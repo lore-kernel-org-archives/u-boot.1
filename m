@@ -4,82 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F233C4828D
-	for <u-boot@archiver.kernel.org>; Tue,  6 Feb 2024 05:27:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4A49C4828D
+	for <u-boot@archiver.kernel.org>; Tue,  6 Feb 2024 05:31:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 36DEA87887;
-	Tue,  6 Feb 2024 06:27:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C04D087887;
+	Tue,  6 Feb 2024 06:31:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BJPwtTTR";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="JqIzwqVW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC66E8786E; Tue,  6 Feb 2024 06:27:27 +0100 (CET)
-Received: from mail-vk1-xa2d.google.com (mail-vk1-xa2d.google.com
- [IPv6:2607:f8b0:4864:20::a2d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 31E1B87964; Tue,  6 Feb 2024 06:31:30 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D67E287887
- for <u-boot@lists.denx.de>; Tue,  6 Feb 2024 06:27:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6F9D48786E
+ for <u-boot@lists.denx.de>; Tue,  6 Feb 2024 06:31:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vk1-xa2d.google.com with SMTP id
- 71dfb90a1353d-4c042af957fso126189e0c.0
- for <u-boot@lists.denx.de>; Mon, 05 Feb 2024 21:27:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1707197243; x=1707802043; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Vs62gTzX4rbhqeYwanBX7CqrlYec5j8ZYSDncgb/OR4=;
- b=BJPwtTTR5/WuYQWgoTYUCWi/RZ1Qb6b2WTukrJOgaNAxQxO4euTnaVx+WFUTsBNVJi
- rEhet1b0K5zmOWfrxmdx1Og3iRr47v5SNwsjbp/23juixUSnG089vMYjvoOzGDQSTN1C
- MZF5707TJDvC4OYbiOVRSBq/eXD4rNCbe5edFfW9Y6GAobBZU7TSx63zNPnff73cRDKh
- +CapcVhTsO/sqZPso8v1b0POCQ0V5bxNLBHUUA6+QIndMpUY1nGXCwB/qAtu1orZENoN
- TYdJFQYADXb2LT1FoYr9yzBOp+p0Y2vgWHjC40S8FqEClZwBCKXMnCBqtSRFdRaM/oQS
- Imzg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707197243; x=1707802043;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Vs62gTzX4rbhqeYwanBX7CqrlYec5j8ZYSDncgb/OR4=;
- b=Zc2Y2HO8a6qtMZ1l4W99ou1RwuMWk13nriaQ8F7F2oWQoRlmteNWEC48RPaNepxSi2
- XM402YLI/bfXgLxrwu5EOefKVfKBu9b5Kfapwq+WJWi3ZyNVfAVv3y8FlR0w0W4yTYsN
- 8zo1yOGH9vZs0BRcbo9Im5thsr3WZObt/JVa+2Qai1q2YHQjhqPZb3Jz12uxpIX91FAT
- ppJYdnnUCFUjut3ZCKgSZ5VKS6m0mk5TnTBr14lS0eP11aoEzJstEKmTPoRWWHhP/Wh7
- Sg+kxQFHcT2dNbx7adVjyieCBg2a4iI2UCGK7ckotaFI8Sfzad78VIMuthYXOkUGwK8y
- oQTw==
-X-Gm-Message-State: AOJu0YwhceAhz79cGG/qKIyYPv4NdvNSKq1e7T6FmJOmei9hxDO31SOR
- GPbdy2oFDGcDBKDc0oR195t/89om5tgMbnKr+I7zEZCAaAGCmVkqLqyn1esLUB5hewtKDKSxcsH
- 02U25Wf/+cK3GSc8OTDVAgDQ0V4PlLZWjBUyw4A==
-X-Google-Smtp-Source: AGHT+IHMKvD9PAhoTt4KezO7bu9FNq84kDYgqXAvdKGo9aGPV2w1Yeqc6Xh1lgCcdvKO5jmIMe4HGzsorSJXv3dibGg=
-X-Received: by 2002:a05:6122:30a6:b0:4c0:3929:2748 with SMTP id
- cd38-20020a05612230a600b004c039292748mr2867893vkb.7.1707197243480; Mon, 05
- Feb 2024 21:27:23 -0800 (PST)
+ spf=pass smtp.mailfrom=danishanwar@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4165VKUV031087;
+ Mon, 5 Feb 2024 23:31:20 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1707197480;
+ bh=tYu6FOkGGvixDCnIC6ntuU7LnkWi8TNnQH82wRPtc88=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=JqIzwqVW5Pnmk1XyS/7Egt7fY4H4sLp/nE2O5fioD3gyFQi5ATLfPhFPFB7C8DqW7
+ xW0raXQYz6agEJUk9a60IsfFOMrdg6YbxCzGp2HfQFHffQiu/ZB1MKDJ9ZKGa3M+nJ
+ r1ZNFzStR5hwuZQiBhA0xomQk5IdyPwvbB/+HFo8=
+Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4165VJMp030721
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 5 Feb 2024 23:31:19 -0600
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 5
+ Feb 2024 23:31:19 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 5 Feb 2024 23:31:19 -0600
+Received: from [10.24.69.25] (danish-tpc.dhcp.ti.com [10.24.69.25])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4165VFVq037391;
+ Mon, 5 Feb 2024 23:31:15 -0600
+Message-ID: <9f3b093c-89fd-4f4c-abad-650c03cb8118@ti.com>
+Date: Tue, 6 Feb 2024 11:01:14 +0530
 MIME-Version: 1.0
-References: <20240202130534.1051438-1-sumit.garg@linaro.org>
- <20240202180226.GF1152441@bill-the-cat>
-In-Reply-To: <20240202180226.GF1152441@bill-the-cat>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Tue, 6 Feb 2024 10:57:12 +0530
-Message-ID: <CAFA6WYMSvu0rL+et1Q7xVuOnyWMDbJYQj9TeC6c2ALNNFGhRCA@mail.gmail.com>
-Subject: Re: [PATCH v5 00/11] An effort to bring DT bindings compliance within
- U-Boot
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
- u-boot-custodians@lists.denx.de, sjg@chromium.org, robh+dt@kernel.org, 
- krzysztof.kozlowski+dt@linaro.org, conor@kernel.org, 
- neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech, 
- daniel.thompson@linaro.org, dgilmore@fedoraproject.org, pbrobinson@gmail.com, 
- ilias.apalodimas@linaro.org, b.galvani@gmail.com, xypron.glpk@gmx.de, 
- michal.simek@amd.com, seanga2@gmail.com, rasmus.villemoes@prevas.dk, 
- peng.fan@nxp.com, jh80.chung@samsung.com, rfried.dev@gmail.com, marex@denx.de, 
- mibodhi@gmail.com, bb@ti.com, mark.kettenis@xs4all.nl, festevam@gmail.com, 
- nm@ti.com, andre.przywara@arm.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4] remoteproc: uclass: Add methods to load firmware to
+ rproc and boot rproc
+Content-Language: en-US
+To: Roger Quadros <rogerq@kernel.org>, "Anwar, Md Danish" <a0501179@ti.com>,
+ Max Krummenacher <max.krummenacher@toradex.com>, Francesco Dolcini
+ <francesco.dolcini@toradex.com>, Dan Carpenter <dan.carpenter@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Nishanth Menon <nm@ti.com>, Tom Rini
+ <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, <srk@ti.com>, Vignesh Raghavendra
+ <vigneshr@ti.com>, <r-gunasekaran@ti.com>
+References: <20240130063322.2345057-1-danishanwar@ti.com>
+ <e72403f9-a0aa-4286-97d2-456735fd3aac@kernel.org>
+ <8bc580b4-5faf-48f4-9d68-052fb9e114e8@ti.com>
+ <d0b4530d-b12a-4b2c-8171-35ca003d4234@kernel.org>
+ <c042c7a5-1561-4efb-b7c4-461bda1f6c36@ti.com>
+ <1646d8b2-7e0d-4716-956f-41b6f61f8626@kernel.org>
+From: MD Danish Anwar <danishanwar@ti.com>
+In-Reply-To: <1646d8b2-7e0d-4716-956f-41b6f61f8626@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,37 +91,174 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-On Fri, 2 Feb 2024 at 23:32, Tom Rini <trini@konsulko.com> wrote:
->
-> On Fri, Feb 02, 2024 at 06:35:23PM +0530, Sumit Garg wrote:
->
-> > Changes in v5:
-> > --------------
-> > - Rebased on tip of master (050a9b981d6a835133521b599be3ae189ce70f41)
-> > - Created v5_dt branch for testing purposes:
-> >   https://github.com/b49020/u-boot/tree/v5_dt
-> > - Patch #6: Added support to cherry-pick fixes in subtree update script.
-> >   Also, used https:// instead of git://.
-> > - Patch #7: Fixed inappropriate documentation update.
-> > - Patch #8: Document how to cherry-pick fixes from devicetree-rebasing
-> >   tree.
->
-> OK, for v6 please push this through CI. I've started a run now to check
-> other things, but just sandbox currently fails to build right now.
->
 
-Yeah it looks like patch#3 rework in v4 has broken EFI capsule .dtsi
-file generation logic which should be fixed by add-on fix [1] for
-patch#3. The github CI passes [2] with that included. I suppose the
-gitlab CI should be fine too. If its fine for your testing as well
-then I will incorporate it in v6.
+On 05/02/24 6:07 pm, Roger Quadros wrote:
+> 
+> 
+> On 05/02/2024 12:20, MD Danish Anwar wrote:
+>>
+>>
+>> On 05/02/24 3:36 pm, Roger Quadros wrote:
+>>>
+>>>
+>>> On 02/02/2024 18:40, Anwar, Md Danish wrote:
+>>>> Hi Roger,
+>>>>
+>>>> On 2/2/2024 4:49 PM, Roger Quadros wrote:
+>>>>>
+>>>>>
+>>>>> On 30/01/2024 08:33, MD Danish Anwar wrote:
+>>>>>> Add APIs to set a firmware_name to a rproc and boot the rproc with the
+>>>>>> same firmware.
+>>>>>>
 
-[1] https://github.com/u-boot/u-boot/pull/484/commits/d796c34307cd363674e0d0d2e31618643ac8e76c
-[2] https://github.com/u-boot/u-boot/pull/484
+<snip>
 
--Sumit
+>>>>
+>>>>> How does caller know what firmware size to set to?
+>>>>> This should already be private to the rproc as it knows 
+>>>>> how large is its program memory.
+>>>>>
+>>>>
+>>>> Caller is trying to boot the rproc with a firmware binary. Caller should
+>>>> know the size of binary that it wants to load to rproc core. Caller will
+>>>> specify the binary size to rproc_boot(). Based on the size provided by
+>>>> caller, rproc_boot() will then allocate that much memory and call
+>>>> request_firmware_into_buf() with the size and allocated buffer. If the
+>>>> caller doesn't provide minimum size rproc_load() will fail.
+>>>
+>>> Caller only knows the filename. It need not know more details.
+>>
+>> Caller is trying to load a file of it's choice to a rproc. Caller should
+>> know the size of file it is trying to load or atleast the max size that
+>> the firmware file could be of.
+>>
+>>
+>>> Also see my comment below about rproc_boot() API.
+>>>
+>>>>
+>>>> rproc_load() calls respective driver ops, for example: pru_load().
+>>>> pru_load() [1] API checks the required size of firmware to load by
+>>>> casting the buffer into Elf32_Ehdr and Elf32_Phdr and returns error if
+>>>> size provided by caller is less than this.
+>>>>
+>>>>
+>>>> 	if (offset + filesz > size) {
+>>>> 		dev_dbg(dev, "truncated fw: need 0x%x avail 0x%zx\n",
+>>>> 			offset + filesz, size);
+>>>> 		ret = -EINVAL;
+>>>> 		break;
+>>>> 	}
+>>>>
+>>>>>> + *
+>>>>>> + * Boot a remote processor (i.e. load its firmware, power it on, ...).
+>>>>>> + *
+>>>>>> + * This function first loads the firmware set in the uclass pdata of Remote
+>>>>>> + * processor to a buffer and then loads firmware to the remote processor
+>>>>>> + * using rproc_load().
+>>>>>> + *
+>>>>>> + * Return: 0 on success, and an appropriate error value otherwise
+>>>>>> + */
+>>>>>> +int rproc_boot(struct udevice *rproc_dev, size_t fw_size);
+>>>>>
+>>>>> Was wondering if you need separate API for rproc_set_firmware or we can just
+>>>>> pass firmware name as argument to rproc_boot()?
+>>>>>
+>>>>
+>>>> Technically we can. But when we discussed this approach first in v1, you
+>>>> had asked to keep the APIs similar to upstream linux. Upstream linux has
+>>>> these two APIs so I kept it that way. If you want I can drop the first
+>>>> API. Please let me know.
+>>>
+>>> Sure you can keep it as it is in Linux, but there, rproc_boot doesn't
+>>> take fw_size argument. So wondering why you should have it in u-boot.
+>>>
+>>
+>> For loading firmware to a rproc core in u-boot, it's first neccassry to
+>> load the firmware into buffer and then load that buffer into rproc core
+>> using rproc_load() API. Now to load the firmware to a buffer ther is an
+>> API request_firmware_into_buf(). This API takes size of firmware as one
+>> of it's argument. So in order to call this API from rproc_boot() we need
+>> to pass fw_size to rproc_boot()
+>>
+>> Other u-boot drivers using request_firmware_into_buf() are also passing
+>> size of firmware from their driver.
+> 
+> But in your driver you didn't use size of firmware but some 64K
+> https://lore.kernel.org/all/20240124064930.1787929-8-danishanwar@ti.com/
+> 
 
-> --
-> Tom
+Yes, in driver I am hardcoding the size to 64K. That's because I know
+the size of ICSSG firmwares are less than 64K. Instead of hardcoding I
+can also define macro or provide a config option where we set the size
+and the driver will read the size from the config and call rproc_boot()
+with size.
+
+For example, fm.c driver reads the size from config option
+CONFIG_SYS_QE_FMAN_FW_LENGTH [1] and calls request_firmware_into_buf()
+
+[1]
+https://elixir.bootlin.com/u-boot/latest/source/drivers/net/fm/fm.c#L458
+
+> So neither does the caller have a clue of firmware size?
+> 
+>>
+>> If rproc_boot() doesn't take fw_size as argument then within
+>> rproc_boot() we need to figure out the fw_size before calling
+>> request_firmware_into_buf().
+>>
+>> If we don't know the size / maximum size of the firmware to load, how
+>> will we call request_firmware_into_buf(). Someone has to tell
+>> request_firmware_into_buf() the size of firmware. I am expecting that to
+>> be the caller. Do you have any other way of getting the firmware size
+>> before request_firmware_into_buf() is called?
+> 
+> /**
+>  * request_firmware_into_buf - Load firmware into a previously allocated buffer.
+>  * @dev: An instance of a driver.
+>  * @name: Name of firmware file.
+>  * @buf: Address of buffer to load firmware into.
+>  * @size: Size of buffer.
+>  * @offset: Offset of a file for start reading into buffer.
+> 
+> It needs size of pre-allocated buffer which can be smaller than file size.
+> It also has the option of offset. So you can load portions of the file limited
+> by buffer size.
+> 
+> My suggestion is that Remoteproc layer should take care of how much buffer
+> to allocate and pass that buffer size to request_firmware_into_buf().
+> You are doing the malloc here itself anyways.
+> 
+
+But how would the remoteproc driver know how much buffer it needs to
+allocate before calling request_firmware_into_buf().
+
+>>
+>>>>
+>>>>>>  #else
+>>>>>>  static inline int rproc_init(void) { return -ENOSYS; }
+>>>>>>  static inline int rproc_dev_init(int id) { return -ENOSYS; }
+>>>>>> @@ -744,6 +775,10 @@ static inline int rproc_elf_load_rsc_table(struct udevice *dev, ulong fw_addr,
+>>>>>>  					   ulong fw_size, ulong *rsc_addr,
+>>>>>>  					   ulong *rsc_size)
+>>>>>>  { return -ENOSYS; }
+>>>>>> +static inline int rproc_set_firmware(struct udevice *rproc_dev, const char *fw_name)
+>>>>>> +{ return -ENOSYS; }
+>>>>>> +static inline int rproc_boot(struct udevice *rproc_dev, size_t fw_size)
+>>>>>> +{ return -ENOSYS; }
+>>>>>>  #endif
+>>>>>>  
+>>>>>>  #endif	/* _RPROC_H_ */
+>>>>>
+>>>>
+>>>> [1]
+>>>> https://elixir.bootlin.com/u-boot/latest/source/drivers/remoteproc/pru_rproc.c#L324
+>>>>
+>>>
+>>
+> 
+
+-- 
+Thanks and Regards,
+Danish
