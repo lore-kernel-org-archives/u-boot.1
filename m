@@ -4,71 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B998C48297
-	for <u-boot@archiver.kernel.org>; Tue,  6 Feb 2024 14:07:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C46C0C4829A
+	for <u-boot@archiver.kernel.org>; Tue,  6 Feb 2024 14:08:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A52DD87C7D;
-	Tue,  6 Feb 2024 15:07:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 2E467875A0;
+	Tue,  6 Feb 2024 15:08:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="j68lk8Uh";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HcBtld/2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E960287CA6; Tue,  6 Feb 2024 15:07:39 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 4001387BAE; Tue,  6 Feb 2024 15:08:47 +0100 (CET)
+Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
+ [IPv6:2607:f8b0:4864:20::82e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0EE2287C78
- for <u-boot@lists.denx.de>; Tue,  6 Feb 2024 15:07:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DFDFC8753C
+ for <u-boot@lists.denx.de>; Tue,  6 Feb 2024 15:08:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 416E7Y68041765;
- Tue, 6 Feb 2024 08:07:34 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1707228454;
- bh=YRDacwXy1IEfqkv52HmHIUPTDDefwMIkLHnB/QcBNxw=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=j68lk8UhXDyJxwJaVz5UqPHe1E+8BynQXML1HIqx1hjyi7kuxzHz+C4okAYxvgMgn
- yfd+W3I731yFRKGIfnwd3Pc7OAwIv+tJLZ8wFo7Yur50MiQyAvWt+ZUXexs0/mzqe+
- 5jmhFzN+i/yfxy8CZ0TfN10u4o3Hrfv7RClfbrq4=
-Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 416E7YHT058138
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 6 Feb 2024 08:07:34 -0600
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 6
- Feb 2024 08:07:34 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 6 Feb 2024 08:07:34 -0600
-Received: from [10.249.141.75] ([10.249.141.75])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 416E7Ubo091504;
- Tue, 6 Feb 2024 08:07:31 -0600
-Message-ID: <092b59f2-681e-4ddf-9a09-d34a18d5efce@ti.com>
-Date: Tue, 6 Feb 2024 19:37:29 +0530
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x82e.google.com with SMTP id
+ d75a77b69052e-42bf29aff0dso38843031cf.3
+ for <u-boot@lists.denx.de>; Tue, 06 Feb 2024 06:08:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1707228523; x=1707833323; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=r41P3OCTlV61DbaYWF621UIcAjjaJXTjgs5PUAidSjI=;
+ b=HcBtld/2Fec+i0hLzjTICnVcNO8clQhzqQOzSKYGKAvNCliv3Rev5TzKeh+tZBkH/h
+ xC35GEFx4yYUok+zeD7w4Ht1LlBQwRxHPqPMBt6WrHAy/e6xbNUKuyM7zzDTmz57rj57
+ cAs8BeTA/sC0PaDsyHQr5NED1HMTClzExmZv0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1707228523; x=1707833323;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=r41P3OCTlV61DbaYWF621UIcAjjaJXTjgs5PUAidSjI=;
+ b=ZP6EK6OPdYsuiATc83rr36OKszhjdb9jvai7ao8h9FjT3cUlCiAIToGfTqWYdye+1Y
+ DlKUjI3SxjwP2ddG/i08p/tlQNIe779C8hp1fhBrEsa28k/xumJkW/Z89+SL9IIN22ey
+ ulOnBGFGxQJemRLvPGVEMq/wzyWUyXMJuaIv8udW4mwhlJhynK+DnDMe+Lm34GcexuH4
+ RbM/oy/coW+OQNhJOfse64Am79VIxD+dh9V299ybVSrHt/Ytxb2141jYLsoi+OozFeJJ
+ iVPkUK810hAvp/uzRybRW052+3zYIlV266VkY6lAdvJr/AgSG72C1gH+3cPobNcQP31U
+ Glnw==
+X-Gm-Message-State: AOJu0Yw5BtnJP4qQ0f4c4ldjruUeDW/heco8+soP3YUujLzkdgHtf0Dk
+ p7XvXGHnZ9g7GQNb1mqzo5Ue58ytDTdEGAdlHPejJBLKEnCDWtPO9PKdUUUjkKXhGscuiGPBObR
+ J
+X-Google-Smtp-Source: AGHT+IETMP+sk8RS3TfZVuq120hm6jhOOnkzLBzPbgekWk1sWYIWqk7IJX2KRSaIi4la+XdnF2p3aA==
+X-Received: by 2002:ac8:748b:0:b0:42b:e44e:7056 with SMTP id
+ v11-20020ac8748b000000b0042be44e7056mr2891847qtq.36.1707228523506; 
+ Tue, 06 Feb 2024 06:08:43 -0800 (PST)
+X-Forwarded-Encrypted: i=0;
+ AJvYcCUB7OANrXkVoWroVd5j/j+BhkrB8nTS+pDFu8757Z3cqiqrz41CzGGAVeAzsHDxU1nTNj8WWX7oSfw5cgVh9zN4lklFvw==
+Received: from bill-the-cat
+ (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
+ [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
+ d16-20020a05622a05d000b004281ce041f6sm907588qtb.21.2024.02.06.06.08.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 06 Feb 2024 06:08:43 -0800 (PST)
+Date: Tue, 6 Feb 2024 09:08:41 -0500
+From: Tom Rini <trini@konsulko.com>
+To: jihongbin <jhb_ee@163.com>
+Cc: Dan Carpenter <dan.carpenter@linaro.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH] xyzModem: Correct xmodem blk verification conditions
+Message-ID: <20240206140841.GR1152441@bill-the-cat>
+References: <20240205065850.7556-1-jhb_ee@163.com>
+ <bd80e95c-b2bb-4ff2-8943-7a185a310546@moroto.mountain>
+ <5cd09ba8-49a1-4ed7-8610-c62097caa45e@163.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 09/10] DONOTMERGE: arm: dts: j721s2: Fix Power domain for
- VTM node.
-Content-Language: en-US
-To: Manorit Chawdhry <m-chawdhry@ti.com>, Jaehoon Chung
- <jh80.chung@samsung.com>
-CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>, Keerthy J
- <j-keerthy@ti.com>, Aniket Limaye <a-limaye@ti.com>, Tom Rini
- <trini@konsulko.com>, Vignesh Raghavendra <vigneshr@ti.com>, Andrew Davis
- <afd@ti.com>, Nishanth Menon <nm@ti.com>, <u-kumar1@ti.com>
-References: <20240206-b4-upstream-j721s2-avs-v1-0-b75043c59969@ti.com>
- <20240206-b4-upstream-j721s2-avs-v1-9-b75043c59969@ti.com>
-From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <20240206-b4-upstream-j721s2-avs-v1-9-b75043c59969@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="x5LSorp3C4iIro3w"
+Content-Disposition: inline
+In-Reply-To: <5cd09ba8-49a1-4ed7-8610-c62097caa45e@163.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,40 +96,59 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 2/6/2024 5:51 PM, Manorit Chawdhry wrote:
-> Patch is sent to upstream linux [0].
->
-> [0]: https://lore.kernel.org/all/20240201-b4-upstream-j721s2-fix-vtm-devid-v2-0-85fd568b77e3@ti.com/
->
-> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
-> ---
->   arch/arm/dts/k3-j721s2-mcu-wakeup.dtsi | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/arch/arm/dts/k3-j721s2-mcu-wakeup.dtsi b/arch/arm/dts/k3-j721s2-mcu-wakeup.dtsi
-> index 80aa33c58a45..a47cb557dd95 100644
-> --- a/arch/arm/dts/k3-j721s2-mcu-wakeup.dtsi
-> +++ b/arch/arm/dts/k3-j721s2-mcu-wakeup.dtsi
-> @@ -663,7 +663,7 @@
->   		compatible = "ti,j7200-vtm";
->   		reg = <0x00 0x42040000 0x0 0x350>,
->   		      <0x00 0x42050000 0x0 0x350>;
-> -		power-domains = <&k3_pds 154 TI_SCI_PD_SHARED>;
-> +		power-domains = <&k3_pds 180 TI_SCI_PD_SHARED>;
+--x5LSorp3C4iIro3w
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I kind of disagree with this patch as Do not Merge, I understand you 
-want to do this change as part of next sync.
+On Tue, Feb 06, 2024 at 09:05:33PM +0800, jihongbin wrote:
 
-But we got already node in u-boot for VTM with incorrect power-domain.
+> It may be that there are relatively few people using this function, or the
+> length of the transmitted data is less than 128byte * 255 byte, so the
+> triggering conditions for the above problems are not encountered;
+>=20
+> I actually discovered this problem during testing. Continuous transmission
+> always fails at block 255.
+>=20
+> The following is the protocol's definition of blk cblk, cblk =3D 255 - blk
+> The original content of the agreement
+> (https://www.menie.org/georges/embedded/xmodem_specification.html) is as
+> follows:
+> -------- 3. MESSAGE BLOCK LEVEL PROTOCOL
+> Each block of the transfer looks like:
+> <SOH><blk #><255-blk #><--128 data bytes--><cksum>
+> in which:
+> <SOH> =3D 01 hex
+> <blk #> =3D binary number, starts at 01 increments by 1, and
+> wraps 0FFH to 00H (not to 01)
+> <255-blk #> =3D blk # after going thru 8080 "CMA" instr, i.e.
+> each bit complemented in the 8-bit block number.
+> Formally, this is the "ones complement".
+>=20
+> <cksum> =3D the sum of the data bytes only. Toss any carry.
 
-I am not sure, with incorrect power-domain, how AVS will be behave.
+Please repost the patch with these kind of details in the commit
+message, thanks.
 
-Here are my 2 cents
+--=20
+Tom
 
-Either mark this patch part of series or Hold AVS till next sync
+--x5LSorp3C4iIro3w
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
 
->   		#thermal-sensor-cells = <1>;
->   	};
->   
->
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXCPWIACgkQFHw5/5Y0
+tyy+8gv/Zc2ta2GdrhsD7Vb8sHIZLnTWp5DKKdepb5gBdBaW8zZYN39yZAOnrLXl
+oOQJPacYAvK7kiWWczvaNu277OT57IcAbuhkDiZgwW0+N3G7UpLo0EqAcS6B04x6
+JNNJRCtsKIdDkPSXw06HXLiLVCE3hNWZjwQkQizU2kWkCdqojbCOEfZ0vi9KPDXg
+p7MF1YByp2cHDOhGGgZU9Lt2eBb8O9Au5knuqRgcyNfFuHdCwTsgTKlgcr7hFmto
+5dTx3Edj70n1N0gt6GApJdxiXIrZIc684DKODZLQi+X1skDJzanjpzSzJX1np/+u
+mYp5QdjhjLgT55RiocMHaVWNZbQy3ROvEo7nRplWyFlo7Xi9rruRjBYJ+ltNVbK3
+5gygV03xa5bO/8agjZKmyv5jvNvMlO/Dclgyum7vWkDyqfJbW8moYgn5Zj7kRlfZ
+Q1bygPi/6qp+naVwp1ZABk5hj0UKo3fctLL4Amv9Fc9BrXKtKDVMcDUMOI97BbtF
+HEckpoBk
+=7SnF
+-----END PGP SIGNATURE-----
+
+--x5LSorp3C4iIro3w--
