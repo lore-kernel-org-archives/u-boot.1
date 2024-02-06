@@ -4,55 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2598FC48297
-	for <u-boot@archiver.kernel.org>; Tue,  6 Feb 2024 13:57:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C752BC48297
+	for <u-boot@archiver.kernel.org>; Tue,  6 Feb 2024 14:03:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 980B687CBA;
-	Tue,  6 Feb 2024 14:56:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=163.com
+	by phobos.denx.de (Postfix) with ESMTP id 3EFAE87C7D;
+	Tue,  6 Feb 2024 15:03:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="EmxsBnX8";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="G77oZm87";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1059387BB5; Tue,  6 Feb 2024 14:05:48 +0100 (CET)
-Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.4])
- by phobos.denx.de (Postfix) with ESMTP id A67A68646E
- for <u-boot@lists.denx.de>; Tue,  6 Feb 2024 14:05:44 +0100 (CET)
+ id 12C7987C7E; Tue,  6 Feb 2024 15:03:03 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B86D87C78
+ for <u-boot@lists.denx.de>; Tue,  6 Feb 2024 15:03:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=163.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jhb_ee@163.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=Content-Type:Message-ID:Date:MIME-Version:Subject:
- From; bh=C//NB5ISYdeeCTG1+i32eVCXx6q+4IBciszUOf/aTBg=; b=EmxsBnX
- 8/fMK3i8Y19wyS35zjoNBr0jXGhhNkZqL4XgDvJ54UsQiSXGZ66ikMHangW2VPyM
- eRaN/HpN512aiUJ5WlXGLAZ+I+uTFbA7CBymm6KU5XA7v3RLyEAIeyWJ+WUaM+LG
- dTzLEA2AiT6D8ihxvbBjVGd1HKpfHpfZlmto=
-Received: from [172.20.10.7] (unknown [106.125.109.142])
- by gzga-smtp-mta-g1-0 (Coremail) with SMTP id _____wDXv3udLsJlYJpOBA--.41958S2;
- Tue, 06 Feb 2024 21:05:34 +0800 (CST)
-Message-ID: <5cd09ba8-49a1-4ed7-8610-c62097caa45e@163.com>
-Date: Tue, 6 Feb 2024 21:05:33 +0800
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id AD22061138;
+ Tue,  6 Feb 2024 14:02:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 80FA9C433F1;
+ Tue,  6 Feb 2024 14:02:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1707228179;
+ bh=S+9/fhAMmU4rPb5CjHJqExMjJ42mr+PsRU1vmZ8Oxw8=;
+ h=From:To:Cc:Subject:Date:From;
+ b=G77oZm87/dMNv3YoUV+GQ74dXRhK+Gi3iJ3KuRrb6RC7MA7zOVjnRZFXn8rve5tdA
+ jf6LyJwnZpUr41lhzUmHLmFJsdkcKmuRDyoGDlBfRBixKThC8KlxhjPMxJi0+TYT7U
+ qNqlAuCvUshuiRuXjBQ7ua58ys42aUD/UtJIZuS7nDLVTAvxSrRhWYUjU4PTYwMZpj
+ BC5eBIRrprbkYELzHNVUHuEZDMxu/qxhAmKxXX4XQEjC1rFR2ChgHrXBAUzJ2pcezj
+ 2XbWhlQRdKMOQ90oZKIDK/cslwii3Uv+Qgw5nMcicJ+u9vKUzzHaihg0jSXxo82Bz9
+ II5hKnpgnb+WQ==
+From: Roger Quadros <rogerq@kernel.org>
+To: trini@konsulko.com
+Cc: dario.binacchi@amarulasolutions.com, nm@ti.com, praneeth@ti.com,
+ vigneshr@ti.com, u-boot@lists.denx.de, Roger Quadros <rogerq@kernel.org>
+Subject: [PATCH] memory: ti-gpmc: Fix lock up at A53 SPL during NAND boot on
+ AM64-EVM
+Date: Tue,  6 Feb 2024 16:02:51 +0200
+Message-Id: <20240206140251.44155-1-rogerq@kernel.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xyzModem: Correct xmodem blk verification conditions
-To: Dan Carpenter <dan.carpenter@linaro.org>
-Cc: u-boot@lists.denx.de, trini@konsulko.com
-References: <20240205065850.7556-1-jhb_ee@163.com>
- <bd80e95c-b2bb-4ff2-8943-7a185a310546@moroto.mountain>
-From: jihongbin <jhb_ee@163.com>
-In-Reply-To: <bd80e95c-b2bb-4ff2-8943-7a185a310546@moroto.mountain>
-X-CM-TRANSID: _____wDXv3udLsJlYJpOBA--.41958S2
-X-Coremail-Antispam: 1Uf129KBjvJXoW7AFWxWrWftrykXw1UWrWUXFb_yoW8Ar13pa
- yfK34xXFn8u3W3Wa18Cws7CF1Yyr93t398Ww12yryfZ398W3WvgF47KwsY93yxK3y8uF10
- vwn0g3ZIkF1jva7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0zMSoG9UUUUU=
-X-Originating-IP: [106.125.109.142]
-X-CM-SenderInfo: 5mkesvrh6rljoofrz/1tbiYR98fGV4G7zqiwAAsl
-X-Mailman-Approved-At: Tue, 06 Feb 2024 14:56:52 +0100
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,45 +68,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It may be that there are relatively few people using this function, or 
-the length of the transmitted data is less than 128byte * 255 byte, so 
-the triggering conditions for the above problems are not encountered;
+AM64 ES2.0 bootrom seems to enable WAIT0EDGEDETECTION interrupt.
+This causes a lockup at A53 SPL when accessing NAND controller
+or ELM registers.
 
-I actually discovered this problem during testing. Continuous 
-transmission always fails at block 255.
+A good option would be to softrest GPMC block at probe
+but this cannot be done for AM64 as SOFTRESET bit is marked
+as reserved in SYSCONFIG register.
 
-The following is the protocol's definition of blk cblk, cblk = 255 - blk
-The original content of the agreement 
-(https://www.menie.org/georges/embedded/xmodem_specification.html) is as 
-follows:
--------- 3. MESSAGE BLOCK LEVEL PROTOCOL
-Each block of the transfer looks like:
-<SOH><blk #><255-blk #><--128 data bytes--><cksum>
-in which:
-<SOH> = 01 hex
-<blk #> = binary number, starts at 01 increments by 1, and
-wraps 0FFH to 00H (not to 01)
-<255-blk #> = blk # after going thru 8080 "CMA" instr, i.e.
-each bit complemented in the 8-bit block number.
-Formally, this is the "ones complement".
+Fix the issue by disabling all IRQs at probe.
 
-<cksum> = the sum of the data bytes only. Toss any carry.
+Signed-off-by: Roger Quadros <rogerq@kernel.org>
+---
+ drivers/memory/ti-gpmc.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
+diff --git a/drivers/memory/ti-gpmc.c b/drivers/memory/ti-gpmc.c
+index 0b8674339e..8877b8f438 100644
+--- a/drivers/memory/ti-gpmc.c
++++ b/drivers/memory/ti-gpmc.c
+@@ -1196,6 +1196,12 @@ static int gpmc_probe(struct udevice *dev)
+ 	gpmc_cfg = (struct gpmc *)priv->base;
+ 	gpmc_base = priv->base;
+ 
++	/*
++	 * Disable all IRQs as some bootroms might leave them enabled
++	 * and that will cause a lock-up later
++	 */
++	gpmc_write_reg(GPMC_IRQENABLE, 0);
++
+ 	priv->l3_clk = devm_clk_get(dev, "fck");
+ 	if (IS_ERR(priv->l3_clk))
+ 		return PTR_ERR(priv->l3_clk);
 
+base-commit: 28760ce8640ff6266bd1c1c568a4a231576f3919
+-- 
+2.34.1
 
-在 2024/2/5 22:25, Dan Carpenter 写道:
-> On Mon, Feb 05, 2024 at 02:58:50PM +0800, Hongbin Ji wrote:
->> When the blk sequence number is 255 and cblk is 0, the original XOR condition
->> produces a result of 0,and the judgment condition will be unsuccessful.
->>
-> This code is 18 years old so it's surprising that it's causing an issue
-> now.  This was added in commit f2841d377060 ("Add support for ymodem
-> protocol (loady command). Patch by Stefano Babic, 29 Mar 2006").
->
-> Not just 255 and zero but any time "blk == 255 - cblk" then your new
-> condition will be true where the original condition was false.  Is that
-> really intentional?  Is this from reviewing documentation or something?
-> What documents?  Or is it from testing?
->
-> regards,
-> dan carpenter
