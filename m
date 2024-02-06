@@ -4,59 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8587C4828D
-	for <u-boot@archiver.kernel.org>; Tue,  6 Feb 2024 20:36:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B6B4C4828D
+	for <u-boot@archiver.kernel.org>; Tue,  6 Feb 2024 22:32:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB1EC87C0A;
-	Tue,  6 Feb 2024 21:36:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 0A24087C7F;
+	Tue,  6 Feb 2024 23:32:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=foundries.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1707251795;
-	bh=DQ9Rgfhha30B5DIzH5uXK1QMYkun7uPzZJ5/KShtoqk=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=RiWTiB6RRhKXI86ebEIIrIz0/CqE0XaInA8jkXsgUiTOpQgpbHdjyAQ3QPJ5oyAM6
-	 KBheyqe1Fsjog36bpX0buI9EFTsJm5doIZCfCPYXIyby0cPPhoWrgUSZj83WdbsI0l
-	 INdlzAPzrVsEBkPNqB47GaFn2Dqm7KU8gQk3VCP3Bluxsc9y3NTD5KmYhcXyManjtm
-	 CE/XYPpZIYB1SuW8QsZ4EJzebpEeXxh2qXJAYTq9rT1Gj0CHvRV+EUyvJ2LkxxXc/+
-	 5cWCenvJ05svp1xvlgjTamEBsNWtg2e8dXB6e+oFdCJMQyRVprYTQI+CIrm4OnLMz3
-	 qakehon83R3YA==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id BC6FD8718A; Tue,  6 Feb 2024 23:32:00 +0100 (CET)
+Received: from mail-lf1-f43.google.com (mail-lf1-f43.google.com
+ [209.85.167.43])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id B921A877FB;
- Tue,  6 Feb 2024 21:36:33 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1707251794;
- bh=DQ9Rgfhha30B5DIzH5uXK1QMYkun7uPzZJ5/KShtoqk=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=PoW1LrIzrze5RFDx2GONCBfz1d13er7b7mVIRLkkzNiayHptQA4YAUAtGv3/IdBem
- LLFlFlGCEuHWrKd73kllWdVshaj7HA2rz+v4KSrri+qyAI0tpn4vnXmyDX+lgTg/qL
- DSyg8kqDiRCLbKMIPJ+sBv5WOem7lPJmJ8P7U/q5ifJzwy7CAyg72vVtRxN+1mc/Q7
- PpttrUYWORRGgt0qzNVTFnAdNv2sk/45/5IOjOL0uRH4Fe1vN4Myc0QxW7zYnQFrQz
- CEwABFTZ75IT0UOJkYMO9OZI+UfyXXroel2iBY6ZKWhKFH/VH3A6zjkyszzvB3zXfj
- wuDondoA5Ex4g==
-Message-ID: <ee020a2c-4f84-4fae-97a0-f12f3157d3ad@denx.de>
-Date: Tue, 6 Feb 2024 21:36:32 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id DF3D2876AE
+ for <u-boot@lists.denx.de>; Tue,  6 Feb 2024 23:31:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=foundries.io
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
+Received: by mail-lf1-f43.google.com with SMTP id
+ 2adb3069b0e04-51156cf5766so530784e87.0
+ for <u-boot@lists.denx.de>; Tue, 06 Feb 2024 14:31:58 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1707258718; x=1707863518;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Qsutu8er/cIaJyQ/yayCF3FWojj90NlbsFvFkdl93vQ=;
+ b=nMQOYRn7HBEwy0BsgIKcsXvRP2N7d4cX1hQ9TvnzH4JjyEiEYY0XvDD6n3hfNFEctB
+ ROFGVkZ4GCdoWla/I7X5+0GJxzhzxA3rGco1S4EBXwKruhT3GClhS1x4DHRdhkT3qCck
+ Odxl8Lg70hOjVM+byQdoi0+RWLS9OJdINo8b+9x7zuXhUHD38F0CvXtpKQBjI1pcWgOc
+ lIQpZvLw/cbB/FZOzzMCL7moDDgjgoMrnLcJ6/vkH2GBi10MUIDbPEjwPmqX0J9Ehjb1
+ 3PsuVrcofKQncpPK0AFHRCLtwBjCbjDt5bVExCFcSxLrCIP8p/3Qshe/7NBlHJypqfRJ
+ apxw==
+X-Gm-Message-State: AOJu0YxzErcx5KkL+FYoRIVyRT+5VnbgEDxjennQMlAKZqsNOVg1fcIc
+ 2yt+opRdeymwwIyiUFjyxq1jJ9PIsXi+jDw8N4LJ4ajYyqkRQeQt1tJakxNoCfHX8w==
+X-Google-Smtp-Source: AGHT+IGF4/J376rH+TC9wMFzctYta1QCmNSrWXkBPnofa4HKtLUhv1STw4umnRbwjoVIQhdZcAfERQ==
+X-Received: by 2002:a19:9114:0:b0:511:63eb:8cea with SMTP id
+ t20-20020a199114000000b0051163eb8ceamr400346lfd.4.1707258717393; 
+ Tue, 06 Feb 2024 14:31:57 -0800 (PST)
+X-Forwarded-Encrypted: i=0;
+ AJvYcCUa2o7DKeSk4uoDgkDKYBvUJTT6KXMoBScYZLckEko7XbaJnSnJuhVsyyyR/YpT0wUMfaE3/FbtLflBti2EqPjHF7BUIK5ZBlzqXN1vEycvSTRFTZQh7WhZjf0748wW+BTfrliPc7mgkrOgGL4byDjK7Tnt+GXISe4KBVgrkLxXxQM9Ftzd3TUd44m4PdsGWDDOzAj77yXtm6wlwSkwcKpAQ4chSq2tqb2//HnPwwXX4JiOVIUhApuoY9ggaztuH3eCb4MByTgmy9IYX/UAEja5dBdL5XseY5jYAZGtRiQcSfTqCkl6KQ7o793+vMQWJ5LmPCRTUSjn2g==
+Received: from localhost ([109.108.76.111]) by smtp.gmail.com with ESMTPSA id
+ w19-20020a19c513000000b00511510cb561sm353047lfe.79.2024.02.06.14.31.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 06 Feb 2024 14:31:56 -0800 (PST)
+From: Igor Opaniuk <igor.opaniuk@foundries.io>
+To: u-boot@lists.denx.de
+Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Igor Opaniuk <igor.opaniuk@foundries.io>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Ivan Khoronzhuk <ivan.khoronzhuk@gmail.com>,
+ Jens Wiklander <jens.wiklander@linaro.org>,
+ Michal Simek <michal.simek@amd.com>, Qu Wenruo <wqu@suse.com>,
+ Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v1 0/7] AVB: cosmetic adjustments/improvements
+Date: Tue,  6 Feb 2024 23:31:46 +0100
+Message-Id: <20240206223153.3060433-1-igor.opaniuk@foundries.io>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/5] usb: dwc3-generic: implement Qualcomm wrapper
-Content-Language: en-US
-To: Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini
- <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot@lists.denx.de
-References: <20240131-b4-qcom-usb-v1-0-6438b2a2285e@linaro.org>
- <20240131-b4-qcom-usb-v1-1-6438b2a2285e@linaro.org>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240131-b4-qcom-usb-v1-1-6438b2a2285e@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,142 +82,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/31/24 15:57, Caleb Connolly wrote:
-> The Qualcomm specific dwc3 wrapper isn't hugely complicated, implemented
-> the missing initialisation for host and gadget mode.
-> 
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->   drivers/usb/dwc3/dwc3-generic.c | 99 ++++++++++++++++++++++++++++++++++++++++-
->   1 file changed, 98 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
-> index 48da621ba966..1119cdecd26d 100644
-> --- a/drivers/usb/dwc3/dwc3-generic.c
-> +++ b/drivers/usb/dwc3/dwc3-generic.c
-> @@ -419,6 +419,99 @@ struct dwc3_glue_ops ti_ops = {
->   	.glue_configure = dwc3_ti_glue_configure,
->   };
->   
-> +/* USB QSCRATCH Hardware registers */
-> +#define QSCRATCH_HS_PHY_CTRL 0x10
-> +#define UTMI_OTG_VBUS_VALID BIT(20)
-> +#define SW_SESSVLD_SEL BIT(28)
-> +
-> +#define QSCRATCH_SS_PHY_CTRL 0x30
-> +#define LANE0_PWR_PRESENT BIT(24)
-> +
-> +#define QSCRATCH_GENERAL_CFG 0x08
-> +#define PIPE_UTMI_CLK_SEL BIT(0)
-> +#define PIPE3_PHYSTATUS_SW BIT(3)
-> +#define PIPE_UTMI_CLK_DIS BIT(8)
-> +
-> +#define PWR_EVNT_IRQ_STAT_REG 0x58
-> +#define PWR_EVNT_LPM_IN_L2_MASK BIT(4)
-> +#define PWR_EVNT_LPM_OUT_L2_MASK BIT(5)
-> +
-> +#define SDM845_QSCRATCH_BASE_OFFSET 0xf8800
-> +#define SDM845_QSCRATCH_SIZE 0x400
-> +#define SDM845_DWC3_CORE_SIZE 0xcd00
+This patch series include:
+- Simplify and add more context for debug/error prints where it's needed.
+- Move SPDX license identifiers to the first line, so it conforms
+  to license placement rule.
+- Use mmc_switch_part() only for eMMC.
+- Rework do_avb_verify_part, take into account device lock state for setting correct
+  androidboot.verifiedbootstate.
+- Adjust AVB documentation, add info about slot_suffix param.
 
-Newline here please
+Igor Opaniuk (7):
+  common: avb_verify: don't call mmc_switch_part for SD
+  avb: move SPDX license itdentifiers to the first line
+  common: avb_verify: rework error/debug prints
+  cmd: avb: rework prints
+  common: avb_verify: add str_avb_io_error/str_avb_slot_error
+  cmd: avb: rework do_avb_verify_part
+  doc: android: avb: add slot_suffix param details
 
-> +static inline void dwc3_qcom_setbits(void __iomem *base, u32 offset, u32 val)
-> +{
-> +	u32 reg;
-> +
-> +	reg = readl(base + offset);
-> +	reg |= val;
-> +	writel(reg, base + offset);
+ cmd/avb.c                              | 206 ++++++++++++-------------
+ common/avb_verify.c                    |  89 +++++++++--
+ doc/android/avb2.rst                   |   8 +-
+ include/avb_verify.h                   |   7 +-
+ test/py/tests/test_android/test_avb.py |   3 +-
+ 5 files changed, 177 insertions(+), 136 deletions(-)
 
-Use setbits_le32() .
+-- 
+2.34.1
 
-> +	/* ensure that above write is through */
-> +	readl(base + offset);
-
-Is this needed ?
-
-> +}
-> +
-> +static inline void dwc3_qcom_clrbits(void __iomem *base, u32 offset, u32 val)
-> +{
-> +	u32 reg;
-> +
-> +	reg = readl(base + offset);
-> +	reg &= ~val;
-> +	writel(reg, base + offset);
-
-clrbits_le32()
-
-> +	/* ensure that above write is through */
-> +	readl(base + offset);
-> +}
-> +
-> +static void dwc3_qcom_vbus_override_enable(void __iomem *qscratch_base, bool enable)
-> +{
-> +	if (enable) {
-> +		dwc3_qcom_setbits(qscratch_base, QSCRATCH_SS_PHY_CTRL,
-> +				  LANE0_PWR_PRESENT);
-> +		dwc3_qcom_setbits(qscratch_base, QSCRATCH_HS_PHY_CTRL,
-> +				  UTMI_OTG_VBUS_VALID | SW_SESSVLD_SEL);
-> +	} else {
-> +		dwc3_qcom_clrbits(qscratch_base, QSCRATCH_SS_PHY_CTRL,
-> +				  LANE0_PWR_PRESENT);
-> +		dwc3_qcom_clrbits(qscratch_base, QSCRATCH_HS_PHY_CTRL,
-> +				  UTMI_OTG_VBUS_VALID | SW_SESSVLD_SEL);
-> +	}
-> +}
-> +
-> +/* For controllers running without superspeed PHYs */
-> +static void dwc3_qcom_select_utmi_clk(void __iomem *qscratch_base)
-> +{
-> +	/* Configure dwc3 to use UTMI clock as PIPE clock not present */
-> +	dwc3_qcom_setbits(qscratch_base, QSCRATCH_GENERAL_CFG,
-> +			  PIPE_UTMI_CLK_DIS);
-> +
-> +	udelay(500);
-
-Isn't there some possibility to poll for completion instead of fixed 
-delay ? If so, use wait_for_bit or some such .
-
-> +	dwc3_qcom_setbits(qscratch_base, QSCRATCH_GENERAL_CFG,
-> +			  PIPE_UTMI_CLK_SEL | PIPE3_PHYSTATUS_SW);
-> +
-> +	udelay(500);
-> +
-> +	dwc3_qcom_clrbits(qscratch_base, QSCRATCH_GENERAL_CFG,
-> +			  PIPE_UTMI_CLK_DIS);
-> +}
-> +
-> +static void dwc3_qcom_glue_configure(struct udevice *dev, int index,
-> +				     enum usb_dr_mode mode)
-> +{
-> +	void __iomem *qscratch_base = (void __iomem *)dev_read_addr(dev);
-
-Can this be NULL ? If yes, add check for != NULL .
-
-> +	if (dev_read_bool(dev, "qcom,select-utmi-as-pipe-clk"))
-> +		dwc3_qcom_select_utmi_clk(qscratch_base);
-> +
-> +	if (mode != USB_DR_MODE_HOST)
-> +		dwc3_qcom_vbus_override_enable(qscratch_base, true);
-> +}
-> +
-> +struct dwc3_glue_ops qcom_ops = {
-> +	.glue_configure = dwc3_qcom_glue_configure,
-> +};
-> +
->   static int dwc3_rk_glue_get_ctrl_dev(struct udevice *dev, ofnode *node)
->   {
->   	*node = dev_ofnode(dev);
-> @@ -506,6 +599,10 @@ static int dwc3_glue_reset_init(struct udevice *dev,
->   	else if (ret)
->   		return ret;
->   
-> +	if (device_is_compatible(dev, "qcom,dwc3")) {
-> +		reset_assert_bulk(&glue->resets);
-> +		udelay(500);
-
-Why this delay here ?
-
-[...]
