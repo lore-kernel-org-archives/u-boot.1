@@ -4,60 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF758C48260
-	for <u-boot@archiver.kernel.org>; Tue,  6 Feb 2024 02:53:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82FDAC48260
+	for <u-boot@archiver.kernel.org>; Tue,  6 Feb 2024 03:00:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 08E578751F;
-	Tue,  6 Feb 2024 03:53:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AD1A18751F;
+	Tue,  6 Feb 2024 04:00:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="ADaoNq90";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="dUo+kcXl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C601187727; Tue,  6 Feb 2024 03:53:21 +0100 (CET)
-Received: from mail-m49213.qiye.163.com (mail-m49213.qiye.163.com
- [45.254.49.213])
+ id 1C4B387732; Tue,  6 Feb 2024 03:59:59 +0100 (CET)
+Received: from mail-m1973194.qiye.163.com (mail-m1973194.qiye.163.com
+ [220.197.31.94])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2B0F086F8E
- for <u-boot@lists.denx.de>; Tue,  6 Feb 2024 03:53:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 50B3186F8E
+ for <u-boot@lists.denx.de>; Tue,  6 Feb 2024 03:59:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=ADaoNq90r8GjKICkVsyc4T3Udpvhl9kpepQ84l4k8xsSYOhVbDtvRzhvEKupkUqLJneWulcYiWlcEocNmhFoXQOFeuqKSo6Z2b5bIG9ZYDt2/hSwolQAj7/sZrU/4UOO5Ec253ic/EGgo/w295ta9sotQx9pS5lS1/TulRPDxyA=;
+ b=dUo+kcXluisz0gtUUPdTfIZCDblSpXTcpA+XigHpma2o5ypcOZBOIx9bxGczCcjypoVpgXao8xW7BI9a8abVQijzd/cyoGodP3758i3U/j14uDAUM5qli/J3YnX5z95h6vhrHucUFcZ+kBOegd2IDy+Y3JC1HqOJjoCwgKkr0fg=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=AbIaodTOlB2skSHj6/T8KTgsmoOO23KPylesFUckvV0=;
+ bh=tarGGsft4AW1HRK0wkVL1lw6CNdDw1xLW5YPl8bNuD4=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.93] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 137CA90016A;
- Tue,  6 Feb 2024 10:53:14 +0800 (CST)
-Message-ID: <c8d71ac6-42ee-43e0-bd9c-385599cc5821@rock-chips.com>
-Date: Tue, 6 Feb 2024 10:53:13 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTPA id 2D0D7900166;
+ Tue,  6 Feb 2024 10:59:50 +0800 (CST)
+Message-ID: <fd15b6e4-5525-4ce5-a145-ceb47d44c40e@rock-chips.com>
+Date: Tue, 6 Feb 2024 10:59:49 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/4] board: rockchip: Add early ADC button detect for RGxx3
+Subject: Re: [PATCH V4 3/7] rockchip: boot_mode: Allow
+ rockchip_dnl_key_pressed() in SPL
 Content-Language: en-US
-To: Chris Morgan <macroalpha82@gmail.com>, u-boot@lists.denx.de
-Cc: philipp.tomsich@vrull.eu, sjg@chromium.org, jonas@kwiboo.se,
- jagan@amarulasolutions.com, Chris Morgan <macromorgan@hotmail.com>
-References: <20240205185855.21508-1-macroalpha82@gmail.com>
- <20240205185855.21508-5-macroalpha82@gmail.com>
+To: Chris Morgan <macromorgan@hotmail.com>
+Cc: Chris Morgan <macroalpha82@gmail.com>, u-boot@lists.denx.de,
+ andre.przywara@arm.com, philipp.tomsich@vrull.eu, sjg@chromium.org,
+ jagan@edgeble.ai, jonas@kwiboo.se
+References: <20240102154654.191055-1-macroalpha82@gmail.com>
+ <20240102154654.191055-4-macroalpha82@gmail.com>
+ <9aae0791-84a5-42b4-b76d-2a89040b23d0@rock-chips.com>
+ <65a93e77.9d0a0220.46f34.1553@mx.google.com>
+ <706a4a06-51ad-421a-ac58-621ce85062f6@rock-chips.com>
+ <20240125065543.BA9B5440469@smtp.qiye.163.com>
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240205185855.21508-5-macroalpha82@gmail.com>
+In-Reply-To: <20240125065543.BA9B5440469@smtp.qiye.163.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ0pCSFZPTB4dTUoaTk4eQ0tVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1DTExPVUpLS1VKQk
- tLWQY+
-X-HM-Tid: 0a8d7c557f4d03a9kunm137ca90016a
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQh1DHlZCGRkZHh1JGUhCQxpVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSUpJVUpLS1VKQl
+ kG
+X-HM-Tid: 0a8d7c5b8ab803a9kunm2d0d7900166
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MxA6Lww4VjMITDMUTDIXTRky
- VjwaFAhVSlVKTEtMSkNMQkJPQklLVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFOTkhCNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Ohw6NCo*PDMREzM3Dx4cPQE9
+ LiIwCzhVSlVKTEtMSkNDSEJLQk5PVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFCSUtMNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,136 +81,195 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 2024/2/6 02:58, Chris Morgan wrote:
-> From: Chris Morgan <macromorgan@hotmail.com>
+On 2024/1/25 06:55, Chris Morgan wrote:
+> On Fri, Jan 19, 2024 at 05:01:38PM +0800, Kever Yang wrote:
+>> Hi Chris,
+>>
+>> On 2024/1/18 23:06, Chris Morgan wrote:
+>>> On Thu, Jan 18, 2024 at 03:20:52PM +0800, Kever Yang wrote:
+>>>> Hi Chris,
+>>>>
+>>>> On 2024/1/2 23:46, Chris Morgan wrote:
+>>>>> From: Chris Morgan<macromorgan@hotmail.com>
+>>>>>
+>>>>> Update the rockchip_dnl_key_pressed() so that it can run in
+>>>>> SPL. Also change the ADC channel to a define that can be
+>>>>> overridden by a board specific option.
+>>>> I should ask this earlier.
+>>>>
+>>>> Why you have to enable the download key in SPL?
+>>>>
+>>>> This works for a long time in U-Boot proper, both mainline and downstream
+>>>> vendor U-Boot,
+>>>>
+>>>> no one is detect this download key in SPL.
+>>>>
+>>>> In theory the SPL can implement all the feature which is available in U-Boot
+>>>> proper,
+>>>>
+>>>> but it would be better to make the SPL focus on the job it should be done
+>>>> and keep as small as possible.
+>>>>
+>>> I wanted this code to run as soon as possible in the event of a bad
+>>> write. I have some devices which lack a way to bypass the eMMC in the
+>>> boot path; the fear is that if an SPL stage is written with a good
+>>> header but a bad payload (or if the A-TF does something wrong) the
+>>> device will become unbootable. If we can't do it this way for
+>>> all Rockchip boards that's fine, but I REALLY want to at least do
+>>> it this way for the Powkiddy X55 board and the Anbernic RGxx3 board.
+>> That's why rockchip platform has two download mode, loader mode(in U-Boot)
+>>
+>> and maskRom mode, any error happen before U-Boot should get into maksRom
+>> mode.
+>>
+>> Most of user/developer only use loader mode because the modules before
+>> U-Boot should
+>>
+>> be more stable and have very little chance to update, for the module owners
+>> before U-Boot,
+>>
+>> they are the users of maskRom mode.
+>>
+>> If you enable this feature in SPL, the error still have chance to happen
+>> during dram init to SPL key detect.
+>>
+>> Does these two board has no way to get into eMMC event with hardware rework?
+>> any hardware
+>>
+>> signal of eMMC CMD/CLK/DATA is OK.
+> A few do not. The error is less likely to occur between RAM init and
+> SPL key detect, but yes it's even possible at this stage.
 >
-> Add ADC button detect for early SPL stage for RGxx3 device. This is
-> important because on at least the RG353P and RG353V a clk pin is not
-> exposed that would allow us to take the eMMC out of the boot path.
+> >From my testing using the latest BL31 file from the
+> rockchip-linux/rkbin github repository I was unable to reboot into
+> maskrom mode after A-TF loaded, the device would just straight
+> reboot. Do you know if A-TF does something that makes reboot
+> into maskrom mode no longer work?
 
-This is another version of below patch, right?
+This is no reasonable, it should be able to reboot to maskrom mode any 
+time we want, because
 
-https://patchwork.ozlabs.org/project/uboot/patch/20240102154654.191055-5-macroalpha82@gmail.com/
+the vendor kernel also do this and the function works.
 
-
-Compare to this one, I would prefer previous version :(
-
+>
+>> And another way to bypass eMMC is to use SDcard which has higher priority
+>> then eMMC in BootRom.
+>>
+> I see in the TRM under section 1.2 that the eMMC is higher in the boot
+> path than SDMMC, and that matches my experience as well.
+Yes, you are right about this, and I think rockchip vendor code is using 
+SD card as  the first
+priority in the SPL instead of "same-as SPL", and make the SPL small and 
+simple enough
+to involve less bug, so that stable enough and no need to update.
+This patch is OK when the check for key press entry is in the board 
+level instead of platform common code.
 
 Thanks,
-
 - Kever
-
+>   So this
+> wouldn't be a solution sadly.
 >
-> Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
-> ---
->   board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c | 64 ++++++++++++++++++++++
->   1 file changed, 64 insertions(+)
+>> For SPL itself debug, I would suggest to RESET into bootrom download mode if
+>> any error happen
+>>
+>> and a reset will need.
+>>
+>> I pick up patches other than 2,3,4 in this patchset for now.
+>>
+>>> While I have you, I have a related question I hope you can help with.
+>>> Is there any way to utilize the boot partitions of an eMMC device? I
+>>> don't know if the BROM of an RK3568 or RK3588 is capable, but I'd love
+>>> to have the SPL and U-Boot stages written to the eMMC boot partitions
+>>> instead of the user partition if I can.
+>> No, Rockchip SoCs does not use the boot partitions of eMMC, only use the
+>> user data partition.
+> That's unfortunate, but I appreciate the feedback.
 >
-> diff --git a/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c b/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
-> index 5c57b902d1..099eea60c3 100644
-> --- a/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
-> +++ b/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
-> @@ -6,12 +6,14 @@
->   #include <abuf.h>
->   #include <adc.h>
->   #include <asm/io.h>
-> +#include <command.h>
->   #include <display.h>
->   #include <dm.h>
->   #include <dm/lists.h>
->   #include <env.h>
->   #include <fdt_support.h>
->   #include <linux/delay.h>
-> +#include <linux/iopoll.h>
->   #include <mipi_dsi.h>
->   #include <mmc.h>
->   #include <panel.h>
-> @@ -19,6 +21,8 @@
->   #include <stdlib.h>
->   #include <video_bridge.h>
->   
-> +#define BOOT_BROM_DOWNLOAD	0xef08a53c
-> +
->   #define GPIO0_BASE		0xfdd60000
->   #define GPIO4_BASE		0xfe770000
->   #define GPIO_SWPORT_DR_L	0x0000
-> @@ -32,6 +36,14 @@
->   
->   #define GPIO_WRITEMASK(bits)	((bits) << 16)
->   
-> +#define SARADC_BASE		0xfe720000
-> +#define SARADC_DATA		0x0000
-> +#define SARADC_STAS		0x0004
-> +#define SARADC_ADC_STATUS	BIT(0)
-> +#define SARADC_CTRL		0x0008
-> +#define SARADC_INPUT_SRC_MSK	0x7
-> +#define SARADC_POWER_CTRL	BIT(3)
-> +
->   #define DTB_DIR			"rockchip/"
->   
->   struct rg3xx_model {
-> @@ -157,12 +169,64 @@ static const struct rg353_panel rg353_panel_details[] = {
->   	},
->   };
->   
-> +/*
-> + * The device has internal eMMC, and while some devices have an exposed
-> + * clk pin you can ground to force a bypass not all devices do. As a
-> + * result it may be possible for some devices to become a perma-brick
-> + * if a corrupted TPL or SPL stage with a valid header is flashed to
-> + * the internal eMMC. Add functionality to read ADC channel 0 (the func
-> + * button) as early as possible in the boot process to provide some
-> + * protection against this. If we ever get an open TPL stage, we should
-> + * consider moving this function there.
-> + */
-> +void read_func_button(void)
-> +{
-> +	int ret;
-> +	u32 reg;
-> +
-> +	/* Turn off SARADC to reset it. */
-> +	writel(0, (SARADC_BASE + SARADC_CTRL));
-> +
-> +	/* Enable channel 0 and power on SARADC. */
-> +	writel(((0 & SARADC_INPUT_SRC_MSK) | SARADC_POWER_CTRL),
-> +	       (SARADC_BASE + SARADC_CTRL));
-> +
-> +	/*
-> +	 * Wait for data to be ready. Use timeout of 20000us from
-> +	 * rockchip_saradc driver.
-> +	 */
-> +	ret = readl_poll_timeout((SARADC_BASE + SARADC_STAS), reg,
-> +				 !(reg & SARADC_ADC_STATUS), 20000);
-> +	if (ret) {
-> +		printf("ADC Timeout");
-> +		return;
-> +	}
-> +
-> +	/* Read the data from the SARADC. */
-> +	reg = readl((SARADC_BASE + SARADC_DATA));
-> +
-> +	/* Turn the SARADC back off so it's ready to be used again. */
-> +	writel(0, (SARADC_BASE + SARADC_CTRL));
-> +
-> +	/*
-> +	 * If the value is less than 30 the button is being pressed.
-> +	 * Reset the device back into Rockchip download mode.
-> +	 */
-> +	if (reg <= 30) {
-> +		printf("download key pressed, entering download mode...");
-> +		writel(BOOT_BROM_DOWNLOAD, CONFIG_ROCKCHIP_BOOT_MODE_REG);
-> +		do_reset(NULL, 0, 0, NULL);
-> +	}
-> +};
-> +
->   /*
->    * Start LED very early so user knows device is on. Set color
->    * to red.
->    */
->   void spl_board_init(void)
->   {
-> +	read_func_button();
-> +
->   	/* Set GPIO0_C5, GPIO0_C6, and GPIO0_C7 to output. */
->   	writel(GPIO_WRITEMASK(GPIO_C7 | GPIO_C6 | GPIO_C5) | \
->   	       (GPIO_C7 | GPIO_C6 | GPIO_C5),
+> Thank you,
+> Chris
+>
+>>
+>> Thanks,
+>>
+>> - Kever
+>>
+>>> Thank you.
+>>>
+>>>> Thanks,
+>>>>
+>>>> - Kever
+>>>>
+>>>>> Signed-off-by: Chris Morgan<macromorgan@hotmail.com>
+>>>>> ---
+>>>>>     arch/arm/mach-rockchip/Makefile    |  4 ++--
+>>>>>     arch/arm/mach-rockchip/boot_mode.c | 11 ++++++++++-
+>>>>>     2 files changed, 12 insertions(+), 3 deletions(-)
+>>>>>
+>>>>> diff --git a/arch/arm/mach-rockchip/Makefile b/arch/arm/mach-rockchip/Makefile
+>>>>> index 1dc92066bb..ff089ae949 100644
+>>>>> --- a/arch/arm/mach-rockchip/Makefile
+>>>>> +++ b/arch/arm/mach-rockchip/Makefile
+>>>>> @@ -15,13 +15,13 @@ obj-tpl-$(CONFIG_ROCKCHIP_PX30) += px30-board-tpl.o
+>>>>>     obj-spl-$(CONFIG_ROCKCHIP_RK3036) += rk3036-board-spl.o
+>>>>> -ifeq ($(CONFIG_SPL_BUILD)$(CONFIG_TPL_BUILD),)
+>>>>> -
+>>>>>     # Always include boot_mode.o, as we bypass it (i.e. turn it off)
+>>>>>     # inside of boot_mode.c when CONFIG_ROCKCHIP_BOOT_MODE_REG is 0.  This way,
+>>>>>     # we can have the preprocessor correctly recognise both 0x0 and 0
+>>>>>     # meaning "turn it off".
+>>>>>     obj-y += boot_mode.o
+>>>>> +
+>>>>> +ifeq ($(CONFIG_SPL_BUILD)$(CONFIG_TPL_BUILD),)
+>>>>>     obj-$(CONFIG_ROCKCHIP_COMMON_BOARD) += board.o
+>>>>>     obj-$(CONFIG_MISC_INIT_R) += misc.o
+>>>>>     endif
+>>>>> diff --git a/arch/arm/mach-rockchip/boot_mode.c b/arch/arm/mach-rockchip/boot_mode.c
+>>>>> index eb8f65ae4e..d2308768be 100644
+>>>>> --- a/arch/arm/mach-rockchip/boot_mode.c
+>>>>> +++ b/arch/arm/mach-rockchip/boot_mode.c
+>>>>> @@ -38,6 +38,10 @@ void set_back_to_bootrom_dnl_flag(void)
+>>>>>     #define KEY_DOWN_MIN_VAL	0
+>>>>>     #define KEY_DOWN_MAX_VAL	30
+>>>>> +#ifndef RK_DNL_ADC_CHAN
+>>>>> +#define RK_DNL_ADC_CHAN		1
+>>>>> +#endif
+>>>>> +
+>>>>>     __weak int rockchip_dnl_key_pressed(void)
+>>>>>     {
+>>>>>     	unsigned int val;
+>>>>> @@ -52,7 +56,8 @@ __weak int rockchip_dnl_key_pressed(void)
+>>>>>     	ret = -ENODEV;
+>>>>>     	uclass_foreach_dev(dev, uc) {
+>>>>>     		if (!strncmp(dev->name, "saradc", 6)) {
+>>>>> -			ret = adc_channel_single_shot(dev->name, 1, &val);
+>>>>> +			ret = adc_channel_single_shot(dev->name,
+>>>>> +						      RK_DNL_ADC_CHAN, &val);
+>>>>>     			break;
+>>>>>     		}
+>>>>>     	}
+>>>>> @@ -73,11 +78,13 @@ __weak int rockchip_dnl_key_pressed(void)
+>>>>>     void rockchip_dnl_mode_check(void)
+>>>>>     {
+>>>>> +#if CONFIG_IS_ENABLED(ADC)
+>>>>>     	if (rockchip_dnl_key_pressed()) {
+>>>>>     		printf("download key pressed, entering download mode...");
+>>>>>     		set_back_to_bootrom_dnl_flag();
+>>>>>     		do_reset(NULL, 0, 0, NULL);
+>>>>>     	}
+>>>>> +#endif
+>>>>>     }
+>>>>>     int setup_boot_mode(void)
+>>>>> @@ -90,6 +97,7 @@ int setup_boot_mode(void)
+>>>>>     	boot_mode = readl(reg);
+>>>>>     	debug("%s: boot mode 0x%08x\n", __func__, boot_mode);
+>>>>> +#if !defined(CONFIG_SPL_BUILD) && !defined(CONFIG_TPL_BUILD)
+>>>>>     	/* Clear boot mode */
+>>>>>     	writel(BOOT_NORMAL, reg);
+>>>>> @@ -103,6 +111,7 @@ int setup_boot_mode(void)
+>>>>>     		env_set("preboot", "setenv preboot; ums mmc 0");
+>>>>>     		break;
+>>>>>     	}
+>>>>> +#endif
+>>>>>     	return 0;
+>>>>>     }
