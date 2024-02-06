@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81451C48260
-	for <u-boot@archiver.kernel.org>; Tue,  6 Feb 2024 02:45:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF758C48260
+	for <u-boot@archiver.kernel.org>; Tue,  6 Feb 2024 02:53:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EAE1587BA8;
-	Tue,  6 Feb 2024 03:45:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 08E578751F;
+	Tue,  6 Feb 2024 03:53:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="bBImEqzM";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="ADaoNq90";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6BDD987B2D; Tue,  6 Feb 2024 03:45:51 +0100 (CET)
-Received: from mail-m118111.qiye.163.com (mail-m118111.qiye.163.com
- [115.236.118.111])
+ id C601187727; Tue,  6 Feb 2024 03:53:21 +0100 (CET)
+Received: from mail-m49213.qiye.163.com (mail-m49213.qiye.163.com
+ [45.254.49.213])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 28718879A2
- for <u-boot@lists.denx.de>; Tue,  6 Feb 2024 03:45:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2B0F086F8E
+ for <u-boot@lists.denx.de>; Tue,  6 Feb 2024 03:53:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=bBImEqzMS6i3KYvSuVwCup4uxfrdLhRBSyzo9ba9WO4oMaPr6eYRxRxo6rbMY8hFMJ/sQwUZq7XS7AvslP6X4enFylcL+7KOfWU/M6U5Y4u6UpodtpVlYBwsnSRn7Cojxq+w5IqgoP6z+2Nn/7ls1R5XGRfoWfXYqu++bACaCXQ=;
+ b=ADaoNq90r8GjKICkVsyc4T3Udpvhl9kpepQ84l4k8xsSYOhVbDtvRzhvEKupkUqLJneWulcYiWlcEocNmhFoXQOFeuqKSo6Z2b5bIG9ZYDt2/hSwolQAj7/sZrU/4UOO5Ec253ic/EGgo/w295ta9sotQx9pS5lS1/TulRPDxyA=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=P08E3TRvLa4S+X7zTDktK8o6J3QpdJ2w7K4bLfcBFu4=;
+ bh=AbIaodTOlB2skSHj6/T8KTgsmoOO23KPylesFUckvV0=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.93] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 89A1A900165;
- Tue,  6 Feb 2024 10:45:45 +0800 (CST)
-Message-ID: <1367375f-12d2-4b4e-9ec9-11c6c0e7cb29@rock-chips.com>
-Date: Tue, 6 Feb 2024 10:45:45 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTPA id 137CA90016A;
+ Tue,  6 Feb 2024 10:53:14 +0800 (CST)
+Message-ID: <c8d71ac6-42ee-43e0-bd9c-385599cc5821@rock-chips.com>
+Date: Tue, 6 Feb 2024 10:53:13 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/4] configs: Remove unnecessary options from RGxx3 config
+Subject: Re: [PATCH 4/4] board: rockchip: Add early ADC button detect for RGxx3
 Content-Language: en-US
 To: Chris Morgan <macroalpha82@gmail.com>, u-boot@lists.denx.de
 Cc: philipp.tomsich@vrull.eu, sjg@chromium.org, jonas@kwiboo.se,
  jagan@amarulasolutions.com, Chris Morgan <macromorgan@hotmail.com>
 References: <20240205185855.21508-1-macroalpha82@gmail.com>
- <20240205185855.21508-4-macroalpha82@gmail.com>
+ <20240205185855.21508-5-macroalpha82@gmail.com>
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240205185855.21508-4-macroalpha82@gmail.com>
+In-Reply-To: <20240205185855.21508-5-macroalpha82@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGh5DHlZJGEtIS0lLQhhDHUlVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSUxOVUpLS1VKQk
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ0pCSFZPTB4dTUoaTk4eQ0tVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1DTExPVUpLS1VKQk
  tLWQY+
-X-HM-Tid: 0a8d7c4ea84503a9kunm89a1a900165
+X-HM-Tid: 0a8d7c557f4d03a9kunm137ca90016a
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PEk6MAw*IzMLLTM8CE4uIhYs
- MDhPC09VSlVKTEtMSkNMTk9NTUJKVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFPTkxDNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MxA6Lww4VjMITDMUTDIXTRky
+ VjwaFAhVSlVKTEtMSkNMQkJPQklLVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFOTkhCNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,90 +78,133 @@ X-Virus-Status: Clean
 On 2024/2/6 02:58, Chris Morgan wrote:
 > From: Chris Morgan <macromorgan@hotmail.com>
 >
-> Based on feedback from the mailing list while adding support for a new
-> device (the Powkiddy X55), correct the config options for the RGxx3
-> as well to remove unnecessary drivers and increase the SPL stack size.
->
-> Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+> Add ADC button detect for early SPL stage for RGxx3 device. This is
+> important because on at least the RG353P and RG353V a clk pin is not
+> exposed that would allow us to take the eMMC out of the boot path.
+
+This is another version of below patch, right?
+
+https://patchwork.ozlabs.org/project/uboot/patch/20240102154654.191055-5-macroalpha82@gmail.com/
+
+
+Compare to this one, I would prefer previous version :(
+
 
 Thanks,
+
 - Kever
-> ---
->   configs/anbernic-rgxx3-rk3566_defconfig | 15 +++++++++++----
->   1 file changed, 11 insertions(+), 4 deletions(-)
+
 >
-> diff --git a/configs/anbernic-rgxx3-rk3566_defconfig b/configs/anbernic-rgxx3-rk3566_defconfig
-> index ed6643d9d4..d52a0d48f2 100644
-> --- a/configs/anbernic-rgxx3-rk3566_defconfig
-> +++ b/configs/anbernic-rgxx3-rk3566_defconfig
-> @@ -3,6 +3,7 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_COUNTER_FREQUENCY=24000000
->   CONFIG_ARCH_ROCKCHIP=y
->   CONFIG_TEXT_BASE=0x00a00000
-> +CONFIG_SPL_GPIO=y
->   CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_NR_DRAM_BANKS=2
-> @@ -24,7 +25,9 @@ CONFIG_SYS_LOAD_ADDR=0xc00800
->   CONFIG_DEBUG_UART=y
->   CONFIG_FIT=y
->   CONFIG_FIT_VERBOSE=y
-> +CONFIG_SPL_FIT_SIGNATURE=y
->   CONFIG_SPL_LOAD_FIT=y
-> +CONFIG_LEGACY_IMAGE_FORMAT=y
->   CONFIG_OF_BOARD_SETUP=y
->   CONFIG_OF_STDOUT_VIA_ALIAS=y
->   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3566-anbernic-rgxx3.dtb"
-> @@ -32,7 +35,7 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3566-anbernic-rgxx3.dtb"
->   # CONFIG_DISPLAY_CPUINFO is not set
->   CONFIG_DISPLAY_BOARDINFO_LATE=y
->   CONFIG_BOARD_RNG_SEED=y
-> -CONFIG_SPL_MAX_SIZE=0x20000
-> +CONFIG_SPL_MAX_SIZE=0x40000
->   CONFIG_SPL_PAD_TO=0x7f8000
->   CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
->   CONFIG_SPL_BSS_START_ADDR=0x4000000
-> @@ -41,6 +44,7 @@ CONFIG_SPL_BOARD_INIT=y
->   # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
->   # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
->   CONFIG_SPL_STACK_R=y
-> +CONFIG_SPL_POWER=y
->   CONFIG_SPL_ATF=y
->   CONFIG_CMD_PWM=y
->   CONFIG_CMD_GPT=y
-> @@ -50,8 +54,10 @@ CONFIG_CMD_MMC=y
->   # CONFIG_SPL_DOS_PARTITION is not set
->   CONFIG_SPL_OF_CONTROL=y
->   CONFIG_OF_LIVE=y
-> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
->   CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
->   # CONFIG_NET is not set
-> +CONFIG_SPL_DM_SEQ_ALIAS=y
->   CONFIG_SPL_REGMAP=y
->   CONFIG_SPL_SYSCON=y
->   CONFIG_SPL_CLK=y
-> @@ -67,13 +73,13 @@ CONFIG_MMC_SDHCI=y
->   CONFIG_MMC_SDHCI_SDMA=y
->   CONFIG_MMC_SDHCI_ROCKCHIP=y
->   CONFIG_PHY_ROCKCHIP_INNO_DSIDPHY=y
-> +CONFIG_SPL_PINCTRL=y
->   CONFIG_DM_PMIC=y
->   CONFIG_DM_PMIC_FAN53555=y
->   CONFIG_PMIC_RK8XX=y
-> -CONFIG_REGULATOR_PWM=y
-> -CONFIG_DM_REGULATOR_GPIO=y
-> +CONFIG_SPL_DM_REGULATOR=y
-> +CONFIG_SPL_DM_REGULATOR_FIXED=y
->   CONFIG_REGULATOR_RK8XX=y
-> -CONFIG_DM_REGULATOR_SCMI=y
->   CONFIG_PWM_ROCKCHIP=y
->   CONFIG_SPL_RAM=y
->   # CONFIG_RAM_ROCKCHIP_DEBUG is not set
-> @@ -89,5 +95,6 @@ CONFIG_VIDEO_ROCKCHIP=y
->   CONFIG_DISPLAY_ROCKCHIP_DW_MIPI=y
->   CONFIG_VIDEO_BRIDGE=y
->   CONFIG_REGEX=y
-> +# CONFIG_RSA is not set
->   CONFIG_ERRNO_STR=y
->   # CONFIG_EFI_LOADER is not set
+> Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
+> ---
+>   board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c | 64 ++++++++++++++++++++++
+>   1 file changed, 64 insertions(+)
+>
+> diff --git a/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c b/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
+> index 5c57b902d1..099eea60c3 100644
+> --- a/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
+> +++ b/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
+> @@ -6,12 +6,14 @@
+>   #include <abuf.h>
+>   #include <adc.h>
+>   #include <asm/io.h>
+> +#include <command.h>
+>   #include <display.h>
+>   #include <dm.h>
+>   #include <dm/lists.h>
+>   #include <env.h>
+>   #include <fdt_support.h>
+>   #include <linux/delay.h>
+> +#include <linux/iopoll.h>
+>   #include <mipi_dsi.h>
+>   #include <mmc.h>
+>   #include <panel.h>
+> @@ -19,6 +21,8 @@
+>   #include <stdlib.h>
+>   #include <video_bridge.h>
+>   
+> +#define BOOT_BROM_DOWNLOAD	0xef08a53c
+> +
+>   #define GPIO0_BASE		0xfdd60000
+>   #define GPIO4_BASE		0xfe770000
+>   #define GPIO_SWPORT_DR_L	0x0000
+> @@ -32,6 +36,14 @@
+>   
+>   #define GPIO_WRITEMASK(bits)	((bits) << 16)
+>   
+> +#define SARADC_BASE		0xfe720000
+> +#define SARADC_DATA		0x0000
+> +#define SARADC_STAS		0x0004
+> +#define SARADC_ADC_STATUS	BIT(0)
+> +#define SARADC_CTRL		0x0008
+> +#define SARADC_INPUT_SRC_MSK	0x7
+> +#define SARADC_POWER_CTRL	BIT(3)
+> +
+>   #define DTB_DIR			"rockchip/"
+>   
+>   struct rg3xx_model {
+> @@ -157,12 +169,64 @@ static const struct rg353_panel rg353_panel_details[] = {
+>   	},
+>   };
+>   
+> +/*
+> + * The device has internal eMMC, and while some devices have an exposed
+> + * clk pin you can ground to force a bypass not all devices do. As a
+> + * result it may be possible for some devices to become a perma-brick
+> + * if a corrupted TPL or SPL stage with a valid header is flashed to
+> + * the internal eMMC. Add functionality to read ADC channel 0 (the func
+> + * button) as early as possible in the boot process to provide some
+> + * protection against this. If we ever get an open TPL stage, we should
+> + * consider moving this function there.
+> + */
+> +void read_func_button(void)
+> +{
+> +	int ret;
+> +	u32 reg;
+> +
+> +	/* Turn off SARADC to reset it. */
+> +	writel(0, (SARADC_BASE + SARADC_CTRL));
+> +
+> +	/* Enable channel 0 and power on SARADC. */
+> +	writel(((0 & SARADC_INPUT_SRC_MSK) | SARADC_POWER_CTRL),
+> +	       (SARADC_BASE + SARADC_CTRL));
+> +
+> +	/*
+> +	 * Wait for data to be ready. Use timeout of 20000us from
+> +	 * rockchip_saradc driver.
+> +	 */
+> +	ret = readl_poll_timeout((SARADC_BASE + SARADC_STAS), reg,
+> +				 !(reg & SARADC_ADC_STATUS), 20000);
+> +	if (ret) {
+> +		printf("ADC Timeout");
+> +		return;
+> +	}
+> +
+> +	/* Read the data from the SARADC. */
+> +	reg = readl((SARADC_BASE + SARADC_DATA));
+> +
+> +	/* Turn the SARADC back off so it's ready to be used again. */
+> +	writel(0, (SARADC_BASE + SARADC_CTRL));
+> +
+> +	/*
+> +	 * If the value is less than 30 the button is being pressed.
+> +	 * Reset the device back into Rockchip download mode.
+> +	 */
+> +	if (reg <= 30) {
+> +		printf("download key pressed, entering download mode...");
+> +		writel(BOOT_BROM_DOWNLOAD, CONFIG_ROCKCHIP_BOOT_MODE_REG);
+> +		do_reset(NULL, 0, 0, NULL);
+> +	}
+> +};
+> +
+>   /*
+>    * Start LED very early so user knows device is on. Set color
+>    * to red.
+>    */
+>   void spl_board_init(void)
+>   {
+> +	read_func_button();
+> +
+>   	/* Set GPIO0_C5, GPIO0_C6, and GPIO0_C7 to output. */
+>   	writel(GPIO_WRITEMASK(GPIO_C7 | GPIO_C6 | GPIO_C5) | \
+>   	       (GPIO_C7 | GPIO_C6 | GPIO_C5),
