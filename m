@@ -4,80 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BFC2C48297
-	for <u-boot@archiver.kernel.org>; Tue,  6 Feb 2024 14:44:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8F61C48297
+	for <u-boot@archiver.kernel.org>; Tue,  6 Feb 2024 15:21:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 50A628798B;
-	Tue,  6 Feb 2024 15:44:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D62B587C7E;
+	Tue,  6 Feb 2024 16:21:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gnu.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Sl/KW5PN";
+	dkim=pass (2048-bit key; unprotected) header.d=gnu.org header.i=@gnu.org header.b="QIv+0NG4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E5CE87BB5; Tue,  6 Feb 2024 15:44:49 +0100 (CET)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5E61B8206E; Tue,  6 Feb 2024 15:34:39 +0100 (CET)
+Received: from eggs.gnu.org (eggs.gnu.org [IPv6:2001:470:142:3::10])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 56E6B87B6C
- for <u-boot@lists.denx.de>; Tue,  6 Feb 2024 15:44:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 43880875A0
+ for <u-boot@lists.denx.de>; Tue,  6 Feb 2024 15:34:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-a30e445602cso143656766b.0
- for <u-boot@lists.denx.de>; Tue, 06 Feb 2024 06:44:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1707230685; x=1707835485; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=TV+puZlDVgVS0cqhUi5Kakymaj2W/LQM0xUU4Oa54ME=;
- b=Sl/KW5PNmqGro6nlA/QZ/sFo/N1017EBnIZmRI+gkL/G7LR4GC8CW6B8xmTxX2P8b1
- UUuZuL+nwcrvwEW7lDEc1IyPnDX4pm99onKW3S5DWVr4VP+dE8lvCiO5zpiTNR6Hw5so
- QvWMCN8cevV69YgvPWMIkAHp0tvzOYfxEDxijBr9YrfOPKIdwldp1yJGIo71cmRD6HvZ
- 4icV97dx0sOeREr2aCjavxQc09fhuOf+8prfOCBO6CRc7iOYonk0SmK2s+2AxxkjYiFD
- 27zU29am2x0H6s+H4SuDsFhIkMYJcYC41CrRkBI8mJVomhONJsE0jV+hpsVrkOkCjzbL
- WY5g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707230685; x=1707835485;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=TV+puZlDVgVS0cqhUi5Kakymaj2W/LQM0xUU4Oa54ME=;
- b=I4GoIZMB+luQKd3byeAtfAqzAKEFVQr211YP6SQXNyojDz9u7ANGFqfbLzyJzFPT77
- 1l0p03jJ10XzC2tXgyLcOkMcK+uyOp7A3K8CopPV4inBloaMAaeDYFe+naWkKG8p9jY8
- Ipmy7LUkQ8Sk4N1JQjZA7yLnYuRFduRBLXEAn4fWQo9fhSDWkrTwDRDd1oqCCLSXDFxO
- 4r2EsJBV5UR4HFP+TLl2K570NsFgDkqgVuj0Es5tUtXJhSkkIer7iQfZDYpzyR/Q9xxb
- PgoksmtVTuI7MHzizH+7NjJSgwklvwgHu7CHxC6qaVRR8FO8k479QxO2E9DfMZDSNprf
- +lCw==
-X-Gm-Message-State: AOJu0YyNF6/PNNOvOxTbTB57JeYPVdUPwwAXmI7f1IhL2EAHAoElHAi/
- HETuK9JZT82GOK5RCQZyMwp3ul4t5DvopRs/c7xDaCuB81BIJGOCzNoBG/RSP4kzlHTVSgS+rp8
- R
-X-Google-Smtp-Source: AGHT+IH5R1AvuFpYcZD27FugLdZkb7wkPnA3qqOmdoPUIKPOKFXjA/dvAYoklsvlIYI7qkz3Sx5w1Q==
-X-Received: by 2002:a17:906:48d:b0:a38:4fb5:c440 with SMTP id
- f13-20020a170906048d00b00a384fb5c440mr298680eja.37.1707230684664; 
- Tue, 06 Feb 2024 06:44:44 -0800 (PST)
-X-Forwarded-Encrypted: i=0;
- AJvYcCUXVH6FboMPxOp7wVlHYCCkF6F0SdQfo3f2RTdhckB7OAnQOJ8BmzALv9ReQQnv//cbjNyTzTiEUKXvUgEk9UjaZlIYnJyJPC6jxplVXRkJDJygDCY=
-Received: from hera (ppp089210121239.access.hol.gr. [89.210.121.239])
- by smtp.gmail.com with ESMTPSA id
- rg14-20020a1709076b8e00b00a382ba97f95sm737160ejc.143.2024.02.06.06.44.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Feb 2024 06:44:44 -0800 (PST)
-Date: Tue, 6 Feb 2024 16:44:42 +0200
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH v2] arm: Add OVERLAY command to BSS section on ARM64
-Message-ID: <ZcJF2uGIMj-jxT3M@hera>
-References: <20231217003347.194657-1-marek.vasut+renesas@mailbox.org>
+ dmarc=pass (p=none dis=none) header.from=gnu.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=othacehe@gnu.org
+Received: from fencepost.gnu.org ([2001:470:142:3::e])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <othacehe@gnu.org>)
+ id 1rXMWq-0005Oy-9S; Tue, 06 Feb 2024 09:34:28 -0500
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=gnu.org;
+ s=fencepost-gnu-org; h=MIME-Version:Date:Subject:To:From:in-reply-to:
+ references; bh=PoZySK9eUQiWvy6xNKxMLOHKR/oYO0JoXvAL7kd8u9o=; b=QIv+0NG4XEaIS4
+ BpSsh88f61n8CPsKgD9KzU43BrNVhxBLTgG2xKWS1wP3EPgOA9Msx7ogrDPuTHy6X+14Yoah56A8s
+ G+rRW+3dpFK/8jhtprvrboQXitGsUDA2WdTvghuV1NpMc3c83JtiVSUiHHK1I0mxgVqlOS55HZXij
+ DbZbqYzSt7eY30NNOYQy0DdHMbqSskVz7FaNBgxd93zCuyIc2zj2UCgTtTCXBJ20JYC34TIwkGO4Y
+ oG8bjzLlgbyJl/8KG6dofSfY4aG/myHQvssYHhEN65CCbBLoxtv97idU7/6voWVm3aIy1K2jFhrB+
+ d7iyPq8BZoLWvWN/Kb+A==;
+From: Mathieu Othacehe <othacehe@gnu.org>
+To: u-boot@lists.denx.de
+Cc: Tom.zheng <haidong.zheng@nxp.com>, Ye Li <ye.li@nxp.com>, Primoz Fiser
+ <primoz.fiser@norik.com>, Fabio Estevam <festevam@denx.de>, Peng Fan
+ <peng.fan@nxp.com>, Ken Sloat <ken.s@variscite.com>, Nate Drude
+ <nate.d@variscite.com>, lukas.skupinski@landisgyr.com,
+ lukas.skupinski@landisgyr.com
+Subject: imx93-var-som: ahab: U-boot is hanging
+Date: Tue, 06 Feb 2024 15:34:25 +0100
+Message-ID: <87y1bx1x1q.fsf@gnu.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20231217003347.194657-1-marek.vasut+renesas@mailbox.org>
+Content-Type: text/plain
+X-Mailman-Approved-At: Tue, 06 Feb 2024 16:21:15 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,115 +66,172 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
 
-On Sun, Dec 17, 2023 at 01:33:39AM +0100, Marek Vasut wrote:
-> Avoid allocating and loading the BSS section.
->
+Hello,
 
-Can we elaborate a bit more on why we need this? AFAICT there's no code
-loading those segments in memory and swapping them, so why do we need the
-OVERLAY? On top of that the ALLOC flag seems to be missing? The .bss
-section doesn't need to be loaded indeed, since we can memset it to 0, but
-it does need proper backing memory.
+I am using the imx93-var-som_defconfig configuration on commit
+v2024.04-rc1. When producing signed or unsigned images on an unclosed
+board everything works fine.
 
-another thing I noticed is the bss_start and end are defined as sections of
-their own and a bit of git history led me to 3ebd1cbc49f00050. But the
-linker script will emit absolute addresses only if the symbol is defined
-outside a section. IOW applying this makes the value expressed as a fixed
-offset from the base of the section and the bss_start/end sections go away
+However, once the board is closed (ahab_close command is issued), u-boot
+hangs this way:
 
---- a/arch/arm/cpu/armv8/u-boot.lds
-+++ b/arch/arm/cpu/armv8/u-boot.lds
-@@ -151,17 +151,11 @@ SECTIONS
-
-        . = ALIGN(8);
-
--       .bss_start : {
--               KEEP(*(.__bss_start));
--       }
--
-        .bss : {
-+               .bss_start = .;
-                *(.bss*)
-                 . = ALIGN(8);
--       }
--
--       .bss_end : {
--               KEEP(*(.__bss_end));
-+               .bss_end = .;
-        }
-
-        /DISCARD/ : { *(.dynsym) }
+--8<---------------cut here---------------start------------->8---
+U-Boot SPL 2024.04-rc1-00004-g8494a62b246-dirty (Feb 06 2024 - 15:24:49 +0100)
+SOC: 0xa0009300
+LC: 0x40040
+M33 prepare ok
+Normal Boot
+Trying to boot from BOOTROM
+Boot Stage: USB boot
+NOTICE:  BL31: v2.6(release):d8bc791fb
+NOTICE:  BL31: Built : 18:11:44, Mar 15 2023
 
 
-leads to this:
+U-Boot 2024.04-rc1-00004-g8494a62b246-dirty (Feb 06 2024 - 15:24:49 +0100)
 
- 11 .bss          000090b0  0000000000102b00  0000000000102b00  00112aa0  2**7
-                  ALLOC
+U-Boot code: 80200000 -> 802B4328  BSS: -> 802BA420
+CPU:   i.MX93 rev1.0
+Model: Variscite VAR-SOM-MX93 on Symphony evaluation board
+DRAM:  Monitor len: 000BA420
+Ram size: 80000000
+Ram top: 100000000
+Reserving 745k for U-Boot at: fff25000
+Reserving 32784k for malloc() at: fdf21000
+Reserving 152 Bytes for Board Info at: fdf20f60
+Reserving 480 Bytes for Global Data at: fdf20d80
+Reserving 24832 Bytes for FDT at: fdf1ac80
 
-P.S: I am playing around with rewriting the linker script and mapping
-u-boot with proper permissions at least for armv8. If this patch is neeeded
-*now* can someone explain why? Otherwise I'll clean it up once I test my
-patches enough
+RAM Configuration:
+Bank #0: 80000000 2 GiB
+Bank #1: 0 0 Bytes
 
-Thanks
-/Ilias
+DRAM:  2 GiB
+New Stack Pointer is: fdf1ac70
+Relocation Offset is: 7fd25000
+Relocating to fff25000, new gd at fdf20d80, sp at fdf1ac70
+Added memory mapping (5): 80000000 80000000
+Pre-reloc malloc() used 0x17478 bytes (93 KB)
+before mem_malloc_init
+--8<---------------cut here---------------end--------------->8---
 
-> $ aarch64-linux-gnu-objdump -Sh u-boot
->
-> Before:
->   10 .bss_start    00000000  00000000000f21d8  00000000000f21d8  001021d8  2**0
->                    CONTENTS, ALLOC, LOAD, DATA
->   11 .bss          000068f8  00000000000f2200  00000000000f2200  001021d8  2**6
->                    ALLOC
->   12 .bss_end      00000000  00000000000f8af8  00000000000f8af8  00108af8  2**0
->                    CONTENTS, ALLOC, LOAD, DATA
->
-> After:
->   10 .bss_start    00000000  00000000000bf990  00000000000bf990  001021e0  2**0
->                    CONTENTS
->   11 .bss          000068e8  00000000000bf990  00000000000bf990  001021e0  2**4
->                    CONTENTS
->   12 .bss_end      00000000  00000000000c6278  00000000000c6278  00108ac8  2**0
->                    CONTENTS
->
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> ---
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> ---
-> V2: Replicate arch/arm/cpu/u-boot.lds BSS part verbatim
-> ---
->  arch/arm/cpu/armv8/u-boot.lds | 8 +++++---
->  1 file changed, 5 insertions(+), 3 deletions(-)
->
-> diff --git a/arch/arm/cpu/armv8/u-boot.lds b/arch/arm/cpu/armv8/u-boot.lds
-> index fb6a30c922f..ebdc079552d 100644
-> --- a/arch/arm/cpu/armv8/u-boot.lds
-> +++ b/arch/arm/cpu/armv8/u-boot.lds
-> @@ -151,16 +151,18 @@ SECTIONS
->
->  	. = ALIGN(8);
->
-> -	.bss_start : {
-> +	.bss_start __rel_dyn_start (OVERLAY) : {
->  		KEEP(*(.__bss_start));
-> +		__bss_base = .;
->  	}
->
-> -	.bss : {
-> +	.bss __bss_base (OVERLAY) : {
->  		*(.bss*)
->  		 . = ALIGN(8);
-> +		 __bss_limit = .;
->  	}
->
-> -	.bss_end : {
-> +	.bss_end __bss_limit (OVERLAY) : {
->  		KEEP(*(.__bss_end));
->  	}
->
-> --
-> 2.43.0
->
+It seems that signature checking is OK because both the SPL and regular
+u-boot are started. However, something seems to cause u-boot to hang.
+
+Here I am hanging in initr_malloc function, right in the
+mem_malloc_init call:
+
+--8<---------------cut here---------------start------------->8---
+static int initr_malloc(void)
+{
+	ulong start;
+
+#if CONFIG_IS_ENABLED(SYS_MALLOC_F)
+	debug("Pre-reloc malloc() used %#lx bytes (%ld KB)\n", gd->malloc_ptr,
+	      gd->malloc_ptr / 1024);
+#endif
+	/* The malloc area is immediately below the monitor copy in DRAM */
+	/*
+	 * This value MUST match the value of gd->start_addr_sp in board_f.c:
+	 * reserve_noncached().
+	 */
+	start = gd->relocaddr - TOTAL_MALLOC_LEN;
+	gd_set_malloc_start(start);
+	debug("before mem_malloc_init\n");
+	mem_malloc_init((ulong)map_sysmem(start, TOTAL_MALLOC_LEN),
+			TOTAL_MALLOC_LEN);
+
+	debug("after mem_malloc_init\n");
+	return 0;
+}
+--8<---------------cut here---------------end--------------->8---
+
+If I add initcall traces, then I'm not going that far:
+
+--8<---------------cut here---------------start------------->8---
+U-Boot SPL 2024.04-rc1-00004-g8494a62b246-dirty (Feb 06 2024 - 15:06:54 +0100)
+SOC: 0xa0009300
+LC: 0x40040
+M33 prepare ok
+Normal Boot
+Trying to boot from BOOTROM
+Boot Stage: USB boot
+NOTICE:  BL31: v2.6(release):d8bc791fb
+NOTICE:  BL31: Built : 18:11:44, Mar 15 2023
+initcall: 000000008027189c
+
+U-Boot 2024.04-rc1-00004-g8494a62b246-dirty (Feb 06 2024 - 15:06:54 +0100)
+
+initcall: 000000008022481c
+U-Boot code: 80200000 -> 802B43C0  BSS: -> 802BA4A0
+initcall: 0000000080224654
+initcall: 0000000080203844
+CPU:   i.MX93 rev1.0
+initcall: 0000000080224fdc
+Model: Variscite VAR-SOM-MX93 on Symphony evaluation board
+initcall: event 8/(unknown)
+initcall: 0000000080224850
+DRAM:  initcall: 00000000802035a8
+initcall: 0000000080224bb8
+Monitor len: 000BA4A0
+Ram size: 80000000
+Ram top: 100000000
+initcall: 0000000080224640
+initcall: 00000000802248b8
+initcall: 0000000080202e24
+initcall: 00000000802248c0
+initcall: 00000000802248c8
+initcall: 00000000802247b4
+Reserving 745k for U-Boot at: fff25000
+initcall: 0000000080224968
+Reserving 32784k for malloc() at: fdf21000
+initcall: 0000000080224908
+Reserving 152 Bytes for Board Info at: fdf20f60
+initcall: 00000000802249a8
+Reserving 480 Bytes for Global Data at: fdf20d80
+initcall: 0000000080224744
+Reserving 24832 Bytes for FDT at: fdf1ac80
+initcall: 00000000802248d0
+initcall: 00000000802248d8
+initcall: 00000000802248f8
+initcall: 0000000080224c30
+initcall: 00000000802035e0
+initcall: 00000000802249ec
+
+RAM Configuration:
+Bank #0: 80000000 2 GiB
+Bank #1: 0 0 Bytes
+
+DRAM:  2 GiB
+initcall: 0000000080224c44
+initcall: 0000000080224720
+New Stack Pointer is: fdf1ac70
+initcall: 000000008022465c
+initcall: 00000000802248e0
+initcall: 00000000802248e8
+initcall: 00000000802246a0
+Relocation Offset is: 7fd25000
+Relocating to fff25000, new gd at fdf20d80, sp at fdf1ac70
+initcall: 0000000080224900
+initcall: 0000000080227704
+initcall: 00000000fff49c8c
+initcall: 00000000fff49c94
+initcall: 00000000fff4c8c0
+initcall: 00000000fff49f54
+Added memory mapping (5): 80000000 80000000
+initcall: 00000000fff49f04
+initcall: 00000000fff49f74
+initcall: 00000000fff49ea4
+Pre-r
+--8<---------------cut here---------------end--------------->8---
+
+and I am stopping in the process of writing the "Pre-reloc ..." trace.
+
+All-in-all, fusing the board seems to change something causing the
+previously working images (on a non-closed board) to stop working.
+
+Does it ring a bell to anyone?
+
+Thanks,
+
+Mathieu
