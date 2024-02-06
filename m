@@ -4,92 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B14FBC48297
-	for <u-boot@archiver.kernel.org>; Tue,  6 Feb 2024 13:00:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B695AC4828D
+	for <u-boot@archiver.kernel.org>; Tue,  6 Feb 2024 13:41:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D56E687C7D;
-	Tue,  6 Feb 2024 14:00:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id AB55E86D4C;
+	Tue,  6 Feb 2024 14:41:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QFczuriD";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="NEOXYHh2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7EDD587BB5; Tue,  6 Feb 2024 14:00:50 +0100 (CET)
-Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
- [IPv6:2607:f8b0:4864:20::72c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7D35C87C1F; Tue,  6 Feb 2024 14:41:31 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B97C87C7D
- for <u-boot@lists.denx.de>; Tue,  6 Feb 2024 14:00:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DFD9C86308
+ for <u-boot@lists.denx.de>; Tue,  6 Feb 2024 14:41:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72c.google.com with SMTP id
- af79cd13be357-783def87c8cso324392085a.0
- for <u-boot@lists.denx.de>; Tue, 06 Feb 2024 05:00:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1707224445; x=1707829245; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=wR2EZlYHyUX/Zh+O4Z5Bqkv8bzyb87ssUbYpNEM4pcE=;
- b=QFczuriDWsCEykAXiH8OzYt4l1ozyL2/oOy/+TWwKGRbmfT3o2u+MBD/VgAU7YOL0i
- jGDVgXvlNA7y8TDqB3Drz2qbVWq9YMrr1dOLzPermqPNEamEmnZMtogAhyyNqATLcYFQ
- NgW9lKQwNHQkRg2kLnSSHWql4vdfv2avHMD7Y=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707224445; x=1707829245;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wR2EZlYHyUX/Zh+O4Z5Bqkv8bzyb87ssUbYpNEM4pcE=;
- b=jWtb3OfJAmijDBgpxF9MdS+l/cEM8FOAc4VFChRCsx/eIAOcn3x23OKZ0Ho9umiR7+
- NS2TtFkEOoWTJrT5GzR9F21YnySRMPxS4w9hzwXV35Wi4YYVNjnlPK6Y9C4jBC12PF3b
- /siDm3VyJhQ8SxmtAP7ahle5h512dQdhO3uCqkAOdQyhSZDi6nBhLKGYFAleyn6zYr8m
- he2FfGYBs7JvGsESA5Ae2E+1EI8m/hr0KZDLlD1YmvljVAqvWAY08oA9/4+veK2JjmOo
- PPXKY9j+CCUl+E9m7hPobnTJCvihg7U5jLl4YKgBCUantu+tOvJukXZc2+91iXZldByW
- SsmA==
-X-Gm-Message-State: AOJu0YwNcp8wu3zCUbNagPE/CJXmjJKB8mKy5Nqpke2bFIf9OBNywRP0
- RCk5341EiKH6SOjYzBCMyRjNmw3wBBu1E3DbCopV9SpcP4ZNx9s3kyHDGQs1hwY=
-X-Google-Smtp-Source: AGHT+IGI3ztPMgM1i4Y1KQgt19deWmdmHTt35W5tpGF+QpDZsQY2xY2OxAdea0LakVMoRyz77FJWaA==
-X-Received: by 2002:a05:620a:16c1:b0:785:9690:91c with SMTP id
- a1-20020a05620a16c100b007859690091cmr6969qkn.41.1707224444948; 
- Tue, 06 Feb 2024 05:00:44 -0800 (PST)
-X-Forwarded-Encrypted: i=0;
- AJvYcCVEDGBBvjiZMcwMafYa1HDx/cC9CR/oV2wvHFxypLo2l5puL15DKd7fXzGMvL4rGaceA/PtLXxy7uMCpzUFQIihysl/eVdo2od0nZ+IVjJf8F5zGzoc2EdnV8GxoCzfg8PpoBHJDziW2x8igG3FC0tPswF0mKakoxPsR29VQZ8Hi/L0ERbzgzefXIlS9kBL6fsuIm8ziC2gDX+VsR2r2a4TAWgx1nOBMdIOxQl5y3LS0rEZvuBayKHKm1ewmIj2Ezzfaw6AIFplmuP/+6As7vgYLQO1NPQ8taMFbBU+UFz1QYL0n8+Dx9Z+UKIDOWcCe+L310xHVkshmiwel2DSWZ8su415DD2zSluVFcWEFHByrepHfeu+6qDT0B9I1d8VotZlOgVACRERu8+InD/4CBNuXIib9CD9KXa9LhQ5NSdR/dhiz0epC4PAc6Uq6t2XK6+BjbbBtyKyBW6G1FYzDlTOK7ekoTWnu3Q5oK7Gu7QY+I0JiktV4tNF7iq8gVRQlX0ARM+fwVeyzcjaWTLMv5y3WH4h0QCQ/I8xYtouccCG3aAzC3Y6lI9CiNhul/qRr/WxMED7c0RsRf3lBvGLRhlyOi7uhfvGQRVoQI/RTcWSTp8Rtp9inUmr4lmCQfIarPJ+ecVmfTRkNlVBSKEiyQGBs/oB4Wv3VB/GCEWgqEEX5xNUO/lrgtl75+E3bF6Y8k5AZIzKMQ08O5XrJVtT6BK3LND9HpxlHL1nMwU0KQAfW9x5QnvYOvrWyjTe+ansxuqN5fG2YH8yNePHWdqeW9/J+7Wtl4P0i0d5WexIJ1XtKgISNkOQTzcXtIfVXUXIvlL5UMH3SUQ8KUYGmY0Yizz6Rlifqr2r4tep1urqixqqLk5MINo8k0YEP/RNE/ZfMt8JjA==
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
- [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- dw24-20020a05620a601800b007858c3d50a5sm670326qkb.42.2024.02.06.05.00.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Feb 2024 05:00:44 -0800 (PST)
-Date: Tue, 6 Feb 2024 08:00:40 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io,
- u-boot-custodians@lists.denx.de, sjg@chromium.org,
- robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org,
- conor@kernel.org, neil.armstrong@linaro.org,
- caleb.connolly@linaro.org, ff@shokubai.tech,
- daniel.thompson@linaro.org, dgilmore@fedoraproject.org,
- pbrobinson@gmail.com, ilias.apalodimas@linaro.org,
- b.galvani@gmail.com, xypron.glpk@gmx.de, michal.simek@amd.com,
- seanga2@gmail.com, rasmus.villemoes@prevas.dk, peng.fan@nxp.com,
- jh80.chung@samsung.com, rfried.dev@gmail.com, marex@denx.de,
- mibodhi@gmail.com, bb@ti.com, mark.kettenis@xs4all.nl,
- festevam@gmail.com, nm@ti.com, andre.przywara@arm.com
-Subject: Re: [PATCH v5 00/11] An effort to bring DT bindings compliance
- within U-Boot
-Message-ID: <20240206130040.GO1152441@bill-the-cat>
-References: <20240202130534.1051438-1-sumit.garg@linaro.org>
- <20240202180226.GF1152441@bill-the-cat>
- <CAFA6WYMSvu0rL+et1Q7xVuOnyWMDbJYQj9TeC6c2ALNNFGhRCA@mail.gmail.com>
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 5966A61349;
+ Tue,  6 Feb 2024 13:41:27 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5DFE7C433F1;
+ Tue,  6 Feb 2024 13:41:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1707226887;
+ bh=lEd9pekSgZxvJO3dswYWDnPf9CX7AC3pGvs+367DLJ8=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=NEOXYHh2KBHZdPbDMCf9UGM5utTWkdL+3Py28C+Zi3HM8l861l3HeQ414j4Cdwfc+
+ 43a6vcIbuP4op914N+p4rjlb/2TAQKqt7I7fcmJKoiPLwQ9MM376BfKq1uA8q3gEaV
+ JhoziRqWbL4S5whxOT4XUSbBxdjQTGSvj6IZOFheBGOHBmUnK6tgjsmwQaYgTuU1NN
+ vmmiqVf/5eWSjUOrgaFNAHViB6KRjQkCcF2tpiFZxOcf8VKTvn6S4DkMjLjJa21c3p
+ E140VThWYaXaODXOEAk5QBzoa20mZBlI1ScptMhr6VzVARXec0lVvGl2G3FLGFbA1b
+ TvB41QuhR1x6w==
+Message-ID: <3ddc45e4-e0d4-4ae7-90ed-b273b3c1ac09@kernel.org>
+Date: Tue, 6 Feb 2024 15:41:21 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Oyg9RMJBWZp/AJxW"
-Content-Disposition: inline
-In-Reply-To: <CAFA6WYMSvu0rL+et1Q7xVuOnyWMDbJYQj9TeC6c2ALNNFGhRCA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4] remoteproc: uclass: Add methods to load firmware to
+ rproc and boot rproc
+Content-Language: en-US
+To: MD Danish Anwar <danishanwar@ti.com>, "Anwar, Md Danish"
+ <a0501179@ti.com>, Max Krummenacher <max.krummenacher@toradex.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Dan Carpenter <dan.carpenter@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Nishanth Menon <nm@ti.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, srk@ti.com, Vignesh Raghavendra <vigneshr@ti.com>,
+ r-gunasekaran@ti.com
+References: <20240130063322.2345057-1-danishanwar@ti.com>
+ <e72403f9-a0aa-4286-97d2-456735fd3aac@kernel.org>
+ <8bc580b4-5faf-48f4-9d68-052fb9e114e8@ti.com>
+ <d0b4530d-b12a-4b2c-8171-35ca003d4234@kernel.org>
+ <c042c7a5-1561-4efb-b7c4-461bda1f6c36@ti.com>
+ <1646d8b2-7e0d-4716-956f-41b6f61f8626@kernel.org>
+ <9f3b093c-89fd-4f4c-abad-650c03cb8118@ti.com>
+From: Roger Quadros <rogerq@kernel.org>
+In-Reply-To: <9f3b093c-89fd-4f4c-abad-650c03cb8118@ti.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,66 +83,186 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---Oyg9RMJBWZp/AJxW
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Tue, Feb 06, 2024 at 10:57:12AM +0530, Sumit Garg wrote:
-> Hi Tom,
->=20
-> On Fri, 2 Feb 2024 at 23:32, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Fri, Feb 02, 2024 at 06:35:23PM +0530, Sumit Garg wrote:
-> >
-> > > Changes in v5:
-> > > --------------
-> > > - Rebased on tip of master (050a9b981d6a835133521b599be3ae189ce70f41)
-> > > - Created v5_dt branch for testing purposes:
-> > >   https://github.com/b49020/u-boot/tree/v5_dt
-> > > - Patch #6: Added support to cherry-pick fixes in subtree update scri=
-pt.
-> > >   Also, used https:// instead of git://.
-> > > - Patch #7: Fixed inappropriate documentation update.
-> > > - Patch #8: Document how to cherry-pick fixes from devicetree-rebasing
-> > >   tree.
-> >
-> > OK, for v6 please push this through CI. I've started a run now to check
-> > other things, but just sandbox currently fails to build right now.
->=20
-> Yeah it looks like patch#3 rework in v4 has broken EFI capsule .dtsi
-> file generation logic which should be fixed by add-on fix [1] for
-> patch#3. The github CI passes [2] with that included. I suppose the
-> gitlab CI should be fine too. If its fine for your testing as well
-> then I will incorporate it in v6.
->=20
-> [1] https://github.com/u-boot/u-boot/pull/484/commits/d796c34307cd363674e=
-0d0d2e31618643ac8e76c
-> [2] https://github.com/u-boot/u-boot/pull/484
+On 06/02/2024 07:31, MD Danish Anwar wrote:
+> 
+> 
+> On 05/02/24 6:07 pm, Roger Quadros wrote:
+>>
+>>
+>> On 05/02/2024 12:20, MD Danish Anwar wrote:
+>>>
+>>>
+>>> On 05/02/24 3:36 pm, Roger Quadros wrote:
+>>>>
+>>>>
+>>>> On 02/02/2024 18:40, Anwar, Md Danish wrote:
+>>>>> Hi Roger,
+>>>>>
+>>>>> On 2/2/2024 4:49 PM, Roger Quadros wrote:
+>>>>>>
+>>>>>>
+>>>>>> On 30/01/2024 08:33, MD Danish Anwar wrote:
+>>>>>>> Add APIs to set a firmware_name to a rproc and boot the rproc with the
+>>>>>>> same firmware.
+>>>>>>>
+> 
+> <snip>
+> 
+>>>>>
+>>>>>> How does caller know what firmware size to set to?
+>>>>>> This should already be private to the rproc as it knows 
+>>>>>> how large is its program memory.
+>>>>>>
+>>>>>
+>>>>> Caller is trying to boot the rproc with a firmware binary. Caller should
+>>>>> know the size of binary that it wants to load to rproc core. Caller will
+>>>>> specify the binary size to rproc_boot(). Based on the size provided by
+>>>>> caller, rproc_boot() will then allocate that much memory and call
+>>>>> request_firmware_into_buf() with the size and allocated buffer. If the
+>>>>> caller doesn't provide minimum size rproc_load() will fail.
+>>>>
+>>>> Caller only knows the filename. It need not know more details.
+>>>
+>>> Caller is trying to load a file of it's choice to a rproc. Caller should
+>>> know the size of file it is trying to load or atleast the max size that
+>>> the firmware file could be of.
+>>>
+>>>
+>>>> Also see my comment below about rproc_boot() API.
+>>>>
+>>>>>
+>>>>> rproc_load() calls respective driver ops, for example: pru_load().
+>>>>> pru_load() [1] API checks the required size of firmware to load by
+>>>>> casting the buffer into Elf32_Ehdr and Elf32_Phdr and returns error if
+>>>>> size provided by caller is less than this.
+>>>>>
+>>>>>
+>>>>> 	if (offset + filesz > size) {
+>>>>> 		dev_dbg(dev, "truncated fw: need 0x%x avail 0x%zx\n",
+>>>>> 			offset + filesz, size);
+>>>>> 		ret = -EINVAL;
+>>>>> 		break;
+>>>>> 	}
+>>>>>
+>>>>>>> + *
+>>>>>>> + * Boot a remote processor (i.e. load its firmware, power it on, ...).
+>>>>>>> + *
+>>>>>>> + * This function first loads the firmware set in the uclass pdata of Remote
+>>>>>>> + * processor to a buffer and then loads firmware to the remote processor
+>>>>>>> + * using rproc_load().
+>>>>>>> + *
+>>>>>>> + * Return: 0 on success, and an appropriate error value otherwise
+>>>>>>> + */
+>>>>>>> +int rproc_boot(struct udevice *rproc_dev, size_t fw_size);
+>>>>>>
+>>>>>> Was wondering if you need separate API for rproc_set_firmware or we can just
+>>>>>> pass firmware name as argument to rproc_boot()?
+>>>>>>
+>>>>>
+>>>>> Technically we can. But when we discussed this approach first in v1, you
+>>>>> had asked to keep the APIs similar to upstream linux. Upstream linux has
+>>>>> these two APIs so I kept it that way. If you want I can drop the first
+>>>>> API. Please let me know.
+>>>>
+>>>> Sure you can keep it as it is in Linux, but there, rproc_boot doesn't
+>>>> take fw_size argument. So wondering why you should have it in u-boot.
+>>>>
+>>>
+>>> For loading firmware to a rproc core in u-boot, it's first neccassry to
+>>> load the firmware into buffer and then load that buffer into rproc core
+>>> using rproc_load() API. Now to load the firmware to a buffer ther is an
+>>> API request_firmware_into_buf(). This API takes size of firmware as one
+>>> of it's argument. So in order to call this API from rproc_boot() we need
+>>> to pass fw_size to rproc_boot()
+>>>
+>>> Other u-boot drivers using request_firmware_into_buf() are also passing
+>>> size of firmware from their driver.
+>>
+>> But in your driver you didn't use size of firmware but some 64K
+>> https://lore.kernel.org/all/20240124064930.1787929-8-danishanwar@ti.com/
+>>
+> 
+> Yes, in driver I am hardcoding the size to 64K. That's because I know
+> the size of ICSSG firmwares are less than 64K. Instead of hardcoding I
 
-Yup, if Azure passes GitLab should pass too. I think you should wait to
-repost v6 until you and Marek agree about how we are (and perhaps
-aren't) handling fixes to dts files.
+What if you enable debugging symbols in the firmware file. Won't it exceed 64KB?
+It is not a good idea to assume any firmware file size as it will eventually
+break sometime in the future and will be a pain to debug.
 
---=20
-Tom
+> can also define macro or provide a config option where we set the size
+> and the driver will read the size from the config and call rproc_boot()
+> with size.
+> 
+> For example, fm.c driver reads the size from config option
+> CONFIG_SYS_QE_FMAN_FW_LENGTH [1] and calls request_firmware_into_buf()
+> 
+> [1]
+> https://elixir.bootlin.com/u-boot/latest/source/drivers/net/fm/fm.c#L458
+> 
+>> So neither does the caller have a clue of firmware size?
+>>
+>>>
+>>> If rproc_boot() doesn't take fw_size as argument then within
+>>> rproc_boot() we need to figure out the fw_size before calling
+>>> request_firmware_into_buf().
+>>>
+>>> If we don't know the size / maximum size of the firmware to load, how
+>>> will we call request_firmware_into_buf(). Someone has to tell
+>>> request_firmware_into_buf() the size of firmware. I am expecting that to
+>>> be the caller. Do you have any other way of getting the firmware size
+>>> before request_firmware_into_buf() is called?
+>>
+>> /**
+>>  * request_firmware_into_buf - Load firmware into a previously allocated buffer.
+>>  * @dev: An instance of a driver.
+>>  * @name: Name of firmware file.
+>>  * @buf: Address of buffer to load firmware into.
+>>  * @size: Size of buffer.
+>>  * @offset: Offset of a file for start reading into buffer.
+>>
+>> It needs size of pre-allocated buffer which can be smaller than file size.
+>> It also has the option of offset. So you can load portions of the file limited
+>> by buffer size.
+>>
+>> My suggestion is that Remoteproc layer should take care of how much buffer
+>> to allocate and pass that buffer size to request_firmware_into_buf().
+>> You are doing the malloc here itself anyways.
+>>
+> 
+> But how would the remoteproc driver know how much buffer it needs to
+> allocate before calling request_firmware_into_buf().
 
---Oyg9RMJBWZp/AJxW
-Content-Type: application/pgp-signature; name="signature.asc"
+Only the filesystem driver knows what exactly is the firmware file size.
+fs_size() API can be used for that.
 
------BEGIN PGP SIGNATURE-----
+> 
+>>>
+>>>>>
+>>>>>>>  #else
+>>>>>>>  static inline int rproc_init(void) { return -ENOSYS; }
+>>>>>>>  static inline int rproc_dev_init(int id) { return -ENOSYS; }
+>>>>>>> @@ -744,6 +775,10 @@ static inline int rproc_elf_load_rsc_table(struct udevice *dev, ulong fw_addr,
+>>>>>>>  					   ulong fw_size, ulong *rsc_addr,
+>>>>>>>  					   ulong *rsc_size)
+>>>>>>>  { return -ENOSYS; }
+>>>>>>> +static inline int rproc_set_firmware(struct udevice *rproc_dev, const char *fw_name)
+>>>>>>> +{ return -ENOSYS; }
+>>>>>>> +static inline int rproc_boot(struct udevice *rproc_dev, size_t fw_size)
+>>>>>>> +{ return -ENOSYS; }
+>>>>>>>  #endif
+>>>>>>>  
+>>>>>>>  #endif	/* _RPROC_H_ */
+>>>>>>
+>>>>>
+>>>>> [1]
+>>>>> https://elixir.bootlin.com/u-boot/latest/source/drivers/remoteproc/pru_rproc.c#L324
+>>>>>
+>>>>
+>>>
+>>
+> 
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXCLXIACgkQFHw5/5Y0
-tyxbggv/dj82883DFxw4JCF99N2EqcCpFOZJpQzLseN3b7XAmvPaIF3KqZAiBfaE
-5WR73UUvhlwYhxquIOORuWMlxExX0HqbNGDVDIz6cMQ996BxoNCbJsDElOTGfZTg
-Ccal/Mw5qgWHGfRZkrRkVDaktPSciGOFmPKucH1al1soe0/TZqmbVi7RJjRo9ZYF
-YMY1zi+gzAit0+zgfcTt1QWhF2pQ8+cG/gVMkYi7/FKrAmPaa33mKWbialTyQMO9
-besBQ88TovF7UYbXSf9XKifRDs2AXNTghFpw/ilZdH56cpwaYPQWumBqE/+7Mcsw
-jekq/ldONt/4nmEQi3LMJL2uD3uHfMEAmXFC9YH2+s5gXZJRzR4XZNSJ3eC+U9kA
-QWbrZ6oU1NNBZMutbaSSjHtwUEz3Eoz1efPddc0rLtJjqpU1ZoTJ31VMDFoMubQX
-jblUlM+ks9DAN7un4EbuB0VU8ncj4vEpgT3Cs42T/IQS+LD0gXf3qUiWqmIJu8g9
-xSVhpNHE
-=QLS3
------END PGP SIGNATURE-----
-
---Oyg9RMJBWZp/AJxW--
+-- 
+cheers,
+-roger
