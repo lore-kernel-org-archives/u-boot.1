@@ -4,77 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4A49C4828D
-	for <u-boot@archiver.kernel.org>; Tue,  6 Feb 2024 05:31:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35494C48286
+	for <u-boot@archiver.kernel.org>; Tue,  6 Feb 2024 05:52:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C04D087887;
-	Tue,  6 Feb 2024 06:31:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 8184A8798F;
+	Tue,  6 Feb 2024 06:52:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="JqIzwqVW";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="UP8PSPLn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31E1B87964; Tue,  6 Feb 2024 06:31:30 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 82FF9879A2; Tue,  6 Feb 2024 06:52:23 +0100 (CET)
+Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6F9D48786E
- for <u-boot@lists.denx.de>; Tue,  6 Feb 2024 06:31:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 252FB87964
+ for <u-boot@lists.denx.de>; Tue,  6 Feb 2024 06:52:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=danishanwar@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4165VKUV031087;
- Mon, 5 Feb 2024 23:31:20 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1707197480;
- bh=tYu6FOkGGvixDCnIC6ntuU7LnkWi8TNnQH82wRPtc88=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=JqIzwqVW5Pnmk1XyS/7Egt7fY4H4sLp/nE2O5fioD3gyFQi5ATLfPhFPFB7C8DqW7
- xW0raXQYz6agEJUk9a60IsfFOMrdg6YbxCzGp2HfQFHffQiu/ZB1MKDJ9ZKGa3M+nJ
- r1ZNFzStR5hwuZQiBhA0xomQk5IdyPwvbB/+HFo8=
-Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4165VJMp030721
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 5 Feb 2024 23:31:19 -0600
-Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 5
- Feb 2024 23:31:19 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 5 Feb 2024 23:31:19 -0600
-Received: from [10.24.69.25] (danish-tpc.dhcp.ti.com [10.24.69.25])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4165VFVq037391;
- Mon, 5 Feb 2024 23:31:15 -0600
-Message-ID: <9f3b093c-89fd-4f4c-abad-650c03cb8118@ti.com>
-Date: Tue, 6 Feb 2024 11:01:14 +0530
+ spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4] remoteproc: uclass: Add methods to load firmware to
- rproc and boot rproc
-Content-Language: en-US
-To: Roger Quadros <rogerq@kernel.org>, "Anwar, Md Danish" <a0501179@ti.com>,
- Max Krummenacher <max.krummenacher@toradex.com>, Francesco Dolcini
- <francesco.dolcini@toradex.com>, Dan Carpenter <dan.carpenter@linaro.org>,
- Simon Glass <sjg@chromium.org>, Nishanth Menon <nm@ti.com>, Tom Rini
- <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, <srk@ti.com>, Vignesh Raghavendra
- <vigneshr@ti.com>, <r-gunasekaran@ti.com>
-References: <20240130063322.2345057-1-danishanwar@ti.com>
- <e72403f9-a0aa-4286-97d2-456735fd3aac@kernel.org>
- <8bc580b4-5faf-48f4-9d68-052fb9e114e8@ti.com>
- <d0b4530d-b12a-4b2c-8171-35ca003d4234@kernel.org>
- <c042c7a5-1561-4efb-b7c4-461bda1f6c36@ti.com>
- <1646d8b2-7e0d-4716-956f-41b6f61f8626@kernel.org>
-From: MD Danish Anwar <danishanwar@ti.com>
-In-Reply-To: <1646d8b2-7e0d-4716-956f-41b6f61f8626@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
+ t=1707198740;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=GCs5ycan7w9Pji72SjWDTMFa8WOmvNiggrLoQlJ7utE=;
+ b=UP8PSPLnVPPMu2UnSXH3YQ/pi/oaWVJTBjvJwc8Y67+dfJ4Pb78xLkr+70DkfhCDqJLSnA
+ 6RXk0dD1ApgowaTZoE94g8JtdV/VCI8MsGzJ53J2oE4vLdO+D4alqEOULGDEiqvv3RGFt4
+ 9FF18/Ln0THLIqHIkaCazH63rWhANOYMC/8lCuoZdy4fatvdRXwnmPL1szWtjLCvUCuW6L
+ vG388IZ8602I7FIaYtyU3zqqyKuBfagx07/d61JyBwbEfip1TqruxKrJZuUy/DXRHnDs7S
+ C/CEPhO5OMIiQ5Cb6JamQgGuKw4Waae/jlXONh/n3FWErTLtqxMn1P1+eutDgA==
+Date: Tue, 06 Feb 2024 06:52:19 +0100
+From: Dragan Simic <dsimic@manjaro.org>
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>, Kever Yang
+ <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Nicolas Frattaroli
+ <frattaroli.nicolas@gmail.com>, Tom Rini <trini@konsulko.com>, Jagan Teki
+ <jagan@amarulasolutions.com>, Andy Yan <andyshrk@163.com>, Tianling Shen
+ <cnsztl@gmail.com>, Akash Gajjar <gajjar04akash@gmail.com>, Eugen Hristev
+ <eugen.hristev@collabora.com>, Joshua Riek <jjriek@verizon.net>, Weizhao
+ Ouyang <o451686892@gmail.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2 1/3] rockchip: rk35xx: Remove use of eMMC DDR52 mode
+In-Reply-To: <39a349b2-8ddc-4806-94fe-79355aa7d5f0@kwiboo.se>
+References: <20240204205312.2342868-1-jonas@kwiboo.se>
+ <20240204205312.2342868-2-jonas@kwiboo.se>
+ <3ec22d95-ee0d-4a0b-8c0e-90067ba0dc32@theobroma-systems.com>
+ <b889d4e3-f507-4520-a02e-212f4ce9c7c7@kwiboo.se>
+ <66d3d8ad40cfce744e8b80c9ad0419eb@manjaro.org>
+ <be5b2bd5-f855-4585-b59d-c6d0c1df16d4@theobroma-systems.com>
+ <e1c70a4b74cd4da978e98927dc08485f@manjaro.org>
+ <39a349b2-8ddc-4806-94fe-79355aa7d5f0@kwiboo.se>
+Message-ID: <f935a6be2317d9d8c68c9603504f4939@manjaro.org>
+X-Sender: dsimic@manjaro.org
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
+Content-Transfer-Encoding: 8bit
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,174 +82,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hello Jonas,
 
-
-On 05/02/24 6:07 pm, Roger Quadros wrote:
+On 2024-02-05 18:01, Jonas Karlman wrote:
+> On 2024-02-05 14:51, Dragan Simic wrote:
+>> On 2024-02-05 14:45, Quentin Schulz wrote:
+>>> On 2/5/24 14:40, Dragan Simic wrote:
+>>>> How about waiting until I fix the mode selection in the Linux kernel
+>>>> drivers?  As I noted already, that's already on my TODO list, and
+>>>> perhaps it would be good to test a bit again under Linux with those
+>>>> fixes applied, before actually removing the buggy modes from the
+>>>> kernel's RK356x and RK3588(s) SoC dtsi files.
+>>> 
+>>> While I appreciate there's some work that can be done in the Linux
+>>> kernel for those low-speed modes, the properties in question are
+>>> removed only from U-Boot's DTS and your future patches for the kernel
+>>> wouldn't impact the bootloader anyway.
+>>> 
+>>> The issue right now is that U-Boot is currently broken because of
+>>> those properties, which are only in U-Boot's DTS.
+>>> 
+>>> Not sure exactly why we should waiting on Linux kernel patches for
+>>> merging work-arounds for U-Boot? What exactly are you suggesting we
+>>> wait for? What can improve the situation?
+>> 
+>> Ah, sorry for the confusion, let me clarify a bit...
+>> 
+>> I just replied to the Jonas's remark about the need to eventually
+>> have the same fixes and mode removals in the Linux kernel's SoC dtsi
+>> files.  In other words, all I wrote was about those changes, not
+>> about the changes on the U-Boot side.
+>> 
+>> Of course, there are no reasons for delaying these U-Boot fixes.
 > 
+> Short history about the added eMMC modes in u-boot.dtsi on RK35xx 
+> boards:
 > 
-> On 05/02/2024 12:20, MD Danish Anwar wrote:
->>
->>
->> On 05/02/24 3:36 pm, Roger Quadros wrote:
->>>
->>>
->>> On 02/02/2024 18:40, Anwar, Md Danish wrote:
->>>> Hi Roger,
->>>>
->>>> On 2/2/2024 4:49 PM, Roger Quadros wrote:
->>>>>
->>>>>
->>>>> On 30/01/2024 08:33, MD Danish Anwar wrote:
->>>>>> Add APIs to set a firmware_name to a rproc and boot the rproc with the
->>>>>> same firmware.
->>>>>>
-
-<snip>
-
->>>>
->>>>> How does caller know what firmware size to set to?
->>>>> This should already be private to the rproc as it knows 
->>>>> how large is its program memory.
->>>>>
->>>>
->>>> Caller is trying to boot the rproc with a firmware binary. Caller should
->>>> know the size of binary that it wants to load to rproc core. Caller will
->>>> specify the binary size to rproc_boot(). Based on the size provided by
->>>> caller, rproc_boot() will then allocate that much memory and call
->>>> request_firmware_into_buf() with the size and allocated buffer. If the
->>>> caller doesn't provide minimum size rproc_load() will fail.
->>>
->>> Caller only knows the filename. It need not know more details.
->>
->> Caller is trying to load a file of it's choice to a rproc. Caller should
->> know the size of file it is trying to load or atleast the max size that
->> the firmware file could be of.
->>
->>
->>> Also see my comment below about rproc_boot() API.
->>>
->>>>
->>>> rproc_load() calls respective driver ops, for example: pru_load().
->>>> pru_load() [1] API checks the required size of firmware to load by
->>>> casting the buffer into Elf32_Ehdr and Elf32_Phdr and returns error if
->>>> size provided by caller is less than this.
->>>>
->>>>
->>>> 	if (offset + filesz > size) {
->>>> 		dev_dbg(dev, "truncated fw: need 0x%x avail 0x%zx\n",
->>>> 			offset + filesz, size);
->>>> 		ret = -EINVAL;
->>>> 		break;
->>>> 	}
->>>>
->>>>>> + *
->>>>>> + * Boot a remote processor (i.e. load its firmware, power it on, ...).
->>>>>> + *
->>>>>> + * This function first loads the firmware set in the uclass pdata of Remote
->>>>>> + * processor to a buffer and then loads firmware to the remote processor
->>>>>> + * using rproc_load().
->>>>>> + *
->>>>>> + * Return: 0 on success, and an appropriate error value otherwise
->>>>>> + */
->>>>>> +int rproc_boot(struct udevice *rproc_dev, size_t fw_size);
->>>>>
->>>>> Was wondering if you need separate API for rproc_set_firmware or we can just
->>>>> pass firmware name as argument to rproc_boot()?
->>>>>
->>>>
->>>> Technically we can. But when we discussed this approach first in v1, you
->>>> had asked to keep the APIs similar to upstream linux. Upstream linux has
->>>> these two APIs so I kept it that way. If you want I can drop the first
->>>> API. Please let me know.
->>>
->>> Sure you can keep it as it is in Linux, but there, rproc_boot doesn't
->>> take fw_size argument. So wondering why you should have it in u-boot.
->>>
->>
->> For loading firmware to a rproc core in u-boot, it's first neccassry to
->> load the firmware into buffer and then load that buffer into rproc core
->> using rproc_load() API. Now to load the firmware to a buffer ther is an
->> API request_firmware_into_buf(). This API takes size of firmware as one
->> of it's argument. So in order to call this API from rproc_boot() we need
->> to pass fw_size to rproc_boot()
->>
->> Other u-boot drivers using request_firmware_into_buf() are also passing
->> size of firmware from their driver.
+> U-Boot defaults to not support HS200+ modes unless explicitly enabled 
+> in
+> Kconfig options and on top of that the driver require DT to have a
+> corresponding mode prop to make use of any mode faster than MMC legacy.
 > 
-> But in your driver you didn't use size of firmware but some 64K
-> https://lore.kernel.org/all/20240124064930.1787929-8-danishanwar@ti.com/
+> When I worked on eMMC fixes for RK3568 and support for RK3588 [1] I 
+> only
+> tested reading data using all modes.
 > 
-
-Yes, in driver I am hardcoding the size to 64K. That's because I know
-the size of ICSSG firmwares are less than 64K. Instead of hardcoding I
-can also define macro or provide a config option where we set the size
-and the driver will read the size from the config and call rproc_boot()
-with size.
-
-For example, fm.c driver reads the size from config option
-CONFIG_SYS_QE_FMAN_FW_LENGTH [1] and calls request_firmware_into_buf()
-
-[1]
-https://elixir.bootlin.com/u-boot/latest/source/drivers/net/fm/fm.c#L458
-
-> So neither does the caller have a clue of firmware size?
+> Because reading data in all modes seem to work on the boards I tested 
+> on,
+> I eventually added the "missing" props to board u-boot.dtsi-files, so
+> that U-Boot could make use of faster modes. However, I opted to only
+> enable the HS200 Kconfig option on boards with embedded eMMC.
 > 
->>
->> If rproc_boot() doesn't take fw_size as argument then within
->> rproc_boot() we need to figure out the fw_size before calling
->> request_firmware_into_buf().
->>
->> If we don't know the size / maximum size of the firmware to load, how
->> will we call request_firmware_into_buf(). Someone has to tell
->> request_firmware_into_buf() the size of firmware. I am expecting that to
->> be the caller. Do you have any other way of getting the firmware size
->> before request_firmware_into_buf() is called?
+> This has resulted in that most RK35xx boards now default to using the
+> fastest none HS200+ mode, i.e. DDR52 mode. They would also try to use a
+> faster mode as long as a HS200+ Kconfig option is enabled.
 > 
-> /**
->  * request_firmware_into_buf - Load firmware into a previously allocated buffer.
->  * @dev: An instance of a driver.
->  * @name: Name of firmware file.
->  * @buf: Address of buffer to load firmware into.
->  * @size: Size of buffer.
->  * @offset: Offset of a file for start reading into buffer.
+> With the removal of mmc-ddr-1_8v prop in this series, at least the most
+> broken mode is avoided for all RK35xx boards. And with the HS200 
+> Kconfig
+> option enabled by default, the required tuning in HS200+ mode should
+> automatically happen as long as eMMC module support HS200 mode. After
+> that writing in any supported lower speed seem to work OK.
 > 
-> It needs size of pre-allocated buffer which can be smaller than file size.
-> It also has the option of offset. So you can load portions of the file limited
-> by buffer size.
+> In the case where HS200 is supported any read/write in lower speed seem
+> to work, so the modes provided by cap-mmc-highspeed prop is OK.
 > 
-> My suggestion is that Remoteproc layer should take care of how much buffer
-> to allocate and pass that buffer size to request_firmware_into_buf().
-> You are doing the malloc here itself anyways.
+> However, if HS200+ is not supported it does not really matter, first
+> write will fail in any remaining mode, the slowest legacy or the modes
+> provided by cap-mmc-highspeed prop.
 > 
+> Keeping the cap-mmc-highspeed prop at least make reading data faster
+> possible, and writing data is still semi-broken in any remaining mode.
+> 
+> In conclusion I suggest:
+> 
+> - We keep the cap-mmc-highspeed props in board u-boot.dtsi for now.
+> 
+> - The mmc mode props that has been added in board u-boot.dtsi and have
+>   been validated working with both U-Boot and linux should be added to
+>   board DT. e.g HS200+ props is missing in some board DT.
+> 
+> - When an updated board DT has been synced from linux, any override in
+>   board u-boot.dtsi should be dropped.
+> 
+> I am also fine with completely dropping cap-mmc-highspeed props now if
+> they cause issues not solved by the HS200 Kconfig option being enabled.
+> 
+> [1] https://patchwork.ozlabs.org/cover/1764606/
 
-But how would the remoteproc driver know how much buffer it needs to
-allocate before calling request_firmware_into_buf().
+Thank you for taking the time to write this detailed summary!
 
->>
->>>>
->>>>>>  #else
->>>>>>  static inline int rproc_init(void) { return -ENOSYS; }
->>>>>>  static inline int rproc_dev_init(int id) { return -ENOSYS; }
->>>>>> @@ -744,6 +775,10 @@ static inline int rproc_elf_load_rsc_table(struct udevice *dev, ulong fw_addr,
->>>>>>  					   ulong fw_size, ulong *rsc_addr,
->>>>>>  					   ulong *rsc_size)
->>>>>>  { return -ENOSYS; }
->>>>>> +static inline int rproc_set_firmware(struct udevice *rproc_dev, const char *fw_name)
->>>>>> +{ return -ENOSYS; }
->>>>>> +static inline int rproc_boot(struct udevice *rproc_dev, size_t fw_size)
->>>>>> +{ return -ENOSYS; }
->>>>>>  #endif
->>>>>>  
->>>>>>  #endif	/* _RPROC_H_ */
->>>>>
->>>>
->>>> [1]
->>>> https://elixir.bootlin.com/u-boot/latest/source/drivers/remoteproc/pru_rproc.c#L324
->>>>
->>>
->>
-> 
-
--- 
-Thanks and Regards,
-Danish
+It's somewhat unexpected that the writes to eMMC fail to work while
+the reads work fine.  As we know, the writes don't introduce the delay
+between the host-generated clock and the data to be written.  It would
+be expected for the reads to be more error-prone.
