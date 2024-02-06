@@ -4,66 +4,131 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B5DCC48286
-	for <u-boot@archiver.kernel.org>; Tue,  6 Feb 2024 08:56:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B93CC4828D
+	for <u-boot@archiver.kernel.org>; Tue,  6 Feb 2024 10:25:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2EBF287B7F;
-	Tue,  6 Feb 2024 09:56:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 64F1E87C09;
+	Tue,  6 Feb 2024 11:25:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=theobroma-systems.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="hJPAhmFJ";
+	dkim=pass (2048-bit key; unprotected) header.d=theobroma-systems.com header.i=@theobroma-systems.com header.b="FUoezzxM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 850E887B7F; Tue,  6 Feb 2024 09:56:16 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id 66BFA87C56; Tue,  6 Feb 2024 11:25:33 +0100 (CET)
+Received: from EUR04-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur04on20701.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2611::701])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EECA08753C
- for <u-boot@lists.denx.de>; Tue,  6 Feb 2024 09:56:13 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-bhatia1@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4168uCZ0024334;
- Tue, 6 Feb 2024 02:56:12 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1707209772;
- bh=WKmGzMseinV1/zuhJ1wHTYH9HHjpY5E5KvbeJRfou+w=;
- h=From:To:CC:Subject:Date;
- b=hJPAhmFJoOK8YNIOW9uT3Xjt47/Be2rXsjNHSPd+b6CrSWCKZ1iTfkS/FUJ1/nbLn
- mlGf6F5ON0YXBVJFRfmbw1/B/W+cJiZzpDptjO+ARk2Nv0KcYKxAwKri8k4sjNG1iq
- fKjAYzIWKaUuyFn8NhYMRADrwRyB38jSvg6El4mI=
-Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4168uBot117906
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 6 Feb 2024 02:56:12 -0600
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 6
- Feb 2024 02:56:11 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 6 Feb 2024 02:56:11 -0600
-Received: from localhost (uda0496377.dhcp.ti.com [10.24.69.150])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4168uADk080891;
- Tue, 6 Feb 2024 02:56:11 -0600
-From: Aradhya Bhatia <a-bhatia1@ti.com>
-To: Tom Rini <trini@konsulko.com>, Andrew Davis <afd@ti.com>, Nishanth Menon
- <nm@ti.com>, Bryan Brattlof <bb@ti.com>
-CC: u-boot Mailing List <u-boot@lists.denx.de>, Vignesh Raghavendra
- <vigneshr@ti.com>, Udit Kumar <u-kumar1@ti.com>, Devarsh Thakkar
- <devarsht@ti.com>, Jai Luthra <j-luthra@ti.com>, Aniket Limaye
- <a-limaye@ti.com>, Aradhya Bhatia <a-bhatia1@ti.com>
-Subject: [PATCH] arm: mach-k3: Refactor QoS settings
-Date: Tue, 6 Feb 2024 14:26:10 +0530
-Message-ID: <20240206085610.3226136-1-a-bhatia1@ti.com>
-X-Mailer: git-send-email 2.34.1
+ by phobos.denx.de (Postfix) with ESMTPS id 1402E86284
+ for <u-boot@lists.denx.de>; Tue,  6 Feb 2024 11:25:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=theobroma-systems.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=quentin.schulz@theobroma-systems.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=f703Ipiwr4I86FXcv+FjqOogSTzuZkl3JFd9enJkjVv4RgQR/5Y6y+v3lCeptYb5Oi0AiGjTdqvO3CC6w681gqY+3l6tdr8hA7jR/rLEynAMpQwAg1QntK5AiwoBROW9BeaTPmofNYCbhRdWnFIBfN+4kAMHhVfOGzoeefYkP9qAF4A8rspZ7ns3ExeK8trY1RVpjvSmpOWHaCVir2puNPPe9BKP6QrS/1f7AMStKGEMFrHwvsgmy5IxELXVAHZKyxiG0AqHvLlE5Cp0cxIzFKhZTYYxM+x6HRlfULxQy5GqL9/kpkBSHS3tJR4D3BH5tXOVLDWjQ6P+wjuseYk7Vw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=3Cx0zXfCepjArk1c24UlBf/GKC+7iBmbchErqSCtSf8=;
+ b=VV3k6BplK76ckW2mTqFElO+8se7cm40dSKBstHwnyWU8dx+GdSetAA/p2HPnE5wIDMH3lxv7VTrMGEQeeRmrTS1GvkyloDOnvnf02rOQjacRGV/afK+dSOBn/aoi3gaGZMt6kT0DbhsVHozCgrxFn3HmobcpH6UiVyiG1T0YEd0rlwsV5wuxGcZBzkM+tP0A/7Qcru8kGqA4CDPQOw1O3i3WjBkQtWtnSbr0FGPYriqSvt9tQAn7+nfOxeZMq4BlXkl4UcPayGvSNkLtKgiZBC0QA/GQ0QsCvnVSZf1WYXp7sFnbT0nTpdk7w09/Lje0mSZCVUj0UB0JDj6DSYBOLA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=theobroma-systems.com; dmarc=pass action=none
+ header.from=theobroma-systems.com; dkim=pass header.d=theobroma-systems.com;
+ arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=theobroma-systems.com; 
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=3Cx0zXfCepjArk1c24UlBf/GKC+7iBmbchErqSCtSf8=;
+ b=FUoezzxMwplDwCzNJhpPcjqPVDyGRrChQkQZSo+QGiP13da1fu3tqc5JWDwftMAN0N4//HAiHKxzIhKhiUHCVUz6SJRlSUpFuFYEqVlDFlfMEDw/ReysOQvkG5pIlHGxl74xBrrjVcbtLk7x4ittT2j0cmdAXiZv432w55AOJpvAxOkgAAiRjnQs4SfWsnhC2bsh1rFVWB7a4/nvnXalBJidFI2m8KxT7+/hn26xcikckVo+hy8vYW0Rpuixv5qLEOFl89TdYvO7hz9ysekM1caZkKlEdIhzvydTA/lOvUoJBVC0Z5atrjICalMXbyTyKLD/dngRdrMJi/8VN6vAZQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=theobroma-systems.com;
+Received: from DU2PR04MB8536.eurprd04.prod.outlook.com (2603:10a6:10:2d7::10)
+ by PAXPR04MB8894.eurprd04.prod.outlook.com (2603:10a6:102:20d::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7249.36; Tue, 6 Feb
+ 2024 10:25:28 +0000
+Received: from DU2PR04MB8536.eurprd04.prod.outlook.com
+ ([fe80::550d:ad96:e3cb:9a6e]) by DU2PR04MB8536.eurprd04.prod.outlook.com
+ ([fe80::550d:ad96:e3cb:9a6e%5]) with mapi id 15.20.7249.035; Tue, 6 Feb 2024
+ 10:25:28 +0000
+Message-ID: <2493a32f-8795-4c71-b719-039db0f0ad24@theobroma-systems.com>
+Date: Tue, 6 Feb 2024 11:25:25 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] scripts: dtc-version: Don't show error messages
+Content-Language: en-US
+To: Dragan Simic <dsimic@manjaro.org>, u-boot@lists.denx.de
+Cc: sjg@chromium.org, trini@konsulko.com, martin@geanix.com
+References: <aebd96be57ec59ace348287094ab919ce82711c9.1707191569.git.dsimic@manjaro.org>
+From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+In-Reply-To: <aebd96be57ec59ace348287094ab919ce82711c9.1707191569.git.dsimic@manjaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1PR06CA0110.eurprd06.prod.outlook.com
+ (2603:10a6:803:8c::39) To DU2PR04MB8536.eurprd04.prod.outlook.com
+ (2603:10a6:10:2d7::10)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DU2PR04MB8536:EE_|PAXPR04MB8894:EE_
+X-MS-Office365-Filtering-Correlation-Id: 78f176db-28b4-480a-3e25-08dc26fdf00c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: efBq4lJYwGEPoJIQL6EhURTW2wB6uRSVMqD1LTpy0vgh0mCu8e7z9GLJpr9T4jR9cuEMVpnSz+vTMEcH/46wRkKzMzTkGrZWGehOpCy/CiaaqGnHNZ93FWtjjPYO3iF8IJdh+tD1eEeS3EA8qLvI2pANM+2ZVURdZf4uf0zKPHBumHH/lP/Rxq7ifnCwJhRNkGPI6lauwVpeWfSfhAdn9IgdVGRJy42fds6fdtPiqb/qHleu0sSz98PUZKPgtUtExKBd8LYdWPkElo9D3ARGk2Mx78z+TizS5CeGr5qpQsfrDkZsx4xrjOKZh3auVfo0+8Qn2MqLQl7iH7RzVpTFL3Sg4+hTqacy3lL+sZX5/kZetzLrGxB0AkQMRxhTk5s+CJO77e98Ez/Ll2NNEj82ITYvp7j+58enRfB1uP5BW1RUptvHdJWYdMBGk3e/OaY7WEtRGGmi1B0n/iWftPcEXftE2ovScsojmtkw5E6r8aS3d8dNvwX7VrcZhOfCHzRk3Pn+lyoqV8XOEQQuyoksTNw89D2RYgYNT+srcR7VqjItVZCJWPKzOGD6z23aljkaV7MCJ8PcCLfNQ/TzRLldTLco1oNaaM4DmzUP03slbs69uaBiD1iFI3yX34YuYOV3prgnep2SBNSExcZlOidXiw==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DU2PR04MB8536.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(396003)(366004)(346002)(39850400004)(136003)(376002)(230922051799003)(230473577357003)(230273577357003)(186009)(64100799003)(451199024)(1800799012)(31686004)(2906002)(15650500001)(41300700001)(36756003)(31696002)(86362001)(6486002)(8936002)(966005)(478600001)(83380400001)(38100700002)(5660300002)(4326008)(6506007)(2616005)(6666004)(53546011)(6512007)(66556008)(66946007)(26005)(66476007)(8676002)(316002)(44832011)(43740500002)(45980500001);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?eDhSWm94TlFqSnM5OWxBU2xBT2pmVzh2dVNPY2hZUm96UXgrRlQyblB5WGRi?=
+ =?utf-8?B?ZGIxdHdsdy9ZUDNYRlRYUzVOdTZacTdnbVZIZ2d1NVo1aEU5c3ljeUpZRXRm?=
+ =?utf-8?B?SmhmQ0E3bkRYcTdxeC9GWGtBT3RLazR6TEpTTk9GS0o0b001OXhaNU5zZnhK?=
+ =?utf-8?B?Y09XY0pScTdhUTVmeGVtSi9rSGhybHdNamw5Y1RnaG82MTNUb0M3Q0ZuWUtp?=
+ =?utf-8?B?eEFwTkErNWNIVUdZUkI2WkxlNVRoVWZ5M3VtZlZteVhsZ0U2SkZFOWljdUVN?=
+ =?utf-8?B?eUF5RjFtdkE5S09KbW42YTRCUnhweS91NTZZR2pWMWxWK1YrRU05ZFdnbkcx?=
+ =?utf-8?B?akVCbDlYRmlSQUdadDhNbTRyYWFGajJLV0VHb0ExN3RnTXJyN0JuaUtHTlE2?=
+ =?utf-8?B?SFQyNGpSU0JyT0lXMHEwV2EvbE8xSkR5OHpGVnFJSlI1YkNTa29EWmV2N2hu?=
+ =?utf-8?B?Yi8yakM0eXd4ZlphV2J4Z2pOaFRVOWVtdXhvUWE3VTQrM2l1aGQyNkhESmlt?=
+ =?utf-8?B?SmR6NnlFVmpYcG1wVXB0eXpOZVhtNmJEa1NaM3lzeDlMYk1VK09jWkRsakRX?=
+ =?utf-8?B?WDRKbUYzVVRIWlBWWmlyYnlONUVrczNZYzBibnJvc1BTWUlOZEsyam5WLzJT?=
+ =?utf-8?B?dDJZOTdlWDUvN3d0SHRUYlhnNTJjeWR3c0VGd1FpVUlFSjBvaFlOTjB2R0k4?=
+ =?utf-8?B?bGJteU03c2NoNmNySVcvbXdxTm1BMHgrdEMrZnRCdXRwVE1RcndONkhZbEUr?=
+ =?utf-8?B?YXBkZk9vYzl5L3R3NWZWTUNsQ3o2TFJjTGJkVkdma1loT3dmUXlTSWZYb2dF?=
+ =?utf-8?B?OWlXR1VORDJKdHdUeGV2dmZoalBKaFZaWmhCU2RtYVY1TDRNZGJNNUt5QnhI?=
+ =?utf-8?B?Nmg4NlMrRVNwYVFEVHpROVJjaFNSMHl6azR1UHdaWVMrRDNrV2R3OWRXZUVE?=
+ =?utf-8?B?dVE5V29ucWJEdnhZSW5GOEl1aCtWaU1YcFlYSVNZdXBMVE9wdnFtVGZMcUNG?=
+ =?utf-8?B?aGcxUVBBdEVzd0I5TlNkSWtpVWU2a3NhaFNVeFB3YkJwVVNkNDlKUTNId1hC?=
+ =?utf-8?B?NGZ0RlMydWk2ZzByVWJqT0xudGMxbHN1cUU0SkZMTDJNZTUwUW0yL2p2bFlT?=
+ =?utf-8?B?TEdFay82aFZYSEJ1S1RTVnR0bDZTc1BJbXRDRWxKbEk3eHd0ZGdKRjI5aDkw?=
+ =?utf-8?B?bVdFYWFtdVB0eVpKWFNTbFkzT0JXUmlXMWRCZTlVVzM1YnFxdkk3NkllVEt2?=
+ =?utf-8?B?NTJBa1ZYaHM3dUorS1N5K0xiNzN3bkNXRzVNbFZEeEg1ZThNckp1aHF0RUdZ?=
+ =?utf-8?B?L002WCtYM0Z5VnBZQ1RTUVR0VHNBanZDZTV1TWc3c1pKRWpwNTl6cWFUTG9Q?=
+ =?utf-8?B?VURjVHM1aVMwYTNmS2pUak5qRFlmdDg0VnZxcGpTc3FDekV5VFlaL2M0OEsv?=
+ =?utf-8?B?L3Jxejl3NDFFaVdTVnhkT3Z1UlhWTDFCV205Q3QwU1dSTW9IaGpqemxTam5T?=
+ =?utf-8?B?cUpoLzJHcC9uSlJOVGVoVzRrbStkZzB3VUZ0cjlpbFMyZU9mZmI5RVVtZG0z?=
+ =?utf-8?B?WEZiWmJPN1hjdGxHNkF6Uk1xcGJwY0tRV3pOT0RFVVhVRlYyN2d5ZU9ucXZG?=
+ =?utf-8?B?dm9PaEdXNDZPQU5KaGZtYVlZT05vdlBpY0JBQ2M5UUc4eHRkcW5YZ0lQQ1Zo?=
+ =?utf-8?B?WEJUSUU5ZUZITHNOTjhHN0ZUbGFMRGJtcjUxS1I0QUJnOHQvRTgycVNwemZ2?=
+ =?utf-8?B?bGdseU9RbHRUQitxNHBvMUpTeWZzVWgwMldxME4vbWRDVXdOVTNHa0xrSUk3?=
+ =?utf-8?B?azN2ZVVpbGsyZ2hBVzZQWDQ4aWJqc3dhejNaQ1M3L2pZd2JEYTNvcXdRVk1Z?=
+ =?utf-8?B?ejRWaXRMU2pCaHptTS9aVExPUnhNdmoxU3p1ZlZ5TG02YTE2amw3MkdOQnBs?=
+ =?utf-8?B?UkkySVNwSnZXWDF0VjY1RmprajNBWG1RVElaZXJIbWRRcElVVTlsRVdTUk9z?=
+ =?utf-8?B?VVVLNUxRSUZsQ3Nvc0VkSzU1V2pLTDNiWWhqOWVkTTkwR3RaM3RMSFR6OFE0?=
+ =?utf-8?B?QlROU1MwdDhrSHM2QkdUaVl4N1RWQWJPQStkT0tOeDMvOVpBOXlTQVlrc2tm?=
+ =?utf-8?B?ZG53em9MNlY4QWxvTnBqRXpVM1FPZkxjb0pHTmVoZ0dQZ1lKVS8rcXI0RERx?=
+ =?utf-8?Q?x48S1EjroH3/116uPlIqXEI=3D?=
+X-OriginatorOrg: theobroma-systems.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 78f176db-28b4-480a-3e25-08dc26fdf00c
+X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8536.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Feb 2024 10:25:28.4968 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: cbElIwVyROZdl7qyTzKEEI6nX+Nne+Zy++rBkLe5FNQxqY8fpifAsxf/tkP4LkFwIlRT/7DeeE1/edWeNIN5MeY3B3rk9H1J/DgzHCGEw1S680gply6qLM/nIYvhDRDq
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8894
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,224 +145,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Refactor common QoS code into a new common header file, and the soc
-specific setup_qos functions into a common API.
+Hi Dragan,
 
-Rename $(soc)_qos_count and $(soc)_qos_data variables to qos_count and
-qos_data. When QoS settings of more SoCs are added, only one pair will
-be defined at a time, based on the config SOC_K3_$(soc).
+On 2/6/24 04:56, Dragan Simic wrote:
+> [You don't often get email from dsimic@manjaro.org. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
+> 
+> Prevent the error messages produced by which(1), such as the one quoted
+> below, from being visible in the build outputs.
+> 
+>      which: no dtc in (./scripts/dtc)
+> 
+> This makes the build outputs look a tiny bit cleaner.
+> 
+> Signed-off-by: Dragan Simic <dsimic@manjaro.org>
+> ---
+>   scripts/dtc-version.sh | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/scripts/dtc-version.sh b/scripts/dtc-version.sh
+> index 53ff868bcdce..6d3d7b68fdfa 100755
+> --- a/scripts/dtc-version.sh
+> +++ b/scripts/dtc-version.sh
+> @@ -15,7 +15,7 @@ if [ ${#dtc} -eq 0 ]; then
+>          exit 1
+>   fi
+> 
+> -if ! which $dtc >/dev/null ; then
+> +if ! which $dtc >/dev/null 2>/dev/null ; then
 
-This refactoring has been done for 2 major purposes.
+What about
 
-- The auto-generated $(soc)_qos_data.c and $(soc)_qos.h files cannot
-  have any code that is specific to any bootloader. Those files have to
-  remain agnostic of different bootloader implementations and their
-  header files.
+which $dtc > /dev/null 2>&1
 
-- The existing implementation was less than ideal and would have enabled
-  multiple $(soc)_qos_count and $(soc)_qos_data variables for all SoC
-  variants.
+instead?
 
-Signed-off-by: Aradhya Bhatia <a-bhatia1@ti.com>
----
- arch/arm/mach-k3/Kconfig                      |  8 +++++++
- arch/arm/mach-k3/am62a7_init.c                | 14 ------------
- arch/arm/mach-k3/common.c                     | 12 ++++++++++
- arch/arm/mach-k3/common.h                     |  8 +++++++
- arch/arm/mach-k3/include/mach/hardware.h      |  9 --------
- arch/arm/mach-k3/include/mach/k3-qos.h        | 22 +++++++++++++++++++
- arch/arm/mach-k3/r5/am62ax/Makefile           |  2 +-
- .../{include/mach => r5/am62ax}/am62a_qos.h   |  0
- .../{am62a_qos_data.c => am62a_qos_uboot.c}   |  9 ++++----
- 9 files changed, 56 insertions(+), 28 deletions(-)
- create mode 100644 arch/arm/mach-k3/include/mach/k3-qos.h
- rename arch/arm/mach-k3/{include/mach => r5/am62ax}/am62a_qos.h (100%)
- rename arch/arm/mach-k3/r5/am62ax/{am62a_qos_data.c => am62a_qos_uboot.c} (85%)
+In any case,
 
-diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
-index 03898424c954..ffc4a9c29029 100644
---- a/arch/arm/mach-k3/Kconfig
-+++ b/arch/arm/mach-k3/Kconfig
-@@ -139,6 +139,14 @@ config K3_DM_FW
- 	  bootloader, it makes RM and PM services not being available
- 	  during R5 SPL execution time.
- 
-+config K3_QOS
-+	bool "Enable Quality of Service (QoS) Settings for TI K3 SoCs"
-+	default y if CPU_V7R && SOC_K3_AM62A7
-+	help
-+	  This option enables the R5 SPL to apply QoS settings for various
-+	  HW controllers inside the TI K3 SoCs. The files for QoS settings are
-+	  generated from Sysconfig and k3-resource-partitioning tools.
-+
- config K3_X509_SWRV
- 	int "SWRV for X509 certificate used for boot images"
- 	default 1
-diff --git a/arch/arm/mach-k3/am62a7_init.c b/arch/arm/mach-k3/am62a7_init.c
-index d72e19936b9b..080274e3af58 100644
---- a/arch/arm/mach-k3/am62a7_init.c
-+++ b/arch/arm/mach-k3/am62a7_init.c
-@@ -69,20 +69,6 @@ static void ctrl_mmr_unlock(void)
- 	mmr_unlock(PADCFG_MMR1_BASE, 1);
- }
- 
--#if (IS_ENABLED(CONFIG_CPU_V7R))
--static void setup_qos(void)
--{
--	u32 i;
--
--	for (i = 0; i < am62a_qos_count; i++)
--		writel(am62a_qos_data[i].val, (uintptr_t)am62a_qos_data[i].reg);
--}
--#else
--static void setup_qos(void)
--{
--}
--#endif
--
- void board_init_f(ulong dummy)
- {
- 	struct udevice *dev;
-diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
-index f411366778f0..b54f2ddc4729 100644
---- a/arch/arm/mach-k3/common.c
-+++ b/arch/arm/mach-k3/common.c
-@@ -28,6 +28,8 @@
- #include <elf.h>
- #include <soc.h>
- 
-+#include <asm/arch/k3-qos.h>
-+
- #if IS_ENABLED(CONFIG_SYS_K3_SPL_ATF)
- enum {
- 	IMAGE_ID_ATF,
-@@ -595,3 +597,13 @@ int misc_init_r(void)
- void __weak do_board_detect(void)
- {
- }
-+
-+#if (IS_ENABLED(CONFIG_K3_QOS))
-+void setup_qos(void)
-+{
-+	u32 i;
-+
-+	for (i = 0; i < qos_count; i++)
-+		writel(qos_data[i].val, (uintptr_t)qos_data[i].reg);
-+}
-+#endif
-diff --git a/arch/arm/mach-k3/common.h b/arch/arm/mach-k3/common.h
-index e9db9fbfb63d..53aa186b31a4 100644
---- a/arch/arm/mach-k3/common.h
-+++ b/arch/arm/mach-k3/common.h
-@@ -45,3 +45,11 @@ void ti_secure_image_post_process(void **p_image, size_t *p_size);
- struct ti_sci_handle *get_ti_sci_handle(void);
- void do_board_detect(void);
- void ti_secure_image_check_binary(void **p_image, size_t *p_size);
-+
-+#if (IS_ENABLED(CONFIG_K3_QOS))
-+void setup_qos(void);
-+#else
-+static inline void setup_qos(void)
-+{
-+}
-+#endif
-diff --git a/arch/arm/mach-k3/include/mach/hardware.h b/arch/arm/mach-k3/include/mach/hardware.h
-index a1a9dfbde66c..52ef82e70b07 100644
---- a/arch/arm/mach-k3/include/mach/hardware.h
-+++ b/arch/arm/mach-k3/include/mach/hardware.h
-@@ -30,7 +30,6 @@
- 
- #ifdef CONFIG_SOC_K3_AM62A7
- #include "am62a_hardware.h"
--#include "am62a_qos.h"
- #endif
- 
- /* Assuming these addresses and definitions stay common across K3 devices */
-@@ -97,12 +96,4 @@ struct rom_extended_boot_data {
- 	u32 num_components;
- };
- 
--struct k3_qos_data {
--	u32 reg;
--	u32 val;
--};
--
--extern struct k3_qos_data am62a_qos_data[];
--extern u32 am62a_qos_count;
--
- #endif /* _ASM_ARCH_HARDWARE_H_ */
-diff --git a/arch/arm/mach-k3/include/mach/k3-qos.h b/arch/arm/mach-k3/include/mach/k3-qos.h
-new file mode 100644
-index 000000000000..e00e1de5b9cb
---- /dev/null
-+++ b/arch/arm/mach-k3/include/mach/k3-qos.h
-@@ -0,0 +1,22 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Quality of Service (QoS) Configuration Header File
-+ *
-+ * Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
-+ */
-+#ifndef _K3_QOS_H_
-+#define _K3_QOS_H_
-+
-+#include <linux/kernel.h>
-+
-+struct k3_qos_data {
-+	u32 reg;
-+	u32 val;
-+};
-+
-+#if (IS_ENABLED(CONFIG_K3_QOS))
-+extern struct k3_qos_data qos_data[];
-+extern u32 qos_count;
-+#endif
-+
-+#endif /* _K3_QOS_H_ */
-diff --git a/arch/arm/mach-k3/r5/am62ax/Makefile b/arch/arm/mach-k3/r5/am62ax/Makefile
-index 02a941805e9a..e4e55ce5c7dd 100644
---- a/arch/arm/mach-k3/r5/am62ax/Makefile
-+++ b/arch/arm/mach-k3/r5/am62ax/Makefile
-@@ -4,4 +4,4 @@
- 
- obj-y += clk-data.o
- obj-y += dev-data.o
--obj-y += am62a_qos_data.o
-+obj-y += am62a_qos_uboot.o
-diff --git a/arch/arm/mach-k3/include/mach/am62a_qos.h b/arch/arm/mach-k3/r5/am62ax/am62a_qos.h
-similarity index 100%
-rename from arch/arm/mach-k3/include/mach/am62a_qos.h
-rename to arch/arm/mach-k3/r5/am62ax/am62a_qos.h
-diff --git a/arch/arm/mach-k3/r5/am62ax/am62a_qos_data.c b/arch/arm/mach-k3/r5/am62ax/am62a_qos_uboot.c
-similarity index 85%
-rename from arch/arm/mach-k3/r5/am62ax/am62a_qos_data.c
-rename to arch/arm/mach-k3/r5/am62ax/am62a_qos_uboot.c
-index 38db4f2f5c8e..9a82944d5fe9 100644
---- a/arch/arm/mach-k3/r5/am62ax/am62a_qos_data.c
-+++ b/arch/arm/mach-k3/r5/am62ax/am62a_qos_uboot.c
-@@ -5,10 +5,11 @@
-  *
-  * Copyright (C) 2022 Texas Instruments Incorporated - https://www.ti.com/
-  */
--#include <asm/arch/hardware.h>
--#include "common.h"
- 
--struct k3_qos_data am62a_qos_data[] = {
-+#include <asm/arch/k3-qos.h>
-+#include "am62a_qos.h"
-+
-+struct k3_qos_data qos_data[] = {
- 	/* modules_qosConfig0 - 1 endpoints, 4 channels */
- 	{
- 		.reg = K3_DSS_UL_MAIN_0_VBUSM_DMA + 0x100 + 0x4 * 0,
-@@ -43,4 +44,4 @@ struct k3_qos_data am62a_qos_data[] = {
- 	},
- };
- 
--uint32_t am62a_qos_count = sizeof(am62a_qos_data) / sizeof(am62a_qos_data[0]);
-+u32 qos_count = ARRAY_SIZE(qos_data);
+Reviewed-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 
-base-commit: daa3100250839dd30626f7f4b7daf041f1114f1c
--- 
-2.34.1
-
+Thanks,
+Quentin
