@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C46C0C4829A
-	for <u-boot@archiver.kernel.org>; Tue,  6 Feb 2024 14:08:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BFC2C48297
+	for <u-boot@archiver.kernel.org>; Tue,  6 Feb 2024 14:44:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E467875A0;
-	Tue,  6 Feb 2024 15:08:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 50A628798B;
+	Tue,  6 Feb 2024 15:44:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HcBtld/2";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Sl/KW5PN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4001387BAE; Tue,  6 Feb 2024 15:08:47 +0100 (CET)
-Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
- [IPv6:2607:f8b0:4864:20::82e])
+ id 3E5CE87BB5; Tue,  6 Feb 2024 15:44:49 +0100 (CET)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DFDFC8753C
- for <u-boot@lists.denx.de>; Tue,  6 Feb 2024 15:08:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 56E6B87B6C
+ for <u-boot@lists.denx.de>; Tue,  6 Feb 2024 15:44:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82e.google.com with SMTP id
- d75a77b69052e-42bf29aff0dso38843031cf.3
- for <u-boot@lists.denx.de>; Tue, 06 Feb 2024 06:08:44 -0800 (PST)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-a30e445602cso143656766b.0
+ for <u-boot@lists.denx.de>; Tue, 06 Feb 2024 06:44:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1707228523; x=1707833323; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1707230685; x=1707835485; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=r41P3OCTlV61DbaYWF621UIcAjjaJXTjgs5PUAidSjI=;
- b=HcBtld/2Fec+i0hLzjTICnVcNO8clQhzqQOzSKYGKAvNCliv3Rev5TzKeh+tZBkH/h
- xC35GEFx4yYUok+zeD7w4Ht1LlBQwRxHPqPMBt6WrHAy/e6xbNUKuyM7zzDTmz57rj57
- cAs8BeTA/sC0PaDsyHQr5NED1HMTClzExmZv0=
+ bh=TV+puZlDVgVS0cqhUi5Kakymaj2W/LQM0xUU4Oa54ME=;
+ b=Sl/KW5PNmqGro6nlA/QZ/sFo/N1017EBnIZmRI+gkL/G7LR4GC8CW6B8xmTxX2P8b1
+ UUuZuL+nwcrvwEW7lDEc1IyPnDX4pm99onKW3S5DWVr4VP+dE8lvCiO5zpiTNR6Hw5so
+ QvWMCN8cevV69YgvPWMIkAHp0tvzOYfxEDxijBr9YrfOPKIdwldp1yJGIo71cmRD6HvZ
+ 4icV97dx0sOeREr2aCjavxQc09fhuOf+8prfOCBO6CRc7iOYonk0SmK2s+2AxxkjYiFD
+ 27zU29am2x0H6s+H4SuDsFhIkMYJcYC41CrRkBI8mJVomhONJsE0jV+hpsVrkOkCjzbL
+ WY5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707228523; x=1707833323;
+ d=1e100.net; s=20230601; t=1707230685; x=1707835485;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=r41P3OCTlV61DbaYWF621UIcAjjaJXTjgs5PUAidSjI=;
- b=ZP6EK6OPdYsuiATc83rr36OKszhjdb9jvai7ao8h9FjT3cUlCiAIToGfTqWYdye+1Y
- DlKUjI3SxjwP2ddG/i08p/tlQNIe779C8hp1fhBrEsa28k/xumJkW/Z89+SL9IIN22ey
- ulOnBGFGxQJemRLvPGVEMq/wzyWUyXMJuaIv8udW4mwhlJhynK+DnDMe+Lm34GcexuH4
- RbM/oy/coW+OQNhJOfse64Am79VIxD+dh9V299ybVSrHt/Ytxb2141jYLsoi+OozFeJJ
- iVPkUK810hAvp/uzRybRW052+3zYIlV266VkY6lAdvJr/AgSG72C1gH+3cPobNcQP31U
- Glnw==
-X-Gm-Message-State: AOJu0Yw5BtnJP4qQ0f4c4ldjruUeDW/heco8+soP3YUujLzkdgHtf0Dk
- p7XvXGHnZ9g7GQNb1mqzo5Ue58ytDTdEGAdlHPejJBLKEnCDWtPO9PKdUUUjkKXhGscuiGPBObR
- J
-X-Google-Smtp-Source: AGHT+IETMP+sk8RS3TfZVuq120hm6jhOOnkzLBzPbgekWk1sWYIWqk7IJX2KRSaIi4la+XdnF2p3aA==
-X-Received: by 2002:ac8:748b:0:b0:42b:e44e:7056 with SMTP id
- v11-20020ac8748b000000b0042be44e7056mr2891847qtq.36.1707228523506; 
- Tue, 06 Feb 2024 06:08:43 -0800 (PST)
+ bh=TV+puZlDVgVS0cqhUi5Kakymaj2W/LQM0xUU4Oa54ME=;
+ b=I4GoIZMB+luQKd3byeAtfAqzAKEFVQr211YP6SQXNyojDz9u7ANGFqfbLzyJzFPT77
+ 1l0p03jJ10XzC2tXgyLcOkMcK+uyOp7A3K8CopPV4inBloaMAaeDYFe+naWkKG8p9jY8
+ Ipmy7LUkQ8Sk4N1JQjZA7yLnYuRFduRBLXEAn4fWQo9fhSDWkrTwDRDd1oqCCLSXDFxO
+ 4r2EsJBV5UR4HFP+TLl2K570NsFgDkqgVuj0Es5tUtXJhSkkIer7iQfZDYpzyR/Q9xxb
+ PgoksmtVTuI7MHzizH+7NjJSgwklvwgHu7CHxC6qaVRR8FO8k479QxO2E9DfMZDSNprf
+ +lCw==
+X-Gm-Message-State: AOJu0YyNF6/PNNOvOxTbTB57JeYPVdUPwwAXmI7f1IhL2EAHAoElHAi/
+ HETuK9JZT82GOK5RCQZyMwp3ul4t5DvopRs/c7xDaCuB81BIJGOCzNoBG/RSP4kzlHTVSgS+rp8
+ R
+X-Google-Smtp-Source: AGHT+IH5R1AvuFpYcZD27FugLdZkb7wkPnA3qqOmdoPUIKPOKFXjA/dvAYoklsvlIYI7qkz3Sx5w1Q==
+X-Received: by 2002:a17:906:48d:b0:a38:4fb5:c440 with SMTP id
+ f13-20020a170906048d00b00a384fb5c440mr298680eja.37.1707230684664; 
+ Tue, 06 Feb 2024 06:44:44 -0800 (PST)
 X-Forwarded-Encrypted: i=0;
- AJvYcCUB7OANrXkVoWroVd5j/j+BhkrB8nTS+pDFu8757Z3cqiqrz41CzGGAVeAzsHDxU1nTNj8WWX7oSfw5cgVh9zN4lklFvw==
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
- [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- d16-20020a05622a05d000b004281ce041f6sm907588qtb.21.2024.02.06.06.08.42
+ AJvYcCUXVH6FboMPxOp7wVlHYCCkF6F0SdQfo3f2RTdhckB7OAnQOJ8BmzALv9ReQQnv//cbjNyTzTiEUKXvUgEk9UjaZlIYnJyJPC6jxplVXRkJDJygDCY=
+Received: from hera (ppp089210121239.access.hol.gr. [89.210.121.239])
+ by smtp.gmail.com with ESMTPSA id
+ rg14-20020a1709076b8e00b00a382ba97f95sm737160ejc.143.2024.02.06.06.44.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Feb 2024 06:08:43 -0800 (PST)
-Date: Tue, 6 Feb 2024 09:08:41 -0500
-From: Tom Rini <trini@konsulko.com>
-To: jihongbin <jhb_ee@163.com>
-Cc: Dan Carpenter <dan.carpenter@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH] xyzModem: Correct xmodem blk verification conditions
-Message-ID: <20240206140841.GR1152441@bill-the-cat>
-References: <20240205065850.7556-1-jhb_ee@163.com>
- <bd80e95c-b2bb-4ff2-8943-7a185a310546@moroto.mountain>
- <5cd09ba8-49a1-4ed7-8610-c62097caa45e@163.com>
+ Tue, 06 Feb 2024 06:44:44 -0800 (PST)
+Date: Tue, 6 Feb 2024 16:44:42 +0200
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH v2] arm: Add OVERLAY command to BSS section on ARM64
+Message-ID: <ZcJF2uGIMj-jxT3M@hera>
+References: <20231217003347.194657-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="x5LSorp3C4iIro3w"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <5cd09ba8-49a1-4ed7-8610-c62097caa45e@163.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+In-Reply-To: <20231217003347.194657-1-marek.vasut+renesas@mailbox.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,60 +94,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Marek,
 
---x5LSorp3C4iIro3w
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Sun, Dec 17, 2023 at 01:33:39AM +0100, Marek Vasut wrote:
+> Avoid allocating and loading the BSS section.
+>
 
-On Tue, Feb 06, 2024 at 09:05:33PM +0800, jihongbin wrote:
+Can we elaborate a bit more on why we need this? AFAICT there's no code
+loading those segments in memory and swapping them, so why do we need the
+OVERLAY? On top of that the ALLOC flag seems to be missing? The .bss
+section doesn't need to be loaded indeed, since we can memset it to 0, but
+it does need proper backing memory.
 
-> It may be that there are relatively few people using this function, or the
-> length of the transmitted data is less than 128byte * 255 byte, so the
-> triggering conditions for the above problems are not encountered;
->=20
-> I actually discovered this problem during testing. Continuous transmission
-> always fails at block 255.
->=20
-> The following is the protocol's definition of blk cblk, cblk =3D 255 - blk
-> The original content of the agreement
-> (https://www.menie.org/georges/embedded/xmodem_specification.html) is as
-> follows:
-> -------- 3. MESSAGE BLOCK LEVEL PROTOCOL
-> Each block of the transfer looks like:
-> <SOH><blk #><255-blk #><--128 data bytes--><cksum>
-> in which:
-> <SOH> =3D 01 hex
-> <blk #> =3D binary number, starts at 01 increments by 1, and
-> wraps 0FFH to 00H (not to 01)
-> <255-blk #> =3D blk # after going thru 8080 "CMA" instr, i.e.
-> each bit complemented in the 8-bit block number.
-> Formally, this is the "ones complement".
->=20
-> <cksum> =3D the sum of the data bytes only. Toss any carry.
+another thing I noticed is the bss_start and end are defined as sections of
+their own and a bit of git history led me to 3ebd1cbc49f00050. But the
+linker script will emit absolute addresses only if the symbol is defined
+outside a section. IOW applying this makes the value expressed as a fixed
+offset from the base of the section and the bss_start/end sections go away
 
-Please repost the patch with these kind of details in the commit
-message, thanks.
+--- a/arch/arm/cpu/armv8/u-boot.lds
++++ b/arch/arm/cpu/armv8/u-boot.lds
+@@ -151,17 +151,11 @@ SECTIONS
 
---=20
-Tom
+        . = ALIGN(8);
 
---x5LSorp3C4iIro3w
-Content-Type: application/pgp-signature; name="signature.asc"
+-       .bss_start : {
+-               KEEP(*(.__bss_start));
+-       }
+-
+        .bss : {
++               .bss_start = .;
+                *(.bss*)
+                 . = ALIGN(8);
+-       }
+-
+-       .bss_end : {
+-               KEEP(*(.__bss_end));
++               .bss_end = .;
+        }
 
------BEGIN PGP SIGNATURE-----
+        /DISCARD/ : { *(.dynsym) }
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXCPWIACgkQFHw5/5Y0
-tyy+8gv/Zc2ta2GdrhsD7Vb8sHIZLnTWp5DKKdepb5gBdBaW8zZYN39yZAOnrLXl
-oOQJPacYAvK7kiWWczvaNu277OT57IcAbuhkDiZgwW0+N3G7UpLo0EqAcS6B04x6
-JNNJRCtsKIdDkPSXw06HXLiLVCE3hNWZjwQkQizU2kWkCdqojbCOEfZ0vi9KPDXg
-p7MF1YByp2cHDOhGGgZU9Lt2eBb8O9Au5knuqRgcyNfFuHdCwTsgTKlgcr7hFmto
-5dTx3Edj70n1N0gt6GApJdxiXIrZIc684DKODZLQi+X1skDJzanjpzSzJX1np/+u
-mYp5QdjhjLgT55RiocMHaVWNZbQy3ROvEo7nRplWyFlo7Xi9rruRjBYJ+ltNVbK3
-5gygV03xa5bO/8agjZKmyv5jvNvMlO/Dclgyum7vWkDyqfJbW8moYgn5Zj7kRlfZ
-Q1bygPi/6qp+naVwp1ZABk5hj0UKo3fctLL4Amv9Fc9BrXKtKDVMcDUMOI97BbtF
-HEckpoBk
-=7SnF
------END PGP SIGNATURE-----
 
---x5LSorp3C4iIro3w--
+leads to this:
+
+ 11 .bss          000090b0  0000000000102b00  0000000000102b00  00112aa0  2**7
+                  ALLOC
+
+P.S: I am playing around with rewriting the linker script and mapping
+u-boot with proper permissions at least for armv8. If this patch is neeeded
+*now* can someone explain why? Otherwise I'll clean it up once I test my
+patches enough
+
+Thanks
+/Ilias
+
+> $ aarch64-linux-gnu-objdump -Sh u-boot
+>
+> Before:
+>   10 .bss_start    00000000  00000000000f21d8  00000000000f21d8  001021d8  2**0
+>                    CONTENTS, ALLOC, LOAD, DATA
+>   11 .bss          000068f8  00000000000f2200  00000000000f2200  001021d8  2**6
+>                    ALLOC
+>   12 .bss_end      00000000  00000000000f8af8  00000000000f8af8  00108af8  2**0
+>                    CONTENTS, ALLOC, LOAD, DATA
+>
+> After:
+>   10 .bss_start    00000000  00000000000bf990  00000000000bf990  001021e0  2**0
+>                    CONTENTS
+>   11 .bss          000068e8  00000000000bf990  00000000000bf990  001021e0  2**4
+>                    CONTENTS
+>   12 .bss_end      00000000  00000000000c6278  00000000000c6278  00108ac8  2**0
+>                    CONTENTS
+>
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> ---
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Tom Rini <trini@konsulko.com>
+> ---
+> V2: Replicate arch/arm/cpu/u-boot.lds BSS part verbatim
+> ---
+>  arch/arm/cpu/armv8/u-boot.lds | 8 +++++---
+>  1 file changed, 5 insertions(+), 3 deletions(-)
+>
+> diff --git a/arch/arm/cpu/armv8/u-boot.lds b/arch/arm/cpu/armv8/u-boot.lds
+> index fb6a30c922f..ebdc079552d 100644
+> --- a/arch/arm/cpu/armv8/u-boot.lds
+> +++ b/arch/arm/cpu/armv8/u-boot.lds
+> @@ -151,16 +151,18 @@ SECTIONS
+>
+>  	. = ALIGN(8);
+>
+> -	.bss_start : {
+> +	.bss_start __rel_dyn_start (OVERLAY) : {
+>  		KEEP(*(.__bss_start));
+> +		__bss_base = .;
+>  	}
+>
+> -	.bss : {
+> +	.bss __bss_base (OVERLAY) : {
+>  		*(.bss*)
+>  		 . = ALIGN(8);
+> +		 __bss_limit = .;
+>  	}
+>
+> -	.bss_end : {
+> +	.bss_end __bss_limit (OVERLAY) : {
+>  		KEEP(*(.__bss_end));
+>  	}
+>
+> --
+> 2.43.0
+>
