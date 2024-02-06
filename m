@@ -4,64 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39C13C48260
-	for <u-boot@archiver.kernel.org>; Tue,  6 Feb 2024 00:21:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88EE8C4828D
+	for <u-boot@archiver.kernel.org>; Tue,  6 Feb 2024 02:25:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43C5587732;
-	Tue,  6 Feb 2024 01:21:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 7E57A876FC;
+	Tue,  6 Feb 2024 03:25:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1707178903;
-	bh=Y6OQOwFa7AZjHIdrN6oTk5e77B6dWZQ1AMUDtDocvIw=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=o3xGm5t23jTaiLD1tsCkg8nnshofXcN3QZR6K+VBdr1M1YUeCLr5sUpP3dY0C+e1F
-	 IvsY7dHzi/uVrI5mTCB8XAJ9DacdHjJ2Refvs7IKQmv4UocHzF1Lez0604B86TeWEE
-	 B9+Rm0pT2azaiIMQwQCQmdH1UrTw6gmTMxmmfmNkVnC/07/LvTrESoFTwTzRSNOMFm
-	 Ren9PuyGTCAM9/x7HzFFLujzUHmVWTjojPEIcTWyiybEXwhOwFyh0kg2BJRvVeLkov
-	 zbqd4Wj/C79sCbJgpB0vCboKYspcCi9vghA9gK7BU5rxjQb/xLPFKIg/S5uMuDC7iO
-	 CfnQn0mV8hKYg==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Gz2KkMYU";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 02EF48786E; Tue,  6 Feb 2024 03:25:48 +0100 (CET)
+Received: from mail-m15588.qiye.163.com (mail-m15588.qiye.163.com
+ [101.71.155.88])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 9849D86F8E;
- Tue,  6 Feb 2024 01:21:40 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1707178902;
- bh=Y6OQOwFa7AZjHIdrN6oTk5e77B6dWZQ1AMUDtDocvIw=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=Rf2zFwYjuIPq9oLNVYBM89gnlbastzL723huKRh8BH9Kvlmb1/1NQHdz2xAN9Uor9
- 3Xyr58s6T8hSjQnp6jCjZOI22qzvrFIdqBr+fTfC93AkzjKOwKxRSgBLn1NmdziPtc
- eKpC1aRLZ42CyAoBKR+ldMlkkMoeSd8jWuqN+d/99aNGQgjVXpyZ6NOHympHogFwDV
- 5Z37zCOQg14hrRiA2srjn6MbmGyZxK8Iw7QIcYJLwuE5lmEDjBTKLTfhfozGK8nG/6
- pFKMT4IqWy4jyPuj4rb31tg28oHoqcoa6UAIl+isNxxKVhVwy0aEPMGFCdF7WsuwHH
- 3KbQd29JtvWCQ==
-Message-ID: <ae946009-64a6-44bd-9034-b035684341a6@denx.de>
-Date: Tue, 6 Feb 2024 01:21:40 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 9A0BD86D38
+ for <u-boot@lists.denx.de>; Tue,  6 Feb 2024 03:25:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=Gz2KkMYU3vsMHddYHbRsUR9GSqZFwzKX7VOmAo/UCTzWD+AvEk7cZwg8ubJ+CCuJNSzFbcPn4tBEuvi3L4gHrhs9DnIjTobwRycc6Brh6JNFywYn8pDpiAdHHwvQ99RM0Nu37G+Gz+FQpQncbW5/Kl+wjHIJv7vZSSRcFPz3MNY=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
+ bh=Rxa4ZUGiTW+9fY78tVhQsLzfeKhDK3M8/zYopKAdhzg=;
+ h=date:mime-version:subject:message-id:from;
+Received: from [172.16.12.93] (unknown [58.22.7.114])
+ by smtp.qiye.163.com (Hmail) with ESMTPA id C4975900133;
+ Tue,  6 Feb 2024 10:25:27 +0800 (CST)
+Message-ID: <1bed8e20-99d5-4ef6-a984-ed33ab435654@rock-chips.com>
+Date: Tue, 6 Feb 2024 10:25:27 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 06/11] dts: Add script to uprev dts/upstream subtree
-To: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de,
- u-boot-amlogic@groups.io, u-boot-custodians@lists.denx.de
-Cc: trini@konsulko.com, sjg@chromium.org, robh+dt@kernel.org,
- krzysztof.kozlowski+dt@linaro.org, conor@kernel.org,
- neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech,
- daniel.thompson@linaro.org, dgilmore@fedoraproject.org,
- pbrobinson@gmail.com, ilias.apalodimas@linaro.org, b.galvani@gmail.com,
- xypron.glpk@gmx.de, michal.simek@amd.com, seanga2@gmail.com,
- rasmus.villemoes@prevas.dk, peng.fan@nxp.com, jh80.chung@samsung.com,
- rfried.dev@gmail.com, mibodhi@gmail.com, bb@ti.com, festevam@gmail.com,
- nm@ti.com, andre.przywara@arm.com
-References: <20240202130534.1051438-1-sumit.garg@linaro.org>
- <20240202130534.1051438-7-sumit.garg@linaro.org>
+Subject: Re: [RFC] rockchip: Reset to bootrom download mode on hang
 Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240202130534.1051438-7-sumit.garg@linaro.org>
+To: Jonas Karlman <jonas@kwiboo.se>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>
+Cc: u-boot@lists.denx.de
+References: <20240202001221.531207-1-jonas@kwiboo.se>
+ <85ab4e51-2d93-4672-881c-8df353232d1f@theobroma-systems.com>
+ <5041c1cc-1183-4fc6-aab8-8a7e12b7daac@kwiboo.se>
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <5041c1cc-1183-4fc6-aab8-8a7e12b7daac@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGk1IHlZDHx1JGUNDQx5PQhlVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSU5IVUpLS1VKQk
+ tLWQY+
+X-HM-Tid: 0a8d7c3c128c03a9kunmc4975900133
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Nz46Ghw6MDMKKTNMCVYfSVE8
+ MjJPCk9VSlVKTEtMSkNNSElDTkJKVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFOSkNMNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,105 +77,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/2/24 14:05, Sumit Garg wrote:
-> dts/update-dts-subtree.sh is just a wrapper around git subtree commands.
-> Usage from the top level U-Boot source tree, run:
-> 
-> $ ./dts/update-dts-subtree.sh pull <release-tag>
-> $ ./dts/update-dts-subtree.sh pick <commit-id>
-> 
-> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+Hi Jonas,
 
-How are the fixes which land in linux-stable handled now ?
+On 2024/2/5 20:34, Jonas Karlman wrote:
+> Hi Quentin,
+>
+> On 2024-02-05 11:49, Quentin Schulz wrote:
+>> Hi Jonas,
+>>
+>> On 2/2/24 01:12, Jonas Karlman wrote:
+>>> Add support to reset to bootrom download mode on hang in U-Boot SPL and
+>>> proper. ROCKCHIP_HANG_TO_BROM can be used to enable this feature.
+>>>
+>>> Example when SPL cannot load FIT:
+>>>
+>>>     U-Boot SPL 2024.04-rc1 (Feb 01 2024 - 23:01:12 +0000)
+>>>     Trying to boot from MMC1
+>>>     mmc_load_image_raw_sector: mmc block read error
+>>>     Trying to boot from MMC2
+>>>     Card did not respond to voltage select! : -110
+>>>     spl: mmc init failed with error: -95
+>>>     Trying to boot from MMC1
+>>>     mmc_load_image_raw_sector: mmc block read error
+>>>     SPL: failed to boot from all boot devices
+>>>     ### ERROR ### Please RESET the board ###
+>>>     entering download mode ...
+>>>     resetting ...
+>>>
+>>> Procedure to start bootrom download mode:
+>>> - U-Boot SPL or proper write 0xEF08A53C to BOOT_MODE_REG and then reset
+>>> - Bootrom loads and run boot code (TPL) from e.g. SPI > eMMC > SD-card
+>>> - TPL check for 0xEF08A53C in BOOT_MODE_REG very early, i.e. Rockchip
+>>>     TPL blobs check for this value directly at start
+>>> - TPL return to bootrom with a return value != 0
+>>> - Bootrom enter download mode
+>>>
+>>> This also fixes an issue where the BOOT_MODE_REG is reset to 0 when
+>>> board is reset on RK35xx after TF-A has been loaded. To fix this the
+>>> SOC_CON1 reg value is reset prior to issuing a global reset.
+>>>
+>>> The RK356x TF-A blobs will clear SOC_CON1 as part of a PSCI reset,
+>>> however the RK3588 TF-A blobs does not seem to clear SOC_CON1.
+>>>
+>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>> I'm wondering if there isn't a simpler way to do this?
+>>
+>> board_boot_order() could parse u-boot,spl-boot-order for e.g. "bootrom",
+>> the same way it does for "same-as-spl" for example.
+>>
+>> If it is set, then add BOOT_DEVICE_BOOTROM to spl_boot_list.
+>>
+>> Then this would call spl_return_to_bootrom() from
+>> common/spl/spl_bootrom.c which in turns would call
+>> board_return_to_bootrom() and back_to_bootrom().
+>>
+>> What do you think?
+> Something like that is what I did in my initial implementation :-)
+>
+> I appended a BOOT_DEVICE_BOOTROM at the end of board_boot_order() and
+> implemented necessary parts in spl_return_to_bootrom(), and that worked
+> great for SPL.
+>
+> However, to catch a hang() in U-Boot proper, e.g. a failed initcall, the
+> only existing integration callback for hang() is to override
+> show_boot_progress().
+>
+> Because the use of show_boot_progress() worked for both SPL and U-Boot
+> proper (probably also TPL) it seemed better to only have one integration
+> part for all phases.
+>
+> I am still not sure exactly when we would want to fall back into bootrom
+> download mode. Always at a hang() or at controlled parts e.g. when no
+> FIT can be loaded.
+There are two case need to consider when hang() happen:
+- For release version: a reboot and get into reset into bootrom download 
+mode if boot fail more than 3 times;
+- For debug version: a dump stack with hang() will be better(which is 
+used in rockchip vendor u-boot);
+Reboot to bootrom download when hang() happen is handy for U-Boot error 
+happen, no need to press the reset
+and recovery/download key in this case.
+The final logic would be: fall back to usb boot(bootrom) whenever we 
+fail to boot in to next stage,
+so that we have chance to update an available firmware.
 
-Do I have to duplicate the work which is already being done by the 
-linux-stable maintainers ?
-
-> ---
-> 
-> Changes in v5:
-> - Added support to cherry-pick fixes in subtree update script. Also, used
->    https:// instead of git://.
-> 
-> Changes in v4:
-> - New patch to add script dts/update-dts-subtree.sh as per Rob's comments.
-> 
->   dts/update-dts-subtree.sh | 45 +++++++++++++++++++++++++++++++++++++++
->   1 file changed, 45 insertions(+)
->   create mode 100755 dts/update-dts-subtree.sh
-> 
-> diff --git a/dts/update-dts-subtree.sh b/dts/update-dts-subtree.sh
-> new file mode 100755
-> index 000000000000..b781bf710025
-> --- /dev/null
-> +++ b/dts/update-dts-subtree.sh
-> @@ -0,0 +1,45 @@
-> +#!/bin/sh
-> +# SPDX-License-Identifier: GPL-2.0+
-> +#
-> +# Copyright 2024 Linaro Ltd.
-> +#
-> +# Usage: from the top level U-Boot source tree, run:
-> +# $ ./dts/update-dts-subtree.sh pull <release-tag>
-> +# $ ./dts/update-dts-subtree.sh pick <commit-id>
-> +#
-> +# The script will pull changes from devicetree-rebasing repo into U-Boot
-> +# as a subtree located as <U-Boot>/dts/upstream sub-directory. It will
-> +# automatically create a squash/merge commit listing the commits imported.
-> +
-> +set -e
-> +
-> +merge_commit_msg=$(cat << EOF
-> +Subtree merge tag '$2' of devicetree-rebasing repo [1] into dts/upstream
-> +
-> +[1] https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git/
-> +EOF
-> +)
-> +
-> +remote_add() {
-> +    if ! git remote | grep -w devicetree-rebasing
-
-I think you are looking for git-remote get-url here.
-
-> +    then
-> +        git remote add devicetree-rebasing \
-> +            https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git
-
-Rather than reconfigure user git remotes like this without user 
-knowledge, either ask them, or print a warning and let the user 
-configure their git remotes knowingly as they need to. Include the 
-command in the warning to make it easier on the user.
-
-> +    fi
-> +    git fetch devicetree-rebasing master
-> +}
-> +
-> +if [ ! -z $1 ] && [ $1 = "pull" ]
-> +then
-> +    remote_add
-
-remote_add_and_fetch , since this does more then remote_add .
-
-> +    git subtree pull --prefix dts/upstream devicetree-rebasing \
-> +        $2 --squash -m "${merge_commit_msg}"
-> +elif [ ! -z $1 ] && [ $1 = "pick" ]
-
-The non-zero test is not useful, just add missing quotes around "$1" and 
-compare:
-
-elif [ "$1" = "pick" ]
-
-> +then
-> +    remote_add
-> +    git cherry-pick -x --strategy=subtree -Xsubtree=dts/upstream/ $2
-> +else
-> +    echo "usage: $0 param1 param2"
-
-The param names could really use improvement, instead of 'param1' that 
-could be some '<op>' and 'param2' could be some '<url>' or something.
-
-> +    echo "  param1    pull or pick"
-> +    echo "  param2    release tag [pull] or commit id [pick]"
-> +fi
-
-Please run shellcheck on this .
+Thanks,
+- Kever
+>
+> I am open for any suggestions.
+>
+> Regards,
+> Jonas
+>
+>> Cheers,
+>> Quentin
