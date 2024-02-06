@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F3AEC4828D
-	for <u-boot@archiver.kernel.org>; Tue,  6 Feb 2024 12:22:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E921CC48297
+	for <u-boot@archiver.kernel.org>; Tue,  6 Feb 2024 12:22:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E11AD87CF4;
-	Tue,  6 Feb 2024 13:21:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6CB0087CE8;
+	Tue,  6 Feb 2024 13:21:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="xWIcaSQO";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="WOLioIQe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1FF6F87CF2; Tue,  6 Feb 2024 13:21:38 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id 4055987CEC; Tue,  6 Feb 2024 13:21:41 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 002DB87CCB
- for <u-boot@lists.denx.de>; Tue,  6 Feb 2024 13:21:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 387F887C68
+ for <u-boot@lists.denx.de>; Tue,  6 Feb 2024 13:21:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=m-chawdhry@ti.com
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 416CLYpZ074444;
- Tue, 6 Feb 2024 06:21:34 -0600
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 416CLboY118834;
+ Tue, 6 Feb 2024 06:21:37 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1707222094;
- bh=Vk6/gXMeGrzx+2IG3n25TDBWYH1fGd9Wq4M0exya7t4=;
+ s=ti-com-17Q1; t=1707222097;
+ bh=dlUILaWQFBeuyDxfIYHFo4WiblUaXfabpOg3HKkgR2U=;
  h=From:Date:Subject:References:In-Reply-To:To:CC;
- b=xWIcaSQOgsOV+8FebHy6GmZgZMesmqzOzx/sG96KDh9md1GlIqmMtATgCsOt+jXYj
- CfxgAl94TSEJUKzkxrdjEWZQ7Uyvzk7t5CR2vlGw6MqrF4dChYJpxcASx3AS3IbKLG
- YDD95ubsQJ2lxiW17TvJG9X3JZw6ublRq/YwLNFw=
-Received: from DLEE106.ent.ti.com (dlee106.ent.ti.com [157.170.170.36])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 416CLYN8078801
+ b=WOLioIQeiNXAWZYpwXu33AUBRR6mPM0GjqbzQSEUSBb+7H0q5c/0mvhN693In3653
+ BzwJExtCX08hRr+QSDWPsee7Rbg8eX0D8BNV4tKJpjoqVzhFxQgvhqUxi/x8sIzKOh
+ 5VzitVvnk2HFAJ/ih+KNtRel9ArySN3WVu2AkLE0=
+Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 416CLbP2078831
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 6 Feb 2024 06:21:34 -0600
-Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 6 Feb 2024 06:21:37 -0600
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 6
- Feb 2024 06:21:33 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ Feb 2024 06:21:36 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 6 Feb 2024 06:21:33 -0600
+ Frontend Transport; Tue, 6 Feb 2024 06:21:36 -0600
 Received: from [127.0.1.1] (uda0497581.dhcp.ti.com [10.24.68.185])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 416CLAi5081923;
- Tue, 6 Feb 2024 06:21:30 -0600
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 416CLAi6081923;
+ Tue, 6 Feb 2024 06:21:34 -0600
 From: Manorit Chawdhry <m-chawdhry@ti.com>
-Date: Tue, 6 Feb 2024 17:51:13 +0530
-Subject: [PATCH 06/10] drivers: power: pmic: Fix compatible for J721S2
+Date: Tue, 6 Feb 2024 17:51:14 +0530
+Subject: [PATCH 07/10] arm: mach-k3: j721s2_init: Initialize AVS Class 0
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <20240206-b4-upstream-j721s2-avs-v1-6-b75043c59969@ti.com>
+Message-ID: <20240206-b4-upstream-j721s2-avs-v1-7-b75043c59969@ti.com>
 References: <20240206-b4-upstream-j721s2-avs-v1-0-b75043c59969@ti.com>
 In-Reply-To: <20240206-b4-upstream-j721s2-avs-v1-0-b75043c59969@ti.com>
 To: Jaehoon Chung <jh80.chung@samsung.com>
@@ -66,11 +66,11 @@ CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>, Keerthy J
  <vigneshr@ti.com>, Andrew Davis <afd@ti.com>,
  Nishanth Menon <nm@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>
 X-Mailer: b4 0.13-dev
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1707222070; l=921;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1707222070; l=763;
  i=m-chawdhry@ti.com; s=20231127; h=from:subject:message-id;
- bh=PrgpdE4fShb609w8NSkTzwHzfuB9zyXNipGXpE4MtTA=;
- b=SnKQl9pu55YcijAMscmWnKlapj2nWLClRFxSfz3xzQJXocctnsSeJ5wIIvldohT2tJO3mr5bD
- jpHdTXSSrhlDwoHltKY/NSraKCSQ9k9vRh4Z4wO/tCRqcv9veNrEW3p
+ bh=bC3GGqLjfCjbTypmndRIEBUeLpyVuz0CF5JrSPJfD14=;
+ b=tQ7Nygc2zDKAHyA7FigAAVcDlAo/7xyzVn/KT5oGMn26dS6HUdNN7GoAGNCzYzneSayHvhPaX
+ IXcw06FSHQ+ARqc5kXQsHJTsfT/7OrQcMtYgtU/2dQdCASdlAPRyQPh
 X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
  pk=fsr6Tm39TvsTgfyfFQLk+nnqIz2sBA1PthfqqfiiYSs=
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
@@ -90,29 +90,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The other compatible is not in use by any other DT node.
-
-Sync the compatible with the compatible present in Linux DT to help with
-DT Sync from Linux as well.
+Initialize AVS Class 0.
 
 Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
 ---
- drivers/power/pmic/tps65941.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/arm/mach-k3/j721s2_init.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/drivers/power/pmic/tps65941.c b/drivers/power/pmic/tps65941.c
-index 727b42747ab6..53db91fce69f 100644
---- a/drivers/power/pmic/tps65941.c
-+++ b/drivers/power/pmic/tps65941.c
-@@ -71,7 +71,7 @@ static struct dm_pmic_ops tps65941_ops = {
- };
+diff --git a/arch/arm/mach-k3/j721s2_init.c b/arch/arm/mach-k3/j721s2_init.c
+index fb0708bae162..7080c519cf4c 100644
+--- a/arch/arm/mach-k3/j721s2_init.c
++++ b/arch/arm/mach-k3/j721s2_init.c
+@@ -206,6 +206,14 @@ void k3_spl_init(void)
  
- static const struct udevice_id tps65941_ids[] = {
--	{ .compatible = "ti,tps659411", .data = TPS659411 },
-+	{ .compatible = "ti,tps6594-q1", .data = TPS659411 },
- 	{ .compatible = "ti,tps659412", .data = TPS659411 },
- 	{ .compatible = "ti,tps659413", .data = TPS659413 },
- 	{ .compatible = "ti,lp876441",  .data =  LP876441 },
+ 	/* Output System Firmware version info */
+ 	k3_sysfw_print_ver();
++
++	if (IS_ENABLED(CONFIG_CPU_V7R) && IS_ENABLED(CONFIG_K3_AVS0)) {
++		ret = uclass_get_device_by_driver(UCLASS_MISC, DM_DRIVER_GET(k3_avs),
++						  &dev);
++		if (ret)
++			printf("AVS init failed: %d\n", ret);
++	}
++
+ }
+ 
+ bool check_rom_loaded_sysfw(void)
 
 -- 
 2.43.0
