@@ -4,66 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82FDAC48260
-	for <u-boot@archiver.kernel.org>; Tue,  6 Feb 2024 03:00:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40C94C4828D
+	for <u-boot@archiver.kernel.org>; Tue,  6 Feb 2024 03:41:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD1A18751F;
-	Tue,  6 Feb 2024 04:00:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 57EF88786E;
+	Tue,  6 Feb 2024 04:41:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="dUo+kcXl";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="QD/QlOt9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C4B387732; Tue,  6 Feb 2024 03:59:59 +0100 (CET)
-Received: from mail-m1973194.qiye.163.com (mail-m1973194.qiye.163.com
- [220.197.31.94])
+ id EC10787613; Tue,  6 Feb 2024 04:41:18 +0100 (CET)
+Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 50B3186F8E
- for <u-boot@lists.denx.de>; Tue,  6 Feb 2024 03:59:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 63FBC86F8E
+ for <u-boot@lists.denx.de>; Tue,  6 Feb 2024 04:41:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=dUo+kcXluisz0gtUUPdTfIZCDblSpXTcpA+XigHpma2o5ypcOZBOIx9bxGczCcjypoVpgXao8xW7BI9a8abVQijzd/cyoGodP3758i3U/j14uDAUM5qli/J3YnX5z95h6vhrHucUFcZ+kBOegd2IDy+Y3JC1HqOJjoCwgKkr0fg=;
- c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=tarGGsft4AW1HRK0wkVL1lw6CNdDw1xLW5YPl8bNuD4=;
- h=date:mime-version:subject:message-id:from;
-Received: from [172.16.12.93] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 2D0D7900166;
- Tue,  6 Feb 2024 10:59:50 +0800 (CST)
-Message-ID: <fd15b6e4-5525-4ce5-a145-ceb47d44c40e@rock-chips.com>
-Date: Tue, 6 Feb 2024 10:59:49 +0800
+ spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH V4 3/7] rockchip: boot_mode: Allow
- rockchip_dnl_key_pressed() in SPL
-Content-Language: en-US
-To: Chris Morgan <macromorgan@hotmail.com>
-Cc: Chris Morgan <macroalpha82@gmail.com>, u-boot@lists.denx.de,
- andre.przywara@arm.com, philipp.tomsich@vrull.eu, sjg@chromium.org,
- jagan@edgeble.ai, jonas@kwiboo.se
-References: <20240102154654.191055-1-macroalpha82@gmail.com>
- <20240102154654.191055-4-macroalpha82@gmail.com>
- <9aae0791-84a5-42b4-b76d-2a89040b23d0@rock-chips.com>
- <65a93e77.9d0a0220.46f34.1553@mx.google.com>
- <706a4a06-51ad-421a-ac58-621ce85062f6@rock-chips.com>
- <20240125065543.BA9B5440469@smtp.qiye.163.com>
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240125065543.BA9B5440469@smtp.qiye.163.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQh1DHlZCGRkZHh1JGUhCQxpVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSUpJVUpLS1VKQl
- kG
-X-HM-Tid: 0a8d7c5b8ab803a9kunm2d0d7900166
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Ohw6NCo*PDMREzM3Dx4cPQE9
- LiIwCzhVSlVKTEtMSkNDSEJLQk5PVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFCSUtMNwY+
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
+ t=1707190875;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=/F0b19Lohmcu8oFFAOJ3fYn8Ut9DrZyEYsStwPSjse4=;
+ b=QD/QlOt9Ot+avaQuhFZP1ouYvqYrs7F2XIARTg+fpKGYQ1ASKHjNtvC8EXZ9RDtM2L2icS
+ eyvzbg7n00LysnqBsYIJ2xeVbwTDzisI3HdRh2Yn05XqDUVCh19v4AHUswnIA85LFqyjKC
+ YtCzybD1wDZwCTc3esYEdm69UJjGqcAgTF+oODhaDoh95YxhCiIK4wK4poow/pZMRmK0eK
+ kNy/X+MmSBxf3Zluyzke/e4Ao0uyomFQb6kHlrS+uec6M2BkQHaH33wd/DflSpDMZOskmi
+ gXC0oaNc1GgwMaDIo6C/RLsefXj04Y3Ha9UVPIN9FWNUupwfxGp7whi83o+J3Q==
+Date: Tue, 06 Feb 2024 04:41:14 +0100
+From: Dragan Simic <dsimic@manjaro.org>
+To: Kever Yang <kever.yang@rock-chips.com>
+Cc: Jonas Karlman <jonas@kwiboo.se>, Quentin Schulz
+ <quentin.schulz@theobroma-systems.com>, Tom Rini <trini@konsulko.com>, Simon
+ Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ u-boot@lists.denx.de
+Subject: Re: [RFC] rockchip: Reset to bootrom download mode on hang
+In-Reply-To: <1bed8e20-99d5-4ef6-a984-ed33ab435654@rock-chips.com>
+References: <20240202001221.531207-1-jonas@kwiboo.se>
+ <85ab4e51-2d93-4672-881c-8df353232d1f@theobroma-systems.com>
+ <5041c1cc-1183-4fc6-aab8-8a7e12b7daac@kwiboo.se>
+ <1bed8e20-99d5-4ef6-a984-ed33ab435654@rock-chips.com>
+Message-ID: <a2278450055a2d3568166dbde6fbde31@manjaro.org>
+X-Sender: dsimic@manjaro.org
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,196 +74,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 2024-02-06 03:25, Kever Yang wrote:
+> On 2024/2/5 20:34, Jonas Karlman wrote:
+>> On 2024-02-05 11:49, Quentin Schulz wrote:
+>>> On 2/2/24 01:12, Jonas Karlman wrote:
+>>>> Add support to reset to bootrom download mode on hang in U-Boot SPL 
+>>>> and
+>>>> proper. ROCKCHIP_HANG_TO_BROM can be used to enable this feature.
+>>>> 
+>>>> Example when SPL cannot load FIT:
+>>>> 
+>>>>     U-Boot SPL 2024.04-rc1 (Feb 01 2024 - 23:01:12 +0000)
+>>>>     Trying to boot from MMC1
+>>>>     mmc_load_image_raw_sector: mmc block read error
+>>>>     Trying to boot from MMC2
+>>>>     Card did not respond to voltage select! : -110
+>>>>     spl: mmc init failed with error: -95
+>>>>     Trying to boot from MMC1
+>>>>     mmc_load_image_raw_sector: mmc block read error
+>>>>     SPL: failed to boot from all boot devices
+>>>>     ### ERROR ### Please RESET the board ###
+>>>>     entering download mode ...
+>>>>     resetting ...
+>>>> 
+>>>> Procedure to start bootrom download mode:
+>>>> - U-Boot SPL or proper write 0xEF08A53C to BOOT_MODE_REG and then 
+>>>> reset
+>>>> - Bootrom loads and run boot code (TPL) from e.g. SPI > eMMC > 
+>>>> SD-card
+>>>> - TPL check for 0xEF08A53C in BOOT_MODE_REG very early, i.e. 
+>>>> Rockchip
+>>>>     TPL blobs check for this value directly at start
+>>>> - TPL return to bootrom with a return value != 0
+>>>> - Bootrom enter download mode
+>>>> 
+>>>> This also fixes an issue where the BOOT_MODE_REG is reset to 0 when
+>>>> board is reset on RK35xx after TF-A has been loaded. To fix this the
+>>>> SOC_CON1 reg value is reset prior to issuing a global reset.
+>>>> 
+>>>> The RK356x TF-A blobs will clear SOC_CON1 as part of a PSCI reset,
+>>>> however the RK3588 TF-A blobs does not seem to clear SOC_CON1.
+>>>> 
+>>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>>> I'm wondering if there isn't a simpler way to do this?
+>>> 
+>>> board_boot_order() could parse u-boot,spl-boot-order for e.g. 
+>>> "bootrom",
+>>> the same way it does for "same-as-spl" for example.
+>>> 
+>>> If it is set, then add BOOT_DEVICE_BOOTROM to spl_boot_list.
+>>> 
+>>> Then this would call spl_return_to_bootrom() from
+>>> common/spl/spl_bootrom.c which in turns would call
+>>> board_return_to_bootrom() and back_to_bootrom().
+>>> 
+>>> What do you think?
+>> Something like that is what I did in my initial implementation :-)
+>> 
+>> I appended a BOOT_DEVICE_BOOTROM at the end of board_boot_order() and
+>> implemented necessary parts in spl_return_to_bootrom(), and that 
+>> worked
+>> great for SPL.
+>> 
+>> However, to catch a hang() in U-Boot proper, e.g. a failed initcall, 
+>> the
+>> only existing integration callback for hang() is to override
+>> show_boot_progress().
+>> 
+>> Because the use of show_boot_progress() worked for both SPL and U-Boot
+>> proper (probably also TPL) it seemed better to only have one 
+>> integration
+>> part for all phases.
+>> 
+>> I am still not sure exactly when we would want to fall back into 
+>> bootrom
+>> download mode. Always at a hang() or at controlled parts e.g. when no
+>> FIT can be loaded.
+> There are two case need to consider when hang() happen:
+> - For release version: a reboot and get into reset into bootrom
+> download mode if boot fail more than 3 times;
+> - For debug version: a dump stack with hang() will be better(which is
+> used in rockchip vendor u-boot);
+> Reboot to bootrom download when hang() happen is handy for U-Boot
+> error happen, no need to press the reset
+> and recovery/download key in this case.
+> The final logic would be: fall back to usb boot(bootrom) whenever we
+> fail to boot in to next stage,
+> so that we have chance to update an available firmware.
 
-On 2024/1/25 06:55, Chris Morgan wrote:
-> On Fri, Jan 19, 2024 at 05:01:38PM +0800, Kever Yang wrote:
->> Hi Chris,
->>
->> On 2024/1/18 23:06, Chris Morgan wrote:
->>> On Thu, Jan 18, 2024 at 03:20:52PM +0800, Kever Yang wrote:
->>>> Hi Chris,
->>>>
->>>> On 2024/1/2 23:46, Chris Morgan wrote:
->>>>> From: Chris Morgan<macromorgan@hotmail.com>
->>>>>
->>>>> Update the rockchip_dnl_key_pressed() so that it can run in
->>>>> SPL. Also change the ADC channel to a define that can be
->>>>> overridden by a board specific option.
->>>> I should ask this earlier.
->>>>
->>>> Why you have to enable the download key in SPL?
->>>>
->>>> This works for a long time in U-Boot proper, both mainline and downstream
->>>> vendor U-Boot,
->>>>
->>>> no one is detect this download key in SPL.
->>>>
->>>> In theory the SPL can implement all the feature which is available in U-Boot
->>>> proper,
->>>>
->>>> but it would be better to make the SPL focus on the job it should be done
->>>> and keep as small as possible.
->>>>
->>> I wanted this code to run as soon as possible in the event of a bad
->>> write. I have some devices which lack a way to bypass the eMMC in the
->>> boot path; the fear is that if an SPL stage is written with a good
->>> header but a bad payload (or if the A-TF does something wrong) the
->>> device will become unbootable. If we can't do it this way for
->>> all Rockchip boards that's fine, but I REALLY want to at least do
->>> it this way for the Powkiddy X55 board and the Anbernic RGxx3 board.
->> That's why rockchip platform has two download mode, loader mode(in U-Boot)
->>
->> and maskRom mode, any error happen before U-Boot should get into maksRom
->> mode.
->>
->> Most of user/developer only use loader mode because the modules before
->> U-Boot should
->>
->> be more stable and have very little chance to update, for the module owners
->> before U-Boot,
->>
->> they are the users of maskRom mode.
->>
->> If you enable this feature in SPL, the error still have chance to happen
->> during dram init to SPL key detect.
->>
->> Does these two board has no way to get into eMMC event with hardware rework?
->> any hardware
->>
->> signal of eMMC CMD/CLK/DATA is OK.
-> A few do not. The error is less likely to occur between RAM init and
-> SPL key detect, but yes it's even possible at this stage.
->
-> >From my testing using the latest BL31 file from the
-> rockchip-linux/rkbin github repository I was unable to reboot into
-> maskrom mode after A-TF loaded, the device would just straight
-> reboot. Do you know if A-TF does something that makes reboot
-> into maskrom mode no longer work?
+Just as a note, falling back to BROM may actually introduce some
+security issues in some setups, by allowing rather low-level access
+to the system that may not be desired.
 
-This is no reasonable, it should be able to reboot to maskrom mode any 
-time we want, because
-
-the vendor kernel also do this and the function works.
-
->
->> And another way to bypass eMMC is to use SDcard which has higher priority
->> then eMMC in BootRom.
->>
-> I see in the TRM under section 1.2 that the eMMC is higher in the boot
-> path than SDMMC, and that matches my experience as well.
-Yes, you are right about this, and I think rockchip vendor code is using 
-SD card as  the first
-priority in the SPL instead of "same-as SPL", and make the SPL small and 
-simple enough
-to involve less bug, so that stable enough and no need to update.
-This patch is OK when the check for key press entry is in the board 
-level instead of platform common code.
-
-Thanks,
-- Kever
->   So this
-> wouldn't be a solution sadly.
->
->> For SPL itself debug, I would suggest to RESET into bootrom download mode if
->> any error happen
->>
->> and a reset will need.
->>
->> I pick up patches other than 2,3,4 in this patchset for now.
->>
->>> While I have you, I have a related question I hope you can help with.
->>> Is there any way to utilize the boot partitions of an eMMC device? I
->>> don't know if the BROM of an RK3568 or RK3588 is capable, but I'd love
->>> to have the SPL and U-Boot stages written to the eMMC boot partitions
->>> instead of the user partition if I can.
->> No, Rockchip SoCs does not use the boot partitions of eMMC, only use the
->> user data partition.
-> That's unfortunate, but I appreciate the feedback.
->
-> Thank you,
-> Chris
->
->>
->> Thanks,
->>
->> - Kever
->>
->>> Thank you.
->>>
->>>> Thanks,
->>>>
->>>> - Kever
->>>>
->>>>> Signed-off-by: Chris Morgan<macromorgan@hotmail.com>
->>>>> ---
->>>>>     arch/arm/mach-rockchip/Makefile    |  4 ++--
->>>>>     arch/arm/mach-rockchip/boot_mode.c | 11 ++++++++++-
->>>>>     2 files changed, 12 insertions(+), 3 deletions(-)
->>>>>
->>>>> diff --git a/arch/arm/mach-rockchip/Makefile b/arch/arm/mach-rockchip/Makefile
->>>>> index 1dc92066bb..ff089ae949 100644
->>>>> --- a/arch/arm/mach-rockchip/Makefile
->>>>> +++ b/arch/arm/mach-rockchip/Makefile
->>>>> @@ -15,13 +15,13 @@ obj-tpl-$(CONFIG_ROCKCHIP_PX30) += px30-board-tpl.o
->>>>>     obj-spl-$(CONFIG_ROCKCHIP_RK3036) += rk3036-board-spl.o
->>>>> -ifeq ($(CONFIG_SPL_BUILD)$(CONFIG_TPL_BUILD),)
->>>>> -
->>>>>     # Always include boot_mode.o, as we bypass it (i.e. turn it off)
->>>>>     # inside of boot_mode.c when CONFIG_ROCKCHIP_BOOT_MODE_REG is 0.  This way,
->>>>>     # we can have the preprocessor correctly recognise both 0x0 and 0
->>>>>     # meaning "turn it off".
->>>>>     obj-y += boot_mode.o
->>>>> +
->>>>> +ifeq ($(CONFIG_SPL_BUILD)$(CONFIG_TPL_BUILD),)
->>>>>     obj-$(CONFIG_ROCKCHIP_COMMON_BOARD) += board.o
->>>>>     obj-$(CONFIG_MISC_INIT_R) += misc.o
->>>>>     endif
->>>>> diff --git a/arch/arm/mach-rockchip/boot_mode.c b/arch/arm/mach-rockchip/boot_mode.c
->>>>> index eb8f65ae4e..d2308768be 100644
->>>>> --- a/arch/arm/mach-rockchip/boot_mode.c
->>>>> +++ b/arch/arm/mach-rockchip/boot_mode.c
->>>>> @@ -38,6 +38,10 @@ void set_back_to_bootrom_dnl_flag(void)
->>>>>     #define KEY_DOWN_MIN_VAL	0
->>>>>     #define KEY_DOWN_MAX_VAL	30
->>>>> +#ifndef RK_DNL_ADC_CHAN
->>>>> +#define RK_DNL_ADC_CHAN		1
->>>>> +#endif
->>>>> +
->>>>>     __weak int rockchip_dnl_key_pressed(void)
->>>>>     {
->>>>>     	unsigned int val;
->>>>> @@ -52,7 +56,8 @@ __weak int rockchip_dnl_key_pressed(void)
->>>>>     	ret = -ENODEV;
->>>>>     	uclass_foreach_dev(dev, uc) {
->>>>>     		if (!strncmp(dev->name, "saradc", 6)) {
->>>>> -			ret = adc_channel_single_shot(dev->name, 1, &val);
->>>>> +			ret = adc_channel_single_shot(dev->name,
->>>>> +						      RK_DNL_ADC_CHAN, &val);
->>>>>     			break;
->>>>>     		}
->>>>>     	}
->>>>> @@ -73,11 +78,13 @@ __weak int rockchip_dnl_key_pressed(void)
->>>>>     void rockchip_dnl_mode_check(void)
->>>>>     {
->>>>> +#if CONFIG_IS_ENABLED(ADC)
->>>>>     	if (rockchip_dnl_key_pressed()) {
->>>>>     		printf("download key pressed, entering download mode...");
->>>>>     		set_back_to_bootrom_dnl_flag();
->>>>>     		do_reset(NULL, 0, 0, NULL);
->>>>>     	}
->>>>> +#endif
->>>>>     }
->>>>>     int setup_boot_mode(void)
->>>>> @@ -90,6 +97,7 @@ int setup_boot_mode(void)
->>>>>     	boot_mode = readl(reg);
->>>>>     	debug("%s: boot mode 0x%08x\n", __func__, boot_mode);
->>>>> +#if !defined(CONFIG_SPL_BUILD) && !defined(CONFIG_TPL_BUILD)
->>>>>     	/* Clear boot mode */
->>>>>     	writel(BOOT_NORMAL, reg);
->>>>> @@ -103,6 +111,7 @@ int setup_boot_mode(void)
->>>>>     		env_set("preboot", "setenv preboot; ums mmc 0");
->>>>>     		break;
->>>>>     	}
->>>>> +#endif
->>>>>     	return 0;
->>>>>     }
+Perhaps not enabling the fallback to BROM by default and leaving it
+to the board configurations would be the desired way to move forward.
