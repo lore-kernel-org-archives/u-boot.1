@@ -4,172 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CFC1C4828D
-	for <u-boot@archiver.kernel.org>; Wed,  7 Feb 2024 11:30:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA2B9C4828D
+	for <u-boot@archiver.kernel.org>; Wed,  7 Feb 2024 12:21:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 613DB87C87;
-	Wed,  7 Feb 2024 12:30:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 9DC1087CDC;
+	Wed,  7 Feb 2024 13:21:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=csie.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="QvtJ34iT";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 240CE87C9A; Wed,  7 Feb 2024 12:30:43 +0100 (CET)
-Received: from NAM04-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam04on20601.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:240a::601])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 54A6B87CAA; Wed,  7 Feb 2024 06:52:28 +0100 (CET)
+Received: from mail-oi1-f176.google.com (mail-oi1-f176.google.com
+ [209.85.167.176])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC36D876AE
- for <u-boot@lists.denx.de>; Wed,  7 Feb 2024 12:30:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C08C080E9A
+ for <u-boot@lists.denx.de>; Wed,  7 Feb 2024 06:52:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=none (p=none dis=none) header.from=csie.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=jXVjgq3XfvxBt+Rc1P3/HJVXVw0CA2JQTBR74zcLe2k4+jsfDX2u1Bro0eZuN9yaHyzeI5mDbgfYuIdeeKahXIQpOeev1vEbZgbihev6+Yv5loj/VYxn5UM6dahkHF1ISWRw3HeM6BnRsl1n6VFQa2zplqOfQE8dzxVIyu/c7HKR6AufOMUtMGT4MmP/5Fy62aiwheGFSw0QZSeZ7nvlzyni7ehNG1ihrWQFBBnW5BN/NqSSseCr+ZxWrlqqerGFPMmpV0Kc9mCgdfUIqqTTR3WawJODHkbVIdHHGvWr8+sJ+8ei7x89+A4o664Y4LlIafrmYX3IJnyCDCUVBI01qA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=uQ5W+3Hw81R0do4lpUi3BBDjC8x6KB+RVlaQ82FfGD0=;
- b=ZyVhHST91EMltaHKp6thAUBgTiTQFFfb68cAmyNLpUqYPg/LlBsKkdA3EWspwykCTchhQmPEH3xhPBLG+ov2C25+XTylp4FHrKgyuTLbfDrEBdLAWC2yQkvvGbU8FMY5VT98QcuIxYn5JIRoFfLjKe9qBhzI8G2Dmy7UkGjpTc31bb9f0gcO7fxRUUqyBLoIbxpX+X83GpyU2z52PoSq8mmQF/BxM8RVQPNgtisfz9/mDQtLB/NUWbzzZ9hdhGn4YA9//6vTCJi16js7Rtav/GpwzOmO6TDd8B68DBoxXR8nQzw6FMBsIqPhl9Z7AstPEgiz8ITVafgC+xymeF/7lw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=uQ5W+3Hw81R0do4lpUi3BBDjC8x6KB+RVlaQ82FfGD0=;
- b=QvtJ34iT3nwzjTfBAyxh4/0PNg+CJopTkzp6LiX9O50Gvhpfv0vr76PSYABUUNsIBMpm1EAiYiU3+Prq4t/DnFT8FOQ6vfBG2Hz4yDyOhmqMFEYsGresxNrG2UoA6wrHTRiPjkxvroXWyEkjWwwmbslM5tpB4OGfa7uel2CqAl4=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from CYXPR12MB9337.namprd12.prod.outlook.com (2603:10b6:930:d8::20)
- by BL1PR12MB5995.namprd12.prod.outlook.com (2603:10b6:208:39b::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7270.17; Wed, 7 Feb
- 2024 11:30:36 +0000
-Received: from CYXPR12MB9337.namprd12.prod.outlook.com
- ([fe80::772d:da3d:154b:fa45]) by CYXPR12MB9337.namprd12.prod.outlook.com
- ([fe80::772d:da3d:154b:fa45%7]) with mapi id 15.20.7270.016; Wed, 7 Feb 2024
- 11:30:36 +0000
-Message-ID: <d899a443-4e51-490b-be18-7bd1b58efd0e@amd.com>
-Date: Wed, 7 Feb 2024 12:30:26 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xilinx: zynqmp: Add the missing function prototype
-Content-Language: en-US
-To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
-Cc: git@xilinx.com
-References: <20240207083328.1673752-1-venkatesh.abbarapu@amd.com>
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- 3i3l5DA=
-In-Reply-To: <20240207083328.1673752-1-venkatesh.abbarapu@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR0102CA0078.eurprd01.prod.exchangelabs.com
- (2603:10a6:803:15::19) To CYXPR12MB9337.namprd12.prod.outlook.com
- (2603:10b6:930:d8::20)
+ spf=pass smtp.mailfrom=wens213@gmail.com
+Received: by mail-oi1-f176.google.com with SMTP id
+ 5614622812f47-3bfd27f6dc0so182067b6e.1
+ for <u-boot@lists.denx.de>; Tue, 06 Feb 2024 21:52:24 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1707285143; x=1707889943;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :reply-to:in-reply-to:references:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=PxuOuEjPzICS5t/zae+etigf0RY81XZQe7Z0CzIpfyw=;
+ b=OyTkjbCoobhQL4J2Z2EUL6CElWLJJ4dFkRjF3s5LUmyC04rIGFvFMDBaOlicmwLPe4
+ ZGDizqRa3/tOpnK7qdLcXQB7c6xMHA3F03f4T1SApzUBpevGM5xlCksqRgbMrJnfdefN
+ OFOLYghRS/uxbnzggRXIJFLDGFhs+/mQYKfo0W1ryrq3zi46Z0QVTJsFjtATuLhXdT9o
+ TWHm6hR2Y33dT8ZfubkXMWIZQunf4uZ5SHpZVDEPO6hqChXJDd3X9bsvSQJgzihJeFgd
+ p31DjOXMF0Gavb6PaAtH2dwvU1Hux/ybCWY/3PS65Cp2vyFW0E8cTjDZC5ar55Rzgbgq
+ EO9Q==
+X-Gm-Message-State: AOJu0Yy1GeUD4JytB2ecemTlQi9yK/cKora3YEEb38LR7wd82hY5d4av
+ 6cjSr+TZ+lB7cg5he9O8TG15KKOg9fDaXZonHSAuyWWTATjnUPeEtUrIxzCp
+X-Google-Smtp-Source: AGHT+IEsUAsq/8r44bi1eRs0BG6nWaSVWGwRZxnwCbNPEqwS66XTj/NB+2gIRUSNLx8I6w4FuY4Vjw==
+X-Received: by 2002:a05:6808:398f:b0:3bf:d136:9d08 with SMTP id
+ gq15-20020a056808398f00b003bfd1369d08mr6687424oib.2.1707285142998; 
+ Tue, 06 Feb 2024 21:52:22 -0800 (PST)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUhMHgTtojOwpu7ryIMe64dbPhco8laE2RLljHRVHLWuxSZ/YIZcK9zE2Y/2ew7VlJkbN/cIQIfZjUn6CZnnSvRPhExPw==
+Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com.
+ [209.85.215.175]) by smtp.gmail.com with ESMTPSA id
+ h4-20020aa786c4000000b006e05cb7fd1fsm531578pfo.164.2024.02.06.21.52.22
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 06 Feb 2024 21:52:22 -0800 (PST)
+Received: by mail-pg1-f175.google.com with SMTP id
+ 41be03b00d2f7-5c229dabbb6so97897a12.0
+ for <u-boot@lists.denx.de>; Tue, 06 Feb 2024 21:52:22 -0800 (PST)
+X-Received: by 2002:a17:90a:8d15:b0:296:181a:e991 with SMTP id
+ c21-20020a17090a8d1500b00296181ae991mr1571627pjo.49.1707285142420; Tue, 06
+ Feb 2024 21:52:22 -0800 (PST)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CYXPR12MB9337:EE_|BL1PR12MB5995:EE_
-X-MS-Office365-Filtering-Correlation-Id: edc9ca77-879f-45c1-1a61-08dc27d033f5
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: GEZzr+Q4IHMLqn7FuIxgAJ6k5AKXqDBLdVbPEom9wnzBYnYBGsV8uhGqy4vGEwLsxxvtqbrU3/AOeO6ibGtMcrrxDsAMWujqsg+W/BsvQnZNSSksuJDfYLr/eurOygyOGttUh99J19WFvxbKpr0nXaNXmixyKrVUYnyV/feaZegRqKPFjGbSkWWcUn/NnE4SlwVPCSW9Q8fDiJ6isa3YISxjAjcFeCsJFPXYwAK3IlKU7J1bgUVed7LLYBtnW1Mb7Id3sP7zdJnOGTkj7LRYwIHk5leFPR117c6LkyUMAmSbRroQ+Gr3Y7/49QguxTbJ1KTIf3ycBQ+9/YC+qnerzrAuLh2Z73Hij7TIe2h3YTUdLoyytXMJT/fzuJ2e0bB1Vxm0JCYZuem3rdq3muMixlHOGgELVwy4gVtGR0IVzmun3cal2HEqYaEgRtx/sHMAml0YtaSvBPkcrwPwOntQzwTire+izuIwDO7/tWWyfz98C9BxMcz9AfwA+pNjiZRcT2eRuD7wYnMJmb0MLT2X3/9ITdZivLMBPZYS7njp+aNoI0IU9zrUl15d3XghqEL8PxIrAJV8V+sI65DObHrqhWwZ+dCK7NYlvYplvyB+skzcTdw/u/S8piwIm47qaSEfYmX89D2csEYV88jaqPfpTw==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CYXPR12MB9337.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(39860400002)(376002)(346002)(366004)(136003)(396003)(230922051799003)(230273577357003)(186009)(1800799012)(451199024)(64100799003)(4744005)(26005)(83380400001)(2616005)(41300700001)(6666004)(66476007)(2906002)(66946007)(8936002)(8676002)(44832011)(6506007)(31696002)(316002)(5660300002)(66556008)(38100700002)(4326008)(6512007)(478600001)(6486002)(53546011)(86362001)(31686004)(36756003)(45980500001)(43740500002);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bkR2WnZ3VzlBYWhFMWNoU2xDM2hDdnBnL3JWbkxoVUZscUk2bDhpWWh3ZlBh?=
- =?utf-8?B?NEtJaFNaMEdkT1JqUngzQmR0QmR4MW4yMnJsVVh1aCtRbzZTTGFlQ2tCRjhn?=
- =?utf-8?B?SnIvTWRHYkpiSVgzcndid21FVUlpYXZObHI3akgrK0NkczdSYVJBcWlNMUZj?=
- =?utf-8?B?anZ1eHpkSDl5bWUvUGYwWlZEcnlHZHhjNlJMcC9WTUZMVE5pZlpvV0xWbXAx?=
- =?utf-8?B?a0tYYUhqNW96RDBPaW9hWWczUm4zMmhnWWVrSlBkVG1UUnpwck5uQ0ZjQ1Q2?=
- =?utf-8?B?aVFrazFmTlpaMlhkUFBwMTZhUmRJekxQQ0ZmdDBNT1F1ajJMK2NheTQzemlZ?=
- =?utf-8?B?UmNtWmlqalJwZ1l5VEJ2TXJQOFF0bEpNb09KMGNJVHdtTDVvVUErQ3VJWklC?=
- =?utf-8?B?N1JKaGZIbmxGck5FN3liRFExZklZcUdMeTFoUXVxTEVhNnYyRzA3NGMwRzEy?=
- =?utf-8?B?ZVovR0NSTisyYUhraUFUak1hV29QNEdGYkovUndUK2RlZ2tRVGl1djlyczF2?=
- =?utf-8?B?U1VpLzlzckhENEJuT003K1N0RG1EOG02OEpnK2QrbExQN2pXSEJRVDhvK3Np?=
- =?utf-8?B?SFJ6SXdzU1dONXlHcjRiVmRDQXNOWmZOcEpJL01heGFodGYxYTdqUHE4OHlj?=
- =?utf-8?B?ejdCK3NlUWY0Y014Z1pqMUpQcVZrc1VpTW44WUlQKy9FanlNKzgrQ3VQVnJN?=
- =?utf-8?B?OFJON3MvNEpFc0FKMEtRRGRYTEVOVy84YW9SUGpBZDQ3S2I2L1BBd3BwTWV6?=
- =?utf-8?B?KzNnc3pWWHRpbmNEZzVBL2lCbCtSVTk3YWNEWlJTbnF4Wnd3SUwrdklMMEtL?=
- =?utf-8?B?VGFVTFZOUFd3MWowTWpiNlZST0p4QlluM1dkVXE2QURSTjdxdmdRZmdmZUpu?=
- =?utf-8?B?b2J5Q2lnY3pXTU9SQkdBWjlZSTV6dGk4bnI0WmV5amVMb3c0SDN1UHo5a1ZV?=
- =?utf-8?B?UzViYXJLamhZVUszZmNkT0liVmJ5YmZyTUdQMFdQV2VrdldCNm1panRjMS9G?=
- =?utf-8?B?Ny9GOHZrLy9aS1ZTaExoWnZlTjVkVVFOSHBkQ1RETkhZZkt5VDk4UEl4THBH?=
- =?utf-8?B?T21vcU0zQTVUaEttVWVSN0JOVHpYZGhXY2FTcVN3ZkZobmZyU2R1aThTTzl3?=
- =?utf-8?B?VElNVGNsdkt3dUJQbkovdUIvK1h2aEhsRjFuZ0pOZmNGaFF0N0szTVNsNjE0?=
- =?utf-8?B?Tk4vVisydkRCaHdXZWtWYXM0M1FjOHZ5Rm8xWEgzTUtxYXRYdzVnRmNoQytI?=
- =?utf-8?B?QjRWeVhaZEU5QW0zYzFnV3h6Y3VtdTgwSklaK2ZNWGppeldXK3hWTHFIMmVB?=
- =?utf-8?B?NzZQR2VxK0drR0M2RmFuZGFYY2V3YUZvUHJDVVFpWkFMMUxqeW4zU2d1ZjZQ?=
- =?utf-8?B?eUFCVUY4L0EyQU9ibUlBZ3RtVlFKeGlTZ0xSL0xJYmo5bWdsbGdGc0pJZzc0?=
- =?utf-8?B?Y2dGdE9UQVZ0K2grVjVtSUIwYkY4ZzVmSE51VGlOcFJET080L3phZjdKQVV0?=
- =?utf-8?B?VzB4TjJsSHZIb0JRTHFmSGFGRW5CRElEczFCOG0wRmdKeVAwOVZ5NHA5Nlc1?=
- =?utf-8?B?TVVOQ0NTajc2ZnhNc2dwWDMwM3ZHMW92cDhQUWFKNFU0OTZmUXpQTG4vR0J6?=
- =?utf-8?B?bEp3dlhRVWdRb0Nvb09qdlhzSE1EUXFpb3A1MVh4VTZRVFBUTUdkeVdzRmhn?=
- =?utf-8?B?UkYxTHY4Q2JGUitiU0xNaS82c1l5NlNZdjV1Q0Nrbkg0WFptdEpzZG1Pbmtr?=
- =?utf-8?B?azhyUzgyTWZ3cURhNnZZdU1oSmNnSFloYjJCVkZyWnhNS0hCWTF0RHdRWWJO?=
- =?utf-8?B?YmpSbmNicURKNW4vMWdKbGs1eHV3V2F6dHArNWtJWlI2ZXgrcXdJdjNoWUxm?=
- =?utf-8?B?S3d1TGNtckUrQ3FBQlF0dmVkWDdPMVRJMkxYNkRZanJhbjJDaW5YMHc3ZDBJ?=
- =?utf-8?B?eERqeU13WDU0ZDlNdGN0WFlhYzJtdFhzZ0pORVFBSWxyeENTY1lSRFNvdVg1?=
- =?utf-8?B?N2IwWUJQa0xMZTNoVW40YVA0L3ZONWEvc28vRUl3OWdvKzh3ZjZGVEIvMng1?=
- =?utf-8?B?Sjc1L202Wk5SRW9GT2I0SWRVR2NWbm1EOHE5MjBjbFkrV2NyQ2RKMmNPVUxE?=
- =?utf-8?Q?7fv1/NvkImQEg0He7eiuOZspH?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: edc9ca77-879f-45c1-1a61-08dc27d033f5
-X-MS-Exchange-CrossTenant-AuthSource: CYXPR12MB9337.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Feb 2024 11:30:36.0381 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: wDBMHFJWZM1YSdfhu9bIQmyOnEUggn5TW+dpgRDbU/x4KReXIQI/kHNa0UFtDcxX
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR12MB5995
+References: <20240207000301.3270722-1-jonas@kwiboo.se>
+ <20240207000301.3270722-5-jonas@kwiboo.se>
+In-Reply-To: <20240207000301.3270722-5-jonas@kwiboo.se>
+From: Chen-Yu Tsai <wens@csie.org>
+Date: Wed, 7 Feb 2024 13:52:11 +0800
+X-Gmail-Original-Message-ID: <CAGb2v64MC4MOgPUcJpoqP6VuMnRaVMKLkVBErVk=DU-y3nMTcw@mail.gmail.com>
+Message-ID: <CAGb2v64MC4MOgPUcJpoqP6VuMnRaVMKLkVBErVk=DU-y3nMTcw@mail.gmail.com>
+Subject: Re: [PATCH 04/15] rockchip: rk3328-roc-cc: Update defconfig
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>, 
+ Loic Devulder <ldevulder@suse.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Wed, 07 Feb 2024 13:21:04 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -181,36 +85,145 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: wens@csie.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Wed, Feb 7, 2024 at 8:04=E2=80=AFAM Jonas Karlman <jonas@kwiboo.se> wrot=
+e:
+>
+> Update defconfig for rk3328-roc-cc with new defaults.
+>
+> Remove the SPL_DRIVERS_MISC=3Dy option, no misc driver is used in SPL.
+>
+> Add CONFIG_SPL_FIT_SIGNATURE=3Dy to let SPL verify an auto generated hash
+> of FIT images. This help indicate if there is an issue loading any of
+> the images to DRAM or SRAM. Also add LEGACY_IMAGE_FORMAT=3Dy to keep
+> support for scripts.
+>
+> Add ROCKCHIP_EFUSE=3Dy and remove NET_RANDOM_ETHADDR=3Dy, ethaddr and
+> eth1addr is set based on cpuid read from eFUSE.
+
+I wonder if it would make sense to enable ROCKCHIP_EFUSE or ROCKCHIP_OTP
+for the respective SoCs by default, either with "imply" under the SoC
+Kconfig options, or "default if XXX" under the driver Kconfig options?
+Not sure which is preferred.
+
+Same goes for CONFIG_MISC_INIT_R for actually generating the serial number
+and MAC addresses from the efuse/OTP.
+
+At least for RK3566 and RK3588 we are implying these options.
 
 
-On 2/7/24 09:33, Venkatesh Yadav Abbarapu wrote:
-> Add missing prototype to fix the below sparse warning
-> warning: no previous prototype for 'spl_spi_get_uboot_offs'
-> 	 [-Wmissing-prototypes]
-> 
-> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+ChenYu
+
+> Add SPL_DM_SEQ_ALIAS=3Dy option to use alias sequence number in SPL.
+>
+> Add DM_ETH_PHY=3Dy, PHY_MOTORCOMM=3Dy and PHY_REALTEK=3Dy to support comm=
+on
+> ethernet PHYs.
+>
+> Add RNG_ROCKCHIP=3Dy and DM_RNG=3Dy options to support the onboard random
+> generator.
+>
+> Also add missing device tree file to MAINTAINERS and add myself as a
+> reviewer for this board.
+>
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 > ---
->   board/xilinx/zynqmp/zynqmp.c | 1 +
->   1 file changed, 1 insertion(+)
-> 
-> diff --git a/board/xilinx/zynqmp/zynqmp.c b/board/xilinx/zynqmp/zynqmp.c
-> index 9f50090720..ba49eb7be2 100644
-> --- a/board/xilinx/zynqmp/zynqmp.c
-> +++ b/board/xilinx/zynqmp/zynqmp.c
-> @@ -18,6 +18,7 @@
->   #include <ahci.h>
->   #include <scsi.h>
->   #include <soc.h>
-> +#include <spl.h>
->   #include <malloc.h>
->   #include <memalign.h>
->   #include <wdt.h>
-
-
-good. Please send it to upstream.
-M
+>  board/rockchip/evb_rk3328/MAINTAINERS | 2 ++
+>  configs/roc-cc-rk3328_defconfig       | 9 +++++++--
+>  doc/board/rockchip/rockchip.rst       | 2 +-
+>  3 files changed, 10 insertions(+), 3 deletions(-)
+>
+> diff --git a/board/rockchip/evb_rk3328/MAINTAINERS b/board/rockchip/evb_r=
+k3328/MAINTAINERS
+> index 419bc8ded375..09488eaf083f 100644
+> --- a/board/rockchip/evb_rk3328/MAINTAINERS
+> +++ b/board/rockchip/evb_rk3328/MAINTAINERS
+> @@ -41,8 +41,10 @@ F:      arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boo=
+t.dtsi
+>  ROC-RK3328-CC
+>  M:      Loic Devulder <ldevulder@suse.com>
+>  M:      Chen-Yu Tsai <wens@csie.org>
+> +R:      Jonas Karlman <jonas@kwiboo.se>
+>  S:      Maintained
+>  F:      configs/roc-cc-rk3328_defconfig
+> +F:      arch/arm/dts/rk3328-roc-cc.dts
+>  F:      arch/arm/dts/rk3328-roc-cc-u-boot.dtsi
+>
+>  ROCK64-RK3328
+> diff --git a/configs/roc-cc-rk3328_defconfig b/configs/roc-cc-rk3328_defc=
+onfig
+> index 4ac3c9403b02..7d81a715ef25 100644
+> --- a/configs/roc-cc-rk3328_defconfig
+> +++ b/configs/roc-cc-rk3328_defconfig
+> @@ -15,7 +15,6 @@ CONFIG_ROCKCHIP_RK3328=3Dy
+>  CONFIG_TPL_ROCKCHIP_COMMON_BOARD=3Dy
+>  CONFIG_TPL_LIBCOMMON_SUPPORT=3Dy
+>  CONFIG_TPL_LIBGENERIC_SUPPORT=3Dy
+> -CONFIG_SPL_DRIVERS_MISC=3Dy
+>  CONFIG_SPL_STACK_R_ADDR=3D0x600000
+>  CONFIG_SPL_STACK=3D0x400000
+>  CONFIG_TPL_SYS_MALLOC_F_LEN=3D0x800
+> @@ -26,7 +25,9 @@ CONFIG_DEBUG_UART=3Dy
+>  # CONFIG_ANDROID_BOOT_IMAGE is not set
+>  CONFIG_FIT=3Dy
+>  CONFIG_FIT_VERBOSE=3Dy
+> +CONFIG_SPL_FIT_SIGNATURE=3Dy
+>  CONFIG_SPL_LOAD_FIT=3Dy
+> +CONFIG_LEGACY_IMAGE_FORMAT=3Dy
+>  CONFIG_DEFAULT_FDT_FILE=3D"rockchip/rk3328-roc-cc.dtb"
+>  # CONFIG_DISPLAY_CPUINFO is not set
+>  CONFIG_DISPLAY_BOARDINFO_LATE=3Dy
+> @@ -58,8 +59,8 @@ CONFIG_TPL_OF_PLATDATA=3Dy
+>  CONFIG_ENV_IS_IN_MMC=3Dy
+>  CONFIG_SYS_RELOC_GD_ENV_ADDR=3Dy
+>  CONFIG_SYS_MMC_ENV_DEV=3D1
+> -CONFIG_NET_RANDOM_ETHADDR=3Dy
+>  CONFIG_TPL_DM=3Dy
+> +CONFIG_SPL_DM_SEQ_ALIAS=3Dy
+>  CONFIG_REGMAP=3Dy
+>  CONFIG_SPL_REGMAP=3Dy
+>  CONFIG_TPL_REGMAP=3Dy
+> @@ -73,9 +74,11 @@ CONFIG_FASTBOOT_CMD_OEM_FORMAT=3Dy
+>  CONFIG_ROCKCHIP_GPIO=3Dy
+>  CONFIG_SYS_I2C_ROCKCHIP=3Dy
+>  CONFIG_MISC=3Dy
+> +CONFIG_ROCKCHIP_EFUSE=3Dy
+>  CONFIG_MMC_DW=3Dy
+>  CONFIG_MMC_DW_ROCKCHIP=3Dy
+>  CONFIG_PHY_REALTEK=3Dy
+> +CONFIG_DM_ETH_PHY=3Dy
+>  CONFIG_PHY_GIGE=3Dy
+>  CONFIG_ETH_DESIGNWARE=3Dy
+>  CONFIG_GMAC_ROCKCHIP=3Dy
+> @@ -95,6 +98,8 @@ CONFIG_PWM_ROCKCHIP=3Dy
+>  CONFIG_RAM=3Dy
+>  CONFIG_SPL_RAM=3Dy
+>  CONFIG_TPL_RAM=3Dy
+> +CONFIG_DM_RNG=3Dy
+> +CONFIG_RNG_ROCKCHIP=3Dy
+>  CONFIG_BAUDRATE=3D1500000
+>  CONFIG_DEBUG_UART_SHIFT=3D2
+>  CONFIG_SYS_NS16550_MEM32=3Dy
+> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchi=
+p.rst
+> index de2195deadca..99f48b6d6fa5 100644
+> --- a/doc/board/rockchip/rockchip.rst
+> +++ b/doc/board/rockchip/rockchip.rst
+> @@ -60,8 +60,8 @@ List of mainline supported Rockchip boards:
+>       - ODROID-GO Advance (odroid-go2)
+>  * rk3328
+>       - Rockchip Evb-RK3328 (evb-rk3328)
+> +     - Firefly ROC-RK3328-CC (roc-cc-rk3328)
+>       - Pine64 Rock64 (rock64-rk3328)
+> -     - Firefly-RK3328 (roc-cc-rk3328)
+>       - Radxa Rockpi E (rock-pi-e-rk3328)
+>  * rk3368
+>       - GeekBox (geekbox)
+> --
+> 2.43.0
+>
