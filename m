@@ -4,80 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5B0AC4828F
-	for <u-boot@archiver.kernel.org>; Wed,  7 Feb 2024 15:45:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86449C4828D
+	for <u-boot@archiver.kernel.org>; Wed,  7 Feb 2024 15:46:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1420E87D2F;
-	Wed,  7 Feb 2024 16:45:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A3B8887D1D;
+	Wed,  7 Feb 2024 16:45:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JEIBcoml";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ukghdCjZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D788D87D1F; Wed,  7 Feb 2024 16:45:15 +0100 (CET)
-Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
- [IPv6:2607:f8b0:4864:20::734])
+ id E239A87D1E; Wed,  7 Feb 2024 16:45:19 +0100 (CET)
+Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
+ [IPv6:2607:f8b0:4864:20::f2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D495F87D1D
- for <u-boot@lists.denx.de>; Wed,  7 Feb 2024 16:45:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E229287D1D
+ for <u-boot@lists.denx.de>; Wed,  7 Feb 2024 16:45:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x734.google.com with SMTP id
- af79cd13be357-783f49812aeso27770985a.2
- for <u-boot@lists.denx.de>; Wed, 07 Feb 2024 07:45:13 -0800 (PST)
+Received: by mail-qv1-xf2b.google.com with SMTP id
+ 6a1803df08f44-6860ff3951aso3722436d6.1
+ for <u-boot@lists.denx.de>; Wed, 07 Feb 2024 07:45:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1707320712; x=1707925512; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1707320716; x=1707925516; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=49WOjELnfM0pg/QuPMhJso7sldaGAKsx7n1XMq0BpZk=;
- b=JEIBcomlkwnX0Q3QCvT0SZFkVuYSnm3AtJmTSI5b3gdNs+r5Mi1wxOKDoBSQ/0ckN3
- BNsaUmD8qwFevhfnFm+JzuNqJK8Meu1uz059IH31Jc0Y/xnXbtMlB97PiGjZe26Kemk8
- YOovZSnpKi3eFsnkb2WxYAlxk9adcO96xgIGs=
+ bh=jd5EouVR78FQ0LeT/kM0uBqvccsRjle5DpRtojOFR7I=;
+ b=ukghdCjZUx0jvu8Xf9BMOZAgbn2zoYT3UQ+i2B71+SwxYLdThuk05YOpkYHZDCnPQ5
+ XQJFOLkbkuG/jXbpvQXMTB2wAKYgWcR3A/3XANBYdctlHbHtpKai5x39qWuluLgD1qV1
+ ADrT8WnvqOitHnpSqCZISAyTOh2XFDwgD8TSo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707320712; x=1707925512;
+ d=1e100.net; s=20230601; t=1707320716; x=1707925516;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=49WOjELnfM0pg/QuPMhJso7sldaGAKsx7n1XMq0BpZk=;
- b=u+XQCKhx9QazEZDjImnyMvWsfHAffcNIYjpPHt7SsL3q85S1ApgzdU8uSjvo2Tt5Sg
- PFypQebCPrQl1n/XSF/BYqaFoqB81RbpWcdlOPyMzdaCRBuyOA8vmltnmo9eupewR9le
- kijl7i6j1LTonclNtYGpatuhj9Z6fBhSan6KMXGGvPxdpJXATFMVFRmIl4lL3cJHXKAe
- IheAZGNOV+zbY7SLV+9mBVfzFgWz4w30b3UyUbDu+lzUINw3IjFQDCEqU7CiAy9+TD6j
- WvXQQyZ9YnonqUyXIjANYNQYQVDROpkZodA1CQuE74bz/5OVdtVsm+U4ZeAQcb1mFjXL
- qG7Q==
-X-Gm-Message-State: AOJu0YwNkAT4RLaL5fo/D99EXOyKwIFNHGUWytwoWKe/CYNml7ABI2aO
- xYjtajLEC7kl7sGqXJG+8lJKZZras/BgHXVeownAmbKnWaxw16TYXNXtsumrPaw=
-X-Google-Smtp-Source: AGHT+IGl0cxWdQRLLMy1P+Ly2Fqjj/36k2XfFQeHNNpOpqtNGCGgsLmPqTmHgy+c/C5EQp14+m+pIA==
-X-Received: by 2002:a05:620a:4c3:b0:783:3a23:ea3f with SMTP id
- 3-20020a05620a04c300b007833a23ea3fmr6139618qks.77.1707320712708; 
- Wed, 07 Feb 2024 07:45:12 -0800 (PST)
+ bh=jd5EouVR78FQ0LeT/kM0uBqvccsRjle5DpRtojOFR7I=;
+ b=TmCaZxPy4Sk+jYrOu3rxc4WRrpvVVu713qwOd1IrHDwR0L7o6SfKRlz/hq3Qfq65c8
+ hpMKIFXuTkuT1tVk7q9U+AZMsdM+4mSLdxj3kcUNEHIL3khqUCM0O2x1iWThVL92Alup
+ uA7+NinRcmQb/P0BxlFaDtXdDbktBABFo9cwnP1Db1oFXG1TF+u2C93vv9NRsCicPTGk
+ zqY3DA3/3PcX67ElVj1dRVbz7q55m3XXwfz/c5O4G9HZ9QSCeD99EP+SlYytBBIu3po0
+ vDsLrXoi6HQnqH9FXw1aQ3f8MjVFaGr5Ua9GCK+uGDbrsR4mnCzjriFZWZTLZZEXL2dX
+ tGdA==
+X-Gm-Message-State: AOJu0Yz+YoCi2UNwvcQ14r/vFnNb3etQLQYfDHnhF4skobOS9vPUmwQ8
+ 6w5SHZxdGlZz0HqBQVKiCN9HpFibZgRbPRfXDt0kItPIoGy8Q1C4QSstnZGmwug=
+X-Google-Smtp-Source: AGHT+IGT9raWwhwxbBoZA04zxIP1EwLFnkudLhJhj6EKvczw9WCLPT4w7sZZxzx4M84ME7QA7uLlTQ==
+X-Received: by 2002:a05:6214:caa:b0:68c:aecf:a3da with SMTP id
+ s10-20020a0562140caa00b0068caecfa3damr7110686qvs.44.1707320716704; 
+ Wed, 07 Feb 2024 07:45:16 -0800 (PST)
 X-Forwarded-Encrypted: i=1;
- AJvYcCX8ZVOP5gXUHWDPsuYFZgR0Y0K1Hvs+nTnaxeSCdhsy7vsZkZbG3RNd5/5KDQqscGvQuYhYl+RhZfBsNEOokTfTG0sDOOU0JlIie7DvUxaon3T0rPEz2u4N5XmbPqtEmyxYRN5u/A5tGqrFooJCJUygr82IYkfDdMtwVH7HBAbZkShiGuYLYIZoyxcSaHbzU17riTOfpxA8HoR+gEAW0Rv8BNnV6og33NGv47Qp5xMAvxc3w/W5xoJgSXtQVD5Q8jDMvmccVYGsiI5AUyGj
+ AJvYcCV+mJV5+5k/gprd/RCA2QLMy+SqM7/dE/aarPDN3P4GU0pD23SM6sCWxFdX1nm9gVbJOvag/iMM2zw=
 Received: from bill-the-cat
  (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
  [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- bl10-20020a05620a1a8a00b007840721780bsm616662qkb.66.2024.02.07.07.45.11
+ es17-20020a056214193100b0068c7eb9c640sm677202qvb.137.2024.02.07.07.45.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Feb 2024 07:45:12 -0800 (PST)
-Date: Wed, 7 Feb 2024 10:45:10 -0500
+ Wed, 07 Feb 2024 07:45:16 -0800 (PST)
+Date: Wed, 7 Feb 2024 10:45:14 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Neha Malcom Francis <n-francis@ti.com>
-Cc: m-chawdhry@ti.com, u-kumar1@ti.com, afd@ti.com,
- christian.gmeiner@gmail.com, j-choudhary@ti.com, nm@ti.com,
- d.haller@phytec.de, joao.goncalves@toradex.com, u-boot@lists.denx.de
-Subject: Re: [RESEND PATCH v2] arm: mach-k3: j721s2_init: Support less than
- max DDR controllers
-Message-ID: <20240207154510.GE1152441@bill-the-cat>
-References: <20240130102356.2762733-1-n-francis@ti.com>
+To: Dhruva Gole <d-gole@ti.com>
+Cc: u-boot@lists.denx.de, Nishanth Menon <nm@ti.com>
+Subject: Re: [PATCH V5 1/2] firmware: ti_sci: fix the secure_hdr in do_xfer
+Message-ID: <20240207154514.GF1152441@bill-the-cat>
+References: <20240130145959.879882-1-d-gole@ti.com>
+ <20240130145959.879882-2-d-gole@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="myy0FEWbgWOvp3jR"
+ protocol="application/pgp-signature"; boundary="7zCqGoyXRlZuKxoF"
 Content-Disposition: inline
-In-Reply-To: <20240130102356.2762733-1-n-francis@ti.com>
+In-Reply-To: <20240130145959.879882-2-d-gole@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,43 +94,56 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---myy0FEWbgWOvp3jR
+--7zCqGoyXRlZuKxoF
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jan 30, 2024 at 03:53:56PM +0530, Neha Malcom Francis wrote:
+On Tue, Jan 30, 2024 at 08:29:59PM +0530, Dhruva Gole wrote:
 
-> The number of DDR controllers to be initialised and used should depend
-> on the device tree with the constraint of the maximum number of
-> controllers the device supports. Since J721S2 has multiple (2)
-> controllers, instead of hardcoding the number of probes, move to
-> depending on the device tree UCLASS_RAM nodes present.
+> The ti_sci driver in U-Boot has support for secure_msg as part of it's
+> do_xfer function. This let's U-boot send secure messages during boot up.
 >=20
-> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
-> Reviewed-by: Manorit Chawdhry <m-chawdhry@ti.com>
+> The protocol to send such secure messages is described as part of the
+> struct ti_sci_secure_msg_hdr. As part of this, there are 2 fields for
+> checksum and reserved that occupy the first 4 bytes of any secure
+> message. This is called as the secure_hdr.
+>=20
+> As of now, the secure_hdr needs to be 0 init-ed before sending secure
+> messages. However the existing code was never putting the zero-inited vars
+> into the secure_buf, leading to possibility of the first 4 bytes of
+> secure_buf being possibly garbage.
+>=20
+> Fix this by initialising the secure_hdr itself to the secure_buf
+> location, thus when we make secure_hdr members 0, it automatically ensures
+> the first 4 bytes of secure_buf are 0.
+>=20
+> Fixes: 32cd25128bd849 ("firmware: Add basic support for TI System Control=
+ Interface (TI SCI)")
+> Reviewed-by: Nishanth Menon <nm@ti.com>
+> Signed-off-by: Dhruva Gole <d-gole@ti.com>
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---myy0FEWbgWOvp3jR
+--7zCqGoyXRlZuKxoF
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXDpYYACgkQFHw5/5Y0
-tyyiMQwArt/lFH2riCdcVahSi9UJwPtWyUB/GXg+eioIAeMBIvuPSPDHjzZadgE4
-VOS1SxVfVHWbyiYxwD9JG5rDklact40bu8lzmoznSvXACpu2qu7Bz6z0+uJbklkI
-6j92JP6Hb7tDXpFT+upAhY6ZO/J+dKd+7kq7uNQqj3lFf/BZ8KXrNgybV2BPgu+G
-6NVea/me33Gz3TyaJlVJdyEo4kht9B0vWkmWJqkdZBg4QQ2aF5nHtZER5b5uEkrR
-LG7r1uHK8s7UxR6AeEKQ7rDRDWcAeBj2bfs9VF2JFH9s9ZcwXoRsh2WpKHVQjAoI
-5W3YWUStqewdVY981sKcAXDISre5GL7LFEh3S6ekqv3C6wUWD94MfquowsoovCvZ
-nOn6PlmJhN0x7hdbUrhe8N1Pn61Bmh1h4B7sbI1pF2y3jXrNjf4+q4mT72QT7w/c
-5jvVWwIlA9nCMJkltUMwC5Kc4agTqCNPuzU9qc5UpwJ5zxZBPWT0lewhrt8YEtKF
-NmzpwiKg
-=7j8G
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXDpYoACgkQFHw5/5Y0
+tyzFWwv/btnc+OU/70DKXyAfAG/h81haIFuyJFMyHTCusXK7oPr3SGE2tKaopRbx
+rDbnkOWmGAumR9DxkfC0BjddYd42KM9RxXHiuLbNZN08nD1pFYUTnzLC+O5moES+
+/knhlT6WaB+TblCkUDVyhmzDod6uA15QKqkOgpGHRAB9mHNevqczhDzK4kiW2DcL
+u7KZE8RYUr3ytXZ9UYxUK5UelUR/ulVSueiSXvo17qNWb5xNiXg/YWdUR19GysNW
+szRygV8rXlaZziznVYVy0LqXTHxM5PBgMLRiKp34wkAXMUtG+oZV71zZcYQSAojs
+ALmqrkHSSwmecrH2p/G+fB+gczCxzSci2EFSuG0MwK8c3qWOUL/UUgoh5rs53+kg
+zZWpGurXqCw9hzcOlUshve7cwBoRc9Zdo8IQ+x/CL0u9VKMRPmR7d8gvBWYQRI4F
+0HtVEhXJehGVuDOr4F3+uVJ70sTzGfyoem6lKwozqcQMcRG1Y9/bSEmlyOTdiuDs
+7vMTCmXa
+=S3ms
 -----END PGP SIGNATURE-----
 
---myy0FEWbgWOvp3jR--
+--7zCqGoyXRlZuKxoF--
