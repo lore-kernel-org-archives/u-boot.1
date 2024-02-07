@@ -4,65 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33530C4828F
-	for <u-boot@archiver.kernel.org>; Wed,  7 Feb 2024 17:19:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECCCBC4828D
+	for <u-boot@archiver.kernel.org>; Wed,  7 Feb 2024 17:19:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 864B387D0F;
-	Wed,  7 Feb 2024 18:19:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1DF5987CFA;
+	Wed,  7 Feb 2024 18:19:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="MVfWRHh4";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="i+qwQmZy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2108787CEC; Wed,  7 Feb 2024 18:19:28 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
+ id D8B388789B; Wed,  7 Feb 2024 18:19:29 +0100 (CET)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 144EE87C4C
+ by phobos.denx.de (Postfix) with ESMTPS id ACA3687CFC
  for <u-boot@lists.denx.de>; Wed,  7 Feb 2024 18:19:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+forbidden405.outlook.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 3BF046196F;
+ by sin.source.kernel.org (Postfix) with ESMTP id 9E697CE1AA4;
  Wed,  7 Feb 2024 17:19:24 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id D4DB1C433C7;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id DDB51C43394;
  Wed,  7 Feb 2024 17:19:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1707326363;
- bh=EFC5NEpDZAHcIYf3L9Z43xzh1RFCEAjPGR3I7vfSEl0=;
+ bh=mx3cfVJoxWot51jdf+PyK+pgSMZ6c3A85Q4+djVs3CA=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=MVfWRHh4xaI+zh1nnluf5CbQI736w6v39/HjEOL7KO20JHynCWpovG8ScrKF8bRM4
- gVsgSaKhSTnmL7/ER+EVQG7HNKE8ddpSME4lRJHKYdqTPrGme2Ktvb7q4h9lOW4cTl
- x8f3vMoesh+fs9KKlW3BP+5xKzicMuQJ4ukrDb5Mgll5B/lvibRHVb5NWugmqdWrEL
- 2PZJeMHozAUS2+qEyFLI1+SQcJj85tOG9FIK5bzOG3vJODEmtmdHLvFrf5pLT9fIBO
- eheZEPcX7J60yb+gTxp7BfOb/5wxedwDlwUan+G4YKPaOYn4gAqyw4x0tMc+5yjnE9
- P6UAopqCVLc2A==
+ b=i+qwQmZyyoaA8loMLMueuUimJM41zwkgr/8oujzg1ch9+D5cHGss1M4UKuWNuBqO6
+ /TY3y7Z7jXFCm53FSghZ1rxrxGvVQXAoCWqEug2xRww34Vsdtf4lI1nXgh4ndXFCPV
+ O503p+uYvae/YP2Fl5lnYhTX+9jqTTpIc2YFr+kmw83fn1OiGueii0s0jqNhJmc4iE
+ 1iXGpIqpUuA1SAeejpp9Ef4YucI4ht1u4zknWz7tqcKbg5zJgm5vEuIxCcue0yVvAR
+ HSw2thJpCBQwkgksmb2hxOvY/9J2TT5hT8+IQUFublLQl7eeHIIkTtxt4/88/05VKB
+ DT23OJMqYx5yg==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id B9AD1C4829C;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id C7EC2C4828D;
  Wed,  7 Feb 2024 17:19:23 +0000 (UTC)
 From: Yang Xiwen via B4 Relay <devnull+forbidden405.outlook.com@kernel.org>
-Date: Thu, 08 Feb 2024 01:19:20 +0800
-Subject: [PATCH v2 1/3] phy: add generic_setup(shutdown)_phy_bulk()
+Date: Thu, 08 Feb 2024 01:19:21 +0800
+Subject: [PATCH v2 2/3] test: phy: test generic_setup(shutdown)_phy_bulk()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240208-ehci-v2-1-6bf084b7ffac@outlook.com>
+Message-Id: <20240208-ehci-v2-2-6bf084b7ffac@outlook.com>
 References: <20240208-ehci-v2-0-6bf084b7ffac@outlook.com>
 In-Reply-To: <20240208-ehci-v2-0-6bf084b7ffac@outlook.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
  Marek Vasut <marex@denx.de>
 Cc: u-boot@lists.denx.de, Yang Xiwen <forbidden405@outlook.com>
 X-Mailer: b4 0.12.4
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1707326360; l=3234;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1707326360; l=1136;
  i=forbidden405@outlook.com; s=20230724; h=from:subject:message-id;
- bh=5iL/0ZVJfeWJrQ6l9WnnUXPrkwzmTPCFwptACgrMZzs=;
- b=g1XrfyDk9fPQBcHOnB9KGmRyZvibEh7rObvmChj+1MztgzHXLTwEJVwpfRXm6Shny5giKro4p
- ikqhKgaGyyQDQbt5svvNea0N+ToNv5uFFrlnX1psejODH+Wgah6xZCU
+ bh=OKbYdfeAfoB1ENsDPSA3px1Y5YCpK81TWIY83hgQ/SQ=;
+ b=jv8MRHQ/4vlPRVo9IVd0yFrkGFp4Jxl3ZCBl2yk+PUKMnnqTTNUL0myH3nzZZZTQC9aKcmei4
+ XhGvj32EbsNCjiKKANPev54CZgRwo/p/xmsXS7FJfiwsW+LtEdfkQh3
 X-Developer-Key: i=forbidden405@outlook.com; a=ed25519;
  pk=qOD5jhp891/Xzc+H/PZ8LWVSWE3O/XCQnAg+5vdU2IU=
 X-Endpoint-Received: by B4 Relay for forbidden405@outlook.com/20230724 with
@@ -87,132 +86,35 @@ X-Virus-Status: Clean
 
 From: Yang Xiwen <forbidden405@outlook.com>
 
-They are the bulk version of generic_setup(shutdown)_phy().
+add unittests for the newly introduced helper functions.
 
 Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
 ---
- drivers/phy/phy-uclass.c | 41 +++++++++++++++++++++++++++++++++++++++++
- include/generic-phy.h    | 29 +++++++++++++++++++++++++++++
- 2 files changed, 70 insertions(+)
+ test/dm/phy.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/drivers/phy/phy-uclass.c b/drivers/phy/phy-uclass.c
-index 0dcfe258bc..1a6bb54290 100644
---- a/drivers/phy/phy-uclass.c
-+++ b/drivers/phy/phy-uclass.c
-@@ -528,6 +528,36 @@ int generic_setup_phy(struct udevice *dev, struct phy *phy, int index)
- 	return ret;
- }
+diff --git a/test/dm/phy.c b/test/dm/phy.c
+index 0cf3689fde..cb16844a0a 100644
+--- a/test/dm/phy.c
++++ b/test/dm/phy.c
+@@ -159,6 +159,8 @@ static int dm_test_phy_bulk(struct unit_test_state *uts)
+ 	ut_asserteq(0, generic_phy_power_on_bulk(&phys));
+ 	ut_asserteq(0, generic_phy_power_off_bulk(&phys));
+ 	ut_asserteq(0, generic_phy_exit_bulk(&phys));
++	ut_asserteq(0, generic_setup_phy_bulk(parent, &phys));
++	ut_asserteq(0, generic_shutdown_phy_bulk(&phys));
  
-+int generic_setup_phy_bulk(struct udevice *dev, struct phy_bulk *bulk)
-+{
-+	int ret;
-+
-+	ret = generic_phy_get_bulk(dev, bulk);
-+	if (ret) {
-+		pr_err("Can't get PHY bulk: %d\n", ret);
-+		goto phys_get_err;
-+	}
-+
-+	ret = generic_phy_init_bulk(bulk);
-+	if (ret) {
-+		pr_err("Can't init PHY bulk: %d\n", ret);
-+		goto phys_get_err;
-+	}
-+
-+	ret = generic_phy_power_on_bulk(bulk);
-+	if (ret) {
-+		generic_phy_exit_bulk(bulk);
-+		goto phys_setup_err;
-+	}
-+
-+	return 0;
-+
-+phys_setup_err:
-+	generic_phy_exit_bulk(bulk);
-+phys_get_err:
-+	return ret;
-+}
-+
- int generic_shutdown_phy(struct phy *phy)
- {
- 	int ret;
-@@ -542,6 +572,17 @@ int generic_shutdown_phy(struct phy *phy)
- 	return generic_phy_exit(phy);
- }
+ 	/* has a known problem phy */
+ 	ut_assertok(uclass_get_device_by_name(UCLASS_SIMPLE_BUS,
+@@ -171,6 +173,8 @@ static int dm_test_phy_bulk(struct unit_test_state *uts)
+ 	ut_asserteq(-EIO, generic_phy_power_on_bulk(&phys));
+ 	ut_asserteq(-EIO, generic_phy_power_off_bulk(&phys));
+ 	ut_asserteq(0, generic_phy_exit_bulk(&phys));
++	ut_asserteq(-EIO, generic_setup_phy_bulk(parent, &phys));
++	ut_asserteq(-EIO, generic_shutdown_phy_bulk(&phys));
  
-+int generic_shutdown_phy_bulk(struct phy_bulk *bulk)
-+{
-+	struct phy *phys = bulk->phys;
-+	int i, ret = 0;
-+
-+	for (i = 0; i < bulk->count; i++)
-+		ret |= generic_shutdown_phy(&phys[i]);
-+
-+	return ret;
-+}
-+
- UCLASS_DRIVER(phy) = {
- 	.id		= UCLASS_PHY,
- 	.name		= "phy",
-diff --git a/include/generic-phy.h b/include/generic-phy.h
-index eaab749166..2d1bf7c1ea 100644
---- a/include/generic-phy.h
-+++ b/include/generic-phy.h
-@@ -420,6 +420,16 @@ int generic_phy_power_off_bulk(struct phy_bulk *bulk);
-  */
- int generic_setup_phy(struct udevice *dev, struct phy *phy, int index);
- 
-+/**
-+ * generic_setup_phy() - Get, initialize and power on all phys in a phy bulk.
-+ *
-+ * @dev:	The consumer device.
-+ * @bulk:	A pointer to the PHY bulk
-+ *
-+ * Return: 0 if OK, or negative error code.
-+ */
-+int generic_setup_phy_bulk(struct udevice *dev, struct phy_bulk *bulk);
-+
- /**
-  * generic_shutdown_phy() - Power off and de-initialize phy.
-  *
-@@ -429,6 +439,15 @@ int generic_setup_phy(struct udevice *dev, struct phy *phy, int index);
-  */
- int generic_shutdown_phy(struct phy *phy);
- 
-+/**
-+ * generic_shutdown_phy_bulk() - Power off and de-initialize all phys in a phy bulk.
-+ *
-+ * @bulk:	A pointer to the PHY bulk.
-+ *
-+ * Return: 0 if OK, or negative error code.
-+ */
-+int generic_shutdown_phy_bulk(struct phy_bulk *bulk);
-+
- #else /* CONFIG_PHY */
- 
- static inline int generic_phy_init(struct phy *phy)
-@@ -514,11 +533,21 @@ static inline int generic_setup_phy(struct udevice *dev, struct phy *phy, int in
  	return 0;
  }
- 
-+static inline int generic_setup_phy_bulk(struct udevice *dev, struct phy_bulk *bulk)
-+{
-+	return 0;
-+}
-+
- static inline int generic_shutdown_phy(struct phy *phy)
- {
- 	return 0;
- }
- 
-+static inline int generic_shutdown_phy_bulk(struct phy_bulk *bulk)
-+{
-+	return 0;
-+}
-+
- #endif /* CONFIG_PHY */
- 
- /**
 
 -- 
 2.43.0
