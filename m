@@ -4,108 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAE8CC4828D
-	for <u-boot@archiver.kernel.org>; Wed,  7 Feb 2024 08:33:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0A4DC4828F
+	for <u-boot@archiver.kernel.org>; Wed,  7 Feb 2024 08:34:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2479B87CEC;
-	Wed,  7 Feb 2024 09:33:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 5560687CCB;
+	Wed,  7 Feb 2024 09:34:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="HLi+tATz";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="l5LKRdty";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 179C587CF6; Wed,  7 Feb 2024 09:33:47 +0100 (CET)
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on20601.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:200a::601])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id CF4CD87CD2; Wed,  7 Feb 2024 09:34:30 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E5B2A87CE8
- for <u-boot@lists.denx.de>; Wed,  7 Feb 2024 09:33:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6787E87CB5
+ for <u-boot@lists.denx.de>; Wed,  7 Feb 2024 09:34:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=VuJECgWDYZybxcU4AOrZgnrmqr5pXY0e4D4R7ElfYLuIrIk3fPhodxLNsWzHwaKQrKmX6New0cBXl/Gs2PPYHJW9fxAzGWa6GaMoSoUDdVCEtOZX2PuU8exp65V0kDNKybDy8IzBFEWmu3qvvYXtq9RAkFxUMhPxvmNUlnn3AR4vTSvaFaDJycPZIzT2xd+N1mUf86xE3BLFrQ9cSi2GTr0xziOtY0hNHaMX6PVRIHjFV04eaCcsXKShQd2QUXWqMA5czYTrAiBvf4l1jpy/+cSaCVjkn3mKubsj5Iit9Gl/I2kVDKTE8+wwJ1KhQjlHlIAvVvs7/3QLzhhUpknXiw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Aepui/U5y8cI7eQ8dNYG+tbiK7sveUxmvzwC4iTm7j8=;
- b=RspbwqB3uPWkYqQbKQfnpX2lB66issv4cwUhzSRCOCcad2hhlBh61R7tuD8lPMB8eWqaEdWj/nSl/akLHcn1a/VaRuAu3wTAOyQUHnyu9/vl7+BIvcnvAz6WbsPu8/hFVzK6/SZEWS5AFNouBxAxTJr1JmNlHpDBgYGccJtWpVK1whLU4kSuGuw6s3cxqRJOWtK838fxeg7OyEpmtBRZQxkqRl0E97PixLb2sfeUgXc0Jpr+50kDPz8Va+m8bRbO3zND2rG0d0s6xE+Ti/FiFQqHvGyAPvo7v2AQBnL8/ogx0dvOXV6foJwd3QuP3qvDffP4FJnoQZ61HaIIUijsvQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Aepui/U5y8cI7eQ8dNYG+tbiK7sveUxmvzwC4iTm7j8=;
- b=HLi+tATzECt60LUht56EAYVLYA+MwOiFvZS54ofVheHxFBRJypD2pgZqp1eeV9oE6pxCFLvaXk/vFhfPsT8XAO4qFoJe1NCWy37yB6P6KObwWoKG1pYUt8wyfn2c8gXL+fgxRazp+5mD4WEbq5BBCeVT0dN+qMLBfj/EXW2S1QI=
-Received: from CYZPR19CA0020.namprd19.prod.outlook.com (2603:10b6:930:8e::12)
- by CY8PR12MB7585.namprd12.prod.outlook.com (2603:10b6:930:98::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7270.12; Wed, 7 Feb
- 2024 08:33:40 +0000
-Received: from CY4PEPF0000E9D4.namprd03.prod.outlook.com
- (2603:10b6:930:8e:cafe::ea) by CYZPR19CA0020.outlook.office365.com
- (2603:10b6:930:8e::12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7249.34 via Frontend
- Transport; Wed, 7 Feb 2024 08:33:40 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CY4PEPF0000E9D4.mail.protection.outlook.com (10.167.241.147) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7249.19 via Frontend Transport; Wed, 7 Feb 2024 08:33:40 +0000
-Received: from SATLEXMB08.amd.com (10.181.40.132) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Wed, 7 Feb
- 2024 02:33:36 -0600
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB08.amd.com
- (10.181.40.132) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.32; Wed, 7 Feb
- 2024 00:33:36 -0800
-Received: from xhdlovek40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34 via Frontend
- Transport; Wed, 7 Feb 2024 02:33:35 -0600
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <git@xilinx.com>
-Subject: [PATCH] xilinx: zynqmp: Add the missing function prototype
-Date: Wed, 7 Feb 2024 14:03:28 +0530
-Message-ID: <20240207083328.1673752-1-venkatesh.abbarapu@amd.com>
-X-Mailer: git-send-email 2.25.1
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=4f0f=JQ=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1707294861;
+ bh=tvintl29eaUMT7c3NWg+rkuBkzPYvGqoPXuBTG8ZqzY=;
+ b=l5LKRdtyY7AtJPJCue6OcO5vJeVtBXlgV3Nb7UbDu1oYWtEXC0dp/PWwT/Un7+sOeb7L9yVmD
+ giG9EabNZH12JQvSSAyZGWsEfAXs/N571D4dDiYLD349P4o/D/hUtOfPvIcWVPL29QYuUyOmY+K
+ w/dNNZh1LVwY0nL6Rp25F1CYyNa6H00imH6oZ1Wq+i+2wjez4TnHvQCtpemgagTIJBHnuVuTZlz
+ DrvlRPOE/+i0xY+INyeYSmcNdHLZ/E5b6OgQx0J/DJilFw+hr4bJ27n3hFVGHgufqbZr34RW4iO
+ snbaOySXVQG9MmmxUw5TJ4/pBSJ4SxeQJnfRKqoNGNiA==
+Message-ID: <efab8cb7-ea17-4ce6-988e-5e0231f11851@kwiboo.se>
+Date: Wed, 7 Feb 2024 09:34:17 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 03/15] rockchip: rk3328-rock64: Update defconfig
+Content-Language: en-US
+To: "Matwey V. Kornilov" <matwey.kornilov@gmail.com>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+References: <20240207000301.3270722-1-jonas@kwiboo.se>
+ <20240207000301.3270722-4-jonas@kwiboo.se>
+ <CAJs94Eat5OcLjTuyAMLkBRWJwBEQ0+vJnnqLT7+krGd1zPrV-A@mail.gmail.com>
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <CAJs94Eat5OcLjTuyAMLkBRWJwBEQ0+vJnnqLT7+krGd1zPrV-A@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9D4:EE_|CY8PR12MB7585:EE_
-X-MS-Office365-Filtering-Correlation-Id: f850c2d1-ecbc-4818-a07a-08dc27b77c86
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: HIhcQUgpi1qnjLXw9CVkEw44JfKPPBrdK9A1HjZDRDfluVCDuTLtljVaAf1AzkURA4JWPCRwzJ1E7lBQ2cnyFQctaqXNMCrbE7M0mqYViyD8Ccv/jsqc9JOHkgu87MsV4BLoq/oUtU/ISkxECDB1SSLCwnprk3j4PsWUA3ZzVmC5M2xWfkYFtub/0gQVDRujkG8z9u3764nbfC2BTZ0okbFYcQlaLn7pAxtElSrr4/36YCayLgENmCHaS3Es0pdpj6DfgD/uzHEsOZ5SIPee8OIx6m5yI58MmnVHEz2QtfGCGXXVH3K5t/HNML6MWy+2gyfcdVAnkk0jNZcKsm0WquA1slWpIWF0BSaA2LVUHNzeBQrcYH8cRHXrn7tqVbzKBEzD4H80RWjhNEUvjTcKXggIj/b+7RevQMRX/HekDqS5MAgUddktIy/h31qTVGsi6kvzkYksM5Rt9ef4zHjTU5vVCY9LnuOu8q0ws6pcUXGTXezb0t+4cZPuVuCpyjrJg7WSCwO3rmKCZDNe1wg5JJV7JUP08WoQ3fjrM6ryxak2j2DoBcBj7oj9QVUabHGO7/2+XfrO8J6hMgXwHwnMwbl1Fh3dQGd/FWSD+rz+X+Hn+QgJEMmifYPT/9EnJE2pOdd5Aymhpi+0IQhRPl/BrSOUiwlYG17sw6IQ0d4A0xo6Q2gyUTIZHF8goCncmUZDmZgb/PY2piUHtEgj22D0yCpqc34eEMOe9Y2sdTd4y0cKWYykZaspigd1dP2Ugp/eOwv9pSVTtZ2R8IAcs2ULsw==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(346002)(39860400002)(396003)(136003)(376002)(230273577357003)(230922051799003)(64100799003)(186009)(82310400011)(1800799012)(451199024)(40470700004)(46966006)(36840700001)(40480700001)(40460700003)(41300700001)(83380400001)(86362001)(36756003)(1076003)(356005)(2616005)(81166007)(70586007)(36860700001)(26005)(47076005)(2906002)(4326008)(107886003)(4744005)(6916009)(8936002)(426003)(336012)(478600001)(82740400003)(70206006)(6666004)(316002)(54906003)(5660300002)(8676002)(36900700001);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Feb 2024 08:33:40.0526 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f850c2d1-ecbc-4818-a07a-08dc27b77c86
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000E9D4.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB7585
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 65c3408d3d20fd1d3b220b9b
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,27 +75,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add missing prototype to fix the below sparse warning
-warning: no previous prototype for 'spl_spi_get_uboot_offs'
-	 [-Wmissing-prototypes]
+On 2024-02-07 08:53, Matwey V. Kornilov wrote:
+> ср, 7 февр. 2024 г. в 03:14, Jonas Karlman <jonas@kwiboo.se>:
+>>
+>> Update defconfig for rk3328-rock64 with new defaults.
+>>
+>> Remove the SPL_DRIVERS_MISC=y option, no misc driver is used in SPL.
+> 
+> What is abould rockchip-efuse?
 
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
----
- board/xilinx/zynqmp/zynqmp.c | 1 +
- 1 file changed, 1 insertion(+)
+The efuse driver is only used in U-Boot proper to read cpuid for serial#
+and ethaddr use, there is nothing trying to access efuse in TPL or SPL.
 
-diff --git a/board/xilinx/zynqmp/zynqmp.c b/board/xilinx/zynqmp/zynqmp.c
-index 9f50090720..ba49eb7be2 100644
---- a/board/xilinx/zynqmp/zynqmp.c
-+++ b/board/xilinx/zynqmp/zynqmp.c
-@@ -18,6 +18,7 @@
- #include <ahci.h>
- #include <scsi.h>
- #include <soc.h>
-+#include <spl.h>
- #include <malloc.h>
- #include <memalign.h>
- #include <wdt.h>
--- 
-2.25.1
+Beside the initialization of efuse block done after commit 5708e8eeae53
+("rockchip: rk3328: Set efuse auto mode and timing control"). But that
+happens outside the efuse driver, in arch_cpu_init() at SPL.
+
+So it is safe to skip DRIVERS_MISC for TPL/SPL and current intended use
+of efuse still continues to work.
+
+Regards,
+Jonas
+
+> 
+>>
+>> Add CONFIG_SPL_FIT_SIGNATURE=y to let SPL verify an auto generated hash
+>> of FIT images. This help indicate if there is an issue loading any of
+>> the images to DRAM or SRAM. Also add LEGACY_IMAGE_FORMAT=y to keep
+>> support for scripts.
+>>
+>> Remove the NET_RANDOM_ETHADDR=y option, ethaddr and eth1addr is set
+>> based on cpuid read from eFUSE.
+>>
+>> Add SPL_DM_SEQ_ALIAS=y option to use alias sequence number in SPL.
+>>
+>> Add DM_ETH_PHY=y and PHY_REALTEK=y to support onboard ethernet PHY.
+>>
+>> Also add missing device tree file to MAINTAINERS and add myself as a
+>> reviewer for this board.
+>>
+>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>> ---
+>>  board/rockchip/evb_rk3328/MAINTAINERS | 2 ++
+>>  configs/rock64-rk3328_defconfig       | 7 +++++--
+>>  2 files changed, 7 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/board/rockchip/evb_rk3328/MAINTAINERS b/board/rockchip/evb_rk3328/MAINTAINERS
+>> index dc750bd69426..419bc8ded375 100644
+>> --- a/board/rockchip/evb_rk3328/MAINTAINERS
+>> +++ b/board/rockchip/evb_rk3328/MAINTAINERS
+>> @@ -47,8 +47,10 @@ F:      arch/arm/dts/rk3328-roc-cc-u-boot.dtsi
+>>
+>>  ROCK64-RK3328
+>>  M:      Matwey V. Kornilov <matwey.kornilov@gmail.com>
+>> +R:      Jonas Karlman <jonas@kwiboo.se>
+>>  S:      Maintained
+>>  F:      configs/rock64-rk3328_defconfig
+>> +F:      arch/arm/dts/rk3328-rock64.dts
+>>  F:      arch/arm/dts/rk3328-rock64-u-boot.dtsi
+>>
+>>  ROCKPIE-RK3328
+>> diff --git a/configs/rock64-rk3328_defconfig b/configs/rock64-rk3328_defconfig
+>> index 0297d098761e..0157a1efe374 100644
+>> --- a/configs/rock64-rk3328_defconfig
+>> +++ b/configs/rock64-rk3328_defconfig
+>> @@ -15,7 +15,6 @@ CONFIG_ROCKCHIP_RK3328=y
+>>  CONFIG_TPL_ROCKCHIP_COMMON_BOARD=y
+>>  CONFIG_TPL_LIBCOMMON_SUPPORT=y
+>>  CONFIG_TPL_LIBGENERIC_SUPPORT=y
+>> -CONFIG_SPL_DRIVERS_MISC=y
+>>  CONFIG_SPL_STACK_R_ADDR=0x600000
+>>  CONFIG_SPL_STACK=0x400000
+>>  CONFIG_TPL_SYS_MALLOC_F_LEN=0x800
+>> @@ -26,7 +25,9 @@ CONFIG_DEBUG_UART=y
+>>  # CONFIG_ANDROID_BOOT_IMAGE is not set
+>>  CONFIG_FIT=y
+>>  CONFIG_FIT_VERBOSE=y
+>> +CONFIG_SPL_FIT_SIGNATURE=y
+>>  CONFIG_SPL_LOAD_FIT=y
+>> +CONFIG_LEGACY_IMAGE_FORMAT=y
+>>  CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-rock64.dtb"
+>>  # CONFIG_DISPLAY_CPUINFO is not set
+>>  CONFIG_DISPLAY_BOARDINFO_LATE=y
+>> @@ -57,8 +58,8 @@ CONFIG_TPL_OF_PLATDATA=y
+>>  CONFIG_ENV_IS_IN_MMC=y
+>>  CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+>>  CONFIG_SYS_MMC_ENV_DEV=1
+>> -CONFIG_NET_RANDOM_ETHADDR=y
+>>  CONFIG_TPL_DM=y
+>> +CONFIG_SPL_DM_SEQ_ALIAS=y
+>>  CONFIG_REGMAP=y
+>>  CONFIG_SPL_REGMAP=y
+>>  CONFIG_TPL_REGMAP=y
+>> @@ -76,6 +77,8 @@ CONFIG_ROCKCHIP_EFUSE=y
+>>  CONFIG_MMC_DW=y
+>>  CONFIG_MMC_DW_ROCKCHIP=y
+>>  CONFIG_SPI_FLASH_GIGADEVICE=y
+>> +CONFIG_PHY_REALTEK=y
+>> +CONFIG_DM_ETH_PHY=y
+>>  CONFIG_ETH_DESIGNWARE=y
+>>  CONFIG_GMAC_ROCKCHIP=y
+>>  CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+>> --
+>> 2.43.0
+>>
+> 
+> 
 
