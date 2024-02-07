@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BA78C48297
-	for <u-boot@archiver.kernel.org>; Wed,  7 Feb 2024 00:15:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE252C48297
+	for <u-boot@archiver.kernel.org>; Wed,  7 Feb 2024 00:15:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 463EB87C9A;
-	Wed,  7 Feb 2024 01:15:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9DFBF87CC2;
+	Wed,  7 Feb 2024 01:15:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="RZr5gyOc";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="jNEnEnK7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 42CBB87CB0; Wed,  7 Feb 2024 01:15:06 +0100 (CET)
+ id 279DA87CBF; Wed,  7 Feb 2024 01:15:08 +0100 (CET)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C755380245
+ by phobos.denx.de (Postfix) with ESMTPS id 14C0987C92
  for <u-boot@lists.denx.de>; Wed,  7 Feb 2024 01:15:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
@@ -28,20 +28,21 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1707264885; bh=xSWvrc1xD+t+uqUaAuJRlveS8AdyQURIPgL6ckyi06A=;
- b=RZr5gyOc8do5mVVTYXE4XKEkmqIAFDb4m+Xwxfm9jS1+9lHDJpxrqq3ILcUPjYV50cUGx3Wlu
- Y4Y4Y/W2fWYyQ9jzMt3cn0goYuONDnpTt61S4wbyGbB/gjfDlgEfXFYxAfda65SGgoYXam88mb7
- NlWshp2OJ/FUcGRGDpXs7De7NqR4ugCyDiN/kMwqwuqwqG76H1TVQXmwu7x4briHBGHxO2DtIei
- fpecckfXCDHjm/GMenyw4wLThEG0XayjOIGr2YknmeWThfk/miXyptJFJ7CwIIdxqFaLQbgB0zK
- JxRG/q2Sit9vixFuk8Bx1curzLgI9wpJ4CTdQppcZF4w==
+ t=1707264886; bh=yNUxW4W81Do99Sc2GZA/QF02HJ0yW2Faiw1oIu1G+pE=;
+ b=jNEnEnK7R4vI4wMq+vG7QGmTRNVOkpJ+5zEvg/ZK0d+v3sMFrOh6a+FWWXuR+Un0j1ZFbV5ow
+ 4E/u6GZs4jKsIiBqNAJ4EReBgzOKAH4Sltl+7S6LPkJlsFxwmRb3XAFvFqwLbu1A28pdUGJ/rj0
+ Q9wvA5r4bOk7G7jkPI6+m0RaknlPNFtKi57PlQNEIfMa4laz64+bsnzR1VshXEdSpOEkv2KNQiz
+ bMJ12tZX3YQyuzsVLU+iNcl01Nn9yIWcMGH3foPyCS7GW8tizrNlTNcAEehTAquaN4BqYvmD6iZ
+ 1kh7ICZhdTdVHfytajdDni1zMzlQleN94gkW8XNADPAg==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Tianling Shen <cnsztl@gmail.com>
 Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 13/15] rockchip: rk3328: Add support to build bootable SPI
- image
-Date: Wed,  7 Feb 2024 00:02:42 +0000
-Message-ID: <20240207000301.3270722-14-jonas@kwiboo.se>
+Subject: [PATCH 15/15] rockchip: rk3328-orangepi-r1-plus: Enable boot from SPI
+ NOR flash
+Date: Wed,  7 Feb 2024 00:02:44 +0000
+Message-ID: <20240207000301.3270722-16-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240207000301.3270722-1-jonas@kwiboo.se>
 References: <20240207000301.3270722-1-jonas@kwiboo.se>
@@ -53,7 +54,7 @@ X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
-X-ForwardEmail-ID: 65c2c8e8d5b31093c56fbff5
+X-ForwardEmail-ID: 65c2c8efd5b31093c56fc017
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,49 +71,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Similar to RK35xx the BootRom in RK3328 can read all data and look for
-idbloader at 0x8000, same as on SD and eMMC.
+Add Kconfig options to enable support for booting from SPI NOR flash on
+Orange Pi R1 Plus boards.
 
-Use the rksd format and modify the mkimage offset to generate a bootable
-u-boot-rockchip-spi.bin that can be written to 0x0 of SPI NOR flash.
+The generated bootable u-boot-rockchip-spi.bin that can be written to
+0x0 of SPI NOR flash. The FIT image is loaded from 0x60000, same as on
+RK35xx boards.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- arch/arm/dts/rk3328-u-boot.dtsi        | 11 +++++++++++
- arch/arm/mach-rockchip/rk3328/rk3328.c |  1 +
- 2 files changed, 12 insertions(+)
+ configs/orangepi-r1-plus-lts-rk3328_defconfig | 8 ++++++++
+ configs/orangepi-r1-plus-rk3328_defconfig     | 8 ++++++++
+ 2 files changed, 16 insertions(+)
 
-diff --git a/arch/arm/dts/rk3328-u-boot.dtsi b/arch/arm/dts/rk3328-u-boot.dtsi
-index b90d78878d77..2a5dca97dd4b 100644
---- a/arch/arm/dts/rk3328-u-boot.dtsi
-+++ b/arch/arm/dts/rk3328-u-boot.dtsi
-@@ -120,3 +120,14 @@
- &usb20_otg {
- 	hnp-srp-disable;
- };
-+
-+#ifdef CONFIG_ROCKCHIP_SPI_IMAGE
-+&binman {
-+	simple-bin-spi {
-+		mkimage {
-+			args = "-n", CONFIG_SYS_SOC, "-T", "rksd";
-+			offset = <0x8000>;
-+		};
-+	};
-+};
-+#endif
-diff --git a/arch/arm/mach-rockchip/rk3328/rk3328.c b/arch/arm/mach-rockchip/rk3328/rk3328.c
-index b591d38fe412..b82b209de9e2 100644
---- a/arch/arm/mach-rockchip/rk3328/rk3328.c
-+++ b/arch/arm/mach-rockchip/rk3328/rk3328.c
-@@ -36,6 +36,7 @@
- 
- const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
- 	[BROM_BOOTSOURCE_EMMC] = "/mmc@ff520000",
-+	[BROM_BOOTSOURCE_SPINOR] = "/spi@ff190000/flash@0",
- 	[BROM_BOOTSOURCE_SD] = "/mmc@ff500000",
- };
- 
+diff --git a/configs/orangepi-r1-plus-lts-rk3328_defconfig b/configs/orangepi-r1-plus-lts-rk3328_defconfig
+index 937ef003d85b..968110c8cd6f 100644
+--- a/configs/orangepi-r1-plus-lts-rk3328_defconfig
++++ b/configs/orangepi-r1-plus-lts-rk3328_defconfig
+@@ -13,6 +13,7 @@ CONFIG_DEFAULT_DEVICE_TREE="rk3328-orangepi-r1-plus-lts"
+ CONFIG_DM_RESET=y
+ CONFIG_ROCKCHIP_RK3328=y
+ CONFIG_TPL_ROCKCHIP_COMMON_BOARD=y
++CONFIG_ROCKCHIP_SPI_IMAGE=y
+ CONFIG_TPL_LIBCOMMON_SUPPORT=y
+ CONFIG_TPL_LIBGENERIC_SUPPORT=y
+ CONFIG_SPL_STACK_R_ADDR=0x600000
+@@ -20,6 +21,8 @@ CONFIG_SPL_STACK=0x400000
+ CONFIG_TPL_SYS_MALLOC_F_LEN=0x800
+ CONFIG_DEBUG_UART_BASE=0xFF130000
+ CONFIG_DEBUG_UART_CLOCK=24000000
++CONFIG_SPL_SPI_FLASH_SUPPORT=y
++CONFIG_SPL_SPI=y
+ CONFIG_SYS_LOAD_ADDR=0x800800
+ CONFIG_DEBUG_UART=y
+ # CONFIG_ANDROID_BOOT_IMAGE is not set
+@@ -42,6 +45,8 @@ CONFIG_SPL_BSS_MAX_SIZE=0x2000
+ CONFIG_SPL_STACK_R=y
+ CONFIG_SPL_I2C=y
+ CONFIG_SPL_POWER=y
++CONFIG_SPL_SPI_LOAD=y
++CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
+ CONFIG_SPL_ATF=y
+ CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+ CONFIG_TPL_SYS_MALLOC_SIMPLE=y
+@@ -76,7 +81,10 @@ CONFIG_MISC=y
+ CONFIG_ROCKCHIP_EFUSE=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
++CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+ CONFIG_SPI_FLASH_GIGADEVICE=y
++CONFIG_SPI_FLASH_MACRONIX=y
++CONFIG_SPI_FLASH_WINBOND=y
+ CONFIG_PHY_MOTORCOMM=y
+ CONFIG_PHY_REALTEK=y
+ CONFIG_DM_ETH_PHY=y
+diff --git a/configs/orangepi-r1-plus-rk3328_defconfig b/configs/orangepi-r1-plus-rk3328_defconfig
+index 563a1ac6ecd4..7038f09f202c 100644
+--- a/configs/orangepi-r1-plus-rk3328_defconfig
++++ b/configs/orangepi-r1-plus-rk3328_defconfig
+@@ -13,6 +13,7 @@ CONFIG_DEFAULT_DEVICE_TREE="rk3328-orangepi-r1-plus"
+ CONFIG_DM_RESET=y
+ CONFIG_ROCKCHIP_RK3328=y
+ CONFIG_TPL_ROCKCHIP_COMMON_BOARD=y
++CONFIG_ROCKCHIP_SPI_IMAGE=y
+ CONFIG_TPL_LIBCOMMON_SUPPORT=y
+ CONFIG_TPL_LIBGENERIC_SUPPORT=y
+ CONFIG_SPL_STACK_R_ADDR=0x600000
+@@ -20,6 +21,8 @@ CONFIG_SPL_STACK=0x400000
+ CONFIG_TPL_SYS_MALLOC_F_LEN=0x800
+ CONFIG_DEBUG_UART_BASE=0xFF130000
+ CONFIG_DEBUG_UART_CLOCK=24000000
++CONFIG_SPL_SPI_FLASH_SUPPORT=y
++CONFIG_SPL_SPI=y
+ CONFIG_SYS_LOAD_ADDR=0x800800
+ CONFIG_DEBUG_UART=y
+ # CONFIG_ANDROID_BOOT_IMAGE is not set
+@@ -42,6 +45,8 @@ CONFIG_SPL_BSS_MAX_SIZE=0x2000
+ CONFIG_SPL_STACK_R=y
+ CONFIG_SPL_I2C=y
+ CONFIG_SPL_POWER=y
++CONFIG_SPL_SPI_LOAD=y
++CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
+ CONFIG_SPL_ATF=y
+ CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+ CONFIG_TPL_SYS_MALLOC_SIMPLE=y
+@@ -76,7 +81,10 @@ CONFIG_MISC=y
+ CONFIG_ROCKCHIP_EFUSE=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
++CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+ CONFIG_SPI_FLASH_GIGADEVICE=y
++CONFIG_SPI_FLASH_MACRONIX=y
++CONFIG_SPI_FLASH_WINBOND=y
+ CONFIG_PHY_MOTORCOMM=y
+ CONFIG_PHY_REALTEK=y
+ CONFIG_DM_ETH_PHY=y
 -- 
 2.43.0
 
