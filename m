@@ -4,54 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DEDDC4828F
-	for <u-boot@archiver.kernel.org>; Wed,  7 Feb 2024 08:03:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC5D8C4828F
+	for <u-boot@archiver.kernel.org>; Wed,  7 Feb 2024 08:17:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3CD2187BC3;
-	Wed,  7 Feb 2024 09:03:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 0C18187C7D;
+	Wed,  7 Feb 2024 09:17:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="DvcFKRss";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="MAfezHZ0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5CF5F87C7D; Wed,  7 Feb 2024 09:03:06 +0100 (CET)
-Received: from mail-m17224.xmail.ntesmail.com (mail-m17224.xmail.ntesmail.com
- [45.195.17.224])
+ id D929987CBF; Wed,  7 Feb 2024 09:17:34 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9626387BC1
- for <u-boot@lists.denx.de>; Wed,  7 Feb 2024 09:03:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 312D187BAC
+ for <u-boot@lists.denx.de>; Wed,  7 Feb 2024 09:17:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=DvcFKRssintARNhIGlnKHTfLmOPwQvnZu6Gq/lt3vUTxVUYO81IioprBnp4EQm2wzgU7EWcQJk26Z2Tgsz/7BH12OY2O9yAf3+A5FXpuYFodKVV1dKLJau95UJ4O8TVltBZ8TfBzL7W+TkV+d7bzYcL4dnt2YZ+pYYIPurHrp+w=;
- c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=FUT7BKW7q67BF7DHAdQAgVej41UCsyP9TEJ1MG4KZiI=;
- h=date:mime-version:subject:message-id:from;
-Received: from localhost.localdomain (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 322779001B3;
- Wed,  7 Feb 2024 16:02:56 +0800 (CST)
-From: Kever Yang <kever.yang@rock-chips.com>
-To: trini@konsulko.com
-Cc: u-boot@lists.denx.de
-Subject: Pull request: u-boot-rockchip-20240207
-Date: Wed,  7 Feb 2024 16:02:55 +0800
-Message-Id: <20240207080255.2154861-1-kever.yang@rock-chips.com>
-X-Mailer: git-send-email 2.25.1
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=4f0f=JQ=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1707293841;
+ bh=9t7nNzYn9KtQUu4oiBoVgNVGWGQITBJC2HFWSIjx+/A=;
+ b=MAfezHZ0e3Y6xc+YRXPLOzvMIfMaigWxf86E8eUQ9NR2RgQmsjV2BcQF9KCdjx/gkmEDz9LfM
+ Y0g8B0hIKGGda/sZfYAXFt4gXROI9lCqKBNdDFbnUqoZG2A2LYnmfHcjW03Ny/2DLRV69ZZVKL3
+ rDkXQryWhePWDm5MVuLf/c+zsKm3V598H+MKRHuIlMc6AMYx8mwcaBOHcUzCTCB6wGa4HZhZE3/
+ OruB4sukG8m38aJq0iJ/GO3OPRcVFHoDJrPiD5wF2JHk2qrG0P0QNW89LBwiuq04aeUn8NsOJbm
+ NcktY4Icug/32JmCtdAJOoD8LAtvQSR9PQzMOk2jfKHQ==
+Message-ID: <386e5968-265c-4c5d-809d-0e6b11123610@kwiboo.se>
+Date: Wed, 7 Feb 2024 09:17:16 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 04/15] rockchip: rk3328-roc-cc: Update defconfig
+To: wens@csie.org
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Loic Devulder <ldevulder@suse.com>, u-boot@lists.denx.de
+References: <20240207000301.3270722-1-jonas@kwiboo.se>
+ <20240207000301.3270722-5-jonas@kwiboo.se>
+ <CAGb2v64MC4MOgPUcJpoqP6VuMnRaVMKLkVBErVk=DU-y3nMTcw@mail.gmail.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <CAGb2v64MC4MOgPUcJpoqP6VuMnRaVMKLkVBErVk=DU-y3nMTcw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGUJMSlYZSkpDTUJKTR4YGkJVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSUxOVUpLS1VKQk
- tLWQY+
-X-HM-Tid: 0a8d829764ae03a9kunm322779001b3
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MAw6Tio*SzMKLTAdMzQcSkkr
- M1YwCiFVSlVKTEtMSUJJQkxNTEpOVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKS09ITDcG
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 65c33c913d20fd1d3b220a3c
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,186 +75,144 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On 2024-02-07 06:52, Chen-Yu Tsai wrote:
+> On Wed, Feb 7, 2024 at 8:04 AM Jonas Karlman <jonas@kwiboo.se> wrote:
+>>
+>> Update defconfig for rk3328-roc-cc with new defaults.
+>>
+>> Remove the SPL_DRIVERS_MISC=y option, no misc driver is used in SPL.
+>>
+>> Add CONFIG_SPL_FIT_SIGNATURE=y to let SPL verify an auto generated hash
+>> of FIT images. This help indicate if there is an issue loading any of
+>> the images to DRAM or SRAM. Also add LEGACY_IMAGE_FORMAT=y to keep
+>> support for scripts.
+>>
+>> Add ROCKCHIP_EFUSE=y and remove NET_RANDOM_ETHADDR=y, ethaddr and
+>> eth1addr is set based on cpuid read from eFUSE.
+> 
+> I wonder if it would make sense to enable ROCKCHIP_EFUSE or ROCKCHIP_OTP
+> for the respective SoCs by default, either with "imply" under the SoC
+> Kconfig options, or "default if XXX" under the driver Kconfig options?
+> Not sure which is preferred.
+> 
+> Same goes for CONFIG_MISC_INIT_R for actually generating the serial number
+> and MAC addresses from the efuse/OTP.
+> 
+> At least for RK3566 and RK3588 we are implying these options.
 
-Please pull the updates for rockchip platform:
-- Add board: rv1126 Sonoff iHost board
-- rv1126 ddr4 support;
-- Enable BOOTSTD_FULL for RK3399 and RK3588;
-- rk3036 spl stack addr fix;
-- dts sync from linux v6.8-rc1 for rk356x, rk3588, rv1126;
-- Enable eMMC HS200 mode by default for rk3568 and rk3588;
+I agree that these and lots of other Kconfig options could and should be
+implied, either at soc or arch level.
 
-CI:
-https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/pipelines/19556
+Maybe something for a follow up series?
 
-Thanks,
-- Kever
+Regards,
+Jonas
 
-The following changes since commit 819abd0a1eaff9a921f5b917e152b85dab302e33:
+> 
+> 
+> ChenYu
+> 
+>> Add SPL_DM_SEQ_ALIAS=y option to use alias sequence number in SPL.
+>>
+>> Add DM_ETH_PHY=y, PHY_MOTORCOMM=y and PHY_REALTEK=y to support common
+>> ethernet PHYs.
+>>
+>> Add RNG_ROCKCHIP=y and DM_RNG=y options to support the onboard random
+>> generator.
+>>
+>> Also add missing device tree file to MAINTAINERS and add myself as a
+>> reviewer for this board.
+>>
+>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>> ---
+>>  board/rockchip/evb_rk3328/MAINTAINERS | 2 ++
+>>  configs/roc-cc-rk3328_defconfig       | 9 +++++++--
+>>  doc/board/rockchip/rockchip.rst       | 2 +-
+>>  3 files changed, 10 insertions(+), 3 deletions(-)
+>>
+>> diff --git a/board/rockchip/evb_rk3328/MAINTAINERS b/board/rockchip/evb_rk3328/MAINTAINERS
+>> index 419bc8ded375..09488eaf083f 100644
+>> --- a/board/rockchip/evb_rk3328/MAINTAINERS
+>> +++ b/board/rockchip/evb_rk3328/MAINTAINERS
+>> @@ -41,8 +41,10 @@ F:      arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi
+>>  ROC-RK3328-CC
+>>  M:      Loic Devulder <ldevulder@suse.com>
+>>  M:      Chen-Yu Tsai <wens@csie.org>
+>> +R:      Jonas Karlman <jonas@kwiboo.se>
+>>  S:      Maintained
+>>  F:      configs/roc-cc-rk3328_defconfig
+>> +F:      arch/arm/dts/rk3328-roc-cc.dts
+>>  F:      arch/arm/dts/rk3328-roc-cc-u-boot.dtsi
+>>
+>>  ROCK64-RK3328
+>> diff --git a/configs/roc-cc-rk3328_defconfig b/configs/roc-cc-rk3328_defconfig
+>> index 4ac3c9403b02..7d81a715ef25 100644
+>> --- a/configs/roc-cc-rk3328_defconfig
+>> +++ b/configs/roc-cc-rk3328_defconfig
+>> @@ -15,7 +15,6 @@ CONFIG_ROCKCHIP_RK3328=y
+>>  CONFIG_TPL_ROCKCHIP_COMMON_BOARD=y
+>>  CONFIG_TPL_LIBCOMMON_SUPPORT=y
+>>  CONFIG_TPL_LIBGENERIC_SUPPORT=y
+>> -CONFIG_SPL_DRIVERS_MISC=y
+>>  CONFIG_SPL_STACK_R_ADDR=0x600000
+>>  CONFIG_SPL_STACK=0x400000
+>>  CONFIG_TPL_SYS_MALLOC_F_LEN=0x800
+>> @@ -26,7 +25,9 @@ CONFIG_DEBUG_UART=y
+>>  # CONFIG_ANDROID_BOOT_IMAGE is not set
+>>  CONFIG_FIT=y
+>>  CONFIG_FIT_VERBOSE=y
+>> +CONFIG_SPL_FIT_SIGNATURE=y
+>>  CONFIG_SPL_LOAD_FIT=y
+>> +CONFIG_LEGACY_IMAGE_FORMAT=y
+>>  CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-roc-cc.dtb"
+>>  # CONFIG_DISPLAY_CPUINFO is not set
+>>  CONFIG_DISPLAY_BOARDINFO_LATE=y
+>> @@ -58,8 +59,8 @@ CONFIG_TPL_OF_PLATDATA=y
+>>  CONFIG_ENV_IS_IN_MMC=y
+>>  CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+>>  CONFIG_SYS_MMC_ENV_DEV=1
+>> -CONFIG_NET_RANDOM_ETHADDR=y
+>>  CONFIG_TPL_DM=y
+>> +CONFIG_SPL_DM_SEQ_ALIAS=y
+>>  CONFIG_REGMAP=y
+>>  CONFIG_SPL_REGMAP=y
+>>  CONFIG_TPL_REGMAP=y
+>> @@ -73,9 +74,11 @@ CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+>>  CONFIG_ROCKCHIP_GPIO=y
+>>  CONFIG_SYS_I2C_ROCKCHIP=y
+>>  CONFIG_MISC=y
+>> +CONFIG_ROCKCHIP_EFUSE=y
+>>  CONFIG_MMC_DW=y
+>>  CONFIG_MMC_DW_ROCKCHIP=y
+>>  CONFIG_PHY_REALTEK=y
+>> +CONFIG_DM_ETH_PHY=y
+>>  CONFIG_PHY_GIGE=y
+>>  CONFIG_ETH_DESIGNWARE=y
+>>  CONFIG_GMAC_ROCKCHIP=y
+>> @@ -95,6 +98,8 @@ CONFIG_PWM_ROCKCHIP=y
+>>  CONFIG_RAM=y
+>>  CONFIG_SPL_RAM=y
+>>  CONFIG_TPL_RAM=y
+>> +CONFIG_DM_RNG=y
+>> +CONFIG_RNG_ROCKCHIP=y
+>>  CONFIG_BAUDRATE=1500000
+>>  CONFIG_DEBUG_UART_SHIFT=2
+>>  CONFIG_SYS_NS16550_MEM32=y
+>> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+>> index de2195deadca..99f48b6d6fa5 100644
+>> --- a/doc/board/rockchip/rockchip.rst
+>> +++ b/doc/board/rockchip/rockchip.rst
+>> @@ -60,8 +60,8 @@ List of mainline supported Rockchip boards:
+>>       - ODROID-GO Advance (odroid-go2)
+>>  * rk3328
+>>       - Rockchip Evb-RK3328 (evb-rk3328)
+>> +     - Firefly ROC-RK3328-CC (roc-cc-rk3328)
+>>       - Pine64 Rock64 (rock64-rk3328)
+>> -     - Firefly-RK3328 (roc-cc-rk3328)
+>>       - Radxa Rockpi E (rock-pi-e-rk3328)
+>>  * rk3368
+>>       - GeekBox (geekbox)
+>> --
+>> 2.43.0
+>>
 
-  Merge tag 'smbios-2024-04-rc2' of https://source.denx.de/u-boot/custodians/u-boot-efi (2024-02-03 09:11:25 -0500)
-
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-rockchip.git tags/u-boot-rockchip-20240207
-
-for you to fetch changes up to b8f1f60c23c9b3edb70159c4e2b1be232a008ee3:
-
-  arm: dts: rockpro64: Add RockPro64 smbios (2024-02-07 10:49:13 +0800)
-
-----------------------------------------------------------------
-Andy Yan (1):
-      rockchip: rk3588-evb: Enable USB support
-
-Jonas Karlman (15):
-      net: designware: Reset eth phy before phy connect
-      rockchip: rk3328-rock-pi-e: Enable DM_ETH_PHY and PHY_REALTEK
-      rockchip: rk356x: Sync device tree from linux v6.7
-      rockchip: rk356x: Sync device tree from linux v6.8-rc1
-      rockchip: rk356x: Move common uart2 props to rk356x-u-boot.dtsi
-      rockchip: rk3588: Sync device tree with linux v6.7
-      rockchip: rk3588: Sync device tree from linux v6.8-rc1
-      rockchip: rk3588: Add default u-boot,spl-boot-order prop
-      rockchip: rk35xx: Remove unnecessary status props
-      rockchip: rk3588: Enable eMMC HS200 mode
-      rockchip: rk3588-quartzpro64: Enable AHCI, PCI and USB
-      rockchip: rk35xx: Remove use of eMMC DDR52 mode
-      rockchip: rk35xx: Enable eMMC HS200 mode by default
-      mmc: rockchip_sdhci: Fix HS400 mode write on RK3568
-      rockchip: rk3568-generic: Enable eMMC HS200 mode
-
-Kever Yang (2):
-      spl: Make SPL_STACK available for ROCKCHIP_RK3036 without spl framework
-      configs: rockchip: rk3036: Fix CONFIG_SPL_STACK define
-
-Shantur Rathore (2):
-      arch: arm: mach-rockchip: Kconfig: Enable BOOTSTD_FULL for RK3399 and RK3588
-      arm: dts: rockpro64: Add RockPro64 smbios
-
-Tim Lunn (6):
-      arm: dts: rockchip: Sync rv1126 dts from linux 6.8-rc1
-      ram: rockchip: Add rv1126 ddr4 support
-      rockchip: Convert rv1126 to standard boot
-      board: rockchip: Add Sonoff iHost board
-      rockchip: rv1126: select SPL_OPTEE_IMAGE
-      rockchip: rv1126: Move RAM disk address
-
-YouMin Chen (1):
-      rockchip: sdram: fix LPDDR5 bank info for sys_reg version 3
-
- arch/arm/dts/Makefile                              |   1 +
- arch/arm/dts/rk3399-rockpro64-u-boot.dtsi          |  22 ++
- arch/arm/dts/rk3566-anbernic-rgxx3-u-boot.dtsi     |   7 -
- arch/arm/dts/rk3566-anbernic-rgxx3.dtsi            |  42 ++-
- arch/arm/dts/rk3566-quartz64-a-u-boot.dtsi         |  13 -
- arch/arm/dts/rk3566-quartz64-a.dts                 |   7 +-
- arch/arm/dts/rk3566-quartz64-b-u-boot.dtsi         |  13 -
- arch/arm/dts/rk3566-quartz64-b.dts                 |   2 -
- arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi       |  13 -
- arch/arm/dts/rk3566-radxa-cm3-io.dts               |   5 +-
- arch/arm/dts/rk3566-soquartz-blade.dts             |   4 +
- arch/arm/dts/rk3566-soquartz-cm4.dts               |   4 +
- arch/arm/dts/rk3566-soquartz-model-a.dts           |   4 +
- arch/arm/dts/rk3566-soquartz-u-boot.dtsi           |  13 -
- arch/arm/dts/rk3566-soquartz.dtsi                  |   4 -
- arch/arm/dts/rk3568-bpi-r2-pro-u-boot.dtsi         |  13 -
- arch/arm/dts/rk3568-evb-u-boot.dtsi                |  17 -
- arch/arm/dts/rk3568-evb.dts                        |   3 -
- arch/arm/dts/rk3568-generic-u-boot.dtsi            |  11 -
- arch/arm/dts/rk3568-generic.dts                    |  12 +-
- arch/arm/dts/rk3568-lubancat-2-u-boot.dtsi         |  13 -
- arch/arm/dts/rk3568-lubancat-2.dts                 |   3 -
- arch/arm/dts/rk3568-nanopi-r5s-u-boot.dtsi         |  13 -
- arch/arm/dts/rk3568-nanopi-r5s.dtsi                |   3 -
- arch/arm/dts/rk3568-odroid-m1-u-boot.dtsi          |  13 -
- arch/arm/dts/rk3568-odroid-m1.dts                  |   3 -
- arch/arm/dts/rk3568-radxa-cm3i.dtsi                |   3 -
- arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi          |  13 -
- arch/arm/dts/rk3568-rock-3a-u-boot.dtsi            |  13 -
- arch/arm/dts/rk3568-rock-3a.dts                    |   7 +-
- arch/arm/dts/rk356x-u-boot.dtsi                    |  12 +-
- arch/arm/dts/rk356x.dtsi                           |  20 +-
- arch/arm/dts/rk3588-edgeble-neu6a-io.dts           |   4 -
- arch/arm/dts/rk3588-edgeble-neu6b-io.dts           |   6 +-
- arch/arm/dts/rk3588-evb1-v10.dts                   |  99 ++++-
- arch/arm/dts/rk3588-nanopc-t6-u-boot.dtsi          |   6 -
- arch/arm/dts/rk3588-nanopc-t6.dts                  |  10 +-
- arch/arm/dts/rk3588-orangepi-5-plus-u-boot.dtsi    |   6 -
- arch/arm/dts/rk3588-orangepi-5-plus.dts            |   1 -
- arch/arm/dts/rk3588-quartzpro64-u-boot.dtsi        |   6 -
- arch/arm/dts/rk3588-quartzpro64.dts                |   2 +-
- arch/arm/dts/rk3588-rock-5b-u-boot.dtsi            |  13 -
- arch/arm/dts/rk3588-rock-5b.dts                    |  13 +-
- arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi         |   8 -
- arch/arm/dts/rk3588-turing-rk1.dtsi                |   6 +-
- arch/arm/dts/rk3588-u-boot.dtsi                    |   2 +-
- arch/arm/dts/rk3588s-orangepi-5.dts                |   9 +-
- arch/arm/dts/rk3588s-pinctrl.dtsi                  |   2 +-
- arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi           |   7 -
- arch/arm/dts/rk3588s-rock-5a.dts                   |  10 +-
- arch/arm/dts/rk3588s-u-boot.dtsi                   |  49 +--
- arch/arm/dts/rk3588s.dtsi                          | 152 ++++++++
- arch/arm/dts/rv1126-edgeble-neu2-io.dts            |  70 ++++
- arch/arm/dts/rv1126-edgeble-neu2.dtsi              |  27 +-
- arch/arm/dts/rv1126-pinctrl.dtsi                   | 130 +++++++
- arch/arm/dts/rv1126-sonoff-ihost-u-boot.dtsi       |  13 +
- arch/arm/dts/rv1126-sonoff-ihost.dts               |  29 ++
- arch/arm/dts/rv1126-sonoff-ihost.dtsi              | 404 +++++++++++++++++++++
- arch/arm/dts/rv1126.dtsi                           | 185 ++++++++++
- arch/arm/mach-rockchip/Kconfig                     |   7 +
- arch/arm/mach-rockchip/rk3588/syscon_rk3588.c      |   2 +-
- arch/arm/mach-rockchip/rv1126/Kconfig              |   8 +
- arch/arm/mach-rockchip/sdram.c                     |   9 +-
- board/itead/sonoff-ihost/Kconfig                   |  16 +
- board/itead/sonoff-ihost/MAINTAINERS               |   6 +
- common/spl/Kconfig                                 |   3 +-
- configs/evb-rk3036_defconfig                       |   1 +
- configs/evb-rk3588_defconfig                       |  14 +
- configs/generic-rk3568_defconfig                   |   5 +-
- configs/kylin-rk3036_defconfig                     |   1 +
- configs/nanopc-t6-rk3588_defconfig                 |   2 +
- configs/nanopi-r5c-rk3568_defconfig                |   2 -
- configs/nanopi-r5s-rk3568_defconfig                |   2 -
- configs/neu6a-io-rk3588_defconfig                  |   2 +
- configs/neu6b-io-rk3588_defconfig                  |   2 +
- configs/orangepi-5-plus-rk3588_defconfig           |   2 +
- configs/quartzpro64-rk3588_defconfig               |  27 ++
- configs/radxa-e25-rk3568_defconfig                 |   2 -
- configs/rock-pi-e-rk3328_defconfig                 |   2 +
- configs/rock5a-rk3588s_defconfig                   |   2 +
- configs/rock5b-rk3588_defconfig                    |   2 +
- configs/rockpro64-rk3399_defconfig                 |   2 +
- configs/sonoff-ihost-rv1126_defconfig              |  60 +++
- configs/turing-rk1-rk3588_defconfig                |   2 +
- doc/board/rockchip/rockchip.rst                    |   1 +
- drivers/mmc/rockchip_sdhci.c                       |   9 +-
- drivers/net/designware.c                           |   7 +
- .../ram/rockchip/sdram-rv1126-ddr4-detect-1056.inc |  75 ++++
- .../ram/rockchip/sdram-rv1126-ddr4-detect-328.inc  |  75 ++++
- .../ram/rockchip/sdram-rv1126-ddr4-detect-396.inc  |  75 ++++
- .../ram/rockchip/sdram-rv1126-ddr4-detect-528.inc  |  75 ++++
- .../ram/rockchip/sdram-rv1126-ddr4-detect-664.inc  |  75 ++++
- .../ram/rockchip/sdram-rv1126-ddr4-detect-784.inc  |  75 ++++
- .../ram/rockchip/sdram-rv1126-ddr4-detect-924.inc  |  75 ++++
- drivers/ram/rockchip/sdram_rv1126.c                |   8 +
- include/configs/neural-compute-module-2.h          |   6 -
- include/configs/rv1126_common.h                    |   5 +-
- include/configs/sonoff-ihost.h                     |  10 +
- include/dt-bindings/clock/rk3568-cru.h             |   1 +
- include/dt-bindings/soc/rockchip,vop2.h            |   4 +
- 100 files changed, 1984 insertions(+), 370 deletions(-)
- create mode 100644 arch/arm/dts/rv1126-sonoff-ihost-u-boot.dtsi
- create mode 100644 arch/arm/dts/rv1126-sonoff-ihost.dts
- create mode 100644 arch/arm/dts/rv1126-sonoff-ihost.dtsi
- create mode 100644 board/itead/sonoff-ihost/Kconfig
- create mode 100644 board/itead/sonoff-ihost/MAINTAINERS
- create mode 100644 configs/sonoff-ihost-rv1126_defconfig
- create mode 100644 drivers/ram/rockchip/sdram-rv1126-ddr4-detect-1056.inc
- create mode 100644 drivers/ram/rockchip/sdram-rv1126-ddr4-detect-328.inc
- create mode 100644 drivers/ram/rockchip/sdram-rv1126-ddr4-detect-396.inc
- create mode 100644 drivers/ram/rockchip/sdram-rv1126-ddr4-detect-528.inc
- create mode 100644 drivers/ram/rockchip/sdram-rv1126-ddr4-detect-664.inc
- create mode 100644 drivers/ram/rockchip/sdram-rv1126-ddr4-detect-784.inc
- create mode 100644 drivers/ram/rockchip/sdram-rv1126-ddr4-detect-924.inc
- create mode 100644 include/configs/sonoff-ihost.h
