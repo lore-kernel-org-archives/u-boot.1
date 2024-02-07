@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5C6EC48297
-	for <u-boot@archiver.kernel.org>; Wed,  7 Feb 2024 00:03:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC7D6C48297
+	for <u-boot@archiver.kernel.org>; Wed,  7 Feb 2024 00:04:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 12DF387CCE;
-	Wed,  7 Feb 2024 01:03:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 47E2B87CCD;
+	Wed,  7 Feb 2024 01:03:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="KECIwwot";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="LGHBmYvr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 61C7A87CBF; Wed,  7 Feb 2024 01:03:50 +0100 (CET)
+ id 692D487CEA; Wed,  7 Feb 2024 01:03:55 +0100 (CET)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6647E86F34
- for <u-boot@lists.denx.de>; Wed,  7 Feb 2024 01:03:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F2BA987CC2
+ for <u-boot@lists.denx.de>; Wed,  7 Feb 2024 01:03:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,23 +28,21 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1707264193; bh=3XDoas5mLt5Vm4rGn8kDcS1kZ2YBIfx4EqpOTT8uQBA=;
- b=KECIwwot/TdrW0qJmIWpSd0jP9H5+cWebHhA4GFahYhMLmEy84WJXJi72bEaPk/Oex2fVE8yP
- WGj87uUXJhoEz8miIqibChimvfCFY8Ge/HNd9I6uTjfRhioZIbKntPLo+Bys+/w46L8ZXtdrYQL
- MELBWg6V0Ri2X/dExUbYOuXHTfkRLCzj7U2SBw7gSwfs+QMWPPxbjFgAXm/lejwz6oBva/9HEr9
- d7CqCjuKSXmtHSPGgmZ320m/7DF5kIW4cUbkWwFuTejA5FlfspHXq2TXQwp4VJSxOq5EpxxR9Aj
- OEHJlBZ2UMBKXKhx5XvWklKcy5U8dDFfy9QijcBx5rHw==
+ t=1707264211; bh=jPWErfD37LoEK52pS6FSmmP8H1bDlZbt7iglrf02KfA=;
+ b=LGHBmYvrSYqsw2p+py/ERk7m6c/B7DUe3nksRHV8wouSnizd06gPW02PxPs8EAzBEx0CfSaw/
+ 73cle1UbFayWhNAb+sirRdycx67jKPX/QvZ/8PEbB+uclQRsx7QLv1okOzQeFfBpR549THB0u95
+ VUW84druGQ41Ty89AQppS279OR2kQXkObzcHyyd+6wbu/7UjDQfz9j3S2kQaFEq9DKxzXosvWPM
+ xd74OsQDUtNZVL9ahtZ5YT7kX6KEXm/VCv4vNiNVEcU7916s6ppwAK2UJ8MjGKBgjcmbpxJXbgo
+ o/ZR/IJ3QSvaWCr4xm0v2ggcJNp5gyRDT/CnjQqNtVtQ==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Tianling Shen <cnsztl@gmail.com>, David Bauer <mail@david-bauer.net>, Loic
- Devulder <ldevulder@suse.com>, "Chen-Yu Tsai" <wens@csie.org>, Jonas
- Karlman <jonas@kwiboo.se>, "Matwey V. Kornilov" <matwey.kornilov@gmail.com>
+ Banglang Huang <banglang.huang@foxmail.com>, Jonas Karlman
+ <jonas@kwiboo.se>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH 01/15] rockchip: rk3328: Update default u-boot,
- spl-boot-order prop
-Date: Wed,  7 Feb 2024 00:02:30 +0000
-Message-ID: <20240207000301.3270722-2-jonas@kwiboo.se>
+Subject: [PATCH 05/15] rockchip: rk3328-rock-pi-e: Update defconfig
+Date: Wed,  7 Feb 2024 00:02:34 +0000
+Message-ID: <20240207000301.3270722-6-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240207000301.3270722-1-jonas@kwiboo.se>
 References: <20240207000301.3270722-1-jonas@kwiboo.se>
@@ -56,7 +54,7 @@ X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  167.172.40.54
-X-ForwardEmail-ID: 65c2c8bfd5b31093c56fbf30
+X-ForwardEmail-ID: 65c2c8ccd5b31093c56fbf68
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,129 +71,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Change to use a common FIT load order, same-as-spl > SD-card > eMMC on
-RK3328 boards. Only EVB and Radxa ROCK Pi E is affected by this change.
+Update defconfig for rk3328-rock-pi-e with new defaults.
+
+Remove the xPL_DRIVERS_MISC=y option, no misc driver is used in xPL.
+
+Add CONFIG_SPL_FIT_SIGNATURE=y to let SPL verify an auto generated hash
+of FIT images. This help indicate if there is an issue loading any of
+the images to DRAM or SRAM. Also add LEGACY_IMAGE_FORMAT=y to keep
+support for scripts.
+
+Add ROCKCHIP_EFUSE=y and remove NET_RANDOM_ETHADDR=y, ethaddr and
+eth1addr is set based on cpuid read from eFUSE.
+
+Add SPL_DM_SEQ_ALIAS=y option to use alias sequence number in SPL.
+
+Add RNG_ROCKCHIP=y and DM_RNG=y options to support the onboard random
+generator.
+
+Also add myself as a reviewer for this board.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- arch/arm/dts/rk3328-nanopi-r2c-plus-u-boot.dtsi      | 6 ------
- arch/arm/dts/rk3328-nanopi-r2s-u-boot.dtsi           | 5 -----
- arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi | 5 -----
- arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi     | 5 -----
- arch/arm/dts/rk3328-roc-cc-u-boot.dtsi               | 5 +----
- arch/arm/dts/rk3328-rock64-u-boot.dtsi               | 5 +----
- arch/arm/dts/rk3328-u-boot.dtsi                      | 2 +-
- 7 files changed, 3 insertions(+), 30 deletions(-)
+ board/rockchip/evb_rk3328/MAINTAINERS |  1 +
+ configs/rock-pi-e-rk3328_defconfig    | 10 ++++++----
+ doc/board/rockchip/rockchip.rst       |  2 +-
+ 3 files changed, 8 insertions(+), 5 deletions(-)
 
-diff --git a/arch/arm/dts/rk3328-nanopi-r2c-plus-u-boot.dtsi b/arch/arm/dts/rk3328-nanopi-r2c-plus-u-boot.dtsi
-index f8adb9e5e1ff..1dc3c022c504 100644
---- a/arch/arm/dts/rk3328-nanopi-r2c-plus-u-boot.dtsi
-+++ b/arch/arm/dts/rk3328-nanopi-r2c-plus-u-boot.dtsi
-@@ -1,9 +1,3 @@
- // SPDX-License-Identifier: GPL-2.0-or-later
+diff --git a/board/rockchip/evb_rk3328/MAINTAINERS b/board/rockchip/evb_rk3328/MAINTAINERS
+index 09488eaf083f..47fd05d2ea8b 100644
+--- a/board/rockchip/evb_rk3328/MAINTAINERS
++++ b/board/rockchip/evb_rk3328/MAINTAINERS
+@@ -57,6 +57,7 @@ F:      arch/arm/dts/rk3328-rock64-u-boot.dtsi
  
- #include "rk3328-nanopi-r2c-u-boot.dtsi"
--
--/ {
--	chosen {
--		u-boot,spl-boot-order = "same-as-spl", &sdmmc, &emmc;
--	};
--};
-diff --git a/arch/arm/dts/rk3328-nanopi-r2s-u-boot.dtsi b/arch/arm/dts/rk3328-nanopi-r2s-u-boot.dtsi
-index 78d37ab47558..d969b008775e 100644
---- a/arch/arm/dts/rk3328-nanopi-r2s-u-boot.dtsi
-+++ b/arch/arm/dts/rk3328-nanopi-r2s-u-boot.dtsi
-@@ -6,11 +6,6 @@
- 
- #include "rk3328-u-boot.dtsi"
- #include "rk3328-sdram-ddr4-666.dtsi"
--/ {
--	chosen {
--		u-boot,spl-boot-order = "same-as-spl", &sdmmc, &emmc;
--	};
--};
- 
- &gpio0 {
- 	bootph-pre-ram;
-diff --git a/arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi b/arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi
-index ebe33e48cb9c..5aaa5ccb15c1 100644
---- a/arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi
-+++ b/arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi
-@@ -6,11 +6,6 @@
- 
- #include "rk3328-u-boot.dtsi"
- #include "rk3328-sdram-lpddr3-666.dtsi"
--/ {
--	chosen {
--		u-boot,spl-boot-order = "same-as-spl", &sdmmc, &emmc;
--	};
--};
- 
- &gpio0 {
- 	bootph-pre-ram;
-diff --git a/arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi b/arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi
-index 637c70adf194..6d3db86dce6a 100644
---- a/arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi
-+++ b/arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi
-@@ -6,11 +6,6 @@
- 
- #include "rk3328-u-boot.dtsi"
- #include "rk3328-sdram-ddr4-666.dtsi"
--/ {
--	chosen {
--		u-boot,spl-boot-order = "same-as-spl", &sdmmc, &emmc;
--	};
--};
- 
- &gpio0 {
- 	bootph-pre-ram;
-diff --git a/arch/arm/dts/rk3328-roc-cc-u-boot.dtsi b/arch/arm/dts/rk3328-roc-cc-u-boot.dtsi
-index 2062f34bf825..8bc2f134f8f4 100644
---- a/arch/arm/dts/rk3328-roc-cc-u-boot.dtsi
-+++ b/arch/arm/dts/rk3328-roc-cc-u-boot.dtsi
-@@ -5,11 +5,8 @@
- 
- #include "rk3328-u-boot.dtsi"
- #include "rk3328-sdram-ddr4-666.dtsi"
--/ {
--	chosen {
--		u-boot,spl-boot-order = "same-as-spl", &sdmmc, &emmc;
--	};
- 
-+/ {
- 	smbios {
- 		compatible = "u-boot,sysinfo-smbios";
- 
-diff --git a/arch/arm/dts/rk3328-rock64-u-boot.dtsi b/arch/arm/dts/rk3328-rock64-u-boot.dtsi
-index 6904515b9693..bfe506fd2249 100644
---- a/arch/arm/dts/rk3328-rock64-u-boot.dtsi
-+++ b/arch/arm/dts/rk3328-rock64-u-boot.dtsi
-@@ -5,11 +5,8 @@
- 
- #include "rk3328-u-boot.dtsi"
- #include "rk3328-sdram-lpddr3-1600.dtsi"
--/ {
--	chosen {
--		u-boot,spl-boot-order = "same-as-spl", &sdmmc, &emmc;
--	};
- 
-+/ {
- 	smbios {
- 		compatible = "u-boot,sysinfo-smbios";
- 
-diff --git a/arch/arm/dts/rk3328-u-boot.dtsi b/arch/arm/dts/rk3328-u-boot.dtsi
-index a9f2536de2a2..a12be7876db0 100644
---- a/arch/arm/dts/rk3328-u-boot.dtsi
-+++ b/arch/arm/dts/rk3328-u-boot.dtsi
-@@ -13,7 +13,7 @@
- 	};
- 
- 	chosen {
--		u-boot,spl-boot-order = &emmc, &sdmmc;
-+		u-boot,spl-boot-order = "same-as-spl", &sdmmc, &emmc;
- 	};
- 
- 	dmc: dmc {
+ ROCKPIE-RK3328
+ M:      Banglang Huang <banglang.huang@foxmail.com>
++R:      Jonas Karlman <jonas@kwiboo.se>
+ S:      Maintained
+ F:      configs/rock-pi-e-rk3328_defconfig
+ F:      arch/arm/dts/rk3328-rock-pi-e.dts
+diff --git a/configs/rock-pi-e-rk3328_defconfig b/configs/rock-pi-e-rk3328_defconfig
+index 6dda900a9b42..ddd482dd0195 100644
+--- a/configs/rock-pi-e-rk3328_defconfig
++++ b/configs/rock-pi-e-rk3328_defconfig
+@@ -15,7 +15,6 @@ CONFIG_ROCKCHIP_RK3328=y
+ CONFIG_TPL_ROCKCHIP_COMMON_BOARD=y
+ CONFIG_TPL_LIBCOMMON_SUPPORT=y
+ CONFIG_TPL_LIBGENERIC_SUPPORT=y
+-CONFIG_SPL_DRIVERS_MISC=y
+ CONFIG_SPL_STACK_R_ADDR=0x4000000
+ CONFIG_SPL_STACK=0x400000
+ CONFIG_TPL_SYS_MALLOC_F_LEN=0x800
+@@ -27,7 +26,9 @@ CONFIG_DEBUG_UART=y
+ # CONFIG_ANDROID_BOOT_IMAGE is not set
+ CONFIG_FIT=y
+ CONFIG_FIT_VERBOSE=y
++CONFIG_SPL_FIT_SIGNATURE=y
+ CONFIG_SPL_LOAD_FIT=y
++CONFIG_LEGACY_IMAGE_FORMAT=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-rock-pi-e.dtb"
+ # CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+@@ -46,7 +47,6 @@ CONFIG_SPL_POWER=y
+ CONFIG_SPL_ATF=y
+ CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+ CONFIG_TPL_SYS_MALLOC_SIMPLE=y
+-CONFIG_TPL_DRIVERS_MISC=y
+ CONFIG_CMD_BOOTZ=y
+ CONFIG_CMD_GPT=y
+ CONFIG_CMD_MMC=y
+@@ -59,8 +59,8 @@ CONFIG_TPL_OF_PLATDATA=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_SYS_MMC_ENV_DEV=1
+-CONFIG_NET_RANDOM_ETHADDR=y
+ CONFIG_TPL_DM=y
++CONFIG_SPL_DM_SEQ_ALIAS=y
+ CONFIG_REGMAP=y
+ CONFIG_SPL_REGMAP=y
+ CONFIG_TPL_REGMAP=y
+@@ -74,6 +74,7 @@ CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+ CONFIG_MISC=y
++CONFIG_ROCKCHIP_EFUSE=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_PHY_REALTEK=y
+@@ -95,9 +96,10 @@ CONFIG_PWM_ROCKCHIP=y
+ CONFIG_RAM=y
+ CONFIG_SPL_RAM=y
+ CONFIG_TPL_RAM=y
++CONFIG_DM_RNG=y
++CONFIG_RNG_ROCKCHIP=y
+ CONFIG_BAUDRATE=1500000
+ CONFIG_DEBUG_UART_SHIFT=2
+-CONFIG_DEBUG_UART_ANNOUNCE=y
+ CONFIG_SYS_NS16550_MEM32=y
+ CONFIG_SYSINFO=y
+ CONFIG_SYSINFO_SMBIOS=y
+diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+index 99f48b6d6fa5..b71fa375b2bf 100644
+--- a/doc/board/rockchip/rockchip.rst
++++ b/doc/board/rockchip/rockchip.rst
+@@ -62,7 +62,7 @@ List of mainline supported Rockchip boards:
+      - Rockchip Evb-RK3328 (evb-rk3328)
+      - Firefly ROC-RK3328-CC (roc-cc-rk3328)
+      - Pine64 Rock64 (rock64-rk3328)
+-     - Radxa Rockpi E (rock-pi-e-rk3328)
++     - Radxa ROCK Pi E (rock-pi-e-rk3328)
+ * rk3368
+      - GeekBox (geekbox)
+      - PX5 EVB (evb-px5)
 -- 
 2.43.0
 
