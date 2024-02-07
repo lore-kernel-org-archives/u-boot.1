@@ -4,73 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F12BCC4828F
-	for <u-boot@archiver.kernel.org>; Wed,  7 Feb 2024 14:17:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 517C2C4828D
+	for <u-boot@archiver.kernel.org>; Wed,  7 Feb 2024 15:11:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0116987CA3;
-	Wed,  7 Feb 2024 15:17:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5AAE287C9A;
+	Wed,  7 Feb 2024 16:11:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Qz+1jK53";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="m56250X4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06DFA87C4C; Wed,  7 Feb 2024 15:16:58 +0100 (CET)
-Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
- [IPv6:2a00:1450:4864:20::22e])
+ id 96DD487C8F; Wed,  7 Feb 2024 16:00:24 +0100 (CET)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B2A0687CE8
- for <u-boot@lists.denx.de>; Wed,  7 Feb 2024 15:16:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9A95787CBC
+ for <u-boot@lists.denx.de>; Wed,  7 Feb 2024 16:00:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-lj1-x22e.google.com with SMTP id
- 38308e7fff4ca-2d09bdddfc9so6965851fa.2
- for <u-boot@lists.denx.de>; Wed, 07 Feb 2024 06:16:51 -0800 (PST)
+ spf=pass smtp.mailfrom=resch.max@gmail.com
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-33b18099411so532169f8f.0
+ for <u-boot@lists.denx.de>; Wed, 07 Feb 2024 07:00:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1707315411; x=1707920211; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=eNPn3x6XUJmymF+Cci6UkKFUZJyh81o2shkuHk8/fNc=;
- b=Qz+1jK53CFSS1xBxKJllQePT8z2FYG7rfyOQsT0SuuLG7Q+Q0bOnQUAQmoUDOnKX63
- WMSMs+n5eWJeAggshAZkLz3Q0NR6W9wo4UkelAI9vmBJ27cLPe6/xg6MUzYf76QSIpc8
- 75M/uOCtVsgijbhPBSTT2wql8ONjV3Zho8HxxzUid7K7m7pv3pJt+6V7qPH0N5X4qONO
- jXy581jA9/28L2U4sDlOfNvoO9stN2O7qjBC+fmBH99nLFDbIvBCMUV6FDVasWS3n4Ov
- 3k52CQ3IaCsLTbm0hmhq6SXl/7ft1NLzzjRVOl9S595FhXnOm4ufpPkDKO+D0iyyyMOS
- Et4g==
+ d=gmail.com; s=20230601; t=1707318021; x=1707922821; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=cA5BaY7BKrIbOfE4vlzzjRyTADTD6IiszULgHx5+zG4=;
+ b=m56250X4ShD76BoSAjKdNNwauQrVzUG7zBHC5astrCxcMxbeYyMhNe6ZJzyM5TMMIJ
+ GzL8QN4TV996GiizzUZtDuhEPSuvCiN+Vq6ifj1aDU1bgyb+7Hb30eFoC9dyH4d7JMaJ
+ zCvt1pYpXMdD+7RRg3gIDoBmb1+YQgrgC6VZ3DEqBKXNhzRFrM45jg7EQuXw88SkzcMZ
+ actTPHCdnMxPv+JS8k5Uj9T9pREuaKryhZ3gpSLXkjufsuhnmR9UuErjRofug3QMRDoT
+ VZENmfa7sfQXEKE0+cS+A+Td9C/FhtKz1Mtd0CogCftgzDNVmJFUTmWbCRcjouPJtqSX
+ d+/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707315411; x=1707920211;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1707318021; x=1707922821;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=eNPn3x6XUJmymF+Cci6UkKFUZJyh81o2shkuHk8/fNc=;
- b=VZr0P3MB7WaelY+x2phPsAOtV5FlB4AcLB98g3KLiA6r34pL+9WTABoDZumqdx4p/A
- N+xWD93Oo/RTVMTz2N4kVQZYcdwz6kRQDVoTUXyI2MDVapRUAqCnccC7RbkKdGuLJX/e
- P+hmJAzPCe8iBZQslpnIcLZiG/Fnpa11LaaAVIe2eXDqLObHrhJL3slWGJsaTLJHfQmP
- HB5sxIQnC9RtsxtzRcdZKTjyk1kvP04oyL4Z67aIpO2me65u2nqUplTSLqJbGLsaDqmI
- 2VS+AXK5r3acflb2OXj6TRCwuLdfgVFISKDpOWYCoInnCgZamsBGOgG+1+b4vX1SRgXE
- f4dg==
-X-Gm-Message-State: AOJu0Yy1uxv9acs8m6Ip0PeVIc+H153JEZD/sSJ8zR8PPlIr+XkIWh+C
- aJYSe3yHYGchNU5Um1QVH9TmYmQ23TP+zxmAAV7Bo0AZJYCpijJRb071QoEpm0l3zXo0YfaXQkA
- BDxZJulbCksilztRutU8WMqTpFFY=
-X-Google-Smtp-Source: AGHT+IGnmldeHEn/MGtSWqUZd5TUyA4/ZOx9mBCJwQSfHlnM4r3P8UdlNRN9DZM9OIrZ9IkSiQlDkK4tYapNalIFfA8=
-X-Received: by 2002:a2e:a273:0:b0:2d0:a9c0:7d66 with SMTP id
- k19-20020a2ea273000000b002d0a9c07d66mr3538457ljm.4.1707315410595; Wed, 07 Feb
- 2024 06:16:50 -0800 (PST)
+ bh=cA5BaY7BKrIbOfE4vlzzjRyTADTD6IiszULgHx5+zG4=;
+ b=ZWdQt6NLNLnrL5/G85ZjP6fhnvfi1AA7iu95iaLPmlkXWuqGLILBI0OzKCOBaz79kk
+ lIg7wk2zPSV3WXmUKFJqjcvZS2L8CjRUEXXC9jQel60cIfg2ES/2mDziqMfxAYjFx96J
+ Ozq31jQktV+5SHFZACVxF6RdZOjT6OpLh/cbLabAJ2iG1zLOMsofq+SsIQC8V8al4xhU
+ OwReW7XQJqlNgWd4RlEwJdBjXrAoGg7AaNKAlkGb0D8WmaBKwP/pKWJms++cZgcP4AAb
+ 5rv+p/diPJ0IiSN9ZUqlf3GLXPsCZxWEdlQbpfSuCzQ8UAHIeSKGp31wfNoa+tl6rm/E
+ vUEg==
+X-Gm-Message-State: AOJu0YwjShkrnQlJJiHVOywzMpTALatqUfHCsorcymyTD6H5fwWcnTwD
+ uBWM3AJn2aj+c8uGldsw8kvTLrtAGOQ5UHb4yQaGWZuINkKp0K8+fDMWrtEiErY=
+X-Google-Smtp-Source: AGHT+IFcZ4rq+jOPCf17BaZkU8sdXz+o42DP/1XQ+D8dbOj08rQT/XWuo9MIihCvFtADKgIm1Ib8mQ==
+X-Received: by 2002:a5d:64ab:0:b0:33a:e4b9:d810 with SMTP id
+ m11-20020a5d64ab000000b0033ae4b9d810mr4829596wrp.40.1707318021126; 
+ Wed, 07 Feb 2024 07:00:21 -0800 (PST)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUjOSKLDDM88B9ayHXBnYrYVa1Zd9qn0AVbG1gb7MghDuRLBAHfO+dso/IhJE0BSW9Irye8dTuGZntWp/KFpTfVQLaj
+Received: from niflheim.lan ([2001:871:223:9d90:4a25:3e0d:c47c:bed7])
+ by smtp.gmail.com with ESMTPSA id
+ m6-20020a056000024600b0033b40a3f92asm1693220wrz.25.2024.02.07.07.00.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 07 Feb 2024 07:00:20 -0800 (PST)
+From: Max Resch <resch.max@gmail.com>
+To: u-boot@lists.denx.de
+Cc: sr@denx.de,
+	Max Resch <resch.max@gmail.com>
+Subject: [PATCH v3] rng: Add Turris Mox rTWM RNG driver
+Date: Wed,  7 Feb 2024 16:00:12 +0100
+Message-ID: <20240207150017.666213-1-resch.max@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <CAByghJZqOnV8w4nJKDOjiPVUGkq2KqYS=qxps09744==oXwtZQ@mail.gmail.com>
- <20240207134813.GV1152441@bill-the-cat>
-In-Reply-To: <20240207134813.GV1152441@bill-the-cat>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Wed, 7 Feb 2024 14:16:39 +0000
-Message-ID: <CALeDE9MDJZjtMDhbg-vfis1E5uVfYn4WwD1hoPgYWxRiPfjwGQ@mail.gmail.com>
-Subject: Re: [RFC] Drop md5sum, crc32 and sha1 cmds in favor of hash cmd
-To: Tom Rini <trini@konsulko.com>
-Cc: Igor Opaniuk <igor.opaniuk@gmail.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Wed, 07 Feb 2024 16:11:43 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,47 +92,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 7 Feb 2024 at 13:48, Tom Rini <trini@konsulko.com> wrote:
->
-> On Wed, Feb 07, 2024 at 02:00:16PM +0100, Igor Opaniuk wrote:
-> > Hello,
-> >
-> > I was playing a bit with different hash functions recently, and
-> > it turned out that md5sum, crc32, sha1 cmds just duplicate
-> > what is already covered by generic `hash` cmd.
-> >
-> > => sha1 0x60000000 0x200
-> > sha1 for 60000000 ... 600001ff ==> 4ff5ffc91d00a95155518b920f46e2483d0e1437
-> > => hash sha1 0x60000000 0x200
-> > sha1 for 60000000 ... 600001ff ==> 4ff5ffc91d00a95155518b920f46e2483d0e1437
-> >
-> > => crc32 0x60000000 0x200
-> > crc32 for 60000000 ... 600001ff ==> 6fe352e8
-> > => hash crc32 0x60000000 0x200
-> > crc32 for 60000000 ... 600001ff ==> 6fe352e8
-> >
-> > => md5sum 0x60000000 0x200
-> > md5 for 60000000 ... 600001ff ==> e6bbbe95f5b41996f4a9b9af7bbd4050
-> > => hash md5 0x60000000 0x200
-> > md5 for 60000000 ... 600001ff ==> e6bbbe95f5b41996f4a9b9af7bbd4050
-> >
-> > Considering that most of them (besides md5sum) are using the same
-> > int hash_command() function under the hood, but have a lot of duplicated
-> > code for handling params, does it make sense to do some cleanup and
-> > drop all them in favour  `hash`?
-> >
-> > I also plan to extend usage info for `hash` by adding a list
-> > compiled-in algos based on hash related compiled flags
-> > (CONFIG_SHA1, CONFIG_CRC32 etc), so it's clear what algos
-> > are available for hash calculation.
-> >
-> > Comments/objections are welcome!
->
-> It would be good, implementation wise, if each of those commands was
-> just a redirect to hash ..., similar to how "load ...." will call the
-> right filesystem calls. Does that make sense? Thanks.
+A RNG driver for Armada 3720 boards running the Turris Mox rWTM firmware
+from CZ.NIC in the secure processor.
 
-Yes, I actually have that one my todo list to basically alias the
-individual commands to the hash command to remove those commands. My
-intention there was a first step to allow us to eventually minimise or
-even remove the use of obsolete hashes etc.
+Signed-off-by: Max Resch <resch.max@gmail.com>
+---
+
+Changes in v3:
+ - More meaningful variable names in accordance with review
+
+Changes in v2:
+ - Removed ring buffer implementation
+
+ drivers/rng/turris_rwtm_rng.c | 18 +++++++++---------
+ 1 file changed, 9 insertions(+), 9 deletions(-)
+
+diff --git a/drivers/rng/turris_rwtm_rng.c b/drivers/rng/turris_rwtm_rng.c
+index 143fe0b47f..ec2cb0bca3 100644
+--- a/drivers/rng/turris_rwtm_rng.c
++++ b/drivers/rng/turris_rwtm_rng.c
+@@ -41,18 +41,19 @@ static int turris_rwtm_rng_fill_entropy(phys_addr_t entropy, size_t size)
+ 
+ static int turris_rwtm_rng_random_read(struct udevice *dev, void *data, size_t count)
+ {
+-	phys_addr_t p;
++	struct turris_rwtm_rng_priv *priv = dev_get_priv(dev);
++	phys_addr_t phys;
+ 	size_t size;
+ 	int ret;
+ 
+-	p = ((struct turris_rwtm_rng_priv *)dev_get_priv(dev))->buffer;
++	phys = priv->buffer;
+ 
+ 	while (count) {
+ 		size = min_t(size_t, RNG_BUFFER_SIZE, count);
+ 
+-		ret = turris_rwtm_rng_fill_entropy(p, size);
++		ret = turris_rwtm_rng_fill_entropy(phys, size);
+ 
+-		memcpy(data, (void *)p, size);
++		memcpy(data, (void *)phys, size);
+ 		count -= size;
+ 		data = (u8 *)data + size;
+ 	}
+@@ -62,7 +63,7 @@ static int turris_rwtm_rng_random_read(struct udevice *dev, void *data, size_t c
+ 
+ static int turris_rwtm_rng_probe(struct udevice *dev)
+ {
+-	struct turris_rwtm_rng_priv *priv;
++	struct turris_rwtm_rng_priv *priv = dev_get_priv(dev);
+ 	u32 args[] = { 0 };
+ 	int ret;
+ 
+@@ -76,7 +77,6 @@ static int turris_rwtm_rng_probe(struct udevice *dev)
+ 		return ret;
+ 
+ 	/* entropy buffer */
+-	priv = (struct turris_rwtm_rng_priv *)dev_get_priv(dev);
+ 	priv->buffer = 0;
+ 
+ 	/* buffer address need to be aligned */
+@@ -89,10 +89,10 @@ static int turris_rwtm_rng_probe(struct udevice *dev)
+ 
+ static int turris_rwtm_rng_remove(struct udevice *dev)
+ {
+-	phys_addr_t p;
++	struct turris_rwtm_rng_priv *priv = dev_get_priv(dev);
++	phys_addr_t phys = priv->buffer;
+ 
+-	p = ((struct turris_rwtm_rng_priv *)dev_get_priv(dev))->buffer;
+-	dma_free_coherent((void *)p);
++	dma_free_coherent((void *)phys);
+ 
+ 	return 0;
+ }
+-- 
+2.43.0
+
