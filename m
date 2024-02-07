@@ -4,76 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA2B9C4828D
-	for <u-boot@archiver.kernel.org>; Wed,  7 Feb 2024 12:21:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69274C4828F
+	for <u-boot@archiver.kernel.org>; Wed,  7 Feb 2024 12:35:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DC1087CDC;
-	Wed,  7 Feb 2024 13:21:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=csie.org
+	by phobos.denx.de (Postfix) with ESMTP id AAD6987CBC;
+	Wed,  7 Feb 2024 13:35:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="IfuB84UA";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 54A6B87CAA; Wed,  7 Feb 2024 06:52:28 +0100 (CET)
-Received: from mail-oi1-f176.google.com (mail-oi1-f176.google.com
- [209.85.167.176])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id F3FE787CDC; Wed,  7 Feb 2024 13:35:36 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C08C080E9A
- for <u-boot@lists.denx.de>; Wed,  7 Feb 2024 06:52:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4B5ED878C9
+ for <u-boot@lists.denx.de>; Wed,  7 Feb 2024 13:35:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=csie.org
+ dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=wens213@gmail.com
-Received: by mail-oi1-f176.google.com with SMTP id
- 5614622812f47-3bfd27f6dc0so182067b6e.1
- for <u-boot@lists.denx.de>; Tue, 06 Feb 2024 21:52:24 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707285143; x=1707889943;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :reply-to:in-reply-to:references:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=PxuOuEjPzICS5t/zae+etigf0RY81XZQe7Z0CzIpfyw=;
- b=OyTkjbCoobhQL4J2Z2EUL6CElWLJJ4dFkRjF3s5LUmyC04rIGFvFMDBaOlicmwLPe4
- ZGDizqRa3/tOpnK7qdLcXQB7c6xMHA3F03f4T1SApzUBpevGM5xlCksqRgbMrJnfdefN
- OFOLYghRS/uxbnzggRXIJFLDGFhs+/mQYKfo0W1ryrq3zi46Z0QVTJsFjtATuLhXdT9o
- TWHm6hR2Y33dT8ZfubkXMWIZQunf4uZ5SHpZVDEPO6hqChXJDd3X9bsvSQJgzihJeFgd
- p31DjOXMF0Gavb6PaAtH2dwvU1Hux/ybCWY/3PS65Cp2vyFW0E8cTjDZC5ar55Rzgbgq
- EO9Q==
-X-Gm-Message-State: AOJu0Yy1GeUD4JytB2ecemTlQi9yK/cKora3YEEb38LR7wd82hY5d4av
- 6cjSr+TZ+lB7cg5he9O8TG15KKOg9fDaXZonHSAuyWWTATjnUPeEtUrIxzCp
-X-Google-Smtp-Source: AGHT+IEsUAsq/8r44bi1eRs0BG6nWaSVWGwRZxnwCbNPEqwS66XTj/NB+2gIRUSNLx8I6w4FuY4Vjw==
-X-Received: by 2002:a05:6808:398f:b0:3bf:d136:9d08 with SMTP id
- gq15-20020a056808398f00b003bfd1369d08mr6687424oib.2.1707285142998; 
- Tue, 06 Feb 2024 21:52:22 -0800 (PST)
-X-Forwarded-Encrypted: i=1;
- AJvYcCUhMHgTtojOwpu7ryIMe64dbPhco8laE2RLljHRVHLWuxSZ/YIZcK9zE2Y/2ew7VlJkbN/cIQIfZjUn6CZnnSvRPhExPw==
-Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com.
- [209.85.215.175]) by smtp.gmail.com with ESMTPSA id
- h4-20020aa786c4000000b006e05cb7fd1fsm531578pfo.164.2024.02.06.21.52.22
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 06 Feb 2024 21:52:22 -0800 (PST)
-Received: by mail-pg1-f175.google.com with SMTP id
- 41be03b00d2f7-5c229dabbb6so97897a12.0
- for <u-boot@lists.denx.de>; Tue, 06 Feb 2024 21:52:22 -0800 (PST)
-X-Received: by 2002:a17:90a:8d15:b0:296:181a:e991 with SMTP id
- c21-20020a17090a8d1500b00296181ae991mr1571627pjo.49.1707285142420; Tue, 06
- Feb 2024 21:52:22 -0800 (PST)
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id AEDB66182C;
+ Wed,  7 Feb 2024 12:35:32 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A16A0C433F1;
+ Wed,  7 Feb 2024 12:35:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1707309332;
+ bh=2GVtrH6hBu3utVrqUkbKaK+fT6Gq2lH5bnK7/2uXQpU=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=IfuB84UA5uvZJbt8hOQpOaIQy2OwWrhxGCxC0+Rt+1GZO3QKSazfFCRWij7EhL4MJ
+ aQh00RFRDNpW1HrcBrqHgXqIXvKDDAx8IcWaqD1y+Hn6garCoqcLSygF7icMmgIGsg
+ KSQEWfmVCAzazm5dUvSEWONaORsSZ3UidtzWHg82JnJmQw0pJW8aOw2qbfX6DjzKH8
+ NVklXZOW8bAvvg4SPyHjub+kxPa/dZPx6kBYFOS57OY93pE5waH270rz3F63jGkJVQ
+ yxT1IA4Q/LzSLQv6OlzmTo4KWpZ7rg/NXQR+3nJp+3fpAcSkxYwj7mxOcxnfUmEEWv
+ 1UoSMY1+di5Aw==
+Message-ID: <911d8755-d162-4987-852a-8ce060454a26@kernel.org>
+Date: Wed, 7 Feb 2024 14:35:26 +0200
 MIME-Version: 1.0
-References: <20240207000301.3270722-1-jonas@kwiboo.se>
- <20240207000301.3270722-5-jonas@kwiboo.se>
-In-Reply-To: <20240207000301.3270722-5-jonas@kwiboo.se>
-From: Chen-Yu Tsai <wens@csie.org>
-Date: Wed, 7 Feb 2024 13:52:11 +0800
-X-Gmail-Original-Message-ID: <CAGb2v64MC4MOgPUcJpoqP6VuMnRaVMKLkVBErVk=DU-y3nMTcw@mail.gmail.com>
-Message-ID: <CAGb2v64MC4MOgPUcJpoqP6VuMnRaVMKLkVBErVk=DU-y3nMTcw@mail.gmail.com>
-Subject: Re: [PATCH 04/15] rockchip: rk3328-roc-cc: Update defconfig
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>, 
- Loic Devulder <ldevulder@suse.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Wed, 07 Feb 2024 13:21:04 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4] remoteproc: uclass: Add methods to load firmware to
+ rproc and boot rproc
+To: MD Danish Anwar <danishanwar@ti.com>, "Anwar, Md Danish"
+ <a0501179@ti.com>, Max Krummenacher <max.krummenacher@toradex.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Dan Carpenter <dan.carpenter@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Nishanth Menon <nm@ti.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, srk@ti.com, Vignesh Raghavendra <vigneshr@ti.com>,
+ r-gunasekaran@ti.com
+References: <20240130063322.2345057-1-danishanwar@ti.com>
+ <e72403f9-a0aa-4286-97d2-456735fd3aac@kernel.org>
+ <8bc580b4-5faf-48f4-9d68-052fb9e114e8@ti.com>
+ <d0b4530d-b12a-4b2c-8171-35ca003d4234@kernel.org>
+ <c042c7a5-1561-4efb-b7c4-461bda1f6c36@ti.com>
+ <1646d8b2-7e0d-4716-956f-41b6f61f8626@kernel.org>
+ <9f3b093c-89fd-4f4c-abad-650c03cb8118@ti.com>
+ <3ddc45e4-e0d4-4ae7-90ed-b273b3c1ac09@kernel.org>
+ <2e16f56b-d022-4d19-a070-b099ae562e77@ti.com>
+Content-Language: en-US
+From: Roger Quadros <rogerq@kernel.org>
+In-Reply-To: <2e16f56b-d022-4d19-a070-b099ae562e77@ti.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,145 +79,315 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: wens@csie.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Feb 7, 2024 at 8:04=E2=80=AFAM Jonas Karlman <jonas@kwiboo.se> wrot=
-e:
->
-> Update defconfig for rk3328-roc-cc with new defaults.
->
-> Remove the SPL_DRIVERS_MISC=3Dy option, no misc driver is used in SPL.
->
-> Add CONFIG_SPL_FIT_SIGNATURE=3Dy to let SPL verify an auto generated hash
-> of FIT images. This help indicate if there is an issue loading any of
-> the images to DRAM or SRAM. Also add LEGACY_IMAGE_FORMAT=3Dy to keep
-> support for scripts.
->
-> Add ROCKCHIP_EFUSE=3Dy and remove NET_RANDOM_ETHADDR=3Dy, ethaddr and
-> eth1addr is set based on cpuid read from eFUSE.
-
-I wonder if it would make sense to enable ROCKCHIP_EFUSE or ROCKCHIP_OTP
-for the respective SoCs by default, either with "imply" under the SoC
-Kconfig options, or "default if XXX" under the driver Kconfig options?
-Not sure which is preferred.
-
-Same goes for CONFIG_MISC_INIT_R for actually generating the serial number
-and MAC addresses from the efuse/OTP.
-
-At least for RK3566 and RK3588 we are implying these options.
 
 
-ChenYu
+On 07/02/2024 09:15, MD Danish Anwar wrote:
+> Hi Roger
+> 
+> On 06/02/24 7:11 pm, Roger Quadros wrote:
+>>
+>>
+>> On 06/02/2024 07:31, MD Danish Anwar wrote:
+>>>
+>>>
+>>> On 05/02/24 6:07 pm, Roger Quadros wrote:
+>>>>
+>>>>
+>>>> On 05/02/2024 12:20, MD Danish Anwar wrote:
+>>>>>
+>>>>>
+>>>>> On 05/02/24 3:36 pm, Roger Quadros wrote:
+>>>>>>
+>>>>>>
+>>>>>> On 02/02/2024 18:40, Anwar, Md Danish wrote:
+>>>>>>> Hi Roger,
+>>>>>>>
+>>>>>>> On 2/2/2024 4:49 PM, Roger Quadros wrote:
+>>>>>>>>
+>>>>>>>>
+>>>>>>>> On 30/01/2024 08:33, MD Danish Anwar wrote:
+>>>>>>>>> Add APIs to set a firmware_name to a rproc and boot the rproc with the
+>>>>>>>>> same firmware.
+>>>>>>>>>
+>>>
+>>> <snip>
+>>>
+>>>>>>>
+>>>>>>>> How does caller know what firmware size to set to?
+>>>>>>>> This should already be private to the rproc as it knows 
+>>>>>>>> how large is its program memory.
+>>>>>>>>
+>>>>>>>
+>>>>>>> Caller is trying to boot the rproc with a firmware binary. Caller should
+>>>>>>> know the size of binary that it wants to load to rproc core. Caller will
+>>>>>>> specify the binary size to rproc_boot(). Based on the size provided by
+>>>>>>> caller, rproc_boot() will then allocate that much memory and call
+>>>>>>> request_firmware_into_buf() with the size and allocated buffer. If the
+>>>>>>> caller doesn't provide minimum size rproc_load() will fail.
+>>>>>>
+>>>>>> Caller only knows the filename. It need not know more details.
+>>>>>
+>>>>> Caller is trying to load a file of it's choice to a rproc. Caller should
+>>>>> know the size of file it is trying to load or atleast the max size that
+>>>>> the firmware file could be of.
+>>>>>
+>>>>>
+>>>>>> Also see my comment below about rproc_boot() API.
+>>>>>>
+>>>>>>>
+>>>>>>> rproc_load() calls respective driver ops, for example: pru_load().
+>>>>>>> pru_load() [1] API checks the required size of firmware to load by
+>>>>>>> casting the buffer into Elf32_Ehdr and Elf32_Phdr and returns error if
+>>>>>>> size provided by caller is less than this.
+>>>>>>>
+>>>>>>>
+>>>>>>> 	if (offset + filesz > size) {
+>>>>>>> 		dev_dbg(dev, "truncated fw: need 0x%x avail 0x%zx\n",
+>>>>>>> 			offset + filesz, size);
+>>>>>>> 		ret = -EINVAL;
+>>>>>>> 		break;
+>>>>>>> 	}
+>>>>>>>
+>>>>>>>>> + *
+>>>>>>>>> + * Boot a remote processor (i.e. load its firmware, power it on, ...).
+>>>>>>>>> + *
+>>>>>>>>> + * This function first loads the firmware set in the uclass pdata of Remote
+>>>>>>>>> + * processor to a buffer and then loads firmware to the remote processor
+>>>>>>>>> + * using rproc_load().
+>>>>>>>>> + *
+>>>>>>>>> + * Return: 0 on success, and an appropriate error value otherwise
+>>>>>>>>> + */
+>>>>>>>>> +int rproc_boot(struct udevice *rproc_dev, size_t fw_size);
+>>>>>>>>
+>>>>>>>> Was wondering if you need separate API for rproc_set_firmware or we can just
+>>>>>>>> pass firmware name as argument to rproc_boot()?
+>>>>>>>>
+>>>>>>>
+>>>>>>> Technically we can. But when we discussed this approach first in v1, you
+>>>>>>> had asked to keep the APIs similar to upstream linux. Upstream linux has
+>>>>>>> these two APIs so I kept it that way. If you want I can drop the first
+>>>>>>> API. Please let me know.
+>>>>>>
+>>>>>> Sure you can keep it as it is in Linux, but there, rproc_boot doesn't
+>>>>>> take fw_size argument. So wondering why you should have it in u-boot.
+>>>>>>
+>>>>>
+>>>>> For loading firmware to a rproc core in u-boot, it's first neccassry to
+>>>>> load the firmware into buffer and then load that buffer into rproc core
+>>>>> using rproc_load() API. Now to load the firmware to a buffer ther is an
+>>>>> API request_firmware_into_buf(). This API takes size of firmware as one
+>>>>> of it's argument. So in order to call this API from rproc_boot() we need
+>>>>> to pass fw_size to rproc_boot()
+>>>>>
+>>>>> Other u-boot drivers using request_firmware_into_buf() are also passing
+>>>>> size of firmware from their driver.
+>>>>
+>>>> But in your driver you didn't use size of firmware but some 64K
+>>>> https://lore.kernel.org/all/20240124064930.1787929-8-danishanwar@ti.com/
+>>>>
+>>>
+>>> Yes, in driver I am hardcoding the size to 64K. That's because I know
+>>> the size of ICSSG firmwares are less than 64K. Instead of hardcoding I
+>>
+>> What if you enable debugging symbols in the firmware file. Won't it exceed 64KB?
+>> It is not a good idea to assume any firmware file size as it will eventually
+>> break sometime in the future and will be a pain to debug.
+>>
+>>> can also define macro or provide a config option where we set the size
+>>> and the driver will read the size from the config and call rproc_boot()
+>>> with size.
+>>>
+>>> For example, fm.c driver reads the size from config option
+>>> CONFIG_SYS_QE_FMAN_FW_LENGTH [1] and calls request_firmware_into_buf()
+>>>
+>>> [1]
+>>> https://elixir.bootlin.com/u-boot/latest/source/drivers/net/fm/fm.c#L458
+>>>
+>>>> So neither does the caller have a clue of firmware size?
+>>>>
+>>>>>
+>>>>> If rproc_boot() doesn't take fw_size as argument then within
+>>>>> rproc_boot() we need to figure out the fw_size before calling
+>>>>> request_firmware_into_buf().
+>>>>>
+>>>>> If we don't know the size / maximum size of the firmware to load, how
+>>>>> will we call request_firmware_into_buf(). Someone has to tell
+>>>>> request_firmware_into_buf() the size of firmware. I am expecting that to
+>>>>> be the caller. Do you have any other way of getting the firmware size
+>>>>> before request_firmware_into_buf() is called?
+>>>>
+>>>> /**
+>>>>  * request_firmware_into_buf - Load firmware into a previously allocated buffer.
+>>>>  * @dev: An instance of a driver.
+>>>>  * @name: Name of firmware file.
+>>>>  * @buf: Address of buffer to load firmware into.
+>>>>  * @size: Size of buffer.
+>>>>  * @offset: Offset of a file for start reading into buffer.
+>>>>
+>>>> It needs size of pre-allocated buffer which can be smaller than file size.
+>>>> It also has the option of offset. So you can load portions of the file limited
+>>>> by buffer size.
+>>>>
+>>>> My suggestion is that Remoteproc layer should take care of how much buffer
+>>>> to allocate and pass that buffer size to request_firmware_into_buf().
+>>>> You are doing the malloc here itself anyways.
+>>>>
+>>>
+>>> But how would the remoteproc driver know how much buffer it needs to
+>>> allocate before calling request_firmware_into_buf().
+>>
+>> Only the filesystem driver knows what exactly is the firmware file size.
+>> fs_size() API can be used for that.
+>>
+> 
+> To use fs_size() we first need to call fs_set_blk_dev() to set the
+> storage interface, device partition and fs_type. eg.
+> fs_set_blk_dev("mmc, "1:2", FS_TYPE_ANY)
+> 
+> Since we are setting the envs for storage_interface and partition I'll
+> use the envs to call fs_set_blk_dev()
+> 
+> This is how rproc_boot() will look now.
+> 
+> int rproc_boot(struct udevice *rproc_dev)
+> {
+> 	struct dm_rproc_uclass_pdata *uc_pdata;
+> 	char *storage_interface, *dev_part;
+> 	struct udevice *fs_loader;
+> 	int core_id, ret = 0;
+> 	char *firmware;
+> 	loff_t fw_size;
+> 	void *addr;
+> 
+> 	if (!rproc_dev)
+> 		return -EINVAL;
+> 
+> 	uc_pdata = dev_get_uclass_plat(rproc_dev);
+> 	if (!uc_pdata)
+> 		return -EINVAL;
+> 
+> 	core_id = dev_seq(rproc_dev);
+> 	firmware = uc_pdata->fw_name;
+> 
+> 	if (!firmware) {
+> 		debug("No firmware set for rproc core %d\n", core_id);
+> 		return -EINVAL;
+> 	}
+> 
+> 	/* Initialize all rproc cores */
+> 	if (!rproc_is_initialized()) {
+> 		ret = rproc_init();
+> 		if (ret) {
+> 			debug("rproc_init() failed: %d\n", ret);
+> 			return ret;
+> 		}
+> 	}
+> 
+> 	/* Loading firmware to a given address */
+> 	ret = get_fs_loader(&fs_loader);
+> 	if (ret) {
+> 		debug("could not get fs loader: %d\n", ret);
+> 		return ret;
+> 	}
+> 
+> 	storage_interface = env_get("fw_storage_interface");
+> 	dev_part = env_get("fw_dev_part");
+> 
+> 	if (storage_interface && dev_part) {
+> 		ret = fs_set_blk_dev(storage_interface, dev_part, 	FS_TYPE_ANY);
+> 	} else {
+> 		debug("could not get env variables to load firmware\n");
+> 		return -EINVAL;
+> 	}
 
-> Add SPL_DM_SEQ_ALIAS=3Dy option to use alias sequence number in SPL.
->
-> Add DM_ETH_PHY=3Dy, PHY_MOTORCOMM=3Dy and PHY_REALTEK=3Dy to support comm=
-on
-> ethernet PHYs.
->
-> Add RNG_ROCKCHIP=3Dy and DM_RNG=3Dy options to support the onboard random
-> generator.
->
-> Also add missing device tree file to MAINTAINERS and add myself as a
-> reviewer for this board.
->
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> ---
->  board/rockchip/evb_rk3328/MAINTAINERS | 2 ++
->  configs/roc-cc-rk3328_defconfig       | 9 +++++++--
->  doc/board/rockchip/rockchip.rst       | 2 +-
->  3 files changed, 10 insertions(+), 3 deletions(-)
->
-> diff --git a/board/rockchip/evb_rk3328/MAINTAINERS b/board/rockchip/evb_r=
-k3328/MAINTAINERS
-> index 419bc8ded375..09488eaf083f 100644
-> --- a/board/rockchip/evb_rk3328/MAINTAINERS
-> +++ b/board/rockchip/evb_rk3328/MAINTAINERS
-> @@ -41,8 +41,10 @@ F:      arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boo=
-t.dtsi
->  ROC-RK3328-CC
->  M:      Loic Devulder <ldevulder@suse.com>
->  M:      Chen-Yu Tsai <wens@csie.org>
-> +R:      Jonas Karlman <jonas@kwiboo.se>
->  S:      Maintained
->  F:      configs/roc-cc-rk3328_defconfig
-> +F:      arch/arm/dts/rk3328-roc-cc.dts
->  F:      arch/arm/dts/rk3328-roc-cc-u-boot.dtsi
->
->  ROCK64-RK3328
-> diff --git a/configs/roc-cc-rk3328_defconfig b/configs/roc-cc-rk3328_defc=
-onfig
-> index 4ac3c9403b02..7d81a715ef25 100644
-> --- a/configs/roc-cc-rk3328_defconfig
-> +++ b/configs/roc-cc-rk3328_defconfig
-> @@ -15,7 +15,6 @@ CONFIG_ROCKCHIP_RK3328=3Dy
->  CONFIG_TPL_ROCKCHIP_COMMON_BOARD=3Dy
->  CONFIG_TPL_LIBCOMMON_SUPPORT=3Dy
->  CONFIG_TPL_LIBGENERIC_SUPPORT=3Dy
-> -CONFIG_SPL_DRIVERS_MISC=3Dy
->  CONFIG_SPL_STACK_R_ADDR=3D0x600000
->  CONFIG_SPL_STACK=3D0x400000
->  CONFIG_TPL_SYS_MALLOC_F_LEN=3D0x800
-> @@ -26,7 +25,9 @@ CONFIG_DEBUG_UART=3Dy
->  # CONFIG_ANDROID_BOOT_IMAGE is not set
->  CONFIG_FIT=3Dy
->  CONFIG_FIT_VERBOSE=3Dy
-> +CONFIG_SPL_FIT_SIGNATURE=3Dy
->  CONFIG_SPL_LOAD_FIT=3Dy
-> +CONFIG_LEGACY_IMAGE_FORMAT=3Dy
->  CONFIG_DEFAULT_FDT_FILE=3D"rockchip/rk3328-roc-cc.dtb"
->  # CONFIG_DISPLAY_CPUINFO is not set
->  CONFIG_DISPLAY_BOARDINFO_LATE=3Dy
-> @@ -58,8 +59,8 @@ CONFIG_TPL_OF_PLATDATA=3Dy
->  CONFIG_ENV_IS_IN_MMC=3Dy
->  CONFIG_SYS_RELOC_GD_ENV_ADDR=3Dy
->  CONFIG_SYS_MMC_ENV_DEV=3D1
-> -CONFIG_NET_RANDOM_ETHADDR=3Dy
->  CONFIG_TPL_DM=3Dy
-> +CONFIG_SPL_DM_SEQ_ALIAS=3Dy
->  CONFIG_REGMAP=3Dy
->  CONFIG_SPL_REGMAP=3Dy
->  CONFIG_TPL_REGMAP=3Dy
-> @@ -73,9 +74,11 @@ CONFIG_FASTBOOT_CMD_OEM_FORMAT=3Dy
->  CONFIG_ROCKCHIP_GPIO=3Dy
->  CONFIG_SYS_I2C_ROCKCHIP=3Dy
->  CONFIG_MISC=3Dy
-> +CONFIG_ROCKCHIP_EFUSE=3Dy
->  CONFIG_MMC_DW=3Dy
->  CONFIG_MMC_DW_ROCKCHIP=3Dy
->  CONFIG_PHY_REALTEK=3Dy
-> +CONFIG_DM_ETH_PHY=3Dy
->  CONFIG_PHY_GIGE=3Dy
->  CONFIG_ETH_DESIGNWARE=3Dy
->  CONFIG_GMAC_ROCKCHIP=3Dy
-> @@ -95,6 +98,8 @@ CONFIG_PWM_ROCKCHIP=3Dy
->  CONFIG_RAM=3Dy
->  CONFIG_SPL_RAM=3Dy
->  CONFIG_TPL_RAM=3Dy
-> +CONFIG_DM_RNG=3Dy
-> +CONFIG_RNG_ROCKCHIP=3Dy
->  CONFIG_BAUDRATE=3D1500000
->  CONFIG_DEBUG_UART_SHIFT=3D2
->  CONFIG_SYS_NS16550_MEM32=3Dy
-> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchi=
-p.rst
-> index de2195deadca..99f48b6d6fa5 100644
-> --- a/doc/board/rockchip/rockchip.rst
-> +++ b/doc/board/rockchip/rockchip.rst
-> @@ -60,8 +60,8 @@ List of mainline supported Rockchip boards:
->       - ODROID-GO Advance (odroid-go2)
->  * rk3328
->       - Rockchip Evb-RK3328 (evb-rk3328)
-> +     - Firefly ROC-RK3328-CC (roc-cc-rk3328)
->       - Pine64 Rock64 (rock64-rk3328)
-> -     - Firefly-RK3328 (roc-cc-rk3328)
->       - Radxa Rockpi E (rock-pi-e-rk3328)
->  * rk3368
->       - GeekBox (geekbox)
-> --
-> 2.43.0
->
+I'm not very sure about this as we are using firmware loader
+specific environment variables outside the firmware loader driver.
+
+I can see 2 solutions here:
+
+1) ask firmware loader driver to tell us the firmware file size.
+fw_get_filesystem_firmware() also deals with UBI filesystem.
+
+2) use a large enough buffer whose size is set in Kconfig.
+
+Tom, any insights?
+
+> 
+> 	if (ret) {
+> 		debug("fs_set_blk_dev failed %d\n", ret);
+> 		return ret;
+> 	}
+> 
+> 	ret = fs_size(firmware, &fw_size);
+> 	if (ret) {
+> 		debug("could not get firmware size %s: %d\n", firmware, ret);
+> 		return ret;
+> 	}
+> 
+> 	addr = malloc(fw_size);
+> 	if (!addr)
+> 		return -ENOMEM;
+> 
+> 	ret = request_firmware_into_buf(fs_loader, firmware, addr, fw_size, 0);
+> 	if (ret < 0) {
+> 		debug("could not request %s: %d\n", firmware, ret);
+> 		goto free_buffer;
+> 	}
+> 
+> 	ret = rproc_load(core_id, (ulong)addr, ret);
+> 	if (ret) {
+> 		debug("failed to load %s to rproc core %d from addr 0x%08lX err %d\n",
+> 		      uc_pdata->fw_name, core_id, (ulong)addr, ret);
+> 		goto free_buffer;
+> 	}
+> 
+> 	ret = rproc_start(core_id);
+> 	if (ret)
+> 		debug("failed to start rproc core %d\n", core_id);
+> 
+> free_buffer:
+> 	free(addr);
+> 	return ret;
+> }
+> 
+> Please let me know if this looks ok. Without calling fs_set_blk_dev()
+> first, fs_size() results in error.
+> 
+> 
+>>>
+>>>>>
+>>>>>>>
+>>>>>>>>>  #else
+>>>>>>>>>  static inline int rproc_init(void) { return -ENOSYS; }
+>>>>>>>>>  static inline int rproc_dev_init(int id) { return -ENOSYS; }
+>>>>>>>>> @@ -744,6 +775,10 @@ static inline int rproc_elf_load_rsc_table(struct udevice *dev, ulong fw_addr,
+>>>>>>>>>  					   ulong fw_size, ulong *rsc_addr,
+>>>>>>>>>  					   ulong *rsc_size)
+>>>>>>>>>  { return -ENOSYS; }
+>>>>>>>>> +static inline int rproc_set_firmware(struct udevice *rproc_dev, const char *fw_name)
+>>>>>>>>> +{ return -ENOSYS; }
+>>>>>>>>> +static inline int rproc_boot(struct udevice *rproc_dev, size_t fw_size)
+>>>>>>>>> +{ return -ENOSYS; }
+>>>>>>>>>  #endif
+>>>>>>>>>  
+>>>>>>>>>  #endif	/* _RPROC_H_ */
+>>>>>>>>
+>>>>>>>
+>>>>>>> [1]
+>>>>>>> https://elixir.bootlin.com/u-boot/latest/source/drivers/remoteproc/pru_rproc.c#L324
+>>>>>>>
+>>>>>>
+>>>>>
+>>>>
+>>>
+>>
+> 
+
+-- 
+cheers,
+-roger
