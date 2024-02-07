@@ -4,56 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 221B9C4828F
-	for <u-boot@archiver.kernel.org>; Wed,  7 Feb 2024 13:07:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D7D3C4828F
+	for <u-boot@archiver.kernel.org>; Wed,  7 Feb 2024 13:12:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5667F87C9A;
-	Wed,  7 Feb 2024 14:07:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 6E78E87CDC;
+	Wed,  7 Feb 2024 14:12:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1707311228;
-	bh=VhMUZOss3/wro///vgSAm/j9d+wcXALUAV6emBiQa5c=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=Np16lUY4FCHG3ivC28Tbah6HtmB5zxr/hseaDuMWNpQSk80Y/yxWuhiQeUbco6XAB
-	 5KVDuwOkgjZ4Zj1w59ab/8PH4BNGFcRlNxeT0k6cG+GRXYLl1w3MfeyvzhyTXzJb2K
-	 ImrebXjhXAoeydhZhZcWwxMDWUDThXwueM0M+88aWHxcXQf6sb/OGMipksID9dOBPQ
-	 rZjg45bHn2TIRcPK4ptxFo7dMw2DrXPdZs2pM0h90UpclPeq/+nf9LQoYppWmJSON6
-	 pggVi2JrE3VoPd3KO9+Nt+t92hTeYbk9berI7a0TsxrwQe+1zrvoER/97aMXi+2llH
-	 kmFWoydxfglkw==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="A992Ygn2";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id BBC9087CE6; Wed,  7 Feb 2024 14:12:10 +0100 (CET)
+Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 24E4187C58;
- Wed,  7 Feb 2024 14:07:06 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1707311226;
- bh=VhMUZOss3/wro///vgSAm/j9d+wcXALUAV6emBiQa5c=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=EA9OFl6no3QvBL8f/8dEgiM9e3GRcJdu0n0exzvrDoHu/4eCeIadrjPhNseadyq7U
- IAZ6QURvy7y553L4FLkC5gBATbXGdMM7L2l2AMz6ymclynCPOi+CDyrcEqnKL+T0zP
- gSJz7kSGqVeIUQjsaFNuPeKUcSo2CcRBI2/496qTA0qpo9m1RaaO+swQwMzqsBL4ws
- iqA9SbiaZl2Jh7wJCOGSeW2+cNA5cweC/SDaiXT6lLwIZDqq3K1q3Smg82tZNtGsg8
- yTclIzDFxfIP0NKeXLQWlCh4eHvd4IJBTyEnGpqLybyKaOr6PGlilr/xYh4v0r+YIN
- wFeB++Tr5CA5w==
-Message-ID: <32db6dba-d515-4077-9d72-d77a7f431335@denx.de>
-Date: Wed, 7 Feb 2024 14:03:41 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id D42E287C9A
+ for <u-boot@lists.denx.de>; Wed,  7 Feb 2024 14:12:08 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=276722ad61=patrick.delaunay@foss.st.com
+Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
+ 417BEKeI002836; Wed, 7 Feb 2024 14:12:07 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding:content-type; s=selector1; bh=Aq1J7L9
+ DSppoDJjHI2LFS8ZtQgG1yTMyfYz1H4TO8eg=; b=A992Ygn2JFcemmGa9ZPLczs
+ 68eXDU89rE5bwJA1CnezmzoXc59I+3y2uzXSvENs2fOWUas2otmyjTe5OcmYKxqE
+ X4OB94tognUq0x1TH0l8nbr5DlWaCVcgEUVlVS7eke9xSI6t7xka9z+WWdXrrIsK
+ VDG3yXFyVlD4H03nuzj1WFbYsrRIbONEcYiXluD8WSKMwzdg7n8k+mrIQIhKiyr4
+ b1xd5ApxLvAlJC8Y1hYhFyv/6xrc4Nak3LR7yiKvFJhUuBy1qEHtlhM6uiI1agBb
+ ygKyVQtS7LYAGS30BLXNrOPBqULglCXCO6//6Ih0MSPjPtZTqNnH8yMC2gE+Cpw=
+ =
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3w21ap5nxu-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 07 Feb 2024 14:12:07 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id B9A04100056;
+ Wed,  7 Feb 2024 14:12:05 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id AD530247040;
+ Wed,  7 Feb 2024 14:12:05 +0100 (CET)
+Received: from localhost (10.201.22.165) by SHFDAG1NODE3.st.com (10.75.129.71)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Wed, 7 Feb
+ 2024 14:12:05 +0100
+From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+To: <u-boot@lists.denx.de>
+CC: Patrick Delaunay <patrick.delaunay@foss.st.com>, Patrice Chotard
+ <patrice.chotard@foss.st.com>, Tom Rini <trini@konsulko.com>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: [PATCH] stm32mp: cmd_stm32prog: add dependencies with
+ USB_GADGET_DOWNLOAD
+Date: Wed, 7 Feb 2024 14:12:01 +0100
+Message-ID: <20240207141154.1.If0aa2d32c2ffde32ed1d87ab8a088db67bc2d25c@changeid>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [FIX PATCH v1] Fix: common: usb_hub: Reset only USB3.0 hub
-To: Shantur Rathore <i@shantur.com>, u-boot@lists.denx.de
-Cc: andre.przywara@arm.com, dsimic@manjaro.org,
- Hector Martin <marcan@marcan.st>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-References: <20240207102327.35125-1-i@shantur.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240207102327.35125-1-i@shantur.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.201.22.165]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-02-07_04,2024-01-31_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,40 +88,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/7/24 11:23, Shantur Rathore wrote:
-> USB 3.0 spec requires hub to reset device while
-> enumeration. Some USB 2.0 hubs / devices don't
-> handle this well and after implementation of
-> reset some USB 2.0 disks weren't detected on
-> Allwinner based boards.
-> 
-> Resetting only when hub is USB 3.0 fixes it.
+This patch avoids compilation issue when CONFIG_USB_GADGET is deactivated
+in defconfig, with undefined reference to run_usb_dnl_gadget and to
+g_dnl_set_product.
 
-It would be good to include as many details about the faulty hardware in 
-the commit message as possible, so that when someone else runs into 
-this, they would have all that information available.
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+---
 
-> Tested-by: Andre Przywara <andre.przywara@arm.com>
-> 
-> Signed-off-by: Shantur Rathore <i@shantur.com>
-> ---
-> 
->   common/usb_hub.c | 6 ++++--
->   1 file changed, 4 insertions(+), 2 deletions(-)
-> 
-> diff --git a/common/usb_hub.c b/common/usb_hub.c
-> index 3fb7e14d10..2e054eb935 100644
-> --- a/common/usb_hub.c
-> +++ b/common/usb_hub.c
-> @@ -174,8 +174,10 @@ static void usb_hub_power_on(struct usb_hub_device *hub)
->   
->   	debug("enabling power on all ports\n");
->   	for (i = 0; i < dev->maxchild; i++) {
-> -		usb_set_port_feature(dev, i + 1, USB_PORT_FEAT_RESET);
-> -		debug("Reset : port %d returns %lX\n", i + 1, dev->status);
-> +		if (usb_hub_is_superspeed(dev)) {
+ arch/arm/mach-stm32mp/cmd_stm32prog/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-Should this condition be "all which are lower than superspeed" instead , 
-so when the next generation of USB comes, this problem won't trigger ?
+diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/Kconfig b/arch/arm/mach-stm32mp/cmd_stm32prog/Kconfig
+index 8f91db4b46b9..589276282e44 100644
+--- a/arch/arm/mach-stm32mp/cmd_stm32prog/Kconfig
++++ b/arch/arm/mach-stm32mp/cmd_stm32prog/Kconfig
+@@ -17,6 +17,7 @@ config CMD_STM32PROG
+ config CMD_STM32PROG_USB
+ 	bool "support stm32prog over USB"
+ 	depends on CMD_STM32PROG
++	depends on USB_GADGET_DOWNLOAD
+ 	default y
+ 	help
+ 		activate the command "stm32prog usb" for STM32MP soc family
+-- 
+2.25.1
 
-What does Linux do btw ?
