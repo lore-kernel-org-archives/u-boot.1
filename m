@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF850C4828F
-	for <u-boot@archiver.kernel.org>; Wed,  7 Feb 2024 10:10:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1025C4828D
+	for <u-boot@archiver.kernel.org>; Wed,  7 Feb 2024 10:24:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EBE7187CEA;
-	Wed,  7 Feb 2024 11:10:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=foundries.io
+	by phobos.denx.de (Postfix) with ESMTP id 3EC6D87BC3;
+	Wed,  7 Feb 2024 11:24:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=foundries.io header.i=@foundries.io header.b="i8tD4pvd";
+	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="nHCVqDpl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E1BAE87CF6; Wed,  7 Feb 2024 11:10:51 +0100 (CET)
-Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
- [IPv6:2a00:1450:4864:20::229])
+ id 6F566879F2; Wed,  7 Feb 2024 11:24:39 +0100 (CET)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 98433878E2
- for <u-boot@lists.denx.de>; Wed,  7 Feb 2024 11:10:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=foundries.io
+ by phobos.denx.de (Postfix) with ESMTPS id 9157F87C9A
+ for <u-boot@lists.denx.de>; Wed,  7 Feb 2024 11:24:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=igor.opaniuk@foundries.io
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-2d0a0e40672so4398491fa.0
- for <u-boot@lists.denx.de>; Wed, 07 Feb 2024 02:10:49 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=shantur.com
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-3394b892691so243629f8f.1
+ for <u-boot@lists.denx.de>; Wed, 07 Feb 2024 02:24:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=foundries.io; s=google; t=1707300649; x=1707905449; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=FuqDReu/h48FqaZAJ5gWRQ3JLtYvpvYc3P2aREsiXGQ=;
- b=i8tD4pvdTSSh2qUmRFUe2yO3IJv58wIsTJgY34y7X7IlVFq/x5ptPfz6S0f1DzXmsL
- KBFrc0JOzeUqjDlP8J8/xBAtRuC0VVadZxBC+ubTdxh6iOdkMuoOoBg3vNz7hYfAXN/h
- GJClq06a1iXC0YpNdEwgM5BARcCdkOAYOcMLazvDcYggJoDr5p8kY+zxgpoQ7pvQfaki
- sEPml0SYV8+7W4d2L4ThGQyEuHmw2VU2fRQIGl3ne2NE6+VeXIvNKnom33OkHWfywGfK
- KPUQtNCPJVLZ94rNL+murTNVORtYkL/4O1KT0+f0l2yyL7BNyPfX3tZKFPqkZIQAY9uo
- oKnA==
+ d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1707301476; x=1707906276;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=qB3UVRje0pvHok6Yl1XNRFfmX7JHLLcOEjdFn+Y/2sg=;
+ b=nHCVqDplP9JjU7TWiQwktEw8SRUC23XdQScyLSSF9KciEm/VXpueuh1NVvhMUKIC3+
+ u2zjWtvdDqaTdQIH/L5NH8d2Gp1sPZdpwj3XA49p86W0PsUfbXNI/2tUMvTuP7dSGBhY
+ SM5gPpaZewyqO9lNJCDevehKjh1I3F+CnrjTH7hWeZWiUGgx8wiJiuoLEL7S3uvqV5sh
+ qdpdWMd5YIzXDHIZ4gRvC2wBiJ5iSrbN5RtIHwWpWldMF7XddsKIVghNMgKvrbboiQGm
+ LcHbb3sZWWgd8J/2YJ9u874yeAQi/pSi/HblL7VxzJbkkKaHB0or5cfDwYvLn3X4XmKm
+ osCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707300649; x=1707905449;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=FuqDReu/h48FqaZAJ5gWRQ3JLtYvpvYc3P2aREsiXGQ=;
- b=ij7DpNyQV88/805EcZm5gwl5+haxyr9frYrHjrE62SZhIClrmvpa3t5HpJ/KumwasP
- iOkF7v1sCItTsMLdcOZ5ZMxrV1x5CNtMwMRMK70EUCThgMatc2RHlIeUJI7vlbAECBR/
- Nkv31jg1hKui+ToNb5wEvXQ8UootaWdUjz9UcoCb7vk3Y4OxjUQ6D6taNDw/TH/oznQI
- 9cOaU12VCuNCqFMUTZCMT6vyLU+yORpOL09Ezk8Ku4tuzkENB8pioAM9pT2E0V2Fxk+w
- O1CmjB5R9g86QTJkBxU3Fi7VjeTKWfUigyzOc+NUUrZovu13dI2u0azKDMDRQ2txssi3
- 4fCA==
-X-Gm-Message-State: AOJu0YwgJaiZLwDKqEPp5v8GHpGRo8ET/l1AcqhwacMQgw0Tc4Rc561c
- u6Mqu7qjvIKs9LZu6Vyi7+oSTAHbSLVNwQOweaOrx1AnEGZJ20tZzBAP7knMnIfQav3FtSULZzu
- 8li7WjR4Kp4cYNAF1ZJj8/iuXH+vqBit7aWGtYSezuQ4nvCMlnqc=
-X-Google-Smtp-Source: AGHT+IEaX/0SwzgVD+YQbNMD7DYt1vuD96hym+U4/MyMZs81j+w2qxpt4+RHirPL8U4NFexfS1UjHxkMWkp2Oe6rr3s=
-X-Received: by 2002:a2e:95d3:0:b0:2d0:af6e:5cb4 with SMTP id
- y19-20020a2e95d3000000b002d0af6e5cb4mr1931902ljh.16.1707300648895; Wed, 07
- Feb 2024 02:10:48 -0800 (PST)
+ d=1e100.net; s=20230601; t=1707301476; x=1707906276;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=qB3UVRje0pvHok6Yl1XNRFfmX7JHLLcOEjdFn+Y/2sg=;
+ b=o0OqllFy8yMYFw/cm+jZrHspjtKr01ubBDRqKwYIAOR3IXhxEgkMCHI/1/7dCoTFM6
+ fdyqUkojiu+EdvUke4UMRrxM/qqMA0dhaDk63bde8C/ICXHNiT+9RVzNDcBceWN9sH63
+ xAJVyhFoVW3zfiO/SMIFXXwzfHnBUZKTWK4Xnkuf9YSmkERaQbJTCZ/AO0Gjc6SCzNIh
+ kbZH9kpflI1ZfEj6knHqEVrgk+i+Fbb241bvEIQstJ5RrmrxYq66WSG9oDvCi74niIby
+ fpywksZw+Wdq92gQLxhSmD3wqL7GWidpW6PzjUP5BJD5ZH4tptL2FnEeZa2zYkh/cPZM
+ AX5g==
+X-Gm-Message-State: AOJu0YyN6C0euLwJzQoWa3lMqPGkr7LRKk+Eacko3xplbxha5WWuy5bw
+ 4Lmg92UuxoWnnR8iHjMO1VVYdM9Sflze1y9l+C+rZstmhSRu3GziaT6Q2i7Ys6N2P0Um51K7YKA
+ D
+X-Google-Smtp-Source: AGHT+IEaURd3lCzbXli4pZdAswIwHfwGRLcMhG3tJui1wLRWP3/eBMI4fw8NVQidBJSTlVNzQ54MxQ==
+X-Received: by 2002:a5d:4112:0:b0:33b:1a58:c70d with SMTP id
+ l18-20020a5d4112000000b0033b1a58c70dmr3130176wrp.26.1707301476539; 
+ Wed, 07 Feb 2024 02:24:36 -0800 (PST)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUe+ls+dq+DohsxtlzPl/BbqkZQYOpvND0x2UNR0psMVE/r6Aho/JnridYnAuSW4cZypjCt6wATRhFK1Nas3CPRmBjROIRsubJMqGeLRyx/EYGtkB0v85FMAwEjuQRqTdeWkT9L9QjrLb2k/baw2jUBcIfnSR5U6oKS8LBQMuy9ulN0p5+nnEAMQPuoJeOamK3SB62vLccf8w==
+Received: from localhost.localdomain (host-212-159-138-247.static.as13285.net.
+ [212.159.138.247]) by smtp.gmail.com with ESMTPSA id
+ l1-20020a5d5601000000b0033b406bc689sm1137790wrv.75.2024.02.07.02.24.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 07 Feb 2024 02:24:36 -0800 (PST)
+From: Shantur Rathore <i@shantur.com>
+To: u-boot@lists.denx.de
+Cc: andre.przywara@arm.com, dsimic@manjaro.org,
+ Shantur Rathore <i@shantur.com>, Hector Martin <marcan@marcan.st>,
+ Marek Vasut <marex@denx.de>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [FIX PATCH v1] Fix: common: usb_hub: Reset only USB3.0 hub
+Date: Wed,  7 Feb 2024 10:23:27 +0000
+Message-Id: <20240207102327.35125-1-i@shantur.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-References: <20240202002448.1116407-1-afd@ti.com>
- <20240202002448.1116407-2-afd@ti.com>
-In-Reply-To: <20240202002448.1116407-2-afd@ti.com>
-From: Igor Opaniuk <igor.opaniuk@foundries.io>
-Date: Wed, 7 Feb 2024 11:10:37 +0100
-Message-ID: <CAL6CDMHMJWkVv9J1BjeGhATtjRPzk6BRZg8SCBMPMjWOsBgJQw@mail.gmail.com>
-Subject: Re: [PATCH 2/6] arm: mach-k3: Move disable_linefill_optimization()
- into R5 directory
-To: Andrew Davis <afd@ti.com>
-Cc: Neha Malcom Francis <n-francis@ti.com>,
- Vignesh Raghavendra <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,126 +94,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andrew,
+USB 3.0 spec requires hub to reset device while
+enumeration. Some USB 2.0 hubs / devices don't
+handle this well and after implementation of
+reset some USB 2.0 disks weren't detected on
+Allwinner based boards.
 
-On Fri, Feb 2, 2024 at 1:26=E2=80=AFAM Andrew Davis <afd@ti.com> wrote:
->
-> The disable_linefill_optimization() function is only ever loaded by the
-> R5 core, move the code into the R5 directory.
->
-> Signed-off-by: Andrew Davis <afd@ti.com>
-> ---
->  arch/arm/mach-k3/common.c    | 25 -------------------------
->  arch/arm/mach-k3/r5/Makefile |  1 +
->  arch/arm/mach-k3/r5/common.c | 35 +++++++++++++++++++++++++++++++++++
->  3 files changed, 36 insertions(+), 25 deletions(-)
->  create mode 100644 arch/arm/mach-k3/r5/common.c
->
-> diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
-> index f411366778f..5d53efed85b 100644
-> --- a/arch/arm/mach-k3/common.c
-> +++ b/arch/arm/mach-k3/common.c
-> @@ -453,31 +453,6 @@ void board_prep_linux(struct bootm_headers *images)
->  }
->  #endif
->
-> -#ifdef CONFIG_CPU_V7R
-> -void disable_linefill_optimization(void)
-> -{
-> -       u32 actlr;
-> -
-> -       /*
-> -        * On K3 devices there are 2 conditions where R5F can deadlock:
-> -        * 1.When software is performing series of store operations to
-> -        *   cacheable write back/write allocate memory region and later
-> -        *   on software execute barrier operation (DSB or DMB). R5F may
-> -        *   hang at the barrier instruction.
-> -        * 2.When software is performing a mix of load and store operatio=
-ns
-> -        *   within a tight loop and store operations are all writing to
-> -        *   cacheable write back/write allocates memory regions, R5F may
-> -        *   hang at one of the load instruction.
-> -        *
-> -        * To avoid the above two conditions disable linefill optimizatio=
-n
-> -        * inside Cortex R5F.
-> -        */
-> -       asm("mrc p15, 0, %0, c1, c0, 1" : "=3Dr" (actlr));
-> -       actlr |=3D (1 << 13); /* Set DLFO bit  */
-> -       asm("mcr p15, 0, %0, c1, c0, 1" : : "r" (actlr));
-> -}
-> -#endif
-> -
->  static void remove_fwl_regions(struct fwl_data fwl_data, size_t num_regi=
-ons,
->                                enum k3_firewall_region_type fwl_type)
->  {
-> diff --git a/arch/arm/mach-k3/r5/Makefile b/arch/arm/mach-k3/r5/Makefile
-> index b99199d3374..8ad86eb2798 100644
-> --- a/arch/arm/mach-k3/r5/Makefile
-> +++ b/arch/arm/mach-k3/r5/Makefile
-> @@ -9,6 +9,7 @@ obj-$(CONFIG_SOC_K3_J721S2) +=3D j721s2/
->  obj-$(CONFIG_SOC_K3_AM625) +=3D am62x/
->  obj-$(CONFIG_SOC_K3_AM62A7) +=3D am62ax/
->
-> +obj-y +=3D common.o
->  obj-y +=3D lowlevel_init.o
->  obj-y +=3D r5_mpu.o
->
-> diff --git a/arch/arm/mach-k3/r5/common.c b/arch/arm/mach-k3/r5/common.c
-> new file mode 100644
-> index 00000000000..ef81f50c6c7
-> --- /dev/null
-> +++ b/arch/arm/mach-k3/r5/common.c
-> @@ -0,0 +1,35 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * K3: R5 Common Architecture initialization
-> + *
-> + * Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.co=
-m/
-> + */
-> +
-> +#include <linux/types.h>
-> +#include <asm/hardware.h>
-> +#include <asm/io.h>
-> +
-> +#include "../common.h"
-> +
-> +void disable_linefill_optimization(void)
-> +{
-> +       u32 actlr;
-> +
-> +       /*
-> +        * On K3 devices there are 2 conditions where R5F can deadlock:
-> +        * 1.When software is performing series of store operations to
-> +        *   cacheable write back/write allocate memory region and later
-> +        *   on software execute barrier operation (DSB or DMB). R5F may
-> +        *   hang at the barrier instruction.
-> +        * 2.When software is performing a mix of load and store operatio=
-ns
-> +        *   within a tight loop and store operations are all writing to
-> +        *   cacheable write back/write allocates memory regions, R5F may
-> +        *   hang at one of the load instruction.
-> +        *
-> +        * To avoid the above two conditions disable linefill optimizatio=
-n
-> +        * inside Cortex R5F.
-> +        */
-> +       asm("mrc p15, 0, %0, c1, c0, 1" : "=3Dr" (actlr));
-> +       actlr |=3D (1 << 13); /* Set DLFO bit  */
-> +       asm("mcr p15, 0, %0, c1, c0, 1" : : "r" (actlr));
-> +}
-> --
-> 2.39.2
->
+Resetting only when hub is USB 3.0 fixes it.
 
-Reviewed-by: Igor Opaniuk <igor.opaniuk@foundries.io>
+Tested-by: Andre Przywara <andre.przywara@arm.com>
 
---=20
-Best regards - Freundliche Gr=C3=BCsse - Meilleures salutations
+Signed-off-by: Shantur Rathore <i@shantur.com>
+---
 
-Igor Opaniuk
-Senior Software Engineer, Embedded & Security
-E: igor.opaniuk@foundries.io
-W: www.foundries.io
+ common/usb_hub.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/common/usb_hub.c b/common/usb_hub.c
+index 3fb7e14d10..2e054eb935 100644
+--- a/common/usb_hub.c
++++ b/common/usb_hub.c
+@@ -174,8 +174,10 @@ static void usb_hub_power_on(struct usb_hub_device *hub)
+ 
+ 	debug("enabling power on all ports\n");
+ 	for (i = 0; i < dev->maxchild; i++) {
+-		usb_set_port_feature(dev, i + 1, USB_PORT_FEAT_RESET);
+-		debug("Reset : port %d returns %lX\n", i + 1, dev->status);
++		if (usb_hub_is_superspeed(dev)) {
++			usb_set_port_feature(dev, i + 1, USB_PORT_FEAT_RESET);
++			debug("Reset : port %d returns %lX\n", i + 1, dev->status);
++		}
+ 		usb_set_port_feature(dev, i + 1, USB_PORT_FEAT_POWER);
+ 		debug("PowerOn : port %d returns %lX\n", i + 1, dev->status);
+ 	}
+-- 
+2.40.1
+
