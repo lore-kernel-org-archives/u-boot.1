@@ -4,77 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86C21C4828D
-	for <u-boot@archiver.kernel.org>; Wed,  7 Feb 2024 00:01:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13617C4828D
+	for <u-boot@archiver.kernel.org>; Wed,  7 Feb 2024 00:03:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C663287C82;
-	Wed,  7 Feb 2024 01:01:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=foundries.io
+	by phobos.denx.de (Postfix) with ESMTP id 58B7187C87;
+	Wed,  7 Feb 2024 01:03:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=foundries.io header.i=@foundries.io header.b="YqScsN27";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="jea3Yu1R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8141087C8D; Wed,  7 Feb 2024 01:01:51 +0100 (CET)
-Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
- [IPv6:2a00:1450:4864:20::132])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 59A2787CA3; Wed,  7 Feb 2024 01:03:26 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7240C86F34
- for <u-boot@lists.denx.de>; Wed,  7 Feb 2024 01:01:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=foundries.io
+ by phobos.denx.de (Postfix) with ESMTPS id 5E6B486F34
+ for <u-boot@lists.denx.de>; Wed,  7 Feb 2024 01:03:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=igor.opaniuk@foundries.io
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-51165a488baso44523e87.2
- for <u-boot@lists.denx.de>; Tue, 06 Feb 2024 16:01:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=foundries.io; s=google; t=1707264107; x=1707868907; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=1KUH8xhcR44BcQGItXczMPQnW+XUJ40OfLWnL0CBK80=;
- b=YqScsN27uqyXIGfjqkAc4cDnHBN8wtGjVMTRalRpNp/mj5gqyZuGxWDi/h2pqr0lur
- Lq24hKotg+QMOhZRi1va0Vy2g3n52mWxsuHqCOhEy8rVXXQpwwh38h/joQ1T7grQ731l
- 5CiVeJ0vcWi4QMZAm0n8BXEh0h2PDHePsneN2A4gRC6uWhZm1DLp75DQTMWHlOOpumwX
- 7gWHXOtrcqd9P4citK1xLQBsSbD/YRMNNfnHx3jH1bWztUwXPLkx5AqFCeMFQPXJ9L0a
- z6BG1g5daAILhXzUARSjBpGU1n4XK+2gudWv77xT1tFUcjmEfcm+obWnCJcEjFSzFVeU
- HoGA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707264107; x=1707868907;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=1KUH8xhcR44BcQGItXczMPQnW+XUJ40OfLWnL0CBK80=;
- b=gtOqgHm9SRwz2p9mBp1tozZti89EHTz9u9TrpkHQb2LFw7y1jAEdq9GPG2XvVMOu2q
- CAQ92F9SN+hYbSjUB/fMiHrCWwI2iZY8fBl5c6CM/oZbSmofF9brx7eWvsiInvcZGxUd
- +6PTkUN0JyTkxnErQFHjMGL6t56UjOYH2nhR9GGgbSUwWCnSmG5xJpVTrFzSmOovr4o1
- fvDWtPvOG9bZTfcUD4l/NJ7XBhE58mLa0n3/qialorS4c3F9QkQzxf+vlwaWwmsUuwfF
- VzyaWdjDLsAqJveXQdNx6495tY8tQ9LVcDs/WdJyvOAt2UTi6XUFuykcXSZXL+7l1A80
- RQmw==
-X-Gm-Message-State: AOJu0YwEaUuJpSW9X6qlYTNgXrY5PsTcrxXXVOptFXJGIJeSCPgmYYbx
- MhAi1I7r1Hc/itf4u/eFIbPvOXIG7PxsmNrw1thxqIvjJH+OOqtWmSxuKAmoOGjv0yObo9R9c3o
- ipVo=
-X-Google-Smtp-Source: AGHT+IGxQCLDYb6DmsVpU2suvAgZJ6+XFZJS9p0kxm1faBy8uxBSe1EynFR9XnU3/Iy3h83v+ZCeKQ==
-X-Received: by 2002:a05:6512:2118:b0:511:4175:8d16 with SMTP id
- q24-20020a056512211800b0051141758d16mr2526936lfr.55.1707264106902; 
- Tue, 06 Feb 2024 16:01:46 -0800 (PST)
-X-Forwarded-Encrypted: i=1;
- AJvYcCXcJgczvaUwo33/A5twlBsnUDo3j+JoLnXwXNMId4OjoN82iOSlbx8zGER0t25kX5wffTCT76F48ILUsYHDu+BBxA8=
-Received: from localhost ([109.108.76.111]) by smtp.gmail.com with ESMTPSA id
- t25-20020a192d59000000b0050ef97ce785sm2645lft.179.2024.02.06.16.01.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Feb 2024 16:01:45 -0800 (PST)
-From: Igor Opaniuk <igor.opaniuk@foundries.io>
-To: u-boot@lists.denx.de
-Cc: Igor Opaniuk <igor.opaniuk@gmail.com>,
-	Tom Rini <trini@konsulko.com>
-Subject: [PATCH v1] cmd: hash: fix param count check
-Date: Wed,  7 Feb 2024 01:01:32 +0100
-Message-Id: <20240207000132.3116094-1-igor.opaniuk@foundries.io>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=4f0f=JQ=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1707264188;
+ bh=0HRwjHkPzGoHRkP8y8IyFGHla9E5x91SShOHrqFl6tI=;
+ b=jea3Yu1RX3ZSAtwJ2Ad+XbZ99wzXgd4T6AOMbZN1KvKA0wrBHYMGQbcTUcorVhkopd4FNN1GR
+ 2LW8BpyyMaIFaj8uah5aCBuatyy5qRFa+rX9ilXZMczqeiH6iMCKgG3j6en2CREAE0MSxlb4KHJ
+ xAhqT73lUIRv8W3aWgA68ljcheF+bXTdp4EmbHS9E2PN1kpDZYx8LV9l26z4U/o990uW/CKGRWt
+ vcdZkE/RDPVZD3TsFprrOT+rTgld6+ny/wl2jvQYZQ3nl+wqvNRw3y698wgtyYjrxS2RAnjrxxQ
+ jiD1K53+XS8rcrzz8ScXELSMhMlQcdLW4v1ujgUotBJw==
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH 00/15] rockchip: rk3328: Update defconfigs,
+ DTs and enable boot from SPI
+Date: Wed,  7 Feb 2024 00:02:29 +0000
+Message-ID: <20240207000301.3270722-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 65c2c8bbd5b31093c56fbf22
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,81 +68,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Igor Opaniuk <igor.opaniuk@gmail.com>
+This series contains miscellaneous updates to defconfigs, syncs latest
+device trees from linux, fixes an issue loading FIT from SD-card when
+running SPL from eMMC and enables building a bootable SPI image on
+RK3328 boards.
 
-Add correct check for parameter count.
+I am also adding myself as a reviewer for the three RK3328 boards I own.
 
-This fixes this issue when `hash` cmd is invoked without params:
+Patch 1-7 updates boards to enable similar Kconfig options and use a
+common order for from where to try and load FIT.
 
-=> hash
-data abort
-pc : [<bf739204>]	   lr : [<ba6effa8>]
-reloc pc : [<60019204>]	   lr : [<5afcffa8>]
-sp : ba6dd9c8  ip : bf7391f0	 fp : bf74ec14
-r10: 00000001  r9 : ba6dfea0	 r8 : bf7ea030
-r7 : 00000000  r6 : ba6effa8	 r5 : 00000000  r4 : ffffffff
-r3 : bf7c257c  r2 : 00000001	 r1 : 00000000  r0 : bf7e6e34
-Flags: nZCv  IRQs off  FIQs on  Mode SVC_32
-Code: e5934004 e1a0e003 e59f3050 e2444001 (e5f4c001)
-Resetting CPU ...
+Patch 8 fix loading FIT from SD-card when booting from eMMC by using
+pinctrl for emmc and sdmmc in SPL.
 
-resetting ...
+Patch 9-10 makes rockchip gpio and rng driver compatible with linux.
 
-Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
----
+Patch 11 sync latest rk3328 device tree files from linux v6.8-rc1.
 
- cmd/hash.c | 19 ++++++++++---------
- 1 file changed, 10 insertions(+), 9 deletions(-)
+Patch 12 reverts an old commit that added duplicated code.
 
-diff --git a/cmd/hash.c b/cmd/hash.c
-index e163cd67742..5534a735fa7 100644
---- a/cmd/hash.c
-+++ b/cmd/hash.c
-@@ -14,15 +14,22 @@
- #include <hash.h>
- #include <linux/ctype.h>
- 
-+#if IS_ENABLED(CONFIG_HASH_VERIFY)
-+#define HARGS 6
-+#else
-+#define HARGS 5
-+#endif
-+
- static int do_hash(struct cmd_tbl *cmdtp, int flag, int argc,
- 		   char *const argv[])
- {
- 	char *s;
- 	int flags = HASH_FLAG_ENV;
- 
--#ifdef CONFIG_HASH_VERIFY
--	if (argc < 4)
-+	if (argc < (HARGS - 1))
- 		return CMD_RET_USAGE;
-+
-+#if IS_ENABLED(CONFIG_HASH_VERIFY)
- 	if (!strcmp(argv[1], "-v")) {
- 		flags |= HASH_FLAG_VERIFY;
- 		argc--;
-@@ -37,18 +44,12 @@ static int do_hash(struct cmd_tbl *cmdtp, int flag, int argc,
- 	return hash_command(*argv, flags, cmdtp, flag, argc - 1, argv + 1);
- }
- 
--#ifdef CONFIG_HASH_VERIFY
--#define HARGS 6
--#else
--#define HARGS 5
--#endif
--
- U_BOOT_CMD(
- 	hash,	HARGS,	1,	do_hash,
- 	"compute hash message digest",
- 	"algorithm address count [[*]hash_dest]\n"
- 		"    - compute message digest [save to env var / *address]"
--#ifdef CONFIG_HASH_VERIFY
-+#if IS_ENABLED(CONFIG_HASH_VERIFY)
- 	"\nhash -v algorithm address count [*]hash\n"
- 		"    - verify message digest of memory area to immediate value, \n"
- 		"      env var or *address"
+Patch 13-15 enables building u-boot-rockchip-spi.bin for boards with
+SPI flash.
+
+This series depends on the "rockchip: Fix ethernet on Radxa ROCK Pi E
+v1.21" series at [1].
+
+[1] https://patchwork.ozlabs.org/cover/1887729/
+
+Jonas Karlman (15):
+  rockchip: rk3328: Update default u-boot,spl-boot-order prop
+  rockchip: rk3328-evb: Update defconfig
+  rockchip: rk3328-rock64: Update defconfig
+  rockchip: rk3328-roc-cc: Update defconfig
+  rockchip: rk3328-rock-pi-e: Update defconfig
+  rockchip: rk3328-nanopi-r2: Update defconfig
+  rockchip: rk3328-orangepi-r1-plus: Update defconfig
+  rockchip: rk3328: Fix loading FIT from SD-card when booting from eMMC
+  gpio: rockchip: Use gpio alias id as gpio bank id
+  rng: rockchip: Use same compatible as linux
+  rockchip: rk3328: Sync device tree from linux v6.8-rc1
+  Revert "rockchip: Allow booting from SPI"
+  rockchip: rk3328: Add support to build bootable SPI image
+  rockchip: rk3328-rock64: Enable boot from SPI NOR flash
+  rockchip: rk3328-orangepi-r1-plus: Enable boot from SPI NOR flash
+
+ arch/arm/dts/rk3328-evb-u-boot.dtsi           |  4 +
+ arch/arm/dts/rk3328-evb.dts                   |  1 +
+ .../dts/rk3328-nanopi-r2c-plus-u-boot.dtsi    |  6 --
+ arch/arm/dts/rk3328-nanopi-r2s-u-boot.dtsi    | 28 ------
+ arch/arm/dts/rk3328-nanopi-r2s.dts            |  3 +-
+ .../rk3328-orangepi-r1-plus-lts-u-boot.dtsi   | 36 ++-----
+ arch/arm/dts/rk3328-orangepi-r1-plus-lts.dts  |  4 +-
+ .../dts/rk3328-orangepi-r1-plus-u-boot.dtsi   | 36 ++-----
+ arch/arm/dts/rk3328-orangepi-r1-plus.dts      |  1 +
+ arch/arm/dts/rk3328-roc-cc-u-boot.dtsi        | 22 +----
+ arch/arm/dts/rk3328-roc-cc.dts                |  3 +-
+ arch/arm/dts/rk3328-rock-pi-e-u-boot.dtsi     | 17 ----
+ arch/arm/dts/rk3328-rock-pi-e.dts             | 55 +++++++++++
+ arch/arm/dts/rk3328-rock64-u-boot.dtsi        | 30 ++----
+ arch/arm/dts/rk3328-rock64.dts                |  1 +
+ arch/arm/dts/rk3328-u-boot.dtsi               | 99 +++++++++++++++----
+ arch/arm/dts/rk3328.dtsi                      | 64 +++++++++---
+ arch/arm/dts/rk3399-u-boot.dtsi               |  2 +-
+ arch/arm/mach-rockchip/rk3328/rk3328.c        |  1 +
+ arch/arm/mach-rockchip/spl-boot-order.c       |  3 -
+ board/rockchip/evb_rk3328/MAINTAINERS         | 11 +++
+ board/rockchip/evb_rk3328/README              | 70 -------------
+ configs/evb-rk3328_defconfig                  | 16 ++-
+ configs/nanopi-r2c-plus-rk3328_defconfig      | 11 ++-
+ configs/nanopi-r2c-rk3328_defconfig           | 11 ++-
+ configs/nanopi-r2s-rk3328_defconfig           | 11 ++-
+ configs/orangepi-r1-plus-lts-rk3328_defconfig | 20 +++-
+ configs/orangepi-r1-plus-rk3328_defconfig     | 20 +++-
+ configs/roc-cc-rk3328_defconfig               |  9 +-
+ configs/rock-pi-e-rk3328_defconfig            | 10 +-
+ configs/rock64-rk3328_defconfig               | 15 ++-
+ doc/board/rockchip/rockchip.rst               |  9 +-
+ drivers/gpio/rk_gpio.c                        |  7 +-
+ drivers/rng/rockchip_rng.c                    | 10 +-
+ 34 files changed, 351 insertions(+), 295 deletions(-)
+ delete mode 100644 board/rockchip/evb_rk3328/README
+
 -- 
-2.34.1
+2.43.0
 
