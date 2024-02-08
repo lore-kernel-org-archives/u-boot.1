@@ -4,78 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDFC8C48260
-	for <u-boot@archiver.kernel.org>; Thu,  8 Feb 2024 21:27:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9450EC48260
+	for <u-boot@archiver.kernel.org>; Thu,  8 Feb 2024 21:30:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D49D87E35;
-	Thu,  8 Feb 2024 22:27:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D6DF787D5D;
+	Thu,  8 Feb 2024 22:30:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VQ2T3Uhc";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="W4DQqMsM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0F2C587CCF; Thu,  8 Feb 2024 22:27:35 +0100 (CET)
-Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com
- [IPv6:2607:f8b0:4864:20::52f])
+ id 10A9787E34; Thu,  8 Feb 2024 22:30:14 +0100 (CET)
+Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
+ [IPv6:2607:f8b0:4864:20::1035])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED61E87E37
- for <u-boot@lists.denx.de>; Thu,  8 Feb 2024 22:27:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B629887CCF
+ for <u-boot@lists.denx.de>; Thu,  8 Feb 2024 22:30:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pg1-x52f.google.com with SMTP id
- 41be03b00d2f7-55b5a37acb6so58942a12.0
- for <u-boot@lists.denx.de>; Thu, 08 Feb 2024 13:27:32 -0800 (PST)
+Received: by mail-pj1-x1035.google.com with SMTP id
+ 98e67ed59e1d1-290c5c705d5so56233a91.0
+ for <u-boot@lists.denx.de>; Thu, 08 Feb 2024 13:30:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1707427651; x=1708032451; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1707427810; x=1708032610; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pOnBfTr9K8rmcLNbayz7jy9MzldyiVeOccbrY3I+0hM=;
- b=VQ2T3UhchIPiZWEBTzwp+sgTCQ0wTkvTnIJEiWEojJv+hVwG/eB5OTjmg2fIn9hGGk
- gMJfK60eoR5dMpGnvRp0yP/BFqJ/IdB2z8NxGWMiPLgzwtHp2G/dZEDeu4sMmKA8VhDM
- lHhDp+1ebwvulVgSXS1+lIKopwrsgTfjL8XitljgrkQRNL8LdVqBA5kca0CgAUwClqgS
- IWXVR58zijJIOR7nQ0XlOkob26hSZfP3b9fU4UKqS7qNrVraVrBaEjj7NO04IzjQcqk4
- vecflKNe84x4ifgncEL+mT6Zrcp/QnXcLoJr8vjCDHcpRYPoBXOCRuvuxluc8VvLWnsW
- wfmA==
+ bh=uKrW+ob48HwDxEOhsSYIIKND7RQYoTHFO7LuowC71Zc=;
+ b=W4DQqMsMIfZpfuaFqpXVg+86h7/od5hVVeszeYrJf0KFEE3kv4M0rARFd9DG0W/6Se
+ DyC+im2wd2OdL6tg2Huvc4U3O7BoD+Z2p9NirsL1KgQVggIzvJEQMFSQsRlKy0Xo7OBU
+ woa56hNL3Uf7PuwojA7HuB5tJtfxo4mu7FSNK4X7xccDwe7ac7zAPEqiZDFVq0STzCZv
+ 7yix72V6IYINzugFwoVQrjcNE6NvlZgenVToKWLOpiDLL22eryc0VxUdLq+LL1XqBaA3
+ qx9U9/P71veydNdLOq4a9pe/gVtynAgqqt+b+jXnlnyWzakB45xKW/tCJaWQc2S8XqPA
+ mP7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707427651; x=1708032451;
+ d=1e100.net; s=20230601; t=1707427810; x=1708032610;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pOnBfTr9K8rmcLNbayz7jy9MzldyiVeOccbrY3I+0hM=;
- b=ceeRp+0l0cCTOkoQRYlDDSLkOmkwX76psA00lcwkAmKr3IEAIh9XCkEEX3oEuaoQfQ
- uZDEdR0XBA+2S+2D+rdoOr4CxmOrf4NEJoHVRy5X+v1ghjJuqmvy0Jp/4jXcfI457LzQ
- nibvl/QTInIm1u+GMgu8y+ez9ad18/MPqIKJDd2zNGcKLyKwZ4i5M8JirS+KM2qShF+R
- KJYzvuISCmzQBU3NDUkj5WAHgXevUMs5PKww/PYVVnjJySnZdNjpyFzb/7eh6A8GEois
- +mKQBmXitHJ4Sk+qaXWbhJEo6mqsS5Amm0He5iR4rrj1mD/yWxpNGSeGU70sWCjIZg8r
- 9RVg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXsZB1zhMaCzUolmnIYj4UqCAvOxzbV54i40H/aaDhSdqmjHl1TK28UGfHwke7kibp4dacaK7RCR7fyjHBSq9xShB7YYQ==
-X-Gm-Message-State: AOJu0YzsO1Si3fyK0bnC04KYHPP/wur6yIn+rh3HGFiwxK4x9OrISlaO
- dwSYwqRzvsWuW8Br6iqhNwuMo37foPTTKRZKUjmo1nFxvCUmpBOFbY7knMBtwUaw/scNnZg3tLJ
- g815hpfNC3jopwu8UVkhZ7KdqPZI=
-X-Google-Smtp-Source: AGHT+IF0ndLpm+TUHiZq6kC7teSugOGGAYqa2y80Yhg2vaJNPPLHHfiK9Xpb9TnSDgRrIlQ/25qgq4vhDWqFfz2dEEs=
-X-Received: by 2002:a05:6a21:339a:b0:19e:3a8e:e722 with SMTP id
- yy26-20020a056a21339a00b0019e3a8ee722mr889432pzb.2.1707427651287; Thu, 08 Feb
- 2024 13:27:31 -0800 (PST)
+ bh=uKrW+ob48HwDxEOhsSYIIKND7RQYoTHFO7LuowC71Zc=;
+ b=b/STAetrAArRGqtzrCT7uv4PpG1ecAPDLaCPYKA20gaAwuwRBYFpj01z/AZUuSuErV
+ g7DXWbER7hzjIP4lk6lnn+Rat0J+tdtLfsFWaH1wMz0pP+a3h6y4CRh+UmIrS8WotdC5
+ L6zdDSuX469NB0UcBWldhlfRSpzQ8AnEuinyapIQks+EtT47Qw5XsaM35bSjlZ9BPkwp
+ ZQrLWuGCi91RHB3jlNoyCBjtxR7x3VHpf2znpLZahnKE+oc6eGHq2egjs4gh832sgJE2
+ uZRsKpdxVgoLIm7u/6N2WLa0cuZ+3cN1SSKB35o7WEXQNwY6oerMXCq6v1ht19Dw84S4
+ aVyw==
+X-Gm-Message-State: AOJu0YxckFfrDjYiAv2SxrAFT/H7YJSemrDRGK1m6wZ8kL2XJSRlxQvx
+ Rxytwmkre940tYPo6wIM1ZX/09oU57ZYmQrKCwT0tzetwLvghnvP+nA6fX8CGB7koU7EUKtBVZ3
+ UKOTYlJuUFuDIfLAz1xsRO+QQ8f0=
+X-Google-Smtp-Source: AGHT+IEqrK19HOVKoHmt5Tu4Xpj5uuozwI/D0Ev2IFUzNaHp7lC4eRsoHZeXpbYlv/E9mnFVA3aZCEyOV/659lOfnbQ=
+X-Received: by 2002:a17:90a:6e06:b0:296:9c2a:e7da with SMTP id
+ b6-20020a17090a6e0600b002969c2ae7damr503610pjk.2.1707427810103; Thu, 08 Feb
+ 2024 13:30:10 -0800 (PST)
 MIME-Version: 1.0
-References: <20240208094518.391-1-othacehe@gnu.org>
- <20240208094518.391-2-othacehe@gnu.org>
-In-Reply-To: <20240208094518.391-2-othacehe@gnu.org>
+References: <20240208173314.397582-1-marex@denx.de>
+In-Reply-To: <20240208173314.397582-1-marex@denx.de>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 8 Feb 2024 18:27:19 -0300
-Message-ID: <CAOMZO5D1sVNMDZ861m8Y9-XVV=rAjLC1LCcfmGtpt4dB=iXZ_w@mail.gmail.com>
-Subject: Re: [PATCH 1/2] board: imx93_var_som: Probe ELE MU
-To: Mathieu Othacehe <othacehe@gnu.org>
-Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, 
- Shiji Yang <yangshiji66@outlook.com>, Ye Li <ye.li@nxp.com>, 
- =?UTF-8?Q?S=C3=A9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>, 
- Simon Glass <sjg@chromium.org>, Mathieu Othacehe <m.othacehe@gmail.com>,
- u-boot@lists.denx.de
+Date: Thu, 8 Feb 2024 18:29:58 -0300
+Message-ID: <CAOMZO5Ch27KJDxX_qU-HnsP47jU3d_d-gefE6Q9oWZpdmvhuZA@mail.gmail.com>
+Subject: Re: [PATCH] spi: mxc_spi: Add imx6ul-ecspi compatible string
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
+ Jagan Teki <jagan@amarulasolutions.com>, Stefano Babic <sbabic@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -94,20 +88,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Feb 8, 2024 at 6:45=E2=80=AFAM Mathieu Othacehe <othacehe@gnu.org> =
-wrote:
+Hi Marek,
 
-> diff --git a/board/variscite/imx93_var_som/spl.c b/board/variscite/imx93_=
-var_som/spl.c
-> index 502e599b91a..0965a2de996 100644
-> --- a/board/variscite/imx93_var_som/spl.c
-> +++ b/board/variscite/imx93_var_som/spl.c
-> @@ -97,6 +97,7 @@ int power_init_board(void)
->         return 0;
->  }
+On Thu, Feb 8, 2024 at 2:33=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
 >
-> +extern int imx9_probe_mu(void *ctx, struct event *event);
+> Recent i.MX8MP DTs use new fsl,imx6ul-ecspi compatible string instead
 
-Please put this prototype into a header file.
+Please specify the Linux version in which this happened.
 
-Currently, it appears in 3 imx93 spl.c files.
+> of the fsl,imx51-ecspi compatible string. Add the new compatible string
+> to fix ECSPI operation on i.MX8MP.
+>
+> Signed-off-by: Marek Vasut <marex@denx.de>
+
+I assume this goes via Jagan's spi tree.
+
+Reviewed-by: Fabio Estevam <festevam@gmail.com>
