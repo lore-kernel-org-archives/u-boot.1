@@ -4,72 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C8EAC48260
-	for <u-boot@archiver.kernel.org>; Thu,  8 Feb 2024 05:19:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34783C4828F
+	for <u-boot@archiver.kernel.org>; Thu,  8 Feb 2024 05:42:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 18CD387D92;
-	Thu,  8 Feb 2024 06:19:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 573CE87D92;
+	Thu,  8 Feb 2024 06:42:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qfy4pWAo";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1707370935;
+	bh=GuFefFj5AklVJS5cOKI7+K4CKSqJLW9hI+/sG6+gTV4=;
+	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=IYlRXKCQgddxL3TrgVyk4PzY0TLE4h8N5Zkm6OcAbLaazn3p5hQ3MY3pJXVZOlyNt
+	 TCfX/F1yPP8S8bboT/P3/4FDROSupcHzUo0/crgHnx6T3I/k+GRyIZc59Q6ogciRON
+	 tENRxljXLoCpTVZpjFXE2kYSRl50Ljrm7956SPK9pECvr6Q1PpmpFddeIuFrvBt656
+	 37wuoH2Wp1tbQVyTCf/aQGxbBe7rXzcs0LCUZXEkU4gbNqKys/0biG0DYdrsYDN7lF
+	 Q4akQ/1ODYtt/bO/531Feb7Mq9/a85FgIX5+2bzQYDbs4B45VAQuglHj3cJJKJXVM6
+	 hNEmpW+TgfUpA==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 08A4787DBB; Thu,  8 Feb 2024 06:19:46 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id AEB2987DD6; Thu,  8 Feb 2024 06:42:11 +0100 (CET)
+Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org
+ [IPv6:2001:67c:2050:101:465::204])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A3A8C87D3B
- for <u-boot@lists.denx.de>; Thu,  8 Feb 2024 06:19:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1047087D3B
+ for <u-boot@lists.denx.de>; Thu,  8 Feb 2024 06:42:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=danishanwar@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4185JY2Y050977;
- Wed, 7 Feb 2024 23:19:34 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1707369574;
- bh=6cPj5eRoVwIq85RcIiz5SDKc206xwMllP3WkwQUo6mQ=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=qfy4pWAoFIynLgHPz5ZsrcZh4oNowWSi3kdFkPM+Wocy5VYniuUEqhf1iVAW4hmW3
- FqwbVX8rytP0+BksJWLs7QDDCGBDzFBympVVYacUPhOv1tm/nY2356vCxGYCxTkezx
- Jekx4gSi4uWNkSfdvZYGII98Wm51ofFYxzYTXu6s=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4185JYwC072686
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 7 Feb 2024 23:19:34 -0600
-Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 7
- Feb 2024 23:19:33 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 7 Feb 2024 23:19:33 -0600
-Received: from [10.24.69.25] (danish-tpc.dhcp.ti.com [10.24.69.25])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4185JTd2002788;
- Wed, 7 Feb 2024 23:19:30 -0600
-Message-ID: <0cf2369d-4d18-4cab-a28b-dc72d42ec136@ti.com>
-Date: Thu, 8 Feb 2024 10:49:28 +0530
+ dmarc=fail (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4TVm8F3jKwz9sM1;
+ Thu,  8 Feb 2024 06:42:05 +0100 (CET)
+Message-ID: <a513d5d5-1cdd-4350-b4f3-5b3b1b2fae5b@denx.de>
+Date: Thu, 8 Feb 2024 06:42:04 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4] misc: fs-loader: Use fw_storage_interface instead of
- storage_interface
+Subject: Re: [PATCH v3] rng: Add Turris Mox rTWM RNG driver
+To: Max Resch <resch.max@gmail.com>, u-boot@lists.denx.de
+References: <20240207150017.666213-1-resch.max@gmail.com>
 Content-Language: en-US
-To: Sean Anderson <seanga2@gmail.com>, Qu Wenruo <wqu@suse.com>, Michal Simek
- <michal.simek@amd.com>, Simon Glass <sjg@chromium.org>, Stefan Roese
- <sr@denx.de>, Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, <srk@ti.com>, Vignesh Raghavendra
- <vigneshr@ti.com>, <r-gunasekaran@ti.com>,
- Roger Quadros <rogerq@kernel.org>
-References: <20240130062627.2344282-1-danishanwar@ti.com>
- <bcbcf89e-f417-849d-ce2c-bcae8dc772fe@gmail.com>
-From: MD Danish Anwar <danishanwar@ti.com>
-In-Reply-To: <bcbcf89e-f417-849d-ce2c-bcae8dc772fe@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+From: Stefan Roese <sr@denx.de>
+In-Reply-To: <20240207150017.666213-1-resch.max@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: 4TVm8F3jKwz9sM1
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,34 +69,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sean,
+Hi Max,
 
-On 07/02/24 11:14 pm, Sean Anderson wrote:
-> On 1/30/24 01:26, MD Danish Anwar wrote:
->> The fs-loader driver reads env storage_interface and uses it to load
->> firmware file into memory using the medium set by env. Update the driver
->> to use env fw_storage_interface as this variable is only used to load
->> firmwares. The env storage_interface will act as fallback so that the
->> existing implementations do not break.
->>
->> Also update the FS Loader documentation accordingly.
+On 2/7/24 16:00, Max Resch wrote:
+> A RNG driver for Armada 3720 boards running the Turris Mox rWTM firmware
+> from CZ.NIC in the secure processor.
 > 
-> So why do you want to do this? I don't see what the point of renaming the
-> variable is, since you are not e.g. adding any new functionality, and we
-> have to pay for the rename in code size.
+> Signed-off-by: Max Resch <resch.max@gmail.com>
+> ---
 > 
+> Changes in v3:
+>   - More meaningful variable names in accordance with review
+> 
+> Changes in v2:
+>   - Removed ring buffer implementation
+> 
+>   drivers/rng/turris_rwtm_rng.c | 18 +++++++++---------
+>   1 file changed, 9 insertions(+), 9 deletions(-)
+> 
+> diff --git a/drivers/rng/turris_rwtm_rng.c b/drivers/rng/turris_rwtm_rng.c
+> index 143fe0b47f..ec2cb0bca3 100644
+> --- a/drivers/rng/turris_rwtm_rng.c
+> +++ b/drivers/rng/turris_rwtm_rng.c
+> @@ -41,18 +41,19 @@ static int turris_rwtm_rng_fill_entropy(phys_addr_t entropy, size_t size)
+>   
+>   static int turris_rwtm_rng_random_read(struct udevice *dev, void *data, size_t count)
+>   {
+> -	phys_addr_t p;
+> +	struct turris_rwtm_rng_priv *priv = dev_get_priv(dev);
+> +	phys_addr_t phys;
 
-I am upstreaming TI's ICSSG driver for u-boot and during code review
-Roger Quadros <rogerq@kernel.org> commented asking to rename this
-variable [1]. I think the motive here was to keep all variables used by
-fs-loader driver with 'fw_' prefix. All other variables had 'fw_' prefix
-except for storage_interface.
+You've now just sent the update v2->v3. As v2 is not applied yet
+this is not the way to do it. Please squash this patch into the v2
+one a send this as v3 or even better v4 now.
 
-[1]
-https://lore.kernel.org/all/4721f3b9-f823-47f3-b4f3-ed40002af31b@kernel.org/
+Thanks,
+Stefan
 
-> --Sean
+>   	size_t size;
+>   	int ret;
+>   
+> -	p = ((struct turris_rwtm_rng_priv *)dev_get_priv(dev))->buffer;
+> +	phys = priv->buffer;
+>   
+>   	while (count) {
+>   		size = min_t(size_t, RNG_BUFFER_SIZE, count);
+>   
+> -		ret = turris_rwtm_rng_fill_entropy(p, size);
+> +		ret = turris_rwtm_rng_fill_entropy(phys, size);
+>   
+> -		memcpy(data, (void *)p, size);
+> +		memcpy(data, (void *)phys, size);
+>   		count -= size;
+>   		data = (u8 *)data + size;
+>   	}
+> @@ -62,7 +63,7 @@ static int turris_rwtm_rng_random_read(struct udevice *dev, void *data, size_t c
+>   
+>   static int turris_rwtm_rng_probe(struct udevice *dev)
+>   {
+> -	struct turris_rwtm_rng_priv *priv;
+> +	struct turris_rwtm_rng_priv *priv = dev_get_priv(dev);
+>   	u32 args[] = { 0 };
+>   	int ret;
+>   
+> @@ -76,7 +77,6 @@ static int turris_rwtm_rng_probe(struct udevice *dev)
+>   		return ret;
+>   
+>   	/* entropy buffer */
+> -	priv = (struct turris_rwtm_rng_priv *)dev_get_priv(dev);
+>   	priv->buffer = 0;
+>   
+>   	/* buffer address need to be aligned */
+> @@ -89,10 +89,10 @@ static int turris_rwtm_rng_probe(struct udevice *dev)
+>   
+>   static int turris_rwtm_rng_remove(struct udevice *dev)
+>   {
+> -	phys_addr_t p;
+> +	struct turris_rwtm_rng_priv *priv = dev_get_priv(dev);
+> +	phys_addr_t phys = priv->buffer;
+>   
+> -	p = ((struct turris_rwtm_rng_priv *)dev_get_priv(dev))->buffer;
+> -	dma_free_coherent((void *)p);
+> +	dma_free_coherent((void *)phys);
+>   
+>   	return 0;
+>   }
+
+Viele Grüße,
+Stefan Roese
 
 -- 
-Thanks and Regards,
-Danish
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
