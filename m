@@ -4,81 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF0E5C4828F
-	for <u-boot@archiver.kernel.org>; Thu,  8 Feb 2024 14:34:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D75EC4828F
+	for <u-boot@archiver.kernel.org>; Thu,  8 Feb 2024 14:34:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4705787E45;
-	Thu,  8 Feb 2024 15:34:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B0A6A87E70;
+	Thu,  8 Feb 2024 15:34:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bGfK2z9A";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XardtmlG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D249987E6F; Thu,  8 Feb 2024 15:34:09 +0100 (CET)
-Received: from mail-pg1-x531.google.com (mail-pg1-x531.google.com
- [IPv6:2607:f8b0:4864:20::531])
+ id 9A64A87E36; Thu,  8 Feb 2024 15:34:38 +0100 (CET)
+Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
+ [IPv6:2607:f8b0:4864:20::1033])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE7C987E36
- for <u-boot@lists.denx.de>; Thu,  8 Feb 2024 15:34:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EDB8287E70
+ for <u-boot@lists.denx.de>; Thu,  8 Feb 2024 15:34:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pg1-x531.google.com with SMTP id
- 41be03b00d2f7-5dc13b142ffso484323a12.1
- for <u-boot@lists.denx.de>; Thu, 08 Feb 2024 06:34:07 -0800 (PST)
+Received: by mail-pj1-x1033.google.com with SMTP id
+ 98e67ed59e1d1-29593a27fcaso486104a91.1
+ for <u-boot@lists.denx.de>; Thu, 08 Feb 2024 06:34:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1707402846; x=1708007646; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1707402874; x=1708007674; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xcA7PMVoRcVTpJ/tJxVQ5G3RSQt9R0BNCprTD+nYYQM=;
- b=bGfK2z9Am2vpTjFy8FM+LvWmYguJtei1vCYJkqY2bN9olOlOfsvWnyjP2sbMdRIaSO
- 8xvpy0CVPdEHEOL/aIj7BXgjRFcA/Llbhx75bGgfSbeAEszrdevpazuNoAqL/BJdhrns
- 8pC53vlT1bfCACGVZs7+bgRqT+LV+9wyDWMd70OfGHgCoPfWxju+3NxRTrfZShhUw07o
- c29o6By81S55BdUNdj3JLyCyzElph45dEsLSKtk+g+zjobefw1Yb91IIx9+MXq4PDDQP
- v9OKZbLBObQd8bKq9W8y1FistREhP2SLhBqaMaLpEhwF7zgCD0CRSxV+LS0EL6o6+exG
- FkCA==
+ bh=7/d50bz8sOEcLtZR4KgMIXRVRCShwz1ZQudHA2LI25A=;
+ b=XardtmlGit7X5wgkGTKEqPR/EVO+M1i7PLzFb+VuBwV1HFKkb7hWLA2kwRBR+UL4rj
+ DXowKTkubuAxq+NccCmyCQdjJyiWnMV5OFc96N6fSJQ9Lk+AivOswTmunms3oqUvGqps
+ +qRMNyq/oL58E4/TQ9+2AIuoa4NufrWSiLxtwWovQLayi4bsio1pn1jEw1fQU2X+FKl/
+ 3200/uh5WI7yzcFLqPb9V1zfF739BSeOge/98n6sAzyN7VR1mQPnyL6WD4MlShXozoLP
+ 89myAY//LLiExJkZlbSUdbnqF6HgOBA9h1UFw2D8fIhwAg8/zWIKUiAB/rKPIj2fSgPp
+ AtFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707402846; x=1708007646;
+ d=1e100.net; s=20230601; t=1707402874; x=1708007674;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=xcA7PMVoRcVTpJ/tJxVQ5G3RSQt9R0BNCprTD+nYYQM=;
- b=SxKZSaSqIcsNv/0Xt3veAQWnGmtNUAaWMDaQTVocgxG1kNLJOP/I/nzmAxJLGefMyR
- WHMWHORxo3MkgwjgmOiq0qeAQBMN9lLN0Q6t1okCcwnmhM90jgS+Qak86cuA45PfOfyy
- ZHh28P5YrpKvJAP6T3eUEdkPltlYCAk1JltGP7DOStlAM2UenggVxc1DCDLRv09eKMvs
- 3n+E9sCUpLpeXZgSv61jaQGvhdNvtIL7b4asnw4N7voLQh+3fId+Ya5/NEyaSMyFYGFR
- CVeNPpdk2dncc9VLKhGtZ5T/NILIbaL3uIpcGrGqbpcl2L48zfGQEbbKvyfcep55nDA5
- 3SXg==
-X-Gm-Message-State: AOJu0Yw3ebX9+H4DC8rhqPjQJGLydk75iScNiR0AtUBL48GRKZIJd+/L
- lu0nrdw5yspVSe+9GF44bqVNGjJfITyV62eakrG9EEYJre3Md36a4pqjxLRZaAJEyDfPJwbYhyF
- ArddsfkQOejTd2tU7nRLOyylL3EM=
-X-Google-Smtp-Source: AGHT+IFa+JLiB/pHFjYDONHUmRG0qivIugkqR1GB4TzuFb9dTOMLNq/fw7FsCXsKUB88R6UtxEOtwwalCJ6NdIkWf5I=
-X-Received: by 2002:a17:90b:1d0c:b0:296:9c2a:e7da with SMTP id
- on12-20020a17090b1d0c00b002969c2ae7damr9171567pjb.2.1707402846058; Thu, 08
- Feb 2024 06:34:06 -0800 (PST)
+ bh=7/d50bz8sOEcLtZR4KgMIXRVRCShwz1ZQudHA2LI25A=;
+ b=OPnhzDIp7Xq/nIvc24M4/EKMKLrhTo7WFp0I5Hy8T6WAULbOn0uky5YlIds3lBI0nF
+ VX7uFxsJjraMaSHzbV19e134UGZBpZimxFwMhKocmXZY4nu2uIrzFa5iZ165D7zZrYaP
+ bzufwsgU9OHc2VdYXDwDDtEBj1/fD58V2h+asbLIKzdD1cKOqEoSb5+vqTEj0uCzZ00R
+ KqenTpiTldX68D7jvobqFIn4arip89cmlty0K6W0yMpEZ295wEO05d8zUCMHtlaRLf3f
+ IFLzfWc6JxvYuojGD9JkXIWD7AQYvubmoW4xTR73uMfKRpVlgI1PEYaSCpOGZM1fnGKe
+ xtmw==
+X-Gm-Message-State: AOJu0YzN3/I84p/Vt4XNyOyLaSR/RNad2qOBeWBZRo4+q3vSMeGXJfMD
+ 0RWz+u/BvTkxtbfcS81m+G4W0ewCvWR1o/m3Fpt9J2YpiEIbBjZKVWnDZ0grg6tbYm2o+lEs/U8
+ S4UrR4bRLdvB+KSikc/u4LHt8nic=
+X-Google-Smtp-Source: AGHT+IFt13uHEAMYcteInuXM/pgRURePURspNHxG8HhQ7Qfs+JufAlhgigHz0F72h3ouWz6XzBKOhi+yUk3AgF6Jp0U=
+X-Received: by 2002:a17:90b:1b0f:b0:292:e812:19e8 with SMTP id
+ nu15-20020a17090b1b0f00b00292e81219e8mr9088322pjb.0.1707402874278; Thu, 08
+ Feb 2024 06:34:34 -0800 (PST)
 MIME-Version: 1.0
-References: <20240124021516.280026-1-Mr.Bossman075@gmail.com>
-In-Reply-To: <20240124021516.280026-1-Mr.Bossman075@gmail.com>
+References: <20240131124926.222556-1-igor.opaniuk@foundries.io>
+ <20240131124926.222556-2-igor.opaniuk@foundries.io>
+In-Reply-To: <20240131124926.222556-2-igor.opaniuk@foundries.io>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 8 Feb 2024 11:33:54 -0300
-Message-ID: <CAOMZO5D9AvjuO5KFJKHsaEmjs7sg=pYFMGWzhoAvQR1++MMagg@mail.gmail.com>
-Subject: Re: [PATCH v1] tools: mkimage: Add support for i.MXRT FlexSPI Header
-To: Jesse Taube <mr.bossman075@gmail.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Giulio Benetti <giulio.benetti@benettiengineering.com>, 
- Mamta Shukla <mamta.shukla@leica-geosystems.com>, 
- Thomas Haemmerle <thomas.haemmerle@leica-geosystems.com>,
- Adam Ford <aford173@gmail.com>, 
- Fabio Estevam <festevam@denx.de>, Simon Glass <sjg@chromium.org>, 
- Jassi Brar <jaswinder.singh@linaro.org>,
- Paul-Erwan Rio <paulerwan.rio@gmail.com>, 
- Alexander Dahl <ada@thorsis.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Masami Hiramatsu <masami.hiramatsu@linaro.org>,
- Mikhail Ilin <ilin.mikhail.ol@gmail.com>
+Date: Thu, 8 Feb 2024 11:34:22 -0300
+Message-ID: <CAOMZO5BK0zuWF8DDqEHTk41_5eNVyFcVZA=snZd5u1FDONAxKA@mail.gmail.com>
+Subject: Re: [PATCH v1 2/2] imx: imx8: print reset cause
+To: Igor Opaniuk <igor.opaniuk@foundries.io>
+Cc: u-boot@lists.denx.de, Stefano Babic <sbabic@denx.de>,
+ Bin Meng <bmeng.cn@gmail.com>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Peng Fan <peng.fan@nxp.com>,
+ Simon Glass <sjg@chromium.org>, 
+ Tom Rini <trini@konsulko.com>, Ye Li <ye.li@nxp.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -97,13 +92,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jan 23, 2024 at 11:15=E2=80=AFPM Jesse Taube <mr.bossman075@gmail.c=
-om> wrote:
+On Wed, Jan 31, 2024 at 9:49=E2=80=AFAM Igor Opaniuk <igor.opaniuk@foundrie=
+s.io> wrote:
 >
-> Modify imx8m Flex SPI Configuration Block to work with imxrt.
-> Add more Flex SPI configuration options to Kconfig.
+> Add support for printing reset cause during boot.
 >
-> Signed-off-by: Jesse Taube <Mr.Bossman075@gmail.com>
-> ---
+> Signed-off-by: Igor Opaniuk <igor.opaniuk@foundries.io>
 
-Applied, thanks.
+Applied, both, thanks.
