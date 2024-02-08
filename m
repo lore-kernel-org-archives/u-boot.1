@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BDF6C4828F
-	for <u-boot@archiver.kernel.org>; Thu,  8 Feb 2024 20:18:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B350C4828F
+	for <u-boot@archiver.kernel.org>; Thu,  8 Feb 2024 20:19:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F0C787CFC;
-	Thu,  8 Feb 2024 21:18:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8AE3787E2B;
+	Thu,  8 Feb 2024 21:18:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RNIqhp53";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TDQjtds3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A5DF87CE8; Thu,  8 Feb 2024 21:18:47 +0100 (CET)
-Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
- [IPv6:2607:f8b0:4864:20::1134])
+ id 32AC087CE8; Thu,  8 Feb 2024 21:18:52 +0100 (CET)
+Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
+ [IPv6:2607:f8b0:4864:20::1135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21BE787CF9
- for <u-boot@lists.denx.de>; Thu,  8 Feb 2024 21:18:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D28E387CF9
+ for <u-boot@lists.denx.de>; Thu,  8 Feb 2024 21:18:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1134.google.com with SMTP id
- 00721157ae682-60493e299b6so3210147b3.1
- for <u-boot@lists.denx.de>; Thu, 08 Feb 2024 12:18:43 -0800 (PST)
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-6002317a427so2923227b3.2
+ for <u-boot@lists.denx.de>; Thu, 08 Feb 2024 12:18:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1707423522; x=1708028322; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=iIau2z6PQ3az5sv3xyaqV7qiCjAiyayeIy/+0rm7Wgs=;
- b=RNIqhp53ytyUh9winFoXEkLRUz2cS0ZWyHCZWZS0MC3JaoRZBXagwxMnRgAvKsQJ80
- 7+aIhk0Em/oM0pU6hdwGMq46JMJiQWA8qqrJQuUcbwr7Jk7R14+BJ1JOd1vq2him0BpG
- T2u8XidGfa/SS9b459b5ZJ0TMJipvyUyJnZVM=
+ d=konsulko.com; s=google; t=1707423528; x=1708028328; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=5H9jfZaq82RHVCQ5Oq4Z6C/zwnaRYifkftCPZJX0Aec=;
+ b=TDQjtds32BpHaY2KLxx7JcOmRMei/MLXcjBBIhKVkHsUy1CDRbMzuXfPXpxZvulm0T
+ T69WYIbPSPqO8yFFSC2+hvp9++Ck7dVCdOqJ7R8iweN7A/iOU3fjihyaeXRoGvOLdPaz
+ IFcMNEVs3i4jBsDhFS773LilIRePNApINfcQc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707423522; x=1708028322;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=iIau2z6PQ3az5sv3xyaqV7qiCjAiyayeIy/+0rm7Wgs=;
- b=iag8QsTc8UXTuFHTba9xU3boXv6bU1lBoz/uzET8z9J8j9JE41OfFGS8EJPgmUnLYp
- 42M/fKWsBInzJp9OZI065amkKwY+hNyRnUM8s0ua6n32Ss7rVJtSzK/VlBuUVsawLhA3
- JLi15A8mlGUYrFeeDz5Z4EuX7N2Bq7w3rcLE67syZv6qmBUz9DPdwquZ9ddiwnlBBw+C
- A1YiIchtAiMQBMUgMN1UMTw4SbaNDLo4PZ8MoOehTktUZQe92kdan8btDZBbFpXxfF+S
- HCuWWJtn/cxAoxiNKqvpfppW2aO5ctmfzoOvVu/3cDHzRELvqW6T0BYdl/eDCSDCKiWh
- z+4Q==
-X-Gm-Message-State: AOJu0Yxr9LT9wQ1wi6ytVRuZlpVAI5gqPZh4CtgefBiEcOS1cYEcxyXg
- 4GJeUJ/phkzCRNdzlDasQj2n2mgqseAJYUzgkV4B0xGZClMj+8uGVDdUVtdjEIg=
-X-Google-Smtp-Source: AGHT+IE7y/fAyABqpwsXlZ901ghKAiBZSVHNUmfpT8jMLqgvsBMtY/tGQRGlPEW2x1+YYfWzOQFeFA==
-X-Received: by 2002:a0d:d493:0:b0:604:1c9:62e1 with SMTP id
- w141-20020a0dd493000000b0060401c962e1mr573360ywd.44.1707423521568; 
- Thu, 08 Feb 2024 12:18:41 -0800 (PST)
+ d=1e100.net; s=20230601; t=1707423528; x=1708028328;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=5H9jfZaq82RHVCQ5Oq4Z6C/zwnaRYifkftCPZJX0Aec=;
+ b=Ebl6BuyODPfWu2k3+h+L7z6yXKAHmhbJKgZzpyulmTn21EnmoE54oqqgYcVSAigw+Z
+ NXCLEnGSeADdDXHNnL+aofjVioNzsjYPiPOQwUtPqI+kEMO9AEsrwz8ubQn0+iFpp2WE
+ tSOShvBbWxZRL8h38e6nUYoyN7q3zwmcTuyLEcYAOEvczwN/hwRkZstk36JLf1vhFeGb
+ tYPotcqlY4kOQ8OMdl0/lOut0Oxtxdqal05PQa6bKl8yYdzbaKv4+piKUo/YT6HUpNDp
+ tjTXtFPkoNBRp0UkyrMVullwld2uz//Ge0R2dGuag1btt2zPm02/Z0q1eyaer9qTDeZC
+ 2ONQ==
+X-Gm-Message-State: AOJu0Ywb5YUxyZF8lGGrtP4z5yV+ZeHvgYd+x1Fbv8aPoyKcMhETGg0C
+ gu/kzxjXEHMKPDzD1kuBXw1asd5lcK3IUVQomUtj0mbvzCjtpWkAyfnkEAg8abs=
+X-Google-Smtp-Source: AGHT+IHRj4j324JH0M0G03p3H5bAgWG8zMxBeb2UnwuRxu1M/D9sfi5pP6CetCmKfG+q6sDCYr9u8A==
+X-Received: by 2002:a81:9e0b:0:b0:603:ebf7:947b with SMTP id
+ m11-20020a819e0b000000b00603ebf7947bmr470867ywj.48.1707423528249; 
+ Thu, 08 Feb 2024 12:18:48 -0800 (PST)
 X-Forwarded-Encrypted: i=1;
- AJvYcCUkO18CqgU1qSZVJNblCpxwuWQd9zY0J3u1GTjNuU/wVaZ6MVcN+H/YT4v3sR99hIee6hRVpNucX+MMeyZQFJOnGBsksibgbjrF37GiagQTsNiICfxGxPSek6B1jp9KqAeqt8I3Ab4c9pBj8iM=
-Received: from [127.0.1.1]
+ AJvYcCU1kTWIFoAlzcVmkjrxPmZx5afuWSoYxMzTFnppcBhgWbjcw1U3IRnYxADuBXO0P6+MYjn5Z0irWRfXfYTMl28IOaXpX1iyTvL1iZ3AlrQlgcZ49I4dCNO0aoKQHgQbdYt6SLIFpppM
+Received: from bill-the-cat
  (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
  [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- c70-20020a814e49000000b006040d34e58csm22328ywb.74.2024.02.08.12.18.40
+ d192-20020a814fc9000000b00604b7668cd9sm23043ywb.54.2024.02.08.12.18.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 Feb 2024 12:18:41 -0800 (PST)
+ Thu, 08 Feb 2024 12:18:46 -0800 (PST)
+Date: Thu, 8 Feb 2024 15:18:44 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>, Nishanth Menon <nm@ti.com>, 
- Vignesh Raghavendra <vigneshr@ti.com>, u-boot@lists.denx.de, 
- Andrew Davis <afd@ti.com>
-In-Reply-To: <20230725155416.100678-1-afd@ti.com>
-References: <20230725155416.100678-1-afd@ti.com>
-Subject: Re: [PATCH 1/2] ti: keystone2: Imply NFS command support
-Message-Id: <170742352088.2307340.11272243782800410123.b4-ty@konsulko.com>
-Date: Thu, 08 Feb 2024 15:18:40 -0500
+To: Peng Fan <peng.fan@nxp.com>
+Cc: "U-Boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "mike.looijmans@topic.nl" <mike.looijmans@topic.nl>,
+ "Radu-nicolae Pirea (OSS)" <radu-nicolae.pirea@oss.nxp.com>
+Subject: Re: [GIT PULL] please pull fsl-qoriq-2024-2-8
+Message-ID: <20240208201844.GK1152441@bill-the-cat>
+References: <DU0PR04MB9417865338E6CCD3646DBF2288442@DU0PR04MB9417.eurprd04.prod.outlook.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.12.4
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="pxXSM7M2YCzF+8CH"
+Content-Disposition: inline
+In-Reply-To: <DU0PR04MB9417865338E6CCD3646DBF2288442@DU0PR04MB9417.eurprd04.prod.outlook.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,16 +94,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 25 Jul 2023 10:54:15 -0500, Andrew Davis wrote:
 
-> TI KS2 boards have the nfs command in their common environment boot
-> configuration, enable this command.
-> 
-> 
+--pxXSM7M2YCzF+8CH
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Feb 08, 2024 at 11:59:32AM +0000, Peng Fan wrote:
+
+> Hi Tom,
+>=20
+> Please pull fsl-qoriq-2024-2-8. Sorry for not being active in the past ti=
+me, will try to
+> catch up.
+>=20
 
 Applied to u-boot/master, thanks!
 
--- 
+--=20
 Tom
 
+--pxXSM7M2YCzF+8CH
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXFNyEACgkQFHw5/5Y0
+tyyDygv/WSHBVkHMilxpqQ68wzGd+V3R79U7AcAPOF4iJJLZyqqz6kVVeGJ9376i
+Lzt1Ii4SqB6zvKM8uPd2m89fTp2ltuWt735CZkXWe/Fny0xnJhG7g1sjeGPAyFfy
+tnh/sfreC+oA9v3CdBEdcQiCUI9VtMHUX7nZ49cufacUHr1Ajwkhn4MQfX8ZIykG
+lupeRHgq4aCQFzcz/JPXVLbQnyEbnkUgBxSnE/mDcEB691LjtAwW8Lh7WXPq9/sH
+6Uyd/tNwRQ0Ak2lUoCnMCdaolNfFeBohzT1J+36oxsiwEHSpTqcbpCuSZ3eZPanZ
+awSYruiK8L6OMQ5aEYdn7T1fBTXiF4wsXnvrsgX/aqILKIgHmXt3ejtpeMN57CEH
+I//AQCUNBtIocVkoECmjyPCC6oCfGTzHGF2BQq8Mot0D4tT8ZW8vizctNRd0i5qN
+gUA9CYWm9EFpXrmw2Q6cO1hioF6tLvaXatSn0CJ1TqFOcezxGq8rhHAj/7t6AOzf
+B3WzMC8f
+=gXbX
+-----END PGP SIGNATURE-----
+
+--pxXSM7M2YCzF+8CH--
