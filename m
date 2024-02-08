@@ -4,81 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3ED67C4828F
-	for <u-boot@archiver.kernel.org>; Thu,  8 Feb 2024 12:11:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5038AC48260
+	for <u-boot@archiver.kernel.org>; Thu,  8 Feb 2024 13:08:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0B0887E77;
-	Thu,  8 Feb 2024 13:11:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=careweather.com
+	by phobos.denx.de (Postfix) with ESMTP id A1FEE87D16;
+	Thu,  8 Feb 2024 14:08:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=careweather-com.20230601.gappssmtp.com header.i=@careweather-com.20230601.gappssmtp.com header.b="VP/0QZbO";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="h/vRVk2x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F28187CF6; Thu,  8 Feb 2024 01:18:04 +0100 (CET)
-Received: from mail-ua1-x942.google.com (mail-ua1-x942.google.com
- [IPv6:2607:f8b0:4864:20::942])
+ id 86AF88709C; Thu,  8 Feb 2024 14:08:40 +0100 (CET)
+Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
+ [IPv6:2607:f8b0:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0306987CDB
- for <u-boot@lists.denx.de>; Thu,  8 Feb 2024 01:17:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=careweather.com
+ by phobos.denx.de (Postfix) with ESMTPS id 5ACDD87D16
+ for <u-boot@lists.denx.de>; Thu,  8 Feb 2024 14:08:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=patrick@careweather.com
-Received: by mail-ua1-x942.google.com with SMTP id
- a1e0cc1a2514c-7d130979108so568516241.1
- for <u-boot@lists.denx.de>; Wed, 07 Feb 2024 16:17:59 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pg1-x52d.google.com with SMTP id
+ 41be03b00d2f7-5a0dc313058so406316a12.0
+ for <u-boot@lists.denx.de>; Thu, 08 Feb 2024 05:08:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=careweather-com.20230601.gappssmtp.com; s=20230601; t=1707351478;
- x=1707956278; darn=lists.denx.de; 
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=OSygxAnAqBFHSdO8qL3of+0h69kLwNMPJjPfOz8RxlE=;
- b=VP/0QZbOSgJ1eeS7UEmAzSHZU/Yf4Dbw3C/eULuVVggo0x9yhWNXqFMingdRFrWrAT
- NOAL7ZvWm8U7h7mdJQI6whM8nXhHiN+N0bIrBnv3tjbt56pra2rcDLR28sKXR9adpzsB
- H9Gq0mlI98fDOm+MkhWvAocCcZlctgVX+XXmTSiwoYioyDOZ2wlOFFxenJd2y2n7J0Ry
- QnvcCRCeOfQ5shskUI6uiBgz8PUtalEALm1nHHNYqVAuPirJXdRFP2VVbPBMAsOQFYSV
- mfbCzHuKhnD0gomxF80h1Vrr6MX8mC8HBnkljZXV5sjwjiOvsy7f17kuFw1EZCxAGmbN
- Dp4Q==
+ d=gmail.com; s=20230601; t=1707397715; x=1708002515; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=rncFTezZUKmWhv5DgZj8jkb1JSZTWUQX7f/MS5V09Yw=;
+ b=h/vRVk2xBPuFFJHrNsRHMy6tqxh/epX1n3mX7+TmSnZsXEGhdzgbYBeIShuezzq7tZ
+ 2VDHP34+m8AyJivF5K8VzzC30oisWAzdq1Q0eiTeEZGZGP3jnwV38sQQWtB7vzWxt9GU
+ xpFnKmDIVIPy/Q5aosbK7KvicNZzlpxfl+NGUrcEob9Wdq13ElthZ2BKyL8TjIIaTYAp
+ Q1ZJG6OmEL/0VMRvnY8LRiArGRbgCCuqtFQSRSlyJV3sSK/bvTIjeYY5Il873RlQ5Dvj
+ H9kfL0FqENURqLq6l0HeCzSdWw5TrElQ8kp4PMqkIJ5wy5hdwIhWiNCxj7kovzL2lej/
+ /IfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707351478; x=1707956278;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=OSygxAnAqBFHSdO8qL3of+0h69kLwNMPJjPfOz8RxlE=;
- b=ERDNtu/ykqn5KtKWuF6c1ALJtQuUZsIzBwL8rO7qY97oFt6V8ubY+42Xuib1OFq7gX
- AAedtERlQRWqRdoAUjR2nYfmZDfBbnFQaqZq0xpmMkF5qnnCGnitAsArk+/vRp60maRS
- 9QSYaIgY16jM4Cho6am3kb3+M0bl3jb9bWVGbyNnY8PHgK1MtycdQ8Js/prZOi2O1/Hq
- TpFMzp+kLFeNiNbltJhtJpT9SsidF1n5c621rEnwq0n547ufhN17/z8GHDPZI9IaQT6j
- jr1jb0CPSiKJK/SdEpbFH21gB3JE2lQ+SwWxqltQVUeJCEzJgdamNpMX9ELGGsCj5ch8
- N+og==
-X-Gm-Message-State: AOJu0Yw2gAf2okVgamCWHQNabgy0smV3P2joqXa9AN6yY22GTf5ybbzi
- UuSUdsTvGxE/U+HraBf7Ztd8rCdxFle3dGuqN5fNESr2yYpRg+zi/WucbkrLr1s+mlSTVfSEYvj
- /zCE=
-X-Google-Smtp-Source: AGHT+IHbM1nYvR9KFh+ql5wRqL5fP1LoM4VxxvoRVNF85hQOOp1RPepizqwk6q/kvdg1Pmtes/ui4g==
-X-Received: by 2002:a05:6102:1986:b0:46d:3c07:f635 with SMTP id
- jm6-20020a056102198600b0046d3c07f635mr4475562vsb.34.1707351478358; 
- Wed, 07 Feb 2024 16:17:58 -0800 (PST)
-Received: from localhost (0.92.231.35.bc.googleusercontent.com. [35.231.92.0])
- by smtp.gmail.com with UTF8SMTPSA id
- t25-20020a67f5d9000000b0046d1c6547c1sm277857vso.0.2024.02.07.16.17.57
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 07 Feb 2024 16:17:57 -0800 (PST)
-Mime-Version: 1.0
-X-Mailer: Superhuman Web (2024-02-07T20:06:16Z)
-X-Superhuman-Thread-ID: draft00a6046020c8047b
-From: "Patrick Walton" <patrick@careweather.com>
-X-Superhuman-ID: lscgz39a.302093ec-75b1-46c7-83b4-1416a5070b3f
-X-Superhuman-Draft-ID: draft00a4d6523adfa632
-Date: Thu, 08 Feb 2024 00:17:56 +0000
-Message-ID: <lscgrcfp.54a556b9-85d9-4bd1-91e0-33993fcf0f4c@we.are.superhuman.com>
-Subject: Bug: PDF documentation doesn't build according to instructions
-To: u-boot@lists.denx.de
-Content-Type: multipart/mixed;
- boundary=99f0b721b571733f154b27a091ef108a87d7cd89b7e303e8b125968c01cc
-X-Mailman-Approved-At: Thu, 08 Feb 2024 13:11:14 +0100
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+ d=1e100.net; s=20230601; t=1707397715; x=1708002515;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=rncFTezZUKmWhv5DgZj8jkb1JSZTWUQX7f/MS5V09Yw=;
+ b=V21D/c8RlGfl+gkeFR0ATTnN/8tn5WMidQBTwVcA4YiD4x2tReuNPiePbwm/ScUoEX
+ +QVJ4mH6wDGlNuNDlB0P8sk4FlY+gXiVsNcXmdtXDtp5xiFFSh7wAaSuHMBZuO7TRjkl
+ 0Rkxg8nTjWmTSpDNgFW4XfIUMKhG2s4e44inDzLaOeDf8Kq2mkqUq5eNiA8+OnHx7Eqb
+ HtKvnZIBA666/qM4qZLCwnhRtiwLRh6CO0zXMKwcBWAfRuIN9/DSUmawoWJJ0Od+fMaf
+ EyKg7LaaX6xgTN22kbOnf5LU90wM/aySMZnDAbO40S5sqRSOBu/KyMFMZWZ0Wnkiw5Mr
+ RESg==
+X-Gm-Message-State: AOJu0YwCQaPkhrltAveBFM7D51h0V9c0wjVXbeEytfhYDER8FDLqLuDc
+ lWp1g7EG17Fl0bbnpF9Y7k4/4xUe5b5gq4NxZ41FqfbA/J0bRTVOxs58wmL3kLxRL6N5xNK39wv
+ VupJcmz5Qg8Aw8caYqGBs6z5Dmeo=
+X-Google-Smtp-Source: AGHT+IF+jSdGnOcXIbxyy7pz8d2tvvR9GjTkMZfG1ofYC5HLI2DTA9DbedN85Nj/xLImKaVMMy7YYB22PmspAaN/9bA=
+X-Received: by 2002:a17:90b:3141:b0:296:df79:c663 with SMTP id
+ ip1-20020a17090b314100b00296df79c663mr5129028pjb.3.1707397715511; Thu, 08 Feb
+ 2024 05:08:35 -0800 (PST)
+MIME-Version: 1.0
+References: <20240206164008.1620933-1-Mr.Bossman075@gmail.com>
+In-Reply-To: <20240206164008.1620933-1-Mr.Bossman075@gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 8 Feb 2024 10:08:23 -0300
+Message-ID: <CAOMZO5CHMYZ5LFz9xCukrZ_BeF-Knt=Pbe9Qs7wrOnr0-ZSP_A@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] imx: imxrt1050-evk: Add support for SPI flash
+ booting
+To: Jesse Taube <mr.bossman075@gmail.com>
+Cc: u-boot@lists.denx.de, 
+ Giulio Benetti <giulio.benetti@benettiengineering.com>,
+ Stefano Babic <sbabic@denx.de>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,54 +92,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---99f0b721b571733f154b27a091ef108a87d7cd89b7e303e8b125968c01cc
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Hi Jesse,
 
-When I follow the instructions for building PDF documentation ( https://doc=
-s.u-boot.org/en/latest/build/documentation.html ) , I run into an error at =
-the texi2pdf step=C2=A0(attached). It appears to have to do with the boot f=
-low diagram of k3_current not being an acceptable format for the pdf compil=
-er. I tested this on several releases and it appears to have appeared in th=
-e v2023.10 release and continues to the latest. I was able to build the doc=
-umentation on the v2023.07 release.
+On Tue, Feb 6, 2024 at 1:40=E2=80=AFPM Jesse Taube <mr.bossman075@gmail.com=
+> wrote:
+>
+> Add support for booting the imxrt1050-evk from spi.
+> Add imximage config and the ability for SPL to boot from NOR.
+>
+> Signed-off-by: Jesse Taube <Mr.Bossman075@gmail.com>
 
-Take care,
+This causes the following build failure when building imxrt1020-evk_defconf=
+ig:
 
-Patrick Walton
-Co-founder/CEO
-Care Weather
-801-227-4740
-www.careweather.com ( http://www.careweather.com )
---99f0b721b571733f154b27a091ef108a87d7cd89b7e303e8b125968c01cc
-Content-Disposition: attachment; filename="doc_error.txt"
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; name="doc_error.txt"
+arm: + imxrt1020-evk
+1221+binman: Device tree 'u-boot.dtb' does not have a 'binman' node
+1222+make[1]: *** [Makefile:1125: .binman_stamp] Error 1
+1223+make: *** [Makefile:177: sub-make] Error 2
+1224w+arch/arm/dts/imxrt1170-evk.dtb: Warning (reg_format):
+/memory/ocram@20240000:reg: property has invalid length (8 bytes)
+(#address-cells =3D=3D 2, #size-cells =3D=3D 1)
+1225w+arch/arm/dts/imxrt1170-evk.dtb: Warning (reg_format):
+/memory/sdram@80000000:reg: property has invalid length (8 bytes)
+(#address-cells =3D=3D 2, #size-cells =3D=3D 1)
+1226w+arch/arm/dts/imxrt1170-evk.dtb: Warning
+(avoid_default_addr_size): /memory/ocram@20240000: Relying on default
+#address-cells value
+1227w+arch/arm/dts/imxrt1170-evk.dtb: Warning
+(avoid_default_addr_size): /memory/ocram@20240000: Relying on default
+#size-cells value
+1228w+arch/arm/dts/imxrt1170-evk.dtb: Warning
+(avoid_default_addr_size): /memory/sdram@80000000: Relying on default
+#address-cells value
+1229w+arch/arm/dts/imxrt1170-evk.dtb: Warning
+(avoid_default_addr_size): /memory/sdram@80000000: Relying on default
+#size-cells value
+1230 arm: w+ topic_miamiplus
 
-Li9kb2Mvb3V0cHV0L3RleGluZm8vdS1ib290LnRleGk6MTE5MTMwOiBDb3VsZCBub3QgZmluZCBp
-bWFnZSBmaWxlIHUtYm9vdC1maWd1cgplcy9ib290X2RpYWdyYW1fazNfY3VycmVudCBmb3IgcGRm
-LgpAZG9wZGZpbWFnZSAuLi51bGQgbm90IGZpbmQgaW1hZ2UgZmlsZSAjMSBmb3IgcGRmfQogICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIEBlbHNlIEBnZGVm
-IEBwZGZpbWdleHQge0pQLi4uCgpAaW1hZ2V4eHggLi4udCBAZmkgQGlmcGRmIEBkb3BkZmltYWdl
-IHsjMX17IzJ9eyMzfQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIEBlbHNlIEBpZnggQFhlVGVYcmV2aXNpb24gLi4uCgpAaW1hZ2UgLi4udHJ1ZSBAZmkg
-QGVsc2UgQGltYWdleHh4ICMxLCwsLCxAZmluaXNoIAogICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIEBmaSAKbC4xMTkxMzAgLi4uYW1fazNfY3VycmVudCws
-LEJvb3QgZmxvdyBkaWFncmFtLHN2Z30KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAKPyAKLi9kb2Mvb3V0cHV0L3RleGluZm8vdS1ib290LnRleGk6MTE5
-MTMwOiBFbWVyZ2VuY3kgc3RvcC4KQGRvcGRmaW1hZ2UgLi4udWxkIG5vdCBmaW5kIGltYWdlIGZp
-bGUgIzEgZm9yIHBkZn0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBAZWxzZSBAZ2RlZiBAcGRmaW1nZXh0IHtKUC4uLgoKQGltYWdleHh4IC4uLnQgQGZp
-IEBpZnBkZiBAZG9wZGZpbWFnZSB7IzF9eyMyfXsjM30KICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBAZWxzZSBAaWZ4IEBYZVRlWHJldmlzaW9uIC4uLgoK
-QGltYWdlIC4uLnRydWUgQGZpIEBlbHNlIEBpbWFnZXh4eCAjMSwsLCwsQGZpbmlzaCAKICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBAZmkgCmwuMTE5MTMw
-IC4uLmFtX2szX2N1cnJlbnQsLCxCb290IGZsb3cgZGlhZ3JhbSxzdmd9CiAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCkBUZXhpbmZvIHN1cHBvcnRzIC5w
-bmcsIC5qcGcsIC5qcGVnLCBhbmQgLnBkZiBpbWFnZXMgd2l0aCBQREYgb3V0cHV0LCBhbmQgbm9u
-ZSAKb2YgdGhvc2UgZm9ybWF0cyBjb3VsZCBiZSBmb3VuZC4gKC5lcHMgY2Fubm90IGJlIHN1cHBv
-cnRlZCBkdWUgdG8gdGhlIGRlc2lnbiBvZgogdGhlIFBERiBmb3JtYXQ7IHVzZSByZWd1bGFyIFRl
-WCAoRFZJIG91dHB1dCkgZm9yIHRoYXQuKSAKCi4vZG9jL291dHB1dC90ZXhpbmZvL3UtYm9vdC50
-ZXhpOjExOTEzMDogID09PiBGYXRhbCBlcnJvciBvY2N1cnJlZCwgbm8gb3V0cHV0IFAKREYgZmls
-ZSBwcm9kdWNlZCEK
---99f0b721b571733f154b27a091ef108a87d7cd89b7e303e8b125968c01cc--
+Please fix and resend.
+
+Also, there was a whitespace warning when applying this series.
+
+Please make sure to run checkpatch on the patches.
