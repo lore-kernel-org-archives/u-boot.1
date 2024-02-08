@@ -4,85 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1AADC48260
-	for <u-boot@archiver.kernel.org>; Thu,  8 Feb 2024 12:10:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E551BC4828F
+	for <u-boot@archiver.kernel.org>; Thu,  8 Feb 2024 12:11:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C54AD87E42;
-	Thu,  8 Feb 2024 13:10:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 849C687E51;
+	Thu,  8 Feb 2024 13:10:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=northern.tech
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=northern.tech header.i=@northern.tech header.b="jTRK9iTp";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=northern.tech header.i=@northern.tech header.b="Hx7a3Mw1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC16D87DFF; Thu,  8 Feb 2024 09:22:37 +0100 (CET)
+ id 4C9CD87D16; Thu,  8 Feb 2024 09:37:13 +0100 (CET)
 Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
  [IPv6:2a00:1450:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A849B87DFC
- for <u-boot@lists.denx.de>; Thu,  8 Feb 2024 09:22:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BA72F87D15
+ for <u-boot@lists.denx.de>; Thu,  8 Feb 2024 09:37:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=northern.tech
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ole.orhagen@northern.tech
 Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-5116bf4dcf4so817116e87.0
- for <u-boot@lists.denx.de>; Thu, 08 Feb 2024 00:22:34 -0800 (PST)
+ 2adb3069b0e04-51168addef1so2037608e87.1
+ for <u-boot@lists.denx.de>; Thu, 08 Feb 2024 00:37:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=northern.tech; s=google; t=1707380554; x=1707985354; darn=lists.denx.de;
+ d=northern.tech; s=google; t=1707381429; x=1707986229; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Yq8sf8pN18pmCZtHfPEly0i5YVMew/xNlwafQ5p1qRw=;
- b=jTRK9iTpZVeGWTYnNDdzNEw7jn4NEXYw8CKegx3roT4b9jKsE2GdZ2AXkGzL0CxOKE
- ZoTGPeQ5RbdSzhaWfztsGfaPm35m8FJtFN0ENyFPJknoU79JLpDr55AEZVqc/G2PZXDh
- u1Lxo9oTXoCxOZdhRuqclr2XNSSYo4CYQfqcHoJIvYhcGke5/lpIr6GZwjwiKlRdgkjS
- 0A1Q/9gs4SEBcEsboiouTjyGhPW52Z6yyxiW09o6WAEtBzqaPArvDBPbjjsNH1I8JqA+
- xp4Uv8sW/SZjk+oyzExlLU+38ntUgdUgkJKOvSVxqSTq+tPvAQ4yAAnG/wMVV1Pnws7t
- nVmA==
+ bh=DO2iVrgXjPJzuf5Xk1jljAAZRvYX0tDAieLrgo6tJS4=;
+ b=Hx7a3Mw1VCZJ1lfcIIGrz3QTsbNE70WhHgYlWys6ytANJIv+jPkxptvqm/bu/JJdxF
+ kNUQqS+kzZ3FhxeuXgEzL7YsnhLrBGeFdvr/GzuPZI7KRvQM9q1E74Uy4dYgQIaFHSCo
+ T7mwYWlboRKd5PRQ8eKNfrwVOewfsIC0V6jKA70kmm1kVq/jEFlW8iypufUID8IN735P
+ 09dOr9KIu8JHXdAmHDcrIL9WEtQimNp0RrLOsUWF6gQ/pVDhwkGd0TE9mQUC9Ts3T+BU
+ +ReeuKfBD+D2leW76ZnHzFZhGzMLuBrjiQsXsGQbdnCw4ow4T23MFwgfTjMtP8Pis573
+ c7FQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707380554; x=1707985354;
+ d=1e100.net; s=20230601; t=1707381429; x=1707986229;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Yq8sf8pN18pmCZtHfPEly0i5YVMew/xNlwafQ5p1qRw=;
- b=iRyR806Ch9tVPwvQM5gjIR8zQWnivj677GRdt9OY8dOWSMCMCMUrV5uc97akSU+A4v
- FduLloLWiLcOwUIqoRkASmBo+HjOH8fCJ00+ThvyCfRWACDl9+5++PjxMIY41VGNzKSl
- BUQcw8P3aF8xfiuMgd9bThFIKPQXuM7XNC3eLMo3YcEt2i+Pt9p9m69j1PLVsc5mDW77
- mikhaIk6+77i6wf5YM8yMEHeYUVGCc8HI78w6LPzRVC45b1qA+NVKCBUVCdt6TziUvvu
- S4clVtKtI4dO3m6MQug1I0lhW24oWRJigBkLLGzeU/Ajt/5/XiDhIKt5MxpXvW/C4XVn
- kKLg==
-X-Gm-Message-State: AOJu0YzCTirtPqdf97w/H/fLdHQrms2cdrZLW/P6jg8ivO1yW5QZFURh
- WMWQg9wNj/n11UdcRlesY5buuaLhcgy/rfOB7F4uHG3S70/fqOxuOAOrmfPh8L882eRGLZaVA4J
- QRHlm9hoL1QufaUtcTSn4zXF+uXzN9qp6brISpeBQ0Oc8yv9wYzyBj3hBmjLDCk1EUUJf3bztAA
- 3tGV377u+nXQrxIms=
-X-Google-Smtp-Source: AGHT+IFskaq4alI5DHKETNAFRSbWrryd9yLGwO7HjbXMBXIpbwPZrU7/eCk2z4DW4RBO57ENucqv8igsSSv2TIjZfb0=
-X-Received: by 2002:ac2:5e8c:0:b0:511:68bd:e23e with SMTP id
- b12-20020ac25e8c000000b0051168bde23emr2264276lfq.41.1707380553567; Thu, 08
- Feb 2024 00:22:33 -0800 (PST)
+ bh=DO2iVrgXjPJzuf5Xk1jljAAZRvYX0tDAieLrgo6tJS4=;
+ b=qK1iV7KvWEca60UouGTI+6pmXtJH0qPBtJvrJmqqobub8fi78Ox9jkN+hJBjyL7v0q
+ JgOEufZnaVW2w7Y5s2pW0t3kdDGwwoV2+B3JLJnqVUVMF5uFbQ2v2a6EoCWQhjpO3MdM
+ ZJcePDJzJOV8pZbVO2I1FVfQo2H5o9PaM/vAC4si7LZQp4IuTa2Ig/XpEnfTXYfty9sg
+ J72beG5IfdqoH2z3lrhIOEINi1+8mdVEZQtoz951u3qiM++aLH7K/mg1OYByy1kDe0Hg
+ RfI312WDlR2wu49GPIMB30Pz0lJ826pEgXzkPr0MdG1Tth021k+vgATJwxDHb5eIsTr+
+ Icog==
+X-Gm-Message-State: AOJu0YxwGnfNlVvfxJFngfXQmxFde/IOulVsWKFEKgZwaKeeugqI1SSs
+ PpR0gA0UEbTmiQAqDZD84C6YbaJw/9HPkmLnaDAGkgeO3VHNjJ9Vv7oA7HkKZev+cQfpBNt+zIV
+ teTHVggv+q5ygjmPuXt+l0up+y81iY3KePZ2TSuOETefbz/IXmHa1IVwwV80RGMfw/dFBXistKl
+ /HPXn0VAjYjdMz7xo=
+X-Google-Smtp-Source: AGHT+IHSHBvj8kTi/LCiZ12WBWuZtHP5bJXwHydz1SDtxApk+f9XBCJLi7ycfcFSmTZaY2onDQf+qo/vfhS/SOuUhtM=
+X-Received: by 2002:a05:6512:3da1:b0:511:691e:100e with SMTP id
+ k33-20020a0565123da100b00511691e100emr2306532lfv.18.1707381428924; Thu, 08
+ Feb 2024 00:37:08 -0800 (PST)
 MIME-Version: 1.0
 References: <20240126124801.1164892-1-ole.orhagen@northern.tech>
- <20240207154457.GB1152441@bill-the-cat>
-In-Reply-To: <20240207154457.GB1152441@bill-the-cat>
+ <CACRpkdYLizF9Duy3ZCfqRsY-NMoLZJO8+TCyBHbQDqSOWuzonQ@mail.gmail.com>
+ <CAD5A3Cuba_EchhDWBfej5HGHsP-T6smgL-L+C6SV_bONf6EqYA@mail.gmail.com>
+ <ed02c9b9-5505-4aad-bc92-a2678607ff54@northern.tech>
+ <CACRpkdaiYgmzjsX8SPMFOFo=iK19s2y8Uuaysc+46Ba7D1PFBg@mail.gmail.com>
+ <CAD5A3Csm_sx4TBHQaADSMFgSqoF=aBZD2jm4_cmzNaonZJqAoQ@mail.gmail.com>
+ <CACRpkdbhM6-JoWN6CbLpx_z+vzyx4hBdxqzB=iQ0G9MPa4r5+w@mail.gmail.com>
+In-Reply-To: <CACRpkdbhM6-JoWN6CbLpx_z+vzyx4hBdxqzB=iQ0G9MPa4r5+w@mail.gmail.com>
 From: Ole Orhagen <ole.orhagen@northern.tech>
-Date: Thu, 8 Feb 2024 09:22:22 +0100
-Message-ID: <CAD5A3Css2=AeozV1x3C3BBypH2LDYWOt9j85VzM89ZWg_WV4Zg@mail.gmail.com>
+Date: Thu, 8 Feb 2024 09:36:57 +0100
+Message-ID: <CAD5A3CuB9Mrd-d1Rt_7YWKOm=H9xAi=X3OGwyaOKHdZGAGg9dw@mail.gmail.com>
 Subject: Re: [PATCH v1] vexpress_ca9x4: Enable DM_SERIAL
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Kristian Amlie <kristian.amlie@northern.tech>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
+To: Linus Walleij <linus.walleij@linaro.org>
+Cc: Kristian Amlie <kristian.amlie@northern.tech>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>,
  =?UTF-8?B?Q3PDs2vDoXMgQmVuY2U=?= <csokas.bence@prolan.hu>, 
  Fabio Estevam <festevam@denx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Linus Walleij <linus.walleij@linaro.org>,
- Liviu Dudau <liviu.dudau@foss.arm.com>, 
- Mark Kettenis <kettenis@openbsd.org>, Patryk Biel <pbiel7@gmail.com>,
- Peng Fan <peng.fan@nxp.com>, Peter Robinson <pbrobinson@gmail.com>, 
+ Liviu Dudau <liviu.dudau@foss.arm.com>, Mark Kettenis <kettenis@openbsd.org>, 
+ Patryk Biel <pbiel7@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
+ Peter Robinson <pbrobinson@gmail.com>, 
  Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  Simon Glass <sjg@chromium.org>, 
- Sumit Garg <sumit.garg@linaro.org>, Yang Xiwen <forbidden405@outlook.com>
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Yang Xiwen <forbidden405@outlook.com>
 X-Mailman-Approved-At: Thu, 08 Feb 2024 13:10:31 +0100
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -103,37 +108,126 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Awesome, thanks!
+On Thu, Feb 8, 2024 at 9:27=E2=80=AFAM Linus Walleij <linus.walleij@linaro.=
+org>
+wrote:
 
-:)
+> On Mon, Feb 5, 2024 at 9:18=E2=80=AFAM Ole Orhagen <ole.orhagen@northern.=
+tech>
+> wrote:
+>
+>>
+>> But I will try to dust it off and test it again.
+>>>
+>>
+>> Did you get any results from the tests?
+>>
+>
+>
+> Yes!
+>
+> It works fine both before and after the patch. Latest log from
+> the actual hardware:
+>
+> Cmd> usb_on
+> Enabling debug USB...
+>
+> (here I copy over the binary to the internal SD-card which is
+> presented over USB mass storage)
+>
+> Cmd> reboot
+>
+> Powering up system...
+> Daughterboard fitted to site 1.
+>
+> Switching on ATXPSU...
+> ATX3V3: ON
+> VIOset: 1.8V
+> MBtemp: 29 degC
+>
+> Configuring motherboard (rev D, var A)...
+> IOFPGA  config: PASSED
+> MUXFPGA config: PASSED
+> OSC CLK config: PASSED
+> Programming image \SOFTWARE\boot-a9.bin
+> Erasing Flash image boot.bin
+> ...
+> Erasing Flash
+> ...
+> Writing Flash
+> .....
+> Updating eeprom with image boot.bin
+> Image: boot.bin UPDATED from \SOFTWARE\boot-a9.bin
+>
+> Testing SMC devices (FPGA build 8)...
+> SRAM 32MB test: PASSED
+> VRAM  8MB test: PASSED
+> LAN9118   test: PASSED
+> USB & OTG test: PASSED
+> KMI1/KMI2 test: PASSED
+> MMC & SD  test: PASSED
+> DVI image test: PASSED
+> AACI AC97 test: PASSED
+> CF card   test: PASSED
+> UART port test: PASSED
+> MAC addrs test: PASSED
+>
+> Reading Site 1 Board File \SITE1\HBI0191B\board.txt
+> DB1 JTAG configuration complete.
+> Setting DB1 OSCCLKS...
+> DB1.0 DCC 0 SPI configuration complete.
+>
+> Writing SCC 0x40610000 with 0xBB8A802A
+> Writing SCC 0x40610001 with 0x00001F09
+> Writing SCC 0x40610002 with 0x00000000
+> DB1.0 DCC 0 SCC configuration complete.
+>
+> DB SMB clock enabled.
+> Waiting for SITE1 CB_READY...
+> Testing SMB clock...
+> Configuring MUXFPGA for DB1.
+> Setting DVI mode for XGA.
+> Releasing Daughterboard resets.
+> Switching MCC log to UART1.
+>
+> ARM Versatile Express Boot Monitor
+> Version:    V5.2.1
+> Build Date: Apr  4 2013
+> Daughterboard Site 1: V2P-CA9 Cortex A9
+> Daughterboard Site 2: Not Used
+> Running boot script from flash - BOOTSCRIPT
+>
+>
+> U-Boot 2024.04-rc1-00101-g0101a2ffe125 (Feb 08 2024 - 09:21:31 +0100)
+>
+> DRAM:  512 MiB (effective 1 GiB)
+> WARNING: Caches not enabled
+> Core:  22 devices, 11 uclasses, devicetree: embed
+> Flash: 128 MiB
+> MMC:   mmci@5000: 0
+> Loading Environment from Flash... OK
+> In:    uart@9000
+> Out:   uart@9000
+> Err:   uart@9000
+> Net:   eth0: ethernet@3,02000000
+> Hit any key to stop autoboot:  0
+> smc911x: detected LAN9118 controller
+> smc911x: phy initialized
+> smc911x: MAC 00:02:f7:00:3c:9d
+> Using ethernet@3,02000000 device
+> TFTP from server 192.168.1.140; our IP address is 192.168.1.35
+> Filename 'zImage'.
+> Load address: 0x62000000
+> Loading: smc911x: MAC 00:02:f7:00:3c:9d
+>
+> Yours,
+> Linus Walleij
+>
 
-On Wed, Feb 7, 2024 at 4:45=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote:
 
-> On Fri, Jan 26, 2024 at 01:47:50PM +0100, Ole P. Orhagen wrote:
->
-> > This commit enables support for DM_SERIAL in the vexpress_ca9x4 boards.
-> >
-> > When running the board with the DM_SERIAL driver, the board ran out of
-> > memory in SPL when initialising the DM serial driver.
-> >
-> > Thus this required an increase in the pre-allocated SRAM memory. I did
-> > increase it to 0x800, and it now works graciously.
-> >
-> > It could probably be set lower, but I do not see any reason not to use
-> the
-> > available SRAM at this point.
-> >
-> > Also adds stdout-path to the 'chosen' node in the device tree.
-> >
-> > Signed-off-by: Ole P. Orhagen <ole.orhagen@northern.tech>
-> > Reviewed-by: Linus Walleij <linus.walleij@linaro.org>
->
-> Applied to u-boot/master, thanks!
->
-> --
-> Tom
->
+Great :)
 
+Thanks for taking the time!
 
 --=20
 *Ole P. Orhagen*
