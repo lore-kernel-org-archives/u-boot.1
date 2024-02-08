@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9450EC48260
-	for <u-boot@archiver.kernel.org>; Thu,  8 Feb 2024 21:30:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0EA2C4828F
+	for <u-boot@archiver.kernel.org>; Thu,  8 Feb 2024 21:31:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6DF787D5D;
-	Thu,  8 Feb 2024 22:30:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5F57A87D5D;
+	Thu,  8 Feb 2024 22:31:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="W4DQqMsM";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QtdFZrRk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 10A9787E34; Thu,  8 Feb 2024 22:30:14 +0100 (CET)
-Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
- [IPv6:2607:f8b0:4864:20::1035])
+ id CA91187E3D; Thu,  8 Feb 2024 22:31:08 +0100 (CET)
+Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
+ [IPv6:2607:f8b0:4864:20::102e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B629887CCF
- for <u-boot@lists.denx.de>; Thu,  8 Feb 2024 22:30:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D23787CCF
+ for <u-boot@lists.denx.de>; Thu,  8 Feb 2024 22:31:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x1035.google.com with SMTP id
- 98e67ed59e1d1-290c5c705d5so56233a91.0
- for <u-boot@lists.denx.de>; Thu, 08 Feb 2024 13:30:11 -0800 (PST)
+Received: by mail-pj1-x102e.google.com with SMTP id
+ 98e67ed59e1d1-295f9e5f8a4so78165a91.0
+ for <u-boot@lists.denx.de>; Thu, 08 Feb 2024 13:31:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1707427810; x=1708032610; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1707427865; x=1708032665; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=uKrW+ob48HwDxEOhsSYIIKND7RQYoTHFO7LuowC71Zc=;
- b=W4DQqMsMIfZpfuaFqpXVg+86h7/od5hVVeszeYrJf0KFEE3kv4M0rARFd9DG0W/6Se
- DyC+im2wd2OdL6tg2Huvc4U3O7BoD+Z2p9NirsL1KgQVggIzvJEQMFSQsRlKy0Xo7OBU
- woa56hNL3Uf7PuwojA7HuB5tJtfxo4mu7FSNK4X7xccDwe7ac7zAPEqiZDFVq0STzCZv
- 7yix72V6IYINzugFwoVQrjcNE6NvlZgenVToKWLOpiDLL22eryc0VxUdLq+LL1XqBaA3
- qx9U9/P71veydNdLOq4a9pe/gVtynAgqqt+b+jXnlnyWzakB45xKW/tCJaWQc2S8XqPA
- mP7A==
+ bh=KZvsFrExuchIqE1z+K5jCUZlplaQLWPOkUPrZfi9g90=;
+ b=QtdFZrRkeNhk6LDGWaZyS+PTnryFHK+vlDGz4zt0nNsNeshaTicuo/QysJfqV6ph+r
+ yd4xaE9oA7NN7Wo/zQ6aVMXPQ5Ck3VultU0hEl+hrD+auI+zUYPZccvHpF+ojDAUEM+v
+ hbweEO8Ub+V5eUBOIcYzewc1oHMux/vQzXuNwkgWBTYw78Cp0W6LoECtya3I7PPb0DEs
+ 7cv+6t6J31cQ2vfGfMtSsHyEgVlqyf0GyNm2dc/ZKvwqThxAzL1pCOvjF8HVUeeMsANI
+ TI1DxUqNIILVI+IUirPen0qjfVwcQNcIhRpyPMLtEfwe/L7d6i/zVpgNQ++eU19LuNjb
+ HXmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707427810; x=1708032610;
+ d=1e100.net; s=20230601; t=1707427865; x=1708032665;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=uKrW+ob48HwDxEOhsSYIIKND7RQYoTHFO7LuowC71Zc=;
- b=b/STAetrAArRGqtzrCT7uv4PpG1ecAPDLaCPYKA20gaAwuwRBYFpj01z/AZUuSuErV
- g7DXWbER7hzjIP4lk6lnn+Rat0J+tdtLfsFWaH1wMz0pP+a3h6y4CRh+UmIrS8WotdC5
- L6zdDSuX469NB0UcBWldhlfRSpzQ8AnEuinyapIQks+EtT47Qw5XsaM35bSjlZ9BPkwp
- ZQrLWuGCi91RHB3jlNoyCBjtxR7x3VHpf2znpLZahnKE+oc6eGHq2egjs4gh832sgJE2
- uZRsKpdxVgoLIm7u/6N2WLa0cuZ+3cN1SSKB35o7WEXQNwY6oerMXCq6v1ht19Dw84S4
- aVyw==
-X-Gm-Message-State: AOJu0YxckFfrDjYiAv2SxrAFT/H7YJSemrDRGK1m6wZ8kL2XJSRlxQvx
- Rxytwmkre940tYPo6wIM1ZX/09oU57ZYmQrKCwT0tzetwLvghnvP+nA6fX8CGB7koU7EUKtBVZ3
- UKOTYlJuUFuDIfLAz1xsRO+QQ8f0=
-X-Google-Smtp-Source: AGHT+IEqrK19HOVKoHmt5Tu4Xpj5uuozwI/D0Ev2IFUzNaHp7lC4eRsoHZeXpbYlv/E9mnFVA3aZCEyOV/659lOfnbQ=
-X-Received: by 2002:a17:90a:6e06:b0:296:9c2a:e7da with SMTP id
- b6-20020a17090a6e0600b002969c2ae7damr503610pjk.2.1707427810103; Thu, 08 Feb
- 2024 13:30:10 -0800 (PST)
+ bh=KZvsFrExuchIqE1z+K5jCUZlplaQLWPOkUPrZfi9g90=;
+ b=NZe4YC+xJzckFsmVfej8WkID437TyqlZ19p9xjzjuO5Hrq7DMcHj+Kr+HVcAd9PoQG
+ ocI+dQ6mjDhC2dvtNBwMVjdfVMZJca0TCk6S5VfgTR8FutJB2BEo5t8wAsox3x92fM2N
+ /SPxDgajMJysN/DOm9vMgGNUqkSVqrUvzB7fDzB3uRkt7LEVx24fH3UnmCe5fQ1nH4oa
+ oPH3TaSu19Ykn3LG8U8MQaOv0+WpG3NYK6MFkejIYy4ESf/hmEpCi5KLetQFa87G8jQT
+ oGoxNHMZ5ZONF5P/58wqvykrTF1XnzxcvV9669QXw25Ot4xRUh0eQyqJWNfpMRnNx7BT
+ YyBQ==
+X-Gm-Message-State: AOJu0YxHTTwkzp67bq2w/VMxfksmx+vdR0ddNmVi/cfNrvVt17KO00hz
+ uk6TpH0ze8Kjbx1nGwsCyRRnGu4kdXatSiRkWpJZRs3Kz07yJ03FNnhFw8WT9g/bpAX0NOw3IHu
+ 1JfVefhKBGDG3+nMUkUUfHU33V3A=
+X-Google-Smtp-Source: AGHT+IFB49KXc2CKmQtBD/ukMnwmwuJBJQtC0Mmr08xofIJQ9kcHdWzQEYQkgCiMOBzryaVuFUcUVVdiFFlcWe0pWRQ=
+X-Received: by 2002:a17:90a:3ec3:b0:290:f5f7:caff with SMTP id
+ k61-20020a17090a3ec300b00290f5f7caffmr491966pjc.3.1707427864815; Thu, 08 Feb
+ 2024 13:31:04 -0800 (PST)
 MIME-Version: 1.0
-References: <20240208173314.397582-1-marex@denx.de>
-In-Reply-To: <20240208173314.397582-1-marex@denx.de>
+References: <20240208173415.397633-1-marex@denx.de>
+In-Reply-To: <20240208173415.397633-1-marex@denx.de>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 8 Feb 2024 18:29:58 -0300
-Message-ID: <CAOMZO5Ch27KJDxX_qU-HnsP47jU3d_d-gefE6Q9oWZpdmvhuZA@mail.gmail.com>
-Subject: Re: [PATCH] spi: mxc_spi: Add imx6ul-ecspi compatible string
+Date: Thu, 8 Feb 2024 18:30:53 -0300
+Message-ID: <CAOMZO5Dy+pvZtz1CYnVU00jTHyLqxyLzysqyD1FRWienY_zNUw@mail.gmail.com>
+Subject: Re: [PATCH] ARM: imx: Let SPL configure ECSPI1 clock on Data Modul
+ i.MX8M Plus eDM SBC
 To: Marek Vasut <marex@denx.de>
 Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
  Jagan Teki <jagan@amarulasolutions.com>, Stefano Babic <sbabic@denx.de>
@@ -90,17 +91,14 @@ X-Virus-Status: Clean
 
 Hi Marek,
 
-On Thu, Feb 8, 2024 at 2:33=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
+On Thu, Feb 8, 2024 at 2:34=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
 >
-> Recent i.MX8MP DTs use new fsl,imx6ul-ecspi compatible string instead
-
-Please specify the Linux version in which this happened.
-
-> of the fsl,imx51-ecspi compatible string. Add the new compatible string
-> to fix ECSPI operation on i.MX8MP.
+> The SPL clock code does configure the ECSPI clock frequency, which has
+> to match the mxc-spi driver configuration for successful SPI NOR boot.
+> Drop the assigned-clock from DT ecspi1 node on this board to let the
+> SPL clock code do the configuration and keep it aligned with the driver
+> expectation.
 >
 > Signed-off-by: Marek Vasut <marex@denx.de>
-
-I assume this goes via Jagan's spi tree.
 
 Reviewed-by: Fabio Estevam <festevam@gmail.com>
