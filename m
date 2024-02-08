@@ -4,55 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34783C4828F
-	for <u-boot@archiver.kernel.org>; Thu,  8 Feb 2024 05:42:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A44A1C48260
+	for <u-boot@archiver.kernel.org>; Thu,  8 Feb 2024 08:27:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 573CE87D92;
-	Thu,  8 Feb 2024 06:42:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id BC30487D16;
+	Thu,  8 Feb 2024 09:27:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1707370935;
-	bh=GuFefFj5AklVJS5cOKI7+K4CKSqJLW9hI+/sG6+gTV4=;
-	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=IYlRXKCQgddxL3TrgVyk4PzY0TLE4h8N5Zkm6OcAbLaazn3p5hQ3MY3pJXVZOlyNt
-	 TCfX/F1yPP8S8bboT/P3/4FDROSupcHzUo0/crgHnx6T3I/k+GRyIZc59Q6ogciRON
-	 tENRxljXLoCpTVZpjFXE2kYSRl50Ljrm7956SPK9pECvr6Q1PpmpFddeIuFrvBt656
-	 37wuoH2Wp1tbQVyTCf/aQGxbBe7rXzcs0LCUZXEkU4gbNqKys/0biG0DYdrsYDN7lF
-	 Q4akQ/1ODYtt/bO/531Feb7Mq9/a85FgIX5+2bzQYDbs4B45VAQuglHj3cJJKJXVM6
-	 hNEmpW+TgfUpA==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id AEB2987DD6; Thu,  8 Feb 2024 06:42:11 +0100 (CET)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org
- [IPv6:2001:67c:2050:101:465::204])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1047087D3B
- for <u-boot@lists.denx.de>; Thu,  8 Feb 2024 06:42:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OXK+x+hK";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 9BAF287D16; Thu,  8 Feb 2024 09:27:33 +0100 (CET)
+Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
+ [IPv6:2607:f8b0:4864:20::b2e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4TVm8F3jKwz9sM1;
- Thu,  8 Feb 2024 06:42:05 +0100 (CET)
-Message-ID: <a513d5d5-1cdd-4350-b4f3-5b3b1b2fae5b@denx.de>
-Date: Thu, 8 Feb 2024 06:42:04 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id BBCA5877D0
+ for <u-boot@lists.denx.de>; Thu,  8 Feb 2024 09:27:29 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=linus.walleij@linaro.org
+Received: by mail-yb1-xb2e.google.com with SMTP id
+ 3f1490d57ef6-dc745927098so168785276.3
+ for <u-boot@lists.denx.de>; Thu, 08 Feb 2024 00:27:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1707380848; x=1707985648; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=RMnHPM8sCpAlGKvRY2Qbz/ArUpX5xkJx79yASSfKjBI=;
+ b=OXK+x+hKDS/i5RJCxz/g1yCOrPyv+Q3DnywNbtWJdKSSbgWxyhgHevdajrpI2RPI3s
+ SW8E4zWab+vq1YP2NH4sHfD7flIYb3kF+m1ZaVDRlOKjj3zL7H4GdFz3dY+oa6UbzE5l
+ +9EZQInyAtKSMG6gjp8C3HNoh6DF5S8kzsNvOgvXfL4GyP79U8/FlusPvZdkaM+KU0gf
+ e72B065iIUhCdUBrJA1bQiXZ/LP3kVRZRh6/D62KaoDLW+gYf9SpZtpEbvoQZ81WtSND
+ Ta/BqZOakM1QkIkGq7Ts5/BTBwbEe5778ZKdPr1boomgh6R6SBVTOQMbPt9VEVe1R/3S
+ d7Cw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1707380848; x=1707985648;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=RMnHPM8sCpAlGKvRY2Qbz/ArUpX5xkJx79yASSfKjBI=;
+ b=N9hTMprDS+i9lAxCODckS5HuBWHBtIsuwyG2Dxfq95hEsoaOtgOgTNtTcPrV+qDpq2
+ vmTe7DLOcZtM7VRENVjWNb4h1vbtTlkL52t4U9t2QI6IHTF+9ZDXB3uwY+A3vW3hk6zC
+ uqAnZWA+f+11TIXpJJ5Re9dXd+/5qoJuulYzlCfySSqc1XwvK2z2YGh0zumNYhNwW0Ut
+ X3iQ4a652613NrXUA6K/j5YUrEYaUN38GcUMy4opgXWnpQz6qcbTXzXJafJWacr15Bcg
+ Ko9sNdN34Pn42qT+C4QDA3c/SX+pS1XIdz1XN7aM3MvupKddXrsVeUc+koGtmE0aJtat
+ y3vQ==
+X-Gm-Message-State: AOJu0YxgPHCeZYKxjK2SmEpcBCepHQHGZ+VUYTuAJ91PPtlLJaalUYHy
+ P/fuaBJfJA5E1xuwyoIxuXBfZCtIz9QoPHfqy372cKQsfK2MjI8k9lUiixCA20Vg/X0Bc1WmZLC
+ 0FJYNNInGgR8ulhGyRUwtvdYYWWSblZiBR/i3tg==
+X-Google-Smtp-Source: AGHT+IHcuakGUrAF4YBiKxUzn7qcdm0epVrg4DhyQAgfaEvEIyZ96qc/1LlwR2CK3nA3L9I1a5z0lkQWWmE1EyiLmDA=
+X-Received: by 2002:a25:fc18:0:b0:dbd:4883:44ce with SMTP id
+ v24-20020a25fc18000000b00dbd488344cemr7096862ybd.32.1707380848399; Thu, 08
+ Feb 2024 00:27:28 -0800 (PST)
 MIME-Version: 1.0
-Subject: Re: [PATCH v3] rng: Add Turris Mox rTWM RNG driver
-To: Max Resch <resch.max@gmail.com>, u-boot@lists.denx.de
-References: <20240207150017.666213-1-resch.max@gmail.com>
-Content-Language: en-US
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20240207150017.666213-1-resch.max@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 4TVm8F3jKwz9sM1
+References: <20240126124801.1164892-1-ole.orhagen@northern.tech>
+ <CACRpkdYLizF9Duy3ZCfqRsY-NMoLZJO8+TCyBHbQDqSOWuzonQ@mail.gmail.com>
+ <CAD5A3Cuba_EchhDWBfej5HGHsP-T6smgL-L+C6SV_bONf6EqYA@mail.gmail.com>
+ <ed02c9b9-5505-4aad-bc92-a2678607ff54@northern.tech>
+ <CACRpkdaiYgmzjsX8SPMFOFo=iK19s2y8Uuaysc+46Ba7D1PFBg@mail.gmail.com>
+ <CAD5A3Csm_sx4TBHQaADSMFgSqoF=aBZD2jm4_cmzNaonZJqAoQ@mail.gmail.com>
+In-Reply-To: <CAD5A3Csm_sx4TBHQaADSMFgSqoF=aBZD2jm4_cmzNaonZJqAoQ@mail.gmail.com>
+From: Linus Walleij <linus.walleij@linaro.org>
+Date: Thu, 8 Feb 2024 09:27:16 +0100
+Message-ID: <CACRpkdbhM6-JoWN6CbLpx_z+vzyx4hBdxqzB=iQ0G9MPa4r5+w@mail.gmail.com>
+Subject: Re: [PATCH v1] vexpress_ca9x4: Enable DM_SERIAL
+To: Ole Orhagen <ole.orhagen@northern.tech>
+Cc: Kristian Amlie <kristian.amlie@northern.tech>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ =?UTF-8?B?Q3PDs2vDoXMgQmVuY2U=?= <csokas.bence@prolan.hu>, 
+ Fabio Estevam <festevam@denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Liviu Dudau <liviu.dudau@foss.arm.com>, Mark Kettenis <kettenis@openbsd.org>, 
+ Patryk Biel <pbiel7@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Simon Glass <sjg@chromium.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Yang Xiwen <forbidden405@outlook.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,96 +105,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Max,
+On Mon, Feb 5, 2024 at 9:18=E2=80=AFAM Ole Orhagen <ole.orhagen@northern.te=
+ch>
+wrote:
 
-On 2/7/24 16:00, Max Resch wrote:
-> A RNG driver for Armada 3720 boards running the Turris Mox rWTM firmware
-> from CZ.NIC in the secure processor.
-> 
-> Signed-off-by: Max Resch <resch.max@gmail.com>
-> ---
-> 
-> Changes in v3:
->   - More meaningful variable names in accordance with review
-> 
-> Changes in v2:
->   - Removed ring buffer implementation
-> 
->   drivers/rng/turris_rwtm_rng.c | 18 +++++++++---------
->   1 file changed, 9 insertions(+), 9 deletions(-)
-> 
-> diff --git a/drivers/rng/turris_rwtm_rng.c b/drivers/rng/turris_rwtm_rng.c
-> index 143fe0b47f..ec2cb0bca3 100644
-> --- a/drivers/rng/turris_rwtm_rng.c
-> +++ b/drivers/rng/turris_rwtm_rng.c
-> @@ -41,18 +41,19 @@ static int turris_rwtm_rng_fill_entropy(phys_addr_t entropy, size_t size)
->   
->   static int turris_rwtm_rng_random_read(struct udevice *dev, void *data, size_t count)
->   {
-> -	phys_addr_t p;
-> +	struct turris_rwtm_rng_priv *priv = dev_get_priv(dev);
-> +	phys_addr_t phys;
+>
+> But I will try to dust it off and test it again.
+>>
+>
+> Did you get any results from the tests?
+>
 
-You've now just sent the update v2->v3. As v2 is not applied yet
-this is not the way to do it. Please squash this patch into the v2
-one a send this as v3 or even better v4 now.
 
-Thanks,
-Stefan
+Yes!
 
->   	size_t size;
->   	int ret;
->   
-> -	p = ((struct turris_rwtm_rng_priv *)dev_get_priv(dev))->buffer;
-> +	phys = priv->buffer;
->   
->   	while (count) {
->   		size = min_t(size_t, RNG_BUFFER_SIZE, count);
->   
-> -		ret = turris_rwtm_rng_fill_entropy(p, size);
-> +		ret = turris_rwtm_rng_fill_entropy(phys, size);
->   
-> -		memcpy(data, (void *)p, size);
-> +		memcpy(data, (void *)phys, size);
->   		count -= size;
->   		data = (u8 *)data + size;
->   	}
-> @@ -62,7 +63,7 @@ static int turris_rwtm_rng_random_read(struct udevice *dev, void *data, size_t c
->   
->   static int turris_rwtm_rng_probe(struct udevice *dev)
->   {
-> -	struct turris_rwtm_rng_priv *priv;
-> +	struct turris_rwtm_rng_priv *priv = dev_get_priv(dev);
->   	u32 args[] = { 0 };
->   	int ret;
->   
-> @@ -76,7 +77,6 @@ static int turris_rwtm_rng_probe(struct udevice *dev)
->   		return ret;
->   
->   	/* entropy buffer */
-> -	priv = (struct turris_rwtm_rng_priv *)dev_get_priv(dev);
->   	priv->buffer = 0;
->   
->   	/* buffer address need to be aligned */
-> @@ -89,10 +89,10 @@ static int turris_rwtm_rng_probe(struct udevice *dev)
->   
->   static int turris_rwtm_rng_remove(struct udevice *dev)
->   {
-> -	phys_addr_t p;
-> +	struct turris_rwtm_rng_priv *priv = dev_get_priv(dev);
-> +	phys_addr_t phys = priv->buffer;
->   
-> -	p = ((struct turris_rwtm_rng_priv *)dev_get_priv(dev))->buffer;
-> -	dma_free_coherent((void *)p);
-> +	dma_free_coherent((void *)phys);
->   
->   	return 0;
->   }
+It works fine both before and after the patch. Latest log from
+the actual hardware:
 
-Viele Grüße,
-Stefan Roese
+Cmd> usb_on
+Enabling debug USB...
 
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
+(here I copy over the binary to the internal SD-card which is
+presented over USB mass storage)
+
+Cmd> reboot
+
+Powering up system...
+Daughterboard fitted to site 1.
+
+Switching on ATXPSU...
+ATX3V3: ON
+VIOset: 1.8V
+MBtemp: 29 degC
+
+Configuring motherboard (rev D, var A)...
+IOFPGA  config: PASSED
+MUXFPGA config: PASSED
+OSC CLK config: PASSED
+Programming image \SOFTWARE\boot-a9.bin
+Erasing Flash image boot.bin
+...
+Erasing Flash
+...
+Writing Flash
+.....
+Updating eeprom with image boot.bin
+Image: boot.bin UPDATED from \SOFTWARE\boot-a9.bin
+
+Testing SMC devices (FPGA build 8)...
+SRAM 32MB test: PASSED
+VRAM  8MB test: PASSED
+LAN9118   test: PASSED
+USB & OTG test: PASSED
+KMI1/KMI2 test: PASSED
+MMC & SD  test: PASSED
+DVI image test: PASSED
+AACI AC97 test: PASSED
+CF card   test: PASSED
+UART port test: PASSED
+MAC addrs test: PASSED
+
+Reading Site 1 Board File \SITE1\HBI0191B\board.txt
+DB1 JTAG configuration complete.
+Setting DB1 OSCCLKS...
+DB1.0 DCC 0 SPI configuration complete.
+
+Writing SCC 0x40610000 with 0xBB8A802A
+Writing SCC 0x40610001 with 0x00001F09
+Writing SCC 0x40610002 with 0x00000000
+DB1.0 DCC 0 SCC configuration complete.
+
+DB SMB clock enabled.
+Waiting for SITE1 CB_READY...
+Testing SMB clock...
+Configuring MUXFPGA for DB1.
+Setting DVI mode for XGA.
+Releasing Daughterboard resets.
+Switching MCC log to UART1.
+
+ARM Versatile Express Boot Monitor
+Version:    V5.2.1
+Build Date: Apr  4 2013
+Daughterboard Site 1: V2P-CA9 Cortex A9
+Daughterboard Site 2: Not Used
+Running boot script from flash - BOOTSCRIPT
+
+
+U-Boot 2024.04-rc1-00101-g0101a2ffe125 (Feb 08 2024 - 09:21:31 +0100)
+
+DRAM:  512 MiB (effective 1 GiB)
+WARNING: Caches not enabled
+Core:  22 devices, 11 uclasses, devicetree: embed
+Flash: 128 MiB
+MMC:   mmci@5000: 0
+Loading Environment from Flash... OK
+In:    uart@9000
+Out:   uart@9000
+Err:   uart@9000
+Net:   eth0: ethernet@3,02000000
+Hit any key to stop autoboot:  0
+smc911x: detected LAN9118 controller
+smc911x: phy initialized
+smc911x: MAC 00:02:f7:00:3c:9d
+Using ethernet@3,02000000 device
+TFTP from server 192.168.1.140; our IP address is 192.168.1.35
+Filename 'zImage'.
+Load address: 0x62000000
+Loading: smc911x: MAC 00:02:f7:00:3c:9d
+
+Yours,
+Linus Walleij
