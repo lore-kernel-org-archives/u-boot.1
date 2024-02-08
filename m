@@ -4,58 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8CE3C48260
-	for <u-boot@archiver.kernel.org>; Thu,  8 Feb 2024 13:38:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2080C4828F
+	for <u-boot@archiver.kernel.org>; Thu,  8 Feb 2024 13:41:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F30487E50;
-	Thu,  8 Feb 2024 14:38:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 0E38587E40;
+	Thu,  8 Feb 2024 14:41:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1707399498;
-	bh=LAStPwk723gohgRXbqB6xj/oz+JP3u4Nq0M2UhHEG20=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=gFEehiYZ3TQzNoZL+mLB11tGop+K9TA5aKOU9Bwl87mX1L7kac+JH1XUbFqDFCDOg
-	 Hrzn5j4So+Tzmg+dSAMOGpd+PUB+k1N9+Lf+Z1sXbJak6pjK/K0lnTR+4fKoN4AilK
-	 oMaReaJvzyODZNxQsNUTeVLTZ5BXyUDoXX25xu5ZmutuGiAnD/ZjTIWLiowSpmwSNC
-	 d0LAPfO3JwrUhCHCxMymdtfG0Gv7Acdx2oDwkg/KxpdsdHLbzQDKRTfrzJ++Z3de1x
-	 ZFszXzhhM3eQP2jwWofDcZFUlmCQmpftwVk+OlHkSJXs8Q8XCUDN4QXpuYH9Go5D6r
-	 tJW3QEtSlTIQQ==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="KbcRPXXQ";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 36CDD87E51; Thu,  8 Feb 2024 14:41:55 +0100 (CET)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id CF63E87E42;
- Thu,  8 Feb 2024 14:38:16 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1707399497;
- bh=LAStPwk723gohgRXbqB6xj/oz+JP3u4Nq0M2UhHEG20=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=n6175Ncuz+FuHuuQeyuM1NX9v9S3UQ3o1e2axZWAIBPbJxYv8IHFaEud6TyRY5fAR
- yyRIjy9bp1KKwxR3naG91hCg4NioAkjfmSh67s8idK0xnQ4zQvfl9uDHPVPJTcW+ta
- B+gIpO57qz0nKRshUW8Ha7BvwqZb+v27SkQsZ8PE5CUJrCxI6fm0jrDM2EMB4Clp+7
- mWkbNC1JCr7H3sBp1gJuwHB+U2e4yc9J4enPyOh9u4Z0ZXy2ueES4KFsPo24/mi/Qc
- 4YQzZSMhjM0xJZ+lzX4knc/GbXu6K9JmcPoih02FyXPfTR5nyd4u5ypwTH5rMPAn9L
- QHAkRNNtZdS4A==
-Message-ID: <93f69779-3197-4ede-bb78-f2512ec30fc1@denx.de>
-Date: Thu, 8 Feb 2024 14:33:15 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id E729387E37
+ for <u-boot@lists.denx.de>; Thu,  8 Feb 2024 14:41:52 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-40ff28388a6so16599965e9.1
+ for <u-boot@lists.denx.de>; Thu, 08 Feb 2024 05:41:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1707399712; x=1708004512;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=vct8k7VPFSy/582A0Wm1Z5eua0LOlLnWo9u8Zomt0Tw=;
+ b=KbcRPXXQdQv+qZE7eMKe4oqNWMQbdzsYGUFXI2N3ibNmnbMkdzvSvdswwyyHcHdlWh
+ ylICfEiS+tvxxw/1vQgv+vXDYzuQqsgyCHHbr8rMaFJkdfpz7afIfRDhdtR8hDGlB23g
+ e2uKKGHANICnlNdiT2jyofh5Rh5pQxJ/GJh6jeggOhHyIypNuFY9Au6M6dK8cldPI0lG
+ gYIkZv/DWkYr/heaCMRRssY2O4DWve56frFDp1n/Tfwgr2Rhv7avn3dY/XNDGHRqHWMr
+ u6ipc8uh2nrLpjLB2bDuNVhkzjhGcqD5mFl56DH5hCP2IX8msJnV3OccjmTWzghHOhea
+ Oevw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1707399712; x=1708004512;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=vct8k7VPFSy/582A0Wm1Z5eua0LOlLnWo9u8Zomt0Tw=;
+ b=jp5ZnAsM0wS2BBNXupnyaoe+dWZ8ulyvDHrwg3bizwR+zuzkd89g8zla0Oi8zUoRhR
+ tS1NDXI+uLIK3l6nomnDkL+gYMVrv8VkhfmV1UyEFhpuq1pKSklzDow2oooYj9UpNf4u
+ pdvO59rqV9nzpCyIc5mVp8bYOjfkRCfMYySCoEoDfrE6eyNkiN+UA8ncnbwqHUso643u
+ yuiA9RPVXcT3lN+1i5defKiXlPv/tLtQXHp7Ji55KEBpcPKAieDajkbeG6A39SD9YYUO
+ N5z0ZS4CtLKt6sBMrlAkkY6s4mxb/giZ+ynTcx1TR25ol6AfDY+NfIBasHdY3Dj5LZ89
+ AvCw==
+X-Gm-Message-State: AOJu0YyiXtvOHRvIoa+5gAvAimNpydunX9HAGpJ0l3BANq3O5gAxdzVR
+ WdKdizWSWgkL7B/Pe4O/ydkm4Atfliv0oUCWr8PPqLs30E/+9VFErJJNixtexsA=
+X-Google-Smtp-Source: AGHT+IFu66uvYxP3ARCTNeIKj3NhFnfv3P+m/JL/fxaJ7bAHDNnkDlYMDjVumlLH6NfumR/doZG1IQ==
+X-Received: by 2002:a05:600c:4f41:b0:40f:bde9:6e29 with SMTP id
+ m1-20020a05600c4f4100b0040fbde96e29mr7501965wmq.39.1707399712254; 
+ Thu, 08 Feb 2024 05:41:52 -0800 (PST)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV09iuzWoQgr1NKbqiQMIY4eTI0f6OrjcIGWLtAfXwNhM2HLMpMpyBkzAqzzcg2898O5o7ImpFXlNKf0JXqI5yDPEkk6IS0WkQv+oX3RnlHRP0/TDaGWe3zUsLdU67swZmywngIiZ9TS2Ffhq3wAlWBDQcAqb8653rdDu8/25Rt8fmmpdSTburIQ9yi5oF5khkXlklOjh9cF2UZgSsTS26mvWWybK1lWRZ0qeuho+gQCIP2YgQ0ocMBbPKq9hTAVM4fAwBFPVaVmVF6fKaJ33rQEobrKRz6qgoC1ek=
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ s10-20020a05600c044a00b004100b3c41absm1606204wmb.30.2024.02.08.05.41.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 08 Feb 2024 05:41:51 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Igor Opaniuk <igor.opaniuk@foundries.io>, u-boot@lists.denx.de
+Cc: Igor Opaniuk <igor.opaniuk@gmail.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Ivan Khoronzhuk
+ <ivan.khoronzhuk@gmail.com>, Jens Wiklander <jens.wiklander@linaro.org>,
+ Michal Simek <michal.simek@amd.com>, Qu Wenruo <wqu@suse.com>, Stefan
+ Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH v1 2/7] avb: move SPDX license itdentifiers to the first
+ line
+In-Reply-To: <20240206223153.3060433-3-igor.opaniuk@foundries.io>
+References: <20240206223153.3060433-1-igor.opaniuk@foundries.io>
+ <20240206223153.3060433-3-igor.opaniuk@foundries.io>
+Date: Thu, 08 Feb 2024 14:41:50 +0100
+Message-ID: <87bk8rjco1.fsf@baylibre.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [FIX PATCH v1] Fix: common: usb_hub: Reset only USB3.0 hub
-Content-Language: en-US
-To: Shantur Rathore <i@shantur.com>
-Cc: u-boot@lists.denx.de, andre.przywara@arm.com, dsimic@manjaro.org,
- Hector Martin <marcan@marcan.st>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-References: <20240207102327.35125-1-i@shantur.com>
- <32db6dba-d515-4077-9d72-d77a7f431335@denx.de>
- <CABEcMwXW3KXQCJM16Qhk=19Sss3zdtQyWtJEed5y=na2mP8RFA@mail.gmail.com>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CABEcMwXW3KXQCJM16Qhk=19Sss3zdtQyWtJEed5y=na2mP8RFA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,64 +98,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/8/24 12:30, Shantur Rathore wrote:
-> Hi Marek,
-> 
-> On Wed, Feb 7, 2024 at 1:07 PM Marek Vasut <marex@denx.de> wrote:
->>
->> On 2/7/24 11:23, Shantur Rathore wrote:
->>> USB 3.0 spec requires hub to reset device while
->>> enumeration. Some USB 2.0 hubs / devices don't
->>> handle this well and after implementation of
->>> reset some USB 2.0 disks weren't detected on
->>> Allwinner based boards.
->>>
->>> Resetting only when hub is USB 3.0 fixes it.
->>
->> It would be good to include as many details about the faulty hardware in
->> the commit message as possible, so that when someone else runs into
->> this, they would have all that information available.
->>
->>> Tested-by: Andre Przywara <andre.przywara@arm.com>
->>>
->>> Signed-off-by: Shantur Rathore <i@shantur.com>
->>> ---
->>>
->>>    common/usb_hub.c | 6 ++++--
->>>    1 file changed, 4 insertions(+), 2 deletions(-)
->>>
->>> diff --git a/common/usb_hub.c b/common/usb_hub.c
->>> index 3fb7e14d10..2e054eb935 100644
->>> --- a/common/usb_hub.c
->>> +++ b/common/usb_hub.c
->>> @@ -174,8 +174,10 @@ static void usb_hub_power_on(struct usb_hub_device *hub)
->>>
->>>        debug("enabling power on all ports\n");
->>>        for (i = 0; i < dev->maxchild; i++) {
->>> -             usb_set_port_feature(dev, i + 1, USB_PORT_FEAT_RESET);
->>> -             debug("Reset : port %d returns %lX\n", i + 1, dev->status);
->>> +             if (usb_hub_is_superspeed(dev)) {
->>
->> Should this condition be "all which are lower than superspeed" instead ,
->> so when the next generation of USB comes, this problem won't trigger ?
->>
->> What does Linux do btw ?
-> 
-> As of now Linux checks if the hub is superspeed
-> https://github.com/torvalds/linux/blob/master/drivers/usb/core/hub.c#L2859
-> 
-> which is
->   return hdev->descriptor.bDeviceProtocol == USB_HUB_PR_SS; // USB_HUB_PR_SS = 3
-> 
-> This holds true for newer SuperSpeedPlus hubs as well.
-> https://github.com/torvalds/linux/blob/master/drivers/usb/core/hub.h#L155
-> 
-> We can change the check to be  bDeviceProtocol > 2 but who knows if
-> things change in the newer version of spec.
-> I am open to suggestions.
+Hi Igor,
 
-Please just include the ^ in the commit description. Use link to 
-git.kernel.org , not some mirror . This is extremely useful information 
-and, well, you already wrote the V2 commit message addition in this answer.
+Thank you for the patch.
 
-Thanks
+On mar., f=C3=A9vr. 06, 2024 at 23:31, Igor Opaniuk <igor.opaniuk@foundries=
+.io> wrote:
+
+> From: Igor Opaniuk <igor.opaniuk@gmail.com>
+>
+> Move SPDX license identifiers to the first line, so it conforms
+> to license placement rule [1]:
+>
+> Placement:
+> The SPDX license identifier in kernel files shall be added at the first
+> possible line in a file which can contain a comment.  For the majority
+> of files this is the first line, except for scripts which require the
+> '#!PATH_TO_INTERPRETER' in the first line.  For those scripts the SPDX
+> identifier goes into the second line.
+>
+> [1] https://www.kernel.org/doc/Documentation/process/license-rules.rst
+>
+> Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
+
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+
+Nitpick in the title: itdentifiers -> identifiers.
+If no other remarks in the series, will fix when applying.
+
+> ---
+>
+>  cmd/avb.c                              | 4 +---
+>  common/avb_verify.c                    | 3 +--
+>  include/avb_verify.h                   | 4 +---
+>  test/py/tests/test_android/test_avb.py | 3 +--
+>  4 files changed, 4 insertions(+), 10 deletions(-)
+>
+> diff --git a/cmd/avb.c b/cmd/avb.c
+> index 783f51b8169..ce8b63873f2 100644
+> --- a/cmd/avb.c
+> +++ b/cmd/avb.c
+> @@ -1,8 +1,6 @@
+> -
+> +// SPDX-License-Identifier: GPL-2.0+
+>  /*
+>   * (C) Copyright 2018, Linaro Limited
+> - *
+> - * SPDX-License-Identifier:	GPL-2.0+
+>   */
+>=20=20
+>  #include <avb_verify.h>
+> diff --git a/common/avb_verify.c b/common/avb_verify.c
+> index 59f2c25e0de..938a5383b5d 100644
+> --- a/common/avb_verify.c
+> +++ b/common/avb_verify.c
+> @@ -1,7 +1,6 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+>  /*
+>   * (C) Copyright 2018, Linaro Limited
+> - *
+> - * SPDX-License-Identifier:	GPL-2.0+
+>   */
+>=20=20
+>  #include <avb_verify.h>
+> diff --git a/include/avb_verify.h b/include/avb_verify.h
+> index 1e787ba6668..2fb850044d9 100644
+> --- a/include/avb_verify.h
+> +++ b/include/avb_verify.h
+> @@ -1,8 +1,6 @@
+> -
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+>  /*
+>   * (C) Copyright 2018, Linaro Limited
+> - *
+> - * SPDX-License-Identifier:	GPL-2.0+
+>   */
+>=20=20
+>  #ifndef	_AVB_VERIFY_H
+> diff --git a/test/py/tests/test_android/test_avb.py b/test/py/tests/test_=
+android/test_avb.py
+> index 238b48c90fa..865efbca4de 100644
+> --- a/test/py/tests/test_android/test_avb.py
+> +++ b/test/py/tests/test_android/test_avb.py
+> @@ -1,6 +1,5 @@
+> -# Copyright (c) 2018, Linaro Limited
+> -#
+>  # SPDX-License-Identifier:  GPL-2.0+
+> +# Copyright (c) 2018, Linaro Limited
+>  #
+>  # Android Verified Boot 2.0 Test
+>=20=20
+> --=20
+> 2.34.1
