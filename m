@@ -4,92 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 035DDC48260
-	for <u-boot@archiver.kernel.org>; Thu,  8 Feb 2024 10:50:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E2F8C4828F
+	for <u-boot@archiver.kernel.org>; Thu,  8 Feb 2024 11:23:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0CCF87E3B;
-	Thu,  8 Feb 2024 11:50:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 8A35187E38;
+	Thu,  8 Feb 2024 12:22:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="mDsaApmF";
+	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="Q3W1/6B0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0DEE186D9E; Thu,  8 Feb 2024 11:50:12 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ id 3831F87D1E; Thu,  8 Feb 2024 12:22:58 +0100 (CET)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.186])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DA62187BF0
- for <u-boot@lists.denx.de>; Thu,  8 Feb 2024 11:50:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 31CCC87D1E
+ for <u-boot@lists.denx.de>; Thu,  8 Feb 2024 12:22:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 4B8F540A28
- for <u-boot@lists.denx.de>; Thu,  8 Feb 2024 10:50:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1707389402;
- bh=s78yCo4rl+eNr4tyduTY1oe7C8VCEwC83q9jKVIrGkQ=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=mDsaApmFsuthfEo0py9h17WMLxNSwJS/7/2NEdc4O64bZpumbSP8lxLQXXQ8Kd45/
- o8HKs+jTxpeAo8cr9NiKz/rdEdCRGiakqQvZoqOPnJ8IIAdJKHzCky0l3oQ4LSip7m
- OZOi57qMmdUV1kE9qx4MvgtMwFUu0AJ2308uQkr+xu1uRUIn4Kpnr+9A3WRO7XoEUV
- se4GZ97d8p0WC3zsh6Bru/EktCtcJQ0ZpSqDlKZ1Br9EhoforDF2EaBeFfNC77rq+1
- HpvT3NL3Hv1kdLqS3JiWPH22m0Oe2jfR8koD9H2A4RjVwlVuylKsnHCBQ1QK/mfY4i
- g3bgm+zBSkI7w==
-Received: by mail-wr1-f72.google.com with SMTP id
- ffacd0b85a97d-33b508b9738so298175f8f.0
- for <u-boot@lists.denx.de>; Thu, 08 Feb 2024 02:50:02 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707389401; x=1707994201;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=s78yCo4rl+eNr4tyduTY1oe7C8VCEwC83q9jKVIrGkQ=;
- b=jBJjkmcSn0rGeDTwJeyhkZRYQxC4QyDjBYCrgsKovGZQpDT1dc8xtSWyE07HiyLZhs
- cjqEbA8JIKhaWjSglnmxLR0/35HPrWCDxWOBpxiXxxWloj4Nlt4BcrPtEdf5zdI8iFxu
- JdJgMZMYBg7QsdEsi4L1dqTfhRnxg4E30azNxmEhJBqAw8AjNOo/CQ5JGvMux+bqvsWt
- 52PgakOGJhy9COPEPTqwJhagGRv9XUkO4D8wstOOGlv6SbLKGXyWI69Dyj114Jg7dO+/
- MtEGwN4Wz0DD1q2kMkAXvt0OX75cjIyjLqQYd9akr8Zz5UkZ4h4IdYMt0YECiZdpMBSA
- HWug==
-X-Gm-Message-State: AOJu0YzLzRWhwWcXyV+eul+oiHBs4Y1pjsyiDaXYrUEEEK1ZX+G9q3Qt
- 2Sgxi+kUcMvAvDPgH8n+GA53n203j3rqg3p+uFMqSg8biygJX1q+Ez/Pkjkk1nb8lKXdq6IGZ/W
- y6AwWeILd0Lx4erBVRI44Cz+i6UfebY9e9ZshBqRMF9Ce+m6OCvQ/QRlpu6QXD/TP4aLFBjc6Xl
- Q=
-X-Received: by 2002:a05:6000:4007:b0:33b:5c8c:bcf with SMTP id
- cp7-20020a056000400700b0033b5c8c0bcfmr114402wrb.10.1707389401776; 
- Thu, 08 Feb 2024 02:50:01 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFVL4AnnAAJJNrBxm16lRWLVAFe1WUeqGCcg7u6D8JT+MfD9e3o/tM8p7Nn+vUWGLKGvP/Izg==
-X-Received: by 2002:a05:6000:4007:b0:33b:5c8c:bcf with SMTP id
- cp7-20020a056000400700b0033b5c8c0bcfmr114378wrb.10.1707389401546; 
- Thu, 08 Feb 2024 02:50:01 -0800 (PST)
-X-Forwarded-Encrypted: i=1;
- AJvYcCWCplii3wFdLSDJZvSbwZ2Pz+EU2x+nA3orlpnfq/pdlqGSGj7YUBC+K3Lm1AHW2/ocIWL9Q3Rb06STuNrkbixtulUdbNJGs165bTrhSwPFDQTUdaM/2VxNHzmi5nSWZBPl1pJRjYxG
-Received: from workstation5.fritz.box
- (ip-178-202-040-247.um47.pools.vodafone-ip.de. [178.202.40.247])
- by smtp.gmail.com with ESMTPSA id
- v12-20020a05600c470c00b0040ff7e3170asm1248348wmo.2.2024.02.08.02.50.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 Feb 2024 02:50:01 -0800 (PST)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 2/2] smbios: fill wake-up type
-Date: Thu,  8 Feb 2024 11:49:52 +0100
-Message-ID: <20240208104952.19964-3-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=none dis=none) header.from=xs4all.nl
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
+X-KPN-MessageId: 69aabb5c-c674-11ee-90ec-00505699b430
+Received: from smtp.kpnmail.nl (unknown [10.31.155.6])
+ by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+ id 69aabb5c-c674-11ee-90ec-00505699b430;
+ Thu, 08 Feb 2024 12:22:58 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
+ h=subject:to:from:message-id:date;
+ bh=+c86awgLgIOYWRvTC7Zd74i5LeP72LH+JwGNhX+F7x0=;
+ b=Q3W1/6B0VNLbXnAz2ILJgPe94378zryem4ypSt/dKh0xuthR1on3E9LmCutTLbiwfRFERinHXlLk2
+ 6cy7SEARFaj2nSCjj7okSi1yPs+FEyYsBeND2sT7W0JXhDXc4+v4QXg6jhM8hZ5JzMNKrU5LWBYCu3
+ QqMB9RuJmLiqlRQwqvOrb1bH6Dyxuv/Yf2jJZ5OrbmtT7MBfT2iBUVgt8SnsZzXlsYcEsUMr2xk8v1
+ G92KBwHQWix3KUt0tpWHNA3sg+D2rMF8RRU/gVdXCVzDTVe2nhWkTl69WkiR57l2tXNqn5n7AWzWtj
+ 7WHuPj0exOqXFzyd9f0DuCwSF3Y4fVw==
+X-KPN-MID: 33|59PR5+IPDeBoTfw3Yj2DnAvOd0cDEKVLi0PdT6u0yJuibOUbjuI+6HCuht/KP/q
+ xh8TbA/t9FGeR+a5pn+IZwI7aMcOUnp87uXgiaGgx7mY=
+X-KPN-VerifiedSender: Yes
+X-CMASSUN: 33|WTb0QxMK6q9AysdDmuQaroSlJ9VSV/aCXBPSPqkK6mWHOxJuw+D7biQzfmcevez
+ J2fAQzbOMUykN6EbOBE2xoA==
+X-Originating-IP: 80.61.163.207
+Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
+ [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
+ id 67277ced-c674-11ee-9e74-00505699772e;
+ Thu, 08 Feb 2024 12:22:55 +0100 (CET)
+Date: Thu, 08 Feb 2024 12:22:54 +0100
+Message-Id: <87il2zp5dd.fsf@bloch.sibelius.xs4all.nl>
+From: Mark Kettenis <mark.kettenis@xs4all.nl>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: trini@konsulko.com, sjg@chromium.org, u-boot@lists.denx.de,
+ heinrich.schuchardt@canonical.com
 In-Reply-To: <20240208104952.19964-1-heinrich.schuchardt@canonical.com>
+ (message from Heinrich Schuchardt on Thu, 8 Feb 2024 11:49:50 +0100)
+Subject: Re: [PATCH 0/2] smbios: fill wake-up type
 References: <20240208104952.19964-1-heinrich.schuchardt@canonical.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,40 +74,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We should not use the reserved value 0x00 for the wake up type but
-use 0x06 (Power Switch).
+> From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Date: Thu,  8 Feb 2024 11:49:50 +0100
+> 
+> We should not use the reserved value 0x00 for the wake up type but
+> use 0x06 (Power Switch).
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- include/smbios.h | 2 ++
- lib/smbios.c     | 1 +
- 2 files changed, 3 insertions(+)
+Well, if I look at my collection of boards, many don't even have a
+power switch.  So I think the only sensible default value is 0x02
+(Unknown).
 
-diff --git a/include/smbios.h b/include/smbios.h
-index 3df8827b60d..704d7e5dc86 100644
---- a/include/smbios.h
-+++ b/include/smbios.h
-@@ -108,6 +108,8 @@ struct __packed smbios_type0 {
- 	char eos[SMBIOS_STRUCT_EOS_BYTES];
- };
- 
-+#define SMBIOS_WAKEUP_TYPE_POWER_SWITCH 0x06
-+
- struct __packed smbios_type1 {
- 	u8 type;
- 	u8 length;
-diff --git a/lib/smbios.c b/lib/smbios.c
-index c83af730a91..8599743738a 100644
---- a/lib/smbios.c
-+++ b/lib/smbios.c
-@@ -394,6 +394,7 @@ static int smbios_write_type1(ulong *current, int handle,
- 	} else {
- 		t->serial_number = smbios_add_prop(ctx, "serial", NULL);
- 	}
-+	t->wakeup_type = SMBIOS_WAKEUP_TYPE_POWER_SWITCH;
- 	t->sku_number = smbios_add_prop(ctx, "sku", NULL);
- 	t->family = smbios_add_prop(ctx, "family", NULL);
- 
--- 
-2.43.0
+If there is a compelling use-case for providing a more accurate value,
+that should probably be done by the various PMIC drivers.
 
+> Correctly display wake-up type in smbios command.
+> 
+> Display SMBIOS type 1 field family in smbios command.
+> 
+> Heinrich Schuchardt (2):
+>   cmd: smbios: type 1 wake-up time, family
+>   smbios: fill wake-up type
+> 
+>  cmd/smbios.c     | 25 +++++++++++++++++++++++--
+>  include/smbios.h |  2 ++
+>  lib/smbios.c     |  1 +
+>  3 files changed, 26 insertions(+), 2 deletions(-)
+> 
+> -- 
+> 2.43.0
+> 
+> 
