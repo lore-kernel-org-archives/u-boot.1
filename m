@@ -4,52 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5248CC48260
-	for <u-boot@archiver.kernel.org>; Thu,  8 Feb 2024 17:34:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9D66C4828F
+	for <u-boot@archiver.kernel.org>; Thu,  8 Feb 2024 19:37:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 98FDB87CDB;
-	Thu,  8 Feb 2024 18:34:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id A089E87CED;
+	Thu,  8 Feb 2024 20:37:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1707413665;
-	bh=bRSL9B7JLYjMqq465FU5uMumF3dW8JljXh8rHRNHAjk=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=kS/wbItPAhDAjjkmI2LiGk4Nt7amfG4sZ3jQMYFQ/FyIA4oZUd1HSCtxh3FQbrL1y
-	 iyJYQVOhEyO99HLwrm/uWRswa255+vGyd/iK9Y9IQCodB06k1CE5yxJUZoUi6w69yT
-	 JEYIbHKwERwNVpgxx48vLKGOWvjxSmXLisDPLPd5JWL2iyRrrR99Z7dvyTgtTGnA+P
-	 5emDkTMnI6VCGGRtN3ysUpMtl62+dPubydMwVirRHXk61u4tZv5YMqNmA6Fv7mXWS6
-	 +JyUysZ25YlH3Oe1N67Z0sGGPJQVAXZrMkzowbtmxsKQoBkcVtntWI2pLdu2C6UN3e
-	 u7jjZ4eEZuugQ==
-Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="iBDt2Clg";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 498DA87CF9; Thu,  8 Feb 2024 20:37:57 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 016A087CCF;
- Thu,  8 Feb 2024 18:34:23 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1707413664;
- bh=bRSL9B7JLYjMqq465FU5uMumF3dW8JljXh8rHRNHAjk=;
- h=From:To:Cc:Subject:Date:From;
- b=jqmjY4/RQX9l1U/YMlp6p+aGb8WsFQ/HkRei1PQ0i9DTXHfIkLozk/aUwwk8Y2cgD
- L+V+cx0xOUv64FtgT5ES7Jb8WbxnRFgW11/Q+45pWpSGkGKDI5FqibtbqD9Udry+XH
- OjmkoGFGhzfwGtNNa5lqu+qRT1vOV4Xf23z/abpS5glOytsqvGsZMfjxF4EqhQJr6t
- mJM2sIQ5Ymucx6GUGWq4F0nT4oMu9YuD4XJKoGeONYoT+XLb4vlgro6aXtel8ZbrOX
- LaBCjw5QxK4yu4Eabv9YN57EZKop5QEmOW8xI2qfV5FZI6H1CHu8riBz3yi1F1ewQ3
- 43V32gRLPMTHA==
-From: Marek Vasut <marex@denx.de>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Fabio Estevam <festevam@gmail.com>,
- Jagan Teki <jagan@amarulasolutions.com>, Stefano Babic <sbabic@denx.de>
-Subject: [PATCH] ARM: imx: Let SPL configure ECSPI1 clock on Data Modul i.MX8M
- Plus eDM SBC
-Date: Thu,  8 Feb 2024 18:33:50 +0100
-Message-ID: <20240208173415.397633-1-marex@denx.de>
-X-Mailer: git-send-email 2.43.0
+ by phobos.denx.de (Postfix) with ESMTPS id 7A8D387CE8
+ for <u-boot@lists.denx.de>; Thu,  8 Feb 2024 20:37:54 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 418Jboaf093738;
+ Thu, 8 Feb 2024 13:37:50 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1707421071;
+ bh=gd+R+Ee6FiYFMzmbUIsP8F2mpc9swQrFYveLWdKrUQM=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=iBDt2Clg2NXEPWEbd8fz8+fesM95LpPzBvLQGnjg+W8Ksmm86NzEXdGwi7gArWaC3
+ CHgfR7C1osT/5/cOp26Nchm5KzjPgFMqIZxbsElGGrtxex6hWa7eI7bATLEIlqq+G+
+ HunsQSvAxbVLkkayGozjyZ2ltq6029rJyAG/MqZ8=
+Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 418Jbo3o084148
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 8 Feb 2024 13:37:50 -0600
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 8
+ Feb 2024 13:37:50 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 8 Feb 2024 13:37:50 -0600
+Received: from [10.249.42.149] ([10.249.42.149])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 418JboS1115134;
+ Thu, 8 Feb 2024 13:37:50 -0600
+Message-ID: <3789611b-7f39-417b-bbdb-af6d7b10ce8d@ti.com>
+Date: Thu, 8 Feb 2024 13:37:50 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] ti: keystone2: Move common Kconfig selections to
+ under ARCH_KEYSTONE
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>
+CC: Simon Glass <sjg@chromium.org>, Nishanth Menon <nm@ti.com>, Vignesh
+ Raghavendra <vigneshr@ti.com>, <u-boot@lists.denx.de>
+References: <20230725155416.100678-1-afd@ti.com>
+ <20230725155416.100678-2-afd@ti.com> <20230725174105.GY3630934@bill-the-cat>
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <20230725174105.GY3630934@bill-the-cat>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,36 +82,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The SPL clock code does configure the ECSPI clock frequency, which has
-to match the mxc-spi driver configuration for successful SPI NOR boot.
-Drop the assigned-clock from DT ecspi1 node on this board to let the
-SPL clock code do the configuration and keep it aligned with the driver
-expectation.
+On 7/25/23 12:41 PM, Tom Rini wrote:
+> On Tue, Jul 25, 2023 at 10:54:16AM -0500, Andrew Davis wrote:
+> 
+>> These select/imply settings are common to the whole architecture not just
+>> these boards, move these settings to the architecture config.
+>>
+>> Signed-off-by: Andrew Davis <afd@ti.com>
+> 
+> Reviewed-by: Tom Rini <trini@konsulko.com>
+> 
 
-Signed-off-by: Marek Vasut <marex@denx.de>
----
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-Cc: Fabio Estevam <festevam@gmail.com>
-Cc: Jagan Teki <jagan@amarulasolutions.com>
-Cc: Stefano Babic <sbabic@denx.de>
----
- arch/arm/dts/imx8mp-data-modul-edm-sbc-u-boot.dtsi | 3 +++
- 1 file changed, 3 insertions(+)
-
-diff --git a/arch/arm/dts/imx8mp-data-modul-edm-sbc-u-boot.dtsi b/arch/arm/dts/imx8mp-data-modul-edm-sbc-u-boot.dtsi
-index cb6ea356fd7..805b5f57955 100644
---- a/arch/arm/dts/imx8mp-data-modul-edm-sbc-u-boot.dtsi
-+++ b/arch/arm/dts/imx8mp-data-modul-edm-sbc-u-boot.dtsi
-@@ -45,6 +45,9 @@
- };
- 
- &ecspi1 {
-+	/delete-property/ assigned-clocks;
-+	/delete-property/ assigned-clock-rates;
-+	/delete-property/ assigned-clock-parents;
- 	bootph-pre-ram;
- 	flash@0 {
- 		bootph-pre-ram;
--- 
-2.43.0
-
+ping
