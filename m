@@ -4,77 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F76CC48260
-	for <u-boot@archiver.kernel.org>; Thu,  8 Feb 2024 20:19:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 868FBC4828F
+	for <u-boot@archiver.kernel.org>; Thu,  8 Feb 2024 21:18:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 78EB487CED;
-	Thu,  8 Feb 2024 21:19:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 738CD87CCF;
+	Thu,  8 Feb 2024 22:18:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VVHlxnjH";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QBE0v3xK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4976F87CF9; Thu,  8 Feb 2024 21:19:00 +0100 (CET)
-Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
- [IPv6:2607:f8b0:4864:20::112b])
+ id 2506287B85; Thu,  8 Feb 2024 22:18:00 +0100 (CET)
+Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
+ [IPv6:2607:f8b0:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8680587E34
- for <u-boot@lists.denx.de>; Thu,  8 Feb 2024 21:18:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1283187CCF
+ for <u-boot@lists.denx.de>; Thu,  8 Feb 2024 22:17:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112b.google.com with SMTP id
- 00721157ae682-60498c31743so2970607b3.3
- for <u-boot@lists.denx.de>; Thu, 08 Feb 2024 12:18:55 -0800 (PST)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-6e06ba6d01fso56021b3a.0
+ for <u-boot@lists.denx.de>; Thu, 08 Feb 2024 13:17:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1707423533; x=1708028333; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=422oiRhhLWfVhJobgkg0Z3TfEExcrbOGtJr38uEa8ZM=;
- b=VVHlxnjHgXLPQXk4zdCNsus+j8WcKC1phTvsyu+BKwMZbGnzawQuKWR0jPJGN/nZWk
- SKK1ZqsiVoDjSksANed6Y0kKnysIY09kUaQrEhvavsQuv/jPOh0rAYfd07nT5ZCMAa2d
- dXW68Au0NUxiyFt3BkNasczw3yH0XWCQ4KZ1s=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707423533; x=1708028333;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1707427076; x=1708031876; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=422oiRhhLWfVhJobgkg0Z3TfEExcrbOGtJr38uEa8ZM=;
- b=Xh5BgHZ1PkM9vjLJbxVFsPvVXchZj5T6sc6N6Q/BLxxjyZ3VQ3SJZSAQbxZJoM87wh
- Ssw+KV//94WwdmOqNz/0lPj+oJ9loqOkrUm22p3DtGSFMk46+770OLHnj3b/NdCAnl+S
- aBVAWVFGxJFGfenue8f0WBMqirbJg165i4JsdopOZSGZqVD2IOAzFdL3xjb+1bcy1Jq7
- lrlwVVopz10R5o/D7+ghCSSiZ4CE4lr9CihdaTPuk8tpGZhCWJcIJ7KmAUV5ByvdaAXT
- +iijAsMeyeKpDJ+slWDEG8FTWq8XTZP3gvrT7YXuGdAEEL/JGdsxtouG/p2MFUy3Mkvv
- leiA==
-X-Gm-Message-State: AOJu0YxlvT3kVpuPYrvtvEEIZjpGVHfEJjcAWnttSY6//dKLdv59/VE7
- uI3LQp1VSYBG/cP5NmCrNDWLXWHfoCVqjGq4suB4cyDtAdGW3RvbwqQ0Of4Diul6VETC+NxUX1F
- bbAg=
-X-Google-Smtp-Source: AGHT+IFVbGFT/M3If+uJKYsaTO9kuMFWp22C4PddzvKKyTOy8AVT9iZYbxeeCQPkl7LLHQkyFf1gjw==
-X-Received: by 2002:a0d:c341:0:b0:5ff:d871:b4d with SMTP id
- f62-20020a0dc341000000b005ffd8710b4dmr482748ywd.44.1707423533301; 
- Thu, 08 Feb 2024 12:18:53 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
- [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- i204-20020a0ddfd5000000b005ff8e964b10sm23885ywe.35.2024.02.08.12.18.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 Feb 2024 12:18:52 -0800 (PST)
-Date: Thu, 8 Feb 2024 15:18:51 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: Pull request: Please pull u-boot-imx-master-20240208
-Message-ID: <20240208201851.GL1152441@bill-the-cat>
-References: <20240208143633.1345238-1-festevam@gmail.com>
+ bh=O/J/WI4uSaz5CObmOn/91rG2BgGhpnMqtZUdLG+ZiHY=;
+ b=QBE0v3xKC4SzwxnU+2NL3b3lJ3ZzY/1jwmmS+cJG8ipuymUmNo60M7+LS7RPxUYpqy
+ +L6bX5QKrnEf5THiyT+mFowhtIbI3hE/RE/cdMCE3+RCubwf75OqVXe5QVpBQ5CcRNgi
+ YCAO0CA+qmAHQ/2MMYJ9ITu89mWO6UwNjzFDobUdgHazP8IvMR+xg8+0kwR1XA1SHnmI
+ 44p8hVLQNe1krZmIQAdNPaL3m2raYHGGMnqqgVTc7Xfk8kA2oOaZWHzF83DlHWwZYAh2
+ gSfL5hmFG9mWTkmTZaWeMgKCtYp/JnbUcAzK07VrjJom3MypKVT5HQUjcjARnO1TdXa1
+ lDxg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1707427076; x=1708031876;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=O/J/WI4uSaz5CObmOn/91rG2BgGhpnMqtZUdLG+ZiHY=;
+ b=ZhnASV/hdehXOCtdVgmPxZ1JCk+jhLmypTWDAqZJYA+Eu/IoWFeOejmmDoiO4kilXS
+ 6cgn10i0H568B28FraqTeJQD/yvTAXAvZnxPfDzIdkOZyqabZpBCBARJRevVDgaJ6IkY
+ OmhzH+4bVkgWG+v6Gq4Cx8BUg0c9oXUhKM3IckdOgOZkY7GEKLB+hjvXmhP76SE8Kooa
+ jkhKUE2bozwGfAOVBGBewmVf2LZMa+SYuoSFtbab5wko9mQOjkOEx32FaoptUe0IEGyo
+ 2zjBamiGE0pPaegEeXSq2lXgh+M7KYubhQrmeL29+fj0D/Uz1slyZ7f/pR2MOtW9QQKl
+ py/w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV9EOmqqvEGg+urRYxmagErnf8motAOqMb4ESPogTPB9H7Kb01ovAN9nwTx3uwkCv/mmttQjBwFo5hwDfMDAZk2NrYjZA==
+X-Gm-Message-State: AOJu0YyNdUTw5EQDMGdUcTfA3BDtBDGYzRtZgPP/ua+0SKSzKr8Ri6mc
+ dDwWgPdQl0uySk+rbXhuk2VgzugWxYcaAi95ezvaXo22rOl39ij59gl6yiPSzNois1/mx21IQC4
+ XEmmYKuIc0SuCzuLozNRft5y1k+Y=
+X-Google-Smtp-Source: AGHT+IF2twAVbhVNcfLeHnqj5VIcy+0udhtUi6i46uPLMResiy1v7ylGWzo7bGhpoyXuRXyq8QCR/sWBMHzljPvRAfk=
+X-Received: by 2002:a05:6a00:9291:b0:6e0:7e60:6b84 with SMTP id
+ jw17-20020a056a00929100b006e07e606b84mr475235pfb.3.1707427076231; Thu, 08 Feb
+ 2024 13:17:56 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="vIr5qdJ3Em+ZynBA"
-Content-Disposition: inline
-In-Reply-To: <20240208143633.1345238-1-festevam@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20240128214335.120280-1-Mr.Bossman075@gmail.com>
+ <CAOMZO5BJRDdD5a7JZ+ws7aqz0p0nmK_vXiq33=V3s5X_4m8+-Q@mail.gmail.com>
+ <CAJFTR8Rn=y-vHfCktUjNjk8GqRgRaU2GJY0Qnfg6GmfEKd7pOg@mail.gmail.com>
+ <b670f1a1-b3b7-46cb-8abb-3270e4457bf0@benettiengineering.com>
+In-Reply-To: <b670f1a1-b3b7-46cb-8abb-3270e4457bf0@benettiengineering.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 8 Feb 2024 18:17:44 -0300
+Message-ID: <CAOMZO5D-YggbA5A=JhT2VBTNsdBN=EaZEK2EdLjtLq+SqfzT+g@mail.gmail.com>
+Subject: Re: [PATCH v1 1/2] imx: imxrt1050-evk: Add support for SPI flash
+ booting
+To: Giulio Benetti <giulio.benetti@benettiengineering.com>
+Cc: Jesse T <mr.bossman075@gmail.com>, u-boot@lists.denx.de, 
+ Stefano Babic <sbabic@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,56 +95,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Giulio,
 
---vIr5qdJ3Em+ZynBA
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Wed, Jan 31, 2024 at 10:06=E2=80=AFAM Giulio Benetti
+<giulio.benetti@benettiengineering.com> wrote:
 
-On Thu, Feb 08, 2024 at 11:36:33AM -0300, Fabio Estevam wrote:
+> The problem is that mmu_set_region_dcache_behaviour() is not implemented
+> for armv7m and mxsfb.c requires it when DCache is enabled, that's why
+> I've disabled.
+>
+> So we can keep it as is or implement armv7m complete
+> mmu_set_region_dcache_behaviour()
 
-> Hi Tom,
->=20
-> Please pull from u-boot-imx, thanks
->=20
-> The following changes since commit 0101a2ffe125911ebf89172b495f5ff14f2fd0=
-58:
->=20
->   Merge branch '2024-02-06-assorted-fixes' (2024-02-07 09:47:47 -0500)
->=20
-> are available in the Git repository at:
->=20
->   https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx=
--master-20240208
->=20
-> for you to fetch changes up to 8dcf1df48dff339b172d1bce2a38a965ee4aafca:
->=20
->   phycore-imx8mp: add support for booting and flashing emmc via UUU (2024=
--02-08 10:11:46 -0300)
->=20
-> u-boot-imx-master-20240208
-
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---vIr5qdJ3Em+ZynBA
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXFNysACgkQFHw5/5Y0
-tyzDkwv9ERbh//tzbZ3QcyuIUrZq8q4mxvksunG9+oyVm/XqDj+eqZcyqYoo45c1
-qBiWha6KwO1U61cRV2Z6MHUW9c4P8fu1hOo4VZpOnITPr8Du2VKxFyL0rVx3YZTz
-7yySRrOszsJwCrUuZ/WSTquxuse5acJKq5sL5WXatATE8wCm1JfzhaYKjFQWXHle
-cNl5+14sNAy1lS6nxnirHzV4f1D/rHzxvMwpvPsH/sFKeMs4eJUaQC5cKZemvUgS
-uphyytkt5Ipgqwzd8uZB+W+2gsiFzpYLJXtrCDUldPVYu/POYK989q1x/TlaJ0Lr
-RCLGI8VZ4xmZBzQAxjnTNxugW7qEaKHujNGzj6DNoq/feNWK3vMHCXq5l4EU7HUj
-N0ZaX2UvlbzBTC808a0SpiTEJXHXL073mXTsOw6GReG9cyVNB83zfJB9p/QjhhVK
-+lYGSdymfgdFCQTL5HIA7qvNaPRGMqZiZpdYkh/m0yTDQDxsWXgrbpF4d/MQD4RZ
-VEN74pQZ
-=l3Q6
------END PGP SIGNATURE-----
-
---vIr5qdJ3Em+ZynBA--
+Ok, thanks for the clarification.
