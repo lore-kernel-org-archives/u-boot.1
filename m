@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 724CFC4828F
-	for <u-boot@archiver.kernel.org>; Thu,  8 Feb 2024 16:59:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B99E8C4828F
+	for <u-boot@archiver.kernel.org>; Thu,  8 Feb 2024 17:33:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E94F787E37;
-	Thu,  8 Feb 2024 17:59:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=fris.de
+	by phobos.denx.de (Postfix) with ESMTP id 1B1C287CDB;
+	Thu,  8 Feb 2024 18:33:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=fris.de header.i=@fris.de header.b="IMPhXnq6";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id D2A9287DFB; Thu,  8 Feb 2024 17:59:25 +0100 (CET)
-Received: from mail.fris.de (mail.fris.de [116.203.77.234])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1707413605;
+	bh=DzV8kOJBWF4iMUJ6kkNOS1V12P6BsvGvgJgGcfh6O3g=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=hMny01YTJP+dIkbHkhxwM50c3VcF7T4SkvWRJa7tDc+/K7Rp2zWptN08OgOfRYIBq
+	 +gPxB7iljDk0OsaI24hN2ZAKde9aGw9iBzsn8wLTAeLtJgQdP9BuCPuTZApZhhCp5/
+	 aMjB75x5uCpTPI1WZqYYCAOeH/qLDxYjQsxJceRG0KifUY5Ta8oHY6AsFN+EjcwLjX
+	 fN3PK7llbTpjkBF+Tx0WXW1/nC8HgC5UdWvVs1Wyx2h5CUDCEhjBCR3HKDnwIsq+Rt
+	 Oz85773XIimddmYVhkqjHj3Su7QUTktfFd3iu6zQIixJjsB5K3Z8fiy0vdA609orW9
+	 HvYYLGprVmm6A==
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB65C87252
- for <u-boot@lists.denx.de>; Thu,  8 Feb 2024 17:59:23 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=fris.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=frieder@fris.de
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 404C7BFBC8; Thu,  8 Feb 2024 17:59:23 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fris.de; s=dkim;
- t=1707411563; h=from:subject:date:message-id:to:cc:mime-version:
- content-transfer-encoding:in-reply-to:references;
- bh=W5OuxnPpTYhydtE67YWa59msN/F5g3m060l79vtaeY8=;
- b=IMPhXnq6gYACTn0mHKUR4PgtBvtenAswqfdz1kifilMkhrLUNNL70Sv2rdchaz0r/7LvjB
- Z/Ib/pIMrhG1ZNacflO5yejGKljcfP4nT4AFAha6NhJdLuN/MUUsFC8hw6kvyudffAGsIG
- MGhpUk0ZU4uMg7r0XVf2aLuVcWWH6bDbrZxRND0O9wsJ89h3fC9LPOg144Gt6xLKfXSQ+Z
- gTZLaqYraTF2WOzICs/9oIytAjorkAJYe8C4s4S6zNfU45w6ADwrZ+Ib2CH77RYqLtZEch
- +nHDFFA2Srp/4fqhwQlOXjQB5MpWCvR6CdIoBHCgjJL21b3J2jZ+Pql+0MmEEg==
-From: Frieder Schrempf <frieder@fris.de>
-To: Tom Rini <trini@konsulko.com>,
-	u-boot@lists.denx.de
-Cc: Frieder Schrempf <frieder.schrempf@kontron.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [PATCH 3/3] doc: board: Add minimal documentation for Sielaff i.MX6
- Solo board
-Date: Thu,  8 Feb 2024 17:58:43 +0100
-Message-ID: <20240208165849.104787-3-frieder@fris.de>
-In-Reply-To: <20240208165849.104787-1-frieder@fris.de>
-References: <20240208165849.104787-1-frieder@fris.de>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id C673987CCF;
+ Thu,  8 Feb 2024 18:33:22 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1707413603;
+ bh=DzV8kOJBWF4iMUJ6kkNOS1V12P6BsvGvgJgGcfh6O3g=;
+ h=From:To:Cc:Subject:Date:From;
+ b=lanIrmS1jLPMzfwCqIcg5zMvRg1gnFnGmCSTgExSLIQJB08MRuDrXxFKwMACyV/lR
+ 4LMw1ko3cDSv2kdO0dHdXQkZ5CFKvTUp9OplV9dyteySsqaYGrmx1N0x3ItQQtAjuA
+ C5wZjEU4mtB5uzHzvxWn9teRGg36DZRHv6oQWzBykTNMqlX51b+Ilu8/j25XjoxvM2
+ uwjkdopa4in3723OG9fGB55eenRPQDnic0jjnALBZSCtrYtEfu7D5v1YrlX5n+jp/n
+ aEtD2RQohrpbl3PjF+LaF8LSosdFMqH8H9wW4VHKuIOUvjpndXpLA62ixg32iZAkUf
+ sVQPP6+K++Stw==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Fabio Estevam <festevam@gmail.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, Stefano Babic <sbabic@denx.de>
+Subject: [PATCH] spi: mxc_spi: Add imx6ul-ecspi compatible string
+Date: Thu,  8 Feb 2024 18:32:56 +0100
+Message-ID: <20240208173314.397582-1-marex@denx.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,71 +65,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Frieder Schrempf <frieder.schrempf@kontron.de>
+Recent i.MX8MP DTs use new fsl,imx6ul-ecspi compatible string instead
+of the fsl,imx51-ecspi compatible string. Add the new compatible string
+to fix ECSPI operation on i.MX8MP.
 
-Describe how to build and boot for the Sielaff i.MX6 Solo board.
-
-Signed-off-by: Frieder Schrempf <frieder.schrempf@kontron.de>
+Signed-off-by: Marek Vasut <marex@denx.de>
 ---
- doc/board/sielaff/imx6dl-sielaff.rst | 32 ++++++++++++++++++++++++++++
- doc/board/sielaff/index.rst          |  9 ++++++++
- 2 files changed, 41 insertions(+)
- create mode 100644 doc/board/sielaff/imx6dl-sielaff.rst
- create mode 100644 doc/board/sielaff/index.rst
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Cc: Fabio Estevam <festevam@gmail.com>
+Cc: Jagan Teki <jagan@amarulasolutions.com>
+Cc: Stefano Babic <sbabic@denx.de>
+---
+ drivers/spi/mxc_spi.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/doc/board/sielaff/imx6dl-sielaff.rst b/doc/board/sielaff/imx6dl-sielaff.rst
-new file mode 100644
-index 00000000000..24dd67ccaef
---- /dev/null
-+++ b/doc/board/sielaff/imx6dl-sielaff.rst
-@@ -0,0 +1,32 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+Sielaff i.MX6 Solo Board
-+========================
-+
-+The Sielaff i.MX6 Solo board is a control and HMI board for vending
-+machines.
-+
-+Quick Start
-+-----------
-+
-+- Build U-Boot
-+- Boot
-+
-+Build U-Boot
-+^^^^^^^^^^^^
-+
-+.. code-block:: bash
-+
-+   $ make imx6dl_sielaff_defconfig
-+   $ make CROSS_COMPILE=arm-none-linux-gnueabihf-
-+
-+Burn the flash.bin to SD card at an offset of 1 KiB:
-+
-+.. code-block:: bash
-+
-+   $ dd if=flash.bin of=/dev/sd[x] bs=1K seek=1 conv=notrunc
-+
-+Boot
-+^^^^
-+
-+Put the SD card in the slot on the board and apply power.
-diff --git a/doc/board/sielaff/index.rst b/doc/board/sielaff/index.rst
-new file mode 100644
-index 00000000000..a8376484d88
---- /dev/null
-+++ b/doc/board/sielaff/index.rst
-@@ -0,0 +1,9 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+Sielaff
-+=======
-+
-+.. toctree::
-+   :maxdepth: 2
-+
-+   imx6dl-sielaff
+diff --git a/drivers/spi/mxc_spi.c b/drivers/spi/mxc_spi.c
+index 33360a18329..e291092c481 100644
+--- a/drivers/spi/mxc_spi.c
++++ b/drivers/spi/mxc_spi.c
+@@ -670,6 +670,7 @@ static const struct dm_spi_ops mxc_spi_ops = {
+ 
+ static const struct udevice_id mxc_spi_ids[] = {
+ 	{ .compatible = "fsl,imx51-ecspi" },
++	{ .compatible = "fsl,imx6ul-ecspi" },
+ 	{ }
+ };
+ 
 -- 
 2.43.0
 
