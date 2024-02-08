@@ -4,74 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7D1DC4828F
-	for <u-boot@archiver.kernel.org>; Thu,  8 Feb 2024 11:30:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15ACBC4828F
+	for <u-boot@archiver.kernel.org>; Thu,  8 Feb 2024 11:46:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E7E9B878E9;
-	Thu,  8 Feb 2024 12:30:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
+	by phobos.denx.de (Postfix) with ESMTP id 6B9F187CF7;
+	Thu,  8 Feb 2024 12:46:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="GSCz6GAM";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PZmcEU76";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8245887D1E; Thu,  8 Feb 2024 12:30:25 +0100 (CET)
-Received: from mail-vk1-xa2c.google.com (mail-vk1-xa2c.google.com
- [IPv6:2607:f8b0:4864:20::a2c])
+ id 0226D87E36; Thu,  8 Feb 2024 12:46:08 +0100 (CET)
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE4118753E
- for <u-boot@lists.denx.de>; Thu,  8 Feb 2024 12:30:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C023387BBA
+ for <u-boot@lists.denx.de>; Thu,  8 Feb 2024 12:46:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=shantur.com
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
-Received: by mail-vk1-xa2c.google.com with SMTP id
- 71dfb90a1353d-4c01ca67504so643502e0c.2
- for <u-boot@lists.denx.de>; Thu, 08 Feb 2024 03:30:22 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-33b3585518eso374681f8f.1
+ for <u-boot@lists.denx.de>; Thu, 08 Feb 2024 03:46:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1707391821; x=1707996621;
- darn=lists.denx.de; 
+ d=gmail.com; s=20230601; t=1707392765; x=1707997565; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=nHPtZy9lAlkx+OTcN3Yv2JpZSR5yJlzw3PUSWMooKo8=;
- b=GSCz6GAMo1Lq1II0q7xu0WLq+gSP6LNMbmz1IrPo9J/p17LSdqM3TuJTEXrI1INFp/
- WUq9U9ekmtRZXmG6YeYLiinvKGxPbSvBMBxszq0NoYaqovAjJHUFT5tJ4l74lwBj0JiJ
- 2fKyoYOszOrcMQ+lGd8enLXhBVA48q7PJvCcu7klSUzkuVoSzjul0WHSGRWN+KeV+0Bz
- 4DihwCy9v1rxdA+ZLZXDtgu/3juuGre8MlEMl4/eHx1a4VBflVQ8XZEhrKx+FloaEaU5
- t6H7urlhJDAjWSVAKi+SuDwNx23bWtSsmOIZEvHd0m2pVN1Y+y/lcj68hmloyGfFkqJt
- TT9g==
+ bh=zwGqhtlGIFEas98KFaeuDuA+yU0BhKaKbzoQiG1hFEc=;
+ b=PZmcEU76BEG0P/gD/wuxylMuq7eDvxYrAGloyACaRxJphb3QGBVSEvODfpGbZaRuAg
+ jpuZO22zhhxLox4/QA5BnM64+rfaUSh/LW41vVS0DvqnkKuIYl/BlYxZhvuCLaVRRqur
+ 6L4BJs6+pKOmSIpEna1tJFt3CCkigaKdDbtJ3Tx+y9ZSaAwbqJ6rNO79BD1YmO4nFF5u
+ ZAg0SOBbwz69uBlz/tP3KSWyL3ZGesArTcBF8e6ofMg7vdyL8bzOTgqXJbJvts1icq05
+ yFxk2U+nXw7CH0mlxBjrxlR4AWRcugcpZSNH50ZRatCWPLdSlPGNEslKIJ7nq0ZP2FJF
+ bmLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707391821; x=1707996621;
+ d=1e100.net; s=20230601; t=1707392765; x=1707997565;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=nHPtZy9lAlkx+OTcN3Yv2JpZSR5yJlzw3PUSWMooKo8=;
- b=aL/ilXIXM/X+5wqOC0zzoN3HrmgD0Z2Of7FUH/xBPOVqXOVLidljsRrjdx26KsRJFt
- mhgQTNl/BADwgSu1UwzCThsaBCnfxM99MqW13Zi61jpXLNh4yaemo+WKj3OJJSV806FI
- SCNarsiR8Nr5pPyrjsuH0va9s7CNl88bT4CZytFTkO1zjJm8MQl8TUzZ/w9yd+dj+4wi
- 1gFMMzVqKLu1dnW9zNqB2gUSDzCsmvKKFd94bTilPROyF1WeYWyDCWduEj9/hloZh05F
- 3Mp2U7xD5MIfQyVbiI+AFoKnsP13zfq2RbNCEJ2t3jPBwtXiaXWd2c8jpD1m6W10bWWP
- r19g==
-X-Gm-Message-State: AOJu0YwvOa8uVmpQPT6OzzboPJDvSlikLLWTzSnIeMNs9HMVPhvdEAuB
- R9Meou7WhodfxykZJkL0Mf08l0PiH086QIIoKs4cUqzweFjAo2sKeUrHttwUPkXo0ptHI3z4yUv
- l4OfvYfMuVNzNSWZv9ZsKOCdeU8Ipa2Pj/Iex1g==
-X-Google-Smtp-Source: AGHT+IF5a6O+3LW0jIiekXg4PiIanKzWrR5DmAfJv7F8viYfppM8kL52EdnDA/zRhS9xUxrxHCk36qoKZdAb5i+sW94=
-X-Received: by 2002:a05:6122:4f10:b0:4bd:6486:16fc with SMTP id
- gh16-20020a0561224f1000b004bd648616fcmr5210056vkb.6.1707391821593; Thu, 08
- Feb 2024 03:30:21 -0800 (PST)
+ bh=zwGqhtlGIFEas98KFaeuDuA+yU0BhKaKbzoQiG1hFEc=;
+ b=ScAP9zcIk9swA4/FAHo8iIHB7O1xma6a6YECtKK/KtmyZPWUkH9P6pTjHfNbRP/Pu7
+ lR19ap6cPepbDXqnSxvhphYKXFvJvom6tfJwAu23fmHVg1bnxp9A2WpmUplIRXQ75vyX
+ H2mF6P4P6fEJGkbc5b40Dl3TNHwluJ8NGrnWKjYw14tXZyaBpnwf7W39IXyXRaaNA9Rv
+ ZqAylki+XQUohL8HNJxxkysBaIEz3c56CmYcaZ9xJ8Zag2k5QYQg4XmmspAIXZ9D6XLU
+ PLd1ZEVRSARdVPivJpMPDH3zi2ywQyGdK1gEIVZcEytLswHEKkIqDxvSqh9s6B4d+kAY
+ qqag==
+X-Gm-Message-State: AOJu0YykCm7xOf7Qq6WHHb6wnLytLaPWHLKXpTGaDp+MadItrMwjRvw7
+ 8UUpSTyH9zo2h0M9/8gpp1y9lfB4OADRx+f65qsc11DBQ/PvMAR0y7etMwzMPcIYCo+FXZGSCyR
+ 7NpfI/nhmeU5Kial1w7xg2sVmAw8=
+X-Google-Smtp-Source: AGHT+IEQn3S9WE9HoG6X3kuxIUUJK2JkgFKzPoo9tnq0+czt5El7f90DSbmqHzMZEni2MNGkULAYRW4zDMB2hbBH44A=
+X-Received: by 2002:a05:6000:1f04:b0:33b:535c:a502 with SMTP id
+ bv4-20020a0560001f0400b0033b535ca502mr2348625wrb.2.1707392764772; Thu, 08 Feb
+ 2024 03:46:04 -0800 (PST)
 MIME-Version: 1.0
-References: <20240207102327.35125-1-i@shantur.com>
- <32db6dba-d515-4077-9d72-d77a7f431335@denx.de>
-In-Reply-To: <32db6dba-d515-4077-9d72-d77a7f431335@denx.de>
-From: Shantur Rathore <i@shantur.com>
-Date: Thu, 8 Feb 2024 11:30:10 +0000
-Message-ID: <CABEcMwXW3KXQCJM16Qhk=19Sss3zdtQyWtJEed5y=na2mP8RFA@mail.gmail.com>
-Subject: Re: [FIX PATCH v1] Fix: common: usb_hub: Reset only USB3.0 hub
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, andre.przywara@arm.com, dsimic@manjaro.org, 
- Hector Martin <marcan@marcan.st>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
+References: <CAByghJZqOnV8w4nJKDOjiPVUGkq2KqYS=qxps09744==oXwtZQ@mail.gmail.com>
+ <20240207134813.GV1152441@bill-the-cat>
+ <CALeDE9MDJZjtMDhbg-vfis1E5uVfYn4WwD1hoPgYWxRiPfjwGQ@mail.gmail.com>
+In-Reply-To: <CALeDE9MDJZjtMDhbg-vfis1E5uVfYn4WwD1hoPgYWxRiPfjwGQ@mail.gmail.com>
+From: Igor Opaniuk <igor.opaniuk@gmail.com>
+Date: Thu, 8 Feb 2024 12:45:52 +0100
+Message-ID: <CAByghJb3TDSQtVY2di-bSrDm2iiwkX8FkcZv85vrnBBHi0eGrw@mail.gmail.com>
+Subject: Re: [RFC] Drop md5sum, crc32 and sha1 cmds in favor of hash cmd
+To: Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -90,63 +89,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+Hello Tom, Peter,
 
-On Wed, Feb 7, 2024 at 1:07=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
+On Wed, Feb 7, 2024 at 3:16=E2=80=AFPM Peter Robinson <pbrobinson@gmail.com=
+> wrote:
 >
-> On 2/7/24 11:23, Shantur Rathore wrote:
-> > USB 3.0 spec requires hub to reset device while
-> > enumeration. Some USB 2.0 hubs / devices don't
-> > handle this well and after implementation of
-> > reset some USB 2.0 disks weren't detected on
-> > Allwinner based boards.
+> On Wed, 7 Feb 2024 at 13:48, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > Resetting only when hub is USB 3.0 fixes it.
+> > On Wed, Feb 07, 2024 at 02:00:16PM +0100, Igor Opaniuk wrote:
+> > > Hello,
+> > >
+> > > I was playing a bit with different hash functions recently, and
+> > > it turned out that md5sum, crc32, sha1 cmds just duplicate
+> > > what is already covered by generic `hash` cmd.
+> > >
+> > > =3D> sha1 0x60000000 0x200
+> > > sha1 for 60000000 ... 600001ff =3D=3D> 4ff5ffc91d00a95155518b920f46e2=
+483d0e1437
+> > > =3D> hash sha1 0x60000000 0x200
+> > > sha1 for 60000000 ... 600001ff =3D=3D> 4ff5ffc91d00a95155518b920f46e2=
+483d0e1437
+> > >
+> > > =3D> crc32 0x60000000 0x200
+> > > crc32 for 60000000 ... 600001ff =3D=3D> 6fe352e8
+> > > =3D> hash crc32 0x60000000 0x200
+> > > crc32 for 60000000 ... 600001ff =3D=3D> 6fe352e8
+> > >
+> > > =3D> md5sum 0x60000000 0x200
+> > > md5 for 60000000 ... 600001ff =3D=3D> e6bbbe95f5b41996f4a9b9af7bbd405=
+0
+> > > =3D> hash md5 0x60000000 0x200
+> > > md5 for 60000000 ... 600001ff =3D=3D> e6bbbe95f5b41996f4a9b9af7bbd405=
+0
+> > >
+> > > Considering that most of them (besides md5sum) are using the same
+> > > int hash_command() function under the hood, but have a lot of duplica=
+ted
+> > > code for handling params, does it make sense to do some cleanup and
+> > > drop all them in favour  `hash`?
+> > >
+> > > I also plan to extend usage info for `hash` by adding a list
+> > > compiled-in algos based on hash related compiled flags
+> > > (CONFIG_SHA1, CONFIG_CRC32 etc), so it's clear what algos
+> > > are available for hash calculation.
+> > >
+> > > Comments/objections are welcome!
+> >
+> > It would be good, implementation wise, if each of those commands was
+> > just a redirect to hash ..., similar to how "load ...." will call the
+> > right filesystem calls. Does that make sense? Thanks.
 >
-> It would be good to include as many details about the faulty hardware in
-> the commit message as possible, so that when someone else runs into
-> this, they would have all that information available.
->
-> > Tested-by: Andre Przywara <andre.przywara@arm.com>
-> >
-> > Signed-off-by: Shantur Rathore <i@shantur.com>
-> > ---
-> >
-> >   common/usb_hub.c | 6 ++++--
-> >   1 file changed, 4 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/common/usb_hub.c b/common/usb_hub.c
-> > index 3fb7e14d10..2e054eb935 100644
-> > --- a/common/usb_hub.c
-> > +++ b/common/usb_hub.c
-> > @@ -174,8 +174,10 @@ static void usb_hub_power_on(struct usb_hub_device=
- *hub)
-> >
-> >       debug("enabling power on all ports\n");
-> >       for (i =3D 0; i < dev->maxchild; i++) {
-> > -             usb_set_port_feature(dev, i + 1, USB_PORT_FEAT_RESET);
-> > -             debug("Reset : port %d returns %lX\n", i + 1, dev->status=
-);
-> > +             if (usb_hub_is_superspeed(dev)) {
->
-> Should this condition be "all which are lower than superspeed" instead ,
-> so when the next generation of USB comes, this problem won't trigger ?
->
-> What does Linux do btw ?
+> Yes, I actually have that one my todo list to basically alias the
+> individual commands to the hash command to remove those commands. My
+> intention there was a first step to allow us to eventually minimise or
+> even remove the use of obsolete hashes etc.
 
-As of now Linux checks if the hub is superspeed
-https://github.com/torvalds/linux/blob/master/drivers/usb/core/hub.c#L2859
+Thank you for your comments. I'll re-factor as discussed and send a patch
+series when it's ready (plan to do that before the next merge window opens)=
+.
 
-which is
- return hdev->descriptor.bDeviceProtocol =3D=3D USB_HUB_PR_SS; // USB_HUB_P=
-R_SS =3D 3
+Regards,
+Igor
 
-This holds true for newer SuperSpeedPlus hubs as well.
-https://github.com/torvalds/linux/blob/master/drivers/usb/core/hub.h#L155
+--=20
+Best regards - Atentamente - Meilleures salutations
 
-We can change the check to be  bDeviceProtocol > 2 but who knows if
-things change in the newer version of spec.
-I am open to suggestions.
+Igor Opaniuk
 
-Kind regards,
-Shantur
+mailto: igor.opaniuk@gmail.com
+skype: igor.opanyuk
+http://ua.linkedin.com/in/iopaniuk
