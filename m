@@ -4,84 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C953C4828F
-	for <u-boot@archiver.kernel.org>; Thu,  8 Feb 2024 13:35:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8CE3C48260
+	for <u-boot@archiver.kernel.org>; Thu,  8 Feb 2024 13:38:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A9A5787E42;
-	Thu,  8 Feb 2024 14:35:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 4F30487E50;
+	Thu,  8 Feb 2024 14:38:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="SpD5me/K";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C97B87E42; Thu,  8 Feb 2024 14:35:23 +0100 (CET)
-Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
- [IPv6:2a00:1450:4864:20::132])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1707399498;
+	bh=LAStPwk723gohgRXbqB6xj/oz+JP3u4Nq0M2UhHEG20=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=gFEehiYZ3TQzNoZL+mLB11tGop+K9TA5aKOU9Bwl87mX1L7kac+JH1XUbFqDFCDOg
+	 Hrzn5j4So+Tzmg+dSAMOGpd+PUB+k1N9+Lf+Z1sXbJak6pjK/K0lnTR+4fKoN4AilK
+	 oMaReaJvzyODZNxQsNUTeVLTZ5BXyUDoXX25xu5ZmutuGiAnD/ZjTIWLiowSpmwSNC
+	 d0LAPfO3JwrUhCHCxMymdtfG0Gv7Acdx2oDwkg/KxpdsdHLbzQDKRTfrzJ++Z3de1x
+	 ZFszXzhhM3eQP2jwWofDcZFUlmCQmpftwVk+OlHkSJXs8Q8XCUDN4QXpuYH9Go5D6r
+	 tJW3QEtSlTIQQ==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0887D87E45
- for <u-boot@lists.denx.de>; Thu,  8 Feb 2024 14:35:21 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-5116063585aso2291364e87.1
- for <u-boot@lists.denx.de>; Thu, 08 Feb 2024 05:35:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1707399320; x=1708004120;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=dY3jIy2yJhCwYnrv8vCmAsgIB/YJ0iOn95mglAHZYQk=;
- b=SpD5me/KEfdnDD5CwqUiHH3SM53PKswgukBkx2cvVL5peZsKHgVmGUcOT5Wr/IQSar
- iKdzFqWRFaq6FEa5wa5RKDtx7Qp3wET1TdKKtuzt+D6PHVfcikFku9OdNRh+8MonCiVS
- 8kDyc6r2mrKCLBK7VqDhrd+gzTOfXVAvhz/e7cxlZKP8UPPct4EelTe/OZ5EuirYtMVO
- bDosa11IC5JoiuM8dJCpQeeVfjQB66RM16osCUiatM+UAM7FA1v4eAnRWF/x+MSO4ooq
- UBppmPXm5cUX6GvjpCk60jHows1Wof7c1ENf83M4stpkeexsTgxOoFbfsHH/TvGi1t5L
- Zm+A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707399320; x=1708004120;
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=dY3jIy2yJhCwYnrv8vCmAsgIB/YJ0iOn95mglAHZYQk=;
- b=QFKeXckGwDJhGup/5zvzJZYocf7adkakfQBAJrzX4KUu23SkC8GTucE0lfIRz8L7Dl
- 95Fy5MYk5Z4pgqYNEIhz1JKZ4ocHM0hrn+bFt9i9wa7tqRzOmY2eYmh4jXaFg2isBGiR
- UZNnfFfWKRaEw5c4mW/637cM+xS73y6C0Fn9NMxgtFqnLZUtGQ0sAFwro8tGDeV+k0x6
- y3Rs3fjncxLMAMMTyImz0o0O/uBi6ddyiiCJVj7a7EXtsb5Pu7jLDYlERkeeRz8iw7b8
- PCUcKy8Sz+T35G2zi0oErckungnJGoZEI0916nozB48Dlo0BSjrrg0vuVE9gCdmJPZ3w
- VkKQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWJ+oZrUoiQ7+wHFbR9mHVqJ514PzI1yYLE12yUy0Y8X7btZPDkTsBWbEzELpXS5wp6FNcjmKUcdr6BhPNjsx6GfuNw3A==
-X-Gm-Message-State: AOJu0YxUpgJf3nDebMYpr3295lasrBnB0Lk0uNQx0XMMqngKxmpq9aaJ
- VVtLuZFwk1mH9OmPeTVAA3zctAkw1Lfo5RuVmj/vGAKgivK6kMZsc3ZyEKgFrGs=
-X-Google-Smtp-Source: AGHT+IF0up9kxpqRsnEvknSkHime5KWC2001vN5MmB0McWtimE0xXREnk88FUjl7g3tDxWKqCn4pZw==
-X-Received: by 2002:ac2:4e92:0:b0:511:51ec:8684 with SMTP id
- o18-20020ac24e92000000b0051151ec8684mr6041331lfr.50.1707399320150; 
- Thu, 08 Feb 2024 05:35:20 -0800 (PST)
-X-Forwarded-Encrypted: i=1;
- AJvYcCVyDik+SC9JqOhCQqvuiI558+QI878trks9Y9Bf7BEnxtxAJTQ56RhYnHjCWzmj5X03H+NxkXXqCyM0d0KUn6E6v3dEk+yBctjMqyJ3gyaL+N7M3h2+w9G3wQ/jeEvKC/5e8FGIlLFS/8+Hmvnq39PxGSc/2/WUhkQkr8599ei24+50m7nFPy+QflbkxuRY
-Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- l20-20020a05600c1d1400b004101543e843sm1685433wms.10.2024.02.08.05.35.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 Feb 2024 05:35:19 -0800 (PST)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Igor Opaniuk <igor.opaniuk@foundries.io>, u-boot@lists.denx.de
-Cc: Igor Opaniuk <igor.opaniuk@gmail.com>, Ivan Khoronzhuk
- <ivan.khoronzhuk@gmail.com>, Jens Wiklander <jens.wiklander@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH v1 1/7] common: avb_verify: don't call mmc_switch_part
- for SD
-In-Reply-To: <20240206223153.3060433-2-igor.opaniuk@foundries.io>
-References: <20240206223153.3060433-1-igor.opaniuk@foundries.io>
- <20240206223153.3060433-2-igor.opaniuk@foundries.io>
-Date: Thu, 08 Feb 2024 14:35:18 +0100
-Message-ID: <87eddnjcyx.fsf@baylibre.com>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id CF63E87E42;
+ Thu,  8 Feb 2024 14:38:16 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1707399497;
+ bh=LAStPwk723gohgRXbqB6xj/oz+JP3u4Nq0M2UhHEG20=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=n6175Ncuz+FuHuuQeyuM1NX9v9S3UQ3o1e2axZWAIBPbJxYv8IHFaEud6TyRY5fAR
+ yyRIjy9bp1KKwxR3naG91hCg4NioAkjfmSh67s8idK0xnQ4zQvfl9uDHPVPJTcW+ta
+ B+gIpO57qz0nKRshUW8Ha7BvwqZb+v27SkQsZ8PE5CUJrCxI6fm0jrDM2EMB4Clp+7
+ mWkbNC1JCr7H3sBp1gJuwHB+U2e4yc9J4enPyOh9u4Z0ZXy2ueES4KFsPo24/mi/Qc
+ 4YQzZSMhjM0xJZ+lzX4knc/GbXu6K9JmcPoih02FyXPfTR5nyd4u5ypwTH5rMPAn9L
+ QHAkRNNtZdS4A==
+Message-ID: <93f69779-3197-4ede-bb78-f2512ec30fc1@denx.de>
+Date: Thu, 8 Feb 2024 14:33:15 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [FIX PATCH v1] Fix: common: usb_hub: Reset only USB3.0 hub
+Content-Language: en-US
+To: Shantur Rathore <i@shantur.com>
+Cc: u-boot@lists.denx.de, andre.przywara@arm.com, dsimic@manjaro.org,
+ Hector Martin <marcan@marcan.st>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+References: <20240207102327.35125-1-i@shantur.com>
+ <32db6dba-d515-4077-9d72-d77a7f431335@denx.de>
+ <CABEcMwXW3KXQCJM16Qhk=19Sss3zdtQyWtJEed5y=na2mP8RFA@mail.gmail.com>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <CABEcMwXW3KXQCJM16Qhk=19Sss3zdtQyWtJEed5y=na2mP8RFA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,47 +72,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Igor,
+On 2/8/24 12:30, Shantur Rathore wrote:
+> Hi Marek,
+> 
+> On Wed, Feb 7, 2024 at 1:07 PM Marek Vasut <marex@denx.de> wrote:
+>>
+>> On 2/7/24 11:23, Shantur Rathore wrote:
+>>> USB 3.0 spec requires hub to reset device while
+>>> enumeration. Some USB 2.0 hubs / devices don't
+>>> handle this well and after implementation of
+>>> reset some USB 2.0 disks weren't detected on
+>>> Allwinner based boards.
+>>>
+>>> Resetting only when hub is USB 3.0 fixes it.
+>>
+>> It would be good to include as many details about the faulty hardware in
+>> the commit message as possible, so that when someone else runs into
+>> this, they would have all that information available.
+>>
+>>> Tested-by: Andre Przywara <andre.przywara@arm.com>
+>>>
+>>> Signed-off-by: Shantur Rathore <i@shantur.com>
+>>> ---
+>>>
+>>>    common/usb_hub.c | 6 ++++--
+>>>    1 file changed, 4 insertions(+), 2 deletions(-)
+>>>
+>>> diff --git a/common/usb_hub.c b/common/usb_hub.c
+>>> index 3fb7e14d10..2e054eb935 100644
+>>> --- a/common/usb_hub.c
+>>> +++ b/common/usb_hub.c
+>>> @@ -174,8 +174,10 @@ static void usb_hub_power_on(struct usb_hub_device *hub)
+>>>
+>>>        debug("enabling power on all ports\n");
+>>>        for (i = 0; i < dev->maxchild; i++) {
+>>> -             usb_set_port_feature(dev, i + 1, USB_PORT_FEAT_RESET);
+>>> -             debug("Reset : port %d returns %lX\n", i + 1, dev->status);
+>>> +             if (usb_hub_is_superspeed(dev)) {
+>>
+>> Should this condition be "all which are lower than superspeed" instead ,
+>> so when the next generation of USB comes, this problem won't trigger ?
+>>
+>> What does Linux do btw ?
+> 
+> As of now Linux checks if the hub is superspeed
+> https://github.com/torvalds/linux/blob/master/drivers/usb/core/hub.c#L2859
+> 
+> which is
+>   return hdev->descriptor.bDeviceProtocol == USB_HUB_PR_SS; // USB_HUB_PR_SS = 3
+> 
+> This holds true for newer SuperSpeedPlus hubs as well.
+> https://github.com/torvalds/linux/blob/master/drivers/usb/core/hub.h#L155
+> 
+> We can change the check to be  bDeviceProtocol > 2 but who knows if
+> things change in the newer version of spec.
+> I am open to suggestions.
 
-Thank you for the patch.
+Please just include the ^ in the commit description. Use link to 
+git.kernel.org , not some mirror . This is extremely useful information 
+and, well, you already wrote the V2 commit message addition in this answer.
 
-On mar., f=C3=A9vr. 06, 2024 at 23:31, Igor Opaniuk <igor.opaniuk@foundries=
-.io> wrote:
-
-> From: Igor Opaniuk <igor.opaniuk@gmail.com>
->
-> mmc_switch_part() is used for switching between hw partitions
-> on eMMC (boot0, boot1, user, rpmb).
-> There is no need to do that for SD card.
->
-> Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
-
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-
-> ---
->
->  common/avb_verify.c | 8 +++++---
->  1 file changed, 5 insertions(+), 3 deletions(-)
->
-> diff --git a/common/avb_verify.c b/common/avb_verify.c
-> index 48ba8db51e5..59f2c25e0de 100644
-> --- a/common/avb_verify.c
-> +++ b/common/avb_verify.c
-> @@ -358,9 +358,11 @@ static struct mmc_part *get_partition(AvbOps *ops, c=
-onst char *partition)
->  		goto err;
->  	}
->=20=20
-> -	ret =3D mmc_switch_part(part->mmc, part_num);
-> -	if (ret)
-> -		goto err;
-> +	if (IS_MMC(part->mmc)) {
-> +		ret =3D mmc_switch_part(part->mmc, part_num);
-> +		if (ret)
-> +			goto err;
-> +	}
->=20=20
->  	mmc_blk =3D mmc_get_blk_desc(part->mmc);
->  	if (!mmc_blk) {
-> --=20
-> 2.34.1
+Thanks
