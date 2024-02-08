@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCC6BC48260
-	for <u-boot@archiver.kernel.org>; Thu,  8 Feb 2024 14:10:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20D97C4828F
+	for <u-boot@archiver.kernel.org>; Thu,  8 Feb 2024 14:12:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 17A5087CED;
-	Thu,  8 Feb 2024 15:10:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
+	by phobos.denx.de (Postfix) with ESMTP id 6E99387DFC;
+	Thu,  8 Feb 2024 15:12:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="YAmyjgbF";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="TJOBKisJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C22FD87B85; Thu,  8 Feb 2024 15:10:16 +0100 (CET)
-Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
- [IPv6:2607:f8b0:4864:20::112b])
+ id 8E8C787E45; Thu,  8 Feb 2024 15:12:53 +0100 (CET)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A40487CED
- for <u-boot@lists.denx.de>; Thu,  8 Feb 2024 15:10:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9621687CED
+ for <u-boot@lists.denx.de>; Thu,  8 Feb 2024 15:12:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=shantur.com
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
-Received: by mail-yw1-x112b.google.com with SMTP id
- 00721157ae682-604a05a36d2so13076757b3.0
- for <u-boot@lists.denx.de>; Thu, 08 Feb 2024 06:10:14 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-40fe59b22dbso14719645e9.3
+ for <u-boot@lists.denx.de>; Thu, 08 Feb 2024 06:12:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1707401413; x=1708006213;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1707401564; x=1708006364;
  darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=rX2ZcZ0OgqdBHZtBrTqSLT+nRZd5zGc7ANnCPnJdWJA=;
- b=YAmyjgbF3SDjqVPNYFkzYlUZC2Wy81tHLxOgbwYTa85YAERtr5JYCAfakPfUquHHJc
- zrATzsgX6QpAvLaosybV4gkMrEKvj9kcEDS5T/mOIxu9zGAEAbMNDClNTnYggJCQP2Ae
- j2e9lJOjCGFHx45ZY8J0KIc/tsMp5kAc7UskTCuJdfJE9/v3BBsruXjCi+Vlmuj1/ysH
- e2KyHCT/QJjlUlTJurF3utle4muUQWGgImKvLUKkF58aEehMhrPdU26w0pupeBA5cyoC
- KxXXFPJifLDJMV9GA5Upmo/fw4Afi+pVe/Vom/LmWbsuh1zj7I7ODHvOFQlhojnhpBKv
- igng==
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=FPW1bIv/ylbR7Cw+5sNT64Vk9P8FTXuIQE+/7GVOhfU=;
+ b=TJOBKisJW59z76jAk6hPIMQoOSAwEFDRAg0bxk+Bl1uOtLFERRslPlvu4s13n5cqbp
+ O0rV95O65E1kIov+qwqtcgAHyL4GymP3kw3Rpf+oRI5A/ASv+Y0z2rgEY4IZdsheyjFH
+ 9Z/j6lPEyLn2daWjvbhpJF33Nb1RID52UISFdlGYUQ6wKlbMMycUwt7GlA7rOeZLgMv8
+ 9o+w3EGsensi2p/tDINi06HJM9LyTOnQ/a1SY+RQBx2Jf/aGpOtpslZOasBERJ4t3vuA
+ V9CfcHVKmuH0Tb6Q5iWJ1bmoXllMMm/cFw4Lh73lZf4url0UGwD/3rLRPpklDzdD/INY
+ i6NA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707401413; x=1708006213;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1707401564; x=1708006364;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=rX2ZcZ0OgqdBHZtBrTqSLT+nRZd5zGc7ANnCPnJdWJA=;
- b=xK4xPzpLoiYqk5Ifqts+lEu9enJR0bPKEWUcxS2IYNvIr8Rim9CdF7KtjVtI2Wp1hv
- MoyEfRgKsBe6yW1kzO5EchoXPRfHuXvdJjuSoJo2WZxaOdS9X7vzFuA8ZDbAIaO3lRDJ
- YO/6WbRBcekcpntZHxeh+7Cub+2KieScauhQQ/okTyI55NamTZt85G/rDZLHpj4liCLh
- kSu3woUoKN2AGHFgJVcCDDB0/dBAbsCAqoxLNfn/ZnHi2IVbWAwnuV4FZG4fPz4NCRZh
- YiJo+gX9nP30LgkgjaPdL5x2W/y4Vt/kOSuGZLrYmqig2cKqOE7iZ+x+vPEVq0AjXTf/
- 9cTg==
-X-Gm-Message-State: AOJu0Yx2M0kW/bDbo58kU9Aah88wOt+kal69/tx1FC1DKQszp5HnggKw
- lUxR1tO//XcRp5SaA8+5/GcoyOFtd6FldUtLX4FlbuklFYMx4LAmAvOz6lUmWWrIGJHiwSvUcms
- hHZjC1dLukPzKFrqWsR4zfh/B1UTAPtHozLQWWg==
-X-Google-Smtp-Source: AGHT+IEQKca8wL4xxLkKfwZgw148Scgiykxs0zi8zuyoP/D92HDrulv8wSemurSBDNvfRoIA/lZaR55FyW2jCKBN6Qs=
-X-Received: by 2002:a81:d306:0:b0:5fc:b5d4:f1cf with SMTP id
- y6-20020a81d306000000b005fcb5d4f1cfmr8640942ywi.35.1707401412852; Thu, 08 Feb
- 2024 06:10:12 -0800 (PST)
+ bh=FPW1bIv/ylbR7Cw+5sNT64Vk9P8FTXuIQE+/7GVOhfU=;
+ b=aJX15YbErzqryDgvAFA+rThO3EuDfFNJuT0cyJ6fDNilH80cbt7QAs+aKIHKHinXav
+ Z3RM4Lv5diiubaE5Nf+49vPVSaFDhhaS9loYYOg952ea6n68wSnHInWTxTnvAiLyAGDt
+ Ip6UA8sfWs79rqaxCvJoUPUMxhnH2stOmdE2BdfZg0UBi8YX4dl7WDA9PEPcI4L4g/6o
+ WBnfpRAstvoZQeHkvNOidtzOsjsyPCXlygbpG1mA6jEN+C7Vb9k1jhsKrgkuVKkhGxzE
+ edHrbUZeo/6rZAfZpIBSudrQdVet0JXGEUGvJtH2X2aDjbIj49+3y/zU0/8juQK7xYHw
+ uOEQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUvR9EV4Ha2j1rskoo7rzrIHqw1ZruwEMfcjWdU/BFLJwepa2nYe3lhqeUi9vAa+Ep4SgEiuH8mpyPqOsWIvX6x/fVAZQ==
+X-Gm-Message-State: AOJu0YwsLJuI5EvaBQXniD55y+0AaFakXQS0kUMKGE2L3E9O4ZNnR/fI
+ 3pYEYm90aiNtButEBAKF9BLwb6F7ebEmmqCodR2xvmBS+fuv8qFBTi/Ax4VnI+E=
+X-Google-Smtp-Source: AGHT+IEu1qe3dcrC6bMM4bLIHSiu15d7EvVzmVMQ/zXyWLsHMriH3z+8t03iFFTeM2hMWNMH3AzwNA==
+X-Received: by 2002:a05:600c:4f05:b0:40f:4e0a:4ead with SMTP id
+ l5-20020a05600c4f0500b0040f4e0a4eadmr6858665wmq.26.1707401563976; 
+ Thu, 08 Feb 2024 06:12:43 -0800 (PST)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX38YmqAfUJXrOZ0kv11Lzm/Kfa7BuqRJtQbiXlUZZygF1sX/KkseNXOj8hMxh3TNMNFJ+vIgfyFEyjG8LdunpGobdPyTXDgB7hsDs3jmx8g9F6qL/t44WA
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ q13-20020a5d61cd000000b0033b4341eb78sm3683617wrv.1.2024.02.08.06.12.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 08 Feb 2024 06:12:43 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Igor Opaniuk <igor.opaniuk@foundries.io>, u-boot@lists.denx.de
+Cc: Igor Opaniuk <igor.opaniuk@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH v1 7/7] doc: android: avb: add slot_suffix param details
+In-Reply-To: <20240206223153.3060433-8-igor.opaniuk@foundries.io>
+References: <20240206223153.3060433-1-igor.opaniuk@foundries.io>
+ <20240206223153.3060433-8-igor.opaniuk@foundries.io>
+Date: Thu, 08 Feb 2024 15:12:42 +0100
+Message-ID: <87zfwbhwo5.fsf@baylibre.com>
 MIME-Version: 1.0
-References: <20240207102327.35125-1-i@shantur.com>
- <32db6dba-d515-4077-9d72-d77a7f431335@denx.de>
- <CABEcMwXW3KXQCJM16Qhk=19Sss3zdtQyWtJEed5y=na2mP8RFA@mail.gmail.com>
- <93f69779-3197-4ede-bb78-f2512ec30fc1@denx.de>
- <24f25359ce213370214bceeabc55e1df@manjaro.org>
-In-Reply-To: <24f25359ce213370214bceeabc55e1df@manjaro.org>
-From: Shantur Rathore <i@shantur.com>
-Date: Thu, 8 Feb 2024 14:10:01 +0000
-Message-ID: <CABEcMwUoyi5uLSADa2N76V3C-ryiXzYywgOKnL=DEqtU6LYa_w@mail.gmail.com>
-Subject: Re: [FIX PATCH v1] Fix: common: usb_hub: Reset only USB3.0 hub
-To: Dragan Simic <dsimic@manjaro.org>
-Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de, andre.przywara@arm.com, 
- Hector Martin <marcan@marcan.st>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,81 +95,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Feb 8, 2024 at 1:44=E2=80=AFPM Dragan Simic <dsimic@manjaro.org> wr=
-ote:
->
-> On 2024-02-08 14:33, Marek Vasut wrote:
-> > On 2/8/24 12:30, Shantur Rathore wrote:
-> >> On Wed, Feb 7, 2024 at 1:07=E2=80=AFPM Marek Vasut <marex@denx.de> wro=
-te:
-> >>> On 2/7/24 11:23, Shantur Rathore wrote:
-> >>>> USB 3.0 spec requires hub to reset device while
-> >>>> enumeration. Some USB 2.0 hubs / devices don't
-> >>>> handle this well and after implementation of
-> >>>> reset some USB 2.0 disks weren't detected on
-> >>>> Allwinner based boards.
-> >>>>
-> >>>> Resetting only when hub is USB 3.0 fixes it.
-> >>>
-> >>> It would be good to include as many details about the faulty hardware
-> >>> in
-> >>> the commit message as possible, so that when someone else runs into
-> >>> this, they would have all that information available.
-> >>>
-> >>>> Tested-by: Andre Przywara <andre.przywara@arm.com>
-> >>>>
-> >>>> Signed-off-by: Shantur Rathore <i@shantur.com>
-> >>>> ---
-> >>>>
-> >>>>    common/usb_hub.c | 6 ++++--
-> >>>>    1 file changed, 4 insertions(+), 2 deletions(-)
-> >>>>
-> >>>> diff --git a/common/usb_hub.c b/common/usb_hub.c
-> >>>> index 3fb7e14d10..2e054eb935 100644
-> >>>> --- a/common/usb_hub.c
-> >>>> +++ b/common/usb_hub.c
-> >>>> @@ -174,8 +174,10 @@ static void usb_hub_power_on(struct
-> >>>> usb_hub_device *hub)
-> >>>>
-> >>>>        debug("enabling power on all ports\n");
-> >>>>        for (i =3D 0; i < dev->maxchild; i++) {
-> >>>> -             usb_set_port_feature(dev, i + 1, USB_PORT_FEAT_RESET);
-> >>>> -             debug("Reset : port %d returns %lX\n", i + 1,
-> >>>> dev->status);
-> >>>> +             if (usb_hub_is_superspeed(dev)) {
-> >>>
-> >>> Should this condition be "all which are lower than superspeed"
-> >>> instead ,
-> >>> so when the next generation of USB comes, this problem won't trigger
-> >>> ?
-> >>>
-> >>> What does Linux do btw ?
-> >>
-> >> As of now Linux checks if the hub is superspeed
-> >> https://github.com/torvalds/linux/blob/master/drivers/usb/core/hub.c#L=
-2859
-> >>
-> >> which is
-> >>   return hdev->descriptor.bDeviceProtocol =3D=3D USB_HUB_PR_SS; //
-> >> USB_HUB_PR_SS =3D 3
-> >>
-> >> This holds true for newer SuperSpeedPlus hubs as well.
-> >> https://github.com/torvalds/linux/blob/master/drivers/usb/core/hub.h#L=
-155
-> >>
-> >> We can change the check to be  bDeviceProtocol > 2 but who knows if
-> >> things change in the newer version of spec.
-> >> I am open to suggestions.
-> >
-> > Please just include the ^ in the commit description. Use link to
-> > git.kernel.org , not some mirror . This is extremely useful
-> > information and, well, you already wrote the V2 commit message
-> > addition in this answer.
->
-> Shantur, if that would be easier or quicker for you, I can write
-> a quite detailed patch description for you, in exchange for a
-> "Helped-by" tag in the v2 patch submission. :)
+Hi Igor,
 
-That would be really kind of you Dragan.
-I am down with the flu so that would really help me as my brain is
-working at 15% capacity.
+Thank you for the patch.
+
+On mar., f=C3=A9vr. 06, 2024 at 23:31, Igor Opaniuk <igor.opaniuk@foundries=
+.io> wrote:
+
+> From: Igor Opaniuk <igor.opaniuk@gmail.com>
+>
+> Add info about slot_suffix param for avb verify.
+>
+> Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
+> ---
+>
+>  doc/android/avb2.rst | 8 +++++---
+>  1 file changed, 5 insertions(+), 3 deletions(-)
+>
+> diff --git a/doc/android/avb2.rst b/doc/android/avb2.rst
+> index a072119574f..c0b2bedb831 100644
+> --- a/doc/android/avb2.rst
+> +++ b/doc/android/avb2.rst
+> @@ -39,15 +39,17 @@ Provides CLI interface to invoke AVB 2.0 verification=
+ + misc. commands for
+>  different testing purposes::
+>=20=20
+>      avb init <dev> - initialize avb 2.0 for <dev>
+> -    avb verify - run verification process using hash data from vbmeta st=
+ructure
+> +    avb verify [slot_suffix] - run verification process using hash data
+> +        from vbmeta structure. Provide [slot_suffix] if vbmeta partition
+> +        is slotted
+
+Any particular reason for this to not be exactly the wording as in cmd/avb.=
+c?
+
+	"avb verify [slot_suffix] - run verification process using hash data\n"
+	"    from vbmeta structure\n"
+	"    [slot_suffix] - _a, _b, etc (if vbmeta partition is slotted)\n"
+
+It looks good, but I think it would be better if both are the same for
+consistency, since both texts are user facing.
+
+>      avb read_rb <num> - read rollback index at location <num>
+>      avb write_rb <num> <rb> - write rollback index <rb> to <num>
+>      avb is_unlocked - returns unlock status of the device
+>      avb get_uuid <partname> - read and print uuid of partition <partname>
+>      avb read_part <partname> <offset> <num> <addr> - read <num> bytes fr=
+om
+> -    partition <partname> to buffer <addr>
+> +        partition <partname> to buffer <addr>
+>      avb write_part <partname> <offset> <num> <addr> - write <num> bytes =
+to
+> -    <partname> by <offset> using data from <addr>
+> +        <partname> by <offset> using data from <addr>
+>=20=20
+>  Partitions tampering (example)
+>  ------------------------------
+> --=20
+> 2.34.1
