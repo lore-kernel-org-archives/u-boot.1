@@ -4,77 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F1D7C4828F
-	for <u-boot@archiver.kernel.org>; Fri,  9 Feb 2024 19:21:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DB0CC4828F
+	for <u-boot@archiver.kernel.org>; Fri,  9 Feb 2024 19:21:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D56FD87E6E;
-	Fri,  9 Feb 2024 20:21:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5D8C887E9A;
+	Fri,  9 Feb 2024 20:21:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=foundries.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=foundries.io header.i=@foundries.io header.b="YanXU9g3";
+	dkim=pass (2048-bit key; secure) header.d=foundries.io header.i=@foundries.io header.b="B6/5bsI9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 48F2D87E8B; Fri,  9 Feb 2024 20:20:59 +0100 (CET)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id 9B76F87E96; Fri,  9 Feb 2024 20:21:01 +0100 (CET)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D42B87E7B
- for <u-boot@lists.denx.de>; Fri,  9 Feb 2024 20:20:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F99087E7B
+ for <u-boot@lists.denx.de>; Fri,  9 Feb 2024 20:20:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=foundries.io
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=igor.opaniuk@foundries.io
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-56003c97d98so1695166a12.3
- for <u-boot@lists.denx.de>; Fri, 09 Feb 2024 11:20:57 -0800 (PST)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-a3c00c98d32so104462566b.3
+ for <u-boot@lists.denx.de>; Fri, 09 Feb 2024 11:20:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=foundries.io; s=google; t=1707506456; x=1708111256; darn=lists.denx.de;
+ d=foundries.io; s=google; t=1707506458; x=1708111258; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6cEU/P1WawNCmmR0UPeIYaPLufQ7CKdlJnkGwsdhZqQ=;
- b=YanXU9g3RV/N2KIQDj7d0U+Qn+BRS4FBWuQEfJx6e8Mgx8K/IShoJ7pCzmuAS3Ltto
- LpR+ZmEO87x2BZ6lHR1P6R6wdvkNW8CnndVhvdjIb88G7Yk6Gb5f2I6Ry8k9T/Jdzjzu
- gdIGlW/qZ2m2zBo87eWJOVoo2InjT0gQ/10SCb+h7rKso+UtAdQLy1loWzHKZxdEUjjZ
- iLRzFOlYTG0gaPj60F1MJUdaUCH3UP1ULkLwU310vHREUS45SvAWorAQ6uupvyWGbpqd
- 0v3zlsVpa2BB7ONf5tYZ6xnpV+XBertg5bDWjKkmUAtcyn0g8yXreVh4zs74+dpsa8hy
- j6gw==
+ bh=YlcH+RUROVCJiS2By0xuxqzgfC95NkX6vN2nKWBf1N8=;
+ b=B6/5bsI9pYinTVXEmfVG1fAjR0m+6Jxr5R6xIJhzY2XhhYDepbBJBlJiNf9DOQ4Hy5
+ uom4RsQ3gzs+3AvWpPmpauHmaqDIf5QZxP0x0XRWRQI7vKv5BRvSzNdoETOCykww4Suf
+ 9H9wGh+XNIQdn0jWVU78xXGJxWoxEcF1Mzk68lfwst0GWZ/xdJ5BaV1A2ReEsTP6Lwhz
+ 0Le2+NKKGg7Ldl5VtKlyBWdiltRu2Ptg+Nn/cV7cV+1X6B57nPRL6DeQuhNcEYVgcAaI
+ Q+IG0Ka/MOsGAYRRD4/oLAD+GmWDchWB2KPhKHVfJbwuLOxwI95283q/oEm0iIkKl7VL
+ ajFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707506456; x=1708111256;
+ d=1e100.net; s=20230601; t=1707506458; x=1708111258;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6cEU/P1WawNCmmR0UPeIYaPLufQ7CKdlJnkGwsdhZqQ=;
- b=SErc8uTWKrIx9R1cUDShSPc+iHfA3+F36yR5786xxIAHsNo+BvXJuh0iVAul+Ydc5v
- e2Gzb+zVVQ26aOfzWvFhYtEDlFMtZ6sqPe/S1b99PzjXliQcNLXWiNSeAPKpms/8Vp0+
- X+QEprTVHdpq+LWILKaL3VIOgHeRc/MAbNiX/DcWfsRqKq+nvGE235G/Tgsc8UcYBO99
- 55GA/VkjZUMG7Yq+N7RoQiSrL88pxxkXbSRMcbNot23aVmi8dcEjZJ3wAQKiBsSEgoQH
- aLFC35oD7LauN7tYWY5G7nV80d4qT4H2Jfr11L7PunUYCD4QFrYiVvf1DBKPUIYP4/4k
- dikQ==
-X-Gm-Message-State: AOJu0YweziBD37gfJr9yNanlvBLjZSI1OkSLC9gJ5ZoOPeS9IagGjTSA
- rXG+VnPOn2lJz/p+mQGdAh6Z3m+ECa5Oa+jALmXHn7Ks8pArSfNpopjfX0K0wdReIuYsRbZDZBq
- Zreg=
-X-Google-Smtp-Source: AGHT+IF5XvZhuFsqWQswFRncrqvuC/yzPpRDorN584bK5UYobpzV8oSkrQLZeIsYakjQFsg9WZeKKA==
-X-Received: by 2002:aa7:dd06:0:b0:560:4ee6:cf78 with SMTP id
- i6-20020aa7dd06000000b005604ee6cf78mr2628266edv.31.1707506455928; 
- Fri, 09 Feb 2024 11:20:55 -0800 (PST)
+ bh=YlcH+RUROVCJiS2By0xuxqzgfC95NkX6vN2nKWBf1N8=;
+ b=FnNGiUA0yJOgfNumcPqeAXBUST3CHfbtZl4r0ooq4B+Dx9ONXnHlCL4bJO1FJ7QdGI
+ axDEMwQvNDNo2R4CR+FDtJg9gtJ9DKUHStA7zwfzULCTJQkuCqSYWlUouh01960Zph0W
+ tQp6+D+k7o0PhuVcyFamKSVyAxXhlermHhloAVvNUztwUQFyOWMtRL9DELZyI7qbSUiu
+ wDFOucwYT774+B29UZFp3xKtQ2+UfE7ML+Kov9NRhzTunv7qW4OmZ4tzTBkjSO/qLvNS
+ FntinZEuFRn1BvkP7fc9eOgFwtZ4f40m4fXfKbNld26XbJCJ/lp2UxN0mVvf7E2SdYmX
+ m8PQ==
+X-Gm-Message-State: AOJu0Ywn9G78sAyBJhOFNb1Xu8tBSDEcH0s2PCJbRUFe4uL1nFGGlK7r
+ BlEcAWIEeRPhQ2YtPgwroyE6pgdv/c8OFUYgPF6gfkQSm6QCEOEtDzPX89t88ykL+IGul12NydF
+ vFFs=
+X-Google-Smtp-Source: AGHT+IHNswFa0blcSbC5OWxPJtEULX+BQZ4oeWp/YA3c2XFsw3OJpwScZkhHPCnYxVEkkBpKCzFezA==
+X-Received: by 2002:a17:906:2b53:b0:a35:cbf1:c254 with SMTP id
+ b19-20020a1709062b5300b00a35cbf1c254mr23463ejg.11.1707506458489; 
+ Fri, 09 Feb 2024 11:20:58 -0800 (PST)
 X-Forwarded-Encrypted: i=1;
- AJvYcCUM9HGCqmoAt7QXtYy80jiZrrqDzhnTLEPWlBATkCNmYVKpY4+HqNrQmIwT9CnPqYX6u0s64Wvw+QMEPJSGC2Pucsf9RZ4nGGrAtTdvWEjAnj7b+fMgPE8Uzrr7Oena4csuJOZhUikrXI5WF13txF1kQFwiDaooYYvs9bWQXkNgkjxwmBZ4Y0sT1R7ylvoXekY=
+ AJvYcCXEifpkIYMODWCyEnD89hr2KnDpJCX65QjBzgEMH8+7Fwl6GV3h5J3hHjwg1REUe6Vc2HTdGOBf/cu6RW7421W8RPQkC6rRducQlOc+j3ogLBivi09o2nhGIDGr3AFSIm830h+h8Gw1oK774N5eo7oS8bumdPCdvxt/QL2vphBbcXWhgjSwDJs24VlHcfrqJ0s0aUOU+B7nfrC0r4cBU/H8hj/VvWzXA9EI/Dj0mijFWjPedmn5ylFdZyNipm4riKZDm1n+y61rUYltclau+yyauutb0PBbbpgxjoJ7KGV/pmO0WVs2GSSEHVQ=
 Received: from localhost ([185.186.156.113]) by smtp.gmail.com with ESMTPSA id
- z21-20020a05640235d500b00560fdb4c9c0sm23014edc.96.2024.02.09.11.20.53
+ dc23-20020a170906c7d700b00a30cd599285sm1031109ejb.223.2024.02.09.11.20.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 Feb 2024 11:20:54 -0800 (PST)
+ Fri, 09 Feb 2024 11:20:56 -0800 (PST)
 From: Igor Opaniuk <igor.opaniuk@foundries.io>
 To: u-boot@lists.denx.de
 Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Ivan Khoronzhuk <ivan.khoronzhuk@gmail.com>,
- Jens Wiklander <jens.wiklander@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 1/7] common: avb_verify: don't call mmc_switch_part for SD
-Date: Fri,  9 Feb 2024 20:20:39 +0100
-Message-Id: <20240209192045.3961832-2-igor.opaniuk@foundries.io>
+ Jens Wiklander <jens.wiklander@linaro.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Stefan Roese <sr@denx.de>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 2/7] avb: move SPDX license identifiers to the first line
+Date: Fri,  9 Feb 2024 20:20:40 +0100
+Message-Id: <20240209192045.3961832-3-igor.opaniuk@foundries.io>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240209192045.3961832-1-igor.opaniuk@foundries.io>
 References: <20240209192045.3961832-1-igor.opaniuk@foundries.io>
@@ -98,39 +102,84 @@ X-Virus-Status: Clean
 
 From: Igor Opaniuk <igor.opaniuk@gmail.com>
 
-mmc_switch_part() is used for switching between hw partitions
-on eMMC (boot0, boot1, user, rpmb).
-There is no need to do that for SD card.
+Move SPDX license identifiers to the first line, so it conforms
+to license placement rule [1]:
 
+Placement:
+The SPDX license identifier in kernel files shall be added at the first
+possible line in a file which can contain a comment.  For the majority
+of files this is the first line, except for scripts which require the
+'#!PATH_TO_INTERPRETER' in the first line.  For those scripts the SPDX
+identifier goes into the second line.
+
+[1] https://www.kernel.org/doc/Documentation/process/license-rules.rst
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
 ---
 
 Changes in v2:
+- Fix typo in commit message
 - Mattijs Korpershoek R-b tag applied
 
- common/avb_verify.c | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
+ cmd/avb.c                              | 4 +---
+ common/avb_verify.c                    | 3 +--
+ include/avb_verify.h                   | 4 +---
+ test/py/tests/test_android/test_avb.py | 3 +--
+ 4 files changed, 4 insertions(+), 10 deletions(-)
 
+diff --git a/cmd/avb.c b/cmd/avb.c
+index 783f51b8169..ce8b63873f2 100644
+--- a/cmd/avb.c
++++ b/cmd/avb.c
+@@ -1,8 +1,6 @@
+-
++// SPDX-License-Identifier: GPL-2.0+
+ /*
+  * (C) Copyright 2018, Linaro Limited
+- *
+- * SPDX-License-Identifier:	GPL-2.0+
+  */
+ 
+ #include <avb_verify.h>
 diff --git a/common/avb_verify.c b/common/avb_verify.c
-index 48ba8db51e5..59f2c25e0de 100644
+index 59f2c25e0de..938a5383b5d 100644
 --- a/common/avb_verify.c
 +++ b/common/avb_verify.c
-@@ -358,9 +358,11 @@ static struct mmc_part *get_partition(AvbOps *ops, const char *partition)
- 		goto err;
- 	}
+@@ -1,7 +1,6 @@
++// SPDX-License-Identifier: GPL-2.0+
+ /*
+  * (C) Copyright 2018, Linaro Limited
+- *
+- * SPDX-License-Identifier:	GPL-2.0+
+  */
  
--	ret = mmc_switch_part(part->mmc, part_num);
--	if (ret)
--		goto err;
-+	if (IS_MMC(part->mmc)) {
-+		ret = mmc_switch_part(part->mmc, part_num);
-+		if (ret)
-+			goto err;
-+	}
+ #include <avb_verify.h>
+diff --git a/include/avb_verify.h b/include/avb_verify.h
+index 1e787ba6668..2fb850044d9 100644
+--- a/include/avb_verify.h
++++ b/include/avb_verify.h
+@@ -1,8 +1,6 @@
+-
++/* SPDX-License-Identifier: GPL-2.0+ */
+ /*
+  * (C) Copyright 2018, Linaro Limited
+- *
+- * SPDX-License-Identifier:	GPL-2.0+
+  */
  
- 	mmc_blk = mmc_get_blk_desc(part->mmc);
- 	if (!mmc_blk) {
+ #ifndef	_AVB_VERIFY_H
+diff --git a/test/py/tests/test_android/test_avb.py b/test/py/tests/test_android/test_avb.py
+index 238b48c90fa..865efbca4de 100644
+--- a/test/py/tests/test_android/test_avb.py
++++ b/test/py/tests/test_android/test_avb.py
+@@ -1,6 +1,5 @@
+-# Copyright (c) 2018, Linaro Limited
+-#
+ # SPDX-License-Identifier:  GPL-2.0+
++# Copyright (c) 2018, Linaro Limited
+ #
+ # Android Verified Boot 2.0 Test
+ 
 -- 
 2.34.1
 
