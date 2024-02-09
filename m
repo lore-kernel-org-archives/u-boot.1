@@ -4,68 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2298AC4828F
-	for <u-boot@archiver.kernel.org>; Fri,  9 Feb 2024 12:05:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39374C48297
+	for <u-boot@archiver.kernel.org>; Fri,  9 Feb 2024 12:05:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9418F87E6F;
-	Fri,  9 Feb 2024 13:05:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linutronix.de
+	by phobos.denx.de (Postfix) with ESMTP id 1A88887E66;
+	Fri,  9 Feb 2024 13:05:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gnu.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=linutronix.de header.i=@linutronix.de header.b="v/Srt/eT";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="/Md4RQIT";
+	dkim=pass (2048-bit key; unprotected) header.d=gnu.org header.i=@gnu.org header.b="rWJoORuL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DC7B787E39; Fri,  9 Feb 2024 09:07:00 +0100 (CET)
-Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6D71487E50; Fri,  9 Feb 2024 11:30:31 +0100 (CET)
+Received: from eggs.gnu.org (eggs.gnu.org [IPv6:2001:470:142:3::10])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 42CC287B6B
- for <u-boot@lists.denx.de>; Fri,  9 Feb 2024 09:06:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 04E7187E5D
+ for <u-boot@lists.denx.de>; Fri,  9 Feb 2024 11:30:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linutronix.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=t-8ch@linutronix.de
-From: =?utf-8?q?Thomas_Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1707466016;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=bvdmW6q709wJFBBDAfM690NM/U3MES6+aHC5TrmX6uI=;
- b=v/Srt/eTjuFatwMoOf/SDoyLE4EcNMAnBfXCqiBPveL1U/x8pgcilH3sT7BNhIcMYq137V
- 3T0VRBd5pZeCAbsvflv1ziEKPlJQmmOPXpLF7NoXJOhgqN11WbgXJzW/5lwxYbUuIbECV8
- V+YhFApfr82KFVQKckan/453bdPhfXdSow1h1zb2Mu3wownCHaVUGjNH6em9/BOXlWdR7d
- Rcw45QA6IuHbxTcYrLjivo5HkTh+klfRihsTKa2YZfTz4wQdEmBjURI1hL4KFK2Ve5nNRf
- mFDv4qItrhoAHulLoAj0IXBsy4xHMSn/dKpZpIyj9vElvuSzttRGWBfS7iDgOw==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1707466016;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=bvdmW6q709wJFBBDAfM690NM/U3MES6+aHC5TrmX6uI=;
- b=/Md4RQITHese9Atf3/6nnLgto+pWdsnuSs2jiPDz7E81dS+4LfgxB53HtmtBj5/LCNWtVi
- QP7GX9OWMNDHJzDg==
-Date: Fri, 09 Feb 2024 09:06:53 +0100
-Subject: [PATCH] configs: am64x_evm_r5_defconfig: enlarge simple malloc
- pool
+ dmarc=pass (p=none dis=none) header.from=gnu.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=othacehe@gnu.org
+Received: from fencepost.gnu.org ([2001:470:142:3::e])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <othacehe@gnu.org>)
+ id 1rYO9G-0002ci-3w; Fri, 09 Feb 2024 05:30:22 -0500
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=gnu.org;
+ s=fencepost-gnu-org; h=MIME-Version:Date:Subject:To:From:in-reply-to:
+ references; bh=6fERyOhsrV/uJf6Cd+LQIY5g8+fzqAfaQoEUke2NoeY=; b=rWJoORuL5roDFE
+ I3k2qFZfYXLLiP+23RGoR+rm4EPC4tWcK7BWEN0FqHRbiZU/btA1nbXRIO/6SHwMFu48iC68kvFby
+ V5JokajM4GfH7cpcMcYnFwGTkkzl14QNiXokyNhzzvTOzhMPbAL1H3AEAH4V8ik/4gFz6sZIu1jSs
+ gW1n33Ag2rzEzckoZDi6biaf3waTzzWwoq4t7LJkgBLUM7rARRDyzopcUrgTJFf0THMTn9r9TjQZN
+ +DVo6lVc8O/kxSBmp38IBHth/GGJmndeTmBPXls6KFPO4AhG5KfhXaAkJJX2YPFyc179z0kHoya7i
+ f+VnyjZYruBLJ0XAlm3Q==;
+From: Mathieu Othacehe <othacehe@gnu.org>
+To: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
+ Shiji Yang <yangshiji66@outlook.com>, Ye Li <ye.li@nxp.com>,
+ =?UTF-8?q?S=C3=A9bastien=20Szymanski?= <sebastien.szymanski@armadeus.com>,
+ Fabio Estevam <festevam@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Mathieu Othacehe <m.othacehe@gmail.com>
+Cc: u-boot@lists.denx.de,
+	Mathieu Othacehe <othacehe@gnu.org>
+Subject: [PATCH v2 0/3] imx93_var_som: Enable AHAB support
+Date: Fri,  9 Feb 2024 11:30:06 +0100
+Message-ID: <20240209103009.5463-1-othacehe@gnu.org>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Message-Id: <20240209-am64x_evm_r5_defconfig-malloc-simple-len-v1-1-4a779a8bd557@linutronix.de>
-X-B4-Tracking: v=1; b=H4sIABzdxWUC/x3NSwrDIBRG4a2EO66gxqaPrZQi1vymF3wEhRAI2
- Xulw29yzkENldHoORxUsXHjkjvUZSD/dXmB4LmbtNRGavkQLk1mt9iSrVc7I/iSAy8iuRiLF43
- TGiEisvgojJO53WFGRT23VgTe/6vX+zx/lg/9RXoAAAA=
-To: Vignesh Raghavendra <vigneshr@ti.com>, Tom Rini <trini@konsulko.com>
-Cc: Benedikt Spranger <b.spranger@linutronix.de>, u-boot@lists.denx.de, 
- =?utf-8?q?Thomas_Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1707466016; l=1016;
- i=thomas.weissschuh@linutronix.de; s=20240209; h=from:subject:message-id;
- bh=qX5prAOrhOw7tfSgYQByCGqWBDqd3mv6O3OyuqFBv50=;
- b=hgII6okcUBihO2BhwQlhN6yHrNlvb+Oay4Vx7RK8Z7RCtUPkCAeFkK3IPduChpYbRfsCBXPWV
- GldLmaMajj/AEab4AzNDPEF0EG6wGCjdSIQFGz6WeiIURkUKbEd2d1Z
-X-Developer-Key: i=thomas.weissschuh@linutronix.de; a=ed25519;
- pk=pfvxvpFUDJV2h2nY0FidLUml22uGLSjByFbM6aqQQws=
 X-Mailman-Approved-At: Fri, 09 Feb 2024 13:04:59 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,36 +67,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With the default size the stack grows into the malloc, pool leading to
-stack corruption and boot failure.
+Hello,
 
-Signed-off-by: Thomas Weißschuh <thomas.weissschuh@linutronix.de>
----
-Note:
+In this v2, I moved imx93_probe_mu to a dedicated header.
 
-Maybe this should be increased for a broader set of devices.
----
- configs/am64x_evm_r5_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+Thanks,
 
-diff --git a/configs/am64x_evm_r5_defconfig b/configs/am64x_evm_r5_defconfig
-index 56df6a4a19..707fe506f3 100644
---- a/configs/am64x_evm_r5_defconfig
-+++ b/configs/am64x_evm_r5_defconfig
-@@ -42,6 +42,7 @@ CONFIG_SPL_SYS_REPORT_STACK_F_USAGE=y
- CONFIG_SPL_BOARD_INIT=y
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
- CONFIG_SPL_STACK_R=y
-+CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x400000
- CONFIG_SPL_SEPARATE_BSS=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+Mathieu
 
----
-base-commit: a4650bf65e4b7d3ef04c90ba8031374428e4a682
-change-id: 20240209-am64x_evm_r5_defconfig-malloc-simple-len-b1e36478e431
+Changelog:
+v2: Move imx93_probe_mu declaration to a header file
 
-Best regards,
+Link to the previous revision:
+v1: https://lists.denx.de/pipermail/u-boot/2024-February/545528.html
+
+Mathieu Othacehe (3):
+  imx93: Use a header for imx9_probe_mu declaration
+  board: imx93_var_som: Probe ELE MU
+  configs: imx93_var_som: Enable AHAB support
+
+ arch/arm/include/asm/arch-imx9/mu.h | 13 +++++++++++++
+ board/freescale/imx93_evk/spl.c     |  2 +-
+ board/phytec/phycore_imx93/spl.c    |  2 +-
+ board/variscite/imx93_var_som/spl.c |  5 +++--
+ configs/imx93_var_som_defconfig     |  1 +
+ 5 files changed, 19 insertions(+), 4 deletions(-)
+ create mode 100644 arch/arm/include/asm/arch-imx9/mu.h
+
 -- 
-Thomas Weißschuh <thomas.weissschuh@linutronix.de>
+2.41.0
 
