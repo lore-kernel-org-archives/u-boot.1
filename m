@@ -4,80 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 378A3C48297
-	for <u-boot@archiver.kernel.org>; Fri,  9 Feb 2024 18:34:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88CD0C4828F
+	for <u-boot@archiver.kernel.org>; Fri,  9 Feb 2024 18:37:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6375D87E99;
-	Fri,  9 Feb 2024 19:34:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id B941487E7F;
+	Fri,  9 Feb 2024 19:37:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jEGErPOb";
+	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="Si6H3LQK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0ECBA87E99; Fri,  9 Feb 2024 19:34:05 +0100 (CET)
-Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
- [IPv6:2607:f8b0:4864:20::1031])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CE5ED87E7E; Fri,  9 Feb 2024 19:36:59 +0100 (CET)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.185])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E116B87E7E
- for <u-boot@lists.denx.de>; Fri,  9 Feb 2024 19:34:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 42BCA87E7F
+ for <u-boot@lists.denx.de>; Fri,  9 Feb 2024 19:36:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x1031.google.com with SMTP id
- 98e67ed59e1d1-290c5c705d5so240396a91.0
- for <u-boot@lists.denx.de>; Fri, 09 Feb 2024 10:34:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1707503641; x=1708108441; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=r/g56Osi8dXsvVS8DzkHie9bL5IA5xlk5FZdIuMZdXo=;
- b=jEGErPObNWYfw4xevkA1qCEKg2g7YcvW7wuKpbIgD1BLfoZfGz7rPab6Y9UNHBS4NF
- wZaQ2zW5fl4P5vwxmOhbxdZktsVHETpiBxj7TshQFNSWdQ4LQGCXfCIt4InjoDM6vLl/
- KwuZTonpfhZny3eYlcxB5MOwccdRLLJls0qsfYCa+IO5tZ1HiS/NDE2mDVApFEiSb8OP
- BwFOHZFEd/FzJsOo58wO5M5Lvpo80cdJe2gkijCEJ7ETQ6ENEJcHit99Yohn4LnN+Qvs
- PQQ0tYUtWLGeFpSERMgxOsp4oblbcpCSq+DW3cCPN9ggwyM4ploTdV7xaOgIY/ekuh9b
- PN1g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707503641; x=1708108441;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=r/g56Osi8dXsvVS8DzkHie9bL5IA5xlk5FZdIuMZdXo=;
- b=TEF+R5WT91Ofioj5OxEyChA6RIglUlFkFmhnjJX56uODJrGX8UoM3Smz9Di19RO+dY
- k7deic86KQUr9dkuaswygPf4nUH+yQv33sORC/jzvmYjZNWk2nTAl18h+woB0zbt6/Qr
- QjFUuLrTzHMhgfEoIFw0CQiL9fdW5JWXzB3C955IKEOpK4xOAYTFSlB4XBRB4bh7Kdym
- +M+hzC3cvvus8rx/r/e+9CvVrT3ex++0oEP7CvM7FcyNTeKMxFQNfDxbL7E9Fq9VrXmF
- dm6AGvUpZ2vR4vpc35f83ooJEth2iSlmNtrz1Y+1QeQ4jyRM+IjGxdrUTMse28MdnDKv
- 4tKw==
-X-Gm-Message-State: AOJu0Yzi1XNeMqW1hpxOP6INcn/pe9ebOenlpOxvIzuM/9+HVGUhMOqf
- gjTCnWUuT7Nbx9LFkdiJWJ7o+GW7jn/t7t1YODx2c1nUZPyqQeamP3t4DM3+sxqNpJlyFj811Di
- Wqa8aVH3C2MM/vdp1JwFxASUn/j0=
-X-Google-Smtp-Source: AGHT+IGGHP5y/3/thVPgxjb8rh/f1aHLAZ49AKK8shbE6opx80UKoRUQe5tf4S6vZIUl5QxthPXmEB5n9DpCxZPXU7Y=
-X-Received: by 2002:a17:90a:7409:b0:296:9c2a:e7da with SMTP id
- a9-20020a17090a740900b002969c2ae7damr2179210pjg.2.1707503641150; Fri, 09 Feb
- 2024 10:34:01 -0800 (PST)
-MIME-Version: 1.0
-References: <20240206164008.1620933-1-Mr.Bossman075@gmail.com>
- <CAOMZO5CHMYZ5LFz9xCukrZ_BeF-Knt=Pbe9Qs7wrOnr0-ZSP_A@mail.gmail.com>
- <CAJFTR8Q_D361vUu5vQ1zHjwG0A6V+9zKj_w5P-x9LFqVch+QsQ@mail.gmail.com>
-In-Reply-To: <CAJFTR8Q_D361vUu5vQ1zHjwG0A6V+9zKj_w5P-x9LFqVch+QsQ@mail.gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 9 Feb 2024 15:33:49 -0300
-Message-ID: <CAOMZO5AiEictCbFJ6GXx=sCBgnSFO6=t2qz7D0pHc8y-fNOAzA@mail.gmail.com>
-Subject: Re: [PATCH v2 1/2] imx: imxrt1050-evk: Add support for SPI flash
- booting
-To: Jesse T <mr.bossman075@gmail.com>
-Cc: u-boot@lists.denx.de, 
- Giulio Benetti <giulio.benetti@benettiengineering.com>,
- Stefano Babic <sbabic@denx.de>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
+X-KPN-MessageId: 2fac513b-c77a-11ee-abd4-005056999439
+Received: from smtp.kpnmail.nl (unknown [10.31.155.5])
+ by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+ id 2fac513b-c77a-11ee-abd4-005056999439;
+ Fri, 09 Feb 2024 19:36:49 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
+ h=subject:to:from:message-id:date;
+ bh=XoC1I0XiN2jzOZ+lhyCFH2VfILW9hP/TfVhg+Avm4m8=;
+ b=Si6H3LQKzsZQryu5/STjxW37CsqmdJ6G6TyUfZR+aoMZ8GDgJIzN2W2BmQRdjfIGdbbpXug1HVMwM
+ V69jq7FP2F0oO5C66oeMBmm1RhBMqewOOK4tY65GiL/G3VLbjUAtVSm+JjnrOgEOBfl+Acg3n+Qs40
+ uHKRhiMMWa38hLeluD2oQoIg/6N8iwNuHhmSDRJiTGFDEEy4H5X2k1Cmp4DIps1lW3QIzXwyOOC/3p
+ js4T9K3m9EUlnjAi/Ix3TI5UBzxQuAm/SD9UBbGGG56a5EiQ1cB9Mt0s5rvICOFPxhcuATojOCmqbE
+ WRisHykQ0oUCtOQ/F9Qq8LjB8EWKH8w==
+X-KPN-MID: 33|L9OyfHcCe0um9uvtZamZnlZNLBKDNfdqQsNoFCdjJ4UFmA+m/UPXYj33NtrZr+C
+ 7vK4Rj4dUFU6FlmYXg8B8Kkc6wjnYhzWoZKWniHwqgQU=
+X-KPN-VerifiedSender: Yes
+X-CMASSUN: 33|0lC10DyXJk1z9DOgdKQFTNNjTX6szItFXfVGfgHZl3/neeANTLI9hXUlutd+2lt
+ AvIIwzlP7Hvfn7q3khB3dFg==
+X-Originating-IP: 80.61.163.207
+Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
+ [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
+ id 30f04642-c77a-11ee-94b6-00505699b758;
+ Fri, 09 Feb 2024 19:36:52 +0100 (CET)
+Date: Fri, 09 Feb 2024 19:36:51 +0100
+Message-Id: <87bk8ppjr0.fsf@bloch.sibelius.xs4all.nl>
+From: Mark Kettenis <mark.kettenis@xs4all.nl>
+To: Dragan Simic <dsimic@manjaro.org>
+Cc: foss+uboot@0leil.net, sjg@chromium.org, philipp.tomsich@vrull.eu,
+ kever.yang@rock-chips.com, trini@konsulko.com,
+ alpernebiyasak@gmail.com, pbrobinson@gmail.com,
+ jagan@amarulasolutions.com, klaus.goger@theobroma-systems.com,
+ heiko.stuebner@cherry.de, otavio@ossystems.com.br,
+ andy.yan@rock-chips.com, manivannan.sadhasivam@linaro.org,
+ lukma@denx.de, seanga2@gmail.com, joe.hershberger@ni.com,
+ rfried.dev@gmail.com, sughosh.ganu@linaro.org,
+ xypron.glpk@gmx.de, agust@denx.de, u-boot@lists.denx.de,
+ quentin.schulz@theobroma-systems.com
+In-Reply-To: <64ed7a21fa952a3dd9cc76a9cc90216e@manjaro.org> (message from
+ Dragan Simic on Fri, 09 Feb 2024 18:58:01 +0100)
+Subject: Re: [PATCH v2 09/20] rockchip: merge misc.c into board.c
+References: <20240209-jaguar-v2-0-6c9ffe09b924@theobroma-systems.com>
+ <20240209-jaguar-v2-9-6c9ffe09b924@theobroma-systems.com>
+ <64ed7a21fa952a3dd9cc76a9cc90216e@manjaro.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,41 +84,396 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Feb 9, 2024 at 3:27=E2=80=AFPM Jesse T <mr.bossman075@gmail.com> wr=
-ote:
+> Date: Fri, 09 Feb 2024 18:58:01 +0100
+> From: Dragan Simic <dsimic@manjaro.org>
+> 
+> Hello Quentin,
+> 
+> Please, see my comments below.
+> 
+> On 2024-02-09 10:50, Quentin Schulz wrote:
+> > From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+> > 
+> > The functions aren't used anywhere else than in board.c, therefore,
+> > let's not expose them anymore at all.
+> > 
+> > This merges misc.c and board.c together and removes the functions from
+> > the misc.h header file.
+> 
+> The patches I'm going to send, which exclude the unneeded code
+> from the U-Boot images for the Pinebook Pro and the Pinebook Pro,
+> change the code that this patch moves around.
+> 
+> Perhaps it would be better to have the move of the code and the
+> subsequent changes to it performed in a separate series, to make
+> checking and accepting the patches simpler as a group, and to
+> perhaps make it a bit more clear what actually happened to anyone
+> going through the repository history later.
+> 
+> Thus, I was wondering would you, please, be fine with excluding
+> this patch from this series and letting me submit it, with proper
+> attribution tags, of course, as part of the series I'll submit
+> in the next couple of days?
 
-> These errors also happen on master.
+Hello Dragan,
 
-There are no errors in master, otherwise they would not pass the CI build.
+I'm not covinced your patches are a good idea.  Unless we're running
+into space constraints, or if there are noticable slowdowns in the
+boot process because of the extra code, I really don't see what the
+benefit of further differentiation between rk3399 boards would be.  It
+just makes testing things harder.
 
-> I will submit a patch to fix these soon.
+The smaller the number of special snow flakes, the better!
 
-Just to clarify: on master we do get the following warnings (not errors):
-
-arch/arm/dts/imxrt1170-evk.dtb: Warning (reg_format):
-/memory/ocram@20240000:reg: property has invalid length (8 bytes)
-(#address-cells =3D=3D 2, #size-cells =3D=3D 1)
-arch/arm/dts/imxrt1170-evk.dtb: Warning (reg_format):
-/memory/sdram@80000000:reg: property has invalid length (8 bytes)
-(#address-cells =3D=3D 2, #size-cells =3D=3D 1)
-arch/arm/dts/imxrt1170-evk.dtb: Warning (avoid_default_addr_size):
-/memory/ocram@20240000: Relying on default #address-cells value
-arch/arm/dts/imxrt1170-evk.dtb: Warning (avoid_default_addr_size):
-/memory/ocram@20240000: Relying on default #size-cells value
-arch/arm/dts/imxrt1170-evk.dtb: Warning (avoid_default_addr_size):
-/memory/sdram@80000000: Relying on default #address-cells value
-arch/arm/dts/imxrt1170-evk.dtb: Warning (avoid_default_addr_size):
-/memory/sdram@80000000: Relying on default #size-cells value
-  SHIPPED dts/dt.dtb
-
-The error I was referring to was:
-
-make imxrt1020-evk_defconfig
-make
-1221+binman: Device tree 'u-boot.dtb' does not have a 'binman' node
-1222+make[1]: *** [Makefile:1125: .binman_stamp] Error 1
-1223+make: *** [Makefile:177: sub-make] Error 2
-
-If you can fix both the warnings and the errors, that would be great.
-
-Thanks
+> > Cc: Quentin Schulz <foss+uboot@0leil.net>
+> > Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+> > Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+> > ---
+> >  arch/arm/include/asm/arch-rockchip/misc.h |   5 --
+> >  arch/arm/mach-rockchip/Makefile           |   1 -
+> >  arch/arm/mach-rockchip/board.c            | 125 
+> > +++++++++++++++++++++++++++
+> >  arch/arm/mach-rockchip/misc.c             | 135 
+> > ------------------------------
+> >  4 files changed, 125 insertions(+), 141 deletions(-)
+> > 
+> > diff --git a/arch/arm/include/asm/arch-rockchip/misc.h
+> > b/arch/arm/include/asm/arch-rockchip/misc.h
+> > index 4155af8c3b0..ef37ff1661a 100644
+> > --- a/arch/arm/include/asm/arch-rockchip/misc.h
+> > +++ b/arch/arm/include/asm/arch-rockchip/misc.h
+> > @@ -6,9 +6,4 @@
+> >   *      Rohan Garg <rohan.garg@collabora.com>
+> >   */
+> > 
+> > -int rockchip_cpuid_from_efuse(const u32 cpuid_offset,
+> > -			      const u32 cpuid_length,
+> > -			      u8 *cpuid);
+> > -int rockchip_cpuid_set(const u8 *cpuid, const u32 cpuid_length);
+> > -int rockchip_setup_macaddr(void);
+> >  void rockchip_capsule_update_board_setup(void);
+> > diff --git a/arch/arm/mach-rockchip/Makefile 
+> > b/arch/arm/mach-rockchip/Makefile
+> > index 1dc92066bbf..c07bdaee4c3 100644
+> > --- a/arch/arm/mach-rockchip/Makefile
+> > +++ b/arch/arm/mach-rockchip/Makefile
+> > @@ -23,7 +23,6 @@ ifeq ($(CONFIG_SPL_BUILD)$(CONFIG_TPL_BUILD),)
+> >  # meaning "turn it off".
+> >  obj-y += boot_mode.o
+> >  obj-$(CONFIG_ROCKCHIP_COMMON_BOARD) += board.o
+> > -obj-$(CONFIG_MISC_INIT_R) += misc.o
+> >  endif
+> > 
+> >  ifeq ($(CONFIG_TPL_BUILD),)
+> > diff --git a/arch/arm/mach-rockchip/board.c 
+> > b/arch/arm/mach-rockchip/board.c
+> > index d5cb59c10fa..80b4514852f 100644
+> > --- a/arch/arm/mach-rockchip/board.c
+> > +++ b/arch/arm/mach-rockchip/board.c
+> > @@ -1,20 +1,32 @@
+> >  // SPDX-License-Identifier: GPL-2.0+
+> >  /*
+> >   * (C) Copyright 2019 Rockchip Electronics Co., Ltd.
+> > + *
+> > + * Copyright (C) 2019 Collabora Inc - https://www.collabora.com/
+> > + *      Rohan Garg <rohan.garg@collabora.com>
+> > + *
+> > + * Based on puma-rk3399.c:
+> > + *      (C) Copyright 2017 Theobroma Systems Design und Consulting 
+> > GmbH
+> >   */
+> >  #include <common.h>
+> >  #include <clk.h>
+> >  #include <cpu_func.h>
+> > +#include <env.h>
+> >  #include <dm.h>
+> >  #include <efi_loader.h>
+> >  #include <fastboot.h>
+> > +#include <hash.h>
+> >  #include <init.h>
+> >  #include <log.h>
+> >  #include <mmc.h>
+> > +#include <dm/uclass-internal.h>
+> > +#include <misc.h>
+> >  #include <part.h>
+> >  #include <ram.h>
+> >  #include <syscon.h>
+> >  #include <uuid.h>
+> > +#include <u-boot/crc.h>
+> > +#include <u-boot/sha256.h>
+> >  #include <asm/cache.h>
+> >  #include <asm/io.h>
+> >  #include <asm/arch-rockchip/boot_mode.h>
+> > @@ -297,6 +309,119 @@ int fastboot_set_reboot_flag(enum
+> > fastboot_reboot_reason reason)
+> >  #endif
+> > 
+> >  #ifdef CONFIG_MISC_INIT_R
+> > +int rockchip_setup_macaddr(void)
+> > +{
+> > +#if CONFIG_IS_ENABLED(HASH) && CONFIG_IS_ENABLED(SHA256)
+> > +	int ret;
+> > +	const char *cpuid = env_get("cpuid#");
+> > +	u8 hash[SHA256_SUM_LEN];
+> > +	int size = sizeof(hash);
+> > +	u8 mac_addr[6];
+> > +
+> > +	/* Only generate a MAC address, if none is set in the environment */
+> > +	if (env_get("ethaddr"))
+> > +		return 0;
+> > +
+> > +	if (!cpuid) {
+> > +		debug("%s: could not retrieve 'cpuid#'\n", __func__);
+> > +		return -1;
+> > +	}
+> > +
+> > +	ret = hash_block("sha256", (void *)cpuid, strlen(cpuid), hash, 
+> > &size);
+> > +	if (ret) {
+> > +		debug("%s: failed to calculate SHA256\n", __func__);
+> > +		return -1;
+> > +	}
+> > +
+> > +	/* Copy 6 bytes of the hash to base the MAC address on */
+> > +	memcpy(mac_addr, hash, 6);
+> > +
+> > +	/* Make this a valid MAC address and set it */
+> > +	mac_addr[0] &= 0xfe;  /* clear multicast bit */
+> > +	mac_addr[0] |= 0x02;  /* set local assignment bit (IEEE802) */
+> > +	eth_env_set_enetaddr("ethaddr", mac_addr);
+> > +
+> > +	/* Make a valid MAC address for ethernet1 */
+> > +	mac_addr[5] ^= 0x01;
+> > +	eth_env_set_enetaddr("eth1addr", mac_addr);
+> > +#endif
+> > +	return 0;
+> > +}
+> > +
+> > +int rockchip_cpuid_from_efuse(const u32 cpuid_offset,
+> > +			      const u32 cpuid_length,
+> > +			      u8 *cpuid)
+> > +{
+> > +#if IS_ENABLED(CONFIG_ROCKCHIP_EFUSE) || 
+> > IS_ENABLED(CONFIG_ROCKCHIP_OTP)
+> > +	struct udevice *dev;
+> > +	int ret;
+> > +
+> > +	/* retrieve the device */
+> > +#if IS_ENABLED(CONFIG_ROCKCHIP_EFUSE)
+> > +	ret = uclass_get_device_by_driver(UCLASS_MISC,
+> > +					  DM_DRIVER_GET(rockchip_efuse), &dev);
+> > +#elif IS_ENABLED(CONFIG_ROCKCHIP_OTP)
+> > +	ret = uclass_get_device_by_driver(UCLASS_MISC,
+> > +					  DM_DRIVER_GET(rockchip_otp), &dev);
+> > +#endif
+> > +	if (ret) {
+> > +		debug("%s: could not find efuse device\n", __func__);
+> > +		return -1;
+> > +	}
+> > +
+> > +	/* read the cpu_id range from the efuses */
+> > +	ret = misc_read(dev, cpuid_offset, cpuid, cpuid_length);
+> > +	if (ret < 0) {
+> > +		debug("%s: reading cpuid from the efuses failed\n",
+> > +		      __func__);
+> > +		return -1;
+> > +	}
+> > +#endif
+> > +	return 0;
+> > +}
+> > +
+> > +int rockchip_cpuid_set(const u8 *cpuid, const u32 cpuid_length)
+> > +{
+> > +	u8 low[cpuid_length / 2], high[cpuid_length / 2];
+> > +	char cpuid_str[cpuid_length * 2 + 1];
+> > +	u64 serialno;
+> > +	char serialno_str[17];
+> > +	const char *oldid;
+> > +	int i;
+> > +
+> > +	memset(cpuid_str, 0, sizeof(cpuid_str));
+> > +	for (i = 0; i < cpuid_length; i++)
+> > +		sprintf(&cpuid_str[i * 2], "%02x", cpuid[i]);
+> > +
+> > +	debug("cpuid: %s\n", cpuid_str);
+> > +
+> > +	/*
+> > +	 * Mix the cpuid bytes using the same rules as in
+> > +	 *   ${linux}/drivers/soc/rockchip/rockchip-cpuinfo.c
+> > +	 */
+> > +	for (i = 0; i < cpuid_length / 2; i++) {
+> > +		low[i] = cpuid[1 + (i << 1)];
+> > +		high[i] = cpuid[i << 1];
+> > +	}
+> > +
+> > +	serialno = crc32_no_comp(0, low, cpuid_length / 2);
+> > +	serialno |= (u64)crc32_no_comp(serialno, high, cpuid_length / 2) << 
+> > 32;
+> > +	snprintf(serialno_str, sizeof(serialno_str), "%016llx", serialno);
+> > +
+> > +	oldid = env_get("cpuid#");
+> > +	if (oldid && strcmp(oldid, cpuid_str) != 0)
+> > +		printf("cpuid: value %s present in env does not match hardware 
+> > %s\n",
+> > +		       oldid, cpuid_str);
+> > +
+> > +	env_set("cpuid#", cpuid_str);
+> > +
+> > +	/* Only generate serial# when none is set yet */
+> > +	if (!env_get("serial#"))
+> > +		env_set("serial#", serialno_str);
+> > +
+> > +	return 0;
+> > +}
+> > +
+> >  __weak int rockchip_early_misc_init_r(void)
+> >  {
+> >  	return 0;
+> > diff --git a/arch/arm/mach-rockchip/misc.c 
+> > b/arch/arm/mach-rockchip/misc.c
+> > deleted file mode 100644
+> > index 15397cff009..00000000000
+> > --- a/arch/arm/mach-rockchip/misc.c
+> > +++ /dev/null
+> > @@ -1,135 +0,0 @@
+> > -/* SPDX-License-Identifier: GPL-2.0+ */
+> > -/*
+> > - * RK3399: Architecture common definitions
+> > - *
+> > - * Copyright (C) 2019 Collabora Inc - https://www.collabora.com/
+> > - *      Rohan Garg <rohan.garg@collabora.com>
+> > - *
+> > - * Based on puma-rk3399.c:
+> > - *      (C) Copyright 2017 Theobroma Systems Design und Consulting 
+> > GmbH
+> > - */
+> > -
+> > -#include <common.h>
+> > -#include <env.h>
+> > -#include <dm.h>
+> > -#include <hash.h>
+> > -#include <log.h>
+> > -#include <dm/uclass-internal.h>
+> > -#include <misc.h>
+> > -#include <u-boot/crc.h>
+> > -#include <u-boot/sha256.h>
+> > -
+> > -#include <asm/arch-rockchip/misc.h>
+> > -
+> > -int rockchip_setup_macaddr(void)
+> > -{
+> > -#if CONFIG_IS_ENABLED(HASH) && CONFIG_IS_ENABLED(SHA256)
+> > -	int ret;
+> > -	const char *cpuid = env_get("cpuid#");
+> > -	u8 hash[SHA256_SUM_LEN];
+> > -	int size = sizeof(hash);
+> > -	u8 mac_addr[6];
+> > -
+> > -	/* Only generate a MAC address, if none is set in the environment */
+> > -	if (env_get("ethaddr"))
+> > -		return 0;
+> > -
+> > -	if (!cpuid) {
+> > -		debug("%s: could not retrieve 'cpuid#'\n", __func__);
+> > -		return -1;
+> > -	}
+> > -
+> > -	ret = hash_block("sha256", (void *)cpuid, strlen(cpuid), hash, 
+> > &size);
+> > -	if (ret) {
+> > -		debug("%s: failed to calculate SHA256\n", __func__);
+> > -		return -1;
+> > -	}
+> > -
+> > -	/* Copy 6 bytes of the hash to base the MAC address on */
+> > -	memcpy(mac_addr, hash, 6);
+> > -
+> > -	/* Make this a valid MAC address and set it */
+> > -	mac_addr[0] &= 0xfe;  /* clear multicast bit */
+> > -	mac_addr[0] |= 0x02;  /* set local assignment bit (IEEE802) */
+> > -	eth_env_set_enetaddr("ethaddr", mac_addr);
+> > -
+> > -	/* Make a valid MAC address for ethernet1 */
+> > -	mac_addr[5] ^= 0x01;
+> > -	eth_env_set_enetaddr("eth1addr", mac_addr);
+> > -#endif
+> > -	return 0;
+> > -}
+> > -
+> > -int rockchip_cpuid_from_efuse(const u32 cpuid_offset,
+> > -			      const u32 cpuid_length,
+> > -			      u8 *cpuid)
+> > -{
+> > -#if IS_ENABLED(CONFIG_ROCKCHIP_EFUSE) || 
+> > IS_ENABLED(CONFIG_ROCKCHIP_OTP)
+> > -	struct udevice *dev;
+> > -	int ret;
+> > -
+> > -	/* retrieve the device */
+> > -#if IS_ENABLED(CONFIG_ROCKCHIP_EFUSE)
+> > -	ret = uclass_get_device_by_driver(UCLASS_MISC,
+> > -					  DM_DRIVER_GET(rockchip_efuse), &dev);
+> > -#elif IS_ENABLED(CONFIG_ROCKCHIP_OTP)
+> > -	ret = uclass_get_device_by_driver(UCLASS_MISC,
+> > -					  DM_DRIVER_GET(rockchip_otp), &dev);
+> > -#endif
+> > -	if (ret) {
+> > -		debug("%s: could not find efuse device\n", __func__);
+> > -		return -1;
+> > -	}
+> > -
+> > -	/* read the cpu_id range from the efuses */
+> > -	ret = misc_read(dev, cpuid_offset, cpuid, cpuid_length);
+> > -	if (ret < 0) {
+> > -		debug("%s: reading cpuid from the efuses failed\n",
+> > -		      __func__);
+> > -		return -1;
+> > -	}
+> > -#endif
+> > -	return 0;
+> > -}
+> > -
+> > -int rockchip_cpuid_set(const u8 *cpuid, const u32 cpuid_length)
+> > -{
+> > -	u8 low[cpuid_length / 2], high[cpuid_length / 2];
+> > -	char cpuid_str[cpuid_length * 2 + 1];
+> > -	u64 serialno;
+> > -	char serialno_str[17];
+> > -	const char *oldid;
+> > -	int i;
+> > -
+> > -	memset(cpuid_str, 0, sizeof(cpuid_str));
+> > -	for (i = 0; i < cpuid_length; i++)
+> > -		sprintf(&cpuid_str[i * 2], "%02x", cpuid[i]);
+> > -
+> > -	debug("cpuid: %s\n", cpuid_str);
+> > -
+> > -	/*
+> > -	 * Mix the cpuid bytes using the same rules as in
+> > -	 *   ${linux}/drivers/soc/rockchip/rockchip-cpuinfo.c
+> > -	 */
+> > -	for (i = 0; i < cpuid_length / 2; i++) {
+> > -		low[i] = cpuid[1 + (i << 1)];
+> > -		high[i] = cpuid[i << 1];
+> > -	}
+> > -
+> > -	serialno = crc32_no_comp(0, low, cpuid_length / 2);
+> > -	serialno |= (u64)crc32_no_comp(serialno, high, cpuid_length / 2) << 
+> > 32;
+> > -	snprintf(serialno_str, sizeof(serialno_str), "%016llx", serialno);
+> > -
+> > -	oldid = env_get("cpuid#");
+> > -	if (oldid && strcmp(oldid, cpuid_str) != 0)
+> > -		printf("cpuid: value %s present in env does not match hardware 
+> > %s\n",
+> > -		       oldid, cpuid_str);
+> > -
+> > -	env_set("cpuid#", cpuid_str);
+> > -
+> > -	/* Only generate serial# when none is set yet */
+> > -	if (!env_get("serial#"))
+> > -		env_set("serial#", serialno_str);
+> > -
+> > -	return 0;
+> > -}
+> 
