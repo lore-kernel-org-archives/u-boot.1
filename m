@@ -4,55 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3EC7C48297
-	for <u-boot@archiver.kernel.org>; Fri,  9 Feb 2024 12:05:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2298AC4828F
+	for <u-boot@archiver.kernel.org>; Fri,  9 Feb 2024 12:05:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D3E5187E69;
-	Fri,  9 Feb 2024 13:05:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gnu.org
+	by phobos.denx.de (Postfix) with ESMTP id 9418F87E6F;
+	Fri,  9 Feb 2024 13:05:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linutronix.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gnu.org header.i=@gnu.org header.b="iuAf+Vv9";
+	dkim=pass (2048-bit key; secure) header.d=linutronix.de header.i=@linutronix.de header.b="v/Srt/eT";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="/Md4RQIT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD0CD87E39; Fri,  9 Feb 2024 09:05:09 +0100 (CET)
-Received: from eggs.gnu.org (eggs.gnu.org [IPv6:2001:470:142:3::10])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id DC7B787E39; Fri,  9 Feb 2024 09:07:00 +0100 (CET)
+Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 160A987B6B
- for <u-boot@lists.denx.de>; Fri,  9 Feb 2024 09:05:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 42CC287B6B
+ for <u-boot@lists.denx.de>; Fri,  9 Feb 2024 09:06:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gnu.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=othacehe@gnu.org
-Received: from fencepost.gnu.org ([2001:470:142:3::e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <othacehe@gnu.org>)
- id 1rYLsb-0003kj-05; Fri, 09 Feb 2024 03:05:01 -0500
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=gnu.org;
- s=fencepost-gnu-org; h=MIME-Version:Date:References:In-Reply-To:Subject:To:
- From; bh=73zR2kIDXtWEs2a1OUZuXjKIWNgLuBZzallvEsT0svs=; b=iuAf+Vv9sPi+n5ChY0Px
- a8SAHN0/piWi8Kk0WIMZibO3M5bOp0lGvVeX7D71aHiCUHMlJ9DpM3HeOvc5nBP3VHUjddjXqih2O
- n47p4+L9EfCLodXDuVK2GPQKa+e9AKwohYqiEI2Jts08TK/NT6wiGi5U/Seuh5LiBflzwcfMhTTxU
- KodCz/se32WupUlpPx5zWjwidVledcNnXgj3TQphxmncDjHXMd4fhFkh3XB5K1m/35w5/mVfRNViu
- hAsxaOscWm/mJHwHKUkl+6ZAeNH8Youd8llKxhvSaK1iRySfkfZblosiGMSt/mMvKW3sSttO5tvCe
- e7ZewLobFuxr5g==;
-From: Mathieu Othacehe <othacehe@gnu.org>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>,  Peng Fan <peng.fan@nxp.com>,  Shiji Yang
- <yangshiji66@outlook.com>,  Ye Li <ye.li@nxp.com>,  =?utf-8?Q?S=C3=A9bast?=
- =?utf-8?Q?ien?= Szymanski
- <sebastien.szymanski@armadeus.com>,  Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH 0/2] imx93_var_som: Enable AHAB support
-In-Reply-To: <CAOMZO5DhQqjsAy4eoZqKdaTT96EWfRa+Vra3gvRCwXP+6fXt0w@mail.gmail.com>
- (Fabio Estevam's message of "Thu, 8 Feb 2024 18:20:57 -0300")
-References: <20240208094518.391-1-othacehe@gnu.org>
- <CAOMZO5DhQqjsAy4eoZqKdaTT96EWfRa+Vra3gvRCwXP+6fXt0w@mail.gmail.com>
-Date: Fri, 09 Feb 2024 09:04:58 +0100
-Message-ID: <87le7uyset.fsf@gnu.org>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+ dmarc=pass (p=none dis=none) header.from=linutronix.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=t-8ch@linutronix.de
+From: =?utf-8?q?Thomas_Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020; t=1707466016;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=bvdmW6q709wJFBBDAfM690NM/U3MES6+aHC5TrmX6uI=;
+ b=v/Srt/eTjuFatwMoOf/SDoyLE4EcNMAnBfXCqiBPveL1U/x8pgcilH3sT7BNhIcMYq137V
+ 3T0VRBd5pZeCAbsvflv1ziEKPlJQmmOPXpLF7NoXJOhgqN11WbgXJzW/5lwxYbUuIbECV8
+ V+YhFApfr82KFVQKckan/453bdPhfXdSow1h1zb2Mu3wownCHaVUGjNH6em9/BOXlWdR7d
+ Rcw45QA6IuHbxTcYrLjivo5HkTh+klfRihsTKa2YZfTz4wQdEmBjURI1hL4KFK2Ve5nNRf
+ mFDv4qItrhoAHulLoAj0IXBsy4xHMSn/dKpZpIyj9vElvuSzttRGWBfS7iDgOw==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020e; t=1707466016;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=bvdmW6q709wJFBBDAfM690NM/U3MES6+aHC5TrmX6uI=;
+ b=/Md4RQITHese9Atf3/6nnLgto+pWdsnuSs2jiPDz7E81dS+4LfgxB53HtmtBj5/LCNWtVi
+ QP7GX9OWMNDHJzDg==
+Date: Fri, 09 Feb 2024 09:06:53 +0100
+Subject: [PATCH] configs: am64x_evm_r5_defconfig: enlarge simple malloc
+ pool
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Message-Id: <20240209-am64x_evm_r5_defconfig-malloc-simple-len-v1-1-4a779a8bd557@linutronix.de>
+X-B4-Tracking: v=1; b=H4sIABzdxWUC/x3NSwrDIBRG4a2EO66gxqaPrZQi1vymF3wEhRAI2
+ Xulw29yzkENldHoORxUsXHjkjvUZSD/dXmB4LmbtNRGavkQLk1mt9iSrVc7I/iSAy8iuRiLF43
+ TGiEisvgojJO53WFGRT23VgTe/6vX+zx/lg/9RXoAAAA=
+To: Vignesh Raghavendra <vigneshr@ti.com>, Tom Rini <trini@konsulko.com>
+Cc: Benedikt Spranger <b.spranger@linutronix.de>, u-boot@lists.denx.de, 
+ =?utf-8?q?Thomas_Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1707466016; l=1016;
+ i=thomas.weissschuh@linutronix.de; s=20240209; h=from:subject:message-id;
+ bh=qX5prAOrhOw7tfSgYQByCGqWBDqd3mv6O3OyuqFBv50=;
+ b=hgII6okcUBihO2BhwQlhN6yHrNlvb+Oay4Vx7RK8Z7RCtUPkCAeFkK3IPduChpYbRfsCBXPWV
+ GldLmaMajj/AEab4AzNDPEF0EG6wGCjdSIQFGz6WeiIURkUKbEd2d1Z
+X-Developer-Key: i=thomas.weissschuh@linutronix.de; a=ed25519;
+ pk=pfvxvpFUDJV2h2nY0FidLUml22uGLSjByFbM6aqQQws=
 X-Mailman-Approved-At: Fri, 09 Feb 2024 13:04:59 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -70,24 +83,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+With the default size the stack grows into the malloc, pool leading to
+stack corruption and boot failure.
 
-Hello Fabio,
+Signed-off-by: Thomas Weißschuh <thomas.weissschuh@linutronix.de>
+---
+Note:
 
-> Just wanted to make sure I understand: if someone programs the fuse to
-> close the board,
-> it will fail to boot U-Boot proper and this means that the board is
-> bricked. Is this correct?
+Maybe this should be increased for a broader set of devices.
+---
+ configs/am64x_evm_r5_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-No. I fused the board and with this series applied and the three HAFDBS
-commits reverted, I can boot just fine on that board.
+diff --git a/configs/am64x_evm_r5_defconfig b/configs/am64x_evm_r5_defconfig
+index 56df6a4a19..707fe506f3 100644
+--- a/configs/am64x_evm_r5_defconfig
++++ b/configs/am64x_evm_r5_defconfig
+@@ -42,6 +42,7 @@ CONFIG_SPL_SYS_REPORT_STACK_F_USAGE=y
+ CONFIG_SPL_BOARD_INIT=y
+ CONFIG_SPL_SYS_MALLOC_SIMPLE=y
+ CONFIG_SPL_STACK_R=y
++CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x400000
+ CONFIG_SPL_SEPARATE_BSS=y
+ CONFIG_SPL_SYS_MALLOC=y
+ CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
 
-Without reverting those commits, the SPL is working fine and u-boot
-hangs at relocation. It is 100% reproducible on my board.
+---
+base-commit: a4650bf65e4b7d3ef04c90ba8031374428e4a682
+change-id: 20240209-am64x_evm_r5_defconfig-malloc-simple-len-b1e36478e431
 
-> Is the boot failure related to some malloc size needing to be increased?
+Best regards,
+-- 
+Thomas Weißschuh <thomas.weissschuh@linutronix.de>
 
-I tried that it has no influence.
-
-Thanks,
-
-Mathieu
