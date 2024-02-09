@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79F8FC4828F
-	for <u-boot@archiver.kernel.org>; Fri,  9 Feb 2024 09:52:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3ECB8C48297
+	for <u-boot@archiver.kernel.org>; Fri,  9 Feb 2024 09:52:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E23087EA1;
-	Fri,  9 Feb 2024 10:50:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C058587EC1;
+	Fri,  9 Feb 2024 10:50:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F66E87EAD; Fri,  9 Feb 2024 10:50:31 +0100 (CET)
-Received: from smtp-190c.mail.infomaniak.ch (smtp-190c.mail.infomaniak.ch
- [IPv6:2001:1600:4:17::190c])
+ id 2D26E87EBC; Fri,  9 Feb 2024 10:50:33 +0100 (CET)
+Received: from smtp-190a.mail.infomaniak.ch (smtp-190a.mail.infomaniak.ch
+ [IPv6:2001:1600:4:17::190a])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9393887E9C
- for <u-boot@lists.denx.de>; Fri,  9 Feb 2024 10:50:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 03FAD87E7C
+ for <u-boot@lists.denx.de>; Fri,  9 Feb 2024 10:50:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-3-0001.mail.infomaniak.ch (unknown [10.4.36.108])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4TWTcM1LprzMpy2k;
- Fri,  9 Feb 2024 10:50:27 +0100 (CET)
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4TWTcN40QtzMpyjQ;
+ Fri,  9 Feb 2024 10:50:28 +0100 (CET)
 Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4TWTcL0DyMzMpnPn; Fri,  9 Feb 2024 10:50:26 +0100 (CET)
+ id 4TWTcM1s47zMpnPn; Fri,  9 Feb 2024 10:50:27 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Fri, 09 Feb 2024 10:50:07 +0100
-Subject: [PATCH v2 11/20] rockchip: rk3588: fix non-working SD controller
- if booting from other media
+Date: Fri, 09 Feb 2024 10:50:08 +0100
+Subject: [PATCH v2 12/20] rockchip: rk3588: add constants for some register
+ address spaces
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240209-jaguar-v2-11-6c9ffe09b924@theobroma-systems.com>
+Message-Id: <20240209-jaguar-v2-12-6c9ffe09b924@theobroma-systems.com>
 References: <20240209-jaguar-v2-0-6c9ffe09b924@theobroma-systems.com>
 In-Reply-To: <20240209-jaguar-v2-0-6c9ffe09b924@theobroma-systems.com>
 To: Simon Glass <sjg@chromium.org>, 
@@ -77,119 +77,81 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 
-Rockchip SoCs have some jtag/sdmmc autoswitching that simply doesn't
-work really well.[00] The Linux kernel disables it for all SoCs[01], so
-U-Boot needs to do the same in order to fix issues related to SD card on
-RK3588. This autoswitching is enabled (by default) via the force_jtag
-bitfield in SYS_GRF_SOC_CON6 in the TRM part1.
-
-The conditions to enter forced JTAG mode are the following:
-- force_jtag is 1
-- GPIO4_D2 is muxed for SDMMC function
-- GPIO3_D3 is muxed for SDMMC function
-- SDMMC_DET is inactive
-
-SDMMC_DET may be put in the inactive mode by HW design (e.g. because the
-detection pin is unused (e.g. card-detect-less designs), or another GPIO
-is used instead, and SDMMC_DET is pulled-low by default).
-
-For some reason, when booting from SD card, everything's fine. But when
-we don't boot from SD card, U-Boot needs to set it up correctly to allow
-accessing SD cards, at the very least for RK3588-Jaguar
-(card-detect-less design with SDMMC_DET pulled-low in HW).
-
-Therefore, let's disable the JTAG mode for the SDMMC pins so that the SD
-controller can be used either as a fallback mechanism to find U-Boot
-proper when the boot medium used to load TPL/SPL cannot find U-Boot
-proper, or to be used in U-Boot CLI.
-
-Note that soc_con[0] is reserved. But considering that it's way more
-user-friendly to access soc_con1 from the TRM with soc_con[1] than
-soc_con[0], and that soc_con0 would actually be located at 4 bytes
-before soc_con1, let's just make soc_con0 part of the soc_con array.
-
-[00] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=c9b75d51c940c25587a2ad72ec7ec60490abfb6c
-[01] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/soc/rockchip/grf.c
+It's one thing to have the register mapped via a well-defined struct but
+it's another to be able to make use of it. For that to happen, one needs
+to cast the physical address memory of the beginning of the register
+address space with the struct. Since this cannot change, let's hardcode
+it in the include files so that users do not need to duplicate this line
+of code in their own implementation.
 
 Cc: Quentin Schulz <foss+uboot@0leil.net>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 ---
- arch/arm/include/asm/arch-rockchip/grf_rk3588.h | 24 ++++++++++++++++++++++++
- arch/arm/mach-rockchip/rk3588/rk3588.c          |  7 +++++++
- 2 files changed, 31 insertions(+)
+ arch/arm/include/asm/arch-rockchip/cru_rk3588.h | 2 ++
+ arch/arm/include/asm/arch-rockchip/ioc_rk3588.h | 6 ++++++
+ arch/arm/mach-rockchip/rk3588/rk3588.c          | 4 ----
+ 3 files changed, 8 insertions(+), 4 deletions(-)
 
-diff --git a/arch/arm/include/asm/arch-rockchip/grf_rk3588.h b/arch/arm/include/asm/arch-rockchip/grf_rk3588.h
-index e0694068bb1..f0ecff97f0b 100644
---- a/arch/arm/include/asm/arch-rockchip/grf_rk3588.h
-+++ b/arch/arm/include/asm/arch-rockchip/grf_rk3588.h
-@@ -32,4 +32,28 @@ struct rk3588_pmu1grf {
+diff --git a/arch/arm/include/asm/arch-rockchip/cru_rk3588.h b/arch/arm/include/asm/arch-rockchip/cru_rk3588.h
+index 7f4a9085392..a4507e5fdd7 100644
+--- a/arch/arm/include/asm/arch-rockchip/cru_rk3588.h
++++ b/arch/arm/include/asm/arch-rockchip/cru_rk3588.h
+@@ -63,6 +63,8 @@ struct rk3588_pll {
+ 	unsigned int reserved0[3];
+ };
  
- check_member(rk3588_pmu1grf, sd_detect_cnt, 0x03b0);
++#define CRU_BASE	0xfd7c0000
++
+ struct rk3588_cru {
+ 	struct rk3588_pll pll[18];
+ 	unsigned int reserved0[16];/* Address Offset: 0x0240 */
+diff --git a/arch/arm/include/asm/arch-rockchip/ioc_rk3588.h b/arch/arm/include/asm/arch-rockchip/ioc_rk3588.h
+index 5a656f850c7..7ad98466c39 100644
+--- a/arch/arm/include/asm/arch-rockchip/ioc_rk3588.h
++++ b/arch/arm/include/asm/arch-rockchip/ioc_rk3588.h
+@@ -5,6 +5,8 @@
+ #ifndef _ASM_ARCH_IOC_RK3588_H
+ #define _ASM_ARCH_IOC_RK3588_H
  
-+#define SYS_GRF_BASE	0xfd58c000
++#define BUS_IOC_BASE	0xfd5f8000
 +
-+struct rk3588_sysgrf {
-+	unsigned int wdt_con0;
-+	unsigned int reserved0[(0x0010 - 0x0000) / 4 - 1];
-+	unsigned int uart_con[2];
-+	unsigned int reserved1[(0x00c0 - 0x0014) / 4 - 1];
-+	unsigned int gic_con0;
-+	unsigned int reserved2[(0x0200 - 0x00c0) / 4 - 1];
-+	unsigned int memcfg_con[32];
-+	unsigned int reserved3[(0x0300 - 0x027c) / 4 - 1];
-+	/* soc_con0 is reserved */
-+	unsigned int soc_con[14];
-+	unsigned int reserved4[(0x0380 - 0x0334) / 4 - 1];
-+	unsigned int soc_status[4];
-+	unsigned int reserved5[(0x0500 - 0x038c) / 4 - 1];
-+	unsigned int otp_key08;
-+	unsigned int otp_key0d;
-+	unsigned int otp_key0e;
-+	unsigned int reserved6[(0x0600 - 0x0508) / 4 - 1];
-+	unsigned int chip_id;
-+};
+ struct rk3588_bus_ioc {
+ 	unsigned int reserved0000[3];      /* Address Offset: 0x0000 */
+ 	unsigned int gpio0b_iomux_sel_h;   /* Address Offset: 0x000C */
+@@ -48,6 +50,8 @@ struct rk3588_bus_ioc {
+ 
+ check_member(rk3588_bus_ioc, gpio4d_iomux_sel_h, 0x009C);
+ 
++#define PMU1_IOC_BASE	0xfd5f0000
 +
-+check_member(rk3588_sysgrf, chip_id, 0x0600);
- #endif /*__SOC_ROCKCHIP_RK3588_GRF_H__ */
+ struct rk3588_pmu1_ioc {
+ 	unsigned int gpio0a_iomux_sel_l;   /* Address Offset: 0x0000 */
+ 	unsigned int gpio0a_iomux_sel_h;   /* Address Offset: 0x0004 */
+@@ -70,6 +74,8 @@ struct rk3588_pmu1_ioc {
+ 
+ check_member(rk3588_pmu1_ioc, xin_con, 0x0040);
+ 
++#define PMU2_IOC_BASE	0xfd5f4000
++
+ struct rk3588_pmu2_ioc {
+ 	unsigned int gpio0b_iomux_sel_h;  /* Address Offset: 0x0000 */
+ 	unsigned int gpio0c_iomux_sel_l;  /* Address Offset: 0x0004 */
 diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
-index 38e95a6e2b2..c5eeda9d751 100644
+index c5eeda9d751..53ee9f1cebc 100644
 --- a/arch/arm/mach-rockchip/rk3588/rk3588.c
 +++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
-@@ -11,6 +11,7 @@
- #include <asm/arch-rockchip/bootrom.h>
- #include <asm/arch-rockchip/hardware.h>
- #include <asm/arch-rockchip/ioc_rk3588.h>
-+#include <asm/arch-rockchip/grf_rk3588.h>
+@@ -26,10 +26,6 @@
+ #define FW_SYSM_MST26_REG		0xa8
+ #define FW_SYSM_MST27_REG		0xac
  
- #define FIREWALL_DDR_BASE		0xfe030000
- #define FW_DDR_MST5_REG			0x54
-@@ -35,6 +36,8 @@
- #define BUS_IOC_GPIO2D_IOMUX_SEL_H	0x5c
- #define BUS_IOC_GPIO3A_IOMUX_SEL_L	0x60
- 
-+#define SYS_GRF_FORCE_JTAG		BIT(14)
-+
- /**
-  * Boot-device identifiers used by the BROM on RK3588 when device is booted
-  * from SPI flash. IOMUX used for SPI flash affect the value used by the BROM
-@@ -134,6 +137,7 @@ void rockchip_stimer_init(void)
- int arch_cpu_init(void)
- {
- #ifdef CONFIG_SPL_BUILD
-+	static struct rk3588_sysgrf * const sys_grf = (void *)SYS_GRF_BASE;
- 	int secure_reg;
- 
- 	/* Set the SDMMC eMMC crypto_ns FSPI access secure area */
-@@ -168,6 +172,9 @@ int arch_cpu_init(void)
- 	secure_reg = readl(FIREWALL_SYSMEM_BASE + FW_SYSM_MST27_REG);
- 	secure_reg &= 0xffff0000;
- 	writel(secure_reg, FIREWALL_SYSMEM_BASE + FW_SYSM_MST27_REG);
-+
-+	/* Disable JTAG exposed on SDMMC */
-+	rk_clrreg(&sys_grf->soc_con[6], SYS_GRF_FORCE_JTAG);
- #endif
- 
- 	return 0;
+-#define PMU1_IOC_BASE			0xfd5f0000
+-#define PMU2_IOC_BASE			0xfd5f4000
+-
+-#define BUS_IOC_BASE			0xfd5f8000
+ #define BUS_IOC_GPIO2A_IOMUX_SEL_L	0x40
+ #define BUS_IOC_GPIO2B_IOMUX_SEL_L	0x48
+ #define BUS_IOC_GPIO2D_IOMUX_SEL_L	0x58
 
 -- 
 2.43.0
