@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BBD3C4828F
-	for <u-boot@archiver.kernel.org>; Fri,  9 Feb 2024 12:05:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF168C48297
+	for <u-boot@archiver.kernel.org>; Fri,  9 Feb 2024 12:06:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BCE8687E7A;
-	Fri,  9 Feb 2024 13:05:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AF4E987E7E;
+	Fri,  9 Feb 2024 13:05:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gnu.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gnu.org header.i=@gnu.org header.b="gGUZwjFf";
+	dkim=pass (2048-bit key; unprotected) header.d=gnu.org header.i=@gnu.org header.b="q1xgvOFz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AEE0187E50; Fri,  9 Feb 2024 11:30:42 +0100 (CET)
+ id 1BFC987E65; Fri,  9 Feb 2024 11:30:44 +0100 (CET)
 Received: from eggs.gnu.org (eggs.gnu.org [IPv6:2001:470:142:3::10])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7FF8F87E5D
- for <u-boot@lists.denx.de>; Fri,  9 Feb 2024 11:30:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E164987E60
+ for <u-boot@lists.denx.de>; Fri,  9 Feb 2024 11:30:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gnu.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=othacehe@gnu.org
 Received: from fencepost.gnu.org ([2001:470:142:3::e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <othacehe@gnu.org>)
- id 1rYO9U-0002jT-A5; Fri, 09 Feb 2024 05:30:36 -0500
+ id 1rYO9Y-0002kG-3d; Fri, 09 Feb 2024 05:30:40 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=gnu.org;
  s=fencepost-gnu-org; h=MIME-Version:References:In-Reply-To:Date:Subject:To:
- From; bh=PXe94eNgSb3+bn9S7HE9tZijkGz/vqv+ZLlPBqyHGvE=; b=gGUZwjFfAYuN9SNYfuVQ
- fHbqj7FON72waKZSqqLTnS1TZcNtdfURmfW+nhfC/LOsMgcHTPU7E9tavi0uFzwebgqoqw/1hi7yN
- BO5qCKY9tC3sBtBLdOS7UDyAS5HwzLFDM2H50/pTPzpqHXP5ZqE9BB8fw7Y1GFBCCqbILwUJv2/jM
- 8KNEyLm+ixWVPfCmJLbGIftQIEjHC9ggtLit0fdFb7fyfTkKDmNzy9H63fikApmnEUeckntv4hViV
- zEvHmICQoSyczcZu5PsEwyvrIQprfNvW8fZ/jBFs2WbgjTXjTkYPPxCC52uFj+jsXS8gV0E7gGChf
- 4U1LAFy/5hdKuQ==;
+ From; bh=LXE3Lhr1WOWqbfZN307hYj/cnZvbouGFlQM5pegNXsY=; b=q1xgvOFzFOb1Ln/pYDKE
+ GjLcG1G5Kyadq0Mv4YJfWtCG/6FHZ0Mb1QbWZb4yLS8R88AsTS7ltDTipFkfEg9/RP+pG55+PspIJ
+ qmxknTtkTPr70roGXCnTF1Yje+iS0O4Sr2uNsij8gr/aRrx/g6m0v5FR0eMQZrvwcesyHH6JvACFR
+ pdQUZUb0ZvSJMyWtzXJxTcVF8Nfedwasnc7PMmDaBYRQ71U+g4wmJJ3IeSaYFviQbS6RZCixJ1nv4
+ UpcWynZJLRXNeqMb1O5Ek2+Riu5M1hQlUzxjo+dfQMcxuWSHGaKzbENg0uMEFACLsUGA1WCk1v6FJ
+ QA5bPCFElvcyxw==;
 From: Mathieu Othacehe <othacehe@gnu.org>
 To: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
  Shiji Yang <yangshiji66@outlook.com>, Ye Li <ye.li@nxp.com>,
@@ -44,9 +44,9 @@ To: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
  Mathieu Othacehe <m.othacehe@gmail.com>
 Cc: u-boot@lists.denx.de,
 	Mathieu Othacehe <othacehe@gnu.org>
-Subject: [PATCH v2 1/3] imx93: Use a header for imx9_probe_mu declaration
-Date: Fri,  9 Feb 2024 11:30:07 +0100
-Message-ID: <20240209103009.5463-2-othacehe@gnu.org>
+Subject: [PATCH v2 2/3] board: imx93_var_som: Probe ELE MU
+Date: Fri,  9 Feb 2024 11:30:08 +0100
+Message-ID: <20240209103009.5463-3-othacehe@gnu.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240209103009.5463-1-othacehe@gnu.org>
 References: <20240209103009.5463-1-othacehe@gnu.org>
@@ -69,40 +69,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Put imx9_probe_mu declaration in a new mu.h header file.
+Probing the MU is needed to prevent this error in the SPL:
+
+ele dev is not initialized
+Authenticate container hdr failed, return -19, resp 0x0
+IND = INVALID
+
+ele dev is not initialized
+Error: release container failed, resp 0x0!
+IND = INVALID
+
+SPL: failed to boot from all boot devices
 
 Signed-off-by: Mathieu Othacehe <othacehe@gnu.org>
 ---
- arch/arm/include/asm/arch-imx9/mu.h | 13 +++++++++++++
- board/freescale/imx93_evk/spl.c     |  2 +-
- board/phytec/phycore_imx93/spl.c    |  2 +-
- 3 files changed, 15 insertions(+), 2 deletions(-)
- create mode 100644 arch/arm/include/asm/arch-imx9/mu.h
+ board/variscite/imx93_var_som/spl.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/include/asm/arch-imx9/mu.h b/arch/arm/include/asm/arch-imx9/mu.h
-new file mode 100644
-index 00000000000..b8604992914
---- /dev/null
-+++ b/arch/arm/include/asm/arch-imx9/mu.h
-@@ -0,0 +1,13 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (C) 2024 Mathieu Othacehe <m.othacehe@gmail.com>
-+ */
-+
-+#ifndef __ARCH_IMX9_MU_H
-+#define __ARCH_IMX9_MU_H
-+
-+#include <event.h>
-+
-+int imx9_probe_mu(void *ctx, struct event *event);
-+
-+#endif
-diff --git a/board/freescale/imx93_evk/spl.c b/board/freescale/imx93_evk/spl.c
-index be9c24fc0d9..a98ed69db88 100644
---- a/board/freescale/imx93_evk/spl.c
-+++ b/board/freescale/imx93_evk/spl.c
-@@ -14,6 +14,7 @@
+diff --git a/board/variscite/imx93_var_som/spl.c b/board/variscite/imx93_var_som/spl.c
+index 502e599b91a..e6db4eb562b 100644
+--- a/board/variscite/imx93_var_som/spl.c
++++ b/board/variscite/imx93_var_som/spl.c
+@@ -13,6 +13,7 @@
  #include <asm/global_data.h>
  #include <asm/io.h>
  #include <asm/arch/imx93_pins.h>
@@ -110,34 +98,18 @@ index be9c24fc0d9..a98ed69db88 100644
  #include <asm/arch/clock.h>
  #include <asm/arch/sys_proto.h>
  #include <asm/mach-imx/boot_mode.h>
-@@ -91,7 +92,6 @@ int power_init_board(void)
- }
- #endif
+@@ -114,9 +115,9 @@ void board_init_f(ulong dummy)
  
--extern int imx9_probe_mu(void *ctx, struct event *event);
- void board_init_f(ulong dummy)
- {
- 	int ret;
-diff --git a/board/phytec/phycore_imx93/spl.c b/board/phytec/phycore_imx93/spl.c
-index da4b9e53594..dabc5316f33 100644
---- a/board/phytec/phycore_imx93/spl.c
-+++ b/board/phytec/phycore_imx93/spl.c
-@@ -7,6 +7,7 @@
+ 	preloader_console_init();
  
- #include <asm/arch/clock.h>
- #include <asm/arch/ddr.h>
-+#include <asm/arch/mu.h>
- #include <asm/arch/sys_proto.h>
- #include <asm/arch/trdc.h>
- #include <asm/mach-imx/boot_mode.h>
-@@ -99,7 +100,6 @@ int power_init_board(void)
- 	return 0;
- }
- 
--extern int imx9_probe_mu(void *ctx, struct event *event);
- void board_init_f(ulong dummy)
- {
- 	int ret;
+-	ret = arch_cpu_init();
++	ret = imx9_probe_mu(NULL, NULL);
+ 	if (ret) {
+-		printf("Fail to init Sentinel API\n");
++		printf("Fail to init ELE API\n");
+ 	} else {
+ 		printf("SOC: 0x%x\n", gd->arch.soc_rev);
+ 		printf("LC: 0x%x\n", gd->arch.lifecycle);
 -- 
 2.41.0
 
