@@ -4,64 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC9BDC4828F
-	for <u-boot@archiver.kernel.org>; Fri,  9 Feb 2024 13:46:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FCCCC48297
+	for <u-boot@archiver.kernel.org>; Fri,  9 Feb 2024 14:15:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0969287E6D;
-	Fri,  9 Feb 2024 14:46:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=theobroma-systems.com
+	by phobos.denx.de (Postfix) with ESMTP id 6E92E87E6B;
+	Fri,  9 Feb 2024 15:15:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=yandex.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=theobroma-systems.com header.i=@theobroma-systems.com header.b="IzKo5bJJ";
+	dkim=pass (1024-bit key; unprotected) header.d=yandex.com header.i=@yandex.com header.b="AgtA/1Po";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD73787E6B; Fri,  9 Feb 2024 14:46:49 +0100 (CET)
-Received: from EUR04-DB3-obe.outbound.protection.outlook.com
- (mail-db3eur04on070a.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe0c::70a])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id C6A4287E37; Fri,  9 Feb 2024 14:07:55 +0100 (CET)
+Received: from forward502b.mail.yandex.net (forward502b.mail.yandex.net
+ [178.154.239.146])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 59DD687E73
- for <u-boot@lists.denx.de>; Fri,  9 Feb 2024 14:46:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=theobroma-systems.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=quentin.schulz@theobroma-systems.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=m6kORhA8rByvgGa99xktsLykEVBbPpTlwkODYGpcZCdPvmFbxAARyggzLHaRAVy8USCUZ/y8oIMZuDgfRjq8U/V7P6CHgEFnA24rp5rC9GSPewEOhEHnWaYJZgaM4r1s6OuXt5ZP6hwxPoG/gZtBaLYM7mL/lwP+lV3RRs+iXd4e3D8OZUyddZqPuQeYWa1LsrnyKB+RbC5ixIoPTW8990442Alex1v0FykZ0v1q7VhOiZxH3upZ8dhEoVqEDHLs4SBMPpLa7Xkd08nMgkGMXQberIci5uWkWdjEVHF51hoX76AafsXg3rkGe+P28DEDSG5M1lI5UvhJZ4zarz99qQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/uQLRpvAvyXGKdqx5hFcLC+DcZtsBd8ZcNES8tXH+04=;
- b=MXUEOhbpMf1+4cYD+gBR9YpMszUeGtgJAoHqZ1JNUIcEpwgoiiasBVW7djkbvOGjj0CEo7/MAqU4TRwAOQoacef2ChP4/JzLRT204w4Tf3ukqA75D2Bd6FvrheklyIsGdTqCtlpGY/K6sUncd6WsHxIJ+fmpHsamnFSOJQtfUKW9sA+7iGvIjwdm73u/8q+EeQkOodBQyuGZKEoyoGT9fBloJhzorEydYkMqUbydnee5+v51wiJJOSDymBv83rxLL5wTTKrTgwfICL93o7+XRDq675uXGHym9GdCbUZGthvmuPaHIcGKDG+PO82yOLGD8OKPvk1WvdVCgUjE7kVgUg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=theobroma-systems.com; dmarc=pass action=none
- header.from=theobroma-systems.com; dkim=pass header.d=theobroma-systems.com;
- arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=theobroma-systems.com; 
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/uQLRpvAvyXGKdqx5hFcLC+DcZtsBd8ZcNES8tXH+04=;
- b=IzKo5bJJ0/z9a2M8nRrhzVGbIXyTLp/BUXPpRkLiNbKYxGf66+M5KpAIWkzGX+dVezBHDmTJpNnd1b8xXN7CcwFwbDH8Lllwp5aVn9r3X5yFgC2IMpYIw0RYOUv55lmM8Zc4LZItZbWi2koylctvZHgpvshPPoDNxRLdgqWYUkf/L4Wmbfh+t3JYV5uo98Bn7CVcM2132Q/yJSADMMWvMsIlMPktGIMcMCSPZoE+gZBnw3GppIN07C7GpqR9ecAp8fct3K5ISBrQ8GVKEx5/Zh3JKL4pi7Mw+ZZgegytKDWwTbQjTjmd40GfAw0iBXNsrzhudsUySTgdonha/ENe3w==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=theobroma-systems.com;
-Received: from DU2PR04MB8536.eurprd04.prod.outlook.com (2603:10a6:10:2d7::10)
- by AS5PR04MB10043.eurprd04.prod.outlook.com (2603:10a6:20b:67f::8)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7270.27; Fri, 9 Feb
- 2024 13:46:44 +0000
-Received: from DU2PR04MB8536.eurprd04.prod.outlook.com
- ([fe80::550d:ad96:e3cb:9a6e]) by DU2PR04MB8536.eurprd04.prod.outlook.com
- ([fe80::550d:ad96:e3cb:9a6e%5]) with mapi id 15.20.7249.039; Fri, 9 Feb 2024
- 13:46:44 +0000
-Message-ID: <51c116ce-db96-4c74-9b96-1d2013e84fa2@theobroma-systems.com>
-Date: Fri, 9 Feb 2024 14:46:41 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 44C9887E62
+ for <u-boot@lists.denx.de>; Fri,  9 Feb 2024 14:07:52 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=yandex.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jbx6244@yandex.com
+Received: from mail-nwsmtp-smtp-production-main-81.myt.yp-c.yandex.net
+ (mail-nwsmtp-smtp-production-main-81.myt.yp-c.yandex.net
+ [IPv6:2a02:6b8:c12:3999:0:640:6a33:0])
+ by forward502b.mail.yandex.net (Yandex) with ESMTPS id 604AE5E913;
+ Fri,  9 Feb 2024 16:07:51 +0300 (MSK)
+Received: by mail-nwsmtp-smtp-production-main-81.myt.yp-c.yandex.net
+ (smtp/Yandex) with ESMTPSA id k7jIeMhTjuQ0-61bvHnss; 
+ Fri, 09 Feb 2024 16:07:49 +0300
+X-Yandex-Fwd: 1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex.com; s=mail;
+ t=1707484069; bh=QERlqA6sJUaggHOkRs0kWwexhcDE2yVZrRZdtaJ2L18=;
+ h=From:In-Reply-To:Cc:Date:References:To:Subject:Message-ID;
+ b=AgtA/1PotSmvWubO0kvCjL7oxC1GAUcNHMcU8xj69dzJ22c+5NOvkJiwrxX8g4KaA
+ psR4gVYjzUCzw71uDRaQmI9NM6VjgiNoEHshE6V5FU4UEce85CHB9chTvbgI/tHbe5
+ Y3fsAuQhdQtPGT1LFlh+oZUprfop/vLf8nvkFzQk=
+Authentication-Results: mail-nwsmtp-smtp-production-main-81.myt.yp-c.yandex.net;
+ dkim=pass header.i=@yandex.com
+Message-ID: <715e6edd-4b5c-46bb-a245-3427175423c9@yandex.com>
+Date: Fri, 9 Feb 2024 14:07:45 +0100
+MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v2 13/20] rockchip: migrate hardware.h inclusion into
  appropriate files
-Content-Language: en-US
-To: Johan Jonker <jbx6244@yandex.com>, Quentin Schulz <foss+uboot@0leil.net>, 
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+To: Quentin Schulz <foss+uboot@0leil.net>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
  Alper Nebi Yasak <alpernebiyasak@gmail.com>,
  Peter Robinson <pbrobinson@gmail.com>,
@@ -75,78 +64,16 @@ To: Johan Jonker <jbx6244@yandex.com>, Quentin Schulz <foss+uboot@0leil.net>,
  Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
  <rfried.dev@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Anatolij Gustschin <agust@denx.de>
-Cc: Dragan Simic <dsimic@manjaro.org>, u-boot@lists.denx.de
+Cc: Dragan Simic <dsimic@manjaro.org>, u-boot@lists.denx.de,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>
 References: <20240209-jaguar-v2-0-6c9ffe09b924@theobroma-systems.com>
  <20240209-jaguar-v2-13-6c9ffe09b924@theobroma-systems.com>
- <715e6edd-4b5c-46bb-a245-3427175423c9@yandex.com>
-From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
-In-Reply-To: <715e6edd-4b5c-46bb-a245-3427175423c9@yandex.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Language: en-US
+From: Johan Jonker <jbx6244@yandex.com>
+In-Reply-To: <20240209-jaguar-v2-13-6c9ffe09b924@theobroma-systems.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR0P281CA0208.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:ad::16) To DU2PR04MB8536.eurprd04.prod.outlook.com
- (2603:10a6:10:2d7::10)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PR04MB8536:EE_|AS5PR04MB10043:EE_
-X-MS-Office365-Filtering-Correlation-Id: 600ffe68-e9de-464f-cb6f-08dc29758da6
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 5ly74AN3XBtgktBFgwWIOfgLG+ajl/XI9PynS2OyxhUdWtk5IoCmuqKaOKbHCYMmuhF6M7UWk6snajpzNDLCGpOCIzwjzD5OIddSDgsuL9B/aC25KgtPwC4XFbwBrPoFImf5GFdqM+y7hBIn1xHzsHiodMfab4ODph0RJJlNSOHdnL6FlY62tuMeBSz6QwE4UeNJVOxfRI+u70j8R362swhgadsof/w69uKfNfkO5EmQHokImbvTXnVs6zSOwF+Dp7hdBIVnklHT5DgRQV+7dNRCZ8RwLZG8FoYGZZ4T/NJt7iG5sTjmiA6UHuNIfk7dUOw92rYXLrLJXZzWudjdg9Tz2PtiDya5qtMKv1WHPRl9uVmIpPFr8gjKjPSmY00s8A/IJ8zKwFPnIwlV0yu8hV8tIQp9cwt8PxFBC385jIYJingrOfyZH08k0TnI/lx7bJGcXALW/DSJTpdWqYdqYJUYCXr6ZFIaBQtCVjKPCRBTq7gkLOokOZFswvdeuOCph3D1JqFqyMK4/WP9kNEPtITr2r8QQkvfe1ROW2AzBvm9hCC/60ATUVvVGv74C9SJh3xctG3lVmfBg8edtw49UstMZbKRyyuncd8efU5QaaI=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DU2PR04MB8536.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(366004)(376002)(136003)(396003)(39850400004)(346002)(230922051799003)(186009)(64100799003)(451199024)(1800799012)(6512007)(6506007)(6486002)(478600001)(53546011)(83380400001)(2616005)(41300700001)(44832011)(2906002)(7416002)(5660300002)(110136005)(316002)(6666004)(66476007)(66556008)(66946007)(8936002)(4326008)(8676002)(36756003)(921011)(38100700002)(31696002)(86362001)(31686004);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NkxlK2w3NFJHakF3clA1NW8vbUVackJEZ2VUNEZ3K2Z4Tm5VNXlsUDJpalBw?=
- =?utf-8?B?SlNMV3BnQ1BJM2ZPc3JGdXJSdGFLQm1VWnREdmtYZm9JR0hOUEl1LzFFcmlt?=
- =?utf-8?B?dmZPMC9aZXFFOFhiaDVQMGlWMUhmR2ZOK1piUUZtSVRDZDNySitDbXpHVVdB?=
- =?utf-8?B?cFY0RnBrLytLbkVBWExRRFR6V0s4UWlYREhyZHo0QzM0QVhzSyt6WStjazVX?=
- =?utf-8?B?b2ZvUDBQbXladzRkVitzcUw3aDMxQ0pUK29jdDhjOHJzL1E2WU0rZ2x5KzBi?=
- =?utf-8?B?a0FubkJMS0FqbE1OQmozbm8rdUNHdW1xY25Oa3JHTHoybmkvTXJrKzdrMXZW?=
- =?utf-8?B?L1Babk1LSDZvN205ZGpnUVkvM3RkQllLaGRYWk5tcy9JdllieDlZaUJmWFZy?=
- =?utf-8?B?aThXUjNBdmd5akFPeEZyVVp3czZqRUdKa1RLejhzV3lYTkdqUWtnWnJ5aVdp?=
- =?utf-8?B?N1VEOTNWSng3MGQ4bjhodFgvUkZ2U1duNFQ5dUJZcEJvb0lqTkV2cXFmOFJX?=
- =?utf-8?B?ZGJEb2F0WXhmV2czMEYzQk1KM0FPb3BPN2JHbWZFUVQ4T09BNFdmQ2ZiS3l0?=
- =?utf-8?B?dDJsVCs2U08xa09EYjlHYVowZE1TSExWcVc0b255OXFQQm90Z2daUzBZMVhL?=
- =?utf-8?B?UDZkRUNWRXE5ZVQwRTNCV1lrMzdtcjB6OXNWejBFMHJNdGlzWGlIb2NvWi9M?=
- =?utf-8?B?Y1lhSWQvNVJRcmQrK05lVGRKWHdkMjVEU3RiQkg2cWhtTC8wS3FvZzZtSE91?=
- =?utf-8?B?ejZHNlpKRXVpbWJGd3cweHZlOXYrYmhHTENGNFhkeGV0b0t5bThwSnU3a2tx?=
- =?utf-8?B?L1ZHM1htOFpabmZvOGI4eTcrQ0tNSnNSRUtGNGkrN2svaWVDLzZDNTBjWlBS?=
- =?utf-8?B?VjhLN0tlN1FUeEJMQkZSVjk5NmR1Y2dWMmhhVmJxUXdXcit5Nm5MRXBkMXQ5?=
- =?utf-8?B?bUdHdlZ2RUFWMnVab0s1YnNPUDFwQjJyellSVkVtcVBTWW9TcllFa1c5ZHFm?=
- =?utf-8?B?MDRxOEU2NjBocyticnNLMHU1Ry9QaUlMTjBqY2pBVFdsWDV0WTVFSVlLeUw4?=
- =?utf-8?B?NFRBQXJMSjMvY2ZNR2NKd0d5bGR4M29NajJRaHdMYVF2VWRCVHQ0VFF5VUxk?=
- =?utf-8?B?YzBObHhjRUV3L053ZGZWYmV1WkdxYUtvM2IvWFdnRkIyUW90RkZJRU1CUmM5?=
- =?utf-8?B?Yndvc2xYV01TaGM1MXlNMUM3aVYyL2xkcGRReGZVa3c0MjBaUkN4a0xEQU5z?=
- =?utf-8?B?UFdtR09ML28xRWcrc0ZnNTdQcnRMK2tIYW5WVE00NS9GYVB6VUpRL3A0Z1ZP?=
- =?utf-8?B?QlhiZzhTVDB0VXFyZERvcU85ay91Q053V1JoUUF0S0VGM09JY0lSZjg5c09S?=
- =?utf-8?B?c0RzQVFVRzBrcDcrNGtHNUlNYVlhZXhMS0lrVm1nYXZDVnBoYVlFK2NpK295?=
- =?utf-8?B?TVNvS0ZZR3VSc2x2cWpVK29qelZDYTR6SmFLcXN5aExiMzA2VGh1eVFRVlVx?=
- =?utf-8?B?Tk83L3dkUG9mWXByc0llUlZXTzJsQnhBREtzV1J1MDlXVHRsQ014cFdSaTZE?=
- =?utf-8?B?WnZhK1UxVW9YSXdxdndTV0RoRS8xc2pQOXFaTTdrYkhMNlNQTTY3ay9SbmZw?=
- =?utf-8?B?OWJlenBkRXBxU0UxTWwyekZPRzd5d0hkWGErUFVBZjNVNlVhelpoVXNQa2Ns?=
- =?utf-8?B?ZHNtSGV0RFpiZHhaQzM5L0EwV0VYZzFFS2dZOHVVVnpzTmFXRmpteC9TS05w?=
- =?utf-8?B?a3BnbWNhWXpQakRGT2dmbmJZNldhenhmVVNFVkNtK1FqNW5yU2RlOUpFbEZ0?=
- =?utf-8?B?eW83WEJlN0FWL0gvS2pUcnk1Mkl6c1FPb05mOWR1dVhkQ2VKRWl6ZW4wd1dJ?=
- =?utf-8?B?RFhyaHRJY0h6UnZwWFZNQjdSZjEvWVNpcjYweWtxekI0djFLejlQdzEzVEdK?=
- =?utf-8?B?MS83eG0xNzlMNzRXZVRmMDJnUzlXYUhRTU1sMktsb3hVUjJ1M0xrMWF2Skdz?=
- =?utf-8?B?d3kxck9TVnNmdXVXS0FPLzNkVUJOYi9PUGNWK0hnT3lQcnhuazhDTklwRGVY?=
- =?utf-8?B?ZmdBNkZXOWUyR3lIczArbDMwSmtlOWRRVE5nb3c3eEROanJYRGcwYVlNaVh5?=
- =?utf-8?B?VyswcG5yTjIreEFlWm4vQ3I5bEgzUDZmdzFUdXZxQ05HVmFRVzNzWlRJL3ZN?=
- =?utf-8?B?VjFSMDFueU1GNEFJT0xNbGdjaWg4QklUcXltS01IWlRTVnpKZkJlTncvZHIv?=
- =?utf-8?B?RHBrRTRmdkdvQTlWV2lQbGo3RUt3PT0=?=
-X-OriginatorOrg: theobroma-systems.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 600ffe68-e9de-464f-cb6f-08dc29758da6
-X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8536.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Feb 2024 13:46:44.5688 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: hvPoF1A9lsLk2EjSXohGOnZdzI0uIoYfXUZ2BxijmhqmacdebIHv1N8NkCAf8qYvJ5GPCeebuK0BF2pis+VBZRHk0pRNEm4ieQc879tMwfszOga9N4ZQv8BqjT/M32EP
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS5PR04MB10043
+X-Mailman-Approved-At: Fri, 09 Feb 2024 15:15:51 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -163,83 +90,194 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Johan,
 
-On 2/9/24 14:07, Johan Jonker wrote:
-[...]
 
+On 2/9/24 10:50, Quentin Schulz wrote:
+> From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 > 
->  From codingstyle.rst:
+> hardware.h is only defining macros which are "wrappers" around writel().
 > 
-> You should follow this ordering in U-Boot.
-> The common.h header (which is going away at some point) should always be first,
-> followed by other headers in order, then headers with directories, then local files.
-> Within that order, sort your includes.
+> writel() is however not available in hardware.h, <asm/io.h> needs to be
+> included. This means in order to use the wrappers in hardware.h, one
+> also needs to include the <asm/io.h> header.
 > 
+> However, this cannot be done currently because hardware.h is included in
+> include/configs files, which are implicitly included by every code file
+> by default, which makes the compilation of arch/arm/cpu/armv8/u-boot.lds
+> fail because ALIGN (the ARM assembly directive) got redefined by some
+> of the include files coming from <asm.io.h>.
+> 
+> Because nothing in the include/configs file actually use hardware.h,
+> let's remove the inclusion of hardware.h from the include/configs files
+> and explicitly add it wherever it is required.
+> 
+> This prepares for the next commit where <asm/io.h> will be included in
+> hardware.h.
+> 
+> Cc: Quentin Schulz <foss+uboot@0leil.net>
+> Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+> Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+> ---
+>  arch/arm/mach-rockchip/rk3066/rk3066.c | 1 +
+>  drivers/ram/rockchip/dmc-rk3368.c      | 1 +
+>  drivers/ram/rockchip/sdram_rk3188.c    | 1 +
+>  drivers/ram/rockchip/sdram_rk3288.c    | 1 +
+>  include/configs/rk3036_common.h        | 1 -
+>  include/configs/rk3066_common.h        | 1 -
+>  include/configs/rk3188_common.h        | 1 -
+>  include/configs/rk322x_common.h        | 1 -
+>  include/configs/rk3288_common.h        | 1 -
+>  include/configs/rk3368_common.h        | 1 -
+>  include/configs/rv1108_common.h        | 1 -
+>  11 files changed, 4 insertions(+), 7 deletions(-)
+> 
+> diff --git a/arch/arm/mach-rockchip/rk3066/rk3066.c b/arch/arm/mach-rockchip/rk3066/rk3066.c
+> index 78c7d894f90..6661b788295 100644
+> --- a/arch/arm/mach-rockchip/rk3066/rk3066.c
+> +++ b/arch/arm/mach-rockchip/rk3066/rk3066.c
+> @@ -7,6 +7,7 @@
+>  #include <asm/io.h>
+>  #include <asm/arch-rockchip/bootrom.h>
+>  #include <asm/arch-rockchip/grf_rk3066.h>
+> +#include <asm/arch-rockchip/hardware.h>
+>  
+>  #define GRF_BASE	0x20008000
+>  
+> diff --git a/drivers/ram/rockchip/dmc-rk3368.c b/drivers/ram/rockchip/dmc-rk3368.c
+> index f36be941a38..74d8aed571c 100644
+> --- a/drivers/ram/rockchip/dmc-rk3368.c
+> +++ b/drivers/ram/rockchip/dmc-rk3368.c
+> @@ -20,6 +20,7 @@
 
-Good catch indeed. I'll avoid resending a 20-patch series today though.
+>  #include <asm/arch-rockchip/ddr_rk3368.h>
+>  #include <asm/arch-rockchip/sdram.h>
+>  #include <asm/arch-rockchip/sdram_rk3288.h>
+> +#include <asm/arch-rockchip/hardware.h>
 
-I have the following diff that can be applied on top of that commit:
+From codingstyle.rst:
 
-"""
-diff --git a/drivers/ram/rockchip/dmc-rk3368.c 
-b/drivers/ram/rockchip/dmc-rk3368.c
-index 74d8aed571c..859fc47030f 100644
---- a/drivers/ram/rockchip/dmc-rk3368.c
-+++ b/drivers/ram/rockchip/dmc-rk3368.c
-@@ -17,10 +17,10 @@
-  #include <asm/arch-rockchip/clock.h>
-  #include <asm/arch-rockchip/cru_rk3368.h>
-  #include <asm/arch-rockchip/grf_rk3368.h>
-+#include <asm/arch-rockchip/hardware.h>
-  #include <asm/arch-rockchip/ddr_rk3368.h>
-  #include <asm/arch-rockchip/sdram.h>
-  #include <asm/arch-rockchip/sdram_rk3288.h>
--#include <asm/arch-rockchip/hardware.h>
-  #include <linux/bitops.h>
-  #include <linux/delay.h>
-  #include <linux/err.h>
-diff --git a/drivers/ram/rockchip/sdram_rk3188.c 
-b/drivers/ram/rockchip/sdram_rk3188.c
-index 16a68885f1f..d23d4231798 100644
---- a/drivers/ram/rockchip/sdram_rk3188.c
-+++ b/drivers/ram/rockchip/sdram_rk3188.c
-@@ -22,10 +22,10 @@
-  #include <asm/arch-rockchip/cru_rk3188.h>
-  #include <asm/arch-rockchip/ddr_rk3188.h>
-  #include <asm/arch-rockchip/grf_rk3188.h>
-+#include <asm/arch-rockchip/hardware.h>
-  #include <asm/arch-rockchip/pmu_rk3188.h>
-  #include <asm/arch-rockchip/sdram.h>
-  #include <asm/arch-rockchip/sdram_rk3288.h>
--#include <asm/arch-rockchip/hardware.h>
-  #include <linux/delay.h>
-  #include <linux/err.h>
+You should follow this ordering in U-Boot. 
+The common.h header (which is going away at some point) should always be first, 
+followed by other headers in order, then headers with directories, then local files.
+Within that order, sort your includes.
 
-diff --git a/drivers/ram/rockchip/sdram_rk3288.c 
-b/drivers/ram/rockchip/sdram_rk3288.c
-index ec6bdcb2015..3177051dd12 100644
---- a/drivers/ram/rockchip/sdram_rk3288.c
-+++ b/drivers/ram/rockchip/sdram_rk3288.c
-@@ -22,10 +22,10 @@
-  #include <asm/arch-rockchip/cru.h>
-  #include <asm/arch-rockchip/ddr_rk3288.h>
-  #include <asm/arch-rockchip/grf_rk3288.h>
-+#include <asm/arch-rockchip/hardware.h>
-  #include <asm/arch-rockchip/pmu_rk3288.h>
-  #include <asm/arch-rockchip/sdram.h>
-  #include <asm/arch-rockchip/sdram_rk3288.h>
--#include <asm/arch-rockchip/hardware.h>
-  #include <linux/delay.h>
-  #include <linux/err.h>
-  #include <power/regulator.h>
-"""
+>  #include <linux/bitops.h>
+>  #include <linux/delay.h>
+>  #include <linux/err.h>
+> diff --git a/drivers/ram/rockchip/sdram_rk3188.c b/drivers/ram/rockchip/sdram_rk3188.c
+> index ad9f936df55..16a68885f1f 100644
+> --- a/drivers/ram/rockchip/sdram_rk3188.c
+> +++ b/drivers/ram/rockchip/sdram_rk3188.c
+> @@ -25,6 +25,7 @@
 
-You'll note that drivers/ram/rockchip/dmc-rk3368.c currently already 
-doesn't follow the coding style :)
+>  #include <asm/arch-rockchip/pmu_rk3188.h>
+>  #include <asm/arch-rockchip/sdram.h>
+>  #include <asm/arch-rockchip/sdram_rk3288.h>
+> +#include <asm/arch-rockchip/hardware.h>
 
-@Kever, up to you if you want me to send a v3 for that or if you can 
-apply the diff above yourself before merging.
+dito
 
-Cheers,
-Quentin
+>  #include <linux/delay.h>
+>  #include <linux/err.h>
+>  
+> diff --git a/drivers/ram/rockchip/sdram_rk3288.c b/drivers/ram/rockchip/sdram_rk3288.c
+> index c99118fd612..ec6bdcb2015 100644
+> --- a/drivers/ram/rockchip/sdram_rk3288.c
+> +++ b/drivers/ram/rockchip/sdram_rk3288.c
+> @@ -25,6 +25,7 @@
+
+>  #include <asm/arch-rockchip/pmu_rk3288.h>
+>  #include <asm/arch-rockchip/sdram.h>
+>  #include <asm/arch-rockchip/sdram_rk3288.h>
+> +#include <asm/arch-rockchip/hardware.h>
+
+dito
+
+>  #include <linux/delay.h>
+>  #include <linux/err.h>
+>  #include <power/regulator.h>
+> diff --git a/include/configs/rk3036_common.h b/include/configs/rk3036_common.h
+> index c2abd14e114..0bf9e8b9a2e 100644
+> --- a/include/configs/rk3036_common.h
+> +++ b/include/configs/rk3036_common.h
+> @@ -5,7 +5,6 @@
+>  #ifndef __CONFIG_RK3036_COMMON_H
+>  #define __CONFIG_RK3036_COMMON_H
+>  
+> -#include <asm/arch-rockchip/hardware.h>
+>  #include "rockchip-common.h"
+>  
+>  #define CFG_SYS_HZ_CLOCK		24000000
+> diff --git a/include/configs/rk3066_common.h b/include/configs/rk3066_common.h
+> index d70c8f77d48..6a3b6900463 100644
+> --- a/include/configs/rk3066_common.h
+> +++ b/include/configs/rk3066_common.h
+> @@ -6,7 +6,6 @@
+>  #ifndef __CONFIG_RK3066_COMMON_H
+>  #define __CONFIG_RK3066_COMMON_H
+>  
+> -#include <asm/arch-rockchip/hardware.h>
+>  #include "rockchip-common.h"
+>  
+>  #define CFG_IRAM_BASE		0x10080000
+> diff --git a/include/configs/rk3188_common.h b/include/configs/rk3188_common.h
+> index a8cee1e44d4..98f2c25f3cf 100644
+> --- a/include/configs/rk3188_common.h
+> +++ b/include/configs/rk3188_common.h
+> @@ -6,7 +6,6 @@
+>  #ifndef __CONFIG_RK3188_COMMON_H
+>  #define __CONFIG_RK3188_COMMON_H
+>  
+> -#include <asm/arch-rockchip/hardware.h>
+>  #include "rockchip-common.h"
+>  
+>  #define CFG_IRAM_BASE	0x10080000
+> diff --git a/include/configs/rk322x_common.h b/include/configs/rk322x_common.h
+> index 15f77df3e17..bab4ca015f7 100644
+> --- a/include/configs/rk322x_common.h
+> +++ b/include/configs/rk322x_common.h
+> @@ -5,7 +5,6 @@
+>  #ifndef __CONFIG_RK322X_COMMON_H
+>  #define __CONFIG_RK322X_COMMON_H
+>  
+> -#include <asm/arch-rockchip/hardware.h>
+>  #include "rockchip-common.h"
+>  
+>  #define CFG_SYS_HZ_CLOCK		24000000
+> diff --git a/include/configs/rk3288_common.h b/include/configs/rk3288_common.h
+> index 3063076a97a..0c449e31099 100644
+> --- a/include/configs/rk3288_common.h
+> +++ b/include/configs/rk3288_common.h
+> @@ -6,7 +6,6 @@
+>  #ifndef __CONFIG_RK3288_COMMON_H
+>  #define __CONFIG_RK3288_COMMON_H
+>  
+> -#include <asm/arch-rockchip/hardware.h>
+>  #include "rockchip-common.h"
+>  
+>  #define CFG_SYS_HZ_CLOCK		24000000
+> diff --git a/include/configs/rk3368_common.h b/include/configs/rk3368_common.h
+> index ccb5369b901..d488f8d477a 100644
+> --- a/include/configs/rk3368_common.h
+> +++ b/include/configs/rk3368_common.h
+> @@ -8,7 +8,6 @@
+>  
+>  #include "rockchip-common.h"
+>  
+> -#include <asm/arch-rockchip/hardware.h>
+>  #include <linux/sizes.h>
+>  
+>  #define CFG_SYS_SDRAM_BASE		0
+> diff --git a/include/configs/rv1108_common.h b/include/configs/rv1108_common.h
+> index 3bf70a0e0ae..ff28236a21d 100644
+> --- a/include/configs/rv1108_common.h
+> +++ b/include/configs/rv1108_common.h
+> @@ -5,7 +5,6 @@
+>  #ifndef __CONFIG_RV1108_COMMON_H
+>  #define __CONFIG_RV1108_COMMON_H
+>  
+> -#include <asm/arch-rockchip/hardware.h>
+>  #include "rockchip-common.h"
+>  
+>  #define CFG_IRAM_BASE		0x10080000
+> 
