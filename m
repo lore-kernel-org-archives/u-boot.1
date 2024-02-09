@@ -4,86 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 241FEC48297
-	for <u-boot@archiver.kernel.org>; Fri,  9 Feb 2024 21:27:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F254C4828F
+	for <u-boot@archiver.kernel.org>; Fri,  9 Feb 2024 22:20:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4CAD287E7B;
-	Fri,  9 Feb 2024 22:27:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=ragnatech.se
+	by phobos.denx.de (Postfix) with ESMTP id 89F5887E6F;
+	Fri,  9 Feb 2024 23:19:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=foundries.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=ragnatech.se header.i=@ragnatech.se header.b="cwO4B4jJ";
+	dkim=pass (2048-bit key; secure) header.d=foundries.io header.i=@foundries.io header.b="e8HshNcD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3FABC87E70; Fri,  9 Feb 2024 22:16:32 +0100 (CET)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id 9A52987C13; Fri,  9 Feb 2024 23:19:57 +0100 (CET)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B72F87E6E
- for <u-boot@lists.denx.de>; Fri,  9 Feb 2024 22:16:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8163087E71
+ for <u-boot@lists.denx.de>; Fri,  9 Feb 2024 23:19:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=foundries.io
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=ragnatech.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=niklas.soderlund+renesas@ragnatech.se
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-55fc7f63639so1953199a12.1
- for <u-boot@lists.denx.de>; Fri, 09 Feb 2024 13:16:29 -0800 (PST)
+ spf=pass smtp.mailfrom=igor.opaniuk@foundries.io
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-5116643c64eso2444677e87.3
+ for <u-boot@lists.denx.de>; Fri, 09 Feb 2024 14:19:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ragnatech.se; s=google; t=1707513389; x=1708118189; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=8wmYeTCl6g4Puyeq+hHOJXDfECuUyxrrSnQt72/tYE0=;
- b=cwO4B4jJ19WLuS4C3wLB2UqS9OBqX7QuKtwn/EddG8Y3X4MqiwZeDKnYySpRI+uovn
- sF5KI3mmYamkmhogRIfHfyamc0WqEdAINa6fKLbwkiXsj+CSE8A3rHHC5+Ev5ufqdTFR
- gkNChIE7ddqskiphALBlqrZGThmdabrUOuyz7KMLNCtcTQepn96/XKOOtcWR0D2tPsqD
- Or1ayHd8Io/0ir2PMkyqnmF99saR7labKcQfg44DhHNWWHnL3oKhbSjITndATRWmXWIz
- HRQOtzctCuZMoTBS/zc7U7anc31bi8XxTSc/f75EpQNsHAfD4LFDvnR6LCG/N3kTjMlF
- B0Wg==
+ d=foundries.io; s=google; t=1707517195; x=1708121995; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=jX1q+0308w70ABBa9F8mP1OwoiyJ6dI9xe1GVqQXjTQ=;
+ b=e8HshNcD/tTxEjq+HrLFbS4/rXn9QRFXn0CtBmIQx0YqtnLxnyjQhoJeUjaJuEI9KF
+ Vu6DAYTXJsG+fXeGHLFLgZgEASGb34e95/IPrwqe54qKVv52QX3v3JYHexmyhJJEwlq8
+ PVOojZdHMYyWxi8Iv2q2Gv6Bn6v5OLuAFS890A0WHcPUp9W4dur+EObGwku4qkJTnhlT
+ 1pdpsZAS7TRZtptdzHO9Sp3FTSUNRnqARxr8gQU5BOXZSuoC9aEcbX4GZONq820CiBSh
+ XHrzQJA7eR8LgyaB9fYjHGewWbZzJb5xozZYVsSjQ3aRe/4dTeW3IDDQF5aJ5url9G19
+ rluQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707513389; x=1708118189;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=8wmYeTCl6g4Puyeq+hHOJXDfECuUyxrrSnQt72/tYE0=;
- b=AyTvEgnt08uq5RwIK/lw8/mxPRpeP1IFB/fMpx/RQkufERDlcqJ4nALn8G0UNPzt1k
- UxfOkbv2irI/ws3/AHlwnmKLrCSIrfP9mcwZKz79RxBWj9dFJCf5CdfDcuZ5S2c6riv1
- zs0bBWt91GFAs2HJiOrvZWhYiv7CqTvdbFLreRD9Yyb3fkUWu0xh6+g8cxuGlwinD9vH
- lRgS1Xy/f6D4EIc6LBjXRA/mOx50/JqGkuVBusoX8gLWeXABu+nRsp3jPWEXmAiy4yB/
- kAhw7dgX/mv7J2cHHXwvhqKmYj9vfgrtUupx0hyIPUY4ZPkqbweQULt6oQZKuMMdShao
- snWw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUfEw1E2N4c1MumXYKIWCysKZOgtIV8f2MR5WyR+QF1fS07EJM7Zse0/75yI/oEq+Dtru1YxfhtfPN8Fl/PfyylKR+IKw==
-X-Gm-Message-State: AOJu0Ywxhm2+nbiUBhZJ6pt1F4Ou6JM57Y+ic9Bu6fUfp2fum5kwla/L
- TYTHlSZd9ZDvb7yhUOSQ1/VxL3usZ5jqTCcgBgApsAmKEy1SWKnlOzbi5anqvW0=
-X-Google-Smtp-Source: AGHT+IHUWcxtsHrW3Eeqb5w5ol2U9vAxa0u7f2aOE7ikg30kSaIdN/HxnhU3z40HI5iT6jcK/oZqHQ==
-X-Received: by 2002:aa7:cf14:0:b0:561:aa3:fafb with SMTP id
- a20-20020aa7cf14000000b005610aa3fafbmr85595edy.6.1707513389128; 
- Fri, 09 Feb 2024 13:16:29 -0800 (PST)
-X-Forwarded-Encrypted: i=1;
- AJvYcCWfVcY9Lnfb9ZeVVYIVs/4ouIFo69Fbbgu2cCZ+eNeDPpuxy474PeZs8VYOtGFRL7tHV8c4mlgWuI70nE6veueLPYz8LKGmNIWHPXbNrBJbODmXwnNajWRAp8UWOHjTnjOC7yEoQrD8PIznUHMQGfMJmvh16vRWKunRRN1r+J28YY0peAyt+EE/qt9I+k0WxJkogqz4wFTxfwEJBTv3zRU/oKrvKsuw764Xs7x6RisJcE+URzaAv/GNpOcUg2BK+wOL1xhQZESQwNhuey1ax4128+aSwgfiDRFurPo=
-Received: from sleipner.berto.se (p4fcc8c6a.dip0.t-ipconnect.de.
- [79.204.140.106]) by smtp.googlemail.com with ESMTPSA id
- et13-20020a056402378d00b0055d19c9daf2sm105202edb.15.2024.02.09.13.16.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 Feb 2024 13:16:28 -0800 (PST)
-From: =?UTF-8?q?Niklas=20S=C3=B6derlund?=
- <niklas.soderlund+renesas@ragnatech.se>
-To: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Tom Rini <trini@konsulko.com>, Hai Pham <hai.pham.ud@renesas.com>,
- u-boot@lists.denx.de
-Cc: linux-renesas-soc@vger.kernel.org,
- =?UTF-8?q?Niklas=20S=C3=B6derlund?= <niklas.soderlund+renesas@ragnatech.se>
-Subject: [PATCH] clk: renesas: Fix broken clocks on all Gen2 boards
-Date: Fri,  9 Feb 2024 22:15:35 +0100
-Message-ID: <20240209211535.3313392-1-niklas.soderlund+renesas@ragnatech.se>
-X-Mailer: git-send-email 2.43.0
+ d=1e100.net; s=20230601; t=1707517195; x=1708121995;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=jX1q+0308w70ABBa9F8mP1OwoiyJ6dI9xe1GVqQXjTQ=;
+ b=su9kwe15J4Sz+g9F/7xsBbj3LQ0nXw6jBckqMuqXwtZ14pfWoQCl5dXhGy5CrCuy8z
+ 90cB7hCKXmDTDh9JsWCSp4LQSkBa7nSZEnG6NdHTJLYH4E3j/G8Oo45DpkdKF7LCPCIu
+ L/75+hQJczsMRZcr0Bx9jIXwrWIOKpy8b2pssqM+S5r9Jx6XdMFVMXnhquuA0xdvFU83
+ bcf55WgX3zFE/SLl1XAMDZdZZTfHoeetrFolOKefQ2D8fR1y+OkDl+RX0EQaTMzwnQqT
+ VFCaAHCsvED1nTNZmWYF7OA8cX1TahI/ffoi9gryO/aSZJ8avdG4KFU9OOGzxwclB6MW
+ Fh4g==
+X-Gm-Message-State: AOJu0YyyyzqzsKsCcFDEWKoQgnbmdPoZiAjrtP5DwMhUvAnLP94C6Q6S
+ 5X6maGFM2j1JOx30ytXuIbY697Dy4v6ywMyaias0qqNbURY1iBkuISkB28OVUBywSMSSgPm+AU0
+ 99SSfGT8Z//eTSk2MAmgYiCuA6lcQA9okZZ8SjA==
+X-Google-Smtp-Source: AGHT+IG7Ex0RJgKqZGWkmbFv1I+AczqwV0IECMdJlUTZo+zbTgIKU43Rx+ABK6KyXjLdUlHN3+R2Jsc0GzhNnpvtknc=
+X-Received: by 2002:ac2:41c4:0:b0:511:7a72:6524 with SMTP id
+ d4-20020ac241c4000000b005117a726524mr221278lfi.15.1707517194795; Fri, 09 Feb
+ 2024 14:19:54 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Fri, 09 Feb 2024 22:27:02 +0100
+References: <20240209103009.5463-1-othacehe@gnu.org>
+ <20240209103009.5463-2-othacehe@gnu.org>
+In-Reply-To: <20240209103009.5463-2-othacehe@gnu.org>
+From: Igor Opaniuk <igor.opaniuk@foundries.io>
+Date: Fri, 9 Feb 2024 23:19:42 +0100
+Message-ID: <CAL6CDMHEbn3THePnu8iykJ-z=1KnauU6j0ijQVEAweRPGV1FiA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/3] imx93: Use a header for imx9_probe_mu declaration
+To: Mathieu Othacehe <othacehe@gnu.org>
+Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, 
+ Shiji Yang <yangshiji66@outlook.com>, Ye Li <ye.li@nxp.com>, 
+ =?UTF-8?Q?S=C3=A9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>, 
+ Fabio Estevam <festevam@gmail.com>, Simon Glass <sjg@chromium.org>, 
+ Mathieu Othacehe <m.othacehe@gmail.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,45 +92,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-To prepare support for multiple register layouts pointers to register
-tables where added to struct cpg_mssr_info. These pointers are suppose
-to be filled in at probe time and no intended change in behavior was
-intended.
+On Fri, Feb 9, 2024 at 1:05=E2=80=AFPM Mathieu Othacehe <othacehe@gnu.org> =
+wrote:
+>
+> Put imx9_probe_mu declaration in a new mu.h header file.
+>
+> Signed-off-by: Mathieu Othacehe <othacehe@gnu.org>
+> ---
+>  arch/arm/include/asm/arch-imx9/mu.h | 13 +++++++++++++
+>  board/freescale/imx93_evk/spl.c     |  2 +-
+>  board/phytec/phycore_imx93/spl.c    |  2 +-
+>  3 files changed, 15 insertions(+), 2 deletions(-)
+>  create mode 100644 arch/arm/include/asm/arch-imx9/mu.h
+>
+> diff --git a/arch/arm/include/asm/arch-imx9/mu.h b/arch/arm/include/asm/a=
+rch-imx9/mu.h
+> new file mode 100644
+> index 00000000000..b8604992914
+> --- /dev/null
+> +++ b/arch/arm/include/asm/arch-imx9/mu.h
+> @@ -0,0 +1,13 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +/*
+> + * Copyright (C) 2024 Mathieu Othacehe <m.othacehe@gmail.com>
+> + */
+> +
+> +#ifndef __ARCH_IMX9_MU_H
+> +#define __ARCH_IMX9_MU_H
+> +
+> +#include <event.h>
+> +
+> +int imx9_probe_mu(void *ctx, struct event *event);
+> +
+> +#endif
+> diff --git a/board/freescale/imx93_evk/spl.c b/board/freescale/imx93_evk/=
+spl.c
+> index be9c24fc0d9..a98ed69db88 100644
+> --- a/board/freescale/imx93_evk/spl.c
+> +++ b/board/freescale/imx93_evk/spl.c
+> @@ -14,6 +14,7 @@
+>  #include <asm/global_data.h>
+>  #include <asm/io.h>
+>  #include <asm/arch/imx93_pins.h>
+> +#include <asm/arch/mu.h>
+>  #include <asm/arch/clock.h>
+>  #include <asm/arch/sys_proto.h>
+>  #include <asm/mach-imx/boot_mode.h>
+> @@ -91,7 +92,6 @@ int power_init_board(void)
+>  }
+>  #endif
+>
+> -extern int imx9_probe_mu(void *ctx, struct event *event);
+>  void board_init_f(ulong dummy)
+>  {
+>         int ret;
+> diff --git a/board/phytec/phycore_imx93/spl.c b/board/phytec/phycore_imx9=
+3/spl.c
+> index da4b9e53594..dabc5316f33 100644
+> --- a/board/phytec/phycore_imx93/spl.c
+> +++ b/board/phytec/phycore_imx93/spl.c
+> @@ -7,6 +7,7 @@
+>
+>  #include <asm/arch/clock.h>
+>  #include <asm/arch/ddr.h>
+> +#include <asm/arch/mu.h>
+>  #include <asm/arch/sys_proto.h>
+>  #include <asm/arch/trdc.h>
+>  #include <asm/mach-imx/boot_mode.h>
+> @@ -99,7 +100,6 @@ int power_init_board(void)
+>         return 0;
+>  }
+>
+> -extern int imx9_probe_mu(void *ctx, struct event *event);
+>  void board_init_f(ulong dummy)
+>  {
+>         int ret;
+> --
+> 2.41.0
+>
 
-However the new pointers where only filled in by some paths of the
-driver implemented in clk-rcar-gen3.c. The path implemented in
-clk-rcar-gen2.c was not updated leaving the pointers uninitialized
-leading to a crash when trying to probe the clocks.
+Reviewed-by: Igor Opaniuk <igor.opaniuk@foundries.io>
 
-Fix this by filling in the pointers in the Gen2 code path with the
-values used before they where moved to struct cpg_mssr_info.
+--=20
+Best regards - Freundliche Gr=C3=BCsse - Meilleures salutations
 
-Fixes: d413214fb748 ("clk: renesas: Add register pointers into struct cpg_mssr_info")
-Signed-off-by: Niklas Söderlund <niklas.soderlund+renesas@ragnatech.se>
----
- drivers/clk/renesas/clk-rcar-gen2.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
-
-diff --git a/drivers/clk/renesas/clk-rcar-gen2.c b/drivers/clk/renesas/clk-rcar-gen2.c
-index 66ffef96b695..89f2d9667469 100644
---- a/drivers/clk/renesas/clk-rcar-gen2.c
-+++ b/drivers/clk/renesas/clk-rcar-gen2.c
-@@ -298,6 +298,15 @@ int gen2_clk_probe(struct udevice *dev)
- 	if (!priv->cpg_pll_config->extal_div)
- 		return -EINVAL;
- 
-+	if (info->reg_layout == CLK_REG_LAYOUT_RCAR_GEN2_AND_GEN3) {
-+		priv->info->status_regs = mstpsr;
-+		priv->info->control_regs = smstpcr;
-+		priv->info->reset_regs = srcr;
-+		priv->info->reset_clear_regs = srstclr;
-+	} else {
-+		return -EINVAL;
-+	}
-+
- 	ret = clk_get_by_name(dev, "extal", &priv->clk_extal);
- 	if (ret < 0)
- 		return ret;
--- 
-2.43.0
-
+Igor Opaniuk
+Senior Software Engineer, Embedded & Security
+E: igor.opaniuk@foundries.io
+W: www.foundries.io
