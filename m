@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 569E3C4828F
-	for <u-boot@archiver.kernel.org>; Fri,  9 Feb 2024 09:16:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26936C4828F
+	for <u-boot@archiver.kernel.org>; Fri,  9 Feb 2024 09:17:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA3848781A;
-	Fri,  9 Feb 2024 10:16:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 9232B87E53;
+	Fri,  9 Feb 2024 10:17:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="IHS6Hdv9";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="TFinbt/l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7AE7287C43; Fri,  9 Feb 2024 10:16:17 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 79B1E87E52; Fri,  9 Feb 2024 10:17:38 +0100 (CET)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C05B2876D3
- for <u-boot@lists.denx.de>; Fri,  9 Feb 2024 10:16:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 62F62876D3
+ for <u-boot@lists.denx.de>; Fri,  9 Feb 2024 10:17:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=danishanwar@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4199G4dH130311;
- Fri, 9 Feb 2024 03:16:04 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1707470164;
- bh=mNTzCAYZvD8I33oJ3M3T1uGlIYBCZZKX/iWKm5V0bqQ=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=IHS6Hdv9Au/kO1fF+1I4HVB/TsFbTDDBlD/HAGBiUYMBNyK9FVyfqLrLW68197pr1
- A8/SBhSGynkUDnuqWvF6RAfGj62cvjCN+gb8bkOnKegBVfIplmv8N430NDDTaZQ3XG
- 1WmKgR8r4Ixogxn0rsZdVytZK5jBUhcDasArGCGQ=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4199G4xa004029
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 9 Feb 2024 03:16:04 -0600
-Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 9
- Feb 2024 03:16:03 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 9 Feb 2024 03:16:03 -0600
-Received: from [10.24.69.25] (danish-tpc.dhcp.ti.com [10.24.69.25])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4199FwUL124725;
- Fri, 9 Feb 2024 03:16:00 -0600
-Message-ID: <b2e70bc1-caea-45d8-aabf-774715aefccc@ti.com>
-Date: Fri, 9 Feb 2024 14:45:58 +0530
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-41059577f26so6713475e9.0
+ for <u-boot@lists.denx.de>; Fri, 09 Feb 2024 01:17:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1707470256; x=1708075056;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=FLCHMteTjouk9rFEIaHdg3c/aesVCxKwRz+AItWLGYM=;
+ b=TFinbt/lOXDRM6/M6DVZjt7cC4W9k2GHzgzoc2kGELK6WSAVkdhfcBSpD2846ccGr8
+ 0IKa0o5aUFBA8k/fh0+Q+oNjVCfGUX7JJT/y/pEPjn2lxLK8CftHvKpT7kIrN2hTGncx
+ 2kHwaEIgM+SsWuAf1FbCgNeaPOZpMfgZnMN+Iz0Pshu9Y6bPJ9bEk5tLZRh89sjQj4XT
+ hYtHtu5EIegKt6ezY4I/I8Q7JsGv7nfvLosRnJbPxL0wRJSFJxFfpQo3PCediGpTpxUi
+ /j80ZGOaX3tFn+jR02SFiO0ZHj9iaK1iKj+Oo/23r6SQeB4c8HjdhzaW7lwKkPovJWgm
+ VKXw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1707470256; x=1708075056;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=FLCHMteTjouk9rFEIaHdg3c/aesVCxKwRz+AItWLGYM=;
+ b=E45sWzXufLr23x6wPYeAMXkDEOR1m7VAYQU+WlL5UdaGTkcMMzcmHHoCoQB4flAXju
+ 8tr6ldfAnTImtw08RL73uxYXKeEleCbDm4LKRuSDjX84zvIYSQ+tMhYPcs6C6X3Zn0U4
+ Pveq+t0YlIbLEGy/4MO5JHVbUaCUNBP9Bo7kr1m965/HVylcHaqaEkUjy7P7zKy8Xv3l
+ DzSJMeYj4DUUqz9j1OQjMbZD/fla4FFhaM8jYNNs6s2eee3h3Sk6WH8z0gZgLje7q9Ox
+ vlvGcyA34cey45LpXTIlh2mvxW6bD0r8TPe1mwXmbmLKASJ+D6vphVW0mWsYVF1PDu8b
+ ohEw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWyrhcXsGfNlsVOK0GAmgvdiDtu1UGz0WOYiNPoDeqlsO9dnX0d+hWyjzdZq9sLXp8x60YH9OR/lQFrZKoQsfhnu+3w+g==
+X-Gm-Message-State: AOJu0YynU5Mhe9OQP9w8WsiSm/vhrlOUxMq0A8uaJsWeIETyqGjQUTEv
+ WYfevsP4ul17cns60NZTaXXjKdHYuzh76GitL0nvid5GRXrA9d2jkrrEdBT61BU=
+X-Google-Smtp-Source: AGHT+IHUjYTxnnwYdBPbZojffT2iMSCcy3Xhu+4SLt9fZW+rrqBAhddmrPX+HikCI9v18195Vz3gnQ==
+X-Received: by 2002:a05:600c:3c96:b0:410:48dd:c397 with SMTP id
+ bg22-20020a05600c3c9600b0041048ddc397mr583045wmb.40.1707470255797; 
+ Fri, 09 Feb 2024 01:17:35 -0800 (PST)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVwosmfHLPVWcSdFjwrSViVfG9uvad2rdlW6o+nvBJZb+8uPIKmfY2ei3rb01WUgd9oC+xzWyibeGMGKDbFzCiRt0prl0eRxGC6eef6fTqvKJiFbBA8D96N
+Received: from localhost ([2a01:cb19:95ba:5000:2b24:7f52:e3f6:e4ef])
+ by smtp.gmail.com with ESMTPSA id
+ fs11-20020a05600c3f8b00b0040ffe1ca25bsm1979674wmb.21.2024.02.09.01.17.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 09 Feb 2024 01:17:35 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Igor Opaniuk <igor.opaniuk@foundries.io>, u-boot@lists.denx.de
+Cc: Igor Opaniuk <igor.opaniuk@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH v1 6/7] cmd: avb: rework do_avb_verify_part
+In-Reply-To: <20240206223153.3060433-7-igor.opaniuk@foundries.io>
+References: <20240206223153.3060433-1-igor.opaniuk@foundries.io>
+ <20240206223153.3060433-7-igor.opaniuk@foundries.io>
+Date: Fri, 09 Feb 2024 10:17:34 +0100
+Message-ID: <87zfwa2dzl.fsf@baylibre.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4] remoteproc: uclass: Add methods to load firmware to
- rproc and boot rproc
-Content-Language: en-US
-To: "Anwar, Md Danish" <a0501179@ti.com>, Roger Quadros <rogerq@kernel.org>,
- Max Krummenacher <max.krummenacher@toradex.com>, Francesco Dolcini
- <francesco.dolcini@toradex.com>, Dan Carpenter <dan.carpenter@linaro.org>,
- Simon Glass <sjg@chromium.org>, Nishanth Menon <nm@ti.com>, Tom Rini
- <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, <srk@ti.com>, Vignesh Raghavendra
- <vigneshr@ti.com>, <r-gunasekaran@ti.com>
-References: <20240130063322.2345057-1-danishanwar@ti.com>
- <e72403f9-a0aa-4286-97d2-456735fd3aac@kernel.org>
- <8bc580b4-5faf-48f4-9d68-052fb9e114e8@ti.com>
- <d0b4530d-b12a-4b2c-8171-35ca003d4234@kernel.org>
- <c042c7a5-1561-4efb-b7c4-461bda1f6c36@ti.com>
- <1646d8b2-7e0d-4716-956f-41b6f61f8626@kernel.org>
- <9f3b093c-89fd-4f4c-abad-650c03cb8118@ti.com>
- <3ddc45e4-e0d4-4ae7-90ed-b273b3c1ac09@kernel.org>
- <2e16f56b-d022-4d19-a070-b099ae562e77@ti.com>
- <911d8755-d162-4987-852a-8ce060454a26@kernel.org>
- <ea38db1d-0939-4497-8fc8-9266f5d0d4cc@ti.com>
-From: MD Danish Anwar <danishanwar@ti.com>
-In-Reply-To: <ea38db1d-0939-4497-8fc8-9266f5d0d4cc@ti.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,338 +96,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 07/02/24 6:27 pm, Anwar, Md Danish wrote:
-> On 2/7/2024 6:05 PM, Roger Quadros wrote:
->>
->>
->> On 07/02/2024 09:15, MD Danish Anwar wrote:
->>> Hi Roger
->>>
->>> On 06/02/24 7:11 pm, Roger Quadros wrote:
->>>>
->>>>
->>>> On 06/02/2024 07:31, MD Danish Anwar wrote:
->>>>>
->>>>>
->>>>> On 05/02/24 6:07 pm, Roger Quadros wrote:
->>>>>>
->>>>>>
->>>>>> On 05/02/2024 12:20, MD Danish Anwar wrote:
->>>>>>>
->>>>>>>
->>>>>>> On 05/02/24 3:36 pm, Roger Quadros wrote:
->>>>>>>>
->>>>>>>>
->>>>>>>> On 02/02/2024 18:40, Anwar, Md Danish wrote:
->>>>>>>>> Hi Roger,
->>>>>>>>>
->>>>>>>>> On 2/2/2024 4:49 PM, Roger Quadros wrote:
->>>>>>>>>>
->>>>>>>>>>
->>>>>>>>>> On 30/01/2024 08:33, MD Danish Anwar wrote:
->>>>>>>>>>> Add APIs to set a firmware_name to a rproc and boot the rproc with the
->>>>>>>>>>> same firmware.
->>>>>>>>>>>
->>>>>
->>>>> <snip>
->>>>>
->>>>>>>>>
->>>>>>>>>> How does caller know what firmware size to set to?
->>>>>>>>>> This should already be private to the rproc as it knows 
->>>>>>>>>> how large is its program memory.
->>>>>>>>>>
->>>>>>>>>
->>>>>>>>> Caller is trying to boot the rproc with a firmware binary. Caller should
->>>>>>>>> know the size of binary that it wants to load to rproc core. Caller will
->>>>>>>>> specify the binary size to rproc_boot(). Based on the size provided by
->>>>>>>>> caller, rproc_boot() will then allocate that much memory and call
->>>>>>>>> request_firmware_into_buf() with the size and allocated buffer. If the
->>>>>>>>> caller doesn't provide minimum size rproc_load() will fail.
->>>>>>>>
->>>>>>>> Caller only knows the filename. It need not know more details.
->>>>>>>
->>>>>>> Caller is trying to load a file of it's choice to a rproc. Caller should
->>>>>>> know the size of file it is trying to load or atleast the max size that
->>>>>>> the firmware file could be of.
->>>>>>>
->>>>>>>
->>>>>>>> Also see my comment below about rproc_boot() API.
->>>>>>>>
->>>>>>>>>
->>>>>>>>> rproc_load() calls respective driver ops, for example: pru_load().
->>>>>>>>> pru_load() [1] API checks the required size of firmware to load by
->>>>>>>>> casting the buffer into Elf32_Ehdr and Elf32_Phdr and returns error if
->>>>>>>>> size provided by caller is less than this.
->>>>>>>>>
->>>>>>>>>
->>>>>>>>> 	if (offset + filesz > size) {
->>>>>>>>> 		dev_dbg(dev, "truncated fw: need 0x%x avail 0x%zx\n",
->>>>>>>>> 			offset + filesz, size);
->>>>>>>>> 		ret = -EINVAL;
->>>>>>>>> 		break;
->>>>>>>>> 	}
->>>>>>>>>
->>>>>>>>>>> + *
->>>>>>>>>>> + * Boot a remote processor (i.e. load its firmware, power it on, ...).
->>>>>>>>>>> + *
->>>>>>>>>>> + * This function first loads the firmware set in the uclass pdata of Remote
->>>>>>>>>>> + * processor to a buffer and then loads firmware to the remote processor
->>>>>>>>>>> + * using rproc_load().
->>>>>>>>>>> + *
->>>>>>>>>>> + * Return: 0 on success, and an appropriate error value otherwise
->>>>>>>>>>> + */
->>>>>>>>>>> +int rproc_boot(struct udevice *rproc_dev, size_t fw_size);
->>>>>>>>>>
->>>>>>>>>> Was wondering if you need separate API for rproc_set_firmware or we can just
->>>>>>>>>> pass firmware name as argument to rproc_boot()?
->>>>>>>>>>
->>>>>>>>>
->>>>>>>>> Technically we can. But when we discussed this approach first in v1, you
->>>>>>>>> had asked to keep the APIs similar to upstream linux. Upstream linux has
->>>>>>>>> these two APIs so I kept it that way. If you want I can drop the first
->>>>>>>>> API. Please let me know.
->>>>>>>>
->>>>>>>> Sure you can keep it as it is in Linux, but there, rproc_boot doesn't
->>>>>>>> take fw_size argument. So wondering why you should have it in u-boot.
->>>>>>>>
->>>>>>>
->>>>>>> For loading firmware to a rproc core in u-boot, it's first neccassry to
->>>>>>> load the firmware into buffer and then load that buffer into rproc core
->>>>>>> using rproc_load() API. Now to load the firmware to a buffer ther is an
->>>>>>> API request_firmware_into_buf(). This API takes size of firmware as one
->>>>>>> of it's argument. So in order to call this API from rproc_boot() we need
->>>>>>> to pass fw_size to rproc_boot()
->>>>>>>
->>>>>>> Other u-boot drivers using request_firmware_into_buf() are also passing
->>>>>>> size of firmware from their driver.
->>>>>>
->>>>>> But in your driver you didn't use size of firmware but some 64K
->>>>>> https://lore.kernel.org/all/20240124064930.1787929-8-danishanwar@ti.com/
->>>>>>
->>>>>
->>>>> Yes, in driver I am hardcoding the size to 64K. That's because I know
->>>>> the size of ICSSG firmwares are less than 64K. Instead of hardcoding I
->>>>
->>>> What if you enable debugging symbols in the firmware file. Won't it exceed 64KB?
->>>> It is not a good idea to assume any firmware file size as it will eventually
->>>> break sometime in the future and will be a pain to debug.
->>>>
->>>>> can also define macro or provide a config option where we set the size
->>>>> and the driver will read the size from the config and call rproc_boot()
->>>>> with size.
->>>>>
->>>>> For example, fm.c driver reads the size from config option
->>>>> CONFIG_SYS_QE_FMAN_FW_LENGTH [1] and calls request_firmware_into_buf()
->>>>>
->>>>> [1]
->>>>> https://elixir.bootlin.com/u-boot/latest/source/drivers/net/fm/fm.c#L458
->>>>>
->>>>>> So neither does the caller have a clue of firmware size?
->>>>>>
->>>>>>>
->>>>>>> If rproc_boot() doesn't take fw_size as argument then within
->>>>>>> rproc_boot() we need to figure out the fw_size before calling
->>>>>>> request_firmware_into_buf().
->>>>>>>
->>>>>>> If we don't know the size / maximum size of the firmware to load, how
->>>>>>> will we call request_firmware_into_buf(). Someone has to tell
->>>>>>> request_firmware_into_buf() the size of firmware. I am expecting that to
->>>>>>> be the caller. Do you have any other way of getting the firmware size
->>>>>>> before request_firmware_into_buf() is called?
->>>>>>
->>>>>> /**
->>>>>>  * request_firmware_into_buf - Load firmware into a previously allocated buffer.
->>>>>>  * @dev: An instance of a driver.
->>>>>>  * @name: Name of firmware file.
->>>>>>  * @buf: Address of buffer to load firmware into.
->>>>>>  * @size: Size of buffer.
->>>>>>  * @offset: Offset of a file for start reading into buffer.
->>>>>>
->>>>>> It needs size of pre-allocated buffer which can be smaller than file size.
->>>>>> It also has the option of offset. So you can load portions of the file limited
->>>>>> by buffer size.
->>>>>>
->>>>>> My suggestion is that Remoteproc layer should take care of how much buffer
->>>>>> to allocate and pass that buffer size to request_firmware_into_buf().
->>>>>> You are doing the malloc here itself anyways.
->>>>>>
->>>>>
->>>>> But how would the remoteproc driver know how much buffer it needs to
->>>>> allocate before calling request_firmware_into_buf().
->>>>
->>>> Only the filesystem driver knows what exactly is the firmware file size.
->>>> fs_size() API can be used for that.
->>>>
->>>
->>> To use fs_size() we first need to call fs_set_blk_dev() to set the
->>> storage interface, device partition and fs_type. eg.
->>> fs_set_blk_dev("mmc, "1:2", FS_TYPE_ANY)
->>>
->>> Since we are setting the envs for storage_interface and partition I'll
->>> use the envs to call fs_set_blk_dev()
->>>
->>> This is how rproc_boot() will look now.
->>>
->>> int rproc_boot(struct udevice *rproc_dev)
->>> {
->>> 	struct dm_rproc_uclass_pdata *uc_pdata;
->>> 	char *storage_interface, *dev_part;
->>> 	struct udevice *fs_loader;
->>> 	int core_id, ret = 0;
->>> 	char *firmware;
->>> 	loff_t fw_size;
->>> 	void *addr;
->>>
->>> 	if (!rproc_dev)
->>> 		return -EINVAL;
->>>
->>> 	uc_pdata = dev_get_uclass_plat(rproc_dev);
->>> 	if (!uc_pdata)
->>> 		return -EINVAL;
->>>
->>> 	core_id = dev_seq(rproc_dev);
->>> 	firmware = uc_pdata->fw_name;
->>>
->>> 	if (!firmware) {
->>> 		debug("No firmware set for rproc core %d\n", core_id);
->>> 		return -EINVAL;
->>> 	}
->>>
->>> 	/* Initialize all rproc cores */
->>> 	if (!rproc_is_initialized()) {
->>> 		ret = rproc_init();
->>> 		if (ret) {
->>> 			debug("rproc_init() failed: %d\n", ret);
->>> 			return ret;
->>> 		}
->>> 	}
->>>
->>> 	/* Loading firmware to a given address */
->>> 	ret = get_fs_loader(&fs_loader);
->>> 	if (ret) {
->>> 		debug("could not get fs loader: %d\n", ret);
->>> 		return ret;
->>> 	}
->>>
->>> 	storage_interface = env_get("fw_storage_interface");
->>> 	dev_part = env_get("fw_dev_part");
->>>
->>> 	if (storage_interface && dev_part) {
->>> 		ret = fs_set_blk_dev(storage_interface, dev_part, 	FS_TYPE_ANY);
->>> 	} else {
->>> 		debug("could not get env variables to load firmware\n");
->>> 		return -EINVAL;
->>> 	}
->>
->> I'm not very sure about this as we are using firmware loader
->> specific environment variables outside the firmware loader driver.
->>
->> I can see 2 solutions here:
->>
->> 1) ask firmware loader driver to tell us the firmware file size.
->> fw_get_filesystem_firmware() also deals with UBI filesystem.
->>
->> 2) use a large enough buffer whose size is set in Kconfig.
->>
-> 
-> Roger, I still think 2 is a better option. In ICSSG driver also I am
-> setting the fw_size to 64K. Instead of hard-coding, this can be set in
-> the config. The ICSSG firmware is usually 40KB so 64K should be OK.
-> Other clients, if they use rproc_boot() in future, can specify there max
-> firmware size in their config. And to rproc layer it will be abstract.
-> 
-> We can also get the size from config (Setting somethinig like
-> CONFIG_RPROC_MAX_FW_SIZE=64K) directly inside rproc_boot() eliminating
-> the need for the client to pass the size. But in future when there are
-> many clients using rproc_boot() for different firmware files, It will
-> become difficult for remoteproc to hardcode a firmware size that can be
-> bigger than any firmware that any client is using.
-> 
-> It's simpler if each client specify there max fw size instead of
-> remoteproc driver specifying max possible size.
-> 
->> Tom, any insights?
->>
+Hi Igor,
 
-Hi Tom, any suggestions?
+Thank you for the patch.
 
-Roger, If Tom doesn't have any comment I will respin the patch by
-defining REMOTEPROC_MAX_FW_SIZE in drivers/remoteproc/Kconfig. I will
-keep the default size as 0x10000 (64K)
+On mar., f=C3=A9vr. 06, 2024 at 23:31, Igor Opaniuk <igor.opaniuk@foundries=
+.io> wrote:
 
->>>
->>> 	if (ret) {
->>> 		debug("fs_set_blk_dev failed %d\n", ret);
->>> 		return ret;
->>> 	}
->>>
->>> 	ret = fs_size(firmware, &fw_size);
->>> 	if (ret) {
->>> 		debug("could not get firmware size %s: %d\n", firmware, ret);
->>> 		return ret;
->>> 	}
->>>
->>> 	addr = malloc(fw_size);
->>> 	if (!addr)
->>> 		return -ENOMEM;
->>>
->>> 	ret = request_firmware_into_buf(fs_loader, firmware, addr, fw_size, 0);
->>> 	if (ret < 0) {
->>> 		debug("could not request %s: %d\n", firmware, ret);
->>> 		goto free_buffer;
->>> 	}
->>>
->>> 	ret = rproc_load(core_id, (ulong)addr, ret);
->>> 	if (ret) {
->>> 		debug("failed to load %s to rproc core %d from addr 0x%08lX err %d\n",
->>> 		      uc_pdata->fw_name, core_id, (ulong)addr, ret);
->>> 		goto free_buffer;
->>> 	}
->>>
->>> 	ret = rproc_start(core_id);
->>> 	if (ret)
->>> 		debug("failed to start rproc core %d\n", core_id);
->>>
->>> free_buffer:
->>> 	free(addr);
->>> 	return ret;
->>> }
->>>
->>> Please let me know if this looks ok. Without calling fs_set_blk_dev()
->>> first, fs_size() results in error.
->>>
->>>
->>>>>
->>>>>>>
->>>>>>>>>
->>>>>>>>>>>  #else
->>>>>>>>>>>  static inline int rproc_init(void) { return -ENOSYS; }
->>>>>>>>>>>  static inline int rproc_dev_init(int id) { return -ENOSYS; }
->>>>>>>>>>> @@ -744,6 +775,10 @@ static inline int rproc_elf_load_rsc_table(struct udevice *dev, ulong fw_addr,
->>>>>>>>>>>  					   ulong fw_size, ulong *rsc_addr,
->>>>>>>>>>>  					   ulong *rsc_size)
->>>>>>>>>>>  { return -ENOSYS; }
->>>>>>>>>>> +static inline int rproc_set_firmware(struct udevice *rproc_dev, const char *fw_name)
->>>>>>>>>>> +{ return -ENOSYS; }
->>>>>>>>>>> +static inline int rproc_boot(struct udevice *rproc_dev, size_t fw_size)
->>>>>>>>>>> +{ return -ENOSYS; }
->>>>>>>>>>>  #endif
->>>>>>>>>>>  
->>>>>>>>>>>  #endif	/* _RPROC_H_ */
->>>>>>>>>>
->>>>>>>>>
->>>>>>>>> [1]
->>>>>>>>> https://elixir.bootlin.com/u-boot/latest/source/drivers/remoteproc/pru_rproc.c#L324
->>>>>>>>>
->>>>>>>>
->>>>>>>
->>>>>>
->>>>>
->>>>
->>>
->>
-> 
+> From: Igor Opaniuk <igor.opaniuk@gmail.com>
+>
+> Use existing str_avb_slot_error() function for obtaining
+> verification fail reason details.
+> Take into account device lock state for setting correct
+> androidboot.verifiedbootstate kernel cmdline parameter.
+>
+> Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
 
--- 
-Thanks and Regards,
-Danish
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+
+Nitpick: the error handling migration could have been part of PATCH 5/7
+but it's fine to keep as is.
+
+> ---
+>
+>  cmd/avb.c | 50 +++++++++++++++++---------------------------------
+>  1 file changed, 17 insertions(+), 33 deletions(-)
+>
+> diff --git a/cmd/avb.c b/cmd/avb.c
+> index ae0012c0e79..e5fc202121f 100644
+> --- a/cmd/avb.c
+> +++ b/cmd/avb.c
+> @@ -239,6 +239,7 @@ int do_avb_verify_part(struct cmd_tbl *cmdtp, int fla=
+g,
+>  	const char * const requested_partitions[] =3D {"boot", NULL};
+>  	AvbSlotVerifyResult slot_result;
+>  	AvbSlotVerifyData *out_data;
+> +	enum avb_boot_state boot_state;
+>  	char *cmdline;
+>  	char *extra_args;
+>  	char *slot_suffix =3D "";
+> @@ -273,18 +274,23 @@ int do_avb_verify_part(struct cmd_tbl *cmdtp, int f=
+lag,
+>  				AVB_HASHTREE_ERROR_MODE_RESTART_AND_INVALIDATE,
+>  				&out_data);
+>=20=20
+> -	switch (slot_result) {
+> -	case AVB_SLOT_VERIFY_RESULT_OK:
+> -		/* Until we don't have support of changing unlock states, we
+> -		 * assume that we are by default in locked state.
+> -		 * So in this case we can boot only when verification is
+> -		 * successful; we also supply in cmdline GREEN boot state
+> -		 */
+> +	/*
+> +	 * LOCKED devices with custom root of trust setup is not supported (YEL=
+LOW)
+> +	 */
+> +	if (slot_result =3D=3D AVB_SLOT_VERIFY_RESULT_OK) {
+>  		printf("Verification passed successfully\n");
+>=20=20
+> -		/* export additional bootargs to AVB_BOOTARGS env var */
+> +		/*
+> +		 * ORANGE state indicates that device may be freely modified.
+> +		 * Device integrity is left to the user to verify out-of-band.
+> +		 */
+> +		if (unlocked)
+> +			boot_state =3D AVB_ORANGE;
+> +		else
+> +			boot_state =3D AVB_GREEN;
+>=20=20
+> -		extra_args =3D avb_set_state(avb_ops, AVB_GREEN);
+> +		/* export boot state to AVB_BOOTARGS env var */
+> +		extra_args =3D avb_set_state(avb_ops, boot_state);
+>  		if (extra_args)
+>  			cmdline =3D append_cmd_line(out_data->cmdline,
+>  						  extra_args);
+> @@ -294,30 +300,8 @@ int do_avb_verify_part(struct cmd_tbl *cmdtp, int fl=
+ag,
+>  		env_set(AVB_BOOTARGS, cmdline);
+>=20=20
+>  		res =3D CMD_RET_SUCCESS;
+> -		break;
+> -	case AVB_SLOT_VERIFY_RESULT_ERROR_VERIFICATION:
+> -		printf("Verification failed\n");
+> -		break;
+> -	case AVB_SLOT_VERIFY_RESULT_ERROR_IO:
+> -		printf("I/O error occurred during verification\n");
+> -		break;
+> -	case AVB_SLOT_VERIFY_RESULT_ERROR_OOM:
+> -		printf("OOM error occurred during verification\n");
+> -		break;
+> -	case AVB_SLOT_VERIFY_RESULT_ERROR_INVALID_METADATA:
+> -		printf("Corrupted dm-verity metadata detected\n");
+> -		break;
+> -	case AVB_SLOT_VERIFY_RESULT_ERROR_UNSUPPORTED_VERSION:
+> -		printf("Unsupported version of avbtool was used\n");
+> -		break;
+> -	case AVB_SLOT_VERIFY_RESULT_ERROR_ROLLBACK_INDEX:
+> -		printf("Rollback index check failed\n");
+> -		break;
+> -	case AVB_SLOT_VERIFY_RESULT_ERROR_PUBLIC_KEY_REJECTED:
+> -		printf("Public key was rejected\n");
+> -		break;
+> -	default:
+> -		printf("Unknown error occurred\n");
+> +	} else {
+> +		printf("Verification failed, reason: %s\n", str_avb_slot_error(slot_re=
+sult));
+>  	}
+>=20=20
+>  	if (out_data)
+> --=20
+> 2.34.1
