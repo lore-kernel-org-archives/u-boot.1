@@ -4,73 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 430A8C4828F
-	for <u-boot@archiver.kernel.org>; Fri,  9 Feb 2024 10:08:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE54FC4828F
+	for <u-boot@archiver.kernel.org>; Fri,  9 Feb 2024 10:15:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BABD787E2B;
-	Fri,  9 Feb 2024 11:08:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 264AB87E41;
+	Fri,  9 Feb 2024 11:15:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Pqb0rHKU";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="M5/LQCVM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 01F6787E35; Fri,  9 Feb 2024 11:08:47 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E8E0287E58; Fri,  9 Feb 2024 11:15:11 +0100 (CET)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E0A086C72
- for <u-boot@lists.denx.de>; Fri,  9 Feb 2024 11:08:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BF53487E40
+ for <u-boot@lists.denx.de>; Fri,  9 Feb 2024 11:15:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=danishanwar@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 419A8XU2011681;
- Fri, 9 Feb 2024 04:08:33 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1707473313;
- bh=X08CwN7bjBjeNGfOs+zvfj32FB/v88vgreEogSx4mTc=;
- h=From:To:CC:Subject:Date;
- b=Pqb0rHKUWr1tEnpicX4T0LkBOvX9Njyrskrdc+G03//5iLDoCiRy75qAjyEClmWU+
- gHn++VpwaLvaeYq0350pG4RzrHVhM18hTgLaoBtoIPFixaeMFBH9tNOKvnbi/QtFNu
- Dib0Xy2kvHealiGCNDGSYEmhYuC+qMqH/LBYi2sA=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 419A8Wra082188
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 9 Feb 2024 04:08:32 -0600
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 9
- Feb 2024 04:08:32 -0600
-Received: from fllvsmtp8.itg.ti.com (10.64.41.158) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 9 Feb 2024 04:08:32 -0600
-Received: from lelv0854.itg.ti.com (lelv0854.itg.ti.com [10.181.64.140])
- by fllvsmtp8.itg.ti.com (8.15.2/8.15.2) with ESMTP id 419A8WWm108605;
- Fri, 9 Feb 2024 04:08:32 -0600
-Received: from localhost (danish-tpc.dhcp.ti.com [10.24.69.25])
- by lelv0854.itg.ti.com (8.14.7/8.14.7) with ESMTP id 419A8VVj004076;
- Fri, 9 Feb 2024 04:08:32 -0600
-From: MD Danish Anwar <danishanwar@ti.com>
-To: Sean Anderson <seanga2@gmail.com>, Neil Armstrong
- <neil.armstrong@linaro.org>,
- Michal Simek <michal.simek@amd.com>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, MD Danish
- Anwar <danishanwar@ti.com>, Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, <srk@ti.com>, Vignesh Raghavendra
- <vigneshr@ti.com>, <r-gunasekaran@ti.com>,
- Roger Quadros <rogerq@kernel.org>
-Subject: [PATCH v5] misc: fs-loader: Use fw_storage_interface instead of
- storage_interface
-Date: Fri, 9 Feb 2024 15:38:29 +0530
-Message-ID: <20240209100829.1079401-1-danishanwar@ti.com>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-33b49debd3bso181761f8f.0
+ for <u-boot@lists.denx.de>; Fri, 09 Feb 2024 02:15:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1707473708; x=1708078508; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=l81KpgJyKVRXm8UEhLd7CGfEud10LGlVyATpxrozPqs=;
+ b=M5/LQCVMOdd9JgE6iC6imEmpOH1KT1jBQpK/XjMc7gq3Fvy5liub12ogPMMHDNDtkQ
+ Yn+P+RRW1dXW9iPnITc0tReJUf/TtTKMWI3moLCwL+2AhmGa3NtvM6BPaniqUVsGEPVn
+ L0blF/dbM6LXgMAVutajK7ZEXfM19LUEDmjEml/NRD/KFBH/CfSmIjgZAKjPcaY8amam
+ iiPoDoFFYvF5BLzl6sZPwA2xj7D/8V5MzlYgUMUH6f013vB+s4apv7F+xB4JEdwwzCrE
+ S7IMUk7ZI/qPolB4ivWWgpTmpBAnSWpW0UKravmTBLK9TmTSYjsVdve3MQ2amIinGsl4
+ Kzsg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1707473708; x=1708078508;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=l81KpgJyKVRXm8UEhLd7CGfEud10LGlVyATpxrozPqs=;
+ b=r8Xyf1jVz40yKauq+z1gHaTDTyXwvnozvQsciMZZzv/iq4BeU81vY/1tzmDJg4Ro/n
+ /5UyYjZY0szQjpIQKpNEQ6NxSAjfkWJcBxm8/w/WuDll1t5v09sb3pWFjRqlK3KtlY3L
+ m7V9bJY30x3NcUQnQJ4PGu+EhGFP01TvFem/po/ssfKIaFYc6nO3KlfVOEJS+gzy/9C0
+ 0CWr5RdossZEs4X28d9l3hiQ1NpMzgaU0Uks+SxLbe2dSO5hP1HvqfHzyoRsUOrUzWWY
+ Ty9JltoZIiqKt2i1AmWpS+OKfec0AkUWkg+Vq1SDcU/uL2119dB3E1o0CAWLebU/7scW
+ 3pCg==
+X-Gm-Message-State: AOJu0Ywek2zWey+W7IyjK531Wk9/ncJO0dxDaNPWIU1HZFGQQ6ZGXI6c
+ rtEt8vSFDflS+02UvdZKUnSsDwQdRElIHk03s9ziaiNw0UODtRha2o9U3uoxz/X8CqqxAp/615U
+ KmFGBCBQ2TMQE+YiMK6L3c/toN89fzOH80AWlV6me
+X-Google-Smtp-Source: AGHT+IF6Ytk7xGanyQvai9oqP4g5a6pa53U1RyqLznecIkj3B67GfDl4zeAPjLp61OnOsGRCorCmTTAjztdcaODxyag=
+X-Received: by 2002:a05:600c:22d6:b0:410:6e5f:90ad with SMTP id
+ 22-20020a05600c22d600b004106e5f90admr759072wmg.0.1707473707976; Fri, 09 Feb
+ 2024 02:15:07 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+From: Igor Opaniuk <igor.opaniuk@gmail.com>
+Date: Fri, 9 Feb 2024 11:14:56 +0100
+Message-ID: <CAByghJb633bMqVhQ+zFzU-tR_hM88EFFhr7mXhj6nWDUhHhHYw@mail.gmail.com>
+Subject: [AVB/AB] Overhaul plans
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,66 +82,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The fs-loader driver reads env storage_interface and uses it to load
-firmware file into memory using the medium set by env. Update the driver
-to use env fw_storage_interface as this variable is only used to load
-firmwares. This is to keep all variables used by fs-loader driver with
-'fw_' prefix. All other variables have 'fw_' prefix except for
-storage_interface.
+Hi everyone,
 
-The env storage_interface will act as fallback so that the
-existing implementations do not break.
+I'm currently planning a big overhaul of the current implementation of
+AVB/AB in U-Boot during the 2024 year, which I have barely touched since
+2019. I used to believe that it was stillborn, but looks like it's
+being actively used
+now by some SoC vendors and Google folks [1][2].
 
-Also update the FS Loader documentation accordingly.
+This is what I have in my todo list:
+* Backport latest libavb from AOSP upstream and add support for
+   Verified Boot 1.3.0 version
+* Sync include/android_bootloader_message.h with AOSP upstream
+* Check and backport fixes for AVB in AOSP U-Boot fork if needed [1]
+* Get acquainted with a current state of A/B support in AOSP and
+   backport all needed changes
+* Re-factor libavb, switch to U-Boot existing implementation of
+   rsa/sha256/sha512
+* Add SHA512 implementation that leverage ARMv8 CE
+   (pull it from Linux)
+* Enable hw acceleration of SHA256/SHA512 that supports ARMv8
+   Crypto Extensions to speed up verification process on ARMv8-based boards.
+* AVB support for NAND storage
 
-Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
----
-Cc: Sean Anderson <seanga2@gmail.com>
-Changes from v4 to v5:
-*) Modified commit message to make the motive cleared for this commit.
-*) Added RB tag of Ravi.
-*) Rebased on the latest u-boot/master [commit
-   a4650bf65e4b7d3ef04c90ba8031374428e4a682]
+If someone is already working on anything from the above list -
+please feel free to reach out to me, so we can avoid duplication of effort.
 
-v4: https://lore.kernel.org/all/20240130062627.2344282-1-danishanwar@ti.com/
+Any comments/suggestions are welcome! Thanks!
 
- doc/develop/driver-model/fs_firmware_loader.rst | 5 ++++-
- drivers/misc/fs_loader.c                        | 5 ++++-
- 2 files changed, 8 insertions(+), 2 deletions(-)
+[1] https://android.googlesource.com/platform/external/u-boot
+[2] https://source.android.com/docs/devices/cuttlefish/bootloader-dev
+[3] https://android.googlesource.com/platform/bootable/recovery/+/main/bootloader_message/include/bootloader_message/bootloader_message.h
 
-diff --git a/doc/develop/driver-model/fs_firmware_loader.rst b/doc/develop/driver-model/fs_firmware_loader.rst
-index 149b8b436e..410cc1442d 100644
---- a/doc/develop/driver-model/fs_firmware_loader.rst
-+++ b/doc/develop/driver-model/fs_firmware_loader.rst
-@@ -98,8 +98,11 @@ through the U-Boot environment variable during run time.
- 
- For examples:
- 
-+fw_storage_interface:
-+  Firmware storage interface, it can be "mmc", "usb", "sata" or "ubi".
- storage_interface:
--  Storage interface, it can be "mmc", "usb", "sata" or "ubi".
-+  Storage interface, it can be "mmc", "usb", "sata" or "ubi". This acts
-+  as a fallback if fw_storage_interface is not set.
- fw_dev_part:
-   Block device number and its partition, it can be "0:1".
- fw_ubi_mtdpart:
-diff --git a/drivers/misc/fs_loader.c b/drivers/misc/fs_loader.c
-index 1ffc199ba1..3798dab5b6 100644
---- a/drivers/misc/fs_loader.c
-+++ b/drivers/misc/fs_loader.c
-@@ -153,7 +153,10 @@ static int fw_get_filesystem_firmware(struct udevice *dev)
- 	char *storage_interface, *dev_part, *ubi_mtdpart, *ubi_volume;
- 	int ret;
- 
--	storage_interface = env_get("storage_interface");
-+	storage_interface = env_get("fw_storage_interface");
-+	if (!storage_interface)
-+		storage_interface = env_get("storage_interface");
-+
- 	dev_part = env_get("fw_dev_part");
- 	ubi_mtdpart = env_get("fw_ubi_mtdpart");
- 	ubi_volume = env_get("fw_ubi_volume");
--- 
-2.34.1
+--
+Best regards - Atentamente - Meilleures salutations
 
+Igor Opaniuk
+
+mailto: igor.opaniuk@gmail.com
+skype: igor.opanyuk
+http://ua.linkedin.com/in/iopaniuk
