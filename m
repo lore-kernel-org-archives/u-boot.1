@@ -4,39 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B0A8C48297
-	for <u-boot@archiver.kernel.org>; Fri,  9 Feb 2024 09:51:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEB60C4828F
+	for <u-boot@archiver.kernel.org>; Fri,  9 Feb 2024 09:51:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 99AFF87E86;
-	Fri,  9 Feb 2024 10:50:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 35FBB87E90;
+	Fri,  9 Feb 2024 10:50:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B922587E90; Fri,  9 Feb 2024 10:50:23 +0100 (CET)
-Received: from smtp-42af.mail.infomaniak.ch (smtp-42af.mail.infomaniak.ch
- [84.16.66.175])
+ id 372A487E77; Fri,  9 Feb 2024 10:50:26 +0100 (CET)
+Received: from smtp-42aa.mail.infomaniak.ch (smtp-42aa.mail.infomaniak.ch
+ [IPv6:2001:1600:4:17::42aa])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4DF8187E64
- for <u-boot@lists.denx.de>; Fri,  9 Feb 2024 10:50:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8CB3A87E7E
+ for <u-boot@lists.denx.de>; Fri,  9 Feb 2024 10:50:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-3-0001.mail.infomaniak.ch (smtp-3-0001.mail.infomaniak.ch
- [10.4.36.108])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4TWTcD54skzgjV;
- Fri,  9 Feb 2024 10:50:20 +0100 (CET)
+Received: from smtp-3-0001.mail.infomaniak.ch (unknown [10.4.36.108])
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4TWTcG0wlKzMpnf1;
+ Fri,  9 Feb 2024 10:50:22 +0100 (CET)
 Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4TWTcC0kvWzMppKR; Fri,  9 Feb 2024 10:50:19 +0100 (CET)
+ id 4TWTcD6hSfzMppKM; Fri,  9 Feb 2024 10:50:20 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Fri, 09 Feb 2024 10:50:02 +0100
-Subject: [PATCH v2 06/20] rockchip: pine64: rockpro64: migrate to
+Date: Fri, 09 Feb 2024 10:50:03 +0100
+Subject: [PATCH v2 07/20] rockchip: theobroma-systems: puma: migrate to
  rockchip_early_misc_init_r
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240209-jaguar-v2-6-6c9ffe09b924@theobroma-systems.com>
+Message-Id: <20240209-jaguar-v2-7-6c9ffe09b924@theobroma-systems.com>
 References: <20240209-jaguar-v2-0-6c9ffe09b924@theobroma-systems.com>
 In-Reply-To: <20240209-jaguar-v2-0-6c9ffe09b924@theobroma-systems.com>
 To: Simon Glass <sjg@chromium.org>, 
@@ -78,31 +77,32 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 
-Only setup_iodomain() differs from the original misc_init_r from
-Rockchip mach code, so let's use rockchip_early_misc_init_r instead of
-reimplementing the whole misc_init_r from Rockchip.
+Only setup_iodomain() and setup_boottargets differ from the original
+misc_init_r from Rockchip mach code, so let's use
+rockchip_early_misc_init_r instead of reimplementing the whole
+misc_init_r from Rockchip.
 
 Cc: Quentin Schulz <foss+uboot@0leil.net>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 ---
- board/pine64/rockpro64_rk3399/rockpro64-rk3399.c | 20 ++------------------
- 1 file changed, 2 insertions(+), 18 deletions(-)
+ board/theobroma-systems/puma_rk3399/puma-rk3399.c | 20 +-------------------
+ 1 file changed, 1 insertion(+), 19 deletions(-)
 
-diff --git a/board/pine64/rockpro64_rk3399/rockpro64-rk3399.c b/board/pine64/rockpro64_rk3399/rockpro64-rk3399.c
-index d79084614f1..d0a694ead1d 100644
---- a/board/pine64/rockpro64_rk3399/rockpro64-rk3399.c
-+++ b/board/pine64/rockpro64_rk3399/rockpro64-rk3399.c
-@@ -11,7 +11,6 @@
+diff --git a/board/theobroma-systems/puma_rk3399/puma-rk3399.c b/board/theobroma-systems/puma_rk3399/puma-rk3399.c
+index a82f97b2d54..98a818b135d 100644
+--- a/board/theobroma-systems/puma_rk3399/puma-rk3399.c
++++ b/board/theobroma-systems/puma_rk3399/puma-rk3399.c
+@@ -10,7 +10,6 @@
  #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/grf_rk3399.h>
  #include <asm/arch-rockchip/hardware.h>
+ #include <asm/arch-rockchip/grf_rk3399.h>
 -#include <asm/arch-rockchip/misc.h>
+ #include "../common/common.h"
  
- #define GRF_IO_VSEL_BT565_SHIFT 0
- #define PMUGRF_CON0_VSEL_SHIFT 8
-@@ -31,26 +30,11 @@ static void setup_iodomain(void)
- 	rk_setreg(&pmugrf->soc_con0, 1 << PMUGRF_CON0_VSEL_SHIFT);
+ static void setup_iodomain(void)
+@@ -27,25 +26,8 @@ static void setup_iodomain(void)
+ 	rk_setreg(&grf->io_vsel, 1 << GRF_IO_VSEL_GPIO4CD_SHIFT);
  }
  
 -int misc_init_r(void)
@@ -113,8 +113,6 @@ index d79084614f1..d0a694ead1d 100644
 -	u8 cpuid[cpuid_length];
 -	int ret;
 -
- 	setup_iodomain();
- 
 -	ret = rockchip_cpuid_from_efuse(cpuid_offset, cpuid_length, cpuid);
 -	if (ret)
 -		return ret;
@@ -124,12 +122,12 @@ index d79084614f1..d0a694ead1d 100644
 -		return ret;
 -
 -	ret = rockchip_setup_macaddr();
+-	if (ret)
+-		return ret;
 -
--	return ret;
-+	return 0;
- }
+ 	setup_iodomain();
+ 	setup_boottargets();
  
- #endif
 
 -- 
 2.43.0
