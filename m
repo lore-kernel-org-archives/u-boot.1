@@ -4,38 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 598CCC48297
-	for <u-boot@archiver.kernel.org>; Fri,  9 Feb 2024 09:53:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35719C4828F
+	for <u-boot@archiver.kernel.org>; Fri,  9 Feb 2024 09:53:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9337787E99;
-	Fri,  9 Feb 2024 10:50:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1CCF587E93;
+	Fri,  9 Feb 2024 10:50:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 42E6787E8A; Fri,  9 Feb 2024 10:50:41 +0100 (CET)
-Received: from smtp-190a.mail.infomaniak.ch (smtp-190a.mail.infomaniak.ch
- [IPv6:2001:1600:4:17::190a])
+ id 0E7E287E99; Fri,  9 Feb 2024 10:50:44 +0100 (CET)
+Received: from smtp-8fa9.mail.infomaniak.ch (smtp-8fa9.mail.infomaniak.ch
+ [83.166.143.169])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 99FD187E77
- for <u-boot@lists.denx.de>; Fri,  9 Feb 2024 10:50:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DAB1387E66
+ for <u-boot@lists.denx.de>; Fri,  9 Feb 2024 10:50:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-3-0001.mail.infomaniak.ch (unknown [10.4.36.108])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4TWTcW2LFCzMpx8w;
- Fri,  9 Feb 2024 10:50:35 +0100 (CET)
+Received: from smtp-3-0001.mail.infomaniak.ch (smtp-3-0001.mail.infomaniak.ch
+ [10.4.36.108])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4TWTcX4ry9zcwZ;
+ Fri,  9 Feb 2024 10:50:36 +0100 (CET)
 Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4TWTcV1Q4wzMpnPh; Fri,  9 Feb 2024 10:50:34 +0100 (CET)
+ id 4TWTcW2WF1zMpnPk; Fri,  9 Feb 2024 10:50:35 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Fri, 09 Feb 2024 10:50:13 +0100
-Subject: [PATCH v2 17/20] rockchip: puma-rk3399: MAINTAINERS: use glob for
- dtses
+Date: Fri, 09 Feb 2024 10:50:14 +0100
+Subject: [PATCH v2 18/20] rockchip: rk3399-puma: migrate README to
+ doc/board in rST format
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240209-jaguar-v2-17-6c9ffe09b924@theobroma-systems.com>
+Message-Id: <20240209-jaguar-v2-18-6c9ffe09b924@theobroma-systems.com>
 References: <20240209-jaguar-v2-0-6c9ffe09b924@theobroma-systems.com>
 In-Reply-To: <20240209-jaguar-v2-0-6c9ffe09b924@theobroma-systems.com>
 To: Simon Glass <sjg@chromium.org>, 
@@ -77,28 +78,267 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 
-There are multiple Device Trees in U-Boot git repo for Puma, so let's
-make the MAINTAINERS entry match them all.
+This migrates the plaintext README in
+board/theobroma-systems/puma_rk3399 to doc/board/theobroma-systems and
+while doing so, update the instructions and rewrite it in rST.
 
 Cc: Quentin Schulz <foss+uboot@0leil.net>
 Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 ---
- board/theobroma-systems/puma_rk3399/MAINTAINERS | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ board/theobroma-systems/puma_rk3399/MAINTAINERS |   1 +
+ board/theobroma-systems/puma_rk3399/README      |  90 +----------------
+ doc/board/theobroma-systems/index.rst           |   1 +
+ doc/board/theobroma-systems/puma_rk3399.rst     | 126 ++++++++++++++++++++++++
+ 4 files changed, 129 insertions(+), 89 deletions(-)
 
 diff --git a/board/theobroma-systems/puma_rk3399/MAINTAINERS b/board/theobroma-systems/puma_rk3399/MAINTAINERS
-index 93f570fc4f9..23701b3f0ed 100644
+index 23701b3f0ed..7e84a5be262 100644
 --- a/board/theobroma-systems/puma_rk3399/MAINTAINERS
 +++ b/board/theobroma-systems/puma_rk3399/MAINTAINERS
-@@ -5,7 +5,7 @@ S:	Maintained
+@@ -4,6 +4,7 @@ M:	Klaus Goger <klaus.goger@theobroma-systems.com>
+ S:	Maintained
  F:	board/theobroma-systems/puma_rk3399
  F:	board/theobroma-systems/common
++F:	doc/board/theobroma-systems
  F:	include/configs/puma_rk3399.h
--F:	arch/arm/dts/rk3399-puma.dts
-+F:	arch/arm/dts/rk3399-puma*
+ F:	arch/arm/dts/rk3399-puma*
  F:	configs/puma-rk3399_defconfig
- W:	https://www.theobroma-systems.com/rk3399-q7/tech-specs
- T:	git git://git.theobroma-systems.com/puma-u-boot.git
+diff --git a/board/theobroma-systems/puma_rk3399/README b/board/theobroma-systems/puma_rk3399/README
+index 649aa3c543d..39c9d618866 100644
+--- a/board/theobroma-systems/puma_rk3399/README
++++ b/board/theobroma-systems/puma_rk3399/README
+@@ -1,89 +1 @@
+-Introduction
+-============
+-
+-The RK3399-Q7 (Puma) is a system-on-module featuring the Rockchip
+-RK3399 in a Qseven-compatible form-factor.
+-
+-RK3399-Q7 features:
+-	* CPU: ARMv8 64bit Big-Little architecture,
+-		* Big: dual-core Cortex-A72
+-		* Little: quad-core Cortex-A53
+-		* IRAM: 200KB
+-	* DRAM: 4GB-128MB dual-channel
+-	* eMMC: onboard eMMC
+-	* SD/MMC
+-	* GbE (onboard Micrel KSZ9031) Gigabit ethernet PHY
+-	* USB:
+-		* USB3.0 dual role port
+-		* 2x USB3.0 host, 1x USB2.0 host via onboard USB3.0 hub
+-	* Display: HDMI/eDP/MIPI
+-	* Camera: 2x CSI (one on the edge connector, one on the Q7 specified CSI ZIF)
+-	* NOR Flash: onboard SPI NOR
+-	* Companion Controller: onboard additional Cortex-M0 microcontroller
+-		* RTC
+-		* fan controller
+-		* CAN
+-
+-Here is the step-by-step to boot to U-Boot on rk3399.
+-
+-Get the Source and build ATF binary
+-===================================
+-
+-  > git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git
+-
+-Compile the ATF
+-===============
+-
+-  > cd trusted-firmware-a
+-  > make CROSS_COMPILE=aarch64-linux-gnu- PLAT=rk3399 bl31
+-  > cp build/rk3399/release/bl31/bl31.elf ../u-boot/bl31.elf
+-
+-Compile the U-Boot
+-==================
+-
+-  > cd ../u-boot
+-  > make CROSS_COMPILE=aarch64-linux-gnu- puma-rk3399_defconfig all
+-
+-Flash the image
+-===============
+-
+-Copy u-boot-rockchip.bin to offset 32k for SD/eMMC.
+-Copy u-boot-rockchip-spi.bin to offset 0 for NOR-flash.
+-
+-SD-Card
+--------
+-
+-  > dd if=u-boot-rockchip.bin of=/dev/sdb seek=64
+-
+-eMMC
+-----
+-
+-rkdeveloptool allows to flash the on-board eMMC via the USB OTG interface with
+-help of the Rockchip loader binary.
+-
+-  > git clone https://github.com/rockchip-linux/rkdeveloptool
+-  > cd rkdeveloptool
+-  > autoreconf -i && ./configure && make
+-  > git clone https://github.com/rockchip-linux/rkbin.git
+-  > cd rkbin
+-  > ./tools/boot_merger RKBOOT/RK3399MINIALL.ini
+-  > cd ..
+-  > ./rkdeveloptool db rkbin/rk3399_loader_v1.25.126.bin
+-  > ./rkdeveloptool wl 64 ../u-boot-rockchip.bin
+-
+-NOR-Flash
+----------
+-
+-rkdeveloptool allows to flash the on-board SPI via the USB OTG interface with
+-help of the Rockchip loader binary.
+-
+-  > git clone https://github.com/rockchip-linux/rkdeveloptool
+-  > cd rkdeveloptool
+-  > autoreconf -i && ./configure && make
+-  > git clone https://github.com/rockchip-linux/rkbin.git
+-  > cd rkbin
+-  > ./tools/boot_merger RKBOOT/RK3399MINIALL_SPINOR.ini
+-  > cd ..
+-  > ./rkdeveloptool db rkbin/rk3399_loader_spinor_v1.25.114.bin
+-  > ./rkdeveloptool ef
+-  > ./rkdeveloptool wl 0 ../u-boot-rockchip-spi.bin
++See doc/board/theobroma-systems/puma_rk3399.rst.
+diff --git a/doc/board/theobroma-systems/index.rst b/doc/board/theobroma-systems/index.rst
+index 945f7a2f976..0720128ad52 100644
+--- a/doc/board/theobroma-systems/index.rst
++++ b/doc/board/theobroma-systems/index.rst
+@@ -7,3 +7,4 @@ Theobroma Systems
+    :maxdepth: 2
+ 
+    jaguar_rk3588
++   puma_rk3399
+diff --git a/doc/board/theobroma-systems/puma_rk3399.rst b/doc/board/theobroma-systems/puma_rk3399.rst
+new file mode 100644
+index 00000000000..5bc6385e451
+--- /dev/null
++++ b/doc/board/theobroma-systems/puma_rk3399.rst
+@@ -0,0 +1,126 @@
++.. SPDX-License-Identifier: GPL-2.0+
++
++RK3399-Q7 Puma
++==============
++
++The RK3399-Q7 (Puma) is a system-on-module featuring the Rockchip
++RK3399 in a Qseven-compatible form-factor.
++
++RK3399-Q7 features:
++
++ * CPU: ARMv8 64bit Big-Little architecture,
++
++   * Big: dual-core Cortex-A72
++   * Little: quad-core Cortex-A53
++   * IRAM: 200KB
++   * DRAM: 4GB-128MB dual-channel
++
++ * eMMC: onboard eMMC
++ * SD/MMC
++ * GbE (onboard Micrel KSZ9031) Gigabit ethernet PHY
++ * USB:
++
++   * USB3.0 dual role port
++   * 2x USB3.0 host, 1x USB2.0 host via onboard USB3.0 hub
++
++ * Display: HDMI/eDP/MIPI
++ * Camera: 2x CSI (one on the edge connector, one on the Q7 specified CSI ZIF)
++ * NOR Flash: onboard SPI NOR
++ * Companion Controller: onboard additional Cortex-M0 microcontroller
++   * RTC
++   * fan controller
++   * CAN
++
++Here is the step-by-step to boot to U-Boot on RK3399-Q7 from Theobroma Systems.
++
++Get the Source and build ATF binary
++-----------------------------------
++
++.. prompt:: bash
++
++   git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git
++   cd trusted-firmware-a
++   make CROSS_COMPILE=aarch64-linux-gnu- PLAT=rk3399 bl31
++   export BL31=$PWD/build/rk3399/release/bl31/bl31.elf
++
++Compile the U-Boot
++------------------
++
++.. prompt:: bash
++
++   cd ../u-boot
++   make CROSS_COMPILE=aarch64-linux-gnu- puma-rk3399_defconfig all
++
++This will build ``u-boot-rockchip.bin`` which can be written to an MMC device
++(eMMC or SD card), and ``u-boot-rockchip-spi.bin`` which can be written to the
++SPI-NOR flash.
++
++Flash the image
++---------------
++
++Copy ``u-boot-rockchip.bin`` to offset 32k for SD/eMMC.
++Copy ``u-boot-rockchip-spi.bin`` to offset 0 for NOR-flash.
++
++SD-Card
++~~~~~~~
++
++.. prompt:: bash
++
++   dd if=u-boot-rockchip.bin of=/dev/sdX seek=64
++
++.. note::
++
++   Replace ``/dev/sdX`` to match your SD card kernel device.
++
++eMMC
++~~~~
++
++``rkdeveloptool`` allows to flash the on-board eMMC via the USB OTG interface
++with help of the Rockchip loader binary.
++
++To enter the USB flashing mode on Haikou baseboard, remove any SD card, insert a
++micro-USB cable in the ``Q7 USB P1`` connector (P8), move ``SW5`` switch into
++``BIOS Disable`` mode, power cycle or reset the board and move ``SW5`` switch
++back to ``Normal Boot`` mode. A new USB device should have appeared on your PC
++(check with ``lsusb -d 2207:330c``).
++
++To flash U-Boot on the eMMC with ``rkdeveloptool``:
++
++.. prompt:: bash
++
++   git clone https://github.com/rockchip-linux/rkdeveloptool
++   cd rkdeveloptool
++   autoreconf -i && CPPFLAGS=-Wno-format-truncation ./configure && make
++   git clone https://github.com/rockchip-linux/rkbin.git
++   cd rkbin
++   ./tools/boot_merger RKBOOT/RK3399MINIALL.ini
++   cd ..
++   ./rkdeveloptool db rkbin/rk3399_loader_v1.30.130.bin
++   ./rkdeveloptool wl 64 ../u-boot-rockchip.bin
++
++NOR-Flash
++~~~~~~~~~
++
++``rkdeveloptool`` allows to flash the on-board SPI via the USB OTG interface with
++help of the Rockchip loader binary.
++
++To enter the USB flashing mode on Haikou baseboard, remove any SD card, insert a
++micro-USB cable in the ``Q7 USB P1`` connector (P8), move ``SW5`` switch into
++``BIOS Disable`` mode, power cycle or reset the board and move ``SW5`` switch
++back to ``Normal Boot`` mode. A new USB device should have appeared on your PC
++(check with ``lsusb -d 2207:330c``).
++
++To flash U-Boot on the SPI with ``rkdeveloptool``:
++
++.. prompt:: bash
++
++   git clone https://github.com/rockchip-linux/rkdeveloptool
++   cd rkdeveloptool
++   autoreconf -i && CPPFLAGS=-Wno-format-truncation ./configure && make
++   git clone https://github.com/rockchip-linux/rkbin.git
++   cd rkbin
++   ./tools/boot_merger RKBOOT/RK3399MINIALL_SPINOR.ini
++   cd ..
++   ./rkdeveloptool db rkbin/rk3399_loader_spinor_v1.30.114.bin
++   ./rkdeveloptool ef
++   ./rkdeveloptool wl 0 ../u-boot-rockchip-spi.bin
 
 -- 
 2.43.0
