@@ -4,51 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F388C48297
-	for <u-boot@archiver.kernel.org>; Fri,  9 Feb 2024 13:18:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45938C48297
+	for <u-boot@archiver.kernel.org>; Fri,  9 Feb 2024 13:40:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7CD1587E66;
-	Fri,  9 Feb 2024 14:18:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
+	by phobos.denx.de (Postfix) with ESMTP id 85A4B87E74;
+	Fri,  9 Feb 2024 14:40:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NIrxfes+";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CCEDE87E6A; Fri,  9 Feb 2024 14:18:27 +0100 (CET)
-Received: from smtp-8fab.mail.infomaniak.ch (smtp-8fab.mail.infomaniak.ch
- [IPv6:2001:1600:7:10::8fab])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CEEFA87E71; Fri,  9 Feb 2024 14:40:38 +0100 (CET)
+Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
+ [IPv6:2607:f8b0:4864:20::730])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D775887E63
- for <u-boot@lists.denx.de>; Fri,  9 Feb 2024 14:18:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8893B87E6B
+ for <u-boot@lists.denx.de>; Fri,  9 Feb 2024 14:40:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=0leil.net
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
- [10.7.10.108])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4TWZDK36bqzDyF;
- Fri,  9 Feb 2024 14:18:25 +0100 (CET)
-Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4TWZDJ1SgLzr8d; Fri,  9 Feb 2024 14:18:24 +0100 (CET)
-From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Fri, 09 Feb 2024 14:18:09 +0100
-Subject: [PATCH] rockchip: ringneck-px30: put STM32_RST line in input mode
- instead of output
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x730.google.com with SMTP id
+ af79cd13be357-783e22a16d4so160431185a.0
+ for <u-boot@lists.denx.de>; Fri, 09 Feb 2024 05:40:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1707486030; x=1708090830; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=2eNqxhtC1DbIj4IbazI4N7wdXSX/apgG1N9WvKGNRgg=;
+ b=NIrxfes+S4Na60ZZLlEsqspqXDYoYcsnJMkiiDEy7ZK4byMGzXLPj41oCxXubvk7Xp
+ kBvysodLtNuddmHrqORebVdmYP+m0AT+v0ccWs3AbNO4nDN3ef7yhlxrcNigc1LSPnEa
+ xdAp6IJnmGCkkq0m4Vz07mX/pk4xNp2l9qZOA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1707486030; x=1708090830;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=2eNqxhtC1DbIj4IbazI4N7wdXSX/apgG1N9WvKGNRgg=;
+ b=WINI0lsY5hhw21n6o39IM/VwBgXqYEF1MpY3jJ41Wxv/LkEaFHprTG58k8kEzS/rwl
+ oJlD/WanTLvxpGJdgKdum3YDTxxI2nvlkaAEJIA/Mvttr6DCYpZEDoZ2aS+uTWHoyS1m
+ TEhQCtwr0ybtIs8WveYfECpoHKcc8UVAmcx631T8erfhYnIhMWPtWui2M5ldWUQh3dua
+ RD3bdaooBmKV3okb920VwB3dK6s1QmxkLEtKB42zYfA1wwb3dvfB53u9xHt06BOptXer
+ JvnRYolG7wWFVChB5PPyPVqdAXqa1Kmn02TR0iTFtQBQqWf7FMGnJhirdSqJ/FDL13yy
+ l9JQ==
+X-Gm-Message-State: AOJu0Yyvj1Ezb47N0hIGDLnWPUGTVL7BYVQcLYbX/FyltsrK6nJHpRBZ
+ tOIi+FaU5PiwXIO67Ze8pSjWyAcYLuCihK/xu3/bnUENQC7RzzAPNp7O+bvRAu8=
+X-Google-Smtp-Source: AGHT+IGvtDOc31Plygw1YYRQGDuso5foYETPMF9Z3Mh174rpBB5fwQlQ/OeNGwVMfNmLL71cau8KVQ==
+X-Received: by 2002:a05:620a:1203:b0:785:6601:ea1c with SMTP id
+ u3-20020a05620a120300b007856601ea1cmr1365741qkj.33.1707486030222; 
+ Fri, 09 Feb 2024 05:40:30 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
+ [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
+ c10-20020a37e10a000000b00783df788230sm715758qkm.126.2024.02.09.05.40.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 09 Feb 2024 05:40:29 -0800 (PST)
+Date: Fri, 9 Feb 2024 08:40:27 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Selvakumar Velandi <selvakumar.velandi@olakrutrim.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH] Added FDT PAD memory size while reserving memory for FDT
+ to avoid some memory corruption issue
+Message-ID: <20240209134027.GN1152441@bill-the-cat>
+References: <CAJ-dvqwMWvWw0=34ZLkG37MwTRG1m_tabSi0zLkoHNY8CjR_PQ@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240209-ringneck-stm32-rst-input-v1-1-fa9d23ac8ebe@theobroma-systems.com>
-X-B4-Tracking: v=1; b=H4sIABAmxmUC/x3MwQqDMAyA4VeRnA3Uzjn0VWSHUlMNwyhJHQPx3
- S07fof/P8FImQyG6gSlLxtvUtDUFcQlyEzIUzF451vnXY/KMgvFD1peHx7VMrLsR8YYmjil0L1
- SekLJd6XEv/96fF/XDae4tL5qAAAA
-To: Klaus Goger <klaus.goger@theobroma-systems.com>, 
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>, 
- Heiko Stuebner <heiko@sntech.de>
-Cc: u-boot@lists.denx.de, 
- Quentin Schulz <quentin.schulz@theobroma-systems.com>, 
- Quentin Schulz <foss+uboot@0leil.net>
-X-Mailer: b4 0.12.4
-X-Infomaniak-Routing: alpha
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="2wsJ30fwnhDYwl9K"
+Content-Disposition: inline
+In-Reply-To: <CAJ-dvqwMWvWw0=34ZLkG37MwTRG1m_tabSi0zLkoHNY8CjR_PQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,54 +91,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 
-The STM32_RST line is routed to the ATtiny microcontroller
-PA0/RESET/UPDI pin. By driving the PX30 SoC pin as GPIO output high, we
-prevent external UPDI to be used for flashing without first putting this
-pin as GPIO input, an extra step we could avoid in userspace.
+--2wsJ30fwnhDYwl9K
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-There's an external hardware pull-up strong enough to keep the STM32_RST
-state high on ATtiny side but weak enough it can be overridden by
-external UPDI. This also means it is safe to use for the STM32 variant,
-where STM32_RST line will be in the same state as if output high was
-used.
+On Fri, Feb 09, 2024 at 01:22:08PM +0530, Selvakumar Velandi wrote:
+> Hi,
+>=20
+> Issue:
+> Linux kernel getting crash after loading kernel in VM system using RISCV
+> QEMU.
+>=20
+> RootCause:
+> Memory corruption in uboot FDT memory while launching a VM system in RISCV
+> QEMU.
+>=20
+> Fix:
+> In the board_f.c file the FDT memory region is reserved without FDT paddi=
+ng
+> bytes. uboot will add some params like bootargs while launching linux.
+> While relocate the FDT, if its decided as run in the Fixed memory location
+> i.e fdy_high is set as -1, then the padding bytes not added while
+> relocating the FDT,
 
-The Q7 standard specifies that MFG_NC1 and MFG_NC2 (used for UPDI for
-Ringneck) pins should neither be driven by the carrierboard, nor have
-pull-up or pull-down resistors. This means this commit is safe to use
-regardless of the carrierboard this module would be connected to
-(provided it follows the Q7 standard).
+Do not disable fdt relocation. The RISC-V platforms which do this today
+are broken.
 
-Fixes: 6acdd63e8771 ("rockchip: ringneck-px30: always reset STM32 companion controller on boot")
-Cc: Quentin Schulz <foss+uboot@0leil.net>
-Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
----
- board/theobroma-systems/ringneck_px30/ringneck-px30.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+--=20
+Tom
 
-diff --git a/board/theobroma-systems/ringneck_px30/ringneck-px30.c b/board/theobroma-systems/ringneck_px30/ringneck-px30.c
-index ff7e414303d..2ab1e7a12fa 100644
---- a/board/theobroma-systems/ringneck_px30/ringneck-px30.c
-+++ b/board/theobroma-systems/ringneck_px30/ringneck-px30.c
-@@ -76,9 +76,9 @@ void spl_board_init(void)
- 
- 	mdelay(1);
- 
--	ret = gpio_direction_output(STM32_RST, 1);
-+	ret = gpio_direction_input(STM32_RST);
- 	if (ret) {
--		debug("Failed to configure STM32_RST as output high\n");
-+		debug("Failed to configure STM32_RST as input\n");
- 		return;
- 	}
- }
+--2wsJ30fwnhDYwl9K
+Content-Type: application/pgp-signature; name="signature.asc"
 
----
-base-commit: a4650bf65e4b7d3ef04c90ba8031374428e4a682
-change-id: 20240209-ringneck-stm32-rst-input-ca1cdfa67ff5
+-----BEGIN PGP SIGNATURE-----
 
-Best regards,
--- 
-Quentin Schulz <quentin.schulz@theobroma-systems.com>
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXGK0gACgkQFHw5/5Y0
+tyy9/gv/QdOM+UH3pQpFduJUZQnCmQ423Ng3KYms2RwUMjdntDOMrdQoAggP/dUP
+YeuHeiupixs4nmqotdzEqmFLUS/4jxrphtRnt3Z4WGb068DqJjJ56CpTcLOFRT/2
+TwbesHM66pd1PGvAnq0/isbyRF3Sa1ooN0uDbqf2z5V/nkPVJybIDtr0uGLXhPMQ
+Z+jjDPX+8d6MOeUdg3KPK8VLSx1Db585xGGRBL1uIjaq1LFtAEjlnau3Gf3QTG+6
+olAivS+npK7aWoR5iR+yFw2ZMQ4JoBo5S4xx7w95B7BF1VZg3JPGnj0zLeSNP8Mj
+9KxjWNFE7cuNF02P8rR+IqBv2I6BN6pck7kkQVimqVk4BgKpxguiS2NgilOsxofr
+3nOmJo3M99zvwElc3tebutbGdOjgC4cAvn5hmpW+Z80ENF4R7Omf+K1lEkJpA6Tk
+oXYQ543m1PuMueGOssuhrExgDIjvwb9kLiSJb9mgLFRaFHEgL6W+LazbxouT5dbc
+kjnrVSmF
+=WNcd
+-----END PGP SIGNATURE-----
 
+--2wsJ30fwnhDYwl9K--
