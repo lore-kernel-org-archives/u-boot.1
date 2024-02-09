@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A75C3C48297
-	for <u-boot@archiver.kernel.org>; Fri,  9 Feb 2024 18:58:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F251C4828F
+	for <u-boot@archiver.kernel.org>; Fri,  9 Feb 2024 19:20:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8A2C87E46;
-	Fri,  9 Feb 2024 19:58:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6558487E71;
+	Fri,  9 Feb 2024 20:20:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=foundries.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XEmjwV4O";
+	dkim=pass (2048-bit key; secure) header.d=foundries.io header.i=@foundries.io header.b="PtTMPyP1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D2CA987E83; Fri,  9 Feb 2024 19:58:30 +0100 (CET)
-Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
- [IPv6:2607:f8b0:4864:20::f36])
+ id D3D8C87E6E; Fri,  9 Feb 2024 20:20:56 +0100 (CET)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B723087B6B
- for <u-boot@lists.denx.de>; Fri,  9 Feb 2024 19:58:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0C9C987E71
+ for <u-boot@lists.denx.de>; Fri,  9 Feb 2024 20:20:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=foundries.io
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf36.google.com with SMTP id
- 6a1803df08f44-68cc9061c78so6751766d6.3
- for <u-boot@lists.denx.de>; Fri, 09 Feb 2024 10:58:28 -0800 (PST)
+ spf=pass smtp.mailfrom=igor.opaniuk@foundries.io
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-560c696ccffso4121165a12.1
+ for <u-boot@lists.denx.de>; Fri, 09 Feb 2024 11:20:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1707505107; x=1708109907; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=f6mhOk5DK7uPFT3UjuMT3XajNMmeyW5vpJgi0pXHDLE=;
- b=XEmjwV4O7xMOjYShmJq9dEL6ifZapyUkUKmSEw1o/obOFIdc4kpcY7jao3GWY2LI+n
- vsuyX5Oe/mMIBFljdb7zKWYz8I/sayLoMK9qI44xL7/JgXNuX1Y3Lqi0sDP5vZjFvhu6
- GTcKeBtC79QGrprK8xhaBBLZzm3DZrNDs8NgA=
+ d=foundries.io; s=google; t=1707506453; x=1708111253; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=hnf4AmQgS5LCXT7rR6h208e/kbzvAgS73BriM3eQS6s=;
+ b=PtTMPyP1DFijfd382eg5Uu7GZv1JMML1bUYNl4A93c3Cf5CxIx8R5aTsJkdv9SYGnp
+ Fk1LVAvI4rsmZlExH1bSDvatlxXionXEdUUuCXZZYXI7+2zAsizpiJXQA3d4CQK0lG8d
+ 9zZxuXj0XCpI0iAbQtAKwbWxsIhDoKISmk6VgFt5IhX3LHKvl55YCT6UuUgZpLZlWpzI
+ IrMYAGufSRUoVqcMDxrTQVsqhwCdiHLuCUMcaS9vs0ojxJ4xA2b8F5r2RKAAGx6DfVAI
+ nv7CE6KL6xeeqNcwdNg4/r5ZToTm3wudBmilwS51qi0uiv5vuoY8wGb2g+sNe0eXo4uQ
+ pq3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707505107; x=1708109907;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=f6mhOk5DK7uPFT3UjuMT3XajNMmeyW5vpJgi0pXHDLE=;
- b=Br3oUsxM46Au/B8J858oZ6z2yOEOUp7IhPsU9cfGspFQNO7mVBOlvUL2hcDutTKKyY
- 6E/iGv3dfyehngrMoLbwqrKqh7cke7LCQJaqnK5mDmAfj25qIoOfNWQU1ADo24CaqIZE
- vr33aIdUgxmkFF/vSkvHl7+plAfuy41x/3xe5jIvQpzEjqLLdkHIkoctPyv1Wn2b02DM
- 3JXM07Mp1hc+gaZfk7ggkvgFRlnDEfTK3Fh4gHxOeKyV5JrQT+vnN979OYmz0U21XGbm
- Kq2tiQMq65XO5KO8bM2SjFIqlvglhwCo/EVIHgKnTHtjyfX4OcmZ61qM2bHrmEaUAc7d
- GxXA==
-X-Gm-Message-State: AOJu0Yzyd5z8YBGRUphRZdh1eVaoUlW0hW6m+dJWS3V/sQkzgSHmHH1T
- z0hh3NohR2XwhDu0yggUF8RGNhjf9bl6BkZ/itHTkIkZOlFGB0kwuI57SzY+T/Q=
-X-Google-Smtp-Source: AGHT+IHi0R+URkSHCwG8yYd1pQY9wOhJJneqeP4CLVNKcJfESP8EZN6CYkCVvaICaJ/W1NIsOQOE0Q==
-X-Received: by 2002:a0c:e393:0:b0:68c:6649:51a6 with SMTP id
- a19-20020a0ce393000000b0068c664951a6mr2178752qvl.51.1707505107503; 
- Fri, 09 Feb 2024 10:58:27 -0800 (PST)
+ d=1e100.net; s=20230601; t=1707506453; x=1708111253;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=hnf4AmQgS5LCXT7rR6h208e/kbzvAgS73BriM3eQS6s=;
+ b=s7Tmv8UNWP1dV53BBZbWdi4X/uJiAM1zmNsz+skHOGySXjwEw+qHfimb/SfxKmym2v
+ +/bvUD4vQ2wDSBoKGeZlOfWiBtkudydos1q5U3blA5tF9x8jB1LAG/r5HeXXFr9cjP/f
+ gi1RrW4Lua340UWzCBRbAzkTR6A7dfrWdYhUcH3nkE6p3958bvGUlwVgbzWQSRZx3hBP
+ aJXN1fS88vSjXvR0Ul/5sm/diLNf7jYnmyyqK0jWzHPQzr5wkaZVg1lK9K4xefYzxzmG
+ hGlsqEaze1/lIRBNvcXlrnkwVK2NZ0ec+A6gd2V++htuj2P2Iau0BxXvPOCHaspXWmAU
+ dCLw==
+X-Gm-Message-State: AOJu0YyPpxTovoC9wlfck2Ykn6FSfwGWn2ExGeoEBDW6P4f1nUYlgRY+
+ Cd8AbEeBgVKCI8UiMV55Buh/tHiKwmTq0inUVJe9pHYTxFV/M+lOdQsz5iD7Fx5/Ud9lZ7XKYnX
+ AtpI=
+X-Google-Smtp-Source: AGHT+IHMjlv+Io2ajcQA5tKYH+2a00a0Ld781ImNUZiiKZrzA6gKgI0jqZQlqG64zlJwhhve4yJNUA==
+X-Received: by 2002:a17:906:4a17:b0:a38:187c:2a9f with SMTP id
+ w23-20020a1709064a1700b00a38187c2a9fmr59771eju.36.1707506453328; 
+ Fri, 09 Feb 2024 11:20:53 -0800 (PST)
 X-Forwarded-Encrypted: i=1;
- AJvYcCWk/9SYMw4BQDzpjc/ydAW3BDTZqHWHJNQV0qDw8ev57Ab9upIScCMFa1xJDN2kWL34Ah2qt6WWJGkY+FpZtI0zr0GUoviqFrJH6X3zhRymYYQBXhBUt+xGVkqLpxDIWdKVwBucL+1NO8Z/vhSS+1e2bdDjsDrkZCueMA==
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
- [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- op33-20020a05621445a100b006819636ba87sm1078199qvb.7.2024.02.09.10.58.26
+ AJvYcCW9cqxn8Oj4zZNudVp3GYobW9cAhFblW2yTL5h+t7Dvu7djAGNp6nKwCO2scZrj96jZeHPabrPzgTOtb/KpKMvhIx6tAWCO1eHtAUIlwF5bUJnXLpawtMsoSpPjU4ij+r58Gia0o5RKOCdYZl/Oo5Dc6ZiJW431QWXeLR/P4rtCYDgZ+bbYleFQc7yRi272uJ6N1gSEaTnLyjIAv5YB7RWxi/7rTcGK/7GD7/Ju+0Ae32mO7stwV7Oa2xmL079EwAzPCIv08nI1ihy8PJ8c1/54CI1URljkLblzpwncY8lhZfUlfah7rQXZsiqEUFF6tKeWsg+pO33p9lboL0271lp9FErFIt8=
+Received: from localhost ([185.186.156.113]) by smtp.gmail.com with ESMTPSA id
+ k6-20020a1709061c0600b00a387d9d6dc5sm1050214ejg.174.2024.02.09.11.20.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 Feb 2024 10:58:27 -0800 (PST)
-Date: Fri, 9 Feb 2024 13:58:24 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Simon Glass <sjg@chromium.org>,
+ Fri, 09 Feb 2024 11:20:52 -0800 (PST)
+From: Igor Opaniuk <igor.opaniuk@foundries.io>
+To: u-boot@lists.denx.de
+Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Igor Opaniuk <igor.opaniuk@foundries.io>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- u-boot@lists.denx.de, Mark Kettenis <mark.kettenis@xs4all.nl>
-Subject: Re: [PATCH v2 2/2] smbios: fill wake-up type
-Message-ID: <20240209185824.GP1152441@bill-the-cat>
-References: <20240209155115.102957-1-heinrich.schuchardt@canonical.com>
- <20240209155115.102957-3-heinrich.schuchardt@canonical.com>
- <20240209181251.GO1152441@bill-the-cat>
- <97001fd9-1fbb-4f42-85fa-491660239ce5@canonical.com>
+ Ivan Khoronzhuk <ivan.khoronzhuk@gmail.com>,
+ Jens Wiklander <jens.wiklander@linaro.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Stefan Roese <sr@denx.de>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 0/7] AVB: cosmetic adjustments/improvements
+Date: Fri,  9 Feb 2024 20:20:38 +0100
+Message-Id: <20240209192045.3961832-1-igor.opaniuk@foundries.io>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="9L/M0ZItlW2iZ1A3"
-Content-Disposition: inline
-In-Reply-To: <97001fd9-1fbb-4f42-85fa-491660239ce5@canonical.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,65 +98,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This is the first patch series for incoming major
+improvements for AVB implementation, that include:
+- Simplify and add more context for debug/error prints where it's needed.
+- Move SPDX license identifiers to the first line, so it conforms
+  to license placement rule.
+- Use mmc_switch_part() only for eMMC.
+- Rework do_avb_verify_part, take into account device lock state for setting correct
+  androidboot.verifiedbootstate.
+- Adjust AVB documentation, sync usage info with the one cmd/avb.c.
 
---9L/M0ZItlW2iZ1A3
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Igor Opaniuk (7):
+  common: avb_verify: don't call mmc_switch_part for SD
+  avb: move SPDX license identifiers to the first line
+  common: avb_verify: rework error/debug prints
+  cmd: avb: rework prints
+  common: avb_verify: add str_avb_io_error/str_avb_slot_error
+  cmd: avb: rework do_avb_verify_part
+  doc: android: avb: sync usage details
 
-On Fri, Feb 09, 2024 at 07:37:28PM +0100, Heinrich Schuchardt wrote:
-> On 2/9/24 19:12, Tom Rini wrote:
-> > On Fri, Feb 09, 2024 at 04:51:15PM +0100, Heinrich Schuchardt wrote:
-> >=20
-> > > We should not use the reserved value 0x00 for the wake up type but
-> > > use 0x02 (Unknown).
-> > >=20
-> > > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> > [snip]
-> > > @@ -108,6 +108,16 @@ struct __packed smbios_type0 {
-> > >   	char eos[SMBIOS_STRUCT_EOS_BYTES];
-> > >   };
-> > > +#define SMBIOS_WAKEUP_TYPE_RESERVED		0x00
-> > > +#define SMBIOS_WAKEUP_TYPE_OTHER		0x01
-> > > +#define SMBIOS_WAKEUP_TYPE_UNKNOWN		0x02
-> > > +#define SMBIOS_WAKEUP_TYPE_APM_TIME		0x03
-> > > +#define SMBIOS_WAKEUP_TYPE_MODEM_RING		0x04
-> > > +#define SMBIOS_WAKEUP_TYPE_LAN_REMOTE		0x05
-> > > +#define SMBIOS_WAKEUP_TYPE_POWER_SWITCH		0x06
-> > > +#define SMBIOS_WAKEUP_TYPE_PCI_PME		0x07
-> > > +#define SMBIOS_WAKEUP_TYPE_AC_POWER_RESTORED	0x08
-> >=20
-> > Shouldn't we do this as an enum these days?
-> >=20
->=20
-> The field in the SMBIOS is of type u8 and cannot be an enum. Defining an
-> enum would only make a difference if we had a function using it.
->=20
-> Do you want me to resend the patch with an enum?
+ cmd/avb.c                              | 173 +++++++++++++------------
+ common/avb_verify.c                    |  89 ++++++++++---
+ doc/android/avb2.rst                   |  16 ++-
+ include/avb_verify.h                   |   7 +-
+ test/py/tests/test_android/test_avb.py |   3 +-
+ 5 files changed, 178 insertions(+), 110 deletions(-)
 
-Since I think this is going to be the start of adding ore and similar
-values (which to be clear, is good), yes please lets get in the habit of
-generally using enums here. Thanks.
+-- 
+2.34.1
 
---=20
-Tom
-
---9L/M0ZItlW2iZ1A3
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXGdckACgkQFHw5/5Y0
-tyz+NQv/SsRilgr/h+jCuDmfMkVg4eb5MFv+ne9IwpbtqxdDOQPUyhTMuBDFbwQx
-mS0ZGxXaI3uVSHek4zMefvPrPEbYv9xyTig7PRHbZAkW+MMKecpNzjMwKQvAWC1C
-keO4D5MUlvex2KAbeSsq0XM8cqThh6P9sVX7g7DOY3QqRdUgZGFe4e0EWTGTjHcB
-i72T9qQWjtnaTc+NLR/EB//bdHbmHN6qng+a5aXOxtfXEfJYtCnQrbJViJ3LniIT
-XKz36fA2nDsp1vuWu5AkG/U9D4NARlYLV3dHmVNyAk09/w3Q++1IXf2wO+hk18Jy
-71sGvV+Whzt5ctp60kzSuquGtkU3f+14Je7d0ET6O614gxIQ7gPK45msaYGyOUF7
-cKRA5vX6NEXP+9xbLcwGTNgQNjsePUYFdQGgTUdvQSHYrA6agR1PBjIaI//cKRNJ
-i9koX6jSa8b0g6MK1fiXLXqH6sZc4RNLlZISeZbOUzp7d2w18UxCbUT/eYdwMk3i
-tr6/IiRB
-=C6hv
------END PGP SIGNATURE-----
-
---9L/M0ZItlW2iZ1A3--
