@@ -4,91 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BDF8C48297
-	for <u-boot@archiver.kernel.org>; Fri,  9 Feb 2024 16:06:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17485C4828F
+	for <u-boot@archiver.kernel.org>; Fri,  9 Feb 2024 16:17:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F1A287E71;
-	Fri,  9 Feb 2024 17:06:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 5D9F987E7C;
+	Fri,  9 Feb 2024 17:17:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qcLYHLlZ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nl4kk4QK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE41287E70; Fri,  9 Feb 2024 17:06:18 +0100 (CET)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id D9F9887E7D; Fri,  9 Feb 2024 17:17:24 +0100 (CET)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 19AED87E7C
- for <u-boot@lists.denx.de>; Fri,  9 Feb 2024 17:06:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 700CA87E71
+ for <u-boot@lists.denx.de>; Fri,  9 Feb 2024 17:17:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-41047386d18so9670865e9.0
- for <u-boot@lists.denx.de>; Fri, 09 Feb 2024 08:06:15 -0800 (PST)
+ spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-33ad9ec3ec2so101753f8f.1
+ for <u-boot@lists.denx.de>; Fri, 09 Feb 2024 08:17:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1707494774; x=1708099574; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=etStm2571dMq4xrpjyH5JaZC0Z0nez3KgLwIFv/GlXk=;
- b=qcLYHLlZeV2AZKAk7jCkfAUNU+eavdQMGqffBCD03b7BexuNvDeOEvpvy44Bxj3oHS
- cK1d2qYQ0gmyZFZIW4P8ccGCM5zK3pVMvCaiOfZZvvhw8eYNsOtJkjse/d+ZAwoRE7sw
- Fx+o0HJeXW7ZA+Qiqrl6C/EUpi3ZDu52rHF1JvyFaB1BHJMp7lkjRlSKMkD8IkdCbXVV
- zGHZnxxBjLcJzBF2+usrgkyAf/XwDrNCUqUxB+v1W14daGi4CVjMeyHtaKHbU2aQKLn5
- sFl9c4FYsEJyTJcdwsOyyTYuSYvew3n6ZbgTLI1eujLIGtyqaMNHFXlHWl9T8KVcglg+
- MF/g==
+ d=gmail.com; s=20230601; t=1707495442; x=1708100242; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ihomAP7ISJ+yF1YUpNCo15SwRWPNJVNHDw2KzP/Pmoo=;
+ b=nl4kk4QKP2dQt+NsV0TOoTnPLsDERUtZgTRTTMNxtBsj/5x9u7ci38YG1+wjqOVIPB
+ v/hm9OkuierdcKbj+4JAtaDK0uDBdtCsdbfItjcfqsD2EAWzmxB/PE8qX+I21Tjdo7ka
+ rSiVABZDGJBxBa3m6LeOTtyVr2UW8zb+O5d78yMMhBWKhix7b8XJtcJKvHE8jejqL1Av
+ E0izDyMRtA3s+scKJoHC5rtkIjIr/EkB7Ir6/nxCI0OHBsc9tavrnUA8cAh+jJ6TXpL+
+ 6oTn9CIFFGfMRw+EATczoi/NbyFfIl0JIcBLjsqnWxLq2GuMFkzWDXnfqbAOBFLaNRCO
+ BdWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707494774; x=1708099574;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=etStm2571dMq4xrpjyH5JaZC0Z0nez3KgLwIFv/GlXk=;
- b=VZGAqHoMCqdv0UQIz254xCrNAFLWS2mM9vhr7tVKLspMIfazYrG1T7sJBvByOwTiCi
- 5RsNoLvwn01mvY9LktSPTUJYcUv0083tzyovvJ8hqxwLR+lwDbsdOLKgadWeu+c8f3J2
- 468uqqpZkoJV5S6GlK5hKgaEw8JXjiCqn1crlGHfx27TrcbDAs+fgj7Rck5eRTLYD0kj
- 1rCdD5yDm0sU5ZQYcpjgKDz/5lY6qbLs+OrBgnl0ykx0RCxIzBvurUpg0V61JO7aQQuU
- yomtOYRF7XE/XDqY8FtZ9wgWGujkGnXfP3X3O10QV1UgbEOyG2gMqvBxNDkhFbp3Dic9
- Jl6g==
-X-Gm-Message-State: AOJu0YwGgJSipsrSBwnew8sRrRqSgxNZqYkrzXmjFbd7J/kLWZlehm3v
- Sg4LRrPKt9VCrO0XwV1atZgqbuRnAt+r0DGwgeDvyepsE+soR43AfNPHY5ipoCM=
-X-Google-Smtp-Source: AGHT+IGeCindjhe7h9h4rwYNJVgMpzLHz/aWAX43T3g5vcwKxPdPIczUDjXC6D5uYDTJju84fQZImw==
-X-Received: by 2002:a05:600c:3544:b0:40f:d2ff:85b1 with SMTP id
- i4-20020a05600c354400b0040fd2ff85b1mr1493709wmq.25.1707494773041; 
- Fri, 09 Feb 2024 08:06:13 -0800 (PST)
-X-Forwarded-Encrypted: i=1;
- AJvYcCV0/shsWO7oD7gl2tHORXeFVrrULdRNW732260oCptU9R+japbnt3SaL0sUWsfw6BhR5otnOVpVBM1qPXmzvCyOucjdjelumYsQQykTPtxhsl9MoHasw5bLkbsHVr6togHi1NcYBIeg/20BD92irhFRSgRJD5kFK9AyHXoXnFHJ9dXSQ00D6VDJvgiBP8xXL6p/U2Bez9OWg1gv6/dLAJREGn0VZep1MKEjjwOLAzHwhsl9aC53mwiaABorJuBJ6aRs8qWbSZCdw6Huj61m0pQhedamj2r+S1v0Qge848+6d8FNzIAhSWsFk67FIrx4CqCzUh1MVRO8aiSE6tccpO8Y/9VTFL0FZJU5FilbZIEzUomRzqMywnr6h5+yM/1/YrEA
-Received: from [192.168.1.78] (host-92-17-96-232.as13285.net. [92.17.96.232])
- by smtp.gmail.com with ESMTPSA id
- bk27-20020a0560001d9b00b0033b55661f32sm2225858wrb.9.2024.02.09.08.06.11
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 09 Feb 2024 08:06:12 -0800 (PST)
-Message-ID: <2239b1c6-9abe-4479-b79e-88dd191c60e6@linaro.org>
-Date: Fri, 9 Feb 2024 16:06:11 +0000
+ d=1e100.net; s=20230601; t=1707495442; x=1708100242;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ihomAP7ISJ+yF1YUpNCo15SwRWPNJVNHDw2KzP/Pmoo=;
+ b=bxsiLTo8P4rQoml4XNkgosXuge+EzLBrfe8+MUlyMUsTa7PJ/Ji1ouVAKVICItA5Ho
+ eNlVLUFItPZUbQTJZ8YMznWtkE5aWTAE3C5D33GH2nXxcgbRlZ5Xf7gDNhRzi5IPTPHB
+ 8ewW3uq1E72zDPJUnAYg8PVZM5LRewSVqG9XjC/2sdh4eLe8o4a1VopglCSP4vOZ1AAb
+ G5gl3YBGdpYz5HJCCwn3y3rsERWJfAQARBvfhXOH6889yo7GG+mr1S6lb2KS5phU5Idw
+ PFakONFAaUNs6W1p5E0yBKTGERKz8XRKwbpV/qnJuQOIZfiQ/dNljNKcE6IeUMVeSU8z
+ VDBg==
+X-Gm-Message-State: AOJu0YzLFLXWtxVPuxe194VHumKzdao1wg3GqxIGmhmqjQj/RI2xy2AS
+ l35PYJMyl7vmW6fIq7jKYfeOqy4/JY4JaGej6cRbZICbNwdIztmZ+ZEUvaqrenYHxDxFjLemY66
+ Vmdx5dIg1E8nUl9ixsRKLkQZasbw=
+X-Google-Smtp-Source: AGHT+IEp+ole8UcqxSKsG0zZyBfNS2997u4UYPJ5E63gZgEXNLr2HfcFYwnNXHgYDmV5nruvFAPr0JYbfvrtjwmO5kE=
+X-Received: by 2002:a05:6000:16ca:b0:33b:278a:15f5 with SMTP id
+ h10-20020a05600016ca00b0033b278a15f5mr1618762wrf.6.1707495441459; Fri, 09 Feb
+ 2024 08:17:21 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 27/36] dts: msm8916: replace with upstream DTS
-Content-Language: en-US
-To: Sumit Garg <sumit.garg@linaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- Ramon Fried <rfried.dev@gmail.com>, Dzmitry Sankouski
- <dsankouski@gmail.com>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
- Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de
-References: <20240130-b4-qcom-common-target-v3-0-e523cbf9e556@linaro.org>
- <20240130-b4-qcom-common-target-v3-27-e523cbf9e556@linaro.org>
- <CAFA6WYMOndY_UeLAqTAq2oZnBotESfVbRwG7MrweNwu40HtR7g@mail.gmail.com>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <CAFA6WYMOndY_UeLAqTAq2oZnBotESfVbRwG7MrweNwu40HtR7g@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <CAByghJb633bMqVhQ+zFzU-tR_hM88EFFhr7mXhj6nWDUhHhHYw@mail.gmail.com>
+ <87wmre2amu.fsf@baylibre.com>
+In-Reply-To: <87wmre2amu.fsf@baylibre.com>
+From: Igor Opaniuk <igor.opaniuk@gmail.com>
+Date: Fri, 9 Feb 2024 17:17:09 +0100
+Message-ID: <CAByghJbZrwA3SZUkacS-vGBCey8497e7v783FQyAKeLBmGSWnA@mail.gmail.com>
+Subject: Re: [AVB/AB] Overhaul plans
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,109 +88,130 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hello Mattijs,
 
+On Fri, Feb 9, 2024 at 11:30=E2=80=AFAM Mattijs Korpershoek
+<mkorpershoek@baylibre.com> wrote:
+>
+> Hi Igor,
+>
+> On ven., f=C3=A9vr. 09, 2024 at 11:14, Igor Opaniuk <igor.opaniuk@gmail.c=
+om> wrote:
+>
+> > Hi everyone,
+> >
+> > I'm currently planning a big overhaul of the current implementation of
+> > AVB/AB in U-Boot during the 2024 year, which I have barely touched sinc=
+e
+> > 2019. I used to believe that it was stillborn, but looks like it's
+> > being actively used
+> > now by some SoC vendors and Google folks [1][2].
+>
+> This is great news! I am not aware of any development related to the
+> above but I'm looking forward to this.
+>
+> I can't speak for all vendors but I know that TI uses both the AVB and
+> AB implementation on their AM62x Android solution.
+Amlogic also uses it.
 
-On 02/02/2024 08:38, Sumit Garg wrote:
-> On Tue, 30 Jan 2024 at 19:35, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->>
->> Drop the U-Boot specific dragonboard410c.dts in favour of the upstream
->> msm8916-sbc.dts. No additional changes are needed to this DTS for U-Boot
->> support.
->>
->> Taken from kernel tag v6.7
->>
->> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
->> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
->> ---
->>  arch/arm/dts/Makefile                   |    2 +-
->>  arch/arm/dts/apq8016-sbc-u-boot.dtsi    |   11 +
->>  arch/arm/dts/apq8016-sbc.dts            |  729 +++++++++
->>  arch/arm/dts/dragonboard410c-uboot.dtsi |   44 -
->>  arch/arm/dts/dragonboard410c.dts        |  221 ---
->>  arch/arm/dts/msm8916.dtsi               | 2702 +++++++++++++++++++++++++++++++
->>  configs/dragonboard410c_defconfig       |    2 +-
->>  7 files changed, 3444 insertions(+), 267 deletions(-)
->>
->> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
->> index 92a4465f5f41..4c8b29b983a4 100644
->> --- a/arch/arm/dts/Makefile
->> +++ b/arch/arm/dts/Makefile
->> @@ -628,7 +628,7 @@ dtb-$(CONFIG_TARGET_SL28) += fsl-ls1028a-kontron-sl28.dtb \
->>
->>  dtb-$(CONFIG_TARGET_TEN64) += fsl-ls1088a-ten64.dtb
->>
->> -dtb-$(CONFIG_ARCH_SNAPDRAGON) += dragonboard410c.dtb \
->> +dtb-$(CONFIG_ARCH_SNAPDRAGON) += apq8016-sbc.dtb \
->>         dragonboard820c.dtb \
->>         sdm845-db845c.dtb \
->>         sdm845-samsung-starqltechn.dtb \
->> diff --git a/arch/arm/dts/apq8016-sbc-u-boot.dtsi b/arch/arm/dts/apq8016-sbc-u-boot.dtsi
->> new file mode 100644
->> index 000000000000..838e629a8ade
->> --- /dev/null
->> +++ b/arch/arm/dts/apq8016-sbc-u-boot.dtsi
->> @@ -0,0 +1,11 @@
->> +// SPDX-License-Identifier: GPL-2.0
->> +/*
->> + * Copyright (c) 2024, Linaro Ltd.
->> + */
->> +
->> +/ {
->> +       /* When running as a first-stage bootloader this isn't filled in automatically */
->> +       memory@80000000 {
->> +               reg = <0 0x80000000 0 0x3da00000>;
->> +       };
->> +};
-> 
-> With U-Boot booting as the first stage bootloader, we have to enable
-> the serial driver prior to relocation. Although we have
-> DM_FLAG_PRE_RELOC for clock and the serial driver, what about the
-> pinctrl driver required to configure UART specific pins prior to
-> relocation? Without following change we get broken U-Boot log without
-> header prints:
+>
+> >
+> > This is what I have in my todo list:
+> > * Backport latest libavb from AOSP upstream and add support for
+> >    Verified Boot 1.3.0 version
+> > * Sync include/android_bootloader_message.h with AOSP upstream
+> > * Check and backport fixes for AVB in AOSP U-Boot fork if needed [1]
+> > * Get acquainted with a current state of A/B support in AOSP and
+> >    backport all needed changes
+> > * Re-factor libavb, switch to U-Boot existing implementation of
+> >    rsa/sha256/sha512
+> > * Add SHA512 implementation that leverage ARMv8 CE
+> >    (pull it from Linux)
+> > * Enable hw acceleration of SHA256/SHA512 that supports ARMv8
+> >    Crypto Extensions to speed up verification process on ARMv8-based bo=
+ards.
+> > * AVB support for NAND storage
+>
+> I know that this has been send but I don't think Alistair has send any
+> follow-up on this:
+> https://patchwork.ozlabs.org/project/uboot/patch/20220926220211.868968-1-=
+adelva@google.com/
+>
+> >
+> > If someone is already working on anything from the above list -
+> > please feel free to reach out to me, so we can avoid duplication of eff=
+ort.
+> >
+> > Any comments/suggestions are welcome! Thanks!
+>
+> From my understanding, the AOSP version of U-Boot has quite a different
+> bootflow since it relies on the (out-of-tree) boot_android command [3]
 
-Ohhh nice! This makes a whole lot of sense. Thanks for figuring this out.
+Correct, but it turned out that they are using some parts of the existing a=
+vb
+implementation in that out-of-tree "boot_android" cmd +
+the made some adjustments on top of it, that we might be interested in :
 
-I finally got my hands on some db410c's (thanks Neil!) and can confirm
-this fixes the issue. I tried using DM_FLAG_PRE_RELOC on the pinctrl
-driver but it doesn't seem like that's enough to get pinctrl going. I'll
-pick your patch below.
-> 
-> diff --git a/arch/arm/dts/apq8016-sbc-u-boot.dtsi
-> b/arch/arm/dts/apq8016-sbc-u-boot.dtsi
-> index 838e629a8ade..0a21732be6cb 100644
-> --- a/arch/arm/dts/apq8016-sbc-u-boot.dtsi
-> +++ b/arch/arm/dts/apq8016-sbc-u-boot.dtsi
-> @@ -9,3 +9,11 @@
->                 reg = <0 0x80000000 0 0x3da00000>;
->         };
->  };
-> +
-> +&tlmm {
-> +       bootph-all;
-> +
-> +       blsp-uart2-default-state {
-> +               bootph-all;
-> +       };
-> +};
-> 
-> Fixes broken U-Boot log:
-> 
-> S - Flash Throughput, 82000 KB/s  (1503304 Bytes,  18330 us)
-> S - DDR Frequency, 400 MHz
-> Core:  135 devices, 20 uclasses, devicetree: board
-> MMC:   mmc@7824900: 0, mmc@7864900: 1
-> Loading Environment from MMC... OK
-> In:    serial@78b0000
-> Out:   serial@78b0000
-> Err:   serial@78b0000
-> ## Error: Can't overwrite "serial#"
-> ## Error inserting "serial#" variable, errno=1
-> Net:   No ethernet found.
-> Hit any key to stop autoboot:  0
-> dragonboard410c =>
-> 
-> -Sumit
+$ git log --grep=3DANDROID --oneline | grep avb
+ea8f0bb45e ANDROID: Add avb_verify unit tests
+c9f88bf213 ANDROID: Adding function comments to avb_verify
+c5599e4a9f Merge "ANDROID: avb_verify: Handle failed malloc in get_partitio=
+n()"
+3aeeae4426 ANDROID: avb_verify: Handle failed malloc in get_partition()
+2910c1042c Merge "ANDROID: avb_pubkey: Use bin2c instead of ld"
+30fbf100b6 Merge "ANDROID: avb: Extract avb_pubkey_is_trusted()"
+296361e80c ANDROID: avb_pubkey: Use bin2c instead of ld
+5af2c6d968 ANDROID: avb: Extract avb_pubkey_is_trusted()
+f74b3f5815 ANDROID: avb_verify: Don't Return ERROR_IO for mismatch in
+pubkey sizes
+d6615cd233 Merge "ANDROID: Qualify avb_find_main_pubkey() parameters as con=
+st"
+9c8470ed6b ANDROID: Qualify avb_find_main_pubkey() parameters as const
+af808f4b04 ANDROID: avb_find_main_pubkey returns CMD_RET_*
+2070f02c75 ANDROID: remove erraneous avb logs
 
--- 
-// Caleb (they/them)
+Btw, my initial intention (back in 2018) was to make avb
+implementation boot-command
+agnostic, as at the time of implementing it different board/SoC
+vendors used different
+approaches for booting AOSP; moreover, iirc AOSP-specific cmd
+(boota/boot_android
+or whatever it's called now) didn't manage to land to the U-Boot
+mainline despite
+multiple attempts by different contributors.
+
+>
+> [3] https://android.googlesource.com/platform/external/u-boot/+/refs/head=
+s/main/cmd/boot_android.c
+>
+> Please keep me in the loop with your progress. If you want, you can
+> reach me on IRC as well (libera: #u-boot, nick: mkorpershoek)
+Sure, will keep you posted!
+
+>
+> >
+> > [1] https://android.googlesource.com/platform/external/u-boot
+> > [2] https://source.android.com/docs/devices/cuttlefish/bootloader-dev
+> > [3] https://android.googlesource.com/platform/bootable/recovery/+/main/=
+bootloader_message/include/bootloader_message/bootloader_message.h
+> >
+> > --
+> > Best regards - Atentamente - Meilleures salutations
+> >
+> > Igor Opaniuk
+> >
+> > mailto: igor.opaniuk@gmail.com
+> > skype: igor.opanyuk
+> > http://ua.linkedin.com/in/iopaniuk
+
+Regards,
+Igor
+
+--=20
+Best regards - Atentamente - Meilleures salutations
+
+Igor Opaniuk
+
+mailto: igor.opaniuk@gmail.com
+skype: igor.opanyuk
+http://ua.linkedin.com/in/iopaniuk
