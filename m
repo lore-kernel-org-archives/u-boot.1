@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F02EC48297
-	for <u-boot@archiver.kernel.org>; Fri,  9 Feb 2024 17:55:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBF2FC48297
+	for <u-boot@archiver.kernel.org>; Fri,  9 Feb 2024 17:55:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CE9387E82;
-	Fri,  9 Feb 2024 18:55:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 09FCB87E87;
+	Fri,  9 Feb 2024 18:55:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="f9ept8H+";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="IaAPtOSc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 13A0B87E71; Fri,  9 Feb 2024 18:55:36 +0100 (CET)
-Received: from mail.manjaro.org (mail.manjaro.org [116.203.91.91])
+ id 038B487E88; Fri,  9 Feb 2024 18:55:57 +0100 (CET)
+Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 38B5387E82
- for <u-boot@lists.denx.de>; Fri,  9 Feb 2024 18:55:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BDD7087E87
+ for <u-boot@lists.denx.de>; Fri,  9 Feb 2024 18:55:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1707501330;
+ t=1707501353;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=/CmFYCdKvJlL4krRU7YrvJmjH+HaJJVJjo/2Y2F1cTE=;
- b=f9ept8H+KRVjFdQdMpowXwWB8osu8FAnkH4PfQTb3+Dz9fWGCGbU8YCC0lyBn8j7TWZJfv
- +8T8jEeZKZyNsa8hm6RtoaABwPRlVDofDwgQINOXvCsqgvhD41/zKMsGuB64RhKU8DNRPU
- Ed0wWgc3lAZm3aNl+6A9kiwG5ZSh+ph3UIZpMgw4TY8nWKtLvqAx9Kce7FTRNgRcd9YgZ2
- mnVJ+QnqOO6jx/f+gcdrzbGfVeWmk2eusKFg9Keki9J6rIs7/27JiDnqt7jrkOReLT4G5A
- x8NO6fZfy06LzDC8tOXImCXiZwfc22zfhsVEzpdYFaIcD2B0hlQnkqWgyTBDqw==
-Date: Fri, 09 Feb 2024 18:55:30 +0100
+ bh=3xxuRTB13/QUhoop8En3m43QstIkymDi/fokbF3PrIA=;
+ b=IaAPtOScBQkWF5OPV2cYsJ0Vbj+1ocnszbrCJ3qgKlJt671QUrlZy9zPmm1aQgxClLWWTo
+ Gml2MuQjpBBQj21PTYgnSMMOWr5ZWPB/KNW+T9zF9sttz1lrAZCCK/Sks2DLt8Fp3fsb0y
+ Zn02TPOeXTRFNGDqQNQpEZ3saq3ly2KB8uApm9QPRmgJp6gS6zUJKBETx+gTeEaBvZ5IW9
+ n2JvBHOPUyBX0WhDhQNpQrMZLogni73XiveKkuHmTo6I5VYtJJewIunYr8dpo3xcqX/Epv
+ sjbgrnhsN+Hpl0d6jojEGY6aNzmHaJYM4XqcTgJQ+kuLMZFcQhlFNM0YaFborA==
+Date: Fri, 09 Feb 2024 18:55:53 +0100
 From: Dragan Simic <dsimic@manjaro.org>
 To: Quentin Schulz <foss+uboot@0leil.net>
 Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich
@@ -54,12 +54,12 @@ Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Anatolij Gustschin
  <agust@denx.de>, u-boot@lists.denx.de, Quentin Schulz
  <quentin.schulz@theobroma-systems.com>
-Subject: Re: [PATCH v2 04/20] rockchip: pine64: pinebook-pro: migrate to
+Subject: Re: [PATCH v2 05/20] rockchip: pine64: pinephone-pro: migrate to
  rockchip_early_misc_init_r
-In-Reply-To: <20240209-jaguar-v2-4-6c9ffe09b924@theobroma-systems.com>
+In-Reply-To: <20240209-jaguar-v2-5-6c9ffe09b924@theobroma-systems.com>
 References: <20240209-jaguar-v2-0-6c9ffe09b924@theobroma-systems.com>
- <20240209-jaguar-v2-4-6c9ffe09b924@theobroma-systems.com>
-Message-ID: <de55ef3d98a0c4841026e473ddd3e2a7@manjaro.org>
+ <20240209-jaguar-v2-5-6c9ffe09b924@theobroma-systems.com>
+Message-ID: <36d64ebb2c3d5e37212689704de68fe7@manjaro.org>
 X-Sender: dsimic@manjaro.org
 Content-Type: text/plain; charset=US-ASCII;
  format=flowed
@@ -104,24 +104,24 @@ in my earlier review.
 Reviewed-by: Dragan Simic <dsimic@manjaro.org>
 
 > ---
->  board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c | 18 
-> ++----------------
->  1 file changed, 2 insertions(+), 16 deletions(-)
+>  .../pine64/pinephone-pro-rk3399/pinephone-pro-rk3399.c  | 17 
+> ++---------------
+>  1 file changed, 2 insertions(+), 15 deletions(-)
 > 
-> diff --git a/board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c
-> b/board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c
-> index 4ad780767ea..2408a367305 100644
-> --- a/board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c
-> +++ b/board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c
-> @@ -11,7 +11,6 @@
+> diff --git a/board/pine64/pinephone-pro-rk3399/pinephone-pro-rk3399.c
+> b/board/pine64/pinephone-pro-rk3399/pinephone-pro-rk3399.c
+> index b6ccbb9c1c4..de75ee329d8 100644
+> --- a/board/pine64/pinephone-pro-rk3399/pinephone-pro-rk3399.c
+> +++ b/board/pine64/pinephone-pro-rk3399/pinephone-pro-rk3399.c
+> @@ -12,7 +12,6 @@
 >  #include <asm/arch-rockchip/clock.h>
 >  #include <asm/arch-rockchip/grf_rk3399.h>
 >  #include <asm/arch-rockchip/hardware.h>
 > -#include <asm/arch-rockchip/misc.h>
->  #include <linux/printk.h>
 >  #include <power/regulator.h>
 > 
-> @@ -54,23 +53,10 @@ static void setup_iodomain(void)
+>  #define GRF_IO_VSEL_BT565_GPIO2AB 1
+> @@ -56,23 +55,11 @@ static void setup_iodomain(void)
 >  	rk_setreg(&pmugrf->soc_con0, 1 << PMUGRF_CON0_VSEL_SHIFT);
 >  }
 > 
@@ -142,8 +142,8 @@ Reviewed-by: Dragan Simic <dsimic@manjaro.org>
 > -	ret = rockchip_cpuid_set(cpuid, cpuid_length);
 > -	if (ret)
 > -		return ret;
-> -
-> -	return ret;
 > +	return 0;
+> 
+> -	return ret;
 >  }
 >  #endif
