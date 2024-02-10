@@ -4,60 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E057CC48260
-	for <u-boot@archiver.kernel.org>; Sat, 10 Feb 2024 17:21:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E692CC4829A
+	for <u-boot@archiver.kernel.org>; Sat, 10 Feb 2024 17:38:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32AB887E5F;
-	Sat, 10 Feb 2024 18:21:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2348C87E94;
+	Sat, 10 Feb 2024 18:38:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="oKysg9e+";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D12C387E98; Sat, 10 Feb 2024 18:21:49 +0100 (CET)
-Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E248287E46
- for <u-boot@lists.denx.de>; Sat, 10 Feb 2024 18:21:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
+ id CF9BC8786C; Sat, 10 Feb 2024 18:38:19 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 8CFCF87E5F
+ for <u-boot@lists.denx.de>; Sat, 10 Feb 2024 18:38:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
+ dmarc=fail (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id F081BDA7;
+ Sat, 10 Feb 2024 09:38:58 -0800 (PST)
+Received: from minigeek.lan (unknown [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 097C33F5A1;
+ Sat, 10 Feb 2024 09:38:15 -0800 (PST)
+Date: Sat, 10 Feb 2024 17:37:03 +0000
+From: Andre Przywara <andre.przywara@arm.com>
+To: Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+Cc: Nils Le Roux <gilbsgilbert@gmail.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2] net: designware: Support high memory nodes
+Message-ID: <20240210173703.73d18367@minigeek.lan>
+In-Reply-To: <20231204010930.071a5ba7@slackpad.lan>
+References: <20231202093952.33256-1-gilbsgilbert@gmail.com>
+ <20231204010930.071a5ba7@slackpad.lan>
+Organization: Arm Ltd.
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1707585707;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=yk+coqzx57maYwaEvJ98nIt+MY/WjzjD8ILsHuGyDG4=;
- b=oKysg9e+UKwWDWiwpslcOLHhyMcZXZjLMqxRy7n5RHQnoxfQDJy06uXGOKMuaXIb1GMvbs
- jXvGhwjsRsoNBCvYYxXyyOeM/s5Bnr+kNWMUbJtq1xdFEh3O12QWQoZPbmxZ0ON5a85J7h
- 3Kz3t6fcW9SVIzp2wWNkwz4Ous32BEZnzBzpUsH46rrk3UpgHFmi8WbvVuM9mEcOGpXNXN
- 8DbnyYWo3lNKbC3Aif5vnTzdYKooNeCtDbJ1FoAtsHTz5xHVLdtrEv57Bpfaf0lYrX+IPm
- vvkLWG7wkv2p6rzgR/YUlqwTz14idAjQpSN8NqQSOCJPuV8+55BMIunzSGxQhQ==
-Date: Sat, 10 Feb 2024 18:21:46 +0100
-From: Dragan Simic <dsimic@manjaro.org>
-To: Da Xue <da@lessconfused.com>
-Cc: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 13/15] rockchip: rk3328: Add support to build bootable SPI
- image
-In-Reply-To: <CACdvmAjfCWicRd=LKKyob7fZo79AFkUQKy0e1HBb0zyJuoO70g@mail.gmail.com>
-References: <20240207000301.3270722-1-jonas@kwiboo.se>
- <20240207000301.3270722-14-jonas@kwiboo.se>
- <72bd1e6d81755da0300a5da9a64b7408@manjaro.org>
- <CACdvmAjfCWicRd=LKKyob7fZo79AFkUQKy0e1HBb0zyJuoO70g@mail.gmail.com>
-Message-ID: <19da82ff31e09e8014c2782c1d1e537c@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
-Content-Transfer-Encoding: 8bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,73 +57,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Da Xue,
+On Mon, 4 Dec 2023 01:09:30 +0000
+Andre Przywara <andre.przywara@arm.com> wrote:
 
-On 2024-02-09 02:57, Da Xue wrote:
-> On Wed, Feb 7, 2024 at 10:53 PM Dragan Simic <dsimic@manjaro.org> 
-> wrote:
->> On 2024-02-07 01:02, Jonas Karlman wrote:
->> > Similar to RK35xx the BootRom in RK3328 can read all data and look for
->> > idbloader at 0x8000, same as on SD and eMMC.
->> >
->> > Use the rksd format and modify the mkimage offset to generate a
->> > bootable
->> > u-boot-rockchip-spi.bin that can be written to 0x0 of SPI NOR flash.
->> >
->> > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->> 
->> Could you, please, clarify a bit why the "rkspi" format isn't used
->> instead of "rksd"?
+Hi Joe, Ramon, Tom,
+
+for some reason patchwork put this on my plate, but it looks like
+genuine network code to me, and the problem definitely doesn't affect
+sunxi.
+As tagged below, I am happy with this change, so if there are no
+objections, can one of you take this patch, please?
+
+Cheers,
+Andre
+
+> On Sat,  2 Dec 2023 10:39:49 +0100
+> Nils Le Roux <gilbsgilbert@gmail.com> wrote:
 > 
-> "The SPI code has a bug that means that the 2 KiB blocks in which the
-> bootloader is loaded have a stride of 4KiB, leaving the 2KiB inbetween
-> as unused padding."
+> Hi Nils,
 > 
-> RK3399 has the 2K SPI bug and necessitated the rkspi format. RK3328
-> came after RK3399 and resolved this bug so the SPI and MMC formats are
-> now the same.
+> > Some platforms (such as the Lichee Pi 4A) have their dwmac device
+> > addressable only in high memory space. Storing the node's base address
+> > on 32 bits is not possible in such case.
+> > 
+> > Use platform's physical address type to store the base address.
+> > 
+> > Signed-off-by: Nils Le Roux <gilbsgilbert@gmail.com>
+> > Cc: Andre Przywara <andre.przywara@arm.com>  
 > 
-> I verified on a ROC-RK3328-CC-V2.
+> many thanks for the changes, that looks good to me now. I have
+> compile-tested that for arm64 and arm.
+> 
+> Reviewed-by: Andre Przywara <andre.przywara@arm.com>
+> 
+> Cheers,
+> Andre
+> 
+> > ---
+> > 
+> > Changes in v2:
+> > - explicitly define and handle ioaddr as a virtual address
+> > - use an intermediate variable to assign the PCI base address
+> > - use appropriate placeholder to print physical addresses
+> > ---
+> >  drivers/net/designware.c | 16 +++++++++-------
+> >  1 file changed, 9 insertions(+), 7 deletions(-)
+> > 
+> > diff --git a/drivers/net/designware.c b/drivers/net/designware.c
+> > index a174344b3e..78bfce07f6 100644
+> > --- a/drivers/net/designware.c
+> > +++ b/drivers/net/designware.c
+> > @@ -678,8 +678,8 @@ int designware_eth_probe(struct udevice *dev)
+> >  {
+> >  	struct eth_pdata *pdata = dev_get_plat(dev);
+> >  	struct dw_eth_dev *priv = dev_get_priv(dev);
+> > -	u32 iobase = pdata->iobase;
+> > -	ulong ioaddr;
+> > +	phys_addr_t iobase = pdata->iobase;
+> > +	void *ioaddr;
+> >  	int ret, err;
+> >  	struct reset_ctl_bulk reset_bulk;
+> >  #ifdef CONFIG_CLK
+> > @@ -740,16 +740,18 @@ int designware_eth_probe(struct udevice *dev)
+> >  	 * or via a PCI bridge, fill in plat before we probe the hardware.
+> >  	 */
+> >  	if (IS_ENABLED(CONFIG_PCI) && device_is_on_pci_bus(dev)) {
+> > -		dm_pci_read_config32(dev, PCI_BASE_ADDRESS_0, &iobase);
+> > -		iobase &= PCI_BASE_ADDRESS_MEM_MASK;
+> > -		iobase = dm_pci_mem_to_phys(dev, iobase);
+> > +		u32 pcibase;
+> >  
+> > +		dm_pci_read_config32(dev, PCI_BASE_ADDRESS_0, &pcibase);
+> > +		pcibase &= PCI_BASE_ADDRESS_MEM_MASK;
+> > +
+> > +		iobase = dm_pci_mem_to_phys(dev, pcibase);
+> >  		pdata->iobase = iobase;
+> >  		pdata->phy_interface = PHY_INTERFACE_MODE_RMII;
+> >  	}
+> >  
+> > -	debug("%s, iobase=%x, priv=%p\n", __func__, iobase, priv);
+> > -	ioaddr = iobase;
+> > +	debug("%s, iobase=%pa, priv=%p\n", __func__, &iobase, priv);
+> > +	ioaddr = phys_to_virt(iobase);
+> >  	priv->mac_regs_p = (struct eth_mac_regs *)ioaddr;
+> >  	priv->dma_regs_p = (struct eth_dma_regs *)(ioaddr + DW_DMA_BASE_OFFSET);
+> >  	priv->interface = pdata->phy_interface;  
+> 
 
-Thank you very much too, for refreshing my memory.  I somehow forgot 
-about
-the bug that the RK3399 BROM suffers from.
-
-
->> > ---
->> >  arch/arm/dts/rk3328-u-boot.dtsi        | 11 +++++++++++
->> >  arch/arm/mach-rockchip/rk3328/rk3328.c |  1 +
->> >  2 files changed, 12 insertions(+)
->> >
->> > diff --git a/arch/arm/dts/rk3328-u-boot.dtsi
->> > b/arch/arm/dts/rk3328-u-boot.dtsi
->> > index b90d78878d77..2a5dca97dd4b 100644
->> > --- a/arch/arm/dts/rk3328-u-boot.dtsi
->> > +++ b/arch/arm/dts/rk3328-u-boot.dtsi
->> > @@ -120,3 +120,14 @@
->> >  &usb20_otg {
->> >       hnp-srp-disable;
->> >  };
->> > +
->> > +#ifdef CONFIG_ROCKCHIP_SPI_IMAGE
->> > +&binman {
->> > +     simple-bin-spi {
->> > +             mkimage {
->> > +                     args = "-n", CONFIG_SYS_SOC, "-T", "rksd";
->> > +                     offset = <0x8000>;
->> > +             };
->> > +     };
->> > +};
->> > +#endif
->> > diff --git a/arch/arm/mach-rockchip/rk3328/rk3328.c
->> > b/arch/arm/mach-rockchip/rk3328/rk3328.c
->> > index b591d38fe412..b82b209de9e2 100644
->> > --- a/arch/arm/mach-rockchip/rk3328/rk3328.c
->> > +++ b/arch/arm/mach-rockchip/rk3328/rk3328.c
->> > @@ -36,6 +36,7 @@
->> >
->> >  const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
->> >       [BROM_BOOTSOURCE_EMMC] = "/mmc@ff520000",
->> > +     [BROM_BOOTSOURCE_SPINOR] = "/spi@ff190000/flash@0",
->> >       [BROM_BOOTSOURCE_SD] = "/mmc@ff500000",
->> >  };
