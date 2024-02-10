@@ -4,44 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C0D7C4829A
-	for <u-boot@archiver.kernel.org>; Sat, 10 Feb 2024 06:33:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EB66C48260
+	for <u-boot@archiver.kernel.org>; Sat, 10 Feb 2024 06:33:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A05C87E90;
-	Sat, 10 Feb 2024 07:33:02 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EF6F787E92;
+	Sat, 10 Feb 2024 07:33:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="RQmy4pCy";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="gf87lkhP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9434387E93; Sat, 10 Feb 2024 07:33:01 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
+ id CC72B87E95; Sat, 10 Feb 2024 07:33:02 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 28AED87E8E
- for <u-boot@lists.denx.de>; Sat, 10 Feb 2024 07:32:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D16C787E91
+ for <u-boot@lists.denx.de>; Sat, 10 Feb 2024 07:33:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=wens@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 22CFA60670;
- Sat, 10 Feb 2024 06:32:57 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 97ED6C433F1;
- Sat, 10 Feb 2024 06:32:56 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 31F0A60916;
+ Sat, 10 Feb 2024 06:32:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9F824C433C7;
+ Sat, 10 Feb 2024 06:32:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1707546776;
- bh=XvjJaoWG+F/Z1LFoehMSJsO52tjyVyfAhwUT/oYYMAc=;
- h=From:To:Cc:Subject:Date:From;
- b=RQmy4pCypTb/3gbgKXJLHkXMqrddfhbaEylXbMCjtoh3XGxsinKR69/sMkvOeidJo
- zlnMUj9391h/p+7+xNuHWNW+Om1nmQk8WEeX2GUh8ibdWbz8aSX3/qMvLVH+NdPhyO
- JWQ886j85eHJUd1b+hLwRCUCZPQdBnwdSelIwt9r7rGYfeCX3CC+MTvuIPiL25YwXp
- mliZ/Xb/Xg/chNM0soNOPflcKekdV+cResULbFz3EeScEmCRPgAgjWFLfWGa7XAGI8
- ATwBm4oWLbDWo8JTY7KUzqH2XgUicGtLxATHWwmJt8Z0YzkBglsYcLqB7eY1NRgxC9
- cBlVClg3vgazw==
+ s=k20201202; t=1707546778;
+ bh=5JMBYrsj5TD93om7R5mq+wEnDgj7ipKCHedAGjqh2dQ=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=gf87lkhP+RBeM/q+MMFQ9fHK5ad/OfcI1/Nnsda5C7W/8HCaCF1qYMs2F1qUVexjl
+ Qzn9TmVAhe7NiOSbVEQ2E+JggBNGF7BZ5PIgrweaQHekj6UPqe3wbJdy9wg6Yb6PeR
+ XAxeszk5FO7tmYzzgH2kBa2onJNi7NGYC71SSyvN1AWwzLuUpR/kFT1ByrgmCAnE/R
+ wQg/V5rUDa/MZ3BCCXGjL6UkQFl71Cp21IWZxL3jR8ev4eTQZWaAoCJQXg9WY7zpbn
+ pawCKsUF71VMMB9YpgnsqSfU4Z+9QzQG6Ldpz0XcLfAhs0YIfUHE5stdZ1Z3WstSKZ
+ aZ50+0Ax/aWRw==
 Received: by wens.tw (Postfix, from userid 1000)
- id 9637A5FB5F; Sat, 10 Feb 2024 14:32:53 +0800 (CST)
+ id C7EEC5FDDF; Sat, 10 Feb 2024 14:32:55 +0800 (CST)
 From: Chen-Yu Tsai <wens@kernel.org>
 To: u-boot@lists.denx.de
 Cc: Chen-Yu Tsai <wens@csie.org>, Tom Rini <trini@konsulko.com>,
@@ -60,11 +59,13 @@ Cc: Chen-Yu Tsai <wens@csie.org>, Tom Rini <trini@konsulko.com>,
  Banglang Huang <banglang.huang@foxmail.com>,
  "Matwey V. Kornilov" <matwey.kornilov@gmail.com>,
  Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>
-Subject: [PATCH 0/4] rockchip: Read cpuid and generate MAC address from efuse
- for RK3328 and RK3399
-Date: Sat, 10 Feb 2024 14:32:46 +0800
-Message-Id: <20240210063252.1065611-1-wens@kernel.org>
+Subject: [PATCH 1/4] rockchip: rk3328: Read cpuid and generate MAC address
+ from efuse
+Date: Sat, 10 Feb 2024 14:32:47 +0800
+Message-Id: <20240210063252.1065611-2-wens@kernel.org>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240210063252.1065611-1-wens@kernel.org>
+References: <20240210063252.1065611-1-wens@kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -85,51 +86,30 @@ X-Virus-Status: Clean
 
 From: Chen-Yu Tsai <wens@csie.org>
 
-Hi folks,
+The rockchip-efuse driver supports the efuse found on RK3328. This
+hardware block is part of the SoC and contains the CPUID, which can
+be used to generate stable serial numbers and MAC addresses.
 
-This series enables ROCKCHIP_EFUSE and MISC_INIT_R by default for RK3328
-and RK3399 so that the cpuid is read from the efuse and used to generate
-a serial number and MAC addresses for all boards.
+Enable the driver and reading cpuid by default for RK3328.
 
-This stacks on top of the recent defconfig update series [1] from Jonas.
+Signed-off-by: Chen-Yu Tsai <wens@csie.org>
+---
+ arch/arm/mach-rockchip/Kconfig | 2 ++
+ 1 file changed, 2 insertions(+)
 
-[1] https://lore.kernel.org/u-boot/20240207000301.3270722-1-jonas@kwiboo.se/
-
-
-Chen-Yu Tsai (4):
-  rockchip: rk3328: Read cpuid and generate MAC address from efuse
-  rockchip: rk3399: Read cpuid and generate MAC address from efuse
-  rockchip: rk3328: regenerate defconfigs
-  rockchip: rk3399: regenerate defconfigs
-
- arch/arm/mach-rockchip/Kconfig                | 4 ++++
- configs/chromebook_bob_defconfig              | 2 --
- configs/chromebook_kevin_defconfig            | 2 --
- configs/evb-rk3328_defconfig                  | 2 --
- configs/firefly-rk3399_defconfig              | 2 --
- configs/nanopi-r2c-plus-rk3328_defconfig      | 2 --
- configs/nanopi-r2c-rk3328_defconfig           | 2 --
- configs/nanopi-r2s-rk3328_defconfig           | 2 --
- configs/nanopi-r4s-rk3399_defconfig           | 2 --
- configs/orangepi-r1-plus-lts-rk3328_defconfig | 2 --
- configs/orangepi-r1-plus-rk3328_defconfig     | 2 --
- configs/pinebook-pro-rk3399_defconfig         | 2 --
- configs/pinephone-pro-rk3399_defconfig        | 2 --
- configs/puma-rk3399_defconfig                 | 2 --
- configs/roc-cc-rk3328_defconfig               | 2 --
- configs/roc-pc-mezzanine-rk3399_defconfig     | 2 --
- configs/roc-pc-rk3399_defconfig               | 2 --
- configs/rock-4c-plus-rk3399_defconfig         | 3 ---
- configs/rock-4se-rk3399_defconfig             | 3 ---
- configs/rock-pi-4-rk3399_defconfig            | 3 ---
- configs/rock-pi-4c-rk3399_defconfig           | 3 ---
- configs/rock-pi-e-rk3328_defconfig            | 2 --
- configs/rock-pi-n10-rk3399pro_defconfig       | 1 -
- configs/rock64-rk3328_defconfig               | 2 --
- configs/rock960-rk3399_defconfig              | 1 -
- configs/rockpro64-rk3399_defconfig            | 2 --
- 26 files changed, 4 insertions(+), 52 deletions(-)
-
+diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
+index 1bc7ee904275..20670fb57376 100644
+--- a/arch/arm/mach-rockchip/Kconfig
++++ b/arch/arm/mach-rockchip/Kconfig
+@@ -189,6 +189,8 @@ config ROCKCHIP_RK3328
+ 	select ENABLE_ARM_SOC_BOOT0_HOOK
+ 	select DEBUG_UART_BOARD_INIT
+ 	select SYS_NS16550
++	imply ROCKCHIP_EFUSE
++	imply MISC_INIT_R
+ 	help
+ 	  The Rockchip RK3328 is a ARM-based SoC with a quad-core Cortex-A53.
+ 	  including NEON and GPU, 1MB L2 cache, Mali-T7 graphics, two
 -- 
 2.39.2
 
