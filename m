@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EB66C48260
-	for <u-boot@archiver.kernel.org>; Sat, 10 Feb 2024 06:33:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19FAAC4829A
+	for <u-boot@archiver.kernel.org>; Sat, 10 Feb 2024 06:33:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF6F787E92;
-	Sat, 10 Feb 2024 07:33:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 758F387E9A;
+	Sat, 10 Feb 2024 07:33:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="gf87lkhP";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="rvCIUH62";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC72B87E95; Sat, 10 Feb 2024 07:33:02 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ id 23A2287E9E; Sat, 10 Feb 2024 07:33:06 +0100 (CET)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D16C787E91
- for <u-boot@lists.denx.de>; Sat, 10 Feb 2024 07:33:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 21AF087E98
+ for <u-boot@lists.denx.de>; Sat, 10 Feb 2024 07:33:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=wens@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 31F0A60916;
- Sat, 10 Feb 2024 06:32:59 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9F824C433C7;
- Sat, 10 Feb 2024 06:32:58 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTP id BE2CCCE0E42;
+ Sat, 10 Feb 2024 06:33:01 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 767CAC433F1;
+ Sat, 10 Feb 2024 06:33:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1707546778;
- bh=5JMBYrsj5TD93om7R5mq+wEnDgj7ipKCHedAGjqh2dQ=;
+ s=k20201202; t=1707546780;
+ bh=GZ5teW6afNDodvHcK5VhexC1t38loWFfWNR8LofZ23I=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=gf87lkhP+RBeM/q+MMFQ9fHK5ad/OfcI1/Nnsda5C7W/8HCaCF1qYMs2F1qUVexjl
- Qzn9TmVAhe7NiOSbVEQ2E+JggBNGF7BZ5PIgrweaQHekj6UPqe3wbJdy9wg6Yb6PeR
- XAxeszk5FO7tmYzzgH2kBa2onJNi7NGYC71SSyvN1AWwzLuUpR/kFT1ByrgmCAnE/R
- wQg/V5rUDa/MZ3BCCXGjL6UkQFl71Cp21IWZxL3jR8ev4eTQZWaAoCJQXg9WY7zpbn
- pawCKsUF71VMMB9YpgnsqSfU4Z+9QzQG6Ldpz0XcLfAhs0YIfUHE5stdZ1Z3WstSKZ
- aZ50+0Ax/aWRw==
+ b=rvCIUH62EBKiQuX/zPIV7CG83WIbWAeipFQCHl+Q3QHkZEnAdYOSTJ4hRsIaWXfBL
+ TCntVAiEVpdhrN+biaIBmGoEioj2myi9WRUJyvldWp6yn7ESICMrFP9HtoykpUn7qG
+ Z8qFW6X5Vy3rNDpEHvzOFfcujV19BstTUtiGfa32ayuOUxd4ucw6NCpoq93vB7teng
+ LNIjNoR/9/Iu/MXiY003r7OXAnCmpB1qO4lfzj/2WMYNweBYRRjbFfGMzNajQK24Vn
+ vsolNzlAQVcm8B++x/AodAygL7WSK5DyWltGcnEZ2r5t0RVtuLLK3VIatRrXeHRwws
+ a/11KHXR1IJcQ==
 Received: by wens.tw (Postfix, from userid 1000)
- id C7EEC5FDDF; Sat, 10 Feb 2024 14:32:55 +0800 (CST)
+ id 0C5265FB5F; Sat, 10 Feb 2024 14:32:58 +0800 (CST)
 From: Chen-Yu Tsai <wens@kernel.org>
 To: u-boot@lists.denx.de
 Cc: Chen-Yu Tsai <wens@csie.org>, Tom Rini <trini@konsulko.com>,
@@ -59,10 +59,10 @@ Cc: Chen-Yu Tsai <wens@csie.org>, Tom Rini <trini@konsulko.com>,
  Banglang Huang <banglang.huang@foxmail.com>,
  "Matwey V. Kornilov" <matwey.kornilov@gmail.com>,
  Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>
-Subject: [PATCH 1/4] rockchip: rk3328: Read cpuid and generate MAC address
+Subject: [PATCH 2/4] rockchip: rk3399: Read cpuid and generate MAC address
  from efuse
-Date: Sat, 10 Feb 2024 14:32:47 +0800
-Message-Id: <20240210063252.1065611-2-wens@kernel.org>
+Date: Sat, 10 Feb 2024 14:32:48 +0800
+Message-Id: <20240210063252.1065611-3-wens@kernel.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240210063252.1065611-1-wens@kernel.org>
 References: <20240210063252.1065611-1-wens@kernel.org>
@@ -86,11 +86,11 @@ X-Virus-Status: Clean
 
 From: Chen-Yu Tsai <wens@csie.org>
 
-The rockchip-efuse driver supports the efuse found on RK3328. This
+The rockchip-efuse driver supports the efuse found on RK3399. This
 hardware block is part of the SoC and contains the CPUID, which can
 be used to generate stable serial numbers and MAC addresses.
 
-Enable the driver and reading cpuid by default for RK3328.
+Enable the driver and reading cpuid by default for RK3399.
 
 Signed-off-by: Chen-Yu Tsai <wens@csie.org>
 ---
@@ -98,18 +98,18 @@ Signed-off-by: Chen-Yu Tsai <wens@csie.org>
  1 file changed, 2 insertions(+)
 
 diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
-index 1bc7ee904275..20670fb57376 100644
+index 20670fb57376..2558d956b8c6 100644
 --- a/arch/arm/mach-rockchip/Kconfig
 +++ b/arch/arm/mach-rockchip/Kconfig
-@@ -189,6 +189,8 @@ config ROCKCHIP_RK3328
- 	select ENABLE_ARM_SOC_BOOT0_HOOK
- 	select DEBUG_UART_BOARD_INIT
- 	select SYS_NS16550
+@@ -269,6 +269,8 @@ config ROCKCHIP_RK3399
+ 	imply SYS_BOOTCOUNT_SINGLEWORD if BOOTCOUNT_LIMIT
+ 	imply BOOTSTD_FULL
+ 	imply CMD_BOOTCOUNT if BOOTCOUNT_LIMIT
 +	imply ROCKCHIP_EFUSE
 +	imply MISC_INIT_R
  	help
- 	  The Rockchip RK3328 is a ARM-based SoC with a quad-core Cortex-A53.
- 	  including NEON and GPU, 1MB L2 cache, Mali-T7 graphics, two
+ 	  The Rockchip RK3399 is a ARM-based SoC with a dual-core Cortex-A72
+ 	  and quad-core Cortex-A53.
 -- 
 2.39.2
 
