@@ -4,93 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5269AC4829A
-	for <u-boot@archiver.kernel.org>; Sat, 10 Feb 2024 11:07:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C0F4C48260
+	for <u-boot@archiver.kernel.org>; Sat, 10 Feb 2024 11:47:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3165B87EAD;
-	Sat, 10 Feb 2024 12:07:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 4AB7187E82;
+	Sat, 10 Feb 2024 12:47:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=jannau.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="ZMWkKKrT";
+	dkim=pass (2048-bit key; unprotected) header.d=jannau.net header.i=@jannau.net header.b="c5UPlpPn";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="jgH72y4I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D30B87EAE; Sat, 10 Feb 2024 12:07:01 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ id 197EE87E46; Sat, 10 Feb 2024 12:47:25 +0100 (CET)
+Received: from wout1-smtp.messagingengine.com (wout1-smtp.messagingengine.com
+ [64.147.123.24])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F188B87EAC
- for <u-boot@lists.denx.de>; Sat, 10 Feb 2024 12:06:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D453487E82
+ for <u-boot@lists.denx.de>; Sat, 10 Feb 2024 12:47:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 94EA640A27
- for <u-boot@lists.denx.de>; Sat, 10 Feb 2024 11:06:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1707563214;
- bh=ocz6KRE5Igk4aiYi+KY4YUC9QFUBZqdpmf4Lu3/DvtU=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=ZMWkKKrTl1S1lOHOYlfsYtBH1zqBB16Fe7A9KyYDJuMJnuMyliXz2sql9uwFNwf3T
- C09PAUyhDuB1UnQMLPSyDHYkAWJ3k9Wp44w+p8zZtkHHGHqNMKCUGTlpGA6iJnhNH6
- plDxxs40Sj3tj0IOBlQiOArBRwc+9qTaLzcZ0n328rxcZRS9T6M+HCjE8f/f4RzbYl
- A1ch7DgMhR32VxorOIG0sqNedwwtXrHlDPwUtgyJC/n5h+g9slLAjvSqgQXU6oIWcR
- TkrJkJBH1xK8YeezVPuYAkMkboZ4zz6qph1NUMg4g0Yg470DNMDHk0qogUZMcHiHqe
- /Kn7aA9qlvVkw==
-Received: by mail-wm1-f70.google.com with SMTP id
- 5b1f17b1804b1-40fb74433ebso10895295e9.3
- for <u-boot@lists.denx.de>; Sat, 10 Feb 2024 03:06:54 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707563214; x=1708168014;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ocz6KRE5Igk4aiYi+KY4YUC9QFUBZqdpmf4Lu3/DvtU=;
- b=LELjI8xF9ucRrELyBEzPO0W0KJ5/7LvHgbGl5iuQzYmsTYTKvgbZiiUEeZV/zoO7Gy
- IWqk9yF0Qcj+oXzcDrWujvAgJUSPkFzHStTEm2kbhZShvR30VMDeFoTz6GW/pXLOc8HI
- eeizk4TzYU/fhSw6AVlOn/gC78yL+OIhq5qvkVIvYNInuxMORjYas+QuB/QJixhbA4ik
- YPcMHIx8TBchffboDh77DWcpif/y6/YxBXAb6cfRpSiLlqmeUKYpVSEdgiwCxh7vXmHK
- dNoCRdd+9XNi/ooV3QtMqumPu2UnhfO+BGXOKuTWflvCtq4cpOzLcXVK+H72SKHpgM07
- xxXQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXslYb6zV3H8bHZmx88xPWjkLQmP8v1F8b5hArlGIeSOaJfSoROUGwjNiLPG+YXpB/zmfPMhn4KLPpUUkyPzDuPTfhDhw==
-X-Gm-Message-State: AOJu0YzlgCOP4weLJv4MbhyF6lZ6IQ0lmafJgAiYReFC0GkN80jJRicL
- nNPtKsmOWy2OOUJ+Qed1XbEi84WnxjsHL+aLOtGo+VwZcoEHL7qOCDtr+G2u6zselsqnlSF2crJ
- EqES/D+FpxzFga8jO5uQJcYeNgstnLOZdDckQCby73YavriGw2+pDK+SG8DOHgWI2d5o=
-X-Received: by 2002:a05:600c:46d1:b0:410:ae8:4c2d with SMTP id
- q17-20020a05600c46d100b004100ae84c2dmr1472743wmo.3.1707563213848; 
- Sat, 10 Feb 2024 03:06:53 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGla70pEerGX499Nwkyv/yPOqBPlQNMWEoLXXhlLKmXjeu9GluKqyA2JcBZtBQyblEEQXJK1A==
-X-Received: by 2002:a05:600c:46d1:b0:410:ae8:4c2d with SMTP id
- q17-20020a05600c46d100b004100ae84c2dmr1472728wmo.3.1707563213537; 
- Sat, 10 Feb 2024 03:06:53 -0800 (PST)
-X-Forwarded-Encrypted: i=1;
- AJvYcCUmAmjbeqg1Nyw7QUzbM6geLW9yUBv1QbxO9Nq/bYoLCfEour75Rc2sCn9cKEZqpAS7mQ3WmbidA5KdpPHWpFnmYVtencba3QhDaKZlsXOQHK3ZVNE3M7daEp74HIqHfEy3WKTtVzRn07HbtyQRt9Rr4Cx2NcoSIwPj
-Received: from x13s.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de.
- [178.202.40.247]) by smtp.gmail.com with ESMTPSA id
- i5-20020a05600c290500b0040ef95e1c78sm3069231wmd.3.2024.02.10.03.06.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 10 Feb 2024 03:06:53 -0800 (PST)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v3 2/2] smbios: fill wake-up type
-Date: Sat, 10 Feb 2024 12:06:48 +0100
-Message-ID: <20240210110648.21977-3-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240210110648.21977-1-heinrich.schuchardt@canonical.com>
-References: <20240210110648.21977-1-heinrich.schuchardt@canonical.com>
+ dmarc=none (p=none dis=none) header.from=jannau.net
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=j@jannau.net
+Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
+ by mailout.west.internal (Postfix) with ESMTP id 8BBBF3200A35;
+ Sat, 10 Feb 2024 06:47:15 -0500 (EST)
+Received: from imap53 ([10.202.2.103])
+ by compute1.internal (MEProxy); Sat, 10 Feb 2024 06:47:16 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jannau.net; h=cc
+ :cc:content-transfer-encoding:content-type:content-type:date
+ :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to; s=fm2; t=1707565635;
+ x=1707652035; bh=00eD3loMNo5Ay59CAZ+j8IM2Qj6lZ/j+m9yLaidThzI=; b=
+ c5UPlpPn+SQrjYmE9sOavRkQjs5RnEl1H0QlvGkNM/KwR+u6ZOLeEmmzwHJeP1V8
+ spPyvJM2y0r1mN4A0Ym9L0aETuJYPCZ4LAWCXtiyr4ecLz/vAGkoLRrHVih4Vfxw
+ 1S+hFydChKhGt5tcisMy7/Ct9Qk/BPm3DRpFLbRrjduX2NKE7zRJU3bvQBEHgTmC
+ zTJ3yj+fJhGHNpk5XPLoirWcncox3wzvlcxUbPEbmTg1av1SRXswUhTWasPDCeMG
+ hG6lXGKqOhz894zy2Db6VqM4xmZhijIU0xxCjv1/QUds2zA/OTrUPZi1vCfNkX1y
+ uS7TlSPvsJePGUeVh8g4fw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1707565635; x=
+ 1707652035; bh=00eD3loMNo5Ay59CAZ+j8IM2Qj6lZ/j+m9yLaidThzI=; b=j
+ gH72y4IvaFn6W9ZxUgq6GAv84TUgK3OHOu8cMRQE7wF58AlN4Z1m7FmMCzwhH0di
+ rokz4uDBor/0BK7gNZsecJh4u8JpBI/QnwBNhoH2Pf3lVh6dtYdAQsD1dYUhcg5o
+ Le+uabIirL/t35l8jgtUu4BDr3ad3R4/fTnL5UocQdA8EuBdV+LUX+SyJIQdudd3
+ j55eNLhl8qlY1c/essbIpP9rNLSuaR1I9VOpvmi9ZAZICjSnLyBil8oYjIS8lqBF
+ tAjIubyiuh59Jo4yOUuLLvp+MLDFxY+jMDAjgrgJ2ejRXECqpdXuoh9wx2mdsCJo
+ 84j0RRzzx/5P5aQfR5gDQ==
+X-ME-Sender: <xms:QmLHZTQd5xHco1lrwJgsBtim-Jjpc8Fqb2FuC-3RgBWmaNmHahbZDQ>
+ <xme:QmLHZUxDio_jY_kgCt8VKhMt8SZHB42lQn4l2tgZXZzzp6cbL6yt5nEQSVpl3RXA_
+ zNpcG6aVz24w2ZH2Ac>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrtdelgddtjecutefuodetggdotefrodftvf
+ curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+ uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
+ fjughrpefofgggkfgjfhffhffvvefutgfgsehtqhertderreejnecuhfhrohhmpedflfgr
+ nhhnvgcuifhruhhnrghufdcuoehjsehjrghnnhgruhdrnhgvtheqnecuggftrfgrthhtvg
+ hrnhepvdefteetfedtvefghfeuueetleeuledugfefleegffeltdevtddtudfhjeevledv
+ necuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepjhesjh
+ grnhhnrghurdhnvght
+X-ME-Proxy: <xmx:QmLHZY1HxT-vO4X9PHFjWZM6EySemtoKfwmwpaLNdLojwpKDgyT_9g>
+ <xmx:QmLHZTCRJ-acDkny8s8oMpQEWEWHDUoiwPnaRN4C-moeeQ-iG5EYUw>
+ <xmx:QmLHZci1zT-UsJoAPAdXYIkuuyjb7tLso1AbQ_vuBjgXLI7LPKymVQ>
+ <xmx:Q2LHZVstKR8zXmtPPPFLIpHtYYN7zMcorAc87AAEa5NRRX2bRTthRw>
+Feedback-ID: i47b949f6:Fastmail
+Received: by mailuser.nyi.internal (Postfix, from userid 501)
+ id C522E364006B; Sat, 10 Feb 2024 06:47:14 -0500 (EST)
+X-Mailer: MessagingEngine.com Webmail Interface
+User-Agent: Cyrus-JMAP/3.11.0-alpha0-144-ge5821d614e-fm-20240125.002-ge5821d61
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Message-Id: <73a96d9b-0001-44ff-8444-fe5ed9ab7082@app.fastmail.com>
+In-Reply-To: <e49eb6ec-fbca-492a-aa7b-7f8cf8b0c1cb@gmx.de>
+References: <20240117-vidconsole-utf8-uefi-v1-0-539f7ce74fb9@jannau.net>
+ <20240117-vidconsole-utf8-uefi-v1-4-539f7ce74fb9@jannau.net>
+ <e49eb6ec-fbca-492a-aa7b-7f8cf8b0c1cb@gmx.de>
+Date: Sat, 10 Feb 2024 12:46:53 +0100
+From: "Janne Grunau" <j@jannau.net>
+To: "Heinrich Schuchardt" <xypron.glpk@gmx.de>
+Cc: "Simon Glass" <sjg@chromium.org>,
+ "Andre Przywara" <andre.przywara@arm.com>, u-boot@lists.denx.de,
+ "Anatolij Gustschin" <agust@denx.de>,
+ "Ilias Apalodimas" <ilias.apalodimas@linaro.org>
+Subject: Re: [PATCH RFC 4/6] efi_selftest: Add international characters test
+Content-Type: text/plain;charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,71 +107,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We should not use the reserved value 0x00 for the wake up type but
-use 0x02 (Unknown).
+Hej,
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
-v3:
-	use an enum for the constants
-v2:
-	use wake-up type 'Unknown' as our default
-	add more SMBIOS wake-up type constants
----
- include/smbios.h | 27 +++++++++++++++++++++++++++
- lib/smbios.c     |  1 +
- 2 files changed, 28 insertions(+)
+On Thu, Jan 18, 2024, at 19:48, Heinrich Schuchardt wrote:
+> On 1/17/24 23:24, Janne Grunau via B4 Relay wrote:
+>> From: Andre Przywara <andre.przywara@arm.com>
+>>
+>> UEFI relies entirely on unicode output, which actual fonts displayed =
+on
+>> the screen might not be ready for.
+>>
+>> Add a test displaying some international characters, to reveal missing
+>> glyphs, especially in our builtin fonts.
+>
+> How would I detect missing Bengali and Gujarati glyphs with this test?
 
-diff --git a/include/smbios.h b/include/smbios.h
-index 3df8827b60..a4fda9df7b 100644
---- a/include/smbios.h
-+++ b/include/smbios.h
-@@ -108,6 +108,33 @@ struct __packed smbios_type0 {
- 	char eos[SMBIOS_STRUCT_EOS_BYTES];
- };
- 
-+/**
-+ * enum smbios_wakeup_type - wake-up type
-+ *
-+ * These constants are used for the Wake-Up Type field in the SMBIOS
-+ * System Information (Type 1) structure.
-+ */
-+enum smbios_wakeup_type {
-+	/** @SMBIOS_WAKEUP_TYPE_RESERVED: Reserved */
-+	SMBIOS_WAKEUP_TYPE_RESERVED,
-+	/** @SMBIOS_WAKEUP_TYPE_OTHER: Other */
-+	SMBIOS_WAKEUP_TYPE_OTHER,
-+	/** @SMBIOS_WAKEUP_TYPE_UNKNOWN: Unknown */
-+	SMBIOS_WAKEUP_TYPE_UNKNOWN,
-+	/** @SMBIOS_WAKEUP_TYPE_APM_TIMER: APM Timer */
-+	SMBIOS_WAKEUP_TYPE_APM_TIMER,
-+	/** @SMBIOS_WAKEUP_TYPE_MODEM_RING: Modem Ring */
-+	SMBIOS_WAKEUP_TYPE_MODEM_RING,
-+	/** @SMBIOS_WAKEUP_TYPE_LAN_REMOTE: LAN Remote */
-+	SMBIOS_WAKEUP_TYPE_LAN_REMOTE,
-+	/** @SMBIOS_WAKEUP_TYPE_POWER_SWITCH: Power Switch */
-+	SMBIOS_WAKEUP_TYPE_POWER_SWITCH,
-+	/** @SMBIOS_WAKEUP_TYPE_PCI_PME: PCI PME# */
-+	SMBIOS_WAKEUP_TYPE_PCI_PME,
-+	/** @SMBIOS_WAKEUP_TYPE_AC_POWER_RESTORED: AC Power Restored */
-+	SMBIOS_WAKEUP_TYPE_AC_POWER_RESTORED,
-+};
-+
- struct __packed smbios_type1 {
- 	u8 type;
- 	u8 length;
-diff --git a/lib/smbios.c b/lib/smbios.c
-index c83af730a9..b190b010f3 100644
---- a/lib/smbios.c
-+++ b/lib/smbios.c
-@@ -394,6 +394,7 @@ static int smbios_write_type1(ulong *current, int handle,
- 	} else {
- 		t->serial_number = smbios_add_prop(ctx, "serial", NULL);
- 	}
-+	t->wakeup_type = SMBIOS_WAKEUP_TYPE_UNKNOWN;
- 	t->sku_number = smbios_add_prop(ctx, "sku", NULL);
- 	t->family = smbios_add_prop(ctx, "family", NULL);
- 
--- 
-2.43.0
+Only by knowing what to expect or to check the test code.
 
+> What might help would be an output of the Unicode entries in the font =
+in
+> parallel with the glyph.
+
+I'm not sure how useful it would be to extend the amount of text to regi=
+ster during the test. Even with the 3 second wait added in the the box d=
+rawing test time is short to check the results. Running the tests option=
+ally with pagination might be an option.
+
+>      U+0040, @
+>      U+0041, A
+>      U+0A85. =E0=AA=85
+>      U+0A86. =E0=AA=86
+>      U+0A87. =E0=AA=87
+>      U+0A88. =E0=AA=88
+>      U+0A89. =E0=AA=89
+>
+> This would require some new command but not an EFI test.
+
+Wouldn't we need both? Console tests to check if the intended glyphs are=
+ shown would be useful but the EFI selftest should still tests that it c=
+an render UTF-8 correctly (partial support on cp437 bitmap font consoles=
+).
+
+Best regards
+Janne
