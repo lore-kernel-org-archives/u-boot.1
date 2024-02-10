@@ -4,43 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19FAAC4829A
-	for <u-boot@archiver.kernel.org>; Sat, 10 Feb 2024 06:33:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACFD2C4829A
+	for <u-boot@archiver.kernel.org>; Sat, 10 Feb 2024 06:33:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 758F387E9A;
-	Sat, 10 Feb 2024 07:33:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EEA2087EAD;
+	Sat, 10 Feb 2024 07:33:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="rvCIUH62";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="kWUhtlSz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 23A2287E9E; Sat, 10 Feb 2024 07:33:06 +0100 (CET)
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+ id 1A1D087EAC; Sat, 10 Feb 2024 07:33:08 +0100 (CET)
+Received: from sin.source.kernel.org (sin.source.kernel.org
+ [IPv6:2604:1380:40e1:4800::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21AF087E98
- for <u-boot@lists.denx.de>; Sat, 10 Feb 2024 07:33:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A947A87E9B
+ for <u-boot@lists.denx.de>; Sat, 10 Feb 2024 07:33:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=wens@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id BE2CCCE0E42;
- Sat, 10 Feb 2024 06:33:01 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 767CAC433F1;
- Sat, 10 Feb 2024 06:33:00 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTP id 7A8F3CE1F80;
+ Sat, 10 Feb 2024 06:33:03 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 99303C433F1;
+ Sat, 10 Feb 2024 06:33:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1707546780;
- bh=GZ5teW6afNDodvHcK5VhexC1t38loWFfWNR8LofZ23I=;
+ s=k20201202; t=1707546782;
+ bh=kQHO0EfsIs68xzw27O0uS8mK63mKwEb14bnXOgqwsHs=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=rvCIUH62EBKiQuX/zPIV7CG83WIbWAeipFQCHl+Q3QHkZEnAdYOSTJ4hRsIaWXfBL
- TCntVAiEVpdhrN+biaIBmGoEioj2myi9WRUJyvldWp6yn7ESICMrFP9HtoykpUn7qG
- Z8qFW6X5Vy3rNDpEHvzOFfcujV19BstTUtiGfa32ayuOUxd4ucw6NCpoq93vB7teng
- LNIjNoR/9/Iu/MXiY003r7OXAnCmpB1qO4lfzj/2WMYNweBYRRjbFfGMzNajQK24Vn
- vsolNzlAQVcm8B++x/AodAygL7WSK5DyWltGcnEZ2r5t0RVtuLLK3VIatRrXeHRwws
- a/11KHXR1IJcQ==
+ b=kWUhtlSzZqfgYygLZqy9P0+ckAzoPg3gpKcjssq/inc8c4dLt8PcpMxG/7PvT0rGd
+ kri/QBVuMc1leSxqfJLOHgenjokqNmQc2eHy0LoBdd3wjk7YYvMzmvaX4mmX8Bjv6N
+ 15eOOpGZ01RKg9hsemdH+zKBjs8l4eRoYnaXwpf5PhaBQiPQ4dhdhnvtUUhF/FAEl3
+ AWKAMcuD4dAFj86r9wZX2O9BzpEbaZoO0BVS3xQlfDhxduOYS5meIU1+wP4bq7yv7f
+ XXuB34b4dOj5IwCb3lmYZk68xZ+6v5FM4BDHka2x3QzwOGns2jHUHqAXWpbKQPl92u
+ cx0WfMTRJcg3Q==
 Received: by wens.tw (Postfix, from userid 1000)
- id 0C5265FB5F; Sat, 10 Feb 2024 14:32:58 +0800 (CST)
+ id 476C75FDDF; Sat, 10 Feb 2024 14:33:00 +0800 (CST)
 From: Chen-Yu Tsai <wens@kernel.org>
 To: u-boot@lists.denx.de
 Cc: Chen-Yu Tsai <wens@csie.org>, Tom Rini <trini@konsulko.com>,
@@ -59,10 +60,9 @@ Cc: Chen-Yu Tsai <wens@csie.org>, Tom Rini <trini@konsulko.com>,
  Banglang Huang <banglang.huang@foxmail.com>,
  "Matwey V. Kornilov" <matwey.kornilov@gmail.com>,
  Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>
-Subject: [PATCH 2/4] rockchip: rk3399: Read cpuid and generate MAC address
- from efuse
-Date: Sat, 10 Feb 2024 14:32:48 +0800
-Message-Id: <20240210063252.1065611-3-wens@kernel.org>
+Subject: [PATCH 3/4] rockchip: rk3328: regenerate defconfigs
+Date: Sat, 10 Feb 2024 14:32:49 +0800
+Message-Id: <20240210063252.1065611-4-wens@kernel.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240210063252.1065611-1-wens@kernel.org>
 References: <20240210063252.1065611-1-wens@kernel.org>
@@ -86,30 +86,201 @@ X-Virus-Status: Clean
 
 From: Chen-Yu Tsai <wens@csie.org>
 
-The rockchip-efuse driver supports the efuse found on RK3399. This
-hardware block is part of the SoC and contains the CPUID, which can
-be used to generate stable serial numbers and MAC addresses.
-
-Enable the driver and reading cpuid by default for RK3399.
+Regenerate RK3328 defconfigs after adding imply statements.
 
 Signed-off-by: Chen-Yu Tsai <wens@csie.org>
 ---
- arch/arm/mach-rockchip/Kconfig | 2 ++
- 1 file changed, 2 insertions(+)
+ configs/evb-rk3328_defconfig                  | 2 --
+ configs/nanopi-r2c-plus-rk3328_defconfig      | 2 --
+ configs/nanopi-r2c-rk3328_defconfig           | 2 --
+ configs/nanopi-r2s-rk3328_defconfig           | 2 --
+ configs/orangepi-r1-plus-lts-rk3328_defconfig | 2 --
+ configs/orangepi-r1-plus-rk3328_defconfig     | 2 --
+ configs/roc-cc-rk3328_defconfig               | 2 --
+ configs/rock-pi-e-rk3328_defconfig            | 2 --
+ configs/rock64-rk3328_defconfig               | 2 --
+ 9 files changed, 18 deletions(-)
 
-diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
-index 20670fb57376..2558d956b8c6 100644
---- a/arch/arm/mach-rockchip/Kconfig
-+++ b/arch/arm/mach-rockchip/Kconfig
-@@ -269,6 +269,8 @@ config ROCKCHIP_RK3399
- 	imply SYS_BOOTCOUNT_SINGLEWORD if BOOTCOUNT_LIMIT
- 	imply BOOTSTD_FULL
- 	imply CMD_BOOTCOUNT if BOOTCOUNT_LIMIT
-+	imply ROCKCHIP_EFUSE
-+	imply MISC_INIT_R
- 	help
- 	  The Rockchip RK3399 is a ARM-based SoC with a dual-core Cortex-A72
- 	  and quad-core Cortex-A53.
+diff --git a/configs/evb-rk3328_defconfig b/configs/evb-rk3328_defconfig
+index 995bfd0558b1..004cbd33e80a 100644
+--- a/configs/evb-rk3328_defconfig
++++ b/configs/evb-rk3328_defconfig
+@@ -30,7 +30,6 @@ CONFIG_LEGACY_IMAGE_FORMAT=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-evb.dtb"
+ # CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+-CONFIG_MISC_INIT_R=y
+ CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_PAD_TO=0x7f8000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+@@ -71,7 +70,6 @@ CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+ CONFIG_MISC=y
+-CONFIG_ROCKCHIP_EFUSE=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_PHY_MOTORCOMM=y
+diff --git a/configs/nanopi-r2c-plus-rk3328_defconfig b/configs/nanopi-r2c-plus-rk3328_defconfig
+index 1cb0ed855398..2f0d253b4b7c 100644
+--- a/configs/nanopi-r2c-plus-rk3328_defconfig
++++ b/configs/nanopi-r2c-plus-rk3328_defconfig
+@@ -31,7 +31,6 @@ CONFIG_LEGACY_IMAGE_FORMAT=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-nanopi-r2c-plus.dtb"
+ # CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+-CONFIG_MISC_INIT_R=y
+ CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_PAD_TO=0x7f8000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+@@ -73,7 +72,6 @@ CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+ CONFIG_MISC=y
+-CONFIG_ROCKCHIP_EFUSE=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_PHY_MOTORCOMM=y
+diff --git a/configs/nanopi-r2c-rk3328_defconfig b/configs/nanopi-r2c-rk3328_defconfig
+index 59801328deda..ca13eb873a72 100644
+--- a/configs/nanopi-r2c-rk3328_defconfig
++++ b/configs/nanopi-r2c-rk3328_defconfig
+@@ -31,7 +31,6 @@ CONFIG_LEGACY_IMAGE_FORMAT=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-nanopi-r2c.dtb"
+ # CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+-CONFIG_MISC_INIT_R=y
+ CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_PAD_TO=0x7f8000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+@@ -73,7 +72,6 @@ CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+ CONFIG_MISC=y
+-CONFIG_ROCKCHIP_EFUSE=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_PHY_MOTORCOMM=y
+diff --git a/configs/nanopi-r2s-rk3328_defconfig b/configs/nanopi-r2s-rk3328_defconfig
+index 61914b1650d2..619707436130 100644
+--- a/configs/nanopi-r2s-rk3328_defconfig
++++ b/configs/nanopi-r2s-rk3328_defconfig
+@@ -31,7 +31,6 @@ CONFIG_LEGACY_IMAGE_FORMAT=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-nanopi-r2s.dtb"
+ # CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+-CONFIG_MISC_INIT_R=y
+ CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_PAD_TO=0x7f8000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+@@ -73,7 +72,6 @@ CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+ CONFIG_MISC=y
+-CONFIG_ROCKCHIP_EFUSE=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_PHY_MOTORCOMM=y
+diff --git a/configs/orangepi-r1-plus-lts-rk3328_defconfig b/configs/orangepi-r1-plus-lts-rk3328_defconfig
+index 968110c8cd6f..8e9a9411a763 100644
+--- a/configs/orangepi-r1-plus-lts-rk3328_defconfig
++++ b/configs/orangepi-r1-plus-lts-rk3328_defconfig
+@@ -34,7 +34,6 @@ CONFIG_LEGACY_IMAGE_FORMAT=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-orangepi-r1-plus-lts.dtb"
+ # CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+-CONFIG_MISC_INIT_R=y
+ CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_PAD_TO=0x7f8000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+@@ -78,7 +77,6 @@ CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+ CONFIG_MISC=y
+-CONFIG_ROCKCHIP_EFUSE=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+diff --git a/configs/orangepi-r1-plus-rk3328_defconfig b/configs/orangepi-r1-plus-rk3328_defconfig
+index 7038f09f202c..240fcdeb221f 100644
+--- a/configs/orangepi-r1-plus-rk3328_defconfig
++++ b/configs/orangepi-r1-plus-rk3328_defconfig
+@@ -34,7 +34,6 @@ CONFIG_LEGACY_IMAGE_FORMAT=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-orangepi-r1-plus.dtb"
+ # CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+-CONFIG_MISC_INIT_R=y
+ CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_PAD_TO=0x7f8000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+@@ -78,7 +77,6 @@ CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+ CONFIG_MISC=y
+-CONFIG_ROCKCHIP_EFUSE=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+diff --git a/configs/roc-cc-rk3328_defconfig b/configs/roc-cc-rk3328_defconfig
+index 7d81a715ef25..f734116f847e 100644
+--- a/configs/roc-cc-rk3328_defconfig
++++ b/configs/roc-cc-rk3328_defconfig
+@@ -31,7 +31,6 @@ CONFIG_LEGACY_IMAGE_FORMAT=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-roc-cc.dtb"
+ # CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+-CONFIG_MISC_INIT_R=y
+ CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_PAD_TO=0x7f8000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+@@ -74,7 +73,6 @@ CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+ CONFIG_MISC=y
+-CONFIG_ROCKCHIP_EFUSE=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_PHY_REALTEK=y
+diff --git a/configs/rock-pi-e-rk3328_defconfig b/configs/rock-pi-e-rk3328_defconfig
+index ddd482dd0195..5ccdc02d4c86 100644
+--- a/configs/rock-pi-e-rk3328_defconfig
++++ b/configs/rock-pi-e-rk3328_defconfig
+@@ -32,7 +32,6 @@ CONFIG_LEGACY_IMAGE_FORMAT=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-rock-pi-e.dtb"
+ # CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+-CONFIG_MISC_INIT_R=y
+ CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_PAD_TO=0x7f8000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+@@ -74,7 +73,6 @@ CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+ CONFIG_MISC=y
+-CONFIG_ROCKCHIP_EFUSE=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_PHY_REALTEK=y
+diff --git a/configs/rock64-rk3328_defconfig b/configs/rock64-rk3328_defconfig
+index 01e447448513..81284c6697a5 100644
+--- a/configs/rock64-rk3328_defconfig
++++ b/configs/rock64-rk3328_defconfig
+@@ -34,7 +34,6 @@ CONFIG_LEGACY_IMAGE_FORMAT=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-rock64.dtb"
+ # CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+-CONFIG_MISC_INIT_R=y
+ CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_PAD_TO=0x7f8000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+@@ -78,7 +77,6 @@ CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+ CONFIG_MISC=y
+-CONFIG_ROCKCHIP_EFUSE=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_SPI_FLASH_SFDP_SUPPORT=y
 -- 
 2.39.2
 
