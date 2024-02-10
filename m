@@ -4,70 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F015C48260
-	for <u-boot@archiver.kernel.org>; Sat, 10 Feb 2024 06:33:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 800E9C4829A
+	for <u-boot@archiver.kernel.org>; Sat, 10 Feb 2024 07:13:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 913D687E9C;
-	Sat, 10 Feb 2024 07:33:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id A5DAE87E92;
+	Sat, 10 Feb 2024 08:13:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Vrfi/ExT";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="mPY/ctzA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 34BC287E9F; Sat, 10 Feb 2024 07:33:10 +0100 (CET)
-Received: from sin.source.kernel.org (sin.source.kernel.org
- [IPv6:2604:1380:40e1:4800::1])
+ id C7D4F87E90; Sat, 10 Feb 2024 08:13:39 +0100 (CET)
+Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A040C87EA9
- for <u-boot@lists.denx.de>; Sat, 10 Feb 2024 07:33:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0686687E92
+ for <u-boot@lists.denx.de>; Sat, 10 Feb 2024 08:13:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=wens@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 7426FCE21B7;
- Sat, 10 Feb 2024 06:33:05 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 943FEC433F1;
- Sat, 10 Feb 2024 06:33:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1707546784;
- bh=wxYd/A0HMl3KlwQsUGf88Y3mufCObtTDoWV26yQG3bU=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Vrfi/ExTXC65TjGCBpZYVooNFFCWr03+QfbqvMzg+oBS/U7CfqjtCYI2xQMWJH9AV
- KpPWxcou+ivdfejJTudJPZ4vqKCRjpytn+WUo1ft971nTjiN0Ur3JE9ErQOJnkBvIx
- JVPRF0b6KZPf477YfPNgemmvjqnVOZT7XYVLBoUXBqRJv9Ys/Q5mepfQKefSlIRqbG
- VzM4tJ46/AFFsUf0nVd5rK615FPgRey36gn6ux4exNibcQV19IkdeID3zzKJHIegVs
- bJIexG7Eo1oh0XSIc6+80UuPMGazzMprtyBCteDCO/1Wx5DS+enz8ZDj1nV/3fEaIf
- G+JgxXoqzDiDw==
-Received: by wens.tw (Postfix, from userid 1000)
- id 85D9A5FB5F; Sat, 10 Feb 2024 14:33:02 +0800 (CST)
-From: Chen-Yu Tsai <wens@kernel.org>
-To: u-boot@lists.denx.de
-Cc: Chen-Yu Tsai <wens@csie.org>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Tianling Shen <cnsztl@gmail.com>, David Bauer <mail@david-bauer.net>,
- Xiaobo Tian <peterwillcn@gmail.com>, Peter Robinson <pbrobinson@gmail.com>,
- Quentin Schulz <quentin.schulz@theobroma-systems.com>,
- Klaus Goger <klaus.goger@theobroma-systems.com>,
- Loic Devulder <ldevulder@suse.com>, Jonas Karlman <jonas@kwiboo.se>,
- Levin Du <djw@t-chip.com.cn>, Suniel Mahesh <sunil@amarulasolutions.com>,
- FUKAUMI Naoki <naoki@radxa.com>,
- Christopher Obbard <chris.obbard@collabora.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Banglang Huang <banglang.huang@foxmail.com>,
- "Matwey V. Kornilov" <matwey.kornilov@gmail.com>,
- Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>
-Subject: [PATCH 4/4] rockchip: rk3399: regenerate defconfigs
-Date: Sat, 10 Feb 2024 14:32:50 +0800
-Message-Id: <20240210063252.1065611-5-wens@kernel.org>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240210063252.1065611-1-wens@kernel.org>
-References: <20240210063252.1065611-1-wens@kernel.org>
+ spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
+ t=1707549214;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=W/QfmuDCunRrUlHojE0pN8X6XUnca/Eo99N47QJEzbc=;
+ b=mPY/ctzAdYXEhXK/KUU3/hUfeMgrjkIfohRYo2n5JWkqSFY9aeyc2oP+lOUp5hyGJZR8XB
+ o1oRWoKbXt0fTlWCakI+1EG8yW6x0XNGaAI6V2TC7LZ2J7fuVCPrt8mp4YS3YCQORtjMrH
+ eYbDn60+ZmiCJmm67w57ly4hOD7BY+l2huLD/oGHtaI9HIXx4GC6AaTwkzxnQM243tU3T6
+ XKk8Glekz8dgg0NcHdqRDCtxiz1/DmbI/2xkNebK5tZgBX2RzAp/P64hQfhA8Q6YjuorRQ
+ PLdyiQLgiG653Wmrps2Pvub8ecmnY4vgG1EVM06WCMZUqD3wivt1215Qxd8QhA==
+Date: Sat, 10 Feb 2024 08:13:33 +0100
+From: Dragan Simic <dsimic@manjaro.org>
+To: Shantur Rathore <i@shantur.com>
+Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
+ andre.przywara@arm.com, Hector Martin <marcan@marcan.st>, Simon Glass
+ <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: Re: [FIX PATCH v1] Fix: common: usb_hub: Reset only USB3.0 hub
+In-Reply-To: <a042e4fa90f02b5f51dd76c3dedf5ae1@manjaro.org>
+References: <20240207102327.35125-1-i@shantur.com>
+ <32db6dba-d515-4077-9d72-d77a7f431335@denx.de>
+ <CABEcMwXW3KXQCJM16Qhk=19Sss3zdtQyWtJEed5y=na2mP8RFA@mail.gmail.com>
+ <93f69779-3197-4ede-bb78-f2512ec30fc1@denx.de>
+ <24f25359ce213370214bceeabc55e1df@manjaro.org>
+ <CABEcMwUoyi5uLSADa2N76V3C-ryiXzYywgOKnL=DEqtU6LYa_w@mail.gmail.com>
+ <a042e4fa90f02b5f51dd76c3dedf5ae1@manjaro.org>
+Message-ID: <3aa6998e3d9fd97cd4ba729f7656f467@manjaro.org>
+X-Sender: dsimic@manjaro.org
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
 Content-Transfer-Encoding: 8bit
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,366 +76,157 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Chen-Yu Tsai <wens@csie.org>
+Hello Shantur,
 
-Regenerate RK3399 defconfigs after adding imply statements.
+On 2024-02-08 15:17, Dragan Simic wrote:
+> On 2024-02-08 15:10, Shantur Rathore wrote:
+>> On Thu, Feb 8, 2024 at 1:44 PM Dragan Simic <dsimic@manjaro.org> 
+>> wrote:
+>>> On 2024-02-08 14:33, Marek Vasut wrote:
+>>> > On 2/8/24 12:30, Shantur Rathore wrote:
+>>> >> On Wed, Feb 7, 2024 at 1:07 PM Marek Vasut <marex@denx.de> wrote:
+>>> >>> On 2/7/24 11:23, Shantur Rathore wrote:
+>>> >>>> USB 3.0 spec requires hub to reset device while
+>>> >>>> enumeration. Some USB 2.0 hubs / devices don't
+>>> >>>> handle this well and after implementation of
+>>> >>>> reset some USB 2.0 disks weren't detected on
+>>> >>>> Allwinner based boards.
+>>> >>>>
+>>> >>>> Resetting only when hub is USB 3.0 fixes it.
+>>> >>>
+>>> >>> It would be good to include as many details about the faulty hardware
+>>> >>> in
+>>> >>> the commit message as possible, so that when someone else runs into
+>>> >>> this, they would have all that information available.
+>>> >>>
+>>> >>>> Tested-by: Andre Przywara <andre.przywara@arm.com>
+>>> >>>>
+>>> >>>> Signed-off-by: Shantur Rathore <i@shantur.com>
+>>> >>>> ---
+>>> >>>>
+>>> >>>>    common/usb_hub.c | 6 ++++--
+>>> >>>>    1 file changed, 4 insertions(+), 2 deletions(-)
+>>> >>>>
+>>> >>>> diff --git a/common/usb_hub.c b/common/usb_hub.c
+>>> >>>> index 3fb7e14d10..2e054eb935 100644
+>>> >>>> --- a/common/usb_hub.c
+>>> >>>> +++ b/common/usb_hub.c
+>>> >>>> @@ -174,8 +174,10 @@ static void usb_hub_power_on(struct
+>>> >>>> usb_hub_device *hub)
+>>> >>>>
+>>> >>>>        debug("enabling power on all ports\n");
+>>> >>>>        for (i = 0; i < dev->maxchild; i++) {
+>>> >>>> -             usb_set_port_feature(dev, i + 1, USB_PORT_FEAT_RESET);
+>>> >>>> -             debug("Reset : port %d returns %lX\n", i + 1,
+>>> >>>> dev->status);
+>>> >>>> +             if (usb_hub_is_superspeed(dev)) {
+>>> >>>
+>>> >>> Should this condition be "all which are lower than superspeed"
+>>> >>> instead ,
+>>> >>> so when the next generation of USB comes, this problem won't trigger
+>>> >>> ?
+>>> >>>
+>>> >>> What does Linux do btw ?
+>>> >>
+>>> >> As of now Linux checks if the hub is superspeed
+>>> >> https://github.com/torvalds/linux/blob/master/drivers/usb/core/hub.c#L2859
+>>> >>
+>>> >> which is
+>>> >>   return hdev->descriptor.bDeviceProtocol == USB_HUB_PR_SS; //
+>>> >> USB_HUB_PR_SS = 3
+>>> >>
+>>> >> This holds true for newer SuperSpeedPlus hubs as well.
+>>> >> https://github.com/torvalds/linux/blob/master/drivers/usb/core/hub.h#L155
+>>> >>
+>>> >> We can change the check to be  bDeviceProtocol > 2 but who knows if
+>>> >> things change in the newer version of spec.
+>>> >> I am open to suggestions.
+>>> >
+>>> > Please just include the ^ in the commit description. Use link to
+>>> > git.kernel.org , not some mirror . This is extremely useful
+>>> > information and, well, you already wrote the V2 commit message
+>>> > addition in this answer.
+>>> 
+>>> Shantur, if that would be easier or quicker for you, I can write
+>>> a quite detailed patch description for you, in exchange for a
+>>> "Helped-by" tag in the v2 patch submission. :)
+>> 
+>> That would be really kind of you Dragan.
+> 
+> Sure, I'll write the summary and send it over.
+> 
+>> I am down with the flu so that would really help me as my brain is
+>> working at 15% capacity.
+> 
+> Oh, I'm really sorry to hear that. :(  I hope you'll get better
+> soon, and I know very well what's it like;  I've also been sick
+> recently, as a result of some kind of flu that unfortunately found
+> its way into my lungs, and it took me about a month to get back
+> to about 90% of my usual mental capacity.  I'm still not back to
+> exactly 100%. :/
+> 
+> I really hope you'll recover much faster.
 
-Signed-off-by: Chen-Yu Tsai <wens@csie.org>
----
- configs/chromebook_bob_defconfig          | 2 --
- configs/chromebook_kevin_defconfig        | 2 --
- configs/firefly-rk3399_defconfig          | 2 --
- configs/nanopi-r4s-rk3399_defconfig       | 2 --
- configs/pinebook-pro-rk3399_defconfig     | 2 --
- configs/pinephone-pro-rk3399_defconfig    | 2 --
- configs/puma-rk3399_defconfig             | 2 --
- configs/roc-pc-mezzanine-rk3399_defconfig | 2 --
- configs/roc-pc-rk3399_defconfig           | 2 --
- configs/rock-4c-plus-rk3399_defconfig     | 3 ---
- configs/rock-4se-rk3399_defconfig         | 3 ---
- configs/rock-pi-4-rk3399_defconfig        | 3 ---
- configs/rock-pi-4c-rk3399_defconfig       | 3 ---
- configs/rock-pi-n10-rk3399pro_defconfig   | 1 -
- configs/rock960-rk3399_defconfig          | 1 -
- configs/rockpro64-rk3399_defconfig        | 2 --
- 16 files changed, 34 deletions(-)
+I hope you're feeling better.
 
-diff --git a/configs/chromebook_bob_defconfig b/configs/chromebook_bob_defconfig
-index b5a5ae737e52..bffa0d33b75c 100644
---- a/configs/chromebook_bob_defconfig
-+++ b/configs/chromebook_bob_defconfig
-@@ -27,7 +27,6 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-gru-bob.dtb"
- # CONFIG_DISPLAY_CPUINFO is not set
- CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_BOARD_EARLY_INIT_R=y
--CONFIG_MISC_INIT_R=y
- CONFIG_BLOBLIST=y
- CONFIG_BLOBLIST_ADDR=0x100000
- CONFIG_BLOBLIST_SIZE=0x1000
-@@ -68,7 +67,6 @@ CONFIG_SYS_I2C_ROCKCHIP=y
- CONFIG_I2C_MUX=y
- CONFIG_CROS_EC_KEYB=y
- CONFIG_MISC=y
--CONFIG_ROCKCHIP_EFUSE=y
- CONFIG_CROS_EC=y
- CONFIG_CROS_EC_SPI=y
- CONFIG_PWRSEQ=y
-diff --git a/configs/chromebook_kevin_defconfig b/configs/chromebook_kevin_defconfig
-index 20913d2cf0fe..e14fc358c504 100644
---- a/configs/chromebook_kevin_defconfig
-+++ b/configs/chromebook_kevin_defconfig
-@@ -28,7 +28,6 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-gru-kevin.dtb"
- # CONFIG_DISPLAY_CPUINFO is not set
- CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_BOARD_EARLY_INIT_R=y
--CONFIG_MISC_INIT_R=y
- CONFIG_BLOBLIST=y
- CONFIG_BLOBLIST_ADDR=0x100000
- CONFIG_BLOBLIST_SIZE=0x1000
-@@ -69,7 +68,6 @@ CONFIG_SYS_I2C_ROCKCHIP=y
- CONFIG_I2C_MUX=y
- CONFIG_CROS_EC_KEYB=y
- CONFIG_MISC=y
--CONFIG_ROCKCHIP_EFUSE=y
- CONFIG_CROS_EC=y
- CONFIG_CROS_EC_SPI=y
- CONFIG_PWRSEQ=y
-diff --git a/configs/firefly-rk3399_defconfig b/configs/firefly-rk3399_defconfig
-index b7c8e95b7b89..b01b1a327896 100644
---- a/configs/firefly-rk3399_defconfig
-+++ b/configs/firefly-rk3399_defconfig
-@@ -20,7 +20,6 @@ CONFIG_PCI=y
- CONFIG_DEBUG_UART=y
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-firefly.dtb"
- CONFIG_DISPLAY_BOARDINFO_LATE=y
--CONFIG_MISC_INIT_R=y
- CONFIG_SPL_MAX_SIZE=0x2e000
- CONFIG_SPL_PAD_TO=0x7f8000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-@@ -46,7 +45,6 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
- CONFIG_MISC=y
--CONFIG_ROCKCHIP_EFUSE=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_MMC_SDHCI=y
-diff --git a/configs/nanopi-r4s-rk3399_defconfig b/configs/nanopi-r4s-rk3399_defconfig
-index cacaab14d21f..18a1e68aa049 100644
---- a/configs/nanopi-r4s-rk3399_defconfig
-+++ b/configs/nanopi-r4s-rk3399_defconfig
-@@ -17,7 +17,6 @@ CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART=y
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-nanopi-r4s.dtb"
- CONFIG_DISPLAY_BOARDINFO_LATE=y
--CONFIG_MISC_INIT_R=y
- CONFIG_SPL_MAX_SIZE=0x2e000
- CONFIG_SPL_PAD_TO=0x7f8000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-@@ -42,7 +41,6 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
- CONFIG_MISC=y
--CONFIG_ROCKCHIP_EFUSE=y
- CONFIG_ROCKCHIP_OTP=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
-diff --git a/configs/pinebook-pro-rk3399_defconfig b/configs/pinebook-pro-rk3399_defconfig
-index de357415fbe4..6b83daf07945 100644
---- a/configs/pinebook-pro-rk3399_defconfig
-+++ b/configs/pinebook-pro-rk3399_defconfig
-@@ -26,7 +26,6 @@ CONFIG_BOOTDELAY=3
- CONFIG_USE_PREBOOT=y
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-pinebook-pro.dtb"
- CONFIG_DISPLAY_BOARDINFO_LATE=y
--CONFIG_MISC_INIT_R=y
- CONFIG_SPL_MAX_SIZE=0x40000
- CONFIG_SPL_PAD_TO=0x7f8000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-@@ -61,7 +60,6 @@ CONFIG_SYS_I2C_ROCKCHIP=y
- CONFIG_LED=y
- CONFIG_LED_GPIO=y
- CONFIG_MISC=y
--CONFIG_ROCKCHIP_EFUSE=y
- CONFIG_MMC_IO_VOLTAGE=y
- CONFIG_SPL_MMC_IO_VOLTAGE=y
- CONFIG_MMC_UHS_SUPPORT=y
-diff --git a/configs/pinephone-pro-rk3399_defconfig b/configs/pinephone-pro-rk3399_defconfig
-index d08224fe536b..96316c4b303f 100644
---- a/configs/pinephone-pro-rk3399_defconfig
-+++ b/configs/pinephone-pro-rk3399_defconfig
-@@ -25,7 +25,6 @@ CONFIG_BOOTDELAY=3
- CONFIG_USE_PREBOOT=y
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-pinephone-pro.dtb"
- CONFIG_DISPLAY_BOARDINFO_LATE=y
--CONFIG_MISC_INIT_R=y
- CONFIG_SPL_MAX_SIZE=0x40000
- CONFIG_SPL_PAD_TO=0x7f8000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-@@ -60,7 +59,6 @@ CONFIG_SYS_I2C_ROCKCHIP=y
- CONFIG_LED=y
- CONFIG_LED_GPIO=y
- CONFIG_MISC=y
--CONFIG_ROCKCHIP_EFUSE=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_MMC_SDHCI=y
-diff --git a/configs/puma-rk3399_defconfig b/configs/puma-rk3399_defconfig
-index c2aa02ec74bd..f39d352c7890 100644
---- a/configs/puma-rk3399_defconfig
-+++ b/configs/puma-rk3399_defconfig
-@@ -25,7 +25,6 @@ CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART=y
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-puma-haikou.dtb"
- CONFIG_DISPLAY_BOARDINFO_LATE=y
--CONFIG_MISC_INIT_R=y
- CONFIG_SPL_MAX_SIZE=0x2e000
- CONFIG_SPL_PAD_TO=0x7f8000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-@@ -68,7 +67,6 @@ CONFIG_SPL_GPIO_HOG=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
- CONFIG_MISC=y
--CONFIG_ROCKCHIP_EFUSE=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_MMC_SDHCI=y
-diff --git a/configs/roc-pc-mezzanine-rk3399_defconfig b/configs/roc-pc-mezzanine-rk3399_defconfig
-index de6539bedf48..64103eada8cf 100644
---- a/configs/roc-pc-mezzanine-rk3399_defconfig
-+++ b/configs/roc-pc-mezzanine-rk3399_defconfig
-@@ -26,7 +26,6 @@ CONFIG_DEBUG_UART=y
- # CONFIG_ANDROID_BOOT_IMAGE is not set
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-roc-pc-mezzanine.dtb"
- CONFIG_DISPLAY_BOARDINFO_LATE=y
--CONFIG_MISC_INIT_R=y
- CONFIG_SPL_MAX_SIZE=0x40000
- CONFIG_SPL_PAD_TO=0x7f8000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-@@ -56,7 +55,6 @@ CONFIG_SPL_DM_SEQ_ALIAS=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
- CONFIG_MISC=y
--CONFIG_ROCKCHIP_EFUSE=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_MMC_SDHCI=y
-diff --git a/configs/roc-pc-rk3399_defconfig b/configs/roc-pc-rk3399_defconfig
-index 7123a7a07299..61991e8868b3 100644
---- a/configs/roc-pc-rk3399_defconfig
-+++ b/configs/roc-pc-rk3399_defconfig
-@@ -27,7 +27,6 @@ CONFIG_DEBUG_UART=y
- CONFIG_USE_PREBOOT=y
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-roc-pc.dtb"
- CONFIG_DISPLAY_BOARDINFO_LATE=y
--CONFIG_MISC_INIT_R=y
- CONFIG_SPL_MAX_SIZE=0x40000
- CONFIG_SPL_PAD_TO=0x7f8000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-@@ -56,7 +55,6 @@ CONFIG_SPL_DM_SEQ_ALIAS=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
- CONFIG_MISC=y
--CONFIG_ROCKCHIP_EFUSE=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_MMC_SDHCI=y
-diff --git a/configs/rock-4c-plus-rk3399_defconfig b/configs/rock-4c-plus-rk3399_defconfig
-index 18525c8bf504..12587b1eba10 100644
---- a/configs/rock-4c-plus-rk3399_defconfig
-+++ b/configs/rock-4c-plus-rk3399_defconfig
-@@ -8,7 +8,6 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
- CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE="rk3399-rock-4c-plus"
--CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_TARGET_EVB_RK3399=y
-@@ -21,7 +20,6 @@ CONFIG_DEBUG_UART=y
- # CONFIG_ANDROID_BOOT_IMAGE is not set
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-rock-4c-plus.dtb"
- CONFIG_DISPLAY_BOARDINFO_LATE=y
--CONFIG_MISC_INIT_R=y
- CONFIG_SPL_MAX_SIZE=0x2e000
- CONFIG_SPL_PAD_TO=0x7f8000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-@@ -53,7 +51,6 @@ CONFIG_DFU_MMC=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
- CONFIG_MISC=y
--CONFIG_ROCKCHIP_EFUSE=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_MMC_SDHCI=y
-diff --git a/configs/rock-4se-rk3399_defconfig b/configs/rock-4se-rk3399_defconfig
-index 171de23ec8f6..16a58a10d7e3 100644
---- a/configs/rock-4se-rk3399_defconfig
-+++ b/configs/rock-4se-rk3399_defconfig
-@@ -8,7 +8,6 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
- CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE="rk3399-rock-4se"
--CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_TARGET_EVB_RK3399=y
-@@ -23,7 +22,6 @@ CONFIG_SPL_FIT_SIGNATURE=y
- CONFIG_LEGACY_IMAGE_FORMAT=y
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-rock-4se.dtb"
- CONFIG_DISPLAY_BOARDINFO_LATE=y
--CONFIG_MISC_INIT_R=y
- CONFIG_SPL_MAX_SIZE=0x2e000
- CONFIG_SPL_PAD_TO=0x7f8000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-@@ -54,7 +52,6 @@ CONFIG_DFU_MMC=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
- CONFIG_MISC=y
--CONFIG_ROCKCHIP_EFUSE=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_MMC_SDHCI=y
-diff --git a/configs/rock-pi-4-rk3399_defconfig b/configs/rock-pi-4-rk3399_defconfig
-index 83fc4ad7dabc..fe3705e3672c 100644
---- a/configs/rock-pi-4-rk3399_defconfig
-+++ b/configs/rock-pi-4-rk3399_defconfig
-@@ -8,7 +8,6 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
- CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE="rk3399-rock-pi-4a"
--CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_TARGET_EVB_RK3399=y
-@@ -23,7 +22,6 @@ CONFIG_SPL_FIT_SIGNATURE=y
- CONFIG_LEGACY_IMAGE_FORMAT=y
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-rock-pi-4a.dtb"
- CONFIG_DISPLAY_BOARDINFO_LATE=y
--CONFIG_MISC_INIT_R=y
- CONFIG_SPL_MAX_SIZE=0x2e000
- CONFIG_SPL_PAD_TO=0x7f8000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-@@ -55,7 +53,6 @@ CONFIG_DFU_MMC=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
- CONFIG_MISC=y
--CONFIG_ROCKCHIP_EFUSE=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_MMC_SDHCI=y
-diff --git a/configs/rock-pi-4c-rk3399_defconfig b/configs/rock-pi-4c-rk3399_defconfig
-index 089344097e0c..f37a09710b9e 100644
---- a/configs/rock-pi-4c-rk3399_defconfig
-+++ b/configs/rock-pi-4c-rk3399_defconfig
-@@ -8,7 +8,6 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
- CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE="rk3399-rock-pi-4c"
--CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_TARGET_EVB_RK3399=y
-@@ -21,7 +20,6 @@ CONFIG_DEBUG_UART=y
- # CONFIG_ANDROID_BOOT_IMAGE is not set
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-rock-pi-4c.dtb"
- CONFIG_DISPLAY_BOARDINFO_LATE=y
--CONFIG_MISC_INIT_R=y
- CONFIG_SPL_MAX_SIZE=0x2e000
- CONFIG_SPL_PAD_TO=0x7f8000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-@@ -53,7 +51,6 @@ CONFIG_DFU_MMC=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
- CONFIG_MISC=y
--CONFIG_ROCKCHIP_EFUSE=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_MMC_SDHCI=y
-diff --git a/configs/rock-pi-n10-rk3399pro_defconfig b/configs/rock-pi-n10-rk3399pro_defconfig
-index dc4b3b40380a..9a8beaa81ddf 100644
---- a/configs/rock-pi-n10-rk3399pro_defconfig
-+++ b/configs/rock-pi-n10-rk3399pro_defconfig
-@@ -22,7 +22,6 @@ CONFIG_DEBUG_UART=y
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399pro-rock-pi-n10.dtb"
- # CONFIG_CONSOLE_MUX is not set
- CONFIG_DISPLAY_BOARDINFO_LATE=y
--CONFIG_MISC_INIT_R=y
- CONFIG_SPL_MAX_SIZE=0x2e000
- CONFIG_SPL_PAD_TO=0x7f8000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/rock960-rk3399_defconfig b/configs/rock960-rk3399_defconfig
-index b93dda56593b..80b41b061bdb 100644
---- a/configs/rock960-rk3399_defconfig
-+++ b/configs/rock960-rk3399_defconfig
-@@ -20,7 +20,6 @@ CONFIG_USE_PREBOOT=y
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-rock960.dtb"
- CONFIG_SYS_PBSIZE=1052
- CONFIG_DISPLAY_BOARDINFO_LATE=y
--CONFIG_MISC_INIT_R=y
- CONFIG_SPL_MAX_SIZE=0x2e000
- CONFIG_SPL_PAD_TO=0x7f8000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/rockpro64-rk3399_defconfig b/configs/rockpro64-rk3399_defconfig
-index 711541f84627..c37d858c2c66 100644
---- a/configs/rockpro64-rk3399_defconfig
-+++ b/configs/rockpro64-rk3399_defconfig
-@@ -28,7 +28,6 @@ CONFIG_BOOTSTAGE_REPORT=y
- CONFIG_USE_PREBOOT=y
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-rockpro64.dtb"
- CONFIG_DISPLAY_BOARDINFO_LATE=y
--CONFIG_MISC_INIT_R=y
- CONFIG_SPL_MAX_SIZE=0x40000
- CONFIG_SPL_PAD_TO=0x7f8000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-@@ -64,7 +63,6 @@ CONFIG_SYS_I2C_ROCKCHIP=y
- CONFIG_LED=y
- CONFIG_LED_GPIO=y
- CONFIG_MISC=y
--CONFIG_ROCKCHIP_EFUSE=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_MMC_SDHCI=y
--- 
-2.39.2
+Below are the patch subject and description that I prepared for you,
+please have a look.
 
+------- >8 ------------- >8 ------------- >8 ------------- >8 -------
+[PATCH v2] common: usb-hub: Reset USB 3.0 hubs only
+
+Additional testing of the changes introduced in commit 33e06dcbe57a 
+("common:
+usb-hub: Reset hub port before scanning") revealed that some USB 3.0 
+flash
+drives didn't work in U-Boot on some Allwinner SoCs that support USB 2.0 
+only.
+More precisely, some tested USB 3.0 flash drives failed to be detected 
+and
+work on an OrangePi Zero 3 with Allwinner H616 SoC, which supports USB 
+2.0
+only, while the same USB flash drives worked just fine on a Pine64 H64 
+with
+Allwinner H6 SoC, which supports both USB 2.0 and 3.0.
+
+Resetting USB 3.0 hubs only has been tested to work as expected, 
+resolving
+the previous issues on the Allwinner H616, while not introducing any new
+issues on other Allwinner SoCs.  Thus, let's fix it that way.
+
+According to the USB 3.0 specification, resetting a USB 3.0 port is 
+required
+when an attached USB device transitions between different states, such 
+as
+when it resumes from suspend.  Though, the Linux kernel performs 
+additional
+USB 3.0 port resets upon initial USB device attachment, presumably to 
+ensure
+proper state of the USB 3.0 hub port and proper USB mode negotiation 
+during
+the initial USB device attachment and enumeration.
+
+Such USB port resets don't seem to exist for USB 2.0 hubs, according the 
+USB
+2.0 specification.  The resets seem to be added to the USB 3.0 
+specification
+as part of the port and device mode negotiation.
+
+The Linux kernel also resets USB 3.0 (i.e. SuperSpeed) hubs only, as 
+visible
+in file drivers/usb/core/hub.c in the kernel source, line 2859.  This 
+check
+also applies to newer SuperSpeed Plus (USB 3.1 or 3.2) hubs as well, 
+which
+hopefully makes it future proof.
+
+Fixes: 33e06dcbe57a ("common: usb-hub: Reset hub port before scanning")
+Link: 
+https://lore.kernel.org/u-boot/20240207102327.35125-1-i@shantur.com/T/#u
+Link: 
+https://lore.kernel.org/u-boot/20240201164604.13315fa6@donnerap.manchester.arm.com/T/#u
+Signed-off-by: Shantur Rathore <i@shantur.com>
+Helped-by: Dragan Simic <dsimic@manjaro.org>
+Tested-by: Andre Przywara <andre.przywara@arm.com>
+Reviewed-by: Dragan Simic <dsimic@manjaro.org>
+------- >8 ------------- >8 ------------- >8 ------------- >8 -------
