@@ -4,100 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17974C4829C
-	for <u-boot@archiver.kernel.org>; Sat, 10 Feb 2024 23:26:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B01BC48260
+	for <u-boot@archiver.kernel.org>; Sat, 10 Feb 2024 23:41:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 522BA87E9F;
-	Sun, 11 Feb 2024 00:26:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id 38D2E879CC;
+	Sun, 11 Feb 2024 00:41:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="K9kQsfjT";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AjMjOpb5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ADD0F87EA0; Sun, 11 Feb 2024 00:26:01 +0100 (CET)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 263B587AEC; Sun, 11 Feb 2024 00:41:22 +0100 (CET)
+Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
+ [IPv6:2607:f8b0:4864:20::736])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9573387873
- for <u-boot@lists.denx.de>; Sun, 11 Feb 2024 00:25:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id A90BD8799D
+ for <u-boot@lists.denx.de>; Sun, 11 Feb 2024 00:41:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=avkrasnov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id E4650120004;
- Sun, 11 Feb 2024 02:25:58 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru E4650120004
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1707607558;
- bh=rQgVgeIBBHV7rp/Zju40yFDUU9dfOy7hwQmb1DZGlp4=;
- h=Message-ID:Date:MIME-Version:Subject:From:To:Content-Type:From;
- b=K9kQsfjTPZ7DmL5uAdn0XccsUfAm1eDShrzcSzkdVO1SPEjlT17nHY2+McYbQJEcu
- elXSetDZA0PrtllBt3JXSPjaSy3zx9il0MdVeL2qXQlup/ZT/npO/MzS+LCzvBCvxi
- 8LwOeFGNZeDo2uYNttWwv1LrOm2dkyatla5kPKosm923lv9CyGVBvOthsTMbaiDlSw
- rjBJfvaUUkr2eC0TFVsaKgz6PmpgDEjTjetC/5qiMEAmxag+5H/jqZkOQ1GTqfV3fi
- SXFrLLY8w4WDMkBizm9TzdEFNkCCEXPQ8qj3KsDQxgHiR7C4p8hCUeIedqG1BpApYH
- vW1lU7CiD3mHg==
-Received: from smtp.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
- [172.16.192.107])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Sun, 11 Feb 2024 02:25:58 +0300 (MSK)
-Received: from [172.28.65.164] (100.64.160.123) by
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Sun, 11 Feb 2024 02:25:58 +0300
-Message-ID: <70f00033-2380-33f1-dc6e-30bc9f22f5d5@salutedevices.com>
-Date: Sun, 11 Feb 2024 02:16:45 +0300
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x736.google.com with SMTP id
+ af79cd13be357-78574840242so86372985a.0
+ for <u-boot@lists.denx.de>; Sat, 10 Feb 2024 15:41:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1707608478; x=1708213278; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=PzpnAr4tVfS15iCSht28fkhCQOO0sXMLTE/IYJnq5+c=;
+ b=AjMjOpb5hAAor7Za0x70L7iEJ1JWkV2MYuqrs0L9YOCxLhLE8KF9Jf9uYDfhWojIAu
+ +okXAmHXCxUQIIm5UQFwCvbI0bCmqo43sJPneHWBVThOWM/QknZ+tH5MXY6AhuZHi5Dz
+ Qi3Do2t6mUNPTRuYegep4f2cUV7cOaLBIG0+k=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1707608478; x=1708213278;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=PzpnAr4tVfS15iCSht28fkhCQOO0sXMLTE/IYJnq5+c=;
+ b=pEoNsg3w7EvdzvbK4nOlfPkDqueQLiu47jgFXqAoleiJgfu/LWogcZz16VxXmZGrTF
+ MoF6ZdVGot5ZmdvQ4JztFe2yRm9HA90N172SpoL6dGQoQmmwXTKcXkQDATFhuHeElf7M
+ RSegJ1wNtCywKs0+XvISJKeWRVI1NOlvuBtmQA2mFTKvnBo75eZmRjZ6ee2lifBYKEUa
+ 6Q3zeYlRXch14mk2hoTtX8yfh2ZXjY08BWYENlpMfV1fM47yq9JuDeJRZwYpDjYXgkHh
+ xRl1TYywjAXOptz8kFaFBXk4wxrbBjWZIpISriGexTx10gP7H0dqM84uw/Nw5bvd1u+s
+ qgZQ==
+X-Gm-Message-State: AOJu0Yx4FHADJpyGbYXMPkSNzR9SAwS9ChrnhD6eLLGy0SsanTwdXeqy
+ dC+uvwmnNrLtbTsUe3w+A/C7hIOQdP7YOs36SZUrSrJRhuIN293D72YUIX9brsY=
+X-Google-Smtp-Source: AGHT+IFNOPRUQvlqBSRaMoo963+30uegIpWFoMiCAX8B2C7cyCTP4lYml3avV2EGsErQO0nYJSUrBA==
+X-Received: by 2002:a05:620a:4511:b0:785:3da4:58a5 with SMTP id
+ t17-20020a05620a451100b007853da458a5mr4192545qkp.37.1707608478379; 
+ Sat, 10 Feb 2024 15:41:18 -0800 (PST)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXe7VQAfI6X8HDdfDM9BwIXOjhDW32KYCn6jaL7cilDevA4WbaReC/UCmzHr9XnVkoNS+MxJ36MDy6UtH1IKYB8txfgB0ugPYioW1O3bmwo2K0zdnwhmkpEsZurA+3sD9BB2AYgxLhMbL9sE+IRlwGW0yku43wRVCnuWH6YWhgxexP4LZLhPA2vs49jA5qHFo6rkZZq
+Received: from bill-the-cat
+ (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
+ [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
+ w25-20020a05620a095900b00785bfd82ba2sm895650qkw.66.2024.02.10.15.41.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 10 Feb 2024 15:41:17 -0800 (PST)
+Date: Sat, 10 Feb 2024 18:41:15 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Dragan Simic <dsimic@manjaro.org>
+Cc: u-boot@lists.denx.de, sjg@chromium.org, philipp.tomsich@vrull.eu,
+ kever.yang@rock-chips.com, massimo.pegorer+oss@gmail.com
+Subject: Re: [PATCH] doc: rockchip: Clarify the rkspi image format further
+Message-ID: <20240210234115.GA3040305@bill-the-cat>
+References: <cd0b002cacfd40ac294b1583c1769718e94e869f.1707588872.git.dsimic@manjaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.1
-Subject: Re: [PATCH v2] cmd: mtd: OTP access support
-Content-Language: en-US
-From: Arseniy Krasnov <avkrasnov@salutedevices.com>
-To: Simon Glass <sjg@chromium.org>, Alexey Romanov <avromanov@sberdevices.ru>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Nikhil M Jain <n-jain1@ti.com>, 
- Viacheslav Mitrofanov <v.v.mitrofanov@yadro.com>, Abdellatif El Khlifi
- <abdellatif.elkhlifi@arm.com>, Sean Edmond <seanedmond@microsoft.com>, Tobias
- Waldekranz <tobias@waldekranz.com>, Stephen Carlson
- <stcarlso@linux.microsoft.com>, Michael Walle <michael@walle.cc>, Peter
- Robinson <pbrobinson@gmail.com>, Mikhail Kshevetskiy
- <mikhail.kshevetskiy@iopsys.eu>, Michael Trimarchi
- <michael@amarulasolutions.com>, Dario Binacchi
- <dario.binacchi@amarulasolutions.com>
-CC: <u-boot@lists.denx.de>, <kernel@sberdevices.ru>, <oxffffaa@gmail.com>
-References: <20231220193649.3154346-1-avkrasnov@salutedevices.com>
- <31e95a3f-822a-d3cd-4725-220c44d7ef14@salutedevices.com>
-In-Reply-To: <31e95a3f-822a-d3cd-4725-220c44d7ef14@salutedevices.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [100.64.160.123]
-X-ClientProxiedBy: p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) To
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 183344 [Feb 10 2024]
-X-KSMG-AntiSpam-Version: 6.1.0.3
-X-KSMG-AntiSpam-Envelope-From: avkrasnov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 7 0.3.7
- 6d6bf5bd8eea7373134f756a2fd73e9456bb7d1a,
- {Tracking_from_domain_doesnt_match_to},
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; smtp.sberdevices.ru:5.0.1,7.1.1;
- salutedevices.com:7.1.1; 127.0.0.199:7.1.2;
- 100.64.160.123:7.1.2, FromAlignment: s, ApMailHostAddress: 100.64.160.123
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean
-X-KSMG-LinksScanning: Clean
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2024/02/10 20:50:00 #23495596
-X-KSMG-AntiVirus-Status: Clean, skipped
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="p3mkKSwnUApbEpBg"
+Content-Disposition: inline
+In-Reply-To: <cd0b002cacfd40ac294b1583c1769718e94e869f.1707588872.git.dsimic@manjaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,299 +93,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Sorry, pls ping
 
-Thanks, Arseniy
+--p3mkKSwnUApbEpBg
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 08.01.2024 21:33, Arseniy Krasnov wrote:
-> Sorry, pls ping
-> 
-> Thanks, Arseniy
-> 
-> On 20.12.2023 22:36, Arseniy Krasnov wrote:
->> Add access to OTP region. It supports info, dump, write and lock
->> operations.
->>
->> Signed-off-by: Arseniy Krasnov <avkrasnov@salutedevices.com>
->> ---
->>  Changelog:
->>  v1 -> v2:
->>   * Remove warning that OTP can't be erased after write.
->>
->>  cmd/Kconfig |   1 +
->>  cmd/mtd.c   | 224 ++++++++++++++++++++++++++++++++++++++++++++++++++++
->>  2 files changed, 225 insertions(+)
->>
->> diff --git a/cmd/Kconfig b/cmd/Kconfig
->> index 90e4ef93e0..c47523a03b 100644
->> --- a/cmd/Kconfig
->> +++ b/cmd/Kconfig
->> @@ -1354,6 +1354,7 @@ config CMD_MTD
->>  	bool "mtd"
->>  	depends on MTD
->>  	select MTD_PARTITIONS
->> +	select HEXDUMP
->>  	help
->>  	  MTD commands support.
->>  
->> diff --git a/cmd/mtd.c b/cmd/mtd.c
->> index eb6e2d6892..1ab69b108b 100644
->> --- a/cmd/mtd.c
->> +++ b/cmd/mtd.c
->> @@ -11,6 +11,7 @@
->>  #include <command.h>
->>  #include <common.h>
->>  #include <console.h>
->> +#include <hexdump.h>
->>  #include <malloc.h>
->>  #include <mapmem.h>
->>  #include <mtd.h>
->> @@ -202,6 +203,219 @@ static bool mtd_oob_write_is_empty(struct mtd_oob_ops *op)
->>  	return true;
->>  }
->>  
->> +static int do_mtd_otp_read(struct cmd_tbl *cmdtp, int flag, int argc,
->> +			   char *const argv[])
->> +{
->> +	struct mtd_info *mtd;
->> +	size_t retlen;
->> +	off_t from;
->> +	size_t len;
->> +	bool user;
->> +	int ret;
->> +	u8 *buf;
->> +
->> +	if (argc != 5)
->> +		return CMD_RET_USAGE;
->> +
->> +	if (!strcmp(argv[2], "u"))
->> +		user = true;
->> +	else if (!strcmp(argv[2], "f"))
->> +		user = false;
->> +	else
->> +		return CMD_RET_USAGE;
->> +
->> +	mtd = get_mtd_by_name(argv[1]);
->> +	if (IS_ERR_OR_NULL(mtd))
->> +		return CMD_RET_FAILURE;
->> +
->> +	from = simple_strtoul(argv[3], NULL, 0);
->> +	len = simple_strtoul(argv[4], NULL, 0);
->> +
->> +	ret = CMD_RET_FAILURE;
->> +
->> +	buf = malloc(len);
->> +	if (!buf)
->> +		goto put_mtd;
->> +
->> +	printf("Reading %s OTP from 0x%lx, %lu bytes\n",
->> +	       user ? "user" : "factory", from, len);
->> +
->> +	if (user)
->> +		ret = mtd_read_user_prot_reg(mtd, from, len, &retlen, buf);
->> +	else
->> +		ret = mtd_read_fact_prot_reg(mtd, from, len, &retlen, buf);
->> +	if (ret) {
->> +		free(buf);
->> +		pr_err("OTP read failed: %d\n", ret);
->> +		ret = CMD_RET_FAILURE;
->> +		goto put_mtd;
->> +	}
->> +
->> +	if (retlen != len)
->> +		pr_err("OTP read returns %zu, but %zu expected\n",
->> +		       retlen, len);
->> +
->> +	print_hex_dump("", 0, 16, 1, buf, retlen, true);
->> +
->> +	free(buf);
->> +
->> +	ret = CMD_RET_SUCCESS;
->> +
->> +put_mtd:
->> +	put_mtd_device(mtd);
->> +
->> +	return ret;
->> +}
->> +
->> +static int do_mtd_otp_lock(struct cmd_tbl *cmdtp, int flag, int argc,
->> +			   char *const argv[])
->> +{
->> +	struct mtd_info *mtd;
->> +	off_t from;
->> +	size_t len;
->> +	int ret;
->> +
->> +	if (argc != 4)
->> +		return CMD_RET_USAGE;
->> +
->> +	mtd = get_mtd_by_name(argv[1]);
->> +	if (IS_ERR_OR_NULL(mtd))
->> +		return CMD_RET_FAILURE;
->> +
->> +	from = simple_strtoul(argv[2], NULL, 0);
->> +	len = simple_strtoul(argv[3], NULL, 0);
->> +
->> +	ret = mtd_lock_user_prot_reg(mtd, from, len);
->> +	if (ret) {
->> +		pr_err("OTP lock failed: %d\n", ret);
->> +		ret = CMD_RET_FAILURE;
->> +		goto put_mtd;
->> +	}
->> +
->> +	ret = CMD_RET_SUCCESS;
->> +
->> +put_mtd:
->> +	put_mtd_device(mtd);
->> +
->> +	return ret;
->> +}
->> +
->> +static int do_mtd_otp_write(struct cmd_tbl *cmdtp, int flag, int argc,
->> +			    char *const argv[])
->> +{
->> +	struct mtd_info *mtd;
->> +	size_t retlen;
->> +	size_t binlen;
->> +	u8 *binbuf;
->> +	off_t from;
->> +	int ret;
->> +
->> +	if (argc != 4)
->> +		return CMD_RET_USAGE;
->> +
->> +	mtd = get_mtd_by_name(argv[1]);
->> +	if (IS_ERR_OR_NULL(mtd))
->> +		return CMD_RET_FAILURE;
->> +
->> +	from = simple_strtoul(argv[2], NULL, 0);
->> +	binlen = strlen(argv[3]) / 2;
->> +
->> +	ret = CMD_RET_FAILURE;
->> +	binbuf = malloc(binlen);
->> +	if (!binbuf)
->> +		goto put_mtd;
->> +
->> +	hex2bin(binbuf, argv[3], binlen);
->> +
->> +	printf("Will write:\n");
->> +
->> +	print_hex_dump("", 0, 16, 1, binbuf, binlen, true);
->> +
->> +	printf("to 0x%zx\n", from);
->> +
->> +	printf("Continue (y/n)?\n");
->> +
->> +	if (confirm_yesno() != 1) {
->> +		pr_err("OTP write canceled\n");
->> +		ret = CMD_RET_SUCCESS;
->> +		goto put_mtd;
->> +	}
->> +
->> +	ret = mtd_write_user_prot_reg(mtd, from, binlen, &retlen, binbuf);
->> +	if (ret) {
->> +		pr_err("OTP write failed: %d\n", ret);
->> +		ret = CMD_RET_FAILURE;
->> +		goto put_mtd;
->> +	}
->> +
->> +	if (retlen != binlen)
->> +		pr_err("OTP write returns %zu, but %zu expected\n",
->> +		       retlen, binlen);
->> +
->> +	ret = CMD_RET_SUCCESS;
->> +
->> +put_mtd:
->> +	free(binbuf);
->> +	put_mtd_device(mtd);
->> +
->> +	return ret;
->> +}
->> +
->> +static int do_mtd_otp_info(struct cmd_tbl *cmdtp, int flag, int argc,
->> +			   char *const argv[])
->> +{
->> +	struct otp_info otp_info;
->> +	struct mtd_info *mtd;
->> +	size_t retlen;
->> +	bool user;
->> +	int ret;
->> +
->> +	if (argc != 3)
->> +		return CMD_RET_USAGE;
->> +
->> +	if (!strcmp(argv[2], "u"))
->> +		user = true;
->> +	else if (!strcmp(argv[2], "f"))
->> +		user = false;
->> +	else
->> +		return CMD_RET_USAGE;
->> +
->> +	mtd = get_mtd_by_name(argv[1]);
->> +	if (IS_ERR_OR_NULL(mtd))
->> +		return CMD_RET_FAILURE;
->> +
->> +	if (user)
->> +		ret = mtd_get_user_prot_info(mtd, sizeof(otp_info), &retlen,
->> +					     &otp_info);
->> +	else
->> +		ret = mtd_get_fact_prot_info(mtd, sizeof(otp_info), &retlen,
->> +					     &otp_info);
->> +	if (ret) {
->> +		pr_err("OTP info failed: %d\n", ret);
->> +		ret = CMD_RET_FAILURE;
->> +		goto put_mtd;
->> +	}
->> +
->> +	if (retlen != sizeof(otp_info)) {
->> +		pr_err("OTP info returns %zu, but %zu expected\n",
->> +		       retlen, sizeof(otp_info));
->> +		ret = CMD_RET_FAILURE;
->> +		goto put_mtd;
->> +	}
->> +
->> +	printf("%s OTP region info:\n", user ? "User" : "Factory");
->> +	printf("\tstart: %u\n", otp_info.start);
->> +	printf("\tlength: %u\n", otp_info.length);
->> +	printf("\tlocked: %u\n", otp_info.locked);
->> +
->> +	ret = CMD_RET_SUCCESS;
->> +
->> +put_mtd:
->> +	put_mtd_device(mtd);
->> +
->> +	return ret;
->> +}
->> +
->>  static int do_mtd_list(struct cmd_tbl *cmdtp, int flag, int argc,
->>  		       char *const argv[])
->>  {
->> @@ -552,6 +766,10 @@ static char mtd_help_text[] =
->>  	"\n"
->>  	"Specific functions:\n"
->>  	"mtd bad                               <name>\n"
->> +	"mtd otpread                           <name> [u|f] <off> <size>\n"
->> +	"mtd otpwrite                          <name> <off> <hex string>\n"
->> +	"mtd otplock                           <name> <off> <size>\n"
->> +	"mtd otpinfo                           <name> [u|f]\n"
->>  	"\n"
->>  	"With:\n"
->>  	"\t<name>: NAND partition/chip name (or corresponding DM device name or OF path)\n"
->> @@ -562,11 +780,17 @@ static char mtd_help_text[] =
->>  	"\t<size>: length of the operation in bytes (default: the entire device)\n"
->>  	"\t\t* must be a multiple of a block for erase\n"
->>  	"\t\t* must be a multiple of a page otherwise (special case: default is a page with dump)\n"
->> +	"\t<hex string>: hex string without '0x' and spaces. Example: ABCD1234\n"
->> +	"\t[u|f]: user or factory OTP region\n"
->>  	"\n"
->>  	"The .dontskipff option forces writing empty pages, don't use it if unsure.\n";
->>  #endif
->>  
->>  U_BOOT_CMD_WITH_SUBCMDS(mtd, "MTD utils", mtd_help_text,
->> +		U_BOOT_SUBCMD_MKENT(otpread, 5, 1, do_mtd_otp_read),
->> +		U_BOOT_SUBCMD_MKENT(otpwrite, 4, 1, do_mtd_otp_write),
->> +		U_BOOT_SUBCMD_MKENT(otplock, 4, 1, do_mtd_otp_lock),
->> +		U_BOOT_SUBCMD_MKENT(otpinfo, 3, 1, do_mtd_otp_info),
->>  		U_BOOT_SUBCMD_MKENT(list, 1, 1, do_mtd_list),
->>  		U_BOOT_SUBCMD_MKENT_COMPLETE(read, 5, 0, do_mtd_io,
->>  					     mtd_name_complete),
+On Sat, Feb 10, 2024 at 07:18:10PM +0100, Dragan Simic wrote:
+
+> As discussed on the U-Boot mailing list, [1][2] only some Rockchip SoCs
+> suffer from a bug in their BROMs that requires a specific format for their
+> SPI images, which was the reason for the rkspi format to be introduced.
+>=20
+> Improve the description of the rkspi format a bit to mention this, for
+> future reference and to make understanding it easier.
+>=20
+> [1] https://lore.kernel.org/u-boot/c32129ba-db25-4b9d-9a4a-032d88dfb9cd@k=
+wiboo.se/
+> [2] https://lore.kernel.org/u-boot/CACdvmAjfCWicRd=3DLKKyob7fZo79AFkUQKy0=
+e1HBb0zyJuoO70g@mail.gmail.com/
+>=20
+> Signed-off-by: Dragan Simic <dsimic@manjaro.org>
+> ---
+>  doc/README.rockchip | 7 ++++++-
+>  1 file changed, 6 insertions(+), 1 deletion(-)
+
+Can we please convert this content to rst under doc/board/rockchip/ then
+enhance it?
+
+--=20
+Tom
+
+--p3mkKSwnUApbEpBg
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXICZgACgkQFHw5/5Y0
+tyzqjgv/fd5Wttf3ooiY6KiefO+xmqZ6Cb7qe3PA9ftPQGBxzy55zXWyTC/PvDcK
+sivKqpP1aB5IqzKOB/ZmUtmFj2eZe0J8/7z7a3+0F/yQ8QcJZE72D9tNFFDjakSg
+0ZE9DGuryuTOmkSQbKpIYw/IxfJy1oCBh9fQTVswv/AOF49TSLoBVXguz7mNOskj
+WiJfe81xGUkase41wqEzslYXT6hGGGaMOIIewEGVBHhM+UnCmrGxmkGjq2+YivXV
+v5r0emn84FQ25sE96FF8HqtApIR7G60fw+y63BbvJ/tSfKZEokoJGkHqCXCwCJSA
+M2hnIUViNHF1la7+MYsg911r+eCyX/KP5afYN3JZdZFqoWvflbbgQpKGhYdWIuWG
+k+takgYmVRmFv0OO651B7q5uiOLmf4ntz77fRo0uYf/dCfV4mAWAfBzLCGKhN5TA
+e/HH9+lKkpntKAlX0vpHGt4h4RUONOqu2N1qkCXAn4VNNuqbYla8HKIr+ILz+a8/
+BjxSDw8Z
+=w9SS
+-----END PGP SIGNATURE-----
+
+--p3mkKSwnUApbEpBg--
