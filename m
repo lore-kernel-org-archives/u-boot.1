@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B970C48260
-	for <u-boot@archiver.kernel.org>; Sat, 10 Feb 2024 12:47:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FC25C48260
+	for <u-boot@archiver.kernel.org>; Sat, 10 Feb 2024 12:47:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E15587E95;
+	by phobos.denx.de (Postfix) with ESMTP id BA1A087EA7;
 	Sat, 10 Feb 2024 13:47:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="tiR3TO85";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="jDb4RUpy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E9A3087E8C; Sat, 10 Feb 2024 13:46:58 +0100 (CET)
+ id 3B59A87EA1; Sat, 10 Feb 2024 13:46:59 +0100 (CET)
 Received: from dfw.source.kernel.org (dfw.source.kernel.org
  [IPv6:2604:1380:4641:c500::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C320787E98
+ by phobos.denx.de (Postfix) with ESMTPS id C11D087E96
  for <u-boot@lists.denx.de>; Sat, 10 Feb 2024 13:46:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=devnull+j.jannau.net@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 2AE3C60A69;
+ by dfw.source.kernel.org (Postfix) with ESMTP id 112E6601D4;
  Sat, 10 Feb 2024 12:46:53 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id C43D4C43394;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id A22DDC433C7;
  Sat, 10 Feb 2024 12:46:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1707569212;
- bh=Ohwut3Y23I+ygNzHyA/MjoH3vkaubVC84woyvFlJxQM=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=tiR3TO85b5jNX06wfJTXkImic78DGMfoLotYVuuVKUM0R+l1gupBP8y4Zbo55Aroa
- +ew8/PgGWyhGFb3pZ49svOZgKiI+6HfBYTNS10vbyuTUIJzDi5mIy4qnM4RjMDW812
- 2CysEUsAt3Ov98f4BIxjuLiekRSK7eQRWaa1DXKZf54eaqWcPegnP0eilHONUuQItK
- fqwwH3tp/tlUC0JRLjZHqBb+ORFvBx1kAAXS259rVsigtnPnxH3/P7/B8pNTShuOcH
- kzMxVJ7dQ6dov9RQUeV+1G/BnN7RmDAvXW1MGrFUI2NYUJPc0Qa2orzNIt/5KlipB0
- rjnnTG++Sbs1g==
+ bh=qrrIsRuZER9w8JJwPSokL7SPOouqThiSo5O68q33i2I=;
+ h=From:Subject:Date:To:Cc:Reply-To:From;
+ b=jDb4RUpyTdLaK14gihK3opEI1Vg7hiPIWSuAb1T9VxBPfrCU3o0pXAD/MFBsnlPZJ
+ Er0liB6R+EG7zn1Ww/6BP0bUtnK3j1LLfMRNnHWWAp1sBuSb7I7ZM7rn4OeX/lus4q
+ QeXT6CLO0L0ElVjjrzz1U+uZ1X+THt2ZdZJC3hcReZdlsLVdaWX/kxI8zKiw5Ht6SB
+ vvs0W9kZhp3aI4N9z6wA7XYpLPMNn/FIy5Cn4I4vgBGOb6yVi8OxirapLASatacqVg
+ qsevGUIp76F6VPmf/9QiI+DSmg7+lkHpR18eY1xS8hueH53PPuAV9Aj+4z9ZQD+nYx
+ GdiV9eiLpicbQ==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id ABA57C48BC0;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 84F22C4829A;
  Sat, 10 Feb 2024 12:46:52 +0000 (UTC)
 From: Janne Grunau via B4 Relay <devnull+j.jannau.net@kernel.org>
-Date: Sat, 10 Feb 2024 13:46:41 +0100
-Subject: [PATCH v2 3/6] lib/charset: Map Unicode code points to CP437 code
- points 0-31
+Subject: [PATCH v2 0/6] video: Add UTF-8 support for UEFI applications
+Date: Sat, 10 Feb 2024 13:46:38 +0100
+Message-Id: <20240210-vidconsole-utf8-uefi-v2-0-88c03db60de2@jannau.net>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240210-vidconsole-utf8-uefi-v2-3-88c03db60de2@jannau.net>
-References: <20240210-vidconsole-utf8-uefi-v2-0-88c03db60de2@jannau.net>
-In-Reply-To: <20240210-vidconsole-utf8-uefi-v2-0-88c03db60de2@jannau.net>
+X-B4-Tracking: v=1; b=H4sIAC9wx2UC/4WNTQ6CMBBGr0Jm7Rha/sSV9zAsSpnKGNOSFhoN6
+ d2tXMDle8n3vh0CeaYA12IHT5EDO5tBngrQs7IPQp4ygyxlXQrRYeRJOxvci3BbzQU3MoxGyWq
+ slW6bqYU8XXy27yN7HzLPHFbnP8dLFD/7JxgFlthUvek0dbUZ+9tTWau2s6UVhpTSF3EIIJO5A
+ AAA
 To: Anatolij Gustschin <agust@denx.de>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: Simon Glass <sjg@chromium.org>, Andre Przywara <andre.przywara@arm.com>, 
  u-boot@lists.denx.de, Janne Grunau <j@jannau.net>
 X-Mailer: b4 0.12.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4021; i=j@jannau.net;
- h=from:subject:message-id; bh=CR8sMkzJo1FBNuRC4CaQGiSe6wg9Ori7fMDenOHKlQI=;
- b=owGbwMvMwCW2UNrmdq9+ahrjabUkhtTjBVaq3DnBsjcM1eZLPzMvn6p569edz3NePP+Qd45p+
- SMeEXenjlIWBjEuBlkxRZYk7ZcdDKtrFGNqH4TBzGFlAhnCwMUpABOJ/sbwv/79LGZxnhOMDTLz
- Ivmf9xnprLd9adVUnt26zW/avr0taowMF48eZ2Jaf/PcG34l3UtRX6029Cz6y/H1dc+XOobXJ+P
- iGQA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2454; i=j@jannau.net;
+ h=from:subject:message-id; bh=qrrIsRuZER9w8JJwPSokL7SPOouqThiSo5O68q33i2I=;
+ b=owGbwMvMwCW2UNrmdq9+ahrjabUkhtTjBVZflkwsYp9iNVfQ+OU81l7j04d8g29maTKuOvbD5
+ OljveedHaUsDGJcDLJiiixJ2i87GFbXKMbUPgiDmcPKBDKEgYtTACbCosbI0LFrDa/LPpGJl82U
+ tlrl7nGY+f+J14eXOy7L6Ymn2y02UmL4n8Lz2PhQreZhe9+UN5ZaISn7979VPrBsU+HOBerN/rv
+ TWAE=
 X-Developer-Key: i=j@jannau.net; a=openpgp;
  fpr=8B336A6BE4E5695E89B8532B81E806F586338419
 X-Endpoint-Received: by B4 Relay for j@jannau.net/default with auth_id=62
@@ -88,127 +89,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Janne Grunau <j@jannau.net>
+Andre submitted 2 years ago DM_VIDEO improvements for UEFI applications
+using UEFI's EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL but did not follow with
+suggested changes. This series takes care of the UTF-8 support which
+required to draw symbol and box drawing characters used by UEFI
+applications like grub2 and sd-boot correctly.
 
-Code page 437 uses code points 1-31 for glyphs instead of control
-characters. Map the appropriate Unicode code points to this code points.
-Fixes rendering of grub2's menu as EFI application using the
-EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL on a console with bitmap fonts.
+Compared to Andre's version this version has the following changes:
+- use and extend existing conversion functions from lib/charset.c
+- convert to Unicode code points for truetype console support
+- conversion is conditional on CONFIG_CHARSET
+- use escape sequences in tests as proposed by Heinrich
 
+Link: https://lore.kernel.org/u-boot/20220110005638.21599-1-andre.przywara@arm.com/
 Signed-off-by: Janne Grunau <j@jannau.net>
 ---
- include/charset.h                      |  2 +-
- include/cp1250.h                       | 12 ++++++++++--
- include/cp437.h                        | 12 ++++++++++--
- lib/charset.c                          |  9 ++++++---
- lib/efi_loader/efi_unicode_collation.c |  2 +-
- 5 files changed, 28 insertions(+), 9 deletions(-)
+Changes in v2:
+- use "CONFIG_IS_ENABLED(CHARSET)" instead of EFI_LOADER
+- rewritten commit message for mapping CP437 cp 1-31
+- extended utf8_to_utf32_stream() documentation as suggested by
+  Heinrich
+- Link to RFC: https://lore.kernel.org/r/20240117-vidconsole-utf8-uefi-v1-0-539f7ce74fb9@jannau.net
 
-diff --git a/include/charset.h b/include/charset.h
-index f1050c903d..348bad5883 100644
---- a/include/charset.h
-+++ b/include/charset.h
-@@ -16,7 +16,7 @@
- /*
-  * codepage_437 - Unicode to codepage 437 translation table
-  */
--extern const u16 codepage_437[128];
-+extern const u16 codepage_437[160];
- 
- /**
-  * console_read_unicode() - read Unicode code point from console
-diff --git a/include/cp1250.h b/include/cp1250.h
-index adacf8a958..b762c78d9f 100644
---- a/include/cp1250.h
-+++ b/include/cp1250.h
-@@ -1,10 +1,18 @@
- /* SPDX-License-Identifier: GPL-2.0+ */
- 
- /*
-- * Constant CP1250 contains the Unicode code points for characters 0x80 - 0xff
-- * of the code page 1250.
-+ * Constant CP1250 contains the Unicode code points for characters 0x00 - 0x1f
-+ * and 0x80 - 0xff of the code page 1250.
-  */
- #define CP1250 { \
-+	0x0000, 0x0000, 0x0000, 0x0000, \
-+	0x0000, 0x0000, 0x0000, 0x0000, \
-+	0x0000, 0x0000, 0x0000, 0x0000, \
-+	0x0000, 0x0000, 0x0000, 0x0000, \
-+	0x0000, 0x0000, 0x0000, 0x0000, \
-+	0x0000, 0x0000, 0x0000, 0x0000, \
-+	0x0000, 0x0000, 0x0000, 0x0000, \
-+	0x0000, 0x0000, 0x0000, 0x0000, \
- 	0x20ac, 0x0000, 0x201a, 0x0000, \
- 	0x201e, 0x2026, 0x2020, 0x2021, \
- 	0x0000, 0x2030, 0x0160, 0x2039, \
-diff --git a/include/cp437.h b/include/cp437.h
-index 0b2b97132e..5093130f5e 100644
---- a/include/cp437.h
-+++ b/include/cp437.h
-@@ -1,10 +1,18 @@
- /* SPDX-License-Identifier: GPL-2.0+ */
- 
- /*
-- * Constant CP437 contains the Unicode code points for characters 0x80 - 0xff
-- * of the code page 437.
-+ * Constant CP437 contains the Unicode code points for characters 0x00 - 0x1f
-+ * and 0x80 - 0xff of the code page 437.
-  */
- #define CP437 { \
-+	0x0000, 0x263a, 0x263b, 0x2665, \
-+	0x2666, 0x2663, 0x2660, 0x2022, \
-+	0x25d8, 0x25cb, 0x25d9, 0x2642, \
-+	0x2640, 0x266a, 0x266b, 0x263c, \
-+	0x25ba, 0x25c4, 0x2195, 0x203c, \
-+	0x00b6, 0x00a7, 0x25ac, 0x21a8, \
-+	0x2191, 0x2193, 0x2192, 0x2190, \
-+	0x221f, 0x2194, 0x25b2, 0x25bc, \
- 	0x00c7, 0x00fc, 0x00e9, 0x00e2, \
- 	0x00e4, 0x00e0, 0x00e5, 0x00e7, \
- 	0x00ea, 0x00eb, 0x00e8, 0x00ef, \
-diff --git a/lib/charset.c b/lib/charset.c
-index 5e4c4f948a..1f8480150a 100644
---- a/lib/charset.c
-+++ b/lib/charset.c
-@@ -16,7 +16,7 @@
- /**
-  * codepage_437 - Unicode to codepage 437 translation table
-  */
--const u16 codepage_437[128] = CP437;
-+const u16 codepage_437[160] = CP437;
- 
- static struct capitalization_table capitalization_table[] =
- #ifdef CONFIG_EFI_UNICODE_CAPITALIZATION
-@@ -517,9 +517,12 @@ int utf_to_cp(s32 *c, const u16 *codepage)
- 		int j;
- 
- 		/* Look up codepage translation */
--		for (j = 0; j < 0x80; ++j) {
-+		for (j = 0; j < 0xA0; ++j) {
- 			if (*c == codepage[j]) {
--				*c = j + 0x80;
-+				if (j < 0x20)
-+					*c = j;
-+				else
-+					*c = j + 0x60;
- 				return 0;
- 			}
- 		}
-diff --git a/lib/efi_loader/efi_unicode_collation.c b/lib/efi_loader/efi_unicode_collation.c
-index c4c7572063..4b2c52918a 100644
---- a/lib/efi_loader/efi_unicode_collation.c
-+++ b/lib/efi_loader/efi_unicode_collation.c
-@@ -257,7 +257,7 @@ static void EFIAPI efi_fat_to_str(struct efi_unicode_collation_protocol *this,
- 	for (i = 0; i < fat_size; ++i) {
- 		c = (unsigned char)fat[i];
- 		if (c > 0x80)
--			c = codepage[c - 0x80];
-+			c = codepage[c - 0x60];
- 		string[i] = c;
- 		if (!c)
- 			break;
+---
+Andre Przywara (2):
+      efi_selftest: Add international characters test
+      efi_selftest: Add box drawing character selftest
 
+Janne Grunau (4):
+      lib: charset: Fix and extend utf8_to_utf32_stream() documentation
+      video: console: Parse UTF-8 character sequences
+      lib/charset: Map Unicode code points to CP437 code points 0-31
+      efi_selftest: Add symbol character selftest
+
+ drivers/video/console_normal.c             |  6 +++--
+ drivers/video/console_rotate.c             | 16 +++++++++-----
+ drivers/video/console_truetype.c           |  8 +++----
+ drivers/video/vidconsole-uclass.c          | 18 ++++++++++-----
+ drivers/video/vidconsole_internal.h        | 15 +++++++++++++
+ include/charset.h                          | 16 +++++++++++---
+ include/cp1250.h                           | 12 ++++++++--
+ include/cp437.h                            | 12 ++++++++--
+ include/video_console.h                    | 10 +++++----
+ lib/charset.c                              |  9 +++++---
+ lib/efi_loader/efi_unicode_collation.c     |  2 +-
+ lib/efi_selftest/efi_selftest_textoutput.c | 35 ++++++++++++++++++++++++++++++
+ 12 files changed, 127 insertions(+), 32 deletions(-)
+---
+base-commit: 866ca972d6c3cabeaf6dbac431e8e08bb30b3c8e
+change-id: 20240117-vidconsole-utf8-uefi-fa23b4ac65d6
+
+Best regards,
 -- 
-2.43.0
+Janne Grunau <j@jannau.net>
 
