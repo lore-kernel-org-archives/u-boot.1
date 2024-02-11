@@ -4,79 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F2BEC4829A
-	for <u-boot@archiver.kernel.org>; Sun, 11 Feb 2024 20:59:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2571C4829A
+	for <u-boot@archiver.kernel.org>; Sun, 11 Feb 2024 21:17:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CDD5387B77;
-	Sun, 11 Feb 2024 21:59:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C7C2487B77;
+	Sun, 11 Feb 2024 22:17:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iq6vlwrt";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="w9/bP08p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1CAE687BCB; Sun, 11 Feb 2024 21:59:17 +0100 (CET)
-Received: from mail-qt1-x831.google.com (mail-qt1-x831.google.com
- [IPv6:2607:f8b0:4864:20::831])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 851628786C; Sun, 11 Feb 2024 22:17:00 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A9867878F4
- for <u-boot@lists.denx.de>; Sun, 11 Feb 2024 21:59:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F3BD8786C
+ for <u-boot@lists.denx.de>; Sun, 11 Feb 2024 22:16:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x831.google.com with SMTP id
- d75a77b69052e-429de32dad9so17416671cf.2
- for <u-boot@lists.denx.de>; Sun, 11 Feb 2024 12:59:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1707685153; x=1708289953; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=kyzUvKvsADI9vGbHKcqn0feYLyqruQyGjhzMC5M2anQ=;
- b=iq6vlwrt0ROrdnKdGDL5wERJxOnJXcCJjRRaCQqA0PHd7fhvoBsaXuK95H+FmmewiS
- FNBlieg3W8nNPcs5kYkTYO8xNwDQb3PupEglZzJUwohQsz2zc4+24LkIvGxGioVSX+20
- pQNgerQa8wcw4QC0WUbY5mNWrJiNDi/SOhtgE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707685153; x=1708289953;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=kyzUvKvsADI9vGbHKcqn0feYLyqruQyGjhzMC5M2anQ=;
- b=IwcVx5qMpd1HGrLDwzNvgoxSEck0BA2Fl1cMFLcDe7A62fr3FQVVY37xI5PF6xvkG7
- Fvpr5gzj1VMDC8E/vDI07OV0HXHVujbc00Mbz3K/z/eS7B4MUG7YcxZKnoSASbf1WoM2
- IPKmW0nM3NzHPrHIyVaR/E8EhtPuA3/bSQ2iMgfhZDZyMupJ5INbtHCve1TRrKQdun8H
- SJm4T8ocQK6Jm1DNg4z+m7k9HpXromhrbd2SZ/7uXkCmEc0ejMnWTPdt3ccCSeXlyMM9
- SBHNu5YaG74uyMXr8/+yKjTDM4Bwd+RkI9/ponqDNNqpftx4i3HjEh9AMZr0aqGTlJVe
- 4TSw==
-X-Gm-Message-State: AOJu0YwqGPU6Or4qxF/MZB64Sd520jrTaHIr9dHZFoecFmCgxn5Nwpn8
- I9cKJDRh8Tzo45y8e7FycQGDJO8ayBOn/vVkTgfs+yaMmn5cpBKbfXDyyOEKF3Y=
-X-Google-Smtp-Source: AGHT+IGeWFlrGr4Sw+LW0aOW6duGYQKHeDDqfqC/MxOj5ATyJojhsdMn9Ks61okOMA8P54UpdOF+dA==
-X-Received: by 2002:a05:622a:142:b0:42c:6cb3:3287 with SMTP id
- v2-20020a05622a014200b0042c6cb33287mr5214828qtw.14.1707685153386; 
- Sun, 11 Feb 2024 12:59:13 -0800 (PST)
-X-Forwarded-Encrypted: i=1;
- AJvYcCUezCeS5E4CCkJWvqtZnqaKKbu4732NHNhxwYRbOl5fGLy7D45GWt/HxOuTI4KL4Yu8qokCHKdo2fybFYSxvDyP+9c3POSlpDXhZuy87tIXWyBY0ZpoyGWOjgmTPdt+P3dgkg==
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
- [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- i11-20020ac8764b000000b0042c6ec8247bsm997550qtr.94.2024.02.11.12.59.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 11 Feb 2024 12:59:12 -0800 (PST)
-Date: Sun, 11 Feb 2024 15:59:10 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de, Duy Nguyen <duy.nguyen.rh@renesas.com>,
- Hai Pham <hai.pham.ud@renesas.com>
-Subject: Re: [PULL] u-boot-sh/master-779h0-r2
-Message-ID: <20240211205910.GC3040305@bill-the-cat>
-References: <20240211173301.7077-1-marek.vasut+renesas@mailbox.org>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=b753=JV=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1707686187;
+ bh=52Sl/4zDNh7JwQvotV/n8rghtUqN+V7PrnYTZQCHTIE=;
+ b=w9/bP08psmEnztHhrgPWTn+ZbTeGTW/VYTPmdTx05fylB35ld+19SaV7FOKOgFOynKBLeBro4
+ sJbE7FK1K9kWxcUtRXT2epCD9a9ttEiTBpSkafnqTqMJy3UTrEwpZ6VV9MQpsExFpSvmrTRSVp1
+ zP96Fa4FAAfbYxSHrcJpDxDVhdpnr8C83/iW3P/BtI7w8eJj/ioxdir9XPQz3EGwMXCJCoMwip6
+ Sndv92e+NKpGr+TeFmXs75ULR+8t5TIvXBI/xeLGOtJVIaeSy/66WkVO2GQNUKxk5Ag98H6wqt+
+ MiNQ1JD23AhNAThJntokTppZ5ZSLmJfxNOPSDkpph8iQ==
+Message-ID: <a3489e7d-7949-4e68-ab85-f569db9427a0@kwiboo.se>
+Date: Sun, 11 Feb 2024 22:16:19 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="+hSBsfS+qZ2wS3m+"
-Content-Disposition: inline
-In-Reply-To: <20240211173301.7077-1-marek.vasut+renesas@mailbox.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 15/20] rockchip: rk3588: bind MMC controllers in U-Boot
+ proper pre-reloc
+To: Quentin Schulz <foss+uboot@0leil.net>, Quentin Schulz
+ <quentin.schulz@theobroma-systems.com>
+Cc: Dragan Simic <dsimic@manjaro.org>, u-boot@lists.denx.de, Simon Glass
+ <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>, Kever Yang
+ <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>, Alper Nebi
+ Yasak <alpernebiyasak@gmail.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, Klaus Goger
+ <klaus.goger@theobroma-systems.com>, Heiko Stuebner
+ <heiko.stuebner@cherry.de>, Otavio Salvador <otavio@ossystems.com.br>,
+ Andy Yan <andy.yan@rock-chips.com>, Manivannan Sadhasivam
+ <manivannan.sadhasivam@linaro.org>, Lukasz Majewski <lukma@denx.de>, Sean
+ Anderson <seanga2@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Sughosh Ganu
+ <sughosh.ganu@linaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Anatolij Gustschin <agust@denx.de>
+References: <20240209-jaguar-v2-0-6c9ffe09b924@theobroma-systems.com>
+ <20240209-jaguar-v2-15-6c9ffe09b924@theobroma-systems.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20240209-jaguar-v2-15-6c9ffe09b924@theobroma-systems.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 65c9392ac33d2ccc75254589
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,51 +86,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Quentin,
 
---+hSBsfS+qZ2wS3m+
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2024-02-09 10:50, Quentin Schulz wrote:
+> From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+> 
+> Since commit 9e644284ab81 ("dm: core: Report bootph-pre-ram/sram node as
+> pre-reloc after relocation"), bootph-pre-ram doesn't make U-Boot proper
+> bind the device before relocation.
+> 
+> While this is usually not much of an issue, it is when there's a lookup
+> for devices by code running before the relocation. Such is the case of
+> env_init() which calls env_driver_lookup() which calls
+> env_get_location() which is a weak symbol and may call
+> arch_env_get_location() also a weak symbol. Those are two functions that
+> may traverse UCLASS to find some devices (e.g.
+> board/theobroma-systems/common/common.c:arch_env_get_location()).
+> 
+> This allows something in the env_init() call stack to be able to use
+> uclasses for SD and eMMC controller on RK3588S/RK3588. This aligns the
+> behavior with what seems to be all SoCs except RK356x family.
+> 
+> Additionally, if any other env function (e.g. env_load) were to be used
+> before relocation, this is also required as otherwise it wouldn't be
+> able to find the MMC device(s).
+> 
+> Cc: Quentin Schulz <foss+uboot@0leil.net>
+> Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+> ---
+>  arch/arm/dts/rk3588s-u-boot.dtsi | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/arch/arm/dts/rk3588s-u-boot.dtsi b/arch/arm/dts/rk3588s-u-boot.dtsi
+> index bf3b1ea8a3c..3f194e8ffbd 100644
+> --- a/arch/arm/dts/rk3588s-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3588s-u-boot.dtsi
+> @@ -187,12 +187,12 @@
+>  };
+>  
+>  &sdmmc {
+> -	bootph-pre-ram;
+> +	bootph-all;
 
-On Sun, Feb 11, 2024 at 06:31:59PM +0100, Marek Vasut wrote:
+I know that there is no TPL for rk3588 so this does not matter at this
+time but I would suggest you instead add bootph-some-ram for both these
+instead of changing them to bootph-all.
 
-> The following changes since commit d7aaaf4223d0a2f9f8c9eed47d7431860b3116=
-d8:
->=20
->   Merge tag 'u-boot-dfu-20240209' of https://source.denx.de/u-boot/custod=
-ians/u-boot-dfu (2024-02-09 09:00:42 -0500)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-sh.git master-779h0-r2
->=20
-> for you to fetch changes up to 53066deccbedf02439309b0d4aca9f0be853a8da:
->=20
->   ARM: renesas: Add Renesas R8A779H0 V4M Gray Hawk board code (2024-02-10=
- 17:08:06 +0100)
->=20
+We are not expected to need the MMC devices in TPL, and I am working on
+a series that changes from bootph-all to bootph-pre-ram+bootph-some-ram
+combo in an upcoming rk3399 cleanup series.
 
-Applied to u-boot/master, thanks!
+Regards,
+Jonas
 
---=20
-Tom
+>  	u-boot,spl-fifo-mode;
+>  };
+>  
+>  &sdhci {
+> -	bootph-pre-ram;
+> +	bootph-all;
+>  	u-boot,spl-fifo-mode;
+>  };
+>  
+> 
 
---+hSBsfS+qZ2wS3m+
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXJNR4ACgkQFHw5/5Y0
-tyyVpAv+O3BRvRH0ag08NGNRxXLv3topd0mwe6ienye+l0Bj+eWPZSvOzvwXETqG
-gbrr9oeul63LV/V8EtOE8QNPxhOsr5O53moOOBULntmy5unTi1FRUP6fltYyCy0Z
-8agJSuvm2RjKL/GE7Kpfm3MSwr+/nGA9LAAhcXUI+0LfCdWVBqWrybWHoSK/Msyo
-Gry8RmDXSVdWb442yW85AFKUxyfXlhmOPkqmxD6MAGfC8nyARIkJntq+qRrK8uji
-ScT3D8HCfJjX0RWYN9JtatUEcnsP8nagVwjj83Cs5kEW7p9RVH+LuLo3seVNlfTb
-N9PYCARrfAM39B0vc6CanWld5sXcLJCFC1wenreh0/z23n05mp4JD36WV8N7A5vg
-LxvmfvTmgqgNab6C0jyUyWB7JU4XPKQRDVJgLnk04cs6RIojRdNbKdPlodJ9HzSu
-dq29LknINZ3DUochS8aLYCSdj5tr3e2BEM7hdCWV/30iQQ1ORGO8u3HixphoNujJ
-LMJtYr89
-=xbU/
------END PGP SIGNATURE-----
-
---+hSBsfS+qZ2wS3m+--
