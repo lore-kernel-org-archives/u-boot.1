@@ -4,60 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94F89C4829A
-	for <u-boot@archiver.kernel.org>; Sun, 11 Feb 2024 14:45:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55A4FC4829A
+	for <u-boot@archiver.kernel.org>; Sun, 11 Feb 2024 15:45:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D5DFD87C45;
-	Sun, 11 Feb 2024 15:45:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=yandex.com
+	by phobos.denx.de (Postfix) with ESMTP id 8D31087C6D;
+	Sun, 11 Feb 2024 16:45:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=yandex.com header.i=@yandex.com header.b="dm1IpJ2i";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="W6tt9K74";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0089B87C45; Sun, 11 Feb 2024 15:07:41 +0100 (CET)
-Received: from forward500b.mail.yandex.net (forward500b.mail.yandex.net
- [178.154.239.144])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7162087C75; Sun, 11 Feb 2024 16:45:50 +0100 (CET)
+Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
+ [IPv6:2a00:1450:4864:20::22a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 12F11877D0
- for <u-boot@lists.denx.de>; Sun, 11 Feb 2024 15:07:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8448587C69
+ for <u-boot@lists.denx.de>; Sun, 11 Feb 2024 16:45:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=yandex.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jbx6244@yandex.com
-Received: from mail-nwsmtp-smtp-production-main-91.iva.yp-c.yandex.net
- (mail-nwsmtp-smtp-production-main-91.iva.yp-c.yandex.net
- [IPv6:2a02:6b8:c0c:68c:0:640:359:0])
- by forward500b.mail.yandex.net (Yandex) with ESMTPS id F3E2F60AEB;
- Sun, 11 Feb 2024 17:07:29 +0300 (MSK)
-Received: by mail-nwsmtp-smtp-production-main-91.iva.yp-c.yandex.net
- (smtp/Yandex) with ESMTPSA id Q7mSPQcOmqM0-rQsrsngN; 
- Sun, 11 Feb 2024 17:07:29 +0300
-X-Yandex-Fwd: 1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex.com; s=mail;
- t=1707660449; bh=j85177/WaqmDSx2iSA8h2V2lqhsXsvNSTovLvKGcTAo=;
- h=From:In-Reply-To:Cc:Date:References:To:Subject:Message-ID;
- b=dm1IpJ2icYf/jImnS2Nz8INtTQ/RxXubXDfLt1q99rrTCYhwDMyuesf6X8W4L8WPi
- SCzYQXrZsVoB/f+mHMKc3EngcVlg3eDrvKmroUwGeA2fdAPGnhnmehLNby0tTNCJIl
- jM3Lj88jqX5mIj8iGwNLO6YhTSghBmyziwyxNM1c=
-Authentication-Results: mail-nwsmtp-smtp-production-main-91.iva.yp-c.yandex.net;
- dkim=pass header.i=@yandex.com
-Message-ID: <f0fdf99e-4688-47e2-97ff-a7ba24682a29@yandex.com>
-Date: Sun, 11 Feb 2024 15:07:25 +0100
+ spf=pass smtp.mailfrom=andrej.skvortzov@gmail.com
+Received: by mail-lj1-x22a.google.com with SMTP id
+ 38308e7fff4ca-2d09d90fa11so32162241fa.3
+ for <u-boot@lists.denx.de>; Sun, 11 Feb 2024 07:45:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1707666348; x=1708271148; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=90n5dFUw9S6m8bY1tX/q7h9mo79YgmkyT3Kx1Gb1/iI=;
+ b=W6tt9K74GAETLVAUaQYjaRRSMhUcjR+00LCYZtalwXVl4loHHYts0YUeYlEcGxBfpl
+ 4++oKE6/A3ojI9g7sHdkdVr+fldbD/odvgeRNTjL4cuK0j0M+JSWgKkFd8BWAgUk1fX3
+ Anr4t4L22jfJqhxVOz3Je8cSVipm79HyYbcxowgsChatheP1S6EFDRXrZoc+t/v2qpsz
+ tVBg+SAWQwSt3u3RTIwFdkDG7n2MluS+E2U9OydB7e+XRoVfdY4iJkZNoDQHsb6KywfS
+ 7mYN53G9RcB5bpAInMek66721nFPTCJiL4W48f6dx3OjGhHsr0wubTJYp1sKtRxaHVgu
+ ANLQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1707666348; x=1708271148;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=90n5dFUw9S6m8bY1tX/q7h9mo79YgmkyT3Kx1Gb1/iI=;
+ b=ie5HiciQgG4/h4KyEUhi881OcrbzFYD3D3xOEqbSKJ0oULK6zbcJ+dvHJFFFrryzIM
+ tKVczz1Ht/OozNxXPaQhr4TVyGcrf58eTV33j9ogOt1xhzSGgyQ32qxD7jJ/X9W+MFNt
+ sPjvIYWJBhdQbaeP0TMGfMiKANzJoJ4Btt0quV1qjQYs847RqOWjzphTdbYlFvmd70SF
+ J3ARbE4en/fn7M+URde5/5LIXGJHLUz8e7MX3BEvjU6fJeG///vN6YnGxzVGXVUgWMVJ
+ iOEAuzWNE3PFY8PJNDIpKVcbJ3zJ/dU5KDTb8DNGuzmq5w+kkEHrNGromGv7rR5miwJl
+ 1GIQ==
+X-Gm-Message-State: AOJu0YwIW9yZgpVZrBaCHMD5H8tiBMQnWb8X1qZE+bCr21tM0pGGIXp9
+ td7Jka6YTdAkxC5bLGT776SZ44m/qVZLWz2s5YE19ew5dS6jbqDYG3UkZtG1kWo=
+X-Google-Smtp-Source: AGHT+IGGtaPn4oCJ6rSZcYj0+EOtS467DTmhN0/yflRqD+K0bl2LpIFXok+hCebrHWi44gI5JFV5Ow==
+X-Received: by 2002:a2e:9bd3:0:b0:2d0:c273:669a with SMTP id
+ w19-20020a2e9bd3000000b002d0c273669amr2683346ljj.46.1707666347474; 
+ Sun, 11 Feb 2024 07:45:47 -0800 (PST)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCURrNWPjzUSqsnL54K/lTVDPpdXCxGyCBIwWJYzMiPvtbCxW+sToApyv/stJFPgSta9wnx81Aa3G2dhK4MkX9p5AX5Yk+jOuzNiIdGUZDZo+zoW7QUuFCQeWnh2byOJPpcrNTzKGkii/pY7PCHCNKa7iK+SlFlZAxY91neDaxh0nsURFkb+9bvb2tWGAybT47Ok4B+B18vI9ERZ9hMDAN/nA8qrbBfDTA==
+Received: from localhost.localdomain ([2a05:3580:f312:6c01:1b8f:2a1b:d18:1951])
+ by smtp.gmail.com with ESMTPSA id
+ y13-20020a2e7d0d000000b002d08153c3cesm1003672ljc.42.2024.02.11.07.45.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 11 Feb 2024 07:45:46 -0800 (PST)
+From: Andrey Skvortsov <andrej.skvortzov@gmail.com>
+To: Samuel Holland <samuel@sholland.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de, Arnaud Ferraris <arnaud.ferraris@collabora.com>,
+ Samuel Dionne-Riel <samuel@dionne-riel.com>,
+ Andre Przywara <andre.przywara@arm.com>
+Cc: Andrey Skvortsov <andrej.skvortzov@gmail.com>
+Subject: [PATCH] sunxi: defconfig: Add pstore support for pinephone
+Date: Sun, 11 Feb 2024 18:45:14 +0300
+Message-ID: <20240211154514.925977-1-andrej.skvortzov@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] doc: rockchip: Clarify the rkspi image format further
-Content-Language: en-US
-To: Dragan Simic <dsimic@manjaro.org>, u-boot@lists.denx.de
-Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
- trini@konsulko.com, massimo.pegorer+oss@gmail.com
-References: <cd0b002cacfd40ac294b1583c1769718e94e869f.1707588872.git.dsimic@manjaro.org>
-From: Johan Jonker <jbx6244@yandex.com>
-In-Reply-To: <cd0b002cacfd40ac294b1583c1769718e94e869f.1707588872.git.dsimic@manjaro.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Sun, 11 Feb 2024 15:45:52 +0100
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,84 +93,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+In general any DRAM address, that isn't overwritten during a boot is
+suitable for pstore.
 
+Range from 0x40000000 - 0x50000000 is heavily used by u-boot for
+internal use and to load kernel, fdt, fdto, scripts, pxefile and ramdisk
+later in the boot process. Ramdisk start address is 0x4FF00000,
+initramfs for kernel with some hacking features and debug info enabled
+can take more than 100Mb and final address will be around 0x58000000.
+Address 0x61000000 will most likely not overlap with that.
 
-On 2/10/24 19:18, Dragan Simic wrote:
-> As discussed on the U-Boot mailing list, [1][2] only some Rockchip SoCs
-> suffer from a bug in their BROMs that requires a specific format for their
+Signed-off-by: Andrey Skvortsov <andrej.skvortzov@gmail.com>
+---
+ configs/pinephone_defconfig | 2 ++
+ 1 file changed, 2 insertions(+)
 
-This not a bug.
+diff --git a/configs/pinephone_defconfig b/configs/pinephone_defconfig
+index 9d39204a43..7b80cc3131 100644
+--- a/configs/pinephone_defconfig
++++ b/configs/pinephone_defconfig
+@@ -10,6 +10,8 @@ CONFIG_DRAM_ZQ=3881949
+ CONFIG_MMC_SUNXI_SLOT_EXTRA=2
+ CONFIG_PINEPHONE_DT_SELECTION=y
+ # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
++CONFIG_CMD_PSTORE=y
++CONFIG_CMD_PSTORE_MEM_ADDR=0x61000000
+ CONFIG_OF_LIST="sun50i-a64-pinephone-1.1 sun50i-a64-pinephone-1.2"
+ CONFIG_LED_STATUS=y
+ CONFIG_LED_STATUS_GPIO=y
+-- 
+2.43.0
 
-> SPI images, which was the reason for the rkspi format to be introduced.
-> 
-> Improve the description of the rkspi format a bit to mention this, for
-> future reference and to make understanding it easier.
-> 
-> [1] https://lore.kernel.org/u-boot/c32129ba-db25-4b9d-9a4a-032d88dfb9cd@kwiboo.se/
-> [2] https://lore.kernel.org/u-boot/CACdvmAjfCWicRd=LKKyob7fZo79AFkUQKy0e1HBb0zyJuoO70g@mail.gmail.com/
-> 
-> Signed-off-by: Dragan Simic <dsimic@manjaro.org>
-> ---
->  doc/README.rockchip | 7 ++++++-
->  1 file changed, 6 insertions(+), 1 deletion(-)
-> 
-> diff --git a/doc/README.rockchip b/doc/README.rockchip
-> index 84caff8a24d3..e0c5c395ec6a 100644
-> --- a/doc/README.rockchip
-> +++ b/doc/README.rockchip
-> @@ -649,7 +649,12 @@ sector is used. The header is the same as with rksd and the maximum size is
-
->  also 32KB (before spreading). The image should be written to the start of
->  SPI flash.
->  
-
-On rk3066 an image should start before page address:
-NAND : 50
-SPI  : 13
-EMMC :  1
-
-Not sure about start limits for other SoC's. (Kever ??)
-
-Also rk3066 and rk3188 use RC4 crypto.
-
-> -See above for instructions on how to write a SPI image.
-> +Only the BROMs of some Rockchip SoCs, such as the RK3399, suffer from a bug
-> +that mandates the above-described data spreading, thus requiring the rkspi
-> +format to be used for their SPI images. Rockchip SoCs that don't suffer
-> +from this bug use the rksd format for their SPI images.
-> +
-
-This not a bug. It's a design choice to reuse the reading function in the boot ROM shared by EMMC, NAND and SPI etc. due to size restrictions.
-
-See NAND example:
-https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/blob/master/drivers/block/rkmtd.c?ref_type=heads#L259
-
-This NAND code also applies to SPI with minor tweaks.
-Code will never read more then 2k regardless of the page size.
-
-===
-This info must be written in a more neutral wording.(no bugs involved)
-Just describe the 2 formats and the SoC's that use it.
-
-Johan
-
-===
-Extra:
-
-Could someone cleanup README.rockchip
-The file README.rockchip has most building scenarios covered by now.
-Please have a look if all the boot log listing in that file are still needed or can be removed. 
-
-===
-
-Is there a need for SPI programmer code a la RKMTD with common base and block interface tools?
-
-===
-
-Is someone able to extract rk3568 boot ROM code in order to study NAND boot behavior for a future RKMTD NFC V9 upgrade?
-
-> +See the section above for instructions on how to write an SPI image.
->  
->  rkmux.py
->  --------
-> 
