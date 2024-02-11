@@ -4,89 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12961C4829A
-	for <u-boot@archiver.kernel.org>; Sun, 11 Feb 2024 16:20:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 526D2C4829A
+	for <u-boot@archiver.kernel.org>; Sun, 11 Feb 2024 17:14:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1954687C4D;
-	Sun, 11 Feb 2024 17:20:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 4C14787C75;
+	Sun, 11 Feb 2024 18:14:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=foundries.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Hy0vUE2F";
+	dkim=pass (2048-bit key; secure) header.d=foundries.io header.i=@foundries.io header.b="mvKv6JQ6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 67C0E87C6D; Sun, 11 Feb 2024 17:20:10 +0100 (CET)
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
- [IPv6:2a00:1450:4864:20::12f])
+ id B826787C76; Sun, 11 Feb 2024 18:14:51 +0100 (CET)
+Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
+ [IPv6:2a00:1450:4864:20::22f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F20E87B71
- for <u-boot@lists.denx.de>; Sun, 11 Feb 2024 17:20:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4344D87C69
+ for <u-boot@lists.denx.de>; Sun, 11 Feb 2024 18:14:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=foundries.io
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrej.skvortzov@gmail.com
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-5114c05806eso3897385e87.1
- for <u-boot@lists.denx.de>; Sun, 11 Feb 2024 08:20:08 -0800 (PST)
+ spf=pass smtp.mailfrom=igor.opaniuk@foundries.io
+Received: by mail-lj1-x22f.google.com with SMTP id
+ 38308e7fff4ca-2d0c7e6b240so32643981fa.0
+ for <u-boot@lists.denx.de>; Sun, 11 Feb 2024 09:14:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1707668407; x=1708273207; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references
- :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
- :subject:date:message-id:reply-to;
- bh=nDlcWGPuMLoZvgx9bEEypvSbK2SxPt29KJiQ1wAM/Ts=;
- b=Hy0vUE2FMeMLVXpnV9WfJlwfPWO0IXF4QoWzeMmlaHb8GAoYs6akPd0B8j+LQ/1wSl
- ic/Jw+nH3c2IZllPCpTrf5emYP3XKQ1radppH9X4qOhVtwpoYmuQpFqmHYasYXKxhjLg
- QHMqz6OM2jxGsu6tydlMimKm0A3X7ifmhVABEzyIi0LpRpSuT5NODBVv4IK3eT6LE8gV
- kHh1SmkDJmegAnvdX5XtmCWdKbSbS+jiFGi0BcEUK2iLq/xTUsE4eOqqKulTLOGEYdW3
- 5WYnqhI/rCjjj75HmAn1BkstDGyHYCkwcVSFK5L9DTpg5WiVzkOrTSZ0Vx76nFXej2Yo
- Nayg==
+ d=foundries.io; s=google; t=1707671687; x=1708276487; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=30fEcHvwrIQ5vfxWI9OOW0ehirG6638MnvQFKVw1o0w=;
+ b=mvKv6JQ6ArnKt23mLteqTjd71inwlLK8tQ1V3i2xATKO6gp4Y2yt8oN3Pg1dxa+wy7
+ xUnbAYiiJPHG5n6RNofGvZyVclrsQcQzz19x7rwl/ScZCQIBZ3jODXZPMpaVN5WUhqhE
+ MQTSsrrEdFy1cIc9k2yK7mKTDmDKHTDH9be0Et0GY3RhLfNAQkHB9lIYEGGa/B4l0qv4
+ WrRYI1R1Qr7WB2ERZHAO4G75nnS6fqBgh0YcHcmrYfqo2jh+zq6So3BuVwYU5ZU1W5uS
+ vZIm+r9AeIilGuJ4BJkVr1jTtl3S8HbDiiCarGmIq3DcsMgUT1C3/PuEuSsgjMtv0pU0
+ OfHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707668407; x=1708273207;
- h=in-reply-to:content-disposition:mime-version:references
- :mail-followup-to:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=nDlcWGPuMLoZvgx9bEEypvSbK2SxPt29KJiQ1wAM/Ts=;
- b=ttbkAPNWVvIlYs+++sWPGoRwEHgYPaMIXXwbXtiJn1ikwBMBJtt9TAsoscLsoB0Blp
- VBAYRGZuUkLf0ZsRY5XbOgFkjful9o/jeuLyA6Z+NJp9zpjb01umY6RKIEo03HvHqWWp
- TqczDceCjEqNUtXNjdZIvCKCCfuVhuCw4gQdpgDL6pq5wpj3ZKg1gC2oATU/5CEOfgmy
- IQhJkEd1QMnt3jQMOS86m8E16cAg8BuOV0stPnllX8l2w8+NbRyLo8duWums1R07tEqc
- bkPhdiU4ATCxetmfgZ4CQ53pOh7Y3AbAFX4jR+NqGuyTAXkDI9LXOFtRD8qsezW14pBU
- Zuyg==
-X-Gm-Message-State: AOJu0Yx1P6MuvTARxKhKW/s0C+4mLnOuuKwBLlg8GeGXL1BecGF4kwCb
- xRmmldv50xWoCyQYvfTTzhQ9LzU9f7c1YMx+RaV7mB48mjFScPh8
-X-Google-Smtp-Source: AGHT+IHNhfJ/jyftSTBr0SRAlQO5tgW3k1yFIMmxklL1ixBuRNDJBjbIdSIChGzVszWr6CiEF2TC4Q==
-X-Received: by 2002:ac2:48a6:0:b0:50d:f81e:6872 with SMTP id
- u6-20020ac248a6000000b0050df81e6872mr3198229lfg.10.1707668407043; 
- Sun, 11 Feb 2024 08:20:07 -0800 (PST)
-X-Forwarded-Encrypted: i=1;
- AJvYcCUYwhh4skqvTHk1KzOZts6eoNK4pG0Cv93NuAMkDsMDUO1m9vLzlDjB5HoSk2Y5txoAsZSOEeHIlT9Eev+WFIeOBOvt45ZxqpJf8w+1/BBpSfnsNUSfM57p5EqSBIdnsix+fMhYsy5ejsIgVILTowmtRZnRh0gOFB2d5lJYt+kZqoOwbxuKpX13cumufY8KLY9zmpfDW9LaMFmcKP2X5RXSLN1ucgLydQ==
-Received: from localhost ([2a05:3580:f312:6c01:1b8f:2a1b:d18:1951])
- by smtp.gmail.com with ESMTPSA id
- f26-20020a056512361a00b005114945fad7sm555911lfs.307.2024.02.11.08.20.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 11 Feb 2024 08:20:06 -0800 (PST)
-Date: Sun, 11 Feb 2024 19:20:06 +0300
-From: Andrey Skvortsov <andrej.skvortzov@gmail.com>
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: Samuel Holland <samuel@sholland.org>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de, Arnaud Ferraris <arnaud.ferraris@collabora.com>,
- Samuel Dionne-Riel <samuel@dionne-riel.com>,
- Andre Przywara <andre.przywara@arm.com>
-Subject: Re: [PATCH] sunxi: defconfig: Add pstore support for pinephone
-Message-ID: <ZcjztoqfwDMAeVK1@skv.local>
-Mail-Followup-To: Peter Robinson <pbrobinson@gmail.com>,
- Samuel Holland <samuel@sholland.org>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de,
- Arnaud Ferraris <arnaud.ferraris@collabora.com>,
- Samuel Dionne-Riel <samuel@dionne-riel.com>,
- Andre Przywara <andre.przywara@arm.com>
-References: <20240211154514.925977-1-andrej.skvortzov@gmail.com>
- <CALeDE9NxT2f_Y=v12EaHraDOHNVMhjPNLJpbLPVLgeZmsxiBMg@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1707671687; x=1708276487;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=30fEcHvwrIQ5vfxWI9OOW0ehirG6638MnvQFKVw1o0w=;
+ b=KN8LhWYAoQIoMSMMqvM4ClOevajUSzAuyKq8Axopj5zNAwVy1nzTdMRUmhs6303yPs
+ VOnNrW+qkBCydDOdkWne7d4kscrwu+ODWu0he8k+uULx1me/kuvmVUXFdNTOwlcI0Tvy
+ xv8W0h+iZm6tAPnlgX4xKylEHIncRx1FYbaVDnrKsJJ2ysYS4rSk30J5QwUaRtezcZS/
+ Kj1VANXPcPaRlHSsxCgVZGixbsaRpAYHMOmkdqHVppq5/yYYtUgRV3JFJLCJEgvQHBgO
+ ZCuWMDd9pi/G/qVMSSTwtD1bLmrf5mVS5lPxdc+eEGGQcUnEkWwFs4jgALS1CISu2BLC
+ 0B5w==
+X-Gm-Message-State: AOJu0YwEi62jgFNFq5BaNCLGxyLjAEfLIAwI65Qq1Ehp1Ii5V3E8vH1W
+ /8Ad7Rrt7mgPCv7wEIxcxN6nJ1RMdEpmh6CmHt+Z2fhSeCetc/1yXeci9MrbVQaEU33EHARiVyy
+ ETGG4KhPEbAR9y3EPfXyC7ed/PbaSPgTlLpChqg==
+X-Google-Smtp-Source: AGHT+IG3wuCwUpHnQCpf0NDJqitjczIh/fq0XFIzh1gXMa3HMyN6jDjKEkoUZwhRvUNLiObWS02n6F3iKdAESVo2NHU=
+X-Received: by 2002:ac2:514a:0:b0:511:7bbb:fd6e with SMTP id
+ q10-20020ac2514a000000b005117bbbfd6emr2658772lfd.27.1707671687230; Sun, 11
+ Feb 2024 09:14:47 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <CALeDE9NxT2f_Y=v12EaHraDOHNVMhjPNLJpbLPVLgeZmsxiBMg@mail.gmail.com>
+References: <20240210120709.938286-1-igor.opaniuk@foundries.io>
+ <86h6if6hj0.wl-maz@kernel.org>
+In-Reply-To: <86h6if6hj0.wl-maz@kernel.org>
+From: Igor Opaniuk <igor.opaniuk@foundries.io>
+Date: Sun, 11 Feb 2024 18:14:35 +0100
+Message-ID: <CAL6CDMFx=r9P+4TGvo7MHksB5gddAO4==NResv=3TwP7K+Wguw@mail.gmail.com>
+Subject: Re: [PATCH v1] armv8: crypto: SHA-512 using ARMv8 Crypto Extensions
+To: Marc Zyngier <maz@kernel.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Loic Poulain <loic.poulain@linaro.org>, Igor Opaniuk <igor.opaniuk@gmail.com>, 
+ Michal Simek <michal.simek@amd.com>, Qu Wenruo <wqu@suse.com>,
+ Simon Glass <sjg@chromium.org>, 
+ "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
+ Ard Biesheuvel <ardb@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,62 +93,427 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peter,
+Hello Marc,
 
-On 24-02-11 16:11, Peter Robinson wrote:
-> On Sun, 11 Feb 2024 at 16:02, Andrey Skvortsov
-> <andrej.skvortzov@gmail.com> wrote:
-> >
-> > In general any DRAM address, that isn't overwritten during a boot is
-> > suitable for pstore.
-> 
-> What's this functionality providing? The details below give the
-> technical reasons for the memory address but I'm not sure what
-> enabling pstore provides to PinePhone users.
+On Sun, Feb 11, 2024 at 12:12=E2=80=AFAM Marc Zyngier <maz@kernel.org> wrot=
+e:
 >
-Good point. pstore allows users to catch kernel crashes and report
-them to developers. It's enabled by default in distribution kernels
-like Debian.
-
-CONFIG_PSTORE=y
-CONFIG_PSTORE_RAM=m
-
-systemd has service that automatically handles pstore and saves them
-in /var/lib/pstore for later usage.
-
-Modern (Android) phones have pstore enabled usually to get information
-about kernel crash, since it's the simplest way to get kernel
-backtrace on mobile device without serial console.
-
-> > Range from 0x40000000 - 0x50000000 is heavily used by u-boot for
-> > internal use and to load kernel, fdt, fdto, scripts, pxefile and ramdisk
-> > later in the boot process. Ramdisk start address is 0x4FF00000,
-> > initramfs for kernel with some hacking features and debug info enabled
-> > can take more than 100Mb and final address will be around 0x58000000.
-> > Address 0x61000000 will most likely not overlap with that.
+> [Fixing Ard's email address for something more current.]
+>
+> On Sat, 10 Feb 2024 12:07:09 +0000,
+> Igor Opaniuk <igor.opaniuk@foundries.io> wrote:
 > >
-> > Signed-off-by: Andrey Skvortsov <andrej.skvortzov@gmail.com>
+> > From: Igor Opaniuk <igor.opaniuk@gmail.com>
+> >
+> > Add support for the SHA-512 Secure Hash Algorithm which uses ARMv8 Cryp=
+to
+> > Extensions. The CPU should support ARMv8.2 instruction set and implemen=
+t
+> > SHA512H, SHA512H2, SHA512SU0, and SHA512SU1 instructions.
+> >
+> > This information can be obtained from ID_AA64ISAR0_EL1 (AArch64 Instruc=
+tion
+> > Set Attribute Register 0), bits [15:12] should be 0b0010 [1], that
+> > indicates support for SHA512* instructions in AArch64 state. As not all
+> > ARMv8-base SoCs support that, ARMV8_CE_SHA512 is left disabled by
+> > default for now.
+>
+> But since you can actually probe it at runtime, what's the problem?
+
+That actually was my initial plan, I just decided to move one step
+one step at a time and address that in the next patch series.
+
+>
+> > Tested in QEMU for ARMv8 with compiled-in SHA-2 support.
+> > Even on emulated cpu the hashing speed increase was visible:
+>
+> Unfortunately, QEMU is not a good oracle for optimisations, and is
+> more akin to rolling a dice. In your case, you *should* see an
+> improvement, but this should be evaluated on bare metal.
+I fully agree with you here, but unfortunately it turned out
+that the only board with ARMv8.2-ready SoC (Cortex A55). I have now
+at hand doesn't support SHA512* instructions, but after all decided
+so send the patch to get rid of the feeling that it was all in vain  :)
+
+Maybe I added a bit of confusion to the commit message,
+as the initial idea was about functional validation (that it works in
+QEMU at least). I didn't want to make any comparison
+in a virtualized environment as it obviously didn't make any sense.
+
+>
+> >
+> > With CE usage:
+> > =3D> time hash sha512 0x40200000 0x2000000
+> > Calculate hash
+> > Calculate hash
+> > sha512 for 40200000 ... 421fffff =3D=3D> 1aeae269f4eb7c37...
+> >
+> > time: 0.215 seconds
+> >
+> > Without CE usage:
+> > =3D> time hash sha512 0x40200000 0x2000000
+> > sha512 for 40200000 ... 421fffff =3D=3D> 1aeae269f4eb7c37...
+> >
+> > time: 0.356 seconds
+> >
+> > Real HW tests should provide much more improvement and objective result=
+s
+> > with 10x speed increase at least.
+> >
+> > The implementation is based on original implementation from Ard Biesheu=
+vel in
+> > Linux kernel [2]
+> >
+> > [1] https://developer.arm.com/documentation/ddi0601/2023-12/AArch64-Reg=
+isters/ID-AA64ISAR0-EL1--AArch64-Instruction-Set-Attribute-Register-0
+> > [2] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/=
+tree/arch/arm/crypto/sha2-ce-core.S
+> >
+> > CC: Ard Biesheuvel <ard.biesheuvel@linaro.org>
+> > CC: Loic Poulain <loic.poulain@linaro.org>
+> > Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
 > > ---
-> >  configs/pinephone_defconfig | 2 ++
-> >  1 file changed, 2 insertions(+)
 > >
-> > diff --git a/configs/pinephone_defconfig b/configs/pinephone_defconfig
-> > index 9d39204a43..7b80cc3131 100644
-> > --- a/configs/pinephone_defconfig
-> > +++ b/configs/pinephone_defconfig
-> > @@ -10,6 +10,8 @@ CONFIG_DRAM_ZQ=3881949
-> >  CONFIG_MMC_SUNXI_SLOT_EXTRA=2
-> >  CONFIG_PINEPHONE_DT_SELECTION=y
-> >  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-> > +CONFIG_CMD_PSTORE=y
-> > +CONFIG_CMD_PSTORE_MEM_ADDR=0x61000000
-> >  CONFIG_OF_LIST="sun50i-a64-pinephone-1.1 sun50i-a64-pinephone-1.2"
-> >  CONFIG_LED_STATUS=y
-> >  CONFIG_LED_STATUS_GPIO=y
-> > --
-> > 2.43.0
+> >  arch/arm/cpu/armv8/Kconfig          |   5 +
+> >  arch/arm/cpu/armv8/Makefile         |   1 +
+> >  arch/arm/cpu/armv8/sha512_ce_core.S | 210 ++++++++++++++++++++++++++++
+> >  arch/arm/cpu/armv8/sha512_ce_glue.c |  20 +++
+> >  lib/sha512.c                        |   6 +-
+> >  5 files changed, 240 insertions(+), 2 deletions(-)
+> >  create mode 100644 arch/arm/cpu/armv8/sha512_ce_core.S
+> >  create mode 100644 arch/arm/cpu/armv8/sha512_ce_glue.c
 > >
+> > diff --git a/arch/arm/cpu/armv8/Kconfig b/arch/arm/cpu/armv8/Kconfig
+> > index 9f0fb369f7..fd5c26421b 100644
+> > --- a/arch/arm/cpu/armv8/Kconfig
+> > +++ b/arch/arm/cpu/armv8/Kconfig
+> > @@ -204,6 +204,11 @@ config ARMV8_CE_SHA256
+> >       bool "SHA-256 digest algorithm (ARMv8 Crypto Extensions)"
+> >       default y if SHA256
+> >
+> > +config ARMV8_CE_SHA512
+> > +     bool "SHA-512 digest algorithm (ARMv8 Crypto Extensions)"
+> > +     depends on SHA512
+> > +     default n
+> > +
+> >  endif
+> >
+> >  endif
+> > diff --git a/arch/arm/cpu/armv8/Makefile b/arch/arm/cpu/armv8/Makefile
+> > index bba4f570db..3894f2bb2a 100644
+> > --- a/arch/arm/cpu/armv8/Makefile
+> > +++ b/arch/arm/cpu/armv8/Makefile
+> > @@ -45,3 +45,4 @@ obj-$(CONFIG_TARGET_BCMNS3) +=3D bcmns3/
+> >  obj-$(CONFIG_XEN) +=3D xen/
+> >  obj-$(CONFIG_ARMV8_CE_SHA1) +=3D sha1_ce_glue.o sha1_ce_core.o
+> >  obj-$(CONFIG_ARMV8_CE_SHA256) +=3D sha256_ce_glue.o sha256_ce_core.o
+> > +obj-$(CONFIG_ARMV8_CE_SHA512) +=3D sha512_ce_glue.o sha512_ce_core.o
+> > \ No newline at end of file
+> > diff --git a/arch/arm/cpu/armv8/sha512_ce_core.S b/arch/arm/cpu/armv8/s=
+ha512_ce_core.S
+> > new file mode 100644
+> > index 0000000000..906291f35b
+> > --- /dev/null
+> > +++ b/arch/arm/cpu/armv8/sha512_ce_core.S
+> > @@ -0,0 +1,210 @@
+> > +/* SPDX-License-Identifier: GPL-2.0-only */
+> > +/*
+> > + * sha512-ce-core.S - core SHA-384/SHA-512 transform using v8 Crypto
+> > + * Extensions
+> > + *
+> > + * Copyright (C) 2018 Linaro Ltd <ard.biesheuvel@linaro.org>
+> > + * Copyright (C) 2024 Igor Opaniuk <igor.opaniuk@gmail.com>
+> > + */
+> > +
+> > + #include <config.h>
+> > + #include <linux/linkage.h>
+> > + #include <asm/system.h>
+> > + #include <asm/macro.h>
+> > +
+> > +     .macro  adr_l, dst, sym
+> > +     adrp    \dst, \sym
+> > +     add     \dst, \dst, :lo12:\sym
+> > +     .endm
+> > +
+> > +     .irp            b,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,=
+19
+> > +     .set            .Lq\b, \b
+> > +     .set            .Lv\b\().2d, \b
+> > +     .endr
+> > +
+> > +     .macro          sha512h, rd, rn, rm
+> > +     .inst           0xce608000 | .L\rd | (.L\rn << 5) | (.L\rm << 16)
+> > +     .endm
+> > +
+> > +     .macro          sha512h2, rd, rn, rm
+> > +     .inst           0xce608400 | .L\rd | (.L\rn << 5) | (.L\rm << 16)
+> > +     .endm
+> > +
+> > +     .macro          sha512su0, rd, rn
+> > +     .inst           0xcec08000 | .L\rd | (.L\rn << 5)
+> > +     .endm
+> > +
+> > +     .macro          sha512su1, rd, rn, rm
+> > +     .inst           0xce608800 | .L\rd | (.L\rn << 5) | (.L\rm << 16)
+> > +     .endm
+> > +
+> > +     /*
+> > +      * The SHA-512 round constants
+> > +      */
+> > +     .section        ".rodata", "a"
+> > +     .align          4
+> > +.Lsha512_rcon:
+> > +     .quad           0x428a2f98d728ae22, 0x7137449123ef65cd
+> > +     .quad           0xb5c0fbcfec4d3b2f, 0xe9b5dba58189dbbc
+> > +     .quad           0x3956c25bf348b538, 0x59f111f1b605d019
+> > +     .quad           0x923f82a4af194f9b, 0xab1c5ed5da6d8118
+> > +     .quad           0xd807aa98a3030242, 0x12835b0145706fbe
+> > +     .quad           0x243185be4ee4b28c, 0x550c7dc3d5ffb4e2
+> > +     .quad           0x72be5d74f27b896f, 0x80deb1fe3b1696b1
+> > +     .quad           0x9bdc06a725c71235, 0xc19bf174cf692694
+> > +     .quad           0xe49b69c19ef14ad2, 0xefbe4786384f25e3
+> > +     .quad           0x0fc19dc68b8cd5b5, 0x240ca1cc77ac9c65
+> > +     .quad           0x2de92c6f592b0275, 0x4a7484aa6ea6e483
+> > +     .quad           0x5cb0a9dcbd41fbd4, 0x76f988da831153b5
+> > +     .quad           0x983e5152ee66dfab, 0xa831c66d2db43210
+> > +     .quad           0xb00327c898fb213f, 0xbf597fc7beef0ee4
+> > +     .quad           0xc6e00bf33da88fc2, 0xd5a79147930aa725
+> > +     .quad           0x06ca6351e003826f, 0x142929670a0e6e70
+> > +     .quad           0x27b70a8546d22ffc, 0x2e1b21385c26c926
+> > +     .quad           0x4d2c6dfc5ac42aed, 0x53380d139d95b3df
+> > +     .quad           0x650a73548baf63de, 0x766a0abb3c77b2a8
+> > +     .quad           0x81c2c92e47edaee6, 0x92722c851482353b
+> > +     .quad           0xa2bfe8a14cf10364, 0xa81a664bbc423001
+> > +     .quad           0xc24b8b70d0f89791, 0xc76c51a30654be30
+> > +     .quad           0xd192e819d6ef5218, 0xd69906245565a910
+> > +     .quad           0xf40e35855771202a, 0x106aa07032bbd1b8
+> > +     .quad           0x19a4c116b8d2d0c8, 0x1e376c085141ab53
+> > +     .quad           0x2748774cdf8eeb99, 0x34b0bcb5e19b48a8
+> > +     .quad           0x391c0cb3c5c95a63, 0x4ed8aa4ae3418acb
+> > +     .quad           0x5b9cca4f7763e373, 0x682e6ff3d6b2b8a3
+> > +     .quad           0x748f82ee5defb2fc, 0x78a5636f43172f60
+> > +     .quad           0x84c87814a1f0ab72, 0x8cc702081a6439ec
+> > +     .quad           0x90befffa23631e28, 0xa4506cebde82bde9
+> > +     .quad           0xbef9a3f7b2c67915, 0xc67178f2e372532b
+> > +     .quad           0xca273eceea26619c, 0xd186b8c721c0c207
+> > +     .quad           0xeada7dd6cde0eb1e, 0xf57d4f7fee6ed178
+> > +     .quad           0x06f067aa72176fba, 0x0a637dc5a2c898a6
+> > +     .quad           0x113f9804bef90dae, 0x1b710b35131c471b
+> > +     .quad           0x28db77f523047d84, 0x32caab7b40c72493
+> > +     .quad           0x3c9ebe0a15c9bebc, 0x431d67c49c100d4c
+> > +     .quad           0x4cc5d4becb3e42b6, 0x597f299cfc657e2a
+> > +     .quad           0x5fcb6fab3ad6faec, 0x6c44198c4a475817
+> > +
+> > +     .macro          dround, i0, i1, i2, i3, i4, rc0, rc1, in0, in1, i=
+n2, in3, in4
+> > +     .ifnb           \rc1
+> > +     ld1             {v\rc1\().2d}, [x4], #16
+> > +     .endif
+> > +     add             v5.2d, v\rc0\().2d, v\in0\().2d
+> > +     ext             v6.16b, v\i2\().16b, v\i3\().16b, #8
+> > +     ext             v5.16b, v5.16b, v5.16b, #8
+> > +     ext             v7.16b, v\i1\().16b, v\i2\().16b, #8
+> > +     add             v\i3\().2d, v\i3\().2d, v5.2d
+> > +     .ifnb           \in1
+> > +     ext             v5.16b, v\in3\().16b, v\in4\().16b, #8
+> > +     sha512su0       v\in0\().2d, v\in1\().2d
+> > +     .endif
+> > +     sha512h         q\i3, q6, v7.2d
+> > +     .ifnb           \in1
+> > +     sha512su1       v\in0\().2d, v\in2\().2d, v5.2d
+> > +     .endif
+> > +     add             v\i4\().2d, v\i1\().2d, v\i3\().2d
+> > +     sha512h2        q\i3, q\i1, v\i0\().2d
+> > +     .endm
+> > +
+> > +     /*
+> > +      * void sha512_ce_transform(struct sha512_state *sst, u8 const *s=
+rc,
+> > +      *                        int blocks)
+> > +      */
+> > +     .text
+> > +ENTRY(sha512_ce_transform)
+> > +     /* load state */
+> > +     ld1             {v8.2d-v11.2d}, [x0]
+> > +
+> > +     /* load first 4 round constants */
+> > +     adr_l           x3, .Lsha512_rcon
+> > +     ld1             {v20.2d-v23.2d}, [x3], #64
+> > +
+> > +     /* load input */
+> > +0:   ld1             {v12.2d-v15.2d}, [x1], #64
+> > +     ld1             {v16.2d-v19.2d}, [x1], #64
+> > +     sub             w2, w2, #1
+> > +#if __BYTE_ORDER =3D=3D __LITTLE_ENDIAN
+> > +        rev64                v12.16b, v12.16b
+> > +        rev64                v13.16b, v13.16b
+> > +        rev64                v14.16b, v14.16b
+> > +        rev64                v15.16b, v15.16b
+> > +        rev64                v16.16b, v16.16b
+> > +        rev64                v17.16b, v17.16b
+> > +        rev64                v18.16b, v18.16b
+> > +        rev64                v19.16b, v19.16b
+> > +#endif
+> > +     mov             x4, x3                          // rc pointer
+> > +
+> > +     mov             v0.16b, v8.16b
+> > +     mov             v1.16b, v9.16b
+> > +     mov             v2.16b, v10.16b
+> > +     mov             v3.16b, v11.16b
+> > +
+> > +     // v0  ab  cd  --  ef  gh  ab
+> > +     // v1  cd  --  ef  gh  ab  cd
+> > +     // v2  ef  gh  ab  cd  --  ef
+> > +     // v3  gh  ab  cd  --  ef  gh
+> > +     // v4  --  ef  gh  ab  cd  --
+> > +
+> > +     dround          0, 1, 2, 3, 4, 20, 24, 12, 13, 19, 16, 17
+> > +     dround          3, 0, 4, 2, 1, 21, 25, 13, 14, 12, 17, 18
+> > +     dround          2, 3, 1, 4, 0, 22, 26, 14, 15, 13, 18, 19
+> > +     dround          4, 2, 0, 1, 3, 23, 27, 15, 16, 14, 19, 12
+> > +     dround          1, 4, 3, 0, 2, 24, 28, 16, 17, 15, 12, 13
+> > +
+> > +     dround          0, 1, 2, 3, 4, 25, 29, 17, 18, 16, 13, 14
+> > +     dround          3, 0, 4, 2, 1, 26, 30, 18, 19, 17, 14, 15
+> > +     dround          2, 3, 1, 4, 0, 27, 31, 19, 12, 18, 15, 16
+> > +     dround          4, 2, 0, 1, 3, 28, 24, 12, 13, 19, 16, 17
+> > +     dround          1, 4, 3, 0, 2, 29, 25, 13, 14, 12, 17, 18
+> > +
+> > +     dround          0, 1, 2, 3, 4, 30, 26, 14, 15, 13, 18, 19
+> > +     dround          3, 0, 4, 2, 1, 31, 27, 15, 16, 14, 19, 12
+> > +     dround          2, 3, 1, 4, 0, 24, 28, 16, 17, 15, 12, 13
+> > +     dround          4, 2, 0, 1, 3, 25, 29, 17, 18, 16, 13, 14
+> > +     dround          1, 4, 3, 0, 2, 26, 30, 18, 19, 17, 14, 15
+> > +
+> > +     dround          0, 1, 2, 3, 4, 27, 31, 19, 12, 18, 15, 16
+> > +     dround          3, 0, 4, 2, 1, 28, 24, 12, 13, 19, 16, 17
+> > +     dround          2, 3, 1, 4, 0, 29, 25, 13, 14, 12, 17, 18
+> > +     dround          4, 2, 0, 1, 3, 30, 26, 14, 15, 13, 18, 19
+> > +     dround          1, 4, 3, 0, 2, 31, 27, 15, 16, 14, 19, 12
+> > +
+> > +     dround          0, 1, 2, 3, 4, 24, 28, 16, 17, 15, 12, 13
+> > +     dround          3, 0, 4, 2, 1, 25, 29, 17, 18, 16, 13, 14
+> > +     dround          2, 3, 1, 4, 0, 26, 30, 18, 19, 17, 14, 15
+> > +     dround          4, 2, 0, 1, 3, 27, 31, 19, 12, 18, 15, 16
+> > +     dround          1, 4, 3, 0, 2, 28, 24, 12, 13, 19, 16, 17
+> > +
+> > +     dround          0, 1, 2, 3, 4, 29, 25, 13, 14, 12, 17, 18
+> > +     dround          3, 0, 4, 2, 1, 30, 26, 14, 15, 13, 18, 19
+> > +     dround          2, 3, 1, 4, 0, 31, 27, 15, 16, 14, 19, 12
+> > +     dround          4, 2, 0, 1, 3, 24, 28, 16, 17, 15, 12, 13
+> > +     dround          1, 4, 3, 0, 2, 25, 29, 17, 18, 16, 13, 14
+> > +
+> > +     dround          0, 1, 2, 3, 4, 26, 30, 18, 19, 17, 14, 15
+> > +     dround          3, 0, 4, 2, 1, 27, 31, 19, 12, 18, 15, 16
+> > +     dround          2, 3, 1, 4, 0, 28, 24, 12
+> > +     dround          4, 2, 0, 1, 3, 29, 25, 13
+> > +     dround          1, 4, 3, 0, 2, 30, 26, 14
+> > +
+> > +     dround          0, 1, 2, 3, 4, 31, 27, 15
+> > +     dround          3, 0, 4, 2, 1, 24,   , 16
+> > +     dround          2, 3, 1, 4, 0, 25,   , 17
+> > +     dround          4, 2, 0, 1, 3, 26,   , 18
+> > +     dround          1, 4, 3, 0, 2, 27,   , 19
+> > +
+> > +     /* update state */
+> > +     add             v8.2d, v8.2d, v0.2d
+> > +     add             v9.2d, v9.2d, v1.2d
+> > +     add             v10.2d, v10.2d, v2.2d
+> > +     add             v11.2d, v11.2d, v3.2d
+> > +
+> > +     /* handled all input blocks? */
+> > +     cbnz            w2, 0b
+> > +
+> > +     /* store new state */
+> > +3:   st1             {v8.2d-v11.2d}, [x0]
+> > +     mov             w0, w2
+> > +     ret
+> > +ENDPROC(sha512_ce_transform)
+> > diff --git a/arch/arm/cpu/armv8/sha512_ce_glue.c b/arch/arm/cpu/armv8/s=
+ha512_ce_glue.c
+> > new file mode 100644
+> > index 0000000000..4db78c8efd
+> > --- /dev/null
+> > +++ b/arch/arm/cpu/armv8/sha512_ce_glue.c
+> > @@ -0,0 +1,20 @@
+> > +// SPDX-License-Identifier: GPL-2.0-only
+> > +/*
+> > + * sha512_ce_glue.c - SHA-512 secure hash using ARMv8 Crypto Extension=
+s
+> > + *
+> > + * Copyright (C) 2024 Igor Opaniuk <igor.opaniuk@gmail.com>
+> > + */
+> > +
+> > +#include <u-boot/sha512.h>
+> > +
+> > +extern void sha512_ce_transform(u64 state[SHA512_SUM_LEN / 8], u8 cons=
+t *src,
+> > +                             u32 blocks);
+> > +
+> > +void sha512_block_fn(sha512_context *ctx, const unsigned char *data,
+> > +                  unsigned int blocks)
+> > +{
+> > +     if (!blocks)
+> > +             return;
+> > +
+> > +     sha512_ce_transform(ctx->state, data, blocks);
+> > +}
+> > diff --git a/lib/sha512.c b/lib/sha512.c
+> > index ffe2c5cd96..186ca4d2ca 100644
+> > --- a/lib/sha512.c
+> > +++ b/lib/sha512.c
+> > @@ -16,6 +16,8 @@
+> >  #include <compiler.h>
+> >  #include <u-boot/sha512.h>
+> >
+> > +#include <linux/compiler_attributes.h>
+> > +
+> >  const uint8_t sha384_der_prefix[SHA384_DER_LEN] =3D {
+> >       0x30, 0x41, 0x30, 0x0d, 0x06, 0x09, 0x60, 0x86,
+> >       0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x02, 0x05,
+> > @@ -187,8 +189,8 @@ sha512_transform(uint64_t *state, const uint8_t *in=
+put)
+> >       a =3D b =3D c =3D d =3D e =3D f =3D g =3D h =3D t1 =3D t2 =3D 0;
+> >  }
+> >
+> > -static void sha512_block_fn(sha512_context *sst, const uint8_t *src,
+> > -                                 int blocks)
+> > +__weak void sha512_block_fn(sha512_context *sst, const uint8_t *src,
+> > +                         int blocks)
+>
+> I really think using a weak symbol for this is the wrong approach. You
+> should instead allow the NEON version to be compiled in and called if
+> ID_AA64ISAR0_EL1.SHA2 tells you that FEAT_SHA512 is supported.
+I followed the same approach as Loic Poulain did already in his
+084d8e6bf9ea("armv8 SHA-1 using ARMv8 Crypto Extensions:").
 
--- 
-Best regards,
-Andrey Skvortsov
+I plan to rework it in future and add dynamic selection of proper
+implementation based on capabilities reported in the ID register.
+
+And adding the NEON version definitely makes sense, thanks!
+This is what I probably needed to start with.
+
+>
+> It isn't like checking an ID register is going to majorly affect the
+> timing of this, and the same u-boot build can boot on systems that
+> have the extension or not. Remember that u-boot can be used in VMs,
+> where the HW capabilities are variable.
+>
+> Thanks,
+>
+>         M.
+>
+> --
+> Without deviation from the norm, progress is not possible.
+
+Thanks for your review/comments!
+
+Regards,
+Igor
+--=20
+Best regards - Freundliche Gr=C3=BCsse - Meilleures salutations
+
+Igor Opaniuk
+Senior Software Engineer, Embedded & Security
+E: igor.opaniuk@foundries.io
+W: www.foundries.io
