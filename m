@@ -4,79 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55A4FC4829A
-	for <u-boot@archiver.kernel.org>; Sun, 11 Feb 2024 15:45:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8E58C4829B
+	for <u-boot@archiver.kernel.org>; Sun, 11 Feb 2024 16:11:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D31087C6D;
-	Sun, 11 Feb 2024 16:45:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AF2F187C6D;
+	Sun, 11 Feb 2024 17:11:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="W6tt9K74";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="US3S/onP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7162087C75; Sun, 11 Feb 2024 16:45:50 +0100 (CET)
-Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
- [IPv6:2a00:1450:4864:20::22a])
+ id 8053987C75; Sun, 11 Feb 2024 17:11:38 +0100 (CET)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8448587C69
- for <u-boot@lists.denx.de>; Sun, 11 Feb 2024 16:45:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A037987C4D
+ for <u-boot@lists.denx.de>; Sun, 11 Feb 2024 17:11:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrej.skvortzov@gmail.com
-Received: by mail-lj1-x22a.google.com with SMTP id
- 38308e7fff4ca-2d09d90fa11so32162241fa.3
- for <u-boot@lists.denx.de>; Sun, 11 Feb 2024 07:45:48 -0800 (PST)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-55f279dca99so3514908a12.3
+ for <u-boot@lists.denx.de>; Sun, 11 Feb 2024 08:11:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1707666348; x=1708271148; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=90n5dFUw9S6m8bY1tX/q7h9mo79YgmkyT3Kx1Gb1/iI=;
- b=W6tt9K74GAETLVAUaQYjaRRSMhUcjR+00LCYZtalwXVl4loHHYts0YUeYlEcGxBfpl
- 4++oKE6/A3ojI9g7sHdkdVr+fldbD/odvgeRNTjL4cuK0j0M+JSWgKkFd8BWAgUk1fX3
- Anr4t4L22jfJqhxVOz3Je8cSVipm79HyYbcxowgsChatheP1S6EFDRXrZoc+t/v2qpsz
- tVBg+SAWQwSt3u3RTIwFdkDG7n2MluS+E2U9OydB7e+XRoVfdY4iJkZNoDQHsb6KywfS
- 7mYN53G9RcB5bpAInMek66721nFPTCJiL4W48f6dx3OjGhHsr0wubTJYp1sKtRxaHVgu
- ANLQ==
+ d=gmail.com; s=20230601; t=1707667896; x=1708272696; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=4On5UnkPtGk2u3Fmff7Mo8S6nUyUMj4Fp62StXaipf4=;
+ b=US3S/onPCHqhTx0Q19VASrGM5dD4nre/0zhjUZmxfpLAvtF6R+Q1L5FElneT8XWyxt
+ M1ft9yAAocgQUW4tCrpalFD+an+8Efz8EvjsQXKQvIWbXJPgawLURj4MQmqZzZ0qdq9S
+ 3pWW8T951twji0Tk9py5dUSlqdMe+qFJAf3iGrYPU6yMxDkhYA/dQ72+DNj+gjJHySYG
+ z8LPAvHpD+gjUulf/tL4dPU6JldflSD10A/aqGUtwpsLXKEdaLDmMRR0EdKomGmHfiib
+ Zp9lYOZf7kTwCnCYWRiSZVafU/JJCpVo4COawKRXWx12sg6Moneg/Yu2FVvE6//anP1+
+ uv+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707666348; x=1708271148;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1707667896; x=1708272696;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=90n5dFUw9S6m8bY1tX/q7h9mo79YgmkyT3Kx1Gb1/iI=;
- b=ie5HiciQgG4/h4KyEUhi881OcrbzFYD3D3xOEqbSKJ0oULK6zbcJ+dvHJFFFrryzIM
- tKVczz1Ht/OozNxXPaQhr4TVyGcrf58eTV33j9ogOt1xhzSGgyQ32qxD7jJ/X9W+MFNt
- sPjvIYWJBhdQbaeP0TMGfMiKANzJoJ4Btt0quV1qjQYs847RqOWjzphTdbYlFvmd70SF
- J3ARbE4en/fn7M+URde5/5LIXGJHLUz8e7MX3BEvjU6fJeG///vN6YnGxzVGXVUgWMVJ
- iOEAuzWNE3PFY8PJNDIpKVcbJ3zJ/dU5KDTb8DNGuzmq5w+kkEHrNGromGv7rR5miwJl
- 1GIQ==
-X-Gm-Message-State: AOJu0YwIW9yZgpVZrBaCHMD5H8tiBMQnWb8X1qZE+bCr21tM0pGGIXp9
- td7Jka6YTdAkxC5bLGT776SZ44m/qVZLWz2s5YE19ew5dS6jbqDYG3UkZtG1kWo=
-X-Google-Smtp-Source: AGHT+IGGtaPn4oCJ6rSZcYj0+EOtS467DTmhN0/yflRqD+K0bl2LpIFXok+hCebrHWi44gI5JFV5Ow==
-X-Received: by 2002:a2e:9bd3:0:b0:2d0:c273:669a with SMTP id
- w19-20020a2e9bd3000000b002d0c273669amr2683346ljj.46.1707666347474; 
- Sun, 11 Feb 2024 07:45:47 -0800 (PST)
-X-Forwarded-Encrypted: i=1;
- AJvYcCURrNWPjzUSqsnL54K/lTVDPpdXCxGyCBIwWJYzMiPvtbCxW+sToApyv/stJFPgSta9wnx81Aa3G2dhK4MkX9p5AX5Yk+jOuzNiIdGUZDZo+zoW7QUuFCQeWnh2byOJPpcrNTzKGkii/pY7PCHCNKa7iK+SlFlZAxY91neDaxh0nsURFkb+9bvb2tWGAybT47Ok4B+B18vI9ERZ9hMDAN/nA8qrbBfDTA==
-Received: from localhost.localdomain ([2a05:3580:f312:6c01:1b8f:2a1b:d18:1951])
- by smtp.gmail.com with ESMTPSA id
- y13-20020a2e7d0d000000b002d08153c3cesm1003672ljc.42.2024.02.11.07.45.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 11 Feb 2024 07:45:46 -0800 (PST)
-From: Andrey Skvortsov <andrej.skvortzov@gmail.com>
-To: Samuel Holland <samuel@sholland.org>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de, Arnaud Ferraris <arnaud.ferraris@collabora.com>,
- Samuel Dionne-Riel <samuel@dionne-riel.com>,
- Andre Przywara <andre.przywara@arm.com>
-Cc: Andrey Skvortsov <andrej.skvortzov@gmail.com>
-Subject: [PATCH] sunxi: defconfig: Add pstore support for pinephone
-Date: Sun, 11 Feb 2024 18:45:14 +0300
-Message-ID: <20240211154514.925977-1-andrej.skvortzov@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ bh=4On5UnkPtGk2u3Fmff7Mo8S6nUyUMj4Fp62StXaipf4=;
+ b=dNKaSX7Izoi0VCLgsB4dQo8bK8HvvljPS5isLdH2wAUNOOdwKqN9MVp7wRisILJBnL
+ JkHLuZjhURL2P4F9wrpwxtNDBS/o+J83fclKpD3tPGaNg+dmAIs//BZDyIhqssvDnLzC
+ iHPqa4Hh6PieOl46AG3GJa7YNypzkVqD5egJRNP1z0JHTr8Zo4S3uNrqFQHqCxSqatH0
+ Oof8s4+HQRLM+U8NtqlwdfSfbVxTe4AYr8xRJp75ZOnTs9MvEbEljykdtTpDH0IfCMOm
+ U8+e8cWXg632p3O9kWWvgoN/els7HPlXcBaBCR4XBZCTW+iEDdn93V4Yfe2MEjI6ezCh
+ aVpg==
+X-Gm-Message-State: AOJu0YwtRtsDN64d9PwBwG18H6duEz/AOiI+xRkchzaK7Gmbgxuqf8H4
+ VO9fYq69iNUVY/vSi6HjUZjLwd/enACEYoKbAI6t6cpb/Zchy/oYZlxoTGmDcAOVnErq94ehAST
+ tTlWaTg/e7RTNy2+QaUY68PbUyO4=
+X-Google-Smtp-Source: AGHT+IEfE0Xue+PdBAADoouk8TS52JL8zZ1EH4zVykspoMho3jgrZBonXFqDjEGv6VwgXFln3i9qQnK9X3NYycFAjqc=
+X-Received: by 2002:aa7:d90f:0:b0:561:aed9:37e8 with SMTP id
+ a15-20020aa7d90f000000b00561aed937e8mr327856edr.3.1707667895777; Sun, 11 Feb
+ 2024 08:11:35 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240211154514.925977-1-andrej.skvortzov@gmail.com>
+In-Reply-To: <20240211154514.925977-1-andrej.skvortzov@gmail.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Sun, 11 Feb 2024 16:11:24 +0000
+Message-ID: <CALeDE9NxT2f_Y=v12EaHraDOHNVMhjPNLJpbLPVLgeZmsxiBMg@mail.gmail.com>
+Subject: Re: [PATCH] sunxi: defconfig: Add pstore support for pinephone
+To: Andrey Skvortsov <andrej.skvortzov@gmail.com>
+Cc: Samuel Holland <samuel@sholland.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de, Arnaud Ferraris <arnaud.ferraris@collabora.com>,
+ Samuel Dionne-Riel <samuel@dionne-riel.com>, 
+ Andre Przywara <andre.przywara@arm.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,34 +88,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In general any DRAM address, that isn't overwritten during a boot is
-suitable for pstore.
+On Sun, 11 Feb 2024 at 16:02, Andrey Skvortsov
+<andrej.skvortzov@gmail.com> wrote:
+>
+> In general any DRAM address, that isn't overwritten during a boot is
+> suitable for pstore.
 
-Range from 0x40000000 - 0x50000000 is heavily used by u-boot for
-internal use and to load kernel, fdt, fdto, scripts, pxefile and ramdisk
-later in the boot process. Ramdisk start address is 0x4FF00000,
-initramfs for kernel with some hacking features and debug info enabled
-can take more than 100Mb and final address will be around 0x58000000.
-Address 0x61000000 will most likely not overlap with that.
+What's this functionality providing? The details below give the
+technical reasons for the memory address but I'm not sure what
+enabling pstore provides to PinePhone users.
 
-Signed-off-by: Andrey Skvortsov <andrej.skvortzov@gmail.com>
----
- configs/pinephone_defconfig | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/configs/pinephone_defconfig b/configs/pinephone_defconfig
-index 9d39204a43..7b80cc3131 100644
---- a/configs/pinephone_defconfig
-+++ b/configs/pinephone_defconfig
-@@ -10,6 +10,8 @@ CONFIG_DRAM_ZQ=3881949
- CONFIG_MMC_SUNXI_SLOT_EXTRA=2
- CONFIG_PINEPHONE_DT_SELECTION=y
- # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-+CONFIG_CMD_PSTORE=y
-+CONFIG_CMD_PSTORE_MEM_ADDR=0x61000000
- CONFIG_OF_LIST="sun50i-a64-pinephone-1.1 sun50i-a64-pinephone-1.2"
- CONFIG_LED_STATUS=y
- CONFIG_LED_STATUS_GPIO=y
--- 
-2.43.0
-
+> Range from 0x40000000 - 0x50000000 is heavily used by u-boot for
+> internal use and to load kernel, fdt, fdto, scripts, pxefile and ramdisk
+> later in the boot process. Ramdisk start address is 0x4FF00000,
+> initramfs for kernel with some hacking features and debug info enabled
+> can take more than 100Mb and final address will be around 0x58000000.
+> Address 0x61000000 will most likely not overlap with that.
+>
+> Signed-off-by: Andrey Skvortsov <andrej.skvortzov@gmail.com>
+> ---
+>  configs/pinephone_defconfig | 2 ++
+>  1 file changed, 2 insertions(+)
+>
+> diff --git a/configs/pinephone_defconfig b/configs/pinephone_defconfig
+> index 9d39204a43..7b80cc3131 100644
+> --- a/configs/pinephone_defconfig
+> +++ b/configs/pinephone_defconfig
+> @@ -10,6 +10,8 @@ CONFIG_DRAM_ZQ=3881949
+>  CONFIG_MMC_SUNXI_SLOT_EXTRA=2
+>  CONFIG_PINEPHONE_DT_SELECTION=y
+>  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+> +CONFIG_CMD_PSTORE=y
+> +CONFIG_CMD_PSTORE_MEM_ADDR=0x61000000
+>  CONFIG_OF_LIST="sun50i-a64-pinephone-1.1 sun50i-a64-pinephone-1.2"
+>  CONFIG_LED_STATUS=y
+>  CONFIG_LED_STATUS_GPIO=y
+> --
+> 2.43.0
+>
