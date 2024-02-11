@@ -4,98 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2077C4829B
-	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 13:15:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AD19C48297
+	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 13:19:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0BF3087B63;
-	Mon, 12 Feb 2024 14:15:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id CD7B987EBE;
+	Mon, 12 Feb 2024 14:19:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TVuRTLdP";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="j6VEhtzj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6409A87BC3; Mon, 12 Feb 2024 14:15:21 +0100 (CET)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id 371CD87C77; Sun, 11 Feb 2024 21:42:56 +0100 (CET)
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
+ [IPv6:2a00:1450:4864:20::132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1FB158718A
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 14:15:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3961E878A1
+ for <u-boot@lists.denx.de>; Sun, 11 Feb 2024 21:42:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-a2f22bfb4e6so424498766b.0
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 05:15:19 -0800 (PST)
+ spf=pass smtp.mailfrom=maximmosk4@gmail.com
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-5116588189aso4584436e87.1
+ for <u-boot@lists.denx.de>; Sun, 11 Feb 2024 12:42:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1707743718; x=1708348518; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=9qM2GAhqwdZ2GkJzFxj3b24ONlGU5Gwf2sk392R7gr4=;
- b=TVuRTLdPwAnWWH2+OrN50CBrBWPDjOA4avPOkUygNlPexKY+13HJl5z2o2Rzwmz4dY
- venzA1FaJ1QD+kvfqnLce3sI4utnMiMvw17rF8lJfGcYXCOZBP+CzC2rWIQDYFOJAeUG
- whz9ykGzBwNMSlmPOK+9c4MiLoNIlYiznyxZIbDcVAO1IMahLqWKtnu2jKgBo+UWNZtP
- AKHAJyEZDfeOiXW0MazlZjSFXLLL/6HaQqSQsUsrf7los0C7N/IRbtsTG16rqwWX0KDm
- cALMHIQnZZjWIanqZKiP7sVLt04AGOp6esI5myfh/IRe+yk2Nsxz+dUSjgtuC+xItQ2o
- inWA==
+ d=gmail.com; s=20230601; t=1707684172; x=1708288972; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=tqI/b86K1BGyyYGqMZEyvDrduknETmz2kqpZEnmlS9o=;
+ b=j6VEhtzjDxjERf1uSXT9M9/3lse/8grGEwKNkR2btNmAr2ihznvALYsWE3LnKs5sdT
+ NOo0ZaAk4F1c5b32iTWFMrutzUV8ueDzIp40dUlGTIswVqt5NoFA6BHBbCZxbBfct6mp
+ QGXY3Kmdvwnr0wfuW0KjLa/qrP5/WP62ooc+RkBb6FmkdRcAt06Pp7Ya2yP6OdkEqUCC
+ vgDJnZir21jPC4x1G/wz5pU+vWmDFFHGIiIIB3i7aKpYEdBy580d/jxdtLQh7CfWRVEF
+ bncNHvN1qkJFmYxh3PVpd+TNpYIVgSm+dSKlUydfptKpPMRTT1SPynRjR5FFudN31hg9
+ +Cug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707743718; x=1708348518;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=9qM2GAhqwdZ2GkJzFxj3b24ONlGU5Gwf2sk392R7gr4=;
- b=UyHCtLzG8Y3YV5W3B9phdTSIZs3+2UmuXcdWaCLe7/mJIVqbj+lELo/iygszGt6mZF
- 46UvUSqh3I+sTS6aFg/UTUUKEk7hU4EyFCi+W7YtUBMil8IYjaaTotl7se7r8QQfMcqB
- pp0LiiyawN2OnySB3MYmnv1xoFObmDmXTOPNUwrcGzfYAAQyUDUmjjLDHVr0AZQnB5rJ
- cKWdJv2/a1QpKJFiXaZewUHPXTpdIjJ2lYhbXVD7eHORJbIKufC7X0tisRG29jSOUKcL
- WCnQz1e9ECIvIY/MTybx0fzQnK3htxKr6UZV7pxWfLuSAUztZIPXdM6FXpHcWrLbjMz+
- gaYw==
-X-Gm-Message-State: AOJu0YxX76XXLgdjFrOVJiG+biFRMwjRx5uiw1I+17eNnMeNoUwgTPI2
- udYUoZdBmMQH6HOFLbwgSpWwTlWzLKpc0B3UUk1EDoq6LaF7j5y3BpywkLcuY6Y=
-X-Google-Smtp-Source: AGHT+IEhVTW6bZ2uw3jWrrCEbtDdiIPq+eyjTdJ5BcGxHYNm6KVobw3baR8OuL24YpqZsY4uww8VlA==
-X-Received: by 2002:a17:906:4111:b0:a38:577b:2a23 with SMTP id
- j17-20020a170906411100b00a38577b2a23mr4590197ejk.20.1707743718565; 
- Mon, 12 Feb 2024 05:15:18 -0800 (PST)
+ d=1e100.net; s=20230601; t=1707684172; x=1708288972;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=tqI/b86K1BGyyYGqMZEyvDrduknETmz2kqpZEnmlS9o=;
+ b=oj+2x1cJHC9iiw8JRBF1NZ/YeFgPZje4ah4qTny0uh0Q/8pE/mjkRBwhXZ9/9Tyovd
+ BdseN72bsfublxhBie8sIb98WgzctLD/wWlHFSoFSf4eE8RdQIBg/Rpq6hLFuxjRclyA
+ mmj4jFNEXS/QWi7yCI2UC+YIuzvudes1wTijUcdVN07a+H6j+Um9ExUqtUc+3sjDC+Pw
+ lEwTkctuUtJukG+5ldpP6sM9ZmV+1qV1aSgmiX0sWCu7lRaDlpzo0OBOl2Q3w4GcYYzb
+ SMfUEsZXsKNCH7hDb81/UmoqZzXYpCMctCSqwPSqRpO6JegXAalC5Kmq2HH4uRybhmEI
+ SiSw==
+X-Gm-Message-State: AOJu0Ywrpf3HOx9DVePj8RHbnWsjAl7dg240nauRCOkt9TS6deKMPKIs
+ Fz37sUch2Az1Di0QOsUdxWu0YtrlePK6CsTuj/PAWVDGBRF6uiUdIWEQjjBV
+X-Google-Smtp-Source: AGHT+IGS9Z+9EvBK7clYw1rdONEMNqFUkQaCUBdTePOPVvE6mNLTbmoiXq/Ew1oGUzXRtLT7cWk7WA==
+X-Received: by 2002:ac2:44dc:0:b0:511:6077:c99c with SMTP id
+ d28-20020ac244dc000000b005116077c99cmr2910631lfm.30.1707684171543; 
+ Sun, 11 Feb 2024 12:42:51 -0800 (PST)
 X-Forwarded-Encrypted: i=1;
- AJvYcCVxezzqH/vHzJGGOpB3zN+lqu6YzP0TZO0CvFBcaEs0M+dFCOi5UJl+nhHDpBw9l5IK4SkufcNMah0CBxh3jl0wtkB0r9dpJ6QCDKZ9fPFSMNN8en/F3o3po3zJ+NkmrtHT6m4QM9ZjnJnaZkLbCrVBdM5hTgVH/o6BDKk27BHsprX2h3fpbVmtNmYuDGfO6leGajFsX/sBzZwnfU8YZHQzNaqvbcn/facWKShYjUvo6xrPvhuYuYSbIanVJ84AndOnUTgegz8dc1OhCx4kdZSWOt4yozTpFAQk7ykTgNtux324PBfE04aYnr0wBcvJbEiDicCKoAc9e/u3CvuZGcQv2eSjiymudjYWxbd7+k1W1RRxj7mJKQhyIbZxsvj+vezq/fGPX3rNhwgvJXTJI6uVgUTQbV9P5bg51fijRnN1UplUKo6L2ZLav6CJV851nZBJvnG5tHAg1yeCxM86+0n+GGt4JDcQxPkfGJH3uSkRzvopFTDP3pfJaUkQQzlFST+bfuIgwj4OAdSWorvKJzeRVcqA5u+D/mkxRiDBpzGVqF+2d0QfnUOwJXDWOjSJI4NtuX1mrjxngMXlUFH/biSDnHcBCzn+3So+waC9Pu7LeHp47rjGk6o6RRCzppc8cwBTd83SIPg3U7a/Ixds
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:19f8:2209:bed2:ce0d?
- ([2a01:e0a:3cb:7bb0:19f8:2209:bed2:ce0d])
- by smtp.gmail.com with ESMTPSA id
- r14-20020a170906c28e00b00a3be732b9b1sm202742ejz.40.2024.02.12.05.15.17
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 12 Feb 2024 05:15:18 -0800 (PST)
-Message-ID: <44d1809d-4317-4363-a0e2-c83029357285@linaro.org>
-Date: Mon, 12 Feb 2024 14:15:16 +0100
+ AJvYcCUQq7D//uwCbVvani2zbqltcjJBsu8eeZhaWxI2TIIs+37OX75bZpT9+MtL0/1I1HbNGeH2oesyXCphaiiAsnbCCUk=
+Received: from localhost.localdomain (109-252-14-208.nat.spd-mgts.ru.
+ [109.252.14.208]) by smtp.gmail.com with ESMTPSA id
+ u1-20020a056512128100b005117583a519sm615607lfs.180.2024.02.11.12.42.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 11 Feb 2024 12:42:51 -0800 (PST)
+From: Maxim Moskalets <maximmosk4@gmail.com>
+X-Google-Original-From: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>
+To: u-boot@lists.denx.de
+Cc: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH] command: add FDT setup for bootelf by flag
+Date: Sun, 11 Feb 2024 23:42:48 +0300
+Message-Id: <20240211204248.273295-1-Maxim.Moskalets@kaspersky.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] rockchip: rk3399: Update stack and bss addresses
-To: Quentin Schulz <quentin.schulz@theobroma-systems.com>,
- Jonas Karlman <jonas@kwiboo.se>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Andy Yan <andy.yan@rock-chips.com>,
- Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>,
- Nick Xie <nick@khadas.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Deepak Das <deepakdas.linux@gmail.com>, Alexandre Vicenzi <linux@alxd.me>,
- Xiaobo Tian <peterwillcn@gmail.com>, Peter Robinson <pbrobinson@gmail.com>,
- Klaus Goger <klaus.goger@theobroma-systems.com>, Levin Du
- <djw@t-chip.com.cn>, Suniel Mahesh <sunil@amarulasolutions.com>,
- FUKAUMI Naoki <naoki@radxa.com>,
- Christopher Obbard <chris.obbard@collabora.com>, u-boot@lists.denx.de
-References: <20240212005914.3512640-1-jonas@kwiboo.se>
- <20240212005914.3512640-3-jonas@kwiboo.se>
- <d8e10b17-0571-4ebc-9783-2301c429c6b3@theobroma-systems.com>
- <c3f2027d-3d87-4b71-bb13-35090640dc9a@kwiboo.se>
- <3b213c6d-9b97-48d1-8c36-4970dd1c4aa8@theobroma-systems.com>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <3b213c6d-9b97-48d1-8c36-4970dd1c4aa8@theobroma-systems.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Mon, 12 Feb 2024 14:19:09 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,75 +93,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Added the ability to use FDT for ELF applications, required to run some OS. To make FDT setup, you need to set the elf_needed_fdt environment variable to a value like y or yes.
 
+Signed-off-by: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>
 
-On 2/12/24 12:51, Quentin Schulz wrote:
-> Hi Jonas,
-> 
-> On 2/12/24 12:08, Jonas Karlman wrote:
->> Hi Quentin,
->>
->> On 2024-02-12 11:37, Quentin Schulz wrote:
->>> Hi Jonas,
->>>
->>> On 2/12/24 01:59, Jonas Karlman wrote:
->>>> With the stack and text base used by U-Boot SPL and proper on RK3399
->>>> there is a high likelihood of overlapping when U-Boot proper + FDT nears
->>>> 1 MiB in size.
->>>>
->>>> Currently the following memory layout is used:
->>>> - 0x00000000 (@0 MiB): U-Boot SPL text base
->>>> - 0x00040000 (@256 KiB): TF-A
->>>> - 0x00200000 (@2 MiB): U-Boot proper text base
->>>> - 0x00300000 (@3 MiB): U-Boot proper init stack
->>>> - 0x00400000 (@4 MiB): U-Boot SPL init stack
->>>> - 0x00400000 (@4 MiB): U-Boot SPL bss
->>>> - 0x02000000 (@64 MiB): U-Boot SPL reloc stack
->>>> - 0x08400000 (@132 MiB): optional OPTEE
->>>>
->>>> SPL load TF-A, U-Boot proper and optional OPTEE after SPL stack has
->>>> relocated, meaning that there is room for close to 2 MiB (@2-4 MiB).
->>>> However, the initial stack used by U-Boot proper is limiting the size
->>>> of U-Boot proper + FDT to below 1 MiB (@2-3 MiB).
->>>>
->>>> Instead change to use the following memory layout:
->>>> - 0x00000000 (@0 MiB): U-Boot SPL text base
->>>> - 0x00040000 (@256 KiB): TF-A
->>>> - 0x00200000 (@2 MiB): U-Boot proper text base
->>>> - 0x00400000 (@4 MiB): U-Boot SPL init stack
->>>> - 0x00800000 (@8 MiB): U-Boot proper init stack (changed)
->>>> - 0x02000000 (@32 MiB): U-Boot SPL bss (changed)
->>>> - 0x04000000 (@64 MiB): U-Boot SPL reloc stack
->>>> - 0x08400000 (@132 MiB): optional OPTEE
->>>>
->>>> This should leave room for loading and running a U-Boot proper close
->>>> to 6 MiB (@2-8 MiB) in size. When U-Boot proper has relocated is should
->>>> be possible to use @2-132 MiB and @164 MiB+ for scripts, kernel etc.
->>>>
->>>> With the moved SPL reloc stack it is also possible to use a much larger
->>>> malloc area in SPL, e.g. using default SPL_STACK_R_MALLOC_SIMPLE_LEN.
->>>>
->>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->>>
->>> Do we not need to update memory addresses in the environment as well?
->>
->> The addresses in environment is to my knowledge only used in U-Boot
->> proper after relocation. And at that time we should be free to use @2+
->> MiB up to somewhere close to gd ram_top/relocaddr. The optional Rockchip
->> OPTEE blobb may occupy @132-164 MiB, but I do not think loading OPTEE
->> blobs works as-is, so that may not be a big issue.
->>
-> 
-> Upstream OP-TEE OS seems to support RK3399, c.f. https://github.com/OP-TEE/optee_os/blob/master/core/arch/arm/plat-rockchip/platform_rk3399.c
+Cc: Tom Rini <trini@konsulko.com>
+---
 
-It does indeed. I run the quarterly release tests on a RockPi4B. We record which
-platforms have been tested in the commit description for each release tag. For
-example, see [1].
+ cmd/elf.c     | 14 ++++++++++++++
+ env/common.c  |  5 +++++
+ include/env.h |  7 +++++++
+ 3 files changed, 26 insertions(+)
 
-In the configuration I test, OP-TEE is loaded at 0x30000000 and uses 32MB (for
-some reason the Linux DT reserves 36MB but I don't think it matters much).
-
-[1] https://github.com/OP-TEE/optee_os/commit/18b424c23aa5a798dfe2e4d20b4bde3919dc4e99
-
+diff --git a/cmd/elf.c b/cmd/elf.c
+index b7b9f506a5..4d365771eb 100644
+--- a/cmd/elf.c
++++ b/cmd/elf.c
+@@ -38,6 +38,8 @@ static unsigned long do_bootelf_exec(ulong (*entry)(int, char * const[]),
+ /* Interpreter command to boot an arbitrary ELF image from memory */
+ int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ {
++	unsigned long fdt_addr;
++	struct bootm_headers img = { 0 };
+ 	unsigned long addr; /* Address of the ELF image */
+ 	unsigned long rc; /* Return value from user code */
+ 	char *sload = NULL;
+@@ -68,6 +70,18 @@ int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	else
+ 		addr = load_elf_image_shdr(addr);
+ 
++	if (!env_get_elf_need_fdt()) {
++		if (argc >= 1 && strict_strtoul(argv[0], 16, &fdt_addr) != -EINVAL) {
++			printf("Got FDT at 0x%08lx ...\n", fdt_addr);
++
++			if (image_setup_libfdt(&img, (void *)fdt_addr, 0, NULL)) {
++				printf("ERROR: Failed to process device tree\n");
++				return 1;
++			}
++		}
++	}
++
++
+ 	if (!env_get_autostart())
+ 		return rcode;
+ 
+diff --git a/env/common.c b/env/common.c
+index 48a565107c..8cd8558c3f 100644
+--- a/env/common.c
++++ b/env/common.c
+@@ -346,6 +346,11 @@ bool env_get_autostart(void)
+ 	return env_get_yesno("autostart") == 1;
+ }
+ 
++bool env_get_elf_need_fdt(void)
++{
++	return env_get_yesno("elf_need_fdt") == 1;
++}
++
+ /*
+  * Look up the variable from the default environment
+  */
+diff --git a/include/env.h b/include/env.h
+index d2a5954ded..384c312d2e 100644
+--- a/include/env.h
++++ b/include/env.h
+@@ -148,6 +148,13 @@ int env_get_yesno(const char *var);
+  */
+ bool env_get_autostart(void);
+ 
++/**
++ * env_get_elf_need_fdt() - Check if FDT is needed for ELF image
++ *
++ * Return: true if the "elf_need_fdt" env var exists and is set to "yes"
++ */
++bool env_get_elf_need_fdt(void);
++
+ /**
+  * env_set() - set an environment variable
+  *
 -- 
-Jerome
+2.39.2
+
