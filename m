@@ -4,77 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99E41C4829A
-	for <u-boot@archiver.kernel.org>; Sun, 11 Feb 2024 18:56:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63F23C4829A
+	for <u-boot@archiver.kernel.org>; Sun, 11 Feb 2024 19:43:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 02D8F87B71;
-	Sun, 11 Feb 2024 19:56:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=foundries.io
+	by phobos.denx.de (Postfix) with ESMTP id 4AF2C87B71;
+	Sun, 11 Feb 2024 20:42:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=foundries.io header.i=@foundries.io header.b="NuONnjRf";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cYUMc7HM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6636687BAE; Sun, 11 Feb 2024 19:56:28 +0100 (CET)
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
- [IPv6:2a00:1450:4864:20::12f])
+ id A176F87C48; Sun, 11 Feb 2024 20:42:58 +0100 (CET)
+Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
+ [IPv6:2607:f8b0:4864:20::1030])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 502468798F
- for <u-boot@lists.denx.de>; Sun, 11 Feb 2024 19:56:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=foundries.io
+ by phobos.denx.de (Postfix) with ESMTPS id 08F5B87B71
+ for <u-boot@lists.denx.de>; Sun, 11 Feb 2024 20:42:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=igor.opaniuk@foundries.io
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-511490772f6so3097898e87.2
- for <u-boot@lists.denx.de>; Sun, 11 Feb 2024 10:56:26 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=paul.liu@linaro.org
+Received: by mail-pj1-x1030.google.com with SMTP id
+ 98e67ed59e1d1-296c562ac70so1921837a91.2
+ for <u-boot@lists.denx.de>; Sun, 11 Feb 2024 11:42:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=foundries.io; s=google; t=1707677784; x=1708282584; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=hGgmuh29HNn4neUPaJ5Fo2BtNYk7u8EvqUQ1Xc+uJ6w=;
- b=NuONnjRfhtdHVb+SJTQrGPq19sdNmA76uNXfqBxtaWsz63aMOe+1owdO5BU7VKp6+6
- ZLnslPxJcDW9/mdU/e8KHij5Pi/E5SyTW2ExeWcYpxFPQXEq+KshcONIGtjp2j08Qoxh
- yYrZO4ua42u/7DGYGyBcESTe7CX/7nh3WCf2TS3iWndnW1H/Ogw4mooWknbCMwxLDIdb
- nbdLWd38c7cyIeNHDzbNxDBVrZYedS+4+tS3kMxggutuez4rK6Nq/rK5iAjLu09L8QJ0
- RxaVD/Hui8oTHMQSzy2SrhAk1LUZKS4JS1ZObKH+MHY/1kLA+fKzFebxOQsh5h3qvP44
- NQxQ==
+ d=linaro.org; s=google; t=1707680574; x=1708285374; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=4g0seGyuIkw4Xdy0ITWVqkBRiBto08YjwvVaW5H0E2w=;
+ b=cYUMc7HMOhc5S0lMrHIu/tDOzviYwi3fSNNsyHEs9RAdz12Lf6fg3igW/4po08klBm
+ 0cQ9dhJuD9kaozn0e97ZT4PwScVOlGHwHRO+YkIlnwYkkZVKLmc5wb5jb8zcjaW2XHrU
+ fmM2T73l9MN+k/8hxDVjJg4vnIaNy9FPlnD6LVJM4JQxwDzIqncyqXJXDH+hLj+P0W6g
+ bdH2gKVst0Dj9qureuIwkqntzKCQm2u6SPMceDbvKZUQ3Z5GfOW97YAIUCfH6a20kaZ7
+ 5RfKUGdG3cYAI70G7WSr91T0OrLrOWrMh+1wV5QcQD5ALrJAZS2iSCaz8xNVIExbxGSR
+ uqlA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707677784; x=1708282584;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1707680574; x=1708285374;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=hGgmuh29HNn4neUPaJ5Fo2BtNYk7u8EvqUQ1Xc+uJ6w=;
- b=o1r3ijqHdBXukEK7iARJ3G4p/RzQHmB+V0RJf/TMs7MUoZ+teaCscdT1p7QWOKDsGg
- O60T+wDsqZCIkIsRSwYGiv8f1ELh5ptHfr5VA2HlbCINjXPFyu1RQmSfsNb1WTo7ribv
- iDiED7hFhOSZ2PIIwzDwk123d+40cT9fqgD57S01rMKPr2P7O4/XujgpHWjVIVvvprgl
- Qgfdv2yB9JT17DuwZe0t47wRyhP3L7nXICdMl2692s9evkvhnxMd7FNVyAKauNCn9gDf
- 4Gkn6UrzhBrlrWBHcUof1KxrSieZYfSXmI96Xg69r5ht1EE3gLQE+UEY7RPuCH3f575w
- DXEg==
-X-Gm-Message-State: AOJu0YzPlmmn1EuGeuFe7kMbQEeVpmSjYt5alVGKU2Yc1TYHJsEpOfPd
- ok/nqCCDeBaUZfmgusicpxbdrJ/V7huHNwn8x/UdIM/lQBphD0p0OnWay+JvgYkx3CwXSYR97ML
- dX7w=
-X-Google-Smtp-Source: AGHT+IEx6Qso8colB0Inxw9x40n4WdThDtNUxm7WwVACVBlSjDcwB5cR9MlGDlDvwhzU+ozRd2X2jQ==
-X-Received: by 2002:ac2:5f69:0:b0:511:878b:805 with SMTP id
- c9-20020ac25f69000000b00511878b0805mr1581574lfc.9.1707677784605; 
- Sun, 11 Feb 2024 10:56:24 -0800 (PST)
+ bh=4g0seGyuIkw4Xdy0ITWVqkBRiBto08YjwvVaW5H0E2w=;
+ b=Lbd1NM5nPPMUmWy1utibpTU4+9kTTrcvmdTGoQqip/Mrkm5db074oYzC1aTNDmNF9A
+ 0NigmKPgqburz2jdIZuC0ba6R4h9fDxp6qSoKR+TbUHFU5++PJpdDJIaXMYPJ7b8Fb6/
+ J5HZFUAOQDGTJiIaHJf9Soc28WpneLpruXCmhadYukUzmGnONRbD1jIcQif2lksvhjES
+ YSOGnvs41/Ml9Rc3Rk49ZdbjJuBevitit2XE8D9yKkcfXrmxX5z3jDDJIzgyV0K6Zgbl
+ dydRseXRzqnni2I5yJvZDuxV3qdreq809LjJgwKlWhqS8bUCfL+jMOndHdwfH7NG1PUD
+ q9gA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVonRijauojIfXaiq/+fi20U//jJC7o9fjG7t2r84qviEFLrqwU8VKk1qbdCoeFcXWn6jymmzPor9gERyfbaL82CxbhpIC0
-Received: from localhost ([109.108.76.111]) by smtp.gmail.com with ESMTPSA id
- bi19-20020a0565120e9300b0051180fe5eeasm550836lfb.71.2024.02.11.10.56.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 11 Feb 2024 10:56:23 -0800 (PST)
-From: Igor Opaniuk <igor.opaniuk@foundries.io>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>,
-	Igor Opaniuk <igor.opaniuk@gmail.com>
-Subject: [PATCH v1] cmd: md5sum: use hash_command
-Date: Sun, 11 Feb 2024 19:56:16 +0100
-Message-Id: <20240211185616.1041356-1-igor.opaniuk@foundries.io>
-X-Mailer: git-send-email 2.34.1
+ AJvYcCU4uEm7KLi905pN/M8UZ8xMARU4goAd7Q46hIgTDWoOsDA6JXEi+c2GY4fKQhgZxW8lYD+UG75bpEUkKV1SwCKCE5vhBQ==
+X-Gm-Message-State: AOJu0Yz88/xmv9RVy2YFxVf0duoo4sDgat9IUr36snkfskObSHFB0vVK
+ 3nLcSgZw417Fc8EPmgbsvFvjZTPfSMcHAG06tnQdEN0JQ/mVFMWnSZwBT7Kjxaxo8hLOJFJrkrr
+ Q+XdeRReMP2Ocxc+dsrm3SNsGTcb9tE/sY4WHUA==
+X-Google-Smtp-Source: AGHT+IGSQ3N/vHPc1FMYNDEL8UIJeRy6PAK160m1sPfnaGPlb+yv6c2I7kfgJhFUElOOuPJ+uOdvJ/botetJbPkZo2k=
+X-Received: by 2002:a17:90b:19d1:b0:297:fb2:119 with SMTP id
+ nm17-20020a17090b19d100b002970fb20119mr2990388pjb.42.1707680574238; Sun, 11
+ Feb 2024 11:42:54 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <CAJ+vNU2U9W2NRT6hf1CAEQ_56SDQviUEzuDD1iYOpdf1CNaZBw@mail.gmail.com>
+ <CAOMZO5C+Pvv429sHPyKuznyvdPv217q=a8uTeNNTSyVmn1EoXw@mail.gmail.com>
+ <20231109001746.GX6601@bill-the-cat>
+ <CAOMZO5DtKc72Zv+Q6J3P6JY8jWVbu7KDbr-AViw1hPcm0N92QQ@mail.gmail.com>
+ <CAOMZO5C0ZR=DgXkGHyG-Fgt9HEr3Z_x4qhgkfmObBpTTXUmpAQ@mail.gmail.com>
+ <CALG-KHx081qs+_LHTSu7ssAOd0AX-N64OPht8M8nGufU778SbQ@mail.gmail.com>
+ <CAOMZO5C4qF4A8uLdRfMeDVosA2NLNU=+WvidGR7QGeSyYJOTmw@mail.gmail.com>
+ <CALG-KHwHxdd_7wz6L+6VDGS04LggyqhTZUoqgV+euSqPn9D2KQ@mail.gmail.com>
+ <CAOMZO5C02Fwe0ci1RW64E2Gxi4BbdDfhDAJx4ycczE_6oW-oxg@mail.gmail.com>
+ <CAOMZO5DbSnU0LdUJwZGF4C2wFuO4WDaoODJPy8WqLa=aoN+0zg@mail.gmail.com>
+ <CAOMZO5DjB+AmBteNJeda51zrFO_atDZN_5gg14KmVgZpiTioqA@mail.gmail.com>
+In-Reply-To: <CAOMZO5DjB+AmBteNJeda51zrFO_atDZN_5gg14KmVgZpiTioqA@mail.gmail.com>
+From: Paul Liu <paul.liu@linaro.org>
+Date: Mon, 12 Feb 2024 03:42:43 +0800
+Message-ID: <CALG-KHzmrULyRYEiN_c9Br8gr=Rvz7jyKWfA87C_9Jawn2BKNA@mail.gmail.com>
+Subject: Re: inconsistent wget behavior
+To: Fabio Estevam <festevam@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, Tim Harvey <tharvey@gateworks.com>, 
+ Marek Vasut <marex@denx.de>, u-boot <u-boot@lists.denx.de>, 
+ Duncan Hare <DuncanCHare@yahoo.com>, Simon Glass <sjg@chromium.org>, 
+ Christian Gmeiner <christian.gmeiner@gmail.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, 
+ Michal Simek <michal.simek@xilinx.com>, Ramon Fried <rfried.dev@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,206 +104,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Igor Opaniuk <igor.opaniuk@gmail.com>
+Hi Fabio,
 
-Drop old implementation and use hash_command() instead, as
-how it's currently done for crc32 and sha1sum cmds.
+I'm on vacation now (Chinese new year). I hope I'll find some time to
+revive my imx8 board.
+I've tried sandbox and qemu. Both of them are not reproducible. I'm
+wondering if it could be some packet loss that causes the issue. Because
+sandbox and qemu there won't be any missing packets because of loopback
+devices.
 
-Test:
-=> md5sum 0x60000000 0x200
-md5 for 60000000 ... 600001ff ==> e6bbbe95f5b41996f4a9b9af7bbd4050
+Yours,
+Paul
 
-Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
----
 
- cmd/md5sum.c | 149 ++++-----------------------------------------------
- 1 file changed, 9 insertions(+), 140 deletions(-)
 
-diff --git a/cmd/md5sum.c b/cmd/md5sum.c
-index 0f0e1d3dd68..618265e8d50 100644
---- a/cmd/md5sum.c
-+++ b/cmd/md5sum.c
-@@ -7,7 +7,6 @@
-  * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
-  */
- 
--#include <common.h>
- #include <command.h>
- #include <env.h>
- #include <image.h>
-@@ -15,158 +14,28 @@
- #include <u-boot/md5.h>
- #include <asm/io.h>
- 
--/*
-- * Store the resulting sum to an address or variable
-- */
--static void store_result(const u8 *sum, const char *dest)
--{
--	unsigned int i;
--
--	if (*dest == '*') {
--		u8 *ptr;
--
--		ptr = (u8 *)hextoul(dest + 1, NULL);
--		for (i = 0; i < 16; i++)
--			*ptr++ = sum[i];
--	} else {
--		char str_output[33];
--		char *str_ptr = str_output;
--
--		for (i = 0; i < 16; i++) {
--			sprintf(str_ptr, "%02x", sum[i]);
--			str_ptr += 2;
--		}
--		env_set(dest, str_output);
--	}
--}
--
--#ifdef CONFIG_MD5SUM_VERIFY
--static int parse_verify_sum(char *verify_str, u8 *vsum)
--{
--	if (*verify_str == '*') {
--		u8 *ptr;
--
--		ptr = (u8 *)hextoul(verify_str + 1, NULL);
--		memcpy(vsum, ptr, 16);
--	} else {
--		unsigned int i;
--		char *vsum_str;
--
--		if (strlen(verify_str) == 32)
--			vsum_str = verify_str;
--		else {
--			vsum_str = env_get(verify_str);
--			if (vsum_str == NULL || strlen(vsum_str) != 32)
--				return 1;
--		}
--
--		for (i = 0; i < 16; i++) {
--			char *nullp = vsum_str + (i + 1) * 2;
--			char end = *nullp;
--
--			*nullp = '\0';
--			*(u8 *)(vsum + i) =
--				hextoul(vsum_str + (i * 2), NULL);
--			*nullp = end;
--		}
--	}
--	return 0;
--}
--
--int do_md5sum(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-+static int do_md5sum(struct cmd_tbl *cmdtp, int flag, int argc,
-+		     char *const argv[])
- {
--	ulong addr, len;
--	unsigned int i;
--	u8 output[16];
--	u8 vsum[16];
--	int verify = 0;
-+	int flags = HASH_FLAG_ENV;
- 	int ac;
--	char * const *av;
--	void *buf;
-+	char *const *av;
- 
- 	if (argc < 3)
- 		return CMD_RET_USAGE;
- 
- 	av = argv + 1;
- 	ac = argc - 1;
--	if (strcmp(*av, "-v") == 0) {
--		verify = 1;
-+	if (IS_ENABLED(CONFIG_MD5SUM_VERIFY) && strcmp(*av, "-v") == 0) {
-+		flags |= HASH_FLAG_VERIFY;
- 		av++;
- 		ac--;
--		if (ac < 3)
--			return CMD_RET_USAGE;
- 	}
- 
--	addr = hextoul(*av++, NULL);
--	len = hextoul(*av++, NULL);
--
--	buf = map_sysmem(addr, len);
--	md5_wd(buf, len, output, CHUNKSZ_MD5);
--	unmap_sysmem(buf);
--
--	if (!verify) {
--		printf("md5 for %08lx ... %08lx ==> ", addr, addr + len - 1);
--		for (i = 0; i < 16; i++)
--			printf("%02x", output[i]);
--		printf("\n");
--
--		if (ac > 2)
--			store_result(output, *av);
--	} else {
--		char *verify_str = *av++;
--
--		if (parse_verify_sum(verify_str, vsum)) {
--			printf("ERROR: %s does not contain a valid md5 sum\n",
--				verify_str);
--			return 1;
--		}
--		if (memcmp(output, vsum, 16) != 0) {
--			printf("md5 for %08lx ... %08lx ==> ", addr,
--				addr + len - 1);
--			for (i = 0; i < 16; i++)
--				printf("%02x", output[i]);
--			printf(" != ");
--			for (i = 0; i < 16; i++)
--				printf("%02x", vsum[i]);
--			printf(" ** ERROR **\n");
--			return 1;
--		}
--	}
--
--	return 0;
--}
--#else
--static int do_md5sum(struct cmd_tbl *cmdtp, int flag, int argc,
--		     char *const argv[])
--{
--	unsigned long addr, len;
--	unsigned int i;
--	u8 output[16];
--	void *buf;
--
--	if (argc < 3)
--		return CMD_RET_USAGE;
--
--	addr = hextoul(argv[1], NULL);
--	len = hextoul(argv[2], NULL);
--
--	buf = map_sysmem(addr, len);
--	md5_wd(buf, len, output, CHUNKSZ_MD5);
--	unmap_sysmem(buf);
--
--	printf("md5 for %08lx ... %08lx ==> ", addr, addr + len - 1);
--	for (i = 0; i < 16; i++)
--		printf("%02x", output[i]);
--	printf("\n");
--
--	if (argc > 3)
--		store_result(output, argv[3]);
--
--	return 0;
-+	return hash_command("md5", flags, cmdtp, flag, ac, av);
- }
--#endif
- 
--#ifdef CONFIG_MD5SUM_VERIFY
-+#if IS_ENABLED(CONFIG_MD5SUM_VERIFY)
- U_BOOT_CMD(
- 	md5sum,	5,	1,	do_md5sum,
- 	"compute MD5 message digest",
-@@ -182,4 +51,4 @@ U_BOOT_CMD(
- 	"address count [[*]sum]\n"
- 		"    - compute MD5 message digest [save to sum]"
- );
--#endif
-+#endif /* IS_ENABLED(CONFIG_MD5SUM_VERIFY) */
--- 
-2.34.1
+On Thu, 8 Feb 2024 at 02:00, Fabio Estevam <festevam@gmail.com> wrote:
 
+> Hi Paul,
+>
+> On Wed, Jan 10, 2024 at 9:20=E2=80=AFAM Fabio Estevam <festevam@gmail.com=
+> wrote:
+>
+> > One colleague from you at Linaro was able to reproduce the bug:
+> >
+> >
+> https://lore.kernel.org/u-boot/CADQ0-X_cj1ECn67U3sefcZ-Jm4OBSYmZkA+JaZRCa=
+3ekq84RaA@mail.gmail.com/
+> >
+> > It is not specific to i.MX.
+>
+> Have you had a chance to look into this wget problem?
+>
