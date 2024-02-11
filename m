@@ -4,77 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DB18C4829A
-	for <u-boot@archiver.kernel.org>; Sun, 11 Feb 2024 09:59:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FAC4C4829A
+	for <u-boot@archiver.kernel.org>; Sun, 11 Feb 2024 13:14:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3DEA687BA8;
-	Sun, 11 Feb 2024 10:59:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=linux-m68k.org
+	by phobos.denx.de (Postfix) with ESMTP id 6E52587C69;
+	Sun, 11 Feb 2024 14:14:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F036187B9D; Sun, 11 Feb 2024 10:59:36 +0100 (CET)
-Received: from mail-oa1-f48.google.com (mail-oa1-f48.google.com
- [209.85.160.48])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DDCC487BA8
- for <u-boot@lists.denx.de>; Sun, 11 Feb 2024 10:59:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=linux-m68k.org
+ id AEBFB87C6D; Sun, 11 Feb 2024 14:14:33 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 52FD487C68
+ for <u-boot@lists.denx.de>; Sun, 11 Feb 2024 14:14:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=geert.uytterhoeven@gmail.com
-Received: by mail-oa1-f48.google.com with SMTP id
- 586e51a60fabf-214c940145bso1248246fac.1
- for <u-boot@lists.denx.de>; Sun, 11 Feb 2024 01:59:34 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707645572; x=1708250372;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=h3KkAxWSRsRVqnLK8aK70Cb5sASB4LcVupWqUX2gQf4=;
- b=ZTjmLU0G+SkRX0LPBccmjC4V+ywkDfHYXDdbvdOAnsUE/aoUJ57UmqAoj5KHSUYGPW
- BOh7elubJHoz/bn2HDH3lG86g98PQ9rUurCKJjzbJbdjV/WF/Q5DeAFufaTWEDl6gQYB
- UcHPbk1u0nKeBQopbS8I3TcCnEEk7nos8K1OCZLt3M5ZxNru6o5t2XSkiyGtvx7DExG/
- BfINnX+a0q6ouhM2kTMCrJNDJinOshwNxAulU9nUHRWdV4BHCuTzzvSc2ruNX7/vyutF
- VYqcmAB27r+UV0fQccJuomKsjhyn8SDgP+i6jUf0hLq1bhI3wxf+6S2vKd/g4OEJlJiz
- DhSA==
-X-Gm-Message-State: AOJu0YwC3KLIQQ92gZ9REk9gjERvtfmlAkkr0X3em5iYbKjscIC045Ab
- kwYIBDQpM+Xj7uky7CycOSWnzTReK+thkRGCZWcslkBDQXmV5Sl+oVRuMxYoVVc=
-X-Google-Smtp-Source: AGHT+IElapg+jnNGclJSHTNno1kgwbXAExheVdHjwQUz4KLYz1QFfVuubQVVyGB7wml1dg/EXocitg==
-X-Received: by 2002:a05:6870:1605:b0:219:c9e9:8e65 with SMTP id
- b5-20020a056870160500b00219c9e98e65mr4059097oae.21.1707645572431; 
- Sun, 11 Feb 2024 01:59:32 -0800 (PST)
-X-Forwarded-Encrypted: i=1;
- AJvYcCX+ybBh9hcaadkvo/vy7thpZUq9jjFMJ8ErBar57uCO6GQiMM7VEvqApYMK2sB/M/yhf/lbaJaSCyaSMiiRcQtbMQFhhQ==
-Received: from mail-ot1-f50.google.com (mail-ot1-f50.google.com.
- [209.85.210.50]) by smtp.gmail.com with ESMTPSA id
- q16-20020a056830441000b006e112c93b1esm1058290otv.6.2024.02.11.01.59.31
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 11 Feb 2024 01:59:31 -0800 (PST)
-Received: by mail-ot1-f50.google.com with SMTP id
- 46e09a7af769-6e2d8a21b79so417081a34.2
- for <u-boot@lists.denx.de>; Sun, 11 Feb 2024 01:59:31 -0800 (PST)
-X-Received: by 2002:a05:6808:23c3:b0:3bf:d798:7689 with SMTP id
- bq3-20020a05680823c300b003bfd7987689mr4477262oib.2.1707645571682; Sun, 11 Feb
- 2024 01:59:31 -0800 (PST)
+ dmarc=fail (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6C19BDA7;
+ Sun, 11 Feb 2024 05:15:12 -0800 (PST)
+Received: from minigeek.lan (unknown [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 5EE4D3F5A1;
+ Sun, 11 Feb 2024 05:14:29 -0800 (PST)
+Date: Sun, 11 Feb 2024 13:13:08 +0000
+From: Andre Przywara <andre.przywara@arm.com>
+To: Andrey Skvortsov <andrej.skvortzov@gmail.com>
+Cc: Hans de Goede <hdegoede@redhat.com>, Jagan Teki
+ <jagan@amarulasolutions.com>, Samuel Holland <samuel@sholland.org>,
+ u-boot@lists.denx.de, Arnaud Ferraris <arnaud.ferraris@collabora.com>,
+ Ondrej Jirman <megi@xff.cz>, Arnav Singh <me@arnavion.dev>, Samuel
+ Dionne-Riel <samuel@dionne-riel.com>
+Subject: Re: [PATCH RFC] sunxi: pinephone: detect existed magnetometer and
+ fixup dtb
+Message-ID: <20240211131251.797abb61@minigeek.lan>
+In-Reply-To: <20240211092824.395155-1-andrej.skvortzov@gmail.com>
+References: <20240211092824.395155-1-andrej.skvortzov@gmail.com>
+Organization: Arm Ltd.
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
-References: <20240209211535.3313392-1-niklas.soderlund+renesas@ragnatech.se>
-In-Reply-To: <20240209211535.3313392-1-niklas.soderlund+renesas@ragnatech.se>
-From: Geert Uytterhoeven <geert@linux-m68k.org>
-Date: Sun, 11 Feb 2024 10:59:20 +0100
-X-Gmail-Original-Message-ID: <CAMuHMdVTUQOogPTGNAa04koock6i=AMa5inO3Q43gJi_O2OBig@mail.gmail.com>
-Message-ID: <CAMuHMdVTUQOogPTGNAa04koock6i=AMa5inO3Q43gJi_O2OBig@mail.gmail.com>
-Subject: Re: [PATCH] clk: renesas: Fix broken clocks on all Gen2 boards
-To: =?UTF-8?Q?Niklas_S=C3=B6derlund?= <niklas.soderlund+renesas@ragnatech.se>
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Tom Rini <trini@konsulko.com>, 
- Hai Pham <hai.pham.ud@renesas.com>, u-boot@lists.denx.de, 
- linux-renesas-soc@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,50 +60,148 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Niklas,
+On Sun, 11 Feb 2024 12:28:24 +0300
+Andrey Skvortsov <andrej.skvortzov@gmail.com> wrote:
 
-Thanks for your patch!
+Hi Andrey,
 
-On Fri, Feb 9, 2024 at 10:22=E2=80=AFPM Niklas S=C3=B6derlund
-<niklas.soderlund+renesas@ragnatech.se> wrote:
-> To prepare support for multiple register layouts pointers to register
-> tables where added to struct cpg_mssr_info. These pointers are suppose
+thanks for taking care of this upstream!
 
-supposed
+> In newer 1.2 PinePhone board revisions LIS3MDL magnetometer was replaced by
+> AF8133J. They use the same PB1 pin in different modes.
+> 
+> LIS3MDL uses it as an gpio input to handle interrupt.
+> AF8133J uses it as an gpio output as a reset signal.
+> 
+> It wasn't possible at runtime to enable both device tree
+> nodes and detect supported sensor at probe time.
+> 
+> AF8133J has reset pin (PB1) connected to the SoC. By default AF8133J
+> is in a reset state and don't respond to probe request on I2C
+> bus. Extra code would be needed to handle reset signal. Therefore this
+> code uses LIS3MDL magnetometer instead of AF8133J.
 
-> to be filled in at probe time and no intended change in behavior was
-> intended.
->
-> However the new pointers where only filled in by some paths of the
+Thanks for the research and explanation, that makes it much easier to
+reason about!
 
-were
+> Introducing new dts 1.2b with AF8133J sensor would require probing in
+> SPL. That would lead to pulling in into SPL I2C controller driver,
+> RSB controller driver, introducing new AXP803 driver to power-up
+> sensors for probe. It's working, but SPL is pretty size-constrained on
+> A64 and doesn't have much space. Therefore fdt fixup is done in U-Boot
+> proper without introducing new board revision and new dts.
 
-> driver implemented in clk-rcar-gen3.c. The path implemented in
-> clk-rcar-gen2.c was not updated leaving the pointers uninitialized
-> leading to a crash when trying to probe the clocks.
->
-> Fix this by filling in the pointers in the Gen2 code path with the
-> values used before they where moved to struct cpg_mssr_info.
+I agree on that, especially if it's indeed just a matter of flipping
+two "status" properties.
 
-were
+> Signed-off-by: Andrey Skvortsov <andrej.skvortzov@gmail.com>
+> ---
+> 
+> AF8133J's driver isn't upstreamed yet, but it will be soon. Therefore this
+> is RFC patch. I'd like to know whether selected approach will be accepted
+> in u-boot before submiting coresponding dts changes to the Linux kernel.
+> Any feedback on this change would be very welcome.
 
-> Fixes: d413214fb748 ("clk: renesas: Add register pointers into struct cpg=
-_mssr_info")
-> Signed-off-by: Niklas S=C3=B6derlund <niklas.soderlund+renesas@ragnatech.=
-se>
+So I think this is the right approach: Since the SPL has no use of this
+device, and it's a rather small DT change, we definitely want to do this
+in U-Boot proper. And I believe that U-Boot (proper) is indeed the best
+place to do those adjustments, since it's built for one board anyway,
+so anything board specific belongs into there (and not into TF-A or the
+SPL, which are more tailored to one *SoC*). Also we are not so size
+sensitive in proper.
+And I also like the fact that it's protected by a board specific
+definition, and even better that it's an already existing one.
 
-Reviewed-by: Geert Uytterhoeven <geert+renesas@glider.be>
+Oh, and I am not really convinced this is the right approach here, but
+maybe have a look at doc/usage/cmd/extension.rst, for another related
+mechanism.
 
-Gr{oetje,eeting}s,
+Some smaller comments below ...
 
-                        Geert
+> 
+>  board/sunxi/board.c         | 26 ++++++++++++++++++++++++++
+>  configs/pinephone_defconfig |  1 +
+>  2 files changed, 27 insertions(+)
+> 
+> diff --git a/board/sunxi/board.c b/board/sunxi/board.c
+> index 1305302060..a4bfa24400 100644
+> --- a/board/sunxi/board.c
+> +++ b/board/sunxi/board.c
+> @@ -15,6 +15,7 @@
+>  #include <dm.h>
+>  #include <env.h>
+>  #include <hang.h>
+> +#include <i2c.h>
+>  #include <image.h>
+>  #include <init.h>
+>  #include <log.h>
+> @@ -920,6 +921,28 @@ static void bluetooth_dt_fixup(void *blob)
+>  			   "local-bd-address", bdaddr, ETH_ALEN, 1);
+>  }
+>  
+> +#ifdef CONFIG_PINEPHONE_DT_SELECTION
 
---=20
-Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k=
-.org
+Can you move that line into the function? That would for one avoid the
+protection in the caller below, and secondly make it easier to add
+other boards, if a need arises for them. The two #defines don't hurt or
+change the code, so just keep them outside.
 
-In personal conversations with technical people, I call myself a hacker. Bu=
-t
-when I'm talking to journalists I just say "programmer" or something like t=
-hat.
-                                -- Linus Torvalds
+> +
+> +#define PINEPHONE_LIS3MDL_I2C_ADDR	0x1E
+> +#define PINEPHONE_LIS3MDL_I2C_BUS	1 /* I2C1 */
+> +
+> +static	void board_dt_fixup(void *blob)
+> +{
+> +	struct udevice *bus, *dev;
+> +
+
+(have the #ifdef here)
+
+> +	if (!fdt_node_check_compatible(blob, 0, "pine64,pinephone-1.2"))
+
+Please have curly braces around that.
+
+So I'd say please send the (disabled) DT node addition patch to the
+kernel MLs, then send this patch to U-Boot.
+
+Cheers,
+Andre
+
+> +		if (!uclass_get_device_by_seq(UCLASS_I2C, PINEPHONE_LIS3MDL_I2C_BUS, &bus)) {
+> +			dm_i2c_probe(bus, PINEPHONE_LIS3MDL_I2C_ADDR, 0, &dev);
+> +			fdt_set_status_by_compatible(
+> +				blob, "st,lis3mdl-magn",
+> +				dev ? FDT_STATUS_OKAY  : FDT_STATUS_DISABLED);
+> +			fdt_set_status_by_compatible(
+> +				blob, "voltafield,af8133j",
+> +				dev ? FDT_STATUS_DISABLED : FDT_STATUS_OKAY);
+> +		}
+> +}
+> +#endif
+> +
+>  int ft_board_setup(void *blob, struct bd_info *bd)
+>  {
+>  	int __maybe_unused r;
+> @@ -934,6 +957,9 @@ int ft_board_setup(void *blob, struct bd_info *bd)
+>  
+>  	bluetooth_dt_fixup(blob);
+>  
+> +#ifdef CONFIG_PINEPHONE_DT_SELECTION
+> +	board_dt_fixup(blob);
+> +#endif
+>  #ifdef CONFIG_VIDEO_DT_SIMPLEFB
+>  	r = sunxi_simplefb_setup(blob);
+>  	if (r)
+> diff --git a/configs/pinephone_defconfig b/configs/pinephone_defconfig
+> index eebc676901..457e7ee1e7 100644
+> --- a/configs/pinephone_defconfig
+> +++ b/configs/pinephone_defconfig
+> @@ -12,6 +12,7 @@ CONFIG_MMC_SUNXI_SLOT_EXTRA=2
+>  CONFIG_PINEPHONE_DT_SELECTION=y
+>  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+>  CONFIG_OF_LIST="sun50i-a64-pinephone-1.1 sun50i-a64-pinephone-1.2"
+> +CONFIG_SYS_I2C_MVTWSI=y
+>  CONFIG_LED_STATUS=y
+>  CONFIG_LED_STATUS_GPIO=y
+>  CONFIG_LED_STATUS0=y
+
