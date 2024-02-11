@@ -4,78 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B01BC48260
-	for <u-boot@archiver.kernel.org>; Sat, 10 Feb 2024 23:41:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6709AC48260
+	for <u-boot@archiver.kernel.org>; Sun, 11 Feb 2024 00:37:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 38D2E879CC;
-	Sun, 11 Feb 2024 00:41:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4780F87E8C;
+	Sun, 11 Feb 2024 01:37:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AjMjOpb5";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="f5j+imhj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 263B587AEC; Sun, 11 Feb 2024 00:41:22 +0100 (CET)
-Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
- [IPv6:2607:f8b0:4864:20::736])
+ id 99E0287EA2; Sun, 11 Feb 2024 01:37:19 +0100 (CET)
+Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
+ [IPv6:2607:f8b0:4864:20::82f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A90BD8799D
- for <u-boot@lists.denx.de>; Sun, 11 Feb 2024 00:41:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E71B87AEC
+ for <u-boot@lists.denx.de>; Sun, 11 Feb 2024 01:37:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x736.google.com with SMTP id
- af79cd13be357-78574840242so86372985a.0
- for <u-boot@lists.denx.de>; Sat, 10 Feb 2024 15:41:19 -0800 (PST)
+Received: by mail-qt1-x82f.google.com with SMTP id
+ d75a77b69052e-42a029c8e76so15268201cf.2
+ for <u-boot@lists.denx.de>; Sat, 10 Feb 2024 16:37:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1707608478; x=1708213278; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1707611836; x=1708216636; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=PzpnAr4tVfS15iCSht28fkhCQOO0sXMLTE/IYJnq5+c=;
- b=AjMjOpb5hAAor7Za0x70L7iEJ1JWkV2MYuqrs0L9YOCxLhLE8KF9Jf9uYDfhWojIAu
- +okXAmHXCxUQIIm5UQFwCvbI0bCmqo43sJPneHWBVThOWM/QknZ+tH5MXY6AhuZHi5Dz
- Qi3Do2t6mUNPTRuYegep4f2cUV7cOaLBIG0+k=
+ bh=3BAenIj/Y8XcwD+eipgpWOtC0LOHX13OfaVE8904YO4=;
+ b=f5j+imhjPRQXYjK6Hs7Tih4CCDXWieqzzD2gOy4D6YmJuvkd/723l4d9TwVCSPjQfr
+ vXp3KMagIN1eXTMsbQIaAn7pXUhRjIhZH60gTKrVUpnM4rZ88GZzwAmTdDIH8UtIqnXm
+ gKeh2V/grMyiuCZ5fRCq9S0TdTQGkyY9k9OEg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707608478; x=1708213278;
+ d=1e100.net; s=20230601; t=1707611836; x=1708216636;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PzpnAr4tVfS15iCSht28fkhCQOO0sXMLTE/IYJnq5+c=;
- b=pEoNsg3w7EvdzvbK4nOlfPkDqueQLiu47jgFXqAoleiJgfu/LWogcZz16VxXmZGrTF
- MoF6ZdVGot5ZmdvQ4JztFe2yRm9HA90N172SpoL6dGQoQmmwXTKcXkQDATFhuHeElf7M
- RSegJ1wNtCywKs0+XvISJKeWRVI1NOlvuBtmQA2mFTKvnBo75eZmRjZ6ee2lifBYKEUa
- 6Q3zeYlRXch14mk2hoTtX8yfh2ZXjY08BWYENlpMfV1fM47yq9JuDeJRZwYpDjYXgkHh
- xRl1TYywjAXOptz8kFaFBXk4wxrbBjWZIpISriGexTx10gP7H0dqM84uw/Nw5bvd1u+s
- qgZQ==
-X-Gm-Message-State: AOJu0Yx4FHADJpyGbYXMPkSNzR9SAwS9ChrnhD6eLLGy0SsanTwdXeqy
- dC+uvwmnNrLtbTsUe3w+A/C7hIOQdP7YOs36SZUrSrJRhuIN293D72YUIX9brsY=
-X-Google-Smtp-Source: AGHT+IFNOPRUQvlqBSRaMoo963+30uegIpWFoMiCAX8B2C7cyCTP4lYml3avV2EGsErQO0nYJSUrBA==
-X-Received: by 2002:a05:620a:4511:b0:785:3da4:58a5 with SMTP id
- t17-20020a05620a451100b007853da458a5mr4192545qkp.37.1707608478379; 
- Sat, 10 Feb 2024 15:41:18 -0800 (PST)
+ bh=3BAenIj/Y8XcwD+eipgpWOtC0LOHX13OfaVE8904YO4=;
+ b=hyPUjpaQEsLcEUtJCF3cOzzYOjckdjzjohGprcqsh2l+20cDuTxb9M84J5+ZJBiBIf
+ zdDkycJG5j1RTl8Ps0l7XOrTiLjd0YlQbiGg4DPJUNw5EQxH9BuUYvqijTziASwYSNYH
+ iRZC3xKBFiVyeC9q9AAk/zHvKlZYScIgv3nY9k1h8Nx7X1DV1Y1pm9tlAR0pw77Eyo8T
+ neS89xOB9hvANhskx743iHal1/xSzXOGnZRNGmlgNg3M2/EefsKqS/vG0EuUhh1hA1Kg
+ UR3uCe6l//t7rx1fPKZLI1/XISJKmuDzaPHw711YRDJ7yb0K8sciH+S92wBn11HLV5G/
+ /tUQ==
+X-Gm-Message-State: AOJu0YzQQtoPiJkK8LPie0q25d/doeHzKN2cohiky9WZfvMNqr6CimD+
+ vF8FHK7U2hROPpLrF8gYxTXX2busWAQDgVRNMs9x8qP9UfasfEpTIQTYJj8k32g=
+X-Google-Smtp-Source: AGHT+IG1O3TBtodgLeorvouRDyKvBZNRdZyY2Ruqq57KMzhyZID0nXx6Wxejfj1GXHK1lNvT4PYEbQ==
+X-Received: by 2002:a05:622a:1987:b0:42c:43e5:2ee8 with SMTP id
+ u7-20020a05622a198700b0042c43e52ee8mr4686725qtc.14.1707611835874; 
+ Sat, 10 Feb 2024 16:37:15 -0800 (PST)
 X-Forwarded-Encrypted: i=1;
- AJvYcCXe7VQAfI6X8HDdfDM9BwIXOjhDW32KYCn6jaL7cilDevA4WbaReC/UCmzHr9XnVkoNS+MxJ36MDy6UtH1IKYB8txfgB0ugPYioW1O3bmwo2K0zdnwhmkpEsZurA+3sD9BB2AYgxLhMbL9sE+IRlwGW0yku43wRVCnuWH6YWhgxexP4LZLhPA2vs49jA5qHFo6rkZZq
+ AJvYcCVRCMd5+AmBuKUDk2hgeQDiNXYtC3Viu6uo3Aghf866A6a/MBds+wiVpCy4pfjwrVxQBIieSlQI9236d2H4n9qtqyqgKsYYp+yDAFmmPbIIdMal7bsAUUd+TqUpzOTYOPHM37T8OF/zyYm8CcHT+3DkIi4KWhesYEe81zbh/Xqro2+eX9ThCZT6U+WOS070aZu4SUYWYAQQ4JRNlGggDlECkv2EqhdNgjHBhtPIel/wRlwc/3JKETe/T3dOmhg3SzCkoJCR1iyprWzkJA==
 Received: from bill-the-cat
  (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
  [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- w25-20020a05620a095900b00785bfd82ba2sm895650qkw.66.2024.02.10.15.41.17
+ l3-20020ac87243000000b0042be1092915sm1869013qtp.10.2024.02.10.16.37.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 10 Feb 2024 15:41:17 -0800 (PST)
-Date: Sat, 10 Feb 2024 18:41:15 -0500
+ Sat, 10 Feb 2024 16:37:15 -0800 (PST)
+Date: Sat, 10 Feb 2024 19:37:12 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Dragan Simic <dsimic@manjaro.org>
-Cc: u-boot@lists.denx.de, sjg@chromium.org, philipp.tomsich@vrull.eu,
- kever.yang@rock-chips.com, massimo.pegorer+oss@gmail.com
-Subject: Re: [PATCH] doc: rockchip: Clarify the rkspi image format further
-Message-ID: <20240210234115.GA3040305@bill-the-cat>
-References: <cd0b002cacfd40ac294b1583c1769718e94e869f.1707588872.git.dsimic@manjaro.org>
+To: Igor Opaniuk <igor.opaniuk@foundries.io>
+Cc: u-boot@lists.denx.de, Ard Biesheuvel <ardb@kernel.org>,
+ Loic Poulain <loic.poulain@linaro.org>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Marc Zyngier <maz@kernel.org>, Michal Simek <michal.simek@amd.com>,
+ Qu Wenruo <wqu@suse.com>, Simon Glass <sjg@chromium.org>,
+ "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
+Subject: Re: [PATCH v1] armv8: crypto: SHA-512 using ARMv8 Crypto Extensions
+Message-ID: <20240211003712.GB3040305@bill-the-cat>
+References: <20240210120709.938286-1-igor.opaniuk@foundries.io>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="p3mkKSwnUApbEpBg"
+ protocol="application/pgp-signature"; boundary="tkPIpzTp4xoJjlZV"
 Content-Disposition: inline
-In-Reply-To: <cd0b002cacfd40ac294b1583c1769718e94e869f.1707588872.git.dsimic@manjaro.org>
+In-Reply-To: <20240210120709.938286-1-igor.opaniuk@foundries.io>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,52 +98,94 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---p3mkKSwnUApbEpBg
+--tkPIpzTp4xoJjlZV
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Feb 10, 2024 at 07:18:10PM +0100, Dragan Simic wrote:
+On Sat, Feb 10, 2024 at 01:07:09PM +0100, Igor Opaniuk wrote:
 
-> As discussed on the U-Boot mailing list, [1][2] only some Rockchip SoCs
-> suffer from a bug in their BROMs that requires a specific format for their
-> SPI images, which was the reason for the rkspi format to be introduced.
+> From: Igor Opaniuk <igor.opaniuk@gmail.com>
 >=20
-> Improve the description of the rkspi format a bit to mention this, for
-> future reference and to make understanding it easier.
+> Add support for the SHA-512 Secure Hash Algorithm which uses ARMv8 Crypto
+> Extensions. The CPU should support ARMv8.2 instruction set and implement
+> SHA512H, SHA512H2, SHA512SU0, and SHA512SU1 instructions.
 >=20
-> [1] https://lore.kernel.org/u-boot/c32129ba-db25-4b9d-9a4a-032d88dfb9cd@k=
-wiboo.se/
-> [2] https://lore.kernel.org/u-boot/CACdvmAjfCWicRd=3DLKKyob7fZo79AFkUQKy0=
-e1HBb0zyJuoO70g@mail.gmail.com/
+> This information can be obtained from ID_AA64ISAR0_EL1 (AArch64 Instructi=
+on
+> Set Attribute Register 0), bits [15:12] should be 0b0010 [1], that
+> indicates support for SHA512* instructions in AArch64 state. As not all
+> ARMv8-base SoCs support that, ARMV8_CE_SHA512 is left disabled by
+> default for now.
 >=20
-> Signed-off-by: Dragan Simic <dsimic@manjaro.org>
-> ---
->  doc/README.rockchip | 7 ++++++-
->  1 file changed, 6 insertions(+), 1 deletion(-)
+> Tested in QEMU for ARMv8 with compiled-in SHA-2 support.
+> Even on emulated cpu the hashing speed increase was visible:
+>=20
+> With CE usage:
+> =3D> time hash sha512 0x40200000 0x2000000
+> Calculate hash
+> Calculate hash
+> sha512 for 40200000 ... 421fffff =3D=3D> 1aeae269f4eb7c37...
+>=20
+> time: 0.215 seconds
+>=20
+> Without CE usage:
+> =3D> time hash sha512 0x40200000 0x2000000
+> sha512 for 40200000 ... 421fffff =3D=3D> 1aeae269f4eb7c37...
+>=20
+> time: 0.356 seconds
+>=20
+> Real HW tests should provide much more improvement and objective results
+> with 10x speed increase at least.
+>=20
+> The implementation is based on original implementation from Ard Biesheuve=
+l in
+> Linux kernel [2]
+>=20
+> [1] https://developer.arm.com/documentation/ddi0601/2023-12/AArch64-Regis=
+ters/ID-AA64ISAR0-EL1--AArch64-Instruction-Set-Attribute-Register-0
+> [2] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tr=
+ee/arch/arm/crypto/sha2-ce-core.S
+>=20
+> CC: Ard Biesheuvel <ard.biesheuvel@linaro.org>
+> CC: Loic Poulain <loic.poulain@linaro.org>
+> Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
+[snip]
+> diff --git a/arch/arm/cpu/armv8/Kconfig b/arch/arm/cpu/armv8/Kconfig
+> index 9f0fb369f7..fd5c26421b 100644
+> --- a/arch/arm/cpu/armv8/Kconfig
+> +++ b/arch/arm/cpu/armv8/Kconfig
+> @@ -204,6 +204,11 @@ config ARMV8_CE_SHA256
+>  	bool "SHA-256 digest algorithm (ARMv8 Crypto Extensions)"
+>  	default y if SHA256
+> =20
+> +config ARMV8_CE_SHA512
+> +	bool "SHA-512 digest algorithm (ARMv8 Crypto Extensions)"
+> +	depends on SHA512
+> +	default n
 
-Can we please convert this content to rst under doc/board/rockchip/ then
-enhance it?
+Like the sha256 one, this should be default y I think, the performance
+improvement is likely worth the size increase.
 
 --=20
 Tom
 
---p3mkKSwnUApbEpBg
+--tkPIpzTp4xoJjlZV
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXICZgACgkQFHw5/5Y0
-tyzqjgv/fd5Wttf3ooiY6KiefO+xmqZ6Cb7qe3PA9ftPQGBxzy55zXWyTC/PvDcK
-sivKqpP1aB5IqzKOB/ZmUtmFj2eZe0J8/7z7a3+0F/yQ8QcJZE72D9tNFFDjakSg
-0ZE9DGuryuTOmkSQbKpIYw/IxfJy1oCBh9fQTVswv/AOF49TSLoBVXguz7mNOskj
-WiJfe81xGUkase41wqEzslYXT6hGGGaMOIIewEGVBHhM+UnCmrGxmkGjq2+YivXV
-v5r0emn84FQ25sE96FF8HqtApIR7G60fw+y63BbvJ/tSfKZEokoJGkHqCXCwCJSA
-M2hnIUViNHF1la7+MYsg911r+eCyX/KP5afYN3JZdZFqoWvflbbgQpKGhYdWIuWG
-k+takgYmVRmFv0OO651B7q5uiOLmf4ntz77fRo0uYf/dCfV4mAWAfBzLCGKhN5TA
-e/HH9+lKkpntKAlX0vpHGt4h4RUONOqu2N1qkCXAn4VNNuqbYla8HKIr+ILz+a8/
-BjxSDw8Z
-=w9SS
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXIFrQACgkQFHw5/5Y0
+tyxHcQwApWulu2xa6TIEw1Cn0hIKxx6gRhw7ZKGbjkLyalzojw98AubZiocGl6YV
+tfyd0Mzs+B686HSLvBa/QTVwwpQr/aa9Lpuy8NXWnJCbCqo+3FExYClnlYsGTdHO
+cGgx3MhjJyzPQkoFlaOzNX0aWxEXADtKxPi3zBYFsNtfTfHldwEb+7xMZEclhbE8
+AuvV/StulRWNnfxgT/dniZlAaKet0a1TgFlEZZ4b0weeBJ9+/hVn1gpuNxPMkiqW
+lIHkuFOv2Z3kN2PLDvg7yvJXGN++zGS3X3EZyweD3DJySESIw51meVjlF6D2p1JF
+woHEyTRxAz1S5IL05gItLGeACXOz2sxLD71A6j3VcwW3q50Qo09ZycPmhrEt3o7S
+vMvdPLfHiBXIWZ7hQpOYdMFMssU8NdISjefp/5HIq3uZOkRSqU0T5v1aycZ15fc4
+pDORlOY8uMjhVTazQQFANThf5JsZiLDS1HisNrnC2q5iKmx8QahKtru+zirPYw6Z
+qdovyf+q
+=BnpE
 -----END PGP SIGNATURE-----
 
---p3mkKSwnUApbEpBg--
+--tkPIpzTp4xoJjlZV--
