@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 526D2C4829A
-	for <u-boot@archiver.kernel.org>; Sun, 11 Feb 2024 17:14:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5282C4829B
+	for <u-boot@archiver.kernel.org>; Sun, 11 Feb 2024 17:27:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C14787C75;
-	Sun, 11 Feb 2024 18:14:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id ED2C987C69;
+	Sun, 11 Feb 2024 18:27:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=foundries.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=foundries.io header.i=@foundries.io header.b="mvKv6JQ6";
+	dkim=pass (2048-bit key; secure) header.d=foundries.io header.i=@foundries.io header.b="FJAp+1S6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B826787C76; Sun, 11 Feb 2024 18:14:51 +0100 (CET)
-Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
- [IPv6:2a00:1450:4864:20::22f])
+ id E3FF087C78; Sun, 11 Feb 2024 18:26:56 +0100 (CET)
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [IPv6:2a00:1450:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4344D87C69
- for <u-boot@lists.denx.de>; Sun, 11 Feb 2024 18:14:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A07A87775
+ for <u-boot@lists.denx.de>; Sun, 11 Feb 2024 18:26:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=foundries.io
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=igor.opaniuk@foundries.io
-Received: by mail-lj1-x22f.google.com with SMTP id
- 38308e7fff4ca-2d0c7e6b240so32643981fa.0
- for <u-boot@lists.denx.de>; Sun, 11 Feb 2024 09:14:48 -0800 (PST)
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-511531f03f6so2906759e87.0
+ for <u-boot@lists.denx.de>; Sun, 11 Feb 2024 09:26:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=foundries.io; s=google; t=1707671687; x=1708276487; darn=lists.denx.de;
+ d=foundries.io; s=google; t=1707672411; x=1708277211; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=30fEcHvwrIQ5vfxWI9OOW0ehirG6638MnvQFKVw1o0w=;
- b=mvKv6JQ6ArnKt23mLteqTjd71inwlLK8tQ1V3i2xATKO6gp4Y2yt8oN3Pg1dxa+wy7
- xUnbAYiiJPHG5n6RNofGvZyVclrsQcQzz19x7rwl/ScZCQIBZ3jODXZPMpaVN5WUhqhE
- MQTSsrrEdFy1cIc9k2yK7mKTDmDKHTDH9be0Et0GY3RhLfNAQkHB9lIYEGGa/B4l0qv4
- WrRYI1R1Qr7WB2ERZHAO4G75nnS6fqBgh0YcHcmrYfqo2jh+zq6So3BuVwYU5ZU1W5uS
- vZIm+r9AeIilGuJ4BJkVr1jTtl3S8HbDiiCarGmIq3DcsMgUT1C3/PuEuSsgjMtv0pU0
- OfHg==
+ bh=8NJ4F8VXlTKMUPN3zDIp1z7oatYTjV3AptYwEznNYO8=;
+ b=FJAp+1S63fbeS0AxR78Ld8xYXhYb+olW8yJJoiQkuidyfPK8LHgAkOpvoDUdt96utk
+ GlDSj5mGpj9wvpR3Zr5kt2zTzJx2LYZiDB4+shIZOH8ewulHS+FIfIXxY508leCvbqvO
+ DhARFphOWn0Zzdla6DcTT1n1CkbKK6JjZ+a4zZUmMHF4o6EGe9kTYvgaFjEN9I8/drgx
+ d9bi0GHmm7dxl3yDyW//j4e2vbJCwAieKE+BUKz6KLnFJPKl6ErHOcihOBZtcq/E6Yye
+ fsGWC7c4Pbp9r9I0cZUdOX8scEny/clU2guUe0ix28I+uAAqPt9/+W4TfKQsPqLjOKVn
+ 0U5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707671687; x=1708276487;
+ d=1e100.net; s=20230601; t=1707672411; x=1708277211;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=30fEcHvwrIQ5vfxWI9OOW0ehirG6638MnvQFKVw1o0w=;
- b=KN8LhWYAoQIoMSMMqvM4ClOevajUSzAuyKq8Axopj5zNAwVy1nzTdMRUmhs6303yPs
- VOnNrW+qkBCydDOdkWne7d4kscrwu+ODWu0he8k+uULx1me/kuvmVUXFdNTOwlcI0Tvy
- xv8W0h+iZm6tAPnlgX4xKylEHIncRx1FYbaVDnrKsJJ2ysYS4rSk30J5QwUaRtezcZS/
- Kj1VANXPcPaRlHSsxCgVZGixbsaRpAYHMOmkdqHVppq5/yYYtUgRV3JFJLCJEgvQHBgO
- ZCuWMDd9pi/G/qVMSSTwtD1bLmrf5mVS5lPxdc+eEGGQcUnEkWwFs4jgALS1CISu2BLC
- 0B5w==
-X-Gm-Message-State: AOJu0YwEi62jgFNFq5BaNCLGxyLjAEfLIAwI65Qq1Ehp1Ii5V3E8vH1W
- /8Ad7Rrt7mgPCv7wEIxcxN6nJ1RMdEpmh6CmHt+Z2fhSeCetc/1yXeci9MrbVQaEU33EHARiVyy
- ETGG4KhPEbAR9y3EPfXyC7ed/PbaSPgTlLpChqg==
-X-Google-Smtp-Source: AGHT+IG3wuCwUpHnQCpf0NDJqitjczIh/fq0XFIzh1gXMa3HMyN6jDjKEkoUZwhRvUNLiObWS02n6F3iKdAESVo2NHU=
-X-Received: by 2002:ac2:514a:0:b0:511:7bbb:fd6e with SMTP id
- q10-20020ac2514a000000b005117bbbfd6emr2658772lfd.27.1707671687230; Sun, 11
- Feb 2024 09:14:47 -0800 (PST)
+ bh=8NJ4F8VXlTKMUPN3zDIp1z7oatYTjV3AptYwEznNYO8=;
+ b=AA7BtzYEHmhuzAFs1cIS89Z3WEkBl9BemTbBoq6zu1ror9Fcf2dnMJfShvpGAauR/J
+ UtTKLKpDcjZGUPIJsBfiJocgmz5wuKbIj7tsU4v14fwzpAmuO4aka197rNpvIsh8WgD1
+ yI91qzU27/brv8pldMenePNOutD+4oVodw5ALHMAFqqpEMtL5KS4Dhkh5LkDfR7CzpRs
+ xPlX6nzNpxE7H+4r/n6BgEfwoC2NFuFNyu1TkMuDnUBxvZS/SqkI1kHynqaPaUxUfzy5
+ OrK1j+BlnNVtjdxRlAJF69aTwcpXyUwVpvL/C870FnDk72M6GUwh/UUZEA1jKQGgI0rJ
+ XnDw==
+X-Gm-Message-State: AOJu0Yz/mtFLQhtv9qS5ZcGA0lqVUrr2JNbs78G2QgfWzRgdCFPMDleg
+ 4v4SMWsQBWa09O54uRq8CPA6nrHPAIb9JDjIwMJGn34yuvbUCJV+Gkh4it8yhLu1VDsfQa8Tdbp
+ OBSjBVzIL/fQd+4+z9/b1IYTP9MGhkFMHCigofsA6LYdJvj6/RiM=
+X-Google-Smtp-Source: AGHT+IFOaiL8HI7sefDbGMm9A8Q6tLrekMIfM8lj4hXgKgUfNRQzElMgSxgUDuA8UirTNHZPxYqz20d5LewPDXzcJQA=
+X-Received: by 2002:ac2:47e3:0:b0:511:19f4:e24f with SMTP id
+ b3-20020ac247e3000000b0051119f4e24fmr2792168lfp.47.1707672411155; Sun, 11 Feb
+ 2024 09:26:51 -0800 (PST)
 MIME-Version: 1.0
 References: <20240210120709.938286-1-igor.opaniuk@foundries.io>
- <86h6if6hj0.wl-maz@kernel.org>
-In-Reply-To: <86h6if6hj0.wl-maz@kernel.org>
+ <20240211003712.GB3040305@bill-the-cat>
+In-Reply-To: <20240211003712.GB3040305@bill-the-cat>
 From: Igor Opaniuk <igor.opaniuk@foundries.io>
-Date: Sun, 11 Feb 2024 18:14:35 +0100
-Message-ID: <CAL6CDMFx=r9P+4TGvo7MHksB5gddAO4==NResv=3TwP7K+Wguw@mail.gmail.com>
+Date: Sun, 11 Feb 2024 18:26:39 +0100
+Message-ID: <CAL6CDMFVEUFqehatU=WJWRtyaDR+Wz0PGY6pRx=nMC9duoj+AQ@mail.gmail.com>
 Subject: Re: [PATCH v1] armv8: crypto: SHA-512 using ARMv8 Crypto Extensions
-To: Marc Zyngier <maz@kernel.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Ard Biesheuvel <ardb@kernel.org>, 
  Loic Poulain <loic.poulain@linaro.org>, Igor Opaniuk <igor.opaniuk@gmail.com>, 
- Michal Simek <michal.simek@amd.com>, Qu Wenruo <wqu@suse.com>,
- Simon Glass <sjg@chromium.org>, 
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
- Ard Biesheuvel <ardb@kernel.org>
+ Marc Zyngier <maz@kernel.org>, Michal Simek <michal.simek@amd.com>,
+ Qu Wenruo <wqu@suse.com>, 
+ Simon Glass <sjg@chromium.org>, "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -93,16 +92,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Marc,
+Hi Tom,
 
-On Sun, Feb 11, 2024 at 12:12=E2=80=AFAM Marc Zyngier <maz@kernel.org> wrot=
-e:
+On Sun, Feb 11, 2024 at 1:37=E2=80=AFAM Tom Rini <trini@konsulko.com> wrote=
+:
 >
-> [Fixing Ard's email address for something more current.]
+> On Sat, Feb 10, 2024 at 01:07:09PM +0100, Igor Opaniuk wrote:
 >
-> On Sat, 10 Feb 2024 12:07:09 +0000,
-> Igor Opaniuk <igor.opaniuk@foundries.io> wrote:
-> >
 > > From: Igor Opaniuk <igor.opaniuk@gmail.com>
 > >
 > > Add support for the SHA-512 Secure Hash Algorithm which uses ARMv8 Cryp=
@@ -117,30 +113,9 @@ tion
 > > indicates support for SHA512* instructions in AArch64 state. As not all
 > > ARMv8-base SoCs support that, ARMV8_CE_SHA512 is left disabled by
 > > default for now.
->
-> But since you can actually probe it at runtime, what's the problem?
-
-That actually was my initial plan, I just decided to move one step
-one step at a time and address that in the next patch series.
-
->
+> >
 > > Tested in QEMU for ARMv8 with compiled-in SHA-2 support.
 > > Even on emulated cpu the hashing speed increase was visible:
->
-> Unfortunately, QEMU is not a good oracle for optimisations, and is
-> more akin to rolling a dice. In your case, you *should* see an
-> improvement, but this should be evaluated on bare metal.
-I fully agree with you here, but unfortunately it turned out
-that the only board with ARMv8.2-ready SoC (Cortex A55). I have now
-at hand doesn't support SHA512* instructions, but after all decided
-so send the patch to get rid of the feeling that it was all in vain  :)
-
-Maybe I added a bit of confusion to the commit message,
-as the initial idea was about functional validation (that it works in
-QEMU at least). I didn't want to make any comparison
-in a virtualized environment as it obviously didn't make any sense.
-
->
 > >
 > > With CE usage:
 > > =3D> time hash sha512 0x40200000 0x2000000
@@ -172,17 +147,7 @@ tree/arch/arm/crypto/sha2-ce-core.S
 > > CC: Ard Biesheuvel <ard.biesheuvel@linaro.org>
 > > CC: Loic Poulain <loic.poulain@linaro.org>
 > > Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
-> > ---
-> >
-> >  arch/arm/cpu/armv8/Kconfig          |   5 +
-> >  arch/arm/cpu/armv8/Makefile         |   1 +
-> >  arch/arm/cpu/armv8/sha512_ce_core.S | 210 ++++++++++++++++++++++++++++
-> >  arch/arm/cpu/armv8/sha512_ce_glue.c |  20 +++
-> >  lib/sha512.c                        |   6 +-
-> >  5 files changed, 240 insertions(+), 2 deletions(-)
-> >  create mode 100644 arch/arm/cpu/armv8/sha512_ce_core.S
-> >  create mode 100644 arch/arm/cpu/armv8/sha512_ce_glue.c
-> >
+> [snip]
 > > diff --git a/arch/arm/cpu/armv8/Kconfig b/arch/arm/cpu/armv8/Kconfig
 > > index 9f0fb369f7..fd5c26421b 100644
 > > --- a/arch/arm/cpu/armv8/Kconfig
@@ -195,321 +160,28 @@ tree/arch/arm/crypto/sha2-ce-core.S
 > > +     bool "SHA-512 digest algorithm (ARMv8 Crypto Extensions)"
 > > +     depends on SHA512
 > > +     default n
-> > +
-> >  endif
-> >
-> >  endif
-> > diff --git a/arch/arm/cpu/armv8/Makefile b/arch/arm/cpu/armv8/Makefile
-> > index bba4f570db..3894f2bb2a 100644
-> > --- a/arch/arm/cpu/armv8/Makefile
-> > +++ b/arch/arm/cpu/armv8/Makefile
-> > @@ -45,3 +45,4 @@ obj-$(CONFIG_TARGET_BCMNS3) +=3D bcmns3/
-> >  obj-$(CONFIG_XEN) +=3D xen/
-> >  obj-$(CONFIG_ARMV8_CE_SHA1) +=3D sha1_ce_glue.o sha1_ce_core.o
-> >  obj-$(CONFIG_ARMV8_CE_SHA256) +=3D sha256_ce_glue.o sha256_ce_core.o
-> > +obj-$(CONFIG_ARMV8_CE_SHA512) +=3D sha512_ce_glue.o sha512_ce_core.o
-> > \ No newline at end of file
-> > diff --git a/arch/arm/cpu/armv8/sha512_ce_core.S b/arch/arm/cpu/armv8/s=
-ha512_ce_core.S
-> > new file mode 100644
-> > index 0000000000..906291f35b
-> > --- /dev/null
-> > +++ b/arch/arm/cpu/armv8/sha512_ce_core.S
-> > @@ -0,0 +1,210 @@
-> > +/* SPDX-License-Identifier: GPL-2.0-only */
-> > +/*
-> > + * sha512-ce-core.S - core SHA-384/SHA-512 transform using v8 Crypto
-> > + * Extensions
-> > + *
-> > + * Copyright (C) 2018 Linaro Ltd <ard.biesheuvel@linaro.org>
-> > + * Copyright (C) 2024 Igor Opaniuk <igor.opaniuk@gmail.com>
-> > + */
-> > +
-> > + #include <config.h>
-> > + #include <linux/linkage.h>
-> > + #include <asm/system.h>
-> > + #include <asm/macro.h>
-> > +
-> > +     .macro  adr_l, dst, sym
-> > +     adrp    \dst, \sym
-> > +     add     \dst, \dst, :lo12:\sym
-> > +     .endm
-> > +
-> > +     .irp            b,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,=
-19
-> > +     .set            .Lq\b, \b
-> > +     .set            .Lv\b\().2d, \b
-> > +     .endr
-> > +
-> > +     .macro          sha512h, rd, rn, rm
-> > +     .inst           0xce608000 | .L\rd | (.L\rn << 5) | (.L\rm << 16)
-> > +     .endm
-> > +
-> > +     .macro          sha512h2, rd, rn, rm
-> > +     .inst           0xce608400 | .L\rd | (.L\rn << 5) | (.L\rm << 16)
-> > +     .endm
-> > +
-> > +     .macro          sha512su0, rd, rn
-> > +     .inst           0xcec08000 | .L\rd | (.L\rn << 5)
-> > +     .endm
-> > +
-> > +     .macro          sha512su1, rd, rn, rm
-> > +     .inst           0xce608800 | .L\rd | (.L\rn << 5) | (.L\rm << 16)
-> > +     .endm
-> > +
-> > +     /*
-> > +      * The SHA-512 round constants
-> > +      */
-> > +     .section        ".rodata", "a"
-> > +     .align          4
-> > +.Lsha512_rcon:
-> > +     .quad           0x428a2f98d728ae22, 0x7137449123ef65cd
-> > +     .quad           0xb5c0fbcfec4d3b2f, 0xe9b5dba58189dbbc
-> > +     .quad           0x3956c25bf348b538, 0x59f111f1b605d019
-> > +     .quad           0x923f82a4af194f9b, 0xab1c5ed5da6d8118
-> > +     .quad           0xd807aa98a3030242, 0x12835b0145706fbe
-> > +     .quad           0x243185be4ee4b28c, 0x550c7dc3d5ffb4e2
-> > +     .quad           0x72be5d74f27b896f, 0x80deb1fe3b1696b1
-> > +     .quad           0x9bdc06a725c71235, 0xc19bf174cf692694
-> > +     .quad           0xe49b69c19ef14ad2, 0xefbe4786384f25e3
-> > +     .quad           0x0fc19dc68b8cd5b5, 0x240ca1cc77ac9c65
-> > +     .quad           0x2de92c6f592b0275, 0x4a7484aa6ea6e483
-> > +     .quad           0x5cb0a9dcbd41fbd4, 0x76f988da831153b5
-> > +     .quad           0x983e5152ee66dfab, 0xa831c66d2db43210
-> > +     .quad           0xb00327c898fb213f, 0xbf597fc7beef0ee4
-> > +     .quad           0xc6e00bf33da88fc2, 0xd5a79147930aa725
-> > +     .quad           0x06ca6351e003826f, 0x142929670a0e6e70
-> > +     .quad           0x27b70a8546d22ffc, 0x2e1b21385c26c926
-> > +     .quad           0x4d2c6dfc5ac42aed, 0x53380d139d95b3df
-> > +     .quad           0x650a73548baf63de, 0x766a0abb3c77b2a8
-> > +     .quad           0x81c2c92e47edaee6, 0x92722c851482353b
-> > +     .quad           0xa2bfe8a14cf10364, 0xa81a664bbc423001
-> > +     .quad           0xc24b8b70d0f89791, 0xc76c51a30654be30
-> > +     .quad           0xd192e819d6ef5218, 0xd69906245565a910
-> > +     .quad           0xf40e35855771202a, 0x106aa07032bbd1b8
-> > +     .quad           0x19a4c116b8d2d0c8, 0x1e376c085141ab53
-> > +     .quad           0x2748774cdf8eeb99, 0x34b0bcb5e19b48a8
-> > +     .quad           0x391c0cb3c5c95a63, 0x4ed8aa4ae3418acb
-> > +     .quad           0x5b9cca4f7763e373, 0x682e6ff3d6b2b8a3
-> > +     .quad           0x748f82ee5defb2fc, 0x78a5636f43172f60
-> > +     .quad           0x84c87814a1f0ab72, 0x8cc702081a6439ec
-> > +     .quad           0x90befffa23631e28, 0xa4506cebde82bde9
-> > +     .quad           0xbef9a3f7b2c67915, 0xc67178f2e372532b
-> > +     .quad           0xca273eceea26619c, 0xd186b8c721c0c207
-> > +     .quad           0xeada7dd6cde0eb1e, 0xf57d4f7fee6ed178
-> > +     .quad           0x06f067aa72176fba, 0x0a637dc5a2c898a6
-> > +     .quad           0x113f9804bef90dae, 0x1b710b35131c471b
-> > +     .quad           0x28db77f523047d84, 0x32caab7b40c72493
-> > +     .quad           0x3c9ebe0a15c9bebc, 0x431d67c49c100d4c
-> > +     .quad           0x4cc5d4becb3e42b6, 0x597f299cfc657e2a
-> > +     .quad           0x5fcb6fab3ad6faec, 0x6c44198c4a475817
-> > +
-> > +     .macro          dround, i0, i1, i2, i3, i4, rc0, rc1, in0, in1, i=
-n2, in3, in4
-> > +     .ifnb           \rc1
-> > +     ld1             {v\rc1\().2d}, [x4], #16
-> > +     .endif
-> > +     add             v5.2d, v\rc0\().2d, v\in0\().2d
-> > +     ext             v6.16b, v\i2\().16b, v\i3\().16b, #8
-> > +     ext             v5.16b, v5.16b, v5.16b, #8
-> > +     ext             v7.16b, v\i1\().16b, v\i2\().16b, #8
-> > +     add             v\i3\().2d, v\i3\().2d, v5.2d
-> > +     .ifnb           \in1
-> > +     ext             v5.16b, v\in3\().16b, v\in4\().16b, #8
-> > +     sha512su0       v\in0\().2d, v\in1\().2d
-> > +     .endif
-> > +     sha512h         q\i3, q6, v7.2d
-> > +     .ifnb           \in1
-> > +     sha512su1       v\in0\().2d, v\in2\().2d, v5.2d
-> > +     .endif
-> > +     add             v\i4\().2d, v\i1\().2d, v\i3\().2d
-> > +     sha512h2        q\i3, q\i1, v\i0\().2d
-> > +     .endm
-> > +
-> > +     /*
-> > +      * void sha512_ce_transform(struct sha512_state *sst, u8 const *s=
-rc,
-> > +      *                        int blocks)
-> > +      */
-> > +     .text
-> > +ENTRY(sha512_ce_transform)
-> > +     /* load state */
-> > +     ld1             {v8.2d-v11.2d}, [x0]
-> > +
-> > +     /* load first 4 round constants */
-> > +     adr_l           x3, .Lsha512_rcon
-> > +     ld1             {v20.2d-v23.2d}, [x3], #64
-> > +
-> > +     /* load input */
-> > +0:   ld1             {v12.2d-v15.2d}, [x1], #64
-> > +     ld1             {v16.2d-v19.2d}, [x1], #64
-> > +     sub             w2, w2, #1
-> > +#if __BYTE_ORDER =3D=3D __LITTLE_ENDIAN
-> > +        rev64                v12.16b, v12.16b
-> > +        rev64                v13.16b, v13.16b
-> > +        rev64                v14.16b, v14.16b
-> > +        rev64                v15.16b, v15.16b
-> > +        rev64                v16.16b, v16.16b
-> > +        rev64                v17.16b, v17.16b
-> > +        rev64                v18.16b, v18.16b
-> > +        rev64                v19.16b, v19.16b
-> > +#endif
-> > +     mov             x4, x3                          // rc pointer
-> > +
-> > +     mov             v0.16b, v8.16b
-> > +     mov             v1.16b, v9.16b
-> > +     mov             v2.16b, v10.16b
-> > +     mov             v3.16b, v11.16b
-> > +
-> > +     // v0  ab  cd  --  ef  gh  ab
-> > +     // v1  cd  --  ef  gh  ab  cd
-> > +     // v2  ef  gh  ab  cd  --  ef
-> > +     // v3  gh  ab  cd  --  ef  gh
-> > +     // v4  --  ef  gh  ab  cd  --
-> > +
-> > +     dround          0, 1, 2, 3, 4, 20, 24, 12, 13, 19, 16, 17
-> > +     dround          3, 0, 4, 2, 1, 21, 25, 13, 14, 12, 17, 18
-> > +     dround          2, 3, 1, 4, 0, 22, 26, 14, 15, 13, 18, 19
-> > +     dround          4, 2, 0, 1, 3, 23, 27, 15, 16, 14, 19, 12
-> > +     dround          1, 4, 3, 0, 2, 24, 28, 16, 17, 15, 12, 13
-> > +
-> > +     dround          0, 1, 2, 3, 4, 25, 29, 17, 18, 16, 13, 14
-> > +     dround          3, 0, 4, 2, 1, 26, 30, 18, 19, 17, 14, 15
-> > +     dround          2, 3, 1, 4, 0, 27, 31, 19, 12, 18, 15, 16
-> > +     dround          4, 2, 0, 1, 3, 28, 24, 12, 13, 19, 16, 17
-> > +     dround          1, 4, 3, 0, 2, 29, 25, 13, 14, 12, 17, 18
-> > +
-> > +     dround          0, 1, 2, 3, 4, 30, 26, 14, 15, 13, 18, 19
-> > +     dround          3, 0, 4, 2, 1, 31, 27, 15, 16, 14, 19, 12
-> > +     dround          2, 3, 1, 4, 0, 24, 28, 16, 17, 15, 12, 13
-> > +     dround          4, 2, 0, 1, 3, 25, 29, 17, 18, 16, 13, 14
-> > +     dround          1, 4, 3, 0, 2, 26, 30, 18, 19, 17, 14, 15
-> > +
-> > +     dround          0, 1, 2, 3, 4, 27, 31, 19, 12, 18, 15, 16
-> > +     dround          3, 0, 4, 2, 1, 28, 24, 12, 13, 19, 16, 17
-> > +     dround          2, 3, 1, 4, 0, 29, 25, 13, 14, 12, 17, 18
-> > +     dround          4, 2, 0, 1, 3, 30, 26, 14, 15, 13, 18, 19
-> > +     dround          1, 4, 3, 0, 2, 31, 27, 15, 16, 14, 19, 12
-> > +
-> > +     dround          0, 1, 2, 3, 4, 24, 28, 16, 17, 15, 12, 13
-> > +     dround          3, 0, 4, 2, 1, 25, 29, 17, 18, 16, 13, 14
-> > +     dround          2, 3, 1, 4, 0, 26, 30, 18, 19, 17, 14, 15
-> > +     dround          4, 2, 0, 1, 3, 27, 31, 19, 12, 18, 15, 16
-> > +     dround          1, 4, 3, 0, 2, 28, 24, 12, 13, 19, 16, 17
-> > +
-> > +     dround          0, 1, 2, 3, 4, 29, 25, 13, 14, 12, 17, 18
-> > +     dround          3, 0, 4, 2, 1, 30, 26, 14, 15, 13, 18, 19
-> > +     dround          2, 3, 1, 4, 0, 31, 27, 15, 16, 14, 19, 12
-> > +     dround          4, 2, 0, 1, 3, 24, 28, 16, 17, 15, 12, 13
-> > +     dround          1, 4, 3, 0, 2, 25, 29, 17, 18, 16, 13, 14
-> > +
-> > +     dround          0, 1, 2, 3, 4, 26, 30, 18, 19, 17, 14, 15
-> > +     dround          3, 0, 4, 2, 1, 27, 31, 19, 12, 18, 15, 16
-> > +     dround          2, 3, 1, 4, 0, 28, 24, 12
-> > +     dround          4, 2, 0, 1, 3, 29, 25, 13
-> > +     dround          1, 4, 3, 0, 2, 30, 26, 14
-> > +
-> > +     dround          0, 1, 2, 3, 4, 31, 27, 15
-> > +     dround          3, 0, 4, 2, 1, 24,   , 16
-> > +     dround          2, 3, 1, 4, 0, 25,   , 17
-> > +     dround          4, 2, 0, 1, 3, 26,   , 18
-> > +     dround          1, 4, 3, 0, 2, 27,   , 19
-> > +
-> > +     /* update state */
-> > +     add             v8.2d, v8.2d, v0.2d
-> > +     add             v9.2d, v9.2d, v1.2d
-> > +     add             v10.2d, v10.2d, v2.2d
-> > +     add             v11.2d, v11.2d, v3.2d
-> > +
-> > +     /* handled all input blocks? */
-> > +     cbnz            w2, 0b
-> > +
-> > +     /* store new state */
-> > +3:   st1             {v8.2d-v11.2d}, [x0]
-> > +     mov             w0, w2
-> > +     ret
-> > +ENDPROC(sha512_ce_transform)
-> > diff --git a/arch/arm/cpu/armv8/sha512_ce_glue.c b/arch/arm/cpu/armv8/s=
-ha512_ce_glue.c
-> > new file mode 100644
-> > index 0000000000..4db78c8efd
-> > --- /dev/null
-> > +++ b/arch/arm/cpu/armv8/sha512_ce_glue.c
-> > @@ -0,0 +1,20 @@
-> > +// SPDX-License-Identifier: GPL-2.0-only
-> > +/*
-> > + * sha512_ce_glue.c - SHA-512 secure hash using ARMv8 Crypto Extension=
-s
-> > + *
-> > + * Copyright (C) 2024 Igor Opaniuk <igor.opaniuk@gmail.com>
-> > + */
-> > +
-> > +#include <u-boot/sha512.h>
-> > +
-> > +extern void sha512_ce_transform(u64 state[SHA512_SUM_LEN / 8], u8 cons=
-t *src,
-> > +                             u32 blocks);
-> > +
-> > +void sha512_block_fn(sha512_context *ctx, const unsigned char *data,
-> > +                  unsigned int blocks)
-> > +{
-> > +     if (!blocks)
-> > +             return;
-> > +
-> > +     sha512_ce_transform(ctx->state, data, blocks);
-> > +}
-> > diff --git a/lib/sha512.c b/lib/sha512.c
-> > index ffe2c5cd96..186ca4d2ca 100644
-> > --- a/lib/sha512.c
-> > +++ b/lib/sha512.c
-> > @@ -16,6 +16,8 @@
-> >  #include <compiler.h>
-> >  #include <u-boot/sha512.h>
-> >
-> > +#include <linux/compiler_attributes.h>
-> > +
-> >  const uint8_t sha384_der_prefix[SHA384_DER_LEN] =3D {
-> >       0x30, 0x41, 0x30, 0x0d, 0x06, 0x09, 0x60, 0x86,
-> >       0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x02, 0x05,
-> > @@ -187,8 +189,8 @@ sha512_transform(uint64_t *state, const uint8_t *in=
-put)
-> >       a =3D b =3D c =3D d =3D e =3D f =3D g =3D h =3D t1 =3D t2 =3D 0;
-> >  }
-> >
-> > -static void sha512_block_fn(sha512_context *sst, const uint8_t *src,
-> > -                                 int blocks)
-> > +__weak void sha512_block_fn(sha512_context *sst, const uint8_t *src,
-> > +                         int blocks)
 >
-> I really think using a weak symbol for this is the wrong approach. You
-> should instead allow the NEON version to be compiled in and called if
-> ID_AA64ISAR0_EL1.SHA2 tells you that FEAT_SHA512 is supported.
-I followed the same approach as Loic Poulain did already in his
-084d8e6bf9ea("armv8 SHA-1 using ARMv8 Crypto Extensions:").
+> Like the sha256 one, this should be default y I think, the performance
+> improvement is likely worth the size increase.
+That was done on purpose, as SHA512* instructions (comparing to SHA256*)
+were introduced only in ARMv8.2-A, and most of the currently supported ARMv=
+8
+SoCs in U-Boot don't support it.
+We probably would end up with most of them reporting Synchronous
+Abort crashes.
 
-I plan to rework it in future and add dynamic selection of proper
-implementation based on capabilities reported in the ID register.
+As Marc suggested in the previous email, we should have
+both versions compiled-in (sw and hw-accelerated) and dynamic selection of
+proper version in runtime based on CPU capabilities, and I plan to
+address that in future in a separate patch series.
 
-And adding the NEON version definitely makes sense, thanks!
-This is what I probably needed to start with.
-
->
-> It isn't like checking an ID register is going to majorly affect the
-> timing of this, and the same u-boot build can boot on systems that
-> have the extension or not. Remember that u-boot can be used in VMs,
-> where the HW capabilities are variable.
->
-> Thanks,
->
->         M.
 >
 > --
-> Without deviation from the norm, progress is not possible.
-
-Thanks for your review/comments!
+> Tom
 
 Regards,
 Igor
+
 --=20
 Best regards - Freundliche Gr=C3=BCsse - Meilleures salutations
 
