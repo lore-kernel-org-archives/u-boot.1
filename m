@@ -4,46 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FAC4C4829A
-	for <u-boot@archiver.kernel.org>; Sun, 11 Feb 2024 13:14:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B4D5C4829A
+	for <u-boot@archiver.kernel.org>; Sun, 11 Feb 2024 13:37:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E52587C69;
-	Sun, 11 Feb 2024 14:14:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 6F1EA87C45;
+	Sun, 11 Feb 2024 14:37:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Gry8JmHn";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AEBFB87C6D; Sun, 11 Feb 2024 14:14:33 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 52FD487C68
- for <u-boot@lists.denx.de>; Sun, 11 Feb 2024 14:14:31 +0100 (CET)
+ id E9F8287C45; Sun, 11 Feb 2024 14:04:43 +0100 (CET)
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
+ [IPv6:2a00:1450:4864:20::132])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 0054A87C69
+ for <u-boot@lists.denx.de>; Sun, 11 Feb 2024 14:04:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6C19BDA7;
- Sun, 11 Feb 2024 05:15:12 -0800 (PST)
-Received: from minigeek.lan (unknown [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 5EE4D3F5A1;
- Sun, 11 Feb 2024 05:14:29 -0800 (PST)
-Date: Sun, 11 Feb 2024 13:13:08 +0000
-From: Andre Przywara <andre.przywara@arm.com>
-To: Andrey Skvortsov <andrej.skvortzov@gmail.com>
-Cc: Hans de Goede <hdegoede@redhat.com>, Jagan Teki
- <jagan@amarulasolutions.com>, Samuel Holland <samuel@sholland.org>,
- u-boot@lists.denx.de, Arnaud Ferraris <arnaud.ferraris@collabora.com>,
- Ondrej Jirman <megi@xff.cz>, Arnav Singh <me@arnavion.dev>, Samuel
- Dionne-Riel <samuel@dionne-riel.com>
-Subject: Re: [PATCH RFC] sunxi: pinephone: detect existed magnetometer and
- fixup dtb
-Message-ID: <20240211131251.797abb61@minigeek.lan>
-In-Reply-To: <20240211092824.395155-1-andrej.skvortzov@gmail.com>
-References: <20240211092824.395155-1-andrej.skvortzov@gmail.com>
-Organization: Arm Ltd.
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
+ spf=pass smtp.mailfrom=resch.max@gmail.com
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-51182f8590bso1050070e87.0
+ for <u-boot@lists.denx.de>; Sun, 11 Feb 2024 05:04:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1707656680; x=1708261480; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Sbl+HbitvHN9cF/CUXTJoKq2jauf8ev1bETOfKaFJmg=;
+ b=Gry8JmHnKu+4jDYyAMitOKpSpUxZkUlh9sGybYjog2LiIFuMIA0b1F7TO0VrmxYMRf
+ 1L75/2x7ZuIgZAS9ohaDltgEfdNLYnMhAz+bkbu5mIBTnDtlekiwKgN201m5td4ieHqR
+ e8gUxrg8OBlU/MhwhaaSdp4C2XhOuNwRSjcSTBk7m60Hg2HjOLFbHC0zdsQpm8wIhz+c
+ EcoFvegQDjNDyHX7tA4L8wRjSD00O/8uCPPUNoLQwZF08TItLq38j0OrXHYpSGfxlkac
+ sXceHBjBiEcXhcoG0cMy2RgdyL1QXr/girN24Xu2Nop+qpSgav3K8owU0zw4WnnBoYB7
+ zqGQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1707656680; x=1708261480;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Sbl+HbitvHN9cF/CUXTJoKq2jauf8ev1bETOfKaFJmg=;
+ b=PM0huAcCXGFbUxLx6Tm9ZGNvwLyY7XIkrCY0kw7lEXrl1FL+zr8hqhhQRvCCXzmqae
+ a3OXJHrF59/J3UvMo7/dGfIGvPEHMdRzA3T2J3/6IgE4ESu0ba8FaeXEJHz4NJXk+uWa
+ i7SI2fNtB78p4gV/Coszr35pEClMgSGD+Bwnsarfx0pncnyZAk/tNS1TBmI64RUmsgY9
+ AChux0BVsKkTjsJvRMsa5Bd7GAQUZVfqF9Zlmx5lXMVdWhum5L4jZKEuI38Dseh17vV4
+ M+XHPmIzuHRF0JkcD9i8Bx3o1PEaFn1JTpZrqbBD2GR58gas7k0ppXFCP5RfMYbvlQEN
+ t0og==
+X-Gm-Message-State: AOJu0YwKMIRb37Fdkw6uMLNRynrXIm0776mVV8hMQ/bZl8dZSmG5m3AK
+ rlvbClH5+2SU8x53w2+DR8RSekB2Ahldr/hadvO1BcBnBqObEbFKHRD9UNHY
+X-Google-Smtp-Source: AGHT+IHzPAT/If5QxihCAbV+uRfNVBBOwIDacbwVyn9zbav7SwlI6u3Cxj1cGbBolG67jjLm44jZVQ==
+X-Received: by 2002:a05:6512:3d11:b0:511:51ec:8684 with SMTP id
+ d17-20020a0565123d1100b0051151ec8684mr3084970lfv.50.1707656680158; 
+ Sun, 11 Feb 2024 05:04:40 -0800 (PST)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWZ2XFEtBlvoA4P6BsHYg+aL+BGMxtPkpJSJ+zbpMSpw/kvqwNb9uBgV9N9EaKRB28rAC+mYEjH0buontFR5w2B01Bu
+Received: from niflheim.lan ([2001:871:223:9d90:4a25:3e0d:c47c:bed7])
+ by smtp.gmail.com with ESMTPSA id
+ p7-20020a05600c468700b004105528c61fsm5825771wmo.35.2024.02.11.05.04.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 11 Feb 2024 05:04:39 -0800 (PST)
+From: Max Resch <resch.max@gmail.com>
+To: u-boot@lists.denx.de
+Cc: sr@denx.de,
+	Max Resch <resch.max@gmail.com>
+Subject: [PATCH v4] rng: Add Turris Mox rTWM RNG driver
+Date: Sun, 11 Feb 2024 14:04:13 +0100
+Message-ID: <20240211130436.698777-1-resch.max@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sun, 11 Feb 2024 14:37:52 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -60,148 +92,181 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 11 Feb 2024 12:28:24 +0300
-Andrey Skvortsov <andrej.skvortzov@gmail.com> wrote:
+A RNG driver for Armada 3720 boards running the Turris Mox rWTM firmware
+from CZ.NIC in the secure processor.
 
-Hi Andrey,
+Signed-off-by: Max Resch <resch.max@gmail.com>
+---
 
-thanks for taking care of this upstream!
+Changes in v4:
+ - wrongful/missing git rebase
 
-> In newer 1.2 PinePhone board revisions LIS3MDL magnetometer was replaced by
-> AF8133J. They use the same PB1 pin in different modes.
-> 
-> LIS3MDL uses it as an gpio input to handle interrupt.
-> AF8133J uses it as an gpio output as a reset signal.
-> 
-> It wasn't possible at runtime to enable both device tree
-> nodes and detect supported sensor at probe time.
-> 
-> AF8133J has reset pin (PB1) connected to the SoC. By default AF8133J
-> is in a reset state and don't respond to probe request on I2C
-> bus. Extra code would be needed to handle reset signal. Therefore this
-> code uses LIS3MDL magnetometer instead of AF8133J.
+Changes in v3:
+ - More meaningful variable names in accordance with review
 
-Thanks for the research and explanation, that makes it much easier to
-reason about!
+Changes in v2:
+ - Removed ring buffer implementation
 
-> Introducing new dts 1.2b with AF8133J sensor would require probing in
-> SPL. That would lead to pulling in into SPL I2C controller driver,
-> RSB controller driver, introducing new AXP803 driver to power-up
-> sensors for probe. It's working, but SPL is pretty size-constrained on
-> A64 and doesn't have much space. Therefore fdt fixup is done in U-Boot
-> proper without introducing new board revision and new dts.
+ drivers/rng/Kconfig           |   8 +++
+ drivers/rng/Makefile          |   1 +
+ drivers/rng/turris_rwtm_rng.c | 122 ++++++++++++++++++++++++++++++++++
+ 3 files changed, 131 insertions(+)
+ create mode 100644 drivers/rng/turris_rwtm_rng.c
 
-I agree on that, especially if it's indeed just a matter of flipping
-two "status" properties.
-
-> Signed-off-by: Andrey Skvortsov <andrej.skvortzov@gmail.com>
-> ---
-> 
-> AF8133J's driver isn't upstreamed yet, but it will be soon. Therefore this
-> is RFC patch. I'd like to know whether selected approach will be accepted
-> in u-boot before submiting coresponding dts changes to the Linux kernel.
-> Any feedback on this change would be very welcome.
-
-So I think this is the right approach: Since the SPL has no use of this
-device, and it's a rather small DT change, we definitely want to do this
-in U-Boot proper. And I believe that U-Boot (proper) is indeed the best
-place to do those adjustments, since it's built for one board anyway,
-so anything board specific belongs into there (and not into TF-A or the
-SPL, which are more tailored to one *SoC*). Also we are not so size
-sensitive in proper.
-And I also like the fact that it's protected by a board specific
-definition, and even better that it's an already existing one.
-
-Oh, and I am not really convinced this is the right approach here, but
-maybe have a look at doc/usage/cmd/extension.rst, for another related
-mechanism.
-
-Some smaller comments below ...
-
-> 
->  board/sunxi/board.c         | 26 ++++++++++++++++++++++++++
->  configs/pinephone_defconfig |  1 +
->  2 files changed, 27 insertions(+)
-> 
-> diff --git a/board/sunxi/board.c b/board/sunxi/board.c
-> index 1305302060..a4bfa24400 100644
-> --- a/board/sunxi/board.c
-> +++ b/board/sunxi/board.c
-> @@ -15,6 +15,7 @@
->  #include <dm.h>
->  #include <env.h>
->  #include <hang.h>
-> +#include <i2c.h>
->  #include <image.h>
->  #include <init.h>
->  #include <log.h>
-> @@ -920,6 +921,28 @@ static void bluetooth_dt_fixup(void *blob)
->  			   "local-bd-address", bdaddr, ETH_ALEN, 1);
->  }
->  
-> +#ifdef CONFIG_PINEPHONE_DT_SELECTION
-
-Can you move that line into the function? That would for one avoid the
-protection in the caller below, and secondly make it easier to add
-other boards, if a need arises for them. The two #defines don't hurt or
-change the code, so just keep them outside.
-
-> +
-> +#define PINEPHONE_LIS3MDL_I2C_ADDR	0x1E
-> +#define PINEPHONE_LIS3MDL_I2C_BUS	1 /* I2C1 */
-> +
-> +static	void board_dt_fixup(void *blob)
-> +{
-> +	struct udevice *bus, *dev;
-> +
-
-(have the #ifdef here)
-
-> +	if (!fdt_node_check_compatible(blob, 0, "pine64,pinephone-1.2"))
-
-Please have curly braces around that.
-
-So I'd say please send the (disabled) DT node addition patch to the
-kernel MLs, then send this patch to U-Boot.
-
-Cheers,
-Andre
-
-> +		if (!uclass_get_device_by_seq(UCLASS_I2C, PINEPHONE_LIS3MDL_I2C_BUS, &bus)) {
-> +			dm_i2c_probe(bus, PINEPHONE_LIS3MDL_I2C_ADDR, 0, &dev);
-> +			fdt_set_status_by_compatible(
-> +				blob, "st,lis3mdl-magn",
-> +				dev ? FDT_STATUS_OKAY  : FDT_STATUS_DISABLED);
-> +			fdt_set_status_by_compatible(
-> +				blob, "voltafield,af8133j",
-> +				dev ? FDT_STATUS_DISABLED : FDT_STATUS_OKAY);
-> +		}
-> +}
-> +#endif
-> +
->  int ft_board_setup(void *blob, struct bd_info *bd)
->  {
->  	int __maybe_unused r;
-> @@ -934,6 +957,9 @@ int ft_board_setup(void *blob, struct bd_info *bd)
->  
->  	bluetooth_dt_fixup(blob);
->  
-> +#ifdef CONFIG_PINEPHONE_DT_SELECTION
-> +	board_dt_fixup(blob);
-> +#endif
->  #ifdef CONFIG_VIDEO_DT_SIMPLEFB
->  	r = sunxi_simplefb_setup(blob);
->  	if (r)
-> diff --git a/configs/pinephone_defconfig b/configs/pinephone_defconfig
-> index eebc676901..457e7ee1e7 100644
-> --- a/configs/pinephone_defconfig
-> +++ b/configs/pinephone_defconfig
-> @@ -12,6 +12,7 @@ CONFIG_MMC_SUNXI_SLOT_EXTRA=2
->  CONFIG_PINEPHONE_DT_SELECTION=y
->  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
->  CONFIG_OF_LIST="sun50i-a64-pinephone-1.1 sun50i-a64-pinephone-1.2"
-> +CONFIG_SYS_I2C_MVTWSI=y
->  CONFIG_LED_STATUS=y
->  CONFIG_LED_STATUS_GPIO=y
->  CONFIG_LED_STATUS0=y
+diff --git a/drivers/rng/Kconfig b/drivers/rng/Kconfig
+index a89c899568..cd72852a47 100644
+--- a/drivers/rng/Kconfig
++++ b/drivers/rng/Kconfig
+@@ -105,4 +105,12 @@ config RNG_JH7110
+ 	help
+ 	  Enable True Random Number Generator in StarFive JH7110 SoCs.
+ 
++config RNG_TURRIS_RWTM
++	bool "Turris Mox TRNG in Secure Processor"
++	depends on DM_RNG && ARMADA_3700
++	help
++	  Use TRNG in Turris Mox Secure Processor Firmware. Can be used
++	  on other Armada-3700 devices (like EspressoBin) if Secure
++	  Firmware from CZ.NIC is used.
++
+ endif
+diff --git a/drivers/rng/Makefile b/drivers/rng/Makefile
+index 7e64c4cdfc..ecae1a3da3 100644
+--- a/drivers/rng/Makefile
++++ b/drivers/rng/Makefile
+@@ -17,3 +17,4 @@ obj-$(CONFIG_RNG_SMCCC_TRNG) += smccc_trng.o
+ obj-$(CONFIG_RNG_ARM_RNDR) += arm_rndr.o
+ obj-$(CONFIG_TPM_RNG) += tpm_rng.o
+ obj-$(CONFIG_RNG_JH7110) += jh7110_rng.o
++obj-$(CONFIG_RNG_TURRIS_RWTM) += turris_rwtm_rng.o
+diff --git a/drivers/rng/turris_rwtm_rng.c b/drivers/rng/turris_rwtm_rng.c
+new file mode 100644
+index 0000000000..ec2cb0bca3
+--- /dev/null
++++ b/drivers/rng/turris_rwtm_rng.c
+@@ -0,0 +1,122 @@
++// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
++/*
++ * Copyright (c) 2024, Max Resch
++ */
++
++#include <dm.h>
++#include <malloc.h>
++#include <rng.h>
++#include <asm/dma-mapping.h>
++#include <asm/types.h>
++#include <mach/mbox.h>
++
++/* size of entropy buffer */
++#define RNG_BUFFER_SIZE	128U
++
++struct turris_rwtm_rng_priv {
++	phys_addr_t buffer;
++};
++
++static int turris_rwtm_rng_fill_entropy(phys_addr_t entropy, size_t size)
++{
++	u32 args[3] = { 1, (u32)entropy, size };
++	int ret;
++
++	/* flush data cache */
++	flush_dcache_range(entropy, entropy + size);
++
++	/*
++	 * get entropy
++	 * args[0] = 1 copies BYTES array in args[1] of length args[2]
++	 */
++	ret = mbox_do_cmd(MBOX_CMD_GET_RANDOM, args, 3, NULL, 0);
++	if (ret < 0)
++		return ret;
++
++	/* invalidate data cache */
++	invalidate_dcache_range(entropy, entropy + size);
++
++	return 0;
++}
++
++static int turris_rwtm_rng_random_read(struct udevice *dev, void *data, size_t count)
++{
++	struct turris_rwtm_rng_priv *priv = dev_get_priv(dev);
++	phys_addr_t phys;
++	size_t size;
++	int ret;
++
++	phys = priv->buffer;
++
++	while (count) {
++		size = min_t(size_t, RNG_BUFFER_SIZE, count);
++
++		ret = turris_rwtm_rng_fill_entropy(phys, size);
++
++		memcpy(data, (void *)phys, size);
++		count -= size;
++		data = (u8 *)data + size;
++	}
++
++	return 0;
++}
++
++static int turris_rwtm_rng_probe(struct udevice *dev)
++{
++	struct turris_rwtm_rng_priv *priv = dev_get_priv(dev);
++	u32 args[] = { 0 };
++	int ret;
++
++	/*
++	 * check if the random command is supported
++	 * args[0] = 0 would copy 16 DWORDS entropy to out but we ignore them
++	 */
++	ret = mbox_do_cmd(MBOX_CMD_GET_RANDOM, args, ARRAY_SIZE(args), NULL, 0);
++
++	if (ret < 0)
++		return ret;
++
++	/* entropy buffer */
++	priv->buffer = 0;
++
++	/* buffer address need to be aligned */
++	dma_alloc_coherent(RNG_BUFFER_SIZE, (unsigned long *)&priv->buffer);
++	if (!priv->buffer)
++		return -ENOMEM;
++
++	return 0;
++}
++
++static int turris_rwtm_rng_remove(struct udevice *dev)
++{
++	struct turris_rwtm_rng_priv *priv = dev_get_priv(dev);
++	phys_addr_t phys = priv->buffer;
++
++	dma_free_coherent((void *)phys);
++
++	return 0;
++}
++
++static const struct dm_rng_ops turris_rwtm_rng_ops = {
++	.read = turris_rwtm_rng_random_read,
++};
++
++/*
++ * only Turris MOX firmware has the RNG but allow all probable devices to be
++ * probed the default firmware will just reject the probe
++ */
++static const struct udevice_id turris_rwtm_rng_match[] = {
++	{ .compatible = "cznic,turris-mox-rwtm" },
++	{ .compatible = "marvell,armada-3700-rwtm-firmware" },
++	{},
++};
++
++U_BOOT_DRIVER(turris_rwtm_rng) = {
++	.name	= "turris-rwtm-rng",
++	.id	= UCLASS_RNG,
++	.of_match = turris_rwtm_rng_match,
++	.ops	= &turris_rwtm_rng_ops,
++	.probe	= turris_rwtm_rng_probe,
++	.remove = turris_rwtm_rng_remove,
++	.priv_auto = sizeof(struct turris_rwtm_rng_priv),
++};
+-- 
+2.43.0
 
