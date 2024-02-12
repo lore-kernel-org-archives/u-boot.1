@@ -4,49 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 521B7C4829B
-	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 07:51:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1835CC4829B
+	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 08:06:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F21E87ECD;
-	Mon, 12 Feb 2024 08:48:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 5ABC887EBD;
+	Mon, 12 Feb 2024 09:06:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aFls5KFm";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4387A87ECD; Mon, 12 Feb 2024 08:48:56 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 47BA387ECC
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 08:48:53 +0100 (CET)
+ id 53AB387EBA; Mon, 12 Feb 2024 09:06:07 +0100 (CET)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 0CD0787EC1
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 09:06:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 555EADA7;
- Sun, 11 Feb 2024 23:49:34 -0800 (PST)
-Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 88DFF3F762;
- Sun, 11 Feb 2024 23:48:49 -0800 (PST)
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Masahisa Kojima <masahisa.kojima@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Yann Gautier <yann.gautier@st.com>,
- Etienne Carriere <etienne.carriere@foss.st.com>,
- Michal Simek <michal.simek@amd.com>,
- Jassi Brar <jaswinder.singh@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v2 21/21] doc: fwu: make changes for supporting FWU Metadata
- version 2
-Date: Mon, 12 Feb 2024 13:17:12 +0530
-Message-Id: <20240212074712.3657076-22-sughosh.ganu@linaro.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240212074712.3657076-1-sughosh.ganu@linaro.org>
-References: <20240212074712.3657076-1-sughosh.ganu@linaro.org>
+ spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-33b670e4093so669006f8f.0
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 00:06:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1707725164; x=1708329964; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=WZJaeKzr7MglYQY4lYHEPX8fAbj4bozDiunr3fDcGMk=;
+ b=aFls5KFm18G7bzeUPZAzTQSM0txHMasEDbx+AHVxWod8SiHyQLEHVydXtRGgncMTT6
+ oD7hJuoVySabxsokyKHzJhVHgI8f6lyUfujY7+5lRtL9s7/I2f7kx+cndR64MMRaKb1t
+ 56TAjYnaN29fSQKBEEmCpq5NAavp+epAvg8gvd3cVdDFM39OBnlRteczT2Hu8R5WFBFM
+ 64Ptk+5td49pHo7UuWY1VbbokzyZHNqv7HATAxBHNBsHWb+QXSMgS4sMfNXNOvX7RqH7
+ 6JJKBaq0A5hBgnXMpAvktA6OsbcUqN6kpbHz2VRDtjGTgnY/T+ocEmmG6/ONyTWcUZie
+ I11g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1707725164; x=1708329964;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=WZJaeKzr7MglYQY4lYHEPX8fAbj4bozDiunr3fDcGMk=;
+ b=BQJ4DuA7b3JuKXWj/BACSdz7OLs3A3vBmE51hhu34Tag7CZ491m56LcLNBtHPoDSpA
+ 9Z7f3TOyzVNKwkRRwenEzcY2Tg/SbPWiNiQIxHPSsqPUj5Qo413+wWzGk6A6vDm7dNvO
+ tmRCa8GaiXHMgYrYuCM6EltFUo/V1p0Bpwy8hYULPOEpsd2oI5TKAX93Yt75Wiv9lSly
+ neTUGifUyFzHyp9+ckJeMhC1axei3syAojtrs6i2Tqt5x1Q2oli4QeNTYAMa74PHCi8g
+ LZ0j/khcUBLZfKftirGOd9ldJ43Ac2O7O17eAjYYzWU+iqgD0KT05NUjIdvZMVoav/7l
+ 28aA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU26B29e7vcJ1sUBAoKvBr4MES7pL3UKi9sz4i8Vkwm8kqO/UbqRO6IYBopjwGMVcu0RbXl4Zz5Cny9dxd2nobFN6PT9Q==
+X-Gm-Message-State: AOJu0YxA6DzDfTXbDvfVyXmSC5Vlxs5XdqPl75Vut2Ti2JoRAubtloOX
+ YKvizl5TkbKaad/TH7yXvmGT2WEKqZPkFPV/lJLjHB9JTN0ZPWKvkbL3fSepoV4s4kBormMy7LX
+ rQFWt1qE8sAC4d7Z8gWiTIkcJJ3U=
+X-Google-Smtp-Source: AGHT+IFJZtsYn1HQ0XyzT/k5Gv5ZciNh01ID9wXWZGX6/lv4v8Jl7JxG4hJD36CQFuiJ8VCv1AryLak0assNRTT027g=
+X-Received: by 2002:a05:6000:68a:b0:33b:2309:63e6 with SMTP id
+ bo10-20020a056000068a00b0033b230963e6mr5565047wrb.5.1707725164099; Mon, 12
+ Feb 2024 00:06:04 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240209192045.3961832-1-igor.opaniuk@foundries.io>
+ <20240209192045.3961832-2-igor.opaniuk@foundries.io>
+ <b457cb25-ea09-4e27-85aa-0e97a5aa7fe0@moroto.mountain>
+In-Reply-To: <b457cb25-ea09-4e27-85aa-0e97a5aa7fe0@moroto.mountain>
+From: Igor Opaniuk <igor.opaniuk@gmail.com>
+Date: Mon, 12 Feb 2024 09:05:52 +0100
+Message-ID: <CAByghJYSy86JjsC2cvGA0-5RupogR-vkADwQ6f9vSRnW4LtcFA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/7] common: avb_verify: don't call mmc_switch_part for
+ SD
+To: Dan Carpenter <dan.carpenter@linaro.org>
+Cc: Igor Opaniuk <igor.opaniuk@foundries.io>, u-boot@lists.denx.de, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Ivan Khoronzhuk <ivan.khoronzhuk@gmail.com>, 
+ Jens Wiklander <jens.wiklander@linaro.org>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,115 +95,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Make changes to the FWU documentation to reflect the changes made with
-migration of the FWU metadata to version 2.
+Hi Dan,
 
-Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
----
+On Mon, Feb 12, 2024 at 8:05=E2=80=AFAM Dan Carpenter <dan.carpenter@linaro=
+.org> wrote:
+>
+> On Fri, Feb 09, 2024 at 08:20:39PM +0100, Igor Opaniuk wrote:
+> > From: Igor Opaniuk <igor.opaniuk@gmail.com>
+> >
+> > mmc_switch_part() is used for switching between hw partitions
+> > on eMMC (boot0, boot1, user, rpmb).
+> > There is no need to do that for SD card.
+> >
+>
+> Is this a clean up or a bugfix?  What are the visible effects for the
+> user?
+avb cmd fails for SD cards, as mmc_switch_part() fails after trying to acce=
+ss
+EXT_CSD register, which obviously is not available.
+>
+> regards,
+> dan carpenter
+>
 
-Changes since V1: None
 
- doc/board/socionext/developerbox.rst |  9 +++------
- doc/develop/uefi/fwu_updates.rst     | 12 +++++-------
- doc/usage/cmd/fwu_mdata.rst          | 12 ++++++++----
- 3 files changed, 16 insertions(+), 17 deletions(-)
+--=20
+Best regards - Atentamente - Meilleures salutations
 
-diff --git a/doc/board/socionext/developerbox.rst b/doc/board/socionext/developerbox.rst
-index 46712c379b..d8c1bb4986 100644
---- a/doc/board/socionext/developerbox.rst
-+++ b/doc/board/socionext/developerbox.rst
-@@ -113,8 +113,6 @@ configs/synquacer_developerbox_defconfig enables default FWU configuration ::
-  CONFIG_FWU_MULTI_BANK_UPDATE=y
-  CONFIG_FWU_MDATA=y
-  CONFIG_FWU_MDATA_MTD=y
-- CONFIG_FWU_NUM_BANKS=2
-- CONFIG_FWU_NUM_IMAGES_PER_BANK=1
-  CONFIG_CMD_FWU_METADATA=y
- 
- And build it::
-@@ -126,10 +124,9 @@ And build it::
-   make -j `noproc`
-   cd ../
- 
--By default, the CONFIG_FWU_NUM_BANKS and CONFIG_FWU_NUM_IMAGES_PER_BANKS are
--set to 2 and 1 respectively. This uses FIP (Firmware Image Package) type image
--which contains TF-A, U-Boot and OP-TEE (the OP-TEE is optional).
--You can use fiptool to compose the FIP image from those firmware images.
-+This uses FIP (Firmware Image Package) type image which contains TF-A,
-+U-Boot and OP-TEE (the OP-TEE is optional). You can use fiptool to
-+compose the FIP image from those firmware images.
- 
- Rebuild SCP firmware
- --------------------
-diff --git a/doc/develop/uefi/fwu_updates.rst b/doc/develop/uefi/fwu_updates.rst
-index e4709d82b4..7911c954d9 100644
---- a/doc/develop/uefi/fwu_updates.rst
-+++ b/doc/develop/uefi/fwu_updates.rst
-@@ -43,8 +43,6 @@ The feature can be enabled by specifying the following configs::
-     CONFIG_FWU_MULTI_BANK_UPDATE=y
-     CONFIG_FWU_MDATA=y
-     CONFIG_FWU_MDATA_GPT_BLK=y
--    CONFIG_FWU_NUM_BANKS=<val>
--    CONFIG_FWU_NUM_IMAGES_PER_BANK=<val>
- 
- in the .config file
- 
-@@ -94,12 +92,12 @@ of. Each GPT partition entry in the GPT header has two GUIDs::
- * UniquePartitionGUID
- 
- The PartitionTypeGUID value should correspond to the
--``image_type_uuid`` field of the FWU metadata. This field is used to
-+``image_type_guid`` field of the FWU metadata. This field is used to
- identify a given type of updatable firmware image, e.g. U-Boot,
- OP-TEE, FIP etc. This GUID should also be used for specifying the
- `--guid` parameter when generating the capsule.
- 
--The UniquePartitionGUID value should correspond to the ``image_uuid``
-+The UniquePartitionGUID value should correspond to the ``image_guid``
- field in the FWU metadata. This GUID is used to identify images of a
- given image type in different banks.
- 
-@@ -108,8 +106,8 @@ metadata partitions. This would be the PartitionTypeGUID for the
- metadata partitions. Similarly, the UEFI specification defines the ESP
- GUID to be be used.
- 
--When generating the metadata, the ``image_type_uuid`` and the
--``image_uuid`` values should match the *PartitionTypeGUID* and the
-+When generating the metadata, the ``image_type_guid`` and the
-+``image_guid`` values should match the *PartitionTypeGUID* and the
- *UniquePartitionGUID* values respectively.
- 
- Performing the Update
-@@ -181,5 +179,5 @@ empty capsule would be::
- Links
- -----
- 
--* [1] https://developer.arm.com/documentation/den0118/a/ - FWU Specification
-+* [1] https://developer.arm.com/documentation/den0118/ - FWU Specification
- * [2] https://git.codelinaro.org/linaro/dependable-boot/mbfw/uploads/6f7ddfe3be24e18d4319e108a758d02e/mbfw.pdf - Dependable Boot Specification
-diff --git a/doc/usage/cmd/fwu_mdata.rst b/doc/usage/cmd/fwu_mdata.rst
-index f1bf08fde1..1804422b33 100644
---- a/doc/usage/cmd/fwu_mdata.rst
-+++ b/doc/usage/cmd/fwu_mdata.rst
-@@ -26,10 +26,14 @@ The output may look like:
- 
-     => fwu_mdata_read
-             FWU Metadata
--    crc32: 0xec4fb997
--    version: 0x1
--    active_index: 0x0
--    previous_active_index: 0x1
-+    crc32: 0x13c330
-+    version: 0x2
-+    active_index: 0x1
-+    previous_active_index: 0x0
-+    bank_state[0]: 0xfc
-+    bank_state[1]: 0xfc
-+    bank_state[2]: 0xff
-+    bank_state[3]: 0xff
-             Image Info
- 
-     Image Type Guid: 19D5DF83-11B0-457B-BE2C-7559C13142A5
--- 
-2.34.1
+Igor Opaniuk
 
+mailto: igor.opaniuk@gmail.com
+skype: igor.opanyuk
+http://ua.linkedin.com/in/iopaniuk
