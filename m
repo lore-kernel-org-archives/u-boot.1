@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9EADC48297
-	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 07:49:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C925C4829B
+	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 07:50:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8384A87EF6;
-	Mon, 12 Feb 2024 08:48:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 05D6087EF7;
+	Mon, 12 Feb 2024 08:48:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4353C87EFB; Mon, 12 Feb 2024 08:48:25 +0100 (CET)
+ id 4AEE487EF4; Mon, 12 Feb 2024 08:48:30 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 4A00687EF4
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 08:48:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 0BEA987F06
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 08:48:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5652ADA7;
- Sun, 11 Feb 2024 23:49:04 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 186D8DA7;
+ Sun, 11 Feb 2024 23:49:08 -0800 (PST)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 894473F762;
- Sun, 11 Feb 2024 23:48:19 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 4C67F3F762;
+ Sun, 11 Feb 2024 23:48:23 -0800 (PST)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -38,10 +38,9 @@ Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Michal Simek <michal.simek@amd.com>,
  Jassi Brar <jaswinder.singh@linaro.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v2 13/21] efi_firmware: fwu: get the number of FWU banks at
- runtime
-Date: Mon, 12 Feb 2024 13:17:04 +0530
-Message-Id: <20240212074712.3657076-14-sughosh.ganu@linaro.org>
+Subject: [PATCH v2 14/21] cmd: fwu: align the command with metadata version 2
+Date: Mon, 12 Feb 2024 13:17:05 +0530
+Message-Id: <20240212074712.3657076-15-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240212074712.3657076-1-sughosh.ganu@linaro.org>
 References: <20240212074712.3657076-1-sughosh.ganu@linaro.org>
@@ -63,65 +62,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With the migration of the FWU metadata to version 2, the number of
-banks are now obtained at runtime, instead of the config symbols. Make
-use of the API to get the number of banks in the versioning
-functions.
+Make changes to the fwu_mdata_read command to have it align with the
+metadata version 2.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
 
-Changes since V1: None
+Changes since V1:
+* Use the helper functions from the previous patch to access the
+  image information in the metadata.
 
- lib/efi_loader/efi_firmware.c | 14 ++++++++++----
- 1 file changed, 10 insertions(+), 4 deletions(-)
+ cmd/fwu_mdata.c | 45 +++++++++++++++++++++++++++++++++++----------
+ 1 file changed, 35 insertions(+), 10 deletions(-)
 
-diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.c
-index c742e23268..26d2916ee1 100644
---- a/lib/efi_loader/efi_firmware.c
-+++ b/lib/efi_loader/efi_firmware.c
-@@ -207,7 +207,8 @@ void efi_firmware_fill_version_info(struct efi_firmware_image_descriptor *image_
- 	u16 varname[13]; /* u"FmpStateXXXX" */
- 	efi_status_t ret;
- 	efi_uintn_t size, expected_size;
--	uint num_banks = 1;
-+	u8 num_banks = 1;
-+	u16 __maybe_unused num_images;
- 	uint active_index = 0;
- 	struct fmp_state *var_state;
- 
-@@ -229,7 +230,9 @@ void efi_firmware_fill_version_info(struct efi_firmware_image_descriptor *image_
- 		if (ret)
- 			return;
- 
--		num_banks = CONFIG_FWU_NUM_BANKS;
-+		ret = fwu_get_banks_images(&num_banks, &num_images);
-+		if (ret)
-+			return;
- 	}
- 
- 	size = num_banks * sizeof(*var_state);
-@@ -379,7 +382,8 @@ efi_status_t efi_firmware_set_fmp_state_var(struct fmp_state *state, u8 image_in
+diff --git a/cmd/fwu_mdata.c b/cmd/fwu_mdata.c
+index 5ecda455df..6d5ed7a187 100644
+--- a/cmd/fwu_mdata.c
++++ b/cmd/fwu_mdata.c
+@@ -16,6 +16,8 @@
+ static void print_mdata(struct fwu_mdata *mdata)
  {
- 	u16 varname[13]; /* u"FmpStateXXXX" */
- 	efi_status_t ret;
--	uint num_banks = 1;
-+	u8 num_banks = 1;
-+	u16 __maybe_unused num_images;
- 	uint update_bank = 0;
- 	efi_uintn_t size;
- 	efi_guid_t *image_type_id;
-@@ -398,7 +402,9 @@ efi_status_t efi_firmware_set_fmp_state_var(struct fmp_state *state, u8 image_in
- 		if (ret)
- 			return EFI_INVALID_PARAMETER;
+ 	int i, j;
++	uint8_t num_banks;
++	uint16_t num_images;
+ 	struct fwu_image_entry *img_entry;
+ 	struct fwu_image_bank_info *img_info;
  
--		num_banks = CONFIG_FWU_NUM_BANKS;
-+		ret = fwu_get_banks_images(&num_banks, &num_images);
-+		if (ret)
-+			return EFI_INVALID_PARAMETER;
+@@ -25,15 +27,22 @@ static void print_mdata(struct fwu_mdata *mdata)
+ 	printf("active_index: %#x\n", mdata->active_index);
+ 	printf("previous_active_index: %#x\n", mdata->previous_active_index);
+ 
++	num_banks = fwu_get_fw_desc(mdata)->num_banks;
++	num_images = fwu_get_fw_desc(mdata)->num_images;
++
++	for (i = 0; i < 4; i++)
++		printf("bank_state[%d]: %#x\n", i, mdata->bank_state[i]);
++
+ 	printf("\tImage Info\n");
+-	for (i = 0; i < CONFIG_FWU_NUM_IMAGES_PER_BANK; i++) {
+-		img_entry = &mdata->img_entry[i];
++
++	for (i = 0; i < num_images; i++) {
++		img_entry = fwu_img_entry_offset(mdata, i);
+ 		printf("\nImage Type Guid: %pUL\n",
+-		       &img_entry->image_type_uuid);
+-		printf("Location Guid: %pUL\n", &img_entry->location_uuid);
+-		for (j = 0; j < CONFIG_FWU_NUM_BANKS; j++) {
+-			img_info = &img_entry->img_bank_info[j];
+-			printf("Image Guid:  %pUL\n", &img_info->image_uuid);
++		       &img_entry->image_type_guid);
++		printf("Location Guid: %pUL\n", &img_entry->location_guid);
++		for (j = 0; j < num_banks; j++) {
++			img_info = fwu_img_bank_info_offset(mdata, i, j);
++			printf("Image Guid:  %pUL\n", &img_info->image_guid);
+ 			printf("Image Acceptance: %s\n",
+ 			       img_info->accepted == 0x1 ? "yes" : "no");
+ 		}
+@@ -43,19 +52,35 @@ static void print_mdata(struct fwu_mdata *mdata)
+ int do_fwu_mdata_read(struct cmd_tbl *cmdtp, int flag,
+ 		     int argc, char * const argv[])
+ {
++	uint32_t mdata_size;
++	struct fwu_mdata *mdata = NULL;
+ 	int ret = CMD_RET_SUCCESS, res;
+-	struct fwu_mdata mdata;
+ 
+-	res = fwu_get_mdata(&mdata);
++	res = fwu_get_mdata_size(&mdata_size);
++	if (res) {
++		log_err("Unable to get FWU metadata size\n");
++		ret = CMD_RET_FAILURE;
++		goto out;
++	}
++
++	mdata = malloc(mdata_size);
++	if (!mdata) {
++		log_err("Unable to allocate memory for FWU metadata\n");
++		ret = CMD_RET_FAILURE;
++		goto out;
++	}
++
++	res = fwu_get_mdata(mdata);
+ 	if (res < 0) {
+ 		log_err("Unable to get valid FWU metadata\n");
+ 		ret = CMD_RET_FAILURE;
+ 		goto out;
  	}
  
- 	size = num_banks * sizeof(*var_state);
+-	print_mdata(&mdata);
++	print_mdata(mdata);
+ 
+ out:
++	free(mdata);
+ 	return ret;
+ }
+ 
 -- 
 2.34.1
 
