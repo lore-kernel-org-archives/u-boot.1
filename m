@@ -4,47 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B768AC4829B
-	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 11:40:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 579E7C4829B
+	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 11:40:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 05EF687EBA;
-	Mon, 12 Feb 2024 12:40:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A55E687B63;
+	Mon, 12 Feb 2024 12:40:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C83287EBE; Mon, 12 Feb 2024 12:40:20 +0100 (CET)
+ id 30297879DF; Mon, 12 Feb 2024 12:40:55 +0100 (CET)
 Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
  [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id DFE44879DF
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 12:40:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 9BF9C87B63
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 12:40:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
 X-IronPort-AV: E=Sophos;i="6.06,263,1705330800"; 
- d="asc'?scan'208";a="197568674"
+ d="asc'?scan'208";a="197568692"
 Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie6.idc.renesas.com with ESMTP; 12 Feb 2024 20:40:16 +0900
+ by relmlie6.idc.renesas.com with ESMTP; 12 Feb 2024 20:40:50 +0900
 Received: from [10.226.92.81] (unknown [10.226.92.81])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id 0F17441ABA19;
- Mon, 12 Feb 2024 20:40:14 +0900 (JST)
-Message-ID: <0a8277c8-3a5c-4b4d-97f0-ff92c27abea3@bp.renesas.com>
-Date: Mon, 12 Feb 2024 11:40:14 +0000
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id 0515441ABBFC;
+ Mon, 12 Feb 2024 20:40:48 +0900 (JST)
+Message-ID: <1b52b9ab-6f65-499d-a657-a9a33265d52d@bp.renesas.com>
+Date: Mon, 12 Feb 2024 11:40:48 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] ARM: renesas: Set R-Car Gen2 board size limit to 512
- kiB
+Subject: Re: [PATCH 3/3] ARM: renesas: Enable LTO on R-Car
 Content-Language: en-GB
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: =?UTF-8?Q?Niklas_S=C3=B6derlund?= <niklas.soderlund+renesas@ragnatech.se>,
  Paul Barker <paul.barker.ct@bp.renesas.com>
 References: <20240211173446.7162-1-marek.vasut+renesas@mailbox.org>
- <20240211173446.7162-2-marek.vasut+renesas@mailbox.org>
+ <20240211173446.7162-3-marek.vasut+renesas@mailbox.org>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20240211173446.7162-2-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20240211173446.7162-3-marek.vasut+renesas@mailbox.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------H6X5xkDaTzPlM2FqzQW0lN1B"
+ boundary="------------WZ3u3UwjmMHUm0L6YXMvXIu4"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,43 +61,43 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------H6X5xkDaTzPlM2FqzQW0lN1B
-Content-Type: multipart/mixed; boundary="------------qwB1ZstvvWH7cuOCMqLAkQ1R";
+--------------WZ3u3UwjmMHUm0L6YXMvXIu4
+Content-Type: multipart/mixed; boundary="------------NTKShUmHA9fdI07Hu8wsDxd3";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: =?UTF-8?Q?Niklas_S=C3=B6derlund?=
  <niklas.soderlund+renesas@ragnatech.se>,
  Paul Barker <paul.barker.ct@bp.renesas.com>
-Message-ID: <0a8277c8-3a5c-4b4d-97f0-ff92c27abea3@bp.renesas.com>
-Subject: Re: [PATCH 2/3] ARM: renesas: Set R-Car Gen2 board size limit to 512
- kiB
+Message-ID: <1b52b9ab-6f65-499d-a657-a9a33265d52d@bp.renesas.com>
+Subject: Re: [PATCH 3/3] ARM: renesas: Enable LTO on R-Car
 References: <20240211173446.7162-1-marek.vasut+renesas@mailbox.org>
- <20240211173446.7162-2-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20240211173446.7162-2-marek.vasut+renesas@mailbox.org>
+ <20240211173446.7162-3-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20240211173446.7162-3-marek.vasut+renesas@mailbox.org>
 
---------------qwB1ZstvvWH7cuOCMqLAkQ1R
-Content-Type: multipart/mixed; boundary="------------OEKqmzg90lk75oTPn9xD1BJH"
+--------------NTKShUmHA9fdI07Hu8wsDxd3
+Content-Type: multipart/mixed; boundary="------------lWSXMtWbuutpEbV4WE6hS6aI"
 
---------------OEKqmzg90lk75oTPn9xD1BJH
+--------------lWSXMtWbuutpEbV4WE6hS6aI
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
 On 11/02/2024 17:34, Marek Vasut wrote:
-> The maximum size of u-boot.img on R-Car Gen2 is 0x80000 or 512 kiB,
-> set the limit to avoid overflows as new functionality gets pulled in.
+> Enable LTO globally on Renesas R-Car platforms. This has been enabled
+> on a subset of boards already, but at this point it is safe to enable
+> it globally. This saves units or tens of kiB from the resulting build.
 >=20
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > ---
 > Cc: Niklas S=C3=B6derlund <niklas.soderlund+renesas@ragnatech.se>
 > Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
 > ---
->  Kconfig | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
+>  arch/arm/Kconfig | 1 +
+>  1 file changed, 1 insertion(+)
 
 Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 
---------------OEKqmzg90lk75oTPn9xD1BJH
+--------------lWSXMtWbuutpEbV4WE6hS6aI
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -162,21 +161,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------OEKqmzg90lk75oTPn9xD1BJH--
+--------------lWSXMtWbuutpEbV4WE6hS6aI--
 
---------------qwB1ZstvvWH7cuOCMqLAkQ1R--
+--------------NTKShUmHA9fdI07Hu8wsDxd3--
 
---------------H6X5xkDaTzPlM2FqzQW0lN1B
+--------------WZ3u3UwjmMHUm0L6YXMvXIu4
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZcoDngUDAAAAAAAKCRDbaV4Vf/JGve8d
-AQCY7JgkE2B0MgElsL39qdgESCyRurd25fYq7pLRFaPGAAD/XAreIBX2ZvypPw/g9XVycUSF75HX
-vwExjUoGAi+X4QU=
-=C0Gt
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZcoDwAUDAAAAAAAKCRDbaV4Vf/JGveZM
+AQDqrsmLj74HjXdHxdIqRGgSe63Jh4DCU9TA8vHl/Sg5MAD/UiSFB3h+abb8cY0gnRsyME4Y5OLV
+4frJjA5AaNMhGg4=
+=kyID
 -----END PGP SIGNATURE-----
 
---------------H6X5xkDaTzPlM2FqzQW0lN1B--
+--------------WZ3u3UwjmMHUm0L6YXMvXIu4--
