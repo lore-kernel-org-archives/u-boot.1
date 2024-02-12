@@ -4,75 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88EB4C4829B
-	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 16:07:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E70DFC4829B
+	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 16:18:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D22DB87061;
-	Mon, 12 Feb 2024 17:07:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 512F7875FC;
+	Mon, 12 Feb 2024 17:18:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="ceh0pFip";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="MFLb8LCz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 52230875FC; Mon, 12 Feb 2024 17:07:28 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ id B1824876A9; Mon, 12 Feb 2024 17:18:48 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E95F486BFA
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 17:07:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AEAB6875FA
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 17:18:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1707754041; x=1708358841; i=xypron.glpk@gmx.de;
- bh=Q5DzgFV2ntOIBIUXUVyunNoDwXVI+XjCXhHcN9MQrEw=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
- In-Reply-To;
- b=ceh0pFipCxoJTqLZ5LgFnhNBBgMyu+/jnZZmU+3psV7FHOCbUUskUIj+NdnqjWI/
- 7xS++UuX8ajl0md2rZNHRkEzqRETdceI1kFxLNkailxTIFRHpyBCjQJ0UWMLORvWC
- vNlDfTL5XqPX+D/LNBkfE/vtHqe/mLyq7CzSzflX38iIxrnGj9Wsa/PvuGX4MIi1u
- vqZMWVxg0ylPo8eMaOX1jLIXDv9YLek/cKki+ObNdlEoy721HL673HWcOusZka/SR
- ihlKGNu7qQIDFbqbhHmf6MaGlKS45SYNTG60tPEIx16+iaIXagEN+91IHfQeX/CEN
- h4mO2oDCNW+Qcai9WA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.67] ([178.202.40.247]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1M7b6l-1rdAOr3oA1-0081CD; Mon, 12
- Feb 2024 17:07:20 +0100
-Message-ID: <9f9c2e53-1639-48e6-b441-1c73abbe48b8@gmx.de>
-Date: Mon, 12 Feb 2024 17:07:20 +0100
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-lf1-f71.google.com (mail-lf1-f71.google.com
+ [209.85.167.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 411C93F125
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 16:18:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1707754726;
+ bh=YjyyRHwi5hOB7c0g1QCEBB2fOM+JqXX75cH1KX10yaA=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=MFLb8LCzdYGX7YQ+gGqinFy0wy6AMVwXVp/kqJCVXGes+nnvBdU9KaZqrlyNP+89a
+ fFd4JPtqr9w15btkVVMb/zJpGZM6gADYvF+q0mfFg3ifAV2cSV+cCVdEtWzmRArK5F
+ A2NPSujbSc+v90p9u3i4Iyl6MOTmAg9awYD9dSvw8EdsP4meNNlJp8bkxODx0j9uRf
+ 1A1XKDx5MkSxfs+bDaOUWRZsSfWaGV70INh6tyEJbDYgUT8kBJLC2D+N9FxpipGgmZ
+ sPGadpC/wrrKbj/tqrQRvbezdw2h95btPAFaZLZ+sTo3wqtkD4tpK6fVey1AqWfF30
+ vl09Ik/1+g3lw==
+Received: by mail-lf1-f71.google.com with SMTP id
+ 2adb3069b0e04-50e9e5c8f49so3627066e87.3
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 08:18:46 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1707754725; x=1708359525;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=YjyyRHwi5hOB7c0g1QCEBB2fOM+JqXX75cH1KX10yaA=;
+ b=eA8p8e12yR23VzRRNa+Fhrx/YrKEqYDVYseehF/UG3HA8VihZGiRNDYJjbaBkQ5yYf
+ ejZOFlqMTCXY85xp+Bhv0YaETMVdQeUX0oOQ8SOp1DUjTbCKfTP1Bc5z+aIcldJOynCT
+ J2C+6NKejCXRQ95MsAQXwoMjMJkOSeJUZTookDkkSISg04LLOi1iJOtkFkk5k9oRVcvG
+ mDIKMYN9tD22pBZ1tvaPpIhB6BSAyG6icXTSYlHUh+KS5Gxnil5eKTS0jb+zKcLX+WAr
+ GFwluJhxJpEbJcj/Fd4B6959v10KFLjpZPYH6I27ygp33XwSdwuwzmFRF/HmGHEAxizd
+ P1ZA==
+X-Gm-Message-State: AOJu0YyDz+lwNyPcHKo9B8fpVyK6Z1T9R8bl2XUQu2gmuDhuzKXy+69q
+ 8HSyESX5318kLczgQypzQUMPVpMXh864tXy/OLUbXiBPjLcqnxjSn2SZ5C3hAxTMYPjJ2SBt3J+
+ t4EgLGRDEU7peUot9He3igTdKD5uyYULI9zsxCDX6g/sVg23z2lUh/FXkSFCdXnyMDtI=
+X-Received: by 2002:ac2:43d5:0:b0:511:4eda:2563 with SMTP id
+ u21-20020ac243d5000000b005114eda2563mr4366098lfl.69.1707754725654; 
+ Mon, 12 Feb 2024 08:18:45 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IH+MNSXRFqz7oBwCgHlF/lSPZc0w7hvB3k6p73OJtxul1CDNicyXiyNhyIq5oD+EAlaVIKDBQ==
+X-Received: by 2002:ac2:43d5:0:b0:511:4eda:2563 with SMTP id
+ u21-20020ac243d5000000b005114eda2563mr4366083lfl.69.1707754725287; 
+ Mon, 12 Feb 2024 08:18:45 -0800 (PST)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVY9OrHunPF6df8cymBrzE0gGyqsr+bolADlMkI382CsxLA8IQ4yBgkqaxBIu2rFtr+OnHG+9DgnLfOgTj97WiQA3iQNAyO8W9bWEkL+/TQOYo=
+Received: from workstation5.fritz.box
+ (ip-178-202-040-247.um47.pools.vodafone-ip.de. [178.202.40.247])
+ by smtp.gmail.com with ESMTPSA id
+ r17-20020adfe691000000b0033aeb0afa8fsm7207003wrm.39.2024.02.12.08.18.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 12 Feb 2024 08:18:44 -0800 (PST)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] efi_driver: provide SBI based runtime system reset
+Date: Mon, 12 Feb 2024 17:18:37 +0100
+Message-ID: <20240212161837.1290585-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 5/6] efi_selftest: Add box drawing character selftest
-Content-Language: en-US
-To: j@jannau.net
-Cc: Simon Glass <sjg@chromium.org>, Andre Przywara <andre.przywara@arm.com>,
- u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Anatolij Gustschin <agust@denx.de>
-References: <20240210-vidconsole-utf8-uefi-v2-0-88c03db60de2@jannau.net>
- <20240210-vidconsole-utf8-uefi-v2-5-88c03db60de2@jannau.net>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240210-vidconsole-utf8-uefi-v2-5-88c03db60de2@jannau.net>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:NrVeTaRQBehA27WfmMZaFxQh9fyiqGumhyCTZTwI6+gQQ+ZyTCh
- uNf3pSrEoUwLFV0nbehsnrko+BDD05josRAceXESm9KqWtY2eRx2uzkcX5U8BDzKvQKb6Ic
- uzxS4b54vQrQOMZy/bQXmJT7WKqwlrQZILB+cWsudCSJiH3UhgKnQxFkB+vMg+I/apOlX2h
- A3ll8NVRPjuWIB4LY+Mlg==
-UI-OutboundReport: notjunk:1;M01:P0:TCnegiPFiOM=;53Xmjie3/sO+9bFLoqRvaH8bSkc
- wU94wa+55KVJD/HHBJrbK/VVsuKnTIYe6EVD4feDUCuP4UlDF2bUJciJh3sfRTTgusWIPbAL9
- DBzkbaaY7EZN+a9afMXGVmsZaRib6KPVQaxCPBx3iV5o1igqCCTdAPKFEaly5GuAiyxkZ5fyF
- R1J8CKO2GMDMIdRZXrP/Vd6Psr6emlDLnKodF7SLwV53ynsHLhQ/xb536Bmc4PxhZRaqpYgPY
- ZHPQwrzYGhw0uOy9rZX+eU66au5yKWZJl6rNOnUynmkJ0UaddgHiFiI40JeCU3wBWo0UOEqsI
- fUGRNiRG7tuNWyQcKJZUKBWDjwsT/7cXkT9QOSVYD5VCflW9hr1jP3rvT6F63tzRa/VMyy05H
- sDOteX918QRtrmEz3NdECwsdF38Aj5iLFXPAxaaC3MAiYNpcbwLS9FYzWKDrPCoNrkm0aud+5
- cZxe999nq3sdBmNBos7GOvUp9gUPX3EW0n8jhGW5QRmrJoO0PVInolW5VlGejhrDFOZ9slpwE
- zAVtl4kXTZEyCe2p65wRW5MzoGmkkDg0pqeNH2SkRnWOxlsMtdCI4WvFY0o5dG4DW7Pe/u2Pf
- UXgGQCkn12vej0VLNjI59REnIfk+iZtmh0kpgKGlh735fVS5zQ2R2Fy1/lVLIvypRIlXKiWA/
- E64F6V72jJ6n4aTLGMnTe7RzM49fvx7WQl573aEkpGwBi1MTLYCUIxOA2UVUPEbtfw7OcfIkO
- mYAaD7EADsuByPdkK21HT9uafwBw/JsAKVI6yZPa4W354NMbuHIMGHEJ6OQvfM6R/HyQav7nV
- fGXxgGlfcX3JwrlhCAMN1qA+s5KWl+NHJybKzkl8bAHqw=
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,72 +102,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10.02.24 13:46, Janne Grunau via B4 Relay wrote:
-> From: Andre Przywara <andre.przywara@arm.com>
->
-> UEFI applications rely on Unicode output capability, and might use that
-> for drawing pseudo-graphical interfaces using Unicode defined box
-> drawing characters.
->
-> Add a simple test to display the most basic box characters, which would
-> need to be checked manually on the screen for correctness.
-> To facilitate this, add a three second delay after the output at this
-> point.
->
-> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
-> Suggested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Signed-off-by: Janne Grunau <j@jannau.net>
-> ---
->   lib/efi_selftest/efi_selftest_textoutput.c | 20 ++++++++++++++++++++
->   1 file changed, 20 insertions(+)
->
-> diff --git a/lib/efi_selftest/efi_selftest_textoutput.c b/lib/efi_selfte=
-st/efi_selftest_textoutput.c
-> index 2aa81b0a80..cc11a22eee 100644
-> --- a/lib/efi_selftest/efi_selftest_textoutput.c
-> +++ b/lib/efi_selftest/efi_selftest_textoutput.c
-> @@ -33,6 +33,19 @@ static int execute(void)
->   	const u16 text[] =3D
->   u"\u00d6sterreich Edelwei\u00df Sm\u00f8rrebr\u00f8d Sm\u00f6rg"
->   u"\u00e5s Ni\u00f1o Ren\u00e9 >\u1f19\u03bb\u03bb\u03ac\u03c2<\n";
-> +	const u16 boxes[] =3D
-> +u"This should render as four boxes with text\n"
-> +u"\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500"
-> +u"\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500"
-> +u"\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502"
-> +u" left top    \u2502 right top     \u2502\n\u251c\u2500"
-> +u"\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500"
-> +u"\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500"
-> +u"\u2500\u2500\u2500\u2500\u2500\u2500\u2524\n\u2502 "
-> +u"left bottom \u2502 right bottom  \u2502\n\u2514\u2500\u2500\u2500"
-> +u"\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534"
-> +u"\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500"
-> +u"\u2500\u2500\u2500\u2500\u2518\n";
->
->   	/* SetAttribute */
->   	efi_st_printf("\nColor palette\n");
-> @@ -126,6 +139,13 @@ u"\u00e5s Ni\u00f1o Ren\u00e9 >\u1f19\u03bb\u03bb\u=
-03ac\u03c2<\n";
->   		efi_st_error("OutputString failed for international chars\n");
->   		return EFI_ST_FAILURE;
->   	}
-> +	ret =3D con_out->output_string(con_out, boxes);
-> +	if (ret !=3D EFI_ST_SUCCESS) {
-> +		efi_st_error("OutputString failed for box drawing chars\n");
-> +		return EFI_ST_FAILURE;
-> +	}
-> +	con_out->output_string(con_out, u"waiting for admiration...\n");
-> +	EFI_CALL(systab.boottime->stall(3000000));
+On RISC-V systems system the Supervisory Binary Interface provides system
+reset and poweroff. Use it at EFI runtime.
 
-We don't want to add any unnecessary waiting times in the unit tests. If
-somebody wants to see the output, he can scroll up.
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ lib/efi_driver/Makefile          |  1 +
+ lib/efi_driver/efi_reset_riscv.c | 29 +++++++++++++++++++++++++++++
+ lib/efi_loader/Kconfig           |  2 +-
+ 3 files changed, 31 insertions(+), 1 deletion(-)
+ create mode 100644 lib/efi_driver/efi_reset_riscv.c
 
-Best regards
-
-Heinrich
-
->   	efi_st_printf("\n");
->
->   	return EFI_ST_SUCCESS;
->
+diff --git a/lib/efi_driver/Makefile b/lib/efi_driver/Makefile
+index f2b6c05cc24..0da20fe91d3 100644
+--- a/lib/efi_driver/Makefile
++++ b/lib/efi_driver/Makefile
+@@ -9,3 +9,4 @@ obj-y += efi_uclass.o
+ ifeq ($(CONFIG_PARTITIONS),y)
+ obj-y += efi_block_device.o
+ endif
++obj-$(CONFIG_SYSRESET_SBI) += efi_reset_riscv.o
+diff --git a/lib/efi_driver/efi_reset_riscv.c b/lib/efi_driver/efi_reset_riscv.c
+new file mode 100644
+index 00000000000..89b23522e95
+--- /dev/null
++++ b/lib/efi_driver/efi_reset_riscv.c
+@@ -0,0 +1,29 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++
++#include <efi_loader.h>
++#include <asm/sbi.h>
++
++void __efi_runtime EFIAPI efi_reset_system(enum efi_reset_type reset_type,
++					   efi_status_t reset_status,
++					   unsigned long data_size,
++					   void *reset_data)
++{
++	register unsigned long eid asm("a7") = SBI_EXT_SRST;
++	register unsigned long fid asm("a6") = SBI_EXT_SRST_RESET;
++	register unsigned long type asm("a0");
++	register unsigned long reason asm("a1") = SBI_SRST_RESET_REASON_NONE;
++
++	switch (reset_type) {
++	case EFI_RESET_WARM:
++		type = SBI_SRST_RESET_TYPE_WARM_REBOOT;
++		break;
++	case EFI_RESET_SHUTDOWN:
++		type = SBI_SRST_RESET_TYPE_SHUTDOWN;
++		break;
++	default:
++		type = SBI_SRST_RESET_TYPE_COLD_REBOOT;
++		break;
++	}
++	asm volatile ("ecall\n"
++		      : : "r" (eid), "r" (fid), "r" (type), "r" (reason));
++}
+diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+index db5571de1d9..a7c3e05c13a 100644
+--- a/lib/efi_loader/Kconfig
++++ b/lib/efi_loader/Kconfig
+@@ -366,7 +366,7 @@ config EFI_HAVE_RUNTIME_RESET
+ 	bool
+ 	default y
+ 	depends on ARCH_BCM283X || FSL_LAYERSCAPE || PSCI_RESET || \
+-		   SANDBOX || SYSRESET_X86
++		   SANDBOX || SYSRESET_SBI || SYSRESET_X86
+ 
+ config EFI_GRUB_ARM32_WORKAROUND
+ 	bool "Workaround for GRUB on 32bit ARM"
+-- 
+2.43.0
 
