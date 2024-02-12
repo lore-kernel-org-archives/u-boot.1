@@ -4,82 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E13FC4829B
-	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 07:05:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADE47C4829B
+	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 07:47:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 467C287CAC;
-	Mon, 12 Feb 2024 08:05:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E762487EBF;
+	Mon, 12 Feb 2024 08:47:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="N0bExnbI";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 52D7787CB8; Mon, 12 Feb 2024 08:05:23 +0100 (CET)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5419A87C1F
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 08:05:21 +0100 (CET)
+ id 2013787EBD; Mon, 12 Feb 2024 08:47:37 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 7A63487C80
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 08:47:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dan.carpenter@linaro.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-a3ca40db065so43507066b.2
- for <u-boot@lists.denx.de>; Sun, 11 Feb 2024 23:05:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1707721520; x=1708326320; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ct/R1lvDgiwWCN+266/11t4MPuuC+3rik3QCNle7Bb8=;
- b=N0bExnbIoR8o00+JMEOO1mmMAoM31ae1Sz2ZTYss2BYlU9Bich+w4faFum4r/TEzYa
- VMJXTO7kLlO1VTftF63R23hrfkmBm/zvaBNv1LJeSdMuK3XVOBoG9rhnOkTfr5LUCrec
- o087pe85MvrO0dSkTZz5H04ZxT4k+xbgz5KAPN4nt4bbvHbDzmvhF6Wy8p1eMl1ye5+o
- nzB+03jhoqjM5a7uHzycgbPa6gQET4wx8A36tMtDrY8tAG9/rDmDVrA051f925xpEGeR
- 3MABbG4BHz5+hHXIcEtS2A+Y2tmVXS9fDfhEYG776zqGXyBZoZBv7Di6Ta83znUqKFvD
- iC3w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707721520; x=1708326320;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ct/R1lvDgiwWCN+266/11t4MPuuC+3rik3QCNle7Bb8=;
- b=JiTcVtlVTS6wWvFgShOQJJ0fpEh7cDiKp1JIcaZthi6QpygmJr9UloMB0LvIcjjPBB
- wc/f9ELwYz9Lcpvs2chfdkMB9RbVy/2cTDAQKt9K/vdbqzYPBCewDNav6VzHrmvyBI5q
- FF/Ggb+n/fupVs2+zhKJRBXYxqS+km63BW2kN8Kco95saKsD2lcWkKr0ppcKNVNDnIzX
- dON0TV3ImRk8FsohxOXECZ5Jjpx4CxuMUbDUV1GPpLfp0PDZDF4uPCVuDcS0+RZGI59T
- zvt/To0uiWwnEm4C4W/m/e9oK/MfNgJSYSHt0uMOrltysXaj8WPEuxBvQkdbvjsSV6oY
- TtsA==
-X-Gm-Message-State: AOJu0YzwZyK9lCPRNiByob/uBT8AtLPDw8TyN3kOIPZOx9fId8AYx4SM
- /p5ShJ9NekIbW7yAJXlKhII9MJgAeYDIvCy9rulo0tFBo1gTijV04/7OX32F9Yo=
-X-Google-Smtp-Source: AGHT+IEyQ86hjQdh08D7DxAzOPjGWS2yKpHqy1luYQGllYj+Rna2Pt9iHY+0+5aLUSa4qKieDpFgyg==
-X-Received: by 2002:a17:906:168d:b0:a39:e059:e632 with SMTP id
- s13-20020a170906168d00b00a39e059e632mr4018118ejd.3.1707721520716; 
- Sun, 11 Feb 2024 23:05:20 -0800 (PST)
-X-Forwarded-Encrypted: i=1;
- AJvYcCXBpvSw3u9oNx+ktVP2hPHedSJpbPqycnqjqoug3GQPOFs0sDdLiVOH6Iau0b/JyW1TXCXen7vEL5R6c64/agpwrHVkFqCdAhrkT/8GMygbmDmcPzFZ9VAM9BmbEYbhjA9E/dBglLn5GPAVOTbFTWgavlwyNQvTibecxK/8h+yxUCMSXElhYi4+1jYh26Msw2exWuNM8UAdQaRfajkUz+iBenscbaMkaVmme/SuRM4qIL3K9ggTjbEw98kOjT8wV3rNdpqs5A==
-Received: from localhost ([102.222.70.76]) by smtp.gmail.com with ESMTPSA id
- g19-20020a170906521300b00a3bb098ffcbsm3547518ejm.89.2024.02.11.23.05.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 11 Feb 2024 23:05:20 -0800 (PST)
-Date: Mon, 12 Feb 2024 10:05:16 +0300
-From: Dan Carpenter <dan.carpenter@linaro.org>
-To: Igor Opaniuk <igor.opaniuk@foundries.io>
-Cc: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Ivan Khoronzhuk <ivan.khoronzhuk@gmail.com>,
- Jens Wiklander <jens.wiklander@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH v2 1/7] common: avb_verify: don't call mmc_switch_part
- for SD
-Message-ID: <b457cb25-ea09-4e27-85aa-0e97a5aa7fe0@moroto.mountain>
-References: <20240209192045.3961832-1-igor.opaniuk@foundries.io>
- <20240209192045.3961832-2-igor.opaniuk@foundries.io>
+ spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5A5B4DA7;
+ Sun, 11 Feb 2024 23:48:15 -0800 (PST)
+Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C8F9F3F7BD;
+ Sun, 11 Feb 2024 23:47:30 -0800 (PST)
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Masahisa Kojima <masahisa.kojima@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Yann Gautier <yann.gautier@st.com>,
+ Etienne Carriere <etienne.carriere@foss.st.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Jassi Brar <jaswinder.singh@linaro.org>
+Subject: [PATCH v2 00/21] FWU: Migrate FWU metadata to version 2
+Date: Mon, 12 Feb 2024 13:16:51 +0530
+Message-Id: <20240212074712.3657076-1-sughosh.ganu@linaro.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240209192045.3961832-2-igor.opaniuk@foundries.io>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,17 +59,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Feb 09, 2024 at 08:20:39PM +0100, Igor Opaniuk wrote:
-> From: Igor Opaniuk <igor.opaniuk@gmail.com>
-> 
-> mmc_switch_part() is used for switching between hw partitions
-> on eMMC (boot0, boot1, user, rpmb).
-> There is no need to do that for SD card.
-> 
 
-Is this a clean up or a bugfix?  What are the visible effects for the
-user?
+The following patches migrate the FWU metadata access code to version
+2 of the structure. This is based on the structure definition as
+defined in the latest rev of the FWU Multi Bank Update specification
+[1].
 
-regards,
-dan carpenter
+Since the version 1 of the structure has currently been adopted on a
+couple of platforms, it was decided to have a clean migration of the
+metadata to version 2 only, instead of supporting both the versions of
+the structure. Also, based on consultations with the main author of
+the specification, it is expected that any further changes in the
+structure would be minor tweaks, and not be significant. Hence a
+migration to version 2.
+
+Similar migration is also being done in TF-A, including migrating the
+ST platform port to support version 2 of the metadata structure [2].
+
+@Michal, I tested the metadata for the two image per bank case, and it
+works fine on the ST board. Kindly test this on your board as well.
+
+@Kojima-san, Please help in testing the version 2 on your
+board. Thanks.
+
+
+[1] - https://developer.arm.com/documentation/den0118/latest/
+[2] - https://review.trustedfirmware.org/q/topic:%22topics/fwu_metadata_v2_migration%22
+
+Changes since V1:
+
+* Do not define flexible array members inside the structures.
+* Access the image information related fields in the metadata using
+  the helper functions defined in an earlier patch.
+* Access fwu_fw_store_desc structure using pointer arithmetic.
+
+
+Sughosh Ganu (21):
+  configs: fwu: remove FWU configs for metadata V2 migration
+  fwu: metadata: migrate to version 2 of the structure
+  drivers: fwu: add the size parameter to the metadata access API's
+  fwu: add helper functions for getting image description offsets
+  fwu: make changes to support version 2 of FWU metadata
+  fwu: add some API's for metadata version 2 access
+  drivers: fwu: mtd: allocate buffer for image info dynamically
+  drivers: fwu: allocate memory for metadata copies
+  fwu: add a function to put a bank in Trial State
+  capsule: accept a bank on a successful update
+  fwu: mtd: modify the DFU API's to align with metadata version 2
+  efi_firmware: fwu: do not read FWU metadata on sandbox
+  efi_firmware: fwu: get the number of FWU banks at runtime
+  cmd: fwu: align the command with metadata version 2
+  test: fwu: align the FWU metadata access test with version 2
+  fwu: remove the config symbols for number of banks and images
+  tools: mkfwumdata: migrate to metadata version 2
+  tools: mkfwumdata: add logic to append vendor data to the FWU metadata
+  tools: mkfwumdata: fix the size parameter to the fwrite call
+  configs: fwu: re-enable FWU configs
+  doc: fwu: make changes for supporting FWU Metadata version 2
+
+ arch/sandbox/Kconfig                     |   6 -
+ board/armltd/corstone1000/corstone1000.c |   2 +-
+ cmd/fwu_mdata.c                          |  45 ++-
+ configs/synquacer_developerbox_defconfig |   1 -
+ doc/board/socionext/developerbox.rst     |   9 +-
+ doc/develop/uefi/fwu_updates.rst         |  12 +-
+ doc/usage/cmd/fwu_mdata.rst              |  12 +-
+ drivers/fwu-mdata/fwu-mdata-uclass.c     |  10 +-
+ drivers/fwu-mdata/gpt_blk.c              |  27 +-
+ drivers/fwu-mdata/raw_mtd.c              |  85 +++--
+ include/fwu.h                            | 139 +++++++-
+ include/fwu_mdata.h                      |  56 +++-
+ lib/efi_loader/efi_capsule.c             |  12 +-
+ lib/efi_loader/efi_firmware.c            |  20 +-
+ lib/fwu_updates/Kconfig                  |  11 -
+ lib/fwu_updates/fwu.c                    | 401 +++++++++++++++++++----
+ lib/fwu_updates/fwu_mtd.c                |  81 +++--
+ test/dm/fwu_mdata.c                      |  56 ++--
+ test/dm/fwu_mdata_disk_image.h           | 124 +++----
+ tools/mkfwumdata.c                       | 132 ++++++--
+ 20 files changed, 924 insertions(+), 317 deletions(-)
+
+-- 
+2.34.1
+
 
