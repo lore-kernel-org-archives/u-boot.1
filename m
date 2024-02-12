@@ -4,66 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA648C4829E
-	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 21:11:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2844DC4829E
+	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 21:50:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3125F87C8F;
-	Mon, 12 Feb 2024 22:11:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 365358751B;
+	Mon, 12 Feb 2024 22:50:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="xFn2roLQ";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="L0CgRMtF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 50A7287BC3; Mon, 12 Feb 2024 22:10:58 +0100 (CET)
-Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
+ id B70388751B; Mon, 12 Feb 2024 22:49:59 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E484E87C8F
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 22:10:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
+ by phobos.denx.de (Postfix) with ESMTPS id 8001E87073
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 22:49:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=15da=JW=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1707774556;
+ bh=kiSpf6l5IBpplUPGQaS3Emahzzz460uUhMCgQ7pIVtI=;
+ b=L0CgRMtF5fdqndDj5yhjXkIIy8skmukf7Q9r5W5wao/w4XGEUF5G/Hjk+tLr3ToNw76NAgHSz
+ JKBQCTtfNSdMIW6Rqu+zmefztp5ED5Kqokxbl13syJFnTda0sD6JYqlsyb3whdyhnHkfpS5et1L
+ PuFNEdKl0mC0gH7blaO0Y4wDu+JoD+0kFMvnC2PnJwU5gJW1IcBTfNR2Ru7jzqBVPLQcSCqRFHb
+ 1AYyXCt0TjZN/ZBfswwB4SJxdRX3hiLlSXTZZCyXFEgeghp7S+RCaA7EMvwqDxQ3qAFheB9VCxH
+ ksVWck8U1sBJ5AN32aRVhJkiy1Xmg5f7m+7N2j97Z8rw==
+Message-ID: <e3e87e1c-f1ba-4b07-9b03-f16bea9996f3@kwiboo.se>
+Date: Mon, 12 Feb 2024 22:49:08 +0100
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1707772243;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=o+/nlahwdi+AOEfiTuupHE+0flj8EyG+uIcLkWcW6IA=;
- b=xFn2roLQ43ctqxwBzI8Ifn+za/ABsMvD7pwd0dyqjDLLYEX4cqx2LWVpocZL0GjKOOeI/a
- pwG0cmNX6WE/TndiHmG5tCsil7rFXGfSkQZKV3hEulPmJDVI2l6W6BVMLBwUmA1gm7VI8W
- zqOTe6OxeDOi3b1YyU35rxyz27rLrZW48Z/nNp/yb8mgtaNiJS5VQOC6uvl/yvDE73c9On
- mErzelj5nkm7qb3DabAaRrV72OWidusMjOP5Wb3GzNdIh3UZg91748KGRjuwqmx9be4h7e
- 4GUSGFEEWvZrHVguDjb/aEbuDx4Gc8hvTAPoWJqdb+UhSm+ciKjVif+Q+f47xg==
-Date: Mon, 12 Feb 2024 22:10:42 +0100
-From: Dragan Simic <dsimic@manjaro.org>
-To: Marek Vasut <marex@denx.de>
-Cc: Shantur Rathore <i@shantur.com>, u-boot@lists.denx.de,
- andre.przywara@arm.com, Hector Martin <marcan@marcan.st>, Simon Glass
- <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: Re: [FIX PATCH v1] Fix: common: usb_hub: Reset only USB3.0 hub
-In-Reply-To: <aa804978-0b1f-4ccd-a4be-f3608cad5ebd@denx.de>
-References: <20240207102327.35125-1-i@shantur.com>
- <32db6dba-d515-4077-9d72-d77a7f431335@denx.de>
- <CABEcMwXW3KXQCJM16Qhk=19Sss3zdtQyWtJEed5y=na2mP8RFA@mail.gmail.com>
- <93f69779-3197-4ede-bb78-f2512ec30fc1@denx.de>
- <24f25359ce213370214bceeabc55e1df@manjaro.org>
- <CABEcMwUoyi5uLSADa2N76V3C-ryiXzYywgOKnL=DEqtU6LYa_w@mail.gmail.com>
- <a042e4fa90f02b5f51dd76c3dedf5ae1@manjaro.org>
- <3aa6998e3d9fd97cd4ba729f7656f467@manjaro.org>
- <CABEcMwXAjRLDcg+xP_td6cujPzPJNdQg8YHUjPNj8scea9cS-w@mail.gmail.com>
- <CABEcMwUvHJWTWykvD3w4HZ3H1fAZMAtMy3CYq_Dv6jnPuzYxdw@mail.gmail.com>
- <aa804978-0b1f-4ccd-a4be-f3608cad5ebd@denx.de>
-Message-ID: <fdc1ff314f3a49c55768f03f6505e6c3@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
-Content-Transfer-Encoding: 8bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] rockchip: rk3399: Update stack and bss addresses
+Content-Language: en-US
+To: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Andy Yan
+ <andy.yan@rock-chips.com>, Manivannan Sadhasivam
+ <manivannan.sadhasivam@linaro.org>, Nick Xie <nick@khadas.com>, Jagan Teki
+ <jagan@amarulasolutions.com>, Deepak Das <deepakdas.linux@gmail.com>,
+ Alexandre Vicenzi <linux@alxd.me>, Xiaobo Tian <peterwillcn@gmail.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Klaus Goger
+ <klaus.goger@theobroma-systems.com>, Levin Du <djw@t-chip.com.cn>, Suniel
+ Mahesh <sunil@amarulasolutions.com>, FUKAUMI Naoki <naoki@radxa.com>,
+ Christopher Obbard <chris.obbard@collabora.com>, u-boot@lists.denx.de
+References: <20240212005914.3512640-1-jonas@kwiboo.se>
+ <20240212005914.3512640-3-jonas@kwiboo.se>
+ <d8e10b17-0571-4ebc-9783-2301c429c6b3@theobroma-systems.com>
+ <c3f2027d-3d87-4b71-bb13-35090640dc9a@kwiboo.se>
+ <3b213c6d-9b97-48d1-8c36-4970dd1c4aa8@theobroma-systems.com>
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <3b213c6d-9b97-48d1-8c36-4970dd1c4aa8@theobroma-systems.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 65ca925cfc130462234ca35c
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,203 +85,245 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Marek, Andre and Shantur,
+Hi Quentin,
 
-On 2024-02-12 21:19, Marek Vasut wrote:
-> On 2/12/24 14:41, Shantur Rathore wrote:
->> On Mon, Feb 12, 2024 at 1:40 PM Shantur Rathore <i@shantur.com> wrote:
->>> On Sat, Feb 10, 2024 at 7:13 AM Dragan Simic <dsimic@manjaro.org> 
->>> wrote:
->>>> On 2024-02-08 15:17, Dragan Simic wrote:
->>>>> On 2024-02-08 15:10, Shantur Rathore wrote:
->>>>>> On Thu, Feb 8, 2024 at 1:44 PM Dragan Simic <dsimic@manjaro.org>
->>>>>> wrote:
->>>>>>> On 2024-02-08 14:33, Marek Vasut wrote:
->>>>>>>> On 2/8/24 12:30, Shantur Rathore wrote:
->>>>>>>>> On Wed, Feb 7, 2024 at 1:07 PM Marek Vasut <marex@denx.de> 
->>>>>>>>> wrote:
->>>>>>>>>> On 2/7/24 11:23, Shantur Rathore wrote:
->>>>>>>>>>> USB 3.0 spec requires hub to reset device while
->>>>>>>>>>> enumeration. Some USB 2.0 hubs / devices don't
->>>>>>>>>>> handle this well and after implementation of
->>>>>>>>>>> reset some USB 2.0 disks weren't detected on
->>>>>>>>>>> Allwinner based boards.
->>>>>>>>>>> 
->>>>>>>>>>> Resetting only when hub is USB 3.0 fixes it.
->>>>>>>>>> 
->>>>>>>>>> It would be good to include as many details about the faulty 
->>>>>>>>>> hardware
->>>>>>>>>> in
->>>>>>>>>> the commit message as possible, so that when someone else runs 
->>>>>>>>>> into
->>>>>>>>>> this, they would have all that information available.
->>>>>>>>>> 
->>>>>>>>>>> Tested-by: Andre Przywara <andre.przywara@arm.com>
->>>>>>>>>>> 
->>>>>>>>>>> Signed-off-by: Shantur Rathore <i@shantur.com>
->>>>>>>>>>> ---
->>>>>>>>>>> 
->>>>>>>>>>>     common/usb_hub.c | 6 ++++--
->>>>>>>>>>>     1 file changed, 4 insertions(+), 2 deletions(-)
->>>>>>>>>>> 
->>>>>>>>>>> diff --git a/common/usb_hub.c b/common/usb_hub.c
->>>>>>>>>>> index 3fb7e14d10..2e054eb935 100644
->>>>>>>>>>> --- a/common/usb_hub.c
->>>>>>>>>>> +++ b/common/usb_hub.c
->>>>>>>>>>> @@ -174,8 +174,10 @@ static void usb_hub_power_on(struct
->>>>>>>>>>> usb_hub_device *hub)
->>>>>>>>>>> 
->>>>>>>>>>>         debug("enabling power on all ports\n");
->>>>>>>>>>>         for (i = 0; i < dev->maxchild; i++) {
->>>>>>>>>>> -             usb_set_port_feature(dev, i + 1, 
->>>>>>>>>>> USB_PORT_FEAT_RESET);
->>>>>>>>>>> -             debug("Reset : port %d returns %lX\n", i + 1,
->>>>>>>>>>> dev->status);
->>>>>>>>>>> +             if (usb_hub_is_superspeed(dev)) {
->>>>>>>>>> 
->>>>>>>>>> Should this condition be "all which are lower than superspeed"
->>>>>>>>>> instead ,
->>>>>>>>>> so when the next generation of USB comes, this problem won't 
->>>>>>>>>> trigger
->>>>>>>>>> ?
->>>>>>>>>> 
->>>>>>>>>> What does Linux do btw ?
->>>>>>>>> 
->>>>>>>>> As of now Linux checks if the hub is superspeed
->>>>>>>>> https://github.com/torvalds/linux/blob/master/drivers/usb/core/hub.c#L2859
->>>>>>>>> 
->>>>>>>>> which is
->>>>>>>>>    return hdev->descriptor.bDeviceProtocol == USB_HUB_PR_SS; //
->>>>>>>>> USB_HUB_PR_SS = 3
->>>>>>>>> 
->>>>>>>>> This holds true for newer SuperSpeedPlus hubs as well.
->>>>>>>>> https://github.com/torvalds/linux/blob/master/drivers/usb/core/hub.h#L155
->>>>>>>>> 
->>>>>>>>> We can change the check to be  bDeviceProtocol > 2 but who 
->>>>>>>>> knows if
->>>>>>>>> things change in the newer version of spec.
->>>>>>>>> I am open to suggestions.
->>>>>>>> 
->>>>>>>> Please just include the ^ in the commit description. Use link to
->>>>>>>> git.kernel.org , not some mirror . This is extremely useful
->>>>>>>> information and, well, you already wrote the V2 commit message
->>>>>>>> addition in this answer.
->>>>>>> 
->>>>>>> Shantur, if that would be easier or quicker for you, I can write
->>>>>>> a quite detailed patch description for you, in exchange for a
->>>>>>> "Helped-by" tag in the v2 patch submission. :)
->>>>>> 
->>>>>> That would be really kind of you Dragan.
->>>>> 
->>>>> Sure, I'll write the summary and send it over.
->>>>> 
->>>>>> I am down with the flu so that would really help me as my brain is
->>>>>> working at 15% capacity.
->>>>> 
->>>>> Oh, I'm really sorry to hear that. :(  I hope you'll get better
->>>>> soon, and I know very well what's it like;  I've also been sick
->>>>> recently, as a result of some kind of flu that unfortunately found
->>>>> its way into my lungs, and it took me about a month to get back
->>>>> to about 90% of my usual mental capacity.  I'm still not back to
->>>>> exactly 100%. :/
->>>>> 
->>>>> I really hope you'll recover much faster.
->>>> 
->>>> I hope you're feeling better.
->>>> 
->>>> Below are the patch subject and description that I prepared for you,
->>>> please have a look.
->>>> 
->>>> ------- >8 ------------- >8 ------------- >8 ------------- >8 
->>>> -------
->>>> [PATCH v2] common: usb-hub: Reset USB 3.0 hubs only
->>>> 
->>>> Additional testing of the changes introduced in commit 33e06dcbe57a
->>>> ("common:
->>>> usb-hub: Reset hub port before scanning") revealed that some USB 3.0
->>>> flash
->>> 
->>> I think it was a USB 2.0 drive that didn't work on the USB 2.0 port.
->>> 
->>>> drives didn't work in U-Boot on some Allwinner SoCs that support USB 
->>>> 2.0
->>>> only.
->>>> More precisely, some tested USB 3.0 flash drives failed to be 
->>>> detected
->>>> and
->>>> work on an OrangePi Zero 3 with Allwinner H616 SoC, which supports 
->>>> USB
->>>> 2.0
->>>> only, while the same USB flash drives worked just fine on a Pine64 
->>>> H64
->>>> with
->>>> Allwinner H6 SoC, which supports both USB 2.0 and 3.0.
->>>> 
->>>> Resetting USB 3.0 hubs only has been tested to work as expected,
->>>> resolving
->>>> the previous issues on the Allwinner H616, while not introducing any 
->>>> new
->>>> issues on other Allwinner SoCs.  Thus, let's fix it that way.
->>>> 
->>>> According to the USB 3.0 specification, resetting a USB 3.0 port is
->>>> required
->>>> when an attached USB device transitions between different states, 
->>>> such
->>>> as
->>>> when it resumes from suspend.  Though, the Linux kernel performs
->>>> additional
->>>> USB 3.0 port resets upon initial USB device attachment, presumably 
->>>> to
->>>> ensure
->>>> proper state of the USB 3.0 hub port and proper USB mode negotiation
->>>> during
->>>> the initial USB device attachment and enumeration.
->>>> 
->>>> Such USB port resets don't seem to exist for USB 2.0 hubs, according 
->>>> the
->>>> USB
->>>> 2.0 specification.  The resets seem to be added to the USB 3.0
->>>> specification
->>>> as part of the port and device mode negotiation.
->>>> 
->>>> The Linux kernel also resets USB 3.0 (i.e. SuperSpeed) hubs only, as
->>>> visible
->>>> in file drivers/usb/core/hub.c in the kernel source, line 2859.  
->>>> This
->>>> check
->>>> also applies to newer SuperSpeed Plus (USB 3.1 or 3.2) hubs as well,
->>>> which
->>>> hopefully makes it future proof.
->>>> 
->>>> Fixes: 33e06dcbe57a ("common: usb-hub: Reset hub port before 
->>>> scanning")
->>>> Link:
->>>> https://lore.kernel.org/u-boot/20240207102327.35125-1-i@shantur.com/T/#u
->>>> Link:
->>>> https://lore.kernel.org/u-boot/20240201164604.13315fa6@donnerap.manchester.arm.com/T/#u
->>>> Signed-off-by: Shantur Rathore <i@shantur.com>
->>>> Helped-by: Dragan Simic <dsimic@manjaro.org>
->>>> Tested-by: Andre Przywara <andre.przywara@arm.com>
->>>> Reviewed-by: Dragan Simic <dsimic@manjaro.org>
->>>> ------- >8 ------------- >8 ------------- >8 ------------- >8 
->>>> -------
->>> 
->>> Regards,
->>> Shantur
->> 
->> Is this description acceptable to you Marek.
+On 2024-02-12 12:51, Quentin Schulz wrote:
+> Hi Jonas,
 > 
-> Please send a V2 patch . If possible, include the device information
-> as reported by Andre, esp. which USB stick triggered it, including USB
-> IDs, this is important for future reference and in case someone has
-> similar failure.
+> On 2/12/24 12:08, Jonas Karlman wrote:
+>> Hi Quentin,
+>>
+>> On 2024-02-12 11:37, Quentin Schulz wrote:
+>>> Hi Jonas,
+>>>
+>>> On 2/12/24 01:59, Jonas Karlman wrote:
+>>>> With the stack and text base used by U-Boot SPL and proper on RK3399
+>>>> there is a high likelihood of overlapping when U-Boot proper + FDT nears
+>>>> 1 MiB in size.
+>>>>
+>>>> Currently the following memory layout is used:
+>>>> - 0x00000000 (@0 MiB): U-Boot SPL text base
+>>>> - 0x00040000 (@256 KiB): TF-A
+>>>> - 0x00200000 (@2 MiB): U-Boot proper text base
+>>>> - 0x00300000 (@3 MiB): U-Boot proper init stack
+>>>> - 0x00400000 (@4 MiB): U-Boot SPL init stack
+>>>> - 0x00400000 (@4 MiB): U-Boot SPL bss
+>>>> - 0x02000000 (@64 MiB): U-Boot SPL reloc stack
+>>>> - 0x08400000 (@132 MiB): optional OPTEE
+>>>>
+>>>> SPL load TF-A, U-Boot proper and optional OPTEE after SPL stack has
+>>>> relocated, meaning that there is room for close to 2 MiB (@2-4 MiB).
+>>>> However, the initial stack used by U-Boot proper is limiting the size
+>>>> of U-Boot proper + FDT to below 1 MiB (@2-3 MiB).
+>>>>
+>>>> Instead change to use the following memory layout:
+>>>> - 0x00000000 (@0 MiB): U-Boot SPL text base
+>>>> - 0x00040000 (@256 KiB): TF-A
+>>>> - 0x00200000 (@2 MiB): U-Boot proper text base
+>>>> - 0x00400000 (@4 MiB): U-Boot SPL init stack
+>>>> - 0x00800000 (@8 MiB): U-Boot proper init stack (changed)
+>>>> - 0x02000000 (@32 MiB): U-Boot SPL bss (changed)
+>>>> - 0x04000000 (@64 MiB): U-Boot SPL reloc stack
+>>>> - 0x08400000 (@132 MiB): optional OPTEE
+>>>>
+>>>> This should leave room for loading and running a U-Boot proper close
+>>>> to 6 MiB (@2-8 MiB) in size. When U-Boot proper has relocated is should
+>>>> be possible to use @2-132 MiB and @164 MiB+ for scripts, kernel etc.
+>>>>
+>>>> With the moved SPL reloc stack it is also possible to use a much larger
+>>>> malloc area in SPL, e.g. using default SPL_STACK_R_MALLOC_SIMPLE_LEN.
+>>>>
+>>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>>>
+>>> Do we not need to update memory addresses in the environment as well?
+>>
+>> The addresses in environment is to my knowledge only used in U-Boot
+>> proper after relocation. And at that time we should be free to use @2+
+>> MiB up to somewhere close to gd ram_top/relocaddr. The optional Rockchip
+>> OPTEE blobb may occupy @132-164 MiB, but I do not think loading OPTEE
+>> blobs works as-is, so that may not be a big issue.
+>>
+> 
+> Upstream OP-TEE OS seems to support RK3399, c.f. 
+> https://github.com/OP-TEE/optee_os/blob/master/core/arch/arm/plat-rockchip/platform_rk3399.c
+> 
+> I cannot say whether it works, I have no knowledge of any of our 
+> customers using it (but that predates my joining Theobroma, so maybe 
+> long time customers do use it?). However, we do use an upstream-based 
+> OP-TEE OS for one of our PX30-based boards, so I would say Rockchip's 
+> OP-TEE OS is not the only option so we shouldn't just disregard this 
+> location in RAM... especially since ramdisk_addr_r starts at 96MiB. But 
+> since we're not changing that location.... people who would have this 
+> issue, would have encountered the issue by now already (provided they 
+> load a ramdisk bigger than 36MiB). So let's ignore that one actually :)
 
-If Andre can supply the USB IDs, I'm willing to help Shantur by
-adjusting the wording of the patch description to include them.
+See my other mail, upstream OP-TEE OS seem to use @768 MiB and should
+not cause issues.
 
-> Please don't use "in the kernel source, line 2859", considering the
-> rate of change of the Linux kernel, it is best to also include exact
-> commit ID as of which this is a line 2859 and spell out this is
-> referring to Linux kernel.
+Anyone trying to use Rockchip's OP-TEE OS blobs will get an error from
+binman, so trying to get that working will already involve customization.
 
-Good point.  I'm willing to adjust the wording.
+> 
+>> So to my knowledge we do not need to update any of the memory addresses
+>> in the environment as well.
+>>
+>>>
+>>> scriptaddr=0x00500000
+>>>
+>>> This is at 5MiB if I'm not mistaken?
+>>>
+>>> Basically everything in include/configs/rk3399_common.h in
+>>> ENV_MEM_LAYOUT_SETTINGS needs to be updated to be located after 164MiB?
+>>>
+>>> Did I misunderstand something? I find it weird the current values seems
+>>> to be located after U-Boot SPL bss and that e.g.
+>>>
+>>> kernel_addr_r=0x02080000
+>>>
+>>> is at 32.5MiB, and with U-Boot SPL reloc stack currently at 64MiB... a
+>>> 31.5+MiB kernel Image would mess up the data there? (what do we need it
+>>> for BTW once in U-boot proper after relocation?).
+>>
+>> After SPL has jumped to TF-A and U-boot proper any memory used by SPL
+>> can be overwritten/used for something else.
+>>
+>> My understanding is as follow:
+>> - SPL always need access to bss
+>> - SPL need access to init stack until it has relocated to reloc stack
+>> - SPL will load FIT images using the reloc stack, at this time only
+>>    SPL code, bss and reloc stack matters
+>> - U-boot proper will use its init stack until it has relocated to end
+>>    of memory. Until U-Boot proper has relocated it will use init stack
+>> - We could use same memory position for init stack for SPL and proper,
+>>    e.g. SPL_SHARES_INIT_SP_ADDR=y without any issue
+>> - After U-Boot proper has relocated we should be free to use @2+ MiB
+>>    up to where U-Boot proper was relocated.
+>>
+> 
+> Not sure how Falcon boot fit in all of this and whether it makes use of 
+> the environment variable (likely in the SPL binary itself).
+
+I have never used Falcon boot myself, not sure how to even make Falcon
+boot work. Guessing it should work as long as kernel is not loaded to
+any offset that is in use by SPL code, bss and reloc stack. Loading to
+@64+ MiB should probably be safe.
+
+> 
+> Was this from experience and/or is there some literature in U-Boot git 
+> repo already? Couldn't find much in the 5min I looked for it :)
+
+This information and insight was all learnt and gathered trying to
+understand why trying to boot my ROCK 4SE did not work, yet my ROCK Pi 4
+could boot.
+
+Turned out the embedded FDT after u-boot proper overlapped with gd
+and/or stack. Activating LOG_DEBUG in malloc_simple.c helped me figure
+out what offsets where used at different phases:
+
+TPL uses SRAM as stack and simple malloc area:
+
+  U-Boot TPL 2024.04-rc1 (Feb 12 2024 - 19:41:25)
+  size=30, ptr=30, limit=4000: ff8ebff0
+  [...]
+  size=8, ptr=22c0, limit=4000: ff8ee2a8
+
+SPL initially uses SPL_STACK as stack and simple malloc area:
+
+  Returning to boot ROM...
+  size=30, ptr=30, limit=4000: 3fc000
+  [...]
+  size=8, ptr=15b0, limit=4000: 3fd5a8
+
+Once SPL is loaded it uses SPL_STACK_R_ADDR as stack and malloc area:
+
+  U-Boot SPL 2024.04-rc1 (Feb 12 2024 - 19:41:25 +0000)
+  size=a0, ptr=a0, limit=10000: 3ff0000
+  [...]
+  size=a00, ptr=11c0, limit=10000: aligned to 3ff07c0
+  [loading FIT]
+  Jumping to U-Boot via ARM Trusted Firmware
+
+U-Boot initially uses CUSTOM_SYS_INIT_SP_ADDR as stack and malloc area:
+
+  INFO:    Entry point address = 0x200000
+  INFO:    SPSR = 0x3c9
+  size=3c8, ptr=3c8, limit=4000: 7fc000
+  [...]
+  size=30, ptr=1d80, limit=4000: 7fdd50
+  [...]
+  U-Boot 2024.04-rc1 (Feb 12 2024 - 19:41:25 +0000)
+
+At this stage U-Boot proper should have fully been relocated.
+
+So a lot of trial and error + guessing + digging into code helped me try
+to make sense of above and what different values we can safely use :-)
+
+> 
+> Thanks for the taking the time to explain this, much appreciated.
+> 
+>>>
+>>> Side question, what about making those values the default for RK3399
+>>> instead of having it in each defconfig? This could grow quickly out of
+>>> hands to move this to the Kconfig symbol itself, so not sure it's that
+>>> interesting to the project, but raising this anyway.
+>>
+>> Agree, was trying to define these as defaults in soc Kconfig, but that
+>> rearranged some values in other defconfigs so I avoided doing that in
+>> this series. Also touching each defconfig helped me ping board
+>> maintainers of the change.
+>>
+>> Hopefully a follow-up series can move these, and other options, into
+>> soc Kconfig.
+>>
+> 
+> I was more suggesting adding:
+> """
+> diff --git a/Kconfig b/Kconfig
+> index 00ed1ecc173..b816e536674 100644
+> --- a/Kconfig
+> +++ b/Kconfig
+> @@ -249,6 +249,7 @@ config HAS_CUSTOM_SYS_INIT_SP_ADDR
+>   config CUSTOM_SYS_INIT_SP_ADDR
+>   	hex "Static location for the initial stack pointer"
+>   	depends on HAS_CUSTOM_SYS_INIT_SP_ADDR
+> +	default 0x800000 if ROCKCHIP_RK3399
+>   	default TEXT_BASE if TFABOOT
+> 
+>   config SYS_MALLOC_F
+> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+> index 6405374bcc1..08b71713b79 100644
+> --- a/common/spl/Kconfig
+> +++ b/common/spl/Kconfig
+> @@ -121,6 +121,7 @@ config SPL_BSS_START_ADDR
+>   	default 0x81f80000 if ARCH_SUNXI && MACH_SUNIV
+>   	default 0x4ff80000 if ARCH_SUNXI && !(MACH_SUN9I || MACH_SUNIV)
+>   	default 0x2ff80000 if ARCH_SUNXI && MACH_SUN9I
+> +	default 0x02000000 if ROCKCHIP_RK3399
+>   	default 0x1000 if ARCH_ZYNQMP
+> 
+>   choice
+> """
+> 
+> So that boards could still override it in defconfigs if they really want 
+> to. I don't have knowledge of any other way to provide an overridable 
+> default?
+
+I was trying to define the defaults similar to how rv1126/Kconfig
+currently does it. However, defining a config option with a default that
+way may affect the order Kconfig options gets listed in all defconfigs.
+
+Config fragments could possible also be used to define defaults, so I
+agree, a topic for another series :-)
+
+Regards,
+Jonas
+
+> 
+> Anyway, a topic for another series, nothing requiring to block this 
+> series, so:
+> 
+> Reviewed-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+> 
+> Thanks,
+> Quentin
+
