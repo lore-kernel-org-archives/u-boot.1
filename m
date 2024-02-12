@@ -4,58 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA070C4829B
-	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 15:54:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5505C4829B
+	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 15:54:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3660A876E7;
+	by phobos.denx.de (Postfix) with ESMTP id A71DF87ED6;
 	Mon, 12 Feb 2024 16:53:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="y/vjpSWv";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Swksv/JS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7073A875E9; Mon, 12 Feb 2024 16:53:40 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id 80F84875FC; Mon, 12 Feb 2024 16:53:40 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D025874B1
+ by phobos.denx.de (Postfix) with ESMTPS id 97793875FA
  for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 16:53:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41CFrYvl056955;
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41CFrYkI121098;
  Mon, 12 Feb 2024 09:53:34 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1707753214;
- bh=yPcHjAHna+qD8VqbR5TOa0i4cDrLpksWMuIsnHSs1r0=;
+ bh=g3MHbXOJx9VZ5QBYfTY12dT6msIkq+eNBA0NU3NLjJA=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=y/vjpSWvXmYz4cpAs7t8I1aK4DFAiSFLoIj0xXvrhQFXVbcpfSt7Y8K36t2dNMKfk
- f+ofhKxsSBogLf6RBubYLnRSNuqSfmGyB0C1QI91b7hV6GP7IrGFc7ru/YaDP1sUIa
- Kxwg7bUc+O7SQrzzcYdxvqZyipP8hNmcio5UF0Z4=
-Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41CFrYF6118500
+ b=Swksv/JSv54FIFyzNkE5cDoiQbPo5JdR+CHgEbXVDu+z5Fhv65oji/v/4yh1gqF/Q
+ gpguHAAQBVLr3qfF1ZfSoopU44UIwPDakeT4+BXfHKVRGf292c2ELldo7kIiNxOioq
+ p4OYQ7o6ZNHE62L0n6tJ8mzb/1ai25EwIwsvoDLQ=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41CFrYTZ003764
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Mon, 12 Feb 2024 09:53:34 -0600
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 12
  Feb 2024 09:53:33 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Mon, 12 Feb 2024 09:53:33 -0600
 Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41CFrX1t028864;
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41CFrXYP028872;
  Mon, 12 Feb 2024 09:53:33 -0600
 From: Nishanth Menon <nm@ti.com>
 To: Robert Nelson <robertcnelson@gmail.com>, Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>, Nishanth Menon <nm@ti.com>
-Subject: [PATCH 2/4] configs: am62x_beagleplay_r5_defconfig: Enable
- SPL_BOARD_INIT
-Date: Mon, 12 Feb 2024 09:53:30 -0600
-Message-ID: <20240212155332.541949-3-nm@ti.com>
+Subject: [PATCH 4/4] board: beagle: beagleplay: Configure debounce registers
+Date: Mon, 12 Feb 2024 09:53:32 -0600
+Message-ID: <20240212155332.541949-5-nm@ti.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240212155332.541949-1-nm@ti.com>
 References: <20240212155332.541949-1-nm@ti.com>
@@ -80,25 +79,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable CONFIG_SPL_BOARD_INIT to configure the 32k crystal.
+Configure the debounce configuration that makes sense for BeaglePlay
+usage model.
 
 Signed-off-by: Nishanth Menon <nm@ti.com>
 ---
- configs/am62x_beagleplay_r5_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+ board/beagle/beagleplay/beagleplay.c | 24 ++++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
 
-diff --git a/configs/am62x_beagleplay_r5_defconfig b/configs/am62x_beagleplay_r5_defconfig
-index 2f3264b7ede6..9413c859870f 100644
---- a/configs/am62x_beagleplay_r5_defconfig
-+++ b/configs/am62x_beagleplay_r5_defconfig
-@@ -36,6 +36,7 @@ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
- CONFIG_SPL_BSS_START_ADDR=0x43c3b000
- CONFIG_SPL_BSS_MAX_SIZE=0x3000
- CONFIG_SPL_SYS_REPORT_STACK_F_USAGE=y
-+CONFIG_SPL_BOARD_INIT=y
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
- CONFIG_SPL_STACK_R=y
- CONFIG_SPL_SEPARATE_BSS=y
+diff --git a/board/beagle/beagleplay/beagleplay.c b/board/beagle/beagleplay/beagleplay.c
+index a75b3145fa37..5640fdf41ed3 100644
+--- a/board/beagle/beagleplay/beagleplay.c
++++ b/board/beagle/beagleplay/beagleplay.c
+@@ -59,9 +59,33 @@ static void crystal_32k_enable(void)
+ 	}
+ }
+ 
++static void debounce_configure(void)
++{
++	/* Configure debounce one time from R5 */
++	if (IS_ENABLED(CONFIG_CPU_V7R)) {
++		/*
++		 * Setup debounce time registers.
++		 * arbitrary values. Times are approx
++		 */
++		/* 1.9ms debounce @ 32k */
++		writel(0x1, CTRLMMR_DBOUNCE_CFG(1));
++		/* 5ms debounce @ 32k */
++		writel(0x5, CTRLMMR_DBOUNCE_CFG(2));
++		/* 20ms debounce @ 32k */
++		writel(0x14, CTRLMMR_DBOUNCE_CFG(3));
++		/* 46ms debounce @ 32k */
++		writel(0x18, CTRLMMR_DBOUNCE_CFG(4));
++		/* 100ms debounce @ 32k */
++		writel(0x1c, CTRLMMR_DBOUNCE_CFG(5));
++		/* 156ms debounce @ 32k */
++		writel(0x1f, CTRLMMR_DBOUNCE_CFG(6));
++	}
++}
++
+ void spl_board_init(void)
+ {
+ 	crystal_32k_enable();
++	debounce_configure();
+ }
+ #endif
+ 
 -- 
 2.43.0
 
