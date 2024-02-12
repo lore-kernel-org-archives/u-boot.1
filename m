@@ -4,63 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A485C48297
-	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 13:41:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB8C6C4829B
+	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 13:50:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 51A6F87ECC;
-	Mon, 12 Feb 2024 14:41:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
+	by phobos.denx.de (Postfix) with ESMTP id 12F2187808;
+	Mon, 12 Feb 2024 14:50:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="Ni2lOcKF";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="isPUaK3f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 77FFC87BC3; Mon, 12 Feb 2024 14:41:41 +0100 (CET)
-Received: from mail-vk1-xa31.google.com (mail-vk1-xa31.google.com
- [IPv6:2607:f8b0:4864:20::a31])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9618687732; Mon, 12 Feb 2024 14:50:32 +0100 (CET)
+Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 26CDF87ECC
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 14:41:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 15BC487808
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 14:50:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=shantur.com
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
-Received: by mail-vk1-xa31.google.com with SMTP id
- 71dfb90a1353d-4c042af957fso1990146e0c.0
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 05:41:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1707745296; x=1708350096;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=A1j/pAD+hinbcMDpUf7NhdLuI8t9BdF+9GPDjQwWXOs=;
- b=Ni2lOcKFFBEbXVg4MPk0FkYSet6dcIDVV7lrtWZAGDP2+lNUNoBLzCd1aetoXYs6Ow
- 3zfJ0MFUvvjJKf06cBFL/kgoakO0tlk1bPrlEmv9Wsxbh8YXTWjyRERaZ846JImVT138
- 0By245gNYis6zze74jGeK3UU4tO28HyWD66cIBmZX4Al9BKq++xzRrf3oULZV06R+pk5
- vMZM11ttpTQfRhyZHlCBMGAJ7nWFFbR6srzp+khPWRISaWjEfxIrRARt/I5JOZEndI9g
- HBLSI5sWYGAX78+ftxwZZqbMUrxaUlkbCoudM9ARJm7o+1d4Sf62WCjBpt9KzRliJiB+
- 6zMw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707745296; x=1708350096;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=A1j/pAD+hinbcMDpUf7NhdLuI8t9BdF+9GPDjQwWXOs=;
- b=Aco1GlFmWB/Re9peRC3txQ0Ah6Gagbz3UD5IoFpzLlbmWy9dxV07lArh6uFlH8kYuQ
- ojlxBzD2cfRaQChIIusIhKnPxOP4d70fB7BdcgJFdBLu7l1Kv+iRjjXsIAYEs6yNOZ+s
- FWC+MRgnV7IYGSjq+UEr7wCRsOyRba2wz4ap4vOa4HsWV1f8b0wKtd7n5VjWPd6jRXJM
- G+366ULGLYEh+XkTgG8qLqLfj3HSXMqH7PyMhGxGwHX0PHYHXI1r9z0Y/s99Uuv1QS5G
- /DjuRiQJJPif+kjwctMi19A34u2N227guSfsdvXojg0s+wUb9NOwK4dL2IB6l2wDywve
- fSaA==
-X-Gm-Message-State: AOJu0YwQwGt8ox8WE/AknvBuuFDkhvJlCmea8i0Z1DAMtX/Dpu0/i64m
- /3v7oIe3bi2hfpgJbnHfAKhuMG7EK2dKL57oLJ7kK14a2HKd8/42/rFd/pq1qxugT2doUDlZ00B
- 6jO9oCGPzS2xrElrzfs600vaNWaXLH4EQ+iOf+g==
-X-Google-Smtp-Source: AGHT+IFPHB6WEaZXwD84hJdqpALJ9g+ZvWo5qjIxjHCZESk1J7osidRE4JKr22KOMakcZZP+FqonCZD/5GcOXK9JIlA=
-X-Received: by 2002:a1f:ed83:0:b0:4c0:a87:a243 with SMTP id
- l125-20020a1fed83000000b004c00a87a243mr4515642vkh.0.1707745295823; Mon, 12
- Feb 2024 05:41:35 -0800 (PST)
+ spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
+ t=1707745829;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=u3ZND7YLq28LIdXKO4nEV3pEAVx0NFhbZI5JQ575B9w=;
+ b=isPUaK3f344epoBCy8KReYd8rij+/wp9p/vpTgNeWWF94Jh205aVbX1nyyVpeSAhBtEY1L
+ tLcqvYAEtXLS+BCtIlEhJc4BBzLMOhGOKmQ6NovI0mk9ZUAfGwwacPs0jV2hSZo8vkgKY/
+ K/o5GAfWqyZC6A/KAYpjyhIsYK3Oey1/ckxySwx/bZWGOgBBvNkvDu57raEQn5Ya3NhQ/I
+ HmmZM8FEyXsMV/IvSwCy4nEeOyE8WSnmYWEtTh2HinoRBYQcVS1EB25FYWNBacuY4oTDH5
+ yyX7BgXl3HUbLOuFQ+m64vPK5WkJtTKelF2s1BoU1Cs7JBZQTeN+7Bg6QiHS3g==
+Date: Mon, 12 Feb 2024 14:50:26 +0100
+From: Dragan Simic <dsimic@manjaro.org>
+To: Shantur Rathore <i@shantur.com>
+Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
+ andre.przywara@arm.com, Hector Martin <marcan@marcan.st>, Simon Glass
+ <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: Re: [FIX PATCH v1] Fix: common: usb_hub: Reset only USB3.0 hub
+In-Reply-To: <CABEcMwXAjRLDcg+xP_td6cujPzPJNdQg8YHUjPNj8scea9cS-w@mail.gmail.com>
 References: <20240207102327.35125-1-i@shantur.com>
  <32db6dba-d515-4077-9d72-d77a7f431335@denx.de>
  <CABEcMwXW3KXQCJM16Qhk=19Sss3zdtQyWtJEed5y=na2mP8RFA@mail.gmail.com>
@@ -70,17 +55,13 @@ References: <20240207102327.35125-1-i@shantur.com>
  <a042e4fa90f02b5f51dd76c3dedf5ae1@manjaro.org>
  <3aa6998e3d9fd97cd4ba729f7656f467@manjaro.org>
  <CABEcMwXAjRLDcg+xP_td6cujPzPJNdQg8YHUjPNj8scea9cS-w@mail.gmail.com>
-In-Reply-To: <CABEcMwXAjRLDcg+xP_td6cujPzPJNdQg8YHUjPNj8scea9cS-w@mail.gmail.com>
-From: Shantur Rathore <i@shantur.com>
-Date: Mon, 12 Feb 2024 13:41:24 +0000
-Message-ID: <CABEcMwUvHJWTWykvD3w4HZ3H1fAZMAtMy3CYq_Dv6jnPuzYxdw@mail.gmail.com>
-Subject: Re: [FIX PATCH v1] Fix: common: usb_hub: Reset only USB3.0 hub
-To: Dragan Simic <dsimic@manjaro.org>
-Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de, andre.przywara@arm.com, 
- Hector Martin <marcan@marcan.st>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Message-ID: <cf64595acee2e94594d0ea65a2533874@manjaro.org>
+X-Sender: dsimic@manjaro.org
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
+Content-Transfer-Encoding: 8bit
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,191 +78,180 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Feb 12, 2024 at 1:40=E2=80=AFPM Shantur Rathore <i@shantur.com> wro=
-te:
->
-> Thanks Dragan,
->
-> On Sat, Feb 10, 2024 at 7:13=E2=80=AFAM Dragan Simic <dsimic@manjaro.org>=
- wrote:
-> >
-> > Hello Shantur,
-> >
-> > On 2024-02-08 15:17, Dragan Simic wrote:
-> > > On 2024-02-08 15:10, Shantur Rathore wrote:
-> > >> On Thu, Feb 8, 2024 at 1:44=E2=80=AFPM Dragan Simic <dsimic@manjaro.=
-org>
-> > >> wrote:
-> > >>> On 2024-02-08 14:33, Marek Vasut wrote:
-> > >>> > On 2/8/24 12:30, Shantur Rathore wrote:
-> > >>> >> On Wed, Feb 7, 2024 at 1:07=E2=80=AFPM Marek Vasut <marex@denx.d=
-e> wrote:
-> > >>> >>> On 2/7/24 11:23, Shantur Rathore wrote:
-> > >>> >>>> USB 3.0 spec requires hub to reset device while
-> > >>> >>>> enumeration. Some USB 2.0 hubs / devices don't
-> > >>> >>>> handle this well and after implementation of
-> > >>> >>>> reset some USB 2.0 disks weren't detected on
-> > >>> >>>> Allwinner based boards.
-> > >>> >>>>
-> > >>> >>>> Resetting only when hub is USB 3.0 fixes it.
-> > >>> >>>
-> > >>> >>> It would be good to include as many details about the faulty ha=
-rdware
-> > >>> >>> in
-> > >>> >>> the commit message as possible, so that when someone else runs =
-into
-> > >>> >>> this, they would have all that information available.
-> > >>> >>>
-> > >>> >>>> Tested-by: Andre Przywara <andre.przywara@arm.com>
-> > >>> >>>>
-> > >>> >>>> Signed-off-by: Shantur Rathore <i@shantur.com>
-> > >>> >>>> ---
-> > >>> >>>>
-> > >>> >>>>    common/usb_hub.c | 6 ++++--
-> > >>> >>>>    1 file changed, 4 insertions(+), 2 deletions(-)
-> > >>> >>>>
-> > >>> >>>> diff --git a/common/usb_hub.c b/common/usb_hub.c
-> > >>> >>>> index 3fb7e14d10..2e054eb935 100644
-> > >>> >>>> --- a/common/usb_hub.c
-> > >>> >>>> +++ b/common/usb_hub.c
-> > >>> >>>> @@ -174,8 +174,10 @@ static void usb_hub_power_on(struct
-> > >>> >>>> usb_hub_device *hub)
-> > >>> >>>>
-> > >>> >>>>        debug("enabling power on all ports\n");
-> > >>> >>>>        for (i =3D 0; i < dev->maxchild; i++) {
-> > >>> >>>> -             usb_set_port_feature(dev, i + 1, USB_PORT_FEAT_R=
-ESET);
-> > >>> >>>> -             debug("Reset : port %d returns %lX\n", i + 1,
-> > >>> >>>> dev->status);
-> > >>> >>>> +             if (usb_hub_is_superspeed(dev)) {
-> > >>> >>>
-> > >>> >>> Should this condition be "all which are lower than superspeed"
-> > >>> >>> instead ,
-> > >>> >>> so when the next generation of USB comes, this problem won't tr=
-igger
-> > >>> >>> ?
-> > >>> >>>
-> > >>> >>> What does Linux do btw ?
-> > >>> >>
-> > >>> >> As of now Linux checks if the hub is superspeed
-> > >>> >> https://github.com/torvalds/linux/blob/master/drivers/usb/core/h=
-ub.c#L2859
-> > >>> >>
-> > >>> >> which is
-> > >>> >>   return hdev->descriptor.bDeviceProtocol =3D=3D USB_HUB_PR_SS; =
-//
-> > >>> >> USB_HUB_PR_SS =3D 3
-> > >>> >>
-> > >>> >> This holds true for newer SuperSpeedPlus hubs as well.
-> > >>> >> https://github.com/torvalds/linux/blob/master/drivers/usb/core/h=
-ub.h#L155
-> > >>> >>
-> > >>> >> We can change the check to be  bDeviceProtocol > 2 but who knows=
- if
-> > >>> >> things change in the newer version of spec.
-> > >>> >> I am open to suggestions.
-> > >>> >
-> > >>> > Please just include the ^ in the commit description. Use link to
-> > >>> > git.kernel.org , not some mirror . This is extremely useful
-> > >>> > information and, well, you already wrote the V2 commit message
-> > >>> > addition in this answer.
-> > >>>
-> > >>> Shantur, if that would be easier or quicker for you, I can write
-> > >>> a quite detailed patch description for you, in exchange for a
-> > >>> "Helped-by" tag in the v2 patch submission. :)
-> > >>
-> > >> That would be really kind of you Dragan.
-> > >
-> > > Sure, I'll write the summary and send it over.
-> > >
-> > >> I am down with the flu so that would really help me as my brain is
-> > >> working at 15% capacity.
-> > >
-> > > Oh, I'm really sorry to hear that. :(  I hope you'll get better
-> > > soon, and I know very well what's it like;  I've also been sick
-> > > recently, as a result of some kind of flu that unfortunately found
-> > > its way into my lungs, and it took me about a month to get back
-> > > to about 90% of my usual mental capacity.  I'm still not back to
-> > > exactly 100%. :/
-> > >
-> > > I really hope you'll recover much faster.
-> >
-> > I hope you're feeling better.
-> >
-> > Below are the patch subject and description that I prepared for you,
-> > please have a look.
-> >
-> > ------- >8 ------------- >8 ------------- >8 ------------- >8 -------
-> > [PATCH v2] common: usb-hub: Reset USB 3.0 hubs only
-> >
-> > Additional testing of the changes introduced in commit 33e06dcbe57a
-> > ("common:
-> > usb-hub: Reset hub port before scanning") revealed that some USB 3.0
-> > flash
->
+Hello Shantur,
+
+On 2024-02-12 14:40, Shantur Rathore wrote:
+> On Sat, Feb 10, 2024 at 7:13 AM Dragan Simic <dsimic@manjaro.org> 
+> wrote:
+>> On 2024-02-08 15:17, Dragan Simic wrote:
+>> > On 2024-02-08 15:10, Shantur Rathore wrote:
+>> >> On Thu, Feb 8, 2024 at 1:44 PM Dragan Simic <dsimic@manjaro.org>
+>> >> wrote:
+>> >>> On 2024-02-08 14:33, Marek Vasut wrote:
+>> >>> > On 2/8/24 12:30, Shantur Rathore wrote:
+>> >>> >> On Wed, Feb 7, 2024 at 1:07 PM Marek Vasut <marex@denx.de> wrote:
+>> >>> >>> On 2/7/24 11:23, Shantur Rathore wrote:
+>> >>> >>>> USB 3.0 spec requires hub to reset device while
+>> >>> >>>> enumeration. Some USB 2.0 hubs / devices don't
+>> >>> >>>> handle this well and after implementation of
+>> >>> >>>> reset some USB 2.0 disks weren't detected on
+>> >>> >>>> Allwinner based boards.
+>> >>> >>>>
+>> >>> >>>> Resetting only when hub is USB 3.0 fixes it.
+>> >>> >>>
+>> >>> >>> It would be good to include as many details about the faulty hardware
+>> >>> >>> in
+>> >>> >>> the commit message as possible, so that when someone else runs into
+>> >>> >>> this, they would have all that information available.
+>> >>> >>>
+>> >>> >>>> Tested-by: Andre Przywara <andre.przywara@arm.com>
+>> >>> >>>>
+>> >>> >>>> Signed-off-by: Shantur Rathore <i@shantur.com>
+>> >>> >>>> ---
+>> >>> >>>>
+>> >>> >>>>    common/usb_hub.c | 6 ++++--
+>> >>> >>>>    1 file changed, 4 insertions(+), 2 deletions(-)
+>> >>> >>>>
+>> >>> >>>> diff --git a/common/usb_hub.c b/common/usb_hub.c
+>> >>> >>>> index 3fb7e14d10..2e054eb935 100644
+>> >>> >>>> --- a/common/usb_hub.c
+>> >>> >>>> +++ b/common/usb_hub.c
+>> >>> >>>> @@ -174,8 +174,10 @@ static void usb_hub_power_on(struct
+>> >>> >>>> usb_hub_device *hub)
+>> >>> >>>>
+>> >>> >>>>        debug("enabling power on all ports\n");
+>> >>> >>>>        for (i = 0; i < dev->maxchild; i++) {
+>> >>> >>>> -             usb_set_port_feature(dev, i + 1, USB_PORT_FEAT_RESET);
+>> >>> >>>> -             debug("Reset : port %d returns %lX\n", i + 1,
+>> >>> >>>> dev->status);
+>> >>> >>>> +             if (usb_hub_is_superspeed(dev)) {
+>> >>> >>>
+>> >>> >>> Should this condition be "all which are lower than superspeed"
+>> >>> >>> instead ,
+>> >>> >>> so when the next generation of USB comes, this problem won't trigger
+>> >>> >>> ?
+>> >>> >>>
+>> >>> >>> What does Linux do btw ?
+>> >>> >>
+>> >>> >> As of now Linux checks if the hub is superspeed
+>> >>> >> https://github.com/torvalds/linux/blob/master/drivers/usb/core/hub.c#L2859
+>> >>> >>
+>> >>> >> which is
+>> >>> >>   return hdev->descriptor.bDeviceProtocol == USB_HUB_PR_SS; //
+>> >>> >> USB_HUB_PR_SS = 3
+>> >>> >>
+>> >>> >> This holds true for newer SuperSpeedPlus hubs as well.
+>> >>> >> https://github.com/torvalds/linux/blob/master/drivers/usb/core/hub.h#L155
+>> >>> >>
+>> >>> >> We can change the check to be  bDeviceProtocol > 2 but who knows if
+>> >>> >> things change in the newer version of spec.
+>> >>> >> I am open to suggestions.
+>> >>> >
+>> >>> > Please just include the ^ in the commit description. Use link to
+>> >>> > git.kernel.org , not some mirror . This is extremely useful
+>> >>> > information and, well, you already wrote the V2 commit message
+>> >>> > addition in this answer.
+>> >>>
+>> >>> Shantur, if that would be easier or quicker for you, I can write
+>> >>> a quite detailed patch description for you, in exchange for a
+>> >>> "Helped-by" tag in the v2 patch submission. :)
+>> >>
+>> >> That would be really kind of you Dragan.
+>> >
+>> > Sure, I'll write the summary and send it over.
+>> >
+>> >> I am down with the flu so that would really help me as my brain is
+>> >> working at 15% capacity.
+>> >
+>> > Oh, I'm really sorry to hear that. :(  I hope you'll get better
+>> > soon, and I know very well what's it like;  I've also been sick
+>> > recently, as a result of some kind of flu that unfortunately found
+>> > its way into my lungs, and it took me about a month to get back
+>> > to about 90% of my usual mental capacity.  I'm still not back to
+>> > exactly 100%. :/
+>> >
+>> > I really hope you'll recover much faster.
+>> 
+>> I hope you're feeling better.
+>> 
+>> Below are the patch subject and description that I prepared for you,
+>> please have a look.
+>> 
+>> ------- >8 ------------- >8 ------------- >8 ------------- >8 -------
+>> [PATCH v2] common: usb-hub: Reset USB 3.0 hubs only
+>> 
+>> Additional testing of the changes introduced in commit 33e06dcbe57a
+>> ("common:
+>> usb-hub: Reset hub port before scanning") revealed that some USB 3.0
+>> flash
+
+s/some USB 3.0 flash/some USB 2.0 and 3.0 flash/
+
 > I think it was a USB 2.0 drive that didn't work on the USB 2.0 port.
->
-> > drives didn't work in U-Boot on some Allwinner SoCs that support USB 2.=
-0
-> > only.
-> > More precisely, some tested USB 3.0 flash drives failed to be detected
-> > and
-> > work on an OrangePi Zero 3 with Allwinner H616 SoC, which supports USB
-> > 2.0
-> > only, while the same USB flash drives worked just fine on a Pine64 H64
-> > with
-> > Allwinner H6 SoC, which supports both USB 2.0 and 3.0.
-> >
-> > Resetting USB 3.0 hubs only has been tested to work as expected,
-> > resolving
-> > the previous issues on the Allwinner H616, while not introducing any ne=
-w
-> > issues on other Allwinner SoCs.  Thus, let's fix it that way.
-> >
-> > According to the USB 3.0 specification, resetting a USB 3.0 port is
-> > required
-> > when an attached USB device transitions between different states, such
-> > as
-> > when it resumes from suspend.  Though, the Linux kernel performs
-> > additional
-> > USB 3.0 port resets upon initial USB device attachment, presumably to
-> > ensure
-> > proper state of the USB 3.0 hub port and proper USB mode negotiation
-> > during
-> > the initial USB device attachment and enumeration.
-> >
-> > Such USB port resets don't seem to exist for USB 2.0 hubs, according th=
-e
-> > USB
-> > 2.0 specification.  The resets seem to be added to the USB 3.0
-> > specification
-> > as part of the port and device mode negotiation.
-> >
-> > The Linux kernel also resets USB 3.0 (i.e. SuperSpeed) hubs only, as
-> > visible
-> > in file drivers/usb/core/hub.c in the kernel source, line 2859.  This
-> > check
-> > also applies to newer SuperSpeed Plus (USB 3.1 or 3.2) hubs as well,
-> > which
-> > hopefully makes it future proof.
-> >
-> > Fixes: 33e06dcbe57a ("common: usb-hub: Reset hub port before scanning")
-> > Link:
-> > https://lore.kernel.org/u-boot/20240207102327.35125-1-i@shantur.com/T/#=
-u
-> > Link:
-> > https://lore.kernel.org/u-boot/20240201164604.13315fa6@donnerap.manches=
-ter.arm.com/T/#u
-> > Signed-off-by: Shantur Rathore <i@shantur.com>
-> > Helped-by: Dragan Simic <dsimic@manjaro.org>
-> > Tested-by: Andre Przywara <andre.przywara@arm.com>
-> > Reviewed-by: Dragan Simic <dsimic@manjaro.org>
-> > ------- >8 ------------- >8 ------------- >8 ------------- >8 -------
->
-> Regards,
-> Shantur
 
-Is this description acceptable to you Marek.
+As visible in the message linked below, there was one USB 3.0 flash
+drive that didn't work in a USB 2.0 port.  Though, you're right, there
+was also a USB 2.0 drive that didn't work.  Thus, it's perhaps best to
+adjust the wording as I suggested above and below.
 
-Thanks,
-Shantur
+https://lore.kernel.org/u-boot/20240202001218.63b4e9c3@minigeek.lan/
+
+>> drives didn't work in U-Boot on some Allwinner SoCs that support USB 
+>> 2.0
+>> only.
+>> More precisely, some tested USB 3.0 flash drives failed to be detected
+>> and
+
+s/some tested USB 3.0 flash drives/some tested USB 2.0 and 3.0 flash 
+drives/
+
+>> work on an OrangePi Zero 3 with Allwinner H616 SoC, which supports USB
+>> 2.0
+>> only, while the same USB flash drives worked just fine on a Pine64 H64
+>> with
+>> Allwinner H6 SoC, which supports both USB 2.0 and 3.0.
+>> 
+>> Resetting USB 3.0 hubs only has been tested to work as expected,
+>> resolving
+>> the previous issues on the Allwinner H616, while not introducing any 
+>> new
+>> issues on other Allwinner SoCs.  Thus, let's fix it that way.
+>> 
+>> According to the USB 3.0 specification, resetting a USB 3.0 port is
+>> required
+>> when an attached USB device transitions between different states, such
+>> as
+>> when it resumes from suspend.  Though, the Linux kernel performs
+>> additional
+>> USB 3.0 port resets upon initial USB device attachment, presumably to
+>> ensure
+>> proper state of the USB 3.0 hub port and proper USB mode negotiation
+>> during
+>> the initial USB device attachment and enumeration.
+>> 
+>> Such USB port resets don't seem to exist for USB 2.0 hubs, according 
+>> the
+>> USB
+>> 2.0 specification.  The resets seem to be added to the USB 3.0
+>> specification
+>> as part of the port and device mode negotiation.
+>> 
+>> The Linux kernel also resets USB 3.0 (i.e. SuperSpeed) hubs only, as
+>> visible
+>> in file drivers/usb/core/hub.c in the kernel source, line 2859.  This
+>> check
+>> also applies to newer SuperSpeed Plus (USB 3.1 or 3.2) hubs as well,
+>> which
+>> hopefully makes it future proof.
+>> 
+>> Fixes: 33e06dcbe57a ("common: usb-hub: Reset hub port before 
+>> scanning")
+>> Link:
+>> https://lore.kernel.org/u-boot/20240207102327.35125-1-i@shantur.com/T/#u
+>> Link:
+>> https://lore.kernel.org/u-boot/20240201164604.13315fa6@donnerap.manchester.arm.com/T/#u
+>> Signed-off-by: Shantur Rathore <i@shantur.com>
+>> Helped-by: Dragan Simic <dsimic@manjaro.org>
+>> Tested-by: Andre Przywara <andre.przywara@arm.com>
+>> Reviewed-by: Dragan Simic <dsimic@manjaro.org>
+>> ------- >8 ------------- >8 ------------- >8 ------------- >8 -------
