@@ -4,46 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81D11C4829B
-	for <u-boot@archiver.kernel.org>; Sun, 11 Feb 2024 23:45:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FBBDC4829B
+	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 00:59:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D0EC878E9;
-	Mon, 12 Feb 2024 00:45:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 276308792D;
+	Mon, 12 Feb 2024 01:59:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="CdBNi2tq";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 84D458786C; Mon, 12 Feb 2024 00:45:18 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id E245F87971
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 00:45:15 +0100 (CET)
+ id 716F687C48; Mon, 12 Feb 2024 01:59:42 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B8EF87811
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 01:59:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C53E2DA7;
- Sun, 11 Feb 2024 15:45:56 -0800 (PST)
-Received: from minigeek.lan (unknown [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B2FB03F5A1;
- Sun, 11 Feb 2024 15:45:13 -0800 (PST)
-Date: Sun, 11 Feb 2024 23:43:59 +0000
-From: Andre Przywara <andre.przywara@arm.com>
-To: Philippe Coval <rzr@users.sf.net>
-Cc: u-boot@lists.denx.de, Olliver Schinagl <oliver@schinagl.nl>, Priit Laes
- <plaes@plaes.org>, Maxime Ripard <maxime.ripard@bootlin.com>, Hans de Goede
- <hdegoede@redhat.com>, Jagan Teki <jagan@amarulasolutions.com>, Sam Edwards
- <CFSworks@gmail.com>, Samuel Holland <samuel@sholland.org>, Tom Rini
- <trini@konsulko.com>
-Subject: Re: [PATCH v2] arm: sunxi: Reduce inrush current on Olimex
- A20-OLinuXino_MICRO configs
-Message-ID: <20240211234359.3d217873@minigeek.lan>
-In-Reply-To: <20240211205227.503969-1-rzr@users.sf.net>
-References: <20240211205227.503969-1-rzr@users.sf.net>
-Organization: Arm Ltd.
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=b753=JV=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1707699561;
+ bh=k7RkwKC0L4r6+LkTwdCa/qGJRnyGOtYTOn7577taS+8=;
+ b=CdBNi2tqfllkQhgBHpIUp49ecqSax1EbVU4wX4Vt1TdrFNCk/IYW96Sg9wKsBHCapl5j2e86x
+ TZYlctL752rQnRcs+bb/Ow6B11oF0qwWZVNGxrKX6+3HEBFszUgkM1TXK0lUvg3EB1SNNCFWqJo
+ PKUgmQNO1ENH2TvjXIYnDARJg06u1592t94a1ku7j6Umm5RosmNlk8FVKaqaO+eyEUj4nZshsS+
+ RY9OSOa4nk4SSLGC4KUo+rFTZEaEz2+EVKHDrT6+QUlyasfJ/ECIM/vqEkH/ervMAfL6dDge/GE
+ p5TITXLResqPjc/MqknIXtWn/blvOLtLgiHbgQrfh7Hw==
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH 0/2] rockchip: Update stack and bss addresses on RK3328 and
+ RK3399
+Date: Mon, 12 Feb 2024 00:59:05 +0000
+Message-ID: <20240212005914.3512640-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 167.172.40.54
+X-ForwardEmail-ID: 65c96d685425f2fb50c1afe3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -60,69 +69,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 11 Feb 2024 21:52:13 +0100
-Philippe Coval <rzr@users.sf.net> wrote:
+With the stack and text base used by U-Boot SPL and proper on RK3328 and
+RK3399 there is a high likelihood of overlapping when U-Boot proper +
+FDT nears 1 MiB in size.
 
-Hi Philippe,
+Trying to run U-Boot proper close to 1 MiB in size with debug logging
+something similar to following can be observed:
 
-> This change fix reboot, both configurations
-> were tested on my Olimex A20 Micro Rev E with debian-12.
-> 
-> This issue was also present and fixed on A20 Lime2 (in 8311e84b18),
-> quoting Olliver Schinagl:
-> 
->     The lime2 features a too large capacitor on the LDO3 output, which
->     causes the PMIC to shutdown when enabling power. To be able to still
->     boot up however, we must gradually enable power on LDO3 for this board.
->     We do this by enabling both the inrush quirk and the maximum slope the
->     AXP209 supports.
-> 
-> Link: https://bugs.debian.org/1060752
-> Cc: Olliver Schinagl <oliver@schinagl.nl>
-> Cc: Priit Laes <plaes@plaes.org>
-> Cc: Maxime Ripard <maxime.ripard@bootlin.com>
-> Signed-off-by: Philippe Coval <rzr@users.sf.net>
+  FDT 00000000002fc4e0 gd 00000000002fddf0
+  FDT overlap
+  resetting ...
+  System reset not supported on this platform
+  ### ERROR ### Please RESET the board ###
 
-Thanks for the changes, this looks good to me now.
+Fix this by changing stack and bss addresses used on RK3328 and RK3399.
+The addresses chosen for stack and bss is a combination from both boards.
 
-Reviewed-by: Andre Przywara <andre.przywara@arm.com>
+This series depends on the following two series:
+- rockchip: rk3328: Update defconfigs, DTs and enable boot from SPI [1]
+- rockchip: Read cpuid and generate MAC address from efuse for RK3328
+  and RK3399 [2]
 
-I will queue this for the sunxi/master.
+[1] https://patchwork.ozlabs.org/cover/1895947/
+[1] https://patchwork.ozlabs.org/cover/1897310/
 
-Cheers,
-Andre
+Jonas Karlman (2):
+  rockchip: rk3328: Update stack addresses
+  rockchip: rk3399: Update stack and bss addresses
 
-> ---
-> 
-> Changes in v2:
-> - Add qirk to eMMC configuration of same machine
-> 
->  configs/A20-OLinuXino_MICRO-eMMC_defconfig | 1 +
->  configs/A20-OLinuXino_MICRO_defconfig      | 1 +
->  2 files changed, 2 insertions(+)
-> 
-> diff --git a/configs/A20-OLinuXino_MICRO-eMMC_defconfig b/configs/A20-OLinuXino_MICRO-eMMC_defconfig
-> index ca5869f43d..2f26b0ca01 100644
-> --- a/configs/A20-OLinuXino_MICRO-eMMC_defconfig
-> +++ b/configs/A20-OLinuXino_MICRO-eMMC_defconfig
-> @@ -20,6 +20,7 @@ CONFIG_ETH_DESIGNWARE=y
->  CONFIG_MII=y
->  CONFIG_SUN7I_GMAC=y
->  CONFIG_SUN7I_GMAC_FORCE_TXERR=y
-> +CONFIG_AXP_ALDO3_INRUSH_QUIRK=y
->  CONFIG_AXP_ALDO3_VOLT=2800
->  CONFIG_AXP_ALDO4_VOLT=2800
->  CONFIG_SCSI=y
-> diff --git a/configs/A20-OLinuXino_MICRO_defconfig b/configs/A20-OLinuXino_MICRO_defconfig
-> index db4270f9b2..673ab85c8a 100644
-> --- a/configs/A20-OLinuXino_MICRO_defconfig
-> +++ b/configs/A20-OLinuXino_MICRO_defconfig
-> @@ -20,6 +20,7 @@ CONFIG_ETH_DESIGNWARE=y
->  CONFIG_MII=y
->  CONFIG_SUN7I_GMAC=y
->  CONFIG_SUN7I_GMAC_FORCE_TXERR=y
-> +CONFIG_AXP_ALDO3_INRUSH_QUIRK=y
->  CONFIG_AXP_ALDO3_VOLT=2800
->  CONFIG_AXP_ALDO4_VOLT=2800
->  CONFIG_SCSI=y
+ arch/arm/mach-rockchip/rk3328/Kconfig         | 2 +-
+ configs/chromebook_bob_defconfig              | 2 +-
+ configs/chromebook_kevin_defconfig            | 2 +-
+ configs/eaidk-610-rk3399_defconfig            | 4 ++--
+ configs/evb-rk3328_defconfig                  | 4 +---
+ configs/evb-rk3399_defconfig                  | 4 ++--
+ configs/ficus-rk3399_defconfig                | 2 +-
+ configs/firefly-rk3399_defconfig              | 4 ++--
+ configs/khadas-edge-captain-rk3399_defconfig  | 4 ++--
+ configs/khadas-edge-rk3399_defconfig          | 4 ++--
+ configs/khadas-edge-v-rk3399_defconfig        | 4 ++--
+ configs/leez-rk3399_defconfig                 | 4 ++--
+ configs/nanopc-t4-rk3399_defconfig            | 4 ++--
+ configs/nanopi-m4-2gb-rk3399_defconfig        | 4 ++--
+ configs/nanopi-m4-rk3399_defconfig            | 4 ++--
+ configs/nanopi-m4b-rk3399_defconfig           | 4 ++--
+ configs/nanopi-neo4-rk3399_defconfig          | 4 ++--
+ configs/nanopi-r2c-plus-rk3328_defconfig      | 4 ++--
+ configs/nanopi-r2c-rk3328_defconfig           | 4 ++--
+ configs/nanopi-r2s-rk3328_defconfig           | 4 ++--
+ configs/nanopi-r4s-rk3399_defconfig           | 4 ++--
+ configs/orangepi-r1-plus-lts-rk3328_defconfig | 4 ++--
+ configs/orangepi-r1-plus-rk3328_defconfig     | 4 ++--
+ configs/orangepi-rk3399_defconfig             | 4 ++--
+ configs/pinebook-pro-rk3399_defconfig         | 4 ++--
+ configs/pinephone-pro-rk3399_defconfig        | 4 ++--
+ configs/puma-rk3399_defconfig                 | 2 +-
+ configs/roc-cc-rk3328_defconfig               | 4 ++--
+ configs/roc-pc-mezzanine-rk3399_defconfig     | 4 ++--
+ configs/roc-pc-rk3399_defconfig               | 4 ++--
+ configs/rock-4c-plus-rk3399_defconfig         | 4 ++--
+ configs/rock-4se-rk3399_defconfig             | 4 ++--
+ configs/rock-pi-4-rk3399_defconfig            | 4 ++--
+ configs/rock-pi-4c-rk3399_defconfig           | 4 ++--
+ configs/rock-pi-e-rk3328_defconfig            | 4 +---
+ configs/rock-pi-n10-rk3399pro_defconfig       | 4 ++--
+ configs/rock64-rk3328_defconfig               | 4 ++--
+ configs/rock960-rk3399_defconfig              | 4 ++--
+ configs/rockpro64-rk3399_defconfig            | 4 ++--
+ 39 files changed, 71 insertions(+), 75 deletions(-)
+
+-- 
+2.43.0
 
