@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F14EC4829B
-	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 07:48:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B180C48297
+	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 07:48:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2052487ECA;
-	Mon, 12 Feb 2024 08:47:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B656887ECC;
+	Mon, 12 Feb 2024 08:47:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C102987C80; Mon, 12 Feb 2024 08:47:47 +0100 (CET)
+ id EDB1987ED1; Mon, 12 Feb 2024 08:47:51 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 8A08287ECC
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 08:47:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 4D96787C80
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 08:47:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 96800DA7;
- Sun, 11 Feb 2024 23:48:26 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 58CCEDA7;
+ Sun, 11 Feb 2024 23:48:30 -0800 (PST)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C97473F7CE;
- Sun, 11 Feb 2024 23:47:41 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 8C9643F7BD;
+ Sun, 11 Feb 2024 23:47:45 -0800 (PST)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -38,10 +38,10 @@ Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Michal Simek <michal.simek@amd.com>,
  Jassi Brar <jaswinder.singh@linaro.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v2 03/21] drivers: fwu: add the size parameter to the metadata
- access API's
-Date: Mon, 12 Feb 2024 13:16:54 +0530
-Message-Id: <20240212074712.3657076-4-sughosh.ganu@linaro.org>
+Subject: [PATCH v2 04/21] fwu: add helper functions for getting image
+ description offsets
+Date: Mon, 12 Feb 2024 13:16:55 +0530
+Message-Id: <20240212074712.3657076-5-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240212074712.3657076-1-sughosh.ganu@linaro.org>
 References: <20240212074712.3657076-1-sughosh.ganu@linaro.org>
@@ -63,226 +63,159 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In version 2 of the metadata structure, the size of the structure
-cannot be determined statically at build time. The structure is now
-broken into the top level structure which contains a field indicating
-the total size of the structure.
+With migration of the FWU metadata structure to version 2, the size of
+the structure is not determined at build time, but at run time.
 
-Add a size parameter to the metadata access API functions to indicate
-the number of bytes to be accessed. This is then used to either read
-the entire structure, or only the top level structure.
+This means, that the offsets for the structures describing firmware
+images which are part of the FWU metadata(struct fwu_fw_store_desc,
+struct fwu_image_entry and struct fwu_image_bank_info) need to be
+computed at runtime. Add helper functions to get addresses of these
+structures.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
 
-Changes since V1: None
+Changes since V1:
+* New patch needed based on comments from Ilias on the earlier
+  version.
 
- drivers/fwu-mdata/fwu-mdata-uclass.c | 10 ++++++----
- drivers/fwu-mdata/gpt_blk.c          | 23 +++++++++++++----------
- drivers/fwu-mdata/raw_mtd.c          | 10 ++++++----
- include/fwu.h                        | 14 ++++++++++----
- 4 files changed, 35 insertions(+), 22 deletions(-)
 
-diff --git a/drivers/fwu-mdata/fwu-mdata-uclass.c b/drivers/fwu-mdata/fwu-mdata-uclass.c
-index 0a8edaaa41..145479bab0 100644
---- a/drivers/fwu-mdata/fwu-mdata-uclass.c
-+++ b/drivers/fwu-mdata/fwu-mdata-uclass.c
-@@ -20,7 +20,8 @@
-  *
-  * Return: 0 if OK, -ve on error
-  */
--int fwu_read_mdata(struct udevice *dev, struct fwu_mdata *mdata, bool primary)
-+int fwu_read_mdata(struct udevice *dev, struct fwu_mdata *mdata, bool primary,
-+		   uint32_t size)
- {
- 	const struct fwu_mdata_ops *ops = device_get_ops(dev);
- 
-@@ -29,7 +30,7 @@ int fwu_read_mdata(struct udevice *dev, struct fwu_mdata *mdata, bool primary)
- 		return -ENOSYS;
- 	}
- 
--	return ops->read_mdata(dev, mdata, primary);
-+	return ops->read_mdata(dev, mdata, primary, size);
- }
- 
- /**
-@@ -37,7 +38,8 @@ int fwu_read_mdata(struct udevice *dev, struct fwu_mdata *mdata, bool primary)
-  *
-  * Return: 0 if OK, -ve on error
-  */
--int fwu_write_mdata(struct udevice *dev, struct fwu_mdata *mdata, bool primary)
-+int fwu_write_mdata(struct udevice *dev, struct fwu_mdata *mdata, bool primary,
-+		    uint32_t size)
- {
- 	const struct fwu_mdata_ops *ops = device_get_ops(dev);
- 
-@@ -46,7 +48,7 @@ int fwu_write_mdata(struct udevice *dev, struct fwu_mdata *mdata, bool primary)
- 		return -ENOSYS;
- 	}
- 
--	return ops->write_mdata(dev, mdata, primary);
-+	return ops->write_mdata(dev, mdata, primary, size);
- }
- 
- UCLASS_DRIVER(fwu_mdata) = {
-diff --git a/drivers/fwu-mdata/gpt_blk.c b/drivers/fwu-mdata/gpt_blk.c
-index c7284916c4..97eac3611f 100644
---- a/drivers/fwu-mdata/gpt_blk.c
-+++ b/drivers/fwu-mdata/gpt_blk.c
-@@ -81,15 +81,14 @@ static int gpt_get_mdata_disk_part(struct blk_desc *desc,
- 	return -ENOENT;
- }
- 
--static int gpt_read_write_mdata(struct blk_desc *desc,
--				struct fwu_mdata *mdata,
--				u8 access, u32 part_num)
-+static int gpt_read_write_mdata(struct blk_desc *desc, struct fwu_mdata *mdata,
-+				u8 access, u32 part_num, u32 size)
- {
- 	int ret;
- 	u32 len, blk_start, blkcnt;
- 	struct disk_partition info;
- 
--	ALLOC_CACHE_ALIGN_BUFFER_PAD(struct fwu_mdata, mdata_aligned, 1,
-+	ALLOC_CACHE_ALIGN_BUFFER_PAD(u8, mdata_aligned, size,
- 				     desc->blksz);
- 
- 	if (!mdata)
-@@ -101,7 +100,7 @@ static int gpt_read_write_mdata(struct blk_desc *desc,
- 		return -ENOENT;
- 	}
- 
--	len = sizeof(*mdata);
-+	len = size;
- 	blkcnt = BLOCK_CNT(len, desc);
- 	if (blkcnt > info.size) {
- 		log_debug("Block count exceeds FWU metadata partition size\n");
-@@ -114,7 +113,7 @@ static int gpt_read_write_mdata(struct blk_desc *desc,
- 			log_debug("Error reading FWU metadata from the device\n");
- 			return -EIO;
- 		}
--		memcpy(mdata, mdata_aligned, sizeof(struct fwu_mdata));
-+		memcpy(mdata, mdata_aligned, size);
- 	} else {
- 		if (blk_dwrite(desc, blk_start, blkcnt, mdata) != blkcnt) {
- 			log_debug("Error writing FWU metadata to the device\n");
-@@ -164,7 +163,7 @@ static int fwu_mdata_gpt_blk_probe(struct udevice *dev)
- }
- 
- static int fwu_gpt_read_mdata(struct udevice *dev, struct fwu_mdata *mdata,
--			      bool primary)
-+			      bool primary, u32 size)
- {
- 	struct fwu_mdata_gpt_blk_priv *priv = dev_get_priv(dev);
- 	struct blk_desc *desc = dev_get_uclass_plat(priv->blk_dev);
-@@ -177,11 +176,13 @@ static int fwu_gpt_read_mdata(struct udevice *dev, struct fwu_mdata *mdata,
- 	}
- 
- 	return gpt_read_write_mdata(desc, mdata, MDATA_READ,
--				    primary ? g_mdata_part[0] : g_mdata_part[1]);
-+				    primary ?
-+				    g_mdata_part[0] : g_mdata_part[1],
-+				    size);
- }
- 
- static int fwu_gpt_write_mdata(struct udevice *dev, struct fwu_mdata *mdata,
--			       bool primary)
-+			       bool primary, u32 size)
- {
- 	struct fwu_mdata_gpt_blk_priv *priv = dev_get_priv(dev);
- 	struct blk_desc *desc = dev_get_uclass_plat(priv->blk_dev);
-@@ -194,7 +195,9 @@ static int fwu_gpt_write_mdata(struct udevice *dev, struct fwu_mdata *mdata,
- 	}
- 
- 	return gpt_read_write_mdata(desc, mdata, MDATA_WRITE,
--				    primary ? g_mdata_part[0] : g_mdata_part[1]);
-+				    primary ?
-+				    g_mdata_part[0] : g_mdata_part[1],
-+				    size);
- }
- 
- static const struct fwu_mdata_ops fwu_gpt_blk_ops = {
-diff --git a/drivers/fwu-mdata/raw_mtd.c b/drivers/fwu-mdata/raw_mtd.c
-index 17e4517973..9f3f1dc213 100644
---- a/drivers/fwu-mdata/raw_mtd.c
-+++ b/drivers/fwu-mdata/raw_mtd.c
-@@ -97,22 +97,24 @@ lock:
- 	return ret;
- }
- 
--static int fwu_mtd_read_mdata(struct udevice *dev, struct fwu_mdata *mdata, bool primary)
-+static int fwu_mtd_read_mdata(struct udevice *dev, struct fwu_mdata *mdata,
-+			      bool primary, u32 size)
- {
- 	struct fwu_mdata_mtd_priv *mtd_priv = dev_get_priv(dev);
- 	struct mtd_info *mtd = mtd_priv->mtd;
- 	u32 offs = primary ? mtd_priv->pri_offset : mtd_priv->sec_offset;
- 
--	return mtd_io_data(mtd, offs, sizeof(struct fwu_mdata), mdata, FWU_MTD_READ);
-+	return mtd_io_data(mtd, offs, size, mdata, FWU_MTD_READ);
- }
- 
--static int fwu_mtd_write_mdata(struct udevice *dev, struct fwu_mdata *mdata, bool primary)
-+static int fwu_mtd_write_mdata(struct udevice *dev, struct fwu_mdata *mdata,
-+			       bool primary, u32 size)
- {
- 	struct fwu_mdata_mtd_priv *mtd_priv = dev_get_priv(dev);
- 	struct mtd_info *mtd = mtd_priv->mtd;
- 	u32 offs = primary ? mtd_priv->pri_offset : mtd_priv->sec_offset;
- 
--	return mtd_io_data(mtd, offs, sizeof(struct fwu_mdata), mdata, FWU_MTD_WRITE);
-+	return mtd_io_data(mtd, offs, size, mdata, FWU_MTD_WRITE);
- }
- 
- static int flash_partition_offset(struct udevice *dev, const char *part_name, fdt_addr_t *offset)
+ include/fwu.h         | 45 +++++++++++++++++++++++++++++++++
+ lib/fwu_updates/fwu.c | 58 +++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 103 insertions(+)
+
 diff --git a/include/fwu.h b/include/fwu.h
-index eb5638f4f3..1815bd0064 100644
+index 1815bd0064..7de462548c 100644
 --- a/include/fwu.h
 +++ b/include/fwu.h
-@@ -32,20 +32,24 @@ struct fwu_mdata_ops {
- 	 * @dev: FWU metadata device
- 	 * @mdata: Output FWU mdata read
- 	 * @primary: If primary or secondary copy of metadata is to be read
-+	 * @size: Size in bytes of the metadata to be read
- 	 *
- 	 * Return: 0 if OK, -ve on error
- 	 */
--	int (*read_mdata)(struct udevice *dev, struct fwu_mdata *mdata, bool primary);
-+	int (*read_mdata)(struct udevice *dev, struct fwu_mdata *mdata,
-+			  bool primary, uint32_t size);
+@@ -8,6 +8,7 @@
  
- 	/**
- 	 * write_mdata() - Write the given FWU metadata copy
- 	 * @dev: FWU metadata device
- 	 * @mdata: Copy of the FWU metadata to write
- 	 * @primary: If primary or secondary copy of metadata is to be written
-+	 * @size: Size in bytes of the metadata to be written
- 	 *
- 	 * Return: 0 if OK, -ve on error
- 	 */
--	int (*write_mdata)(struct udevice *dev, struct fwu_mdata *mdata, bool primary);
-+	int (*write_mdata)(struct udevice *dev, struct fwu_mdata *mdata,
-+			   bool primary, uint32_t size);
- };
+ #include <blk.h>
+ #include <efi.h>
++#include <fwu_mdata.h>
+ #include <mtd.h>
+ #include <uuid.h>
  
- #define FWU_MDATA_VERSION	0x1
-@@ -80,12 +84,14 @@ struct fwu_mdata_ops {
+@@ -81,6 +82,50 @@ struct fwu_mdata_ops {
+ 	EFI_GUID(0x0c996046, 0xbcc0, 0x4d04, 0x85, 0xec, \
+ 		 0xe1, 0xfc, 0xed, 0xf1, 0xc6, 0xf8)
+ 
++
++/**
++ * fwu_get_fw_desc() - Return pointer to firmware descriptor store struct
++ * @mdata: Pointer to the FWU metadata
++ *
++ * Returns pointer to the firmware store descriptor of the FWU metadata
++ * containing information on updatable images.
++ *
++ * Return: Pointer to the struct fwu_fw_store_desc
++ */
++static inline struct fwu_fw_store_desc *fwu_get_fw_desc(struct fwu_mdata *mdata)
++{
++	return (struct fwu_fw_store_desc *)((u8 *)mdata + sizeof(*mdata));
++}
++
++/**
++ * fwu_img_entry_offset() - Get pointer to struct fwu_image_entry
++ * @mdata: Pointer to the FWU metadata
++ * @idx: Image index for which pointer is to be returned
++ *
++ * Fetches pointer to am array element of type struct fwu_image_entry.
++ * This returns back a pointer to a structure which is providing
++ * information on a updatable image.
++ *
++ * Return: Pointer to an array element of type struct fwu_image_entry
++ *
++ */
++struct fwu_image_entry *fwu_img_entry_offset(struct fwu_mdata *mdata, u16 idx);
++
++/**
++ * fwu_img_bank_info_offset() - Get pointer to struct fwu_image_bank_info
++ * @mdata: Pointer to the FWU metadata
++ * @idx: Image index for which information is needed
++ * @bank: Bank for which pointer is to be returned
++ *
++ * Fetches pointer to an array element of type struct fwu_image_bank_info
++ * for a given image. This returns back a pointer to a structure which
++ * is providing information for a given bank for a particular image.
++ *
++ * Return: Pointer to an array element of type fwu_image_bank_info
++ *
++ */
++struct fwu_image_bank_info *fwu_img_bank_info_offset(struct fwu_mdata *mdata,
++						     u16 idx, u8 bank);
  /**
   * fwu_read_mdata() - Wrapper around fwu_mdata_ops.read_mdata()
   */
--int fwu_read_mdata(struct udevice *dev, struct fwu_mdata *mdata, bool primary);
-+int fwu_read_mdata(struct udevice *dev, struct fwu_mdata *mdata,
-+		   bool primary, uint32_t size);
+diff --git a/lib/fwu_updates/fwu.c b/lib/fwu_updates/fwu.c
+index 86518108c2..5f1182a764 100644
+--- a/lib/fwu_updates/fwu.c
++++ b/lib/fwu_updates/fwu.c
+@@ -141,6 +141,64 @@ static int fwu_get_image_type_id(u8 image_index, efi_guid_t *image_type_id)
+ 	return -ENOENT;
+ }
  
++/**
++ * fwu_img_entry_offset() - Get pointer to struct fwu_image_entry
++ * @mdata: Pointer to the FWU metadata
++ * @idx: Image index for which pointer is to be returned
++ *
++ * Fetches pointer to am array element of type struct fwu_image_entry.
++ * This returns back a pointer to a structure which is providing
++ * information on a updatable image.
++ *
++ * Return: Pointer to an array element of type struct fwu_image_entry
++ *
++ */
++struct fwu_image_entry *fwu_img_entry_offset(struct fwu_mdata *mdata, u16 idx)
++{
++	u8 num_banks;
++	size_t offset;
++
++	num_banks = fwu_get_fw_desc(mdata)->num_banks;
++
++	offset = sizeof(struct fwu_mdata) +
++		sizeof(struct fwu_fw_store_desc) +
++		(sizeof(struct fwu_image_entry) +
++		 sizeof(struct fwu_image_bank_info) * num_banks) * idx;
++
++	return (struct fwu_image_entry *)((char *)mdata + offset);
++}
++
++/**
++ * fwu_img_bank_info_offset() - Get pointer to struct fwu_image_bank_info
++ * @mdata: Pointer to the FWU metadata
++ * @idx: Image index for which information is needed
++ * @bank: Bank for which pointer is to be returned
++ *
++ * Fetches pointer to an array element of type struct fwu_image_bank_info
++ * for a given image. This returns back a pointer to a structure which
++ * is providing information for a given bank for a particular image.
++ *
++ * Return: Pointer to an array element of type fwu_image_bank_info
++ *
++ */
++struct fwu_image_bank_info *fwu_img_bank_info_offset(struct fwu_mdata *mdata,
++						     u16 idx, u8 bank)
++{
++	u8 num_banks;
++	size_t offset;
++
++	num_banks = fwu_get_fw_desc(mdata)->num_banks;
++
++	offset = sizeof(struct fwu_mdata) +
++		sizeof(struct fwu_fw_store_desc) +
++		(sizeof(struct fwu_image_entry) +
++		 sizeof(struct fwu_image_bank_info) * num_banks) * idx +
++		sizeof(struct fwu_image_entry) +
++		sizeof(struct fwu_image_bank_info) * bank;
++
++	return (struct fwu_image_bank_info *)((char *)mdata + offset);
++}
++
  /**
-  * fwu_write_mdata() - Wrapper around fwu_mdata_ops.write_mdata()
-  */
--int fwu_write_mdata(struct udevice *dev, struct fwu_mdata *mdata, bool primary);
-+int fwu_write_mdata(struct udevice *dev, struct fwu_mdata *mdata,
-+		    bool primary, uint32_t size);
- 
- /**
-  * fwu_get_mdata() - Read, verify and return the FWU metadata
+  * fwu_sync_mdata() - Update given meta-data partition(s) with the copy provided
+  * @mdata: FWU metadata structure
 -- 
 2.34.1
 
