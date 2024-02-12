@@ -4,79 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06CC0C48297
-	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 10:59:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 794D0C48297
+	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 11:02:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 725F987BE5;
-	Mon, 12 Feb 2024 11:59:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C4F4887BE5;
+	Mon, 12 Feb 2024 12:02:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Khq+iT2T";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UM3NxN2+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B706879DF; Mon, 12 Feb 2024 11:59:41 +0100 (CET)
-Received: from mail-pg1-x532.google.com (mail-pg1-x532.google.com
- [IPv6:2607:f8b0:4864:20::532])
+ id 70F5D87EC4; Mon, 12 Feb 2024 12:02:09 +0100 (CET)
+Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
+ [IPv6:2607:f8b0:4864:20::1035])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F198287EC4
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 11:59:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DF603879DF
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 12:02:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pg1-x532.google.com with SMTP id
- 41be03b00d2f7-5cfcf509fbdso1017142a12.1
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 02:59:38 -0800 (PST)
+Received: by mail-pj1-x1035.google.com with SMTP id
+ 98e67ed59e1d1-29593a27fcaso594282a91.1
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 03:02:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1707735577; x=1708340377; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UmSgkQvcG80GyxJXoXDLwXOxN7cm8RWhTzqJk03C90U=;
- b=Khq+iT2T+9zi+dyiQMaGzXtbIlxbB8ztaWDO4jpao2GLi1nB2P6+k+qQ/fLplpErGD
- x9TTJ0ktmokhw+6bEYtoOnfxXPhxtJuWy1NXHiOjOHRTe5SwzyEcNY3ltQcZlWHAmCSI
- 4MXdc27Kcba4YKFpyvBeh74qP9kceksIdMYhaPj6CF03VyLiqpFf8ODZwFZP80tMjtp0
- FB7ZenCuL919VZC8fWQuWIJrtl7YA3DmtqQg3UYlMThOnL5moZ9L8B7oe8ijnywvpWfo
- ruNijb3Z/vAkfIN9ZkUkyeiAXlDRkelr8HeIwFXeOkUyybQGdSN530hmqtBXggCK5nzk
- U7/w==
+ d=gmail.com; s=20230601; t=1707735725; x=1708340525; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=8owkyLsN8ILDoUCIvUvjXPU4glWYrWv2egX19J2ds0A=;
+ b=UM3NxN2+29UPYp5w9bYvje4UPtgPb+5l7xivf1mtHTHLA1lECV9GD3MNO4mq3YpCD+
+ VxZEIMSH7B6s88OER7vyQ4WDFes0Ksjp/wwgdqwnrEr3X7Gs1Rkj10IwJJGmcqDwTgBb
+ TdQ0ZAISkv5ps+Yl7HmhyFQr0ZlfzrPcbVM5YM4/K+OkgD4KNolXEWQcR8dtV+t+dOy/
+ nJOfnxXT/fW/CNJZIGLEzbm6UiSAOfGoc7BuboaqjuhSURc4YnqrdMsgumLowRvTpT9L
+ EDOxepNsaFzjAiUDDBLwz74AGLawTE6+byPl39Hb7eulUPFM27g3A8k8Cjxp3hgh56jV
+ Qevg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707735577; x=1708340377;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=UmSgkQvcG80GyxJXoXDLwXOxN7cm8RWhTzqJk03C90U=;
- b=sdidBMOiTQ0yk8Bo1TTra+yBowsrHJJOoiqhEJ1FqgZXJi4qFUw18pfQEWkwW8wCUT
- dOVsa83KW6/Jw8ePGNFEwus49hiUmZ4qZpBAARganDPyQzW4vspnJ/KnQtpTlMJ43FIA
- kp0DbgRi1su1KvzorZMY7o+4r+K6AAKUnBt9Btfi27fbOPWQ5SE7hC5oHzvy3p/KIrHN
- QreMYHeBSAnB7ntlwI4fgLATCMeNqF8TnCWMrofjlwT/8SxsRFVPRwRvlw1PGtGZqGIt
- zOp2tyO9JhpBDn5nD3SzP1T6AjwsPr97azuSo/4uS9Zn4VZmXiA/Spmvzo6shi6Begpz
- tTNg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVHmjJkX3I1NmXwa1xnHfSe3Ncz5VR3kmTepmUwlRivuHIUdAshX6tpm7TDNkR1cmXcSd07SKw/fuI37clxzgvQ2rms7g==
-X-Gm-Message-State: AOJu0YzgF9/rMmQt7ipK5u4d9DDhj6Gjk3P2EHpRIFVDty1NduhzbPf+
- CSPSXKPOGQsBB7W0qPw+MoTDRL1OzAmCdGJYAQ0xLDaPUxue4XZTkquR404PLt13BYGVIIazWS3
- oCoGmNZuRY9XiScFXzQK3Q3nxMuI=
-X-Google-Smtp-Source: AGHT+IHJLtQqBHhkTUjPApaQzdu4iztKkxR0zj1Nud5yacTIggH/HUaCjnl/r0u5RF5c3FAW/hCQtO897argGjBt3IE=
-X-Received: by 2002:a05:6a21:999f:b0:1a0:5a49:801b with SMTP id
- ve31-20020a056a21999f00b001a05a49801bmr396501pzb.3.1707735577346; Mon, 12 Feb
- 2024 02:59:37 -0800 (PST)
-MIME-Version: 1.0
-References: <20240209103009.5463-1-othacehe@gnu.org>
-In-Reply-To: <20240209103009.5463-1-othacehe@gnu.org>
+ d=1e100.net; s=20230601; t=1707735725; x=1708340525;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=8owkyLsN8ILDoUCIvUvjXPU4glWYrWv2egX19J2ds0A=;
+ b=I7RhsghxapJey14JxOBnpuAoRHl2oJDFzsy1nsIwlA7DIv/uTSp/p2N0M0a9rb41Ix
+ FvyMG42arSV1IYgESUvMCMSqOibTls6bExE8+kByL3gEgiPuw7cWwVczOpjWeSKERVKX
+ huSfwDY3L+DcsgZLJFEb/IMwKJEGHws/3FFma/JN/W0r5MFwtQNanocKnHYLVqz+YoOT
+ ZCOY4wgoU0rHg/fAg2bPJakF9bdKCDK83YJs5qDtGkK+PcaUtyYxGh+yEm+9+Tt5D/5Z
+ g1tN2msCmKvY8YS40f3WaS6csSjuTXMb4D7H2VRyojNlLOKDoIY9MFvCFd048aa3lWIb
+ 70GQ==
+X-Gm-Message-State: AOJu0Yw3pUyOgaDV8xv2wLfrCUxlG9RbOtO+Zab6vdP90D3FFsnToJIK
+ qbYS4C23bHZiY8djJdRIWwV0HKrTS2yy5/HcfNQle67kgoPRkVRkk5XJPppg
+X-Google-Smtp-Source: AGHT+IGH7bU6dIdimFroJj7+92IAIzORWRaTls5ixEYziOHXW0BKxO/ADGeIPjcKjazbvkjUrx92Gw==
+X-Received: by 2002:a17:90a:6f83:b0:296:ee29:ac4 with SMTP id
+ e3-20020a17090a6f8300b00296ee290ac4mr4313736pjk.3.1707735725110; 
+ Mon, 12 Feb 2024 03:02:05 -0800 (PST)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:a8ea:7cb9:1157:1655])
+ by smtp.gmail.com with ESMTPSA id
+ sv7-20020a17090b538700b0029604b0b7d1sm226926pjb.15.2024.02.12.03.02.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 12 Feb 2024 03:02:04 -0800 (PST)
 From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 12 Feb 2024 07:59:25 -0300
-Message-ID: <CAOMZO5DWK_bLW5-_4is__8GPBvpOp1JdBDTRjbET78yzAPZekQ@mail.gmail.com>
-Subject: Re: [PATCH v2 0/3] imx93_var_som: Enable AHAB support
-To: Mathieu Othacehe <othacehe@gnu.org>
-Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, 
- Shiji Yang <yangshiji66@outlook.com>, Ye Li <ye.li@nxp.com>, 
- =?UTF-8?Q?S=C3=A9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>, 
- Simon Glass <sjg@chromium.org>, Mathieu Othacehe <m.othacehe@gmail.com>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: Pull request: Please pull u-boot-imx-master-20240212
+Date: Mon, 12 Feb 2024 08:01:59 -0300
+Message-Id: <20240212110159.2426827-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,11 +88,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Feb 9, 2024 at 7:30=E2=80=AFAM Mathieu Othacehe <othacehe@gnu.org> =
-wrote:
->
-> Hello,
->
-> In this v2, I moved imx93_probe_mu to a dedicated header.
+Hi Tom,
 
-Applied all, thanks.
+Please pull from u-boot-imx, thanks.
+
+The following changes since commit d7aaaf4223d0a2f9f8c9eed47d7431860b3116d8:
+
+  Merge tag 'u-boot-dfu-20240209' of https://source.denx.de/u-boot/custodians/u-boot-dfu (2024-02-09 09:00:42 -0500)
+
+are available in the Git repository at:
+
+  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-master-20240212
+
+for you to fetch changes up to fcd377ed6480643b1f79188c7a8fb9280a211b4f:
+
+  configs: imx93_var_som: Enable AHAB support (2024-02-10 15:16:13 -0300)
+
+u-boot-imx-master-20240212
+--------------------------
+
+CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/19583
+
+- Fix the i.MX8MP SPI compatible string.
+- Let the SPL clock code do the configuration on Data Modul i.MX8M Plus eDM SBC.
+- Enable secure boot on the imx93_var_som board.
+----------------------------------------------------------------
+Marek Vasut (2):
+      ARM: imx: Let SPL configure ECSPI1 clock on Data Modul i.MX8M Plus eDM SBC
+      spi: mxc_spi: Add imx6ul-ecspi compatible string
+
+Mathieu Othacehe (3):
+      imx93: Use a header for imx9_probe_mu declaration
+      board: imx93_var_som: Probe ELE MU
+      configs: imx93_var_som: Enable AHAB support
+
+ arch/arm/dts/imx8mp-data-modul-edm-sbc-u-boot.dtsi |  3 +++
+ arch/arm/include/asm/arch-imx9/mu.h                | 13 +++++++++++++
+ board/freescale/imx93_evk/spl.c                    |  2 +-
+ board/phytec/phycore_imx93/spl.c                   |  2 +-
+ board/variscite/imx93_var_som/spl.c                |  5 +++--
+ configs/imx93_var_som_defconfig                    |  1 +
+ drivers/spi/mxc_spi.c                              |  1 +
+ 7 files changed, 23 insertions(+), 4 deletions(-)
+ create mode 100644 arch/arm/include/asm/arch-imx9/mu.h
