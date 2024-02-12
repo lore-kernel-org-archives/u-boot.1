@@ -4,75 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CF53C48297
-	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 13:02:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2077C4829B
+	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 13:15:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2CCB887BC3;
-	Mon, 12 Feb 2024 14:02:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 0BF3087B63;
+	Mon, 12 Feb 2024 14:15:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="gfpxH2qg";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TVuRTLdP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC6AC87EBD; Mon, 12 Feb 2024 14:02:38 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6409A87BC3; Mon, 12 Feb 2024 14:15:21 +0100 (CET)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0964187B63
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 14:02:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1FB158718A
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 14:15:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1707742952; x=1708347752; i=xypron.glpk@gmx.de;
- bh=5sqnQOkQQoKnRi8QcD3EY1DMlw7LADtvZa6WcSWek8U=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
- In-Reply-To;
- b=gfpxH2qgv6NnNC3/Kodm1awiHwRanCtHcwZoGaZXA+3Zr0YgOZEhNHmawOonGi3Y
- LPBu5MTN9q69i5CGo6xbiqO9WFPBgDPSbkxpb8x68nN5xqoWLf/xOjf9OJVxn50bJ
- apjtixaoPShJlDX6HYhkNIzuT3UcVeyfCVu4G3oQkFnj3/+SdnWllenfeXNDbQJgw
- pNTjwkpZBetd+zxq2yvZjKIcle3qMLzapWUgg5RBO7QquJWOuS4Y2xyBRNppnef+/
- NtZEkJ5mRkjd+pfWW9BvCB2SogdnOMJ0uTk7ZIX6MU6jM2UU/k7augf9ug8o+fp+S
- ymUstOUbkGO6Vu7ewg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.67] ([178.202.40.247]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MXXyP-1rTpQt185n-00Z01W; Mon, 12
- Feb 2024 14:02:32 +0100
-Message-ID: <baff3515-65ba-4f1e-8272-9bc90185faff@gmx.de>
-Date: Mon, 12 Feb 2024 14:02:31 +0100
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-a2f22bfb4e6so424498766b.0
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 05:15:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1707743718; x=1708348518; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=9qM2GAhqwdZ2GkJzFxj3b24ONlGU5Gwf2sk392R7gr4=;
+ b=TVuRTLdPwAnWWH2+OrN50CBrBWPDjOA4avPOkUygNlPexKY+13HJl5z2o2Rzwmz4dY
+ venzA1FaJ1QD+kvfqnLce3sI4utnMiMvw17rF8lJfGcYXCOZBP+CzC2rWIQDYFOJAeUG
+ whz9ykGzBwNMSlmPOK+9c4MiLoNIlYiznyxZIbDcVAO1IMahLqWKtnu2jKgBo+UWNZtP
+ AKHAJyEZDfeOiXW0MazlZjSFXLLL/6HaQqSQsUsrf7los0C7N/IRbtsTG16rqwWX0KDm
+ cALMHIQnZZjWIanqZKiP7sVLt04AGOp6esI5myfh/IRe+yk2Nsxz+dUSjgtuC+xItQ2o
+ inWA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1707743718; x=1708348518;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=9qM2GAhqwdZ2GkJzFxj3b24ONlGU5Gwf2sk392R7gr4=;
+ b=UyHCtLzG8Y3YV5W3B9phdTSIZs3+2UmuXcdWaCLe7/mJIVqbj+lELo/iygszGt6mZF
+ 46UvUSqh3I+sTS6aFg/UTUUKEk7hU4EyFCi+W7YtUBMil8IYjaaTotl7se7r8QQfMcqB
+ pp0LiiyawN2OnySB3MYmnv1xoFObmDmXTOPNUwrcGzfYAAQyUDUmjjLDHVr0AZQnB5rJ
+ cKWdJv2/a1QpKJFiXaZewUHPXTpdIjJ2lYhbXVD7eHORJbIKufC7X0tisRG29jSOUKcL
+ WCnQz1e9ECIvIY/MTybx0fzQnK3htxKr6UZV7pxWfLuSAUztZIPXdM6FXpHcWrLbjMz+
+ gaYw==
+X-Gm-Message-State: AOJu0YxX76XXLgdjFrOVJiG+biFRMwjRx5uiw1I+17eNnMeNoUwgTPI2
+ udYUoZdBmMQH6HOFLbwgSpWwTlWzLKpc0B3UUk1EDoq6LaF7j5y3BpywkLcuY6Y=
+X-Google-Smtp-Source: AGHT+IEhVTW6bZ2uw3jWrrCEbtDdiIPq+eyjTdJ5BcGxHYNm6KVobw3baR8OuL24YpqZsY4uww8VlA==
+X-Received: by 2002:a17:906:4111:b0:a38:577b:2a23 with SMTP id
+ j17-20020a170906411100b00a38577b2a23mr4590197ejk.20.1707743718565; 
+ Mon, 12 Feb 2024 05:15:18 -0800 (PST)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVxezzqH/vHzJGGOpB3zN+lqu6YzP0TZO0CvFBcaEs0M+dFCOi5UJl+nhHDpBw9l5IK4SkufcNMah0CBxh3jl0wtkB0r9dpJ6QCDKZ9fPFSMNN8en/F3o3po3zJ+NkmrtHT6m4QM9ZjnJnaZkLbCrVBdM5hTgVH/o6BDKk27BHsprX2h3fpbVmtNmYuDGfO6leGajFsX/sBzZwnfU8YZHQzNaqvbcn/facWKShYjUvo6xrPvhuYuYSbIanVJ84AndOnUTgegz8dc1OhCx4kdZSWOt4yozTpFAQk7ykTgNtux324PBfE04aYnr0wBcvJbEiDicCKoAc9e/u3CvuZGcQv2eSjiymudjYWxbd7+k1W1RRxj7mJKQhyIbZxsvj+vezq/fGPX3rNhwgvJXTJI6uVgUTQbV9P5bg51fijRnN1UplUKo6L2ZLav6CJV851nZBJvnG5tHAg1yeCxM86+0n+GGt4JDcQxPkfGJH3uSkRzvopFTDP3pfJaUkQQzlFST+bfuIgwj4OAdSWorvKJzeRVcqA5u+D/mkxRiDBpzGVqF+2d0QfnUOwJXDWOjSJI4NtuX1mrjxngMXlUFH/biSDnHcBCzn+3So+waC9Pu7LeHp47rjGk6o6RRCzppc8cwBTd83SIPg3U7a/Ixds
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:19f8:2209:bed2:ce0d?
+ ([2a01:e0a:3cb:7bb0:19f8:2209:bed2:ce0d])
+ by smtp.gmail.com with ESMTPSA id
+ r14-20020a170906c28e00b00a3be732b9b1sm202742ejz.40.2024.02.12.05.15.17
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 12 Feb 2024 05:15:18 -0800 (PST)
+Message-ID: <44d1809d-4317-4363-a0e2-c83029357285@linaro.org>
+Date: Mon, 12 Feb 2024 14:15:16 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 4/6] efi_selftest: Add international characters test
+Subject: Re: [PATCH 2/2] rockchip: rk3399: Update stack and bss addresses
+To: Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ Jonas Karlman <jonas@kwiboo.se>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Andy Yan <andy.yan@rock-chips.com>,
+ Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>,
+ Nick Xie <nick@khadas.com>, Jagan Teki <jagan@amarulasolutions.com>,
+ Deepak Das <deepakdas.linux@gmail.com>, Alexandre Vicenzi <linux@alxd.me>,
+ Xiaobo Tian <peterwillcn@gmail.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Klaus Goger <klaus.goger@theobroma-systems.com>, Levin Du
+ <djw@t-chip.com.cn>, Suniel Mahesh <sunil@amarulasolutions.com>,
+ FUKAUMI Naoki <naoki@radxa.com>,
+ Christopher Obbard <chris.obbard@collabora.com>, u-boot@lists.denx.de
+References: <20240212005914.3512640-1-jonas@kwiboo.se>
+ <20240212005914.3512640-3-jonas@kwiboo.se>
+ <d8e10b17-0571-4ebc-9783-2301c429c6b3@theobroma-systems.com>
+ <c3f2027d-3d87-4b71-bb13-35090640dc9a@kwiboo.se>
+ <3b213c6d-9b97-48d1-8c36-4970dd1c4aa8@theobroma-systems.com>
 Content-Language: en-US
-To: j@jannau.net
-Cc: Simon Glass <sjg@chromium.org>, Andre Przywara <andre.przywara@arm.com>,
- u-boot@lists.denx.de, Anatolij Gustschin <agust@denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-References: <20240210-vidconsole-utf8-uefi-v2-0-88c03db60de2@jannau.net>
- <20240210-vidconsole-utf8-uefi-v2-4-88c03db60de2@jannau.net>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240210-vidconsole-utf8-uefi-v2-4-88c03db60de2@jannau.net>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:qjMElWAn4yYZq7ws70lf2ugaW1q3GZ45R+ke4DtW6js5mQ2+j1t
- nd8XSZbvuNw4HWelyrwGmogYcuon+p2n1KVnF3ZOfYrdhKDztNUEZL/RXgC+V0l0MszWxqY
- eCtL3Y+4+IIvlYZWnOxYAwJ7vXDgsfYyc/hO69jR/OpyV3q9Adph1VwZYojuJsZ2ROn6isi
- r6A7SXrVL+TUHY2N1IENg==
-UI-OutboundReport: notjunk:1;M01:P0:eMPx3XRlZkM=;7fbCCK7gUwZhP4iwSOJOrYoO2Iq
- gb2ACtJxDHNQ105fMmvBndoVfC5Zj0Izmk4QZFnleMr0N0GMOGcuyG+M4UZranCRfa4OGsyvX
- TsN1Wfe3BWBIAS92owbGUQESHZxkdKK7wQirVLpxhFe4Jzuwwl4PgeVUXpbXWziWSsahGVi5R
- 0895B0hbG82iAxggaLbfcWj0l+bJ0TbcDSgGXMPuXzx/bQnUK91r521SsiHWNttLvdZagfArs
- AgkzaxWeK4h0lj7NssCaYbtUW2xElcoyWYR037+MMpedlma2FElk2ybKnqbQr4KCmSYvKOfkw
- YjsurRv1f+kw/KGeYbKLZ3zJVChtRrvjku6tzlWVlD80LMLSQ4/a62n8s7EfplqaKyfbGxOde
- dapcjrrYL4y21xTIBr3QDlz46uXYpe18Jn6tHmKNqS4/09X32smjy3Yd1iusQ/BMiNmrSUTTN
- fDvrJ8u+6mTuzvJERR5lnMBqLnyXq5iZNUGXIoZFR4kKpcSW0PTvov8F5OCU7iPsVU1jb0/D1
- EVhWwLExk5G8LiQE8V4vInVwPGaq0sUulxUo2XVASd/U/9dAAAZCVcctLuAZ+qA4deyJYn2TY
- PVKOfdtUWpor+zlNjQOcU1mFNMgCTnER/1dREzAHLadBoTBdf15hoMs9FdtGWIwicXYokb/2x
- ZBvuBsuyKX1jsTGtj45pWdML/VapVjCkkL5A42BJPSXwax4ThPCYZ3d1/xqCpbhPXy4isVm5f
- +1rKc2Rm5uWDn2Re+XoeVRg7iKPuOL37XY8LbvOPtNw4Fp8giBt8olAuCTnyWlpEjkNs4epCG
- dpaav/dFWFIMCfSIvExIuLyf39aqnkY/+LhKdf/lStDhQ=
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <3b213c6d-9b97-48d1-8c36-4970dd1c4aa8@theobroma-systems.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,72 +112,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10.02.24 13:46, Janne Grunau via B4 Relay wrote:
-> From: Andre Przywara <andre.przywara@arm.com>
->
-> UEFI relies entirely on unicode output, which actual fonts displayed on
-> the screen might not be ready for.
->
-> Add a test displaying some international characters, to reveal missing
-> glyphs, especially in our builtin fonts.
-> This would be needed to be manually checked on the screen for
-> correctness.
->
-> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
-> Suggested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Signed-off-by: Janne Grunau <j@jannau.net>
-> ---
->   lib/efi_selftest/efi_selftest_textoutput.c | 8 ++++++++
->   1 file changed, 8 insertions(+)
->
-> diff --git a/lib/efi_selftest/efi_selftest_textoutput.c b/lib/efi_selfte=
-st/efi_selftest_textoutput.c
-> index cc44b38bc2..2aa81b0a80 100644
-> --- a/lib/efi_selftest/efi_selftest_textoutput.c
-> +++ b/lib/efi_selftest/efi_selftest_textoutput.c
-> @@ -30,6 +30,9 @@ static int execute(void)
->   		0xD804, 0xDC05,
->   		0xD804, 0xDC22,
->   		0};
-> +	const u16 text[] =3D
 
-A person not speaking German, Danish, French, Spanish, and Greek would
-not know which characters to look for.
 
-How about printing
+On 2/12/24 12:51, Quentin Schulz wrote:
+> Hi Jonas,
+> 
+> On 2/12/24 12:08, Jonas Karlman wrote:
+>> Hi Quentin,
+>>
+>> On 2024-02-12 11:37, Quentin Schulz wrote:
+>>> Hi Jonas,
+>>>
+>>> On 2/12/24 01:59, Jonas Karlman wrote:
+>>>> With the stack and text base used by U-Boot SPL and proper on RK3399
+>>>> there is a high likelihood of overlapping when U-Boot proper + FDT nears
+>>>> 1 MiB in size.
+>>>>
+>>>> Currently the following memory layout is used:
+>>>> - 0x00000000 (@0 MiB): U-Boot SPL text base
+>>>> - 0x00040000 (@256 KiB): TF-A
+>>>> - 0x00200000 (@2 MiB): U-Boot proper text base
+>>>> - 0x00300000 (@3 MiB): U-Boot proper init stack
+>>>> - 0x00400000 (@4 MiB): U-Boot SPL init stack
+>>>> - 0x00400000 (@4 MiB): U-Boot SPL bss
+>>>> - 0x02000000 (@64 MiB): U-Boot SPL reloc stack
+>>>> - 0x08400000 (@132 MiB): optional OPTEE
+>>>>
+>>>> SPL load TF-A, U-Boot proper and optional OPTEE after SPL stack has
+>>>> relocated, meaning that there is room for close to 2 MiB (@2-4 MiB).
+>>>> However, the initial stack used by U-Boot proper is limiting the size
+>>>> of U-Boot proper + FDT to below 1 MiB (@2-3 MiB).
+>>>>
+>>>> Instead change to use the following memory layout:
+>>>> - 0x00000000 (@0 MiB): U-Boot SPL text base
+>>>> - 0x00040000 (@256 KiB): TF-A
+>>>> - 0x00200000 (@2 MiB): U-Boot proper text base
+>>>> - 0x00400000 (@4 MiB): U-Boot SPL init stack
+>>>> - 0x00800000 (@8 MiB): U-Boot proper init stack (changed)
+>>>> - 0x02000000 (@32 MiB): U-Boot SPL bss (changed)
+>>>> - 0x04000000 (@64 MiB): U-Boot SPL reloc stack
+>>>> - 0x08400000 (@132 MiB): optional OPTEE
+>>>>
+>>>> This should leave room for loading and running a U-Boot proper close
+>>>> to 6 MiB (@2-8 MiB) in size. When U-Boot proper has relocated is should
+>>>> be possible to use @2-132 MiB and @164 MiB+ for scripts, kernel etc.
+>>>>
+>>>> With the moved SPL reloc stack it is also possible to use a much larger
+>>>> malloc area in SPL, e.g. using default SPL_STACK_R_MALLOC_SIMPLE_LEN.
+>>>>
+>>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>>>
+>>> Do we not need to update memory addresses in the environment as well?
+>>
+>> The addresses in environment is to my knowledge only used in U-Boot
+>> proper after relocation. And at that time we should be free to use @2+
+>> MiB up to somewhere close to gd ram_top/relocaddr. The optional Rockchip
+>> OPTEE blobb may occupy @132-164 MiB, but I do not think loading OPTEE
+>> blobs works as-is, so that may not be a big issue.
+>>
+> 
+> Upstream OP-TEE OS seems to support RK3399, c.f. https://github.com/OP-TEE/optee_os/blob/master/core/arch/arm/plat-rockchip/platform_rk3399.c
 
-U+00D6 =C3=96 - Latin capital O with diaresis
-U+00DF =C3=9F - Latin small letter sharp s
-U+00E5 =C3=A5 - Latin small a with ring above
-U+00E5 =C3=A9 - Latin small e with acute
-U+00F1 =C3=B1 - Latin small n with tilde
-U+00F6 =C3=B6 - Latin small o with diaresis
-U+00F8 =C3=B8 - Latin small letter o with stroke
-U+03AC =CE=AC - Greek small letter alpha with tonus
-U+03BB =CE=BB - Greek small letter lambda
-U+03C2 =CF=82 - Greek small letter final sigma
-U+1F19 =E1=BC=99 - Greek capital letter epsilon with dasia
+It does indeed. I run the quarterly release tests on a RockPi4B. We record which
+platforms have been tested in the commit description for each release tag. For
+example, see [1].
 
-Best regards
+In the configuration I test, OP-TEE is loaded at 0x30000000 and uses 32MB (for
+some reason the Linux DT reserves 36MB but I don't think it matters much).
 
-Heinrich
+[1] https://github.com/OP-TEE/optee_os/commit/18b424c23aa5a798dfe2e4d20b4bde3919dc4e99
 
-> +u"\u00d6sterreich Edelwei\u00df Sm\u00f8rrebr\u00f8d Sm\u00f6rg"
-> +u"\u00e5s Ni\u00f1o Ren\u00e9 >\u1f19\u03bb\u03bb\u03ac\u03c2<\n";
->
->   	/* SetAttribute */
->   	efi_st_printf("\nColor palette\n");
-> @@ -118,6 +121,11 @@ static int execute(void)
->   		efi_st_printf("Unicode not handled properly\n");
->   		return EFI_ST_FAILURE;
->   	}
-> +	ret =3D con_out->output_string(con_out, text);
-> +	if (ret !=3D EFI_ST_SUCCESS) {
-> +		efi_st_error("OutputString failed for international chars\n");
-> +		return EFI_ST_FAILURE;
-> +	}
->   	efi_st_printf("\n");
->
->   	return EFI_ST_SUCCESS;
->
-
+-- 
+Jerome
