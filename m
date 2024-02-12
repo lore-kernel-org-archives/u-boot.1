@@ -4,88 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E70DFC4829B
-	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 16:18:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59363C48297
+	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 16:19:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 512F7875FC;
-	Mon, 12 Feb 2024 17:18:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id C1B21877D3;
+	Mon, 12 Feb 2024 17:19:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="MFLb8LCz";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="K8Yr+ewZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B1824876A9; Mon, 12 Feb 2024 17:18:48 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9E691875FA; Mon, 12 Feb 2024 17:19:02 +0100 (CET)
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AEAB6875FA
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 17:18:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1951987ED2
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 17:19:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-lf1-f71.google.com (mail-lf1-f71.google.com
- [209.85.167.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 411C93F125
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 16:18:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1707754726;
- bh=YjyyRHwi5hOB7c0g1QCEBB2fOM+JqXX75cH1KX10yaA=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=MFLb8LCzdYGX7YQ+gGqinFy0wy6AMVwXVp/kqJCVXGes+nnvBdU9KaZqrlyNP+89a
- fFd4JPtqr9w15btkVVMb/zJpGZM6gADYvF+q0mfFg3ifAV2cSV+cCVdEtWzmRArK5F
- A2NPSujbSc+v90p9u3i4Iyl6MOTmAg9awYD9dSvw8EdsP4meNNlJp8bkxODx0j9uRf
- 1A1XKDx5MkSxfs+bDaOUWRZsSfWaGV70INh6tyEJbDYgUT8kBJLC2D+N9FxpipGgmZ
- sPGadpC/wrrKbj/tqrQRvbezdw2h95btPAFaZLZ+sTo3wqtkD4tpK6fVey1AqWfF30
- vl09Ik/1+g3lw==
-Received: by mail-lf1-f71.google.com with SMTP id
- 2adb3069b0e04-50e9e5c8f49so3627066e87.3
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 08:18:46 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-6077d2b3bb1so616917b3.3
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 08:19:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1707754739; x=1708359539; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=WrmSwbyI2zSbms8rn4QAFQvnBYWJJNddGWvH6awp5PE=;
+ b=K8Yr+ewZC8xU3BTowCh/I6EE4NigeVFim1X7EB0wq0odThHOxRTQvqPexs+7z1/AfN
+ hOoTz1K2BeI7ClauivkA+IEtne55/REFn4FcOySNeLJaN0/O0F0n+IDWOVn08lN4o2f7
+ Nh50fU/oTMGs63az0XlWbaDttXI0bs/9ctxHQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707754725; x=1708359525;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=YjyyRHwi5hOB7c0g1QCEBB2fOM+JqXX75cH1KX10yaA=;
- b=eA8p8e12yR23VzRRNa+Fhrx/YrKEqYDVYseehF/UG3HA8VihZGiRNDYJjbaBkQ5yYf
- ejZOFlqMTCXY85xp+Bhv0YaETMVdQeUX0oOQ8SOp1DUjTbCKfTP1Bc5z+aIcldJOynCT
- J2C+6NKejCXRQ95MsAQXwoMjMJkOSeJUZTookDkkSISg04LLOi1iJOtkFkk5k9oRVcvG
- mDIKMYN9tD22pBZ1tvaPpIhB6BSAyG6icXTSYlHUh+KS5Gxnil5eKTS0jb+zKcLX+WAr
- GFwluJhxJpEbJcj/Fd4B6959v10KFLjpZPYH6I27ygp33XwSdwuwzmFRF/HmGHEAxizd
- P1ZA==
-X-Gm-Message-State: AOJu0YyDz+lwNyPcHKo9B8fpVyK6Z1T9R8bl2XUQu2gmuDhuzKXy+69q
- 8HSyESX5318kLczgQypzQUMPVpMXh864tXy/OLUbXiBPjLcqnxjSn2SZ5C3hAxTMYPjJ2SBt3J+
- t4EgLGRDEU7peUot9He3igTdKD5uyYULI9zsxCDX6g/sVg23z2lUh/FXkSFCdXnyMDtI=
-X-Received: by 2002:ac2:43d5:0:b0:511:4eda:2563 with SMTP id
- u21-20020ac243d5000000b005114eda2563mr4366098lfl.69.1707754725654; 
- Mon, 12 Feb 2024 08:18:45 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IH+MNSXRFqz7oBwCgHlF/lSPZc0w7hvB3k6p73OJtxul1CDNicyXiyNhyIq5oD+EAlaVIKDBQ==
-X-Received: by 2002:ac2:43d5:0:b0:511:4eda:2563 with SMTP id
- u21-20020ac243d5000000b005114eda2563mr4366083lfl.69.1707754725287; 
- Mon, 12 Feb 2024 08:18:45 -0800 (PST)
-X-Forwarded-Encrypted: i=1;
- AJvYcCVY9OrHunPF6df8cymBrzE0gGyqsr+bolADlMkI382CsxLA8IQ4yBgkqaxBIu2rFtr+OnHG+9DgnLfOgTj97WiQA3iQNAyO8W9bWEkL+/TQOYo=
-Received: from workstation5.fritz.box
- (ip-178-202-040-247.um47.pools.vodafone-ip.de. [178.202.40.247])
- by smtp.gmail.com with ESMTPSA id
- r17-20020adfe691000000b0033aeb0afa8fsm7207003wrm.39.2024.02.12.08.18.43
+ d=1e100.net; s=20230601; t=1707754739; x=1708359539;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=WrmSwbyI2zSbms8rn4QAFQvnBYWJJNddGWvH6awp5PE=;
+ b=cQkasq/yWdR5CA9lWZq5/qxzxdMvyLznluDzf0uaafUJ9LtcJ2RboqRk0i4+C3vZoE
+ FhZbzeT9J9l0YOwjOdtlOiUrx2SVfu1HhYnChnJYT+lHHLj/3p/Ro0nWTRjOlr1Fsi/W
+ hnj60Bxel7MLXqnYBOLCkqgGbc+/ZyTARY2hZ1pPy8NuJ610SdlRaXW10Y2ib3IuxEam
+ DygsetiXXc9u41UoWXj8UhGXYpZpvwUv/f+op3TdPZTwF1hb2WAh/cfEw8GNpdmA7Z/M
+ fjaJR7JPFUmWFMAM6l85TGvLullSM5e6UQfMLzQbI04K/T5XLjGHsoPpN5EQgiWAz81t
+ 6Pig==
+X-Gm-Message-State: AOJu0YwbMS8rzXLL45bX+1D46463CWsl3yWBBh3CIcCos0vSQ8z24bmi
+ AGb7PxdDejiYz4yMKiJ0oMsbSs5/rWhROy0umXy+VuaV0BIZNeC9dDiF9movk4H20SdT/V3Llxj
+ v
+X-Google-Smtp-Source: AGHT+IHa2HVlLCaBaBtoMB2Fd03+u9knK2Om18JFGy3vojdl6hLXn+Pu7jeN8YvgsTQh/LRK0GEdZg==
+X-Received: by 2002:a25:ac5b:0:b0:dc2:4e83:e6be with SMTP id
+ r27-20020a25ac5b000000b00dc24e83e6bemr5715144ybd.46.1707754738773; 
+ Mon, 12 Feb 2024 08:18:58 -0800 (PST)
+Received: from bill-the-cat (065-184-194-195.res.spectrum.com.
+ [65.184.194.195]) by smtp.gmail.com with ESMTPSA id
+ v124-20020a252f82000000b00dcbbea79ffcsm107502ybv.42.2024.02.12.08.18.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Feb 2024 08:18:44 -0800 (PST)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] efi_driver: provide SBI based runtime system reset
-Date: Mon, 12 Feb 2024 17:18:37 +0100
-Message-ID: <20240212161837.1290585-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.43.0
+ Mon, 12 Feb 2024 08:18:58 -0800 (PST)
+Date: Mon, 12 Feb 2024 11:18:56 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: Pull request: Please pull u-boot-imx-master-20240212
+Message-ID: <20240212161856.GD3040305@bill-the-cat>
+References: <20240212110159.2426827-1-festevam@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="nUvXBLVfJs3ilROu"
+Content-Disposition: inline
+In-Reply-To: <20240212110159.2426827-1-festevam@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,74 +90,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On RISC-V systems system the Supervisory Binary Interface provides system
-reset and poweroff. Use it at EFI runtime.
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- lib/efi_driver/Makefile          |  1 +
- lib/efi_driver/efi_reset_riscv.c | 29 +++++++++++++++++++++++++++++
- lib/efi_loader/Kconfig           |  2 +-
- 3 files changed, 31 insertions(+), 1 deletion(-)
- create mode 100644 lib/efi_driver/efi_reset_riscv.c
+--nUvXBLVfJs3ilROu
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/lib/efi_driver/Makefile b/lib/efi_driver/Makefile
-index f2b6c05cc24..0da20fe91d3 100644
---- a/lib/efi_driver/Makefile
-+++ b/lib/efi_driver/Makefile
-@@ -9,3 +9,4 @@ obj-y += efi_uclass.o
- ifeq ($(CONFIG_PARTITIONS),y)
- obj-y += efi_block_device.o
- endif
-+obj-$(CONFIG_SYSRESET_SBI) += efi_reset_riscv.o
-diff --git a/lib/efi_driver/efi_reset_riscv.c b/lib/efi_driver/efi_reset_riscv.c
-new file mode 100644
-index 00000000000..89b23522e95
---- /dev/null
-+++ b/lib/efi_driver/efi_reset_riscv.c
-@@ -0,0 +1,29 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+
-+#include <efi_loader.h>
-+#include <asm/sbi.h>
-+
-+void __efi_runtime EFIAPI efi_reset_system(enum efi_reset_type reset_type,
-+					   efi_status_t reset_status,
-+					   unsigned long data_size,
-+					   void *reset_data)
-+{
-+	register unsigned long eid asm("a7") = SBI_EXT_SRST;
-+	register unsigned long fid asm("a6") = SBI_EXT_SRST_RESET;
-+	register unsigned long type asm("a0");
-+	register unsigned long reason asm("a1") = SBI_SRST_RESET_REASON_NONE;
-+
-+	switch (reset_type) {
-+	case EFI_RESET_WARM:
-+		type = SBI_SRST_RESET_TYPE_WARM_REBOOT;
-+		break;
-+	case EFI_RESET_SHUTDOWN:
-+		type = SBI_SRST_RESET_TYPE_SHUTDOWN;
-+		break;
-+	default:
-+		type = SBI_SRST_RESET_TYPE_COLD_REBOOT;
-+		break;
-+	}
-+	asm volatile ("ecall\n"
-+		      : : "r" (eid), "r" (fid), "r" (type), "r" (reason));
-+}
-diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-index db5571de1d9..a7c3e05c13a 100644
---- a/lib/efi_loader/Kconfig
-+++ b/lib/efi_loader/Kconfig
-@@ -366,7 +366,7 @@ config EFI_HAVE_RUNTIME_RESET
- 	bool
- 	default y
- 	depends on ARCH_BCM283X || FSL_LAYERSCAPE || PSCI_RESET || \
--		   SANDBOX || SYSRESET_X86
-+		   SANDBOX || SYSRESET_SBI || SYSRESET_X86
- 
- config EFI_GRUB_ARM32_WORKAROUND
- 	bool "Workaround for GRUB on 32bit ARM"
--- 
-2.43.0
+On Mon, Feb 12, 2024 at 08:01:59AM -0300, Fabio Estevam wrote:
 
+> Hi Tom,
+>=20
+> Please pull from u-boot-imx, thanks.
+>=20
+> The following changes since commit d7aaaf4223d0a2f9f8c9eed47d7431860b3116=
+d8:
+>=20
+>   Merge tag 'u-boot-dfu-20240209' of https://source.denx.de/u-boot/custod=
+ians/u-boot-dfu (2024-02-09 09:00:42 -0500)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx=
+-master-20240212
+>=20
+> for you to fetch changes up to fcd377ed6480643b1f79188c7a8fb9280a211b4f:
+>=20
+>   configs: imx93_var_som: Enable AHAB support (2024-02-10 15:16:13 -0300)
+>=20
+> u-boot-imx-master-20240212
+
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--nUvXBLVfJs3ilROu
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXKRO0ACgkQFHw5/5Y0
+tyyMOwv/TPIxvLLtBgXUnQsNenXON1Weq/46ev1bypixIoybSKbmf6INgNN4bjMM
+eSAIlbwwMsJ3yqBq5ZrAZNQRBGj0eIl9yxGAxJtGLYtm5MHLQiizgTswgkFPFMpw
+yjGQzyhfO/wtl7GVnW5dEUv66ThauetVKbB7dn/RChA4fKdiLcVHWUoiLjLeL6II
+rvFtIWhniZa9h1YAGFdaqnY5+p+f6WxKVnAGspRMaAJ8a8A/9nF0QEF/LyQ7mUgp
+0UnQg6MFniD+bY17TiCjPwr3TmLw5q28dXklUGdhCZIxRNX0Rx/fgZM4gBwM7Nfz
+s+Nx7d69Mese0jlTJYvEV4QHzqdOrofvGzCBZh7PAh9ue5QrmNk+Dv/3K+LS6Czz
+TxV5qN9sD+6/4JjL7RdqsIEB35cOeZV0py4ow7DNBgYLMCiKQb6gKQJnl4Tg5jo9
+6Ytgrsm1om4fMrjlUf2WQou/RLtC1sv9R/H19aqOBY2NXOrUJsQNkw4xFCAyI3KM
+AR6GUJMK
+=5h8b
+-----END PGP SIGNATURE-----
+
+--nUvXBLVfJs3ilROu--
