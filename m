@@ -4,65 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46C6EC4829B
-	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 15:54:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88EB4C4829B
+	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 16:07:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 16DE987EDE;
-	Mon, 12 Feb 2024 16:53:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id D22DB87061;
+	Mon, 12 Feb 2024 17:07:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="OKpHHnUy";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="ceh0pFip";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2213C875FA; Mon, 12 Feb 2024 16:53:41 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 52230875FC; Mon, 12 Feb 2024 17:07:28 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 689DE8718A
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 16:53:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E95F486BFA
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 17:07:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41CFrXSV056946;
- Mon, 12 Feb 2024 09:53:33 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1707753214;
- bh=r06DvzFd/9njWxi9H+OlpUagan8BvMnt1ZPtUXvXXGI=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=OKpHHnUyU5qeTSlcKPgdQ+RV516EftIfXGX17rFjlnWSpBD91SRqjsou91k9+Jzm6
- mN4jxuASIn3VBHl2//flZY6pkgA5NYn1yWYptwB7wROCa8nRxBnbcO5ymuD0cxYMyB
- suGMYoFHFsTe49X9MyS3jL9949CoT+UZoosZkrZM=
-Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41CFrXMf118489
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 12 Feb 2024 09:53:33 -0600
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 12
- Feb 2024 09:53:33 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 12 Feb 2024 09:53:33 -0600
-Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41CFrX6a033145;
- Mon, 12 Feb 2024 09:53:33 -0600
-From: Nishanth Menon <nm@ti.com>
-To: Robert Nelson <robertcnelson@gmail.com>, Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, Nishanth Menon <nm@ti.com>
-Subject: [PATCH 1/4] board: beagle: beagleplay: Enable 32k crystal
-Date: Mon, 12 Feb 2024 09:53:29 -0600
-Message-ID: <20240212155332.541949-2-nm@ti.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240212155332.541949-1-nm@ti.com>
-References: <20240212155332.541949-1-nm@ti.com>
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1707754041; x=1708358841; i=xypron.glpk@gmx.de;
+ bh=Q5DzgFV2ntOIBIUXUVyunNoDwXVI+XjCXhHcN9MQrEw=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=ceh0pFipCxoJTqLZ5LgFnhNBBgMyu+/jnZZmU+3psV7FHOCbUUskUIj+NdnqjWI/
+ 7xS++UuX8ajl0md2rZNHRkEzqRETdceI1kFxLNkailxTIFRHpyBCjQJ0UWMLORvWC
+ vNlDfTL5XqPX+D/LNBkfE/vtHqe/mLyq7CzSzflX38iIxrnGj9Wsa/PvuGX4MIi1u
+ vqZMWVxg0ylPo8eMaOX1jLIXDv9YLek/cKki+ObNdlEoy721HL673HWcOusZka/SR
+ ihlKGNu7qQIDFbqbhHmf6MaGlKS45SYNTG60tPEIx16+iaIXagEN+91IHfQeX/CEN
+ h4mO2oDCNW+Qcai9WA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.67] ([178.202.40.247]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1M7b6l-1rdAOr3oA1-0081CD; Mon, 12
+ Feb 2024 17:07:20 +0100
+Message-ID: <9f9c2e53-1639-48e6-b441-1c73abbe48b8@gmx.de>
+Date: Mon, 12 Feb 2024 17:07:20 +0100
 MIME-Version: 1.0
-Organization: Texas Instruments, Inc.
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 5/6] efi_selftest: Add box drawing character selftest
+Content-Language: en-US
+To: j@jannau.net
+Cc: Simon Glass <sjg@chromium.org>, Andre Przywara <andre.przywara@arm.com>,
+ u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Anatolij Gustschin <agust@denx.de>
+References: <20240210-vidconsole-utf8-uefi-v2-0-88c03db60de2@jannau.net>
+ <20240210-vidconsole-utf8-uefi-v2-5-88c03db60de2@jannau.net>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240210-vidconsole-utf8-uefi-v2-5-88c03db60de2@jannau.net>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:NrVeTaRQBehA27WfmMZaFxQh9fyiqGumhyCTZTwI6+gQQ+ZyTCh
+ uNf3pSrEoUwLFV0nbehsnrko+BDD05josRAceXESm9KqWtY2eRx2uzkcX5U8BDzKvQKb6Ic
+ uzxS4b54vQrQOMZy/bQXmJT7WKqwlrQZILB+cWsudCSJiH3UhgKnQxFkB+vMg+I/apOlX2h
+ A3ll8NVRPjuWIB4LY+Mlg==
+UI-OutboundReport: notjunk:1;M01:P0:TCnegiPFiOM=;53Xmjie3/sO+9bFLoqRvaH8bSkc
+ wU94wa+55KVJD/HHBJrbK/VVsuKnTIYe6EVD4feDUCuP4UlDF2bUJciJh3sfRTTgusWIPbAL9
+ DBzkbaaY7EZN+a9afMXGVmsZaRib6KPVQaxCPBx3iV5o1igqCCTdAPKFEaly5GuAiyxkZ5fyF
+ R1J8CKO2GMDMIdRZXrP/Vd6Psr6emlDLnKodF7SLwV53ynsHLhQ/xb536Bmc4PxhZRaqpYgPY
+ ZHPQwrzYGhw0uOy9rZX+eU66au5yKWZJl6rNOnUynmkJ0UaddgHiFiI40JeCU3wBWo0UOEqsI
+ fUGRNiRG7tuNWyQcKJZUKBWDjwsT/7cXkT9QOSVYD5VCflW9hr1jP3rvT6F63tzRa/VMyy05H
+ sDOteX918QRtrmEz3NdECwsdF38Aj5iLFXPAxaaC3MAiYNpcbwLS9FYzWKDrPCoNrkm0aud+5
+ cZxe999nq3sdBmNBos7GOvUp9gUPX3EW0n8jhGW5QRmrJoO0PVInolW5VlGejhrDFOZ9slpwE
+ zAVtl4kXTZEyCe2p65wRW5MzoGmkkDg0pqeNH2SkRnWOxlsMtdCI4WvFY0o5dG4DW7Pe/u2Pf
+ UXgGQCkn12vej0VLNjI59REnIfk+iZtmh0kpgKGlh735fVS5zQ2R2Fy1/lVLIvypRIlXKiWA/
+ E64F6V72jJ6n4aTLGMnTe7RzM49fvx7WQl573aEkpGwBi1MTLYCUIxOA2UVUPEbtfw7OcfIkO
+ mYAaD7EADsuByPdkK21HT9uafwBw/JsAKVI6yZPa4W354NMbuHIMGHEJ6OQvfM6R/HyQav7nV
+ fGXxgGlfcX3JwrlhCAMN1qA+s5KWl+NHJybKzkl8bAHqw=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,72 +89,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable the external 32k crystal similar to that found on other
-production AM62X board. The trim settings for the crystal is board
-dependent, so the sequences tend to be board specific. Since this is
-a configuration that needs to be done prior to DM managing the system
-and all other muxes get set, do the same from R5 context.
+On 10.02.24 13:46, Janne Grunau via B4 Relay wrote:
+> From: Andre Przywara <andre.przywara@arm.com>
+>
+> UEFI applications rely on Unicode output capability, and might use that
+> for drawing pseudo-graphical interfaces using Unicode defined box
+> drawing characters.
+>
+> Add a simple test to display the most basic box characters, which would
+> need to be checked manually on the screen for correctness.
+> To facilitate this, add a three second delay after the output at this
+> point.
+>
+> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+> Suggested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Signed-off-by: Janne Grunau <j@jannau.net>
+> ---
+>   lib/efi_selftest/efi_selftest_textoutput.c | 20 ++++++++++++++++++++
+>   1 file changed, 20 insertions(+)
+>
+> diff --git a/lib/efi_selftest/efi_selftest_textoutput.c b/lib/efi_selfte=
+st/efi_selftest_textoutput.c
+> index 2aa81b0a80..cc11a22eee 100644
+> --- a/lib/efi_selftest/efi_selftest_textoutput.c
+> +++ b/lib/efi_selftest/efi_selftest_textoutput.c
+> @@ -33,6 +33,19 @@ static int execute(void)
+>   	const u16 text[] =3D
+>   u"\u00d6sterreich Edelwei\u00df Sm\u00f8rrebr\u00f8d Sm\u00f6rg"
+>   u"\u00e5s Ni\u00f1o Ren\u00e9 >\u1f19\u03bb\u03bb\u03ac\u03c2<\n";
+> +	const u16 boxes[] =3D
+> +u"This should render as four boxes with text\n"
+> +u"\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500"
+> +u"\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500"
+> +u"\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502"
+> +u" left top    \u2502 right top     \u2502\n\u251c\u2500"
+> +u"\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500"
+> +u"\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500"
+> +u"\u2500\u2500\u2500\u2500\u2500\u2500\u2524\n\u2502 "
+> +u"left bottom \u2502 right bottom  \u2502\n\u2514\u2500\u2500\u2500"
+> +u"\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534"
+> +u"\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500"
+> +u"\u2500\u2500\u2500\u2500\u2518\n";
+>
+>   	/* SetAttribute */
+>   	efi_st_printf("\nColor palette\n");
+> @@ -126,6 +139,13 @@ u"\u00e5s Ni\u00f1o Ren\u00e9 >\u1f19\u03bb\u03bb\u=
+03ac\u03c2<\n";
+>   		efi_st_error("OutputString failed for international chars\n");
+>   		return EFI_ST_FAILURE;
+>   	}
+> +	ret =3D con_out->output_string(con_out, boxes);
+> +	if (ret !=3D EFI_ST_SUCCESS) {
+> +		efi_st_error("OutputString failed for box drawing chars\n");
+> +		return EFI_ST_FAILURE;
+> +	}
+> +	con_out->output_string(con_out, u"waiting for admiration...\n");
+> +	EFI_CALL(systab.boottime->stall(3000000));
 
-Signed-off-by: Nishanth Menon <nm@ti.com>
----
- board/beagle/beagleplay/beagleplay.c | 37 ++++++++++++++++++++++++++++
- 1 file changed, 37 insertions(+)
+We don't want to add any unnecessary waiting times in the unit tests. If
+somebody wants to see the output, he can scroll up.
 
-diff --git a/board/beagle/beagleplay/beagleplay.c b/board/beagle/beagleplay/beagleplay.c
-index 20819ecf45b4..a75b3145fa37 100644
---- a/board/beagle/beagleplay/beagleplay.c
-+++ b/board/beagle/beagleplay/beagleplay.c
-@@ -11,6 +11,8 @@
- #include <fdt_support.h>
- #include <spl.h>
- 
-+#include <asm/arch/hardware.h>
-+
- DECLARE_GLOBAL_DATA_PTR;
- 
- int board_init(void)
-@@ -28,6 +30,41 @@ int dram_init_banksize(void)
- 	return fdtdec_setup_memory_banksize();
- }
- 
-+#ifdef CONFIG_SPL_BOARD_INIT
-+
-+/*
-+ * Enable the 32k Crystal: needed for accurate 32k clock
-+ * and external clock sources such as wlan 32k input clock
-+ * supplied from the SoC to the wlan chip.
-+ *
-+ * The trim setup can be very highly board type specific choice of the crystal
-+ * So this is done in the board file, though, in this case, no specific trim
-+ * is necessary.
-+ */
-+static void crystal_32k_enable(void)
-+{
-+	/* Only mess with 32k at the start of boot from R5 */
-+	if (IS_ENABLED(CONFIG_CPU_V7R)) {
-+		/*
-+		 * We have external 32k crystal, so lets enable it (0x0)
-+		 * and disable bypass (0x0)
-+		 */
-+		writel(0x0, MCU_CTRL_LFXOSC_CTRL);
-+
-+		/* Add any crystal specific TRIM needed here.. */
-+
-+		/* Make sure to mux the SoC 32k from the crystal */
-+		writel(MCU_CTRL_DEVICE_CLKOUT_LFOSC_SELECT_VAL,
-+		       MCU_CTRL_DEVICE_CLKOUT_32K_CTRL);
-+	}
-+}
-+
-+void spl_board_init(void)
-+{
-+	crystal_32k_enable();
-+}
-+#endif
-+
- #ifdef CONFIG_BOARD_LATE_INIT
- int board_late_init(void)
- {
--- 
-2.43.0
+Best regards
+
+Heinrich
+
+>   	efi_st_printf("\n");
+>
+>   	return EFI_ST_SUCCESS;
+>
 
