@@ -4,74 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61696C4829C
-	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 16:52:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B005C48297
+	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 16:53:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 85CFA8751B;
-	Mon, 12 Feb 2024 17:52:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 6CCD4877D3;
+	Mon, 12 Feb 2024 17:53:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="bW0H7UbL";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="fm1KtWlU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4AE078751B; Mon, 12 Feb 2024 17:52:12 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ id BFBF4877FB; Mon, 12 Feb 2024 17:53:41 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4C44C875FC
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 17:52:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AD85D8718A
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 17:53:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1707756728; x=1708361528; i=xypron.glpk@gmx.de;
- bh=9ZAHXYtzTaMdLzrdicSOulsuYoe4s63XrJbz5SUXkyw=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
- In-Reply-To;
- b=bW0H7UbLHu0zWda4GRqCyr83o/iVAvKautYd7mavlXDx/+k26DnLtmXJn7WTOGRV
- EXDDcKwKAK/rYPFjr+o3Cs4j4tEX7ZVX7+MeTAIKXSgOoTu+I6cY1epyVlDL2vIAZ
- x3y4oQhdeat1LlrYxNS5xZslQ2MV+iOHkRYgNgx5c2AVTJr9PlonpP9kJEmEqzxEv
- 2mhdSP8rdCnA30wHQH2I4a56zzE7bIID/rzvMmOy8Kj3hduzviV21odjkOL+7BoFu
- UhYsIo989u+bYKtGOlEiDIShPjk0EDGVm0hTy+qBGc7qVr1hgRy9FpRnUP+Si8xk8
- ZU2hH6ymZxtlJDvzPQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.67] ([178.202.40.247]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MhlKy-1r4vc00kK0-00ds3q; Mon, 12
- Feb 2024 17:52:08 +0100
-Message-ID: <ca87001b-2713-4fdc-8d93-9bfc7008bb02@gmx.de>
-Date: Mon, 12 Feb 2024 17:52:03 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] doc/develop/codingstyle.rst: Clarify include section
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 65E4A40576
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 16:53:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1707756818;
+ bh=ECSXAkIHmj1wskFMSCcJqNJfTlIu09th+SDXSgyqM0Q=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=fm1KtWlUqIl6e9Edi8oRHA6b7kMDu7NU04eG5aAKQVhdp3ZqqqpA2AlWMvqbTomXs
+ e7OgGhW4YzshMhhB3RrmWaWnfXUzPWVlXs34RXz0dML3khj+NHrvOuSPXENpjoTO8H
+ yqLyPHVUfCyZxakxdMxlOjCgnX3x9MyIlExYDGxfk1jJQv9LqltdmQ0DJphNu6cYqQ
+ Tyb1CrIiC+Mx79Bm5xzwPGOYpEbezb/bu26xt+KZYOzfF+vUGCwWVskPfsZQbJ9K+P
+ 36kr8VnKYJBZBspe24gwAJehvdaWuSktBz6+6Le7Pu5Perw8nEiAJ2EUsvujZiXhRS
+ y/gEeJHc8fD+g==
+Received: by mail-wr1-f70.google.com with SMTP id
+ ffacd0b85a97d-33b28f50eadso1538664f8f.1
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 08:53:38 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1707756818; x=1708361618;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ECSXAkIHmj1wskFMSCcJqNJfTlIu09th+SDXSgyqM0Q=;
+ b=mP37D3Rz8aOHasBrbm9nD/GZCwq5hxf7m5DvMO+VqRRcAiKIJrvw5z7pG3fJMWDDrE
+ WIaO0FEbuWnjOs7KLvBDFjbtMA1HSmJfrWjTbDHNwSu67OtcB00OQY9uNYf2ozhLn7rt
+ 0QszfyerTUM26ErK2Adt8DajpYoHzWGlEM2uDU12jbak5MFNmFV586BraeCSK4Mjt7Lr
+ 52WJDySEbwUD6vUyXsY//QO6ReAwFV1RT8SvQLGdL6xsGsuWJgVcwIJz6gCXpRzShJXi
+ NPbNBc75/SdW+tKSg5Xo+xJb8rE+ZovIsJtUhPgMEh/T8qg5DZFmZ4CiBMstWMwLOYH6
+ KwJg==
+X-Gm-Message-State: AOJu0Ywtgg5j2kC4rND+ZPlAG1WalJhASwm8htoV0f8bjxNAMKYbJHqC
+ OAbXyBd/YeZnkExbjNCScxod5fuAK0wPU2LrUMfiLrlEACfh0/zdYA/QBe3MEAp/ocXtG6xnx6I
+ TCri4A/uyzJR5t5ft2CGqx3+6ylUxtuRxAVXxRdGM/Xxge9fXAjyTkdu9Tg9MVwt9cfA=
+X-Received: by 2002:a5d:4f86:0:b0:33b:7560:ce3c with SMTP id
+ d6-20020a5d4f86000000b0033b7560ce3cmr4559678wru.64.1707756818045; 
+ Mon, 12 Feb 2024 08:53:38 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGAZ5Bi43K8836c1TJejRZNXQIVzgiTJidBwpvtoLgHVm+DqpHzneecokdJhMDkAohyKL0v/A==
+X-Received: by 2002:a5d:4f86:0:b0:33b:7560:ce3c with SMTP id
+ d6-20020a5d4f86000000b0033b7560ce3cmr4559667wru.64.1707756817687; 
+ Mon, 12 Feb 2024 08:53:37 -0800 (PST)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVZ603baF+K0bwybg1Rtk6JReuV3G2JeE3Eqz5P9eVWBV/kp7nO8XycF2LlhV+I4WaU2GEDnsNZ0+2WkVOvUyJHJ/fJWsyVycCevY8LwGZr7+LM5DOhmbNJ8uubtQ1PEJh+9acBwV8urdrPN6CIaIJO+9oSZ4O7qqnHrd4HBzguQQWCLduE+3jKnAIhNsgdCxU99NWhwJjxn/l6Z7NuX0BIYU9DlA==
+Received: from workstation5.fritz.box
+ (ip-178-202-040-247.um47.pools.vodafone-ip.de. [178.202.40.247])
+ by smtp.gmail.com with ESMTPSA id
+ t24-20020adfa2d8000000b0033b86b38611sm1960240wra.10.2024.02.12.08.53.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 12 Feb 2024 08:53:37 -0800 (PST)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Igor Opaniuk <igor.opaniuk@gmail.com>
-References: <20240209143520.2724221-1-trini@konsulko.com>
- <CAByghJYCzN4Nm0mThc1QXMKk8KSPRZwwL2pp4ucLv7iwJsMSJg@mail.gmail.com>
- <20240212161909.GF3040305@bill-the-cat>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240212161909.GF3040305@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:hVzd/EMUUHtBZ076CNYxpbpOUT1Ady2HrXQq7WeBl2h13O+WrzG
- MSJlt5gZ8ZeFaUav4zN37Mefst5JQKGYG8LEYeVqYsxxKEBslTC7usEoGWYyLx0CEgEk7v7
- oOMZuiaMAm1DvE/mBM+RE/HyGYTesizjBEE2qEIJbnFkmDxXTTGbYT5BzKd6O3x0NYohEKj
- h2wDqFxc6pveG64x4KA3Q==
-UI-OutboundReport: notjunk:1;M01:P0:dxKMYCrgxuo=;IXbsSiyaJ2IhrrjR9+6B6vFGq0S
- zxGD/rJ3ETqVHrr024hPwwqyt8XEgUT8ZaAJBPIkph0d4EM+lvftB2IL/kmMS6Lxz1ta5gVpN
- zfQkkH0ZLhvKJKT9TRlzP1qOp1lwBySZh1Be6hKunc1ZJqRQ9STYJvCcRhNgIJSxmQZsEJht0
- +ruTcPUat+otZlgKjrkyuwZYoAHj3UwIwizxkMHL4f6/gFa3cNzjjhgJFjA4EPysSUZ9l2XIr
- Fj9fHiuplj3pXH9uJF0VFGdofkPteFLXnlmiF929ncXQzTwpLG9YkgAl70+4YRDuGYSBSTCoM
- PgQkHCpeWoifcBZ6J+Ts5uqZQtz4h13KNS9TEvCYJd3GS6eb+SULxbiaR01MfyXzZFAqha99/
- 8CipAQevfpasT+fv7uhWNt6PkZoIcER0jWqaCJIswjZg+z1g0RCbzHXY/3JsSa7OblZHwYunk
- 02CBoFevUZ9eh/XS7u85fh7fMAcugOz6JLqDQOJQ3HdFCdHyzu2C6tgTmvplklmhkeXIYevwX
- bDQFaYswFQ1KlAOcxKGQsiB6xpf0Ao+eikhhvLfW8SMTZMbZGCpWDwY2UlI6QmdYPO3d2P1ub
- 6eO7Q5J/zX1fQxa4EmQgpNGJL6GprVR8wwNMA9ZD7XqTJG/bjCvpXN/qvvomhFXk81l5dpWrU
- PMiIvq+XWufRFRTZ1hnM4erJR8BE+nhHkyJhW1O3WaPYQ2VLKnfKvoo5XAS54VrxrqBYZT+LL
- NBRqMGm1HzuM5sFSLBLRkAm09QuZCKJRG/ktpfTLDvV0sFzQIBCCm5EC4mCqJAa3HlSwncm2R
- nyQT2N1s56EllXu7gDUAT58XQTJioXdUBO21L/M5eusL0=
+Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+ u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH] cmd: remove common.h from exception command implementations
+Date: Mon, 12 Feb 2024 17:53:29 +0100
+Message-ID: <20240212165329.17847-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,98 +104,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12.02.24 17:19, Tom Rini wrote:
-> On Sun, Feb 11, 2024 at 06:53:47PM +0100, Igor Opaniuk wrote:
->> Hi Tom,
->>
->> On Fri, Feb 9, 2024 at 3:52=E2=80=AFPM Tom Rini <trini@konsulko.com> wr=
-ote:
->>>
->>> Rework the section about includes slightly. We should not be using
->>> common.h anywhere, so remove that from examples and ask people to send
->>> patches removing it when found. Doing this also means we need to rewor=
-d
->>> other parts of this section. Be clearer about using alphabetical
->>> ordering.
->>>
->>> Signed-off-by: Tom Rini <trini@konsulko.com>
->>> ---
->>>   doc/develop/codingstyle.rst | 23 +++++++++++------------
->>>   1 file changed, 11 insertions(+), 12 deletions(-)
->>>
->>> diff --git a/doc/develop/codingstyle.rst b/doc/develop/codingstyle.rst
->>> index b25bfbd271f0..cdf5aedfcbb0 100644
->>> --- a/doc/develop/codingstyle.rst
->>> +++ b/doc/develop/codingstyle.rst
->>> @@ -108,30 +108,29 @@ expected size, or that particular members appear=
- at the right offset.
->>>   Include files
->>>   -------------
->>>
->>> -You should follow this ordering in U-Boot. The common.h header (which=
- is going
->>> -away at some point) should always be first, followed by other headers=
- in order,
->>> -then headers with directories, then local files:
->>> +You should follow this ordering in U-Boot. In all cases, they should =
-be listed
->>> +in alphabetical order. First comes headers which are located directly=
- in our
->>> +top-level include diretory. This excludes the common.h header file wh=
-ich is to
->>> +be removed. Second are headers within subdirectories, Finally directo=
-ry-local
->>> +includes should be listed. See this example:
->>>
->>>   .. code-block:: C
->>>
->>> -   #include <common.h>
->>>      #include <bootstage.h>
->>>      #include <dm.h>
->>>      #include <others.h>
->>>      #include <asm/...>
->>> -   #include <arm/arch/...>
->>> +   #include <asm/arch/...>
->>>      #include <dm/device_compat.h>
->>>      #include <linux/...>
->>>      #include "local.h"
->>>
->>> -Within that order, sort your includes.
->>> -
->>> -It is important to include common.h first since it provides basic fea=
-tures used
->>> -by most files, e.g. CONFIG options.
->>> -
->>>   For files that need to be compiled for the host (e.g. tools), you ne=
-ed to use
->>> -``#ifndef USE_HOSTCC`` to avoid including common.h since it includes =
-a lot of
->>> -internal U-Boot things. See common/image.c for an example.
->>> +``#ifndef USE_HOSTCC`` to avoid including U-Boot specific include fil=
-es.  See
->>> +common/image.c for an example.
->>> +
->>> +If you encounter ccode which still uses <common.h> a patch to remove =
-that and
->> nitpick: s/ccode/code/g
->
-> Whoops, Heinrich can you please fix when applying?
->
+The common.h should not be used anymore.
 
-Hello Tom,
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ cmd/arm/exception.c     | 1 -
+ cmd/riscv/exception.c   | 1 -
+ cmd/sandbox/exception.c | 1 -
+ cmd/x86/exception.c     | 1 -
+ 4 files changed, 4 deletions(-)
 
-I am missing here some text about the includes that are automatically
-included, e.g.
-
-linux/kconfig.h
-include/generated/autoconf.h
-
-Maybe you could describe this in a future patch.
-
-We still have 4107 files including common.h. Should we have a Migration
-warning in Makefile?
-
-Best regards
-
-Heinrich
+diff --git a/cmd/arm/exception.c b/cmd/arm/exception.c
+index 522f6dff53f..98a9795b68c 100644
+--- a/cmd/arm/exception.c
++++ b/cmd/arm/exception.c
+@@ -5,7 +5,6 @@
+  * Copyright (c) 2018, Heinrich Schuchardt <xypron.glpk@gmx.de>
+  */
+ 
+-#include <common.h>
+ #include <command.h>
+ 
+ static int do_unaligned(struct cmd_tbl *cmdtp, int flag, int argc,
+diff --git a/cmd/riscv/exception.c b/cmd/riscv/exception.c
+index f38f454a0b1..14ad6c440a5 100644
+--- a/cmd/riscv/exception.c
++++ b/cmd/riscv/exception.c
+@@ -5,7 +5,6 @@
+  * Copyright (c) 2018, Heinrich Schuchardt <xypron.glpk@gmx.de>
+  */
+ 
+-#include <common.h>
+ #include <command.h>
+ 
+ static int do_compressed(struct cmd_tbl *cmdtp, int flag, int argc,
+diff --git a/cmd/sandbox/exception.c b/cmd/sandbox/exception.c
+index c082401ce6b..cfa153da260 100644
+--- a/cmd/sandbox/exception.c
++++ b/cmd/sandbox/exception.c
+@@ -5,7 +5,6 @@
+  * Copyright (c) 2020, Heinrich Schuchardt <xypron.glpk@gmx.de>
+  */
+ 
+-#include <common.h>
+ #include <command.h>
+ 
+ static int do_sigsegv(struct cmd_tbl *cmdtp, int flag, int argc,
+diff --git a/cmd/x86/exception.c b/cmd/x86/exception.c
+index 82faaa913e5..14b6bd6f493 100644
+--- a/cmd/x86/exception.c
++++ b/cmd/x86/exception.c
+@@ -5,7 +5,6 @@
+  * Copyright (c) 2018, Heinrich Schuchardt <xypron.glpk@gmx.de>
+  */
+ 
+-#include <common.h>
+ #include <command.h>
+ 
+ static int do_undefined(struct cmd_tbl *cmdtp, int flag, int argc,
+-- 
+2.43.0
 
