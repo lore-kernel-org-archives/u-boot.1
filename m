@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA141C4829B
-	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 07:49:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13C6FC48297
+	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 07:49:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C3E087EE7;
-	Mon, 12 Feb 2024 08:48:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3AC2A87EED;
+	Mon, 12 Feb 2024 08:48:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6BB2887EC9; Mon, 12 Feb 2024 08:48:10 +0100 (CET)
+ id 9B9BE87EC9; Mon, 12 Feb 2024 08:48:14 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 4ABAE87EED
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 08:48:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 8072A87EED
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 08:48:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 56FF2DA7;
- Sun, 11 Feb 2024 23:48:49 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 19555DA7;
+ Sun, 11 Feb 2024 23:48:53 -0800 (PST)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 8A9753F762;
- Sun, 11 Feb 2024 23:48:04 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 4D09C3F762;
+ Sun, 11 Feb 2024 23:48:08 -0800 (PST)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -38,9 +38,9 @@ Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Michal Simek <michal.simek@amd.com>,
  Jassi Brar <jaswinder.singh@linaro.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v2 09/21] fwu: add a function to put a bank in Trial State
-Date: Mon, 12 Feb 2024 13:17:00 +0530
-Message-Id: <20240212074712.3657076-10-sughosh.ganu@linaro.org>
+Subject: [PATCH v2 10/21] capsule: accept a bank on a successful update
+Date: Mon, 12 Feb 2024 13:17:01 +0530
+Message-Id: <20240212074712.3657076-11-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240212074712.3657076-1-sughosh.ganu@linaro.org>
 References: <20240212074712.3657076-1-sughosh.ganu@linaro.org>
@@ -62,147 +62,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The version 2 of the FWU metadata has a field in the top level
-structure, called bank_state. This is used to keep the state a given
-bank is in, either of valid(for trial state), invalid, or accepted.
+The version 2 of the FWU metadata maintains a bank_state field per
+bank, which keeps an aggregate status of the bank. A bank can either
+be in a valid, invalid, or accepted state.
 
-Update this field when putting the platform in Trial State, in
-addition to starting the TrialStateCtr variable by calling the
-fwu_trial_state_start() function.
+Update the bank_state field of the metadata once the update has gone
+through successfully(when skipping Trial State), or once the images in
+the bank have been accepted.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
 
 Changes since V1: None
 
- include/fwu.h                | 12 +++++---
- lib/efi_loader/efi_capsule.c |  2 +-
- lib/fwu_updates/fwu.c        | 54 ++++++++++++++++++++++++++++++------
- 3 files changed, 54 insertions(+), 14 deletions(-)
+ lib/efi_loader/efi_capsule.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-diff --git a/include/fwu.h b/include/fwu.h
-index 109ceb2610..1c6a5fcda9 100644
---- a/include/fwu.h
-+++ b/include/fwu.h
-@@ -342,15 +342,19 @@ u8 fwu_update_checks_pass(void);
- u8 fwu_empty_capsule_checks_pass(void);
- 
- /**
-- * fwu_trial_state_ctr_start() - Start the Trial State counter
-+ * fwu_trial_state_start() - Put the platform in Trial State
-+ * @update_index: Bank number to which images have been updated
-  *
-- * Start the counter to identify the platform booting in the
-- * Trial State. The counter is implemented as an EFI variable.
-+ * Put the platform in Trial State by starting the counter to
-+ * identify the platform booting in the Trial State. The
-+ * counter is implemented as an EFI variable. Secondly, set
-+ * the bank_state in the metadata for the updated bank to Valid
-+ * state.
-  *
-  * Return: 0 if OK, -ve on error
-  *
-  */
--int fwu_trial_state_ctr_start(void);
-+int fwu_trial_state_start(uint update_index);
- 
- /**
-  * fwu_gen_alt_info_from_mtd() - Parse dfu_alt_info from metadata in mtd
 diff --git a/lib/efi_loader/efi_capsule.c b/lib/efi_loader/efi_capsule.c
-index de0d49ebeb..0e6a38b441 100644
+index 0e6a38b441..422bb11162 100644
 --- a/lib/efi_loader/efi_capsule.c
 +++ b/lib/efi_loader/efi_capsule.c
-@@ -522,7 +522,7 @@ static __maybe_unused efi_status_t fwu_post_update_process(bool fw_accept_os)
- 	} else {
- 		log_debug("Successfully updated the active_index\n");
- 		if (fw_accept_os) {
--			status = fwu_trial_state_ctr_start();
-+			status = fwu_trial_state_start(update_index);
+@@ -480,6 +480,12 @@ static __maybe_unused efi_status_t fwu_empty_capsule_process(
+ 		if (ret != EFI_SUCCESS)
+ 			log_err("Unable to set the Accept bit for the image %pUs\n",
+ 				image_guid);
++
++		status = fwu_bank_state_update(active_idx);
++		ret = fwu_to_efi_error(status);
++		if (ret != EFI_SUCCESS)
++			log_err("Unable to update the bank_state for bank %u\n",
++				active_idx);
+ 	}
+ 
+ 	return ret;
+@@ -525,6 +531,10 @@ static __maybe_unused efi_status_t fwu_post_update_process(bool fw_accept_os)
+ 			status = fwu_trial_state_start(update_index);
  			if (status < 0)
  				ret = EFI_DEVICE_ERROR;
++		} else {
++			status = fwu_bank_state_update(update_index);
++			if (status < 0)
++				ret = EFI_DEVICE_ERROR;
  		}
-diff --git a/lib/fwu_updates/fwu.c b/lib/fwu_updates/fwu.c
-index 587ca779d3..a58c42bee2 100644
---- a/lib/fwu_updates/fwu.c
-+++ b/lib/fwu_updates/fwu.c
-@@ -672,6 +672,36 @@ out:
- 	return ret;
- }
+ 	}
  
-+static int fwu_trial_state_ctr_start(void)
-+{
-+	int ret;
-+	u16 trial_state_ctr;
-+
-+	printf("%s: starting the TrialStateCtr\n", __func__);
-+	trial_state_ctr = 0;
-+	ret = trial_counter_update(&trial_state_ctr);
-+	if (ret)
-+		log_err("Unable to initialise TrialStateCtr\n");
-+
-+	return ret;
-+}
-+
-+static int fwu_set_bank_state_trial(uint update_index)
-+{
-+	int ret;
-+	struct fwu_mdata *mdata = g_mdata;
-+
-+	mdata->bank_state[update_index] = FWU_BANK_VALID;
-+
-+	ret = fwu_sync_mdata(mdata, BOTH_PARTS);
-+	if (ret) {
-+		log_err("Unable to set bank_state for %d bank\n", update_index);
-+		return ret;
-+	}
-+
-+	return 0;
-+}
-+
- /**
-  * fwu_bank_state_update() - Check and update the bank_state of the metadata
-  * @update_index: Bank for which the bank_state needs to be updated
-@@ -830,25 +860,31 @@ u8 fwu_empty_capsule_checks_pass(void)
- }
- 
- /**
-- * fwu_trial_state_ctr_start() - Start the Trial State counter
-+ * fwu_trial_state_start() - Put the platform in Trial State
-+ * @update_index: Bank number to which images have been updated
-  *
-- * Start the counter to identify the platform booting in the
-- * Trial State. The counter is implemented as an EFI variable.
-+ * Put the platform in Trial State by starting the counter to
-+ * identify the platform booting in the Trial State. The
-+ * counter is implemented as an EFI variable. Secondly, set
-+ * the bank_state in the metadata for the updated bank to Valid
-+ * state.
-  *
-  * Return: 0 if OK, -ve on error
-  *
-  */
--int fwu_trial_state_ctr_start(void)
-+int fwu_trial_state_start(uint update_index)
- {
- 	int ret;
--	u16 trial_state_ctr;
- 
--	trial_state_ctr = 0;
--	ret = trial_counter_update(&trial_state_ctr);
-+	ret = fwu_trial_state_ctr_start();
- 	if (ret)
--		log_err("Unable to initialise TrialStateCtr\n");
-+		return ret;
- 
--	return ret;
-+	ret = fwu_set_bank_state_trial(update_index);
-+	if (ret)
-+		return ret;
-+
-+	return 0;
- }
- 
- static int fwu_boottime_checks(void)
 -- 
 2.34.1
 
