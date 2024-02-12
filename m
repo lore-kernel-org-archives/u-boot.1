@@ -4,68 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6C87C48297
-	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 11:24:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97F28C4829B
+	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 11:39:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1028287DFA;
-	Mon, 12 Feb 2024 12:24:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id E3ECE87B63;
+	Mon, 12 Feb 2024 12:39:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="LVrpt0mw";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C6FA487EB6; Mon, 12 Feb 2024 12:24:39 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 04798879DF
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 12:24:36 +0100 (CET)
+ id 2A08187BC3; Mon, 12 Feb 2024 12:39:47 +0100 (CET)
+Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
+ [210.160.252.172])
+ by phobos.denx.de (Postfix) with ESMTP id CCDE0879DF
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 12:39:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ardb@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 6A98260F6B
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 11:24:35 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0011AC433A6
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 11:24:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1707737075;
- bh=S9prBaFMdogZMmoI5hwn5WIBbvFQGGMdtFQJ5xNTpuM=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=LVrpt0mw0BFK3lynkoM6B0uXn4SW6Rx1w8lqu6gni9tXR1uxzT3quOIXuyck9rBGQ
- TBdyAbzmn22qxv9Y6mEIzrgipULYD8+zqcr1n74Y2d54+NBOGV4YgssdmAyyGKPXDR
- aARx05ER4tPVqhxrAGjBN9rO5c9obkqHI8fnO9Mt5mFVnSvedvVP8aJjLuQ/cXPmeg
- IwxuwFT2D6cLaEpSvgNE+2wdcVYbsgJucDxUEseeQZkvUQy/QjUdA3BghlftGbFdPb
- oH8fZlSTyetVZ6uXJKJm1tmcBWxmd4uWdWrRdhKu6iMOmUU4Bk2/5C8Hbtu1ofDnQR
- 9cQ3yp+YaSDCw==
-Received: by mail-lf1-f44.google.com with SMTP id
- 2adb3069b0e04-51171c9f4c0so3589685e87.3
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 03:24:34 -0800 (PST)
-X-Gm-Message-State: AOJu0YzR9dAV7KDIgnmVzfAqSTc7ZHLtHpXPEth2zEOB79CTMKsiI3sP
- FOAxdyd9qfYs0RQjpOZGjtzQ/Y+fNb8vqWrxrtiJf2S9C9jLApqUrxdTxHgQKcvm4/B96hjX1TJ
- sU/WPtMjPtx7ibdcE+dOTNrQZOdk=
-X-Google-Smtp-Source: AGHT+IGMLast+OeeSGATZdLIGcZxvpyTFgy19PyzuM5c/pbf+wFnDU8RDL3Ae9UnL6brxt2sm4B6KzcrM303eLSdNIk=
-X-Received: by 2002:a05:6512:1385:b0:511:8581:4352 with SMTP id
- fc5-20020a056512138500b0051185814352mr3644482lfb.34.1707737073081; Mon, 12
- Feb 2024 03:24:33 -0800 (PST)
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-IronPort-AV: E=Sophos;i="6.06,263,1705330800"; 
+ d="asc'?scan'208";a="197568615"
+Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
+ by relmlie6.idc.renesas.com with ESMTP; 12 Feb 2024 20:39:40 +0900
+Received: from [10.226.92.81] (unknown [10.226.92.81])
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id D6942400E2D7;
+ Mon, 12 Feb 2024 20:39:38 +0900 (JST)
+Message-ID: <f1cb2463-90d5-4d42-941e-ee3cde0855da@bp.renesas.com>
+Date: Mon, 12 Feb 2024 11:39:37 +0000
 MIME-Version: 1.0
-References: <20240212104500.1098004-1-igor.opaniuk@foundries.io>
-In-Reply-To: <20240212104500.1098004-1-igor.opaniuk@foundries.io>
-From: Ard Biesheuvel <ardb@kernel.org>
-Date: Mon, 12 Feb 2024 12:24:21 +0100
-X-Gmail-Original-Message-ID: <CAMj1kXHRJf_fbU+N_nAj2ss6wQ30ox4vr2Z5Q=a2iDiWNqYS2g@mail.gmail.com>
-Message-ID: <CAMj1kXHRJf_fbU+N_nAj2ss6wQ30ox4vr2Z5Q=a2iDiWNqYS2g@mail.gmail.com>
-Subject: Re: [PATCH v2] armv8: crypto: SHA-512 using ARMv8 Crypto Extensions
-To: Igor Opaniuk <igor.opaniuk@foundries.io>
-Cc: u-boot@lists.denx.de, Loic Poulain <loic.poulain@linaro.org>, 
- Marc Zyngier <maz@kernel.org>, Michal Simek <michal.simek@amd.com>,
- Tom Rini <trini@konsulko.com>, 
- Igor Opaniuk <igor.opaniuk@gmail.com>, Qu Wenruo <wqu@suse.com>,
- Simon Glass <sjg@chromium.org>, 
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/3] ARM: renesas: Disable EFI on R-Car Gen2
+Content-Language: en-GB
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: =?UTF-8?Q?Niklas_S=C3=B6derlund?= <niklas.soderlund+renesas@ragnatech.se>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>
+References: <20240211173446.7162-1-marek.vasut+renesas@mailbox.org>
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+In-Reply-To: <20240211173446.7162-1-marek.vasut+renesas@mailbox.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------jeK0CxzjHaS4Y0XvToDyivB0"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,367 +59,130 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 12 Feb 2024 at 11:45, Igor Opaniuk <igor.opaniuk@foundries.io> wrote:
->
-> From: Igor Opaniuk <igor.opaniuk@gmail.com>
->
-> Add support for the SHA-512 Secure Hash Algorithm which uses ARMv8 Crypto
-> Extensions. The CPU should support ARMv8.2 instruction set and implement
-> SHA512H, SHA512H2, SHA512SU0, and SHA512SU1 instructions.
->
-> This information can be obtained from ID_AA64ISAR0_EL1 (AArch64 Instruction
-> Set Attribute Register 0), bits [15:12] should be 0b0010 [1], that
-> indicates support for SHA512* instructions in AArch64 state. As not all
-> ARMv8-base SoCs support that, ARMV8_CE_SHA512 is left disabled by
-> default for now.
->
-> Validated in QEMU for ARMv8 with compiled-in SHA-2 support (because of
-> absence of hw with ARMv8.2-A ready SoC at hand):
->
-> => hash sha512 0x40200000 0x2000000
-> sha512 for 40200000 ... 421fffff ==> 1aeae269f4eb7c37...
->
-> The implementation is based on original implementation from Ard Biesheuvel in
-> Linux kernel [2]
->
-> [1] https://developer.arm.com/documentation/ddi0601/2023-12/AArch64-Registers/ID-AA64ISAR0-EL1--AArch64-Instruction-Set-Attribute-Register-0
-> [2] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/arm/crypto/sha2-ce-core.S
->
-> CC: Ard Biesheuvel <ardb@kernel.org>>
-> CC: Loic Poulain <loic.poulain@linaro.org>
-> Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------jeK0CxzjHaS4Y0XvToDyivB0
+Content-Type: multipart/mixed; boundary="------------tYxcVRau3xlEttP0NAClC7rl";
+ protected-headers="v1"
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: =?UTF-8?Q?Niklas_S=C3=B6derlund?=
+ <niklas.soderlund+renesas@ragnatech.se>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>
+Message-ID: <f1cb2463-90d5-4d42-941e-ee3cde0855da@bp.renesas.com>
+Subject: Re: [PATCH 1/3] ARM: renesas: Disable EFI on R-Car Gen2
+References: <20240211173446.7162-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20240211173446.7162-1-marek.vasut+renesas@mailbox.org>
+
+--------------tYxcVRau3xlEttP0NAClC7rl
+Content-Type: multipart/mixed; boundary="------------CPRzUQ78ze44973IIl0Nqd0l"
+
+--------------CPRzUQ78ze44973IIl0Nqd0l
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+On 11/02/2024 17:34, Marek Vasut wrote:
+> These systems are unlikely to use EFI as this functionality has not bee=
+n
+> enabled until it got pulled in by Kconfig default. This functionality
+> does add some 60-70 kiB to the u-boot.img size, which overflows the siz=
+e
+> limit. Disable it.
+>=20
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > ---
->
-> Changes in v2:
-> - Dropped "Default n" in Kconfig as Michal Simek suggested
-> - Adjusted commit message about QEMU validation
->
->  arch/arm/cpu/armv8/Kconfig          |   4 +
->  arch/arm/cpu/armv8/Makefile         |   1 +
->  arch/arm/cpu/armv8/sha512_ce_core.S | 210 ++++++++++++++++++++++++++++
->  arch/arm/cpu/armv8/sha512_ce_glue.c |  20 +++
->  lib/sha512.c                        |   6 +-
->  5 files changed, 239 insertions(+), 2 deletions(-)
->  create mode 100644 arch/arm/cpu/armv8/sha512_ce_core.S
->  create mode 100644 arch/arm/cpu/armv8/sha512_ce_glue.c
->
-> diff --git a/arch/arm/cpu/armv8/Kconfig b/arch/arm/cpu/armv8/Kconfig
-> index 9f0fb369f7..37b8b60914 100644
-> --- a/arch/arm/cpu/armv8/Kconfig
-> +++ b/arch/arm/cpu/armv8/Kconfig
-> @@ -204,6 +204,10 @@ config ARMV8_CE_SHA256
->         bool "SHA-256 digest algorithm (ARMv8 Crypto Extensions)"
->         default y if SHA256
->
-> +config ARMV8_CE_SHA512
-> +       bool "SHA-512 digest algorithm (ARMv8 Crypto Extensions)"
-> +       depends on SHA512
-> +
->  endif
->
->  endif
-> diff --git a/arch/arm/cpu/armv8/Makefile b/arch/arm/cpu/armv8/Makefile
-> index bba4f570db..3894f2bb2a 100644
-> --- a/arch/arm/cpu/armv8/Makefile
-> +++ b/arch/arm/cpu/armv8/Makefile
-> @@ -45,3 +45,4 @@ obj-$(CONFIG_TARGET_BCMNS3) += bcmns3/
->  obj-$(CONFIG_XEN) += xen/
->  obj-$(CONFIG_ARMV8_CE_SHA1) += sha1_ce_glue.o sha1_ce_core.o
->  obj-$(CONFIG_ARMV8_CE_SHA256) += sha256_ce_glue.o sha256_ce_core.o
-> +obj-$(CONFIG_ARMV8_CE_SHA512) += sha512_ce_glue.o sha512_ce_core.o
-> \ No newline at end of file
-> diff --git a/arch/arm/cpu/armv8/sha512_ce_core.S b/arch/arm/cpu/armv8/sha512_ce_core.S
-> new file mode 100644
-> index 0000000000..906291f35b
-> --- /dev/null
-> +++ b/arch/arm/cpu/armv8/sha512_ce_core.S
-> @@ -0,0 +1,210 @@
-> +/* SPDX-License-Identifier: GPL-2.0-only */
-> +/*
-> + * sha512-ce-core.S - core SHA-384/SHA-512 transform using v8 Crypto
-> + * Extensions
-> + *
-> + * Copyright (C) 2018 Linaro Ltd <ard.biesheuvel@linaro.org>
-> + * Copyright (C) 2024 Igor Opaniuk <igor.opaniuk@gmail.com>
-> + */
-> +
-> + #include <config.h>
-> + #include <linux/linkage.h>
-> + #include <asm/system.h>
-> + #include <asm/macro.h>
-> +
-> +       .macro  adr_l, dst, sym
-> +       adrp    \dst, \sym
-> +       add     \dst, \dst, :lo12:\sym
-> +       .endm
-> +
-> +       .irp            b,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19
-> +       .set            .Lq\b, \b
-> +       .set            .Lv\b\().2d, \b
-> +       .endr
-> +
-> +       .macro          sha512h, rd, rn, rm
-> +       .inst           0xce608000 | .L\rd | (.L\rn << 5) | (.L\rm << 16)
-> +       .endm
-> +
-> +       .macro          sha512h2, rd, rn, rm
-> +       .inst           0xce608400 | .L\rd | (.L\rn << 5) | (.L\rm << 16)
-> +       .endm
-> +
-> +       .macro          sha512su0, rd, rn
-> +       .inst           0xcec08000 | .L\rd | (.L\rn << 5)
-> +       .endm
-> +
-> +       .macro          sha512su1, rd, rn, rm
-> +       .inst           0xce608800 | .L\rd | (.L\rn << 5) | (.L\rm << 16)
-> +       .endm
-> +
+> Cc: Niklas S=C3=B6derlund <niklas.soderlund+renesas@ragnatech.se>
+> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+> ---
+>  configs/alt_defconfig     | 2 ++
+>  configs/blanche_defconfig | 2 ++
+>  configs/gose_defconfig    | 2 ++
+>  configs/koelsch_defconfig | 2 ++
+>  configs/lager_defconfig   | 2 ++
+>  configs/porter_defconfig  | 2 ++
+>  configs/silk_defconfig    | 2 ++
+>  configs/stout_defconfig   | 2 ++
+>  8 files changed, 16 insertions(+)
 
-You might check which binutils version supports these instructions
-natively, and whether anything older is still supported by u-boot. If
-not, you can just drop these macros.
+Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+--------------CPRzUQ78ze44973IIl0Nqd0l
+Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
+Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
 
-> +       /*
-> +        * The SHA-512 round constants
-> +        */
-> +       .section        ".rodata", "a"
-> +       .align          4
-> +.Lsha512_rcon:
-> +       .quad           0x428a2f98d728ae22, 0x7137449123ef65cd
-> +       .quad           0xb5c0fbcfec4d3b2f, 0xe9b5dba58189dbbc
-> +       .quad           0x3956c25bf348b538, 0x59f111f1b605d019
-> +       .quad           0x923f82a4af194f9b, 0xab1c5ed5da6d8118
-> +       .quad           0xd807aa98a3030242, 0x12835b0145706fbe
-> +       .quad           0x243185be4ee4b28c, 0x550c7dc3d5ffb4e2
-> +       .quad           0x72be5d74f27b896f, 0x80deb1fe3b1696b1
-> +       .quad           0x9bdc06a725c71235, 0xc19bf174cf692694
-> +       .quad           0xe49b69c19ef14ad2, 0xefbe4786384f25e3
-> +       .quad           0x0fc19dc68b8cd5b5, 0x240ca1cc77ac9c65
-> +       .quad           0x2de92c6f592b0275, 0x4a7484aa6ea6e483
-> +       .quad           0x5cb0a9dcbd41fbd4, 0x76f988da831153b5
-> +       .quad           0x983e5152ee66dfab, 0xa831c66d2db43210
-> +       .quad           0xb00327c898fb213f, 0xbf597fc7beef0ee4
-> +       .quad           0xc6e00bf33da88fc2, 0xd5a79147930aa725
-> +       .quad           0x06ca6351e003826f, 0x142929670a0e6e70
-> +       .quad           0x27b70a8546d22ffc, 0x2e1b21385c26c926
-> +       .quad           0x4d2c6dfc5ac42aed, 0x53380d139d95b3df
-> +       .quad           0x650a73548baf63de, 0x766a0abb3c77b2a8
-> +       .quad           0x81c2c92e47edaee6, 0x92722c851482353b
-> +       .quad           0xa2bfe8a14cf10364, 0xa81a664bbc423001
-> +       .quad           0xc24b8b70d0f89791, 0xc76c51a30654be30
-> +       .quad           0xd192e819d6ef5218, 0xd69906245565a910
-> +       .quad           0xf40e35855771202a, 0x106aa07032bbd1b8
-> +       .quad           0x19a4c116b8d2d0c8, 0x1e376c085141ab53
-> +       .quad           0x2748774cdf8eeb99, 0x34b0bcb5e19b48a8
-> +       .quad           0x391c0cb3c5c95a63, 0x4ed8aa4ae3418acb
-> +       .quad           0x5b9cca4f7763e373, 0x682e6ff3d6b2b8a3
-> +       .quad           0x748f82ee5defb2fc, 0x78a5636f43172f60
-> +       .quad           0x84c87814a1f0ab72, 0x8cc702081a6439ec
-> +       .quad           0x90befffa23631e28, 0xa4506cebde82bde9
-> +       .quad           0xbef9a3f7b2c67915, 0xc67178f2e372532b
-> +       .quad           0xca273eceea26619c, 0xd186b8c721c0c207
-> +       .quad           0xeada7dd6cde0eb1e, 0xf57d4f7fee6ed178
-> +       .quad           0x06f067aa72176fba, 0x0a637dc5a2c898a6
-> +       .quad           0x113f9804bef90dae, 0x1b710b35131c471b
-> +       .quad           0x28db77f523047d84, 0x32caab7b40c72493
-> +       .quad           0x3c9ebe0a15c9bebc, 0x431d67c49c100d4c
-> +       .quad           0x4cc5d4becb3e42b6, 0x597f299cfc657e2a
-> +       .quad           0x5fcb6fab3ad6faec, 0x6c44198c4a475817
-> +
-> +       .macro          dround, i0, i1, i2, i3, i4, rc0, rc1, in0, in1, in2, in3, in4
-> +       .ifnb           \rc1
-> +       ld1             {v\rc1\().2d}, [x4], #16
-> +       .endif
-> +       add             v5.2d, v\rc0\().2d, v\in0\().2d
-> +       ext             v6.16b, v\i2\().16b, v\i3\().16b, #8
-> +       ext             v5.16b, v5.16b, v5.16b, #8
-> +       ext             v7.16b, v\i1\().16b, v\i2\().16b, #8
-> +       add             v\i3\().2d, v\i3\().2d, v5.2d
-> +       .ifnb           \in1
-> +       ext             v5.16b, v\in3\().16b, v\in4\().16b, #8
-> +       sha512su0       v\in0\().2d, v\in1\().2d
-> +       .endif
-> +       sha512h         q\i3, q6, v7.2d
-> +       .ifnb           \in1
-> +       sha512su1       v\in0\().2d, v\in2\().2d, v5.2d
-> +       .endif
-> +       add             v\i4\().2d, v\i1\().2d, v\i3\().2d
-> +       sha512h2        q\i3, q\i1, v\i0\().2d
-> +       .endm
-> +
-> +       /*
-> +        * void sha512_ce_transform(struct sha512_state *sst, u8 const *src,
-> +        *                        int blocks)
-> +        */
-> +       .text
-> +ENTRY(sha512_ce_transform)
+-----BEGIN PGP PUBLIC KEY BLOCK-----
 
-Jump to the generic implementation here if the instructions are not
-implemented by the hardware (see below)
+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3D
+=3DsIIN
+-----END PGP PUBLIC KEY BLOCK-----
 
-> +       /* load state */
-> +       ld1             {v8.2d-v11.2d}, [x0]
-> +
-> +       /* load first 4 round constants */
-> +       adr_l           x3, .Lsha512_rcon
-> +       ld1             {v20.2d-v23.2d}, [x3], #64
-> +
-> +       /* load input */
-> +0:     ld1             {v12.2d-v15.2d}, [x1], #64
-> +       ld1             {v16.2d-v19.2d}, [x1], #64
-> +       sub             w2, w2, #1
-> +#if __BYTE_ORDER == __LITTLE_ENDIAN
-> +        rev64          v12.16b, v12.16b
-> +        rev64          v13.16b, v13.16b
-> +        rev64          v14.16b, v14.16b
-> +        rev64          v15.16b, v15.16b
-> +        rev64          v16.16b, v16.16b
-> +        rev64          v17.16b, v17.16b
-> +        rev64          v18.16b, v18.16b
-> +        rev64          v19.16b, v19.16b
-> +#endif
-> +       mov             x4, x3                          // rc pointer
-> +
-> +       mov             v0.16b, v8.16b
-> +       mov             v1.16b, v9.16b
-> +       mov             v2.16b, v10.16b
-> +       mov             v3.16b, v11.16b
-> +
-> +       // v0  ab  cd  --  ef  gh  ab
-> +       // v1  cd  --  ef  gh  ab  cd
-> +       // v2  ef  gh  ab  cd  --  ef
-> +       // v3  gh  ab  cd  --  ef  gh
-> +       // v4  --  ef  gh  ab  cd  --
-> +
-> +       dround          0, 1, 2, 3, 4, 20, 24, 12, 13, 19, 16, 17
-> +       dround          3, 0, 4, 2, 1, 21, 25, 13, 14, 12, 17, 18
-> +       dround          2, 3, 1, 4, 0, 22, 26, 14, 15, 13, 18, 19
-> +       dround          4, 2, 0, 1, 3, 23, 27, 15, 16, 14, 19, 12
-> +       dround          1, 4, 3, 0, 2, 24, 28, 16, 17, 15, 12, 13
-> +
-> +       dround          0, 1, 2, 3, 4, 25, 29, 17, 18, 16, 13, 14
-> +       dround          3, 0, 4, 2, 1, 26, 30, 18, 19, 17, 14, 15
-> +       dround          2, 3, 1, 4, 0, 27, 31, 19, 12, 18, 15, 16
-> +       dround          4, 2, 0, 1, 3, 28, 24, 12, 13, 19, 16, 17
-> +       dround          1, 4, 3, 0, 2, 29, 25, 13, 14, 12, 17, 18
-> +
-> +       dround          0, 1, 2, 3, 4, 30, 26, 14, 15, 13, 18, 19
-> +       dround          3, 0, 4, 2, 1, 31, 27, 15, 16, 14, 19, 12
-> +       dround          2, 3, 1, 4, 0, 24, 28, 16, 17, 15, 12, 13
-> +       dround          4, 2, 0, 1, 3, 25, 29, 17, 18, 16, 13, 14
-> +       dround          1, 4, 3, 0, 2, 26, 30, 18, 19, 17, 14, 15
-> +
-> +       dround          0, 1, 2, 3, 4, 27, 31, 19, 12, 18, 15, 16
-> +       dround          3, 0, 4, 2, 1, 28, 24, 12, 13, 19, 16, 17
-> +       dround          2, 3, 1, 4, 0, 29, 25, 13, 14, 12, 17, 18
-> +       dround          4, 2, 0, 1, 3, 30, 26, 14, 15, 13, 18, 19
-> +       dround          1, 4, 3, 0, 2, 31, 27, 15, 16, 14, 19, 12
-> +
-> +       dround          0, 1, 2, 3, 4, 24, 28, 16, 17, 15, 12, 13
-> +       dround          3, 0, 4, 2, 1, 25, 29, 17, 18, 16, 13, 14
-> +       dround          2, 3, 1, 4, 0, 26, 30, 18, 19, 17, 14, 15
-> +       dround          4, 2, 0, 1, 3, 27, 31, 19, 12, 18, 15, 16
-> +       dround          1, 4, 3, 0, 2, 28, 24, 12, 13, 19, 16, 17
-> +
-> +       dround          0, 1, 2, 3, 4, 29, 25, 13, 14, 12, 17, 18
-> +       dround          3, 0, 4, 2, 1, 30, 26, 14, 15, 13, 18, 19
-> +       dround          2, 3, 1, 4, 0, 31, 27, 15, 16, 14, 19, 12
-> +       dround          4, 2, 0, 1, 3, 24, 28, 16, 17, 15, 12, 13
-> +       dround          1, 4, 3, 0, 2, 25, 29, 17, 18, 16, 13, 14
-> +
-> +       dround          0, 1, 2, 3, 4, 26, 30, 18, 19, 17, 14, 15
-> +       dround          3, 0, 4, 2, 1, 27, 31, 19, 12, 18, 15, 16
-> +       dround          2, 3, 1, 4, 0, 28, 24, 12
-> +       dround          4, 2, 0, 1, 3, 29, 25, 13
-> +       dround          1, 4, 3, 0, 2, 30, 26, 14
-> +
-> +       dround          0, 1, 2, 3, 4, 31, 27, 15
-> +       dround          3, 0, 4, 2, 1, 24,   , 16
-> +       dround          2, 3, 1, 4, 0, 25,   , 17
-> +       dround          4, 2, 0, 1, 3, 26,   , 18
-> +       dround          1, 4, 3, 0, 2, 27,   , 19
-> +
-> +       /* update state */
-> +       add             v8.2d, v8.2d, v0.2d
-> +       add             v9.2d, v9.2d, v1.2d
-> +       add             v10.2d, v10.2d, v2.2d
-> +       add             v11.2d, v11.2d, v3.2d
-> +
-> +       /* handled all input blocks? */
-> +       cbnz            w2, 0b
-> +
-> +       /* store new state */
-> +3:     st1             {v8.2d-v11.2d}, [x0]
-> +       mov             w0, w2
+--------------CPRzUQ78ze44973IIl0Nqd0l--
 
-Drop this mov - the function returns void.
+--------------tYxcVRau3xlEttP0NAClC7rl--
 
-> +       ret
-> +ENDPROC(sha512_ce_transform)
-> diff --git a/arch/arm/cpu/armv8/sha512_ce_glue.c b/arch/arm/cpu/armv8/sha512_ce_glue.c
-> new file mode 100644
-> index 0000000000..4db78c8efd
-> --- /dev/null
-> +++ b/arch/arm/cpu/armv8/sha512_ce_glue.c
-> @@ -0,0 +1,20 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
-> +/*
-> + * sha512_ce_glue.c - SHA-512 secure hash using ARMv8 Crypto Extensions
-> + *
-> + * Copyright (C) 2024 Igor Opaniuk <igor.opaniuk@gmail.com>
-> + */
-> +
-> +#include <u-boot/sha512.h>
-> +
-> +extern void sha512_ce_transform(u64 state[SHA512_SUM_LEN / 8], u8 const *src,
-> +                               u32 blocks);
-> +
-> +void sha512_block_fn(sha512_context *ctx, const unsigned char *data,
-> +                    unsigned int blocks)
-> +{
-> +       if (!blocks)
-> +               return;
-> +
-> +       sha512_ce_transform(ctx->state, data, blocks);
-> +}
-> diff --git a/lib/sha512.c b/lib/sha512.c
-> index ffe2c5cd96..186ca4d2ca 100644
-> --- a/lib/sha512.c
-> +++ b/lib/sha512.c
-> @@ -16,6 +16,8 @@
->  #include <compiler.h>
->  #include <u-boot/sha512.h>
->
-> +#include <linux/compiler_attributes.h>
-> +
->  const uint8_t sha384_der_prefix[SHA384_DER_LEN] = {
->         0x30, 0x41, 0x30, 0x0d, 0x06, 0x09, 0x60, 0x86,
->         0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x02, 0x05,
-> @@ -187,8 +189,8 @@ sha512_transform(uint64_t *state, const uint8_t *input)
->         a = b = c = d = e = f = g = h = t1 = t2 = 0;
->  }
->
-> -static void sha512_block_fn(sha512_context *sst, const uint8_t *src,
-> -                                   int blocks)
-> +__weak void sha512_block_fn(sha512_context *sst, const uint8_t *src,
-> +                           int blocks)
+--------------jeK0CxzjHaS4Y0XvToDyivB0
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
-If you make this a weak alias, you can still expose the generic version as well.
+-----BEGIN PGP SIGNATURE-----
 
-E.g.,
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZcoDeQUDAAAAAAAKCRDbaV4Vf/JGveHj
+AQDgoSQgBXL85NwWrhFdbbJ/RAvli7jV4V9sbEcNsg5bMQD/REP7j3OYvjYyIWgaco9GlCjVISXk
+wKUhKgQKYaI7SQ0=
+=oSgZ
+-----END PGP SIGNATURE-----
 
-void sha512_block_fn_generic()
-{
-..
-}
-
-__weak void sha512_block_fn()
-__attribute__((__alias__("sha512_block_fn_generic")));
-
-
->  {
->         while (blocks--) {
->                 sha512_transform(sst->state, src);
-> --
-> 2.34.1
->
+--------------jeK0CxzjHaS4Y0XvToDyivB0--
