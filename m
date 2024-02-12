@@ -4,83 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54564C4829E
-	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 18:40:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E85ACC48297
+	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 18:41:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1967187E78;
-	Mon, 12 Feb 2024 19:40:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 4F3A087E78;
+	Mon, 12 Feb 2024 19:41:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FU0joT6h";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jUXJayFq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 62D3687E96; Mon, 12 Feb 2024 19:40:39 +0100 (CET)
-Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
- [IPv6:2607:f8b0:4864:20::1131])
+ id 3191887E78; Mon, 12 Feb 2024 19:41:24 +0100 (CET)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 410BA877D3
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 19:40:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3471D877D3
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 19:41:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1131.google.com with SMTP id
- 00721157ae682-60777552d72so5300547b3.1
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 10:40:35 -0800 (PST)
+ spf=pass smtp.mailfrom=maximmosk4@gmail.com
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-5116b017503so101892e87.1
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 10:41:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1707763234; x=1708368034; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=1wLFGjWo9164ywA0Yuua1KHnXO4FM9BY2oVKZKTXNTg=;
- b=FU0joT6hDvTCRiUFanxJpNJ5wwzrSFUU37q6kOY9M5yMSXkvpemo4L25fDqWzRolEz
- ZZ86VbLayaJVBJJf8GpnYXG4qSndAiqoZzpfa2EHCQGFIlooTVnCx1mLvdVSnFh/xIcJ
- RkXLpxzkkhxH++CICAknYZHXpy8sEilEkcDmc=
+ d=gmail.com; s=20230601; t=1707763281; x=1708368081; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=KnXtRqtYIHFo4QSvtMM5piobZ/CxKkbxNdfmlmFR7yc=;
+ b=jUXJayFq3hmK1cJLNqcLoKoZBJihrOyFzUxpLhC1XXAsXxHZYdk6s0lNeUeLo+DLtI
+ iQnWsIET/hoMuLvNfPpG1kSiFz4RSwCVFcdpkLB9rXEo8nWXwczLbqp60IkDx0czJVme
+ a3/tZ6/xefzBBdwy9meZZJcSqXIcq9SpKyhG79cGWCha9dwe4BdJMG51VSa1fSHTQqQF
+ KRiglYHo6utGc39e66q/UKFRnC6JA2y7lXM1jSjHjl96U6F9XjYF+0BvC5CNwHBbCd4O
+ usKq7y22uGAldohe78qqdl2bYEDMxWARCoeaoNAFOTEr+v1xT1Av+tK2/G0G+ymPzkgc
+ EJ2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707763234; x=1708368034;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=1wLFGjWo9164ywA0Yuua1KHnXO4FM9BY2oVKZKTXNTg=;
- b=Kk9BJUS6R8co6uW6ZU89Wkd8leTejQ1+I2DcWBMwvrFfM5r847DDrWZ0UVDQduGHUw
- zvOo1ojsLZvc99vueRhVNMDCTgUIJ2d6RKpQqczDB5bSV3ZuenwhOXbcou+qKQW1mDH3
- 0yPwQuIfnUrDZtbsfxzpl/2yBBQyaY2BrRXgIF3GPDHJ8A0OHoASD5NvT/AAUzcBtoDJ
- 0KvIjK9y7KsgSsQGi1sj/73ggB5FvrUnkKH/G6U9I0p6Z2IgMcR7mgnhw8TupjK3etl0
- cgBouKNlehgi2SNYfwqXL0ZJLA1txxxKRJwEAZyLhmoXFJRR9c7JeEHRWIc1UyaNLMzL
- 0kqg==
+ d=1e100.net; s=20230601; t=1707763281; x=1708368081;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=KnXtRqtYIHFo4QSvtMM5piobZ/CxKkbxNdfmlmFR7yc=;
+ b=T/SKDsg5ppUQvgRAOQbP5REsz7BRJWsH9oVIvvFB9Cs3N8ybx7DsjVFkuv4EBO12cO
+ cPjZtd6UL3P2I3rnV3gmcLZZuDNF1FFAartOm60o/Ok33Ue54YwcXVYjOdKpz2ez0diL
+ S/v8ow6sx0WMepusRgMsppUi10UYiV+HPsn+ZdcQQZ7je60bY5AX/+daowPRJEOTj9Jc
+ +L0roROlFr1nFMUsjSnf9zsyZsUQXUjckE7hOM7k60QKG6A3Q8SkbOxm4I35uTnrHjlN
+ tA/h8DV1PmNy29SnSm1VfoHUr+DEqK+m22dylOgiDZqNevthmgBhT33Hdusfoh6EuKps
+ 7jfw==
+X-Gm-Message-State: AOJu0YwwFJm7xf3J/Akv2VDSKxBjGsCkkzAde7QU/d6NiFnKKKnH3NH4
+ iEQnA7nKx8pGDIuZK9VQ10STOjgOXFd7UBTy1oIQM1KlcTysyH8Tyi+Wm4fcqz4=
+X-Google-Smtp-Source: AGHT+IGs5wF9+pil0ejT3rVwiExbHDScuM8hpEj7NZxHAnhy/lywWzWGE5t9NGohEnXzp8TLhOoTqg==
+X-Received: by 2002:a05:6512:3daa:b0:511:3a32:4e4f with SMTP id
+ k42-20020a0565123daa00b005113a324e4fmr5632922lfv.18.1707763280891; 
+ Mon, 12 Feb 2024 10:41:20 -0800 (PST)
 X-Forwarded-Encrypted: i=1;
- AJvYcCUl+7QW37w4HVknSvAXHloT1lXorjL+0U3rrGGfp5ceF+BVkR5WZhCwu2ao1F7F9rsU25YHzrhqxQ7/JMBQClk6TSki2w==
-X-Gm-Message-State: AOJu0Yxp5PjLMCBxFxWhXH95AfW7Tv9PsWzyUJDMHOIgTG2k4kglIb1U
- utlZ3sE1GqBLFcGWwUv21yIRsgEJe60cM1fvYzI9iqG1Y6A3pt0AC37xq7KDHnc=
-X-Google-Smtp-Source: AGHT+IFrszcQJzbQgFltWUbNnRjPZckHQ3MCDx1uT1l+7ZHG3YHIC4AnTXO5If6vWaHog80MUX7xsQ==
-X-Received: by 2002:a0d:e4c6:0:b0:603:c656:5e31 with SMTP id
- n189-20020a0de4c6000000b00603c6565e31mr6698157ywe.28.1707763234189; 
- Mon, 12 Feb 2024 10:40:34 -0800 (PST)
-X-Forwarded-Encrypted: i=1;
- AJvYcCX+kus/r38xYKSX5xFfs1Hnw0NWY77O/7oSyHNZwk732fLxcvS1nxScFtaHrLX/RrdStJwZWiFaFvWlewZV0lUcihmdsN3xm8+7w7e/tgac61jrjrMeRJG2G77HSDNk8MSXhHCHoNnTIy4OsrVFT6bAW48=
-Received: from bill-the-cat (065-184-194-195.res.spectrum.com.
- [65.184.194.195]) by smtp.gmail.com with ESMTPSA id
- l8-20020a0de208000000b006048617fbecsm1296203ywe.30.2024.02.12.10.40.33
+ AJvYcCXjHqhZ5gJDLAu5T2J4IpNBRlvdr0HL2cqM/v0jKIsu6QmHLS+ptbdkTZFn8zR9rVZwDkfyjQe9Cu70mmL3a1qGRHI=
+Received: from localhost.localdomain (109-252-14-208.nat.spd-mgts.ru.
+ [109.252.14.208]) by smtp.gmail.com with ESMTPSA id
+ u8-20020ac24c28000000b0051186a82fc1sm764714lfq.171.2024.02.12.10.41.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Feb 2024 10:40:33 -0800 (PST)
-Date: Mon, 12 Feb 2024 13:40:31 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- Nils Le Roux <gilbsgilbert@gmail.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2] net: designware: Support high memory nodes
-Message-ID: <20240212184031.GL3040305@bill-the-cat>
-References: <20231202093952.33256-1-gilbsgilbert@gmail.com>
- <20231204010930.071a5ba7@slackpad.lan>
- <20240210173703.73d18367@minigeek.lan>
+ Mon, 12 Feb 2024 10:41:20 -0800 (PST)
+From: Maxim Moskalets <maximmosk4@gmail.com>
+X-Google-Original-From: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>
+To: u-boot@lists.denx.de
+Cc: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH] cmd: add FDT setup for bootelf by flag
+Date: Mon, 12 Feb 2024 21:41:17 +0300
+Message-Id: <20240212184117.25641-1-Maxim.Moskalets@kaspersky.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="6a3inNSG6t0RjnUy"
-Content-Disposition: inline
-In-Reply-To: <20240210173703.73d18367@minigeek.lan>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,49 +92,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Added the ability to use FDT for ELF applications, required to run some OS. To make FDT setup, you need to set the elf_needed_fdt environment variable to a value like y or yes.
 
---6a3inNSG6t0RjnUy
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>
 
-On Sat, Feb 10, 2024 at 05:37:03PM +0000, Andre Przywara wrote:
+Cc: Tom Rini <trini@konsulko.com>
+---
 
-> On Mon, 4 Dec 2023 01:09:30 +0000
-> Andre Przywara <andre.przywara@arm.com> wrote:
->=20
-> Hi Joe, Ramon, Tom,
->=20
-> for some reason patchwork put this on my plate, but it looks like
-> genuine network code to me, and the problem definitely doesn't affect
-> sunxi.
-> As tagged below, I am happy with this change, so if there are no
-> objections, can one of you take this patch, please?
+ cmd/elf.c     | 14 ++++++++++++++
+ env/common.c  |  5 +++++
+ include/env.h |  7 +++++++
+ 3 files changed, 26 insertions(+)
 
-I believe I delegated it to you since Ramon doesn't often have time to
-put together a PR, and since it seems otherwise fine and relevant to
-platforms you're the custodian for, I was fine with you grabbing it. But
-yes, I can pick it up directly instead.
+diff --git a/cmd/elf.c b/cmd/elf.c
+index b7b9f506a5..1ee86c03de 100644
+--- a/cmd/elf.c
++++ b/cmd/elf.c
+@@ -38,6 +38,8 @@ static unsigned long do_bootelf_exec(ulong (*entry)(int, char * const[]),
+ /* Interpreter command to boot an arbitrary ELF image from memory */
+ int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ {
++	struct bootm_headers img = {0};
++	unsigned long fdt_addr; /* Address of the FDT */
+ 	unsigned long addr; /* Address of the ELF image */
+ 	unsigned long rc; /* Return value from user code */
+ 	char *sload = NULL;
+@@ -68,6 +70,18 @@ int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	else
+ 		addr = load_elf_image_shdr(addr);
+ 
++	if (env_get_elf_need_fdt()) {
++		if (argc >= 1 && strict_strtoul(argv[0], 16, &fdt_addr) != -EINVAL) {
++			printf("Got FDT at 0x%08lx ...\n", fdt_addr);
++
++			if (image_setup_libfdt(&img, (void *)fdt_addr, NULL)) {
++				printf("ERROR: Failed to process device tree\n");
++				return 1;
++			}
++		}
++	}
++
++
+ 	if (!env_get_autostart())
+ 		return rcode;
+ 
+diff --git a/env/common.c b/env/common.c
+index 48a565107c..8cd8558c3f 100644
+--- a/env/common.c
++++ b/env/common.c
+@@ -346,6 +346,11 @@ bool env_get_autostart(void)
+ 	return env_get_yesno("autostart") == 1;
+ }
+ 
++bool env_get_elf_need_fdt(void)
++{
++	return env_get_yesno("elf_need_fdt") == 1;
++}
++
+ /*
+  * Look up the variable from the default environment
+  */
+diff --git a/include/env.h b/include/env.h
+index d2a5954ded..384c312d2e 100644
+--- a/include/env.h
++++ b/include/env.h
+@@ -148,6 +148,13 @@ int env_get_yesno(const char *var);
+  */
+ bool env_get_autostart(void);
+ 
++/**
++ * env_get_elf_need_fdt() - Check if FDT is needed for ELF image
++ *
++ * Return: true if the "elf_need_fdt" env var exists and is set to "yes"
++ */
++bool env_get_elf_need_fdt(void);
++
+ /**
+  * env_set() - set an environment variable
+  *
+-- 
+2.39.2
 
---=20
-Tom
-
---6a3inNSG6t0RjnUy
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXKZhwACgkQFHw5/5Y0
-tyzDlgv9HEkI6KjwseWBp7pYLVlAB98aRcixTYhm6H/fVf/9zSPikB+OiDGG9NyT
-roBzocN9gBktTTpPa/+SnlAstsNxSkfkTrb3DYEARCoZnWmM7DbyjELVNDB4mpBq
-vbV1HYYiJpnvP7vt4QAJ2RhnSNg80IdHwmDLyyRGq+vzHlWRBhb+wMvrjOhtXKJp
-v0vxBB2stcGpCjsDtF0BU9KEZ2yUtNjR1ghtED1GYZFQeflhca7BJyF7a7Fv3dsV
-/rT6hmyYI/Xyd8yx0duECJh+pfPSPk6K4UXHkmf3HttQ1CjxAD1Q/H24diHOtGjo
-JlYdvbTHnyW3qCzwMtL1Zk4sVALn/rDeEj0TjHXaDt5xSRbMtsDh7O+saWgEz5WS
-O3jkOG/IGfWFIVyVTcrP8tHsaHBgeCf//Mpu0za5UVQ8wiDCxJLwhM4OGJHhdpV6
-I85kgWINL8G4PFY46bwZrPwTMvbzcKiOCwaVl1seTPKCkZuL3ZNMQYUM5lVShIni
-hcLmRQi1
-=eDKd
------END PGP SIGNATURE-----
-
---6a3inNSG6t0RjnUy--
