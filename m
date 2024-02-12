@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F428C4829E
-	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 20:44:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37CDAC4829D
+	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 20:48:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 77E2887B05;
-	Mon, 12 Feb 2024 21:44:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 743AC879DF;
+	Mon, 12 Feb 2024 21:48:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RxYSBxDt";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cJRo5Rd7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D843587B3D; Mon, 12 Feb 2024 21:44:55 +0100 (CET)
-Received: from mail-vs1-xe34.google.com (mail-vs1-xe34.google.com
- [IPv6:2607:f8b0:4864:20::e34])
+ id 0C9ED86D9E; Mon, 12 Feb 2024 21:48:15 +0100 (CET)
+Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
+ [IPv6:2607:f8b0:4864:20::1132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8BBB7879DF
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 21:44:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9559787D4E
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 21:48:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=robertcnelson@gmail.com
-Received: by mail-vs1-xe34.google.com with SMTP id
- ada2fe7eead31-46d239a4655so570092137.2
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 12:44:50 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1132.google.com with SMTP id
+ 00721157ae682-604aaf2d047so37054137b3.0
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 12:48:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1707770689; x=1708375489; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0hQdObcl6o6xYxp46gERjvMOQCPmJjeO3tkoC5r52lQ=;
- b=RxYSBxDt6KX+hN0FfuToG5M88lQcLhteM3iOqDHfBXZRrnXVtYBgj2ZyhbGrJllfW7
- 7poIMgbvvmhzwMVisRPQ2ztX6/uo9E2B4VkIKf/ekf2o0DFoEK/Nuxni3Yq880utajsA
- N0UqL1FMqOcUMsx+rgVBJQFmWUM+AwB7WFh23YLVTyNh2hZ/X6IF1+HjUCzHp1zaEScY
- b+iNLPzbtA8gmmRxjS1sfyeau/nscROwbv511bpQSm2e8aFAOVhopQ4X3xJ2rOnrRZhw
- rcoEHX0g/qPzVeHp+2T4LMy0W7bmc3vhtUrGTuuWaCJ5H4jLVstoOPC0WSWWf0zkT1EX
- 57FA==
+ d=konsulko.com; s=google; t=1707770886; x=1708375686; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZgcZLqFPsRbbNVkIXXvpMDFjroj7j/mPC9K6h/LrFV8=;
+ b=cJRo5Rd7ARyXbASXWdz4j8qVMfgsUREbukKBkzIjY3qxaDsiZcfpuft3xjCG3M0p21
+ bjvWb9sIqtcCHWu2zZhiQ8kWOkvIQY4jUHnYpHDax6L/mIU+YYG0WPjo+cjgeu/+thNh
+ DHM0RDzuh2+7dkQPz9X3WLEqKOwKiTqd3U2fM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707770689; x=1708375489;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=0hQdObcl6o6xYxp46gERjvMOQCPmJjeO3tkoC5r52lQ=;
- b=HKYnrSO4i1w9KrphaOos1gKR/asjP8Y/m2dV0QjJRL7V1QfmIy9cNvLNMFISFZdjgO
- 1bXbQA330pUrt3Vt4UHgTrVuKQUfTmn47LZZOo05euKMCB33r8JAvlgedXfCy/lu4/60
- S7CsWSzc4abyJN/hV++12SiOyccKOac933dDfrAN7z1rCwXJObLPSdbOJ9fLHjXRhcO1
- mjGYUgkqfN54A9LQJFT8PEwsCv44uqroIjMwil5CIi/oE5WvG4qbFP8td2ncILFtFTFa
- uTLfPJoO9WDek3BHYCqJYwCmRu5e3XEtfGLVfK8aVes6mqo1HZDAHF0RUDFHytUPoZG4
- 6Gtg==
+ d=1e100.net; s=20230601; t=1707770886; x=1708375686;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ZgcZLqFPsRbbNVkIXXvpMDFjroj7j/mPC9K6h/LrFV8=;
+ b=wtHKXfi1oMIqJVaOmaMdYTMAvENDehVDvPGXldWku0GQ+dNKqErje10zAoF9LPZINj
+ z+DgbVPrQ9xzCsknugXZCdKr8wEDx7vKEsTLF838QN015cjwLHG3YN2mS45B1/ZozD3b
+ 7zRSLSBnGrnjlxqV13vUS5XRhcjEUlTiTUE4IPzsHOb9I/cxGpXmDpdpJKhri3cCmPNB
+ KW2gAR2ms+lxD7tX7CXca0FEuhJKQDR+8ZMxHBQ7GGT9IUAgG/eR1WQZckNN+CMiQajz
+ KmqKEH8E3L49UbjaWdRgk8WmBrGcm516g3Y/l6EALyTllK4VxujkH8ZYri/XzK+eebGt
+ tBMw==
+X-Gm-Message-State: AOJu0YxdmX5q/5KkJI6ThiW4ypjG/Qe8O9vufP5sjcMq8aeW307Ot7jx
+ LuuvPMkxN796AYebtsnmA1STAFYTUnYm7iQPGDhN0a1OfjG042SNGxFEIcnf23U=
+X-Google-Smtp-Source: AGHT+IGk+bCAr8wUty8pME0x/bPYD791s0c3k1Nd3uyqWDDfdoaj0Q1EaehASalRjiAdUmt0LvrzbQ==
+X-Received: by 2002:a81:488f:0:b0:604:4b89:bf4 with SMTP id
+ v137-20020a81488f000000b006044b890bf4mr6012294ywa.20.1707770886289; 
+ Mon, 12 Feb 2024 12:48:06 -0800 (PST)
 X-Forwarded-Encrypted: i=1;
- AJvYcCVlZfPNJAa27SFv9aHIBdC8HbgyzXfCh+ZIZkBDA7jwU22mCrb87eWkdUXxKLw52JnQ5q3lP0BtzJgrSFhwbPWbrGQ2/Q==
-X-Gm-Message-State: AOJu0YypdEIGpSts23JdbqS016STOCNVnfn32oYW3c1sMWW7AE9z+Qlu
- L75mUvuRO2XzPfVGbOlOa7QxzQG9Xr6AyvmMzet2TcbOwLQs+9MGWqvDL2E5KP0HFbkFBVjdQfD
- HT/6HiMEcnlIikgmsaJVPOlW9y10=
-X-Google-Smtp-Source: AGHT+IHwfqf70liivG0gvgGuFr6AfKGZJyZh01x7oQoe9qcKoUNLejo5ibw8QGQJFGN6z8XyJMn26GQNZWC59xPw3x8=
-X-Received: by 2002:a67:fe45:0:b0:46d:3c29:1ad6 with SMTP id
- m5-20020a67fe45000000b0046d3c291ad6mr6695543vsr.21.1707770689155; Mon, 12 Feb
- 2024 12:44:49 -0800 (PST)
+ AJvYcCXINxwcqqCO9nCgyOhopnDDHk2kPuPIC6Ilqm2o3vGMUZmZ0nTHw0XQwRfoDsRnvW2Nn6B9H4XBKHcLCIIfmN4Qk5JQUK/X7Sr6GnD5VRysbAnBKQst
+Received: from bill-the-cat (065-184-194-195.res.spectrum.com.
+ [65.184.194.195]) by smtp.gmail.com with ESMTPSA id
+ a4-20020a0dd804000000b006048395c0f9sm1334132ywe.77.2024.02.12.12.48.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 12 Feb 2024 12:48:04 -0800 (PST)
+Date: Mon, 12 Feb 2024 15:48:02 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Janne Grunau <j@jannau.net>,
+ Jesse Taube <Mr.Bossman075@gmail.com>
+Subject: Re: Pull request doc-2024-04-rc2
+Message-ID: <20240212204802.GP3040305@bill-the-cat>
+References: <feceb682-cb14-42de-b833-4198e1a71c0c@gmx.de>
 MIME-Version: 1.0
-References: <20240212155332.541949-1-nm@ti.com>
- <20240212155332.541949-2-nm@ti.com>
-In-Reply-To: <20240212155332.541949-2-nm@ti.com>
-From: Robert Nelson <robertcnelson@gmail.com>
-Date: Mon, 12 Feb 2024 14:44:22 -0600
-Message-ID: <CAOCHtYjBCeHa_gT41NyRkuHOi0xkGrXFHxSKfSObWaTWdahyig@mail.gmail.com>
-Subject: Re: [PATCH 1/4] board: beagle: beagleplay: Enable 32k crystal
-To: Nishanth Menon <nm@ti.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="JPbYAo5T4qNuXs8X"
+Content-Disposition: inline
+In-Reply-To: <feceb682-cb14-42de-b833-4198e1a71c0c@gmx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,39 +92,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Feb 12, 2024 at 9:53=E2=80=AFAM Nishanth Menon <nm@ti.com> wrote:
->
-> Enable the external 32k crystal similar to that found on other
-> production AM62X board. The trim settings for the crystal is board
-> dependent, so the sequences tend to be board specific. Since this is
-> a configuration that needs to be done prior to DM managing the system
-> and all other muxes get set, do the same from R5 context.
->
-> Signed-off-by: Nishanth Menon <nm@ti.com>
 
-Tested-by: Robert Nelson <robertcnelson@gmail.com>
+--JPbYAo5T4qNuXs8X
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Yay, WiFi (wl18xx) now works on the BeaglePay with these 4 patches on
-top of v2024.01-rc1
+On Mon, Feb 12, 2024 at 09:18:09PM +0100, Heinrich Schuchardt wrote:
 
-debian@BeaglePlay-57:~$ dmesg | grep wl
-[    1.892839] wlan_en: supplied by vdd_3v3
-[    8.437425] systemd[1]: Expecting device
-sys-subsystem-net-devices-wlan0.device -
-/sys/subsystem/net/devices/wlan0...
-[   13.241739] wlcore: wl18xx HW: 183x or 180x, PG 2.2 (ROM 0x11)
-[   13.246116] wlcore: WARNING Detected unconfigured mac address in
-nvs, derive from fuse instead.
-[   13.246155] wlcore: WARNING This default nvs file can be removed
-from the file system
-[   13.253088] wlcore: loaded
-[   13.788451] wlcore: using inverted interrupt logic: 2
-[   13.842464] wlcore: PHY firmware version: Rev 8.2.0.0.243
-[   13.938371] wlcore: firmware booted (Rev 8.9.0.0.83)
+> Dear Tom,
+>=20
+> The following changes since commit 91c37c4a20db24a4fc1d565c70035072d355cc=
+e0:
+>=20
+>   Merge tag 'u-boot-imx-master-20240212' of
+> https://gitlab.denx.de/u-boot/custodians/u-boot-imx (2024-02-12 09:26:20
+> -0500)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-efi.git
+> tags/doc-2024-04-rc2
+>=20
+> for you to fetch changes up to 2eb39c9adafb4210c6bcf0aed75a34493c098c8e:
+>=20
+>   doc/develop/codingstyle.rst: Clarify include section (2024-02-12
+> 17:35:34 +0100)
+>=20
 
-
-Regards,
+Applied to u-boot/master, thanks!
 
 --=20
-Robert Nelson
-https://rcn-ee.com/
+Tom
+
+--JPbYAo5T4qNuXs8X
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXKg/wACgkQFHw5/5Y0
+tyzruwv+OiiXyiGI9tO5pLW9sllPaZgdmO6KlDTavHIvuDZVtOIzGKjghgUemFEP
+Mw8QkS2BkteuBsKJClW4okugzVOmzmcslMAja0knxHmEzOuEx+6M2Z+39Gjn2bwb
+ZxUxdhSAZaLW4h1sW6O3UArH6CmGIrugbWSKw8smIKQoSdZl+AZUtAguHvaabUpU
+yhs/+veOEtSXLS2q892yzywqf/hsEQHMywrllFKFZQA0eF66d6d72uSSfw1gpsol
+j0DstFaD7p3b63lno5zVMEUW6I+0M5H9S8aBcF4zwAR+xhXy6zM4urCRtoyqfl/O
+IDnSkouPmdDxj5g520f4ChB4fqz0eGoggCCNiXDqrF1H0nCPygoQ2HRInv+ynVqy
+We929vjCKBeWAPNknGskGAWOo3WVi9uFVPrTozkwRY5W/kBlIvGzXzKvpjPGWrQ6
+GhHHAjflPrOH8oNT4BoSTRiHT/BqWSbdzyLbr6sYn3//n8C2wbILu3qOsLcHOIxr
+RDGwGaGH
+=vOc2
+-----END PGP SIGNATURE-----
+
+--JPbYAo5T4qNuXs8X--
