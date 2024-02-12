@@ -4,74 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 794D0C48297
-	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 11:02:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D05D9C48297
+	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 11:09:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C4F4887BE5;
-	Mon, 12 Feb 2024 12:02:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 099CD879DF;
+	Mon, 12 Feb 2024 12:09:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UM3NxN2+";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="tSepR1d2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 70F5D87EC4; Mon, 12 Feb 2024 12:02:09 +0100 (CET)
-Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
- [IPv6:2607:f8b0:4864:20::1035])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 37AD887BE5; Mon, 12 Feb 2024 12:09:27 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DF603879DF
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 12:02:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BFE1186A26
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 12:09:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x1035.google.com with SMTP id
- 98e67ed59e1d1-29593a27fcaso594282a91.1
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 03:02:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1707735725; x=1708340525; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=8owkyLsN8ILDoUCIvUvjXPU4glWYrWv2egX19J2ds0A=;
- b=UM3NxN2+29UPYp5w9bYvje4UPtgPb+5l7xivf1mtHTHLA1lECV9GD3MNO4mq3YpCD+
- VxZEIMSH7B6s88OER7vyQ4WDFes0Ksjp/wwgdqwnrEr3X7Gs1Rkj10IwJJGmcqDwTgBb
- TdQ0ZAISkv5ps+Yl7HmhyFQr0ZlfzrPcbVM5YM4/K+OkgD4KNolXEWQcR8dtV+t+dOy/
- nJOfnxXT/fW/CNJZIGLEzbm6UiSAOfGoc7BuboaqjuhSURc4YnqrdMsgumLowRvTpT9L
- EDOxepNsaFzjAiUDDBLwz74AGLawTE6+byPl39Hb7eulUPFM27g3A8k8Cjxp3hgh56jV
- Qevg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707735725; x=1708340525;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=8owkyLsN8ILDoUCIvUvjXPU4glWYrWv2egX19J2ds0A=;
- b=I7RhsghxapJey14JxOBnpuAoRHl2oJDFzsy1nsIwlA7DIv/uTSp/p2N0M0a9rb41Ix
- FvyMG42arSV1IYgESUvMCMSqOibTls6bExE8+kByL3gEgiPuw7cWwVczOpjWeSKERVKX
- huSfwDY3L+DcsgZLJFEb/IMwKJEGHws/3FFma/JN/W0r5MFwtQNanocKnHYLVqz+YoOT
- ZCOY4wgoU0rHg/fAg2bPJakF9bdKCDK83YJs5qDtGkK+PcaUtyYxGh+yEm+9+Tt5D/5Z
- g1tN2msCmKvY8YS40f3WaS6csSjuTXMb4D7H2VRyojNlLOKDoIY9MFvCFd048aa3lWIb
- 70GQ==
-X-Gm-Message-State: AOJu0Yw3pUyOgaDV8xv2wLfrCUxlG9RbOtO+Zab6vdP90D3FFsnToJIK
- qbYS4C23bHZiY8djJdRIWwV0HKrTS2yy5/HcfNQle67kgoPRkVRkk5XJPppg
-X-Google-Smtp-Source: AGHT+IGH7bU6dIdimFroJj7+92IAIzORWRaTls5ixEYziOHXW0BKxO/ADGeIPjcKjazbvkjUrx92Gw==
-X-Received: by 2002:a17:90a:6f83:b0:296:ee29:ac4 with SMTP id
- e3-20020a17090a6f8300b00296ee290ac4mr4313736pjk.3.1707735725110; 
- Mon, 12 Feb 2024 03:02:05 -0800 (PST)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:a8ea:7cb9:1157:1655])
- by smtp.gmail.com with ESMTPSA id
- sv7-20020a17090b538700b0029604b0b7d1sm226926pjb.15.2024.02.12.03.02.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Feb 2024 03:02:04 -0800 (PST)
-From: Fabio Estevam <festevam@gmail.com>
-To: trini@konsulko.com
-Cc: u-boot@lists.denx.de
-Subject: Pull request: Please pull u-boot-imx-master-20240212
-Date: Mon, 12 Feb 2024 08:01:59 -0300
-Message-Id: <20240212110159.2426827-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=b753=JV=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1707736124;
+ bh=46D2tBdQ56d9wNZVEfDH8S/g8x/Z+sv7k3ICCEIl3DQ=;
+ b=tSepR1d2efTCYzp1vJ0T+7xsRQ/FkI1PYNOU9pEDufHbk5M6VGtyCnaIGzY4/P3gkb5AlWK46
+ 3yiOHOR4pQUdti1JbLL6pbJPUtK4SLhHOi4w4ygJkzMiCEPjs8BVGUGrBhO2ipxIkak5Z7VEfGU
+ ForDpQ2ncxd2KYZnmOqloVvakHYDcuj3CET3oZVbBwWXuapk6J7psTCeWRpCDnpiRILptlycQMC
+ ILG62H12CqyTPpEEEhb7hA8lQfjwZZ5LxdGcnn+NxvBNaEVC/YwkcretqlWr/nU2+qh3ax08YI1
+ SUrUmKQKED2Tw0ThS27yEDFkx2GFG0k6OxcoImbghHgA==
+Message-ID: <c3f2027d-3d87-4b71-bb13-35090640dc9a@kwiboo.se>
+Date: Mon, 12 Feb 2024 12:08:36 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] rockchip: rk3399: Update stack and bss addresses
+Content-Language: en-US
+To: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Andy Yan
+ <andy.yan@rock-chips.com>, Manivannan Sadhasivam
+ <manivannan.sadhasivam@linaro.org>, Nick Xie <nick@khadas.com>, Jagan Teki
+ <jagan@amarulasolutions.com>, Deepak Das <deepakdas.linux@gmail.com>,
+ Alexandre Vicenzi <linux@alxd.me>, Xiaobo Tian <peterwillcn@gmail.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Klaus Goger
+ <klaus.goger@theobroma-systems.com>, Levin Du <djw@t-chip.com.cn>, Suniel
+ Mahesh <sunil@amarulasolutions.com>, FUKAUMI Naoki <naoki@radxa.com>,
+ Christopher Obbard <chris.obbard@collabora.com>, u-boot@lists.denx.de
+References: <20240212005914.3512640-1-jonas@kwiboo.se>
+ <20240212005914.3512640-3-jonas@kwiboo.se>
+ <d8e10b17-0571-4ebc-9783-2301c429c6b3@theobroma-systems.com>
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <d8e10b17-0571-4ebc-9783-2301c429c6b3@theobroma-systems.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 167.172.40.54
+X-ForwardEmail-ID: 65c9fc3b824ba36109ad370b
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,46 +83,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Quentin,
 
-Please pull from u-boot-imx, thanks.
+On 2024-02-12 11:37, Quentin Schulz wrote:
+> Hi Jonas,
+> 
+> On 2/12/24 01:59, Jonas Karlman wrote:
+>> With the stack and text base used by U-Boot SPL and proper on RK3399
+>> there is a high likelihood of overlapping when U-Boot proper + FDT nears
+>> 1 MiB in size.
+>>
+>> Currently the following memory layout is used:
+>> - 0x00000000 (@0 MiB): U-Boot SPL text base
+>> - 0x00040000 (@256 KiB): TF-A
+>> - 0x00200000 (@2 MiB): U-Boot proper text base
+>> - 0x00300000 (@3 MiB): U-Boot proper init stack
+>> - 0x00400000 (@4 MiB): U-Boot SPL init stack
+>> - 0x00400000 (@4 MiB): U-Boot SPL bss
+>> - 0x02000000 (@64 MiB): U-Boot SPL reloc stack
+>> - 0x08400000 (@132 MiB): optional OPTEE
+>>
+>> SPL load TF-A, U-Boot proper and optional OPTEE after SPL stack has
+>> relocated, meaning that there is room for close to 2 MiB (@2-4 MiB).
+>> However, the initial stack used by U-Boot proper is limiting the size
+>> of U-Boot proper + FDT to below 1 MiB (@2-3 MiB).
+>>
+>> Instead change to use the following memory layout:
+>> - 0x00000000 (@0 MiB): U-Boot SPL text base
+>> - 0x00040000 (@256 KiB): TF-A
+>> - 0x00200000 (@2 MiB): U-Boot proper text base
+>> - 0x00400000 (@4 MiB): U-Boot SPL init stack
+>> - 0x00800000 (@8 MiB): U-Boot proper init stack (changed)
+>> - 0x02000000 (@32 MiB): U-Boot SPL bss (changed)
+>> - 0x04000000 (@64 MiB): U-Boot SPL reloc stack
+>> - 0x08400000 (@132 MiB): optional OPTEE
+>>
+>> This should leave room for loading and running a U-Boot proper close
+>> to 6 MiB (@2-8 MiB) in size. When U-Boot proper has relocated is should
+>> be possible to use @2-132 MiB and @164 MiB+ for scripts, kernel etc.
+>>
+>> With the moved SPL reloc stack it is also possible to use a much larger
+>> malloc area in SPL, e.g. using default SPL_STACK_R_MALLOC_SIMPLE_LEN.
+>>
+>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> 
+> Do we not need to update memory addresses in the environment as well?
 
-The following changes since commit d7aaaf4223d0a2f9f8c9eed47d7431860b3116d8:
+The addresses in environment is to my knowledge only used in U-Boot
+proper after relocation. And at that time we should be free to use @2+
+MiB up to somewhere close to gd ram_top/relocaddr. The optional Rockchip
+OPTEE blobb may occupy @132-164 MiB, but I do not think loading OPTEE
+blobs works as-is, so that may not be a big issue.
 
-  Merge tag 'u-boot-dfu-20240209' of https://source.denx.de/u-boot/custodians/u-boot-dfu (2024-02-09 09:00:42 -0500)
+So to my knowledge we do not need to update any of the memory addresses
+in the environment as well.
 
-are available in the Git repository at:
+> 
+> scriptaddr=0x00500000
+> 
+> This is at 5MiB if I'm not mistaken?
+> 
+> Basically everything in include/configs/rk3399_common.h in 
+> ENV_MEM_LAYOUT_SETTINGS needs to be updated to be located after 164MiB?
+> 
+> Did I misunderstand something? I find it weird the current values seems 
+> to be located after U-Boot SPL bss and that e.g.
+> 
+> kernel_addr_r=0x02080000
+> 
+> is at 32.5MiB, and with U-Boot SPL reloc stack currently at 64MiB... a 
+> 31.5+MiB kernel Image would mess up the data there? (what do we need it 
+> for BTW once in U-boot proper after relocation?).
 
-  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-master-20240212
+After SPL has jumped to TF-A and U-boot proper any memory used by SPL
+can be overwritten/used for something else.
 
-for you to fetch changes up to fcd377ed6480643b1f79188c7a8fb9280a211b4f:
+My understanding is as follow:
+- SPL always need access to bss
+- SPL need access to init stack until it has relocated to reloc stack
+- SPL will load FIT images using the reloc stack, at this time only
+  SPL code, bss and reloc stack matters
+- U-boot proper will use its init stack until it has relocated to end
+  of memory. Until U-Boot proper has relocated it will use init stack
+- We could use same memory position for init stack for SPL and proper,
+  e.g. SPL_SHARES_INIT_SP_ADDR=y without any issue
+- After U-Boot proper has relocated we should be free to use @2+ MiB
+  up to where U-Boot proper was relocated.
 
-  configs: imx93_var_som: Enable AHAB support (2024-02-10 15:16:13 -0300)
+> 
+> Side question, what about making those values the default for RK3399 
+> instead of having it in each defconfig? This could grow quickly out of 
+> hands to move this to the Kconfig symbol itself, so not sure it's that 
+> interesting to the project, but raising this anyway.
 
-u-boot-imx-master-20240212
---------------------------
+Agree, was trying to define these as defaults in soc Kconfig, but that
+rearranged some values in other defconfigs so I avoided doing that in
+this series. Also touching each defconfig helped me ping board
+maintainers of the change.
 
-CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/19583
+Hopefully a follow-up series can move these, and other options, into
+soc Kconfig.
 
-- Fix the i.MX8MP SPI compatible string.
-- Let the SPL clock code do the configuration on Data Modul i.MX8M Plus eDM SBC.
-- Enable secure boot on the imx93_var_som board.
-----------------------------------------------------------------
-Marek Vasut (2):
-      ARM: imx: Let SPL configure ECSPI1 clock on Data Modul i.MX8M Plus eDM SBC
-      spi: mxc_spi: Add imx6ul-ecspi compatible string
+Regards,
+Jonas
 
-Mathieu Othacehe (3):
-      imx93: Use a header for imx9_probe_mu declaration
-      board: imx93_var_som: Probe ELE MU
-      configs: imx93_var_som: Enable AHAB support
+> 
+> Cheers,
+> Quentin
 
- arch/arm/dts/imx8mp-data-modul-edm-sbc-u-boot.dtsi |  3 +++
- arch/arm/include/asm/arch-imx9/mu.h                | 13 +++++++++++++
- board/freescale/imx93_evk/spl.c                    |  2 +-
- board/phytec/phycore_imx93/spl.c                   |  2 +-
- board/variscite/imx93_var_som/spl.c                |  5 +++--
- configs/imx93_var_som_defconfig                    |  1 +
- drivers/spi/mxc_spi.c                              |  1 +
- 7 files changed, 23 insertions(+), 4 deletions(-)
- create mode 100644 arch/arm/include/asm/arch-imx9/mu.h
