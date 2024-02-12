@@ -4,76 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3AACC4829B
-	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 12:38:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CF14C48297
+	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 12:46:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D144878A1;
-	Mon, 12 Feb 2024 13:38:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id AE79087EC9;
+	Mon, 12 Feb 2024 13:46:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="ABlMGdWN";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZxrXdlGm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A435287775; Mon, 12 Feb 2024 13:38:31 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C211587ECA; Mon, 12 Feb 2024 13:46:07 +0100 (CET)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7504287EBD
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 13:38:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DEF2287CC2
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 13:46:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1707741505; x=1708346305; i=xypron.glpk@gmx.de;
- bh=yp8d7SKJU2kQwh8n7sLzwDrKzhpOQupmZ9gf/gItups=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
- In-Reply-To;
- b=ABlMGdWNxvABVdfTdcorWcKtBjxZ9VGXtnhNzfsMWgOGQ3YVXuWhRwQdT8fdxQBv
- Q6KqmNEHZrh/t8ZBtuUeNaRC4YQsMOR7Q82eDC8o/h1KRYMUERie4FHYwxdfCb2qr
- fbmIK3qed706Swhucvgd1H7zguMx8aG6Gt28fYBHJpqLLZPQD2pL6+xj5eGo+4OfA
- oF6Ia9xVHCnWJX+X1ScOnqiiu4Y1TALXWOq81Z268bcr9VWZwhyr4RpsSWYiZDMRn
- glqw09vH/2rZcj7jgu/OtdPI/IOWeGhEDQ08phMSoeBwU30sZryKLilmbTTN9Wzij
- WJ0ZkOWcLEBomU3c9Q==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.67] ([178.202.40.247]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MA7Ka-1rfbSd0Syo-00BbM6; Mon, 12
- Feb 2024 13:38:25 +0100
-Message-ID: <ec57adb0-527f-451d-a243-9987a67e6bfd@gmx.de>
-Date: Mon, 12 Feb 2024 13:38:24 +0100
+ spf=pass smtp.mailfrom=gilles.talis@gmail.com
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-a2f79e79f0cso488119566b.2
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 04:46:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1707741965; x=1708346765; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0cmbSd57Sj1RDUKOKSgw2ItWwGB8e72r6xayliz7OaI=;
+ b=ZxrXdlGmfYQqepmYv8ssEpt8ME9es9AVlIjCVxIurtt5B0eRPdSJBtESpHAYVxl1yV
+ nqWc7u05aMyF3c6qL94B5SGYS7FjeMHSNlOxkvgadnn+r9E+YWtjEkGRClClv3oyx6wO
+ HbIzDn0UBwnudqdcw1kNAx8zboJxs4u0pivxnqYVm13M9tXACRMZkvVFK3j0SPN5501T
+ I/WB0QR59A2qAc92m1L6OtqQ+OBItPn6A+wvygmcxvIFP8MiYbHXxKTtsrXFJQU1ROik
+ G1CImN63bjt+UY/2ctAGFiQlfv7NnYAGrc+pi+SrYR4jtGqclDtkfvgKRCytB+sVNSSz
+ 7loA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1707741965; x=1708346765;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=0cmbSd57Sj1RDUKOKSgw2ItWwGB8e72r6xayliz7OaI=;
+ b=iKnbWb0qtrdAyAIdxAMJvCqWHPiABeQoTgccb2p7RsZRKzWPR94YJF4lKAjbCdB1Xg
+ R9QalXr4OKGkNACPy2aJnnXHdD1nO1/E8p782eJj3de7QNPyioMLAJwWnsUD3Slbk1ry
+ r3IoS7fRdzyEjMVErJpZvVZETWk83s2SGnFCIVtiB2E0JCMfDV7Aq9M4hDrBgBiUrF5G
+ xUBv2ca3WkFP/Z4BTuvAgyubwTvPWVndQ8ZGPwfpPmJNrbawzmOmmFu4JtHmCjbqRZac
+ cHcdog6PUbc39CoV0Mj6Mu9VlgnjXZ2AS55LAqbcPA6tX/ClEWe3KKdLWhNsCWNIW5eH
+ zhdw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXsZPumWMfeu8liX3QWcKZ5+rqojWs3t5CGGeInZxlJk9FmodKSvRC+FPhPKl3neJ1Efc3O4U/ifm+jJWTeNpnWosrqkw==
+X-Gm-Message-State: AOJu0Yzb9yk5ve1zlDyIJdbfzI1FDUtx3gVtOY8e723ClhFHAa1Y/ErJ
+ kCy2b1/c7QfiolOJ1J8WESaKl34Xqj+QX4XP9VbAOsY6BzJJFsgNR08mZz8Chh/iZrbiPgZ6Edq
+ qIrvvC7OZSlt6ejeuGxIR1wRYlS4=
+X-Google-Smtp-Source: AGHT+IGMgdHRyV6EI4yKpRWveBqNJVnPBRx6FQaupWR4NrHwYXqtEfC8Et/PSLh1LmAV+PUFn1C5WMtKubVCMTwH9+o=
+X-Received: by 2002:a17:906:1b1b:b0:a3c:83d4:6869 with SMTP id
+ o27-20020a1709061b1b00b00a3c83d46869mr3096335ejg.54.1707741965051; Mon, 12
+ Feb 2024 04:46:05 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/6] lib/charset: Map Unicode code points to CP437 code
- points 0-31
-Content-Language: en-US
-To: j@jannau.net
-Cc: Simon Glass <sjg@chromium.org>, Andre Przywara <andre.przywara@arm.com>,
- u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Anatolij Gustschin <agust@denx.de>
-References: <20240210-vidconsole-utf8-uefi-v2-0-88c03db60de2@jannau.net>
- <20240210-vidconsole-utf8-uefi-v2-3-88c03db60de2@jannau.net>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240210-vidconsole-utf8-uefi-v2-3-88c03db60de2@jannau.net>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+References: <20230523192155.33222-1-gilles.talis@gmail.com>
+ <58a07085-3926-b942-fb8c-58f1f5eac421@oss.nxp.com> <877clq6odx.fsf@redhat.com>
+ <CAKcgs2x1FdvW0afXN=GGRc5nb8rhZtm70xzkURFeworcmTHPpg@mail.gmail.com>
+ <87bkavbo6c.fsf@redhat.com> <877cjrss43.fsf@redhat.com>
+ <CAOMZO5A2W4ZZBdUjNkA9fqB+kBgASM7esfcLL3RvdwmCi9qakw@mail.gmail.com>
+ <87r0hy38am.fsf@redhat.com>
+In-Reply-To: <87r0hy38am.fsf@redhat.com>
+From: Gilles Talis <gilles.talis@gmail.com>
+Date: Mon, 12 Feb 2024 08:45:53 -0400
+Message-ID: <CAKcgs2wmZPQEnV0xtr=L-BdX_Qt=Qbd2XwEZPDqSG_xHLUd9uA@mail.gmail.com>
+Subject: Re: [PATCH v2] imx: imx8mp: Add support for Polyhex Debix Model A SBC
+To: Milan Zamazal <mzamazal@redhat.com>
+Cc: Fabio Estevam <festevam@gmail.com>, Peng Fan <peng.fan@oss.nxp.com>,
+ uboot-imx@nxp.com, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:9oHGelV0880Dk5us021TMZObZRxLUdUcDpU7gmL85t21aVX6ry6
- kfo2s79P+mJOnZAPnAl49GWiJCcO50TBBMxo6+FilMPv2rqWOSVfVB7w03yooi5CXqCU2Uj
- cAquZt7QlOf3qirt9F3dOosqFgwK4Gf9+DSdM6V9r795YgLgyrxBhI4VHKuzuNS0rPAizMH
- n9uz84vzwcP6QrykxW47Q==
-UI-OutboundReport: notjunk:1;M01:P0:/ks701LnNyM=;X9QbXiS1ozP+J+HvIjnHI6hBDF2
- 8wM1ukqPkMPMSqN0l3u/66g19td4XfZPg6/+LUX6kAyznMVLbIN3wgzLDapNH2P6grE6xGA7/
- Fc6spJw2E05ef559EnsZR/lLWip8M2cOfSgiyIMVyWVzeC8Y/YZxn4u9w56Wbhh+0j5ZO80n3
- erXY76lfCaw6b7y1ShJCNZflBix165ZWFR9jIpbERlMZ79yfkKl2wP0wJb8UkwZvo5ZY0sC2W
- lCkwEwLo1uZz3hKRz8XqTABKu2B6LJMHrA5AL7f00ATPNhW/HdZcbJvoxIRi5iw2xMcvCpVnm
- LemBYxxM/BIOYi/CDzy6BUYDet+8rhskhJxwNMbg95bxvu4o3ne5zOtF5HxIRau+llKahMq6W
- 2/taKFrG0e2e1K9rVwLmucDo1IYlXpTIIIwh1lWy2ZBLSX2K64lEf0D2LsimBvuhh+fHiMaF0
- 8k4rEfweS3msPe8jHMrr0D7Cw0S1vuc+uvWwizLW57Bs96BNIK7RGysqzaYZkQl/FHFsffQ1y
- nbX3nESOr6fyUfaJnOzvwxzobytBW3Mirkwxig44v40yLrrTTYB3pR0Q1fnSW/ESSp52aaIvJ
- sYyWPr5gst9yP2tZ19Vp7SHxw22szQJuKlLhdNpnOUfsDDg/lh1hFM/GDnaudW3lmMVgje9bt
- j2L3b7sCEcS3GOEBWNxPr5a8IVAGLH1H/9RroyX04pLDtcE59nk/Jy/auVhVlyT2VA95qwtQ9
- z+RF+8AWfyLbDDWfZMP5v3w6UCGowkVd3x6yPJGrC0X9UFtTEHS9iSfX1CCe695qWTosa+Asx
- KzaScGQoObySwFoeXbJh49gvPWXiFJ7LOjmK8fg8WLTmI=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,144 +95,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10.02.24 13:46, Janne Grunau via B4 Relay wrote:
-> From: Janne Grunau <j@jannau.net>
->
-> Code page 437 uses code points 1-31 for glyphs instead of control
-> characters. Map the appropriate Unicode code points to this code points.
-> Fixes rendering of grub2's menu as EFI application using the
-> EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL on a console with bitmap fonts.
->
-> Signed-off-by: Janne Grunau <j@jannau.net>
-> ---
->   include/charset.h                      |  2 +-
->   include/cp1250.h                       | 12 ++++++++++--
->   include/cp437.h                        | 12 ++++++++++--
->   lib/charset.c                          |  9 ++++++---
->   lib/efi_loader/efi_unicode_collation.c |  2 +-
->   5 files changed, 28 insertions(+), 9 deletions(-)
->
-> diff --git a/include/charset.h b/include/charset.h
-> index f1050c903d..348bad5883 100644
-> --- a/include/charset.h
-> +++ b/include/charset.h
-> @@ -16,7 +16,7 @@
->   /*
->    * codepage_437 - Unicode to codepage 437 translation table
->    */
-> -extern const u16 codepage_437[128];
-> +extern const u16 codepage_437[160];
->
->   /**
->    * console_read_unicode() - read Unicode code point from console
-> diff --git a/include/cp1250.h b/include/cp1250.h
-> index adacf8a958..b762c78d9f 100644
-> --- a/include/cp1250.h
-> +++ b/include/cp1250.h
-> @@ -1,10 +1,18 @@
->   /* SPDX-License-Identifier: GPL-2.0+ */
->
->   /*
-> - * Constant CP1250 contains the Unicode code points for characters 0x80=
- - 0xff
-> - * of the code page 1250.
-> + * Constant CP1250 contains the Unicode code points for characters 0x00=
- - 0x1f
-> + * and 0x80 - 0xff of the code page 1250.
->    */
->   #define vi  { \
-> +	0x0000, 0x0000, 0x0000, 0x0000, \
-> +	0x0000, 0x0000, 0x0000, 0x0000, \
-> +	0x0000, 0x0000, 0x0000, 0x0000, \
-> +	0x0000, 0x0000, 0x0000, 0x0000, \
-> +	0x0000, 0x0000, 0x0000, 0x0000, \
-> +	0x0000, 0x0000, 0x0000, 0x0000, \
-> +	0x0000, 0x0000, 0x0000, 0x0000, \
-> +	0x0000, 0x0000, 0x0000, 0x0000, \
->   	0x20ac, 0x0000, 0x201a, 0x0000, \
->   	0x201e, 0x2026, 0x2020, 0x2021, \
->   	0x0000, 0x2030, 0x0160, 0x2039, \
-> diff --git a/include/cp437.h b/include/cp437.h
-> index 0b2b97132e..5093130f5e 100644
-> --- a/include/cp437.h
-> +++ b/include/cp437.h
-> @@ -1,10 +1,18 @@
->   /* SPDX-License-Identifier: GPL-2.0+ */
->
->   /*
-> - * Constant CP437 contains the Unicode code points for characters 0x80 =
-- 0xff
-> - * of the code page 437.
-> + * Constant CP437 contains the Unicode code points for characters 0x00 =
-- 0x1f
-> + * and 0x80 - 0xff of the code page 437.
->    */
->   #define CP437 { \
-> +	0x0000, 0x263a, 0x263b, 0x2665, \
-> +	0x2666, 0x2663, 0x2660, 0x2022, \
-> +	0x25d8, 0x25cb, 0x25d9, 0x2642, \
-> +	0x2640, 0x266a, 0x266b, 0x263c, \
-> +	0x25ba, 0x25c4, 0x2195, 0x203c, \
-> +	0x00b6, 0x00a7, 0x25ac, 0x21a8, \
-> +	0x2191, 0x2193, 0x2192, 0x2190, \
-> +	0x221f, 0x2194, 0x25b2, 0x25bc, \
->   	0x00c7, 0x00fc, 0x00e9, 0x00e2, \
->   	0x00e4, 0x00e0, 0x00e5, 0x00e7, \
->   	0x00ea, 0x00eb, 0x00e8, 0x00ef, \
-> diff --git a/lib/charset.c b/lib/charset.c
-> index 5e4c4f948a..1f8480150a 100644
-> --- a/lib/charset.c
-> +++ b/lib/charset.c
-> @@ -16,7 +16,7 @@
->   /**
->    * codepage_437 - Unicode to codepage 437 translation table
->    */
-> -const u16 codepage_437[128] =3D CP437;
-> +const u16 codepage_437[160] =3D CP437;
->
->   static struct capitalization_table capitalization_table[] =3D
->   #ifdef CONFIG_EFI_UNICODE_CAPITALIZATION
-> @@ -517,9 +517,12 @@ int utf_to_cp(s32 *c, const u16 *codepage)
+Hi Milan,
 
-This functions is used by the implementation of the Unicode Collation
-Protocol.
 
-In lib/efi_selftest/efi_selftest_unicode_collation.c, function
-test_str_to_fat() we should test that the added Unicode characters are
-translated to '_' and not to control codes (< 0x20).
-
-Best regards
-
-Heinrich
-
->   		int j;
+Le mar. 30 janv. 2024 =C3=A0 15:55, Milan Zamazal <mzamazal@redhat.com> a =
+=C3=A9crit :
 >
->   		/* Look up codepage translation */
-> -		for (j =3D 0; j < 0x80; ++j) {
-> +		for (j =3D 0; j < 0xA0; ++j) {
->   			if (*c =3D=3D codepage[j]) {
-> -				*c =3D j + 0x80;
-> +				if (j < 0x20)
-> +					*c =3D j;
-> +				else
-> +					*c =3D j + 0x60;
->   				return 0;
->   			}
->   		}
-> diff --git a/lib/efi_loader/efi_unicode_collation.c b/lib/efi_loader/efi=
-_unicode_collation.c
-> index c4c7572063..4b2c52918a 100644
-> --- a/lib/efi_loader/efi_unicode_collation.c
-> +++ b/lib/efi_loader/efi_unicode_collation.c
-> @@ -257,7 +257,7 @@ static void EFIAPI efi_fat_to_str(struct efi_unicode=
-_collation_protocol *this,
->   	for (i =3D 0; i < fat_size; ++i) {
->   		c =3D (unsigned char)fat[i];
->   		if (c > 0x80)
-> -			c =3D codepage[c - 0x80];
-> +			c =3D codepage[c - 0x60];
->   		string[i] =3D c;
->   		if (!c)
->   			break;
+> Fabio Estevam <festevam@gmail.com> writes:
 >
+> > Hi Milan,
+> >
+> > On Tue, Jan 30, 2024 at 9:22=E2=80=AFAM Milan Zamazal <mzamazal@redhat.=
+com> wrote:
+> >
+> >> Well, after trying both the SD cards again with fresh reinstallations,=
+ it works
+> >> with a 32 GB card and I get the error above with a 64 GB card.  Is it =
+possible
+> >> that there is something wrong with SDXC cards?
+> >
+> > Does the change below help?
+> >
+> > --- a/arch/arm/dts/imx8mp-debix-model-a-u-boot.dtsi
+> > +++ b/arch/arm/dts/imx8mp-debix-model-a-u-boot.dtsi
+> > @@ -128,6 +128,9 @@
+> >         bootph-pre-ram;
+> >         sd-uhs-sdr104;
+> >         sd-uhs-ddr50;
+> > +       assigned-clocks =3D <&clk IMX8MP_CLK_USDHC2>;
+> > +       assigned-clock-rates =3D <400000000>;
+> > +       assigned-clock-parents =3D <&clk IMX8MP_SYS_PLL1_400M>;
+> >  };
+> >
+> >  &usdhc3 {
+>
+> No, the same error. :-(
+>
+> Regards,
+> Milan
+>
+I tried with a  32GB Sandisk high endurance SD and a 64GB Sandisk
+Ultra SDXC UHS-I and both worked.
+Can you tell me which 64GB sd cards you tried booting with? And also,
+which steps you followed to get the errors (which image to download,
+etc...)?
 
+thanks
+Gilles.
