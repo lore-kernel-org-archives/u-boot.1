@@ -4,80 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAE66C4829C
-	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 16:58:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01F31C48297
+	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 17:03:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4113687EE8;
-	Mon, 12 Feb 2024 17:58:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 62EF78723E;
+	Mon, 12 Feb 2024 18:03:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=outlook.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fevpS8t9";
+	dkim=pass (2048-bit key; unprotected) header.d=outlook.com header.i=@outlook.com header.b="ixn2o9ig";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C4FCF87EDF; Mon, 12 Feb 2024 17:58:38 +0100 (CET)
-Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
- [IPv6:2607:f8b0:4864:20::b33])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 03EF78723E; Mon, 12 Feb 2024 18:03:07 +0100 (CET)
+Received: from APC01-TYZ-obe.outbound.protection.outlook.com
+ (mail-tyzapc01olkn20801.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:280c::801])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 926E587EDC
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 17:58:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5106087732
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 18:03:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=outlook.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb33.google.com with SMTP id
- 3f1490d57ef6-db3a09e96daso2871446276.3
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 08:58:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1707757109; x=1708361909; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=3uryNI8p3apJu6T7jZPqUrmZuXxu6DKhNel+dZTCuSc=;
- b=fevpS8t9xMrvJLa5oOte3UBQnNcjH0Dpc1V2Shvxr+Acg/Y7HhUMiMPuS8Pb6UEO17
- 1q3q6U4sAo9ybrmu/6kaEExF4d7OpAtEk8OcXhbhh3xJxS7y9X4V4Q6jCALKJdr6g7+f
- LBTfHhFRvSg6jBQ2uedPQHYHWKxw9FYX/HAvw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707757109; x=1708361909;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3uryNI8p3apJu6T7jZPqUrmZuXxu6DKhNel+dZTCuSc=;
- b=gX/I+f6VhFFJqnNWu57wx5pxtqtPcs1bPr8JJ5pOaSHU4/pzscWLCdaOXPGZEwgZCm
- LrCqEWd7GyBkjkX6mOJuY9RTqD337ZpqWuTkHPwZu4fD7Ui0X5emNWkfVIhLMKyDHTm0
- 95d26bv/PUF331CWdiXlvcr1dYgZ9kup2xzu4j0V5UlTyKgT7dvEZEAGj5r4nJkKKvrX
- hPRxVqtPAqX5eRfL5EXiZmU05ZWM/YrKooXWv/Xj8QsZMQoYQHyUcoTzq7BAch6HBhlt
- SNzEz6zhJJXuGGjGBcMZo4GkiPw83VzoddMtyOXZYtz4j2RFvLbhZn8xR+yIDYnEtKld
- nlKQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWSqPLWYmVjfNx/CdXx4D5MOZGgmQSgrZqDB1dIggk/WjKtCAT7S+HFllINFaA6y5dAnZsXEJdF0MoX67BgK3cyNwu1BQ==
-X-Gm-Message-State: AOJu0Yyt3leRTxv/2bffqLOpBvO3XTbtDLwJ9e9DEVBoHWkmFNZtY6Qz
- 3ymWKNMRnHWY9q0JAtsJY4affTl0s7NlPisX2f5LIaVkNnf7vANu4r3CJ/YD81Y=
-X-Google-Smtp-Source: AGHT+IHtpORTeXaXzWGDvJI3SgIn/s8ZMROMKW6TXki0aElNQAAGELD0CKolsFKxpfbmDY19oIkiOw==
-X-Received: by 2002:a05:6902:2606:b0:dc6:9399:849e with SMTP id
- dw6-20020a056902260600b00dc69399849emr6299923ybb.11.1707757109354; 
- Mon, 12 Feb 2024 08:58:29 -0800 (PST)
-X-Forwarded-Encrypted: i=1;
- AJvYcCUbarfeJIz9JCtVOXwu4peiCVaYx8AAyMUJzXAsKL7kBOaWhuTbbJ2WZJTQWNm8fydjX1rBxwNX4WX9iFpsKegExHpIcl/fLGgUV8P1OGnTWJniEDhjkfN+3vtpXinOlA==
-Received: from bill-the-cat (065-184-194-195.res.spectrum.com.
- [65.184.194.195]) by smtp.gmail.com with ESMTPSA id
- x28-20020a25acdc000000b00dc74363dc0csm1303227ybd.21.2024.02.12.08.58.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Feb 2024 08:58:28 -0800 (PST)
-Date: Mon, 12 Feb 2024 11:58:27 -0500
-From: Tom Rini <trini@konsulko.com>
-To: forbidden405@outlook.com
+ spf=pass smtp.mailfrom=forbidden405@outlook.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=CStAK4EuQS4M0LWSHrHTqSwFT9NmHxR9siZEBS38fTF6uEIxgOlcG1H8iBmZpJ+U/oxk+NVG6cJWHm+VVC9kIXcJFpcjNGCw53GkKpXjEFQedNyg+dB4PT7yRm2pQVVeHGVrIpGV7H44+U40T5dm9haHwXKPQXF3vhnAPa8zM+KcNWUdTjdSirC2QuH5S1PLwV+Yc45oLWzZzOnQhjdWQlZBlfaBDjx0RWMdb8MeqR+689kDCytLVb6ObcLZyZJSaMGbrzmGAAGMlcAvyY1xH2CL+kB+XMiXawaSuFpClY9UAdvXpSgp/3PdIzl/J8D4sXsayx6m0YwExFDBkeNacg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=PpYqLs0UNJW0R9bvcadhYr1AfZ4op0Tsi0CvEVgDFk0=;
+ b=gGr83UUoF+A6sYCnaYNpSHF8gPc94QHbnwTy7TSsOfvHsCJGaeMOcL+Y26scw+JElTkr93xd5isAdj1DR3JkXlPTnGKAuZ3biMbHRpdaArwlN2psCB60vQ3Ag9nh5rkbtpK7indeu3XAPbOSwai/7//92Y6mBzmw38ecBFfabzwFXek4MlCCCIEWpedNIttxW7g08++FkEt/ZIVoMv/881VYTunKV9K2H6M3MlCSatDxnzgCirgNC2SkfsVECVmZRJ3Ml8L2LVP8Iov2SoMU761ZTd+KN6qUZJWc4cmh5mZovjzskVlkeEmbfPPrU9VOtbBM0IsZ4ew3lQC07S6VJw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=PpYqLs0UNJW0R9bvcadhYr1AfZ4op0Tsi0CvEVgDFk0=;
+ b=ixn2o9igwPV40woCSUTZUGEhqEF67P31Y5dQHUKTIQJgIgvN8rQO7LvFHWxH+9d5teW5NN7BIaHXhYUuLyo3ygZYvngzAGOgNB+IKsvZtLjTQRBMo3f+p1jty9xBkOdQUanbZxXLMRHpyYdyysglzs6aYOssixWjvI2tgr1ZPhQypNcnyugL3JRHy1J7JIRAhOXa3n/V4G1EX4mDgu6zUCcj3dgg6QN6nZKRj6qEk9hrPYJylpE1fCenmXzjKx/Oaf161LDIQyKLVtGjVjt1re8P/cr9XdZsgBdx71Lz8Vy82ZvJKxHVzeIyFqeZ0fQLIbWtAaa2+LNh2HTLSE1Tjw==
+Received: from SEZPR06MB6959.apcprd06.prod.outlook.com (2603:1096:101:1ed::14)
+ by PUZPR06MB5794.apcprd06.prod.outlook.com (2603:1096:301:f2::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7270.35; Mon, 12 Feb
+ 2024 17:02:57 +0000
+Received: from SEZPR06MB6959.apcprd06.prod.outlook.com
+ ([fe80::9a6b:d813:8f4b:cba1]) by SEZPR06MB6959.apcprd06.prod.outlook.com
+ ([fe80::9a6b:d813:8f4b:cba1%4]) with mapi id 15.20.7270.033; Mon, 12 Feb 2024
+ 17:02:56 +0000
+Message-ID: <SEZPR06MB69597D40FEF2059B89BC68D196482@SEZPR06MB6959.apcprd06.prod.outlook.com>
+Date: Tue, 13 Feb 2024 01:02:50 +0800
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFC] pinctrl: add support for HiSilicon HiSTB SoCs
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>
 Cc: Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
  Igor Opaniuk <igor.opaniuk@foundries.io>, u-boot@lists.denx.de
-Subject: Re: [PATCH RFC] pinctrl: add support for HiSilicon HiSTB SoCs
-Message-ID: <20240212165827.GJ3040305@bill-the-cat>
 References: <20240213-pinctrl-v1-1-e71c8ead72f2@outlook.com>
+ <20240212165827.GJ3040305@bill-the-cat>
+From: Yang Xiwen <forbidden405@outlook.com>
+In-Reply-To: <20240212165827.GJ3040305@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-TMN: [cb+PJKRiJcK0fEzcfvj0Z6nqbCz475OzRtD1dA7623r5nYF7EdLpMR3Pp6OxoFk6j6USXkgMG5g=]
+X-ClientProxiedBy: TY2PR0101CA0025.apcprd01.prod.exchangelabs.com
+ (2603:1096:404:8000::11) To SEZPR06MB6959.apcprd06.prod.outlook.com
+ (2603:1096:101:1ed::14)
+X-Microsoft-Original-Message-ID: <9eaa0a3e-2fb6-460d-987d-4d14825acb4a@outlook.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="7KGTMFYdI4FM6DyC"
-Content-Disposition: inline
-In-Reply-To: <20240213-pinctrl-v1-1-e71c8ead72f2@outlook.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SEZPR06MB6959:EE_|PUZPR06MB5794:EE_
+X-MS-Office365-Filtering-Correlation-Id: 175a8e73-0653-4d6c-2462-08dc2bec7501
+X-MS-Exchange-SLBlob-MailProps: laRBL560oLTYF3BVvcfZzLdqNADu7oxW7GL/lD7xyWF/t8zqXreO4Q9qil0BKSNCzuu7jhaG+n3hD4eC6ZRGyxJcvB1CNVjBPXTBWJ+dmVtMOgytip0ubI4wZi5K/CTdTQEXGc0HcWR3S6l56JtCBzNpnpFrKlp2qW14bmq5cCMLlS0oVk/hxmY8UfiS+MiQLKmaVqyTG7cVL9GNLCpFZ20LKAP5RbpLtrjloklaGLtCGI4crSEy7jFWPfiyhFJFWkf5e3Jk7P4zPgkacu8LG1v2ZzZDOAdS8eTMl9GHUeuL4PaZussBhAVcKa4Vs4O4pz9eSi8EjDSZbCKkDLmUJS3Pn094Xq1A/7OCFwpF16iz4v6KBviGDb+DkilWaV8siGFJowKX8RzUSkMCbf4xf14nVH2wmaX7hbTwBuEMnU0XGvFJrjjXyHZtQJDYJ2Id9ZoOusaKWcJ1n5pxao/69vTZnxNr7KsX8yDPs7fMx16a6stC1fitEYoH35tnPsx+7ivPiU+zregaAU+5cW/UHHWT15mYK4nSRrdh4IoATzV1OnFWZ4QZdNPa2FOdzYtwSP8fUiqA0aL9mG7LkZBEyCyqbi2RokUQH6QfG+D+yKe1GJrd0bb+Kf2V6ICpZ5YOZQnLBMDsK+ToAN8CWHyjBfJ2+P9cLPoPXcElH0WIr616p6JMxoN3TdL5ubKYgfnVNEG44l6TS3dpNFT6msjJcX7CiK6cT7Xj/hDaW+NkSZZjTkdbbb5JxqQ5m4Csq6ECpayf/i+IF1Q0QSmi+Ut46vUM12P5JrPW
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: V+8K7MuxJCaN4U3Fhn8rEt9sQ05sv3RZ3d58rxq+Oypsd1Oyt4dwb3xUijW6BHrNaSsuIel8y9dBePBhIxRgqhZO1GptYq9p940TZ+PrkOijMXLoUW7iReMaZyckoIGGkjABjq28db/3hQm/c+tnbQvTYGk3+xIM04vaOwjfFeT3cGZCkaskvLa1DC2CMLsY17Lcj/XFtJDDjfK8yP/eCHunfYbJ4UgeAswsrzp+4ZArbAQEhjHEXKZgKyRzt0bQPOhaSJI8q0fFQMwSmM9n+K/W2n/4HbePp6iF1dNb4Pcoc7gi5jtry6UyVuSDJ3qVAEwzHgjXGbiABsa+3/Zho7jVmnbTYXlhSqEGsfHBkl14cVlPCMCQvCzfCuy4DIQljewxxLlsnXtyGJ5vWVkgJIYOWLDh9z/4IIII1XzYkdKlROAjxdTLpghnILvY17X+CLx0PYqbBHOxbR2s4VorS9yDg4OmPOW1qvFYU1/jkEIdKSk7AIviNrejobWioxJEIkcZGCCHnzA9DG2wt9c7zIdCDzJmGPykKrMhirwGLg5xYuls4LiFj7ZEVRrf9s44
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Y0xpOUJFM2xtN2FKMnBWZCtHUlFIMTlLSjJGalU4SUpsRmp0NXAxb2lFOHRO?=
+ =?utf-8?B?NjFiOVZEVTZsdE52TkovYlQ5MHZzb0RuaGhHSEs0NnFFaURzeWVhdm1YY2k2?=
+ =?utf-8?B?cU50VUx0SzJqN3RkVVQvLzZVc3FrTHFmTklxK0NPZGdBMXU4dklMRVNzdTVJ?=
+ =?utf-8?B?TnZFWjhET1JyWCtIWForb2hZR1JDaDVFeTZNQ3VRdXR6aWtjY0ErbWNBSlBD?=
+ =?utf-8?B?dlI2amRUUktEZXZVZ3RRSFBUbi9WdmtzMk84L3dqb2hXNS9XNnJRemdmL0pj?=
+ =?utf-8?B?NmVWeDFENG84TzZpVC9hUnh0ZFA3OUJyeVQyRlNJVDkyQ3g3SURYNzBqUzJh?=
+ =?utf-8?B?VlhnUFhsRS9hbUJvVmZseFNidWlNZFNDMXZSZXRDOGtmR2w2dDBObFdVVzhZ?=
+ =?utf-8?B?eDMrbUhxSG9sTG5hTUR3L3lqdkZPbmxFNjFkZm9hU0ZpbFdWekl4MnM3RXVR?=
+ =?utf-8?B?dHZodUVwWEVDbmdheExzd2p3UDR6VU54VmJqa0htLzJ2VnpSNTc1RmtwQWFE?=
+ =?utf-8?B?bUJSbHJOTW1pak5ZcVVNcTlvNjY5N2xKV1RhREtKejJ2NWh4R1VnSVFnTXpt?=
+ =?utf-8?B?dmFPaUtDTHk3a0M0bUNuMDVLTk44eXF3YmNPZ3JqVXNWeDk0NjB6Y1JLYkdF?=
+ =?utf-8?B?T0JkYjZGMS9BMDR0c0pkWmVZcW5sVTNpeWpNajdxNTQ5NnZZK1UxZlh5aGI4?=
+ =?utf-8?B?RE5USHp0Z25YK0JaeGU5MjJ3UDNHNEl2QkNpSWNSUDliRVovcmxuVTNCL2hM?=
+ =?utf-8?B?RkpzUkVPekJBUSttYk93NndvbElhNzFXb1hxejJPd0RqNmErT0l4aDFpS0lI?=
+ =?utf-8?B?K01FNDBsVEh6NTFNaFRvYlYrcXQrdmo3d3FjMmFodDI3MnhoOFk3L1VFbCtN?=
+ =?utf-8?B?ODhuaVNDRFVCb0N2aVFRWEhUUzVidUE2NUtMSHQxa0J0REJzUkN0NjRCeCt2?=
+ =?utf-8?B?Mk5LblRMWHNjc2RTWVJ6YUZnUGdMbnl5VEQ0N1NhWlAwTkJWdXZBcTBOT2hk?=
+ =?utf-8?B?bE5KRkhLNXNsYXcyQ3dKemhZWk12WE1vVXh3T1NBM1l5VDVnTk5hMWg2Ulkx?=
+ =?utf-8?B?WHN5Y1V4SkJjY0dDMVd4am1EREZVSVlFN2RaazBaVkJXZ3VkK0tqL01qaVRB?=
+ =?utf-8?B?Y3VjOEZYN0VacmhkbVdHcElMdFpoV1h6cEZybFNlaW9keU5HUHMwSkE1eHhJ?=
+ =?utf-8?B?dVBIaTk1dDdKV0lXTHVPWFY1UFRTRUFRbUdCd3VLSUlucWFEMHVwNWM4bjNT?=
+ =?utf-8?B?VHJETis0VlRMeDdCa0JtV3FrS2gwRDlpYi9lTDVRSmgwWWMxR1plT002VENR?=
+ =?utf-8?B?VUdPNkNoWnhFM00zeThxd3o0ay96eG42R0hvVEU4RkpoS2RCQXlwVVBYQjJt?=
+ =?utf-8?B?TGR1TjN3UnhZK3Y2OUh1L0hqVGxwUFRqRWRjZU9paEJSMXlLNTBMVVVGalFR?=
+ =?utf-8?B?c2NKOGJOYUxTR1FOUzRaSzRTMk5HYUlFRmlMWk9QQUFndVJKUk5LcU1LMmdn?=
+ =?utf-8?B?ZjRZWkhYZDZ5OFdVQjJNRHlndlpiSXA0K3RLcXpITWU1MmszQjVsL0lvNTJN?=
+ =?utf-8?B?M1FMdHFqeVJ3QUkySXpkK2NhNWlCRGhMRFFMUnoxdUUyTWpkaHBzbXRDRE45?=
+ =?utf-8?B?ck9pQTVWZk9HSFl0bWxGbU9xelRxVnBKb0g1T1FOM1p4RWdicS9qQmZRQVYw?=
+ =?utf-8?B?djNMakVsRkZaZkZYZjBHbWdFUnhVa0R2czlHWGJHbzNRdThGQ3NGV1hGZC9t?=
+ =?utf-8?Q?HAJqvTK8mxJgDzn8mRDgmdqLaFkeizFbSnKBCnF?=
+X-OriginatorOrg: outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 175a8e73-0653-4d6c-2462-08dc2bec7501
+X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB6959.apcprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Feb 2024 17:02:55.7317 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PUZPR06MB5794
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,51 +133,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 2/13/2024 12:58 AM, Tom Rini wrote:
+> On Tue, Feb 13, 2024 at 12:30:15AM +0800, Yang Xiwen via B4 Relay wrote:
+>
+>> From: Yang Xiwen <forbidden405@outlook.com>
+>>
+>> The first supported SoC is Hi3798MV200.
+>>
+>> Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
+>> ---
+>> This patchset adds support for HiSTB ioconfig module. The module is used
+>> to set pins config(e.g. pull-up, pull-down, drive-strength etc..) and
+>> pinmux.
+>>
+>> The first supported chip is Hi3798MV200. Adding support for Hi3798CV200
+>> should be also easy.
+>>
+>> Below is an example of the dts node:
+> [snip]
+>
+> Has this binding already been accepted to the kernel? Thanks.
+>
+No, I've not wrote the driver for linux yet. That's why it is RFC now. 
+But it is expected to be soon. I'm going to finish u-boot part first and 
+work on linux kernel later. After that, i can sync linux dts and 
+bindings back to u-boot.
 
---7KGTMFYdI4FM6DyC
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+-- 
+Regards,
+Yang Xiwen
 
-On Tue, Feb 13, 2024 at 12:30:15AM +0800, Yang Xiwen via B4 Relay wrote:
-
-> From: Yang Xiwen <forbidden405@outlook.com>
->=20
-> The first supported SoC is Hi3798MV200.
->=20
-> Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
-> ---
-> This patchset adds support for HiSTB ioconfig module. The module is used
-> to set pins config(e.g. pull-up, pull-down, drive-strength etc..) and
-> pinmux.
->=20
-> The first supported chip is Hi3798MV200. Adding support for Hi3798CV200
-> should be also easy.
->=20
-> Below is an example of the dts node:
-[snip]
-
-Has this binding already been accepted to the kernel? Thanks.
-
---=20
-Tom
-
---7KGTMFYdI4FM6DyC
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXKTjMACgkQFHw5/5Y0
-tywl2QwAtzOv6v51W3G3/D6xviVHpj+Mq/o9s55XXLuEWyLDlXWudCDQw5v7WM87
-CSll/8kB6f678BeUVkGVzsrcGkNb597SOSA1tlDiVvLfu+8TdpxBarRr+E9FVucB
-HipSgVTTEujC4KyTmC/4ixIyuXvB0tCh37ZwFvpJeniJ/WkCyO06j187QVVnP+TL
-fHI6Jd56yJkiqUrGDrhF8n14fEqGRfBs+SdXirtoSvkmlEueuWRsruH/+SRntQDn
-7Rn9gL0A/Hcx49jQRllDnxMw3/UJ++AhTP8ETPefi5xDUVmKhCse5J2BsNoXWdxf
-oGTJmi0dc8ZJANg1XiXvrnkonshX4CI7c11K2M9nLoPHDt6w63lBne7enfWll02O
-JD1xQqLuDJFPC5+7bDtYnhUHFfM75eVToRuY6vdbZyGPjjfeqr9Riy79MQpxVGOd
-HgJH/IRu32B23j+lscTTlKLAwrcbNCuMVig911J29dXTC0DALrJ0LqKlpfnAlFWm
-Ppgii6To
-=83H3
------END PGP SIGNATURE-----
-
---7KGTMFYdI4FM6DyC--
