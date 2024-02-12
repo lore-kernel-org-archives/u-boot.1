@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADE47C4829B
-	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 07:47:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24D8CC4829B
+	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 07:47:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E762487EBF;
-	Mon, 12 Feb 2024 08:47:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 60CB687E52;
+	Mon, 12 Feb 2024 08:47:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2013787EBD; Mon, 12 Feb 2024 08:47:37 +0100 (CET)
+ id 03ECB87EC4; Mon, 12 Feb 2024 08:47:40 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 7A63487C80
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 08:47:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 104D287C80
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 08:47:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5A5B4DA7;
- Sun, 11 Feb 2024 23:48:15 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1C16BDA7;
+ Sun, 11 Feb 2024 23:48:19 -0800 (PST)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C8F9F3F7BD;
- Sun, 11 Feb 2024 23:47:30 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 4F9193F7BD;
+ Sun, 11 Feb 2024 23:47:34 -0800 (PST)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -36,11 +36,15 @@ Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Yann Gautier <yann.gautier@st.com>,
  Etienne Carriere <etienne.carriere@foss.st.com>,
  Michal Simek <michal.simek@amd.com>,
- Jassi Brar <jaswinder.singh@linaro.org>
-Subject: [PATCH v2 00/21] FWU: Migrate FWU metadata to version 2
-Date: Mon, 12 Feb 2024 13:16:51 +0530
-Message-Id: <20240212074712.3657076-1-sughosh.ganu@linaro.org>
+ Jassi Brar <jaswinder.singh@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: [PATCH v2 01/21] configs: fwu: remove FWU configs for metadata V2
+ migration
+Date: Mon, 12 Feb 2024 13:16:52 +0530
+Message-Id: <20240212074712.3657076-2-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240212074712.3657076-1-sughosh.ganu@linaro.org>
+References: <20240212074712.3657076-1-sughosh.ganu@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -59,87 +63,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The FWU metadata is to be migrated to version 2. Disable the FWU
+feature on platforms that enable it for the migration.
 
-The following patches migrate the FWU metadata access code to version
-2 of the structure. This is based on the structure definition as
-defined in the latest rev of the FWU Multi Bank Update specification
-[1].
+Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
 
-Since the version 1 of the structure has currently been adopted on a
-couple of platforms, it was decided to have a clean migration of the
-metadata to version 2 only, instead of supporting both the versions of
-the structure. Also, based on consultations with the main author of
-the specification, it is expected that any further changes in the
-structure would be minor tweaks, and not be significant. Hence a
-migration to version 2.
+Changes since V1: None
 
-Similar migration is also being done in TF-A, including migrating the
-ST platform port to support version 2 of the metadata structure [2].
+ configs/corstone1000_defconfig           | 2 --
+ configs/sandbox64_defconfig              | 1 -
+ configs/synquacer_developerbox_defconfig | 4 ----
+ 3 files changed, 7 deletions(-)
 
-@Michal, I tested the metadata for the two image per bank case, and it
-works fine on the ST board. Kindly test this on your board as well.
-
-@Kojima-san, Please help in testing the version 2 on your
-board. Thanks.
-
-
-[1] - https://developer.arm.com/documentation/den0118/latest/
-[2] - https://review.trustedfirmware.org/q/topic:%22topics/fwu_metadata_v2_migration%22
-
-Changes since V1:
-
-* Do not define flexible array members inside the structures.
-* Access the image information related fields in the metadata using
-  the helper functions defined in an earlier patch.
-* Access fwu_fw_store_desc structure using pointer arithmetic.
-
-
-Sughosh Ganu (21):
-  configs: fwu: remove FWU configs for metadata V2 migration
-  fwu: metadata: migrate to version 2 of the structure
-  drivers: fwu: add the size parameter to the metadata access API's
-  fwu: add helper functions for getting image description offsets
-  fwu: make changes to support version 2 of FWU metadata
-  fwu: add some API's for metadata version 2 access
-  drivers: fwu: mtd: allocate buffer for image info dynamically
-  drivers: fwu: allocate memory for metadata copies
-  fwu: add a function to put a bank in Trial State
-  capsule: accept a bank on a successful update
-  fwu: mtd: modify the DFU API's to align with metadata version 2
-  efi_firmware: fwu: do not read FWU metadata on sandbox
-  efi_firmware: fwu: get the number of FWU banks at runtime
-  cmd: fwu: align the command with metadata version 2
-  test: fwu: align the FWU metadata access test with version 2
-  fwu: remove the config symbols for number of banks and images
-  tools: mkfwumdata: migrate to metadata version 2
-  tools: mkfwumdata: add logic to append vendor data to the FWU metadata
-  tools: mkfwumdata: fix the size parameter to the fwrite call
-  configs: fwu: re-enable FWU configs
-  doc: fwu: make changes for supporting FWU Metadata version 2
-
- arch/sandbox/Kconfig                     |   6 -
- board/armltd/corstone1000/corstone1000.c |   2 +-
- cmd/fwu_mdata.c                          |  45 ++-
- configs/synquacer_developerbox_defconfig |   1 -
- doc/board/socionext/developerbox.rst     |   9 +-
- doc/develop/uefi/fwu_updates.rst         |  12 +-
- doc/usage/cmd/fwu_mdata.rst              |  12 +-
- drivers/fwu-mdata/fwu-mdata-uclass.c     |  10 +-
- drivers/fwu-mdata/gpt_blk.c              |  27 +-
- drivers/fwu-mdata/raw_mtd.c              |  85 +++--
- include/fwu.h                            | 139 +++++++-
- include/fwu_mdata.h                      |  56 +++-
- lib/efi_loader/efi_capsule.c             |  12 +-
- lib/efi_loader/efi_firmware.c            |  20 +-
- lib/fwu_updates/Kconfig                  |  11 -
- lib/fwu_updates/fwu.c                    | 401 +++++++++++++++++++----
- lib/fwu_updates/fwu_mtd.c                |  81 +++--
- test/dm/fwu_mdata.c                      |  56 ++--
- test/dm/fwu_mdata_disk_image.h           | 124 +++----
- tools/mkfwumdata.c                       | 132 ++++++--
- 20 files changed, 924 insertions(+), 317 deletions(-)
-
+diff --git a/configs/corstone1000_defconfig b/configs/corstone1000_defconfig
+index a86ac12732..c26a621175 100644
+--- a/configs/corstone1000_defconfig
++++ b/configs/corstone1000_defconfig
+@@ -25,7 +25,6 @@ CONFIG_BOARD_LATE_INIT=y
+ CONFIG_SYS_PROMPT="corstone1000# "
+ CONFIG_SYS_MAXARGS=64
+ # CONFIG_CMD_CONSOLE is not set
+-CONFIG_CMD_FWU_METADATA=y
+ CONFIG_CMD_BOOTZ=y
+ # CONFIG_CMD_XIMG is not set
+ CONFIG_CMD_GPT=y
+@@ -68,4 +67,3 @@ CONFIG_FFA_SHARED_MM_BUF_OFFSET=0
+ CONFIG_FFA_SHARED_MM_BUF_ADDR=0x02000000
+ CONFIG_EFI_CAPSULE_ON_DISK=y
+ CONFIG_EFI_IGNORE_OSINDICATIONS=y
+-CONFIG_FWU_MULTI_BANK_UPDATE=y
+diff --git a/configs/sandbox64_defconfig b/configs/sandbox64_defconfig
+index d101cca6a7..2863f9b189 100644
+--- a/configs/sandbox64_defconfig
++++ b/configs/sandbox64_defconfig
+@@ -273,7 +273,6 @@ CONFIG_EFI_CAPSULE_ON_DISK=y
+ CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+ CONFIG_EFI_SECURE_BOOT=y
+ CONFIG_TEST_FDTDEC=y
+-CONFIG_FWU_MULTI_BANK_UPDATE=y
+ CONFIG_UNIT_TEST=y
+ CONFIG_UT_TIME=y
+ CONFIG_UT_DM=y
+diff --git a/configs/synquacer_developerbox_defconfig b/configs/synquacer_developerbox_defconfig
+index 2a0407de40..616d410074 100644
+--- a/configs/synquacer_developerbox_defconfig
++++ b/configs/synquacer_developerbox_defconfig
+@@ -11,14 +11,12 @@ CONFIG_DM_GPIO=y
+ CONFIG_DEFAULT_DEVICE_TREE="synquacer-sc2a11-developerbox"
+ CONFIG_SYS_LOAD_ADDR=0x80000000
+ CONFIG_TARGET_DEVELOPERBOX=y
+-CONFIG_FWU_NUM_IMAGES_PER_BANK=1
+ CONFIG_AHCI=y
+ CONFIG_FIT=y
+ CONFIG_SYS_BOOTM_LEN=0x800000
+ CONFIG_BOOTSTAGE_STASH_SIZE=4096
+ CONFIG_HUSH_PARSER=y
+ CONFIG_SYS_MAXARGS=128
+-CONFIG_CMD_FWU_METADATA=y
+ CONFIG_CMD_IMLS=y
+ CONFIG_CMD_ERASEENV=y
+ CONFIG_CMD_NVEDIT_EFI=y
+@@ -53,7 +51,6 @@ CONFIG_DFU_TFTP=y
+ CONFIG_DFU_MTD=y
+ CONFIG_DFU_RAM=y
+ CONFIG_DFU_SF=y
+-CONFIG_FWU_MDATA_MTD=y
+ CONFIG_DM_I2C=y
+ CONFIG_SYS_I2C_SYNQUACER=y
+ CONFIG_MMC_SDHCI=y
+@@ -96,4 +93,3 @@ CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
+ CONFIG_EFI_CAPSULE_ON_DISK=y
+ CONFIG_EFI_IGNORE_OSINDICATIONS=y
+ CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+-CONFIG_FWU_MULTI_BANK_UPDATE=y
 -- 
 2.34.1
-
 
