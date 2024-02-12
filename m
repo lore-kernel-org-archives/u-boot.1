@@ -4,76 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB291C4829B
-	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 13:19:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0BF3C4829B
+	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 13:19:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5AF3987ECE;
+	by phobos.denx.de (Postfix) with ESMTP id D8F4F87ED7;
 	Mon, 12 Feb 2024 14:19:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linutronix.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yMvHc9GC";
+	dkim=pass (2048-bit key; secure) header.d=linutronix.de header.i=@linutronix.de header.b="lCeIDG0o";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="D0UKIOrn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A30987EBD; Mon, 12 Feb 2024 08:37:12 +0100 (CET)
-Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
- [IPv6:2a00:1450:4864:20::22a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 901D887073; Mon, 12 Feb 2024 10:33:02 +0100 (CET)
+Received: from galois.linutronix.de (Galois.linutronix.de
+ [IPv6:2a0a:51c0:0:12e:550::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA43487C80
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 08:37:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 68FFC87CA8
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 10:32:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=linutronix.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dmitry.baryshkov@linaro.org
-Received: by mail-lj1-x22a.google.com with SMTP id
- 38308e7fff4ca-2cf206e4d56so39688451fa.3
- for <u-boot@lists.denx.de>; Sun, 11 Feb 2024 23:37:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1707723429; x=1708328229; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=YYzK2WBNMyfFeAQa2ns8DhDgZJmXnsGZWwxnrt+2OBU=;
- b=yMvHc9GCbpACKpAIKqeThR7MwSnRtNS7/bF7XOrOaq4PctCiFKZ5ky87fFlRjuTPIc
- 6XhQt2e4kFpyab8wHZj9pxebRNIqIER0klP/zbIWiag/GCG74rVvao1H/ym1LbH8rqha
- i/iQTk0rWQjn+P42t+QjYFDLDSWkvpXLFxTW7Uw6aZLrMfPaawyBGoEvWLsl65uqRZjs
- jU8+wEt7nKusWYC2A8JAL0SGPdrDp7VqngH/wl+O/BnMRwavZMuwOMYGPFkqk45vr8cY
- uAaPaSwhoShORE3e6e92OhlTdvYk/UN7I0NJWmu7wpRoND29qvd3JRjRAQPq4dv1xkYp
- XLsA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707723429; x=1708328229;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=YYzK2WBNMyfFeAQa2ns8DhDgZJmXnsGZWwxnrt+2OBU=;
- b=sGGvBa8El7F0nXvsDbxm7PvAu4Z+2OCU8zojW84ilou+9EX+GbT/v6KdDNf8r6kHXt
- 8hflrSHHk8WiYBGohQzyGTJLnzB05TUQEQ8V/LXEY2ASI4dBsNyUOkxe3G2XDzvKfvwv
- FwMRXMAGAGzGV4+JYXa9QNpCpXzYf4TwCUKe5tBguM4chjTaPvTkOgUKvl0A456cSXEc
- onN9Xs2LNOL7+hDCvsG6te9Ykz3y33z1a1O6WB24NItiHn4tnV53hqHcEp6upEaNsVh8
- ti0WvlFidaf7EZ2vl/zAh7FHtOaEDD3epxwBCpALAsVVgu9XTUXpjWxlvFSZhXFvuOrk
- GEfw==
-X-Gm-Message-State: AOJu0YzntfhbSumRpUVa3w3jSq8K36X+C99aNdYpsBlYYsTItziLQrwO
- pV+75b+Xx8QlJRh1jR1DPzmnWePio40z3F023fVqRU+DJITt64et3KkcyKAGetnIMr7dABiErKp
- n
-X-Google-Smtp-Source: AGHT+IE3u5+O6l7vo3B3EY94PHYZviQWrB0jkix/SL3SLGoQ1f6/NHjgvqTzcuIshA5SMi4g3tcgyw==
-X-Received: by 2002:a2e:8216:0:b0:2d0:cce1:f0a8 with SMTP id
- w22-20020a2e8216000000b002d0cce1f0a8mr3621768ljg.1.1707723428853; 
- Sun, 11 Feb 2024 23:37:08 -0800 (PST)
-X-Forwarded-Encrypted: i=1;
- AJvYcCVpmYGMEgTSrbDQIHY59sv4wF/AMJuWkTPI8wboNQWvbOaoSV0e1VsSke70gXc9/pwCwcgK/YcgjXBj1rmTvp2h4Bs=
-Received: from umbar.unikie.fi ([192.130.178.91])
- by smtp.gmail.com with ESMTPSA id
- n10-20020a05651c000a00b002d0cd6bfd62sm1310552lja.136.2024.02.11.23.37.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 11 Feb 2024 23:37:08 -0800 (PST)
-From: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-To: u-boot@lists.denx.de,
-	Bin Meng <bmeng.cn@gmail.com>
-Subject: [PATCH] virtio: fix get_config / set_config for legacy VirtIO targets
-Date: Mon, 12 Feb 2024 09:37:08 +0200
-Message-Id: <20240212073708.4161197-1-dmitry.baryshkov@linaro.org>
-X-Mailer: git-send-email 2.39.2
+ spf=pass smtp.mailfrom=t-8ch@linutronix.de
+From: =?utf-8?q?Thomas_Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020; t=1707730378;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=u7zdhebH/8yYQnYf+O44xivoghJT/RQ9QfIMD5HC5HY=;
+ b=lCeIDG0ofGfGjkzyzWgQT7UU8TU8UToID9lbJS7oplRefn0THmA7THpmWrcZ8ZVTHZ2hzY
+ hZlTnRiydL3PKAr11xJktYkjY/mhy71gSbNtUapY1LogJyXanJWCEk0wMWZEEkkpjONEwj
+ l7wjSpOknkxesohDIOHmnGMLaZOf6+h6yZHOWnG834QvEZFcropx/JFZTUYAxIZlKnfJ9f
+ ksxq1daMVR+pkvfptXm3CoOtHlpRg4+aXp0WbK6kPoDj8WqDC+muA/kAjJDPfa9Bk0w9bz
+ FA9gcNrJxK6z6HTPcaRmigM4BHAH3rIlGQ4Nt2kUgvI2oJhWyLW6E4v00Ex6jQ==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020e; t=1707730378;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=u7zdhebH/8yYQnYf+O44xivoghJT/RQ9QfIMD5HC5HY=;
+ b=D0UKIOrnUaTF6D23vkabWtaV6rqD/42t7IGm2cY82Hr+eGc2RnOJE7N0ti0sEySkRsAca0
+ hIB+Zv51XW96nhAw==
+Date: Mon, 12 Feb 2024 10:32:56 +0100
+Subject: [PATCH] log: make global data relocatable
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
+Message-Id: <20240212-spl-logging-v1-1-051cde837559@linutronix.de>
+X-B4-Tracking: v=1; b=H4sIAMflyWUC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIxMDIwML3eKCHN2c/PT0zLx0XUOTREMjU/NkY0MTcyWgjoKi1LTMCrBp0bG
+ 1tQDQpBv/XQAAAA==
+To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Benedikt Spranger <b.spranger@linutronix.de>, 
+ =?utf-8?q?Thomas_Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1707730377; l=3884;
+ i=thomas.weissschuh@linutronix.de; s=20240209; h=from:subject:message-id;
+ bh=Qkt+NXi4Y+g6MRNsMkk7TC5e1jK+mMHfTll29WmFNrk=;
+ b=9KizOiL1JvkSYlX6p+WX3W0HHycBq3pdTtoU7faR7QusvgovppusETw7woCNKkpZoPG630C3j
+ mHE4hrGQo1wAGuagk+yyfVV3WRzBfc9U3FYaqYGwFpawNngo5LkNuqG
+X-Developer-Key: i=thomas.weissschuh@linutronix.de; a=ed25519;
+ pk=pfvxvpFUDJV2h2nY0FidLUml22uGLSjByFbM6aqQQws=
 X-Mailman-Approved-At: Mon, 12 Feb 2024 14:19:09 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,42 +83,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The functions virtio_pci_get_config() and virtio_pci_set_config() don't
-take the offset into account when reading the config space. For example
-this manifests when U-Boot tries to read the MAC address of the VirtIO
-networking device. It reads 6 equa bytes instead of the proper addess.
+When `gd` is relocated during `spl_relocate_stack_gd()` the
+doubly-linked circular list in the `log_head` member is broken.
 
-Fix those functions by taking the offset in the config space into
-account.
+The last element of the list should point back to the initial
+`list_head`, but as the initial `list_head` is moved the pointer becomes
+stale. As a result the loop in `log_dispatch` would never finish.
 
-Fixes: 4135e10732a0 ("virtio: Add virtio over pci transport driver")
-Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+Migrate the list to a singly-linked non-circular one which is
+easily relocatable.
+
+This should also remove the special handling introduced in
+commit e7595aa350ae ("x86: Allow logging to be used in SPL reliably").
+
+Signed-off-by: Thomas Weißschuh <thomas.weissschuh@linutronix.de>
 ---
- drivers/virtio/virtio_pci_legacy.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ common/log.c                      | 15 +++++++++------
+ include/asm-generic/global_data.h |  2 +-
+ include/log.h                     |  2 +-
+ 3 files changed, 11 insertions(+), 8 deletions(-)
 
-diff --git a/drivers/virtio/virtio_pci_legacy.c b/drivers/virtio/virtio_pci_legacy.c
-index cf5dfb17a94d..aa89604ae84d 100644
---- a/drivers/virtio/virtio_pci_legacy.c
-+++ b/drivers/virtio/virtio_pci_legacy.c
-@@ -107,7 +107,7 @@ static int virtio_pci_get_config(struct udevice *udev, unsigned int offset,
- 	int i;
+diff --git a/common/log.c b/common/log.c
+index b2de57fcb3b8..098d40c86d81 100644
+--- a/common/log.c
++++ b/common/log.c
+@@ -109,7 +109,7 @@ struct log_device *log_device_find_by_name(const char *drv_name)
+ {
+ 	struct log_device *ldev;
  
- 	for (i = 0; i < len; i++)
--		ptr[i] = ioread8(ioaddr + i);
-+		ptr[i] = ioread8(ioaddr + offset + i);
+-	list_for_each_entry(ldev, &gd->log_head, sibling_node) {
++	for (ldev = gd->log_head; ldev; ldev = ldev->sibling_node) {
+ 		if (!strcmp(drv_name, ldev->drv->name))
+ 			return ldev;
+ 	}
+@@ -218,7 +218,7 @@ static int log_dispatch(struct log_rec *rec, const char *fmt, va_list args)
  
- 	return 0;
- }
-@@ -121,7 +121,7 @@ static int virtio_pci_set_config(struct udevice *udev, unsigned int offset,
- 	int i;
+ 	/* Emit message */
+ 	gd->processing_msg = true;
+-	list_for_each_entry(ldev, &gd->log_head, sibling_node) {
++	for (ldev = gd->log_head; ldev; ldev = ldev->sibling_node) {
+ 		if ((ldev->flags & LOGDF_ENABLE) &&
+ 		    log_passes_filters(ldev, rec)) {
+ 			if (!rec->msg) {
+@@ -400,7 +400,7 @@ static struct log_device *log_find_device_by_drv(struct log_driver *drv)
+ {
+ 	struct log_device *ldev;
  
- 	for (i = 0; i < len; i++)
--		iowrite8(ptr[i], ioaddr + i);
-+		iowrite8(ptr[i], ioaddr + offset + i);
+-	list_for_each_entry(ldev, &gd->log_head, sibling_node) {
++	for (ldev = gd->log_head; ldev; ldev = ldev->sibling_node) {
+ 		if (ldev->drv == drv)
+ 			return ldev;
+ 	}
+@@ -433,13 +433,16 @@ int log_init(void)
+ 	struct log_driver *drv = ll_entry_start(struct log_driver, log_driver);
+ 	const int count = ll_entry_count(struct log_driver, log_driver);
+ 	struct log_driver *end = drv + count;
++	struct log_device **log_head;
++
++	gd->log_head = NULL;
++	log_head = (struct log_device **)&gd->log_head;
  
- 	return 0;
- }
+ 	/*
+ 	 * We cannot add runtime data to the driver since it is likely stored
+ 	 * in rodata. Instead, set up a 'device' corresponding to each driver.
+ 	 * We only support having a single device for each driver.
+ 	 */
+-	INIT_LIST_HEAD((struct list_head *)&gd->log_head);
+ 	while (drv < end) {
+ 		struct log_device *ldev;
+ 
+@@ -451,8 +454,8 @@ int log_init(void)
+ 		INIT_LIST_HEAD(&ldev->filter_head);
+ 		ldev->drv = drv;
+ 		ldev->flags = drv->flags;
+-		list_add_tail(&ldev->sibling_node,
+-			      (struct list_head *)&gd->log_head);
++		*log_head = ldev;
++		log_head = &ldev->sibling_node;
+ 		drv++;
+ 	}
+ 	gd->flags |= GD_FLG_LOG_READY;
+diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
+index fcc3c6e14ca3..a9a407b801c2 100644
+--- a/include/asm-generic/global_data.h
++++ b/include/asm-generic/global_data.h
+@@ -404,7 +404,7 @@ struct global_data {
+ 	/**
+ 	 * @log_head: list of logging devices
+ 	 */
+-	struct list_head log_head;
++	struct log_device *log_head;
+ 	/**
+ 	 * @log_fmt: bit mask for logging format
+ 	 *
+diff --git a/include/log.h b/include/log.h
+index 6e84f080ef3d..961233684d2a 100644
+--- a/include/log.h
++++ b/include/log.h
+@@ -455,7 +455,7 @@ struct log_device {
+ 	unsigned short flags;
+ 	struct log_driver *drv;
+ 	struct list_head filter_head;
+-	struct list_head sibling_node;
++	struct log_device *sibling_node;
+ };
+ 
+ enum {
+
+---
+base-commit: e8f2404e093daf6cc3ac2b3233e3c6770d13e371
+change-id: 20240208-spl-logging-14a1257c3147
+
+Best regards,
 -- 
-2.39.2
+Thomas Weißschuh <thomas.weissschuh@linutronix.de>
 
