@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E85ACC48297
-	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 18:41:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1969C4829E
+	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 18:43:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F3A087E78;
-	Mon, 12 Feb 2024 19:41:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 25700877D3;
+	Mon, 12 Feb 2024 19:43:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jUXJayFq";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ozZ5lFcf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3191887E78; Mon, 12 Feb 2024 19:41:24 +0100 (CET)
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
+ id 31CA980E9A; Mon, 12 Feb 2024 19:43:09 +0100 (CET)
+Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
+ [IPv6:2607:f8b0:4864:20::b33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3471D877D3
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 19:41:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 22D7D87E78
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 19:43:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=maximmosk4@gmail.com
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-5116b017503so101892e87.1
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 10:41:22 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb33.google.com with SMTP id
+ 3f1490d57ef6-dc745927098so2948727276.3
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 10:43:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1707763281; x=1708368081; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=KnXtRqtYIHFo4QSvtMM5piobZ/CxKkbxNdfmlmFR7yc=;
- b=jUXJayFq3hmK1cJLNqcLoKoZBJihrOyFzUxpLhC1XXAsXxHZYdk6s0lNeUeLo+DLtI
- iQnWsIET/hoMuLvNfPpG1kSiFz4RSwCVFcdpkLB9rXEo8nWXwczLbqp60IkDx0czJVme
- a3/tZ6/xefzBBdwy9meZZJcSqXIcq9SpKyhG79cGWCha9dwe4BdJMG51VSa1fSHTQqQF
- KRiglYHo6utGc39e66q/UKFRnC6JA2y7lXM1jSjHjl96U6F9XjYF+0BvC5CNwHBbCd4O
- usKq7y22uGAldohe78qqdl2bYEDMxWARCoeaoNAFOTEr+v1xT1Av+tK2/G0G+ymPzkgc
- EJ2g==
+ d=konsulko.com; s=google; t=1707763386; x=1708368186; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=qawWVNOcffDU80iU4gYC9nvdt3Ksg0zM2miBpxlJpWk=;
+ b=ozZ5lFcfvrRwWbxjuwKHR0fCOxex54DpIP7Ade33Nh1/wf6z7XBD6XVMiq4tem9WMJ
+ 6dRO49DvT5lrY7dHS18WkQVYUEUXDY9gBjn/19mS/ygFBzXpufC/YflcLKW5jQ3B0Qfg
+ ccpIpJScvmIN5xsPCTo5Edn04/HEa6eYtEPiI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707763281; x=1708368081;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=KnXtRqtYIHFo4QSvtMM5piobZ/CxKkbxNdfmlmFR7yc=;
- b=T/SKDsg5ppUQvgRAOQbP5REsz7BRJWsH9oVIvvFB9Cs3N8ybx7DsjVFkuv4EBO12cO
- cPjZtd6UL3P2I3rnV3gmcLZZuDNF1FFAartOm60o/Ok33Ue54YwcXVYjOdKpz2ez0diL
- S/v8ow6sx0WMepusRgMsppUi10UYiV+HPsn+ZdcQQZ7je60bY5AX/+daowPRJEOTj9Jc
- +L0roROlFr1nFMUsjSnf9zsyZsUQXUjckE7hOM7k60QKG6A3Q8SkbOxm4I35uTnrHjlN
- tA/h8DV1PmNy29SnSm1VfoHUr+DEqK+m22dylOgiDZqNevthmgBhT33Hdusfoh6EuKps
- 7jfw==
-X-Gm-Message-State: AOJu0YwwFJm7xf3J/Akv2VDSKxBjGsCkkzAde7QU/d6NiFnKKKnH3NH4
- iEQnA7nKx8pGDIuZK9VQ10STOjgOXFd7UBTy1oIQM1KlcTysyH8Tyi+Wm4fcqz4=
-X-Google-Smtp-Source: AGHT+IGs5wF9+pil0ejT3rVwiExbHDScuM8hpEj7NZxHAnhy/lywWzWGE5t9NGohEnXzp8TLhOoTqg==
-X-Received: by 2002:a05:6512:3daa:b0:511:3a32:4e4f with SMTP id
- k42-20020a0565123daa00b005113a324e4fmr5632922lfv.18.1707763280891; 
- Mon, 12 Feb 2024 10:41:20 -0800 (PST)
+ d=1e100.net; s=20230601; t=1707763386; x=1708368186;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=qawWVNOcffDU80iU4gYC9nvdt3Ksg0zM2miBpxlJpWk=;
+ b=szF18IUWGHl7moTODcZM4Bv9nIO95gx9ijsk2cD/w8d96NyUm0MGDKGIcQYB0DDTTv
+ OKV9hLtMBCnpiqQehceSaO2yCUns0YZCAAhWyVTWGmM5kJcM98PTICTTwn3vThKpJn5Y
+ 6FsgvcyGRnMHFioGVMbo4AVO/own052s+NBa0fZ/KVw0fYfQjKfDFW3Qzww+2h4UVy/l
+ f0RCCSKYgfmCalVkJ4Rbib9kr53L0H3q9H6gIX6ViBD5+LpHcINm9AcA5R7x8dX46yIV
+ hnjvv8po2hmqT9S56hEvBLabNxge1i1bpxBUJAfmTEm/Qv0HWxXg2DeQyRW2ZXm1d+cK
+ 4LqQ==
+X-Gm-Message-State: AOJu0YwxPJC91YIopMPIXItBsxMA7GRn3IKWqho+ZFhCQ5xF5FbUpyXp
+ N48YwS/QwbqQT7Fed9MSazO+aszUIsP8sVScdOP1rK6o958K6pV+fXetufchEEnDwBxD/jKCb3G
+ 0
+X-Google-Smtp-Source: AGHT+IEM1efFNBidOh+3oWPCqaBPJPE9R6EEfELPHJNinJbwN2dDPsyvfJPSexd6XFo2D8SWnYTNiQ==
+X-Received: by 2002:a25:6814:0:b0:dc6:bde1:3e33 with SMTP id
+ d20-20020a256814000000b00dc6bde13e33mr5607385ybc.33.1707763385663; 
+ Mon, 12 Feb 2024 10:43:05 -0800 (PST)
 X-Forwarded-Encrypted: i=1;
- AJvYcCXjHqhZ5gJDLAu5T2J4IpNBRlvdr0HL2cqM/v0jKIsu6QmHLS+ptbdkTZFn8zR9rVZwDkfyjQe9Cu70mmL3a1qGRHI=
-Received: from localhost.localdomain (109-252-14-208.nat.spd-mgts.ru.
- [109.252.14.208]) by smtp.gmail.com with ESMTPSA id
- u8-20020ac24c28000000b0051186a82fc1sm764714lfq.171.2024.02.12.10.41.20
+ AJvYcCUa1ZENiWH43zOsPdx5mJTyEvOzm8uEHR7z82RsYaorYP76P0t0b5gfULVbXn7P9tBYmreI/AecQieuf0Lykc/Emcy929eno40nUI1ZoA==
+Received: from bill-the-cat (065-184-194-195.res.spectrum.com.
+ [65.184.194.195]) by smtp.gmail.com with ESMTPSA id
+ h10-20020a25b18a000000b00dc6c58ae000sm1300283ybj.16.2024.02.12.10.43.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Feb 2024 10:41:20 -0800 (PST)
-From: Maxim Moskalets <maximmosk4@gmail.com>
-X-Google-Original-From: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>
-To: u-boot@lists.denx.de
-Cc: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH] cmd: add FDT setup for bootelf by flag
-Date: Mon, 12 Feb 2024 21:41:17 +0300
-Message-Id: <20240212184117.25641-1-Maxim.Moskalets@kaspersky.com>
-X-Mailer: git-send-email 2.39.2
+ Mon, 12 Feb 2024 10:43:05 -0800 (PST)
+Date: Mon, 12 Feb 2024 13:43:03 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Maxim Moskalets <maximmosk4@gmail.com>
+Cc: u-boot@lists.denx.de, Maxim Moskalets <Maxim.Moskalets@kaspersky.com>
+Subject: Re: [PATCH] cmd: add FDT setup for bootelf by flag
+Message-ID: <20240212184303.GM3040305@bill-the-cat>
+References: <20240212184117.25641-1-Maxim.Moskalets@kaspersky.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="fzNZNPe2RY+jFMnq"
+Content-Disposition: inline
+In-Reply-To: <20240212184117.25641-1-Maxim.Moskalets@kaspersky.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,84 +92,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Added the ability to use FDT for ELF applications, required to run some OS. To make FDT setup, you need to set the elf_needed_fdt environment variable to a value like y or yes.
 
-Signed-off-by: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>
+--fzNZNPe2RY+jFMnq
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Cc: Tom Rini <trini@konsulko.com>
----
+On Mon, Feb 12, 2024 at 09:41:17PM +0300, Maxim Moskalets wrote:
 
- cmd/elf.c     | 14 ++++++++++++++
- env/common.c  |  5 +++++
- include/env.h |  7 +++++++
- 3 files changed, 26 insertions(+)
+> Added the ability to use FDT for ELF applications, required to run some O=
+S. To make FDT setup, you need to set the elf_needed_fdt environment variab=
+le to a value like y or yes.
+>=20
+> Signed-off-by: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>
+>=20
+> Cc: Tom Rini <trini@konsulko.com>
+> ---
+>=20
+>  cmd/elf.c     | 14 ++++++++++++++
+>  env/common.c  |  5 +++++
+>  include/env.h |  7 +++++++
+>  3 files changed, 26 insertions(+)
 
-diff --git a/cmd/elf.c b/cmd/elf.c
-index b7b9f506a5..1ee86c03de 100644
---- a/cmd/elf.c
-+++ b/cmd/elf.c
-@@ -38,6 +38,8 @@ static unsigned long do_bootelf_exec(ulong (*entry)(int, char * const[]),
- /* Interpreter command to boot an arbitrary ELF image from memory */
- int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- {
-+	struct bootm_headers img = {0};
-+	unsigned long fdt_addr; /* Address of the FDT */
- 	unsigned long addr; /* Address of the ELF image */
- 	unsigned long rc; /* Return value from user code */
- 	char *sload = NULL;
-@@ -68,6 +70,18 @@ int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	else
- 		addr = load_elf_image_shdr(addr);
- 
-+	if (env_get_elf_need_fdt()) {
-+		if (argc >= 1 && strict_strtoul(argv[0], 16, &fdt_addr) != -EINVAL) {
-+			printf("Got FDT at 0x%08lx ...\n", fdt_addr);
-+
-+			if (image_setup_libfdt(&img, (void *)fdt_addr, NULL)) {
-+				printf("ERROR: Failed to process device tree\n");
-+				return 1;
-+			}
-+		}
-+	}
-+
-+
- 	if (!env_get_autostart())
- 		return rcode;
- 
-diff --git a/env/common.c b/env/common.c
-index 48a565107c..8cd8558c3f 100644
---- a/env/common.c
-+++ b/env/common.c
-@@ -346,6 +346,11 @@ bool env_get_autostart(void)
- 	return env_get_yesno("autostart") == 1;
- }
- 
-+bool env_get_elf_need_fdt(void)
-+{
-+	return env_get_yesno("elf_need_fdt") == 1;
-+}
-+
- /*
-  * Look up the variable from the default environment
-  */
-diff --git a/include/env.h b/include/env.h
-index d2a5954ded..384c312d2e 100644
---- a/include/env.h
-+++ b/include/env.h
-@@ -148,6 +148,13 @@ int env_get_yesno(const char *var);
-  */
- bool env_get_autostart(void);
- 
-+/**
-+ * env_get_elf_need_fdt() - Check if FDT is needed for ELF image
-+ *
-+ * Return: true if the "elf_need_fdt" env var exists and is set to "yes"
-+ */
-+bool env_get_elf_need_fdt(void);
-+
- /**
-  * env_set() - set an environment variable
-  *
--- 
-2.39.2
+Is there some change compared with the last version of this patch? And,
+I was thinking of how to reply to the previous one and I think my
+question is why don't we just use a flag being passed to bootelf instead
+of this? Doing bootelf addr -d fdt_addr seems clearer than bootelf addr1
+addr2 and checking the environment.
 
+--=20
+Tom
+
+--fzNZNPe2RY+jFMnq
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXKZrcACgkQFHw5/5Y0
+tyw8Tgv/YCiM27xUvj4CSUym3CaI40y1uNhzTuUNFWFBAQu0G328r602L+PtVOsh
+TaPxGumxa5pva0NitZJyYRi6Cds2iSOasBDvlPggxO5c4DXS3xS/0Q2UcJwr2oIn
+KMy4L/ccpJgWBUML+2/f470rOzSZ6Nw9rcSvnkVgUoTeZVrR9dVgXXJKd2MjBX7S
+O2PMjGa7Qhz3uHULD/wb/WXiuQm/u/w0gt7JDuP/wynbwtIkOMeAVU+i/0b42/91
+5dzHh5dhn142sxE7Iui6mCWInzRbq1Y/HkJykQKUfK2BdnaGiyO+GcJ/f8DLeA1E
+ZbQgZfHkawPunhSIhKHT5mLFCjPUe+4HnMTk0IVvMxF4QnYgtXlRchTp6gSpJyDH
+xgRml609wpvlRlSIwiLm0p1HyZZF4BmctqR7jK7uv53BNGTP5zX5wIiGCPmqFGMb
+gcf4IO0uE78HkYlbZGT3RwdEqZqXdy1hTMMiA8D+FECQpk0dQz79iUh+5uRYbpnk
+Vq/5Fq7O
+=mR+b
+-----END PGP SIGNATURE-----
+
+--fzNZNPe2RY+jFMnq--
