@@ -4,64 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB8C6C4829B
-	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 13:50:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C8ABC4829B
+	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 13:51:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 12F2187808;
-	Mon, 12 Feb 2024 14:50:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A542587CC2;
+	Mon, 12 Feb 2024 14:51:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="isPUaK3f";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ralzus5y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9618687732; Mon, 12 Feb 2024 14:50:32 +0100 (CET)
-Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
+ id F36F287CB5; Mon, 12 Feb 2024 14:51:22 +0100 (CET)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15BC487808
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 14:50:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
+ by phobos.denx.de (Postfix) with ESMTPS id A134187ED1
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 14:51:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=wens@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id 67AA0CE0FE5;
+ Mon, 12 Feb 2024 13:51:17 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 728D4C433C7;
+ Mon, 12 Feb 2024 13:51:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1707745876;
+ bh=GWEhZ/u+vfVYczD45WDGEJtmyn0FGdiTJFZB29l0ZO8=;
+ h=From:To:Cc:Subject:Date:From;
+ b=ralzus5yJFJsZ9t+txE6MFk0vwHWk36HXn9wvER+sKuBLD3nZwjiF6UgRfSNbunG8
+ IRI3V3giyjb8UvLbb6LXQAZJWYuj/97spydQIirqBlWJ5C6ceRT0V+WeYBexxBr5O4
+ 4G6L2oEpkokvbguzLQUh8OnghQpiGKwqoNIWMhBWqgPx5X1V6yxCX5f7YvzaNzjs9P
+ z57ceAgGxXjIiqZIEnk66kbvo2iifwQW32SYFl+EJuKScxjdWQjpggoWh4lkPLsLPt
+ 5ux+fRBS2s8WqYyVKG3UyIA8EAZNyAj/JN0J5K0w0a9Ggve9qyhBg4bFbDrtJriqCk
+ Ck3LjYb9v6+fA==
+Received: by wens.tw (Postfix, from userid 1000)
+ id 0C5895FBEA; Mon, 12 Feb 2024 21:51:13 +0800 (CST)
+From: Chen-Yu Tsai <wens@kernel.org>
+To: u-boot@lists.denx.de
+Cc: Chen-Yu Tsai <wens@csie.org>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Andy Yan <andy.yan@rock-chips.com>, Nick Xie <nick@khadas.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Deepak Das <deepakdas.linux@gmail.com>, Alexandre Vicenzi <linux@alxd.me>,
+ Tianling Shen <cnsztl@gmail.com>, David Bauer <mail@david-bauer.net>,
+ Xiaobo Tian <peterwillcn@gmail.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ Klaus Goger <klaus.goger@theobroma-systems.com>,
+ Loic Devulder <ldevulder@suse.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Levin Du <djw@t-chip.com.cn>, Suniel Mahesh <sunil@amarulasolutions.com>,
+ FUKAUMI Naoki <naoki@radxa.com>,
+ Christopher Obbard <chris.obbard@collabora.com>,
+ Banglang Huang <banglang.huang@foxmail.com>,
+ "Matwey V. Kornilov" <matwey.kornilov@gmail.com>,
+ Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>
+Subject: [PATCH v2 0/5] rockchip: Read cpuid and generate MAC address from
+ efuse for RK3328 and RK3399
+Date: Mon, 12 Feb 2024 21:51:03 +0800
+Message-Id: <20240212135111.1767734-1-wens@kernel.org>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1707745829;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=u3ZND7YLq28LIdXKO4nEV3pEAVx0NFhbZI5JQ575B9w=;
- b=isPUaK3f344epoBCy8KReYd8rij+/wp9p/vpTgNeWWF94Jh205aVbX1nyyVpeSAhBtEY1L
- tLcqvYAEtXLS+BCtIlEhJc4BBzLMOhGOKmQ6NovI0mk9ZUAfGwwacPs0jV2hSZo8vkgKY/
- K/o5GAfWqyZC6A/KAYpjyhIsYK3Oey1/ckxySwx/bZWGOgBBvNkvDu57raEQn5Ya3NhQ/I
- HmmZM8FEyXsMV/IvSwCy4nEeOyE8WSnmYWEtTh2HinoRBYQcVS1EB25FYWNBacuY4oTDH5
- yyX7BgXl3HUbLOuFQ+m64vPK5WkJtTKelF2s1BoU1Cs7JBZQTeN+7Bg6QiHS3g==
-Date: Mon, 12 Feb 2024 14:50:26 +0100
-From: Dragan Simic <dsimic@manjaro.org>
-To: Shantur Rathore <i@shantur.com>
-Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
- andre.przywara@arm.com, Hector Martin <marcan@marcan.st>, Simon Glass
- <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: Re: [FIX PATCH v1] Fix: common: usb_hub: Reset only USB3.0 hub
-In-Reply-To: <CABEcMwXAjRLDcg+xP_td6cujPzPJNdQg8YHUjPNj8scea9cS-w@mail.gmail.com>
-References: <20240207102327.35125-1-i@shantur.com>
- <32db6dba-d515-4077-9d72-d77a7f431335@denx.de>
- <CABEcMwXW3KXQCJM16Qhk=19Sss3zdtQyWtJEed5y=na2mP8RFA@mail.gmail.com>
- <93f69779-3197-4ede-bb78-f2512ec30fc1@denx.de>
- <24f25359ce213370214bceeabc55e1df@manjaro.org>
- <CABEcMwUoyi5uLSADa2N76V3C-ryiXzYywgOKnL=DEqtU6LYa_w@mail.gmail.com>
- <a042e4fa90f02b5f51dd76c3dedf5ae1@manjaro.org>
- <3aa6998e3d9fd97cd4ba729f7656f467@manjaro.org>
- <CABEcMwXAjRLDcg+xP_td6cujPzPJNdQg8YHUjPNj8scea9cS-w@mail.gmail.com>
-Message-ID: <cf64595acee2e94594d0ea65a2533874@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
 Content-Transfer-Encoding: 8bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,180 +84,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Shantur,
+From: Chen-Yu Tsai <wens@csie.org>
 
-On 2024-02-12 14:40, Shantur Rathore wrote:
-> On Sat, Feb 10, 2024 at 7:13 AM Dragan Simic <dsimic@manjaro.org> 
-> wrote:
->> On 2024-02-08 15:17, Dragan Simic wrote:
->> > On 2024-02-08 15:10, Shantur Rathore wrote:
->> >> On Thu, Feb 8, 2024 at 1:44 PM Dragan Simic <dsimic@manjaro.org>
->> >> wrote:
->> >>> On 2024-02-08 14:33, Marek Vasut wrote:
->> >>> > On 2/8/24 12:30, Shantur Rathore wrote:
->> >>> >> On Wed, Feb 7, 2024 at 1:07 PM Marek Vasut <marex@denx.de> wrote:
->> >>> >>> On 2/7/24 11:23, Shantur Rathore wrote:
->> >>> >>>> USB 3.0 spec requires hub to reset device while
->> >>> >>>> enumeration. Some USB 2.0 hubs / devices don't
->> >>> >>>> handle this well and after implementation of
->> >>> >>>> reset some USB 2.0 disks weren't detected on
->> >>> >>>> Allwinner based boards.
->> >>> >>>>
->> >>> >>>> Resetting only when hub is USB 3.0 fixes it.
->> >>> >>>
->> >>> >>> It would be good to include as many details about the faulty hardware
->> >>> >>> in
->> >>> >>> the commit message as possible, so that when someone else runs into
->> >>> >>> this, they would have all that information available.
->> >>> >>>
->> >>> >>>> Tested-by: Andre Przywara <andre.przywara@arm.com>
->> >>> >>>>
->> >>> >>>> Signed-off-by: Shantur Rathore <i@shantur.com>
->> >>> >>>> ---
->> >>> >>>>
->> >>> >>>>    common/usb_hub.c | 6 ++++--
->> >>> >>>>    1 file changed, 4 insertions(+), 2 deletions(-)
->> >>> >>>>
->> >>> >>>> diff --git a/common/usb_hub.c b/common/usb_hub.c
->> >>> >>>> index 3fb7e14d10..2e054eb935 100644
->> >>> >>>> --- a/common/usb_hub.c
->> >>> >>>> +++ b/common/usb_hub.c
->> >>> >>>> @@ -174,8 +174,10 @@ static void usb_hub_power_on(struct
->> >>> >>>> usb_hub_device *hub)
->> >>> >>>>
->> >>> >>>>        debug("enabling power on all ports\n");
->> >>> >>>>        for (i = 0; i < dev->maxchild; i++) {
->> >>> >>>> -             usb_set_port_feature(dev, i + 1, USB_PORT_FEAT_RESET);
->> >>> >>>> -             debug("Reset : port %d returns %lX\n", i + 1,
->> >>> >>>> dev->status);
->> >>> >>>> +             if (usb_hub_is_superspeed(dev)) {
->> >>> >>>
->> >>> >>> Should this condition be "all which are lower than superspeed"
->> >>> >>> instead ,
->> >>> >>> so when the next generation of USB comes, this problem won't trigger
->> >>> >>> ?
->> >>> >>>
->> >>> >>> What does Linux do btw ?
->> >>> >>
->> >>> >> As of now Linux checks if the hub is superspeed
->> >>> >> https://github.com/torvalds/linux/blob/master/drivers/usb/core/hub.c#L2859
->> >>> >>
->> >>> >> which is
->> >>> >>   return hdev->descriptor.bDeviceProtocol == USB_HUB_PR_SS; //
->> >>> >> USB_HUB_PR_SS = 3
->> >>> >>
->> >>> >> This holds true for newer SuperSpeedPlus hubs as well.
->> >>> >> https://github.com/torvalds/linux/blob/master/drivers/usb/core/hub.h#L155
->> >>> >>
->> >>> >> We can change the check to be  bDeviceProtocol > 2 but who knows if
->> >>> >> things change in the newer version of spec.
->> >>> >> I am open to suggestions.
->> >>> >
->> >>> > Please just include the ^ in the commit description. Use link to
->> >>> > git.kernel.org , not some mirror . This is extremely useful
->> >>> > information and, well, you already wrote the V2 commit message
->> >>> > addition in this answer.
->> >>>
->> >>> Shantur, if that would be easier or quicker for you, I can write
->> >>> a quite detailed patch description for you, in exchange for a
->> >>> "Helped-by" tag in the v2 patch submission. :)
->> >>
->> >> That would be really kind of you Dragan.
->> >
->> > Sure, I'll write the summary and send it over.
->> >
->> >> I am down with the flu so that would really help me as my brain is
->> >> working at 15% capacity.
->> >
->> > Oh, I'm really sorry to hear that. :(  I hope you'll get better
->> > soon, and I know very well what's it like;  I've also been sick
->> > recently, as a result of some kind of flu that unfortunately found
->> > its way into my lungs, and it took me about a month to get back
->> > to about 90% of my usual mental capacity.  I'm still not back to
->> > exactly 100%. :/
->> >
->> > I really hope you'll recover much faster.
->> 
->> I hope you're feeling better.
->> 
->> Below are the patch subject and description that I prepared for you,
->> please have a look.
->> 
->> ------- >8 ------------- >8 ------------- >8 ------------- >8 -------
->> [PATCH v2] common: usb-hub: Reset USB 3.0 hubs only
->> 
->> Additional testing of the changes introduced in commit 33e06dcbe57a
->> ("common:
->> usb-hub: Reset hub port before scanning") revealed that some USB 3.0
->> flash
+Hi folks,
 
-s/some USB 3.0 flash/some USB 2.0 and 3.0 flash/
+This is v2 of my "read cpuid and generate MAC address from efuse on
+RK3328 and RK3399 by default" series.
 
-> I think it was a USB 2.0 drive that didn't work on the USB 2.0 port.
+Changes since v1:
+- Also imply "CONFIG_MISC"
+- Add back unintentionally removed CONFIG_OF_LIBFDT_OVERLAY=y
+- Remove ROCKCHIP_OTP from nanopi-r4s-rk3399_defconfig as requested by
+  Jonas
 
-As visible in the message linked below, there was one USB 3.0 flash
-drive that didn't work in a USB 2.0 port.  Though, you're right, there
-was also a USB 2.0 drive that didn't work.  Thus, it's perhaps best to
-adjust the wording as I suggested above and below.
+This series enables ROCKCHIP_EFUSE and MISC_INIT_R by default for RK3328
+and RK3399 so that the cpuid is read from the efuse and used to generate
+a serial number and MAC addresses for all boards.
 
-https://lore.kernel.org/u-boot/20240202001218.63b4e9c3@minigeek.lan/
+This stacks on top of the recent defconfig update series [1] from Jonas.
 
->> drives didn't work in U-Boot on some Allwinner SoCs that support USB 
->> 2.0
->> only.
->> More precisely, some tested USB 3.0 flash drives failed to be detected
->> and
+[1] https://lore.kernel.org/u-boot/20240207000301.3270722-1-jonas@kwiboo.se/
 
-s/some tested USB 3.0 flash drives/some tested USB 2.0 and 3.0 flash 
-drives/
+Chen-Yu Tsai (5):
+  rockchip: rk3328: Read cpuid and generate MAC address from efuse
+  rockchip: rk3399: Read cpuid and generate MAC address from efuse
+  rockchip: rk3328: regenerate defconfigs
+  rockchip: rk3399: regenerate defconfigs
+  rockchip: nanopi-r4s: Drop ROCKCHIP_OTP
 
->> work on an OrangePi Zero 3 with Allwinner H616 SoC, which supports USB
->> 2.0
->> only, while the same USB flash drives worked just fine on a Pine64 H64
->> with
->> Allwinner H6 SoC, which supports both USB 2.0 and 3.0.
->> 
->> Resetting USB 3.0 hubs only has been tested to work as expected,
->> resolving
->> the previous issues on the Allwinner H616, while not introducing any 
->> new
->> issues on other Allwinner SoCs.  Thus, let's fix it that way.
->> 
->> According to the USB 3.0 specification, resetting a USB 3.0 port is
->> required
->> when an attached USB device transitions between different states, such
->> as
->> when it resumes from suspend.  Though, the Linux kernel performs
->> additional
->> USB 3.0 port resets upon initial USB device attachment, presumably to
->> ensure
->> proper state of the USB 3.0 hub port and proper USB mode negotiation
->> during
->> the initial USB device attachment and enumeration.
->> 
->> Such USB port resets don't seem to exist for USB 2.0 hubs, according 
->> the
->> USB
->> 2.0 specification.  The resets seem to be added to the USB 3.0
->> specification
->> as part of the port and device mode negotiation.
->> 
->> The Linux kernel also resets USB 3.0 (i.e. SuperSpeed) hubs only, as
->> visible
->> in file drivers/usb/core/hub.c in the kernel source, line 2859.  This
->> check
->> also applies to newer SuperSpeed Plus (USB 3.1 or 3.2) hubs as well,
->> which
->> hopefully makes it future proof.
->> 
->> Fixes: 33e06dcbe57a ("common: usb-hub: Reset hub port before 
->> scanning")
->> Link:
->> https://lore.kernel.org/u-boot/20240207102327.35125-1-i@shantur.com/T/#u
->> Link:
->> https://lore.kernel.org/u-boot/20240201164604.13315fa6@donnerap.manchester.arm.com/T/#u
->> Signed-off-by: Shantur Rathore <i@shantur.com>
->> Helped-by: Dragan Simic <dsimic@manjaro.org>
->> Tested-by: Andre Przywara <andre.przywara@arm.com>
->> Reviewed-by: Dragan Simic <dsimic@manjaro.org>
->> ------- >8 ------------- >8 ------------- >8 ------------- >8 -------
+ arch/arm/mach-rockchip/Kconfig                | 6 ++++++
+ configs/chromebook_bob_defconfig              | 3 ---
+ configs/chromebook_kevin_defconfig            | 3 ---
+ configs/eaidk-610-rk3399_defconfig            | 1 -
+ configs/evb-rk3328_defconfig                  | 3 ---
+ configs/evb-rk3399_defconfig                  | 1 -
+ configs/firefly-rk3399_defconfig              | 3 ---
+ configs/khadas-edge-captain-rk3399_defconfig  | 1 -
+ configs/khadas-edge-rk3399_defconfig          | 1 -
+ configs/khadas-edge-v-rk3399_defconfig        | 1 -
+ configs/leez-rk3399_defconfig                 | 1 -
+ configs/nanopc-t4-rk3399_defconfig            | 1 -
+ configs/nanopi-m4-2gb-rk3399_defconfig        | 1 -
+ configs/nanopi-m4-rk3399_defconfig            | 1 -
+ configs/nanopi-m4b-rk3399_defconfig           | 1 -
+ configs/nanopi-neo4-rk3399_defconfig          | 1 -
+ configs/nanopi-r2c-plus-rk3328_defconfig      | 3 ---
+ configs/nanopi-r2c-rk3328_defconfig           | 3 ---
+ configs/nanopi-r2s-rk3328_defconfig           | 3 ---
+ configs/nanopi-r4s-rk3399_defconfig           | 4 ----
+ configs/orangepi-r1-plus-lts-rk3328_defconfig | 3 ---
+ configs/orangepi-r1-plus-rk3328_defconfig     | 3 ---
+ configs/orangepi-rk3399_defconfig             | 1 -
+ configs/pinebook-pro-rk3399_defconfig         | 3 ---
+ configs/pinephone-pro-rk3399_defconfig        | 3 ---
+ configs/puma-rk3399_defconfig                 | 3 ---
+ configs/roc-cc-rk3328_defconfig               | 3 ---
+ configs/roc-pc-mezzanine-rk3399_defconfig     | 3 ---
+ configs/roc-pc-rk3399_defconfig               | 3 ---
+ configs/rock-4c-plus-rk3399_defconfig         | 3 ---
+ configs/rock-4se-rk3399_defconfig             | 3 ---
+ configs/rock-pi-4-rk3399_defconfig            | 3 ---
+ configs/rock-pi-4c-rk3399_defconfig           | 3 ---
+ configs/rock-pi-e-rk3328_defconfig            | 3 ---
+ configs/rock-pi-n10-rk3399pro_defconfig       | 2 --
+ configs/rock64-rk3328_defconfig               | 3 ---
+ configs/rock960-rk3399_defconfig              | 2 --
+ configs/rockpro64-rk3399_defconfig            | 3 ---
+ 38 files changed, 6 insertions(+), 86 deletions(-)
+
+-- 
+2.39.2
+
