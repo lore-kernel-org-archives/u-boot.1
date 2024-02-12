@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F11CEC4829E
-	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 19:47:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04C86C4829E
+	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 19:48:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32DB387EC9;
-	Mon, 12 Feb 2024 20:47:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 67C0F87ED5;
+	Mon, 12 Feb 2024 20:47:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="cJ2e+Tsd";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ZYyvzpU6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A0C4B87EBD; Mon, 12 Feb 2024 20:47:40 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id 89A8C87ED0; Mon, 12 Feb 2024 20:47:43 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D77787061
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 20:47:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 24865874BA
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 20:47:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41CJlR0t077349;
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41CJlR4H127400;
  Mon, 12 Feb 2024 13:47:27 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1707767247;
- bh=ydh8bYlPG5tLuZOPN1UbUfQ7B8aIKIV8mAymVnrCoNQ=;
+ bh=n7bevE4Ne6ZU21sLRGS5orNZTv0w3gGXI3AqQPaIJK0=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=cJ2e+TsdxbXkccAj6EcSEYSnh9InntneA+gt52Wiw2llT06Wt2hRxrm9brxvYTcj+
- aOj2EvXuNaBH8sYGXpHJxAb4I+BDmEbWwzj/bI5cjXq75H7bzJDY0aiMNLRFr7wKRk
- 9VLBTMxiehWd107L+GuTW0dv7IFh6c4c+nOv2G04=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41CJlRd4011581
+ b=ZYyvzpU6hDSlkTm311yNrbGQHljh0MFRlcsQh5yu73aVrW8qGHF6gaUADaRt7aBtj
+ ooSa15mc+bzLBm0tm5K+0x6jzOc0NqMC/wlaNExBVHraqq5yhEe6XADpTq+M8/znxw
+ VphLuHcEC7TEc/dFLXNlKwZ53rQ0omX05vvBv02A=
+Received: from DLEE101.ent.ti.com (dlee101.ent.ti.com [157.170.170.31])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41CJlRIn010211
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Mon, 12 Feb 2024 13:47:27 -0600
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 12
- Feb 2024 13:47:27 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ Feb 2024 13:47:26 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 12 Feb 2024 13:47:27 -0600
+ Frontend Transport; Mon, 12 Feb 2024 13:47:26 -0600
 Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41CJlRwX000778;
- Mon, 12 Feb 2024 13:47:27 -0600
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41CJlQ42005871;
+ Mon, 12 Feb 2024 13:47:26 -0600
 From: Nishanth Menon <nm@ti.com>
 To: Tom Rini <trini@konsulko.com>
 CC: Kamlesh Gurudasani <kamlesh@ti.com>, Sinthu Raja <sinthu.raja@ti.com>,
@@ -60,10 +60,9 @@ CC: Kamlesh Gurudasani <kamlesh@ti.com>, Sinthu Raja <sinthu.raja@ti.com>,
  Bryan Brattlof <bb@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
  <u-boot@lists.denx.de>, Jon Humphreys <j-humphreys@ti.com>,
  Nishanth Menon <nm@ti.com>
-Subject: [PATCH 07/11] board: ti: j721e: Set fdtfile from C code instead of
- findfdt script
-Date: Mon, 12 Feb 2024 13:47:22 -0600
-Message-ID: <20240212194726.1093771-8-nm@ti.com>
+Subject: [PATCH 01/11] board: ti: Add missing common/Kconfig references
+Date: Mon, 12 Feb 2024 13:47:16 -0600
+Message-ID: <20240212194726.1093771-2-nm@ti.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240212194726.1093771-1-nm@ti.com>
 References: <20240212194726.1093771-1-nm@ti.com>
@@ -88,79 +87,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We now can provide a map and have the standard fdtfile variable set from
-code itself. This allows for bootstd to "just work".
+Add missing board/ti/common/Kconfig references for the platforms that
+missed it. The intent is for the common Kconfig to be usable across TI
+reference boards as required.
 
-While at this, replace findfdt in environment with a warning as it is no
-longer needed.
-
-Reviewed-by: Jonathan Humphreys <j-humphreys@ti.com>
-Reviewed-by: Roger Quadros <rogerq@kernel.org>
+Reported-by: Tom Rini <trini@konsulko.com>
 Signed-off-by: Nishanth Menon <nm@ti.com>
 ---
 Changes since V3:
 * No change
 
-V3: https://lore.kernel.org/r/20240130130615.670783-8-nm@ti.com
+V3: https://lore.kernel.org/r/20240130130615.670783-2-nm@ti.com
 
- board/ti/j721e/evm.c     |  8 ++++++++
- board/ti/j721e/j721e.env | 10 ----------
- 2 files changed, 8 insertions(+), 10 deletions(-)
+ board/ti/omap3evm/Kconfig | 2 ++
+ board/ti/panda/Kconfig    | 2 ++
+ board/ti/sdp4430/Kconfig  | 2 ++
+ 3 files changed, 6 insertions(+)
 
-diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
-index b77cffc5ef56..9dc3ed6dfffa 100644
---- a/board/ti/j721e/evm.c
-+++ b/board/ti/j721e/evm.c
-@@ -16,6 +16,7 @@
- #include <dm.h>
+diff --git a/board/ti/omap3evm/Kconfig b/board/ti/omap3evm/Kconfig
+index 08a8aa20ae85..cd71fe083176 100644
+--- a/board/ti/omap3evm/Kconfig
++++ b/board/ti/omap3evm/Kconfig
+@@ -9,4 +9,6 @@ config SYS_VENDOR
+ config SYS_CONFIG_NAME
+ 	default "omap3_evm"
  
- #include "../common/board_detect.h"
-+#include "../common/fdt_ops.h"
++source "board/ti/common/Kconfig"
++
+ endif
+diff --git a/board/ti/panda/Kconfig b/board/ti/panda/Kconfig
+index 8f277b612a45..5912f69babe2 100644
+--- a/board/ti/panda/Kconfig
++++ b/board/ti/panda/Kconfig
+@@ -9,4 +9,6 @@ config SYS_VENDOR
+ config SYS_CONFIG_NAME
+ 	default "omap4_panda"
  
- #define board_is_j721e_som()	(board_ti_k3_is("J721EX-PM1-SOM") || \
- 				 board_ti_k3_is("J721EX-PM2-SOM"))
-@@ -353,6 +354,12 @@ static int probe_daughtercards(void)
- #endif
++source "board/ti/common/Kconfig"
++
+ endif
+diff --git a/board/ti/sdp4430/Kconfig b/board/ti/sdp4430/Kconfig
+index 36f185282166..65e9107bc1b0 100644
+--- a/board/ti/sdp4430/Kconfig
++++ b/board/ti/sdp4430/Kconfig
+@@ -12,4 +12,6 @@ config SYS_CONFIG_NAME
+ config CMD_BAT
+ 	bool "Enable board-specific battery command"
  
- #ifdef CONFIG_BOARD_LATE_INIT
-+static struct ti_fdt_map ti_j721e_evm_fdt_map[] = {
-+	{"j721e", "k3-j721e-common-proc-board.dtb"},
-+	{"j721e-sk", "k3-j721e-sk.dtb"},
-+	{"j7200", "k3-j7200-common-proc-board.dtb"},
-+	{ /* Sentinel. */ }
-+};
- static void setup_board_eeprom_env(void)
- {
- 	char *name = "j721e";
-@@ -372,6 +379,7 @@ static void setup_board_eeprom_env(void)
- 
- invalid_eeprom:
- 	set_board_info_env_am6(name);
-+	ti_set_fdt_env(name, ti_j721e_evm_fdt_map);
- }
- 
- static void setup_serial(void)
-diff --git a/board/ti/j721e/j721e.env b/board/ti/j721e/j721e.env
-index cb27bf5e2b24..38bfd7d49634 100644
---- a/board/ti/j721e/j721e.env
-+++ b/board/ti/j721e/j721e.env
-@@ -7,16 +7,6 @@
- #include <env/ti/k3_rproc.env>
- #endif
- 
--default_device_tree=ti/k3-j721e-common-proc-board.dtb
--findfdt=
--	setenv name_fdt ${default_device_tree};
--	if test $board_name = j721e; then
--		setenv name_fdt ti/k3-j721e-common-proc-board.dtb; fi;
--	if test $board_name = j7200; then
--		setenv name_fdt ti/k3-j7200-common-proc-board.dtb; fi;
--	if test $board_name = j721e-eaik || test $board_name = j721e-sk; then
--		setenv name_fdt ti/k3-j721e-sk.dtb; fi;
--	setenv fdtfile ${name_fdt}
- name_kern=Image
- console=ttyS2,115200n8
- args_all=setenv optargs earlycon=ns16550a,mmio32,0x02800000
++source "board/ti/common/Kconfig"
++
+ endif
 -- 
 2.43.0
 
