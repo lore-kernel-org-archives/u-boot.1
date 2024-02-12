@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3895C4829C
-	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 16:56:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 335B8C4829C
+	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 16:57:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 18AFE875FC;
-	Mon, 12 Feb 2024 17:56:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DFE8C87ED8;
+	Mon, 12 Feb 2024 17:57:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="m86lLweN";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="K59caSle";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A2167876A9; Mon, 12 Feb 2024 17:56:39 +0100 (CET)
-Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
- [IPv6:2607:f8b0:4864:20::b2b])
+ id 4611A87ED9; Mon, 12 Feb 2024 17:57:29 +0100 (CET)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 68C138718A
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 17:56:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2EC4A8718A
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 17:57:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2b.google.com with SMTP id
- 3f1490d57ef6-dc25e12cc63so3632991276.0
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 08:56:37 -0800 (PST)
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-6077789e054so3900577b3.1
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 08:57:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1707756996; x=1708361796; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1707757045; x=1708361845; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=fY6zzsvoYQMn81kjZAksD5twwmfNppud1GYq+S92jXY=;
- b=m86lLweN0wjiKOqD6mfBi6IodktInSLG4901fQRgjOmgKx8SocNWsqZF/GvaRNtfqw
- q5I9QuW4oNx2O5swdUxkDcUUPwR1L+eafUZ+wzh2Q2YCM+8MpqSHH0iDTUDotnfEveDJ
- SnVun1NQ2rvkZMsEAh2mgFZ2ncEwFE8+5RZco=
+ bh=WY/mTWFA/kLcPUSeUjLEZHn2Eo8rRFnXjAuKqfwf3tM=;
+ b=K59caSleEdEpeAT8AoaCb0zlAiq+/5FhVGdiF0y9pTHWZ8m15hHeAyh5wEoRCmfWA0
+ CtxHNZrfIaZbZL8hv9rVdJwij0g2ziPHzIYcsXZGbREP20+JH/4zglSDMjvzywHvrLhz
+ TylcuZI134bX4AlZNPamTAY2ruVYfCRHk25Ng=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707756996; x=1708361796;
+ d=1e100.net; s=20230601; t=1707757045; x=1708361845;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fY6zzsvoYQMn81kjZAksD5twwmfNppud1GYq+S92jXY=;
- b=mDUhe6cq7YVKmTuCCnt7RI9q9Kn/IZ+NypsLK1hmPCV1fC3ExiGaaRLnkTNvRDTE3N
- E7kFdxL4+6I+jpQgyDm6LrX0AOYGb5xBGSr4WR2Ej2yevOcnQob502wAUwhGaL1SrUih
- 2ZYBBXToY9GVxPSUKrEt5N+7AgRBMj9wYVAeW682YkAmq21Z8F8gRonGOpFDbx9aljAN
- 9t/AcTMopkkVpigSGnQY5M2Eb1iY8Lg+N9BdC/be4F4iLmPgydxMR1Gl3wd1BbrZakLx
- HUiGuTIBUNZYmCJ+DG3/ssW/qswawTw3nnYCs1bSczWXSC7qC02st7Qck4lHzf3RovTj
- 0+TQ==
-X-Gm-Message-State: AOJu0YzI8nNy9gT/pBH9zZNK63/3W1G4HY/A8s8CKdwgUZQFVN3lwDTJ
- U0mFHe8fnv6bqDVhDG4zrxzHKeof8Oj7tOhVFODP93WqGCIqLPnfSA/PX7NS9ZA=
-X-Google-Smtp-Source: AGHT+IExF3SqyTCEh8ViKG0FIkcs3iLV508QpKESf1sznjHc9FTBMq3QpS1sOJbNp3MXXoIhz7CblA==
-X-Received: by 2002:a25:7242:0:b0:dc6:d258:c694 with SMTP id
- n63-20020a257242000000b00dc6d258c694mr63238ybc.19.1707756994611; 
- Mon, 12 Feb 2024 08:56:34 -0800 (PST)
+ bh=WY/mTWFA/kLcPUSeUjLEZHn2Eo8rRFnXjAuKqfwf3tM=;
+ b=VD67MlIGM6CNxDn4br1UAlYTFhXeeVTYi+qGpGMqcYXUVHBtbrRn7SV8hVKNdW+Z2H
+ lfneEoCS87BgVA/maCCYeQUFkjmlGw355KQU6152JJrHbnbkEgH5Al4NhwAEEUFynQ7p
+ tvQJv4ej1UvZx/6eV7TtntfbIJuAK5VodI+1avQ+7wfIxwBtQLrji6175llQLwQ1xAF5
+ p5iidxLcQNtvhzOEAcjZpf1k4OjtfdFm8zWAB6Bbn1CQwkqE5wiTdynHY3UoxRWJ5ol7
+ gRIfKgE1sDAoGwRTgc1XFHp/PAtouNZfS2jwaZ0Ik/f0e1upOdzYULb44aff3gpB1xp7
+ 8r0Q==
+X-Gm-Message-State: AOJu0YzqtSlotITq0YKN5C1Lfjeeu4Elb8U8OGvKvvo0WngY5UWDmrPH
+ fW8ui6E4DpqXCYGgosh2uMckbgsNZb+mRU/7Tcqy41dn+ZWs0ka3zfXWsZbSyZE=
+X-Google-Smtp-Source: AGHT+IHCQ2X/dR8mt9KNTFuWTtSOcRYVpJLpG6LoFEMmHPZAVaOAzAEv0AJzF3wjdQoMp1yii4folQ==
+X-Received: by 2002:a81:9254:0:b0:604:5c41:e3cf with SMTP id
+ j81-20020a819254000000b006045c41e3cfmr5283381ywg.24.1707757045092; 
+ Mon, 12 Feb 2024 08:57:25 -0800 (PST)
 X-Forwarded-Encrypted: i=1;
- AJvYcCUDBOeiGUozlNft14J7aMZEVic4nf4TrfHYD/P3ZcOEKSVJeSo+aEw2oM+WkeqVwdajdH1hDhpyql2mWnuyDz7xm4sx153R
+ AJvYcCULwfY2CBHFUZpor8JwXvc3aI6xsWl4SBvpwWoY4NI4tQID3nOqMuPs+NBMtam2jg58CV11bOnRHuctfKjuT0aaYQzZoXxA0/rFwhVA4OBEehPtbHiifIPDWnWN8ZkSkp9TOYZLO//UCX9LDJELJZ9XoGxEo2Eh2/F58mdqU3kdnQU=
 Received: from bill-the-cat (065-184-194-195.res.spectrum.com.
  [65.184.194.195]) by smtp.gmail.com with ESMTPSA id
- v16-20020a2583d0000000b00dc6e5ea9152sm1220354ybm.29.2024.02.12.08.56.32
+ a4-20020a0dd804000000b006048395c0f9sm1243728ywe.77.2024.02.12.08.57.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Feb 2024 08:56:33 -0800 (PST)
-Date: Mon, 12 Feb 2024 11:56:31 -0500
+ Mon, 12 Feb 2024 08:57:24 -0800 (PST)
+Date: Mon, 12 Feb 2024 11:57:22 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: u-boot@lists.denx.de, Igor Opaniuk <igor.opaniuk@gmail.com>
-Subject: Re: [PATCH] doc/develop/codingstyle.rst: Clarify include section
-Message-ID: <20240212165631.GH3040305@bill-the-cat>
-References: <20240209143520.2724221-1-trini@konsulko.com>
- <CAByghJYCzN4Nm0mThc1QXMKk8KSPRZwwL2pp4ucLv7iwJsMSJg@mail.gmail.com>
- <20240212161909.GF3040305@bill-the-cat>
- <ca87001b-2713-4fdc-8d93-9bfc7008bb02@gmx.de>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH] cmd: remove common.h from exception command
+ implementations
+Message-ID: <20240212165722.GI3040305@bill-the-cat>
+References: <20240212165329.17847-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="/6M+xZywRdt8XRkd"
+ protocol="application/pgp-signature"; boundary="DQMbMGqtO124xLe4"
 Content-Disposition: inline
-In-Reply-To: <ca87001b-2713-4fdc-8d93-9bfc7008bb02@gmx.de>
+In-Reply-To: <20240212165329.17847-1-heinrich.schuchardt@canonical.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,134 +95,38 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---/6M+xZywRdt8XRkd
-Content-Type: text/plain; charset=utf-8
+--DQMbMGqtO124xLe4
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Feb 12, 2024 at 05:52:03PM +0100, Heinrich Schuchardt wrote:
-> On 12.02.24 17:19, Tom Rini wrote:
-> > On Sun, Feb 11, 2024 at 06:53:47PM +0100, Igor Opaniuk wrote:
-> > > Hi Tom,
-> > >=20
-> > > On Fri, Feb 9, 2024 at 3:52=E2=80=AFPM Tom Rini <trini@konsulko.com> =
-wrote:
-> > > >=20
-> > > > Rework the section about includes slightly. We should not be using
-> > > > common.h anywhere, so remove that from examples and ask people to s=
-end
-> > > > patches removing it when found. Doing this also means we need to re=
-word
-> > > > other parts of this section. Be clearer about using alphabetical
-> > > > ordering.
-> > > >=20
-> > > > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > > > ---
-> > > >   doc/develop/codingstyle.rst | 23 +++++++++++------------
-> > > >   1 file changed, 11 insertions(+), 12 deletions(-)
-> > > >=20
-> > > > diff --git a/doc/develop/codingstyle.rst b/doc/develop/codingstyle.=
-rst
-> > > > index b25bfbd271f0..cdf5aedfcbb0 100644
-> > > > --- a/doc/develop/codingstyle.rst
-> > > > +++ b/doc/develop/codingstyle.rst
-> > > > @@ -108,30 +108,29 @@ expected size, or that particular members app=
-ear at the right offset.
-> > > >   Include files
-> > > >   -------------
-> > > >=20
-> > > > -You should follow this ordering in U-Boot. The common.h header (wh=
-ich is going
-> > > > -away at some point) should always be first, followed by other head=
-ers in order,
-> > > > -then headers with directories, then local files:
-> > > > +You should follow this ordering in U-Boot. In all cases, they shou=
-ld be listed
-> > > > +in alphabetical order. First comes headers which are located direc=
-tly in our
-> > > > +top-level include diretory. This excludes the common.h header file=
- which is to
-> > > > +be removed. Second are headers within subdirectories, Finally dire=
-ctory-local
-> > > > +includes should be listed. See this example:
-> > > >=20
-> > > >   .. code-block:: C
-> > > >=20
-> > > > -   #include <common.h>
-> > > >      #include <bootstage.h>
-> > > >      #include <dm.h>
-> > > >      #include <others.h>
-> > > >      #include <asm/...>
-> > > > -   #include <arm/arch/...>
-> > > > +   #include <asm/arch/...>
-> > > >      #include <dm/device_compat.h>
-> > > >      #include <linux/...>
-> > > >      #include "local.h"
-> > > >=20
-> > > > -Within that order, sort your includes.
-> > > > -
-> > > > -It is important to include common.h first since it provides basic =
-features used
-> > > > -by most files, e.g. CONFIG options.
-> > > > -
-> > > >   For files that need to be compiled for the host (e.g. tools), you=
- need to use
-> > > > -``#ifndef USE_HOSTCC`` to avoid including common.h since it includ=
-es a lot of
-> > > > -internal U-Boot things. See common/image.c for an example.
-> > > > +``#ifndef USE_HOSTCC`` to avoid including U-Boot specific include =
-files.  See
-> > > > +common/image.c for an example.
-> > > > +
-> > > > +If you encounter ccode which still uses <common.h> a patch to remo=
-ve that and
-> > > nitpick: s/ccode/code/g
-> >=20
-> > Whoops, Heinrich can you please fix when applying?
-> >=20
->=20
-> Hello Tom,
->=20
-> I am missing here some text about the includes that are automatically
-> included, e.g.
->=20
-> linux/kconfig.h
-> include/generated/autoconf.h
->=20
-> Maybe you could describe this in a future patch.
+On Mon, Feb 12, 2024 at 05:53:29PM +0100, Heinrich Schuchardt wrote:
 
-Yeah, that would be good as there's in turn a few places we do have to
-manually include those files.
+> The common.h should not be used anymore.
+>=20
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
-> We still have 4107 files including common.h. Should we have a Migration
-> warning in Makefile?
-
-checkpatch.pl already marks this as an error for new patches. In some
-other threads I've talked with Simon about not wanting to script the
-removal as there's some style to it (in short, the linux kernel doesn't
-enforce direct #include of everything needed in every C file, so we
-aren't either, so it's a matter of pulling common.h out and fixing
-fallout rather than adding say errno.h everywhere first).
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---/6M+xZywRdt8XRkd
+--DQMbMGqtO124xLe4
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXKTbgACgkQFHw5/5Y0
-tyxMLgwAsTwa5qCLKHpiwon4uIVte1yPG0Q6l0mq/QWuq//2Ib2QJfxTeIbRatA7
-w6QUbg9Mrk53fGiNVZSLaa1mq3n/syUcG7CVxrIFZhfP+0JKmfRkcfCUcDtssA48
-puGl9VUYtLcwwAoc1vIuz6VZcWTg744QOMKssmgf965hOEPgCr7F4ATyIuAQH3si
-GPB4JU/wkRKRFfAxGdXLuW62S2ThytVgOffEgBVULv7d8Y8XyrshuGYJwh8oC89L
-G4kSxUFV8VISuo4lxAtTswQIrsCx4xA43zpzbyDE1nnYri11N6q3+6SJwMkj25EA
-eIPdu9g7hH0hs6rJ2B8Llt76teBqXzswHPxo9NHQ+P3z0GQVczjZ51xlIILwNm+p
-qFFsrY7UZRXeYu8sQemQYDFW8FovL7jVwG0ho5613mjoasyki24LUq0pbqIpMAwt
-qfDYuKMdTKjnhlWX7ZqQg3eA+SYmVtfSv85usq82UR2GnIRtak4ebR6AR14Y1lPK
-UqWjBjyU
-=qPVu
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXKTfIACgkQFHw5/5Y0
+tyw1UAwApBmLtRcmw82dz/w2EsverpNGf9hyABItaoj3HyTXQbM3oljaP1DrrCv3
+k+nwvl7uqot6tHK0/mTGqlMfCP/gtE9sjGM+49sXZxKVPEVxC9NJ3z5U0WXV2jZi
+erMfOYZTrG/0JQU/h8Y+407D3DQYw39Y3MKo06HxdEJMZm7V54KjaF1mqsZa4K2K
+wea11rtsuQRiQnvQRzJBhruOMuinaN7jTpQox3tiL/tijhMtHSJEx99WWCflFPxG
+4+/tV40/WLIV0nyeyjBXUWrSn7QgpNlCk/oX8q8zYW3znafxRn8Ifk4pFV0D9f4d
++JUjQeLcP+BDkNyy4wbAk2Gb+PApzBRK+p7HYjUFQx9pN+LxSmJqPNvqNte+m5Hx
+EBqtDYr8ziDmFcf7/Ta17MduTrabUlc4HKB+aBiu95xvKi94H0rQHQob2e1XNoVU
+gbpeCdQcGFf9hq4eTO/e5h0jTDTpbwa+5Hcqh7fiRaQZpyVd19GvCn8XtWYTa7kc
++0+Xji2H
+=27x9
 -----END PGP SIGNATURE-----
 
---/6M+xZywRdt8XRkd--
+--DQMbMGqtO124xLe4--
