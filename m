@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13C6FC48297
-	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 07:49:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5553EC4829B
+	for <u-boot@archiver.kernel.org>; Mon, 12 Feb 2024 07:49:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3AC2A87EED;
-	Mon, 12 Feb 2024 08:48:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6EA9487EF2;
+	Mon, 12 Feb 2024 08:48:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B9BE87EC9; Mon, 12 Feb 2024 08:48:14 +0100 (CET)
+ id 0059487808; Mon, 12 Feb 2024 08:48:17 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 8072A87EED
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 08:48:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id C4C9587EC9
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 08:48:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 19555DA7;
- Sun, 11 Feb 2024 23:48:53 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D0579DA7;
+ Sun, 11 Feb 2024 23:48:56 -0800 (PST)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 4D09C3F762;
- Sun, 11 Feb 2024 23:48:08 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 0F7AB3F762;
+ Sun, 11 Feb 2024 23:48:11 -0800 (PST)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -38,9 +38,10 @@ Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Michal Simek <michal.simek@amd.com>,
  Jassi Brar <jaswinder.singh@linaro.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v2 10/21] capsule: accept a bank on a successful update
-Date: Mon, 12 Feb 2024 13:17:01 +0530
-Message-Id: <20240212074712.3657076-11-sughosh.ganu@linaro.org>
+Subject: [PATCH v2 11/21] fwu: mtd: modify the DFU API's to align with
+ metadata version 2
+Date: Mon, 12 Feb 2024 13:17:02 +0530
+Message-Id: <20240212074712.3657076-12-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240212074712.3657076-1-sughosh.ganu@linaro.org>
 References: <20240212074712.3657076-1-sughosh.ganu@linaro.org>
@@ -62,50 +63,164 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The version 2 of the FWU metadata maintains a bank_state field per
-bank, which keeps an aggregate status of the bank. A bank can either
-be in a valid, invalid, or accepted state.
+Make changes to the functions used for generating the DFU's alt
+variable so that they are aligned with changes to the metadata version
+2.
 
-Update the bank_state field of the metadata once the update has gone
-through successfully(when skipping Trial State), or once the images in
-the bank have been accepted.
+These changes include getting the number of banks and images per bank
+at runtime from the metadata, as well as accessing the updatable image
+information from the FWU MTD driver's private structure.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
 
-Changes since V1: None
+Changes since V1:
+* Use the helper functions from the previous patch to access the
+  image information in the metadata.
 
- lib/efi_loader/efi_capsule.c | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ lib/fwu_updates/fwu_mtd.c | 81 +++++++++++++++++++++++++++++----------
+ 1 file changed, 61 insertions(+), 20 deletions(-)
 
-diff --git a/lib/efi_loader/efi_capsule.c b/lib/efi_loader/efi_capsule.c
-index 0e6a38b441..422bb11162 100644
---- a/lib/efi_loader/efi_capsule.c
-+++ b/lib/efi_loader/efi_capsule.c
-@@ -480,6 +480,12 @@ static __maybe_unused efi_status_t fwu_empty_capsule_process(
- 		if (ret != EFI_SUCCESS)
- 			log_err("Unable to set the Accept bit for the image %pUs\n",
- 				image_guid);
-+
-+		status = fwu_bank_state_update(active_idx);
-+		ret = fwu_to_efi_error(status);
-+		if (ret != EFI_SUCCESS)
-+			log_err("Unable to update the bank_state for bank %u\n",
-+				active_idx);
- 	}
+diff --git a/lib/fwu_updates/fwu_mtd.c b/lib/fwu_updates/fwu_mtd.c
+index 69cd3d7001..50ff0d692d 100644
+--- a/lib/fwu_updates/fwu_mtd.c
++++ b/lib/fwu_updates/fwu_mtd.c
+@@ -15,16 +15,51 @@
  
- 	return ret;
-@@ -525,6 +531,10 @@ static __maybe_unused efi_status_t fwu_post_update_process(bool fw_accept_os)
- 			status = fwu_trial_state_start(update_index);
- 			if (status < 0)
- 				ret = EFI_DEVICE_ERROR;
-+		} else {
-+			status = fwu_bank_state_update(update_index);
-+			if (status < 0)
-+				ret = EFI_DEVICE_ERROR;
+ #include <dm/ofnode.h>
+ 
+-struct fwu_mtd_image_info
+-fwu_mtd_images[CONFIG_FWU_NUM_BANKS * CONFIG_FWU_NUM_IMAGES_PER_BANK];
++static struct fwu_mdata *mdata;
++
++static int read_mdata(void)
++{
++	int ret = 0;
++	u32 mdata_size;
++
++	ret = fwu_get_mdata_size(&mdata_size);
++	if (ret)
++		return ret;
++
++	mdata = malloc(mdata_size);
++	if (!mdata)
++		return -ENOMEM;
++
++	ret = fwu_get_mdata(mdata);
++	if (ret < 0) {
++		log_err("Failed to get the FWU mdata\n");
++		free(mdata);
++		mdata = NULL;
++	}
++
++	return ret;
++}
+ 
+ static struct fwu_mtd_image_info *mtd_img_by_uuid(const char *uuidbuf)
+ {
+-	int num_images = ARRAY_SIZE(fwu_mtd_images);
++	u8 nbanks;
++	u16 nimages;
++	int num_images, ret;
++	struct fwu_mdata_mtd_priv *mtd_priv = dev_get_priv(fwu_get_dev());
++	struct fwu_mtd_image_info *image_info = mtd_priv->fwu_mtd_images;
++
++	if (!image_info)
++		return NULL;
++
++	ret = fwu_get_banks_images(&nbanks, &nimages);
++	if (ret)
++		return NULL;
++
++	num_images = nbanks * nimages;
+ 
+ 	for (int i = 0; i < num_images; i++)
+-		if (!strcmp(uuidbuf, fwu_mtd_images[i].uuidbuf))
+-			return &fwu_mtd_images[i];
++		if (!strcmp(uuidbuf, image_info[i].uuidbuf))
++			return &image_info[i];
+ 
+ 	return NULL;
+ }
+@@ -107,8 +142,9 @@ __weak int fwu_plat_get_alt_num(struct udevice *dev, efi_guid_t *image_id,
+ 	return fwu_mtd_get_alt_num(image_id, alt_num, "nor1");
+ }
+ 
+-static int gen_image_alt_info(char *buf, size_t len, int sidx,
+-			      struct fwu_image_entry *img, struct mtd_info *mtd)
++static int gen_image_alt_info(char *buf, size_t len, int idx,
++			      struct fwu_image_entry *img,
++			      struct mtd_info *mtd, uint8_t num_banks)
+ {
+ 	char *p = buf, *end = buf + len;
+ 	int i;
+@@ -123,15 +159,15 @@ static int gen_image_alt_info(char *buf, size_t len, int sidx,
+ 	 * List the image banks in the FWU mdata and search the corresponding
+ 	 * partition based on partition's uuid.
+ 	 */
+-	for (i = 0; i < CONFIG_FWU_NUM_BANKS; i++) {
++	for (i = 0; i < num_banks; i++) {
+ 		struct fwu_mtd_image_info *mtd_img_info;
+ 		struct fwu_image_bank_info *bank;
+ 		char uuidbuf[UUID_STR_LEN + 1];
+ 		u32 offset, size;
+ 
+ 		/* Query a partition by image UUID */
+-		bank = &img->img_bank_info[i];
+-		uuid_bin_to_str(bank->image_uuid.b, uuidbuf, UUID_STR_FORMAT_STD);
++		bank = fwu_img_bank_info_offset(mdata, idx, i);
++		uuid_bin_to_str(bank->image_guid.b, uuidbuf, UUID_STR_FORMAT_STD);
+ 
+ 		mtd_img_info = mtd_img_by_uuid(uuidbuf);
+ 		if (!mtd_img_info) {
+@@ -150,7 +186,7 @@ static int gen_image_alt_info(char *buf, size_t len, int sidx,
  		}
  	}
  
+-	if (i == CONFIG_FWU_NUM_BANKS)
++	if (i == num_banks)
+ 		return 0;
+ 
+ 	return -ENOENT;
+@@ -158,24 +194,29 @@ static int gen_image_alt_info(char *buf, size_t len, int sidx,
+ 
+ int fwu_gen_alt_info_from_mtd(char *buf, size_t len, struct mtd_info *mtd)
+ {
+-	struct fwu_mdata mdata;
++	u8 num_banks;
++	u16 num_images;
+ 	int i, l, ret;
++	struct fwu_image_entry *img_entry;
+ 
+-	ret = fwu_get_mdata(&mdata);
+-	if (ret < 0) {
+-		log_err("Failed to get the FWU mdata.\n");
+-		return ret;
++	if (!mdata) {
++		ret = read_mdata();
++		if (ret)
++			return ret;
+ 	}
+ 
+-	for (i = 0; i < CONFIG_FWU_NUM_IMAGES_PER_BANK; i++) {
+-		ret = gen_image_alt_info(buf, len, i * CONFIG_FWU_NUM_BANKS,
+-					 &mdata.img_entry[i], mtd);
++	num_banks = fwu_get_fw_desc(mdata)->num_banks;
++	num_images = fwu_get_fw_desc(mdata)->num_images;
++	for (i = 0; i < num_images; i++) {
++		img_entry = fwu_img_entry_offset(mdata, i);
++		ret = gen_image_alt_info(buf, len, i,
++					 img_entry, mtd, num_banks);
+ 		if (ret)
+ 			break;
+ 
+ 		l = strlen(buf);
+ 		/* Replace the last ';' with '&' if there is another image. */
+-		if (i != CONFIG_FWU_NUM_IMAGES_PER_BANK - 1 && l) {
++		if (i != num_images - 1 && l) {
+ 			buf[l] = '&';
+ 			buf++;
+ 		}
 -- 
 2.34.1
 
