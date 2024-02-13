@@ -4,87 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 095A0C4829A
-	for <u-boot@archiver.kernel.org>; Tue, 13 Feb 2024 15:18:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DDE8C48260
+	for <u-boot@archiver.kernel.org>; Tue, 13 Feb 2024 15:32:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5CE6F87D84;
-	Tue, 13 Feb 2024 16:18:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 97FF587D58;
+	Tue, 13 Feb 2024 16:32:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="i/yBgFcp";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hqOM/wyS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6D81887D8D; Tue, 13 Feb 2024 16:18:54 +0100 (CET)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id 7394287D66; Tue, 13 Feb 2024 16:32:06 +0100 (CET)
+Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
+ [IPv6:2607:f8b0:4864:20::1136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 947E687D1A
- for <u-boot@lists.denx.de>; Tue, 13 Feb 2024 16:18:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1070086A26
+ for <u-boot@lists.denx.de>; Tue, 13 Feb 2024 16:32:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-411c93e1cd8so3357735e9.0
- for <u-boot@lists.denx.de>; Tue, 13 Feb 2024 07:18:45 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1136.google.com with SMTP id
+ 00721157ae682-6077a99bbf1so10544347b3.1
+ for <u-boot@lists.denx.de>; Tue, 13 Feb 2024 07:32:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1707837525; x=1708442325;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=qLq7X59SL55E+utCfYJJsTUeaWFGKUeSAdMICiY191w=;
- b=i/yBgFcplt0eKlPGNePEr+Tme0oy//DHK8QhYlXZX2BOAyTPUSm5CwVm7iZ9TEfJ7Z
- tllTIdEYlrtvopodhQemsVcOrFY+LbM6sBL2UOBofQeE7AoqTAOsTh8IXpQwfmB/9J1j
- 9dusXkXvP3nCstnqWOSC7eqpfzmsnfBJXsFb+1sSq4qAORakmL1OoIdGThcfyAiedxQP
- IXZPtJewWhiB5b+ZBzS7T9ZtUkQdhoj3slsmSwXfHEtGLVfxBHn+IMjQtIrcK5LlQ4Bh
- rGX8C1XVYF1worpyM6Yef3QqiT8SHeWI06lZl7jGSCIoM2vFFO3rXx+5Ygkt3zR5Wv0D
- p7kg==
+ d=konsulko.com; s=google; t=1707838319; x=1708443119; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=lCTqFdu0vmkeSpUddhPxegTA+/k3UaVO1FtRzVEFMSE=;
+ b=hqOM/wyS11onu0IaO9OAgdUVnjn/aiNmrabotM4XpUBVCxXkNYoenI+2AIUs3zKaL0
+ +eKBe5FZSIJ4m0wCmfvs05AY2A1gc2jHNuIA/R8TL9FSUMRweSFTPIgzlHZXhGYvS30f
+ qKh5urHkqYgVup/CgquNZFMphhcZL7S1btOi0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707837525; x=1708442325;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=qLq7X59SL55E+utCfYJJsTUeaWFGKUeSAdMICiY191w=;
- b=YpnG2SHJqXZFkIfeN0XEZ2DjyCFuEL6IvvVrp79vdmnU5u145uqwbotUp2UYQI2Cj9
- mVsDB8+ZWCebJzWN/fo+iGo6/N098ut+BULgd1i0qos4tesZ6EtNb2yt4uloLdzB2fcH
- hYlT6J2C4Cxv+qCzCobk9zE7QxCnB68LMFU822spcv+KR0qRpf5rnziEaqrkE6XQs1MB
- hBQ5DVHbBPZ1H+tDiS6HBGXaDUM2J293fv5wrtje3SMZyY9nU6/wilMmf6BxCbvsumvU
- wjW1uibTRSoYjROaVkkCIEb5tK+m+olhaqgMJTsYaiIiU7Xwl0G4Bp/d4WJ3Pv5ep9Fv
- Ie/Q==
-X-Gm-Message-State: AOJu0YzqPZrcvHWoIQSFjLAGfCQ4NbsmV931c8lL6pjjpenYg7+0hf7M
- KzJfg904CEmL4eJc5Wiiu+XiIjb+sMu9dEqOH3D42aM8VAmC3okqdMMK2ZT2IaE=
-X-Google-Smtp-Source: AGHT+IFgFzPC3SS0ntFv6ANqlUek959iw5aUArI7Dh5rsNu5sBfQDQym/P/nE7GOlo5KWFUEoeQZdw==
-X-Received: by 2002:a05:600c:5108:b0:411:c8a7:7b6e with SMTP id
- o8-20020a05600c510800b00411c8a77b6emr1414225wms.10.1707837525036; 
- Tue, 13 Feb 2024 07:18:45 -0800 (PST)
-X-Forwarded-Encrypted: i=1;
- AJvYcCX1ISle86exsvgsYOmo/5XVIKrwX1O3ILvuk56gPQEssH42u4I0qpBi+17M4yxFpCH/40EWdg2t7v62O+aOrqOuyZkgM88DdVjWIlNvhAnd0+L+lAUebIdvhemEVIys7GvF0eCxZ4If1POcS42e9ykJ2XuVpQZJGr9kddkACZlM+ni/w7z3P6qYNPorotCXpBrNA15LwrWkCpZWRM77GFfyV4uOn44A/yPhVj2PBTuScTsbGFhv3OyDQlPXT/ZR4CClNWtGsGbBxkx6W+zd0fdVnw9m5gFS3rGXFtSWrAM+L/hqr8mqU8Eu3kFjFcY=
-Received: from [192.168.2.40] ([82.66.159.240])
- by smtp.gmail.com with ESMTPSA id
- b13-20020a05600c11cd00b00410dd253008sm5753923wmi.42.2024.02.13.07.18.44
+ d=1e100.net; s=20230601; t=1707838319; x=1708443119;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=lCTqFdu0vmkeSpUddhPxegTA+/k3UaVO1FtRzVEFMSE=;
+ b=dW4gMZm9VPqx+85lHnPLZXndhoVy1N2ur5zFPvEjyiTQKvTMvI7A23mqoA++AvYJ+F
+ 4v7eqvAxQWa2tlwXinVANNAJp2QUCH+m2N9rHkESVlniQlY8jT5cLOV1v2YYzmzgrepV
+ yV+B8QhQ81/O+KJvJo2wa5kFPr5KOzrl+ECXXOe6BLFIkSIqkUdhLLXFRQbaFpqC9FfS
+ TaZz+9QBXD8eTFAHIq7N29rm3MVovFWrl6TrBxZ3jE4FK1IRcwbcYcPIDgwJZa+80oEu
+ JPFYJkIqEejIF96538qtPVJZukI8tIp64QzLOAIndfND8RAdZvpam0ctTS8xtPHp8QEU
+ SqNQ==
+X-Gm-Message-State: AOJu0YyqsF6FoGJnJRHygzM5x0k4NEu0icUKv5uWBA24tXpFXNiSjFW4
+ pKQXWYOvqyIpuO7GlReXMuI63n6c8ZsqF2L7loCfnYR4tkq2CyIeXEDQVROUPiBwlUNdc9AAPMR
+ t
+X-Google-Smtp-Source: AGHT+IHZ6a6xU5lSMixdN2rDQVDISOWRr3eJiCyIhCCIyqxrZ3erOqVxQpeyqgG1+mNTY6ZVMx5VmQ==
+X-Received: by 2002:a0d:eb8e:0:b0:604:55e9:fb35 with SMTP id
+ u136-20020a0deb8e000000b0060455e9fb35mr2115035ywe.7.1707838319308; 
+ Tue, 13 Feb 2024 07:31:59 -0800 (PST)
+Received: from bill-the-cat (065-184-194-195.res.spectrum.com.
+ [65.184.194.195]) by smtp.gmail.com with ESMTPSA id
+ y5-20020a818805000000b006040f198d3esm1749980ywf.142.2024.02.13.07.31.56
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 13 Feb 2024 07:18:44 -0800 (PST)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: u-boot@lists.denx.de, Igor Opaniuk <igor.opaniuk@foundries.io>
-Cc: Igor Opaniuk <igor.opaniuk@gmail.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Ivan Khoronzhuk <ivan.khoronzhuk@gmail.com>, 
- Jens Wiklander <jens.wiklander@linaro.org>, 
- Michal Simek <michal.simek@amd.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Stefan Roese <sr@denx.de>, 
- Tom Rini <trini@konsulko.com>
-In-Reply-To: <20240209192045.3961832-1-igor.opaniuk@foundries.io>
-References: <20240209192045.3961832-1-igor.opaniuk@foundries.io>
-Subject: Re: [PATCH v2 0/7] AVB: cosmetic adjustments/improvements
-Message-Id: <170783752432.651311.6466036162960002340.b4-ty@baylibre.com>
-Date: Tue, 13 Feb 2024 16:18:44 +0100
+ Tue, 13 Feb 2024 07:31:57 -0800 (PST)
+Date: Tue, 13 Feb 2024 10:31:31 -0500
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Subject: Re: [PATCH 1/3] Dockerfile: Build coreboot from source
+Message-ID: <20240213153131.GS3040305@bill-the-cat>
+References: <20240213143928.91443-1-trini@konsulko.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.12.2
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="7/p5iy2fW/N+wp71"
+Content-Disposition: inline
+In-Reply-To: <20240213143928.91443-1-trini@konsulko.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,37 +90,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-On Fri, 09 Feb 2024 20:20:38 +0100, Igor Opaniuk wrote:
-> This is the first patch series for incoming major
-> improvements for AVB implementation, that include:
-> - Simplify and add more context for debug/error prints where it's needed.
-> - Move SPDX license identifiers to the first line, so it conforms
->   to license placement rule.
-> - Use mmc_switch_part() only for eMMC.
-> - Rework do_avb_verify_part, take into account device lock state for setting correct
->   androidboot.verifiedbootstate.
-> - Adjust AVB documentation, sync usage info with the one cmd/avb.c.
-> 
-> [...]
+--7/p5iy2fW/N+wp71
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu)
+On Tue, Feb 13, 2024 at 09:39:26AM -0500, Tom Rini wrote:
+> To make CI runs rely less on external servers, build a coreboot release
+> from source and populate /opt/coreboot with the output.
+>=20
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+>  tools/docker/Dockerfile | 11 +++++++++++
+>  1 file changed, 11 insertions(+)
+>=20
+> diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
+> index 6122776bc64d..3d044657406e 100644
+> --- a/tools/docker/Dockerfile
+> +++ b/tools/docker/Dockerfile
+> @@ -231,6 +231,17 @@ RUN mkdir /tmp/trace && \
+>      sudo make install && \
+>      rm -rf /tmp/trace
+> =20
+> +# Build coreboot
+> +RUN wget -O - https://coreboot.org/releases/coreboot-4.22.01.tar.xz | ta=
+r -C /tmp -xJ && \
+> +    cd /tmp/coreboot-4.22.01 && \
+> +    make crossgcc-i386 CPUS=3D$(nproc) && \
+> +    make -C payloads/coreinfo olddefconfig && \
+> +    make -C payloads/coreinfo && \
+> +    make olddefconfig && \
+> +    make -j $(nproc) && \
+> +    sudo mkdir /opt/coreboot && \
+> +    sudo cp build/coreboot.rom build/cbfstool /opt/coreboot/
 
-[1/7] common: avb_verify: don't call mmc_switch_part for SD
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/dbde93c12616bd6ba22e6bcb76363a6a3f253087
-[2/7] avb: move SPDX license identifiers to the first line
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/bf7d47b4274568927adadeff8c9d1aaf2bd45ca6
-[3/7] common: avb_verify: rework error/debug prints
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/bdcc8f8c8fd3dfb053cea7a0f62b34ef062411e0
-[4/7] cmd: avb: rework prints
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/055462005fcc48a12a86edf2cbd3f7aa8712788b
-[5/7] common: avb_verify: add str_avb_io_error/str_avb_slot_error
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/63736ddd4fc357768e31a6f10c10b1a28a10ccbc
-[6/7] cmd: avb: rework do_avb_verify_part
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/07caf5febcfcfb5f2cdaade124ed8d11735a6029
-[7/7] doc: android: avb: sync usage details
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/85af871dcca7e9cae074e3a635706052a57629a4
+And I forgot an "rm -rf /tmp/coreboot-4.22.01" at the end here which
+I'll add while merging if there's no further comments.
 
---
-Mattijs
+--=20
+Tom
+
+--7/p5iy2fW/N+wp71
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXLi0kACgkQFHw5/5Y0
+tyxTJAv+Ma58PQrDZH5YgZACOEpYbnJznDkKZVp7kc4SMF53nXLp55ShOETFp0vb
+UH8SzffEd1o2Ke4jDtemkBaYGeK9v8XrBSbnxZ62v0aFsGypz6vwnOUEVprP8SGO
+wueHxnQLDduhHgpOno29aF4VE7EcHv2Fsx3moJx1XxX9cNal14JZYyyeqZaj7KUe
+pPT+1mYiyYcdRzshQaRKEQETdgOPFDOQeFYj4g9Ib/SKWVgANn+EtRiGTYgpBqii
+6aEhTXphNYDHzrLhFqcZxW4nGHMejUPtHP2Gi6DRVVU5I3N1Ody4NSHZF5iqSogf
+ygNa82RZEAnboaM8IaqHJZ8p/waoo0f5t3j/LWr2pD/E0OqIe3Ye0eIX8Htt+uep
+OYFBaEYlbW9v1yKSyG6YDgo+Fmy3tuRC3HVeyAjBiJJd1DryNZeX55oN5GdTZTwJ
+/+z/yPKUhYNzsWt4sPAONv1ak4RBWJs7uOOuwN1xiz+dJoFNMCPkveheP3EnrBr3
+Ow7d+RGl
+=f0ru
+-----END PGP SIGNATURE-----
+
+--7/p5iy2fW/N+wp71--
