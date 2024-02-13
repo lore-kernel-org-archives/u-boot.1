@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D816C4829A
-	for <u-boot@archiver.kernel.org>; Tue, 13 Feb 2024 08:22:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A21C1C48260
+	for <u-boot@archiver.kernel.org>; Tue, 13 Feb 2024 08:28:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B37287D2C;
-	Tue, 13 Feb 2024 09:22:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DE68D87D1F;
+	Tue, 13 Feb 2024 09:28:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="ltGAV489";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="zMwjg44w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A90C87D2C; Tue, 13 Feb 2024 09:22:41 +0100 (CET)
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [IPv6:2a00:1450:4864:20::12a])
+ id 9CB6087D38; Tue, 13 Feb 2024 09:28:27 +0100 (CET)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DCD3387D37
- for <u-boot@lists.denx.de>; Tue, 13 Feb 2024 09:22:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 33C9D87CDC
+ for <u-boot@lists.denx.de>; Tue, 13 Feb 2024 09:28:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-511972043c3so719099e87.1
- for <u-boot@lists.denx.de>; Tue, 13 Feb 2024 00:22:35 -0800 (PST)
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-337d05b8942so3386784f8f.3
+ for <u-boot@lists.denx.de>; Tue, 13 Feb 2024 00:28:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1707812555; x=1708417355;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1707812902; x=1708417702;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:message-id:date:references
  :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=nYpaD7O5xWMOmbg970skDbUk6kQuzuztgEvd+Biu0m8=;
- b=ltGAV489cwqSl8yV2GusUsRtolN+e78EOQV3Nn2ukObN4xfJ8LGFILb4YUay8Nhvog
- 93KXXj1kCNbOqnTBfM8N21eIFAFdMp4Xv9REtrkYFh4lz5Y12JqF7kmB/sq68sibkIkm
- aFolhCWAEOPhUFODUBu1xNvp/VOfnTvw4uvYwqxTS6mAEH/JyngRJ30vJcNigqpp8czG
- XliUre7LgVCpNBS5HgqiR5mBOBnUERUZ5CxDTfdwKBRT52FIrsNt+gS03yn6KQBn3lYD
- 6OsTR1G1Bjm+ARGD60VWgTvlT1v0ECc5YIILYHq7WDXe4BGw21XI7HjL5HBX63QRnSI6
- bZQA==
+ :reply-to; bh=ncFcEWll8pMU1+aQ5DkZUqDqWRE78XCIGIqwVGyRvqM=;
+ b=zMwjg44wPWmX94tUPXss50/VtsNXyX552U3o3fhOsDIh+IIa+zjz2ex1ISXs3jLLTk
+ BD1z9Ez2CwChecEcOwnbpEGAVFFlhrhoea4RDG+bWjCCt1cY5o8wo5zTMC0qkjOfXkfa
+ HCmP5ktAdBTt4x69RLS6vnSoNswU8Yram9nzMiwiN3NVCXG7FVqvVlqzd3TUjhFfi2MN
+ JRZwNa8Q4vr/IE9nMNkn0whSsOdZCSBid8807QgQDXRtormQk0yvBgoJLLIWL0p1lkay
+ 1DsjfWZDhfF8huiErwHu3RuMSGesXZ6eUeWLlZPM39YLc5LF6LTEPghh3Z4TRpQjWqpZ
+ Em9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707812555; x=1708417355;
+ d=1e100.net; s=20230601; t=1707812902; x=1708417702;
  h=content-transfer-encoding:mime-version:message-id:date:references
  :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=nYpaD7O5xWMOmbg970skDbUk6kQuzuztgEvd+Biu0m8=;
- b=CHlWrfY+3rE1SFvw0qJpbtTad/FkOzcAVLbQLBpygFa6zD0k8nXEs47l2VkwV3IGLk
- cvJoTUuphdDF3O4LcoWp6soZHmnl0A863G/sOnt/Mqlbtm46OtnZS8dsJnKgfsQPBRdk
- htnpkGkMYzyF4SSwZsWcbUtaOeDYuy6H/uj6HJWyZctx2rndvDD1irbMqrNmVahbolkJ
- BAJbBUDm+HDQgigq+DuAncNMXbJbeuUPzdbSPS/HFUyS6bZsIqPU4mw8fsctjBqJw19A
- MbdxGaKX/4wmXGkPIWZbr6A+OQrsPFzFKLIJRqKcjaEoBVmPIq0wYnVcI6bsxwznkh4h
- g0ng==
+ bh=ncFcEWll8pMU1+aQ5DkZUqDqWRE78XCIGIqwVGyRvqM=;
+ b=KxBDYWxvIjcy5c4D94Z7ylSMs9jS8FdOdJJ8xXF9y0aWrk2sOhIy2e1K4m5tgKrcQt
+ cgqacHa5qrpxL/FC64B32GVnkuc7/orsrYWuetndo6Ts+91iDZZ9xfxTQpEzoOEswGp6
+ QKNIBNUkzK6HX9tjkUZdAeRrkck0+EIz1ed8FzZOP3/GP+PuP4v9a+kt18LcGg3urcsO
+ k0WO4kaaHiUG0QgXxH/GRDElXDD5ozTxSooyNshwE557QZnMdlqkoUgmhTt3RVAeS/ye
+ UZPQRqQyNq1cYQhcB/s2HyCQ47wKH1lMf+6NGXOGorf681iBtGcgMuNorXzpDQID1NsP
+ d13Q==
+X-Gm-Message-State: AOJu0YxQ3sZUWO8rAHP6rfgQ38Xsd3Dxi2WkVKH6JnMjbOQq5fI9wnmo
+ j6h8BLSBSBEHPFfZmt7HXSVM/rPuX917ftvBeKuf4pWHflii3DCyyUzK1O148Ls=
+X-Google-Smtp-Source: AGHT+IHLQh4UykOAF2+b3v8mUXVH3tCcCFIB9lnx9mTuZ6odkgmMsSJ03I5AFsv2+6nMCZzxnTvkxg==
+X-Received: by 2002:adf:fd10:0:b0:33b:4f10:f2b8 with SMTP id
+ e16-20020adffd10000000b0033b4f10f2b8mr5351167wrr.43.1707812902552; 
+ Tue, 13 Feb 2024 00:28:22 -0800 (PST)
 X-Forwarded-Encrypted: i=1;
- AJvYcCUQ1Q6sk2BDRkBaSIegvH1tvcehKielIHPBat3YpbVLZYcGcFTaFV9eVI/n3RdhcDhq2fy6r3W81ITtIiml4zokf9WtIA==
-X-Gm-Message-State: AOJu0YyvgOHyRnbxQDFlLrXhefolYxr04Tz2v+V6P52ocpNoiFDVFQNJ
- ycrisiUPfpW4EUST81LLoS22jh3s5DUC9vc6pOkS/jkDgXqKjovcZoryioSPQnk=
-X-Google-Smtp-Source: AGHT+IEW0jP42dt0e/6JxuxdifxXyFW7osSaVGhOso82WSCz6hb0DzH14KaffYJGWAYroOzzQgvmgA==
-X-Received: by 2002:a05:6512:5c9:b0:511:628b:e892 with SMTP id
- o9-20020a05651205c900b00511628be892mr5615800lfo.18.1707812555168; 
- Tue, 13 Feb 2024 00:22:35 -0800 (PST)
-X-Forwarded-Encrypted: i=1;
- AJvYcCWe0dcFy0/Do+U2zCsMiJfFhIwCezE5xdJ/P9xv5VqWkmuDr1N9EY5yXzuRYdzdgHy7rv1txjK6V6+PAn308EYoBHL79uTUFxYFZHNSVYlMGbMvpKALICnh
+ AJvYcCUWs0H4Sos15pJwJ5YU250aVxSIAHMvXM6pA5TQYUFGpGfd/YAmgDX/by3W1C9TyKiUioFCWG2cDsLU2Dr5jEgYUxP+DlJcIWxI33sEIwI6yoUjAV/uWG+gNS6AlP+uSKrvTi3OTwApIYaOSW3rI7VPEdpTflqbdKTLPy50ZK0LZwaZ7ctAGKotJkZqbEzbCAaSfQ5W9Dwoh1gNpMJbajTkozb/MZnY9YcCy9eiws1VRAUhsU50bPGiJFle6sMc/oQbG1AHid5GPNYXx7DOQy4//Oh9abYeM/O9G12BtIn+8XeZSZ4EkumjrphAWwzuAL6HYefPwYGg+WKv+Ja2bJU7cXZgFHTizw==
 Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- az6-20020a05600c600600b00411c6c0dbafsm520761wmb.47.2024.02.13.00.22.34
+ i14-20020a5d558e000000b0033929310ae4sm8884836wrv.73.2024.02.13.00.28.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 13 Feb 2024 00:22:34 -0800 (PST)
+ Tue, 13 Feb 2024 00:28:22 -0800 (PST)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 To: Igor Opaniuk <igor.opaniuk@foundries.io>, u-boot@lists.denx.de
-Cc: Igor Opaniuk <igor.opaniuk@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH v2 7/7] doc: android: avb: sync usage details
-In-Reply-To: <20240209192045.3961832-8-igor.opaniuk@foundries.io>
-References: <20240209192045.3961832-1-igor.opaniuk@foundries.io>
- <20240209192045.3961832-8-igor.opaniuk@foundries.io>
-Date: Tue, 13 Feb 2024 09:22:33 +0100
-Message-ID: <87bk8kg4dy.fsf@baylibre.com>
+Cc: Igor Opaniuk <igor.opaniuk@gmail.com>, Abdellatif El Khlifi
+ <abdellatif.elkhlifi@arm.com>, Frieder Schrempf
+ <frieder.schrempf@kontron.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Kever Yang <kever.yang@rock-chips.com>, Manorit Chawdhry
+ <m-chawdhry@ti.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, Simon
+ Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: Re: [RESEND PATCH v1] MAINTAINERS: add custodian tree info for AVB/AB
+In-Reply-To: <20240213073638.1125429-1-igor.opaniuk@foundries.io>
+References: <20240213073638.1125429-1-igor.opaniuk@foundries.io>
+Date: Tue, 13 Feb 2024 09:28:21 +0100
+Message-ID: <878r3og44a.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -99,60 +101,43 @@ Hi Igor,
 
 Thank you for the patch.
 
-On ven., f=C3=A9vr. 09, 2024 at 20:20, Igor Opaniuk <igor.opaniuk@foundries=
+On mar., f=C3=A9vr. 13, 2024 at 08:36, Igor Opaniuk <igor.opaniuk@foundries=
 .io> wrote:
 
 > From: Igor Opaniuk <igor.opaniuk@gmail.com>
 >
-> Sync usage info with the one cmd/avb.c.
+> Add information about a custodian tree [1] for AVB/AB, which is
+> maintained by Mattijs Korpershoek.
 >
+> [1] https://source.denx.de/u-boot/custodians/u-boot-dfu
 > Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
 
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
 > ---
 >
-> Changes in v2:
-> - Address Mattijs comment about usage info, sync with cmd/avb.c
+>  MAINTAINERS | 2 ++
+>  1 file changed, 2 insertions(+)
 >
->  doc/android/avb2.rst | 16 +++++++++++-----
->  1 file changed, 11 insertions(+), 5 deletions(-)
->
-> diff --git a/doc/android/avb2.rst b/doc/android/avb2.rst
-> index a072119574f..4aca7a5c660 100644
-> --- a/doc/android/avb2.rst
-> +++ b/doc/android/avb2.rst
-> @@ -38,16 +38,22 @@ AVB 2.0 U-Boot shell commands
->  Provides CLI interface to invoke AVB 2.0 verification + misc. commands f=
-or
->  different testing purposes::
->=20=20
-> -    avb init <dev> - initialize avb 2.0 for <dev>
-> -    avb verify - run verification process using hash data from vbmeta st=
-ructure
-> +    avb init <dev> - initialize avb 2 for <dev>
->      avb read_rb <num> - read rollback index at location <num>
->      avb write_rb <num> <rb> - write rollback index <rb> to <num>
->      avb is_unlocked - returns unlock status of the device
-> -    avb get_uuid <partname> - read and print uuid of partition <partname>
-> +    avb get_uuid <partname> - read and print uuid of partition <part>
->      avb read_part <partname> <offset> <num> <addr> - read <num> bytes fr=
-om
-> -    partition <partname> to buffer <addr>
-> +        partition <partname> to buffer <addr>
-> +    avb read_part_hex <partname> <offset> <num> - read <num> bytes from
-> +        partition <partname> and print to stdout
->      avb write_part <partname> <offset> <num> <addr> - write <num> bytes =
-to
-> -    <partname> by <offset> using data from <addr>
-> +        <partname> by <offset> using data from <addr>
-> +    avb read_pvalue <name> <bytes> - read a persistent value <name>
-> +    avb write_pvalue <name> <value> - write a persistent value <name>
-> +    avb verify [slot_suffix] - run verification process using hash data
-> +        from vbmeta structure
-> +        [slot_suffix] - _a, _b, etc (if vbmeta partition is slotted)
->=20=20
->  Partitions tampering (example)
->  ------------------------------
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 46ba17647f3..32f3ee30710 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -62,6 +62,7 @@ M:	Igor Opaniuk <igor.opaniuk@gmail.com>
+>  M:	Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>  R:	Sam Protsenko <semen.protsenko@linaro.org>
+>  S:	Maintained
+> +T:	git https://source.denx.de/u-boot/custodians/u-boot-dfu.git
+>  F:	boot/android_ab.c
+>  F:	cmd/ab_select.c
+>  F:	doc/android/ab.rst
+> @@ -72,6 +73,7 @@ ANDROID AVB
+>  M:	Igor Opaniuk <igor.opaniuk@gmail.com>
+>  M:	Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>  S:	Maintained
+> +T:	git https://source.denx.de/u-boot/custodians/u-boot-dfu.git
+>  F:	cmd/avb.c
+>  F:	common/avb_verify.c
+>  F:	doc/android/avb2.rst
 > --=20
 > 2.34.1
