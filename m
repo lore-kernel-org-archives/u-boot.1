@@ -4,87 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D1E2C4829A
-	for <u-boot@archiver.kernel.org>; Tue, 13 Feb 2024 13:32:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75258C48260
+	for <u-boot@archiver.kernel.org>; Tue, 13 Feb 2024 14:08:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC5C487D64;
-	Tue, 13 Feb 2024 14:32:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id B178087CEC;
+	Tue, 13 Feb 2024 15:08:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gehealthcare.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="haCu+0Fg";
+	dkim=pass (2048-bit key; unprotected) header.d=gehealthcare.com header.i=@gehealthcare.com header.b="ioosmlWL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C205E87D76; Tue, 13 Feb 2024 14:32:07 +0100 (CET)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id ADF6687D66; Tue, 13 Feb 2024 14:17:21 +0100 (CET)
+Received: from mx0a-00176a03.pphosted.com (mx0b-00176a03.pphosted.com
+ [67.231.157.48])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E3B5187D64
- for <u-boot@lists.denx.de>; Tue, 13 Feb 2024 14:31:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 80E5487CEB
+ for <u-boot@lists.denx.de>; Tue, 13 Feb 2024 14:17:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=gehealthcare.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-411a6ada28dso6365065e9.3
- for <u-boot@lists.denx.de>; Tue, 13 Feb 2024 05:31:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1707831111; x=1708435911;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=X3ViBsXIbPo4cQDSGoUQ/ELV2O9wGxWnbhmGyyEaZww=;
- b=haCu+0FgAKgpZUINmzoitV5uT/mguVJSdezvwlQFZfHD5PsRc5GgRL6p20atVqtbpF
- LKMFbA80hX/o7b3lSMeqCF9kZUUOz5ZMdv7YuHPRIfVFBx8YQNbIIndo83S+yMJTAD0W
- An+GkRAg/FqBODo9iWyhfPeTrVMKWFykaRDFTpr6U0OIPCYh2sqQhLy/xWcmoU7rMApH
- J14nl4fTm3iYc9puTeyaNv1LWiNZ70DLtuKz65Qh7TfSnDWKvNs8bHdaNmwS38T04UB+
- 1AlO4e7j8Lopp0S6UnHZTVHq/bXftKMGYPsogCxZwUpv/+KoFRGp03CrRqQhMqJlNJU8
- KWYg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707831111; x=1708435911;
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=X3ViBsXIbPo4cQDSGoUQ/ELV2O9wGxWnbhmGyyEaZww=;
- b=gi8YZk0vMW/sciTiamYpi8EnPKW/DLIXrGltpUCQEYbHCL305uvZyL200xA1Lhqq87
- wRWoSeuesLuwaYjJBlmJVtWgsp+sOx7emX3/RzULsBe8bEq6wJNFySNb2sIn0L6SNclo
- dc3egk4nPHZ6ZId2GDQR/JRSooQRybb+PDEcmMRX7DPyFGW7+RjYnI/5Sox4POVbFF1p
- m3ovTRdQPjnVPUymexyEPHqK9QF/q0DbNHDD3eyQP/dSDEwaqgtLg4Df6IvejqNli4RU
- C9SG7dpIRy9zH41sNcQhorMtuV4jEkDpETQXWfWijtIWxfWkAnWuE2/fogij1BAyLMPo
- 29SQ==
-X-Gm-Message-State: AOJu0Yzyr/ezgZSp+t7h//kHIMOhDe3yEZJLkGF8VfInCOAlV3P0LMO1
- 8gmJhWyhOe/Y/+Dnf4MiJ5CdKVQ0inWONdjBnG1DkrOM1LXdkyAx9T0W3VENnVU=
-X-Google-Smtp-Source: AGHT+IHo1om30flNhGc8Q4aADzzbqXt573L1ZmhzHrzzekOkwn6jycBQ930rCLa7n1h+r8vWCKC9KA==
-X-Received: by 2002:adf:f787:0:b0:33c:e2ba:99c5 with SMTP id
- q7-20020adff787000000b0033ce2ba99c5mr417320wrp.62.1707831111291; 
- Tue, 13 Feb 2024 05:31:51 -0800 (PST)
-X-Forwarded-Encrypted: i=1;
- AJvYcCVzh/EWSLtSH2KcWm+R9iNCpgdUsxM+rhD3OJ48ri7tJwTzUEWHl9mR874+COBtk77VzJ9Q7iftAauq7J6uS+XydDGsWOaj29WjuM/Npts9jm0hntqwxa4rcuf96wpIsWs/pUjySUdHmS1Qx46WhWyqT9REw1aVQ116GbErmS8hF4q/MtktL2oYK8iBKQOmjNFzTuFgg7rzYdX7mKbTQadPMlRua278kYTV
-Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- by19-20020a056000099300b0033b79440fa9sm7358977wrb.111.2024.02.13.05.31.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 13 Feb 2024 05:31:50 -0800 (PST)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Igor Opaniuk <igor.opaniuk@gmail.com>
-Cc: Dan Carpenter <dan.carpenter@linaro.org>, Igor Opaniuk
- <igor.opaniuk@foundries.io>, u-boot@lists.denx.de, Ivan Khoronzhuk
- <ivan.khoronzhuk@gmail.com>, Jens Wiklander <jens.wiklander@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH v2 1/7] common: avb_verify: don't call mmc_switch_part
- for SD
-In-Reply-To: <CAByghJa8QqYvU7hnYEwihhTBo=YAH1Ky9YtB95w0RQ0H0RW+KQ@mail.gmail.com>
-References: <20240209192045.3961832-1-igor.opaniuk@foundries.io>
- <20240209192045.3961832-2-igor.opaniuk@foundries.io>
- <b457cb25-ea09-4e27-85aa-0e97a5aa7fe0@moroto.mountain>
- <CAByghJYSy86JjsC2cvGA0-5RupogR-vkADwQ6f9vSRnW4LtcFA@mail.gmail.com>
- <87h6icg4sw.fsf@baylibre.com>
- <CAByghJa8QqYvU7hnYEwihhTBo=YAH1Ky9YtB95w0RQ0H0RW+KQ@mail.gmail.com>
-Date: Tue, 13 Feb 2024 14:31:49 +0100
-Message-ID: <87zfw4ebi2.fsf@baylibre.com>
+ spf=pass smtp.mailfrom=ian.ray@gehealthcare.com
+Received: from pps.filterd (m0048300.ppops.net [127.0.0.1])
+ by m0048300.ppops.net-00176a03. (8.17.1.24/8.17.1.24) with ESMTP id
+ 41DBgpxq001957
+ for <u-boot@lists.denx.de>; Tue, 13 Feb 2024 08:17:18 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ gehealthcare.com; h=from:to:cc:subject:date:message-id
+ :mime-version:content-type:content-transfer-encoding; s=
+ outbound; bh=0Yi28sjpUCNvnSmv5o7rpMvBgKwgN41qCgMjDhqWcOc=; b=ioo
+ smlWLdkEotysvD4bi7DRXrJqUnFrjxBwdm4AAXLJOCoYyKQSP0SBvX/duDoR4sPt
+ FuPSKgasjjBxdq9COCCItMhHwa0RJS93YghpK1NOGOGpHCUQnWZ22u9HFGIv1eGs
+ vanWGzEEte6udkzEajAYjNGsRBXYVN2mzq4qaG19r4Va4qpi9fOZsTcgGs2kOCKy
+ +sL5N/OAE8dB7DUq08fYyxc2bS2GT1rOyYJ84ve6Yb08x807CF029A2YN/KKdB/D
+ oEltHdDdc34jjunY3WdcGixAYC4NTsIk6RFR7PLx38n5k18u/SHIp1fcc8IufNqm
+ u8amDXtottN9B9LK3CA==
+From: Ian Ray <ian.ray@gehealthcare.com>
+To: sbabic@denx.de
+Cc: u-boot@lists.denx.de, ian.ray@ge.com, HuanWang@ge.com,
+ Ian Ray <ian.ray@gehealthcare.com>
+Subject: [PATCH] MAINTAINERS: Update after GEHC spin-off
+Date: Tue, 13 Feb 2024 15:17:06 +0200
+Message-Id: <20240213131706.64-1-ian.ray@gehealthcare.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-ORIG-GUID: sey6qSQoQe56sQU3M3fnascCklROyPXj
+X-Proofpoint-GUID: sey6qSQoQe56sQU3M3fnascCklROyPXj
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-02-13_07,2024-02-12_03,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxlogscore=778
+ mlxscore=0 bulkscore=0
+ impostorscore=0 malwarescore=0 clxscore=1011 phishscore=0 spamscore=0
+ priorityscore=1501 lowpriorityscore=0 suspectscore=0 adultscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2401310000
+ definitions=main-2402130104
+X-Mailman-Approved-At: Tue, 13 Feb 2024 15:08:18 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,82 +79,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Igor,
+Update our email addresses, from @ge.com to @gehealthcare.com, after GE
+HealthCare was spun-off from GE.
 
-On mar., f=C3=A9vr. 13, 2024 at 12:19, Igor Opaniuk <igor.opaniuk@gmail.com=
-> wrote:
+Remove Antti, who no longer works on the project.
 
-> Hi Mattijs,
->
-> On Tue, Feb 13, 2024 at 9:13=E2=80=AFAM Mattijs Korpershoek
-> <mkorpershoek@baylibre.com> wrote:
->>
->> Hi Igor,
->>
->> On lun., f=C3=A9vr. 12, 2024 at 09:05, Igor Opaniuk <igor.opaniuk@gmail.=
-com> wrote:
->>
->> > Hi Dan,
->> >
->> > On Mon, Feb 12, 2024 at 8:05=E2=80=AFAM Dan Carpenter <dan.carpenter@l=
-inaro.org> wrote:
->> >>
->> >> On Fri, Feb 09, 2024 at 08:20:39PM +0100, Igor Opaniuk wrote:
->> >> > From: Igor Opaniuk <igor.opaniuk@gmail.com>
->> >> >
->> >> > mmc_switch_part() is used for switching between hw partitions
->> >> > on eMMC (boot0, boot1, user, rpmb).
->> >> > There is no need to do that for SD card.
->> >> >
->> >>
->> >> Is this a clean up or a bugfix?  What are the visible effects for the
->> >> user?
->> > avb cmd fails for SD cards, as mmc_switch_part() fails after trying to=
- access
->> > EXT_CSD register, which obviously is not available.
->>
->> Does this means that we only need this patch to fix AVB commands when
->> booting from SD cards?
->>
->> If yes, I propose adding the following note to the commit message:
->>
->> "This fixes the avb command usage on on SD cards."
->>
->> If you agree, I can do this while applying.
-> Yes, could you please add to the commit message so I don't
-> send v3 for that (if there are no any additional objections/comments)
+Signed-off-by: Ian Ray <ian.ray@gehealthcare.com>
+---
+ MAINTAINERS                  | 2 +-
+ board/ge/b1x5v2/MAINTAINERS  | 4 ++--
+ board/ge/bx50v3/MAINTAINERS  | 2 +-
+ board/ge/mx53ppd/MAINTAINERS | 3 +--
+ 4 files changed, 5 insertions(+), 6 deletions(-)
 
-There are no additional objections, comments on my end.
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 46ba17647f..338b7b6348 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -453,7 +453,7 @@ F:	drivers/timer/mchp-pit64b-timer.c
+ 
+ ARM MSC SM2S IMX8MP SOM
+ M:	Martyn Welch <martyn.welch@collabora.com>
+-M:	Ian Ray <ian.ray@ge.com>
++M:	Ian Ray <ian.ray@gehealthcare.com>
+ S:	Maintained
+ F:	arch/arm/dts/imx8mp-msc-sm2s*
+ F:	board/msc/sm2s_imx8mp/
+diff --git a/board/ge/b1x5v2/MAINTAINERS b/board/ge/b1x5v2/MAINTAINERS
+index 3196ddbb51..7312f4be1a 100644
+--- a/board/ge/b1x5v2/MAINTAINERS
++++ b/board/ge/b1x5v2/MAINTAINERS
+@@ -1,6 +1,6 @@
+ GE B1X5V2 BOARD
+-M:	Huan 'Kitty' Wang <HuanWang@ge.com>
+-M:	Ian Ray <ian.ray@ge.com>
++M:	Huan 'Kitty' Wang <HuanWang@gehealthcare.com>
++M:	Ian Ray <ian.ray@gehealthcare.com>
+ M:	Martyn Welch <martyn.welch@collabora.com>
+ S:	Maintained
+ F:	arch/arm/dts/imx6dl-b1x5v2.dts
+diff --git a/board/ge/bx50v3/MAINTAINERS b/board/ge/bx50v3/MAINTAINERS
+index c165048336..53a8d88a90 100644
+--- a/board/ge/bx50v3/MAINTAINERS
++++ b/board/ge/bx50v3/MAINTAINERS
+@@ -1,5 +1,5 @@
+ GE BX50V3 BOARD
+-M:	Ian Ray <ian.ray@ge.com>
++M:	Ian Ray <ian.ray@gehealthcare.com>
+ M:	Martyn Welch <martyn.welch@collabora.com>
+ S:	Maintained
+ F:	arch/arm/dts/imx6q-b450v3.dts
+diff --git a/board/ge/mx53ppd/MAINTAINERS b/board/ge/mx53ppd/MAINTAINERS
+index 146a460e7e..19e4ea7593 100644
+--- a/board/ge/mx53ppd/MAINTAINERS
++++ b/board/ge/mx53ppd/MAINTAINERS
+@@ -1,6 +1,5 @@
+ GE PPD BOARD
+-M:	Antti Mäentausta <antti.maentausta@ge.com>
+-M:	Ian Ray <ian.ray@ge.com>
++M:	Ian Ray <ian.ray@gehealthcare.com>
+ M:	Martyn Welch <martyn.welch@collabora.com>
+ S:	Maintained
+ F:	arch/arm/dts/imx53-ppd*
+-- 
+2.39.2
 
-I will add this to the commit message when applying.
-
->
-> Thanks
->>
->> If not, we can keep the message as is.
->>
->> >>
->> >> regards,
->> >> dan carpenter
->> >>
->> >
->> >
->> > --
->> > Best regards - Atentamente - Meilleures salutations
->> >
->> > Igor Opaniuk
->> >
->> > mailto: igor.opaniuk@gmail.com
->> > skype: igor.opanyuk
->> > http://ua.linkedin.com/in/iopaniuk
->
->
->
-> --=20
-> Best regards - Atentamente - Meilleures salutations
->
-> Igor Opaniuk
->
-> mailto: igor.opaniuk@gmail.com
-> skype: igor.opanyuk
-> http://ua.linkedin.com/in/iopaniuk
