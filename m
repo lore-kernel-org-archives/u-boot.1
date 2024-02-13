@@ -4,68 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED03FC4829A
-	for <u-boot@archiver.kernel.org>; Tue, 13 Feb 2024 11:59:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D146AC4829A
+	for <u-boot@archiver.kernel.org>; Tue, 13 Feb 2024 12:32:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0977C87D72;
-	Tue, 13 Feb 2024 12:59:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D53C687BBA;
+	Tue, 13 Feb 2024 13:32:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Owh4W90b";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JA6oUFz3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C03C87D02; Tue, 13 Feb 2024 08:27:05 +0100 (CET)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id 2F5C387D64; Tue, 13 Feb 2024 13:32:04 +0100 (CET)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 86C17871C0
- for <u-boot@lists.denx.de>; Tue, 13 Feb 2024 08:26:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5324D875E9
+ for <u-boot@lists.denx.de>; Tue, 13 Feb 2024 13:32:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=cedric.blancher@gmail.com
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-5601eb97b29so7125222a12.0
- for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 23:26:55 -0800 (PST)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-55fcceb5f34so4923292a12.3
+ for <u-boot@lists.denx.de>; Tue, 13 Feb 2024 04:32:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1707809214; x=1708414014; darn=lists.denx.de;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=Y0uHo5oJF8obb5StULaxodyFhHVmuZx/ic9dcvY35HI=;
- b=Owh4W90bkphE42GHwq3YYB8Xwnq7f87dvqmbpxK387JK1P3LjQOIeWgYQO8fzvax00
- ZoitMBaH4+2NPzqMp6BOln4ptYWUY11THkGft+7MVuvIEN5VT6l70Lc+rPoS1FRBLAWs
- lAT8nDt/UEM8P4R1lrmKIlzKFzXN5B219JfzzqnD1f62dCIuCQpsMqmhCajKxYZiX1r1
- tx62pl6hlNtGFHXHCix2MCVT1ODSmGg1VeDG9xyVx3lcFi84wOMkJoonA3Qv6XCPNZBt
- DMt7WjPMhRqvLMMv1Lq+EwhWo9eDBqW+SOwmtyrKXvjyKVOOT2ninc1vXZRFDuC51+iU
- l0bw==
+ d=gmail.com; s=20230601; t=1707827522; x=1708432322; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=/B2gowrtG7sbbrsD2s1U5QDalm62RcVm4EbKlOJ/4yk=;
+ b=JA6oUFz3mZ+TQrNJP3X85PHXCG/GlgRU/gIp9PC7hmMVrFAt7EF2kJ1xKt646PfkFO
+ rTnaSEzqab1yQF3XfQbc95HP9A392/CFPlu75ll2c5iqQAInz1DFoZbfZRKmUD0SAoRo
+ X3NQzr4cSWggPK/EIVT3nGSn1/jWae7X7afKjt5tEJ79RA+m3cEZ1vbFvNyYpFQYU7K6
+ 3SVY01Ri195F3BuXGqdJQdqYNgf7IZ7TZJfpByk18qPu+lhF04IRmZiyyu2A7bX8xIZQ
+ IGthav6tL9B5gGhCS64Juxlq1357rl78GnqxQ1ER0uKIHRrJg4VIRqPxFPpB1XSFuCPt
+ k4Zg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707809214; x=1708414014;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Y0uHo5oJF8obb5StULaxodyFhHVmuZx/ic9dcvY35HI=;
- b=B0KoDCqu8e7TKKwWC1STmm2MC5Lh3Mdi6IYIIsDiJ54zNSM/OIZ2YZ7lnvsj1xaxt6
- b1/Dr+SwZrKwGUUaNC9d4/I5gZTT2WiHaFTeLkzjpveZeT9t1kmjJEDyq5CZvf7TeCyB
- VVG7kh/YRbdiOccsrXA2ToGrbXVAcG0xtBqSYJA/FIlsUY6tX4lOkKzeBisL6jSAHvba
- 3WblxY/rQDlqyOnTrAxzWPV+dvJ4h99X6zFs+hM3Kzm6gXATUXF8kpZP+tZhP0I5SWyy
- BatlnX29HtDW+uPmi74DrT7v8Jqz42hxV7tVrJ8v9SllZ4Jm+hqcyfTdT/ud7ktKG8cg
- vDgQ==
-X-Gm-Message-State: AOJu0Yyp67fnT1slQaaXzQf/ch6KfF59fZkCzbtSfWzfpZnnidXNirQl
- zpfBOooTgiDn5WoSTRzP0cHvP4PQgoBKjxhB4cv/PLVpzYueffwipYhIAQHXrIdxKU5xEKF36zz
- SrhGiEd9TWkBt9S70uToRMVKoVYguKaVHkUEm7A==
-X-Google-Smtp-Source: AGHT+IE21DJNtOyOb75+QGtLyLYyoQ75qOgij64cCllEanEUox3gVncaO5n0up0o2biFlUkIt5KnZXfEfL0koRBVZ/A=
-X-Received: by 2002:a05:6402:3706:b0:561:aa6:32f5 with SMTP id
- ek6-20020a056402370600b005610aa632f5mr1585281edb.18.1707809214603; Mon, 12
- Feb 2024 23:26:54 -0800 (PST)
+ d=1e100.net; s=20230601; t=1707827522; x=1708432322;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=/B2gowrtG7sbbrsD2s1U5QDalm62RcVm4EbKlOJ/4yk=;
+ b=gJewVLU/52Z451FKyDQzEyDmL3U8r+j0j5Lba9A8f7mvFq8tOu1ladYnUcguYlCrwx
+ ACu+vSJrz6lnItJK6K8M1Z269jg9xilXDkhlTcuI32f9LgWqsvtBwQnDXaYgvgguYYXV
+ s4ikbhzwOMpvYWiJKh3IppJL3V+s4rSkYHQ6llegrQ9fJG7V+DzfMnNHWVd0/q2xBzL4
+ rC6IdCViHf8xRvUUd1LzqWEPYijrE0SXsAEozjjrR7FibAhIC6rYWjTxlJU5fPuu2TMN
+ zSL+xXccD6RUXTR+IeA289cr6y1AnHVhrutRm3VTVjj+1Mhya0k299xJ0Dh84K/0EVie
+ B2yg==
+X-Gm-Message-State: AOJu0YxkSuF6L0K2G9qrLDzu2Sgg34otyWgG321qEb2FEIOW1gQRRrix
+ 8ql0Y6SMiTBmr8Uf40tqWLJuRMQNUejK1oWmlLaiZo3UEMfajWyUwwvvgNsvLT3FQ1KLy3615kT
+ /YNPKPuLu+Xfv7yqufITHMxXFRDY=
+X-Google-Smtp-Source: AGHT+IHKVi3p0VF/vDfxOrHPxy/XWU9+rPzbHItXKYOtQpzT50wFcEXwUcZzFHsYgH9oBcbcM1yMKVznzjptGrRLok8=
+X-Received: by 2002:a05:6402:31f9:b0:560:bbcf:1f45 with SMTP id
+ dy25-20020a05640231f900b00560bbcf1f45mr6185600edb.5.1707827521189; Tue, 13
+ Feb 2024 04:32:01 -0800 (PST)
 MIME-Version: 1.0
-From: Cedric Blancher <cedric.blancher@gmail.com>
-Date: Tue, 13 Feb 2024 08:26:00 +0100
-Message-ID: <CALXu0UeJvw5UR2MDqNAi5s8R7HT22kSYr0MMoEdUgHSff9=geA@mail.gmail.com>
-Subject: Booting from NFSv4 file system?
-To: u-boot@lists.denx.de
+References: <CALXu0UeJvw5UR2MDqNAi5s8R7HT22kSYr0MMoEdUgHSff9=geA@mail.gmail.com>
+In-Reply-To: <CALXu0UeJvw5UR2MDqNAi5s8R7HT22kSYr0MMoEdUgHSff9=geA@mail.gmail.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Tue, 13 Feb 2024 12:31:50 +0000
+Message-ID: <CALeDE9ML1WqE6fjtPwS3DA4OEcdA2fFBH60eUrkvH3FJB1W+LA@mail.gmail.com>
+Subject: Re: Booting from NFSv4 file system?
+To: Cedric Blancher <cedric.blancher@gmail.com>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Tue, 13 Feb 2024 12:59:13 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,14 +85,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Good morning!
+On Tue, 13 Feb 2024 at 12:18, Cedric Blancher <cedric.blancher@gmail.com> wrote:
+>
+> Good morning!
+>
+> Does U-Boot support booting from a NFSv4 file system? Explicitly
+> neither NFSv2 or NFSv3 will work in our case, as both protocol
+> versions are depreciated and no longer allowed by our IT department.
 
-Does U-Boot support booting from a NFSv4 file system? Explicitly
-neither NFSv2 or NFSv3 will work in our case, as both protocol
-versions are depreciated and no longer allowed by our IT department.
-
-Ced
--- 
-Cedric Blancher <cedric.blancher@gmail.com>
-[https://plus.google.com/u/0/+CedricBlancher/]
-Institute Pasteur
+Not that I am aware of, at least not upstream, there is work being
+done to support booting using UEFI HTTP boot if HTTP is more straight
+forward for network booting.
