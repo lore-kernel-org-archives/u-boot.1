@@ -4,88 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD961C4829A
-	for <u-boot@archiver.kernel.org>; Tue, 13 Feb 2024 17:16:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF394C48260
+	for <u-boot@archiver.kernel.org>; Tue, 13 Feb 2024 17:22:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F1A8487D99;
-	Tue, 13 Feb 2024 18:16:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 107EC87DA4;
+	Tue, 13 Feb 2024 18:22:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=fris.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YFgKns56";
+	dkim=pass (2048-bit key; unprotected) header.d=fris.de header.i=@fris.de header.b="dFfW1zbh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B2C1787D66; Tue, 13 Feb 2024 18:16:54 +0100 (CET)
-Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
- [IPv6:2607:f8b0:4864:20::1031])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 94E9387DA1; Tue, 13 Feb 2024 18:22:56 +0100 (CET)
+Received: from mail.fris.de (unknown [IPv6:2a01:4f8:c2c:390b::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB25987D90
- for <u-boot@lists.denx.de>; Tue, 13 Feb 2024 18:16:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A4AFF87D35
+ for <u-boot@lists.denx.de>; Tue, 13 Feb 2024 18:22:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x1031.google.com with SMTP id
- 98e67ed59e1d1-292655cb454so429852a91.0
- for <u-boot@lists.denx.de>; Tue, 13 Feb 2024 09:16:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1707844608; x=1708449408; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=yLl3lAf1h18bC+930qYphJRDX2mUrKR7fSnNG9cfmbQ=;
- b=YFgKns56uBOmNFBf7Lgi8wZRVkolaECpzOTpXJOAyHrVuYjpWpymwNkiHYp8gSlIJG
- yRPuXclqa2a2qwHdBSkexV61P2c1apUzWmZxsp9wG+chb5UcaZg2FuFJYetvtcGTX2AU
- 2SBd6RfpPA52UzYZwKbp2Jlw6mELzWPLNavThMwo/cGEWXS0f7/Lx5Nw4Xk9006hMGj+
- Bo6ZW+DFvaJS8ZJfccSzS8RbyB07tUoiFRHJZF4LgYlLcjEQyO8hDHbyrJ0hdQ3g7bpT
- to6bUSGyMvmIHvCEdZn6BknIIR0q5kJeoWpkZ07mhz+jLhAw0O5LJFR/n+pB3pNlgZ/x
- /4kg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707844608; x=1708449408;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=yLl3lAf1h18bC+930qYphJRDX2mUrKR7fSnNG9cfmbQ=;
- b=cbq0oDdBemGoFoWgOGIyJf+Pzcy5s6vrPkwrbtgIZOHxFGt2k0GMxIKvbKfO19BBc0
- KB5RLIqojSYDHcL+c017XFSbvxG8emd2N+GIgOpgHsZSn/DxCyZofE3fb1SJCKArBI6r
- 0sZDRC+dP/oofOT1NDM+hDV7nkiInh+wBqtrB9g/OkNg8i18SEhrWuQa8dzhjzT8atzw
- YsTs0qpcXotulJ4tcZlAkVlGS6NoCObVeszBKMWdQVRRUf2dO8x6MzSfpD4o7RFAb0U9
- F5poTjwAAia622hKOIYybzegmQPQwV+D0t9rHg4xi6psjWCtDVYXiiDTHmaGEBOhIt5b
- myow==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVReTdSShPqGs46kZW3eMawmvUtJZ4P1kvvIincrwFYSl812utj0InZRi7CLt5ky614PwONUR6ypnLH+JenWHMoLLYVrw==
-X-Gm-Message-State: AOJu0YzEvcu5yTZFFwLtHBaN+jbraTF8z8XsY+OeVZJqetvVy7UlFxf4
- YzHaYqmPdIEQ5hQFYpUW4qoZJTB/XOEA7vH/oEwWdvYrF8r91TY26ifsdwp+LNix2fyoxlFxOkP
- 0fOaMFpX4UczxEaDqVrDAgsFvwjhs5w7aAz0=
-X-Google-Smtp-Source: AGHT+IE4b2KkmIlm54FPzTd+OC8maX1CsLvCWi+kV8SVXv5/7urcuRsP2jG4LyzmTsX8xPDFoxGQ71e4cINtfXi8yBg=
-X-Received: by 2002:a17:90a:1283:b0:298:b4da:f90e with SMTP id
- g3-20020a17090a128300b00298b4daf90emr114228pja.1.1707844607957; Tue, 13 Feb
- 2024 09:16:47 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=fris.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=frieder@fris.de
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 28D9EBFC06; Tue, 13 Feb 2024 18:22:37 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fris.de; s=dkim;
+ t=1707844963; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=KBEO7ORgeEy4Q2vLF13/qD9KIlZiB26KRF4mrsROmZg=;
+ b=dFfW1zbh9n6Kv5gyQyAgAJ60VGcFIbiFME3zcRr8GIgh2psFh+VKbOzG4KspbKOsen8G/Y
+ GlJXBPGUHA1LLfMFNxarzaDsQWb4fRt9mIuw9/m+CuUIiYXWi0pKUQNQws9alZJ5e3GmPj
+ vFyHEwHnU4jBYSu8Xc4U4FrALRJFYkYYoG0it1fGiyPorWdC9Yx9igYxdSK9sBi3n3z5Iq
+ lhRi1Q/08x1pb6Ch8B09YJZ95fd8s5SEtpyCuIZK60ePsbt5Xyes5YRpN4AMC+oJpvd3ef
+ DkFlh3Qja0+u663Wt52WfhrevDGaIiyetQi2k7aZsRgsiOhS2ZZ8MICKr0yh6w==
+From: Frieder Schrempf <frieder@fris.de>
+To: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de, Vignesh R <vigneshr@ti.com>
+Cc: Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Fabio Estevam <festevam@gmail.com>,
+ Andre Przywara <andre.przywara@arm.com>, Bruce Suen <bruce_suen@163.com>,
+ Jim Liu <jim.t90615@gmail.com>, Jit Loon Lim <jit.loon.lim@intel.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Neal Frager <neal.frager@amd.com>,
+ Nishanth Menon <nm@ti.com>, Ssunk <ssunkkan@gmail.com>,
+ Teik Heng Chong <teik.heng.chong@intel.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Subject: [PATCH v2 1/3] mtd: spi-nor-ids: Add support for ESMT/EON EN25Q80B
+Date: Tue, 13 Feb 2024 18:22:18 +0100
+Message-ID: <20240213172226.151181-1-frieder@fris.de>
 MIME-Version: 1.0
-References: <20240208165849.104787-1-frieder@fris.de>
- <20240208165849.104787-2-frieder@fris.de>
- <CAOMZO5C3JVhG4hfe3F6xfERJidDUt=Ow5eB+LNFx1EWp07wysw@mail.gmail.com>
- <69eca99a-e760-481d-817f-b312c71cc10b@kontron.de>
-In-Reply-To: <69eca99a-e760-481d-817f-b312c71cc10b@kontron.de>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 13 Feb 2024 14:16:35 -0300
-Message-ID: <CAOMZO5Ca6gyU=2fEQ=EbQeqXr2JREEjHh8fTZTEcu5S8GrzZaQ@mail.gmail.com>
-Subject: Re: [PATCH 2/3] board: Add support for Sielaff i.MX6 Solo board
-To: Frieder Schrempf <frieder.schrempf@kontron.de>
-Cc: Frieder Schrempf <frieder@fris.de>, Stefano Babic <sbabic@denx.de>,
- Tom Rini <trini@konsulko.com>, 
- u-boot@lists.denx.de, Christian Hewitt <christianshewitt@gmail.com>, 
- FUKAUMI Naoki <naoki@radxa.com>, Hai Pham <hai.pham.ud@renesas.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>, 
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, Marek Vasut <marex@denx.de>, 
- Michal Simek <michal.simek@amd.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Simon Glass <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Tianling Shen <cnsztl@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,24 +67,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Frieder,
+From: Frieder Schrempf <frieder.schrempf@kontron.de>
 
-On Tue, Feb 13, 2024 at 1:58=E2=80=AFPM Frieder Schrempf
-<frieder.schrempf@kontron.de> wrote:
+The datasheet can be found here:
+https://www.esmt.com.tw/upload/pdf/ESMT/datasheets/EN25Q80B_Ver.E.pdf
 
-> I understand the reasoning and I can change that if you insist. But I'm
-> not really happy about it as we already use the flash.bin as common name
-> for the binary across all platforms downstream. Also in our upstream
-> config for the i.MX6UL/ULL SoMs we already use this pattern (see [1]).
+Signed-off-by: Frieder Schrempf <frieder.schrempf@kontron.de>
+Reviewed-by: Fabio Estevam <festevam@gmail.com>
+---
+Changes in v2:
+* Add R-b tag from Fabio (Thanks!)
+---
+ drivers/mtd/spi/spi-nor-ids.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-Ok, I just wanted to point out that there was an alternative, but if you pr=
-efer
-to go with the binman approach in your platforms, I am OK with that.
+diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
+index 38a287487ed..4e83b8c94c9 100644
+--- a/drivers/mtd/spi/spi-nor-ids.c
++++ b/drivers/mtd/spi/spi-nor-ids.c
+@@ -80,6 +80,7 @@ const struct flash_info spi_nor_ids[] = {
+ #endif
+ #ifdef CONFIG_SPI_FLASH_EON		/* EON */
+ 	/* EON -- en25xxx */
++	{ INFO("en25q80b",   0x1c3014, 0, 64 * 1024,   16, SECT_4K) },
+ 	{ INFO("en25q32b",   0x1c3016, 0, 64 * 1024,   64, 0) },
+ 	{ INFO("en25q64",    0x1c3017, 0, 64 * 1024,  128, SECT_4K) },
+ 	{ INFO("en25q128b",  0x1c3018, 0, 64 * 1024,  256, 0) },
+-- 
+2.43.0
 
-> > Does the 'reset' command work on this board?
->
-> No, I will fix it.
-
-Here is an example of how to fix it:
-https://gitlab.com/u-boot/u-boot/-/commit/dbc4814515d37a3d1c4bb237f4e1c16d1=
-f9e3736
