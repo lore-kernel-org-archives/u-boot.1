@@ -4,100 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2ED42C48BC1
-	for <u-boot@archiver.kernel.org>; Tue, 13 Feb 2024 10:35:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE221C48260
+	for <u-boot@archiver.kernel.org>; Tue, 13 Feb 2024 11:20:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4014187D37;
-	Tue, 13 Feb 2024 11:35:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=redhat.com
+	by phobos.denx.de (Postfix) with ESMTP id 2F0D487061;
+	Tue, 13 Feb 2024 12:19:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="bvNC72xX";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hIDTCf4E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7DC9F87CAB; Tue, 13 Feb 2024 11:35:11 +0100 (CET)
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5AE8587D10; Tue, 13 Feb 2024 12:19:58 +0100 (CET)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 101D787D37
- for <u-boot@lists.denx.de>; Tue, 13 Feb 2024 11:35:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A32EC86F67
+ for <u-boot@lists.denx.de>; Tue, 13 Feb 2024 12:19:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=redhat.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mzamazal@redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1707820505;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=+630eYzBqnOfq0uJ36XCxNBlk8zBk+MqhBxeIj2WgDI=;
- b=bvNC72xXOpDAwWvQETQ+/IHjhNQjG43T6NlLYxm4ZffcRcVVlg/8Uj37iVLzoJG/5Jy9q8
- denSit+URvukpQREUxQy1oJCnJ7/3O3spaPmtpbFv94ISiSiLpv46EePwA09eMnVx7g1Xy
- kQnWn5Sv268smurYLcwLoIR0Plx7syw=
-Received: from mail-ej1-f72.google.com (mail-ej1-f72.google.com
- [209.85.218.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-696-oys6zq_xP3KTNM6HMKoyaw-1; Tue, 13 Feb 2024 05:35:04 -0500
-X-MC-Unique: oys6zq_xP3KTNM6HMKoyaw-1
-Received: by mail-ej1-f72.google.com with SMTP id
- a640c23a62f3a-a3cfc0287faso23754666b.2
- for <u-boot@lists.denx.de>; Tue, 13 Feb 2024 02:35:04 -0800 (PST)
+ spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-410826218a7so4098485e9.1
+ for <u-boot@lists.denx.de>; Tue, 13 Feb 2024 03:19:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1707823189; x=1708427989; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=lrGpI2QCR1T3pU1vKQk3VWqSlnEJEUXF1Tc7cm6Hr6M=;
+ b=hIDTCf4EVOLYzgNDDlHrcGDWansLtvny+bPNACbAzlmxK5GMqI0KimyL12TmlKPsU0
+ K51Ztx00Qx3y8M72m6lxVlN4KBzsOdjVNZpOKNLzbHBIyvt+yaB6rKz8QbAhNHG6/jzz
+ fPOH3fKUVYrCXd373hwT3+XqGU5OsxmwPb5u7dUetqQqHP5SOM0UULvsV40vB9MExpI3
+ xb1LMPK6vQAjl0xRlrHXhorjqHz+IcMcVTvLz99IlMwhdW4OmTd2spjcwPgc63vuK8m6
+ Cgz2zC6CkU4FUJM7S1QQ91xbDT3Z1gqriVeyDKeMNVfT7bxY6zjiyai3ckoPMj6gbxLo
+ 9RWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707820502; x=1708425302;
- h=content-transfer-encoding:mime-version:user-agent:message-id:date
- :references:in-reply-to:subject:cc:to:from:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=+630eYzBqnOfq0uJ36XCxNBlk8zBk+MqhBxeIj2WgDI=;
- b=WNNdZJ30fPpMiZUZy57nUMOU5bDI2VZYlJT5xXiFEqLN5trUcZuSGacSGauu1Zmv3v
- 0b2eYDcn5ie3whiMOHJtQRBE7gj9I4AwQqLRip8vMNXLSbQkYIWG6YJ9pbl9Sw32jRe8
- ISxrk64osHwNwLCDiL0NjX9p9wwFs+9AjP7RTCdzkjb993/axhglgd8MuZaS9DMmd8F7
- SJS37xBSekT4Pf2aDacOy31Ah6y4lC3JO5q2m7FQVU3S275bi+fRfLbS52Hwad7aeevP
- aew0/zyG4HnPDvreRKc3ke7Cy5/gYbkd3tfVPHx/1U8MKPOufkcmlfAPNiWZAEGKT8G8
- kyFA==
+ d=1e100.net; s=20230601; t=1707823189; x=1708427989;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=lrGpI2QCR1T3pU1vKQk3VWqSlnEJEUXF1Tc7cm6Hr6M=;
+ b=l/21kljBAAzisxsGUEQ7QZ2PpmT7GEuNVu2D8HWbBvFWlCCBJTy1BdMJEHyz8nQyQF
+ 3gPX0+0nEb4eLo1Xv7z+qwn+h4ch1UHMZuUgy/PTovLWTsB8Z1/ULyRJDFQU9X0MzQqH
+ 8Ul79GQQYO1ZMMFe1pMQypxkTMcu+8cZK52QWmhmOHBB78cyVZ0MOP248B/T3ahyrVvs
+ mx8tFQlt9gLqmW7A7UMwxLQ8FViUS0k5iv6YoNMVAuZoHU9/HzKFM4KQnU3+9foLzItM
+ ef9U22dqd8uILHtJYJZ/inIcK2a19Zq0NEZ6pdaRPN8JZ/6mDy3OWpKPz8Iqy9Be8Xmg
+ jO4A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXYmNoiE45o3ou+FkRjwil/Ryzo1ayJ/fQbqDOXu0ly0o2c0tMTh+i3uGwWfBuueooCNDCjaDG56xeDd5S0qo2cw6/quA==
-X-Gm-Message-State: AOJu0YxIgesdWFAica03q+am7Yo0/orwbOwlZHBH2H4i4PacEJpfPD+Q
- PwvG85v0sDOQf8iewbQM9nBimctKNJpE1s5QewggFq7SaJh56nXeG9EFynfgyaz8HDJBXgpaWbJ
- PHdC5ziTnni46aZagsqF5DUCzxFhQJoBnw1G0Z6ntoFf7Jwi406TSjCfdc4XvzYaa7GKpNVBzMA
- K8q5QRi3crXr+h9T1Vd+i48jXaOQoBudZVpfU=
-X-Received: by 2002:a17:906:ccd6:b0:a3d:15f0:85cd with SMTP id
- ot22-20020a170906ccd600b00a3d15f085cdmr434980ejb.9.1707820502093; 
- Tue, 13 Feb 2024 02:35:02 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFYu79zCxMUqjhEIqN+oiSbYkX3n6dsWOpQHWjQfVodN+pKTzcHY406UO9SEFvXHCyS8BgQaw==
-X-Received: by 2002:a17:906:ccd6:b0:a3d:15f0:85cd with SMTP id
- ot22-20020a170906ccd600b00a3d15f085cdmr434957ejb.9.1707820501563; 
- Tue, 13 Feb 2024 02:35:01 -0800 (PST)
-X-Forwarded-Encrypted: i=1;
- AJvYcCVntqZ9wuwTqiu/e5pemQXrHQQm0OF8G71ayHG/zy0RtoDngDIu3HmiJGpiveQrRs8LH6c+ePwuUEn7TQ+HtPGHWCk9i2Rvlfh3DkVTOyHuQNrfofTJFna+Zfqa46wublmFzKTSKKc0FcUlVP3i
-Received: from nuthatch (ip-77-48-47-2.net.vodafone.cz. [77.48.47.2])
- by smtp.gmail.com with ESMTPSA id
- ps7-20020a170906bf4700b00a3c7fb8cc74sm1137901ejb.154.2024.02.13.02.35.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 13 Feb 2024 02:35:00 -0800 (PST)
-From: Milan Zamazal <mzamazal@redhat.com>
-To: Gilles Talis <gilles.talis@gmail.com>
-Cc: Fabio Estevam <festevam@gmail.com>,  Peng Fan <peng.fan@oss.nxp.com>,
- uboot-imx@nxp.com,  u-boot@lists.denx.de
-Subject: Re: [PATCH v2] imx: imx8mp: Add support for Polyhex Debix Model A SBC
-In-Reply-To: <CAKcgs2wmZPQEnV0xtr=L-BdX_Qt=Qbd2XwEZPDqSG_xHLUd9uA@mail.gmail.com>
- (Gilles Talis's message of "Mon, 12 Feb 2024 08:45:53 -0400")
-References: <20230523192155.33222-1-gilles.talis@gmail.com>
- <58a07085-3926-b942-fb8c-58f1f5eac421@oss.nxp.com>
- <877clq6odx.fsf@redhat.com>
- <CAKcgs2x1FdvW0afXN=GGRc5nb8rhZtm70xzkURFeworcmTHPpg@mail.gmail.com>
- <87bkavbo6c.fsf@redhat.com> <877cjrss43.fsf@redhat.com>
- <CAOMZO5A2W4ZZBdUjNkA9fqB+kBgASM7esfcLL3RvdwmCi9qakw@mail.gmail.com>
- <87r0hy38am.fsf@redhat.com>
- <CAKcgs2wmZPQEnV0xtr=L-BdX_Qt=Qbd2XwEZPDqSG_xHLUd9uA@mail.gmail.com>
-Date: Tue, 13 Feb 2024 11:34:59 +0100
-Message-ID: <87v86smz3g.fsf@redhat.com>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+ AJvYcCXWvgEQdlJlQ1yLamEtDbeIevp8QPiDoHHYrVRSgGTsCwJiOUFxPAQ/9BqHBD4FmLlU+TfqWZ9BjIyX7ZKkVk0XnTsO0w==
+X-Gm-Message-State: AOJu0YyLfXkf2OtUEOxlDxlY3B05CxK51bYi+/cH4jn0PKl4PujRarnV
+ iMARquMb0sd7z6sID9JmIczKf8bwV0iN1zYDr+zOLe5DoR0tVSx4gRdtfBsBU69T4tAtpPBTzT0
+ fFOAYgypRof0u/yaznLRmJlAyzeM=
+X-Google-Smtp-Source: AGHT+IHjVjpJ4sVgNi28+WZ8EEzSx0sPA9OdPKYaCSObidoYQ9V8hY7FtikrIkt4JIBzP9g5pHNnuzlAjMT7rdzzkaA=
+X-Received: by 2002:a05:600c:1991:b0:40f:d34d:c0c5 with SMTP id
+ t17-20020a05600c199100b0040fd34dc0c5mr7511810wmq.1.1707823188556; Tue, 13 Feb
+ 2024 03:19:48 -0800 (PST)
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
+References: <20240209192045.3961832-1-igor.opaniuk@foundries.io>
+ <20240209192045.3961832-2-igor.opaniuk@foundries.io>
+ <b457cb25-ea09-4e27-85aa-0e97a5aa7fe0@moroto.mountain>
+ <CAByghJYSy86JjsC2cvGA0-5RupogR-vkADwQ6f9vSRnW4LtcFA@mail.gmail.com>
+ <87h6icg4sw.fsf@baylibre.com>
+In-Reply-To: <87h6icg4sw.fsf@baylibre.com>
+From: Igor Opaniuk <igor.opaniuk@gmail.com>
+Date: Tue, 13 Feb 2024 12:19:36 +0100
+Message-ID: <CAByghJa8QqYvU7hnYEwihhTBo=YAH1Ky9YtB95w0RQ0H0RW+KQ@mail.gmail.com>
+Subject: Re: [PATCH v2 1/7] common: avb_verify: don't call mmc_switch_part for
+ SD
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: Dan Carpenter <dan.carpenter@linaro.org>,
+ Igor Opaniuk <igor.opaniuk@foundries.io>, 
+ u-boot@lists.denx.de, Ivan Khoronzhuk <ivan.khoronzhuk@gmail.com>, 
+ Jens Wiklander <jens.wiklander@linaro.org>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -115,71 +97,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Gilles,
+Hi Mattijs,
 
-Gilles Talis <gilles.talis@gmail.com> writes:
-
-> Hi Milan,
+On Tue, Feb 13, 2024 at 9:13=E2=80=AFAM Mattijs Korpershoek
+<mkorpershoek@baylibre.com> wrote:
 >
+> Hi Igor,
 >
-> Le mar. 30 janv. 2024 =C3=A0 15:55, Milan Zamazal <mzamazal@redhat.com> a=
- =C3=A9crit :
->>
->> Fabio Estevam <festevam@gmail.com> writes:
->>
->> > Hi Milan,
->> >
->> > On Tue, Jan 30, 2024 at 9:22=E2=80=AFAM Milan Zamazal <mzamazal@redhat=
-.com> wrote:
->> >
->> >> Well, after trying both the SD cards again with fresh reinstallations=
-, it works
->> >> with a 32 GB card and I get the error above with a 64 GB card.  Is it=
- possible
->> >> that there is something wrong with SDXC cards?
->> >
->> > Does the change below help?
->> >
->> > --- a/arch/arm/dts/imx8mp-debix-model-a-u-boot.dtsi
->> > +++ b/arch/arm/dts/imx8mp-debix-model-a-u-boot.dtsi
->> > @@ -128,6 +128,9 @@
->> >         bootph-pre-ram;
->> >         sd-uhs-sdr104;
->> >         sd-uhs-ddr50;
->> > +       assigned-clocks =3D <&clk IMX8MP_CLK_USDHC2>;
->> > +       assigned-clock-rates =3D <400000000>;
->> > +       assigned-clock-parents =3D <&clk IMX8MP_SYS_PLL1_400M>;
->> >  };
->> >
->> >  &usdhc3 {
->>
->> No, the same error. :-(
->>
->> Regards,
->> Milan
->>
-> I tried with a  32GB Sandisk high endurance SD and a 64GB Sandisk
-> Ultra SDXC UHS-I and both worked.
-> Can you tell me which 64GB sd cards you tried booting with?=20
+> On lun., f=C3=A9vr. 12, 2024 at 09:05, Igor Opaniuk <igor.opaniuk@gmail.c=
+om> wrote:
+>
+> > Hi Dan,
+> >
+> > On Mon, Feb 12, 2024 at 8:05=E2=80=AFAM Dan Carpenter <dan.carpenter@li=
+naro.org> wrote:
+> >>
+> >> On Fri, Feb 09, 2024 at 08:20:39PM +0100, Igor Opaniuk wrote:
+> >> > From: Igor Opaniuk <igor.opaniuk@gmail.com>
+> >> >
+> >> > mmc_switch_part() is used for switching between hw partitions
+> >> > on eMMC (boot0, boot1, user, rpmb).
+> >> > There is no need to do that for SD card.
+> >> >
+> >>
+> >> Is this a clean up or a bugfix?  What are the visible effects for the
+> >> user?
+> > avb cmd fails for SD cards, as mmc_switch_part() fails after trying to =
+access
+> > EXT_CSD register, which obviously is not available.
+>
+> Does this means that we only need this patch to fix AVB commands when
+> booting from SD cards?
+>
+> If yes, I propose adding the following note to the commit message:
+>
+> "This fixes the avb command usage on on SD cards."
+>
+> If you agree, I can do this while applying.
+Yes, could you please add to the commit message so I don't
+send v3 for that (if there are no any additional objections/comments)
 
-Sandisk SDXC Extreme 64 GB UHS-I U3
+Thanks
+>
+> If not, we can keep the message as is.
+>
+> >>
+> >> regards,
+> >> dan carpenter
+> >>
+> >
+> >
+> > --
+> > Best regards - Atentamente - Meilleures salutations
+> >
+> > Igor Opaniuk
+> >
+> > mailto: igor.opaniuk@gmail.com
+> > skype: igor.opanyuk
+> > http://ua.linkedin.com/in/iopaniuk
 
-> And also, which steps you followed to get the errors (which image to down=
-load,
-> etc...)?
 
-wget
-https://download.fedoraproject.org/pub/fedora/linux/releases/39/Server/aarc=
-h64/images/Fedora-Server-39-1.5.aarch64.raw.xz
-unxz Fedora-Server-39-1.5.aarch64.raw.xz
-sudo dd if=3DFedora-Server-39-1.5.aarch64.raw of=3D/dev/mmcblk0 bs=3D1M
-sudo -E gparted /dev/mmcblk0
-# move / resize the first partition by 8 MB / to 592 MB
-sudo dd if=3Dflash.bin of=3D/dev/mmcblk0 bs=3D1k seek=3D32 conv=3Dfsync
-sync
 
-When I do the same with some older Kingston 32 GB, it boots fine.
+--=20
+Best regards - Atentamente - Meilleures salutations
 
-Regards,
-Milan
+Igor Opaniuk
 
+mailto: igor.opaniuk@gmail.com
+skype: igor.opanyuk
+http://ua.linkedin.com/in/iopaniuk
