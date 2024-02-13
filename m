@@ -4,70 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB5A9C4829A
-	for <u-boot@archiver.kernel.org>; Tue, 13 Feb 2024 06:06:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 664F7C4829A
+	for <u-boot@archiver.kernel.org>; Tue, 13 Feb 2024 06:49:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F79787C8F;
-	Tue, 13 Feb 2024 07:06:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 87BAD87CD2;
+	Tue, 13 Feb 2024 07:49:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="k6Fn73s+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KNoDxhOP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E2B3787C00; Tue, 13 Feb 2024 07:06:09 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 53D6B87CDC; Tue, 13 Feb 2024 07:49:56 +0100 (CET)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 38A17875FC
- for <u-boot@lists.denx.de>; Tue, 13 Feb 2024 07:06:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F38F187CAC
+ for <u-boot@lists.denx.de>; Tue, 13 Feb 2024 07:49:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-bhatia1@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41D6657K022669;
- Tue, 13 Feb 2024 00:06:05 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1707804365;
- bh=JLs1blDzBjl41ajfMZgzVDmGzut22AUvDIoCDggC7/o=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=k6Fn73s+z4NQwBuR8wXlFuFp03JHITZnk5FM93zgWcPhgz0m8pnh9aaY7Xscfj5Ur
- UVv41I22/gbGbDiUetDUY3dXwWNjxZQlA1gFU/gKP+3bohGOLWekAr5i8niVIpt3SC
- d3IRYR021dbzook4lmghWhPQjOqe9oJsnSxLjpaI=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41D665tn032162
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 13 Feb 2024 00:06:05 -0600
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 13
- Feb 2024 00:06:04 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 13 Feb 2024 00:06:04 -0600
-Received: from [172.24.227.31] (uda0496377.dhcp.ti.com [172.24.227.31])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41D6619p040756;
- Tue, 13 Feb 2024 00:06:02 -0600
-Message-ID: <1d341c03-14af-40fa-ae04-d1258a6652bf@ti.com>
-Date: Tue, 13 Feb 2024 11:36:00 +0530
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=dan.carpenter@linaro.org
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-55f0b2c79cdso5390179a12.3
+ for <u-boot@lists.denx.de>; Mon, 12 Feb 2024 22:49:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1707806985; x=1708411785; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=IhKSNldJyieiE9joWbSWRqVyUv1lWXnfL2o/5UGSPfc=;
+ b=KNoDxhOPKAWyAex/4J1fgrhx0xvRq2e9nUKqGO8ot9PH67z23DQTOY0AdFmicR0izi
+ qSKaIRXu6ah55VjwW/E2r47QsA8qfcugMeYOgzuOqZGoYz2WvSIQbQPo3XNqdzBulE7z
+ RNx5efvZYTAGtawSZ5B52wU8QeJfzhaHKH1WPI8nIbovZ/0i9cZ5Zzx5nGhW429DfdFH
+ jMyZANEa+2chHvKGboxPIsn345/Nz61UW6VjD1kdz9l/hBboTGBE9zsYtEz0ZCWvxenN
+ hoKstxv0GG1iinFO5RzXF00y66hVJlnb1kkYSEGrtNVSVM6MNFBzMyRUz4a1MIMb64NE
+ trtw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1707806985; x=1708411785;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=IhKSNldJyieiE9joWbSWRqVyUv1lWXnfL2o/5UGSPfc=;
+ b=JaeAesavGQr/p76Wh+4w4KwjkCXvZX0iDAa6gnsuiwpBmAEQdIahi0jq6vXoBDQQaP
+ Bx6PMf3McQ8WVK7VMy7+eMbh+fZPGCPaJ+VHe7rvfunsqpEAf8jBbjHRIH2Gun8xjA3I
+ N93DsjNdC6Jt3RVvfA/0iINYNqehy1Jr8SsRRPtfGKEnkpmxv9Ebyr2oqDOHrbUIkwZZ
+ bUmCwqMbIx6EDauVOgo6bAcyDWHC/RxBWBIiI8k0Os0mB7jrGtREvBnv8EnHbj/rixFc
+ av4jtKgdg5bVvSxJmqLCu8lFA+ih+e5o5erOtqq39I9fvU/hT00GB6+Q4Y6kHboxHlSO
+ 0uNg==
+X-Gm-Message-State: AOJu0Ywlo2iaPZaLPOFkop382VT/7u581j9+pPRTIvtCAj38SClFt7qU
+ 7DTk3OEJHH+s8yFIPvbZaU2T2KZEAG5g5KEZd1aTGzdDmBlW5mKD3GKhE8hinZw=
+X-Google-Smtp-Source: AGHT+IGh8eim0FMnDlyNvzHCxH5YQQ4OsK0RsoB9GAYhBK+L4H6tiCs5CbK9M1o+elTx0/I5h7R5Nw==
+X-Received: by 2002:aa7:db48:0:b0:561:d3e5:a83a with SMTP id
+ n8-20020aa7db48000000b00561d3e5a83amr1953950edt.5.1707806985399; 
+ Mon, 12 Feb 2024 22:49:45 -0800 (PST)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVxpKrayFGSu5tm4AQWymUEjzREe/0ZHN4Vy4oUlDLyRnkBc2n4veC7xMGSwTPTWZUTYcjOKhLxAM6gteNJ0aYR1oMp2wziFZjLnG3ojer6e+yq9LWvQ8UltrlWfiApFIfAZF8FD6WWWpIaPVr63dOrT9+2jbdWsFQSDb8=
+Received: from localhost ([102.222.70.76]) by smtp.gmail.com with ESMTPSA id
+ b6-20020aa7c906000000b00560ba66587csm3379741edt.13.2024.02.12.22.49.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 12 Feb 2024 22:49:44 -0800 (PST)
+Date: Tue, 13 Feb 2024 09:49:38 +0300
+From: Dan Carpenter <dan.carpenter@linaro.org>
+To: Maxim Moskalets <maximmosk4@gmail.com>
+Cc: u-boot@lists.denx.de, Maxim Moskalets <Maxim.Moskalets@kaspersky.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH] command: add FDT setup for bootelf by flag
+Message-ID: <e83d2a8a-ddf5-4bf5-b55e-2d2565ca78fb@moroto.mountain>
+References: <20240211204248.273295-1-Maxim.Moskalets@kaspersky.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] arm: mach-k3: Refactor QoS settings
-Content-Language: en-US
-To: Bryan Brattlof <bb@ti.com>
-CC: Tom Rini <trini@konsulko.com>, Andrew Davis <afd@ti.com>, Nishanth Menon
- <nm@ti.com>, u-boot Mailing List <u-boot@lists.denx.de>,
- Vignesh Raghavendra <vigneshr@ti.com>, Udit Kumar <u-kumar1@ti.com>,
- Devarsh Thakkar <devarsht@ti.com>, Jai Luthra <j-luthra@ti.com>,
- Aniket Limaye <a-limaye@ti.com>
-References: <20240212100635.879272-1-a-bhatia1@ti.com>
- <20240212152122.4gsxji44wevoyeor@bryanbrattlof.com>
-From: Aradhya Bhatia <a-bhatia1@ti.com>
-In-Reply-To: <20240212152122.4gsxji44wevoyeor@bryanbrattlof.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240211204248.273295-1-Maxim.Moskalets@kaspersky.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,70 +92,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hey Bryan!
+On Sun, Feb 11, 2024 at 11:42:48PM +0300, Maxim Moskalets wrote:
+> diff --git a/cmd/elf.c b/cmd/elf.c
+> index b7b9f506a5..4d365771eb 100644
+> --- a/cmd/elf.c
+> +++ b/cmd/elf.c
+> @@ -38,6 +38,8 @@ static unsigned long do_bootelf_exec(ulong (*entry)(int, char * const[]),
+>  /* Interpreter command to boot an arbitrary ELF image from memory */
+>  int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>  {
+> +	unsigned long fdt_addr;
+> +	struct bootm_headers img = { 0 };
+>  	unsigned long addr; /* Address of the ELF image */
+>  	unsigned long rc; /* Return value from user code */
+>  	char *sload = NULL;
+> @@ -68,6 +70,18 @@ int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>  	else
+>  		addr = load_elf_image_shdr(addr);
+>  
+> +	if (!env_get_elf_need_fdt()) {
 
-On 12/02/24 20:51, Bryan Brattlof wrote:
-> Hey Aradhya!
-> 
-> On February 12, 2024 thus sayeth Aradhya Bhatia:
->> Refactor common QoS code into a new common header file, and the soc
->> specific setup_qos functions into a common API.
->>
->> Rename $(soc)_qos_count and $(soc)_qos_data variables to qos_count and
->> qos_data. When QoS settings of more SoCs are added, only one pair will
->> be defined at a time, based on the config SOC_K3_$(soc).
->>
->> This refactoring has been done for 2 major purposes.
->>
->> - The auto-generated $(soc)_qos_data.c and $(soc)_qos.h files cannot
->>   have any code that is specific to any bootloader. Those files have to
->>   remain agnostic of different bootloader implementations and their
->>   header files.
->>
->> - The existing implementation was less than ideal and would have enabled
->>   multiple $(soc)_qos_count and $(soc)_qos_data variables for all SoC
->>   variants.
->>
->> Signed-off-by: Aradhya Bhatia <a-bhatia1@ti.com>
->> ---
->>
->> Change Log:
->>
->>  - new in v2:
->>    - Move K3_QOS config to the r5/Kconfig.
->>
->> Previous versions:
->>
->>   - v1: https://lore.kernel.org/all/20240206085610.3226136-1-a-bhatia1@ti.com/
->>
-> 
-> ...
-> 
->> diff --git a/arch/arm/mach-k3/r5/am62ax/Makefile 
->> b/arch/arm/mach-k3/r5/am62ax/Makefile
->> index 02a941805e9a..e4e55ce5c7dd 100644
->> --- a/arch/arm/mach-k3/r5/am62ax/Makefile
->> +++ b/arch/arm/mach-k3/r5/am62ax/Makefile
->> @@ -4,4 +4,4 @@
->>  
->>  obj-y += clk-data.o
->>  obj-y += dev-data.o
->> -obj-y += am62a_qos_data.o
->> +obj-y += am62a_qos_uboot.o
-> 
-> No objections from me though I am curious about the name change. Was 
-> there an issue with using the original am62a_qos_data.c
-> 
+Should the ! be there?  This looks reversed...
 
-Yes! The previous version of the auto-generated file ($soc_qos_data.c)
-was the same for u-boot and SBL, which restricted us from making u-boot
-specific changes. We will now be creating 2 different files for each of
-them, and the name had to be changed to reflect that.
+> +		if (argc >= 1 && strict_strtoul(argv[0], 16, &fdt_addr) != -EINVAL) {
+> +			printf("Got FDT at 0x%08lx ...\n", fdt_addr);
+> +
+> +			if (image_setup_libfdt(&img, (void *)fdt_addr, 0, NULL)) {
+> +				printf("ERROR: Failed to process device tree\n");
+> +				return 1;
+> +			}
+> +		}
+> +	}
+> +
+> +
+>  	if (!env_get_autostart())
+>  		return rcode;
 
+There are a few style nits that I have with this change like the double
+blank line at the end.  Try running scripts/checkpatch.pl on your patch.
+We could also combine the conditions and pull the code in a tab.  Also I
+recognize that you just copied the != -EINVAL from a few lines earlier
+and it does work, but it's better to check for == 0 instead.
 
-Regards
-Aradhya
+	if (env_get_elf_need_fdt() && argc >= 1 &&
+            strict_strtoul(argv[0], 16, &fdt_addr) == 0) {
+		printf("Got FDT at 0x%08lx ...\n", fdt_addr);
 
+		if (image_setup_libfdt(&img, (void *)fdt_addr, 0, NULL)) {
+			printf("ERROR: Failed to process device tree\n");
+			return 1;
+		}
+	}
 
-
+regards,
+dan carpenter
 
