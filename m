@@ -4,83 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A21C1C48260
-	for <u-boot@archiver.kernel.org>; Tue, 13 Feb 2024 08:28:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8ECB2C4829A
+	for <u-boot@archiver.kernel.org>; Tue, 13 Feb 2024 09:14:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE68D87D1F;
-	Tue, 13 Feb 2024 09:28:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id B1F03875FA;
+	Tue, 13 Feb 2024 10:14:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="zMwjg44w";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="icQmQmaU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9CB6087D38; Tue, 13 Feb 2024 09:28:27 +0100 (CET)
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [IPv6:2a00:1450:4864:20::432])
+ id 69281875FA; Tue, 13 Feb 2024 10:14:35 +0100 (CET)
+Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
+ [IPv6:2a00:1450:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 33C9D87CDC
- for <u-boot@lists.denx.de>; Tue, 13 Feb 2024 09:28:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BCD8C875E9
+ for <u-boot@lists.denx.de>; Tue, 13 Feb 2024 10:14:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-337d05b8942so3386784f8f.3
- for <u-boot@lists.denx.de>; Tue, 13 Feb 2024 00:28:23 -0800 (PST)
+ spf=pass smtp.mailfrom=maximmosk4@gmail.com
+Received: by mail-lj1-x233.google.com with SMTP id
+ 38308e7fff4ca-2d0fd07ba8bso19000271fa.1
+ for <u-boot@lists.denx.de>; Tue, 13 Feb 2024 01:14:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1707812902; x=1708417702;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=ncFcEWll8pMU1+aQ5DkZUqDqWRE78XCIGIqwVGyRvqM=;
- b=zMwjg44wPWmX94tUPXss50/VtsNXyX552U3o3fhOsDIh+IIa+zjz2ex1ISXs3jLLTk
- BD1z9Ez2CwChecEcOwnbpEGAVFFlhrhoea4RDG+bWjCCt1cY5o8wo5zTMC0qkjOfXkfa
- HCmP5ktAdBTt4x69RLS6vnSoNswU8Yram9nzMiwiN3NVCXG7FVqvVlqzd3TUjhFfi2MN
- JRZwNa8Q4vr/IE9nMNkn0whSsOdZCSBid8807QgQDXRtormQk0yvBgoJLLIWL0p1lkay
- 1DsjfWZDhfF8huiErwHu3RuMSGesXZ6eUeWLlZPM39YLc5LF6LTEPghh3Z4TRpQjWqpZ
- Em9Q==
+ d=gmail.com; s=20230601; t=1707815671; x=1708420471; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=nS4UbSL83oCIuDnU7IAjuo5cSCD/DpBLlvaM9yMfuho=;
+ b=icQmQmaUACEsVpbWp4GuPjoOtoKZBB9LFQUcE/eHX+sBV0AB4s8LtbO8ZQ96freV0v
+ v3VRQf2NPkqzkQzrDPBGWmN1ZaiKKFuB5ggamrdq27Dn2T82KdbbMxANbF8BDEewjP2o
+ cdmF+IZ2G8bWYOc6hgLPc8XYFSKqG3nbKhwhelN4Fr7pL8QhmLsNGk2MFbuIPbG+HpmE
+ ipQqhlSXQHAXUw0526Q0ZUw38+ZKOrfIdWDolrw2qWHetb3l26oH2n8IAhpbYF+o/yyF
+ CqTp54cIZyGLvXODS1YDxLesofqpkqN4LZsdCs69RGm39spQaqfQ7/5rmy3wTstIwSOH
+ Qb+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707812902; x=1708417702;
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1707815671; x=1708420471;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ncFcEWll8pMU1+aQ5DkZUqDqWRE78XCIGIqwVGyRvqM=;
- b=KxBDYWxvIjcy5c4D94Z7ylSMs9jS8FdOdJJ8xXF9y0aWrk2sOhIy2e1K4m5tgKrcQt
- cgqacHa5qrpxL/FC64B32GVnkuc7/orsrYWuetndo6Ts+91iDZZ9xfxTQpEzoOEswGp6
- QKNIBNUkzK6HX9tjkUZdAeRrkck0+EIz1ed8FzZOP3/GP+PuP4v9a+kt18LcGg3urcsO
- k0WO4kaaHiUG0QgXxH/GRDElXDD5ozTxSooyNshwE557QZnMdlqkoUgmhTt3RVAeS/ye
- UZPQRqQyNq1cYQhcB/s2HyCQ47wKH1lMf+6NGXOGorf681iBtGcgMuNorXzpDQID1NsP
- d13Q==
-X-Gm-Message-State: AOJu0YxQ3sZUWO8rAHP6rfgQ38Xsd3Dxi2WkVKH6JnMjbOQq5fI9wnmo
- j6h8BLSBSBEHPFfZmt7HXSVM/rPuX917ftvBeKuf4pWHflii3DCyyUzK1O148Ls=
-X-Google-Smtp-Source: AGHT+IHLQh4UykOAF2+b3v8mUXVH3tCcCFIB9lnx9mTuZ6odkgmMsSJ03I5AFsv2+6nMCZzxnTvkxg==
-X-Received: by 2002:adf:fd10:0:b0:33b:4f10:f2b8 with SMTP id
- e16-20020adffd10000000b0033b4f10f2b8mr5351167wrr.43.1707812902552; 
- Tue, 13 Feb 2024 00:28:22 -0800 (PST)
+ bh=nS4UbSL83oCIuDnU7IAjuo5cSCD/DpBLlvaM9yMfuho=;
+ b=tE38d2LSj73Y+lFDlGDvtzsNmMX8dXeFj9szUlRebPQ5T0qVfbfkQ/yqY9odo9P/ai
+ OtY+EjVqNrk8KSbBJnMnvaa8R8OWNPit6UrvMsP5T68AE6tNCBM9pNeIPfweZQ8xSJm+
+ pynOB4xOu45sDDJrr/1nMTxc2UQLNxFblS7FFAeWIVrk+YQ3OUospNQcJL23k+MZZreW
+ C9CL4mJp32+do6bIem74m1aQVKCIUXD6ioznpy6Mv/IaVSFKMFXYYAwuu1jM2jA16dFx
+ sSpCv2LEcG5whbJX+Mtb0emPXy5ggKfBd6b6NjOwc0CFptfj5gaPfRq3VkWixMBLkAKq
+ gyAA==
+X-Gm-Message-State: AOJu0Yzkwi7Mg9nXySJFVDy6xRaM2pgJ4wy27tkElGvOY3uY1gg1xumU
+ 8KcexqmG7E4UlqtV+735b4bWqRKemdOd8c9J6NrE5YNyNAJB1UbC8RQYFztZ4zQ=
+X-Google-Smtp-Source: AGHT+IHlrine7OtjJ2GbQAHKsQdet6NOYKALGvyKTzucgh0VDSEtOxKSl3ZHEETZMXeziNSsnFI1Iw==
+X-Received: by 2002:a2e:be1f:0:b0:2d0:7fea:2920 with SMTP id
+ z31-20020a2ebe1f000000b002d07fea2920mr2787955ljq.37.1707815670392; 
+ Tue, 13 Feb 2024 01:14:30 -0800 (PST)
 X-Forwarded-Encrypted: i=1;
- AJvYcCUWs0H4Sos15pJwJ5YU250aVxSIAHMvXM6pA5TQYUFGpGfd/YAmgDX/by3W1C9TyKiUioFCWG2cDsLU2Dr5jEgYUxP+DlJcIWxI33sEIwI6yoUjAV/uWG+gNS6AlP+uSKrvTi3OTwApIYaOSW3rI7VPEdpTflqbdKTLPy50ZK0LZwaZ7ctAGKotJkZqbEzbCAaSfQ5W9Dwoh1gNpMJbajTkozb/MZnY9YcCy9eiws1VRAUhsU50bPGiJFle6sMc/oQbG1AHid5GPNYXx7DOQy4//Oh9abYeM/O9G12BtIn+8XeZSZ4EkumjrphAWwzuAL6HYefPwYGg+WKv+Ja2bJU7cXZgFHTizw==
-Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- i14-20020a5d558e000000b0033929310ae4sm8884836wrv.73.2024.02.13.00.28.22
+ AJvYcCUsiI10ftgIP+KlZschj0EkpWAcDozwbifw56MhM/zxKA8lVRGQkXIcygQSflO0bfITNbQOHVRDADxXP0FOa5qHCdo=
+Received: from moskalets-nb.kdtln.ru (109-252-14-208.nat.spd-mgts.ru.
+ [109.252.14.208]) by smtp.gmail.com with ESMTPSA id
+ j7-20020a2eb707000000b002d0bf23c0bfsm415603ljo.130.2024.02.13.01.14.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 13 Feb 2024 00:28:22 -0800 (PST)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Igor Opaniuk <igor.opaniuk@foundries.io>, u-boot@lists.denx.de
-Cc: Igor Opaniuk <igor.opaniuk@gmail.com>, Abdellatif El Khlifi
- <abdellatif.elkhlifi@arm.com>, Frieder Schrempf
- <frieder.schrempf@kontron.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Kever Yang <kever.yang@rock-chips.com>, Manorit Chawdhry
- <m-chawdhry@ti.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, Simon
- Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: Re: [RESEND PATCH v1] MAINTAINERS: add custodian tree info for AVB/AB
-In-Reply-To: <20240213073638.1125429-1-igor.opaniuk@foundries.io>
-References: <20240213073638.1125429-1-igor.opaniuk@foundries.io>
-Date: Tue, 13 Feb 2024 09:28:21 +0100
-Message-ID: <878r3og44a.fsf@baylibre.com>
+ Tue, 13 Feb 2024 01:14:29 -0800 (PST)
+From: Maxim Moskalets <maximmosk4@gmail.com>
+X-Google-Original-From: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>
+To: u-boot@lists.denx.de
+Cc: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3] cmd: add FDT setup for bootelf by flag
+Date: Tue, 13 Feb 2024 12:14:22 +0300
+Message-Id: <20240213091422.13635-1-Maxim.Moskalets@kaspersky.com>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240212202043.54427-1-Maxim.Moskalets@kaspersky.com>
+References: <20240212202043.54427-1-Maxim.Moskalets@kaspersky.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,47 +95,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Igor,
+Added the ability to use FDT for ELF applications, required to run some OS. To make FDT setup, you need to set the -d fdt_addr_r cmd option for bootelf command
 
-Thank you for the patch.
+Signed-off-by: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>
 
-On mar., f=C3=A9vr. 13, 2024 at 08:36, Igor Opaniuk <igor.opaniuk@foundries=
-.io> wrote:
+Cc: Tom Rini <trini@konsulko.com>
+---
 
-> From: Igor Opaniuk <igor.opaniuk@gmail.com>
->
-> Add information about a custodian tree [1] for AVB/AB, which is
-> maintained by Mattijs Korpershoek.
->
-> [1] https://source.denx.de/u-boot/custodians/u-boot-dfu
-> Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
+ cmd/elf.c | 24 ++++++++++++++++++++++--
+ 1 file changed, 22 insertions(+), 2 deletions(-)
 
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+diff --git a/cmd/elf.c b/cmd/elf.c
+index b7b9f506a5..c525618a39 100644
+--- a/cmd/elf.c
++++ b/cmd/elf.c
+@@ -38,6 +38,8 @@ static unsigned long do_bootelf_exec(ulong (*entry)(int, char * const[]),
+ /* Interpreter command to boot an arbitrary ELF image from memory */
+ int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ {
++	struct bootm_headers img = {0};
++	unsigned long fdt_addr = 0; /* Address of the FDT */
+ 	unsigned long addr; /* Address of the ELF image */
+ 	unsigned long rc; /* Return value from user code */
+ 	char *sload = NULL;
+@@ -46,13 +48,23 @@ int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	/* Consume 'bootelf' */
+ 	argc--; argv++;
+ 
+-	/* Check for flag. */
++	/* Check for [-p|-s] flag. */
+ 	if (argc >= 1 && (argv[0][0] == '-' && \
+ 				(argv[0][1] == 'p' || argv[0][1] == 's'))) {
+ 		sload = argv[0];
+ 		/* Consume flag. */
+ 		argc--; argv++;
+ 	}
++
++	/* Check for [-d fdt_addr_r] option. */
++	if ((argc >= 2) && (argv[0][0] == '-') && (argv[0][1] == 'd')) {
++		if (strict_strtoul(argv[1], 16, &fdt_addr) != 0)
++			return CMD_RET_USAGE;
++		/* Consume option. */
++		argc -= 2;
++		argv += 2;
++	}
++
+ 	/* Check for address. */
+ 	if (argc >= 1 && strict_strtoul(argv[0], 16, &addr) != -EINVAL) {
+ 		/* Consume address */
+@@ -68,6 +80,14 @@ int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	else
+ 		addr = load_elf_image_shdr(addr);
+ 
++	if (fdt_addr) {
++		printf("## Setting up FDT at 0x%08lx ...\n", fdt_addr);
++		flush();
++
++		if (image_setup_libfdt(&img, (void *)fdt_addr, NULL))
++			return 1;
++	}
++
+ 	if (!env_get_autostart())
+ 		return rcode;
+ 
+@@ -298,7 +318,7 @@ int do_bootvx(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ U_BOOT_CMD(
+ 	bootelf, CONFIG_SYS_MAXARGS, 0, do_bootelf,
+ 	"Boot from an ELF image in memory",
+-	"[-p|-s] [address]\n"
++	"[-p|-s] [-d fdt_addr_r] [address]\n"
+ 	"\t- load ELF image at [address] via program headers (-p)\n"
+ 	"\t  or via section headers (-s)"
+ );
+-- 
+2.39.2
 
-> ---
->
->  MAINTAINERS | 2 ++
->  1 file changed, 2 insertions(+)
->
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 46ba17647f3..32f3ee30710 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -62,6 +62,7 @@ M:	Igor Opaniuk <igor.opaniuk@gmail.com>
->  M:	Mattijs Korpershoek <mkorpershoek@baylibre.com>
->  R:	Sam Protsenko <semen.protsenko@linaro.org>
->  S:	Maintained
-> +T:	git https://source.denx.de/u-boot/custodians/u-boot-dfu.git
->  F:	boot/android_ab.c
->  F:	cmd/ab_select.c
->  F:	doc/android/ab.rst
-> @@ -72,6 +73,7 @@ ANDROID AVB
->  M:	Igor Opaniuk <igor.opaniuk@gmail.com>
->  M:	Mattijs Korpershoek <mkorpershoek@baylibre.com>
->  S:	Maintained
-> +T:	git https://source.denx.de/u-boot/custodians/u-boot-dfu.git
->  F:	cmd/avb.c
->  F:	common/avb_verify.c
->  F:	doc/android/avb2.rst
-> --=20
-> 2.34.1
