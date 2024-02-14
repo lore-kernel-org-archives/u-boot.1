@@ -4,76 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECC10C48BC1
-	for <u-boot@archiver.kernel.org>; Wed, 14 Feb 2024 12:42:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8ABCC48BC3
+	for <u-boot@archiver.kernel.org>; Wed, 14 Feb 2024 12:43:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B1E387E1C;
+	by phobos.denx.de (Postfix) with ESMTP id C1A2787E26;
 	Wed, 14 Feb 2024 13:42:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=olakrutrim.com
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=reposit.be
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=olakrutrim.com header.i=@olakrutrim.com header.b="chhHqkP4";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=mailprotect.be header.i=@mailprotect.be header.b="dh5mjX0Y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DFAD987DE6; Wed, 14 Feb 2024 10:27:51 +0100 (CET)
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
- [IPv6:2607:f8b0:4864:20::635])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 891C487DF3; Wed, 14 Feb 2024 12:07:07 +0100 (CET)
+Received: from out002.mailprotect.be (out002.mailprotect.be [83.217.72.86])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6965D879E0
- for <u-boot@lists.denx.de>; Wed, 14 Feb 2024 10:27:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=olakrutrim.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=selvakumar.velandi@olakrutrim.com
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-1d70b0e521eso39904275ad.1
- for <u-boot@lists.denx.de>; Wed, 14 Feb 2024 01:27:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=olakrutrim.com; s=google; t=1707902851; x=1708507651; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=SK8OhHBUN8WwUrXzSUe62hnpb8AoHatMFZNaSHwg/Nw=;
- b=chhHqkP4uWi6VeouuXnNBvr/f8TDljzB39zK5dig1jhpJ6BXfJ+jH8BNwySuznQTZR
- x3+3pP5BIQbOx9mu89/KcgOx4jblxWd1t2+vCREAhyjKVwmuBgU5PEn7WHBRs45N+eMY
- J+OX5b+7jo+o95hoxq2jo0DOpHJ76zn0Nxyis=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707902851; x=1708507651;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=SK8OhHBUN8WwUrXzSUe62hnpb8AoHatMFZNaSHwg/Nw=;
- b=JQ+/XG60diXucz9PJ40aNFZ9c/FIDZnmOx1YZhkiyWcl4bWbv2TYqrWkyqwcMEReAA
- KqQShfiUm0zlSIcK+yLNDtxd92T0k9bfHBkHCtilOlOL07whXvbhagCiv+K4nLxS3AFw
- RCS6jyJlpNfFdkXhaIlSHKR+X0tStUSrFQgD3vcRIAFEWlKxp4vyAI0P2XGFcB555hXX
- laogqkqrsXgBVBYmRXfZU7ZuFhgC6GNZTDBS6QPs+j1StC1ieGw3D6NfA6PugC1Emw9X
- dS03aBmxr4p2plbtFBBV5URf9l67M/QSlsvNBoU4MUOKl9/OApy9qWk7e7MNLwnyNEAf
- rkng==
-X-Gm-Message-State: AOJu0Yx+PkuZzUkdNpdCaY0b5cQSK4A7K7LzJayBF1lxdK0mpcZTl7Gi
- XtuO7LbYbSENfHprTMKN5zgvf/hzkH6Kt4+2yd4r/9AtqqPXPOr82j8MftUz1DpHFQtg1Jb/pWQ
- fsGPjxiLD6nEI7vOktjXObl54fJ56opGc3JDHFSnv4bTxWHxr1Xldjv3JWP4JgewtdVwLF2TmXb
- TKbOH7yrxc71dh2eLuR/2xpbREQq9wmg==
-X-Google-Smtp-Source: AGHT+IGYQGwSLfQjhS2BCPt+KHNn6bDcz4PVrLolm+yJ4FOuICc63YAwF5Wxo5kKyjWRPn0Se/js2cbJPvd+usAj9bo=
-X-Received: by 2002:a17:90b:2349:b0:296:2589:c05e with SMTP id
- ms9-20020a17090b234900b002962589c05emr1724692pjb.30.1707902850594; Wed, 14
- Feb 2024 01:27:30 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id ADB2887DE6
+ for <u-boot@lists.denx.de>; Wed, 14 Feb 2024 12:06:57 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=reposit.be
+Authentication-Results: phobos.denx.de;
+ spf=none smtp.mailfrom=spamsink@reposit.be
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=mailprotect.be; s=mail; h=Content-Transfer-Encoding:Content-Type:Subject:
+ From:To:MIME-Version:Date:Message-ID:reply-to:sender:cc:bcc:in-reply-to:
+ references; bh=s2VA7/8CAm8sY90S6t7n20u2BLsNRfgMN6EQ2yY8+kk=; b=dh5mjX0YuZYIVr
+ B/vNxXvrLapsH18f7wRJ6/xlHr4tww3DyEbA/mDgi5feePKS7ITHFNnoHZFC9OqB/KSNMMM/0P8n5
+ y2Ldolxvla9RMX7gDWoZl1raDwdAs4foivHz/z6mfjdSM++VIGpvIDrDN2tuIJs4v7wHVPFnO0k5p
+ 4ey/z64nCi+tUJMwYEUR+BXwVO7lkIoXI0E6wBwC6eCN3JYpfi6kbU2BfDVyRznd052dYAcxfkjbI
+ BUN72wT50b4ebJJYayD1oLlG0zHBDCHX8gh0F/pBlSsPraxDeriFJrSM9IRMexEw9TUP0W5y46jvF
+ qXZJYt78B9mR1BZrxQbA==;
+Received: from smtp-auth.mailprotect.be ([178.208.39.155])
+ by com-mpt-out002.mailprotect.be with esmtp (Exim 4.92)
+ (envelope-from <spamsink@reposit.be>) id 1raD6J-00EnsX-G2
+ for u-boot@lists.denx.de; Wed, 14 Feb 2024 12:06:52 +0100
+Received: from [192.168.1.76] (host81-157-10-143.range81-157.btcentralplus.com
+ [81.157.10.143])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-auth.mailprotect.be (Postfix) with ESMTPSA id 18FF9C00B5
+ for <u-boot@lists.denx.de>; Wed, 14 Feb 2024 12:06:51 +0100 (CET)
+Message-ID: <eb9a091f-9f8e-401a-bd71-a9a3511a21b0@reposit.be>
+Date: Wed, 14 Feb 2024 11:06:50 +0000
 MIME-Version: 1.0
-References: <CAJ-dvqwMWvWw0=34ZLkG37MwTRG1m_tabSi0zLkoHNY8CjR_PQ@mail.gmail.com>
- <20240209134027.GN1152441@bill-the-cat>
- <CAJ-dvqzoCPRtO4hczmH+ygU8pAUKMxAzRqegcD02NbTJo619Pw@mail.gmail.com>
- <20240209202509.GQ1152441@bill-the-cat>
-In-Reply-To: <20240209202509.GQ1152441@bill-the-cat>
-From: Selvakumar Velandi <selvakumar.velandi@olakrutrim.com>
-Date: Wed, 14 Feb 2024 14:57:18 +0530
-Message-ID: <CAJ-dvqzSVcJr+9fumE1OQpFD3KXN+c3+s=QNEtyQo1G6HYuGzg@mail.gmail.com>
-Subject: Re: [PATCH] Added FDT PAD memory size while reserving memory for FDT
- to avoid some memory corruption issue
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: u-boot@lists.denx.de
+From: spamsink <spamsink@reposit.be>
+Subject: How To Move Root Partition From eMMC to SSD
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: 178.208.39.155
+X-SpamExperts-Domain: mailprotect.be
+X-SpamExperts-Username: 178.208.39.128/27
+Authentication-Results: mailprotect.be;
+ auth=pass smtp.auth=178.208.39.128/27@mailprotect.be
+X-SpamExperts-Outgoing-Class: ham
+X-SpamExperts-Outgoing-Evidence: Combined (0.09)
+X-Recommended-Action: accept
+X-Filter-ID: Pt3MvcO5N4iKaDQ5O6lkdGlMVN6RH8bjRMzItlySaT9C+lX49wzKuu+fwZtIrQRIPUtbdvnXkggZ
+ 3YnVId/Y5jcf0yeVQAvfjHznO7+bT5x4wC90Yk0QFU2gbxptqJ4B54dC4kjiE7gKZmgIc1sDr5Jm
+ rQtsDjVbbrJuWV2M+6arAP5R/Cae/ZemygD++WnmSxIRXVMlFuiz/acFNeeXt8QYiTpLCsrpI++d
+ V3X+sU/z4wiOJN2t32kiKQ9BM1X47eibU04JcTWQKv3WukWvpAOpGxzbGQcYwg5X1bHm9UwM4xIi
+ XRR3ynoyoca++B06gnlHOlhWnpMpiZGPvNEMh2hfj9whi8KpGkNMaaLS9DIcqbdy+7WYS7ujrPXH
+ qhox0HpT3S2SFmqVvJUoDpLg17fDQD9rTYKpWUjzugBu3bT93D7ELi2IS29UXckX14BTLmsJGGG4
+ zaE8z0regZWEmsDT9ZG0CmXc0v4tKHsUSjuO8OL3MKmWpyx7GTPK+LOWY5R6BpcvGp3jcY/qUcse
+ gzIzJvw9qxD5zQLggp7fQfdHwZdrLrPMu08YNUTiQ69BIK/1NH5THMtlYvyHAYGOGqz2oidVuoQM
+ okQutY3pHcCHFzboKDhGx0chVC6Uo5u4n3/KWfbq3t5NmLSY+EPGe2Z04axdCHI0laytOhuDj57o
+ R3GWp9x3h1XKW6BJmYeGzzt+DXr8CK8an+ENS9RuzHKXFavGbcISl1ukdIaYXR4c4UteuEWGL4uk
+ AgP8rQMRCNzTZvmOQVChs+18gxFkqdZVmoJEXiApImRe7ZZpOObpfj5sSQhb3cc4IkKXIhy+nQrj
+ z4c4GigPSJgMsoNdiy/xH9LyY999F9Hm166WDIsMdNlNLSa8f5xLFtnfqQdjDlXGb9ueGtUrKYC6
+ 2QQl/4ErWMddmgnZiYJZW8Mx5OI4XjD8YIRbIyMCDTapG1wvP3+m/xDwzcJD3WpfpflqIsw4Oh2L
+ kwsmIC+tUiJAU2Er8l1a+B3b8WJsR0wzQmfGh2gsrFnWkSEVyhXwWjx2Pi8/3bImoUNQxaBiRh+E
+ LzQHfvAIIq3mhMeBOPt+aoVQZCXluMXV6vXk0yaNYekQfeM0IzWKRsu4i7omKI43ueU=
+X-Report-Abuse-To: spam@com-mpt-mgt001.mailprotect.be
 X-Mailman-Approved-At: Wed, 14 Feb 2024 13:42:37 +0100
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,81 +96,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+I am running the NanoPi R6C.  The device is not capable of booting from 
+the SSD, the next best thing is to load the root filesystem from the SSD.
 
-The issue is happening in the following scenario.
-1) Launch the QEMU for RISCV virt platform with uboot and ubuntu OS (Host
-system). Now the OS is booted without any issue.
-2) Enable the KVM in the ubuntu OS.
-3) Create a VM by launching the same RISC V QEMU from the Ubuntu OS (Host
-system)  after enabling KVM.
-4) So now the qemu is running from the HOST OS and launching the uboot and
-then OS. The system crash is happening in the VM OS booting.
-If the FDT is reserved with stub bytes then the VM is launched properly.
+Using rockchip's repos, I compile from source the images to boot 1) from 
+the microSD card and 2) from eMMC.  I install to the eMMC.  Then, so as 
+not to mount any partitions from eMMC, I boot from the microSD card, and 
+I clone the root partition from the eMMC (/dev/mmcblk2p8) to the SSD 
+(/dev/nvme0n1p1).
 
-The issue is not happening while launching Host OS even if it use the same
-uboot code.
-As per the image_fdt code in uboot, the  FDT size is blindly increased even
-if the relocation is disabled and updated in the FDT header.
-So i reserve the Padding bytes while reserving FDT in uboot board_f phase
-itself for adding bootargs in uboot after image_fdt.
+I boot from the eMMC, the output of "cat /proc/cmdline" is:
+
+storagemedia=emmc androidboot.storagemedia=emmc androidboot.mode=normal 
+androidboot.dtbo_idx=0 androidboot.verifiedbootstate=orange 
+earlycon=uart8250,mmio32,0xfeb50000 console=ttyFIQ0 coherent_pool=1m 
+irqchip.gicv3_pseudo_nmi=0 rw root=/dev/mmcblk2p8 rootfstype=ext4 
+rootflags=discard data=/dev/mmcblk2p9 consoleblank=0 
+cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory swapaccount=1 
+androidboot.fwver=uboot-a83a7263ef-01/09/2024
+
+How do I change "root=/dev/mmcblk2p8" to "root=/dev/nvme0n1p1"?
+
+I connect to the serial port and get to the U-Boot monitor.  I examine 
+the variables.  "bootcmd" runs "bootrkp" which boots the system.  
+"bootrkp" ignores "bootargs", I confirm this by deleting "bootargs" 
+before running "bootrkp", the system boots up as before with no change 
+in behavior.  "bootrkp" is implemented in file "cmd/bootrkp.c".  That 
+code emits the equivalent of:
+
+setenv bootm-no-reloc y
+booti 0x400000 0xa200000:0x7b2bc0 0x8300000
+
+Can I tell U-Boot to load the root partition from /dev/nvme0n1p1, either 
+by entering commands at the monitor, or by modifying the source code of 
+U-Boot, or through any other means?
 
 Regards,
-Selva
-
-
-On Sat, Feb 10, 2024 at 1:55=E2=80=AFAM Tom Rini <trini@konsulko.com> wrote=
-:
-
-> On Fri, Feb 09, 2024 at 07:45:10PM +0530, Selvakumar Velandi wrote:
->
-> > The FDT relocation is not disabled. I am adding the FDT PADDING bytes
-> while
-> > doing FDT reservation in the board_f file.
-> > Also update the FDT length based on the new allocation, instead of
-> blindly
-> > increasing the size.
-> > Currently the size is getting increased even for the relocation disable=
-d
-> > scenario also.
-> > So without increasing the physical memory for the disable relocation us=
-e
-> > case, the fdt total size is updated. thus causing memory corruption
->
-> Please explain on what system you're seeing this with, and how things
-> are configured and what else is required to trigger this problem. Your
-> changes to boot/image-fdt.c change things so that we don't pad the
-> non-relocated device tree (but we need to, we still change the bootargs
-> and so forth). And the changes to common/board_f.c look like we're
-> trying to do that instead, earlier? But we should not have a kernel
-> corruption problem unless:
-> - We aren't relocating the device tree
-> - We aren't relocating the device tree far enough away from the kernel,
->   but this shouldn't be a problem on arm64 and riscv where the Image
->   header structure tells us how big the BSS is to be and we obey that.
->
-> --
-> Tom
->
-
---=20
-***
-This communication is confidential, may be privileged and is meant only=20
-for the intended recipient and purpose. No part of this email or any files=
-=20
-transmitted with it can be shared, copied, forwarded or published online or=
-=20
-offline, without=C2=A0prior=C2=A0written consent of the sender. If you are =
-not the=20
-intended recipient, please preserve the confidentiality, delete the e-mail=
-=20
-and attachments, if any from your system and inform the sender immediately.=
-=C2=A0
-=C2=A0
-
-***
-
-
-
-
+Eric
 
