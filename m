@@ -4,101 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30408C48BC3
-	for <u-boot@archiver.kernel.org>; Wed, 14 Feb 2024 12:42:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECC10C48BC1
+	for <u-boot@archiver.kernel.org>; Wed, 14 Feb 2024 12:42:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F6E087DC2;
-	Wed, 14 Feb 2024 13:42:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id 2B1E387E1C;
+	Wed, 14 Feb 2024 13:42:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=olakrutrim.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="BJcZz/jz";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=olakrutrim.com header.i=@olakrutrim.com header.b="chhHqkP4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A71487DE3; Wed, 14 Feb 2024 09:39:39 +0100 (CET)
-Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id DFAD987DE6; Wed, 14 Feb 2024 10:27:51 +0100 (CET)
+Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
+ [IPv6:2607:f8b0:4864:20::635])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 67A6587DE6
- for <u-boot@lists.denx.de>; Wed, 14 Feb 2024 09:39:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6965D879E0
+ for <u-boot@lists.denx.de>; Wed, 14 Feb 2024 10:27:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=salutedevices.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=avromanov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 9E151100034;
- Wed, 14 Feb 2024 11:39:34 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 9E151100034
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1707899974;
- bh=saukfLdNBtB+ROItL7ANJ6zRXjkh1/XJo7Io9M/RweM=;
- h=From:To:Subject:Date:Message-ID:Content-Type:MIME-Version:From;
- b=BJcZz/jzfGWNJER5Cv3ZgPQ0KdkUiempBW3Nkzk7hWwCAg1F/Pu1yY7ChXdh/1UZy
- Stbu32QLm+KxgVNZKaROOkO3BIEeAAUzJm/fTd7c0d1Zco5/wLltfsETbh1J33dfCo
- B26tK/7bd8AuoXas22Jwbi2GpIyKHZZ+MTKaBBS/sK8fjkvmDE679gUWA+E+CPrWap
- M0wXVGg//kec17kaNtfD9/9BHozuzcmrr3MsiU9ySFzkjZbpDP1P+UkaqEZcqerZ6Z
- sTXB1CHwo4RUYMpnVdcihRM3Knuma4VJccz7uoE6PmJxMRoNlkK+tapGB6E0MUMpL4
- S/b/E9cWaya2w==
-Received: from smtp.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
- [172.16.192.107])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Wed, 14 Feb 2024 11:39:34 +0300 (MSK)
-Received: from p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) by
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Wed, 14 Feb 2024 11:39:34 +0300
-Received: from p-i-exch-sc-m01.sberdevices.ru ([fe80::6d41:e8f1:b95e:ba1]) by
- p-i-exch-sc-m01.sberdevices.ru ([fe80::6d41:e8f1:b95e:ba1%7]) with
- mapi id 15.02.1118.040; Wed, 14 Feb 2024 11:39:34 +0300
-From: Alexey Romanov <avromanov@salutedevices.com>
-To: "sjg@chromium.org" <sjg@chromium.org>, "hs@denx.de" <hs@denx.de>,
- "sean.anderson@seco.com" <sean.anderson@seco.com>, "dimorinny@google.com"
- <dimorinny@google.com>, "mkorpershoek@baylibre.com"
- <mkorpershoek@baylibre.com>, "patrick.delaunay@foss.st.com"
- <patrick.delaunay@foss.st.com>
-CC: kernel <kernel@sberdevices.ru>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-Subject: Re: [RFC PATCH v2 0/2] Introduce fastboot oem board command
-Thread-Topic: [RFC PATCH v2 0/2] Introduce fastboot oem board command
-Thread-Index: AQHaVO/pE+Z+TvMoTk66BBpFWW2rqbEJZncA
-Date: Wed, 14 Feb 2024 08:39:33 +0000
-Message-ID: <20240214083926.3xrdf7hhjkfbgh75@cab-wsm-0029881>
-References: <20240201092027.6258-1-avromanov@salutedevices.com>
-In-Reply-To: <20240201092027.6258-1-avromanov@salutedevices.com>
-Accept-Language: ru-RU, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [172.16.18.93]
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <2FD5DC1639753C43946B99E769359D17@sberdevices.ru>
-Content-Transfer-Encoding: quoted-printable
+ header.from=olakrutrim.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=selvakumar.velandi@olakrutrim.com
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-1d70b0e521eso39904275ad.1
+ for <u-boot@lists.denx.de>; Wed, 14 Feb 2024 01:27:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=olakrutrim.com; s=google; t=1707902851; x=1708507651; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=SK8OhHBUN8WwUrXzSUe62hnpb8AoHatMFZNaSHwg/Nw=;
+ b=chhHqkP4uWi6VeouuXnNBvr/f8TDljzB39zK5dig1jhpJ6BXfJ+jH8BNwySuznQTZR
+ x3+3pP5BIQbOx9mu89/KcgOx4jblxWd1t2+vCREAhyjKVwmuBgU5PEn7WHBRs45N+eMY
+ J+OX5b+7jo+o95hoxq2jo0DOpHJ76zn0Nxyis=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1707902851; x=1708507651;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=SK8OhHBUN8WwUrXzSUe62hnpb8AoHatMFZNaSHwg/Nw=;
+ b=JQ+/XG60diXucz9PJ40aNFZ9c/FIDZnmOx1YZhkiyWcl4bWbv2TYqrWkyqwcMEReAA
+ KqQShfiUm0zlSIcK+yLNDtxd92T0k9bfHBkHCtilOlOL07whXvbhagCiv+K4nLxS3AFw
+ RCS6jyJlpNfFdkXhaIlSHKR+X0tStUSrFQgD3vcRIAFEWlKxp4vyAI0P2XGFcB555hXX
+ laogqkqrsXgBVBYmRXfZU7ZuFhgC6GNZTDBS6QPs+j1StC1ieGw3D6NfA6PugC1Emw9X
+ dS03aBmxr4p2plbtFBBV5URf9l67M/QSlsvNBoU4MUOKl9/OApy9qWk7e7MNLwnyNEAf
+ rkng==
+X-Gm-Message-State: AOJu0Yx+PkuZzUkdNpdCaY0b5cQSK4A7K7LzJayBF1lxdK0mpcZTl7Gi
+ XtuO7LbYbSENfHprTMKN5zgvf/hzkH6Kt4+2yd4r/9AtqqPXPOr82j8MftUz1DpHFQtg1Jb/pWQ
+ fsGPjxiLD6nEI7vOktjXObl54fJ56opGc3JDHFSnv4bTxWHxr1Xldjv3JWP4JgewtdVwLF2TmXb
+ TKbOH7yrxc71dh2eLuR/2xpbREQq9wmg==
+X-Google-Smtp-Source: AGHT+IGYQGwSLfQjhS2BCPt+KHNn6bDcz4PVrLolm+yJ4FOuICc63YAwF5Wxo5kKyjWRPn0Se/js2cbJPvd+usAj9bo=
+X-Received: by 2002:a17:90b:2349:b0:296:2589:c05e with SMTP id
+ ms9-20020a17090b234900b002962589c05emr1724692pjb.30.1707902850594; Wed, 14
+ Feb 2024 01:27:30 -0800 (PST)
 MIME-Version: 1.0
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 183422 [Feb 14 2024]
-X-KSMG-AntiSpam-Version: 6.1.0.3
-X-KSMG-AntiSpam-Envelope-From: avromanov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 7 0.3.7
- 6d6bf5bd8eea7373134f756a2fd73e9456bb7d1a, {Tracking_uf_ne_domains},
- {Track_E25351}, {Tracking_from_domain_doesnt_match_to},
- salutedevices.com:7.1.1; d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
- 127.0.0.199:7.1.2; smtp.sberdevices.ru:5.0.1,7.1.1;
- lore.kernel.org:7.1.1, FromAlignment: s
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean, bases: 2024/02/14 06:40:00
-X-KSMG-LinksScanning: Clean, bases: 2024/02/14 06:40:00
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2024/02/14 04:43:00 #23596813
-X-KSMG-AntiVirus-Status: Clean, skipped
+References: <CAJ-dvqwMWvWw0=34ZLkG37MwTRG1m_tabSi0zLkoHNY8CjR_PQ@mail.gmail.com>
+ <20240209134027.GN1152441@bill-the-cat>
+ <CAJ-dvqzoCPRtO4hczmH+ygU8pAUKMxAzRqegcD02NbTJo619Pw@mail.gmail.com>
+ <20240209202509.GQ1152441@bill-the-cat>
+In-Reply-To: <20240209202509.GQ1152441@bill-the-cat>
+From: Selvakumar Velandi <selvakumar.velandi@olakrutrim.com>
+Date: Wed, 14 Feb 2024 14:57:18 +0530
+Message-ID: <CAJ-dvqzSVcJr+9fumE1OQpFD3KXN+c3+s=QNEtyQo1G6HYuGzg@mail.gmail.com>
+Subject: Re: [PATCH] Added FDT PAD memory size while reserving memory for FDT
+ to avoid some memory corruption issue
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
 X-Mailman-Approved-At: Wed, 14 Feb 2024 13:42:37 +0100
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,34 +90,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello! Ping.
+Hi,
 
-On Thu, Feb 01, 2024 at 12:20:25PM +0300, Alexey Romanov wrote:
-> Changes v2 since v1 at [1]:
->     - Added an example of using the command as requsted
->       by Sean Anderson [2].
->=20
-> Links:
->     [1] https://lore.kernel.org/all/20231228152522.83291-1-avromanov@salu=
-tedevices.com/
->     [2] https://lore.kernel.org/all/72ac233d-c18d-4f57-bc66-451fe0bd2997@=
-seco.com/
->=20
-> Alexey Romanov (2):
->   fastboot: introduce 'oem board' subcommand
->   board: ad401: example of fastboot oem board realization
->=20
->  board/amlogic/ad401/fastboot.c | 222 +++++++++++++++++++++++++++++++++
->  drivers/fastboot/Kconfig       |   7 ++
->  drivers/fastboot/fb_command.c  |  15 +++
->  include/fastboot.h             |   1 +
->  4 files changed, 245 insertions(+)
->  create mode 100644 board/amlogic/ad401/fastboot.c
->=20
-> --=20
-> 2.30.1
->=20
+The issue is happening in the following scenario.
+1) Launch the QEMU for RISCV virt platform with uboot and ubuntu OS (Host
+system). Now the OS is booted without any issue.
+2) Enable the KVM in the ubuntu OS.
+3) Create a VM by launching the same RISC V QEMU from the Ubuntu OS (Host
+system)  after enabling KVM.
+4) So now the qemu is running from the HOST OS and launching the uboot and
+then OS. The system crash is happening in the VM OS booting.
+If the FDT is reserved with stub bytes then the VM is launched properly.
+
+The issue is not happening while launching Host OS even if it use the same
+uboot code.
+As per the image_fdt code in uboot, the  FDT size is blindly increased even
+if the relocation is disabled and updated in the FDT header.
+So i reserve the Padding bytes while reserving FDT in uboot board_f phase
+itself for adding bootargs in uboot after image_fdt.
+
+Regards,
+Selva
+
+
+On Sat, Feb 10, 2024 at 1:55=E2=80=AFAM Tom Rini <trini@konsulko.com> wrote=
+:
+
+> On Fri, Feb 09, 2024 at 07:45:10PM +0530, Selvakumar Velandi wrote:
+>
+> > The FDT relocation is not disabled. I am adding the FDT PADDING bytes
+> while
+> > doing FDT reservation in the board_f file.
+> > Also update the FDT length based on the new allocation, instead of
+> blindly
+> > increasing the size.
+> > Currently the size is getting increased even for the relocation disable=
+d
+> > scenario also.
+> > So without increasing the physical memory for the disable relocation us=
+e
+> > case, the fdt total size is updated. thus causing memory corruption
+>
+> Please explain on what system you're seeing this with, and how things
+> are configured and what else is required to trigger this problem. Your
+> changes to boot/image-fdt.c change things so that we don't pad the
+> non-relocated device tree (but we need to, we still change the bootargs
+> and so forth). And the changes to common/board_f.c look like we're
+> trying to do that instead, earlier? But we should not have a kernel
+> corruption problem unless:
+> - We aren't relocating the device tree
+> - We aren't relocating the device tree far enough away from the kernel,
+>   but this shouldn't be a problem on arm64 and riscv where the Image
+>   header structure tells us how big the BSS is to be and we obey that.
+>
+> --
+> Tom
+>
 
 --=20
-Thank you,
-Alexey=
+***
+This communication is confidential, may be privileged and is meant only=20
+for the intended recipient and purpose. No part of this email or any files=
+=20
+transmitted with it can be shared, copied, forwarded or published online or=
+=20
+offline, without=C2=A0prior=C2=A0written consent of the sender. If you are =
+not the=20
+intended recipient, please preserve the confidentiality, delete the e-mail=
+=20
+and attachments, if any from your system and inform the sender immediately.=
+=C2=A0
+=C2=A0
+
+***
+
+
+
+
+
