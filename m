@@ -4,59 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8913EC48BC1
-	for <u-boot@archiver.kernel.org>; Wed, 14 Feb 2024 20:11:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3093C48BC3
+	for <u-boot@archiver.kernel.org>; Wed, 14 Feb 2024 20:31:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 16E6A87D59;
-	Wed, 14 Feb 2024 21:11:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hellion.org.uk
+	by phobos.denx.de (Postfix) with ESMTP id A82AA87C2D;
+	Wed, 14 Feb 2024 21:31:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id B531C87DEC; Wed, 14 Feb 2024 14:53:04 +0100 (CET)
-Received: from benson.vs.mythic-beasts.com (benson.vs.mythic-beasts.com
- [IPv6:2a00:1098:86:101::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D4DD87CEC;
- Wed, 14 Feb 2024 14:53:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=hellion.org.uk
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ijc@hellion.org.uk
-Received: from cmbg-18-b2-v4wan-169768-cust68.vm17.cable.virginm.net
- ([81.101.144.69] helo=[192.168.2.211])
- by benson.vs.mythic-beasts.com with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <ijc@hellion.org.uk>)
- id 1raFh2-00AY3O-RL; Wed, 14 Feb 2024 13:52:56 +0000
-Message-ID: <827145b922239467c9fb520839d25384c1a57c0e.camel@hellion.org.uk>
-Subject: Re: [PATCH v5 08/11] doc: devicetree: Updates for
- devicetree-rebasing subtree
-From: Ian Campbell <ijc@hellion.org.uk>
-To: Sumit Garg <sumit.garg@linaro.org>, Paul Barker
- <paul.barker.ct@bp.renesas.com>
-Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
- u-boot-custodians@lists.denx.de, trini@konsulko.com, sjg@chromium.org, 
- robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org, conor@kernel.org, 
- neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech, 
- daniel.thompson@linaro.org, dgilmore@fedoraproject.org,
- pbrobinson@gmail.com,  ilias.apalodimas@linaro.org, b.galvani@gmail.com,
- xypron.glpk@gmx.de,  michal.simek@amd.com, seanga2@gmail.com,
- rasmus.villemoes@prevas.dk,  peng.fan@nxp.com, jh80.chung@samsung.com,
- rfried.dev@gmail.com, marex@denx.de,  mibodhi@gmail.com, bb@ti.com,
- mark.kettenis@xs4all.nl, festevam@gmail.com, nm@ti.com, 
- andre.przywara@arm.com
-Date: Wed, 14 Feb 2024 13:52:55 +0000
-In-Reply-To: <CAFA6WYOdYK4vAibGEQ9SnNCGMv00AKYkzZu+capfW9E4y=cFHA@mail.gmail.com>
-References: <20240202130534.1051438-1-sumit.garg@linaro.org>
- <20240202130534.1051438-9-sumit.garg@linaro.org>
- <518d87fc-457e-4d77-ba66-9e3a5aa15279@bp.renesas.com>
- <CAFA6WYOdYK4vAibGEQ9SnNCGMv00AKYkzZu+capfW9E4y=cFHA@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.50.3-1 
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hCReB9fs";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 2A59787CEC; Wed, 14 Feb 2024 21:31:45 +0100 (CET)
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 340A286F67
+ for <u-boot@lists.denx.de>; Wed, 14 Feb 2024 21:31:32 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=bigunclemax@gmail.com
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-51182ece606so201639e87.0
+ for <u-boot@lists.denx.de>; Wed, 14 Feb 2024 12:31:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1707942686; x=1708547486; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=mNwD+xUhJEJ0KwQ2uoADHaKoP2gdzaqm4sAptBQg6zE=;
+ b=hCReB9fsIZLhg7bIe4pLn+L/m/a0741mESu/GEVLmtBJPmc45/nQ+Gj7zGdRyVF69a
+ o/4Qm+EWLSOup4pK/W9GKDfHyakgPNXm4RfCPEdq+0I89xVw+OrWZdig7a5n3u47uVCG
+ Lnw3vzmApcZak3TPNSqC2AVcR+vQDPVDLmZn87PLSIlHuLS2aVwh0tXIT97yY7BvoSee
+ wy7HqXEcHqBmEefd2yYuAfyxxTConaSZmJiB+scQ23CxiMt6Dizn9/x84daG0X7m3d+l
+ 8TvwTRC4k21dwMfve1J1TLjcG9njr3DBnafshmCLqDJ87rYakU7N88E/pGDuomrHaNiz
+ llEA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1707942686; x=1708547486;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=mNwD+xUhJEJ0KwQ2uoADHaKoP2gdzaqm4sAptBQg6zE=;
+ b=an1vs5L0AUjiE2inxL6o+GuhZxWoqpFj5TFI9aqKEuaVop1JvDbvE7RZe7JUzoXkyC
+ bB7rdclCFye6QK0xAsiX/uz1961Thx/Dg5LNCRqcHIsPlR1NpTRHfVvlWiaSZpwFRTjE
+ iQUXVdY4gIo+UN7HvI0wVuA3nSsVPGdqxEkt3ACD0F6+vuzy3D0K6x6B0RUbKsFoHVpF
+ p7LRPttCXRFYxI42lF4K+W+VfIIERY4nv1BGfRBkq7z4Vz4GCnPOHJHxRgBFaVKU2ARo
+ n/z9KpfHbD9Qv+x9eftGzAjqEcZXyORKVjVZAzLM4T8zB7zW82rb97mNYvYp18RoMGgC
+ bSNw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCURaF7zh9GS1HX8hdEDdkWqxuSY6QC/G9sYo1D+dENlpkdE+J8YQeySiylHIJCbTkzEYLrUEs9wwbbqVUeUQ4CAgxwaPA==
+X-Gm-Message-State: AOJu0Yzn7JGdTWnmM82SOAg2QSO5dVBbpuQZSz1AHtsX+dxRgsQrUsKx
+ la45KQ/4VUXh9DgZpXQzTqAIk44bIZvalSuUwbYDuj6bmqnvU8T0
+X-Google-Smtp-Source: AGHT+IHYgbqmzdwQaACG15wCmn3sJsmBVU7Vxg2Z71EUMdTh7sk6tEMQXe0bOBi9q5blGDZ5BTwY0w==
+X-Received: by 2002:a05:6512:34c5:b0:511:853e:8d72 with SMTP id
+ w5-20020a05651234c500b00511853e8d72mr904559lfr.34.1707942686134; 
+ Wed, 14 Feb 2024 12:31:26 -0800 (PST)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXnucYvkDVUXxiJZwz9sPBjmA3Qaqrm71mKBYlnI/srYJYq56DZydCBQVxjSylPyLGL/x9KmgeAFji9Ew2pRGrETCS/jvlodEcxx1cIRZ0vfvtGFq/Ybw==
+Received: from user-PC.. ([37.232.111.23]) by smtp.gmail.com with ESMTPSA id
+ o3-20020ac24943000000b00511525b9d57sm1793028lfi.43.2024.02.14.12.31.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 14 Feb 2024 12:31:25 -0800 (PST)
+From: Maksim Kiselev <bigunclemax@gmail.com>
+To: 
+Cc: Maksim Kiselev <bigunclemax@gmail.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de
+Subject: [PATCH v1] pci-host-ecam-generic: Convert to ofnode functions
+Date: Wed, 14 Feb 2024 23:30:01 +0300
+Message-Id: <20240214203001.150942-1-bigunclemax@gmail.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-X-Mailman-Approved-At: Wed, 14 Feb 2024 21:11:33 +0100
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,34 +92,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 2024-02-14 at 19:02 +0530, Sumit Garg wrote:
->=20
-> >=20
-> > Also, is devicetree-rebasing a "forked copy"? A fork would imply some
-> > difference from upstream. I would guess this is more like a mirror.
->=20
-> AFAIK, it's a mirror from upstream with a different directory
-> (Makefile) structure. Ian may clarify further as to how this mirror is
-> kept updated.
+FDT functions is not working when OF_LIVE is enabled.
+Convert fdt parsing functions to ofnode parsing functions
 
-It's not really a mirror nor a fork, I guess it is something in
-between.
+Signed-off-by: Maksim Kiselev <bigunclemax@gmail.com>
+---
+ drivers/pci/pcie_ecam_generic.c | 11 +++++------
+ 1 file changed, 5 insertions(+), 6 deletions(-)
 
-It's a rewritten tree which extracts the DTS bits only from the kernel
-source into a standalone source repo. It's produced using "git filter-
-branch", all the scripting to do so is at:
+diff --git a/drivers/pci/pcie_ecam_generic.c b/drivers/pci/pcie_ecam_generic.c
+index 2e089b0e03..f5bc6e3d92 100644
+--- a/drivers/pci/pcie_ecam_generic.c
++++ b/drivers/pci/pcie_ecam_generic.c
+@@ -10,7 +10,7 @@
+ #include <common.h>
+ #include <dm.h>
+ #include <pci.h>
+-#include <asm/global_data.h>
++#include <linux/ioport.h>
+ #include <linux/printk.h>
+ 
+ #include <asm/io.h>
+@@ -133,18 +133,17 @@ static int pci_generic_ecam_write_config(struct udevice *bus, pci_dev_t bdf,
+ static int pci_generic_ecam_of_to_plat(struct udevice *dev)
+ {
+ 	struct generic_ecam_pcie *pcie = dev_get_priv(dev);
+-	struct fdt_resource reg_res;
+-	DECLARE_GLOBAL_DATA_PTR;
++	ofnode node = dev_ofnode(dev);
++	struct resource reg_res;
+ 	int err;
+ 
+-	err = fdt_get_resource(gd->fdt_blob, dev_of_offset(dev), "reg",
+-			       0, &reg_res);
++	err = ofnode_read_resource(node, 0, &reg_res);
+ 	if (err < 0) {
+ 		pr_err("\"reg\" resource not found\n");
+ 		return err;
+ 	}
+ 
+-	pcie->size = fdt_resource_size(&reg_res);
++	pcie->size = resource_size(&reg_res);
+ 	pcie->cfg_base = map_physmem(reg_res.start, pcie->size, MAP_NOCACHE);
+ 
+ 	return 0;
+-- 
+2.40.1
 
-https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebas=
-ing.git/tree/scripts
-
-The conversion state is part of
-https://github.com/ijc/devicetree-conversion-state-v3/, that repo
-contains all of upstream Linux commits too, since the branches there
-track the most recently converted inputs to support incremental
-updates.
-
-There's also the filter-map branch which maintains the state needed to
-not have to redo the conversion every time (which from scratch took
-days last time...)
-
-Ian
