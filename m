@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E275C48BC1
-	for <u-boot@archiver.kernel.org>; Wed, 14 Feb 2024 21:40:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1AF2C48BC1
+	for <u-boot@archiver.kernel.org>; Wed, 14 Feb 2024 21:41:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4E4A987CF9;
-	Wed, 14 Feb 2024 22:40:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EFC1087CAB;
+	Wed, 14 Feb 2024 22:41:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="s2Zo9V0g";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="kIpspcJr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7C24F87CAB; Wed, 14 Feb 2024 22:40:23 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ id 2A4E087CAB; Wed, 14 Feb 2024 22:41:35 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 19F3A87BBA
- for <u-boot@lists.denx.de>; Wed, 14 Feb 2024 22:40:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 19539879E0
+ for <u-boot@lists.denx.de>; Wed, 14 Feb 2024 22:41:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1707946816; x=1708551616; i=xypron.glpk@gmx.de;
- bh=9DfDLuuYzvixSqbPrE4eJ2CBdB/uKDDYaOFVSxFbuh8=;
+ t=1707946887; x=1708551687; i=xypron.glpk@gmx.de;
+ bh=aRKezAtsOP/at5Uax17rG2oC3dln9skP7DRritjGEZs=;
  h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
  In-Reply-To;
- b=s2Zo9V0gNKbL7XT+2quit9MWa/cp4Hc7v5G/SFLDhlW4GGl69sTIENhxD7G+4Or5
- +65fkyqeKZCMcF15j9ZMjaB6XglOPBnI+4PM0MRPBrdK1pCbf3HAztVKHZ/wJgbvY
- 337Wnanf3LA/QGpLx/keglu1XY22Z9UT3g3ntvXfvKTPG1qGnwSmUPxVDiJT8Ynln
- o0FIfzg6VsGbzooJfg20jfPJGWrXBi7WhXX0Yqb4TaLIioZCEqYmL9XqDR2OX5Mw3
- I6ptknyRpq8/B1VODsd4cME6LQdOnCz0q+k72+63xS5qIinUc8+3qTrdRouFkN6fe
- +qI1jZ+cjS/BHWvwtw==
+ b=kIpspcJrN2GYBfFSVBSQQ3RwkQsEcA4b9VvlcHpKu7x092gxP7+Livk0Vk6ZPCT1
+ 0C4hux7WiCDor+n0s3RG4vZKJt87RqNV4Yr8cjbiFyRpF10V03i9xCm0rcP58hjgx
+ FJ8dEU2VgySbxuIzG1dm+FUnSwWk5PUjnFFuRYYnFPoHAIrCmh1Vzb4M++uIlaL4L
+ 787Oma1EY/YYekKfdPK6XLpnuGViV9qbQUyLSa7XP7vEw9+nzuASGQ5cQ4MoXoreT
+ rcceUgEzK1ALXFZk0Zrj0A+CqY7yeKqcDO9Rjl5qRWV+tWlLJfprA30/zeGZbvoF6
+ y/KkNRVFr1VBaLRjpA==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.161] ([178.202.40.247]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MLzBp-1rIZ1K3emP-00Hulu; Wed, 14
- Feb 2024 22:40:15 +0100
-Message-ID: <2a659d15-1b1f-4187-b700-827558591084@gmx.de>
-Date: Wed, 14 Feb 2024 22:40:24 +0100
+Received: from [192.168.123.161] ([178.202.40.247]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1Mlw7f-1rALWm2Wg7-00j5dq; Wed, 14
+ Feb 2024 22:41:27 +0100
+Message-ID: <782e7a88-b8ad-4220-8c86-113f7d1277a2@gmx.de>
+Date: Wed, 14 Feb 2024 22:41:40 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 1/5] tee: optee: fix description in Kconfig
+Subject: Re: [PATCH v1 2/5] tee: sandbox: fix spelling errors
+Content-Language: en-US, de-DE
 To: Igor Opaniuk <igor.opaniuk@foundries.io>
 Cc: Igor Opaniuk <igor.opaniuk@gmail.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jens Wiklander <jens.wiklander@linaro.org>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
+ Jens Wiklander <jens.wiklander@linaro.org>,
+ Jorge Ramirez-Ortiz <jorge@foundries.io>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 References: <20240214183444.493629-1-igor.opaniuk@gmail.com>
- <20240214183444.493629-2-igor.opaniuk@gmail.com>
-Content-Language: en-US, de-DE
+ <20240214183444.493629-3-igor.opaniuk@gmail.com>
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240214183444.493629-2-igor.opaniuk@gmail.com>
+In-Reply-To: <20240214183444.493629-3-igor.opaniuk@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:I0GVI2jQ7aV1HRtZimqJWI4VlYcgkiXg55COHVfCnxlsALHVehu
- 5nGB4yhLjn9jQyCOrN1xxreA96YfWEKGX9z2jyPpOIojatuT24Xy5yQoyblxzKqDVPJLSF/
- rUVH9BzQARUZxXGWBwOryLkTVxMBnpFC36+FCHHFypU4FRiamSE+UpD7yeIcAeKV9/VpiWC
- 5ev9amLdBOVOQXli22lrA==
-UI-OutboundReport: notjunk:1;M01:P0:QZp2WNzDSOY=;NViugOch7p+PWzVHsIuxU7IZA5H
- TBgkwjsSk9aiHhfg2rZRowVYI8dPq2Rfamhxm74GLZJzbIEh/oLsAIc0gaw9jfg55vgKWbGsL
- bN96rKQroD5Ya+25lQsSHGrE42i/1U2wdo9jO4P//cW+2SPRYpUJllfsecaKni3nD3zHeUEYM
- 9d/eAhqy1eedQD6tkJPokpg2Jp11j8Cf2X6q1288LBcTZgIj5RHrhBI70yLXQCKmRMsekddqx
- ekcCBBEUFkCvUwLPUck/NSk3AN61hOIpZPbILaxYUeoeruwW6mZwz/G6BtktADccF3/qZUdyY
- cOPZ8zFiNPWWPrOEtwraxcFA3/hPmuvquCCiOoBdz1RAe6doRVWoFlLPYSIA1BkTk0lEDDDjn
- V7WUIlIXWxuyZxI1uifk/g8XTb2nbOYFhuYGJ0d4j7TroRWtIyV8M93DUAEvRHiNz+eCGVOud
- THmPBs3RdiN9wMGykzD2sOLTEY9gmfUG+ZHnFcOkI71iwyTdSkIsWaO30YsM3Av34pzZIkrBJ
- Uo4X4wDoLqv+4SUGG14oAVhtQKhM3cQUmoXBmlcjDEKnTzzoNTlLOop8pki3x58W5c+uRafE0
- BXjqwXCB/SU6JONRmEPzW5YzwQYgYy8zfAA+3qxlwd+CqCW1pSU6dHkAJ/1hkeCjKeKe3VRsY
- FAdgSgnFeIM+zOKB6SvcfaglcONXbszjuNj9P+AsuFmTLRKcMq1CU0kh5eT4lSpPW1+mBp8S3
- IWNoqvybmfv7AxdrOaTmSF4Y/doKUjvi22DcqtnRPTQsLSRS+bXE6snB77BbPjQKz+bXNMKhH
- QARPdUVWg1CigCn8+3CWzE49IueWMaAFJd4yLa9pxJi4I=
+X-Provags-ID: V03:K1:+4+3p/vURkHuFaBBEFtZmz1liKK3m6lSrVTNDGsD3dffJ6798Kj
+ tk3SUd6W4enMyVqlvWaUSpznSluF2Zo2S6WLlRo4CIgO9CG69BAB7B/P7qlIL/168sugnVe
+ R50ccyYiZA7oDZuATCzH3tyVIBfIUY6OZZvu6jXXiZO7/5JCrpQKrQpqAwur26U7UxDoZxB
+ Tstu/YLyvuIgb7p0znYoA==
+UI-OutboundReport: notjunk:1;M01:P0:VhNGMFJczjM=;db+97DBo6b3vsdpcjM3jmf41W8T
+ geAo1h34smNlOtHEBk49iBCA1AL4WO1GIy1BQdfklw3NAHzJF92181QBqwfZYvArOplOndU9P
+ lGS/nO87Ue6AG/H7nEtvZ4NUKmarKKPUcx4wnpDs0SRmjINwDilNzhVcwKumhLIYIzApkFiZX
+ mJOQSANqQVfI+1ja5L3wvQv7QxugItYkJSEAR77YTpXMBLY8cpdOUVvcWhn8fZluXywDkilnh
+ Q6qscjHEmEeQ666fdr3MxHKYPqrTJJLoNhRosmFvgG3yow8ngeTFR4OAZGNsQudr2NDIFygEK
+ mnE10BrI3S0yDac7NTVFQIRtaySAHQL2y6wIRQ7H7kZrDidxBo2k/xJPnvO6qIH3//QcNjNss
+ YPZOfwGb+RkGuSwaw04CkzN9jkBmoWr/BEwga5RrOtZHKabzBYA+wr7lMUm0vi4ohbt/Ginhb
+ QrGkJ3lmnopTAq4tuzanDl26DNX0vkooOzxWlXMs3G/gZb4BjrISKVCfulsEJ1RofusmlX6m4
+ OUSvMgdQKSFbXtksMv9pfVWp0+HIy65thQfQeNOQ0KPKaRx2sT5uCw79Jbz5DLGgiXiPs45ei
+ SuF7XHFbpPsDe/6Glxkv1f0HpZ9Fptw+ekvjeBaDchouooFjGqkbb4V3Fud7OHIVX1ePLdTkq
+ HRCkRqHxKoV4CnVj06hLY7B2F85MQ27lVkoM7dNnhEiNDQtvWRlZwo1BRhq1NwADEU0iAsGQK
+ k0zzQo5ByQF2bnH2eohAP3xz8WJMw34M9nVC4SnIfa7JuUD6TprKjShgpjfitOh5Kmg4nG/7c
+ 5jW0/iT7G9w6SkLBgpUrrnxVfRKxwA6TC8Mq6Im7cyJKE=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,33 +92,51 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 2/14/24 7:34 PM, Igor Opaniuk wrote:
-> Fix OPTEE_TA_AVB symbol description in Kconfig:
-> s/"write"rb"/"write_rb"/g
+> Fix spelling errors in comments.
 >
 > Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
-
-The change is consistent with
-cmd/avb.c:424:
-U_BOOT_CMD_MKENT(write_rb, 3, 0, do_avb_write_rb, "", ""),
 
 Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
 > ---
 >
->   drivers/tee/optee/Kconfig | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+>   drivers/tee/sandbox.c | 8 ++++----
+>   1 file changed, 4 insertions(+), 4 deletions(-)
 >
-> diff --git a/drivers/tee/optee/Kconfig b/drivers/tee/optee/Kconfig
-> index 9dc65b0501e..db0bcfa6f15 100644
-> --- a/drivers/tee/optee/Kconfig
-> +++ b/drivers/tee/optee/Kconfig
-> @@ -19,7 +19,7 @@ config OPTEE_TA_AVB
->   	default y
->   	help
->   	  Enables support for the AVB Trusted Application (TA) in OP-TEE.
-> -	  The TA can support the "avb" subcommands "read_rb", "write"rb"
-> +	  The TA can support the "avb" subcommands "read_rb", "write_rb"
->   	  and "is_unlocked".
+> diff --git a/drivers/tee/sandbox.c b/drivers/tee/sandbox.c
+> index 86219a9bb1a..ec66401878c 100644
+> --- a/drivers/tee/sandbox.c
+> +++ b/drivers/tee/sandbox.c
+> @@ -14,7 +14,7 @@
+>   #include "optee/optee_private.h"
 >
->   config OPTEE_TA_RPC_TEST
+>   /*
+> - * The sandbox tee driver tries to emulate a generic Trusted Exectution
+> + * The sandbox tee driver tries to emulate a generic Trusted Execution
+>    * Environment (TEE) with the Trusted Applications (TA) OPTEE_TA_AVB a=
+nd
+>    * OPTEE_TA_RPC_TEST available.
+>    */
+> @@ -23,7 +23,7 @@ static const u32 pstorage_max =3D 16;
+>   /**
+>    * struct ta_entry - TA entries
+>    * @uuid:		UUID of an emulated TA
+> - * @open_session	Called when a session is openened to the TA
+> + * @open_session	Called when a session is opened to the TA
+>    * @invoke_func		Called when a function in the TA is to be invoked
+>    *
+>    * This struct is used to register TAs in this sandbox emulation of a =
+TEE.
+> @@ -140,8 +140,8 @@ static u32 pta_scp03_invoke_func(struct udevice *dev=
+, u32 func, uint num_params,
+>   			provisioned =3D true;
+>
+>   		/*
+> -		 * Either way, we asume both operations succeeded and that
+> -		 * the communication channel has now been stablished
+> +		 * Either way, we assume both operations succeeded and that
+> +		 * the communication channel has now been established
+>   		 */
+>
+>   		return TEE_SUCCESS;
 
