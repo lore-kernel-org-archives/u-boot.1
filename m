@@ -4,84 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DC38C48BC3
-	for <u-boot@archiver.kernel.org>; Wed, 14 Feb 2024 17:18:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31B16C48BC1
+	for <u-boot@archiver.kernel.org>; Wed, 14 Feb 2024 18:34:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F3708718A;
-	Wed, 14 Feb 2024 18:17:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1B45A8787C;
+	Wed, 14 Feb 2024 19:34:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=foundries.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ClHwIxmf";
+	dkim=pass (2048-bit key; secure) header.d=foundries.io header.i=@foundries.io header.b="G2RaFYAd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A09A587DB9; Wed, 14 Feb 2024 18:17:56 +0100 (CET)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id D10108787C; Wed, 14 Feb 2024 19:34:55 +0100 (CET)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BEF078796B
- for <u-boot@lists.denx.de>; Wed, 14 Feb 2024 18:17:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9A88D80E9A
+ for <u-boot@lists.denx.de>; Wed, 14 Feb 2024 19:34:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=foundries.io
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-411de7c6b3dso9111995e9.3
- for <u-boot@lists.denx.de>; Wed, 14 Feb 2024 09:17:45 -0800 (PST)
+ spf=pass smtp.mailfrom=igor.opaniuk@foundries.io
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-5639c8cc449so74741a12.2
+ for <u-boot@lists.denx.de>; Wed, 14 Feb 2024 10:34:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1707931065; x=1708535865; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3JZUIxrGm5UANZb/t1mh+nQ3a6lqeplTEALK7eUMZH0=;
- b=ClHwIxmfLFu0wPvCbMT0umM7JrYYnQ6jUPWK+CjzI7qV4+i/BzDN67wFY2vabc7Bqj
- Huw9bfFubWYnDB58xmxvlrALfV7yEG7sxRYfyY1GnTpqRVy8015i0wcgQLPdBe3/5Qqx
- eJnQKloars2nIvNbTYjS7VYReol5tcf2jwPe5X/dt8yio3x7HyWShcFIDdtmvpYDspXr
- 723gMjJH8l6QyuwJqgZsn6ErMKnZK/Bzkf2SVbYsEIhEXGhd4OV/xTu5ZxCFcubQ2kSQ
- +wXvkatwwYIg8U32XLA/afgyW6majTssBlaembupSIC93ffFIvobD+6l50L5cKavDOOy
- fpoA==
+ d=foundries.io; s=google; t=1707935688; x=1708540488; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Br7QgmtL56EB3uwKhAEV+FUsJQbv18oNuillspPtMaI=;
+ b=G2RaFYAdZAKimvjvfkFYNnmePY0bo1jJEA/9NkLagtquMm59FzzU7LBx2ochnKph3m
+ uMx5mAlDMgOZKCz39GJk/NNSjv6/MHYV7g2bn1j3sZ1/ngBVvbbZ4bpXLh0d2oDstS6L
+ 9YlCMI7jtrMppfSUHi1r84ela+pAw1NeiqIx1Gs1JLvgtfGLHLPW4Ee1vXBDOiXMPYgq
+ VH/A7Nwy1/sytxJin0LWNTUGc+cq62yK81hTjUiGwvb/YgqKX5fn3c8VyC7qI/uuo/61
+ hP9xnvUvcvX3ylIllFenGYtHi+4n74/GihbZnUcZww14nUQOsDQllWzBtUPDl1wTpiia
+ Is6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707931065; x=1708535865;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=3JZUIxrGm5UANZb/t1mh+nQ3a6lqeplTEALK7eUMZH0=;
- b=R/C+urOBpOm8EP8Vgg72eVuEO6pKhiOIEdWdeQatceJ0fpjyBKuSkHDwgWZdaYz4RJ
- tQ1MghchnRIfW4bKoAs3ZYX9mE1AC1dA04/mmb9tdIgsbaE0AswmCQeuyV1ij3DhLLAp
- NGM5jvuzOsT4gTs4r+IPxj0CFj+oaflWEcXQji087mIVwbFTtKEf5aotNH4AruHtckn/
- 5/E9Elw3RuYeh30m9Mg72UvBJOrcytjI0sumlym+fhC6zMG3Zp8WZvFWoWPwzVoVLCQe
- GjWVdZHdFNK8mRuPuDLKJesOsscD0LNWecIAAPSEtBuBMtHxrZq7n2UC68YUmObSKncM
- XjtA==
+ d=1e100.net; s=20230601; t=1707935688; x=1708540488;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Br7QgmtL56EB3uwKhAEV+FUsJQbv18oNuillspPtMaI=;
+ b=LXiAjlXYqjEsc7kRavZLszwx6yJiVGosL8XVJdTEDipcUS5cZMBxJQKZIpf70chcWv
+ zFtr09+/pqgxCuPhI8tqSvp5vSai6V3yqL61v85usUT6nGrG8TYeCSZLsVIJF1HwHD3T
+ izdsQUBKmcWne+hGr/PqgEo6ykYwRAaR9jMObJEKw0HRkn+yBCFD3S6MTf4s/W98kq7X
+ oeR4PjlxPpjec6FM+3MDC4demS5mi3UZiJNpWGUu/RGYixe0mE9thOIZ1n9eJt7qZBzB
+ rS2lMKT/wfns4s7xi349MiI8/O9oM94U3g1UVLnSCINHhjVpgJWFvKJHvIKcka1ndwjP
+ xO4A==
+X-Gm-Message-State: AOJu0YwUTDYDpT1WB3wiMPotoNNtEuGaY71iqhIcrbsfxFpipb0RnHXl
+ bW2H6VIED7+NjzAYDK9Nw9WPW8PKNLn9nnHeqFSI2jhWtUOK0/EPQtQadqv68WdfwCj9IU3KZJB
+ BjHg=
+X-Google-Smtp-Source: AGHT+IH0Z4BXrkpD5RixXne4YwXchVL2RqmqLqDWYd03M4dKEpaRvaK1OOVSqijgxpUcRRMjtDR8/A==
+X-Received: by 2002:a17:906:5a8a:b0:a3c:b36d:dffb with SMTP id
+ l10-20020a1709065a8a00b00a3cb36ddffbmr2175306ejq.16.1707935688562; 
+ Wed, 14 Feb 2024 10:34:48 -0800 (PST)
 X-Forwarded-Encrypted: i=1;
- AJvYcCXmC9pvPE29Us+G8fzZBzGa8Vy9dw2hKDaScaeoKlSDNzyPaoNbCwMM5Wmrcpm8p9Ogs14OGxmLthqhRjzFsyXAiaIfBQ==
-X-Gm-Message-State: AOJu0YzBisYY2Hg2rtdM4xwo39cP8nSmTLZtEeonRoDQ9hlcygV0/ko3
- +UZ4w/QxZyfczNz5ntQuBsVRGOux77Xg0qQi6me4lqKjCf4gOEfXW+Xvswevm68=
-X-Google-Smtp-Source: AGHT+IHPovz30kTtKBHKdBBvYNagwrL2w4HHP2O5E1QHpRGbqlSk2ysWuJ5MPJBpiutaE++lStZ+iQ==
-X-Received: by 2002:a05:600c:3ba8:b0:40f:e60f:438e with SMTP id
- n40-20020a05600c3ba800b0040fe60f438emr2824486wms.8.1707931064960; 
- Wed, 14 Feb 2024 09:17:44 -0800 (PST)
-X-Forwarded-Encrypted: i=1;
- AJvYcCVHLcC/Bbkl19VKoJ3gV2gDzjWZViQfQIkm7nrWGahH2B3TtS661ZBWrl8mqGosOsj457cqHRykvi3Feno/28BlrXl7ucwe4iIsI1zHximFPCvAiJFCFB53Vd/0d/lAoW7sOVNOfbF11zcRuHK0uwytNr6detiVUzhqnFTo93C07HL4aqnE82Cli3rJbdIlORb+rSpH6MOo6c7+ZRQ=
-Received: from lion.caleb.rex.connolly.tech (host-92-17-96-232.as13285.net.
- [92.17.96.232]) by smtp.gmail.com with ESMTPSA id
- fc10-20020a05600c524a00b00411e1782d33sm2538149wmb.23.2024.02.14.09.17.44
+ AJvYcCU4Y3ySDEcGgHC7LeRim+hoA3Bh142v1dMANCHNYCAnt4qesX9FdHIH/593qW/Bs+STDV00HAdDLep00SdeUUvNznNbLCjNDHaJQYpwXbeWRR/pwxDs0vJgx2jVv/psIW7dXvGY+tJ7DieXOKqPSeHDH0mkCB1mfSHEf8X8OwiMFZ+zSNz2/TBHR2T3qCDBfNTa8O8i3Td8A91fSjdlPBCoM5d9POmlxIxGduFTm+qm3AeFp/zhlZbYC1FDXbwnGmFHUijmS+WeK3PTUUvPcqskMH0RU42swpjpVMwFbxh6UUd7giHbLmnC/ckf2VcFzm4bmtloFRvBiJ3I7P0N92A0mP2R7faH/Rm+SDLYvG4QnlS9FeqzyFGH6YnjBz4JJqV0b4FT8q/upaWuBDGtGsW4GyU5viQwDSNz9x6hVGMpWRGpmX8kAGwassxgFvTcdCcHMLYixmQpWS2haKbmcBm2MB/fku5uRqWHHT/xSb/hG+NiWvJ4k0NTaefMo2+45sdgjZPBI7oW/AVuehro/+Ask9Bmp6vZDHlaC3BuEe/k1AsB/lbtFEZUijSjcB26E83edAV+ZCSMYTLczoeqZyw=
+Received: from localhost ([185.186.156.113]) by smtp.gmail.com with ESMTPSA id
+ qo3-20020a170907874300b00a3d03a5f7acsm1863543ejc.65.2024.02.14.10.34.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 14 Feb 2024 09:17:44 -0800 (PST)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Dan Carpenter <dan.carpenter@linaro.org>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH] button: qcom-pmic: fix some error checking
-Date: Wed, 14 Feb 2024 17:17:28 +0000
-Message-ID: <170793103298.4095603.7903662755965755863.b4-ty@linaro.org>
-X-Mailer: git-send-email 2.43.1
-In-Reply-To: <12e63b80-3c65-494c-94b4-bfd949232ef7@moroto.mountain>
-References: <12e63b80-3c65-494c-94b4-bfd949232ef7@moroto.mountain>
+ Wed, 14 Feb 2024 10:34:46 -0800 (PST)
+From: Igor Opaniuk <igor.opaniuk@foundries.io>
+X-Google-Original-From: Igor Opaniuk <igor.opaniuk@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Igor Opaniuk <igor.opaniuk@gmail.com>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Bin Meng <bmeng@tinylab.org>,
+ Etienne Carriere <etienne.carriere@foss.st.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jens Wiklander <jens.wiklander@linaro.org>,
+ Jorge Ramirez-Ortiz <jorge@foundries.io>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Roger Knecht <rknecht@pm.me>, Sean Edmond <seanedmond@microsoft.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v1 0/5] TEE: minor cleanup
+Date: Wed, 14 Feb 2024 19:34:39 +0100
+Message-Id: <20240214183444.493629-1-igor.opaniuk@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,18 +105,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+- Address some spelling errors and typos
+- Support CMD_OPTEE_RPMB for SANDBOX configurations and add python tests
+- Remove common.h inclusion for drivers/tee
 
-On Wed, 31 Jan 2024 10:09:15 +0300, Dan Carpenter wrote:
-> The pmic_reg_read() function can return errors.  Add a check for that.
-> 
-> 
+Igor Opaniuk (5):
+  tee: optee: fix description in Kconfig
+  tee: sandbox: fix spelling errors
+  cmd: optee_rpmb: build cmd for sandbox
+  test: py: add optee_rpmb tests
+  tee: remove common.h inclusion
 
-Applied, thanks!
+ cmd/Kconfig                        |  4 +++-
+ drivers/tee/broadcom/chimp_optee.c |  2 +-
+ drivers/tee/optee/Kconfig          |  2 +-
+ drivers/tee/optee/core.c           |  1 -
+ drivers/tee/optee/i2c.c            |  1 -
+ drivers/tee/optee/rpmb.c           |  1 -
+ drivers/tee/optee/supplicant.c     |  2 +-
+ drivers/tee/sandbox.c              | 10 +++++-----
+ drivers/tee/tee-uclass.c           |  1 -
+ test/py/tests/test_optee_rpmb.py   | 20 ++++++++++++++++++++
+ 10 files changed, 31 insertions(+), 13 deletions(-)
+ create mode 100644 test/py/tests/test_optee_rpmb.py
 
-[1/1] button: qcom-pmic: fix some error checking
-      commit: 6b929e9f3c16bbddeffb85351e93db13eaa9b57d
-
-Best regards,
 -- 
-// Caleb (they/them)
+2.34.1
 
