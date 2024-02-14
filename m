@@ -4,77 +4,115 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03094C48BC4
-	for <u-boot@archiver.kernel.org>; Wed, 14 Feb 2024 11:16:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89553C48BC1
+	for <u-boot@archiver.kernel.org>; Wed, 14 Feb 2024 11:52:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3BF7087DEC;
-	Wed, 14 Feb 2024 12:16:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
+	by phobos.denx.de (Postfix) with ESMTP id 630BE87E07;
+	Wed, 14 Feb 2024 12:52:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="RgBrq6Oo";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="kTKAamh0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3756E87DF9; Wed, 14 Feb 2024 12:16:07 +0100 (CET)
-Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
- [IPv6:2607:f8b0:4864:20::b2e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E1A7387E02; Wed, 14 Feb 2024 12:52:47 +0100 (CET)
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on20601.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2416::601])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BCDA987DE6
- for <u-boot@lists.denx.de>; Wed, 14 Feb 2024 12:15:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1351387C6D
+ for <u-boot@lists.denx.de>; Wed, 14 Feb 2024 12:52:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=monstr.eu
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
-Received: by mail-yb1-xb2e.google.com with SMTP id
- 3f1490d57ef6-dcc7cdb3a98so1874973276.2
- for <u-boot@lists.denx.de>; Wed, 14 Feb 2024 03:15:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1707909358; x=1708514158;
- darn=lists.denx.de; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=WULajc2RgFy56p26opL14oOcnFP4UnUu0ivHMw8L1NU=;
- b=RgBrq6OoStV8OTSoAsvWcF9Bs7GlM5Iq5X5jL5iCzUADq1uNJnrIe3YeWGSbTxTS7C
- fmclNfy9GWr2ccCX3tzJh+FxnUtTogSNnyPmhxYAWFk5qQHXx2RDhOVaWm62BUINFFku
- gksK+Vw9ukHLj/0iWwffuLQczSkBDzkOXU6yDBRv3vwU2liMCtQzNyS4ZU9UHBDuf6HN
- o3bLLz0ByJmyorefrZp96vqN8l7sCFiK/kDVozNPSiy1sgP5INhOQDKS1Qn4l9ywJ3ui
- 2x5fc8WwITqelQpb/FSwk97A2trsb/eK8v5aAO/894dS5nV09nJc63CUY7oGp+yWsCak
- pZ6g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707909358; x=1708514158;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=WULajc2RgFy56p26opL14oOcnFP4UnUu0ivHMw8L1NU=;
- b=hfur2m20vSe3IuxbXpCca4yJA8Rso/t758mzEbuEkSih6ziENz//ZbHrk8m+HLB+/j
- WWvmtoQCpiWamVW5Vzy8aG+Ad/65YbPqRFojniVvBKOP3WHItYq4F4zQSYOyvOsUuZq4
- KVnpQXrUSKqjVJP1lvHqBB7+Tbi+S+6dBR1bkVQooOXDBglOFL0rPKG68LfK/J7jCDWo
- U0p/M+XOiAAkElHDGuGWrIAv4E3Jcl+ZGW8iSV57lz6gNos9cSuHUELYW7ggJRt2jEaE
- 8tX68x6jk40gOSz9qj73EOlDKzzSgiGq72FVfCed4g+/rCgn71Dt5m0Yq02xGBhp/OMM
- Nozw==
-X-Gm-Message-State: AOJu0YwVojyNvTbUnxf1Rj7iUMAoE+U03b3hXqhhWsrmemIOxXAApMkL
- I4w69JkZCSK0L07Tj8qWfOIBsemy2FvenKFjRDT79Wfuv2YTP6aRjuNGvBqVSohrDSL2ERslxYa
- yeWYhQ8w1W3sMxDcKDhnrHqzBs42HlvyB7t6q
-X-Google-Smtp-Source: AGHT+IHGGbYfhVgGCCUFosjBTmMvQ4N+RbB8vqjnVpIqnLnFGGfhmyTn08aRjhOX7xF+lxnQcMDg5FzSTMf4cKXzndU=
-X-Received: by 2002:a25:2708:0:b0:dcd:c3ba:d788 with SMTP id
- n8-20020a252708000000b00dcdc3bad788mr37540ybn.47.1707909358393; Wed, 14 Feb
- 2024 03:15:58 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=crXY6tX+AIvpe2MNc3IQc6+Dqv4gbD67PI9ZYug9LcmHRsagQfw/U+rMkRghA/nXmf4rYkxkR/lmEsP/lcpHW5TseqTQPO15kNCnGoQb+DKEhtwrH7XtAuWiwA0vQxMyu9oq2t4nEgpJf3dEoY2bOs6aq/LejWHVv20+k2my0Ul0qDDocy3hM8D9/jnc0QwW8YtLWbHIKWSp9M2q3fmv+VePHuy73RkLUqhgUMOauybUgCnRYiLEg9pbkXF1cJLYCophX45GjNYOy4hbPm+0j9ZDQNwlq9kzrczlrAA10tCNUGnLHpHsHcb2Rlll/H3lA094P2eg5MFVJMgsz7wE4g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=5y1DLsNRrrsCgn4uOqt7YDap5HWqXOrVPPhEUYZIDqg=;
+ b=OVTizWPHX9GNA0Sx0dBm1bymDtWCkA0DmmjcP7hx1llQpdrEEvAztmZ55J9ZapBuxZaRFgUd2pcXaUEMwU3Gi69lY+RYY5oE34gKvt3v6kSaGdA1dIjeZZjiOkhTDK7FWmGl02d3bgGlIYQey2RbzOmkqRXqZ+roshILnw6UiFWj9XwWg6SPb4DCAC2064HLC/7Kun+vVCXkKNuGb6rp0zbREr2MDI/aVhcmhUwtWhWc/qSx8V0fXsSe0PEFG0ZtDyWaz9VOTFG3lsBESDKmEpHJ+wT4FvTmPsglDkxNs3i7wJ/ObKvFpSS3oL4GwQTLZeSWdIDE+ZfA3xe+JO+7hw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=5y1DLsNRrrsCgn4uOqt7YDap5HWqXOrVPPhEUYZIDqg=;
+ b=kTKAamh0u4/x5qBx8whEqNQLc7TV9CQRSHukNwV9/KyZR5LY4sXt6zWK2NZNTIC9r+Xz1vxcOCKx8GNO/GIY5qoXuIbA2pqoBbtw0nllhb2hZ481+ESf1MDkOhj0nwBTfVC/bCMQ9v3K17YvXoXpYSN6S2jvw1DgIWVgbAO2KhA=
+Received: from BN9PR03CA0577.namprd03.prod.outlook.com (2603:10b6:408:10d::12)
+ by DS7PR12MB8202.namprd12.prod.outlook.com (2603:10b6:8:e1::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7292.25; Wed, 14 Feb
+ 2024 11:52:37 +0000
+Received: from BN2PEPF000044A1.namprd02.prod.outlook.com
+ (2603:10b6:408:10d:cafe::f7) by BN9PR03CA0577.outlook.office365.com
+ (2603:10b6:408:10d::12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7292.26 via Frontend
+ Transport; Wed, 14 Feb 2024 11:52:37 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BN2PEPF000044A1.mail.protection.outlook.com (10.167.243.152) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7292.25 via Frontend Transport; Wed, 14 Feb 2024 11:52:37 +0000
+Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Wed, 14 Feb
+ 2024 05:52:35 -0600
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@xilinx.com>
+CC: Algapally Santosh Sagar <santoshsagar.algapally@amd.com>, "Heinrich
+ Schuchardt" <xypron.glpk@gmx.de>, Leo <ycliang@andestech.com>, Masahisa
+ Kojima <masahisa.kojima@linaro.org>, Padmarao Begari
+ <padmarao.begari@microchip.com>, Rick Chen <rick@andestech.com>, Shiji Yang
+ <yangshiji66@outlook.com>, Simon Glass <sjg@chromium.org>, Tom Rini
+ <trini@konsulko.com>, Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Subject: [PATCH 0/5] riscv: mbv: Enhance MB-V support with also enabling SPL
+Date: Wed, 14 Feb 2024 12:52:28 +0100
+Message-ID: <cover.1707911544.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.36.1
 MIME-Version: 1.0
-References: <20230413062008.981238-1-bmeng@tinylab.org>
- <20230413062008.981238-9-bmeng@tinylab.org>
-In-Reply-To: <20230413062008.981238-9-bmeng@tinylab.org>
-From: Michal Simek <monstr@monstr.eu>
-Date: Wed, 14 Feb 2024 12:15:47 +0100
-Message-ID: <CAHTX3dKP2guG2=4MM_WgMH4NRU5yH281GLgAXHfnDLHLg4jKBA@mail.gmail.com>
-Subject: Re: [PATCH v2 9/9] riscv: Update alignment for some sections in
- linker scripts
-To: Bin Meng <bmeng@tinylab.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Andrew Scull <ascull@google.com>,
- Leo <ycliang@andestech.com>, 
- Rick Chen <rick@andestech.com>, Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1036; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=wEnzMtus1Lsu+p8ennozAPqVPKRfRZA7WraM9FbdTg0=;
+ b=owGbwMvMwCR4yjP1tKYXjyLjabUkhtQzK6tuJqXoSnM86pCK4T7E5Ptv5b7q3c9eTC9Jd5jeN
+ qV/682yjlgWBkEmBlkxRRZpmytn9lbOmCJ88bAczBxWJpAhDFycAjCRBleGuQJLd53r3vRs+9JL
+ Re/XyKhlFe0Jc2KYK/PEziMsMPJFhatZftuJj5t5nGMZAQ==
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN2PEPF000044A1:EE_|DS7PR12MB8202:EE_
+X-MS-Office365-Filtering-Correlation-Id: d9e3355f-4691-4d64-6505-08dc2d53707f
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: eKlyvEib/6DSK95MBcpgN/EdncmdHS9elllp4oF/k2GXhBfVmkREriAp9mWs1Qz16xKBw8W7tzBmYlUPEV6+T6tDkOyKYWMg28n6rmtNUod7B4Js7HoUNEK+P74Pi+9zWanF4iWq6+XYMc+104TQO7Gq4PXqE4FHnBc2AxbHyUGRJL3tpvLXBuTvVPp7yX21GZCnwBEwPNx7NbWiUYXgB4iS/vfs8rwms8CdtznewdbfQLSFE+5WZoaZmQ9ddYay7R/7vNRIT02rlhqDNovOz586dK0/8Detto3GsGsVlAXqMvgxL1o9/Rc1zgDb7WDi6PnxDpSYJuLfAEWtm5TztubSpLjC6ywH4BkwWmt3lG4QUJTf/qBmLguLw4CnZIEgL2h/5we+taBRhoKdbWaj37YijVtM7xjTGU5r+tFlqCxSK+CJRec5/r5HV5QTxdzUerhPg/22KcQHofMUZbtpCbpvwZn4VgRCDrJ6RAuDoX6wq7wwVaEF55oInr5a9/ka041yFgmIqm4taSrTH2e0BH0oavSFXugaR4FxPkN1YTM5jSKpoSZVRdGKmZSYyP3ClCvCyasQA1FNghTOkSJ0G6dRTe5qsbFKeau2SW5Km/s=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(136003)(39860400002)(346002)(396003)(376002)(230922051799003)(82310400011)(186009)(451199024)(64100799003)(1800799012)(40470700004)(36840700001)(2906002)(4326008)(4744005)(8936002)(44832011)(8676002)(5660300002)(110136005)(336012)(426003)(83380400001)(2616005)(26005)(82740400003)(16526019)(36756003)(86362001)(70586007)(356005)(81166007)(54906003)(316002)(70206006)(6666004)(478600001)(41300700001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Feb 2024 11:52:37.2231 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d9e3355f-4691-4d64-6505-08dc2d53707f
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF000044A1.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB8202
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,133 +129,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Bin,
+Hi,
 
-=C4=8Dt 13. 4. 2023 v 8:21 odes=C3=ADlatel Bin Meng <bmeng@tinylab.org> nap=
-sal:
-
-> Some sections in the linker scripts are aligned to 4 bytes, which
-> may cause misaligned exception on some platforms, e.g.: clearing
-> the bss section on 64-bit hardware if __bss_start does not start
-> from a naturally 8 bytes aligned address.
->
-> Signed-off-by: Bin Meng <bmeng@tinylab.org>
->
-> ---
->
-> (no changes since v1)
->
->  arch/riscv/cpu/u-boot-spl.lds | 2 +-
->  arch/riscv/cpu/u-boot.lds     | 6 +++---
->  2 files changed, 4 insertions(+), 4 deletions(-)
->
-> diff --git a/arch/riscv/cpu/u-boot-spl.lds b/arch/riscv/cpu/u-boot-spl.ld=
-s
-> index c3b4907905..d1113a59aa 100644
-> --- a/arch/riscv/cpu/u-boot-spl.lds
-> +++ b/arch/riscv/cpu/u-boot-spl.lds
-> @@ -44,7 +44,7 @@ SECTIONS
->                 __binman_sym_end =3D .;
->         } > .spl_mem
->
-> -       . =3D ALIGN(4);
-> +       . =3D ALIGN(8);
->
->         _end =3D .;
->         _image_binary_end =3D .;
-> diff --git a/arch/riscv/cpu/u-boot.lds b/arch/riscv/cpu/u-boot.lds
-> index 1c937aebee..15b5cbc585 100644
-> --- a/arch/riscv/cpu/u-boot.lds
-> +++ b/arch/riscv/cpu/u-boot.lds
-> @@ -57,7 +57,7 @@ SECTIONS
->                 __efi_runtime_rel_stop =3D .;
->         }
->
-> -       . =3D ALIGN(4);
-> +       . =3D ALIGN(8);
->
->         /DISCARD/ : { *(.rela.plt*) }
->         .rela.dyn : {
-> @@ -66,7 +66,7 @@ SECTIONS
->                 __rel_dyn_end =3D .;
->         }
->
-> -       . =3D ALIGN(4);
-> +       . =3D ALIGN(8);
->
->         .dynsym : {
->                 __dyn_sym_start =3D .;
-> @@ -74,7 +74,7 @@ SECTIONS
->                 __dyn_sym_end =3D .;
->         }
->
-> -       . =3D ALIGN(4);
-> +       . =3D ALIGN(8);
->
->         _end =3D .;
->
-
-This change has actually a side effect on SPL and its behavior. You are
-enforcing here that symbols _end
-or _image_binary_end are 8byte aligned but if previous section are only 4
-bytes aligned you are forcing 4byte gap
-between the end of u-boot-nodtb.bin binary and symbol reference.
-It means when you want to attach dtb behind SPL you have a problem.
-DTBs should be 64bit aligned. It means alignment of 8bytes is fine but you
-need to also make sure that
-spl/u-boot-nodtb.bin is 8byte aligned.
-
-Pretty much talking about change like below but it would require to change
-all u-boot-spl.lds to make sure that end symbols are
-8byte aligned that appended DTB is 8byte aligned all the time.
-
-Thanks,
-Michal
-
-diff --git a/scripts/Makefile.spl b/scripts/Makefile.spl
-index 407fc52376a5..486360f10176 100644
---- a/scripts/Makefile.spl
-+++ b/scripts/Makefile.spl
-@@ -320,7 +320,7 @@ endif
- endif
-
- ifneq ($(build_dtb),)
--$(obj)/$(SPL_BIN)-dtb.bin: $(obj)/$(SPL_BIN)-nodtb.bin \
-+$(obj)/$(SPL_BIN)-dtb.bin: $(obj)/$(SPL_BIN)-nodtb-align.bin \
-                $(if
-$(CONFIG_$(SPL_TPL_)SEPARATE_BSS),,$(obj)/$(SPL_BIN)-pad.bin) \
-                $(FINAL_DTB_CONTAINER)  FORCE
-        $(call if_changed,cat)
-@@ -328,7 +328,7 @@ $(obj)/$(SPL_BIN)-dtb.bin: $(obj)/$(SPL_BIN)-nodtb.bin =
-\
- $(obj)/$(SPL_BIN).bin: $(obj)/$(SPL_BIN)-dtb.bin FORCE
-        $(call if_changed,copy)
- else
--$(obj)/$(SPL_BIN).bin: $(obj)/$(SPL_BIN)-nodtb.bin FORCE
-+$(obj)/$(SPL_BIN).bin: $(obj)/$(SPL_BIN)-nodtb-align.bin FORCE
-        $(call if_changed,copy)
- endif
-
-@@ -390,6 +390,9 @@ OBJCOPYFLAGS_$(SPL_BIN)-nodtb.bin =3D $(SPL_OBJCFLAGS) =
--O
-binary \
- $(obj)/$(SPL_BIN)-nodtb.bin: $(obj)/$(SPL_BIN) FORCE
-        $(call if_changed,objcopy)
-
-+$(obj)/$(SPL_BIN)-nodtb-align.bin: $(obj)/$(SPL_BIN)-nodtb.bin
-+       @dd if=3D$< of=3D$@ conv=3Dblock,sync bs=3D8 2>/dev/null;
-+
- OBJCOPYFLAGS_u-boot-x86-start16-spl.bin :=3D -O binary -j .start16
- $(obj)/u-boot-x86-start16-spl.bin: $(obj)/u-boot-spl FORCE
-        $(call if_changed,objcopy)
+enhance MB-V support with SPL configuration to support OpenSBI.
+All of that changes are out of generic Risc-V support that's why happy to
+take it via my tree. Please let me know if you want this to take via riscv
+subtree.
 
 Thanks,
 Michal
 
 
---=20
-Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
-w: www.monstr.eu p: +42-0-721842854
-Maintainer of Linux kernel - Xilinx Microblaze
-Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP ARM64 SoCs
-U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal SoCs
+Michal Simek (5):
+  riscv: mbv: Align addresses with default DT
+  riscv: mbv: Enable REMAKE_ELF by default
+  riscv: mbv: Switch to OF_SEPARATE with fixed address
+  riscv: mbv: Moving little_endian variable to data section
+  riscv: mbv: Enable SPL and binman
+
+ arch/riscv/dts/xilinx-mbv32.dts      |  3 +++
+ board/xilinx/Kconfig                 |  1 +
+ board/xilinx/common/board.c          |  8 ++++++++
+ board/xilinx/mbv/Kconfig             | 14 ++++++++++++--
+ board/xilinx/mbv/board.c             | 10 ++++++++++
+ configs/xilinx_mbv32_defconfig       | 23 ++++++++++++++++++-----
+ configs/xilinx_mbv32_smode_defconfig | 25 ++++++++++++++++++++-----
+ drivers/serial/serial_xuartlite.c    |  2 +-
+ 8 files changed, 73 insertions(+), 13 deletions(-)
+
+-- 
+2.36.1
+
