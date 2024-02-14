@@ -4,71 +4,172 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E712C48BEB
-	for <u-boot@archiver.kernel.org>; Wed, 14 Feb 2024 10:23:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 636D0C48BC4
+	for <u-boot@archiver.kernel.org>; Wed, 14 Feb 2024 10:23:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 73C0487DD5;
-	Wed, 14 Feb 2024 11:23:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 42D0F87DFE;
+	Wed, 14 Feb 2024 11:23:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="TkgCu69R";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="3cef0MMy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 395EF87DF3; Wed, 14 Feb 2024 11:23:19 +0100 (CET)
-Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B785387DFC; Wed, 14 Feb 2024 11:23:36 +0100 (CET)
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam12on20601.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2417::601])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 799B787C6D
- for <u-boot@lists.denx.de>; Wed, 14 Feb 2024 11:23:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
+ by phobos.denx.de (Postfix) with ESMTPS id 1471B87E01
+ for <u-boot@lists.denx.de>; Wed, 14 Feb 2024 11:23:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=niKsjTK2tcBXFMMrMv22LrDsMHAX/8yxk1s697DQw+nKkIkRCH/+soedstBwvu7e7BRQEEGIa+6SCdQRPo1+FGyZk2M+GTQm7qK9ZClsy48Owt9+KDl7SZcFbI8AfSRgMR6aD1biUXUJrVpAxiVW5dI6CaPOYUaoxttL+pTI1NfuC3xneLzdLrUnhEAPQ4rQgn7+5JQJ0GOhj5TRZA3RTSQH0d0x1fVQ9SQoXNILH8enFPcbIhkGGoGVG6ZI5GVVTLldW/q37lydRY/sguEXs0tNnp+49HVG8OqxL6xhe1Rk5g8LfkDW6QbMiKjZHpx7ONBNPDjrWbbJpMno0s7mTw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=8Q9xTithT1qcLAiXty9C7Kbv4Ytnowj8Cfc8WiDQBbI=;
+ b=OqG4XikpN0lUXvqtH4l42xEgUR7MvwRChZ++bww/fhKl1akDRNrzuWePmwBIXOn7A/YJDzhF1mqZUreFhD9W1fm83V4axPiwiDOTs7efMPZ7unnvSTBCq4IzWVuR9uPhzWjfB1FV0mEd+Vv82FnWiEqRP3HZAdwLaCZAFGVA5Cn8LUcIOgr6xhQHDd1gO+BRniqh2Qr3gQe5a6zfVa1vJibAE+nr6xxZzs3ByVwECIJMyd6vd8ZZMaJiG7UBve9E/ofVnDwxjLrDk+4g5uAfO14DG1Ch0QHbSaVkPvuZ9FnZVclDwjYGdbROdirFuEOeheHPG7kJ3ExhBYNWDa88rw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=8Q9xTithT1qcLAiXty9C7Kbv4Ytnowj8Cfc8WiDQBbI=;
+ b=3cef0MMyJV/nLiULxyo4UXZP8iZy4YqLAf6jPsqMxOh5gEHy7pMC3M50EEuY/uNQVhz+B+JQDkA9ks7/Sg/zZUfJpdL8Jo8ni3cKNCtMSZh/QsfvYC5n8XKIhh4pywwUkHMrFWSKJtiTk7RK69V4HuZCB9D223F3xzvs+JPgN5k=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from CYXPR12MB9337.namprd12.prod.outlook.com (2603:10b6:930:d8::20)
+ by DS7PR12MB5911.namprd12.prod.outlook.com (2603:10b6:8:7c::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7292.21; Wed, 14 Feb
+ 2024 10:23:28 +0000
+Received: from CYXPR12MB9337.namprd12.prod.outlook.com
+ ([fe80::772d:da3d:154b:fa45]) by CYXPR12MB9337.namprd12.prod.outlook.com
+ ([fe80::772d:da3d:154b:fa45%7]) with mapi id 15.20.7292.022; Wed, 14 Feb 2024
+ 10:23:28 +0000
+Message-ID: <09e92f9c-6e64-4906-9259-5248f2a51a40@amd.com>
+Date: Wed, 14 Feb 2024 11:23:18 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] arm64: versal-net: Setup correct addresses of GICR/GICD
+Content-Language: en-US
+From: Michal Simek <michal.simek@amd.com>
+To: u-boot@lists.denx.de, git@xilinx.com
+Cc: Ashok Reddy Soma <ashok.reddy.soma@amd.com>, Tom Rini <trini@konsulko.com>
+References: <5d3d0e1afb1f673ffeb4a1c5d7f040475c806a30.1707220293.git.michal.simek@amd.com>
+Autocrypt: addr=michal.simek@amd.com; keydata=
+ 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
+ 3i3l5DA=
+In-Reply-To: <5d3d0e1afb1f673ffeb4a1c5d7f040475c806a30.1707220293.git.michal.simek@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VE1PR08CA0035.eurprd08.prod.outlook.com
+ (2603:10a6:803:104::48) To CYXPR12MB9337.namprd12.prod.outlook.com
+ (2603:10b6:930:d8::20)
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1707906195;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=wS4dTCukWabCop4LjE1W9Ofw709pfGGHp2r3yPHvh4A=;
- b=TkgCu69RnysgrHhM23efa7//fGgma8C7OlYBhaFDGZENtBXEwsqDyfTvaSHB1VnYHQztcU
- evUCA2SqkYwvLu7T1TICBBajrnYvP2iZwWzeVv+d3nBoh3zT9yYON+HMGzrrimEggzUGrQ
- 3UN0bG1ytWIHUGWJ4O5le+oD+tTYmTODS1C9VNYKHW1JRNSgILuEud61zh6VhzOmQHfLna
- PM7ldNZyPctyJ9xojJipMRpts8K2vq/lj6AjNKTu93Sbn7jINPXFNbaCnyddzcxgGzs1SJ
- vsfSKfSiskvjzuffBlWBpcpKinTuclVnQV7THOIXn1e9lv9B4BSkb++TLLo0lA==
-Date: Wed, 14 Feb 2024 11:23:14 +0100
-From: Dragan Simic <dsimic@manjaro.org>
-To: Shantur Rathore <i@shantur.com>
-Cc: Andre Przywara <andre.przywara@arm.com>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de, Hector Martin <marcan@marcan.st>, Simon Glass
- <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: Re: [FIX PATCH v1] Fix: common: usb_hub: Reset only USB3.0 hub
-In-Reply-To: <CABEcMwUtCk-jehZPWrCdBTKYoX8T+xixMVhJFmM2PxXB-paSLg@mail.gmail.com>
-References: <20240207102327.35125-1-i@shantur.com>
- <32db6dba-d515-4077-9d72-d77a7f431335@denx.de>
- <CABEcMwXW3KXQCJM16Qhk=19Sss3zdtQyWtJEed5y=na2mP8RFA@mail.gmail.com>
- <93f69779-3197-4ede-bb78-f2512ec30fc1@denx.de>
- <24f25359ce213370214bceeabc55e1df@manjaro.org>
- <CABEcMwUoyi5uLSADa2N76V3C-ryiXzYywgOKnL=DEqtU6LYa_w@mail.gmail.com>
- <a042e4fa90f02b5f51dd76c3dedf5ae1@manjaro.org>
- <3aa6998e3d9fd97cd4ba729f7656f467@manjaro.org>
- <CABEcMwXAjRLDcg+xP_td6cujPzPJNdQg8YHUjPNj8scea9cS-w@mail.gmail.com>
- <CABEcMwUvHJWTWykvD3w4HZ3H1fAZMAtMy3CYq_Dv6jnPuzYxdw@mail.gmail.com>
- <aa804978-0b1f-4ccd-a4be-f3608cad5ebd@denx.de>
- <20240214020413.662bfac6@minigeek.lan>
- <db00cf79606be59e9041b870c3f96507@manjaro.org>
- <e76980463dc9855eda493d5a30f307ee@manjaro.org>
- <CABEcMwX4mHjibZMxAUiJda36noMFvr7oeAm4cr6y=58NeAAGaA@mail.gmail.com>
- <CABEcMwUtCk-jehZPWrCdBTKYoX8T+xixMVhJFmM2PxXB-paSLg@mail.gmail.com>
-Message-ID: <eaecd8670bacaf40292fbdf4a834d65b@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
-Content-Transfer-Encoding: 8bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CYXPR12MB9337:EE_|DS7PR12MB5911:EE_
+X-MS-Office365-Filtering-Correlation-Id: 65b95540-1b45-49db-4fe9-08dc2d46fc00
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: M+VenrhVASwOIywLspKrMl2YLXYVdHVeudt4qRm1b5PoYt2dgrJ6I6fr3AUovN7qr3AjR17eFTwsLNnSTfFLE93NqpOO/aTQ4LhxRyziNtPAm2aHadiTbpKTQwZfSK4QqTVSi64t4L447QFwNGkQ7QtVK9r2P1pFWp6f5Kcu5KWwjW9mSG3DBSQogUk3R/+D3gKpSVDHFmPyNrmUmfz85ZJS5qdX0xAvPOIVvR9ROoB7J+qHBoRfpvaeJolvFbYJOR5Lqv5NjHIRBIRHX/e6epbs7MUB+hjupk/tpL7qiZk6nJUF0+MYDTRo6jj8T9T8YiYT2C68ZRxekx8qfBGEx71JRCCteL6XWjA/IMrhKOlZKMEtKu+m+3PNtjCe5umK/cha368TlYxRc6eFxGmf7lup3yv2Yt/y8NVVokNdDejfrLt8vL9nTmIGQEnS280Uv7hgkzfM69aGhdLp1i6ehcDfavuP8DlonBIU5PzbZKKYGEjcGu79EhSuev+WyFYxY6vqgroXdanmqFpgy0VN2DSmUSh56phytjvVpqfeCkXJ4Pb7tmQ2VRltfDfSC3qy
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:CYXPR12MB9337.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(376002)(396003)(39860400002)(136003)(346002)(366004)(230922051799003)(64100799003)(186009)(1800799012)(451199024)(86362001)(31696002)(38100700002)(41300700001)(31686004)(4744005)(6486002)(2906002)(6512007)(316002)(66556008)(478600001)(6506007)(83380400001)(26005)(2616005)(6666004)(53546011)(5660300002)(36756003)(54906003)(8936002)(66946007)(66476007)(8676002)(4326008)(44832011);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Z0NZK3hHbitRN2hNUVNPcWo0cXJKWG9FSFFlS0RlaXZEc3gvVnI4SDQxMndv?=
+ =?utf-8?B?N3ovVml0dzdmRm9FYnVlR29UbTB6V3ROb3ZLeStDVzdkSFRMSWcvZTl6Q2dM?=
+ =?utf-8?B?ZUdEb2pHZ2JKb2ptSGU3ZXk0eU5Dc2wzc3lGUE9LMndrTU9qY2Y5Zmx1V0pN?=
+ =?utf-8?B?T3BIUUJJWjU3bjlpTGo4TUdsTnpHSnpWNnNLRmdIbnlna2ZlYlZnNEZMaGYy?=
+ =?utf-8?B?TFlXdVpFQng5SEZEZE5VMUNiaCtLSVN4KzVlWjljeXMxZ2VNVkpsUUdNVm1D?=
+ =?utf-8?B?Tmg3MVdEOG9kMHhEUHNUVFB6cUVtVTFESHA1N1VDRU5sTjd2RStzUG1DZGMx?=
+ =?utf-8?B?TUFnd1Exc0FTdXRsNXA2cjhWSlo2KzNpVDdOWW9QWitTbkZ3K2ptVkU1UWpW?=
+ =?utf-8?B?Wnp1N3FuYWlGOEppUXJCZExYYXU1T3FHaDM2WHRtOVl2ckVnOFdBMm43TU1E?=
+ =?utf-8?B?ajc0R0Nxd0ZzZTloWWlHN0NFS0RtajFGbHk1K3VQbUdpNUI5bk5NNWlRTEdY?=
+ =?utf-8?B?K0MrYXBEYWZ4bUtpK3VZSG1FMmVqR254b3l1QjIvWG9FZTl3NGI1SndlelA4?=
+ =?utf-8?B?UVQ1UUM4ZDNhM3ZTV1BwRG1iTHo1cmgraU4rWmxNczJiaUJVbkF4SERMaDRU?=
+ =?utf-8?B?VDI0VTVCU3FKMXZnVWphNnRaTmVkQ2cweXFXbWxyNFVLdWtYOXdLdmJWQzhk?=
+ =?utf-8?B?eXcyQUoxS3c0cGJwMDZyVlppaUhsQmgvVFM3cTB6dE5yM0RuRFFsdmNmSWZY?=
+ =?utf-8?B?a2NMR0FxNWFReEMzWTV1Wjh1ZWFzdFo3NGNJR0t4dWY0VFRRMURmWGdKYTVp?=
+ =?utf-8?B?WjJCeEV2NXBtVy96T1M1dStoZTBkS2ZrRkNUYkU4VHFiTW01Sk9NVTcraXJR?=
+ =?utf-8?B?dDV2OS9QTUF0WGFDOG9McTRsNWxqdERteGhqV1V1U1hORVBlYU9PdUZYSVlN?=
+ =?utf-8?B?UmxCWmh5UzF6NCtRRW1RdTUrVytCaS81ZFFCUktnNjJlMnlodVF6L0pTZFNC?=
+ =?utf-8?B?MXIvN3prcUZ2UnkxMHh5cytHcW5MOU1XdnVHWFpkN3dMaGc3bFlpR096R2Vx?=
+ =?utf-8?B?TDJOS3pvWmdjVGVGamtYODBJNVNocCthODhualRGNEkzMFJxZ3FhNC9KbUJy?=
+ =?utf-8?B?OFUvUUkyWExicXozMjloZW5wSm15Y1FhdFhLSGcrbWYyazN1L3hZRkZSZ0U3?=
+ =?utf-8?B?WXQvb3lsYmRNbC8zWXBaL2UydDFiN05OS3F5cmNTVzE0WnpPN1owSVkzQ1Z4?=
+ =?utf-8?B?d0xMVVZjU3FaQ0dvZzBuWWx0YUdpR2cycHFMR3ArcDdKcjRRL1BJWlV5Tk1R?=
+ =?utf-8?B?ekV6bUJxNFBKVnBMVlFQZkx2MTdKenZGR0lzMitZUE5vSHl6YnNiU3FKODRQ?=
+ =?utf-8?B?RUlnOUlDUDM0MVE1UVdBbjJsVVZvUWY3TEFDL3RKSEpZNUFxNkZoTWJPZ3NB?=
+ =?utf-8?B?d3JLUnl6czNiK0VBMnJsZmFXcjVKYjFQcEVROUxUNERubXp4NEMvNkRoSktR?=
+ =?utf-8?B?V1hxTHh2azFHa25PK3VoS0ViQ0RaaGN3UEZ1eXhDZ1VvdWUzenU1MW9kVk16?=
+ =?utf-8?B?VHFoY29rVjBOK01KQzlFb1RzWXBaRzJvS3JOQlE4TVdsYmcvS3JpWVFZcUl3?=
+ =?utf-8?B?SE9uczdndnNqblZvSHFTcC9NU0JQbUorVzhGdFZGVVNEZHpqaUxkNXQvZlEz?=
+ =?utf-8?B?ZG1LdStwaVp5eUZ0S3hIdmxMb2pwYlZkcFBWcU56b0hTcjI5aUs1LzFEQ3Vi?=
+ =?utf-8?B?aS9BWkNUR3dwdjRLbDE0RGR4YXE4K0txUWxJUURyUXRJZVpJUHBpRVRPZVly?=
+ =?utf-8?B?Z1VZdDZHZTByUnMwY3BSUXpIVlg1eWJiWkN5UCsyQk51WVRXMkdYemhUNFVy?=
+ =?utf-8?B?eVlFMTFhaU52RVlONnFWV1ZtckV5NDMyWksyb2l6UldmdGJsR0FKYWJzVExk?=
+ =?utf-8?B?M29RWHJSSDFiaHVhK0FkN1A4NTg0ckVpR00yc2hrZ1kzQ0Y4RExrZ3NYMmxE?=
+ =?utf-8?B?elRoamhneUpsMUw1a3dqd2JXTEVDN1ZWUktVenAvVkpGUGorVS9CVTRQc2Jp?=
+ =?utf-8?B?WmdhSlJXcjd5Y21hRmhDQzR1eTNSdCtpOGxucE8zVVBTY0tGZVFFOTAwelJ3?=
+ =?utf-8?Q?BUQIkFLMvJKXCf9M+rZDcMOL0?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 65b95540-1b45-49db-4fe9-08dc2d46fc00
+X-MS-Exchange-CrossTenant-AuthSource: CYXPR12MB9337.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Feb 2024 10:23:28.0918 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: gnwuhwW+Dy933e8QgSdmtY0Gw7UyBX1jOf5Rp0QQsPJIZJs6k/3GFXOGvjRCUiXc
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB5911
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,289 +186,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2024-02-14 11:01, Shantur Rathore wrote:
-> On Wed, Feb 14, 2024 at 9:56 AM Shantur Rathore <i@shantur.com> wrote:
->> On Wed, Feb 14, 2024 at 3:48 AM Dragan Simic <dsimic@manjaro.org> 
->> wrote:
->> > On 2024-02-14 04:18, Dragan Simic wrote:
->> > > On 2024-02-14 03:04, Andre Przywara wrote:
->> > >> On Mon, 12 Feb 2024 21:19:13 +0100 Marek Vasut <marex@denx.de> wrote:
->> > >>> On 2/12/24 14:41, Shantur Rathore wrote:
->> > >>> > On Mon, Feb 12, 2024 at 1:40 PM Shantur Rathore <i@shantur.com> wrote:
->> > >>> >> On Sat, Feb 10, 2024 at 7:13 AM Dragan Simic <dsimic@manjaro.org> wrote:
->> > >>> >>> On 2024-02-08 15:17, Dragan Simic wrote:
->> > >>> >>>> On 2024-02-08 15:10, Shantur Rathore wrote:
->> > >>> >>>>> On Thu, Feb 8, 2024 at 1:44 PM Dragan Simic <dsimic@manjaro.org>
->> > >>> >>>>> wrote:
->> > >>> >>>>>> On 2024-02-08 14:33, Marek Vasut wrote:
->> > >>> >>>>>>> On 2/8/24 12:30, Shantur Rathore wrote:
->> > >>> >>>>>>>> On Wed, Feb 7, 2024 at 1:07 PM Marek Vasut <marex@denx.de> wrote:
->> > >>> >>>>>>>>> On 2/7/24 11:23, Shantur Rathore wrote:
->> > >>> >>>>>>>>>> USB 3.0 spec requires hub to reset device while
->> > >>> >>>>>>>>>> enumeration. Some USB 2.0 hubs / devices don't
->> > >>> >>>>>>>>>> handle this well and after implementation of
->> > >>> >>>>>>>>>> reset some USB 2.0 disks weren't detected on
->> > >>> >>>>>>>>>> Allwinner based boards.
->> > >>> >>>>>>>>>>
->> > >>> >>>>>>>>>> Resetting only when hub is USB 3.0 fixes it.
->> > >>> >>>>>>>>>
->> > >>> >>>>>>>>> It would be good to include as many details about the faulty hardware
->> > >>> >>>>>>>>> in
->> > >>> >>>>>>>>> the commit message as possible, so that when someone else runs into
->> > >>> >>>>>>>>> this, they would have all that information available.
->> > >>> >>>>>>>>>
->> > >>> >>>>>>>>>> Tested-by: Andre Przywara <andre.przywara@arm.com>
->> > >>> >>>>>>>>>>
->> > >>> >>>>>>>>>> Signed-off-by: Shantur Rathore <i@shantur.com>
->> > >>> >>>>>>>>>> ---
->> > >>> >>>>>>>>>>
->> > >>> >>>>>>>>>>     common/usb_hub.c | 6 ++++--
->> > >>> >>>>>>>>>>     1 file changed, 4 insertions(+), 2 deletions(-)
->> > >>> >>>>>>>>>>
->> > >>> >>>>>>>>>> diff --git a/common/usb_hub.c b/common/usb_hub.c
->> > >>> >>>>>>>>>> index 3fb7e14d10..2e054eb935 100644
->> > >>> >>>>>>>>>> --- a/common/usb_hub.c
->> > >>> >>>>>>>>>> +++ b/common/usb_hub.c
->> > >>> >>>>>>>>>> @@ -174,8 +174,10 @@ static void usb_hub_power_on(struct
->> > >>> >>>>>>>>>> usb_hub_device *hub)
->> > >>> >>>>>>>>>>
->> > >>> >>>>>>>>>>         debug("enabling power on all ports\n");
->> > >>> >>>>>>>>>>         for (i = 0; i < dev->maxchild; i++) {
->> > >>> >>>>>>>>>> -             usb_set_port_feature(dev, i + 1, USB_PORT_FEAT_RESET);
->> > >>> >>>>>>>>>> -             debug("Reset : port %d returns %lX\n", i + 1,
->> > >>> >>>>>>>>>> dev->status);
->> > >>> >>>>>>>>>> +             if (usb_hub_is_superspeed(dev)) {
->> > >>> >>>>>>>>>
->> > >>> >>>>>>>>> Should this condition be "all which are lower than superspeed"
->> > >>> >>>>>>>>> instead ,
->> > >>> >>>>>>>>> so when the next generation of USB comes, this problem won't trigger
->> > >>> >>>>>>>>> ?
->> > >>> >>>>>>>>>
->> > >>> >>>>>>>>> What does Linux do btw ?
->> > >>> >>>>>>>>
->> > >>> >>>>>>>> As of now Linux checks if the hub is superspeed
->> > >>> >>>>>>>> https://github.com/torvalds/linux/blob/master/drivers/usb/core/hub.c#L2859
->> > >>> >>>>>>>>
->> > >>> >>>>>>>> which is
->> > >>> >>>>>>>>    return hdev->descriptor.bDeviceProtocol == USB_HUB_PR_SS; //
->> > >>> >>>>>>>> USB_HUB_PR_SS = 3
->> > >>> >>>>>>>>
->> > >>> >>>>>>>> This holds true for newer SuperSpeedPlus hubs as well.
->> > >>> >>>>>>>> https://github.com/torvalds/linux/blob/master/drivers/usb/core/hub.h#L155
->> > >>> >>>>>>>>
->> > >>> >>>>>>>> We can change the check to be  bDeviceProtocol > 2 but who knows if
->> > >>> >>>>>>>> things change in the newer version of spec.
->> > >>> >>>>>>>> I am open to suggestions.
->> > >>> >>>>>>>
->> > >>> >>>>>>> Please just include the ^ in the commit description. Use link to
->> > >>> >>>>>>> git.kernel.org , not some mirror . This is extremely useful
->> > >>> >>>>>>> information and, well, you already wrote the V2 commit message
->> > >>> >>>>>>> addition in this answer.
->> > >>> >>>>>>
->> > >>> >>>>>> Shantur, if that would be easier or quicker for you, I can write
->> > >>> >>>>>> a quite detailed patch description for you, in exchange for a
->> > >>> >>>>>> "Helped-by" tag in the v2 patch submission. :)
->> > >>> >>>>>
->> > >>> >>>>> That would be really kind of you Dragan.
->> > >>> >>>>
->> > >>> >>>> Sure, I'll write the summary and send it over.
->> > >>> >>>>
->> > >>> >>>>> I am down with the flu so that would really help me as my brain is
->> > >>> >>>>> working at 15% capacity.
->> > >>> >>>>
->> > >>> >>>> Oh, I'm really sorry to hear that. :(  I hope you'll get better
->> > >>> >>>> soon, and I know very well what's it like;  I've also been sick
->> > >>> >>>> recently, as a result of some kind of flu that unfortunately found
->> > >>> >>>> its way into my lungs, and it took me about a month to get back
->> > >>> >>>> to about 90% of my usual mental capacity.  I'm still not back to
->> > >>> >>>> exactly 100%. :/
->> > >>> >>>>
->> > >>> >>>> I really hope you'll recover much faster.
->> > >>> >>>
->> > >>> >>> I hope you're feeling better.
->> > >>> >>>
->> > >>> >>> Below are the patch subject and description that I prepared for you,
->> > >>> >>> please have a look.
->> > >>> >>>
->> > >>> >>> ------- >8 ------------- >8 ------------- >8 ------------- >8 -------
->> > >>> >>> [PATCH v2] common: usb-hub: Reset USB 3.0 hubs only
->> > >>> >>>
->> > >>> >>> Additional testing of the changes introduced in commit 33e06dcbe57a
->> > >>> >>> ("common:
->> > >>> >>> usb-hub: Reset hub port before scanning") revealed that some USB 3.0
->> > >>> >>> flash
->> > >>> >>
->> > >>> >> I think it was a USB 2.0 drive that didn't work on the USB 2.0 port.
->> > >>> >>
->> > >>> >>> drives didn't work in U-Boot on some Allwinner SoCs that support USB 2.0
->> > >>> >>> only.
->> > >>> >>> More precisely, some tested USB 3.0 flash drives failed to be detected
->> > >>> >>> and
->> > >>> >>> work on an OrangePi Zero 3 with Allwinner H616 SoC, which supports USB
->> > >>> >>> 2.0
->> > >>> >>> only, while the same USB flash drives worked just fine on a Pine64 H64
->> > >>> >>> with
->> > >>> >>> Allwinner H6 SoC, which supports both USB 2.0 and 3.0.
->> > >>> >>>
->> > >>> >>> Resetting USB 3.0 hubs only has been tested to work as expected,
->> > >>> >>> resolving
->> > >>> >>> the previous issues on the Allwinner H616, while not introducing any new
->> > >>> >>> issues on other Allwinner SoCs.  Thus, let's fix it that way.
->> > >>> >>>
->> > >>> >>> According to the USB 3.0 specification, resetting a USB 3.0 port is
->> > >>> >>> required
->> > >>> >>> when an attached USB device transitions between different states, such
->> > >>> >>> as
->> > >>> >>> when it resumes from suspend.  Though, the Linux kernel performs
->> > >>> >>> additional
->> > >>> >>> USB 3.0 port resets upon initial USB device attachment, presumably to
->> > >>> >>> ensure
->> > >>> >>> proper state of the USB 3.0 hub port and proper USB mode negotiation
->> > >>> >>> during
->> > >>> >>> the initial USB device attachment and enumeration.
->> > >>> >>>
->> > >>> >>> Such USB port resets don't seem to exist for USB 2.0 hubs, according the
->> > >>> >>> USB
->> > >>> >>> 2.0 specification.  The resets seem to be added to the USB 3.0
->> > >>> >>> specification
->> > >>> >>> as part of the port and device mode negotiation.
->> > >>> >>>
->> > >>> >>> The Linux kernel also resets USB 3.0 (i.e. SuperSpeed) hubs only, as
->> > >>> >>> visible
->> > >>> >>> in file drivers/usb/core/hub.c in the kernel source, line 2859.  This
->> > >>> >>> check
->> > >>> >>> also applies to newer SuperSpeed Plus (USB 3.1 or 3.2) hubs as well,
->> > >>> >>> which
->> > >>> >>> hopefully makes it future proof.
->> > >>> >>>
->> > >>> >>> Fixes: 33e06dcbe57a ("common: usb-hub: Reset hub port before scanning")
->> > >>> >>> Link:
->> > >>> >>> https://lore.kernel.org/u-boot/20240207102327.35125-1-i@shantur.com/T/#u
->> > >>> >>> Link:
->> > >>> >>> https://lore.kernel.org/u-boot/20240201164604.13315fa6@donnerap.manchester.arm.com/T/#u
->> > >>> >>> Signed-off-by: Shantur Rathore <i@shantur.com>
->> > >>> >>> Helped-by: Dragan Simic <dsimic@manjaro.org>
->> > >>> >>> Tested-by: Andre Przywara <andre.przywara@arm.com>
->> > >>> >>> Reviewed-by: Dragan Simic <dsimic@manjaro.org>
->> > >>> >>> ------- >8 ------------- >8 ------------- >8 ------------- >8 -------
->> > >>> >>
->> > >>> >> Regards,
->> > >>> >> Shantur
->> > >>> >
->> > >>> > Is this description acceptable to you Marek.
->> > >>>
->> > >>> Please send a V2 patch . If possible, include the device information
->> > >>> as
->> > >>> reported by Andre, esp. which USB stick triggered it, including USB
->> > >>> IDs,
->> > >>> this is important for future reference and in case someone has
->> > >>> similar
->> > >>> failure.
->> > >>
->> > >> So the USB 2.0 stick is some no-name, unlabelled and super cheap one,
->> > >> I
->> > >> think we bought a pack of it, just for boot-strapping machines. The
->> > >> USB
->> > >> ID of "abcd:1234" kind of gives away that this is bogus AF.
->> > >> The USB 3.0 stick is a PNY 32GB one, the USB ID is:
->> > >> 1f75:0917 Innostor Technology Corporation IS917 Mass storage
->> > >>
->> > >> Hope that helps.
->> > >
->> > > Thank you for replying.  I'll include the available information into
->> > > the revised commit description and send it over a bit later.
->> >
->> > Here are the revised commit subject and description, please have a look
->> > and let me know if further improvements are needed.
->> >
->> > ------- >8 ------------- >8 ------------- >8 ------------- >8 -------
->> > [PATCH v2] common: usb-hub: Reset USB 3.0 hubs only
->> >
->> > Additional testing of the changes introduced in commit 33e06dcbe57a
->> > ("common:
->> > usb-hub: Reset hub port before scanning") revealed that some USB 2.0 and
->> > 3.0
->> > flash drives didn't work in U-Boot on some Allwinner SoCs that support
->> > USB
->> > 2.0 interfaces only.  More precisely, some of the tested USB 2.0 and 3.0
->> > flash drives failed to be detected and work on an OrangePi Zero 3, based
->> > on
->> > the Allwinner H616 SoC that supports USB 2.0 only, while the same USB
->> > flash
->> > drives worked just fine on a Pine64 H64, based on the Allwinner H6 SoC
->> > that
->> > supports both USB 2.0 and USB 3.0 interfaces.
->> >
->> > The USB ID of the above-mentioned USB 3.0 flash drive that failed to
->> > work is
->> > 1f75:0917 (Innostor Technology Corporation IS917 Mass storage), it is 32
->> > GB
->> > in size and sold under the PNY brand.  The mentioned USB 2.0 drive is
->> > some
->> > inexpensive no-name drive with an invalid USB ID.
->> >
->> > Resetting USB 3.0 hubs only, which this patch introduces to the USB hub
->> > resets, has been tested to work as expected, resolving the identified
->> > issues
->> > on the Allwinner H616, while not introducing any new issues on other
->> > tested
->> > Allwinner SoCs.  Thus, let's fix it that way.
->> >
->> > According to the USB 3.0 specification, resetting a USB 3.0 port is
->> > required
->> > when an attached USB device transitions between different states, such
->> > as
->> > when it resumes from suspend.  Though, the Linux kernel performs
->> > additional
->> > USB 3.0 port resets upon initial USB device attachment, as visible in
->> > commit
->> > 07194ab7be63 ("USB: Reset USB 3.0 devices on (re)discovery") in the
->> > kernel
->> > source, to ensure proper state of the USB 3.0 hub port and proper USB
->> > mode
->> > negotiation during the initial USB device attachment and enumeration.
->> >
->> > These additional types of USB port resets don't exist for USB 2.0 hubs,
->> > according the USB 2.0 specification.  The resets seem to be added to the
->> > USB
->> > 3.0 specification as part of the port and device mode negotiation.
->> >
->> > The Linux kernel resets USB 3.0 (i.e. SuperSpeed) hubs only, as visible
->> > in
->> > commit 10d674a82e55 ("USB: When hot reset for USB3 fails, try warm
->> > reset.")
->> > in the kernel source.  The check for SuperSpeed hubs is performed in a
->> > way
->> > that also applies to newer SuperSpeed Plus (USB 3.1 or 3.2) hubs as
->> > well,
->> > which hopefully makes it future proof.
->> >
->> > Fixes: 33e06dcbe57a ("common: usb-hub: Reset hub port before scanning")
->> > Link:
->> > https://lore.kernel.org/u-boot/20240207102327.35125-1-i@shantur.com/T/#u
->> > Link:
->> > https://lore.kernel.org/u-boot/20240201164604.13315fa6@donnerap.manchester.arm.com/T/#u
->> > Signed-off-by: Shantur Rathore <i@shantur.com>
->> > Helped-by: Dragan Simic <dsimic@manjaro.org>
->> > Tested-by: Andre Przywara <andre.przywara@arm.com>
->> > Reviewed-by: Dragan Simic <dsimic@manjaro.org>
->> > ------- >8 ------------- >8 ------------- >8 ------------- >8 -------
->> >
->> > Shantur, I hope you're feeling better.
->> 
->> Thanks Dragan, V2 is submitted.
->> I am feeling much better, thanks for asking.
 
-It's good to hear that you're feeling better!
 
-> PS : I don't think I could ever explain as well as you did Dragan.
-> Thanks a lot for the help.
+On 2/6/24 12:51, Michal Simek wrote:
+> Previous addresses where used in past in emulation environment but never
+> gets to silicon that's why use correct addresses.
+> 
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> ---
+> 
+>   include/configs/xilinx_versal_net.h | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/include/configs/xilinx_versal_net.h b/include/configs/xilinx_versal_net.h
+> index 2b441da91a10..9cb6b2bfea3e 100644
+> --- a/include/configs/xilinx_versal_net.h
+> +++ b/include/configs/xilinx_versal_net.h
+> @@ -16,8 +16,8 @@
+>   /* #define CONFIG_ARMV8_SWITCH_TO_EL1 */
+>   
+>   /* Generic Interrupt Controller Definitions */
+> -#define GICD_BASE	0xF9000000
+> -#define GICR_BASE	0xF9060000
+> +#define GICD_BASE	0xe2000000
+> +#define GICR_BASE	0xe2060000
+>   
+>   /* Serial setup */
+>   #define CFG_SYS_BAUDRATE_TABLE \
 
-I'm glad to help. :)  We're here to work together by combining
-our skills and strengths.
-
-> I will bring another pending matter to your attention on the Linux list 
-> now ;P
-
-Is it about the USB regulators on the RockPro64? :)  I haven't
-forgotten that, and I expect to work on that rather soon.
+Applied.
+M
