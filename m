@@ -4,74 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFCEFC4829F
-	for <u-boot@archiver.kernel.org>; Wed, 14 Feb 2024 06:43:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55BA3C4829A
+	for <u-boot@archiver.kernel.org>; Wed, 14 Feb 2024 07:50:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD05C87DC2;
-	Wed, 14 Feb 2024 07:43:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6DD7787DDE;
+	Wed, 14 Feb 2024 08:50:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hSCNDm+6";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1707897023;
+	bh=wn+5ZeBEXt2c+vERr6DpuE3QuVTxYuZAVJEl+tP3SF4=;
+	h=Date:Subject:From:To:Cc:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=YmvvDfTf2JtaAqksvDqa8leU3mrESq32ZRVcT/lKGzlZquACAXibN5V4Eb5vC/D/n
+	 3n/cRoKBVLN6/Q39Lx41QXVBk+GJE6u5ivpuQ01b1HHQ/tJHTbM+ei6dRX52YNAIOl
+	 g1cmVrf7tUTLcWHOTOKu1kTStRTFQYiAF7G8aw91090yYRFQJV4j+EDFkOjI0kmmvS
+	 mEmfk0Q7D8Buf8Urn69HVLZ4V1gYFdVaumI1uL/v/36m/VlSpbxZb6mCfakp7WtaiB
+	 U/7n76S9Iuw755HMCBwRfLCYSkVWPPEb7te5bW5dfOUk/GA2dZKXClYV8pZYd28s0c
+	 Mf7S53RXZjClw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF6CF869F7; Wed, 14 Feb 2024 07:43:05 +0100 (CET)
-Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
- [IPv6:2a00:1450:4864:20::132])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 394A787DDF; Wed, 14 Feb 2024 08:50:22 +0100 (CET)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A5BF869F7
- for <u-boot@lists.denx.de>; Wed, 14 Feb 2024 07:42:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C96587DDB
+ for <u-boot@lists.denx.de>; Wed, 14 Feb 2024 08:50:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-5119cfaeb9bso1591232e87.1
- for <u-boot@lists.denx.de>; Tue, 13 Feb 2024 22:42:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1707892978; x=1708497778; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=cCoqIcez1gFBDn/jhf3ugHCWJmbwh9qo/yVN04wCUfQ=;
- b=hSCNDm+6z44DL1MdHSmxFGXLzotzu4AJ7pK1NdRf++ubYh0sTyjB0e2YGhTfTYRJe2
- 2GTX2zPNkrnRv+3H5RtyyifaaswzXM3Vp1iHk0S/HYectEOGEUN61qnZLoGuqPR3JJpO
- 3dva2TJ0F+ka5/9fX4Ow58K5uv8zU85urVAh67/FMlq7hAiqRC3kshmDWHljCxQIAVjf
- 9L6l3MHOY0IVGrF/hM4CleEc6SsbrMg5J5L5U0Jkj5GJgd4cuYs7WCoeb1ZfWeBMdOoR
- aC6Kin9a7xYp/ZYScyGrAjuJS9WwFvwfAy1BavKy7GRGywRW/E2+ce9L+/LirE5NeIin
- FN5A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707892978; x=1708497778;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=cCoqIcez1gFBDn/jhf3ugHCWJmbwh9qo/yVN04wCUfQ=;
- b=SkJ1H4gTUany4CDZqjqf0JouVfXGphxdODFqEGwtnJ2AbZtzr13Tr3IODraX3kTzr6
- lb++TfgGHkqpVLH/mO3vzWNDTMBQgGXinbuWy0JFv9w6cNUxeWlltXEWXKj/J2UHiHHu
- usMj6jCS6UP61GYckTLfdM1bt6T9OIkeLKTII+LTiJo2qdC9PZOUc9u2dioZ9mSnHBjt
- AAsO7siOOQWP2DHdwnsBrk+wagignpvliOdvhMTL79Mt5HLtWA1rz7fDO79Ad2fvl/it
- TLdP8OV+5ddP9EVXSrYlUmhpam6xy7TKFHF3Xja7d9agP/TiQ8uDH0XZXY5HlmN5K6Ov
- bfEQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVIpZ0Bj6ja7W75nae9HyVPIdgZbpvx14QI+b/0BQDS5fwaz4XrALh+uBMukekicjCV1wJs7lYOL1/ke1/lg4xmDJ+XNA==
-X-Gm-Message-State: AOJu0Yzx2Hi5YuJwjQsuEwOAQUBqvCkekIz6s9HfuZ1tUHNXDsnNDz8H
- y3tcCoQ7incx4IUpoxISumi+tAR9CZjfOyMmWK86fcTWDJr9d82ZT8RpNKBN4nQ5oAk4jGPI+ea
- OGvRRmJQZs6m2Fiz3EzlZSzvZEP6KIz0THnyxjg==
-X-Google-Smtp-Source: AGHT+IHssRKfjlGAJJ1LeFvIteASUEoteKcL7F9T5zGNYznc2i5TucBxHVg+QNiSrf2GtSlWt0U1dnjLIRrqdB2ntxc=
-X-Received: by 2002:ac2:5282:0:b0:511:8987:1941 with SMTP id
- q2-20020ac25282000000b0051189871941mr1029973lfm.62.1707892977741; Tue, 13 Feb
- 2024 22:42:57 -0800 (PST)
+ dmarc=fail (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4TZVjP6k1jz9skq;
+ Wed, 14 Feb 2024 08:50:17 +0100 (CET)
+Message-ID: <45ffb9f2-8986-4d85-868e-eca618ff16ab@denx.de>
+Date: Wed, 14 Feb 2024 08:50:16 +0100
 MIME-Version: 1.0
-References: <20240202141252.62378-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20240202141252.62378-1-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 14 Feb 2024 08:42:21 +0200
-Message-ID: <CAC_iWjKDHDXK3ojjgEGa7kyc0YrRJv2cOaU8NuZ65NEbSon8LA@mail.gmail.com>
-Subject: Re: [PATCH 1/1] efi_loader: simplify error message in
- efi_disk_create_raw()
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [PATCH v2] net: mv88e6xxx: fix missing SMI address initialization
+From: Stefan Roese <sr@denx.de>
+To: =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>,
+ =?UTF-8?Q?Marek_Moj=C3=ADk?= <marek.mojik@nic.cz>, rfried.dev@gmail.com
+Cc: u-boot@lists.denx.de, joe.hershberger@ni.com, tharvey@gateworks.com,
+ marex@denx.de
+References: <62eoapvurxkedw74vpzb55q3nuqgb4cef3bl2laayx57cpjzus@vlpx57cjc4ph>
+ <20231218170930.4afe5dbd@dellmb>
+ <c620d56f-29b6-4819-a51f-dca962a2ec64@denx.de>
+Content-Language: en-US
+In-Reply-To: <c620d56f-29b6-4819-a51f-dca962a2ec64@denx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,45 +71,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 2 Feb 2024 at 16:13, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> The error message
->
->     Adding disk for usb_mass_storage.lun0 failed (err=-9223372036854775788/0x8000000000000014)
->
-> provides a decimal and a hexadecimal notation of the EFI status code
-> EFI_ALREADY_STARTED which is defined as (EFI_ERROR_MASK | 20).
-> The decimal output does not convey the value 20 clearly.
->
-> With the patch we write
->
->     Adding block device usb_mass_storage.lun0 failed, r = 20
->
-> similar to other EFI error messages.
->
-> Fixes: 952018117ab4 ("dm: sandbox: Switch over to using the new host uclass")
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  lib/efi_loader/efi_disk.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
->
-> diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
-> index b1739d99201..2fefd05fbdc 100644
-> --- a/lib/efi_loader/efi_disk.c
-> +++ b/lib/efi_loader/efi_disk.c
-> @@ -574,7 +574,8 @@ static int efi_disk_create_raw(struct udevice *dev, efi_handle_t agent_handle)
->                         log_notice("Disk %s not ready\n", dev->name);
->                         ret = -EBUSY;
->                 } else {
-> -                       log_err("Adding disk for %s failed (err=%ld/%#lx)\n", dev->name, ret, ret);
-> +                       log_err("Adding block device %s failed, r = %lu\n",
-> +                               dev->name, ret & ~EFI_ERROR_MASK);
->                         ret = -ENOENT;
->                 }
->
-> --
-> 2.43.0
->
+Hi Ramon,
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+On 1/9/24 10:37, Stefan Roese wrote:
+> On 12/18/23 17:09, Marek Behún wrote:
+>> On Wed, 6 Dec 2023 15:35:56 +0100
+>> Marek Mojík <marek.mojik@nic.cz> wrote:
+>>
+>>> The mv88e6xxx driver does not currently initialize the smi_addr 
+>>> field, but
+>>> instead keeps the default zero value. This leads to driver being 
+>>> unusable
+>>> on devices where the switch is not on address zero of the mdio bus. Fix
+>>> this problem by reading the SMI address from device tree.
+>>>
+>>> Signed-off-by: Marek Mojík <marek.mojik@nic.cz>
+>>> ---
+>>>   drivers/net/mv88e6xxx.c | 8 ++++++++
+>>>   1 file changed, 8 insertions(+)
+>>>
+>>> diff --git a/drivers/net/mv88e6xxx.c b/drivers/net/mv88e6xxx.c
+>>> index c073f81e72..8fbbc1cacc 100644
+>>> --- a/drivers/net/mv88e6xxx.c
+>>> +++ b/drivers/net/mv88e6xxx.c
+>>> @@ -745,6 +745,7 @@ static int mv88e6xxx_probe(struct udevice *dev)
+>>>   {
+>>>       struct dsa_pdata *dsa_pdata = dev_get_uclass_plat(dev);
+>>>       struct mv88e6xxx_priv *priv = dev_get_priv(dev);
+>>> +    fdt_addr_t smi_addr;
+>>>       int val, ret;
+>>>       if (ofnode_valid(dev_ofnode(dev)) &&
+>>> @@ -753,6 +754,13 @@ static int mv88e6xxx_probe(struct udevice *dev)
+>>>           return -ENODEV;
+>>>       }
+>>> +    smi_addr = dev_read_addr(dev);
+>>> +    if (smi_addr == FDT_ADDR_T_NONE) {
+>>> +        dev_err(dev, "Missing SMI address\n");
+>>> +        return -EINVAL;
+>>> +    }
+>>> +    priv->smi_addr = smi_addr;
+>>> +
+>>>       /* probe internal mdio bus */
+>>>       ret = mv88e6xxx_probe_mdio(dev);
+>>>       if (ret)
+>>
+>> Reviewed-by: Marek Behún <kabel@kernel.org>
+> 
+> Reviewed-by: Stefan Roese <sr@denx.de>
+> 
+> Ramon, this patch was assigned to me as an Marvell MVEBU patch
+> depends on it. I've assigned it to you now. Or if it's okay that
+> I pull it with the Marvell tree, just let me know.
+
+Any updates on this?
+
+Thanks,
+Stefan
