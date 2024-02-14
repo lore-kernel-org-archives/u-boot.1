@@ -4,84 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A789C48BC1
-	for <u-boot@archiver.kernel.org>; Wed, 14 Feb 2024 18:35:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D66F2C48BC1
+	for <u-boot@archiver.kernel.org>; Wed, 14 Feb 2024 18:35:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A1D3C87D57;
-	Wed, 14 Feb 2024 19:35:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4D3CD87D71;
+	Wed, 14 Feb 2024 19:35:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=foundries.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=foundries.io header.i=@foundries.io header.b="SzKZo+Lo";
+	dkim=pass (2048-bit key; secure) header.d=foundries.io header.i=@foundries.io header.b="igA/uUUu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E2F9A87D6C; Wed, 14 Feb 2024 19:35:05 +0100 (CET)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id E8C3D87D94; Wed, 14 Feb 2024 19:35:12 +0100 (CET)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 362A987D38
- for <u-boot@lists.denx.de>; Wed, 14 Feb 2024 19:35:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CEFEB8785F
+ for <u-boot@lists.denx.de>; Wed, 14 Feb 2024 19:34:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=foundries.io
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=igor.opaniuk@foundries.io
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-a26f73732c5so840975366b.3
- for <u-boot@lists.denx.de>; Wed, 14 Feb 2024 10:35:00 -0800 (PST)
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-55ee686b5d5so90967a12.0
+ for <u-boot@lists.denx.de>; Wed, 14 Feb 2024 10:34:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=foundries.io; s=google; t=1707935698; x=1708540498; darn=lists.denx.de;
+ d=foundries.io; s=google; t=1707935692; x=1708540492; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FvFJAdZAFUJyzS1WaO3bLDMHxE7A84ohIZOBxh+qx1M=;
- b=SzKZo+LoQS8Vq+tbjxhsGIj7P7KHf9d4v5KwVwUv9IigEl4mOBCNiC5BW9A9i12K+L
- Yo5H5ooFf/VSgTGnO1CeclZ+MPirWY//BnsG03UXZuw/Q03eWCbN7ntQb/9p7hQTQP6H
- 0bPcJAzmfXz3u+4VgCcxnlVww8hf25zi7JALsdHQBfNzb0SHRf/bbg0c6+T6eJ2WidOJ
- /k3CC9w7st4lAapitwKtP/E5qQnhkNr6oFXHwUelKEqx3DIW9RVbzctKVee9SCOeFgLq
- h/Fht8yOM+35Kw3UQLeA7Ea4eTfjctpgf57O/DJDZF3+23ZdGQBwR4zU05XAxO0IUc5c
- 4CVA==
+ bh=coMBrwKo8FxHUKtJ7NDABYA6WDE7AakJLJNkVlYE2kk=;
+ b=igA/uUUuk5wfTeZz+2ZRGjaWTTyMEhrRSH4xFR/rb66fphen4OQymfZvtWKAOlXDvW
+ 6FCHuWr3oaoGD865scK0bAZIss35Ih/nvtHMPon7F173v0dy3/k785M46slbHDJPoEvA
+ 8hYlybiBac7V4X1jiD/hPHANSmP5uFvt/emBWMMbj3RVLYci5oiirnvph0J+l2znfbxC
+ ZUOMCMtTAtBGCkLpB/r0vnHNgD5u4GDQrclodbSxaemNlzzSyY8CTEG62GMKIJAGGYTt
+ +pyaiKphZI7NGFFl2q9s7MAx+kHfYrwdwmuxQaEljtbqN16nMCxDhuGTpl6iZQYnPT4o
+ iI3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707935698; x=1708540498;
+ d=1e100.net; s=20230601; t=1707935692; x=1708540492;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=FvFJAdZAFUJyzS1WaO3bLDMHxE7A84ohIZOBxh+qx1M=;
- b=hWVorYKXSbjbsw4SXD/rgg285QMJnYFX69CTi7qJofi8WO84LjIP7346MmxSUyttki
- ySkmZy1apr04ltHoV35LOB72AmTewDNOVxDJce3+swZgdwjkq8PfVMG2HG36Xl98LnVZ
- bseS89mMcPKW1ShRmvRuQlIFlxXTRU6MPhEg+Nu2x8Ace4gZsyUJvZeGTaTcM1UW2is7
- aj8e0gGzrGAfwKhBktDRAgv87Rd/55W8BGlilqrg7edlfZlwytaMG3L8PFk8CdwAl7pZ
- 89Z/MfVSnJRNPsJCmRgs/he9cU7tdrBLKFrwiB96G2F6+TzSxw2LKfRYXbDh7EPdz2x3
- uuGw==
-X-Gm-Message-State: AOJu0YwBTiOsxwILwzfDaDDx0dT56FLgBYqDoY3gb6KHWpmyN7ArrhAI
- qj3NXx6VJdo7hyhrk8FisjBy8eYBtGXnhEaArmkRJ+1S7YLjkneeO87d9UVoWdDV1okzRymOshy
- OsmU=
-X-Google-Smtp-Source: AGHT+IEIk661G/DrYQTMSZEkXC3hbm7HaqquiAPGQEc2J0rtXPijgGrIb0CQy9zIVIRpWWuNk2XZCA==
-X-Received: by 2002:a17:906:2312:b0:a3d:26ec:dec2 with SMTP id
- l18-20020a170906231200b00a3d26ecdec2mr2559973eja.2.1707935698517; 
- Wed, 14 Feb 2024 10:34:58 -0800 (PST)
+ bh=coMBrwKo8FxHUKtJ7NDABYA6WDE7AakJLJNkVlYE2kk=;
+ b=pog/S8a6MRoFgWcJHikCOclpoPvgRhKWRD3PXRzVRvgX/wvO4pZwE6a6LQT7FB5wDG
+ yqoo8SBuGabKr3waOkY92KwVqwRb1b3nNOWcB0nnGrIboWQC4UNorIsCzltwZicHLUyU
+ UkW15ss+SS07lmDcob+diKaiEWmJ5kfmZRNEJl8ikdVx6pxWS4j6O2xUPooEUssn6sg6
+ XKvML0TSn238o1oMitiaWTP4YbsP6w4s5UP9FgNsfs8kiU2d0uMKS+uxsaJbBGAL3YHf
+ rChIsEVLyuw4+hkT3eUlzd5kbrX077jqjjt+ziUwheKCx5eI1tOZwkdIXCbESqC6TMzZ
+ qGWA==
+X-Gm-Message-State: AOJu0YwtE0uCUr1zR24+uOfI2FG4jbcVb5qmlVmnfYkWK5ZGgs1tZoXZ
+ VW8qG+cnbPv2P449tLHvzSW/y9bwh6m1Gc0L3BKapXYfYI2D4q1NVYKFpez0AmQ87RhuDfLh+Nx
+ MJ18=
+X-Google-Smtp-Source: AGHT+IGk0GXq8sU/yWXGaS64ka/8/QWGAzG8tpkbYrLzLjnfWMpnIyXbtRmK5J6GcGAL6vSzx7GdcA==
+X-Received: by 2002:aa7:dcc1:0:b0:560:ecd5:968b with SMTP id
+ w1-20020aa7dcc1000000b00560ecd5968bmr2651991edu.23.1707935692395; 
+ Wed, 14 Feb 2024 10:34:52 -0800 (PST)
 X-Forwarded-Encrypted: i=1;
- AJvYcCWLSChg+ClwkuKiw4Lc4L1sbb5gq7WxpXIQioTq3lD1HOxuXMOqLOMV7Gu/My178VywXrNp7mBV2w618NjhUQAbA5H0nrP7MQJ/DAI3St2S7qt41y/sOMZBJ2JD4h5IXKQjJtjAmYO4drFQA9AJAb8DvS9SSCrFbrD/0JPgtO6bzKa3FhsYRUyvWsDjxbyJNAd4JQt+n0bo+uMEhKe+RozRvnxMs793OKq4hITg804vsxoVI9qVHNdm+53Fs2JnYLGt/4bWx7sSK9c6JHq+bEm+Tgo8ZuRtGH207D6fgIYw8dqBFk1JVxyN2uBhj7vBO44x6jhZtITvhyKS4ZmuasZGFr2xAQV8nq4ORQG27Psb1XJYcFiEAnU0iE0xWVSSr/KaDnOC+15Qe0xy/NxpCKuCALnSDhLq45Q=
+ AJvYcCWyUQemE5uyNxZ2L8P5nEPOIocQU3+MlTdti+avzXXHXFLggsqwXCVmyqS6iuj2wcUv3BH6EXSDtx3r2/AsuBwTRRua/ajCyU5/VOWX70Ej0SarRWoy/ruv33kowdF98ozz1BMfZEKP8o3cLJjz2Vybk0pMJN1q5Yux1w==
 Received: from localhost ([185.186.156.113]) by smtp.gmail.com with ESMTPSA id
- tz15-20020a170907c78f00b00a3d153fba90sm1609058ejc.220.2024.02.14.10.34.56
+ x9-20020a056402414900b0055ef7742204sm4513440eda.97.2024.02.14.10.34.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 14 Feb 2024 10:34:56 -0800 (PST)
+ Wed, 14 Feb 2024 10:34:49 -0800 (PST)
 From: Igor Opaniuk <igor.opaniuk@foundries.io>
 X-Google-Original-From: Igor Opaniuk <igor.opaniuk@gmail.com>
 To: u-boot@lists.denx.de
 Cc: Igor Opaniuk <igor.opaniuk@gmail.com>,
- AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Bin Meng <bmeng@tinylab.org>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>, Roger Knecht <rknecht@pm.me>,
- Sean Edmond <seanedmond@microsoft.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v1 3/5] cmd: optee_rpmb: build cmd for sandbox
-Date: Wed, 14 Feb 2024 19:34:42 +0100
-Message-Id: <20240214183444.493629-4-igor.opaniuk@gmail.com>
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jens Wiklander <jens.wiklander@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v1 1/5] tee: optee: fix description in Kconfig
+Date: Wed, 14 Feb 2024 19:34:40 +0100
+Message-Id: <20240214183444.493629-2-igor.opaniuk@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240214183444.493629-1-igor.opaniuk@gmail.com>
 References: <20240214183444.493629-1-igor.opaniuk@gmail.com>
@@ -103,37 +96,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Support CMD_OPTEE_RPMB for SANDBOX configurations.
-Test:
-
-$ ./u-boot -d arch/sandbox/dts/test.dtb
-...
-=> optee_rpmb write_pvalue test_variable test_value
-Wrote 11 bytes
-=> optee_rpmb read_pvalue test_variable 11
-Read 11 bytes, value = test_value
+Fix OPTEE_TA_AVB symbol description in Kconfig:
+s/"write"rb"/"write_rb"/g
 
 Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
 ---
 
- cmd/Kconfig | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ drivers/tee/optee/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index a86b5705174..8ad8c0c542c 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -1370,7 +1370,9 @@ config CMD_CLONE
- 
- config CMD_OPTEE_RPMB
- 	bool "Enable read/write support on RPMB via OPTEE"
--	depends on SUPPORT_EMMC_RPMB && OPTEE
-+	depends on (SUPPORT_EMMC_RPMB && OPTEE) || SANDBOX_TEE
-+	default y if SANDBOX_TEE
-+	select OPTEE_TA_AVB if SANDBOX_TEE
+diff --git a/drivers/tee/optee/Kconfig b/drivers/tee/optee/Kconfig
+index 9dc65b0501e..db0bcfa6f15 100644
+--- a/drivers/tee/optee/Kconfig
++++ b/drivers/tee/optee/Kconfig
+@@ -19,7 +19,7 @@ config OPTEE_TA_AVB
+ 	default y
  	help
- 	  Enable the commands for reading, writing persistent named values
- 	  in the Replay Protection Memory Block partition in eMMC by
+ 	  Enables support for the AVB Trusted Application (TA) in OP-TEE.
+-	  The TA can support the "avb" subcommands "read_rb", "write"rb"
++	  The TA can support the "avb" subcommands "read_rb", "write_rb"
+ 	  and "is_unlocked".
+ 
+ config OPTEE_TA_RPC_TEST
 -- 
 2.34.1
 
