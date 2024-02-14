@@ -4,78 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97B7EC48BC3
-	for <u-boot@archiver.kernel.org>; Wed, 14 Feb 2024 16:00:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D82B9C48BC3
+	for <u-boot@archiver.kernel.org>; Wed, 14 Feb 2024 16:30:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 34B4787E18;
-	Wed, 14 Feb 2024 17:00:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
+	by phobos.denx.de (Postfix) with ESMTP id E071E87E25;
+	Wed, 14 Feb 2024 17:30:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="NT2BlGMX";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="tTMSdssY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 919C187E07; Wed, 14 Feb 2024 17:00:06 +0100 (CET)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3A56787E5C; Wed, 14 Feb 2024 17:30:21 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E07587DD0
- for <u-boot@lists.denx.de>; Wed, 14 Feb 2024 17:00:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B493287E24
+ for <u-boot@lists.denx.de>; Wed, 14 Feb 2024 17:30:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=monstr.eu
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-55ee686b5d5so7614941a12.0
- for <u-boot@lists.denx.de>; Wed, 14 Feb 2024 08:00:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1707926395; x=1708531195;
- darn=lists.denx.de; 
- h=content-transfer-encoding:subject:from:cc:to:content-language
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ZOknemz5GA0vvp2rNtpuPab2p4Gc60yYXzcWY94SYCI=;
- b=NT2BlGMXVUK/A05vdFpHSH9FHNIbhP5CJ5vEvRmTMWxSZPloRflnzYSjKmBj5Fd3Nv
- 6t5pI3oBBSc0Bzintst8sDC+Au/2gYi0WBIebltsodZhDUfFApy+oKWXBS0TRBy0BfNc
- 43J8lKwqBIk5pChAtlt3d3qqwakm1J7wZBLesTyY9cFIQRZWbvDJWCPRq7eedkPD7fGX
- 3DkNg5P6B/Nph57579FbHFiAxGp1Np3ihlLUvh2pGeBvWkg06XFO+8y49JIhm0CaNDpf
- qbv9VZF782p0sQ8t/BJkbSvRoqOYWZxxN10W8/7mjtCkwXag5OJUqKFYlxyN0+V7Uk7O
- g+LQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707926395; x=1708531195;
- h=content-transfer-encoding:subject:from:cc:to:content-language
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=ZOknemz5GA0vvp2rNtpuPab2p4Gc60yYXzcWY94SYCI=;
- b=RBB5aiTprd3Dh8K85IZcNL1RD3p9JR7DzxsPqSIh4YxSJLl7XgvPQ0puwKUPjv+DL6
- dE1Kxb4n6dYc45057v9de9B0PD58nQC59sklGJwbxwXNbAunaRK7GX7wmorqbBT9X/tw
- GNyRAuyjGg4mpCyMyHwSp6sbPVdlQEXkPIsjZGuGBMLBfmtaQyvSlLyFEbpMjaypmIv2
- m1jewdceS2Wg5dBhyXeyctX6kiWGlhXTwZapiC9cNYDI9H7vRvyJXhonk7Of9AUrr1jU
- geXE9bKg8QOn6OtZDkGAdxnd5cUNXa4iwkLaf1BmqhBMBnXc7GM6bL2J4s5OMVaAB/yA
- EfBA==
-X-Gm-Message-State: AOJu0YwdME6ooV7WiJLaoY5g5E7vT/VPNixt+QmQpRI+mipnq+sWRYWj
- +VL/mqtoXNc/VYODRUcn6MZvtQD7XW9UlDcFiw5dLUZxBCBK6wuYRZTR4CdC4sjrc/qkshTjAKK
- DAUTD
-X-Google-Smtp-Source: AGHT+IFZ5jNpCn11tJZHcw49l327VjTFrSdhDDpE9ID7tBo7Vjjpetk6EsjbNFOiaErnf3HmIMRmeQ==
-X-Received: by 2002:aa7:d4cd:0:b0:55f:fd10:5e73 with SMTP id
- t13-20020aa7d4cd000000b0055ffd105e73mr2526870edr.20.1707926395378; 
- Wed, 14 Feb 2024 07:59:55 -0800 (PST)
-Received: from [192.168.0.105] (nat-35.starnet.cz. [178.255.168.35])
- by smtp.gmail.com with ESMTPSA id
- d20-20020a056402401400b00561c666991csm2654446eda.73.2024.02.14.07.59.54
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 14 Feb 2024 07:59:54 -0800 (PST)
-Message-ID: <ff2b2845-9520-4264-bc49-72075736d3b4@monstr.eu>
-Date: Wed, 14 Feb 2024 16:59:52 +0100
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41EGUBqu103505;
+ Wed, 14 Feb 2024 10:30:11 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1707928211;
+ bh=Eb6NH5rz4wxsb2HXN5pMgSShcX/Bw+rbD3K5cIoIMl8=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=tTMSdssYWPApK0bf8nqB49pv26cbPT50HfLPwh4RCHtassH64QivnoMZp8b0wBoCt
+ TZYxg097a/ZV/cZrcuPsqilkvpihb0moA1ed7ofOYo1ISQsjPQqSVRUmis3xEQGHLc
+ zo+2G3An8x3eA244nSKiJn1QOx4cYahhaUdlpUQY=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41EGUBcK028161
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 14 Feb 2024 10:30:11 -0600
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 14
+ Feb 2024 10:30:11 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 14 Feb 2024 10:30:10 -0600
+Received: from lelvsmtp5.itg.ti.com ([10.249.42.149])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41EGU9rt014388;
+ Wed, 14 Feb 2024 10:30:10 -0600
+From: Andrew Davis <afd@ti.com>
+To: Neha Malcom Francis <n-francis@ti.com>, Vignesh Raghavendra
+ <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>, Simon Glass
+ <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, Andrew Davis <afd@ti.com>
+Subject: [PATCH 2/6] arm: mach-k3: Add config option for setting OP-TEE address
+Date: Wed, 14 Feb 2024 10:30:05 -0600
+Message-ID: <20240214163009.983034-3-afd@ti.com>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240214163009.983034-1-afd@ti.com>
+References: <20240214163009.983034-1-afd@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-From: Michal Simek <monstr@monstr.eu>
-Subject: [GIT PULL] xilinx patches for v2024.04-rc3
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,94 +80,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Much like we have for ATF, OP-TEE has a standard address that we load
+it too and run it from. Add a Kconfig item for this to remove some
+hard-coding and allow this address to be more easily changed.
 
-please pull these patches to your branch. Most of them are related to device 
-tree and aligning with the latest dt schema for SR certification.
-CI is not reporting any issue too.
+Signed-off-by: Andrew Davis <afd@ti.com>
+---
+ arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi     | 4 ++--
+ arch/arm/dts/k3-am65-iot2050-boot-image.dtsi     | 4 ++--
+ arch/arm/dts/k3-binman.dtsi                      | 8 ++++----
+ arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi | 4 ++--
+ arch/arm/mach-k3/Kconfig                         | 7 +++++++
+ 5 files changed, 17 insertions(+), 10 deletions(-)
 
-Thanks,
-Michal
-
-
-The following changes since commit e8f2404e093daf6cc3ac2b3233e3c6770d13e371:
-
-   Merge branch 'master-779h0-r2' of 
-https://source.denx.de/u-boot/custodians/u-boot-sh (2024-02-11 12:42:25 -0500)
-
-are available in the Git repository at:
-
-   git@source.denx.de:u-boot/custodians/u-boot-microblaze.git 
-tags/xilinx-for-v2024.04-rc3
-
-for you to fetch changes up to c2ad5fb616d4e8aa2ac00e224030589847731fbe:
-
-   arm64: versal-net: Setup correct addresses of GICR/GICD (2024-02-14 11:23:43 
-+0100)
-
-----------------------------------------------------------------
-Xilinx changes for v2024.04-rc3
-
-zynqmp:
-- Cover missing _SE chip variants to fix fpga programming
-
-versal:
-- Enable LTO for mini configurations
-
-versal-net:
-- Enable LTO for mini configurations
-- Fix GIC address to aligned with real silicon
-
-xilinx:
-- DTs cleanup and fixups
-- Enable HTTP boot
-- Add missing spl header to zynqmp.c
-
-----------------------------------------------------------------
-Michal Simek (10):
-       arm64: xilinx: Enable EFI_HTTP_BOOT by default
-       arm64: zynqmp: Sync clock labels with kr260 revB
-       arm64: zynqmp: Describe 25MHz fixed clock for PL GEMs
-       arm64: zynqmp: Fix kr260 clock wiring
-       xilinx: Fix fpga region DT nodes name
-       arm64: zynqmp: Remove arm,cortex-a53-edac node
-       arm64: zynqmp: Align nvmem-fw node with dt-schema
-       arm64: zynqmp: Do not expose usbhub nodes on kr260 usb1
-       arm64: zynqmp: Disable DP on kd240
-       arm64: versal-net: Setup correct addresses of GICR/GICD
-
-Saeed Nowshadi (1):
-       arm64: zynqmp: Add 'silabs, skip-recall' to all si570 clk nodes
-
-Venkatesh Yadav Abbarapu (4):
-       soc: zynqmp: Add the IDcode for dr_SE and eg_SE variants
-       configs: versal: Enable CONFIG_LTO for mini qspi/ospi
-       configs: versal_net: Enable CONFIG_LTO for mini qspi/ospi
-       xilinx: zynqmp: Add the missing function prototype
-
-  arch/arm/dts/zynq-7000.dtsi                   |   2 +-
-  arch/arm/dts/zynqmp-e-a2197-00-revA.dts       |   5 +
-  arch/arm/dts/zynqmp-sck-kd-g-revA.dtso        |  16 +++
-  arch/arm/dts/zynqmp-sck-kr-g-revA.dtso        |  25 ++--
-  arch/arm/dts/zynqmp-sck-kr-g-revB.dtso        |   8 ++
-  arch/arm/dts/zynqmp.dtsi                      | 131 ++++++++++----------
-  board/xilinx/zynqmp/zynqmp.c                  |   1 +
-  configs/xilinx_versal_mini_ospi_defconfig     |   1 +
-  configs/xilinx_versal_mini_qspi_defconfig     |   1 +
-  configs/xilinx_versal_net_mini_ospi_defconfig |   1 +
-  configs/xilinx_versal_net_mini_qspi_defconfig |   1 +
-  configs/xilinx_versal_net_virt_defconfig      |   1 +
-  configs/xilinx_versal_virt_defconfig          |   1 +
-  configs/xilinx_zynqmp_kria_defconfig          |   1 +
-  configs/xilinx_zynqmp_virt_defconfig          |   1 +
-  drivers/soc/soc_xilinx_zynqmp.c               |  28 ++++-
-  include/configs/xilinx_versal_net.h           |   4 +-
-  17 files changed, 149 insertions(+), 79 deletions(-)
-
+diff --git a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
+index a723caa5805..cca0f44b7d8 100644
+--- a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
++++ b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
+@@ -105,8 +105,8 @@
+ 					arch = "arm64";
+ 					compression = "none";
+ 					os = "tee";
+-					load = <0x9e800000>;
+-					entry = <0x9e800000>;
++					load = <CONFIG_K3_OPTEE_LOAD_ADDR>;
++					entry = <CONFIG_K3_OPTEE_LOAD_ADDR>;
+ 					tee-os {
+ 						filename = "tee-raw.bin";
+ 					};
+diff --git a/arch/arm/dts/k3-am65-iot2050-boot-image.dtsi b/arch/arm/dts/k3-am65-iot2050-boot-image.dtsi
+index 64318d09cf0..3a6db91e132 100644
+--- a/arch/arm/dts/k3-am65-iot2050-boot-image.dtsi
++++ b/arch/arm/dts/k3-am65-iot2050-boot-image.dtsi
+@@ -51,8 +51,8 @@
+ 					arch = "arm64";
+ 					compression = "none";
+ 					os = "tee";
+-					load = <0x9e800000>;
+-					entry = <0x9e800000>;
++					load = <CONFIG_K3_OPTEE_LOAD_ADDR>;
++					entry = <CONFIG_K3_OPTEE_LOAD_ADDR>;
+ 					tee-os {
+ 					};
+ 				};
+diff --git a/arch/arm/dts/k3-binman.dtsi b/arch/arm/dts/k3-binman.dtsi
+index 758c8bf6ea1..621653e9471 100644
+--- a/arch/arm/dts/k3-binman.dtsi
++++ b/arch/arm/dts/k3-binman.dtsi
+@@ -286,8 +286,8 @@
+ 					arch = "arm64";
+ 					compression = "none";
+ 					os = "tee";
+-					load = <0x9e800000>;
+-					entry = <0x9e800000>;
++					load = <CONFIG_K3_OPTEE_LOAD_ADDR>;
++					entry = <CONFIG_K3_OPTEE_LOAD_ADDR>;
+ 					ti-secure {
+ 						content = <&tee>;
+ 						keyfile = "custMpk.pem";
+@@ -356,8 +356,8 @@
+ 					arch = "arm64";
+ 					compression = "none";
+ 					os = "tee";
+-					load = <0x9e800000>;
+-					entry = <0x9e800000>;
++					load = <CONFIG_K3_OPTEE_LOAD_ADDR>;
++					entry = <CONFIG_K3_OPTEE_LOAD_ADDR>;
+ 					tee-os {
+ 						filename = "tee-raw.bin";
+ 					};
+diff --git a/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi b/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi
+index 017a5a722e0..ca99fa0e690 100644
+--- a/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi
++++ b/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi
+@@ -250,8 +250,8 @@
+ 					arch = "arm64";
+ 					compression = "none";
+ 					os = "tee";
+-					load = <0x9e800000>;
+-					entry = <0x9e800000>;
++					load = <CONFIG_K3_OPTEE_LOAD_ADDR>;
++					entry = <CONFIG_K3_OPTEE_LOAD_ADDR>;
+ 					tee-os {
+ 						filename = "tee-raw.bin";
+ 					};
+diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
+index 0bd3f9fa12d..55bb874d9aa 100644
+--- a/arch/arm/mach-k3/Kconfig
++++ b/arch/arm/mach-k3/Kconfig
+@@ -129,6 +129,13 @@ config K3_ATF_LOAD_ADDR
+ 	  The load address for the ATF image. This value is used to build the
+ 	  FIT image header that places ATF in memory where it will run.
+ 
++config K3_OPTEE_LOAD_ADDR
++	hex "Load address of OPTEE image"
++	default 0x9e800000
++	help
++	  The load address for the OPTEE image. This value defaults to 0x9e800000
++	  if not provided in the board defconfig file.
++
+ config K3_DM_FW
+ 	bool "Separate DM firmware image"
+ 	depends on CPU_V7R && (SOC_K3_J721E || SOC_K3_J721S2 || SOC_K3_AM625 || SOC_K3_AM62A7) && !CLK_TI_SCI && !TI_SCI_POWER_DOMAIN
 -- 
-Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
-w: www.monstr.eu p: +42-0-721842854
-Maintainer of Linux kernel - Xilinx Microblaze
-Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP/Versal ARM64 SoCs
-U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal/Versal NET SoCs
-TF-A maintainer - Xilinx ZynqMP/Versal/Versal NET SoCs
+2.39.2
+
