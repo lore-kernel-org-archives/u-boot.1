@@ -4,57 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BB66C48BC1
-	for <u-boot@archiver.kernel.org>; Wed, 14 Feb 2024 20:43:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E275C48BC1
+	for <u-boot@archiver.kernel.org>; Wed, 14 Feb 2024 21:40:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B883871C0;
-	Wed, 14 Feb 2024 21:43:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 4E4A987CF9;
+	Wed, 14 Feb 2024 22:40:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="IGFCT6Qb";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="s2Zo9V0g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A9319875E9; Wed, 14 Feb 2024 21:43:17 +0100 (CET)
-Received: from smtp-relay-canonical-0.canonical.com
- (smtp-relay-canonical-0.canonical.com [185.125.188.120])
+ id 7C24F87CAB; Wed, 14 Feb 2024 22:40:23 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 550B186F67
- for <u-boot@lists.denx.de>; Wed, 14 Feb 2024 21:43:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 19F3A87BBA
+ for <u-boot@lists.denx.de>; Wed, 14 Feb 2024 22:40:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de
- [178.202.40.247])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id D82E740933; 
- Wed, 14 Feb 2024 20:43:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1707943393;
- bh=E5fkNN3FDFFcM6W7pDTaiidYdEG8t6SAccml7dDra+g=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=IGFCT6Qb4tlb40mcL/TZctDFkFiSO5Mnvk5rLwyiL/Y7WLbugsK9hLp+Hpqx0A1A/
- bnRzMfrJehRQ0W/pRt44V88MP44QhmgN3tDtBAFciiliV+LDyXsePA2mcvWpUqXjCr
- W85nFVxOpOR/u/S2+2R6g912SGcIW1zyO/MrxcIpiTKgZ6FV1hOTzl9xDr1UJRZxlL
- aAkXHgs5HM6ar3sKYFCNE1vLLmbDJRmFoeraEAi6glvrhoLGaGCmKEtwlrPL7yZfJG
- XkLUkzwodlF7ogWuFR5txSALgqQKiiKHuo/TggluMbUIqzC1lavh1hUpo7H9TKdbCd
- LQs66HVP4eQDQ==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] efi_loader: set IMAGE_DLLCHARACTERISTICS_NX_COMPAT
-Date: Wed, 14 Feb 2024 21:43:21 +0100
-Message-ID: <20240214204321.24466-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1707946816; x=1708551616; i=xypron.glpk@gmx.de;
+ bh=9DfDLuuYzvixSqbPrE4eJ2CBdB/uKDDYaOFVSxFbuh8=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=s2Zo9V0gNKbL7XT+2quit9MWa/cp4Hc7v5G/SFLDhlW4GGl69sTIENhxD7G+4Or5
+ +65fkyqeKZCMcF15j9ZMjaB6XglOPBnI+4PM0MRPBrdK1pCbf3HAztVKHZ/wJgbvY
+ 337Wnanf3LA/QGpLx/keglu1XY22Z9UT3g3ntvXfvKTPG1qGnwSmUPxVDiJT8Ynln
+ o0FIfzg6VsGbzooJfg20jfPJGWrXBi7WhXX0Yqb4TaLIioZCEqYmL9XqDR2OX5Mw3
+ I6ptknyRpq8/B1VODsd4cME6LQdOnCz0q+k72+63xS5qIinUc8+3qTrdRouFkN6fe
+ +qI1jZ+cjS/BHWvwtw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.161] ([178.202.40.247]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MLzBp-1rIZ1K3emP-00Hulu; Wed, 14
+ Feb 2024 22:40:15 +0100
+Message-ID: <2a659d15-1b1f-4187-b700-827558591084@gmx.de>
+Date: Wed, 14 Feb 2024 22:40:24 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 1/5] tee: optee: fix description in Kconfig
+To: Igor Opaniuk <igor.opaniuk@foundries.io>
+Cc: Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jens Wiklander <jens.wiklander@linaro.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+References: <20240214183444.493629-1-igor.opaniuk@gmail.com>
+ <20240214183444.493629-2-igor.opaniuk@gmail.com>
+Content-Language: en-US, de-DE
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240214183444.493629-2-igor.opaniuk@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:I0GVI2jQ7aV1HRtZimqJWI4VlYcgkiXg55COHVfCnxlsALHVehu
+ 5nGB4yhLjn9jQyCOrN1xxreA96YfWEKGX9z2jyPpOIojatuT24Xy5yQoyblxzKqDVPJLSF/
+ rUVH9BzQARUZxXGWBwOryLkTVxMBnpFC36+FCHHFypU4FRiamSE+UpD7yeIcAeKV9/VpiWC
+ 5ev9amLdBOVOQXli22lrA==
+UI-OutboundReport: notjunk:1;M01:P0:QZp2WNzDSOY=;NViugOch7p+PWzVHsIuxU7IZA5H
+ TBgkwjsSk9aiHhfg2rZRowVYI8dPq2Rfamhxm74GLZJzbIEh/oLsAIc0gaw9jfg55vgKWbGsL
+ bN96rKQroD5Ya+25lQsSHGrE42i/1U2wdo9jO4P//cW+2SPRYpUJllfsecaKni3nD3zHeUEYM
+ 9d/eAhqy1eedQD6tkJPokpg2Jp11j8Cf2X6q1288LBcTZgIj5RHrhBI70yLXQCKmRMsekddqx
+ ekcCBBEUFkCvUwLPUck/NSk3AN61hOIpZPbILaxYUeoeruwW6mZwz/G6BtktADccF3/qZUdyY
+ cOPZ8zFiNPWWPrOEtwraxcFA3/hPmuvquCCiOoBdz1RAe6doRVWoFlLPYSIA1BkTk0lEDDDjn
+ V7WUIlIXWxuyZxI1uifk/g8XTb2nbOYFhuYGJ0d4j7TroRWtIyV8M93DUAEvRHiNz+eCGVOud
+ THmPBs3RdiN9wMGykzD2sOLTEY9gmfUG+ZHnFcOkI71iwyTdSkIsWaO30YsM3Av34pzZIkrBJ
+ Uo4X4wDoLqv+4SUGG14oAVhtQKhM3cQUmoXBmlcjDEKnTzzoNTlLOop8pki3x58W5c+uRafE0
+ BXjqwXCB/SU6JONRmEPzW5YzwQYgYy8zfAA+3qxlwd+CqCW1pSU6dHkAJ/1hkeCjKeKe3VRsY
+ FAdgSgnFeIM+zOKB6SvcfaglcONXbszjuNj9P+AsuFmTLRKcMq1CU0kh5eT4lSpPW1+mBp8S3
+ IWNoqvybmfv7AxdrOaTmSF4Y/doKUjvi22DcqtnRPTQsLSRS+bXE6snB77BbPjQKz+bXNMKhH
+ QARPdUVWg1CigCn8+3CWzE49IueWMaAFJd4yLa9pxJi4I=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,102 +90,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The IMAGE_DLLCHARACTERISTICS_NX_COMPAT flag marks an EFI binary where
-the following conditions are met [1]:
+On 2/14/24 7:34 PM, Igor Opaniuk wrote:
+> Fix OPTEE_TA_AVB symbol description in Kconfig:
+> s/"write"rb"/"write_rb"/g
+>
+> Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
 
-* Executable and writable sections are separated.
-* The application does not run self-modifying code.
-* The application uses the EFI_MEMORY_ATTRIBUTE_PROTOCOL when loading
-  executable code.
-* The application does not assume that all memory ranges are usable.
-* The stack is not expected to be executable.
+The change is consistent with
+cmd/avb.c:424:
+U_BOOT_CMD_MKENT(write_rb, 3, 0, do_avb_write_rb, "", ""),
 
-The only EFI binaries U-Boot provides that do not fulfill these
-requirements are the EFI app and the EFI payload.
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
-Once we have implemented separation of writable and executable memory in
-U-Boot we can use the IMAGE_DLLCHARACTERISTICS_NX_COMPAT flag to decide
-if we will load an EFI binary.
-
-[1] New UEFI CA memory mitigation requirements for signing
-    https://techcommunity.microsoft.com/t5/hardware-dev-center/new-uefi-ca-memory-mitigation-requirements-for-signing/ba-p/3608714
-
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
-The separation of executable and writable sections for armv7 EFI binaries
-is provided by
-
-[PATCH 1/1] arm: separate .data and .text sections of EFI binaries
-https://lore.kernel.org/u-boot/20240214190625.13764-1-heinrich.schuchardt@canonical.com/T/#u
----
- arch/arm/lib/crt0_aarch64_efi.S | 4 ++++
- arch/arm/lib/crt0_arm_efi.S     | 4 ++++
- arch/riscv/lib/crt0_riscv_efi.S | 4 ++++
- include/asm-generic/pe.h        | 3 +++
- 4 files changed, 15 insertions(+)
-
-diff --git a/arch/arm/lib/crt0_aarch64_efi.S b/arch/arm/lib/crt0_aarch64_efi.S
-index 3c2cef6ec7..fe6eca576e 100644
---- a/arch/arm/lib/crt0_aarch64_efi.S
-+++ b/arch/arm/lib/crt0_aarch64_efi.S
-@@ -66,7 +66,11 @@ extra_header_fields:
- 	.long	_start - ImageBase		/* SizeOfHeaders */
- 	.long	0				/* CheckSum */
- 	.short	IMAGE_SUBSYSTEM_EFI_APPLICATION /* Subsystem */
-+#if CONFIG_VENDOR_EFI
- 	.short	0				/* DllCharacteristics */
-+#else
-+	.short	IMAGE_DLLCHARACTERISTICS_NX_COMPAT
-+#endif
- 	.quad	0				/* SizeOfStackReserve */
- 	.quad	0				/* SizeOfStackCommit */
- 	.quad	0				/* SizeOfHeapReserve */
-diff --git a/arch/arm/lib/crt0_arm_efi.S b/arch/arm/lib/crt0_arm_efi.S
-index ba9fada500..afeff3f3fb 100644
---- a/arch/arm/lib/crt0_arm_efi.S
-+++ b/arch/arm/lib/crt0_arm_efi.S
-@@ -65,7 +65,11 @@ extra_header_fields:
- 	.long	_start - image_base		/* SizeOfHeaders */
- 	.long	0				/* CheckSum */
- 	.short	IMAGE_SUBSYSTEM_EFI_APPLICATION	/* Subsystem */
-+#if CONFIG_VENDOR_EFI
- 	.short	0				/* DllCharacteristics */
-+#else
-+	.short	IMAGE_DLLCHARACTERISTICS_NX_COMPAT
-+#endif
- 	.long	0				/* SizeOfStackReserve */
- 	.long	0				/* SizeOfStackCommit */
- 	.long	0				/* SizeOfHeapReserve */
-diff --git a/arch/riscv/lib/crt0_riscv_efi.S b/arch/riscv/lib/crt0_riscv_efi.S
-index 46b0855237..c7a4559eac 100644
---- a/arch/riscv/lib/crt0_riscv_efi.S
-+++ b/arch/riscv/lib/crt0_riscv_efi.S
-@@ -96,7 +96,11 @@ extra_header_fields:
- 	.long	_start - ImageBase		/* SizeOfHeaders */
- 	.long	0				/* CheckSum */
- 	.short	IMAGE_SUBSYSTEM_EFI_APPLICATION /* Subsystem */
-+#if CONFIG_VENDOR_EFI
- 	.short	0				/* DllCharacteristics */
-+#else
-+	.short	IMAGE_DLLCHARACTERISTICS_NX_COMPAT
-+#endif
- #if __riscv_xlen == 32
- 	.long	0				/* SizeOfStackReserve */
- 	.long	0				/* SizeOfStackCommit */
-diff --git a/include/asm-generic/pe.h b/include/asm-generic/pe.h
-index b9d674b6da..cd5b6ad62b 100644
---- a/include/asm-generic/pe.h
-+++ b/include/asm-generic/pe.h
-@@ -51,6 +51,9 @@
- #define IMAGE_SUBSYSTEM_EFI_RUNTIME_DRIVER	12
- #define IMAGE_SUBSYSTEM_EFI_ROM			13
- 
-+/* DLL characteristics */
-+#define IMAGE_DLLCHARACTERISTICS_NX_COMPAT	0x100
-+
- /* Section flags */
- #define IMAGE_SCN_CNT_CODE			0x00000020
- #define IMAGE_SCN_CNT_INITIALIZED_DATA		0x00000040
--- 
-2.43.0
+> ---
+>
+>   drivers/tee/optee/Kconfig | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/drivers/tee/optee/Kconfig b/drivers/tee/optee/Kconfig
+> index 9dc65b0501e..db0bcfa6f15 100644
+> --- a/drivers/tee/optee/Kconfig
+> +++ b/drivers/tee/optee/Kconfig
+> @@ -19,7 +19,7 @@ config OPTEE_TA_AVB
+>   	default y
+>   	help
+>   	  Enables support for the AVB Trusted Application (TA) in OP-TEE.
+> -	  The TA can support the "avb" subcommands "read_rb", "write"rb"
+> +	  The TA can support the "avb" subcommands "read_rb", "write_rb"
+>   	  and "is_unlocked".
+>
+>   config OPTEE_TA_RPC_TEST
 
