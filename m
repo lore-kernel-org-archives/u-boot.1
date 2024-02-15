@@ -4,58 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FA6BC4829E
-	for <u-boot@archiver.kernel.org>; Thu, 15 Feb 2024 14:31:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE4C0C4829E
+	for <u-boot@archiver.kernel.org>; Thu, 15 Feb 2024 14:32:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6AE6987A80;
-	Thu, 15 Feb 2024 15:31:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1592287DEC;
+	Thu, 15 Feb 2024 15:32:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="aBBQekVs";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="PqTgEyfu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B47587D6D; Thu, 15 Feb 2024 15:31:32 +0100 (CET)
+ id 8EE4486D38; Thu, 15 Feb 2024 15:32:09 +0100 (CET)
 Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on20601.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2415::601])
+ (mail-dm6nam11on20600.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2415::600])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9896186D38
- for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 15:31:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 19FF687DEC
+ for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 15:31:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=VjpQFhYC2uUVuapGFTa74/UyILQLH0M4Hp5pal6PuIvfEgNwSCKVyfqkWayZAc8SPXmojJJVsN4BNO5FNaQLSDZP3AMhaAVsgyRjJnSxQY8lWWR+mIsN2xsX+eFbY4OCslJ2dOdOs3ipdHVmmJIWwSDvuJtlj5nkABE4OKF7psNJfeg6sieBcW/AwAh8AHGNWK733cOI5jkC7Ap7j4ul1jZk+WvIN/HAbvebIVufE5h7PIRi4C5R0Z57lWxahAu78G3Ln+4EK0BFMQaNiqkqUnNTMgMQwRLcREqNLEtzQj00wCR68Ts5y/yrzXud9ccSSAJWCY6KjdOTf6qCP70bbw==
+ b=WH8AgBqPLh7zSXDUn/tcqOgHFTZegUUlUdb6+MW1c0NBxFjc7k9Mnfqc5UeOqxtPzTOirwvWU8eibhjUhWtLfoTQ0L1MxmoTzyuddivXUjGFCUb5WGOG+FDuHHXG9Vx3uWouZDFeZLL8/LQi9ykAUddzu/qlCi//rSIWnTKr5svV0t4VNBtMGrfz+cykd9GbiwXnC+o5SBTWhaKH/RNTdG3uPcxzgPwCPRLFgTMDmDEL+IIjsJNB3+4HorLd5rws2bv609185c5tL64sNwMl0Re47ulXIJpK76v82toLyD1HllZi2hdw1R2oWrY4zKezYupF8JtxToN9dbfbyRz3/g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JPo4y+VckW8LdypQMgHLBER2oUb6wM48RnoEcOqJRxk=;
- b=FfRjCJkI5eoU+k6dyRWl4YDRVsd7H6GSKKZs3Y7VeIo5L9K2GYWh5/vrzjwGLN3m4EXVuJ5IMtPBc/cnzkvriazTE4dQOXtKr6s7A2MllVFX8+XM/wSgyw1jR9e51k/h/qeJOKpPwPSIplTEWjGUd4cWnIKLgQRbQzyY8YN90Hvyt0seyuSHg7JI+U/NfmaHYEawbsfWO5qaKyrxM6zG+lU5srMJU06pUkne2cO9hedqoWQMCE2O0LR0QHG6yGCliGW4ujwJK6+dPvoXUoMwsL28H6lFGxjMv3qAC6Uu0FKfGA+VBpezAX7vsiZJLYFPbArEy+im/IQY9XqYrm2G3g==
+ bh=gjd2tyetUd5LDY+wr4YbQ6ONPcEZQ+SLqgC3pgYh2BA=;
+ b=DeImG5Rqo0qpIe+XNtWcTs7jwP2KO3k1mEnMoc1Ynv40P8UyL706nxnioyabCveyN3K9I2ojNYvRSLyZB0H7gC5vkrE1qpKtNxTmL87ZhOHsXUJ1nNv88oBiwTUVS6LOx5rSqkjFQMjd4eiv8ausgiJW5Paso/Mm5r+ivqU0TJnANE8k5ThOUhLLiGr+bnuNauWC7eDF4fBP7FdhLwRIxqO7QiX9N+cw6bH+YItgQ4lOuDTb8wl5Hd9qKtxHFt6gczVZpDh3Vk2WWvYqXGlNHTU8RD2m51RJQqLv5YO8GEO0PPJd5ayyHfkhEqBfiACf4r0GfBiFMzAoaDRoxbKS7w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JPo4y+VckW8LdypQMgHLBER2oUb6wM48RnoEcOqJRxk=;
- b=aBBQekVsl1GTU31A0B7iJHJh/3d7TpQwvmKUO2EVTnnwn5D9vqGwFas61IhRannCkYkykmYMcYd5/ARO2R+glQVxCYPhcVWqx+8of+jvFaoxD9iVP/9NmgA7RgHFFd2e6EB4p6hYKkKbj0SdQlvh2VEY4E/E5yCPWcWuEYpzaWc=
+ bh=gjd2tyetUd5LDY+wr4YbQ6ONPcEZQ+SLqgC3pgYh2BA=;
+ b=PqTgEyfuTcMfag5FpgnYRplHg6H5/tr9gjRZkoKVjKn+GMNiWc3Z8YtokR0g2UeRGfGsi+EqNGXpu3oo+xoQkLGkkiAyKjxkZCoiKFqE6ks6aZQa2xt5EQGEtjvgTV/ufeZNvR5IxKQZJqZvaxtfZy725+VzZ2Mfqzl/movfN/8=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from CYXPR12MB9337.namprd12.prod.outlook.com (2603:10b6:930:d8::20)
  by SA0PR12MB4493.namprd12.prod.outlook.com (2603:10b6:806:72::24)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7292.27; Thu, 15 Feb
- 2024 14:31:24 +0000
+ 2024 14:31:48 +0000
 Received: from CYXPR12MB9337.namprd12.prod.outlook.com
  ([fe80::772d:da3d:154b:fa45]) by CYXPR12MB9337.namprd12.prod.outlook.com
  ([fe80::772d:da3d:154b:fa45%7]) with mapi id 15.20.7292.022; Thu, 15 Feb 2024
- 14:31:24 +0000
-Message-ID: <7cc3cab2-19e3-4f6b-b6c3-c48d549a3f3c@amd.com>
-Date: Thu, 15 Feb 2024 15:31:10 +0100
+ 14:31:48 +0000
+Message-ID: <877195ff-1c10-4e98-b042-cdc47cbaa293@amd.com>
+Date: Thu, 15 Feb 2024 15:31:42 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 17/21] tools: mkfwumdata: migrate to metadata version 2
+Subject: Re: [PATCH v2 18/21] tools: mkfwumdata: add logic to append vendor
+ data to the FWU metadata
 Content-Language: en-US
 To: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -67,7 +68,7 @@ Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Etienne Carriere <etienne.carriere@foss.st.com>,
  Jassi Brar <jaswinder.singh@linaro.org>
 References: <20240212074712.3657076-1-sughosh.ganu@linaro.org>
- <20240212074712.3657076-18-sughosh.ganu@linaro.org>
+ <20240212074712.3657076-19-sughosh.ganu@linaro.org>
 From: Michal Simek <michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
@@ -113,7 +114,7 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
  l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
  3i3l5DA=
-In-Reply-To: <20240212074712.3657076-18-sughosh.ganu@linaro.org>
+In-Reply-To: <20240212074712.3657076-19-sughosh.ganu@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-ClientProxiedBy: VI1PR0102CA0004.eurprd01.prod.exchangelabs.com
@@ -122,61 +123,61 @@ X-ClientProxiedBy: VI1PR0102CA0004.eurprd01.prod.exchangelabs.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: CYXPR12MB9337:EE_|SA0PR12MB4493:EE_
-X-MS-Office365-Filtering-Correlation-Id: a7d8c32c-35e7-4e46-311b-08dc2e32c948
+X-MS-Office365-Filtering-Correlation-Id: 562b7a2b-96c0-4777-b196-08dc2e32d789
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 4WjJtkuf0aVxQ1HQKXA60PPT18VoCbROaK/dYQuE6C9WQX126aRKbjQLB9zD7UlvNnRxVrBi0xh9lAwuXdNWtaFPL028yxxssbR1nno1lUDm1XvQms0Q5Os/LmTYAX2U8cEOFhHK6UwlofQGsZ70EgXriOIlziCjnrzNW7eLDUHTTfBVmcPKuv/KjJm6sOu7vyfeG2uq/AGCMzePD3kMOtMQVyDCstE0zC8KuziPAKuoVbtokNzGpv/gVYetX1n4QSnQ6WkuMrN7EXuaZ8JZ9sI+z3crfWKcdZgQn5nHED3gHWP1j5FpH91coM5SGREdPGuzeeHrd3bwmnweQc5I/cVThuBVURVushLjxkxQVQGLgszr/FNAakMok2rfGft1UEMOPWolBG2eoAZpP9iYsw6DP6YYmpMHC6SNomP+ofTlj1nHsfXRiXxIGGcK6B0I6gia+p+ExVs/DQdwZNWNOyifrAsKi3JJCjFPoUoKJF4xpWuGx3sIM1HylENrs6XeHu/m2Uzvz7nR7qQZCXlll64hMBeM5xcGV/o/ke36Ad21PX0VIMaX0Is7O+9asrvU
+X-Microsoft-Antispam-Message-Info: 33NB8/0E4ceqPBfwNk5FCUzmot+McaA5p4F74zfoyFUjqHNXz1vmdjGpYqcLLf53SrsNzLeUeUyesYauNnqEvzdPZrHvKhcCtH7VBWxOjBx/GzmJFthLi5ShOmMdM3FdDopCQm3sCqewvq8zOspFnC0lL/FyqXVW7rjYFPmD6q+y94t4UgnUk5Uq/tnWLIYcLaO3IrEo3a9YOP8TRLBqbLwEngr2hKeAr4hDroTbXxwsZ2WuZ1+8LA1OrL9v4gFhQ/L5D0a5fnwKEECtoc5Ok+/oeRpgC+mH33Dd9+EkQOUjsLxeGEsD7C3vhcSRHHlmgWx9rDTjio8eTHRM1RxzSMyQkM22S8xfk5eVNFgd7Nm15FXzOCr/Mo/deiUGLRi1hmffJY5t0xvTVgGOTSYS6inNd+X4O5z1Ov/y0SdBaUGPGDFrk0YpHGFPBlFnqZf6vswbty44dxath8hZiutBoyHK5+0Fd0Yu/YZPZI91WFk0N8VgKO4hneC/NZ0vvYy6Ue1Wegjh64mNOE8N/5UHteddnvR5t21oNr2T0WINbxst2bapcfBqRI43GcOZc+FE
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:CYXPR12MB9337.namprd12.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230031)(39860400002)(346002)(366004)(396003)(376002)(136003)(230922051799003)(451199024)(1800799012)(186009)(64100799003)(6486002)(31686004)(6512007)(6666004)(478600001)(41300700001)(8936002)(44832011)(2906002)(8676002)(7416002)(4326008)(5660300002)(6506007)(53546011)(54906003)(66946007)(66556008)(66476007)(316002)(2616005)(83380400001)(31696002)(38100700002)(86362001)(26005)(36756003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SzZpUkRkeFFNNEtZL0lyWmt5TWYyVC81OWtuM0ZiNGk2L3NaU0RrZkk2S3JR?=
- =?utf-8?B?YTlSK2kzYlI5QlZuSzg1anFMVk9FM2FCRE9QV0I1T3RvdHBycmcrWnVHLzl4?=
- =?utf-8?B?RG95MnFaYi94Unp6Z1prZTJPNitwNlE1bk5uUVpnb0MwZytabTdWOTdaVmVo?=
- =?utf-8?B?bGh6UWx2Wm84dmEycUxGUWhDRnJ1MUp3QWlacTJWVjA4NnJXOEViWGFQNkhZ?=
- =?utf-8?B?Z0dOQjBMaHgyUEw4cWlQa1R6YUxnNTd3Rkx0dVQxalJ2UU5zeWxYTXZNZ3Iv?=
- =?utf-8?B?RDFWVGkzOUVCTys4UFBGSWx5Z3NvanlBdW9XcnRKQmRDMkR1MkF2OWVWMzN3?=
- =?utf-8?B?VEJua1RPSUdiZlpJS2pKazVhNjZvTzk0aUdrSlZ4bE04VzhORm9hbTk4eU91?=
- =?utf-8?B?NG0wcTdpaU02Y3k0QTZCT29Ed2paYU1FL3RlZHNJZWkyWEZiR1NWU3RZdTdw?=
- =?utf-8?B?VFVQZWlURVRWa2x0WjJ1RHRseTliTy9sd2hVOTdHUitOdkhpcWdnOXk3Q2R4?=
- =?utf-8?B?V3A5U1U0Z2VuQUF3UzV0enZ6NVVhLzhNWC9hWTY1QWVLZlptQXRLSzAwb2ZY?=
- =?utf-8?B?QUZOamFscXFhZ2U1c0ZIQ1l6ekwwT04xREUwWExwY2kzcU00L2svM1UybTk1?=
- =?utf-8?B?S3RySlYyQ01RODk3Z212V1o3M2xTMjRYVVFzQUZCdlRwNkxnM2RXU2FDREF3?=
- =?utf-8?B?ajZ6L2dIaVptblA0SEZLclVCMGxGc200bVVWQUxuUlR6Sm9DSHZLUjVnWVVV?=
- =?utf-8?B?RTBpU01YeVJTKzdjcGtUTjN4b3ltRkpGOWxNaUVJeHJ4QTNSb0liRExjZldR?=
- =?utf-8?B?OU9XU3JEald6eDcxUHFxWTh4RmloNUZpYnFkb2hRcHNOd083RklZSURDbFVV?=
- =?utf-8?B?bGNaZTJ4WXVxdTVOT2NCM3d2amlUbzRjOEwrSXdkMDl1REtLN2FmL3d1VEpG?=
- =?utf-8?B?Q1lWSWMyb3ZNWGEyNzFxUnZPa1c3UlJZejJZM3hGUDlrNldORmR3L2JPakhW?=
- =?utf-8?B?NUZ6ZEhvSWRmanp1V2FZN1FKZExYVjBwaGhYTHo4c0hMdTVKQmhhcG9nR2lq?=
- =?utf-8?B?L2V4N3RHd0FreFRzOHFqVzFmd3A5M2wrMHJFQTRBMkQ2QzU2Q09saHMycDlw?=
- =?utf-8?B?bVZlZjBwQnRzaGE3UHpKWGQ4aDhPYTBaR015SHpRcjdGSnlqZlhVNXN4K3Ux?=
- =?utf-8?B?TXg4YitoOHUvNkYxQktlWHQ0c2EweDBwdHc4SGo0d3FSRGEzRkZCYVhtNEYx?=
- =?utf-8?B?MlhBdVlPZUE4QmNUMUlEd085RTFSdS9QT1ZMSU1kL0lvbXZuS0ZyTnJkK2hR?=
- =?utf-8?B?eGhoUXRKVUdOWCtNV3F1WE51aGdYQUdHVlFQZnJNa3RKUUJHNjN0eTFDbXZD?=
- =?utf-8?B?bjZEbDJlUTEvbFd3V20weE5VN1pMejV1NCtwYXJ5T2k2MDRIK1dOekM0VC9Z?=
- =?utf-8?B?K2xEcElaQnRJLzN2NVVLSWpzSFRyRUVKc0Y3S21zcVFFTlZpcy9ybGE2Umtw?=
- =?utf-8?B?eTJRczhrU3RBZnBaUEFDS3J6Ym5LLzJrdlhSRTRVemdLTHhDd2g2RHJjK1By?=
- =?utf-8?B?eG83d0lKN0JPZ0V3aXRFQmE3VlZBQmZpK0xYRXJVVFhaOHFQa3ZEY0ltbFVT?=
- =?utf-8?B?V3VBSWRGUDZ1WFdVZXc2OFhXZS8rUDBFb1JZdGdnVE82UnNFZzc0dldmV1Mr?=
- =?utf-8?B?U2tXb2IzeTZhU3N1WVFhaUV4Q1BnNzhFbUpKQTcveUxBVkJlbGkzQ1JvYVlG?=
- =?utf-8?B?TldDMHVvQytIanZxME0yQmwzQk8ybGlPREphZlMvaGxiK1hTWElEMHh0UzRk?=
- =?utf-8?B?amxHZWc3UmpEUU0vSi9mOUluY2JnSnd5K2dqQkFOVnZvMlFGLy9zZEFIakNT?=
- =?utf-8?B?RHN0YVFXMHRKc2pBMkM2QVB5SXkwVUcweTQ4L1pqRGZWV0FJWWRxWXR0Tjhl?=
- =?utf-8?B?Rm9vcjBmL1oxR1dJT3VnN3ozSlpLQjNMY3hCaURzclErWTZrU3N1dy9KZDRy?=
- =?utf-8?B?ZnhDWjh3TmpMa0FhZElXbUpaaGlvSWk2RVdPNEZXejBta1R4c3I2VXhSeDJI?=
- =?utf-8?B?QzdWZ1FJV2pYR3BXL2xmUlVNQ3pHOStKUW9raVZhNExQSlRsSlJqRCtDdFdk?=
- =?utf-8?Q?BPecN5sd4KyTMtZ2HQwxp2zzU?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VVYyRDhXNzJ3STVGZk1vREloQTBOUzdhTG9iblJiQjdoK0pod3d5cDR0WkVo?=
+ =?utf-8?B?RWx5WGRDZjduUzVIajM0V1Z2b20xbUVDVGtmMENFK0lxZWVrWk1TaVRaRGZv?=
+ =?utf-8?B?K0k0UDU2c3dzNGI4dlJnMCtGM3RlRU5VZHZLcUpiZTVTbXNuNzllRzJlcmZ0?=
+ =?utf-8?B?NVI2bWtJeWdoWWlvbDQ2dTJxTmxCVVBhSy9IUUlpQ3lwM3ZXU1F1clNwVGlM?=
+ =?utf-8?B?YlJENG9BZjRKRTd2R3ZRcHVza0xmYnMwZjllWUJPMUdkcHBscG1OVXpjeXNp?=
+ =?utf-8?B?ZW5VZ3pvS2dQTGlVZ1RzOU1STDNyNGNpbHo5alg2dzlQazNNeEU1dWRmVFkw?=
+ =?utf-8?B?NEZzYXhGdVc3Vnp1V0ZYU240TERhZ2xkMGlDSThwaGwzZFlYaXpvNGFNWVps?=
+ =?utf-8?B?UG8zcHRQd2pzZG1NWEYzMDdLRGRvSkdXRU9nMzY0KzQxRmttL0gyMk5wckth?=
+ =?utf-8?B?Uk1KREcva2xISldkK2cweHVyV1VpNHdjSGhjOUFVRlpEekpqYkVrZEJyQklT?=
+ =?utf-8?B?ZllyTzFkTy81aGM3cTkxa25TSXErZUtUZjJEZy83L2Z3SS9uYWcrcmVtTytR?=
+ =?utf-8?B?U05Qakx6NEpIeGJPTmFsdnVVWTJGSXlwbCt2c1BsdU4yWHZNTVY4cm1FTXda?=
+ =?utf-8?B?UzFWeHhjSHZPUVJVakRtMEMrTlpyOFhpTkFkMm1MK05zYlJ4RDFlOTd0TXp3?=
+ =?utf-8?B?V1NkVHZrbERaaGNFR29EbkM4THBNSVlxRVJtTkN5WWhWcHQrNnVwMkRpcTJo?=
+ =?utf-8?B?bUR3VEh0ajJOMmh4aWFFUUl3RUFjd3FkZy9uWXJqYk9FeGUzWm5GQmZQUGhm?=
+ =?utf-8?B?Q0E0ejc3YWNJdFhxaE9yaCtFUC9FODRGK2l2TXZzRzh0V1dOSTVmMUNnVi8z?=
+ =?utf-8?B?dVJjTWV1WGl5U1ZVdHk0Uk9zTmEzK3o1Smd3OEplelJLUGRIWHliS3hwY3A5?=
+ =?utf-8?B?amVuSTArK0d1WktnQzFmMVkxd3Y3Nkk3aGVkS3pFVEVIZHpVR1dyblBzRzlh?=
+ =?utf-8?B?OTMrdGdNbngxaUVtUmpBVU1xUkxCektmV3dGMmJOOXZacEZlaEVoV1JON2hv?=
+ =?utf-8?B?MDBPV3U5enZzUXlFdGY5VzZnQ0tsQ0E1UzB5Y0NNNDFySFhaeDBhWDduZzRD?=
+ =?utf-8?B?dzI1Y2lJTDZDbkxseDJrVVdmZi9MOGxIbDF6dGl1SDZGK3VHMHdxbzlaY3Y0?=
+ =?utf-8?B?S2tkdWpEWFA2L2t2YUpQN2szampMeGpqMmVoQ2FGdzQrWEFUQXRtWFhseXBm?=
+ =?utf-8?B?M0hyYUlxaWtUejFxUjVGUkhKQVlvM0xweGQ1Q1d5RWpaSTZxTDdrQXo3dDU1?=
+ =?utf-8?B?QmgxNnRETUZrWkJjZXNSSFJGdGpxcENzT0Rmb2lFU0pKU0VVUkdHbitPdGV5?=
+ =?utf-8?B?ajNBOU5Cc3pwbjlZMDBWVnhVVlpaZnJzRExKc1lFNW5CVVNqak1ORE1hU0Jt?=
+ =?utf-8?B?SjV2T3J1MWh5NnV1Y3dRMU1Kcm01MFl0em50WWpsUDFtWFVPODY5Y1VhVGVz?=
+ =?utf-8?B?T3NrQ3lCa00zYktTeDBpd1lpNWVEV3FLQnpSejZ1dElzSmpaVWJtNHFTK09l?=
+ =?utf-8?B?bWg5c2pCZnRZdFV2M2hHUm5weXVZUkdDSHJDWXdOZG1BUW51VXhtSkd1YmVK?=
+ =?utf-8?B?VFhsN2JhT0JnN1Z3S0lEek45L1A2YWxYWWQ5S1JUN1lia21rbzE4VEhmMCtv?=
+ =?utf-8?B?MUErblZSUXI3RzRkMDc4UlhRbTc2enpjTVNZdU5pSnRZVjg3QXlReWlCeEti?=
+ =?utf-8?B?SnZVZEUwYXpNQW91dG5XaEJ1bGhPemlzdW1RSzhZbXIxN3pZays3Rzl1M1hE?=
+ =?utf-8?B?SGlMWnIvQW5CbzlwVUc0UEg5Zy9Bckx6RlMza3FaRHkyL1JKdDByb3RRR2RH?=
+ =?utf-8?B?MDIveWxOcmlOY1BVVFJjcHd4UHNEQVplRUhwUlVoY0RjT3V4SzJXdklxTGRW?=
+ =?utf-8?B?Q0s2U1VYV0xYWjZVK1hzL2p6ODJ3TWVCM1BtSEdpNitKNFJPazhlOTQybnpm?=
+ =?utf-8?B?Rm8xTmFrWmw4amY5Rm9PVWg1Q2p0UkN6b09OWlVRT1gwZlV3Qkx3UXJTcVhU?=
+ =?utf-8?B?MVc5T2o0MU0wbjdoWlFJT3JoZjRjTUhaRVNib2Q3N3ZreUN0NGlnVUZEbEV1?=
+ =?utf-8?Q?0IqVYYA7aozPs8NvpYz8QWl/L?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a7d8c32c-35e7-4e46-311b-08dc2e32c948
+X-MS-Exchange-CrossTenant-Network-Message-Id: 562b7a2b-96c0-4777-b196-08dc2e32d789
 X-MS-Exchange-CrossTenant-AuthSource: CYXPR12MB9337.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Feb 2024 14:31:24.2495 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Feb 2024 14:31:48.3079 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: kYf5SnqcLwMkBVPx9Gq/c9VhIPmHfw6r96V9PF6d4xc1ZClpCUOeS6y9jvDquYBw
+X-MS-Exchange-CrossTenant-UserPrincipalName: KFQVeL7fehemJ66SzF353NV+0t5jurvd1Mt/jokz/4T1qIyCj/V6vHsqovcxvrHz
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR12MB4493
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -194,46 +195,230 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+
 
 On 2/12/24 08:47, Sughosh Ganu wrote:
-> Migrate the metadata generation tool to generate the version 2
-> metadata.
+> The version 2 of the FWU metadata allows for appending opaque vendor
+> specific data to the metadata structure. Add support for appending
+> this data to the metadata. The vendor specific data needs to be
+> provided through a file, passed through a command-line parameter.
 > 
 > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > ---
 > 
-> Changes since V1:
-> * Compute location of struct fwu_fw_store_desc using pointer
->    arithmetic.
+> Changes since V1: New patch
 > 
->   tools/mkfwumdata.c | 45 ++++++++++++++++++++++++++++++++++-----------
->   1 file changed, 34 insertions(+), 11 deletions(-)
+>   tools/mkfwumdata.c | 85 +++++++++++++++++++++++++++++++++++++++++-----
+>   1 file changed, 77 insertions(+), 8 deletions(-)
 > 
 > diff --git a/tools/mkfwumdata.c b/tools/mkfwumdata.c
-> index 9732a8ddc5..fb847e3a78 100644
+> index fb847e3a78..ab07623e25 100644
 > --- a/tools/mkfwumdata.c
 > +++ b/tools/mkfwumdata.c
-> @@ -14,12 +14,13 @@
+> @@ -12,6 +12,8 @@
+>   #include <string.h>
+>   #include <u-boot/crc.h>
 >   #include <unistd.h>
+> +#include <sys/types.h>
+> +#include <sys/stat.h>
 >   #include <uuid/uuid.h>
 >   
-> -/* This will dynamically allocate the fwu_mdata */
-> -#define CONFIG_FWU_NUM_BANKS		0
-> -#define CONFIG_FWU_NUM_IMAGES_PER_BANK	0
-> -
 >   /* Since we can not include fwu.h, redefine version here. */
-> -#define FWU_MDATA_VERSION		1
-> +#define FWU_MDATA_VERSION		2
+> @@ -30,7 +32,7 @@ typedef uint64_t u64;
+>   
+>   #include <fwu_mdata.h>
+>   
+> -static const char *opts_short = "b:i:a:p:gh";
+> +static const char *opts_short = "b:i:a:p:v:gh";
+>   
+>   static struct option options[] = {
+>   	{"banks", required_argument, NULL, 'b'},
+> @@ -38,6 +40,7 @@ static struct option options[] = {
+>   	{"guid", required_argument, NULL, 'g'},
+>   	{"active-bank", required_argument, NULL, 'a'},
+>   	{"previous-bank", required_argument, NULL, 'p'},
+> +	{"vendor-file", required_argument, NULL, 'v'},
+>   	{"help", no_argument, NULL, 'h'},
+>   	{NULL, 0, NULL, 0},
+>   };
+> @@ -51,6 +54,7 @@ static void print_usage(void)
+>   		"\t-a, --active-bank  <num>    Active bank (default=0)\n"
+>   		"\t-p, --previous-bank  <num>  Previous active bank (default=active_bank - 1)\n"
+>   		"\t-g, --guid                  Use GUID instead of UUID\n"
+> +		"\t-v, --vendor-file           Vendor data file to append to the metadata\n"
+>   		"\t-h, --help                  print a help message\n"
+>   		);
+>   	fprintf(stderr, "  UUIDs list syntax:\n"
+> @@ -69,13 +73,16 @@ struct fwu_mdata_object {
+>   	size_t images;
+>   	size_t banks;
+>   	size_t size;
+> +	size_t vsize;
+> +	void *vbuf;
+>   	struct fwu_mdata *mdata;
+>   };
+>   
+>   static int previous_bank, active_bank;
+>   static bool __use_guid;
+>   
+> -static struct fwu_mdata_object *fwu_alloc_mdata(size_t images, size_t banks)
+> +static struct fwu_mdata_object *fwu_alloc_mdata(size_t images, size_t banks,
+> +						size_t vendor_size)
+>   {
+>   	struct fwu_mdata_object *mobj;
+>   
+> @@ -87,16 +94,28 @@ static struct fwu_mdata_object *fwu_alloc_mdata(size_t images, size_t banks)
+>   		sizeof(struct fwu_fw_store_desc) +
+>   		(sizeof(struct fwu_image_entry) +
+>   		 sizeof(struct fwu_image_bank_info) * banks) * images;
 > +
-> +#define MAX_BANKS			4
+> +	mobj->size += vendor_size;
+> +	mobj->vsize = vendor_size;
+>   	mobj->images = images;
+>   	mobj->banks = banks;
+>   
+>   	mobj->mdata = calloc(1, mobj->size);
+> -	if (!mobj->mdata) {
+> -		free(mobj);
+> -		return NULL;
+> +	if (!mobj->mdata)
+> +		goto alloc_err;
 > +
-> +#define BANK_INVALID			0xFF
-> +#define BANK_ACCEPTED			0xFC
+> +	if (vendor_size) {
+> +		mobj->vbuf = calloc(1, mobj->vsize);
+> +		if (!mobj->vbuf)
+> +			goto alloc_err;
+>   	}
+>   
+>   	return mobj;
+> +
+> +alloc_err:
+> +	free(mobj->mdata);
+> +	free(mobj);
+> +	return NULL;
+>   }
+>   
+>   static struct fwu_image_entry *
+> @@ -223,6 +242,7 @@ static int fwu_parse_fill_uuids(struct fwu_mdata_object *mobj, char *uuids[])
+>   {
+>   	struct fwu_mdata *mdata = mobj->mdata;
+>   	struct fwu_fw_store_desc *fw_desc;
+> +	char *vdata;
+>   	int i, ret;
+>   
+>   	mdata->version = FWU_MDATA_VERSION;
+> @@ -249,23 +269,65 @@ static int fwu_parse_fill_uuids(struct fwu_mdata_object *mobj, char *uuids[])
+>   			return ret;
+>   	}
+>   
+> +	if (mobj->vsize) {
+> +		vdata = (char *)mobj->mdata + (mobj->size - mobj->vsize);
+> +		memcpy(vdata, mobj->vbuf, mobj->vsize);
+> +	}
+> +
+>   	mdata->crc32 = crc32(0, (const unsigned char *)&mdata->version,
+>   			     mobj->size - sizeof(uint32_t));
+>   
+>   	return 0;
+>   }
+>   
+> +static int fwu_read_vendor_data(struct fwu_mdata_object *mobj,
+> +				const char *vendor_file)
+> +{
+> +	int ret = 0;
+> +	FILE *vfile = NULL;
+> +
+> +	vfile = fopen(vendor_file, "r");
+> +	if (!vfile) {
+> +		ret = -1;
+> +		goto out;
+> +	}
+> +
+> +	if (fread(mobj->vbuf, 1, mobj->vsize, vfile) != mobj->vsize)
+> +		ret = -1;
+> +
+> +out:
+> +	fclose(vfile);
+> +	return ret;
+> +}
+> +
+>   static int
+> -fwu_make_mdata(size_t images, size_t banks, char *uuids[], char *output)
+> +fwu_make_mdata(size_t images, size_t banks, const char *vendor_file,
+> +	       char *uuids[], char *output)
+>   {
+>   	struct fwu_mdata_object *mobj;
+>   	FILE *file;
+> +	struct stat sbuf;
+> +	size_t vendor_size = 0;
+>   	int ret;
+>   
+> -	mobj = fwu_alloc_mdata(images, banks);
+> +	if (vendor_file) {
+> +		ret = stat(vendor_file, &sbuf);
+> +		if (ret)
+> +			return -errno;
+> +
+> +		vendor_size = sbuf.st_size;
+> +	}
+> +
+> +	mobj = fwu_alloc_mdata(images, banks, vendor_size);
+>   	if (!mobj)
+>   		return -ENOMEM;
+>   
+> +	if (vendor_file) {
+> +		ret = fwu_read_vendor_data(mobj, vendor_file);
+> +		if (ret)
+> +			goto done_make;
+> +	}
+> +
+>   	ret = fwu_parse_fill_uuids(mobj, uuids);
+>   	if (ret < 0)
+>   		goto done_make;
+> @@ -286,6 +348,7 @@ fwu_make_mdata(size_t images, size_t banks, char *uuids[], char *output)
+>   
+>   done_make:
+>   	free(mobj->mdata);
+> +	free(mobj->vbuf);
+>   	free(mobj);
+>   
+>   	return ret;
+> @@ -295,11 +358,13 @@ int main(int argc, char *argv[])
+>   {
+>   	unsigned long banks = 0, images = 0;
+>   	int c, ret;
+> +	const char *vendor_file;
+>   
+>   	/* Explicitly initialize defaults */
+>   	active_bank = 0;
+>   	__use_guid = false;
+>   	previous_bank = INT_MAX;
+> +	vendor_file = NULL;
+>   
+>   	do {
+>   		c = getopt_long(argc, argv, opts_short, options, NULL);
+> @@ -322,6 +387,9 @@ int main(int argc, char *argv[])
+>   		case 'a':
+>   			active_bank = strtoul(optarg, NULL, 0);
+>   			break;
+> +		case 'v':
+> +			vendor_file = optarg;
+> +			break;
+>   		}
+>   	} while (c != -1);
+>   
+> @@ -348,7 +416,8 @@ int main(int argc, char *argv[])
+>   		previous_bank = active_bank > 0 ? active_bank - 1 : banks - 1;
+>   	}
+>   
+> -	ret = fwu_make_mdata(images, banks, argv + optind, argv[argc - 1]);
+> +	ret = fwu_make_mdata(images, banks, vendor_file, argv + optind,
+> +			     argv[argc - 1]);
+>   	if (ret < 0)
+>   		fprintf(stderr, "Error: Failed to parse and write image: %s\n",
+>   			strerror(-ret));
 
-I think in previous version only active bank was accepted not others.
-I don't think it is wrong behavior but please consider to select it too.
-I was just surprised to see both banks in that state.
+Tested-by: Michal Simek <michal.simek@amd.com>
 
 Thanks,
 Michal
