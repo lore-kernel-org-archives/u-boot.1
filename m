@@ -4,171 +4,149 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00331C4829E
-	for <u-boot@archiver.kernel.org>; Thu, 15 Feb 2024 19:08:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E1D0C4829E
+	for <u-boot@archiver.kernel.org>; Thu, 15 Feb 2024 19:31:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 07DB887D80;
-	Thu, 15 Feb 2024 20:08:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 756A687DC1;
+	Thu, 15 Feb 2024 20:31:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=seco.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="zvLW8SGH";
+	dkim=pass (2048-bit key; unprotected) header.d=seco.com header.i=@seco.com header.b="jO/NgIRN";
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=seco.com header.i=@seco.com header.b="YobYVno5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F6AC800A5; Thu, 15 Feb 2024 20:08:26 +0100 (CET)
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on20600.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2416::600])
+ id 2007287DC1; Thu, 15 Feb 2024 20:31:51 +0100 (CET)
+Received: from EUR04-HE1-obe.outbound.protection.outlook.com
+ (mail-he1eur04on20700.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:260f::700])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8ECA4800A5
- for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 20:08:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5DB61870C4
+ for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 20:31:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=reject dis=none) header.from=seco.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
+ spf=pass smtp.mailfrom=sean.anderson@seco.com
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=pass;
+ b=A8zZzm9VJmL5wmslCZWO1XFtqh/K/D10mEi3j/6KMqWYZmzeXtKmK+TsnlcOlGwYnI+kexHM1ucc3U+8AUQ9MeKxuJm0G7n/C57n/MYJKjb/nqNa29cgl7g7yJSoaLULdoRDgpJgf8mbsdU9kOsttR3i9FSj96vX1MKKSSWAKTVi8baO34PZw1g3XME/nsajBRgS+UauPydxq/gBYEMKMB72RJ1K4UX2Xg306+sj58Hcs9KJdBaiE3G965tN7e4ii8kHWjXE0Kdjfv/mfsl7/Dgnf+XO8b/kk1Ili1CUWESI8NDoa4bvxN1E8jaKrKgz3jzW/8yaeKktQX1r5Km6Ew==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=FzYXCgTzkIVtHMnGJFOeImgUs4+hm019ygxOB9RM9wQ=;
+ b=nhiO9DTX3FTmb0s5INzdhWI0UE0okAwqMEUQSmA5oE3ESGbfQFEn7meCZ3pELt8wTg3pCeJ3CrMJbzxfcIe3nNR5gGpU7fkNVhLE4Jc/KinfyHBX4upP73JWv6XcSqaQBTbope3pTrOfLtDcRITI4fJEVayr5yRnB6AosoZRtYkGJYFbBHPckDaiGgm1gGphdLH8LAdjCtyOFPbZiPyHEsIoGLb2I51SbcdrGZ52FoTeBsdAfO5e3Ry5iUTfWhgv2iZtVcnxQqBtcSPFWLhK3oNg9t4aJdi3Q3o9oQUYKsTn6njek8HITR9XuAOYK5rhFctnymjS7QbAWAgmjMoptg==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 20.160.56.81) smtp.rcpttodomain=amd.com smtp.mailfrom=seco.com; dmarc=pass
+ (p=reject sp=reject pct=100) action=none header.from=seco.com; dkim=pass
+ (signature was verified) header.d=seco.com; arc=pass (0 oda=1 ltdi=1
+ spf=[1,1,smtp.mailfrom=seco.com] dkim=[1,1,header.d=seco.com]
+ dmarc=[1,1,header.from=seco.com])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seco.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=FzYXCgTzkIVtHMnGJFOeImgUs4+hm019ygxOB9RM9wQ=;
+ b=jO/NgIRNqi/yXlxV+uBbNodwa5K08rTEaOvKRmRvN/is6/wT3AFHcvK18CA2yZOMVKpj0AQLSbXvJrfVQD5dewK/RUtZi37xqwSJAQyuzZAai8d1C2ciq5v4yYOKPoil3QX2RgIti3Go28n9d/ilNahC2Dp1zeftQj22eyKHHS9MgaQNXZmI95V5o+1LzMP+IwPKSlvDhXZtTOp8iaPhVAHjh9P+fTbWNkSBWI8ElDO4RWEEucRJZ+24JKTG+vN2+/IpmMtwHKq15q7aR5CMNazo/ZO0Q760eggaTvoincMJw4UVVAGAzFeW98amNVBblvaLzuk09PXTiIgpa0uAcw==
+Received: from AS8P250CA0008.EURP250.PROD.OUTLOOK.COM (2603:10a6:20b:330::13)
+ by DU2PR03MB9919.eurprd03.prod.outlook.com (2603:10a6:10:499::10)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7270.39; Thu, 15 Feb
+ 2024 19:31:43 +0000
+Received: from AMS0EPF0000019C.eurprd05.prod.outlook.com
+ (2603:10a6:20b:330:cafe::16) by AS8P250CA0008.outlook.office365.com
+ (2603:10a6:20b:330::13) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7292.26 via Frontend
+ Transport; Thu, 15 Feb 2024 19:31:43 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 20.160.56.81)
+ smtp.mailfrom=seco.com; dkim=pass (signature was verified)
+ header.d=seco.com;dmarc=pass action=none header.from=seco.com;
+Received-SPF: Pass (protection.outlook.com: domain of seco.com designates
+ 20.160.56.81 as permitted sender) receiver=protection.outlook.com;
+ client-ip=20.160.56.81; helo=repost-eu.tmcas.trendmicro.com; pr=C
+Received: from repost-eu.tmcas.trendmicro.com (20.160.56.81) by
+ AMS0EPF0000019C.mail.protection.outlook.com (10.167.16.248) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7292.25 via Frontend Transport; Thu, 15 Feb 2024 19:31:42 +0000
+Received: from outmta (unknown [192.168.82.133])
+ by repost-eu.tmcas.trendmicro.com (Trend Micro CAS) with ESMTP id
+ A75572009538A; Thu, 15 Feb 2024 19:31:42 +0000 (UTC)
+Received: from EUR04-HE1-obe.outbound.protection.outlook.com (unknown
+ [104.47.13.51])
+ by repre.tmcas.trendmicro.com (Trend Micro CAS) with ESMTPS id 1AB412008006E; 
+ Thu, 15 Feb 2024 19:31:41 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=jg+jZK9Es6Iq/AxP5NWi6wRt3ZPuj7Rxvnn8jsSQ7C/sZNTjrC+wjPUoAkv9rN0bJfEI+KJ5x9xFmK4cwo9AOLWJACD0/tA2MBA/aF1VVcXJVwi+i/QNjLK4IcOYFt2hAK6rO5oqAgttoXhXRc7iPzzxTzt7ku2FW3S2R6YdliPF/z2Idxb+ykriQWIZRy88zeFVDhoxXDipY9D3jTke1tEW2SHSPt629zo/DMTcs6qRN25uPtOMXaDXYI/ssooTLCjdrdguhyJoFZ1UOJkI5aH10y3ax3mCtdyWacYGaIOW0UeB8cewRbePqokWHqNY7iYXcKu+DpD9OgQ+LLpk0w==
+ b=AN9V5ta1ZO1WMMdR+RGR7XuxHiMi1aP9hZGhWWadFXPFYWBpcwisQtM4Gl1xbgu4JzQQcTOBUwW6UE/nICqG9c0CihmtF9uPsrzaAwWr4KzWSqffAQw5m7lzilCq+9bvdhwn5+SQW/yoMMqrdOpA35FJ6v1b7Z2NTSGH+iCJXg5515ifKPRfpZOCJtLVUFdBRpDqfVUboWeH8gpUj/owmWlqYA/S+ovlfH2x0HDi/JsuMxoFy8j4gZwabYG0WwJnjOcvI7xxw7GgaRoivdO5cAoqAABhG1DySWytv0obd3GrSO3VuLuANsDD8U1z+CLvOox8TeA6whVy3ZOolhse9g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=IxmMYlw6Wf470EH4FG5ITlBcxhN/2t0bb3Ej56jtvFQ=;
- b=fko0lD+oP2/cFUUjQ+/paGm3oQ+nd3lmDcDvVTwT2vBjI2fBE94VEj2TWStYJ+9XOlM8p43LFBIQ909wn2z2Z2WPakmgyedcciAK31aLq1SMAe7Tw8D78WVtA/riHGw+++38+cI9NRLQunJrLmqv5r3HgrtS0Z8BIh+HhLvEEqjHdPzoNl2OxnIGRczRMNvcWfdfyLFLQS6HLNaYEWUSMouMCL8KV+XY0lYDx/kFSVbDTTxQHkupqcQJgRRiWFl8jwvTbzUp7PGpQTEXk9Sduoh8ObxvY1VZhrf7JXEhtDsVW+ahgJ2QaOT/f67QIBRqfqMB0Xv8jek+8OEHsNXPgA==
+ bh=62gN4jsVlttXN7aa4N29G17Oz3Xj5ydHP6faV0IU8fc=;
+ b=gONOxz9UkjrBErCQOaAOPvUqDABEOFuHrA9gmYDEOf36adA+2waWCvBstX052Ou0lU3S3QSpDZTDdnX95Xvk+9yCvNwkzArL7qr/RKHouH8J5dh569x/ccbCfUOdNIAyQYBwFNcsfpSLMhKuHv2uSFTQS2s5Lb1NVIXIPRSHAgbpkrvYSJCPC6mM9k9p8P4iJa2iURah4K8NEBRDb72hPmHyi9P1dYQbEDtQgCPIPJ4QgeHc1fkYNCRqIv+tskgFhogwQlFTQRsEJaL7zg46dP8sgb6z9zG6uly9QqVae/DCOiRLks7UOngQ3x47kojf/MaAWb19eUMGwcSsEVzXZA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ smtp.mailfrom=seco.com; dmarc=pass action=none header.from=seco.com;
+ dkim=pass header.d=seco.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seco.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=IxmMYlw6Wf470EH4FG5ITlBcxhN/2t0bb3Ej56jtvFQ=;
- b=zvLW8SGHflh4gi1Rf/MY7zahLT6Z1YNOjUVly0vjzQZwv/wllnWZawB+ug3OuxCDTbILig7eptMgDw7XtiJjH+CgOBrYwrBC84do6l3gqQcEAFAEkson+bBEBs+wMVoOuufhCIPZCj434oC9zFoDXKtuIPbs8+ROYT+x24FFMvI=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from CYXPR12MB9337.namprd12.prod.outlook.com (2603:10b6:930:d8::20)
- by PH0PR12MB7813.namprd12.prod.outlook.com (2603:10b6:510:286::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7292.25; Thu, 15 Feb
- 2024 19:08:14 +0000
-Received: from CYXPR12MB9337.namprd12.prod.outlook.com
- ([fe80::772d:da3d:154b:fa45]) by CYXPR12MB9337.namprd12.prod.outlook.com
- ([fe80::772d:da3d:154b:fa45%7]) with mapi id 15.20.7292.022; Thu, 15 Feb 2024
- 19:08:14 +0000
-Message-ID: <3f6a5971-a024-4eb2-bdba-76071fbd9bb2@amd.com>
-Date: Thu, 15 Feb 2024 20:08:05 +0100
+ bh=62gN4jsVlttXN7aa4N29G17Oz3Xj5ydHP6faV0IU8fc=;
+ b=YobYVno5zTx4Oe9+188E+YoryODdZyyvbvrsUqyn6fDMf0le7DIUCpKxqDZVYptIfF/dZWpS5uaSh5rZC8JXF6XhP9QBjkfZzQdQbndffcfPQgjpennuauZP67uQIv2oWT5zkVdPVcsk9Dk6THWx8NsilpmNKdJ2hBKyefItyLpnOJwhWDszM2LPx1D1Os6fKIBH2VsSOu6VULEfNRVaBWI3JvblSlEPZv1s3IyveCepje3D6q0jBa8macoHHocOeuyJLB3uVaFbV7hYxw2RLKF4XKHhxZAq3afuSir36qWPIV4j06u5Vks2EV3mtWdBgCYQVoGZsH1KZynPVqYvnQ==
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=seco.com;
+Received: from DB9PR03MB8847.eurprd03.prod.outlook.com (2603:10a6:10:3dd::13)
+ by GV2PR03MB8605.eurprd03.prod.outlook.com (2603:10a6:150:ad::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7270.33; Thu, 15 Feb
+ 2024 19:31:37 +0000
+Received: from DB9PR03MB8847.eurprd03.prod.outlook.com
+ ([fe80::18b0:3c00:30cb:711c]) by DB9PR03MB8847.eurprd03.prod.outlook.com
+ ([fe80::18b0:3c00:30cb:711c%6]) with mapi id 15.20.7292.029; Thu, 15 Feb 2024
+ 19:31:37 +0000
+Message-ID: <e9fd399c-34e2-4c54-a74e-d1a3b84fbcdb@seco.com>
+Date: Thu, 15 Feb 2024 14:31:34 -0500
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH] arm64: zynqmp: Support semhosting boot method
 Content-Language: en-US
-To: Sean Anderson <sean.anderson@seco.com>, u-boot@lists.denx.de
+To: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de
 References: <20240215171918.3729508-1-sean.anderson@seco.com>
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- 3i3l5DA=
-In-Reply-To: <20240215171918.3729508-1-sean.anderson@seco.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR06CA0097.eurprd06.prod.outlook.com
- (2603:10a6:803:8c::26) To CYXPR12MB9337.namprd12.prod.outlook.com
- (2603:10b6:930:d8::20)
+ <3f6a5971-a024-4eb2-bdba-76071fbd9bb2@amd.com>
+From: Sean Anderson <sean.anderson@seco.com>
+In-Reply-To: <3f6a5971-a024-4eb2-bdba-76071fbd9bb2@amd.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-ClientProxiedBy: MN2PR17CA0018.namprd17.prod.outlook.com
+ (2603:10b6:208:15e::31) To DB9PR03MB8847.eurprd03.prod.outlook.com
+ (2603:10a6:10:3dd::13)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CYXPR12MB9337:EE_|PH0PR12MB7813:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1a0871b2-2e76-421b-a5d9-08dc2e59757a
+X-MS-TrafficTypeDiagnostic: DB9PR03MB8847:EE_|GV2PR03MB8605:EE_|AMS0EPF0000019C:EE_|DU2PR03MB9919:EE_
+X-MS-Office365-Filtering-Correlation-Id: a0e8953e-6271-4f39-ebac-08dc2e5cbd58
+X-TrendMicro-CAS-OUT-LOOP-IDENTIFIER: 656f966764b7fb185830381c646b41a1
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;
+X-Microsoft-Antispam-Message-Info-Original: SNabPnPdG4+yxk1FrTaSTfrAqo9IxQRyhyk7/tzYY5rlYX4db/kTXnSFIb4/W8wC216t6fqk+tIGOqLOEztV1j9t8bSj3Zcy9adw384526yCGOkoFr94AHrUvxmKMXtNZFXKiyboe2M4uO0GiZxfRxhaBe5864wzcy40T0RmBhhOAumgQC4a7bYTihsWTZE1MrJgwa2HOWkByMdoYJSa49p00oSxUNZWeV8S2bwD1sDSvfFkiTtjZz4uIfegFdcKUvZElVMGyTDE1iXllIsrGoy6Sx66SNPRkIuT6MM1XOq7adMGC+/MWZhF/uOWCAnEXP8BcPkR9jLxOzB22frFHugMEEgxnYrQYi/u9Xwc8Bdn1/JAezqFL7r8/27SjXxRCYKFaupE4Lg3TRxX6T+XuqcY9mimGQtWEdPQxk1eD0wJ9ySSWRCvkuff2+LPueZuXpR6LycKV+Yv0fxB6dqIYWqjfrztRhWoV2t83lpcHdrsjf0NipwE0TeeXq6lBEtOHRI3X0j3wiQf313UWJUIErJUXtYRtxFWTGRW0cEdETYUU+s6Q7tSTVom4aqJ6QnXwlEIDFms+dhyL3qX3iN6P0jZFBmLCieHqLKPH1VgGI8=
+X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
+ SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:DB9PR03MB8847.eurprd03.prod.outlook.com;
+ PTR:; CAT:NONE;
+ SFS:(13230031)(376002)(39850400004)(396003)(366004)(136003)(346002)(230922051799003)(230273577357003)(1800799012)(186009)(64100799003)(451199024)(44832011)(8676002)(5660300002)(86362001)(8936002)(2906002)(38350700005)(2616005)(26005)(38100700002)(36756003)(31696002)(66946007)(316002)(66476007)(6506007)(83380400001)(53546011)(52116002)(6666004)(66556008)(478600001)(6512007)(31686004)(41300700001)(6486002)(966005);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR03MB8605
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: AMS0EPF0000019C.eurprd05.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 6f3535c3-b3fd-467b-bea8-08dc2e5cba0d
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: E5ySMJmlqa+alJ2+2baP+LwWZQRlfOOGWsgm1RfMZUIdryD1/4gaiLjowaGMKeJx5ty4IfXom/uhO/byRwouH1Eebm5gMu5bnauAzfdCaFBrptJUSy96z/4JN060jqGjrkSZ81I8HvvIgwOnL3lifZQt2Pb1abRRShR5QJwvdk6SQB7mWtYUSRfjiF8qIcMV0swR254aTPcwWRb+DC2sXF9/Gd87c2XAQhSClhsR24wyUYqS8o5dO/k5x9spIu5U7lGFApg3JJjO1OCabZ0sIHmWDmjotSmG7jitkiAoQRRTFWfH9KtyWj3GHsYXgbHH81eWN0E92KsMYLlDbozgsbDJE8yilaDzSJu4OxSOXm8N7+YnJYDIrBeL9NQ/EpH9qXnc9kDskeP/4N9MYMhwj2tzMS33a/LWZYYafawkFNv4OZ/bIT3lY2pph1NwvqWYO2lTZ2mNgIKOjq/gV5FbDhpr1kuMhIz4fB6o/uJ7TXRfEzQsQVRAYasOx5d7Spxkh9Dvl/m+pn8kgnaSll54GtQgeGt3Ai65SCCwY0rIKNOZsvVt4GC+L64tEnKaWcPL
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CYXPR12MB9337.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(39860400002)(396003)(136003)(376002)(366004)(346002)(230922051799003)(186009)(64100799003)(1800799012)(451199024)(36756003)(31686004)(2906002)(44832011)(2616005)(478600001)(8936002)(53546011)(26005)(66556008)(83380400001)(66946007)(6512007)(66476007)(5660300002)(6486002)(8676002)(6506007)(86362001)(41300700001)(31696002)(316002)(6666004)(38100700002);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dzVPaEd1NU5lZEQ3RmJwZ1I4YVQwUlVLV2wxZEtVZWdROEUzTDJCTmtpVExM?=
- =?utf-8?B?cXpzckpwdFVidXN1MG95c2VoT2lLYlJKNUFYaTBNdW9uRi9SVUlOaVpDOVo3?=
- =?utf-8?B?RnJrVGo3WWFDOEtvaEgzeWxjbmxWUjlhWGhUV0RvWXZhUGg2d29YOEN6QjNJ?=
- =?utf-8?B?WmpESWNmY0tobWdUUU1yQjFGRVluUFA2WHF0alVzOEtXL2k0OC9SNC9ENFVP?=
- =?utf-8?B?b0tXWEdySERGdDN2MnpOektNcEdHZ0pTN2I0R2tSbXlISldwUjFBQ2VWMnI4?=
- =?utf-8?B?bEpKSzNWbGNpQStvWGVBVHl0T0RSVVdPWFpOeXk4aWpYay9EWkIzYUJ0dlBY?=
- =?utf-8?B?S3I0d2F0S1ZvWlpsaDg2ZmM2L2RxblplYWlmYmYwcmNValZWVWxqcmJNUDZJ?=
- =?utf-8?B?Mnlja2pvaW4xT1Z1RE9wL1AxeHdPSE8zNm03c0lhN25SVHdISSt6dTUzTWZS?=
- =?utf-8?B?MnMxM1pscCsxbEc3bFdrZk5MSmNOek81TmhSQUhQWm8vVDAyZ3dscGZ1aWR6?=
- =?utf-8?B?T3dVeWhZRE1jVmtpV0NlUE1JQXpTRFpCVHR2VEMvSU5TQ0hMR1VTUVlpemRu?=
- =?utf-8?B?aGpyQ1RuWW5jRklXT2htNjh3SnBhMlhDT2o5b1pDRTFYM09VN1c0Qkl0MVlW?=
- =?utf-8?B?aWVMU3had0V4S0YzZkRkWHBTQVdZZlRTaCtRSGhjaHFPNjd2SlBhdGxEb2xi?=
- =?utf-8?B?N2Q2ZnUvOStBMk5LMHpuUnFiQXA2K2E4eGZrcWFpNGtib3ZhbmVtQndScWRw?=
- =?utf-8?B?MGlJV3hLRTg0anJydW1BMDF2c2hCdDhld2JwVUVlWEtONEpaQUh5Q0kwVzc0?=
- =?utf-8?B?V1J0SHJQVVFlTEthN1pvSVVsWVBjNmNnQ0ZvUlZ5c3h0dzlpRjRHNDFRc0tz?=
- =?utf-8?B?WmlUakZrL0lSN1RCVGRmUjE1aTJFby9wcUYvOVhQNmd2a1MxVFlyZDZvUnhS?=
- =?utf-8?B?NUoyNXFoU2tlRjQ0RVJZbFRhMmlIekFtQzVsaGhGQWxtQTFqYytVN3Q1N3By?=
- =?utf-8?B?WW1kS1NrRDUwaWZMNFBhUkcwQ09Rc0tYcTBnMVNoQnNlY05ycVJmWW1kejZX?=
- =?utf-8?B?VVMwUEErZXYzSEZVOE51bCtBQWdMY1BHK2I3NGN3WVBneTZSN0gycm42Q3JE?=
- =?utf-8?B?Zk43dUMyTHp4clJabndKYjVlc1RpMGVpV25Jc1IrM3hMTk9OWmpMMFdsVExa?=
- =?utf-8?B?RGhHSWRBL3NhU20wQW41NkZRaXhLOXl3SDQ3KzVrZHVpUjVKR29Dckt4VW16?=
- =?utf-8?B?ZHd3Z0dGSEVUZC9Qa3hqSTMxNmY3b1BLbm9ERllzK1JhQlROcWppNVRnSW9V?=
- =?utf-8?B?bDZwaHFveG95Mmx4R2c3OUJmNjdNMEhTc2hDOW10eU5IUDNzK1pVRmlxUmlI?=
- =?utf-8?B?OGkveDVWTWNOTFpaQklOOHh1Ymd5Tk5pWU05ek12dHQvUWlXTzRFeEtONzkz?=
- =?utf-8?B?dFlhV1J3WGtRL1lmWE5lSUoyRmlJSjNBblNTL1FPYjUyQmhMSGxHekJWU0hp?=
- =?utf-8?B?WTEycW4wQWNsdTdENmFpbjV1MkxwRTVXV0dxcVR2cTNLcU9JMnVKV05wc1NU?=
- =?utf-8?B?U041VHBFSUJ6U0RQbWdKOTJmb2swVnZSZFRrVFgyeXBvTE1wYnVKVDFVMHVl?=
- =?utf-8?B?Y0FZNDIzQ2lnS3V3elNHclMrV3hoM280RCszV0Z3cHZ6RFVtTDVtNCtHOExY?=
- =?utf-8?B?U0JVeS9taDRNVVEvZUYvcC9mNjQ5Z24veXJNYkxSelRycHgwOXZvRGZtYzZP?=
- =?utf-8?B?OEhTcHdzRFdPZ3NrWjh3S0F0d1dIYU5aSDl6bEVoa3RMdVVqRTI4U0RYMG5H?=
- =?utf-8?B?RTh3RXkrYUxkTjlxZ0ZlUzJJeXk3enZmdFphYXBHd3lTQWw5QXQwc1NJcDFP?=
- =?utf-8?B?Yjk2dzRkWGFTNURIZWxvMmIvbUxnQlBnMGlMYzhnTHRWTm4xN3ZIREFVa2lp?=
- =?utf-8?B?TVdRdVpZc2FhbmJ1UmpHQmpNczgzNit1S0grbGREQUg3dkE2RVJTYXErcWhC?=
- =?utf-8?B?UlczZitxZVkxT3dXOTJYbHBZYjdFWnRKT0xpNVNPbmhVMnNNT3NqRWRsUHM4?=
- =?utf-8?B?eE9MZDUvaEVrQXN5Q2tZcjY0cFQzcjROKzUvVW9MZWM1UnRMSW8yOGZuOEs3?=
- =?utf-8?Q?kyWUqeZy8mG+F7s51CfXKJZTZ?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1a0871b2-2e76-421b-a5d9-08dc2e59757a
-X-MS-Exchange-CrossTenant-AuthSource: CYXPR12MB9337.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Feb 2024 19:08:14.0677 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: zAL83BKEIQhhLWU4oggvkRCQnjbDVXsOyXzkUF9pBUO+sdhDdw/2o0lExUachKUg
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR12MB7813
+X-Microsoft-Antispam-Message-Info: 1I72i+/a4rJFbLReuKCaFKfIQMu/1Aof2KZvWSouOCZp3umUAD1L1Td6idRT6f1dZGfzf46z1Ks2k02PCUT2vMKZXgrCrtIfDMIfIfOxYj81sgMM3SuyZsgy8UZGi3TJvlagakr30uny8oow1J9oz98pQxFw/TwfaRjYTMHk8jr0o9fZ3MwEES/yefz97OqzcN+QQnrK/hoF6eEFAwODjDDAe0xs+PtFhH3n6e1b1xtLv1r8FPkkQeCCP/UbkoVky1Ft/BjQxYxYZNpmCL5XVNbEmqiNZqkYE+iKWW2/o92gBC2VH7Cih+KRYjBwWgkPI/lRmS1/XkPmPnqVKKIy3tEMebwqwOfw3CKOY47S+1IC3TiIQKRqz7vYDQVPWjBrLGhfgu7+01NNIQOROBKw1YtNbB7je/6/HxVzM29BWMFj3qldLwfPkeC2zCVhUgpdKENRYgAlVEu2EYr/3L1kbpxNMa6IiSfFVxW4fOxFMLKW8E7715gjf9aoiD0BEhPs5jc0q5F/ttQ0AZEbxS/H4XXCCAV2I7Yos2ao/OIhfzJ4CeXdxHUwNhQsyb94DmHCK2XDJmHsJf2RZMFtm8vFZqYPSTR/aU3NUuO/T7cUnTLeQ/aKrgHittLk60wiQ+OX9zH3Zd9/8uaxPwLiWAZxDg==
+X-Forefront-Antispam-Report: CIP:20.160.56.81; CTRY:NL; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:repost-eu.tmcas.trendmicro.com;
+ PTR:repost-eu.tmcas.trendmicro.com; CAT:NONE;
+ SFS:(13230031)(346002)(396003)(39850400004)(376002)(136003)(230922051799003)(230273577357003)(1800799012)(451199024)(36860700004)(64100799003)(82310400011)(186009)(46966006)(7636003)(356005)(2906002)(7596003)(478600001)(31696002)(82740400003)(36756003)(966005)(6512007)(53546011)(6486002)(6666004)(6506007)(2616005)(26005)(336012)(83380400001)(70206006)(44832011)(70586007)(86362001)(5660300002)(316002)(31686004)(8936002)(41300700001)(8676002);
+ DIR:OUT; SFP:1102; 
+X-OriginatorOrg: seco.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Feb 2024 19:31:42.7889 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a0e8953e-6271-4f39-ebac-08dc2e5cbd58
+X-MS-Exchange-CrossTenant-Id: bebe97c3-6438-442e-ade3-ff17aa50e733
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=bebe97c3-6438-442e-ade3-ff17aa50e733; Ip=[20.160.56.81];
+ Helo=[repost-eu.tmcas.trendmicro.com]
+X-MS-Exchange-CrossTenant-AuthSource: AMS0EPF0000019C.eurprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR03MB9919
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -185,76 +163,224 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 2/15/24 14:08, Michal Simek wrote:
+>
+>
+> On 2/15/24 18:19, Sean Anderson wrote:
+>> Currently, when we boot from JTAG we try to boot U-Boot from RAM.
+>> However, this is a bit tricky to time, since the debugger has to wait
+>> for SPL to initialize RAM before it can load U-Boot. This can result in
+>> long waits, since occasionally initializing RAM (and other things in
+>> psu_init) takes a long time to complete and the debugger must wait for
+>> this worst case.
+>>
+>> Support semihosting if it is enabled, as it lets U-Boot tell the
+>> debugger when we are ready for the image. This means we don't have to
+>> wait any more than necessary. We don't change the default config to
+>> ensure we don't break compatibility with existing debuggers that don't
+>> expect us to hit semihosting breakpoints.
+>>
+>> Signed-off-by: Sean Anderson <sean.anderson@seco.com>
+>> ---
+>>
+>>   arch/arm/mach-zynqmp/spl.c | 10 ++++++++--
+>>   1 file changed, 8 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/arch/arm/mach-zynqmp/spl.c b/arch/arm/mach-zynqmp/spl.c
+>> index a0f35f36faa..5af735aa5ce 100644
+>> --- a/arch/arm/mach-zynqmp/spl.c
+>> +++ b/arch/arm/mach-zynqmp/spl.c
+>> @@ -9,6 +9,7 @@
+>>   #include <image.h>
+>>   #include <init.h>
+>>   #include <log.h>
+>> +#include <semihosting.h>
+>>   #include <spl.h>
+>>   #include <linux/delay.h>
+>>
+>> @@ -66,6 +67,11 @@ void spl_board_init(void)
+>>   }
+>>   #endif
+>>
+>> +static u32 jtag_boot_device(void)
+>> +{
+>> +       return semihosting_enabled() ? BOOT_DEVICE_SMH : BOOT_DEVICE_RAM=
+;
+>> +}
+>> +
+>>   void board_boot_order(u32 *spl_boot_list)
+>>   {
+>>          spl_boot_list[0] =3D spl_boot_device();
+>> @@ -75,7 +81,7 @@ void board_boot_order(u32 *spl_boot_list)
+>>          if (spl_boot_list[0] =3D=3D BOOT_DEVICE_MMC2)
+>>                  spl_boot_list[1] =3D BOOT_DEVICE_MMC1;
+>>
+>> -       spl_boot_list[2] =3D BOOT_DEVICE_RAM;
+>> +       spl_boot_list[2] =3D jtag_boot_device();
+>>   }
+>>
+>>   u32 spl_boot_device(void)
+>> @@ -97,7 +103,7 @@ u32 spl_boot_device(void)
+>>
+>>          switch (bootmode) {
+>>          case JTAG_MODE:
+>> -               return BOOT_DEVICE_RAM;
+>> +               return jtag_boot_device();
+>>   #ifdef CONFIG_SPL_MMC
+>>          case SD_MODE1:
+>>          case SD1_LSHFT_MODE: /* not working on silicon v1 */
+>
+> Good timing. Can you please tell me how to test this? What's the setup?
+> Which debugger are you using?
 
+I am using OpenOCD with the patches at https://review.openocd.org/c/openocd=
+/+/8133
 
-On 2/15/24 18:19, Sean Anderson wrote:
-> Currently, when we boot from JTAG we try to boot U-Boot from RAM.
-> However, this is a bit tricky to time, since the debugger has to wait
-> for SPL to initialize RAM before it can load U-Boot. This can result in
-> long waits, since occasionally initializing RAM (and other things in
-> psu_init) takes a long time to complete and the debugger must wait for
-> this worst case.
-> 
-> Support semihosting if it is enabled, as it lets U-Boot tell the
-> debugger when we are ready for the image. This means we don't have to
-> wait any more than necessary. We don't change the default config to
-> ensure we don't break compatibility with existing debuggers that don't
-> expect us to hit semihosting breakpoints.
-> 
-> Signed-off-by: Sean Anderson <sean.anderson@seco.com>
-> ---
-> 
->   arch/arm/mach-zynqmp/spl.c | 10 ++++++++--
->   1 file changed, 8 insertions(+), 2 deletions(-)
-> 
-> diff --git a/arch/arm/mach-zynqmp/spl.c b/arch/arm/mach-zynqmp/spl.c
-> index a0f35f36faa..5af735aa5ce 100644
-> --- a/arch/arm/mach-zynqmp/spl.c
-> +++ b/arch/arm/mach-zynqmp/spl.c
-> @@ -9,6 +9,7 @@
->   #include <image.h>
->   #include <init.h>
->   #include <log.h>
-> +#include <semihosting.h>
->   #include <spl.h>
->   #include <linux/delay.h>
-> 
-> @@ -66,6 +67,11 @@ void spl_board_init(void)
->   }
->   #endif
-> 
-> +static u32 jtag_boot_device(void)
-> +{
-> +       return semihosting_enabled() ? BOOT_DEVICE_SMH : BOOT_DEVICE_RAM;
-> +}
-> +
->   void board_boot_order(u32 *spl_boot_list)
->   {
->          spl_boot_list[0] = spl_boot_device();
-> @@ -75,7 +81,7 @@ void board_boot_order(u32 *spl_boot_list)
->          if (spl_boot_list[0] == BOOT_DEVICE_MMC2)
->                  spl_boot_list[1] = BOOT_DEVICE_MMC1;
-> 
-> -       spl_boot_list[2] = BOOT_DEVICE_RAM;
-> +       spl_boot_list[2] = jtag_boot_device();
->   }
-> 
->   u32 spl_boot_device(void)
-> @@ -97,7 +103,7 @@ u32 spl_boot_device(void)
-> 
->          switch (bootmode) {
->          case JTAG_MODE:
-> -               return BOOT_DEVICE_RAM;
-> +               return jtag_boot_device();
->   #ifdef CONFIG_SPL_MMC
->          case SD_MODE1:
->          case SD1_LSHFT_MODE: /* not working on silicon v1 */
+My boot flow is
 
-Good timing. Can you please tell me how to test this? What's the setup?
-Which debugger are you using?
+SPL -> ATF -> U-Boot (no FSBL)
 
-Also curious if semihosting serial can be used in your setup.
+This allows me to use a FIT which saves some time since I can
+compress the bitstream. Right now I am using
+xilinx_zynqmp_virt_defconfig with the following modifications:
 
-Thanks,
-Michal
+CONFIG_SYS_LOAD_ADDR=3D0x30000000
+# CONFIG_SPL_OS_BOOT is not set
+CONFIG_SPL_SEMIHOSTING=3Dy
 
+I also have CONFIG_XILINX_PS_INIT_FILE,
+CONFIG_ZYNQMP_SPL_PM_CFG_OBJ_FILE, and CONFIG_PMUFW_INIT_FILE defined as
+appropriate. I use the following FIT for U-Boot:
+
+/dts-v1/;
+
+/ {
+    description =3D "U-Boot and ATF";
+    #address-cells =3D <1>;
+
+    images {
+        atf {
+            description =3D "Arm Trusted Firmware";
+            data =3D /incbin/("arm-trusted-firmware.bin");
+            type =3D "firmware";
+            os =3D "arm-trusted-firmware";
+            arch =3D "arm64";
+            compression =3D "none";
+            load =3D <0xfffea000>;
+            entry =3D <0xfffea000>;
+        };
+
+        fpga {
+            description =3D "PL Bitstream";
+            data =3D /incbin/("system.bit.gz");
+            type =3D "fpga";
+            arch =3D "arm64";
+            compression =3D "gzip";
+            load =3D <0x7c000000>;
+            compatible =3D "u-boot,fpga-legacy";
+        };
+
+        u-boot {
+            description =3D "U-Boot";
+            data =3D /incbin/("u-boot-nodtb.bin");
+            type =3D "firmware";
+            os =3D "u-boot";
+            arch =3D "arm64";
+            compression =3D "none";
+            load =3D <0x00080000>;
+            entry =3D <0x00080000>;
+        };
+
+        fdt {
+            description =3D "U-Boot FDT";
+            data =3D /incbin/("u-boot.dtb");
+            type =3D "flat_dt";
+            arch =3D "arm64";
+            compression =3D "none";
+            hash-1 {
+                algo =3D "crc32";
+            };
+        };
+    };
+
+    configurations {
+        default =3D "conf";
+        conf {
+            description =3D "Boot ATF and U-Boot";
+            firmware =3D "atf";
+            loadables =3D "u-boot", "fpga";
+            fdt =3D "fdt";
+        };
+    };
+};
+
+Boot output looks like
+
+U-Boot SPL 2024.01 (Feb 15 2024 - 17:03:10 +0000)
+Loading new PMUFW cfg obj (1848 bytes)
+PMUFW:  v1.1
+Silicon version:        3
+EL Level:       EL3
+Secure Boot:    not authenticated, not encrypted
+Multiboot:      0
+Trying to boot from MMC1
+FPGA image loaded from FIT
+NOTICE:  BL31: v2.6(release):xlnx_rebase_v2.6_2022.2
+NOTICE:  BL31: Built : 03:55:03, Sep  9 2022
+
+U-Boot 2024.01 (Feb 15 2024 - 17:03:10 +0000)
+
+CPU:   ZynqMP
+Silicon: v3
+Chip:  zu4
+Board: Xilinx ZynqMP
+DRAM:  2 GiB (effective 4 GiB)
+PMUFW:  v1.1
+EL Level:       EL2
+Secure Boot:    not authenticated, not encrypted
+Core:  67 devices, 29 uclasses, devicetree: board
+Warning: Device tree includes old 'u-boot,dm-' tags: please fix by 2023.07!
+NAND:  0 MiB
+MMC:   PMUFW:  No permission to change config object
+arasan_sdhci mmc@ff170000: Sdhci card detect state not stable
+arasan_sdhci mmc@ff170000: Sdhci card detect state not stable
+mmc@ff170000 - probe failed: -110
+mmc@ff160000: 0arasan_sdhci mmc@ff170000: Sdhci card detect state not stabl=
+e
+
+Loading Environment from nowhere... OK
+In:    serial
+Out:   serial,vidconsole
+Err:   serial,vidconsole
+Bootmode: JTAG_MODE
+Reset reason:   EXTERNAL
+Net:   zynq_gem ethernet@ff0b0000: failed to get tx_clock
+zynq_gem ethernet@ff0c0000: failed to get tx_clock
+zynq_gem ethernet@ff0d0000: failed to get tx_clock
+zynq_gem ethernet@ff0e0000: failed to get tx_clock
+No ethernet found.
+
+scanning bus for devices...
+SATA link 0 timeout.
+SATA link 1 timeout.
+AHCI 0001.0301 32 slots 2 ports 6 Gbps 0x3 impl SATA mode
+flags: 64bit ncq pm clo only pmp fbss pio slum part ccc apst
+starting USB...
+Bus usb@fe300000: Register 2000440 NbrPorts 2
+Starting the controller
+USB XHCI 1.00
+scanning bus usb@fe300000 for devices... 1 USB Device(s) found
+       scanning usb for storage devices... 0 Storage Device(s) found
+Hit any key to stop autoboot:  0
+
+> Also curious if semihosting serial can be used in your setup.
+
+I haven't tested it.
+
+Hope that helps. Unfortunately, I don't think all of the above is
+documented in one place.
+
+--Sean
+
+[Embedded World 2024, SECO SpA]<https://www.messe-ticket.de/Nuernberg/embed=
+dedworld2024/Register/ew24517689>
