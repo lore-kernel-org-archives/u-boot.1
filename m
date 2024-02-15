@@ -4,56 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25927C4829E
-	for <u-boot@archiver.kernel.org>; Thu, 15 Feb 2024 11:55:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1774C4829E
+	for <u-boot@archiver.kernel.org>; Thu, 15 Feb 2024 12:27:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7336E87D9D;
-	Thu, 15 Feb 2024 12:55:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=163.com
+	by phobos.denx.de (Postfix) with ESMTP id BCDE087DC5;
+	Thu, 15 Feb 2024 13:27:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="QRin0HzF";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="S1WQT//S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CEED387D9D; Thu, 15 Feb 2024 12:55:48 +0100 (CET)
-Received: from m1390.mail.163.com (m1390.mail.163.com [220.181.13.90])
- by phobos.denx.de (Postfix) with ESMTP id C71B387DC1
- for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 12:55:34 +0100 (CET)
+ id 64F0F87DD9; Thu, 15 Feb 2024 13:27:43 +0100 (CET)
+Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
+ [IPv6:2607:f8b0:4864:20::102e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 8DF7A87DC5
+ for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 13:27:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=163.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=andyshrk@163.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=Date:From:Subject:Content-Type:MIME-Version:
- Message-ID; bh=TWRqxD1o6K5OmP4s95bLFHVBry7GhWQ1sIvNyDzLhr4=; b=Q
- Rin0HzF8f8elw20u7HkTcPwM2KEFmhQf5/HY5Hqu90QLf7wvKWH46KalbynoE8IB
- IxhdERGH/854jzf3nIUVqzcpgvudVAKO95MyE50ZGYXZ5+y1OZWp6yDtpUpdpdNH
- 2h6G7vXp5MZ5ou+LfDnFVArg2isF/YvkpOW5I9pwds=
-Received: from andyshrk$163.com ( [58.22.7.114] ) by ajax-webmail-wmsvr90
- (Coremail) ; Thu, 15 Feb 2024 19:55:25 +0800 (CST)
-X-Originating-IP: [58.22.7.114]
-Date: Thu, 15 Feb 2024 19:55:25 +0800 (CST)
-From: "Andy Yan" <andyshrk@163.com>
-To: "Quentin Schulz" <quentin.schulz@theobroma-systems.com>
-Cc: kever.yang@rock-chips.com, jonas@kwiboo.se, u-boot@lists.denx.de
-Subject: Re:Re: [PATCH v2 1/2] board: rockchip: Add support for rk3588s
- based Cool Pi 4B
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version XT5.0.14 build 20230109(dcb5de15)
- Copyright (c) 2002-2024 www.mailtech.cn 163com
-In-Reply-To: <cdda29dd-3d9f-4eef-83a5-a5f80ca79dcb@theobroma-systems.com>
-References: <20240214093126.329717-1-andyshrk@163.com>
- <918dfa17-3c32-44d4-8d16-87bab10cc138@theobroma-systems.com>
- <261ba9aa.2fa.18dac558cf4.Coremail.andyshrk@163.com>
- <cdda29dd-3d9f-4eef-83a5-a5f80ca79dcb@theobroma-systems.com>
-X-NTES-SC: AL_Qu2bBfWSt0kp4yeRbOkXn0kXhec2W8Czvvgg34JRP5k0pSrL2yAvTU94DEvR/PyKCwSRgCiIVxNP0ep6Yqx2XbLvIl6a4ncRZPn5gKivPJMc
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset=UTF-8
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x102e.google.com with SMTP id
+ 98e67ed59e1d1-298d827e841so216030a91.1
+ for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 04:27:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1708000053; x=1708604853; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=3lCBpNJaz1SHLv3fxSpxTmSO0GgCPdYbsTMHQcvdw78=;
+ b=S1WQT//SFSSYjRNQy3WpasGIYZhaKMRmMDvzRqWCpAudyNlNyt60JIFUAQg31BdDVK
+ xqG8uGvQXM50AlxM5b29BTBKpz8jYi1YxKRbi2WbWX0axTPa5Yt1RDZvGQIx3UPq6+HY
+ /xZEBgAfhiiEZMZKYF7pUWr3M1Ks8zC1hb7CHKRGJ8b+JluK/olyaLk5JqHXgh8ZxAod
+ xv54hF8+VPeSZDF8xj000JiwcmKoU6r/oS7Z8vL6BqTWg2lzL/iNQUngwuBDRS6X2rxl
+ 7UhDDM+ixZafCfv4ObwjuLcHDC/Sc65WgPx35bcHNmuWXqMgma9F0n8RkArNbxbBnax9
+ vQmw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1708000053; x=1708604853;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=3lCBpNJaz1SHLv3fxSpxTmSO0GgCPdYbsTMHQcvdw78=;
+ b=ENexovyfSJKs9CGCRcH6oEqOLn2r7Mm4kNb5TaehEHDfyOcXItXQrbvQQQU80aAEuL
+ hyYG8uWY2YRQMpEk20p3ykoIVxWLZjMhsO4imhiX74Qp+dKndtF2t9beVsPQuhSe3/mK
+ 9NYsyJ0BGDtb92Vae6vqNDGNKRcJVPLpqeEg8hCsLCz8khJ5upXJo5iLjN3AHTaWAkPX
+ gDVNRROC5rR23Af/Z6yGDbZcwwXi2xg04j/n6PhfKguqOa2R+zD9kVjD1+8UlQptJpvf
+ uQkWDa4dUrv+OTQu83kvdqFxPNTJ7Yiqq9jAyb+de7L1d8yHVwq1wEpPumfm7+xvYjp/
+ eWTw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUBk4lX4jOTyUiNi5XyFAAphmoMCipTNj2pphZ0tiuA5NwKdvPfIv1lrA9VGeZXcCMw//d4VUeGdTPAY7+LVtdn2Qhi6g==
+X-Gm-Message-State: AOJu0Yw4c4B4lYQxU3qb03is1vcO9d/f/txuoKd2USLZHoid2ZnNk8Eh
+ B1IN6swRaQprtfl1e12l1EoatssKDpYuWUKO9Tks1AcqbF0Xt/ZCWlyWyR+mcBaYTx5InuNUwb0
+ QV/5r8aVqI6CL4uifig6wB/zFGdg=
+X-Google-Smtp-Source: AGHT+IGFTJ/GJFrYeQvXHfeWm5R87dSrrg1I3KhsLwM6uMoBnka5te3L50o9IBOVEorlG8lIytn2fuWt4zjuEjhjOCo=
+X-Received: by 2002:a17:90a:f2c4:b0:299:1ae1:51b2 with SMTP id
+ gt4-20020a17090af2c400b002991ae151b2mr559799pjb.4.1708000052780; Thu, 15 Feb
+ 2024 04:27:32 -0800 (PST)
 MIME-Version: 1.0
-Message-ID: <1cd3e505.333.18dac9f1eed.Coremail.andyshrk@163.com>
-X-Coremail-Locale: zh_CN
-X-CM-TRANSID: WsGowAD3X1eu+81lF9QIAA--.20415W
-X-CM-SenderInfo: 5dqg52xkunqiywtou0bp/1tbiqBWFXmVOCQb4eAABsD
-X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
+References: <20240213172226.151181-1-frieder@fris.de>
+ <20240213172226.151181-2-frieder@fris.de>
+In-Reply-To: <20240213172226.151181-2-frieder@fris.de>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 15 Feb 2024 09:27:20 -0300
+Message-ID: <CAOMZO5AtTf_2pg2Fs93pPvVGcO20tcGsd3mJPfj+bhFBaKd_vA@mail.gmail.com>
+Subject: Re: [PATCH v2 2/3] board: Add support for Sielaff i.MX6 Solo board
+To: Frieder Schrempf <frieder@fris.de>
+Cc: Stefano Babic <sbabic@denx.de>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de, Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Christian Hewitt <christianshewitt@gmail.com>, 
+ FUKAUMI Naoki <naoki@radxa.com>, Hai Pham <hai.pham.ud@renesas.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Marek Vasut <marex@denx.de>, 
+ Martyn Welch <martyn.welch@collabora.com>, Michal Simek <michal.simek@amd.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Peng Fan <peng.fan@nxp.com>, 
+ Simon Glass <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Tianling Shen <cnsztl@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,87 +101,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-CgpIaSBRdWVudGlu77yaCkF0IDIwMjQtMDItMTUgMTg6NDA6MjUsICJRdWVudGluIFNjaHVseiIg
-PHF1ZW50aW4uc2NodWx6QHRoZW9icm9tYS1zeXN0ZW1zLmNvbT4gd3JvdGU6Cj5IaSBBbmR5LAo+
-Cj5PbiAyLzE1LzI0IDExOjM1LCBBbmR5IFlhbiB3cm90ZToKPlsuLi5dCj4+Pj4gZGlmZiAtLWdp
-dCBhL2NvbmZpZ3MvY29vbHBpLTRiLXJrMzU4OHNfZGVmY29uZmlnIGIvY29uZmlncy9jb29scGkt
-NGItcmszNTg4c19kZWZjb25maWcKPj4+PiBuZXcgZmlsZSBtb2RlIDEwMDY0NAo+Pj4+IGluZGV4
-IDAwMDAwMDAwMDAuLjNlM2U1YWJjODYKPj4+PiAtLS0gL2Rldi9udWxsCj4+Pj4gKysrIGIvY29u
-Zmlncy9jb29scGktNGItcmszNTg4c19kZWZjb25maWcKPj4+PiBAQCAtMCwwICsxLDEwNSBAQAo+
-Pj4+ICtDT05GSUdfQVJNPXkKPj4+PiArQ09ORklHX1NLSVBfTE9XTEVWRUxfSU5JVD15Cj4+Pj4g
-K0NPTkZJR19DT1VOVEVSX0ZSRVFVRU5DWT0yNDAwMDAwMAo+Pj4+ICtDT05GSUdfQVJDSF9ST0NL
-Q0hJUD15Cj4+Pj4gK0NPTkZJR19URVhUX0JBU0U9MHgwMGEwMDAwMAo+Pj4+ICtDT05GSUdfU1BM
-X0xJQkNPTU1PTl9TVVBQT1JUPXkKPj4+PiArQ09ORklHX1NQTF9MSUJHRU5FUklDX1NVUFBPUlQ9
-eQo+Pj4+ICtDT05GSUdfTlJfRFJBTV9CQU5LUz0yCj4+Pj4gK0NPTkZJR19IQVNfQ1VTVE9NX1NZ
-U19JTklUX1NQX0FERFI9eQo+Pj4+ICtDT05GSUdfQ1VTVE9NX1NZU19JTklUX1NQX0FERFI9MHhj
-MDAwMDAKPj4+PiArQ09ORklHX1NGX0RFRkFVTFRfU1BFRUQ9MjQwMDAwMDAKPj4+PiArQ09ORklH
-X1NGX0RFRkFVTFRfTU9ERT0weDIwMDAKPj4+PiArQ09ORklHX0RFRkFVTFRfREVWSUNFX1RSRUU9
-InJrMzU4OHMtY29vbHBpLTRiIgo+Pj4+ICtDT05GSUdfUk9DS0NISVBfUkszNTg4PXkKPj4+PiAr
-Q09ORklHX1NQTF9ST0NLQ0hJUF9DT01NT05fQk9BUkQ9eQo+Pj4+ICtDT05GSUdfUk9DS0NISVBf
-U1BJX0lNQUdFPXkKPj4+PiArQ09ORklHX1NQTF9TRVJJQUw9eQo+Pj4+ICtDT05GSUdfU1BMX1NU
-QUNLX1JfQUREUj0weDYwMDAwMAo+Pj4+ICtDT05GSUdfVEFSR0VUX0VWQl9SSzM1ODg9eQo+Pj4+
-ICtDT05GSUdfU1BMX1NUQUNLPTB4NDAwMDAwCj4+Pj4gK0NPTkZJR19ERUJVR19VQVJUX0JBU0U9
-MHhGRUI1MDAwMAo+Pj4+ICtDT05GSUdfREVCVUdfVUFSVF9DTE9DSz0yNDAwMDAwMAo+Pj4+ICtD
-T05GSUdfU1BMX1NQSV9GTEFTSF9TVVBQT1JUPXkKPj4+PiArQ09ORklHX1NQTF9TUEk9eQo+Pj4+
-ICtDT05GSUdfU1lTX0xPQURfQUREUj0weGMwMDgwMAo+Pj4+ICtDT05GSUdfUENJPXkKPj4+PiAr
-Q09ORklHX0RFQlVHX1VBUlQ9eQo+Pj4+ICtDT05GSUdfQUhDST15Cj4+Pj4gK0NPTkZJR19GSVQ9
-eQo+Pj4+ICtDT05GSUdfRklUX1ZFUkJPU0U9eQo+Pj4+ICtDT05GSUdfU1BMX0ZJVF9TSUdOQVRV
-UkU9eQo+Pj4+ICtDT05GSUdfU1BMX0xPQURfRklUPXkKPj4+PiArQ09ORklHX0xFR0FDWV9JTUFH
-RV9GT1JNQVQ9eQo+Pj4+ICtDT05GSUdfT0ZfQk9BUkRfU0VUVVA9eQo+Pj4+ICtDT05GSUdfREVG
-QVVMVF9GRFRfRklMRT0icm9ja2NoaXAvcmszNTg4cy1jb29scGktNGIuZHRiIgo+Pj4+ICsjIENP
-TkZJR19ESVNQTEFZX0NQVUlORk8gaXMgbm90IHNldAo+Pj4+ICtDT05GSUdfRElTUExBWV9CT0FS
-RElORk9fTEFURT15Cj4+Pj4gK0NPTkZJR19TUExfTUFYX1NJWkU9MHg0MDAwMAo+Pj4+ICtDT05G
-SUdfU1BMX1BBRF9UTz0weDdmODAwMAo+Pj4+ICtDT05GSUdfU1BMX0hBU19CU1NfTElOS0VSX1NF
-Q1RJT049eQo+Pj4+ICtDT05GSUdfU1BMX0JTU19TVEFSVF9BRERSPTB4NDAwMDAwMAo+Pj4+ICtD
-T05GSUdfU1BMX0JTU19NQVhfU0laRT0weDQwMDAKPj4+PiArIyBDT05GSUdfU1BMX1JBV19JTUFH
-RV9TVVBQT1JUIGlzIG5vdCBzZXQKPj4+PiArIyBDT05GSUdfU1BMX1NIQVJFU19JTklUX1NQX0FE
-RFIgaXMgbm90IHNldAo+Pj4+ICtDT05GSUdfU1BMX1NUQUNLX1I9eQo+Pj4+ICtDT05GSUdfU1BM
-X1NQSV9MT0FEPXkKPj4+PiArQ09ORklHX1NZU19TUElfVV9CT09UX09GRlM9MHg2MDAwMAo+Pj4+
-ICtDT05GSUdfU1BMX0FURj15Cj4+Pj4gK0NPTkZJR19DTURfR1BJTz15Cj4+Pj4gK0NPTkZJR19D
-TURfR1BUPXkKPj4+PiArQ09ORklHX0NNRF9JMkM9eQo+Pj4+ICtDT05GSUdfQ01EX01NQz15Cj4+
-Pj4gK0NPTkZJR19DTURfUENJPXkKPj4+PiArQ09ORklHX0NNRF9VU0I9eQo+Pj4+ICsjIENPTkZJ
-R19DTURfU0VURVhQUiBpcyBub3Qgc2V0Cj4+Pj4gK0NPTkZJR19DTURfUkVHVUxBVE9SPXkKPj4+
-PiArIyBDT05GSUdfU1BMX0RPU19QQVJUSVRJT04gaXMgbm90IHNldAo+Pj4+ICtDT05GSUdfU1BM
-X09GX0NPTlRST0w9eQo+Pj4+ICtDT05GSUdfT0ZfTElWRT15Cj4+Pj4gK0NPTkZJR19PRl9TUExf
-UkVNT1ZFX1BST1BTPSJjbG9jay1uYW1lcyBpbnRlcnJ1cHQtcGFyZW50IGFzc2lnbmVkLWNsb2Nr
-cyBhc3NpZ25lZC1jbG9jay1yYXRlcyBhc3NpZ25lZC1jbG9jay1wYXJlbnRzIgo+Pj4+ICtDT05G
-SUdfU1BMX0RNX1NFUV9BTElBUz15Cj4+Pj4gK0NPTkZJR19TUExfUkVHTUFQPXkKPj4+PiArQ09O
-RklHX1NQTF9TWVNDT049eQo+Pj4+ICtDT05GSUdfQUhDSV9QQ0k9eQo+Pj4+ICtDT05GSUdfRFdD
-X0FIQ0k9eQo+Pj4+ICtDT05GSUdfU1BMX0NMSz15Cj4+Pj4gK0NPTkZJR19ST0NLQ0hJUF9HUElP
-PXkKPj4+PiArQ09ORklHX1NZU19JMkNfUk9DS0NISVA9eQo+Pj4+ICtDT05GSUdfTUlTQz15Cj4+
-Pj4gK0NPTkZJR19TVVBQT1JUX0VNTUNfUlBNQj15Cj4+Pj4gK0NPTkZJR19NTUNfRFc9eQo+Pj4+
-ICtDT05GSUdfTU1DX0RXX1JPQ0tDSElQPXkKPj4+PiArQ09ORklHX01NQ19TREhDST15Cj4+Pj4g
-K0NPTkZJR19NTUNfU0RIQ0lfU0RNQT15Cj4+Pj4gK0NPTkZJR19NTUNfU0RIQ0lfUk9DS0NISVA9
-eQo+Pj4+ICtDT05GSUdfU0ZfREVGQVVMVF9CVVM9NQo+Pj4+ICtDT05GSUdfU1BJX0ZMQVNIX1NG
-RFBfU1VQUE9SVD15Cj4+Pj4gK0NPTkZJR19TUElfRkxBU0hfWE1DPXkKPj4+PiArQ09ORklHX1NQ
-SV9GTEFTSF9YVFg9eQo+Pj4+ICtDT05GSUdfUEhZX01PVE9SQ09NTT15Cj4+Pj4gK0NPTkZJR19E
-V0NfRVRIX1FPUz15Cj4+Pj4gK0NPTkZJR19EV0NfRVRIX1FPU19ST0NLQ0hJUD15Cj4+Pj4gK0NP
-TkZJR19OVk1FX1BDST15Cj4+Pj4gK0NPTkZJR19QQ0lFX0RXX1JPQ0tDSElQPXkKPj4+PiArQ09O
-RklHX1BIWV9ST0NLQ0hJUF9JTk5PX1VTQjI9eQo+Pj4+ICtDT05GSUdfUEhZX1JPQ0tDSElQX05B
-TkVOR19DT01CT1BIWT15Cj4+Pj4gK0NPTkZJR19QSFlfUk9DS0NISVBfVVNCRFA9eQo+Pj4+ICtD
-T05GSUdfU1BMX1BJTkNUUkw9eQo+Pj4+ICtDT05GSUdfUFdNX1JPQ0tDSElQPXkKPj4+PiArQ09O
-RklHX1NQTF9SQU09eQo+Pj4+ICtDT05GSUdfU0NTST15Cj4+Pj4gK0NPTkZJR19CQVVEUkFURT0x
-NTAwMDAwCj4+Pj4gK0NPTkZJR19ERUJVR19VQVJUX1NISUZUPTIKPj4+PiArQ09ORklHX1NZU19O
-UzE2NTUwX01FTTMyPXkKPj4+PiArQ09ORklHX1JPQ0tDSElQX1NGQz15Cj4+Pj4gK0NPTkZJR19T
-WVNSRVNFVD15Cj4+Pj4gK0NPTkZJR19VU0I9eQo+Pj4+ICtDT05GSUdfVVNCX1hIQ0lfSENEPXkK
-Pj4+PiArQ09ORklHX1VTQl9FSENJX0hDRD15Cj4+Pj4gK0NPTkZJR19VU0JfRUhDSV9HRU5FUklD
-PXkKPj4+PiArQ09ORklHX1VTQl9PSENJX0hDRD15Cj4+Pj4gK0NPTkZJR19VU0JfT0hDSV9HRU5F
-UklDPXkKPj4+PiArQ09ORklHX1VTQl9EV0MzPXkKPj4+PiArQ09ORklHX1VTQl9EV0MzX0dFTkVS
-SUM9eQo+Pj4+ICtDT05GSUdfRVJSTk9fU1RSPXkKPj4+Cj4+PiBJcyB0aGVyZSBhbnkgcmVhc29u
-IGZvciBOT1QgZW5hYmxpbmcgTU1DX0hTNDAwX0VTPwo+PiAKPj4gTm8sIEkganVzdCBmb2xsb3cg
-dGhlIGNvbmZpZyBvZiBvdGhlciByazM1ODgvcyBiYXNlZCBib2FyZHMuCj4KPkZvcnR1bmF0ZWx5
-IGVub3VnaCwgYSBwYXRjaCB3YXMgcmVjZW50bHkgbWVyZ2VkIHRvIGhhdmUgYXQgbGVhc3QgSFMy
-MDAgCj5vbiBSSzM1ODgsIHdoaWNoIGlzIHRoZSBmaXJzdCBtb2RlIHRoYXQgYWN0dWFsbHkgd29y
-a3MsIGFueXRoaW5nIGJlbG93IAo+dGhhdCBpcyBicm9rZW4gcmlnaHQgbm93Lgo+Cj4+IEl0IHNl
-ZW1zIHRoYXQgdGhlcmUgYXJlIG5vIHJrMzU4OC9zIGJhc2VkIGJvYXJkcyBlbmFibGUgTU1DX0hT
-NDAwX0VTIGluIHRoZSBjdXJyZW50IHUtYm9vdCBtYWlubGluZSA/Cj4+IAo+Cj5KYWd1YXIgaXMg
-aG9wZWZ1bGx5IGNvbWluZyBzb29uLWlzaCwgbWF5YmUgbm90IGluIHRoaXMgcmVsZWFzZSBidXQg
-dGhlIAo+bmV4dCBvbmUgKHBhdGNoZXMgYXJlIHNlbnQgYWxyZWFkeSksIGFuZCB3ZSBtYWtlIHVz
-IG9mIGl0IGluIFUtQm9vdCAKPnByb3BlciBhbmQgdGhlIFNQTC4gVXAgdG8geW91LCBjYW4gYWx3
-YXlzIGJlIGVuYWJsZWQgbGF0ZXIgb24uCgpXaXRoIGEgcXVpY2sgc2VhcmNo77yMIEkgZm9uZCBq
-b25hcydTIHBhdGNoIGZvciBlbmFibGluZyBIUzIwMCBoYXMgYmVlbiBtZXJnZWQsIGJ1dAp5b3Vy
-IHBhdGNoIHdpbGwgYnJpbmcgSFM0MDBfRVMsIGRvZXMgdGhhdCBtZWFuIGFsbCB0aGUgcmszNTg4
-L3MgYmFzZWQgYm9hcnMgd2lsbCBzd2l0Y2ggdG8KSFM0MDAgRVMgaWYgdGhleSBzdXBwb3J0IGl0
-PwoKVGhhbmtzLgo+Cj5GV0lXLCBib3RoIGNvbW1lbnRzIG9uIHRoaXMgcGF0Y2ggYWxzbyBhcHBs
-eSB0byB0aGUgc2Vjb25kIHBhdGNoIGluIHRoaXMgCj5zZXJpZXMgOikKPgo+Q2hlZXJzLAo+UXVl
-bnRpbgo=
+Hi Frieder,
+
+On Tue, Feb 13, 2024 at 2:22=E2=80=AFPM Frieder Schrempf <frieder@fris.de> =
+wrote:
+>
+> From: Frieder Schrempf <frieder.schrempf@kontron.de>
+>
+> The Sielaff i.MX6 Solo board is a control and HMI board for vending
+> machines. Add support for this board.
+>
+> The devicetree files are taken from pending changes in the Linux
+> kernel that are available from linux-next and will likely be
+> part of Linux v6.9.
+>
+> Signed-off-by: Frieder Schrempf <frieder.schrempf@kontron.de>
+> ---
+> Changes in v2:
+> * Implement changes suggested by Fabio (Thanks!)
+>   * Fix system reset and remove unneeded cpu_reset()
+>   * Add 'static const' to nfc_pads[]
+>   * Remove hostname from env
+>   * Remove options to disable caches
+> * Enable watchdog and wdt command
+> * Enable LTO
+
+I put this series in CI and it complained that there is no MAINTAINERS
+entry for this board:
+
+https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/784464
+
+and there was also an issue with the documentation:
+
+https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/784463
+
+Please fix these two issues and submit v3.
