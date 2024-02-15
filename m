@@ -4,79 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3274C4829E
-	for <u-boot@archiver.kernel.org>; Thu, 15 Feb 2024 21:28:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B479C4829E
+	for <u-boot@archiver.kernel.org>; Thu, 15 Feb 2024 21:54:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D9F087DF4;
-	Thu, 15 Feb 2024 22:28:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8018B87BBA;
+	Thu, 15 Feb 2024 22:54:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Zbq9vwB8";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="r5N97fX+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D40787DF4; Thu, 15 Feb 2024 22:28:39 +0100 (CET)
-Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
- [IPv6:2607:f8b0:4864:20::1130])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A588487D6B; Thu, 15 Feb 2024 22:54:06 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE81687E12
- for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 22:28:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BC1B786308
+ for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 22:54:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1130.google.com with SMTP id
- 00721157ae682-607ec539525so5953287b3.0
- for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 13:28:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1708032506; x=1708637306; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=lCKTP3XtxFQ3ehKb5xchMrZ4MVUy93EOf6zsXJad3Tg=;
- b=Zbq9vwB8QupEc677h/jWHx13WUbyatTny6F0lI7zYNw3K+GGtPvEKDW8a26sRpHnLp
- tuYIlWn8vE4/NjdKEVmQGik0KTHjqhdphFGjkVh4nFN2F/dtQqx5ZtxcWHY31eKv6Ko3
- ATA4nHHWSdy0OahVIzwHCkBNtJw0fMCyHD/+s=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708032506; x=1708637306;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=lCKTP3XtxFQ3ehKb5xchMrZ4MVUy93EOf6zsXJad3Tg=;
- b=jq90xcMLen42q9Baq4Kcq0McAcZIniiLz3PjQpMq0r30dU6KFeRJQUjH+cPDIMlCNy
- jRWZZP1rvD/x9kS7hW0ExaZy9CRafU/Y5qK/lOzmAHQtvyKBkxUafMEMCPGhvvf8C68i
- Ek8IFmfJ+4GyTLAJjBCKNNZS8F50tu9dKeNiHkvM1Gty3WSgSXS6A9f3hXsO96A+wa3E
- Gf1Pkl5KZhiym5tH5R7w6dgHdfu7WF+9vIzZjJm9F7bVWjcumIDWrFryV1vin7kxna87
- O7GjaobkpS4Dubm/iOFFwR6JimulqT+2JRyROdSGZYXi1fDE2vO1oa0EbMiw6lT9rwQV
- Qm4g==
-X-Gm-Message-State: AOJu0YzbEBgTPc08KMeeDFdX+ekFeaiayIlfd0lZWN4gk0CuIrCyZL30
- wQivTsifVw6D9w56CLDcjXFVgSDokPx4EvmF+jjRI6qxPL77gSVSCdGs+UZ2UgrDHf8cq1H278X
- T
-X-Google-Smtp-Source: AGHT+IF5cudCzjzTmuePibh8I3Axx6TT8OCZg3Uzv+t4Vsji/Mb3Y/CauCdwuH1JrcVcV421PmE75A==
-X-Received: by 2002:a81:6f0b:0:b0:607:ca2e:f23e with SMTP id
- k11-20020a816f0b000000b00607ca2ef23emr3164858ywc.30.1708032506337; 
- Thu, 15 Feb 2024 13:28:26 -0800 (PST)
-Received: from bill-the-cat (065-184-194-195.res.spectrum.com.
- [65.184.194.195]) by smtp.gmail.com with ESMTPSA id
- s4-20020a817704000000b0060788326365sm59703ywc.0.2024.02.15.13.28.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Feb 2024 13:28:25 -0800 (PST)
-Date: Thu, 15 Feb 2024 16:28:24 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH 2/2] doc: Rework the gcc section to reflect general build
- instructions
-Message-ID: <20240215212824.GF3040305@bill-the-cat>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1708034040; x=1708638840; i=xypron.glpk@gmx.de;
+ bh=AFeIv6FDOvuAadMjSaKsIBOd9Uco6wyDdn5gFSYE0Dw=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:
+ References;
+ b=r5N97fX+ZzT+6d1xwYqpItRB6VxbYpZ3Z6sU3wHG5vTMYqLAqBy/QoyF7iKEeTSo
+ /cUDPV8wHVbM1oSRfsZV4KgYJ5KgbXSwipNN/RnkPxn/XYyHW3dmC/KCqVm3Ipl+w
+ QtzH3YiogVYwgX6/HdO7IYX0aRqsCy4yX23SlI7KUvLabe1HMqGj9925A2ZGPoFSi
+ 66yaQQAo4R4L7tXewp5oy3mnBNOMqKv+/8eI7XaHdviRO89x6EtMWkrfA/cG9ue4F
+ BG//t5mop/hX5z259yxzainbtH17Hpoquw+BU3heC9/knK5dy2oh28jbgYcI2Ur5J
+ rLBbTIoun70oZawR5A==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([178.202.40.247]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1Mk0NU-1r82gi20BE-00kPbB; Thu, 15
+ Feb 2024 22:54:00 +0100
+Date: Thu, 15 Feb 2024 22:53:59 +0100
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Tom Rini <trini@konsulko.com>
+CC: u-boot@lists.denx.de
+Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_2/2=5D_doc=3A_Rework_the_gcc_sect?=
+ =?US-ASCII?Q?ion_to_reflect_general_build_instructions?=
+User-Agent: K-9 Mail for Android
+In-Reply-To: <20240215212824.GF3040305@bill-the-cat>
 References: <20240215211025.690964-1-trini@konsulko.com>
  <20240215211025.690964-2-trini@konsulko.com>
  <45D1EDA6-C570-4F18-B937-57808BBCDFC2@gmx.de>
+ <20240215212824.GF3040305@bill-the-cat>
+Message-ID: <6FCE298F-EE98-462E-B27E-EEF0796D0097@gmx.de>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="wxHb47uCybLtf6lc"
-Content-Disposition: inline
-In-Reply-To: <45D1EDA6-C570-4F18-B937-57808BBCDFC2@gmx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:Sd5ff+uDAtUg273pekESKWnOC7u69aQZfCaNKdoETFkmHK9fnWO
+ LXJ5Fjs7ufG0e47AspGOcoA853pG/cQY+j3BFpoKovivEAzUG/VkP6TdQKzmod86hmYPT04
+ mfhBHm1WkMKsmIB43l98ul9unnNdBTH3/CEDNbbwOPF6HWROWf+jadcCfjBaQzCZ3FW0pda
+ cp1VP7E1jTlBlyGM76OGQ==
+UI-OutboundReport: notjunk:1;M01:P0:a5tJFtrdzdk=;d0/h2cdOXENd+OAl2+1mGrAqQtP
+ znxMMT32ZqPRmoxFBQIEXwFtXIm0rMyvEInQ0c2q+Xv/WmojxGJuJysEsK6dXirHBnX+Zn14x
+ gynyGjtC5jUSbq9Zp6pg5zxrHYvyxM4uesFDo6zFgjXqLIJvOK/6sNENb758w/plwF0PN5rnX
+ jP2sgZw9z2qXS/cYNwz7NXYa4aSyG8Gh6li9xStII0RxoHRtVCz+oRDFX2UsF0K70ue0a1COG
+ wf7cU40Rb+UQSmwzZJBIDm2HYRZJKzT2XIHUBTXxOlRWFFJ6tfn95Z3kVNeW/9Kuxo4krvIT2
+ eINV54pPVoJmAcJ4TvstOxmfT1sBczjYBcc+rhOQoTVOB0yU717UW6zfR8Ne8C+SVZl/46UEz
+ 04TuyQcMTXAm3BzkWiqiKnM9J5aOYnvZ2h9COKHRght6RPOzlB7uNSxEJ66CzEbJUzk4tmHmQ
+ PciIwxgkVXHpZ+FFBr+Z2WIDTt5wyF/h1Cg6cGZqjcv9TiY4SMB/vkVtRXqJsdW8alWSwNkzm
+ iEUYecPai36uJ2KKqHMNVxYY3NlI9O4EdbOQIBRx/80l/Lj7EmUFWVnsMsHWfW13mTiIgnrvw
+ FwwrE7ya/s0OwQA4uhA3WKDU3k2pCFyT8ag21Whl3x5Abd9Zi5/QWeA1Qrpgl+9NFaFUd1R0B
+ fNv5LvfCXvFqoLuJBoIdyDC9wInf8J07gSD99gncIoSJtYf2qwRG9xC0B7YXt+/yFBfG4fnxc
+ +mwmIg1z0CkgLLqO5CRWQ467uQAY8Noj7yRJSMzdBiYUPXft1QCAdeN+AoLOH4Y+dGV8QqjLW
+ SkeNDQUoBtOI4J2F+dfHnX/ZovuTIzlwqZ2F2bvYZiTPg=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,163 +91,160 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---wxHb47uCybLtf6lc
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Thu, Feb 15, 2024 at 10:24:40PM +0100, Heinrich Schuchardt wrote:
->=20
->=20
-> Am 15. Februar 2024 22:10:25 MEZ schrieb Tom Rini <trini@konsulko.com>:
-> >The first big issue is that the "gcc" file talked a lot about the
-> >general build requirements as well, but was titled in a gcc-centric
-> >manner. Solve this by renaming the file to compile.rst and more fully
-> >reflecting that it is general build instructions. Next, add a section
-> >about the prebuilt toolchains that are recommended (as they are the ones
-> >we use in CI), and update a few places to reference these vendor-neutral
-> >tools.
-> >
-> >Next, we can include the reproducible builds section directly in the
-> >compile instructions rather than as a small standalone file.
-> >
-> >Finally, we update the sandbox document to reflect both the name change
-> >as well as what is specifically required to build sandbox.
-> >
-> >Signed-off-by: Tom Rini <trini@konsulko.com>
-> >---
-> >Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> >---
-> > doc/arch/sandbox/sandbox.rst       |  5 ++-
-> > doc/build/{gcc.rst =3D> compile.rst} | 64 ++++++++++++++++++++++++++----
-> > doc/build/index.rst                |  3 +-
-> > doc/build/reproducible.rst         | 27 -------------
-> > 4 files changed, 61 insertions(+), 38 deletions(-)
-> > rename doc/build/{gcc.rst =3D> compile.rst} (73%)
-> > delete mode 100644 doc/build/reproducible.rst
-> >
-> >diff --git a/doc/arch/sandbox/sandbox.rst b/doc/arch/sandbox/sandbox.rst
-> >index 5f8db126657f..f2ed5a25c115 100644
-> >--- a/doc/arch/sandbox/sandbox.rst
-> >+++ b/doc/arch/sandbox/sandbox.rst
-> >@@ -39,11 +39,12 @@ integers can only be built on 64-bit hosts.
-> >=20
-> > Note that standalone/API support is not available at present.
-> >=20
-> >-
-> > Prerequisites
-> > -------------
-> >=20
-> >-Install the dependencies noted in :doc:`../../build/gcc`.
-> >+In addition to the normal dependencies shows in the :doc:`general build
-> >+instructions <../../build/compile>` to enable display support SDL2 libr=
-aries
-> >+need to be available.
-> >=20
-> >=20
-> > Basic Operation
-> >diff --git a/doc/build/gcc.rst b/doc/build/compile.rst
-> >similarity index 73%
-> >rename from doc/build/gcc.rst
-> >rename to doc/build/compile.rst
-> >index 3c6465772729..ef9c8545835a 100644
-> >--- a/doc/build/gcc.rst
-> >+++ b/doc/build/compile.rst
-> >@@ -1,11 +1,19 @@
-> >-Building with GCC
-> >-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> >+Building U-Boot
-> >+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> >=20
-> > Dependencies
-> > ------------
-> >=20
-> >-For building U-Boot you need a GCC compiler for your host platform. If =
-you
-> >-are not building on the target platform you further need  a GCC cross c=
-ompiler.
-> >+For building U-Boot you need the general build tools such as `make` and=
- a C
-> >+compiler for your host platform. Next, if you are not building on the s=
-ame
-> >+architecture as the target platform you further need a C cross compiler.
-> >+Furthermore, some target platforms require additional host tools to be =
-present
-> >+and their package names may vary slightly dependinng on the naming sche=
-me used
-> >+by a particular host OS.
-> >+
-> >+In general, GCC should be used for both the host and target C compiler.=
- Using
-> >+:doc:`clang <clang>` is supported but please see the documented issues =
-for it as
-> >+well.
-> >=20
-> > Debian based
-> > ~~~~~~~~~~~~
-> >@@ -69,6 +77,17 @@ Depending on the build target further packages may be=
- needed:
-> > * riscv64 S-mode targets: opensbi
-> > * some arm64 targets: arm-trusted-firmware
-> >=20
-> >+Prebuilt
-> >+~~~~~~~~
-> >+
-> >+Another option, which the project uses for CI for example, is to use a =
-prebuilt
-> >+toolchain. For the most part, we use the latest `kernel.org`_ prebuit b=
-inaries,
-> >+but there are a few architectures that require their own specific toolc=
-hains
-> >+still.
-> >+
-> >+In general, examples found within the documentation here refer to the t=
-ools
-> >+found here and exceptions will be noted where relevant.
-> >+
-> > Prerequisites
-> > -------------
-> >=20
-> >@@ -112,11 +131,11 @@ command line or export it beforehand.
-> >=20
-> >     CROSS_COMPILE=3D<compiler-prefix> make
-> >=20
-> >-Assuming cross compiling on Debian for ARMv8 this would be
-> >+Assuming cross compiling for ARMv8 this would be
-> >=20
-> > .. code-block:: bash
-> >=20
-> >-    CROSS_COMPILE=3Daarch64-linux-gnu- make
-> >+    CROSS_COMPILE=3Daarch64-linux- make
->=20
-> GCC uses triples to specify the architecture. With the suggested change b=
-uilding will fail on many distros, e.g. in our CI image.
->=20
-> cf. https://gcc.gnu.org/install/specific.html#aarch64-x-x
+Am 15=2E Februar 2024 22:28:24 MEZ schrieb Tom Rini <trini@konsulko=2Ecom>=
+:
+>On Thu, Feb 15, 2024 at 10:24:40PM +0100, Heinrich Schuchardt wrote:
+>>=20
+>>=20
+>> Am 15=2E Februar 2024 22:10:25 MEZ schrieb Tom Rini <trini@konsulko=2Ec=
+om>:
+>> >The first big issue is that the "gcc" file talked a lot about the
+>> >general build requirements as well, but was titled in a gcc-centric
+>> >manner=2E Solve this by renaming the file to compile=2Erst and more fu=
+lly
+>> >reflecting that it is general build instructions=2E Next, add a sectio=
+n
+>> >about the prebuilt toolchains that are recommended (as they are the on=
+es
+>> >we use in CI), and update a few places to reference these vendor-neutr=
+al
+>> >tools=2E
+>> >
+>> >Next, we can include the reproducible builds section directly in the
+>> >compile instructions rather than as a small standalone file=2E
+>> >
+>> >Finally, we update the sandbox document to reflect both the name chang=
+e
+>> >as well as what is specifically required to build sandbox=2E
+>> >
+>> >Signed-off-by: Tom Rini <trini@konsulko=2Ecom>
+>> >---
+>> >Cc: Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede>
+>> >---
+>> > doc/arch/sandbox/sandbox=2Erst       |  5 ++-
+>> > doc/build/{gcc=2Erst =3D> compile=2Erst} | 64 +++++++++++++++++++++++=
++++----
+>> > doc/build/index=2Erst                |  3 +-
+>> > doc/build/reproducible=2Erst         | 27 -------------
+>> > 4 files changed, 61 insertions(+), 38 deletions(-)
+>> > rename doc/build/{gcc=2Erst =3D> compile=2Erst} (73%)
+>> > delete mode 100644 doc/build/reproducible=2Erst
+>> >
+>> >diff --git a/doc/arch/sandbox/sandbox=2Erst b/doc/arch/sandbox/sandbox=
+=2Erst
+>> >index 5f8db126657f=2E=2Ef2ed5a25c115 100644
+>> >--- a/doc/arch/sandbox/sandbox=2Erst
+>> >+++ b/doc/arch/sandbox/sandbox=2Erst
+>> >@@ -39,11 +39,12 @@ integers can only be built on 64-bit hosts=2E
+>> >=20
+>> > Note that standalone/API support is not available at present=2E
+>> >=20
+>> >-
+>> > Prerequisites
+>> > -------------
+>> >=20
+>> >-Install the dependencies noted in :doc:`=2E=2E/=2E=2E/build/gcc`=2E
+>> >+In addition to the normal dependencies shows in the :doc:`general bui=
+ld
+>> >+instructions <=2E=2E/=2E=2E/build/compile>` to enable display support=
+ SDL2 libraries
+>> >+need to be available=2E
+>> >=20
+>> >=20
+>> > Basic Operation
+>> >diff --git a/doc/build/gcc=2Erst b/doc/build/compile=2Erst
+>> >similarity index 73%
+>> >rename from doc/build/gcc=2Erst
+>> >rename to doc/build/compile=2Erst
+>> >index 3c6465772729=2E=2Eef9c8545835a 100644
+>> >--- a/doc/build/gcc=2Erst
+>> >+++ b/doc/build/compile=2Erst
+>> >@@ -1,11 +1,19 @@
+>> >-Building with GCC
+>> >-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>> >+Building U-Boot
+>> >+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>> >=20
+>> > Dependencies
+>> > ------------
+>> >=20
+>> >-For building U-Boot you need a GCC compiler for your host platform=2E=
+ If you
+>> >-are not building on the target platform you further need  a GCC cross=
+ compiler=2E
+>> >+For building U-Boot you need the general build tools such as `make` a=
+nd a C
+>> >+compiler for your host platform=2E Next, if you are not building on t=
+he same
+>> >+architecture as the target platform you further need a C cross compil=
+er=2E
+>> >+Furthermore, some target platforms require additional host tools to b=
+e present
+>> >+and their package names may vary slightly dependinng on the naming sc=
+heme used
+>> >+by a particular host OS=2E
+>> >+
+>> >+In general, GCC should be used for both the host and target C compile=
+r=2E Using
+>> >+:doc:`clang <clang>` is supported but please see the documented issue=
+s for it as
+>> >+well=2E
+>> >=20
+>> > Debian based
+>> > ~~~~~~~~~~~~
+>> >@@ -69,6 +77,17 @@ Depending on the build target further packages may =
+be needed:
+>> > * riscv64 S-mode targets: opensbi
+>> > * some arm64 targets: arm-trusted-firmware
+>> >=20
+>> >+Prebuilt
+>> >+~~~~~~~~
+>> >+
+>> >+Another option, which the project uses for CI for example, is to use =
+a prebuilt
+>> >+toolchain=2E For the most part, we use the latest `kernel=2Eorg`_ pre=
+buit binaries,
+>> >+but there are a few architectures that require their own specific too=
+lchains
+>> >+still=2E
+>> >+
+>> >+In general, examples found within the documentation here refer to the=
+ tools
+>> >+found here and exceptions will be noted where relevant=2E
+>> >+
+>> > Prerequisites
+>> > -------------
+>> >=20
+>> >@@ -112,11 +131,11 @@ command line or export it beforehand=2E
+>> >=20
+>> >     CROSS_COMPILE=3D<compiler-prefix> make
+>> >=20
+>> >-Assuming cross compiling on Debian for ARMv8 this would be
+>> >+Assuming cross compiling for ARMv8 this would be
+>> >=20
+>> > =2E=2E code-block:: bash
+>> >=20
+>> >-    CROSS_COMPILE=3Daarch64-linux-gnu- make
+>> >+    CROSS_COMPILE=3Daarch64-linux- make
+>>=20
+>> GCC uses triples to specify the architecture=2E With the suggested chan=
+ge building will fail on many distros, e=2Eg=2E in our CI image=2E
+>>=20
+>> cf=2E https://gcc=2Egnu=2Eorg/install/specific=2Ehtml#aarch64-x-x
+>
+>But this is what the kernel=2Eorg compiler is called, and for consistency
+>we should reference the reference compiler in our docs=2E I'm wanting to
+>follow up and change everyone to use consistent names=2E
+>
 
-But this is what the kernel.org compiler is called, and for consistency
-we should reference the reference compiler in our docs. I'm wanting to
-follow up and change everyone to use consistent names.
+Please, do not asume that Linux distros will change=2E=20
 
---=20
-Tom
+Users will and should use the tools provided by their distros=2E Side load=
+ing foreign binaries is a secutity risc which should be avoided=2E
 
---wxHb47uCybLtf6lc
-Content-Type: application/pgp-signature; name="signature.asc"
+I cannot see what is inconsistent about sticking to triples=2E
 
------BEGIN PGP SIGNATURE-----
+Best regards
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXOgfQACgkQFHw5/5Y0
-tyzpZwv/VQZZKTqXNOZqoMCNwMhC/j0wdX3yeT6eqsV4n9wjTy5oMZrkRZNM8teR
-AijE6axHRUy8vXBIOe7BtQdtS8dxSwrBHmOjMCKW1grTxspYRY70FD9CWotiTlkb
-8+4vgoPIl3lEAM3102RXM8OwMTCKjUgbdHyfEpIX1aXEI33nVF4eH/mlrtxcbs0x
-8Sspcsnr6yQkKqCclQGRVvQwoNkJlqQbDEgTIwUSSaPzPQ1iOEyxK+5uv1uTJuTN
-p7dz2/lH9czY3iC/qi//z1FR6rxD3b+nNU3nhnLCeiBRnUPu+XqU/jY9TXaRjUlJ
-24wqNbFvbWJSxQDWNtkbSnRPIgav9tz+ZIFa+NNMPaK5zmSUX/7EYDD63yIiZ8cq
-qqAc12TJtVZ4i7g7My9dcgg+7eu3XeEEdbym1yfYumUBi3ShzjVIdyipjNDRwCzh
-QlpBam9RZ2v3v1Ef9hfZJz+iAGa+d+00sjip1FFXOP0oAXpryCIcrONLhHDcFxWy
-bBZ4Q+6o
-=psyj
------END PGP SIGNATURE-----
-
---wxHb47uCybLtf6lc--
+Heinrich
