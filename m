@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EB65C4829E
-	for <u-boot@archiver.kernel.org>; Thu, 15 Feb 2024 20:54:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08727C48BC4
+	for <u-boot@archiver.kernel.org>; Thu, 15 Feb 2024 20:54:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DECF87F35;
-	Thu, 15 Feb 2024 21:53:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 41E7C87F3E;
+	Thu, 15 Feb 2024 21:53:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GViDxwR8";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fJHhGi7B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31D1A87F27; Thu, 15 Feb 2024 21:53:05 +0100 (CET)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
+ id 9743C87F27; Thu, 15 Feb 2024 21:53:05 +0100 (CET)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D2C4D87E29
- for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 21:52:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9081C87E9C
+ for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 21:52:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-411d715c401so10605005e9.1
- for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 12:52:34 -0800 (PST)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-411e5f21c0bso11354035e9.0
+ for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 12:52:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708030354; x=1708635154; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1708030357; x=1708635157; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=e0os/9yFdpHIAkKAumeZWSsYNTXNlbIBO0NQGDV4dvw=;
- b=GViDxwR8pFJ14r/FYvL7ijM269qXvve7qAXJSWnsjsSAGhP+uatAuvMv3M8w5WJ94b
- 4SBcpAlvOc4s5wKaMqwuHAYZDO3sy/PH1gP3Twt6TsS18gFDRVYoFDNx1MFQgAnnbzAi
- JeNy40t5SeyUJmNbSHv0xdB99RvX/Ye5RUJpeR2AygnsflGKCYnKZMxARXSizGaACtLm
- FUJJOyAd9bGO+Cj70wraadh8w//sGqiD5cDNBeWl1yk26nEpfyBOrdMuRHzDQk4HH3m3
- F5jzXaTW1bWZuwQmE526n51kZ6L49kzt1YQCp0FJF/tUQaC5jedGF8dqLvjZjj9fXk8D
- ahmg==
+ :reply-to; bh=JT/YfULvcUfAyLH8loGuVjpmYwwBYpOtdZZCAuGHDmE=;
+ b=fJHhGi7B6I1bGd+2suGiKh7NI/evkdDGE2j6S8HR+ZVi+kJPzbvUDX/RSv1cfpLeoD
+ KRLMx5syzHhkO1O1Iud3bg7tKlRrisP9qtVHrKzSg23S8xv0QiOVTuKbVy5L3fMtd0jL
+ Kq75+7ntRGEIy1F2KboquLzS/xJXXvosErJnlCJWphCqr/X2TnIkha4duzsHCZkDsvpM
+ lzC3VbAf7ICDJEKrTC7yeciRmD7Sn54oSOziY415gwx6Zp3koJnl6/BEdPe9LiA5HRZ+
+ noIvyI0uiNng96XXVp25zneAXWYLvgBhxQpTFAZJWnjP4+NBSlqf41EqW1B8vpUNnXLA
+ XEng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708030354; x=1708635154;
+ d=1e100.net; s=20230601; t=1708030357; x=1708635157;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=e0os/9yFdpHIAkKAumeZWSsYNTXNlbIBO0NQGDV4dvw=;
- b=syCeBNDDj0gtW3eUpx2PJutYOiPhOwkmD1erYwLSg+Rt5aD3Sx0fc2DIg14D4MyZEe
- DqeyPj9b1UU214AFU9W2r7LKQVPAOtYQTJ2wi1XR2s9xRA6DkekD4Y8hmZM0VJcWd6dG
- 95MRqmmzIqzlaolEFDtIS+vP+o3zC1riKX/yblkcqPDXf3bkmDiw325IdQTelc6ee8w+
- qNNgi+d+PJkgFXHXTkwKrFkKHegJp5o882yqdDaOyJLL+7w75TLI5XYL64wzh9W4TtdS
- 25MbbmXicCdJMb58YHaQY5tBh5OAeFDggWsXckkxRLqrlZdfDlD/zNhp7TTUzgc0bom7
- nEJA==
+ bh=JT/YfULvcUfAyLH8loGuVjpmYwwBYpOtdZZCAuGHDmE=;
+ b=jsE/oqqeOcakpssC7hvBuqRtm4xmdgFu7Jk4vJY28vwa8MrXQ2H7v9txegayh7LLes
+ P8K/QTADvydX2m9wpxsj8zyIX6s/W1DI7sfqCZvW3pU5G2vjkb5MlnDdXjYIQY+UVc26
+ IuGFjK5QKs5fl6FNZYcI0cSboOPhRedYNZSybtlKWWH2qQ+i+ifb6vIl3xobkvJpkN7s
+ miTFg5tdvkIi2iyuHgFpO5xU8qULBmPC4JDhp1vD3hk6SnuieYruIV3GXqpQKkyIqIy3
+ BS9dTM/1rD3C/aQpFBrjHzpcCD62wQiOClo5lmCaqb6lmYzJzzFFLZ+ZkJt3nd+kMg1s
+ cczw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWhD+O3f+xs1R3DdzLkKGb4VY1tAFSjcPx89v2/ax278XQgkmoCvQ1q/O8tpEzSoRd4ADqAY5/IH3vCT3aoA6woRRkShg==
-X-Gm-Message-State: AOJu0YwygviBzpx3SHV0JCYOn/EVMCgdorjg3yLbYGHbQMC9iEn46t1m
- PHaDuSdZ6W5HY8V3sB/rBNzwFzR1X6oknji0GGW/DOVNf/lw9OkIE70aoYd2wSi3+sT+7LgAwlv
- H
-X-Google-Smtp-Source: AGHT+IG3nkcTU33t4IS6BBhlo+z1DEplhYBUo8CKdnluZTdpg3oVhHyp0Bdh3HlQKJIvWODO4QFRGw==
-X-Received: by 2002:a05:600c:602a:b0:411:b66a:5bf6 with SMTP id
- az42-20020a05600c602a00b00411b66a5bf6mr2222195wmb.5.1708030354199; 
- Thu, 15 Feb 2024 12:52:34 -0800 (PST)
+ AJvYcCVbOhUc5BSxQy+cTL0Y2D/gC0QzQTNQCyMhsCA9Xz/itOo7tTxJ6Btd3ZY2B+1mwXoPE9bqaKKX0QRzVoZ5fAN8J0Bqlw==
+X-Gm-Message-State: AOJu0YxB6acs+uMAIlthTlGCKoYIf4s6g6juAzptBubV4HYA64gaG8Sn
+ t1uSxDnhPCUBzHnqrWi44zUfvL88w0PHXCUpfdwRfjkcmCUazU2n9kr/euuTmY6vj4cUwlM4Amm
+ m
+X-Google-Smtp-Source: AGHT+IHh5rFZWXJgzaAk9fuvSnphnRR7oJfsRI5BmKwY8IV1JuWtXb0OBjsG4akfBpTZmiLlcvd6Ig==
+X-Received: by 2002:a5d:430d:0:b0:33b:65b3:e51b with SMTP id
+ h13-20020a5d430d000000b0033b65b3e51bmr2339765wrq.48.1708030356934; 
+ Thu, 15 Feb 2024 12:52:36 -0800 (PST)
 Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- e4-20020adfe384000000b0033cfa00e497sm194025wrm.64.2024.02.15.12.52.33
+ e4-20020adfe384000000b0033cfa00e497sm194025wrm.64.2024.02.15.12.52.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Feb 2024 12:52:33 -0800 (PST)
+ Thu, 15 Feb 2024 12:52:36 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Thu, 15 Feb 2024 20:52:27 +0000
-Subject: [PATCH v4 09/39] gpio: qcom_pmic: 1-based GPIOs
+Date: Thu, 15 Feb 2024 20:52:30 +0000
+Subject: [PATCH v4 12/39] sandbox: dts: fix qcom pmic gpio
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240215-b4-qcom-common-target-v4-9-ed06355c634a@linaro.org>
+Message-Id: <20240215-b4-qcom-common-target-v4-12-ed06355c634a@linaro.org>
 References: <20240215-b4-qcom-common-target-v4-0-ed06355c634a@linaro.org>
 In-Reply-To: <20240215-b4-qcom-common-target-v4-0-ed06355c634a@linaro.org>
 To: Neil Armstrong <neil.armstrong@linaro.org>, 
@@ -86,13 +86,13 @@ To: Neil Armstrong <neil.armstrong@linaro.org>,
  Stephan Gerhold <stephan@gerhold.net>
 Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
 X-Mailer: b4 0.13-dev-4bd13
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1524;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=922;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=0Cpoq4aK9px2MmgAZstpzaLCFy/v8Vx4qmVc23MI294=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtRzlS02HicUMtxLBG/o/zE8dffFo6y25wcMHsbfmaEre
- IXzKO/8jlIWBkEOBlkxRRbxE8ssm9ZettfYvuACzBxWJpAhDFycAjCRDwsZ/kp1FgSxHv91e73V
- j4MaD6Xn9CzvWPHXxXDqk3+V8+Ufb1nG8M+s8v0OY49V/Oaz0hwLD33LZX0xcdqLl09uzb3w033
- PHY1dAA==
+ bh=fm1qcyWTfz46ooE7qb9F+mNmYNekLls8y4xKlrPYAaU=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtRzla35rutfC3KeyLi0jScwu3vn5m0N26rq7hT+/zfb5
+ rrIg2tzO0pZGAQ5GGTFFFnETyyzbFp72V5j+4ILMHNYmUCGMHBxCsBE3A8x/A9ruuXxPy10Xqem
+ 7r9nX86tY/2fMTnJJP1pRUnrv/gSx30M/7TeFSiFV9QdFVk7waNiRsqWbTMc4nk4lrJm55znSlN
+ 61wMA
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -111,54 +111,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Qualcomm PMICs number their GPIOs starting from 1, implement a custom
-.xlate method to handle this.
+Adjust the DT to match upstream bindings.
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- drivers/gpio/qcom_pmic_gpio.c | 22 ++++++++++++++++++++++
- 1 file changed, 22 insertions(+)
+ arch/sandbox/dts/sandbox.dtsi | 9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/gpio/qcom_pmic_gpio.c b/drivers/gpio/qcom_pmic_gpio.c
-index 6167c8411678..2a4fef8d28cb 100644
---- a/drivers/gpio/qcom_pmic_gpio.c
-+++ b/drivers/gpio/qcom_pmic_gpio.c
-@@ -209,12 +209,34 @@ static int qcom_gpio_set_value(struct udevice *dev, unsigned offset,
- 				       REG_CTL_OUTPUT_MASK, !!value);
- }
+diff --git a/arch/sandbox/dts/sandbox.dtsi b/arch/sandbox/dts/sandbox.dtsi
+index 241f397ba6e7..c93ce7128942 100644
+--- a/arch/sandbox/dts/sandbox.dtsi
++++ b/arch/sandbox/dts/sandbox.dtsi
+@@ -419,17 +419,16 @@
+ 		#size-cells = <0x1>;
+ 		pm8916@0 {
+ 			compatible = "qcom,spmi-pmic";
+-			reg = <0x0 0x1>;
++			reg = <0x0 0x0>;
+ 			#address-cells = <0x1>;
+-			#size-cells = <0x1>;
++			#size-cells = <0x0>;
  
-+static int qcom_gpio_xlate(struct udevice *dev, struct gpio_desc *desc,
-+			   struct ofnode_phandle_args *args)
-+{
-+	struct gpio_dev_priv *uc_priv = dev_get_uclass_priv(dev);
-+
-+	if (args->args_count < 1)
-+		return -EINVAL;
-+
-+	/* GPIOs in DT are 1-based */
-+	desc->offset = args->args[0] - 1;
-+	if (desc->offset >= uc_priv->gpio_count)
-+		return -EINVAL;
-+
-+	if (args->args_count < 2)
-+		return 0;
-+
-+	desc->flags = gpio_flags_xlate(args->args[1]);
-+
-+	return 0;
-+}
-+
- static const struct dm_gpio_ops qcom_gpio_ops = {
- 	.direction_input	= qcom_gpio_direction_input,
- 	.direction_output	= qcom_gpio_direction_output,
- 	.get_value		= qcom_gpio_get_value,
- 	.set_value		= qcom_gpio_set_value,
- 	.get_function		= qcom_gpio_get_function,
-+	.xlate			= qcom_gpio_xlate,
- };
- 
- static int qcom_gpio_probe(struct udevice *dev)
+ 			spmi_gpios: gpios@c000 {
+ 				compatible = "qcom,pm8916-gpio";
+-				reg = <0xc000 0x400>;
++				reg = <0xc000>;
+ 				gpio-controller;
+-				gpio-count = <4>;
++				gpio-ranges = <&spmi_gpios 0 0 4>;
+ 				#gpio-cells = <2>;
+-				gpio-bank-name="spmi";
+ 			};
+ 		};
+ 	};
 
 -- 
 2.43.1
