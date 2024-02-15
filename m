@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB876C48BC4
-	for <u-boot@archiver.kernel.org>; Thu, 15 Feb 2024 20:56:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A46C4C4829E
+	for <u-boot@archiver.kernel.org>; Thu, 15 Feb 2024 20:56:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E7EA387EE6;
-	Thu, 15 Feb 2024 21:53:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8DB0087EF6;
+	Thu, 15 Feb 2024 21:53:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IHNAGb3r";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fyCBd2Jt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7BB1287F44; Thu, 15 Feb 2024 21:53:11 +0100 (CET)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id B41C187F44; Thu, 15 Feb 2024 21:53:11 +0100 (CET)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55CE987ED7
- for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 21:52:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BAC3987E86
+ for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 21:52:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-337d05b8942so825401f8f.3
- for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 12:52:43 -0800 (PST)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-411d231ea71so10391345e9.1
+ for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 12:52:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708030362; x=1708635162; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1708030355; x=1708635155; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=0kKqfPSlp33BHdJyiYncMhkAbJhkMkhshVt7lCHKW1I=;
- b=IHNAGb3rAEHcPW527ZhuPKZ6elUNKJeSdTB1BUnJPrzmXyUjxrCJbtF2+TMFGgATPv
- J+GjdPW+lnuCPzqBSEXOOG25dyZ9wBaOVF+dYc4fmGS/Ru1c27uM9BCqk6c35InwFNLV
- WkJFrF/m6y/xWAnptdcOVbC4LYg6hyQRCVtRggO80iT4phFRfoQKxxQPbEDkIX+ynPiV
- EhQ1eMGyehX5XxR0FXDBr1ljNLGz8ww5cT9ceSi3NHUZg5viwQfLO2IoLdGbWkCvZ4NU
- K2dM0XjGyLaHblarYlOMctSUUiRB7MxUDjau/dMCBCNr4BnYT9OTVGWRI1bfITcXURnZ
- bibg==
+ :reply-to; bh=R0kFbeejCuT/GZe/lYkO7yMHcAX15oeReIjH/Ny6yjk=;
+ b=fyCBd2Jt15KAkDYNuZs9YOlI4LltRGpPFLIMPuU7ISz/LVKPU+MGJXZBQAuOCbdzW6
+ QY8xhiTgR/lV5k+1sPotFy/ypS/Lmil+o3GB5Yb01TWtksOSCs3ulDTwfcmVV5FUbnJz
+ JhK6bZlDm9QkzWsd1qP2zOFuqW2j/FoXzZyAzDTHdarJ1mVM2XhsEMjaGaRYdyoNT3bw
+ uQrAeHOKQSlR+EfxxQ6b4WxUT1F7S8j7KX28mrduWyyG9RDkQLGc35sjwgCLzj1KwO8Y
+ UTu0t57a1aFCTGTiRiFKQw5d7czSAq4krQiDdJgp66qlNXo9Uz4uQD+5j3g4QDBLolYc
+ BLUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708030362; x=1708635162;
+ d=1e100.net; s=20230601; t=1708030355; x=1708635155;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0kKqfPSlp33BHdJyiYncMhkAbJhkMkhshVt7lCHKW1I=;
- b=RPzOLI2/4VAKV3D3vKzxUTvTE5pdn1JnCI9GpR6GAosL9ze9AzduTqLSQUTl+/2bx4
- 2DcwA9iBoEZHZc4GGWqKR8EjSbJBapom6h2edvbsZVonQscbgWlov6MYXQHJBzqpZJMX
- uHLnAdxl6q+Kyy9mkeZ3XE5Pt3+2+DgO9CQrskvy+OcVkOujDxz5G/m55hI/LqU3n37i
- mQ9uEZb9bDWNNouQeDCtUKOQTLpnOr87363MQxAZ4frGXfRB4qJpNW1oegjMzGRGwh1b
- dAsvBg9RJdTyj9ZzZ2kCA8zZrPKeCZzxTce26Nc88tEZ+fjnTYLD6skbtBOMoC6mj4Eu
- /jCw==
+ bh=R0kFbeejCuT/GZe/lYkO7yMHcAX15oeReIjH/Ny6yjk=;
+ b=CPNi1E0Th5pWgJGa5MUknmn1k5fulrDT8FxWyq1mw9s6Fnl4afCAoSMy3OaVAVXeP3
+ oh/p3CgRA5BmteEEDOmreu6GyFWkJtgtqsc201d02uil52gSfjKmTphS+VIj+7iHkbRD
+ PWY+JCEhxIYsL5w07MVbW1pwF5cXEAgnTcFFVUP46OjpKEY8VQ4QQBMvOzmI1cW0rH/V
+ vY7bD//SCKTJ5BNBXpZdQtV5GPP8UK5nn4N5lMpgB6rP2YjfsfUBVzroCne/xlZWfvEy
+ OBQ2BhbC6JwebmWOTcoto16lMBrxhm7m/JjHt1dFOuIisEMwqCiBDghL3LDFJU4fQ15R
+ L++w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXGigMP4zSOs+/TRwKKamPu9Bmn3q/4l8iwEgafipzZJHVp3wzHAa+jdqu0JAhT+wPf1kH2rXcam6MS6wlak4iqDytqlQ==
-X-Gm-Message-State: AOJu0YzOHrQVJxsPYxNXcAVL5payG1CDa+3UIac0spZJF0fhiZ9GuhSI
- E5FSp7YThteMo1OHEABI5BE5s2PK6U473z7+KK8kgNDcjJSDJlpgtTKIokC7NmsXvErUZ+gcNyo
- j
-X-Google-Smtp-Source: AGHT+IEF+bvf/toiCgcoYhWC9iJjLbyCXU7ejb9VbSviRqAl1GuvTMTHJVw/zhFCQi/AYTLKzBrqJw==
-X-Received: by 2002:a05:6000:1817:b0:33d:6e1:36b3 with SMTP id
- m23-20020a056000181700b0033d06e136b3mr1541983wrh.64.1708030362595; 
- Thu, 15 Feb 2024 12:52:42 -0800 (PST)
+ AJvYcCWsT/hOkuOAkvXkNrkF66d+mMqt7DfC7PkpoLa7wZP1bSqr7vC5fJcsBd7qY5BEIvC/R2uSL/6nd7Frq61NOjIBKgriiw==
+X-Gm-Message-State: AOJu0Yylvpzd09Wu3vBYJy1RT2H4y5oYQ7MetclNegX0/KXHfASCnFT4
+ QhLlx+sRigUIwVixdc+vNubdLCtTpAOtRSU23gwBxZmGY1XFZO8FdmxvyQjAAhbFCAxKo93DoLG
+ W
+X-Google-Smtp-Source: AGHT+IERCWqiFpj7Ad9gxatUbRU2UF5PD6lCEUSt0OHz971iKZgn4wm9DbkG1xd+2SUC8o3LJbtK/A==
+X-Received: by 2002:a7b:c850:0:b0:40f:ed18:f74b with SMTP id
+ c16-20020a7bc850000000b0040fed18f74bmr2264479wml.35.1708030355142; 
+ Thu, 15 Feb 2024 12:52:35 -0800 (PST)
 Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- e4-20020adfe384000000b0033cfa00e497sm194025wrm.64.2024.02.15.12.52.41
+ e4-20020adfe384000000b0033cfa00e497sm194025wrm.64.2024.02.15.12.52.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Feb 2024 12:52:42 -0800 (PST)
+ Thu, 15 Feb 2024 12:52:34 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Thu, 15 Feb 2024 20:52:36 +0000
-Subject: [PATCH v4 18/39] board: dragonboard410c: import board code from
- mach-snapdragon
+Date: Thu, 15 Feb 2024 20:52:28 +0000
+Subject: [PATCH v4 10/39] gpio: qcom_pmic: add a quirk to skip GPIO
+ configuration
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240215-b4-qcom-common-target-v4-18-ed06355c634a@linaro.org>
+Message-Id: <20240215-b4-qcom-common-target-v4-10-ed06355c634a@linaro.org>
 References: <20240215-b4-qcom-common-target-v4-0-ed06355c634a@linaro.org>
 In-Reply-To: <20240215-b4-qcom-common-target-v4-0-ed06355c634a@linaro.org>
 To: Neil Armstrong <neil.armstrong@linaro.org>, 
@@ -87,13 +87,13 @@ To: Neil Armstrong <neil.armstrong@linaro.org>,
  Stephan Gerhold <stephan@gerhold.net>
 Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
 X-Mailer: b4 0.13-dev-4bd13
-X-Developer-Signature: v=1; a=openpgp-sha256; l=9157;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2074;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=KyAzA79DgSabUqclhFqL2r8R0DtaMlxd0tPzet10qEQ=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtRzla2fTPR4J670eDzvUoi7k3byhvT18zQne68Iuysnl
- ZbUx7u0o5SFQZCDQVZMkUX8xDLLprWX7TW2L7gAM4eVCWQIAxenAExk7guG/947n85mkeG7lTN5
- bqOZVvvJB02Mj8JzbBf95jq70TwldxnDH557588YTz/xe9G17Yti/jevUueO1dyve+1hWFOvrey
- iuesA
+ bh=xdStU/W+T5cpkGEsLGe473/TzSYkvUKiMzCleKraZX0=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtRzlS01r19vvmjbdM5QYsreXj7tXc5OC+Zf5Xq678u7s
+ hnNEZ2GHaUsDIIcDLJiiiziJ5ZZNq29bK+xfcEFmDmsTCBDGLg4BWAi2WKMDIu1N87Ya9K4UmuC
+ GI+WRbMnY8u9190sGueCHJhXB4Zl6TP8D/dZfNpkzi4VuY7y3y/vRbJfNZwlGLJixjyJJx2ek/4
+ KHwAA
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -112,327 +112,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some of the db410c board support code was written to be generic and
-placed in mach-snapdragon. However, as the db410c is the only board
-using this, move the code out of mach-snapdragon. This makes is more
-obvious what code is relevant for which targets and helps tidy things up
-a little more.
+Some platforms hard reset when attempting to configure PMIC GPIOs. Add
+support for quirks specified in match data with a single quirk to skip
+this configuration. We rely on the GPIO already be configured correctly,
+which is always the case for volume up (the only current user of these
+GPIOs).
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- arch/arm/mach-snapdragon/Makefile                |  2 -
- arch/arm/mach-snapdragon/dram.c                  | 99 ------------------------
- arch/arm/mach-snapdragon/include/mach/dram.h     | 12 ---
- arch/arm/mach-snapdragon/include/mach/misc.h     | 13 ----
- arch/arm/mach-snapdragon/misc.c                  | 55 -------------
- board/qualcomm/dragonboard410c/Makefile          |  2 +-
- board/qualcomm/dragonboard410c/dragonboard410c.c | 48 +++++++++++-
- 7 files changed, 45 insertions(+), 186 deletions(-)
+ drivers/gpio/qcom_pmic_gpio.c | 18 ++++++++++++++++--
+ 1 file changed, 16 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/mach-snapdragon/Makefile b/arch/arm/mach-snapdragon/Makefile
-index 3a3a297c1768..d02432df8b04 100644
---- a/arch/arm/mach-snapdragon/Makefile
-+++ b/arch/arm/mach-snapdragon/Makefile
-@@ -6,6 +6,4 @@ obj-$(CONFIG_SDM845) += sysmap-sdm845.o
- obj-$(CONFIG_SDM845) += init_sdm845.o
- obj-$(CONFIG_TARGET_DRAGONBOARD820C) += sysmap-apq8096.o
- obj-$(CONFIG_TARGET_DRAGONBOARD410C) += sysmap-apq8016.o
--obj-y += misc.o
--obj-y += dram.o
- obj-$(CONFIG_TARGET_QCS404EVB) += sysmap-qcs404.o
-diff --git a/arch/arm/mach-snapdragon/dram.c b/arch/arm/mach-snapdragon/dram.c
-deleted file mode 100644
-index 499dfdf0da6e..000000000000
---- a/arch/arm/mach-snapdragon/dram.c
-+++ /dev/null
-@@ -1,99 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+
--/*
-- * Onboard memory detection for Snapdragon boards
-- *
-- * (C) Copyright 2018 Ramon Fried <ramon.fried@gmail.com>
-- *
-- */
--
--#include <common.h>
--#include <dm.h>
--#include <log.h>
--#include <part.h>
--#include <smem.h>
--#include <fdt_support.h>
--#include <asm/arch/dram.h>
--
--#define SMEM_USABLE_RAM_PARTITION_TABLE 402
--#define RAM_PART_NAME_LENGTH            16
--#define RAM_NUM_PART_ENTRIES            32
--#define CATEGORY_SDRAM 0x0E
--#define TYPE_SYSMEM 0x01
--
--struct smem_ram_ptable_hdr {
--	u32 magic[2];
--	u32 version;
--	u32 reserved;
--	u32 len;
--} __attribute__ ((__packed__));
--
--struct smem_ram_ptn {
--	char name[RAM_PART_NAME_LENGTH];
--	u64 start;
--	u64 size;
--	u32 attr;
--	u32 category;
--	u32 domain;
--	u32 type;
--	u32 num_partitions;
--	u32 reserved[3];
--} __attribute__ ((__packed__));
--
--struct smem_ram_ptable {
--	struct smem_ram_ptable_hdr hdr;
--	u32 reserved;     /* Added for 8 bytes alignment of header */
--	struct smem_ram_ptn parts[RAM_NUM_PART_ENTRIES];
--} __attribute__ ((__packed__));
--
--#ifndef MEMORY_BANKS_MAX
--#define MEMORY_BANKS_MAX 4
--#endif
--
--int msm_fixup_memory(void *blob)
--{
--	u64 bank_start[MEMORY_BANKS_MAX];
--	u64 bank_size[MEMORY_BANKS_MAX];
--	size_t size;
--	int i;
--	int count = 0;
--	struct udevice *smem;
+diff --git a/drivers/gpio/qcom_pmic_gpio.c b/drivers/gpio/qcom_pmic_gpio.c
+index 2a4fef8d28cb..198cd84bc31e 100644
+--- a/drivers/gpio/qcom_pmic_gpio.c
++++ b/drivers/gpio/qcom_pmic_gpio.c
+@@ -64,6 +64,15 @@
+ #define REG_EN_CTL             0x46
+ #define REG_EN_CTL_ENABLE      (1 << 7)
+ 
++/**
++ * pmic_gpio_match_data - platform specific configuration
++ *
++ * @PMIC_MATCH_READONLY: treat all GPIOs as readonly, don't attempt to configure them
++ */
++enum pmic_gpio_quirks {
++	QCOM_PMIC_QUIRK_READONLY = (1 << 0),
++};
++
+ struct qcom_gpio_bank {
+ 	uint32_t pid; /* Peripheral ID on SPMI bus */
+ 	bool     lv_mv_type; /* If subtype is GPIO_LV(0x10) or GPIO_MV(0x11) */
+@@ -75,7 +84,12 @@ static int qcom_gpio_set_direction(struct udevice *dev, unsigned offset,
+ 	struct qcom_gpio_bank *priv = dev_get_priv(dev);
+ 	uint32_t gpio_base = priv->pid + REG_OFFSET(offset);
+ 	uint32_t reg_ctl_val;
 -	int ret;
--	struct smem_ram_ptable *ram_ptable;
--	struct smem_ram_ptn *p;
--
--	ret = uclass_get_device_by_name(UCLASS_SMEM, "smem", &smem);
--	if (ret < 0) {
--		printf("Failed to find SMEM node. Check device tree\n");
--		return 0;
--	}
--
--	ram_ptable = smem_get(smem, -1, SMEM_USABLE_RAM_PARTITION_TABLE, &size);
--
--	if (!ram_ptable) {
--		printf("Failed to find SMEM partition.\n");
--		return -ENODEV;
--	}
--
--	/* Check validy of RAM */
--	for (i = 0; i < RAM_NUM_PART_ENTRIES; i++) {
--		p = &ram_ptable->parts[i];
--		if (p->category == CATEGORY_SDRAM && p->type == TYPE_SYSMEM) {
--			bank_start[count] = p->start;
--			bank_size[count] = p->size;
--			debug("Detected memory bank %u: start: 0x%llx size: 0x%llx\n",
--					count, p->start, p->size);
--			count++;
--		}
--	}
--
--	if (!count) {
--		printf("Failed to detect any memory bank\n");
--		return -ENODEV;
--	}
--
--	ret = fdt_fixup_memory_banks(blob, bank_start, bank_size, count);
--	if (ret)
--		return ret;
--
--	return 0;
--}
-diff --git a/arch/arm/mach-snapdragon/include/mach/dram.h b/arch/arm/mach-snapdragon/include/mach/dram.h
-deleted file mode 100644
-index 0a9eedda414c..000000000000
---- a/arch/arm/mach-snapdragon/include/mach/dram.h
-+++ /dev/null
-@@ -1,12 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0+ */
--/*
-- * Snapdragon DRAM
-- * Copyright (C) 2018 Ramon Fried <ramon.fried@gmail.com>
-- */
--
--#ifndef DRAM_H
--#define DRAM_H
--
--int msm_fixup_memory(void *blob);
--
--#endif
-diff --git a/arch/arm/mach-snapdragon/include/mach/misc.h b/arch/arm/mach-snapdragon/include/mach/misc.h
-deleted file mode 100644
-index c60e3e472470..000000000000
---- a/arch/arm/mach-snapdragon/include/mach/misc.h
-+++ /dev/null
-@@ -1,13 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0+ */
--/*
-- * Snapdragon DRAM
-- * Copyright (C) 2018 Ramon Fried <ramon.fried@gmail.com>
-- */
--
--#ifndef MISC_H
--#define MISC_H
--
--u32 msm_board_serial(void);
--void msm_generate_mac_addr(u8 *mac);
--
--#endif
-diff --git a/arch/arm/mach-snapdragon/misc.c b/arch/arm/mach-snapdragon/misc.c
-deleted file mode 100644
-index 7d452f4529b7..000000000000
---- a/arch/arm/mach-snapdragon/misc.c
-+++ /dev/null
-@@ -1,55 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+
--/*
-- * Miscellaneous Snapdragon functionality
-- *
-- * (C) Copyright 2018 Ramon Fried <ramon.fried@gmail.com>
-- *
-- */
--
--#include <common.h>
--#include <mmc.h>
--#include <asm/arch/misc.h>
--#include <asm/unaligned.h>
--
--/* UNSTUFF_BITS macro taken from Linux Kernel: drivers/mmc/core/sd.c */
--#define UNSTUFF_BITS(resp, start, size) \
--	({ \
--		const int __size = size; \
--		const u32 __mask = (__size < 32 ? 1 << __size : 0) - 1;	\
--		const int __off = 3 - ((start) / 32); \
--		const int __shft = (start) & 31; \
--		u32 __res; \
--					\
--		__res = resp[__off] >> __shft; \
--		if (__size + __shft > 32) \
--			__res |= resp[__off - 1] << ((32 - __shft) % 32); \
--		__res & __mask;	\
--	})
--
--u32 msm_board_serial(void)
--{
--	struct mmc *mmc_dev;
--
--	mmc_dev = find_mmc_device(0);
--	if (!mmc_dev)
--		return 0;
--
--	if (mmc_init(mmc_dev))
--		return 0;
--
--	return UNSTUFF_BITS(mmc_dev->cid, 16, 32);
--}
--
--void msm_generate_mac_addr(u8 *mac)
--{
--	/* use locally adminstrated pool */
--	mac[0] = 0x02;
--	mac[1] = 0x00;
--
--	/*
--	 * Put the 32-bit serial number in the last 32-bit of the MAC address.
--	 * Use big endian order so it is consistent with the serial number
--	 * written as a hexadecimal string, e.g. 0x1234abcd -> 02:00:12:34:ab:cd
--	 */
--	put_unaligned_be32(msm_board_serial(), &mac[2]);
--}
-diff --git a/board/qualcomm/dragonboard410c/Makefile b/board/qualcomm/dragonboard410c/Makefile
-index 1b99c8b0efef..189f83813325 100644
---- a/board/qualcomm/dragonboard410c/Makefile
-+++ b/board/qualcomm/dragonboard410c/Makefile
-@@ -2,4 +2,4 @@
- #
- # (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
- 
--obj-y	:= dragonboard410c.o
-+obj-y := dragonboard410c.o
-diff --git a/board/qualcomm/dragonboard410c/dragonboard410c.c b/board/qualcomm/dragonboard410c/dragonboard410c.c
-index 1adac07569ae..40b5448c6ef1 100644
---- a/board/qualcomm/dragonboard410c/dragonboard410c.c
-+++ b/board/qualcomm/dragonboard410c/dragonboard410c.c
-@@ -12,14 +12,13 @@
- #include <dm/pinctrl.h>
- #include <env.h>
- #include <init.h>
-+#include <mmc.h>
- #include <net.h>
- #include <usb.h>
- #include <asm/cache.h>
- #include <asm/global_data.h>
- #include <asm/gpio.h>
- #include <fdt_support.h>
--#include <asm/arch/dram.h>
--#include <asm/arch/misc.h>
- #include <linux/delay.h>
- 
- DECLARE_GLOBAL_DATA_PTR;
-@@ -55,6 +54,49 @@ int board_usb_init(int index, enum usb_init_type init)
- 	return 0;
- }
- 
-+/* UNSTUFF_BITS macro taken from Linux Kernel: drivers/mmc/core/sd.c */
-+#define UNSTUFF_BITS(resp, start, size) \
-+	({ \
-+		const int __size = size; \
-+		const u32 __mask = (__size < 32 ? 1 << __size : 0) - 1;	\
-+		const int __off = 3 - ((start) / 32); \
-+		const int __shft = (start) & 31; \
-+		u32 __res; \
-+					\
-+		__res = resp[__off] >> __shft; \
-+		if (__size + __shft > 32) \
-+			__res |= resp[__off - 1] << ((32 - __shft) % 32); \
-+		__res & __mask;	\
-+	})
++	ulong quirks = dev_get_driver_data(dev);
++	int ret = 0;
 +
-+static u32 msm_board_serial(void)
-+{
-+	struct mmc *mmc_dev;
-+
-+	mmc_dev = find_mmc_device(0);
-+	if (!mmc_dev)
++	/* Some PMICs don't like their GPIOs being configured */
++	if (quirks & QCOM_PMIC_QUIRK_READONLY)
 +		return 0;
-+
-+	if (mmc_init(mmc_dev))
-+		return 0;
-+
-+	return UNSTUFF_BITS(mmc_dev->cid, 16, 32);
-+}
-+
-+static void msm_generate_mac_addr(u8 *mac)
-+{
-+	/* use locally adminstrated pool */
-+	mac[0] = 0x02;
-+	mac[1] = 0x00;
-+
-+	/*
-+	 * Put the 32-bit serial number in the last 32-bit of the MAC address.
-+	 * Use big endian order so it is consistent with the serial number
-+	 * written as a hexadecimal string, e.g. 0x1234abcd -> 02:00:12:34:ab:cd
-+	 */
-+	put_unaligned_be32(msm_board_serial(), &mac[2]);
-+}
-+
- /* Check for vol- button - if pressed - stop autoboot */
- int misc_init_r(void)
- {
-@@ -103,8 +145,6 @@ int ft_board_setup(void *blob, struct bd_info *bd)
- {
- 	u8 mac[ARP_HLEN];
  
--	msm_fixup_memory(blob);
--
- 	if (!eth_env_get_enetaddr("wlanaddr", mac)) {
- 		msm_generate_mac_addr(mac);
- 	};
+ 	/* Disable the GPIO */
+ 	ret = pmic_clrsetbits(dev->parent, gpio_base + REG_EN_CTL,
+@@ -304,7 +318,7 @@ static int qcom_gpio_of_to_plat(struct udevice *dev)
+ static const struct udevice_id qcom_gpio_ids[] = {
+ 	{ .compatible = "qcom,pm8916-gpio" },
+ 	{ .compatible = "qcom,pm8994-gpio" },	/* 22 GPIO's */
+-	{ .compatible = "qcom,pm8998-gpio" },
++	{ .compatible = "qcom,pm8998-gpio", .data = QCOM_PMIC_QUIRK_READONLY },
+ 	{ .compatible = "qcom,pms405-gpio" },
+ 	{ }
+ };
 
 -- 
 2.43.1
