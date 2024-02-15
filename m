@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6EF5C48BC4
-	for <u-boot@archiver.kernel.org>; Thu, 15 Feb 2024 20:59:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A844EC4829E
+	for <u-boot@archiver.kernel.org>; Thu, 15 Feb 2024 20:59:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE5FB87F16;
-	Thu, 15 Feb 2024 21:53:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 56FEF87F74;
+	Thu, 15 Feb 2024 21:54:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="s+EElIqj";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="afFFSxQW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D3A6B87ED7; Thu, 15 Feb 2024 21:53:44 +0100 (CET)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id B54CC87ED7; Thu, 15 Feb 2024 21:53:47 +0100 (CET)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE15787E87
- for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 21:52:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 43ABE8718A
+ for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 21:52:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-411f165ef9bso11514855e9.0
- for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 12:52:50 -0800 (PST)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-41239bbab1aso58135e9.3
+ for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 12:52:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708030370; x=1708635170; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1708030377; x=1708635177; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=jaOEmBmvq0IW2fPkLymTvZcfR2OMib4p02N2iEvoup0=;
- b=s+EElIqj3JoYpd3hZXO3hBCpr80tzLa7ueWk2HgmL2qZYonYZVE0NLOdi6OCxY0v5R
- lVIH32Q7omdIG+5rcYo7hjhpXnS4xtpD8EMawwxqs9UDdMCvZLOYx2hA5sqpQc941vcZ
- 7+6D3vl/hLIHaVp4EDb2RXRGr++AewFT+dtC4YLNhvpR48igl/+fp062UxrMKRChNCcM
- Efr5/didNsGwgdPSxz5SUyM8aglFcD5q9Ixl6isc1XQN5cT7/ZjAJR4j/lkxmVowcS+W
- L/mvk66l+l9GC9+xuHBFHCWqDXXSNV8040qN3X5YI5bcHR/LF7v2sPlQT6uR4+K/bT3H
- U0bQ==
+ :reply-to; bh=aAgUaZ7u1D8eTt07EvcX8Y+mmPl9PlP3RYowakTJ+Mk=;
+ b=afFFSxQWFtY4KxfTh8Bq5fEwPRl6ohQND1tj/upC/0302enQJe8bXU3kVM5rh1Y0KE
+ ngFpQeB1JCYhDiedoMlJS/aYBgd6nwHe5VpoY90tRdJar99vDDt9G39GcK9W7mhulRKi
+ CRFOIathJPUFAYbAg0T/P6jR4Kue6RgNuxjybmj4oPdJyzTP99Fr8vQUXSKwB5CvYLoq
+ 9/+aIoZnpjy/651TW8LzDTnz5cRHaSpTLdChUZZLbjxDk0axj3f6XVcFiVNbt2lKi7Tn
+ y0D0L7WCmmyp1aUjO1uEZ/6SId1ygh3d+KXN2dzC/bHWBCJiFSCFi1yI3TwXaNnuxxI2
+ BDBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708030370; x=1708635170;
+ d=1e100.net; s=20230601; t=1708030377; x=1708635177;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jaOEmBmvq0IW2fPkLymTvZcfR2OMib4p02N2iEvoup0=;
- b=uyp+h3q1wkU3FNpHRuwaCTuE2L1qKwPLMvLwdrLBs45+IEmOO+fCbHz606MJyhWgi2
- HR7nXzDWHLlVKU8OEcDPPevNVrT6GoP5QoiWXtfyb01x8OhlnOeMWTSW7ZRH9+bhFMyN
- LqEeP83T4WaFPMjayY7of4Iu0wRaZ3yx4xW1mCgfRZ/pcETct626fHx4KvZ7kKudc7nZ
- SIaNLXMYdjU63fncvtGqlYFJgihTXpsSkfOyjVSSuuW5v3CUrxyGrgvWH9s0S+40sXNe
- DVawA4qpzowZPaKIZ1U9M9XWOjPocalnnBxXg2q+G5Qht5Fp8NPCRLu4a0tCDC8kupxK
- fofQ==
+ bh=aAgUaZ7u1D8eTt07EvcX8Y+mmPl9PlP3RYowakTJ+Mk=;
+ b=iVkBUr7NRJ94rOJSdM6fFUv9Bs++wctYBvin4XVn0bG8dHMgPtwPrurN9lxhguL4fW
+ 2vgf+3gurzUEsCOuDfHBen9Rg1VJLFLadSxoPNETIY/JDVZs9ybEeLkrHH82VJ59OU97
+ +5pg041kHFNiT1V37CEfcw+r/Z1h/XabTeW9or8yMs9JttwzKwQSiAb+Cp+Cp/bUVtgh
+ FUeMvgrrP4ss92NB91OeXPpRdy4Kxua78huIfc1qPg8xqhkO8L1ZkuhZ+ocaQIbPO/HK
+ qsquMYVQZHUW3dEXgPdQNIbezVincP0fgVKDW49o/T7oH+xxVaYXKbaUgllX+ddrK4g7
+ iwjQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX59xr6koJ7FjoTMYb7eDh8b4dfXxXD8i1pkOjXte5zeVFWH/2ysI32Ulr/sVPkiEt9uQOa0R0kAPMjAcgW8pXwQXB2Vg==
-X-Gm-Message-State: AOJu0Yy/WorP/An8M7656KMHC/hOaU/w2OqJkcG4Bp8wD9LFIP6UvO6i
- euv52qrplc36gBt6AvQAPJjaPP7TbhKvr3ZD6/fjFnuR/ii3I2VvX/hpq1wbg+DXnToAUSmx+C7
- p
-X-Google-Smtp-Source: AGHT+IHAJQc5NOLvuwgA1i5T7+rf7ywvraylxYumCL68ejacCD1zFXYcv/DedmJLlliq5V7ESnjOdg==
-X-Received: by 2002:a05:600c:3150:b0:412:2788:beee with SMTP id
- h16-20020a05600c315000b004122788beeemr1457061wmo.4.1708030369894; 
- Thu, 15 Feb 2024 12:52:49 -0800 (PST)
+ AJvYcCVPb1TYfjhukiIdYtKT6wK0USoxvQLJEI17IPCvAjkwyR2IqawWgl+6QmSSR3zAFb4yBf11ufSb/8ZTXs6VRqsKcpkavw==
+X-Gm-Message-State: AOJu0YwyGhRfrIqKWUPseIOzue24g1w6sr+peG9Rx2Vas3WAtHBCSeWR
+ NT15rbV7EZK8diD7yh1jWM8wVc73XG08fb9IEBxMeuEYXlGSVNom4PYVooYaXz86ap0S5FbQ+aK
+ Z
+X-Google-Smtp-Source: AGHT+IHhKJ7SHZ87jq2DnAULOt/STB4fDF0/96oYjrKbg+nDpHTw3+3JJNIf6aDCvJf+jzaEtW7bIw==
+X-Received: by 2002:a05:600c:4691:b0:410:cbc5:b4ab with SMTP id
+ p17-20020a05600c469100b00410cbc5b4abmr2905777wmo.19.1708030376970; 
+ Thu, 15 Feb 2024 12:52:56 -0800 (PST)
 Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- e4-20020adfe384000000b0033cfa00e497sm194025wrm.64.2024.02.15.12.52.48
+ e4-20020adfe384000000b0033cfa00e497sm194025wrm.64.2024.02.15.12.52.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Feb 2024 12:52:49 -0800 (PST)
+ Thu, 15 Feb 2024 12:52:56 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Thu, 15 Feb 2024 20:52:43 +0000
-Subject: [PATCH v4 25/39] doc: board/qualcomm: document generic targets
+Date: Thu, 15 Feb 2024 20:52:49 +0000
+Subject: [PATCH v4 31/39] dts: msm8916: import PMIC dtsi files
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240215-b4-qcom-common-target-v4-25-ed06355c634a@linaro.org>
+Message-Id: <20240215-b4-qcom-common-target-v4-31-ed06355c634a@linaro.org>
 References: <20240215-b4-qcom-common-target-v4-0-ed06355c634a@linaro.org>
 In-Reply-To: <20240215-b4-qcom-common-target-v4-0-ed06355c634a@linaro.org>
 To: Neil Armstrong <neil.armstrong@linaro.org>, 
@@ -86,13 +86,13 @@ To: Neil Armstrong <neil.armstrong@linaro.org>,
  Stephan Gerhold <stephan@gerhold.net>
 Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
 X-Mailer: b4 0.13-dev-4bd13
-X-Developer-Signature: v=1; a=openpgp-sha256; l=13843;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=9340;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=HR0+HIiFVuU/z4T9wKrmfy0cwmAf5v27ir0GhwapG2Y=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtRzlW07g7JvdHU51Dr+2696e/dpuSszrPawLmXizPIO/
- r/UvZOto5SFQZCDQVZMkUX8xDLLprWX7TW2L7gAM4eVCWQIAxenAEyES5jhf+Art7rvC2ecu9Mb
- +GR6Wp3tsrlvcrbETVM21K4KuWwkf5qRYaH80bkXlfM5DcNPa8/utvJf97mjfdXOT1mzvWyszRg
- WGQIA
+ bh=XSpc+BGZ0g95PCxSI2C5ir0A0AmOuOlOfrlGqYM/Rqg=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtRzle2qtzt+5W2JqrvsOIm/V4U1zV1c8U3PPPNJOb0Gz
+ otm/JrUUcrCIMjBICumyCJ+Ypll09rL9hrbF1yAmcPKBDKEgYtTAC7yi+F/wZLEs12uE28XOkud
+ z2kuWLzWbs6mP6n/Axfvz2Nb0NT5npGh+9xi94uf8qpXrD33ILnv+F7e+9tmTW131Z6ydJ2/pGh
+ 9JAA=
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -111,491 +111,365 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Replace the board specific docs with a generic board.rst file which
-documents the build/boot process for the sdm845 and qcs404 boards now
-that the only differences are the DTB in use.
+Import the supporting pm8916.dtsi and msm8916-pm8916.dtsi files from
+upstream in preparation for switching boards over.
 
-At the same time, create a debugging page to document some useful
-snippets and tips for working with Qualcomm platforms.
+Taken from kernel tag v6.7
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- doc/board/qualcomm/board.rst     | 125 +++++++++++++++++++++++++++++
- doc/board/qualcomm/debugging.rst |  61 ++++++++++++++
- doc/board/qualcomm/index.rst     |   4 +-
- doc/board/qualcomm/qcs404.rst    |  79 ------------------
- doc/board/qualcomm/sdm845.rst    | 167 ---------------------------------------
- 5 files changed, 188 insertions(+), 248 deletions(-)
+ arch/arm/dts/msm8916-pm8916.dtsi | 157 ++++++++++++++++++++++++++++++++++
+ arch/arm/dts/pm8916.dtsi         | 178 +++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 335 insertions(+)
 
-diff --git a/doc/board/qualcomm/board.rst b/doc/board/qualcomm/board.rst
+diff --git a/arch/arm/dts/msm8916-pm8916.dtsi b/arch/arm/dts/msm8916-pm8916.dtsi
 new file mode 100644
-index 000000000000..4d793209f9e3
+index 000000000000..b1a7eafbee31
 --- /dev/null
-+++ b/doc/board/qualcomm/board.rst
-@@ -0,0 +1,125 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+.. sectionauthor:: Dzmitry Sankouski <dsankouski@gmail.com>
++++ b/arch/arm/dts/msm8916-pm8916.dtsi
+@@ -0,0 +1,157 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * msm8916-pm8916.dtsi describes common properties (e.g. regulator connections)
++ * that apply to most devices that make use of the MSM8916 SoC and PM8916 PMIC.
++ * Many regulators have a fixed purpose in the original reference design and
++ * were rarely re-used for different purposes. Devices that deviate from the
++ * typical reference design should not make use of this include and instead add
++ * the necessary properties in the board-specific device tree.
++ */
 +
-+Qualcomm generic boards
-+=======================
++#include "msm8916.dtsi"
++#include "pm8916.dtsi"
 +
-+About this
-+----------
-+This document describes how to build and run U-Boot for Qualcomm generic
-+boards. Right now the generic target supports the Snapdragon 845 SoC, however
-+it's expected to support more SoCs going forward.
++&camss {
++	vdda-supply = <&pm8916_l2>;
++};
 +
-+SDM845 - high-end qualcomm chip, introduced in late 2017.
-+Mostly used in flagship phones and tablets of 2018.
++&mdss_dsi0 {
++	vdda-supply = <&pm8916_l2>;
++	vddio-supply = <&pm8916_l6>;
++};
 +
-+The current boot flow support loading u-boot as an Android boot image via
-+Qualcomm's UEFI-based ABL (Android) Bootloader. The DTB used by U-Boot will
-+be appended to the U-Boot image the same way as when booting Linux. U-Boot
-+will then retrieve the DTB during init. This way the memory layout and KASLR
-+offset will be populated by ABL.
++&mdss_dsi0_phy {
++	vddio-supply = <&pm8916_l6>;
++};
 +
-+Installation
-+------------
-+Build
-+^^^^^
++&mpss {
++	pll-supply = <&pm8916_l7>;
++};
 +
-+	$ ./tools/buildman/buildman -o .output qcom
++&pm8916_codec {
++	vdd-cdc-io-supply = <&pm8916_l5>;
++	vdd-cdc-tx-rx-cx-supply = <&pm8916_l5>;
++	vdd-micbias-supply = <&pm8916_l13>;
++};
 +
-+This will build ``.output/u-boot-nodtb.bin`` using the ``qcom_defconfig``.
++&sdhc_1 {
++	vmmc-supply = <&pm8916_l8>;
++	vqmmc-supply = <&pm8916_l5>;
++};
 +
-+Generate FIT image (optional)
-+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-+See doc/uImage.FIT for more details
++&sdhc_2 {
++	vmmc-supply = <&pm8916_l11>;
++	vqmmc-supply = <&pm8916_l12>;
++};
 +
-+Pack android boot image
-+^^^^^^^^^^^^^^^^^^^^^^^
-+We'll assemble android boot image with ``u-boot-nodtb.bin`` instead of linux kernel,
-+and FIT image instead of ``initramfs``. Android bootloader expect gzipped kernel
-+with appended dtb, so let's mimic linux to satisfy stock bootloader.
++&usb_hs_phy {
++	v1p8-supply = <&pm8916_l7>;
++	v3p3-supply = <&pm8916_l13>;
++};
 +
-+Boards
-+------
++&wcnss {
++	vddpx-supply = <&pm8916_l7>;
++};
 +
-+starqlte
-+^^^^^^^^
++&wcnss_iris {
++	vddxo-supply = <&pm8916_l7>;
++	vddrfa-supply = <&pm8916_s3>;
++	vddpa-supply = <&pm8916_l9>;
++	vdddig-supply = <&pm8916_l5>;
++};
 +
-+The starqltechn is a production board for Samsung S9 (SM-G9600) phone,
-+based on the Qualcomm SDM845 SoC.
++&rpm_requests {
++	pm8916_rpm_regulators: regulators {
++		compatible = "qcom,rpm-pm8916-regulators";
++		vdd_l1_l2_l3-supply = <&pm8916_s3>;
++		vdd_l4_l5_l6-supply = <&pm8916_s4>;
++		vdd_l7-supply = <&pm8916_s4>;
 +
-+This device is supported by the common qcom_defconfig.
++		/* pm8916_s1 is managed by rpmpd (MSM8916_VDDCX) */
 +
-+The DTB is called "sdm845-samsung-starqltechn.dtb"
++		pm8916_s3: s3 {
++			regulator-min-microvolt = <1250000>;
++			regulator-max-microvolt = <1350000>;
++			regulator-always-on; /* Needed for L2 */
++		};
 +
-+More information can be found on the `Samsung S9 page`_.
++		pm8916_s4: s4 {
++			regulator-min-microvolt = <1850000>;
++			regulator-max-microvolt = <2150000>;
++			regulator-always-on; /* Needed for L5/L7 */
++		};
 +
-+dragonboard845c
-+^^^^^^^^^^^^^^^
++		/*
++		 * Some of the regulators are unused or managed by another
++		 * processor (e.g. the modem). We should still define nodes for
++		 * them to ensure the vote from the application processor can be
++		 * dropped in case the regulators are already on during boot.
++		 *
++		 * The labels for these nodes are omitted on purpose because
++		 * boards should configure a proper voltage before using them.
++		 */
++		l1 {};
 +
-+The dragonboard845c is a Qualcomm Robotics RB3 Development Platform, based on
-+the Qualcomm SDM845 SoC.
++		pm8916_l2: l2 {
++			regulator-min-microvolt = <1200000>;
++			regulator-max-microvolt = <1200000>;
++			regulator-always-on; /* Needed for LPDDR RAM */
++		};
 +
-+This device is supported by the common qcom_defconfig
++		/* pm8916_l3 is managed by rpmpd (MSM8916_VDDMX) */
 +
-+The DTB is called "sdm845-db845c.dtb"
++		l4 {};
 +
-+More information can be found on the `DragonBoard 845c page`_.
++		pm8916_l5: l5 {
++			regulator-min-microvolt = <1800000>;
++			regulator-max-microvolt = <1800000>;
++			regulator-always-on; /* Needed for most digital I/O */
++		};
 +
-+qcs404-evb
-+^^^^^^^^^^
++		pm8916_l6: l6 {
++			regulator-min-microvolt = <1800000>;
++			regulator-max-microvolt = <1800000>;
++		};
 +
-+The QCS404 EvB is a Qualcomm Development Platform, based on the Qualcomm QCS404 SoC.
++		pm8916_l7: l7 {
++			regulator-min-microvolt = <1800000>;
++			regulator-max-microvolt = <1800000>;
++			regulator-always-on; /* Needed for CPU PLL */
++		};
 +
-+This device is supported by the common qcom_defconfig
++		pm8916_l8: l8 {
++			regulator-min-microvolt = <2900000>;
++			regulator-max-microvolt = <2900000>;
++		};
 +
-+The DTB is called "qcs404-evb-4000.dtb"
++		pm8916_l9: l9 {
++			regulator-min-microvolt = <3300000>;
++			regulator-max-microvolt = <3300000>;
++		};
 +
-+Building steps
-+--------------
++		l10 {};
 +
-+Steps:
++		pm8916_l11: l11 {
++			regulator-min-microvolt = <2950000>;
++			regulator-max-microvolt = <2950000>;
++			regulator-allow-set-load;
++			regulator-system-load = <200000>;
++		};
 +
-+- Build u-boot
++		pm8916_l12: l12 {
++			regulator-min-microvolt = <1800000>;
++			regulator-max-microvolt = <2950000>;
++		};
 +
-+As above::
++		pm8916_l13: l13 {
++			regulator-min-microvolt = <3075000>;
++			regulator-max-microvolt = <3075000>;
++		};
 +
-+	./tools/buildman/buildman -o .output qcom
-+
-+Or for db410c (and other boards not supported by the generic target)::
-+
-+	make CROSS_COMPILE=aarch64-linux-gnu- O=.output dragonboard410c_defconfig
-+	make O=.output -j$(nproc)
-+
-+- gzip u-boot::
-+
-+	gzip u-boot-nodtb.bin
-+
-+- Append dtb to gzipped u-boot::
-+
-+	cat u-boot-nodtb.bin.gz arch/arm/dts/your-board.dtb > u-boot-nodtb.bin.gz-dtb
-+
-+- If you chose to build a FIT image, A ``qcom.its`` file can be found in ``board/qualcomm/generic/``
-+  directory. It expects a folder as ``qcom_imgs/`` in the main directory containing pre-built kernel,
-+  dts and ramdisk images. See ``qcom.its`` for full path to images::
-+
-+	mkimage -f qcom.its qcom.itb
-+
-+- Now we've got everything to build android boot image::
-+
-+	mkbootimg --kernel u-boot-nodtb.bin.gz-dtb --ramdisk db845c.itb \
-+	--output boot.img --pagesize 4096 --base 0x80000000
-+
-+Or with no FIT image::
-+
-+	mkbootimg --kernel u-boot-nodtb.bin.gz-dtb \
-+	--output boot.img --pagesize 4096 --base 0x80000000
-+
-+- Flash boot.img using fastboot and erase dtbo to avoid conflicts with our DTB:
-+
-+  .. code-block:: bash
-+
-+	fastboot flash boot boot.img
-+	fastboot erase dtbo
-+
-+.. _Samsung S9 page: https://en.wikipedia.org/wiki/Samsung_Galaxy_S9
-+.. _DragonBoard 845c page: https://www.96boards.org/product/rb3-platform/
-diff --git a/doc/board/qualcomm/debugging.rst b/doc/board/qualcomm/debugging.rst
++		l14 {};
++		l15 {};
++		l16 {};
++		l17 {};
++		l18 {};
++	};
++};
+diff --git a/arch/arm/dts/pm8916.dtsi b/arch/arm/dts/pm8916.dtsi
 new file mode 100644
-index 000000000000..1c35d1909d12
+index 000000000000..f4de86787743
 --- /dev/null
-+++ b/doc/board/qualcomm/debugging.rst
-@@ -0,0 +1,61 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+.. sectionauthor:: Caleb Connolly <caleb.connolly@linaro.org>
++++ b/arch/arm/dts/pm8916.dtsi
+@@ -0,0 +1,178 @@
++// SPDX-License-Identifier: GPL-2.0
++#include <dt-bindings/iio/qcom,spmi-vadc.h>
++#include <dt-bindings/input/linux-event-codes.h>
++#include <dt-bindings/interrupt-controller/irq.h>
++#include <dt-bindings/spmi/spmi.h>
 +
-+Qualcomm debugging
-+==================
++&spmi_bus {
 +
-+About this
-+----------
++	pm8916_0: pmic@0 {
++		compatible = "qcom,pm8916", "qcom,spmi-pmic";
++		reg = <0x0 SPMI_USID>;
++		#address-cells = <1>;
++		#size-cells = <0>;
 +
-+This page describes how to enable early UART and other debugging techniques
-+for Qualcomm boards.
++		pon@800 {
++			compatible = "qcom,pm8916-pon";
++			reg = <0x800>;
++			mode-bootloader = <0x2>;
++			mode-recovery = <0x1>;
 +
-+Enable debug UART
-+-----------------
++			pwrkey {
++				compatible = "qcom,pm8941-pwrkey";
++				interrupts = <0x0 0x8 0 IRQ_TYPE_EDGE_BOTH>;
++				debounce = <15625>;
++				bias-pull-up;
++				linux,code = <KEY_POWER>;
++			};
 +
-+Newer boards (SDM845 and newer, those with GENI SE UART)
-+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
++			pm8916_resin: resin {
++				compatible = "qcom,pm8941-resin";
++				interrupts = <0x0 0x8 1 IRQ_TYPE_EDGE_BOTH>;
++				debounce = <15625>;
++				bias-pull-up;
++				status = "disabled";
++			};
 +
-+Open ``configs/qcom_defconfig`` and add the following snippet to the bottom:
++			watchdog {
++				compatible = "qcom,pm8916-wdt";
++				interrupts = <0x0 0x8 6 IRQ_TYPE_EDGE_RISING>;
++				timeout-sec = <60>;
++			};
++		};
 +
-+	CONFIG_BAUDRATE=115200
++		pm8916_usbin: usb-detect@1300 {
++			compatible = "qcom,pm8941-misc";
++			reg = <0x1300>;
++			interrupts = <0x0 0x13 1 IRQ_TYPE_EDGE_BOTH>;
++			interrupt-names = "usb_vbus";
++			status = "disabled";
++		};
 +
-+	# Uncomment to enable UART pre-relocation
-+	CONFIG_DEBUG_UART=y
-+	CONFIG_DEBUG_UART_ANNOUNCE=y
-+	# This is the address of the debug-uart peripheral
-+	# The value here is for SDM845, other platforms will vary
-+	CONFIG_DEBUG_UART_BASE=0xa84000
-+	# Boards older than ~2018 pre-date the GENI driver and unfortunately
-+	# aren't supported here
-+	CONFIG_DEBUG_UART_MSM_GENI=y
-+	# For sdm845 this is the UART clock rate
-+	CONFIG_DEBUG_UART_CLOCK=7372800
-+	# Most newer boards have an oversampling value of 16 instead
-+	# of 32, they need the clock rate to be doubled
-+	#CONFIG_DEBUG_UART_CLOCK=14745600
++		pm8916_temp: temp-alarm@2400 {
++			compatible = "qcom,spmi-temp-alarm";
++			reg = <0x2400>;
++			interrupts = <0 0x24 0 IRQ_TYPE_EDGE_RISING>;
++			io-channels = <&pm8916_vadc VADC_DIE_TEMP>;
++			io-channel-names = "thermal";
++			#thermal-sensor-cells = <0>;
++		};
 +
-+Then build as normal (don't forget to ``make qcom_defconfig``` again).
++		pm8916_vadc: adc@3100 {
++			compatible = "qcom,spmi-vadc";
++			reg = <0x3100>;
++			interrupts = <0x0 0x31 0x0 IRQ_TYPE_EDGE_RISING>;
++			#address-cells = <1>;
++			#size-cells = <0>;
++			#io-channel-cells = <1>;
 +
-+Older boards (db410c and db820c)
-+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
++			channel@0 {
++				reg = <VADC_USBIN>;
++				qcom,pre-scaling = <1 10>;
++			};
++			channel@7 {
++				reg = <VADC_VSYS>;
++				qcom,pre-scaling = <1 3>;
++			};
++			channel@8 {
++				reg = <VADC_DIE_TEMP>;
++			};
++			channel@9 {
++				reg = <VADC_REF_625MV>;
++			};
++			channel@a {
++				reg = <VADC_REF_1250MV>;
++			};
++			channel@e {
++				reg = <VADC_GND_REF>;
++			};
++			channel@f {
++				reg = <VADC_VDD_VADC>;
++			};
++		};
 +
-+Open ``configs/dragonboard<BOARD>_defconfig``
++		rtc@6000 {
++			compatible = "qcom,pm8941-rtc";
++			reg = <0x6000>, <0x6100>;
++			reg-names = "rtc", "alarm";
++			interrupts = <0x0 0x61 0x1 IRQ_TYPE_EDGE_RISING>;
++		};
 +
-+	CONFIG_BAUDRATE=115200
-+	CONFIG_DEBUG_UART=y
-+	CONFIG_DEBUG_UART_ANNOUNCE=y
-+	# db410c - 0x78b0000
-+	# db820c - 0x75b0000
-+	CONFIG_DEBUG_UART_BASE=0x75b0000
-+	CONFIG_DEBUG_UART_MSM=y
-+	CONFIG_DEBUG_UART_CLOCK=7372800
-+	#CONFIG_DEBUG_UART_SKIP_INIT=y
++		pm8916_mpps: mpps@a000 {
++			compatible = "qcom,pm8916-mpp", "qcom,spmi-mpp";
++			reg = <0xa000>;
++			gpio-controller;
++			#gpio-cells = <2>;
++			gpio-ranges = <&pm8916_mpps 0 0 4>;
++			interrupt-controller;
++			#interrupt-cells = <2>;
++		};
 +
-+	CONFIG_LOG=y
-+	CONFIG_HEXDUMP=y
-+	CONFIG_CMD_LOG=y
-+	CONFIG_LOG_MAX_LEVEL=9
-+	CONFIG_LOG_DEFAULT_LEVEL=9
-+	CONFIG_LOGLEVEL=9
++		pm8916_gpios: gpio@c000 {
++			compatible = "qcom,pm8916-gpio", "qcom,spmi-gpio";
++			reg = <0xc000>;
++			gpio-controller;
++			gpio-ranges = <&pm8916_gpios 0 0 4>;
++			#gpio-cells = <2>;
++			interrupt-controller;
++			#interrupt-cells = <2>;
++		};
++	};
 +
-diff --git a/doc/board/qualcomm/index.rst b/doc/board/qualcomm/index.rst
-index 0f9c4299569a..4955274a39bc 100644
---- a/doc/board/qualcomm/index.rst
-+++ b/doc/board/qualcomm/index.rst
-@@ -7,5 +7,5 @@ Qualcomm
-    :maxdepth: 2
- 
-    dragonboard410c
--   sdm845
--   qcs404
-+   board
-+   debugging
-diff --git a/doc/board/qualcomm/qcs404.rst b/doc/board/qualcomm/qcs404.rst
-deleted file mode 100644
-index 0cb71d97c987..000000000000
---- a/doc/board/qualcomm/qcs404.rst
-+++ /dev/null
-@@ -1,79 +0,0 @@
--.. SPDX-License-Identifier: GPL-2.0+
--.. sectionauthor:: Sumit Garg <sumit.garg@linaro.org>
--
--QCS404 EVB
--==========
--
--About this
------------
--This document describes the information about Qualcomm QCS404 evaluation board
--and it's usage steps.
--
--The current boot flow support loading u-boot as an Android boot image via
--Qualcomm's UEFI-based ABL (Android) Bootloader.
--
--Installation
--------------
--Build
--^^^^^
--Setup ``CROSS_COMPILE`` for aarch64 and build U-Boot for your board::
--
--	$ export CROSS_COMPILE=<aarch64 toolchain prefix>
--	$ make qcs404evb_defconfig
--	$ make
--
--This will build ``u-boot.bin`` in the configured output directory.
--
--Generate FIT image
--^^^^^^^^^^^^^^^^^^
--A ``qcs404.its`` file can be found in ``board/qualcomm/qcs404-evb/`` directory.
--It expects a folder as ``qcs404_imgs/`` in the main directory containing
--pre-built kernel, dts and ramdisk images. See ``qcs404.its`` for full path to
--images.
--
--- Build FIT image::
--
--	mkimage -f qcs404-evb.its qcs404-evb.itb
--
--Pack android boot image
--^^^^^^^^^^^^^^^^^^^^^^^
--We'll assemble android boot image with ``u-boot.bin`` instead of linux kernel,
--and FIT image instead of ``initramfs``. Android bootloader expect gzipped kernel
--with appended dtb, so let's mimic linux to satisfy stock bootloader:
--
--- create dump dtb::
--
--	workdir=/tmp/prepare_payload
--	mkdir -p "$workdir"
--	cd "$workdir"
--	mock_dtb="$workdir"/payload_mock.dtb
--
--	dtc -I dts -O dtb -o "$mock_dtb" << EOF
--	/dts-v1/;
--	/ {
--		model = "Qualcomm Technologies, Inc. QCS404 EVB 4000";
--		compatible = "qcom,qcs404-evb-4000", "qcom,qcs404-evb", "qcom,qcs404";
--
--		#address-cells = <2>;
--		#size-cells = <2>;
--
--		memory@80000000 {
--			device_type = "memory";
--			/* We expect the bootloader to fill in the size */
--			reg = <0 0x80000000 0 0>;
--		};
--
--		chosen { };
--	};
--	EOF
--
--- gzip u-boot ``gzip u-boot.bin``
--- append dtb to gzipped u-boot: ``cat u-boot.bin.gz "$mock_dtb" > u-boot.bin.gz-dtb``
--
--Now we've got everything to build android boot image:::
--
--	mkbootimg --kernel u-boot.bin.gz-dtb \
--	--ramdisk qcs404-evb.itb --pagesize 4096 \
--	--base 0x80000000 --output boot.img
--
--Flash image on qcs404-evb using fastboot method.
-diff --git a/doc/board/qualcomm/sdm845.rst b/doc/board/qualcomm/sdm845.rst
-deleted file mode 100644
-index a65f00df39f5..000000000000
---- a/doc/board/qualcomm/sdm845.rst
-+++ /dev/null
-@@ -1,167 +0,0 @@
--.. SPDX-License-Identifier: GPL-2.0+
--.. sectionauthor:: Dzmitry Sankouski <dsankouski@gmail.com>
--
--Snapdragon 845
--==============
--
--About this
------------
--
--This document describes the information about Qualcomm Snapdragon 845
--supported boards and it's usage steps.
--
--SDM845 - hi-end qualcomm chip, introduced in late 2017.
--Mostly used in flagship phones and tablets of 2018.
--
--The current boot flow support loading u-boot as an Android boot image via
--Qualcomm's UEFI-based ABL (Android) Bootloader.
--
--Installation
--------------
--
--Build
--^^^^^
--
--Setup ``CROSS_COMPILE`` for aarch64 and build U-Boot for your board::
--
--	$ export CROSS_COMPILE=<aarch64 toolchain prefix>
--	$ make <your board name here, see Boards section>_defconfig
--	$ make
--
--This will build ``u-boot.bin`` in the configured output directory.
--
--Generate FIT image
--^^^^^^^^^^^^^^^^^^
--
--See doc/uImage.FIT for more details
--
--Pack android boot image
--^^^^^^^^^^^^^^^^^^^^^^^
--
--We'll assemble android boot image with ``u-boot.bin`` instead of linux kernel,
--and FIT image instead of ``initramfs``. Android bootloader expect gzipped kernel
--with appended dtb, so let's mimic linux to satisfy stock bootloader.
--
--Boards
--------
--
--starqlte
--^^^^^^^^
--
--The starqltechn is a production board for Samsung S9 (SM-G9600) phone,
--based on the Qualcomm SDM845 SoC.
--
--Steps:
--
--- Build u-boot::
--
--	$ export CROSS_COMPILE=<aarch64 toolchain prefix>
--	$ make starqltechn_defconfig
--	$ make
--
--- Create dump dtb::
--
--	workdir=/tmp/prepare_payload
--	mkdir -p "$workdir"
--	cd "$workdir"
--	mock_dtb="$workdir"/payload_mock.dtb
--
--	dtc -I dts -O dtb -o "$mock_dtb" << EOF
--	/dts-v1/;
--	/ {
--		memory {
--			/* We expect the bootloader to fill in the size */
--			reg = <0 0 0 0>;
--		};
--
--		chosen { };
--	};
--	EOF
--
--- gzip u-boot::
--
--	gzip u-boot.bin
--
--- Append dtb to gzipped u-boot::
--
--	cat u-boot.bin.gz "$mock_dtb" > u-boot.bin.gz-dtb
--
--- Now we've got everything to build android boot image::
--
--	mkbootimg --base 0x0 --kernel_offset 0x00008000 \
--	--ramdisk_offset 0x02000000 --tags_offset 0x01e00000 \
--	--pagesize 4096 --second_offset 0x00f00000 \
--	--ramdisk "$fit_image" \
--	--kernel u-boot.bin.gz-dtb \
--	-o boot.img
--
--- Flash image with your phone's flashing method.
--
--More information can be found on the `Samsung S9 page`_.
--
--dragonboard845c
--^^^^^^^^^^^^^^^
--
--The dragonboard845c is a Qualcomm Robotics RB3 Development Platform, based on
--the Qualcomm SDM845 SoC.
--
--Steps:
--
--- Build u-boot::
--
--	$ export CROSS_COMPILE=<aarch64 toolchain prefix>
--	$ make dragonboard845c_defconfig
--	$ make
--
--- Create dummy dtb::
--
--	workdir=/tmp/prepare_payload
--	mkdir -p "$workdir"
--	mock_dtb="$workdir"/payload_mock.dtb
--
--	dtc -I dts -O dtb -o "$mock_dtb" << EOF
--	/dts-v1/;
--	/ {
--		#address-cells = <2>;
--		#size-cells = <2>;
--
--		memory@80000000 {
--			device_type = "memory";
--			/* We expect the bootloader to fill in the size */
--			reg = <0 0x80000000 0 0>;
--		};
--
--		chosen { };
--	};
--	EOF
--
--- gzip u-boot::
--
--	gzip u-boot.bin
--
--- Append dtb to gzipped u-boot::
--
--	 cat u-boot.bin.gz "$mock_dtb" > u-boot.bin.gz-dtb
--
--- A ``db845c.its`` file can be found in ``board/qualcomm/dragonboard845c/``
--  directory. It expects a folder as ``db845c_imgs/`` in the main directory
--  containing pre-built kernel, dts and ramdisk images. See ``db845c.its``
--  for full path to images::
--
--	mkimage -f db845c.its db845c.itb
--
--- Now we've got everything to build android boot image::
--
--	mkbootimg --kernel u-boot.bin.gz-dtb --ramdisk db845c.itb \
--	--output boot.img --pagesize 4096 --base 0x80000000
--
--- Flash boot.img using db845c fastboot method:
--
--  .. code-block:: bash
--
--      sudo fastboot flash boot boot.img
--
--More information can be found on the `DragonBoard 845c page`_.
--
--.. _Samsung S9 page: https://en.wikipedia.org/wiki/Samsung_Galaxy_S9
--.. _DragonBoard 845c page: https://www.96boards.org/product/rb3-platform/
++	pm8916_1: pmic@1 {
++		compatible = "qcom,pm8916", "qcom,spmi-pmic";
++		reg = <0x1 SPMI_USID>;
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		pm8916_pwm: pwm {
++			compatible = "qcom,pm8916-pwm";
++
++			#pwm-cells = <2>;
++
++			status = "disabled";
++		};
++
++		pm8916_vib: vibrator@c000 {
++			compatible = "qcom,pm8916-vib";
++			reg = <0xc000>;
++			status = "disabled";
++		};
++
++		pm8916_codec: audio-codec@f000 {
++			compatible = "qcom,pm8916-wcd-analog-codec";
++			reg = <0xf000>;
++			interrupt-parent = <&spmi_bus>;
++			interrupts = <0x1 0xf0 0x0 IRQ_TYPE_NONE>,
++				     <0x1 0xf0 0x1 IRQ_TYPE_NONE>,
++				     <0x1 0xf0 0x2 IRQ_TYPE_NONE>,
++				     <0x1 0xf0 0x3 IRQ_TYPE_NONE>,
++				     <0x1 0xf0 0x4 IRQ_TYPE_NONE>,
++				     <0x1 0xf0 0x5 IRQ_TYPE_NONE>,
++				     <0x1 0xf0 0x6 IRQ_TYPE_NONE>,
++				     <0x1 0xf0 0x7 IRQ_TYPE_NONE>,
++				     <0x1 0xf1 0x0 IRQ_TYPE_NONE>,
++				     <0x1 0xf1 0x1 IRQ_TYPE_NONE>,
++				     <0x1 0xf1 0x2 IRQ_TYPE_NONE>,
++				     <0x1 0xf1 0x3 IRQ_TYPE_NONE>,
++				     <0x1 0xf1 0x4 IRQ_TYPE_NONE>,
++				     <0x1 0xf1 0x5 IRQ_TYPE_NONE>;
++			interrupt-names = "cdc_spk_cnp_int",
++					  "cdc_spk_clip_int",
++					  "cdc_spk_ocp_int",
++					  "mbhc_ins_rem_det1",
++					  "mbhc_but_rel_det",
++					  "mbhc_but_press_det",
++					  "mbhc_ins_rem_det",
++					  "mbhc_switch_int",
++					  "cdc_ear_ocp_int",
++					  "cdc_hphr_ocp_int",
++					  "cdc_hphl_ocp_det",
++					  "cdc_ear_cnp_int",
++					  "cdc_hphr_cnp_int",
++					  "cdc_hphl_cnp_int";
++			#sound-dai-cells = <1>;
++			status = "disabled";
++		};
++	};
++};
 
 -- 
 2.43.1
