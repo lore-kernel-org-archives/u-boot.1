@@ -4,73 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C33CC4829E
-	for <u-boot@archiver.kernel.org>; Thu, 15 Feb 2024 21:10:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A34A7C4829E
+	for <u-boot@archiver.kernel.org>; Thu, 15 Feb 2024 21:25:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B626F87E20;
-	Thu, 15 Feb 2024 22:10:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D6CA087E1B;
+	Thu, 15 Feb 2024 22:24:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jmGA5++v";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="U7WcfcS3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B52F487E2C; Thu, 15 Feb 2024 22:10:37 +0100 (CET)
-Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
- [IPv6:2607:f8b0:4864:20::112a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B8AC787DF4; Thu, 15 Feb 2024 22:24:55 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 199B587DEC
- for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 22:10:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 066B787C83
+ for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 22:24:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112a.google.com with SMTP id
- 00721157ae682-607d5af59feso8619257b3.3
- for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 13:10:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1708031427; x=1708636227; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=+nbxA+sDkZ5llZO7sbARGMHAuWT8AplLeJ6kmT8uptM=;
- b=jmGA5++vTn3knqBIkyeaNY0SmhLKRasysVgRdJuDK4CWQsO8ZgEIV1wF35ZYHfzvh4
- V6HbNU63GznXgCtuAB0hai7ECCgaFCX2DF9F9DqFWNH0U54EHR/+s1FF5x4MKdeZSLTd
- Xq60SG8ZE4nVqOoF9zG1CcYX5rafX6iwlYfP0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708031427; x=1708636227;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=+nbxA+sDkZ5llZO7sbARGMHAuWT8AplLeJ6kmT8uptM=;
- b=lltBCBPk6chqDVT9XZQL7dJ0TUElPgBivE9v6VkG4+aAquf2cpKa12kbdm2jpvx0Y7
- r5FCaYmMGd64nf5bYp2u+th8ODjO5o/8h45zJD1ZK+SpyH/GDa9C2p1vsZHB1o8mfobQ
- HjUwrMMXu3BqyRyqSP5/FdpKJhDE6aDA5J0B8BMpPjSakxHTX6dbHk96DHOpc9zeIl3Q
- 50VctUVaMgwbfk0q6C4U+qxX09X0Fm1X2I7/4+qvU97CJB1arGTsfPKjKG+PwmlT9LGT
- u+ymzvD+xZEZ3AUP0ZPOQcpy57m6mdc5lVR32uuT+bjQxYAZyPY3KKFTE0KJ5stD6GJk
- jEhQ==
-X-Gm-Message-State: AOJu0YwlLIXJCRaArAgTr6mwSx5xaD8gDIU6CWX1GgFX5i8CjpKjhz4N
- fcU3QQYT5MoX1pon31z6R1wDT5ur9aPoXPbVYe125AK1cRtER8pknL8K1kcK3Stavd7n6paHf/k
- k
-X-Google-Smtp-Source: AGHT+IF1y29uXRfAG5owu42BVtzRPj5t/sOmitMKyYBCkpbLIdWO/sel41aaYoPcIcNLJRxHeCLxdA==
-X-Received: by 2002:a81:b603:0:b0:604:a9c2:2a17 with SMTP id
- u3-20020a81b603000000b00604a9c22a17mr2908001ywh.45.1708031427522; 
- Thu, 15 Feb 2024 13:10:27 -0800 (PST)
-Received: from bill-the-cat.. (065-184-194-195.res.spectrum.com.
- [65.184.194.195]) by smtp.gmail.com with ESMTPSA id
- w84-20020a817b57000000b006077c89b001sm45484ywc.83.2024.02.15.13.10.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Feb 2024 13:10:27 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Mark Kettenis <kettenis@openbsd.org>
-Subject: [PATCH 1/2] doc: Update our clang documentation to reflect current
- status
-Date: Thu, 15 Feb 2024 16:10:24 -0500
-Message-Id: <20240215211025.690964-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1708032281; x=1708637081; i=xypron.glpk@gmx.de;
+ bh=NTEOJS6wFXdFrzsPOqT/3X2n+Ui+kAwcXkmkxL2EHZA=;
+ h=X-UI-Sender-Class:Date:From:To:Subject:In-Reply-To:References;
+ b=U7WcfcS3Zhm8by9HSFcj1seOan8lpUlwHh/s/v16KM1s4dUATgI001X6qfxEEDtO
+ x0XeR+VhKnskjmQhNPWoEDSAXdrbhJMBOaN6z9Mn2D/yCw3dK2M8sgbN7mSJgtbDh
+ SOhXDmygexb9iO7hHatY5hBDx1N6XJjpxojDxcKptuzDfW6PkoYPpdaFfBiFBvVlM
+ PS72+rNje6h6u+wHj2KXkdaOt5bKh8m7GnGpK4dlTzga3SZERfRK/6z62qRCxoqRS
+ w5ixhihGU1BqLE0StWqT1hJOTppsVQal3cXWIH+R0bM2d0dvgNWOUHhHSg5RO18es
+ 66qVJpyqvz7x7AHOHg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([178.202.40.247]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MJVHU-1rH0Vd2vhA-00JqX3; Thu, 15
+ Feb 2024 22:24:41 +0100
+Date: Thu, 15 Feb 2024 22:24:40 +0100
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_2/2=5D_doc=3A_Rework_the_gcc_sect?=
+ =?US-ASCII?Q?ion_to_reflect_general_build_instructions?=
+User-Agent: K-9 Mail for Android
+In-Reply-To: <20240215211025.690964-2-trini@konsulko.com>
+References: <20240215211025.690964-1-trini@konsulko.com>
+ <20240215211025.690964-2-trini@konsulko.com>
+Message-ID: <45D1EDA6-C570-4F18-B937-57808BBCDFC2@gmx.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:/yXarfLMyNG+ZjjbYznxLllaRsiQHI86j2XCPVM1oWeXyNzotkP
+ 3ZYo5WI1mosrzoFWJxhS9AzW6nlpszX5+2bg8Kb2lYE79EulGMhTgGEhy5BK9K5P/SfwYBp
+ nZKKL8p/A2UCvas5jC6Ri5f0f3gOB2BALanWTljHXVsCOlNFxc3Jhdxgc8TvYuVkUoS/xdi
+ hVcH2khw4iwlUmn6LIINQ==
+UI-OutboundReport: notjunk:1;M01:P0:1+GcrNs9CwY=;87inh9ajDTOWybxQqCqw5xkIb/Q
+ ruAb7pOOcRtAH6GetULFuwQit1Y/AU4PwY/Gj+ouLfW1NFDdCRD0udviLGNaB7JEfUykPIdiS
+ t/JzckZC+GdKx2XJPsmLodgkQTS57BOV7jZx/XAhVC5sIpNrzrtEawgHm14f8dSGp83dEJGA5
+ 5ccAIH/RXoywNK9GGfqkSQBCUTNmM0Ilm4G1BvgwI8NQV+dYGh3OQydy4snAnKmJtMfJ/CKYb
+ +EKbfhGcsaR8hDJJ4cmmYYoiVIMva1rpkU2fUcMzBELUmB40+5v3o0zcgswUfhjxauszpTZoY
+ 8dQ7O5A/pao7Ntl//YGtBtFCD6VxtiPEC6EbD8Q1b1+/VdCGE0gOr4/2NPdlGfQw+TqotNkOW
+ JRiLptv8zPaGunN+rK2qQGMeCqzShcS/oQmh5DjmHdiBo4XIqOtj/vz4+6arzPXcgqgsWYsCd
+ dnmBEJ4VQjgw5heRd3KCCMrLk6Eu19L9ZndvQlda0Sw9ISYqXU4iMhzq158bhg5FosilfAn2D
+ KR+VXmshkpU8/jDqCS3r50ijsz60YWRwqUWZouBoLvpzc4/H1Xnn0eosj6S6MFqG7Nuz1InoY
+ ehGNP7CgALHBboBZ9bwtYRuo/hkd4j2NeGKSACFEEzpKZeG2gun9/7Eh34AzHOUDsAccH9ekb
+ TZKdeo4kwpp8EAWAtdEv0giPbNOYq4rpX6NdLxiTGAjgk1ZVXx9+I+DfiREjxQ4G4leJNkAPm
+ HU47Xj3HQTCP4eUmzRiBVdFjQqyzsEU5Qr+j5zALizC0WO0Ff2zyvnUhxVqy1a+76uG3ujigW
+ pwTc+I3QMK24H83NCqfmlWwUuYK5Cpyh4q7l0lflEZcAU=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,122 +86,261 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-First, since this document was written the biggest challenges at the
-time are simply not applicable anymore. Second, we need to list the
-challenges which are preventing more platforms from being able to be
-built with Clang today.  Next, we update the general wording to be host
-distribution agnostic. Finally, the section about xenguest_arm64 issues
-is not present anymore.
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
-Cc: Mark Kettenis <kettenis@openbsd.org>
-This does leave the FreeBSD section unchanged and should likely be
-looked at again by someone with a BSD build machine available.
----
- doc/build/clang.rst | 85 +++++++++++----------------------------------
- 1 file changed, 21 insertions(+), 64 deletions(-)
 
-diff --git a/doc/build/clang.rst b/doc/build/clang.rst
-index 09bb988e9236..d8c554982567 100644
---- a/doc/build/clang.rst
-+++ b/doc/build/clang.rst
-@@ -1,34 +1,27 @@
- Building with Clang
- ===================
- 
--The biggest problem when trying to compile U-Boot with Clang is that almost all
--archs rely on storing gd in a global register and the Clang 3.5 user manual
--states: "Clang does not support global register variables; this is unlikely to
--be implemented soon because it requires additional LLVM backend support."
--
--The ARM backend can be instructed not to use the r9 and x18 registers using
---ffixed-r9 or -ffixed-x18 respectively. As global registers themselves are not
--supported inline assembly is needed to get and set the r9 or x18 value. This
--leads to larger code then strictly necessary, but at least works.
--
--Debian based
--------------
--
--Required packages can be installed via apt, e.g.
--
--.. code-block:: bash
--
--    sudo apt-get install clang
--
--We make use of the CROSS_COMPILE variable to derive the build target which is
--passed as the --target parameter to clang.
--
--The CROSS_COMPILE variable further determines the paths to other build
--tools. As assembler we use the binary pointed to by '$(CROSS_COMPILE)as'
--instead of the LLVM integrated assembler (IAS).
--
--Here is an example demonstrating building U-Boot for the Raspberry Pi 2
--using clang:
-+In general terms, U-Boot support building with Clang as the C compiler and
-+building and booting our "sandbox" target is part of CI.
-+
-+There are however some specific issues that need to be addressed to fully
-+support building with Clang on all targets.
-+
-+* Given the issue reported in https://github.com/llvm/llvm-project/issues/78778
-+  currently one has to configure the build first with GCC.
-+* Support for passing the correct flags along to `$(CPP)` needs to be
-+  backported from the Linux Kernel.
-+* Support for using Clang as the linker is required to support the LTO feature
-+  which some platforms require in order to create an appropriately small
-+  binary.
-+
-+In general, when building with Clang we make use of the CROSS_COMPILE variable
-+to derive the build target which is passed as the --target parameter to clang.
-+The CROSS_COMPILE variable further determines the paths to other build tools.
-+As assembler we use the binary pointed to by '$(CROSS_COMPILE)as' instead of
-+the LLVM integrated assembler (IAS).  After installing clang as per the
-+instructions for your specific distribution, in order to build for example the
-+Raspberry Pi 2 using clang:
- 
- .. code-block:: bash
- 
-@@ -72,39 +65,3 @@ simplified with a simple wrapper script - saved as
- 
-     #!/bin/sh
-     exec clang -target arm-freebsd-eabi --sysroot /usr/arm-freebsd "$@"
--
--
--Known Issues
--------------
--
--When build U-boot for `xenguest_arm64_defconfig` target, it reports linkage
--error:
--
--.. code-block:: bash
--
--    aarch64-linux-gnu-ld.bfd: drivers/xen/hypervisor.o: in function `do_hypervisor_callback':
--    /home/leoy/Dev2/u-boot/drivers/xen/hypervisor.c:188: undefined reference to `__aarch64_swp8_acq_rel'
--    aarch64-linux-gnu-ld.bfd: drivers/xen/hypervisor.o: in function `synch_test_and_set_bit':
--    /home/leoy/Dev2/u-boot/./arch/arm/include/asm/xen/system.h:40: undefined reference to `__aarch64_ldset1_acq_rel'
--    aarch64-linux-gnu-ld.bfd: drivers/xen/hypervisor.o: in function `synch_test_and_clear_bit':
--    /home/leoy/Dev2/u-boot/./arch/arm/include/asm/xen/system.h:28: undefined reference to `__aarch64_ldclr1_acq_rel'
--    aarch64-linux-gnu-ld.bfd: drivers/xen/hypervisor.o: in function `synch_test_and_set_bit':
--    /home/leoy/Dev2/u-boot/./arch/arm/include/asm/xen/system.h:40: undefined reference to `__aarch64_ldset1_acq_rel'
--    aarch64-linux-gnu-ld.bfd: drivers/xen/hypervisor.o: in function `synch_test_and_clear_bit':
--    /home/leoy/Dev2/u-boot/./arch/arm/include/asm/xen/system.h:28: undefined reference to `__aarch64_ldclr1_acq_rel'
--    aarch64-linux-gnu-ld.bfd: drivers/xen/events.o: in function `synch_test_and_clear_bit':
--    /home/leoy/Dev2/u-boot/./arch/arm/include/asm/xen/system.h:28: undefined reference to `__aarch64_ldclr1_acq_rel'
--    aarch64-linux-gnu-ld.bfd: drivers/xen/events.o: in function `synch_test_and_set_bit':
--    /home/leoy/Dev2/u-boot/./arch/arm/include/asm/xen/system.h:40: undefined reference to `__aarch64_ldset1_acq_rel'
--    aarch64-linux-gnu-ld.bfd: drivers/xen/gnttab.o: in function `gnttab_end_access':
--    /home/leoy/Dev2/u-boot/drivers/xen/gnttab.c:109: undefined reference to `__aarch64_cas2_acq_rel'
--    Segmentation fault
--
--To fix the failure, we need to append option `-mno-outline-atomics` in Clang
--command to not generate local calls to out-of-line atomic operations:
--
--.. code-block:: bash
--
--    make HOSTCC=clang xenguest_arm64_defconfig
--    make HOSTCC=clang CROSS_COMPILE=aarch64-linux-gnu- \
--         CC="clang -target aarch64-linux-gnueabi -mno-outline-atomics" -j8
--- 
-2.34.1
+Am 15=2E Februar 2024 22:10:25 MEZ schrieb Tom Rini <trini@konsulko=2Ecom>=
+:
+>The first big issue is that the "gcc" file talked a lot about the
+>general build requirements as well, but was titled in a gcc-centric
+>manner=2E Solve this by renaming the file to compile=2Erst and more fully
+>reflecting that it is general build instructions=2E Next, add a section
+>about the prebuilt toolchains that are recommended (as they are the ones
+>we use in CI), and update a few places to reference these vendor-neutral
+>tools=2E
+>
+>Next, we can include the reproducible builds section directly in the
+>compile instructions rather than as a small standalone file=2E
+>
+>Finally, we update the sandbox document to reflect both the name change
+>as well as what is specifically required to build sandbox=2E
+>
+>Signed-off-by: Tom Rini <trini@konsulko=2Ecom>
+>---
+>Cc: Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede>
+>---
+> doc/arch/sandbox/sandbox=2Erst       |  5 ++-
+> doc/build/{gcc=2Erst =3D> compile=2Erst} | 64 ++++++++++++++++++++++++++=
+----
+> doc/build/index=2Erst                |  3 +-
+> doc/build/reproducible=2Erst         | 27 -------------
+> 4 files changed, 61 insertions(+), 38 deletions(-)
+> rename doc/build/{gcc=2Erst =3D> compile=2Erst} (73%)
+> delete mode 100644 doc/build/reproducible=2Erst
+>
+>diff --git a/doc/arch/sandbox/sandbox=2Erst b/doc/arch/sandbox/sandbox=2E=
+rst
+>index 5f8db126657f=2E=2Ef2ed5a25c115 100644
+>--- a/doc/arch/sandbox/sandbox=2Erst
+>+++ b/doc/arch/sandbox/sandbox=2Erst
+>@@ -39,11 +39,12 @@ integers can only be built on 64-bit hosts=2E
+>=20
+> Note that standalone/API support is not available at present=2E
+>=20
+>-
+> Prerequisites
+> -------------
+>=20
+>-Install the dependencies noted in :doc:`=2E=2E/=2E=2E/build/gcc`=2E
+>+In addition to the normal dependencies shows in the :doc:`general build
+>+instructions <=2E=2E/=2E=2E/build/compile>` to enable display support SD=
+L2 libraries
+>+need to be available=2E
+>=20
+>=20
+> Basic Operation
+>diff --git a/doc/build/gcc=2Erst b/doc/build/compile=2Erst
+>similarity index 73%
+>rename from doc/build/gcc=2Erst
+>rename to doc/build/compile=2Erst
+>index 3c6465772729=2E=2Eef9c8545835a 100644
+>--- a/doc/build/gcc=2Erst
+>+++ b/doc/build/compile=2Erst
+>@@ -1,11 +1,19 @@
+>-Building with GCC
+>-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>+Building U-Boot
+>+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>=20
+> Dependencies
+> ------------
+>=20
+>-For building U-Boot you need a GCC compiler for your host platform=2E If=
+ you
+>-are not building on the target platform you further need  a GCC cross co=
+mpiler=2E
+>+For building U-Boot you need the general build tools such as `make` and =
+a C
+>+compiler for your host platform=2E Next, if you are not building on the =
+same
+>+architecture as the target platform you further need a C cross compiler=
+=2E
+>+Furthermore, some target platforms require additional host tools to be p=
+resent
+>+and their package names may vary slightly dependinng on the naming schem=
+e used
+>+by a particular host OS=2E
+>+
+>+In general, GCC should be used for both the host and target C compiler=
+=2E Using
+>+:doc:`clang <clang>` is supported but please see the documented issues f=
+or it as
+>+well=2E
+>=20
+> Debian based
+> ~~~~~~~~~~~~
+>@@ -69,6 +77,17 @@ Depending on the build target further packages may be =
+needed:
+> * riscv64 S-mode targets: opensbi
+> * some arm64 targets: arm-trusted-firmware
+>=20
+>+Prebuilt
+>+~~~~~~~~
+>+
+>+Another option, which the project uses for CI for example, is to use a p=
+rebuilt
+>+toolchain=2E For the most part, we use the latest `kernel=2Eorg`_ prebui=
+t binaries,
+>+but there are a few architectures that require their own specific toolch=
+ains
+>+still=2E
+>+
+>+In general, examples found within the documentation here refer to the to=
+ols
+>+found here and exceptions will be noted where relevant=2E
+>+
+> Prerequisites
+> -------------
+>=20
+>@@ -112,11 +131,11 @@ command line or export it beforehand=2E
+>=20
+>     CROSS_COMPILE=3D<compiler-prefix> make
+>=20
+>-Assuming cross compiling on Debian for ARMv8 this would be
+>+Assuming cross compiling for ARMv8 this would be
+>=20
+> =2E=2E code-block:: bash
+>=20
+>-    CROSS_COMPILE=3Daarch64-linux-gnu- make
+>+    CROSS_COMPILE=3Daarch64-linux- make
 
+GCC uses triples to specify the architecture=2E With the suggested change =
+building will fail on many distros, e=2Eg=2E in our CI image=2E
+
+cf=2E https://gcc=2Egnu=2Eorg/install/specific=2Ehtml#aarch64-x-x
+
+>=20
+> Build parameters
+> ~~~~~~~~~~~~~~~~
+>@@ -131,13 +150,40 @@ You can speed up compilation by parallelization usi=
+ng the -j parameter, e=2Eg=2E
+>=20
+> =2E=2E code-block:: bash
+>=20
+>-    CROSS_COMPILE=3Daarch64-linux-gnu- make -j$(nproc)
+>+    CROSS_COMPILE=3Daarch64-linux- make -j$(nproc)
+
+ditto
+
+Best regards
+
+Heinrich
+
+>=20
+> Further important build parameters are
+>=20
+> * O=3D<dir> - generate all output files in directory <dir>, including =
+=2Econfig
+> * V=3D1 - verbose build
+>=20
+>+
+>+Reproducible builds
+>+~~~~~~~~~~~~~~~~~~~
+>+
+>+In order to achieve reproducible builds, timestamps used in the U-Boot b=
+uild
+>+process have to be set to a fixed value=2E
+>+
+>+This is done using the SOURCE_DATE_EPOCH environment variable which spec=
+ifies
+>+the number of seconds since 1970-01-01T00:00:00Z=2E
+>+
+>+
+>+To build the sandbox with 2023-01-01T00:00:00Z as timestamp we can use:
+>+
+>+=2E=2E code-block:: bash
+>+
+>+    make sandbox_defconfig
+>+    SOURCE_DATE_EPOCH=3D1672531200 make
+>+
+>+This date is shown when we launch U-Boot:
+>+
+>+=2E=2E code-block:: console
+>+
+>+    =2E/u-boot -T
+>+    U-Boot 2023=2E01 (Jan 01 2023 - 00:00:00 +0000)
+>+
+>+The same effect can be obtained with buildman using the `-r` flag=2E
+>+
+> Devicetree compiler
+> ~~~~~~~~~~~~~~~~~~~
+>=20
+>@@ -176,6 +222,8 @@ builds during development, you can disable it by sett=
+ing `NO_LTO` to `1`=2E
+>=20
+>     NO_LTO=3D1 make
+>=20
+>+Note that not all platforms which enable LTO support disabling it howeve=
+r=2E
+>+
+> Other build targets
+> ~~~~~~~~~~~~~~~~~~~
+>=20
+>@@ -195,3 +243,5 @@ Installation
+>=20
+> The process for installing U-Boot on the target device is device specifi=
+c=2E
+> Please, refer to the board specific documentation :doc:`=2E=2E/board/ind=
+ex`=2E
+>+
+>+=2E=2E _`kernel=2Eorg`: https://mirrors=2Eedge=2Ekernel=2Eorg/pub/tools/=
+crosstool/files/bin/
+>diff --git a/doc/build/index=2Erst b/doc/build/index=2Erst
+>index 7a4507b57461=2E=2E5262b4f3c1b9 100644
+>--- a/doc/build/index=2Erst
+>+++ b/doc/build/index=2Erst
+>@@ -7,9 +7,8 @@ Build U-Boot
+>    :maxdepth: 2
+>=20
+>    source
+>-   gcc
+>+   compile
+>    clang
+>-   reproducible
+>    docker
+>    tools
+>    buildman
+>diff --git a/doc/build/reproducible=2Erst b/doc/build/reproducible=2Erst
+>deleted file mode 100644
+>index 8b030f469d7c=2E=2E000000000000
+>--- a/doc/build/reproducible=2Erst
+>+++ /dev/null
+>@@ -1,27 +0,0 @@
+>-Reproducible builds
+>-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>-
+>-In order to achieve reproducible builds, timestamps used in the U-Boot b=
+uild
+>-process have to be set to a fixed value=2E
+>-
+>-This is done using the SOURCE_DATE_EPOCH environment variable which spec=
+ifies
+>-the number of seconds since 1970-01-01T00:00:00Z=2E
+>-
+>-Example
+>--------
+>-
+>-To build the sandbox with 2023-01-01T00:00:00Z as timestamp we can use:
+>-
+>-=2E=2E code-block:: bash
+>-
+>-    make sandbox_defconfig
+>-    SOURCE_DATE_EPOCH=3D1672531200 make
+>-
+>-This date is shown when we launch U-Boot:
+>-
+>-=2E=2E code-block:: console
+>-
+>-    =2E/u-boot -T
+>-    U-Boot 2023=2E01 (Jan 01 2023 - 00:00:00 +0000)
+>-
+>-The same effect can be obtained with buildman using the `-r` flag=2E
