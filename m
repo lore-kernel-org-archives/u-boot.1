@@ -4,69 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C1BCC4829E
-	for <u-boot@archiver.kernel.org>; Thu, 15 Feb 2024 11:31:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25927C4829E
+	for <u-boot@archiver.kernel.org>; Thu, 15 Feb 2024 11:55:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 400A987DFD;
-	Thu, 15 Feb 2024 12:30:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7336E87D9D;
+	Thu, 15 Feb 2024 12:55:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=163.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LjShAQtf";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="QRin0HzF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C05787DB9; Thu, 15 Feb 2024 12:13:37 +0100 (CET)
-Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
- [IPv6:2607:f8b0:4864:20::c30])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 704A887D80
- for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 12:13:32 +0100 (CET)
+ id CEED387D9D; Thu, 15 Feb 2024 12:55:48 +0100 (CET)
+Received: from m1390.mail.163.com (m1390.mail.163.com [220.181.13.90])
+ by phobos.denx.de (Postfix) with ESMTP id C71B387DC1
+ for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 12:55:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=hrsourabh011@gmail.com
-Received: by mail-oo1-xc30.google.com with SMTP id
- 006d021491bc7-59a1a03d067so146822eaf.1
- for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 03:13:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1707995611; x=1708600411; darn=lists.denx.de;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=ng3uWNCo9Kbv3QSW4Gforo1ppu+17fiuw/AU0cPWlJg=;
- b=LjShAQtfRY5/BAinTh8STU6zGseOQrcvSpIT3I+8sT57fTylfInbAMRtOs0FE0QjTq
- iOipf13AJGXQ0YsQkAAm6qWdkg7D+FqNESp0V4f2dD+JB6KKvCB42zsze7cqo1F50S1K
- JpuiWnJLqvl8Vi+hwI0BcunfXR8/qrg8MhD6v6quL4IWwGmcA6QzFSZrjSMQDs74ldcl
- Pw+HMllRwvT0O3Ia5lEmhynG3qUcIUzLsH8GbOxdWKJN3fpKWl4iWzTCBqH63jrcMj67
- MEe1vxFq5eD39F38FYvSvEuwX3qj3jmRpYTDPHJMCh7hruRDj7MZY/Hz1ufsAH+vpCx1
- 9ngQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707995611; x=1708600411;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=ng3uWNCo9Kbv3QSW4Gforo1ppu+17fiuw/AU0cPWlJg=;
- b=s4oSYELmb0UYFNUwUGPXxNHdk9EY4RcD9iytF7DfkToDVMFwVJ18/jBNUMaJD1cjS0
- ZunVXsU9Xw6npoMnk3ZQyTh+m9bMSw9FyUeYTw9WYXKLQWtRNX/1zD1ACqZOcH6t8GVP
- UKrp8z32xlr2y7n87MATj967z5owVgBWDd2g8e+xcgQnCZ2hC6YEIW8TramiKhuIU0Ci
- Pomh7J/MMaQiPNzPvUHuu2K1q4KYmtdhUbWblumQfjRGNXlQbj1hQbHNDdZQExj4zhiG
- b7EYX37ARrv4AGWVWJASwg1FqhHGd8lmFrS4yMN+gI7pNzKCHZFcANbkDR0wdEE9pNXE
- DE7A==
-X-Gm-Message-State: AOJu0YyidBaoMQ1phY9Z5X53i9wr9/wV1X1urU6f5rMygSO7N9YyBQ35
- VcNu44NaHNKNWUbwQRUUchUM5krKPb1oxWOdCcLoi/GQuQJzVoAYUfjCtGWO/lpRaQfiVzIjUSa
- kydMjg8gokLh5LIeE/oIWbKzHz+OkSz895NLYQg==
-X-Google-Smtp-Source: AGHT+IHxnRK3a5FVnLoA1no6B4dr65cESmNewZqheFQV5wXHjuPVZ7/O7whKwRclg+EY36yQl0ZbzhlZXu+Kazf/gk4=
-X-Received: by 2002:a4a:6245:0:b0:59d:c3a:d6a0 with SMTP id
- y5-20020a4a6245000000b0059d0c3ad6a0mr1441657oog.4.1707995610536; Thu, 15 Feb
- 2024 03:13:30 -0800 (PST)
+ dmarc=fail (p=none dis=none) header.from=163.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=andyshrk@163.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+ s=s110527; h=Date:From:Subject:Content-Type:MIME-Version:
+ Message-ID; bh=TWRqxD1o6K5OmP4s95bLFHVBry7GhWQ1sIvNyDzLhr4=; b=Q
+ Rin0HzF8f8elw20u7HkTcPwM2KEFmhQf5/HY5Hqu90QLf7wvKWH46KalbynoE8IB
+ IxhdERGH/854jzf3nIUVqzcpgvudVAKO95MyE50ZGYXZ5+y1OZWp6yDtpUpdpdNH
+ 2h6G7vXp5MZ5ou+LfDnFVArg2isF/YvkpOW5I9pwds=
+Received: from andyshrk$163.com ( [58.22.7.114] ) by ajax-webmail-wmsvr90
+ (Coremail) ; Thu, 15 Feb 2024 19:55:25 +0800 (CST)
+X-Originating-IP: [58.22.7.114]
+Date: Thu, 15 Feb 2024 19:55:25 +0800 (CST)
+From: "Andy Yan" <andyshrk@163.com>
+To: "Quentin Schulz" <quentin.schulz@theobroma-systems.com>
+Cc: kever.yang@rock-chips.com, jonas@kwiboo.se, u-boot@lists.denx.de
+Subject: Re:Re: [PATCH v2 1/2] board: rockchip: Add support for rk3588s
+ based Cool Pi 4B
+X-Priority: 3
+X-Mailer: Coremail Webmail Server Version XT5.0.14 build 20230109(dcb5de15)
+ Copyright (c) 2002-2024 www.mailtech.cn 163com
+In-Reply-To: <cdda29dd-3d9f-4eef-83a5-a5f80ca79dcb@theobroma-systems.com>
+References: <20240214093126.329717-1-andyshrk@163.com>
+ <918dfa17-3c32-44d4-8d16-87bab10cc138@theobroma-systems.com>
+ <261ba9aa.2fa.18dac558cf4.Coremail.andyshrk@163.com>
+ <cdda29dd-3d9f-4eef-83a5-a5f80ca79dcb@theobroma-systems.com>
+X-NTES-SC: AL_Qu2bBfWSt0kp4yeRbOkXn0kXhec2W8Czvvgg34JRP5k0pSrL2yAvTU94DEvR/PyKCwSRgCiIVxNP0ep6Yqx2XbLvIl6a4ncRZPn5gKivPJMc
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset=UTF-8
 MIME-Version: 1.0
-From: Sourabh Hegde <hrsourabh011@gmail.com>
-Date: Thu, 15 Feb 2024 12:13:20 +0100
-Message-ID: <CADYjeSv5HOLwAVyg69woJ-CaapynJcx=ZJEByDFqrpVhGH1SVg@mail.gmail.com>
-Subject: How to load raw disk image in u-boot?
-To: u-boot@lists.denx.de
-X-Mailman-Approved-At: Thu, 15 Feb 2024 12:30:49 +0100
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Message-ID: <1cd3e505.333.18dac9f1eed.Coremail.andyshrk@163.com>
+X-Coremail-Locale: zh_CN
+X-CM-TRANSID: WsGowAD3X1eu+81lF9QIAA--.20415W
+X-CM-SenderInfo: 5dqg52xkunqiywtou0bp/1tbiqBWFXmVOCQb4eAABsD
+X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,32 +70,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
-
-I am working on the secure boot for raspberry pi topic as described here
-https://github.com/raspberrypi/usbboot/tree/master?tab=readme-ov-file#secure-boot---image-creation
-The
-boot.img file contains u-boot.bin, config.txt, boot.scr, Image, DTB and
-other raspberry pi necessary files.
-But when I try to integrate this with u-boot, the boot.img is not being
-parsed and I see below errors
-
-libfdt fdt_check_header(): FDT_ERR_BADMAGIC
-No EFI system partition
-BootOrder not defined
-EFI boot manager: Cannot load any image
-
-I tried to manually load it using:
-fatload mmc 0:1 ${kernel_addr_r} boot.img
-
-this works but, booty is not able to run it
-booti ${kernel_addr_r} - ${fdt_addr}
-
-Bad Linux ARM64 Image magic!
-
-I believe first we need to uncompress the raw disk image and then load it.
-However with unzip it is not possible to do it.
-unzip ${kernel_addr_r} 0x83000000
-Error: Bad gzipped data
-
-So, how can we load the raw disk image in U-boot?
+CgpIaSBRdWVudGlu77yaCkF0IDIwMjQtMDItMTUgMTg6NDA6MjUsICJRdWVudGluIFNjaHVseiIg
+PHF1ZW50aW4uc2NodWx6QHRoZW9icm9tYS1zeXN0ZW1zLmNvbT4gd3JvdGU6Cj5IaSBBbmR5LAo+
+Cj5PbiAyLzE1LzI0IDExOjM1LCBBbmR5IFlhbiB3cm90ZToKPlsuLi5dCj4+Pj4gZGlmZiAtLWdp
+dCBhL2NvbmZpZ3MvY29vbHBpLTRiLXJrMzU4OHNfZGVmY29uZmlnIGIvY29uZmlncy9jb29scGkt
+NGItcmszNTg4c19kZWZjb25maWcKPj4+PiBuZXcgZmlsZSBtb2RlIDEwMDY0NAo+Pj4+IGluZGV4
+IDAwMDAwMDAwMDAuLjNlM2U1YWJjODYKPj4+PiAtLS0gL2Rldi9udWxsCj4+Pj4gKysrIGIvY29u
+Zmlncy9jb29scGktNGItcmszNTg4c19kZWZjb25maWcKPj4+PiBAQCAtMCwwICsxLDEwNSBAQAo+
+Pj4+ICtDT05GSUdfQVJNPXkKPj4+PiArQ09ORklHX1NLSVBfTE9XTEVWRUxfSU5JVD15Cj4+Pj4g
+K0NPTkZJR19DT1VOVEVSX0ZSRVFVRU5DWT0yNDAwMDAwMAo+Pj4+ICtDT05GSUdfQVJDSF9ST0NL
+Q0hJUD15Cj4+Pj4gK0NPTkZJR19URVhUX0JBU0U9MHgwMGEwMDAwMAo+Pj4+ICtDT05GSUdfU1BM
+X0xJQkNPTU1PTl9TVVBQT1JUPXkKPj4+PiArQ09ORklHX1NQTF9MSUJHRU5FUklDX1NVUFBPUlQ9
+eQo+Pj4+ICtDT05GSUdfTlJfRFJBTV9CQU5LUz0yCj4+Pj4gK0NPTkZJR19IQVNfQ1VTVE9NX1NZ
+U19JTklUX1NQX0FERFI9eQo+Pj4+ICtDT05GSUdfQ1VTVE9NX1NZU19JTklUX1NQX0FERFI9MHhj
+MDAwMDAKPj4+PiArQ09ORklHX1NGX0RFRkFVTFRfU1BFRUQ9MjQwMDAwMDAKPj4+PiArQ09ORklH
+X1NGX0RFRkFVTFRfTU9ERT0weDIwMDAKPj4+PiArQ09ORklHX0RFRkFVTFRfREVWSUNFX1RSRUU9
+InJrMzU4OHMtY29vbHBpLTRiIgo+Pj4+ICtDT05GSUdfUk9DS0NISVBfUkszNTg4PXkKPj4+PiAr
+Q09ORklHX1NQTF9ST0NLQ0hJUF9DT01NT05fQk9BUkQ9eQo+Pj4+ICtDT05GSUdfUk9DS0NISVBf
+U1BJX0lNQUdFPXkKPj4+PiArQ09ORklHX1NQTF9TRVJJQUw9eQo+Pj4+ICtDT05GSUdfU1BMX1NU
+QUNLX1JfQUREUj0weDYwMDAwMAo+Pj4+ICtDT05GSUdfVEFSR0VUX0VWQl9SSzM1ODg9eQo+Pj4+
+ICtDT05GSUdfU1BMX1NUQUNLPTB4NDAwMDAwCj4+Pj4gK0NPTkZJR19ERUJVR19VQVJUX0JBU0U9
+MHhGRUI1MDAwMAo+Pj4+ICtDT05GSUdfREVCVUdfVUFSVF9DTE9DSz0yNDAwMDAwMAo+Pj4+ICtD
+T05GSUdfU1BMX1NQSV9GTEFTSF9TVVBQT1JUPXkKPj4+PiArQ09ORklHX1NQTF9TUEk9eQo+Pj4+
+ICtDT05GSUdfU1lTX0xPQURfQUREUj0weGMwMDgwMAo+Pj4+ICtDT05GSUdfUENJPXkKPj4+PiAr
+Q09ORklHX0RFQlVHX1VBUlQ9eQo+Pj4+ICtDT05GSUdfQUhDST15Cj4+Pj4gK0NPTkZJR19GSVQ9
+eQo+Pj4+ICtDT05GSUdfRklUX1ZFUkJPU0U9eQo+Pj4+ICtDT05GSUdfU1BMX0ZJVF9TSUdOQVRV
+UkU9eQo+Pj4+ICtDT05GSUdfU1BMX0xPQURfRklUPXkKPj4+PiArQ09ORklHX0xFR0FDWV9JTUFH
+RV9GT1JNQVQ9eQo+Pj4+ICtDT05GSUdfT0ZfQk9BUkRfU0VUVVA9eQo+Pj4+ICtDT05GSUdfREVG
+QVVMVF9GRFRfRklMRT0icm9ja2NoaXAvcmszNTg4cy1jb29scGktNGIuZHRiIgo+Pj4+ICsjIENP
+TkZJR19ESVNQTEFZX0NQVUlORk8gaXMgbm90IHNldAo+Pj4+ICtDT05GSUdfRElTUExBWV9CT0FS
+RElORk9fTEFURT15Cj4+Pj4gK0NPTkZJR19TUExfTUFYX1NJWkU9MHg0MDAwMAo+Pj4+ICtDT05G
+SUdfU1BMX1BBRF9UTz0weDdmODAwMAo+Pj4+ICtDT05GSUdfU1BMX0hBU19CU1NfTElOS0VSX1NF
+Q1RJT049eQo+Pj4+ICtDT05GSUdfU1BMX0JTU19TVEFSVF9BRERSPTB4NDAwMDAwMAo+Pj4+ICtD
+T05GSUdfU1BMX0JTU19NQVhfU0laRT0weDQwMDAKPj4+PiArIyBDT05GSUdfU1BMX1JBV19JTUFH
+RV9TVVBQT1JUIGlzIG5vdCBzZXQKPj4+PiArIyBDT05GSUdfU1BMX1NIQVJFU19JTklUX1NQX0FE
+RFIgaXMgbm90IHNldAo+Pj4+ICtDT05GSUdfU1BMX1NUQUNLX1I9eQo+Pj4+ICtDT05GSUdfU1BM
+X1NQSV9MT0FEPXkKPj4+PiArQ09ORklHX1NZU19TUElfVV9CT09UX09GRlM9MHg2MDAwMAo+Pj4+
+ICtDT05GSUdfU1BMX0FURj15Cj4+Pj4gK0NPTkZJR19DTURfR1BJTz15Cj4+Pj4gK0NPTkZJR19D
+TURfR1BUPXkKPj4+PiArQ09ORklHX0NNRF9JMkM9eQo+Pj4+ICtDT05GSUdfQ01EX01NQz15Cj4+
+Pj4gK0NPTkZJR19DTURfUENJPXkKPj4+PiArQ09ORklHX0NNRF9VU0I9eQo+Pj4+ICsjIENPTkZJ
+R19DTURfU0VURVhQUiBpcyBub3Qgc2V0Cj4+Pj4gK0NPTkZJR19DTURfUkVHVUxBVE9SPXkKPj4+
+PiArIyBDT05GSUdfU1BMX0RPU19QQVJUSVRJT04gaXMgbm90IHNldAo+Pj4+ICtDT05GSUdfU1BM
+X09GX0NPTlRST0w9eQo+Pj4+ICtDT05GSUdfT0ZfTElWRT15Cj4+Pj4gK0NPTkZJR19PRl9TUExf
+UkVNT1ZFX1BST1BTPSJjbG9jay1uYW1lcyBpbnRlcnJ1cHQtcGFyZW50IGFzc2lnbmVkLWNsb2Nr
+cyBhc3NpZ25lZC1jbG9jay1yYXRlcyBhc3NpZ25lZC1jbG9jay1wYXJlbnRzIgo+Pj4+ICtDT05G
+SUdfU1BMX0RNX1NFUV9BTElBUz15Cj4+Pj4gK0NPTkZJR19TUExfUkVHTUFQPXkKPj4+PiArQ09O
+RklHX1NQTF9TWVNDT049eQo+Pj4+ICtDT05GSUdfQUhDSV9QQ0k9eQo+Pj4+ICtDT05GSUdfRFdD
+X0FIQ0k9eQo+Pj4+ICtDT05GSUdfU1BMX0NMSz15Cj4+Pj4gK0NPTkZJR19ST0NLQ0hJUF9HUElP
+PXkKPj4+PiArQ09ORklHX1NZU19JMkNfUk9DS0NISVA9eQo+Pj4+ICtDT05GSUdfTUlTQz15Cj4+
+Pj4gK0NPTkZJR19TVVBQT1JUX0VNTUNfUlBNQj15Cj4+Pj4gK0NPTkZJR19NTUNfRFc9eQo+Pj4+
+ICtDT05GSUdfTU1DX0RXX1JPQ0tDSElQPXkKPj4+PiArQ09ORklHX01NQ19TREhDST15Cj4+Pj4g
+K0NPTkZJR19NTUNfU0RIQ0lfU0RNQT15Cj4+Pj4gK0NPTkZJR19NTUNfU0RIQ0lfUk9DS0NISVA9
+eQo+Pj4+ICtDT05GSUdfU0ZfREVGQVVMVF9CVVM9NQo+Pj4+ICtDT05GSUdfU1BJX0ZMQVNIX1NG
+RFBfU1VQUE9SVD15Cj4+Pj4gK0NPTkZJR19TUElfRkxBU0hfWE1DPXkKPj4+PiArQ09ORklHX1NQ
+SV9GTEFTSF9YVFg9eQo+Pj4+ICtDT05GSUdfUEhZX01PVE9SQ09NTT15Cj4+Pj4gK0NPTkZJR19E
+V0NfRVRIX1FPUz15Cj4+Pj4gK0NPTkZJR19EV0NfRVRIX1FPU19ST0NLQ0hJUD15Cj4+Pj4gK0NP
+TkZJR19OVk1FX1BDST15Cj4+Pj4gK0NPTkZJR19QQ0lFX0RXX1JPQ0tDSElQPXkKPj4+PiArQ09O
+RklHX1BIWV9ST0NLQ0hJUF9JTk5PX1VTQjI9eQo+Pj4+ICtDT05GSUdfUEhZX1JPQ0tDSElQX05B
+TkVOR19DT01CT1BIWT15Cj4+Pj4gK0NPTkZJR19QSFlfUk9DS0NISVBfVVNCRFA9eQo+Pj4+ICtD
+T05GSUdfU1BMX1BJTkNUUkw9eQo+Pj4+ICtDT05GSUdfUFdNX1JPQ0tDSElQPXkKPj4+PiArQ09O
+RklHX1NQTF9SQU09eQo+Pj4+ICtDT05GSUdfU0NTST15Cj4+Pj4gK0NPTkZJR19CQVVEUkFURT0x
+NTAwMDAwCj4+Pj4gK0NPTkZJR19ERUJVR19VQVJUX1NISUZUPTIKPj4+PiArQ09ORklHX1NZU19O
+UzE2NTUwX01FTTMyPXkKPj4+PiArQ09ORklHX1JPQ0tDSElQX1NGQz15Cj4+Pj4gK0NPTkZJR19T
+WVNSRVNFVD15Cj4+Pj4gK0NPTkZJR19VU0I9eQo+Pj4+ICtDT05GSUdfVVNCX1hIQ0lfSENEPXkK
+Pj4+PiArQ09ORklHX1VTQl9FSENJX0hDRD15Cj4+Pj4gK0NPTkZJR19VU0JfRUhDSV9HRU5FUklD
+PXkKPj4+PiArQ09ORklHX1VTQl9PSENJX0hDRD15Cj4+Pj4gK0NPTkZJR19VU0JfT0hDSV9HRU5F
+UklDPXkKPj4+PiArQ09ORklHX1VTQl9EV0MzPXkKPj4+PiArQ09ORklHX1VTQl9EV0MzX0dFTkVS
+SUM9eQo+Pj4+ICtDT05GSUdfRVJSTk9fU1RSPXkKPj4+Cj4+PiBJcyB0aGVyZSBhbnkgcmVhc29u
+IGZvciBOT1QgZW5hYmxpbmcgTU1DX0hTNDAwX0VTPwo+PiAKPj4gTm8sIEkganVzdCBmb2xsb3cg
+dGhlIGNvbmZpZyBvZiBvdGhlciByazM1ODgvcyBiYXNlZCBib2FyZHMuCj4KPkZvcnR1bmF0ZWx5
+IGVub3VnaCwgYSBwYXRjaCB3YXMgcmVjZW50bHkgbWVyZ2VkIHRvIGhhdmUgYXQgbGVhc3QgSFMy
+MDAgCj5vbiBSSzM1ODgsIHdoaWNoIGlzIHRoZSBmaXJzdCBtb2RlIHRoYXQgYWN0dWFsbHkgd29y
+a3MsIGFueXRoaW5nIGJlbG93IAo+dGhhdCBpcyBicm9rZW4gcmlnaHQgbm93Lgo+Cj4+IEl0IHNl
+ZW1zIHRoYXQgdGhlcmUgYXJlIG5vIHJrMzU4OC9zIGJhc2VkIGJvYXJkcyBlbmFibGUgTU1DX0hT
+NDAwX0VTIGluIHRoZSBjdXJyZW50IHUtYm9vdCBtYWlubGluZSA/Cj4+IAo+Cj5KYWd1YXIgaXMg
+aG9wZWZ1bGx5IGNvbWluZyBzb29uLWlzaCwgbWF5YmUgbm90IGluIHRoaXMgcmVsZWFzZSBidXQg
+dGhlIAo+bmV4dCBvbmUgKHBhdGNoZXMgYXJlIHNlbnQgYWxyZWFkeSksIGFuZCB3ZSBtYWtlIHVz
+IG9mIGl0IGluIFUtQm9vdCAKPnByb3BlciBhbmQgdGhlIFNQTC4gVXAgdG8geW91LCBjYW4gYWx3
+YXlzIGJlIGVuYWJsZWQgbGF0ZXIgb24uCgpXaXRoIGEgcXVpY2sgc2VhcmNo77yMIEkgZm9uZCBq
+b25hcydTIHBhdGNoIGZvciBlbmFibGluZyBIUzIwMCBoYXMgYmVlbiBtZXJnZWQsIGJ1dAp5b3Vy
+IHBhdGNoIHdpbGwgYnJpbmcgSFM0MDBfRVMsIGRvZXMgdGhhdCBtZWFuIGFsbCB0aGUgcmszNTg4
+L3MgYmFzZWQgYm9hcnMgd2lsbCBzd2l0Y2ggdG8KSFM0MDAgRVMgaWYgdGhleSBzdXBwb3J0IGl0
+PwoKVGhhbmtzLgo+Cj5GV0lXLCBib3RoIGNvbW1lbnRzIG9uIHRoaXMgcGF0Y2ggYWxzbyBhcHBs
+eSB0byB0aGUgc2Vjb25kIHBhdGNoIGluIHRoaXMgCj5zZXJpZXMgOikKPgo+Q2hlZXJzLAo+UXVl
+bnRpbgo=
