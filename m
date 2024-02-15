@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74BD2C4829E
-	for <u-boot@archiver.kernel.org>; Thu, 15 Feb 2024 20:58:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 981E5C48BC4
+	for <u-boot@archiver.kernel.org>; Thu, 15 Feb 2024 20:58:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 02E9087F77;
-	Thu, 15 Feb 2024 21:53:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D842E87F76;
+	Thu, 15 Feb 2024 21:53:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Lt/+tq6y";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="EkyrO2ey";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DACF387F2B; Thu, 15 Feb 2024 21:53:38 +0100 (CET)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
+ id 07E5487F67; Thu, 15 Feb 2024 21:53:41 +0100 (CET)
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8372287F00
- for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 21:52:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6CFBF87E83
+ for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 21:52:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-33aea66a31cso723595f8f.1
- for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 12:52:42 -0800 (PST)
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-33cf7812777so722257f8f.0
+ for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 12:52:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708030362; x=1708635162; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1708030373; x=1708635173; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=1BObBok8WqC8cCKYU6VlfX9vQKB0L9pyzuuKQW4V83s=;
- b=Lt/+tq6y/HHCZW9yT50E4OamUwG9it/AGBeB828Z7WjguxsnjXkEQFojxsVv60cu2m
- i01J2IvqW49CEBAdsXf6SUB1bF81n5JK8Z5xJ4KFIc/OjlS04omdqqDUwzL7yUXOhFCY
- uEKvsHAxTz2D3zIuQDlFdcZvR9t9JgLgiaj8Z61/oSuf63lej4pXInNrIQimOtf3MYxA
- AhIFfT+54QUBiD3XWETNJERIPGH8wmMjIRlvyJ0fB1r7/p1nCKhdLMQvfiji+tABdQD9
- 3gPn/sra74BlnVIbHGQVJKt1h4tQdt2N1W2VzDoQihJgF+P2nGi9oyq6o00rlLa4ZOh5
- +VIQ==
+ :reply-to; bh=dgXyCD4i7pdnGWCYYpUapZozc5dNH7qHSnKYm+5wLzE=;
+ b=EkyrO2eyVtPPpjVD3YfOb0TdJPyDHf9VFdrNLptu356MXOu1cx7dUSXsiFgLy98AUb
+ Au8vW7rbik4fTQzkyHrM28n4KfKo8+mq4ZAqBarZhH68KsLl9fLRo4rVD5AB8Hhp8jBj
+ K33zblo8+TraGoJuFRRCH/WmOMtEAc+bMnXW+mXKEAx+HFAYF9l1c32Bdu9pE8UNYGTm
+ urH4uaYWDLWIf2eMlgPbmWgsFo6VlsjAd69d+tprf5AmwkW/QSvyKMWMd/JcDCuM+PTi
+ yXaQ083P/7gm5qzMCNOquK9zAvQKJy6kUsvcpQLEQwgPKFLpFvndSZpDH29pT9hJJuRQ
+ /k2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708030362; x=1708635162;
+ d=1e100.net; s=20230601; t=1708030373; x=1708635173;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=1BObBok8WqC8cCKYU6VlfX9vQKB0L9pyzuuKQW4V83s=;
- b=NexWq6BPl8ZLGoHQTDQvLcawMD+R04p+yynJ/9cwCZ79EsVLlNyVC2d658Ath5ieh7
- gmdI1Tp6uxLK6ceMQKLdM1Ii8IjjPT0ZxjbhbtLcSyDJTNqq/OS4n3iFjZvrDEB0o3az
- yL/+UHN7HQFCNc7dI8fQOcVGea40N4HNLl/jP5KJryCse+5usRbzg1ripfVnqTrSjivc
- 5uicntYcw45KZlFraBNI2EzaJdloLEcwp4zwb5D6wVI3IwMwN5S2tJ8gy64btjeN3hKL
- N+M9/ZWwjjoE2n3wol1AT8oEIsY1bOg3co6yCeTD+6s/50gyepzQwij9e0UOEendzoKm
- sN8Q==
+ bh=dgXyCD4i7pdnGWCYYpUapZozc5dNH7qHSnKYm+5wLzE=;
+ b=tgh0qcHZ96DmBzQz4V7SMrXHFYWfXulwBMW+8qdS5DI7hzt9qHtMoTaj/QmcDsl/C6
+ C0kXcVjtKMimVgxAWj8GETZBfmmzbEwQ7bemp2qZONiLeQwIlY8qe/j0CGSqie15G7Xg
+ 2zRMiX/cbbB/kIGPszBND49xAq85F6lh5do/yoTBo7HC0dV8dU8EZL5Xj4VMDIcj87GD
+ jo02txtbgNZSpQbm+nvI0cGSVLcxVhvNtUY3MdDTwwXzcJjTobltXGvK6HE27h9CEE+q
+ lPVr6g36GaQ8TdwDo3CzvvQFSHa3h0O7d4SqQUxnkRPU5FJQ0JGOPO1m1e5x8IreLyNO
+ NScA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWGVlC0JHu0fzHBNcn7gqHHfOMGw+R01QIPANjW53U14DUrq4eiB01ubVhduFYkwAI6ReKeLeSHTaczZw+qYVyDnt3Acw==
-X-Gm-Message-State: AOJu0YySfPLDLW/LF1t+tPZIoboK+hFu1/Z6s8yUC08Eiz7YvCRJ5P3V
- VXDmkIPAqA62b8krccUqQXGH9wxzlu3PBydk619Nbt/h8aLtKUupg/nbVMlmwDtWuKtY2a3NZT9
- D
-X-Google-Smtp-Source: AGHT+IEiblwDk9/METuqIHpkO0/n+ecmDD4/3ubBMRNaE/ILzrkTZLfAoNYjNdwzwz0b0sR95tR6Tg==
-X-Received: by 2002:adf:e8d1:0:b0:33c:e065:76c2 with SMTP id
- k17-20020adfe8d1000000b0033ce06576c2mr2427557wrn.46.1708030361674; 
- Thu, 15 Feb 2024 12:52:41 -0800 (PST)
+ AJvYcCWj8z0Cfxwb7r96WFVIe5tWl/6IrI3PllUYo72Z4QzD0cP5qxutMNON2TD7nmLMvbI4m4HSXAanBu34rpoyl2TPNW1EGw==
+X-Gm-Message-State: AOJu0Yy13qwGALjl0IJyxlsMsiqbEnhSuxjFNomF4YZffvRf8bo2WcmD
+ /Pf+aA04ymGFbBUnf+oAkyetgL7bXw6GaJ6oXt2IYmitplmpTrDUrilTnSiiuuDOK2/iMPqfFjW
+ 2
+X-Google-Smtp-Source: AGHT+IG97/4/WYgohHGEDcc7TrV20mkamzDh0Wi8yeqNZI2c8VFk+PRbQSDtKfz2+/gHd4xcEOaNfQ==
+X-Received: by 2002:adf:f2c3:0:b0:33b:48ee:8a35 with SMTP id
+ d3-20020adff2c3000000b0033b48ee8a35mr2474438wrp.3.1708030373561; 
+ Thu, 15 Feb 2024 12:52:53 -0800 (PST)
 Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- e4-20020adfe384000000b0033cfa00e497sm194025wrm.64.2024.02.15.12.52.40
+ e4-20020adfe384000000b0033cfa00e497sm194025wrm.64.2024.02.15.12.52.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Feb 2024 12:52:41 -0800 (PST)
+ Thu, 15 Feb 2024 12:52:52 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Thu, 15 Feb 2024 20:52:35 +0000
-Subject: [PATCH v4 17/39] board: dragonboard410c: upstream DT compat
+Date: Thu, 15 Feb 2024 20:52:46 +0000
+Subject: [PATCH v4 28/39] dts: sdm845: import supporting dtsi files
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240215-b4-qcom-common-target-v4-17-ed06355c634a@linaro.org>
+Message-Id: <20240215-b4-qcom-common-target-v4-28-ed06355c634a@linaro.org>
 References: <20240215-b4-qcom-common-target-v4-0-ed06355c634a@linaro.org>
 In-Reply-To: <20240215-b4-qcom-common-target-v4-0-ed06355c634a@linaro.org>
 To: Neil Armstrong <neil.armstrong@linaro.org>, 
@@ -86,13 +86,13 @@ To: Neil Armstrong <neil.armstrong@linaro.org>,
  Stephan Gerhold <stephan@gerhold.net>
 Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
 X-Mailer: b4 0.13-dev-4bd13
-X-Developer-Signature: v=1; a=openpgp-sha256; l=16103;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=8827;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=LlDylvtgEj62tYyFXodNxKvjMNwy95DVWx6BKKLB4sI=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtRzla2P3cU6FnhMNMqXnflmTv+FK1yhoYeNzALFxcUWN
- K67EGzfUcrCIMjBICumyCJ+Ypll09rL9hrbF1yAmcPKBDKEgYtTACbyyIeRYQNb4NZ7otN2VPxx
- zhd9zDwxOFvs6+RpXbFrPVWsanbNesvwv/zw//e/WBk27blTXM51RXPbo5ZbOUezJq35EZm8fuW
- /WRMB
+ bh=5uL8P5ObobohhBGwsLv0VSJTIAjNpe+AHme5wP/FlQ8=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtRzlW3Fa6cZZK6/fi5Ia6uixRlZHs5L5ziTm1YttXiry
+ ZZ/vKO4o5SFQZCDQVZMkUX8xDLLprWX7TW2L7gAM4eVCWQIAxenAEykuZvhf13nsUla0czKG4W+
+ 3Ok+vP4zu9ps76uL37dJ75OJ7WnYco3hv7vIt3T2e61JZZqs5w1NTpk5795j2BkdrfxtgeVmkU0
+ XdAE=
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -111,516 +111,352 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use the root compatible strings from upstream Linux, add missing
-'#clock-cells' property to the gcc node.
+Import the PM8998 and PMI8998 PMIC DTSI files from Linux as well
+as the common audio codec in preperation for replacing board DTS files
+with upstream.
 
-Adjust some of the msm8916/apq8016 drivers to use the correct upstream
-compatible properties and DT bindings.
-
-This prepares us to switch to upstream DT in a future patch.
+Taken from kernel tag v6.7
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- arch/arm/dts/dragonboard410c.dts                 |  25 +++-
- board/qualcomm/dragonboard410c/dragonboard410c.c |  93 +++---------
- doc/device-tree-bindings/usb/ehci-msm.txt        |  10 --
- drivers/clk/qcom/clock-apq8016.c                 |   7 +-
- drivers/phy/qcom/msm8916-usbh-phy.c              |   4 +-
- drivers/pinctrl/qcom/pinctrl-apq8016.c           |   2 +-
- drivers/usb/host/ehci-msm.c                      |  22 ++-
- include/dt-bindings/clock/qcom,gcc-msm8916.h     | 179 +++++++++++++++++++++++
- 8 files changed, 246 insertions(+), 96 deletions(-)
+ arch/arm/dts/pm8998.dtsi         | 130 +++++++++++++++++++++++++++++++++++++++
+ arch/arm/dts/pmi8998.dtsi        |  98 +++++++++++++++++++++++++++++
+ arch/arm/dts/sdm845-wcd9340.dtsi |  86 ++++++++++++++++++++++++++
+ 3 files changed, 314 insertions(+)
 
-diff --git a/arch/arm/dts/dragonboard410c.dts b/arch/arm/dts/dragonboard410c.dts
-index c395e6cc0427..453642b25705 100644
---- a/arch/arm/dts/dragonboard410c.dts
-+++ b/arch/arm/dts/dragonboard410c.dts
-@@ -12,7 +12,7 @@
- 
- / {
- 	model = "Qualcomm Technologies, Inc. Dragonboard 410c";
--	compatible = "qcom,dragonboard", "qcom,apq8016-sbc";
-+	compatible = "qcom,apq8016-sbc", "qcom,apq8016";
- 	qcom,msm-id = <0xce 0x0 0xf8 0x0 0xf9 0x0 0xfa 0x0 0xf7 0x0>;
- 	qcom,board-id = <0x10018 0x0>;
- 	#address-cells = <0x2>;
-@@ -79,6 +79,7 @@
- 			reg = <0x1800000 0x80000>;
- 			#address-cells = <0x1>;
- 			#size-cells = <0x0>;
-+			#clock-cells = <0x1>;
- 		};
- 
- 		serial@78b0000 {
-@@ -91,15 +92,25 @@
- 		};
- 
- 		ehci@78d9000 {
--			compatible = "qcom,ehci-host";
-+			compatible = "qcom,ci-hdrc";
- 			reg = <0x78d9000 0x400>;
- 			phys = <&ehci_phy>;
--		};
- 
--		ehci_phy: ehci_phy@78d9000 {
--			compatible = "qcom,apq8016-usbphy";
--			reg = <0x78d9000 0x400>;
--			#phy-cells = <0>;
-+			ulpi {
-+				usb_hs_phy: phy {
-+					compatible = "qcom,usb-hs-phy-msm8916",
-+						     "qcom,usb-hs-phy";
-+					#phy-cells = <0>;
-+					clocks = <&xo_board>, <&gcc GCC_USB2A_PHY_SLEEP_CLK>;
-+					clock-names = "ref", "sleep";
-+					resets = <&gcc GCC_USB2A_PHY_BCR>, <&usb 0>;
-+					reset-names = "phy", "por";
-+					qcom,init-seq = /bits/ 8 <0x0 0x44>,
-+								 <0x1 0x6b>,
-+								 <0x2 0x24>,
-+								 <0x3 0x13>;
+diff --git a/arch/arm/dts/pm8998.dtsi b/arch/arm/dts/pm8998.dtsi
+new file mode 100644
+index 000000000000..3f82715392c6
+--- /dev/null
++++ b/arch/arm/dts/pm8998.dtsi
+@@ -0,0 +1,130 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/* Copyright 2018 Google LLC. */
++
++#include <dt-bindings/iio/qcom,spmi-vadc.h>
++#include <dt-bindings/input/linux-event-codes.h>
++#include <dt-bindings/interrupt-controller/irq.h>
++#include <dt-bindings/spmi/spmi.h>
++#include <dt-bindings/thermal/thermal.h>
++
++/ {
++	thermal-zones {
++		pm8998-thermal {
++			polling-delay-passive = <250>;
++			polling-delay = <1000>;
++
++			thermal-sensors = <&pm8998_temp>;
++
++			trips {
++				pm8998_alert0: pm8998-alert0 {
++					temperature = <105000>;
++					hysteresis = <2000>;
++					type = "passive";
++				};
++				pm8998_crit: pm8998-crit {
++					temperature = <125000>;
++					hysteresis = <2000>;
++					type = "critical";
 +				};
 +			};
- 		};
- 
- 		sdhci@07824000 {
-diff --git a/board/qualcomm/dragonboard410c/dragonboard410c.c b/board/qualcomm/dragonboard410c/dragonboard410c.c
-index 350e0e9e20aa..1adac07569ae 100644
---- a/board/qualcomm/dragonboard410c/dragonboard410c.c
-+++ b/board/qualcomm/dragonboard410c/dragonboard410c.c
-@@ -9,6 +9,7 @@
- #include <common.h>
- #include <cpu_func.h>
- #include <dm.h>
-+#include <dm/pinctrl.h>
- #include <env.h>
- #include <init.h>
- #include <net.h>
-@@ -23,84 +24,32 @@
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
--int dram_init(void)
--{
--	gd->ram_size = PHYS_SDRAM_1_SIZE;
--
--	return 0;
--}
--
--int dram_init_banksize(void)
--{
--	gd->bd->bi_dram[0].start = PHYS_SDRAM_1;
--	gd->bd->bi_dram[0].size = PHYS_SDRAM_1_SIZE;
--
--	return 0;
--}
-+#define USB_HUB_RESET_GPIO 2
-+#define USB_SW_SELECT_GPIO 3
- 
- int board_usb_init(int index, enum usb_init_type init)
- {
--	static struct udevice *pmic_gpio;
--	static struct gpio_desc hub_reset, usb_sel;
--	int ret = 0, node;
-+	struct udevice *usb;
-+	int ret = 0;
- 
--	if (!pmic_gpio) {
--		ret = uclass_get_device_by_name(UCLASS_GPIO,
--						"pm8916_gpios@c000",
--						&pmic_gpio);
--		if (ret < 0) {
--			printf("Failed to find pm8916_gpios@c000 node.\n");
--			return ret;
--		}
-+	/* USB device */
-+	ret = device_find_global_by_ofnode(ofnode_path("/soc/usb"), &usb);
-+	if (ret) {
-+		printf("Cannot find USB device\n");
-+		return ret;
- 	}
- 
--	/* Try to request gpios needed to start usb host on dragonboard */
--	if (!dm_gpio_is_valid(&hub_reset)) {
--		node = fdt_subnode_offset(gd->fdt_blob,
--					  dev_of_offset(pmic_gpio),
--					  "usb_hub_reset_pm");
--		if (node < 0) {
--			printf("Failed to find usb_hub_reset_pm dt node.\n");
--			return node;
--		}
--		ret = gpio_request_by_name_nodev(offset_to_ofnode(node),
--						 "gpios", 0, &hub_reset, 0);
--		if (ret < 0) {
--			printf("Failed to request usb_hub_reset_pm gpio.\n");
--			return ret;
--		}
--	}
--
--	if (!dm_gpio_is_valid(&usb_sel)) {
--		node = fdt_subnode_offset(gd->fdt_blob,
--					  dev_of_offset(pmic_gpio),
--					  "usb_sw_sel_pm");
--		if (node < 0) {
--			printf("Failed to find usb_sw_sel_pm dt node.\n");
--			return 0;
--		}
--		ret = gpio_request_by_name_nodev(offset_to_ofnode(node),
--						 "gpios", 0, &usb_sel, 0);
--		if (ret < 0) {
--			printf("Failed to request usb_sw_sel_pm gpio.\n");
--			return ret;
--		}
--	}
--
--	if (init == USB_INIT_HOST) {
--		/* Start USB Hub */
--		dm_gpio_set_dir_flags(&hub_reset,
--				      GPIOD_IS_OUT | GPIOD_IS_OUT_ACTIVE);
--		mdelay(100);
--		/* Switch usb to host connectors */
--		dm_gpio_set_dir_flags(&usb_sel,
--				      GPIOD_IS_OUT | GPIOD_IS_OUT_ACTIVE);
--		mdelay(100);
--	} else { /* Device */
--		/* Disable hub */
--		dm_gpio_set_dir_flags(&hub_reset, GPIOD_IS_OUT);
--		/* Switch back to device connector */
--		dm_gpio_set_dir_flags(&usb_sel, GPIOD_IS_OUT);
-+	/* Select "default" or "device" pinctrl */
-+	switch (init) {
-+	case USB_INIT_HOST:
-+		pinctrl_select_state(usb, "default");
-+		break;
-+	case USB_INIT_DEVICE:
-+		pinctrl_select_state(usb, "device");
-+		break;
-+	default:
-+		debug("Unknown usb_init_type %d\n", init);
-+		break;
- 	}
- 
- 	return 0;
-diff --git a/doc/device-tree-bindings/usb/ehci-msm.txt b/doc/device-tree-bindings/usb/ehci-msm.txt
-deleted file mode 100644
-index 205bb07220fb..000000000000
---- a/doc/device-tree-bindings/usb/ehci-msm.txt
-+++ /dev/null
-@@ -1,10 +0,0 @@
--Chipidea EHCI controller (part of OTG controller) used on Qualcomm devices.
--
--Required properties:
--- compatible: must be "qcom,ehci-host"
--- reg: start address and size of the registers
--
--ehci@78d9000 {
--	compatible = "qcom,ehci-host";
--	reg = <0x78d9000 0x400>;
--};
-diff --git a/drivers/clk/qcom/clock-apq8016.c b/drivers/clk/qcom/clock-apq8016.c
-index 0af7191cff52..9de0ad5ed32d 100644
---- a/drivers/clk/qcom/clock-apq8016.c
-+++ b/drivers/clk/qcom/clock-apq8016.c
-@@ -13,6 +13,7 @@
- #include <errno.h>
- #include <asm/io.h>
- #include <linux/bitops.h>
-+#include <dt-bindings/clock/qcom,gcc-msm8916.h>
- 
- #include "clock-qcom.h"
- 
-@@ -125,13 +126,13 @@ static ulong apq8016_clk_set_rate(struct clk *clk, ulong rate)
- 	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
- 
- 	switch (clk->id) {
--	case 0: /* SDC1 */
-+	case GCC_SDCC1_APPS_CLK: /* SDC1 */
- 		return clk_init_sdc(priv, 0, rate);
- 		break;
--	case 1: /* SDC2 */
-+	case GCC_SDCC2_APPS_CLK: /* SDC2 */
- 		return clk_init_sdc(priv, 1, rate);
- 		break;
--	case 4: /* UART2 */
-+	case GCC_BLSP1_UART2_APPS_CLK: /* UART2 */
- 		return clk_init_uart(priv);
- 		break;
- 	default:
-diff --git a/drivers/phy/qcom/msm8916-usbh-phy.c b/drivers/phy/qcom/msm8916-usbh-phy.c
-index 7c9d030a4d8a..f52046f7cb02 100644
---- a/drivers/phy/qcom/msm8916-usbh-phy.c
-+++ b/drivers/phy/qcom/msm8916-usbh-phy.c
-@@ -74,7 +74,7 @@ static int msm_phy_probe(struct udevice *dev)
- {
- 	struct msm_phy_priv *priv = dev_get_priv(dev);
- 
--	priv->regs = dev_remap_addr(dev);
-+	priv->regs = dev_remap_addr(dev_get_parent(dev));
- 	if (!priv->regs)
- 		return -EINVAL;
- 
-@@ -96,7 +96,7 @@ static struct phy_ops msm_phy_ops = {
- };
- 
- static const struct udevice_id msm_phy_ids[] = {
--	{ .compatible = "qcom,apq8016-usbphy" },
-+	{ .compatible = "qcom,usb-hs-phy-msm8916" },
- 	{ }
- };
- 
-diff --git a/drivers/pinctrl/qcom/pinctrl-apq8016.c b/drivers/pinctrl/qcom/pinctrl-apq8016.c
-index df5bd1c19f6e..c8f4eeae6082 100644
---- a/drivers/pinctrl/qcom/pinctrl-apq8016.c
-+++ b/drivers/pinctrl/qcom/pinctrl-apq8016.c
-@@ -29,7 +29,7 @@ static const char * const msm_pinctrl_pins[] = {
- };
- 
- static const struct pinctrl_function msm_pinctrl_functions[] = {
--	{"blsp1_uart", 2},
-+	{"blsp_uart2", 2},
- };
- 
- static const char *apq8016_get_function_name(struct udevice *dev,
-diff --git a/drivers/usb/host/ehci-msm.c b/drivers/usb/host/ehci-msm.c
-index dd0d153500cb..98fe7bc3bcb1 100644
---- a/drivers/usb/host/ehci-msm.c
-+++ b/drivers/usb/host/ehci-msm.c
-@@ -9,6 +9,7 @@
- 
- #include <common.h>
- #include <dm.h>
-+#include <dm/lists.h>
- #include <errno.h>
- #include <usb.h>
- #include <usb/ehci-ci.h>
-@@ -119,6 +120,24 @@ static int ehci_usb_of_to_plat(struct udevice *dev)
- 	return 0;
- }
- 
-+static int ehci_usb_of_bind(struct udevice *dev)
-+{
-+	ofnode ulpi_node = ofnode_first_subnode(dev_ofnode(dev));
-+	ofnode phy_node;
++		};
++	};
++};
 +
-+	if (!ofnode_valid(ulpi_node))
-+		return 0;
++&spmi_bus {
++	pm8998_lsid0: pmic@0 {
++		compatible = "qcom,pm8998", "qcom,spmi-pmic";
++		reg = <0x0 SPMI_USID>;
++		#address-cells = <1>;
++		#size-cells = <0>;
 +
-+	phy_node = ofnode_first_subnode(ulpi_node);
-+	if (!ofnode_valid(phy_node)) {
-+		printf("%s: ulpi subnode with no phy\n", __func__);
-+		return -ENOENT;
-+	}
++		pm8998_pon: pon@800 {
++			compatible = "qcom,pm8998-pon";
 +
-+	return device_bind_driver_to_node(dev, "msm8916_usbphy", "msm8916_usbphy",
-+					  phy_node, NULL);
-+}
++			reg = <0x800>;
++			mode-bootloader = <0x2>;
++			mode-recovery = <0x1>;
 +
- #if defined(CONFIG_CI_UDC)
- /* Little quirk that MSM needs with Chipidea controller
-  * Must reinit phy after reset
-@@ -132,7 +151,7 @@ void ci_init_after_reset(struct ehci_ctrl *ctrl)
- #endif
- 
- static const struct udevice_id ehci_usb_ids[] = {
--	{ .compatible = "qcom,ehci-host", },
-+	{ .compatible = "qcom,ci-hdrc", },
- 	{ }
- };
- 
-@@ -141,6 +160,7 @@ U_BOOT_DRIVER(usb_ehci) = {
- 	.id	= UCLASS_USB,
- 	.of_match = ehci_usb_ids,
- 	.of_to_plat = ehci_usb_of_to_plat,
-+	.bind = ehci_usb_of_bind,
- 	.probe = ehci_usb_probe,
- 	.remove = ehci_usb_remove,
- 	.ops	= &ehci_usb_ops,
-diff --git a/include/dt-bindings/clock/qcom,gcc-msm8916.h b/include/dt-bindings/clock/qcom,gcc-msm8916.h
++			pm8998_pwrkey: pwrkey {
++				compatible = "qcom,pm8941-pwrkey";
++				interrupts = <0x0 0x8 0 IRQ_TYPE_EDGE_BOTH>;
++				debounce = <15625>;
++				bias-pull-up;
++				linux,code = <KEY_POWER>;
++			};
++
++			pm8998_resin: resin {
++				compatible = "qcom,pm8941-resin";
++				interrupts = <0x0 0x8 1 IRQ_TYPE_EDGE_BOTH>;
++				debounce = <15625>;
++				bias-pull-up;
++				status = "disabled";
++			};
++		};
++
++		pm8998_temp: temp-alarm@2400 {
++			compatible = "qcom,spmi-temp-alarm";
++			reg = <0x2400>;
++			interrupts = <0x0 0x24 0x0 IRQ_TYPE_EDGE_RISING>;
++			io-channels = <&pm8998_adc ADC5_DIE_TEMP>;
++			io-channel-names = "thermal";
++			#thermal-sensor-cells = <0>;
++		};
++
++		pm8998_coincell: charger@2800 {
++			compatible = "qcom,pm8998-coincell", "qcom,pm8941-coincell";
++			reg = <0x2800>;
++
++			status = "disabled";
++		};
++
++		pm8998_adc: adc@3100 {
++			compatible = "qcom,spmi-adc-rev2";
++			reg = <0x3100>;
++			interrupts = <0x0 0x31 0x0 IRQ_TYPE_EDGE_RISING>;
++			#address-cells = <1>;
++			#size-cells = <0>;
++			#io-channel-cells = <1>;
++
++			channel@6 {
++				reg = <ADC5_DIE_TEMP>;
++				label = "die_temp";
++			};
++		};
++
++		pm8998_adc_tm: adc-tm@3400 {
++			compatible = "qcom,spmi-adc-tm-hc";
++			reg = <0x3400>;
++			interrupts = <0x0 0x34 0x0 IRQ_TYPE_EDGE_RISING>;
++			#thermal-sensor-cells = <1>;
++			#address-cells = <1>;
++			#size-cells = <0>;
++			status = "disabled";
++		};
++
++		rtc@6000 {
++			compatible = "qcom,pm8941-rtc";
++			reg = <0x6000>, <0x6100>;
++			reg-names = "rtc", "alarm";
++			interrupts = <0x0 0x61 0x1 IRQ_TYPE_EDGE_RISING>;
++		};
++
++		pm8998_gpios: gpio@c000 {
++			compatible = "qcom,pm8998-gpio", "qcom,spmi-gpio";
++			reg = <0xc000>;
++			gpio-controller;
++			gpio-ranges = <&pm8998_gpios 0 0 26>;
++			#gpio-cells = <2>;
++			interrupt-controller;
++			#interrupt-cells = <2>;
++		};
++
++	};
++
++	pm8998_lsid1: pmic@1 {
++		compatible = "qcom,pm8998", "qcom,spmi-pmic";
++		reg = <0x1 SPMI_USID>;
++		#address-cells = <1>;
++		#size-cells = <0>;
++	};
++};
+diff --git a/arch/arm/dts/pmi8998.dtsi b/arch/arm/dts/pmi8998.dtsi
 new file mode 100644
-index 000000000000..563034406184
+index 000000000000..cd3f0790fd42
 --- /dev/null
-+++ b/include/dt-bindings/clock/qcom,gcc-msm8916.h
-@@ -0,0 +1,179 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
++++ b/arch/arm/dts/pmi8998.dtsi
+@@ -0,0 +1,98 @@
++// SPDX-License-Identifier: GPL-2.0
++#include <dt-bindings/interrupt-controller/irq.h>
++#include <dt-bindings/spmi/spmi.h>
++
++&spmi_bus {
++	pmi8998_lsid0: pmic@2 {
++		compatible = "qcom,pmi8998", "qcom,spmi-pmic";
++		reg = <0x2 SPMI_USID>;
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		pmi8998_charger: charger@1000 {
++			compatible = "qcom,pmi8998-charger";
++			reg = <0x1000>;
++
++			interrupts = <0x2 0x13 0x4 IRQ_TYPE_EDGE_BOTH>,
++				     <0x2 0x12 0x2 IRQ_TYPE_EDGE_BOTH>,
++				     <0x2 0x16 0x1 IRQ_TYPE_EDGE_RISING>,
++				     <0x2 0x13 0x6 IRQ_TYPE_EDGE_RISING>;
++			interrupt-names = "usb-plugin",
++					  "bat-ov",
++					  "wdog-bark",
++					  "usbin-icl-change";
++
++			io-channels = <&pmi8998_rradc 3>,
++				      <&pmi8998_rradc 4>;
++			io-channel-names = "usbin_i", "usbin_v";
++
++			status = "disabled";
++		};
++
++		pmi8998_gpios: gpio@c000 {
++			compatible = "qcom,pmi8998-gpio", "qcom,spmi-gpio";
++			reg = <0xc000>;
++			gpio-controller;
++			gpio-ranges = <&pmi8998_gpios 0 0 14>;
++			#gpio-cells = <2>;
++			interrupt-controller;
++			#interrupt-cells = <2>;
++		};
++
++		pmi8998_rradc: adc@4500 {
++			compatible = "qcom,pmi8998-rradc";
++			reg = <0x4500>;
++			#io-channel-cells = <1>;
++		};
++	};
++
++	pmi8998_lsid1: pmic@3 {
++		compatible = "qcom,pmi8998", "qcom,spmi-pmic";
++		reg = <0x3 SPMI_USID>;
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		labibb {
++			compatible = "qcom,pmi8998-lab-ibb";
++
++			ibb: ibb {
++				interrupts = <0x3 0xdc 0x2 IRQ_TYPE_EDGE_RISING>,
++					     <0x3 0xdc 0x0 IRQ_TYPE_LEVEL_HIGH>;
++				interrupt-names = "sc-err", "ocp";
++			};
++
++			lab: lab {
++				interrupts = <0x3 0xde 0x1 IRQ_TYPE_EDGE_RISING>,
++					     <0x3 0xde 0x0 IRQ_TYPE_LEVEL_LOW>;
++				interrupt-names = "sc-err", "ocp";
++			};
++		};
++
++		pmi8998_lpg: pwm {
++			compatible = "qcom,pmi8998-lpg";
++
++			#address-cells = <1>;
++			#size-cells = <0>;
++			#pwm-cells = <2>;
++
++			status = "disabled";
++		};
++
++		pmi8998_flash: led-controller@d300 {
++			compatible = "qcom,pmi8998-flash-led", "qcom,spmi-flash-led";
++			reg = <0xd300>;
++			status = "disabled";
++		};
++
++		pmi8998_wled: leds@d800 {
++			compatible = "qcom,pmi8998-wled";
++			reg = <0xd800>, <0xd900>;
++			interrupts = <0x3 0xd8 0x1 IRQ_TYPE_EDGE_RISING>,
++				     <0x3 0xd8 0x2 IRQ_TYPE_EDGE_RISING>;
++			interrupt-names = "ovp", "short";
++			label = "backlight";
++
++			status = "disabled";
++		};
++	};
++};
+diff --git a/arch/arm/dts/sdm845-wcd9340.dtsi b/arch/arm/dts/sdm845-wcd9340.dtsi
+new file mode 100644
+index 000000000000..c15d48860646
+--- /dev/null
++++ b/arch/arm/dts/sdm845-wcd9340.dtsi
+@@ -0,0 +1,86 @@
++// SPDX-License-Identifier: GPL-2.0
 +/*
-+ * Copyright 2015 Linaro Limited
++ * SDM845 SoC device tree source
++ *
++ * Copyright (c) 2018, The Linux Foundation. All rights reserved.
 + */
 +
-+#ifndef _DT_BINDINGS_CLK_MSM_GCC_8916_H
-+#define _DT_BINDINGS_CLK_MSM_GCC_8916_H
++&slim {
++	status = "okay";
 +
-+#define GPLL0					0
-+#define GPLL0_VOTE				1
-+#define BIMC_PLL				2
-+#define BIMC_PLL_VOTE				3
-+#define GPLL1					4
-+#define GPLL1_VOTE				5
-+#define GPLL2					6
-+#define GPLL2_VOTE				7
-+#define PCNOC_BFDCD_CLK_SRC			8
-+#define SYSTEM_NOC_BFDCD_CLK_SRC		9
-+#define CAMSS_AHB_CLK_SRC			10
-+#define APSS_AHB_CLK_SRC			11
-+#define CSI0_CLK_SRC				12
-+#define CSI1_CLK_SRC				13
-+#define GFX3D_CLK_SRC				14
-+#define VFE0_CLK_SRC				15
-+#define BLSP1_QUP1_I2C_APPS_CLK_SRC		16
-+#define BLSP1_QUP1_SPI_APPS_CLK_SRC		17
-+#define BLSP1_QUP2_I2C_APPS_CLK_SRC		18
-+#define BLSP1_QUP2_SPI_APPS_CLK_SRC		19
-+#define BLSP1_QUP3_I2C_APPS_CLK_SRC		20
-+#define BLSP1_QUP3_SPI_APPS_CLK_SRC		21
-+#define BLSP1_QUP4_I2C_APPS_CLK_SRC		22
-+#define BLSP1_QUP4_SPI_APPS_CLK_SRC		23
-+#define BLSP1_QUP5_I2C_APPS_CLK_SRC		24
-+#define BLSP1_QUP5_SPI_APPS_CLK_SRC		25
-+#define BLSP1_QUP6_I2C_APPS_CLK_SRC		26
-+#define BLSP1_QUP6_SPI_APPS_CLK_SRC		27
-+#define BLSP1_UART1_APPS_CLK_SRC		28
-+#define BLSP1_UART2_APPS_CLK_SRC		29
-+#define CCI_CLK_SRC				30
-+#define CAMSS_GP0_CLK_SRC			31
-+#define CAMSS_GP1_CLK_SRC			32
-+#define JPEG0_CLK_SRC				33
-+#define MCLK0_CLK_SRC				34
-+#define MCLK1_CLK_SRC				35
-+#define CSI0PHYTIMER_CLK_SRC			36
-+#define CSI1PHYTIMER_CLK_SRC			37
-+#define CPP_CLK_SRC				38
-+#define CRYPTO_CLK_SRC				39
-+#define GP1_CLK_SRC				40
-+#define GP2_CLK_SRC				41
-+#define GP3_CLK_SRC				42
-+#define BYTE0_CLK_SRC				43
-+#define ESC0_CLK_SRC				44
-+#define MDP_CLK_SRC				45
-+#define PCLK0_CLK_SRC				46
-+#define VSYNC_CLK_SRC				47
-+#define PDM2_CLK_SRC				48
-+#define SDCC1_APPS_CLK_SRC			49
-+#define SDCC2_APPS_CLK_SRC			50
-+#define APSS_TCU_CLK_SRC			51
-+#define USB_HS_SYSTEM_CLK_SRC			52
-+#define VCODEC0_CLK_SRC				53
-+#define GCC_BLSP1_AHB_CLK			54
-+#define GCC_BLSP1_SLEEP_CLK			55
-+#define GCC_BLSP1_QUP1_I2C_APPS_CLK		56
-+#define GCC_BLSP1_QUP1_SPI_APPS_CLK		57
-+#define GCC_BLSP1_QUP2_I2C_APPS_CLK		58
-+#define GCC_BLSP1_QUP2_SPI_APPS_CLK		59
-+#define GCC_BLSP1_QUP3_I2C_APPS_CLK		60
-+#define GCC_BLSP1_QUP3_SPI_APPS_CLK		61
-+#define GCC_BLSP1_QUP4_I2C_APPS_CLK		62
-+#define GCC_BLSP1_QUP4_SPI_APPS_CLK		63
-+#define GCC_BLSP1_QUP5_I2C_APPS_CLK		64
-+#define GCC_BLSP1_QUP5_SPI_APPS_CLK		65
-+#define GCC_BLSP1_QUP6_I2C_APPS_CLK		66
-+#define GCC_BLSP1_QUP6_SPI_APPS_CLK		67
-+#define GCC_BLSP1_UART1_APPS_CLK		68
-+#define GCC_BLSP1_UART2_APPS_CLK		69
-+#define GCC_BOOT_ROM_AHB_CLK			70
-+#define GCC_CAMSS_CCI_AHB_CLK			71
-+#define GCC_CAMSS_CCI_CLK			72
-+#define GCC_CAMSS_CSI0_AHB_CLK			73
-+#define GCC_CAMSS_CSI0_CLK			74
-+#define GCC_CAMSS_CSI0PHY_CLK			75
-+#define GCC_CAMSS_CSI0PIX_CLK			76
-+#define GCC_CAMSS_CSI0RDI_CLK			77
-+#define GCC_CAMSS_CSI1_AHB_CLK			78
-+#define GCC_CAMSS_CSI1_CLK			79
-+#define GCC_CAMSS_CSI1PHY_CLK			80
-+#define GCC_CAMSS_CSI1PIX_CLK			81
-+#define GCC_CAMSS_CSI1RDI_CLK			82
-+#define GCC_CAMSS_CSI_VFE0_CLK			83
-+#define GCC_CAMSS_GP0_CLK			84
-+#define GCC_CAMSS_GP1_CLK			85
-+#define GCC_CAMSS_ISPIF_AHB_CLK			86
-+#define GCC_CAMSS_JPEG0_CLK			87
-+#define GCC_CAMSS_JPEG_AHB_CLK			88
-+#define GCC_CAMSS_JPEG_AXI_CLK			89
-+#define GCC_CAMSS_MCLK0_CLK			90
-+#define GCC_CAMSS_MCLK1_CLK			91
-+#define GCC_CAMSS_MICRO_AHB_CLK			92
-+#define GCC_CAMSS_CSI0PHYTIMER_CLK		93
-+#define GCC_CAMSS_CSI1PHYTIMER_CLK		94
-+#define GCC_CAMSS_AHB_CLK			95
-+#define GCC_CAMSS_TOP_AHB_CLK			96
-+#define GCC_CAMSS_CPP_AHB_CLK			97
-+#define GCC_CAMSS_CPP_CLK			98
-+#define GCC_CAMSS_VFE0_CLK			99
-+#define GCC_CAMSS_VFE_AHB_CLK			100
-+#define GCC_CAMSS_VFE_AXI_CLK			101
-+#define GCC_CRYPTO_AHB_CLK			102
-+#define GCC_CRYPTO_AXI_CLK			103
-+#define GCC_CRYPTO_CLK				104
-+#define GCC_OXILI_GMEM_CLK			105
-+#define GCC_GP1_CLK				106
-+#define GCC_GP2_CLK				107
-+#define GCC_GP3_CLK				108
-+#define GCC_MDSS_AHB_CLK			109
-+#define GCC_MDSS_AXI_CLK			110
-+#define GCC_MDSS_BYTE0_CLK			111
-+#define GCC_MDSS_ESC0_CLK			112
-+#define GCC_MDSS_MDP_CLK			113
-+#define GCC_MDSS_PCLK0_CLK			114
-+#define GCC_MDSS_VSYNC_CLK			115
-+#define GCC_MSS_CFG_AHB_CLK			116
-+#define GCC_OXILI_AHB_CLK			117
-+#define GCC_OXILI_GFX3D_CLK			118
-+#define GCC_PDM2_CLK				119
-+#define GCC_PDM_AHB_CLK				120
-+#define GCC_PRNG_AHB_CLK			121
-+#define GCC_SDCC1_AHB_CLK			122
-+#define GCC_SDCC1_APPS_CLK			123
-+#define GCC_SDCC2_AHB_CLK			124
-+#define GCC_SDCC2_APPS_CLK			125
-+#define GCC_GTCU_AHB_CLK			126
-+#define GCC_JPEG_TBU_CLK			127
-+#define GCC_MDP_TBU_CLK				128
-+#define GCC_SMMU_CFG_CLK			129
-+#define GCC_VENUS_TBU_CLK			130
-+#define GCC_VFE_TBU_CLK				131
-+#define GCC_USB2A_PHY_SLEEP_CLK			132
-+#define GCC_USB_HS_AHB_CLK			133
-+#define GCC_USB_HS_SYSTEM_CLK			134
-+#define GCC_VENUS0_AHB_CLK			135
-+#define GCC_VENUS0_AXI_CLK			136
-+#define GCC_VENUS0_VCODEC0_CLK			137
-+#define BIMC_DDR_CLK_SRC			138
-+#define GCC_APSS_TCU_CLK			139
-+#define GCC_GFX_TCU_CLK				140
-+#define BIMC_GPU_CLK_SRC			141
-+#define GCC_BIMC_GFX_CLK			142
-+#define GCC_BIMC_GPU_CLK			143
-+#define ULTAUDIO_LPAIF_PRI_I2S_CLK_SRC		144
-+#define ULTAUDIO_LPAIF_SEC_I2S_CLK_SRC		145
-+#define ULTAUDIO_LPAIF_AUX_I2S_CLK_SRC		146
-+#define ULTAUDIO_XO_CLK_SRC			147
-+#define ULTAUDIO_AHBFABRIC_CLK_SRC		148
-+#define CODEC_DIGCODEC_CLK_SRC			149
-+#define GCC_ULTAUDIO_PCNOC_MPORT_CLK		150
-+#define GCC_ULTAUDIO_PCNOC_SWAY_CLK		151
-+#define GCC_ULTAUDIO_AVSYNC_XO_CLK		152
-+#define GCC_ULTAUDIO_STC_XO_CLK			153
-+#define GCC_ULTAUDIO_AHBFABRIC_IXFABRIC_CLK	154
-+#define GCC_ULTAUDIO_AHBFABRIC_IXFABRIC_LPM_CLK	155
-+#define GCC_ULTAUDIO_LPAIF_PRI_I2S_CLK		156
-+#define GCC_ULTAUDIO_LPAIF_SEC_I2S_CLK		157
-+#define GCC_ULTAUDIO_LPAIF_AUX_I2S_CLK		158
-+#define GCC_CODEC_DIGCODEC_CLK			159
-+#define GCC_MSS_Q6_BIMC_AXI_CLK			160
++	slim@1 {
++		reg = <1>;
++		#address-cells = <2>;
++		#size-cells = <0>;
 +
-+/* Indexes for GDSCs */
-+#define BIMC_GDSC				0
-+#define VENUS_GDSC				1
-+#define MDSS_GDSC				2
-+#define JPEG_GDSC				3
-+#define VFE_GDSC				4
-+#define OXILI_GDSC				5
++		wcd9340_ifd: ifd@0,0 {
++			compatible = "slim217,250";
++			reg = <0 0>;
++		};
 +
-+#endif
++		wcd9340: codec@1,0 {
++			compatible = "slim217,250";
++			reg = <1 0>;
++			slim-ifc-dev = <&wcd9340_ifd>;
++
++			#sound-dai-cells = <1>;
++
++			interrupts-extended = <&tlmm 54 IRQ_TYPE_LEVEL_HIGH>;
++			interrupt-controller;
++			#interrupt-cells = <1>;
++
++			clock-names = "extclk";
++			clocks = <&rpmhcc RPMH_LN_BB_CLK2>;
++
++			#clock-cells = <0>;
++			clock-frequency = <9600000>;
++			clock-output-names = "mclk";
++
++			pinctrl-0 = <&wcd_intr_default>;
++			pinctrl-names = "default";
++
++			qcom,micbias1-microvolt = <1800000>;
++			qcom,micbias2-microvolt = <1800000>;
++			qcom,micbias3-microvolt = <1800000>;
++			qcom,micbias4-microvolt = <1800000>;
++
++			#address-cells = <1>;
++			#size-cells = <1>;
++
++			wcdgpio: gpio-controller@42 {
++				compatible = "qcom,wcd9340-gpio";
++				gpio-controller;
++				#gpio-cells = <2>;
++				reg = <0x42 0x2>;
++			};
++
++			swm: swm@c85 {
++				compatible = "qcom,soundwire-v1.3.0";
++				reg = <0xc85 0x40>;
++				interrupts-extended = <&wcd9340 20>;
++
++				qcom,dout-ports = <6>;
++				qcom,din-ports = <2>;
++				qcom,ports-sinterval-low = /bits/ 8  <0x07 0x1f 0x3f 0x7 0x1f 0x3f 0x0f 0x0f>;
++				qcom,ports-offset1 = /bits/ 8 <0x01 0x02 0x0c 0x6 0x12 0x0d 0x07 0x0a>;
++				qcom,ports-offset2 = /bits/ 8 <0x00 0x00 0x1f 0x00 0x00 0x1f 0x00 0x00>;
++
++				#sound-dai-cells = <1>;
++				clocks = <&wcd9340>;
++				clock-names = "iface";
++				#address-cells = <2>;
++				#size-cells = <0>;
++			};
++		};
++	};
++};
++
++&tlmm {
++	wcd_intr_default: wcd-intr-default-state {
++		pins = "gpio54";
++		function = "gpio";
++
++		bias-pull-down;
++		drive-strength = <2>;
++	};
++};
 
 -- 
 2.43.1
