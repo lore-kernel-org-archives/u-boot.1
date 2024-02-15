@@ -4,54 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3E78C4829E
-	for <u-boot@archiver.kernel.org>; Thu, 15 Feb 2024 08:07:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6044BC4829E
+	for <u-boot@archiver.kernel.org>; Thu, 15 Feb 2024 09:04:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1195087D7F;
-	Thu, 15 Feb 2024 09:07:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id 6AF7C87CC1;
+	Thu, 15 Feb 2024 10:04:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="UuRMh6Sj";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="oMtOnkp2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 310B087D7F; Thu, 15 Feb 2024 09:07:03 +0100 (CET)
-Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 435C487D8A; Thu, 15 Feb 2024 10:04:09 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ECB19879BB
- for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 09:06:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C6B58078B
+ for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 10:04:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
- by mail11.truemail.it (Postfix) with ESMTPA id 107281F927;
- Thu, 15 Feb 2024 09:06:57 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1707984417;
- bh=1z9DqBOmzW5YIs7ik+C5oaKA7B50Wu700C/uc1ISR8M=; h=From:To:Subject;
- b=UuRMh6SjuYLCvAeuHGdlPcTklgB7gCR1hlOgWiAbpIaG6h0nHk/GWslNpqbvTwDna
- qKm9dGn1JJYLD21qBZSeGE9Zc/UvgWlpiRm8TEQjs/+UqYlJJai4gUNc4Funnt1un9
- gS2mD/Jw1T6jXac1YX5oHoLBN8e+UBYB3IsNYKW2gO2WdLhK/qHedLGrYvLITSl42s
- Tiv5gtiCH24MmGmVAlUTGJPo3o3qHph7ot8PPijznza1shJIQvCCsd8KqYuNBLNs1A
- iGIaxbc9xF2m2CEjGBl5RxtZ/Jk/2jxZgJGXN74v02H6F7auS7qGLOW1vSN3v94WAI
- g01kcANURsLTg==
-Date: Thu, 15 Feb 2024 09:06:53 +0100
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Andrew Davis <afd@ti.com>
-Cc: Neha Malcom Francis <n-francis@ti.com>,
- Vignesh Raghavendra <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH 6/6] arm: mach-k3: Move DRAM address of ATF for AM62/AM62a
-Message-ID: <20240215080653.GA5107@francesco-nb>
-References: <20240214163009.983034-1-afd@ti.com>
- <20240214163009.983034-7-afd@ti.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41F93ntr070691;
+ Thu, 15 Feb 2024 03:03:49 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1707987829;
+ bh=xBKv/JcMcjvq1a+oN+ahHysyMRi9qQdc/kXLVUZk0Js=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=oMtOnkp2kfiHT+CHv7ZA2BFg5sjhxnFxgybhPR5uggksaVa1MvAmImTtACMYm9ji5
+ oSToC+3MKtRjkQ2s9NwUdKtYzHWTPa7SPTcJQF9fKKsQbUcxB46jMfBFALZCDEidcX
+ PfIVZ3IkMhoEAdi4KnfBZdaoVzqWCaKwDC23fbuw=
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41F93n0B070252
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 15 Feb 2024 03:03:49 -0600
+Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 15
+ Feb 2024 03:03:49 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 15 Feb 2024 03:03:49 -0600
+Received: from [10.249.139.5] ([10.249.139.5])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41F93fdm066578;
+ Thu, 15 Feb 2024 03:03:42 -0600
+Message-ID: <d7298f55-c565-457b-a9b5-52980ae63f1e@ti.com>
+Date: Thu, 15 Feb 2024 14:33:40 +0530
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240214163009.983034-7-afd@ti.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v8 12/16] arm: dts: Introduce j784s4 u-boot dts files
+Content-Language: en-US
+To: Nishanth Menon <nm@ti.com>, Apurva Nandan <a-nandan@ti.com>
+CC: Hari Nagalla <hnagalla@ti.com>, Lukasz Majewski <lukma@denx.de>, Sean
+ Anderson <seanga2@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>, Simon
+ Glass <sjg@chromium.org>, Andrew Davis <afd@ti.com>, Kamlesh Gurudasani
+ <kamlesh@ti.com>, Dasnavis Sabiya <sabiya.d@ti.com>, Manorit Chawdhry
+ <m-chawdhry@ti.com>, Aradhya Bhatia <a-bhatia1@ti.com>, Bryan Brattlof
+ <bb@ti.com>, Christian Gmeiner <christian.gmeiner@gmail.com>, Heinrich
+ Schuchardt <xypron.glpk@gmx.de>, Marcel Ziswiler
+ <marcel.ziswiler@toradex.com>, Roger Quadros <rogerq@kernel.org>, Jayesh
+ Choudhary <j-choudhary@ti.com>, Ralph Siemsen <ralph.siemsen@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Rasmus Villemoes
+ <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>, Sinthu Raja M
+ <sinthu.raja@mistralsolutions.com>, Udit Kumar <u-kumar1@ti.com>
+References: <20240119175043.3904751-1-a-nandan@ti.com>
+ <20240119175043.3904751-13-a-nandan@ti.com>
+ <20240119191743.xtxtuhnmhw7eq662@bonus>
+ <f7cd5cbe-7c14-429e-b5c1-9f994f3ea4f7@ti.com>
+ <20240123205255.i7eynu6vdpoxwybf@irregular>
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <20240123205255.i7eynu6vdpoxwybf@irregular>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,23 +94,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Andrew,
-thanks for this series.
+Hi Nishanth
 
-On Wed, Feb 14, 2024 at 10:30:09AM -0600, Andrew Davis wrote:
-> The current address of TF-A in DRAM is just below the 512MB address line.
-> This means if the DRAM in a system is 512MB then TF-A is right at the
-> end of memory which is often reused, for instance U-Boot relocates itself
-> here. If a system has less than 512MB then that system wouldn't work at
-> all as TF-A would fail to load.
+On 24-Jan-24 2:22 AM, Nishanth Menon wrote:
+> On 20:28-20240123, Apurva Nandan wrote:
+>>
+> [...]
+> 
+>>> in j784s4-binman.dtsi:
+>>>
+>>>
+>>>    &binman {
+>>>           j784s4_tiboot3_hs_fs_template: template-9 {
+>>>
+>>> and then in sk.dtsi:
+>> sk.dtsi means sk-uboot.dtsi or sk-binman.dtsi?
+> 
+> you wont need an sk-binman.dtsi with template. sk-u-boot.dtsi and
+> r5-sk.dts ofcourse will instantiate the required templates!
+> 
+>>> &binman {
+>>>         ti-j784s4-hs-evm.bin {
+>>>            insert-template =<&j784s4_tiboot3_hs_fs_template>;
+>>>        };
+>>> };
+>>>
+>>> This allows boards to readily include the template for the binaries of
+>>> choice and generate just relevant output. Wont it save much confusion?
+>>>
+>>> [...]
+>> It is still little unclear what is the full thing that you are recommending
+>> to implement here.
+>>  From what I understood, is it as follows?
+>>
+>> - Three binman files will be there: j784s4-binman.dtsi (soc binman),
+>> j784s4-evm-binman.dtsi and am69-sk-binman.dtsi (board binman)
+> 
+> Nope. just j784s4-binman.dtsi with bin file templates for different kinds
+> of devices.
+> 
+>> - j784s4-binman.dtsi will be a SoC binman, and will have only templates for
+>> all tiboot3 gp, hs, hsfs, and tispl/uboot
+> 
+> tiboot3.bin is a an example, but you should do templates for other files
+> (tispl, u-boot.img... )as well on similar lines. So all a board file
+> ideally should instantiate is device types it wants and overrides of
+> dtbs it needs.
+> 
+>> - The board binman files will include these templates and update the dtb
+>> files in them.
+> 
+> Correct.
+> 
+>> - Final board.dts will use the correct board-binman.dtsi files
+> 
+> if the templates are abstract enough, the additional code will be so
+> minimal that we wont need a board-binman.dtsi - just u-boot.dtsi and
+> r5.dtsi can include the relevant templates.
+> 
+> Hope this helps.
 
-Do you expect issue with system with exactly 512MB of RAM? We have such
-a board available and this is something that was not on our radar.
 
-The way we handle this is with `verdin-am62.c:board_get_usable_ram_top()`
+So I took a stab at working on this for couple of days, a fix was needed 
+within the tool to allow binman to handle multiple consecutive templates 
+which is needed here etc. which is why it did not work as is; but the 
+built binaries are still not stable for boot. I think this will need 
+some additional work and debugging. As of now, templating is not widely 
+used, so I'm guessing some more minor fixes would be needed to get it 
+building as we intend.
 
-There is also some other reserved memory just before the 512MB limit,
-not just the TF-A.
+If you are okay, I think we can take this series as is for now, I will 
+take action to start off a series cleaning up and using templating for 
+all the devices.
 
-Francesco
-
+-- 
+Thanking You
+Neha Malcom Francis
