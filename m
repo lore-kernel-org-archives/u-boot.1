@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D592BC48BC4
-	for <u-boot@archiver.kernel.org>; Thu, 15 Feb 2024 20:57:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF321C4829E
+	for <u-boot@archiver.kernel.org>; Thu, 15 Feb 2024 20:57:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D41F87F72;
-	Thu, 15 Feb 2024 21:53:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C758887EF1;
+	Thu, 15 Feb 2024 21:53:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LKqoF5cT";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ctwky/E/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9106487F2B; Thu, 15 Feb 2024 21:53:33 +0100 (CET)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 779EB87F2B; Thu, 15 Feb 2024 21:53:34 +0100 (CET)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC58E87EEB
- for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 21:52:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3943A87EDB
+ for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 21:52:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-41239bbab1aso56565e9.3
- for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 12:52:36 -0800 (PST)
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-33d173acb98so76761f8f.2
+ for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 12:52:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708030356; x=1708635156; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1708030363; x=1708635163; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=+OhJENdISBa9JaygNqPdmUjnpRZoJLBS/uzwdXCs7vk=;
- b=LKqoF5cTYjijE4HmozMdDF8XK7NNGclAwg6PS4S8BHXtIh+NSkUbpqxd5ernFomn/e
- fLSXOB4GT7Ze65+9JTcfj7li5LgV9lzqEp6nTTpo/tUybOIiiMI8iuYxAHzKg3SUCuXE
- ArFfKAWh+tL87v5xjjFuzamCh4D5dTC3mmQI98JopHtckVzwskOwFTZFnDP8Ae8anVA5
- QjmoGNhyf9cmqA0rHwNVIjCCkIw2InCsUT0nEjZRXGr+nMGBlDqZOwZiXzSQum4ckSC2
- YUOWm3isDeeKPM6cwJPOklHiK+nBO4bSIxaDSlayep/nQBL7wVMwCk1ZcLkjppCMsv+M
- Kh0A==
+ :reply-to; bh=xgyenr9wkbe4ZW3R/61adtNJnLoKSyW7Ttu1HNLErK4=;
+ b=ctwky/E/qH08AQYxaeea9vc3PIYB/Q699rO1MiwsWnvugsDWf6D8aYhNbolNLOC0i2
+ yjV5jAze9mxdNbi90tD0cjV13j648ktFicVK29fxrXdon3PbHz59JpqPp9N6WX8vUe3l
+ gREOuqEVDerbb5Qv8LsWtfmD+KypdN12+QvyB65xd4PI9Ehy/GIiQKwt63d8gm71jl+D
+ qKlQYmK+IySs0YeKmAHkhUL5RoJcmnB2x83tlSbCKPwGAWmAIEvs7EgNn8f4uMWHBV1n
+ uPpA7uMrbVV1DNQdMNUnmjo7JieI9l7lI5vDhoPJKX8nF4HVrqIEsg0qtga5grWuAU+M
+ 4wYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708030356; x=1708635156;
+ d=1e100.net; s=20230601; t=1708030363; x=1708635163;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+OhJENdISBa9JaygNqPdmUjnpRZoJLBS/uzwdXCs7vk=;
- b=g/yc3dkJj6jioBquvq/JRayfbBaZk7o5mKUxgKsdGlu5JfzILn7CiKnCCjCuhYvsYJ
- JIIUKEc1sbiGQywSEe/V/pSSuBcLhRRoA55bE/pRdSNlZvvN4fmKMS+08qlyek/RhhQ2
- 5BhaltKrx4viShqSJmpw2s1LUoKRn8t6csQsM8L7n+FsyY8gXBZilDwm2jZlV76k+GUq
- AWYcZ3F29dXvVScy9t9UIwOJQDUmhJy1sPKadbVyS6mAQ3GPcIWKwNhWZxsXgdYlJGUz
- kqtvy0vY1164FD/QLoGidK6NdRcIH9utqXnlE3Ot2B07UcB/Q7XP8btYZlxdr+sG7GD1
- zzxA==
+ bh=xgyenr9wkbe4ZW3R/61adtNJnLoKSyW7Ttu1HNLErK4=;
+ b=LouhEtwDXwy6QBADcAKOIHEx/StluaOdmp95Uyb0iXT+ZuPpOZHxGcRwIhBvbPebvr
+ /QPvaWclzx7yZqvuHzbJvaOA3Spmc72mq0dz6xdghW2roRvQ9et8rhXhXgA+1Zl/aW7T
+ v7fUNemGlDarXtAQ68nOHYKIjEuCcj0ft+1cszA6PnuN492IKGvUgPY8uxuq7viY4JLR
+ WUlJRlaN2b6eeDjheU48ooWQAbN+7jt/cBZ0z+RAOoLTNGhBkLCgANEEyu1hqPWr2SiE
+ Ya1jDE+t3hEF5oFDUtII8nUMgpxJZwX1f+Dqu7SzyL35SWLRJeYsG+V4LyTzNFrFiLkb
+ I/Sw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXtI2vO5ws7o5NfSoVsZye2TEhVpLMzPFZqRqBhFm08eYffkd5PxoDqevHHhigQXFTRoJyTSk3Zsx5lj8ahiE/fIOFfVQ==
-X-Gm-Message-State: AOJu0YwJ6H+FIlOsEQPxKRSK5+++7HB9Njixq+L/IfXyGbCx1iM4knze
- RfzixAYIk7knvgB6vhQtze59ebw0PzklO3JMKBnGEGG/eeKjKOq0e9nRZ0vQRYgxM0AAagV6SJQ
- P
-X-Google-Smtp-Source: AGHT+IFBeG1zo8gvibgRvPB4nZyRmeym7U9yxaOD4Sd563hG9M7hLVgwukCW2b3USZIrxQXr+9tTWw==
-X-Received: by 2002:a5d:6b8c:0:b0:33b:50df:a65e with SMTP id
- n12-20020a5d6b8c000000b0033b50dfa65emr2277429wrx.47.1708030356079; 
- Thu, 15 Feb 2024 12:52:36 -0800 (PST)
+ AJvYcCUF3YNpGuCRZ6fqO5Kbmr3NoMB1aIF8cxvCDwzuEqZXP/SchJzRLLEfKQbt804gPPwNMbOtNXjPRoNNitVI6x8F2cSDOg==
+X-Gm-Message-State: AOJu0YxsJrzvizkww07XTPmR7OZLtRNfRotDv0Gqbt2jQtEKVoKhAgEu
+ JXH9SMAKbal5FoTltyexaxIv+Kug6MJkPtHzTzU9gIEJB8OEltUHDW3uFjDkK6GcudQSSKwzhPl
+ o
+X-Google-Smtp-Source: AGHT+IEa4x1T4uGHt0u8PSU2wRQWUVZTBPKfmTp61ugvXXv/zWO4aqbCIKaFi074R+86R3w32c/DwQ==
+X-Received: by 2002:adf:ec82:0:b0:33b:1a39:e501 with SMTP id
+ z2-20020adfec82000000b0033b1a39e501mr1974328wrn.28.1708030363546; 
+ Thu, 15 Feb 2024 12:52:43 -0800 (PST)
 Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- e4-20020adfe384000000b0033cfa00e497sm194025wrm.64.2024.02.15.12.52.35
+ e4-20020adfe384000000b0033cfa00e497sm194025wrm.64.2024.02.15.12.52.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Feb 2024 12:52:35 -0800 (PST)
+ Thu, 15 Feb 2024 12:52:43 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Thu, 15 Feb 2024 20:52:29 +0000
-Subject: [PATCH v4 11/39] gpio: qcom_pmic: add pinctrl driver
+Date: Thu, 15 Feb 2024 20:52:37 +0000
+Subject: [PATCH v4 19/39] board: dragonboard820c: use LINUX_KERNEL_IMAGE_HEADER
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240215-b4-qcom-common-target-v4-11-ed06355c634a@linaro.org>
+Message-Id: <20240215-b4-qcom-common-target-v4-19-ed06355c634a@linaro.org>
 References: <20240215-b4-qcom-common-target-v4-0-ed06355c634a@linaro.org>
 In-Reply-To: <20240215-b4-qcom-common-target-v4-0-ed06355c634a@linaro.org>
 To: Neil Armstrong <neil.armstrong@linaro.org>, 
@@ -86,13 +86,13 @@ To: Neil Armstrong <neil.armstrong@linaro.org>,
  Stephan Gerhold <stephan@gerhold.net>
 Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
 X-Mailer: b4 0.13-dev-4bd13
-X-Developer-Signature: v=1; a=openpgp-sha256; l=12222;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4839;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=HcyB4pt0Mw7/00yC6uL5YvHPSdZEgcSdrGuB4IEUylY=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtRzla3LD5+28yx41rbj5HW2PekvdHJPiKTWblhxz6Cxf
- dOGa19bO0pZGAQ5GGTFFFnETyyzbFp72V5j+4ILMHNYmUCGMHBxCsBEuDMZ/jscbV6UPfnuzZ+v
- w97LybZ1t0jcPDzzdu4/9VWXNnoomK1mZOi+3aVnWjB1ObfhtH7LKfkrD2QtjNVaUXNcM1r+5uP
- pz1UA
+ bh=TB+rEOKQi0BInDj0rjvhEg9UlCH4+k/WgcTWUfjAHXc=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtRzla2rYlRuul0549da7f44dbPqtO6VntyJrHoc1i2Tj
+ hl7/cvrKGVhEORgkBVTZBE/scyyae1le43tCy7AzGFlAhnCwMUpABNZ1Mbwz5C1JDEo9d/m/ZvX
+ zdF4X3++aPVdJ7WLm9aXnWTUdC2L/sTwP/5n+rUjJr+m+y93sjb3y+j0P+7vlOh10y154sRpCX1
+ vhQA=
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -111,393 +111,196 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce a basic pinctrl driver for the SPMI PMIC GPIOs. This is
-necessary to make proper use of upstream DT bindings specifically on the
-dragonboard410c where they're used to switch between USB host and device
-modes.
+db820c predated support for prepending the kernel image header
+automatically, drop it's custom linker script and head.S in favour of
+this generic support.
 
-Only support for driving the pins as output low or high is enabled for
-now.
-
-To minimise duplicated code and allow for sharing common DT data, the
-pinctrl driver is initialised as a child of the existing GPIO driver.
-
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- drivers/gpio/qcom_pmic_gpio.c | 257 +++++++++++++++++++++++++++++-------------
- 1 file changed, 176 insertions(+), 81 deletions(-)
+ arch/arm/mach-snapdragon/Kconfig          |   1 +
+ board/qualcomm/dragonboard820c/Makefile   |   1 -
+ board/qualcomm/dragonboard820c/head.S     |  33 ---------
+ board/qualcomm/dragonboard820c/u-boot.lds | 111 ------------------------------
+ 4 files changed, 1 insertion(+), 145 deletions(-)
 
-diff --git a/drivers/gpio/qcom_pmic_gpio.c b/drivers/gpio/qcom_pmic_gpio.c
-index 198cd84bc31e..9eca1556c356 100644
---- a/drivers/gpio/qcom_pmic_gpio.c
-+++ b/drivers/gpio/qcom_pmic_gpio.c
-@@ -7,10 +7,14 @@
+diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
+index ad6671081910..f897c393464f 100644
+--- a/arch/arm/mach-snapdragon/Kconfig
++++ b/arch/arm/mach-snapdragon/Kconfig
+@@ -45,6 +45,7 @@ config TARGET_DRAGONBOARD410C
  
- #include <common.h>
- #include <dm.h>
-+#include <dm/device-internal.h>
-+#include <dm/lists.h>
-+#include <dm/pinctrl.h>
- #include <log.h>
- #include <power/pmic.h>
- #include <spmi/spmi.h>
- #include <asm/io.h>
-+#include <stdlib.h>
- #include <asm/gpio.h>
- #include <linux/bitops.h>
+ config TARGET_DRAGONBOARD820C
+ 	bool "96Boards Dragonboard 820C"
++	select LINUX_KERNEL_IMAGE_HEADER
+ 	imply CLK_QCOM_APQ8096
+ 	imply PINCTRL_QCOM_APQ8096
+ 	imply BUTTON_QCOM_PMIC
+diff --git a/board/qualcomm/dragonboard820c/Makefile b/board/qualcomm/dragonboard820c/Makefile
+index 643311f5b3ba..2ae6d16364aa 100644
+--- a/board/qualcomm/dragonboard820c/Makefile
++++ b/board/qualcomm/dragonboard820c/Makefile
+@@ -3,4 +3,3 @@
+ # (C) Copyright 2017 Jorge Ramirez-Ortiz <jorge.ramirez-ortiz@gmail.com>
  
-@@ -73,17 +77,54 @@ enum pmic_gpio_quirks {
- 	QCOM_PMIC_QUIRK_READONLY = (1 << 0),
- };
- 
--struct qcom_gpio_bank {
-+struct qcom_pmic_gpio_data {
- 	uint32_t pid; /* Peripheral ID on SPMI bus */
- 	bool     lv_mv_type; /* If subtype is GPIO_LV(0x10) or GPIO_MV(0x11) */
-+	u32 pin_count;
-+	struct udevice *pmic; /* Reference to pmic device for read/write */
- };
- 
--static int qcom_gpio_set_direction(struct udevice *dev, unsigned offset,
-+/* dev can be the GPIO or pinctrl device */
-+static int _qcom_gpio_set_direction(struct udevice *dev, u32 offset, bool input, int value)
-+{
-+	struct qcom_pmic_gpio_data *plat = dev_get_plat(dev);
-+	u32 gpio_base = plat->pid + REG_OFFSET(offset);
-+	u32 reg_ctl_val;
-+	int ret = 0;
-+
-+	/* Select the mode and output */
-+	if (plat->lv_mv_type) {
-+		if (input)
-+			reg_ctl_val = REG_CTL_LV_MV_MODE_INPUT;
-+		else
-+			reg_ctl_val = REG_CTL_LV_MV_MODE_INOUT;
-+	} else {
-+		if (input)
-+			reg_ctl_val = REG_CTL_MODE_INPUT;
-+		else
-+			reg_ctl_val = REG_CTL_MODE_INOUT | !!value;
-+	}
-+
-+	ret = pmic_reg_write(plat->pmic, gpio_base + REG_CTL, reg_ctl_val);
-+	if (ret < 0)
-+		return ret;
-+
-+	if (plat->lv_mv_type && !input) {
-+		ret = pmic_reg_write(plat->pmic,
-+				     gpio_base + REG_LV_MV_OUTPUT_CTL,
-+				     !!value << REG_LV_MV_OUTPUT_CTL_SHIFT);
-+		if (ret < 0)
-+			return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+static int qcom_gpio_set_direction(struct udevice *dev, unsigned int offset,
- 				   bool input, int value)
- {
--	struct qcom_gpio_bank *priv = dev_get_priv(dev);
--	uint32_t gpio_base = priv->pid + REG_OFFSET(offset);
--	uint32_t reg_ctl_val;
-+	struct qcom_pmic_gpio_data *plat = dev_get_plat(dev);
-+	uint32_t gpio_base = plat->pid + REG_OFFSET(offset);
- 	ulong quirks = dev_get_driver_data(dev);
- 	int ret = 0;
- 
-@@ -97,33 +138,10 @@ static int qcom_gpio_set_direction(struct udevice *dev, unsigned offset,
- 	if (ret < 0)
- 		return ret;
- 
--	/* Select the mode and output */
--	if (priv->lv_mv_type) {
--		if (input)
--			reg_ctl_val = REG_CTL_LV_MV_MODE_INPUT;
--		else
--			reg_ctl_val = REG_CTL_LV_MV_MODE_INOUT;
--	} else {
--		if (input)
--			reg_ctl_val = REG_CTL_MODE_INPUT;
--		else
--			reg_ctl_val = REG_CTL_MODE_INOUT | !!value;
--	}
+ obj-y	:= dragonboard820c.o
+-extra-y += head.o
+diff --git a/board/qualcomm/dragonboard820c/head.S b/board/qualcomm/dragonboard820c/head.S
+deleted file mode 100644
+index b052a858fd32..000000000000
+--- a/board/qualcomm/dragonboard820c/head.S
++++ /dev/null
+@@ -1,33 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * ARM64 header for proper chain-loading with Little Kernel.
+- *
+- * Little Kernel shipped with Dragonboard820C boots standard Linux images for
+- * ARM64. This file adds header that is required to boot U-Boot properly.
+- *
+- * For details see:
+- * https://www.kernel.org/doc/Documentation/arm64/booting.txt
+- *
+- * (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
+- */
 -
--	ret = pmic_reg_write(dev->parent, gpio_base + REG_CTL, reg_ctl_val);
--	if (ret < 0)
--		return ret;
--
--	if (priv->lv_mv_type && !input) {
--		ret = pmic_reg_write(dev->parent,
--				     gpio_base + REG_LV_MV_OUTPUT_CTL,
--				     !!value << REG_LV_MV_OUTPUT_CTL_SHIFT);
--		if (ret < 0)
--			return ret;
--	}
-+	_qcom_gpio_set_direction(dev, offset, input, value);
- 
- 	/* Set the right pull (no pull) */
--	ret = pmic_reg_write(dev->parent, gpio_base + REG_DIG_PULL_CTL,
-+	ret = pmic_reg_write(plat->pmic, gpio_base + REG_DIG_PULL_CTL,
- 			     REG_DIG_PULL_NO_PU);
- 	if (ret < 0)
- 		return ret;
-@@ -131,13 +149,13 @@ static int qcom_gpio_set_direction(struct udevice *dev, unsigned offset,
- 	/* Configure output pin drivers if needed */
- 	if (!input) {
- 		/* Select the VIN - VIN0, pin is input so it doesn't matter */
--		ret = pmic_reg_write(dev->parent, gpio_base + REG_DIG_VIN_CTL,
-+		ret = pmic_reg_write(plat->pmic, gpio_base + REG_DIG_VIN_CTL,
- 				     REG_DIG_VIN_VIN0);
- 		if (ret < 0)
- 			return ret;
- 
- 		/* Set the right dig out control */
--		ret = pmic_reg_write(dev->parent, gpio_base + REG_DIG_OUT_CTL,
-+		ret = pmic_reg_write(plat->pmic, gpio_base + REG_DIG_OUT_CTL,
- 				     REG_DIG_OUT_CTL_CMOS |
- 				     REG_DIG_OUT_CTL_DRIVE_L);
- 		if (ret < 0)
-@@ -162,15 +180,15 @@ static int qcom_gpio_direction_output(struct udevice *dev, unsigned offset,
- 
- static int qcom_gpio_get_function(struct udevice *dev, unsigned offset)
- {
--	struct qcom_gpio_bank *priv = dev_get_priv(dev);
--	uint32_t gpio_base = priv->pid + REG_OFFSET(offset);
-+	struct qcom_pmic_gpio_data *plat = dev_get_plat(dev);
-+	uint32_t gpio_base = plat->pid + REG_OFFSET(offset);
- 	int reg;
- 
--	reg = pmic_reg_read(dev->parent, gpio_base + REG_CTL);
-+	reg = pmic_reg_read(plat->pmic, gpio_base + REG_CTL);
- 	if (reg < 0)
- 		return reg;
- 
--	if (priv->lv_mv_type) {
-+	if (plat->lv_mv_type) {
- 		switch (reg & REG_CTL_LV_MV_MODE_MASK) {
- 		case REG_CTL_LV_MV_MODE_INPUT:
- 			return GPIOF_INPUT;
-@@ -195,11 +213,11 @@ static int qcom_gpio_get_function(struct udevice *dev, unsigned offset)
- 
- static int qcom_gpio_get_value(struct udevice *dev, unsigned offset)
- {
--	struct qcom_gpio_bank *priv = dev_get_priv(dev);
--	uint32_t gpio_base = priv->pid + REG_OFFSET(offset);
-+	struct qcom_pmic_gpio_data *plat = dev_get_plat(dev);
-+	uint32_t gpio_base = plat->pid + REG_OFFSET(offset);
- 	int reg;
- 
--	reg = pmic_reg_read(dev->parent, gpio_base + REG_STATUS);
-+	reg = pmic_reg_read(plat->pmic, gpio_base + REG_STATUS);
- 	if (reg < 0)
- 		return reg;
- 
-@@ -209,11 +227,11 @@ static int qcom_gpio_get_value(struct udevice *dev, unsigned offset)
- static int qcom_gpio_set_value(struct udevice *dev, unsigned offset,
- 			       int value)
- {
--	struct qcom_gpio_bank *priv = dev_get_priv(dev);
--	uint32_t gpio_base = priv->pid + REG_OFFSET(offset);
-+	struct qcom_pmic_gpio_data *plat = dev_get_plat(dev);
-+	uint32_t gpio_base = plat->pid + REG_OFFSET(offset);
- 
- 	/* Set the output value of the gpio */
--	if (priv->lv_mv_type)
-+	if (plat->lv_mv_type)
- 		return pmic_clrsetbits(dev->parent,
- 				       gpio_base + REG_LV_MV_OUTPUT_CTL,
- 				       REG_LV_MV_OUTPUT_CTL_MASK,
-@@ -253,63 +271,74 @@ static const struct dm_gpio_ops qcom_gpio_ops = {
- 	.xlate			= qcom_gpio_xlate,
- };
- 
-+static int qcom_gpio_bind(struct udevice *dev)
-+{
-+	
-+	struct qcom_pmic_gpio_data *plat = dev_get_plat(dev);
-+	ulong quirks = dev_get_driver_data(dev);
-+	struct udevice *child;
-+	struct driver *drv;
-+	int ret;
-+
-+	drv = lists_driver_lookup_name("qcom_pmic_pinctrl");
-+	if (!drv) {
-+		log_warning("Cannot find driver '%s'\n", "qcom_pmic_pinctrl");
-+		return -ENOENT;
-+	}
-+
-+	/* Bind the GPIO driver as a child of the PMIC. */
-+	ret = device_bind_with_driver_data(dev, drv,
-+					   dev->name,
-+					   quirks, dev_ofnode(dev), &child);
-+	if (ret)
-+		return log_msg_ret("bind", ret);
-+
-+	dev_set_plat(child, plat);
-+
-+	return 0;
-+}
-+
- static int qcom_gpio_probe(struct udevice *dev)
- {
--	struct qcom_gpio_bank *priv = dev_get_priv(dev);
--	int reg;
-+	struct gpio_dev_priv *uc_priv = dev_get_uclass_priv(dev);
-+	struct qcom_pmic_gpio_data *plat = dev_get_plat(dev);
-+	struct ofnode_phandle_args args;
-+	int val, ret;
- 	u64 pid;
- 
-+	plat->pmic = dev->parent;
-+
- 	pid = dev_read_addr(dev);
- 	if (pid == FDT_ADDR_T_NONE)
- 		return log_msg_ret("bad address", -EINVAL);
- 
--	priv->pid = pid;
-+	plat->pid = pid;
- 
- 	/* Do a sanity check */
--	reg = pmic_reg_read(dev->parent, priv->pid + REG_TYPE);
--	if (reg != REG_TYPE_VAL)
-+	val = pmic_reg_read(plat->pmic, plat->pid + REG_TYPE);
-+	if (val != REG_TYPE_VAL)
- 		return log_msg_ret("bad type", -ENXIO);
- 
--	reg = pmic_reg_read(dev->parent, priv->pid + REG_SUBTYPE);
--	if (reg != REG_SUBTYPE_GPIO_4CH && reg != REG_SUBTYPE_GPIOC_4CH &&
--	    reg != REG_SUBTYPE_GPIO_LV && reg != REG_SUBTYPE_GPIO_MV)
-+	val = pmic_reg_read(plat->pmic, plat->pid + REG_SUBTYPE);
-+	if (val != REG_SUBTYPE_GPIO_4CH && val != REG_SUBTYPE_GPIOC_4CH &&
-+	    val != REG_SUBTYPE_GPIO_LV && val != REG_SUBTYPE_GPIO_MV)
- 		return log_msg_ret("bad subtype", -ENXIO);
- 
--	priv->lv_mv_type = reg == REG_SUBTYPE_GPIO_LV ||
--			   reg == REG_SUBTYPE_GPIO_MV;
--
--	return 0;
--}
+-#include <config.h>
 -
 -/*
-- * Parse basic GPIO count specified via the gpio-ranges property
-- * as specified in Linux devicetrees
-- * Returns < 0 on error, otherwise gpio count
+- *   per document in linux/Doc/arm64/booting.text
 - */
--static int qcom_gpio_of_parse_ranges(struct udevice *dev)
+-.global _arm64_header
+-_arm64_header:
+-	b _start
+-	.word 0
+-	.quad   CONFIG_TEXT_BASE-PHYS_SDRAM_1 /* Image load offset, LE */
+-	.quad   0    /* Effective size of kernel image, little-endian */
+-	.quad   0    /* kernel flags, little-endian */
+-	.quad   0    /* reserved */
+-	.quad   0    /* reserved */
+-	.quad   0    /* reserved */
+-	.byte   0x41 /* Magic number, "ARM\x64" */
+-	.byte   0x52
+-	.byte   0x4d
+-	.byte   0x64
+-	.word   0    /* reserved (used for PE COFF offset) */
+diff --git a/board/qualcomm/dragonboard820c/u-boot.lds b/board/qualcomm/dragonboard820c/u-boot.lds
+deleted file mode 100644
+index 5251b59fbe76..000000000000
+--- a/board/qualcomm/dragonboard820c/u-boot.lds
++++ /dev/null
+@@ -1,111 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * Override linker script for fastboot-readable images
+- *
+- * (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
+- *
+- * Based on arch/arm/cpu/armv8/u-boot.lds (Just add header)
+- */
+-
+-OUTPUT_FORMAT("elf64-littleaarch64", "elf64-littleaarch64", "elf64-littleaarch64")
+-OUTPUT_ARCH(aarch64)
+-ENTRY(_arm64_header)
+-SECTIONS
 -{
--	int ret;
--	struct ofnode_phandle_args args;
-+	plat->lv_mv_type = val == REG_SUBTYPE_GPIO_LV ||
-+			   val == REG_SUBTYPE_GPIO_MV;
- 
-+	/*
-+	 * Parse basic GPIO count specified via the gpio-ranges property
-+	 * as specified in upstream devicetrees
-+	 */
- 	ret = ofnode_parse_phandle_with_args(dev_ofnode(dev), "gpio-ranges",
- 					     NULL, 3, 0, &args);
- 	if (ret)
- 		return log_msg_ret("gpio-ranges", ret);
- 
--	return args.args[2];
+-	. = 0x00000000;
+-
+-	. = ALIGN(8);
+-	.text :
+-	{
+-		*(.__image_copy_start)
+-		board/qualcomm/dragonboard820c/head.o (.text*)
+-		CPUDIR/start.o (.text*)
+-	}
+-
+-	/* This needs to come before *(.text*) */
+-	.efi_runtime : {
+-                __efi_runtime_start = .;
+-		*(.text.efi_runtime*)
+-		*(.rodata.efi_runtime*)
+-		*(.data.efi_runtime*)
+-                __efi_runtime_stop = .;
+-	}
+-
+-	.text_rest :
+-	{
+-		*(.text*)
+-	}
+-
+-	. = ALIGN(8);
+-	.rodata : { *(SORT_BY_ALIGNMENT(SORT_BY_NAME(.rodata*))) }
+-
+-	. = ALIGN(8);
+-	.data : {
+-		*(.data*)
+-	}
+-
+-	. = ALIGN(8);
+-
+-	. = .;
+-
+-	. = ALIGN(8);
+-	__u_boot_list : {
+-		KEEP(*(SORT(__u_boot_list*)));
+-	}
+-
+-	. = ALIGN(8);
+-
+-	.efi_runtime_rel : {
+-                __efi_runtime_rel_start = .;
+-		*(.rel*.efi_runtime)
+-		*(.rel*.efi_runtime.*)
+-                __efi_runtime_rel_stop = .;
+-	}
+-
+-	. = ALIGN(8);
+-
+-	.image_copy_end :
+-	{
+-		*(.__image_copy_end)
+-	}
+-
+-	. = ALIGN(8);
+-
+-	.rel_dyn_start :
+-	{
+-		*(.__rel_dyn_start)
+-	}
+-
+-	.rela.dyn : {
+-		*(.rela*)
+-	}
+-
+-	.rel_dyn_end :
+-	{
+-		*(.__rel_dyn_end)
+-	}
+-
+-	_end = .;
+-
+-	. = ALIGN(8);
+-
+-	.bss_start : {
+-		KEEP(*(.__bss_start));
+-	}
+-
+-	.bss : {
+-		*(.bss*)
+-		 . = ALIGN(8);
+-	}
+-
+-	.bss_end : {
+-		KEEP(*(.__bss_end));
+-	}
+-
+-	/DISCARD/ : { *(.dynsym) }
+-	/DISCARD/ : { *(.dynstr*) }
+-	/DISCARD/ : { *(.dynamic*) }
+-	/DISCARD/ : { *(.plt*) }
+-	/DISCARD/ : { *(.interp*) }
+-	/DISCARD/ : { *(.gnu*) }
 -}
--
--static int qcom_gpio_of_to_plat(struct udevice *dev)
--{
--	struct gpio_dev_priv *uc_priv = dev_get_uclass_priv(dev);
--	int ret;
--
--	ret = qcom_gpio_of_parse_ranges(dev);
--	if (ret > 0)
--		uc_priv->gpio_count = ret;
--	else
--		return ret;
-+	plat->pin_count = args.args[2];
- 
-+	uc_priv->gpio_count = plat->pin_count;
- 	uc_priv->bank_name = "pmic";
- 
- 	return 0;
-@@ -327,9 +356,75 @@ U_BOOT_DRIVER(qcom_pmic_gpio) = {
- 	.name	= "qcom_pmic_gpio",
- 	.id	= UCLASS_GPIO,
- 	.of_match = qcom_gpio_ids,
--	.of_to_plat = qcom_gpio_of_to_plat,
--	.probe	= qcom_gpio_probe,
-+	.bind	= qcom_gpio_bind,
-+	.probe = qcom_gpio_probe,
- 	.ops	= &qcom_gpio_ops,
--	.priv_auto	= sizeof(struct qcom_gpio_bank),
-+	.plat_auto = sizeof(struct qcom_pmic_gpio_data),
-+	.flags = DM_FLAG_ALLOC_PDATA,
- };
- 
-+static const struct pinconf_param qcom_pmic_pinctrl_conf_params[] = {
-+	{ "output-high", PIN_CONFIG_OUTPUT_ENABLE, 1 },
-+	{ "output-low", PIN_CONFIG_OUTPUT, 0 },
-+};
-+
-+static int qcom_pmic_pinctrl_get_pins_count(struct udevice *dev)
-+{
-+	struct qcom_pmic_gpio_data *plat = dev_get_plat(dev);
-+
-+	return plat->pin_count;
-+}
-+
-+static const char *qcom_pmic_pinctrl_get_pin_name(struct udevice *dev, unsigned int selector)
-+{
-+	static char name[8];
-+
-+	/* DT indexes from 1 */
-+	snprintf(name, sizeof(name), "gpio%u", selector + 1);
-+
-+	return name;
-+}
-+
-+static int qcom_pmic_pinctrl_pinconf_set(struct udevice *dev, unsigned int selector,
-+					 unsigned int param, unsigned int arg)
-+{
-+	/* We only support configuring the pin as an output, either low or high */
-+	return _qcom_gpio_set_direction(dev, selector, false,
-+					param == PIN_CONFIG_OUTPUT_ENABLE);
-+}
-+
-+static const char *qcom_pmic_pinctrl_get_function_name(struct udevice *dev, unsigned int selector)
-+{
-+	if (!selector)
-+		return "normal";
-+	return NULL;
-+}
-+
-+static int qcom_pmic_pinctrl_generic_get_functions_count(struct udevice *dev)
-+{
-+	return 1;
-+}
-+
-+static int qcom_pmic_pinctrl_generic_pinmux_set_mux(struct udevice *dev, unsigned int selector,
-+						    unsigned int func_selector)
-+{
-+	return 0;
-+}
-+
-+struct pinctrl_ops qcom_pmic_pinctrl_ops = {
-+	.get_pins_count = qcom_pmic_pinctrl_get_pins_count,
-+	.get_pin_name = qcom_pmic_pinctrl_get_pin_name,
-+	.set_state = pinctrl_generic_set_state,
-+	.pinconf_num_params = ARRAY_SIZE(qcom_pmic_pinctrl_conf_params),
-+	.pinconf_params = qcom_pmic_pinctrl_conf_params,
-+	.pinconf_set = qcom_pmic_pinctrl_pinconf_set,
-+	.get_function_name = qcom_pmic_pinctrl_get_function_name,
-+	.get_functions_count = qcom_pmic_pinctrl_generic_get_functions_count,
-+	.pinmux_set = qcom_pmic_pinctrl_generic_pinmux_set_mux,
-+};
-+
-+U_BOOT_DRIVER(qcom_pmic_pinctrl) = {
-+	.name	= "qcom_pmic_pinctrl",
-+	.id	= UCLASS_PINCTRL,
-+	.ops	= &qcom_pmic_pinctrl_ops,
-+};
 
 -- 
 2.43.1
