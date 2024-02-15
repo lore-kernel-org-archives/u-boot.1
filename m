@@ -4,76 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FCBFC48BC4
-	for <u-boot@archiver.kernel.org>; Thu, 15 Feb 2024 13:13:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFF09C48BC4
+	for <u-boot@archiver.kernel.org>; Thu, 15 Feb 2024 13:28:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE04987DF4;
-	Thu, 15 Feb 2024 14:13:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1E95187DC5;
+	Thu, 15 Feb 2024 14:28:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gehealthcare.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="t06clLVJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gehealthcare.com header.i=@gehealthcare.com header.b="Gfv47k3t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C92787DC5; Thu, 15 Feb 2024 14:13:20 +0100 (CET)
-Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
- [IPv6:2607:f8b0:4864:20::1131])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 47B7B87DC7; Thu, 15 Feb 2024 13:05:46 +0100 (CET)
+Received: from mx0a-00176a03.pphosted.com (mx0b-00176a03.pphosted.com
+ [67.231.157.48])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2284F87DEC
- for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 14:13:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B41A787D6D
+ for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 13:05:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=gehealthcare.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1131.google.com with SMTP id
- 00721157ae682-6079d44b02bso8333637b3.3
- for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 05:13:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1708002790; x=1708607590; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=U9jprutVfeSZ1LrsSW2N1XeqnUQUWklDTGOfsJ4DhvU=;
- b=t06clLVJprIM6lCkL+me/r+da1P3PQB8IZTFrsb1xdKmoViwbbT3G0vPVWx0oDnk6R
- 9xelEc47/ToEULpxVMElmf0gmuVK8IOXY+aEt35fV8CXk15junRXuJzoPMVc3XVc/fHc
- otx65YK1rUoyiVaCstOZnZr03ryXkCnbXbfCg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708002790; x=1708607590;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=U9jprutVfeSZ1LrsSW2N1XeqnUQUWklDTGOfsJ4DhvU=;
- b=kBSavNB1L7neI4CT1PFMPCB4vUijp8jI60F7J6MMeKc/H/nMs/gyBmZNoGFR7OmTtB
- pgkF+Zoou2391E6pv+iOhCIvP31neZ3Nx2nB6M6WyZeYzBP5Qx9ziOCCd9hez0xtYRSx
- F5vlBVWpGMaKy6DM3U9QeDV17ASmV93NUgmSkxAM2wSk/hf4HCNpa8yBpGyWzvCCGigH
- cQvjv9KKA1yaqVxG2zP+o/BmKipy6ZmYO/t97ISsU98QhxXmN0b270RCGt1T9qkpyrXf
- Nn4f3CaGCadkJ+HfveWt7RTKQsMEyiRVM95OiDmPtdc2x1LdUMJjsuydfOhEPqcWC42z
- 7GfQ==
-X-Gm-Message-State: AOJu0YyBKfc0LUhKI5/GD57MizP9VzMq7mzizfvJA2BcWWY5Yb3gN1Rr
- zOYV55uoUlUOlp5+2u2tB2HtUjMFGicTqR47/5LE5jhBNkfJG3Whc1NoPecL3ERW6/jL1QtKbrn
- x
-X-Google-Smtp-Source: AGHT+IH4Fh0unxgciMZ0Jpv9qbdcGoSlS4/eutMZZuo5F8tZl0uawqE7Uz9M0mWG8qVCj8XmHAr1LA==
-X-Received: by 2002:a81:ae48:0:b0:607:ec67:401d with SMTP id
- g8-20020a81ae48000000b00607ec67401dmr168969ywk.31.1708002790385; 
- Thu, 15 Feb 2024 05:13:10 -0800 (PST)
-Received: from bill-the-cat (065-184-194-195.res.spectrum.com.
- [65.184.194.195]) by smtp.gmail.com with ESMTPSA id
- z134-20020a814c8c000000b00607a957c82dsm117562ywa.3.2024.02.15.05.13.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Feb 2024 05:13:09 -0800 (PST)
-Date: Thu, 15 Feb 2024 08:13:08 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Michal Simek <monstr@monstr.eu>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [GIT PULL] xilinx patches for v2024.04-rc3
-Message-ID: <20240215131308.GB3040305@bill-the-cat>
-References: <ff2b2845-9520-4264-bc49-72075736d3b4@monstr.eu>
+ spf=pass smtp.mailfrom=ian.ray@gehealthcare.com
+Received: from pps.filterd (m0048205.ppops.net [127.0.0.1])
+ by m0048205.ppops.net-00176a03. (8.17.1.24/8.17.1.24) with ESMTP id
+ 41FAEJTU039906
+ for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 07:05:40 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ gehealthcare.com; h=date:from:to:cc:subject:message-id
+ :references:mime-version:content-type:in-reply-to; s=outbound;
+ bh=HXNpArFhGpg/8bU0sMdi+KiAKks/bzkEgKfkYdalTvw=; b=Gfv47k3tf0jV
+ keZt+hsC/Gb9aAlIkwNTZgj/sd7d7rIpW7i5qh5g5TSSrefLsCOidbgPUcLe0kgA
+ ud7T6irl0v8W4F4LednxAZZmbE23rLCYdoYmmZVJtxku/CefkaV2ZiALZ7s8VZ8d
+ HAUorEE45ncwajuhdxPQp3trwMHLV+ZykUIXH8Q9CqfoTzxBpPRle0TVGoZQ3v9W
+ Xem6KmMPFtFLoPulfwMoSerdinCWWtP9osU2PnT9TdcKkDnd6vKZirkDexLv3TLG
+ 7deLlVU5JalL3JM7hnjuHVfPdwsiFI6N3fFfxYyw6hayQ4teQLpo8IAJMG5iyGx8
+ g8LvezCs2Q==
+Date: Thu, 15 Feb 2024 14:05:34 +0200
+From: Ian Ray <ian.ray@gehealthcare.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: sbabic@denx.de, ian.ray@ge.com, martyn.welch@collabora.com,
+ u-boot@lists.denx.de, Fabio Estevam <festevam@denx.de>
+Subject: Re: EXT: [PATCH 2/5] msc_sm2s_imx8mp: Make Ethernet functional
+Message-ID: <Zc3-DhdhLk9PxcPH@de2cfed78370>
+References: <20240213114342.2728075-1-festevam@gmail.com>
+ <20240213114342.2728075-2-festevam@gmail.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="2yrgR/gEnyNFYP8q"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <ff2b2845-9520-4264-bc49-72075736d3b4@monstr.eu>
-X-Clacks-Overhead: GNU Terry Pratchett
+In-Reply-To: <20240213114342.2728075-2-festevam@gmail.com>
+X-Proofpoint-GUID: UB8EBlMbn92TwvhEUnp0iaZaXHxp1OAG
+X-Proofpoint-ORIG-GUID: UB8EBlMbn92TwvhEUnp0iaZaXHxp1OAG
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-02-15_11,2024-02-14_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 clxscore=1015
+ mlxscore=0
+ impostorscore=0 malwarescore=0 bulkscore=0 lowpriorityscore=0 spamscore=0
+ adultscore=0 mlxlogscore=901 priorityscore=1501 suspectscore=0
+ phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2401310000 definitions=main-2402150096
+X-Mailman-Approved-At: Thu, 15 Feb 2024 14:28:40 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,64 +81,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Tue, Feb 13, 2024 at 08:43:39AM -0300, Fabio Estevam wrote:
+> 
+> From: Fabio Estevam <festevam@denx.de>
+> 
+> Currently, the Ethernet ports are not working.
+> 
+> The Ethernet PHY reset lines are controlled by the TCA6424 I2C GPIO
+> expander.
+> 
+> The TCA6424 I2C GPIO expander is supported by the CONFIG_DM_PCA953X
+> driver.
+> 
+> Select the CONFIG_DM_PCA953X option so that the Ethernet PHYs can
+> go through a proper reset making Ethernet to be functional.
+> 
+> Signed-off-by: Fabio Estevam <festevam@denx.de>
 
---2yrgR/gEnyNFYP8q
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Reviewed-by: Ian Ray <ian.ray@gehealthcare.com>
 
-On Wed, Feb 14, 2024 at 04:59:52PM +0100, Michal Simek wrote:
-
-> Hi Tom,
->=20
-> please pull these patches to your branch. Most of them are related to dev=
-ice
-> tree and aligning with the latest dt schema for SR certification.
-> CI is not reporting any issue too.
->=20
-> Thanks,
-> Michal
->=20
->=20
-> The following changes since commit e8f2404e093daf6cc3ac2b3233e3c6770d13e3=
-71:
->=20
->   Merge branch 'master-779h0-r2' of
-> https://source.denx.de/u-boot/custodians/u-boot-sh (2024-02-11 12:42:25
-> -0500)
->=20
-> are available in the Git repository at:
->=20
->   git@source.denx.de:u-boot/custodians/u-boot-microblaze.git
-> tags/xilinx-for-v2024.04-rc3
->=20
-> for you to fetch changes up to c2ad5fb616d4e8aa2ac00e224030589847731fbe:
->=20
->   arm64: versal-net: Setup correct addresses of GICR/GICD (2024-02-14
-> 11:23:43 +0100)
->=20
-
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---2yrgR/gEnyNFYP8q
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXODeQACgkQFHw5/5Y0
-tyznTwv/RNMYYwRhN6/DIc/N3w2AxPSGWxF4oWi8iEiryzAkCjzNcxfImsCbnugI
-1z8isOWUSX23OybFKQCyeiDOAEm7wCHljLLbpmT7fcK69VjY5cK2l1TebaCN/q3k
-N52BeymcxPR2HkAKM0lkW3inCVeH8Fu7KLtFez7jPacZKbwhq55Klgr6aKYaXNK2
-I/eXj5QsFygmhGsPYH8Upv9aUpUWIrVdAhJOcBaRGISQn2qcLUdE3oA5uYjCh1Qa
-YGmVYl1HTiu60dUGM/4/fJZKJumKY5Y+XYbTTuML2KC9BeyE7qZi7TSu8X2OckNR
-R7d/bHlInygWlwCyAOJUaizqzYaZPdCFriNIBDQe5H4GY/DF6RJ9Omd4Wi3eXnBW
-wjGMa70Z8keeRqvpG5l8L2vicMWSgPb12RqfvqOtksSS5gHZlcCK56IMitXyWmX6
-+/asxL1jINrB4QE8wJIercqswet+R19rX1i3bVBl7kern7g6NETQ5K/X/+fWpcyJ
-jm311G4R
-=DEe2
------END PGP SIGNATURE-----
-
---2yrgR/gEnyNFYP8q--
+> ---
+>  configs/msc_sm2s_imx8mp_defconfig | 1 +
+>  1 file changed, 1 insertion(+)
+> 
+> diff --git a/configs/msc_sm2s_imx8mp_defconfig b/configs/msc_sm2s_imx8mp_defconfig
+> index 9c27a72f8a..a190c1ea22 100644
+> --- a/configs/msc_sm2s_imx8mp_defconfig
+> +++ b/configs/msc_sm2s_imx8mp_defconfig
+> @@ -72,6 +72,7 @@ CONFIG_CLK_COMPOSITE_CCF=y
+>  CONFIG_SPL_CLK_IMX8MP=y
+>  CONFIG_CLK_IMX8MP=y
+>  CONFIG_MXC_GPIO=y
+> +CONFIG_DM_PCA953X=y
+>  CONFIG_DM_I2C=y
+>  CONFIG_LED=y
+>  CONFIG_LED_GPIO=y
+> -- 
+> 2.34.1
+> 
+> 
