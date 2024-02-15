@@ -4,67 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB152C48BC4
-	for <u-boot@archiver.kernel.org>; Thu, 15 Feb 2024 13:29:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44886C4829E
+	for <u-boot@archiver.kernel.org>; Thu, 15 Feb 2024 13:35:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 649DB87E1A;
-	Thu, 15 Feb 2024 14:28:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gehealthcare.com
+	by phobos.denx.de (Postfix) with ESMTP id 9C90B87DE1;
+	Thu, 15 Feb 2024 14:35:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gehealthcare.com header.i=@gehealthcare.com header.b="bxkjbXGT";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="N9zSNyiD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8523B87DC1; Thu, 15 Feb 2024 13:07:04 +0100 (CET)
-Received: from mx0a-00176a03.pphosted.com (mx0a-00176a03.pphosted.com
- [67.231.149.52])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 1B6EE87DCF; Thu, 15 Feb 2024 14:35:28 +0100 (CET)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C44287D6D
- for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 13:07:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=gehealthcare.com
+ by phobos.denx.de (Postfix) with ESMTPS id 92F0287DE1
+ for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 14:35:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ian.ray@gehealthcare.com
-Received: from pps.filterd (m0048274.ppops.net [127.0.0.1])
- by m0048274.ppops.net-00176a03. (8.17.1.24/8.17.1.24) with ESMTP id
- 41FBkjml011067
- for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 07:06:58 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- gehealthcare.com; h=date:from:to:cc:subject:message-id
- :references:mime-version:content-type:in-reply-to; s=outbound;
- bh=XmKycvJaDqtooA2iacgyznuVMHOLz0s4ge4KDPcaxeI=; b=bxkjbXGT7RVW
- GuoNI23F2SrqfzRblm1jC5EL/GR/wNZiXqT2z7gxPTRz7P4ac/Ime47/0iN6V8on
- C1VGkf+eNF2jgXdOiYpB38CCkQh71BH4snmuP93KMRDs4eivM3GqbexF1WdYJqS5
- p/En2oAv9t7BPUFgfroOt26pcrfNYrR9AmM91TD2+UBA8dkFz2r42x23bqMVu00a
- 84RLH7//AfFbvq/Qp4Nu2RepWwPY7cv6LgvdzZMNugvcn+psFLG2m2XkvAj+joxi
- 3zROEFRyREN+Z6eBXM9MzLVZx/rUzjuma0o6srlrrxD9/6d5kyM/0dI0+v06dUaw
- XSPntoKmOg==
-Date: Thu, 15 Feb 2024 14:06:50 +0200
-From: Ian Ray <ian.ray@gehealthcare.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: sbabic@denx.de, ian.ray@ge.com, martyn.welch@collabora.com,
- u-boot@lists.denx.de, Fabio Estevam <festevam@denx.de>
-Subject: Re: EXT: [PATCH 5/5] msc_sm2s_imx8mp: Fix CONFIG_DEFAULT_FDT_FILE
-Message-ID: <Zc3-WjyDLuJ8dROf@de2cfed78370>
-References: <20240213114342.2728075-1-festevam@gmail.com>
- <20240213114342.2728075-5-festevam@gmail.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-6078c21505bso7983967b3.0
+ for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 05:35:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1708004122; x=1708608922; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=4brI//OBBoV0vqYTEueLfu08ehL7kMhXyfasRuU9Cvs=;
+ b=N9zSNyiDmz31EjY9WIQ/hvAc+zTd3zDilJlQxvu5uWVW+bexKKEY99C0WqbTt00cEo
+ U4khCE7RA0GFSL2HOkAUq2p2u2G/IaXF0w0zLYvdqdz6ORXr658iqFW9AnFrpaaaLzck
+ hGRjASrQRu7wYRx2AsFme9lvmASFg78dlp37M=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1708004122; x=1708608922;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=4brI//OBBoV0vqYTEueLfu08ehL7kMhXyfasRuU9Cvs=;
+ b=pzPteUFnqlxVIp/8mfj0kUkhUNMm68s4o309ed6DJWBhuKx/h629oT6zFzJ8WD13L1
+ p7Msrs/FuHDlEHOhaLenU5NHf/vly8kgKNfXsp+SKa5SJiY22pm88ihcG3++XI5dn05/
+ UkBfz0udMKVIPkortusIT0a8JWb9ZEjRF/EaBSNLbHL/sg4eRFN7MMO6oJ8BIeKJmIbI
+ +RFkE2kwxRKMDap9EmhvgorqPP0NuUAjPt0+2bV5YkAZ5g+RTJLOlsp9f4CmHVcx9OoW
+ Gm5XgMlGZXDh+FCbmccr8V8hzxihTEYcJSllOkLdCcM6CqC6N0xvr5E+FgBexmtvz70M
+ GBqQ==
+X-Gm-Message-State: AOJu0Yw6fLaGRUvfwha4Xh/ElKMyBufj5RWEs/LnFsA9RxkkQVUYELc5
+ 97VK5+tQ1AhMJGj2wYfYuQ0SteSs3zw1f+Ry0A1f3p92odyjElHh4qawMQdiersOsT4+MTL/19n
+ +
+X-Google-Smtp-Source: AGHT+IG3i11HdSs7LY99Gymm1ibakRHCFv2fbJqN9bWJp3S1gkXBwrU9kx+zOVfKSuG74H1PmgeJhw==
+X-Received: by 2002:a81:b71b:0:b0:607:7df1:2c18 with SMTP id
+ v27-20020a81b71b000000b006077df12c18mr1627622ywh.24.1708004120829; 
+ Thu, 15 Feb 2024 05:35:20 -0800 (PST)
+Received: from bill-the-cat (065-184-194-195.res.spectrum.com.
+ [65.184.194.195]) by smtp.gmail.com with ESMTPSA id
+ g143-20020a0ddd95000000b005ffce9cee9fsm241209ywe.12.2024.02.15.05.35.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 15 Feb 2024 05:35:20 -0800 (PST)
+Date: Thu, 15 Feb 2024 08:35:18 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
+Subject: Re: ACPI Vendor ID Request
+Message-ID: <20240215133518.GC3040305@bill-the-cat>
+References: <e72c7ad5-e1db-4065-99f6-326b55e7556e@canonical.com>
+ <20240121151722.GD3652023@bill-the-cat>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="hicGaxADl9y1/66g"
 Content-Disposition: inline
-In-Reply-To: <20240213114342.2728075-5-festevam@gmail.com>
-X-Proofpoint-ORIG-GUID: 7gtyo0ETnxiXlZdWa2Pz755YR7aoIJcz
-X-Proofpoint-GUID: 7gtyo0ETnxiXlZdWa2Pz755YR7aoIJcz
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-02-15_11,2024-02-14_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0
- bulkscore=0
- mlxlogscore=999 clxscore=1015 impostorscore=0 phishscore=0 spamscore=0
- priorityscore=1501 malwarescore=0 mlxscore=0 suspectscore=0
- lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2401310000 definitions=main-2402150097
-X-Mailman-Approved-At: Thu, 15 Feb 2024 14:28:40 +0100
+In-Reply-To: <20240121151722.GD3652023@bill-the-cat>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,36 +91,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Feb 13, 2024 at 08:43:42AM -0300, Fabio Estevam wrote:
-> 
-> From: Fabio Estevam <festevam@denx.de>
-> 
-> There is no imx8mp-msc-sm2s.dtb file in upstream Linux.
-> 
-> Change it to imx8mp-msc-sm2s-ep1.dtb.
-> 
-> Signed-off-by: Fabio Estevam <festevam@denx.de>
 
-Reviewed-by: Ian Ray <ian.ray@gehealthcare.com>
+--hicGaxADl9y1/66g
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> ---
->  configs/msc_sm2s_imx8mp_defconfig | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/configs/msc_sm2s_imx8mp_defconfig b/configs/msc_sm2s_imx8mp_defconfig
-> index 3a49b7d55c..5688c7a64d 100644
-> --- a/configs/msc_sm2s_imx8mp_defconfig
-> +++ b/configs/msc_sm2s_imx8mp_defconfig
-> @@ -28,7 +28,7 @@ CONFIG_SPL_LOAD_FIT=y
->  CONFIG_SYS_BOOTM_LEN=0x2000000
->  CONFIG_DISTRO_DEFAULTS=y
->  CONFIG_OF_SYSTEM_SETUP=y
-> -CONFIG_DEFAULT_FDT_FILE="imx8mp-msc-sm2s.dtb"
-> +CONFIG_DEFAULT_FDT_FILE="imx8mp-msc-sm2s-ep1.dtb"
->  CONFIG_SYS_CBSIZE=2048
->  CONFIG_SYS_PBSIZE=2074
->  CONFIG_SPL_MAX_SIZE=0x26000
-> -- 
-> 2.34.1
-> 
-> 
+On Sun, Jan 21, 2024 at 10:17:22AM -0500, Tom Rini wrote:
+> On Sun, Jan 21, 2024 at 03:42:16PM +0100, Heinrich Schuchardt wrote:
+> > Hello Tom,
+> >=20
+> > as we have started to generate ACPI tables in U-Boot we should request =
+an
+> > ACPI vendor ID for the U-Boot project.
+> >=20
+> > As described in https://uefi.org/PNP_ACPI_Registry this is done by send=
+ing a
+> > mail to vid-request@uefi.org.
+> >=20
+> > As the ID is meant to have 4 letters I suggest to use 'UBOO'.
+> >=20
+> > https://uefi.org/ACPI_ID_List shows existing IDs. I don't know if the o=
+wner
+> > must be a legal company (which probably needs to be member of the UEFI
+> > forum) or we simply can have "Das U-Boot project" as owner.
+>=20
+> I see from the list that Coreboot has "BOOT" so presumably we can
+> request UBOO for the project, and I've done so now.
+
+For the record, we've been granted the ID 'UBOO' now, officially.
+
+--=20
+Tom
+
+--hicGaxADl9y1/66g
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXOExMACgkQFHw5/5Y0
+tywIXAwAhbMhY6RgRYHHuuovAHpNnIRJiWINMQI085mWq5OrClkI2B4yGxfXI9Nz
+NDBkKgdJ/HKk2WJIvn6gOCc9SqYNozdvYA5vM0Bjbd2Lui7dB5XHk5V0c8dceoCB
+5XYVykzOlsdJvdkae19LppwO2efaDluARFRKhohfc8+Cx86UxeSEmY7lRl9sfFvP
+jpGWEQW6plFqe3uDAL7l/vhm9fxF63w+VhdIZcjvwW4srbdS7/+fIJkTJ2jkCpmm
+qr5dYz3FNN4IPIIRcKDTmneo6kyGSHtAll0vLeWW14iT34JWXvvNoJDO2/kbTFuS
+XvnBV4eYETP5Dzme37JjhRr6HfuPVfNj0yS9v4NnZr+YXK/ce0PefSY2m6DOXRXv
+VcZS6FGHMAi+jC2jfzcWlBSd2c5F9top8NfE4Lehh1U+T2CIe2AJXPXWCKY7sXuA
+H45G70P162wsjhz+oMUVveM6FAS5QjQ9O5uT46mAeOQrJXxTpfPNATxErQMVBhQ3
+ooqNS6F0
+=vUdm
+-----END PGP SIGNATURE-----
+
+--hicGaxADl9y1/66g--
