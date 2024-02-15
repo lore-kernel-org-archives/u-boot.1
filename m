@@ -4,77 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44886C4829E
-	for <u-boot@archiver.kernel.org>; Thu, 15 Feb 2024 13:35:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9C07C4829E
+	for <u-boot@archiver.kernel.org>; Thu, 15 Feb 2024 13:35:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C90B87DE1;
-	Thu, 15 Feb 2024 14:35:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3597287E0C;
+	Thu, 15 Feb 2024 14:35:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=fris.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="N9zSNyiD";
+	dkim=pass (2048-bit key; unprotected) header.d=fris.de header.i=@fris.de header.b="Kdo9CbiO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B6EE87DCF; Thu, 15 Feb 2024 14:35:28 +0100 (CET)
-Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
- [IPv6:2607:f8b0:4864:20::112f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7B14787E1A; Thu, 15 Feb 2024 14:35:56 +0100 (CET)
+Received: from mail.fris.de (unknown [IPv6:2a01:4f8:c2c:390b::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92F0287DE1
- for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 14:35:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EC6B387E18
+ for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 14:35:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-6078c21505bso7983967b3.0
- for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 05:35:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1708004122; x=1708608922; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=4brI//OBBoV0vqYTEueLfu08ehL7kMhXyfasRuU9Cvs=;
- b=N9zSNyiDmz31EjY9WIQ/hvAc+zTd3zDilJlQxvu5uWVW+bexKKEY99C0WqbTt00cEo
- U4khCE7RA0GFSL2HOkAUq2p2u2G/IaXF0w0zLYvdqdz6ORXr658iqFW9AnFrpaaaLzck
- hGRjASrQRu7wYRx2AsFme9lvmASFg78dlp37M=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708004122; x=1708608922;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=4brI//OBBoV0vqYTEueLfu08ehL7kMhXyfasRuU9Cvs=;
- b=pzPteUFnqlxVIp/8mfj0kUkhUNMm68s4o309ed6DJWBhuKx/h629oT6zFzJ8WD13L1
- p7Msrs/FuHDlEHOhaLenU5NHf/vly8kgKNfXsp+SKa5SJiY22pm88ihcG3++XI5dn05/
- UkBfz0udMKVIPkortusIT0a8JWb9ZEjRF/EaBSNLbHL/sg4eRFN7MMO6oJ8BIeKJmIbI
- +RFkE2kwxRKMDap9EmhvgorqPP0NuUAjPt0+2bV5YkAZ5g+RTJLOlsp9f4CmHVcx9OoW
- Gm5XgMlGZXDh+FCbmccr8V8hzxihTEYcJSllOkLdCcM6CqC6N0xvr5E+FgBexmtvz70M
- GBqQ==
-X-Gm-Message-State: AOJu0Yw6fLaGRUvfwha4Xh/ElKMyBufj5RWEs/LnFsA9RxkkQVUYELc5
- 97VK5+tQ1AhMJGj2wYfYuQ0SteSs3zw1f+Ry0A1f3p92odyjElHh4qawMQdiersOsT4+MTL/19n
- +
-X-Google-Smtp-Source: AGHT+IG3i11HdSs7LY99Gymm1ibakRHCFv2fbJqN9bWJp3S1gkXBwrU9kx+zOVfKSuG74H1PmgeJhw==
-X-Received: by 2002:a81:b71b:0:b0:607:7df1:2c18 with SMTP id
- v27-20020a81b71b000000b006077df12c18mr1627622ywh.24.1708004120829; 
- Thu, 15 Feb 2024 05:35:20 -0800 (PST)
-Received: from bill-the-cat (065-184-194-195.res.spectrum.com.
- [65.184.194.195]) by smtp.gmail.com with ESMTPSA id
- g143-20020a0ddd95000000b005ffce9cee9fsm241209ywe.12.2024.02.15.05.35.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Feb 2024 05:35:20 -0800 (PST)
-Date: Thu, 15 Feb 2024 08:35:18 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
-Subject: Re: ACPI Vendor ID Request
-Message-ID: <20240215133518.GC3040305@bill-the-cat>
-References: <e72c7ad5-e1db-4065-99f6-326b55e7556e@canonical.com>
- <20240121151722.GD3652023@bill-the-cat>
+ dmarc=pass (p=quarantine dis=none) header.from=fris.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=frieder@fris.de
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id A73B7BFBF8; Thu, 15 Feb 2024 14:35:40 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fris.de; s=dkim;
+ t=1708004149; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=otjUe2UfgpA22obude7VokHHS+cqewtEjrvofDTD6qo=;
+ b=Kdo9CbiOELiZWzsa9mwejzE1OMO00djvs+rFRpdD+qAAN5dh1uwZACItyKdOdtXkuuOoZH
+ 6WT3gSGEFv7pTQ1zpqrEbFIegDzY2yeeYsB4mJhMbPAqgak8DH7PNggFBVKZlTD5n3ouyV
+ H1vDN7kBrwJzRguMGKR2VkdiKi3PfYKnVDRu8QoVa4mroCIz3c4PqlpjVj9n/69dFn0YLO
+ bsbrAITgQKc4ZtoGXpU7YvMPeczjgxU1B2Uik1CVJW5RToH84bK/Btjhda1V3V4Yh99J9b
+ QewKoY1V7lV7cPm0fo2x75vz6QXgDEjepWOEkSa+SFeom3LyxV5lQE3f2SEpBQ==
+From: Frieder Schrempf <frieder@fris.de>
+To: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de, Vignesh R <vigneshr@ti.com>
+Cc: Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Fabio Estevam <festevam@gmail.com>,
+ Andre Przywara <andre.przywara@arm.com>, Bruce Suen <bruce_suen@163.com>,
+ Dhruva Gole <d-gole@ti.com>, Jim Liu <jim.t90615@gmail.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Neal Frager <neal.frager@amd.com>,
+ Nishanth Menon <nm@ti.com>, Ricardo Pardini <ricardo@pardini.net>,
+ Teik Heng Chong <teik.heng.chong@intel.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Subject: [PATCH v3 1/3] mtd: spi-nor-ids: Add support for ESMT/EON EN25Q80B
+Date: Thu, 15 Feb 2024 14:35:19 +0100
+Message-ID: <20240215133527.216126-1-frieder@fris.de>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="hicGaxADl9y1/66g"
-Content-Disposition: inline
-In-Reply-To: <20240121151722.GD3652023@bill-the-cat>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,55 +67,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Frieder Schrempf <frieder.schrempf@kontron.de>
 
---hicGaxADl9y1/66g
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The datasheet can be found here:
+https://www.esmt.com.tw/upload/pdf/ESMT/datasheets/EN25Q80B_Ver.E.pdf
 
-On Sun, Jan 21, 2024 at 10:17:22AM -0500, Tom Rini wrote:
-> On Sun, Jan 21, 2024 at 03:42:16PM +0100, Heinrich Schuchardt wrote:
-> > Hello Tom,
-> >=20
-> > as we have started to generate ACPI tables in U-Boot we should request =
-an
-> > ACPI vendor ID for the U-Boot project.
-> >=20
-> > As described in https://uefi.org/PNP_ACPI_Registry this is done by send=
-ing a
-> > mail to vid-request@uefi.org.
-> >=20
-> > As the ID is meant to have 4 letters I suggest to use 'UBOO'.
-> >=20
-> > https://uefi.org/ACPI_ID_List shows existing IDs. I don't know if the o=
-wner
-> > must be a legal company (which probably needs to be member of the UEFI
-> > forum) or we simply can have "Das U-Boot project" as owner.
->=20
-> I see from the list that Coreboot has "BOOT" so presumably we can
-> request UBOO for the project, and I've done so now.
+Signed-off-by: Frieder Schrempf <frieder.schrempf@kontron.de>
+Reviewed-by: Fabio Estevam <festevam@gmail.com>
+---
+Changes in v3:
+* none
 
-For the record, we've been granted the ID 'UBOO' now, officially.
+Changes in v2:
+* Add R-b tag from Fabio (Thanks!)
+---
+ drivers/mtd/spi/spi-nor-ids.c | 1 +
+ 1 file changed, 1 insertion(+)
 
---=20
-Tom
+diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
+index 38a287487ed..4e83b8c94c9 100644
+--- a/drivers/mtd/spi/spi-nor-ids.c
++++ b/drivers/mtd/spi/spi-nor-ids.c
+@@ -80,6 +80,7 @@ const struct flash_info spi_nor_ids[] = {
+ #endif
+ #ifdef CONFIG_SPI_FLASH_EON		/* EON */
+ 	/* EON -- en25xxx */
++	{ INFO("en25q80b",   0x1c3014, 0, 64 * 1024,   16, SECT_4K) },
+ 	{ INFO("en25q32b",   0x1c3016, 0, 64 * 1024,   64, 0) },
+ 	{ INFO("en25q64",    0x1c3017, 0, 64 * 1024,  128, SECT_4K) },
+ 	{ INFO("en25q128b",  0x1c3018, 0, 64 * 1024,  256, 0) },
+-- 
+2.43.0
 
---hicGaxADl9y1/66g
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXOExMACgkQFHw5/5Y0
-tywIXAwAhbMhY6RgRYHHuuovAHpNnIRJiWINMQI085mWq5OrClkI2B4yGxfXI9Nz
-NDBkKgdJ/HKk2WJIvn6gOCc9SqYNozdvYA5vM0Bjbd2Lui7dB5XHk5V0c8dceoCB
-5XYVykzOlsdJvdkae19LppwO2efaDluARFRKhohfc8+Cx86UxeSEmY7lRl9sfFvP
-jpGWEQW6plFqe3uDAL7l/vhm9fxF63w+VhdIZcjvwW4srbdS7/+fIJkTJ2jkCpmm
-qr5dYz3FNN4IPIIRcKDTmneo6kyGSHtAll0vLeWW14iT34JWXvvNoJDO2/kbTFuS
-XvnBV4eYETP5Dzme37JjhRr6HfuPVfNj0yS9v4NnZr+YXK/ce0PefSY2m6DOXRXv
-VcZS6FGHMAi+jC2jfzcWlBSd2c5F9top8NfE4Lehh1U+T2CIe2AJXPXWCKY7sXuA
-H45G70P162wsjhz+oMUVveM6FAS5QjQ9O5uT46mAeOQrJXxTpfPNATxErQMVBhQ3
-ooqNS6F0
-=vUdm
------END PGP SIGNATURE-----
-
---hicGaxADl9y1/66g--
