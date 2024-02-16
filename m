@@ -4,88 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2FCFC48260
-	for <u-boot@archiver.kernel.org>; Fri, 16 Feb 2024 17:23:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83B42C48260
+	for <u-boot@archiver.kernel.org>; Fri, 16 Feb 2024 18:39:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C0EF86FEF;
-	Fri, 16 Feb 2024 18:23:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C400487C68;
+	Fri, 16 Feb 2024 19:38:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="e/Dq+3zx";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="a2rambEZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E012287E50; Fri, 16 Feb 2024 18:23:24 +0100 (CET)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 1B3FB87DE6; Fri, 16 Feb 2024 19:38:52 +0100 (CET)
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F37086FEF
- for <u-boot@lists.denx.de>; Fri, 16 Feb 2024 18:23:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7946587B89
+ for <u-boot@lists.denx.de>; Fri, 16 Feb 2024 19:38:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a3cfacf0eadso265489766b.2
- for <u-boot@lists.denx.de>; Fri, 16 Feb 2024 09:23:16 -0800 (PST)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-33d211c27abso416993f8f.3
+ for <u-boot@lists.denx.de>; Fri, 16 Feb 2024 10:38:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708104195; x=1708708995; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ADuSKG0OxM4RTw/c7f7cKaocbpCoxstL+N7uifqVV/8=;
- b=e/Dq+3zxRs3yTIl+XIpa+ihLibtOhOf0/gvP9i6qyY5KIRH22FoilnO0RqedrLICw/
- tGws5iATdJU4UpirsWkCkl5EMq38s5Rb/3Mc5taHS5rN2I92PoQreobLaaUBtOf3Y0rE
- nrVD/qEyzHBqKGrDGHo48PlHkkqQ8D5FUx+pc2kSYFWraUvVK7eC5bPku0brVUz10uei
- SbtaDQM7IpCbtFHnnMxhxdzAeyKZd24QXQy9rMvXIBivuEob81Q6Sverqyc62pA3fdtR
- vkYS1IrjEKeFXx8sLCiMl8RZNzJn5KFqA6MoVVTtKz5iP78lLpZrA5J3VaBpBnhvsuTl
- aShg==
+ d=linaro.org; s=google; t=1708108725; x=1708713525; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=JoRTLsTmjlI7hIXMoXjUShSiLcP4vRvqo7cHnkT5tSM=;
+ b=a2rambEZ9j0C+e1vR6LrmFDFS9E1wdgen4siZr3rMJoCvCEQCNJ7oyczpHEscANUsF
+ 5BJrnqh3VOLit7IGtl5lo435Re0qCm94yX880HBjKasB+Y5sXS73e9rtYQZO2fownut2
+ ThVw0XTgHURnhZcwsS7C1JmMXwa00fsG6kktdHhQCAxVEugNr+lbEyKWD7TXnkQ/pv+y
+ CxiTY0MVhvW7u2aUVN+iNvVH4jnleyHIS6843Zp4TSWq8CypaZOBk8FPGmQrDOF1DddX
+ F3pZRLqUuQhI5zM/jJhAJL3fWsUwb90yNrLhJTkxg/iC30lfRWWMkVwR2zI25saOipY6
+ 3gWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708104195; x=1708708995;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ADuSKG0OxM4RTw/c7f7cKaocbpCoxstL+N7uifqVV/8=;
- b=i7IeYeG6KaqnWYbtALhiRbh0hdgybjQuoGAti1sl7ay2qbGjeYcLFjHkepXffbh9rH
- Mjb9Nbwy7tcl8uA7ynNusl7X/2jU0dQEqu44/EWjjiSZ7RKCkRfXkT6sHEq0/m/rp5xa
- YIeQvxv5xu66B3RHRByrIo0eLZMNBLZBHTigCkjuSlp3YTcRQps8DdxPWlqJqlkcViAO
- bbGXibYhcF5YLQdbJAcL9cErECPVfkx2hsxBAH2lhyLgOy3qjGqlSanPUKQ++Ii4VDty
- PALEXvz8AIoZeILh6taRCkRY6ayRIwtYvNMjsDCQvpn9TtJY/0kHSHRWca1IfYiw6Sk8
- D+Rw==
+ d=1e100.net; s=20230601; t=1708108725; x=1708713525;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=JoRTLsTmjlI7hIXMoXjUShSiLcP4vRvqo7cHnkT5tSM=;
+ b=kYquXSHURdG3vCqS7WwEN0ZP7Zvl1T9aa4AkP147IP/sDIQ1B46xthl5+4MESAAHJe
+ /c3G3+HkT+m8t8S9SEAvF3JGrMqIatuuNL0pC8iNoC2UzKu7HNYPV5xaiLuIaW0hsREk
+ Ifr5MG033JQTiWCHFUgy6IAgT9ErbC+GVBrYApdIxGOWK9ZRNZby35cQUV44P8oAPG2r
+ 9xLyUu+8usEhmRHas9UWjMDApVIAkBPw+hqwlAoK8ArqYT/sUjGCMfol4OIFLGm+Q0IS
+ DWjUYTH1btuTVGcMeASbEenUn8Qqq+ELtBK9qbl40/jrG6e5lmaThFS+oov6i9TSZZV+
+ 4CHw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWkt84QwJ98dY1NTwweNSfo9nJjGjb3NxuQI3c7Gu7F7pbQ4iBIUIhW/gLdH/h6vwYiUgfREFs/L471n3g3uxNR0OSovA==
-X-Gm-Message-State: AOJu0Ywsqge4/GMEDxBM9qBxNEA5QZ+QuL+1xObiCMR9oDZQBThhMyAp
- PVK7b35WwLl6GSVmHVPtIuSZtC9dtmyUrKchsTMOimJicqCGofEz+jUBhvi5gkU=
-X-Google-Smtp-Source: AGHT+IHM+XCd6z2q9v3F/Cd7sNYIPgWfx5C2LLgIFT0c9PYtxqnEmSB/7UnJ0EeATlMZzVx27wnkCw==
-X-Received: by 2002:a17:906:ccc7:b0:a3e:a98:6df4 with SMTP id
- ot7-20020a170906ccc700b00a3e0a986df4mr206382ejb.19.1708104195386; 
- Fri, 16 Feb 2024 09:23:15 -0800 (PST)
-Received: from hera (ppp089210121239.access.hol.gr. [89.210.121.239])
- by smtp.gmail.com with ESMTPSA id
- u25-20020a170906c41900b00a3ce1bef210sm155996ejz.28.2024.02.16.09.23.13
+ AJvYcCWfRJRLTveRCYQ1AIib/rOavUsHitLDjcpJfUoeqvYoeV1OLqO+kWS7Tca0iGGgZgV10FVgaOVy5QQLccqdemjMFZ5fSw==
+X-Gm-Message-State: AOJu0YzMk2z2PmPlnzZrmMwksW4Yre5TujQDpr340ZQuuxTfOi08tK2j
+ LW6tcEs7s8//jMzLk/+kKiu4K/pXb5FvJUTyZBQzotA4A/4qmh23qS5uMiMbdL8=
+X-Google-Smtp-Source: AGHT+IHBchc5ra4fyXtcMiQoweG2xnO3OwfnZ565fG5nJLSOeYdzEF1xaviVCfhQnM1+00P0AqLsdg==
+X-Received: by 2002:adf:f892:0:b0:33c:fb94:1e12 with SMTP id
+ u18-20020adff892000000b0033cfb941e12mr4317644wrp.54.1708108725311; 
+ Fri, 16 Feb 2024 10:38:45 -0800 (PST)
+Received: from lion.caleb.rex.connolly.tech (host-92-17-96-232.as13285.net.
+ [92.17.96.232]) by smtp.gmail.com with ESMTPSA id
+ w12-20020a05600c474c00b00411ec07674esm3117755wmo.31.2024.02.16.10.38.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Feb 2024 09:23:15 -0800 (PST)
-Date: Fri, 16 Feb 2024 19:23:12 +0200
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Ramon Fried <rfried.dev@gmail.com>,
- Dzmitry Sankouski <dsankouski@gmail.com>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
- Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v4 19/39] board: dragonboard820c: use
- LINUX_KERNEL_IMAGE_HEADER
-Message-ID: <Zc-aAFf6G1hDwQz9@hera>
-References: <20240215-b4-qcom-common-target-v4-0-ed06355c634a@linaro.org>
- <20240215-b4-qcom-common-target-v4-19-ed06355c634a@linaro.org>
+ Fri, 16 Feb 2024 10:38:44 -0800 (PST)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+To: Anatolij Gustschin <agust@denx.de>,
+	Tom Rini <trini@konsulko.com>
+Cc: Rob Clark <robdclark@gmail.com>, u-boot@lists.denx.de,
+ Caleb Connolly <caleb.connolly@linaro.org>
+Subject: [PATCH] video: simplefb: modernise DT parsing
+Date: Fri, 16 Feb 2024 18:38:06 +0000
+Message-ID: <20240216183840.879482-1-caleb.connolly@linaro.org>
+X-Mailer: git-send-email 2.43.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240215-b4-qcom-common-target-v4-19-ed06355c634a@linaro.org>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,200 +92,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Feb 15, 2024 at 08:52:37PM +0000, Caleb Connolly wrote:
-> db820c predated support for prepending the kernel image header
-> automatically, drop it's custom linker script and head.S in favour of
-> this generic support.
->
-> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->  arch/arm/mach-snapdragon/Kconfig          |   1 +
->  board/qualcomm/dragonboard820c/Makefile   |   1 -
->  board/qualcomm/dragonboard820c/head.S     |  33 ---------
->  board/qualcomm/dragonboard820c/u-boot.lds | 111 ------------------------------
->  4 files changed, 1 insertion(+), 145 deletions(-)
->
-> diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
-> index ad6671081910..f897c393464f 100644
-> --- a/arch/arm/mach-snapdragon/Kconfig
-> +++ b/arch/arm/mach-snapdragon/Kconfig
-> @@ -45,6 +45,7 @@ config TARGET_DRAGONBOARD410C
->
->  config TARGET_DRAGONBOARD820C
->  	bool "96Boards Dragonboard 820C"
-> +	select LINUX_KERNEL_IMAGE_HEADER
->  	imply CLK_QCOM_APQ8096
->  	imply PINCTRL_QCOM_APQ8096
->  	imply BUTTON_QCOM_PMIC
-> diff --git a/board/qualcomm/dragonboard820c/Makefile b/board/qualcomm/dragonboard820c/Makefile
-> index 643311f5b3ba..2ae6d16364aa 100644
-> --- a/board/qualcomm/dragonboard820c/Makefile
-> +++ b/board/qualcomm/dragonboard820c/Makefile
-> @@ -3,4 +3,3 @@
->  # (C) Copyright 2017 Jorge Ramirez-Ortiz <jorge.ramirez-ortiz@gmail.com>
->
->  obj-y	:= dragonboard820c.o
-> -extra-y += head.o
-> diff --git a/board/qualcomm/dragonboard820c/head.S b/board/qualcomm/dragonboard820c/head.S
-> deleted file mode 100644
-> index b052a858fd32..000000000000
-> --- a/board/qualcomm/dragonboard820c/head.S
-> +++ /dev/null
-> @@ -1,33 +0,0 @@
-> -/* SPDX-License-Identifier: GPL-2.0+ */
-> -/*
-> - * ARM64 header for proper chain-loading with Little Kernel.
-> - *
-> - * Little Kernel shipped with Dragonboard820C boots standard Linux images for
-> - * ARM64. This file adds header that is required to boot U-Boot properly.
-> - *
-> - * For details see:
-> - * https://www.kernel.org/doc/Documentation/arm64/booting.txt
-> - *
-> - * (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
-> - */
-> -
-> -#include <config.h>
-> -
-> -/*
-> - *   per document in linux/Doc/arm64/booting.text
-> - */
-> -.global _arm64_header
-> -_arm64_header:
-> -	b _start
-> -	.word 0
-> -	.quad   CONFIG_TEXT_BASE-PHYS_SDRAM_1 /* Image load offset, LE */
-> -	.quad   0    /* Effective size of kernel image, little-endian */
-> -	.quad   0    /* kernel flags, little-endian */
-> -	.quad   0    /* reserved */
-> -	.quad   0    /* reserved */
-> -	.quad   0    /* reserved */
-> -	.byte   0x41 /* Magic number, "ARM\x64" */
-> -	.byte   0x52
-> -	.byte   0x4d
-> -	.byte   0x64
-> -	.word   0    /* reserved (used for PE COFF offset) */
-> diff --git a/board/qualcomm/dragonboard820c/u-boot.lds b/board/qualcomm/dragonboard820c/u-boot.lds
-> deleted file mode 100644
-> index 5251b59fbe76..000000000000
-> --- a/board/qualcomm/dragonboard820c/u-boot.lds
-> +++ /dev/null
-> @@ -1,111 +0,0 @@
-> -/* SPDX-License-Identifier: GPL-2.0+ */
-> -/*
-> - * Override linker script for fastboot-readable images
-> - *
-> - * (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
-> - *
-> - * Based on arch/arm/cpu/armv8/u-boot.lds (Just add header)
-> - */
-> -
-> -OUTPUT_FORMAT("elf64-littleaarch64", "elf64-littleaarch64", "elf64-littleaarch64")
-> -OUTPUT_ARCH(aarch64)
-> -ENTRY(_arm64_header)
-> -SECTIONS
-> -{
-> -	. = 0x00000000;
-> -
-> -	. = ALIGN(8);
-> -	.text :
-> -	{
-> -		*(.__image_copy_start)
-> -		board/qualcomm/dragonboard820c/head.o (.text*)
-> -		CPUDIR/start.o (.text*)
-> -	}
-> -
-> -	/* This needs to come before *(.text*) */
-> -	.efi_runtime : {
-> -                __efi_runtime_start = .;
-> -		*(.text.efi_runtime*)
-> -		*(.rodata.efi_runtime*)
-> -		*(.data.efi_runtime*)
-> -                __efi_runtime_stop = .;
-> -	}
-> -
-> -	.text_rest :
-> -	{
-> -		*(.text*)
-> -	}
-> -
-> -	. = ALIGN(8);
-> -	.rodata : { *(SORT_BY_ALIGNMENT(SORT_BY_NAME(.rodata*))) }
-> -
-> -	. = ALIGN(8);
-> -	.data : {
-> -		*(.data*)
-> -	}
-> -
-> -	. = ALIGN(8);
-> -
-> -	. = .;
-> -
-> -	. = ALIGN(8);
-> -	__u_boot_list : {
-> -		KEEP(*(SORT(__u_boot_list*)));
-> -	}
-> -
-> -	. = ALIGN(8);
-> -
-> -	.efi_runtime_rel : {
-> -                __efi_runtime_rel_start = .;
-> -		*(.rel*.efi_runtime)
-> -		*(.rel*.efi_runtime.*)
-> -                __efi_runtime_rel_stop = .;
-> -	}
-> -
-> -	. = ALIGN(8);
-> -
-> -	.image_copy_end :
-> -	{
-> -		*(.__image_copy_end)
-> -	}
-> -
-> -	. = ALIGN(8);
-> -
-> -	.rel_dyn_start :
-> -	{
-> -		*(.__rel_dyn_start)
-> -	}
-> -
-> -	.rela.dyn : {
-> -		*(.rela*)
-> -	}
-> -
-> -	.rel_dyn_end :
-> -	{
-> -		*(.__rel_dyn_end)
-> -	}
-> -
-> -	_end = .;
-> -
-> -	. = ALIGN(8);
-> -
-> -	.bss_start : {
-> -		KEEP(*(.__bss_start));
-> -	}
-> -
-> -	.bss : {
-> -		*(.bss*)
-> -		 . = ALIGN(8);
-> -	}
-> -
-> -	.bss_end : {
-> -		KEEP(*(.__bss_end));
-> -	}
-> -
-> -	/DISCARD/ : { *(.dynsym) }
-> -	/DISCARD/ : { *(.dynstr*) }
-> -	/DISCARD/ : { *(.dynamic*) }
-> -	/DISCARD/ : { *(.plt*) }
-> -	/DISCARD/ : { *(.interp*) }
-> -	/DISCARD/ : { *(.gnu*) }
-> -}
->
-> --
-> 2.43.1
->
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+simplefb was using old style FDT parsing which doesn't behave well in
+combination with livetree. Update it to use ofnode instead and add a
+missing null check for the "format" property.
+
+Standardise the error logging while we're here.
+
+Fixes: 971d7e64245d ("video: simplefb")
+Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+---
+ drivers/video/simplefb.c | 32 ++++++++++++++++++++------------
+ 1 file changed, 20 insertions(+), 12 deletions(-)
+
+diff --git a/drivers/video/simplefb.c b/drivers/video/simplefb.c
+index 235ec761f70b..3d83bf8f2e88 100644
+--- a/drivers/video/simplefb.c
++++ b/drivers/video/simplefb.c
+@@ -15,14 +15,14 @@ static int simple_video_probe(struct udevice *dev)
+ {
+ 	struct video_uc_plat *plat = dev_get_uclass_plat(dev);
+ 	struct video_priv *uc_priv = dev_get_uclass_priv(dev);
+-	const void *blob = gd->fdt_blob;
+-	const int node = dev_of_offset(dev);
++	ofnode node = dev_ofnode(dev);
+ 	const char *format;
++	int ret;
+ 	fdt_addr_t base;
+ 	fdt_size_t size;
++	u32 width, height, rot;
+ 
+-	base = fdtdec_get_addr_size_auto_parent(blob, dev_of_offset(dev->parent),
+-			node, "reg", 0, &size, false);
++	base = dev_read_addr_size(dev, &size);
+ 	if (base == FDT_ADDR_T_NONE) {
+ 		debug("%s: Failed to decode memory region\n", __func__);
+ 		return -EINVAL;
+@@ -41,17 +41,25 @@ static int simple_video_probe(struct udevice *dev)
+ 
+ 	debug("%s: Query resolution...\n", __func__);
+ 
+-	uc_priv->xsize = fdtdec_get_uint(blob, node, "width", 0);
+-	uc_priv->ysize = fdtdec_get_uint(blob, node, "height", 0);
+-	uc_priv->rot = fdtdec_get_uint(blob, node, "rot", 0);
+-	if (uc_priv->rot > 3) {
+-		log_debug("%s: invalid rot\n", __func__);
+-		return log_msg_ret("rot", -EINVAL);
++	ret = ofnode_read_u32(node, "width", &width);
++	ret = ret ?: ofnode_read_u32(node, "height", &height);
++	if (ret || !width || !height) {
++		log_err("%s: invalid width or height: %d\n", __func__, ret);
++		return ret;
+ 	}
++	ofnode_read_u32(node, "rot", &rot);
++	uc_priv->rot = rot;
++	uc_priv->xsize = width;
++	uc_priv->ysize = height;
+ 
+-	format = fdt_getprop(blob, node, "format", NULL);
++	format = ofnode_read_string(node, "format");
+ 	debug("%s: %dx%d@%s\n", __func__, uc_priv->xsize, uc_priv->ysize, format);
+ 
++	if (!format) {
++		log_err("%s: please add required property \"format\"\n", __func__);
++		return -EINVAL;
++	}
++
+ 	if (strcmp(format, "r5g6b5") == 0) {
+ 		uc_priv->bpix = VIDEO_BPP16;
+ 	} else if (strcmp(format, "a8b8g8r8") == 0 ||
+@@ -67,7 +75,7 @@ static int simple_video_probe(struct udevice *dev)
+ 		uc_priv->bpix = VIDEO_BPP32;
+ 		uc_priv->format = VIDEO_X2R10G10B10;
+ 	} else {
+-		printf("%s: invalid format: %s\n", __func__, format);
++		log_err("%s: invalid format: %s\n", __func__, format);
+ 		return -EINVAL;
+ 	}
+ 
+-- 
+2.43.1
 
