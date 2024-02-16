@@ -4,58 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1EE1C48260
-	for <u-boot@archiver.kernel.org>; Fri, 16 Feb 2024 11:37:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2550FC48260
+	for <u-boot@archiver.kernel.org>; Fri, 16 Feb 2024 13:18:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC7A987BEE;
-	Fri, 16 Feb 2024 12:37:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=163.com
+	by phobos.denx.de (Postfix) with ESMTP id 01F3187C5B;
+	Fri, 16 Feb 2024 14:18:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="IrAXcvxZ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JZNQpQsT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0AE5087B50; Fri, 16 Feb 2024 12:37:52 +0100 (CET)
-Received: from m1325.mail.163.com (m1325.mail.163.com [220.181.13.25])
- by phobos.denx.de (Postfix) with ESMTP id ACE3E87CB9
- for <u-boot@lists.denx.de>; Fri, 16 Feb 2024 12:37:48 +0100 (CET)
+ id 67F6387CBA; Fri, 16 Feb 2024 14:18:43 +0100 (CET)
+Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
+ [IPv6:2607:f8b0:4864:20::1136])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id A4C548718A
+ for <u-boot@lists.denx.de>; Fri, 16 Feb 2024 14:18:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=163.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=andyshrk@163.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=Date:From:Subject:Content-Type:MIME-Version:
- Message-ID; bh=4P7c6Ai8qpUa1nXPrihXtPdJgsa8HJ7MJoG+Tk4JJcY=; b=I
- rAXcvxZHqb1TWHdp6CJStPi3Ch/1/CBXz1qoVGeVSrZBAaQGuAGt+drVIAdXuJs5
- tLnUdD/hVrMFTNvXEuVX56J1eodD2Q8yd7WLDsbjbos5utify1Jnysz8RYmsWBxM
- r/w5qxAcWCpvtENgtoDbjbZqzgQIGDMDl4zB4v29GY=
-Received: from andyshrk$163.com ( [58.22.7.114] ) by ajax-webmail-wmsvr25
- (Coremail) ; Fri, 16 Feb 2024 19:37:40 +0800 (CST)
-X-Originating-IP: [58.22.7.114]
-Date: Fri, 16 Feb 2024 19:37:40 +0800 (CST)
-From: "Andy Yan" <andyshrk@163.com>
-To: "Quentin Schulz" <quentin.schulz@theobroma-systems.com>
-Cc: kever.yang@rock-chips.com, jonas@kwiboo.se, u-boot@lists.denx.de
-Subject: Re:Re: [PATCH v2 1/2] board: rockchip: Add support for rk3588s
- based Cool Pi 4B
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version XT5.0.14 build 20230109(dcb5de15)
- Copyright (c) 2002-2024 www.mailtech.cn 163com
-In-Reply-To: <0b536be2-3469-4c1a-b972-a7b5c877a03d@theobroma-systems.com>
-References: <20240214093126.329717-1-andyshrk@163.com>
- <918dfa17-3c32-44d4-8d16-87bab10cc138@theobroma-systems.com>
- <261ba9aa.2fa.18dac558cf4.Coremail.andyshrk@163.com>
- <cdda29dd-3d9f-4eef-83a5-a5f80ca79dcb@theobroma-systems.com>
- <1cd3e505.333.18dac9f1eed.Coremail.andyshrk@163.com>
- <0b536be2-3469-4c1a-b972-a7b5c877a03d@theobroma-systems.com>
-X-NTES-SC: AL_Qu2bCvyTvEwt5iidYekZnEobh+Y5UcK2s/ki2YFXN5k0kinEyAoad3RNPl3m2/yWDSaruxOtVRR8x9V9RaN7dbwsh701lAOh6byrdilX7bfO
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset=UTF-8
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1136.google.com with SMTP id
+ 00721157ae682-60802b329c4so3479337b3.0
+ for <u-boot@lists.denx.de>; Fri, 16 Feb 2024 05:18:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1708089518; x=1708694318; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=SbzFbd2Wu9+RR5gMBifnTmblY62uB/erYIfZdy+gd+Y=;
+ b=JZNQpQsT2OctpdCEMRi+s/owbynobio6RiFeaK+JC8Oz+W8ynoULjdCfRs9i3HYHb5
+ nPQDHc9rnyEjS916bFwA31SvN67BCbR1nfunfyKgMWA8wVx8Ao/4FsinpktqxLKLx+G3
+ Gc1sSUxUtfK/IByUsH3ls8eWx+ZEdZA6Z6j9o=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1708089518; x=1708694318;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=SbzFbd2Wu9+RR5gMBifnTmblY62uB/erYIfZdy+gd+Y=;
+ b=PGqxiUeBJOfkQx0n8bpe4VBpd4LeqojTILB1IELajj7WMBreiuBck0sE8dmTQ+h8dy
+ Kx6z0zKxXAxab8mJSOa2b2/6ciPGdvS6jablhWVznEzusK6Tsr0GHGQfuOuUFiOaeJmU
+ xqFOTt3OD/aZJk/Yh3vzKihC2FQg7ws276mEuWqhSDtG8dXZ/CrdGqCpmOQVdrrVHy6N
+ u/5bW6vdisWzueqpFi2kTO8eyooehbGWv3q8/+nTOhkqaH/fkVyYkEsFoRe1eDeJe3jH
+ FYKlfZsNykdKGGfHQrTu4gSQPFweTWlii2vq3fzj3RkhTnJbZ95hqYmr5KylJWoZhnB2
+ 1nvQ==
+X-Gm-Message-State: AOJu0YzMIozg2leb2B/JO0e72cOwlUD0SwiuljMrn180LM2OzMToslW4
+ iIrMLv+PKqEQjx5XTfrpqBRS7ZFi9OWhBlduWBgICYVBIuRCgndyA+REZg1LoyM=
+X-Google-Smtp-Source: AGHT+IGVhmCt/awY4TGKGUtmgRIy9AtennV0CwX8n194MbJLzq1JQMc7d+1D661sAQ9+8aMzXwhDww==
+X-Received: by 2002:a81:b71b:0:b0:604:3ee2:f258 with SMTP id
+ v27-20020a81b71b000000b006043ee2f258mr4760923ywh.45.1708089518273; 
+ Fri, 16 Feb 2024 05:18:38 -0800 (PST)
+Received: from bill-the-cat (065-184-194-195.res.spectrum.com.
+ [65.184.194.195]) by smtp.gmail.com with ESMTPSA id
+ w133-20020a0dd48b000000b00607cb99db8fsm338547ywd.53.2024.02.16.05.18.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 16 Feb 2024 05:18:37 -0800 (PST)
+Date: Fri, 16 Feb 2024 08:18:35 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH 2/2] doc: Rework the gcc section to reflect general build
+ instructions
+Message-ID: <20240216131835.GH3040305@bill-the-cat>
+References: <20240215211025.690964-1-trini@konsulko.com>
+ <20240215211025.690964-2-trini@konsulko.com>
+ <45D1EDA6-C570-4F18-B937-57808BBCDFC2@gmx.de>
+ <20240215212824.GF3040305@bill-the-cat>
+ <6FCE298F-EE98-462E-B27E-EEF0796D0097@gmx.de>
+ <20240215220032.GG3040305@bill-the-cat>
+ <9B30B785-4711-4343-9402-3CF5DC7F0338@gmx.de>
 MIME-Version: 1.0
-Message-ID: <1619445.492.18db1b53afe.Coremail.andyshrk@163.com>
-X-Coremail-Locale: zh_CN
-X-CM-TRANSID: GcGowAC3f68FSc9lLugIAA--.2862W
-X-CM-SenderInfo: 5dqg52xkunqiywtou0bp/xtbBEAuGXmVOCRL3xAAEsE
-X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="M+PxOaeQ8CEUNxww"
+Content-Disposition: inline
+In-Reply-To: <9B30B785-4711-4343-9402-3CF5DC7F0338@gmx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,120 +96,211 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-CkhpIFF1ZW50aW7vvJoKCgrlnKggMjAyNC0wMi0xNSAyMDo0Mjo1Nu+8jCJRdWVudGluIFNjaHVs
-eiIgPHF1ZW50aW4uc2NodWx6QHRoZW9icm9tYS1zeXN0ZW1zLmNvbT4g5YaZ6YGT77yaCj5IaSBB
-bmR5LAo+Cj5PbiAyLzE1LzI0IDEyOjU1LCBBbmR5IFlhbiB3cm90ZToKPj4gW1lvdSBkb24ndCBv
-ZnRlbiBnZXQgZW1haWwgZnJvbSBhbmR5c2hya0AxNjMuY29tLiBMZWFybiB3aHkgdGhpcyBpcyBp
-bXBvcnRhbnQgYXQgaHR0cHM6Ly9ha2EubXMvTGVhcm5BYm91dFNlbmRlcklkZW50aWZpY2F0aW9u
-IF0KPj4gCj4+IEhpIFF1ZW50aW7vvJoKPj4gQXQgMjAyNC0wMi0xNSAxODo0MDoyNSwgIlF1ZW50
-aW4gU2NodWx6IiA8cXVlbnRpbi5zY2h1bHpAdGhlb2Jyb21hLXN5c3RlbXMuY29tPiB3cm90ZToK
-Pj4+IEhpIEFuZHksCj4+Pgo+Pj4gT24gMi8xNS8yNCAxMTozNSwgQW5keSBZYW4gd3JvdGU6Cj4+
-PiBbLi4uXQo+Pj4+Pj4gZGlmZiAtLWdpdCBhL2NvbmZpZ3MvY29vbHBpLTRiLXJrMzU4OHNfZGVm
-Y29uZmlnIGIvY29uZmlncy9jb29scGktNGItcmszNTg4c19kZWZjb25maWcKPj4+Pj4+IG5ldyBm
-aWxlIG1vZGUgMTAwNjQ0Cj4+Pj4+PiBpbmRleCAwMDAwMDAwMDAwLi4zZTNlNWFiYzg2Cj4+Pj4+
-PiAtLS0gL2Rldi9udWxsCj4+Pj4+PiArKysgYi9jb25maWdzL2Nvb2xwaS00Yi1yazM1ODhzX2Rl
-ZmNvbmZpZwo+Pj4+Pj4gQEAgLTAsMCArMSwxMDUgQEAKPj4+Pj4+ICtDT05GSUdfQVJNPXkKPj4+
-Pj4+ICtDT05GSUdfU0tJUF9MT1dMRVZFTF9JTklUPXkKPj4+Pj4+ICtDT05GSUdfQ09VTlRFUl9G
-UkVRVUVOQ1k9MjQwMDAwMDAKPj4+Pj4+ICtDT05GSUdfQVJDSF9ST0NLQ0hJUD15Cj4+Pj4+PiAr
-Q09ORklHX1RFWFRfQkFTRT0weDAwYTAwMDAwCj4+Pj4+PiArQ09ORklHX1NQTF9MSUJDT01NT05f
-U1VQUE9SVD15Cj4+Pj4+PiArQ09ORklHX1NQTF9MSUJHRU5FUklDX1NVUFBPUlQ9eQo+Pj4+Pj4g
-K0NPTkZJR19OUl9EUkFNX0JBTktTPTIKPj4+Pj4+ICtDT05GSUdfSEFTX0NVU1RPTV9TWVNfSU5J
-VF9TUF9BRERSPXkKPj4+Pj4+ICtDT05GSUdfQ1VTVE9NX1NZU19JTklUX1NQX0FERFI9MHhjMDAw
-MDAKPj4+Pj4+ICtDT05GSUdfU0ZfREVGQVVMVF9TUEVFRD0yNDAwMDAwMAo+Pj4+Pj4gK0NPTkZJ
-R19TRl9ERUZBVUxUX01PREU9MHgyMDAwCj4+Pj4+PiArQ09ORklHX0RFRkFVTFRfREVWSUNFX1RS
-RUU9InJrMzU4OHMtY29vbHBpLTRiIgo+Pj4+Pj4gK0NPTkZJR19ST0NLQ0hJUF9SSzM1ODg9eQo+
-Pj4+Pj4gK0NPTkZJR19TUExfUk9DS0NISVBfQ09NTU9OX0JPQVJEPXkKPj4+Pj4+ICtDT05GSUdf
-Uk9DS0NISVBfU1BJX0lNQUdFPXkKPj4+Pj4+ICtDT05GSUdfU1BMX1NFUklBTD15Cj4+Pj4+PiAr
-Q09ORklHX1NQTF9TVEFDS19SX0FERFI9MHg2MDAwMDAKPj4+Pj4+ICtDT05GSUdfVEFSR0VUX0VW
-Ql9SSzM1ODg9eQo+Pj4+Pj4gK0NPTkZJR19TUExfU1RBQ0s9MHg0MDAwMDAKPj4+Pj4+ICtDT05G
-SUdfREVCVUdfVUFSVF9CQVNFPTB4RkVCNTAwMDAKPj4+Pj4+ICtDT05GSUdfREVCVUdfVUFSVF9D
-TE9DSz0yNDAwMDAwMAo+Pj4+Pj4gK0NPTkZJR19TUExfU1BJX0ZMQVNIX1NVUFBPUlQ9eQo+Pj4+
-Pj4gK0NPTkZJR19TUExfU1BJPXkKPj4+Pj4+ICtDT05GSUdfU1lTX0xPQURfQUREUj0weGMwMDgw
-MAo+Pj4+Pj4gK0NPTkZJR19QQ0k9eQo+Pj4+Pj4gK0NPTkZJR19ERUJVR19VQVJUPXkKPj4+Pj4+
-ICtDT05GSUdfQUhDST15Cj4+Pj4+PiArQ09ORklHX0ZJVD15Cj4+Pj4+PiArQ09ORklHX0ZJVF9W
-RVJCT1NFPXkKPj4+Pj4+ICtDT05GSUdfU1BMX0ZJVF9TSUdOQVRVUkU9eQo+Pj4+Pj4gK0NPTkZJ
-R19TUExfTE9BRF9GSVQ9eQo+Pj4+Pj4gK0NPTkZJR19MRUdBQ1lfSU1BR0VfRk9STUFUPXkKPj4+
-Pj4+ICtDT05GSUdfT0ZfQk9BUkRfU0VUVVA9eQo+Pj4+Pj4gK0NPTkZJR19ERUZBVUxUX0ZEVF9G
-SUxFPSJyb2NrY2hpcC9yazM1ODhzLWNvb2xwaS00Yi5kdGIiCj4+Pj4+PiArIyBDT05GSUdfRElT
-UExBWV9DUFVJTkZPIGlzIG5vdCBzZXQKPj4+Pj4+ICtDT05GSUdfRElTUExBWV9CT0FSRElORk9f
-TEFURT15Cj4+Pj4+PiArQ09ORklHX1NQTF9NQVhfU0laRT0weDQwMDAwCj4+Pj4+PiArQ09ORklH
-X1NQTF9QQURfVE89MHg3ZjgwMDAKPj4+Pj4+ICtDT05GSUdfU1BMX0hBU19CU1NfTElOS0VSX1NF
-Q1RJT049eQo+Pj4+Pj4gK0NPTkZJR19TUExfQlNTX1NUQVJUX0FERFI9MHg0MDAwMDAwCj4+Pj4+
-PiArQ09ORklHX1NQTF9CU1NfTUFYX1NJWkU9MHg0MDAwCj4+Pj4+PiArIyBDT05GSUdfU1BMX1JB
-V19JTUFHRV9TVVBQT1JUIGlzIG5vdCBzZXQKPj4+Pj4+ICsjIENPTkZJR19TUExfU0hBUkVTX0lO
-SVRfU1BfQUREUiBpcyBub3Qgc2V0Cj4+Pj4+PiArQ09ORklHX1NQTF9TVEFDS19SPXkKPj4+Pj4+
-ICtDT05GSUdfU1BMX1NQSV9MT0FEPXkKPj4+Pj4+ICtDT05GSUdfU1lTX1NQSV9VX0JPT1RfT0ZG
-Uz0weDYwMDAwCj4+Pj4+PiArQ09ORklHX1NQTF9BVEY9eQo+Pj4+Pj4gK0NPTkZJR19DTURfR1BJ
-Tz15Cj4+Pj4+PiArQ09ORklHX0NNRF9HUFQ9eQo+Pj4+Pj4gK0NPTkZJR19DTURfSTJDPXkKPj4+
-Pj4+ICtDT05GSUdfQ01EX01NQz15Cj4+Pj4+PiArQ09ORklHX0NNRF9QQ0k9eQo+Pj4+Pj4gK0NP
-TkZJR19DTURfVVNCPXkKPj4+Pj4+ICsjIENPTkZJR19DTURfU0VURVhQUiBpcyBub3Qgc2V0Cj4+
-Pj4+PiArQ09ORklHX0NNRF9SRUdVTEFUT1I9eQo+Pj4+Pj4gKyMgQ09ORklHX1NQTF9ET1NfUEFS
-VElUSU9OIGlzIG5vdCBzZXQKPj4+Pj4+ICtDT05GSUdfU1BMX09GX0NPTlRST0w9eQo+Pj4+Pj4g
-K0NPTkZJR19PRl9MSVZFPXkKPj4+Pj4+ICtDT05GSUdfT0ZfU1BMX1JFTU9WRV9QUk9QUz0iY2xv
-Y2stbmFtZXMgaW50ZXJydXB0LXBhcmVudCBhc3NpZ25lZC1jbG9ja3MgYXNzaWduZWQtY2xvY2st
-cmF0ZXMgYXNzaWduZWQtY2xvY2stcGFyZW50cyIKPj4+Pj4+ICtDT05GSUdfU1BMX0RNX1NFUV9B
-TElBUz15Cj4+Pj4+PiArQ09ORklHX1NQTF9SRUdNQVA9eQo+Pj4+Pj4gK0NPTkZJR19TUExfU1lT
-Q09OPXkKPj4+Pj4+ICtDT05GSUdfQUhDSV9QQ0k9eQo+Pj4+Pj4gK0NPTkZJR19EV0NfQUhDST15
-Cj4+Pj4+PiArQ09ORklHX1NQTF9DTEs9eQo+Pj4+Pj4gK0NPTkZJR19ST0NLQ0hJUF9HUElPPXkK
-Pj4+Pj4+ICtDT05GSUdfU1lTX0kyQ19ST0NLQ0hJUD15Cj4+Pj4+PiArQ09ORklHX01JU0M9eQo+
-Pj4+Pj4gK0NPTkZJR19TVVBQT1JUX0VNTUNfUlBNQj15Cj4+Pj4+PiArQ09ORklHX01NQ19EVz15
-Cj4+Pj4+PiArQ09ORklHX01NQ19EV19ST0NLQ0hJUD15Cj4+Pj4+PiArQ09ORklHX01NQ19TREhD
-ST15Cj4+Pj4+PiArQ09ORklHX01NQ19TREhDSV9TRE1BPXkKPj4+Pj4+ICtDT05GSUdfTU1DX1NE
-SENJX1JPQ0tDSElQPXkKPj4+Pj4+ICtDT05GSUdfU0ZfREVGQVVMVF9CVVM9NQo+Pj4+Pj4gK0NP
-TkZJR19TUElfRkxBU0hfU0ZEUF9TVVBQT1JUPXkKPj4+Pj4+ICtDT05GSUdfU1BJX0ZMQVNIX1hN
-Qz15Cj4+Pj4+PiArQ09ORklHX1NQSV9GTEFTSF9YVFg9eQo+Pj4+Pj4gK0NPTkZJR19QSFlfTU9U
-T1JDT01NPXkKPj4+Pj4+ICtDT05GSUdfRFdDX0VUSF9RT1M9eQo+Pj4+Pj4gK0NPTkZJR19EV0Nf
-RVRIX1FPU19ST0NLQ0hJUD15Cj4+Pj4+PiArQ09ORklHX05WTUVfUENJPXkKPj4+Pj4+ICtDT05G
-SUdfUENJRV9EV19ST0NLQ0hJUD15Cj4+Pj4+PiArQ09ORklHX1BIWV9ST0NLQ0hJUF9JTk5PX1VT
-QjI9eQo+Pj4+Pj4gK0NPTkZJR19QSFlfUk9DS0NISVBfTkFORU5HX0NPTUJPUEhZPXkKPj4+Pj4+
-ICtDT05GSUdfUEhZX1JPQ0tDSElQX1VTQkRQPXkKPj4+Pj4+ICtDT05GSUdfU1BMX1BJTkNUUkw9
-eQo+Pj4+Pj4gK0NPTkZJR19QV01fUk9DS0NISVA9eQo+Pj4+Pj4gK0NPTkZJR19TUExfUkFNPXkK
-Pj4+Pj4+ICtDT05GSUdfU0NTST15Cj4+Pj4+PiArQ09ORklHX0JBVURSQVRFPTE1MDAwMDAKPj4+
-Pj4+ICtDT05GSUdfREVCVUdfVUFSVF9TSElGVD0yCj4+Pj4+PiArQ09ORklHX1NZU19OUzE2NTUw
-X01FTTMyPXkKPj4+Pj4+ICtDT05GSUdfUk9DS0NISVBfU0ZDPXkKPj4+Pj4+ICtDT05GSUdfU1lT
-UkVTRVQ9eQo+Pj4+Pj4gK0NPTkZJR19VU0I9eQo+Pj4+Pj4gK0NPTkZJR19VU0JfWEhDSV9IQ0Q9
-eQo+Pj4+Pj4gK0NPTkZJR19VU0JfRUhDSV9IQ0Q9eQo+Pj4+Pj4gK0NPTkZJR19VU0JfRUhDSV9H
-RU5FUklDPXkKPj4+Pj4+ICtDT05GSUdfVVNCX09IQ0lfSENEPXkKPj4+Pj4+ICtDT05GSUdfVVNC
-X09IQ0lfR0VORVJJQz15Cj4+Pj4+PiArQ09ORklHX1VTQl9EV0MzPXkKPj4+Pj4+ICtDT05GSUdf
-VVNCX0RXQzNfR0VORVJJQz15Cj4+Pj4+PiArQ09ORklHX0VSUk5PX1NUUj15Cj4+Pj4+Cj4+Pj4+
-IElzIHRoZXJlIGFueSByZWFzb24gZm9yIE5PVCBlbmFibGluZyBNTUNfSFM0MDBfRVM/Cj4+Pj4K
-Pj4+PiBObywgSSBqdXN0IGZvbGxvdyB0aGUgY29uZmlnIG9mIG90aGVyIHJrMzU4OC9zIGJhc2Vk
-IGJvYXJkcy4KPj4+Cj4+PiBGb3J0dW5hdGVseSBlbm91Z2gsIGEgcGF0Y2ggd2FzIHJlY2VudGx5
-IG1lcmdlZCB0byBoYXZlIGF0IGxlYXN0IEhTMjAwCj4+PiBvbiBSSzM1ODgsIHdoaWNoIGlzIHRo
-ZSBmaXJzdCBtb2RlIHRoYXQgYWN0dWFsbHkgd29ya3MsIGFueXRoaW5nIGJlbG93Cj4+PiB0aGF0
-IGlzIGJyb2tlbiByaWdodCBub3cuCj4+Pgo+Pj4+IEl0IHNlZW1zIHRoYXQgdGhlcmUgYXJlIG5v
-IHJrMzU4OC9zIGJhc2VkIGJvYXJkcyBlbmFibGUgTU1DX0hTNDAwX0VTIGluIHRoZSBjdXJyZW50
-IHUtYm9vdCBtYWlubGluZSA/Cj4+Pj4KPj4+Cj4+PiBKYWd1YXIgaXMgaG9wZWZ1bGx5IGNvbWlu
-ZyBzb29uLWlzaCwgbWF5YmUgbm90IGluIHRoaXMgcmVsZWFzZSBidXQgdGhlCj4+PiBuZXh0IG9u
-ZSAocGF0Y2hlcyBhcmUgc2VudCBhbHJlYWR5KSwgYW5kIHdlIG1ha2UgdXMgb2YgaXQgaW4gVS1C
-b290Cj4+PiBwcm9wZXIgYW5kIHRoZSBTUEwuIFVwIHRvIHlvdSwgY2FuIGFsd2F5cyBiZSBlbmFi
-bGVkIGxhdGVyIG9uLgo+PiAKPj4gV2l0aCBhIHF1aWNrIHNlYXJjaO+8jCBJIGZvbmQgam9uYXMn
-UyBwYXRjaCBmb3IgZW5hYmxpbmcgSFMyMDAgaGFzIGJlZW4gbWVyZ2VkLCBidXQKPj4geW91ciBw
-YXRjaCB3aWxsIGJyaW5nIEhTNDAwX0VTLCBkb2VzIHRoYXQgbWVhbiBhbGwgdGhlIHJrMzU4OC9z
-IGJhc2VkIGJvYXJzIHdpbGwgc3dpdGNoIHRvCj4+IEhTNDAwIEVTIGlmIHRoZXkgc3VwcG9ydCBp
-dD8KPj4gCj4KPk5vLCBpdCdzIG9uIGEgcGVyLWJvYXJkIGJhc2lzLiBOb3QgYWxsIGVNTUMgb3Ig
-Ym9hcmRzIHN1cHBvcnQgCj5IUzQwMC9IUzQwMF9FUywgaXQgZGVwZW5kcyBvbiB0aGUgc2lnbmFs
-IHF1YWxpdHkvaW50ZWdyaXR5IGFuZCB0aGUgZU1NQyAKPmNoaXAgaXRzZWxmIGlmIEknbSBub3Qg
-bWlzdGFrZW4uIElmIEkgcmVtZW1iZXIgY29ycmVjdGx5LCBKb25hcyBoYWQgc29tZSAKPlJLMzU4
-OCBib2FyZHMgd2hpY2ggZGlkbid0IHdvcmsgd2l0aCBIUzQwMC9IUzQwMF9FUyAocHJvYmFibHkg
-b25lIG9mIAo+dGhvc2UgYm9hcmRzIHdpdGggdGhlIGVNTUMgdGhhdCBpcyBwbHVnZ2VkIGluPyku
-CgpXaXRoIHRoZSBmb2xsb3dpbmcgYWRkIHRvIG15IGRlZmNvbmZpZ++8mgorQ09ORklHX01NQ19J
-T19WT0xUQUdFPXkKK0NPTkZJR19TUExfTU1DX0lPX1ZPTFRBR0U9eQorQ09ORklHX01NQ19VSFNf
-U1VQUE9SVD15CitDT05GSUdfU1BMX01NQ19VSFNfU1VQUE9SVD15CitDT05GSUdfTU1DX0hTNDAw
-X0VTX1NVUFBPUlQ9eQorQ09ORklHX1NQTF9NTUNfSFM0MDBfRVNfU1VQUE9SVD15CitDT05GSUdf
-TU1DX0hTNDAwX1NVUFBPUlQ9eQorQ09ORklHX1NQTF9NTUNfSFM0MDBfU1VQUE9SVD15CgpJIGNh
-biBzZWUgSFM0MDAgd2l0aCBtbWMgaWZuZm/vvIwgYnV0IG5vIEhTNDAwRVPvvJ9NYXliZSB0aGUg
-ZW1tYyBvbgp0aGUgYm9hcmQgZG9lcyBub3Qgc3VwcG9ydCBIUzQwMEVT77yMYnV0IEkgZG9uJ3Qg
-aGF2ZSBkYXRhc2hlZXQgYWJvdXQgdGhlIGVtbWMgdG8gY2hlY2sgaXQuCgpXaXRoIHNvbWUgdGVz
-dCAsIEhTNDAwIHNlZW1zIHdvcmsgZmluZSBvbiB0aGVzZSB0d28gYm9hcmRzLCAgSSB0aGluayBJ
-IGNhbiBlbmFibGUgaXQgaW4gdGhlIG5leHQgdmVyc2lvbi4KPT4gbW1jIGluZm8KRGV2aWNlOiBt
-bWNAZmUyZTAwMDAKTWFudWZhY3R1cmVyIElEOiBlYwpPRU06IDAKTmFtZTogQVQyUzlDIApCdXMg
-U3BlZWQ6IDIwMDAwMDAwMApNb2RlOiBIUzQwMCAoMjAwTUh6KQpSZCBCbG9jayBMZW46IDUxMgpN
-TUMgdmVyc2lvbiA1LjEKSGlnaCBDYXBhY2l0eTogWWVzCkNhcGFjaXR5OiA1OC4yIEdpQgpCdXMg
-V2lkdGg6IDgtYml0IEREUgpFcmFzZSBHcm91cCBTaXplOiA1MTIgS2lCCkhDIFdQIEdyb3VwIFNp
-emU6IDggTWlCClVzZXIgQ2FwYWNpdHk6IDU4LjIgR2lCIFdSUkVMCkJvb3QgQ2FwYWNpdHk6IDQg
-TWlCIEVOSApSUE1CIENhcGFjaXR5OiA0IE1pQiBFTkgKQm9vdCBhcmVhIDAgaXMgbm90IHdyaXRl
-IHByb3RlY3RlZApCb290IGFyZWEgMSBpcyBub3Qgd3JpdGUgcHJvdGVjdGVkCj4KPk5vdyB0byBj
-b21lIHRvIHRoaW5rIG9mIGl0Li4uIEkgZG9uJ3Qga25vdyBob3cvd2h5IEhTNDAwIGlzbid0IGVu
-YWJsZWQgCj5vbmx5IHdoZW4gaXQncyBwcmVzZW50IGluIHRoZSBEVEI/Cj4KPkNoZWVycywKPlF1
-ZW50aW4K
+
+--M+PxOaeQ8CEUNxww
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Feb 16, 2024 at 12:20:14AM +0100, Heinrich Schuchardt wrote:
+>=20
+>=20
+> Am 15. Februar 2024 23:00:32 MEZ schrieb Tom Rini <trini@konsulko.com>:
+> >On Thu, Feb 15, 2024 at 10:53:59PM +0100, Heinrich Schuchardt wrote:
+> >>=20
+> >>=20
+> >> Am 15. Februar 2024 22:28:24 MEZ schrieb Tom Rini <trini@konsulko.com>:
+> >> >On Thu, Feb 15, 2024 at 10:24:40PM +0100, Heinrich Schuchardt wrote:
+> >> >>=20
+> >> >>=20
+> >> >> Am 15. Februar 2024 22:10:25 MEZ schrieb Tom Rini <trini@konsulko.c=
+om>:
+> >> >> >The first big issue is that the "gcc" file talked a lot about the
+> >> >> >general build requirements as well, but was titled in a gcc-centric
+> >> >> >manner. Solve this by renaming the file to compile.rst and more fu=
+lly
+> >> >> >reflecting that it is general build instructions. Next, add a sect=
+ion
+> >> >> >about the prebuilt toolchains that are recommended (as they are th=
+e ones
+> >> >> >we use in CI), and update a few places to reference these vendor-n=
+eutral
+> >> >> >tools.
+> >> >> >
+> >> >> >Next, we can include the reproducible builds section directly in t=
+he
+> >> >> >compile instructions rather than as a small standalone file.
+> >> >> >
+> >> >> >Finally, we update the sandbox document to reflect both the name c=
+hange
+> >> >> >as well as what is specifically required to build sandbox.
+> >> >> >
+> >> >> >Signed-off-by: Tom Rini <trini@konsulko.com>
+> >> >> >---
+> >> >> >Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> >> >> >---
+> >> >> > doc/arch/sandbox/sandbox.rst       |  5 ++-
+> >> >> > doc/build/{gcc.rst =3D> compile.rst} | 64 +++++++++++++++++++++++=
++++----
+> >> >> > doc/build/index.rst                |  3 +-
+> >> >> > doc/build/reproducible.rst         | 27 -------------
+> >> >> > 4 files changed, 61 insertions(+), 38 deletions(-)
+> >> >> > rename doc/build/{gcc.rst =3D> compile.rst} (73%)
+> >> >> > delete mode 100644 doc/build/reproducible.rst
+> >> >> >
+> >> >> >diff --git a/doc/arch/sandbox/sandbox.rst b/doc/arch/sandbox/sandb=
+ox.rst
+> >> >> >index 5f8db126657f..f2ed5a25c115 100644
+> >> >> >--- a/doc/arch/sandbox/sandbox.rst
+> >> >> >+++ b/doc/arch/sandbox/sandbox.rst
+> >> >> >@@ -39,11 +39,12 @@ integers can only be built on 64-bit hosts.
+> >> >> >=20
+> >> >> > Note that standalone/API support is not available at present.
+> >> >> >=20
+> >> >> >-
+> >> >> > Prerequisites
+> >> >> > -------------
+> >> >> >=20
+> >> >> >-Install the dependencies noted in :doc:`../../build/gcc`.
+> >> >> >+In addition to the normal dependencies shows in the :doc:`general=
+ build
+> >> >> >+instructions <../../build/compile>` to enable display support SDL=
+2 libraries
+> >> >> >+need to be available.
+> >> >> >=20
+> >> >> >=20
+> >> >> > Basic Operation
+> >> >> >diff --git a/doc/build/gcc.rst b/doc/build/compile.rst
+> >> >> >similarity index 73%
+> >> >> >rename from doc/build/gcc.rst
+> >> >> >rename to doc/build/compile.rst
+> >> >> >index 3c6465772729..ef9c8545835a 100644
+> >> >> >--- a/doc/build/gcc.rst
+> >> >> >+++ b/doc/build/compile.rst
+> >> >> >@@ -1,11 +1,19 @@
+> >> >> >-Building with GCC
+> >> >> >-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >> >> >+Building U-Boot
+> >> >> >+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >> >> >=20
+> >> >> > Dependencies
+> >> >> > ------------
+> >> >> >=20
+> >> >> >-For building U-Boot you need a GCC compiler for your host platfor=
+m. If you
+> >> >> >-are not building on the target platform you further need  a GCC c=
+ross compiler.
+> >> >> >+For building U-Boot you need the general build tools such as `mak=
+e` and a C
+> >> >> >+compiler for your host platform. Next, if you are not building on=
+ the same
+> >> >> >+architecture as the target platform you further need a C cross co=
+mpiler.
+> >> >> >+Furthermore, some target platforms require additional host tools =
+to be present
+> >> >> >+and their package names may vary slightly dependinng on the namin=
+g scheme used
+> >> >> >+by a particular host OS.
+> >> >> >+
+> >> >> >+In general, GCC should be used for both the host and target C com=
+piler. Using
+> >> >> >+:doc:`clang <clang>` is supported but please see the documented i=
+ssues for it as
+> >> >> >+well.
+> >> >> >=20
+> >> >> > Debian based
+> >> >> > ~~~~~~~~~~~~
+> >> >> >@@ -69,6 +77,17 @@ Depending on the build target further packages =
+may be needed:
+> >> >> > * riscv64 S-mode targets: opensbi
+> >> >> > * some arm64 targets: arm-trusted-firmware
+> >> >> >=20
+> >> >> >+Prebuilt
+> >> >> >+~~~~~~~~
+> >> >> >+
+> >> >> >+Another option, which the project uses for CI for example, is to =
+use a prebuilt
+> >> >> >+toolchain. For the most part, we use the latest `kernel.org`_ pre=
+buit binaries,
+> >> >> >+but there are a few architectures that require their own specific=
+ toolchains
+> >> >> >+still.
+> >> >> >+
+> >> >> >+In general, examples found within the documentation here refer to=
+ the tools
+> >> >> >+found here and exceptions will be noted where relevant.
+> >> >> >+
+> >> >> > Prerequisites
+> >> >> > -------------
+> >> >> >=20
+> >> >> >@@ -112,11 +131,11 @@ command line or export it beforehand.
+> >> >> >=20
+> >> >> >     CROSS_COMPILE=3D<compiler-prefix> make
+> >> >> >=20
+> >> >> >-Assuming cross compiling on Debian for ARMv8 this would be
+> >> >> >+Assuming cross compiling for ARMv8 this would be
+> >> >> >=20
+> >> >> > .. code-block:: bash
+> >> >> >=20
+> >> >> >-    CROSS_COMPILE=3Daarch64-linux-gnu- make
+> >> >> >+    CROSS_COMPILE=3Daarch64-linux- make
+> >> >>=20
+> >> >> GCC uses triples to specify the architecture. With the suggested ch=
+ange building will fail on many distros, e.g. in our CI image.
+> >> >>=20
+> >> >> cf. https://gcc.gnu.org/install/specific.html#aarch64-x-x
+> >> >
+> >> >But this is what the kernel.org compiler is called, and for consisten=
+cy
+> >> >we should reference the reference compiler in our docs. I'm wanting to
+> >> >follow up and change everyone to use consistent names.
+> >> >
+> >>=20
+> >> Please, do not asume that Linux distros will change.=20
+> >>=20
+> >> Users will and should use the tools provided by their distros. Side lo=
+ading foreign binaries is a secutity risc which should be avoided.
+> >>=20
+> >> I cannot see what is inconsistent about sticking to triples.
+> >
+> >We need to be consistent within our docs, and we aren't today. And
+> >"-gnu" isn't a required suffix for aarch64 linux toolchains as not all
+> >distributions do that. I'd be open to wording suggesting that users
+> >install tools recommended by their vendors, but that still won't give us
+> >consistent names due to "aarch64-poky-linux-" being what other vendor
+> >tools will be.
+> >
+>=20
+> On which operating systems will CROSS_COMPILE=3Daarch64-linux- work for t=
+he distro tools?
+>=20
+> On which will CROSS_COMPILE=3Daarch64-linux-gnu- work?
+
+Should we document what we test? We don't test distribution tools
+because then we would have to test some number of distributions. And
+distro tools can be too old. I guess the biggest problem is that I see
+distro tools as a fall back option and you see kernel.org prebuilt
+toolchains as a fallback option.
+
+--=20
+Tom
+
+--M+PxOaeQ8CEUNxww
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXPYKUACgkQFHw5/5Y0
+tyzw6Qv/YH4/5y7oxw7hfYxHHZ13HCTeRhDNvzRko4XSdYk/I8UV1yqX6L8aeqyZ
+MpgZ3GKfcG6FfdqvD5I5No/7C0BqK1B2Pb8b0e4KpIPXoAGuZGtAkPP8LGyLU+72
+Qb0/8kpNZlBD0Lo42An01aSYNJPauQks6BxgUOCSIMvUnUd6tSLxfMNzmoVEhgRw
+30jWifKlurxauWcRH5KVrl/8VubQ+W0kH/zqP+yKwWTf+iAxL9sYATevzKZz4sIT
+TNAXZKJPVAPgERMW6hZGcH5JbnjkQHOX7JL2NdWgjnv7FbkVIZPDHHqxDScQpYur
+Z22CAvPUIRtQt5iHKXS0luoNIvG9WnssHIK0/FLHy9DarA0rgaPIP0PNbmi4BJtg
+cmwRKjJOf1Mn0L6+3ef77LJIP1RfFltuls8SR7UtA1QZ5B2OE7TO98SVbQXBMLQo
+uqyc2Z1H9H5wdPH2gzyaUDBmu60PnruWRI0uYoT+sPZSi8dNjN75L6O2m9Ikehuq
+1tf6nsLR
+=nazt
+-----END PGP SIGNATURE-----
+
+--M+PxOaeQ8CEUNxww--
