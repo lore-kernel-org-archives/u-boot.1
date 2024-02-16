@@ -4,73 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4357C48260
-	for <u-boot@archiver.kernel.org>; Fri, 16 Feb 2024 10:35:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF431C48260
+	for <u-boot@archiver.kernel.org>; Fri, 16 Feb 2024 10:41:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A4718780A;
-	Fri, 16 Feb 2024 11:35:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 56E5E87B50;
+	Fri, 16 Feb 2024 11:41:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bz5qhZ5Q";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="d+UPLgiU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F189D87BA8; Fri, 16 Feb 2024 11:35:47 +0100 (CET)
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 65A6387E44; Fri, 16 Feb 2024 11:41:20 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E249586564
- for <u-boot@lists.denx.de>; Fri, 16 Feb 2024 11:35:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C870D8780A
+ for <u-boot@lists.denx.de>; Fri, 16 Feb 2024 11:41:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-51187830d6dso591362e87.3
- for <u-boot@lists.denx.de>; Fri, 16 Feb 2024 02:35:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708079739; x=1708684539; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=DOFdDHKODy+IBKkRskBbEFcSDGGO4es9EZIYOeyvGz4=;
- b=bz5qhZ5Qn7+qCzIK2YVtNSlIZ15PBWz048I7k0hBS2qRgAhHQof9mXzeadP+5KOwma
- BqXNPSqW8v0fB3qppPS4TM+42dJytDs9xw7YCn2sSubGSRhYTmkfjlbr+DMKjDhxGoDO
- gsRkjNd5UkbHrR61qT033ChRvkQNkRJfGjbF2rIEreKoRqad1TwYp1lZeXraaP6RfWHq
- boGiUicam1K/8LGW3GqQZQgnE1csV22O8lfMqU7vU/l91lzmmeR5zSu+qfKrkDMKW3KJ
- 1dTyXsn81k1CNJ/SMwCfJZK9JnpffI2ZL4K5yAEPfIHaQT2TN9znq+aJoNqAyPZ55bLK
- klIg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708079739; x=1708684539;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=DOFdDHKODy+IBKkRskBbEFcSDGGO4es9EZIYOeyvGz4=;
- b=qXv4rH7Y7CyVJBxIcmxAuH6mmHM2xjc43jEvIcpTIzxtz3lcZXOBJI6fmqa6Hxhlj8
- oY35ZtzNMc3CFJD0UDjAR9+Q0NmTMLzlBUNlY+9AYVKYPX57FgkORETUVufl/v53ZJRZ
- Gygfctwx1VRXXfmbTwgZtcUH4zSKIOdAjHgu1Q4933Oooq8DGyWbA6hpfPaYSAOyUE3b
- Nr2ctqizKCesj5ngINdBcN70ftTpITFEb9asspeNlUrZWH9tOLn7u0Ds8SP5r2qB7b7/
- GwkWtySuM298bhPFdYtns7PW0wdHDn+F3txktCdYI/wo6lxHFqzMpTzsz+XvY5Di7KDo
- 7eYw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUc99TGIB08vjb/+mBMpN7l4fmEp1hjmS1oqLNTagS49Ulgcf2rN6dKSiVmukmp3QVyUtIlnwOYBuQ/XDXVxuSRGj9DqA==
-X-Gm-Message-State: AOJu0YzxxVVs6BDXdoSM2hkYjG+S4M0UHoTxlATdnWX4wu0/u+G7zCsE
- pxdjAwZZBM54chhR1gIpjpVanp5XHHrXasjnhPGtSQdf5pSnBFPshAFiqwHCo2oFvW5Bi4W3V92
- YYVYF6YW6AhDBMfv/dlzVghKZAm/XPIqeuUQASg==
-X-Google-Smtp-Source: AGHT+IEaelKInM64PA8/GtVMiTOl9ZuI6TAZjRMY4bjvTc7tDAXXs+0JjnN75hwVjmk2t4RrugFdvksHyPn99pQrbi4=
-X-Received: by 2002:ac2:53b5:0:b0:511:a02b:8223 with SMTP id
- j21-20020ac253b5000000b00511a02b8223mr3006243lfh.58.1708079739628; Fri, 16
- Feb 2024 02:35:39 -0800 (PST)
+ spf=pass smtp.mailfrom=s-vadapalli@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41GAf9RA063071;
+ Fri, 16 Feb 2024 04:41:09 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1708080069;
+ bh=u787QNlqle7TtFiaOBcItkhipSEE4abj/m70ZNvmZ9o=;
+ h=From:To:CC:Subject:Date;
+ b=d+UPLgiUHvngt+UbuBytbv9940MUcC28t2UxOtPlGlqRs7b/60MfisQwvQrQLH8p6
+ QgOY5IIzhXvk61pm1vga6UxFjgqfHh+wDN0oM2rM/P+ZXfc8F5kCR4VOlUJcmafwT+
+ yVnvF6oTvO1t6QsmadVghco7WRCfTW5yakxpQEQQ=
+Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41GAf9rQ031468
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 16 Feb 2024 04:41:09 -0600
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 16
+ Feb 2024 04:41:08 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 16 Feb 2024 04:41:08 -0600
+Received: from uda0492258.dhcp.ti.com (uda0492258.dhcp.ti.com [172.24.227.9])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41GAf5HR011657; 
+ Fri, 16 Feb 2024 04:41:06 -0600
+From: Siddharth Vadapalli <s-vadapalli@ti.com>
+To: <trini@konsulko.com>, <sjg@chromium.org>, <vigneshr@ti.com>,
+ <matthias.schiffer@ew.tq-group.com>, <nm@ti.com>
+CC: <u-boot@lists.denx.de>, <srk@ti.com>, <s-vadapalli@ti.com>
+Subject: [PATCH] dma: ti: k3-udma: Fix error handling for setup_resources() in
+ udma_probe()
+Date: Fri, 16 Feb 2024 16:11:05 +0530
+Message-ID: <20240216104105.494602-1-s-vadapalli@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20240214190625.13764-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20240214190625.13764-1-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 16 Feb 2024 12:35:03 +0200
-Message-ID: <CAC_iWj+SVZw14QeNLFp8KC8=cP8fYaZUnThQG_cEivxN56BwAw@mail.gmail.com>
-Subject: Re: [PATCH 1/1] arm: separate .data and .text sections of EFI binaries
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,58 +79,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+In udma_probe() the return value of setup_resources() is stored in the
+u32 "ch_count" member of "struct udma_dev", due to which any negative
+return value which indicates an error is masked.
 
-[...]
+Fix this by storing the return value of setup_resources() in the already
+declared integer variable "ret", followed by assigning it to the "ch_count"
+member of "struct udma_dev" in case of no error.
 
->         }
-> +       .rela.dyn : { *(.rela.dyn) }
-> +       .rela.plt : { *(.rela.plt) }
-> +       .rela.got : { *(.rela.got) }
-> +       .rela.data : { *(.rela.data) *(.rela.data*) }
+While at it, change the "return ret" at the end of udma_probe() to a
+"return 0", to explicitly indicate that probe was successful.
 
-Why are we switching from Rel to Rela?
+Fixes: a8837cf43839 ("dma: ti: k3-udma: Query DMA channels allocated from Resource Manager")
+Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+---
 
->         _etext = .;
->         _text_size = . - _text;
-> -       .dynamic  : { *(.dynamic) }
-> +       . = ALIGN(4096);
->         .data : {
->                 _data = .;
->                 *(.sdata)
-> @@ -47,20 +59,19 @@ SECTIONS
->                 . = ALIGN(512);
->                 _bss_end = .;
->                 _edata = .;
-> -       }
-> -       .rel.dyn : { *(.rel.dyn) }
-> -       .rel.plt : { *(.rel.plt) }
-> -       .rel.got : { *(.rel.got) }
-> -       .rel.data : { *(.rel.data) *(.rel.data*) }
-> -       _data_size = . - _etext;
-> +       } :data
-> +       _data_size = _edata - _data;
->
-> +       . = ALIGN(4096);
-> +       .dynsym   : { *(.dynsym) }
-> +       . = ALIGN(4096);
-> +       .dynstr   : { *(.dynstr) }
-> +       . = ALIGN(4096);
-> +       .note.gnu.build-id : { *(.note.gnu.build-id) }
->         /DISCARD/ : {
->                 *(.rel.reloc)
->                 *(.eh_frame)
->                 *(.note.GNU-stack)
-> -               *(.dynsym)
-> -               *(.dynstr)
-> -               *(.note.gnu.build-id)
-> -               *(.comment)
->         }
-> +       .comment 0 : { *(.comment) }
->  }
-> --
-> 2.43.0
->
+Hello,
 
-Cheers
-/Ilias
+This patch is based on commit
+9e00b6993f Merge tag 'u-boot-dfu-20240215' of https://source.denx.de/u-boot/custodians/u-boot-dfu
+of the master branch of U-Boot.
+
+Regards,
+Siddharth.
+
+ drivers/dma/ti/k3-udma.c | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
+
+diff --git a/drivers/dma/ti/k3-udma.c b/drivers/dma/ti/k3-udma.c
+index eea9ec9659..8a6625f034 100644
+--- a/drivers/dma/ti/k3-udma.c
++++ b/drivers/dma/ti/k3-udma.c
+@@ -1770,9 +1770,11 @@ static int udma_probe(struct udevice *dev)
+ 		return PTR_ERR(ud->ringacc);
+ 
+ 	ud->dev = dev;
+-	ud->ch_count = setup_resources(ud);
+-	if (ud->ch_count <= 0)
+-		return ud->ch_count;
++	ret = setup_resources(ud);
++	if (ret <= 0)
++		return ret;
++
++	ud->ch_count = ret;
+ 
+ 	for (i = 0; i < ud->bchan_cnt; i++) {
+ 		struct udma_bchan *bchan = &ud->bchans[i];
+@@ -1831,7 +1833,7 @@ static int udma_probe(struct udevice *dev)
+ 
+ 	uc_priv->supported = DMA_SUPPORTS_MEM_TO_MEM | DMA_SUPPORTS_MEM_TO_DEV;
+ 
+-	return ret;
++	return 0;
+ }
+ 
+ static int udma_push_to_ring(struct k3_nav_ring *ring, void *elem)
+-- 
+2.34.1
+
