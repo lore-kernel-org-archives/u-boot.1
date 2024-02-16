@@ -4,60 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 367E2C48260
-	for <u-boot@archiver.kernel.org>; Fri, 16 Feb 2024 11:17:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1EE1C48260
+	for <u-boot@archiver.kernel.org>; Fri, 16 Feb 2024 11:37:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A413787B50;
-	Fri, 16 Feb 2024 12:16:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
+	by phobos.denx.de (Postfix) with ESMTP id DC7A987BEE;
+	Fri, 16 Feb 2024 12:37:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=163.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id C756387E67; Fri, 16 Feb 2024 11:47:11 +0100 (CET)
-Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
- [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id 34FD387E64;
- Fri, 16 Feb 2024 11:47:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-IronPort-AV: E=Sophos;i="6.06,164,1705330800"; 
- d="asc'?scan'208";a="198086376"
-Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie6.idc.renesas.com with ESMTP; 16 Feb 2024 19:47:01 +0900
-Received: from [10.226.93.96] (unknown [10.226.93.96])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id 09D8C400CF01;
- Fri, 16 Feb 2024 19:46:51 +0900 (JST)
-Message-ID: <e5eec82e-359d-45ad-a01d-6d852fe78d99@bp.renesas.com>
-Date: Fri, 16 Feb 2024 10:46:50 +0000
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="IrAXcvxZ";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 0AE5087B50; Fri, 16 Feb 2024 12:37:52 +0100 (CET)
+Received: from m1325.mail.163.com (m1325.mail.163.com [220.181.13.25])
+ by phobos.denx.de (Postfix) with ESMTP id ACE3E87CB9
+ for <u-boot@lists.denx.de>; Fri, 16 Feb 2024 12:37:48 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=fail (p=none dis=none) header.from=163.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=andyshrk@163.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+ s=s110527; h=Date:From:Subject:Content-Type:MIME-Version:
+ Message-ID; bh=4P7c6Ai8qpUa1nXPrihXtPdJgsa8HJ7MJoG+Tk4JJcY=; b=I
+ rAXcvxZHqb1TWHdp6CJStPi3Ch/1/CBXz1qoVGeVSrZBAaQGuAGt+drVIAdXuJs5
+ tLnUdD/hVrMFTNvXEuVX56J1eodD2Q8yd7WLDsbjbos5utify1Jnysz8RYmsWBxM
+ r/w5qxAcWCpvtENgtoDbjbZqzgQIGDMDl4zB4v29GY=
+Received: from andyshrk$163.com ( [58.22.7.114] ) by ajax-webmail-wmsvr25
+ (Coremail) ; Fri, 16 Feb 2024 19:37:40 +0800 (CST)
+X-Originating-IP: [58.22.7.114]
+Date: Fri, 16 Feb 2024 19:37:40 +0800 (CST)
+From: "Andy Yan" <andyshrk@163.com>
+To: "Quentin Schulz" <quentin.schulz@theobroma-systems.com>
+Cc: kever.yang@rock-chips.com, jonas@kwiboo.se, u-boot@lists.denx.de
+Subject: Re:Re: [PATCH v2 1/2] board: rockchip: Add support for rk3588s
+ based Cool Pi 4B
+X-Priority: 3
+X-Mailer: Coremail Webmail Server Version XT5.0.14 build 20230109(dcb5de15)
+ Copyright (c) 2002-2024 www.mailtech.cn 163com
+In-Reply-To: <0b536be2-3469-4c1a-b972-a7b5c877a03d@theobroma-systems.com>
+References: <20240214093126.329717-1-andyshrk@163.com>
+ <918dfa17-3c32-44d4-8d16-87bab10cc138@theobroma-systems.com>
+ <261ba9aa.2fa.18dac558cf4.Coremail.andyshrk@163.com>
+ <cdda29dd-3d9f-4eef-83a5-a5f80ca79dcb@theobroma-systems.com>
+ <1cd3e505.333.18dac9f1eed.Coremail.andyshrk@163.com>
+ <0b536be2-3469-4c1a-b972-a7b5c877a03d@theobroma-systems.com>
+X-NTES-SC: AL_Qu2bCvyTvEwt5iidYekZnEobh+Y5UcK2s/ki2YFXN5k0kinEyAoad3RNPl3m2/yWDSaruxOtVRR8x9V9RaN7dbwsh701lAOh6byrdilX7bfO
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset=UTF-8
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 08/11] doc: devicetree: Updates for devicetree-rebasing
- subtree
-Content-Language: en-GB
-To: Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io,
- u-boot-custodians@lists.denx.de, trini@konsulko.com, sjg@chromium.org,
- robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org, conor@kernel.org,
- neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech,
- daniel.thompson@linaro.org, dgilmore@fedoraproject.org,
- pbrobinson@gmail.com, ilias.apalodimas@linaro.org, b.galvani@gmail.com,
- xypron.glpk@gmx.de, michal.simek@amd.com, seanga2@gmail.com,
- rasmus.villemoes@prevas.dk, peng.fan@nxp.com, jh80.chung@samsung.com,
- rfried.dev@gmail.com, marex@denx.de, mibodhi@gmail.com, bb@ti.com,
- mark.kettenis@xs4all.nl, festevam@gmail.com, nm@ti.com,
- andre.przywara@arm.com, ijc@hellion.org.uk
-References: <20240202130534.1051438-1-sumit.garg@linaro.org>
- <20240202130534.1051438-9-sumit.garg@linaro.org>
- <518d87fc-457e-4d77-ba66-9e3a5aa15279@bp.renesas.com>
- <CAFA6WYOdYK4vAibGEQ9SnNCGMv00AKYkzZu+capfW9E4y=cFHA@mail.gmail.com>
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-Organization: Renesas Electronics Corporation
-In-Reply-To: <CAFA6WYOdYK4vAibGEQ9SnNCGMv00AKYkzZu+capfW9E4y=cFHA@mail.gmail.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------fDnJ0NUi7Aeqw0sjd0sWpFtg"
-X-Mailman-Approved-At: Fri, 16 Feb 2024 12:16:56 +0100
+Message-ID: <1619445.492.18db1b53afe.Coremail.andyshrk@163.com>
+X-Coremail-Locale: zh_CN
+X-CM-TRANSID: GcGowAC3f68FSc9lLugIAA--.2862W
+X-CM-SenderInfo: 5dqg52xkunqiywtou0bp/xtbBEAuGXmVOCRL3xAAEsE
+X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,202 +72,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------fDnJ0NUi7Aeqw0sjd0sWpFtg
-Content-Type: multipart/mixed; boundary="------------nNGq5v0JNixz260cJAe4O0yY";
- protected-headers="v1"
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io,
- u-boot-custodians@lists.denx.de, trini@konsulko.com, sjg@chromium.org,
- robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org, conor@kernel.org,
- neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech,
- daniel.thompson@linaro.org, dgilmore@fedoraproject.org,
- pbrobinson@gmail.com, ilias.apalodimas@linaro.org, b.galvani@gmail.com,
- xypron.glpk@gmx.de, michal.simek@amd.com, seanga2@gmail.com,
- rasmus.villemoes@prevas.dk, peng.fan@nxp.com, jh80.chung@samsung.com,
- rfried.dev@gmail.com, marex@denx.de, mibodhi@gmail.com, bb@ti.com,
- mark.kettenis@xs4all.nl, festevam@gmail.com, nm@ti.com,
- andre.przywara@arm.com, ijc@hellion.org.uk
-Message-ID: <e5eec82e-359d-45ad-a01d-6d852fe78d99@bp.renesas.com>
-Subject: Re: [PATCH v5 08/11] doc: devicetree: Updates for devicetree-rebasing
- subtree
-References: <20240202130534.1051438-1-sumit.garg@linaro.org>
- <20240202130534.1051438-9-sumit.garg@linaro.org>
- <518d87fc-457e-4d77-ba66-9e3a5aa15279@bp.renesas.com>
- <CAFA6WYOdYK4vAibGEQ9SnNCGMv00AKYkzZu+capfW9E4y=cFHA@mail.gmail.com>
-In-Reply-To: <CAFA6WYOdYK4vAibGEQ9SnNCGMv00AKYkzZu+capfW9E4y=cFHA@mail.gmail.com>
-
---------------nNGq5v0JNixz260cJAe4O0yY
-Content-Type: multipart/mixed; boundary="------------cAjcMN9uM6Cudv3og0HnnOxk"
-
---------------cAjcMN9uM6Cudv3og0HnnOxk
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-On 14/02/2024 13:32, Sumit Garg wrote:
-> On Wed, 14 Feb 2024 at 03:01, Paul Barker <paul.barker.ct@bp.renesas.co=
-m> wrote:
->> On 02/02/2024 13:05, Sumit Garg wrote:
->>> +Dependencies
->>> +~~~~~~~~~~~~
->>> +
->>> +The DT schema project must be installed in order to validate the DT =
-schema
->>> +binding documents and validate DTS files using the DT schema. The DT=
- schema
->>> +project can be installed with pip::
->>> +
->>> +    pip3 install dtschema
->>
->> Unfortunately this won't work on recent distro versions, e.g. on Debia=
-n
->> 12 I get:
->>
->>     error: externally-managed-environment
->>
->>     =C3=97 This environment is externally managed
->>     =E2=95=B0=E2=94=80> To install Python packages system-wide, try ap=
-t install
->>         python3-xyz, where xyz is the package you are trying to
->>         install.
->>
->>         If you wish to install a non-Debian-packaged Python package,
->>         create a virtual environment using python3 -m venv path/to/ven=
-v.
->>         Then use path/to/venv/bin/python and path/to/venv/bin/pip. Mak=
-e
->>         sure you have python3-full installed.
->>
->>         If you wish to install a non-Debian packaged Python applicatio=
-n,
->>         it may be easiest to use pipx install xyz, which will manage a=
-
->>         virtual environment for you. Make sure you have pipx installed=
-=2E
->>
->>         See /usr/share/doc/python3.11/README.venv for more information=
-=2E
->>
->>     note: If you believe this is a mistake, please contact your Python=
-
->>     installation or OS distribution provider. You can override this, a=
-t the
->>     risk of breaking your Python installation or OS, by passing
->>     --break-system-packages.
->>     hint: See PEP 668 for the detailed specification.
->>
->> I don't have a good solution to recommend here - there's no consensus =
-on
->> how to install Python tools for use in development. You could use
->> `pipx`, you could create a virtualenv, and I'm sure there are other
->> options as well. Perhaps we just need to leave it up to the reader to
->> find out how to install dtschema on their system.
->=20
-> I suppose you haven't installed python3-pip package [1] on your Debian
-> 12. BTW, `pip3` is being used as the common way to install dtschema
-> [2]. Also, every user may not be aware about python virtual
-> environments. So it's better to provide the commonly used pip3 option
-> for installation.
-
-The python3-pip package is installed, it's the pip3 program that is
-printing the error message I saw. This is the new behaviour in Debian
-12, also seen in rolling distributions like Arch Linux and OpenSuSE
-Tumbleweed since the middle of last year. There is a good guide to this
-from Python=3D>Speed [1] and more detail in the Python packaging spec [2]=
-=2E
-Sadly it's something we now have to live with in recent Linux distro
-releases, and I expect all distros will enable this in upcoming
-releases.
-
-[1]: https://pythonspeed.com/articles/externally-managed-environment-pep-=
-668/
-[2]: https://packaging.python.org/en/latest/specifications/externally-man=
-aged-environments/#externally-managed-environments
-
-Thanks,
-
---=20
-Paul Barker
---------------cAjcMN9uM6Cudv3og0HnnOxk
-Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
-Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
-
------BEGIN PGP PUBLIC KEY BLOCK-----
-
-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3D
-=3DsIIN
------END PGP PUBLIC KEY BLOCK-----
-
---------------cAjcMN9uM6Cudv3og0HnnOxk--
-
---------------nNGq5v0JNixz260cJAe4O0yY--
-
---------------fDnJ0NUi7Aeqw0sjd0sWpFtg
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZc89GgUDAAAAAAAKCRDbaV4Vf/JGvRx2
-AP9Ul0x7G0olxAybgekuWjiewsfGrAPxCC63O4B4OKMcGQEAuj56oDM8LuFSACBdCpW/68fhDB1c
-qz95WJN6YWic8go=
-=YKTH
------END PGP SIGNATURE-----
-
---------------fDnJ0NUi7Aeqw0sjd0sWpFtg--
+CkhpIFF1ZW50aW7vvJoKCgrlnKggMjAyNC0wMi0xNSAyMDo0Mjo1Nu+8jCJRdWVudGluIFNjaHVs
+eiIgPHF1ZW50aW4uc2NodWx6QHRoZW9icm9tYS1zeXN0ZW1zLmNvbT4g5YaZ6YGT77yaCj5IaSBB
+bmR5LAo+Cj5PbiAyLzE1LzI0IDEyOjU1LCBBbmR5IFlhbiB3cm90ZToKPj4gW1lvdSBkb24ndCBv
+ZnRlbiBnZXQgZW1haWwgZnJvbSBhbmR5c2hya0AxNjMuY29tLiBMZWFybiB3aHkgdGhpcyBpcyBp
+bXBvcnRhbnQgYXQgaHR0cHM6Ly9ha2EubXMvTGVhcm5BYm91dFNlbmRlcklkZW50aWZpY2F0aW9u
+IF0KPj4gCj4+IEhpIFF1ZW50aW7vvJoKPj4gQXQgMjAyNC0wMi0xNSAxODo0MDoyNSwgIlF1ZW50
+aW4gU2NodWx6IiA8cXVlbnRpbi5zY2h1bHpAdGhlb2Jyb21hLXN5c3RlbXMuY29tPiB3cm90ZToK
+Pj4+IEhpIEFuZHksCj4+Pgo+Pj4gT24gMi8xNS8yNCAxMTozNSwgQW5keSBZYW4gd3JvdGU6Cj4+
+PiBbLi4uXQo+Pj4+Pj4gZGlmZiAtLWdpdCBhL2NvbmZpZ3MvY29vbHBpLTRiLXJrMzU4OHNfZGVm
+Y29uZmlnIGIvY29uZmlncy9jb29scGktNGItcmszNTg4c19kZWZjb25maWcKPj4+Pj4+IG5ldyBm
+aWxlIG1vZGUgMTAwNjQ0Cj4+Pj4+PiBpbmRleCAwMDAwMDAwMDAwLi4zZTNlNWFiYzg2Cj4+Pj4+
+PiAtLS0gL2Rldi9udWxsCj4+Pj4+PiArKysgYi9jb25maWdzL2Nvb2xwaS00Yi1yazM1ODhzX2Rl
+ZmNvbmZpZwo+Pj4+Pj4gQEAgLTAsMCArMSwxMDUgQEAKPj4+Pj4+ICtDT05GSUdfQVJNPXkKPj4+
+Pj4+ICtDT05GSUdfU0tJUF9MT1dMRVZFTF9JTklUPXkKPj4+Pj4+ICtDT05GSUdfQ09VTlRFUl9G
+UkVRVUVOQ1k9MjQwMDAwMDAKPj4+Pj4+ICtDT05GSUdfQVJDSF9ST0NLQ0hJUD15Cj4+Pj4+PiAr
+Q09ORklHX1RFWFRfQkFTRT0weDAwYTAwMDAwCj4+Pj4+PiArQ09ORklHX1NQTF9MSUJDT01NT05f
+U1VQUE9SVD15Cj4+Pj4+PiArQ09ORklHX1NQTF9MSUJHRU5FUklDX1NVUFBPUlQ9eQo+Pj4+Pj4g
+K0NPTkZJR19OUl9EUkFNX0JBTktTPTIKPj4+Pj4+ICtDT05GSUdfSEFTX0NVU1RPTV9TWVNfSU5J
+VF9TUF9BRERSPXkKPj4+Pj4+ICtDT05GSUdfQ1VTVE9NX1NZU19JTklUX1NQX0FERFI9MHhjMDAw
+MDAKPj4+Pj4+ICtDT05GSUdfU0ZfREVGQVVMVF9TUEVFRD0yNDAwMDAwMAo+Pj4+Pj4gK0NPTkZJ
+R19TRl9ERUZBVUxUX01PREU9MHgyMDAwCj4+Pj4+PiArQ09ORklHX0RFRkFVTFRfREVWSUNFX1RS
+RUU9InJrMzU4OHMtY29vbHBpLTRiIgo+Pj4+Pj4gK0NPTkZJR19ST0NLQ0hJUF9SSzM1ODg9eQo+
+Pj4+Pj4gK0NPTkZJR19TUExfUk9DS0NISVBfQ09NTU9OX0JPQVJEPXkKPj4+Pj4+ICtDT05GSUdf
+Uk9DS0NISVBfU1BJX0lNQUdFPXkKPj4+Pj4+ICtDT05GSUdfU1BMX1NFUklBTD15Cj4+Pj4+PiAr
+Q09ORklHX1NQTF9TVEFDS19SX0FERFI9MHg2MDAwMDAKPj4+Pj4+ICtDT05GSUdfVEFSR0VUX0VW
+Ql9SSzM1ODg9eQo+Pj4+Pj4gK0NPTkZJR19TUExfU1RBQ0s9MHg0MDAwMDAKPj4+Pj4+ICtDT05G
+SUdfREVCVUdfVUFSVF9CQVNFPTB4RkVCNTAwMDAKPj4+Pj4+ICtDT05GSUdfREVCVUdfVUFSVF9D
+TE9DSz0yNDAwMDAwMAo+Pj4+Pj4gK0NPTkZJR19TUExfU1BJX0ZMQVNIX1NVUFBPUlQ9eQo+Pj4+
+Pj4gK0NPTkZJR19TUExfU1BJPXkKPj4+Pj4+ICtDT05GSUdfU1lTX0xPQURfQUREUj0weGMwMDgw
+MAo+Pj4+Pj4gK0NPTkZJR19QQ0k9eQo+Pj4+Pj4gK0NPTkZJR19ERUJVR19VQVJUPXkKPj4+Pj4+
+ICtDT05GSUdfQUhDST15Cj4+Pj4+PiArQ09ORklHX0ZJVD15Cj4+Pj4+PiArQ09ORklHX0ZJVF9W
+RVJCT1NFPXkKPj4+Pj4+ICtDT05GSUdfU1BMX0ZJVF9TSUdOQVRVUkU9eQo+Pj4+Pj4gK0NPTkZJ
+R19TUExfTE9BRF9GSVQ9eQo+Pj4+Pj4gK0NPTkZJR19MRUdBQ1lfSU1BR0VfRk9STUFUPXkKPj4+
+Pj4+ICtDT05GSUdfT0ZfQk9BUkRfU0VUVVA9eQo+Pj4+Pj4gK0NPTkZJR19ERUZBVUxUX0ZEVF9G
+SUxFPSJyb2NrY2hpcC9yazM1ODhzLWNvb2xwaS00Yi5kdGIiCj4+Pj4+PiArIyBDT05GSUdfRElT
+UExBWV9DUFVJTkZPIGlzIG5vdCBzZXQKPj4+Pj4+ICtDT05GSUdfRElTUExBWV9CT0FSRElORk9f
+TEFURT15Cj4+Pj4+PiArQ09ORklHX1NQTF9NQVhfU0laRT0weDQwMDAwCj4+Pj4+PiArQ09ORklH
+X1NQTF9QQURfVE89MHg3ZjgwMDAKPj4+Pj4+ICtDT05GSUdfU1BMX0hBU19CU1NfTElOS0VSX1NF
+Q1RJT049eQo+Pj4+Pj4gK0NPTkZJR19TUExfQlNTX1NUQVJUX0FERFI9MHg0MDAwMDAwCj4+Pj4+
+PiArQ09ORklHX1NQTF9CU1NfTUFYX1NJWkU9MHg0MDAwCj4+Pj4+PiArIyBDT05GSUdfU1BMX1JB
+V19JTUFHRV9TVVBQT1JUIGlzIG5vdCBzZXQKPj4+Pj4+ICsjIENPTkZJR19TUExfU0hBUkVTX0lO
+SVRfU1BfQUREUiBpcyBub3Qgc2V0Cj4+Pj4+PiArQ09ORklHX1NQTF9TVEFDS19SPXkKPj4+Pj4+
+ICtDT05GSUdfU1BMX1NQSV9MT0FEPXkKPj4+Pj4+ICtDT05GSUdfU1lTX1NQSV9VX0JPT1RfT0ZG
+Uz0weDYwMDAwCj4+Pj4+PiArQ09ORklHX1NQTF9BVEY9eQo+Pj4+Pj4gK0NPTkZJR19DTURfR1BJ
+Tz15Cj4+Pj4+PiArQ09ORklHX0NNRF9HUFQ9eQo+Pj4+Pj4gK0NPTkZJR19DTURfSTJDPXkKPj4+
+Pj4+ICtDT05GSUdfQ01EX01NQz15Cj4+Pj4+PiArQ09ORklHX0NNRF9QQ0k9eQo+Pj4+Pj4gK0NP
+TkZJR19DTURfVVNCPXkKPj4+Pj4+ICsjIENPTkZJR19DTURfU0VURVhQUiBpcyBub3Qgc2V0Cj4+
+Pj4+PiArQ09ORklHX0NNRF9SRUdVTEFUT1I9eQo+Pj4+Pj4gKyMgQ09ORklHX1NQTF9ET1NfUEFS
+VElUSU9OIGlzIG5vdCBzZXQKPj4+Pj4+ICtDT05GSUdfU1BMX09GX0NPTlRST0w9eQo+Pj4+Pj4g
+K0NPTkZJR19PRl9MSVZFPXkKPj4+Pj4+ICtDT05GSUdfT0ZfU1BMX1JFTU9WRV9QUk9QUz0iY2xv
+Y2stbmFtZXMgaW50ZXJydXB0LXBhcmVudCBhc3NpZ25lZC1jbG9ja3MgYXNzaWduZWQtY2xvY2st
+cmF0ZXMgYXNzaWduZWQtY2xvY2stcGFyZW50cyIKPj4+Pj4+ICtDT05GSUdfU1BMX0RNX1NFUV9B
+TElBUz15Cj4+Pj4+PiArQ09ORklHX1NQTF9SRUdNQVA9eQo+Pj4+Pj4gK0NPTkZJR19TUExfU1lT
+Q09OPXkKPj4+Pj4+ICtDT05GSUdfQUhDSV9QQ0k9eQo+Pj4+Pj4gK0NPTkZJR19EV0NfQUhDST15
+Cj4+Pj4+PiArQ09ORklHX1NQTF9DTEs9eQo+Pj4+Pj4gK0NPTkZJR19ST0NLQ0hJUF9HUElPPXkK
+Pj4+Pj4+ICtDT05GSUdfU1lTX0kyQ19ST0NLQ0hJUD15Cj4+Pj4+PiArQ09ORklHX01JU0M9eQo+
+Pj4+Pj4gK0NPTkZJR19TVVBQT1JUX0VNTUNfUlBNQj15Cj4+Pj4+PiArQ09ORklHX01NQ19EVz15
+Cj4+Pj4+PiArQ09ORklHX01NQ19EV19ST0NLQ0hJUD15Cj4+Pj4+PiArQ09ORklHX01NQ19TREhD
+ST15Cj4+Pj4+PiArQ09ORklHX01NQ19TREhDSV9TRE1BPXkKPj4+Pj4+ICtDT05GSUdfTU1DX1NE
+SENJX1JPQ0tDSElQPXkKPj4+Pj4+ICtDT05GSUdfU0ZfREVGQVVMVF9CVVM9NQo+Pj4+Pj4gK0NP
+TkZJR19TUElfRkxBU0hfU0ZEUF9TVVBQT1JUPXkKPj4+Pj4+ICtDT05GSUdfU1BJX0ZMQVNIX1hN
+Qz15Cj4+Pj4+PiArQ09ORklHX1NQSV9GTEFTSF9YVFg9eQo+Pj4+Pj4gK0NPTkZJR19QSFlfTU9U
+T1JDT01NPXkKPj4+Pj4+ICtDT05GSUdfRFdDX0VUSF9RT1M9eQo+Pj4+Pj4gK0NPTkZJR19EV0Nf
+RVRIX1FPU19ST0NLQ0hJUD15Cj4+Pj4+PiArQ09ORklHX05WTUVfUENJPXkKPj4+Pj4+ICtDT05G
+SUdfUENJRV9EV19ST0NLQ0hJUD15Cj4+Pj4+PiArQ09ORklHX1BIWV9ST0NLQ0hJUF9JTk5PX1VT
+QjI9eQo+Pj4+Pj4gK0NPTkZJR19QSFlfUk9DS0NISVBfTkFORU5HX0NPTUJPUEhZPXkKPj4+Pj4+
+ICtDT05GSUdfUEhZX1JPQ0tDSElQX1VTQkRQPXkKPj4+Pj4+ICtDT05GSUdfU1BMX1BJTkNUUkw9
+eQo+Pj4+Pj4gK0NPTkZJR19QV01fUk9DS0NISVA9eQo+Pj4+Pj4gK0NPTkZJR19TUExfUkFNPXkK
+Pj4+Pj4+ICtDT05GSUdfU0NTST15Cj4+Pj4+PiArQ09ORklHX0JBVURSQVRFPTE1MDAwMDAKPj4+
+Pj4+ICtDT05GSUdfREVCVUdfVUFSVF9TSElGVD0yCj4+Pj4+PiArQ09ORklHX1NZU19OUzE2NTUw
+X01FTTMyPXkKPj4+Pj4+ICtDT05GSUdfUk9DS0NISVBfU0ZDPXkKPj4+Pj4+ICtDT05GSUdfU1lT
+UkVTRVQ9eQo+Pj4+Pj4gK0NPTkZJR19VU0I9eQo+Pj4+Pj4gK0NPTkZJR19VU0JfWEhDSV9IQ0Q9
+eQo+Pj4+Pj4gK0NPTkZJR19VU0JfRUhDSV9IQ0Q9eQo+Pj4+Pj4gK0NPTkZJR19VU0JfRUhDSV9H
+RU5FUklDPXkKPj4+Pj4+ICtDT05GSUdfVVNCX09IQ0lfSENEPXkKPj4+Pj4+ICtDT05GSUdfVVNC
+X09IQ0lfR0VORVJJQz15Cj4+Pj4+PiArQ09ORklHX1VTQl9EV0MzPXkKPj4+Pj4+ICtDT05GSUdf
+VVNCX0RXQzNfR0VORVJJQz15Cj4+Pj4+PiArQ09ORklHX0VSUk5PX1NUUj15Cj4+Pj4+Cj4+Pj4+
+IElzIHRoZXJlIGFueSByZWFzb24gZm9yIE5PVCBlbmFibGluZyBNTUNfSFM0MDBfRVM/Cj4+Pj4K
+Pj4+PiBObywgSSBqdXN0IGZvbGxvdyB0aGUgY29uZmlnIG9mIG90aGVyIHJrMzU4OC9zIGJhc2Vk
+IGJvYXJkcy4KPj4+Cj4+PiBGb3J0dW5hdGVseSBlbm91Z2gsIGEgcGF0Y2ggd2FzIHJlY2VudGx5
+IG1lcmdlZCB0byBoYXZlIGF0IGxlYXN0IEhTMjAwCj4+PiBvbiBSSzM1ODgsIHdoaWNoIGlzIHRo
+ZSBmaXJzdCBtb2RlIHRoYXQgYWN0dWFsbHkgd29ya3MsIGFueXRoaW5nIGJlbG93Cj4+PiB0aGF0
+IGlzIGJyb2tlbiByaWdodCBub3cuCj4+Pgo+Pj4+IEl0IHNlZW1zIHRoYXQgdGhlcmUgYXJlIG5v
+IHJrMzU4OC9zIGJhc2VkIGJvYXJkcyBlbmFibGUgTU1DX0hTNDAwX0VTIGluIHRoZSBjdXJyZW50
+IHUtYm9vdCBtYWlubGluZSA/Cj4+Pj4KPj4+Cj4+PiBKYWd1YXIgaXMgaG9wZWZ1bGx5IGNvbWlu
+ZyBzb29uLWlzaCwgbWF5YmUgbm90IGluIHRoaXMgcmVsZWFzZSBidXQgdGhlCj4+PiBuZXh0IG9u
+ZSAocGF0Y2hlcyBhcmUgc2VudCBhbHJlYWR5KSwgYW5kIHdlIG1ha2UgdXMgb2YgaXQgaW4gVS1C
+b290Cj4+PiBwcm9wZXIgYW5kIHRoZSBTUEwuIFVwIHRvIHlvdSwgY2FuIGFsd2F5cyBiZSBlbmFi
+bGVkIGxhdGVyIG9uLgo+PiAKPj4gV2l0aCBhIHF1aWNrIHNlYXJjaO+8jCBJIGZvbmQgam9uYXMn
+UyBwYXRjaCBmb3IgZW5hYmxpbmcgSFMyMDAgaGFzIGJlZW4gbWVyZ2VkLCBidXQKPj4geW91ciBw
+YXRjaCB3aWxsIGJyaW5nIEhTNDAwX0VTLCBkb2VzIHRoYXQgbWVhbiBhbGwgdGhlIHJrMzU4OC9z
+IGJhc2VkIGJvYXJzIHdpbGwgc3dpdGNoIHRvCj4+IEhTNDAwIEVTIGlmIHRoZXkgc3VwcG9ydCBp
+dD8KPj4gCj4KPk5vLCBpdCdzIG9uIGEgcGVyLWJvYXJkIGJhc2lzLiBOb3QgYWxsIGVNTUMgb3Ig
+Ym9hcmRzIHN1cHBvcnQgCj5IUzQwMC9IUzQwMF9FUywgaXQgZGVwZW5kcyBvbiB0aGUgc2lnbmFs
+IHF1YWxpdHkvaW50ZWdyaXR5IGFuZCB0aGUgZU1NQyAKPmNoaXAgaXRzZWxmIGlmIEknbSBub3Qg
+bWlzdGFrZW4uIElmIEkgcmVtZW1iZXIgY29ycmVjdGx5LCBKb25hcyBoYWQgc29tZSAKPlJLMzU4
+OCBib2FyZHMgd2hpY2ggZGlkbid0IHdvcmsgd2l0aCBIUzQwMC9IUzQwMF9FUyAocHJvYmFibHkg
+b25lIG9mIAo+dGhvc2UgYm9hcmRzIHdpdGggdGhlIGVNTUMgdGhhdCBpcyBwbHVnZ2VkIGluPyku
+CgpXaXRoIHRoZSBmb2xsb3dpbmcgYWRkIHRvIG15IGRlZmNvbmZpZ++8mgorQ09ORklHX01NQ19J
+T19WT0xUQUdFPXkKK0NPTkZJR19TUExfTU1DX0lPX1ZPTFRBR0U9eQorQ09ORklHX01NQ19VSFNf
+U1VQUE9SVD15CitDT05GSUdfU1BMX01NQ19VSFNfU1VQUE9SVD15CitDT05GSUdfTU1DX0hTNDAw
+X0VTX1NVUFBPUlQ9eQorQ09ORklHX1NQTF9NTUNfSFM0MDBfRVNfU1VQUE9SVD15CitDT05GSUdf
+TU1DX0hTNDAwX1NVUFBPUlQ9eQorQ09ORklHX1NQTF9NTUNfSFM0MDBfU1VQUE9SVD15CgpJIGNh
+biBzZWUgSFM0MDAgd2l0aCBtbWMgaWZuZm/vvIwgYnV0IG5vIEhTNDAwRVPvvJ9NYXliZSB0aGUg
+ZW1tYyBvbgp0aGUgYm9hcmQgZG9lcyBub3Qgc3VwcG9ydCBIUzQwMEVT77yMYnV0IEkgZG9uJ3Qg
+aGF2ZSBkYXRhc2hlZXQgYWJvdXQgdGhlIGVtbWMgdG8gY2hlY2sgaXQuCgpXaXRoIHNvbWUgdGVz
+dCAsIEhTNDAwIHNlZW1zIHdvcmsgZmluZSBvbiB0aGVzZSB0d28gYm9hcmRzLCAgSSB0aGluayBJ
+IGNhbiBlbmFibGUgaXQgaW4gdGhlIG5leHQgdmVyc2lvbi4KPT4gbW1jIGluZm8KRGV2aWNlOiBt
+bWNAZmUyZTAwMDAKTWFudWZhY3R1cmVyIElEOiBlYwpPRU06IDAKTmFtZTogQVQyUzlDIApCdXMg
+U3BlZWQ6IDIwMDAwMDAwMApNb2RlOiBIUzQwMCAoMjAwTUh6KQpSZCBCbG9jayBMZW46IDUxMgpN
+TUMgdmVyc2lvbiA1LjEKSGlnaCBDYXBhY2l0eTogWWVzCkNhcGFjaXR5OiA1OC4yIEdpQgpCdXMg
+V2lkdGg6IDgtYml0IEREUgpFcmFzZSBHcm91cCBTaXplOiA1MTIgS2lCCkhDIFdQIEdyb3VwIFNp
+emU6IDggTWlCClVzZXIgQ2FwYWNpdHk6IDU4LjIgR2lCIFdSUkVMCkJvb3QgQ2FwYWNpdHk6IDQg
+TWlCIEVOSApSUE1CIENhcGFjaXR5OiA0IE1pQiBFTkgKQm9vdCBhcmVhIDAgaXMgbm90IHdyaXRl
+IHByb3RlY3RlZApCb290IGFyZWEgMSBpcyBub3Qgd3JpdGUgcHJvdGVjdGVkCj4KPk5vdyB0byBj
+b21lIHRvIHRoaW5rIG9mIGl0Li4uIEkgZG9uJ3Qga25vdyBob3cvd2h5IEhTNDAwIGlzbid0IGVu
+YWJsZWQgCj5vbmx5IHdoZW4gaXQncyBwcmVzZW50IGluIHRoZSBEVEI/Cj4KPkNoZWVycywKPlF1
+ZW50aW4K
