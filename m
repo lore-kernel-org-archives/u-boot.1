@@ -4,67 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA35EC48260
-	for <u-boot@archiver.kernel.org>; Fri, 16 Feb 2024 05:01:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E06CC48260
+	for <u-boot@archiver.kernel.org>; Fri, 16 Feb 2024 05:27:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C05387E44;
-	Fri, 16 Feb 2024 06:01:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 3F84D87E30;
+	Fri, 16 Feb 2024 06:27:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iwABEu8U";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="WekxWm/J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 76FEF87E44; Fri, 16 Feb 2024 06:01:44 +0100 (CET)
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id DA0C687E32; Fri, 16 Feb 2024 06:27:08 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 53F2287E50
- for <u-boot@lists.denx.de>; Fri, 16 Feb 2024 06:01:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1CA3787E2A
+ for <u-boot@lists.denx.de>; Fri, 16 Feb 2024 06:27:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sahaj.sarup@linaro.org
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-2d0f7585d89so3945251fa.3
- for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 21:01:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708059692; x=1708664492; darn=lists.denx.de;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=045cEGbQgVKMeKRFsw5kqxEKs77t2Znhca/Dm4rZg4c=;
- b=iwABEu8UlH0J6mMQhj6rcaWVn9STA6KJESiFbJ2OJy6zpVO7hJiMOHJm4F54OJjaoX
- QT9btN00zwXyFVr/1cylV3G357DXo5gh5COqc1UWDfztSQ7HEEgrIDBOWVjsEluwkx6b
- X4fE2Q0P3yk4fAtLB0HISRtLAm3Bieegvcxyl8aEg2Ya5yShvDd7dlHf4Kgc43zEevD9
- ZawS7Ib1GKyuk3QeNEBioxOzN2tFpUn63B1ixS8EdTND2C4uFwekBan5Yh+w4z/pAlC2
- dXfq/MPXyhxVmuwEFGWRLy9E+pNx6wGUCOwkFT3fzrN08cJsDYIMCo5DnRqyMMQRl/0r
- 8J2w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708059692; x=1708664492;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=045cEGbQgVKMeKRFsw5kqxEKs77t2Znhca/Dm4rZg4c=;
- b=YBtEz6AHYvtixUwL3BY+sKn4Fgj4DSz9RA4IGPU+ovgZwQnJmX/DrMmx3uOcy5mSBA
- qPwWgtg1lbKv1poh9DgPSjV0ATSkeqZTDpuGop/V8LKDlvLoV3J2UWeN+pPTVOAyic6d
- 96RqvdVpIo3LQGOrQlif1JiqCqWHrtZoCP7T7AP/PmXYe8Jv8WrGf7AKRbcSQneFVw/H
- cQbJhfDcAzauJ/Du7absbHXXyKTdLew8IvwPajZjFA5ZL3sg64ZGVkXVGldWrQ0Kev+k
- JdPGgHvhXUB2ncmuikwm/RRpXN4kyEbDr7L9QFyLF7Mq+oOqaNWXQ3qzq3sddQJt7i1C
- 8TYw==
-X-Gm-Message-State: AOJu0Yx5pjVpEAabToPcvo33dMUJSJS8GK/xxv4g8IgKwMYXfcG/wnTu
- 9SE5uu1nz82zVdZCsVB+KnWdeAEViLlv9X4We3b5zAGncjk5Q9mbCWJHJe8PFsby4sasSJ6TQck
- yN0FtLL0WzFcxY5+3zoFu+GvX9j6Vlr63mp12dAzhWiZ08bpPpG4=
-X-Google-Smtp-Source: AGHT+IHEp4i+Wsbv3jLTTNmPXVDi9Il2OH/OEbUzsvD+dOXk8I8xks5wZjJgWX5jVdAnVFdlK639VZZo2C2hiK2keRg=
-X-Received: by 2002:a2e:9198:0:b0:2d0:ac7f:eef9 with SMTP id
- f24-20020a2e9198000000b002d0ac7feef9mr2863596ljg.34.1708059691326; Thu, 15
- Feb 2024 21:01:31 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41G5QwAp109301;
+ Thu, 15 Feb 2024 23:26:58 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1708061218;
+ bh=3P0baVpvUs2+It6R5Yj8UpViZ50awkVjuLEFE1smnWY=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=WekxWm/JCa8BX4DQGzlX4FYbxnVOBqIqUmv9LTz4itGFZMsc1AtfTunEsTI4quXmF
+ 14667LIc9ceUaswXzeDePfNrBUvBcPAKOMB3qoGvTnqSQcX6u2btG0ZPQb3QRuO4NS
+ kFrD8my5fQXAJk23kUGhkgOEYIsJPOSeTHDujH2c=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41G5QwsU053445
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 15 Feb 2024 23:26:58 -0600
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 15
+ Feb 2024 23:26:58 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 15 Feb 2024 23:26:57 -0600
+Received: from [172.24.227.36]
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41G5Qtjc019871;
+ Thu, 15 Feb 2024 23:26:56 -0600
+Message-ID: <47f90ba6-732e-4664-9b89-65b4d6db2cb1@ti.com>
+Date: Fri, 16 Feb 2024 10:56:55 +0530
 MIME-Version: 1.0
-From: Sahaj Sarup <sahaj.sarup@linaro.org>
-Date: Fri, 16 Feb 2024 10:31:20 +0530
-Message-ID: <CAKZ1LvM45MB8N0CqgU+C7i9=Bjb6kqNTxWo2Tv407HKLWtCMkA@mail.gmail.com>
-Subject: verdin-imx8mp: Ethernet does not load at boot
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 4/6] arm: mach-k3: am62: Fixup TF-A/OP-TEE reserved-memory
+ node in FDT
+Content-Language: en-US
+To: Andrew Davis <afd@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, Nishanth
+ Menon <nm@ti.com>, Simon Glass <sjg@chromium.org>, Tom Rini
+ <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>
+References: <20240214163009.983034-1-afd@ti.com>
+ <20240214163009.983034-5-afd@ti.com>
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <20240214163009.983034-5-afd@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,92 +84,119 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Andrew
 
-On a verdin-imx8mp platform I am now unable to use the ethernet ports.
-My last build was from December
-(8f5043ee6d378d7c10d947cf48b047a5954ef5b3) so it was working fine
-then.
+On 14/02/24 22:00, Andrew Davis wrote:
+> The address we load TF-A and OP-TEE to is configurable by Kconfig
+> CONFIG_K3_{ATF,OPTEE}_LOAD_ADDR, but the DT nodes reserving this memory
+> are often statically defined. As these binaries are dynamically loadable,
+> and in the case of OP-TEE may not even be loaded at all, hard-coding these
+> addresses is not a hardware description, but rather a configuration.
+> 
+> If the address that U-Boot loaded TF-A or OP-TEE does not match the
+> address in hard-coded in DT, then fix that node address. This also handles
+> the case when no reserved memory for these is provided by DT, which is
+> more correct as explained above.
+> 
+> Add this fixup function, and enable it for AM62.
+> 
+> Signed-off-by: Andrew Davis <afd@ti.com>
+> ---
+>   arch/arm/mach-k3/am625_fdt.c  |  2 ++
+>   arch/arm/mach-k3/common_fdt.c | 52 +++++++++++++++++++++++++++++++++++
+>   arch/arm/mach-k3/common_fdt.h |  2 ++
+>   3 files changed, 56 insertions(+)
+> 
+> diff --git a/arch/arm/mach-k3/am625_fdt.c b/arch/arm/mach-k3/am625_fdt.c
+> index 970dd3447de..b26186456f3 100644
+> --- a/arch/arm/mach-k3/am625_fdt.c
+> +++ b/arch/arm/mach-k3/am625_fdt.c
+> @@ -43,6 +43,8 @@ int ft_system_setup(void *blob, struct bd_info *bd)
+>   	fdt_fixup_cores_nodes_am625(blob, k3_get_core_nr());
+>   	fdt_fixup_gpu_nodes_am625(blob, k3_has_gpu());
+>   	fdt_fixup_pru_node_am625(blob, k3_has_pru());
+> +	fdt_fixup_reserved(blob, "tfa", CONFIG_K3_ATF_LOAD_ADDR, 0x80000);
+> +	fdt_fixup_reserved(blob, "optee", CONFIG_K3_OPTEE_LOAD_ADDR, 0x1800000);
+>   
+>   	return 0;
+>   }
+> diff --git a/arch/arm/mach-k3/common_fdt.c b/arch/arm/mach-k3/common_fdt.c
+> index 645c4de42f7..3bdedd7b509 100644
+> --- a/arch/arm/mach-k3/common_fdt.c
+> +++ b/arch/arm/mach-k3/common_fdt.c
+> @@ -112,3 +112,55 @@ int fdt_del_node_path(void *blob, const char *path)
+>   
+>   	return ret;
+>   }
+> +
+> +int fdt_fixup_reserved(void *blob, const char *name,
+> +		       unsigned int new_address, unsigned int new_size)
+> +{
+> +	int nodeoffset, subnode;
+> +	int ret;
+> +
+> +	/* Find reserved-memory */
+> +	nodeoffset = fdt_subnode_offset(blob, 0, "reserved-memory");
+> +	if (nodeoffset < 0) {
+> +		debug("Could not find reserved-memory node\n");
+> +		return 0;
+> +	}
+> +
+> +	/* Find existing matching subnode and remove it */
+> +	fdt_for_each_subnode(subnode, blob, nodeoffset) {
+> +		const char *node_name;
+> +		fdt_addr_t addr;
+> +		fdt_size_t size;
+> +
+> +		/* Name matching */
+> +		node_name = fdt_get_name(blob, subnode, NULL);
+> +		if (!name)
+> +			return -EINVAL;
+> +		if (!strncmp(node_name, name, strlen(name))) {
+> +			/* Read out old size first */
+> +			addr = fdtdec_get_addr_size(blob, subnode, "reg", &size);
+> +			if (addr == FDT_ADDR_T_NONE)
+> +				return -EINVAL;
+> +			new_size = size;
+> +
+> +			/* Delete node */
+> +			ret = fdt_del_node(blob, subnode);
+> +			if (ret < 0)
+> +				return ret;
+> +
+> +			/* Only one matching node */
+> +			break;
+> +		}
+> +	}
+> +
+> +	struct fdt_memory carveout = {
+> +		.start = new_address,
+> +		.end = new_address + new_size - 1,
+> +	};
+> +	ret = fdtdec_add_reserved_memory(blob, name, &carveout, NULL, 0, NULL,
+> +					 FDTDEC_RESERVED_MEMORY_NO_MAP);
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	return 0;
+> +}
+> diff --git a/arch/arm/mach-k3/common_fdt.h b/arch/arm/mach-k3/common_fdt.h
+> index 4d23ae638ca..52c07957483 100644
+> --- a/arch/arm/mach-k3/common_fdt.h
+> +++ b/arch/arm/mach-k3/common_fdt.h
+> @@ -8,5 +8,7 @@
+>   
+>   int fdt_fixup_msmc_ram_k3(void *blob);
+>   int fdt_del_node_path(void *blob, const char *path);
+> +int fdt_fixup_reserved(void *blob, const char *name,
+> +		       unsigned int new_address, unsigned int new_size);
+>   
+>   #endif /* _COMMON_FDT_H */
 
-Boot log:
+This looks pretty neat! Thanks!
 
-```
-U-Boot SPL 2024.04-rc2-00002-gbef352dd57-dirty (Feb 16 2024 - 10:07:17 +0530)
-Training FAILED
-DDR configured as single rank
-SEC0:  RNG instantiated
-Normal Boot
-WDT:   Started watchdog@30280000 with servicing every 1000ms (60s timeout)
-Trying to boot from BOOTROM
-Boot Stage: Primary boot
-Find img info 0x4802ae00, size 1044
-Need continue download 1024
-NOTICE:  Do not release JR0 to NS as it can be used by HAB
-NOTICE:  BL31: v2.10.0  (release):v2.10.0-44-g2e1e1664c
-NOTICE:  BL31: Built : 13:09:20, Dec  1 2023
+Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
 
-
-U-Boot 2024.04-rc2-00002-gbef352dd57-dirty (Feb 16 2024 - 10:07:17 +0530)
-
-CPU:   Freescale i.MX8MP[8] rev1.1 1600 MHz (running at 1200 MHz)
-CPU:   Industrial temperature grade (-40C to 105C) at 36C
-Reset cause: POR
-DRAM:  4 GiB
-Core:  171 devices, 28 uclasses, devicetree: separate
-WDT:   Started watchdog@30280000 with servicing every 1000ms (60s timeout)
-MMC:   FSL_SDHC: 1, FSL_SDHC: 2
-Loading Environment from MMC... *** Warning - bad CRC, using default environment
-
-In:    serial@30880000
-Out:   serial@30880000
-Err:   serial@30880000
-Model: Toradex Verdin iMX8M Plus WB on Verdin Development Board
-SEC0:  RNG instantiated
-Setting variant to nonwifi
-Net:
-Error: ethernet@30bf0000 No valid MAC address found.
-Can't find FEC0 clk rate: -22
-
-Error: ethernet@30bf0000 No valid MAC address found.
-Read MDIO failed...
-Read MDIO failed...
-Read MDIO failed...
-Read MDIO failed...
-Read MDIO failed...
-Read MDIO failed...
-Could not get PHY for mdio: addr 7
-Read MDIO failed...
-Read MDIO failed...
-Read MDIO failed...
-Read MDIO failed...
-Read MDIO failed...
-Read MDIO failed...
-Could not get PHY for FEC1: addr 7
-
-Error: ethernet@30bf0000 No valid MAC address found.
-Can't find FEC0 clk rate: -22
-
-Error: ethernet@30bf0000 No valid MAC address found.
-Read MDIO failed...
-Read MDIO failed...
-Read MDIO failed...
-Read MDIO failed...
-Read MDIO failed...
-Read MDIO failed...
-Could not get PHY for mdio: addr 7
-Read MDIO failed...
-Read MDIO failed...
-Read MDIO failed...
-Read MDIO failed...
-Read MDIO failed...
-Read MDIO failed...
-Could not get PHY for FEC1: addr 7
-
-Error: ethernet@30bf0000 No valid MAC address found.
-
-Error: ethernet@30bf0000 No valid MAC address found.
-No ethernet found.
-
-Hit any key to stop autoboot:  0
-
-```
+-- 
+Thanking You
+Neha Malcom Francis
