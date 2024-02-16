@@ -4,46 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D97CC48BEB
-	for <u-boot@archiver.kernel.org>; Fri, 16 Feb 2024 10:06:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15153C48BEB
+	for <u-boot@archiver.kernel.org>; Fri, 16 Feb 2024 10:10:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E7FD087E32;
-	Fri, 16 Feb 2024 11:06:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0FE8B87D66;
+	Fri, 16 Feb 2024 11:10:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C7AF087E3E; Fri, 16 Feb 2024 11:06:11 +0100 (CET)
-Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
- [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id 1C0A587C5D
- for <u-boot@lists.denx.de>; Fri, 16 Feb 2024 11:06:07 +0100 (CET)
+ id 725D187D66; Fri, 16 Feb 2024 11:10:43 +0100 (CET)
+Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
+ [210.160.252.172])
+ by phobos.denx.de (Postfix) with ESMTP id 79ABD87C5D
+ for <u-boot@lists.denx.de>; Fri, 16 Feb 2024 11:10:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
 X-IronPort-AV: E=Sophos;i="6.06,164,1705330800"; 
- d="asc'?scan'208";a="194160559"
-Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie5.idc.renesas.com with ESMTP; 16 Feb 2024 19:06:05 +0900
+ d="asc'?scan'208";a="198083126"
+Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
+ by relmlie6.idc.renesas.com with ESMTP; 16 Feb 2024 19:10:22 +0900
 Received: from [10.226.93.96] (unknown [10.226.93.96])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id 8A82040062DC;
- Fri, 16 Feb 2024 19:06:04 +0900 (JST)
-Message-ID: <016b8379-08aa-4e72-bcde-33b17c5a2d35@bp.renesas.com>
-Date: Fri, 16 Feb 2024 10:06:03 +0000
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id 6D2EE4209FB8;
+ Fri, 16 Feb 2024 19:10:21 +0900 (JST)
+Message-ID: <626503f4-8109-44d1-b3c7-8e32e7b33f30@bp.renesas.com>
+Date: Fri, 16 Feb 2024 10:10:19 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] doc: Update our clang documentation to reflect
- current status
+Subject: Re: [PATCH 2/2] doc: Rework the gcc section to reflect general build
+ instructions
 Content-Language: en-GB
 To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: Mark Kettenis <kettenis@openbsd.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
 References: <20240215211025.690964-1-trini@konsulko.com>
+ <20240215211025.690964-2-trini@konsulko.com>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 Organization: Renesas Electronics Corporation
-In-Reply-To: <20240215211025.690964-1-trini@konsulko.com>
+In-Reply-To: <20240215211025.690964-2-trini@konsulko.com>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------RKv9AQU2ZxfSmvdvnxd6Gfyw"
+ boundary="------------jWmkL4iT0XFaoqxlbrPkwnsF"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -61,108 +62,124 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------RKv9AQU2ZxfSmvdvnxd6Gfyw
-Content-Type: multipart/mixed; boundary="------------gMQUbwgygAPY1hF0lLjaiHdO";
+--------------jWmkL4iT0XFaoqxlbrPkwnsF
+Content-Type: multipart/mixed; boundary="------------5DdZbvRO2lBQAdfgNvblcDLP";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: Mark Kettenis <kettenis@openbsd.org>
-Message-ID: <016b8379-08aa-4e72-bcde-33b17c5a2d35@bp.renesas.com>
-Subject: Re: [PATCH 1/2] doc: Update our clang documentation to reflect
- current status
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Message-ID: <626503f4-8109-44d1-b3c7-8e32e7b33f30@bp.renesas.com>
+Subject: Re: [PATCH 2/2] doc: Rework the gcc section to reflect general build
+ instructions
 References: <20240215211025.690964-1-trini@konsulko.com>
-In-Reply-To: <20240215211025.690964-1-trini@konsulko.com>
+ <20240215211025.690964-2-trini@konsulko.com>
+In-Reply-To: <20240215211025.690964-2-trini@konsulko.com>
 
---------------gMQUbwgygAPY1hF0lLjaiHdO
-Content-Type: multipart/mixed; boundary="------------BUGTS3HiHT2LdAoOLl4OKFcY"
+--------------5DdZbvRO2lBQAdfgNvblcDLP
+Content-Type: multipart/mixed; boundary="------------uBN2TP9b5ykSaDPSiXvI0vti"
 
---------------BUGTS3HiHT2LdAoOLl4OKFcY
+--------------uBN2TP9b5ykSaDPSiXvI0vti
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
 On 15/02/2024 21:10, Tom Rini wrote:
-> First, since this document was written the biggest challenges at the
-> time are simply not applicable anymore. Second, we need to list the
-> challenges which are preventing more platforms from being able to be
-> built with Clang today.  Next, we update the general wording to be host=
+> The first big issue is that the "gcc" file talked a lot about the
+> general build requirements as well, but was titled in a gcc-centric
+> manner. Solve this by renaming the file to compile.rst and more fully
+> reflecting that it is general build instructions. Next, add a section
+> about the prebuilt toolchains that are recommended (as they are the one=
+s
+> we use in CI), and update a few places to reference these vendor-neutra=
+l
+> tools.
+>=20
+> Next, we can include the reproducible builds section directly in the
+> compile instructions rather than as a small standalone file.
+>=20
+> Finally, we update the sandbox document to reflect both the name change=
 
-> distribution agnostic. Finally, the section about xenguest_arm64 issues=
-
-> is not present anymore.
+> as well as what is specifically required to build sandbox.
 >=20
 > Signed-off-by: Tom Rini <trini@konsulko.com>
 > ---
-> Cc: Mark Kettenis <kettenis@openbsd.org>
-> This does leave the FreeBSD section unchanged and should likely be
-> looked at again by someone with a BSD build machine available.
+> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
 > ---
->  doc/build/clang.rst | 85 +++++++++++----------------------------------=
-
->  1 file changed, 21 insertions(+), 64 deletions(-)
+>  doc/arch/sandbox/sandbox.rst       |  5 ++-
+>  doc/build/{gcc.rst =3D> compile.rst} | 64 ++++++++++++++++++++++++++--=
+--
+>  doc/build/index.rst                |  3 +-
+>  doc/build/reproducible.rst         | 27 -------------
+>  4 files changed, 61 insertions(+), 38 deletions(-)
+>  rename doc/build/{gcc.rst =3D> compile.rst} (73%)
+>  delete mode 100644 doc/build/reproducible.rst
 >=20
-> diff --git a/doc/build/clang.rst b/doc/build/clang.rst
-> index 09bb988e9236..d8c554982567 100644
-> --- a/doc/build/clang.rst
-> +++ b/doc/build/clang.rst
-> @@ -1,34 +1,27 @@
->  Building with Clang
->  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> diff --git a/doc/arch/sandbox/sandbox.rst b/doc/arch/sandbox/sandbox.rs=
+t
+> index 5f8db126657f..f2ed5a25c115 100644
+> --- a/doc/arch/sandbox/sandbox.rst
+> +++ b/doc/arch/sandbox/sandbox.rst
+> @@ -39,11 +39,12 @@ integers can only be built on 64-bit hosts.
 > =20
-> -The biggest problem when trying to compile U-Boot with Clang is that a=
-lmost all
-> -archs rely on storing gd in a global register and the Clang 3.5 user m=
-anual
-> -states: "Clang does not support global register variables; this is unl=
-ikely to
-> -be implemented soon because it requires additional LLVM backend suppor=
-t."
+>  Note that standalone/API support is not available at present.
+> =20
 > -
-> -The ARM backend can be instructed not to use the r9 and x18 registers =
-using
-> --ffixed-r9 or -ffixed-x18 respectively. As global registers themselves=
- are not
-> -supported inline assembly is needed to get and set the r9 or x18 value=
-=2E This
-> -leads to larger code then strictly necessary, but at least works.
-> -
-> -Debian based
-> -------------
-> -
-> -Required packages can be installed via apt, e.g.
-> -
-> -.. code-block:: bash
-> -
-> -    sudo apt-get install clang
-> -
-> -We make use of the CROSS_COMPILE variable to derive the build target w=
-hich is
-> -passed as the --target parameter to clang.
-> -
-> -The CROSS_COMPILE variable further determines the paths to other build=
+>  Prerequisites
+>  -------------
+> =20
+> -Install the dependencies noted in :doc:`../../build/gcc`.
+> +In addition to the normal dependencies shows in the :doc:`general buil=
+d
+> +instructions <../../build/compile>` to enable display support SDL2 lib=
+raries
+> +need to be available.
 
-> -tools. As assembler we use the binary pointed to by '$(CROSS_COMPILE)a=
-s'
-> -instead of the LLVM integrated assembler (IAS).
-> -
-> -Here is an example demonstrating building U-Boot for the Raspberry Pi =
-2
-> -using clang:
-> +In general terms, U-Boot support building with Clang as the C compiler=
- and
+I find this a little unclear. Perhaps:
 
-s/support/supports/
+To enable display support, SDL2 libraries need to be available in
+addition to the normal dependencies shown in the :doc:`general build
+instructions <../../build/compile>`.
 
-> +building and booting our "sandbox" target is part of CI.
+> =20
+> =20
+>  Basic Operation
+> diff --git a/doc/build/gcc.rst b/doc/build/compile.rst
+> similarity index 73%
+> rename from doc/build/gcc.rst
+> rename to doc/build/compile.rst
+> index 3c6465772729..ef9c8545835a 100644
+> --- a/doc/build/gcc.rst
+> +++ b/doc/build/compile.rst
+> @@ -1,11 +1,19 @@
+> -Building with GCC
+> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +Building U-Boot
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> =20
+>  Dependencies
+>  ------------
+> =20
+> -For building U-Boot you need a GCC compiler for your host platform. If=
+ you
+> -are not building on the target platform you further need  a GCC cross =
+compiler.
+> +For building U-Boot you need the general build tools such as `make` an=
+d a C
+> +compiler for your host platform. Next, if you are not building on the =
+same
+> +architecture as the target platform you further need a C cross compile=
+r.
+> +Furthermore, some target platforms require additional host tools to be=
+ present
+> +and their package names may vary slightly dependinng on the naming sch=
+eme used
 
-Are you saying that building the sandbox target with Clang then booting
-it is part of CI? I think this sentence needs re-wording to make it a
-little clearer.
+s/dependinng/depending/
 
 Thanks,
 
 --=20
 Paul Barker
---------------BUGTS3HiHT2LdAoOLl4OKFcY
+--------------uBN2TP9b5ykSaDPSiXvI0vti
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -226,21 +243,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------BUGTS3HiHT2LdAoOLl4OKFcY--
+--------------uBN2TP9b5ykSaDPSiXvI0vti--
 
---------------gMQUbwgygAPY1hF0lLjaiHdO--
+--------------5DdZbvRO2lBQAdfgNvblcDLP--
 
---------------RKv9AQU2ZxfSmvdvnxd6Gfyw
+--------------jWmkL4iT0XFaoqxlbrPkwnsF
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZc8ziwUDAAAAAAAKCRDbaV4Vf/JGvYO5
-AQDuZ/ytkgpsVBBP4+duNBcz4/QXFJMG7SKcFdcx9eZCQQEA+44Fm9h6oFDyexX0BgQXzYyWobpe
-so47EAEgaZeqVwM=
-=KFiZ
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZc80jAUDAAAAAAAKCRDbaV4Vf/JGvVwj
+AQCMXPUmBixDsnttGtBlncMSdVvkUssQC2KfbA9yfg2uNwEA7w+hLBsuKQcVkPkh0ZpqeXjfjg2U
+iBJnaMVc8PeTcQc=
+=hK2R
 -----END PGP SIGNATURE-----
 
---------------RKv9AQU2ZxfSmvdvnxd6Gfyw--
+--------------jWmkL4iT0XFaoqxlbrPkwnsF--
