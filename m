@@ -4,76 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83B42C48260
-	for <u-boot@archiver.kernel.org>; Fri, 16 Feb 2024 18:39:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8E27C48BF5
+	for <u-boot@archiver.kernel.org>; Fri, 16 Feb 2024 23:18:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C400487C68;
-	Fri, 16 Feb 2024 19:38:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B93CC87E0F;
+	Sat, 17 Feb 2024 00:18:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="a2rambEZ";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="evSOB5Kv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B3FB87DE6; Fri, 16 Feb 2024 19:38:52 +0100 (CET)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4C5FC87E16; Sat, 17 Feb 2024 00:18:19 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7946587B89
- for <u-boot@lists.denx.de>; Fri, 16 Feb 2024 19:38:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D97F987E0F
+ for <u-boot@lists.denx.de>; Sat, 17 Feb 2024 00:18:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-33d211c27abso416993f8f.3
- for <u-boot@lists.denx.de>; Fri, 16 Feb 2024 10:38:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708108725; x=1708713525; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=JoRTLsTmjlI7hIXMoXjUShSiLcP4vRvqo7cHnkT5tSM=;
- b=a2rambEZ9j0C+e1vR6LrmFDFS9E1wdgen4siZr3rMJoCvCEQCNJ7oyczpHEscANUsF
- 5BJrnqh3VOLit7IGtl5lo435Re0qCm94yX880HBjKasB+Y5sXS73e9rtYQZO2fownut2
- ThVw0XTgHURnhZcwsS7C1JmMXwa00fsG6kktdHhQCAxVEugNr+lbEyKWD7TXnkQ/pv+y
- CxiTY0MVhvW7u2aUVN+iNvVH4jnleyHIS6843Zp4TSWq8CypaZOBk8FPGmQrDOF1DddX
- F3pZRLqUuQhI5zM/jJhAJL3fWsUwb90yNrLhJTkxg/iC30lfRWWMkVwR2zI25saOipY6
- 3gWQ==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id B534F40A15
+ for <u-boot@lists.denx.de>; Fri, 16 Feb 2024 23:18:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1708125492;
+ bh=98oHK2ITfedIUgZ5tTVnFUSK/Ou5EE1tCYMra4puHSY=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=evSOB5KvsqO110aSEU6MbUwwaX9ohTlGqpyQNwyFK5MnIYc+rUEfNorRGO+FNJUP2
+ 0F7aClgKPAeFl1glkZJLOG7qm+ofvtUi3lREckz4/zhkf/m9Rd8mexpAp4A+cU27jT
+ Qs9rHzE/iPtbq7KocF5qTbxu5YlHyUzO2LOJQE/1AYHVp5jDYXh/CrlOg7/rIvKWRT
+ K4oskBM9JBSZNhUZDsVTA/L47Kv/vo1N4Q4yl9y1IsGn/11aj1exe3lyw+1oiWRG4F
+ bLbjbVe89Kp0VVvcOd/aXNg6OfSAQT8q0I1291bvV+8tnXtJo7QL07+OFSfmT1sW48
+ RIpSK0u8IejBA==
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-41082621642so13770905e9.1
+ for <u-boot@lists.denx.de>; Fri, 16 Feb 2024 15:18:12 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708108725; x=1708713525;
+ d=1e100.net; s=20230601; t=1708125492; x=1708730292;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=JoRTLsTmjlI7hIXMoXjUShSiLcP4vRvqo7cHnkT5tSM=;
- b=kYquXSHURdG3vCqS7WwEN0ZP7Zvl1T9aa4AkP147IP/sDIQ1B46xthl5+4MESAAHJe
- /c3G3+HkT+m8t8S9SEAvF3JGrMqIatuuNL0pC8iNoC2UzKu7HNYPV5xaiLuIaW0hsREk
- Ifr5MG033JQTiWCHFUgy6IAgT9ErbC+GVBrYApdIxGOWK9ZRNZby35cQUV44P8oAPG2r
- 9xLyUu+8usEhmRHas9UWjMDApVIAkBPw+hqwlAoK8ArqYT/sUjGCMfol4OIFLGm+Q0IS
- DWjUYTH1btuTVGcMeASbEenUn8Qqq+ELtBK9qbl40/jrG6e5lmaThFS+oov6i9TSZZV+
- 4CHw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWfRJRLTveRCYQ1AIib/rOavUsHitLDjcpJfUoeqvYoeV1OLqO+kWS7Tca0iGGgZgV10FVgaOVy5QQLccqdemjMFZ5fSw==
-X-Gm-Message-State: AOJu0YzMk2z2PmPlnzZrmMwksW4Yre5TujQDpr340ZQuuxTfOi08tK2j
- LW6tcEs7s8//jMzLk/+kKiu4K/pXb5FvJUTyZBQzotA4A/4qmh23qS5uMiMbdL8=
-X-Google-Smtp-Source: AGHT+IHBchc5ra4fyXtcMiQoweG2xnO3OwfnZ565fG5nJLSOeYdzEF1xaviVCfhQnM1+00P0AqLsdg==
-X-Received: by 2002:adf:f892:0:b0:33c:fb94:1e12 with SMTP id
- u18-20020adff892000000b0033cfb941e12mr4317644wrp.54.1708108725311; 
- Fri, 16 Feb 2024 10:38:45 -0800 (PST)
-Received: from lion.caleb.rex.connolly.tech (host-92-17-96-232.as13285.net.
- [92.17.96.232]) by smtp.gmail.com with ESMTPSA id
- w12-20020a05600c474c00b00411ec07674esm3117755wmo.31.2024.02.16.10.38.44
+ bh=98oHK2ITfedIUgZ5tTVnFUSK/Ou5EE1tCYMra4puHSY=;
+ b=n8S+CupV4223G4T7rGptEpMGRByr1+R0U9wwxJt30jtPHvgL4KlNFavMESvt3v7dSu
+ l4pF0D85qIly9d80HU8Pq/ANYygX2VtsfflUULIsG1mmLpWlhBm/Yx/CCYQJYRxu4NUU
+ k1eMr0Y7yHC6wyRtRloB83t51LarfLQEPjoPhjnNwIM9qatBj5ZNUMsKgYdqzsW0w/o/
+ K4D7aqcCABmQYRIZqEls238QJ/iMzP22y8vLwIiVHPyzEQvmQHxg+uy6YsuVFqcbIwo1
+ lbsDVs1U8YDyHG+HV5V63GkR3BSpOHu5sxE3gREcDwYFvWa9TADcW9UrLJP59iAlqdYy
+ DW3Q==
+X-Gm-Message-State: AOJu0Yxr0J1GpKsASLmVxhwOebvTBQa9UakbhwtJv3FdhneVY1tNcGBr
+ MZ58HXiBrIig8nbOixcChcKzhzKvP+RIQRL6i9Mn3ADee47OMAM1uNh89nT1Z9UsA5PZpuduTG2
+ 7VvdjMnJdQhRm/SoXN/SAvRzVLrVGWmlUao8wog4QLZlo+yPMqbLluQ8jYtYX9on+8BI=
+X-Received: by 2002:a05:600c:1f8d:b0:410:c5a9:a24a with SMTP id
+ je13-20020a05600c1f8d00b00410c5a9a24amr4631887wmb.20.1708125492004; 
+ Fri, 16 Feb 2024 15:18:12 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHkWGwx0gZA8s4nbkK3uVcNWzplwJH+DxylS7qzQuuYItNfv9YCxgoK/WYVGcTbfPkFqyS5zg==
+X-Received: by 2002:a05:600c:1f8d:b0:410:c5a9:a24a with SMTP id
+ je13-20020a05600c1f8d00b00410c5a9a24amr4631874wmb.20.1708125491625; 
+ Fri, 16 Feb 2024 15:18:11 -0800 (PST)
+Received: from workstation5.fritz.box
+ (ip-178-202-040-247.um47.pools.vodafone-ip.de. [178.202.40.247])
+ by smtp.gmail.com with ESMTPSA id
+ v16-20020a05600c215000b004104bc8d841sm3501495wml.13.2024.02.16.15.18.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Feb 2024 10:38:44 -0800 (PST)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Anatolij Gustschin <agust@denx.de>,
-	Tom Rini <trini@konsulko.com>
-Cc: Rob Clark <robdclark@gmail.com>, u-boot@lists.denx.de,
- Caleb Connolly <caleb.connolly@linaro.org>
-Subject: [PATCH] video: simplefb: modernise DT parsing
-Date: Fri, 16 Feb 2024 18:38:06 +0000
-Message-ID: <20240216183840.879482-1-caleb.connolly@linaro.org>
-X-Mailer: git-send-email 2.43.1
+ Fri, 16 Feb 2024 15:18:11 -0800 (PST)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Lukasz Majewski <lukma@denx.de>,
+	Sean Anderson <seanga2@gmail.com>
+Cc: u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] clk: sifive: avoid declaring static variables in includes
+Date: Sat, 17 Feb 2024 00:18:04 +0100
+Message-ID: <20240216231804.141470-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -92,83 +101,155 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-simplefb was using old style FDT parsing which doesn't behave well in
-combination with livetree. Update it to use ofnode instead and add a
-missing null check for the "format" property.
+The existing code is unnecessarily convoluted:
 
-Standardise the error logging while we're here.
+Arrays __prci_init_clocks_fu[5|7]40  are initialized with data.
+In separate includes fu[5|7]40-prci.h the size of the arrays is provided as
+constants.
 
-Fixes: 971d7e64245d ("video: simplefb")
-Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+By moving the structures prci_clk_fu[5|7]40 to the respective code modules
+we can directly use ARRAY_SIZE() to access the size of the data used for
+initialization.
+
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- drivers/video/simplefb.c | 32 ++++++++++++++++++++------------
- 1 file changed, 20 insertions(+), 12 deletions(-)
+ drivers/clk/sifive/fu540-prci.c  |  7 ++++++-
+ drivers/clk/sifive/fu540-prci.h  | 22 ----------------------
+ drivers/clk/sifive/fu740-prci.c  |  7 ++++++-
+ drivers/clk/sifive/fu740-prci.h  | 22 ----------------------
+ drivers/clk/sifive/sifive-prci.c |  3 +--
+ drivers/clk/sifive/sifive-prci.h |  4 ++++
+ 6 files changed, 17 insertions(+), 48 deletions(-)
+ delete mode 100644 drivers/clk/sifive/fu540-prci.h
+ delete mode 100644 drivers/clk/sifive/fu740-prci.h
 
-diff --git a/drivers/video/simplefb.c b/drivers/video/simplefb.c
-index 235ec761f70b..3d83bf8f2e88 100644
---- a/drivers/video/simplefb.c
-+++ b/drivers/video/simplefb.c
-@@ -15,14 +15,14 @@ static int simple_video_probe(struct udevice *dev)
- {
- 	struct video_uc_plat *plat = dev_get_uclass_plat(dev);
- 	struct video_priv *uc_priv = dev_get_uclass_priv(dev);
--	const void *blob = gd->fdt_blob;
--	const int node = dev_of_offset(dev);
-+	ofnode node = dev_ofnode(dev);
- 	const char *format;
-+	int ret;
- 	fdt_addr_t base;
- 	fdt_size_t size;
-+	u32 width, height, rot;
+diff --git a/drivers/clk/sifive/fu540-prci.c b/drivers/clk/sifive/fu540-prci.c
+index ceb2c6fab0d..e55a26ab8fd 100644
+--- a/drivers/clk/sifive/fu540-prci.c
++++ b/drivers/clk/sifive/fu540-prci.c
+@@ -58,7 +58,7 @@ static const struct __prci_clock_ops sifive_fu540_prci_tlclksel_clk_ops = {
+ };
  
--	base = fdtdec_get_addr_size_auto_parent(blob, dev_of_offset(dev->parent),
--			node, "reg", 0, &size, false);
-+	base = dev_read_addr_size(dev, &size);
- 	if (base == FDT_ADDR_T_NONE) {
- 		debug("%s: Failed to decode memory region\n", __func__);
- 		return -EINVAL;
-@@ -41,17 +41,25 @@ static int simple_video_probe(struct udevice *dev)
- 
- 	debug("%s: Query resolution...\n", __func__);
- 
--	uc_priv->xsize = fdtdec_get_uint(blob, node, "width", 0);
--	uc_priv->ysize = fdtdec_get_uint(blob, node, "height", 0);
--	uc_priv->rot = fdtdec_get_uint(blob, node, "rot", 0);
--	if (uc_priv->rot > 3) {
--		log_debug("%s: invalid rot\n", __func__);
--		return log_msg_ret("rot", -EINVAL);
-+	ret = ofnode_read_u32(node, "width", &width);
-+	ret = ret ?: ofnode_read_u32(node, "height", &height);
-+	if (ret || !width || !height) {
-+		log_err("%s: invalid width or height: %d\n", __func__, ret);
-+		return ret;
- 	}
-+	ofnode_read_u32(node, "rot", &rot);
-+	uc_priv->rot = rot;
-+	uc_priv->xsize = width;
-+	uc_priv->ysize = height;
- 
--	format = fdt_getprop(blob, node, "format", NULL);
-+	format = ofnode_read_string(node, "format");
- 	debug("%s: %dx%d@%s\n", __func__, uc_priv->xsize, uc_priv->ysize, format);
- 
-+	if (!format) {
-+		log_err("%s: please add required property \"format\"\n", __func__);
-+		return -EINVAL;
-+	}
+ /* List of clock controls provided by the PRCI */
+-struct __prci_clock __prci_init_clocks_fu540[] = {
++static struct __prci_clock __prci_init_clocks_fu540[] = {
+ 	[PRCI_CLK_COREPLL] = {
+ 		.name = "corepll",
+ 		.parent_name = "hfclk",
+@@ -83,3 +83,8 @@ struct __prci_clock __prci_init_clocks_fu540[] = {
+ 		.ops = &sifive_fu540_prci_tlclksel_clk_ops,
+ 	},
+ };
 +
- 	if (strcmp(format, "r5g6b5") == 0) {
- 		uc_priv->bpix = VIDEO_BPP16;
- 	} else if (strcmp(format, "a8b8g8r8") == 0 ||
-@@ -67,7 +75,7 @@ static int simple_video_probe(struct udevice *dev)
- 		uc_priv->bpix = VIDEO_BPP32;
- 		uc_priv->format = VIDEO_X2R10G10B10;
- 	} else {
--		printf("%s: invalid format: %s\n", __func__, format);
-+		log_err("%s: invalid format: %s\n", __func__, format);
- 		return -EINVAL;
- 	}
++const struct prci_clk_desc prci_clk_fu540 = {
++	.clks = __prci_init_clocks_fu540,
++	.num_clks = ARRAY_SIZE(__prci_init_clocks_fu540),
++};
+diff --git a/drivers/clk/sifive/fu540-prci.h b/drivers/clk/sifive/fu540-prci.h
+deleted file mode 100644
+index 113301107da..00000000000
+--- a/drivers/clk/sifive/fu540-prci.h
++++ /dev/null
+@@ -1,22 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * Copyright (C) 2020-2021 SiFive, Inc.
+- * Zong Li
+- * Pragnesh Patel
+- */
+-
+-#ifndef __SIFIVE_CLK_FU540_PRCI_H
+-#define __SIFIVE_CLK_FU540_PRCI_H
+-
+-#include "sifive-prci.h"
+-
+-#define NUM_CLOCK_FU540	4
+-
+-extern struct __prci_clock __prci_init_clocks_fu540[NUM_CLOCK_FU540];
+-
+-static const struct prci_clk_desc prci_clk_fu540 = {
+-	.clks = __prci_init_clocks_fu540,
+-	.num_clks = ARRAY_SIZE(__prci_init_clocks_fu540),
+-};
+-
+-#endif /* __SIFIVE_CLK_FU540_PRCI_H */
+diff --git a/drivers/clk/sifive/fu740-prci.c b/drivers/clk/sifive/fu740-prci.c
+index 5edc864e4bd..4274b215d2f 100644
+--- a/drivers/clk/sifive/fu740-prci.c
++++ b/drivers/clk/sifive/fu740-prci.c
+@@ -102,7 +102,7 @@ static const struct __prci_clock_ops sifive_fu740_prci_pcieaux_clk_ops = {
+ };
  
+ /* List of clock controls provided by the PRCI */
+-struct __prci_clock __prci_init_clocks_fu740[] = {
++static struct __prci_clock __prci_init_clocks_fu740[] = {
+ 	[FU740_PRCI_CLK_COREPLL] = {
+ 		.name = "corepll",
+ 		.parent_name = "hfclk",
+@@ -156,3 +156,8 @@ struct __prci_clock __prci_init_clocks_fu740[] = {
+ 		.pwd = &__prci_pcieaux_data,
+ 	}
+ };
++
++const struct prci_clk_desc prci_clk_fu740 = {
++	.clks = __prci_init_clocks_fu740,
++	.num_clks = ARRAY_SIZE(__prci_init_clocks_fu740),
++};
+diff --git a/drivers/clk/sifive/fu740-prci.h b/drivers/clk/sifive/fu740-prci.h
+deleted file mode 100644
+index b74f0789061..00000000000
+--- a/drivers/clk/sifive/fu740-prci.h
++++ /dev/null
+@@ -1,22 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * Copyright (C) 2020-2021 SiFive, Inc.
+- * Zong Li
+- * Pragnesh Patel
+- */
+-
+-#ifndef __SIFIVE_CLK_FU740_PRCI_H
+-#define __SIFIVE_CLK_FU740_PRCI_H
+-
+-#include "sifive-prci.h"
+-
+-#define NUM_CLOCK_FU740		9
+-
+-extern struct __prci_clock __prci_init_clocks_fu740[NUM_CLOCK_FU740];
+-
+-static const struct prci_clk_desc prci_clk_fu740 = {
+-	.clks = __prci_init_clocks_fu740,
+-	.num_clks = ARRAY_SIZE(__prci_init_clocks_fu740),
+-};
+-
+-#endif /* __SIFIVE_CLK_FU740_PRCI_H */
+diff --git a/drivers/clk/sifive/sifive-prci.c b/drivers/clk/sifive/sifive-prci.c
+index c8fb6002907..603a176d06a 100644
+--- a/drivers/clk/sifive/sifive-prci.c
++++ b/drivers/clk/sifive/sifive-prci.c
+@@ -34,8 +34,7 @@
+ #include <linux/math64.h>
+ #include <dt-bindings/clock/sifive-fu740-prci.h>
+ 
+-#include "fu540-prci.h"
+-#include "fu740-prci.h"
++#include "sifive-prci.h"
+ 
+ /*
+  * Private functions
+diff --git a/drivers/clk/sifive/sifive-prci.h b/drivers/clk/sifive/sifive-prci.h
+index 5ce33d61846..b391698081d 100644
+--- a/drivers/clk/sifive/sifive-prci.h
++++ b/drivers/clk/sifive/sifive-prci.h
+@@ -320,4 +320,8 @@ unsigned long sifive_prci_hfpclkplldiv_recalc_rate(struct __prci_clock *pc,
+ 
+ int sifive_prci_clock_enable(struct __prci_clock *pc, bool enable);
+ 
++/* Clock driver data */
++extern const struct prci_clk_desc prci_clk_fu540;
++extern const struct prci_clk_desc prci_clk_fu740;
++
+ #endif /* __SIFIVE_CLK_SIFIVE_PRCI_H */
 -- 
-2.43.1
+2.43.0
 
