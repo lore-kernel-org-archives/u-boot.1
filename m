@@ -4,67 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4A2DC48260
-	for <u-boot@archiver.kernel.org>; Fri, 16 Feb 2024 04:49:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 603ECC48BC4
+	for <u-boot@archiver.kernel.org>; Fri, 16 Feb 2024 04:56:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 919EA87E1E;
-	Fri, 16 Feb 2024 05:49:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7A32B87E20;
+	Fri, 16 Feb 2024 05:55:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wSGEsOCg";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="wx77CxFW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9DACF87E20; Fri, 16 Feb 2024 05:49:54 +0100 (CET)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 021048751B; Fri, 16 Feb 2024 05:55:49 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A36408718A
- for <u-boot@lists.denx.de>; Fri, 16 Feb 2024 05:49:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D56AB87E3A
+ for <u-boot@lists.denx.de>; Fri, 16 Feb 2024 05:55:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sahaj.sarup@linaro.org
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-41244cc3d67so1407195e9.2
- for <u-boot@lists.denx.de>; Thu, 15 Feb 2024 20:49:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708058990; x=1708663790; darn=lists.denx.de;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=fcclDkln0nSHv5w+OT63xxJZ1DZeybrO4QlHamgqB5I=;
- b=wSGEsOCgfPUwvCJQkdclWHNr1zoe2vK1C2UY3QLISAzdp9oR8CHFY8ETHr4+2uBtSe
- adYMzLcksvJieWKvbOwnS1XIJGmeVMy6EIs1MmWlR44csx7r5MtS4EixAQAQS2ACtwRN
- XnxSHwzA7+LYZ5UglhvcZE4qdbi/Ws7GYKjEH8LQmFMvQ47303pgvJx2vCP1g6Y0k1+S
- F3GDM8e9NDPU0/+tv0PKg1KbUUbvkDrIv9Wflh1wkjsPzWmXVN8947Rg4APcYudqDMw3
- Uo/4tWsW/xEheJnZexRqkBJAwsm3K7jY3f0BTwo8+QunY6HHt0kqLwsXU8aZmP9lXgci
- jjpQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708058990; x=1708663790;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=fcclDkln0nSHv5w+OT63xxJZ1DZeybrO4QlHamgqB5I=;
- b=HWvWZYRRe6F4ikynclRewEK3T/w0jOYtFjIx9RtnadZKKBP1ueTCSWClTCPJCB5cls
- iey06wFrstXBPPwHi95OF+rIDpkZ26Jk0tg9kvpTgzPkJyE+joDfAzNhdpHFI6a/mbln
- v/H8NK7Dve7ut6wEoi3/GRZALN4Wl5XuFeII3rdXd25HqNRFFNk+DRZfvSE3/uKFbLvZ
- Ep9qz3CqK+sdYHoLCirSs8yzjEifxBT3m/4CBxIuPqA9e5k3p5S0ZlW9ULli2OXx5XKU
- nNR8pmDF+2idMpVa1Q/lGVFll+XUMKZYl9EDHZVhR/mq38wZqn8T3v8E647ZC0hIWlF6
- xgBA==
-X-Gm-Message-State: AOJu0YzbAXFwcihPvXmOnNNitIERtFOeBE1d67D2ChNoTnEa7C3d6PbI
- 7G/3JLapFXT/q9x7BTmNBMpRd5WMnrWMenXpH8qGMtnFV/FC88lEf15NV3vNNDLKEHSdJQxaroE
- bJYklbQucpch1EANPH8j7Zw9ssX2uH8IinZKaJNoWaJd7Ezby2Ok=
-X-Google-Smtp-Source: AGHT+IGV5Zfv2An5ZEi1JGrXCqsljx/QXc+YiErjp3WhOGp337Nf6I14aaeQywr1tN56J63WaV7ktMcsETnhdbCVc1o=
-X-Received: by 2002:a05:6000:10c1:b0:33d:1d74:f2c7 with SMTP id
- b1-20020a05600010c100b0033d1d74f2c7mr254599wrx.28.1708058989659; Thu, 15 Feb
- 2024 20:49:49 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41G4tfFm103880;
+ Thu, 15 Feb 2024 22:55:41 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1708059341;
+ bh=eCXS4O4llGa/x9NCmiyKpti4HMnWzH1eEdiP/MnKcBk=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=wx77CxFW1r5tJzL0cmPhpZWi9qDRTdQWcTos9VfMniGGyuCJbT8f1Z8d6VIjk8O4D
+ 8iWFhVLzpwhfK8+45R2oAYJpvwnpaA3gH0Tll47Th+xP8/smBNRxTr+ZUUaQ3X2am+
+ +LS6ZI8HjPrtLej4OlBdniCSFBfpXLiR+lbwEeDg=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41G4tfWa013578
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 15 Feb 2024 22:55:41 -0600
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 15
+ Feb 2024 22:55:40 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 15 Feb 2024 22:55:41 -0600
+Received: from [172.24.227.36]
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41G4tcrB052500;
+ Thu, 15 Feb 2024 22:55:39 -0600
+Message-ID: <724d96ad-8ba5-44d3-b02b-633caf27ef8d@ti.com>
+Date: Fri, 16 Feb 2024 10:25:38 +0530
 MIME-Version: 1.0
-From: Sahaj Sarup <sahaj.sarup@linaro.org>
-Date: Fri, 16 Feb 2024 10:19:38 +0530
-Message-ID: <CAKZ1LvPwQyWadPtmv4LRmANm-6CHQpNZQqgRyzdxM3fvBTT=1A@mail.gmail.com>
-Subject: LTO build failure with GCC 13.2.1
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/6] arm: mach-k3: Add default ATF location for AM62/AM62a
+To: Andrew Davis <afd@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, Nishanth
+ Menon <nm@ti.com>, Simon Glass <sjg@chromium.org>, Tom Rini
+ <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>
+References: <20240214163009.983034-1-afd@ti.com>
+ <20240214163009.983034-2-afd@ti.com>
+Content-Language: en-US
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <20240214163009.983034-2-afd@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,63 +83,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
+Hi Andrew
 
-Since commit f8cebb4f789c9950caf55a0b73e88049e7a1c3a3 enabled LTO by
-default for imx8m platforms,
-I have been having issues building u-boot.
-I am primarily working on imx8mp instead of imx8mm platforms so the
-bug resolved by that commit doesn't affect me yet.
-But I guess it's a generic issue with u-boot's LTO requirements and GCC 13.
+On 14/02/24 22:00, Andrew Davis wrote:
+> There is a default ATF load address that is used for devices that have
+> ATF running in SRAM. For AM62 and AM62a, ATF runs from DRAM. Instead
+> of having to override the address in every defconfig, make add a
+> default for these ATF in DRAM devices.
+> 
+> Signed-off-by: Andrew Davis <afd@ti.com>
+> ---
+>   arch/arm/mach-k3/Kconfig               | 5 +++--
+>   configs/am62ax_evm_a53_defconfig       | 1 -
+>   configs/am62x_beagleplay_a53_defconfig | 1 -
+>   configs/am62x_evm_a53_defconfig        | 1 -
+>   configs/phycore_am62x_a53_defconfig    | 1 -
+>   configs/verdin-am62_a53_defconfig      | 1 -
+>   6 files changed, 3 insertions(+), 7 deletions(-)
+> 
+> diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
+> index 03898424c95..0bd3f9fa12d 100644
+> --- a/arch/arm/mach-k3/Kconfig
+> +++ b/arch/arm/mach-k3/Kconfig
+> @@ -123,10 +123,11 @@ config SYS_K3_SPL_ATF
+>   
+>   config K3_ATF_LOAD_ADDR
+>   	hex "Load address of ATF image"
+> +	default 0x9e780000 if (SOC_K3_AM625 || SOC_K3_AM62A7)
+>   	default 0x70000000
+>   	help
+> -	  The load address for the ATF image. This value defaults to 0x70000000
+> -	  if not provided in the board defconfig file.
+> +	  The load address for the ATF image. This value is used to build the
+> +	  FIT image header that places ATF in memory where it will run.
+>   
+>   config K3_DM_FW
+>   	bool "Separate DM firmware image"
+> diff --git a/configs/am62ax_evm_a53_defconfig b/configs/am62ax_evm_a53_defconfig
+> index 38083586a3e..03b2dea7d51 100644
+> --- a/configs/am62ax_evm_a53_defconfig
+> +++ b/configs/am62ax_evm_a53_defconfig
+> @@ -5,7 +5,6 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
+>   CONFIG_SPL_LIBGENERIC_SUPPORT=y
+>   CONFIG_NR_DRAM_BANKS=2
+>   CONFIG_SOC_K3_AM62A7=y
+> -CONFIG_K3_ATF_LOAD_ADDR=0x9e780000
+>   CONFIG_TARGET_AM62A7_A53_EVM=y
+>   CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+>   CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80480000
+> diff --git a/configs/am62x_beagleplay_a53_defconfig b/configs/am62x_beagleplay_a53_defconfig
+> index 0be20045a97..122c1ba9299 100644
+> --- a/configs/am62x_beagleplay_a53_defconfig
+> +++ b/configs/am62x_beagleplay_a53_defconfig
+> @@ -6,7 +6,6 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
+>   CONFIG_SPL_LIBGENERIC_SUPPORT=y
+>   CONFIG_NR_DRAM_BANKS=2
+>   CONFIG_SOC_K3_AM625=y
+> -CONFIG_K3_ATF_LOAD_ADDR=0x9e780000
+>   CONFIG_TARGET_AM625_A53_BEAGLEPLAY=y
+>   CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+>   CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80b80000
+> diff --git a/configs/am62x_evm_a53_defconfig b/configs/am62x_evm_a53_defconfig
+> index 457931faf21..e29df6ec523 100644
+> --- a/configs/am62x_evm_a53_defconfig
+> +++ b/configs/am62x_evm_a53_defconfig
+> @@ -5,7 +5,6 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
+>   CONFIG_SPL_LIBGENERIC_SUPPORT=y
+>   CONFIG_NR_DRAM_BANKS=2
+>   CONFIG_SOC_K3_AM625=y
+> -CONFIG_K3_ATF_LOAD_ADDR=0x9e780000
+>   CONFIG_TARGET_AM625_A53_EVM=y
+>   CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+>   CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80b80000
+> diff --git a/configs/phycore_am62x_a53_defconfig b/configs/phycore_am62x_a53_defconfig
+> index 2d5d906a9d7..5ba08440268 100644
+> --- a/configs/phycore_am62x_a53_defconfig
+> +++ b/configs/phycore_am62x_a53_defconfig
+> @@ -5,7 +5,6 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
+>   CONFIG_SPL_LIBGENERIC_SUPPORT=y
+>   CONFIG_NR_DRAM_BANKS=2
+>   CONFIG_SOC_K3_AM625=y
+> -CONFIG_K3_ATF_LOAD_ADDR=0x9e780000
+>   CONFIG_TARGET_PHYCORE_AM62X_A53=y
+>   CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+>   CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80b80000
+> diff --git a/configs/verdin-am62_a53_defconfig b/configs/verdin-am62_a53_defconfig
+> index 956e3a1ad75..2003a530c7d 100644
+> --- a/configs/verdin-am62_a53_defconfig
+> +++ b/configs/verdin-am62_a53_defconfig
+> @@ -8,7 +8,6 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
+>   CONFIG_SPL_LIBGENERIC_SUPPORT=y
+>   CONFIG_NR_DRAM_BANKS=2
+>   CONFIG_SOC_K3_AM625=y
+> -CONFIG_K3_ATF_LOAD_ADDR=0x9e780000
+>   CONFIG_TARGET_VERDIN_AM62_A53=y
+>   CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+>   CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80b80000
 
-Build log:
-```
-  LTO     u-boot
-/usr/bin/aarch64-linux-gnu-ld:
-/usr/lib/gcc/aarch64-linux-gnu/13/libgcc.a(lse-init.o): in function
-`init_have_lse_atomics':
-/builddir/build/BUILD/gcc-13.2.1-20230728/aarch64-linux-gnu/aarch64-linux-gnu/libgcc/../../../gcc-13.2.1-20230728/libgcc/config/aarch64/lse-init.c:46:
-undefined reference to `__getauxval'
-collect2: fatal error: ld terminated with signal 11 [Segmentation
-fault], core dumped
-compilation terminated.
-make: *** [Makefile:1766: u-boot] Error 1
-make: *** Deleting file 'u-boot'
-```
+Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
 
-GCC Version:
-```
-$ aarch64-linux-gnu-gcc -v
-Using built-in specs.
-COLLECT_GCC=/usr/bin/aarch64-linux-gnu-gcc
-COLLECT_LTO_WRAPPER=/usr/libexec/gcc/aarch64-linux-gnu/13/lto-wrapper
-Target: aarch64-linux-gnu
-Configured with: ../gcc-13.2.1-20230728/configure --bindir=/usr/bin
---build=x86_64-redhat-linux-gnu --datadir=/usr/share --disable-
-decimal-float --disable-dependency-tracking --disable-gold
---disable-libgcj --disable-libgomp --disable-libmpx
---disable-libquadmat
-h --disable-libssp --disable-libunwind-exceptions --disable-shared
---disable-silent-rules --disable-sjlj-exceptions --disable-threa
-ds --with-ld=/usr/bin/aarch64-linux-gnu-ld --enable-__cxa_atexit
---enable-checking=release --enable-gnu-unique-object --enable-init
-fini-array --enable-languages=c,c++ --enable-linker-build-id
---enable-lto --enable-nls --enable-obsolete --enable-plugin --enable-t
-argets=all --exec-prefix=/usr --host=x86_64-redhat-linux-gnu
---includedir=/usr/include --infodir=/usr/share/info --libexecdir=/usr/
-libexec --localstatedir=/var --mandir=/usr/share/man --prefix=/usr
---program-prefix=aarch64-linux-gnu- --sbindir=/usr/sbin --shared
-statedir=/var/lib --sysconfdir=/etc --target=aarch64-linux-gnu
---with-bugurl=http://bugzilla.redhat.com/bugzilla/ --with-gcc-major-
-version-only --with-isl --with-newlib
---with-plugin-ld=/usr/bin/aarch64-linux-gnu-ld
---with-sysroot=/usr/aarch64-linux-gnu/sys-root
---with-system-libunwind --with-system-zlib --without-headers
---enable-gnu-indirect-function --with-linker-hash-style=gnu
-Thread model: single
-Supported LTO compression algorithms: zlib zstd
-gcc version 13.2.1 20230728 (Red Hat Cross 13.2.1-1) (GCC)
-```
-
-Thanks,
-Sahaj Sarup
+-- 
+Thanking You
+Neha Malcom Francis
