@@ -4,95 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14CA7C48260
-	for <u-boot@archiver.kernel.org>; Sat, 17 Feb 2024 03:12:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4C0AC48BF6
+	for <u-boot@archiver.kernel.org>; Sat, 17 Feb 2024 06:22:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B70B787C45;
-	Sat, 17 Feb 2024 04:12:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A197587B77;
+	Sat, 17 Feb 2024 07:21:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kZ2m5MyK";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SKJajgpg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F45D87C48; Sat, 17 Feb 2024 04:11:56 +0100 (CET)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id B0A6B87C9E; Sat, 17 Feb 2024 07:21:57 +0100 (CET)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 065778765B
- for <u-boot@lists.denx.de>; Sat, 17 Feb 2024 04:11:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BB07F8792D
+ for <u-boot@lists.denx.de>; Sat, 17 Feb 2024 07:21:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alexander.sverdlin@gmail.com
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-412345cca4eso12928275e9.2
- for <u-boot@lists.denx.de>; Fri, 16 Feb 2024 19:11:44 -0800 (PST)
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=cnsztl@gmail.com
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-a26f73732c5so227774466b.3
+ for <u-boot@lists.denx.de>; Fri, 16 Feb 2024 22:21:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1708139504; x=1708744304; darn=lists.denx.de;
- h=mime-version:user-agent:content-transfer-encoding:autocrypt
- :references:in-reply-to:date:cc:to:from:subject:message-id:from:to
- :cc:subject:date:message-id:reply-to;
- bh=qcaXtL2aF9B7L3CoPBlLIo0JpIjl+zR4Ag91mEIioWA=;
- b=kZ2m5MyKKE1uLWQl/BAUcfLIutLslWgB93hnHwjWpB4aZ1yxUUpikuVCQRupsY2+Sa
- +5VFdj7c5gsVs+Cz/ZsGmbHD9T0TR+IvVGWGN7IlxM5Y2r2wLwrMZdTu0FfQ+NA+cgRC
- Z0KpekTWrlaeeFWZz369cR6PXM51hAW4vIrdWHWmFnle/hVWeE0ih7Wfij+8WwzCHIqJ
- 4BBHscwWPgNsfYyjHUKnBiV0Gw1e7L9ynpATRTHClE21NHgBdckZEhjtpjkNxOhzt4+I
- Tq+q2ZRRY0a2bzMdX7n63BkR1I8MWtJBq0soNK1eqd9C4Aty5R2Tr19+pSnKtutSljaZ
- b3ig==
+ d=gmail.com; s=20230601; t=1708150912; x=1708755712; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=RgbkIFMdS6/I44nI6fvbAjHB8LvNFD6Arw/9iwI6SkA=;
+ b=SKJajgpgmmVEWYc6nCvBWalpzSnDkyaEDvdCJH15MNOMndl74YjRbYZs5djwJsCwWW
+ Z0zsgLU2PSKIjgv/ZCFVY9mYzjZaB0jt5004u4wAuH+67zgO06MQDZsPXEX+IyNk94UX
+ t8JKjmn3jndFXpAkXTSUUrSfDFKsvCxo046SFY4aG4enwCSe6vc7iN5PKnzUElX4Q/Hz
+ dUVi0twjqzH6Xv1PI7DLite39gJQlV0/mVy/0ocbeIOqGo3RSNkPe+fxAwIp0B/3oRES
+ ApSmLiZ5qva1mJVkPfkMqfseUIxc2wFngN2fmbqPhECF4QWdyjqvVUErFXspvAlNl1bc
+ fnFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708139504; x=1708744304;
- h=mime-version:user-agent:content-transfer-encoding:autocrypt
- :references:in-reply-to:date:cc:to:from:subject:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=qcaXtL2aF9B7L3CoPBlLIo0JpIjl+zR4Ag91mEIioWA=;
- b=Pfzq50+OP2oQ+PJymJ3A90sOLPqRY0NPLaOIM6gmMeTdqlZS9bsh56JrzOL1+vuk5+
- C2ngdIZPvcx2J0QtChjT2ktqIVI2hpsSGiF8k0H2SRYxGaKhCt4z3+6XLsKrKkHc373J
- +qpfjG4gei6snSurHW7bbdvIWUGJ7R5U/2zaVcBr4LI6rWlwn72nKLLCo/aUi+AjjFRC
- EfkMdstV5PK9EFVneMwE/FmbWjuczcHGBhoM9C+ZxTjfF3kW1j+BCRf+bfjHaRc31Rfl
- XIY96FFfRRDSI9k6gmwAo3fHmpaKDHqWlCpzeeJYurXZbpMDV/IoQ2/66Iyt9CiT5IMD
- yG/g==
+ d=1e100.net; s=20230601; t=1708150912; x=1708755712;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=RgbkIFMdS6/I44nI6fvbAjHB8LvNFD6Arw/9iwI6SkA=;
+ b=UBhVNb+7zuy3iYyTbAQcmIfuSn/EdMGDFe3GxTA1nRzyowi3LQQiob17cRXLGbiiqJ
+ wARd/y1ujEQiJbJco3og6CAIIpIfNtIudbdp278Algro51qWaSV0d+EZyb7S2g3ffi5U
+ 5CF9dRSex8qvNpSkSFQGbOb7rMsxjSPEC++80u1D2b+PGAhabN5C2+3EhOEark/XG5Mo
+ yd7CujwqgT8qCE44bBlTDKqW5pG+Nrkz/JJfIz0RtEZnBAoeb5pjjG2cgOxLT3Fhx9Af
+ 32HgjPxExMJezxmSkrWsteMPcKnvt6RG/kwn0t6iZg+AgugdI7Us3+Xeh66tierpk042
+ LScA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXvKJ0eyddzjH2PfSMCv6AltqzWbxfzgc5f8CFXKy5ve9S4N20lBRspoCbWS5eFtPZpwBigUBiADysrKt3mrD1DHw1aHA==
-X-Gm-Message-State: AOJu0YyR+RBVcShAgxbIRgHBBsalDgt/WnuJmv7DLbx4lKwIp0io7uSO
- aEKs0cgtE6oIlacnxJrlnFe23s3HabsPU0CK8d9pjvuFLskWPdO8
-X-Google-Smtp-Source: AGHT+IGKKC3n2BnIHcQxdMHqoSQdt35jexKMJuBr62mWfWptIEHn2srgOs809Qa4WgyVGO49EnlKgQ==
-X-Received: by 2002:a05:600c:5189:b0:412:488a:5922 with SMTP id
- fa9-20020a05600c518900b00412488a5922mr2643782wmb.21.1708139503967; 
- Fri, 16 Feb 2024 19:11:43 -0800 (PST)
-Received: from giga-mm-1.home ([2a02:1210:8690:9300:82ee:73ff:feb8:99e3])
- by smtp.gmail.com with ESMTPSA id
- dn23-20020a05600c655700b0040fafd84095sm3819290wmb.41.2024.02.16.19.11.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Feb 2024 19:11:43 -0800 (PST)
-Message-ID: <87f154591fee4979570e78cbc8c73eb0a56469eb.camel@gmail.com>
-Subject: Re: [PATCH V6 07/20] configs: am62x_evm_a53_defconfig: Switch to
- bootstd
-From: Alexander Sverdlin <alexander.sverdlin@gmail.com>
-To: Nishanth Menon <nm@ti.com>, Neha Francis <n-francis@ti.com>, Tom Rini
- <trini@konsulko.com>, Simon Glass <sjg@google.com>
-Cc: Bryan <bb@ti.com>, Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>,
- Robert Nelson <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
- u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@baylibre.com>, Jan
- Kiszka <jan.kiszka@siemens.com>, Simon Glass <sjg@chromium.org>,  Andreas
- Dannenberg <dannenberg@ti.com>, Romain Naour <romain.naour@smile.fr>
-Date: Sat, 17 Feb 2024 04:11:47 +0100
-In-Reply-To: <20230825180305.69515-8-nm@ti.com>
-References: <20230825180305.69515-1-nm@ti.com>
- <20230825180305.69515-8-nm@ti.com>
-Autocrypt: addr=alexander.sverdlin@gmail.com; prefer-encrypt=mutual;
- keydata=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
+ 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
+X-Gm-Message-State: AOJu0YyTlkn3fWgjJkvbbTP2PWX5iOU3FRUxPDU/2m4m2SDidmDSkviE
+ TQGiIivhPptlEy0G1T5sRTQGDTAP+srAX5ZuPKrEZnBiYlRWoTFlhtxPO65yHvWs6xCsUviewg5
+ Z9Efm4mm6b5fR+21ZiRIzLHgW5kc=
+X-Google-Smtp-Source: AGHT+IEJsVmi2EzA/AbvK+s1J04CVcKcZd9BJwaJUjEzI+h63jQp2eKsIMSAiJlrqUeRsberGCpBdomnAurUSYOM/Ek=
+X-Received: by 2002:a17:906:6d4e:b0:a3d:ce2c:49ab with SMTP id
+ a14-20020a1709066d4e00b00a3dce2c49abmr2963808ejt.64.1708150911410; Fri, 16
+ Feb 2024 22:21:51 -0800 (PST)
+MIME-Version: 1.0
+References: <20240217002304.2141064-1-jonas@kwiboo.se>
+ <20240217002304.2141064-7-jonas@kwiboo.se>
+In-Reply-To: <20240217002304.2141064-7-jonas@kwiboo.se>
+From: Tianling Shen <cnsztl@gmail.com>
+Date: Sat, 17 Feb 2024 14:21:38 +0800
+Message-ID: <CAOP2_Tjsx7VkEkqN_5+z=jBRHoabnRqB2MewZTYwKAZ7KeJ0Dw@mail.gmail.com>
+Subject: Re: [PATCH v2 06/15] rockchip: rk3328-nanopi-r2: Update defconfig
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>, 
+ David Bauer <mail@david-bauer.net>, Dragan Simic <dsimic@manjaro.org>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.50.4 
-MIME-Version: 1.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,88 +92,389 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Nishanth,
+Hi Jonas,
 
-On Fri, 2023-08-25 at 13:02 -0500, Nishanth Menon wrote:
-> Switch to using bootstd. Note with this change, we will stop using
-> distro_bootcmd and instead depend entirely on bootflow method of
-> starting the system up.
->=20
-> Suggested-by: Tom Rini <trini@konsulko.com>
-> Suggested-by: Simon Glass <sjg@chromium.org>
-> Reviewed-by: Tom Rini <trini@konsulko.com>
-> Tested-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> Signed-off-by: Nishanth Menon <nm@ti.com>
-> Reviewed-by: Tom Rini <trini@konsulko.com>
-> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+On Sat, Feb 17, 2024 at 8:23=E2=80=AFAM Jonas Karlman <jonas@kwiboo.se> wro=
+te:
+>
+> Update defconfig for rk3328-nanopi-r2* boards with new defaults.
+>
+> Remove the SPL_DRIVERS_MISC=3Dy option, no misc driver is used in SPL.
+>
+> Add CONFIG_SPL_FIT_SIGNATURE=3Dy to let SPL verify an auto generated hash
+> of FIT images. This help indicate if there is an issue loading any of
+> the images to DRAM or SRAM. Also add LEGACY_IMAGE_FORMAT=3Dy to keep
+> support for scripts.
+>
+> Remove SPL_I2C=3Dy and SPL_PMIC_RK8XX=3Dy, the related i2c and pmic nodes=
+ is
+> not included in the SPL fdt.
+>
+> Add CMD_GPIO=3Dy and CMD_REGULATOR=3Dy to add the helpful gpio and regula=
+tor
+> commands.
+>
+> Add ROCKCHIP_EFUSE=3Dy and remove NET_RANDOM_ETHADDR=3Dy, ethaddr and
+> eth1addr is set based on cpuid read from eFUSE.
+>
+> Add SPL_DM_SEQ_ALIAS=3Dy option to use alias sequence number in SPL.
+>
+> Add DM_ETH_PHY=3Dy, PHY_GIGE=3Dy, PHY_MOTORCOMM=3Dy, PHY_REALTEK=3Dy and =
+remove
+> &gmac2io to support reset of onboard ethernet PHYs. Also add DM_MDIO=3Dy
+> to ensure device tree props is used by motorcomm PHY driver.
+>
+> Remove REGULATOR_PWM=3Dy, the pwm-regulator compatible is not used.
+>
+> Add DM_REGULATOR_GPIO=3Dy and SPL_DM_REGULATOR_GPIO=3Dy to support the
+> regulator-gpio compatible.
+>
+> Add RNG_ROCKCHIP=3Dy and DM_RNG=3Dy options to support the onboard random
+> generator.
+>
+> Also add missing device tree files to MAINTAINERS file.
+>
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+
+Reviewed-by: Tianling Shen <cnsztl@gmail.com>
+
+Thanks,
+Tianling.
+
 > ---
-> No change other than picking up reviews, tested tags along the way.
-> V5: https://lore.kernel.org/r/20230824031101.3460411-6-nm@ti.com
-> =C2=A0configs/am62x_evm_a53_defconfig | 5 +++--
-> =C2=A01 file changed, 3 insertions(+), 2 deletions(-)
->=20
-> diff --git a/configs/am62x_evm_a53_defconfig b/configs/am62x_evm_a53_defc=
-onfig
-> index d55caabe22c9..1807df8bbee9 100644
-> --- a/configs/am62x_evm_a53_defconfig
-> +++ b/configs/am62x_evm_a53_defconfig
-> @@ -28,8 +28,9 @@ CONFIG_SPL_SPI=3Dy
-> =C2=A0# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-> =C2=A0CONFIG_SPL_LOAD_FIT=3Dy
-> =C2=A0CONFIG_SPL_LOAD_FIT_ADDRESS=3D0x81000000
-> -CONFIG_DISTRO_DEFAULTS=3Dy
-> -CONFIG_BOOTCOMMAND=3D"run envboot; run distro_bootcmd;"
-> +CONFIG_BOOTSTD_FULL=3Dy
-> +CONFIG_BOOTSTD_DEFAULTS=3Dy
-> +CONFIG_BOOTCOMMAND=3D"run envboot; bootflow scan -lb"
-> =C2=A0CONFIG_SPL_MAX_SIZE=3D0x58000
-> =C2=A0CONFIG_SPL_HAS_BSS_LINKER_SECTION=3Dy
-> =C2=A0CONFIG_SPL_BSS_START_ADDR=3D0x80c80000
-
-could you please suggest which distro have you used for testing?
-
-After U-Boot update to v2024.01 Buildroot is not booting any more:
-
----
-U-Boot 2024.01 (Feb 15 2024 - 01:43:17 +0100)
-
-SoC:   AM62X SR1.0 HS-FS
-Model: Texas Instruments AM625 SK
-DRAM:  2 GiB
-Core:  56 devices, 23 uclasses, devicetree: separate
-MMC:   mmc@fa10000: 0, mmc@fa00000: 1
-Loading Environment from nowhere... OK
-In:    serial@2800000
-Out:   serial@2800000
-Err:   serial@2800000
-Net:   eth0: ethernet@8000000port@1
-Hit any key to stop autoboot:  0=20
-switch to partitions #0, OK
-mmc1 is current device
-SD/MMC found on device 1
-Failed to load 'uEnv.txt'
-Scanning for bootflows in all bootdevs
-Seq  Method       State   Uclass    Part  Name                      Filenam=
-e
----  -----------  ------  --------  ----  ------------------------  -------=
----------
-Scanning global bootmeth 'efi_mgr':
-No EFI system partition
-No EFI system partition
-Failed to persist EFI variables
-Scanning bootdev 'mmc@fa00000.bootdev':
-Scanning bootdev 'mmc@fa10000.bootdev':
-Unknown uclass 'usb' in label
-link up on port 1, speed 100, full duplex
-BOOTP broadcast 1
-BOOTP broadcast 2
-BOOTP broadcast 3
-...
----
-
-I suppose TI's BSP has older U-Boot... So it's not providing necessary
-script for BOOTSTD, I suppose?
-
---=20
-Alexander Sverdlin.
-
+> v2:
+> - Add CMD_GPIO, CMD_REGULATOR, DM_MDIO, PHY_GIGE, DM_REGULATOR_GPIO and
+>   SPL_DM_REGULATOR_GPIO
+> - Remove SPL_I2C, SPL_PMIC_RK8XX and REGULATOR_PWM
+> ---
+>  arch/arm/dts/rk3328-nanopi-r2s-u-boot.dtsi |  6 ------
+>  board/rockchip/evb_rk3328/MAINTAINERS      |  2 ++
+>  configs/nanopi-r2c-plus-rk3328_defconfig   | 20 +++++++++++++++-----
+>  configs/nanopi-r2c-rk3328_defconfig        | 20 +++++++++++++++-----
+>  configs/nanopi-r2s-rk3328_defconfig        | 20 +++++++++++++++-----
+>  doc/board/rockchip/rockchip.rst            |  3 +++
+>  6 files changed, 50 insertions(+), 21 deletions(-)
+>
+> diff --git a/arch/arm/dts/rk3328-nanopi-r2s-u-boot.dtsi b/arch/arm/dts/rk=
+3328-nanopi-r2s-u-boot.dtsi
+> index d969b008775e..0a1152e8b52d 100644
+> --- a/arch/arm/dts/rk3328-nanopi-r2s-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3328-nanopi-r2s-u-boot.dtsi
+> @@ -27,9 +27,3 @@
+>  &vcc_sd {
+>         bootph-pre-ram;
+>  };
+> -
+> -&gmac2io {
+> -       snps,reset-gpio =3D <&gpio1 RK_PC2 GPIO_ACTIVE_LOW>;
+> -       snps,reset-active-low;
+> -       snps,reset-delays-us =3D <0 10000 50000>;
+> -};
+> diff --git a/board/rockchip/evb_rk3328/MAINTAINERS b/board/rockchip/evb_r=
+k3328/MAINTAINERS
+> index 47fd05d2ea8b..b88727acad26 100644
+> --- a/board/rockchip/evb_rk3328/MAINTAINERS
+> +++ b/board/rockchip/evb_rk3328/MAINTAINERS
+> @@ -11,12 +11,14 @@ NANOPI-R2C-RK3328
+>  M:      Tianling Shen <cnsztl@gmail.com>
+>  S:      Maintained
+>  F:      configs/nanopi-r2c-rk3328_defconfig
+> +F:      arch/arm/dts/rk3328-nanopi-r2c.dts
+>  F:      arch/arm/dts/rk3328-nanopi-r2c-u-boot.dtsi
+>
+>  NANOPI-R2C-PLUS-RK3328
+>  M:      Tianling Shen <cnsztl@gmail.com>
+>  S:      Maintained
+>  F:      configs/nanopi-r2c-plus-rk3328_defconfig
+> +F:      arch/arm/dts/rk3328-nanopi-r2c-plus.dts
+>  F:      arch/arm/dts/rk3328-nanopi-r2c-plus-u-boot.dtsi
+>
+>  NANOPI-R2S-RK3328
+> diff --git a/configs/nanopi-r2c-plus-rk3328_defconfig b/configs/nanopi-r2=
+c-plus-rk3328_defconfig
+> index 320ed8b434a8..7a7b0342629f 100644
+> --- a/configs/nanopi-r2c-plus-rk3328_defconfig
+> +++ b/configs/nanopi-r2c-plus-rk3328_defconfig
+> @@ -15,7 +15,6 @@ CONFIG_ROCKCHIP_RK3328=3Dy
+>  CONFIG_TPL_ROCKCHIP_COMMON_BOARD=3Dy
+>  CONFIG_TPL_LIBCOMMON_SUPPORT=3Dy
+>  CONFIG_TPL_LIBGENERIC_SUPPORT=3Dy
+> -CONFIG_SPL_DRIVERS_MISC=3Dy
+>  CONFIG_SPL_STACK_R_ADDR=3D0x600000
+>  CONFIG_SPL_STACK=3D0x400000
+>  CONFIG_TPL_SYS_MALLOC_F_LEN=3D0x800
+> @@ -26,7 +25,9 @@ CONFIG_DEBUG_UART=3Dy
+>  # CONFIG_ANDROID_BOOT_IMAGE is not set
+>  CONFIG_FIT=3Dy
+>  CONFIG_FIT_VERBOSE=3Dy
+> +CONFIG_SPL_FIT_SIGNATURE=3Dy
+>  CONFIG_SPL_LOAD_FIT=3Dy
+> +CONFIG_LEGACY_IMAGE_FORMAT=3Dy
+>  CONFIG_DEFAULT_FDT_FILE=3D"rockchip/rk3328-nanopi-r2c-plus.dtb"
+>  # CONFIG_DISPLAY_CPUINFO is not set
+>  CONFIG_DISPLAY_BOARDINFO_LATE=3Dy
+> @@ -39,17 +40,18 @@ CONFIG_SPL_BSS_MAX_SIZE=3D0x2000
+>  # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+>  # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+>  CONFIG_SPL_STACK_R=3Dy
+> -CONFIG_SPL_I2C=3Dy
+>  CONFIG_SPL_POWER=3Dy
+>  CONFIG_SPL_ATF=3Dy
+>  CONFIG_SPL_ATF_NO_PLATFORM_PARAM=3Dy
+>  CONFIG_TPL_SYS_MALLOC_SIMPLE=3Dy
+>  CONFIG_CMD_BOOTZ=3Dy
+> +CONFIG_CMD_GPIO=3Dy
+>  CONFIG_CMD_GPT=3Dy
+>  CONFIG_CMD_MMC=3Dy
+>  CONFIG_CMD_USB=3Dy
+>  # CONFIG_CMD_SETEXPR is not set
+>  CONFIG_CMD_TIME=3Dy
+> +CONFIG_CMD_REGULATOR=3Dy
+>  CONFIG_SPL_OF_CONTROL=3Dy
+>  CONFIG_TPL_OF_CONTROL=3Dy
+>  CONFIG_OF_SPL_REMOVE_PROPS=3D"clock-names interrupt-parent assigned-cloc=
+ks assigned-clock-rates assigned-clock-parents"
+> @@ -57,8 +59,8 @@ CONFIG_TPL_OF_PLATDATA=3Dy
+>  CONFIG_ENV_IS_IN_MMC=3Dy
+>  CONFIG_SYS_RELOC_GD_ENV_ADDR=3Dy
+>  CONFIG_SYS_MMC_ENV_DEV=3D1
+> -CONFIG_NET_RANDOM_ETHADDR=3Dy
+>  CONFIG_TPL_DM=3Dy
+> +CONFIG_SPL_DM_SEQ_ALIAS=3Dy
+>  CONFIG_REGMAP=3Dy
+>  CONFIG_SPL_REGMAP=3Dy
+>  CONFIG_TPL_REGMAP=3Dy
+> @@ -72,8 +74,14 @@ CONFIG_FASTBOOT_CMD_OEM_FORMAT=3Dy
+>  CONFIG_ROCKCHIP_GPIO=3Dy
+>  CONFIG_SYS_I2C_ROCKCHIP=3Dy
+>  CONFIG_MISC=3Dy
+> +CONFIG_ROCKCHIP_EFUSE=3Dy
+>  CONFIG_MMC_DW=3Dy
+>  CONFIG_MMC_DW_ROCKCHIP=3Dy
+> +CONFIG_PHY_MOTORCOMM=3Dy
+> +CONFIG_PHY_REALTEK=3Dy
+> +CONFIG_DM_MDIO=3Dy
+> +CONFIG_DM_ETH_PHY=3Dy
+> +CONFIG_PHY_GIGE=3Dy
+>  CONFIG_ETH_DESIGNWARE=3Dy
+>  CONFIG_GMAC_ROCKCHIP=3Dy
+>  CONFIG_PHY_ROCKCHIP_INNO_USB2=3Dy
+> @@ -81,16 +89,18 @@ CONFIG_PINCTRL=3Dy
+>  CONFIG_SPL_PINCTRL=3Dy
+>  CONFIG_DM_PMIC=3Dy
+>  CONFIG_PMIC_RK8XX=3Dy
+> -CONFIG_SPL_PMIC_RK8XX=3Dy
+>  CONFIG_SPL_DM_REGULATOR=3Dy
+> -CONFIG_REGULATOR_PWM=3Dy
+>  CONFIG_DM_REGULATOR_FIXED=3Dy
+>  CONFIG_SPL_DM_REGULATOR_FIXED=3Dy
+> +CONFIG_DM_REGULATOR_GPIO=3Dy
+> +CONFIG_SPL_DM_REGULATOR_GPIO=3Dy
+>  CONFIG_REGULATOR_RK8XX=3Dy
+>  CONFIG_PWM_ROCKCHIP=3Dy
+>  CONFIG_RAM=3Dy
+>  CONFIG_SPL_RAM=3Dy
+>  CONFIG_TPL_RAM=3Dy
+> +CONFIG_DM_RNG=3Dy
+> +CONFIG_RNG_ROCKCHIP=3Dy
+>  CONFIG_BAUDRATE=3D1500000
+>  CONFIG_DEBUG_UART_SHIFT=3D2
+>  CONFIG_SYS_NS16550_MEM32=3Dy
+> diff --git a/configs/nanopi-r2c-rk3328_defconfig b/configs/nanopi-r2c-rk3=
+328_defconfig
+> index 583179d7c548..becad021f95d 100644
+> --- a/configs/nanopi-r2c-rk3328_defconfig
+> +++ b/configs/nanopi-r2c-rk3328_defconfig
+> @@ -15,7 +15,6 @@ CONFIG_ROCKCHIP_RK3328=3Dy
+>  CONFIG_TPL_ROCKCHIP_COMMON_BOARD=3Dy
+>  CONFIG_TPL_LIBCOMMON_SUPPORT=3Dy
+>  CONFIG_TPL_LIBGENERIC_SUPPORT=3Dy
+> -CONFIG_SPL_DRIVERS_MISC=3Dy
+>  CONFIG_SPL_STACK_R_ADDR=3D0x600000
+>  CONFIG_SPL_STACK=3D0x400000
+>  CONFIG_TPL_SYS_MALLOC_F_LEN=3D0x800
+> @@ -26,7 +25,9 @@ CONFIG_DEBUG_UART=3Dy
+>  # CONFIG_ANDROID_BOOT_IMAGE is not set
+>  CONFIG_FIT=3Dy
+>  CONFIG_FIT_VERBOSE=3Dy
+> +CONFIG_SPL_FIT_SIGNATURE=3Dy
+>  CONFIG_SPL_LOAD_FIT=3Dy
+> +CONFIG_LEGACY_IMAGE_FORMAT=3Dy
+>  CONFIG_DEFAULT_FDT_FILE=3D"rockchip/rk3328-nanopi-r2c.dtb"
+>  # CONFIG_DISPLAY_CPUINFO is not set
+>  CONFIG_DISPLAY_BOARDINFO_LATE=3Dy
+> @@ -39,17 +40,18 @@ CONFIG_SPL_BSS_MAX_SIZE=3D0x2000
+>  # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+>  # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+>  CONFIG_SPL_STACK_R=3Dy
+> -CONFIG_SPL_I2C=3Dy
+>  CONFIG_SPL_POWER=3Dy
+>  CONFIG_SPL_ATF=3Dy
+>  CONFIG_SPL_ATF_NO_PLATFORM_PARAM=3Dy
+>  CONFIG_TPL_SYS_MALLOC_SIMPLE=3Dy
+>  CONFIG_CMD_BOOTZ=3Dy
+> +CONFIG_CMD_GPIO=3Dy
+>  CONFIG_CMD_GPT=3Dy
+>  CONFIG_CMD_MMC=3Dy
+>  CONFIG_CMD_USB=3Dy
+>  # CONFIG_CMD_SETEXPR is not set
+>  CONFIG_CMD_TIME=3Dy
+> +CONFIG_CMD_REGULATOR=3Dy
+>  CONFIG_SPL_OF_CONTROL=3Dy
+>  CONFIG_TPL_OF_CONTROL=3Dy
+>  CONFIG_OF_SPL_REMOVE_PROPS=3D"clock-names interrupt-parent assigned-cloc=
+ks assigned-clock-rates assigned-clock-parents"
+> @@ -57,8 +59,8 @@ CONFIG_TPL_OF_PLATDATA=3Dy
+>  CONFIG_ENV_IS_IN_MMC=3Dy
+>  CONFIG_SYS_RELOC_GD_ENV_ADDR=3Dy
+>  CONFIG_SYS_MMC_ENV_DEV=3D1
+> -CONFIG_NET_RANDOM_ETHADDR=3Dy
+>  CONFIG_TPL_DM=3Dy
+> +CONFIG_SPL_DM_SEQ_ALIAS=3Dy
+>  CONFIG_REGMAP=3Dy
+>  CONFIG_SPL_REGMAP=3Dy
+>  CONFIG_TPL_REGMAP=3Dy
+> @@ -72,8 +74,14 @@ CONFIG_FASTBOOT_CMD_OEM_FORMAT=3Dy
+>  CONFIG_ROCKCHIP_GPIO=3Dy
+>  CONFIG_SYS_I2C_ROCKCHIP=3Dy
+>  CONFIG_MISC=3Dy
+> +CONFIG_ROCKCHIP_EFUSE=3Dy
+>  CONFIG_MMC_DW=3Dy
+>  CONFIG_MMC_DW_ROCKCHIP=3Dy
+> +CONFIG_PHY_MOTORCOMM=3Dy
+> +CONFIG_PHY_REALTEK=3Dy
+> +CONFIG_DM_MDIO=3Dy
+> +CONFIG_DM_ETH_PHY=3Dy
+> +CONFIG_PHY_GIGE=3Dy
+>  CONFIG_ETH_DESIGNWARE=3Dy
+>  CONFIG_GMAC_ROCKCHIP=3Dy
+>  CONFIG_PHY_ROCKCHIP_INNO_USB2=3Dy
+> @@ -81,16 +89,18 @@ CONFIG_PINCTRL=3Dy
+>  CONFIG_SPL_PINCTRL=3Dy
+>  CONFIG_DM_PMIC=3Dy
+>  CONFIG_PMIC_RK8XX=3Dy
+> -CONFIG_SPL_PMIC_RK8XX=3Dy
+>  CONFIG_SPL_DM_REGULATOR=3Dy
+> -CONFIG_REGULATOR_PWM=3Dy
+>  CONFIG_DM_REGULATOR_FIXED=3Dy
+>  CONFIG_SPL_DM_REGULATOR_FIXED=3Dy
+> +CONFIG_DM_REGULATOR_GPIO=3Dy
+> +CONFIG_SPL_DM_REGULATOR_GPIO=3Dy
+>  CONFIG_REGULATOR_RK8XX=3Dy
+>  CONFIG_PWM_ROCKCHIP=3Dy
+>  CONFIG_RAM=3Dy
+>  CONFIG_SPL_RAM=3Dy
+>  CONFIG_TPL_RAM=3Dy
+> +CONFIG_DM_RNG=3Dy
+> +CONFIG_RNG_ROCKCHIP=3Dy
+>  CONFIG_BAUDRATE=3D1500000
+>  CONFIG_DEBUG_UART_SHIFT=3D2
+>  CONFIG_SYS_NS16550_MEM32=3Dy
+> diff --git a/configs/nanopi-r2s-rk3328_defconfig b/configs/nanopi-r2s-rk3=
+328_defconfig
+> index f7ed71e41228..fc910b9d03c9 100644
+> --- a/configs/nanopi-r2s-rk3328_defconfig
+> +++ b/configs/nanopi-r2s-rk3328_defconfig
+> @@ -15,7 +15,6 @@ CONFIG_ROCKCHIP_RK3328=3Dy
+>  CONFIG_TPL_ROCKCHIP_COMMON_BOARD=3Dy
+>  CONFIG_TPL_LIBCOMMON_SUPPORT=3Dy
+>  CONFIG_TPL_LIBGENERIC_SUPPORT=3Dy
+> -CONFIG_SPL_DRIVERS_MISC=3Dy
+>  CONFIG_SPL_STACK_R_ADDR=3D0x600000
+>  CONFIG_SPL_STACK=3D0x400000
+>  CONFIG_TPL_SYS_MALLOC_F_LEN=3D0x800
+> @@ -26,7 +25,9 @@ CONFIG_DEBUG_UART=3Dy
+>  # CONFIG_ANDROID_BOOT_IMAGE is not set
+>  CONFIG_FIT=3Dy
+>  CONFIG_FIT_VERBOSE=3Dy
+> +CONFIG_SPL_FIT_SIGNATURE=3Dy
+>  CONFIG_SPL_LOAD_FIT=3Dy
+> +CONFIG_LEGACY_IMAGE_FORMAT=3Dy
+>  CONFIG_DEFAULT_FDT_FILE=3D"rockchip/rk3328-nanopi-r2s.dtb"
+>  # CONFIG_DISPLAY_CPUINFO is not set
+>  CONFIG_DISPLAY_BOARDINFO_LATE=3Dy
+> @@ -39,17 +40,18 @@ CONFIG_SPL_BSS_MAX_SIZE=3D0x2000
+>  # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+>  # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+>  CONFIG_SPL_STACK_R=3Dy
+> -CONFIG_SPL_I2C=3Dy
+>  CONFIG_SPL_POWER=3Dy
+>  CONFIG_SPL_ATF=3Dy
+>  CONFIG_SPL_ATF_NO_PLATFORM_PARAM=3Dy
+>  CONFIG_TPL_SYS_MALLOC_SIMPLE=3Dy
+>  CONFIG_CMD_BOOTZ=3Dy
+> +CONFIG_CMD_GPIO=3Dy
+>  CONFIG_CMD_GPT=3Dy
+>  CONFIG_CMD_MMC=3Dy
+>  CONFIG_CMD_USB=3Dy
+>  # CONFIG_CMD_SETEXPR is not set
+>  CONFIG_CMD_TIME=3Dy
+> +CONFIG_CMD_REGULATOR=3Dy
+>  CONFIG_SPL_OF_CONTROL=3Dy
+>  CONFIG_TPL_OF_CONTROL=3Dy
+>  CONFIG_OF_SPL_REMOVE_PROPS=3D"clock-names interrupt-parent assigned-cloc=
+ks assigned-clock-rates assigned-clock-parents"
+> @@ -57,8 +59,8 @@ CONFIG_TPL_OF_PLATDATA=3Dy
+>  CONFIG_ENV_IS_IN_MMC=3Dy
+>  CONFIG_SYS_RELOC_GD_ENV_ADDR=3Dy
+>  CONFIG_SYS_MMC_ENV_DEV=3D1
+> -CONFIG_NET_RANDOM_ETHADDR=3Dy
+>  CONFIG_TPL_DM=3Dy
+> +CONFIG_SPL_DM_SEQ_ALIAS=3Dy
+>  CONFIG_REGMAP=3Dy
+>  CONFIG_SPL_REGMAP=3Dy
+>  CONFIG_TPL_REGMAP=3Dy
+> @@ -72,8 +74,14 @@ CONFIG_FASTBOOT_CMD_OEM_FORMAT=3Dy
+>  CONFIG_ROCKCHIP_GPIO=3Dy
+>  CONFIG_SYS_I2C_ROCKCHIP=3Dy
+>  CONFIG_MISC=3Dy
+> +CONFIG_ROCKCHIP_EFUSE=3Dy
+>  CONFIG_MMC_DW=3Dy
+>  CONFIG_MMC_DW_ROCKCHIP=3Dy
+> +CONFIG_PHY_MOTORCOMM=3Dy
+> +CONFIG_PHY_REALTEK=3Dy
+> +CONFIG_DM_MDIO=3Dy
+> +CONFIG_DM_ETH_PHY=3Dy
+> +CONFIG_PHY_GIGE=3Dy
+>  CONFIG_ETH_DESIGNWARE=3Dy
+>  CONFIG_GMAC_ROCKCHIP=3Dy
+>  CONFIG_PHY_ROCKCHIP_INNO_USB2=3Dy
+> @@ -81,16 +89,18 @@ CONFIG_PINCTRL=3Dy
+>  CONFIG_SPL_PINCTRL=3Dy
+>  CONFIG_DM_PMIC=3Dy
+>  CONFIG_PMIC_RK8XX=3Dy
+> -CONFIG_SPL_PMIC_RK8XX=3Dy
+>  CONFIG_SPL_DM_REGULATOR=3Dy
+> -CONFIG_REGULATOR_PWM=3Dy
+>  CONFIG_DM_REGULATOR_FIXED=3Dy
+>  CONFIG_SPL_DM_REGULATOR_FIXED=3Dy
+> +CONFIG_DM_REGULATOR_GPIO=3Dy
+> +CONFIG_SPL_DM_REGULATOR_GPIO=3Dy
+>  CONFIG_REGULATOR_RK8XX=3Dy
+>  CONFIG_PWM_ROCKCHIP=3Dy
+>  CONFIG_RAM=3Dy
+>  CONFIG_SPL_RAM=3Dy
+>  CONFIG_TPL_RAM=3Dy
+> +CONFIG_DM_RNG=3Dy
+> +CONFIG_RNG_ROCKCHIP=3Dy
+>  CONFIG_BAUDRATE=3D1500000
+>  CONFIG_DEBUG_UART_SHIFT=3D2
+>  CONFIG_SYS_NS16550_MEM32=3Dy
+> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchi=
+p.rst
+> index becd0bfe801d..5f613e7462e5 100644
+> --- a/doc/board/rockchip/rockchip.rst
+> +++ b/doc/board/rockchip/rockchip.rst
+> @@ -61,6 +61,9 @@ List of mainline supported Rockchip boards:
+>  * rk3328
+>       - Rockchip Evb-RK3328 (evb-rk3328)
+>       - Firefly ROC-RK3328-CC (roc-cc-rk3328)
+> +     - FriendlyElec NanoPi R2C (nanopi-r2c-rk3328)
+> +     - FriendlyElec NanoPi R2C Plus (nanopi-r2c-plus-rk3328)
+> +     - FriendlyElec NanoPi R2S (nanopi-r2s-rk3328)
+>       - Pine64 Rock64 (rock64-rk3328)
+>       - Radxa ROCK Pi E (rock-pi-e-rk3328)
+>  * rk3368
+> --
+> 2.43.0
+>
