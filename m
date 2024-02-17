@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FBC2C48260
-	for <u-boot@archiver.kernel.org>; Sat, 17 Feb 2024 00:37:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBF1EC48260
+	for <u-boot@archiver.kernel.org>; Sat, 17 Feb 2024 00:37:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5248087ECC;
-	Sat, 17 Feb 2024 01:26:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E711987ED2;
+	Sat, 17 Feb 2024 01:27:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="gVbQLx02";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="R1IMmSMX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 38A9C87EA6; Sat, 17 Feb 2024 01:26:48 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
+ id EF1DD87EB2; Sat, 17 Feb 2024 01:26:54 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E38FB87E93
- for <u-boot@lists.denx.de>; Sat, 17 Feb 2024 01:26:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6C56B87E95
+ for <u-boot@lists.denx.de>; Sat, 17 Feb 2024 01:26:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,21 +28,24 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1708129425; bh=j62HIJI4Zgsi2+LlqV+/4e6JLD722mTqyXfZdQnZMyQ=;
- b=gVbQLx0298fxSlg1jk2DQKA0BW/kXimnGJf2/DDVkUBVW/TwU9BftLhgGv4yAJhwC2bupi182
- YpD/H6ZnDpfw8m1JjqkEN+DYPqrrkP3tlA071Jy8szfQyUDJDNJvV3xqSXntEHvxfDcUFC1jyiu
- FSHJVSHfu6lxf39CCZPDw2OfXTwEfyjdrB4sRy7x0vzekHHl3I8JMtf3+95H9VfJQuZHuLwbZ03
- 5eLbPQHpL9VMNEvb1+owS0iuJbe+ASp3qrcaOa8J+gsWohEIsMYmzJrShHTgaxRDQcvB2xASLZc
- oRGdFT4DERAc8k+Ox5WyiQzs4h6BoCdFmZGvILNT/YKg==
+ t=1708129443; bh=FwhFvKuT55HThTWYn70yeOq0ojNs+JsbmhS9BL1dr44=;
+ b=R1IMmSMXVyTk68fcMydV21L/7EKvrKe7ArGYuskczrnqrkw3U55TBt2m1QjtXreu3NCaRPYdM
+ OUTgl4dltLy2o4xC+bJjno0qvpwB4Gg/VguiRc7sLO97Udo/Lp0Fd5oOXtJ3hMXZgBCG8Am5et0
+ W2sHMiWNqxYsM35sOilTpoqMGkydulwITmSUP3xIm7QzVrRUD1HivHg8e7nhyjfXqchBHBES+ax
+ tdftlWDAmgDW8Q2El8VotfcNkYoti7b0RX/C+AViPvsC7NPhzRXciMG75Y9vaW+23DyKhXomvWV
+ FEVabGLWPmd60aY8am9/4stGGdqzin2n/mcB6PWzbJYw==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Tianling Shen <cnsztl@gmail.com>
-Cc: Dragan Simic <dsimic@manjaro.org>, u-boot@lists.denx.de, Jonas Karlman
- <jonas@kwiboo.se>
-Subject: [PATCH v2 07/15] rockchip: rk3328-orangepi-r1-plus: Update defconfig
-Date: Sat, 17 Feb 2024 00:22:33 +0000
-Message-ID: <20240217002304.2141064-8-jonas@kwiboo.se>
+ David Bauer <mail@david-bauer.net>, Tianling Shen <cnsztl@gmail.com>, Loic
+ Devulder <ldevulder@suse.com>, "Chen-Yu Tsai" <wens@csie.org>, Jonas
+ Karlman <jonas@kwiboo.se>, Banglang Huang <banglang.huang@foxmail.com>,
+ "Matwey V. Kornilov" <matwey.kornilov@gmail.com>
+Cc: Dragan Simic <dsimic@manjaro.org>, u-boot@lists.denx.de
+Subject: [PATCH v2 11/15] rockchip: rk3328: Sync device tree from linux
+ v6.8-rc1
+Date: Sat, 17 Feb 2024 00:22:37 +0000
+Message-ID: <20240217002304.2141064-12-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240217002304.2141064-1-jonas@kwiboo.se>
 References: <20240217002304.2141064-1-jonas@kwiboo.se>
@@ -53,8 +56,8 @@ X-Report-Abuse: abuse@forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 167.172.40.54
-X-ForwardEmail-ID: 65cffc8fbb96cee8b5411efd
+ 149.28.215.223
+X-ForwardEmail-ID: 65cffca1bb96cee8b5411f45
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,295 +74,418 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update defconfig for rk3328-orangepi-r1-plus boards with new defaults.
-
-Remove the SPL_DRIVERS_MISC=y option, no misc driver is used in SPL.
-
-Add CONFIG_SPL_FIT_SIGNATURE=y to let SPL verify an auto generated hash
-of FIT images. This help indicate if there is an issue loading any of
-the images to DRAM or SRAM. Also add LEGACY_IMAGE_FORMAT=y to keep
-support for scripts.
-
-Remove SPL_I2C=y and SPL_PMIC_RK8XX=y, the related i2c and pmic nodes is
-not included in the SPL fdt.
-
-Add CMD_GPIO=y and CMD_REGULATOR=y to add the helpful gpio and regulator
-commands.
-
-Add ROCKCHIP_EFUSE=y and remove NET_RANDOM_ETHADDR=y, ethaddr and
-eth1addr is set based on cpuid read from eFUSE.
-
-Add SPL_DM_SEQ_ALIAS=y option to use alias sequence number in SPL.
-
-Add DM_ETH_PHY=y, PHY_GIGE=y, PHY_MOTORCOMM=y, PHY_REALTEK=y and remove
-&gmac2io to support reset of onboard ethernet PHYs. Also add DM_MDIO=y
-to ensure device tree props is used by motorcomm PHY driver.
-
-Add PHY_ROCKCHIP_INNO_USB2=y option to support the onboard USB PHY.
-
-Remove REGULATOR_PWM=y, the pwm-regulator compatible is not used.
-
-Add RNG_ROCKCHIP=y and DM_RNG=y options to support the onboard random
-generator.
-
-Also add missing device tree files to MAINTAINERS file.
+Sync rk3328 device tree from linux v6.8-rc1.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-Reviewed-by: Tianling Shen <cnsztl@gmail.com>
 ---
 v2:
-- Add CMD_GPIO, CMD_REGULATOR, DM_MDIO and PHY_GIGE
-- Remove SPL_I2C, SPL_PMIC_RK8XX and REGULATOR_PWM
-- Collect r-b tag
+- No change
 ---
- .../rk3328-orangepi-r1-plus-lts-u-boot.dtsi   |  6 ------
- .../dts/rk3328-orangepi-r1-plus-u-boot.dtsi   |  6 ------
- board/rockchip/evb_rk3328/MAINTAINERS         |  2 ++
- configs/orangepi-r1-plus-lts-rk3328_defconfig | 19 ++++++++++++++-----
- configs/orangepi-r1-plus-rk3328_defconfig     | 19 ++++++++++++++-----
- doc/board/rockchip/rockchip.rst               |  2 ++
- 6 files changed, 32 insertions(+), 22 deletions(-)
+ arch/arm/dts/rk3328-evb.dts                  |  1 +
+ arch/arm/dts/rk3328-nanopi-r2s.dts           |  3 +-
+ arch/arm/dts/rk3328-orangepi-r1-plus-lts.dts |  4 +-
+ arch/arm/dts/rk3328-orangepi-r1-plus.dts     |  1 +
+ arch/arm/dts/rk3328-roc-cc.dts               |  3 +-
+ arch/arm/dts/rk3328-rock-pi-e.dts            | 55 +++++++++++++++++
+ arch/arm/dts/rk3328-rock64.dts               |  1 +
+ arch/arm/dts/rk3328-u-boot.dtsi              |  6 --
+ arch/arm/dts/rk3328.dtsi                     | 64 +++++++++++++++-----
+ 9 files changed, 112 insertions(+), 26 deletions(-)
 
-diff --git a/arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi b/arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi
-index 5aaa5ccb15c1..8a4189c6f1cc 100644
---- a/arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi
-+++ b/arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi
-@@ -28,12 +28,6 @@
- 	bootph-pre-ram;
+diff --git a/arch/arm/dts/rk3328-evb.dts b/arch/arm/dts/rk3328-evb.dts
+index ff6b466e0e07..1eef5504445f 100644
+--- a/arch/arm/dts/rk3328-evb.dts
++++ b/arch/arm/dts/rk3328-evb.dts
+@@ -11,6 +11,7 @@
+ 	compatible = "rockchip,rk3328-evb", "rockchip,rk3328";
+ 
+ 	aliases {
++		ethernet0 = &gmac2phy;
+ 		mmc0 = &sdmmc;
+ 		mmc1 = &sdio;
+ 		mmc2 = &emmc;
+diff --git a/arch/arm/dts/rk3328-nanopi-r2s.dts b/arch/arm/dts/rk3328-nanopi-r2s.dts
+index 3857d487ab84..a4399da7d8b1 100644
+--- a/arch/arm/dts/rk3328-nanopi-r2s.dts
++++ b/arch/arm/dts/rk3328-nanopi-r2s.dts
+@@ -14,6 +14,7 @@
+ 	compatible = "friendlyarm,nanopi-r2s", "rockchip,rk3328";
+ 
+ 	aliases {
++		ethernet0 = &gmac2io;
+ 		ethernet1 = &rtl8153;
+ 		mmc0 = &sdmmc;
+ 	};
+@@ -34,7 +35,7 @@
+ 		pinctrl-0 = <&reset_button_pin>;
+ 		pinctrl-names = "default";
+ 
+-		reset {
++		key-reset {
+ 			label = "reset";
+ 			gpios = <&gpio0 RK_PA0 GPIO_ACTIVE_LOW>;
+ 			linux,code = <KEY_RESTART>;
+diff --git a/arch/arm/dts/rk3328-orangepi-r1-plus-lts.dts b/arch/arm/dts/rk3328-orangepi-r1-plus-lts.dts
+index 5d7d567283e5..4237f2ee8fee 100644
+--- a/arch/arm/dts/rk3328-orangepi-r1-plus-lts.dts
++++ b/arch/arm/dts/rk3328-orangepi-r1-plus-lts.dts
+@@ -26,9 +26,11 @@
+ 			compatible = "ethernet-phy-ieee802.3-c22";
+ 			reg = <0>;
+ 
++			motorcomm,auto-sleep-disabled;
+ 			motorcomm,clk-out-frequency-hz = <125000000>;
+ 			motorcomm,keep-pll-enabled;
+-			motorcomm,auto-sleep-disabled;
++			motorcomm,rx-clk-drv-microamp = <5020>;
++			motorcomm,rx-data-drv-microamp = <5020>;
+ 
+ 			pinctrl-0 = <&eth_phy_reset_pin>;
+ 			pinctrl-names = "default";
+diff --git a/arch/arm/dts/rk3328-orangepi-r1-plus.dts b/arch/arm/dts/rk3328-orangepi-r1-plus.dts
+index dc83d74045a3..f20662929c77 100644
+--- a/arch/arm/dts/rk3328-orangepi-r1-plus.dts
++++ b/arch/arm/dts/rk3328-orangepi-r1-plus.dts
+@@ -15,6 +15,7 @@
+ 	compatible = "xunlong,orangepi-r1-plus", "rockchip,rk3328";
+ 
+ 	aliases {
++		ethernet0 = &gmac2io;
+ 		ethernet1 = &rtl8153;
+ 		mmc0 = &sdmmc;
+ 	};
+diff --git a/arch/arm/dts/rk3328-roc-cc.dts b/arch/arm/dts/rk3328-roc-cc.dts
+index aa22a0c22265..414897a57e75 100644
+--- a/arch/arm/dts/rk3328-roc-cc.dts
++++ b/arch/arm/dts/rk3328-roc-cc.dts
+@@ -11,6 +11,7 @@
+ 	compatible = "firefly,roc-rk3328-cc", "rockchip,rk3328";
+ 
+ 	aliases {
++		ethernet0 = &gmac2io;
+ 		mmc0 = &sdmmc;
+ 		mmc1 = &emmc;
+ 	};
+@@ -96,7 +97,6 @@
+ 			linux,default-trigger = "heartbeat";
+ 			gpios = <&rk805 1 GPIO_ACTIVE_LOW>;
+ 			default-state = "on";
+-			mode = <0x23>;
+ 		};
+ 
+ 		user_led: led-1 {
+@@ -104,7 +104,6 @@
+ 			linux,default-trigger = "mmc1";
+ 			gpios = <&rk805 0 GPIO_ACTIVE_LOW>;
+ 			default-state = "off";
+-			mode = <0x05>;
+ 		};
+ 	};
+ };
+diff --git a/arch/arm/dts/rk3328-rock-pi-e.dts b/arch/arm/dts/rk3328-rock-pi-e.dts
+index 018a3a5075c7..3cda6c627b68 100644
+--- a/arch/arm/dts/rk3328-rock-pi-e.dts
++++ b/arch/arm/dts/rk3328-rock-pi-e.dts
+@@ -21,6 +21,8 @@
+ 	compatible = "radxa,rockpi-e", "rockchip,rk3328";
+ 
+ 	aliases {
++		ethernet0 = &gmac2io;
++		ethernet1 = &gmac2phy;
+ 		mmc0 = &sdmmc;
+ 		mmc1 = &emmc;
+ 	};
+@@ -180,6 +182,59 @@
+ 	status = "okay";
  };
  
--&gmac2io {
--	snps,reset-gpio = <&gpio1 RK_PC2 GPIO_ACTIVE_LOW>;
--	snps,reset-active-low;
--	snps,reset-delays-us = <0 10000 50000>;
--};
++&gpio0 {
++	gpio-line-names =
++		/* GPIO0_A0 - A7 */
++		"", "", "", "", "", "", "", "",
++		/* GPIO0_B0 - B7 */
++		"", "", "", "", "", "", "", "",
++		/* GPIO0_C0 - C7 */
++		"", "", "", "", "", "", "", "",
++		/* GPIO0_D0 - D7 */
++		"", "", "", "pin-15 [GPIO0_D3]", "", "", "", "";
++};
++
++&gpio1 {
++	gpio-line-names =
++		/* GPIO1_A0 - A7 */
++		"", "", "", "", "", "", "", "",
++		/* GPIO1_B0 - B7 */
++		"", "", "", "", "", "", "", "",
++		/* GPIO1_C0 - C7 */
++		"", "", "", "", "", "", "", "",
++		/* GPIO1_D0 - D7 */
++		"", "", "", "", "pin-07 [GPIO1_D4]", "", "", "";
++};
++
++&gpio2 {
++	gpio-line-names =
++		/* GPIO2_A0 - A7 */
++		"pin-08 [GPIO2_A0]", "pin-10 [GPIO2_A1]", "pin-11 [GPIO2_A2]",
++		"pin-13 [GPIO2-A3]", "pin-27 [GPIO2_A4]", "pin-28 [GPIO2_A5]",
++		"pin-33 [GPIO2_A6]", "",
++		/* GPIO2_B0 - B7 */
++		"", "", "", "", "pin-26 [GPIO2_B4]", "", "", "pin-36 [GPIO2_B7]",
++		/* GPIO2_C0 - C7 */
++		"pin-32 [GPIO2_C0]", "pin-35 [GPIO2_C1]", "pin-12 [GPIO2_C2]",
++		"pin-38 [GPIO2_C3]", "pin-29 [GPIO2_C4]", "pin-31 [GPIO2_C5]",
++		"pin-37 [GPIO2_C6]", "pin-40 [GPIO2_C7]",
++		/* GPIO2_D0 - D7 */
++		"", "", "", "", "", "", "", "";
++};
++
++&gpio3 {
++	gpio-line-names =
++		/* GPIO3_A0 - A7 */
++		"pin-23 [GPIO3_A0]", "pin-19 [GPIO3_A1]", "pin-21 [GPIO3_A2]",
++		"", "pin-03 [GPIO3_A4]", "", "pin-05 [GPIO3_A6]", "",
++		/* GPIO3_B0 - B7 */
++		"pin-24 [GPIO3_B0]", "", "", "", "", "", "", "",
++		/* GPIO3_C0 - C7 */
++		"", "", "", "", "", "", "", "",
++		/* GPIO3_D0 - D7 */
++		"", "", "", "", "", "", "", "";
++};
++
+ &i2c1 {
+ 	status = "okay";
+ 
+diff --git a/arch/arm/dts/rk3328-rock64.dts b/arch/arm/dts/rk3328-rock64.dts
+index 0a27fa5271f5..229fe9da9c2d 100644
+--- a/arch/arm/dts/rk3328-rock64.dts
++++ b/arch/arm/dts/rk3328-rock64.dts
+@@ -11,6 +11,7 @@
+ 	compatible = "pine64,rock64", "rockchip,rk3328";
+ 
+ 	aliases {
++		ethernet0 = &gmac2io;
+ 		mmc0 = &sdmmc;
+ 		mmc1 = &emmc;
+ 	};
+diff --git a/arch/arm/dts/rk3328-u-boot.dtsi b/arch/arm/dts/rk3328-u-boot.dtsi
+index ea34bf6b78bb..a030f1a5e51d 100644
+--- a/arch/arm/dts/rk3328-u-boot.dtsi
++++ b/arch/arm/dts/rk3328-u-boot.dtsi
+@@ -26,12 +26,6 @@
+ 		       0x0 0xff720000 0x0 0x1000
+ 		       0x0 0xff798000 0x0 0x1000>;
+ 	};
 -
- &spi0 {
- 	spi_flash: spiflash@0 {
- 		bootph-all;
-diff --git a/arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi b/arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi
-index 6d3db86dce6a..2e3b6a77a268 100644
---- a/arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi
-+++ b/arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi
-@@ -28,12 +28,6 @@
- 	bootph-pre-ram;
+-	rng: rng@ff060000 {
+-		compatible = "rockchip,rk3328-crypto";
+-		reg = <0x0 0xff060000 0x0 0x4000>;
+-		status = "okay";
+-	};
  };
  
--&gmac2io {
--	snps,reset-gpio = <&gpio1 RK_PC2 GPIO_ACTIVE_LOW>;
--	snps,reset-active-low;
--	snps,reset-delays-us = <0 10000 50000>;
--};
--
- &spi0 {
- 	spi_flash: spiflash@0 {
- 		bootph-all;
-diff --git a/board/rockchip/evb_rk3328/MAINTAINERS b/board/rockchip/evb_rk3328/MAINTAINERS
-index b88727acad26..675b72dd060c 100644
---- a/board/rockchip/evb_rk3328/MAINTAINERS
-+++ b/board/rockchip/evb_rk3328/MAINTAINERS
-@@ -32,12 +32,14 @@ ORANGEPI-R1-PLUS-RK3328
- M:      Tianling Shen <cnsztl@gmail.com>
- S:      Maintained
- F:      configs/orangepi-r1-plus-rk3328_defconfig
-+F:      arch/arm/dts/rk3328-orangepi-r1-plus.dts
- F:      arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi
+ &cru {
+diff --git a/arch/arm/dts/rk3328.dtsi b/arch/arm/dts/rk3328.dtsi
+index e8d8f00be8aa..fe81b97bbe78 100644
+--- a/arch/arm/dts/rk3328.dtsi
++++ b/arch/arm/dts/rk3328.dtsi
+@@ -20,6 +20,10 @@
+ 	#size-cells = <2>;
  
- ORANGEPI-R1-PLUS-LTS-RK3328
- M:      Tianling Shen <cnsztl@gmail.com>
- S:      Maintained
- F:      configs/orangepi-r1-plus-lts-rk3328_defconfig
-+F:      arch/arm/dts/rk3328-orangepi-r1-plus-lts.dts
- F:      arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi
+ 	aliases {
++		gpio0 = &gpio0;
++		gpio1 = &gpio1;
++		gpio2 = &gpio2;
++		gpio3 = &gpio3;
+ 		serial0 = &uart0;
+ 		serial1 = &uart1;
+ 		serial2 = &uart2;
+@@ -27,8 +31,6 @@
+ 		i2c1 = &i2c1;
+ 		i2c2 = &i2c2;
+ 		i2c3 = &i2c3;
+-		ethernet0 = &gmac2io;
+-		ethernet1 = &gmac2phy;
+ 	};
  
- ROC-RK3328-CC
-diff --git a/configs/orangepi-r1-plus-lts-rk3328_defconfig b/configs/orangepi-r1-plus-lts-rk3328_defconfig
-index d3d9417509e9..96d563bb4fc5 100644
---- a/configs/orangepi-r1-plus-lts-rk3328_defconfig
-+++ b/configs/orangepi-r1-plus-lts-rk3328_defconfig
-@@ -15,7 +15,6 @@ CONFIG_ROCKCHIP_RK3328=y
- CONFIG_TPL_ROCKCHIP_COMMON_BOARD=y
- CONFIG_TPL_LIBCOMMON_SUPPORT=y
- CONFIG_TPL_LIBGENERIC_SUPPORT=y
--CONFIG_SPL_DRIVERS_MISC=y
- CONFIG_SPL_STACK_R_ADDR=0x600000
- CONFIG_SPL_STACK=0x400000
- CONFIG_TPL_SYS_MALLOC_F_LEN=0x800
-@@ -26,7 +25,9 @@ CONFIG_DEBUG_UART=y
- # CONFIG_ANDROID_BOOT_IMAGE is not set
- CONFIG_FIT=y
- CONFIG_FIT_VERBOSE=y
-+CONFIG_SPL_FIT_SIGNATURE=y
- CONFIG_SPL_LOAD_FIT=y
-+CONFIG_LEGACY_IMAGE_FORMAT=y
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-orangepi-r1-plus-lts.dtb"
- # CONFIG_DISPLAY_CPUINFO is not set
- CONFIG_DISPLAY_BOARDINFO_LATE=y
-@@ -39,17 +40,18 @@ CONFIG_SPL_BSS_MAX_SIZE=0x2000
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
- # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
- CONFIG_SPL_STACK_R=y
--CONFIG_SPL_I2C=y
- CONFIG_SPL_POWER=y
- CONFIG_SPL_ATF=y
- CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
- CONFIG_TPL_SYS_MALLOC_SIMPLE=y
- CONFIG_CMD_BOOTZ=y
-+CONFIG_CMD_GPIO=y
- CONFIG_CMD_GPT=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_USB=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_TIME=y
-+CONFIG_CMD_REGULATOR=y
- CONFIG_SPL_OF_CONTROL=y
- CONFIG_TPL_OF_CONTROL=y
- CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-@@ -57,8 +59,8 @@ CONFIG_TPL_OF_PLATDATA=y
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_MMC_ENV_DEV=1
--CONFIG_NET_RANDOM_ETHADDR=y
- CONFIG_TPL_DM=y
-+CONFIG_SPL_DM_SEQ_ALIAS=y
- CONFIG_REGMAP=y
- CONFIG_SPL_REGMAP=y
- CONFIG_TPL_REGMAP=y
-@@ -72,18 +74,23 @@ CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
- CONFIG_MISC=y
-+CONFIG_ROCKCHIP_EFUSE=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_SPI_FLASH_GIGADEVICE=y
-+CONFIG_PHY_MOTORCOMM=y
-+CONFIG_PHY_REALTEK=y
-+CONFIG_DM_MDIO=y
-+CONFIG_DM_ETH_PHY=y
-+CONFIG_PHY_GIGE=y
- CONFIG_ETH_DESIGNWARE=y
- CONFIG_GMAC_ROCKCHIP=y
-+CONFIG_PHY_ROCKCHIP_INNO_USB2=y
- CONFIG_PINCTRL=y
- CONFIG_SPL_PINCTRL=y
- CONFIG_DM_PMIC=y
- CONFIG_PMIC_RK8XX=y
--CONFIG_SPL_PMIC_RK8XX=y
- CONFIG_SPL_DM_REGULATOR=y
--CONFIG_REGULATOR_PWM=y
- CONFIG_DM_REGULATOR_FIXED=y
- CONFIG_SPL_DM_REGULATOR_FIXED=y
- CONFIG_REGULATOR_RK8XX=y
-@@ -91,6 +98,8 @@ CONFIG_PWM_ROCKCHIP=y
- CONFIG_RAM=y
- CONFIG_SPL_RAM=y
- CONFIG_TPL_RAM=y
-+CONFIG_DM_RNG=y
-+CONFIG_RNG_ROCKCHIP=y
- CONFIG_BAUDRATE=1500000
- CONFIG_DEBUG_UART_SHIFT=2
- CONFIG_SYS_NS16550_MEM32=y
-diff --git a/configs/orangepi-r1-plus-rk3328_defconfig b/configs/orangepi-r1-plus-rk3328_defconfig
-index 9356e87132e7..dfb05f176553 100644
---- a/configs/orangepi-r1-plus-rk3328_defconfig
-+++ b/configs/orangepi-r1-plus-rk3328_defconfig
-@@ -15,7 +15,6 @@ CONFIG_ROCKCHIP_RK3328=y
- CONFIG_TPL_ROCKCHIP_COMMON_BOARD=y
- CONFIG_TPL_LIBCOMMON_SUPPORT=y
- CONFIG_TPL_LIBGENERIC_SUPPORT=y
--CONFIG_SPL_DRIVERS_MISC=y
- CONFIG_SPL_STACK_R_ADDR=0x600000
- CONFIG_SPL_STACK=0x400000
- CONFIG_TPL_SYS_MALLOC_F_LEN=0x800
-@@ -26,7 +25,9 @@ CONFIG_DEBUG_UART=y
- # CONFIG_ANDROID_BOOT_IMAGE is not set
- CONFIG_FIT=y
- CONFIG_FIT_VERBOSE=y
-+CONFIG_SPL_FIT_SIGNATURE=y
- CONFIG_SPL_LOAD_FIT=y
-+CONFIG_LEGACY_IMAGE_FORMAT=y
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-orangepi-r1-plus.dtb"
- # CONFIG_DISPLAY_CPUINFO is not set
- CONFIG_DISPLAY_BOARDINFO_LATE=y
-@@ -39,17 +40,18 @@ CONFIG_SPL_BSS_MAX_SIZE=0x2000
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
- # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
- CONFIG_SPL_STACK_R=y
--CONFIG_SPL_I2C=y
- CONFIG_SPL_POWER=y
- CONFIG_SPL_ATF=y
- CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
- CONFIG_TPL_SYS_MALLOC_SIMPLE=y
- CONFIG_CMD_BOOTZ=y
-+CONFIG_CMD_GPIO=y
- CONFIG_CMD_GPT=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_USB=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_TIME=y
-+CONFIG_CMD_REGULATOR=y
- CONFIG_SPL_OF_CONTROL=y
- CONFIG_TPL_OF_CONTROL=y
- CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-@@ -57,8 +59,8 @@ CONFIG_TPL_OF_PLATDATA=y
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_MMC_ENV_DEV=1
--CONFIG_NET_RANDOM_ETHADDR=y
- CONFIG_TPL_DM=y
-+CONFIG_SPL_DM_SEQ_ALIAS=y
- CONFIG_REGMAP=y
- CONFIG_SPL_REGMAP=y
- CONFIG_TPL_REGMAP=y
-@@ -72,18 +74,23 @@ CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
- CONFIG_MISC=y
-+CONFIG_ROCKCHIP_EFUSE=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_SPI_FLASH_GIGADEVICE=y
-+CONFIG_PHY_MOTORCOMM=y
-+CONFIG_PHY_REALTEK=y
-+CONFIG_DM_MDIO=y
-+CONFIG_DM_ETH_PHY=y
-+CONFIG_PHY_GIGE=y
- CONFIG_ETH_DESIGNWARE=y
- CONFIG_GMAC_ROCKCHIP=y
-+CONFIG_PHY_ROCKCHIP_INNO_USB2=y
- CONFIG_PINCTRL=y
- CONFIG_SPL_PINCTRL=y
- CONFIG_DM_PMIC=y
- CONFIG_PMIC_RK8XX=y
--CONFIG_SPL_PMIC_RK8XX=y
- CONFIG_SPL_DM_REGULATOR=y
--CONFIG_REGULATOR_PWM=y
- CONFIG_DM_REGULATOR_FIXED=y
- CONFIG_SPL_DM_REGULATOR_FIXED=y
- CONFIG_REGULATOR_RK8XX=y
-@@ -91,6 +98,8 @@ CONFIG_PWM_ROCKCHIP=y
- CONFIG_RAM=y
- CONFIG_SPL_RAM=y
- CONFIG_TPL_RAM=y
-+CONFIG_DM_RNG=y
-+CONFIG_RNG_ROCKCHIP=y
- CONFIG_BAUDRATE=1500000
- CONFIG_DEBUG_UART_SHIFT=2
- CONFIG_SYS_NS16550_MEM32=y
-diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-index 5f613e7462e5..612edf917cc3 100644
---- a/doc/board/rockchip/rockchip.rst
-+++ b/doc/board/rockchip/rockchip.rst
-@@ -66,6 +66,8 @@ List of mainline supported Rockchip boards:
-      - FriendlyElec NanoPi R2S (nanopi-r2s-rk3328)
-      - Pine64 Rock64 (rock64-rk3328)
-      - Radxa ROCK Pi E (rock-pi-e-rk3328)
-+     - Xunlong Orange Pi R1 Plus (orangepi-r1-plus-rk3328)
-+     - Xunlong Orange Pi R1 Plus LTS (orangepi-r1-plus-lts-rk3328)
- * rk3368
-      - GeekBox (geekbox)
-      - PX5 EVB (evb-px5)
+ 	cpus {
+@@ -102,10 +104,12 @@
+ 
+ 		l2: l2-cache0 {
+ 			compatible = "cache";
++			cache-level = <2>;
++			cache-unified;
+ 		};
+ 	};
+ 
+-	cpu0_opp_table: opp_table0 {
++	cpu0_opp_table: opp-table-0 {
+ 		compatible = "operating-points-v2";
+ 		opp-shared;
+ 
+@@ -306,6 +310,10 @@
+ 			};
+ 			power-domain@RK3328_PD_VIDEO {
+ 				reg = <RK3328_PD_VIDEO>;
++				clocks = <&cru ACLK_RKVDEC>,
++					 <&cru HCLK_RKVDEC>,
++					 <&cru SCLK_VDEC_CABAC>,
++					 <&cru SCLK_VDEC_CORE>;
+ 				#power-domain-cells = <0>;
+ 			};
+ 			power-domain@RK3328_PD_VPU {
+@@ -489,7 +497,7 @@
+ 		status = "disabled";
+ 	};
+ 
+-	dmac: dmac@ff1f0000 {
++	dmac: dma-controller@ff1f0000 {
+ 		compatible = "arm,pl330", "arm,primecell";
+ 		reg = <0x0 0xff1f0000 0x0 0x4000>;
+ 		interrupts = <GIC_SPI 0 IRQ_TYPE_LEVEL_HIGH>,
+@@ -599,7 +607,7 @@
+ 
+ 	gpu: gpu@ff300000 {
+ 		compatible = "rockchip,rk3328-mali", "arm,mali-450";
+-		reg = <0x0 0xff300000 0x0 0x40000>;
++		reg = <0x0 0xff300000 0x0 0x30000>;
+ 		interrupts = <GIC_SPI 90 IRQ_TYPE_LEVEL_HIGH>,
+ 			     <GIC_SPI 87 IRQ_TYPE_LEVEL_HIGH>,
+ 			     <GIC_SPI 93 IRQ_TYPE_LEVEL_HIGH>,
+@@ -623,7 +631,6 @@
+ 		compatible = "rockchip,iommu";
+ 		reg = <0x0 0xff330200 0 0x100>;
+ 		interrupts = <GIC_SPI 96 IRQ_TYPE_LEVEL_HIGH>;
+-		interrupt-names = "h265e_mmu";
+ 		clocks = <&cru ACLK_H265>, <&cru PCLK_H265>;
+ 		clock-names = "aclk", "iface";
+ 		#iommu-cells = <0>;
+@@ -634,7 +641,6 @@
+ 		compatible = "rockchip,iommu";
+ 		reg = <0x0 0xff340800 0x0 0x40>;
+ 		interrupts = <GIC_SPI 98 IRQ_TYPE_LEVEL_HIGH>;
+-		interrupt-names = "vepu_mmu";
+ 		clocks = <&cru ACLK_VPU>, <&cru HCLK_VPU>;
+ 		clock-names = "aclk", "iface";
+ 		#iommu-cells = <0>;
+@@ -656,22 +662,34 @@
+ 		compatible = "rockchip,iommu";
+ 		reg = <0x0 0xff350800 0x0 0x40>;
+ 		interrupts = <GIC_SPI 11 IRQ_TYPE_LEVEL_HIGH>;
+-		interrupt-names = "vpu_mmu";
+ 		clocks = <&cru ACLK_VPU>, <&cru HCLK_VPU>;
+ 		clock-names = "aclk", "iface";
+ 		#iommu-cells = <0>;
+ 		power-domains = <&power RK3328_PD_VPU>;
+ 	};
+ 
+-	rkvdec_mmu: iommu@ff360480 {
++	vdec: video-codec@ff360000 {
++		compatible = "rockchip,rk3328-vdec", "rockchip,rk3399-vdec";
++		reg = <0x0 0xff360000 0x0 0x480>;
++		interrupts = <GIC_SPI 7 IRQ_TYPE_LEVEL_HIGH>;
++		clocks = <&cru ACLK_RKVDEC>, <&cru HCLK_RKVDEC>,
++			 <&cru SCLK_VDEC_CABAC>, <&cru SCLK_VDEC_CORE>;
++		clock-names = "axi", "ahb", "cabac", "core";
++		assigned-clocks = <&cru ACLK_RKVDEC>, <&cru SCLK_VDEC_CABAC>,
++				  <&cru SCLK_VDEC_CORE>;
++		assigned-clock-rates = <400000000>, <400000000>, <300000000>;
++		iommus = <&vdec_mmu>;
++		power-domains = <&power RK3328_PD_VIDEO>;
++	};
++
++	vdec_mmu: iommu@ff360480 {
+ 		compatible = "rockchip,iommu";
+ 		reg = <0x0 0xff360480 0x0 0x40>, <0x0 0xff3604c0 0x0 0x40>;
+ 		interrupts = <GIC_SPI 74 IRQ_TYPE_LEVEL_HIGH>;
+-		interrupt-names = "rkvdec_mmu";
+ 		clocks = <&cru ACLK_RKVDEC>, <&cru HCLK_RKVDEC>;
+ 		clock-names = "aclk", "iface";
+ 		#iommu-cells = <0>;
+-		status = "disabled";
++		power-domains = <&power RK3328_PD_VIDEO>;
+ 	};
+ 
+ 	vop: vop@ff370000 {
+@@ -700,7 +718,6 @@
+ 		compatible = "rockchip,iommu";
+ 		reg = <0x0 0xff373f00 0x0 0x100>;
+ 		interrupts = <GIC_SPI 32 IRQ_TYPE_LEVEL_HIGH>;
+-		interrupt-names = "vop_mmu";
+ 		clocks = <&cru ACLK_VOP>, <&cru HCLK_VOP>;
+ 		clock-names = "aclk", "iface";
+ 		#iommu-cells = <0>;
+@@ -901,6 +918,8 @@
+ 		resets = <&cru SRST_GMAC2IO_A>;
+ 		reset-names = "stmmaceth";
+ 		rockchip,grf = <&grf>;
++		tx-fifo-depth = <2048>;
++		rx-fifo-depth = <4096>;
+ 		snps,txpbl = <0x4>;
+ 		status = "disabled";
+ 	};
+@@ -923,6 +942,8 @@
+ 		reset-names = "stmmaceth";
+ 		phy-mode = "rmii";
+ 		phy-handle = <&phy>;
++		tx-fifo-depth = <2048>;
++		rx-fifo-depth = <4096>;
+ 		snps,txpbl = <0x4>;
+ 		clock_in_out = "output";
+ 		status = "disabled";
+@@ -1021,6 +1042,17 @@
+ 		      (GIC_CPU_MASK_SIMPLE(4) | IRQ_TYPE_LEVEL_HIGH)>;
+ 	};
+ 
++	crypto: crypto@ff060000 {
++		compatible = "rockchip,rk3328-crypto";
++		reg = <0x0 0xff060000 0x0 0x4000>;
++		interrupts = <GIC_SPI 30 IRQ_TYPE_LEVEL_HIGH>;
++		clocks = <&cru HCLK_CRYPTO_MST>, <&cru HCLK_CRYPTO_SLV>,
++			 <&cru SCLK_CRYPTO>;
++		clock-names = "hclk_master", "hclk_slave", "sclk";
++		resets = <&cru SRST_CRYPTO>;
++		reset-names = "crypto-rst";
++	};
++
+ 	pinctrl: pinctrl {
+ 		compatible = "rockchip,rk3328-pinctrl";
+ 		rockchip,grf = <&grf>;
+@@ -1028,7 +1060,7 @@
+ 		#size-cells = <2>;
+ 		ranges;
+ 
+-		gpio0: gpio0@ff210000 {
++		gpio0: gpio@ff210000 {
+ 			compatible = "rockchip,gpio-bank";
+ 			reg = <0x0 0xff210000 0x0 0x100>;
+ 			interrupts = <GIC_SPI 51 IRQ_TYPE_LEVEL_HIGH>;
+@@ -1041,7 +1073,7 @@
+ 			#interrupt-cells = <2>;
+ 		};
+ 
+-		gpio1: gpio1@ff220000 {
++		gpio1: gpio@ff220000 {
+ 			compatible = "rockchip,gpio-bank";
+ 			reg = <0x0 0xff220000 0x0 0x100>;
+ 			interrupts = <GIC_SPI 52 IRQ_TYPE_LEVEL_HIGH>;
+@@ -1054,7 +1086,7 @@
+ 			#interrupt-cells = <2>;
+ 		};
+ 
+-		gpio2: gpio2@ff230000 {
++		gpio2: gpio@ff230000 {
+ 			compatible = "rockchip,gpio-bank";
+ 			reg = <0x0 0xff230000 0x0 0x100>;
+ 			interrupts = <GIC_SPI 53 IRQ_TYPE_LEVEL_HIGH>;
+@@ -1067,7 +1099,7 @@
+ 			#interrupt-cells = <2>;
+ 		};
+ 
+-		gpio3: gpio3@ff240000 {
++		gpio3: gpio@ff240000 {
+ 			compatible = "rockchip,gpio-bank";
+ 			reg = <0x0 0xff240000 0x0 0x100>;
+ 			interrupts = <GIC_SPI 54 IRQ_TYPE_LEVEL_HIGH>;
 -- 
 2.43.0
 
