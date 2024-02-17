@@ -4,59 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 844AAC48260
-	for <u-boot@archiver.kernel.org>; Sat, 17 Feb 2024 01:01:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14CA7C48260
+	for <u-boot@archiver.kernel.org>; Sat, 17 Feb 2024 03:12:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B4DCD87E74;
-	Sat, 17 Feb 2024 01:59:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id B70B787C45;
+	Sat, 17 Feb 2024 04:12:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="SU9OsUi/";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kZ2m5MyK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E04287E28; Sat, 17 Feb 2024 01:59:34 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2F45D87C48; Sat, 17 Feb 2024 04:11:56 +0100 (CET)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6548F87E8C
- for <u-boot@lists.denx.de>; Sat, 17 Feb 2024 01:58:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 065778765B
+ for <u-boot@lists.denx.de>; Sat, 17 Feb 2024 04:11:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=4c2a=J2=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1708131508; bh=qgikFweTpH77yUkY4JPwF7a2Z+pDA8nznQBRxW8FR88=;
- b=SU9OsUi/nJjJcFIAUsnoJfaqaquN14CAl0jT9dXgDTHQlP9TT1OUJEF15YOrhLqEr4RcEv2q4
- oGeJMXQnyaRzZyZ642sHoIfngDEAeb3eGReyJaFeg/SohtLSJvVCmvMpmTQ0FTAm3aaZAXYE6gz
- BDB8+d3HcIhTyfXtJO6Iq7k2rbPrbiDHrk85EvPjQcxqn7U2uEeIbXafjZfei2zGMmOZCjsbFlL
- gUhbm2fM3RadkNiN/GX+CwYrX8w8hzRIjY3IM1m5ZGHyW8fkzQg091KbgmLNTWrqdEVkzPPxLqx
- mWlLzGLOaFxzSebXjXwgj+rk5Vhgv2m28ItuJkIi1moQ==
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Tianling Shen <cnsztl@gmail.com>, David Bauer <mail@david-bauer.net>, Loic
- Devulder <ldevulder@suse.com>, "Chen-Yu Tsai" <wens@csie.org>, Jonas
- Karlman <jonas@kwiboo.se>, Banglang Huang <banglang.huang@foxmail.com>,
- "Matwey V. Kornilov" <matwey.kornilov@gmail.com>
-Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>, u-boot@lists.denx.de
-Subject: [PATCH v2 1/2] rockchip: rk3328: Update stack addresses
-Date: Sat, 17 Feb 2024 00:58:09 +0000
-Message-ID: <20240217005817.2150377-2-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240217005817.2150377-1-jonas@kwiboo.se>
-References: <20240217005817.2150377-1-jonas@kwiboo.se>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=alexander.sverdlin@gmail.com
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-412345cca4eso12928275e9.2
+ for <u-boot@lists.denx.de>; Fri, 16 Feb 2024 19:11:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1708139504; x=1708744304; darn=lists.denx.de;
+ h=mime-version:user-agent:content-transfer-encoding:autocrypt
+ :references:in-reply-to:date:cc:to:from:subject:message-id:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=qcaXtL2aF9B7L3CoPBlLIo0JpIjl+zR4Ag91mEIioWA=;
+ b=kZ2m5MyKKE1uLWQl/BAUcfLIutLslWgB93hnHwjWpB4aZ1yxUUpikuVCQRupsY2+Sa
+ +5VFdj7c5gsVs+Cz/ZsGmbHD9T0TR+IvVGWGN7IlxM5Y2r2wLwrMZdTu0FfQ+NA+cgRC
+ Z0KpekTWrlaeeFWZz369cR6PXM51hAW4vIrdWHWmFnle/hVWeE0ih7Wfij+8WwzCHIqJ
+ 4BBHscwWPgNsfYyjHUKnBiV0Gw1e7L9ynpATRTHClE21NHgBdckZEhjtpjkNxOhzt4+I
+ Tq+q2ZRRY0a2bzMdX7n63BkR1I8MWtJBq0soNK1eqd9C4Aty5R2Tr19+pSnKtutSljaZ
+ b3ig==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1708139504; x=1708744304;
+ h=mime-version:user-agent:content-transfer-encoding:autocrypt
+ :references:in-reply-to:date:cc:to:from:subject:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=qcaXtL2aF9B7L3CoPBlLIo0JpIjl+zR4Ag91mEIioWA=;
+ b=Pfzq50+OP2oQ+PJymJ3A90sOLPqRY0NPLaOIM6gmMeTdqlZS9bsh56JrzOL1+vuk5+
+ C2ngdIZPvcx2J0QtChjT2ktqIVI2hpsSGiF8k0H2SRYxGaKhCt4z3+6XLsKrKkHc373J
+ +qpfjG4gei6snSurHW7bbdvIWUGJ7R5U/2zaVcBr4LI6rWlwn72nKLLCo/aUi+AjjFRC
+ EfkMdstV5PK9EFVneMwE/FmbWjuczcHGBhoM9C+ZxTjfF3kW1j+BCRf+bfjHaRc31Rfl
+ XIY96FFfRRDSI9k6gmwAo3fHmpaKDHqWlCpzeeJYurXZbpMDV/IoQ2/66Iyt9CiT5IMD
+ yG/g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXvKJ0eyddzjH2PfSMCv6AltqzWbxfzgc5f8CFXKy5ve9S4N20lBRspoCbWS5eFtPZpwBigUBiADysrKt3mrD1DHw1aHA==
+X-Gm-Message-State: AOJu0YyR+RBVcShAgxbIRgHBBsalDgt/WnuJmv7DLbx4lKwIp0io7uSO
+ aEKs0cgtE6oIlacnxJrlnFe23s3HabsPU0CK8d9pjvuFLskWPdO8
+X-Google-Smtp-Source: AGHT+IGKKC3n2BnIHcQxdMHqoSQdt35jexKMJuBr62mWfWptIEHn2srgOs809Qa4WgyVGO49EnlKgQ==
+X-Received: by 2002:a05:600c:5189:b0:412:488a:5922 with SMTP id
+ fa9-20020a05600c518900b00412488a5922mr2643782wmb.21.1708139503967; 
+ Fri, 16 Feb 2024 19:11:43 -0800 (PST)
+Received: from giga-mm-1.home ([2a02:1210:8690:9300:82ee:73ff:feb8:99e3])
+ by smtp.gmail.com with ESMTPSA id
+ dn23-20020a05600c655700b0040fafd84095sm3819290wmb.41.2024.02.16.19.11.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 16 Feb 2024 19:11:43 -0800 (PST)
+Message-ID: <87f154591fee4979570e78cbc8c73eb0a56469eb.camel@gmail.com>
+Subject: Re: [PATCH V6 07/20] configs: am62x_evm_a53_defconfig: Switch to
+ bootstd
+From: Alexander Sverdlin <alexander.sverdlin@gmail.com>
+To: Nishanth Menon <nm@ti.com>, Neha Francis <n-francis@ti.com>, Tom Rini
+ <trini@konsulko.com>, Simon Glass <sjg@google.com>
+Cc: Bryan <bb@ti.com>, Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>,
+ Robert Nelson <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
+ u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@baylibre.com>, Jan
+ Kiszka <jan.kiszka@siemens.com>, Simon Glass <sjg@chromium.org>,  Andreas
+ Dannenberg <dannenberg@ti.com>, Romain Naour <romain.naour@smile.fr>
+Date: Sat, 17 Feb 2024 04:11:47 +0100
+In-Reply-To: <20230825180305.69515-8-nm@ti.com>
+References: <20230825180305.69515-1-nm@ti.com>
+ <20230825180305.69515-8-nm@ti.com>
+Autocrypt: addr=alexander.sverdlin@gmail.com; prefer-encrypt=mutual;
+ keydata=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
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.50.4 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 167.172.40.54
-X-ForwardEmail-ID: 65d004b320aeacdad56da2ec
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,287 +109,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With the stack and text base used by U-Boot SPL and proper on RK3328
-there is a high likelihood of overlapping when U-Boot proper + FDT nears
-1 MiB in size.
+Hello Nishanth,
 
-Currently the following memory layout is used:
-- 0x00000000 (@0 MiB): U-Boot SPL text base
-- 0x00040000 (@256 KiB): TF-A
-- 0x00200000 (@2 MiB): U-Boot proper text base
-- 0x00300000 (@3 MiB): U-Boot proper init stack
-- 0x00400000 (@4 MiB): U-Boot SPL init stack
-- 0x00600000 (@6 MiB): U-Boot SPL reloc stack
-- 0x02000000 (@32 MiB): U-Boot SPL bss
-- 0x08400000 (@132 MiB): optional OPTEE
+On Fri, 2023-08-25 at 13:02 -0500, Nishanth Menon wrote:
+> Switch to using bootstd. Note with this change, we will stop using
+> distro_bootcmd and instead depend entirely on bootflow method of
+> starting the system up.
+>=20
+> Suggested-by: Tom Rini <trini@konsulko.com>
+> Suggested-by: Simon Glass <sjg@chromium.org>
+> Reviewed-by: Tom Rini <trini@konsulko.com>
+> Tested-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> Signed-off-by: Nishanth Menon <nm@ti.com>
+> Reviewed-by: Tom Rini <trini@konsulko.com>
+> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> ---
+> No change other than picking up reviews, tested tags along the way.
+> V5: https://lore.kernel.org/r/20230824031101.3460411-6-nm@ti.com
+> =C2=A0configs/am62x_evm_a53_defconfig | 5 +++--
+> =C2=A01 file changed, 3 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/configs/am62x_evm_a53_defconfig b/configs/am62x_evm_a53_defc=
+onfig
+> index d55caabe22c9..1807df8bbee9 100644
+> --- a/configs/am62x_evm_a53_defconfig
+> +++ b/configs/am62x_evm_a53_defconfig
+> @@ -28,8 +28,9 @@ CONFIG_SPL_SPI=3Dy
+> =C2=A0# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+> =C2=A0CONFIG_SPL_LOAD_FIT=3Dy
+> =C2=A0CONFIG_SPL_LOAD_FIT_ADDRESS=3D0x81000000
+> -CONFIG_DISTRO_DEFAULTS=3Dy
+> -CONFIG_BOOTCOMMAND=3D"run envboot; run distro_bootcmd;"
+> +CONFIG_BOOTSTD_FULL=3Dy
+> +CONFIG_BOOTSTD_DEFAULTS=3Dy
+> +CONFIG_BOOTCOMMAND=3D"run envboot; bootflow scan -lb"
+> =C2=A0CONFIG_SPL_MAX_SIZE=3D0x58000
+> =C2=A0CONFIG_SPL_HAS_BSS_LINKER_SECTION=3Dy
+> =C2=A0CONFIG_SPL_BSS_START_ADDR=3D0x80c80000
 
-SPL load TF-A, U-Boot proper and optional OPTEE after SPL stack has
-relocated, meaning that there is room for close to 4 MiB (@2-6 MiB).
-However, the initial stack used by U-Boot proper is limiting the size
-of U-Boot proper + FDT to below 1 MiB (@2-3 MiB).
+could you please suggest which distro have you used for testing?
 
-Instead change to use the following memory layout:
-- 0x00000000 (@0 MiB): U-Boot SPL text base
-- 0x00040000 (@256 KiB): TF-A
-- 0x00200000 (@2 MiB): U-Boot proper text base
-- 0x00400000 (@4 MiB): U-Boot SPL init stack
-- 0x00800000 (@8 MiB): U-Boot proper init stack (changed)
-- 0x02000000 (@32 MiB): U-Boot SPL bss
-- 0x04000000 (@64 MiB): U-Boot SPL reloc stack (changed)
-- 0x08400000 (@132 MiB): optional OPTEE
+After U-Boot update to v2024.01 Buildroot is not booting any more:
 
-This should leave room for loading and running a U-Boot proper close
-to 6 MiB (@2-8 MiB) in size. When U-Boot proper has relocated is should
-be possible to use @2-132 MiB and @164 MiB+ for scripts, kernel etc.
-
-Also update SYS_MALLOC_F_LEN to use a 16 KiB malloc area running in SPL
-pre-reloc and proper pre-reloc stage. Same size that is used on RK3399.
-
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
-v2:
-- Rebase on v2 of "rockchip: rk3328: Update defconfigs, DTs and enable
-  boot from SPI" [1]
+U-Boot 2024.01 (Feb 15 2024 - 01:43:17 +0100)
 
-[1] https://patchwork.ozlabs.org/cover/1900345/
+SoC:   AM62X SR1.0 HS-FS
+Model: Texas Instruments AM625 SK
+DRAM:  2 GiB
+Core:  56 devices, 23 uclasses, devicetree: separate
+MMC:   mmc@fa10000: 0, mmc@fa00000: 1
+Loading Environment from nowhere... OK
+In:    serial@2800000
+Out:   serial@2800000
+Err:   serial@2800000
+Net:   eth0: ethernet@8000000port@1
+Hit any key to stop autoboot:  0=20
+switch to partitions #0, OK
+mmc1 is current device
+SD/MMC found on device 1
+Failed to load 'uEnv.txt'
+Scanning for bootflows in all bootdevs
+Seq  Method       State   Uclass    Part  Name                      Filenam=
+e
+---  -----------  ------  --------  ----  ------------------------  -------=
+---------
+Scanning global bootmeth 'efi_mgr':
+No EFI system partition
+No EFI system partition
+Failed to persist EFI variables
+Scanning bootdev 'mmc@fa00000.bootdev':
+Scanning bootdev 'mmc@fa10000.bootdev':
+Unknown uclass 'usb' in label
+link up on port 1, speed 100, full duplex
+BOOTP broadcast 1
+BOOTP broadcast 2
+BOOTP broadcast 3
+...
 ---
- arch/arm/mach-rockchip/rk3328/Kconfig         | 2 +-
- configs/evb-rk3328_defconfig                  | 4 +---
- configs/nanopi-r2c-plus-rk3328_defconfig      | 4 ++--
- configs/nanopi-r2c-rk3328_defconfig           | 4 ++--
- configs/nanopi-r2s-rk3328_defconfig           | 4 ++--
- configs/orangepi-r1-plus-lts-rk3328_defconfig | 4 ++--
- configs/orangepi-r1-plus-rk3328_defconfig     | 4 ++--
- configs/roc-cc-rk3328_defconfig               | 4 ++--
- configs/rock-pi-e-rk3328_defconfig            | 4 +---
- configs/rock64-rk3328_defconfig               | 4 ++--
- 10 files changed, 17 insertions(+), 21 deletions(-)
 
-diff --git a/arch/arm/mach-rockchip/rk3328/Kconfig b/arch/arm/mach-rockchip/rk3328/Kconfig
-index d5cb649ae6ba..681a1a624da2 100644
---- a/arch/arm/mach-rockchip/rk3328/Kconfig
-+++ b/arch/arm/mach-rockchip/rk3328/Kconfig
-@@ -22,7 +22,7 @@ config SYS_SOC
- 	default "rk3328"
- 
- config SYS_MALLOC_F_LEN
--	default 0x2000
-+	default 0x4000
- 
- config SPL_LIBCOMMON_SUPPORT
- 	default y
-diff --git a/configs/evb-rk3328_defconfig b/configs/evb-rk3328_defconfig
-index da422c8ba4e7..f456f6d88f9b 100644
---- a/configs/evb-rk3328_defconfig
-+++ b/configs/evb-rk3328_defconfig
-@@ -5,7 +5,7 @@ CONFIG_ARCH_ROCKCHIP=y
- CONFIG_TEXT_BASE=0x00200000
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x800000
- CONFIG_SF_DEFAULT_SPEED=20000000
- CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE="rk3328-evb"
-@@ -17,7 +17,6 @@ CONFIG_TPL_LIBGENERIC_SUPPORT=y
- CONFIG_SPL_STACK_R_ADDR=0x4000000
- CONFIG_SPL_STACK=0x400000
- CONFIG_TPL_SYS_MALLOC_F_LEN=0x800
--CONFIG_SPL_SYS_MALLOC_F_LEN=0x4000
- CONFIG_DEBUG_UART_BASE=0xFF130000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_SYS_LOAD_ADDR=0x800800
-@@ -39,7 +38,6 @@ CONFIG_SPL_BSS_MAX_SIZE=0x2000
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
- # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
- CONFIG_SPL_STACK_R=y
--CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x10000
- CONFIG_SPL_ATF=y
- CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
- CONFIG_TPL_SYS_MALLOC_SIMPLE=y
-diff --git a/configs/nanopi-r2c-plus-rk3328_defconfig b/configs/nanopi-r2c-plus-rk3328_defconfig
-index 25850328f8b8..ccac94ab0961 100644
---- a/configs/nanopi-r2c-plus-rk3328_defconfig
-+++ b/configs/nanopi-r2c-plus-rk3328_defconfig
-@@ -6,7 +6,7 @@ CONFIG_TEXT_BASE=0x00200000
- CONFIG_SPL_GPIO=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x800000
- CONFIG_SF_DEFAULT_SPEED=20000000
- CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE="rk3328-nanopi-r2c-plus"
-@@ -15,7 +15,7 @@ CONFIG_ROCKCHIP_RK3328=y
- CONFIG_TPL_ROCKCHIP_COMMON_BOARD=y
- CONFIG_TPL_LIBCOMMON_SUPPORT=y
- CONFIG_TPL_LIBGENERIC_SUPPORT=y
--CONFIG_SPL_STACK_R_ADDR=0x600000
-+CONFIG_SPL_STACK_R_ADDR=0x4000000
- CONFIG_SPL_STACK=0x400000
- CONFIG_TPL_SYS_MALLOC_F_LEN=0x800
- CONFIG_DEBUG_UART_BASE=0xFF130000
-diff --git a/configs/nanopi-r2c-rk3328_defconfig b/configs/nanopi-r2c-rk3328_defconfig
-index a4cb148246e6..0097cf98ed79 100644
---- a/configs/nanopi-r2c-rk3328_defconfig
-+++ b/configs/nanopi-r2c-rk3328_defconfig
-@@ -6,7 +6,7 @@ CONFIG_TEXT_BASE=0x00200000
- CONFIG_SPL_GPIO=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x800000
- CONFIG_SF_DEFAULT_SPEED=20000000
- CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE="rk3328-nanopi-r2c"
-@@ -15,7 +15,7 @@ CONFIG_ROCKCHIP_RK3328=y
- CONFIG_TPL_ROCKCHIP_COMMON_BOARD=y
- CONFIG_TPL_LIBCOMMON_SUPPORT=y
- CONFIG_TPL_LIBGENERIC_SUPPORT=y
--CONFIG_SPL_STACK_R_ADDR=0x600000
-+CONFIG_SPL_STACK_R_ADDR=0x4000000
- CONFIG_SPL_STACK=0x400000
- CONFIG_TPL_SYS_MALLOC_F_LEN=0x800
- CONFIG_DEBUG_UART_BASE=0xFF130000
-diff --git a/configs/nanopi-r2s-rk3328_defconfig b/configs/nanopi-r2s-rk3328_defconfig
-index c5d13788528b..4b43818b7dc7 100644
---- a/configs/nanopi-r2s-rk3328_defconfig
-+++ b/configs/nanopi-r2s-rk3328_defconfig
-@@ -6,7 +6,7 @@ CONFIG_TEXT_BASE=0x00200000
- CONFIG_SPL_GPIO=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x800000
- CONFIG_SF_DEFAULT_SPEED=20000000
- CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE="rk3328-nanopi-r2s"
-@@ -15,7 +15,7 @@ CONFIG_ROCKCHIP_RK3328=y
- CONFIG_TPL_ROCKCHIP_COMMON_BOARD=y
- CONFIG_TPL_LIBCOMMON_SUPPORT=y
- CONFIG_TPL_LIBGENERIC_SUPPORT=y
--CONFIG_SPL_STACK_R_ADDR=0x600000
-+CONFIG_SPL_STACK_R_ADDR=0x4000000
- CONFIG_SPL_STACK=0x400000
- CONFIG_TPL_SYS_MALLOC_F_LEN=0x800
- CONFIG_DEBUG_UART_BASE=0xFF130000
-diff --git a/configs/orangepi-r1-plus-lts-rk3328_defconfig b/configs/orangepi-r1-plus-lts-rk3328_defconfig
-index 6360f5df3864..18e253c44154 100644
---- a/configs/orangepi-r1-plus-lts-rk3328_defconfig
-+++ b/configs/orangepi-r1-plus-lts-rk3328_defconfig
-@@ -6,7 +6,7 @@ CONFIG_TEXT_BASE=0x00200000
- CONFIG_SPL_GPIO=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x800000
- CONFIG_SF_DEFAULT_SPEED=20000000
- CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE="rk3328-orangepi-r1-plus-lts"
-@@ -16,7 +16,7 @@ CONFIG_TPL_ROCKCHIP_COMMON_BOARD=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_TPL_LIBCOMMON_SUPPORT=y
- CONFIG_TPL_LIBGENERIC_SUPPORT=y
--CONFIG_SPL_STACK_R_ADDR=0x600000
-+CONFIG_SPL_STACK_R_ADDR=0x4000000
- CONFIG_SPL_STACK=0x400000
- CONFIG_TPL_SYS_MALLOC_F_LEN=0x800
- CONFIG_DEBUG_UART_BASE=0xFF130000
-diff --git a/configs/orangepi-r1-plus-rk3328_defconfig b/configs/orangepi-r1-plus-rk3328_defconfig
-index 9473a08fe20d..8a403b5c664d 100644
---- a/configs/orangepi-r1-plus-rk3328_defconfig
-+++ b/configs/orangepi-r1-plus-rk3328_defconfig
-@@ -6,7 +6,7 @@ CONFIG_TEXT_BASE=0x00200000
- CONFIG_SPL_GPIO=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x800000
- CONFIG_SF_DEFAULT_SPEED=20000000
- CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE="rk3328-orangepi-r1-plus"
-@@ -16,7 +16,7 @@ CONFIG_TPL_ROCKCHIP_COMMON_BOARD=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_TPL_LIBCOMMON_SUPPORT=y
- CONFIG_TPL_LIBGENERIC_SUPPORT=y
--CONFIG_SPL_STACK_R_ADDR=0x600000
-+CONFIG_SPL_STACK_R_ADDR=0x4000000
- CONFIG_SPL_STACK=0x400000
- CONFIG_TPL_SYS_MALLOC_F_LEN=0x800
- CONFIG_DEBUG_UART_BASE=0xFF130000
-diff --git a/configs/roc-cc-rk3328_defconfig b/configs/roc-cc-rk3328_defconfig
-index c66b1ccba267..b6e0bd2fb47a 100644
---- a/configs/roc-cc-rk3328_defconfig
-+++ b/configs/roc-cc-rk3328_defconfig
-@@ -6,7 +6,7 @@ CONFIG_TEXT_BASE=0x00200000
- CONFIG_SPL_GPIO=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x800000
- CONFIG_SF_DEFAULT_SPEED=20000000
- CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE="rk3328-roc-cc"
-@@ -15,7 +15,7 @@ CONFIG_ROCKCHIP_RK3328=y
- CONFIG_TPL_ROCKCHIP_COMMON_BOARD=y
- CONFIG_TPL_LIBCOMMON_SUPPORT=y
- CONFIG_TPL_LIBGENERIC_SUPPORT=y
--CONFIG_SPL_STACK_R_ADDR=0x600000
-+CONFIG_SPL_STACK_R_ADDR=0x4000000
- CONFIG_SPL_STACK=0x400000
- CONFIG_TPL_SYS_MALLOC_F_LEN=0x800
- CONFIG_DEBUG_UART_BASE=0xFF130000
-diff --git a/configs/rock-pi-e-rk3328_defconfig b/configs/rock-pi-e-rk3328_defconfig
-index 275ffc3ed8f4..e5e96cd59b77 100644
---- a/configs/rock-pi-e-rk3328_defconfig
-+++ b/configs/rock-pi-e-rk3328_defconfig
-@@ -6,7 +6,7 @@ CONFIG_TEXT_BASE=0x00200000
- CONFIG_SPL_GPIO=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x800000
- CONFIG_SF_DEFAULT_SPEED=20000000
- CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE="rk3328-rock-pi-e"
-@@ -18,7 +18,6 @@ CONFIG_TPL_LIBGENERIC_SUPPORT=y
- CONFIG_SPL_STACK_R_ADDR=0x4000000
- CONFIG_SPL_STACK=0x400000
- CONFIG_TPL_SYS_MALLOC_F_LEN=0x800
--CONFIG_SPL_SYS_MALLOC_F_LEN=0x4000
- CONFIG_DEBUG_UART_BASE=0xFF130000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_SYS_LOAD_ADDR=0x800800
-@@ -40,7 +39,6 @@ CONFIG_SPL_BSS_MAX_SIZE=0x2000
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
- # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
- CONFIG_SPL_STACK_R=y
--CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x10000
- CONFIG_SPL_POWER=y
- CONFIG_SPL_ATF=y
- CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
-diff --git a/configs/rock64-rk3328_defconfig b/configs/rock64-rk3328_defconfig
-index 1cb4e6777d45..408ebe0aa264 100644
---- a/configs/rock64-rk3328_defconfig
-+++ b/configs/rock64-rk3328_defconfig
-@@ -6,7 +6,7 @@ CONFIG_TEXT_BASE=0x00200000
- CONFIG_SPL_GPIO=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x800000
- CONFIG_SF_DEFAULT_SPEED=20000000
- CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE="rk3328-rock64"
-@@ -16,7 +16,7 @@ CONFIG_TPL_ROCKCHIP_COMMON_BOARD=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_TPL_LIBCOMMON_SUPPORT=y
- CONFIG_TPL_LIBGENERIC_SUPPORT=y
--CONFIG_SPL_STACK_R_ADDR=0x600000
-+CONFIG_SPL_STACK_R_ADDR=0x4000000
- CONFIG_SPL_STACK=0x400000
- CONFIG_TPL_SYS_MALLOC_F_LEN=0x800
- CONFIG_DEBUG_UART_BASE=0xFF130000
--- 
-2.43.0
+I suppose TI's BSP has older U-Boot... So it's not providing necessary
+script for BOOTSTD, I suppose?
+
+--=20
+Alexander Sverdlin.
 
