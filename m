@@ -4,70 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73252C48BC4
-	for <u-boot@archiver.kernel.org>; Sat, 17 Feb 2024 20:21:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E7E0C48BC4
+	for <u-boot@archiver.kernel.org>; Sat, 17 Feb 2024 23:36:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB63D8785A;
-	Sat, 17 Feb 2024 21:21:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.net
+	by phobos.denx.de (Postfix) with ESMTP id 717DA878AA;
+	Sun, 18 Feb 2024 00:36:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.net header.i=wahrenst@gmx.net header.b="tD4PW1/S";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="PDvydmfy";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="fvcV9nT6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8EC7C87E79; Sat, 17 Feb 2024 21:21:36 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ id 60B3F87763; Sun, 18 Feb 2024 00:36:12 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E998F87811
- for <u-boot@lists.denx.de>; Sat, 17 Feb 2024 21:21:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B9E3B87E6D
+ for <u-boot@lists.denx.de>; Sun, 18 Feb 2024 00:36:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.net
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=wahrenst@gmx.net
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
- s=s31663417; t=1708201284; x=1708806084; i=wahrenst@gmx.net;
- bh=rED0s7pJ6SlNRKx9wExE4SjxqDviV5YMv6gdXNy6ewk=;
- h=X-UI-Sender-Class:Date:Subject:To:References:From:In-Reply-To;
- b=tD4PW1/SFSB0pDU5Khr+J/77FAVs1UJCg+H6QXhqrtXbmJ0fZm1wSlIuUlPLSxgk
- kCcMh3/vqn4/fqx/ZxoFrxLzWzKKOCF5R8S2AG6Mv42g+9FIiKpuByrn2WU3lhj1n
- aK/J/85/pD9xWBWQQF2YgYz9H3D08w6d75alvDYGKapBDsEXo2ndi54lxi7XX82TS
- WgiFY65hXD0ZmX2+mvhZXlPCkwqsAHwze1iypL1z0IdcyH8Egarcbyo5SQmoSsU80
- hSFQJ9W7lUhY9YBeeTCZXm4szKA6+p8je3JlGxV6Ku2dE7IaqJRc+Y4stJnviDYgZ
- dhQ1sFZe2ia0QHPC8Q==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.1.167] ([37.4.248.43]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1N8GQs-1qpGSa3K76-014DqK; Sat, 17
- Feb 2024 21:21:24 +0100
-Message-ID: <ade7bba7-bd59-4fd0-af85-c882b552c836@gmx.net>
-Date: Sat, 17 Feb 2024 21:21:24 +0100
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4TclYD367wz9spj;
+ Sun, 18 Feb 2024 00:36:00 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1708212960;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=Z4AvoUz+WV56Duw5CTqaH+xWH3Uyg6jWx/A2QyNIFsM=;
+ b=PDvydmfySqFvayWq0d+YEmROK4o3ZH6f67DuDr6sanr02UyTZvSLtg4nMbcwLVXW7914WA
+ Xq4+OhiILKdQMCZKk2p1MTWgUQ4YHdY1MXj10V8v0BJRgVDnCQUkKHzPQx5WodB4khtXXd
+ MOfPmBq9Sx3tt6RddvFYkP2vwOUXbdfHEEtY1OslczmDfAqh35OmTCfWlMnqNov4IlWMZr
+ YLejrZaZMujndoB5+3dTZN3wu2SFXK5dXWCK8xpc8dz+/kXzbhEV3gDTpN54cA6QEJ9HWD
+ vSZBhJ7oTUJ1t3m0o+ZNXLgQq4FKhXiQJRpU/eNSoHin/kYFcp7mhP/sIBz/Mw==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1708212958;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=Z4AvoUz+WV56Duw5CTqaH+xWH3Uyg6jWx/A2QyNIFsM=;
+ b=fvcV9nT6V3qt1ihdY5lirNkoFSZds/zuSK1Wcljy7giGmdoxziVT8yObCFwzYs8mcGo9gn
+ 2sFw+jY77ShldCoBM0x+UwIehPEeLOn0ss4aI6U0wxVLvZLmSyaMaW8XlgFTKZfT9mJiBR
+ ZyJRrZrHv6pnDbQQlNO6WcTzptOSsltZkCCnH4AZhf5q81zMen1uNGT7RXR83vRwyQVlh3
+ nujU9C1K5KI7BMQYlBY+m89Ng7J8I0KB9nG1q2e8gRPKXPytVzV/wbPGw11FOXLh1YGJlE
+ gfebWvfD67HvXjQjSZkbyzWlljqxNLfn/kBlFi4Dinax8jud98i+Kgqc/u+e1Q==
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ =?UTF-8?q?Niklas=20S=C3=B6derlund?= <niklas.soderlund+renesas@ragnatech.se>
+Subject: [PULL] u-boot-sh/master-porter
+Date: Sun, 18 Feb 2024 00:34:49 +0100
+Message-ID: <20240217233544.174028-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: Booting RPi5B with latest git
-Content-Language: en-US
-To: John <therealgraysky@proton.me>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-References: <VhjYVKfXb22i7OLAE71TUsea5YoQHzRZl2a-pTntu6mAGWiAuixDG1380ukg9ag-1j7_JZUXh8mLYxId4j3mmvjopigOO6NgqVF0aBxC8Io=@proton.me>
-From: Stefan Wahren <wahrenst@gmx.net>
-In-Reply-To: <VhjYVKfXb22i7OLAE71TUsea5YoQHzRZl2a-pTntu6mAGWiAuixDG1380ukg9ag-1j7_JZUXh8mLYxId4j3mmvjopigOO6NgqVF0aBxC8Io=@proton.me>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:xxsI0jHMjP2fcRC+G2f8F5F5Ag0cB2juk1SSt0JOEbXPDydX3tU
- 5UotMSP4HltLqXAYacqCvRjIyrClmioSeQEY6qD0gTMNqVxw/2PTJmyx6heK6bb75KoWENe
- 6autABwP2gCITP03IwDW251dDkqZuV2r40awoH5ZBW4Lfg7GyYmV7GVs5bGlKRuQNJpmWaE
- RTprcS340hfx3Qv6a9Y9w==
-UI-OutboundReport: notjunk:1;M01:P0:55pVfo9dfCA=;zDalEbiUzmOWw0SmFmJVZkOqXsG
- lXM3oWyxFM3cRVwV9Rt/7pnXU1XcrsChcMLYx8d7y6mHY7JlmL5wMgjqC6e5rnB6Cp1iwCIP9
- xw94jW/ROVBiVis6apV6B2Z+/GIH6EqSgtgiF6IZVZdz5oCg15BI14YKSJ4diWo8uY28oJEib
- TQdFPIKCzakIu0pOFQMzDTP4mJwbacVlnCsmo6q5cMuTmS2bJe/RnCaQIM0eKOhygvza+BNG7
- koJe0Xf0K603qUBENSCllDoMjN1IGx2dVowWVt18MlSQlSVbf5JTfLzfbafpuC0DX4VXtnpcc
- YsRwcY0W2XX4GQLWTqQHfk7G9rWifurXJilb0hV5RDEWLG4izQA3UH2FpWKciO3SA/rOEULcx
- g+Bg0KkcvMncID4nYbuHc40zruWwFQEp/be7whtaEc0n1XpZ8krSs19Tqdbz17PqG/kzbOfwn
- 728hSCVZ4bo+qpB7a1HNyaUOMMBy1r8+vDuRlwy1Y5SYAUw1pLNaw++7bhsFb3q7Coq4ePAGn
- so5ROik2VKM5ibO2qVVoJKJrbs/byAD094A75x77GdaaiwBDoZxgYC81vi2V43GHzGZoDJVTM
- UpazkAM7l3srJcuCFNx5iOt+Z/4lHWpPbBaxruMJO0i5NVeRLxSGTGEjzBGslQM479MVRbSiz
- nLH9O2BYbVGRYXBXsEYdkLmzWmsQNhpqMkHKufeUvlz/g3iwCU2tFoMoXMOjzaxLdPHEIzZ9Q
- JvJhw/UQR5veJG4Ie3FuxAFzTYdx7miqOd51jsklz45K8SDaGFVTViAdG3b+69oTH5vnepzDO
- +QHdHlyWufYyBlxtrPhp32GaYVwfYKdjug16LFANwqmVc=
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 6cd14bcdbc15ef84998
+X-MBO-RS-META: 65jwbhfhfjqjmyth1dfcyzd99uxw98ut
+X-Rspamd-Queue-Id: 4TclYD367wz9spj
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,14 +86,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi John,
+The following changes since commit 9e00b6993f724da9699ef12573307afea8c19284:
 
-Am 17.02.24 um 17:33 schrieb John:
-> I am running Arch ARM on a RPi4B and also on a RPi5B. My RPi4B can boot =
-the vanilla kernel package (linux-aarch64) with the latest uboot-raspberry=
-pi (2024.04-rc2) just fine.
-btw the mainline kernel doesn't have any RPi 5 support yet. So you will
-need the vendor kernel.
+  Merge tag 'u-boot-dfu-20240215' of https://source.denx.de/u-boot/custodians/u-boot-dfu (2024-02-15 10:26:24 -0500)
 
-Best regards
+are available in the Git repository at:
 
+  https://source.denx.de/u-boot/custodians/u-boot-sh.git master-porter
+
+for you to fetch changes up to 87f9ffbef5e894bbcea99614520c8afd216bbf1a:
+
+  ARM: renesas: Enable LTO on R-Car (2024-02-17 22:38:20 +0100)
+
+----------------------------------------------------------------
+Marek Vasut (3):
+      ARM: renesas: Disable EFI on R-Car Gen2
+      ARM: renesas: Set R-Car Gen2 board size limit to 512 kiB
+      ARM: renesas: Enable LTO on R-Car
+
+Niklas Söderlund (1):
+      clk: renesas: Fix broken clocks on all Gen2 boards
+
+ Kconfig                             | 3 ++-
+ arch/arm/Kconfig                    | 1 +
+ configs/alt_defconfig               | 2 ++
+ configs/blanche_defconfig           | 2 ++
+ configs/gose_defconfig              | 2 ++
+ configs/koelsch_defconfig           | 2 ++
+ configs/lager_defconfig             | 2 ++
+ configs/porter_defconfig            | 2 ++
+ configs/silk_defconfig              | 2 ++
+ configs/stout_defconfig             | 2 ++
+ drivers/clk/renesas/clk-rcar-gen2.c | 9 +++++++++
+ 11 files changed, 28 insertions(+), 1 deletion(-)
