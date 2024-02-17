@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 653F5C48260
-	for <u-boot@archiver.kernel.org>; Sat, 17 Feb 2024 00:40:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BF92C48BF6
+	for <u-boot@archiver.kernel.org>; Sat, 17 Feb 2024 00:40:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 02A1087EAF;
-	Sat, 17 Feb 2024 01:27:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8ED5987E9C;
+	Sat, 17 Feb 2024 01:27:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="HCF1D3tK";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="TfUtu0E3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9310687E86; Sat, 17 Feb 2024 01:27:04 +0100 (CET)
+ id 47EA287E9C; Sat, 17 Feb 2024 01:27:29 +0100 (CET)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5FD8287E6F
- for <u-boot@lists.denx.de>; Sat, 17 Feb 2024 01:26:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AC77687EAC
+ for <u-boot@lists.denx.de>; Sat, 17 Feb 2024 01:26:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,20 +28,23 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1708129447; bh=6M6pl2m1kCaEBFxfGsETYSpjUuJw/7PZoN7lGWjge20=;
- b=HCF1D3tKl9djE/EzWYbrVx4cmSydMU+yXg2xve6Y8pdNHWJGHobNmAdZ0NGH/e0MTGGK9QOjg
- IYhOolc17puij6OXsuUKga4uocCa4JlcF+ntKQ2YVB7R2BQSJZaovVnblY7COnSyeu7kyVdFSQj
- DLV5kYZUsl48P1jjykG+khIH+AK4zQfgmmYbXsdkCmL67q4mQYUYWQtymBhvu1cGQKeN2A4SXbV
- 6U7FnnU25IuYzJGv/bmd4QZQm28JRIf6N289xea5JqjXEAYWwseS7cMT8Qm9rbvx0yitp8XehHY
- hnf1cKaegUm3pJCe75uOyynXZxLCKkkgaZhkG+KK9N1w==
+ t=1708129455; bh=g0onsKXxQ3QUnjq74nH6WYn+WqksPhCSeMIYEezGfIY=;
+ b=TfUtu0E3yiAv8ra3PmmjaISfrCqxUN9NRjgYrgOjoqM3VY2Nlx+dGY1zEo2+ozPMwwJv8Y9dq
+ bnD0UWIqstnmVeV+IpAWMbNa3ULfcUonbJ9j+/CD9jT7LZqNZ5Q4B/DPUcnrAvSKPkqShw5Eo6S
+ hYlkg6NQ9mfLiIBHfk8l1YBBfghO9rh40VTPFAZR+q/R4Yyc1qSU+Rfwot7gzYM1WQPz+F+lU08
+ 4H+fh3GrE5pav9Rx+7ZajXxNx8pBIcli13DtS6YVkfNp2AWM2RwVk96DjGWhtT5P9LtTqQg8N3f
+ FIzva9GR8jlsK9zNBItnkSpzpMp7Sq8Uuz2b2JH28wrQ==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ "Matwey V. Kornilov" <matwey.kornilov@gmail.com>, Jonas Karlman
+ <jonas@kwiboo.se>
 Cc: Dragan Simic <dsimic@manjaro.org>, Tianling Shen <cnsztl@gmail.com>,
- u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v2 12/15] Revert "rockchip: Allow booting from SPI"
-Date: Sat, 17 Feb 2024 00:22:38 +0000
-Message-ID: <20240217002304.2141064-13-jonas@kwiboo.se>
+ u-boot@lists.denx.de
+Subject: [PATCH v2 14/15] rockchip: rk3328-rock64: Enable boot from SPI NOR
+ flash
+Date: Sat, 17 Feb 2024 00:22:40 +0000
+Message-ID: <20240217002304.2141064-15-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240217002304.2141064-1-jonas@kwiboo.se>
 References: <20240217002304.2141064-1-jonas@kwiboo.se>
@@ -53,7 +56,7 @@ X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
-X-ForwardEmail-ID: 65cffca5bb96cee8b5411f57
+X-ForwardEmail-ID: 65cffcadbb96cee8b5411f7b
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,34 +73,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This reverts commit 3523c07867b403d5b3b68812aebac8a5afa5be4c.
+Add Kconfig options to enable support for booting from SPI NOR flash on
+Pine64 Rock64.
 
-Booting from SPI was already allowed before this commit was first
-introduced. A few lines further down the exact same code already existed
-and still does.
+The generated bootable u-boot-rockchip-spi.bin can be written to 0x0 of
+SPI NOR flash. The FIT image is loaded from 0x60000, same as on RK35xx
+boards.
+
+  => sf probe
+  SF: Detected gd25q128 with page size 256 Bytes, erase size 4 KiB, total 16 MiB
+
+  => load mmc 1:1 10000000 u-boot-rockchip-spi.bin
+  1359872 bytes read in 65 ms (20 MiB/s)
+
+  => sf update ${fileaddr} 0 ${filesize}
+  device 0 offset 0x0, size 0x14c000
+  1118208 bytes written, 241664 bytes skipped in 8.516s, speed 163516 B/s
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+Reviewed-by: Dragan Simic <dsimic@manjaro.org>
 ---
 v2:
-- No change
+- Include SPI flash pinctrl nodes in SPL
+- Enable SPI_FLASH_XTX
+- Collect r-b tag
 ---
- arch/arm/mach-rockchip/spl-boot-order.c | 3 ---
- 1 file changed, 3 deletions(-)
+ arch/arm/dts/rk3328-rock64-u-boot.dtsi | 16 ++++++++++++++++
+ configs/rock64-rk3328_defconfig        |  9 +++++++++
+ 2 files changed, 25 insertions(+)
 
-diff --git a/arch/arm/mach-rockchip/spl-boot-order.c b/arch/arm/mach-rockchip/spl-boot-order.c
-index 2c39a215c107..79c856d2a0ac 100644
---- a/arch/arm/mach-rockchip/spl-boot-order.c
-+++ b/arch/arm/mach-rockchip/spl-boot-order.c
-@@ -65,9 +65,6 @@ static int spl_node_to_boot_device(int node)
- 		default:
- 			return -ENOSYS;
- 		}
--	} else if (!uclass_get_device_by_of_offset(UCLASS_SPI_FLASH, node,
--		&parent)) {
--		return BOOT_DEVICE_SPI;
- 	}
+diff --git a/arch/arm/dts/rk3328-rock64-u-boot.dtsi b/arch/arm/dts/rk3328-rock64-u-boot.dtsi
+index 9de645d8d7ab..85426495c3d8 100644
+--- a/arch/arm/dts/rk3328-rock64-u-boot.dtsi
++++ b/arch/arm/dts/rk3328-rock64-u-boot.dtsi
+@@ -39,6 +39,22 @@
+ 	};
+ };
  
- 	/*
++&spi0m2_clk {
++	bootph-pre-ram;
++};
++
++&spi0m2_cs0 {
++	bootph-pre-ram;
++};
++
++&spi0m2_rx {
++	bootph-pre-ram;
++};
++
++&spi0m2_tx {
++	bootph-pre-ram;
++};
++
+ &vcc_sd {
+ 	bootph-pre-ram;
+ };
+diff --git a/configs/rock64-rk3328_defconfig b/configs/rock64-rk3328_defconfig
+index feda87014286..0c640d7eaadc 100644
+--- a/configs/rock64-rk3328_defconfig
++++ b/configs/rock64-rk3328_defconfig
+@@ -13,6 +13,7 @@ CONFIG_DEFAULT_DEVICE_TREE="rk3328-rock64"
+ CONFIG_DM_RESET=y
+ CONFIG_ROCKCHIP_RK3328=y
+ CONFIG_TPL_ROCKCHIP_COMMON_BOARD=y
++CONFIG_ROCKCHIP_SPI_IMAGE=y
+ CONFIG_TPL_LIBCOMMON_SUPPORT=y
+ CONFIG_TPL_LIBGENERIC_SUPPORT=y
+ CONFIG_SPL_STACK_R_ADDR=0x600000
+@@ -20,6 +21,8 @@ CONFIG_SPL_STACK=0x400000
+ CONFIG_TPL_SYS_MALLOC_F_LEN=0x800
+ CONFIG_DEBUG_UART_BASE=0xFF130000
+ CONFIG_DEBUG_UART_CLOCK=24000000
++CONFIG_SPL_SPI_FLASH_SUPPORT=y
++CONFIG_SPL_SPI=y
+ CONFIG_SYS_LOAD_ADDR=0x800800
+ CONFIG_DEBUG_UART=y
+ # CONFIG_ANDROID_BOOT_IMAGE is not set
+@@ -41,6 +44,8 @@ CONFIG_SPL_BSS_MAX_SIZE=0x2000
+ # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+ CONFIG_SPL_STACK_R=y
+ CONFIG_SPL_POWER=y
++CONFIG_SPL_SPI_LOAD=y
++CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
+ CONFIG_SPL_ATF=y
+ CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+ CONFIG_TPL_SYS_MALLOC_SIMPLE=y
+@@ -78,7 +83,11 @@ CONFIG_MISC=y
+ CONFIG_ROCKCHIP_EFUSE=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
++CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+ CONFIG_SPI_FLASH_GIGADEVICE=y
++CONFIG_SPI_FLASH_MACRONIX=y
++CONFIG_SPI_FLASH_WINBOND=y
++CONFIG_SPI_FLASH_XTX=y
+ CONFIG_PHY_REALTEK=y
+ CONFIG_DM_ETH_PHY=y
+ CONFIG_PHY_GIGE=y
 -- 
 2.43.0
 
