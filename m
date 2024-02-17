@@ -4,57 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92032C48BC4
-	for <u-boot@archiver.kernel.org>; Sat, 17 Feb 2024 18:43:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68173C48BC4
+	for <u-boot@archiver.kernel.org>; Sat, 17 Feb 2024 19:17:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 84B1487EEA;
-	Sat, 17 Feb 2024 19:38:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 770D587DCD;
+	Sat, 17 Feb 2024 20:17:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=proton.me
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="Dp8CL5nf";
+	dkim=pass (2048-bit key; secure) header.d=proton.me header.i=@proton.me header.b="Brzi+XmQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B4F387E60; Sat, 17 Feb 2024 19:37:52 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id 6539087DFA; Sat, 17 Feb 2024 20:17:15 +0100 (CET)
+Received: from mail-40135.protonmail.ch (mail-40135.protonmail.ch
+ [185.70.40.135])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8AB5387E93
- for <u-boot@lists.denx.de>; Sat, 17 Feb 2024 19:37:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 58ECE87DBB
+ for <u-boot@lists.denx.de>; Sat, 17 Feb 2024 20:17:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=proton.me
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=f1ab=J3=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1708195032; bh=+wThmMe07uFvuz8Qq6m+kdatC3D3G/3Yg0ChgAmyzOw=;
- b=Dp8CL5nf9YWi53dZ1KBBa+KyEtNZaccxxWLs7VTo4wRKqwaXdChezJe4KOpABMumJEW/SJx5n
- 7tK5fY5y0AzhPr7E/S6PEZ4Foc0Bz248E8NOs//cseSxFrnrGEICa/QM/moi9CeZXaLmbuKU4FB
- cW6A+HsSj7G/usq3suUMbzW0WJ7oLtwOuIsZIrJD0vdzZ/GE4MePIRbD51gaEY2qGghDLWceKE5
- Z+/5S977uxXqc4q2B0bUS2feMHXCU6aOODKpfyUxHUfYIFUUiPu2DxpwJX6GqKUsPOP8ebMEkWp
- OaiH7cW5H6fnm/rc5BVb9hOvcLLqDDFLMZ95KRey2MSQ==
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>
-Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>,
- u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 11/11] rockchip: google: gru: Migrate to use IO-domain driver
-Date: Sat, 17 Feb 2024 18:35:56 +0000
-Message-ID: <20240217183610.2621132-12-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240217183610.2621132-1-jonas@kwiboo.se>
-References: <20240217183610.2621132-1-jonas@kwiboo.se>
+ spf=pass smtp.mailfrom=therealgraysky@proton.me
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
+ s=r5n2m4hsfvepdj5cthzj2ftffm.protonmail; t=1708197429; x=1708456629;
+ bh=e8ZgEHZetu36vOskrF6nDLyQ+/uPEA+EPZSpCks/3PM=;
+ h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+ Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+ Message-ID:BIMI-Selector;
+ b=Brzi+XmQXf1WCgdqQI1+MSNqZK+26mPArs//nOaIlF7Jtcx/2CdayzMqej+4FgSi9
+ zP2rYNlJqx4Ufvn+e6E4GRNS2mWIvriIDcBqQ4Gdly2xrpwygUwN7JzuVeZxzU8leQ
+ s4KjOo5lxnyMGWdJPdHuO/Tj5YvRStaz3tiICSd/+0btgTake0xj4R4+C6xhctyj1Y
+ CzeFLbB6tEtNdAYbRDpTdhxYJunsOUZBqL4I83HPMBhYQwtpf9jx1ViqBhdwWbDaQA
+ QIr6/zTjUU4WXnI7xzOa2FEjbbMKxEJ5YT/sXY8hx2/0kaJJhn8bwfZAQoUbQsPXVY
+ 2Fg8rAITe+cOw==
+Date: Sat, 17 Feb 2024 19:16:56 +0000
+To: Jojan <jjvazha@yahoo.com>
+From: John <therealgraysky@proton.me>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: Booting RPi5B with latest git
+Message-ID: <DGgjhERuQGB1Y5hPRvHb9voUNFMnLh01k7vLy61hTmLJ95fcKvnDP_AmTzTBA0jBbmDNXRza4jl_KWr2UrSja5RLGnFveMiWGXM3Mpk8v-E=@proton.me>
+In-Reply-To: <1031326949.2069496.1708196119886@mail.yahoo.com>
+References: <VhjYVKfXb22i7OLAE71TUsea5YoQHzRZl2a-pTntu6mAGWiAuixDG1380ukg9ag-1j7_JZUXh8mLYxId4j3mmvjopigOO6NgqVF0aBxC8Io=@proton.me>
+ <1031326949.2069496.1708196119886@mail.yahoo.com>
+Feedback-ID: 47473199:user:proton
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 65d0fcd6af53a5c07f266d14
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,97 +67,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Switch to use the IO-domain driver to configure IO-domain based on
-device tree instead of a setup_iodomain() function.
 
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
-This should be runtime tested by someone with a gru device. All DT props
-and driver seem to be enabled and I expect the io_vsel and soc_con0 to
-be configured with correct value.
----
- board/google/gru/gru.c             | 35 ------------------------------
- configs/chromebook_bob_defconfig   |  1 +
- configs/chromebook_kevin_defconfig |  1 +
- 3 files changed, 2 insertions(+), 35 deletions(-)
+On Saturday, February 17th, 2024 at 1:55 PM, Jojan <jjvazha@yahoo.com> wrot=
+e:
 
-diff --git a/board/google/gru/gru.c b/board/google/gru/gru.c
-index 9cb3a5252047..e08cb42c27ed 100644
---- a/board/google/gru/gru.c
-+++ b/board/google/gru/gru.c
-@@ -3,18 +3,9 @@
-  * Copyright 2018 Google
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <init.h>
--#include <syscon.h>
- #include <asm/arch-rockchip/clock.h>
--#include <asm/arch-rockchip/grf_rk3399.h>
--#include <asm/arch-rockchip/hardware.h>
--
--#define GRF_IO_VSEL_BT656_SHIFT 0
--#define GRF_IO_VSEL_AUDIO_SHIFT 1
--#define PMUGRF_CON0_VSEL_SHIFT 8
--#define PMUGRF_CON0_VOL_SHIFT 9
- 
- #ifdef CONFIG_SPL_BUILD
- /* provided to defeat compiler optimisation in board_init_f() */
-@@ -63,29 +54,3 @@ int board_early_init_r(void)
- 	return 0;
- }
- #endif
--
--static void setup_iodomain(void)
--{
--	struct rk3399_grf_regs *grf =
--	   syscon_get_first_range(ROCKCHIP_SYSCON_GRF);
--	struct rk3399_pmugrf_regs *pmugrf =
--	   syscon_get_first_range(ROCKCHIP_SYSCON_PMUGRF);
--
--	/* BT656 and audio is in 1.8v domain */
--	rk_setreg(&grf->io_vsel, (1 << GRF_IO_VSEL_BT656_SHIFT |
--				  1 << GRF_IO_VSEL_AUDIO_SHIFT));
--
--	/*
--	 * Set GPIO1 1.8v/3.0v source select to PMU1830_VOL
--	 * and explicitly configure that PMU1830_VOL to be 1.8V
--	 */
--	rk_setreg(&pmugrf->soc_con0, (1 << PMUGRF_CON0_VSEL_SHIFT |
--				      1 << PMUGRF_CON0_VOL_SHIFT));
--}
--
--int rockchip_early_misc_init_r(void)
--{
--	setup_iodomain();
--
--	return 0;
--}
-diff --git a/configs/chromebook_bob_defconfig b/configs/chromebook_bob_defconfig
-index 28697b174a05..9e13b3544d05 100644
---- a/configs/chromebook_bob_defconfig
-+++ b/configs/chromebook_bob_defconfig
-@@ -66,6 +66,7 @@ CONFIG_I2C_CROS_EC_TUNNEL=y
- CONFIG_SYS_I2C_ROCKCHIP=y
- CONFIG_I2C_MUX=y
- CONFIG_CROS_EC_KEYB=y
-+CONFIG_ROCKCHIP_IODOMAIN=y
- CONFIG_CROS_EC=y
- CONFIG_CROS_EC_SPI=y
- CONFIG_PWRSEQ=y
-diff --git a/configs/chromebook_kevin_defconfig b/configs/chromebook_kevin_defconfig
-index aab938014e38..e1e80447de3c 100644
---- a/configs/chromebook_kevin_defconfig
-+++ b/configs/chromebook_kevin_defconfig
-@@ -67,6 +67,7 @@ CONFIG_I2C_CROS_EC_TUNNEL=y
- CONFIG_SYS_I2C_ROCKCHIP=y
- CONFIG_I2C_MUX=y
- CONFIG_CROS_EC_KEYB=y
-+CONFIG_ROCKCHIP_IODOMAIN=y
- CONFIG_CROS_EC=y
- CONFIG_CROS_EC_SPI=y
- CONFIG_PWRSEQ=y
--- 
-2.43.0
+> For RPi 5B you need bcm2712 device tree . RPi4 uses 2711.
+> So the e rpi_arm64_confi does not work for RPi5
+>=20
 
+Which config target did you build or did you modify rpi_arm64_config?  If s=
+o, can you share the diff?  You mentioned modifying "the config" in your me=
+ssage below.
+
+> Also make sure that you have the changes=C2=A0 discussed here.[GIT PULL] =
+rpi: updates for v2024.04 (mail-archive.com)
+
+I built from the master branch of the github mirror.  That should have thes=
+e changes incorporate, no?  https://github.com/u-boot/u-boot/commits/master=
+/
+
+> Iwas able to get the git (https://source.denx.de/u-boot/custodians/u-boot=
+-raspberrypi.git=C2=A0tags/rpi-next-2024.04)
+>=20
+> and modify the config to get 2712 dts file, and able to get u-boot.
+> [GIT PULL] rpi: updates for v2024.04
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+>=20
+> On Saturday, February 17, 2024 at 08:36:22 AM PST, John <therealgraysky@p=
+roton.me> wrote:
+>=20
+>=20
+> I am running Arch ARM on a RPi4B and also on a RPi5B. My RPi4B can boot t=
+he vanilla kernel package (linux-aarch64) with the latest uboot-raspberrypi=
+ (2024.04-rc2) just fine. Yet, if I take that uSD card and place it in my R=
+Pi5B, it does not boot. I only see the "U-Boot" submarine logo in the upper=
+ right of the screen/no debug output. Any thoughts are appreciated.
+>=20
+> I built u-boot like this:
+>=20
+> unset CFLAGS
+> unset CXXFLAGS
+> unset CPPFLAGS
+>=20
+> make rpi_arm64_config
+> echo 'CONFIG_IDENT_STRING=3D" Arch Linux ARM"' >> .config
+> make EXTRAVERSION=3D-2024.04rc2
