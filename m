@@ -4,49 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A631C48260
-	for <u-boot@archiver.kernel.org>; Sat, 17 Feb 2024 00:41:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCD04C48260
+	for <u-boot@archiver.kernel.org>; Sat, 17 Feb 2024 00:58:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E684E87E95;
-	Sat, 17 Feb 2024 01:28:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 257F087B71;
+	Sat, 17 Feb 2024 01:58:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="Hv/ZP4Wk";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="u6k1dROj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B9CFA87E32; Sat, 17 Feb 2024 01:27:17 +0100 (CET)
+ id C2367879AF; Sat, 17 Feb 2024 01:58:34 +0100 (CET)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5FDAE87EAB
- for <u-boot@lists.denx.de>; Sat, 17 Feb 2024 01:26:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C15A878DF
+ for <u-boot@lists.denx.de>; Sat, 17 Feb 2024 01:58:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=SRS0=4c2a=J2=kwiboo.se=jonas@fe-bounces.kwiboo.se
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1708129438; bh=aF9THy9dbUDZsYnZ5mjt032yGGHq2esaylAgj0k8xiw=;
- b=Hv/ZP4WkTvGHQNuGT+9DgngvAykmINNeJsQw8i4quSVnIeFhcK6gpLNgs1vB884aSWIIJPawB
- uaz975Ao3KRb7OFOi3zyL6a5jRxI7/Ccsm3KEYi6k5aHdxRbnItQtvFJai7bRcwWoW56KM55MMc
- LAZYOaNz8cNKkvPb8ngW+4yd63N5EPwuAyobLC49/7T0evb5WsrlvitfyK4PcIYq74OKTe2FDFB
- TF4QKUStZwcmPTvOyCG1AvXoUdxXwPGSF1mrdyFbvDsLPehzXRvHvcLwfW/79iU0o75284zgmjG
- y6LBrsG045vZCopToCfeW3KOTuMZ5AZXLj1eLbEjHmrw==
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1708131502;
+ bh=WuLNJkjnFF2KRXOOFQoZPwN19n6S2SbO82RH1nzWThw=;
+ b=u6k1dROjZZyC/Ev4mBHXRfQd1ck1BtFRpcd2Y86VC97uskkzuCC2oCkowncVj4Sa8DpqyVzbR
+ GT9vlbSELu1UT67MqXuKG+BM7dDnIaquvZ9k4vImYQCAqWYgVoT/Gzm57QareTujnUmy8q08TLo
+ hNj66ZS//4DGUOk3GKeta+NNZaXnTT0bxS3aSlvzF2JeUqkcaDPuj2YZ/HEA6rMJEqsEUYcgm+s
+ xnu+4HdcIL+h7URMGouHQm9sjK9VSLT2E/AH7amMvPP02AtRwRfMKteCWvc2sOOlx6uE+9nbS1o
+ 5FfylNa9ypgXVs3LNYsMnP5zFmVbvhqfZqYNgQxUwV1w==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Jagan Teki <jagan@amarulasolutions.com>, Sughosh Ganu
- <sughosh.ganu@linaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Dragan Simic <dsimic@manjaro.org>, Tianling Shen <cnsztl@gmail.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>,
  u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v2 10/15] rng: rockchip: Use same compatible as linux
-Date: Sat, 17 Feb 2024 00:22:36 +0000
-Message-ID: <20240217002304.2141064-11-jonas@kwiboo.se>
+Subject: [PATCH v2 0/2] rockchip: Update stack and bss addresses on RK3328 and
+ RK3399
+Date: Sat, 17 Feb 2024 00:58:08 +0000
+Message-ID: <20240217005817.2150377-1-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240217002304.2141064-1-jonas@kwiboo.se>
-References: <20240217002304.2141064-1-jonas@kwiboo.se>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Report-Abuse-To: abuse@forwardemail.net
@@ -55,7 +52,7 @@ X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
-X-ForwardEmail-ID: 65cffc9cbb96cee8b5411f33
+X-ForwardEmail-ID: 65d004ae20aeacdad56da2da
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,69 +69,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Replace the rockchip,cryptov1-rng compatible with compatibles used in
-the linux device tree for RK3288, RK3328 and RK3399 to ease sync of SoC
-device tree from linux.
+With the stack and text base used by U-Boot SPL and proper on RK3328 and
+RK3399 there is a high likelihood of overlapping when U-Boot proper +
+FDT nears 1 MiB in size.
 
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
----
-v2:
-- No change
+Trying to run U-Boot proper close to 1 MiB in size with debug logging
+something similar to following can be observed:
+
+  FDT 00000000002fc4e0 gd 00000000002fddf0
+  FDT overlap
+  resetting ...
+  System reset not supported on this platform
+  ### ERROR ### Please RESET the board ###
+
+Fix this by changing stack and bss addresses used on RK3328 and RK3399.
+The addresses chosen for stack and bss is a combination from both boards.
+
+Changes in v2:
+- Rebase on v2 of "rockchip: rk3328: Update defconfigs, DTs and enable
+  boot from SPI" [1]
+- Use correct address 0x04000000 for 64 MiB offset in commit message
 - Collect r-b tag
----
- arch/arm/dts/rk3328-u-boot.dtsi |  2 +-
- arch/arm/dts/rk3399-u-boot.dtsi |  2 +-
- drivers/rng/rockchip_rng.c      | 10 +++++++++-
- 3 files changed, 11 insertions(+), 3 deletions(-)
 
-diff --git a/arch/arm/dts/rk3328-u-boot.dtsi b/arch/arm/dts/rk3328-u-boot.dtsi
-index 687c16da5135..ea34bf6b78bb 100644
---- a/arch/arm/dts/rk3328-u-boot.dtsi
-+++ b/arch/arm/dts/rk3328-u-boot.dtsi
-@@ -28,7 +28,7 @@
- 	};
- 
- 	rng: rng@ff060000 {
--		compatible = "rockchip,cryptov1-rng";
-+		compatible = "rockchip,rk3328-crypto";
- 		reg = <0x0 0xff060000 0x0 0x4000>;
- 		status = "okay";
- 	};
-diff --git a/arch/arm/dts/rk3399-u-boot.dtsi b/arch/arm/dts/rk3399-u-boot.dtsi
-index 3423b882c437..87b173e59579 100644
---- a/arch/arm/dts/rk3399-u-boot.dtsi
-+++ b/arch/arm/dts/rk3399-u-boot.dtsi
-@@ -30,7 +30,7 @@
- 	};
- 
- 	rng: rng@ff8b8000 {
--		compatible = "rockchip,cryptov1-rng";
-+		compatible = "rockchip,rk3399-crypto";
- 		reg = <0x0 0xff8b8000 0x0 0x1000>;
- 		status = "okay";
- 	};
-diff --git a/drivers/rng/rockchip_rng.c b/drivers/rng/rockchip_rng.c
-index 705b424cf3dd..e82b5572fec5 100644
---- a/drivers/rng/rockchip_rng.c
-+++ b/drivers/rng/rockchip_rng.c
-@@ -302,7 +302,15 @@ static const struct dm_rng_ops rockchip_rng_ops = {
- 
- static const struct udevice_id rockchip_rng_match[] = {
- 	{
--		.compatible = "rockchip,cryptov1-rng",
-+		.compatible = "rockchip,rk3288-crypto",
-+		.data = (ulong)&rk_cryptov1_soc_data,
-+	},
-+	{
-+		.compatible = "rockchip,rk3328-crypto",
-+		.data = (ulong)&rk_cryptov1_soc_data,
-+	},
-+	{
-+		.compatible = "rockchip,rk3399-crypto",
- 		.data = (ulong)&rk_cryptov1_soc_data,
- 	},
- 	{
+This series depends on v2 of the following two series:
+- rockchip: rk3328: Update defconfigs, DTs and enable boot from SPI [1]
+- rockchip: Read cpuid and generate MAC address from efuse for RK3328
+  and RK3399 [2]
+
+A copy of this series and its two depends can be found at [3].
+
+[1] https://patchwork.ozlabs.org/cover/1900345/
+[2] https://patchwork.ozlabs.org/cover/1897743/
+[3] https://github.com/Kwiboo/u-boot-rockchip/commits/rk3328-update-v2
+
+Jonas Karlman (2):
+  rockchip: rk3328: Update stack addresses
+  rockchip: rk3399: Update stack and bss addresses
+
+ arch/arm/mach-rockchip/rk3328/Kconfig         | 2 +-
+ configs/chromebook_bob_defconfig              | 2 +-
+ configs/chromebook_kevin_defconfig            | 2 +-
+ configs/eaidk-610-rk3399_defconfig            | 4 ++--
+ configs/evb-rk3328_defconfig                  | 4 +---
+ configs/evb-rk3399_defconfig                  | 4 ++--
+ configs/ficus-rk3399_defconfig                | 2 +-
+ configs/firefly-rk3399_defconfig              | 4 ++--
+ configs/khadas-edge-captain-rk3399_defconfig  | 4 ++--
+ configs/khadas-edge-rk3399_defconfig          | 4 ++--
+ configs/khadas-edge-v-rk3399_defconfig        | 4 ++--
+ configs/leez-rk3399_defconfig                 | 4 ++--
+ configs/nanopc-t4-rk3399_defconfig            | 4 ++--
+ configs/nanopi-m4-2gb-rk3399_defconfig        | 4 ++--
+ configs/nanopi-m4-rk3399_defconfig            | 4 ++--
+ configs/nanopi-m4b-rk3399_defconfig           | 4 ++--
+ configs/nanopi-neo4-rk3399_defconfig          | 4 ++--
+ configs/nanopi-r2c-plus-rk3328_defconfig      | 4 ++--
+ configs/nanopi-r2c-rk3328_defconfig           | 4 ++--
+ configs/nanopi-r2s-rk3328_defconfig           | 4 ++--
+ configs/nanopi-r4s-rk3399_defconfig           | 4 ++--
+ configs/orangepi-r1-plus-lts-rk3328_defconfig | 4 ++--
+ configs/orangepi-r1-plus-rk3328_defconfig     | 4 ++--
+ configs/orangepi-rk3399_defconfig             | 4 ++--
+ configs/pinebook-pro-rk3399_defconfig         | 4 ++--
+ configs/pinephone-pro-rk3399_defconfig        | 4 ++--
+ configs/puma-rk3399_defconfig                 | 2 +-
+ configs/roc-cc-rk3328_defconfig               | 4 ++--
+ configs/roc-pc-mezzanine-rk3399_defconfig     | 4 ++--
+ configs/roc-pc-rk3399_defconfig               | 4 ++--
+ configs/rock-4c-plus-rk3399_defconfig         | 4 ++--
+ configs/rock-4se-rk3399_defconfig             | 4 ++--
+ configs/rock-pi-4-rk3399_defconfig            | 4 ++--
+ configs/rock-pi-4c-rk3399_defconfig           | 4 ++--
+ configs/rock-pi-e-rk3328_defconfig            | 4 +---
+ configs/rock-pi-n10-rk3399pro_defconfig       | 4 ++--
+ configs/rock64-rk3328_defconfig               | 4 ++--
+ configs/rock960-rk3399_defconfig              | 4 ++--
+ configs/rockpro64-rk3399_defconfig            | 4 ++--
+ 39 files changed, 71 insertions(+), 75 deletions(-)
+
 -- 
 2.43.0
 
