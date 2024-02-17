@@ -4,54 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63A75C48BF6
-	for <u-boot@archiver.kernel.org>; Sat, 17 Feb 2024 19:27:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E3B6C48BC3
+	for <u-boot@archiver.kernel.org>; Sat, 17 Feb 2024 20:09:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B857B87E74;
-	Sat, 17 Feb 2024 20:27:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=proton.me
+	by phobos.denx.de (Postfix) with ESMTP id BAC0A87E75;
+	Sat, 17 Feb 2024 21:09:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=proton.me header.i=@proton.me header.b="BXcQX8F/";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vMVzCr9H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 021C487E75; Sat, 17 Feb 2024 20:27:42 +0100 (CET)
-Received: from mail-4319.protonmail.ch (mail-4319.protonmail.ch [185.70.43.19])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A0E4187E79; Sat, 17 Feb 2024 21:09:39 +0100 (CET)
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
+ [IPv6:2607:f8b0:4864:20::112a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 09A0987DFA
- for <u-boot@lists.denx.de>; Sat, 17 Feb 2024 20:27:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=proton.me
+ by phobos.denx.de (Postfix) with ESMTPS id AB00E87E74
+ for <u-boot@lists.denx.de>; Sat, 17 Feb 2024 21:09:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=therealgraysky@proton.me
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
- s=lpdppjcc3bhbxj4s26pwzmcogq.protonmail; t=1708198058; x=1708457258;
- bh=iA9LTybJWnR9qbEX/pk3bfHF4He/+wDGjgM6aMyvb6Y=;
- h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector;
- b=BXcQX8F/1Duli/60wJfo/4g5dc77H4YKrggbaeyRw9FkfQJZ1F4piPjDbZnJ3dXhJ
- ItNYu76cLM6cRiojhX+wR7q8s6CTwtB+dPgGKaUwO0l4OrDHCbx6VBnjm4jJRJG9YZ
- m5WbGNv3y927Svu2E8dU1AhQM8xLI/hvGAz4sKrlfQmf0a1YOot1wgLLwcO/U9DxN1
- O29Lygjx9J6oLrQlPOG1FDfmm8Y+YreMwzK85pC3NmxaDIXbcLRHxDnJqMvx6TD4Ql
- GdAReA6E9VSJq1AjQsWAezjGrweArGNNQOS9GWJ62VOgkNv4ZYRFYUT7BtBVpS5mQD
- t1qDL+NThOXqQ==
-Date: Sat, 17 Feb 2024 19:27:27 +0000
-To: Jojan <jjvazha@yahoo.com>
-From: John <therealgraysky@proton.me>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: Booting RPi5B with latest git
-Message-ID: <niR3jnQfdu37PQnzpszMB4Ljv4s1UdFZjHAzR6AUdvSo7yfooe1wUd_kkulyKFLa0A0NsYbiXn3cFQhR9BkDv4X-xhsb_l_BzT-se4BNAVk=@proton.me>
-In-Reply-To: <927582348.2068714.1708197919275@mail.yahoo.com>
-References: <VhjYVKfXb22i7OLAE71TUsea5YoQHzRZl2a-pTntu6mAGWiAuixDG1380ukg9ag-1j7_JZUXh8mLYxId4j3mmvjopigOO6NgqVF0aBxC8Io=@proton.me>
- <1031326949.2069496.1708196119886@mail.yahoo.com>
- <DGgjhERuQGB1Y5hPRvHb9voUNFMnLh01k7vLy61hTmLJ95fcKvnDP_AmTzTBA0jBbmDNXRza4jl_KWr2UrSja5RLGnFveMiWGXM3Mpk8v-E=@proton.me>
- <927582348.2068714.1708197919275@mail.yahoo.com>
-Feedback-ID: 47473199:user:proton
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=dmitry.baryshkov@linaro.org
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-603fd31f5c2so35191277b3.0
+ for <u-boot@lists.denx.de>; Sat, 17 Feb 2024 12:09:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1708200563; x=1708805363; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=BPvZxG9rT6mW+LMynIYGHCBUn9vpMplT26PvR5g3g5g=;
+ b=vMVzCr9HsFfRqnFIHuUnKi3Th5+MD18HppVdlDuWEjEdZRvUzoxEiSptFMzpvXlUm+
+ fmsoE1BYPbi1jRRnmpc44wVAf4o6SXHWvqkNh2r6qc0QA79trJXbUMcrOSb8tfG4sTcE
+ +80IrtuUxrJHqpnbbGTZyv36DIGN39+Nc8E+kCkDHmrLwskak44yU/f9ugUaBtMrxzP1
+ CW4hSYEJ/cmm37lTHJ/Zy79XoNqdpacqUfL6LFb8M2MXqpJfFgY2ryu+67qVDMPaGbXT
+ SPGwqeOFB1amehp2uNIvHC3lxwIMSLNczW4tFWKGuy/NYc+pTAuB3hgQCslYtBEyfdi6
+ Bkww==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1708200563; x=1708805363;
+ h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=BPvZxG9rT6mW+LMynIYGHCBUn9vpMplT26PvR5g3g5g=;
+ b=iLEa1dvyF68upezzCtWcX+pn/qnDphByoVh9xIhu/dtqalDD6Z+nC+bizvEVNM8HxZ
+ Kg/7c/iLdH0GK84Xlo2HZVz5Ezx3qaOKMbJ3WEJRH6GrUADC6kpx/PdYH82yzDmXuDiM
+ 7a/rm8opKdRISg5KwozXoTFfFfgTiS+e30IwsYquvLLHhWyyMY2OwEXrOrJgkHCpzy5O
+ 6uGH0AW2rp9R83nddpTo7fWMUOy8lBhJVTeJyYnDYhY4VSVAU9JpovOA4zKVsf+R0I44
+ szmjODANzndPX7a4Gwz9Icg232PNKUznHf2dB2CGBFCzH+rNjN33HpFj4VvdVr7ipdVL
+ r+zQ==
+X-Gm-Message-State: AOJu0YwvUV8SjIWU2nbNj8GL4gExSVGjfpnRf4CvhWVA/OQIB1BqXLGd
+ GEd2TBCwg0wJrBnEgqvwb7waIptMtX+nUX/mi9Q6ZKlw1vOfoqHTac0Y6TJUev7vx22h2tIP1f9
+ uRwNcTfKTokQQk66Iq6e6hDUiqaz4zw/KidkN/gvzdclQShHK
+X-Google-Smtp-Source: AGHT+IHbLS8OGNqXfmiSGDjS31nKgNYH99wrhB2vXswU14Usw8m4M56gtlY72NNmNS0M5tnscIq7Y6vYfZFFZ+KtCzU=
+X-Received: by 2002:a0d:d514:0:b0:607:cc6a:e1e5 with SMTP id
+ x20-20020a0dd514000000b00607cc6ae1e5mr6287727ywd.2.1708200563223; Sat, 17 Feb
+ 2024 12:09:23 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+References: <20240212073708.4161197-1-dmitry.baryshkov@linaro.org>
+In-Reply-To: <20240212073708.4161197-1-dmitry.baryshkov@linaro.org>
+From: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+Date: Sat, 17 Feb 2024 22:09:12 +0200
+Message-ID: <CAA8EJppQQG0F+tR202ZLraG8x_CJ9ZH2jcm+ncs2eq=pX0D7Mw@mail.gmail.com>
+Subject: Re: [PATCH] virtio: fix get_config / set_config for legacy VirtIO
+ targets
+To: u-boot@lists.denx.de, Bin Meng <bmeng.cn@gmail.com>,
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,74 +85,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Thank you for the steps.  If the NIC is non-functional, I think I will wait=
- for official RPi5B support to come to u-boot.
+On Mon, 12 Feb 2024 at 09:37, Dmitry Baryshkov
+<dmitry.baryshkov@linaro.org> wrote:
+>
+> The functions virtio_pci_get_config() and virtio_pci_set_config() don't
+> take the offset into account when reading the config space. For example
+> this manifests when U-Boot tries to read the MAC address of the VirtIO
+> networking device. It reads 6 equa bytes instead of the proper addess.
+>
+> Fix those functions by taking the offset in the config space into
+> account.
+>
+> Fixes: 4135e10732a0 ("virtio: Add virtio over pci transport driver")
+> Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+
+Gracious ping
+
+> ---
+>  drivers/virtio/virtio_pci_legacy.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/drivers/virtio/virtio_pci_legacy.c b/drivers/virtio/virtio_pci_legacy.c
+> index cf5dfb17a94d..aa89604ae84d 100644
+> --- a/drivers/virtio/virtio_pci_legacy.c
+> +++ b/drivers/virtio/virtio_pci_legacy.c
+> @@ -107,7 +107,7 @@ static int virtio_pci_get_config(struct udevice *udev, unsigned int offset,
+>         int i;
+>
+>         for (i = 0; i < len; i++)
+> -               ptr[i] = ioread8(ioaddr + i);
+> +               ptr[i] = ioread8(ioaddr + offset + i);
+>
+>         return 0;
+>  }
+> @@ -121,7 +121,7 @@ static int virtio_pci_set_config(struct udevice *udev, unsigned int offset,
+>         int i;
+>
+>         for (i = 0; i < len; i++)
+> -               iowrite8(ptr[i], ioaddr + i);
+> +               iowrite8(ptr[i], ioaddr + offset + i);
+>
+>         return 0;
+>  }
+> --
+> 2.39.2
+>
 
 
-On Saturday, February 17th, 2024 at 2:25 PM, Jojan <jjvazha@yahoo.com> wrot=
-e:
-
-> yes , I created new config=C2=A0 by renaming ' rpi_arm64_config'=C2=A0 to=
- rpi5_arm64_config.
-> and edited the device tree to bcm2712-rpi-5-b.dtb. Then get get the dts f=
-iles=C2=A0 fromlinux/arch/arm/boot/dts/bcm2712-rpi-5-b.dts at rpi-6.1.y)
->=20
->=20
-> It gets booted but still need more controllers( ethernet)
->=20
->=20
->=20
-> On Saturday, February 17, 2024 at 11:17:12 AM PST, John <therealgraysky@p=
-roton.me> wrote:
->=20
->=20
->=20
-> On Saturday, February 17th, 2024 at 1:55 PM, Jojan <jjvazha@yahoo.com> wr=
-ote:
->=20
-> > For RPi 5B you need bcm2712 device tree . RPi4 uses 2711.
-> > So the e rpi_arm64_confi does not work for RPi5
-> >
->=20
-> Which config target did you build or did you modify rpi_arm64_config?=
-=C2=A0 If so, can you share the diff?=C2=A0 You mentioned modifying "the co=
-nfig" in your message below.
->=20
-> > Also make sure that you have the changes=C2=A0 discussed here.[GIT PULL=
-] rpi: updates for v2024.04 (mail-archive.com)
->=20
-> I built from the master branch of the github mirror.=C2=A0 That should ha=
-ve these changes incorporate, no?=C2=A0 https://github.com/u-boot/u-boot/co=
-mmits/master/
->=20
-> > Iwas able to get the git (https://source.denx.de/u-boot/custodians/u-bo=
-ot-raspberrypi.git=C2=A0tags/rpi-next-2024.04)
-> >
-> > and modify the config to get 2712 dts file, and able to get u-boot.
-> > [GIT PULL] rpi: updates for v2024.04
-> >
-> >
-> >
-> >
-> >
-> >
-> >
-> > On Saturday, February 17, 2024 at 08:36:22 AM PST, John <therealgraysky=
-@proton.me> wrote:
-> >
-> >
-> > I am running Arch ARM on a RPi4B and also on a RPi5B. My RPi4B can boot=
- the vanilla kernel package (linux-aarch64) with the latest uboot-raspberry=
-pi (2024.04-rc2) just fine. Yet, if I take that uSD card and place it in my=
- RPi5B, it does not boot. I only see the "U-Boot" submarine logo in the upp=
-er right of the screen/no debug output. Any thoughts are appreciated.
-> >
-> > I built u-boot like this:
-> >
-> > unset CFLAGS
-> > unset CXXFLAGS
-> > unset CPPFLAGS
-> >
-> > make rpi_arm64_config
-> > echo 'CONFIG_IDENT_STRING=3D" Arch Linux ARM"' >> .config
-> > make EXTRAVERSION=3D-2024.04rc2
+-- 
+With best wishes
+Dmitry
