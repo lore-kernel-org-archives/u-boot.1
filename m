@@ -4,52 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B9E7C48BC4
-	for <u-boot@archiver.kernel.org>; Sat, 17 Feb 2024 13:20:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 962DBC48BC3
+	for <u-boot@archiver.kernel.org>; Sat, 17 Feb 2024 14:16:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B9EEA87C80;
-	Sat, 17 Feb 2024 14:20:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 5BEC687E52;
+	Sat, 17 Feb 2024 15:16:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=qq.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="F1jtg/lS";
+	dkim=pass (1024-bit key; unprotected) header.d=qq.com header.i=@qq.com header.b="IpiGNYKE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB28687E60; Sat, 17 Feb 2024 14:20:10 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B4D2787E21; Sat, 17 Feb 2024 14:56:04 +0100 (CET)
+Received: from out162-62-57-210.mail.qq.com (out162-62-57-210.mail.qq.com
+ [162.62.57.210])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C05CF878C6
- for <u-boot@lists.denx.de>; Sat, 17 Feb 2024 14:19:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 71F768792D
+ for <u-boot@lists.denx.de>; Sat, 17 Feb 2024 14:55:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=f1ab=J3=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
- To: From; q=dns/txt; s=fe-e1b5cab7be; t=1708175991;
- bh=kMMGrNrdumB4jLhpyKVDnlgJuIia4PwoJ7nPWXE4414=;
- b=F1jtg/lSIb1t8wpI873BFsV+aeU95WgkrInFnjwCISixIjz0sAgNIpsum3dvMIxSZepJNNxMa
- LNu20yY66z4YHWqCiLO4wEnOGw7ACOwSVxRMfjE8pHs7YakRnU9BJPx/RUZm3wH98EqwJiz5h8O
- +hiWsiSMmzDOmthEVEyYQx+Y150xMeupTpT6cR8B7YWsLA52vqBm8quGdIV0mtDeMBIoW+1SfGm
- i2BqIEL6smTr4u+At7iD0cR52AcDDVB9TqQeDhiikqTiFrLXLZNGfSjnFrOxFNh8FpZ8GG3+oTu
- qV+CmuneuL65JdcT3Z5UPWNoHXG2Fqihv9erWutcu/6w==
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Cc: Jonas Karlman <jonas@kwiboo.se>, u-boot@lists.denx.de
-Subject: [PATCH] dm: core: Fix address translation in devfdt_get_addr_index()
-Date: Sat, 17 Feb 2024 13:19:41 +0000
-Message-ID: <20240217131943.2472659-1-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=quarantine dis=none) header.from=qq.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hanyuan-z@qq.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
+ t=1708178150; bh=I/x0567JHZNKfJGQEG8vJoyci6dC8VFOhfV25aWGucI=;
+ h=From:To:Cc:Subject:Date;
+ b=IpiGNYKEOkD2d8KegFKAnqqxpUHk+poDiHRUIsCSoJTvSCrHlhRPpa2EV5WEGUIMd
+ yQnWQe6z/Bz/SLm6S/hQouZb/qTk0dRctiDmOkLIhQUnA5nLaxzoLZKiefAPQAEkyY
+ heczLHu4T3SdDo51uxgAIFYyqxTEHz8Y/XQF7ZVo=
+Received: from localhost.localdomain ([36.101.128.104])
+ by newxmesmtplogicsvrsza1-0.qq.com (NewEsmtp) with SMTP
+ id DF099EEC; Sat, 17 Feb 2024 21:55:48 +0800
+X-QQ-mid: xmsmtpt1708178148tdvy5n6kz
+Message-ID: <tencent_411A9B7DA959D26CCAFCE7961870C400E80A@qq.com>
+X-QQ-XMAILINFO: NnA3IMNPwBd+T5WxaW3m1/6qTcU3usHDxtggCV2BdiklV9QLyE074JnyGDT/Hz
+ z3DKwvkZi9XbMvS793eIleBb0p7gg5dE9Q5MqByKIf0bCeZK5VDPPKM66YuEqe3J8iSvuGQF/A51
+ n86B+73Sci4B1sW5Srwk8o1fbM5oacA+shgmszw7Lq6+iLxoz05X+5/8l+ONQG47Mp2Qk3zk49pA
+ tUOXgVsoYti3z1TzLqMTrqiPUs37vwGmynYVshUTHkmMX6Gn0nXYeBKeYzIyJnt1ecqbyU3g3kJg
+ RazEjF7YGjEIMw7qQ35gs/gcFobv8zRkxAEV+vX+wcWT8ewJqKxWYkS1ZcZijqFgTbeeYj4fxqGu
+ y0VLyiy9s4oyiYTtLzhWC3aXyMKB9jw7HbV5hVmRcbjKLBdQSaicfaumehVpKYgludojdI81zsI6
+ BAyoDDy2uFbVTk71w+s12Dyif+1s9W1btCH+Q36lXrNfEtKaWbA+M9z7d/LiP+grIAK5b+FnNWcM
+ pz+cETv15ugmuqgWyEeDzkiLJAVZrqzjFXxN19zKzyjTwBQZpIDwJ2ROehOrntuwDMlkE2nPGY/4
+ mVbaivkuYoaAo+a72090qxrX5xtn+f3Z9O93xjYFdBq586K3jaw9ogoyYde+MA3fzN+ET0XLGIJQ
+ frK6kg5vnbo8C6zzPep60sJYI/zcGCHA0RQzqZKchFArNYkvSJzuvLw6QnHIpd+cqkOWz+V0VEu7
+ B3SAQ5fs/4PnmJzo8u8pCj2O3MkALYseyI+9iafy7J8HOARI2kmqA2vb5Z3zefWSNmfTWFqhzNQj
+ nQm9OdHX3MjPtXcL7zsB+8Hsjg3QJTnDhgYLnaHIBMOwiu8p7Ej3ZwiXj5a1U53KyYapGjm/sZ67
+ qfv5x1xnHcxzPUoQb/aMUFdrynNxwZ2HOLbOV1W9cSTmi4gF8WKAQhGS/HNvDAilecH+air1zSQ0
+ lJiDwhaFAZEeufq5RnI1SBFQ196rv9aVrTDzmIOGkFEZWDsWIq7LUxFsIVQvPR
+X-QQ-XMRINFO: MSVp+SPm3vtS1Vd6Y4Mggwc=
+From: Hanyuan Zhao <hanyuan-z@qq.com>
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Hanyuan Zhao <hanyuan-z@qq.com>
+Subject: [PATCH 1/2] cli: allow users to disable history if unused at all
+Date: Sat, 17 Feb 2024 21:54:43 +0800
+X-OQ-MSGID: <20240217135443.16503-1-hanyuan-z@qq.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 167.172.40.54
-X-ForwardEmail-ID: 65d0b275cae393c1e258a577
+X-Mailman-Approved-At: Sat, 17 Feb 2024 15:16:43 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,79 +78,159 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-During address translation #address/size-cells props are expected to
-apply to child nodes. However, devfdt_get_addr_index() incorrectly use
-the parent offset of the udevice parent instead of getting the offset of
-the node parent. This will work in most cases when there is only one
-udevice tied to a node.
+This commit allows user to determine whether to have history recording
+in command-line. Previously the history data as uninitialized static
+array would not directly take much space in binary file since it only
+marks size in the binary. However now it asks to allocate space. By
+connecting the original CMD_HISTORY flag in Kconfig, users could unset
+the whole history function, and the memory usage could be eased, if the
+history function is not used at all.
 
-On e.g. an Orange Pi R1 Plus TLS board the dwc3-generic (parent) and
-dwc3-generic-host (child) udevice is tied to the same node.
-
-In that case both the offset and parent values end up being the same.
-As a result, the #address/size-cells props intended for child nodes
-incorrectly gets applied to the node itself resulting in wrong addr
-being returned, 0x0 instead of 0xff600000.
-
-The following can be seen on console:
-
-  dwc3-generic-host usb@ff600000: this is not a DesignWare USB3 DRD Core
-  dwc3-generic-host usb@ff600000: failed to initialize core
-
-Fix this by using the offset of the parent node and not the offset to
-the node the parent udevice is tied to.
-
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+Signed-off-by: Hanyuan Zhao <hanyuan-z@qq.com>
 ---
-I think the following unit test dts and code should be able to detect
-this issue. Not sure on how to add a test with a different dts, most
-existing ones seemed to use #address/size-cells = <1>.
+ cmd/Kconfig           |  1 +
+ common/cli_readline.c | 44 ++++++++++++++++++++++++-------------------
+ 2 files changed, 26 insertions(+), 19 deletions(-)
 
-Please advide on how following could be turned into a proper unit test.
-
-/dts-v1/;
-
-/ {
-	#address-cells = <2>;
-	#size-cells = <2>;
-
-	some-bus {
-		compatible = "denx,u-boot-test-bus";
-		reg = <0x0 0xffff0000 0x0 0x1000>;
-		#address-cells = <1>;
-		#size-cells = <0>;
-
-		device@0 {
-			compatible = "denx,u-boot-fdt-test";
-			reg = <0>;
-		};
-	};
-};
-
-struct udevice *bus, *dev;
-
-ut_assertok(uclass_get_device(UCLASS_TEST_BUS, 0, &bus));
-ut_asserteq(0xffff0000, devfdt_get_addr(bus));
-ut_assertok(device_bind(bus, DM_DRIVER_GET(denx_u_boot_fdt_test),
-			"test", NULL, dev_ofnode(bus), &dev));
-ut_asserteq(0xffff0000, devfdt_get_addr(dev));
----
- drivers/core/fdtaddr.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/drivers/core/fdtaddr.c b/drivers/core/fdtaddr.c
-index 8e774d49ce6e..5f27d2511485 100644
---- a/drivers/core/fdtaddr.c
-+++ b/drivers/core/fdtaddr.c
-@@ -23,7 +23,7 @@ fdt_addr_t devfdt_get_addr_index(const struct udevice *dev, int index)
- {
- #if CONFIG_IS_ENABLED(OF_REAL)
- 	int offset = dev_of_offset(dev);
--	int parent = dev_of_offset(dev->parent);
-+	int parent = fdt_parent_offset(gd->fdt_blob, offset);
- 	fdt_addr_t addr;
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index a86b570517..af4dbc95fc 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -184,6 +184,7 @@ config CMD_FWU_METADATA
  
- 	if (CONFIG_IS_ENABLED(OF_TRANSLATE)) {
+ config CMD_HISTORY
+ 	bool "history"
++	default y
+ 	depends on CMDLINE_EDITING
+ 	help
+ 	  Show the command-line history, i.e. a list of commands that are in
+diff --git a/common/cli_readline.c b/common/cli_readline.c
+index 2507be2295..eec6d8b0a2 100644
+--- a/common/cli_readline.c
++++ b/common/cli_readline.c
+@@ -67,12 +67,13 @@ static char *delete_char (char *buffer, char *p, int *colp, int *np, int plen)
+ #define CTL_BACKSPACE		('\b')
+ #define DEL			((char)255)
+ #define DEL7			((char)127)
+-#define CREAD_HIST_CHAR		('!')
+ 
+ #define getcmd_putch(ch)	putc(ch)
+ #define getcmd_getch()		getchar()
+ #define getcmd_cbeep()		getcmd_putch('\a')
+ 
++#ifdef CONFIG_CMD_HISTORY
++#define CREAD_HIST_CHAR		('!')
+ #ifdef CONFIG_SPL_BUILD
+ #define HIST_MAX		3
+ #define HIST_SIZE		32
+@@ -90,14 +91,6 @@ static char *hist_list[HIST_MAX];
+ 
+ #define add_idx_minus_one() ((hist_add_idx == 0) ? hist_max : hist_add_idx-1)
+ 
+-static void getcmd_putchars(int count, int ch)
+-{
+-	int i;
+-
+-	for (i = 0; i < count; i++)
+-		getcmd_putch(ch);
+-}
+-
+ static int hist_init(void)
+ {
+ 	unsigned char *hist;
+@@ -110,7 +103,7 @@ static int hist_init(void)
+ 
+ 	hist = calloc(HIST_MAX, HIST_SIZE + 1);
+ 	if (!hist)
+-		return -ENOMEM;
++		panic("%s: calloc: out of memory!\n", __func__);
+ 
+ 	for (i = 0; i < HIST_MAX; i++)
+ 		hist_list[i] = hist + (i * (HIST_SIZE + 1));
+@@ -192,6 +185,15 @@ void cread_print_hist_list(void)
+ 		i++;
+ 	}
+ }
++#endif
++
++static void getcmd_putchars(int count, int ch)
++{
++	int i;
++
++	for (i = 0; i < count; i++)
++		getcmd_putch(ch);
++}
+ 
+ #define BEGINNING_OF_LINE() {			\
+ 	while (cls->num) {			\
+@@ -365,6 +367,7 @@ int cread_line_process_ch(struct cli_line_state *cls, char ichar)
+ 			cls->eol_num--;
+ 		}
+ 		break;
++#ifdef CONFIG_CMD_HISTORY
+ 	case CTL_CH('p'):
+ 	case CTL_CH('n'):
+ 		if (cls->history) {
+@@ -394,6 +397,7 @@ int cread_line_process_ch(struct cli_line_state *cls, char ichar)
+ 			break;
+ 		}
+ 		break;
++#endif
+ 	case '\t':
+ 		if (IS_ENABLED(CONFIG_AUTO_COMPLETE) && cls->cmd_complete) {
+ 			int num2, col;
+@@ -490,19 +494,23 @@ static int cread_line(const char *const prompt, char *buf, unsigned int *len,
+ 	}
+ 	*len = cls->eol_num;
+ 
++#ifdef CONFIG_CMD_HISTORY
+ 	if (buf[0] && buf[0] != CREAD_HIST_CHAR)
+ 		cread_add_to_hist(buf);
+ 	hist_cur = hist_add_idx;
++#endif
+ 
+ 	return 0;
+ }
+ 
+ #else /* !CONFIG_CMDLINE_EDITING */
+ 
++#ifdef CONFIG_CMD_HISTORY
+ static inline int hist_init(void)
+ {
+ 	return 0;
+ }
++#endif
+ 
+ static int cread_line(const char *const prompt, char *buf, unsigned int *len,
+ 		      int timeout)
+@@ -640,20 +648,18 @@ int cli_readline_into_buffer(const char *const prompt, char *buffer,
+ 	char *p = buffer;
+ 	uint len = CONFIG_SYS_CBSIZE;
+ 	int rc;
+-	static int initted;
++#ifdef CONFIG_CMD_HISTORY
++	static int hist_initted;
++#endif
+ 
+-	/*
+-	 * History uses a global array which is not
+-	 * writable until after relocation to RAM.
+-	 * Revert to non-history version if still
+-	 * running from flash.
+-	 */
+ 	if (IS_ENABLED(CONFIG_CMDLINE_EDITING) && (gd->flags & GD_FLG_RELOC)) {
+-		if (!initted) {
++#ifdef CONFIG_CMD_HISTORY
++		if (!hist_initted) {
+ 			rc = hist_init();
+ 			if (rc == 0)
+-				initted = 1;
++				hist_initted = 1;
+ 		}
++#endif
+ 
+ 		if (prompt)
+ 			puts(prompt);
 -- 
-2.43.0
+2.34.1
 
