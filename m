@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 326B4C48BC4
-	for <u-boot@archiver.kernel.org>; Sat, 17 Feb 2024 18:38:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06BADC48BC4
+	for <u-boot@archiver.kernel.org>; Sat, 17 Feb 2024 18:38:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CD3A87E95;
-	Sat, 17 Feb 2024 19:37:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2D4DC87E77;
+	Sat, 17 Feb 2024 19:37:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="gLpl1EwC";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="w5y2xVy1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E41887E7F; Sat, 17 Feb 2024 19:37:00 +0100 (CET)
+ id 3200187E7B; Sat, 17 Feb 2024 19:37:03 +0100 (CET)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 40E6287E6E
- for <u-boot@lists.denx.de>; Sat, 17 Feb 2024 19:36:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B82F587E78
+ for <u-boot@lists.denx.de>; Sat, 17 Feb 2024 19:36:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,24 +28,22 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1708194984; bh=/vDnVx6FTacbn1LyICB5yPcdg+Vx9amVc/J2IBw+vBI=;
- b=gLpl1EwC0lX+OQv3Y+ZP1BGqhjpx/v9YAoWUZw3r0Rj0P5i1K8vXlBj+6Ejsa1mrzF7J8wUXo
- dy3mtT9KOYTebYe12zonzhfI4riaSsYFaczCA6d3K3/It5r890WKR4cqeAfkNuzs6j2tmUVTs2J
- tGA3lp1pEpYQdx8v6b8vRhDdp36QyF9e59a2vMhGzl2IxSy2tBUHVcwwhCF2r/GuT69/H4eYOKL
- Uz95kiy2pLMdfUOisRLJVkeJtEUuk0XUbyJLnguobY3VyEKqJLJs9e0V4mkbSe9x3mQezWeLhKA
- lz+KtPNcgWTfoZeF0jTQo3Sr9xhtTQ4pTXIKCYiS+okQ==
+ t=1708194993; bh=FaS8BA+IqaZf6bDa/FQcBjq6HI+jc9V+qYp2xpu/SSo=;
+ b=w5y2xVy12jPXqAEe4AXTD1zknMqKWB7r3dQIAe5hCeNvwFcgjPa/iJhJjgGyyNnC9Z4CcF0Rd
+ DBJP99CjAY20Am9jajy90A/QI8Isptn/iBbNYlBnFoiZj6hwyfTUOERsXRyCmO2SnhfCU4U06CY
+ Q44hse10Io0cDHjQSX7HWEgwrY+y066nuni4Ir3M5pTvYD+vg6fAOBnQELyTFzb0sY03VNjvtXR
+ M5mmuSSDUi+4ZxZ5BjPA414XoXyaQTHisQzLs/3daS2a9uLndGJcDav0HXezTO1WfvG80TMrSXt
+ IzImRqo1quSgGIUQYmpDgaDOCMu4RddaLflIb3SCrgsg==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
  Levin Du <djw@t-chip.com.cn>, Suniel Mahesh <sunil@amarulasolutions.com>,
- Peter Robinson <pbrobinson@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
- Jagan Teki <jagan@amarulasolutions.com>, Manivannan Sadhasivam
- <manivannan.sadhasivam@linaro.org>
+ Peter Robinson <pbrobinson@gmail.com>, Jonas Karlman <jonas@kwiboo.se>
 Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>, u-boot@lists.denx.de
-Subject: [PATCH 01/11] board: rockchip: rk3399: Add device tree files to
- MAINTAINERS
-Date: Sat, 17 Feb 2024 18:35:46 +0000
-Message-ID: <20240217183610.2621132-2-jonas@kwiboo.se>
+Subject: [PATCH 03/11] board: rockchip: rk3399: Remove unused
+ board_early_init_f functions
+Date: Sat, 17 Feb 2024 18:35:48 +0000
+Message-ID: <20240217183610.2621132-4-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240217183610.2621132-1-jonas@kwiboo.se>
 References: <20240217183610.2621132-1-jonas@kwiboo.se>
@@ -57,7 +55,7 @@ X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
-X-ForwardEmail-ID: 65d0fca6af53a5c07f266c5b
+X-ForwardEmail-ID: 65d0fcafaf53a5c07f266c84
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,215 +72,175 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update MAINTAINERS files for RK3399 boards to include related device
-tree files. Also correct a few filenames.
+These functions is excluded from SPL build and BOARD_EARLY_INIT_F is not
+enabled for any of the affected boards, so this legacy code is not used.
+
+Rockchip common board code already enable all regulators flagged as
+always-on or boot-on in device tree, and fixed/gpio regulators now have
+basic reference counting support so the original intent of this code is
+no longer valid.
+
+Remove the unneeded and unused code that used to enable usb regulators.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- board/firefly/roc-pc-rk3399/MAINTAINERS       |  5 ++++
- board/pine64/pinebook-pro-rk3399/MAINTAINERS  |  2 +-
- board/pine64/pinephone-pro-rk3399/MAINTAINERS |  2 +-
- board/pine64/rockpro64_rk3399/MAINTAINERS     |  2 ++
- board/rockchip/evb_rk3399/MAINTAINERS         | 24 ++++++++++++++++++-
- board/vamrs/rock960_rk3399/MAINTAINERS        |  5 ++++
- 6 files changed, 37 insertions(+), 3 deletions(-)
+ board/firefly/roc-pc-rk3399/roc-pc-rk3399.c   | 22 +------------------
+ .../pinebook-pro-rk3399/pinebook-pro-rk3399.c | 22 -------------------
+ .../pinephone-pro-rk3399.c                    | 22 -------------------
+ board/rockchip/evb_rk3399/evb-rk3399.c        | 20 -----------------
+ 4 files changed, 1 insertion(+), 85 deletions(-)
 
-diff --git a/board/firefly/roc-pc-rk3399/MAINTAINERS b/board/firefly/roc-pc-rk3399/MAINTAINERS
-index 68a5b757d1df..d26e3c4cd2ba 100644
---- a/board/firefly/roc-pc-rk3399/MAINTAINERS
-+++ b/board/firefly/roc-pc-rk3399/MAINTAINERS
-@@ -6,3 +6,8 @@ F:	board/firefly/roc-pc-rk3399
- F:	include/configs/roc-pc-rk3399.h
- F:	configs/roc-pc-rk3399_defconfig
- F:	configs/roc-pc-mezzanine-rk3399_defconfig
-+F:	arch/arm/dts/rk3399-roc-pc.dts
-+F:	arch/arm/dts/rk3399-roc-pc.dtsi
-+F:	arch/arm/dts/rk3399-roc-pc-u-boot.dtsi
-+F:	arch/arm/dts/rk3399-roc-pc-mezzanine.dts
-+F:	arch/arm/dts/rk3399-roc-pc-mezzanine-u-boot.dtsi
-diff --git a/board/pine64/pinebook-pro-rk3399/MAINTAINERS b/board/pine64/pinebook-pro-rk3399/MAINTAINERS
-index 7300ca1b1b81..b80fc5cb6021 100644
---- a/board/pine64/pinebook-pro-rk3399/MAINTAINERS
-+++ b/board/pine64/pinebook-pro-rk3399/MAINTAINERS
-@@ -2,7 +2,7 @@ PINEBOOK_PRO
- M:	Peter Robinson <pbrobinson@gmail.com>
- S:	Maintained
- F:	board/pine64/pinebook-pro-rk3399/
--F:	include/configs/rk3399-pinebook-pro.h
-+F:	include/configs/pinebook-pro-rk3399.h
- F:	arch/arm/dts/rk3399-pinebook-pro.dts
- F:	arch/arm/dts/rk3399-pinebook-pro-u-boot.dtsi
- F:	configs/pinebook-pro-rk3399_defconfig
-diff --git a/board/pine64/pinephone-pro-rk3399/MAINTAINERS b/board/pine64/pinephone-pro-rk3399/MAINTAINERS
-index bc2dcdd8d423..a2f4337cebc6 100644
---- a/board/pine64/pinephone-pro-rk3399/MAINTAINERS
-+++ b/board/pine64/pinephone-pro-rk3399/MAINTAINERS
-@@ -2,7 +2,7 @@ PINEPHONE_PRO
- M:	Peter Robinson <pbrobinson@gmail.com>
- S:	Maintained
- F:	board/pine64/pinephone-pro-rk3399/
--F:	include/configs/rk3399-pinephone-pro.h
-+F:	include/configs/pinephone-pro-rk3399.h
- F:	arch/arm/dts/rk3399-pinephone-pro.dts
- F:	arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi
- F:	configs/pinephone-pro-rk3399_defconfig
-diff --git a/board/pine64/rockpro64_rk3399/MAINTAINERS b/board/pine64/rockpro64_rk3399/MAINTAINERS
-index 220ee21f230f..396363cc8d9b 100644
---- a/board/pine64/rockpro64_rk3399/MAINTAINERS
-+++ b/board/pine64/rockpro64_rk3399/MAINTAINERS
-@@ -3,5 +3,7 @@ M:	Jagan Teki <jagan@amarulasolutions.com>
- S:	Maintained
- F:	board/pine64/rockpro64_rk3399
- F:	include/configs/rockpro64_rk3399.h
-+F:	arch/arm/dts/rk3399-rockpro64.dts
-+F:	arch/arm/dts/rk3399-rockpro64.dtsi
- F:	arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
- F:	configs/rockpro64-rk3399_defconfig
-diff --git a/board/rockchip/evb_rk3399/MAINTAINERS b/board/rockchip/evb_rk3399/MAINTAINERS
-index acdb840f2093..166e01bcc685 100644
---- a/board/rockchip/evb_rk3399/MAINTAINERS
-+++ b/board/rockchip/evb_rk3399/MAINTAINERS
-@@ -4,35 +4,45 @@ S:      Maintained
- F:      board/rockchip/evb_rk3399
- F:      include/configs/evb_rk3399.h
- F:      configs/evb-rk3399_defconfig
-+F:      arch/arm/dts/rk3399-evb.dts
-+F:      arch/arm/dts/rk3399-evb-u-boot.dtsi
- F:      configs/firefly-rk3399_defconfig
-+F:      arch/arm/dts/rk3399-firefly.dts
-+F:      arch/arm/dts/rk3399-firefly-u-boot.dtsi
+diff --git a/board/firefly/roc-pc-rk3399/roc-pc-rk3399.c b/board/firefly/roc-pc-rk3399/roc-pc-rk3399.c
+index 93e7d776fb2f..590519b32af2 100644
+--- a/board/firefly/roc-pc-rk3399/roc-pc-rk3399.c
++++ b/board/firefly/roc-pc-rk3399/roc-pc-rk3399.c
+@@ -9,32 +9,12 @@
+ #include <log.h>
+ #include <spl_gpio.h>
+ #include <asm/io.h>
+-#include <power/regulator.h>
  
- EAIDK-610
- M:      Andy Yan <andy.yan@rock-chips.com>
- S:      Maintained
- F:	configs/eaidk-610-rk3399_defconfig
-+F:	arch/arm/dts/rk3399-eaidk-610.dts
- F:	arch/arm/dts/rk3399-eaidk-610-u-boot.dtsi
+ #include <asm/arch-rockchip/cru.h>
+ #include <asm/arch-rockchip/gpio.h>
+ #include <asm/arch-rockchip/grf_rk3399.h>
  
- KHADAS-EDGE
- M:	Nick Xie <nick@khadas.com>
- S:	Maintained
- F:	configs/khadas-edge-rk3399_defconfig
-+F:	arch/arm/dts/rk3399-khadas-edge.dts
-+F:	arch/arm/dts/rk3399-khadas-edge.dtsi
- F:	arch/arm/dts/rk3399-khadas-edge-u-boot.dtsi
+-#ifndef CONFIG_SPL_BUILD
+-int board_early_init_f(void)
+-{
+-	struct udevice *regulator;
+-	int ret;
+-
+-	ret = regulator_get_by_platname("vcc5v0_host", &regulator);
+-	if (ret) {
+-		debug("%s vcc5v0_host init fail! ret %d\n", __func__, ret);
+-		goto out;
+-	}
+-
+-	ret = regulator_set_enable(regulator, true);
+-	if (ret)
+-		debug("%s vcc5v0-host-en set fail! ret %d\n", __func__, ret);
+-out:
+-	return 0;
+-}
+-
+-#else
++#ifdef CONFIG_SPL_BUILD
  
- KHADAS-EDGE-CAPTAIN
- M:	Nick Xie <nick@khadas.com>
- S:	Maintained
- F:	configs/khadas-edge-captain-rk3399_defconfig
-+F:	arch/arm/dts/rk3399-khadas-edge-captain.dts
- F:	arch/arm/dts/rk3399-khadas-edge-captain-u-boot.dtsi
+ #define PMUGRF_BASE	0xff320000
+ #define GPIO0_BASE	0xff720000
+diff --git a/board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c b/board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c
+index 5e758ea6cd92..0001022c62a6 100644
+--- a/board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c
++++ b/board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c
+@@ -11,32 +11,10 @@
+ #include <asm/arch-rockchip/grf_rk3399.h>
+ #include <asm/arch-rockchip/hardware.h>
+ #include <linux/printk.h>
+-#include <power/regulator.h>
  
- KHADAS-EDGE-V
- M:	Nick Xie <nick@khadas.com>
- S:	Maintained
- F:	configs/khadas-edge-v-rk3399_defconfig
-+F:	arch/arm/dts/rk3399-khadas-edge-v.dts
- F:	arch/arm/dts/rk3399-khadas-edge-v-u-boot.dtsi
+ #define GRF_IO_VSEL_BT565_SHIFT 0
+ #define PMUGRF_CON0_VSEL_SHIFT 8
  
- LEEZ-P710
- M:	Andy Yan <andy.yan@rock-chips.com>
- S:      Maintained
-+F:	arch/arm/dts/rk3399-leez-p710.dts
- F:	arch/arm/dts/rk3399-leez-p710-u-boot.dtsi
- F:	configs/leez-rk3399_defconfig
+-#ifndef CONFIG_SPL_BUILD
+-int board_early_init_f(void)
+-{
+-	struct udevice *regulator;
+-	int ret;
+-
+-	ret = regulator_get_by_platname("vcc5v0_usb", &regulator);
+-	if (ret) {
+-		pr_debug("%s vcc5v0_usb init fail! ret %d\n", __func__, ret);
+-		goto out;
+-	}
+-
+-	ret = regulator_set_enable(regulator, true);
+-	if (ret)
+-		pr_debug("%s vcc5v0-host-en-gpio set fail! ret %d\n", __func__, ret);
+-
+-out:
+-	return 0;
+-}
+-#endif
+-
+ #ifdef CONFIG_MISC_INIT_R
+ static void setup_iodomain(void)
+ {
+diff --git a/board/pine64/pinephone-pro-rk3399/pinephone-pro-rk3399.c b/board/pine64/pinephone-pro-rk3399/pinephone-pro-rk3399.c
+index c9b0d5a061d6..06dc512c57d8 100644
+--- a/board/pine64/pinephone-pro-rk3399/pinephone-pro-rk3399.c
++++ b/board/pine64/pinephone-pro-rk3399/pinephone-pro-rk3399.c
+@@ -11,33 +11,11 @@
+ #include <asm/arch-rockchip/clock.h>
+ #include <asm/arch-rockchip/grf_rk3399.h>
+ #include <asm/arch-rockchip/hardware.h>
+-#include <power/regulator.h>
  
-@@ -40,12 +50,14 @@ NANOPC-T4
- M:	Jagan Teki <jagan@amarulasolutions.com>
- S:	Maintained
- F:	configs/nanopc-t4-rk3399_defconfig
-+F:	arch/arm/dts/rk3399-nanopc-t4.dts
- F:	arch/arm/dts/rk3399-nanopc-t4-u-boot.dtsi
+ #define GRF_IO_VSEL_BT565_GPIO2AB 1
+ #define GRF_IO_VSEL_AUDIO_GPIO3D4A 2
+ #define PMUGRF_CON0_VSEL_SHIFT 8
  
- NANOPI-M4
- M:	Jagan Teki <jagan@amarulasolutions.com>
- S:	Maintained
- F:	configs/nanopi-m4-rk3399_defconfig
-+F:	arch/arm/dts/rk3399-nanopi-m4.dts
- F:	arch/arm/dts/rk3399-nanopi-m4-u-boot.dtsi
+-#ifndef CONFIG_SPL_BUILD
+-int board_early_init_f(void)
+-{
+-	struct udevice *regulator;
+-	int ret;
+-
+-	ret = regulator_get_by_platname("vcc5v0_usb", &regulator);
+-	if (ret) {
+-		pr_debug("%s vcc5v0_usb init fail! ret %d\n", __func__, ret);
+-		goto out;
+-	}
+-
+-	ret = regulator_set_enable(regulator, true);
+-	if (ret)
+-		pr_debug("%s vcc5v0-host-en-gpio set fail! ret %d\n", __func__, ret);
+-
+-out:
+-	return 0;
+-}
+-#endif
+-
+ #ifdef CONFIG_MISC_INIT_R
+ static void setup_iodomain(void)
+ {
+diff --git a/board/rockchip/evb_rk3399/evb-rk3399.c b/board/rockchip/evb_rk3399/evb-rk3399.c
+index 3c773d0930cc..ebdd74a7b97f 100644
+--- a/board/rockchip/evb_rk3399/evb-rk3399.c
++++ b/board/rockchip/evb_rk3399/evb-rk3399.c
+@@ -10,7 +10,6 @@
+ #include <log.h>
+ #include <asm/arch-rockchip/periph.h>
+ #include <linux/kernel.h>
+-#include <power/regulator.h>
  
- NANOPI-M4-2GB
-@@ -53,12 +65,14 @@ M:	Jagan Teki <jagan@amarulasolutions.com>
- M:	Deepak Das <deepakdas.linux@gmail.com>
- S:	Maintained
- F:	configs/nanopi-m4-2gb-rk3399_defconfig
-+F:	arch/arm/dts/rk3399-nanopi-m4-2gb.dts
- F:	arch/arm/dts/rk3399-nanopi-m4-2gb-u-boot.dtsi
+ #define ROCKPI4_UPDATABLE_IMAGES	2
  
- NANOPI-M4B
- M:	Alexandre Vicenzi <linux@alxd.me>
- S:	Maintained
- F:	configs/nanopi-m4b-rk3399_defconfig
-+F:	arch/arm/dts/rk3399-nanopi-m4b.dts
- F:	arch/arm/dts/rk3399-nanopi-m4b-u-boot.dtsi
+@@ -25,25 +24,6 @@ struct efi_capsule_update_info update_info = {
+ #endif
  
- NANOPI-NEO4
-@@ -71,13 +85,14 @@ NANOPI-R4S
- M:	Xiaobo Tian <peterwillcn@gmail.com>
- S:	Maintained
- F:	configs/nanopi-r4s-rk3399_defconfig
-+F:	arch/arm/dts/rk3399-nanopi-r4s.dts
- F:	arch/arm/dts/rk3399-nanopi-r4s-u-boot.dtsi
- 
- ORANGEPI-RK3399
- M:	Jagan Teki <jagan@amarulasolutions.com>
- S:	Maintained
- F:	configs/orangepi-rk3399_defconfig
--F:	arch/arm/dts/rk3399-u-boot.dtsi
-+F:	arch/arm/dts/rk3399-orangepi.dts
- F:	arch/arm/dts/rk3399-orangepi-u-boot.dtsi
- 
- ROCK-4C+
-@@ -85,23 +100,30 @@ M:	FUKAUMI Naoki <naoki@radxa.com>
- S:	Maintained
- F:	configs/rock-4c-plus-rk3399_defconfig
- F:	arch/arm/dts/rk3399-rock-4c-plus.dts
-+F:	arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi
- 
- ROCK-4SE
- M:	Christopher Obbard <chris.obbard@collabora.com>
- S:	Maintained
- F:	configs/rock-4se-rk3399_defconfig
-+F:	arch/arm/dts/rk3399-rock-4se.dts
- F:	arch/arm/dts/rk3399-rock-4se-u-boot.dtsi
- 
- ROCK-PI-4
- M:	Jagan Teki <jagan@amarulasolutions.com>
- S:	Maintained
- F:	configs/rock-pi-4-rk3399_defconfig
-+F:	arch/arm/dts/rk3399-rock-pi-4.dtsi
- F:	arch/arm/dts/rk3399-rock-pi-4-u-boot.dtsi
-+F:	arch/arm/dts/rk3399-rock-pi-4a.dts
-+F:	arch/arm/dts/rk3399-rock-pi-4a-u-boot.dtsi
- F:	configs/rock-pi-4c-rk3399_defconfig
-+F:	arch/arm/dts/rk3399-rock-pi-4c.dts
- F:	arch/arm/dts/rk3399-rock-pi-4c-u-boot.dtsi
- 
- ROCK-PI-N10
- M:	Jagan Teki <jagan@amarulasolutions.com>
- S:	Maintained
- F:	configs/rock-pi-n10-rk3399pro_defconfig
-+F:	arch/arm/dts/rk3399pro-rock-pi-n10.dts
- F:	arch/arm/dts/rk3399pro-rock-pi-n10-u-boot.dtsi
-diff --git a/board/vamrs/rock960_rk3399/MAINTAINERS b/board/vamrs/rock960_rk3399/MAINTAINERS
-index 8821672a3abb..6a6d46a49b97 100644
---- a/board/vamrs/rock960_rk3399/MAINTAINERS
-+++ b/board/vamrs/rock960_rk3399/MAINTAINERS
-@@ -4,8 +4,13 @@ S:      Maintained
- F:      board/vamrs/rock960_rk3399/
- F:      include/configs/rock960_rk3399.h
- F:      configs/rock960-rk3399_defconfig
-+F:      arch/arm/dts/rk3399-rock960.dts
-+F:      arch/arm/dts/rk3399-rock960.dtsi
-+F:      arch/arm/dts/rk3399-rock960-u-boot.dtsi
- 
- FICUS EE
- M:      Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>
- S:      Maintained
- F:	configs/ficus-rk3399_defconfig
-+F:	arch/arm/dts/rk3399-ficus.dts
-+F:	arch/arm/dts/rk3399-ficus-u-boot.dtsi
+ #ifndef CONFIG_SPL_BUILD
+-int board_early_init_f(void)
+-{
+-	struct udevice *regulator;
+-	int ret;
+-
+-	ret = regulator_get_by_platname("vcc5v0_host", &regulator);
+-	if (ret) {
+-		debug("%s vcc5v0_host init fail! ret %d\n", __func__, ret);
+-		goto out;
+-	}
+-
+-	ret = regulator_set_enable(regulator, true);
+-	if (ret)
+-		debug("%s vcc5v0-host-en set fail! ret %d\n", __func__, ret);
+-
+-out:
+-	return 0;
+-}
+-
+ #if defined(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) && defined(CONFIG_EFI_PARTITION)
+ static bool board_is_rockpi_4b(void)
+ {
 -- 
 2.43.0
 
