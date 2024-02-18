@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19F72C48BC4
-	for <u-boot@archiver.kernel.org>; Sun, 18 Feb 2024 23:59:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6ADAC48BC4
+	for <u-boot@archiver.kernel.org>; Mon, 19 Feb 2024 00:00:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 47C3587D55;
-	Mon, 19 Feb 2024 00:59:48 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B0CA987EE8;
+	Mon, 19 Feb 2024 01:00:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ECHbCv+p";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bRqCOoQ1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 43F4E87E9F; Mon, 19 Feb 2024 00:59:47 +0100 (CET)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id 37A7087EDE; Mon, 19 Feb 2024 01:00:16 +0100 (CET)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE29887971
- for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 00:59:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ACBFB87E95
+ for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 00:59:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-41262ec677fso4261625e9.1
- for <u-boot@lists.denx.de>; Sun, 18 Feb 2024 15:59:44 -0800 (PST)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-40fb3b5893eso17814205e9.0
+ for <u-boot@lists.denx.de>; Sun, 18 Feb 2024 15:59:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1708300784; x=1708905584; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Z9gfNiipB/pHMd7M36PNPLSObxiTmu8w4iSStl2HBH4=;
- b=ECHbCv+pdvJi7R2BU8/ra9LmOVYKhBrQtxhp9prQLVzU89wfP5TS1DtPcQ91bIPOin
- 0yCQdl+gHr5YHx59hfM7Bxp40wmYiXtBWlarXNHNcN0mR2SoRD9PuZ2hJDN2ZuD0wnK3
- PBOQU7zovFNcJbd9qplyPGnJnviH0EdIDp3Dd9GleanvUJkCMPCE/nl9spewvNXUB+M/
- m1syuAB2+fXgD9VEzHkZ9qOSNreHDvWMi4ik3HMm116K5tiX5toK7u24TIomj5j3UGoM
- 2rnLGCVKu/i63LmQXzEwQAV/eQnLvXZXJ+1Qa6AjZ9kqvKWUGgrPkEaiHs9TDpXLVu9m
- nMPQ==
+ d=gmail.com; s=20230601; t=1708300786; x=1708905586; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=3GFQsHjw5lCS6cYaxmaTE7m+g201P4aWrcSxt3gP0LE=;
+ b=bRqCOoQ1MQXeMK/S+P8quvKrtxfanvQd5SGa8bZpXNzCdsqds2jDShx3PZlHsgejMc
+ hbQj8ejaUWpjtLsqIO05ZOSt+5Mqx7RWZtyslvNdvfV0T4P/offjf/xpzxOXzrK6TFf0
+ 0gbGkQtCTFn8WxugkyznF10gxmynvKrQss27ay6+NGXessNrYsD1oj2a0wgynd+0ZoL1
+ LJNW6cei6HUtgQpF1+HdXWRhDOobXuXLwoCC1HuiG6fld8JEtIj59PyBd7J8itWDcuz0
+ uvmw5KULb8wA/bMoB6hzR54JWyhBNMMXyQY4B0ov992LXTmPJCqmoX+yQk7zQ+2kF7nN
+ XlLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708300784; x=1708905584;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Z9gfNiipB/pHMd7M36PNPLSObxiTmu8w4iSStl2HBH4=;
- b=UQichbeQ5+wRpeN9wDdD30qS3AmuwjRXeO9+zOX8z/NxUy3IuA5VYBms3xKUN9HUsq
- nfQ3ze1H5aHJNKhnMNQ00U3u24emWoEPVTEAlA+5dUn92oWQwG8m62bGT6IB+NrtVjPt
- 1cuo+4Tt4WYQW8lBzZC0TxQ7ihVzNYEPS42zxaBP1XAlbNdfXh9oTblAZ2IIl3UEBXdX
- VQJUT5dlfBMTa0VEA+ZlSyYLxlCUO7mbj249+mUIjmQ0wShcMh4q8lLYaMOoZfGKE/gx
- rNlWQu35hKfSHqeCA9qYtM6bCFKC2p2PbOKDPglvSZThkb9Pmb9rCPtK5ddNAtEuf0td
- jRuA==
+ d=1e100.net; s=20230601; t=1708300786; x=1708905586;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=3GFQsHjw5lCS6cYaxmaTE7m+g201P4aWrcSxt3gP0LE=;
+ b=uyWR6qhoxynoIXXtn50Cb9bA9cmFdCka+duVdkebAZz+Fs92+GaYN50Sh5F7ZOqn0x
+ nitZfZT+PZ+o6CQ0C4OdoWBHGMBcACSq8uZxn9/Ku8icgSV0DcT4B+367Q8psMIu0Fyi
+ reZIrs874QPVnnZKZX6jnxsznEjkFMXajORb5yB+bFE8r5kmosaMhZQzjLD728Bd48os
+ P4aXLZkz7S0i/AI/JLzC6fCKKFENXNWzTA0g5vY6/kFAXGFkyoQCsGl/h7eZEVesP7xR
+ zbxHUt3pYFoSyN+oPEYXef2yATqOXOzL4kWBrbeMlXxaxRdEjFZixICsnwYaWb0UAqtF
+ eGrA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVEfLdgfugrldyMrNuyDgnFCZ2gnf/E4Ir1m8bpzb/EWNWuJbblg+QFwpbqjUKuGYR1rTixF6xOJqHTsqHHS1jB/jkhMg==
-X-Gm-Message-State: AOJu0YxH7id/Ih6XedBy5t4q5D9P05GRZPa5W6LZYvzVCbNT+RnPz5DH
- ItK6gfU+u5vnIv2b7PEkdtTtwbvnlKea10q3AGW9rlWOroJrdbR3
-X-Google-Smtp-Source: AGHT+IFAAFShxe4qrIXyY913nXGAYZnRZU5vCnQ/HEUdPH36rhj2Tfwl6zLqgQbk3wEIY5qXTPmIkg==
-X-Received: by 2002:a05:600c:4507:b0:412:6170:a178 with SMTP id
- t7-20020a05600c450700b004126170a178mr1971356wmo.29.1708300783970; 
- Sun, 18 Feb 2024 15:59:43 -0800 (PST)
+ AJvYcCUVJ/US++TgFQiO/QU8AHs7avtuAeOjVo3q8fF4bFSbAFptlezZlZK8d0iF247Lgq1KR/Op0lGkHax1ebRzvWPyNP75LA==
+X-Gm-Message-State: AOJu0Yx8ztFqqfBtXYY3stcYsbHdZocnhv8q7hbRxZCy6YrgOh8bfDkL
+ rsQVa+zV/5WRQ7vtJp4G+9mURskzcpWtlKugdwemLKkpanSE911G
+X-Google-Smtp-Source: AGHT+IGn4EDaeDIv0W9tt0/XkOSyReLqTGbFCdksSdWaiipE1nQhk0+It75czrIaG94vuufZXmbktQ==
+X-Received: by 2002:a05:600c:4e87:b0:40f:d14a:624a with SMTP id
+ f7-20020a05600c4e8700b0040fd14a624amr5580011wmq.18.1708300785683; 
+ Sun, 18 Feb 2024 15:59:45 -0800 (PST)
 Received: from morpheus.home.roving-it.com.com
  (8.c.1.0.0.0.0.0.0.0.0.0.0.0.0.0.1.8.6.2.1.1.b.f.0.b.8.0.1.0.0.2.ip6.arpa.
  [2001:8b0:fb11:2681::1c8]) by smtp.googlemail.com with ESMTPSA id
- p18-20020a05600c359200b0041256523bf8sm6854124wmq.31.2024.02.18.15.59.43
+ p18-20020a05600c359200b0041256523bf8sm6854124wmq.31.2024.02.18.15.59.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 18 Feb 2024 15:59:43 -0800 (PST)
+ Sun, 18 Feb 2024 15:59:45 -0800 (PST)
 From: Peter Robinson <pbrobinson@gmail.com>
 To: Tom Rini <trini@konsulko.com>,
 	u-boot@lists.denx.de
 Cc: Peter Robinson <pbrobinson@gmail.com>
-Subject: [PATCH 0/2] Drop reiserfs support
-Date: Sun, 18 Feb 2024 23:59:33 +0000
-Message-ID: <20240218235940.987876-1-pbrobinson@gmail.com>
+Subject: [PATCH 2/2] fs: drop reiserfs
+Date: Sun, 18 Feb 2024 23:59:35 +0000
+Message-ID: <20240218235940.987876-3-pbrobinson@gmail.com>
 X-Mailer: git-send-email 2.43.1
+In-Reply-To: <20240218235940.987876-1-pbrobinson@gmail.com>
+References: <20240218235940.987876-1-pbrobinson@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -92,23 +95,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The reiserfs filesystem	was only enabled by the ethernut5 which appears
-to use jffs on nand for all default usecases (Nut/OS, Yocto) and doesn't
-have USB Storage support enabled, but does have MMC. It's also scheduled
-for removal in upstream Linux.
+It was only included by a single board which doesn't appear to have
+ever used it for any default use cases so drop the filesystem now
+that isn't used by any in-tree configurations.
 
-Looking at the logs for ethernut5 it doesn't actually appear to be
-actively maintained either for the best part of 10+ years but I don't
-remove that as part of this PR but leave it to someone who may know the
-AT91 ecosystem better than me.
-
-Peter Robinson (2):
-  configs: ethernut5: Drop reiserfs
-  fs: drop reiserfs
-
+Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
+---
  cmd/Kconfig                    |   9 -
  cmd/reiser.c                   | 171 ------
- configs/ethernut5_defconfig    |   1 -
  fs/Kconfig                     |   2 -
  fs/Makefile                    |   1 -
  fs/reiserfs/Kconfig            |   0
@@ -118,7 +112,7 @@ Peter Robinson (2):
  fs/reiserfs/reiserfs.c         | 971 ---------------------------------
  fs/reiserfs/reiserfs_private.h | 509 -----------------
  include/reiserfs.h             |  72 ---
- 12 files changed, 1898 deletions(-)
+ 11 files changed, 1897 deletions(-)
  delete mode 100644 cmd/reiser.c
  delete mode 100644 fs/reiserfs/Kconfig
  delete mode 100644 fs/reiserfs/Makefile
@@ -128,6 +122,1981 @@ Peter Robinson (2):
  delete mode 100644 fs/reiserfs/reiserfs_private.h
  delete mode 100644 include/reiserfs.h
 
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index a854a4e8312..62ba7347dd4 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -2751,15 +2751,6 @@ config MTDPARTS_DEFAULT
+ 	  Defines a default MTD partitioning scheme in the Linux MTD command
+ 	  line partitions format
+ 
+-config CMD_REISER
+-	bool "reiser - Access to reiserfs filesystems"
+-	help
+-	  This provides two commands which operate on a resierfs filesystem,
+-	  commonly used some years ago:
+-
+-	    reiserls - list files
+-	    reiserload - load a file
+-
+ config CMD_YAFFS2
+ 	bool "yaffs2 - Access of YAFFS2 filesystem"
+ 	depends on YAFFS2
+diff --git a/cmd/reiser.c b/cmd/reiser.c
+deleted file mode 100644
+index 707167fcd59..00000000000
+--- a/cmd/reiser.c
++++ /dev/null
+@@ -1,171 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * (C) Copyright 2003 - 2004
+- * Sysgo Real-Time Solutions, AG <www.elinos.com>
+- * Pavel Bartusek <pba@sysgo.com>
+- */
+-
+-/*
+- * Reiserfs support
+- */
+-#include <common.h>
+-#include <config.h>
+-#include <command.h>
+-#include <env.h>
+-#include <image.h>
+-#include <linux/ctype.h>
+-#include <asm/byteorder.h>
+-#include <reiserfs.h>
+-#include <part.h>
+-
+-#if !CONFIG_IS_ENABLED(DOS_PARTITION)
+-#error DOS partition support must be selected
+-#endif
+-
+-/* #define	REISER_DEBUG */
+-
+-#ifdef	REISER_DEBUG
+-#define	PRINTF(fmt,args...)	printf (fmt ,##args)
+-#else
+-#define PRINTF(fmt,args...)
+-#endif
+-
+-int do_reiserls(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+-{
+-	char *filename = "/";
+-	int dev, part;
+-	struct blk_desc *dev_desc = NULL;
+-	struct disk_partition info;
+-
+-	if (argc < 3)
+-		return CMD_RET_USAGE;
+-
+-	part = blk_get_device_part_str(argv[1], argv[2], &dev_desc, &info, 1);
+-	if (part < 0)
+-		return 1;
+-
+-	if (argc == 4) {
+-	    filename = argv[3];
+-	}
+-
+-	dev = dev_desc->devnum;
+-	PRINTF("Using device %s %d:%d, directory: %s\n", argv[1], dev, part, filename);
+-
+-	reiserfs_set_blk_dev(dev_desc, &info);
+-
+-	if (!reiserfs_mount(info.size)) {
+-		printf ("** Bad Reiserfs partition or disk - %s %d:%d **\n",  argv[1], dev, part);
+-		return 1;
+-	}
+-
+-	if (reiserfs_ls (filename)) {
+-		printf ("** Error reiserfs_ls() **\n");
+-		return 1;
+-	};
+-
+-	return 0;
+-}
+-
+-U_BOOT_CMD(
+-	reiserls,	4,	1,	do_reiserls,
+-	"list files in a directory (default /)",
+-	"<interface> <dev[:part]> [directory]\n"
+-	"    - list files from 'dev' on 'interface' in a 'directory'"
+-);
+-
+-/******************************************************************************
+- * Reiserfs boot command intepreter. Derived from diskboot
+- */
+-int do_reiserload(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+-{
+-	char *filename = NULL;
+-	int dev, part;
+-	ulong addr = 0, filelen;
+-	struct disk_partition info;
+-	struct blk_desc *dev_desc = NULL;
+-	unsigned long count;
+-	char *addr_str;
+-
+-	switch (argc) {
+-	case 3:
+-		addr_str = env_get("loadaddr");
+-		if (addr_str != NULL) {
+-			addr = hextoul(addr_str, NULL);
+-		} else {
+-			addr = CONFIG_SYS_LOAD_ADDR;
+-		}
+-		filename = env_get("bootfile");
+-		count = 0;
+-		break;
+-	case 4:
+-		addr = hextoul(argv[3], NULL);
+-		filename = env_get("bootfile");
+-		count = 0;
+-		break;
+-	case 5:
+-		addr = hextoul(argv[3], NULL);
+-		filename = argv[4];
+-		count = 0;
+-		break;
+-	case 6:
+-		addr = hextoul(argv[3], NULL);
+-		filename = argv[4];
+-		count = hextoul(argv[5], NULL);
+-		break;
+-
+-	default:
+-		return CMD_RET_USAGE;
+-	}
+-
+-	if (!filename) {
+-		puts ("\n** No boot file defined **\n");
+-		return 1;
+-	}
+-
+-	part = blk_get_device_part_str(argv[1], argv[2], &dev_desc, &info, 1);
+-	if (part < 0)
+-		return 1;
+-
+-	dev = dev_desc->devnum;
+-
+-	printf("Loading file \"%s\" from %s device %d%c%c\n",
+-		filename, argv[1], dev,
+-		part ? ':' : ' ', part ? part + '0' : ' ');
+-
+-	reiserfs_set_blk_dev(dev_desc, &info);
+-
+-	if (!reiserfs_mount(info.size)) {
+-		printf ("** Bad Reiserfs partition or disk - %s %d:%d **\n",  argv[1], dev, part);
+-		return 1;
+-	}
+-
+-	filelen = reiserfs_open(filename);
+-	if (filelen < 0) {
+-		printf("** File not found %s **\n", filename);
+-		return 1;
+-	}
+-	if ((count < filelen) && (count != 0)) {
+-	    filelen = count;
+-	}
+-
+-	if (reiserfs_read((char *)addr, filelen) != filelen) {
+-		printf("\n** Unable to read \"%s\" from %s %d:%d **\n", filename, argv[1], dev, part);
+-		return 1;
+-	}
+-
+-	/* Loading ok, update default load address */
+-	image_load_addr = addr;
+-
+-	printf ("\n%ld bytes read\n", filelen);
+-	env_set_hex("filesize", filelen);
+-
+-	return filelen;
+-}
+-
+-U_BOOT_CMD(
+-	reiserload,	6,	0,	do_reiserload,
+-	"load binary file from a Reiser filesystem",
+-	"<interface> <dev[:part]> [addr] [filename] [bytes]\n"
+-	"    - load binary file 'filename' from 'dev' on 'interface'\n"
+-	"      to address 'addr' from dos filesystem"
+-);
+diff --git a/fs/Kconfig b/fs/Kconfig
+index aa13d4faa77..744c9812b12 100644
+--- a/fs/Kconfig
++++ b/fs/Kconfig
+@@ -10,8 +10,6 @@ source "fs/cbfs/Kconfig"
+ 
+ source "fs/ext4/Kconfig"
+ 
+-source "fs/reiserfs/Kconfig"
+-
+ source "fs/fat/Kconfig"
+ 
+ source "fs/jffs2/Kconfig"
+diff --git a/fs/Makefile b/fs/Makefile
+index 4bed2ff2d99..7b05c79e0cc 100644
+--- a/fs/Makefile
++++ b/fs/Makefile
+@@ -19,7 +19,6 @@ obj-$(CONFIG_CMD_CRAMFS) += cramfs/
+ obj-$(CONFIG_FS_EXT4) += ext4/
+ obj-$(CONFIG_FS_FAT) += fat/
+ obj-$(CONFIG_FS_JFFS2) += jffs2/
+-obj-$(CONFIG_CMD_REISER) += reiserfs/
+ obj-$(CONFIG_SANDBOX) += sandbox/
+ obj-$(CONFIG_SEMIHOSTING) += semihostingfs.o
+ obj-$(CONFIG_CMD_UBIFS) += ubifs/
+diff --git a/fs/reiserfs/Kconfig b/fs/reiserfs/Kconfig
+deleted file mode 100644
+index e69de29bb2d..00000000000
+diff --git a/fs/reiserfs/Makefile b/fs/reiserfs/Makefile
+deleted file mode 100644
+index 63dd8957534..00000000000
+--- a/fs/reiserfs/Makefile
++++ /dev/null
+@@ -1,10 +0,0 @@
+-# SPDX-License-Identifier: GPL-2.0+
+-#
+-# (C) Copyright 2006
+-# Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+-#
+-# (C) Copyright 2003
+-# Pavel Bartusek, Sysgo Real-Time Solutions AG, pba@sysgo.de
+-#
+-
+-obj-y := reiserfs.o dev.o mode_string.o
+diff --git a/fs/reiserfs/dev.c b/fs/reiserfs/dev.c
+deleted file mode 100644
+index 5d9c26489aa..00000000000
+--- a/fs/reiserfs/dev.c
++++ /dev/null
+@@ -1,28 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- *  (C) Copyright 2003 - 2004
+- *  Sysgo AG, <www.elinos.com>, Pavel Bartusek <pba@sysgo.com>
+- */
+-
+-
+-#include <common.h>
+-#include <config.h>
+-#include <reiserfs.h>
+-#include <fs_internal.h>
+-#include "reiserfs_private.h"
+-
+-static struct blk_desc *reiserfs_blk_desc;
+-static struct disk_partition *part_info;
+-
+-
+-void reiserfs_set_blk_dev(struct blk_desc *rbdd, struct disk_partition *info)
+-{
+-	reiserfs_blk_desc = rbdd;
+-	part_info = info;
+-}
+-
+-int reiserfs_devread(int sector, int byte_offset, int byte_len, char *buf)
+-{
+-	return fs_devread(reiserfs_blk_desc, part_info, sector, byte_offset,
+-			  byte_len, buf);
+-}
+diff --git a/fs/reiserfs/mode_string.c b/fs/reiserfs/mode_string.c
+deleted file mode 100644
+index 638cf6368da..00000000000
+--- a/fs/reiserfs/mode_string.c
++++ /dev/null
+@@ -1,124 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * mode_string implementation for busybox
+- *
+- * Copyright (C) 2003  Manuel Novoa III  <mjn3@codepoet.org>
+- */
+-
+-/* Aug 13, 2003
+- * Fix a bug reported by junkio@cox.net involving the mode_chars index.
+- */
+-
+-
+-#include <common.h>
+-#include <linux/stat.h>
+-
+-#if ( S_ISUID != 04000 ) || ( S_ISGID != 02000 ) || ( S_ISVTX != 01000 ) \
+- || ( S_IRUSR != 00400 ) || ( S_IWUSR != 00200 ) || ( S_IXUSR != 00100 ) \
+- || ( S_IRGRP != 00040 ) || ( S_IWGRP != 00020 ) || ( S_IXGRP != 00010 ) \
+- || ( S_IROTH != 00004 ) || ( S_IWOTH != 00002 ) || ( S_IXOTH != 00001 )
+-#error permission bitflag value assumption(s) violated!
+-#endif
+-
+-#if ( S_IFSOCK!= 0140000 ) || ( S_IFLNK != 0120000 ) \
+- || ( S_IFREG != 0100000 ) || ( S_IFBLK != 0060000 ) \
+- || ( S_IFDIR != 0040000 ) || ( S_IFCHR != 0020000 ) \
+- || ( S_IFIFO != 0010000 )
+-#warning mode type bitflag value assumption(s) violated! falling back to larger version
+-
+-#if (S_IRWXU | S_IRWXG | S_IRWXO | S_ISUID | S_ISGID | S_ISVTX) == 07777
+-#undef mode_t
+-#define mode_t unsigned short
+-#endif
+-
+-static const mode_t mode_flags[] = {
+-	S_IRUSR, S_IWUSR, S_IXUSR, S_ISUID,
+-	S_IRGRP, S_IWGRP, S_IXGRP, S_ISGID,
+-	S_IROTH, S_IWOTH, S_IXOTH, S_ISVTX
+-};
+-
+-/* The static const char arrays below are duplicated for the two cases
+- * because moving them ahead of the mode_flags declaration cause a text
+- * size increase with the gcc version I'm using. */
+-
+-/* The previous version used "0pcCd?bB-?l?s???".  However, the '0', 'C',
+- * and 'B' types don't appear to be available on linux.  So I removed them. */
+-static const char type_chars[16] = "?pc?d?b?-?l?s???";
+-/*                                  0123456789abcdef */
+-static const char mode_chars[7] = "rwxSTst";
+-
+-const char *bb_mode_string(int mode)
+-{
+-	static char buf[12];
+-	char *p = buf;
+-
+-	int i, j, k;
+-
+-	*p = type_chars[ (mode >> 12) & 0xf ];
+-	i = 0;
+-	do {
+-		j = k = 0;
+-		do {
+-			*++p = '-';
+-			if (mode & mode_flags[i+j]) {
+-				*p = mode_chars[j];
+-				k = j;
+-			}
+-		} while (++j < 3);
+-		if (mode & mode_flags[i+j]) {
+-			*p = mode_chars[3 + (k & 2) + ((i&8) >> 3)];
+-		}
+-		i += 4;
+-	} while (i < 12);
+-
+-	/* Note: We don't bother with nul termination because bss initialization
+-	 * should have taken care of that for us.  If the user scribbled in buf
+-	 * memory, they deserve whatever happens.  But we'll at least assert. */
+-	if (buf[10] != 0) return NULL;
+-
+-	return buf;
+-}
+-
+-#else
+-
+-/* The previous version used "0pcCd?bB-?l?s???".  However, the '0', 'C',
+- * and 'B' types don't appear to be available on linux.  So I removed them. */
+-static const char type_chars[16] = "?pc?d?b?-?l?s???";
+-/*                                  0123456789abcdef */
+-static const char mode_chars[7] = "rwxSTst";
+-
+-const char *bb_mode_string(int mode)
+-{
+-	static char buf[12];
+-	char *p = buf;
+-
+-	int i, j, k, m;
+-
+-	*p = type_chars[ (mode >> 12) & 0xf ];
+-	i = 0;
+-	m = 0400;
+-	do {
+-		j = k = 0;
+-		do {
+-			*++p = '-';
+-			if (mode & m) {
+-				*p = mode_chars[j];
+-				k = j;
+-			}
+-			m >>= 1;
+-		} while (++j < 3);
+-		++i;
+-		if (mode & (010000 >> i)) {
+-			*p = mode_chars[3 + (k & 2) + (i == 3)];
+-		}
+-	} while (i < 3);
+-
+-	/* Note: We don't bother with nul termination because bss initialization
+-	 * should have taken care of that for us.  If the user scribbled in buf
+-	 * memory, they deserve whatever happens.  But we'll at least assert. */
+-	if (buf[10] != 0) return NULL;
+-
+-	return buf;
+-}
+-
+-#endif
+diff --git a/fs/reiserfs/reiserfs.c b/fs/reiserfs/reiserfs.c
+deleted file mode 100644
+index 635aab2eba7..00000000000
+--- a/fs/reiserfs/reiserfs.c
++++ /dev/null
+@@ -1,971 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- *  Copyright 2000-2002 by Hans Reiser, licensing governed by reiserfs/README
+- *
+- *  GRUB  --  GRand Unified Bootloader
+- *  Copyright (C) 2000, 2001  Free Software Foundation, Inc.
+- *
+- *  (C) Copyright 2003 - 2004
+- *  Sysgo AG, <www.elinos.com>, Pavel Bartusek <pba@sysgo.com>
+- *
+- */
+-
+-/* An implementation for the ReiserFS filesystem ported from GRUB.
+- * Some parts of this code (mainly the structures and defines) are
+- * from the original reiser fs code, as found in the linux kernel.
+- */
+-
+-#include <common.h>
+-#include <malloc.h>
+-#include <linux/ctype.h>
+-#include <linux/time.h>
+-#include <asm/byteorder.h>
+-#include <reiserfs.h>
+-
+-#include "reiserfs_private.h"
+-
+-#undef REISERDEBUG
+-
+-/* Some parts of this code (mainly the structures and defines) are
+- * from the original reiser fs code, as found in the linux kernel.
+- */
+-
+-static char fsys_buf[FSYS_BUFLEN];
+-static reiserfs_error_t errnum = ERR_NONE;
+-static int print_possibilities;
+-static unsigned int filepos, filemax;
+-
+-static int
+-substring (const char *s1, const char *s2)
+-{
+-  while (*s1 == *s2)
+-    {
+-      /* The strings match exactly. */
+-      if (! *(s1++))
+-	return 0;
+-      s2 ++;
+-    }
+-
+-  /* S1 is a substring of S2. */
+-  if (*s1 == 0)
+-    return -1;
+-
+-  /* S1 isn't a substring. */
+-  return 1;
+-}
+-
+-static void sd_print_item (struct item_head * ih, char * item)
+-{
+-    char filetime[30];
+-    time_t ttime;
+-
+-    if (stat_data_v1 (ih)) {
+-	struct stat_data_v1 * sd = (struct stat_data_v1 *)item;
+-	ttime = sd_v1_mtime(sd);
+-	ctime_r(&ttime, filetime);
+-	printf ("%-10s %4hd %6d %6d %9d %24.24s",
+-		 bb_mode_string(sd_v1_mode(sd)), sd_v1_nlink(sd),sd_v1_uid(sd), sd_v1_gid(sd),
+-		 sd_v1_size(sd), filetime);
+-    } else {
+-	struct stat_data * sd = (struct stat_data *)item;
+-	ttime = sd_v2_mtime(sd);
+-	ctime_r(&ttime, filetime);
+-	printf ("%-10s %4d %6d %6d %9d %24.24s",
+-		 bb_mode_string(sd_v2_mode(sd)), sd_v2_nlink(sd),sd_v2_uid(sd),sd_v2_gid(sd),
+-		 (__u32) sd_v2_size(sd), filetime);
+-    }
+-}
+-
+-static int
+-journal_read (int block, int len, char *buffer)
+-{
+-  return reiserfs_devread ((INFO->journal_block + block) << INFO->blocksize_shift,
+-			   0, len, buffer);
+-}
+-
+-/* Read a block from ReiserFS file system, taking the journal into
+- * account.  If the block nr is in the journal, the block from the
+- * journal taken.
+- */
+-static int
+-block_read (unsigned int blockNr, int start, int len, char *buffer)
+-{
+-  int transactions = INFO->journal_transactions;
+-  int desc_block = INFO->journal_first_desc;
+-  int journal_mask = INFO->journal_block_count - 1;
+-  int translatedNr = blockNr;
+-  __u32 *journal_table = JOURNAL_START;
+-  while (transactions-- > 0)
+-    {
+-      int i = 0;
+-      int j_len;
+-      if (__le32_to_cpu(*journal_table) != 0xffffffff)
+-	{
+-	  /* Search for the blockNr in cached journal */
+-	  j_len = __le32_to_cpu(*journal_table++);
+-	  while (i++ < j_len)
+-	    {
+-	      if (__le32_to_cpu(*journal_table++) == blockNr)
+-		{
+-		  journal_table += j_len - i;
+-		  goto found;
+-		}
+-	    }
+-	}
+-      else
+-	{
+-	  /* This is the end of cached journal marker.  The remaining
+-	   * transactions are still on disk.
+-	   */
+-	  struct reiserfs_journal_desc   desc;
+-	  struct reiserfs_journal_commit commit;
+-
+-	  if (! journal_read (desc_block, sizeof (desc), (char *) &desc))
+-	    return 0;
+-
+-	  j_len = __le32_to_cpu(desc.j_len);
+-	  while (i < j_len && i < JOURNAL_TRANS_HALF)
+-	    if (__le32_to_cpu(desc.j_realblock[i++]) == blockNr)
+-	      goto found;
+-
+-	  if (j_len >= JOURNAL_TRANS_HALF)
+-	    {
+-	      int commit_block = (desc_block + 1 + j_len) & journal_mask;
+-	      if (! journal_read (commit_block,
+-				  sizeof (commit), (char *) &commit))
+-		return 0;
+-	      while (i < j_len)
+-		if (__le32_to_cpu(commit.j_realblock[i++ - JOURNAL_TRANS_HALF]) == blockNr)
+-		  goto found;
+-	    }
+-	}
+-      goto not_found;
+-
+-    found:
+-      translatedNr = INFO->journal_block + ((desc_block + i) & journal_mask);
+-#ifdef REISERDEBUG
+-      printf ("block_read: block %d is mapped to journal block %d.\n",
+-	      blockNr, translatedNr - INFO->journal_block);
+-#endif
+-      /* We must continue the search, as this block may be overwritten
+-       * in later transactions.
+-       */
+-    not_found:
+-      desc_block = (desc_block + 2 + j_len) & journal_mask;
+-    }
+-  return reiserfs_devread (translatedNr << INFO->blocksize_shift, start, len, buffer);
+-}
+-
+-/* Init the journal data structure.  We try to cache as much as
+- * possible in the JOURNAL_START-JOURNAL_END space, but if it is full
+- * we can still read the rest from the disk on demand.
+- *
+- * The first number of valid transactions and the descriptor block of the
+- * first valid transaction are held in INFO.  The transactions are all
+- * adjacent, but we must take care of the journal wrap around.
+- */
+-static int
+-journal_init (void)
+-{
+-  unsigned int block_count = INFO->journal_block_count;
+-  unsigned int desc_block;
+-  unsigned int commit_block;
+-  unsigned int next_trans_id;
+-  struct reiserfs_journal_header header;
+-  struct reiserfs_journal_desc   desc;
+-  struct reiserfs_journal_commit commit;
+-  __u32 *journal_table = JOURNAL_START;
+-
+-  journal_read (block_count, sizeof (header), (char *) &header);
+-  desc_block = __le32_to_cpu(header.j_first_unflushed_offset);
+-  if (desc_block >= block_count)
+-    return 0;
+-
+-  INFO->journal_first_desc = desc_block;
+-  next_trans_id = __le32_to_cpu(header.j_last_flush_trans_id) + 1;
+-
+-#ifdef REISERDEBUG
+-  printf ("journal_init: last flushed %d\n",
+-	  __le32_to_cpu(header.j_last_flush_trans_id));
+-#endif
+-
+-  while (1)
+-    {
+-      journal_read (desc_block, sizeof (desc), (char *) &desc);
+-      if (substring (JOURNAL_DESC_MAGIC, desc.j_magic) > 0
+-	  || __le32_to_cpu(desc.j_trans_id) != next_trans_id
+-	  || __le32_to_cpu(desc.j_mount_id) != __le32_to_cpu(header.j_mount_id))
+-	/* no more valid transactions */
+-	break;
+-
+-      commit_block = (desc_block + __le32_to_cpu(desc.j_len) + 1) & (block_count - 1);
+-      journal_read (commit_block, sizeof (commit), (char *) &commit);
+-      if (__le32_to_cpu(desc.j_trans_id) != commit.j_trans_id
+-	  || __le32_to_cpu(desc.j_len) != __le32_to_cpu(commit.j_len))
+-	/* no more valid transactions */
+-	break;
+-
+-#ifdef REISERDEBUG
+-      printf ("Found valid transaction %d/%d at %d.\n",
+-	      __le32_to_cpu(desc.j_trans_id), __le32_to_cpu(desc.j_mount_id), desc_block);
+-#endif
+-
+-      next_trans_id++;
+-      if (journal_table < JOURNAL_END)
+-	{
+-	  if ((journal_table + 1 + __le32_to_cpu(desc.j_len)) >= JOURNAL_END)
+-	    {
+-	      /* The table is almost full; mark the end of the cached
+-	       * journal.*/
+-	      *journal_table = __cpu_to_le32(0xffffffff);
+-	      journal_table = JOURNAL_END;
+-	    }
+-	  else
+-	    {
+-	      unsigned int i;
+-	      /* Cache the length and the realblock numbers in the table.
+-	       * The block number of descriptor can easily be computed.
+-	       * and need not to be stored here.
+-	       */
+-
+-	      /* both are in the little endian format */
+-	      *journal_table++ = desc.j_len;
+-	      for (i = 0; i < __le32_to_cpu(desc.j_len) && i < JOURNAL_TRANS_HALF; i++)
+-		{
+-		  /* both are in the little endian format */
+-		  *journal_table++ = desc.j_realblock[i];
+-#ifdef REISERDEBUG
+-		  printf ("block %d is in journal %d.\n",
+-			  __le32_to_cpu(desc.j_realblock[i]), desc_block);
+-#endif
+-		}
+-	      for (     ; i < __le32_to_cpu(desc.j_len); i++)
+-		{
+-		  /* both are in the little endian format */
+-		  *journal_table++ = commit.j_realblock[i-JOURNAL_TRANS_HALF];
+-#ifdef REISERDEBUG
+-		  printf ("block %d is in journal %d.\n",
+-			  __le32_to_cpu(commit.j_realblock[i-JOURNAL_TRANS_HALF]),
+-			  desc_block);
+-#endif
+-		}
+-	    }
+-	}
+-      desc_block = (commit_block + 1) & (block_count - 1);
+-    }
+-#ifdef REISERDEBUG
+-  printf ("Transaction %d/%d at %d isn't valid.\n",
+-	  __le32_to_cpu(desc.j_trans_id), __le32_to_cpu(desc.j_mount_id), desc_block);
+-#endif
+-
+-  INFO->journal_transactions
+-    = next_trans_id - __le32_to_cpu(header.j_last_flush_trans_id) - 1;
+-  return errnum == 0;
+-}
+-
+-/* check filesystem types and read superblock into memory buffer */
+-int
+-reiserfs_mount (unsigned part_length)
+-{
+-  struct reiserfs_super_block super;
+-  int superblock = REISERFS_DISK_OFFSET_IN_BYTES >> SECTOR_BITS;
+-  char *cache;
+-
+-  if (part_length < superblock + (sizeof (super) >> SECTOR_BITS)
+-      || ! reiserfs_devread (superblock, 0, sizeof (struct reiserfs_super_block),
+-			     (char *) &super)
+-      || (substring (REISER3FS_SUPER_MAGIC_STRING, super.s_magic) > 0
+-	  && substring (REISER2FS_SUPER_MAGIC_STRING, super.s_magic) > 0
+-	  && substring (REISERFS_SUPER_MAGIC_STRING, super.s_magic) > 0)
+-      || (/* check that this is not a copy inside the journal log */
+-	  sb_journal_block(&super) * sb_blocksize(&super)
+-	  <= REISERFS_DISK_OFFSET_IN_BYTES))
+-    {
+-      /* Try old super block position */
+-      superblock = REISERFS_OLD_DISK_OFFSET_IN_BYTES >> SECTOR_BITS;
+-      if (part_length < superblock + (sizeof (super) >> SECTOR_BITS)
+-	  || ! reiserfs_devread (superblock, 0, sizeof (struct reiserfs_super_block),
+-				 (char *) &super))
+-	return 0;
+-
+-      if (substring (REISER2FS_SUPER_MAGIC_STRING, super.s_magic) > 0
+-	  && substring (REISERFS_SUPER_MAGIC_STRING, super.s_magic) > 0)
+-	{
+-	  /* pre journaling super block ? */
+-	  if (substring (REISERFS_SUPER_MAGIC_STRING,
+-			 (char*) ((int) &super + 20)) > 0)
+-	    return 0;
+-
+-	  set_sb_blocksize(&super, REISERFS_OLD_BLOCKSIZE);
+-	  set_sb_journal_block(&super, 0);
+-	  set_sb_version(&super, 0);
+-	}
+-    }
+-
+-  /* check the version number.  */
+-  if (sb_version(&super) > REISERFS_MAX_SUPPORTED_VERSION)
+-    return 0;
+-
+-  INFO->version = sb_version(&super);
+-  INFO->blocksize = sb_blocksize(&super);
+-  INFO->fullblocksize_shift = log2 (sb_blocksize(&super));
+-  INFO->blocksize_shift = INFO->fullblocksize_shift - SECTOR_BITS;
+-  INFO->cached_slots =
+-    (FSYSREISER_CACHE_SIZE >> INFO->fullblocksize_shift) - 1;
+-
+-#ifdef REISERDEBUG
+-  printf ("reiserfs_mount: version=%d, blocksize=%d\n",
+-	  INFO->version, INFO->blocksize);
+-#endif /* REISERDEBUG */
+-
+-  /* Clear node cache. */
+-  memset (INFO->blocks, 0, sizeof (INFO->blocks));
+-
+-  if (sb_blocksize(&super) < FSYSREISER_MIN_BLOCKSIZE
+-      || sb_blocksize(&super) > FSYSREISER_MAX_BLOCKSIZE
+-      || (SECTOR_SIZE << INFO->blocksize_shift) != sb_blocksize(&super))
+-    return 0;
+-
+-  /* Initialize journal code.  If something fails we end with zero
+-   * journal_transactions, so we don't access the journal at all.
+-   */
+-  INFO->journal_transactions = 0;
+-  if (sb_journal_block(&super) != 0 && super.s_journal_dev == 0)
+-    {
+-      INFO->journal_block = sb_journal_block(&super);
+-      INFO->journal_block_count = sb_journal_size(&super);
+-      if (is_power_of_two (INFO->journal_block_count))
+-	journal_init ();
+-
+-      /* Read in super block again, maybe it is in the journal */
+-      block_read (superblock >> INFO->blocksize_shift,
+-		  0, sizeof (struct reiserfs_super_block), (char *) &super);
+-    }
+-
+-  if (! block_read (sb_root_block(&super), 0, INFO->blocksize, (char*) ROOT))
+-    return 0;
+-
+-  cache = ROOT;
+-  INFO->tree_depth = __le16_to_cpu(BLOCKHEAD (cache)->blk_level);
+-
+-#ifdef REISERDEBUG
+-  printf ("root read_in: block=%d, depth=%d\n",
+-	  sb_root_block(&super), INFO->tree_depth);
+-#endif /* REISERDEBUG */
+-
+-  if (INFO->tree_depth >= MAX_HEIGHT)
+-    return 0;
+-  if (INFO->tree_depth == DISK_LEAF_NODE_LEVEL)
+-    {
+-      /* There is only one node in the whole filesystem,
+-       * which is simultanously leaf and root */
+-      memcpy (LEAF, ROOT, INFO->blocksize);
+-    }
+-  return 1;
+-}
+-
+-/***************** TREE ACCESSING METHODS *****************************/
+-
+-/* I assume you are familiar with the ReiserFS tree, if not go to
+- * http://www.namesys.com/content_table.html
+- *
+- * My tree node cache is organized as following
+- *   0   ROOT node
+- *   1   LEAF node  (if the ROOT is also a LEAF it is copied here
+- *   2-n other nodes on current path from bottom to top.
+- *       if there is not enough space in the cache, the top most are
+- *       omitted.
+- *
+- * I have only two methods to find a key in the tree:
+- *   search_stat(dir_id, objectid) searches for the stat entry (always
+- *       the first entry) of an object.
+- *   next_key() gets the next key in tree order.
+- *
+- * This means, that I can only sequential reads of files are
+- * efficient, but this really doesn't hurt for grub.
+- */
+-
+-/* Read in the node at the current path and depth into the node cache.
+- * You must set INFO->blocks[depth] before.
+- */
+-static char *
+-read_tree_node (unsigned int blockNr, int depth)
+-{
+-  char* cache = CACHE(depth);
+-  int num_cached = INFO->cached_slots;
+-  if (depth < num_cached)
+-    {
+-      /* This is the cached part of the path.  Check if same block is
+-       * needed.
+-       */
+-      if (blockNr == INFO->blocks[depth])
+-	return cache;
+-    }
+-  else
+-    cache = CACHE(num_cached);
+-
+-#ifdef REISERDEBUG
+-  printf ("  next read_in: block=%d (depth=%d)\n",
+-	  blockNr, depth);
+-#endif /* REISERDEBUG */
+-  if (! block_read (blockNr, 0, INFO->blocksize, cache))
+-    return 0;
+-  /* Make sure it has the right node level */
+-  if (__le16_to_cpu(BLOCKHEAD (cache)->blk_level) != depth)
+-    {
+-      errnum = ERR_FSYS_CORRUPT;
+-      return 0;
+-    }
+-
+-  INFO->blocks[depth] = blockNr;
+-  return cache;
+-}
+-
+-/* Get the next key, i.e. the key following the last retrieved key in
+- * tree order.  INFO->current_ih and
+- * INFO->current_info are adapted accordingly.  */
+-static int
+-next_key (void)
+-{
+-  int depth;
+-  struct item_head *ih = INFO->current_ih + 1;
+-  char *cache;
+-
+-#ifdef REISERDEBUG
+-  printf ("next_key:\n  old ih: key %d:%d:%d:%d version:%d\n",
+-	  __le32_to_cpu(INFO->current_ih->ih_key.k_dir_id),
+-	  __le32_to_cpu(INFO->current_ih->ih_key.k_objectid),
+-	  __le32_to_cpu(INFO->current_ih->ih_key.u.v1.k_offset),
+-	  __le32_to_cpu(INFO->current_ih->ih_key.u.v1.k_uniqueness),
+-	  __le16_to_cpu(INFO->current_ih->ih_version));
+-#endif /* REISERDEBUG */
+-
+-  if (ih == &ITEMHEAD[__le16_to_cpu(BLOCKHEAD (LEAF)->blk_nr_item)])
+-    {
+-      depth = DISK_LEAF_NODE_LEVEL;
+-      /* The last item, was the last in the leaf node.
+-       * Read in the next block
+-       */
+-      do
+-	{
+-	  if (depth == INFO->tree_depth)
+-	    {
+-	      /* There are no more keys at all.
+-	       * Return a dummy item with MAX_KEY */
+-	      ih = (struct item_head *) &BLOCKHEAD (LEAF)->blk_right_delim_key;
+-	      goto found;
+-	    }
+-	  depth++;
+-#ifdef REISERDEBUG
+-	  printf ("  depth=%d, i=%d\n", depth, INFO->next_key_nr[depth]);
+-#endif /* REISERDEBUG */
+-	}
+-      while (INFO->next_key_nr[depth] == 0);
+-
+-      if (depth == INFO->tree_depth)
+-	cache = ROOT;
+-      else if (depth <= INFO->cached_slots)
+-	cache = CACHE (depth);
+-      else
+-	{
+-	  cache = read_tree_node (INFO->blocks[depth], depth);
+-	  if (! cache)
+-	    return 0;
+-	}
+-
+-      do
+-	{
+-	  int nr_item = __le16_to_cpu(BLOCKHEAD (cache)->blk_nr_item);
+-	  int key_nr = INFO->next_key_nr[depth]++;
+-#ifdef REISERDEBUG
+-	  printf ("  depth=%d, i=%d/%d\n", depth, key_nr, nr_item);
+-#endif /* REISERDEBUG */
+-	  if (key_nr == nr_item)
+-	    /* This is the last item in this block, set the next_key_nr to 0 */
+-	    INFO->next_key_nr[depth] = 0;
+-
+-	  cache = read_tree_node (dc_block_number(&(DC (cache)[key_nr])), --depth);
+-	  if (! cache)
+-	    return 0;
+-	}
+-      while (depth > DISK_LEAF_NODE_LEVEL);
+-
+-      ih = ITEMHEAD;
+-    }
+- found:
+-  INFO->current_ih   = ih;
+-  INFO->current_item = &LEAF[__le16_to_cpu(ih->ih_item_location)];
+-#ifdef REISERDEBUG
+-  printf ("  new ih: key %d:%d:%d:%d version:%d\n",
+-	  __le32_to_cpu(INFO->current_ih->ih_key.k_dir_id),
+-	  __le32_to_cpu(INFO->current_ih->ih_key.k_objectid),
+-	  __le32_to_cpu(INFO->current_ih->ih_key.u.v1.k_offset),
+-	  __le32_to_cpu(INFO->current_ih->ih_key.u.v1.k_uniqueness),
+-	  __le16_to_cpu(INFO->current_ih->ih_version));
+-#endif /* REISERDEBUG */
+-  return 1;
+-}
+-
+-/* preconditions: reiserfs_mount already executed, therefore
+- *   INFO block is valid
+- * returns: 0 if error (errnum is set),
+- *   nonzero iff we were able to find the key successfully.
+- * postconditions: on a nonzero return, the current_ih and
+- *   current_item fields describe the key that equals the
+- *   searched key.  INFO->next_key contains the next key after
+- *   the searched key.
+- * side effects: messes around with the cache.
+- */
+-static int
+-search_stat (__u32 dir_id, __u32 objectid)
+-{
+-  char *cache;
+-  int depth;
+-  int nr_item;
+-  int i;
+-  struct item_head *ih;
+-#ifdef REISERDEBUG
+-  printf ("search_stat:\n  key %d:%d:0:0\n", dir_id, objectid);
+-#endif /* REISERDEBUG */
+-
+-  depth = INFO->tree_depth;
+-  cache = ROOT;
+-
+-  while (depth > DISK_LEAF_NODE_LEVEL)
+-    {
+-      struct key *key;
+-      nr_item = __le16_to_cpu(BLOCKHEAD (cache)->blk_nr_item);
+-
+-      key = KEY (cache);
+-
+-      for (i = 0; i < nr_item; i++)
+-	{
+-	  if (__le32_to_cpu(key->k_dir_id) > dir_id
+-	      || (__le32_to_cpu(key->k_dir_id) == dir_id
+-		  && (__le32_to_cpu(key->k_objectid) > objectid
+-		      || (__le32_to_cpu(key->k_objectid) == objectid
+-			  && (__le32_to_cpu(key->u.v1.k_offset)
+-			      | __le32_to_cpu(key->u.v1.k_uniqueness)) > 0))))
+-	    break;
+-	  key++;
+-	}
+-
+-#ifdef REISERDEBUG
+-      printf ("  depth=%d, i=%d/%d\n", depth, i, nr_item);
+-#endif /* REISERDEBUG */
+-      INFO->next_key_nr[depth] = (i == nr_item) ? 0 : i+1;
+-      cache = read_tree_node (dc_block_number(&(DC (cache)[i])), --depth);
+-      if (! cache)
+-	return 0;
+-    }
+-
+-  /* cache == LEAF */
+-  nr_item = __le16_to_cpu(BLOCKHEAD (LEAF)->blk_nr_item);
+-  ih = ITEMHEAD;
+-  for (i = 0; i < nr_item; i++)
+-    {
+-      if (__le32_to_cpu(ih->ih_key.k_dir_id) == dir_id
+-	  && __le32_to_cpu(ih->ih_key.k_objectid) == objectid
+-	  && __le32_to_cpu(ih->ih_key.u.v1.k_offset) == 0
+-	  && __le32_to_cpu(ih->ih_key.u.v1.k_uniqueness) == 0)
+-	{
+-#ifdef REISERDEBUG
+-	  printf ("  depth=%d, i=%d/%d\n", depth, i, nr_item);
+-#endif /* REISERDEBUG */
+-	  INFO->current_ih   = ih;
+-	  INFO->current_item = &LEAF[__le16_to_cpu(ih->ih_item_location)];
+-	  return 1;
+-	}
+-      ih++;
+-    }
+-  errnum = ERR_FSYS_CORRUPT;
+-  return 0;
+-}
+-
+-int
+-reiserfs_read (char *buf, unsigned len)
+-{
+-  unsigned int blocksize;
+-  unsigned int offset;
+-  unsigned int to_read;
+-  char *prev_buf = buf;
+-
+-#ifdef REISERDEBUG
+-  printf ("reiserfs_read: filepos=%d len=%d, offset=%Lx\n",
+-	  filepos, len, (__u64) IH_KEY_OFFSET (INFO->current_ih) - 1);
+-#endif /* REISERDEBUG */
+-
+-  if (__le32_to_cpu(INFO->current_ih->ih_key.k_objectid) != INFO->fileinfo.k_objectid
+-      || IH_KEY_OFFSET (INFO->current_ih) > filepos + 1)
+-    {
+-      search_stat (INFO->fileinfo.k_dir_id, INFO->fileinfo.k_objectid);
+-      goto get_next_key;
+-    }
+-
+-  while (! errnum)
+-    {
+-      if (__le32_to_cpu(INFO->current_ih->ih_key.k_objectid) != INFO->fileinfo.k_objectid) {
+-	break;
+-      }
+-
+-      offset = filepos - IH_KEY_OFFSET (INFO->current_ih) + 1;
+-      blocksize = __le16_to_cpu(INFO->current_ih->ih_item_len);
+-
+-#ifdef REISERDEBUG
+-      printf ("  loop: filepos=%d len=%d, offset=%d blocksize=%d\n",
+-	      filepos, len, offset, blocksize);
+-#endif /* REISERDEBUG */
+-
+-      if (IH_KEY_ISTYPE(INFO->current_ih, TYPE_DIRECT)
+-	  && offset < blocksize)
+-	{
+-#ifdef REISERDEBUG
+-	  printf ("direct_read: offset=%d, blocksize=%d\n",
+-		  offset, blocksize);
+-#endif /* REISERDEBUG */
+-	  to_read = blocksize - offset;
+-	  if (to_read > len)
+-	    to_read = len;
+-
+-	  memcpy (buf, INFO->current_item + offset, to_read);
+-	  goto update_buf_len;
+-	}
+-      else if (IH_KEY_ISTYPE(INFO->current_ih, TYPE_INDIRECT))
+-	{
+-	  blocksize = (blocksize >> 2) << INFO->fullblocksize_shift;
+-#ifdef REISERDEBUG
+-	  printf ("indirect_read: offset=%d, blocksize=%d\n",
+-		  offset, blocksize);
+-#endif /* REISERDEBUG */
+-
+-	  while (offset < blocksize)
+-	    {
+-	      __u32 blocknr = __le32_to_cpu(((__u32 *) INFO->current_item)
+-		[offset >> INFO->fullblocksize_shift]);
+-	      int blk_offset = offset & (INFO->blocksize-1);
+-	      to_read = INFO->blocksize - blk_offset;
+-	      if (to_read > len)
+-		to_read = len;
+-
+-	      /* Journal is only for meta data.  Data blocks can be read
+-	       * directly without using block_read
+-	       */
+-	      reiserfs_devread (blocknr << INFO->blocksize_shift,
+-				blk_offset, to_read, buf);
+-	    update_buf_len:
+-	      len -= to_read;
+-	      buf += to_read;
+-	      offset += to_read;
+-	      filepos += to_read;
+-	      if (len == 0)
+-		goto done;
+-	    }
+-	}
+-    get_next_key:
+-      next_key ();
+-    }
+- done:
+-  return errnum ? 0 : buf - prev_buf;
+-}
+-
+-
+-/* preconditions: reiserfs_mount already executed, therefore
+- *   INFO block is valid
+- * returns: 0 if error, nonzero iff we were able to find the file successfully
+- * postconditions: on a nonzero return, INFO->fileinfo contains the info
+- *   of the file we were trying to look up, filepos is 0 and filemax is
+- *   the size of the file.
+- */
+-static int
+-reiserfs_dir (char *dirname)
+-{
+-  struct reiserfs_de_head *de_head;
+-  char *rest, ch;
+-  __u32 dir_id, objectid, parent_dir_id = 0, parent_objectid = 0;
+-#ifndef STAGE1_5
+-  int do_possibilities = 0;
+-#endif /* ! STAGE1_5 */
+-  char linkbuf[PATH_MAX];	/* buffer for following symbolic links */
+-  int link_count = 0;
+-  int mode;
+-
+-  dir_id = REISERFS_ROOT_PARENT_OBJECTID;
+-  objectid = REISERFS_ROOT_OBJECTID;
+-
+-  while (1)
+-    {
+-#ifdef REISERDEBUG
+-      printf ("dirname=%s\n", dirname);
+-#endif /* REISERDEBUG */
+-
+-      /* Search for the stat info first. */
+-      if (! search_stat (dir_id, objectid))
+-	return 0;
+-
+-#ifdef REISERDEBUG
+-       printf ("sd_mode=%x sd_size=%d\n",
+-	       stat_data_v1(INFO->current_ih) ? sd_v1_mode((struct stat_data_v1 *) INFO->current_item) :
+-						sd_v2_mode((struct stat_data *) (INFO->current_item)),
+-	       stat_data_v1(INFO->current_ih) ? sd_v1_size((struct stat_data_v1 *) INFO->current_item) :
+-						sd_v2_size((struct stat_data *) INFO->current_item)
+-	      );
+-
+-#endif /* REISERDEBUG */
+-      mode = stat_data_v1(INFO->current_ih) ?
+-	       sd_v1_mode((struct stat_data_v1 *) INFO->current_item) :
+-	       sd_v2_mode((struct stat_data *) INFO->current_item);
+-
+-      /* If we've got a symbolic link, then chase it. */
+-      if (S_ISLNK (mode))
+-	{
+-	  unsigned int len;
+-	  if (++link_count > MAX_LINK_COUNT)
+-	    {
+-	      errnum = ERR_SYMLINK_LOOP;
+-	      return 0;
+-	    }
+-
+-	  /* Get the symlink size. */
+-	  filemax = stat_data_v1(INFO->current_ih) ?
+-		     sd_v1_size((struct stat_data_v1 *) INFO->current_item) :
+-		     sd_v2_size((struct stat_data *) INFO->current_item);
+-
+-	  /* Find out how long our remaining name is. */
+-	  len = 0;
+-	  while (dirname[len] && !isspace (dirname[len]))
+-	    len++;
+-
+-	  if (filemax + len > sizeof (linkbuf) - 1)
+-	    {
+-	      errnum = ERR_FILELENGTH;
+-	      return 0;
+-	    }
+-
+-	  /* Copy the remaining name to the end of the symlink data.
+-	     Note that DIRNAME and LINKBUF may overlap! */
+-	  memmove (linkbuf + filemax, dirname, len+1);
+-
+-	  INFO->fileinfo.k_dir_id = dir_id;
+-	  INFO->fileinfo.k_objectid = objectid;
+-	  filepos = 0;
+-	  if (! next_key ()
+-	      || reiserfs_read (linkbuf, filemax) != filemax)
+-	    {
+-	      if (! errnum)
+-		errnum = ERR_FSYS_CORRUPT;
+-	      return 0;
+-	    }
+-
+-#ifdef REISERDEBUG
+-	  printf ("symlink=%s\n", linkbuf);
+-#endif /* REISERDEBUG */
+-
+-	  dirname = linkbuf;
+-	  if (*dirname == '/')
+-	    {
+-	      /* It's an absolute link, so look it up in root. */
+-	      dir_id = REISERFS_ROOT_PARENT_OBJECTID;
+-	      objectid = REISERFS_ROOT_OBJECTID;
+-	    }
+-	  else
+-	    {
+-	      /* Relative, so look it up in our parent directory. */
+-	      dir_id   = parent_dir_id;
+-	      objectid = parent_objectid;
+-	    }
+-
+-	  /* Now lookup the new name. */
+-	  continue;
+-	}
+-
+-      /* if we have a real file (and we're not just printing possibilities),
+-	 then this is where we want to exit */
+-
+-      if (! *dirname || isspace (*dirname))
+-	{
+-	  if (! S_ISREG (mode))
+-	    {
+-	      errnum = ERR_BAD_FILETYPE;
+-	      return 0;
+-	    }
+-
+-	  filepos = 0;
+-	  filemax = stat_data_v1(INFO->current_ih) ?
+-		      sd_v1_size((struct stat_data_v1 *) INFO->current_item) :
+-		      sd_v2_size((struct stat_data *) INFO->current_item);
+-#if 0
+-	  /* If this is a new stat data and size is > 4GB set filemax to
+-	   * maximum
+-	   */
+-	  if (__le16_to_cpu(INFO->current_ih->ih_version) == ITEM_VERSION_2
+-	      && sd_size_hi((struct stat_data *) INFO->current_item) > 0)
+-	    filemax = 0xffffffff;
+-#endif
+-	  INFO->fileinfo.k_dir_id = dir_id;
+-	  INFO->fileinfo.k_objectid = objectid;
+-	  return next_key ();
+-	}
+-
+-      /* continue with the file/directory name interpretation */
+-      while (*dirname == '/')
+-	dirname++;
+-      if (! S_ISDIR (mode))
+-	{
+-	  errnum = ERR_BAD_FILETYPE;
+-	  return 0;
+-	}
+-      for (rest = dirname; (ch = *rest) && ! isspace (ch) && ch != '/'; rest++);
+-      *rest = 0;
+-
+-# ifndef STAGE1_5
+-      if (print_possibilities && ch != '/')
+-	do_possibilities = 1;
+-# endif /* ! STAGE1_5 */
+-
+-      while (1)
+-	{
+-	  char *name_end;
+-	  int num_entries;
+-
+-	  if (! next_key ())
+-	    return 0;
+-#ifdef REISERDEBUG
+-	  printf ("ih: key %d:%d:%d:%d version:%d\n",
+-		  __le32_to_cpu(INFO->current_ih->ih_key.k_dir_id),
+-		  __le32_to_cpu(INFO->current_ih->ih_key.k_objectid),
+-		  __le32_to_cpu(INFO->current_ih->ih_key.u.v1.k_offset),
+-		  __le32_to_cpu(INFO->current_ih->ih_key.u.v1.k_uniqueness),
+-		  __le16_to_cpu(INFO->current_ih->ih_version));
+-#endif /* REISERDEBUG */
+-
+-	  if (__le32_to_cpu(INFO->current_ih->ih_key.k_objectid) != objectid)
+-	    break;
+-
+-	  name_end = INFO->current_item + __le16_to_cpu(INFO->current_ih->ih_item_len);
+-	  de_head = (struct reiserfs_de_head *) INFO->current_item;
+-	  num_entries = __le16_to_cpu(INFO->current_ih->u.ih_entry_count);
+-	  while (num_entries > 0)
+-	    {
+-	      char *filename = INFO->current_item + deh_location(de_head);
+-	      char  tmp = *name_end;
+-	      if ((deh_state(de_head) & DEH_Visible))
+-		{
+-		  int cmp;
+-		  /* Directory names in ReiserFS are not null
+-		   * terminated.  We write a temporary 0 behind it.
+-		   * NOTE: that this may overwrite the first block in
+-		   * the tree cache.  That doesn't hurt as long as we
+-		   * don't call next_key () in between.
+-		   */
+-		  *name_end = 0;
+-		  cmp = substring (dirname, filename);
+-		  *name_end = tmp;
+-# ifndef STAGE1_5
+-		  if (do_possibilities)
+-		    {
+-		      if (cmp <= 0)
+-			{
+-			  char fn[PATH_MAX];
+-			  struct fsys_reiser_info info_save;
+-
+-			  if (print_possibilities > 0)
+-			    print_possibilities = -print_possibilities;
+-			  *name_end = 0;
+-			  strcpy(fn, filename);
+-			  *name_end = tmp;
+-
+-			  /* If NAME is "." or "..", do not count it.  */
+-			  if (strcmp (fn, ".") != 0 && strcmp (fn, "..") != 0) {
+-			    memcpy(&info_save, INFO, sizeof(struct fsys_reiser_info));
+-			    search_stat (deh_dir_id(de_head), deh_objectid(de_head));
+-			    sd_print_item(INFO->current_ih, INFO->current_item);
+-			    printf(" %s\n", fn);
+-			    search_stat (dir_id, objectid);
+-			    memcpy(INFO, &info_save, sizeof(struct fsys_reiser_info));
+-			  }
+-			}
+-		    }
+-		  else
+-# endif /* ! STAGE1_5 */
+-		    if (cmp == 0)
+-		      goto found;
+-		}
+-	      /* The beginning of this name marks the end of the next name.
+-	       */
+-	      name_end = filename;
+-	      de_head++;
+-	      num_entries--;
+-	    }
+-	}
+-
+-# ifndef STAGE1_5
+-      if (print_possibilities < 0)
+-	return 1;
+-# endif /* ! STAGE1_5 */
+-
+-      errnum = ERR_FILE_NOT_FOUND;
+-      *rest = ch;
+-      return 0;
+-
+-    found:
+-      *rest = ch;
+-      dirname = rest;
+-
+-      parent_dir_id = dir_id;
+-      parent_objectid = objectid;
+-      dir_id = deh_dir_id(de_head);
+-      objectid = deh_objectid(de_head);
+-    }
+-}
+-
+-/*
+- * U-Boot interface functions
+- */
+-
+-/*
+- * List given directory
+- *
+- * RETURN: 0 - OK, else grub_error_t errnum
+- */
+-int
+-reiserfs_ls (char *dirname)
+-{
+-	char *dir_slash;
+-	int res;
+-
+-	errnum = 0;
+-	dir_slash = malloc(strlen(dirname) + 1);
+-	if (dir_slash == NULL) {
+-		return ERR_NUMBER_OVERFLOW;
+-	}
+-	strcpy(dir_slash, dirname);
+-	/* add "/" to the directory name */
+-	strcat(dir_slash, "/");
+-
+-	print_possibilities = 1;
+-	res = reiserfs_dir (dir_slash);
+-	free(dir_slash);
+-	if (!res || errnum) {
+-		return errnum;
+-	}
+-
+-	return 0;
+-}
+-
+-/*
+- * Open file for reading
+- *
+- * RETURN: >0 - OK, size of opened file
+- *         <0 - ERROR  -grub_error_t errnum
+- */
+-int
+-reiserfs_open (char *filename)
+-{
+-	/* open the file */
+-	errnum = 0;
+-	print_possibilities = 0;
+-	if (!reiserfs_dir (filename) || errnum) {
+-		return -errnum;
+-	}
+-	return filemax;
+-}
+diff --git a/fs/reiserfs/reiserfs_private.h b/fs/reiserfs/reiserfs_private.h
+deleted file mode 100644
+index 5936f214005..00000000000
+--- a/fs/reiserfs/reiserfs_private.h
++++ /dev/null
+@@ -1,509 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- *  Copyright 2000-2002 by Hans Reiser, licensing governed by reiserfs/README
+- *
+- *  GRUB  --  GRand Unified Bootloader
+- *  Copyright (C) 2000, 2001  Free Software Foundation, Inc.
+- *
+- *  (C) Copyright 2003 - 2004
+- *  Sysgo AG, <www.elinos.com>, Pavel Bartusek <pba@sysgo.com>
+- *
+- */
+-
+-/* An implementation for the ReiserFS filesystem ported from GRUB.
+- * Some parts of this code (mainly the structures and defines) are
+- * from the original reiser fs code, as found in the linux kernel.
+- */
+-
+-#include <compiler.h>
+-
+-#ifndef __BYTE_ORDER
+-#if defined(__LITTLE_ENDIAN) && !defined(__BIG_ENDIAN)
+-#define __BYTE_ORDER __LITTLE_ENDIAN
+-#elif defined(__BIG_ENDIAN) && !defined(__LITTLE_ENDIAN)
+-#define __BYTE_ORDER __BIG_ENDIAN
+-#else
+-#error "unable to define __BYTE_ORDER"
+-#endif
+-#endif /* not __BYTE_ORDER */
+-
+-#define FSYS_BUFLEN  0x8000
+-#define FSYS_BUF     fsys_buf
+-
+-/* This is the new super block of a journaling reiserfs system */
+-struct reiserfs_super_block
+-{
+-  __u32 s_block_count;			/* blocks count		*/
+-  __u32 s_free_blocks;			/* free blocks count	*/
+-  __u32 s_root_block;			/* root block number	*/
+-  __u32 s_journal_block;		/* journal block number    */
+-  __u32 s_journal_dev;			/* journal device number  */
+-  __u32 s_journal_size;			/* size of the journal on FS creation.	used to make sure they don't overflow it */
+-  __u32 s_journal_trans_max;		/* max number of blocks in a transaction.  */
+-  __u32 s_journal_magic;		/* random value made on fs creation */
+-  __u32 s_journal_max_batch;		/* max number of blocks to batch into a trans */
+-  __u32 s_journal_max_commit_age;	/* in seconds, how old can an async commit be */
+-  __u32 s_journal_max_trans_age;	/* in seconds, how old can a transaction be */
+-  __u16 s_blocksize;			/* block size		*/
+-  __u16 s_oid_maxsize;			/* max size of object id array	*/
+-  __u16 s_oid_cursize;			/* current size of object id array */
+-  __u16 s_state;			/* valid or error	*/
+-  char s_magic[16];			/* reiserfs magic string indicates that file system is reiserfs */
+-  __u16 s_tree_height;			/* height of disk tree */
+-  __u16 s_bmap_nr;			/* amount of bitmap blocks needed to address each block of file system */
+-  __u16 s_version;
+-  char s_unused[128];			/* zero filled by mkreiserfs */
+-};
+-
+-
+-#define sb_root_block(sbp)	      (__le32_to_cpu((sbp)->s_root_block))
+-#define sb_journal_block(sbp)	      (__le32_to_cpu((sbp)->s_journal_block))
+-#define set_sb_journal_block(sbp,v)   ((sbp)->s_journal_block = __cpu_to_le32(v))
+-#define sb_journal_size(sbp)	      (__le32_to_cpu((sbp)->s_journal_size))
+-#define sb_blocksize(sbp)	      (__le16_to_cpu((sbp)->s_blocksize))
+-#define set_sb_blocksize(sbp,v)       ((sbp)->s_blocksize = __cpu_to_le16(v))
+-#define sb_version(sbp)		      (__le16_to_cpu((sbp)->s_version))
+-#define set_sb_version(sbp,v)	      ((sbp)->s_version = __cpu_to_le16(v))
+-
+-
+-#define REISERFS_MAX_SUPPORTED_VERSION 2
+-#define REISERFS_SUPER_MAGIC_STRING "ReIsErFs"
+-#define REISER2FS_SUPER_MAGIC_STRING "ReIsEr2Fs"
+-#define REISER3FS_SUPER_MAGIC_STRING "ReIsEr3Fs"
+-
+-#define MAX_HEIGHT 7
+-
+-/* must be correct to keep the desc and commit structs at 4k */
+-#define JOURNAL_TRANS_HALF 1018
+-
+-/* first block written in a commit.  */
+-struct reiserfs_journal_desc {
+-  __u32 j_trans_id;			/* id of commit */
+-  __u32 j_len;				/* length of commit. len +1 is the commit block */
+-  __u32 j_mount_id;			/* mount id of this trans*/
+-  __u32 j_realblock[JOURNAL_TRANS_HALF]; /* real locations for the first blocks */
+-  char j_magic[12];
+-};
+-
+-/* last block written in a commit */
+-struct reiserfs_journal_commit {
+-  __u32 j_trans_id;			/* must match j_trans_id from the desc block */
+-  __u32 j_len;			/* ditto */
+-  __u32 j_realblock[JOURNAL_TRANS_HALF]; /* real locations for the last blocks */
+-  char j_digest[16];			/* md5 sum of all the blocks involved, including desc and commit. not used, kill it */
+-};
+-
+-/* this header block gets written whenever a transaction is considered
+-   fully flushed, and is more recent than the last fully flushed
+-   transaction.
+-   fully flushed means all the log blocks and all the real blocks are
+-   on disk, and this transaction does not need to be replayed.
+-*/
+-struct reiserfs_journal_header {
+-  /* id of last fully flushed transaction */
+-  __u32 j_last_flush_trans_id;
+-  /* offset in the log of where to start replay after a crash */
+-  __u32 j_first_unflushed_offset;
+-  /* mount id to detect very old transactions */
+-  __u32 j_mount_id;
+-};
+-
+-/* magic string to find desc blocks in the journal */
+-#define JOURNAL_DESC_MAGIC "ReIsErLB"
+-
+-
+-/*
+- * directories use this key as well as old files
+- */
+-struct offset_v1
+-{
+-  /*
+-   * for regular files this is the offset to the first byte of the
+-   * body, contained in the object-item, as measured from the start of
+-   * the entire body of the object.
+-   *
+-   * for directory entries, k_offset consists of hash derived from
+-   * hashing the name and using few bits (23 or more) of the resulting
+-   * hash, and generation number that allows distinguishing names with
+-   * hash collisions. If number of collisions overflows generation
+-   * number, we return EEXIST.	High order bit is 0 always
+-   */
+-  __u32 k_offset;
+-  __u32 k_uniqueness;
+-};
+-
+-struct offset_v2 {
+-  /*
+-   * for regular files this is the offset to the first byte of the
+-   * body, contained in the object-item, as measured from the start of
+-   * the entire body of the object.
+-   *
+-   * for directory entries, k_offset consists of hash derived from
+-   * hashing the name and using few bits (23 or more) of the resulting
+-   * hash, and generation number that allows distinguishing names with
+-   * hash collisions. If number of collisions overflows generation
+-   * number, we return EEXIST.	High order bit is 0 always
+-   */
+-
+-#if defined(__LITTLE_ENDIAN_BITFIELD)
+-	    /* little endian version */
+-	    __u64 k_offset:60;
+-	    __u64 k_type: 4;
+-#elif defined(__BIG_ENDIAN_BITFIELD)
+-	    /* big endian version */
+-	    __u64 k_type: 4;
+-	    __u64 k_offset:60;
+-#else
+-#error "__LITTLE_ENDIAN_BITFIELD or __BIG_ENDIAN_BITFIELD must be defined"
+-#endif
+-} __attribute__ ((__packed__));
+-
+-#define TYPE_MAXTYPE 3
+-#define TYPE_ANY 15
+-
+-#if (__BYTE_ORDER == __BIG_ENDIAN)
+-typedef union {
+-    struct offset_v2 offset_v2;
+-    __u64 linear;
+-} __attribute__ ((__packed__)) offset_v2_esafe_overlay;
+-
+-static inline __u16 offset_v2_k_type( const struct offset_v2 *v2 )
+-{
+-    offset_v2_esafe_overlay tmp = *(const offset_v2_esafe_overlay *)v2;
+-    tmp.linear = __le64_to_cpu( tmp.linear );
+-    return (tmp.offset_v2.k_type <= TYPE_MAXTYPE)?tmp.offset_v2.k_type:TYPE_ANY;
+-}
+-
+-static inline loff_t offset_v2_k_offset( const struct offset_v2 *v2 )
+-{
+-    offset_v2_esafe_overlay tmp = *(const offset_v2_esafe_overlay *)v2;
+-    tmp.linear = __le64_to_cpu( tmp.linear );
+-    return tmp.offset_v2.k_offset;
+-}
+-#elif (__BYTE_ORDER == __LITTLE_ENDIAN)
+-# define offset_v2_k_type(v2)		((v2)->k_type)
+-# define offset_v2_k_offset(v2)		((v2)->k_offset)
+-#else
+-#error "__BYTE_ORDER must be __LITTLE_ENDIAN or __BIG_ENDIAN"
+-#endif
+-
+-struct key
+-{
+-  /* packing locality: by default parent directory object id */
+-  __u32 k_dir_id;
+-  /* object identifier */
+-  __u32 k_objectid;
+-  /* the offset and node type (old and new form) */
+-  union
+-  {
+-    struct offset_v1 v1;
+-    struct offset_v2 v2;
+-  }
+-  u;
+-};
+-
+-#define KEY_SIZE (sizeof (struct key))
+-
+-/* Header of a disk block.  More precisely, header of a formatted leaf
+-   or internal node, and not the header of an unformatted node. */
+-struct block_head
+-{
+-  __u16 blk_level;	  /* Level of a block in the tree. */
+-  __u16 blk_nr_item;	  /* Number of keys/items in a block. */
+-  __u16 blk_free_space;   /* Block free space in bytes. */
+-  struct key  blk_right_delim_key; /* Right delimiting key for this block (supported for leaf level nodes
+-				      only) */
+-};
+-#define BLKH_SIZE (sizeof (struct block_head))
+-#define DISK_LEAF_NODE_LEVEL  1 /* Leaf node level.			  */
+-
+-struct item_head
+-{
+-	/* Everything in the tree is found by searching for it based on
+-	 * its key.*/
+-	struct key ih_key;
+-	union {
+-		/* The free space in the last unformatted node of an
+-		   indirect item if this is an indirect item.  This
+-		   equals 0xFFFF iff this is a direct item or stat data
+-		   item. Note that the key, not this field, is used to
+-		   determine the item type, and thus which field this
+-		   union contains. */
+-		__u16 ih_free_space;
+-		/* Iff this is a directory item, this field equals the
+-		   number of directory entries in the directory item. */
+-		__u16 ih_entry_count;
+-	} __attribute__ ((__packed__)) u;
+-	__u16 ih_item_len;	     /* total size of the item body */
+-	__u16 ih_item_location;      /* an offset to the item body
+-				      * within the block */
+-	__u16 ih_version;	     /* 0 for all old items, 2 for new
+-					ones. Highest bit is set by fsck
+-					temporary, cleaned after all
+-					done */
+-} __attribute__ ((__packed__));
+-
+-/* size of item header	   */
+-#define IH_SIZE (sizeof (struct item_head))
+-
+-#define ITEM_VERSION_1 0
+-#define ITEM_VERSION_2 1
+-
+-#define ih_version(ih)	  (__le16_to_cpu((ih)->ih_version))
+-
+-#define IH_KEY_OFFSET(ih) (ih_version(ih) == ITEM_VERSION_1 \
+-			   ? __le32_to_cpu((ih)->ih_key.u.v1.k_offset) \
+-			   : offset_v2_k_offset(&((ih)->ih_key.u.v2)))
+-
+-#define IH_KEY_ISTYPE(ih, type) (ih_version(ih) == ITEM_VERSION_1 \
+-				 ? __le32_to_cpu((ih)->ih_key.u.v1.k_uniqueness) == V1_##type \
+-				 : offset_v2_k_type(&((ih)->ih_key.u.v2)) == V2_##type)
+-
+-/***************************************************************************/
+-/*			DISK CHILD					   */
+-/***************************************************************************/
+-/* Disk child pointer: The pointer from an internal node of the tree
+-   to a node that is on disk. */
+-struct disk_child {
+-  __u32       dc_block_number;		    /* Disk child's block number. */
+-  __u16       dc_size;			    /* Disk child's used space.   */
+-  __u16       dc_reserved;
+-};
+-
+-#define DC_SIZE (sizeof(struct disk_child))
+-#define dc_block_number(dc_p)	(__le32_to_cpu((dc_p)->dc_block_number))
+-
+-
+-/*
+- * old stat data is 32 bytes long. We are going to distinguish new one by
+- * different size
+- */
+-struct stat_data_v1
+-{
+-    __u16 sd_mode;	/* file type, permissions */
+-    __u16 sd_nlink;	/* number of hard links */
+-    __u16 sd_uid;		/* owner */
+-    __u16 sd_gid;		/* group */
+-    __u32 sd_size;	/* file size */
+-    __u32 sd_atime;	/* time of last access */
+-    __u32 sd_mtime;	/* time file was last modified	*/
+-    __u32 sd_ctime;	/* time inode (stat data) was last changed (except changes to sd_atime and sd_mtime) */
+-    union {
+-	__u32 sd_rdev;
+-	__u32 sd_blocks;	/* number of blocks file uses */
+-    } __attribute__ ((__packed__)) u;
+-    __u32 sd_first_direct_byte; /* first byte of file which is stored
+-				   in a direct item: except that if it
+-				   equals 1 it is a symlink and if it
+-				   equals ~(__u32)0 there is no
+-				   direct item.  The existence of this
+-				   field really grates on me. Let's
+-				   replace it with a macro based on
+-				   sd_size and our tail suppression
+-				   policy.  Someday.  -Hans */
+-} __attribute__ ((__packed__));
+-
+-#define stat_data_v1(ih)	(ih_version(ih) == ITEM_VERSION_1)
+-#define sd_v1_mode(sdp)		((sdp)->sd_mode)
+-#define sd_v1_nlink(sdp)	(__le16_to_cpu((sdp)->sd_nlink))
+-#define sd_v1_uid(sdp)		(__le16_to_cpu((sdp)->sd_uid))
+-#define sd_v1_gid(sdp)		(__le16_to_cpu((sdp)->sd_gid))
+-#define sd_v1_size(sdp)		(__le32_to_cpu((sdp)->sd_size))
+-#define sd_v1_mtime(sdp)	(__le32_to_cpu((sdp)->sd_mtime))
+-
+-/* Stat Data on disk (reiserfs version of UFS disk inode minus the
+-   address blocks) */
+-struct stat_data {
+-    __u16 sd_mode;	/* file type, permissions */
+-    __u16 sd_attrs;	/* persistent inode flags */
+-    __u32 sd_nlink;	/* number of hard links */
+-    __u64 sd_size;	/* file size */
+-    __u32 sd_uid;		/* owner */
+-    __u32 sd_gid;		/* group */
+-    __u32 sd_atime;	/* time of last access */
+-    __u32 sd_mtime;	/* time file was last modified	*/
+-    __u32 sd_ctime;	/* time inode (stat data) was last changed (except changes to sd_atime and sd_mtime) */
+-    __u32 sd_blocks;
+-    union {
+-	__u32 sd_rdev;
+-	__u32 sd_generation;
+-      /*__u32 sd_first_direct_byte; */
+-      /* first byte of file which is stored in a
+-				       direct item: except that if it equals 1
+-				       it is a symlink and if it equals
+-				       ~(__u32)0 there is no direct item.  The
+-				       existence of this field really grates
+-				       on me. Let's replace it with a macro
+-				       based on sd_size and our tail
+-				       suppression policy? */
+-  } __attribute__ ((__packed__)) u;
+-} __attribute__ ((__packed__));
+-
+-#define stat_data_v2(ih)	(ih_version(ih) == ITEM_VERSION_2)
+-#define sd_v2_mode(sdp)		(__le16_to_cpu((sdp)->sd_mode))
+-#define sd_v2_nlink(sdp)	(__le32_to_cpu((sdp)->sd_nlink))
+-#define sd_v2_size(sdp)		(__le64_to_cpu((sdp)->sd_size))
+-#define sd_v2_uid(sdp)		(__le32_to_cpu((sdp)->sd_uid))
+-#define sd_v2_gid(sdp)		(__le32_to_cpu((sdp)->sd_gid))
+-#define sd_v2_mtime(sdp)	(__le32_to_cpu((sdp)->sd_mtime))
+-
+-#define sd_mode(sdp)	     (__le16_to_cpu((sdp)->sd_mode))
+-#define sd_size(sdp)	     (__le32_to_cpu((sdp)->sd_size))
+-#define sd_size_hi(sdp)      (__le32_to_cpu((sdp)->sd_size_hi))
+-
+-struct reiserfs_de_head
+-{
+-  __u32 deh_offset;  /* third component of the directory entry key */
+-  __u32 deh_dir_id;  /* objectid of the parent directory of the
+-			object, that is referenced by directory entry */
+-  __u32 deh_objectid;/* objectid of the object, that is referenced by
+-			directory entry */
+-  __u16 deh_location;/* offset of name in the whole item */
+-  __u16 deh_state;   /* whether 1) entry contains stat data (for
+-			future), and 2) whether entry is hidden
+-			(unlinked) */
+-};
+-
+-#define DEH_SIZE (sizeof (struct reiserfs_de_head))
+-#define deh_offset(p_deh)	  (__le32_to_cpu((p_deh)->deh_offset))
+-#define deh_dir_id(p_deh)	  (__le32_to_cpu((p_deh)->deh_dir_id))
+-#define deh_objectid(p_deh)	  (__le32_to_cpu((p_deh)->deh_objectid))
+-#define deh_location(p_deh)	  (__le16_to_cpu((p_deh)->deh_location))
+-#define deh_state(p_deh)	  (__le16_to_cpu((p_deh)->deh_state))
+-
+-
+-#define DEH_Statdata (1 << 0)			/* not used now */
+-#define DEH_Visible  (1 << 2)
+-
+-#define SD_OFFSET  0
+-#define SD_UNIQUENESS 0
+-#define DOT_OFFSET 1
+-#define DOT_DOT_OFFSET 2
+-#define DIRENTRY_UNIQUENESS 500
+-
+-#define V1_TYPE_STAT_DATA 0x0
+-#define V1_TYPE_DIRECT 0xffffffff
+-#define V1_TYPE_INDIRECT 0xfffffffe
+-#define V1_TYPE_DIRECTORY_MAX 0xfffffffd
+-#define V2_TYPE_STAT_DATA 0
+-#define V2_TYPE_INDIRECT 1
+-#define V2_TYPE_DIRECT 2
+-#define V2_TYPE_DIRENTRY 3
+-
+-#define REISERFS_ROOT_OBJECTID 2
+-#define REISERFS_ROOT_PARENT_OBJECTID 1
+-#define REISERFS_DISK_OFFSET_IN_BYTES (64 * 1024)
+-/* the spot for the super in versions 3.5 - 3.5.11 (inclusive) */
+-#define REISERFS_OLD_DISK_OFFSET_IN_BYTES (8 * 1024)
+-#define REISERFS_OLD_BLOCKSIZE 4096
+-
+-#define S_ISREG(mode) (((mode) & 0170000) == 0100000)
+-#define S_ISDIR(mode) (((mode) & 0170000) == 0040000)
+-#define S_ISLNK(mode) (((mode) & 0170000) == 0120000)
+-
+-#define PATH_MAX       1024	/* include/linux/limits.h */
+-#define MAX_LINK_COUNT	  5	/* number of symbolic links to follow */
+-
+-/* The size of the node cache */
+-#define FSYSREISER_CACHE_SIZE 24*1024
+-#define FSYSREISER_MIN_BLOCKSIZE SECTOR_SIZE
+-#define FSYSREISER_MAX_BLOCKSIZE FSYSREISER_CACHE_SIZE / 3
+-
+-/* Info about currently opened file */
+-struct fsys_reiser_fileinfo
+-{
+-  __u32 k_dir_id;
+-  __u32 k_objectid;
+-};
+-
+-/* In memory info about the currently mounted filesystem */
+-struct fsys_reiser_info
+-{
+-  /* The last read item head */
+-  struct item_head *current_ih;
+-  /* The last read item */
+-  char *current_item;
+-  /* The information for the currently opened file */
+-  struct fsys_reiser_fileinfo fileinfo;
+-  /* The start of the journal */
+-  __u32 journal_block;
+-  /* The size of the journal */
+-  __u32 journal_block_count;
+-  /* The first valid descriptor block in journal
+-     (relative to journal_block) */
+-  __u32 journal_first_desc;
+-
+-  /* The ReiserFS version. */
+-  __u16 version;
+-  /* The current depth of the reiser tree. */
+-  __u16 tree_depth;
+-  /* SECTOR_SIZE << blocksize_shift == blocksize. */
+-  __u8	blocksize_shift;
+-  /* 1 << full_blocksize_shift == blocksize. */
+-  __u8	fullblocksize_shift;
+-  /* The reiserfs block size  (must be a power of 2) */
+-  __u16 blocksize;
+-  /* The number of cached tree nodes */
+-  __u16 cached_slots;
+-  /* The number of valid transactions in journal */
+-  __u16 journal_transactions;
+-
+-  unsigned int blocks[MAX_HEIGHT];
+-  unsigned int next_key_nr[MAX_HEIGHT];
+-};
+-
+-/* The cached s+tree blocks in FSYS_BUF,  see below
+- * for a more detailed description.
+- */
+-#define ROOT	 ((char *) ((int) FSYS_BUF))
+-#define CACHE(i) (ROOT + ((i) << INFO->fullblocksize_shift))
+-#define LEAF	 CACHE (DISK_LEAF_NODE_LEVEL)
+-
+-#define BLOCKHEAD(cache) ((struct block_head *) cache)
+-#define ITEMHEAD	 ((struct item_head  *) ((int) LEAF + BLKH_SIZE))
+-#define KEY(cache)	 ((struct key	     *) ((int) cache + BLKH_SIZE))
+-#define DC(cache)	 ((struct disk_child *) \
+-			  ((int) cache + BLKH_SIZE + KEY_SIZE * nr_item))
+-/* The fsys_reiser_info block.
+- */
+-#define INFO \
+-    ((struct fsys_reiser_info *) ((int) FSYS_BUF + FSYSREISER_CACHE_SIZE))
+-/*
+- * The journal cache.  For each transaction it contains the number of
+- * blocks followed by the real block numbers of this transaction.
+- *
+- * If the block numbers of some transaction won't fit in this space,
+- * this list is stopped with a 0xffffffff marker and the remaining
+- * uncommitted transactions aren't cached.
+- */
+-#define JOURNAL_START	 ((__u32 *) (INFO + 1))
+-#define JOURNAL_END	 ((__u32 *) (FSYS_BUF + FSYS_BUFLEN))
+-
+-
+-static __inline__ unsigned long
+-log2 (unsigned long word)
+-{
+-#ifdef __I386__
+-  __asm__ ("bsfl %1,%0"
+-	   : "=r" (word)
+-	   : "r" (word));
+-  return word;
+-#else
+-  int i;
+-
+-  for(i=0; i<(8*sizeof(word)); i++)
+-    if ((1<<i) & word)
+-      return i;
+-
+-  return 0;
+-#endif
+-}
+-
+-static __inline__ int
+-is_power_of_two (unsigned long word)
+-{
+-  return (word & -word) == word;
+-}
+-
+-extern const char *bb_mode_string(int mode);
+-extern int reiserfs_devread (int sector, int byte_offset, int byte_len, char *buf);
+diff --git a/include/reiserfs.h b/include/reiserfs.h
+deleted file mode 100644
+index b61bb600679..00000000000
+--- a/include/reiserfs.h
++++ /dev/null
+@@ -1,72 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- *  Copyright 2000-2002 by Hans Reiser, licensing governed by reiserfs/README
+- *
+- *  GRUB  --  GRand Unified Bootloader
+- *  Copyright (C) 2000, 2001  Free Software Foundation, Inc.
+- *
+- *  (C) Copyright 2003 Sysgo Real-Time Solutions, AG <www.elinos.com>
+- *  Pavel Bartusek <pba@sysgo.de>
+- */
+-
+-/* An implementation for the ReiserFS filesystem ported from GRUB.
+- * Some parts of this code (mainly the structures and defines) are
+- * from the original reiser fs code, as found in the linux kernel.
+- */
+-
+-
+-#define SECTOR_SIZE		0x200
+-#define SECTOR_BITS		9
+-
+-struct blk_desc;
+-struct disk_partition;
+-
+-/* Error codes */
+-typedef enum
+-{
+-  ERR_NONE = 0,
+-  ERR_BAD_FILENAME,
+-  ERR_BAD_FILETYPE,
+-  ERR_BAD_GZIP_DATA,
+-  ERR_BAD_GZIP_HEADER,
+-  ERR_BAD_PART_TABLE,
+-  ERR_BAD_VERSION,
+-  ERR_BELOW_1MB,
+-  ERR_BOOT_COMMAND,
+-  ERR_BOOT_FAILURE,
+-  ERR_BOOT_FEATURES,
+-  ERR_DEV_FORMAT,
+-  ERR_DEV_VALUES,
+-  ERR_EXEC_FORMAT,
+-  ERR_FILELENGTH,
+-  ERR_FILE_NOT_FOUND,
+-  ERR_FSYS_CORRUPT,
+-  ERR_FSYS_MOUNT,
+-  ERR_GEOM,
+-  ERR_NEED_LX_KERNEL,
+-  ERR_NEED_MB_KERNEL,
+-  ERR_NO_DISK,
+-  ERR_NO_PART,
+-  ERR_NUMBER_PARSING,
+-  ERR_OUTSIDE_PART,
+-  ERR_READ,
+-  ERR_SYMLINK_LOOP,
+-  ERR_UNRECOGNIZED,
+-  ERR_WONT_FIT,
+-  ERR_WRITE,
+-  ERR_BAD_ARGUMENT,
+-  ERR_UNALIGNED,
+-  ERR_PRIVILEGED,
+-  ERR_DEV_NEED_INIT,
+-  ERR_NO_DISK_SPACE,
+-  ERR_NUMBER_OVERFLOW,
+-
+-  MAX_ERR_NUM
+-} reiserfs_error_t;
+-
+-
+-void reiserfs_set_blk_dev(struct blk_desc *rbdd, struct disk_partition *info);
+-extern int reiserfs_ls (char *dirname);
+-extern int reiserfs_open (char *filename);
+-extern int reiserfs_read (char *buf, unsigned len);
+-extern int reiserfs_mount (unsigned part_length);
 -- 
 2.43.1
 
