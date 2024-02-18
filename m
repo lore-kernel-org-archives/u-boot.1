@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00ED2C48BC4
-	for <u-boot@archiver.kernel.org>; Sun, 18 Feb 2024 21:54:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD58CC48BC4
+	for <u-boot@archiver.kernel.org>; Sun, 18 Feb 2024 22:04:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E13E87CD2;
-	Sun, 18 Feb 2024 22:54:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 06BA787D73;
+	Sun, 18 Feb 2024 23:04:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="wN9zeM/5";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="b4Da7IXD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5B37287EB9; Sun, 18 Feb 2024 22:54:51 +0100 (CET)
+ id 73EDE8765B; Sun, 18 Feb 2024 23:04:26 +0100 (CET)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D78F8765B
- for <u-boot@lists.denx.de>; Sun, 18 Feb 2024 22:54:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6934D87EC6
+ for <u-boot@lists.denx.de>; Sun, 18 Feb 2024 23:04:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,26 +28,27 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
  Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1708293276;
- bh=LCYrw1UKpyK8A1El/8XobKcvkZDQmrr1dggXWIgDGAA=;
- b=wN9zeM/5MrNAjLaI7pKFpj6fHdwrdaQxBbAcFI4t2qCYOZeTkiET2UV9VEBxGuwSDOJs/Lfhz
- wNiqzd7Cc117h9dGU9lQ5T24rFtMZxa5naPuzL+qeakfxBc+kbfLTXajPlBklyhSNS4s1bpw6CG
- EYBOtG7zw6mPBaVQz3KKqvzHagYuVcDwc190Qwv8XtpfVXRUcE7mLZECApGK+vD6W207AeFSOCH
- /LUU7CBq/RmcQJe5PMayjqoV2BczLa64LcCQ+cFfxoorCvRhlx3oU1kSHJp9eBowmPHmo2sBlHx
- OFyBlyUrAaMdP5klNHdijbu48oSRf5ClglPZUvRexnMw==
-Message-ID: <4a3806e8-8899-440f-a800-1d24c25a3ecb@kwiboo.se>
-Date: Sun, 18 Feb 2024 22:54:28 +0100
+ s=fe-e1b5cab7be; t=1708293842;
+ bh=Heen5qH5hCyKfbz8rs4gSFKCUIT+nCPzrRvDDtgZZj0=;
+ b=b4Da7IXDvDU38hlR/ZPxFVMTST/ERTFgTx5PRlSA1dValx982zqJBzZNN7yFS7zA/jVW3GKy3
+ ZT9GTRYJ8z199+wsrBtE2eloJb5kg+ZOXUVh1FT5I5Ag57nyYEKT5/R9kp3S1TgiTIfP7QZZ5hf
+ hLbOIetcbvWedSrVD4EQeu5BNsDuWWNgmT3e/JAWq8aexlcm0SGHIOzSRRJ4lBJJG9LiR70k3J2
+ 4kAf5eI0rxxzkQ/ZrqAs46WTMXPHu9XPLEZ9hAzEwRnvG5R7JSFGmgRApn3wGWx2YjZsIGLJvNq
+ byIsqoi/hycuFIQpsbw+o2I4H3ttI3EEht6jOs0fcS7A==
+Message-ID: <4158938f-cb1d-4a24-9d48-9bc95c36d70c@kwiboo.se>
+Date: Sun, 18 Feb 2024 23:03:54 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/2] rockchip: Update stack and bss addresses on RK3328
- and RK3399
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>, u-boot@lists.denx.de
-References: <20240217005817.2150377-1-jonas@kwiboo.se>
+Subject: Re: [PATCH] mmc: rockchip_sdhci: Use bounce buffer in SPL to fix read
+ performance
 Content-Language: en-US
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>
+Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>, u-boot@lists.denx.de
+References: <20240205182736.2770679-1-jonas@kwiboo.se>
 From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20240217005817.2150377-1-jonas@kwiboo.se>
+In-Reply-To: <20240205182736.2770679-1-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-Report-Abuse-To: abuse@forwardemail.net
@@ -56,7 +57,7 @@ X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  167.172.40.54
-X-ForwardEmail-ID: 65d27c9af583e5e67397e467
+X-ForwardEmail-ID: 65d27ecfb6076c65b7c2f1b0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,96 +76,98 @@ X-Virus-Status: Clean
 
 Hi all,
 
-Please ignore this series for now.
+Please ignore this patch for now.
 
-The simple malloc heap created on the SPL init stack is still in use
-after SPL relocation, so memory layout needs to rearranged once more.
+Reading more than 4 blocks with a single CMD18 command in PIO mode seem
+to work much better after the HS200 mode series [1] together with a fix
+so that the stack and simple malloc heap does not overlap.
 
-Also the RK35xx boards is affected by a simple malloc heap and stack
-overlap issue.
-
-I will re-send a different version once I have addressed these issues.
+I will send a different patch in next few days.
 
 Regards,
 Jonas
 
-On 2024-02-17 01:58, Jonas Karlman wrote:
-> With the stack and text base used by U-Boot SPL and proper on RK3328 and
-> RK3399 there is a high likelihood of overlapping when U-Boot proper +
-> FDT nears 1 MiB in size.
+On 2024-02-05 19:27, Jonas Karlman wrote:
+> The commit 3b804b370dd8 ("mmc: rockchip_sdhci: Disable DMA mode using a
+> device tree property") and commit 2cc6cde647e2 ("mmc: rockchip_sdhci:
+> Limit number of blocks read in a single command") implemented a
+> workaround to fix loading a part of TF-A into SRAM from eMMC in SPL.
 > 
-> Trying to run U-Boot proper close to 1 MiB in size with debug logging
-> something similar to following can be observed:
+> This has resulted in very slow read performance of FIT from eMMC in SPL
+> on RK3588.
 > 
->   FDT 00000000002fc4e0 gd 00000000002fddf0
->   FDT overlap
->   resetting ...
->   System reset not supported on this platform
->   ### ERROR ### Please RESET the board ###
+> Change to make use of a bounce buffer to significantly improve the read
+> performance when malloc_limit is large enough and use PIO mode as fall
+> back.
 > 
-> Fix this by changing stack and bss addresses used on RK3328 and RK3399.
-> The addresses chosen for stack and bss is a combination from both boards.
+> Also update the size of align_buffer to use SDHCI_DEFAULT_BOUNDARY_SIZE
+> instead of a hardcoded 512 * 1024.
 > 
-> Changes in v2:
-> - Rebase on v2 of "rockchip: rk3328: Update defconfigs, DTs and enable
->   boot from SPI" [1]
-> - Use correct address 0x04000000 for 64 MiB offset in commit message
-> - Collect r-b tag
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> ---
+> - This has been tested on RK3588 boards with malloc_limit above 512 KiB
+>   and on RK3399 boards with less than 512 KiB malloc_limit.
+> - Together with HS200 mode [1] and D-cache [2] enabled in SPL loading of
+>   FIT can be very fast on RK3588.
 > 
-> This series depends on v2 of the following two series:
-> - rockchip: rk3328: Update defconfigs, DTs and enable boot from SPI [1]
-> - rockchip: Read cpuid and generate MAC address from efuse for RK3328
->   and RK3399 [2]
+> [1] https://patchwork.ozlabs.org/patch/1895043/
+> [2] https://patchwork.ozlabs.org/patch/1891025/
+> ---
+>  drivers/mmc/rockchip_sdhci.c | 20 ++++++++++++++++----
+>  drivers/mmc/sdhci.c          |  2 +-
+>  2 files changed, 17 insertions(+), 5 deletions(-)
 > 
-> A copy of this series and its two depends can be found at [3].
-> 
-> [1] https://patchwork.ozlabs.org/cover/1900345/
-> [2] https://patchwork.ozlabs.org/cover/1897743/
-> [3] https://github.com/Kwiboo/u-boot-rockchip/commits/rk3328-update-v2
-> 
-> Jonas Karlman (2):
->   rockchip: rk3328: Update stack addresses
->   rockchip: rk3399: Update stack and bss addresses
-> 
->  arch/arm/mach-rockchip/rk3328/Kconfig         | 2 +-
->  configs/chromebook_bob_defconfig              | 2 +-
->  configs/chromebook_kevin_defconfig            | 2 +-
->  configs/eaidk-610-rk3399_defconfig            | 4 ++--
->  configs/evb-rk3328_defconfig                  | 4 +---
->  configs/evb-rk3399_defconfig                  | 4 ++--
->  configs/ficus-rk3399_defconfig                | 2 +-
->  configs/firefly-rk3399_defconfig              | 4 ++--
->  configs/khadas-edge-captain-rk3399_defconfig  | 4 ++--
->  configs/khadas-edge-rk3399_defconfig          | 4 ++--
->  configs/khadas-edge-v-rk3399_defconfig        | 4 ++--
->  configs/leez-rk3399_defconfig                 | 4 ++--
->  configs/nanopc-t4-rk3399_defconfig            | 4 ++--
->  configs/nanopi-m4-2gb-rk3399_defconfig        | 4 ++--
->  configs/nanopi-m4-rk3399_defconfig            | 4 ++--
->  configs/nanopi-m4b-rk3399_defconfig           | 4 ++--
->  configs/nanopi-neo4-rk3399_defconfig          | 4 ++--
->  configs/nanopi-r2c-plus-rk3328_defconfig      | 4 ++--
->  configs/nanopi-r2c-rk3328_defconfig           | 4 ++--
->  configs/nanopi-r2s-rk3328_defconfig           | 4 ++--
->  configs/nanopi-r4s-rk3399_defconfig           | 4 ++--
->  configs/orangepi-r1-plus-lts-rk3328_defconfig | 4 ++--
->  configs/orangepi-r1-plus-rk3328_defconfig     | 4 ++--
->  configs/orangepi-rk3399_defconfig             | 4 ++--
->  configs/pinebook-pro-rk3399_defconfig         | 4 ++--
->  configs/pinephone-pro-rk3399_defconfig        | 4 ++--
->  configs/puma-rk3399_defconfig                 | 2 +-
->  configs/roc-cc-rk3328_defconfig               | 4 ++--
->  configs/roc-pc-mezzanine-rk3399_defconfig     | 4 ++--
->  configs/roc-pc-rk3399_defconfig               | 4 ++--
->  configs/rock-4c-plus-rk3399_defconfig         | 4 ++--
->  configs/rock-4se-rk3399_defconfig             | 4 ++--
->  configs/rock-pi-4-rk3399_defconfig            | 4 ++--
->  configs/rock-pi-4c-rk3399_defconfig           | 4 ++--
->  configs/rock-pi-e-rk3328_defconfig            | 4 +---
->  configs/rock-pi-n10-rk3399pro_defconfig       | 4 ++--
->  configs/rock64-rk3328_defconfig               | 4 ++--
->  configs/rock960-rk3399_defconfig              | 4 ++--
->  configs/rockpro64-rk3399_defconfig            | 4 ++--
->  39 files changed, 71 insertions(+), 75 deletions(-)
-> 
+> diff --git a/drivers/mmc/rockchip_sdhci.c b/drivers/mmc/rockchip_sdhci.c
+> index 706fb1235796..528544b1eff8 100644
+> --- a/drivers/mmc/rockchip_sdhci.c
+> +++ b/drivers/mmc/rockchip_sdhci.c
+> @@ -21,6 +21,9 @@
+>  #include <syscon.h>
+>  #include <asm/arch-rockchip/clock.h>
+>  #include <asm/arch-rockchip/hardware.h>
+> +#include <asm/global_data.h>
+> +
+> +DECLARE_GLOBAL_DATA_PTR;
+>  
+>  /* DWCMSHC specific Mode Select value */
+>  #define DWCMSHC_CTRL_HS400		0x7
+> @@ -591,12 +594,21 @@ static int rockchip_sdhci_probe(struct udevice *dev)
+>  		return ret;
+>  
+>  	/*
+> -	 * Disable use of DMA and force use of PIO mode in SPL to fix an issue
+> -	 * where loading part of TF-A into SRAM using DMA silently fails.
+> +	 * Use a bounce buffer or PIO mode in SPL to fix an issue where loading
+> +	 * part of TF-A directly into SRAM using DMA silently fails.
+>  	 */
+>  	if (IS_ENABLED(CONFIG_SPL_BUILD) &&
+> -	    dev_read_bool(dev, "u-boot,spl-fifo-mode"))
+> -		host->flags &= ~USE_DMA;
+> +	    dev_read_bool(dev, "u-boot,spl-fifo-mode")) {
+> +		if (CONFIG_IS_ENABLED(SYS_MALLOC_F) &&
+> +		    gd->malloc_limit > SDHCI_DEFAULT_BOUNDARY_SIZE) {
+> +			cfg->b_max = SDHCI_DEFAULT_BOUNDARY_SIZE /
+> +				     MMC_MAX_BLOCK_LEN;
+> +			host->force_align_buffer = true;
+> +			host->quirks |= SDHCI_QUIRK_32BIT_DMA_ADDR;
+> +		} else {
+> +			host->flags &= ~USE_DMA;
+> +		}
+> +	}
+>  
+>  	/*
+>  	 * Reading more than 4 blocks with a single CMD18 command in PIO mode
+> diff --git a/drivers/mmc/sdhci.c b/drivers/mmc/sdhci.c
+> index 0178ed8a11e1..cc855dc7ba3d 100644
+> --- a/drivers/mmc/sdhci.c
+> +++ b/drivers/mmc/sdhci.c
+> @@ -736,7 +736,7 @@ static int sdhci_init(struct mmc *mmc)
+>  	host->force_align_buffer = true;
+>  #else
+>  	if (host->quirks & SDHCI_QUIRK_32BIT_DMA_ADDR) {
+> -		host->align_buffer = memalign(8, 512 * 1024);
+> +		host->align_buffer = memalign(8, SDHCI_DEFAULT_BOUNDARY_SIZE);
+>  		if (!host->align_buffer) {
+>  			printf("%s: Aligned buffer alloc failed!!!\n",
+>  			       __func__);
 
