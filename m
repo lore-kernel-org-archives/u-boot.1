@@ -4,82 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44F22C48BC3
-	for <u-boot@archiver.kernel.org>; Mon, 19 Feb 2024 13:12:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B16BC48BC3
+	for <u-boot@archiver.kernel.org>; Mon, 19 Feb 2024 13:15:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 694CD87F36;
-	Mon, 19 Feb 2024 14:12:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B0BF587F5A;
+	Mon, 19 Feb 2024 14:15:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kji0S8VU";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UAlKH/jw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 71A2487F51; Mon, 19 Feb 2024 14:12:51 +0100 (CET)
-Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
- [IPv6:2607:f8b0:4864:20::102b])
+ id 3FB1487F5B; Mon, 19 Feb 2024 14:15:26 +0100 (CET)
+Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
+ [IPv6:2607:f8b0:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3335E87F4F
- for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 14:12:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E8E9F87F57
+ for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 14:15:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x102b.google.com with SMTP id
- 98e67ed59e1d1-299a9d382ccso229908a91.0
- for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 05:12:27 -0800 (PST)
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-1dbd81000b6so5792635ad.0
+ for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 05:15:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1708348345; x=1708953145; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1708348515; x=1708953315; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VMmBW0aDFDWalea+rcr3BZ5RjJzt7xB6VHoHEnGLBsc=;
- b=kji0S8VUBceUnsV4t6q05M2XiKI/PgyCRwC6D1+KWqe4SYia/scLii2qgDBSIkAgyw
- uGFvltUqHYpA6HthKNRLzdAKozzCKwyjPr39+fQoTjq3MV0xZgng1s1r9sdcDe4+66R7
- Yw/MfTaST2idXYHAFSo3WsTkAXTdCwfa1RekcB+/h9GYrxZU1RcxGdNU2XX/dCVmzNgT
- W3vbZ/YmrVumMoUaS7aM7k4o56aAhjiMHno/5DPKdFLKoq2XpS2ex2/e4IqADrwq7LC5
- fAzUixsX6o8oKlRK9o0SCczqbVtxBCt59kivIJoZxMA1SSRY6rgNI03+vk6R0pCy8ns3
- dY6w==
+ bh=RmM6/QMOQ7fy0igYv0TIB7JjXkEkpGnAFVBjhpl/OAg=;
+ b=UAlKH/jw6zP+ih4IIIY5YRMcaKcN01//lvZeGujxV5RxQBSzimc+46v9i6L/nwOsA3
+ by/Kzct0nOTmpAVtjerhhqi5stAIFnaWqUYk8QuKuihCLNqMLbroOFHDKlvBx0ZoWeqf
+ IAX0atpxSdyfmCDU+r+pcPN35G4PTmp8C8LYBbeSHu/8EH+d1KLl8ww0FQv0yGs+cKd7
+ iNuvhzIHiP+tjE1P2wqKM25oN7uI9770UvjyL3LVTIr8ywqWttw7qdkwh855M9j3xydA
+ OwXdN02zxQ2plORyO03NyZ/pfLqBgqdUqlX1Hx88paYQNI1BqoYKp0W2jgzFgnMWpVRv
+ 1kOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708348345; x=1708953145;
+ d=1e100.net; s=20230601; t=1708348515; x=1708953315;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=VMmBW0aDFDWalea+rcr3BZ5RjJzt7xB6VHoHEnGLBsc=;
- b=l1I+gB7vyObf0C6EuF6Boq7Nk4bUGgM3UKqpMZK/vDUkuqc6+uGS6Sf+it4JwCmxzV
- lYgFV5J6H/IB1I+PvRl/VR2QXLPzY+XimDFC5cLjoGKbNWWQEB40AfjccfHo0WRoXg1X
- t6zOZRTfRkD+4v+mF6U+aayLASwKBUIALDd36XedG/FKIJL+EIb2cUVRZcy4Xm9r9MJT
- PqK5oQLxjoSKVID8Jjz/H0iYwfqJsiVAcrIH4jnbeyGJ4F02hMRwLITxc0fI33eSuDFE
- U1AZ1+75peZWNHDmGolhNMcuoJ6w4Mg3WkaeOGEFphFOH0DaZrmpU1NO2P8QAnI/Ltvj
- EZgA==
+ bh=RmM6/QMOQ7fy0igYv0TIB7JjXkEkpGnAFVBjhpl/OAg=;
+ b=ToQD5cnQPWj8KDn4SjP8dP9+L/1tHIWzPqyPfxKmrkwp8XGV5xlx6c9r+15mQLoWiW
+ JUbKPZYrsTxooaZezE70fsX1VxM2Cb9EXaIaD6P735y4AaNCNG9XtxB7IfrrbX20VzEz
+ 0VDCYXO5jEefW74Rtk3ixgfneJ02fXAVRFUhUlrWr3AGB9i2p2VvAq9DdePp77bC4w2Y
+ 7Rr6enJJcUCcOJsmwsdTApTexpFlKWqLMRXEw9guaknNjY/vIyX9lbw8+iyAPbDhW5Y4
+ 1f7BtJCqR7i8OjUSUvfTZLkvdG3lbJidgbljMFgataIapZu884ttDyBu6gjjkaS9vlV8
+ PZiQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWOD2/mf8l6j+NjFnqebOM8DeiJgQU08pEoJ9wsimne2h9p7l9rg3Ez05hziMxMUErckEwyeMmS3c0yMr9xZhrFo3BGWA==
-X-Gm-Message-State: AOJu0YxHtF1tu5qB0AqLz01VyMhinZYf+/0KawcshGcPUSASRRi3bbDg
- vKqij3OVi1C7nVtIadgamivVYV52MBBA4EtkGs/RbLrI541EW+1EDx3F3oKyw3361WtIJRAlAY5
- bxv0sI1V2z9lkaH3lKpk6S7AJN8c=
-X-Google-Smtp-Source: AGHT+IH+xlxg3rvGRGLKGMKWqvvGdZ0CQj4Hc5apDhTcJ5e6dpJwjAby2A1lVKRhr5u5/2CuQSyO6SM5+LdhIaamYXE=
-X-Received: by 2002:a17:90a:985:b0:299:3258:fdfb with SMTP id
- 5-20020a17090a098500b002993258fdfbmr7476617pjo.4.1708348345370; Mon, 19 Feb
- 2024 05:12:25 -0800 (PST)
+ AJvYcCXYS5yKJpbmmC18znlWsjAvy0c97SaCCEpWSQSWMuldzNo2TwFwyKdTRjfmVkgqBtRu4V4/oKvQK5AHkvz1r79LeYhXVg==
+X-Gm-Message-State: AOJu0YzWfUYgv8gO/GPHGyf8SJ55oQzbOVtJofo7qq6i9xIdMzeGRr1B
+ qVrUETpOKQSKj7wcl2nxSbOHN8uSyRtcq0H8RTWW68T160pN/ye/9+PVVAmNXuAk6Tk37ohNDdn
+ UH/Tfj5FhKWOITeEws30mCMWl0H8=
+X-Google-Smtp-Source: AGHT+IHXmhD5e7WEQ+bU7ZNM8i5pQucOvFoWeUseo4DzSjq2tcydN/Nv5vRFjGAfEEyKAB40WvZf0bXPJBJWmLJ+rs8=
+X-Received: by 2002:a17:902:c14b:b0:1db:92e1:2e55 with SMTP id
+ 11-20020a170902c14b00b001db92e12e55mr10344216plj.2.1708348515129; Mon, 19 Feb
+ 2024 05:15:15 -0800 (PST)
 MIME-Version: 1.0
-References: <20240215140043.220680-1-frieder@fris.de>
-In-Reply-To: <20240215140043.220680-1-frieder@fris.de>
+References: <20240213114342.2728075-1-festevam@gmail.com>
+ <Zc39_kXIbw0LsCvd@de2cfed78370>
+In-Reply-To: <Zc39_kXIbw0LsCvd@de2cfed78370>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 19 Feb 2024 10:12:15 -0300
-Message-ID: <CAOMZO5CoNWVK0_Zz6UDfx58tuhTkp7MyhCUEC5YyKZWzkfD8_w@mail.gmail.com>
-Subject: Re: [PATCH v4 1/3] mtd: spi-nor-ids: Add support for ESMT/EON EN25Q80B
-To: Frieder Schrempf <frieder@fris.de>
-Cc: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de, 
- Vignesh R <vigneshr@ti.com>, Frieder Schrempf <frieder.schrempf@kontron.de>, 
- Andre Przywara <andre.przywara@arm.com>, Bruce Suen <bruce_suen@163.com>, 
- Godfrey Mwangi <godmwan@microsoft.com>, Jim Liu <jim.t90615@gmail.com>, 
- Jit Loon Lim <jit.loon.lim@intel.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Neal Frager <neal.frager@amd.com>, Nishanth Menon <nm@ti.com>, 
- Takahiro Kuwano <Takahiro.Kuwano@infineon.com>,
- Teik Heng Chong <teik.heng.chong@intel.com>, 
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Date: Mon, 19 Feb 2024 10:15:05 -0300
+Message-ID: <CAOMZO5Aw6H4aPsBPChKDSN0mcnkaxoWPC_6xysGa9dN_Vn1o2g@mail.gmail.com>
+Subject: Re: EXT: [PATCH 1/5] msc_sm2s_imx8mp: Convert to DM_SERIAL
+To: Ian Ray <ian.ray@gehealthcare.com>
+Cc: sbabic@denx.de, ian.ray@ge.com, martyn.welch@collabora.com, 
+ u-boot@lists.denx.de, Fabio Estevam <festevam@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -98,15 +91,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Feb 15, 2024 at 11:00=E2=80=AFAM Frieder Schrempf <frieder@fris.de>=
- wrote:
+On Thu, Feb 15, 2024 at 9:05=E2=80=AFAM Ian Ray <ian.ray@gehealthcare.com> =
+wrote:
 >
-> From: Frieder Schrempf <frieder.schrempf@kontron.de>
+> On Tue, Feb 13, 2024 at 08:43:38AM -0300, Fabio Estevam wrote:
+> >
+> > From: Fabio Estevam <festevam@denx.de>
+> >
+> > The conversion to DM_SERIAL is mandatory, so do the conversion.
+> >
+> > Signed-off-by: Fabio Estevam <festevam@denx.de>
 >
-> The datasheet can be found here:
-> https://www.esmt.com.tw/upload/pdf/ESMT/datasheets/EN25Q80B_Ver.E.pdf
->
-> Signed-off-by: Frieder Schrempf <frieder.schrempf@kontron.de>
-> Reviewed-by: Fabio Estevam <festevam@gmail.com>
+> Reviewed-by: Ian Ray <ian.ray@gehealthcare.com>
 
 Applied all, thanks.
