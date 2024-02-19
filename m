@@ -4,76 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E152AC48BF8
-	for <u-boot@archiver.kernel.org>; Mon, 19 Feb 2024 12:08:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC0A8C54764
+	for <u-boot@archiver.kernel.org>; Mon, 19 Feb 2024 12:09:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2ABE687F58;
-	Mon, 19 Feb 2024 13:08:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=timesys.com
+	by phobos.denx.de (Postfix) with ESMTP id A51EC87F4E;
+	Mon, 19 Feb 2024 13:08:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gnu.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=timesys-com.20230601.gappssmtp.com header.i=@timesys-com.20230601.gappssmtp.com header.b="yDrI27i6";
+	dkim=pass (2048-bit key; unprotected) header.d=gnu.org header.i=@gnu.org header.b="EGQEQSjN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 72DE187F53; Mon, 19 Feb 2024 13:00:21 +0100 (CET)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9603D87DE0; Mon, 19 Feb 2024 09:43:25 +0100 (CET)
+Received: from eggs.gnu.org (eggs.gnu.org [IPv6:2001:470:142:3::10])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 351FD87F31
- for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 12:59:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6220687F2C
+ for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 09:43:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=timesys.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=piotr.wojtaszczyk@timesys.com
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-a3e8c1e4aa7so83635766b.2
- for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 03:59:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=timesys-com.20230601.gappssmtp.com; s=20230601; t=1708343977; x=1708948777;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=EUXlQ7h5OmSjgd8bigjv3LZZ2DhMnPUbLnTAAw+eTYU=;
- b=yDrI27i6UKpx/YP1wCkT4HaHPsiWWqBeRFg/duLrbaHU54LPBEgKgKXbvu7Izxs5Sl
- Ya4Aq1/r44VeSjh5X9Vwp8zZX6WkG3K6yQ5pFE17hzynJKL0YM0tWy5ShQ07Hx5jhZbv
- xc4F9dQucyWPbqnz2rNP58FmI5Z6uOllxpAFDDXh9Jl8BPMPEm96epabjPjfLkAouaTV
- pwGLDiYz6Oz/6KKlmvS84nX+Zl/JQp505IuSobuntieaZglcuVoonr1AiN/zg+oLRqGF
- CtOpYW9HkQxeRaC04iPcg7Ngy0D6jSe4Tk4qU2jOfqDJtz/ehEXrbKWodlKRnW43fXFo
- zIUg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708343977; x=1708948777;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=EUXlQ7h5OmSjgd8bigjv3LZZ2DhMnPUbLnTAAw+eTYU=;
- b=sEuIxi+G5OMRqoTp/Ix6TRl0jqfcMmzy7GJTAxCQrKGgwaNAUsCC0cPGfo+GIq9dQf
- l4aeugEuSYLaCb+rtrif3Ke/mfPHFSuwTrbUZdx8RWaon3EQxDgbjcqSkCE6LMPc15Vc
- vpbwwLvUv81yRBCyza+dDaNS9z4l55AO/PU4liBMDXIcyVzgXqGvoXTmr3VAIve/5gYM
- yXmK/q+rjjJ5XEK9dTR0fuNVV+A+9CIlt98k7G6ZPClvodwk4+OrygA2ExcUVh4rlGy9
- ijk7wT8Qna5//jfrN55HKdrlvXbJa27a1rxxLB0iLc6nFKBpAj8pB7NxRz8oi0tVnzBj
- sFyQ==
-X-Gm-Message-State: AOJu0YyRyM1VUdhT2VPV6iVBALto3BdmEAy4yP847h09oAWfeC1TVcdn
- attdaw6rhzJdZAIxW/GiK9EXA1P7CZh9/4xXQkeU912NIaf1BgMIH8hvkZfQXusSqFkMHD46n8M
- 4
-X-Google-Smtp-Source: AGHT+IH4+ipHxh/0Zm9J0xu61unWuYqeJjx67dCjUBhVAgpuDrRf2IL16EV4U8h17cO6g3uEzaQtRg==
-X-Received: by 2002:a17:906:fa09:b0:a3e:8710:4f2b with SMTP id
- lo9-20020a170906fa0900b00a3e87104f2bmr2160026ejb.15.1708343977325; 
- Mon, 19 Feb 2024 03:59:37 -0800 (PST)
-Received: from localhost.localdomain ([91.216.213.152])
- by smtp.gmail.com with ESMTPSA id
- af1-20020a170906998100b00a3ecfef7f1esm248629ejc.189.2024.02.19.03.59.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 Feb 2024 03:59:36 -0800 (PST)
-From: Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>
-To: u-boot@lists.denx.de
-Cc: marex@denx.de,
-	Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>
-Subject: [PATCH v2 1/5] usb: ohci-generic: ignore ENOSYS and ENOTSUPP errors
- from clk and reset
-Date: Mon, 19 Feb 2024 12:59:25 +0100
-Message-Id: <20240219115925.12675-1-piotr.wojtaszczyk@timesys.com>
-X-Mailer: git-send-email 2.25.1
+ dmarc=pass (p=none dis=none) header.from=gnu.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=othacehe@gnu.org
+Received: from fencepost.gnu.org ([2001:470:142:3::e])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <othacehe@gnu.org>)
+ id 1rbzF0-0004XB-K0; Mon, 19 Feb 2024 03:43:10 -0500
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=gnu.org;
+ s=fencepost-gnu-org; h=MIME-Version:Date:Subject:To:From:in-reply-to:
+ references; bh=Xhk+U4oxNpLGf6ix96cMon+dsIWXzxroUrKU5kW78u8=; b=EGQEQSjN+1Rfya
+ 253QcNqqMCLuHn9RXN51bDm4BZC4DWEVV8vwA0nbJwwoo4zmkVcwGTe3yrXj6yV41iJJ5YZDPatTM
+ pZuFDNVm3GRpIEOrRP0F5dt8QqDHABe38ggvsdci+pb+p+UGwNv4D9WHEzw/Mk/gDWuS4xblw5kLb
+ IcHKkVZXsJiMX28Lv8SmoUgaezQ5nUbKBNKFW17Zpr/I4ihl+8olQ0miM1/q6jkUpCtBAJyHIQGA2
+ RyhVZfetF42ZmmDBgyifgOsIwjQxBsaDksNWLp3mKL/iU7vPWLcsXHv552GgykZgctyfHecstR/BZ
+ GrcfoKRLysnM8MtARkgA==;
+From: Mathieu Othacehe <othacehe@gnu.org>
+To: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
+ Shiji Yang <yangshiji66@outlook.com>, Ye Li <ye.li@nxp.com>,
+ =?UTF-8?q?S=C3=A9bastien=20Szymanski?= <sebastien.szymanski@armadeus.com>,
+ Fabio Estevam <festevam@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Mathieu Othacehe <m.othacehe@gmail.com>
+Cc: u-boot@lists.denx.de,
+	Mathieu Othacehe <othacehe@gnu.org>
+Subject: [PATCH] usb: ehci-mx6: Add i.MX93 support
+Date: Mon, 19 Feb 2024 09:43:00 +0100
+Message-ID: <20240219084300.8228-1-othacehe@gnu.org>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Mon, 19 Feb 2024 13:07:56 +0100
@@ -93,62 +67,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If a machine doesn't have CONFIG_CLK set the call to clk_get_bulk()
-returns '-ENOSYS' error which should be handled the same way as
-'-ENOENT' error. The same applies to reset_get_bulk() and 'ENOTSUPP'.
+i.MX93 uses the same USB IP as i.MX8MM. It can then reuse the ehci-mx6
+driver.
 
-Signed-off-by: Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>
+Signed-off-by: Mathieu Othacehe <othacehe@gnu.org>
 ---
-Changes for v2:
-- Changed logic style from !(== || ==) to (!= && !=)
+ drivers/usb/host/Kconfig    | 6 +++---
+ drivers/usb/host/ehci-mx6.c | 2 +-
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
- drivers/usb/host/ohci-generic.c | 12 ++++++++----
- 1 file changed, 8 insertions(+), 4 deletions(-)
-
-diff --git a/drivers/usb/host/ohci-generic.c b/drivers/usb/host/ohci-generic.c
-index ceed1911a9..8740094afc 100644
---- a/drivers/usb/host/ohci-generic.c
-+++ b/drivers/usb/host/ohci-generic.c
-@@ -28,7 +28,7 @@ static int ohci_usb_probe(struct udevice *dev)
- 	int err, ret;
+diff --git a/drivers/usb/host/Kconfig b/drivers/usb/host/Kconfig
+index 0dd5736433c..f96027d7bd2 100644
+--- a/drivers/usb/host/Kconfig
++++ b/drivers/usb/host/Kconfig
+@@ -210,10 +210,10 @@ config USB_EHCI_MX6
  
- 	ret = clk_get_bulk(dev, &priv->clocks);
--	if (ret && ret != -ENOENT) {
-+	if (ret && ret != -ENOENT && ret != -ENOSYS) {
- 		dev_err(dev, "Failed to get clocks (ret=%d)\n", ret);
- 		return ret;
- 	}
-@@ -40,7 +40,7 @@ static int ohci_usb_probe(struct udevice *dev)
- 	}
- 
- 	err = reset_get_bulk(dev, &priv->resets);
--	if (err && err != -ENOENT) {
-+	if (err && err != -ENOENT && err != -ENOTSUPP) {
- 		dev_err(dev, "failed to get resets (err=%d)\n", err);
- 		goto clk_err;
- 	}
-@@ -72,7 +72,7 @@ reset_err:
- 		dev_err(dev, "failed to release resets (ret=%d)\n", ret);
- clk_err:
- 	ret = clk_release_bulk(&priv->clocks);
--	if (ret)
-+	if (ret && (ret != -ENOSYS))
- 		dev_err(dev, "failed to release clocks (ret=%d)\n", ret);
- 
- 	return err;
-@@ -95,7 +95,11 @@ static int ohci_usb_remove(struct udevice *dev)
- 	if (ret)
- 		return ret;
- 
--	return clk_release_bulk(&priv->clocks);
-+	ret = clk_release_bulk(&priv->clocks);
-+	if (ret && (ret != -ENOSYS))
-+		return ret;
-+
-+	return 0;
- }
- 
- static const struct udevice_id ohci_usb_ids[] = {
+ config USB_EHCI_MX7
+ 	bool "Support for i.MX7 on-chip EHCI USB controller"
+-	depends on ARCH_MX7 || IMX8M
++	depends on ARCH_MX7 || IMX8M || IMX93
+ 	select EHCI_HCD_INIT_AFTER_RESET if ARCH_MX7
+-	select PHY if IMX8M
+-	select NOP_PHY if IMX8M
++	select PHY if IMX8M || IMX93
++	select NOP_PHY if IMX8M || IMX93
+ 	default y
+ 	---help---
+ 	  Enables support for the on-chip EHCI controller on i.MX7 SoCs.
+diff --git a/drivers/usb/host/ehci-mx6.c b/drivers/usb/host/ehci-mx6.c
+index a9ed5e7a0d5..a35fcca43a2 100644
+--- a/drivers/usb/host/ehci-mx6.c
++++ b/drivers/usb/host/ehci-mx6.c
+@@ -538,7 +538,7 @@ static int ehci_usb_phy_mode(struct udevice *dev)
+ 			plat->init_type = USB_INIT_DEVICE;
+ 		else
+ 			plat->init_type = USB_INIT_HOST;
+-	} else if (is_mx7() || is_imx8mm() || is_imx8mn()) {
++	} else if (is_mx7() || is_imx8mm() || is_imx8mn() || is_imx93()) {
+ 		phy_status = (void __iomem *)(addr +
+ 					      USBNC_PHY_STATUS_OFFSET);
+ 		val = readl(phy_status);
 -- 
-2.25.1
+2.41.0
 
