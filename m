@@ -4,76 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14FE0C48BF8
-	for <u-boot@archiver.kernel.org>; Mon, 19 Feb 2024 20:50:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F5C7C48BF8
+	for <u-boot@archiver.kernel.org>; Mon, 19 Feb 2024 21:14:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 40D8E87DEF;
-	Mon, 19 Feb 2024 21:50:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 494848751B;
+	Mon, 19 Feb 2024 22:14:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="o3mI46RP";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="X3OQsNYd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF56687DEF; Mon, 19 Feb 2024 21:50:08 +0100 (CET)
-Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
- [IPv6:2607:f8b0:4864:20::1133])
+ id 32373876E7; Mon, 19 Feb 2024 22:14:26 +0100 (CET)
+Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
+ [IPv6:2607:f8b0:4864:20::1129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 53A7B87F59
- for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 21:49:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E0DAA87061
+ for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 22:14:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-607bfa4c913so44499117b3.3
- for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 12:49:53 -0800 (PST)
+Received: by mail-yw1-x1129.google.com with SMTP id
+ 00721157ae682-607d8506099so45333447b3.0
+ for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 13:14:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1708375791; x=1708980591; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1708377257; x=1708982057; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=QAIzF8zkInCIafHm01SAypVJTKMewYcUv0uCZxVRHJQ=;
- b=o3mI46RP0sechph2qG2IHBYtbY4fSMaXp2QrMpuAQNIaDo7Ep/HdXYh3LxoVA78Bhf
- K9ellzD2QdvXM/6xnlibq2VAMTtTJKYWRa9n32rllrTsd8EGG89gvB/WT/S4ymL3vZgk
- onOg65bBaK7GcAO271/gb59F0l9eVsQPzCOkE=
+ bh=D6tNXPuS7JQBK+C4XRGRN0YaZzlPRiB4SJmbv+bW9tg=;
+ b=X3OQsNYdhCMr6AgHwPyQDnrXRQReh29cZgvt+yT3P3uba2nytOsUuNhappDPiTgZzg
+ hftTjD0EtrNb7y8ZXHtnnFgzkqJ5hZeVffjw8XgpamkKhDNde+JQjTxA1HRZLdj8a7Of
+ uZwxCO30/0/FiXVi229qjUmBufQBT9LQAbMWM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708375791; x=1708980591;
+ d=1e100.net; s=20230601; t=1708377257; x=1708982057;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=QAIzF8zkInCIafHm01SAypVJTKMewYcUv0uCZxVRHJQ=;
- b=YHUBrjWjpn41HMHk67GlYrTjwUIMTTqMzc8RBz4ehvVsNaPFmjCe3q5XjIbMvQuBBf
- +X3t9g3i1xZ3af97CirolULiItLHfc7TSjRtZJFJubE2SO+7fx5Qn5zVX/2FkUcBi9ys
- EUr6KDpgVawC4PAcPpZu+F4cm42Z/d5njWU3uQPvW46JoGAIC9gFtbsqNsk6ITG9mnhK
- pMqlof/ninSD1LvYwOJZFS2soqaI3pgD+A93X39wH/wW4nRyE4HGuuIbi3F3dqrBBr/o
- UhkmwsfPUPCGMOY7v0EU+ds729+0uUqRhUUsuGCUC5uBbWVpYbTQ8qTP3o/cPSKZvi2Z
- rEJA==
-X-Gm-Message-State: AOJu0YyoayqdHfFunofmi3XAga1HFyQjbZkt5+kNdQOZ+cGpt4mtg+y3
- tHb6/v7W7LPEwEyg3wGR50GmOEDR+7V8G8OHlQg5/VP04xXP6I/glzl47g0qhYo=
-X-Google-Smtp-Source: AGHT+IHBe23aob7vr459vaEDMLfT7p3944ubVUF6rEm86wP+Ofw+HIQQD8VqIl321ZYBXd6x3v/wnA==
-X-Received: by 2002:a05:690c:4442:b0:608:1b39:245a with SMTP id
- gq2-20020a05690c444200b006081b39245amr6445710ywb.1.1708375791495; 
- Mon, 19 Feb 2024 12:49:51 -0800 (PST)
+ bh=D6tNXPuS7JQBK+C4XRGRN0YaZzlPRiB4SJmbv+bW9tg=;
+ b=YXpK5R5cZOHSIcZqu6KCLaABtw/BD4oIvAqrcFbhLHbgl0DJgsiENboaOkJwlnARyE
+ qY4Z0TjX0LYXV45XCm63lY0fAKd4c0Q5D+t3EAD/dYqDtigO5hlBU5ApeeH0y2EGdqtB
+ WhJozVknFD3kcBtsRBpg3IPjsfuh36JAz5ik9ecE8h3TF5Bm64qUM0xca+w10dV7rcrf
+ SkTf99ns6L6i1siVt0MLl0+lh5qvLPYUbYXN4FqUpJZxkAl6wYWX70hTm7bCZPG336t3
+ kgUuy4MLVfHnnDGEyKktyEPR6UBrpqvK2Fs5UbWxr+AmmffYVFb3MNpu5+66jCaGP6MO
+ W/bw==
+X-Gm-Message-State: AOJu0YwGt7Ogvl67yzfm1d693lk/JYvUdEBUijgJ6B4DuRKGUBB86hwH
+ wyCiGD07kNi6eX1u5JvZ0b9pKUdY21dh6WT5RFynlyXR2na3wK21zGgpsqHxJuA=
+X-Google-Smtp-Source: AGHT+IFCdR/zAsN0YUrj552crUFkKiZFUhxHNcImLnd3hZrC/9PIShOnkhFwmo3TI3GRlul8szwTTQ==
+X-Received: by 2002:a0d:e243:0:b0:607:a30d:8b3 with SMTP id
+ l64-20020a0de243000000b00607a30d08b3mr13809475ywe.18.1708377257487; 
+ Mon, 19 Feb 2024 13:14:17 -0800 (PST)
 Received: from bill-the-cat (065-184-194-195.res.spectrum.com.
  [65.184.194.195]) by smtp.gmail.com with ESMTPSA id
- h123-20020a0dde81000000b006040d34e58csm1789169ywe.74.2024.02.19.12.49.50
+ u185-20020a8184c2000000b0060820229c74sm1019225ywf.5.2024.02.19.13.14.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 Feb 2024 12:49:50 -0800 (PST)
-Date: Mon, 19 Feb 2024 15:49:49 -0500
+ Mon, 19 Feb 2024 13:14:17 -0800 (PST)
+Date: Mon, 19 Feb 2024 16:14:15 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-Cc: u-boot@lists.denx.de, Bin Meng <bmeng.cn@gmail.com>
-Subject: Re: [PATCH] virtio: fix get_config / set_config for legacy VirtIO
- targets
-Message-ID: <20240219204949.GN3040305@bill-the-cat>
-References: <20240212073708.4161197-1-dmitry.baryshkov@linaro.org>
- <CAA8EJppQQG0F+tR202ZLraG8x_CJ9ZH2jcm+ncs2eq=pX0D7Mw@mail.gmail.com>
+To: Sahaj Sarup <sahaj.sarup@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: LTO build failure with GCC 13.2.1
+Message-ID: <20240219211415.GO3040305@bill-the-cat>
+References: <CAKZ1LvPwQyWadPtmv4LRmANm-6CHQpNZQqgRyzdxM3fvBTT=1A@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="1kOGEpVGCpHehYgH"
+ protocol="application/pgp-signature"; boundary="0qqw3VCbzCVQ2kRJ"
 Content-Disposition: inline
-In-Reply-To: <CAA8EJppQQG0F+tR202ZLraG8x_CJ9ZH2jcm+ncs2eq=pX0D7Mw@mail.gmail.com>
+In-Reply-To: <CAKZ1LvPwQyWadPtmv4LRmANm-6CHQpNZQqgRyzdxM3fvBTT=1A@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,79 +90,98 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---1kOGEpVGCpHehYgH
+--0qqw3VCbzCVQ2kRJ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Feb 17, 2024 at 10:09:12PM +0200, Dmitry Baryshkov wrote:
-> On Mon, 12 Feb 2024 at 09:37, Dmitry Baryshkov
-> <dmitry.baryshkov@linaro.org> wrote:
-> >
-> > The functions virtio_pci_get_config() and virtio_pci_set_config() don't
-> > take the offset into account when reading the config space. For example
-> > this manifests when U-Boot tries to read the MAC address of the VirtIO
-> > networking device. It reads 6 equa bytes instead of the proper addess.
-> >
-> > Fix those functions by taking the offset in the config space into
-> > account.
-> >
-> > Fixes: 4135e10732a0 ("virtio: Add virtio over pci transport driver")
-> > Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
->=20
-> Gracious ping
->=20
-> > ---
-> >  drivers/virtio/virtio_pci_legacy.c | 4 ++--
-> >  1 file changed, 2 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/drivers/virtio/virtio_pci_legacy.c b/drivers/virtio/virtio=
-_pci_legacy.c
-> > index cf5dfb17a94d..aa89604ae84d 100644
-> > --- a/drivers/virtio/virtio_pci_legacy.c
-> > +++ b/drivers/virtio/virtio_pci_legacy.c
-> > @@ -107,7 +107,7 @@ static int virtio_pci_get_config(struct udevice *ud=
-ev, unsigned int offset,
-> >         int i;
-> >
-> >         for (i =3D 0; i < len; i++)
-> > -               ptr[i] =3D ioread8(ioaddr + i);
-> > +               ptr[i] =3D ioread8(ioaddr + offset + i);
-> >
-> >         return 0;
-> >  }
-> > @@ -121,7 +121,7 @@ static int virtio_pci_set_config(struct udevice *ud=
-ev, unsigned int offset,
-> >         int i;
-> >
-> >         for (i =3D 0; i < len; i++)
-> > -               iowrite8(ptr[i], ioaddr + i);
-> > +               iowrite8(ptr[i], ioaddr + offset + i);
-> >
-> >         return 0;
-> >  }
+On Fri, Feb 16, 2024 at 10:19:38AM +0530, Sahaj Sarup wrote:
 
-I'll take this for -next when it opens.
+> Hi all,
+>=20
+> Since commit f8cebb4f789c9950caf55a0b73e88049e7a1c3a3 enabled LTO by
+> default for imx8m platforms,
+> I have been having issues building u-boot.
+> I am primarily working on imx8mp instead of imx8mm platforms so the
+> bug resolved by that commit doesn't affect me yet.
+> But I guess it's a generic issue with u-boot's LTO requirements and GCC 1=
+3.
+>=20
+> Build log:
+> ```
+>   LTO     u-boot
+> /usr/bin/aarch64-linux-gnu-ld:
+> /usr/lib/gcc/aarch64-linux-gnu/13/libgcc.a(lse-init.o): in function
+> `init_have_lse_atomics':
+> /builddir/build/BUILD/gcc-13.2.1-20230728/aarch64-linux-gnu/aarch64-linux=
+-gnu/libgcc/../../../gcc-13.2.1-20230728/libgcc/config/aarch64/lse-init.c:4=
+6:
+> undefined reference to `__getauxval'
+> collect2: fatal error: ld terminated with signal 11 [Segmentation
+> fault], core dumped
+> compilation terminated.
+> make: *** [Makefile:1766: u-boot] Error 1
+> make: *** Deleting file 'u-boot'
+> ```
+>=20
+> GCC Version:
+> ```
+> $ aarch64-linux-gnu-gcc -v
+> Using built-in specs.
+> COLLECT_GCC=3D/usr/bin/aarch64-linux-gnu-gcc
+> COLLECT_LTO_WRAPPER=3D/usr/libexec/gcc/aarch64-linux-gnu/13/lto-wrapper
+> Target: aarch64-linux-gnu
+> Configured with: ../gcc-13.2.1-20230728/configure --bindir=3D/usr/bin
+> --build=3Dx86_64-redhat-linux-gnu --datadir=3D/usr/share --disable-
+> decimal-float --disable-dependency-tracking --disable-gold
+> --disable-libgcj --disable-libgomp --disable-libmpx
+> --disable-libquadmat
+> h --disable-libssp --disable-libunwind-exceptions --disable-shared
+> --disable-silent-rules --disable-sjlj-exceptions --disable-threa
+> ds --with-ld=3D/usr/bin/aarch64-linux-gnu-ld --enable-__cxa_atexit
+> --enable-checking=3Drelease --enable-gnu-unique-object --enable-init
+> fini-array --enable-languages=3Dc,c++ --enable-linker-build-id
+> --enable-lto --enable-nls --enable-obsolete --enable-plugin --enable-t
+> argets=3Dall --exec-prefix=3D/usr --host=3Dx86_64-redhat-linux-gnu
+> --includedir=3D/usr/include --infodir=3D/usr/share/info --libexecdir=3D/u=
+sr/
+> libexec --localstatedir=3D/var --mandir=3D/usr/share/man --prefix=3D/usr
+> --program-prefix=3Daarch64-linux-gnu- --sbindir=3D/usr/sbin --shared
+> statedir=3D/var/lib --sysconfdir=3D/etc --target=3Daarch64-linux-gnu
+> --with-bugurl=3Dhttp://bugzilla.redhat.com/bugzilla/ --with-gcc-major-
+> version-only --with-isl --with-newlib
+> --with-plugin-ld=3D/usr/bin/aarch64-linux-gnu-ld
+> --with-sysroot=3D/usr/aarch64-linux-gnu/sys-root
+> --with-system-libunwind --with-system-zlib --without-headers
+> --enable-gnu-indirect-function --with-linker-hash-style=3Dgnu
+> Thread model: single
+> Supported LTO compression algorithms: zlib zstd
+> gcc version 13.2.1 20230728 (Red Hat Cross 13.2.1-1) (GCC)
+
+Interesting, we build this platform fine with gcc-13.2.0, so this might
+be a regression elsewhere? Please investigate what's required to fix
+this, and perhaps if it's a toolchain problem or a compiler problem,
+once the "fix" is known in U-Boot.
 
 --=20
 Tom
 
---1kOGEpVGCpHehYgH
+--0qqw3VCbzCVQ2kRJ
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXTvukACgkQFHw5/5Y0
-tyxiywwAqw9NZqZm1qcWjgkWOEdyq59q+E9Tni2jKs1oKv1e69HEbgFXIkfUnHa0
-ab8QHrLoQeEis1vwOvUjfmX59c64bbjx4HyaJybFBCGZ/0zjdV0k9h+uM+waCh4V
-figH9hcvpsr9xzZj9dlkILWpsQpb6wDQ8IbdwW0K98VeM9BuIkdsaIvbaUOpputT
-O/Xp7Pg8B0nqrznDzqJ0775ATLUbKU57+Rm3gMU0qJ2Ne5udqH6Wwl0u7yJV+HJc
-EjS5tvMsG8YLMpUwKb3/GUlRyFgBlLAiFIhyqFNGE7K8s7pGgTkNREBMUBStzwTh
-QSWzZhggU/M5SVFvcNNAo0/NywGITNIJxmXH6MC2BNXNmHfHnyh3Ddqq+vKuTQaO
-LpPpaICUIvjCB7aSR8YLnT0YsUBAxr+ERQAJ7qRVI8T3TX/rjp4oSZyd5M9km7OY
-cS1ZSs2HwVWIrakdZzM6bW79GI0gUbR2OpOzIwaJXoqgIyY0u5Xm3eJ32lY2nn/K
-mFbqyRNm
-=4eOV
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXTxKMACgkQFHw5/5Y0
+tyysdwv/UCzneTlFw5ZlKxt28gYA1QvUHYHpxhUzcnQvODT9x0qM3NB/A9g8xpMD
+jNdEqTB1wRWo0FKowGRORUiUjA/JnigXer3e44S55M3ys4B+7QIMzld687Rh88gj
+kcWws+Y3jaYF2Jidu6/Sk1DeLkEwF+qzuG/M8F0HCWtxpLh4BCNbjYxpwaR2vINo
+PqXx9BreGxA4sB22ktXnGPwnN7wSJ54cUwT8gZ+dXlqkIUMAVBdS6q1EP4Hlw9kJ
+oSpiOvY3/6bhOBU/ZhMLLtGhIWeBpqXLqLg5c7QTpYGVXK87f7huuPtkJpYPhNJb
+OPTgGYcmiPsLrKAmaCg2owYn5zyS2PyTK9C4cKT1NSmbe3uHvvA3G0GJJ43c3wSl
+l8x0Tu0I+Pu8uMFAyOfbwwhgrWn3KymYiFhMFtiiirpTUlzJ57pRL66yOFjL0/0C
+GzbomO2AJRnQw5S9UJxTkOShlzx+EIm6Vtq3VAvQUMcjVYLUhQ6qHrCqx3tT35lo
+LOYsMmKU
+=kUqx
 -----END PGP SIGNATURE-----
 
---1kOGEpVGCpHehYgH--
+--0qqw3VCbzCVQ2kRJ--
