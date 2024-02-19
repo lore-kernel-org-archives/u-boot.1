@@ -4,76 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AF0FC48BC3
-	for <u-boot@archiver.kernel.org>; Mon, 19 Feb 2024 12:59:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95155C48BF8
+	for <u-boot@archiver.kernel.org>; Mon, 19 Feb 2024 13:10:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BEDDB87DE8;
-	Mon, 19 Feb 2024 13:59:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7CDA687DED;
+	Mon, 19 Feb 2024 14:10:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iaTCnLrB";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="V2IHI+m7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BC44E87DE8; Mon, 19 Feb 2024 13:59:23 +0100 (CET)
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
+ id 5853A87F48; Mon, 19 Feb 2024 14:10:27 +0100 (CET)
+Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
+ [IPv6:2607:f8b0:4864:20::1029])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D025987DE9
- for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 13:59:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8B1C287F33
+ for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 14:10:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-512be6fda52so294465e87.0
- for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 04:59:03 -0800 (PST)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-29593a27fcaso1245532a91.1
+ for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 05:10:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708347542; x=1708952342; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Uz9bDrDXKrYCEujzY3ZB9qmYB7insuaI5VcWb3+7K0k=;
- b=iaTCnLrBGnmmIQamOE8Nc4AMAlOQrXEusETechomANTO2PeIpkrbrpnZGu5+doLB/8
- tDNjxNPkL2q43BIUEkejOzouJYn0i+r8bqAUh/BoLXQpYOj/XcXbKIPDiZ45VQ2yU+hQ
- ogjYspbo8vS8Rx/jXbMY6H1Fewx9mESpUJ+8coj1Z3zvmvLMwdJhOfxnwgWEyGA9GjXd
- MH9sTUVkHlyQy5wu6goJm2ELOYYmIz2OQuvX2Vm7KV8vyLn80g/QKQB9bJdLr7g+IaWk
- gC1oxd6j0zyts1xhBhpjHS4+1Rz4RURbkiIHCgKuDMgwQlFb0CWZ4vhIgHxgaNAgTdMv
- ncYQ==
+ d=gmail.com; s=20230601; t=1708348209; x=1708953009; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=CNfGQztNZ4X1buBrwQEkyiKtkXv6ygsx8PU+fiTec8A=;
+ b=V2IHI+m70nba8VVuMVFc4WFTi4+7ApQrAypaThbjbsR/JztHrRS7n316gkYgeIJhyv
+ nEeFWl5x0QpXv8qzOr1zWU0kEIrDzVkgwQF/dFf1y1K4molzigPNwxF9Snb1DV2zwdPp
+ XE+nqiOlqkgeBrQgBzJU/XFeaeE3aUuqfnPabeIfms0z9RX4TDLkp1HigryaY/MZA/T+
+ kioAYz8+Ksfj65ByyYg2bRhzegSQtbs5IG+mdDUrU2gw8qiqu8PFcLdqZf1SFeJflG8d
+ 5XXTeqndgU1oJ8Tu1lC5XVUMGAXYGnqD2H8a7lxuHbCOMjqrubZ4n/IfK6hX6sDmKAeA
+ 9cAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708347542; x=1708952342;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1708348209; x=1708953009;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Uz9bDrDXKrYCEujzY3ZB9qmYB7insuaI5VcWb3+7K0k=;
- b=OaJmz9KCKycwAw7P1KYtq03OVRVDIyOA+0NdsQXlJa/NHuC8g014QVL85SSXnzDBv3
- 8BnxaFIxnBbPXV2tjWT3MyibczqPjEZoHiesiC3TfsUiMSkC90YBWUpBG3tldjXzoQcp
- T+Yl4eS37mGvLGetRU4JC+ZxthJ0saVfO9gz3XXxrLaUDM6EvhnZuDfcxpWFwcSavN3y
- EQCsxokMT3JP5MTYTnZSqnSN1K7UnGPOYhQEsA61yK+qxgBRT5mDlyWxuspwFuTSTZAV
- 6G/4Cb+LmFRfaBCC5wRTSfXrrtDo4ZeQZHaVtuinjxPsjCneBfZA5WfvWi2IV/8dGlnA
- +8nQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX69mEKhecGA+Njp7/2+BpdZlKSBnodxe47bJe19Ck4HDRBDl1oVlIqpSY7ykArrZfILwza6KywxpfODQlPJ9miAViD5A==
-X-Gm-Message-State: AOJu0YzPNKfV6/2WyG3gpwUwGpfO5zeRLLx+WEguFcE+UMJnOVH95/Wx
- iirmZVlpV1GGFrbKFq987AijGc0NiqUGBqU60Z1LNsJT00FKGJ9RcGYnG+eHSrGmSiOg9a6khgM
- vXCIzlRgOeIP2t1+poDf5ShF9j+0jjxwFIKyYuA==
-X-Google-Smtp-Source: AGHT+IEWWiXzLPV7S6IjbUcAmXIQ8ZLJYgF8ioNkqASzYiRC01MoUzmYLp9NF0eOFoXTUnmV2D78rhwJcjn2Owgjy68=
-X-Received: by 2002:a05:6512:304e:b0:512:b313:73ae with SMTP id
- b14-20020a056512304e00b00512b31373aemr1914501lfb.43.1708347542357; Mon, 19
- Feb 2024 04:59:02 -0800 (PST)
+ bh=CNfGQztNZ4X1buBrwQEkyiKtkXv6ygsx8PU+fiTec8A=;
+ b=Ozq4y3Kphs1hcEUg9kSLN6zI0Twy8a6OHbs8eoiWeUDqpr1+WCR3QBHhlAF88WUf8Y
+ DPB8exn8m9lozBWdaaJER29jkyHOguqUpUI/xr1TyrRghSm/Vd1x13bng90Wu1uzx45/
+ urXlVFiehh6Kkry9qT6IqlzHgrP+x5KGjZU5T30eXr7+3VEo9Vv/2bdn46Xc1vNwKg5l
+ BNe9Z/BFjUmb/Mtb/OG1N4gOh9EBpe/ubADf4q+RgDeD4XnaXfgtdQsMCAeyGFUkCMnU
+ VTaqDiZ3HPxuK/QtpFR1ukPBoEcFnzLxHWAdC/eYnXYId9IR/uMrTeo6uVproToyN5xM
+ bxFA==
+X-Gm-Message-State: AOJu0Yw1E7ttl8JpWB/K7QUfiwq/03tKBUCF1eK4m3C0yzO1PsFYWFxJ
+ cETtoEM8FN1HU5Zbj1UsBtKQZZU372oJGgGxnELh90iH0Q9+GEy9ssIDvwg8
+X-Google-Smtp-Source: AGHT+IG1io6Vx2BZj9ODQPxMUgquTpT6en3r3YJ3WysjYrLHl33TGVzG7FGNwZKyJhks0NyKc3NUmQ==
+X-Received: by 2002:a17:902:c185:b0:1db:a770:81a4 with SMTP id
+ d5-20020a170902c18500b001dba77081a4mr9835084pld.1.1708348209183; 
+ Mon, 19 Feb 2024 05:10:09 -0800 (PST)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:dae7:e0e5:f74b:fce1])
+ by smtp.gmail.com with ESMTPSA id
+ jw11-20020a170903278b00b001db67377e8dsm4329462plb.248.2024.02.19.05.10.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 19 Feb 2024 05:10:08 -0800 (PST)
+From: Fabio Estevam <festevam@gmail.com>
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: [GIT PULL] Please pull u-boot-imx-master-20240219
+Date: Mon, 19 Feb 2024 10:10:06 -0300
+Message-Id: <20240219131006.391634-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20240219091220.1022422-1-pbrobinson@gmail.com>
- <878r3gn44l.fsf@bloch.sibelius.xs4all.nl>
- <CALeDE9OPB5XSPvHKXJd-TXgd+gkBTBeji-hWpRTNQBppLz1OEw@mail.gmail.com>
-In-Reply-To: <CALeDE9OPB5XSPvHKXJd-TXgd+gkBTBeji-hWpRTNQBppLz1OEw@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 19 Feb 2024 14:58:26 +0200
-Message-ID: <CAC_iWjLMD_K4w2DuC0qi4PPXXvuySgGq1rEqJ6wEBRiWharU1Q@mail.gmail.com>
-Subject: Re: [PATCH] disk: dos: Add all options for EFI System Partitions
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: Mark Kettenis <mark.kettenis@xs4all.nl>, trini@konsulko.com,
- sjg@chromium.org, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,102 +88,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
+Hi Tom,
 
-On Mon, 19 Feb 2024 at 12:53, Peter Robinson <pbrobinson@gmail.com> wrote:
->
-> On Mon, 19 Feb 2024 at 10:24, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
-> >
-> > > From: Peter Robinson <pbrobinson@gmail.com>
-> > > Date: Mon, 19 Feb 2024 09:12:15 +0000
-> > >
-> > > The EFI spec states that the ESP can be any of FAT12/16/32 but for
-> > > compatibility doesn't necssarily require the partition to be the
-> > > EFI partition table ID of 0xef. A number of arm devices will not
-> > > find their firmware on a FAT partition with an ID of 0xef so also
-> > > allow the original FAT12/16/32 partition IDs as they are also
-> > > permissable for an ESP.
-> >
-> > Hi Peter,
-> >
-> > Any reason not to include 0x0c as well?  That is what we use on
-> > OpenBSD/armv7 and OpenBSD/arm64.  And as far as I know all UEFI
-> > implementations (on arm64 at least) boot from such a partition.
->
-> I wasn't 100% the support with LBA so I erred with caution, but no
-> reason I can't add it.
->
-> > (And yes, we use that partition type because we want to have a
-> > bootable image that works on the various Raspberry Pi models).
->
-> Yes, that is the same reason for us, plus a few other random other Arm
-> devices that won't recognise EF as VFAT and won't boot.
->
-> > That said, what problem does this fix?  And what happens if we have
-> > both a 0xea and a 0x01/0x06/0x0b/0x0c partition?  In that case U-Boot
-> > should probably prefer the 0xea over the others as the ESP.
->
-> The reason is because the support to write EFI vars on ESP, and yes I
-> realise it's got security issues but for most boards it's the least of
-> their problem, as the support won't do that without the flag and you
-> get a bunch of these on boot:
->
-> No EFI system partition
-> Failed to persist EFI variables
->
-> As for multiple partitions UEFI should handle that and I believe the
-> EFI var support has logic around which partition it chooses.
+Please pull from u-boot-imx, thanks.
 
-For now we 'just' select the first ESP partition we scan while adding
-disks on the EFI subsystem. But this patch doesn't change that logic.
+The following changes since commit e4013bcb10f604ec1dfe955634d57e1fc336b15f:
 
-That being said, I am pretty sure Mark is right here and this is going
-to be a problem in the future (but it's still orthogonal to this
-patch).
+  Merge branch 'master-porter' of https://source.denx.de/u-boot/custodians/u-boot-sh (2024-02-17 18:37:07 -0500)
 
->
-> > Oh, and while your're at it, the hex constants are a bit inconsistent
-> > (0x1/0x6 vs. 0x0b).
->
-> Will fix with v2 when I add 0x0c, I'll await other feedback for a bit.
->
-> Thanks,
-> Peter
->
-> > Cheers,
-> >
-> > Mark
-> >
-> > > Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
-> > > ---
-> > >  disk/part_dos.c | 6 ++++++
-> > >  1 file changed, 6 insertions(+)
-> > >
-> > > diff --git a/disk/part_dos.c b/disk/part_dos.c
-> > > index 567ead7511d..303eb1d13ee 100644
-> > > --- a/disk/part_dos.c
-> > > +++ b/disk/part_dos.c
-> > > @@ -40,6 +40,12 @@ static int get_bootable(dos_partition_t *p)
-> > >  {
-> > >       int ret = 0;
-> > >
-> > > +     if (p->sys_ind == 0x1)
-> > > +             ret |= PART_EFI_SYSTEM_PARTITION;
-> > > +     if (p->sys_ind == 0x6)
-> > > +             ret |= PART_EFI_SYSTEM_PARTITION;
-> > > +     if (p->sys_ind == 0x0b)
-> > > +             ret |= PART_EFI_SYSTEM_PARTITION;
-> > >       if (p->sys_ind == 0xef)
-> > >               ret |= PART_EFI_SYSTEM_PARTITION;
+are available in the Git repository at:
 
+  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-master-20240219
 
-Can switch the many ifs to a switch statement? Going to make adding
-more IDs easier.
+for you to fetch changes up to 0cfc2e9225fb682a1a5b3e5d49af8ebf8d893cef:
 
-Thanks
-/Ilias
-> > >       if (p->boot_ind == 0x80)
-> > > --
-> > > 2.43.1
-> > >
-> > >
+  doc: board: Add minimal documentation for Sielaff i.MX6 Solo board (2024-02-19 08:19:39 -0300)
+
+u-boot-imx-master-20240219
+--------------------------
+
+CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/19683
+
+- Convert msc_sm2s_imx8mp to DM_SERIAL.
+- Make Ethernel functional on msc_sm2s_imx8mp.
+- General improvements for msc_sm2s_imx8mp.
+- Add suport for the Sielaff i.MX6 Solo board.
+- Update GE HealthCare maitainers' e-mail addresses.
+----------------------------------------------------------------
+Fabio Estevam (5):
+      msc_sm2s_imx8mp: Convert to DM_SERIAL
+      msc_sm2s_imx8mp: Make Ethernet functional
+      imx8mp-msc-sm2s: Add mmc aliases
+      msc_sm2s_imx8mp: Add redundant environment support
+      msc_sm2s_imx8mp: Fix CONFIG_DEFAULT_FDT_FILE
+
+Frieder Schrempf (3):
+      mtd: spi-nor-ids: Add support for ESMT/EON EN25Q80B
+      board: Add support for Sielaff i.MX6 Solo board
+      doc: board: Add minimal documentation for Sielaff i.MX6 Solo board
+
+Ian Ray (1):
+      MAINTAINERS: Update after GEHC spin-off
+
+ MAINTAINERS                                     |   2 +-
+ arch/arm/dts/Makefile                           |   1 +
+ arch/arm/dts/imx6dl-sielaff-u-boot.dtsi         |  38 ++
+ arch/arm/dts/imx6dl-sielaff.dts                 | 533 ++++++++++++++++++++++++
+ arch/arm/dts/imx8mp-msc-sm2s-u-boot.dtsi        |  13 +
+ arch/arm/mach-imx/mx6/Kconfig                   |  10 +
+ board/ge/b1x5v2/MAINTAINERS                     |   4 +-
+ board/ge/bx50v3/MAINTAINERS                     |   2 +-
+ board/ge/mx53ppd/MAINTAINERS                    |   3 +-
+ board/msc/sm2s_imx8mp/spl.c                     |   9 -
+ board/sielaff/imx6dl-sielaff/Kconfig            |  15 +
+ board/sielaff/imx6dl-sielaff/MAINTAINERS        |   9 +
+ board/sielaff/imx6dl-sielaff/Makefile           |   8 +
+ board/sielaff/imx6dl-sielaff/imx6dl-sielaff.c   | 111 +++++
+ board/sielaff/imx6dl-sielaff/imx6dl-sielaff.env | 114 +++++
+ board/sielaff/imx6dl-sielaff/spl.c              | 273 ++++++++++++
+ configs/imx6dl_sielaff_defconfig                | 120 ++++++
+ configs/msc_sm2s_imx8mp_defconfig               |  10 +-
+ doc/board/index.rst                             |   1 +
+ doc/board/sielaff/imx6dl-sielaff.rst            |  29 ++
+ doc/board/sielaff/index.rst                     |   9 +
+ drivers/mtd/spi/spi-nor-ids.c                   |   1 +
+ include/configs/imx6dl-sielaff.h                |  25 ++
+ include/configs/msc_sm2s_imx8mp.h               |   2 -
+ 24 files changed, 1323 insertions(+), 19 deletions(-)
+ create mode 100644 arch/arm/dts/imx6dl-sielaff-u-boot.dtsi
+ create mode 100644 arch/arm/dts/imx6dl-sielaff.dts
+ create mode 100644 board/sielaff/imx6dl-sielaff/Kconfig
+ create mode 100644 board/sielaff/imx6dl-sielaff/MAINTAINERS
+ create mode 100644 board/sielaff/imx6dl-sielaff/Makefile
+ create mode 100644 board/sielaff/imx6dl-sielaff/imx6dl-sielaff.c
+ create mode 100644 board/sielaff/imx6dl-sielaff/imx6dl-sielaff.env
+ create mode 100644 board/sielaff/imx6dl-sielaff/spl.c
+ create mode 100644 configs/imx6dl_sielaff_defconfig
+ create mode 100644 doc/board/sielaff/imx6dl-sielaff.rst
+ create mode 100644 doc/board/sielaff/index.rst
+ create mode 100644 include/configs/imx6dl-sielaff.h
