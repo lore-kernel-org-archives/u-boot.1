@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3E48C48BC3
-	for <u-boot@archiver.kernel.org>; Mon, 19 Feb 2024 09:53:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3082C48BC3
+	for <u-boot@archiver.kernel.org>; Mon, 19 Feb 2024 09:56:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9D4D487F39;
-	Mon, 19 Feb 2024 10:50:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7113187E95;
+	Mon, 19 Feb 2024 10:51:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SuoAwohI";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ET0yFeRo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F014187DBE; Mon, 19 Feb 2024 10:50:38 +0100 (CET)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id C561E87E80; Mon, 19 Feb 2024 10:51:00 +0100 (CET)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 77D6C87F35
- for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 10:50:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 05DCD87ED3
+ for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 10:50:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-4125eabb8f4so13073355e9.3
- for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 01:50:05 -0800 (PST)
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-512a9ae6c02so1614861e87.2
+ for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 01:50:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708336205; x=1708941005; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1708336231; x=1708941031; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :references:cc:to:content-language:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=+ukHQPxY/qams9+FSTLBT0/sTGuwPJRAvJ2CNhYDg1k=;
- b=SuoAwohIWX5RWEcKzpjOtYhOAh2XnGQpiV5z3QEXxGJarT9pfHOOpi33vqwzh2aG/g
- 9blr7uDCn5jB5oDCM+Czsv/yj4NHVTN9l+USVX/JpM7j68jAabXhSoM+o4zU7jtgiq/7
- VSxX958yqRDWg6Y7dKN0ST4TNHNZ3H/629gEdFrNAuWxMn/a2zDDDGwn1R3fswZCtGAz
- +HMf1SCzGpPr2EtK4OJFmZSUDDKH//jrLD4hB4uUer71SB+YIFmnw9EmkoOY6tQHyMxK
- SCIV9+dk2ZfNnZ+FHQiY4TWWzhOoE3nLDJI8m1VuOW/YRvmgAMezJpfLC3Zix96ZCgzC
- rfWw==
+ :reply-to; bh=f/ucG4Ll4X4pq3QhJLH+Wr3YKS0fw8b8SGmqANbJpDQ=;
+ b=ET0yFeRofcZe/86of/43YT5tyJrm6ueihSFAknM9AURZ89G0oaz8j4pvSDNQhDIYA0
+ 7F9BI7xB36e+IQInmS8G8uO0gC5WtAY+nhHJdpdZrZV8XXSxDdPfuxCayqIusmMx5INW
+ bllw64Ky9Qids3ZJkh/UJkG08wZ5+it/xhqxRVMVwv27ikv0e+VR/OJSXPBjD50+vEJt
+ BGdNcuWYV/WnitAPDLcZtFnHTaqpOSTxENXrg31Yw53dCGIN35FQJckmIysthf3v2DZw
+ W96E4kR6VSwASk5uAV5wDEa/+T7YWRG6ceRVFD1xuEPlZMvkBmLi9TtBDKtPXE+/0ZBh
+ B15w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708336205; x=1708941005;
+ d=1e100.net; s=20230601; t=1708336231; x=1708941031;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :references:cc:to:content-language:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=+ukHQPxY/qams9+FSTLBT0/sTGuwPJRAvJ2CNhYDg1k=;
- b=B+ahU2kJnSgKRi3PVcpUWvjXBuYzBaGiCnTMNU1m2pCLBdzM5KpdyDvJdTK8lqs9JS
- T5MtLl5EXZIp58Ice29FQpvqH+1Uq0GfhiSRMPZzyIk7liBUXA9ZEwQ0K5UA1gOjakOw
- FIz7jgAcRJXzKgkpoDEFIfHdIgTk7J8wWxIbaAHlSYmGRNKznSW2OnE76BMobOX14HYg
- dEO4hVypwLOJqXC0UaKlyeakSPLvM9CELpRN2LJ1O5200VbH2CTpR8iFe9nIEe3IqaRU
- AGK2K7AsxVrzbqfKF+mfaLbAvIMPvuiTUKXq0VKy8xklSKoI3gRMxONNMCmGa0aIVXE/
- 6hEg==
+ bh=f/ucG4Ll4X4pq3QhJLH+Wr3YKS0fw8b8SGmqANbJpDQ=;
+ b=FbCvV2MxxALlOztKtjIPzidB0jKpUgs0Zpt7HMsawZtsKZLwEupcksmObjCst1DpEr
+ ecd7kOTMLh2//np0TOJPGsJxXaGNHijAXELqiYLhS/kUZLZdovIKbO8hmn91X+2N5z0r
+ NiijcslxpbqPVXIqFs2PnSjgYof5MvCWP/ORs7ygRd6pdlwgVwbrHmhJrX6va4CNoa0A
+ T1C+WdNnjhby9xoGKHmiSiowBIqngvJ+jvsmuFfpOR9/ptYkztPAZjuZPb2AP8Or1vwu
+ nol1UEEgc436XDwegDKi2CkcmT32jJtj2v19u7bfiWeM4d1iZrQ/zlAgR/IlghgcvrZs
+ RVfQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWAX4sXX1MsK43GgGpXGZaU1LnHWFFj++VyiOik8iSC6eYkhAbMCrByMeezpDzIwXaas9/JkEwdZ1dWTb4YNEO3ViOlzg==
-X-Gm-Message-State: AOJu0YxN4XXn9Xxhvv1SdQbCITpFtyVsOpx5fdGubF7kq3ky1HAFPqTJ
- rEy/HmLfy2H2G+F899W1QaRZNOteaekFNJFhFa0Fx/X54zRcFWcEP1aeXcAbCJc=
-X-Google-Smtp-Source: AGHT+IEOLTXXtZTXvY1OvpRTQ7VJAToDnKTEfLjpGhG/SYiDMm1SS9DIfn1I0XJ6OvZMuopDvt5t6Q==
-X-Received: by 2002:a05:600c:4592:b0:410:a039:ed5d with SMTP id
- r18-20020a05600c459200b00410a039ed5dmr8584527wmo.33.1708336204866; 
- Mon, 19 Feb 2024 01:50:04 -0800 (PST)
+ AJvYcCXf9+29BcjA2NYXP7YhgTxNjvNgsvKtMUMFzQ29d31NBvWjkwqdzQs6AXdTqGELRb2D9/e/BOuwuzPB9eCyVspzNWRfvg==
+X-Gm-Message-State: AOJu0YxKc8vkIlJ9yW4dmQ8RQ+PDaAtQvRAwRtCaYGTO6UbJiHcY2lWK
+ hADzct0jhB5BuyGDz9WAxnaZVZ2AT6SqFMdVuI0tsXQBdSe3QnIEFAOv+zPEOsI=
+X-Google-Smtp-Source: AGHT+IH128IoV77c81pAa9TTdHLf/mlzIzpm6Y1LSuki8iDxicwpe/x6TTCZs9Dfo/AR+7cU2H6DbQ==
+X-Received: by 2002:ac2:55ba:0:b0:512:9595:ef45 with SMTP id
+ y26-20020ac255ba000000b005129595ef45mr4853179lfg.34.1708336231005; 
+ Mon, 19 Feb 2024 01:50:31 -0800 (PST)
 Received: from ?IPV6:2a01:e0a:982:cbb0:9470:c6e0:c87a:fa9f?
  ([2a01:e0a:982:cbb0:9470:c6e0:c87a:fa9f])
  by smtp.gmail.com with ESMTPSA id
- q17-20020a05600c46d100b0041249ea88b9sm10136159wmo.16.2024.02.19.01.50.03
+ q17-20020a05600c46d100b0041249ea88b9sm10136159wmo.16.2024.02.19.01.50.29
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 19 Feb 2024 01:50:04 -0800 (PST)
-Message-ID: <9a9cb3eb-089f-40ce-932f-5e013adebe06@linaro.org>
-Date: Mon, 19 Feb 2024 10:50:03 +0100
+ Mon, 19 Feb 2024 01:50:30 -0800 (PST)
+Message-ID: <2647f79a-4a25-4470-b4a8-aa5f4db92391@linaro.org>
+Date: Mon, 19 Feb 2024 10:50:29 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v4 15/39] pinctrl: qcom: apq8016: init pre-reloaction
+Subject: Re: [PATCH v4 13/39] pinctrl: qcom: stub support for special GPIOs
 Content-Language: en-US, fr
 To: Caleb Connolly <caleb.connolly@linaro.org>,
  Sumit Garg <sumit.garg@linaro.org>, Ramon Fried <rfried.dev@gmail.com>,
@@ -85,7 +85,7 @@ To: Caleb Connolly <caleb.connolly@linaro.org>,
  Stephan Gerhold <stephan@gerhold.net>
 Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
 References: <20240215-b4-qcom-common-target-v4-0-ed06355c634a@linaro.org>
- <20240215-b4-qcom-common-target-v4-15-ed06355c634a@linaro.org>
+ <20240215-b4-qcom-common-target-v4-13-ed06355c634a@linaro.org>
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
  GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
@@ -111,7 +111,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro Developer Services
-In-Reply-To: <20240215-b4-qcom-common-target-v4-15-ed06355c634a@linaro.org>
+In-Reply-To: <20240215-b4-qcom-common-target-v4-13-ed06355c634a@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -132,30 +132,131 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 15/02/2024 21:52, Caleb Connolly wrote:
-> On the DB410c we support running as a first stage bootloader. This
-> requires initialising the GPIOs which are muxed to UART before they can
-> be used. Add DM_FLAG_PRE_RELOC to the apq8016 pinctrl driver to ensure
-> that we do this early enough.
+> Most platforms have a handful of "special" GPIOs, like the MMC
+> clock/data lanes, UFS reset, etc. These don't follow the usually naming
+> scheme of "gpioX" and also have unique capabilities and registers. We
+> can get away without supporting them all for now, but DT compatibility
+> is still an issue.
 > 
-> This is required to prevent the first few lines of UART log from being
-> dropped.
+> Add support for allowing these to be specified after the other pins, and
+> make all pinmux/pinconf calls for them nop.
 > 
-> Reported-by: Sumit Garg <sumit.garg@linaro.org>
 > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->   drivers/pinctrl/qcom/pinctrl-apq8016.c | 1 +
->   1 file changed, 1 insertion(+)
+>   arch/arm/mach-snapdragon/include/mach/gpio.h |  2 ++
+>   drivers/gpio/msm_gpio.c                      | 20 ++++++++++++++++++++
+>   drivers/pinctrl/qcom/pinctrl-qcom.c          | 12 ++++++++++++
+>   3 files changed, 34 insertions(+)
 > 
-> diff --git a/drivers/pinctrl/qcom/pinctrl-apq8016.c b/drivers/pinctrl/qcom/pinctrl-apq8016.c
-> index 10796710ba7a..df5bd1c19f6e 100644
-> --- a/drivers/pinctrl/qcom/pinctrl-apq8016.c
-> +++ b/drivers/pinctrl/qcom/pinctrl-apq8016.c
-> @@ -73,4 +73,5 @@ U_BOOT_DRIVER(pinctrl_apq8016) = {
->   	.of_match	= msm_pinctrl_ids,
->   	.ops		= &msm_pinctrl_ops,
->   	.bind		= msm_pinctrl_bind,
-> +	.flags		= DM_FLAG_PRE_RELOC,
+> diff --git a/arch/arm/mach-snapdragon/include/mach/gpio.h b/arch/arm/mach-snapdragon/include/mach/gpio.h
+> index 8dac62f870b9..c373f5a4cf3d 100644
+> --- a/arch/arm/mach-snapdragon/include/mach/gpio.h
+> +++ b/arch/arm/mach-snapdragon/include/mach/gpio.h
+> @@ -13,6 +13,8 @@
+>   struct msm_pin_data {
+>   	int pin_count;
+>   	const unsigned int *pin_offsets;
+> +	/* Index of first special pin, these are ignored for now */
+> +	unsigned int special_pins_start;
 >   };
+>   
+>   static inline u32 qcom_pin_offset(const unsigned int *offs, unsigned int selector)
+> diff --git a/drivers/gpio/msm_gpio.c b/drivers/gpio/msm_gpio.c
+> index 80cd28bb231f..8a5e8730e911 100644
+> --- a/drivers/gpio/msm_gpio.c
+> +++ b/drivers/gpio/msm_gpio.c
+> @@ -39,6 +39,10 @@ static int msm_gpio_direction_input(struct udevice *dev, unsigned int gpio)
+>   {
+>   	struct msm_gpio_bank *priv = dev_get_priv(dev);
+>   
+> +	/* Always NOP for special pins, assume they're in the correct state */
+> +	if (gpio >= priv->pin_data->special_pins_start)
+> +		return 0;
+> +
+>   	/* Disable OE bit */
+>   	clrsetbits_le32(priv->base + GPIO_CONFIG_REG(dev, gpio),
+>   			GPIO_OE_MASK, GPIO_OE_DISABLE);
+> @@ -50,6 +54,10 @@ static int msm_gpio_set_value(struct udevice *dev, unsigned int gpio, int value)
+>   {
+>   	struct msm_gpio_bank *priv = dev_get_priv(dev);
+>   
+> +	/* Always NOP for special pins, assume they're in the correct state */
+> +	if (gpio >= priv->pin_data->special_pins_start)
+> +		return 0;
+> +
+>   	value = !!value;
+>   	/* set value */
+>   	writel(value << GPIO_OUT, priv->base + GPIO_IN_OUT_REG(dev, gpio));
+> @@ -62,6 +70,10 @@ static int msm_gpio_direction_output(struct udevice *dev, unsigned int gpio,
+>   {
+>   	struct msm_gpio_bank *priv = dev_get_priv(dev);
+>   
+> +	/* Always NOP for special pins, assume they're in the correct state */
+> +	if (gpio >= priv->pin_data->special_pins_start)
+> +		return 0;
+> +
+>   	value = !!value;
+>   	/* set value */
+>   	writel(value << GPIO_OUT, priv->base + GPIO_IN_OUT_REG(dev, gpio));
+> @@ -76,6 +88,10 @@ static int msm_gpio_get_value(struct udevice *dev, unsigned int gpio)
+>   {
+>   	struct msm_gpio_bank *priv = dev_get_priv(dev);
+>   
+> +	/* Always NOP for special pins, assume they're in the correct state */
+> +	if (gpio >= priv->pin_data->special_pins_start)
+> +		return 0;
+> +
+>   	return !!(readl(priv->base + GPIO_IN_OUT_REG(dev, gpio)) >> GPIO_IN);
+>   }
+>   
+> @@ -83,6 +99,10 @@ static int msm_gpio_get_function(struct udevice *dev, unsigned int gpio)
+>   {
+>   	struct msm_gpio_bank *priv = dev_get_priv(dev);
+>   
+> +	/* Always NOP for special pins, assume they're in the correct state */
+> +	if (gpio >= priv->pin_data->special_pins_start)
+> +		return 0;
+> +
+>   	if (readl(priv->base + GPIO_CONFIG_REG(dev, gpio)) & GPIO_OE_ENABLE)
+>   		return GPIOF_OUTPUT;
+>   
+> diff --git a/drivers/pinctrl/qcom/pinctrl-qcom.c b/drivers/pinctrl/qcom/pinctrl-qcom.c
+> index dc3d8c4d9034..1ea4d21c41fc 100644
+> --- a/drivers/pinctrl/qcom/pinctrl-qcom.c
+> +++ b/drivers/pinctrl/qcom/pinctrl-qcom.c
+> @@ -83,6 +83,10 @@ static int msm_pinmux_set(struct udevice *dev, unsigned int pin_selector,
+>   {
+>   	struct msm_pinctrl_priv *priv = dev_get_priv(dev);
+>   
+> +	/* Always NOP for special pins, assume they're in the correct state */
+> +	if (pin_selector >= priv->data->pin_data.special_pins_start)
+> +		return 0;
+> +
+>   	clrsetbits_le32(priv->base + GPIO_CONFIG_REG(priv, pin_selector),
+>   			TLMM_FUNC_SEL_MASK | TLMM_GPIO_DISABLE,
+>   			priv->data->get_function_mux(func_selector) << 2);
+> @@ -94,6 +98,10 @@ static int msm_pinconf_set(struct udevice *dev, unsigned int pin_selector,
+>   {
+>   	struct msm_pinctrl_priv *priv = dev_get_priv(dev);
+>   
+> +	/* Always NOP for special pins */
+> +	if (pin_selector >= priv->data->pin_data.special_pins_start)
+> +		return 0;
+> +
+>   	switch (param) {
+>   	case PIN_CONFIG_DRIVE_STRENGTH:
+>   		argument = (argument / 2) - 1;
+> @@ -136,6 +144,10 @@ int msm_pinctrl_bind(struct udevice *dev)
+>   	const char *name;
+>   	int ret;
+>   
+> +	/* Make sure we don't indadvertently treat all pins as special pins. */
+> +	if (!data->pin_data.special_pins_start)
+> +		data->pin_data.special_pins_start = data->pin_data.pin_count;
+> +
+>   	drv = lists_driver_lookup_name("pinctrl_qcom");
+>   	if (!drv)
+>   		return -ENOENT;
 > 
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
