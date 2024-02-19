@@ -4,69 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7886C48BC3
-	for <u-boot@archiver.kernel.org>; Mon, 19 Feb 2024 16:35:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1D62C48BF8
+	for <u-boot@archiver.kernel.org>; Mon, 19 Feb 2024 16:36:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0772487F46;
+	by phobos.denx.de (Postfix) with ESMTP id 6A5BB87F51;
 	Mon, 19 Feb 2024 17:35:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="msOwY9OG";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="w5HlGgkZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2ABF087DDA; Mon, 19 Feb 2024 17:32:27 +0100 (CET)
-Received: from mail-lj1-x24a.google.com (mail-lj1-x24a.google.com
- [IPv6:2a00:1450:4864:20::24a])
+ id CBA8387F22; Mon, 19 Feb 2024 17:32:45 +0100 (CET)
+Received: from mail-yw1-x114a.google.com (mail-yw1-x114a.google.com
+ [IPv6:2607:f8b0:4864:20::114a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 957F683CF3
- for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 17:32:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7B5F583CF3
+ for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 17:32:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=3kYLTZQYKBho10HD0I6EE6B4.2ECK-1EEJB8IJI.34DN.34@flex--barnas.bounces.google.com
-Received: by mail-lj1-x24a.google.com with SMTP id
- 38308e7fff4ca-2d23d2bd17fso8336511fa.1
- for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 08:32:18 -0800 (PST)
+ smtp.mailfrom=3n4LTZQYKBigFEVREWKSSKPI.GSQY-FSSXPMWXW.HIRb.HI@flex--barnas.bounces.google.com
+Received: by mail-yw1-x114a.google.com with SMTP id
+ 00721157ae682-607cd6c11d7so63995157b3.0
+ for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 08:32:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1708360338; x=1708965138; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:from:subject:message-id
- :mime-version:date:from:to:cc:subject:date:message-id:reply-to;
- bh=C2eQfBNdiL33t+IxFqWEfUAbJ3JZZmnmdLCrNl+nSXw=;
- b=msOwY9OGpLlvxR67+Oy0eXQaczRKaB6K/fg4GpjISS+CwyL0F5s1ky5P4dGAdSf8Vg
- 3BQ3uJE+Ii5wfG8uwzs4JPi8iNkp/ss8G24Y0p7gg0yECHoVIgwewatxGTEu8EF5JwWR
- sr3odsdFzH9//HYfO4SM4FeY+rLq7sAsLD1ipTqltJ627hECFOT1lUBtu6ptZqvW0D6W
- a7+uFFHjfkNAVDHbYnvv0Uq3LNw/lBkgUoUkKIX26qLEYtgl9oSEkWXq7pmM+aivp7o2
- Pt5INWJ93+C8J50O8nvNbZDLcmR5rni76+lpFezUVTe4tOdIWM4gkNGF7o2NMu8W6G+p
- k6Cg==
+ d=google.com; s=20230601; t=1708360352; x=1708965152; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:from:subject:message-id:references
+ :mime-version:in-reply-to:date:from:to:cc:subject:date:message-id
+ :reply-to; bh=O7PUmy+xQ3/8cEPxwAI006xHbvDymz/RHTPdFuXk89Y=;
+ b=w5HlGgkZdcmMcTtmJD8e+0aVONfvPXz56NfDuJu7uTj9cHE6U6vDM2NZgXH3EaNABJ
+ j51eiqFmt7nOl6ekkKKmSlKd57gH6x0cIa0jNymQXHUHyajrFo5Yd+0jDwWr/padl8GW
+ JpbOtdCM0dA6x6LQx5Hf/EyPgKlBkvojMnNYALIO8BIoE+Ma1xAIcs/jProD+Xh72wXL
+ dkIEsZhvEHhltbUtcuz4Bt5RRpCZmGsecmd9HJ5pD8bJQKnOQ64voAb4gR+YQT23im1L
+ /vxR42dl0U+w6kGvGOmDmqzRvOG6pBjGKp5118YIDbUzzye5jAF+bSBEq+r8sIOFbgwc
+ +lgQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708360338; x=1708965138;
- h=content-transfer-encoding:cc:to:from:subject:message-id
- :mime-version:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=C2eQfBNdiL33t+IxFqWEfUAbJ3JZZmnmdLCrNl+nSXw=;
- b=ouvL5eFnZ0Ity/n/ljxoFKqhOwwW7HXCBCLCNYUOSVcIrivBm4Fm0gRJ1z9xO9Oooh
- 1NOxYJ+g7VdTuvxyMon4n1ZTLXpN3F/zcaY7oXqIOEfnYhRDGjb4ozxgqwkx+zgdM2DM
- l/g104QMBNFp8urgY435FlHO1C3VQe66S5KhKaQTh78bveysSHHZSM5MyCNvwD/0qR0V
- IK+AL2yawI9UUvPLhxvT3Qat07OQZnFICgfK+U72Ci2PtTE7LJzxemW4y5/u0A7JTCdM
- Y0LJkex8JX08Y0DlEW01Qs7bzAZcXyGX1Dt9RV6ktJlwRFPZrjfmUT65Ij6/e0EG3MGz
- 6+tA==
-X-Gm-Message-State: AOJu0Yy8TO5EgghI3YwXwKwTqG7tLpyMUtn18VZuVcHyO/LtSiScyFJb
- hAHIleCIDxsZoQwt+mBGPGvOgeKViuzUSr7t4N+zPVbXl55YzzlGHcFgX4qFkNRztBnF0Lm0Q9a
- oSvxFRQdtkcid7vQ+4xZ3kgz3Rg8IoEaNAZiWz/6isChIFfDnhv1eBRER7CtW0f4n2nJ5iedqPc
- V5GMjSwlQr9e9eKAbgXSor7/4pSBj0hA==
-X-Google-Smtp-Source: AGHT+IFY4BQHJxrdf32VTEMXtXd3kW0yrVnT55YNyI2mnsAr9BwR1701y2NCfwEEERNWqxBIEsEYcyM2bnE=
+ d=1e100.net; s=20230601; t=1708360352; x=1708965152;
+ h=content-transfer-encoding:cc:to:from:subject:message-id:references
+ :mime-version:in-reply-to:date:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=O7PUmy+xQ3/8cEPxwAI006xHbvDymz/RHTPdFuXk89Y=;
+ b=aBbhunlHOeA0lSFvtNHdg28gszdA6Fb/iLIbSWnbMusNbK9nnNnlZkjV8fpaxpZ6cC
+ UgcgMP6KCx2DYBZAfaVhydPAoXjdqXSEcbwq8zgALx2IPeFDn9+D/ICTUHwxCmi4UzD+
+ 7rXMAAw/EklXPUc93DC7Gx+02ThYfUY7rTGuGu3BensiISU6MMcunR1V9b4FYdGG+XWn
+ TWuZC5dDWpO3xoMyaQcrHz9kTGqumFkzCBi1qzm88kcGJVi/4IINW5GdFx2ivafydKfo
+ JV+oZAW4UazQQL+rYgGT7sTqpWKaX4QlqsQxqdCwUQ4N0W+rQmVkJ0WVSxQogkN/tyMf
+ wT9w==
+X-Gm-Message-State: AOJu0YxF7yDab1jrTRzY/J+AsTWD42+PUNt/v8qa4QaW9v5I7LnoeR2I
+ DpXs0JuxTcEP+BCPZAwIl3Dkkmgxy4GtlXLU1VL9IcxbV/gQIYyhxk3UpKTtpMbXsb2BATsghmb
+ LZomKnwwliaQqkq4O5ifMpt6UZiHQcPBY+V4agdQP77jxQHvdjkdCnfmd1LMR1R6S8CMifuqHpX
+ m0qXZgWpDmgH02yrsklvuDeR3VxkihTQ==
+X-Google-Smtp-Source: AGHT+IEt+z9kj5a4v9d/6e6UNWRvUxfUuFlHDxY95YyEKOp6HVhYYxKgMmAFR7VGC8i7rV6wLWPO8Ov9IVA=
 X-Received: from zombine.c.googlers.com
  ([fda3:e722:ac3:cc00:68:949d:c0a8:7f3e])
- (user=barnas job=sendgmr) by 2002:a2e:95d2:0:b0:2d2:3fdc:b914 with SMTP id
- y18-20020a2e95d2000000b002d23fdcb914mr2196ljh.0.1708360337406; Mon, 19 Feb
- 2024 08:32:17 -0800 (PST)
-Date: Mon, 19 Feb 2024 16:32:01 +0000
+ (user=barnas job=sendgmr) by 2002:a05:6902:1001:b0:dcc:79ab:e522 with SMTP id
+ w1-20020a056902100100b00dcc79abe522mr515037ybt.11.1708360351892; Mon, 19 Feb
+ 2024 08:32:31 -0800 (PST)
+Date: Mon, 19 Feb 2024 16:32:02 +0000
+In-Reply-To: <20240219163213.855667-1-barnas@google.com>
 Mime-Version: 1.0
+References: <20240219163213.855667-1-barnas@google.com>
 X-Mailer: git-send-email 2.44.0.rc0.258.g7320e95886-goog
-Message-ID: <20240219163213.855667-1-barnas@google.com>
-Subject: [PATCH 0/3] Fix driver for misc/atsha204a
+Message-ID: <20240219163213.855667-2-barnas@google.com>
+Subject: [PATCH 1/3] misc: atsha204a: remove broken for loop
 From: "=?UTF-8?q?Micha=C5=82=20Barna=C5=9B?=" <barnas@google.com>
 To: u-boot@lists.denx.de
 Cc: "=?UTF-8?q?Micha=C5=82=20Barna=C5=9B?=" <barnas@google.com>,
@@ -90,23 +92,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Some previous commit changed the continue statement to return,
+making the for loop used to retry waking up the chip to always
+return after one iteration. This commit removes the loop, cleaning
+the code a little.
 
-Fix the driver to behave like the chip datasheet requires.
-Improve wake up function to send low signal on SDA line for at least
-60us as chip requires to wake up. Fix sleep function to move the chip
-into sleep mode, not into idle mode. Remove unnecessary for loop,
-which would never run for more than one iteration.
+Signed-off-by: Micha=C5=82 Barna=C5=9B <barnas@google.com>
+---
 
+ drivers/misc/atsha204a-i2c.c | 45 +++++++++++++++---------------------
+ 1 file changed, 19 insertions(+), 26 deletions(-)
 
-
-Micha=C5=82 Barna=C5=9B (3):
-  misc: atsha204a: remove broken for loop
-  misc: atsha204a: fix sleep function
-  misc: atsha204a: fix wakeup function
-
- drivers/misc/atsha204a-i2c.c | 90 ++++++++++++++++++++++++------------
- 1 file changed, 61 insertions(+), 29 deletions(-)
-
+diff --git a/drivers/misc/atsha204a-i2c.c b/drivers/misc/atsha204a-i2c.c
+index d3c515828f..ab83bbc3e9 100644
+--- a/drivers/misc/atsha204a-i2c.c
++++ b/drivers/misc/atsha204a-i2c.c
+@@ -96,40 +96,33 @@ int atsha204a_wakeup(struct udevice *dev)
+ {
+ 	u8 req[4];
+ 	struct atsha204a_resp resp;
+-	int try, res;
++	int res;
+=20
+ 	debug("Waking up ATSHA204A\n");
+=20
+-	for (try =3D 1; try <=3D 10; ++try) {
+-		debug("Try %i... ", try);
+-
+-		/*
+-		 * The device ignores any levels or transitions on the SCL pin
+-		 * when the device is idle, asleep or during waking up.
+-		 * Don't check for error when waking up the device.
+-		 */
+-		memset(req, 0, 4);
+-		atsha204a_send(dev, req, 4);
++	/*
++	 * The device ignores any levels or transitions on the SCL pin
++	 * when the device is idle, asleep or during waking up.
++	 * Don't check for error when waking up the device.
++	 */
++	memset(req, 0, 4);
++	atsha204a_send(dev, req, 4);
+=20
+-		udelay(ATSHA204A_TWLO_US + ATSHA204A_TWHI_US);
++	udelay(ATSHA204A_TWLO_US + ATSHA204A_TWHI_US);
+=20
+-		res =3D atsha204a_recv_resp(dev, &resp);
+-		if (res) {
+-			debug("failed on receiving response, ending\n");
+-			return res;
+-		}
+-
+-		if (resp.code !=3D ATSHA204A_STATUS_AFTER_WAKE) {
+-			debug ("failed (responce code =3D %02x), ending\n",
+-			       resp.code);
+-			return -EBADMSG;
+-		}
++	res =3D atsha204a_recv_resp(dev, &resp);
++	if (res) {
++		debug("failed on receiving response, ending\n");
++		return res;
++	}
+=20
+-		debug("success\n");
+-		return 0;
++	if (resp.code !=3D ATSHA204A_STATUS_AFTER_WAKE) {
++		debug("failed (response code =3D %02x), ending\n", resp.code);
++		return -EBADMSG;
+ 	}
+=20
+-	return -ETIMEDOUT;
++	debug("success\n");
++	return 0;
+ }
+=20
+ int atsha204a_idle(struct udevice *dev)
 --=20
 2.44.0.rc0.258.g7320e95886-goog
 
