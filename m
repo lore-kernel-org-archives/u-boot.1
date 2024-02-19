@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3082C48BC3
-	for <u-boot@archiver.kernel.org>; Mon, 19 Feb 2024 09:56:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42640C54764
+	for <u-boot@archiver.kernel.org>; Mon, 19 Feb 2024 09:57:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7113187E95;
+	by phobos.denx.de (Postfix) with ESMTP id E5E5987F34;
 	Mon, 19 Feb 2024 10:51:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ET0yFeRo";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="l3BshUDv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C561E87E80; Mon, 19 Feb 2024 10:51:00 +0100 (CET)
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [IPv6:2a00:1450:4864:20::12e])
+ id D5AAB87ED3; Mon, 19 Feb 2024 10:51:03 +0100 (CET)
+Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
+ [IPv6:2a00:1450:4864:20::22d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05DCD87ED3
+ by phobos.denx.de (Postfix) with ESMTPS id 3C7A587F34
  for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 10:50:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-512a9ae6c02so1614861e87.2
+Received: by mail-lj1-x22d.google.com with SMTP id
+ 38308e7fff4ca-2d22b8c6e0dso21397271fa.2
  for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 01:50:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708336231; x=1708941031; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1708336221; x=1708941021; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :references:cc:to:content-language:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=f/ucG4Ll4X4pq3QhJLH+Wr3YKS0fw8b8SGmqANbJpDQ=;
- b=ET0yFeRofcZe/86of/43YT5tyJrm6ueihSFAknM9AURZ89G0oaz8j4pvSDNQhDIYA0
- 7F9BI7xB36e+IQInmS8G8uO0gC5WtAY+nhHJdpdZrZV8XXSxDdPfuxCayqIusmMx5INW
- bllw64Ky9Qids3ZJkh/UJkG08wZ5+it/xhqxRVMVwv27ikv0e+VR/OJSXPBjD50+vEJt
- BGdNcuWYV/WnitAPDLcZtFnHTaqpOSTxENXrg31Yw53dCGIN35FQJckmIysthf3v2DZw
- W96E4kR6VSwASk5uAV5wDEa/+T7YWRG6ceRVFD1xuEPlZMvkBmLi9TtBDKtPXE+/0ZBh
- B15w==
+ :reply-to; bh=OPG9/Sx5GuNkiPd4Cmnl9Qv7mOfNuFo+EEB15Vvej28=;
+ b=l3BshUDvvUo56roCqvf251zZrR5kXXM3isLDxOmnyvrfbUgKt5y59M5ymvgTj+rrRU
+ NK3UfjiKdbvonCVi+LjON3TSUAfmySzwliSA453bQRyL3oHa5vtMJ1OJINBp5BZe+lIj
+ XXSH9XMlTi2ZsLkVUqsFafD20/772hpd85atIDqiX0xZ5HukRU7O8V5DulPgHGJX1kh5
+ v1Kj7IQUQKoRZrPhhZenZJ5vg39mhmDUWmKGThJlUSMpYq9z0kjiBd8PnomT/sS2FzPD
+ fZ4jXQbekK8BH7Dsc70SvqAA1rYUZE547Wl22QUUnmBNyaX9WJJ1xLiN+wyg6K64YqBH
+ C0Ug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708336231; x=1708941031;
+ d=1e100.net; s=20230601; t=1708336221; x=1708941021;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :references:cc:to:content-language:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=f/ucG4Ll4X4pq3QhJLH+Wr3YKS0fw8b8SGmqANbJpDQ=;
- b=FbCvV2MxxALlOztKtjIPzidB0jKpUgs0Zpt7HMsawZtsKZLwEupcksmObjCst1DpEr
- ecd7kOTMLh2//np0TOJPGsJxXaGNHijAXELqiYLhS/kUZLZdovIKbO8hmn91X+2N5z0r
- NiijcslxpbqPVXIqFs2PnSjgYof5MvCWP/ORs7ygRd6pdlwgVwbrHmhJrX6va4CNoa0A
- T1C+WdNnjhby9xoGKHmiSiowBIqngvJ+jvsmuFfpOR9/ptYkztPAZjuZPb2AP8Or1vwu
- nol1UEEgc436XDwegDKi2CkcmT32jJtj2v19u7bfiWeM4d1iZrQ/zlAgR/IlghgcvrZs
- RVfQ==
+ bh=OPG9/Sx5GuNkiPd4Cmnl9Qv7mOfNuFo+EEB15Vvej28=;
+ b=SZB1kPfv3aUQrD5Q8oOYK378iIuSvxRgFLwwBd9rRD5pCKg5nY3KIDyH8V/dlSXMhx
+ qbZISdb1640a4P/KzKJIYq5Li/8eESqNi7Elk9nREq6jUICYGpfDc4S+1veOCdDDuaZa
+ 8uocznZAI7LIxjybI0J5G3WDD3ManQf/mDSqHESjrS3qJV3+mUdUSljEM9kfJngYt+XQ
+ aToySqRBcjh03NH9alTX9HBGR9L3P7ynsWin8StUWPjyleNMPGpzLwnhBdwEXnUZWxd4
+ B8/OiY0Hv6N2SsayeWhM82eXSPUfI0GjFMSxISIOJUuR/DcVTkChCL23xs8nYYxAG5UL
+ OkQg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXf9+29BcjA2NYXP7YhgTxNjvNgsvKtMUMFzQ29d31NBvWjkwqdzQs6AXdTqGELRb2D9/e/BOuwuzPB9eCyVspzNWRfvg==
-X-Gm-Message-State: AOJu0YxKc8vkIlJ9yW4dmQ8RQ+PDaAtQvRAwRtCaYGTO6UbJiHcY2lWK
- hADzct0jhB5BuyGDz9WAxnaZVZ2AT6SqFMdVuI0tsXQBdSe3QnIEFAOv+zPEOsI=
-X-Google-Smtp-Source: AGHT+IH128IoV77c81pAa9TTdHLf/mlzIzpm6Y1LSuki8iDxicwpe/x6TTCZs9Dfo/AR+7cU2H6DbQ==
-X-Received: by 2002:ac2:55ba:0:b0:512:9595:ef45 with SMTP id
- y26-20020ac255ba000000b005129595ef45mr4853179lfg.34.1708336231005; 
- Mon, 19 Feb 2024 01:50:31 -0800 (PST)
+ AJvYcCWYW3spQ5LV5+hOzaTm6NYb8k0H0GeaoqQZb60CO13/8WR3bGVNFn8lMvEURevfcnVx7hd5thU/Bv1ejJsDnUGr4f3MZQ==
+X-Gm-Message-State: AOJu0YySVAXpQegvcVVcWVh5pg05K1F4V7C9ZjYZYGsGaNhfzbch/Bhd
+ 5iGs/inO6HKDA/hfxL66NVvd0PLtTAmkfnRLx6jhvFE2fo65n1c8FWjXRfO8bI0=
+X-Google-Smtp-Source: AGHT+IHoBHBRhYLLn7OWFFYTxlU5UuItRodr0pp6Ix09ka27YVOxgUz/Jy1+yJmsmep0fDyL+IWxaA==
+X-Received: by 2002:a2e:a724:0:b0:2d2:35fb:8329 with SMTP id
+ s36-20020a2ea724000000b002d235fb8329mr1674862lje.33.1708336221237; 
+ Mon, 19 Feb 2024 01:50:21 -0800 (PST)
 Received: from ?IPV6:2a01:e0a:982:cbb0:9470:c6e0:c87a:fa9f?
  ([2a01:e0a:982:cbb0:9470:c6e0:c87a:fa9f])
  by smtp.gmail.com with ESMTPSA id
- q17-20020a05600c46d100b0041249ea88b9sm10136159wmo.16.2024.02.19.01.50.29
+ q17-20020a05600c46d100b0041249ea88b9sm10136159wmo.16.2024.02.19.01.50.20
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 19 Feb 2024 01:50:30 -0800 (PST)
-Message-ID: <2647f79a-4a25-4470-b4a8-aa5f4db92391@linaro.org>
-Date: Mon, 19 Feb 2024 10:50:29 +0100
+ Mon, 19 Feb 2024 01:50:20 -0800 (PST)
+Message-ID: <014a0eca-635d-43a3-a2f5-3ef458adba50@linaro.org>
+Date: Mon, 19 Feb 2024 10:50:20 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v4 13/39] pinctrl: qcom: stub support for special GPIOs
+Subject: Re: [PATCH v4 14/39] pinctrl: qcom: fix DT compatibility
 Content-Language: en-US, fr
 To: Caleb Connolly <caleb.connolly@linaro.org>,
  Sumit Garg <sumit.garg@linaro.org>, Ramon Fried <rfried.dev@gmail.com>,
@@ -85,7 +85,7 @@ To: Caleb Connolly <caleb.connolly@linaro.org>,
  Stephan Gerhold <stephan@gerhold.net>
 Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
 References: <20240215-b4-qcom-common-target-v4-0-ed06355c634a@linaro.org>
- <20240215-b4-qcom-common-target-v4-13-ed06355c634a@linaro.org>
+ <20240215-b4-qcom-common-target-v4-14-ed06355c634a@linaro.org>
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
  GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
@@ -111,7 +111,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro Developer Services
-In-Reply-To: <20240215-b4-qcom-common-target-v4-13-ed06355c634a@linaro.org>
+In-Reply-To: <20240215-b4-qcom-common-target-v4-14-ed06355c634a@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -132,131 +132,190 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 15/02/2024 21:52, Caleb Connolly wrote:
-> Most platforms have a handful of "special" GPIOs, like the MMC
-> clock/data lanes, UFS reset, etc. These don't follow the usually naming
-> scheme of "gpioX" and also have unique capabilities and registers. We
-> can get away without supporting them all for now, but DT compatibility
-> is still an issue.
-> 
-> Add support for allowing these to be specified after the other pins, and
-> make all pinmux/pinconf calls for them nop.
+> Upstream devicetrees label GPIOs with "gpioX", not "GPIO_X", fix this
+> for SoCs where we're now using upstream DT.
 > 
 > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->   arch/arm/mach-snapdragon/include/mach/gpio.h |  2 ++
->   drivers/gpio/msm_gpio.c                      | 20 ++++++++++++++++++++
->   drivers/pinctrl/qcom/pinctrl-qcom.c          | 12 ++++++++++++
->   3 files changed, 34 insertions(+)
+>   drivers/pinctrl/qcom/pinctrl-apq8016.c | 26 +++++++--------
+>   drivers/pinctrl/qcom/pinctrl-apq8096.c | 16 +++++-----
+>   drivers/pinctrl/qcom/pinctrl-qcs404.c  | 58 ++++++++++++++++++++++++++++------
+>   3 files changed, 69 insertions(+), 31 deletions(-)
 > 
-> diff --git a/arch/arm/mach-snapdragon/include/mach/gpio.h b/arch/arm/mach-snapdragon/include/mach/gpio.h
-> index 8dac62f870b9..c373f5a4cf3d 100644
-> --- a/arch/arm/mach-snapdragon/include/mach/gpio.h
-> +++ b/arch/arm/mach-snapdragon/include/mach/gpio.h
-> @@ -13,6 +13,8 @@
->   struct msm_pin_data {
->   	int pin_count;
->   	const unsigned int *pin_offsets;
-> +	/* Index of first special pin, these are ignored for now */
-> +	unsigned int special_pins_start;
+> diff --git a/drivers/pinctrl/qcom/pinctrl-apq8016.c b/drivers/pinctrl/qcom/pinctrl-apq8016.c
+> index 8149ffd83cc4..10796710ba7a 100644
+> --- a/drivers/pinctrl/qcom/pinctrl-apq8016.c
+> +++ b/drivers/pinctrl/qcom/pinctrl-apq8016.c
+> @@ -14,18 +14,18 @@
+>   #define MAX_PIN_NAME_LEN 32
+>   static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
+>   static const char * const msm_pinctrl_pins[] = {
+> -	"SDC1_CLK",
+> -	"SDC1_CMD",
+> -	"SDC1_DATA",
+> -	"SDC2_CLK",
+> -	"SDC2_CMD",
+> -	"SDC2_DATA",
+> -	"QDSD_CLK",
+> -	"QDSD_CMD",
+> -	"QDSD_DATA0",
+> -	"QDSD_DATA1",
+> -	"QDSD_DATA2",
+> -	"QDSD_DATA3",
+> +	"sdc1_clk",
+> +	"sdc1_cmd",
+> +	"sdc1_data",
+> +	"sdc2_clk",
+> +	"sdc2_cmd",
+> +	"sdc2_data",
+> +	"qdsd_clk",
+> +	"qdsd_cmd",
+> +	"qdsd_data0",
+> +	"qdsd_data1",
+> +	"qdsd_data2",
+> +	"qdsd_data3",
 >   };
 >   
->   static inline u32 qcom_pin_offset(const unsigned int *offs, unsigned int selector)
-> diff --git a/drivers/gpio/msm_gpio.c b/drivers/gpio/msm_gpio.c
-> index 80cd28bb231f..8a5e8730e911 100644
-> --- a/drivers/gpio/msm_gpio.c
-> +++ b/drivers/gpio/msm_gpio.c
-> @@ -39,6 +39,10 @@ static int msm_gpio_direction_input(struct udevice *dev, unsigned int gpio)
+>   static const struct pinctrl_function msm_pinctrl_functions[] = {
+> @@ -42,7 +42,7 @@ static const char *apq8016_get_pin_name(struct udevice *dev,
+>   					unsigned int selector)
 >   {
->   	struct msm_gpio_bank *priv = dev_get_priv(dev);
+>   	if (selector < 122) {
+> -		snprintf(pin_name, MAX_PIN_NAME_LEN, "GPIO_%u", selector);
+> +		snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
+>   		return pin_name;
+>   	} else {
+>   		return msm_pinctrl_pins[selector - 122];
+> diff --git a/drivers/pinctrl/qcom/pinctrl-apq8096.c b/drivers/pinctrl/qcom/pinctrl-apq8096.c
+> index d64ab1ff7bee..f2eeb4cf469a 100644
+> --- a/drivers/pinctrl/qcom/pinctrl-apq8096.c
+> +++ b/drivers/pinctrl/qcom/pinctrl-apq8096.c
+> @@ -14,13 +14,13 @@
+>   #define MAX_PIN_NAME_LEN 32
+>   static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
+>   static const char * const msm_pinctrl_pins[] = {
+> -	"SDC1_CLK",
+> -	"SDC1_CMD",
+> -	"SDC1_DATA",
+> -	"SDC2_CLK",
+> -	"SDC2_CMD",
+> -	"SDC2_DATA",
+> -	"SDC1_RCLK",
+> +	"sdc1_clk",
+> +	"sdc1_cmd",
+> +	"sdc1_data",
+> +	"sdc2_clk",
+> +	"sdc2_cmd",
+> +	"sdc2_data",
+> +	"sdc1_rclk",
+>   };
 >   
-> +	/* Always NOP for special pins, assume they're in the correct state */
-> +	if (gpio >= priv->pin_data->special_pins_start)
-> +		return 0;
-> +
->   	/* Disable OE bit */
->   	clrsetbits_le32(priv->base + GPIO_CONFIG_REG(dev, gpio),
->   			GPIO_OE_MASK, GPIO_OE_DISABLE);
-> @@ -50,6 +54,10 @@ static int msm_gpio_set_value(struct udevice *dev, unsigned int gpio, int value)
+>   static const struct pinctrl_function msm_pinctrl_functions[] = {
+> @@ -37,7 +37,7 @@ static const char *apq8096_get_pin_name(struct udevice *dev,
+>   					unsigned int selector)
 >   {
->   	struct msm_gpio_bank *priv = dev_get_priv(dev);
+>   	if (selector < 150) {
+> -		snprintf(pin_name, MAX_PIN_NAME_LEN, "GPIO_%u", selector);
+> +		snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
+>   		return pin_name;
+>   	} else {
+>   		return msm_pinctrl_pins[selector - 150];
+> diff --git a/drivers/pinctrl/qcom/pinctrl-qcs404.c b/drivers/pinctrl/qcom/pinctrl-qcs404.c
+> index ac00afa2a1f4..5066f2bba6b3 100644
+> --- a/drivers/pinctrl/qcom/pinctrl-qcs404.c
+> +++ b/drivers/pinctrl/qcom/pinctrl-qcs404.c
+> @@ -10,20 +10,24 @@
 >   
-> +	/* Always NOP for special pins, assume they're in the correct state */
-> +	if (gpio >= priv->pin_data->special_pins_start)
-> +		return 0;
+>   #include "pinctrl-qcom.h"
+>   
+> +#define NORTH	0x00300000
+> +#define SOUTH	0x00000000
+> +#define EAST	0x06b00000
 > +
->   	value = !!value;
->   	/* set value */
->   	writel(value << GPIO_OUT, priv->base + GPIO_IN_OUT_REG(dev, gpio));
-> @@ -62,6 +70,10 @@ static int msm_gpio_direction_output(struct udevice *dev, unsigned int gpio,
+>   #define MAX_PIN_NAME_LEN 32
+>   static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
+>   static const char * const msm_pinctrl_pins[] = {
+> -	"SDC1_RCLK",
+> -	"SDC1_CLK",
+> -	"SDC1_CMD",
+> -	"SDC1_DATA",
+> -	"SDC2_CLK",
+> -	"SDC2_CMD",
+> -	"SDC2_DATA",
+> +	"sdc1_rclk",
+> +	"sdc1_clk",
+> +	"sdc1_cmd",
+> +	"sdc1_data",
+> +	"sdc2_clk",
+> +	"sdc2_cmd",
+> +	"sdc2_data",
+>   };
+>   
+>   static const struct pinctrl_function msm_pinctrl_functions[] = {
+> -	{"blsp_uart2", 1},
+> +	{"gpio", 0},
+>   	{"rgmii_int", 1},
+>   	{"rgmii_ck", 1},
+>   	{"rgmii_tx", 1},
+> @@ -37,6 +41,40 @@ static const struct pinctrl_function msm_pinctrl_functions[] = {
+>   	{"blsp_i2c_scl_a2", 3},
+>   	{"blsp_i2c3", 2},
+>   	{"blsp_i2c4", 1},
+> +	{"blsp_uart_tx_a2", 1},
+> +	{"blsp_uart_rx_a2", 1},
+> +};
+> +
+> +static const unsigned int qcs404_pin_offsets[] = {
+> +	[0] = SOUTH,    [1] = SOUTH,    [2] = SOUTH,    [3] = SOUTH,    [4] = SOUTH,
+> +	[5] = SOUTH,   [6] = SOUTH,   [7] = SOUTH,   [8] = SOUTH,    [9] = SOUTH,
+> +	[10] = SOUTH,   [11] = SOUTH,   [12] = SOUTH,  [13] = SOUTH,  [14] = SOUTH,
+> +	[15] = SOUTH,  [16] = SOUTH,  [17] = NORTH,  [18] = NORTH,  [19] = NORTH,
+> +	[20] = NORTH,  [21] = SOUTH,  [22] = NORTH,  [23] = NORTH,  [24] = NORTH,
+> +	[25] = NORTH,  [26] = EAST,  [27] = EAST,   [28] = EAST,   [29] = EAST,
+> +	[30] = NORTH,   [31] = NORTH,  [32] = NORTH,  [33] = NORTH,  [34] = SOUTH,
+> +	[35] = SOUTH,  [36] = NORTH,  [37] = NORTH,  [38] = NORTH,  [39] = EAST,
+> +	[40] = EAST,  [41] = EAST,   [42] = EAST,   [43] = EAST,   [44] = EAST,
+> +	[45] = EAST,   [46] = EAST,   [47] = EAST,   [48] = EAST,   [49] = EAST,
+> +	[50] = EAST,  [51] = EAST,  [52] = EAST,  [53] = EAST,  [54] = EAST,
+> +	[55] = EAST,  [56] = EAST,  [57] = EAST,  [58] = EAST,  [59] = EAST,
+> +	[60] = NORTH,  [61] = NORTH,  [62] = NORTH,  [63] = NORTH,  [64] = NORTH,
+> +	[65] = NORTH,  [66] = NORTH,  [67] = NORTH,  [68] = NORTH,  [69] = NORTH,
+> +	[70] = NORTH,   [71] = NORTH,   [72] = NORTH,   [73] = NORTH,   [74] = NORTH,
+> +	[75] = NORTH,   [76] = NORTH,   [77] = NORTH,   [78] = EAST,   [79] = EAST,
+> +	[80] = EAST,  [81] = EAST,  [82] = NORTH,  [83] = NORTH,  [84] = NORTH,
+> +	[85] = NORTH,   [86] = EAST,   [87] = EAST,   [88] = EAST,   [89] = EAST,
+> +	[90] = EAST,  [91] = EAST,  [92] = EAST,  [93] = EAST,  [94] = EAST,
+> +	[95] = EAST,  [96] = EAST,  [97] = EAST,  [98] = EAST,  [99] = EAST,
+> +	[100] = EAST, [101] = EAST, [102] = EAST, [103] = EAST, [104] = EAST,
+> +	[105] = EAST, [106] = EAST, [107] = EAST, [108] = EAST, [109] = EAST,
+> +	[110] = EAST, [111] = EAST, [112] = EAST, [113] = EAST, [114] = EAST,
+> +	[115] = EAST, [116] = EAST, [117] = NORTH, [118] = NORTH, [119] = EAST,
+> +	/*
+> +	 * There's 126 pins but the last ones are special and have non-standard registers
+> +	 * so we leave them out here. The pinctrl and GPIO drivers both currently ignore
+> +	 * these pins.
+> +	 */
+>   };
+>   
+>   static const char *qcs404_get_function_name(struct udevice *dev,
+> @@ -49,7 +87,7 @@ static const char *qcs404_get_pin_name(struct udevice *dev,
+>   				       unsigned int selector)
 >   {
->   	struct msm_gpio_bank *priv = dev_get_priv(dev);
->   
-> +	/* Always NOP for special pins, assume they're in the correct state */
-> +	if (gpio >= priv->pin_data->special_pins_start)
-> +		return 0;
-> +
->   	value = !!value;
->   	/* set value */
->   	writel(value << GPIO_OUT, priv->base + GPIO_IN_OUT_REG(dev, gpio));
-> @@ -76,6 +88,10 @@ static int msm_gpio_get_value(struct udevice *dev, unsigned int gpio)
->   {
->   	struct msm_gpio_bank *priv = dev_get_priv(dev);
->   
-> +	/* Always NOP for special pins, assume they're in the correct state */
-> +	if (gpio >= priv->pin_data->special_pins_start)
-> +		return 0;
-> +
->   	return !!(readl(priv->base + GPIO_IN_OUT_REG(dev, gpio)) >> GPIO_IN);
+>   	if (selector < 120) {
+> -		snprintf(pin_name, MAX_PIN_NAME_LEN, "GPIO_%u", selector);
+> +		snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
+>   		return pin_name;
+>   	} else {
+>   		return msm_pinctrl_pins[selector - 120];
+> @@ -62,7 +100,7 @@ static unsigned int qcs404_get_function_mux(unsigned int selector)
 >   }
 >   
-> @@ -83,6 +99,10 @@ static int msm_gpio_get_function(struct udevice *dev, unsigned int gpio)
->   {
->   	struct msm_gpio_bank *priv = dev_get_priv(dev);
->   
-> +	/* Always NOP for special pins, assume they're in the correct state */
-> +	if (gpio >= priv->pin_data->special_pins_start)
-> +		return 0;
-> +
->   	if (readl(priv->base + GPIO_CONFIG_REG(dev, gpio)) & GPIO_OE_ENABLE)
->   		return GPIOF_OUTPUT;
->   
-> diff --git a/drivers/pinctrl/qcom/pinctrl-qcom.c b/drivers/pinctrl/qcom/pinctrl-qcom.c
-> index dc3d8c4d9034..1ea4d21c41fc 100644
-> --- a/drivers/pinctrl/qcom/pinctrl-qcom.c
-> +++ b/drivers/pinctrl/qcom/pinctrl-qcom.c
-> @@ -83,6 +83,10 @@ static int msm_pinmux_set(struct udevice *dev, unsigned int pin_selector,
->   {
->   	struct msm_pinctrl_priv *priv = dev_get_priv(dev);
->   
-> +	/* Always NOP for special pins, assume they're in the correct state */
-> +	if (pin_selector >= priv->data->pin_data.special_pins_start)
-> +		return 0;
-> +
->   	clrsetbits_le32(priv->base + GPIO_CONFIG_REG(priv, pin_selector),
->   			TLMM_FUNC_SEL_MASK | TLMM_GPIO_DISABLE,
->   			priv->data->get_function_mux(func_selector) << 2);
-> @@ -94,6 +98,10 @@ static int msm_pinconf_set(struct udevice *dev, unsigned int pin_selector,
->   {
->   	struct msm_pinctrl_priv *priv = dev_get_priv(dev);
->   
-> +	/* Always NOP for special pins */
-> +	if (pin_selector >= priv->data->pin_data.special_pins_start)
-> +		return 0;
-> +
->   	switch (param) {
->   	case PIN_CONFIG_DRIVE_STRENGTH:
->   		argument = (argument / 2) - 1;
-> @@ -136,6 +144,10 @@ int msm_pinctrl_bind(struct udevice *dev)
->   	const char *name;
->   	int ret;
->   
-> +	/* Make sure we don't indadvertently treat all pins as special pins. */
-> +	if (!data->pin_data.special_pins_start)
-> +		data->pin_data.special_pins_start = data->pin_data.pin_count;
-> +
->   	drv = lists_driver_lookup_name("pinctrl_qcom");
->   	if (!drv)
->   		return -ENOENT;
+>   static struct msm_pinctrl_data qcs404_data = {
+> -	.pin_data = { .pin_count = 126, },
+> +	.pin_data = { .pin_count = 126, .pin_offsets = qcs404_pin_offsets, .special_pins_start = 120, },
+>   	.functions_count = ARRAY_SIZE(msm_pinctrl_functions),
+>   	.get_function_name = qcs404_get_function_name,
+>   	.get_function_mux = qcs404_get_function_mux,
 > 
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
