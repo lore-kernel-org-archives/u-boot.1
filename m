@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6000DC48BC3
-	for <u-boot@archiver.kernel.org>; Mon, 19 Feb 2024 09:46:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFF0CC48BC3
+	for <u-boot@archiver.kernel.org>; Mon, 19 Feb 2024 09:48:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CCA2C87D25;
-	Mon, 19 Feb 2024 10:46:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1F0F487F30;
+	Mon, 19 Feb 2024 10:48:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="i2UCH1VA";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qmGz8uU3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0BC4C87CED; Mon, 19 Feb 2024 10:46:54 +0100 (CET)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id 8D80887D1A; Mon, 19 Feb 2024 10:47:27 +0100 (CET)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D5C3187DA2
- for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 10:46:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 14D0A87DE5
+ for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 10:47:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-41266ef4bc3so3907295e9.3
- for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 01:46:39 -0800 (PST)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-41262ec677fso6744655e9.1
+ for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 01:47:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708335999; x=1708940799; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1708336030; x=1708940830; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :references:cc:to:content-language:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=CG3kEgZLIf65Rho0ck4oqI31AvxiDGPA+aZ6EQqIpAk=;
- b=i2UCH1VAjp7+2EH0IAdyItkb1Az+O+l1GpvHIp4CbNzD7+jMuBEcDxitNnp4Cp0qaT
- NxmqXhDJZuQj6ZWKJFAM1WGoLflggwKuhz7wEfNq3YzlFfmKrXnVHt/NkvcDiJ0eojwy
- UVCegolAnGRlENLHXEcWQeTfCQEniOyYJBtxh7cYYfvCqz38UcBeUDANEy7g5HU/Mc8D
- t0p7JhzzcCX43m1SkXhX1xkn0qtgddlVazoYQYUlOaRMNTC9r7Kghn/6lGz18HZ16GqX
- jemUmkBTbGtTif5YhPJpWUs1dE8re40Lf5SHwXnWY/KmlP+TU/8x/tCPQPUcnqjj5jyP
- pEtg==
+ :reply-to; bh=cqRd8mmSRTxKLdaGk3pfHlklv+sasvpqbzrD2CZiU80=;
+ b=qmGz8uU3G4BO+zSBGFSVzs7EAMWP8FLEkd+kawAqWoHJDz4vhr8EC52Dx2vXcz1xWa
+ lgxSfNRjHpCDx05Lm09GTYk8K536DAWzeOH7KndE5qQ/paUJZXw6hr6Qg99+GKD6hhwG
+ oo0Yss6KEw/NRybJ13x+zXdD6pxqenwCxvIJf0oRbGI2JMKOvCfv/xrKtyLpq/LzRMoG
+ PT3/oFt/NxdeSp50ZQ+KWSmLZs6v6wrABPqKRw7fxxr9Jy6UxQIIcGlyGAGyaL1v+kdh
+ b6RnAH2/bfNw7FdsUsHRarx9NOZAlKnATSvVxEWQGIoPX3nUxwmFy25k+7EbCtH1eJZ5
+ jBBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708335999; x=1708940799;
+ d=1e100.net; s=20230601; t=1708336030; x=1708940830;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :references:cc:to:content-language:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=CG3kEgZLIf65Rho0ck4oqI31AvxiDGPA+aZ6EQqIpAk=;
- b=jBWFISfi4VmaqwUtHgh/JYGJARG/Ol1g9wgtG91u2UMGUhEw9WMHSXpGwLq4PiamaZ
- ElEXa4F7S9St1GKFTWZcJnAH7r5ogfeMLSTRikcaNXXmdT16HtZDrhRGnRV/JTSaiXh4
- TDfWk5hYKGUAyzX5QMRcgQga8MWbbXH+DxAw3HC4v4EpRynczNcK0smFRLj/c9yxGZWx
- JZ3swYmImgb1KppeWcT1BGeqBl+ZketRLK+VwtrI99W2yZfJECku06FBxlB+c5+iBxwE
- 9g2kcb8J/rD18r5BjZbSv+IxHXFtGn9evLk1hJaTKz8zuBzGAnH2r50zE8yYJipeDUNK
- ijBQ==
+ bh=cqRd8mmSRTxKLdaGk3pfHlklv+sasvpqbzrD2CZiU80=;
+ b=Of9hRJ3US5MygrKi14lIe19wHP/x0bbhKvi6EGerwR2vuWKD4MAFCHdn4qFzGemzBr
+ moqKfBYUAhbpr5b8S3ZfyM4o6lPatkDPjXH5ZiZ2H0ZjQ1A6vOyyAcuBSf9L2H/GzBl5
+ rqcnzllrqWP2W3sXwc+qUolH8RWC3YOfXa0pwaFzkUdeyHzOZkbKBa/dxN+sfwmMXuCx
+ yI5AHyF3iOYpp/HotWPurBoLhXM6fY+aPFzw1YFL41aUGSmJG4diaRji9zEtEvVDwOJw
+ BDfKGfEq3/NDbrAlR+FrFqpnFBP2X9Vcup8heKRNj9rGHyKu0T5Znus3OadzXoXnK5UR
+ ppMw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXs/Xeqip3RELL3sjULrdBfWNdHTaPeKxsUPkSyj1at4yNvdtbntdMwyvjmeRxhvN6eqZzHfVRyagMvZTEF9YzWkMVyWg==
-X-Gm-Message-State: AOJu0YxnbCQBX/FnwurgcueEDYXQdpXx/o601+HLbwya9jE2vBfWGjve
- zOdvz+Q/c7siQk8sUMQK+flMQ2+dKTqH8O5QqO80rrCWekn6KOwEPlZkxOufRrM=
-X-Google-Smtp-Source: AGHT+IHkfLzzyM+iJHDT5mxVbXKejOJ0i3ZN3YpACpyOpfTtAul8utoLuiHyKLkO6VCr9UnHPHVIMQ==
-X-Received: by 2002:a05:600c:4446:b0:412:6807:93ab with SMTP id
- v6-20020a05600c444600b00412680793abmr794552wmn.5.1708335999204; 
- Mon, 19 Feb 2024 01:46:39 -0800 (PST)
+ AJvYcCVJ9yrdr7Mi7od95BboSmWtSKaSoo0vdXJQ0EX32Dmqws6WJaO6+/Wstx1wNXOHqQlOx4nbxYg+JfLW/+k6kd1l30zB1Q==
+X-Gm-Message-State: AOJu0YyvtIzZIjcxeQVzC4Uwf0MdGDFEZai2oNFWrkT3tONh+x6Yo+wz
+ a9nqhI4AABbmPzGgTNyupcFXiviPpSNy3VUXb/fQLlwr1SaorWk5YgqjIX/gLb8=
+X-Google-Smtp-Source: AGHT+IFqifKIiu7HKyVw8vEtlFSPdGiDmjL10su/ikYBEepRPh8PZV3OuZaZ9ZAeVtBmkUWMfayUpw==
+X-Received: by 2002:a05:600c:4fc4:b0:410:68e1:d9ca with SMTP id
+ o4-20020a05600c4fc400b0041068e1d9camr9124644wmq.2.1708336030009; 
+ Mon, 19 Feb 2024 01:47:10 -0800 (PST)
 Received: from ?IPV6:2a01:e0a:982:cbb0:9470:c6e0:c87a:fa9f?
  ([2a01:e0a:982:cbb0:9470:c6e0:c87a:fa9f])
  by smtp.gmail.com with ESMTPSA id
- q17-20020a05600c46d100b0041249ea88b9sm10136159wmo.16.2024.02.19.01.46.38
+ q17-20020a05600c46d100b0041249ea88b9sm10136159wmo.16.2024.02.19.01.47.08
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 19 Feb 2024 01:46:38 -0800 (PST)
-Message-ID: <056f528d-2c05-4eff-a353-c9524a47fffc@linaro.org>
-Date: Mon, 19 Feb 2024 10:46:37 +0100
+ Mon, 19 Feb 2024 01:47:09 -0800 (PST)
+Message-ID: <1dfb19cf-a446-4b94-a330-04bbe32081e5@linaro.org>
+Date: Mon, 19 Feb 2024 10:47:08 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v4 06/39] clock/qcom: qcs404: fix clk_set_rate
+Subject: Re: [PATCH v4 07/39] serial: msm: add debug UART
 Content-Language: en-US, fr
 To: Caleb Connolly <caleb.connolly@linaro.org>,
  Sumit Garg <sumit.garg@linaro.org>, Ramon Fried <rfried.dev@gmail.com>,
@@ -85,7 +85,7 @@ To: Caleb Connolly <caleb.connolly@linaro.org>,
  Stephan Gerhold <stephan@gerhold.net>
 Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
 References: <20240215-b4-qcom-common-target-v4-0-ed06355c634a@linaro.org>
- <20240215-b4-qcom-common-target-v4-6-ed06355c634a@linaro.org>
+ <20240215-b4-qcom-common-target-v4-7-ed06355c634a@linaro.org>
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
  GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
@@ -111,7 +111,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro Developer Services
-In-Reply-To: <20240215-b4-qcom-common-target-v4-6-ed06355c634a@linaro.org>
+In-Reply-To: <20240215-b4-qcom-common-target-v4-7-ed06355c634a@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -132,75 +132,81 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 15/02/2024 21:52, Caleb Connolly wrote:
-> We should be returning the rate that we set the clock to, drivers like
-> MMC rely on this. So fix it.
+> Introduce support for early debugging. This relies on the previous stage
+> bootloader to initialise the UART clocks, when running with U-Boot as
+> the primary bootloader this feature doesn't work. It will require a way
+> to configure the clocks before the driver model is available.
 > 
 > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->   drivers/clk/qcom/clock-qcs404.c | 25 +++++++++++++------------
->   1 file changed, 13 insertions(+), 12 deletions(-)
+>   drivers/serial/Kconfig      |  8 ++++++++
+>   drivers/serial/serial_msm.c | 37 +++++++++++++++++++++++++++++++++++++
+>   2 files changed, 45 insertions(+)
 > 
-> diff --git a/drivers/clk/qcom/clock-qcs404.c b/drivers/clk/qcom/clock-qcs404.c
-> index f5b352803927..958312b88842 100644
-> --- a/drivers/clk/qcom/clock-qcs404.c
-> +++ b/drivers/clk/qcom/clock-qcs404.c
-> @@ -193,24 +193,18 @@ static ulong qcs404_clk_set_rate(struct clk *clk, ulong rate)
+> diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig
+> index 26460c4e0cab..fbd351a47859 100644
+> --- a/drivers/serial/Kconfig
+> +++ b/drivers/serial/Kconfig
+> @@ -319,6 +319,14 @@ config DEBUG_UART_S5P
+>   	  will need to provide parameters to make this work. The driver will
+>   	  be available until the real driver-model serial is running.
 >   
->   	switch (clk->id) {
->   	case GCC_BLSP1_UART2_APPS_CLK:
-> -		/* UART: 115200 */
-> +		/* UART: 1843200Hz for a fixed 115200 baudrate (19200000 * (12/125)) */
->   		clk_rcg_set_rate_mnd(priv->base, &uart2_regs, 0, 12, 125,
->   				     CFG_CLK_SRC_CXO, 16);
->   		clk_enable_cbc(priv->base + BLSP1_UART2_APPS_CBCR);
-> -		break;
-> -	case GCC_BLSP1_AHB_CLK:
-> -		clk_enable_vote_clk(priv->base, &gcc_blsp1_ahb_clk);
-> -		break;
-> +		return 1843200;
->   	case GCC_SDCC1_APPS_CLK:
->   		/* SDCC1: 200MHz */
->   		clk_rcg_set_rate_mnd(priv->base, &sdc_regs, 7, 0, 0,
->   				     CFG_CLK_SRC_GPLL0, 8);
->   		clk_enable_gpll0(priv->base, &gpll0_vote_clk);
->   		clk_enable_cbc(priv->base + SDCC_APPS_CBCR(1));
-> -		break;
-> -	case GCC_SDCC1_AHB_CLK:
-> -		clk_enable_cbc(priv->base + SDCC_AHB_CBCR(1));
-> -		break;
-> +		return rate;
->   	case GCC_ETH_RGMII_CLK:
->   		if (rate == 250000000)
->   			clk_rcg_set_rate_mnd(priv->base, &emac_regs, 3, 0, 0,
-> @@ -224,11 +218,15 @@ static ulong qcs404_clk_set_rate(struct clk *clk, ulong rate)
->   		else if (rate == 5000000)
->   			clk_rcg_set_rate_mnd(priv->base, &emac_regs, 3, 1, 50,
->   					     CFG_CLK_SRC_GPLL1, 8);
-> -		break;
-> -	default:
-> -		return 0;
-> +		return rate;
->   	}
->   
-> +	/* There is a bug only seeming to affect this board where the MMC driver somehow calls
-> +	 * clk_set_rate() on a clock with id 0 which is associated with the qcom_clk device.
-> +	 * The only clock with ID 0 is the xo_board clock which should not be associated with
-> +	 * this device...
-> +	 */
-> +	log_debug("Unknown clock id %ld\n", clk->id);
->   	return 0;
->   }
->   
-> @@ -305,6 +303,9 @@ static int qcs404_clk_enable(struct clk *clk)
->   		clk_rcg_set_rate(priv->base, &blsp1_qup4_i2c_apps_regs, 0,
->   				 CFG_CLK_SRC_CXO);
->   		break;
-> +	case GCC_SDCC1_AHB_CLK:
-> +		clk_enable_cbc(priv->base + SDCC_AHB_CBCR(1));
-> +		break;
->   	default:
->   		return 0;
->   	}
+> +config DEBUG_UART_MSM
+> +	bool "Qualcomm QUP UART debug"
+> +	depends on ARCH_SNAPDRAGON
+> +	help
+> +	  Select this to enable a debug UART using the serial_msm driver. You
+> +	  will need to provide parameters to make this work. The driver will
+> +	  be available until the real driver-model serial is running.
+> +
+>   config DEBUG_UART_MSM_GENI
+>   	bool "Qualcomm snapdragon"
+>   	depends on ARCH_SNAPDRAGON
+> diff --git a/drivers/serial/serial_msm.c b/drivers/serial/serial_msm.c
+> index f4d96313b931..44b93bd7ff21 100644
+> --- a/drivers/serial/serial_msm.c
+> +++ b/drivers/serial/serial_msm.c
+> @@ -252,3 +252,40 @@ U_BOOT_DRIVER(serial_msm) = {
+>   	.probe = msm_serial_probe,
+>   	.ops	= &msm_serial_ops,
+>   };
+> +
+> +#ifdef CONFIG_DEBUG_UART_MSM
+> +
+> +static struct msm_serial_data init_serial_data = {
+> +	.base = CONFIG_VAL(DEBUG_UART_BASE),
+> +	.clk_rate = 7372800,
+> +};
+> +
+> +#include <debug_uart.h>
+> +
+> +/* Uncomment to turn on UART clocks when debugging U-Boot as aboot on MSM8916 */
+> +//int apq8016_clk_init_uart(phys_addr_t gcc_base);
+> +
+> +static inline void _debug_uart_init(void)
+> +{
+> +	/* Uncomment to turn on UART clocks when debugging U-Boot as aboot on MSM8916 */
+> +	//apq8016_clk_init_uart(0x1800000);
+> +	uart_dm_init(&init_serial_data);
+> +}
+> +
+> +static inline void _debug_uart_putc(int ch)
+> +{
+> +	struct msm_serial_data *priv = &init_serial_data;
+> +
+> +	while (!(readl(priv->base + UARTDM_SR) & UARTDM_SR_TX_EMPTY) &&
+> +	       !(readl(priv->base + UARTDM_ISR) & UARTDM_ISR_TX_READY))
+> +		;
+> +
+> +	writel(UARTDM_CR_CMD_RESET_TX_READY, priv->base + UARTDM_CR);
+> +
+> +	writel(1, priv->base + UARTDM_NCF_TX);
+> +	writel(ch, priv->base + UARTDM_TF);
+> +}
+> +
+> +DEBUG_UART_FUNCS
+> +
+> +#endif
 > 
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
