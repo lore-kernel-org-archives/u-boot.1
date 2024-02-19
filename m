@@ -4,80 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64E71C48BC3
-	for <u-boot@archiver.kernel.org>; Mon, 19 Feb 2024 20:35:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14FE0C48BF8
+	for <u-boot@archiver.kernel.org>; Mon, 19 Feb 2024 20:50:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 071EE87F22;
-	Mon, 19 Feb 2024 21:35:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 40D8E87DEF;
+	Mon, 19 Feb 2024 21:50:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fzifI9hV";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="o3mI46RP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B5F2C87EAD; Mon, 19 Feb 2024 21:35:03 +0100 (CET)
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
- [IPv6:2607:f8b0:4864:20::635])
+ id DF56687DEF; Mon, 19 Feb 2024 21:50:08 +0100 (CET)
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4840C87DA4
- for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 21:34:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 53A7B87F59
+ for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 21:49:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-1dbd81000b6so6981445ad.0
- for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 12:34:51 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-607bfa4c913so44499117b3.3
+ for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 12:49:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1708374890; x=1708979690; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=7BpZpaZwlKcwoO9EgDW1tR4T2FejBLe5H8xL4acmbqs=;
- b=fzifI9hVian2GP9LXtjbCSc5cFbtVfe02/pR3sGrjmrJCvFYWA6aViqTt+GbZOyhlG
- 0QB3zrMfsNXHcFEmaM3NFstRbtsDlk5fOEngYULC80sK4f6xwEgjGEyaG1wSj4Q/nqyW
- 9idMdyJAIHbxfrw51qot4QY4jWlErfXCaXvsMEcMuardS7Cy9ADVz5oz45QgRnziyCO6
- UOqMfa5WXkjJ59vGpc2GTLwgbuo9fK2T+uSKj/t9DJAUbmjh5kkgbL8OvITFdt345g5E
- gy+wA3KcEW01rPJGnb7ERE5qQfM4L+L3HZzJXX5coJMSTzdqxoLAzxYJ/WA/ceC488Z6
- 0lZg==
+ d=konsulko.com; s=google; t=1708375791; x=1708980591; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=QAIzF8zkInCIafHm01SAypVJTKMewYcUv0uCZxVRHJQ=;
+ b=o3mI46RP0sechph2qG2IHBYtbY4fSMaXp2QrMpuAQNIaDo7Ep/HdXYh3LxoVA78Bhf
+ K9ellzD2QdvXM/6xnlibq2VAMTtTJKYWRa9n32rllrTsd8EGG89gvB/WT/S4ymL3vZgk
+ onOg65bBaK7GcAO271/gb59F0l9eVsQPzCOkE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708374890; x=1708979690;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=7BpZpaZwlKcwoO9EgDW1tR4T2FejBLe5H8xL4acmbqs=;
- b=wFPh5HhPCnMhu45KnwVzgauyLqsMDYSPMyAntR4nAiii8f0zemRh3qS6NIK4t8Qboe
- jIoKllMXneo0EVLLQ7Q4leZyUKsuKbctjQMB6lCj1MdKuVglFOmHR8g/yKudJN0ml6lk
- 7s/6rkOPFTGbMX85mYp/Q4zwGbthh2B1BTOrR/j80UR9xEdN7dt4Ny9ySTMRGikCtA91
- Pj267MOWXqWlyNsNAs7hrTvjzJf3QQ/grJVixug0GBAbTobtM8ptzShixDnPGOt+4/fc
- BG+LBp4YbfYiR00Y411vLfMg6m56qj5A/jQDROQ88fP3V/IlREvkUui3+8BpwLcdTqUn
- HRhg==
-X-Gm-Message-State: AOJu0YzvClLkS2UyzT5H5yC7NadcrxQ5k7lnwANq/PkU6QzECTaKBbpm
- 1F2QdLOeDlXn9MD8UIx6LG9/HIowZa+LYHa2Ua8qU8MmAgybFxWreerxREjjIuM46M8zu54OzJ8
- QLT2uSRV9D5ifVvDtJ8G/JTDalW8=
-X-Google-Smtp-Source: AGHT+IFRgP6qJFNBiluFZA3Y5PPib5cUOpAZS3at62B4RhG0w5fcDexTaDOS8/chSJ2vvZw9NU2PdLc85TMPq3F/Gxw=
-X-Received: by 2002:a17:902:c14b:b0:1db:92e1:2e55 with SMTP id
- 11-20020a170902c14b00b001db92e12e55mr11458305plj.2.1708374890121; Mon, 19 Feb
- 2024 12:34:50 -0800 (PST)
+ d=1e100.net; s=20230601; t=1708375791; x=1708980591;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=QAIzF8zkInCIafHm01SAypVJTKMewYcUv0uCZxVRHJQ=;
+ b=YHUBrjWjpn41HMHk67GlYrTjwUIMTTqMzc8RBz4ehvVsNaPFmjCe3q5XjIbMvQuBBf
+ +X3t9g3i1xZ3af97CirolULiItLHfc7TSjRtZJFJubE2SO+7fx5Qn5zVX/2FkUcBi9ys
+ EUr6KDpgVawC4PAcPpZu+F4cm42Z/d5njWU3uQPvW46JoGAIC9gFtbsqNsk6ITG9mnhK
+ pMqlof/ninSD1LvYwOJZFS2soqaI3pgD+A93X39wH/wW4nRyE4HGuuIbi3F3dqrBBr/o
+ UhkmwsfPUPCGMOY7v0EU+ds729+0uUqRhUUsuGCUC5uBbWVpYbTQ8qTP3o/cPSKZvi2Z
+ rEJA==
+X-Gm-Message-State: AOJu0YyoayqdHfFunofmi3XAga1HFyQjbZkt5+kNdQOZ+cGpt4mtg+y3
+ tHb6/v7W7LPEwEyg3wGR50GmOEDR+7V8G8OHlQg5/VP04xXP6I/glzl47g0qhYo=
+X-Google-Smtp-Source: AGHT+IHBe23aob7vr459vaEDMLfT7p3944ubVUF6rEm86wP+Ofw+HIQQD8VqIl321ZYBXd6x3v/wnA==
+X-Received: by 2002:a05:690c:4442:b0:608:1b39:245a with SMTP id
+ gq2-20020a05690c444200b006081b39245amr6445710ywb.1.1708375791495; 
+ Mon, 19 Feb 2024 12:49:51 -0800 (PST)
+Received: from bill-the-cat (065-184-194-195.res.spectrum.com.
+ [65.184.194.195]) by smtp.gmail.com with ESMTPSA id
+ h123-20020a0dde81000000b006040d34e58csm1789169ywe.74.2024.02.19.12.49.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 19 Feb 2024 12:49:50 -0800 (PST)
+Date: Mon, 19 Feb 2024 15:49:49 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+Cc: u-boot@lists.denx.de, Bin Meng <bmeng.cn@gmail.com>
+Subject: Re: [PATCH] virtio: fix get_config / set_config for legacy VirtIO
+ targets
+Message-ID: <20240219204949.GN3040305@bill-the-cat>
+References: <20240212073708.4161197-1-dmitry.baryshkov@linaro.org>
+ <CAA8EJppQQG0F+tR202ZLraG8x_CJ9ZH2jcm+ncs2eq=pX0D7Mw@mail.gmail.com>
 MIME-Version: 1.0
-References: <20240218211958.2849847-1-Mr.Bossman075@gmail.com>
- <CAOMZO5DQruTiaWMj4zv8gKyUJqtYqb5bmf7Z-Upc7k2+6yCffg@mail.gmail.com>
- <CAOMZO5AgYn1i1U6b85b3-6GXigY3UoCJ=1Zy4PsREGD88B-uEw@mail.gmail.com>
- <CAJFTR8R9tnycG2iV7QSDb67PqJBB9tJHnxmjxW8o-TzUBy_9yw@mail.gmail.com>
-In-Reply-To: <CAJFTR8R9tnycG2iV7QSDb67PqJBB9tJHnxmjxW8o-TzUBy_9yw@mail.gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 19 Feb 2024 17:34:40 -0300
-Message-ID: <CAOMZO5DtKH63vvvp5X8U8h2w1TwkmaAmVdn1zYJgJGUHEHofXg@mail.gmail.com>
-Subject: Re: [PATCH v3 1/3] arm: dts: imxrt: Add binman support
-To: Jesse T <mr.bossman075@gmail.com>
-Cc: u-boot@lists.denx.de, 
- Giulio Benetti <giulio.benetti@benettiengineering.com>,
- Stefano Babic <sbabic@denx.de>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="1kOGEpVGCpHehYgH"
+Content-Disposition: inline
+In-Reply-To: <CAA8EJppQQG0F+tR202ZLraG8x_CJ9ZH2jcm+ncs2eq=pX0D7Mw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,9 +91,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Feb 19, 2024 at 5:18=E2=80=AFPM Jesse T <mr.bossman075@gmail.com> w=
-rote:
 
-> Shall I send a V4 with them squashed then?
+--1kOGEpVGCpHehYgH
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Yes, please send a v4 with them squashed and with a nice commit log :-)
+On Sat, Feb 17, 2024 at 10:09:12PM +0200, Dmitry Baryshkov wrote:
+> On Mon, 12 Feb 2024 at 09:37, Dmitry Baryshkov
+> <dmitry.baryshkov@linaro.org> wrote:
+> >
+> > The functions virtio_pci_get_config() and virtio_pci_set_config() don't
+> > take the offset into account when reading the config space. For example
+> > this manifests when U-Boot tries to read the MAC address of the VirtIO
+> > networking device. It reads 6 equa bytes instead of the proper addess.
+> >
+> > Fix those functions by taking the offset in the config space into
+> > account.
+> >
+> > Fixes: 4135e10732a0 ("virtio: Add virtio over pci transport driver")
+> > Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+>=20
+> Gracious ping
+>=20
+> > ---
+> >  drivers/virtio/virtio_pci_legacy.c | 4 ++--
+> >  1 file changed, 2 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/drivers/virtio/virtio_pci_legacy.c b/drivers/virtio/virtio=
+_pci_legacy.c
+> > index cf5dfb17a94d..aa89604ae84d 100644
+> > --- a/drivers/virtio/virtio_pci_legacy.c
+> > +++ b/drivers/virtio/virtio_pci_legacy.c
+> > @@ -107,7 +107,7 @@ static int virtio_pci_get_config(struct udevice *ud=
+ev, unsigned int offset,
+> >         int i;
+> >
+> >         for (i =3D 0; i < len; i++)
+> > -               ptr[i] =3D ioread8(ioaddr + i);
+> > +               ptr[i] =3D ioread8(ioaddr + offset + i);
+> >
+> >         return 0;
+> >  }
+> > @@ -121,7 +121,7 @@ static int virtio_pci_set_config(struct udevice *ud=
+ev, unsigned int offset,
+> >         int i;
+> >
+> >         for (i =3D 0; i < len; i++)
+> > -               iowrite8(ptr[i], ioaddr + i);
+> > +               iowrite8(ptr[i], ioaddr + offset + i);
+> >
+> >         return 0;
+> >  }
+
+I'll take this for -next when it opens.
+
+--=20
+Tom
+
+--1kOGEpVGCpHehYgH
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXTvukACgkQFHw5/5Y0
+tyxiywwAqw9NZqZm1qcWjgkWOEdyq59q+E9Tni2jKs1oKv1e69HEbgFXIkfUnHa0
+ab8QHrLoQeEis1vwOvUjfmX59c64bbjx4HyaJybFBCGZ/0zjdV0k9h+uM+waCh4V
+figH9hcvpsr9xzZj9dlkILWpsQpb6wDQ8IbdwW0K98VeM9BuIkdsaIvbaUOpputT
+O/Xp7Pg8B0nqrznDzqJ0775ATLUbKU57+Rm3gMU0qJ2Ne5udqH6Wwl0u7yJV+HJc
+EjS5tvMsG8YLMpUwKb3/GUlRyFgBlLAiFIhyqFNGE7K8s7pGgTkNREBMUBStzwTh
+QSWzZhggU/M5SVFvcNNAo0/NywGITNIJxmXH6MC2BNXNmHfHnyh3Ddqq+vKuTQaO
+LpPpaICUIvjCB7aSR8YLnT0YsUBAxr+ERQAJ7qRVI8T3TX/rjp4oSZyd5M9km7OY
+cS1ZSs2HwVWIrakdZzM6bW79GI0gUbR2OpOzIwaJXoqgIyY0u5Xm3eJ32lY2nn/K
+mFbqyRNm
+=4eOV
+-----END PGP SIGNATURE-----
+
+--1kOGEpVGCpHehYgH--
