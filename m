@@ -4,59 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B6BFC48BF8
-	for <u-boot@archiver.kernel.org>; Mon, 19 Feb 2024 14:12:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B6EDC48BF8
+	for <u-boot@archiver.kernel.org>; Mon, 19 Feb 2024 14:13:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2FFA087F33;
-	Mon, 19 Feb 2024 15:12:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4B30B87F1A;
+	Mon, 19 Feb 2024 15:12:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1708351952;
-	bh=hJw1S5dj/jKVgkC62LpSUF3j6sWgKIX5YMKgAl/NFrs=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	s=phobos-20191101; t=1708351964;
+	bh=Jraf4vMPpfAsW2gNzuy8vtAks2tAz7UX6HprKzRRa7c=;
+	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=GYBHfjUbmcUfkrMwL442UA1Ldh5M0Xqh6Ku4KQQw+go+jrgWXNVAJXJqp0LVJXzfb
-	 z3JRJX5GB9akfPwOvXoxHsXYZl3XY79VBPJ+x2o/wt6M5ACyc1F9RPF7z2QXOkKI7a
-	 ULD6/kU/l+yWGpHpGCUG8G1dFL2oi1UyS33dG4AitJMahLmcg3/nXkolmIN9ck4M+o
-	 UQE++3+JPouXjZXjRyjIhPE7LjnGb8zClZoluCd9/2CEapa5dyuIndLic6WniGD2p1
-	 LbcweomXLs4vpyIP9MTtuCkCIHvYLfGAG2yOiEQB8aWiXsBCj9Dq4sdtntyvWlLB4T
-	 N0YBBTKS+7+iw==
+	b=OKPYrsobxe2ql3Vl22T/C0s2lPmHbj988uKYPkR0MkwrwbR0RmkVxP6Fm5mBiJ9hh
+	 lAvhrUO51n778xv9f88Y5qY3JbKY1j5m3K7BIt08iUtXCz/CvC/bmve48KgcZ4vOZI
+	 JkaKCznTohzYCXGDaxsPlhlzVlzknAwv2yk3X9FKQRZrjobXPIN33ayNqUKvWferJE
+	 kk8PVeDgKO2iIQ9qWpS105ycJxNOo0uxDhXnLKFEql8HEWkvnNfZzheGFu1ETWYeYr
+	 2AEx++2hoYZxxRpftL6/w9UDuXOSuXGqu6oqZxXQP2tduydsrQoK6Heup6/VNgOv5c
+	 EtZYvowFVMnmQ==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 814E086DBD;
- Mon, 19 Feb 2024 15:12:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id 6344C87F1A;
+ Mon, 19 Feb 2024 15:12:30 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1708351950;
- bh=hJw1S5dj/jKVgkC62LpSUF3j6sWgKIX5YMKgAl/NFrs=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=vMCCvsahwTU9PwWi7nzlXtXakK5tj/FJ6lFkvc5nFY7wgzlukxF832dclIrFKvDZF
- c4NSs/RRVhKtpPKA0FrBJtmS0/M0IdxU56cn5Nq+PFNAIDEbO0iocNzvDa0JG1F7bx
- PJ3410JUL33ZNOv/7Y0II/3V0fm9ilDV3NNQh9mhxlZB1PBj2v6vhHC708MddV2zO/
- 0+wzuKIU+QuU9luiXgyCXwW5/V7U1ORaqOGJqaERY00qigQKC7npPyz6cZAUdFI2wc
- SJHF/9itcyG5QNHgMI3W4Llpqw0SRVDPxT6N3Exy6R1s3NIx6CnX1aMyLZ62xPARMb
- labxY1L1YWZQg==
-Message-ID: <a84821a6-f9fa-4986-84a2-af1170017d7c@denx.de>
-Date: Mon, 19 Feb 2024 15:04:28 +0100
+ s=phobos-20191101; t=1708351952;
+ bh=Jraf4vMPpfAsW2gNzuy8vtAks2tAz7UX6HprKzRRa7c=;
+ h=Date:Subject:To:References:From:In-Reply-To:From;
+ b=G35c08XS0m7xYholNRK6Bp3g7wyUjl60sjNWUI53F6vcPYuVnRAePmwQIrPS79E+Z
+ ydE0yW/Wp3f6Ys2JEALWnIQskcbCOZO7g0fcz26uhRv/2m3JN6zWPx56jiXNUH/W6B
+ lsLwZtnH1ebwMv6E4A8DCQPsbQ+shc907tltewfFx+e9b9rq4hnQovat4BDsGZlJOc
+ LvQHtegEEJ8TWHDV9BNOrZaYr5Q7BjaONq6akA2D8vWUaV1dPVuSmO3qcWB3TXEKd8
+ /Cx2jD5w/zSSRGLCNJXKhdGt0fYmSaYNweBtbdxXwJ1HV96kCqXjEn9mp9ZfnaZoP+
+ odeBO2AmfejGg==
+Message-ID: <ab6edb25-2d18-4f65-bccb-f14ced184636@denx.de>
+Date: Mon, 19 Feb 2024 15:05:43 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] usb: ehci-mx6: Add i.MX93 support
+Subject: Re: [PATCH v2 1/5] usb: ohci-generic: ignore ENOSYS and ENOTSUPP
+ errors from clk and reset
 Content-Language: en-US
-To: Fabio Estevam <festevam@gmail.com>, Mathieu Othacehe <othacehe@gnu.org>
-Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
- Shiji Yang <yangshiji66@outlook.com>, Ye Li <ye.li@nxp.com>,
- =?UTF-8?Q?S=C3=A9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>,
- Simon Glass <sjg@chromium.org>, Mathieu Othacehe <m.othacehe@gmail.com>,
- u-boot@lists.denx.de
-References: <20240219084300.8228-1-othacehe@gnu.org>
- <CAOMZO5D2rMX+7RH+8Fs0o+bXv+a0BLb9=g09rCnodrXf-O43ng@mail.gmail.com>
+To: Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>, u-boot@lists.denx.de
+References: <20240219115925.12675-1-piotr.wojtaszczyk@timesys.com>
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAOMZO5D2rMX+7RH+8Fs0o+bXv+a0BLb9=g09rCnodrXf-O43ng@mail.gmail.com>
+In-Reply-To: <20240219115925.12675-1-piotr.wojtaszczyk@timesys.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,22 +68,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/19/24 14:18, Fabio Estevam wrote:
-> Hi Mathieu,
+On 2/19/24 12:59, Piotr Wojtaszczyk wrote:
+> If a machine doesn't have CONFIG_CLK set the call to clk_get_bulk()
+> returns '-ENOSYS' error which should be handled the same way as
+> '-ENOENT' error. The same applies to reset_get_bulk() and 'ENOTSUPP'.
 > 
-> On Mon, Feb 19, 2024 at 5:43 AM Mathieu Othacehe <othacehe@gnu.org> wrote:
->>
->> i.MX93 uses the same USB IP as i.MX8MM. It can then reuse the ehci-mx6
->> driver.
->>
->> Signed-off-by: Mathieu Othacehe <othacehe@gnu.org>
+> Signed-off-by: Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>
+> ---
+> Changes for v2:
+> - Changed logic style from !(== || ==) to (!= && !=)
 > 
-> You missed copying Marek Vasut, who is the USB maintainer.
+>   drivers/usb/host/ohci-generic.c | 12 ++++++++----
+>   1 file changed, 8 insertions(+), 4 deletions(-)
+> 
+> diff --git a/drivers/usb/host/ohci-generic.c b/drivers/usb/host/ohci-generic.c
+> index ceed1911a9..8740094afc 100644
+> --- a/drivers/usb/host/ohci-generic.c
+> +++ b/drivers/usb/host/ohci-generic.c
+> @@ -28,7 +28,7 @@ static int ohci_usb_probe(struct udevice *dev)
+>   	int err, ret;
+>   
+>   	ret = clk_get_bulk(dev, &priv->clocks);
+> -	if (ret && ret != -ENOENT) {
+> +	if (ret && ret != -ENOENT && ret != -ENOSYS) {
+>   		dev_err(dev, "Failed to get clocks (ret=%d)\n", ret);
+>   		return ret;
+>   	}
+> @@ -40,7 +40,7 @@ static int ohci_usb_probe(struct udevice *dev)
+>   	}
+>   
+>   	err = reset_get_bulk(dev, &priv->resets);
+> -	if (err && err != -ENOENT) {
+> +	if (err && err != -ENOENT && err != -ENOTSUPP) {
+>   		dev_err(dev, "failed to get resets (err=%d)\n", err);
+>   		goto clk_err;
+>   	}
+> @@ -72,7 +72,7 @@ reset_err:
+>   		dev_err(dev, "failed to release resets (ret=%d)\n", ret);
+>   clk_err:
+>   	ret = clk_release_bulk(&priv->clocks);
+> -	if (ret)
+> +	if (ret && (ret != -ENOSYS))
 
-The patch itself looks fine:
-
-Reviewed-by: Marek Vasut <marex@denx.de>
-
-Just send a V2 with the collected tags so it can be applied.
-
-Thanks !
+The extra parenthesis are not needed I think, the rest of the patch 
+seems OK, thanks !
