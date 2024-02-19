@@ -4,120 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59482C48BC3
-	for <u-boot@archiver.kernel.org>; Mon, 19 Feb 2024 08:31:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F9B5C48260
+	for <u-boot@archiver.kernel.org>; Mon, 19 Feb 2024 08:42:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7C48287DDF;
-	Mon, 19 Feb 2024 09:31:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=suse.de
+	by phobos.denx.de (Postfix) with ESMTP id 8BE9587F02;
+	Mon, 19 Feb 2024 09:42:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="GHqfGfkp";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="1lY10xlH";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="o4qytCjy";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="7Xtxekee";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UNhpA3s9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F0EB287F1A; Mon, 19 Feb 2024 09:31:08 +0100 (CET)
-Received: from smtp-out1.suse.de (smtp-out1.suse.de
- [IPv6:2a07:de40:b251:101:10:150:64:1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id AF21C87F1A; Mon, 19 Feb 2024 09:42:09 +0100 (CET)
+Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
+ [IPv6:2607:f8b0:4864:20::634])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 68F1B87D25
- for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 09:30:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D808C87EBA
+ for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 09:41:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=suse.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=iivanov@suse.de
-Received: from imap2.dmz-prg2.suse.org (imap2.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:98])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id C5BB4222FB;
- Mon, 19 Feb 2024 08:30:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1708331456; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=k2Tf5LSLcVMMFj6RMLVDyiiXZ7HyEx3GlVW9LJgRUE8=;
- b=GHqfGfkpIICNxdamK5eWuiTzfCrzCnTizjX99jpZ+4/2Eov5bYglilFg3bBNdDM5288IDK
- qKC8VzxEY3TLUZmtSigpcuG1XdB+nuHK17fPwbOMfsuXZsniozU7NTmFSspW2pmBvI4EqV
- UtMPGIPz1e50R9cRDZHS4gCrQkWU8Ds=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1708331456;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=k2Tf5LSLcVMMFj6RMLVDyiiXZ7HyEx3GlVW9LJgRUE8=;
- b=1lY10xlHH9FSCWZhP0qotsopglzVAZhNDIPPXLnpQc2H1ePEYQw0dMrDgM8Yh+X7eAWFrU
- bNMmet8Bt0gWcKBg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1708331454; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=k2Tf5LSLcVMMFj6RMLVDyiiXZ7HyEx3GlVW9LJgRUE8=;
- b=o4qytCjyJ6mu4x1bFnuBb7sdDtFtuf3m6yclLBdgrH9FXcwfKJo0RK4dbD3USaNfR9crJk
- mghD4mlXl14D+4ugoI3npWA0JNp1WmgLzwXpRy1b1MBEYp8vfafmJ0uQS1gBIGnGboHZCe
- Fu8sCTizPnCg03Qs3qGV11yGYf/kTHY=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1708331454;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=k2Tf5LSLcVMMFj6RMLVDyiiXZ7HyEx3GlVW9LJgRUE8=;
- b=7XtxekeezrDcdaAh4695QZfS+/Cohx0FPqtMy10twNY5EUHHWvRLfJnKoLHt28xwwBzMkU
- owL8IMrbOD5W92Ag==
-Received: from imap2.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap2.dmz-prg2.suse.org (Postfix) with ESMTPS id 82CC6139C6;
- Mon, 19 Feb 2024 08:30:54 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([10.150.64.162])
- by imap2.dmz-prg2.suse.org with ESMTPSA id enj5HL4R02WlQAAAn2gu4w
- (envelope-from <iivanov@suse.de>); Mon, 19 Feb 2024 08:30:54 +0000
-Content-Type: text/plain;
-	charset=utf-8
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3731.700.6.1.1\))
-Subject: Re: Booting RPi5B with latest git
-From: "Ivan T. Ivanov" <iivanov@suse.de>
-In-Reply-To: <1031326949.2069496.1708196119886@mail.yahoo.com>
-Date: Mon, 19 Feb 2024 10:30:43 +0200
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- John <therealgraysky@proton.me>
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <B5482069-1D43-418D-8602-416585D1788C@suse.de>
-References: <VhjYVKfXb22i7OLAE71TUsea5YoQHzRZl2a-pTntu6mAGWiAuixDG1380ukg9ag-1j7_JZUXh8mLYxId4j3mmvjopigOO6NgqVF0aBxC8Io=@proton.me>
- <1031326949.2069496.1708196119886@mail.yahoo.com>
-To: Jojan <jjvazha@yahoo.com>
-X-Mailer: Apple Mail (2.3731.700.6.1.1)
-Authentication-Results: smtp-out1.suse.de;
- dkim=pass header.d=suse.de header.s=susede2_rsa header.b=o4qytCjy;
- dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=7Xtxekee
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Spamd-Result: default: False [-1.53 / 50.00]; TO_DN_EQ_ADDR_SOME(0.00)[];
- RCVD_VIA_SMTP_AUTH(0.00)[];
- SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:98:from];
- TO_DN_SOME(0.00)[]; MV_CASE(0.50)[]; RCVD_COUNT_THREE(0.00)[3];
- DKIM_TRACE(0.00)[suse.de:+]; MX_GOOD(-0.01)[];
- NEURAL_HAM_SHORT(-0.20)[-1.000]; FREEMAIL_TO(0.00)[yahoo.com];
- FROM_EQ_ENVFROM(0.00)[]; MIME_TRACE(0.00)[0:+];
- BAYES_HAM(-0.52)[80.37%]; MID_RHS_MATCH_FROM(0.00)[];
- ARC_NA(0.00)[];
- R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- FROM_HAS_DN(0.00)[]; RCPT_COUNT_THREE(0.00)[3];
- FREEMAIL_ENVRCPT(0.00)[yahoo.com];
- TO_MATCH_ENVRCPT_ALL(0.00)[]; MIME_GOOD(-0.10)[text/plain];
- NEURAL_HAM_LONG(-1.00)[-1.000];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:dkim,mail-archive.com:url,2711.so:url]; 
- FUZZY_BLOCKED(0.00)[rspamd.com]; RCVD_TLS_ALL(0.00)[];
- RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:98:from]
-X-Rspamd-Queue-Id: C5BB4222FB
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-1d731314e67so27703205ad.1
+ for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 00:41:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1708332112; x=1708936912; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=BQ3MXRY7ECt5oypwaYTfOq8nRxkhmz0eAU6WSP2NLJc=;
+ b=UNhpA3s9ljqD1GmtHIcMkkqjZkZFstRtSZmegwScLgQ3Xh9Rq1bCOLurkKJYkXwAGJ
+ DbY2kPBbRYgQ154KcC1hvoPAlcQ5AiXpCPpffmFa2aZiBPkzglkwVx+0xTwlwzJCUjCA
+ kNV2nhNeNIv98Dw7VRsOXCzc3TrRNjrfQ0CDzXXLPGRMTh4orFLxlGKv2KJguKl9tTOO
+ phJVFNNzSNOUPBXWrQaSZ+BOUfRZe6p0jdYLvdsDCAHIm0TgIBt12Bthb+ZWXf7XF62v
+ 6evk+lUnNaWlwkxPTy9HvZ2OuOD7OuyC3dlTbuSR/QU01y5JTTflYqX29M3k7/202rzg
+ ED6w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1708332112; x=1708936912;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=BQ3MXRY7ECt5oypwaYTfOq8nRxkhmz0eAU6WSP2NLJc=;
+ b=EdJ7vNQ0ZiBQ8Czs1XejSfFMi6iQN76Wmy0XV3vUceHX3nYrCDGaODSetnXKSZPY7i
+ 6s5Oal5LilRSkRlAEc8Z+3vlLhhWDnn5xv49JOLxD+Xw4GA3rnqY1A6ch8u8L6YlUyIv
+ CGb38mbag7haf0HIXwNRXOEacBhzxBWZSTktkzoyIO5JhEyf0ZGVECkBhKNL3j5XWfk/
+ v7PpCU/1sZhhNX5Qa2l8Nf9ESetVeQgi++BLj+A3RfV0zFk5RD+IHIPHThPjJ1jGVXeE
+ iYj7HN9VBzo4tNAe+r/lGg0n6zj8zjP4S1LNJu1W1Bq4utZsapALhjKXP0fuGPvZNAd9
+ HF5A==
+X-Gm-Message-State: AOJu0YyNmxPetRfm87Bz8Aw+Ha4c0z7cOUp2+3QwYuK9KmZcNJyFHUjQ
+ Z6B3OwxzVK2x+Z4mymmiElcy9CPNsGqsuAjaiTv7lirJtr3YMgAdyGqWnl3zoug=
+X-Google-Smtp-Source: AGHT+IEAaC6o2uHqvEvKJIZCLBOtGliVa7fJrQoKwvEgxCU6v1dcIuuGGViAF2IMNh2xY1uiJuouCg==
+X-Received: by 2002:a17:902:d486:b0:1dc:687:26d6 with SMTP id
+ c6-20020a170902d48600b001dc068726d6mr432488plg.18.1708332112074; 
+ Mon, 19 Feb 2024 00:41:52 -0800 (PST)
+Received: from sumit-X1.. ([223.178.209.148]) by smtp.gmail.com with ESMTPSA id
+ f9-20020a170902e98900b001db45855528sm3797059plb.198.2024.02.19.00.41.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 19 Feb 2024 00:41:51 -0800 (PST)
+From: Sumit Garg <sumit.garg@linaro.org>
+To: caleb.connolly@linaro.org,
+	neil.armstrong@linaro.org
+Cc: u-boot@lists.denx.de, trini@konsulko.com,
+ Sumit Garg <sumit.garg@linaro.org>
+Subject: [PATCH] qcom_defconfig: Enable ethernet and I2C support
+Date: Mon, 19 Feb 2024 14:11:44 +0530
+Message-Id: <20240219084144.2881155-1-sumit.garg@linaro.org>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -134,24 +89,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+QCS404 supports Synopsys Designware Ethernet QOS IP and we already have
+the corresponding glue layer present upstream as:
+drivers/net/dwc_eth_qos_qcom.c. So enable corresponding support.
 
-> On 17 Feb 2024, at 20:55, Jojan <jjvazha@yahoo.com> wrote:
->=20
-> For RPi 5B you need bcm2712 device tree . RPi4 uses 2711.So the e =
-rpi_arm64_confi does not work for RPi5
-> Also make sure that you have the changes  discussed here.[GIT PULL] =
-rpi: updates for v2024.04 (mail-archive.com)
+Along with that it is possible for Qualcomm platforms to retrieve MAC
+address from I2C eeprom present on board. So enable corresponding
+support as well.
 
-You don=E2=80=99t have to change rip_arm64_config file. For RPi5 device =
-you
-should have bcm2712-rpi-5-b.dtb in dtb directory on your boot drive.
+Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+---
 
-You could get this file from "Raspberry Pi OS=E2=80=9D or openSUSE =
-Tumbleweed
-images, at least. You could compile it yourself from the vendor Linux
-tree too.
+This patch based upon Caleb's series [1].
 
-Regards,
-Ivan
+[1] https://lore.kernel.org/all/20240215-b4-qcom-common-target-v4-0-ed06355c634a@linaro.org/
+
+ configs/qcom_defconfig | 24 +++++++++++++++++++++++-
+ 1 file changed, 23 insertions(+), 1 deletion(-)
+
+diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+index 222db6448aba..cbc612b44bd9 100644
+--- a/configs/qcom_defconfig
++++ b/configs/qcom_defconfig
+@@ -26,7 +26,6 @@ CONFIG_CMD_USB=y
+ CONFIG_CMD_CAT=y
+ CONFIG_CMD_BMP=y
+ CONFIG_CMD_LOG=y
+-# CONFIG_NET is not set
+ CONFIG_BUTTON_QCOM_PMIC=y
+ CONFIG_CLK=y
+ CONFIG_CLK_QCOM_QCS404=y
+@@ -65,3 +64,26 @@ CONFIG_VIDEO_SIMPLE=y
+ CONFIG_HEXDUMP=y
+ # CONFIG_GENERATE_SMBIOS_TABLE is not set
+ CONFIG_LMB_MAX_REGIONS=64
++CONFIG_CMD_DHCP=y
++CONFIG_CMD_EEPROM=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_PING=y
++CONFIG_DM_ETH=y
++CONFIG_DM_ETH_PHY=y
++CONFIG_DM_MDIO=y
++CONFIG_DWC_ETH_QOS=y
++CONFIG_DWC_ETH_QOS_QCOM=y
++CONFIG_RGMII=y
++CONFIG_PHY_MICREL=y
++CONFIG_PHY_MICREL_KSZ90X1=y
++CONFIG_MISC=y
++CONFIG_NVMEM=y
++CONFIG_DM_I2C=y
++CONFIG_I2C_SUPPORT=y
++CONFIG_I2C_MUX=y
++CONFIG_I2C_EEPROM=y
++CONFIG_SYS_I2C=y
++CONFIG_SYS_I2C_QUP=y
++CONFIG_SYS_I2C_EEPROM_BUS=2
++CONFIG_SYS_I2C_EEPROM_ADDR_LEN=2
++CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=5
+-- 
+2.34.1
 
