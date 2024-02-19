@@ -4,77 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C36EC48BC3
-	for <u-boot@archiver.kernel.org>; Mon, 19 Feb 2024 10:16:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F4B6C48BC3
+	for <u-boot@archiver.kernel.org>; Mon, 19 Feb 2024 10:24:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 967DA87ED3;
-	Mon, 19 Feb 2024 11:16:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 70D9D87F0F;
+	Mon, 19 Feb 2024 11:24:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="a0ujVdti";
+	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="CgYLM40R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D85C687DDA; Mon, 19 Feb 2024 11:16:20 +0100 (CET)
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [IPv6:2a00:1450:4864:20::12a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C351287F0F; Mon, 19 Feb 2024 11:24:34 +0100 (CET)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.184])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1253287ED3
- for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 11:16:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EDF85875FD
+ for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 11:24:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-50e4e36c09cso1749338e87.1
- for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 02:16:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1708337768; x=1708942568; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=0bjjD45MAzo5pf+qE396QEfRH5+gKwIiRFwy/egt4kc=;
- b=a0ujVdtiuCBzL2IhlYvjPYjGInavPyElw3PNtiHFXw5LWuD+0extWrz5xO17sb1ZC6
- 0Mb2ihWfecmVJkvUC+HXx3MFQ49QtQ+P8FSXrIaEpaJbavQ1E1cAt9pFvpFYKkXlHb7S
- lPWq1KkS1DAIJi+bJKti9bC++uh4BC6+LoELniDVMWNSC7yIKoxxiiF+ZEDp7eeCdC8O
- OVChm1ux9sLMaikRJ1RDjYT6i+aVTSlMtcIe4co/fA3o12/udILqEYQkRmIhv9UKLEk3
- dugqxegUww2LQKqNPVD/S0OkaInQC6jGQt7bW0AJYrKSEi/SKGBfKfKoE116YMRVE5vh
- Tklw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708337768; x=1708942568;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=0bjjD45MAzo5pf+qE396QEfRH5+gKwIiRFwy/egt4kc=;
- b=dreIwO9hch1HUbTai/QfZ4gRoOSJJD+XOF8nu+F5OJhikk5TYRLemIA1FCONQS0fFX
- 5BMbcIdd5kciJAXRMsUFYt6JdAW3b6uz834ZRCD3p/JAUHDzu7zxnQio5ByQ9D4SiRBd
- SY0HXzP7YtzWdOpTCqxTw+emDx8z3qv2fJ0cahsCzoKt6Q7/E8vVGL7eu9BXLYfyajRU
- nP7KkECdae7dvLJ6qIp20SM8H7uvVRtr3Bu//vwO1tAG5laDgiXIP6yVLl7gl/Z83YWu
- AKFM36qd8ozmn8e0QDV2dI1uot5nEhkNLAtmnPPK6UyqQW3W5ZoVR6zAdUwdzdtcKehr
- ftwA==
-X-Gm-Message-State: AOJu0YxclBdNi9KNDwBWgf2OtaVgn/ODCDpv6Qq2LGhcoYwYEWKmxTJR
- DUZFllpoqaEJyv/qBcUbSfi7jNMr2jkqaS2H4zdMsrWR3GTIZgbIaSoOddJxv+0=
-X-Google-Smtp-Source: AGHT+IEWMT9czXsbhDxJciL9EwkxogqR9Djt8Kr7gFrs0VN9z6yCPnNcYFn82OoMJh0F5c6tuD8YJA==
-X-Received: by 2002:ac2:4d09:0:b0:512:b25e:571a with SMTP id
- r9-20020ac24d09000000b00512b25e571amr1206823lfi.3.1708337767723; 
- Mon, 19 Feb 2024 02:16:07 -0800 (PST)
-Received: from localhost ([109.108.76.111]) by smtp.gmail.com with ESMTPSA id
- g12-20020ac24d8c000000b00511adacecf0sm844439lfe.199.2024.02.19.02.16.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 Feb 2024 02:16:06 -0800 (PST)
-From: Igor Opaniuk <igor.opaniuk@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Eugeniu Rosca <erosca@de.adit-jv.com>, Tom Rini <trini@konsulko.com>,
- Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>,
- Alex Deymo <deymo@google.com>, Igor Opaniuk <igor.opaniuk@gmail.com>
-Subject: [PATCH v1] include: android_bootloader_message.h: sync with AOSP
- upstream
-Date: Mon, 19 Feb 2024 11:15:59 +0100
-Message-Id: <20240219101559.364553-1-igor.opaniuk@gmail.com>
-X-Mailer: git-send-email 2.34.1
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+ spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
+X-KPN-MessageId: 04a64a6a-cf11-11ee-b64d-005056994fde
+Received: from smtp.kpnmail.nl (unknown [10.31.155.5])
+ by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+ id 04a64a6a-cf11-11ee-b64d-005056994fde;
+ Mon, 19 Feb 2024 11:24:09 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
+ h=subject:to:from:message-id:date;
+ bh=lE33BY7+3OIzwNL76PjQ2XBJODgKPY08r4rORh3OI3k=;
+ b=CgYLM40R5E8gEf6AJtId5/vcVv/tZjEqrdZvDPI8jTTJeqGtPkKBbeOm1gFvDG3DTbjdFfpTzeHOn
+ 2p+J1AvnpUnqbnMIv6IOSG/YS0hZty+4klGLjc17tJtK1245tWmKHOfnCGUYp2+56OvhMOAoKKOUBd
+ skSu9qOJCDTyocaczuREqhAFSL3a1qsxFobluNgmNAv/7pLfqdInDIqb5iqE4893ZgX3D30PVBk4rE
+ xOtUAm4EUNaMkwv8/4ZqMMfWy9i/yz+qUD+nK6skUFfkUVFG4ZW79ByTA49i+rcZQY0877Do/SzBYe
+ Sr7AjZbkrp9Rlq4Cv9hZBA03R5dmKEg==
+X-KPN-MID: 33|vhDnFt0e9kgG8w+kSNVc9l9dcZoFGU1GViZM/ZcLeNj+/Nxbm4fM0SFed14gFAu
+ dAhIcqolvjym7Iz282g7vWcJ0Y6nXz5DvMS3W2O2+mIc=
+X-KPN-VerifiedSender: Yes
+X-CMASSUN: 33|CkhcVdDpix0ERYOvzLs9TUapwW1E2hoZ+SiMxYm17oI/xFO04bvltmkIOFwUwp/
+ OYNYAT6XA4ZLFiW+AUg8TZA==
+X-Originating-IP: 80.61.163.207
+Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
+ [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
+ id 0edce5a0-cf11-11ee-94ba-00505699b758;
+ Mon, 19 Feb 2024 11:24:27 +0100 (CET)
+Date: Mon, 19 Feb 2024 11:24:26 +0100
+Message-Id: <878r3gn44l.fsf@bloch.sibelius.xs4all.nl>
+From: Mark Kettenis <mark.kettenis@xs4all.nl>
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: trini@konsulko.com, sjg@chromium.org, ilias.apalodimas@linaro.org,
+ u-boot@lists.denx.de, pbrobinson@gmail.com
+In-Reply-To: <20240219091220.1022422-1-pbrobinson@gmail.com> (message from
+ Peter Robinson on Mon, 19 Feb 2024 09:12:15 +0000)
+Subject: Re: [PATCH] disk: dos: Add all options for EFI System Partitions
+References: <20240219091220.1022422-1-pbrobinson@gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,232 +74,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This takes the latest changes from AOSP from [1][2] (as this
-header was split on two) with minimal changes (this could lead
-to warnings reported by checkpatch).
+> From: Peter Robinson <pbrobinson@gmail.com>
+> Date: Mon, 19 Feb 2024 09:12:15 +0000
+> 
+> The EFI spec states that the ESP can be any of FAT12/16/32 but for
+> compatibility doesn't necssarily require the partition to be the
+> EFI partition table ID of 0xef. A number of arm devices will not
+> find their firmware on a FAT partition with an ID of 0xef so also
+> allow the original FAT12/16/32 partition IDs as they are also
+> permissable for an ESP.
 
-Some local changes have been applied:
-1. Enable static_assert() for defined structures to be sure
-that all of them have correct sizes.
-2. Adjuste types in bootloader_control structure with bitfields
-(uint8_t -> uint16_t). It seems that gcc just doesn't like bitfields
-that cross the width of the type. Changing the type doesn't change
-the layout though.
-This addresses this gcc note:
-In file included from boot/android_ab.c:7:
-include/android_bootloader_message.h:230:1: note: offset of packed bit-field ‘merge_status’ has changed in GCC 4.4
-  230 | } __attribute__((packed));
+Hi Peter,
 
-[1] https://android.googlesource.com/platform/bootable/recovery/+/main/bootloader_message/include/bootloader_message/bootloader_message.h
-[2] https://android.googlesource.com/platform/hardware/interfaces/+/main/boot/1.1/default/boot_control/include/private/boot_control_definition.h
+Any reason not to include 0x0c as well?  That is what we use on
+OpenBSD/armv7 and OpenBSD/arm64.  And as far as I know all UEFI
+implementations (on arm64 at least) boot from such a partition.
 
-CC: Alex Deymo <deymo@google.com>
-CC: Sam Protsenko <semen.protsenko@linaro.org>
-CC: Eugeniu Rosca <erosca@de.adit-jv.com>
-CC: Simon Glass <sjg@chromium.org>
-Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
----
+(And yes, we use that partition type because we want to have a
+bootable image that works on the various Raspberry Pi models).
 
- include/android_bootloader_message.h | 104 +++++++++++++++++++++++----
- 1 file changed, 92 insertions(+), 12 deletions(-)
+That said, what problem does this fix?  And what happens if we have
+both a 0xea and a 0x01/0x06/0x0b/0x0c partition?  In that case U-Boot
+should probably prefer the 0xea over the others as the ESP.
 
-diff --git a/include/android_bootloader_message.h b/include/android_bootloader_message.h
-index 286d7ab0f31..75198fc9dc2 100644
---- a/include/android_bootloader_message.h
-+++ b/include/android_bootloader_message.h
-@@ -21,17 +21,22 @@
-  * stddef.h
-  */
- #include <compiler.h>
-+#include <linux/build_bug.h>
- #endif
- 
- // Spaces used by misc partition are as below:
- // 0   - 2K     For bootloader_message
- // 2K  - 16K    Used by Vendor's bootloader (the 2K - 4K range may be optionally used
- //              as bootloader_message_ab struct)
--// 16K - 64K    Used by uncrypt and recovery to store wipe_package for A/B devices
-+// 16K - 32K    Used by uncrypt and recovery to store wipe_package for A/B devices
-+// 32K - 64K    System space, used for miscellanious AOSP features. See below.
- // Note that these offsets are admitted by bootloader,recovery and uncrypt, so they
- // are not configurable without changing all of them.
- static const size_t BOOTLOADER_MESSAGE_OFFSET_IN_MISC = 0;
-+static const size_t VENDOR_SPACE_OFFSET_IN_MISC = 2 * 1024;
- static const size_t WIPE_PACKAGE_OFFSET_IN_MISC = 16 * 1024;
-+static const size_t SYSTEM_SPACE_OFFSET_IN_MISC = 32 * 1024;
-+static const size_t SYSTEM_SPACE_SIZE_IN_MISC = 32 * 1024;
- 
- /* Bootloader Message (2-KiB)
-  *
-@@ -81,24 +86,67 @@ struct bootloader_message {
-     char reserved[1184];
- };
- 
-+// Holds Virtual A/B merge status information. Current version is 1. New fields
-+// must be added to the end.
-+struct misc_virtual_ab_message {
-+  uint8_t version;
-+  uint32_t magic;
-+  uint8_t merge_status;  // IBootControl 1.1, MergeStatus enum.
-+  uint8_t source_slot;   // Slot number when merge_status was written.
-+  uint8_t reserved[57];
-+} __attribute__((packed));
-+
-+struct misc_memtag_message {
-+  uint8_t version;
-+  uint32_t magic; // magic string for treble compat
-+  uint32_t memtag_mode;
-+  uint8_t reserved[55];
-+} __attribute__((packed));
-+
-+struct misc_kcmdline_message {
-+  uint8_t version;
-+  uint32_t magic;
-+  uint64_t kcmdline_flags;
-+  uint8_t reserved[51];
-+} __attribute__((packed));
-+
-+#define MISC_VIRTUAL_AB_MESSAGE_VERSION 2
-+#define MISC_VIRTUAL_AB_MAGIC_HEADER 0x56740AB0
-+
-+#define MISC_MEMTAG_MESSAGE_VERSION 1
-+#define MISC_MEMTAG_MAGIC_HEADER 0x5afefe5a
-+#define MISC_MEMTAG_MODE_MEMTAG 0x1
-+#define MISC_MEMTAG_MODE_MEMTAG_ONCE 0x2
-+#define MISC_MEMTAG_MODE_MEMTAG_KERNEL 0x4
-+#define MISC_MEMTAG_MODE_MEMTAG_KERNEL_ONCE 0x8
-+#define MISC_MEMTAG_MODE_MEMTAG_OFF 0x10
-+// This is set when the state was overridden forcibly. This does not need to be
-+// interpreted by the bootloader but is only for bookkeeping purposes so
-+// userspace knows what to do when the override is undone.
-+// See system/extras/mtectrl in AOSP for more information.
-+#define MISC_MEMTAG_MODE_FORCED 0x20
-+
-+#define MISC_KCMDLINE_MESSAGE_VERSION 1
-+#define MISC_KCMDLINE_MAGIC_HEADER 0x6ab5110c
-+#define MISC_KCMDLINE_BINDER_RUST 0x1
- /**
-  * We must be cautious when changing the bootloader_message struct size,
-  * because A/B-specific fields may end up with different offsets.
-  */
--#ifndef __UBOOT__
-+
- #if (__STDC_VERSION__ >= 201112L) || defined(__cplusplus)
- static_assert(sizeof(struct bootloader_message) == 2048,
-               "struct bootloader_message size changes, which may break A/B devices");
- #endif
--#endif /* __UBOOT__ */
- 
- /**
-  * The A/B-specific bootloader message structure (4-KiB).
-  *
-  * We separate A/B boot control metadata from the regular bootloader
-  * message struct and keep it here. Everything that's A/B-specific
-- * stays after struct bootloader_message, which should be managed by
-- * the A/B-bootloader or boot control HAL.
-+ * stays after struct bootloader_message, which belongs to the vendor
-+ * space of /misc partition. Also, the A/B-specific contents should be
-+ * managed by the A/B-bootloader or boot control HAL.
-  *
-  * The slot_suffix field is used for A/B implementations where the
-  * bootloader does not set the androidboot.ro.boot.slot_suffix kernel
-@@ -124,12 +172,10 @@ struct bootloader_message_ab {
-  * Be cautious about the struct size change, in case we put anything post
-  * bootloader_message_ab struct (b/29159185).
-  */
--#ifndef __UBOOT__
- #if (__STDC_VERSION__ >= 201112L) || defined(__cplusplus)
- static_assert(sizeof(struct bootloader_message_ab) == 4096,
-               "struct bootloader_message_ab size changes");
- #endif
--#endif /* __UBOOT__ */
- 
- #define BOOT_CTRL_MAGIC   0x42414342 /* Bootloader Control AB */
- #define BOOT_CTRL_VERSION 1
-@@ -165,11 +211,13 @@ struct bootloader_control {
-     // Version of struct being used (see BOOT_CTRL_VERSION).
-     uint8_t version;
-     // Number of slots being managed.
--    uint8_t nb_slot : 3;
-+    uint16_t nb_slot : 3;
-     // Number of times left attempting to boot recovery.
--    uint8_t recovery_tries_remaining : 3;
-+    uint16_t recovery_tries_remaining : 3;
-+    // Status of any pending snapshot merge of dynamic partitions.
-+    uint16_t merge_status : 3;
-     // Ensure 4-bytes alignment for slot_info field.
--    uint8_t reserved0[2];
-+    uint8_t reserved0[1];
-     // Per-slot information.  Up to 4 slots.
-     struct slot_metadata slot_info[4];
-     // Reserved for further use.
-@@ -179,25 +227,46 @@ struct bootloader_control {
-     uint32_t crc32_le;
- } __attribute__((packed));
- 
--#ifndef __UBOOT__
- #if (__STDC_VERSION__ >= 201112L) || defined(__cplusplus)
- static_assert(sizeof(struct bootloader_control) ==
-               sizeof(((struct bootloader_message_ab *)0)->slot_suffix),
-               "struct bootloader_control has wrong size");
-+static_assert(sizeof(struct misc_virtual_ab_message) == 64,
-+              "struct misc_virtual_ab_message has wrong size");
-+static_assert(sizeof(struct misc_memtag_message) == 64,
-+              "struct misc_memtag_message has wrong size");
-+static_assert(sizeof(struct misc_kcmdline_message) == 64,
-+              "struct misc_kcmdline_message has wrong size");
- #endif
--#endif /* __UBOOT__ */
- 
- #ifndef __UBOOT__
-+
-+// This struct is not meant to be used directly, rather, it is to make
-+// computation of offsets easier. New fields must be added to the end.
-+struct misc_system_space_layout {
-+  misc_virtual_ab_message virtual_ab_message;
-+  misc_memtag_message memtag_message;
-+  misc_kcmdline_message kcmdline_message;
-+} __attribute__((packed));
-+
- #ifdef __cplusplus
- 
- #include <string>
- #include <vector>
- 
-+// Gets the block device name of /misc partition.
-+std::string get_misc_blk_device(std::string* err);
-+
- // Return the block device name for the bootloader message partition and waits
- // for the device for up to 10 seconds. In case of error returns the empty
- // string.
- std::string get_bootloader_message_blk_device(std::string* err);
- 
-+// Writes |size| bytes of data from buffer |p| to |misc_blk_device| at |offset|. If the write fails,
-+// sets the error message in |err|.
-+bool write_misc_partition(const void* p, size_t size, const std::string& misc_blk_device,
-+                          size_t offset, std::string* err);
-+
- // Read bootloader message into boot. Error message will be set in err.
- bool read_bootloader_message(bootloader_message* boot, std::string* err);
- 
-@@ -242,6 +311,17 @@ bool read_wipe_package(std::string* package_data, size_t size, std::string* err)
- // Write the wipe package into BCB (to offset WIPE_PACKAGE_OFFSET_IN_MISC).
- bool write_wipe_package(const std::string& package_data, std::string* err);
- 
-+// Read or write the Virtual A/B message from system space in /misc.
-+bool ReadMiscVirtualAbMessage(misc_virtual_ab_message* message, std::string* err);
-+bool WriteMiscVirtualAbMessage(const misc_virtual_ab_message& message, std::string* err);
-+
-+// Read or write the memtag message from system space in /misc.
-+bool ReadMiscMemtagMessage(misc_memtag_message* message, std::string* err);
-+bool WriteMiscMemtagMessage(const misc_memtag_message& message, std::string* err);
-+
-+// Read or write the kcmdline message from system space in /misc.
-+bool ReadMiscKcmdlineMessage(misc_kcmdline_message* message, std::string* err);
-+bool WriteMiscKcmdlineMessage(const misc_kcmdline_message& message, std::string* err);
- #else
- 
- #include <stdbool.h>
--- 
-2.34.1
+Oh, and while your're at it, the hex constants are a bit inconsistent
+(0x1/0x6 vs. 0x0b).
 
+Cheers,
+
+Mark
+
+> Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
+> ---
+>  disk/part_dos.c | 6 ++++++
+>  1 file changed, 6 insertions(+)
+> 
+> diff --git a/disk/part_dos.c b/disk/part_dos.c
+> index 567ead7511d..303eb1d13ee 100644
+> --- a/disk/part_dos.c
+> +++ b/disk/part_dos.c
+> @@ -40,6 +40,12 @@ static int get_bootable(dos_partition_t *p)
+>  {
+>  	int ret = 0;
+>  
+> +	if (p->sys_ind == 0x1)
+> +		ret |= PART_EFI_SYSTEM_PARTITION;
+> +	if (p->sys_ind == 0x6)
+> +		ret |= PART_EFI_SYSTEM_PARTITION;
+> +	if (p->sys_ind == 0x0b)
+> +		ret |= PART_EFI_SYSTEM_PARTITION;
+>  	if (p->sys_ind == 0xef)
+>  		ret |= PART_EFI_SYSTEM_PARTITION;
+>  	if (p->boot_ind == 0x80)
+> -- 
+> 2.43.1
+> 
+> 
