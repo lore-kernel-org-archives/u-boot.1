@@ -4,55 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06731C48BC3
-	for <u-boot@archiver.kernel.org>; Mon, 19 Feb 2024 18:24:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A035EC48BF8
+	for <u-boot@archiver.kernel.org>; Mon, 19 Feb 2024 18:33:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 62E6D87F53;
-	Mon, 19 Feb 2024 19:24:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 6CFBC87F69;
+	Mon, 19 Feb 2024 19:33:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1708367094;
-	bh=qXyHT2x4wz9kDLBqcZhv0Xc8nurYkYP0N1G2UZfZKw4=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=DI05ETRdGkHeVyK1WnB0T6QZEmRbE1+ATqiDMqtBksFrEJLeIXe6MFV123/I1dN6+
-	 h386Hve3PHRWWI4G/YNf0vNz5H5VFuqYmEyW//kmoqeb/AgdFOpEhODW7bQvSISz+K
-	 8cVCK06FvZWKl/AYAtbKxBb07GmhrPA9Z1pjfZ5CVHGVzWWmoUPuJNAcHhQSnhJ6yU
-	 5lEOLvUlbEMGe+FpEFKtSeJVQW22wbji/eiGjcSnQ45Wx+YWwDQR6k8FaHdEjK0Uup
-	 V4P41piX9y0E2ix/oPHeSN/mVMnRK/wVFqhFSeuPUAOakSVApBfXG5LOl0H7YGdZe+
-	 vCLrTQrH10oFQ==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="ldB0dHO/";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 474A487F63; Mon, 19 Feb 2024 19:33:25 +0100 (CET)
+Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
+ [IPv6:2607:f8b0:4864:20::c2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 6E46787DB7;
- Mon, 19 Feb 2024 19:24:44 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1708367093;
- bh=qXyHT2x4wz9kDLBqcZhv0Xc8nurYkYP0N1G2UZfZKw4=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=HBKDs2WWhPg3XnyvueJU2DLtAaXQEYeErI1iSQWfJhI1gf5BPsKp6dc1eW5NkZgh4
- A28TOSBchN1WgHMXE2qzROn1OBxx+bGCN62GL/G20kIZPZCWSwotETw2tGJjihcn3s
- PKop2PP2ymSnusdbELqCTI1wsSsUoKrBFfoKGoEiKAwuBki2BLR2HqCFngWbkhQ8wx
- CgFDHW/3l1rbcLYTzpFPU7C9v+dW9ZRDG18S8xu+5sivVM5AakNBT6+/SdpaZ569b+
- uajWvD61s2385BDY54H2HUm4r/Vt6f9mmt1cPOFEK7iuKade9CbVEGTrB2niosZNQx
- WE2YskIS89cnw==
-Message-ID: <053161b6-3eee-4c48-b163-70b22bd116bc@denx.de>
-Date: Mon, 19 Feb 2024 19:24:15 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id B0FE087DEB
+ for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 19:32:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jagan@amarulasolutions.com
+Received: by mail-oo1-xc2b.google.com with SMTP id
+ 006d021491bc7-59d78deb469so2959069eaf.1
+ for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 10:32:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1708367575; x=1708972375;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=nvNPwkbblPXfY0RHMIbafQ2c4kOdJgIIVIfpVB0GVxc=;
+ b=ldB0dHO/5D7qML+WHb4y2uqstdE8+hfH71aFloAdBVSV88hJ8f3YuZy7u5LvuiUP7I
+ cC9privvkbCW1+5eZw9fTYrVYwys5m5SlIESGrjU/q7BS50PdnbRzCGHYd/hmDW7loeS
+ pGNloQa9pkdnxEXcZyu4F5/bJaGZDW7iw2i7w=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1708367575; x=1708972375;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=nvNPwkbblPXfY0RHMIbafQ2c4kOdJgIIVIfpVB0GVxc=;
+ b=p5fJTQDWXWnr1v+RpMIy8Po3UJyk7974/Qgd5CvONDP9h1CRkxQdrzRy4JjMowgAi2
+ f+S0UKe1/IQpOnNtHJwfEAV3T+h0v0tHLwc33bj0A05zwe+bsGz77Mc1K+57lCnSNyLQ
+ KtbE8dNpYWzYyjq6tUPHIl6VeTquV8wpzuj/zTXLYlhqvFa6y/2qkGfsBVjb8FafW7oi
+ +6NnKoZmP1rbpHSPwkMpk4criBCHwNoKlherZmS8+S990ZapU5MsuCCak3ImmWYXHpao
+ qcP5K6klm9dzr8kBAi5mcV4nbgmq+W+tMvUiyYu1hI4Do6GuknO8s9tCQYLaxwvWdTHg
+ +45A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUrDu9nOZlb3ZFFC8YF1Sba/SeCYE3vgg4Cs16Trs6ekW3zMWXpZJh9RxT76/gU1dDu61EQRfE1UPMlZD85ZjRGmChX/g==
+X-Gm-Message-State: AOJu0Yy+EHXKbct8hY85IsM2pMpqOBBZ9jg8ubV5vhU7POI10symnqPu
+ DNXIE5IulvhSilNAuXj435uAs4YO2rOvAcM3BS46mRnaB8KKuQRBnR4hyLxeYEAg/c0NqjaF9ea
+ UTR4daVvbDkxMiz1D/x5R006t83rA3F0pFg8o6g==
+X-Google-Smtp-Source: AGHT+IFV9YXiAdxWxyHln1qtXQNqg7m5dg5eyS1vfJm0UjhG5EWyHC7ms/0iZIskLREFIfupeQe5/2rS4eGvKRpSF60=
+X-Received: by 2002:a05:6359:4c03:b0:17b:4a67:4e80 with SMTP id
+ kj3-20020a0563594c0300b0017b4a674e80mr1579182rwc.11.1708367575598; Mon, 19
+ Feb 2024 10:32:55 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] common: usb-hub: Reset USB 3.0 hubs only
-To: Shantur Rathore <i@shantur.com>, u-boot@lists.denx.de
-Cc: dsimic@manjaro.org, andre.przywara@arm.com,
- Hector Martin <marcan@marcan.st>, Tom Rini <trini@konsulko.com>
-References: <20240214095403.53051-1-i@shantur.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240214095403.53051-1-i@shantur.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20240117075154.58747-1-jagan@amarulasolutions.com>
+ <20240117075154.58747-15-jagan@amarulasolutions.com>
+ <8facae6f-425b-4389-a826-8269eef92aa3@kwiboo.se>
+In-Reply-To: <8facae6f-425b-4389-a826-8269eef92aa3@kwiboo.se>
+From: Jagan Teki <jagan@amarulasolutions.com>
+Date: Tue, 20 Feb 2024 00:02:44 +0530
+Message-ID: <CAMty3ZCdyW-bPG4gdz=hAaJyxBS4aKh_VRmaFTDMA0wTAk7q9w@mail.gmail.com>
+Subject: Re: [PATCH v3 14/17] ARM: dts: rk3328: Enable VOP for bootph-all
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Anatolij Gustschin <agust@denx.de>,
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Andre Przywara <andre.przywara@arm.com>, Kever Yang <kever.yang@rock-chips.com>,
+ Simon Glass <sjg@chromium.org>, Heiko Stuebner <heiko@sntech.de>,
+ Andy Yan <andyshrk@163.com>, 
+ Robin Murphy <robin.murphy@arm.com>, Da Xue <da.xue@libretech.co>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,54 +95,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/14/24 10:54, Shantur Rathore wrote:
-> Additional testing of the changes introduced in commit 33e06dcbe57a "common:
-> usb-hub: Reset hub port before scanning") revealed that some USB 2.0 and 3.0
-> flash drives didn't work in U-Boot on some Allwinner SoCs that support USB
-> 2.0 interfaces only.  More precisely, some of the tested USB 2.0 and 3.0
-> flash drives failed to be detected and work on an OrangePi Zero 3, based on
-> the Allwinner H616 SoC that supports USB 2.0 only, while the same USB flash
-> drives worked just fine on a Pine64 H64, based on the Allwinner H6 SoC that
-> supports both USB 2.0 and USB 3.0 interfaces.
-> 
-> The USB ID of the above-mentioned USB 3.0 flash drive that failed to work is
-> 1f75:0917 (Innostor Technology Corporation IS917 Mass storage), it is 32 GB
-> in size and sold under the PNY brand.  The mentioned USB 2.0 drive is some
-> inexpensive no-name drive with an invalid USB ID.
-> 
-> Resetting USB 3.0 hubs only, which this patch introduces to the USB hub
-> resets, has been tested to work as expected, resolving the identified issues
-> on the Allwinner H616, while not introducing any new issues on other tested
-> Allwinner SoCs.  Thus, let's fix it that way.
-> 
-> According to the USB 3.0 specification, resetting a USB 3.0 port is required
-> when an attached USB device transitions between different states, such as
-> when it resumes from suspend.  Though, the Linux kernel performs additional
-> USB 3.0 port resets upon initial USB device attachment, as visible in commit
-> 07194ab7be63 ("USB: Reset USB 3.0 devices on (re)discovery") in the kernel
-> source, to ensure proper state of the USB 3.0 hub port and proper USB mode
-> negotiation during the initial USB device attachment and enumeration.
-> 
-> These additional types of USB port resets don't exist for USB 2.0 hubs,
-> according the USB 2.0 specification.  The resets seem to be added to the USB
-> 3.0 specification as part of the port and device mode negotiation.
-> 
-> The Linux kernel resets USB 3.0 (i.e. SuperSpeed) hubs only, as visible in
-> commit 10d674a82e55 ("USB: When hot reset for USB3 fails, try warm reset.")
-> in the kernel source.  The check for SuperSpeed hubs is performed in a way
-> that also applies to newer SuperSpeed Plus (USB 3.1 or 3.2) hubs as well,
-> which hopefully makes it future proof.
-> 
-> Fixes: commit 33e06dcbe57a ("common: usb-hub: Reset hub port before scanning")
-> 
-> Link:
-> https://lore.kernel.org/u-boot/20240207102327.35125-1-i@shantur.com/T/#u
-> Link:
-> https://lore.kernel.org/u-boot/20240201164604.13315fa6@donnerap.manchester.arm.com/T/#u
-> 
-> Signed-off-by: Shantur Rathore <i@shantur.com>
-> Helped-by: Dragan Simic <dsimic@manjaro.org>
-> Tested-by: Andre Przywara <andre.przywara@arm.com>
-> Reviewed-by: Dragan Simic <dsimic@manjaro.org>
+Hi Jonas,
 
-Reviewed-by: Marek Vasut <marex@denx.de>
+On Mon, Feb 19, 2024 at 10:51=E2=80=AFPM Jonas Karlman <jonas@kwiboo.se> wr=
+ote:
+>
+> Hi Jagan,
+>
+> On 2024-01-17 08:51, Jagan Teki wrote:
+> > Model: Firefly roc-rk3328-cc
+> > DRAM: 1 GiB (effective 1022 MiB)
+> > Video device 'vop@ff370000' cannot allocate frame buffer memory -ensure=
+ the device is set up before relocation
+> > Error binding driver 'rockchip_rk3328_vop': -28
+> > Some drivers failed to bind
+> > initcall sequence 000000003ffcd5e8 failed at call 000000000021a5c4 (err=
+=3D-28)
+> >  ### ERROR ### Please RESET the board ###
+> >
+> > Signed-off-by: Jagan Teki <jagan@amarulasolutions.com>
+> > ---
+> > Changes for v3, v2:
+> > - none
+> >
+> >  arch/arm/dts/rk3328-u-boot.dtsi | 4 ++++
+> >  1 file changed, 4 insertions(+)
+> >
+> > diff --git a/arch/arm/dts/rk3328-u-boot.dtsi b/arch/arm/dts/rk3328-u-bo=
+ot.dtsi
+> > index a9f2536de2..5258fec566 100644
+> > --- a/arch/arm/dts/rk3328-u-boot.dtsi
+> > +++ b/arch/arm/dts/rk3328-u-boot.dtsi
+> > @@ -68,3 +68,7 @@
+> >  &spi0 {
+> >       bootph-all;
+> >  };
+> > +
+> > +&vop {
+> > +     bootph-all;
+>
+> bootph-some-ram is better, TPL or SPL does not need or use the vop node.
+>
+> I am working on a cleanup series for rk3399 and that series will include
+> a change from bootph-all to bootph-some-ram of vop nodes on rk3399.
+
+Sure, we can even update the same later as these were in the ML from
+months ago. I will mark them as well.
+
+Jagan.
