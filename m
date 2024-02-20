@@ -4,35 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6494C48BC3
-	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 10:58:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96384C48BC4
+	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 11:04:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C6D187D98;
-	Tue, 20 Feb 2024 11:58:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 569A487F91;
+	Tue, 20 Feb 2024 12:01:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F46487F52; Tue, 20 Feb 2024 11:58:42 +0100 (CET)
+ id 9344A87D9A; Tue, 20 Feb 2024 12:01:41 +0100 (CET)
 Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
  [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id E37A887D82
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 11:58:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id ABE3287F9E
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 12:00:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
 X-IronPort-AV: E=Sophos;i="6.06,172,1705330800"; 
- d="asc'?scan'208";a="194580584"
-Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie5.idc.renesas.com with ESMTP; 20 Feb 2024 19:58:33 +0900
+ d="asc'?scan'208";a="194580744"
+Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
+ by relmlie5.idc.renesas.com with ESMTP; 20 Feb 2024 20:00:26 +0900
 Received: from [10.226.92.69] (unknown [10.226.92.69])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id C7429400BC1A;
- Tue, 20 Feb 2024 19:58:30 +0900 (JST)
-Message-ID: <e577c76e-5141-47d6-bc34-8c5027750f49@bp.renesas.com>
-Date: Tue, 20 Feb 2024 10:58:30 +0000
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id 30CB742FA46C;
+ Tue, 20 Feb 2024 20:00:22 +0900 (JST)
+Message-ID: <05c8a770-99e1-4e0b-bd5c-c145e21e4d60@bp.renesas.com>
+Date: Tue, 20 Feb 2024 11:00:21 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] mmc: Add generic tuning flag
+Subject: Re: [PATCH 3/3] mmc: renesas-sdhi: Do not access SCC during tuning in
+ send_cmd callback
 Content-Language: en-GB
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: Hai Pham <hai.pham.ud@renesas.com>, Jaehoon Chung
@@ -41,13 +42,13 @@ Cc: Hai Pham <hai.pham.ud@renesas.com>, Jaehoon Chung
  Tom Rini <trini@konsulko.com>,
  Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
 References: <20240220083755.34449-1-marek.vasut+renesas@mailbox.org>
- <20240220083755.34449-2-marek.vasut+renesas@mailbox.org>
+ <20240220083755.34449-3-marek.vasut+renesas@mailbox.org>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 Organization: Renesas Electronics Corporation
-In-Reply-To: <20240220083755.34449-2-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20240220083755.34449-3-marek.vasut+renesas@mailbox.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------nwHb0hOxf0PZp5zi3BnrpPX0"
+ boundary="------------Z4ABb4yWK6HV2oofxDxD5r0w"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,8 +66,8 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------nwHb0hOxf0PZp5zi3BnrpPX0
-Content-Type: multipart/mixed; boundary="------------piI0w04IbtiPAKlsoNOLWfNG";
+--------------Z4ABb4yWK6HV2oofxDxD5r0w
+Content-Type: multipart/mixed; boundary="------------QUp4Vq9abBAV4AUYxiAH9orh";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
@@ -75,23 +76,60 @@ Cc: Hai Pham <hai.pham.ud@renesas.com>, Jaehoon Chung
  Peng Fan <peng.fan@nxp.com>, Sean Anderson <seanga2@gmail.com>,
  Tom Rini <trini@konsulko.com>,
  Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
-Message-ID: <e577c76e-5141-47d6-bc34-8c5027750f49@bp.renesas.com>
-Subject: Re: [PATCH 2/3] mmc: Add generic tuning flag
+Message-ID: <05c8a770-99e1-4e0b-bd5c-c145e21e4d60@bp.renesas.com>
+Subject: Re: [PATCH 3/3] mmc: renesas-sdhi: Do not access SCC during tuning in
+ send_cmd callback
 References: <20240220083755.34449-1-marek.vasut+renesas@mailbox.org>
- <20240220083755.34449-2-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20240220083755.34449-2-marek.vasut+renesas@mailbox.org>
+ <20240220083755.34449-3-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20240220083755.34449-3-marek.vasut+renesas@mailbox.org>
 
---------------piI0w04IbtiPAKlsoNOLWfNG
-Content-Type: multipart/mixed; boundary="------------kNG09cfmUzh9rfu2A9VGVh0F"
+--------------QUp4Vq9abBAV4AUYxiAH9orh
+Content-Type: multipart/mixed; boundary="------------RZ0khgQUteEIiicixF6WQGE2"
 
---------------kNG09cfmUzh9rfu2A9VGVh0F
+--------------RZ0khgQUteEIiicixF6WQGE2
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
 On 20/02/2024 08:37, Marek Vasut wrote:
-> Set generic mmc->tuning flag when performing tuning to indicate
-> this condition to drivers. Drivers may use this to bypass various
-> checks during tuning.
+> Do not access SCC when sending commands during tuning operation as that=
+
+> will disrupt the tuning operation. The tuning operation is adjusting th=
+e
+> SCC settings itself in execute_tuning callback.
+>=20
+> When renesas_sdhi_execute_tuning() is called by the MMC core code, a lo=
+op
+> which consists of renesas_sdhi_prepare_tuning(), mmc_send_tuning() and
+> renesas_sdhi_compare_scc_data() iterates over each SCC tuning tap.
+>=20
+> The renesas_sdhi_prepare_tuning() configures the SCC tuning tap number =
+into
+> hardware, mmc_send_tuning() triggers transfer of tuning block which dep=
+ends
+> on the bus mode for which the bus is currently being tuned, this inform=
+ation
+> is supplied by the MMC core code, and finally renesas_sdhi_compare_scc_=
+data()
+> tests the received tuning block for validity.
+>=20
+> Because renesas_sdhi_prepare_tuning() configures the SCC tuning tap int=
+o
+> the hardware to fit the tuning operation, mmc_send_tuning() which trigg=
+ers
+> command transfer using renesas_sdhi_send_cmd() must not manipulate with=
+
+> the SCC in any way. Currently renesas_sdhi_send_cmd() does unconditiona=
+lly
+> call renesas_sdhi_check_scc_error(), which may adjust the SCC tuning ta=
+p
+> position by writing RENESAS_SDHI_SCC_TAPSET, which would overwrite the
+> required tuning configuration set by renesas_sdhi_prepare_tuning() and
+> disrupt the tuning operation.
+>=20
+> Fix this by skipping the renesas_sdhi_check_scc_error() call in case th=
+e
+> MMC subsystem is in tuning state. This way, the SCC settings are left
+> unmodified by command transfer during tuning operation.
 >=20
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > ---
@@ -104,42 +142,28 @@ On 20/02/2024 08:37, Marek Vasut wrote:
 > Cc: Tom Rini <trini@konsulko.com>
 > Cc: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
 > ---
->  drivers/mmc/mmc-uclass.c | 8 +++++++-
->  include/mmc.h            | 1 +
->  2 files changed, 8 insertions(+), 1 deletion(-)
+>  drivers/mmc/renesas-sdhi.c | 5 ++++-
+>  1 file changed, 4 insertions(+), 1 deletion(-)
 >=20
-> diff --git a/drivers/mmc/mmc-uclass.c b/drivers/mmc/mmc-uclass.c
-> index 328456831dd..304bd5eaee2 100644
-> --- a/drivers/mmc/mmc-uclass.c
-> +++ b/drivers/mmc/mmc-uclass.c
-> @@ -124,7 +124,13 @@ static int dm_mmc_execute_tuning(struct udevice *d=
-ev, uint opcode)
+> diff --git a/drivers/mmc/renesas-sdhi.c b/drivers/mmc/renesas-sdhi.c
+> index 9770b6bb5e1..316b75b35fe 100644
+> --- a/drivers/mmc/renesas-sdhi.c
+> +++ b/drivers/mmc/renesas-sdhi.c
+> @@ -798,9 +798,12 @@ static int renesas_sdhi_send_cmd(struct udevice *d=
+ev, struct mmc_cmd *cmd,
+>  #if CONFIG_IS_ENABLED(MMC_UHS_SUPPORT) || \
+>      CONFIG_IS_ENABLED(MMC_HS200_SUPPORT) || \
+>      CONFIG_IS_ENABLED(MMC_HS400_SUPPORT)
+> +	struct mmc_uclass_priv *upriv =3D dev_get_uclass_priv(dev);
+>  	struct tmio_sd_priv *priv =3D dev_get_priv(dev);
+> +	struct mmc *mmc =3D upriv->mmc;
 > =20
->  int mmc_execute_tuning(struct mmc *mmc, uint opcode)
->  {
-> -	return dm_mmc_execute_tuning(mmc->dev, opcode);
-> +	int ret;
-> +
-> +	mmc->tuning =3D true;
-> +	ret =3D dm_mmc_execute_tuning(mmc->dev, opcode);
-> +	mmc->tuning =3D false;
-> +
-> +	return ret;
->  }
->  #endif
+> -	renesas_sdhi_check_scc_error(dev);
+> +	if (!mmc->tuning)
+> +		renesas_sdhi_check_scc_error(dev);
 > =20
-> diff --git a/include/mmc.h b/include/mmc.h
-> index 92cffc6a19a..47ccf5f45a1 100644
-> --- a/include/mmc.h
-> +++ b/include/mmc.h
-> @@ -736,6 +736,7 @@ struct mmc {
->  				  * accessing the boot partitions
->  				  */
->  	u32 quirks;
-> +	bool tuning;
->  	bool hs400_tuning;
-> =20
->  	enum bus_mode user_speed_mode; /* input speed mode from user */
+>  	if (cmd->cmdidx =3D=3D MMC_CMD_SEND_STATUS)
+>  		renesas_sdhi_adjust_hs400_mode_enable(priv);
 
 Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 Tested-by: Paul Barker <paul.barker.ct@bp.renesas.com>
@@ -149,7 +173,7 @@ Tested-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 --=20
 Paul Barker
 
---------------kNG09cfmUzh9rfu2A9VGVh0F
+--------------RZ0khgQUteEIiicixF6WQGE2
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -213,21 +237,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------kNG09cfmUzh9rfu2A9VGVh0F--
+--------------RZ0khgQUteEIiicixF6WQGE2--
 
---------------piI0w04IbtiPAKlsoNOLWfNG--
+--------------QUp4Vq9abBAV4AUYxiAH9orh--
 
---------------nwHb0hOxf0PZp5zi3BnrpPX0
+--------------Z4ABb4yWK6HV2oofxDxD5r0w
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZdSF1gUDAAAAAAAKCRDbaV4Vf/JGvTMr
-AQDHJC8TC6W0ZSWXRY6qrUFl2OgnBIEhu/QkiuIVCbyxrwD/Wp3PkxelAUARWTaRKbJe9jpJBHXb
-UNhnaMDoinfwDA4=
-=ZRWw
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZdSGRQUDAAAAAAAKCRDbaV4Vf/JGvYrH
+AP0V8maj1pX5eGieBGOcBQdemItxk7OjjDwQMV3LtpW2WQEAxp766x2UCX/MR7ztkF0SIGI2Ung4
+cA+h73J/vK7g7A4=
+=5mdV
 -----END PGP SIGNATURE-----
 
---------------nwHb0hOxf0PZp5zi3BnrpPX0--
+--------------Z4ABb4yWK6HV2oofxDxD5r0w--
