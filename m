@@ -4,82 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B064BC48BC4
-	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 11:46:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FA66C48BC3
+	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 11:54:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8BB9487D1A;
-	Tue, 20 Feb 2024 12:46:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id CBEE587F95;
+	Tue, 20 Feb 2024 12:54:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vSuUyCr4";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="tR2lG4a3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F59F87964; Tue, 20 Feb 2024 12:46:21 +0100 (CET)
-Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
- [IPv6:2a00:1450:4864:20::229])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id ABE4687F96; Tue, 20 Feb 2024 12:54:40 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 97B7687D2C
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 12:45:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5E77A83346
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 12:54:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-2d09cf00214so57680871fa.0
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 03:45:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708429453; x=1709034253; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=umxEw3DZPLcyfF54fZhxUr5EpHkw7p0hEe6uo1ZsSmU=;
- b=vSuUyCr4z/8WbKUGUEwqiFlp3P1DCKF3t48OOKzD5rFfoRcQuk+djuk0uUOteBxU2O
- b68Uot9UfIIM68B5LMSIxrLQPGz5uCJC8IcDodyGak+hQgFqfb3gq+Q67XDBhApjkHHo
- BG5vRYL8Qcl2zf/DyVjwhPZpJwOlU0EgUdkpQltApmLnpYoF/8T+RkDydzEK6srkQ/Kt
- pGhIg6QnEx03yBfno9lR3qHXbT1sbY9yT2toKNf4x5mHy284FdKfgFO7ytWFRm70583x
- c+JOtV48DECh8ymBXwQvT+Gr184Gakbh2/Y+HymGFGF1olhBgh/ljZG6MkSzHJ+2XSRS
- orLg==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 143653F68E
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 11:54:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1708430074;
+ bh=sBJsrfXsg+5koADtVd+VStsi4cpY2WzYSO4jNy5prZI=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=tR2lG4a3za7qI1zJhMjgxkIRtvusiUCly9cjtPWuBkedl+2i6MFWj7OeuX9rR1n6F
+ H/BpGUwQU+amS3kv71JH5FdtYjNnjXahfGUIvz4RLk78xhPcge1AelrxtD0YZ2bYoE
+ AHthu4/Yyh+GfMF/kZKREfK3AuKWslSwj8kIYZ8kOAO/U2gvv3TZMaXi2TyKgvOUL9
+ Gl1JBOI/pq6jfGbdb8hG4ojWUYFK5uAj5upQ+dpL1OfUtBAUfkEYqXb8K8BhZTxkGI
+ q0eHkNCdk9usw8NU/O+qOhMkwr6S50hS30MCV4n+yba3yLHd81+ezYUrKsEHe1I4PB
+ wgYjx572+M5YQ==
+Received: by mail-wr1-f69.google.com with SMTP id
+ ffacd0b85a97d-33d39bc6bf4so1372139f8f.0
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 03:54:34 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708429453; x=1709034253;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=umxEw3DZPLcyfF54fZhxUr5EpHkw7p0hEe6uo1ZsSmU=;
- b=jmtL+7SuxTKLZDslY1jf0d3F/w7904RmTcsF+9YpeYCOBVoR/AprPAaTpAgRsnKPmv
- qOeURx6YI4BDXx5JFaIhB/M50NipR+0L310VSD4JjFbXEPs/FA6I0Z8rdDZ+zLtEvO5k
- iKWS5tFnvY4DFaWwQwI6dF5UJC7OpUv9qukJIsezSmm8gEiOzSRz/otYDw0MEuyYN3aw
- Wquv9pwAHw3+H+Hc9aJd0i+0tvP8JvbhHomUanQFtCGmDLW8LaSYpppaiMHkWWcHuwIu
- TLFwQxj7AL479uyP8uonK+qkUecpF9X1wDUnACLGj7zmYZkBLb9Xl0RolzaQevdRE862
- Lnyw==
+ d=1e100.net; s=20230601; t=1708430073; x=1709034873;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=sBJsrfXsg+5koADtVd+VStsi4cpY2WzYSO4jNy5prZI=;
+ b=q1l3yJa3+CiMjc4MLlle7XI2BRveL9MQT7t4w6kEnMPhz/iRd7lC2QlHD/IpEmTeES
+ etfplc7tHWrXeq3Pqe+I8BZOC0Uqbb4HTBPhTYRNFz3iKGMWbVkpY2Q4ZlJ4EjBC1+Wx
+ D7iRfUES7/tHCF9udPrMOVKZhOF5vaCOD/aj9+qLhUWKxpJVNChHmeOFoMuyUbMRnq6R
+ eHZ0dGfTodKfiRuv2TmEOoETCW6q8UnRhwJtPwhwV+9ADLHbHM2aL6UyK+tVFhNB3eJN
+ OLHj7z1HUcyUmudPR0EIofWVKOzNeOUijEc7+cDHcYXtYAULbQsDdk3gAiIRdZm7xNhR
+ ellA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXAD2KAKjefWIiI8guvGGhowug4ZGbOS9ozQvU0y7DZ92K+KuhZphRrC8nGklgoyJUTpO9yfsATdPl20uyyvQRVIScs9w==
-X-Gm-Message-State: AOJu0Yx0XlDeTz8Fouri3IlWXzDFuaZfYFCHMZbW9EVPRXz7zdhHnB+U
- U0kVQeEjj/7sdWMuIw1aMIdCnx7xF+bIoGzXsJ37UOmTwkijzXGFq8tY/evVSug=
-X-Google-Smtp-Source: AGHT+IEiRa70YgY1uj3oTvZ1ojRNDVRkt/a7g3BXLI1kxwPSmWe/MU46FI/DW7y6dnbJrH5hRj2XdA==
-X-Received: by 2002:a05:6512:3409:b0:512:b3bf:b803 with SMTP id
- i9-20020a056512340900b00512b3bfb803mr3837469lfr.39.1708429453010; 
- Tue, 20 Feb 2024 03:44:13 -0800 (PST)
-Received: from [192.168.1.78] (host-92-17-96-232.as13285.net. [92.17.96.232])
+ AJvYcCW+pgjzisFb7NYXIJC0P8CIypRGvYjb/uWGLx1BAQCIbBBpPNEwcz4dYWSmyiOyv+EBc6aIKU3z08Vn8pdMw5KfjOm2sg==
+X-Gm-Message-State: AOJu0YwpTJyNqp5nJPIOCpGthXTfH0OgcS8WzAF1EWOiIhyfdSpV7s7v
+ SRX59Ac7sU/s9rOoLsK7LW30H7HS+ZAYCePPrpHicPleibkjyQcMGVb97XzQ5gl38xO7c/kRJM2
+ LF8bV70uSapcSsNj1W0CyrrkGxYatU0TFTL13bv788Dh+r0rrfttFZpDYBGiQQUYBF90=
+X-Received: by 2002:a05:6000:1286:b0:33d:3490:6e05 with SMTP id
+ f6-20020a056000128600b0033d34906e05mr6135616wrx.27.1708430073712; 
+ Tue, 20 Feb 2024 03:54:33 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHuEMVwsKGAypCufbGmBW3V+I1RSMzLbvHRhfSOID/iu9Ye/m79af8cvaBjvdDI5YcS7C5Wtw==
+X-Received: by 2002:a05:6000:1286:b0:33d:3490:6e05 with SMTP id
+ f6-20020a056000128600b0033d34906e05mr6135599wrx.27.1708430073290; 
+ Tue, 20 Feb 2024 03:54:33 -0800 (PST)
+Received: from workstation5.fritz.box
+ (ip-178-202-040-247.um47.pools.vodafone-ip.de. [178.202.40.247])
  by smtp.gmail.com with ESMTPSA id
- l20-20020a05600c1d1400b0041256ab5becsm11675855wms.26.2024.02.20.03.44.12
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 20 Feb 2024 03:44:12 -0800 (PST)
-Message-ID: <b3771ce5-e36c-4f28-875b-7c35b9492d73@linaro.org>
-Date: Tue, 20 Feb 2024 11:44:11 +0000
+ cl2-20020a5d5f02000000b0033d4dab14a8sm6853361wrb.22.2024.02.20.03.54.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 20 Feb 2024 03:54:32 -0800 (PST)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Sean Anderson <seanga2@gmail.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Simon Glass <sjg@chromium.org>, Hakgoo Lee <goodguy.lee@samsung.com>,
+ Uma Shankar <uma.shankar@samsung.com>,
+ Manjunatha C Achar <a.manjunatha@samsung.com>,
+ Iqbal Shareef <iqbal.ams@samsung.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] ext4: detect directories in ext4fs_exists()
+Date: Tue, 20 Feb 2024 12:54:23 +0100
+Message-ID: <20240220115423.61417-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] efi_loader: simplify error message in
- efi_disk_create_raw()
-Content-Language: en-US
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-References: <20240202141252.62378-1-heinrich.schuchardt@canonical.com>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20240202141252.62378-1-heinrich.schuchardt@canonical.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,45 +107,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+While fat_exists() reports directories and files as existing
+ext4fs_exists() only recognizes files. This lead to errors
+when using systemd-boot with an ext4 file-system.
 
+Change ext4fs_exists() to find any type of inode:
+files, directories, symbolic links.
 
-On 02/02/2024 14:12, Heinrich Schuchardt wrote:
-> The error message
-> 
->     Adding disk for usb_mass_storage.lun0 failed (err=-9223372036854775788/0x8000000000000014)
-> 
-> provides a decimal and a hexadecimal notation of the EFI status code
-> EFI_ALREADY_STARTED which is defined as (EFI_ERROR_MASK | 20).
-> The decimal output does not convey the value 20 clearly.
-> 
-> With the patch we write
-> 
->     Adding block device usb_mass_storage.lun0 failed, r = 20
-> 
-> similar to other EFI error messages.
-> 
-> Fixes: 952018117ab4 ("dm: sandbox: Switch over to using the new host uclass")
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Fixes: a1596438a689 ("ext4fs ls load support")
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+I still need to figure out a good test. Currently 'xxd' is the only command
+invoking fs_exists().
+---
+ fs/ext4/ext4_common.c |  5 ++---
+ fs/ext4/ext4_common.h |  2 ++
+ fs/ext4/ext4fs.c      | 11 +++++++----
+ 3 files changed, 11 insertions(+), 7 deletions(-)
 
-Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->  lib/efi_loader/efi_disk.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
-> 
-> diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
-> index b1739d99201..2fefd05fbdc 100644
-> --- a/lib/efi_loader/efi_disk.c
-> +++ b/lib/efi_loader/efi_disk.c
-> @@ -574,7 +574,8 @@ static int efi_disk_create_raw(struct udevice *dev, efi_handle_t agent_handle)
->  			log_notice("Disk %s not ready\n", dev->name);
->  			ret = -EBUSY;
->  		} else {
-> -			log_err("Adding disk for %s failed (err=%ld/%#lx)\n", dev->name, ret, ret);
-> +			log_err("Adding block device %s failed, r = %lu\n",
-> +				dev->name, ret & ~EFI_ERROR_MASK);
->  			ret = -ENOENT;
->  		}
->  
-
+diff --git a/fs/ext4/ext4_common.c b/fs/ext4/ext4_common.c
+index ea9b92298ba..365c5147c4b 100644
+--- a/fs/ext4/ext4_common.c
++++ b/fs/ext4/ext4_common.c
+@@ -2214,9 +2214,8 @@ static char *ext4fs_read_symlink(struct ext2fs_node *node)
+ 	return symlink;
+ }
+ 
+-static int ext4fs_find_file1(const char *currpath,
+-			     struct ext2fs_node *currroot,
+-			     struct ext2fs_node **currfound, int *foundtype)
++int ext4fs_find_file1(const char *currpath, struct ext2fs_node *currroot,
++		      struct ext2fs_node **currfound, int *foundtype)
+ {
+ 	char fpath[strlen(currpath) + 1];
+ 	char *name = fpath;
+diff --git a/fs/ext4/ext4_common.h b/fs/ext4/ext4_common.h
+index 504c708b064..84500e990aa 100644
+--- a/fs/ext4/ext4_common.h
++++ b/fs/ext4/ext4_common.h
+@@ -54,6 +54,8 @@ int ext4fs_read_file(struct ext2fs_node *node, loff_t pos, loff_t len,
+ 		     char *buf, loff_t *actread);
+ int ext4fs_find_file(const char *path, struct ext2fs_node *rootnode,
+ 			struct ext2fs_node **foundnode, int expecttype);
++int ext4fs_find_file1(const char *currpath, struct ext2fs_node *currroot,
++		      struct ext2fs_node **currfound, int *foundtype);
+ int ext4fs_iterate_dir(struct ext2fs_node *dir, char *name,
+ 			struct ext2fs_node **fnode, int *ftype);
+ 
+diff --git a/fs/ext4/ext4fs.c b/fs/ext4/ext4fs.c
+index 3b12ec54fa2..b1359d14909 100644
+--- a/fs/ext4/ext4fs.c
++++ b/fs/ext4/ext4fs.c
+@@ -208,11 +208,14 @@ int ext4fs_ls(const char *dirname)
+ 
+ int ext4fs_exists(const char *filename)
+ {
+-	loff_t file_len;
+-	int ret;
++	struct ext2fs_node *dirnode = NULL;
++	int filetype;
+ 
+-	ret = ext4fs_open(filename, &file_len);
+-	return ret == 0;
++	if (!filename)
++		return 0;
++
++	return ext4fs_find_file1(filename, &ext4fs_root->diropen, &dirnode,
++				 &filetype);
+ }
+ 
+ int ext4fs_size(const char *filename, loff_t *size)
 -- 
-// Caleb (they/them)
+2.43.0
+
