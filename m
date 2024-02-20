@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 793EBC48BC3
-	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 10:57:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6494C48BC3
+	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 10:58:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D31EF87D8F;
-	Tue, 20 Feb 2024 11:57:48 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4C6D187D98;
+	Tue, 20 Feb 2024 11:58:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C90587D98; Tue, 20 Feb 2024 11:57:47 +0100 (CET)
+ id 9F46487F52; Tue, 20 Feb 2024 11:58:42 +0100 (CET)
 Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
  [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id 41D0787D82
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 11:57:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id E37A887D82
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 11:58:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
 X-IronPort-AV: E=Sophos;i="6.06,172,1705330800"; 
- d="asc'?scan'208";a="194580519"
+ d="asc'?scan'208";a="194580584"
 Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie5.idc.renesas.com with ESMTP; 20 Feb 2024 19:57:36 +0900
+ by relmlie5.idc.renesas.com with ESMTP; 20 Feb 2024 19:58:33 +0900
 Received: from [10.226.92.69] (unknown [10.226.92.69])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id E03D4400BC1B;
- Tue, 20 Feb 2024 19:57:33 +0900 (JST)
-Message-ID: <df373095-3c23-4a87-8590-dca3dcf5c2f0@bp.renesas.com>
-Date: Tue, 20 Feb 2024 10:57:32 +0000
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id C7429400BC1A;
+ Tue, 20 Feb 2024 19:58:30 +0900 (JST)
+Message-ID: <e577c76e-5141-47d6-bc34-8c5027750f49@bp.renesas.com>
+Date: Tue, 20 Feb 2024 10:58:30 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] mmc: Convert hs400_tuning flag from u8 to bool
+Subject: Re: [PATCH 2/3] mmc: Add generic tuning flag
 Content-Language: en-GB
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: Hai Pham <hai.pham.ud@renesas.com>, Jaehoon Chung
@@ -41,12 +41,13 @@ Cc: Hai Pham <hai.pham.ud@renesas.com>, Jaehoon Chung
  Tom Rini <trini@konsulko.com>,
  Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
 References: <20240220083755.34449-1-marek.vasut+renesas@mailbox.org>
+ <20240220083755.34449-2-marek.vasut+renesas@mailbox.org>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 Organization: Renesas Electronics Corporation
-In-Reply-To: <20240220083755.34449-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20240220083755.34449-2-marek.vasut+renesas@mailbox.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------1d5Wfeh7mqLZ78I30nX0blYl"
+ boundary="------------nwHb0hOxf0PZp5zi3BnrpPX0"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,8 +65,8 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------1d5Wfeh7mqLZ78I30nX0blYl
-Content-Type: multipart/mixed; boundary="------------yaCV29LOdBAh0PVDPBibL1fT";
+--------------nwHb0hOxf0PZp5zi3BnrpPX0
+Content-Type: multipart/mixed; boundary="------------piI0w04IbtiPAKlsoNOLWfNG";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
@@ -74,43 +75,81 @@ Cc: Hai Pham <hai.pham.ud@renesas.com>, Jaehoon Chung
  Peng Fan <peng.fan@nxp.com>, Sean Anderson <seanga2@gmail.com>,
  Tom Rini <trini@konsulko.com>,
  Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
-Message-ID: <df373095-3c23-4a87-8590-dca3dcf5c2f0@bp.renesas.com>
-Subject: Re: [PATCH 1/3] mmc: Convert hs400_tuning flag from u8 to bool
+Message-ID: <e577c76e-5141-47d6-bc34-8c5027750f49@bp.renesas.com>
+Subject: Re: [PATCH 2/3] mmc: Add generic tuning flag
 References: <20240220083755.34449-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20240220083755.34449-1-marek.vasut+renesas@mailbox.org>
+ <20240220083755.34449-2-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20240220083755.34449-2-marek.vasut+renesas@mailbox.org>
 
---------------yaCV29LOdBAh0PVDPBibL1fT
-Content-Type: multipart/mixed; boundary="------------001L5Y10hMgR2JIBc8LN1uqP"
+--------------piI0w04IbtiPAKlsoNOLWfNG
+Content-Type: multipart/mixed; boundary="------------kNG09cfmUzh9rfu2A9VGVh0F"
 
---------------001L5Y10hMgR2JIBc8LN1uqP
+--------------kNG09cfmUzh9rfu2A9VGVh0F
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
 On 20/02/2024 08:37, Marek Vasut wrote:
-> This hs400_tuning is a flag, make it bool. No functional change.
-> This will be useful in the following patch, which adds another
-> more generic flag, where the compiler can better use the space
-> now reserved for the u8 to store more flags in it.
-
-The minimum size for a bool is one byte so there likely won't be any
-improvement in struct size from using bool instead of u8 for
-`hs400_tuning` here and `tuning` added in the next patch. I still think
-it's a good change to make though, bool is the right type for an on/off
-flag.
-
-So I think the commit message needs a little clarification. Other than
-that,
+> Set generic mmc->tuning flag when performing tuning to indicate
+> this condition to drivers. Drivers may use this to bypass various
+> checks during tuning.
+>=20
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> ---
+> Cc: Hai Pham <hai.pham.ud@renesas.com>
+> Cc: Jaehoon Chung <jh80.chung@samsung.com>
+> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+> Cc: Peng Fan <peng.fan@nxp.com>
+> Cc: Sean Anderson <seanga2@gmail.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
+> ---
+>  drivers/mmc/mmc-uclass.c | 8 +++++++-
+>  include/mmc.h            | 1 +
+>  2 files changed, 8 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/drivers/mmc/mmc-uclass.c b/drivers/mmc/mmc-uclass.c
+> index 328456831dd..304bd5eaee2 100644
+> --- a/drivers/mmc/mmc-uclass.c
+> +++ b/drivers/mmc/mmc-uclass.c
+> @@ -124,7 +124,13 @@ static int dm_mmc_execute_tuning(struct udevice *d=
+ev, uint opcode)
+> =20
+>  int mmc_execute_tuning(struct mmc *mmc, uint opcode)
+>  {
+> -	return dm_mmc_execute_tuning(mmc->dev, opcode);
+> +	int ret;
+> +
+> +	mmc->tuning =3D true;
+> +	ret =3D dm_mmc_execute_tuning(mmc->dev, opcode);
+> +	mmc->tuning =3D false;
+> +
+> +	return ret;
+>  }
+>  #endif
+> =20
+> diff --git a/include/mmc.h b/include/mmc.h
+> index 92cffc6a19a..47ccf5f45a1 100644
+> --- a/include/mmc.h
+> +++ b/include/mmc.h
+> @@ -736,6 +736,7 @@ struct mmc {
+>  				  * accessing the boot partitions
+>  				  */
+>  	u32 quirks;
+> +	bool tuning;
+>  	bool hs400_tuning;
+> =20
+>  	enum bus_mode user_speed_mode; /* input speed mode from user */
 
 Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 Tested-by: Paul Barker <paul.barker.ct@bp.renesas.com>
   (tested on RZ/G2L with commit ad50a8151387 from
   https://source.denx.de/u-boot/custodians/u-boot-sh)
 
-Thanks,
-
 --=20
 Paul Barker
---------------001L5Y10hMgR2JIBc8LN1uqP
+
+--------------kNG09cfmUzh9rfu2A9VGVh0F
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -174,21 +213,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------001L5Y10hMgR2JIBc8LN1uqP--
+--------------kNG09cfmUzh9rfu2A9VGVh0F--
 
---------------yaCV29LOdBAh0PVDPBibL1fT--
+--------------piI0w04IbtiPAKlsoNOLWfNG--
 
---------------1d5Wfeh7mqLZ78I30nX0blYl
+--------------nwHb0hOxf0PZp5zi3BnrpPX0
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZdSFnAUDAAAAAAAKCRDbaV4Vf/JGvcel
-AP9MoVSWGtQh+9je3PrnjLpgcFZ6+SphV1+WX+VCfwFw4wEA6IIzjOAD/cv/G89RvRyNgNKAjW1o
-4/9WFP21zia/NwY=
-=XXH2
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZdSF1gUDAAAAAAAKCRDbaV4Vf/JGvTMr
+AQDHJC8TC6W0ZSWXRY6qrUFl2OgnBIEhu/QkiuIVCbyxrwD/Wp3PkxelAUARWTaRKbJe9jpJBHXb
+UNhnaMDoinfwDA4=
+=ZRWw
 -----END PGP SIGNATURE-----
 
---------------1d5Wfeh7mqLZ78I30nX0blYl--
+--------------nwHb0hOxf0PZp5zi3BnrpPX0--
