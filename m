@@ -4,92 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 731D9C48BC3
-	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 08:49:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83DDEC48BC3
+	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 09:01:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CEE6587F6F;
-	Tue, 20 Feb 2024 09:49:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 55B5D87F56;
+	Tue, 20 Feb 2024 10:01:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=fris.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Q8gpwhq4";
+	dkim=pass (2048-bit key; unprotected) header.d=fris.de header.i=@fris.de header.b="Seqg3BQI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D67E87F88; Tue, 20 Feb 2024 09:49:33 +0100 (CET)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7AA1D87F9C; Tue, 20 Feb 2024 10:01:27 +0100 (CET)
+Received: from mail.fris.de (unknown [IPv6:2a01:4f8:c2c:390b::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A315B87F1F
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 09:49:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1BF9287D2F
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 10:01:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dan.carpenter@linaro.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-a34c5ca2537so663117566b.0
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 00:49:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708418967; x=1709023767; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=N3vsrnUic6rkR+ZQyCDkb8Qk5auCLUffNYRU+wK6mHY=;
- b=Q8gpwhq4xGR/vTIdiG8o9Fu9vr8x2eZCWlpr944NrIhRnYIA9RQLGF70YcEk41QeA1
- bpR+UFUpbccKTcEtPz81x8xuuW/5aRyJY/ISULLif1gcTjdRKF+gckHtWUhnIzV6txJc
- T5cyXSZHFcid0HDnPhmacfCXU07KlVEdLVHn5q7fyzMaakywbENxeJZcEQjIYtCBmQsW
- az5tVDtl2juWnjjxTcgOiDQ+CayR1h5rCNYKaRitZOiDz+392Gfy2d5t/wTD9/OHavdD
- vNIjBxOe1I39GOMo22RMlJZCGacVPHzqWjtza3xXjXR1VNZcI3fE3qhtFF8NPtibct1K
- qF6Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708418967; x=1709023767;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=N3vsrnUic6rkR+ZQyCDkb8Qk5auCLUffNYRU+wK6mHY=;
- b=fXTBezyOy4VVD4CK4qaz5KOXSzh/ZCX/QqAjY2HFGRb6WRlTYrbw/bv+HtBw3FUXyK
- Zn13hAFoa901iQEdwNkiafdk+yRx+Lks4wLfySyHxIUv2SgyIJ+JOA19dCK2bMk8h+mB
- EOY7s1XIsfpKloNZm0/OV7CdhrdKoVaogneK+PHbYBpRpTZ83TyogLVxx4oEu5i6zegv
- ueBfjOZwF/fZnbvwl754EUWBxp6BWAM/3NtXrE2Gsr7dObWry9DoFYF+vneYX92EgmqF
- luy9Om8qBfiwEbV1+RNKQsxKqt+S8JwJ0bu2GgspvXZo76z5QNO7olMGr2+OoDtTC88N
- Z7Vg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVNHB+L7quNaPpayPPPGt6FZwOvBoWJnXKh6UrGOtaqYzZegXO45akukmJYDn0NNLeJWLOSCCSHrkz7cPn/KRwmtfNj3A==
-X-Gm-Message-State: AOJu0Yyv+n00aM3L07WL334Nwra/fgE4PcZqyh1h1RJIyUSp4nQvLgLJ
- uu103tpjcX6HFlIMqNfKvQHZksTH/bNSiCy7ncqxCSZpjpJiS4ygfTQ4ogU1pz0=
-X-Google-Smtp-Source: AGHT+IG+n+lplBYWbHSqKuCaOeEkqotAWBl+NE8L2SS9AA9+WDd5Bj8HxeJydRdBunUKcai0uR9NnQ==
-X-Received: by 2002:a17:906:8cf:b0:a3e:aadd:f962 with SMTP id
- o15-20020a17090608cf00b00a3eaaddf962mr2976962eje.62.1708418966816; 
- Tue, 20 Feb 2024 00:49:26 -0800 (PST)
-Received: from localhost ([102.222.70.76]) by smtp.gmail.com with ESMTPSA id
- vi10-20020a170907d40a00b00a3e7713dcbesm2255333ejc.39.2024.02.20.00.49.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Feb 2024 00:49:26 -0800 (PST)
-Date: Tue, 20 Feb 2024 11:49:22 +0300
-From: Dan Carpenter <dan.carpenter@linaro.org>
-To: Frieder Schrempf <frieder.schrempf@kontron.de>
-Cc: Frieder Schrempf <frieder@fris.de>, Fabio Estevam <festevam@gmail.com>,
- Stefano Babic <sbabic@denx.de>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de, Christian Hewitt <christianshewitt@gmail.com>,
- FUKAUMI Naoki <naoki@radxa.com>, Hai Pham <hai.pham.ud@renesas.com>,
- Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, Marek Vasut <marex@denx.de>,
- Martyn Welch <martyn.welch@collabora.com>,
- Michal Simek <michal.simek@amd.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Tianling Shen <cnsztl@gmail.com>
-Subject: Re: [PATCH v3 2/3] board: Add support for Sielaff i.MX6 Solo board
-Message-ID: <232c2a37-4266-41d6-a806-4d807a11c41e@moroto.mountain>
-References: <20240215133527.216126-1-frieder@fris.de>
- <20240215133527.216126-2-frieder@fris.de>
- <1a3b311d-0f5d-4f2e-a9f7-da0ec0c4f60b@moroto.mountain>
- <847f8bd9-000b-4005-b6e3-2075b72191d0@kontron.de>
+ dmarc=pass (p=quarantine dis=none) header.from=fris.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=frieder@fris.de
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id B4E7CBFB8C; Tue, 20 Feb 2024 10:01:16 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fris.de; s=dkim;
+ t=1708419679; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=BJQjQRy3jEltrP4p8/iVKOGrjE0pYpLoSwcjw7C/cSU=;
+ b=Seqg3BQIEl4PsMaJCPUKQQq9iucTyHkG5656vnNSbQJ4oSsH0Nz/UlF8382QCgHVJAMHdm
+ /NPx76w7kXL/HPI3xpSNzi0d2Wr+WUjzaFQbhxt+Nim3X89LT4HJ1rXUbX/KpL7Vqv5NQH
+ wIpftxGDLGM8OdUx/2YkhC19cl+C/3kRmVm0pQIH9jD2FO+d3UKI/bNy8iEzVx6olIpv+G
+ ofsTChlGVac2NNwbdVTPBxSzb0LGFmOuIvlTSAA2hM+zchWu3fu57wHrNlqVoBeM/CHXW6
+ a6lRkn1e9lPo6yCWzBsFiJBCSWhOlh2BNDV/nG4F18LqHPUzRg9r/yUwundOIw==
+From: Frieder Schrempf <frieder@fris.de>
+To: Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Cc: Dan Carpenter <dan.carpenter@linaro.org>,
+ Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>
+Subject: [PATCH] board: imx6dl-sielaff: spl.c: Remove multiline string
+Date: Tue, 20 Feb 2024 10:01:00 +0100
+Message-ID: <20240220090102.32932-1-frieder@fris.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <847f8bd9-000b-4005-b6e3-2075b72191d0@kontron.de>
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,24 +61,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Feb 20, 2024 at 09:38:01AM +0100, Frieder Schrempf wrote:
-> Hi Dan,
-> 
-> On 20.02.24 06:56, Dan Carpenter wrote:
-> > On Thu, Feb 15, 2024 at 02:35:20PM +0100, Frieder Schrempf wrote:
-> >> +int board_mmc_getcd(struct mmc *mmc)
-> > 
-> > This function is never called.  Also for bool functions make them type
-> > bool and name them so that it's clear they return true/false such as
-> > board_mmc_getcd_was_successful() but less wordy.
-> 
-> What makes you think so? This is an implementation for the existing
-> prototype from mmc.h. As far as I can see this is called by the mmc
-> driver and I can't change it in any way.
-> 
+From: Frieder Schrempf <frieder.schrempf@kontron.de>
 
-Ah, yes.  You're right.  My bad.
+Remove the malformed multiline string and fix the checkpatch warning.
 
-regards,
-dan carpenter
+Reported-by: Dan Carpenter <dan.carpenter@linaro.org>
+Signed-off-by: Frieder Schrempf <frieder.schrempf@kontron.de>
+---
+Cc: Fabio Estevam <festevam@gmail.com>
+Cc: Stefano Babic <sbabic@denx.de>
+---
+ board/sielaff/imx6dl-sielaff/spl.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
+diff --git a/board/sielaff/imx6dl-sielaff/spl.c b/board/sielaff/imx6dl-sielaff/spl.c
+index 64a84fd5122..6815952c0fb 100644
+--- a/board/sielaff/imx6dl-sielaff/spl.c
++++ b/board/sielaff/imx6dl-sielaff/spl.c
+@@ -93,8 +93,8 @@ int board_mmc_init(struct bd_info *bis)
+ 			usdhc_cfg[0].sdhc_clk = mxc_get_clock(MXC_ESDHC3_CLK);
+ 			break;
+ 		default:
+-			printf("Warning: you configured more USDHC controllers \
+-				(%d) than supported by the board\n", i + 1);
++			printf("Warning: you configured more USDHC controllers (%d) than supported by the board\n",
++			       i + 1);
+ 			return -EINVAL;
+ 		}
+ 
+-- 
+2.43.0
