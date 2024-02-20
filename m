@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CB0DC48BC3
-	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 15:33:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 703F0C5475B
+	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 15:33:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C5CF487FE8;
-	Tue, 20 Feb 2024 16:32:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3BD6487FEF;
+	Tue, 20 Feb 2024 16:32:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1708443163;
-	bh=4EoL6QdQVlaaQUZxH0mhsbrOF88N7d+L6lfKsovkFdY=;
+	s=phobos-20191101; t=1708443164;
+	bh=PM/xIImiClhXPn7jZ4s9UkqTPxWgUepivK7EPqhFtcg=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=iUz47+d1gMsiVig6TmzS+9F9PihvDHoL/RrNYH/v6xYf+S0DwmwfkVkcf/iLWA0pK
-	 r1tupSloRl7ep2pBP29NO6ec+dCX9mHhgj1emH2piUZ4eyqDIBTIexSBexWXAqt3JP
-	 NR/g+BpHod7TRi6liia5BhVSSEi+FbVk8YsIC+Jx+juIMbmuupjiJzkfRCc7SANUEX
-	 ET5UP8HY5aroKmBzySt/QMQo/S8Rc0Vxcpr2VRg0tiIQgo2fqQ9EqIUcomchuSXUIh
-	 uyhyDxJhOmyLHt620+24B/S5WrveDD8A80mOWAKs6+YC1bp0tmhM5rXjWOYQep8rae
-	 2CHAcfarvbFhQ==
+	b=KMY+OaOlaRfQa6dHnoijFGmk2wBU59DdPlJrqg1vkO9E8PuY1UATa91mZmKHFapkE
+	 5EmX5y9CwOqgx7iS54OKKb50g2M5FA5IT3XPX9SwJ7rKpcVq9Wg2W2hBIrfIvF+5Yw
+	 B6HvYBb3+cC40luPUFd0+iht7MzurUSp2lUEeSLyjuXz2kcJO1LEFHPKtnbNvzouBE
+	 Qoi38B2qZ8Ne1td12rNu2wnY3B+yV14vbt9cu94/Z0FlJdVSveHceTALOhX6nty7H5
+	 ByCGmtKPrvFp36EUjp1Fj3okefy2lMWOxmfoZ6U5RUi+d7ZPKmg1huYxLjVXviFZae
+	 tDqaTDIQt2T+w==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 9852987FE0;
- Tue, 20 Feb 2024 16:32:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id DFE7B87FE1;
+ Tue, 20 Feb 2024 16:32:39 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1708443159;
- bh=4EoL6QdQVlaaQUZxH0mhsbrOF88N7d+L6lfKsovkFdY=;
+ s=phobos-20191101; t=1708443161;
+ bh=PM/xIImiClhXPn7jZ4s9UkqTPxWgUepivK7EPqhFtcg=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=Wcl/weB/l9PjOaK/g98txzg6zBR2VwqhlQQ3WRkpCov/xtAHlzWk6J6KW+Y9Juc7+
- SHJdmOZOxpVuIAQTL8sLSe+vdV+ZvYvm6oyHWTZIyCbLjQVNJ996Qsj9+vLCeW/m4W
- 2SxZ6ZFma2aW6vTlDgBs7ZpGcejn/QN9/rUGzPEZ0r/sJUnXjjmORNORcYAYKA5mp3
- qzpBnqFmOes0QoehOJh/tNYMQovuPv/dlB1tmhTCdQhwK/A7B4Wd9b9AA/G98d7Xgu
- G3i3Mv5t8+HI00Jw47IF5OaKMA+Ix5neJHprVGHa1qGvhG/+OifpGi7idl02gHW7HD
- 8WrR2BebmLRjw==
-Message-ID: <947bbd39-451b-4ce0-86dc-47d95db2885d@denx.de>
-Date: Tue, 20 Feb 2024 16:16:20 +0100
+ b=j3zYsDer/L1uny9nlN4cHSHDJpjEU7I8Cz7JQH5c2vfOVzPAggl8ltNRaDOW+KOYt
+ tJe53BI76T2qEISDwwXdWQUPPonTf2s1xSw/5+N17B+YtiBfuvHjfhEoGrN7kSXOd3
+ xE8bMniFvllbUXeZLrtoyS6Xodc1OWJdgyWYTavZg9e+Pe0PYjtsu4RDivZ3/WAk7b
+ Zc+e/i1n8/ppKQvbWJz/0kWB9uQl3bhqkrU6xlH64JadYaVZGHLbTZcqwr9EWJPYkS
+ 5G1O8GVJ1r0cd4HL7QKIntsXSl3WbLWc1zb2LUaMurBnfgUT56nszBG9awnFqIX0mb
+ MLowcX5NrSZig==
+Message-ID: <55e11f56-0080-41a7-b4b9-43c3abe61264@denx.de>
+Date: Tue, 20 Feb 2024 16:17:29 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/7] imx8mp: power-domain: Expose high performance PLL
- clock
+Subject: Re: [PATCH 5/7] phy: phy-imx8m-pcie: Add support for i.MX8M{M/P} PCIe
+ PHY
 Content-Language: en-US
 To: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de
 Cc: marcel.ziswiler@toradex.com, trini@konsulko.com, lukma@denx.de,
@@ -54,9 +54,9 @@ Cc: marcel.ziswiler@toradex.com, trini@konsulko.com, lukma@denx.de,
  fathi.boudra@linaro.org, remi.duraffort@linaro.org,
  daniel.thompson@linaro.org
 References: <20240220131056.2962331-1-sumit.garg@linaro.org>
- <20240220131056.2962331-5-sumit.garg@linaro.org>
+ <20240220131056.2962331-6-sumit.garg@linaro.org>
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240220131056.2962331-5-sumit.garg@linaro.org>
+In-Reply-To: <20240220131056.2962331-6-sumit.garg@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -76,84 +76,10 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 2/20/24 14:10, Sumit Garg wrote:
-> PCIe PHY can use it when there is no external refclock provided.
+> Add initial support for i.MX8M{M/P} PCIe PHY. On i.MX8M{M/P} SoCs PCIe
+> PHY initialization moved to this standalone PHY driver.
+> 
+> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 
-Commit message needs to be fixed.
-
-> +static int hsio_pll_enable(struct udevice *dev)
-> +{
-> +	struct imx8mp_hsiomix_priv *priv = dev_get_priv(dev);
-> +	unsigned long start;
-> +	u32 val;
-> +
-> +	/* Setup HSIO PLL */
-> +	val = readl(priv->base + GPR_REG2);
-> +	val &= ~(P_PLL_MASK | M_PLL_MASK | S_PLL_MASK);
-> +	val |= (FIELD_PREP(P_PLL_MASK, 12) | FIELD_PREP(M_PLL_MASK, 800) |
-> +		FIELD_PREP(S_PLL_MASK, 4));
-> +	writel(val, priv->base + GPR_REG2);
-
-clrsetbits_le32()
-
-> +	/* de-assert PLL reset */
-> +	setbits_le32(priv->base + GPR_REG3, PLL_RST);
-> +
-> +	/* enable PLL */
-> +	setbits_le32(priv->base + GPR_REG3, PLL_CKE);
-> +
-> +	/* Check if PLL is locked */
-> +	start = get_timer(0);
-
-wait_for_bit() or readl_poll_timeout()
-
-> +	for (;;) {
-> +		if (readl(priv->base + GPR_REG1) & PLL_LOCK)
-> +			break;
-> +
-> +		if (get_timer(start) > 100) {
-> +			dev_err(dev, "failed to lock HSIO PLL\n");
-> +			return -ETIMEDOUT;
-> +		}
-> +
-> +		udelay(10);
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static void hsio_pll_disable(struct udevice *dev)
-> +{
-> +	struct imx8mp_hsiomix_priv *priv = dev_get_priv(dev);
-> +
-> +	/* de-assert PLL reset */
-> +	clrbits_le32(priv->base + GPR_REG3, PLL_RST);
-> +
-> +	/* enable PLL */
-> +	clrbits_le32(priv->base + GPR_REG3, PLL_CKE);
-> +}
-> +
->   static int imx8mp_hsiomix_on(struct power_domain *power_domain)
->   {
->   	struct udevice *dev = power_domain->dev;
-> @@ -69,16 +127,23 @@ static int imx8mp_hsiomix_on(struct power_domain *power_domain)
->   	if (ret)
->   		goto err_clk_pcie;
->   
-> -	if (power_domain->id == IMX8MP_HSIOBLK_PD_USB)
-> +	if (power_domain->id == IMX8MP_HSIOBLK_PD_USB) {
->   		setbits_le32(priv->base + GPR_REG0, USB_CLOCK_MODULE_EN);
-> -	else if (power_domain->id == IMX8MP_HSIOBLK_PD_PCIE)
-> +	} else if (power_domain->id == IMX8MP_HSIOBLK_PD_PCIE) {
->   		setbits_le32(priv->base + GPR_REG0, PCIE_CLOCK_MODULE_EN);
-> -	else if (power_domain->id == IMX8MP_HSIOBLK_PD_PCIE_PHY)
-> +	} else if (power_domain->id == IMX8MP_HSIOBLK_PD_PCIE_PHY) {
->   		setbits_le32(priv->base + GPR_REG0, PCIE_PHY_APB_RST |
->   						    PCIE_PHY_INIT_RST);
->   
-> +		ret = hsio_pll_enable(dev);
-
-Is this how Linux handles this PLL ?
-
-Seems like this should be either syscon or clock driver .
-
-[...]
+Is this based on Linux ? If so, include Linux commit ID from which the 
+code was imported.
