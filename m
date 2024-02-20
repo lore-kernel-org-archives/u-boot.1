@@ -4,54 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE1F1C48BC3
-	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 08:29:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49618C48BC3
+	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 08:36:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D72D87F63;
-	Tue, 20 Feb 2024 09:29:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id 624F087B3D;
+	Tue, 20 Feb 2024 09:36:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="SDNc5TeT";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 0FDAB87F65; Tue, 20 Feb 2024 09:29:17 +0100 (CET)
-Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1708418169;
+	bh=ECfNEPqBeTTRUpe2x96+N7/a+BCrpsUbVJyo19i+DSM=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=Ae68csNPjHsdx8EOzw4tH5nuWwRP/h0PpZn7dRI6xV0toshA52ITtesi9zRnKPrKq
+	 PfwbhwVEKCbSRICKIKoaWKmnZ3d19Wv/7Jbsj8/rI1ltMfjX7AvrACLlUUfjS8w7F6
+	 PqO/De4eltPDWvShhMYYahGHi6UEnHcewT7fdl+mlX6mPxcrpmw+20koj2q175jV/6
+	 5GblZqEIJ4/gODw0NIvDoMnSTfIpPkJvakDzeUzTc5JShgQoakGzMcPO/X7V0g1gYJ
+	 xWXkhP7qlcybI2JH6uU8HBoT48WWRcLo/GEDH5X1xZWtavI+9vHEcSPgIBF/UnJoN8
+	 o9FY+wlSx4JSQ==
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5743B87E02
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 09:28:31 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb (31-10-206-125.static.upc.ch [31.10.206.125])
- by mail11.truemail.it (Postfix) with ESMTPA id 57DB6225A9;
- Tue, 20 Feb 2024 09:28:30 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1708417710;
- bh=td1MKoYTi18l5wSyjdXZHOUZ80C8eWg9WjoNiaxC2AE=; h=From:To:Subject;
- b=SDNc5TeTtqWyV89KuWaRMsBtxVClSgeqmHRBD8bTfBfZCTEkLwT06QNyxtxVtxdT7
- xkUP7kX4IjjmiIj0ckZYaZ348mZiqsibvu0nSJ5v0qPwpdyeflBTfSFDrm0hBZZR1R
- 86HIRAI1pkQqgKrwZre7SLNwn+hEJf+bi371KA/XbZ1KrxcM6lw8L2d7MmmNSJdc9G
- gmDR45c0onWSmnE/MaAnevvuuHUk4QD1p/TS/DBk5qL6hGzDPMECcvnN2rw4R0cqRo
- Hh1vlw1s2bAnSDeGb+PBUv161D5V5yZ1ngy9G/i/tGztf2PI/QBN7CWp5rTGvrt48N
- 8Vzmv66U1sKiA==
-Date: Tue, 20 Feb 2024 09:28:23 +0100
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Vignesh Raghavendra <vigneshr@ti.com>
-Cc: Vitor Soares <ivitro@gmail.com>, marcel.ziswiler@toradex.com,
- trini@konsulko.com, u-boot@lists.denx.de,
- Vitor Soares <vitor.soares@toradex.com>
-Subject: Re: [PATCH] arm: dts: k3-am625-verdin-r5: Change CPU frequency to
- 1000MHz
-Message-ID: <20240220082823.GA4685@francesco-nb>
-References: <20240219123408.22054-1-ivitro@gmail.com>
- <00d656a1-52f2-4f69-a2dc-6e98347780b2@ti.com>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 493BD87F7B;
+ Tue, 20 Feb 2024 09:36:07 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1708418167;
+ bh=ECfNEPqBeTTRUpe2x96+N7/a+BCrpsUbVJyo19i+DSM=;
+ h=From:To:Cc:Subject:Date:From;
+ b=l7Nifz82HT+bzckGdMrhM4kS6LOfZ4KyiJoOTAAJLTiY3Txt4Bx0fR7fEuKSzCxaS
+ GjcaYfimkgPSZQoT2yt5DGhyjiEhozeCVfE30+1+tWirYDNLL2xx97+/r6k0LnX2+v
+ bo6z0EXciYD3Xc4cioHcE/7NKNmMlozNvePQyYDgJExhq1c7Z0IE+RhR9mhyGX79aR
+ DLFjg3mjoYoLHMuSKAb4NxIJaqnQwySo3tho4/MggokKAMmqxwIFDB4LKmG5w5nUE/
+ 9f30fsJBF0aJECMKoLXgpMvv6FiiQcLiWZsBMFoki9x6RGK5nvmyhGt1zEDHJ2p5gD
+ vsKzMSRCJtgIw==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marex@denx.de>, Mathieu Othacehe <othacehe@gnu.org>,
+ Shantur Rathore <i@shantur.com>
+Subject: [PULL] u-boot-usb/master
+Date: Tue, 20 Feb 2024 09:35:43 +0100
+Message-ID: <20240220083555.34347-1-marex@denx.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <00d656a1-52f2-4f69-a2dc-6e98347780b2@ti.com>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,37 +65,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Feb 20, 2024 at 10:47:03AM +0530, Vignesh Raghavendra wrote:
-> 
-> 
-> On 19/02/24 18:04, Vitor Soares wrote:
-> > From: Vitor Soares <vitor.soares@toradex.com>
-> > 
-> > The same U-Boot binary is compatible with multiple Verdin AM62 board
-> > variants. However, some of the SoC models can only operate at a maximum
-> > speed of 1 GHz.
-> > 
-> > Previously, the boards with lower-speed grades were running at
-> > overclocked speeds, leading to kernel complaints about unsupported
-> > configurations.
-> > 
-> > To resolve this issue, the operating speed has been decreased to the
-> > maximum allowable value across all Verdin AM62 board variants. As a
-> > result, there is a regression in overall boot time, increasing by around
-> > 200 milliseconds for the faster SoC variant.
-> > 
-> 
-> Patch as such is fine. But one way to avoid boot regression is to fixup
-> the clock freq using based on speed grade identified by
-> k3_get_speed_grade() and freq mapping table for each letter as show in
-> datasheet [0]
+The following changes since commit 3e6f2a94bfc25f1782ce2d45db27f47ec781feb1:
 
-Ack. I would still merge this as it is, I think that is conceptually
-better to have a safe and valid value in the DT source file.
+  Merge tag 'u-boot-imx-master-20240219' of https://gitlab.denx.de/u-boot/custodians/u-boot-imx (2024-02-19 08:55:17 -0500)
 
-We can still do the optimization you suggested afterward, we just wanted
-to get rid of any potential malfunction because of this overclocking as
-soon as possible.
+are available in the Git repository at:
 
-Francesco
+  git://source.denx.de/u-boot-usb.git master
 
+for you to fetch changes up to d9a20fea2ba53db3a999827d3e50e181d5513e09:
+
+  usb: ehci-mx6: Add i.MX93 support (2024-02-19 20:08:51 +0100)
+
+----------------------------------------------------------------
+Mathieu Othacehe (1):
+      usb: ehci-mx6: Add i.MX93 support
+
+Shantur Rathore (1):
+      common: usb-hub: Reset USB 3.0 hubs only
+
+ common/usb_hub.c            | 6 ++++--
+ drivers/usb/host/Kconfig    | 6 +++---
+ drivers/usb/host/ehci-mx6.c | 2 +-
+ 3 files changed, 8 insertions(+), 6 deletions(-)
