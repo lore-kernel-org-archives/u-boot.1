@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05F62C48BC3
-	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 14:10:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1075CC48BC3
+	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 14:10:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 14FE487FAE;
-	Tue, 20 Feb 2024 15:08:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3392987FDE;
+	Tue, 20 Feb 2024 15:09:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OjSnJ2l9";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VGax5QYM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A480E87FC9; Tue, 20 Feb 2024 15:08:53 +0100 (CET)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
+ id 9649187FDF; Tue, 20 Feb 2024 15:08:59 +0100 (CET)
+Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
+ [IPv6:2607:f8b0:4864:20::230])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1149387FE9
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 15:08:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F60C87FA7
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 15:08:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-6e2d83d2568so3767879a34.3
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 06:08:43 -0800 (PST)
+Received: by mail-oi1-x230.google.com with SMTP id
+ 5614622812f47-3c049ccb623so3223089b6e.1
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 06:08:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708438122; x=1709042922; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1708438125; x=1709042925; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=UfPX0cUJ7RNjUkaTT0ejWcnMZI/LyxUpw6tgH9JB3Ig=;
- b=OjSnJ2l9WpRYPUeboTVREszGY82QKtqxWUZpxebF5+TsBt/Bpt7gVKm+l0zw6OP3XP
- UL16qpgk+WVc/7BKmP/w0Gl3ZX0GX1zLlv/LhZ00BwKg85OhrTDby4Qdiae/VrFVVn4B
- eH8hvFCKeFgdoJJmhSC1dvOUnb9MGXsDkotMLVFg1xZ6af6TzaaQoUu4BLPnbklTLwxt
- p6kikN8Qznt7t0Ls7ZqIMs9s28kCE4yDAqyxnOn1+ua6ODD8LAruFFv2uQhi1l76JNMF
- HRbc35/HoOt+xjw4Mb+XYnKW5HQloj9zTmFScKC4ifJ7UOfd6DQ6UuPAxsZgAmq5kZIx
- 0GpA==
+ bh=yooiyI2D0NVR6aZOYh1QGJp+C9X/1+hggMx7hPzIIio=;
+ b=VGax5QYMcUAyObI8W0M52nX5GjeiMeOs+BmrTwv/NTY30rD9WG2ZWURPnZadpysS4j
+ cGtfTxVs5lkIQzvdcr2DocNS10hfXj+Zgl2C3d3KVR3fj1UYL1mdU51fEvc90/ipVvh6
+ rT86xnsVa244ibQx6ENijs6cwVFFlQVUn+aT1IAiUlFmc0KUO0HRcYlCqVYj6EZZk7tR
+ kbhWJcOr3D6zukk2FdY/ut6S7FXfXie7piUQKFp8Fkme4fZoKIt6PrfQUJZg/NiTEwtf
+ xfG8KtVXPw/TLUADJXyHTYgBE7RsnllYLwkSIF2SNguK7aIdpSw5SoqVYGyXARma3K2v
+ WrcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708438122; x=1709042922;
+ d=1e100.net; s=20230601; t=1708438125; x=1709042925;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=UfPX0cUJ7RNjUkaTT0ejWcnMZI/LyxUpw6tgH9JB3Ig=;
- b=QAMNov51KCgKB6WSiiwzifbn7q3eM7U36ch6Go72pBcTVQPDmXPofgkcGU/EBkD7Pn
- ew7XdiejbiMjEP+y42uLCtGONdicHF1EfkatK4WXn2XqgVuOOvaQX/3FHT6hJPiLsM+X
- 07vF+1K6ukV0HWAnarOWwpDg947RaaHMK+1IU9i0sIaxT9MiZ6nD4Kel7sdnwrtCXLj1
- RULHJXUyx4LHqSG9776RXfwPLDYaYGhfITVCf51SJ6YL8JYDip0lWK6UNpsre/XuFQx7
- Eyl9Vjf1Gg5asIuj38k6AAEslrUpLdSM9H+5C0mHhmGxW9nZub0VbbhTqmvUVKD2Udrp
- qD7g==
+ bh=yooiyI2D0NVR6aZOYh1QGJp+C9X/1+hggMx7hPzIIio=;
+ b=Y/77j5mBCNCPISGFFULP8uA54EKW22EhJBSPcCu9WBht/M0Z0wVmXajMxnnOoVCZU6
+ fqR2Sy3gakRhThC2xGbWHkeTxsWPbCyeW8XiVQq1GByd+3pwS9UW+epFus8G3rlDbvHE
+ BBEH7Wz7qpT8fLOGNfBGTG+WmNsmbgnH3IsSChinX9jQiN/XVLd2PHFWhbVx7x+KzWCG
+ 51xXWItzaObU98EyEys1wrqy3JF4U2AgK+1FONuOmjPMNxewtQGE+gS5hlgP2qCswYzA
+ lry5uDuV7geY5D4F3/GO4CoocxnzwPM405w74KZs78YlBoKasPgtCqmrHAnOu2i/mxR3
+ Egfg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUGr0GERZt94+tMU9qOZsmf5uHhHagwjkg1K8/I6OjtX2RsY+ddGXLPj8z9Xxix0gZwwKERZ4WT+NQuHN0y5bWJrH1UaA==
-X-Gm-Message-State: AOJu0YyiFfSlp2QCEzBjTKvqWIhgmqpAqf7nFj9nQ1P3+xgGD3H2GcaT
- 3e3k6CFkdC8Lu6bLBDC11PMZ9ebympskVjcynDNYMPdGpkdFzF3I4Ul+mHSi1ZlX9Nn64x0Ra4O
- FBv3lf0EYvZozrydwf6mmwEIOm0YTFtNkk954ZA==
-X-Google-Smtp-Source: AGHT+IFs/pIzOgDnjzTjNCW0+WwrCyKRyEYWm8Dd+ZKslOcSXQAcrvlRhtuHs3T3RgtJ1OGb9mPlpP3ru0hGHTI7WrM=
-X-Received: by 2002:a05:6808:3a05:b0:3c1:3e44:3ded with SMTP id
- gr5-20020a0568083a0500b003c13e443dedmr19187326oib.19.1708438122344; Tue, 20
- Feb 2024 06:08:42 -0800 (PST)
+ AJvYcCVbyZf3MJTCU7CCvgceb7ExzjFtSf+60xCjuA6LaTky+D8q3ORen2OYPHkow2GOmavcurpWnp81jdK+ubTeMd3RpMX6kg==
+X-Gm-Message-State: AOJu0YxhpVp5/7CdsjfsIIiRCErxGfz2fpAdigwJrNsQgZeuej7xd6db
+ I3ZLe85Nm7atKgvENNI3BqBRbb+1+K+bkPAjRvLiWn1Kj533Yu18If/S7oYG62NMd9hb+E2lpqI
+ fJDE+G+DXpl9f1L0gfi7/agRO11UOLCxwGTQ2Ug==
+X-Google-Smtp-Source: AGHT+IEYjFW/pQ7dOJv/axQNgNZS4TquqAdeVrte9n9WDd3AFFnCn4McSUyC3mSBIDu87J/d+s2A1cE/lPceCQyT5Tc=
+X-Received: by 2002:a05:6808:2198:b0:3bf:d775:616e with SMTP id
+ be24-20020a056808219800b003bfd775616emr17691950oib.53.1708438124853; Tue, 20
+ Feb 2024 06:08:44 -0800 (PST)
 MIME-Version: 1.0
 References: <20240215-b4-qcom-common-target-v4-0-ed06355c634a@linaro.org>
- <20240215-b4-qcom-common-target-v4-31-ed06355c634a@linaro.org>
-In-Reply-To: <20240215-b4-qcom-common-target-v4-31-ed06355c634a@linaro.org>
+ <20240215-b4-qcom-common-target-v4-30-ed06355c634a@linaro.org>
+In-Reply-To: <20240215-b4-qcom-common-target-v4-30-ed06355c634a@linaro.org>
 From: Sumit Garg <sumit.garg@linaro.org>
-Date: Tue, 20 Feb 2024 19:38:31 +0530
-Message-ID: <CAFA6WYM7pBPWWL_sh6OL_Axe2z-0tOF9rVuQtzNp9kDfQhu7xQ@mail.gmail.com>
-Subject: Re: [PATCH v4 31/39] dts: msm8916: import PMIC dtsi files
+Date: Tue, 20 Feb 2024 19:38:33 +0530
+Message-ID: <CAFA6WYOBNsFeffeCqwocRMfKSvOpySnxzVi8NKsV=nsXdc6ktA@mail.gmail.com>
+Subject: Re: [PATCH v4 30/39] dt-bindings: import headers for MSM8916
 To: Caleb Connolly <caleb.connolly@linaro.org>
 Cc: Neil Armstrong <neil.armstrong@linaro.org>,
  Ramon Fried <rfried.dev@gmail.com>, 
@@ -98,17 +98,22 @@ X-Virus-Status: Clean
 
 On Fri, 16 Feb 2024 at 02:22, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >
-> Import the supporting pm8916.dtsi and msm8916-pm8916.dtsi files from
-> upstream in preparation for switching boards over.
+> Import the dt-bindings headers in preparation for switching to upstream
+> DTS for MSM8916.
 >
 > Taken from kernel tag v6.7
 >
 > Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->  arch/arm/dts/msm8916-pm8916.dtsi | 157 ++++++++++++++++++++++++++++++++++
->  arch/arm/dts/pm8916.dtsi         | 178 +++++++++++++++++++++++++++++++++++++++
->  2 files changed, 335 insertions(+)
+>  include/dt-bindings/arm/coresight-cti-dt.h      |  37 +++++
+>  include/dt-bindings/clock/qcom,rpmcc.h          | 174 ++++++++++++++++++++++++
+>  include/dt-bindings/interconnect/qcom,msm8916.h | 100 ++++++++++++++
+>  include/dt-bindings/pinctrl/qcom,pmic-mpp.h     | 106 +++++++++++++++
+>  include/dt-bindings/reset/qcom,gcc-msm8916.h    | 100 ++++++++++++++
+>  include/dt-bindings/sound/apq8016-lpass.h       |   9 ++
+>  include/dt-bindings/sound/qcom,lpass.h          |  46 +++++++
+>  7 files changed, 572 insertions(+)
 >
 
 Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
@@ -116,353 +121,620 @@ Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
 
 -Sumit
 
-> diff --git a/arch/arm/dts/msm8916-pm8916.dtsi b/arch/arm/dts/msm8916-pm8916.dtsi
+> diff --git a/include/dt-bindings/arm/coresight-cti-dt.h b/include/dt-bindings/arm/coresight-cti-dt.h
 > new file mode 100644
-> index 000000000000..b1a7eafbee31
+> index 000000000000..61e7bdf8ea6e
 > --- /dev/null
-> +++ b/arch/arm/dts/msm8916-pm8916.dtsi
-> @@ -0,0 +1,157 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
+> +++ b/include/dt-bindings/arm/coresight-cti-dt.h
+> @@ -0,0 +1,37 @@
+> +/* SPDX-License-Identifier: GPL-2.0 */
 > +/*
-> + * msm8916-pm8916.dtsi describes common properties (e.g. regulator connections)
-> + * that apply to most devices that make use of the MSM8916 SoC and PM8916 PMIC.
-> + * Many regulators have a fixed purpose in the original reference design and
-> + * were rarely re-used for different purposes. Devices that deviate from the
-> + * typical reference design should not make use of this include and instead add
-> + * the necessary properties in the board-specific device tree.
+> + * This header provides constants for the defined trigger signal
+> + * types on CoreSight CTI.
 > + */
 > +
-> +#include "msm8916.dtsi"
-> +#include "pm8916.dtsi"
+> +#ifndef _DT_BINDINGS_ARM_CORESIGHT_CTI_DT_H
+> +#define _DT_BINDINGS_ARM_CORESIGHT_CTI_DT_H
 > +
-> +&camss {
-> +       vdda-supply = <&pm8916_l2>;
-> +};
+> +#define GEN_IO         0
+> +#define GEN_INTREQ     1
+> +#define GEN_INTACK     2
+> +#define GEN_HALTREQ    3
+> +#define GEN_RESTARTREQ 4
+> +#define PE_EDBGREQ     5
+> +#define PE_DBGRESTART  6
+> +#define PE_CTIIRQ      7
+> +#define PE_PMUIRQ      8
+> +#define PE_DBGTRIGGER  9
+> +#define ETM_EXTOUT     10
+> +#define ETM_EXTIN      11
+> +#define SNK_FULL       12
+> +#define SNK_ACQCOMP    13
+> +#define SNK_FLUSHCOMP  14
+> +#define SNK_FLUSHIN    15
+> +#define SNK_TRIGIN     16
+> +#define STM_ASYNCOUT   17
+> +#define STM_TOUT_SPTE  18
+> +#define STM_TOUT_SW    19
+> +#define STM_TOUT_HETE  20
+> +#define STM_HWEVENT    21
+> +#define ELA_TSTART     22
+> +#define ELA_TSTOP      23
+> +#define ELA_DBGREQ     24
+> +#define CTI_TRIG_MAX   25
 > +
-> +&mdss_dsi0 {
-> +       vdda-supply = <&pm8916_l2>;
-> +       vddio-supply = <&pm8916_l6>;
-> +};
-> +
-> +&mdss_dsi0_phy {
-> +       vddio-supply = <&pm8916_l6>;
-> +};
-> +
-> +&mpss {
-> +       pll-supply = <&pm8916_l7>;
-> +};
-> +
-> +&pm8916_codec {
-> +       vdd-cdc-io-supply = <&pm8916_l5>;
-> +       vdd-cdc-tx-rx-cx-supply = <&pm8916_l5>;
-> +       vdd-micbias-supply = <&pm8916_l13>;
-> +};
-> +
-> +&sdhc_1 {
-> +       vmmc-supply = <&pm8916_l8>;
-> +       vqmmc-supply = <&pm8916_l5>;
-> +};
-> +
-> +&sdhc_2 {
-> +       vmmc-supply = <&pm8916_l11>;
-> +       vqmmc-supply = <&pm8916_l12>;
-> +};
-> +
-> +&usb_hs_phy {
-> +       v1p8-supply = <&pm8916_l7>;
-> +       v3p3-supply = <&pm8916_l13>;
-> +};
-> +
-> +&wcnss {
-> +       vddpx-supply = <&pm8916_l7>;
-> +};
-> +
-> +&wcnss_iris {
-> +       vddxo-supply = <&pm8916_l7>;
-> +       vddrfa-supply = <&pm8916_s3>;
-> +       vddpa-supply = <&pm8916_l9>;
-> +       vdddig-supply = <&pm8916_l5>;
-> +};
-> +
-> +&rpm_requests {
-> +       pm8916_rpm_regulators: regulators {
-> +               compatible = "qcom,rpm-pm8916-regulators";
-> +               vdd_l1_l2_l3-supply = <&pm8916_s3>;
-> +               vdd_l4_l5_l6-supply = <&pm8916_s4>;
-> +               vdd_l7-supply = <&pm8916_s4>;
-> +
-> +               /* pm8916_s1 is managed by rpmpd (MSM8916_VDDCX) */
-> +
-> +               pm8916_s3: s3 {
-> +                       regulator-min-microvolt = <1250000>;
-> +                       regulator-max-microvolt = <1350000>;
-> +                       regulator-always-on; /* Needed for L2 */
-> +               };
-> +
-> +               pm8916_s4: s4 {
-> +                       regulator-min-microvolt = <1850000>;
-> +                       regulator-max-microvolt = <2150000>;
-> +                       regulator-always-on; /* Needed for L5/L7 */
-> +               };
-> +
-> +               /*
-> +                * Some of the regulators are unused or managed by another
-> +                * processor (e.g. the modem). We should still define nodes for
-> +                * them to ensure the vote from the application processor can be
-> +                * dropped in case the regulators are already on during boot.
-> +                *
-> +                * The labels for these nodes are omitted on purpose because
-> +                * boards should configure a proper voltage before using them.
-> +                */
-> +               l1 {};
-> +
-> +               pm8916_l2: l2 {
-> +                       regulator-min-microvolt = <1200000>;
-> +                       regulator-max-microvolt = <1200000>;
-> +                       regulator-always-on; /* Needed for LPDDR RAM */
-> +               };
-> +
-> +               /* pm8916_l3 is managed by rpmpd (MSM8916_VDDMX) */
-> +
-> +               l4 {};
-> +
-> +               pm8916_l5: l5 {
-> +                       regulator-min-microvolt = <1800000>;
-> +                       regulator-max-microvolt = <1800000>;
-> +                       regulator-always-on; /* Needed for most digital I/O */
-> +               };
-> +
-> +               pm8916_l6: l6 {
-> +                       regulator-min-microvolt = <1800000>;
-> +                       regulator-max-microvolt = <1800000>;
-> +               };
-> +
-> +               pm8916_l7: l7 {
-> +                       regulator-min-microvolt = <1800000>;
-> +                       regulator-max-microvolt = <1800000>;
-> +                       regulator-always-on; /* Needed for CPU PLL */
-> +               };
-> +
-> +               pm8916_l8: l8 {
-> +                       regulator-min-microvolt = <2900000>;
-> +                       regulator-max-microvolt = <2900000>;
-> +               };
-> +
-> +               pm8916_l9: l9 {
-> +                       regulator-min-microvolt = <3300000>;
-> +                       regulator-max-microvolt = <3300000>;
-> +               };
-> +
-> +               l10 {};
-> +
-> +               pm8916_l11: l11 {
-> +                       regulator-min-microvolt = <2950000>;
-> +                       regulator-max-microvolt = <2950000>;
-> +                       regulator-allow-set-load;
-> +                       regulator-system-load = <200000>;
-> +               };
-> +
-> +               pm8916_l12: l12 {
-> +                       regulator-min-microvolt = <1800000>;
-> +                       regulator-max-microvolt = <2950000>;
-> +               };
-> +
-> +               pm8916_l13: l13 {
-> +                       regulator-min-microvolt = <3075000>;
-> +                       regulator-max-microvolt = <3075000>;
-> +               };
-> +
-> +               l14 {};
-> +               l15 {};
-> +               l16 {};
-> +               l17 {};
-> +               l18 {};
-> +       };
-> +};
-> diff --git a/arch/arm/dts/pm8916.dtsi b/arch/arm/dts/pm8916.dtsi
+> +#endif /*_DT_BINDINGS_ARM_CORESIGHT_CTI_DT_H */
+> diff --git a/include/dt-bindings/clock/qcom,rpmcc.h b/include/dt-bindings/clock/qcom,rpmcc.h
 > new file mode 100644
-> index 000000000000..f4de86787743
+> index 000000000000..46309c9953b2
 > --- /dev/null
-> +++ b/arch/arm/dts/pm8916.dtsi
-> @@ -0,0 +1,178 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +#include <dt-bindings/iio/qcom,spmi-vadc.h>
-> +#include <dt-bindings/input/linux-event-codes.h>
-> +#include <dt-bindings/interrupt-controller/irq.h>
-> +#include <dt-bindings/spmi/spmi.h>
+> +++ b/include/dt-bindings/clock/qcom,rpmcc.h
+> @@ -0,0 +1,174 @@
+> +/* SPDX-License-Identifier: GPL-2.0-only */
+> +/*
+> + * Copyright 2015 Linaro Limited
+> + */
 > +
-> +&spmi_bus {
+> +#ifndef _DT_BINDINGS_CLK_MSM_RPMCC_H
+> +#define _DT_BINDINGS_CLK_MSM_RPMCC_H
 > +
-> +       pm8916_0: pmic@0 {
-> +               compatible = "qcom,pm8916", "qcom,spmi-pmic";
-> +               reg = <0x0 SPMI_USID>;
-> +               #address-cells = <1>;
-> +               #size-cells = <0>;
+> +/* RPM clocks */
+> +#define RPM_PXO_CLK                            0
+> +#define RPM_PXO_A_CLK                          1
+> +#define RPM_CXO_CLK                            2
+> +#define RPM_CXO_A_CLK                          3
+> +#define RPM_APPS_FABRIC_CLK                    4
+> +#define RPM_APPS_FABRIC_A_CLK                  5
+> +#define RPM_CFPB_CLK                           6
+> +#define RPM_CFPB_A_CLK                         7
+> +#define RPM_QDSS_CLK                           8
+> +#define RPM_QDSS_A_CLK                         9
+> +#define RPM_DAYTONA_FABRIC_CLK                 10
+> +#define RPM_DAYTONA_FABRIC_A_CLK               11
+> +#define RPM_EBI1_CLK                           12
+> +#define RPM_EBI1_A_CLK                         13
+> +#define RPM_MM_FABRIC_CLK                      14
+> +#define RPM_MM_FABRIC_A_CLK                    15
+> +#define RPM_MMFPB_CLK                          16
+> +#define RPM_MMFPB_A_CLK                                17
+> +#define RPM_SYS_FABRIC_CLK                     18
+> +#define RPM_SYS_FABRIC_A_CLK                   19
+> +#define RPM_SFPB_CLK                           20
+> +#define RPM_SFPB_A_CLK                         21
+> +#define RPM_SMI_CLK                            22
+> +#define RPM_SMI_A_CLK                          23
+> +#define RPM_PLL4_CLK                           24
+> +#define RPM_XO_D0                              25
+> +#define RPM_XO_D1                              26
+> +#define RPM_XO_A0                              27
+> +#define RPM_XO_A1                              28
+> +#define RPM_XO_A2                              29
+> +#define RPM_NSS_FABRIC_0_CLK                   30
+> +#define RPM_NSS_FABRIC_0_A_CLK                 31
+> +#define RPM_NSS_FABRIC_1_CLK                   32
+> +#define RPM_NSS_FABRIC_1_A_CLK                 33
 > +
-> +               pon@800 {
-> +                       compatible = "qcom,pm8916-pon";
-> +                       reg = <0x800>;
-> +                       mode-bootloader = <0x2>;
-> +                       mode-recovery = <0x1>;
+> +/* SMD RPM clocks */
+> +#define RPM_SMD_XO_CLK_SRC                             0
+> +#define RPM_SMD_XO_A_CLK_SRC                   1
+> +#define RPM_SMD_PCNOC_CLK                              2
+> +#define RPM_SMD_PCNOC_A_CLK                            3
+> +#define RPM_SMD_SNOC_CLK                               4
+> +#define RPM_SMD_SNOC_A_CLK                             5
+> +#define RPM_SMD_BIMC_CLK                               6
+> +#define RPM_SMD_BIMC_A_CLK                             7
+> +#define RPM_SMD_QDSS_CLK                               8
+> +#define RPM_SMD_QDSS_A_CLK                             9
+> +#define RPM_SMD_BB_CLK1                                10
+> +#define RPM_SMD_BB_CLK1_A                              11
+> +#define RPM_SMD_BB_CLK2                                12
+> +#define RPM_SMD_BB_CLK2_A                              13
+> +#define RPM_SMD_RF_CLK1                                14
+> +#define RPM_SMD_RF_CLK1_A                              15
+> +#define RPM_SMD_RF_CLK2                                16
+> +#define RPM_SMD_RF_CLK2_A                              17
+> +#define RPM_SMD_BB_CLK1_PIN                            18
+> +#define RPM_SMD_BB_CLK1_A_PIN                  19
+> +#define RPM_SMD_BB_CLK2_PIN                            20
+> +#define RPM_SMD_BB_CLK2_A_PIN                  21
+> +#define RPM_SMD_RF_CLK1_PIN                            22
+> +#define RPM_SMD_RF_CLK1_A_PIN                  23
+> +#define RPM_SMD_RF_CLK2_PIN                            24
+> +#define RPM_SMD_RF_CLK2_A_PIN                  25
+> +#define RPM_SMD_PNOC_CLK                       26
+> +#define RPM_SMD_PNOC_A_CLK                     27
+> +#define RPM_SMD_CNOC_CLK                       28
+> +#define RPM_SMD_CNOC_A_CLK                     29
+> +#define RPM_SMD_MMSSNOC_AHB_CLK                        30
+> +#define RPM_SMD_MMSSNOC_AHB_A_CLK              31
+> +#define RPM_SMD_GFX3D_CLK_SRC                  32
+> +#define RPM_SMD_GFX3D_A_CLK_SRC                        33
+> +#define RPM_SMD_OCMEMGX_CLK                    34
+> +#define RPM_SMD_OCMEMGX_A_CLK                  35
+> +#define RPM_SMD_CXO_D0                         36
+> +#define RPM_SMD_CXO_D0_A                       37
+> +#define RPM_SMD_CXO_D1                         38
+> +#define RPM_SMD_CXO_D1_A                       39
+> +#define RPM_SMD_CXO_A0                         40
+> +#define RPM_SMD_CXO_A0_A                       41
+> +#define RPM_SMD_CXO_A1                         42
+> +#define RPM_SMD_CXO_A1_A                       43
+> +#define RPM_SMD_CXO_A2                         44
+> +#define RPM_SMD_CXO_A2_A                       45
+> +#define RPM_SMD_DIV_CLK1                       46
+> +#define RPM_SMD_DIV_A_CLK1                     47
+> +#define RPM_SMD_DIV_CLK2                       48
+> +#define RPM_SMD_DIV_A_CLK2                     49
+> +#define RPM_SMD_DIFF_CLK                       50
+> +#define RPM_SMD_DIFF_A_CLK                     51
+> +#define RPM_SMD_CXO_D0_PIN                     52
+> +#define RPM_SMD_CXO_D0_A_PIN                   53
+> +#define RPM_SMD_CXO_D1_PIN                     54
+> +#define RPM_SMD_CXO_D1_A_PIN                   55
+> +#define RPM_SMD_CXO_A0_PIN                     56
+> +#define RPM_SMD_CXO_A0_A_PIN                   57
+> +#define RPM_SMD_CXO_A1_PIN                     58
+> +#define RPM_SMD_CXO_A1_A_PIN                   59
+> +#define RPM_SMD_CXO_A2_PIN                     60
+> +#define RPM_SMD_CXO_A2_A_PIN                   61
+> +#define RPM_SMD_AGGR1_NOC_CLK                  62
+> +#define RPM_SMD_AGGR1_NOC_A_CLK                        63
+> +#define RPM_SMD_AGGR2_NOC_CLK                  64
+> +#define RPM_SMD_AGGR2_NOC_A_CLK                        65
+> +#define RPM_SMD_MMAXI_CLK                      66
+> +#define RPM_SMD_MMAXI_A_CLK                    67
+> +#define RPM_SMD_IPA_CLK                                68
+> +#define RPM_SMD_IPA_A_CLK                      69
+> +#define RPM_SMD_CE1_CLK                                70
+> +#define RPM_SMD_CE1_A_CLK                      71
+> +#define RPM_SMD_DIV_CLK3                       72
+> +#define RPM_SMD_DIV_A_CLK3                     73
+> +#define RPM_SMD_LN_BB_CLK                      74
+> +#define RPM_SMD_LN_BB_A_CLK                    75
+> +#define RPM_SMD_BIMC_GPU_CLK                   76
+> +#define RPM_SMD_BIMC_GPU_A_CLK                 77
+> +#define RPM_SMD_QPIC_CLK                       78
+> +#define RPM_SMD_QPIC_CLK_A                     79
+> +#define RPM_SMD_LN_BB_CLK1                     80
+> +#define RPM_SMD_LN_BB_CLK1_A                   81
+> +#define RPM_SMD_LN_BB_CLK2                     82
+> +#define RPM_SMD_LN_BB_CLK2_A                   83
+> +#define RPM_SMD_LN_BB_CLK3_PIN                 84
+> +#define RPM_SMD_LN_BB_CLK3_A_PIN               85
+> +#define RPM_SMD_RF_CLK3                                86
+> +#define RPM_SMD_RF_CLK3_A                      87
+> +#define RPM_SMD_RF_CLK3_PIN                    88
+> +#define RPM_SMD_RF_CLK3_A_PIN                  89
+> +#define RPM_SMD_MMSSNOC_AXI_CLK                        90
+> +#define RPM_SMD_MMSSNOC_AXI_CLK_A              91
+> +#define RPM_SMD_CNOC_PERIPH_CLK                        92
+> +#define RPM_SMD_CNOC_PERIPH_A_CLK              93
+> +#define RPM_SMD_LN_BB_CLK3                     94
+> +#define RPM_SMD_LN_BB_CLK3_A                   95
+> +#define RPM_SMD_LN_BB_CLK1_PIN                 96
+> +#define RPM_SMD_LN_BB_CLK1_A_PIN               97
+> +#define RPM_SMD_LN_BB_CLK2_PIN                 98
+> +#define RPM_SMD_LN_BB_CLK2_A_PIN               99
+> +#define RPM_SMD_SYSMMNOC_CLK                   100
+> +#define RPM_SMD_SYSMMNOC_A_CLK                 101
+> +#define RPM_SMD_CE2_CLK                                102
+> +#define RPM_SMD_CE2_A_CLK                      103
+> +#define RPM_SMD_CE3_CLK                                104
+> +#define RPM_SMD_CE3_A_CLK                      105
+> +#define RPM_SMD_QUP_CLK                                106
+> +#define RPM_SMD_QUP_A_CLK                      107
+> +#define RPM_SMD_MMRT_CLK                       108
+> +#define RPM_SMD_MMRT_A_CLK                     109
+> +#define RPM_SMD_MMNRT_CLK                      110
+> +#define RPM_SMD_MMNRT_A_CLK                    111
+> +#define RPM_SMD_SNOC_PERIPH_CLK                        112
+> +#define RPM_SMD_SNOC_PERIPH_A_CLK              113
+> +#define RPM_SMD_SNOC_LPASS_CLK                 114
+> +#define RPM_SMD_SNOC_LPASS_A_CLK               115
+> +#define RPM_SMD_HWKM_CLK                       116
+> +#define RPM_SMD_HWKM_A_CLK                     117
+> +#define RPM_SMD_PKA_CLK                                118
+> +#define RPM_SMD_PKA_A_CLK                      119
+> +#define RPM_SMD_CPUSS_GNOC_CLK                 120
+> +#define RPM_SMD_CPUSS_GNOC_A_CLK               121
+> +#define RPM_SMD_MSS_CFG_AHB_CLK                122
+> +#define RPM_SMD_MSS_CFG_AHB_A_CLK              123
+> +#define RPM_SMD_BIMC_FREQ_LOG                  124
+> +#define RPM_SMD_LN_BB_CLK_PIN                  125
+> +#define RPM_SMD_LN_BB_A_CLK_PIN                        126
 > +
-> +                       pwrkey {
-> +                               compatible = "qcom,pm8941-pwrkey";
-> +                               interrupts = <0x0 0x8 0 IRQ_TYPE_EDGE_BOTH>;
-> +                               debounce = <15625>;
-> +                               bias-pull-up;
-> +                               linux,code = <KEY_POWER>;
-> +                       };
+> +#endif
+> diff --git a/include/dt-bindings/interconnect/qcom,msm8916.h b/include/dt-bindings/interconnect/qcom,msm8916.h
+> new file mode 100644
+> index 000000000000..359a75feb198
+> --- /dev/null
+> +++ b/include/dt-bindings/interconnect/qcom,msm8916.h
+> @@ -0,0 +1,100 @@
+> +/* SPDX-License-Identifier: GPL-2.0 */
+> +/*
+> + * Qualcomm interconnect IDs
+> + *
+> + * Copyright (c) 2019, Linaro Ltd.
+> + * Author: Georgi Djakov <georgi.djakov@linaro.org>
+> + */
 > +
-> +                       pm8916_resin: resin {
-> +                               compatible = "qcom,pm8941-resin";
-> +                               interrupts = <0x0 0x8 1 IRQ_TYPE_EDGE_BOTH>;
-> +                               debounce = <15625>;
-> +                               bias-pull-up;
-> +                               status = "disabled";
-> +                       };
+> +#ifndef __DT_BINDINGS_INTERCONNECT_QCOM_MSM8916_H
+> +#define __DT_BINDINGS_INTERCONNECT_QCOM_MSM8916_H
 > +
-> +                       watchdog {
-> +                               compatible = "qcom,pm8916-wdt";
-> +                               interrupts = <0x0 0x8 6 IRQ_TYPE_EDGE_RISING>;
-> +                               timeout-sec = <60>;
-> +                       };
-> +               };
+> +#define BIMC_SNOC_SLV                  0
+> +#define MASTER_JPEG                    1
+> +#define MASTER_MDP_PORT0               2
+> +#define MASTER_QDSS_BAM                        3
+> +#define MASTER_QDSS_ETR                        4
+> +#define MASTER_SNOC_CFG                        5
+> +#define MASTER_VFE                     6
+> +#define MASTER_VIDEO_P0                        7
+> +#define SNOC_MM_INT_0                  8
+> +#define SNOC_MM_INT_1                  9
+> +#define SNOC_MM_INT_2                  10
+> +#define SNOC_MM_INT_BIMC               11
+> +#define PCNOC_SNOC_SLV                 12
+> +#define SLAVE_APSS                     13
+> +#define SLAVE_CATS_128                 14
+> +#define SLAVE_OCMEM_64                 15
+> +#define SLAVE_IMEM                     16
+> +#define SLAVE_QDSS_STM                 17
+> +#define SLAVE_SRVC_SNOC                        18
+> +#define SNOC_BIMC_0_MAS                        19
+> +#define SNOC_BIMC_1_MAS                        20
+> +#define SNOC_INT_0                     21
+> +#define SNOC_INT_1                     22
+> +#define SNOC_INT_BIMC                  23
+> +#define SNOC_PCNOC_MAS                 24
+> +#define SNOC_QDSS_INT                  25
 > +
-> +               pm8916_usbin: usb-detect@1300 {
-> +                       compatible = "qcom,pm8941-misc";
-> +                       reg = <0x1300>;
-> +                       interrupts = <0x0 0x13 1 IRQ_TYPE_EDGE_BOTH>;
-> +                       interrupt-names = "usb_vbus";
-> +                       status = "disabled";
-> +               };
+> +#define BIMC_SNOC_MAS                  0
+> +#define MASTER_AMPSS_M0                        1
+> +#define MASTER_GRAPHICS_3D             2
+> +#define MASTER_TCU0                    3
+> +#define MASTER_TCU1                    4
+> +#define SLAVE_AMPSS_L2                 5
+> +#define SLAVE_EBI_CH0                  6
+> +#define SNOC_BIMC_0_SLV                        7
+> +#define SNOC_BIMC_1_SLV                        8
 > +
-> +               pm8916_temp: temp-alarm@2400 {
-> +                       compatible = "qcom,spmi-temp-alarm";
-> +                       reg = <0x2400>;
-> +                       interrupts = <0 0x24 0 IRQ_TYPE_EDGE_RISING>;
-> +                       io-channels = <&pm8916_vadc VADC_DIE_TEMP>;
-> +                       io-channel-names = "thermal";
-> +                       #thermal-sensor-cells = <0>;
-> +               };
+> +#define MASTER_BLSP_1                  0
+> +#define MASTER_DEHR                    1
+> +#define MASTER_LPASS                   2
+> +#define MASTER_CRYPTO_CORE0            3
+> +#define MASTER_SDCC_1                  4
+> +#define MASTER_SDCC_2                  5
+> +#define MASTER_SPDM                    6
+> +#define MASTER_USB_HS                  7
+> +#define PCNOC_INT_0                    8
+> +#define PCNOC_INT_1                    9
+> +#define PCNOC_MAS_0                    10
+> +#define PCNOC_MAS_1                    11
+> +#define PCNOC_SLV_0                    12
+> +#define PCNOC_SLV_1                    13
+> +#define PCNOC_SLV_2                    14
+> +#define PCNOC_SLV_3                    15
+> +#define PCNOC_SLV_4                    16
+> +#define PCNOC_SLV_8                    17
+> +#define PCNOC_SLV_9                    18
+> +#define PCNOC_SNOC_MAS                 19
+> +#define SLAVE_BIMC_CFG                 20
+> +#define SLAVE_BLSP_1                   21
+> +#define SLAVE_BOOT_ROM                 22
+> +#define SLAVE_CAMERA_CFG               23
+> +#define SLAVE_CLK_CTL                  24
+> +#define SLAVE_CRYPTO_0_CFG             25
+> +#define SLAVE_DEHR_CFG                 26
+> +#define SLAVE_DISPLAY_CFG              27
+> +#define SLAVE_GRAPHICS_3D_CFG          28
+> +#define SLAVE_IMEM_CFG                 29
+> +#define SLAVE_LPASS                    30
+> +#define SLAVE_MPM                      31
+> +#define SLAVE_MSG_RAM                  32
+> +#define SLAVE_MSS                      33
+> +#define SLAVE_PDM                      34
+> +#define SLAVE_PMIC_ARB                 35
+> +#define SLAVE_PCNOC_CFG                        36
+> +#define SLAVE_PRNG                     37
+> +#define SLAVE_QDSS_CFG                 38
+> +#define SLAVE_RBCPR_CFG                        39
+> +#define SLAVE_SDCC_1                   40
+> +#define SLAVE_SDCC_2                   41
+> +#define SLAVE_SECURITY                 42
+> +#define SLAVE_SNOC_CFG                 43
+> +#define SLAVE_SPDM                     44
+> +#define SLAVE_TCSR                     45
+> +#define SLAVE_TLMM                     46
+> +#define SLAVE_USB_HS                   47
+> +#define SLAVE_VENUS_CFG                        48
+> +#define SNOC_PCNOC_SLV                 49
 > +
-> +               pm8916_vadc: adc@3100 {
-> +                       compatible = "qcom,spmi-vadc";
-> +                       reg = <0x3100>;
-> +                       interrupts = <0x0 0x31 0x0 IRQ_TYPE_EDGE_RISING>;
-> +                       #address-cells = <1>;
-> +                       #size-cells = <0>;
-> +                       #io-channel-cells = <1>;
+> +#endif
+> diff --git a/include/dt-bindings/pinctrl/qcom,pmic-mpp.h b/include/dt-bindings/pinctrl/qcom,pmic-mpp.h
+> new file mode 100644
+> index 000000000000..32e66ee7e830
+> --- /dev/null
+> +++ b/include/dt-bindings/pinctrl/qcom,pmic-mpp.h
+> @@ -0,0 +1,106 @@
+> +/* SPDX-License-Identifier: GPL-2.0 */
+> +/*
+> + * This header provides constants for the Qualcomm PMIC's
+> + * Multi-Purpose Pin binding.
+> + */
 > +
-> +                       channel@0 {
-> +                               reg = <VADC_USBIN>;
-> +                               qcom,pre-scaling = <1 10>;
-> +                       };
-> +                       channel@7 {
-> +                               reg = <VADC_VSYS>;
-> +                               qcom,pre-scaling = <1 3>;
-> +                       };
-> +                       channel@8 {
-> +                               reg = <VADC_DIE_TEMP>;
-> +                       };
-> +                       channel@9 {
-> +                               reg = <VADC_REF_625MV>;
-> +                       };
-> +                       channel@a {
-> +                               reg = <VADC_REF_1250MV>;
-> +                       };
-> +                       channel@e {
-> +                               reg = <VADC_GND_REF>;
-> +                       };
-> +                       channel@f {
-> +                               reg = <VADC_VDD_VADC>;
-> +                       };
-> +               };
+> +#ifndef _DT_BINDINGS_PINCTRL_QCOM_PMIC_MPP_H
+> +#define _DT_BINDINGS_PINCTRL_QCOM_PMIC_MPP_H
 > +
-> +               rtc@6000 {
-> +                       compatible = "qcom,pm8941-rtc";
-> +                       reg = <0x6000>, <0x6100>;
-> +                       reg-names = "rtc", "alarm";
-> +                       interrupts = <0x0 0x61 0x1 IRQ_TYPE_EDGE_RISING>;
-> +               };
+> +/* power-source */
 > +
-> +               pm8916_mpps: mpps@a000 {
-> +                       compatible = "qcom,pm8916-mpp", "qcom,spmi-mpp";
-> +                       reg = <0xa000>;
-> +                       gpio-controller;
-> +                       #gpio-cells = <2>;
-> +                       gpio-ranges = <&pm8916_mpps 0 0 4>;
-> +                       interrupt-controller;
-> +                       #interrupt-cells = <2>;
-> +               };
+> +/* Digital Input/Output: level [PM8058] */
+> +#define PM8058_MPP_VPH                 0
+> +#define PM8058_MPP_S3                  1
+> +#define PM8058_MPP_L2                  2
+> +#define PM8058_MPP_L3                  3
 > +
-> +               pm8916_gpios: gpio@c000 {
-> +                       compatible = "qcom,pm8916-gpio", "qcom,spmi-gpio";
-> +                       reg = <0xc000>;
-> +                       gpio-controller;
-> +                       gpio-ranges = <&pm8916_gpios 0 0 4>;
-> +                       #gpio-cells = <2>;
-> +                       interrupt-controller;
-> +                       #interrupt-cells = <2>;
-> +               };
-> +       };
+> +/* Digital Input/Output: level [PM8901] */
+> +#define PM8901_MPP_MSMIO               0
+> +#define PM8901_MPP_DIG                 1
+> +#define PM8901_MPP_L5                  2
+> +#define PM8901_MPP_S4                  3
+> +#define PM8901_MPP_VPH                 4
 > +
-> +       pm8916_1: pmic@1 {
-> +               compatible = "qcom,pm8916", "qcom,spmi-pmic";
-> +               reg = <0x1 SPMI_USID>;
-> +               #address-cells = <1>;
-> +               #size-cells = <0>;
+> +/* Digital Input/Output: level [PM8921] */
+> +#define PM8921_MPP_S4                  1
+> +#define PM8921_MPP_L15                 3
+> +#define PM8921_MPP_L17                 4
+> +#define PM8921_MPP_VPH                 7
 > +
-> +               pm8916_pwm: pwm {
-> +                       compatible = "qcom,pm8916-pwm";
+> +/* Digital Input/Output: level [PM8821] */
+> +#define PM8821_MPP_1P8                 0
+> +#define PM8821_MPP_VPH                 7
 > +
-> +                       #pwm-cells = <2>;
+> +/* Digital Input/Output: level [PM8018] */
+> +#define PM8018_MPP_L4                  0
+> +#define PM8018_MPP_L14                 1
+> +#define PM8018_MPP_S3                  2
+> +#define PM8018_MPP_L6                  3
+> +#define PM8018_MPP_L2                  4
+> +#define PM8018_MPP_L5                  5
+> +#define PM8018_MPP_VPH                 7
 > +
-> +                       status = "disabled";
-> +               };
+> +/* Digital Input/Output: level [PM8038] */
+> +#define PM8038_MPP_L20                 0
+> +#define PM8038_MPP_L11                 1
+> +#define PM8038_MPP_L5                  2
+> +#define PM8038_MPP_L15                 3
+> +#define PM8038_MPP_L17                 4
+> +#define PM8038_MPP_VPH                 7
 > +
-> +               pm8916_vib: vibrator@c000 {
-> +                       compatible = "qcom,pm8916-vib";
-> +                       reg = <0xc000>;
-> +                       status = "disabled";
-> +               };
+> +#define PM8841_MPP_VPH                 0
+> +#define PM8841_MPP_S3                  2
 > +
-> +               pm8916_codec: audio-codec@f000 {
-> +                       compatible = "qcom,pm8916-wcd-analog-codec";
-> +                       reg = <0xf000>;
-> +                       interrupt-parent = <&spmi_bus>;
-> +                       interrupts = <0x1 0xf0 0x0 IRQ_TYPE_NONE>,
-> +                                    <0x1 0xf0 0x1 IRQ_TYPE_NONE>,
-> +                                    <0x1 0xf0 0x2 IRQ_TYPE_NONE>,
-> +                                    <0x1 0xf0 0x3 IRQ_TYPE_NONE>,
-> +                                    <0x1 0xf0 0x4 IRQ_TYPE_NONE>,
-> +                                    <0x1 0xf0 0x5 IRQ_TYPE_NONE>,
-> +                                    <0x1 0xf0 0x6 IRQ_TYPE_NONE>,
-> +                                    <0x1 0xf0 0x7 IRQ_TYPE_NONE>,
-> +                                    <0x1 0xf1 0x0 IRQ_TYPE_NONE>,
-> +                                    <0x1 0xf1 0x1 IRQ_TYPE_NONE>,
-> +                                    <0x1 0xf1 0x2 IRQ_TYPE_NONE>,
-> +                                    <0x1 0xf1 0x3 IRQ_TYPE_NONE>,
-> +                                    <0x1 0xf1 0x4 IRQ_TYPE_NONE>,
-> +                                    <0x1 0xf1 0x5 IRQ_TYPE_NONE>;
-> +                       interrupt-names = "cdc_spk_cnp_int",
-> +                                         "cdc_spk_clip_int",
-> +                                         "cdc_spk_ocp_int",
-> +                                         "mbhc_ins_rem_det1",
-> +                                         "mbhc_but_rel_det",
-> +                                         "mbhc_but_press_det",
-> +                                         "mbhc_ins_rem_det",
-> +                                         "mbhc_switch_int",
-> +                                         "cdc_ear_ocp_int",
-> +                                         "cdc_hphr_ocp_int",
-> +                                         "cdc_hphl_ocp_det",
-> +                                         "cdc_ear_cnp_int",
-> +                                         "cdc_hphr_cnp_int",
-> +                                         "cdc_hphl_cnp_int";
-> +                       #sound-dai-cells = <1>;
-> +                       status = "disabled";
-> +               };
-> +       };
-> +};
+> +#define PM8916_MPP_VPH                 0
+> +#define PM8916_MPP_L2                  2
+> +#define PM8916_MPP_L5                  3
+> +
+> +#define PM8941_MPP_VPH                 0
+> +#define PM8941_MPP_L1                  1
+> +#define PM8941_MPP_S3                  2
+> +#define PM8941_MPP_L6                  3
+> +
+> +#define PMA8084_MPP_VPH                        0
+> +#define PMA8084_MPP_L1                 1
+> +#define PMA8084_MPP_S4                 2
+> +#define PMA8084_MPP_L6                 3
+> +
+> +#define PM8994_MPP_VPH                 0
+> +/* Only supported for MPP_05-MPP_08 */
+> +#define PM8994_MPP_L19                 1
+> +#define PM8994_MPP_S4                  2
+> +#define PM8994_MPP_L12                 3
+> +
+> +/*
+> + * Analog Input - Set the source for analog input.
+> + * To be used with "qcom,amux-route" property
+> + */
+> +#define PMIC_MPP_AMUX_ROUTE_CH5                0
+> +#define PMIC_MPP_AMUX_ROUTE_CH6                1
+> +#define PMIC_MPP_AMUX_ROUTE_CH7                2
+> +#define PMIC_MPP_AMUX_ROUTE_CH8                3
+> +#define PMIC_MPP_AMUX_ROUTE_ABUS1      4
+> +#define PMIC_MPP_AMUX_ROUTE_ABUS2      5
+> +#define PMIC_MPP_AMUX_ROUTE_ABUS3      6
+> +#define PMIC_MPP_AMUX_ROUTE_ABUS4      7
+> +
+> +/* Analog Output: level */
+> +#define PMIC_MPP_AOUT_LVL_1V25         0
+> +#define PMIC_MPP_AOUT_LVL_1V25_2       1
+> +#define PMIC_MPP_AOUT_LVL_0V625                2
+> +#define PMIC_MPP_AOUT_LVL_0V3125       3
+> +#define PMIC_MPP_AOUT_LVL_MPP          4
+> +#define PMIC_MPP_AOUT_LVL_ABUS1                5
+> +#define PMIC_MPP_AOUT_LVL_ABUS2                6
+> +#define PMIC_MPP_AOUT_LVL_ABUS3                7
+> +
+> +/* To be used with "function" */
+> +#define PMIC_MPP_FUNC_NORMAL           "normal"
+> +#define PMIC_MPP_FUNC_PAIRED           "paired"
+> +#define PMIC_MPP_FUNC_DTEST1           "dtest1"
+> +#define PMIC_MPP_FUNC_DTEST2           "dtest2"
+> +#define PMIC_MPP_FUNC_DTEST3           "dtest3"
+> +#define PMIC_MPP_FUNC_DTEST4           "dtest4"
+> +
+> +#endif
+> diff --git a/include/dt-bindings/reset/qcom,gcc-msm8916.h b/include/dt-bindings/reset/qcom,gcc-msm8916.h
+> new file mode 100644
+> index 000000000000..1f9be10872df
+> --- /dev/null
+> +++ b/include/dt-bindings/reset/qcom,gcc-msm8916.h
+> @@ -0,0 +1,100 @@
+> +/* SPDX-License-Identifier: GPL-2.0-only */
+> +/*
+> + * Copyright 2015 Linaro Limited
+> + */
+> +
+> +#ifndef _DT_BINDINGS_RESET_MSM_GCC_8916_H
+> +#define _DT_BINDINGS_RESET_MSM_GCC_8916_H
+> +
+> +#define GCC_BLSP1_BCR                  0
+> +#define GCC_BLSP1_QUP1_BCR             1
+> +#define GCC_BLSP1_UART1_BCR            2
+> +#define GCC_BLSP1_QUP2_BCR             3
+> +#define GCC_BLSP1_UART2_BCR            4
+> +#define GCC_BLSP1_QUP3_BCR             5
+> +#define GCC_BLSP1_QUP4_BCR             6
+> +#define GCC_BLSP1_QUP5_BCR             7
+> +#define GCC_BLSP1_QUP6_BCR             8
+> +#define GCC_IMEM_BCR                   9
+> +#define GCC_SMMU_BCR                   10
+> +#define GCC_APSS_TCU_BCR               11
+> +#define GCC_SMMU_XPU_BCR               12
+> +#define GCC_PCNOC_TBU_BCR              13
+> +#define GCC_PRNG_BCR                   14
+> +#define GCC_BOOT_ROM_BCR               15
+> +#define GCC_CRYPTO_BCR                 16
+> +#define GCC_SEC_CTRL_BCR               17
+> +#define GCC_AUDIO_CORE_BCR             18
+> +#define GCC_ULT_AUDIO_BCR              19
+> +#define GCC_DEHR_BCR                   20
+> +#define GCC_SYSTEM_NOC_BCR             21
+> +#define GCC_PCNOC_BCR                  22
+> +#define GCC_TCSR_BCR                   23
+> +#define GCC_QDSS_BCR                   24
+> +#define GCC_DCD_BCR                    25
+> +#define GCC_MSG_RAM_BCR                        26
+> +#define GCC_MPM_BCR                    27
+> +#define GCC_SPMI_BCR                   28
+> +#define GCC_SPDM_BCR                   29
+> +#define GCC_MM_SPDM_BCR                        30
+> +#define GCC_BIMC_BCR                   31
+> +#define GCC_RBCPR_BCR                  32
+> +#define GCC_TLMM_BCR                   33
+> +#define GCC_USB_HS_BCR                 34
+> +#define GCC_USB2A_PHY_BCR              35
+> +#define GCC_SDCC1_BCR                  36
+> +#define GCC_SDCC2_BCR                  37
+> +#define GCC_PDM_BCR                    38
+> +#define GCC_SNOC_BUS_TIMEOUT0_BCR      39
+> +#define GCC_PCNOC_BUS_TIMEOUT0_BCR     40
+> +#define GCC_PCNOC_BUS_TIMEOUT1_BCR     41
+> +#define GCC_PCNOC_BUS_TIMEOUT2_BCR     42
+> +#define GCC_PCNOC_BUS_TIMEOUT3_BCR     43
+> +#define GCC_PCNOC_BUS_TIMEOUT4_BCR     44
+> +#define GCC_PCNOC_BUS_TIMEOUT5_BCR     45
+> +#define GCC_PCNOC_BUS_TIMEOUT6_BCR     46
+> +#define GCC_PCNOC_BUS_TIMEOUT7_BCR     47
+> +#define GCC_PCNOC_BUS_TIMEOUT8_BCR     48
+> +#define GCC_PCNOC_BUS_TIMEOUT9_BCR     49
+> +#define GCC_MMSS_BCR                   50
+> +#define GCC_VENUS0_BCR                 51
+> +#define GCC_MDSS_BCR                   52
+> +#define GCC_CAMSS_PHY0_BCR             53
+> +#define GCC_CAMSS_CSI0_BCR             54
+> +#define GCC_CAMSS_CSI0PHY_BCR          55
+> +#define GCC_CAMSS_CSI0RDI_BCR          56
+> +#define GCC_CAMSS_CSI0PIX_BCR          57
+> +#define GCC_CAMSS_PHY1_BCR             58
+> +#define GCC_CAMSS_CSI1_BCR             59
+> +#define GCC_CAMSS_CSI1PHY_BCR          60
+> +#define GCC_CAMSS_CSI1RDI_BCR          61
+> +#define GCC_CAMSS_CSI1PIX_BCR          62
+> +#define GCC_CAMSS_ISPIF_BCR            63
+> +#define GCC_CAMSS_CCI_BCR              64
+> +#define GCC_CAMSS_MCLK0_BCR            65
+> +#define GCC_CAMSS_MCLK1_BCR            66
+> +#define GCC_CAMSS_GP0_BCR              67
+> +#define GCC_CAMSS_GP1_BCR              68
+> +#define GCC_CAMSS_TOP_BCR              69
+> +#define GCC_CAMSS_MICRO_BCR            70
+> +#define GCC_CAMSS_JPEG_BCR             71
+> +#define GCC_CAMSS_VFE_BCR              72
+> +#define GCC_CAMSS_CSI_VFE0_BCR         73
+> +#define GCC_OXILI_BCR                  74
+> +#define GCC_GMEM_BCR                   75
+> +#define GCC_CAMSS_AHB_BCR              76
+> +#define GCC_MDP_TBU_BCR                        77
+> +#define GCC_GFX_TBU_BCR                        78
+> +#define GCC_GFX_TCU_BCR                        79
+> +#define GCC_MSS_TBU_AXI_BCR            80
+> +#define GCC_MSS_TBU_GSS_AXI_BCR                81
+> +#define GCC_MSS_TBU_Q6_AXI_BCR         82
+> +#define GCC_GTCU_AHB_BCR               83
+> +#define GCC_SMMU_CFG_BCR               84
+> +#define GCC_VFE_TBU_BCR                        85
+> +#define GCC_VENUS_TBU_BCR              86
+> +#define GCC_JPEG_TBU_BCR               87
+> +#define GCC_PRONTO_TBU_BCR             88
+> +#define GCC_SMMU_CATS_BCR              89
+> +
+> +#endif
+> diff --git a/include/dt-bindings/sound/apq8016-lpass.h b/include/dt-bindings/sound/apq8016-lpass.h
+> new file mode 100644
+> index 000000000000..dc605c4bc224
+> --- /dev/null
+> +++ b/include/dt-bindings/sound/apq8016-lpass.h
+> @@ -0,0 +1,9 @@
+> +/* SPDX-License-Identifier: GPL-2.0 */
+> +#ifndef __DT_APQ8016_LPASS_H
+> +#define __DT_APQ8016_LPASS_H
+> +
+> +#include <dt-bindings/sound/qcom,lpass.h>
+> +
+> +/* NOTE: Use qcom,lpass.h to define any AIF ID's for LPASS */
+> +
+> +#endif /* __DT_APQ8016_LPASS_H */
+> diff --git a/include/dt-bindings/sound/qcom,lpass.h b/include/dt-bindings/sound/qcom,lpass.h
+> new file mode 100644
+> index 000000000000..a9404c3b8884
+> --- /dev/null
+> +++ b/include/dt-bindings/sound/qcom,lpass.h
+> @@ -0,0 +1,46 @@
+> +/* SPDX-License-Identifier: GPL-2.0 */
+> +#ifndef __DT_QCOM_LPASS_H
+> +#define __DT_QCOM_LPASS_H
+> +
+> +#define MI2S_PRIMARY   0
+> +#define MI2S_SECONDARY 1
+> +#define MI2S_TERTIARY  2
+> +#define MI2S_QUATERNARY        3
+> +#define MI2S_QUINARY   4
+> +
+> +#define LPASS_DP_RX    5
+> +
+> +#define LPASS_CDC_DMA_RX0 6
+> +#define LPASS_CDC_DMA_RX1 7
+> +#define LPASS_CDC_DMA_RX2 8
+> +#define LPASS_CDC_DMA_RX3 9
+> +#define LPASS_CDC_DMA_RX4 10
+> +#define LPASS_CDC_DMA_RX5 11
+> +#define LPASS_CDC_DMA_RX6 12
+> +#define LPASS_CDC_DMA_RX7 13
+> +#define LPASS_CDC_DMA_RX8 14
+> +#define LPASS_CDC_DMA_RX9 15
+> +
+> +#define LPASS_CDC_DMA_TX0 16
+> +#define LPASS_CDC_DMA_TX1 17
+> +#define LPASS_CDC_DMA_TX2 18
+> +#define LPASS_CDC_DMA_TX3 19
+> +#define LPASS_CDC_DMA_TX4 20
+> +#define LPASS_CDC_DMA_TX5 21
+> +#define LPASS_CDC_DMA_TX6 22
+> +#define LPASS_CDC_DMA_TX7 23
+> +#define LPASS_CDC_DMA_TX8 24
+> +
+> +#define LPASS_CDC_DMA_VA_TX0 25
+> +#define LPASS_CDC_DMA_VA_TX1 26
+> +#define LPASS_CDC_DMA_VA_TX2 27
+> +#define LPASS_CDC_DMA_VA_TX3 28
+> +#define LPASS_CDC_DMA_VA_TX4 29
+> +#define LPASS_CDC_DMA_VA_TX5 30
+> +#define LPASS_CDC_DMA_VA_TX6 31
+> +#define LPASS_CDC_DMA_VA_TX7 32
+> +#define LPASS_CDC_DMA_VA_TX8 33
+> +
+> +#define LPASS_MCLK0    0
+> +
+> +#endif /* __DT_QCOM_LPASS_H */
 >
 > --
 > 2.43.1
