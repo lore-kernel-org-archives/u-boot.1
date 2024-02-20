@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 653B9C48BC4
-	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 06:17:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3111DC5475B
+	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 06:18:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6BBAD87F8E;
-	Tue, 20 Feb 2024 07:10:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9A05E87F86;
+	Tue, 20 Feb 2024 07:17:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fjDOfziA";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QyIFmsKm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D35FA87BB3; Tue, 20 Feb 2024 07:10:32 +0100 (CET)
-Received: from mail-ua1-x934.google.com (mail-ua1-x934.google.com
- [IPv6:2607:f8b0:4864:20::934])
+ id 694BA87F96; Tue, 20 Feb 2024 07:15:54 +0100 (CET)
+Received: from mail-vs1-xe31.google.com (mail-vs1-xe31.google.com
+ [IPv6:2607:f8b0:4864:20::e31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AEFC687F92
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 07:10:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8050C87EAD
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 07:15:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ua1-x934.google.com with SMTP id
- a1e0cc1a2514c-7ce3c7566e0so2291957241.1
- for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 22:10:28 -0800 (PST)
+Received: by mail-vs1-xe31.google.com with SMTP id
+ ada2fe7eead31-4705496ac55so279126137.3
+ for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 22:15:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708409383; x=1709014183; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1708409689; x=1709014489; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=f9yI5eOPPRpti+7HSngJaO0WpkyFYIO/D7umg3rS0cM=;
- b=fjDOfziA2tuO4sOH1X+vyEmoAJbG2aptdfxESblUidcLkl2etANNXKrsNL/3QfrkzS
- UFNKlYSW4KNeLVYwKBvJZQPoT9wqd630Pjdklnq8fY+oayWNfpVQqxdePpVryWvhnliI
- roOmjDSWvH+1pfubw9ruenCPqQdtWgIm1GMUJhDghH+949ybCJf75kp5dJBhcTXolK6G
- bfBmkUyKjfEnM8/wGpXXDX0NoBHhDHCb8MjLX70U0/hD0ng/1h+Cv+iVGrxHgjdl25mx
- /mn+jNJ1xoVmed4BR18TiuLAqfBWaSkNKHj1t4LjjpVxjVSv+v/2WTZQKQ2WZi/7+3f2
- YUHg==
+ bh=eQxcoWVfQccM0LkwGSNwky21E9rzvKv6RM//AG0H2Ec=;
+ b=QyIFmsKmc9bqpd0u4UFeRQ665FZpShdA98OIJW0jxMsbrfA/DxV6oJSsbmMe/SGcis
+ cDUUtY366K6BDRgrAxxuv+SjzVFjmG9EVPsPm2aOVx4DRUVuOO+81TZLkz61iGHsvDkr
+ aIUJWhlmrNgl3aC9KRk10nTPQ/SeejxikJiXnVTqlAPKVfu4KdRhBGkrwh6aNEcdtIFj
+ B0Mapfj9IVXPKaJvzezVCoiSeGnTdmizVV8R8ygxGniaanMmnQaWwmZoHhoXKpWAw7ui
+ FHYgq7loPUUMt9fV86VSGgVdR9+kuBWLghG3MDtNQTDx5rWDv0DuiJQ966nl1a4USR06
+ HxwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708409383; x=1709014183;
+ d=1e100.net; s=20230601; t=1708409689; x=1709014489;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=f9yI5eOPPRpti+7HSngJaO0WpkyFYIO/D7umg3rS0cM=;
- b=VvO0eOjgEO/5S3RYUqGZllowe7Q2v8IszpyIU39q33ioXWfGAsSNxNmxPi50BE98F2
- yrvquRW11ofUp6p7+S/gyuNzRqglVblI8LMAvpGI5I8nc0tuRb2Ropr6xp3NwjII0xMB
- PAXQWrTqxO6YzN8mGSyFuTjLDxqrUmZBzv9lK3QWhXi7tRMHPuBjCiEMxW6f6Hyt0U0E
- zCaM0KDe4vL7RcKwwRTxxNLYGSeF7hsnStMZ70KDEFLEobccbIj4abRnmxAW04oGccce
- NyKLB5YAcqUidRW9BBW3IRPgBmPRcPUPeE5seqIN8iM6CrXE6VnkSKt38NYwlvkKfOxC
- fzpQ==
+ bh=eQxcoWVfQccM0LkwGSNwky21E9rzvKv6RM//AG0H2Ec=;
+ b=MHt+ZNuD7DhyW0AwGez4ihborOytHE2eG34yju0s+F9Siiqrd0UQF0jGWPs/JSD9pw
+ TlH+/XR/olGY7xcyRYv70TEjdU5A3iUrBtzfinwcw9fcH1CxWydbD5KjLTCgfOIKKUjY
+ Wo1Nai0LqJupHePyV1LOqvP2CD9VB8MDJMys9V/Qf9sPVrpIUKVj9ZBL5XaQN1MZPg8L
+ rVN0CeXjDbinJlL/doFboqM5cBwil4BkmPL2B5Q6Z1OQjMsGEu6nWJXmMCoHwdetlZWY
+ 92fFt3Jvylc7H3e9/lcETdcqisu+LN+aM3KVmkgfIe7uJ0WozgXAXX6twGRFZ5Pi38gz
+ PgwQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWa3ibZOfTjdalW4bOFXmzwt1QyGt3W34O5MvrnFZ+R/EjHgCSUVK5vVi1qj14PA1OtryhOC2V746i1spN/DP6OQyJxLw==
-X-Gm-Message-State: AOJu0YzHA6/ofzMF//3lnYuyMtK5hrxAfRpxgHt1LyazcVqhcOza39vc
- iTVd4q9FbDmRU5yfh2nM1pRs/6kNd+gu8LlaJhbIuUTTiPPSt4/txNmZkx4DrY3aROBaFj8Ehzm
- icJWLHGD60qxCTgZk1a4q9HOMiMbvqI0wDpvXqQ==
-X-Google-Smtp-Source: AGHT+IFkLyU1braXpmeY0ZP2/NNqKQcghxRgnfwxlvv4t1xNUq4RxOGrJyRPxdetX5oDMFbwZrSg/vybDW9mjtwYEMY=
-X-Received: by 2002:a67:f498:0:b0:470:5792:cf86 with SMTP id
- o24-20020a67f498000000b004705792cf86mr2457848vsn.0.1708409382898; Mon, 19 Feb
- 2024 22:09:42 -0800 (PST)
+ AJvYcCW6mqbZs8+tPLRjgHqrGC8MkgsnZsdwPR9lLo8Z88vvYzKDqVL6BdkgvDkcqETtf1tA0LhETAaAfN8EYjV3LxESAu8oww==
+X-Gm-Message-State: AOJu0YzBuikSg+Rv1pW/xDdH/1Rzta3TWEySib3blyu+Jh8l6/l9atiP
+ L8yNcm0ixxuWXfFaLWmoJwEnIZMd4M8Ip0E0q8jDXvf5cHgt+Pczj3hr2od7H9Xz2JntcTzr/je
+ Mraz4oxl4XEUwzBJEcCxDFZCC0L07+j6GUjEuPA==
+X-Google-Smtp-Source: AGHT+IG2UAZrnLTi9zuDK1QZbFZC3HYCgYmgPeYcI7UPkD51GbL34YL+KFBS1Zy28RMRnL7owcrGw6fBFujaBn5wr1I=
+X-Received: by 2002:a05:6102:3973:b0:470:43bc:eff6 with SMTP id
+ ho19-20020a056102397300b0047043bceff6mr5475197vsb.10.1708409688776; Mon, 19
+ Feb 2024 22:14:48 -0800 (PST)
 MIME-Version: 1.0
 References: <20240215-b4-qcom-common-target-v4-0-ed06355c634a@linaro.org>
- <20240215-b4-qcom-common-target-v4-8-ed06355c634a@linaro.org>
-In-Reply-To: <20240215-b4-qcom-common-target-v4-8-ed06355c634a@linaro.org>
+ <20240215-b4-qcom-common-target-v4-11-ed06355c634a@linaro.org>
+In-Reply-To: <20240215-b4-qcom-common-target-v4-11-ed06355c634a@linaro.org>
 From: Sumit Garg <sumit.garg@linaro.org>
-Date: Tue, 20 Feb 2024 11:39:32 +0530
-Message-ID: <CAFA6WYP+U0CNeTcTE2UJAz+8h44=_t2Car_ZpKtHBmbTzi6UBA@mail.gmail.com>
-Subject: Re: [PATCH v4 08/39] serial: msm: fix clock handling and pinctrl
+Date: Tue, 20 Feb 2024 11:44:37 +0530
+Message-ID: <CAFA6WYNuc7fgdJ66B-zY0fN833VZ7BqkuB+H68OgsmPHB9PQBQ@mail.gmail.com>
+Subject: Re: [PATCH v4 11/39] gpio: qcom_pmic: add pinctrl driver
 To: Caleb Connolly <caleb.connolly@linaro.org>
 Cc: Neil Armstrong <neil.armstrong@linaro.org>,
  Ramon Fried <rfried.dev@gmail.com>, 
@@ -98,105 +98,398 @@ X-Virus-Status: Clean
 
 On Fri, 16 Feb 2024 at 02:22, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >
-> Use the modern helpers to fetch the clock and use the correct property
-> ("clocks" instead of "clock"). Drop the call to pinctrl_select_state()
-> as no boards have a "uart" pinctrl state and this prints confusing
-> errors.
+> Introduce a basic pinctrl driver for the SPMI PMIC GPIOs. This is
+> necessary to make proper use of upstream DT bindings specifically on the
+> dragonboard410c where they're used to switch between USB host and device
+> modes.
+>
+> Only support for driving the pins as output low or high is enabled for
+> now.
+>
+> To minimise duplicated code and allow for sharing common DT data, the
+> pinctrl driver is initialised as a child of the existing GPIO driver.
 >
 > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->  arch/arm/dts/dragonboard410c.dts |  3 ++-
->  arch/arm/dts/dragonboard820c.dts |  3 ++-
->  drivers/serial/serial_msm.c      | 25 +++++--------------------
->  3 files changed, 9 insertions(+), 22 deletions(-)
+>  drivers/gpio/qcom_pmic_gpio.c | 257 +++++++++++++++++++++++++++++-------------
+>  1 file changed, 176 insertions(+), 81 deletions(-)
 >
 
 Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
 
 -Sumit
 
-> diff --git a/arch/arm/dts/dragonboard410c.dts b/arch/arm/dts/dragonboard410c.dts
-> index 02c824d0226c..c395e6cc0427 100644
-> --- a/arch/arm/dts/dragonboard410c.dts
-> +++ b/arch/arm/dts/dragonboard410c.dts
-> @@ -84,7 +84,8 @@
->                 serial@78b0000 {
->                         compatible = "qcom,msm-uartdm-v1.4";
->                         reg = <0x78b0000 0x200>;
-> -                       clock = <&clkc 4>;
-> +                       clocks = <&clkc 4>;
-> +                       clock-names = "core";
->                         pinctrl-names = "uart";
->                         pinctrl-0 = <&blsp1_uart>;
->                 };
-> diff --git a/arch/arm/dts/dragonboard820c.dts b/arch/arm/dts/dragonboard820c.dts
-> index 146a0af8aafe..86b7f83d36d6 100644
-> --- a/arch/arm/dts/dragonboard820c.dts
-> +++ b/arch/arm/dts/dragonboard820c.dts
-> @@ -78,7 +78,8 @@
->                 blsp2_uart2: serial@75b0000 {
->                         compatible = "qcom,msm-uartdm-v1.4", "qcom,msm-uartdm";
->                         reg = <0x75b0000 0x1000>;
-> -                       clock = <&gcc 4>;
-> +                       clocks = <&gcc 4>;
-> +                       clock-names = "core";
->                         pinctrl-names = "uart";
->                         pinctrl-0 = <&blsp8_uart>;
->                 };
-> diff --git a/drivers/serial/serial_msm.c b/drivers/serial/serial_msm.c
-> index 44b93bd7ff21..ac4280c6c4c2 100644
-> --- a/drivers/serial/serial_msm.c
-> +++ b/drivers/serial/serial_msm.c
-> @@ -160,29 +160,14 @@ static int msm_uart_clk_init(struct udevice *dev)
->  {
->         uint clk_rate = fdtdec_get_uint(gd->fdt_blob, dev_of_offset(dev),
->                                         "clock-frequency", 115200);
-> -       uint clkd[2]; /* clk_id and clk_no */
-> -       int clk_offset;
-> -       struct udevice *clk_dev;
->         struct clk clk;
->         int ret;
+> diff --git a/drivers/gpio/qcom_pmic_gpio.c b/drivers/gpio/qcom_pmic_gpio.c
+> index 198cd84bc31e..9eca1556c356 100644
+> --- a/drivers/gpio/qcom_pmic_gpio.c
+> +++ b/drivers/gpio/qcom_pmic_gpio.c
+> @@ -7,10 +7,14 @@
 >
-> -       ret = fdtdec_get_int_array(gd->fdt_blob, dev_of_offset(dev), "clock",
-> -                                  clkd, 2);
-> -       if (ret)
-> -               return ret;
-> -
-> -       clk_offset = fdt_node_offset_by_phandle(gd->fdt_blob, clkd[0]);
-> -       if (clk_offset < 0)
-> -               return clk_offset;
-> -
-> -       ret = uclass_get_device_by_of_offset(UCLASS_CLK, clk_offset, &clk_dev);
-> -       if (ret)
-> -               return ret;
-> -
-> -       clk.id = clkd[1];
-> -       ret = clk_request(clk_dev, &clk);
-> -       if (ret < 0)
-> +       ret = clk_get_by_name(dev, "core", &clk);
-> +       if (ret < 0) {
-> +               pr_warn("%s: Failed to get clock: %d\n", __func__, ret);
->                 return ret;
-> +       }
+>  #include <common.h>
+>  #include <dm.h>
+> +#include <dm/device-internal.h>
+> +#include <dm/lists.h>
+> +#include <dm/pinctrl.h>
+>  #include <log.h>
+>  #include <power/pmic.h>
+>  #include <spmi/spmi.h>
+>  #include <asm/io.h>
+> +#include <stdlib.h>
+>  #include <asm/gpio.h>
+>  #include <linux/bitops.h>
 >
->         ret = clk_set_rate(&clk, clk_rate);
->         if (ret < 0)
-> @@ -218,7 +203,6 @@ static int msm_serial_probe(struct udevice *dev)
->         if (ret)
->                 return ret;
->
-> -       pinctrl_select_state(dev, "uart");
->         uart_dm_init(priv);
->
->         return 0;
-> @@ -251,6 +235,7 @@ U_BOOT_DRIVER(serial_msm) = {
->         .priv_auto      = sizeof(struct msm_serial_data),
->         .probe = msm_serial_probe,
->         .ops    = &msm_serial_ops,
-> +       .flags = DM_FLAG_PRE_RELOC,
+> @@ -73,17 +77,54 @@ enum pmic_gpio_quirks {
+>         QCOM_PMIC_QUIRK_READONLY = (1 << 0),
 >  };
 >
->  #ifdef CONFIG_DEBUG_UART_MSM
+> -struct qcom_gpio_bank {
+> +struct qcom_pmic_gpio_data {
+>         uint32_t pid; /* Peripheral ID on SPMI bus */
+>         bool     lv_mv_type; /* If subtype is GPIO_LV(0x10) or GPIO_MV(0x11) */
+> +       u32 pin_count;
+> +       struct udevice *pmic; /* Reference to pmic device for read/write */
+>  };
+>
+> -static int qcom_gpio_set_direction(struct udevice *dev, unsigned offset,
+> +/* dev can be the GPIO or pinctrl device */
+> +static int _qcom_gpio_set_direction(struct udevice *dev, u32 offset, bool input, int value)
+> +{
+> +       struct qcom_pmic_gpio_data *plat = dev_get_plat(dev);
+> +       u32 gpio_base = plat->pid + REG_OFFSET(offset);
+> +       u32 reg_ctl_val;
+> +       int ret = 0;
+> +
+> +       /* Select the mode and output */
+> +       if (plat->lv_mv_type) {
+> +               if (input)
+> +                       reg_ctl_val = REG_CTL_LV_MV_MODE_INPUT;
+> +               else
+> +                       reg_ctl_val = REG_CTL_LV_MV_MODE_INOUT;
+> +       } else {
+> +               if (input)
+> +                       reg_ctl_val = REG_CTL_MODE_INPUT;
+> +               else
+> +                       reg_ctl_val = REG_CTL_MODE_INOUT | !!value;
+> +       }
+> +
+> +       ret = pmic_reg_write(plat->pmic, gpio_base + REG_CTL, reg_ctl_val);
+> +       if (ret < 0)
+> +               return ret;
+> +
+> +       if (plat->lv_mv_type && !input) {
+> +               ret = pmic_reg_write(plat->pmic,
+> +                                    gpio_base + REG_LV_MV_OUTPUT_CTL,
+> +                                    !!value << REG_LV_MV_OUTPUT_CTL_SHIFT);
+> +               if (ret < 0)
+> +                       return ret;
+> +       }
+> +
+> +       return 0;
+> +}
+> +
+> +static int qcom_gpio_set_direction(struct udevice *dev, unsigned int offset,
+>                                    bool input, int value)
+>  {
+> -       struct qcom_gpio_bank *priv = dev_get_priv(dev);
+> -       uint32_t gpio_base = priv->pid + REG_OFFSET(offset);
+> -       uint32_t reg_ctl_val;
+> +       struct qcom_pmic_gpio_data *plat = dev_get_plat(dev);
+> +       uint32_t gpio_base = plat->pid + REG_OFFSET(offset);
+>         ulong quirks = dev_get_driver_data(dev);
+>         int ret = 0;
+>
+> @@ -97,33 +138,10 @@ static int qcom_gpio_set_direction(struct udevice *dev, unsigned offset,
+>         if (ret < 0)
+>                 return ret;
+>
+> -       /* Select the mode and output */
+> -       if (priv->lv_mv_type) {
+> -               if (input)
+> -                       reg_ctl_val = REG_CTL_LV_MV_MODE_INPUT;
+> -               else
+> -                       reg_ctl_val = REG_CTL_LV_MV_MODE_INOUT;
+> -       } else {
+> -               if (input)
+> -                       reg_ctl_val = REG_CTL_MODE_INPUT;
+> -               else
+> -                       reg_ctl_val = REG_CTL_MODE_INOUT | !!value;
+> -       }
+> -
+> -       ret = pmic_reg_write(dev->parent, gpio_base + REG_CTL, reg_ctl_val);
+> -       if (ret < 0)
+> -               return ret;
+> -
+> -       if (priv->lv_mv_type && !input) {
+> -               ret = pmic_reg_write(dev->parent,
+> -                                    gpio_base + REG_LV_MV_OUTPUT_CTL,
+> -                                    !!value << REG_LV_MV_OUTPUT_CTL_SHIFT);
+> -               if (ret < 0)
+> -                       return ret;
+> -       }
+> +       _qcom_gpio_set_direction(dev, offset, input, value);
+>
+>         /* Set the right pull (no pull) */
+> -       ret = pmic_reg_write(dev->parent, gpio_base + REG_DIG_PULL_CTL,
+> +       ret = pmic_reg_write(plat->pmic, gpio_base + REG_DIG_PULL_CTL,
+>                              REG_DIG_PULL_NO_PU);
+>         if (ret < 0)
+>                 return ret;
+> @@ -131,13 +149,13 @@ static int qcom_gpio_set_direction(struct udevice *dev, unsigned offset,
+>         /* Configure output pin drivers if needed */
+>         if (!input) {
+>                 /* Select the VIN - VIN0, pin is input so it doesn't matter */
+> -               ret = pmic_reg_write(dev->parent, gpio_base + REG_DIG_VIN_CTL,
+> +               ret = pmic_reg_write(plat->pmic, gpio_base + REG_DIG_VIN_CTL,
+>                                      REG_DIG_VIN_VIN0);
+>                 if (ret < 0)
+>                         return ret;
+>
+>                 /* Set the right dig out control */
+> -               ret = pmic_reg_write(dev->parent, gpio_base + REG_DIG_OUT_CTL,
+> +               ret = pmic_reg_write(plat->pmic, gpio_base + REG_DIG_OUT_CTL,
+>                                      REG_DIG_OUT_CTL_CMOS |
+>                                      REG_DIG_OUT_CTL_DRIVE_L);
+>                 if (ret < 0)
+> @@ -162,15 +180,15 @@ static int qcom_gpio_direction_output(struct udevice *dev, unsigned offset,
+>
+>  static int qcom_gpio_get_function(struct udevice *dev, unsigned offset)
+>  {
+> -       struct qcom_gpio_bank *priv = dev_get_priv(dev);
+> -       uint32_t gpio_base = priv->pid + REG_OFFSET(offset);
+> +       struct qcom_pmic_gpio_data *plat = dev_get_plat(dev);
+> +       uint32_t gpio_base = plat->pid + REG_OFFSET(offset);
+>         int reg;
+>
+> -       reg = pmic_reg_read(dev->parent, gpio_base + REG_CTL);
+> +       reg = pmic_reg_read(plat->pmic, gpio_base + REG_CTL);
+>         if (reg < 0)
+>                 return reg;
+>
+> -       if (priv->lv_mv_type) {
+> +       if (plat->lv_mv_type) {
+>                 switch (reg & REG_CTL_LV_MV_MODE_MASK) {
+>                 case REG_CTL_LV_MV_MODE_INPUT:
+>                         return GPIOF_INPUT;
+> @@ -195,11 +213,11 @@ static int qcom_gpio_get_function(struct udevice *dev, unsigned offset)
+>
+>  static int qcom_gpio_get_value(struct udevice *dev, unsigned offset)
+>  {
+> -       struct qcom_gpio_bank *priv = dev_get_priv(dev);
+> -       uint32_t gpio_base = priv->pid + REG_OFFSET(offset);
+> +       struct qcom_pmic_gpio_data *plat = dev_get_plat(dev);
+> +       uint32_t gpio_base = plat->pid + REG_OFFSET(offset);
+>         int reg;
+>
+> -       reg = pmic_reg_read(dev->parent, gpio_base + REG_STATUS);
+> +       reg = pmic_reg_read(plat->pmic, gpio_base + REG_STATUS);
+>         if (reg < 0)
+>                 return reg;
+>
+> @@ -209,11 +227,11 @@ static int qcom_gpio_get_value(struct udevice *dev, unsigned offset)
+>  static int qcom_gpio_set_value(struct udevice *dev, unsigned offset,
+>                                int value)
+>  {
+> -       struct qcom_gpio_bank *priv = dev_get_priv(dev);
+> -       uint32_t gpio_base = priv->pid + REG_OFFSET(offset);
+> +       struct qcom_pmic_gpio_data *plat = dev_get_plat(dev);
+> +       uint32_t gpio_base = plat->pid + REG_OFFSET(offset);
+>
+>         /* Set the output value of the gpio */
+> -       if (priv->lv_mv_type)
+> +       if (plat->lv_mv_type)
+>                 return pmic_clrsetbits(dev->parent,
+>                                        gpio_base + REG_LV_MV_OUTPUT_CTL,
+>                                        REG_LV_MV_OUTPUT_CTL_MASK,
+> @@ -253,63 +271,74 @@ static const struct dm_gpio_ops qcom_gpio_ops = {
+>         .xlate                  = qcom_gpio_xlate,
+>  };
+>
+> +static int qcom_gpio_bind(struct udevice *dev)
+> +{
+> +
+> +       struct qcom_pmic_gpio_data *plat = dev_get_plat(dev);
+> +       ulong quirks = dev_get_driver_data(dev);
+> +       struct udevice *child;
+> +       struct driver *drv;
+> +       int ret;
+> +
+> +       drv = lists_driver_lookup_name("qcom_pmic_pinctrl");
+> +       if (!drv) {
+> +               log_warning("Cannot find driver '%s'\n", "qcom_pmic_pinctrl");
+> +               return -ENOENT;
+> +       }
+> +
+> +       /* Bind the GPIO driver as a child of the PMIC. */
+> +       ret = device_bind_with_driver_data(dev, drv,
+> +                                          dev->name,
+> +                                          quirks, dev_ofnode(dev), &child);
+> +       if (ret)
+> +               return log_msg_ret("bind", ret);
+> +
+> +       dev_set_plat(child, plat);
+> +
+> +       return 0;
+> +}
+> +
+>  static int qcom_gpio_probe(struct udevice *dev)
+>  {
+> -       struct qcom_gpio_bank *priv = dev_get_priv(dev);
+> -       int reg;
+> +       struct gpio_dev_priv *uc_priv = dev_get_uclass_priv(dev);
+> +       struct qcom_pmic_gpio_data *plat = dev_get_plat(dev);
+> +       struct ofnode_phandle_args args;
+> +       int val, ret;
+>         u64 pid;
+>
+> +       plat->pmic = dev->parent;
+> +
+>         pid = dev_read_addr(dev);
+>         if (pid == FDT_ADDR_T_NONE)
+>                 return log_msg_ret("bad address", -EINVAL);
+>
+> -       priv->pid = pid;
+> +       plat->pid = pid;
+>
+>         /* Do a sanity check */
+> -       reg = pmic_reg_read(dev->parent, priv->pid + REG_TYPE);
+> -       if (reg != REG_TYPE_VAL)
+> +       val = pmic_reg_read(plat->pmic, plat->pid + REG_TYPE);
+> +       if (val != REG_TYPE_VAL)
+>                 return log_msg_ret("bad type", -ENXIO);
+>
+> -       reg = pmic_reg_read(dev->parent, priv->pid + REG_SUBTYPE);
+> -       if (reg != REG_SUBTYPE_GPIO_4CH && reg != REG_SUBTYPE_GPIOC_4CH &&
+> -           reg != REG_SUBTYPE_GPIO_LV && reg != REG_SUBTYPE_GPIO_MV)
+> +       val = pmic_reg_read(plat->pmic, plat->pid + REG_SUBTYPE);
+> +       if (val != REG_SUBTYPE_GPIO_4CH && val != REG_SUBTYPE_GPIOC_4CH &&
+> +           val != REG_SUBTYPE_GPIO_LV && val != REG_SUBTYPE_GPIO_MV)
+>                 return log_msg_ret("bad subtype", -ENXIO);
+>
+> -       priv->lv_mv_type = reg == REG_SUBTYPE_GPIO_LV ||
+> -                          reg == REG_SUBTYPE_GPIO_MV;
+> -
+> -       return 0;
+> -}
+> -
+> -/*
+> - * Parse basic GPIO count specified via the gpio-ranges property
+> - * as specified in Linux devicetrees
+> - * Returns < 0 on error, otherwise gpio count
+> - */
+> -static int qcom_gpio_of_parse_ranges(struct udevice *dev)
+> -{
+> -       int ret;
+> -       struct ofnode_phandle_args args;
+> +       plat->lv_mv_type = val == REG_SUBTYPE_GPIO_LV ||
+> +                          val == REG_SUBTYPE_GPIO_MV;
+>
+> +       /*
+> +        * Parse basic GPIO count specified via the gpio-ranges property
+> +        * as specified in upstream devicetrees
+> +        */
+>         ret = ofnode_parse_phandle_with_args(dev_ofnode(dev), "gpio-ranges",
+>                                              NULL, 3, 0, &args);
+>         if (ret)
+>                 return log_msg_ret("gpio-ranges", ret);
+>
+> -       return args.args[2];
+> -}
+> -
+> -static int qcom_gpio_of_to_plat(struct udevice *dev)
+> -{
+> -       struct gpio_dev_priv *uc_priv = dev_get_uclass_priv(dev);
+> -       int ret;
+> -
+> -       ret = qcom_gpio_of_parse_ranges(dev);
+> -       if (ret > 0)
+> -               uc_priv->gpio_count = ret;
+> -       else
+> -               return ret;
+> +       plat->pin_count = args.args[2];
+>
+> +       uc_priv->gpio_count = plat->pin_count;
+>         uc_priv->bank_name = "pmic";
+>
+>         return 0;
+> @@ -327,9 +356,75 @@ U_BOOT_DRIVER(qcom_pmic_gpio) = {
+>         .name   = "qcom_pmic_gpio",
+>         .id     = UCLASS_GPIO,
+>         .of_match = qcom_gpio_ids,
+> -       .of_to_plat = qcom_gpio_of_to_plat,
+> -       .probe  = qcom_gpio_probe,
+> +       .bind   = qcom_gpio_bind,
+> +       .probe = qcom_gpio_probe,
+>         .ops    = &qcom_gpio_ops,
+> -       .priv_auto      = sizeof(struct qcom_gpio_bank),
+> +       .plat_auto = sizeof(struct qcom_pmic_gpio_data),
+> +       .flags = DM_FLAG_ALLOC_PDATA,
+>  };
+>
+> +static const struct pinconf_param qcom_pmic_pinctrl_conf_params[] = {
+> +       { "output-high", PIN_CONFIG_OUTPUT_ENABLE, 1 },
+> +       { "output-low", PIN_CONFIG_OUTPUT, 0 },
+> +};
+> +
+> +static int qcom_pmic_pinctrl_get_pins_count(struct udevice *dev)
+> +{
+> +       struct qcom_pmic_gpio_data *plat = dev_get_plat(dev);
+> +
+> +       return plat->pin_count;
+> +}
+> +
+> +static const char *qcom_pmic_pinctrl_get_pin_name(struct udevice *dev, unsigned int selector)
+> +{
+> +       static char name[8];
+> +
+> +       /* DT indexes from 1 */
+> +       snprintf(name, sizeof(name), "gpio%u", selector + 1);
+> +
+> +       return name;
+> +}
+> +
+> +static int qcom_pmic_pinctrl_pinconf_set(struct udevice *dev, unsigned int selector,
+> +                                        unsigned int param, unsigned int arg)
+> +{
+> +       /* We only support configuring the pin as an output, either low or high */
+> +       return _qcom_gpio_set_direction(dev, selector, false,
+> +                                       param == PIN_CONFIG_OUTPUT_ENABLE);
+> +}
+> +
+> +static const char *qcom_pmic_pinctrl_get_function_name(struct udevice *dev, unsigned int selector)
+> +{
+> +       if (!selector)
+> +               return "normal";
+> +       return NULL;
+> +}
+> +
+> +static int qcom_pmic_pinctrl_generic_get_functions_count(struct udevice *dev)
+> +{
+> +       return 1;
+> +}
+> +
+> +static int qcom_pmic_pinctrl_generic_pinmux_set_mux(struct udevice *dev, unsigned int selector,
+> +                                                   unsigned int func_selector)
+> +{
+> +       return 0;
+> +}
+> +
+> +struct pinctrl_ops qcom_pmic_pinctrl_ops = {
+> +       .get_pins_count = qcom_pmic_pinctrl_get_pins_count,
+> +       .get_pin_name = qcom_pmic_pinctrl_get_pin_name,
+> +       .set_state = pinctrl_generic_set_state,
+> +       .pinconf_num_params = ARRAY_SIZE(qcom_pmic_pinctrl_conf_params),
+> +       .pinconf_params = qcom_pmic_pinctrl_conf_params,
+> +       .pinconf_set = qcom_pmic_pinctrl_pinconf_set,
+> +       .get_function_name = qcom_pmic_pinctrl_get_function_name,
+> +       .get_functions_count = qcom_pmic_pinctrl_generic_get_functions_count,
+> +       .pinmux_set = qcom_pmic_pinctrl_generic_pinmux_set_mux,
+> +};
+> +
+> +U_BOOT_DRIVER(qcom_pmic_pinctrl) = {
+> +       .name   = "qcom_pmic_pinctrl",
+> +       .id     = UCLASS_PINCTRL,
+> +       .ops    = &qcom_pmic_pinctrl_ops,
+> +};
 >
 > --
 > 2.43.1
