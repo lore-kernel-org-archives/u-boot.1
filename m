@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEE0FC48BC4
-	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 05:47:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3375C48BC3
+	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 05:50:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1ADFE87D16;
-	Tue, 20 Feb 2024 06:47:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3D81F87F6A;
+	Tue, 20 Feb 2024 06:49:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OqPoiNr8";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HbN/Bnvh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B81E187F6F; Tue, 20 Feb 2024 06:47:20 +0100 (CET)
-Received: from mail-vs1-xe33.google.com (mail-vs1-xe33.google.com
- [IPv6:2607:f8b0:4864:20::e33])
+ id 66E7187F81; Tue, 20 Feb 2024 06:49:44 +0100 (CET)
+Received: from mail-ua1-x92e.google.com (mail-ua1-x92e.google.com
+ [IPv6:2607:f8b0:4864:20::92e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D04F987F78
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 06:47:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EF02F87F83
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 06:48:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vs1-xe33.google.com with SMTP id
- ada2fe7eead31-4704c073becso335359137.1
- for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 21:47:05 -0800 (PST)
+Received: by mail-ua1-x92e.google.com with SMTP id
+ a1e0cc1a2514c-7d60ee03b54so1763181241.2
+ for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 21:48:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708408024; x=1709012824; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1708408079; x=1709012879; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=BoubW3Q0yFjGit2HUyWj10+jJhr6K02fKtRZjUo5XBs=;
- b=OqPoiNr8NDAK3RWqup5Ka3VpG0e46HGRlYe0cdk+sd6ruasedjz2j2QSc6AnmFGcVO
- stnm3Rlf3AUG23apOUJW4oEnFG3KqZ+Tmi0t4SgFOkTKYt3jqLT/XSgI7triEKCAhA/Q
- 4IuOhycFnF2cjg4WtenD+c/ideAw7OLhsHJ3mhFPsz9f2oiU5N0pG+wLNnKSbWkgueul
- ubOIYKFN7M3J9ERt6/MFAr+crLoFT3YwKP/F6cY9WRIJLM8bBdOG0j2DCeK4gk8eVTjg
- rQ9xlDbp7MKxX8Vv3hO8WMniOXC89iNSIL72gD8voO5nbrlhMsssOCRmDbY6ag96tbKi
- CQig==
+ bh=nlnYNOicLw6C+SLEuGpI6Dai7RoMqutriQVe7u3Z6Q8=;
+ b=HbN/Bnvh4JEnY8p9Z2KPKzweDdWaoWN2moQn1Z/pMTq2PbUV9IMAikc9o7bmeytrUp
+ rZolJjY1WYNai9ZdA5bNO2+y/aSFObKATxIFJb1sWoCRVNddyngew+ghx9uZqpaL8pH0
+ X51/UEoLl+I350dUwkhTYF2xTa/3wUjaCxq2bgjtYHCzHJmUXQDn1JoEOpHfrXyv6qGd
+ xrQ7cga7A7ViGQEu0tcENKCWH42PumkPoFNGJG+EZVOenzIuL3jNvRhh5RToLpKsMZBI
+ kSVqOrV2Qc4cfqO7i/sY9PsXzInoFvjks7CzjGsFQdA7fZ5Qx7PMpSFVCCL30kCyFqce
+ P7Vg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708408024; x=1709012824;
+ d=1e100.net; s=20230601; t=1708408079; x=1709012879;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=BoubW3Q0yFjGit2HUyWj10+jJhr6K02fKtRZjUo5XBs=;
- b=oZHS2Svink0xVC3RcwBI1MWGkkmXP7hEtvCGO1zb5nXtYbL5qyEtkk1wcUSoJ2brFb
- gq/wX0EflJXZg7oPyzaK7yVLgXK9nNpciudAn3GRNlrLi+WtST3qSLBcLpxgYggqZsDs
- y/SFn3BSf0ZtBRiVVxWMRTbkdwXYqpwU9RE3ubFLYak2W5pErjq4198EFx4CIH8qFbyT
- bQ4eMcfJZNhcAZyuduQpe7BMnmHu2KBWTsFuUk7NEJl11EJaglAwVi/Rwh7md158v7FS
- Uieg1zIF1YNv9yXqLY2tRb6gK2IfaWfH/wrG8HD7p9mBe9V/fZs7d1oM4eHfEJv9Qr5x
- SFwg==
+ bh=nlnYNOicLw6C+SLEuGpI6Dai7RoMqutriQVe7u3Z6Q8=;
+ b=UPPWNMHoFEUQUqqAOvD0E0I2nWcXiuImxp9+T1AD/MlueUu48OKZq6+OUu3GyFioyG
+ l1jIJRJ2DCypfp0Tk8rm+26Bd+lAhifnXygQhVXd+sn4y+6urxTBvp/ZbzCr1VnjrbYn
+ /n4zXbrJlfOGuR6R37F3d3K97KZgyHri9adADwkQXexImZjkLbO/qIY0SSm9mloBnifu
+ emCAky6MnbG0kk4pqWCILv8+LTHv2xeK7pVwNxpN4uT3D51Va8OapzzPk/o0SuAXfD8c
+ JEQ+OSBITBLKg7U3uHG/XcTT6NP6hV2lKpxEHWgdB6WB+JXTZPYl15scwMH4poXn46+v
+ 5FEA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX/MvoIsd03WLlK9KbwdrMVZN2VbhkRxTZruZ0O03TtwmjcZu7WhKphuoUEaotyQqlwUJpdtjzu6yNP/A/RCGeA8DVqgA==
-X-Gm-Message-State: AOJu0YwZL8dmcBAsXIRy1P3foVfwh4PHELoH8ED4FT7KE4n2KJTrxzT0
- UqlXCvSLb585njyzuoRzTXKI01RL1LZHarAo88jWm4AU/Lm5WiqewMHkOnbI0K/KX93YOd+M/rC
- +jXKQvHBs8wF0N4NEEFRV400FXqI37hrpexVbbg==
-X-Google-Smtp-Source: AGHT+IHjWYcSeVPfW4KG9M0mRqJ0g2DakO74PhOBjir2+BMR3xgYQtDmmQYMckezA2FD/6GJPvVqXhYgbQKdrt8h6YY=
-X-Received: by 2002:a67:fbcb:0:b0:470:3ece:b43d with SMTP id
- o11-20020a67fbcb000000b004703eceb43dmr9732951vsr.5.1708408024409; Mon, 19 Feb
- 2024 21:47:04 -0800 (PST)
+ AJvYcCVRKc0ILQAWJZgeLG8zeeSOUYGuTRoHZB9DnX2L9fj8GdO/Y/09O12zh0+CTQyO8RaIvt2e+UAPkF8gYmG6dOQy2IhMAg==
+X-Gm-Message-State: AOJu0YwUerFon0BAd4HNoUhnXtXVcvtMy4umfyC578vy8AzC6rQ1eUQ5
+ zckqgvGaIX0z/KQhrU7t/pSI8+eP0dhyf9kNEOG1gzLIZL89UFzuzm3wA1GrBVb6bOwiMNwQNbj
+ 9UTR7Kysb8vEQOkp09OUw6uyit69Dewo3VYkyoQ==
+X-Google-Smtp-Source: AGHT+IFTRwuUGVoBUjjMKggHSAfMJ6t683b24kC5sdk6k86mLfnGwWnGlj0ATitygultH6TqFYKtEGL3U0H4u5CP8cU=
+X-Received: by 2002:a67:f519:0:b0:470:5503:60e5 with SMTP id
+ u25-20020a67f519000000b00470550360e5mr3033890vsn.35.1708408078814; Mon, 19
+ Feb 2024 21:47:58 -0800 (PST)
 MIME-Version: 1.0
 References: <20240215-b4-qcom-common-target-v4-0-ed06355c634a@linaro.org>
- <20240215-b4-qcom-common-target-v4-5-ed06355c634a@linaro.org>
-In-Reply-To: <20240215-b4-qcom-common-target-v4-5-ed06355c634a@linaro.org>
+ <20240215-b4-qcom-common-target-v4-9-ed06355c634a@linaro.org>
+In-Reply-To: <20240215-b4-qcom-common-target-v4-9-ed06355c634a@linaro.org>
 From: Sumit Garg <sumit.garg@linaro.org>
-Date: Tue, 20 Feb 2024 11:16:53 +0530
-Message-ID: <CAFA6WYO08icEpHVM4ciYDmzUuexG7_ZzAmL3hXOrfJh39=Q-zg@mail.gmail.com>
-Subject: Re: [PATCH v4 05/39] clk/qcom: use upstream compatible properties
+Date: Tue, 20 Feb 2024 11:17:47 +0530
+Message-ID: <CAFA6WYO2CCzx5MPCi7FMpWFU2WWUiBK6ZZoc+7bKCwZjK44BWA@mail.gmail.com>
+Subject: Re: [PATCH v4 09/39] gpio: qcom_pmic: 1-based GPIOs
 To: Caleb Connolly <caleb.connolly@linaro.org>
 Cc: Neil Armstrong <neil.armstrong@linaro.org>,
  Ramon Fried <rfried.dev@gmail.com>, 
@@ -98,64 +98,59 @@ X-Virus-Status: Clean
 
 On Fri, 16 Feb 2024 at 02:22, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >
-> Adjust the apq8016 and apq8096 drivers to use the upstream compatible
-> properties, and adjust the associated dts files in U-Boot.
-
-It looks like you haven't adjusted the dts file for db820c. However,
-later patches drop them completely so I am not too worried about it.
+> Qualcomm PMICs number their GPIOs starting from 1, implement a custom
+> .xlate method to handle this.
+>
+> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> ---
+>  drivers/gpio/qcom_pmic_gpio.c | 22 ++++++++++++++++++++++
+>  1 file changed, 22 insertions(+)
+>
 
 Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
 
 -Sumit
 
+> diff --git a/drivers/gpio/qcom_pmic_gpio.c b/drivers/gpio/qcom_pmic_gpio.c
+> index 6167c8411678..2a4fef8d28cb 100644
+> --- a/drivers/gpio/qcom_pmic_gpio.c
+> +++ b/drivers/gpio/qcom_pmic_gpio.c
+> @@ -209,12 +209,34 @@ static int qcom_gpio_set_value(struct udevice *dev, unsigned offset,
+>                                        REG_CTL_OUTPUT_MASK, !!value);
+>  }
 >
-> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->  arch/arm/dts/dragonboard410c.dts | 2 +-
->  drivers/clk/qcom/clock-apq8016.c | 2 +-
->  drivers/clk/qcom/clock-apq8096.c | 2 +-
->  3 files changed, 3 insertions(+), 3 deletions(-)
+> +static int qcom_gpio_xlate(struct udevice *dev, struct gpio_desc *desc,
+> +                          struct ofnode_phandle_args *args)
+> +{
+> +       struct gpio_dev_priv *uc_priv = dev_get_uclass_priv(dev);
+> +
+> +       if (args->args_count < 1)
+> +               return -EINVAL;
+> +
+> +       /* GPIOs in DT are 1-based */
+> +       desc->offset = args->args[0] - 1;
+> +       if (desc->offset >= uc_priv->gpio_count)
+> +               return -EINVAL;
+> +
+> +       if (args->args_count < 2)
+> +               return 0;
+> +
+> +       desc->flags = gpio_flags_xlate(args->args[1]);
+> +
+> +       return 0;
+> +}
+> +
+>  static const struct dm_gpio_ops qcom_gpio_ops = {
+>         .direction_input        = qcom_gpio_direction_input,
+>         .direction_output       = qcom_gpio_direction_output,
+>         .get_value              = qcom_gpio_get_value,
+>         .set_value              = qcom_gpio_set_value,
+>         .get_function           = qcom_gpio_get_function,
+> +       .xlate                  = qcom_gpio_xlate,
+>  };
 >
-> diff --git a/arch/arm/dts/dragonboard410c.dts b/arch/arm/dts/dragonboard410c.dts
-> index 6a4e3ccf17b1..02c824d0226c 100644
-> --- a/arch/arm/dts/dragonboard410c.dts
-> +++ b/arch/arm/dts/dragonboard410c.dts
-> @@ -75,7 +75,7 @@
->                         };
->                 };
->                 clkc: qcom,gcc@1800000 {
-> -                       compatible = "qcom,gcc-apq8016";
-> +                       compatible = "qcom,gcc-msm8916";
->                         reg = <0x1800000 0x80000>;
->                         #address-cells = <0x1>;
->                         #size-cells = <0x0>;
-> diff --git a/drivers/clk/qcom/clock-apq8016.c b/drivers/clk/qcom/clock-apq8016.c
-> index c0ce570edc79..0af7191cff52 100644
-> --- a/drivers/clk/qcom/clock-apq8016.c
-> +++ b/drivers/clk/qcom/clock-apq8016.c
-> @@ -145,7 +145,7 @@ static struct msm_clk_data apq8016_clk_data = {
->
->  static const struct udevice_id gcc_apq8016_of_match[] = {
->         {
-> -               .compatible = "qcom,gcc-apq8016",
-> +               .compatible = "qcom,gcc-msm8916",
->                 .data = (ulong)&apq8016_clk_data,
->         },
->         { }
-> diff --git a/drivers/clk/qcom/clock-apq8096.c b/drivers/clk/qcom/clock-apq8096.c
-> index cf1a347309a5..1e6fdb5cd42d 100644
-> --- a/drivers/clk/qcom/clock-apq8096.c
-> +++ b/drivers/clk/qcom/clock-apq8096.c
-> @@ -123,7 +123,7 @@ static struct msm_clk_data apq8096_clk_data = {
->
->  static const struct udevice_id gcc_apq8096_of_match[] = {
->         {
-> -               .compatible = "qcom,gcc-apq8096",
-> +               .compatible = "qcom,gcc-msm8996",
->                 .data = (ulong)&apq8096_clk_data,
->         },
->         { }
+>  static int qcom_gpio_probe(struct udevice *dev)
 >
 > --
 > 2.43.1
