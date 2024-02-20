@@ -4,82 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3375C48BC3
-	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 05:50:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72A8AC48BC4
+	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 05:59:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D81F87F6A;
-	Tue, 20 Feb 2024 06:49:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 46E7D87F77;
+	Tue, 20 Feb 2024 06:57:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HbN/Bnvh";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PZjNyFv/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 66E7187F81; Tue, 20 Feb 2024 06:49:44 +0100 (CET)
-Received: from mail-ua1-x92e.google.com (mail-ua1-x92e.google.com
- [IPv6:2607:f8b0:4864:20::92e])
+ id 80DD587F63; Tue, 20 Feb 2024 06:57:05 +0100 (CET)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF02F87F83
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 06:48:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 64E6F876E7
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 06:56:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ua1-x92e.google.com with SMTP id
- a1e0cc1a2514c-7d60ee03b54so1763181241.2
- for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 21:48:00 -0800 (PST)
+ spf=pass smtp.mailfrom=dan.carpenter@linaro.org
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-a3e87b2de41so165325866b.2
+ for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 21:56:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708408079; x=1709012879; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=nlnYNOicLw6C+SLEuGpI6Dai7RoMqutriQVe7u3Z6Q8=;
- b=HbN/Bnvh4JEnY8p9Z2KPKzweDdWaoWN2moQn1Z/pMTq2PbUV9IMAikc9o7bmeytrUp
- rZolJjY1WYNai9ZdA5bNO2+y/aSFObKATxIFJb1sWoCRVNddyngew+ghx9uZqpaL8pH0
- X51/UEoLl+I350dUwkhTYF2xTa/3wUjaCxq2bgjtYHCzHJmUXQDn1JoEOpHfrXyv6qGd
- xrQ7cga7A7ViGQEu0tcENKCWH42PumkPoFNGJG+EZVOenzIuL3jNvRhh5RToLpKsMZBI
- kSVqOrV2Qc4cfqO7i/sY9PsXzInoFvjks7CzjGsFQdA7fZ5Qx7PMpSFVCCL30kCyFqce
- P7Vg==
+ d=linaro.org; s=google; t=1708408606; x=1709013406; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=XoGp42Yx1tk2F21J4DXwNtmcz9195v8cyuaQ1QsDvVw=;
+ b=PZjNyFv/flQMDWba4KEt2g+9btZwk56zU8j0B4ZPaIoe8NNeu+pZI6E8/XVcaFtoW3
+ oUMiGCZqbw6mHRMsDGEL3g3vixKS4hZLlKzhZ/ryGbXVtdlwF0xjKXv+ES93mI/8OB7H
+ e2/WzeVpsvG3fRlD+4jNCeKwMXHZa1mHvm47kYXhw/RsCd6xgUwcQnPhUK9z8t9GfkLM
+ QKxeNuoIV31TlsaO/TeVppyp9xZe8ij0MS/RxT1AclirdK9nBAvrisjp+kcWNuxrW5gN
+ xQq1CX4CsjHIoiO8kDsJ+biqsw251AH6fOeQxfgtTW+BHy1SLc0GwINSKEY7/aBCW7cw
+ xXGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708408079; x=1709012879;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=nlnYNOicLw6C+SLEuGpI6Dai7RoMqutriQVe7u3Z6Q8=;
- b=UPPWNMHoFEUQUqqAOvD0E0I2nWcXiuImxp9+T1AD/MlueUu48OKZq6+OUu3GyFioyG
- l1jIJRJ2DCypfp0Tk8rm+26Bd+lAhifnXygQhVXd+sn4y+6urxTBvp/ZbzCr1VnjrbYn
- /n4zXbrJlfOGuR6R37F3d3K97KZgyHri9adADwkQXexImZjkLbO/qIY0SSm9mloBnifu
- emCAky6MnbG0kk4pqWCILv8+LTHv2xeK7pVwNxpN4uT3D51Va8OapzzPk/o0SuAXfD8c
- JEQ+OSBITBLKg7U3uHG/XcTT6NP6hV2lKpxEHWgdB6WB+JXTZPYl15scwMH4poXn46+v
- 5FEA==
+ d=1e100.net; s=20230601; t=1708408606; x=1709013406;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=XoGp42Yx1tk2F21J4DXwNtmcz9195v8cyuaQ1QsDvVw=;
+ b=v497xa1Vv9yj1zirkGnjQDQgu1wISDnXeeH6DYNjzulHnRLMuPByYRuL9ByenlAO2l
+ m3MlQBX6IzHcDnMv1mL6TeO6DAC+5MqeMfF5XFL1m+57x63pex505768bp9gNr4t34/b
+ qS6kE5NEbvVExrUrXYzL9mgvt5gIImeiliJAHrZll93P/YJlJ5l6kc4an+qIUdskjp/g
+ +TuBIKEdUNokx/1Jl1xoHg031sHdxEtvnmlBl6QHlR0gL/GmuwwdJrqKkHjctMbAx1g2
+ 04E8YGjthcpv+4jUQLu5Ty4VcCXBXNrglW3boD8G9aqkhdQuNmUSrJHfJFCnC931dNCP
+ 9fHw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVRKc0ILQAWJZgeLG8zeeSOUYGuTRoHZB9DnX2L9fj8GdO/Y/09O12zh0+CTQyO8RaIvt2e+UAPkF8gYmG6dOQy2IhMAg==
-X-Gm-Message-State: AOJu0YwUerFon0BAd4HNoUhnXtXVcvtMy4umfyC578vy8AzC6rQ1eUQ5
- zckqgvGaIX0z/KQhrU7t/pSI8+eP0dhyf9kNEOG1gzLIZL89UFzuzm3wA1GrBVb6bOwiMNwQNbj
- 9UTR7Kysb8vEQOkp09OUw6uyit69Dewo3VYkyoQ==
-X-Google-Smtp-Source: AGHT+IFTRwuUGVoBUjjMKggHSAfMJ6t683b24kC5sdk6k86mLfnGwWnGlj0ATitygultH6TqFYKtEGL3U0H4u5CP8cU=
-X-Received: by 2002:a67:f519:0:b0:470:5503:60e5 with SMTP id
- u25-20020a67f519000000b00470550360e5mr3033890vsn.35.1708408078814; Mon, 19
- Feb 2024 21:47:58 -0800 (PST)
+ AJvYcCUexcYzaQPuiFYDCGp58+bbJUkDjb3LSwbGFmO2CoOrsDO8J8+6Mv+tXF5FcFW2qLefkX9c9xBcshfHVLlmFUCOIbiR4g==
+X-Gm-Message-State: AOJu0Yz9MbIJaR1qPLiK0k/3sEcJZ7h1yzcpdhuXlmJyfsuTO2p1rRNy
+ PPz9uLGfMUA/gzp7byzgc+VZCwbjQQmrgb7+1fq4AkJs5aT3KH2Hay9f5U3H4+Y=
+X-Google-Smtp-Source: AGHT+IF7dwkpsDW8eK/6MXxc7w38muroMqdFzfOi2IBBFPbZuR7lbC3vTMsi0rToM1jnS5k3UWYN2Q==
+X-Received: by 2002:a17:906:69d0:b0:a3c:af7e:1660 with SMTP id
+ g16-20020a17090669d000b00a3caf7e1660mr9858438ejs.22.1708408605809; 
+ Mon, 19 Feb 2024 21:56:45 -0800 (PST)
+Received: from localhost ([102.222.70.76]) by smtp.gmail.com with ESMTPSA id
+ lf17-20020a170906ae5100b00a3eac4fc956sm1412594ejb.150.2024.02.19.21.56.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 19 Feb 2024 21:56:45 -0800 (PST)
+Date: Tue, 20 Feb 2024 08:56:41 +0300
+From: Dan Carpenter <dan.carpenter@linaro.org>
+To: Frieder Schrempf <frieder@fris.de>
+Cc: Fabio Estevam <festevam@gmail.com>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Stefano Babic <sbabic@denx.de>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de, Christian Hewitt <christianshewitt@gmail.com>,
+ FUKAUMI Naoki <naoki@radxa.com>, Hai Pham <hai.pham.ud@renesas.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, Marek Vasut <marex@denx.de>,
+ Martyn Welch <martyn.welch@collabora.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tianling Shen <cnsztl@gmail.com>
+Subject: Re: [PATCH v3 2/3] board: Add support for Sielaff i.MX6 Solo board
+Message-ID: <1a3b311d-0f5d-4f2e-a9f7-da0ec0c4f60b@moroto.mountain>
+References: <20240215133527.216126-1-frieder@fris.de>
+ <20240215133527.216126-2-frieder@fris.de>
 MIME-Version: 1.0
-References: <20240215-b4-qcom-common-target-v4-0-ed06355c634a@linaro.org>
- <20240215-b4-qcom-common-target-v4-9-ed06355c634a@linaro.org>
-In-Reply-To: <20240215-b4-qcom-common-target-v4-9-ed06355c634a@linaro.org>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Tue, 20 Feb 2024 11:17:47 +0530
-Message-ID: <CAFA6WYO2CCzx5MPCi7FMpWFU2WWUiBK6ZZoc+7bKCwZjK44BWA@mail.gmail.com>
-Subject: Re: [PATCH v4 09/39] gpio: qcom_pmic: 1-based GPIOs
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- Ramon Fried <rfried.dev@gmail.com>, 
- Dzmitry Sankouski <dsankouski@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
- Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240215133527.216126-2-frieder@fris.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,62 +105,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 16 Feb 2024 at 02:22, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->
-> Qualcomm PMICs number their GPIOs starting from 1, implement a custom
-> .xlate method to handle this.
->
-> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->  drivers/gpio/qcom_pmic_gpio.c | 22 ++++++++++++++++++++++
->  1 file changed, 22 insertions(+)
->
+On Thu, Feb 15, 2024 at 02:35:20PM +0100, Frieder Schrempf wrote:
+> +int board_mmc_getcd(struct mmc *mmc)
 
-Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
+This function is never called.  Also for bool functions make them type
+bool and name them so that it's clear they return true/false such as
+board_mmc_getcd_was_successful() but less wordy.
 
--Sumit
-
-> diff --git a/drivers/gpio/qcom_pmic_gpio.c b/drivers/gpio/qcom_pmic_gpio.c
-> index 6167c8411678..2a4fef8d28cb 100644
-> --- a/drivers/gpio/qcom_pmic_gpio.c
-> +++ b/drivers/gpio/qcom_pmic_gpio.c
-> @@ -209,12 +209,34 @@ static int qcom_gpio_set_value(struct udevice *dev, unsigned offset,
->                                        REG_CTL_OUTPUT_MASK, !!value);
->  }
->
-> +static int qcom_gpio_xlate(struct udevice *dev, struct gpio_desc *desc,
-> +                          struct ofnode_phandle_args *args)
 > +{
-> +       struct gpio_dev_priv *uc_priv = dev_get_uclass_priv(dev);
+> +	struct fsl_esdhc_cfg *cfg = (struct fsl_esdhc_cfg *)mmc->priv;
+> +	int ret = 0;
 > +
-> +       if (args->args_count < 1)
-> +               return -EINVAL;
+> +	switch (cfg->esdhc_base) {
+> +	case USDHC3_BASE_ADDR:
+> +		ret = !gpio_get_value(USDHC3_CD_GPIO);
+> +		break;
+> +	}
 > +
-> +       /* GPIOs in DT are 1-based */
-> +       desc->offset = args->args[0] - 1;
-> +       if (desc->offset >= uc_priv->gpio_count)
-> +               return -EINVAL;
-> +
-> +       if (args->args_count < 2)
-> +               return 0;
-> +
-> +       desc->flags = gpio_flags_xlate(args->args[1]);
-> +
-> +       return 0;
+> +	return ret;
 > +}
 > +
->  static const struct dm_gpio_ops qcom_gpio_ops = {
->         .direction_input        = qcom_gpio_direction_input,
->         .direction_output       = qcom_gpio_direction_output,
->         .get_value              = qcom_gpio_get_value,
->         .set_value              = qcom_gpio_set_value,
->         .get_function           = qcom_gpio_get_function,
-> +       .xlate                  = qcom_gpio_xlate,
->  };
->
->  static int qcom_gpio_probe(struct udevice *dev)
->
-> --
-> 2.43.1
->
+> +int board_mmc_init(struct bd_info *bis)
+> +{
+> +	int i, ret;
+> +
+> +	/*
+> +	 * According to the board_mmc_init() the following map is done:
+> +	 * (U-boot device node)    (Physical Port)
+> +	 * mmc0                    USDHC1
+> +	 * mmc1                    USDHC2
+> +	 */
+> +	for (i = 0; i < CFG_SYS_FSL_USDHC_NUM; i++) {
+> +		switch (i) {
+> +		case 0:
+> +			imx_iomux_v3_setup_multiple_pads(usdhc3_pads,
+> +							 ARRAY_SIZE(usdhc3_pads));
+> +			gpio_direction_input(USDHC3_CD_GPIO);
+> +			usdhc_cfg[0].sdhc_clk = mxc_get_clock(MXC_ESDHC3_CLK);
+> +			break;
+> +		default:
+> +			printf("Warning: you configured more USDHC controllers \
+> +				(%d) than supported by the board\n", i + 1);
+> +			return -EINVAL;
+
+This will look weird if it's ever printed:
+
+"Warning: you configured more USDHC controllers 				(%d) than supported by the board\n"
+
+There is a checkpatch warnings for this.
+
+WARNING: Avoid line continuations in quoted strings
+#1137: FILE: board/sielaff/imx6dl-sielaff/spl.c:96:
++                       printf("Warning: you configured more USDHC controllers \
+
+regards,
+dan carpenter
+
