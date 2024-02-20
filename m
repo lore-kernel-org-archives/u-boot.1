@@ -4,141 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E255FC48BC4
-	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 07:48:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23C62C48BC4
+	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 07:51:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3212587F70;
-	Tue, 20 Feb 2024 08:48:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
+	by phobos.denx.de (Postfix) with ESMTP id 865A687D6F;
+	Tue, 20 Feb 2024 08:50:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="qL4iHDWh";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 559EE87F70; Tue, 20 Feb 2024 08:48:33 +0100 (CET)
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on20601.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2613::601])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A53387D1A
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 08:48:23 +0100 (CET)
+ id 5969587D69; Tue, 20 Feb 2024 08:50:57 +0100 (CET)
+Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
+ [210.160.252.171])
+ by phobos.denx.de (Postfix) with ESMTP id 6AEC287D74
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 08:50:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=siemens.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jan.kiszka@siemens.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=iyj2dYLQG/INvUg/BEwLMaPyH6RU7XuadvfeuDyNATpc3XO7YfdB+RM5GUEHESPyMFW8EFw0dYds9qUjWU63PSoPkeAxEqpW+gczvyDWfxE8OZppqEpeZLx0r1ntPhqAYpjijXrkIOoUDk5Z4a8G31nrcB/ZoccQddNZtumdIKq5PIZCFNOzqBDepvpK3AfhbjyvFDXmSp9v0eX2ammHaB19zQELWVFtmQiHD4/q1uKiaGRw7KaaX4EC9mbWVqdlesZJ5ho++hHg3oVTUK9NYgcVs/xHr/tvulSfYkGzxVTahFHBmBBhjmHWtnCcKd3b2uyyqA58cK4V5OthmVR0Ag==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wyeemArMqMGODKOfCcjhTonx4QVfzKs773SM578m+5o=;
- b=V/ZoYW4E4dW7czQPWPKZ72opvql2gFeN5PnnFCcvrinwmcO/Xad+fLt4XxvGV1BLdxdGQS7CYj6R3OAcy20i+RODUvhJ3IfP/4kQ0N4+QnvPCfW+Ivjo9aAEem7jNRZoKZ9EOZwM632sgsrJhzmPHbjmwilHHIAE7FTjhF7nVdoBJFuyU7qn9VEa0XzHYQnMuI3ykTnc5rJXmNZs2L8eFI9Whwf9WcKmL4bMQY2cvricX1pVpUApKOPdhzDjTZOnWfnaloRHpX/Q0Ykg7m6J1hEAmsH+TVAoDLXbecAWJGCErWa9nHFIXwg++87f1FvdCPThawrn29vG5xdx/n8BnQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
- dkim=pass header.d=siemens.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wyeemArMqMGODKOfCcjhTonx4QVfzKs773SM578m+5o=;
- b=qL4iHDWhC22g1jmyHJU2N2ICu8I0nPrAk2Ykjln/8P9+k89Zolu3LPsbCIlmbn8uCYZ+m4nIdvGnZ2HM2xd6oyCLkPr7c1ejapvCxRgZn6F2ULZ9ReDadsbq3WYHTThI3xGHH9xZrHqsnYjFPXuE7aRlzR4I5V3LpBc641ggnK5R/vZ8DigkfNhe81uUHzAsD2GGpii2WPtaaDTk1/RuayZ5EkW6HOnCwa19ehGgwjhzcb/eVtv6WlOKbkrq66m0/dYoHVa36thLrvHaN5gfr/ouwN2Ig/mcOXPHziQv1LXdj6zlpJZeH8ZYalK3UA0jqcAB66y0GKtmgieqfdZOGw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=siemens.com;
-Received: from AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:588::19)
- by DB9PR10MB5257.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:33d::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7292.39; Tue, 20 Feb
- 2024 07:48:22 +0000
-Received: from AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::8d16:7fbb:4964:94fe]) by AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::8d16:7fbb:4964:94fe%3]) with mapi id 15.20.7292.036; Tue, 20 Feb 2024
- 07:48:21 +0000
-Message-ID: <782ea2c0-eef5-478d-a122-cc6e2d066762@siemens.com>
-Date: Tue, 20 Feb 2024 08:48:18 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH V6 07/20] configs: am62x_evm_a53_defconfig: Switch to
- bootstd
-Content-Language: en-US
-From: Jan Kiszka <jan.kiszka@siemens.com>
-To: Alexander Sverdlin <alexander.sverdlin@gmail.com>,
- Nishanth Menon <nm@ti.com>, Neha Francis <n-francis@ti.com>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@google.com>
-Cc: Bryan <bb@ti.com>, Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>,
- Robert Nelson <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
- u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Simon Glass <sjg@chromium.org>, Andreas Dannenberg <dannenberg@ti.com>,
- Romain Naour <romain.naour@smile.fr>
-References: <20230825180305.69515-1-nm@ti.com>
- <20230825180305.69515-8-nm@ti.com>
- <87f154591fee4979570e78cbc8c73eb0a56469eb.camel@gmail.com>
- <e6222770-cbcd-45e2-94fe-eb55fb0a2f94@siemens.com>
- <5679ced7e927e1eb858a47d25abbd4025b4b67b7.camel@gmail.com>
- <dba0d25f-121d-4146-a78b-ac3beeeb1531@siemens.com>
-In-Reply-To: <dba0d25f-121d-4146-a78b-ac3beeeb1531@siemens.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR3P281CA0170.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:a0::18) To AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:588::19)
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-IronPort-AV: E=Sophos;i="6.06,172,1705330800"; 
+ d="asc'?scan'208";a="194554937"
+Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
+ by relmlie5.idc.renesas.com with ESMTP; 20 Feb 2024 16:50:45 +0900
+Received: from [10.226.93.3] (unknown [10.226.93.3])
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id 8C1B941D2F53;
+ Tue, 20 Feb 2024 16:50:43 +0900 (JST)
+Message-ID: <edaa1b92-da79-4990-a0f6-3d499b408b82@bp.renesas.com>
+Date: Tue, 20 Feb 2024 07:50:38 +0000
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS4PR10MB6181:EE_|DB9PR10MB5257:EE_
-X-MS-Office365-Filtering-Correlation-Id: d4a6b71e-9144-48fe-971c-08dc31e84f22
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: jCM9QoWi+/9UBVRX2+LOD5l2o5yzyxNmNo/ZYzAexcutbI7uROyDqTfIgPy+hhn4b2n6F3/H7rVGc3qH1oxQQicz+MB3bP5IDuZDDeaXjIdoNUrXmxMbbY8+722ogPPFhiqg1hOQ20HZzMoaNbQDY//wavAN3O9IedA/zWUMHx5qSDxf4Mm36YxN/wuNoC5ZJs+2CegrcDYH1aamFquS9Yh/ME1+FF0nJ6e4cJ9jIvNu+gSEszHHV8jaRKt3b/gaxhd4Jqct7UtElqqhbL03vvQsgjrMFFucPxTimdDGAu0981CcvQ9GEiFpkU00V4CWLc+nY1Mg5LLr2XKHpA4pBKrE2y8D+at27T4TxNe9YQFdG0VtD5hGW4QCWbbRlpXpGeaagbTbXeuvREqz6qawHzK0FBT5yJ+Alsm+MgW4SOuZmC983TosPUNuuhvzXT7LDG9m2LSoXrjtPRkAPhEf0oqFdENxxTp7M3uh7kWG83362fi14woDQz8CFAQmwHiH5QBz1DfYTA6/E+958NrqwkpQFbZ5K5nAXbFngi9aW/I=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230031); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?OGlmVmlIaE1icUpyRjZNWTNnZ2RpS012eG1ZblphOVJld2pYZHdhU2Y1M3E5?=
- =?utf-8?B?SWVQcXJDRmhSY1pMbktEMkpPWUhscHh1eVpKZUFWenp4dm9VTnY0VUhiV1Fo?=
- =?utf-8?B?UFRvSGQvdGpWbzNPYmtibVlPRXJsd2M5R2Yyc0VPTVQ5VXdQL2FwT3dCOHNl?=
- =?utf-8?B?TjVqRmdiSEdESFpPV0VtdnErRzZ6cGVvZVZwWnFCL3ZsQ1REM3JpQlV4UDRv?=
- =?utf-8?B?WnQveUxxRVNQRzNjQXdRa0YwWXk1bEUrMUxXbU1kUVdENFRHRUFtYi9nd3Ru?=
- =?utf-8?B?RGZ1NGIveWFFb1J3QmtMV0dCeENBMldpc0doa0h4VFJ6SXMyNFlySGk4WjFy?=
- =?utf-8?B?cFhlQUg0OXY3eVRBenNZSUhJS3hnNitRY0ZmOGhzOGxmYm5LWlk2WWZjRFdI?=
- =?utf-8?B?Nm9wZ0lxVm8rbVZIY1o5cTNkMmVkbkFEUmJrVWFsK00xM2txOUV3RXRlZGlr?=
- =?utf-8?B?ME5mMDlCbVUxK2YrUDdhWlpnMjg1WkJMYmZqU2F5ck5BdkhoM0YyaVpWSGk1?=
- =?utf-8?B?bWR0Tmk5aWd2R21CVU84TlM3dWdpSEdOQlE4Y001R3JIek5LRGg5bmorYWpk?=
- =?utf-8?B?a2gvRGNWMTlxOE0yaUtCR1Z4MG9TODhoSTdRbjZLcTdzTUdHL210YzVibEow?=
- =?utf-8?B?c00vY082bG1XbFdWeUZtQkR5QjZYbUlWSkhvemFUMkRDei9GeVVjeWhVZjB4?=
- =?utf-8?B?UDg1U3dmbTZMWm1LVUk2UEdoQ250WDNNUFM2UEQxbEpzQ3Q4YW1yS3M2REJU?=
- =?utf-8?B?RU5jQTZndE90Ny91RE1PMCszUFhsYmJGMkMwVEVDdGFBa0JlM3J1a2o0TVpF?=
- =?utf-8?B?WWFJamxpZGI0TFd2amd3WVBJNXNmcVNzaFExZWJzWUlibW5WclpDeHVjVk9X?=
- =?utf-8?B?NjUrSmZkZWVOYWRRYVlhem5iZFBkR3E1Q0xsNWxoMDkzZ1RoZ1VXMFNOMURq?=
- =?utf-8?B?Z2JqNWZLTDRRQXB0NkhhYlZCTFdDMkIrKzJKNVdqZkQ4TFIzaFJIL29Zb3FX?=
- =?utf-8?B?b0V6MjIrY0lnUm9aUTM0VEtWQ1dSaUxjZjRnUEVLTkxEME0rekd6QWNMYnVS?=
- =?utf-8?B?SGFaZ1d0WmNra2xBZHZqaEdlQWplMjB3ZHNYc3JmcW9xc3daaDJXdXh4eEpY?=
- =?utf-8?B?N01lUGh1b1F0VjZFU0FpUHY4VURiSHRiZ1UxKzAyVzB6bG93SENHVk5IYUg4?=
- =?utf-8?B?MGVLa3h6c2cyTW5lNUVDTmR5RGw2Q3RZcWcrQ0V5YkcyS0VOSS91Rmh5WFJl?=
- =?utf-8?B?ekZnVktjZk5zQktHcGwrWk15SGJwY3pNTDlYZHhUZllCV2g2NTNqMnkxRloz?=
- =?utf-8?B?SXVzL3c3RGs1YjRmcmdPZzR0bCtBV0dVaFhZNUlCRzdsb2NtQ3dydmtMSm1j?=
- =?utf-8?B?V3VSRzBJK0JybC9TN2x5Yk03UEpNMk0vTGJrMXluWW1wZDdRdG5sNmJIWUVI?=
- =?utf-8?B?OVJCd1dVS3R4dllPK3hYWWowZXlNY0ZxR28vUVpOM1pLRHlMN1h1TXFJMUxS?=
- =?utf-8?B?dkxpd3N6NGsxK2Erb09ycVNHZUNCL0FOTlhZcEs3ZHJRaGpJR096Y3BnSy9W?=
- =?utf-8?B?bmpFOHhuTGJoU1FSRGFjUGxZV2JFS0hDRlBrUEk2WVVkMEErUVJEWDBsaVdl?=
- =?utf-8?B?akFGVjdyZjVGa3J2UXovOHJBaGlxZkpkY1grYlV1WmQwbkV1bWRsbXFZSkU3?=
- =?utf-8?B?bHhHTHdrUm1HMkorWUdVZE03eE5yaDhmNkNmNWtiVGp5NkpMUGNIUWhNTTc2?=
- =?utf-8?B?V0Q1OWtqVTkxRTNBZFhsQzFWemxjRzZBUjRXL29JV2VLWG1xSDl4NlJEZWZm?=
- =?utf-8?B?ZkF2TjNXeURlR2xKbW90U1crK2Z2bGswM0hmS1l2TGdpd0N5Vlg3Z0F4SnpN?=
- =?utf-8?B?YUpxWlpESDJreld1RjIrdWNqOHFqaVJKSkZyamQybTF0Vkh3MTVkMndrbCsw?=
- =?utf-8?B?N1EwOVl3QWxFejVrSFF3Q283bDRJYVY3V2ErNSs4dGZZcVpNWUZ1alJ2WHdy?=
- =?utf-8?B?eHYzVDJlN3pZcDAwejEzbU5tK1NpUzZxUEo4b21CYU1aam1YVjl0ZXNqYmhU?=
- =?utf-8?B?Qy8zMWtNQ2xKcUcyNFFlUWdHaFJBY0FXQ1p5NFZKYjlFNW9qVXpVMUovUlNY?=
- =?utf-8?B?QmxrZlBSaXpWV0plc1IwTkJDSVUwOHp3bjhLV0VvTisyYVdkTXUreXd1Yndr?=
- =?utf-8?B?SGc9PQ==?=
-X-OriginatorOrg: siemens.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d4a6b71e-9144-48fe-971c-08dc31e84f22
-X-MS-Exchange-CrossTenant-AuthSource: AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Feb 2024 07:48:21.4477 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: zJvJCqUnJMZc8i3bVy4dmjBrl0JEAB2uhXAVnwavEWvcaTx60q6Y7ISCQJ6/IQJ42baATXIuICYDLPu/K6Js9A==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR10MB5257
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/5] i2c: rzg2l: Add I2C driver for RZ/G2L family
+Content-Language: en-GB
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Heiko Schocher <hs@denx.de>
+References: <20231115174025.12974-1-paul.barker.ct@bp.renesas.com>
+ <20231115174025.12974-4-paul.barker.ct@bp.renesas.com>
+ <90feb671-d939-4dbf-9a49-418fc9a56b23@mailbox.org>
+ <20231119204853.bmg4ghuo625c3zkm@GBR-5CG2373LKG.adwin.renesas.com>
+ <faee5984-fb92-46f0-a9b7-17f57eddbee5@mailbox.org>
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+Organization: Renesas Electronics Corporation
+In-Reply-To: <faee5984-fb92-46f0-a9b7-17f57eddbee5@mailbox.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------AMMhlsxoh2CgEg3rpM9HafSJ"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -155,121 +64,173 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 19.02.24 19:37, Jan Kiszka wrote:
-> On 17.02.24 12:36, Alexander Sverdlin wrote:
->> Hi Jan!
->>
->> On Sat, 2024-02-17 at 09:42 +0100, Jan Kiszka wrote:
->>>> U-Boot 2024.01 (Feb 15 2024 - 01:43:17 +0100)
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------AMMhlsxoh2CgEg3rpM9HafSJ
+Content-Type: multipart/mixed; boundary="------------w6Q5A2HROoxkMINqrU0SpXHJ";
+ protected-headers="v1"
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Heiko Schocher <hs@denx.de>
+Message-ID: <edaa1b92-da79-4990-a0f6-3d499b408b82@bp.renesas.com>
+Subject: Re: [PATCH 3/5] i2c: rzg2l: Add I2C driver for RZ/G2L family
+References: <20231115174025.12974-1-paul.barker.ct@bp.renesas.com>
+ <20231115174025.12974-4-paul.barker.ct@bp.renesas.com>
+ <90feb671-d939-4dbf-9a49-418fc9a56b23@mailbox.org>
+ <20231119204853.bmg4ghuo625c3zkm@GBR-5CG2373LKG.adwin.renesas.com>
+ <faee5984-fb92-46f0-a9b7-17f57eddbee5@mailbox.org>
+In-Reply-To: <faee5984-fb92-46f0-a9b7-17f57eddbee5@mailbox.org>
+
+--------------w6Q5A2HROoxkMINqrU0SpXHJ
+Content-Type: multipart/mixed; boundary="------------wjBtPhcM8G6BmwJgD22TsT05"
+
+--------------wjBtPhcM8G6BmwJgD22TsT05
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+On 02/12/2023 18:18, Marek Vasut wrote:
+> On 11/19/23 21:48, Paul Barker wrote:
+>> On Sun, Nov 19, 2023 at 09:15:36PM +0100, Marek Vasut wrote:
+>>> On 11/15/23 18:40, Paul Barker wrote:
+>>>> This driver supports the I2C module on the Renesas RZ/G2L (R9A07G044=
+)
+>>>> SoC, also known as the RIIC module.
 >>>>
->>>> SoC:   AM62X SR1.0 HS-FS
->>>> Model: Texas Instruments AM625 SK
->>>> DRAM:  2 GiB
->>>> Core:  56 devices, 23 uclasses, devicetree: separate
->>>> MMC:   mmc@fa10000: 0, mmc@fa00000: 1
->>>> Loading Environment from nowhere... OK
->>>> In:    serial@2800000
->>>> Out:   serial@2800000
->>>> Err:   serial@2800000
->>>> Net:   eth0: ethernet@8000000port@1
->>>> Hit any key to stop autoboot:  0 
->>>> switch to partitions #0, OK
->>>> mmc1 is current device
->>>> SD/MMC found on device 1
->>>> Failed to load 'uEnv.txt'
->>>> Scanning for bootflows in all bootdevs
->>>> Seq  Method       State   Uclass    Part  Name                      Filename
->>>> ---  -----------  ------  --------  ----  ------------------------  ----------------
->>>> Scanning global bootmeth 'efi_mgr':
->>>> No EFI system partition
->>>> No EFI system partition
->>>> Failed to persist EFI variables
->>>> Scanning bootdev 'mmc@fa00000.bootdev':
->>>> Scanning bootdev 'mmc@fa10000.bootdev':
->>>> Unknown uclass 'usb' in label
->>>> link up on port 1, speed 100, full duplex
->>>> BOOTP broadcast 1
->>>> BOOTP broadcast 2
->>>> BOOTP broadcast 3
->>>> ...
->>>> ---
+>>>> This patch is based on both the u-boot driver in the Renesas RZ BSP
+>>>> 3.0.5 release [1] (commit 7fcc1fdc2534), and the Linux v6.6 driver
+>>>> (commit ffc253263a13).
 >>>>
->>>> I suppose TI's BSP has older U-Boot... So it's not providing necessary
->>>> script for BOOTSTD, I suppose?
+>>>> Support for deblocking the I2C bus is included as this may be needed=
+
+>>>> after triggering a reset via the Power Management IC (PMIC) over I2C=
+
+>>>> (the PMIC asserts the reset line before the SoC completes the I2C wr=
+ite
+>>>> transaction with obvious bus locking effects). If the SDA line is
+>>>> observed to be low during initialisation, we automatically attempt t=
+o
+>>>> deblock.
 >>>>
+>>>> [1]: https://github.com/renesas-rz/renesas-u-boot-cip
+>>>>
+>>>> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 >>>
->>> You can make the BeagleBone boot via EFI, but it requires a hybrid
->>> partition table (ROM loader want DOS, EFI needs GPT). A Debian
->>> integration with this can be found for Isar [1] in this series [2]. It's
->>> only using upstream sources (plus still one u-boot patch to get wifi
->>> working).
->>>
->>> If you want legacy script booting, I suspect you need to flip some extra
->>> switches explicitly by now.
+>>> The driver seems very similar to drivers/i2c/rcar_iic.c , can there b=
+e some
+>>> code reuse ?
 >>
->> Thanks for the hints!
->> I'm wondering, if this was a deliberate "let's stop booting all the
->> pre-existing embedded distros" decision? (buildroot, yocto/meta-ti...)
+>> My initial idea was to extend the R-Car iic driver but I quickly saw
+>> that would be very messy. All the registers and bits are in different
+>> places, the calculations are different (particularly in regard to
+>> setting bus speed) and the read/write process has more edge cases for
+>> the RZ/G2L. The bus recovery mechanism we use also doesn't exist on
+>> previous R-Car SoCs.
 >>
-> 
-> FWIW, I'm not seeing other boot methods being specifically disabled in
-> beagleplay in 2024.01 or even newer. I didn't try the result, but this
-> may actually be some other issue and real bug, nothing obviously intended.
-> 
+>> The Linux drivers for these modules are also separate, see
+>> drivers/i2c/busses/i2c-sh_mobile.c (for R-Car and earlier SoCs) and
+>> drivers/i2c/busses/i2c-riic.c (for RZ/G2L) in the Linux kernel.
+>=20
+> Ah, I thought some of the registers were the same, but indeed the RZG=20
+> core is much more extensive.
+>=20
+> You should either use devm_clk_*() in probe() or implement .remove=20
+> callback. With that fixed:
+>=20
+> Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>=20
+> And sorry for the delayed reply.
 
-I'm not even sure about this anymore, though there is still a bug, just 
-a different one:
+Here's an even more delayed reply from me! I've been busy on other work
+but getting back to u-boot now.
 
-...
-U-Boot 2024.04-rc2-00040-g3e6f2a94bfc (Feb 20 2024 - 08:42:59 +0100)
+Using devm_clk_get() in the probe function for this driver doesn't seem
+to be needed. The `struct clk` is stored in a `struct riic_priv`, this
+is allocated and freed automatically for each device as we set
+`priv_auto` in the driver definition.
 
-SoC:   AM62X SR1.0 GP
-Model: BeagleBoard.org BeaglePlay
-DRAM:  2 GiB
-Core:  98 devices, 27 uclasses, devicetree: separate
-MMC:   mmc@fa10000: 0, mmc@fa00000: 1, mmc@fa20000: 2
-Loading Environment from nowhere... OK
-In:    serial@2800000
-Out:   serial@2800000
-Err:   serial@2800000
-Net:   No ethernet found.
+Thanks,
 
-Press SPACE to abort autoboot in 2 seconds
-=> print bootmeths 
-bootmeths=script extlinux efi pxe
-=> bootflow scan -l
-Scanning for bootflows in all bootdevs
-Seq  Method       State   Uclass    Part  Name                      Filename
----  -----------  ------  --------  ----  ------------------------  ----------------
-Scanning bootdev 'mmc@fa00000.bootdev':
-  0  efi          ready   mmc          2  mmc@fa00000.bootdev.part_ efi/boot/bootaa64.efi
-Scanning bootdev 'mmc@fa10000.bootdev':
-  1  extlinux     ready   mmc          1  mmc@fa10000.bootdev.part_ /extlinux/extlinux.conf
-Unknown uclass 'usb' in label
-"Synchronous Abort" handler, esr 0x86000004, far 0x3030303030303840
-elr: 3030302fb0bc0840 lr : 3030302fb0bc0840 (reloc)
-elr: 3030303030303840 lr : 3030303030303840
-x0 : 00000000ffffffed x1 : 0000000000000000
-x2 : 0000000000000002 x3 : 00000000ffb49d30
-x4 : 00000000fffd4c00 x5 : 00000000ffb49d50
-x6 : 0000000000000000 x7 : 00000000ffb4e890
-x8 : 0000000000006924 x9 : 00000000ffb1212c
-x10: 0000000000000003 x11: 0000000000006914
-x12: 00000000ffb1221c x13: 00000000ffb12b40
-x14: 00000000ffb12b40 x15: 00000000ffb12535
-x16: 00000000fff8a9d4 x17: 0000000000000000
-x18: 00000000ffb23da0 x19: 0000314074726f70
-x20: 00000000fffed000 x21: 00000000fffef000
-x22: 0000000000000000 x23: 00000000fffef000
-x24: 00000000fffef000 x25: 0000000000000000
-x26: 00000000fffc7174 x27: 0000000000000000
-x28: 0000000000000000 x29: 74656e7265687465
+--=20
+Paul Barker
+--------------wjBtPhcM8G6BmwJgD22TsT05
+Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
+Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
 
-Same with 2024.01 release.
+-----BEGIN PGP PUBLIC KEY BLOCK-----
 
-Jan
+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3D
+=3DsIIN
+-----END PGP PUBLIC KEY BLOCK-----
 
--- 
-Siemens AG, Technology
-Linux Expert Center
+--------------wjBtPhcM8G6BmwJgD22TsT05--
 
+--------------w6Q5A2HROoxkMINqrU0SpXHJ--
+
+--------------AMMhlsxoh2CgEg3rpM9HafSJ
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZdRZzgUDAAAAAAAKCRDbaV4Vf/JGvYQ8
+AP4/hNlpWS1UV1vJCG7ThLno5ocygeqaOR2Y3VQxfXhC2wEArLc2yiJosTfwNUZYzPOEb4qeHhPP
+2H+9dAMaC5mhBAM=
+=uXHv
+-----END PGP SIGNATURE-----
+
+--------------AMMhlsxoh2CgEg3rpM9HafSJ--
