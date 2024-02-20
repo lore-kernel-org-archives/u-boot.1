@@ -4,75 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7CD0C48BC3
-	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 20:05:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DB27C48BC3
+	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 20:39:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5EB9288005;
-	Tue, 20 Feb 2024 21:05:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 5869288012;
+	Tue, 20 Feb 2024 21:39:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VRrwd8nI";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="EEKNzrWd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D616687FFF; Tue, 20 Feb 2024 21:05:09 +0100 (CET)
-Received: from mail-il1-x133.google.com (mail-il1-x133.google.com
- [IPv6:2607:f8b0:4864:20::133])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D5E3788015; Tue, 20 Feb 2024 21:39:54 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 828BA88003
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 21:05:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 41BA288001
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 21:39:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-il1-x133.google.com with SMTP id
- e9e14a558f8ab-365273fb1a9so8076555ab.3
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 12:05:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1708459502; x=1709064302; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=JhxifTka7CdK9NuaKFDOo1bkkHOUrUfcvm4A5g6d33w=;
- b=VRrwd8nINR53QVZsKNy8cmdH1v2IBQx/wygIYrmbVysAGgnhb9tITiAKN2fwChN6td
- WYWRm7ygVAEAMPVgldYMn71En9tFZFomCmmPv/PdARzDAIQRFyBIZ9exVIP/N0nM/WCQ
- EtBzAbwB7K66gCtQuBen7ylEdGb1+Nl8+NlJY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708459502; x=1709064302;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=JhxifTka7CdK9NuaKFDOo1bkkHOUrUfcvm4A5g6d33w=;
- b=M+sIHGY1ezibQpB3TXbH5nNV0UHZpJItiHj2AGZPdLhiF8rwCjMRTae384aT0WRVV7
- x0Rmqop7ztAiB0k+kLt4IAyncr/obKc8JYzjIhmn+TOtLYSFs5QBr5AsMgldAkyF8VGc
- E5uASxk9YO3tlZ+rNF1VTDipF3oBNiIwzB7VVZxENrYM71MVFrDD8sdTTw/id6ZHqZnw
- RMxp45koC9JNv7hFoy2iZL7AoL9p4Q9v1aIgf+vcG4oaQbv6dAd9hKTBQlfzOSdM1Fj1
- jHXNzCGHP2K9ofeQ+SKoL29rZYxEAhbwVPYvtIkS7aLMY+nXnfvDTJJvK8Gk2hwoFekF
- 3kdQ==
-X-Gm-Message-State: AOJu0YxCSUfW42so6Fd7JtKS4SU4FspLTrVj3LoeHS7L8BE1o/fSMDN5
- eIo3fBhLvqwiPwJASZfDcOpZM2wbjJlPh3PEzCMxhVwNxBOH1ntZX9Sbs3vhuBU=
-X-Google-Smtp-Source: AGHT+IGrpZBxpXhfDRHAesURMsmJbEbI9w/IWbErEwiO7uqxMJB0vYCHLDkyww4OHCOKzY/MYAN9SQ==
-X-Received: by 2002:a92:c101:0:b0:365:1976:4869 with SMTP id
- p1-20020a92c101000000b0036519764869mr8947772ile.18.1708459502091; 
- Tue, 20 Feb 2024 12:05:02 -0800 (PST)
-Received: from bill-the-cat (065-184-194-195.res.spectrum.com.
- [65.184.194.195]) by smtp.gmail.com with ESMTPSA id
- bx15-20020a05690c080f00b006082aec5cbbsm1190026ywb.132.2024.02.20.12.05.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Feb 2024 12:05:01 -0800 (PST)
-Date: Tue, 20 Feb 2024 15:04:59 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Love Kumar <love.kumar@amd.com>
-Cc: u-boot@lists.denx.de, michal.simek@amd.com, git@xilinx.com
-Subject: Re: [PATCH v3] test/py: saveenv: Add a test for saveenv command
-Message-ID: <20240220200459.GS3040305@bill-the-cat>
-References: <a206af0d5844af9b68d315e6e667db782fc5211b.1708413969.git.love.kumar@amd.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vishalm@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41KKdj1G111274;
+ Tue, 20 Feb 2024 14:39:45 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1708461585;
+ bh=6wurAbYknRiloKKCiA/ZuG+fAYQOswSubIRYH6pioW4=;
+ h=From:To:CC:Subject:Date;
+ b=EEKNzrWdj5ub5yBAZ5J5DDdX4+H3rrGVjPcJrvsrmzce5mutAtVvgZ3gDyrv4Kvh0
+ W3lfjcXFjVhgLlLbWUl5O9i80lVneipb9/ToXJ7eo0w6sSKBi+ImBmzMFWA9eUX59X
+ cR9RnQcEhfwlE8ppe8rtlv0wlFvmGMkQrE2Y1/M8=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41KKdjhB124754
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 20 Feb 2024 14:39:45 -0600
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 20
+ Feb 2024 14:39:44 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 20 Feb 2024 14:39:44 -0600
+Received: from uda0271468c (uda0271468c.dhcp.ti.com [128.247.81.219])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41KKdiZ2034175;
+ Tue, 20 Feb 2024 14:39:44 -0600
+Received: from vishallocal by uda0271468c with local (Exim 4.90_1)
+ (envelope-from <vishalm@ti.com>)
+ id 1rcWu0-0007GP-L2; Tue, 20 Feb 2024 14:39:44 -0600
+From: Vishal Mahaveer <vishalm@ti.com>
+To: <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
+CC: Neha Malcom Francis <n-francis@ti.com>, Bryan Brattlof <bb@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>
+Subject: [PATCH] board: ti: rm-cfg: Update rm-cfg to reflect new resource
+ reservation
+Date: Tue, 20 Feb 2024 14:39:44 -0600
+Message-ID: <20240220203944.27916-1-vishalm@ti.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="a92pMPArJ1jqqi7x"
-Content-Disposition: inline
-In-Reply-To: <a206af0d5844af9b68d315e6e667db782fc5211b.1708413969.git.love.kumar@amd.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,40 +81,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+With the latest TIFS firmware, an additional virtual interrupt and
+event is reserved for TIFS usage on am62x and am62ax devices.
 
---a92pMPArJ1jqqi7x
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Update the rm-cfg to reflect this new reservation.
 
-On Tue, Feb 20, 2024 at 01:11:49PM +0530, Love Kumar wrote:
+Signed-off-by: Vishal Mahaveer <vishalm@ti.com>
+---
+ board/ti/am62ax/rm-cfg.yaml | 8 ++++----
+ board/ti/am62x/rm-cfg.yaml  | 8 ++++----
+ 2 files changed, 8 insertions(+), 8 deletions(-)
 
-> Add test case for saveenv command in non-JTAG bootmode which saves the
-> u-boot environment variables in persistent storage.
->=20
-> Signed-off-by: Love Kumar <love.kumar@amd.com>
+diff --git a/board/ti/am62ax/rm-cfg.yaml b/board/ti/am62ax/rm-cfg.yaml
+index 73e8e15f66..cbd087de79 100644
+--- a/board/ti/am62ax/rm-cfg.yaml
++++ b/board/ti/am62ax/rm-cfg.yaml
+@@ -1,5 +1,5 @@
+ # SPDX-License-Identifier: GPL-2.0+
+-# Copyright (C) 2022-2023 Texas Instruments Incorporated - https://www.ti.com/
++# Copyright (C) 2022-2024 Texas Instruments Incorporated - https://www.ti.com/
+ #
+ # Resource management configuration for AM62A
+ #
+@@ -519,13 +519,13 @@ rm-cfg:
+             reserved: 0
+         -
+             start_resource: 44
+-            num_resource: 36
++            num_resource: 35
+             type: 1802
+             host_id: 35
+             reserved: 0
+         -
+             start_resource: 44
+-            num_resource: 36
++            num_resource: 35
+             type: 1802
+             host_id: 36
+             reserved: 0
+@@ -567,7 +567,7 @@ rm-cfg:
+             reserved: 0
+         -
+             start_resource: 1038
+-            num_resource: 498
++            num_resource: 497
+             type: 1805
+             host_id: 128
+             reserved: 0
+diff --git a/board/ti/am62x/rm-cfg.yaml b/board/ti/am62x/rm-cfg.yaml
+index 725f7c83f0..26d99b03b8 100644
+--- a/board/ti/am62x/rm-cfg.yaml
++++ b/board/ti/am62x/rm-cfg.yaml
+@@ -1,5 +1,5 @@
+ # SPDX-License-Identifier: GPL-2.0+
+-# Copyright (C) 2022-2023 Texas Instruments Incorporated - https://www.ti.com/
++# Copyright (C) 2022-2024 Texas Instruments Incorporated - https://www.ti.com/
+ #
+ # Resource management configuration for AM62X
+ #
+@@ -513,13 +513,13 @@ rm-cfg:
+             reserved: 0
+         -
+             start_resource: 44
+-            num_resource: 36
++            num_resource: 35
+             type: 1802
+             host_id: 35
+             reserved: 0
+         -
+             start_resource: 44
+-            num_resource: 36
++            num_resource: 35
+             type: 1802
+             host_id: 36
+             reserved: 0
+@@ -555,7 +555,7 @@ rm-cfg:
+             reserved: 0
+         -
+             start_resource: 909
+-            num_resource: 627
++            num_resource: 626
+             type: 1805
+             host_id: 128
+             reserved: 0
+-- 
+2.43.0
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
---=20
-Tom
-
---a92pMPArJ1jqqi7x
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXVBesACgkQFHw5/5Y0
-tyy5Hwv/Xf6XKnwSQXK6lhOEx87oKiDJceGFl/WAmrQYAxKLyQDNPoIIoLjJu9vx
-ZfrXXhQjWLd3ma+YFE+a0NXIy4rcQ592SyMrbh0zJ8VboksZtAykPAisPOhEAkk+
-gL4OM3vxFM6GPd5xOnSu8Dh8U1Zp0lPnyJAjF4LtY4a0maOQHF62stNWRDnnN4X1
-6/xTJZiUBWJRq/Bhy4isg/TL+XWHdZTVcULAzEpdO8zgaoNC6g1DcDNrAQ2BEvBN
-nZcGH8fR55MDao7PmejPMDEQMgUkIVOdRB7fpIoDh7J4J+83QvEylUVPChsxJHZo
-Ls7V+LEatco1fu58cjRD4V+Nf/aTS64gRZX7WikCxO7V0xh6LgbbnMhuthGAjX/h
-RoSEQEBs3R8Htv0W2daJyO4KjSdxzAFGQb2tWKhj3EmNIEORBAcz6Nn5sQ+GsUny
-Og2Sd5H8n1i+13SimY/cC4LGl9EcMFHK5hYm725wyprKzDrK4E/o5VamW3F4wYuD
-3xj0rWPy
-=I3sB
------END PGP SIGNATURE-----
-
---a92pMPArJ1jqqi7x--
