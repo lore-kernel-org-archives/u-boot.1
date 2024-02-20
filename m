@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B245FC48BC3
-	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 11:10:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A681CC48BC4
+	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 11:11:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D4DBD87FCA;
-	Tue, 20 Feb 2024 12:04:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 411AD87FD6;
+	Tue, 20 Feb 2024 12:04:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gnu.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gnu.org header.i=@gnu.org header.b="BDH4eJvR";
+	dkim=pass (2048-bit key; unprotected) header.d=gnu.org header.i=@gnu.org header.b="Y0L2dI/d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0830087D4D; Tue, 20 Feb 2024 11:36:11 +0100 (CET)
+ id 4067B87D4D; Tue, 20 Feb 2024 11:36:11 +0100 (CET)
 Received: from eggs.gnu.org (eggs.gnu.org [IPv6:2001:470:142:3::10])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C6E9C87D98
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 11:35:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B06DE87F8C
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 11:35:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gnu.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=othacehe@gnu.org
 Received: from fencepost.gnu.org ([2001:470:142:3::e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <othacehe@gnu.org>)
- id 1rcNTU-00014U-06; Tue, 20 Feb 2024 05:35:47 -0500
+ id 1rcNTf-000165-8c; Tue, 20 Feb 2024 05:35:55 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=gnu.org;
  s=fencepost-gnu-org; h=MIME-Version:References:In-Reply-To:Date:Subject:To:
- From; bh=rMuG1uMF27D4BQKAZwxczpxifoX3+ILXmtY2md6uZc4=; b=BDH4eJvRxrlnHktZ0Rd9
- RjyGYXI0KPHNu+bJyrZ1JdES4aVsO6tV3OF4k3IyOvu7jl4+ltW3IHeewdLNpxcsNmttkXtUFiezT
- z0bFT/Bp1z+eA8gUyZSn9gRW3OkszfAC8nA5atgd1OSqdI9Pd2QHh1geQWsY/vYllzz9ufH5KLl3W
- /N1qi/z3FAcsV7Tzbpv0ezxnOYM2nWZPCj7O2FKxI2lxc1eeA0m56k5GpZ/b0rHg1dvyeZOtXCmsJ
- 2Nwr2mcZXVwiCiZt90SuFNtBBf2mCok63El7bS5xPjo7hCLuK3/KmE66GVTcQSfRb/4DmNewQMVLc
- AqAlq/fj2nJLoQ==;
+ From; bh=5N9XkB03bSP4zZ0rLeJDgLgJJy2/hRX9K/i0Ttf8aDU=; b=Y0L2dI/dU766ol9KAOck
+ OziNeJjhz+F4agI5++6jrQ+zrVPztFCNFHdU3NWQiJOsCW5Aq/eFolcDMu1uUSqAF311Q6YBWv9NQ
+ 6Bp1hrXV+TGly5RE+wJg5ZZkfvejY3VFQQ6CvRzbUb6cdyhfHw6Z/oGNgH0lPCBVfAsVRxBQS1sXh
+ 0fsnOyrEYL4Z8g1qznoal0yW2sB8Q4gYFGoItATYt/OJxVk6ZPjMSLd5w8ErsBeu3uryXpuaNCw9V
+ 3eCJoULQo2dPI8ehYKDYzyy9HLferEqFIYIpa/6UNtRUGANA3/IMiBBX4+MT8F4Bkdmcm04zCcZeX
+ 1+EE3Wr6Sf5Fng==;
 From: Mathieu Othacehe <othacehe@gnu.org>
 To: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
  Peng Fan <peng.fan@nxp.com>, Shiji Yang <yangshiji66@outlook.com>,
@@ -46,9 +46,9 @@ To: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
  Mathieu Othacehe <m.othacehe@gmail.com>
 Cc: u-boot@lists.denx.de,
 	Mathieu Othacehe <othacehe@gnu.org>
-Subject: [PATCH 1/5] arm: dts: imx93: Add USB support.
-Date: Tue, 20 Feb 2024 11:35:02 +0100
-Message-ID: <20240220103506.17218-2-othacehe@gnu.org>
+Subject: [PATCH 4/5] configs: imx93_var_som: Add fastboot support.
+Date: Tue, 20 Feb 2024 11:35:05 +0100
+Message-ID: <20240220103506.17218-5-othacehe@gnu.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240220103506.17218-1-othacehe@gnu.org>
 References: <20240220103506.17218-1-othacehe@gnu.org>
@@ -71,89 +71,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Copied from:
-https://lore.kernel.org/linux-devicetree/20240131114324.3722428-6-xu.yang_2@nxp.com/
+Enable the `fastboot` command.
 
 Signed-off-by: Mathieu Othacehe <othacehe@gnu.org>
 ---
- arch/arm/dts/imx93.dtsi | 58 +++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 58 insertions(+)
+ configs/imx93_var_som_defconfig | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/arch/arm/dts/imx93.dtsi b/arch/arm/dts/imx93.dtsi
-index 90de635481f..d6964714ea0 100644
---- a/arch/arm/dts/imx93.dtsi
-+++ b/arch/arm/dts/imx93.dtsi
-@@ -149,6 +149,20 @@
- 		};
- 	};
- 
-+	usbphynop1: usbphynop1 {
-+		compatible = "usb-nop-xceiv";
-+		#phy-cells = <0>;
-+		clocks = <&clk IMX93_CLK_USB_PHY_BURUNIN>;
-+		clock-names = "main_clk";
-+	};
-+
-+	usbphynop2: usbphynop2 {
-+		compatible = "usb-nop-xceiv";
-+		#phy-cells = <0>;
-+		clocks = <&clk IMX93_CLK_USB_PHY_BURUNIN>;
-+		clock-names = "main_clk";
-+	};
-+
- 	soc@0 {
- 		compatible = "simple-bus";
- 		#address-cells = <1>;
-@@ -844,5 +858,49 @@
- 			#power-domain-cells = <1>;
- 			status = "disabled";
- 		};
-+
-+		usbotg1: usb@4c100000 {
-+			compatible = "fsl,imx93-usb", "fsl,imx7d-usb", "fsl,imx27-usb";
-+			reg = <0x4c100000 0x200>;
-+			interrupts = <GIC_SPI 187 IRQ_TYPE_LEVEL_HIGH>;
-+			clocks = <&clk IMX93_CLK_USB_CONTROLLER_GATE>,
-+				 <&clk IMX93_CLK_HSIO_32K_GATE>;
-+			clock-names = "usb_ctrl_root_clk", "usb_wakeup";
-+			assigned-clocks = <&clk IMX93_CLK_HSIO>;
-+			assigned-clock-parents = <&clk IMX93_CLK_SYS_PLL_PFD1_DIV2>;
-+			assigned-clock-rates = <133000000>;
-+			phys = <&usbphynop1>;
-+			fsl,usbmisc = <&usbmisc1 0>;
-+			status = "disabled";
-+		};
-+
-+		usbmisc1: usbmisc@4c100200 {
-+			compatible = "fsl,imx8mm-usbmisc", "fsl,imx7d-usbmisc",
-+				     "fsl,imx6q-usbmisc";
-+			reg = <0x4c100200 0x200>;
-+			#index-cells = <1>;
-+		};
-+
-+		usbotg2: usb@4c200000 {
-+			compatible = "fsl,imx93-usb", "fsl,imx7d-usb", "fsl,imx27-usb";
-+			reg = <0x4c200000 0x200>;
-+			interrupts = <GIC_SPI 188 IRQ_TYPE_LEVEL_HIGH>;
-+			clocks = <&clk IMX93_CLK_USB_CONTROLLER_GATE>,
-+				 <&clk IMX93_CLK_HSIO_32K_GATE>;
-+			clock-names = "usb_ctrl_root_clk", "usb_wakeup";
-+			assigned-clocks = <&clk IMX93_CLK_HSIO>;
-+			assigned-clock-parents = <&clk IMX93_CLK_SYS_PLL_PFD1_DIV2>;
-+			assigned-clock-rates = <133000000>;
-+			phys = <&usbphynop2>;
-+			fsl,usbmisc = <&usbmisc2 0>;
-+			status = "disabled";
-+		};
-+
-+		usbmisc2: usbmisc@4c200200 {
-+			compatible = "fsl,imx8mm-usbmisc", "fsl,imx7d-usbmisc",
-+				     "fsl,imx6q-usbmisc";
-+			reg = <0x4c200200 0x200>;
-+			#index-cells = <1>;
-+		};
- 	};
- };
+diff --git a/configs/imx93_var_som_defconfig b/configs/imx93_var_som_defconfig
+index 0aab222c7c1..60751a77037 100644
+--- a/configs/imx93_var_som_defconfig
++++ b/configs/imx93_var_som_defconfig
+@@ -97,6 +97,12 @@ CONFIG_SPL_CLK_IMX93=y
+ CONFIG_CLK_IMX93=y
+ CONFIG_DFU_MMC=y
+ CONFIG_DFU_RAM=y
++CONFIG_USB_FUNCTION_FASTBOOT=y
++CONFIG_FASTBOOT_BUF_ADDR=0x82800000
++CONFIG_FASTBOOT_BUF_SIZE=0x20000000
++CONFIG_FASTBOOT_FLASH=y
++CONFIG_FASTBOOT_UUU_SUPPORT=y
++CONFIG_FASTBOOT_FLASH_MMC_DEV=0
+ CONFIG_GPIO_HOG=y
+ CONFIG_IMX_RGPIO2P=y
+ CONFIG_DM_PCA953X=y
 -- 
 2.41.0
 
