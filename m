@@ -4,88 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EBF3C48BC3
-	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 11:06:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23EFBC48BC3
+	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 11:07:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 74CC687D82;
-	Tue, 20 Feb 2024 12:03:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=reposit.be
+	by phobos.denx.de (Postfix) with ESMTP id BD00A87F97;
+	Tue, 20 Feb 2024 12:04:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=mailprotect.be header.i=@mailprotect.be header.b="O5DWswAG";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BeAiE1f6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A942D87F52; Tue, 20 Feb 2024 11:48:21 +0100 (CET)
-Received: from com-out001.mailprotect.be (com-out001.mailprotect.be
- [83.217.72.83])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B724887FA3; Tue, 20 Feb 2024 10:51:01 +0100 (CET)
+Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
+ [IPv6:2a00:1450:4864:20::12c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CFFB987D4D
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 11:48:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F2E187D7E
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 10:50:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=reposit.be
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=spamsink@reposit.be
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=mailprotect.be; s=mail; h=Content-Transfer-Encoding:Content-Type:
- In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:
- reply-to:sender:bcc; bh=bZcXCyQlz5fDhwCyJP+v3MVcWc6NaUMyLdlHsGdVfMQ=; b=O5DWs
- wAGoZy8CUlI7wi8XYDi/i8HFIDHRzClprR8MphjOHYVBkEkG1jSA0SaFAHeJjOvZDz99HsFRjCHoy
- uiNDBcmEw5ETI8zQBsFmex9Ps0Ujl/VgWtWKP6cdnnQneyG7wDPXboplVNBL6sDguvzIjz8Fayukp
- 9s1bJuJEu0c670RzSBYAy6nd+q+cgt1qPDlVSuTTTlWG+vuTksnK9QLf7xUtruV0YP6SUaLx2OArl
- JAsB0ACb7pZLp1HBpNE9/7QaS9AsxnEGR+rRJ16nm320jHLljrIL8d+TDT+psqfNUns5g5n9/NiLa
- mbag1Izy5mForuNA6sO8IAMIT2few==;
-Received: from smtp-auth.mailprotect.be ([178.208.39.159])
- by com-mpt-out001.mailprotect.be with esmtp (Exim 4.92)
- (envelope-from <spamsink@reposit.be>)
- id 1rcNfD-00FMMA-Fz; Tue, 20 Feb 2024 11:47:52 +0100
-Received: from [192.168.2.116] (120.249-131-109.adsl-dyn.isp.belgacom.be
- [109.131.249.120])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-auth.mailprotect.be (Postfix) with ESMTPSA id 2E8B1C0145;
- Tue, 20 Feb 2024 11:47:51 +0100 (CET)
-Message-ID: <444b4db5-b762-4599-99ac-5827f6de7f81@reposit.be>
-Date: Tue, 20 Feb 2024 11:47:50 +0100
+ spf=pass smtp.mailfrom=blemouzy.ml@gmail.com
+Received: by mail-lf1-x12c.google.com with SMTP id
+ 2adb3069b0e04-512b29f82d1so2795533e87.1
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 01:50:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1708422653; x=1709027453; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:subject:to:from
+ :date:from:to:cc:subject:date:message-id:reply-to;
+ bh=hpq/SLFbA0ftMBg0H9iqWJOGqjWx7eRC2JI8LcexCII=;
+ b=BeAiE1f6CtHFL923uA+/pfT4QW6lWWdTvANnJaBF9LyP2IH/hsS5cqhJUE9zgKZQ5I
+ TV6EY0xX3oMstGO14J07kOdsC7G73Z+v1m1jFchRl7YRhEnwQgSDrYe90KsV28qXLW7q
+ pHFXXQYdhxU+/RFhmFSE9lwd53A2aALBZVSQv3MB5bok2GLuy9tZW+AtziP9Zn1gvGYk
+ Y510RmkZp0dp3kxKgsn1I77P3LFiv6L4+lXpdi8NE/4tUMwGBqcSCobakIwdB2TUgPQr
+ yn7Aqkk8Do+59qtRQWkLH3LT5tzYIjEDYVQMPun8SV7NCpOmzCz5aPrd6muHkUbkJJdZ
+ N9hA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1708422653; x=1709027453;
+ h=content-transfer-encoding:mime-version:message-id:subject:to:from
+ :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=hpq/SLFbA0ftMBg0H9iqWJOGqjWx7eRC2JI8LcexCII=;
+ b=aQodK+xmC7mQRJVuFl0/Bpp/SDNwtKSmOw7gCQ3OKhxxqrTT4iDCPnkv86mUDKFv21
+ L/ajs/XACDTaH/WXNf2S3S/uZ7JAMnLRz/C5ir4pTb51m5SeTAq/6US1f1/+nfdeZeLq
+ Pf0S77UU0ftlz0Rfa8yepTY9szsJ/EHXxEMUVIRLHvjsGqjIeqtVOkbXrMkQVO5mO33W
+ pGUWdFo6RXejw19JoDRZBkXvVDF5RcorbxoAGIn6RCtuLm/BSAXLw4z1axCOPB+lAmic
+ pskxQNFYq96ep9U/EDKWgnD+qBGM8A/aEkWOUn0tOZiR1HTTr55EhyVBCeAuCwLIv2RJ
+ J8xA==
+X-Gm-Message-State: AOJu0Yyjjd84z4S6/z7v3NAsHyKyY84UHeKvy821SbjVH+Ak3CkkTtX9
+ IjrpJ+LCcQXqhPi/hUqDnW1kPyY9rLWzcBB8DjUEuDZbZHb9ITbjERDkSjYqwt7WQg==
+X-Google-Smtp-Source: AGHT+IG4UNydiGaVoaeqchWrt8wPBYpvi8xBwhH+4Tk8fF3V25IkcEaUMSXRrInFsNskfvoPwiyt6Q==
+X-Received: by 2002:a19:761a:0:b0:512:b2b6:486d with SMTP id
+ c26-20020a19761a000000b00512b2b6486dmr3702445lff.62.1708422652453; 
+ Tue, 20 Feb 2024 01:50:52 -0800 (PST)
+Received: from localhost ([37.174.24.210]) by smtp.gmail.com with ESMTPSA id
+ bx14-20020a5d5b0e000000b0033d6bd4eab9sm1383089wrb.1.2024.02.20.01.50.51
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 20 Feb 2024 01:50:52 -0800 (PST)
+Date: Tue, 20 Feb 2024 10:50:49 +0100
+From: Benjamin Lemouzy <blemouzy.ml@gmail.com>
+To: u-boot@lists.denx.de
+Subject: HABv4 with SPL and u-boot-dtb.img on i.MX6
+Message-ID: <20240220105049.00000d3c@gmail.com>
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.38; x86_64-w64-mingw32)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: How To Move Root Partition From eMMC to SSD
-Content-Language: en-US
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: u-boot@lists.denx.de
-References: <eb9a091f-9f8e-401a-bd71-a9a3511a21b0@reposit.be>
- <CALeDE9Oy3YgAE1rW6kVimYybQpq-h4PEPKkvG7WuwHv1zFZ2+Q@mail.gmail.com>
-From: Spam Sink <spamsink@reposit.be>
-In-Reply-To: <CALeDE9Oy3YgAE1rW6kVimYybQpq-h4PEPKkvG7WuwHv1zFZ2+Q@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-X-Originating-IP: 178.208.39.159
-X-SpamExperts-Domain: mailprotect.be
-X-SpamExperts-Username: 178.208.39.128/27
-Authentication-Results: mailprotect.be;
- auth=pass smtp.auth=178.208.39.128/27@mailprotect.be
-X-SpamExperts-Outgoing-Class: ham
-X-SpamExperts-Outgoing-Evidence: Combined (0.09)
-X-Recommended-Action: accept
-X-Filter-ID: Pt3MvcO5N4iKaDQ5O6lkdGlMVN6RH8bjRMzItlySaT/LclLF+d5qBKpOuliEyEgrPUtbdvnXkggZ
- 3YnVId/Y5jcf0yeVQAvfjHznO7+bT5zLxcsAtc0AxbM7NAq0eoKJhm7Wn5RPv9bU7t0vZ9aIQH1a
- 0DJ+b/SgCu+AdGqtMFGceEiKFEfUYPWZ0gk+PNKAxaK45aVeAEKQk278CLO1KlGavff7/jlq6fkm
- O4krnmvBLjX540LEall2D33XsAZHsN9dFtaDdX4G2JtSh1MW4DKi2t+FYZlHRQpKkcY41094/Odx
- ovv9CJ8DeAu6sHFBdnrLabUgNzEO/QU0BfnnNOd+WLFOM0So3rJR5cRvcK50w9Wr3qLZYKKaXd/z
- pCPr3ukajz0++WUAVTHPi4utW+nE6wHyAbSyVXutrqMjgFLX7D3r+yzaf09FesHDYiVhb9lLcno8
- +LMWQktE6OGVK+l085HUneNJLb49A9kZ4q0bCRPFibWJLI3C/DG3imYUL4QFy0eB/isP83e9uHLE
- BeHTPI/rzJIRbhotX0RECi73tAkKkqOraDjBQ0V6Jl6cNXf0xLkfge9mzM1qtvMzGiYxT7p/s9HY
- sq8PpN/9QE7dZh03ExTqDquACpNsmDrlcntZzD+8euQ3PTJH+fGZGHMcN6qoXPjenLhIOF1oeRZi
- w/asA3gqiCsSahbDNh51lfj9j/UgQbPDs81InVAWXhQ+D7uUqWW7lr71mUAnQK0O4VWXDfBpByWd
- e7nT/lT4MzfVS2F5zx6Xv1wYD5pggF9L2zldRguLVknTBH19KmbWXGH5SDG2kyRsdcYPy9St+qJK
- V/NvwbV06JaLnkml7NEyvDkN3AfUBddcu9g0UhykBJTycjSXYBbCRRLP/dzFIBlzvTEDJe7e8l++
- Pz+86OQJyPsBMRItmV2XMBZo/xvRvV1DAYDQzvjZDRqMBVvkRDdj0FLm1Ou4eCELljzGeByrLEiV
- YnZBEe1WauMnlc/KATDDBZ7fFc0FDw0l2bg+/rVyvOTVreAmAaNpe76fU4XjPD5cu1DZPbPiUdvQ
- 5iKkASe0zzIoSVH5jzhBWWljqBsEh5wxUOD+GA7ZQVwcq03nFL4yr42TjbS14OCo2rmWn8fjrynD
- skL1KLEvQjvy
-X-Report-Abuse-To: spam@com-mpt-mgt001.mailprotect.be
-X-Mailman-Approved-At: Tue, 20 Feb 2024 12:03:22 +0100
+X-Mailman-Approved-At: Tue, 20 Feb 2024 12:03:24 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,97 +88,172 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It's very kind of you to get back to me.  I got it working in the 
-meantime.  I am working with a U-Boot fork from FriendlyElec 
-(manufacturer of the NanoPi R6C), I think that might be different from 
-the rockchip fork.
+Hello,
 
-Yes by SSD I mean NVMe.  I wanted to put boot and root partitions on 
-NVMe but my understanding is that the R6C is not capable of finding the 
-boot partition on NVMe, so the best you can do is to put the boot 
-partition on eMMC and root partition on NVMe.
+I'm trying to make secure boot work on i.MX6 SABRE with SPL and u-boot-dtb.img files and I'm not sure how to do it.
 
-FriendlyElec package for the R6C half a dozen OS images, all of which 
-share the same custom kernel image.  I am using one of their ubuntu images.
+I'm using the U-Boot vanilla master branch (2024.04-rc2) with the following configuration:
 
-In the U-Boot monitor, I tried to override bootargs to change 
-"root=/dev/mmcblk2p8" to "root=/dev/nvme0n1p1".  It didn't work.  I 
-looked at the source code of FriendlyElec's fork of U-Boot and it 
-appears that it ignores input from the monitor.
+    # Remove some stuff to not exceed file size limit
+    $ cat <<EOF >> configs/mx6sabresd_defconfig
+    CONFIG_BOOTMETH_EFILOADER=n
+    CONFIG_CMD_NET=n
+    CONFIG_NET=n
+    EOF
 
-Instead I modified the source code of the FriendlyElec U-Boot fork, and 
-hard coded the change:
+    # Enable secure boot
+    $ cat <<EOF >> configs/mx6sabresd_defconfig
+    CONFIG_IMX_HAB=y
+    CONFIG_SPL_LOAD_FIT_ADDRESS=0x18000000
+    EOF
 
-     env_update("bootargs", "root=/dev/nvme0n1p1");
+    $ make ARCH=arm O=build mx6sabresd_defconfig
 
-This worked and now it loads the root partition from NVMe.
+    $ make ARCH=arm O=build
 
-You say that upstream U-Boot can boot a Linux OS from NVMe on an RK3588 
-device, so I don't know why the FriendlyElec build is incapable of doing 
-the same.  I might try to use upstream U-Boot.
+I have no issue to generate a working SPL-signed file following doc/imx/habv4/guides/mx6_mx7_spl_secure_boot.txt instructions.
+
+doc/imx/habv4/guides/mx6_mx7_spl_secure_boot.txt only gives instructions to sign u-boot-ivt.img but this file doesn't contain device trees listed in CONFIG_OF_LIST as u-boot-dtb.img does and I need them.
+
+
+
+NXP AN4581 lists 2 possible formats to sign additional images:
+
+- Image format:
+
+            ------- +-----------------------------+ <-- *load_address
+                ^   |                             |
+                |   |                             |
+                |   |          Image data         |
+         Signed |   |                             |
+          Data  |   |                             |
+                |   +-----------------------------+
+                |   |    Padding Next Boundary    |
+                |   +-----------------------------+ <-- *ivt
+                v   |     Image Vector Table      |
+            ------- +-----------------------------+ <-- *csf
+                    |                             |
+                    | Command Sequence File (CSF) |
+                    |                             |
+                    +-----------------------------+
+                    |     Padding (optional)      |
+                    +-----------------------------+
+
+- FIT image format:
+
+            ------- +-----------------------------+ -------
+                ^   |                             |    ^
+                |   |                             |    |
+                |   |           FDT FIT           |    |
+                |   |                             |    |
+    Signed data |   |                             |    |
+                |   +-----------------------------+    |
+                |   |    Padding Next Boundary    |    |
+                |   +-----------------------------+    |
+                v   |     Image Vector Table      |    |
+            ------- +-----------------------------+    | FIT image
+                    |                             |    |
+                    | Command Sequence File (CSF) |    |
+                    |                             |    |
+                    +-----------------------------+    |
+                    |     Padding (optional)      |    |
+            ------- +-----------------------------+    |
+                ^   |                             |    |
+    Signed data |   |           U-Boot            |    |
+                v   |                             |    v
+            ------- +-----------------------------+ -------
+
+And as u-boot-dtb.img is a FIT image, I probably have to use the FIT image format, right?
+
+
+
+I manually craft the signed FIT image using doc/imx/habv4/csf_examples/mx8m/csf.sh as reference and everything looks fine:
+
+    U-Boot SPL 2024.04-rc2-00025-g9e00b6993f-dirty (Feb 19 2024 - 13:17:31 +0100)
+    >>SPL: board_init_r()
+    spl_init
+    Trying to boot from MMC1
+    fit read offset 11400, size=12800, dst=18000000, count=12800
+    spl_load_simple_fit_fix_load: ivt: 18001000 offset: 1000 size: 3060
+    spl_load_simple_fit_fix_load: ivt self: 18001000
+    hab fuse not enabled
+
+    Authenticate image from DDR location 0x18000000...
+
+    ivt_offset = 0x1000, ivt addr = 0x18001000
+    ivt entry = 0x18000000, dcd = 0x00000000, csf = 0x18001020
+    Dumping IVT
+    .. @............
+    ........ .......
+    Dumping CSF Header
+    ..PC...........P
+    ................
+    .......<........
+    ...............8
+
+    Calling authenticate_image in ROM
+            ivt_offset = 0x1000
+            start = 0x18000000
+            bytes = 0x3060
+    firmware: 'firmware-1'
+    External data: dst=17800000, offset=3060, size=86138
+    Image OS is U-Boot
+    fdt: 'fdt-1'
+    Can't get 'load' property from FIT 0x18000000, node: offset 464, name fdt-1 (FDT_ERR_NOTFOUND)
+    External data: dst=17886140, offset=89198, size=ac00
+    Can't get 'entry' property from FIT 0x18000000, node: offset 464, name fdt-1 (FDT_ERR_NOTFOUND)
+    loadables: 'firmware-1'
+    no string for index 1
+    Jumping to U-Boot...
+    SPL malloc() used 0x0 bytes (0 KB)
+    image entry point: 0x
+
+
+    U-Boot 2024.04-rc2-00025-g9e00b6993f-dirty (Feb 19 2024 - 13:17:31 +0100)
+
+    CPU:   Freescale i.MX6Q rev1.2 996 MHz (running at 792 MHz)
+    CPU:   Automotive temperature grade (-40C to 125C) at 35C
+    Reset cause: POR
+    Model: Freescale i.MX6 Quad SABRE Smart Device Board
+    DRAM:  1 GiB
+    Core:  94 devices, 23 uclasses, devicetree: separate
+    WDT:   Started watchdog@20c0000 with servicing every 1000ms (128s timeout)
+    MMC:   FSL_SDHC: 4, FSL_SDHC: 1, FSL_SDHC: 3
+    Loading Environment from MMC... *** Warning - bad CRC, using default environment
+
+    No panel detected: default to Hannstar-XGA
+    Display: Hannstar-XGA (1024x768)
+    In:    serial
+    Out:   serial
+    Err:   serial
+    SEC0:  RNG instantiated
+    Hit any key to stop autoboot:  0
+    => hab_status
+
+    Secure boot disabled
+
+    HAB Configuration: 0xf0, HAB State: 0x66
+    No HAB Events Found!
+
+But as only the FDT part of the FIT image is checked through HAB, U-Boot and DTB are only protected by FIT image hashes, right?
+
+Using fdtdump shows that crc32 is used as hash algorithm for FIT image which is a super weak one.
+I tried to pass another algo (sha256) using mkimage -o option but that doesn't work.
+
+  ./tools/mkimage -f auto -A arm -T firmware -C none -O u-boot -a 0x17800000 -e 0x17800000 -p 0x0 -n "U-Boot 2024.04-rc2-00025-g9e00b6993f-dirty for mx6sabresd board" -E -b arch/arm/dts/imx6q-sabresd.dtb -b arch/arm/dts/imx6qp-sabresd.dtb -b arch/arm/dts/imx6dl-sabresd.dtb -d u-boot-nodtb.bin -o sha256 u-boot-dtb.img
+
+Is there any way to change U-Boot FIT image hash?
+
+
+
+I also try to use image format and force the HAB to verify the whole u-boot-dtb.img file by patching the FIT image size:
+
+    image_size=$(stat -tc %s u-boot-dtb.img)
+    printf "00000004: %08x" "$image_size" | xxd -r - u-boot-dtb.img
+
+SPL starts, authentication looks fine but the boot fails.
+Is there any chance to make it work or is it insane to try to use this format?
 
 Regards,
-Eric
 
-On 2/17/24 17:36, Peter Robinson wrote:
->> I am running the NanoPi R6C.  The device is not capable of booting from
->> the SSD, the next best thing is to load the root filesystem from the SSD.
-> 
-> By booting you mean loading the firmware from SSD (by which I think
-> you mean NVME right).
-> 
->> Using rockchip's repos, I compile from source the images to boot 1) from
->> the microSD card and 2) from eMMC.  I install to the eMMC.  Then, so as
->> not to mount any partitions from eMMC, I boot from the microSD card, and
->> I clone the root partition from the eMMC (/dev/mmcblk2p8) to the SSD
->> (/dev/nvme0n1p1).
->>
->> I boot from the eMMC, the output of "cat /proc/cmdline" is:
->>
->> storagemedia=emmc androidboot.storagemedia=emmc androidboot.mode=normal
->> androidboot.dtbo_idx=0 androidboot.verifiedbootstate=orange
->> earlycon=uart8250,mmio32,0xfeb50000 console=ttyFIQ0 coherent_pool=1m
->> irqchip.gicv3_pseudo_nmi=0 rw root=/dev/mmcblk2p8 rootfstype=ext4
->> rootflags=discard data=/dev/mmcblk2p9 consoleblank=0
->> cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory swapaccount=1
->> androidboot.fwver=uboot-a83a7263ef-01/09/2024
->>
->> How do I change "root=/dev/mmcblk2p8" to "root=/dev/nvme0n1p1"?
->>
->> I connect to the serial port and get to the U-Boot monitor.  I examine
->> the variables.  "bootcmd" runs "bootrkp" which boots the system.
->> "bootrkp" ignores "bootargs", I confirm this by deleting "bootargs"
->> before running "bootrkp", the system boots up as before with no change
->> in behavior.  "bootrkp" is implemented in file "cmd/bootrkp.c".  That
->> code emits the equivalent of:
->>
->> setenv bootm-no-reloc y
->> booti 0x400000 0xa200000:0x7b2bc0 0x8300000
->>
->> Can I tell U-Boot to load the root partition from /dev/nvme0n1p1, either
->> by entering commands at the monitor, or by modifying the source code of
->> U-Boot, or through any other means?
-> 
-> You don't mention what OS you're trying to load, is it Android?
-> 
-> So upstream U-Boot can boot a Linux OS from NVME on a rk3588 device,
-> but it appears you're using the Rockchip fork and I have no idea of
-> the state of that.
-> 
-> The upstream U-Boot doesn't yet have the R6C.
-> 
-> Generally if a device doesn't have something like a SPI flash where
-> you can put firmware it's fine to use the eMMC for firmware and it
-> should be able to run an OS from NVME.
-> 
-> If you're not using Android and are using a standard Linux distro I
-> would look at enabling "distro boot" in the rockchip fork which will
-> give you a standard UEFI boot interface and things should work. I have
-> no idea if the U-Boot fork you're using includes PCI or NVME support
-> but obviously make sure the appropriate drivers are enabled for that
-> (look at the upstream Rock5B config).
-> 
-> Unfortunately I can't offer much more help from there as I generally
-> only deal with upstream.
-> 
-> Peter
+Benjamin
