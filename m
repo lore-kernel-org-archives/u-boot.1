@@ -4,50 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10CDFC48BC3
-	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 11:14:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7340BC48BC4
+	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 11:16:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 07F4687FC4;
-	Tue, 20 Feb 2024 12:06:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
+	by phobos.denx.de (Postfix) with ESMTP id 1980287ECD;
+	Tue, 20 Feb 2024 12:16:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 7424987DA2; Tue, 20 Feb 2024 12:06:06 +0100 (CET)
-Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
- [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id 4FA2687F84
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 12:06:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-IronPort-AV: E=Sophos;i="6.06,172,1705330800"; 
- d="asc'?scan'208";a="198517443"
-Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie6.idc.renesas.com with ESMTP; 20 Feb 2024 20:05:59 +0900
-Received: from [10.226.92.69] (unknown [10.226.92.69])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id 3BBDF42FAD8E;
- Tue, 20 Feb 2024 20:05:55 +0900 (JST)
-Message-ID: <b57a1023-7cb5-4675-89e5-4e369011af14@bp.renesas.com>
-Date: Tue, 20 Feb 2024 11:05:54 +0000
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vLlUYaJr";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 528AF87D85; Tue, 20 Feb 2024 12:16:22 +0100 (CET)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 406D987F83
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 12:16:08 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-563cb3ba9daso5280833a12.3
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 03:16:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1708427767; x=1709032567; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=rcD3opA9adJPLI1dA+sDg+tjWAj3+VSTYkVedt/eYqM=;
+ b=vLlUYaJr0hfB6vboLFDY6Sd2bfLfhmHbmpgfZM01k2mk4dyHb3tengTyDPfod9Jcns
+ rN9/1eOIDATT57fdZ2LMwiP6CREX6/q3IXEM82fgEAiHraSVIGAW6cmI82umgnnCJtR4
+ TqVvFCBlUZGqaedJnywLiLrPxrgAm6MasVxTUsXwEG1JUpkI2UUTeslIAVM2IVSF8Hxq
+ GP84SK0E+TnFw7dQtFQWIeY/EUtYOmqHkAgUeS6OxgEpvT4Pdjdq71g4nPfOD7PAC/pF
+ ErJgbmqtMCKcT4m2fQVSLj1tr1gDsl+HGspWOY7baq6ANemMdYaId31yuItrp9zg4D6c
+ FqrA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1708427767; x=1709032567;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=rcD3opA9adJPLI1dA+sDg+tjWAj3+VSTYkVedt/eYqM=;
+ b=VMsnzvDsmESCCHXweIbuzuKciCvl3OslLsz7T12jMv6rmplDfuf5J3yibJqsuRA5JH
+ iE6LKksgniKoQ+IuSnnpr09oAxxKPOVcpLH4Sdu6PLiZ5Sg1Yqp8OUOk3CEipybRj2ff
+ CEr4VnAAmBLK+LqrkwrU265f6NJwwo5N/twGSqfHgSKZvUZbRk/mkzV5H1u6b2cG7239
+ IppDajUwjNTlHWlpuRSCl03rngh5QzP94Utdo/vhAvWfJcH+FTZhL0YAsXrKtTTZZ2Kp
+ 5v3TB2M/7C0pv5UbNCD6SCbksvix0v/Sqq9SWhyWFi4h/moEKy7kM65q7koaebx9JAC3
+ DXgg==
+X-Gm-Message-State: AOJu0Yyedpd6AQneb3X2dVI26HEN+TpNHMHAZRgB52NVRpliH8qeDndx
+ TXUNwmF8c4M4/VOzqlrUCcKfGPGuCUgKo4dpJ9+D0woGGINkxgJkGHUsqR4XlOLjQr6V5bKPsRS
+ bCWF80Cx71x2oGnan1RemudWVcTMKyPxtAQcUfg==
+X-Google-Smtp-Source: AGHT+IEFZdiUcaSnKKCsa+9bgBsQTCPSfRLUklSlYAJpdgbw2uqQ9wwAjIu/hWANN3YCjqaKKtBIFXO8zafreicDmi0=
+X-Received: by 2002:aa7:db49:0:b0:564:a76b:aa55 with SMTP id
+ n9-20020aa7db49000000b00564a76baa55mr1608447edt.12.1708427767514; Tue, 20 Feb
+ 2024 03:16:07 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mmc: renesas-sdhi: Stop transmission in case tuning block
- transfer fails
-Content-Language: en-GB
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Hai Pham <hai.pham.ud@renesas.com>, Jaehoon Chung
- <jh80.chung@samsung.com>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Peng Fan <peng.fan@nxp.com>, Sean Anderson <seanga2@gmail.com>,
- Tom Rini <trini@konsulko.com>,
- Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
-References: <20240220083853.34497-1-marek.vasut+renesas@mailbox.org>
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-Organization: Renesas Electronics Corporation
-In-Reply-To: <20240220083853.34497-1-marek.vasut+renesas@mailbox.org>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------55BQIZBxE7wILuvdirazIafE"
+References: <20240212074712.3657076-1-sughosh.ganu@linaro.org>
+ <0ace0a3a8a94407b84ee95c34eefdafc@foss.st.com>
+In-Reply-To: <0ace0a3a8a94407b84ee95c34eefdafc@foss.st.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Tue, 20 Feb 2024 16:45:56 +0530
+Message-ID: <CADg8p943k217YcO5LYv8LWnCivqPD3tyOJg8EhY0hRwgtRPPLg@mail.gmail.com>
+Subject: Re: [PATCH v2 00/21] FWU: Migrate FWU metadata to version 2
+To: Etienne CARRIERE - foss <etienne.carriere@foss.st.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Masahisa Kojima <masahisa.kojima@linaro.org>, 
+ Patrice CHOTARD - foss <patrice.chotard@foss.st.com>, 
+ Patrick DELAUNAY - foss <patrick.delaunay@foss.st.com>,
+ Yann GAUTIER <yann.gautier@st.com>, 
+ Michal Simek <michal.simek@amd.com>, Jassi Brar <jaswinder.singh@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,186 +95,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------55BQIZBxE7wILuvdirazIafE
-Content-Type: multipart/mixed; boundary="------------IT003bOZ007obTfPoRticLJh";
- protected-headers="v1"
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Hai Pham <hai.pham.ud@renesas.com>, Jaehoon Chung
- <jh80.chung@samsung.com>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Peng Fan <peng.fan@nxp.com>, Sean Anderson <seanga2@gmail.com>,
- Tom Rini <trini@konsulko.com>,
- Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
-Message-ID: <b57a1023-7cb5-4675-89e5-4e369011af14@bp.renesas.com>
-Subject: Re: [PATCH] mmc: renesas-sdhi: Stop transmission in case tuning block
- transfer fails
-References: <20240220083853.34497-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20240220083853.34497-1-marek.vasut+renesas@mailbox.org>
+hi Etienne,
 
---------------IT003bOZ007obTfPoRticLJh
-Content-Type: multipart/mixed; boundary="------------w60I0CsLIPZB9boq08gZyOJR"
+On Tue, 20 Feb 2024 at 15:14, Etienne CARRIERE - foss
+<etienne.carriere@foss.st.com> wrote:
+>
+> Hello Sughosh,
+>
+> Sorry for this very late reply especially since I have a quite negative f=
+eedback  on the proposed changes.
+>
+> I don't think FWU metadata version 1 should be removed from U-Boot suppor=
+t.
+> There are existing immutable boot agent relying on format v1, starting fr=
+om the Synquacer boards based on SCP-firmware v2.11 [1] onward (at least up=
+ to latest v2.13 tag) and the stm32mp1 platforms based on TF-A v2.7 [2] onw=
+ard (at least up to latest tag v2.10). These platforms should be able to up=
+date there EFI firmware hence needing the update agent (U-Boot) to support =
+format v1.
 
---------------w60I0CsLIPZB9boq08gZyOJR
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Currently, we have two platforms which are using the feature with the
+Update Agent in U-Boot, one being the ST boards, and the Synquacer
+platform from Socionext. Support is going to be added to the Xilinx
+boards, but they are interested in v2 only. Before I started working
+on this migration, I had written to the stakeholders in early December
+about their thoughts on this change. I had also written to you about
+this, but since you did not respond, I took it as an implicit
+acceptance for the change. Socionext had responded saying that they
+are fine with the migration to v2 only support in U-Boot. You are also
+aware that I am making changes in TF-A to migrate support to v2 only,
+and that includes the ST boards as well. So, will it not be better to
+migrate both TF-A and U-Boot to v2 only support?
 
-On 20/02/2024 08:38, Marek Vasut wrote:
-> The current code uses the state of tuning block received by SCC to
-> determine whether or not to send transmission stop command. This is
-> not correct. Use the state of tuning block transfer to determine
-> whether or not to send transmission stop command instead, because
-> the transmission stop command has to be sent in case the tuning
-> block transfer failed.
->=20
-> This requires two changes, separate variable to store and check the
-> state of tuning block received by SCC, and another separate variable
-> to store and check return value from transmission stop command.
->=20
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> ---
-> Cc: Hai Pham <hai.pham.ud@renesas.com>
-> Cc: Jaehoon Chung <jh80.chung@samsung.com>
-> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-> Cc: Peng Fan <peng.fan@nxp.com>
-> Cc: Sean Anderson <seanga2@gmail.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
-> ---
->  drivers/mmc/renesas-sdhi.c | 14 +++++++-------
->  1 file changed, 7 insertions(+), 7 deletions(-)
->=20
-> diff --git a/drivers/mmc/renesas-sdhi.c b/drivers/mmc/renesas-sdhi.c
-> index 316b75b35fe..c4d0733b621 100644
-> --- a/drivers/mmc/renesas-sdhi.c
-> +++ b/drivers/mmc/renesas-sdhi.c
-> @@ -568,8 +568,8 @@ int renesas_sdhi_execute_tuning(struct udevice *dev=
-, uint opcode)
->  	struct mmc *mmc =3D upriv->mmc;
->  	unsigned int tap_num;
->  	unsigned int taps =3D 0;
-> -	int i, ret =3D 0;
-> -	u32 caps;
-> +	int i, ret =3D 0, sret;
-> +	u32 caps, reg;
-> =20
->  	/* Only supported on Renesas RCar */
->  	if (!(priv->caps & TMIO_SD_CAP_RCAR_UHS))
-> @@ -612,8 +612,8 @@ int renesas_sdhi_execute_tuning(struct udevice *dev=
-, uint opcode)
->  		if (ret =3D=3D 0)
->  			taps |=3D BIT(i);
-> =20
-> -		ret =3D renesas_sdhi_compare_scc_data(priv);
-> -		if (ret =3D=3D 0)
-> +		reg =3D renesas_sdhi_compare_scc_data(priv);
-> +		if (reg =3D=3D 0)
->  			priv->smpcmp |=3D BIT(i);
-> =20
->  		mdelay(1);
-> @@ -624,9 +624,9 @@ int renesas_sdhi_execute_tuning(struct udevice *dev=
-, uint opcode)
->  		 * eMMC.
->  		 */
->  		if (ret && (opcode =3D=3D MMC_CMD_SEND_TUNING_BLOCK_HS200)) {
-> -			ret =3D mmc_send_stop_transmission(mmc, false);
-> -			if (ret < 0)
-> -				dev_dbg(dev, "Tuning abort fail (%d)\n", ret);
-> +			sret =3D mmc_send_stop_transmission(mmc, false);
-> +			if (sret < 0)
-> +				dev_dbg(dev, "Tuning abort fail (%d)\n", sret);
->  		}
->  	}
-> =20
+Since you are proposing supporting both the versions in U-Boot, I want
+to check with you if there are ST platforms in the field which have
+version 1 support? If not, I think it will be cleaner to support only
+v2, and use that version in both TF-A and U-Boot henceforth. I had
+checked with Jose, who is the author of the spec and he had mentioned
+that he does not foresee any major change in the metadata structure
+henceforth. Which is another reason why it was deemed suitable to
+migrate to v2 instead of supporting both versions.
 
-Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
-Tested-by: Paul Barker <paul.barker.ct@bp.renesas.com>
-  (tested on RZ/G2L with commit ad50a8151387 from
-  https://source.denx.de/u-boot/custodians/u-boot-sh)
+>
+> With the proposed series, the new format v2 contains the same information=
+ the previous mdata v1 based implementation did (apart that some info where=
+ built-in whereas v2 describe them from the mdata storage area).
+> Could it be possible the implementation support both, using for example a=
+ internal structure fed from either format v1 or v2 content read from the s=
+torage, and used to update the mdata  v1 or v2 format storage layout?
 
---=20
-Paul Barker
+This is software, so we can definitely support it. But the question is
+whether we really need to support v1 as well? If the feature has not
+been deployed in the field yet, I would say a clean migration is
+better.
 
---------------w60I0CsLIPZB9boq08gZyOJR
-Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
-Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
+-sughosh
 
------BEGIN PGP PUBLIC KEY BLOCK-----
-
-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3D
-=3DsIIN
------END PGP PUBLIC KEY BLOCK-----
-
---------------w60I0CsLIPZB9boq08gZyOJR--
-
---------------IT003bOZ007obTfPoRticLJh--
-
---------------55BQIZBxE7wILuvdirazIafE
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZdSHkgUDAAAAAAAKCRDbaV4Vf/JGvUug
-AP4pszA0P5MIwInYIIDXVDQ7Sgd2eqn1eMAKupic+o5mdgEAoldeUWwbu8BIN7czCdxzk+t/ndM5
-tXg0O83Ef0vlSgQ=
-=ynId
------END PGP SIGNATURE-----
-
---------------55BQIZBxE7wILuvdirazIafE--
+>
+> [1] https://gitlab.arm.com/firmware/SCP-firmware/-/blob/v2.11.0/product/s=
+ynquacer/include/fwu_mdata.h
+> [2] https://review.trustedfirmware.org/plugins/gitiles/TF-A/trusted-firmw=
+are-a/+/refs/tags/v2.7/include/drivers/fwu/fwu_metadata.h
+>
+> Best regards,
+> Etienne
+>
+> > From: Sughosh Ganu <sughosh.ganu@linaro.org>
+> >
+> > The following patches migrate the FWU metadata access code to version
+> > 2 of the structure. This is based on the structure definition as
+> > defined in the latest rev of the FWU Multi Bank Update specification
+> > [1].
+> >
+> > Since the version 1 of the structure has currently been adopted on a
+> > couple of platforms, it was decided to have a clean migration of the
+> > metadata to version 2 only, instead of supporting both the versions of
+> > the structure. Also, based on consultations with the main author of
+> > the specification, it is expected that any further changes in the
+> > structure would be minor tweaks, and not be significant. Hence a
+> > migration to version 2.
+> >
+> > Similar migration is also being done in TF-A, including migrating the
+> > ST platform port to support version 2 of the metadata structure [2].
+> >
+> > @Michal, I tested the metadata for the two image per bank case, and it
+> > works fine on the ST board. Kindly test this on your board as well.
+> >
+> > @Kojima-san, Please help in testing the version 2 on your
+> > board. Thanks.
+> >
+> >
+> > [1] - https://developer.arm.com/documentation/den0118/latest/
+> > [2] - https://review.trustedfirmware.org/q/topic:%22topics/fwu_metadata=
+_v2_migration%22
+> >
+> > Changes since V1:
+> >
+> > * Do not define flexible array members inside the structures.
+> > * Access the image information related fields in the metadata using
+> >   the helper functions defined in an earlier patch.
+> > * Access fwu_fw_store_desc structure using pointer arithmetic.
+> >
+> > (snip)
