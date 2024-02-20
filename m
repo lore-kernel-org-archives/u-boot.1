@@ -4,80 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87E39C5475B
-	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 17:20:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7362C48BC3
+	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 17:22:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C77E87FD2;
-	Tue, 20 Feb 2024 18:20:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id C8A9D87FE9;
+	Tue, 20 Feb 2024 18:22:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QRVhUdDU";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uJfIQhmV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A2BA87FE3; Tue, 20 Feb 2024 18:20:43 +0100 (CET)
-Received: from mail-pg1-x52b.google.com (mail-pg1-x52b.google.com
- [IPv6:2607:f8b0:4864:20::52b])
+ id 2F28A87FE6; Tue, 20 Feb 2024 18:22:17 +0100 (CET)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB12987DA2
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 18:20:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7B25087FDB
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 18:22:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pg1-x52b.google.com with SMTP id
- 41be03b00d2f7-55b5a37acb6so1689198a12.0
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 09:20:36 -0800 (PST)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-512b29f82d1so3528693e87.1
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 09:22:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1708449635; x=1709054435; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=n6to8vzuihTvs6zgw2HzCG+EsnFxLppLdglwlQtaisQ=;
- b=QRVhUdDU3c6AUgwAqgXWnZ3gw9OfvAirTNcPa867rpVeZ3QK9kycwhbMBeqYWW42JC
- We0+VwzMOB+Hk2d3Qod0nqby5agAWO9I9xRu0Xl6cX+xe7Dl+hk+bcGfC5k4juZm67UW
- Bd/XvQ1MNrIvBcil52aW8Ld6BwCl0RWoAO2XSeT1yFp/YZuSa6FdKISkpugl8EnvXbh7
- SCWmHrvVUjk6/AKHm8m6FcVX2ifFOuGU8RXVzv6yfznnSR1e0AheBfmFyaXVH9c4hAVh
- 4mVldI3JNmznL5Kpwnn2pB325iwWDx+hMFqdyZ7S9ZGNREboq+PGu1QYqNJr5wo4WgAx
- J7XA==
+ d=linaro.org; s=google; t=1708449732; x=1709054532; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=63zII7G/pXb+UOKUUF/QrH7LX69YOLRF7vvTVOaoc4g=;
+ b=uJfIQhmVf0s2GxOuYo0WKvgxNXirlCUXHyR9qLQ1NEWB2an+yxpAAj4v9kL3stVERx
+ Okj9zwehA1S2S+vuovVjBBqJNCxFYjuBHnqT/T0U+knv5tf6x1iY2UwmPYoNshL2yNH3
+ t93GYO9BMmNA/lKbUqmHEsHkiZ9cauEUJYpLDsmpuGNFESTo+/toS5Ou6GhgwEfxtWCB
+ PgD/P9IGe92wSfgs6vCyUTYPlzUFGVds0AJuOPdkhw05eOtzeIz8irv0iaFWxduvJk7G
+ 1zX74LhjnL8KmIT84qf7JyHrs4ooYb0Nd6pK7zCJmQKVZePunPylY8y7E37FiGwIuCZT
+ 9SRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708449635; x=1709054435;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=n6to8vzuihTvs6zgw2HzCG+EsnFxLppLdglwlQtaisQ=;
- b=NbNGG9f5UtAitvIb5aO+lycqRh7brqRVpxtIs3Mkt3koKy/nGC5DAmRaDlrsiLlmX2
- PCIkcrfpSIuLMEGkfxRE7YnlyzMEyjwR6QrZ5tBJLjpLU41IMnHLk3FcuPzN0gqa7TU7
- U5/U6F2zgPxcvfNQn+/0KZrRoFwJDo4c440n7tvyS830TrGF7+YTCZYgvufUyar8DF4F
- rZEGa1p2+75pNK6iB0q3TuGIPk8E0SESUKtwixdlsgBK2mdPQOEqhTE9aQIIywo+tpyz
- 6ge/1ISzpnepyEz76/vxO+BB2n3RJf38PUYb8vJPsLCpQbESsaAtAOYG/ykCGUv79Itf
- pBrw==
-X-Gm-Message-State: AOJu0Yys7IPcRk4cBR0trE//Q3bqXHdpV31dyKFUalePwU6J+uM1Io90
- VWhYMsmzIrR7TxEdU8TeZT3sN5k6h7Thr1iSu0GcAkrZRhIL+UAQ3jgzTAyE0PHdYw9AQ7yrVTU
- 3y7JKukwFx9IPtftlMj7M1MkE6eo=
-X-Google-Smtp-Source: AGHT+IEMUvnQMFys6U5zh/5w3SiedvuQok2EhPB6BJKPYBsR/bcKWi5QjRJ3VYjutD1kWI9Lro8TZRR+WnlewXX6bQ0=
-X-Received: by 2002:a05:6a20:2587:b0:1a0:b3b6:e2c9 with SMTP id
- k7-20020a056a20258700b001a0b3b6e2c9mr2913205pzd.5.1708449635075; Tue, 20 Feb
- 2024 09:20:35 -0800 (PST)
+ d=1e100.net; s=20230601; t=1708449732; x=1709054532;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=63zII7G/pXb+UOKUUF/QrH7LX69YOLRF7vvTVOaoc4g=;
+ b=od9fFLOo4q48j1g8BPJtz4qaoRXs9xPw7Hi+EJZLygzUYpfb4YzGsVGAjdk39KHh82
+ jmA+OocAG6UX231n+uxGd1PonCXFfnJPTXyx+PgnRItHLS7hvJjQ5PgLQgltQzOOvHWC
+ Pi18FKITs8wiAg4EyWaKQIso8DacH67mOoBC19U6eP/KFem1iXgJw+GskzO9lUPqqbwF
+ 3ZXyVw3ITX5A/JBYJeRKU0723kULnk4rC3W8ky2gDXf09ff/bRTawlsQIoQ9wUPuk8Is
+ DTm2PQHeqXweGspNtMgtwIWQf03vSjmDTPmODczsfCxXHi1mmf5m8ll+jIPSTZU0xiuJ
+ sZoA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW5WQ8v0goAlOONVOCcwnc0PahmWueRma3temQq9joELDQnDk+242YhbB+90pynCXEg5KE02SJoxWFljTwhrrzu13Ux8Q==
+X-Gm-Message-State: AOJu0Yz1kSJWwh7mRnFbBMm0fN7B8zpOKHUrSlMYq3eFZDMkA2A3sZE9
+ hZ3nYFb6MWjrpudTVIK91FfrbaBMeJWbWaaX0obsijx3YQi7zXKlWPqRRSlnZWU=
+X-Google-Smtp-Source: AGHT+IFVTUCKPGbegL3lBPTDjaEkpL29RBokVTIkJXPruwkdjwl+w5o8aJFkvsrXA4fDmn1NqHhx0g==
+X-Received: by 2002:a05:6512:1290:b0:512:96dc:ab50 with SMTP id
+ u16-20020a056512129000b0051296dcab50mr10866111lfs.20.1708449731758; 
+ Tue, 20 Feb 2024 09:22:11 -0800 (PST)
+Received: from [192.168.1.78] (host-92-17-96-232.as13285.net. [92.17.96.232])
+ by smtp.gmail.com with ESMTPSA id
+ q12-20020a170906770c00b00a3df13a4fe0sm4218686ejm.15.2024.02.20.09.22.10
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 20 Feb 2024 09:22:11 -0800 (PST)
+Message-ID: <ca960f7c-6b78-4355-bdee-008ade4d91c4@linaro.org>
+Date: Tue, 20 Feb 2024 17:22:10 +0000
 MIME-Version: 1.0
-References: <20240219230100.2980309-1-Mr.Bossman075@gmail.com>
- <CAOMZO5B+eZhJOifRiux0n8VXLkQgwc8Q8215ybJgJ-LHE8RAAQ@mail.gmail.com>
- <CAJFTR8Tjk8b-DZGxu2f4-LBoZdSqE5oDvyTY-DDOJYUU=DSvcA@mail.gmail.com>
-In-Reply-To: <CAJFTR8Tjk8b-DZGxu2f4-LBoZdSqE5oDvyTY-DDOJYUU=DSvcA@mail.gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 20 Feb 2024 14:20:24 -0300
-Message-ID: <CAOMZO5CAev9T_627gV88Rzcc7AE1jYpm0EyBJ-eSPcEJ=X4V-w@mail.gmail.com>
-Subject: Re: [PATCH v4 1/2] imx: imxrt1050-evk: Add support for SPI flash
- booting
-To: Jesse T <mr.bossman075@gmail.com>
-Cc: u-boot@lists.denx.de, 
- Giulio Benetti <giulio.benetti@benettiengineering.com>,
- Stefano Babic <sbabic@denx.de>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 16/39] board: dragonboard410c: add chainloaded config
+ fragment
+Content-Language: en-US
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Ramon Fried <rfried.dev@gmail.com>,
+ Dzmitry Sankouski <dsankouski@gmail.com>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
+ Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de
+References: <20240215-b4-qcom-common-target-v4-0-ed06355c634a@linaro.org>
+ <20240215-b4-qcom-common-target-v4-16-ed06355c634a@linaro.org>
+ <CALeDE9MzcnEBR-McJvJo8FPf8ad=8ytoU0+HkmpB4s-bLEDAwQ@mail.gmail.com>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <CALeDE9MzcnEBR-McJvJo8FPf8ad=8ytoU0+HkmpB4s-bLEDAwQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,12 +106,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Feb 19, 2024 at 11:50=E2=80=AFPM Jesse T <mr.bossman075@gmail.com> =
-wrote:
 
-> Huh, this is very interesting and I haven't noticed before.
-> When sending git send-email lowercases my email.
-> It seems like all my commits are like this.
-> Do you want this fixed?
 
-Please fix both issues and submit a v5.
+On 20/02/2024 14:19, Peter Robinson wrote:
+> On Thu, 15 Feb 2024 at 21:03, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>>
+>> Add a config fragment for building U-Boot such that it can be
+>> chainloaded by aboot/LK rather than being flashed directly to the aboot
+>> partition.
+> 
+> How does this work in practice? I think a lot of devices, one example
+> I see is signed vs unsigned, or emmc vs other storage, have to
+> configs, how would a user choose with LK vs the other option here?
+
+I'm not sure I understand, maybe the commit message wording was a bit
+vague... There is only the default mode where U-Boot is flashed to the
+aboot partition, and then the chainloaded usecase where it's wrapped in
+an Android boot image and flashed to the boot partition.
+> 
+>> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+>> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+>> ---
+>>  board/qualcomm/dragonboard410c/configs/chainloaded.config | 7 +++++++
+>>  1 file changed, 7 insertions(+)
+>>
+>> diff --git a/board/qualcomm/dragonboard410c/configs/chainloaded.config b/board/qualcomm/dragonboard410c/configs/chainloaded.config
+>> new file mode 100644
+>> index 000000000000..3fd064924a1f
+>> --- /dev/null
+>> +++ b/board/qualcomm/dragonboard410c/configs/chainloaded.config
+>> @@ -0,0 +1,7 @@
+>> +# CONFIG_ENABLE_ARM_SOC_BOOT0_HOOK is not set
+>> +CONFIG_TEXT_BASE=0x0
+>> +# CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR is not set
+>> +# CONFIG_REMAKE_ELF is not set
+>> +CONFIG_POSITION_INDEPENDENT=y
+>> +CONFIG_INIT_SP_RELATIVE=y
+>> +CONFIG_SYS_INIT_SP_BSS_OFFSET=524288
+>>
+>> --
+>> 2.43.1
+>>
+
+-- 
+// Caleb (they/them)
