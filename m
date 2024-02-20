@@ -4,176 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B744C48BC3
-	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 18:24:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 332E2C48BC3
+	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 18:29:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BFDF687F62;
-	Tue, 20 Feb 2024 19:24:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 70D7D87FEC;
+	Tue, 20 Feb 2024 19:29:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="rgImDoH2";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pHiOB9e6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7DD7287FD8; Tue, 20 Feb 2024 19:24:43 +0100 (CET)
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on20600.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2417::600])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id ACACF87FED; Tue, 20 Feb 2024 19:29:30 +0100 (CET)
+Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
+ [IPv6:2607:f8b0:4864:20::b2b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C4E487ED8
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 19:24:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BF9EF87FE7
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 19:29:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=N/ezMRQ0NDArBvXIzWAHbRgBjMejG0x1BsQPq9aOZ5K7M0SnzeQ4fY+2HMacfEx85C2ZykWDgRWpT9VU/amINN1jYY4tNJ6Gl+mKO5AcueYt5HX2nCviRLYY7juCwezuopvteW0vHPY4dwBbqU5Herq2GHAXWEHwksIXCKdYZOr4OaSbwIWR0w8X6x1O79161ohwbJAQgyK2sl2SzdM/n3G+/ka1czYRe11VOM6zMiSvaj7JVsteS3HagdqTpKx+ND3UD1X4ODaNX+Hnad8TkmSBQandbQ10xYvbU4EAz0AO4bERT3rBu6X6BFIC99cS2Byi6ZjMp1KENRKmA6V8Rw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=bHazRwtJsUK2ISOTn+P2WeyMtcEaHvgp5faG1y/P/kw=;
- b=BNNEqEIbG8E6tLgWxNOFmNJ8RpVyfSSsoANb6HbeZnw8Pyb2VKncdJyh/M7ggrWYyVfXMrL+jlWKFPqURe1A61egl96P1lKQ3T/D5XFkASPvm06Yv+9M36mlNCK/Ze6YaczJoD9mTlR46KDbZhBZHy2jrq4KnETEX4VHZ0xl3AYba+cXbscY05MCHQDAEIbmwgFM28/hYA8mdwKQTehSXb2Mz318aPwAMcF27wnEgp4h+XxQeHx+fyde6vXC7NXYcrQU6uafVHMbH4QCBKiUorXeiuFksGhg2ZdctTOv+eLyhsVRrSS4MUoH7r27NxkZw+tbmvHK8aPJQ5GI6Mp88g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bHazRwtJsUK2ISOTn+P2WeyMtcEaHvgp5faG1y/P/kw=;
- b=rgImDoH2/wTFLkICz9GS9HfznHPPEIq7alJ1siSmLMI2g8WZIi2z7gHSJNr4kt/wjhqQuqJ5ztBpJbg3rLVyXwDsKvxrqx2bX+xkBUau+UxxFa9tCw2Tzi6CiVxJuSm+l3qMNYtHDkgI59Ikvll/sTPVWZ4tJV+141b5IHXRmxY=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from CYXPR12MB9337.namprd12.prod.outlook.com (2603:10b6:930:d8::20)
- by SJ2PR12MB8063.namprd12.prod.outlook.com (2603:10b6:a03:4d1::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7316.19; Tue, 20 Feb
- 2024 18:24:30 +0000
-Received: from CYXPR12MB9337.namprd12.prod.outlook.com
- ([fe80::84b1:5355:e3da:dc97]) by CYXPR12MB9337.namprd12.prod.outlook.com
- ([fe80::84b1:5355:e3da:dc97%4]) with mapi id 15.20.7316.018; Tue, 20 Feb 2024
- 18:24:29 +0000
-Message-ID: <5816ffd1-4105-49b9-8026-026a4195fa00@amd.com>
-Date: Tue, 20 Feb 2024 19:24:20 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm64: zynqmp: Support semhosting boot method
-Content-Language: en-US
-To: Sean Anderson <sean.anderson@seco.com>, u-boot@lists.denx.de
-References: <20240215171918.3729508-1-sean.anderson@seco.com>
- <3f6a5971-a024-4eb2-bdba-76071fbd9bb2@amd.com>
- <e9fd399c-34e2-4c54-a74e-d1a3b84fbcdb@seco.com>
- <326f67f9-a6de-42e3-a2fb-9d649520557a@amd.com>
- <0ab35778-ae8a-4eb2-a021-ee8e3a9815be@amd.com>
- <4a2e8e89-36e3-4e58-9f14-2151fc907081@seco.com>
- <8561797f-3b77-44af-849b-faa555e244bf@seco.com>
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- 3i3l5DA=
-In-Reply-To: <8561797f-3b77-44af-849b-faa555e244bf@seco.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1P195CA0052.EURP195.PROD.OUTLOOK.COM
- (2603:10a6:802:5a::41) To CYXPR12MB9337.namprd12.prod.outlook.com
- (2603:10b6:930:d8::20)
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-yb1-xb2b.google.com with SMTP id
+ 3f1490d57ef6-dcd7c526cc0so6157192276.1
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 10:29:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1708453764; x=1709058564; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=98WiXc81phEkqAmDtGk5TwynerWB4QheCAwGnKCmc7c=;
+ b=pHiOB9e60UEWpcqdHORd7Oa4JlFYTU2mYuTh+/JLhAHCimp/jOLR3Vx0Hv9+IxiPTZ
+ 8LEzSRXNmiNBUhRKWbeo3K+vT1II1sGBKuSx2TGh7IA8kCS3e9Ns52F8eDKyOfhhC5NG
+ bqRrljxxHb3xEPfZkthlDN6NyBuI8VIowD7p4LMFia8ZI9MR4GPUIXl56tzJ9edyXLSG
+ KiJoWQWYhzgMgnZVeGoqoy2rmsDwnwq3x2B5JcyMMSRuD0T+vsWdYGk7I826puB5zWJ4
+ Nf2gJ28sUaCDES7QeeNF8Ck7/+H0Rcscd23vBt5n+wvjGseYvW8PeC1TN+sD/AgiQUHn
+ 0WKg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1708453764; x=1709058564;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=98WiXc81phEkqAmDtGk5TwynerWB4QheCAwGnKCmc7c=;
+ b=Lq8GPeehdMzemdzwNeFVszzpi6XsMQ5pi8BnjF2ruSJiewZs1dgf9ZhrmiGMZnN8xq
+ ttovEtNojCvqzA6/EiS/x0IzkB1Ulaiej2OWU/7NjauCpvKX655pBvzdXAmLLp9MvciR
+ aV68c9kD2KsrBOjK1ds895lVFl/HToCGlZ3pn5JFt4Nuyyp2rEN+qmd20y+1uO4KoSjz
+ kI8Bs8fOZ+CVhqJ0d9GV3IuRoGI9JpaejD+e3mvvR089o6ITaGjhKHpnJICOVa9O7Kdw
+ 2EnQrUZ6cgjCJYayt3wVHmR60H+zsBrEXHTR2SrPN0T+jkwxAkzgqi1OwpLXxHRA6q5F
+ xYgg==
+X-Gm-Message-State: AOJu0YzNoLNj31wzXGO7hQhMCsYly9FU/yznGQhcR2ZKIL/dqeQfn/tv
+ pZcau2o6ktX13RvStAtIGGycekB/Rc0x+otpilh/tuDfTyWRDnjyCI+kmycsM7q9G+CE6tADGIs
+ MvKxVai9NLtH8y9vFcfFFoEmPYFjnSkj1PqhRZ2xZ0eDXp2okr7g=
+X-Google-Smtp-Source: AGHT+IGRY/fFMtCoai1/o881Bz0mEDqhjG0e+iXqZobEs8jZJg1SjFyIEp8WgU4nkoNMcIZ/IpJG7tTAxsLenf7WRHM=
+X-Received: by 2002:a25:98c3:0:b0:dcc:693e:b396 with SMTP id
+ m3-20020a2598c3000000b00dcc693eb396mr13837976ybo.2.1708453763017; Tue, 20 Feb
+ 2024 10:29:23 -0800 (PST)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CYXPR12MB9337:EE_|SJ2PR12MB8063:EE_
-X-MS-Office365-Filtering-Correlation-Id: 593ce474-51a2-4c5c-ca92-08dc32412d83
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: PW8Yyfb7FFVDkE8pbCEYRYBrKMKHcASifT1JAJ5mdXMfeB0Wys/E81xZQ4GrMRKsLjnsiR8nvCZ3UEtl5teLz1pvX3SuG/4vZuEQyUVpmWw/cxTNFfQ+JMZ6qHaqVdiKFw5+RikDtfFgWIWeevS6CugAlDO6aeKN1itvlXUDH5f9dCZSW4k4sSOq8qmBtgF9DePZqGCa8dP7xxuwQjYFPNhVgpDjxy+KlECl7HY0V62p27ANY4LPE+cRVkTGMP0Cncd7vWZNYNfli3FBgHMS+PsKdVd16mqZ2B7atjg8mZIJHKDohVQp8cg9pgU5hYASIvXGWOVsp8a6cArwi35gSOgZFx1CkYXOOsJJCgJTleoyAefSo+4E5/1gzc0zP4ZiTZD/z4hZnzBYJRQTK14G+8ouOoKGM5V6I+d7cITuGhI1zxTlhOy6IvdUUOVcJ5X1kK21OJ/stnXNfgM0jVQEmTJtQNtuSfueguISx1iv9EDhnJXO6lcsa6IJ/T23QbQ1bcZklGTyxkRtRCwuGjvzpMgUtjE0Jvi1C8Z3TJYgRY87s0Ausqi6vj0Kyz+KT+6J
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CYXPR12MB9337.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(230273577357003); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?cEtTWm1vNkw2RlJPd2t2TGhUdzBTSmtackE3WjlISEtTSUxvRTdXU1FkWStB?=
- =?utf-8?B?aXduc2E1WU5IcXpzOE13UC9YaGE4Um95dzFJY2VhNURFamYvZmFLRGtIV3l1?=
- =?utf-8?B?c1B0djZtKzhrakpGTndJUjJGc1RSRThWODZGS21pVHZRZGpYSmUwT1dleCtq?=
- =?utf-8?B?emo3eUJnTjdGL3l4UFU0bEZ2ZjZia2hlRjFFUU9PMVNxSDRGalpSNHIxS0ow?=
- =?utf-8?B?Y1dLcmk5WmhLUjg2aGhCalMxZE5tMlhhWVgzaDNCYldseTlrK09UQVlYRE9K?=
- =?utf-8?B?Y1ozNlZiRCtpR3hhN1NoWWZvYzl2a21adHoxRVVFODU2QnU5MmJtOVUwK2Zh?=
- =?utf-8?B?WlJtcGhRT3BtVzNCQXVhbnRudCtTL0U3bzBud1dqbVhGOVJTak13S3gvY0Fr?=
- =?utf-8?B?cXRUclJJT3Y4Zis0MENyNno4S3VKMmMwRGFJTjRIeTJwNHgyT2FWMytGNFQ5?=
- =?utf-8?B?Y1A5WkozL0dWSjZycWhLRjlCZnRyVVZuRVNJVFlsKzk2RXo5djBCS3JUWWpP?=
- =?utf-8?B?cVRzQ05ZTGZBQnRHZklrS3pESEZ5dzh0RWxoaUpNTWZEZURvSVZjeUhhRUdU?=
- =?utf-8?B?d0RBTHNPOW16akV6cElpaTFWV0J5R0dkQVZOY2pYNm9Ba1YrckJBUEdhd0JZ?=
- =?utf-8?B?ZlI0c01PTVhXQU40andxU2VDc1p0ay9LSnJiM0pSeFN4Y08wTXNsSjI2RWN0?=
- =?utf-8?B?ZXVuTjNaekwvaC9uK3BncmM4UTJSQzVWcW93cUtKN0lERzNyMjM0cStxRm1m?=
- =?utf-8?B?b0dtTExKZjBJOHFhTmI5RVA2eDEwNnk2ciswdEhuTzJldmlFYWQ1S1lzd2JP?=
- =?utf-8?B?cWNZcGpqcGoxR1AyZnpXV1UvUDJZUDEyK2YxZll6N2R5aDh3SEtUdzlsSGhM?=
- =?utf-8?B?M0xlS3FyNFBwcXdBZE9Eek9XMkI4VWUzeCtEbldvcFZ1RXViajRNRDhRTS96?=
- =?utf-8?B?dUhpbG1JVmxaTE1EUUVSbUxYWnhnNTdOS2l3Sk9FSHVsWGgzRGtwbHJkTzhK?=
- =?utf-8?B?WkpPYWFCSlU0R1lRREVCWlNJWHRpd0RxMmpXWjJqNFhrYmllVGxuZ3pqVVU0?=
- =?utf-8?B?U0VJMDY4UmNJODI0R3VFMzRsVzB6ekRtMlB6TDU2ajFFU3MvOE51bnl1VitF?=
- =?utf-8?B?OUhXME1WNTY2bFR0YUhoSlpsWnJXOGt5dkJDNkIxNFdydzd6eVIwWWRFN3Nw?=
- =?utf-8?B?dHcveEMwN1FOcEpjVUVHRDBOYWhXU0QvLzVQd3BHVTBiclZlSUhuV0R4aDRx?=
- =?utf-8?B?UjUyQ21zR3o2Z2NMeDU0ZXcrKzVmQllYRExoOG5sODNPMVdYZVdxNDNxdXd0?=
- =?utf-8?B?UktqRW9xMnpaVnBrRno3TG45cWxadTJZTENlWHlEb3RiNEIzQXl4b2JVVU9y?=
- =?utf-8?B?M2UwbVdHZjNTSDV4eHNCeE05VGtnWGlyTzRHVU9ibjB6bkdVMTYvUlFHWHZG?=
- =?utf-8?B?aWYzTktFT1hibUQyTlFJQmppb2trRDZJcUpQaUx2U3YvS25OU2kxbFhIV3Ru?=
- =?utf-8?B?dUZBb3RwckJrK29VRzlFUzR0NlZ6dVgzb1FqdDhBYmtGMG55dW54NDlvZEFQ?=
- =?utf-8?B?eE9BdWlhb2h4TE9OeWJWU2xLR0F0WnVYUTJEVi81S2VxdHNKTGhGTVVkTThw?=
- =?utf-8?B?MFVvcEUzdDZLOUZLRGpuR3FRWUxrWnE3V21ITUZvTjFtTE43blp5RWZXc1RI?=
- =?utf-8?B?NHJZNVNTRU5sYUdIb2RkQ3V0d1VPUWdDb2lYbW9POUJ4RkppeGhoeVhIc1B4?=
- =?utf-8?B?MVUzekVzQUZ3c2l1QzZiQTlYczRYYkxyUXhLcjVjeGNBcmVNb0lRWVc1Vmls?=
- =?utf-8?B?Y290OGdMTGdkU09yN0VWaEVmcUpDUGk3c0Mrc3dFdnd0cERlc3hlMjZ6SndC?=
- =?utf-8?B?WThCR1NqL1puQVMwcGFPT0F0WnB3Rm9WYkNCK1JoYTBETFFYSDdIcU9LQTZp?=
- =?utf-8?B?MUdtd0FYOGZXZGNIaC9DYVhZdTZzYlNxREpDUE5ycnNJeHFTc0NENEU5dG0z?=
- =?utf-8?B?VDIzT01JQlJUQUxSZVQvejhSd2JYNGxPL2RLVnE0akdoWXI3MUFPN0pxUHBY?=
- =?utf-8?B?dFFxR1d2a2RSSVFWZ3RuT2hBM1hHSlFqRURQRFVVQllLRSsvV09jeC9TTE9T?=
- =?utf-8?Q?O4ThdKvSD53Z6q1t5C+or8pxT?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 593ce474-51a2-4c5c-ca92-08dc32412d83
-X-MS-Exchange-CrossTenant-AuthSource: CYXPR12MB9337.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Feb 2024 18:24:29.8712 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: WKKdolF3jlRAqLn6G34kPJPfoy3N7hqdP3M9jdArCLDJ3hGsZ3o176dIJ2f1r+9R
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB8063
+References: <20240219101559.364553-1-igor.opaniuk@gmail.com>
+In-Reply-To: <20240219101559.364553-1-igor.opaniuk@gmail.com>
+From: Sam Protsenko <semen.protsenko@linaro.org>
+Date: Tue, 20 Feb 2024 12:29:12 -0600
+Message-ID: <CAPLW+4kB0mJ-dFAkd6s8Lu6rQzSjd7LmBcZJy-YLApO5suUAJA@mail.gmail.com>
+Subject: Re: [PATCH v1] include: android_bootloader_message.h: sync with AOSP
+ upstream
+To: Igor Opaniuk <igor.opaniuk@gmail.com>
+Cc: u-boot@lists.denx.de, Eugeniu Rosca <erosca@de.adit-jv.com>, 
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Alex Deymo <deymo@google.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -190,255 +90,295 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Mon, Feb 19, 2024 at 4:16=E2=80=AFAM Igor Opaniuk <igor.opaniuk@gmail.co=
+m> wrote:
+>
+> This takes the latest changes from AOSP from [1][2] (as this
+> header was split on two) with minimal changes (this could lead
+> to warnings reported by checkpatch).
 
+Do we want to maybe follow that and also carry two different headers
+in U-Boot? Or it doesn't make much sense? I'm thinking in terms of
+future portability mostly: how easy it's to update this header right
+now, and how easy it's going to be further. I didn't form any opinion
+on that, hence asking.
 
-On 2/16/24 17:09, Sean Anderson wrote:
-> On 2/16/24 11:03, Sean Anderson wrote:
->> On 2/16/24 10:06, Michal Simek wrote:
->>>
->>>
->>> On 2/16/24 14:48, Michal Simek wrote:
->>>>
->>>>
->>>> On 2/15/24 20:31, Sean Anderson wrote:
->>>>> On 2/15/24 14:08, Michal Simek wrote:
->>>>>>
->>>>>>
->>>>>> On 2/15/24 18:19, Sean Anderson wrote:
->>>>>>> Currently, when we boot from JTAG we try to boot U-Boot from RAM.
->>>>>>> However, this is a bit tricky to time, since the debugger has to wait
->>>>>>> for SPL to initialize RAM before it can load U-Boot. This can result in
->>>>>>> long waits, since occasionally initializing RAM (and other things in
->>>>>>> psu_init) takes a long time to complete and the debugger must wait for
->>>>>>> this worst case.
->>>>>>>
->>>>>>> Support semihosting if it is enabled, as it lets U-Boot tell the
->>>>>>> debugger when we are ready for the image. This means we don't have to
->>>>>>> wait any more than necessary. We don't change the default config to
->>>>>>> ensure we don't break compatibility with existing debuggers that don't
->>>>>>> expect us to hit semihosting breakpoints.
->>>>>>>
->>>>>>> Signed-off-by: Sean Anderson <sean.anderson@seco.com>
->>>>>>> ---
->>>>>>>
->>>>>>>     arch/arm/mach-zynqmp/spl.c | 10 ++++++++--
->>>>>>>     1 file changed, 8 insertions(+), 2 deletions(-)
->>>>>>>
->>>>>>> diff --git a/arch/arm/mach-zynqmp/spl.c b/arch/arm/mach-zynqmp/spl.c
->>>>>>> index a0f35f36faa..5af735aa5ce 100644
->>>>>>> --- a/arch/arm/mach-zynqmp/spl.c
->>>>>>> +++ b/arch/arm/mach-zynqmp/spl.c
->>>>>>> @@ -9,6 +9,7 @@
->>>>>>>     #include <image.h>
->>>>>>>     #include <init.h>
->>>>>>>     #include <log.h>
->>>>>>> +#include <semihosting.h>
->>>>>>>     #include <spl.h>
->>>>>>>     #include <linux/delay.h>
->>>>>>>
->>>>>>> @@ -66,6 +67,11 @@ void spl_board_init(void)
->>>>>>>     }
->>>>>>>     #endif
->>>>>>>
->>>>>>> +static u32 jtag_boot_device(void)
->>>>>>> +{
->>>>>>> +       return semihosting_enabled() ? BOOT_DEVICE_SMH : BOOT_DEVICE_RAM;
->>>>>>> +}
->>>>>>> +
->>>>>>>     void board_boot_order(u32 *spl_boot_list)
->>>>>>>     {
->>>>>>>            spl_boot_list[0] = spl_boot_device();
->>>>>>> @@ -75,7 +81,7 @@ void board_boot_order(u32 *spl_boot_list)
->>>>>>>            if (spl_boot_list[0] == BOOT_DEVICE_MMC2)
->>>>>>>                    spl_boot_list[1] = BOOT_DEVICE_MMC1;
->>>>>>>
->>>>>>> -       spl_boot_list[2] = BOOT_DEVICE_RAM;
->>>>>>> +       spl_boot_list[2] = jtag_boot_device();
->>>>>>>     }
->>>>>>>
->>>>>>>     u32 spl_boot_device(void)
->>>>>>> @@ -97,7 +103,7 @@ u32 spl_boot_device(void)
->>>>>>>
->>>>>>>            switch (bootmode) {
->>>>>>>            case JTAG_MODE:
->>>>>>> -               return BOOT_DEVICE_RAM;
->>>>>>> +               return jtag_boot_device();
->>>>>>>     #ifdef CONFIG_SPL_MMC
->>>>>>>            case SD_MODE1:
->>>>>>>            case SD1_LSHFT_MODE: /* not working on silicon v1 */
->>>>>>
->>>>>> Good timing. Can you please tell me how to test this? What's the setup?
->>>>>> Which debugger are you using?
->>>>>
->>>>> I am using OpenOCD with the patches at https://cas5-0-urlprotect.trendmicro.com:443/wis/clicktime/v1/query?url=https%3a%2f%2freview.openocd.org%2fc%2fopenocd%2f%2b%2f8133&umid=6e1be473-0b3f-4bc4-a4f0-403592e74baf&auth=d807158c60b7d2502abde8a2fc01f40662980862-afc15b07b0f91c910f832185958363d84f990a08
->>>>>
->>>>
->>>> I am trying it on the top of the latest git but getting issue with event block and no idea how to fix it.
->>>>
->>>> # sudo openocd -f /usr/local/share/openocd/scripts/interface/ftdi/digilent_jtag_hs3.cfg -f /usr/local/share/openocd/scripts/target/xilinx_zynqmp.cfg
->>>> Open On-Chip Debugger 0.12.0+dev-01509-g6d288937cb2d (2024-02-16-12:22)
->>>> Licensed under GNU GPL v2
->>>> For bug reports, read
->>>>       https://cas5-0-urlprotect.trendmicro.com:443/wis/clicktime/v1/query?url=http%3a%2f%2fopenocd.org%2fdoc%2fdoxygen%2fbugs.html&umid=6e1be473-0b3f-4bc4-a4f0-403592e74baf&auth=d807158c60b7d2502abde8a2fc01f40662980862-f501ab9aa5516ff666e387e53598fd624398f1bc
->>>> Info : auto-selecting first available session transport "jtag". To override use 'transport select <transport>'.
->>>> wrong # args: should be "-event <event-name> <event-body>"
->>>>
->>>>
->>>> Do you know how to fix it?
->>>
->>>
->>> I actually bisect it and found that it is caused by
->>> jtag: rewrite jim_jtag_configure() as COMMAND_HANDLER
->>> ea2e26f7d521f5755b4bfda7bf12d99650277421
->>
->> Interesting. I have been testing with 0.12.
->>
->>> # sudo openocd -f /usr/local/share/openocd/scripts/interface/ftdi/digilent_jtag_smt2_nc.cfg -f /usr/local/share/openocd/scripts/target/xilinx_zynqmp.cfg
->>
->> FWIW after installing the udev rules I do not need sudo
->>
->>> Open On-Chip Debugger 0.12.0+dev-01512-g214206ebb972 (2024-02-16-15:38)
->>> Licensed under GNU GPL v2
->>> For bug reports, read
->>>      https://cas5-0-urlprotect.trendmicro.com:443/wis/clicktime/v1/query?url=http%3a%2f%2fopenocd.org%2fdoc%2fdoxygen%2fbugs.html&umid=6e1be473-0b3f-4bc4-a4f0-403592e74baf&auth=d807158c60b7d2502abde8a2fc01f40662980862-f501ab9aa5516ff666e387e53598fd624398f1bc
->>> none separate
->>> Info : auto-selecting first available session transport "jtag". To override use 'transport select <transport>'.
->>> Info : Hardware thread awareness created
->>> boot_apu
->>> Info : Listening on port 6666 for tcl connections
->>> Info : Listening on port 4444 for telnet connections
->>> Warn : An adapter speed is not selected in the init scripts. OpenOCD will try to run the adapter at very low speed (100 kHz).
->>> Warn : To remove this warnings and achieve reasonable communication speed with the target, set "adapter speed" or "jtag_rclk" in the init scripts.
->>> Info : clock speed 100 kHz
->>> Info : TAP uscale.tap does not have valid IDCODE (idcode=0x48e70126)
->>> Info : JTAG tap: uscale.ps tap/device found: 0x24738093 (mfg: 0x049 (Xilinx), part: 0x4738, ver: 0x2)
->>> Info : JTAG tap: uscale.tap tap/device found: 0x5ba00477 (mfg: 0x23b (ARM Ltd), part: 0xba00, ver: 0x5)
->>> Info : JTAG tap: uscale.ps tap/device found: 0x24738093 (mfg: 0x049 (Xilinx), part: 0x4738, ver: 0x2)
->>> Error: JTAG-DP STICKY ERROR
->>> Error: [uscale.a53.0] Examination failed
->>> Warn : target uscale.a53.0 examination failed
->>> Info : [uscale.axi] Examination succeed
->>> Info : starting gdb server for uscale.a53.0 on 3333
->>> Info : Listening on port 3333 for gdb connections
->>> Info : gdb port disabled
->>>
->>> but with zcu102 I am still not able to connect because error above.
->>> The same behavior with recording SOM IDs I see on kv260 (via hs3 cable).
->>> It looks like that not everything is working for zynqmp.
->>
->> Is this with the boot mode set to JTAG? If so, you will not be able to
->> examine any of the CPUs until you have released them from reset. So you
->> should be able to run
->>
->>          targets uscale.axi
->>          boot_pmu /path/to/pmu-firmware.bin
->>          boot_apu /path/to/u-boot-spl.bin
->>
->> to boot a CPU. If you want to silence the above error, you can add
->>
->>          uscale.a53.0 configure -defer-examine
->>
->> to your config. So the full command would be
->>
->> $ openocd -f interface/ftdi/digilent_jtag_smt2_nc.cfg \
->>          -f target/xilinx_zynqmp.cfg \
->>          -c 'uscale.a53.o configure -defer-examine' \
->>          -c init -c 'targets uscale.axi' \
->>          -c 'boot_pmu /path/to/pmu-firmware.bin' \
->>          -c 'boot_apu /path/to/boot.bin'
->>
->> Let me know if that works for you.
-> 
-> Oh, and I forgot to mention, but if you are testing semihosting then you will need to add
-> 
-> -c 'uscale.a53.0 arm semihosting enable'
-> 
-> to the end of that. I also find setting the semihosting base directory with
-> 
-> -c 'uscale.a53.0 arm semihosting_basedir $IMAGEDIR'
-> 
-> to be helpful.
-> 
-> As you can imagine this is a long command line, so I have a config which looks like
-> 
-> source [find interface/ftdi/digilent_jtag_smt2_nc.cfg]
-> adapter speed 25000
-> source [find target/xilinx_zynqmp.cfg]
-> uscale.a53.0 configure -defer-examine
-> 
-> proc boot {imagedir machine} {
->          targets uscale.axi
->          boot_pmu "${imagedir}/pmu-firmware-${machine}.bin"
->          boot_apu "${imagedir}/u-boot-spl.bin"
->          uscale.a53.0 arm semihosting enable
->          uscale.a53.0 arm semihosting_basedir $imagedir
-> }
-> 
-> which I invoke like
-> 
-> $ openocd -f my_config.cfg -c init -c 'boot /path/to/images my-machine'
+Another thing: are you sure that changing only the header won't break
+anything in U-Boot .c files that use this header?
 
+>
+> Some local changes have been applied:
 
-ok. 0.12.0 version is working better. I am able to load firmware to APU but I 
-was not able to load pmufw. It was saying timeout like this.
+Is it possible to split this work into two patches:
+  1. Bring the original changes only
+  2. Apply all necessary changes for U-Boot
 
- > boot_pmu /mnt/disk/som/pmu_obj.bin
-/usr/local/bin/../share/openocd/scripts/target/xilinx_zynqmp.cfg:173: Error: 
-Timed out waiting for PMU firmware
-in procedure 'boot_pmu'
-in procedure 'resume_pmu' called at file 
-"/usr/local/bin/../share/openocd/scripts/target/xilinx_zynqmp.cfg", line 232
-at file "/usr/local/bin/../share/openocd/scripts/target/xilinx_zynqmp.cfg", line 173
- >
+Or does it break the build, etc? Again, thinking in terms of
+portability easiness, and not sure which approach is better -- just
+asking basically.
 
-Then I looked at pmu and use below snipset which I use on xsdb to make it 
-visible for debugger and also small waiting time.
+> 1. Enable static_assert() for defined structures to be sure
+> that all of them have correct sizes.
+> 2. Adjuste types in bootloader_control structure with bitfields
 
+Adjuste -> adjust
 
-@@ -141,6 +146,13 @@ add_help_text halt_pmu "Halt the PMU in preparation for 
-loading new firmware.\
-         This should be matched with a call to resume_pmu."
-  proc halt_pmu {} {
-         set axi $::_CHIPNAME.axi
-+
-+       puts "Enable PMU target"
-+       set val [$axi read_memory 0xFFCA0038 32 1]
-+       $axi write_memory 0xFFCA0038 32 [expr {$val | 0x1C0}]
-+       sleep 5
-+       puts "PMU target should be enabled"
-+
-         set val [$axi read_memory $::IPI_PMU_0_IER 32 1]
-         $axi write_memory $::IPI_PMU_0_IER 32 [expr {$val | $::IPI_PMU_0}]
+> (uint8_t -> uint16_t). It seems that gcc just doesn't like bitfields
 
-With that I am able to test your patch but it is kind of slow.
-Max freq I am able to use on zcu102 is 2MHz which is far from 15MHz used by xsdb.
+I wonder if all those extra changes can be upstreamed back to AOSP?
+Ideally we'd want to just copy those headers over from AOSP to U-Boot
+with no changes, would make the porting work easier. What are your
+thoughts on that?
 
-After some time I am seeing
+> that cross the width of the type. Changing the type doesn't change
+> the layout though.
+> This addresses this gcc note:
+> In file included from boot/android_ab.c:7:
+> include/android_bootloader_message.h:230:1: note: offset of packed bit-fi=
+eld =E2=80=98merge_status=E2=80=99 has changed in GCC 4.4
+>   230 | } __attribute__((packed));
+>
+> [1] https://android.googlesource.com/platform/bootable/recovery/+/main/bo=
+otloader_message/include/bootloader_message/bootloader_message.h
+> [2] https://android.googlesource.com/platform/hardware/interfaces/+/main/=
+boot/1.1/default/boot_control/include/private/boot_control_definition.h
+>
+> CC: Alex Deymo <deymo@google.com>
+> CC: Sam Protsenko <semen.protsenko@linaro.org>
+> CC: Eugeniu Rosca <erosca@de.adit-jv.com>
+> CC: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
+> ---
+>
+>  include/android_bootloader_message.h | 104 +++++++++++++++++++++++----
+>  1 file changed, 92 insertions(+), 12 deletions(-)
+>
+> diff --git a/include/android_bootloader_message.h b/include/android_bootl=
+oader_message.h
+> index 286d7ab0f31..75198fc9dc2 100644
+> --- a/include/android_bootloader_message.h
+> +++ b/include/android_bootloader_message.h
+> @@ -21,17 +21,22 @@
+>   * stddef.h
+>   */
+>  #include <compiler.h>
+> +#include <linux/build_bug.h>
+>  #endif
+>
+>  // Spaces used by misc partition are as below:
+>  // 0   - 2K     For bootloader_message
+>  // 2K  - 16K    Used by Vendor's bootloader (the 2K - 4K range may be op=
+tionally used
+>  //              as bootloader_message_ab struct)
+> -// 16K - 64K    Used by uncrypt and recovery to store wipe_package for A=
+/B devices
+> +// 16K - 32K    Used by uncrypt and recovery to store wipe_package for A=
+/B devices
+> +// 32K - 64K    System space, used for miscellanious AOSP features. See =
+below.
+>  // Note that these offsets are admitted by bootloader,recovery and uncry=
+pt, so they
+>  // are not configurable without changing all of them.
+>  static const size_t BOOTLOADER_MESSAGE_OFFSET_IN_MISC =3D 0;
+> +static const size_t VENDOR_SPACE_OFFSET_IN_MISC =3D 2 * 1024;
+>  static const size_t WIPE_PACKAGE_OFFSET_IN_MISC =3D 16 * 1024;
+> +static const size_t SYSTEM_SPACE_OFFSET_IN_MISC =3D 32 * 1024;
+> +static const size_t SYSTEM_SPACE_SIZE_IN_MISC =3D 32 * 1024;
+>
+>  /* Bootloader Message (2-KiB)
+>   *
+> @@ -81,24 +86,67 @@ struct bootloader_message {
+>      char reserved[1184];
+>  };
+>
+> +// Holds Virtual A/B merge status information. Current version is 1. New=
+ fields
+> +// must be added to the end.
+> +struct misc_virtual_ab_message {
+> +  uint8_t version;
+> +  uint32_t magic;
+> +  uint8_t merge_status;  // IBootControl 1.1, MergeStatus enum.
+> +  uint8_t source_slot;   // Slot number when merge_status was written.
+> +  uint8_t reserved[57];
+> +} __attribute__((packed));
+> +
+> +struct misc_memtag_message {
+> +  uint8_t version;
+> +  uint32_t magic; // magic string for treble compat
+> +  uint32_t memtag_mode;
+> +  uint8_t reserved[55];
+> +} __attribute__((packed));
+> +
+> +struct misc_kcmdline_message {
+> +  uint8_t version;
+> +  uint32_t magic;
+> +  uint64_t kcmdline_flags;
+> +  uint8_t reserved[51];
+> +} __attribute__((packed));
+> +
+> +#define MISC_VIRTUAL_AB_MESSAGE_VERSION 2
+> +#define MISC_VIRTUAL_AB_MAGIC_HEADER 0x56740AB0
+> +
+> +#define MISC_MEMTAG_MESSAGE_VERSION 1
+> +#define MISC_MEMTAG_MAGIC_HEADER 0x5afefe5a
+> +#define MISC_MEMTAG_MODE_MEMTAG 0x1
+> +#define MISC_MEMTAG_MODE_MEMTAG_ONCE 0x2
+> +#define MISC_MEMTAG_MODE_MEMTAG_KERNEL 0x4
+> +#define MISC_MEMTAG_MODE_MEMTAG_KERNEL_ONCE 0x8
+> +#define MISC_MEMTAG_MODE_MEMTAG_OFF 0x10
+> +// This is set when the state was overridden forcibly. This does not nee=
+d to be
+> +// interpreted by the bootloader but is only for bookkeeping purposes so
+> +// userspace knows what to do when the override is undone.
+> +// See system/extras/mtectrl in AOSP for more information.
+> +#define MISC_MEMTAG_MODE_FORCED 0x20
+> +
+> +#define MISC_KCMDLINE_MESSAGE_VERSION 1
+> +#define MISC_KCMDLINE_MAGIC_HEADER 0x6ab5110c
+> +#define MISC_KCMDLINE_BINDER_RUST 0x1
+>  /**
+>   * We must be cautious when changing the bootloader_message struct size,
+>   * because A/B-specific fields may end up with different offsets.
+>   */
+> -#ifndef __UBOOT__
+> +
+>  #if (__STDC_VERSION__ >=3D 201112L) || defined(__cplusplus)
+>  static_assert(sizeof(struct bootloader_message) =3D=3D 2048,
+>                "struct bootloader_message size changes, which may break A=
+/B devices");
+>  #endif
+> -#endif /* __UBOOT__ */
+>
+>  /**
+>   * The A/B-specific bootloader message structure (4-KiB).
+>   *
+>   * We separate A/B boot control metadata from the regular bootloader
+>   * message struct and keep it here. Everything that's A/B-specific
+> - * stays after struct bootloader_message, which should be managed by
+> - * the A/B-bootloader or boot control HAL.
+> + * stays after struct bootloader_message, which belongs to the vendor
+> + * space of /misc partition. Also, the A/B-specific contents should be
+> + * managed by the A/B-bootloader or boot control HAL.
+>   *
+>   * The slot_suffix field is used for A/B implementations where the
+>   * bootloader does not set the androidboot.ro.boot.slot_suffix kernel
+> @@ -124,12 +172,10 @@ struct bootloader_message_ab {
+>   * Be cautious about the struct size change, in case we put anything pos=
+t
+>   * bootloader_message_ab struct (b/29159185).
+>   */
+> -#ifndef __UBOOT__
+>  #if (__STDC_VERSION__ >=3D 201112L) || defined(__cplusplus)
+>  static_assert(sizeof(struct bootloader_message_ab) =3D=3D 4096,
+>                "struct bootloader_message_ab size changes");
+>  #endif
+> -#endif /* __UBOOT__ */
+>
+>  #define BOOT_CTRL_MAGIC   0x42414342 /* Bootloader Control AB */
+>  #define BOOT_CTRL_VERSION 1
+> @@ -165,11 +211,13 @@ struct bootloader_control {
+>      // Version of struct being used (see BOOT_CTRL_VERSION).
+>      uint8_t version;
+>      // Number of slots being managed.
+> -    uint8_t nb_slot : 3;
+> +    uint16_t nb_slot : 3;
+>      // Number of times left attempting to boot recovery.
+> -    uint8_t recovery_tries_remaining : 3;
+> +    uint16_t recovery_tries_remaining : 3;
+> +    // Status of any pending snapshot merge of dynamic partitions.
+> +    uint16_t merge_status : 3;
+>      // Ensure 4-bytes alignment for slot_info field.
+> -    uint8_t reserved0[2];
+> +    uint8_t reserved0[1];
+>      // Per-slot information.  Up to 4 slots.
+>      struct slot_metadata slot_info[4];
+>      // Reserved for further use.
+> @@ -179,25 +227,46 @@ struct bootloader_control {
+>      uint32_t crc32_le;
+>  } __attribute__((packed));
+>
+> -#ifndef __UBOOT__
+>  #if (__STDC_VERSION__ >=3D 201112L) || defined(__cplusplus)
+>  static_assert(sizeof(struct bootloader_control) =3D=3D
+>                sizeof(((struct bootloader_message_ab *)0)->slot_suffix),
+>                "struct bootloader_control has wrong size");
+> +static_assert(sizeof(struct misc_virtual_ab_message) =3D=3D 64,
+> +              "struct misc_virtual_ab_message has wrong size");
+> +static_assert(sizeof(struct misc_memtag_message) =3D=3D 64,
+> +              "struct misc_memtag_message has wrong size");
+> +static_assert(sizeof(struct misc_kcmdline_message) =3D=3D 64,
+> +              "struct misc_kcmdline_message has wrong size");
+>  #endif
+> -#endif /* __UBOOT__ */
+>
+>  #ifndef __UBOOT__
+> +
+> +// This struct is not meant to be used directly, rather, it is to make
+> +// computation of offsets easier. New fields must be added to the end.
+> +struct misc_system_space_layout {
+> +  misc_virtual_ab_message virtual_ab_message;
+> +  misc_memtag_message memtag_message;
+> +  misc_kcmdline_message kcmdline_message;
+> +} __attribute__((packed));
+> +
+>  #ifdef __cplusplus
+>
+>  #include <string>
+>  #include <vector>
+>
+> +// Gets the block device name of /misc partition.
+> +std::string get_misc_blk_device(std::string* err);
+> +
+>  // Return the block device name for the bootloader message partition and=
+ waits
+>  // for the device for up to 10 seconds. In case of error returns the emp=
+ty
+>  // string.
+>  std::string get_bootloader_message_blk_device(std::string* err);
+>
+> +// Writes |size| bytes of data from buffer |p| to |misc_blk_device| at |=
+offset|. If the write fails,
+> +// sets the error message in |err|.
+> +bool write_misc_partition(const void* p, size_t size, const std::string&=
+ misc_blk_device,
+> +                          size_t offset, std::string* err);
+> +
+>  // Read bootloader message into boot. Error message will be set in err.
+>  bool read_bootloader_message(bootloader_message* boot, std::string* err)=
+;
+>
+> @@ -242,6 +311,17 @@ bool read_wipe_package(std::string* package_data, si=
+ze_t size, std::string* err)
+>  // Write the wipe package into BCB (to offset WIPE_PACKAGE_OFFSET_IN_MIS=
+C).
+>  bool write_wipe_package(const std::string& package_data, std::string* er=
+r);
+>
+> +// Read or write the Virtual A/B message from system space in /misc.
+> +bool ReadMiscVirtualAbMessage(misc_virtual_ab_message* message, std::str=
+ing* err);
+> +bool WriteMiscVirtualAbMessage(const misc_virtual_ab_message& message, s=
+td::string* err);
+> +
+> +// Read or write the memtag message from system space in /misc.
+> +bool ReadMiscMemtagMessage(misc_memtag_message* message, std::string* er=
+r);
+> +bool WriteMiscMemtagMessage(const misc_memtag_message& message, std::str=
+ing* err);
+> +
+> +// Read or write the kcmdline message from system space in /misc.
+> +bool ReadMiscKcmdlineMessage(misc_kcmdline_message* message, std::string=
+* err);
+> +bool WriteMiscKcmdlineMessage(const misc_kcmdline_message& message, std:=
+:string* err);
 
-Error: Invalid ACK (4) in DAP response
-Polling target uscale.a53.0 failed, trying to reexamine
-Error: Invalid ACK (0) in DAP response
-Error: Could not initialize the APB-AP
-Examination failed, GDB will be halted. Polling again in 100ms
-Error: Invalid ACK (0) in DAP response
-Polling target uscale.a53.0 failed, trying to reexamine
-Error: Invalid ACK (0) in DAP response
-Error: Could not initialize the APB-AP
-Examination failed, GDB will be halted. Polling again in 300ms
-Error: Invalid ACK (0) in DAP response
-Polling target uscale.a53.0 failed, trying to reexamine
-Error: Invalid ACK (0) in DAP response
-Error: Could not initialize the APB-AP
-Examination failed, GDB will be halted. Polling again in 700ms
-Error: Invalid ACK (0) in DAP response
+AFAIU, these new prototypes brought by this patch don't have actual
+implementation yet. Does it affect the build somehow, e.g. maybe
+causing some build warnings? Or is the build log clean?
 
-OpenOCD is far from stable but it does something.
-
-Thanks,
-Michal
-
-
-
-
-
-
+>  #else
+>
+>  #include <stdbool.h>
+> --
+> 2.34.1
+>
