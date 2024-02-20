@@ -4,73 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 861E7C48BC3
-	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 08:40:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 731D9C48BC3
+	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 08:49:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 36C2687BB3;
-	Tue, 20 Feb 2024 09:39:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id CEE6587F6F;
+	Tue, 20 Feb 2024 09:49:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="N6z2547k";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="OoesVVv+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Q8gpwhq4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 354C887FB9; Tue, 20 Feb 2024 09:39:47 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7D67E87F88; Tue, 20 Feb 2024 09:49:33 +0100 (CET)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 713B087F79
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 09:39:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A315B87F1F
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 09:49:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4TfCVx2Kw6z9scC;
- Tue, 20 Feb 2024 09:39:05 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1708418345;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=Mn3SQVWEQhem2TKfWn0P6peJemOFGmfLQ/0BBk48PnE=;
- b=N6z2547kV2ta/YnCtPw43HCnF5K8jYnUWrd2rNk8kGiqKfSB3SQ7u+SDQ9BiAoBQWT4oaR
- aFGMj6lxecCxhh3O+t6X4zVwtEexmoid2OgZmS7Eu3bKgWMhG9XuIJPOLL0C3bklcPJbxU
- o2zhGvBVUUs/Q9BqTsvmbYqCI0nCbUGf5Hbc+aOx+RG/GHwqKrAv1zFj1L99CS5kkJ2uF/
- 6yZvsZjn6Joq4LO4Sb8bJXOT/FNvcF1JfUp1yCETGm/1IrL1XK9D2Su9V7W3B130MeibWO
- b3TDwKw+vDUrk35f6xZ5FqeuLh8B99KCbBVIVEoirzhWa6ccEIekxe0z9udfDw==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1708418343;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=Mn3SQVWEQhem2TKfWn0P6peJemOFGmfLQ/0BBk48PnE=;
- b=OoesVVv+2JCW58OWB7nlYe7tzt8LQPolo/xq+3TDUxOIf2p6PZR68lIRQZOoYSrJyT3kwt
- 8B5qXYU48mviyLxNcJuJgeTyXNuyQSVfpxlYH0O9RvCsxtcdu8B0NMTZvpx2FXz6ZoRJAL
- zivIsTniqbDZEcOyKsmqve54NI10KwrvVp7TW8sxcXq6SDJeu1S/xwceeL8+tvSt1Ibxla
- 4vjefvl2lG3kr6irtJHsP9Le5vG3Ytifu/c2gz0JpcPf0+37ZG0J/gmvzZA+Obffy4yNkC
- bro1VylrIUOCvqm7rVVRkd1Kz7eemdtB8nN6Lg7QiK9lvmyuBEyzNQvp2I27dg==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Hai Pham <hai.pham.ud@renesas.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>, Peng Fan <peng.fan@nxp.com>,
- Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>,
- Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
-Subject: [PATCH] mmc: renesas-sdhi: Stop transmission in case tuning block
- transfer fails
-Date: Tue, 20 Feb 2024 09:38:45 +0100
-Message-ID: <20240220083853.34497-1-marek.vasut+renesas@mailbox.org>
+ spf=pass smtp.mailfrom=dan.carpenter@linaro.org
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-a34c5ca2537so663117566b.0
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 00:49:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1708418967; x=1709023767; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=N3vsrnUic6rkR+ZQyCDkb8Qk5auCLUffNYRU+wK6mHY=;
+ b=Q8gpwhq4xGR/vTIdiG8o9Fu9vr8x2eZCWlpr944NrIhRnYIA9RQLGF70YcEk41QeA1
+ bpR+UFUpbccKTcEtPz81x8xuuW/5aRyJY/ISULLif1gcTjdRKF+gckHtWUhnIzV6txJc
+ T5cyXSZHFcid0HDnPhmacfCXU07KlVEdLVHn5q7fyzMaakywbENxeJZcEQjIYtCBmQsW
+ az5tVDtl2juWnjjxTcgOiDQ+CayR1h5rCNYKaRitZOiDz+392Gfy2d5t/wTD9/OHavdD
+ vNIjBxOe1I39GOMo22RMlJZCGacVPHzqWjtza3xXjXR1VNZcI3fE3qhtFF8NPtibct1K
+ qF6Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1708418967; x=1709023767;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=N3vsrnUic6rkR+ZQyCDkb8Qk5auCLUffNYRU+wK6mHY=;
+ b=fXTBezyOy4VVD4CK4qaz5KOXSzh/ZCX/QqAjY2HFGRb6WRlTYrbw/bv+HtBw3FUXyK
+ Zn13hAFoa901iQEdwNkiafdk+yRx+Lks4wLfySyHxIUv2SgyIJ+JOA19dCK2bMk8h+mB
+ EOY7s1XIsfpKloNZm0/OV7CdhrdKoVaogneK+PHbYBpRpTZ83TyogLVxx4oEu5i6zegv
+ ueBfjOZwF/fZnbvwl754EUWBxp6BWAM/3NtXrE2Gsr7dObWry9DoFYF+vneYX92EgmqF
+ luy9Om8qBfiwEbV1+RNKQsxKqt+S8JwJ0bu2GgspvXZo76z5QNO7olMGr2+OoDtTC88N
+ Z7Vg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVNHB+L7quNaPpayPPPGt6FZwOvBoWJnXKh6UrGOtaqYzZegXO45akukmJYDn0NNLeJWLOSCCSHrkz7cPn/KRwmtfNj3A==
+X-Gm-Message-State: AOJu0Yyv+n00aM3L07WL334Nwra/fgE4PcZqyh1h1RJIyUSp4nQvLgLJ
+ uu103tpjcX6HFlIMqNfKvQHZksTH/bNSiCy7ncqxCSZpjpJiS4ygfTQ4ogU1pz0=
+X-Google-Smtp-Source: AGHT+IG+n+lplBYWbHSqKuCaOeEkqotAWBl+NE8L2SS9AA9+WDd5Bj8HxeJydRdBunUKcai0uR9NnQ==
+X-Received: by 2002:a17:906:8cf:b0:a3e:aadd:f962 with SMTP id
+ o15-20020a17090608cf00b00a3eaaddf962mr2976962eje.62.1708418966816; 
+ Tue, 20 Feb 2024 00:49:26 -0800 (PST)
+Received: from localhost ([102.222.70.76]) by smtp.gmail.com with ESMTPSA id
+ vi10-20020a170907d40a00b00a3e7713dcbesm2255333ejc.39.2024.02.20.00.49.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 20 Feb 2024 00:49:26 -0800 (PST)
+Date: Tue, 20 Feb 2024 11:49:22 +0300
+From: Dan Carpenter <dan.carpenter@linaro.org>
+To: Frieder Schrempf <frieder.schrempf@kontron.de>
+Cc: Frieder Schrempf <frieder@fris.de>, Fabio Estevam <festevam@gmail.com>,
+ Stefano Babic <sbabic@denx.de>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de, Christian Hewitt <christianshewitt@gmail.com>,
+ FUKAUMI Naoki <naoki@radxa.com>, Hai Pham <hai.pham.ud@renesas.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, Marek Vasut <marex@denx.de>,
+ Martyn Welch <martyn.welch@collabora.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tianling Shen <cnsztl@gmail.com>
+Subject: Re: [PATCH v3 2/3] board: Add support for Sielaff i.MX6 Solo board
+Message-ID: <232c2a37-4266-41d6-a806-4d807a11c41e@moroto.mountain>
+References: <20240215133527.216126-1-frieder@fris.de>
+ <20240215133527.216126-2-frieder@fris.de>
+ <1a3b311d-0f5d-4f2e-a9f7-da0ec0c4f60b@moroto.mountain>
+ <847f8bd9-000b-4005-b6e3-2075b72191d0@kontron.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: tt39m3f8zpp38i5wzqiamj5qfuko49kw
-X-MBO-RS-ID: 49055c505b11522c630
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <847f8bd9-000b-4005-b6e3-2075b72191d0@kontron.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,70 +106,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The current code uses the state of tuning block received by SCC to
-determine whether or not to send transmission stop command. This is
-not correct. Use the state of tuning block transfer to determine
-whether or not to send transmission stop command instead, because
-the transmission stop command has to be sent in case the tuning
-block transfer failed.
+On Tue, Feb 20, 2024 at 09:38:01AM +0100, Frieder Schrempf wrote:
+> Hi Dan,
+> 
+> On 20.02.24 06:56, Dan Carpenter wrote:
+> > On Thu, Feb 15, 2024 at 02:35:20PM +0100, Frieder Schrempf wrote:
+> >> +int board_mmc_getcd(struct mmc *mmc)
+> > 
+> > This function is never called.  Also for bool functions make them type
+> > bool and name them so that it's clear they return true/false such as
+> > board_mmc_getcd_was_successful() but less wordy.
+> 
+> What makes you think so? This is an implementation for the existing
+> prototype from mmc.h. As far as I can see this is called by the mmc
+> driver and I can't change it in any way.
+> 
 
-This requires two changes, separate variable to store and check the
-state of tuning block received by SCC, and another separate variable
-to store and check return value from transmission stop command.
+Ah, yes.  You're right.  My bad.
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Hai Pham <hai.pham.ud@renesas.com>
-Cc: Jaehoon Chung <jh80.chung@samsung.com>
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-Cc: Peng Fan <peng.fan@nxp.com>
-Cc: Sean Anderson <seanga2@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
----
- drivers/mmc/renesas-sdhi.c | 14 +++++++-------
- 1 file changed, 7 insertions(+), 7 deletions(-)
-
-diff --git a/drivers/mmc/renesas-sdhi.c b/drivers/mmc/renesas-sdhi.c
-index 316b75b35fe..c4d0733b621 100644
---- a/drivers/mmc/renesas-sdhi.c
-+++ b/drivers/mmc/renesas-sdhi.c
-@@ -568,8 +568,8 @@ int renesas_sdhi_execute_tuning(struct udevice *dev, uint opcode)
- 	struct mmc *mmc = upriv->mmc;
- 	unsigned int tap_num;
- 	unsigned int taps = 0;
--	int i, ret = 0;
--	u32 caps;
-+	int i, ret = 0, sret;
-+	u32 caps, reg;
- 
- 	/* Only supported on Renesas RCar */
- 	if (!(priv->caps & TMIO_SD_CAP_RCAR_UHS))
-@@ -612,8 +612,8 @@ int renesas_sdhi_execute_tuning(struct udevice *dev, uint opcode)
- 		if (ret == 0)
- 			taps |= BIT(i);
- 
--		ret = renesas_sdhi_compare_scc_data(priv);
--		if (ret == 0)
-+		reg = renesas_sdhi_compare_scc_data(priv);
-+		if (reg == 0)
- 			priv->smpcmp |= BIT(i);
- 
- 		mdelay(1);
-@@ -624,9 +624,9 @@ int renesas_sdhi_execute_tuning(struct udevice *dev, uint opcode)
- 		 * eMMC.
- 		 */
- 		if (ret && (opcode == MMC_CMD_SEND_TUNING_BLOCK_HS200)) {
--			ret = mmc_send_stop_transmission(mmc, false);
--			if (ret < 0)
--				dev_dbg(dev, "Tuning abort fail (%d)\n", ret);
-+			sret = mmc_send_stop_transmission(mmc, false);
-+			if (sret < 0)
-+				dev_dbg(dev, "Tuning abort fail (%d)\n", sret);
- 		}
- 	}
- 
--- 
-2.43.0
+regards,
+dan carpenter
 
