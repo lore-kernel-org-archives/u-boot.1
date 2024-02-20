@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E357C5475B
-	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 13:34:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EF6DC5475B
+	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 13:36:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 97A9C87EAD;
-	Tue, 20 Feb 2024 14:34:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DDFF587F9B;
+	Tue, 20 Feb 2024 14:36:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DU+9N+nQ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="v1jko5st";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E782987D74; Tue, 20 Feb 2024 14:34:39 +0100 (CET)
-Received: from mail-vs1-xe31.google.com (mail-vs1-xe31.google.com
- [IPv6:2607:f8b0:4864:20::e31])
+ id B3ECF87F9B; Tue, 20 Feb 2024 14:36:20 +0100 (CET)
+Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
+ [IPv6:2607:f8b0:4864:20::c35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B922787F52
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 14:34:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BDCBD87D72
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 14:36:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vs1-xe31.google.com with SMTP id
- ada2fe7eead31-4704c69a3d9so440952137.2
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 05:34:31 -0800 (PST)
+Received: by mail-oo1-xc35.google.com with SMTP id
+ 006d021491bc7-5a00b5e78adso11988eaf.0
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 05:36:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708436070; x=1709040870; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=W3+KMQRh4vU8vAY5b2uLWXEKyISabds93gB2twbvB+c=;
- b=DU+9N+nQbPSG+RdfM6ED4Jk5jGtBRdhW1d53g05Gr7EW9D2t/Y3uT8RSt/X84jS08C
- fP8j36EaNqE9zTXRNmFZnSTMjePlhd/JiBpt2z/FV5WBjGQob/78IGsS3PVsus2e1476
- v3OsfKqLozSsqWe9JHWLxEul7uJVyJW1L/Sl8K9q4buLe00lYBiza3mvjdZNXYAnuuzW
- B5bFDMTMrwnYnIYpu+88KruoiKwhY1p+MyU2ptkil+/e2BiTDErHXj9l57sgIH69euTx
- dR/VzuzJ27NIc28FmtRh5+RA1jUmYWUiTbIsDxEimNhCcZwcAZzMDBw1mpoBBmGDnKOB
- u2Aw==
+ d=linaro.org; s=google; t=1708436163; x=1709040963; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=noORKPFv+rQdtdH/NhcKa9ybSVdfJgbtV5xfDHrUIjs=;
+ b=v1jko5stxsd7k01ApfxuvciLLeA6ESGHFsCmvzuCFEbp06FA5gLjbGQNbEkiFWIVBf
+ AxGREtVS+PKNys1vH8y7dhiCycqY/w8D2k92i1Sv/uMekT4c0XgP5hAVARCmoXHnFZAJ
+ lZWCLy036deJEXFegNKATdW/0AXjvuXxHEdmG/9XOdYF0UJtq6lgrjKsJ6EvM7jnJfxK
+ 1/WzqPkIMdhIDBwSWP5XYly6eCtD6P7vwW2I17BiO4eWJ3kPGHOtiSO0LB9TnuBDIdqt
+ Az0HTN4N2dPh7OIUYOtvx41DqgPfdageoJuXmgsadB6d3iyZsqAZ/Tf3O29sa0Sxa0L4
+ IHXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708436070; x=1709040870;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=W3+KMQRh4vU8vAY5b2uLWXEKyISabds93gB2twbvB+c=;
- b=j3S25ESnZHq6fmByWKZ2sreW0Bt/spnzxpIExDjlbUwzsN08KjNo/0Y6HqFx6mqKMg
- /J2qZ6JYLQHOiIm2EhqrhwDTHAqH6NgdKAeKWn3XtTxKpmDw2uOb1CsXMAzEpGwrH/3G
- IU7xK8xcDUeHyG7yrcjJxR1K9bt66O1bTrI/NNQyKyJycbAHZ86X3tgGZKsBNFLxzD3X
- 93uUR+6cxrwDpzUwXkogMkvqQVgPMydIE4HRz4o6Me8w4Qg0QtS4rpE33jj0UcJHedl7
- aeSwujNfIF54dwslQwv66TcAaIeTgNRntp397gcdJO4TAE7HsMCxAKJJAyY9hSYjykD2
- CfcQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWvxXN+7MHPh2Qdaiygzj9T+Jb0ktzfRQuMCJQPrdu4dPZT6Sd5T7RqKEP2a4/S2pJH8xNBOU+dB3PAk4gdQWYBMjCzZg==
-X-Gm-Message-State: AOJu0YxAEzkXjJwELZJI7kwVqwT3uhOnhr81vzDTpzHwQm+ToQTjleUe
- Qw+EtBsMJccUzy33tzHMz2HOK7ood9UsTuGJdDE07bnBoOI9OX5JzxUAdjwqvfjlL0UiR9ipN0C
- ALwJKCsNlq3oOPNWlLEaiYuJXHXkm+79aBikC8g==
-X-Google-Smtp-Source: AGHT+IHgxu84eeJkf8JnpPqLtnt+W+uAE9KWFZjSCpKe9agxlEsVzJvCpdJ5jxXH+pj19jvCGGtfeC78Br4ZHM0onVE=
-X-Received: by 2002:a05:6102:2926:b0:470:4969:b35 with SMTP id
- cz38-20020a056102292600b0047049690b35mr7688463vsb.31.1708436070517; Tue, 20
- Feb 2024 05:34:30 -0800 (PST)
-MIME-Version: 1.0
-References: <20240215-b4-qcom-common-target-v4-0-ed06355c634a@linaro.org>
- <20240215-b4-qcom-common-target-v4-21-ed06355c634a@linaro.org>
-In-Reply-To: <20240215-b4-qcom-common-target-v4-21-ed06355c634a@linaro.org>
+ d=1e100.net; s=20230601; t=1708436163; x=1709040963;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=noORKPFv+rQdtdH/NhcKa9ybSVdfJgbtV5xfDHrUIjs=;
+ b=ZpM9Thfoq35rWRIhgxRuIl+kZJxgtQxPeZaY4YUYOXumkTuasOOkUoshsvF8MMJofn
+ N04iwR63NL9VFwxMWLLciwiHYDY2PTF46govOgE1tJQ7mozUni5E8fpwq65fmJherJuo
+ 71FS7sacne3+c1JE9bQ2EswJFRPVdHkvjYiT++ilOh/Bbe/FRUxR/4jEndaHJSBLl75v
+ dWw7NCp83FSw8XBdra/SNPJCPzJ9vbMUrC+NexqKKC+yUUwCgROUYvuxDSI70BxDQRZi
+ lMlhWOuAcqPR8btfpx+Uxv1iSeZehUucIH2LhArtlLEglju11WQDWrYNfcEARbesMaXz
+ Y+vw==
+X-Gm-Message-State: AOJu0YzOvQhfC3nsvcdiKilpnyZ6Xe89G1taFJmD73TYmDzUoi5SoQ3q
+ Zzb6XBBMWKqhFSgonUWEhn+OvhutCviiD9NQ61lSVfKq0+dQaxD9e4zF2PtOeT8xOrbpXqqt/2n
+ g
+X-Google-Smtp-Source: AGHT+IE9Gv4oailSbB78RYzCW1edC6gGrCtxruCDGYaiyFhziBWQsBXM3gCJhOkY2G7uVcOJ8uisvg==
+X-Received: by 2002:a05:6a00:4e57:b0:6e4:5a4a:cea4 with SMTP id
+ gu23-20020a056a004e5700b006e45a4acea4mr5349821pfb.19.1708434693808; 
+ Tue, 20 Feb 2024 05:11:33 -0800 (PST)
+Received: from sumit-X1.. ([223.178.209.148]) by smtp.gmail.com with ESMTPSA id
+ y12-20020aa79e0c000000b006e3e72a4f87sm5195902pfq.0.2024.02.20.05.11.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 20 Feb 2024 05:11:33 -0800 (PST)
 From: Sumit Garg <sumit.garg@linaro.org>
-Date: Tue, 20 Feb 2024 19:04:19 +0530
-Message-ID: <CAFA6WYMK+sb-sdQp2nswHhg2GSxczCziqp-Q2n+fZCrRs8q1NA@mail.gmail.com>
-Subject: Re: [PATCH v4 21/39] mach-snapdragon: dynamic load addresses
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- Ramon Fried <rfried.dev@gmail.com>, 
- Dzmitry Sankouski <dsankouski@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
- Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+To: u-boot@lists.denx.de
+Cc: marcel.ziswiler@toradex.com, trini@konsulko.com, lukma@denx.de,
+ seanga2@gmail.com, jh80.chung@samsung.com, festevam@denx.de,
+ andrejs.cainikovs@toradex.com, sjg@chromium.org, peng.fan@nxp.com,
+ aford173@gmail.com, marex@denx.de, ilias.apalodimas@linaro.org,
+ sahaj.sarup@linaro.org, fathi.boudra@linaro.org, remi.duraffort@linaro.org,
+ daniel.thompson@linaro.org, Sumit Garg <sumit.garg@linaro.org>
+Subject: [PATCH 4/7] imx8mp: power-domain: Expose high performance PLL clock
+Date: Tue, 20 Feb 2024 18:40:53 +0530
+Message-Id: <20240220131056.2962331-5-sumit.garg@linaro.org>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240220131056.2962331-1-sumit.garg@linaro.org>
+References: <20240220131056.2962331-1-sumit.garg@linaro.org>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,105 +96,142 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 16 Feb 2024 at 02:22, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->
-> Heavily inspired by Apple board code. Use the LMB allocator to configure
-> load addresses at runtime, and implement a lookup table for selecting a
-> devicetree.
->
-> As some Qualcomm RBx boards have different RAM capacities and base
-> addresses, it isn't possible to hardcode these regions.
->
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->  arch/arm/Kconfig                                 |  1 +
->  arch/arm/mach-snapdragon/board.c                 | 34 ++++++++++++++++++++++++
->  board/qualcomm/dragonboard410c/dragonboard410c.c |  2 +-
->  3 files changed, 36 insertions(+), 1 deletion(-)
->
+PCIe PHY can use it when there is no external refclock provided.
 
-Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
+Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+---
+ drivers/power/domain/imx8mp-hsiomix.c | 79 +++++++++++++++++++++++++--
+ 1 file changed, 73 insertions(+), 6 deletions(-)
 
--Sumit
+diff --git a/drivers/power/domain/imx8mp-hsiomix.c b/drivers/power/domain/imx8mp-hsiomix.c
+index 62145e0261b..4cefe642724 100644
+--- a/drivers/power/domain/imx8mp-hsiomix.c
++++ b/drivers/power/domain/imx8mp-hsiomix.c
+@@ -9,6 +9,8 @@
+ #include <dm.h>
+ #include <dm/device.h>
+ #include <dm/device_compat.h>
++#include <linux/bitfield.h>
++#include <linux/delay.h>
+ #include <power-domain-uclass.h>
+ 
+ #include <dt-bindings/power/imx8mp-power.h>
+@@ -18,6 +20,15 @@
+ #define  USB_CLOCK_MODULE_EN	BIT(1)
+ #define  PCIE_PHY_APB_RST	BIT(4)
+ #define  PCIE_PHY_INIT_RST	BIT(5)
++#define GPR_REG1		0x4
++#define  PLL_LOCK		BIT(13)
++#define GPR_REG2		0x8
++#define  P_PLL_MASK		GENMASK(5, 0)
++#define  M_PLL_MASK		GENMASK(15, 6)
++#define  S_PLL_MASK		GENMASK(18, 16)
++#define GPR_REG3		0xc
++#define  PLL_CKE		BIT(17)
++#define  PLL_RST		BIT(31)
+ 
+ struct imx8mp_hsiomix_priv {
+ 	void __iomem *base;
+@@ -31,6 +42,53 @@ struct imx8mp_hsiomix_priv {
+ 	struct power_domain pd_pcie_phy;
+ };
+ 
++static int hsio_pll_enable(struct udevice *dev)
++{
++	struct imx8mp_hsiomix_priv *priv = dev_get_priv(dev);
++	unsigned long start;
++	u32 val;
++
++	/* Setup HSIO PLL */
++	val = readl(priv->base + GPR_REG2);
++	val &= ~(P_PLL_MASK | M_PLL_MASK | S_PLL_MASK);
++	val |= (FIELD_PREP(P_PLL_MASK, 12) | FIELD_PREP(M_PLL_MASK, 800) |
++		FIELD_PREP(S_PLL_MASK, 4));
++	writel(val, priv->base + GPR_REG2);
++
++	/* de-assert PLL reset */
++	setbits_le32(priv->base + GPR_REG3, PLL_RST);
++
++	/* enable PLL */
++	setbits_le32(priv->base + GPR_REG3, PLL_CKE);
++
++	/* Check if PLL is locked */
++	start = get_timer(0);
++	for (;;) {
++		if (readl(priv->base + GPR_REG1) & PLL_LOCK)
++			break;
++
++		if (get_timer(start) > 100) {
++			dev_err(dev, "failed to lock HSIO PLL\n");
++			return -ETIMEDOUT;
++		}
++
++		udelay(10);
++	}
++
++	return 0;
++}
++
++static void hsio_pll_disable(struct udevice *dev)
++{
++	struct imx8mp_hsiomix_priv *priv = dev_get_priv(dev);
++
++	/* de-assert PLL reset */
++	clrbits_le32(priv->base + GPR_REG3, PLL_RST);
++
++	/* enable PLL */
++	clrbits_le32(priv->base + GPR_REG3, PLL_CKE);
++}
++
+ static int imx8mp_hsiomix_on(struct power_domain *power_domain)
+ {
+ 	struct udevice *dev = power_domain->dev;
+@@ -69,16 +127,23 @@ static int imx8mp_hsiomix_on(struct power_domain *power_domain)
+ 	if (ret)
+ 		goto err_clk_pcie;
+ 
+-	if (power_domain->id == IMX8MP_HSIOBLK_PD_USB)
++	if (power_domain->id == IMX8MP_HSIOBLK_PD_USB) {
+ 		setbits_le32(priv->base + GPR_REG0, USB_CLOCK_MODULE_EN);
+-	else if (power_domain->id == IMX8MP_HSIOBLK_PD_PCIE)
++	} else if (power_domain->id == IMX8MP_HSIOBLK_PD_PCIE) {
+ 		setbits_le32(priv->base + GPR_REG0, PCIE_CLOCK_MODULE_EN);
+-	else if (power_domain->id == IMX8MP_HSIOBLK_PD_PCIE_PHY)
++	} else if (power_domain->id == IMX8MP_HSIOBLK_PD_PCIE_PHY) {
+ 		setbits_le32(priv->base + GPR_REG0, PCIE_PHY_APB_RST |
+ 						    PCIE_PHY_INIT_RST);
+ 
++		ret = hsio_pll_enable(dev);
++		if (ret)
++			goto err_hsio_pll;
++	}
++
+ 	return 0;
+ 
++err_hsio_pll:
++	clk_disable(&priv->clk_pcie);
+ err_clk_pcie:
+ 	clk_disable(&priv->clk_usb);
+ err_clk_usb:
+@@ -93,13 +158,15 @@ static int imx8mp_hsiomix_off(struct power_domain *power_domain)
+ 	struct udevice *dev = power_domain->dev;
+ 	struct imx8mp_hsiomix_priv *priv = dev_get_priv(dev);
+ 
+-	if (power_domain->id == IMX8MP_HSIOBLK_PD_USB)
++	if (power_domain->id == IMX8MP_HSIOBLK_PD_USB) {
+ 		clrbits_le32(priv->base + GPR_REG0, USB_CLOCK_MODULE_EN);
+-	else if (power_domain->id == IMX8MP_HSIOBLK_PD_PCIE)
++	} else if (power_domain->id == IMX8MP_HSIOBLK_PD_PCIE) {
+ 		clrbits_le32(priv->base + GPR_REG0, PCIE_CLOCK_MODULE_EN);
+-	else if (power_domain->id == IMX8MP_HSIOBLK_PD_PCIE_PHY)
++	} else if (power_domain->id == IMX8MP_HSIOBLK_PD_PCIE_PHY) {
+ 		clrbits_le32(priv->base + GPR_REG0, PCIE_PHY_APB_RST |
+ 						    PCIE_PHY_INIT_RST);
++		hsio_pll_disable(dev);
++	}
+ 
+ 	clk_disable(&priv->clk_usb);
+ 	clk_disable(&priv->clk_pcie);
+-- 
+2.34.1
 
-> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-> index 672577d0ddcc..0dba77f86b49 100644
-> --- a/arch/arm/Kconfig
-> +++ b/arch/arm/Kconfig
-> @@ -1095,6 +1095,7 @@ config ARCH_SNAPDRAGON
->         select OF_SEPARATE
->         select SMEM
->         select SPMI
-> +       select BOARD_LATE_INIT
->         select OF_BOARD
->         select SAVE_PREV_BL_FDT_ADDR
->         select LINUX_KERNEL_IMAGE_HEADER
-> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-> index a1867852bcca..f445bed3af00 100644
-> --- a/arch/arm/mach-snapdragon/board.c
-> +++ b/arch/arm/mach-snapdragon/board.c
-> @@ -22,6 +22,7 @@
->  #include <linux/bug.h>
->  #include <linux/psci.h>
->  #include <linux/sizes.h>
-> +#include <lmb.h>
->  #include <malloc.h>
->  #include <usb.h>
->
-> @@ -159,6 +160,39 @@ int board_init(void)
->         return 0;
->  }
->
-> +void __weak qcom_late_init(void)
-> +{
-> +}
-> +
-> +#define KERNEL_COMP_SIZE       SZ_64M
-> +
-> +#define addr_alloc(lmb, size) lmb_alloc(lmb, size, SZ_2M)
-> +
-> +/* Stolen from arch/arm/mach-apple/board.c */
-> +int board_late_init(void)
-> +{
-> +       struct lmb lmb;
-> +       u32 status = 0;
-> +
-> +       lmb_init_and_reserve(&lmb, gd->bd, (void *)gd->fdt_blob);
-> +
-> +       /* We need to be fairly conservative here as we support boards with just 1G of TOTAL RAM */
-> +       status |= env_set_hex("kernel_addr_r", addr_alloc(&lmb, SZ_128M));
-> +       status |= env_set_hex("ramdisk_addr_r", addr_alloc(&lmb, SZ_128M));
-> +       status |= env_set_hex("kernel_comp_addr_r", addr_alloc(&lmb, KERNEL_COMP_SIZE));
-> +       status |= env_set_hex("kernel_comp_size", KERNEL_COMP_SIZE);
-> +       status |= env_set_hex("scriptaddr", addr_alloc(&lmb, SZ_4M));
-> +       status |= env_set_hex("pxefile_addr_r", addr_alloc(&lmb, SZ_4M));
-> +       status |= env_set_hex("fdt_addr_r", addr_alloc(&lmb, SZ_2M));
-> +
-> +       if (status)
-> +               log_warning("%s: Failed to set run time variables\n", __func__);
-> +
-> +       qcom_late_init();
-> +
-> +       return 0;
-> +}
-> +
->  static void build_mem_map(void)
->  {
->         int i;
-> diff --git a/board/qualcomm/dragonboard410c/dragonboard410c.c b/board/qualcomm/dragonboard410c/dragonboard410c.c
-> index 0136cc2237de..fbbfc0e65e24 100644
-> --- a/board/qualcomm/dragonboard410c/dragonboard410c.c
-> +++ b/board/qualcomm/dragonboard410c/dragonboard410c.c
-> @@ -88,7 +88,7 @@ int misc_init_r(void)
->         return 0;
->  }
->
-> -int board_late_init(void)
-> +int qcom_late_init(void)
->  {
->         char serial[16];
->
->
-> --
-> 2.43.1
->
