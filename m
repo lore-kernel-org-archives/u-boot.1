@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBB85C5475B
-	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 19:09:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF31BC5475B
+	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 19:15:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 682E687FF8;
-	Tue, 20 Feb 2024 20:09:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=foundries.io
+	by phobos.denx.de (Postfix) with ESMTP id C634588008;
+	Tue, 20 Feb 2024 20:15:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=foundries.io header.i=@foundries.io header.b="Wjcf0k9F";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Lb+gKQHu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F271287FF7; Tue, 20 Feb 2024 20:09:06 +0100 (CET)
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [IPv6:2a00:1450:4864:20::12c])
+ id 2C59788001; Tue, 20 Feb 2024 20:15:05 +0100 (CET)
+Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
+ [IPv6:2a00:1450:4864:20::232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C0FA87FED
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 20:08:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=foundries.io
+ by phobos.denx.de (Postfix) with ESMTPS id 2353487FF6
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 20:15:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=igor.opaniuk@foundries.io
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-512be87a0f3so2293057e87.3
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 11:08:59 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-lj1-x232.google.com with SMTP id
+ 38308e7fff4ca-2d220ad10b3so49817931fa.1
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 11:15:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=foundries.io; s=google; t=1708456138; x=1709060938; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1708456499; x=1709061299; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=rAG+dtshcF+CrFt6eTKcCXk2ycXAy8qxNdsAtjglN0Y=;
- b=Wjcf0k9FCUnZqXIY4QQ+G0YeFIOuLtdVBhHJLugSarczaNm8hzD0JhLXiPX6LyAw1c
- HdAjaXI7G+GRmDQNM3H/rg9reqRHDHTKleIDPTPhrfdY7tpgODtLDVsFYdfNWWDubTaP
- xg9EWg/iXfJssgN0kHUvCD+YASXUOKpUY6ha3gCN4FtUHGI21JkAsl9LTZWa3ZtQ5nFq
- 4o2NKtIXr+ZvaMNCzk3GZNkHIPRwfD2QjBO9b42dO7sR2S/9ZWI8igBKrlKii1rnGHVC
- Pb0byBQFbWl3REorOI74dE4v010wzs4K3Xv8DyJDHy9pBCI+VlbceG6Ri8BmFl2bs6wk
- XK/A==
+ bh=MRgboJSmymKVgxZ1RdekP5U3dGx7PPfsJFn4b7GRj/A=;
+ b=Lb+gKQHuDpPDl6FCEjxcL4VAK5IS1Ez9fyz4xBIfLQhQnOG/FKnYpwc75M4ChpOkCg
+ wqJb1Qe6qUKkU0MpdQN56S216Y1Dy39kbw71TUvIMZai5Ve3aahTIMKvtB5cEd3Oj1Th
+ TZN/cBKw6wNdvbsv6E1dgYvGn7XGFJ+3goIARtuWoBWD7SzmtzbyJ/LhJlRq0/vN8w0Z
+ voNkeO1lMOV0y48hPPEk25jcosyyatXE6MGBOJMrT6g9rEup39XPoLZG4gvUHhl5gz0v
+ 6dddyptxNyvJkRRglbyNlA94y9ijsgLO5BpAEkd8QSSeaaSslO7vYesy+84unADhEfup
+ r5fA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708456138; x=1709060938;
+ d=1e100.net; s=20230601; t=1708456499; x=1709061299;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=rAG+dtshcF+CrFt6eTKcCXk2ycXAy8qxNdsAtjglN0Y=;
- b=V6jXDYTmh3b3kjM93dcmtZH0Xq6Ffy2dM55/ZRC2Eu+lLl//TBjGG2b/rQu5AD1ZGj
- xyjPMrDq3H7yRVa9ilwAe0XOTfIVT5SfLuU/xMx0RaaPhW2+NG3zIXPTiucqU+FgnqIb
- hXXk2TcSYq45au65bKR7oX4KfjnQvIXecbOW1ULwdFTt49/r4COoNhYxUl6Uds7sH4ak
- LgAANK3X4fdU1i1D0ydfcCb3qFs+uLnHdHCrH5iiOAxHGQ1SJpG50cjBhER1xfpz6PE2
- xRFURPJTOeNZjqLxxZ+SIVJVG8fmZdlonzN3l1l4RMgVoOB+E89L2v/5008wnmTsbULQ
- zIfA==
+ bh=MRgboJSmymKVgxZ1RdekP5U3dGx7PPfsJFn4b7GRj/A=;
+ b=YetAiORO4gNQ+tf7LkApERm0lUSNrFo+n3sSJoZNSe2GfCVctISqvS/Yx/0qGoh24Y
+ lgvhh7PI9UNFO4zUNocimvEPmq6w818a/mOKiSpiMSnySuuZ5mvGcChiemwL0NlKIlHT
+ Q6pxrtoNhQZpPFdJYP9SYL7m0dKHrXbEX1+MvxLUKvo8KvAoOsyxAcjbvO3kmDFk8tnw
+ o1W+oROKZWbViABlwMNCY7CnSjDEeA1+sr2SeFBvbnR8lB9lNtFIME27yPut1Nkzes2t
+ jUVU7oj6ZsNLjio3eeuKeAqcEWJh02A3bUD9pqFia2sbUnwgHG3wJaVavsopGnNUP/c/
+ KjqA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVxhwENIgTHmepINEdcpFoEPG58XR+jKlSmJReA7cmc2jP7kQr80iaE2pDpBKfoqiRk3KTEJGuly1X/kIAEhCzhwL2STQ==
-X-Gm-Message-State: AOJu0YzHOd3GOAVaskbvLpjHvIlZ0/NgiT2sRC5W39PitGRKYdcWMAYA
- vAGD4a0nDvWxyHRJM8FEvXH0E6AmAGmk5OOrZNsxGWsxDzXziUs5ZwcOpb31p8WgysnWa6C9iHc
- CP7oDDGv7raW2iQBhaEXbb/yUfEdATmCQKAn87g==
-X-Google-Smtp-Source: AGHT+IGSoVg1Qj+0Fq+68QqkRuN3Lrg5/0nbB2csjGRoKC14z22qut/Xg11UGUWy1kWoQ954lmVmv3nOanguKvNGsSs=
-X-Received: by 2002:a05:6512:b9f:b0:512:acce:3df0 with SMTP id
- b31-20020a0565120b9f00b00512acce3df0mr6142623lfv.8.1708456138142; Tue, 20 Feb
- 2024 11:08:58 -0800 (PST)
+ AJvYcCWFPMYs0flqAWbAigJCW8FjMhvp+wKUvaEv4SAcayx8WlZST65Qfd6KwEwIT6/6Ouot6ngAKVeqEqvZDSZhlcQyWmwGpQ==
+X-Gm-Message-State: AOJu0YxdrId+PMzaBFcS9e7LEHmg2g86BcfodV2vQCxILQNhg3L6lR+B
+ v3WoKtXuBkwZSfKaTnE86odBsmZFxrp9+ayIN+H8BI5dNDjA0TDhao6x9e3ivUp157foOpxmzTK
+ vl9304bVxfXzfhdxTXPZWMOyeguQYV9gn
+X-Google-Smtp-Source: AGHT+IHLDd3CN0ZE3W7SDEEm5ZYaTe7FmN8eQuzZlNDRSSmA/FAYR28ymjxLBZ2kkbpkZYARsw1Pb1Ryxk+gq7+ZDaQ=
+X-Received: by 2002:a2e:9592:0:b0:2d2:3573:27e6 with SMTP id
+ w18-20020a2e9592000000b002d2357327e6mr4808967ljh.35.1708456499005; Tue, 20
+ Feb 2024 11:14:59 -0800 (PST)
 MIME-Version: 1.0
-References: <20240219101559.364553-1-igor.opaniuk@gmail.com>
- <CAPLW+4kB0mJ-dFAkd6s8Lu6rQzSjd7LmBcZJy-YLApO5suUAJA@mail.gmail.com>
-In-Reply-To: <CAPLW+4kB0mJ-dFAkd6s8Lu6rQzSjd7LmBcZJy-YLApO5suUAJA@mail.gmail.com>
-From: Igor Opaniuk <igor.opaniuk@foundries.io>
-Date: Tue, 20 Feb 2024 20:08:46 +0100
-Message-ID: <CAL6CDMHJkgLeAqWtzcXG_XpWwG=ctHzrnHJVshnKaHfKuMs5tw@mail.gmail.com>
-Subject: Re: [PATCH v1] include: android_bootloader_message.h: sync with AOSP
- upstream
-To: Sam Protsenko <semen.protsenko@linaro.org>
-Cc: Igor Opaniuk <igor.opaniuk@gmail.com>, u-boot@lists.denx.de, 
- Eugeniu Rosca <erosca@de.adit-jv.com>, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Alex Deymo <deymo@google.com>
+References: <20240220182926.101161-1-francesco@dolcini.it>
+ <20240220182926.101161-6-francesco@dolcini.it>
+In-Reply-To: <20240220182926.101161-6-francesco@dolcini.it>
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+Date: Tue, 20 Feb 2024 21:14:47 +0200
+Message-ID: <CAPVz0n1oQZR5muRGHFm66hY6jEA8cSVUdJG0t2WTqV=oC6DiEA@mail.gmail.com>
+Subject: Re: [PATCH v1 5/7] toradex: common: Add sysinfo driver
+To: Francesco Dolcini <francesco@dolcini.it>
+Cc: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
+ Tom Rini <trini@konsulko.com>, Thierry Reding <treding@nvidia.com>, 
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, u-boot@lists.denx.de, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -93,334 +95,389 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sam,
+=D0=B2=D1=82, 20 =D0=BB=D1=8E=D1=82. 2024=E2=80=AF=D1=80. =D0=BE 20:29 Fran=
+cesco Dolcini <francesco@dolcini.it> =D0=BF=D0=B8=D1=88=D0=B5:
+>
+> From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
+>
+> This commit introduces support for the Toradex sysinfo driver in U-Boot,
+> which uses information from Toradex config block to print correct
+> board model.
+> In case the Toradex config block is not present sysinfo prints the model
+> of the board provided by device tree removing per board specific prints.
+>
+> Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
+> Signed-off-by: Francesco Dolcini <francesco.dolcini@toradex.com>
+> ---
+>  arch/arm/dts/fsl-imx8qm-apalis-u-boot.dtsi    |  6 +++
+>  arch/arm/dts/fsl-imx8qxp-colibri-u-boot.dtsi  |  6 +++
+>  .../dts/imx6dl-colibri-eval-v3-u-boot.dtsi    |  4 ++
+>  arch/arm/dts/imx6q-apalis-eval-u-boot.dtsi    |  4 ++
+>  .../dts/imx6ull-colibri-eval-v3-u-boot.dtsi   |  4 ++
+>  .../arm/dts/imx7d-colibri-eval-v3-u-boot.dtsi |  4 ++
+>  .../dts/imx8mm-verdin-wifi-dev-u-boot.dtsi    |  4 ++
+>  .../dts/imx8mp-verdin-wifi-dev-u-boot.dtsi    |  4 ++
+>  .../dts/k3-am625-verdin-wifi-dev-u-boot.dtsi  |  4 ++
+>  arch/arm/dts/tegra124-apalis-u-boot.dtsi      | 12 +++++
+>  arch/arm/dts/tegra20-colibri-u-boot.dtsi      | 12 +++++
+>  arch/arm/dts/tegra30-apalis-u-boot.dtsi       | 12 +++++
+>  arch/arm/dts/tegra30-colibri-u-boot.dtsi      | 12 +++++
+>  .../arm/dts/vf610-colibri-eval-v3-u-boot.dtsi |  4 ++
+>  board/toradex/common/Kconfig                  |  1 +
+>  board/toradex/common/tdx-common.c             | 50 ++++++++++++++++---
+>  16 files changed, 136 insertions(+), 7 deletions(-)
+>  create mode 100644 arch/arm/dts/tegra124-apalis-u-boot.dtsi
+>  create mode 100644 arch/arm/dts/tegra20-colibri-u-boot.dtsi
+>  create mode 100644 arch/arm/dts/tegra30-apalis-u-boot.dtsi
+>  create mode 100644 arch/arm/dts/tegra30-colibri-u-boot.dtsi
+>
 
-On Tue, Feb 20, 2024 at 7:29=E2=80=AFPM Sam Protsenko
-<semen.protsenko@linaro.org> wrote:
->
-> On Mon, Feb 19, 2024 at 4:16=E2=80=AFAM Igor Opaniuk <igor.opaniuk@gmail.=
-com> wrote:
-> >
-> > This takes the latest changes from AOSP from [1][2] (as this
-> > header was split on two) with minimal changes (this could lead
-> > to warnings reported by checkpatch).
->
-> Do we want to maybe follow that and also carry two different headers
-> in U-Boot? Or it doesn't make much sense? I'm thinking in terms of
-> future portability mostly: how easy it's to update this header right
-> now, and how easy it's going to be further. I didn't form any opinion
-> on that, hence asking.
-The problem is licensing. android_bootloader_message.h was
-re-licensed by Alex Deymo from Google under BSD-3-Clause,
-which is GPLv2 compatible. I'm not sure it's legally correct to pull
-boot_control_definition.h from AOSP licensed under Apache as a
-separate file.
+Greetings! Thank you for contribution but may you at split patches
+according to SoC vendor at least? For imx, tegra and ti since it
+would be hard to both review and pick them to correct custodian
+trees.
 
+> diff --git a/arch/arm/dts/fsl-imx8qm-apalis-u-boot.dtsi b/arch/arm/dts/fs=
+l-imx8qm-apalis-u-boot.dtsi
+> index c54a59e89c5d..d73be74d2112 100644
+> --- a/arch/arm/dts/fsl-imx8qm-apalis-u-boot.dtsi
+> +++ b/arch/arm/dts/fsl-imx8qm-apalis-u-boot.dtsi
+> @@ -3,6 +3,12 @@
+>   * Copyright 2019 Toradex AG
+>   */
 >
-> Another thing: are you sure that changing only the header won't break
-> anything in U-Boot .c files that use this header?
-
-I've tested both ab_select and avb verify in QEMU. Or do you mean
-something else additionally should be tested?
-
+> +/ {
+> +       sysinfo {
+> +               compatible =3D "toradex,sysinfo";
+> +       };
+> +};
+> +
+>  &mu {
+>         bootph-some-ram;
+>  };
+> diff --git a/arch/arm/dts/fsl-imx8qxp-colibri-u-boot.dtsi b/arch/arm/dts/=
+fsl-imx8qxp-colibri-u-boot.dtsi
+> index 6ab6b1f9ee69..60c4cd6fc01f 100644
+> --- a/arch/arm/dts/fsl-imx8qxp-colibri-u-boot.dtsi
+> +++ b/arch/arm/dts/fsl-imx8qxp-colibri-u-boot.dtsi
+> @@ -3,6 +3,12 @@
+>   * Copyright 2019 Toradex AG
+>   */
 >
-> >
-> > Some local changes have been applied:
+> +/ {
+> +       sysinfo {
+> +               compatible =3D "toradex,sysinfo";
+> +       };
+> +};
+> +
+>  &{/imx8qx-pm} {
 >
-> Is it possible to split this work into two patches:
->   1. Bring the original changes only
->   2. Apply all necessary changes for U-Boot
+>         bootph-some-ram;
+> diff --git a/arch/arm/dts/imx6dl-colibri-eval-v3-u-boot.dtsi b/arch/arm/d=
+ts/imx6dl-colibri-eval-v3-u-boot.dtsi
+> index 0eea4d1862ae..5a91d0aca204 100644
+> --- a/arch/arm/dts/imx6dl-colibri-eval-v3-u-boot.dtsi
+> +++ b/arch/arm/dts/imx6dl-colibri-eval-v3-u-boot.dtsi
+> @@ -16,6 +16,10 @@
+>                 mmc0 =3D &usdhc3;
+>                 mmc1 =3D &usdhc1;
+>         };
+> +
+> +       sysinfo {
+> +               compatible =3D "toradex,sysinfo";
+> +       };
+>  };
 >
-> Or does it break the build, etc? Again, thinking in terms of
-> portability easiness, and not sure which approach is better -- just
-> asking basically.
-Yeah, that's the problem, as splitting this on two commits
-will lead to the first one reporting warnings/notes.
-
+>  &wdog1 {
+> diff --git a/arch/arm/dts/imx6q-apalis-eval-u-boot.dtsi b/arch/arm/dts/im=
+x6q-apalis-eval-u-boot.dtsi
+> index 3c6e503d043b..59412635420a 100644
+> --- a/arch/arm/dts/imx6q-apalis-eval-u-boot.dtsi
+> +++ b/arch/arm/dts/imx6q-apalis-eval-u-boot.dtsi
+> @@ -19,6 +19,10 @@
+>                 mmc1 =3D &usdhc1;
+>                 mmc2 =3D &usdhc2;
+>         };
+> +
+> +       sysinfo {
+> +               compatible =3D "toradex,sysinfo";
+> +       };
+>  };
 >
-> > 1. Enable static_assert() for defined structures to be sure
-> > that all of them have correct sizes.
-> > 2. Adjuste types in bootloader_control structure with bitfields
+>  &wdog1 {
+> diff --git a/arch/arm/dts/imx6ull-colibri-eval-v3-u-boot.dtsi b/arch/arm/=
+dts/imx6ull-colibri-eval-v3-u-boot.dtsi
+> index 6823b42d4514..731814216e1f 100644
+> --- a/arch/arm/dts/imx6ull-colibri-eval-v3-u-boot.dtsi
+> +++ b/arch/arm/dts/imx6ull-colibri-eval-v3-u-boot.dtsi
+> @@ -9,6 +9,10 @@
+>                 usb0 =3D &usbotg1; /* required for ums */
+>                 display0 =3D &lcdif;
+>         };
+> +
+> +       sysinfo {
+> +               compatible =3D "toradex,sysinfo";
+> +       };
+>  };
 >
-> Adjuste -> adjust
-Will fix, thanks!
+>  &pinctrl_uart1 {
+> diff --git a/arch/arm/dts/imx7d-colibri-eval-v3-u-boot.dtsi b/arch/arm/dt=
+s/imx7d-colibri-eval-v3-u-boot.dtsi
+> index b2c12a413daf..68142769d360 100644
+> --- a/arch/arm/dts/imx7d-colibri-eval-v3-u-boot.dtsi
+> +++ b/arch/arm/dts/imx7d-colibri-eval-v3-u-boot.dtsi
+> @@ -11,6 +11,10 @@
+>                 mmc0 =3D &usdhc3;
+>                 mmc1 =3D &usdhc1;
+>         };
+> +
+> +       sysinfo {
+> +               compatible =3D "toradex,sysinfo";
+> +       };
+>  };
 >
-> > (uint8_t -> uint16_t). It seems that gcc just doesn't like bitfields
+>  &lcdif {
+> diff --git a/arch/arm/dts/imx8mm-verdin-wifi-dev-u-boot.dtsi b/arch/arm/d=
+ts/imx8mm-verdin-wifi-dev-u-boot.dtsi
+> index 515f195ab759..38db56059d69 100644
+> --- a/arch/arm/dts/imx8mm-verdin-wifi-dev-u-boot.dtsi
+> +++ b/arch/arm/dts/imx8mm-verdin-wifi-dev-u-boot.dtsi
+> @@ -12,6 +12,10 @@
+>                 eeprom2 =3D &eeprom_display_adapter;
+>         };
 >
-> I wonder if all those extra changes can be upstreamed back to AOSP?
-> Ideally we'd want to just copy those headers over from AOSP to U-Boot
-> with no changes, would make the porting work easier. What are your
-> thoughts on that?
-Technically we can, I was planning to do that.
-
+> +       sysinfo {
+> +               compatible =3D "toradex,sysinfo";
+> +       };
+> +
+>         wdt-reboot {
+>                 compatible =3D "wdt-reboot";
+>                 bootph-pre-ram;
+> diff --git a/arch/arm/dts/imx8mp-verdin-wifi-dev-u-boot.dtsi b/arch/arm/d=
+ts/imx8mp-verdin-wifi-dev-u-boot.dtsi
+> index 67f1d45ce269..03f211d5f7d3 100644
+> --- a/arch/arm/dts/imx8mp-verdin-wifi-dev-u-boot.dtsi
+> +++ b/arch/arm/dts/imx8mp-verdin-wifi-dev-u-boot.dtsi
+> @@ -12,6 +12,10 @@
+>                 eeprom2 =3D &eeprom_display_adapter;
+>         };
 >
-> > that cross the width of the type. Changing the type doesn't change
-> > the layout though.
-> > This addresses this gcc note:
-> > In file included from boot/android_ab.c:7:
-> > include/android_bootloader_message.h:230:1: note: offset of packed bit-=
-field =E2=80=98merge_status=E2=80=99 has changed in GCC 4.4
-> >   230 | } __attribute__((packed));
-> >
-> > [1] https://android.googlesource.com/platform/bootable/recovery/+/main/=
-bootloader_message/include/bootloader_message/bootloader_message.h
-> > [2] https://android.googlesource.com/platform/hardware/interfaces/+/mai=
-n/boot/1.1/default/boot_control/include/private/boot_control_definition.h
-> >
-> > CC: Alex Deymo <deymo@google.com>
-> > CC: Sam Protsenko <semen.protsenko@linaro.org>
-> > CC: Eugeniu Rosca <erosca@de.adit-jv.com>
-> > CC: Simon Glass <sjg@chromium.org>
-> > Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
-> > ---
-> >
-> >  include/android_bootloader_message.h | 104 +++++++++++++++++++++++----
-> >  1 file changed, 92 insertions(+), 12 deletions(-)
-> >
-> > diff --git a/include/android_bootloader_message.h b/include/android_boo=
-tloader_message.h
-> > index 286d7ab0f31..75198fc9dc2 100644
-> > --- a/include/android_bootloader_message.h
-> > +++ b/include/android_bootloader_message.h
-> > @@ -21,17 +21,22 @@
-> >   * stddef.h
-> >   */
-> >  #include <compiler.h>
-> > +#include <linux/build_bug.h>
-> >  #endif
-> >
-> >  // Spaces used by misc partition are as below:
-> >  // 0   - 2K     For bootloader_message
-> >  // 2K  - 16K    Used by Vendor's bootloader (the 2K - 4K range may be =
-optionally used
-> >  //              as bootloader_message_ab struct)
-> > -// 16K - 64K    Used by uncrypt and recovery to store wipe_package for=
- A/B devices
-> > +// 16K - 32K    Used by uncrypt and recovery to store wipe_package for=
- A/B devices
-> > +// 32K - 64K    System space, used for miscellanious AOSP features. Se=
-e below.
-> >  // Note that these offsets are admitted by bootloader,recovery and unc=
-rypt, so they
-> >  // are not configurable without changing all of them.
-> >  static const size_t BOOTLOADER_MESSAGE_OFFSET_IN_MISC =3D 0;
-> > +static const size_t VENDOR_SPACE_OFFSET_IN_MISC =3D 2 * 1024;
-> >  static const size_t WIPE_PACKAGE_OFFSET_IN_MISC =3D 16 * 1024;
-> > +static const size_t SYSTEM_SPACE_OFFSET_IN_MISC =3D 32 * 1024;
-> > +static const size_t SYSTEM_SPACE_SIZE_IN_MISC =3D 32 * 1024;
-> >
-> >  /* Bootloader Message (2-KiB)
-> >   *
-> > @@ -81,24 +86,67 @@ struct bootloader_message {
-> >      char reserved[1184];
-> >  };
-> >
-> > +// Holds Virtual A/B merge status information. Current version is 1. N=
-ew fields
-> > +// must be added to the end.
-> > +struct misc_virtual_ab_message {
-> > +  uint8_t version;
-> > +  uint32_t magic;
-> > +  uint8_t merge_status;  // IBootControl 1.1, MergeStatus enum.
-> > +  uint8_t source_slot;   // Slot number when merge_status was written.
-> > +  uint8_t reserved[57];
-> > +} __attribute__((packed));
-> > +
-> > +struct misc_memtag_message {
-> > +  uint8_t version;
-> > +  uint32_t magic; // magic string for treble compat
-> > +  uint32_t memtag_mode;
-> > +  uint8_t reserved[55];
-> > +} __attribute__((packed));
-> > +
-> > +struct misc_kcmdline_message {
-> > +  uint8_t version;
-> > +  uint32_t magic;
-> > +  uint64_t kcmdline_flags;
-> > +  uint8_t reserved[51];
-> > +} __attribute__((packed));
-> > +
-> > +#define MISC_VIRTUAL_AB_MESSAGE_VERSION 2
-> > +#define MISC_VIRTUAL_AB_MAGIC_HEADER 0x56740AB0
-> > +
-> > +#define MISC_MEMTAG_MESSAGE_VERSION 1
-> > +#define MISC_MEMTAG_MAGIC_HEADER 0x5afefe5a
-> > +#define MISC_MEMTAG_MODE_MEMTAG 0x1
-> > +#define MISC_MEMTAG_MODE_MEMTAG_ONCE 0x2
-> > +#define MISC_MEMTAG_MODE_MEMTAG_KERNEL 0x4
-> > +#define MISC_MEMTAG_MODE_MEMTAG_KERNEL_ONCE 0x8
-> > +#define MISC_MEMTAG_MODE_MEMTAG_OFF 0x10
-> > +// This is set when the state was overridden forcibly. This does not n=
-eed to be
-> > +// interpreted by the bootloader but is only for bookkeeping purposes =
-so
-> > +// userspace knows what to do when the override is undone.
-> > +// See system/extras/mtectrl in AOSP for more information.
-> > +#define MISC_MEMTAG_MODE_FORCED 0x20
-> > +
-> > +#define MISC_KCMDLINE_MESSAGE_VERSION 1
-> > +#define MISC_KCMDLINE_MAGIC_HEADER 0x6ab5110c
-> > +#define MISC_KCMDLINE_BINDER_RUST 0x1
-> >  /**
-> >   * We must be cautious when changing the bootloader_message struct siz=
-e,
-> >   * because A/B-specific fields may end up with different offsets.
-> >   */
-> > -#ifndef __UBOOT__
-> > +
-> >  #if (__STDC_VERSION__ >=3D 201112L) || defined(__cplusplus)
-> >  static_assert(sizeof(struct bootloader_message) =3D=3D 2048,
-> >                "struct bootloader_message size changes, which may break=
- A/B devices");
-> >  #endif
-> > -#endif /* __UBOOT__ */
-> >
-> >  /**
-> >   * The A/B-specific bootloader message structure (4-KiB).
-> >   *
-> >   * We separate A/B boot control metadata from the regular bootloader
-> >   * message struct and keep it here. Everything that's A/B-specific
-> > - * stays after struct bootloader_message, which should be managed by
-> > - * the A/B-bootloader or boot control HAL.
-> > + * stays after struct bootloader_message, which belongs to the vendor
-> > + * space of /misc partition. Also, the A/B-specific contents should be
-> > + * managed by the A/B-bootloader or boot control HAL.
-> >   *
-> >   * The slot_suffix field is used for A/B implementations where the
-> >   * bootloader does not set the androidboot.ro.boot.slot_suffix kernel
-> > @@ -124,12 +172,10 @@ struct bootloader_message_ab {
-> >   * Be cautious about the struct size change, in case we put anything p=
-ost
-> >   * bootloader_message_ab struct (b/29159185).
-> >   */
-> > -#ifndef __UBOOT__
-> >  #if (__STDC_VERSION__ >=3D 201112L) || defined(__cplusplus)
-> >  static_assert(sizeof(struct bootloader_message_ab) =3D=3D 4096,
-> >                "struct bootloader_message_ab size changes");
-> >  #endif
-> > -#endif /* __UBOOT__ */
-> >
-> >  #define BOOT_CTRL_MAGIC   0x42414342 /* Bootloader Control AB */
-> >  #define BOOT_CTRL_VERSION 1
-> > @@ -165,11 +211,13 @@ struct bootloader_control {
-> >      // Version of struct being used (see BOOT_CTRL_VERSION).
-> >      uint8_t version;
-> >      // Number of slots being managed.
-> > -    uint8_t nb_slot : 3;
-> > +    uint16_t nb_slot : 3;
-> >      // Number of times left attempting to boot recovery.
-> > -    uint8_t recovery_tries_remaining : 3;
-> > +    uint16_t recovery_tries_remaining : 3;
-> > +    // Status of any pending snapshot merge of dynamic partitions.
-> > +    uint16_t merge_status : 3;
-> >      // Ensure 4-bytes alignment for slot_info field.
-> > -    uint8_t reserved0[2];
-> > +    uint8_t reserved0[1];
-> >      // Per-slot information.  Up to 4 slots.
-> >      struct slot_metadata slot_info[4];
-> >      // Reserved for further use.
-> > @@ -179,25 +227,46 @@ struct bootloader_control {
-> >      uint32_t crc32_le;
-> >  } __attribute__((packed));
-> >
-> > -#ifndef __UBOOT__
-> >  #if (__STDC_VERSION__ >=3D 201112L) || defined(__cplusplus)
-> >  static_assert(sizeof(struct bootloader_control) =3D=3D
-> >                sizeof(((struct bootloader_message_ab *)0)->slot_suffix)=
-,
-> >                "struct bootloader_control has wrong size");
-> > +static_assert(sizeof(struct misc_virtual_ab_message) =3D=3D 64,
-> > +              "struct misc_virtual_ab_message has wrong size");
-> > +static_assert(sizeof(struct misc_memtag_message) =3D=3D 64,
-> > +              "struct misc_memtag_message has wrong size");
-> > +static_assert(sizeof(struct misc_kcmdline_message) =3D=3D 64,
-> > +              "struct misc_kcmdline_message has wrong size");
-> >  #endif
-> > -#endif /* __UBOOT__ */
-> >
-> >  #ifndef __UBOOT__
-> > +
-> > +// This struct is not meant to be used directly, rather, it is to make
-> > +// computation of offsets easier. New fields must be added to the end.
-> > +struct misc_system_space_layout {
-> > +  misc_virtual_ab_message virtual_ab_message;
-> > +  misc_memtag_message memtag_message;
-> > +  misc_kcmdline_message kcmdline_message;
-> > +} __attribute__((packed));
-> > +
-> >  #ifdef __cplusplus
-> >
-> >  #include <string>
-> >  #include <vector>
-> >
-> > +// Gets the block device name of /misc partition.
-> > +std::string get_misc_blk_device(std::string* err);
-> > +
-> >  // Return the block device name for the bootloader message partition a=
-nd waits
-> >  // for the device for up to 10 seconds. In case of error returns the e=
-mpty
-> >  // string.
-> >  std::string get_bootloader_message_blk_device(std::string* err);
-> >
-> > +// Writes |size| bytes of data from buffer |p| to |misc_blk_device| at=
- |offset|. If the write fails,
-> > +// sets the error message in |err|.
-> > +bool write_misc_partition(const void* p, size_t size, const std::strin=
-g& misc_blk_device,
-> > +                          size_t offset, std::string* err);
-> > +
-> >  // Read bootloader message into boot. Error message will be set in err=
-.
-> >  bool read_bootloader_message(bootloader_message* boot, std::string* er=
-r);
-> >
-> > @@ -242,6 +311,17 @@ bool read_wipe_package(std::string* package_data, =
-size_t size, std::string* err)
-> >  // Write the wipe package into BCB (to offset WIPE_PACKAGE_OFFSET_IN_M=
-ISC).
-> >  bool write_wipe_package(const std::string& package_data, std::string* =
-err);
-> >
-> > +// Read or write the Virtual A/B message from system space in /misc.
-> > +bool ReadMiscVirtualAbMessage(misc_virtual_ab_message* message, std::s=
-tring* err);
-> > +bool WriteMiscVirtualAbMessage(const misc_virtual_ab_message& message,=
- std::string* err);
-> > +
-> > +// Read or write the memtag message from system space in /misc.
-> > +bool ReadMiscMemtagMessage(misc_memtag_message* message, std::string* =
-err);
-> > +bool WriteMiscMemtagMessage(const misc_memtag_message& message, std::s=
-tring* err);
-> > +
-> > +// Read or write the kcmdline message from system space in /misc.
-> > +bool ReadMiscKcmdlineMessage(misc_kcmdline_message* message, std::stri=
-ng* err);
-> > +bool WriteMiscKcmdlineMessage(const misc_kcmdline_message& message, st=
-d::string* err);
+> +       sysinfo {
+> +               compatible =3D "toradex,sysinfo";
+> +       };
+> +
+>         wdt-reboot {
+>                 compatible =3D "wdt-reboot";
+>                 bootph-pre-ram;
+> diff --git a/arch/arm/dts/k3-am625-verdin-wifi-dev-u-boot.dtsi b/arch/arm=
+/dts/k3-am625-verdin-wifi-dev-u-boot.dtsi
+> index 02f34c90c6d7..28b697b67ae0 100644
+> --- a/arch/arm/dts/k3-am625-verdin-wifi-dev-u-boot.dtsi
+> +++ b/arch/arm/dts/k3-am625-verdin-wifi-dev-u-boot.dtsi
+> @@ -19,6 +19,10 @@
+>         memory@80000000 {
+>                 bootph-all;
+>         };
+> +
+> +       sysinfo {
+> +               compatible =3D "toradex,sysinfo";
+> +       };
+>  };
 >
-> AFAIU, these new prototypes brought by this patch don't have actual
-> implementation yet. Does it affect the build somehow, e.g. maybe
-> causing some build warnings? Or is the build log clean?
-
-They are all wrapped with #ifndef __UBOOT__.
-
-
+>  &main_timer0 {
+> diff --git a/arch/arm/dts/tegra124-apalis-u-boot.dtsi b/arch/arm/dts/tegr=
+a124-apalis-u-boot.dtsi
+> new file mode 100644
+> index 000000000000..a3614d279439
+> --- /dev/null
+> +++ b/arch/arm/dts/tegra124-apalis-u-boot.dtsi
+> @@ -0,0 +1,12 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
+> +/*
+> + * Copyright 2023 Toradex
+> + */
+> +
+> +#include "tegra124-u-boot.dtsi"
+> +
+> +/ {
+> +       sysinfo {
+> +               compatible =3D "toradex,sysinfo";
+> +       };
+> +};
+> diff --git a/arch/arm/dts/tegra20-colibri-u-boot.dtsi b/arch/arm/dts/tegr=
+a20-colibri-u-boot.dtsi
+> new file mode 100644
+> index 000000000000..d4a669a288d8
+> --- /dev/null
+> +++ b/arch/arm/dts/tegra20-colibri-u-boot.dtsi
+> @@ -0,0 +1,12 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
+> +/*
+> + * Copyright 2023 Toradex
+> + */
+> +
+> +#include "tegra20-u-boot.dtsi"
+> +
+> +/ {
+> +       sysinfo {
+> +               compatible =3D "toradex,sysinfo";
+> +       };
+> +};
+> diff --git a/arch/arm/dts/tegra30-apalis-u-boot.dtsi b/arch/arm/dts/tegra=
+30-apalis-u-boot.dtsi
+> new file mode 100644
+> index 000000000000..37cbfbcc3506
+> --- /dev/null
+> +++ b/arch/arm/dts/tegra30-apalis-u-boot.dtsi
+> @@ -0,0 +1,12 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
+> +/*
+> + * Copyright 2023 Toradex
+> + */
+> +
+> +#include "tegra30-u-boot.dtsi"
+> +
+> +/ {
+> +       sysinfo {
+> +               compatible =3D "toradex,sysinfo";
+> +       };
+> +};
+> diff --git a/arch/arm/dts/tegra30-colibri-u-boot.dtsi b/arch/arm/dts/tegr=
+a30-colibri-u-boot.dtsi
+> new file mode 100644
+> index 000000000000..37cbfbcc3506
+> --- /dev/null
+> +++ b/arch/arm/dts/tegra30-colibri-u-boot.dtsi
+> @@ -0,0 +1,12 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
+> +/*
+> + * Copyright 2023 Toradex
+> + */
+> +
+> +#include "tegra30-u-boot.dtsi"
+> +
+> +/ {
+> +       sysinfo {
+> +               compatible =3D "toradex,sysinfo";
+> +       };
+> +};
+> diff --git a/arch/arm/dts/vf610-colibri-eval-v3-u-boot.dtsi b/arch/arm/dt=
+s/vf610-colibri-eval-v3-u-boot.dtsi
+> index 572d40877ef9..8c3b86c201fa 100644
+> --- a/arch/arm/dts/vf610-colibri-eval-v3-u-boot.dtsi
+> +++ b/arch/arm/dts/vf610-colibri-eval-v3-u-boot.dtsi
+> @@ -7,6 +7,10 @@
+>         soc {
+>                 bootph-all;
+>         };
+> +
+> +       sysinfo {
+> +               compatible =3D "toradex,sysinfo";
+> +       };
+>  };
 >
-> >  #else
-> >
-> >  #include <stdbool.h>
-> > --
-> > 2.34.1
-> >
-Thanks for your comments!
-
-
---=20
-Best regards - Freundliche Gr=C3=BCsse - Meilleures salutations
-
-Igor Opaniuk
-Senior Software Engineer, Embedded & Security
-E: igor.opaniuk@foundries.io
-W: www.foundries.io
+>  &aips0 {
+> diff --git a/board/toradex/common/Kconfig b/board/toradex/common/Kconfig
+> index 1f6a5e4db561..b85893ab44e4 100644
+> --- a/board/toradex/common/Kconfig
+> +++ b/board/toradex/common/Kconfig
+> @@ -4,6 +4,7 @@
+>  menuconfig TDX_CFG_BLOCK
+>         bool "Enable Toradex config block support"
+>         select OF_BOARD_SETUP
+> +       select SYSINFO
+>         help
+>           The Toradex config block stored production data on the on-modul=
+e
+>           flash device (NAND, NOR or eMMC). The area is normally preserve=
+d by
+> diff --git a/board/toradex/common/tdx-common.c b/board/toradex/common/tdx=
+-common.c
+> index 6084436b48b4..1f3253f4222e 100644
+> --- a/board/toradex/common/tdx-common.c
+> +++ b/board/toradex/common/tdx-common.c
+> @@ -3,15 +3,16 @@
+>   * Copyright (c) 2016 Toradex, Inc.
+>   */
+>
+> +#include <dm.h>
+>  #include <common.h>
+>  #include <env.h>
+>  #include <g_dnl.h>
+>  #include <init.h>
+>  #include <linux/libfdt.h>
+> +#include <sysinfo.h>
+>
+>  #ifdef CONFIG_VIDEO
+>  #include <bmp_logo.h>
+> -#include <dm.h>
+>  #include <splash.h>
+>  #include <video.h>
+>  #endif
+> @@ -103,13 +104,8 @@ __weak int print_bootinfo(void)
+>
+>  int checkboard(void)
+>  {
+> -       if (valid_cfgblock) {
+> -               printf("Model: Toradex %04d %s %s\n",
+> -                      tdx_hw_tag.prodid,
+> -                      toradex_modules[tdx_hw_tag.prodid].name,
+> -                      tdx_board_rev_str);
+> +       if (valid_cfgblock)
+>                 printf("Serial#: %s\n", tdx_serial_str);
+> -       }
+>
+>  #ifdef CONFIG_TDX_CFG_BLOCK_EXTRA
+>         if (tdx_carrier_board_name)
+> @@ -188,6 +184,46 @@ static int settings_r(void)
+>  }
+>  EVENT_SPY_SIMPLE(EVT_SETTINGS_R, settings_r);
+>
+> +static int tdx_detect(struct udevice *dev)
+> +{
+> +       return valid_cfgblock ? 0 : -EINVAL;
+> +}
+> +
+> +static int tdx_get_str(struct udevice *dev, int id, size_t size, char *v=
+al)
+> +{
+> +       int ret =3D -ENOTSUPP;
+> +
+> +       switch (id) {
+> +       case SYSINFO_ID_BOARD_MODEL:
+> +               snprintf(val, size,
+> +                        "Toradex %04d %s %s",
+> +                        tdx_hw_tag.prodid,
+> +                        toradex_modules[tdx_hw_tag.prodid].name,
+> +                        tdx_board_rev_str);
+> +
+> +               ret =3D 0;
+> +       }
+> +
+> +       return ret;
+> +}
+> +
+> +static const struct udevice_id sysinfo_tdx_ids[] =3D {
+> +       { .compatible =3D "toradex,sysinfo" },
+> +       { /* sentinel */ }
+> +};
+> +
+> +static const struct sysinfo_ops sysinfo_tdx_ops =3D {
+> +       .detect         =3D tdx_detect,
+> +       .get_str        =3D tdx_get_str,
+> +};
+> +
+> +U_BOOT_DRIVER(sysinfo_toradex) =3D {
+> +       .name           =3D "sysinfo_toradex",
+> +       .id             =3D UCLASS_SYSINFO,
+> +       .of_match       =3D sysinfo_tdx_ids,
+> +       .ops            =3D &sysinfo_tdx_ops,
+> +};
+> +
+>  #ifdef CONFIG_TDX_CFG_BLOCK_USB_GADGET_PID
+>  int g_dnl_bind_fixup(struct usb_device_descriptor *dev, const char *name=
+)
+>  {
+> --
+> 2.39.2
+>
