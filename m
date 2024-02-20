@@ -4,62 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 377F9C48BC3
-	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 18:40:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2600BC5475B
+	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 18:40:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 056C48802B;
-	Tue, 20 Feb 2024 19:40:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DFA1B88027;
+	Tue, 20 Feb 2024 19:40:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="rty4u3WW";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="eIbjMTxw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B233D87FEE; Tue, 20 Feb 2024 19:40:13 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id 967EB87FEE; Tue, 20 Feb 2024 19:40:07 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D25F48800D
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 19:39:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 16C6387FF4
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 19:39:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41KIdrqx124929;
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41KIdrdl107908;
  Tue, 20 Feb 2024 12:39:53 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1708454393;
- bh=d/vOp1URLkal2W4Qsc9sxr9KXrTo5kWL2SNC/pePWD8=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=rty4u3WWlZHUGVjeoagjtxjNOf9XYNEUgo2E54/t46X91fegzR13+YLImPC3LWaGc
- tiQvdpk0A5rglew382eG/jNvJCPzF3b4fdx5F+Esx0LmukPAR/xkqWjAOonn+07k5N
- JDRqrpbHkg7gPQy90Pw3VsEQkLHvqhVpim/2GCvo=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41KIdr7J040206
+ bh=qBFaV0MwO5Mb+KBu4idQ/GgBB0KHzeeAZZnGlPYcin8=;
+ h=From:To:CC:Subject:Date;
+ b=eIbjMTxw+LMjksfiFvrjxLUiS6FMhfSA5skCOLFwDbcTFJl3vaGKbMF8TF/t20viY
+ hibth6eHhz7bnNvX74Ognn/dAlpAme8gYi3bBPJQ+R4FPNbMw1HCGOcLv9KGmBPk//
+ XmGh9WzGVs+WXIWlBDd2gtcMQR+DkvSsYHwGC0nk=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41KIdrkh017470
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Tue, 20 Feb 2024 12:39:53 -0600
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 20
  Feb 2024 12:39:53 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Tue, 20 Feb 2024 12:39:53 -0600
 Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41KIdr88128007;
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41KIdrnx006240;
  Tue, 20 Feb 2024 12:39:53 -0600
 From: Nishanth Menon <nm@ti.com>
 To: Robert Nelson <robertcnelson@gmail.com>, Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, Nishanth Menon <nm@ti.com>, Roger Quadros
- <rogerq@kernel.org>, Jan Kiszka <jan.kiszka@siemens.com>
-Subject: [PATCH V2 5/5] board: beagle: beagleplay: env: Drop usb and pxe as
- boot targets
-Date: Tue, 20 Feb 2024 12:39:52 -0600
-Message-ID: <20240220183952.3614252-6-nm@ti.com>
+CC: <u-boot@lists.denx.de>, Nishanth Menon <nm@ti.com>
+Subject: [PATCH V2 0/5] board: beagle: Enable 32k and debounce configuration
+ and fixups
+Date: Tue, 20 Feb 2024 12:39:47 -0600
+Message-ID: <20240220183952.3614252-1-nm@ti.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240220183952.3614252-1-nm@ti.com>
-References: <20240220183952.3614252-1-nm@ti.com>
 MIME-Version: 1.0
 Organization: Texas Instruments, Inc.
 Content-Transfer-Encoding: 8bit
@@ -81,39 +78,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We had enabled USB and network pxe boot with the hope to get it all
-merged on time. However, it has not panned out. Drop usb and pxe boot
-else bootflow scan -l throws in:
-a) Unknown uclass 'usb' in label
-b) Crashes when attempting pxe - cpsw/mdio driver apparently has missing
-   error handling of what ever form. This is the one that Jan noticed in
-   his log.
+Hi,
 
-We can enable these on a later date once things are working.
+Rev 2 of the series.
 
-Cc: Roger Quadros <rogerq@kernel.org>
+This is a follow up from [1] - Without the 32k crystal configuration,
+wlan doesn't work. Debounce is needed for HDMI Hot plug detect(hpd)
+gpio interrupt not storming.
 
-Reported-by: Jan Kiszka <jan.kiszka@siemens.com>
-Closes: https://lore.kernel.org/all/782ea2c0-eef5-478d-a122-cc6e2d066762@siemens.com/
-Signed-off-by: Nishanth Menon <nm@ti.com>
----
-- New patch in V2 of the series.
+At least the 32k configuration has been done for toradex and phytec
+boards, follow similar model of programming.
 
- board/beagle/beagleplay/beagleplay.env | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Series is now based off master branch.
 
-diff --git a/board/beagle/beagleplay/beagleplay.env b/board/beagle/beagleplay/beagleplay.env
-index 4f0a94a8113e..db737e069b58 100644
---- a/board/beagle/beagleplay/beagleplay.env
-+++ b/board/beagle/beagleplay/beagleplay.env
-@@ -14,6 +14,6 @@ boot=mmc
- mmcdev=1
- bootpart=1:1
- bootdir=/boot
--boot_targets=mmc1 mmc0 usb pxe
-+boot_targets=mmc1 mmc0
- bootmeths=script extlinux efi pxe
- rd_spec=-
+Bootlog: https://gist.github.com/nmenon/75df38bee907785d1d78d1ec4abd7304
+
+Changes from V2:
+- Removed depedency on [2] - depending on which way
+  the merge sequence goes, one of the series will need a rebase.
+- Added a patch for a bug that Jan noticed
+- Fixup for the fat finger missing 0x in 0x4080 :(
+
+V1: https://lore.kernel.org/all/20240212155332.541949-1-nm@ti.com/
+
+Nishanth Menon :
+  board: beagle: beagleplay: Enable 32k crystal
+  configs: am62x_beagleplay_r5_defconfig: Enable SPL_BOARD_INIT
+  arm: mach-k3: am62: Add Debounce configuration register definitions
+  board: beagle: beagleplay: Configure debounce registers
+  board: beagle: beagleplay: env: Drop usb and pxe as boot targets
+
+ arch/arm/mach-k3/include/mach/am62_hardware.h |  3 +
+ board/beagle/beagleplay/beagleplay.c          | 61 +++++++++++++++++++
+ board/beagle/beagleplay/beagleplay.env        |  2 +-
+ configs/am62x_beagleplay_r5_defconfig         |  1 +
+ 4 files changed, 66 insertions(+), 1 deletion(-)
+
+base-commit: 3e6f2a94bfc25f1782ce2d45db27f47ec781feb1
+
+[1] https://lore.kernel.org/u-boot/20230725185253.2123433-4-nm@ti.com/
+[2] https://lore.kernel.org/u-boot/20240212194726.1093771-1-nm@ti.com/
 -- 
 2.43.0
-
