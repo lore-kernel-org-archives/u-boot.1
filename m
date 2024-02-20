@@ -4,48 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0698C5475B
-	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 18:30:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CA3FC5475B
+	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 18:30:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B914B87FFC;
-	Tue, 20 Feb 2024 19:29:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 247A588017;
+	Tue, 20 Feb 2024 19:29:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="A2l+KuCE";
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="EwP1bYXi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6EF6488012; Tue, 20 Feb 2024 19:29:41 +0100 (CET)
+ id B97C288012; Tue, 20 Feb 2024 19:29:41 +0100 (CET)
 Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 225D687FF5
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 19:29:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F7C787FFE
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 19:29:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=francesco@dolcini.it
 Received: from francesco-nb.corp.toradex.com (31-10-206-125.static.upc.ch
  [31.10.206.125])
- by mail11.truemail.it (Postfix) with ESMTPA id 695D322697;
- Tue, 20 Feb 2024 19:29:31 +0100 (CET)
+ by mail11.truemail.it (Postfix) with ESMTPA id 7F54922700;
+ Tue, 20 Feb 2024 19:29:32 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1708453771;
- bh=rr7DjUrA2GZ1aaZ8q1hJfY/yKXqQvYOmT/BdWNlBI3M=; h=From:To:Subject;
- b=A2l+KuCEDQStXpyAC5SFAHOKZv72Wh2jzVQB+Fz/+p5PNp9WgSv0fv/RgQEpV9K1z
- V3JtoNW+cT9m3KR13h6HV67drmC2kzuRmv50VKkdool2Sc+GyP8LZ6k2g0jDjyEuBt
- z4/HTmdpueIl4Wo+02TbFSrn3oyRBY4UGENJiUulD33Y6ozrPnJWqQLXgx4OaFm8tr
- a71GGt6NJoW/Pi6jUFLtj2MePyjOrw7LwniAfbdhaWrP62iCAz77AG1/zgNvL6N8YA
- KcDci4KYYdok3eeDRlMEIcoJHVgtvMziZqPRmiJAh7sFGFHiDh6w+5C1XimikxeApO
- ebknqH4LJ5HqQ==
+ s=default; t=1708453772;
+ bh=puvB1Obnz7pzmUtFvvxvoAKJ4LTi3qx4YxE8alfNcVY=; h=From:To:Subject;
+ b=EwP1bYXiWbaI8D7c9B3NokpqOWgLbhSI/0lzvhdRkpSqSSEcin8Ol49OWtExilPpS
+ ryOnasEu2J50Az33lX3XUYCLcKKFDbsPqy4E9fNEupdV9YpAzw52eWN5Q7WWE6JZOk
+ bYk71V8PcjdGcAgE3LerA0gwxxUxT36OvGw6epSsPDLAUj9gbnzb6m9zcVwjzXV874
+ NI0MDxWgcfSuo2VhHrBVgWwUeZvnk/JuWPINnBYIbC+Ll3ArmF2iYYja3cNYWpJzcG
+ DEoXVVdqFgAdPxWbVKV4R0H+zH017D7qnHvRL5xQuruHO7b9shiCJ8lryxbUtLVybp
+ EntzbJRNUwzNQ==
 From: Francesco Dolcini <francesco@dolcini.it>
-To: Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+To: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
  Tom Rini <trini@konsulko.com>
 Cc: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, u-boot@lists.denx.de,
  Francesco Dolcini <francesco.dolcini@toradex.com>
-Subject: [PATCH v1 1/7] toradex: Fix recursive call to checkboard
-Date: Tue, 20 Feb 2024 19:29:20 +0100
-Message-Id: <20240220182926.101161-2-francesco@dolcini.it>
+Subject: [PATCH v1 4/7] arm: dts: Refactor device trees using "&{/aliases}"
+ syntax
+Date: Tue, 20 Feb 2024 19:29:23 +0100
+Message-Id: <20240220182926.101161-5-francesco@dolcini.it>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240220182926.101161-1-francesco@dolcini.it>
 References: <20240220182926.101161-1-francesco@dolcini.it>
@@ -69,30 +72,165 @@ X-Virus-Status: Clean
 
 From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 
-Since checkboard() is used instead of show_board_info(), in case toradex
-config block is missing or malformed, checkboard is recursively called.
-It prints a long list of "MISSING TORADEX CONFIG BLOCK" till the stack
-is full.
+Use the common syntax to define aliases.
 
-Fixes: edb0ecd18708 ("toradex: Use checkboard() instead of show_board_info()")
 Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 Signed-off-by: Francesco Dolcini <francesco.dolcini@toradex.com>
 ---
- board/toradex/common/tdx-common.c | 1 -
- 1 file changed, 1 deletion(-)
+ .../dts/imx6dl-colibri-eval-v3-u-boot.dtsi    | 18 ++++++++-----
+ arch/arm/dts/imx6q-apalis-eval-u-boot.dtsi    | 26 ++++++++++---------
+ .../arm/dts/imx7d-colibri-eval-v3-u-boot.dtsi | 10 ++++---
+ .../dts/imx8mm-verdin-wifi-dev-u-boot.dtsi    | 12 ++++-----
+ .../dts/imx8mp-verdin-wifi-dev-u-boot.dtsi    | 12 ++++-----
+ 5 files changed, 43 insertions(+), 35 deletions(-)
 
-diff --git a/board/toradex/common/tdx-common.c b/board/toradex/common/tdx-common.c
-index ed8f0a6a4756..ddc4a175da68 100644
---- a/board/toradex/common/tdx-common.c
-+++ b/board/toradex/common/tdx-common.c
-@@ -103,7 +103,6 @@ int tdx_checkboard(void)
- 	if (read_tdx_cfg_block()) {
- 		printf("MISSING TORADEX CONFIG BLOCK\n");
- 		get_mac_from_serial(tdx_serial, &tdx_eth_addr);
--		checkboard();
- 	} else {
- 		snprintf(tdx_serial_str, sizeof(tdx_serial_str),
- 			 "%08u", tdx_serial);
+diff --git a/arch/arm/dts/imx6dl-colibri-eval-v3-u-boot.dtsi b/arch/arm/dts/imx6dl-colibri-eval-v3-u-boot.dtsi
+index 31f3a48dd9f0..0eea4d1862ae 100644
+--- a/arch/arm/dts/imx6dl-colibri-eval-v3-u-boot.dtsi
++++ b/arch/arm/dts/imx6dl-colibri-eval-v3-u-boot.dtsi
+@@ -5,13 +5,17 @@
+ 
+ #include "imx6qdl-u-boot.dtsi"
+ 
+-&{/aliases} {
+-	/* U-Boot won't find PMIC otherwise */
+-	i2c0 = &i2c3;
+-	i2c1 = &i2c2;
+-	/* SDHCI instance order: eMMC, 4-bit SD/MMC (U-Boot won't find ConfigBlock otherwise) */
+-	mmc0 = &usdhc3;
+-	mmc1 = &usdhc1;
++/ {
++	aliases {
++		/* U-Boot won't find PMIC otherwise */
++		i2c0 = &i2c3;
++		i2c1 = &i2c2;
++		/* SDHCI instance order: eMMC, 4-bit SD/MMC
++		 * (U-Boot won't find ConfigBlock otherwise)
++		 */
++		mmc0 = &usdhc3;
++		mmc1 = &usdhc1;
++	};
+ };
+ 
+ &wdog1 {
+diff --git a/arch/arm/dts/imx6q-apalis-eval-u-boot.dtsi b/arch/arm/dts/imx6q-apalis-eval-u-boot.dtsi
+index 3d19796cb698..3c6e503d043b 100644
+--- a/arch/arm/dts/imx6q-apalis-eval-u-boot.dtsi
++++ b/arch/arm/dts/imx6q-apalis-eval-u-boot.dtsi
+@@ -5,18 +5,20 @@
+ 
+ #include "imx6qdl-u-boot.dtsi"
+ 
+-&{/aliases} {
+-	/* U-Boot won't find PMIC otherwise */
+-	i2c0 = &i2c1;
+-	i2c1 = &i2c2;
+-	i2c2 = &i2c3;
+-	/*
+-	 * SDHCI instance order: eMMC, 8-bit SD/MMC, 4-bit SD
+-	 * (U-Boot won't find ConfigBlock otherwise)
+-	 */
+-	mmc0 = &usdhc3;
+-	mmc1 = &usdhc1;
+-	mmc2 = &usdhc2;
++/ {
++	aliases {
++		/* U-Boot won't find PMIC otherwise */
++		i2c0 = &i2c1;
++		i2c1 = &i2c2;
++		i2c2 = &i2c3;
++		/*
++		 * SDHCI instance order: eMMC, 8-bit SD/MMC, 4-bit SD
++		 * (U-Boot won't find ConfigBlock otherwise)
++		 */
++		mmc0 = &usdhc3;
++		mmc1 = &usdhc1;
++		mmc2 = &usdhc2;
++	};
+ };
+ 
+ &wdog1 {
+diff --git a/arch/arm/dts/imx7d-colibri-eval-v3-u-boot.dtsi b/arch/arm/dts/imx7d-colibri-eval-v3-u-boot.dtsi
+index 57ca28edb70d..b2c12a413daf 100644
+--- a/arch/arm/dts/imx7d-colibri-eval-v3-u-boot.dtsi
++++ b/arch/arm/dts/imx7d-colibri-eval-v3-u-boot.dtsi
+@@ -5,10 +5,12 @@
+ 
+ #include "imx7s-u-boot.dtsi"
+ 
+-&{/aliases} {
+-	/* SDHCI instance order: eMMC, SD/MMC */
+-	mmc0 = &usdhc3;
+-	mmc1 = &usdhc1;
++/ {
++	aliases {
++		/* SDHCI instance order: eMMC, SD/MMC */
++		mmc0 = &usdhc3;
++		mmc1 = &usdhc1;
++	};
+ };
+ 
+ &lcdif {
+diff --git a/arch/arm/dts/imx8mm-verdin-wifi-dev-u-boot.dtsi b/arch/arm/dts/imx8mm-verdin-wifi-dev-u-boot.dtsi
+index 8efa4ddc734a..515f195ab759 100644
+--- a/arch/arm/dts/imx8mm-verdin-wifi-dev-u-boot.dtsi
++++ b/arch/arm/dts/imx8mm-verdin-wifi-dev-u-boot.dtsi
+@@ -6,6 +6,12 @@
+ #include "imx8mm-u-boot.dtsi"
+ 
+ / {
++	aliases {
++		eeprom0 = &eeprom_module;
++		eeprom1 = &eeprom_carrier_board;
++		eeprom2 = &eeprom_display_adapter;
++	};
++
+ 	wdt-reboot {
+ 		compatible = "wdt-reboot";
+ 		bootph-pre-ram;
+@@ -13,12 +19,6 @@
+ 	};
+ };
+ 
+-&{/aliases} {
+-	eeprom0 = &eeprom_module;
+-	eeprom1 = &eeprom_carrier_board;
+-	eeprom2 = &eeprom_display_adapter;
+-};
+-
+ &{/soc@0/bus@30800000/i2c@30a20000/pmic@25} {
+ 	bootph-pre-ram;
+ };
+diff --git a/arch/arm/dts/imx8mp-verdin-wifi-dev-u-boot.dtsi b/arch/arm/dts/imx8mp-verdin-wifi-dev-u-boot.dtsi
+index 2a1aa1935a76..67f1d45ce269 100644
+--- a/arch/arm/dts/imx8mp-verdin-wifi-dev-u-boot.dtsi
++++ b/arch/arm/dts/imx8mp-verdin-wifi-dev-u-boot.dtsi
+@@ -6,6 +6,12 @@
+ #include "imx8mp-u-boot.dtsi"
+ 
+ / {
++	aliases {
++		eeprom0 = &eeprom_module;
++		eeprom1 = &eeprom_carrier_board;
++		eeprom2 = &eeprom_display_adapter;
++	};
++
+ 	wdt-reboot {
+ 		compatible = "wdt-reboot";
+ 		bootph-pre-ram;
+@@ -13,12 +19,6 @@
+ 	};
+ };
+ 
+-&{/aliases} {
+-	eeprom0 = &eeprom_module;
+-	eeprom1 = &eeprom_carrier_board;
+-	eeprom2 = &eeprom_display_adapter;
+-};
+-
+ &clk {
+ 	bootph-all;
+ 	bootph-pre-ram;
 -- 
 2.39.2
 
