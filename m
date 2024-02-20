@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25305C5475B
-	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 15:32:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DE2CC5475B
+	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 15:32:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 44BC587FB9;
-	Tue, 20 Feb 2024 16:32:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D92F687FB3;
+	Tue, 20 Feb 2024 16:32:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1708443141;
-	bh=yJ2EAv7NnzAt32fe2tQU0PeR5u4AY19aBlYABNz5zFs=;
+	s=phobos-20191101; t=1708443147;
+	bh=ogVg9fehEZrkeuGc9x1JDR1zA+tkeGytlAsh88Pwe04=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=TlBs+0pcd2MeH75VTD0T/FaZi2UDoYvMyKHROcsjz/Bu8lOedE6AjvA0auvErrFK3
-	 Rw2xb8vluxYhe0Ii5XhrhXH8QTFF7pmrGjdtxXvPae57i97MIGzXXH22ObNIx7nwzr
-	 NoFGCQSxUHANMA+H8wt84xctDrUkokUIMNn9axYMjJ9nJdDNbfvjMepaxTVp6AS0r5
-	 psgJYDu3a5F+D4jtaZZzQymYbojWpnvu3HcCw4znUbCMcLGwDSOc94Oup8DMgTcXLV
-	 0w1687LSGL/Qq+j+hLB0iGG5os50KJyphWbgo0qnKOCkN+a+3XQK+0AcucPMwX6dMx
-	 Pgkmb5FjTMpkw==
+	b=WIVd1zrAyGQsT1q0FJpaTRCYMLT0OyWC5pQy7trUtUCpZ3VIDcBf9WNZUWOti0M5v
+	 WN9jD8UPVR0N7nVVueg8Gwq2uCLrOsWmR5RW2X3gsrA7MeipTurQlkBy9hqPCwC6vP
+	 IkcJim300mZFHUx0VpGBCjkoWPZD/ZkyLKjUDgnxHywlQp1xD/RLJo41Bn4uUwPV1n
+	 +XxYVtTLZgoCSl9Rzb9lWDFFb3f4oGtVPwcdcgTtKZ9zlx2kd2fWXFQikWSIYY3RII
+	 XkYJJ1gRwHusRy6XMD1r2KfPSJWV2iP6pbJYvkVtcGxRWghHTcrg/nej7DhYvkCwTy
+	 TppFnf4ncEWIQ==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 0441987ED6;
- Tue, 20 Feb 2024 16:32:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id 9510887F7D;
+ Tue, 20 Feb 2024 16:32:20 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1708443140;
- bh=yJ2EAv7NnzAt32fe2tQU0PeR5u4AY19aBlYABNz5zFs=;
+ s=phobos-20191101; t=1708443146;
+ bh=ogVg9fehEZrkeuGc9x1JDR1zA+tkeGytlAsh88Pwe04=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=mH8Xm6Caj9wlfHf56Hq/dfdPKXGFLgaWfHdvAQgGOVMmTOL1vP2UPFHca51qjbPK5
- rqdr6rg1NeJiD5WErVViNXFe7673DFMHWSD3vGrh3Bk21vUz+jEEl1P3vkmM+ZqdNf
- MHuRXN9khaXWy4DWZqHug8iMRe7c94YuuPFGTLy0V0co8NA2GxUsv8iGBh7/0/Gqp+
- WElpbbVbiRDdTpi7eR8j+R7yVz3D7FxtgmZ14u3WhTvxwgzYmMWgLSGxXUWDpwMORQ
- zBwB4Glw3hFpTw8Ri/obxUI20HY3LUibg+PiPynkK+R8/ajehI0ydPM3RtNojsATxg
- V9wkxJZnVXefw==
-Message-ID: <6111dab9-62e2-4ef6-9007-448bf0f4fc0b@denx.de>
-Date: Tue, 20 Feb 2024 16:04:08 +0100
+ b=eT2hQAG2fUm1ao76h833k7yDgmqnaibgn9OlyADH2FMCwaLoOpcHX6Os4VsDnymEN
+ 0j5zEofjCGpni2NmElI3HWmXADHizefYcEz5vacYshnyN5Ms9oSggpapOCWCKt4p+g
+ q3O9m3ogu5fTHvFjNA3rH5U7906TuBg0JusqewrmGJMTYZzNqM4U8y1qeoGeHx3Rmm
+ rB3r9Jjfbl176sI0TwtQmrUcYdYV6VImOf595LY5yuHVLYYEjV/km7zaoxfln1xWDE
+ 4URhB0xZ+MpVIUaruqY/ITqCeNZbr56noeS1My2T+8V+JoDesfH29AbhCATsW08wvr
+ tYdI47YEDY5sw==
+Message-ID: <314b12f0-7b5d-44f4-bcf1-69a287a9005d@denx.de>
+Date: Tue, 20 Feb 2024 16:12:12 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/7] imx8mp: Enable PCIe/NVMe support
+Subject: Re: [PATCH 2/7] reset: imx: Add support for i.MX8MP reset controller
 Content-Language: en-US
 To: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de
 Cc: marcel.ziswiler@toradex.com, trini@konsulko.com, lukma@denx.de,
@@ -53,8 +53,9 @@ Cc: marcel.ziswiler@toradex.com, trini@konsulko.com, lukma@denx.de,
  fathi.boudra@linaro.org, remi.duraffort@linaro.org,
  daniel.thompson@linaro.org
 References: <20240220131056.2962331-1-sumit.garg@linaro.org>
+ <20240220131056.2962331-3-sumit.garg@linaro.org>
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240220131056.2962331-1-sumit.garg@linaro.org>
+In-Reply-To: <20240220131056.2962331-3-sumit.garg@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -74,55 +75,42 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 2/20/24 14:10, Sumit Garg wrote:
-> pcie_imx doesn't seem to share any useful code for iMX8MP SoC and it is
-> rather tied to quite old port of pcie_designware driver from Linux which
-> suffices only iMX6 specific needs.
-> 
-> But currently we have the common DWC specific bits which alligns pretty
-> well with DW PCIe controller on iMX8MP SoC. So lets reuse those common
-> bits instead as a new driver for iMX8 SoCs. It should be fairly easy to
-> add support for other iMX8 variants to this driver.
-> 
-> iMX8MP SoC also comes up with standalone PCIe PHY support, so hence we
-> can reuse the generic PHY infrastructure to power on PCIe PHY.
-> 
-> Patch #1: Adds PCIe clocks support.
-> Patch #2: Adds i.MX8MP reset controller support.
-> Patch #3: Extend i.MX8MP power domain driver with PCIe support
-> Patch #4: Expose high performance PLL clock required for PCIe PHY
->            on verdin board.
-> Patch #5: Adds standalone PCIe PHY support for i.MX8MP SoC.
-> Patch #6: Adds DW PCIe controller support for iMX8MP SoC.
-> Patch #7: Enable PCIe/NVMe support for verdin board.
-> 
-> Testing with this patch-set included:
-> 
-> Verdin iMX8MP # pci enum
-> PCIE-0: Link up (Gen1-x1, Bus0)
-> Verdin iMX8MP #
-> Verdin iMX8MP # nvme scan
-> Verdin iMX8MP #
-> Verdin iMX8MP # nvme info
-> Device 0: Vendor: 0x126f Rev: T0828A0  Prod: AA000000000000000720
->              Type: Hard Disk
->              Capacity: 122104.3 MB = 119.2 GB (250069680 x 512)
-> Verdin iMX8MP #
-> Verdin iMX8MP # load nvme 0 $loadaddr <file-name>
-> 
-> Sumit Garg (7):
->    clk: imx8mp: Add support for PCIe clocks
->    reset: imx: Add support for i.MX8MP reset controller
->    imx8mp: power-domain: Add PCIe support
->    imx8mp: power-domain: Expose high performance PLL clock
->    phy: phy-imx8m-pcie: Add support for i.MX8M{M/P} PCIe PHY
->    pci: Add DW PCIe controller support for iMX8MP SoC
->    verdin-imx8mp_defconfig: Enable PCIe/NVMe support
-> 
->   configs/verdin-imx8mp_defconfig       |   9 +
->   drivers/clk/imx/clk-imx8mp.c          |   6 +
->   drivers/pci/Kconfig                   |   8 +
->   drivers/pci/Makefile                  |   1 +
->   drivers/pci/pcie_dw_imx8.c            | 348 ++++++++++++++++++++++++++
+> Pre-requisite to enable PCIe support on iMX8MP SoC.
 
-You can call this pcie_dw_imx.c , the imx6 support can be converted over 
-to that driver too I guess ?
+Please write a proper commit message .
+
+> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+> ---
+>   drivers/reset/reset-imx7.c | 114 +++++++++++++++++++++++++++++++++++++
+>   1 file changed, 114 insertions(+)
+> 
+> diff --git a/drivers/reset/reset-imx7.c b/drivers/reset/reset-imx7.c
+> index eaef2cc2cdf..c1de84dea8b 100644
+> --- a/drivers/reset/reset-imx7.c
+> +++ b/drivers/reset/reset-imx7.c
+> @@ -10,6 +10,7 @@
+>   #include <dm.h>
+>   #include <dt-bindings/reset/imx7-reset.h>
+>   #include <dt-bindings/reset/imx8mq-reset.h>
+> +#include <dt-bindings/reset/imx8mp-reset.h>
+>   #include <reset-uclass.h>
+>   #include <linux/bitops.h>
+>   #include <linux/delay.h>
+> @@ -252,6 +253,115 @@ static int imx7_reset_assert_imx8mq(struct reset_ctl *rst)
+>   	return 0;
+>   }
+>   
+> +enum imx8mp_src_registers {
+> +	SRC_SUPERMIX_RCR	= 0x0018,
+> +	SRC_AUDIOMIX_RCR	= 0x001c,
+> +	SRC_MLMIX_RCR		= 0x0028,
+> +	SRC_GPU2D_RCR		= 0x0038,
+> +	SRC_GPU3D_RCR		= 0x003c,
+> +	SRC_VPU_G1_RCR		= 0x0048,
+> +	SRC_VPU_G2_RCR		= 0x004c,
+> +	SRC_VPUVC8KE_RCR	= 0x0050,
+> +	SRC_NOC_RCR		= 0x0054,
+> +};
+
+This seems copied from Linux, include Linux commit ID as of which this 
+was imported from in commit message.
