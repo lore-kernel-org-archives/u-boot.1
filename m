@@ -4,83 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36004C48BC3
-	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 14:20:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DC61C5475B
+	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 14:34:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F10E87F96;
-	Tue, 20 Feb 2024 15:20:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id AFF8887F5D;
+	Tue, 20 Feb 2024 15:34:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Barok5wV";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 74CF287FCD; Tue, 20 Feb 2024 15:20:15 +0100 (CET)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 08DB987F5D
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 15:19:55 +0100 (CET)
+ id 8131187F5D; Tue, 20 Feb 2024 15:34:10 +0100 (CET)
+Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
+ [210.160.252.171])
+ by phobos.denx.de (Postfix) with ESMTP id AB5E187ED6
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 15:34:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-564372fb762so4202992a12.0
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 06:19:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1708438795; x=1709043595; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=3ujyIGiG+Mnu9vRmCk3UiNbY6tf+5mP0r6fuz88Ietk=;
- b=Barok5wV9Jp0GK7GhFXXzIJiWypyJbmq2+qHZ1J7qH9h5gYzsO+7Os26MI+izwoPGB
- wzhtmywR9Wex2UkBX2oq3H/ZpVAQUP6EwLtvz+O42p7krfkfKMsaDE0Yl32TXBO6WYis
- Beu/eb+HACMTCCy42yIJbH61kMfJ+GRwcmKMEb90zK0gjLDQ4dOBPIhap8PkaAjXh5tm
- FURjLMjqh413X2AQjr/cFPsIF0SzgkqjsnA7On3WHOf47/MQTrk1y8nXQJqKjzlYasqi
- koYn07eo+cPr9AnpZ199GhynUYlBFm8EP+v0igrb/tY2WHfTkJhQ9PhLaTg1PTA04LEn
- OhwA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708438795; x=1709043595;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=3ujyIGiG+Mnu9vRmCk3UiNbY6tf+5mP0r6fuz88Ietk=;
- b=fQYWSnfBqiQQgdH0e/pHrh+LRlpGBJ2eqpr8k0yLb05rwaP+rPzyZQjOJAO3u2YETq
- M6IUXeUCIa5kOvtN7wT5UMjL5TDZB/Xy5a3ZbSbVxiXjB2h0MLs5qeWbvC9717nEStH5
- 5JkZmPvmDM+P8z5tdSqSAV0Lgn79RR+2GPryrw6wAvB3xCUAT9geLe1LkmTkZY6u4K35
- h0U5kBaEiPu+o3DVMHWvco3wmn1RdVoMFL+gM95/sJ6ysZ3fW+fj+4xQLt9jFZmNR7Zo
- 3vroVlLeLvgzzzcc6g6+jbXYt6siOEkE7vmL4GtpKCuSrnERDxzAp1kgBAETBqHm5Epz
- yzuQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXFQgMM4ooSTa7oqeOr+JtovxuM1YHyvZfzJPNKYwZWktSnYIF1RLezK1yxCiWcf8PZ6JDiNEsYXQL6yBrwtd257ov0EQ==
-X-Gm-Message-State: AOJu0Yxsvqz9dOX97XGAqfxSPUmdsohMxBRRMK1kOvU+47xTUZVugbNW
- E4A2ZbPAxJgSzAgXvjJHf0oL6zvfCuWzLt3mrL3djppe8TO8C7rhWtdUQ45MDZdaFZIToHY+na5
- JY2OGqAjiXw5Ec2+1gzeofBBH7oU=
-X-Google-Smtp-Source: AGHT+IEsHx4PxPpGdAWocwu/SiFcKBk4AAK1gJKqYJA8Y/NlS/Ad7Mg/mccWVO4FyU2/wOw+6W+CdS6Sz9B8lIcSkM4=
-X-Received: by 2002:a05:6402:514a:b0:564:dd12:841c with SMTP id
- n10-20020a056402514a00b00564dd12841cmr476260edd.30.1708438794944; Tue, 20 Feb
- 2024 06:19:54 -0800 (PST)
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-IronPort-AV: E=Sophos;i="6.06,172,1705330800"; 
+ d="asc'?scan'208";a="194596805"
+Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
+ by relmlie5.idc.renesas.com with ESMTP; 20 Feb 2024 23:33:59 +0900
+Received: from [10.226.92.11] (unknown [10.226.92.11])
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id F1E35400F7B5;
+ Tue, 20 Feb 2024 23:33:55 +0900 (JST)
+Message-ID: <47301ada-bbbb-46c7-8a6e-9cf5cc065724@bp.renesas.com>
+Date: Tue, 20 Feb 2024 14:33:54 +0000
 MIME-Version: 1.0
-References: <20240215-b4-qcom-common-target-v4-0-ed06355c634a@linaro.org>
- <20240215-b4-qcom-common-target-v4-16-ed06355c634a@linaro.org>
-In-Reply-To: <20240215-b4-qcom-common-target-v4-16-ed06355c634a@linaro.org>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Tue, 20 Feb 2024 14:19:43 +0000
-Message-ID: <CALeDE9MzcnEBR-McJvJo8FPf8ad=8ytoU0+HkmpB4s-bLEDAwQ@mail.gmail.com>
-Subject: Re: [PATCH v4 16/39] board: dragonboard410c: add chainloaded config
- fragment
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, 
- Ramon Fried <rfried.dev@gmail.com>, Dzmitry Sankouski <dsankouski@gmail.com>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
- Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] mmc: Drop unused mmc_send_tuning() cmd_error parameter
+Content-Language: en-GB
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>
+Cc: Hai Pham <hai.pham.ud@renesas.com>, Jaehoon Chung
+ <jh80.chung@samsung.com>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Peng Fan <peng.fan@nxp.com>, Sean Anderson <seanga2@gmail.com>,
+ Tom Rini <trini@konsulko.com>,
+ Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
  u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+References: <20240220083642.34389-1-marek.vasut+renesas@mailbox.org>
+ <69c9c403-2ac2-45b7-9e11-05db7b490a42@bp.renesas.com>
+ <3d2b1c06-0841-4cb2-93cb-6f1ce245f2c1@mailbox.org>
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+Organization: Renesas Electronics Corporation
+In-Reply-To: <3d2b1c06-0841-4cb2-93cb-6f1ce245f2c1@mailbox.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------Co0a6duibU8bacPoquVVc5oQ"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,36 +69,229 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 15 Feb 2024 at 21:03, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->
-> Add a config fragment for building U-Boot such that it can be
-> chainloaded by aboot/LK rather than being flashed directly to the aboot
-> partition.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------Co0a6duibU8bacPoquVVc5oQ
+Content-Type: multipart/mixed; boundary="------------V86Q10A0h04Uwg0p3WhObTVt";
+ protected-headers="v1"
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>
+Cc: Hai Pham <hai.pham.ud@renesas.com>, Jaehoon Chung
+ <jh80.chung@samsung.com>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Peng Fan <peng.fan@nxp.com>, Sean Anderson <seanga2@gmail.com>,
+ Tom Rini <trini@konsulko.com>,
+ Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ u-boot@lists.denx.de
+Message-ID: <47301ada-bbbb-46c7-8a6e-9cf5cc065724@bp.renesas.com>
+Subject: Re: [PATCH] mmc: Drop unused mmc_send_tuning() cmd_error parameter
+References: <20240220083642.34389-1-marek.vasut+renesas@mailbox.org>
+ <69c9c403-2ac2-45b7-9e11-05db7b490a42@bp.renesas.com>
+ <3d2b1c06-0841-4cb2-93cb-6f1ce245f2c1@mailbox.org>
+In-Reply-To: <3d2b1c06-0841-4cb2-93cb-6f1ce245f2c1@mailbox.org>
 
-How does this work in practice? I think a lot of devices, one example
-I see is signed vs unsigned, or emmc vs other storage, have to
-configs, how would a user choose with LK vs the other option here?
+--------------V86Q10A0h04Uwg0p3WhObTVt
+Content-Type: multipart/mixed; boundary="------------zYell1oj0EZmMdE1Sc02U0gV"
 
-> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->  board/qualcomm/dragonboard410c/configs/chainloaded.config | 7 +++++++
->  1 file changed, 7 insertions(+)
->
-> diff --git a/board/qualcomm/dragonboard410c/configs/chainloaded.config b/board/qualcomm/dragonboard410c/configs/chainloaded.config
-> new file mode 100644
-> index 000000000000..3fd064924a1f
-> --- /dev/null
-> +++ b/board/qualcomm/dragonboard410c/configs/chainloaded.config
-> @@ -0,0 +1,7 @@
-> +# CONFIG_ENABLE_ARM_SOC_BOOT0_HOOK is not set
-> +CONFIG_TEXT_BASE=0x0
-> +# CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR is not set
-> +# CONFIG_REMAKE_ELF is not set
-> +CONFIG_POSITION_INDEPENDENT=y
-> +CONFIG_INIT_SP_RELATIVE=y
-> +CONFIG_SYS_INIT_SP_BSS_OFFSET=524288
->
-> --
-> 2.43.1
->
+--------------zYell1oj0EZmMdE1Sc02U0gV
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+On 20/02/2024 11:26, Marek Vasut wrote:
+> On 2/20/24 11:50, Paul Barker wrote:
+>> On 20/02/2024 08:36, Marek Vasut wrote:
+>>> The cmd_error parameter is not used, remove it.
+>>>   [snip]
+>>>
+>>> diff --git a/drivers/mmc/mtk-sd.c b/drivers/mmc/mtk-sd.c
+>>> index 5a0c61daed5..296aaee7331 100644
+>>> --- a/drivers/mmc/mtk-sd.c
+>>> +++ b/drivers/mmc/mtk-sd.c
+>>> @@ -1131,7 +1131,7 @@ static int hs400_tune_response(struct udevice *=
+dev, u32 opcode)
+>>>   				i << PAD_CMD_TUNE_RX_DLY3_S);
+>>>  =20
+>>>   		for (j =3D 0; j < 3; j++) {
+>>> -			mmc_send_tuning(mmc, opcode, &cmd_err);
+>>> +			cmd_err =3D mmc_send_tuning(mmc, opcode);
+>>>   			if (!cmd_err) {
+>>>   				cmd_delay |=3D (1 << i);
+>>>   			} else {
+>>> @@ -1181,7 +1181,7 @@ static int msdc_tune_response(struct udevice *d=
+ev, u32 opcode)
+>>>   				i << MSDC_PAD_TUNE_CMDRDLY_S);
+>>>  =20
+>>>   		for (j =3D 0; j < 3; j++) {
+>>> -			mmc_send_tuning(mmc, opcode, &cmd_err);
+>>> +			cmd_err =3D mmc_send_tuning(mmc, opcode);
+>>>   			if (!cmd_err) {
+>>>   				rise_delay |=3D (1 << i);
+>>>   			} else {
+>>> @@ -1203,7 +1203,7 @@ static int msdc_tune_response(struct udevice *d=
+ev, u32 opcode)
+>>>   				i << MSDC_PAD_TUNE_CMDRDLY_S);
+>>>  =20
+>>>   		for (j =3D 0; j < 3; j++) {
+>>> -			mmc_send_tuning(mmc, opcode, &cmd_err);
+>>> +			cmd_err =3D mmc_send_tuning(mmc, opcode);
+>>>   			if (!cmd_err) {
+>>>   				fall_delay |=3D (1 << i);
+>>>   			} else {
+>>> @@ -1238,7 +1238,7 @@ skip_fall:
+>>>   		clrsetbits_le32(tune_reg, MSDC_PAD_TUNE_CMDRRDLY_M,
+>>>   				i << MSDC_PAD_TUNE_CMDRRDLY_S);
+>>>  =20
+>>> -		mmc_send_tuning(mmc, opcode, &cmd_err);
+>>> +		cmd_err =3D mmc_send_tuning(mmc, opcode);
+>>>   		if (!cmd_err)
+>>>   			internal_delay |=3D (1 << i);
+>>>   	}
+>>> @@ -1264,7 +1264,6 @@ static int msdc_tune_data(struct udevice *dev, =
+u32 opcode)
+>>>   	struct msdc_delay_phase final_rise_delay, final_fall_delay =3D { 0=
+, };
+>>>   	u8 final_delay, final_maxlen;
+>>>   	void __iomem *tune_reg =3D &host->base->pad_tune;
+>>> -	int cmd_err;
+>>>   	int i, ret;
+>>>  =20
+>>>   	if (host->dev_comp->pad_tune0)
+>>> @@ -1277,10 +1276,10 @@ static int msdc_tune_data(struct udevice *dev=
+, u32 opcode)
+>>>   		clrsetbits_le32(tune_reg, MSDC_PAD_TUNE_DATRRDLY_M,
+>>>   				i << MSDC_PAD_TUNE_DATRRDLY_S);
+>>>  =20
+>>> -		ret =3D mmc_send_tuning(mmc, opcode, &cmd_err);
+>>> +		ret =3D mmc_send_tuning(mmc, opcode);
+>>>   		if (!ret) {
+>>>   			rise_delay |=3D (1 << i);
+>>> -		} else if (cmd_err) {
+>>> +		} else {
+>>>   			/* in this case, retune response is needed */
+>>>   			ret =3D msdc_tune_response(dev, opcode);
+>>>   			if (ret)
+>>> @@ -1300,10 +1299,10 @@ static int msdc_tune_data(struct udevice *dev=
+, u32 opcode)
+>>>   		clrsetbits_le32(tune_reg, MSDC_PAD_TUNE_DATRRDLY_M,
+>>>   				i << MSDC_PAD_TUNE_DATRRDLY_S);
+>>>  =20
+>>> -		ret =3D mmc_send_tuning(mmc, opcode, &cmd_err);
+>>> +		ret =3D mmc_send_tuning(mmc, opcode);
+>>>   		if (!ret) {
+>>>   			fall_delay |=3D (1 << i);
+>>> -		} else if (cmd_err) {
+>>> +		} else {
+>>>   			/* in this case, retune response is needed */
+>>>   			ret =3D msdc_tune_response(dev, opcode);
+>>>   			if (ret)
+>>
+>> This driver (mtk-sd.c) seems to be the only one that really uses the
+>> `cmd_error` parameter.
+>>
+>> Looking at the implementation of mmc_send_tuning() in Linux, this
+>> parameter is used so that a caller can differentiate between a command=
+
+>> error and a data error. I don't know enough details about MMC to
+>> understand the distinction, but I assume there is some reason for this=
+=2E
+>> So I wonder if the mtk-sd driver will still work if those error paths
+>> are taken for data errors and not just command errors. Has this change=
+
+>> been tested on some board which uses this driver?
+>=20
+> Not by me, so far this driver used uninitialized error value and assume=
+d=20
+> it was initialized as far as I can tell, so it is likely already broken=
+=2E
+
++To: Ryder Lee, Weijie Gao, Chunfeng Yun
++Cc: GSS_MTK_Uboot_upstream@mediatek.com
+
+Do you have any input as ARM MEDIATEK maintainers?
+
+--=20
+Paul Barker
+
+--------------zYell1oj0EZmMdE1Sc02U0gV
+Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
+Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+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3D
+=3DsIIN
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------zYell1oj0EZmMdE1Sc02U0gV--
+
+--------------V86Q10A0h04Uwg0p3WhObTVt--
+
+--------------Co0a6duibU8bacPoquVVc5oQ
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZdS4UgUDAAAAAAAKCRDbaV4Vf/JGvQym
+AP99Y1T//kRAQhu4uuEOQThlcHFpPlhN7C1bWx29WWxj2AEAmbdsJQ0LansHcHYLkDttxJ/HSNm4
+WuvcOfaRl/bLoQQ=
+=+jea
+-----END PGP SIGNATURE-----
+
+--------------Co0a6duibU8bacPoquVVc5oQ--
