@@ -4,73 +4,144 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 153C9C48BC3
-	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 08:37:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B30A4C48BC4
+	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 08:38:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 529BF87F7B;
-	Tue, 20 Feb 2024 09:37:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 26E5A87F98;
+	Tue, 20 Feb 2024 09:38:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=kontron.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="J9wPmO4+";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Ac6yyduI";
+	dkim=pass (1024-bit key; unprotected) header.d=mysnt.onmicrosoft.com header.i=@mysnt.onmicrosoft.com header.b="NLu9pdzM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 71C3A87F91; Tue, 20 Feb 2024 09:37:07 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2AB1F87F9E; Tue, 20 Feb 2024 09:38:23 +0100 (CET)
+Received: from EUR04-HE1-obe.outbound.protection.outlook.com
+ (mail-he1eur04on20700.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:260f::700])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F74D87F6F
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 09:37:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 344AA87F99
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 09:38:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=none (p=none dis=none) header.from=kontron.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4TfCSY1pPFz9scM;
- Tue, 20 Feb 2024 09:37:01 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1708418221;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=ROZFzPAp8KPzLvgn1oS93NDGdsKYU/PalnelHuWOmOE=;
- b=J9wPmO4+C1b2ljm+ePyBnUwbFRo7pepubfiuVqAiuZyOmTGP71GP7gNWudPpTzvqyyuRY5
- kORFHFaMmrJzNrNpsNNLZUieq9qXR5t9hEo+qXO8dGq6eQb1LufzHGmr7yxIYPJ0drvsqB
- tD+82MEAbZnoqrtme4fnHfKiVLmZSb9CdKUhpzFJVvUgD7YJfLVsDK4UewWo7N50am0Tda
- VuXCAiX81YmwsRh+pX3KnazTgDhcz7Hj5hfXsZohOz8q90MJJTKrg/iF6RQp4TolfEqUA2
- W1GKLfBfQA8M0+4uKOJc0NXpYRDPCxmTyNGRhAwv6YxnDuZc2j1zMQ0dqOX3NA==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1708418219;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=ROZFzPAp8KPzLvgn1oS93NDGdsKYU/PalnelHuWOmOE=;
- b=Ac6yyduIzg1VTaVgDbD0FtYF2+2N5MAD0mES71VuMEzJFgJvOsU3UQ7x81D/nfcfUUaFeE
- hZhnSd0i3AfyymsrDhxk7LkQy3ucgHGwIslDk2uW/oruQGjwZ9jcEJTCCFWn8qR9HyclSB
- 66h/IBIxLAaF3bg3GAb3Ozi6HQfsEkwUdMaXBMoMmFIIGsYpPxwl8xKEHwPYUAN+x84RIN
- X2qsfPCnXdR+Fuiioz7s2vb+0vdK12p7Nbg4NC79jGca+YMpTUFIoCzyQOn3JJezDAUqE+
- r3EeHxwhwK7UBJcfSUHxzDY1T7KlHX7XGkjHFBz4yFiF7Q9czoWj24COS5fGnw==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Hai Pham <hai.pham.ud@renesas.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>, Peng Fan <peng.fan@nxp.com>,
- Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>,
- Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
-Subject: [PATCH] mmc: Drop unused mmc_send_tuning() cmd_error parameter
-Date: Tue, 20 Feb 2024 09:36:23 +0100
-Message-ID: <20240220083642.34389-1-marek.vasut+renesas@mailbox.org>
+ spf=pass smtp.mailfrom=frieder.schrempf@kontron.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=jR0uDIQuBKzr2Jh4eDrlg5mdzrNjoDrxz7QPdh0gafpCqRnLvZqLkL4MpX7TG5WqiSlzeVMXfc2uPYIPrQs9Wdu4HbNFEHRq2jKPNu74u+fkN0Tb9MjCeiEQNd32edL3bre5qHNEVPq/Ui/rBsGilIhP15FdlFb17SkN42z3DWeztj6IuAc7ZVySQPCX1ykVv7t5RUvFrmBl4Qwt9itoBSGXKr6K9ymp1fcBbE0HXpfuegayGGNLZW8XQHqSvNNYSPaqZoa24pfvn5/jUjD7npxDsQsljvhQmwWi78DUVIMzzZYF/u+rFc54p+H6mI60hVzetisuFrglGdTmjZoNvw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=uhvAMOTiLrzXsqjLzPxUxT/V2xnrL8PkWwc78KffvJc=;
+ b=ml5JataMgBKFzVu9AVQouRzAuzpyimea4rtokHovfFAYJuQMU+uPlKtuDuQ+nKmGClWEgIr00Qp3DAJJJYtpiHFYc0ncKXt886/E2k+A1hdE2xnrnhmjA8aMQs/quYEifR7mj3iR+LVMBvaXS9jCcOSzPILaCQST0g3sAWpZG24cXaNePvXKMzhNLHFySIfmYvEIzwCF3zezmuNRzLrfAt4cT/QC4gVDLt9lIRJyHce2FAtj/Bta0wSyChWTZsNTlx60xbGuTQHAOZaSHEd6mShamdLiujqSrwXeZP/rBKt1SguImCExTxeiDt01KZdgXb0FzdK75F5RRgqK7e1Ysg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=kontron.de; dmarc=pass action=none header.from=kontron.de;
+ dkim=pass header.d=kontron.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mysnt.onmicrosoft.com; 
+ s=selector2-mysnt-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=uhvAMOTiLrzXsqjLzPxUxT/V2xnrL8PkWwc78KffvJc=;
+ b=NLu9pdzMA+SIFv2fxJO0ctKesO6FyHqPMs9uiDkiq+Fc8AkxAAJ/5/WfSLJMX/Har80yLKhcNWamXLfsYjzEsbipiLdmbCI3uguD4qigyn526vCEa3ZGW0pwpouxUVlKxxyP8WHkB+WFN3CnDc8tVQEmUyXC+MlC1/ISi1APcn8=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=kontron.de;
+Received: from PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:263::10)
+ by GV2PR10MB6066.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:aa::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7292.38; Tue, 20 Feb
+ 2024 08:38:03 +0000
+Received: from PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::7059:adf6:18fa:1ddf]) by PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::7059:adf6:18fa:1ddf%3]) with mapi id 15.20.7292.029; Tue, 20 Feb 2024
+ 08:38:03 +0000
+Message-ID: <847f8bd9-000b-4005-b6e3-2075b72191d0@kontron.de>
+Date: Tue, 20 Feb 2024 09:38:01 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 2/3] board: Add support for Sielaff i.MX6 Solo board
+Content-Language: en-US, de-DE
+To: Dan Carpenter <dan.carpenter@linaro.org>,
+ Frieder Schrempf <frieder@fris.de>
+Cc: Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ Christian Hewitt <christianshewitt@gmail.com>,
+ FUKAUMI Naoki <naoki@radxa.com>, Hai Pham <hai.pham.ud@renesas.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, Marek Vasut <marex@denx.de>,
+ Martyn Welch <martyn.welch@collabora.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Peng Fan
+ <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tianling Shen <cnsztl@gmail.com>
+References: <20240215133527.216126-1-frieder@fris.de>
+ <20240215133527.216126-2-frieder@fris.de>
+ <1a3b311d-0f5d-4f2e-a9f7-da0ec0c4f60b@moroto.mountain>
+From: Frieder Schrempf <frieder.schrempf@kontron.de>
+In-Reply-To: <1a3b311d-0f5d-4f2e-a9f7-da0ec0c4f60b@moroto.mountain>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR0P281CA0126.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:97::6) To PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:102:263::10)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: a6d956c761978a46ade
-X-MBO-RS-META: cswsfd7ydhd95ursafbz9idokbgy1xgb
-X-Rspamd-Queue-Id: 4TfCSY1pPFz9scM
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PA4PR10MB5681:EE_|GV2PR10MB6066:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2fec69d8-7767-48e6-8694-08dc31ef40b8
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 22+LpLbsp4LiX4YtS3FjxTxG7kgBhTP6pnHdkdrDB53cy1tRcpqi/38GGZi+i+i5JGXeza9qj8bxfyo2rcaPCRureuysnoO21Nnm0Dgt5I3gDbteShynwMY3ugPyoRQitRNwcmaauq797iue5Zbd3pcjLuJwHQyv8wCGrjyYtjVDooEqT3HV3Yh6hHLGD/BdLM8bzIfGisPzFzCoLiTO2HdP+fNuMEGys6kXTwO8XI5PLqAVUq7w1VEGxQXa5r8yGfJwGoKOFj7faE6erELy0rOTQ6bs5JeepjyEm8RnVDwWVaLPcNGjqGZ/Sh7ZK5P0ROyJ1bELwUFPwWQi1SmauQxwiE1e1G4CALwYgcFQPo+XrWVmCAKAdt8k3R1OgoMWLZGH96X8T9LxoKtcaMkLSFKucMvvjT/U9rQIHrMvY4Cut2mnXluqozlC3fIIgnxaA15SIc8+eOBkPudW7UodkLtwTiUoVYhSwHVfZv0Gk1tlb8MQuxxjdCKKovEyd9TLtn1l42q3YXa0aV2ymw0PtQJ3kDxltDt7G0i4oVZuCHmWaDm+Bq1Z7KOL2OTmZ8cp
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230031)(230273577357003); DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?allCTzV3MDF1cVlabmk3WGpLc04zcWdEM09CL0hMZysvR1RaTVQ4Vndjamhz?=
+ =?utf-8?B?VWpTejFqKzJlR29WZTBnTHE2SGFJdFdxWUZjYkZYS2VjaEQxeENoZ0tNM0Mr?=
+ =?utf-8?B?c2grSjVwSHpGam9BQnhCSnN2K0dyaE5tWmlxeXorRlZlWk90VGtlZitMQUFo?=
+ =?utf-8?B?blB0TFh4QmREV2FLQ0FqSmZkRGRibmszc0ZEL1VOeUE5eFlkOElPT01PWTcx?=
+ =?utf-8?B?WGwxaDQ1K2l0a09WZXB3czdVTDdvc2MyUzROVDlTVnBQalZIRFM5ZkFOczM5?=
+ =?utf-8?B?NzYwZUN6ckVCa2Y3a2NkTVFSa2x6RElZdytiQzRnc1VQZ3cxVUpOL3A3RFRG?=
+ =?utf-8?B?UzkzUWs4YUlXU2ZtLzBzZXA5Y3BscFkzOE40ZGF0RlZqTk9oWGM5SkRkYlZ2?=
+ =?utf-8?B?enJBMmVMSXVDTTFqZi9hRlBCYlpHTnUzUUN6SXVxdVlheC83SVJzRDQ2TTRH?=
+ =?utf-8?B?U0dRaDh2amo5eTUwdlo1aDJDeGJIbkNsbmRYUlY5SC9sQ1gxMysvdisxREti?=
+ =?utf-8?B?bVltTXVRMUpjQVp2SDhGNmpRdzN2cEQzMVRubHZlYXlsQXI0UlpWUEoxMFpw?=
+ =?utf-8?B?aWx3WEVVWE9kT25xTUk5NHN1MW5IK09EMUlVQ3V1eVNQVVlYbERYa1R6RXMy?=
+ =?utf-8?B?d3JwVmtLUTh0dGpxbngvRDFTSTNWMGhKRHpUYS9lVVZRa0lVSG45RlQ0YjV0?=
+ =?utf-8?B?MHovd3ptaWZzd3VrdVZDVkdqam4vN2xZWElUdnlDVThsVzQ5bU9BWGRwalBz?=
+ =?utf-8?B?TmY2TjF0aTBjVzZSak01R281ZUpmUU5SK0ZsSEhRQTkvNUF6a216dEJ3MjhR?=
+ =?utf-8?B?RlFsUGJ3eFBSVENsbGs1RGlVZE42eWt2V2wyTUZVU2liWTRUQVlPeW1tNTR1?=
+ =?utf-8?B?VFRZdnd3aTZ5OHhSU1F1MTVSaHEvVkxiZzNrWFVQQUt6VEcyUTZhRkFXN0Z0?=
+ =?utf-8?B?WnlidjBFemU3b2JVa0VuWjlqWU15RTlxaTBENmw0alhHNkNLKzBGbHpVZFlp?=
+ =?utf-8?B?MkZGWWJZUVpGVXVOdzRmSThWa01HVExtVmtJZ0lYK29BSkp6Y0M3dUozU3Yw?=
+ =?utf-8?B?Y281Y0JVK2NFalgvbkpQV1V4RHVWd1RtbU1VMHJjelVsSFZnRVd5T0JUby92?=
+ =?utf-8?B?TThpdXJBVXVKRlJzNmZ1QnQ0Q0pkUTRTTXNvZWkxeGQ1SVUrNW5USDVxK2NH?=
+ =?utf-8?B?U1FqeHB5Q2djemt3OFF0VjlsNG5zMlMxUUxjQVVPdE9OeHJLVkgxdXliMk5a?=
+ =?utf-8?B?T0hPUnA0VGtxVE5DMk1ZUnd6TUd2dW1HK3FHOFlsSEpsWW5tcExERkpxNUtt?=
+ =?utf-8?B?R1Z2Nnc4ZW5EZjFnaDlLWEZXbVErMlZPOXNMWHAzai9tbXJMZ001RE1RRzl4?=
+ =?utf-8?B?ekR3cGhaSnRTMUF6WmY2N0NuaDBIVDRtMEdhdjY0TjZEeXdUeGQ0MkxPcW0v?=
+ =?utf-8?B?RVFRZTA2dHZiVER6LzcwT2wyeFd4b0N3eGJzNG1GbG1jZm84KzJoTGM2MlVv?=
+ =?utf-8?B?cUg4ZXZQb3hJcEZoWDNPTkhuenZDSWNRVnR0MlFYcElCYld6aUFjM1NmWU1X?=
+ =?utf-8?B?dkRTZlkvUVBKME9FeU5XenF6VDAyc29SNXN0dWdXSWhnaHdOLzY5eU1peWRW?=
+ =?utf-8?B?bjRndkZhbkxnSVZKQXVxYURDVXAzNkQ0THcrM0xaWWZLV09YSXhxVGRZMHJr?=
+ =?utf-8?B?bFBVeXE2NGdDNk85NFA4QjJmSDQ0VFRaWHJTZGdKUU9DY21EMmxBRDlwdy9T?=
+ =?utf-8?B?Q294RnNldm1xZVphd3dXVHpCNTNvTjFYRFJTRXRDdFlmeEFtVW1NWFVpYktt?=
+ =?utf-8?B?Vko1b1FSNUExY3F2dFhaTURBSEl5MnRicmI2UnlsRTgzOGZBQno0Ukt4TEw1?=
+ =?utf-8?B?c2lHNlNFL3E4Mmo0dnM1OGwyckQwWFR0ZExoN2FlSWc2ZG1sM2c4TWc2blhO?=
+ =?utf-8?B?SUY0TEFxUUYwQmJBRWhOTUJoMmJHSGwzRURSSkx1QXBXejJJaFFUNTkyNS9t?=
+ =?utf-8?B?QnFDdS8xWU5yR1NXOUZ6NS96aHFKYnpUancvdU5ObmRvaFRFMG4wRnJaejlB?=
+ =?utf-8?B?eStPcmR0R25OMjc3TmFoQlpBNnp2UUNPaE1GMTcyakU2cDNaVjBZenhyYStU?=
+ =?utf-8?B?MExTaGQ4eDJuMklaeHFjVytwZTIxKzNZOGlJdjcwcTlEb1I0a0JKN0tlWER5?=
+ =?utf-8?B?bkE9PQ==?=
+X-OriginatorOrg: kontron.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2fec69d8-7767-48e6-8694-08dc31ef40b8
+X-MS-Exchange-CrossTenant-AuthSource: PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Feb 2024 08:38:03.3873 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8c9d3c97-3fd9-41c8-a2b1-646f3942daf1
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: YLyGdJkG4rNSoimbeQ7TUP29Ekl9pw/9tiImrCe8z5LLyCQu4D8V2nA5b7+HGQbLcMhuwBy8tvjcjpAA6F/8UTUa17O4xFxL1j6OEm60TVI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR10MB6066
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,271 +158,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The cmd_error parameter is not used, remove it.
+Hi Dan,
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Hai Pham <hai.pham.ud@renesas.com>
-Cc: Jaehoon Chung <jh80.chung@samsung.com>
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-Cc: Peng Fan <peng.fan@nxp.com>
-Cc: Sean Anderson <seanga2@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
----
- drivers/mmc/am654_sdhci.c    |  2 +-
- drivers/mmc/fsl_esdhc.c      |  2 +-
- drivers/mmc/fsl_esdhc_imx.c  |  2 +-
- drivers/mmc/mmc.c            |  2 +-
- drivers/mmc/mtk-sd.c         | 21 ++++++++++-----------
- drivers/mmc/octeontx_hsmmc.c |  8 +++++++-
- drivers/mmc/omap_hsmmc.c     |  6 +++---
- drivers/mmc/renesas-sdhi.c   |  2 +-
- drivers/mmc/sdhci-cadence.c  |  2 +-
- include/mmc.h                |  2 +-
- 10 files changed, 27 insertions(+), 22 deletions(-)
+On 20.02.24 06:56, Dan Carpenter wrote:
+> On Thu, Feb 15, 2024 at 02:35:20PM +0100, Frieder Schrempf wrote:
+>> +int board_mmc_getcd(struct mmc *mmc)
+> 
+> This function is never called.  Also for bool functions make them type
+> bool and name them so that it's clear they return true/false such as
+> board_mmc_getcd_was_successful() but less wordy.
 
-diff --git a/drivers/mmc/am654_sdhci.c b/drivers/mmc/am654_sdhci.c
-index 05595bdac39..2139fea04d5 100644
---- a/drivers/mmc/am654_sdhci.c
-+++ b/drivers/mmc/am654_sdhci.c
-@@ -390,7 +390,7 @@ static int am654_sdhci_execute_tuning(struct mmc *mmc, u8 opcode)
- 	for (itap = 0; itap < ITAP_MAX; itap++) {
- 		am654_sdhci_write_itapdly(plat, itap);
- 
--		cur_val = !mmc_send_tuning(mmc, opcode, NULL);
-+		cur_val = !mmc_send_tuning(mmc, opcode);
- 		if (cur_val && !prev_val)
- 			pass_window = itap;
- 
-diff --git a/drivers/mmc/fsl_esdhc.c b/drivers/mmc/fsl_esdhc.c
-index d5066666698..d44dfa5d06f 100644
---- a/drivers/mmc/fsl_esdhc.c
-+++ b/drivers/mmc/fsl_esdhc.c
-@@ -1123,7 +1123,7 @@ static int fsl_esdhc_execute_tuning(struct udevice *dev, uint32_t opcode)
- 	esdhc_write32(&regs->irqstaten, IRQSTATEN_BRR);
- 
- 	for (i = 0; i < MAX_TUNING_LOOP; i++) {
--		mmc_send_tuning(mmc, opcode, NULL);
-+		mmc_send_tuning(mmc, opcode);
- 		mdelay(1);
- 
- 		val = esdhc_read32(&regs->autoc12err);
-diff --git a/drivers/mmc/fsl_esdhc_imx.c b/drivers/mmc/fsl_esdhc_imx.c
-index 7c39c86c5e9..b74c0140020 100644
---- a/drivers/mmc/fsl_esdhc_imx.c
-+++ b/drivers/mmc/fsl_esdhc_imx.c
-@@ -882,7 +882,7 @@ static int fsl_esdhc_execute_tuning(struct udevice *dev, uint32_t opcode)
- 		esdhc_write32(&regs->mixctrl, val);
- 
- 		/* We are using STD tuning, no need to check return value */
--		mmc_send_tuning(mmc, opcode, NULL);
-+		mmc_send_tuning(mmc, opcode);
- 
- 		ctrl = esdhc_read32(&regs->autoc12err);
- 		if ((!(ctrl & MIX_CTRL_EXE_TUNE)) &&
-diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
-index d96db7a0f83..83f9ae8bb7d 100644
---- a/drivers/mmc/mmc.c
-+++ b/drivers/mmc/mmc.c
-@@ -360,7 +360,7 @@ static const u8 tuning_blk_pattern_8bit[] = {
- 	0xff, 0x77, 0x77, 0xff, 0x77, 0xbb, 0xdd, 0xee,
- };
- 
--int mmc_send_tuning(struct mmc *mmc, u32 opcode, int *cmd_error)
-+int mmc_send_tuning(struct mmc *mmc, u32 opcode)
- {
- 	struct mmc_cmd cmd;
- 	struct mmc_data data;
-diff --git a/drivers/mmc/mtk-sd.c b/drivers/mmc/mtk-sd.c
-index 5a0c61daed5..296aaee7331 100644
---- a/drivers/mmc/mtk-sd.c
-+++ b/drivers/mmc/mtk-sd.c
-@@ -1131,7 +1131,7 @@ static int hs400_tune_response(struct udevice *dev, u32 opcode)
- 				i << PAD_CMD_TUNE_RX_DLY3_S);
- 
- 		for (j = 0; j < 3; j++) {
--			mmc_send_tuning(mmc, opcode, &cmd_err);
-+			cmd_err = mmc_send_tuning(mmc, opcode);
- 			if (!cmd_err) {
- 				cmd_delay |= (1 << i);
- 			} else {
-@@ -1181,7 +1181,7 @@ static int msdc_tune_response(struct udevice *dev, u32 opcode)
- 				i << MSDC_PAD_TUNE_CMDRDLY_S);
- 
- 		for (j = 0; j < 3; j++) {
--			mmc_send_tuning(mmc, opcode, &cmd_err);
-+			cmd_err = mmc_send_tuning(mmc, opcode);
- 			if (!cmd_err) {
- 				rise_delay |= (1 << i);
- 			} else {
-@@ -1203,7 +1203,7 @@ static int msdc_tune_response(struct udevice *dev, u32 opcode)
- 				i << MSDC_PAD_TUNE_CMDRDLY_S);
- 
- 		for (j = 0; j < 3; j++) {
--			mmc_send_tuning(mmc, opcode, &cmd_err);
-+			cmd_err = mmc_send_tuning(mmc, opcode);
- 			if (!cmd_err) {
- 				fall_delay |= (1 << i);
- 			} else {
-@@ -1238,7 +1238,7 @@ skip_fall:
- 		clrsetbits_le32(tune_reg, MSDC_PAD_TUNE_CMDRRDLY_M,
- 				i << MSDC_PAD_TUNE_CMDRRDLY_S);
- 
--		mmc_send_tuning(mmc, opcode, &cmd_err);
-+		cmd_err = mmc_send_tuning(mmc, opcode);
- 		if (!cmd_err)
- 			internal_delay |= (1 << i);
- 	}
-@@ -1264,7 +1264,6 @@ static int msdc_tune_data(struct udevice *dev, u32 opcode)
- 	struct msdc_delay_phase final_rise_delay, final_fall_delay = { 0, };
- 	u8 final_delay, final_maxlen;
- 	void __iomem *tune_reg = &host->base->pad_tune;
--	int cmd_err;
- 	int i, ret;
- 
- 	if (host->dev_comp->pad_tune0)
-@@ -1277,10 +1276,10 @@ static int msdc_tune_data(struct udevice *dev, u32 opcode)
- 		clrsetbits_le32(tune_reg, MSDC_PAD_TUNE_DATRRDLY_M,
- 				i << MSDC_PAD_TUNE_DATRRDLY_S);
- 
--		ret = mmc_send_tuning(mmc, opcode, &cmd_err);
-+		ret = mmc_send_tuning(mmc, opcode);
- 		if (!ret) {
- 			rise_delay |= (1 << i);
--		} else if (cmd_err) {
-+		} else {
- 			/* in this case, retune response is needed */
- 			ret = msdc_tune_response(dev, opcode);
- 			if (ret)
-@@ -1300,10 +1299,10 @@ static int msdc_tune_data(struct udevice *dev, u32 opcode)
- 		clrsetbits_le32(tune_reg, MSDC_PAD_TUNE_DATRRDLY_M,
- 				i << MSDC_PAD_TUNE_DATRRDLY_S);
- 
--		ret = mmc_send_tuning(mmc, opcode, &cmd_err);
-+		ret = mmc_send_tuning(mmc, opcode);
- 		if (!ret) {
- 			fall_delay |= (1 << i);
--		} else if (cmd_err) {
-+		} else {
- 			/* in this case, retune response is needed */
- 			ret = msdc_tune_response(dev, opcode);
- 			if (ret)
-@@ -1362,7 +1361,7 @@ static int msdc_tune_together(struct udevice *dev, u32 opcode)
- 	for (i = 0; i < PAD_DELAY_MAX; i++) {
- 		msdc_set_cmd_delay(host, i);
- 		msdc_set_data_delay(host, i);
--		ret = mmc_send_tuning(mmc, opcode, NULL);
-+		ret = mmc_send_tuning(mmc, opcode);
- 		if (!ret)
- 			rise_delay |= (1 << i);
- 	}
-@@ -1378,7 +1377,7 @@ static int msdc_tune_together(struct udevice *dev, u32 opcode)
- 	for (i = 0; i < PAD_DELAY_MAX; i++) {
- 		msdc_set_cmd_delay(host, i);
- 		msdc_set_data_delay(host, i);
--		ret = mmc_send_tuning(mmc, opcode, NULL);
-+		ret = mmc_send_tuning(mmc, opcode);
- 		if (!ret)
- 			fall_delay |= (1 << i);
- 	}
-diff --git a/drivers/mmc/octeontx_hsmmc.c b/drivers/mmc/octeontx_hsmmc.c
-index 4ee62df9d40..7f9c4f4d36d 100644
---- a/drivers/mmc/octeontx_hsmmc.c
-+++ b/drivers/mmc/octeontx_hsmmc.c
-@@ -1653,6 +1653,12 @@ static int octeontx_mmc_test_cmd(struct mmc *mmc, u32 opcode, int *statp)
- 	return err;
- }
- 
-+static int octeontx_mmc_send_tuning(struct mmc *mmc, u32 opcode, int *error)
-+{
-+	*error = 0;
-+	return mmc_send_tuning(mmc, opcode);
-+}
-+
- static int octeontx_mmc_test_get_ext_csd(struct mmc *mmc, u32 opcode,
- 					 int *statp)
- {
-@@ -2006,7 +2012,7 @@ struct adj adj[] = {
- 	{ "CMD_IN", 48, octeontx_mmc_test_cmd, MMC_CMD_SEND_STATUS,
- 	  false, false, false, 2, },
- /*	{ "CMD_OUT", 32, octeontx_mmc_test_cmd, MMC_CMD_SEND_STATUS, },*/
--	{ "DATA_IN(HS200)", 16, mmc_send_tuning,
-+	{ "DATA_IN(HS200)", 16, octeontx_mmc_send_tuning,
- 		MMC_CMD_SEND_TUNING_BLOCK_HS200, false, true, false, 2, },
- 	{ "DATA_IN", 16, octeontx_mmc_test_get_ext_csd, 0, false, false,
- 	  true, 2, },
-diff --git a/drivers/mmc/omap_hsmmc.c b/drivers/mmc/omap_hsmmc.c
-index a2595d19e7f..99f21b2c546 100644
---- a/drivers/mmc/omap_hsmmc.c
-+++ b/drivers/mmc/omap_hsmmc.c
-@@ -666,7 +666,7 @@ static int omap_hsmmc_execute_tuning(struct udevice *dev, uint opcode)
- 	while (phase_delay <= MAX_PHASE_DELAY) {
- 		omap_hsmmc_set_dll(mmc, phase_delay);
- 
--		cur_match = !mmc_send_tuning(mmc, opcode, NULL);
-+		cur_match = !mmc_send_tuning(mmc, opcode);
- 
- 		if (cur_match) {
- 			if (prev_match) {
-@@ -731,7 +731,7 @@ static int omap_hsmmc_execute_tuning(struct udevice *dev, uint opcode)
- 	 */
- 	for (i = 3; i <= 10; i++) {
- 		omap_hsmmc_set_dll(mmc, phase_delay + i);
--		if (mmc_send_tuning(mmc, opcode, NULL)) {
-+		if (mmc_send_tuning(mmc, opcode)) {
- 			if (temperature < 10000)
- 				phase_delay += i + 6;
- 			else if (temperature < 20000)
-@@ -749,7 +749,7 @@ static int omap_hsmmc_execute_tuning(struct udevice *dev, uint opcode)
- 
- 	for (i = 2; i >= -10; i--) {
- 		omap_hsmmc_set_dll(mmc, phase_delay + i);
--		if (mmc_send_tuning(mmc, opcode, NULL)) {
-+		if (mmc_send_tuning(mmc, opcode)) {
- 			if (temperature < 10000)
- 				phase_delay += i + 12;
- 			else if (temperature < 20000)
-diff --git a/drivers/mmc/renesas-sdhi.c b/drivers/mmc/renesas-sdhi.c
-index a74559ca686..9770b6bb5e1 100644
---- a/drivers/mmc/renesas-sdhi.c
-+++ b/drivers/mmc/renesas-sdhi.c
-@@ -605,7 +605,7 @@ int renesas_sdhi_execute_tuning(struct udevice *dev, uint opcode)
- 		caps = priv->caps;
- 		priv->caps &= ~TMIO_SD_CAP_DMA_INTERNAL;
- 
--		ret = mmc_send_tuning(mmc, opcode, NULL);
-+		ret = mmc_send_tuning(mmc, opcode);
- 
- 		priv->caps = caps;
- 
-diff --git a/drivers/mmc/sdhci-cadence.c b/drivers/mmc/sdhci-cadence.c
-index 327a05ad11d..c0a9f60b149 100644
---- a/drivers/mmc/sdhci-cadence.c
-+++ b/drivers/mmc/sdhci-cadence.c
-@@ -224,7 +224,7 @@ static int __maybe_unused sdhci_cdns_execute_tuning(struct udevice *dev,
- 
- 	for (i = 0; i < SDHCI_CDNS_MAX_TUNING_LOOP; i++) {
- 		if (sdhci_cdns_set_tune_val(plat, i) ||
--		    mmc_send_tuning(mmc, opcode, NULL)) { /* bad */
-+		    mmc_send_tuning(mmc, opcode)) { /* bad */
- 			cur_streak = 0;
- 		} else { /* good */
- 			cur_streak++;
-diff --git a/include/mmc.h b/include/mmc.h
-index 1022db3ffa7..2b9a6aa8ee0 100644
---- a/include/mmc.h
-+++ b/include/mmc.h
-@@ -795,7 +795,7 @@ int mmc_unbind(struct udevice *dev);
- int mmc_initialize(struct bd_info *bis);
- int mmc_init_device(int num);
- int mmc_init(struct mmc *mmc);
--int mmc_send_tuning(struct mmc *mmc, u32 opcode, int *cmd_error);
-+int mmc_send_tuning(struct mmc *mmc, u32 opcode);
- int mmc_send_cmd(struct mmc *mmc, struct mmc_cmd *cmd, struct mmc_data *data);
- int mmc_deinit(struct mmc *mmc);
- 
--- 
-2.43.0
+What makes you think so? This is an implementation for the existing
+prototype from mmc.h. As far as I can see this is called by the mmc
+driver and I can't change it in any way.
 
+> 
+>> +{
+>> +	struct fsl_esdhc_cfg *cfg = (struct fsl_esdhc_cfg *)mmc->priv;
+>> +	int ret = 0;
+>> +
+>> +	switch (cfg->esdhc_base) {
+>> +	case USDHC3_BASE_ADDR:
+>> +		ret = !gpio_get_value(USDHC3_CD_GPIO);
+>> +		break;
+>> +	}
+>> +
+>> +	return ret;
+>> +}
+>> +
+>> +int board_mmc_init(struct bd_info *bis)
+>> +{
+>> +	int i, ret;
+>> +
+>> +	/*
+>> +	 * According to the board_mmc_init() the following map is done:
+>> +	 * (U-boot device node)    (Physical Port)
+>> +	 * mmc0                    USDHC1
+>> +	 * mmc1                    USDHC2
+>> +	 */
+>> +	for (i = 0; i < CFG_SYS_FSL_USDHC_NUM; i++) {
+>> +		switch (i) {
+>> +		case 0:
+>> +			imx_iomux_v3_setup_multiple_pads(usdhc3_pads,
+>> +							 ARRAY_SIZE(usdhc3_pads));
+>> +			gpio_direction_input(USDHC3_CD_GPIO);
+>> +			usdhc_cfg[0].sdhc_clk = mxc_get_clock(MXC_ESDHC3_CLK);
+>> +			break;
+>> +		default:
+>> +			printf("Warning: you configured more USDHC controllers \
+>> +				(%d) than supported by the board\n", i + 1);
+>> +			return -EINVAL;
+> 
+> This will look weird if it's ever printed:
+> 
+> "Warning: you configured more USDHC controllers 				(%d) than supported by the board\n"
+> 
+> There is a checkpatch warnings for this.
+> 
+> WARNING: Avoid line continuations in quoted strings
+> #1137: FILE: board/sielaff/imx6dl-sielaff/spl.c:96:
+> +                       printf("Warning: you configured more USDHC controllers \
+
+Agreed. Fabio already applied this to his tree. I can send a fixup for this.
+
+Thanks
+Frieder
