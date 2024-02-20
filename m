@@ -4,93 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FA66C48BC3
-	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 11:54:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2609DC48BC3
+	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 13:23:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CBEE587F95;
-	Tue, 20 Feb 2024 12:54:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 4ACB987D2C;
+	Tue, 20 Feb 2024 14:23:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="tR2lG4a3";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TJGObV0R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ABE4687F96; Tue, 20 Feb 2024 12:54:40 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2C91587D70; Tue, 20 Feb 2024 14:23:12 +0100 (CET)
+Received: from mail-vs1-xe2a.google.com (mail-vs1-xe2a.google.com
+ [IPv6:2607:f8b0:4864:20::e2a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E77A83346
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 12:54:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B36E287C13
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 14:22:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 143653F68E
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 11:54:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1708430074;
- bh=sBJsrfXsg+5koADtVd+VStsi4cpY2WzYSO4jNy5prZI=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=tR2lG4a3za7qI1zJhMjgxkIRtvusiUCly9cjtPWuBkedl+2i6MFWj7OeuX9rR1n6F
- H/BpGUwQU+amS3kv71JH5FdtYjNnjXahfGUIvz4RLk78xhPcge1AelrxtD0YZ2bYoE
- AHthu4/Yyh+GfMF/kZKREfK3AuKWslSwj8kIYZ8kOAO/U2gvv3TZMaXi2TyKgvOUL9
- Gl1JBOI/pq6jfGbdb8hG4ojWUYFK5uAj5upQ+dpL1OfUtBAUfkEYqXb8K8BhZTxkGI
- q0eHkNCdk9usw8NU/O+qOhMkwr6S50hS30MCV4n+yba3yLHd81+ezYUrKsEHe1I4PB
- wgYjx572+M5YQ==
-Received: by mail-wr1-f69.google.com with SMTP id
- ffacd0b85a97d-33d39bc6bf4so1372139f8f.0
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 03:54:34 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-vs1-xe2a.google.com with SMTP id
+ ada2fe7eead31-4704f3e2a99so396509137.3
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 05:22:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1708435371; x=1709040171; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Ekxk/z/WUmDuMQO/AjNvmJ1hdWe/mt1eDMy96YOWPMQ=;
+ b=TJGObV0RqnOTlkbVyCu9VfhHQYNXI0oBnbBom7kp+1fI/JfHSMKqkPAv05QUi+Nqce
+ //DMjw8BrbhqVdNIAxV86PcZ6GORz9LCXTVcoH+o4UnYvioyEVqgouumRCEUv7ABpKKZ
+ hXctXLK+76mfjpzscBDwzKhhNZEo0U0+loI5Kt+7Jbs63uizdiblZxiTQx3NnFEC5/dO
+ 9qw49HqpAd42GKmiV1NnlAGLA0khaKSlR7MbNS7/mGJACchVEWDb3P2AQomPM0UGOIrv
+ fQ+CgL6akzwYAJrGj1jVNBq5vx1UzgeL2zf1RfeZvyJRYt7ev5HiEi+wgERD5AgUQOf1
+ aP1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708430073; x=1709034873;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1708435371; x=1709040171;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=sBJsrfXsg+5koADtVd+VStsi4cpY2WzYSO4jNy5prZI=;
- b=q1l3yJa3+CiMjc4MLlle7XI2BRveL9MQT7t4w6kEnMPhz/iRd7lC2QlHD/IpEmTeES
- etfplc7tHWrXeq3Pqe+I8BZOC0Uqbb4HTBPhTYRNFz3iKGMWbVkpY2Q4ZlJ4EjBC1+Wx
- D7iRfUES7/tHCF9udPrMOVKZhOF5vaCOD/aj9+qLhUWKxpJVNChHmeOFoMuyUbMRnq6R
- eHZ0dGfTodKfiRuv2TmEOoETCW6q8UnRhwJtPwhwV+9ADLHbHM2aL6UyK+tVFhNB3eJN
- OLHj7z1HUcyUmudPR0EIofWVKOzNeOUijEc7+cDHcYXtYAULbQsDdk3gAiIRdZm7xNhR
- ellA==
+ bh=Ekxk/z/WUmDuMQO/AjNvmJ1hdWe/mt1eDMy96YOWPMQ=;
+ b=JoYv72CAYwLHO+TDFEd6AsDJJUYAhyhpOyKlnnU0JdRgWKOLxiKoGyCBb81KzdQmWu
+ WnlwlS36C7ZPr2B9Q+LHKmXYsmFXpgzYygs4w8qb7lCpINcD3axfpGozX1xi8XUyRVaB
+ cvg7NKeiqI13bpxc+UlJtkB/yl8c8rhdPjnjWpLtTI1RhCs2OH/+USl+tKt7rlfA1hXf
+ 6DgWg2EUTT2whFw1lrpC9/bl46t4clgbKK+g6IanEJecWVl7fSFj0r7O8hvG4HPtulS2
+ 63aAGq8mvHCw1JUHoEPMquqL+ZheLmSg9AJkM+r2hZ7kLhxvwywTFtbs0vQW2RPioYbd
+ Ec5w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW+pgjzisFb7NYXIJC0P8CIypRGvYjb/uWGLx1BAQCIbBBpPNEwcz4dYWSmyiOyv+EBc6aIKU3z08Vn8pdMw5KfjOm2sg==
-X-Gm-Message-State: AOJu0YwpTJyNqp5nJPIOCpGthXTfH0OgcS8WzAF1EWOiIhyfdSpV7s7v
- SRX59Ac7sU/s9rOoLsK7LW30H7HS+ZAYCePPrpHicPleibkjyQcMGVb97XzQ5gl38xO7c/kRJM2
- LF8bV70uSapcSsNj1W0CyrrkGxYatU0TFTL13bv788Dh+r0rrfttFZpDYBGiQQUYBF90=
-X-Received: by 2002:a05:6000:1286:b0:33d:3490:6e05 with SMTP id
- f6-20020a056000128600b0033d34906e05mr6135616wrx.27.1708430073712; 
- Tue, 20 Feb 2024 03:54:33 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHuEMVwsKGAypCufbGmBW3V+I1RSMzLbvHRhfSOID/iu9Ye/m79af8cvaBjvdDI5YcS7C5Wtw==
-X-Received: by 2002:a05:6000:1286:b0:33d:3490:6e05 with SMTP id
- f6-20020a056000128600b0033d34906e05mr6135599wrx.27.1708430073290; 
- Tue, 20 Feb 2024 03:54:33 -0800 (PST)
-Received: from workstation5.fritz.box
- (ip-178-202-040-247.um47.pools.vodafone-ip.de. [178.202.40.247])
- by smtp.gmail.com with ESMTPSA id
- cl2-20020a5d5f02000000b0033d4dab14a8sm6853361wrb.22.2024.02.20.03.54.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Feb 2024 03:54:32 -0800 (PST)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Sean Anderson <seanga2@gmail.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Simon Glass <sjg@chromium.org>, Hakgoo Lee <goodguy.lee@samsung.com>,
- Uma Shankar <uma.shankar@samsung.com>,
- Manjunatha C Achar <a.manjunatha@samsung.com>,
- Iqbal Shareef <iqbal.ams@samsung.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] ext4: detect directories in ext4fs_exists()
-Date: Tue, 20 Feb 2024 12:54:23 +0100
-Message-ID: <20240220115423.61417-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.43.0
+ AJvYcCXrLiaL8wU2pmFC/nmx9fVccljlAPWOq8QBis65TpDR6Tp5y9f5JNguVOgt4KexJd/4SbKhHyQSkD7Cr/LrO7x7WxZdWQ==
+X-Gm-Message-State: AOJu0YzoOIPNNsLj4a3UvdfHw2906XdANHH8jJMr7iRD0xovcnP2Qi5K
+ ARI+K+0mhw3YcmrLEp7jpwnB4sbvZE6cJGABuOp6BhYWqtzDxU8Tvtq7s/93ZlLP56HOnZgz8Gv
+ e6DfZYIkrf/bUYkqLEfKcf510TGrE6fItVKgfgA==
+X-Google-Smtp-Source: AGHT+IGfw9yPD9OzaRC7ni3dya/B99vbLo5M3M75jw2HdtmJrydVWwIBghYSOrjIrfDNS0Um2Qo2b6qdZEgMoe02fV8=
+X-Received: by 2002:a05:6102:30b1:b0:470:6bfc:b9af with SMTP id
+ y17-20020a05610230b100b004706bfcb9afmr2129285vsd.2.1708435371391; Tue, 20 Feb
+ 2024 05:22:51 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240215-b4-qcom-common-target-v4-0-ed06355c634a@linaro.org>
+ <20240215-b4-qcom-common-target-v4-13-ed06355c634a@linaro.org>
+In-Reply-To: <20240215-b4-qcom-common-target-v4-13-ed06355c634a@linaro.org>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Tue, 20 Feb 2024 18:52:40 +0530
+Message-ID: <CAFA6WYP3gtcTpXXtuwg6ckpXFuaC9WMfBL9j38iVidd4EEKg+g@mail.gmail.com>
+Subject: Re: [PATCH v4 13/39] pinctrl: qcom: stub support for special GPIOs
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>,
+ Ramon Fried <rfried.dev@gmail.com>, 
+ Dzmitry Sankouski <dsankouski@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
+ Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,76 +96,146 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-While fat_exists() reports directories and files as existing
-ext4fs_exists() only recognizes files. This lead to errors
-when using systemd-boot with an ext4 file-system.
+On Fri, 16 Feb 2024 at 02:22, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>
+> Most platforms have a handful of "special" GPIOs, like the MMC
+> clock/data lanes, UFS reset, etc. These don't follow the usually naming
 
-Change ext4fs_exists() to find any type of inode:
-files, directories, symbolic links.
+s/usually/usual/
 
-Fixes: a1596438a689 ("ext4fs ls load support")
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
-I still need to figure out a good test. Currently 'xxd' is the only command
-invoking fs_exists().
----
- fs/ext4/ext4_common.c |  5 ++---
- fs/ext4/ext4_common.h |  2 ++
- fs/ext4/ext4fs.c      | 11 +++++++----
- 3 files changed, 11 insertions(+), 7 deletions(-)
+> scheme of "gpioX" and also have unique capabilities and registers. We
+> can get away without supporting them all for now, but DT compatibility
+> is still an issue.
+>
+> Add support for allowing these to be specified after the other pins, and
+> make all pinmux/pinconf calls for them nop.
 
-diff --git a/fs/ext4/ext4_common.c b/fs/ext4/ext4_common.c
-index ea9b92298ba..365c5147c4b 100644
---- a/fs/ext4/ext4_common.c
-+++ b/fs/ext4/ext4_common.c
-@@ -2214,9 +2214,8 @@ static char *ext4fs_read_symlink(struct ext2fs_node *node)
- 	return symlink;
- }
- 
--static int ext4fs_find_file1(const char *currpath,
--			     struct ext2fs_node *currroot,
--			     struct ext2fs_node **currfound, int *foundtype)
-+int ext4fs_find_file1(const char *currpath, struct ext2fs_node *currroot,
-+		      struct ext2fs_node **currfound, int *foundtype)
- {
- 	char fpath[strlen(currpath) + 1];
- 	char *name = fpath;
-diff --git a/fs/ext4/ext4_common.h b/fs/ext4/ext4_common.h
-index 504c708b064..84500e990aa 100644
---- a/fs/ext4/ext4_common.h
-+++ b/fs/ext4/ext4_common.h
-@@ -54,6 +54,8 @@ int ext4fs_read_file(struct ext2fs_node *node, loff_t pos, loff_t len,
- 		     char *buf, loff_t *actread);
- int ext4fs_find_file(const char *path, struct ext2fs_node *rootnode,
- 			struct ext2fs_node **foundnode, int expecttype);
-+int ext4fs_find_file1(const char *currpath, struct ext2fs_node *currroot,
-+		      struct ext2fs_node **currfound, int *foundtype);
- int ext4fs_iterate_dir(struct ext2fs_node *dir, char *name,
- 			struct ext2fs_node **fnode, int *ftype);
- 
-diff --git a/fs/ext4/ext4fs.c b/fs/ext4/ext4fs.c
-index 3b12ec54fa2..b1359d14909 100644
---- a/fs/ext4/ext4fs.c
-+++ b/fs/ext4/ext4fs.c
-@@ -208,11 +208,14 @@ int ext4fs_ls(const char *dirname)
- 
- int ext4fs_exists(const char *filename)
- {
--	loff_t file_len;
--	int ret;
-+	struct ext2fs_node *dirnode = NULL;
-+	int filetype;
- 
--	ret = ext4fs_open(filename, &file_len);
--	return ret == 0;
-+	if (!filename)
-+		return 0;
-+
-+	return ext4fs_find_file1(filename, &ext4fs_root->diropen, &dirnode,
-+				 &filetype);
- }
- 
- int ext4fs_size(const char *filename, loff_t *size)
--- 
-2.43.0
+Yeah earlier incorrect configuration was done for these pins. So
+having them nop is an improvement.
 
+>
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> ---
+>  arch/arm/mach-snapdragon/include/mach/gpio.h |  2 ++
+>  drivers/gpio/msm_gpio.c                      | 20 ++++++++++++++++++++
+>  drivers/pinctrl/qcom/pinctrl-qcom.c          | 12 ++++++++++++
+>  3 files changed, 34 insertions(+)
+>
+
+Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
+
+-Sumit
+
+> diff --git a/arch/arm/mach-snapdragon/include/mach/gpio.h b/arch/arm/mach-snapdragon/include/mach/gpio.h
+> index 8dac62f870b9..c373f5a4cf3d 100644
+> --- a/arch/arm/mach-snapdragon/include/mach/gpio.h
+> +++ b/arch/arm/mach-snapdragon/include/mach/gpio.h
+> @@ -13,6 +13,8 @@
+>  struct msm_pin_data {
+>         int pin_count;
+>         const unsigned int *pin_offsets;
+> +       /* Index of first special pin, these are ignored for now */
+> +       unsigned int special_pins_start;
+>  };
+>
+>  static inline u32 qcom_pin_offset(const unsigned int *offs, unsigned int selector)
+> diff --git a/drivers/gpio/msm_gpio.c b/drivers/gpio/msm_gpio.c
+> index 80cd28bb231f..8a5e8730e911 100644
+> --- a/drivers/gpio/msm_gpio.c
+> +++ b/drivers/gpio/msm_gpio.c
+> @@ -39,6 +39,10 @@ static int msm_gpio_direction_input(struct udevice *dev, unsigned int gpio)
+>  {
+>         struct msm_gpio_bank *priv = dev_get_priv(dev);
+>
+> +       /* Always NOP for special pins, assume they're in the correct state */
+> +       if (gpio >= priv->pin_data->special_pins_start)
+> +               return 0;
+> +
+>         /* Disable OE bit */
+>         clrsetbits_le32(priv->base + GPIO_CONFIG_REG(dev, gpio),
+>                         GPIO_OE_MASK, GPIO_OE_DISABLE);
+> @@ -50,6 +54,10 @@ static int msm_gpio_set_value(struct udevice *dev, unsigned int gpio, int value)
+>  {
+>         struct msm_gpio_bank *priv = dev_get_priv(dev);
+>
+> +       /* Always NOP for special pins, assume they're in the correct state */
+> +       if (gpio >= priv->pin_data->special_pins_start)
+> +               return 0;
+> +
+>         value = !!value;
+>         /* set value */
+>         writel(value << GPIO_OUT, priv->base + GPIO_IN_OUT_REG(dev, gpio));
+> @@ -62,6 +70,10 @@ static int msm_gpio_direction_output(struct udevice *dev, unsigned int gpio,
+>  {
+>         struct msm_gpio_bank *priv = dev_get_priv(dev);
+>
+> +       /* Always NOP for special pins, assume they're in the correct state */
+> +       if (gpio >= priv->pin_data->special_pins_start)
+> +               return 0;
+> +
+>         value = !!value;
+>         /* set value */
+>         writel(value << GPIO_OUT, priv->base + GPIO_IN_OUT_REG(dev, gpio));
+> @@ -76,6 +88,10 @@ static int msm_gpio_get_value(struct udevice *dev, unsigned int gpio)
+>  {
+>         struct msm_gpio_bank *priv = dev_get_priv(dev);
+>
+> +       /* Always NOP for special pins, assume they're in the correct state */
+> +       if (gpio >= priv->pin_data->special_pins_start)
+> +               return 0;
+> +
+>         return !!(readl(priv->base + GPIO_IN_OUT_REG(dev, gpio)) >> GPIO_IN);
+>  }
+>
+> @@ -83,6 +99,10 @@ static int msm_gpio_get_function(struct udevice *dev, unsigned int gpio)
+>  {
+>         struct msm_gpio_bank *priv = dev_get_priv(dev);
+>
+> +       /* Always NOP for special pins, assume they're in the correct state */
+> +       if (gpio >= priv->pin_data->special_pins_start)
+> +               return 0;
+> +
+>         if (readl(priv->base + GPIO_CONFIG_REG(dev, gpio)) & GPIO_OE_ENABLE)
+>                 return GPIOF_OUTPUT;
+>
+> diff --git a/drivers/pinctrl/qcom/pinctrl-qcom.c b/drivers/pinctrl/qcom/pinctrl-qcom.c
+> index dc3d8c4d9034..1ea4d21c41fc 100644
+> --- a/drivers/pinctrl/qcom/pinctrl-qcom.c
+> +++ b/drivers/pinctrl/qcom/pinctrl-qcom.c
+> @@ -83,6 +83,10 @@ static int msm_pinmux_set(struct udevice *dev, unsigned int pin_selector,
+>  {
+>         struct msm_pinctrl_priv *priv = dev_get_priv(dev);
+>
+> +       /* Always NOP for special pins, assume they're in the correct state */
+> +       if (pin_selector >= priv->data->pin_data.special_pins_start)
+> +               return 0;
+> +
+>         clrsetbits_le32(priv->base + GPIO_CONFIG_REG(priv, pin_selector),
+>                         TLMM_FUNC_SEL_MASK | TLMM_GPIO_DISABLE,
+>                         priv->data->get_function_mux(func_selector) << 2);
+> @@ -94,6 +98,10 @@ static int msm_pinconf_set(struct udevice *dev, unsigned int pin_selector,
+>  {
+>         struct msm_pinctrl_priv *priv = dev_get_priv(dev);
+>
+> +       /* Always NOP for special pins */
+> +       if (pin_selector >= priv->data->pin_data.special_pins_start)
+> +               return 0;
+> +
+>         switch (param) {
+>         case PIN_CONFIG_DRIVE_STRENGTH:
+>                 argument = (argument / 2) - 1;
+> @@ -136,6 +144,10 @@ int msm_pinctrl_bind(struct udevice *dev)
+>         const char *name;
+>         int ret;
+>
+> +       /* Make sure we don't indadvertently treat all pins as special pins. */
+> +       if (!data->pin_data.special_pins_start)
+> +               data->pin_data.special_pins_start = data->pin_data.pin_count;
+> +
+>         drv = lists_driver_lookup_name("pinctrl_qcom");
+>         if (!drv)
+>                 return -ENOENT;
+>
+> --
+> 2.43.1
+>
