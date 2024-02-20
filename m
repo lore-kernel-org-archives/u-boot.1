@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DC81C5475B
-	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 13:42:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6E9CC5475B
+	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 13:42:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B47A887DC9;
-	Tue, 20 Feb 2024 14:42:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3CAA687D72;
+	Tue, 20 Feb 2024 14:42:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zBZXPaBx";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DoKNtaow";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 49E8C87D91; Tue, 20 Feb 2024 14:42:32 +0100 (CET)
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
+ id 11B7687D72; Tue, 20 Feb 2024 14:42:38 +0100 (CET)
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ABCF487D5D
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 14:42:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8EE4187D5D
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 14:42:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-68f87e24be8so10411386d6.2
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 05:42:27 -0800 (PST)
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-1d94323d547so38742995ad.3
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 05:42:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708436546; x=1709041346; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1708436550; x=1709041350; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=p2fliZdbKRAS/8qB6Q+Mr+XBR/1QnLa1MnnWR1xjOsU=;
- b=zBZXPaBxOFF7fS89yOgwujaBEOx8/soQr3JBaLF7WO9DarTCtls6UD1ESCqsXljlGj
- 3vjxHyKSXQqHfPskOY4bi6MJ7n1ynDllGNvgNdRAKBD466dDNaVXbmp/PKpKXKZIyTA1
- 4pE28BzqzMlE3G38bD6V17TQoxz24I4RCfoYTInf+UwlIL/f8rusnBdx1aVp9FlBzAAT
- JcDS/73QNXWakGcbDlPi8/YYRC3GTft0mw7bF2FL+6j/1lbmxgHaHfNK7FycDDwBh7yk
- 4NRluebYINyjCMhkc6DvFfm8KYPDYRvQsi/zDBJbFgvP3SEfo7Ce030kNOtow+Zo85j8
- e61g==
+ bh=LZqcJ3CkWeWExBzgQjX/PeUAcATPcnjxo86ynHqQYSM=;
+ b=DoKNtaowKF0qpyUvWE75QKK9RvS7jRFYBsQbnJSh0TvO2qHMK9cd1kvJprhuDLoDGL
+ l/ltZ9DazKiFgEkuS6VkYVs8jSTCaM2TrDQxWqnm7buMxiPiwdMyvHfP56htFzYbqKTn
+ tQIZwzzLtgjIKUmbake9gFa6XAvpEL0e440LV4jujsqhcCksOooz3FSCxq+SFNC1UJI1
+ SAKG2qPYPqH265+4nOolxDpwcLkCXMfMbfbkVXfDXIkA1hF/+Ay+x0N3D3i1WHQLynOM
+ L5HUESv9+WmVljvyh/uspwCj8dFkhaTsrdn5HAhlVAVtxRWYdr9O0zvYrV6A/o2hjge2
+ 6f7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708436546; x=1709041346;
+ d=1e100.net; s=20230601; t=1708436550; x=1709041350;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=p2fliZdbKRAS/8qB6Q+Mr+XBR/1QnLa1MnnWR1xjOsU=;
- b=tM6xSxIfTt3dAyMMPWw8hIujfLtZnvr3ewm89Rw1TfPbFxwIgquv+6GGPdUoONCU1J
- SiU+wyRaN7FZ9maHkgSsSvI953CZ8vyu57zleMTBTAhcWlkEvN5CIZ5m/42inTcNJdrl
- Z88yq0yPF76ruR065NGkAnphJxzNa/UTLkKct9xjbKFMIoyngNEOhnnfJ+Io0T0hKx6p
- 5Q0beoKaKR/oqz8HX7fSFZeO24YbA9vYrJkIAhUzZN+BI7LJmOACJ1A3yhy6qRL8OwZF
- zz50W3hNZ7cprZ+ykbk1IquXJqadjyUk/XTz4Bhi92/ZAxa+m8SRfSp1An3oq+e7FmIV
- rAPQ==
-X-Gm-Message-State: AOJu0YwrwPAv1flDIv8X7kcPqg8hjXwvggEGRiGe+2eLTSJfXFJGgC88
- RuxWb4SFFIoIipU9o6myCXdg6oGfih7E+m5AzIAjsYWRNvIQKOWblAAgrXVvRuoxySIeT02Njw7
+ bh=LZqcJ3CkWeWExBzgQjX/PeUAcATPcnjxo86ynHqQYSM=;
+ b=CTUW/QXw/ISArbmWJDlQwN0TVc9ELx0yyxihza/Lwu9bJqapJu0atiKZyWxLBt5BS/
+ cpgna3gnlz8WsX5etaapOX+Yso3x7ohMvBiuA8AG9TJV5TE6RY3KQyBGpoz0BHCGlS7J
+ AsroTyPOgIC3mQMEjq67wOu4r6XFIVsEW93st3fFezIdOAkQkD5pqUzUUQojSjOulkFR
+ Wq2DG/H6f1yQdWMtDN4nnGBiIyp6Ssq0P6vXbdF00lvih6lVpW/EaDlQBJOgbRfbWa4v
+ l8I/4pMIRtyps/4btsArF2falP80TYRW5UkNV68W1uPwkMSQjzAcyXmyZfG73AZZrJ17
+ U0cw==
+X-Gm-Message-State: AOJu0Yy4X0FFhbp4omhpd9sqz94B8Jh1LsRiZA6f7gXnB0c/0Sujcew7
+ 7dlxZWkM6WMyqILjZ1Ej0r3Db0zgKef64fd2PcJvPGCBkfop5We4Fb7BSPdus5GiQZv9Fiy32Ie
  i
-X-Google-Smtp-Source: AGHT+IFO7rf/uyKaEKKW2midebZIs0WeBrCbjRTrQA+h3RtsNRoZeimkWk3HhQ5epOAahxr0ufl6Mg==
-X-Received: by 2002:a05:6a21:1519:b0:1a0:828a:50d8 with SMTP id
- nq25-20020a056a21151900b001a0828a50d8mr13499651pzb.22.1708434677503; 
- Tue, 20 Feb 2024 05:11:17 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGzF1uqinFvP3ybwawHi28ZW9kVHO5zatLoY7IK87C54oBMTdGwapjYEaMgE4xAYQdyvDiiYA==
+X-Received: by 2002:a62:cd82:0:b0:6e4:3ea4:a7e1 with SMTP id
+ o124-20020a62cd82000000b006e43ea4a7e1mr4316022pfg.27.1708434710023; 
+ Tue, 20 Feb 2024 05:11:50 -0800 (PST)
 Received: from sumit-X1.. ([223.178.209.148]) by smtp.gmail.com with ESMTPSA id
- y12-20020aa79e0c000000b006e3e72a4f87sm5195902pfq.0.2024.02.20.05.11.12
+ y12-20020aa79e0c000000b006e3e72a4f87sm5195902pfq.0.2024.02.20.05.11.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Feb 2024 05:11:17 -0800 (PST)
+ Tue, 20 Feb 2024 05:11:49 -0800 (PST)
 From: Sumit Garg <sumit.garg@linaro.org>
 To: u-boot@lists.denx.de
 Cc: marcel.ziswiler@toradex.com, trini@konsulko.com, lukma@denx.de,
@@ -72,9 +72,9 @@ Cc: marcel.ziswiler@toradex.com, trini@konsulko.com, lukma@denx.de,
  aford173@gmail.com, marex@denx.de, ilias.apalodimas@linaro.org,
  sahaj.sarup@linaro.org, fathi.boudra@linaro.org, remi.duraffort@linaro.org,
  daniel.thompson@linaro.org, Sumit Garg <sumit.garg@linaro.org>
-Subject: [PATCH 1/7] clk: imx8mp: Add support for PCIe clocks
-Date: Tue, 20 Feb 2024 18:40:50 +0530
-Message-Id: <20240220131056.2962331-2-sumit.garg@linaro.org>
+Subject: [PATCH 7/7] verdin-imx8mp_defconfig: Enable PCIe/NVMe support
+Date: Tue, 20 Feb 2024 18:40:56 +0530
+Message-Id: <20240220131056.2962331-8-sumit.garg@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240220131056.2962331-1-sumit.garg@linaro.org>
 References: <20240220131056.2962331-1-sumit.garg@linaro.org>
@@ -96,44 +96,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Pre-requisite to enable PCIe support on iMX8MP SoC.
+Also, enable reset driver which is a prerequisite for PCIe support.
 
 Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 ---
- drivers/clk/imx/clk-imx8mp.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+ configs/verdin-imx8mp_defconfig | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/drivers/clk/imx/clk-imx8mp.c b/drivers/clk/imx/clk-imx8mp.c
-index a21a3ce34bb..7dfc829df2c 100644
---- a/drivers/clk/imx/clk-imx8mp.c
-+++ b/drivers/clk/imx/clk-imx8mp.c
-@@ -62,6 +62,10 @@ static const char *imx8mp_dram_apb_sels[] = {"clock-osc-24m", "sys_pll2_200m", "
- 					     "sys_pll1_160m", "sys_pll1_800m", "sys_pll3_out",
- 					     "sys_pll2_250m", "audio_pll2_out", };
- 
-+static const char * const imx8mp_pcie_aux_sels[] = {"clock-osc-24m", "sys_pll2_200m", "sys_pll2_50m",
-+						    "sys_pll3_out", "sys_pll2_100m", "sys_pll1_80m",
-+						    "sys_pll1_160m", "sys_pll1_200m", };
-+
- static const char *imx8mp_i2c5_sels[] = {"clock-osc-24m", "sys_pll1_160m", "sys_pll2_50m",
- 					 "sys_pll3_out", "audio_pll1_out", "video_pll1_out",
- 					 "audio_pll2_out", "sys_pll1_133m", };
-@@ -272,6 +276,7 @@ static int imx8mp_clk_probe(struct udevice *dev)
- 
- 	clk_dm(IMX8MP_CLK_DRAM_ALT, imx8m_clk_composite("dram_alt", imx8mp_dram_alt_sels, base + 0xa000));
- 	clk_dm(IMX8MP_CLK_DRAM_APB, imx8m_clk_composite_critical("dram_apb", imx8mp_dram_apb_sels, base + 0xa080));
-+	clk_dm(IMX8MP_CLK_PCIE_AUX, imx8m_clk_composite("pcie_aux", imx8mp_pcie_aux_sels, base + 0xa400));
- 	clk_dm(IMX8MP_CLK_I2C5, imx8m_clk_composite("i2c5", imx8mp_i2c5_sels, base + 0xa480));
- 	clk_dm(IMX8MP_CLK_I2C6, imx8m_clk_composite("i2c6", imx8mp_i2c6_sels, base + 0xa500));
- 	clk_dm(IMX8MP_CLK_ENET_QOS, imx8m_clk_composite("enet_qos", imx8mp_enet_qos_sels, base + 0xa880));
-@@ -322,6 +327,7 @@ static int imx8mp_clk_probe(struct udevice *dev)
- 	clk_dm(IMX8MP_CLK_I2C2_ROOT, imx_clk_gate4("i2c2_root_clk", "i2c2", base + 0x4180, 0));
- 	clk_dm(IMX8MP_CLK_I2C3_ROOT, imx_clk_gate4("i2c3_root_clk", "i2c3", base + 0x4190, 0));
- 	clk_dm(IMX8MP_CLK_I2C4_ROOT, imx_clk_gate4("i2c4_root_clk", "i2c4", base + 0x41a0, 0));
-+	clk_dm(IMX8MP_CLK_PCIE_ROOT, imx_clk_gate4("pcie_root_clk", "pcie_aux", base + 0x4250, 0));
- 	clk_dm(IMX8MP_CLK_PWM1_ROOT, imx_clk_gate4("pwm1_root_clk", "pwm1", base + 0x4280, 0));
- 	clk_dm(IMX8MP_CLK_PWM2_ROOT, imx_clk_gate4("pwm2_root_clk", "pwm2", base + 0x4290, 0));
- 	clk_dm(IMX8MP_CLK_PWM3_ROOT, imx_clk_gate4("pwm3_root_clk", "pwm3", base + 0x42a0, 0));
+diff --git a/configs/verdin-imx8mp_defconfig b/configs/verdin-imx8mp_defconfig
+index 22b8a334dfa..d8bd644322b 100644
+--- a/configs/verdin-imx8mp_defconfig
++++ b/configs/verdin-imx8mp_defconfig
+@@ -185,3 +185,12 @@ CONFIG_USB_GADGET_VENDOR_NUM=0x1b67
+ CONFIG_USB_GADGET_PRODUCT_NUM=0x4000
+ CONFIG_IMX_WATCHDOG=y
+ CONFIG_HEXDUMP=y
++CONFIG_DM_RESET=y
++CONFIG_RESET_IMX=y
++CONFIG_PCI=y
++CONFIG_PCIE_DW_IMX8=y
++CONFIG_PHY_IMX8M_PCIE=y
++CONFIG_CMD_PCI=y
++CONFIG_NVME=y
++CONFIG_NVME_PCI=y
++CONFIG_CMD_NVME=y
 -- 
 2.34.1
 
