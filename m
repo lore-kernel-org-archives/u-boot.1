@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33183C5475B
-	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 14:09:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05F62C48BC3
+	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 14:10:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 91A5C87FD9;
-	Tue, 20 Feb 2024 15:08:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 14FE487FAE;
+	Tue, 20 Feb 2024 15:08:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QFGZFVUk";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OjSnJ2l9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A652287FA5; Tue, 20 Feb 2024 15:08:44 +0100 (CET)
-Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
- [IPv6:2607:f8b0:4864:20::233])
+ id A480E87FC9; Tue, 20 Feb 2024 15:08:53 +0100 (CET)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D49387DE0
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 15:08:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1149387FE9
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 15:08:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-3c13410a319so3636322b6e.3
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 06:08:40 -0800 (PST)
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-6e2d83d2568so3767879a34.3
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 06:08:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708438119; x=1709042919; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1708438122; x=1709042922; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=OWUwjTNb0WUn/j7xveyT3jgIv4x7u/3Nk5cJRkFp0Co=;
- b=QFGZFVUkliDieSHsEyqLswBn69s/3lvA7CvMqGh0HfZu8v9FrU96ACmdfiAcE/ASon
- 1dAwMWtBBsBPkQNBbE4lOz2X4YfZ2r492B8bQJMXhabHPgGc7Kb4ysvbk6dV4avvL68Z
- Vy46Sjt/AuIS7IECfLQef9kPEHsbHZehIr3F0UJYg0AWiiBqIXtUJrVITYwR8DbVKXvV
- ABFdEqvmpB4hhRS+TurTe+bcZKN2DY9MTaYh0xN515EmPKIwRTEWGsdWMmD6MNLkUhLV
- pCHmU/o2zgoM35OmiW7ku3cM3nRwwryVyObS5FR0+UdGaq1jAC8jzN/9NKsLjjS5rzvI
- gCuA==
+ bh=UfPX0cUJ7RNjUkaTT0ejWcnMZI/LyxUpw6tgH9JB3Ig=;
+ b=OjSnJ2l9WpRYPUeboTVREszGY82QKtqxWUZpxebF5+TsBt/Bpt7gVKm+l0zw6OP3XP
+ UL16qpgk+WVc/7BKmP/w0Gl3ZX0GX1zLlv/LhZ00BwKg85OhrTDby4Qdiae/VrFVVn4B
+ eH8hvFCKeFgdoJJmhSC1dvOUnb9MGXsDkotMLVFg1xZ6af6TzaaQoUu4BLPnbklTLwxt
+ p6kikN8Qznt7t0Ls7ZqIMs9s28kCE4yDAqyxnOn1+ua6ODD8LAruFFv2uQhi1l76JNMF
+ HRbc35/HoOt+xjw4Mb+XYnKW5HQloj9zTmFScKC4ifJ7UOfd6DQ6UuPAxsZgAmq5kZIx
+ 0GpA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708438119; x=1709042919;
+ d=1e100.net; s=20230601; t=1708438122; x=1709042922;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=OWUwjTNb0WUn/j7xveyT3jgIv4x7u/3Nk5cJRkFp0Co=;
- b=KzZ3jbnZ7Qe7iC82X9wiXuAulxew9oNYqZ/hiHS/soajIUCIgSvwAIJQZ67FeftKeT
- f3cIYnS8RsI/rbikde1WA+KKLxI7rPOsP6+XZ/owoAHvB2JVId+Ffzn679Hj8B7ZI6f5
- XJXH6JnbrhzZQTl/X74pc4gP4VmpxxvQug0r46+PM8MWxrckHrmXSTDZmdn99wsbYegK
- NWGCxBG93g1/8P2AUmQO2skCvHYuFXwK0mISd6+9vayWqTWKx1g4wRy8h4hE63VYNzp0
- HLTVPDcznfPoPETtpl+T5mKBo3HYJsESvydFQqYOuc9ODZ52i3KK/qVO/KA2TYGZY2HT
- +RBw==
+ bh=UfPX0cUJ7RNjUkaTT0ejWcnMZI/LyxUpw6tgH9JB3Ig=;
+ b=QAMNov51KCgKB6WSiiwzifbn7q3eM7U36ch6Go72pBcTVQPDmXPofgkcGU/EBkD7Pn
+ ew7XdiejbiMjEP+y42uLCtGONdicHF1EfkatK4WXn2XqgVuOOvaQX/3FHT6hJPiLsM+X
+ 07vF+1K6ukV0HWAnarOWwpDg947RaaHMK+1IU9i0sIaxT9MiZ6nD4Kel7sdnwrtCXLj1
+ RULHJXUyx4LHqSG9776RXfwPLDYaYGhfITVCf51SJ6YL8JYDip0lWK6UNpsre/XuFQx7
+ Eyl9Vjf1Gg5asIuj38k6AAEslrUpLdSM9H+5C0mHhmGxW9nZub0VbbhTqmvUVKD2Udrp
+ qD7g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVNFmwg+J3t3Si66JRUIVaaTARtaSBOZ+YDZUybkMYWFY6wPdiDP+cpfKleslKW48Wgc9H2jhv+R6cj8iOM7bqnHeyzuw==
-X-Gm-Message-State: AOJu0Yxkm2AFkfJqV8YP4Eu9xW/Q0MuTiXhJFjmYqnW5inwXWvAsTA2o
- 0uKHgj0jSilZCNHgA56OkUHEgUWv2yfLZY1T/o4PJK6vqUSzms9TfbZo8uOyTyEI6khvioJJlYa
- E2ibL6ArKdvZ2o2hlbFAyTiWYiNGv7UIoAbAwbQ==
-X-Google-Smtp-Source: AGHT+IG1+gMNR8vh2eso93OTGV4QruDN7asJ2V1g5FZrHgcMfYUQE9iEJrWNEUgxvKOGbE5RiItuTACWsBTBnHnx5lU=
-X-Received: by 2002:a05:6808:d53:b0:3c1:50f6:9f93 with SMTP id
- w19-20020a0568080d5300b003c150f69f93mr11507932oik.11.1708438118981; Tue, 20
- Feb 2024 06:08:38 -0800 (PST)
+ AJvYcCUGr0GERZt94+tMU9qOZsmf5uHhHagwjkg1K8/I6OjtX2RsY+ddGXLPj8z9Xxix0gZwwKERZ4WT+NQuHN0y5bWJrH1UaA==
+X-Gm-Message-State: AOJu0YyiFfSlp2QCEzBjTKvqWIhgmqpAqf7nFj9nQ1P3+xgGD3H2GcaT
+ 3e3k6CFkdC8Lu6bLBDC11PMZ9ebympskVjcynDNYMPdGpkdFzF3I4Ul+mHSi1ZlX9Nn64x0Ra4O
+ FBv3lf0EYvZozrydwf6mmwEIOm0YTFtNkk954ZA==
+X-Google-Smtp-Source: AGHT+IFs/pIzOgDnjzTjNCW0+WwrCyKRyEYWm8Dd+ZKslOcSXQAcrvlRhtuHs3T3RgtJ1OGb9mPlpP3ru0hGHTI7WrM=
+X-Received: by 2002:a05:6808:3a05:b0:3c1:3e44:3ded with SMTP id
+ gr5-20020a0568083a0500b003c13e443dedmr19187326oib.19.1708438122344; Tue, 20
+ Feb 2024 06:08:42 -0800 (PST)
 MIME-Version: 1.0
 References: <20240215-b4-qcom-common-target-v4-0-ed06355c634a@linaro.org>
- <20240215-b4-qcom-common-target-v4-33-ed06355c634a@linaro.org>
-In-Reply-To: <20240215-b4-qcom-common-target-v4-33-ed06355c634a@linaro.org>
+ <20240215-b4-qcom-common-target-v4-31-ed06355c634a@linaro.org>
+In-Reply-To: <20240215-b4-qcom-common-target-v4-31-ed06355c634a@linaro.org>
 From: Sumit Garg <sumit.garg@linaro.org>
-Date: Tue, 20 Feb 2024 19:38:27 +0530
-Message-ID: <CAFA6WYM2qJQg4uSZqfZsGNDuSm6eH=5zKCDDVvvFshon_zw7ww@mail.gmail.com>
-Subject: Re: [PATCH v4 33/39] dt-bindings: import headers for MSM8996
+Date: Tue, 20 Feb 2024 19:38:31 +0530
+Message-ID: <CAFA6WYM7pBPWWL_sh6OL_Axe2z-0tOF9rVuQtzNp9kDfQhu7xQ@mail.gmail.com>
+Subject: Re: [PATCH v4 31/39] dts: msm8916: import PMIC dtsi files
 To: Caleb Connolly <caleb.connolly@linaro.org>
 Cc: Neil Armstrong <neil.armstrong@linaro.org>,
  Ramon Fried <rfried.dev@gmail.com>, 
@@ -98,19 +98,17 @@ X-Virus-Status: Clean
 
 On Fri, 16 Feb 2024 at 02:22, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >
-> Import dt-binding headers for MSM8996/APQ8096 from Linux.
+> Import the supporting pm8916.dtsi and msm8916-pm8916.dtsi files from
+> upstream in preparation for switching boards over.
 >
 > Taken from kernel tag v6.7
 >
 > Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->  include/dt-bindings/clock/qcom,gcc-msm8996.h       | 362 +++++++++++++++++++++
->  include/dt-bindings/clock/qcom,mmcc-msm8996.h      | 295 +++++++++++++++++
->  .../dt-bindings/interconnect/qcom,msm8996-cbf.h    |  12 +
->  include/dt-bindings/interconnect/qcom,msm8996.h    | 163 ++++++++++
->  include/dt-bindings/sound/qcom,wcd9335.h           |  15 +
->  5 files changed, 847 insertions(+)
+>  arch/arm/dts/msm8916-pm8916.dtsi | 157 ++++++++++++++++++++++++++++++++++
+>  arch/arm/dts/pm8916.dtsi         | 178 +++++++++++++++++++++++++++++++++++++++
+>  2 files changed, 335 insertions(+)
 >
 
 Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
@@ -118,883 +116,353 @@ Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
 
 -Sumit
 
-> diff --git a/include/dt-bindings/clock/qcom,gcc-msm8996.h b/include/dt-bindings/clock/qcom,gcc-msm8996.h
+> diff --git a/arch/arm/dts/msm8916-pm8916.dtsi b/arch/arm/dts/msm8916-pm8916.dtsi
 > new file mode 100644
-> index 000000000000..ddfd6fd73081
+> index 000000000000..b1a7eafbee31
 > --- /dev/null
-> +++ b/include/dt-bindings/clock/qcom,gcc-msm8996.h
-> @@ -0,0 +1,362 @@
-> +/* SPDX-License-Identifier: GPL-2.0-only */
+> +++ b/arch/arm/dts/msm8916-pm8916.dtsi
+> @@ -0,0 +1,157 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
 > +/*
-> + * Copyright (c) 2015, The Linux Foundation. All rights reserved.
+> + * msm8916-pm8916.dtsi describes common properties (e.g. regulator connections)
+> + * that apply to most devices that make use of the MSM8916 SoC and PM8916 PMIC.
+> + * Many regulators have a fixed purpose in the original reference design and
+> + * were rarely re-used for different purposes. Devices that deviate from the
+> + * typical reference design should not make use of this include and instead add
+> + * the necessary properties in the board-specific device tree.
 > + */
 > +
-> +#ifndef _DT_BINDINGS_CLK_MSM_GCC_8996_H
-> +#define _DT_BINDINGS_CLK_MSM_GCC_8996_H
+> +#include "msm8916.dtsi"
+> +#include "pm8916.dtsi"
 > +
-> +#define GPLL0_EARLY                                            0
-> +#define GPLL0                                                  1
-> +#define GPLL1_EARLY                                            2
-> +#define GPLL1                                                  3
-> +#define GPLL2_EARLY                                            4
-> +#define GPLL2                                                  5
-> +#define GPLL3_EARLY                                            6
-> +#define GPLL3                                                  7
-> +#define GPLL4_EARLY                                            8
-> +#define GPLL4                                                  9
-> +#define SYSTEM_NOC_CLK_SRC                                     10
-> +/* U-Boot: KConfig check in CI erroneously picks this up, it's unused
-> + * anyway so comment it out for now
-> + */
-> +//#define CONFIG _NOC_CLK_SRC                                  11
-> +#define PERIPH_NOC_CLK_SRC                                     12
-> +#define MMSS_BIMC_GFX_CLK_SRC                                  13
-> +#define USB30_MASTER_CLK_SRC                                   14
-> +#define USB30_MOCK_UTMI_CLK_SRC                                        15
-> +#define USB3_PHY_AUX_CLK_SRC                                   16
-> +#define USB20_MASTER_CLK_SRC                                   17
-> +#define USB20_MOCK_UTMI_CLK_SRC                                        18
-> +#define SDCC1_APPS_CLK_SRC                                     19
-> +#define SDCC1_ICE_CORE_CLK_SRC                                 20
-> +#define SDCC2_APPS_CLK_SRC                                     21
-> +#define SDCC3_APPS_CLK_SRC                                     22
-> +#define SDCC4_APPS_CLK_SRC                                     23
-> +#define BLSP1_QUP1_SPI_APPS_CLK_SRC                            24
-> +#define BLSP1_QUP1_I2C_APPS_CLK_SRC                            25
-> +#define BLSP1_UART1_APPS_CLK_SRC                               26
-> +#define BLSP1_QUP2_SPI_APPS_CLK_SRC                            27
-> +#define BLSP1_QUP2_I2C_APPS_CLK_SRC                            28
-> +#define BLSP1_UART2_APPS_CLK_SRC                               29
-> +#define BLSP1_QUP3_SPI_APPS_CLK_SRC                            30
-> +#define BLSP1_QUP3_I2C_APPS_CLK_SRC                            31
-> +#define BLSP1_UART3_APPS_CLK_SRC                               32
-> +#define BLSP1_QUP4_SPI_APPS_CLK_SRC                            33
-> +#define BLSP1_QUP4_I2C_APPS_CLK_SRC                            34
-> +#define BLSP1_UART4_APPS_CLK_SRC                               35
-> +#define BLSP1_QUP5_SPI_APPS_CLK_SRC                            36
-> +#define BLSP1_QUP5_I2C_APPS_CLK_SRC                            37
-> +#define BLSP1_UART5_APPS_CLK_SRC                               38
-> +#define BLSP1_QUP6_SPI_APPS_CLK_SRC                            39
-> +#define BLSP1_QUP6_I2C_APPS_CLK_SRC                            40
-> +#define BLSP1_UART6_APPS_CLK_SRC                               41
-> +#define BLSP2_QUP1_SPI_APPS_CLK_SRC                            42
-> +#define BLSP2_QUP1_I2C_APPS_CLK_SRC                            43
-> +#define BLSP2_UART1_APPS_CLK_SRC                               44
-> +#define BLSP2_QUP2_SPI_APPS_CLK_SRC                            45
-> +#define BLSP2_QUP2_I2C_APPS_CLK_SRC                            46
-> +#define BLSP2_UART2_APPS_CLK_SRC                               47
-> +#define BLSP2_QUP3_SPI_APPS_CLK_SRC                            48
-> +#define BLSP2_QUP3_I2C_APPS_CLK_SRC                            49
-> +#define BLSP2_UART3_APPS_CLK_SRC                               50
-> +#define BLSP2_QUP4_SPI_APPS_CLK_SRC                            51
-> +#define BLSP2_QUP4_I2C_APPS_CLK_SRC                            52
-> +#define BLSP2_UART4_APPS_CLK_SRC                               53
-> +#define BLSP2_QUP5_SPI_APPS_CLK_SRC                            54
-> +#define BLSP2_QUP5_I2C_APPS_CLK_SRC                            55
-> +#define BLSP2_UART5_APPS_CLK_SRC                               56
-> +#define BLSP2_QUP6_SPI_APPS_CLK_SRC                            57
-> +#define BLSP2_QUP6_I2C_APPS_CLK_SRC                            58
-> +#define BLSP2_UART6_APPS_CLK_SRC                               59
-> +#define PDM2_CLK_SRC                                           60
-> +#define TSIF_REF_CLK_SRC                                       61
-> +#define CE1_CLK_SRC                                            62
-> +#define GCC_SLEEP_CLK_SRC                                      63
-> +#define BIMC_CLK_SRC                                           64
-> +#define HMSS_AHB_CLK_SRC                                       65
-> +#define BIMC_HMSS_AXI_CLK_SRC                                  66
-> +#define HMSS_RBCPR_CLK_SRC                                     67
-> +#define HMSS_GPLL0_CLK_SRC                                     68
-> +#define GP1_CLK_SRC                                            69
-> +#define GP2_CLK_SRC                                            70
-> +#define GP3_CLK_SRC                                            71
-> +#define PCIE_AUX_CLK_SRC                                       72
-> +#define UFS_AXI_CLK_SRC                                                73
-> +#define UFS_ICE_CORE_CLK_SRC                                   74
-> +#define QSPI_SER_CLK_SRC                                       75
-> +#define GCC_SYS_NOC_AXI_CLK                                    76
-> +#define GCC_SYS_NOC_HMSS_AHB_CLK                               77
-> +#define GCC_SNOC_CNOC_AHB_CLK                                  78
-> +#define GCC_SNOC_PNOC_AHB_CLK                                  79
-> +#define GCC_SYS_NOC_AT_CLK                                     80
-> +#define GCC_SYS_NOC_USB3_AXI_CLK                               81
-> +#define GCC_SYS_NOC_UFS_AXI_CLK                                        82
-> +#define GCC_CFG_NOC_AHB_CLK                                    83
-> +#define GCC_PERIPH_NOC_AHB_CLK                                 84
-> +#define GCC_PERIPH_NOC_USB20_AHB_CLK                           85
-> +#define GCC_TIC_CLK                                            86
-> +#define GCC_IMEM_AXI_CLK                                       87
-> +#define GCC_MMSS_SYS_NOC_AXI_CLK                               88
-> +#define GCC_MMSS_NOC_CFG_AHB_CLK                               89
-> +#define GCC_MMSS_BIMC_GFX_CLK                                  90
-> +#define GCC_USB30_MASTER_CLK                                   91
-> +#define GCC_USB30_SLEEP_CLK                                    92
-> +#define GCC_USB30_MOCK_UTMI_CLK                                        93
-> +#define GCC_USB3_PHY_AUX_CLK                                   94
-> +#define GCC_USB3_PHY_PIPE_CLK                                  95
-> +#define GCC_USB20_MASTER_CLK                                   96
-> +#define GCC_USB20_SLEEP_CLK                                    97
-> +#define GCC_USB20_MOCK_UTMI_CLK                                        98
-> +#define GCC_USB_PHY_CFG_AHB2PHY_CLK                            99
-> +#define GCC_SDCC1_APPS_CLK                                     100
-> +#define GCC_SDCC1_AHB_CLK                                      101
-> +#define GCC_SDCC1_ICE_CORE_CLK                                 102
-> +#define GCC_SDCC2_APPS_CLK                                     103
-> +#define GCC_SDCC2_AHB_CLK                                      104
-> +#define GCC_SDCC3_APPS_CLK                                     105
-> +#define GCC_SDCC3_AHB_CLK                                      106
-> +#define GCC_SDCC4_APPS_CLK                                     107
-> +#define GCC_SDCC4_AHB_CLK                                      108
-> +#define GCC_BLSP1_AHB_CLK                                      109
-> +#define GCC_BLSP1_SLEEP_CLK                                    110
-> +#define GCC_BLSP1_QUP1_SPI_APPS_CLK                            111
-> +#define GCC_BLSP1_QUP1_I2C_APPS_CLK                            112
-> +#define GCC_BLSP1_UART1_APPS_CLK                               113
-> +#define GCC_BLSP1_QUP2_SPI_APPS_CLK                            114
-> +#define GCC_BLSP1_QUP2_I2C_APPS_CLK                            115
-> +#define GCC_BLSP1_UART2_APPS_CLK                               116
-> +#define GCC_BLSP1_QUP3_SPI_APPS_CLK                            117
-> +#define GCC_BLSP1_QUP3_I2C_APPS_CLK                            118
-> +#define GCC_BLSP1_UART3_APPS_CLK                               119
-> +#define GCC_BLSP1_QUP4_SPI_APPS_CLK                            120
-> +#define GCC_BLSP1_QUP4_I2C_APPS_CLK                            121
-> +#define GCC_BLSP1_UART4_APPS_CLK                               122
-> +#define GCC_BLSP1_QUP5_SPI_APPS_CLK                            123
-> +#define GCC_BLSP1_QUP5_I2C_APPS_CLK                            124
-> +#define GCC_BLSP1_UART5_APPS_CLK                               125
-> +#define GCC_BLSP1_QUP6_SPI_APPS_CLK                            126
-> +#define GCC_BLSP1_QUP6_I2C_APPS_CLK                            127
-> +#define GCC_BLSP1_UART6_APPS_CLK                               128
-> +#define GCC_BLSP2_AHB_CLK                                      129
-> +#define GCC_BLSP2_SLEEP_CLK                                    130
-> +#define GCC_BLSP2_QUP1_SPI_APPS_CLK                            131
-> +#define GCC_BLSP2_QUP1_I2C_APPS_CLK                            132
-> +#define GCC_BLSP2_UART1_APPS_CLK                               133
-> +#define GCC_BLSP2_QUP2_SPI_APPS_CLK                            134
-> +#define GCC_BLSP2_QUP2_I2C_APPS_CLK                            135
-> +#define GCC_BLSP2_UART2_APPS_CLK                               136
-> +#define GCC_BLSP2_QUP3_SPI_APPS_CLK                            137
-> +#define GCC_BLSP2_QUP3_I2C_APPS_CLK                            138
-> +#define GCC_BLSP2_UART3_APPS_CLK                               139
-> +#define GCC_BLSP2_QUP4_SPI_APPS_CLK                            140
-> +#define GCC_BLSP2_QUP4_I2C_APPS_CLK                            141
-> +#define GCC_BLSP2_UART4_APPS_CLK                               142
-> +#define GCC_BLSP2_QUP5_SPI_APPS_CLK                            143
-> +#define GCC_BLSP2_QUP5_I2C_APPS_CLK                            144
-> +#define GCC_BLSP2_UART5_APPS_CLK                               145
-> +#define GCC_BLSP2_QUP6_SPI_APPS_CLK                            146
-> +#define GCC_BLSP2_QUP6_I2C_APPS_CLK                            147
-> +#define GCC_BLSP2_UART6_APPS_CLK                               148
-> +#define GCC_PDM_AHB_CLK                                                149
-> +#define GCC_PDM_XO4_CLK                                                150
-> +#define GCC_PDM2_CLK                                           151
-> +#define GCC_PRNG_AHB_CLK                                       152
-> +#define GCC_TSIF_AHB_CLK                                       153
-> +#define GCC_TSIF_REF_CLK                                       154
-> +#define GCC_TSIF_INACTIVITY_TIMERS_CLK                         155
-> +#define GCC_TCSR_AHB_CLK                                       156
-> +#define GCC_BOOT_ROM_AHB_CLK                                   157
-> +#define GCC_MSG_RAM_AHB_CLK                                    158
-> +#define GCC_TLMM_AHB_CLK                                       159
-> +#define GCC_TLMM_CLK                                           160
-> +#define GCC_MPM_AHB_CLK                                                161
-> +#define GCC_SPMI_SER_CLK                                       162
-> +#define GCC_SPMI_CNOC_AHB_CLK                                  163
-> +#define GCC_CE1_CLK                                            164
-> +#define GCC_CE1_AXI_CLK                                                165
-> +#define GCC_CE1_AHB_CLK                                                166
-> +#define GCC_BIMC_HMSS_AXI_CLK                                  167
-> +#define GCC_BIMC_GFX_CLK                                       168
-> +#define GCC_HMSS_AHB_CLK                                       169
-> +#define GCC_HMSS_SLV_AXI_CLK                                   170
-> +#define GCC_HMSS_MSTR_AXI_CLK                                  171
-> +#define GCC_HMSS_RBCPR_CLK                                     172
-> +#define GCC_GP1_CLK                                            173
-> +#define GCC_GP2_CLK                                            174
-> +#define GCC_GP3_CLK                                            175
-> +#define GCC_PCIE_0_SLV_AXI_CLK                                 176
-> +#define GCC_PCIE_0_MSTR_AXI_CLK                                        177
-> +#define GCC_PCIE_0_CFG_AHB_CLK                                 178
-> +#define GCC_PCIE_0_AUX_CLK                                     179
-> +#define GCC_PCIE_0_PIPE_CLK                                    180
-> +#define GCC_PCIE_1_SLV_AXI_CLK                                 181
-> +#define GCC_PCIE_1_MSTR_AXI_CLK                                        182
-> +#define GCC_PCIE_1_CFG_AHB_CLK                                 183
-> +#define GCC_PCIE_1_AUX_CLK                                     184
-> +#define GCC_PCIE_1_PIPE_CLK                                    185
-> +#define GCC_PCIE_2_SLV_AXI_CLK                                 186
-> +#define GCC_PCIE_2_MSTR_AXI_CLK                                        187
-> +#define GCC_PCIE_2_CFG_AHB_CLK                                 188
-> +#define GCC_PCIE_2_AUX_CLK                                     189
-> +#define GCC_PCIE_2_PIPE_CLK                                    190
-> +#define GCC_PCIE_PHY_CFG_AHB_CLK                               191
-> +#define GCC_PCIE_PHY_AUX_CLK                                   192
-> +#define GCC_UFS_AXI_CLK                                                193
-> +#define GCC_UFS_AHB_CLK                                                194
-> +#define GCC_UFS_TX_CFG_CLK                                     195
-> +#define GCC_UFS_RX_CFG_CLK                                     196
-> +#define GCC_UFS_TX_SYMBOL_0_CLK                                        197
-> +#define GCC_UFS_RX_SYMBOL_0_CLK                                        198
-> +#define GCC_UFS_RX_SYMBOL_1_CLK                                        199
-> +#define GCC_UFS_UNIPRO_CORE_CLK                                        200
-> +#define GCC_UFS_ICE_CORE_CLK                                   201
-> +#define GCC_UFS_SYS_CLK_CORE_CLK                               202
-> +#define GCC_UFS_TX_SYMBOL_CLK_CORE_CLK                         203
-> +#define GCC_AGGRE0_SNOC_AXI_CLK                                        204
-> +#define GCC_AGGRE0_CNOC_AHB_CLK                                        205
-> +#define GCC_SMMU_AGGRE0_AXI_CLK                                        206
-> +#define GCC_SMMU_AGGRE0_AHB_CLK                                        207
-> +#define GCC_AGGRE1_PNOC_AHB_CLK                                        208
-> +#define GCC_AGGRE2_UFS_AXI_CLK                                 209
-> +#define GCC_AGGRE2_USB3_AXI_CLK                                        210
-> +#define GCC_QSPI_AHB_CLK                                       211
-> +#define GCC_QSPI_SER_CLK                                       212
-> +#define GCC_USB3_CLKREF_CLK                                    213
-> +#define GCC_HDMI_CLKREF_CLK                                    214
-> +#define GCC_UFS_CLKREF_CLK                                     215
-> +#define GCC_PCIE_CLKREF_CLK                                    216
-> +#define GCC_RX2_USB2_CLKREF_CLK                                        217
-> +#define GCC_RX1_USB2_CLKREF_CLK                                        218
-> +#define GCC_HLOS1_VOTE_LPASS_CORE_SMMU_CLK                     219
-> +#define GCC_HLOS1_VOTE_LPASS_ADSP_SMMU_CLK                     220
-> +#define GCC_EDP_CLKREF_CLK                                     221
-> +#define GCC_MSS_CFG_AHB_CLK                                    222
-> +#define GCC_MSS_Q6_BIMC_AXI_CLK                                        223
-> +#define GCC_MSS_SNOC_AXI_CLK                                   224
-> +#define GCC_MSS_MNOC_BIMC_AXI_CLK                              225
-> +#define GCC_DCC_AHB_CLK                                                226
-> +#define GCC_AGGRE0_NOC_MPU_CFG_AHB_CLK                         227
-> +#define GCC_MMSS_GPLL0_DIV_CLK                                 228
-> +#define GCC_MSS_GPLL0_DIV_CLK                                  229
+> +&camss {
+> +       vdda-supply = <&pm8916_l2>;
+> +};
 > +
-> +#define GCC_SYSTEM_NOC_BCR                                     0
-> +#define GCC_CONFIG_NOC_BCR                                     1
-> +#define GCC_PERIPH_NOC_BCR                                     2
-> +#define GCC_IMEM_BCR                                           3
-> +#define GCC_MMSS_BCR                                           4
-> +#define GCC_PIMEM_BCR                                          5
-> +#define GCC_QDSS_BCR                                           6
-> +#define GCC_USB_30_BCR                                         7
-> +#define GCC_USB_20_BCR                                         8
-> +#define GCC_QUSB2PHY_PRIM_BCR                                  9
-> +#define GCC_QUSB2PHY_SEC_BCR                                   10
-> +#define GCC_USB_PHY_CFG_AHB2PHY_BCR                            11
-> +#define GCC_SDCC1_BCR                                          12
-> +#define GCC_SDCC2_BCR                                          13
-> +#define GCC_SDCC3_BCR                                          14
-> +#define GCC_SDCC4_BCR                                          15
-> +#define GCC_BLSP1_BCR                                          16
-> +#define GCC_BLSP1_QUP1_BCR                                     17
-> +#define GCC_BLSP1_UART1_BCR                                    18
-> +#define GCC_BLSP1_QUP2_BCR                                     19
-> +#define GCC_BLSP1_UART2_BCR                                    20
-> +#define GCC_BLSP1_QUP3_BCR                                     21
-> +#define GCC_BLSP1_UART3_BCR                                    22
-> +#define GCC_BLSP1_QUP4_BCR                                     23
-> +#define GCC_BLSP1_UART4_BCR                                    24
-> +#define GCC_BLSP1_QUP5_BCR                                     25
-> +#define GCC_BLSP1_UART5_BCR                                    26
-> +#define GCC_BLSP1_QUP6_BCR                                     27
-> +#define GCC_BLSP1_UART6_BCR                                    28
-> +#define GCC_BLSP2_BCR                                          29
-> +#define GCC_BLSP2_QUP1_BCR                                     30
-> +#define GCC_BLSP2_UART1_BCR                                    31
-> +#define GCC_BLSP2_QUP2_BCR                                     32
-> +#define GCC_BLSP2_UART2_BCR                                    33
-> +#define GCC_BLSP2_QUP3_BCR                                     34
-> +#define GCC_BLSP2_UART3_BCR                                    35
-> +#define GCC_BLSP2_QUP4_BCR                                     36
-> +#define GCC_BLSP2_UART4_BCR                                    37
-> +#define GCC_BLSP2_QUP5_BCR                                     38
-> +#define GCC_BLSP2_UART5_BCR                                    39
-> +#define GCC_BLSP2_QUP6_BCR                                     40
-> +#define GCC_BLSP2_UART6_BCR                                    41
-> +#define GCC_PDM_BCR                                            42
-> +#define GCC_PRNG_BCR                                           43
-> +#define GCC_TSIF_BCR                                           44
-> +#define GCC_TCSR_BCR                                           45
-> +#define GCC_BOOT_ROM_BCR                                       46
-> +#define GCC_MSG_RAM_BCR                                                47
-> +#define GCC_TLMM_BCR                                           48
-> +#define GCC_MPM_BCR                                            49
-> +#define GCC_SEC_CTRL_BCR                                       50
-> +#define GCC_SPMI_BCR                                           51
-> +#define GCC_SPDM_BCR                                           52
-> +#define GCC_CE1_BCR                                            53
-> +#define GCC_BIMC_BCR                                           54
-> +#define GCC_SNOC_BUS_TIMEOUT0_BCR                              55
-> +#define GCC_SNOC_BUS_TIMEOUT2_BCR                              56
-> +#define GCC_SNOC_BUS_TIMEOUT1_BCR                              57
-> +#define GCC_SNOC_BUS_TIMEOUT3_BCR                              58
-> +#define GCC_SNOC_BUS_TIMEOUT_EXTREF_BCR                                59
-> +#define GCC_PNOC_BUS_TIMEOUT0_BCR                              60
-> +#define GCC_PNOC_BUS_TIMEOUT1_BCR                              61
-> +#define GCC_PNOC_BUS_TIMEOUT2_BCR                              62
-> +#define GCC_PNOC_BUS_TIMEOUT3_BCR                              63
-> +#define GCC_PNOC_BUS_TIMEOUT4_BCR                              64
-> +#define GCC_CNOC_BUS_TIMEOUT0_BCR                              65
-> +#define GCC_CNOC_BUS_TIMEOUT1_BCR                              66
-> +#define GCC_CNOC_BUS_TIMEOUT2_BCR                              67
-> +#define GCC_CNOC_BUS_TIMEOUT3_BCR                              68
-> +#define GCC_CNOC_BUS_TIMEOUT4_BCR                              69
-> +#define GCC_CNOC_BUS_TIMEOUT5_BCR                              70
-> +#define GCC_CNOC_BUS_TIMEOUT6_BCR                              71
-> +#define GCC_CNOC_BUS_TIMEOUT7_BCR                              72
-> +#define GCC_CNOC_BUS_TIMEOUT8_BCR                              73
-> +#define GCC_CNOC_BUS_TIMEOUT9_BCR                              74
-> +#define GCC_CNOC_BUS_TIMEOUT_EXTREF_BCR                                75
-> +#define GCC_APB2JTAG_BCR                                       76
-> +#define GCC_RBCPR_CX_BCR                                       77
-> +#define GCC_RBCPR_MX_BCR                                       78
-> +#define GCC_PCIE_0_BCR                                         79
-> +#define GCC_PCIE_0_PHY_BCR                                     80
-> +#define GCC_PCIE_1_BCR                                         81
-> +#define GCC_PCIE_1_PHY_BCR                                     82
-> +#define GCC_PCIE_2_BCR                                         83
-> +#define GCC_PCIE_2_PHY_BCR                                     84
-> +#define GCC_PCIE_PHY_BCR                                       85
-> +#define GCC_DCD_BCR                                            86
-> +#define GCC_OBT_ODT_BCR                                                87
-> +#define GCC_UFS_BCR                                            88
-> +#define GCC_SSC_BCR                                            89
-> +#define GCC_VS_BCR                                             90
-> +#define GCC_AGGRE0_NOC_BCR                                     91
-> +#define GCC_AGGRE1_NOC_BCR                                     92
-> +#define GCC_AGGRE2_NOC_BCR                                     93
-> +#define GCC_DCC_BCR                                            94
-> +#define GCC_IPA_BCR                                            95
-> +#define GCC_QSPI_BCR                                           96
-> +#define GCC_SKL_BCR                                            97
-> +#define GCC_MSMPU_BCR                                          98
-> +#define GCC_MSS_Q6_BCR                                         99
-> +#define GCC_QREFS_VBG_CAL_BCR                                  100
-> +#define GCC_PCIE_PHY_COM_BCR                                   101
-> +#define GCC_PCIE_PHY_COM_NOCSR_BCR                             102
-> +#define GCC_USB3_PHY_BCR                                       103
-> +#define GCC_USB3PHY_PHY_BCR                                    104
-> +#define GCC_MSS_RESTART                                                105
+> +&mdss_dsi0 {
+> +       vdda-supply = <&pm8916_l2>;
+> +       vddio-supply = <&pm8916_l6>;
+> +};
 > +
+> +&mdss_dsi0_phy {
+> +       vddio-supply = <&pm8916_l6>;
+> +};
 > +
-> +/* Indexes for GDSCs */
-> +#define AGGRE0_NOC_GDSC                        0
-> +#define HLOS1_VOTE_AGGRE0_NOC_GDSC     1
-> +#define HLOS1_VOTE_LPASS_ADSP_GDSC     2
-> +#define HLOS1_VOTE_LPASS_CORE_GDSC     3
-> +#define USB30_GDSC                     4
-> +#define PCIE0_GDSC                     5
-> +#define PCIE1_GDSC                     6
-> +#define PCIE2_GDSC                     7
-> +#define UFS_GDSC                       8
+> +&mpss {
+> +       pll-supply = <&pm8916_l7>;
+> +};
 > +
-> +#endif
-> diff --git a/include/dt-bindings/clock/qcom,mmcc-msm8996.h b/include/dt-bindings/clock/qcom,mmcc-msm8996.h
+> +&pm8916_codec {
+> +       vdd-cdc-io-supply = <&pm8916_l5>;
+> +       vdd-cdc-tx-rx-cx-supply = <&pm8916_l5>;
+> +       vdd-micbias-supply = <&pm8916_l13>;
+> +};
+> +
+> +&sdhc_1 {
+> +       vmmc-supply = <&pm8916_l8>;
+> +       vqmmc-supply = <&pm8916_l5>;
+> +};
+> +
+> +&sdhc_2 {
+> +       vmmc-supply = <&pm8916_l11>;
+> +       vqmmc-supply = <&pm8916_l12>;
+> +};
+> +
+> +&usb_hs_phy {
+> +       v1p8-supply = <&pm8916_l7>;
+> +       v3p3-supply = <&pm8916_l13>;
+> +};
+> +
+> +&wcnss {
+> +       vddpx-supply = <&pm8916_l7>;
+> +};
+> +
+> +&wcnss_iris {
+> +       vddxo-supply = <&pm8916_l7>;
+> +       vddrfa-supply = <&pm8916_s3>;
+> +       vddpa-supply = <&pm8916_l9>;
+> +       vdddig-supply = <&pm8916_l5>;
+> +};
+> +
+> +&rpm_requests {
+> +       pm8916_rpm_regulators: regulators {
+> +               compatible = "qcom,rpm-pm8916-regulators";
+> +               vdd_l1_l2_l3-supply = <&pm8916_s3>;
+> +               vdd_l4_l5_l6-supply = <&pm8916_s4>;
+> +               vdd_l7-supply = <&pm8916_s4>;
+> +
+> +               /* pm8916_s1 is managed by rpmpd (MSM8916_VDDCX) */
+> +
+> +               pm8916_s3: s3 {
+> +                       regulator-min-microvolt = <1250000>;
+> +                       regulator-max-microvolt = <1350000>;
+> +                       regulator-always-on; /* Needed for L2 */
+> +               };
+> +
+> +               pm8916_s4: s4 {
+> +                       regulator-min-microvolt = <1850000>;
+> +                       regulator-max-microvolt = <2150000>;
+> +                       regulator-always-on; /* Needed for L5/L7 */
+> +               };
+> +
+> +               /*
+> +                * Some of the regulators are unused or managed by another
+> +                * processor (e.g. the modem). We should still define nodes for
+> +                * them to ensure the vote from the application processor can be
+> +                * dropped in case the regulators are already on during boot.
+> +                *
+> +                * The labels for these nodes are omitted on purpose because
+> +                * boards should configure a proper voltage before using them.
+> +                */
+> +               l1 {};
+> +
+> +               pm8916_l2: l2 {
+> +                       regulator-min-microvolt = <1200000>;
+> +                       regulator-max-microvolt = <1200000>;
+> +                       regulator-always-on; /* Needed for LPDDR RAM */
+> +               };
+> +
+> +               /* pm8916_l3 is managed by rpmpd (MSM8916_VDDMX) */
+> +
+> +               l4 {};
+> +
+> +               pm8916_l5: l5 {
+> +                       regulator-min-microvolt = <1800000>;
+> +                       regulator-max-microvolt = <1800000>;
+> +                       regulator-always-on; /* Needed for most digital I/O */
+> +               };
+> +
+> +               pm8916_l6: l6 {
+> +                       regulator-min-microvolt = <1800000>;
+> +                       regulator-max-microvolt = <1800000>;
+> +               };
+> +
+> +               pm8916_l7: l7 {
+> +                       regulator-min-microvolt = <1800000>;
+> +                       regulator-max-microvolt = <1800000>;
+> +                       regulator-always-on; /* Needed for CPU PLL */
+> +               };
+> +
+> +               pm8916_l8: l8 {
+> +                       regulator-min-microvolt = <2900000>;
+> +                       regulator-max-microvolt = <2900000>;
+> +               };
+> +
+> +               pm8916_l9: l9 {
+> +                       regulator-min-microvolt = <3300000>;
+> +                       regulator-max-microvolt = <3300000>;
+> +               };
+> +
+> +               l10 {};
+> +
+> +               pm8916_l11: l11 {
+> +                       regulator-min-microvolt = <2950000>;
+> +                       regulator-max-microvolt = <2950000>;
+> +                       regulator-allow-set-load;
+> +                       regulator-system-load = <200000>;
+> +               };
+> +
+> +               pm8916_l12: l12 {
+> +                       regulator-min-microvolt = <1800000>;
+> +                       regulator-max-microvolt = <2950000>;
+> +               };
+> +
+> +               pm8916_l13: l13 {
+> +                       regulator-min-microvolt = <3075000>;
+> +                       regulator-max-microvolt = <3075000>;
+> +               };
+> +
+> +               l14 {};
+> +               l15 {};
+> +               l16 {};
+> +               l17 {};
+> +               l18 {};
+> +       };
+> +};
+> diff --git a/arch/arm/dts/pm8916.dtsi b/arch/arm/dts/pm8916.dtsi
 > new file mode 100644
-> index 000000000000..d51f9ac70566
+> index 000000000000..f4de86787743
 > --- /dev/null
-> +++ b/include/dt-bindings/clock/qcom,mmcc-msm8996.h
-> @@ -0,0 +1,295 @@
-> +/* SPDX-License-Identifier: GPL-2.0-only */
-> +/*
-> + * Copyright (c) 2015, The Linux Foundation. All rights reserved.
-> + */
+> +++ b/arch/arm/dts/pm8916.dtsi
+> @@ -0,0 +1,178 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +#include <dt-bindings/iio/qcom,spmi-vadc.h>
+> +#include <dt-bindings/input/linux-event-codes.h>
+> +#include <dt-bindings/interrupt-controller/irq.h>
+> +#include <dt-bindings/spmi/spmi.h>
 > +
-> +#ifndef _DT_BINDINGS_CLK_MSM_MMCC_8996_H
-> +#define _DT_BINDINGS_CLK_MSM_MMCC_8996_H
+> +&spmi_bus {
 > +
-> +#define MMPLL0_EARLY                                   0
-> +#define MMPLL0_PLL                                     1
-> +#define MMPLL1_EARLY                                   2
-> +#define MMPLL1_PLL                                     3
-> +#define MMPLL2_EARLY                                   4
-> +#define MMPLL2_PLL                                     5
-> +#define MMPLL3_EARLY                                   6
-> +#define MMPLL3_PLL                                     7
-> +#define MMPLL4_EARLY                                   8
-> +#define MMPLL4_PLL                                     9
-> +#define MMPLL5_EARLY                                   10
-> +#define MMPLL5_PLL                                     11
-> +#define MMPLL8_EARLY                                   12
-> +#define MMPLL8_PLL                                     13
-> +#define MMPLL9_EARLY                                   14
-> +#define MMPLL9_PLL                                     15
-> +#define AHB_CLK_SRC                                    16
-> +#define AXI_CLK_SRC                                    17
-> +#define MAXI_CLK_SRC                                   18
-> +#define DSA_CORE_CLK_SRC                               19
-> +#define GFX3D_CLK_SRC                                  20
-> +#define RBBMTIMER_CLK_SRC                              21
-> +#define ISENSE_CLK_SRC                                 22
-> +#define RBCPR_CLK_SRC                                  23
-> +#define VIDEO_CORE_CLK_SRC                             24
-> +#define VIDEO_SUBCORE0_CLK_SRC                         25
-> +#define VIDEO_SUBCORE1_CLK_SRC                         26
-> +#define PCLK0_CLK_SRC                                  27
-> +#define PCLK1_CLK_SRC                                  28
-> +#define MDP_CLK_SRC                                    29
-> +#define EXTPCLK_CLK_SRC                                        30
-> +#define VSYNC_CLK_SRC                                  31
-> +#define HDMI_CLK_SRC                                   32
-> +#define BYTE0_CLK_SRC                                  33
-> +#define BYTE1_CLK_SRC                                  34
-> +#define ESC0_CLK_SRC                                   35
-> +#define ESC1_CLK_SRC                                   36
-> +#define CAMSS_GP0_CLK_SRC                              37
-> +#define CAMSS_GP1_CLK_SRC                              38
-> +#define MCLK0_CLK_SRC                                  39
-> +#define MCLK1_CLK_SRC                                  40
-> +#define MCLK2_CLK_SRC                                  41
-> +#define MCLK3_CLK_SRC                                  42
-> +#define CCI_CLK_SRC                                    43
-> +#define CSI0PHYTIMER_CLK_SRC                           44
-> +#define CSI1PHYTIMER_CLK_SRC                           45
-> +#define CSI2PHYTIMER_CLK_SRC                           46
-> +#define CSIPHY0_3P_CLK_SRC                             47
-> +#define CSIPHY1_3P_CLK_SRC                             48
-> +#define CSIPHY2_3P_CLK_SRC                             49
-> +#define JPEG0_CLK_SRC                                  50
-> +#define JPEG2_CLK_SRC                                  51
-> +#define JPEG_DMA_CLK_SRC                               52
-> +#define VFE0_CLK_SRC                                   53
-> +#define VFE1_CLK_SRC                                   54
-> +#define CPP_CLK_SRC                                    55
-> +#define CSI0_CLK_SRC                                   56
-> +#define CSI1_CLK_SRC                                   57
-> +#define CSI2_CLK_SRC                                   58
-> +#define CSI3_CLK_SRC                                   59
-> +#define FD_CORE_CLK_SRC                                        60
-> +#define MMSS_CXO_CLK                                   61
-> +#define MMSS_SLEEPCLK_CLK                              62
-> +#define MMSS_MMAGIC_AHB_CLK                            63
-> +#define MMSS_MMAGIC_CFG_AHB_CLK                                64
-> +#define MMSS_MISC_AHB_CLK                              65
-> +#define MMSS_MISC_CXO_CLK                              66
-> +#define MMSS_BTO_AHB_CLK                               67
-> +#define MMSS_MMAGIC_AXI_CLK                            68
-> +#define MMSS_S0_AXI_CLK                                        69
-> +#define MMSS_MMAGIC_MAXI_CLK                           70
-> +#define DSA_CORE_CLK                                   71
-> +#define DSA_NOC_CFG_AHB_CLK                            72
-> +#define MMAGIC_CAMSS_AXI_CLK                           73
-> +#define MMAGIC_CAMSS_NOC_CFG_AHB_CLK                   74
-> +#define THROTTLE_CAMSS_CXO_CLK                         75
-> +#define THROTTLE_CAMSS_AHB_CLK                         76
-> +#define THROTTLE_CAMSS_AXI_CLK                         77
-> +#define SMMU_VFE_AHB_CLK                               78
-> +#define SMMU_VFE_AXI_CLK                               79
-> +#define SMMU_CPP_AHB_CLK                               80
-> +#define SMMU_CPP_AXI_CLK                               81
-> +#define SMMU_JPEG_AHB_CLK                              82
-> +#define SMMU_JPEG_AXI_CLK                              83
-> +#define MMAGIC_MDSS_AXI_CLK                            84
-> +#define MMAGIC_MDSS_NOC_CFG_AHB_CLK                    85
-> +#define THROTTLE_MDSS_CXO_CLK                          86
-> +#define THROTTLE_MDSS_AHB_CLK                          87
-> +#define THROTTLE_MDSS_AXI_CLK                          88
-> +#define SMMU_ROT_AHB_CLK                               89
-> +#define SMMU_ROT_AXI_CLK                               90
-> +#define SMMU_MDP_AHB_CLK                               91
-> +#define SMMU_MDP_AXI_CLK                               92
-> +#define MMAGIC_VIDEO_AXI_CLK                           93
-> +#define MMAGIC_VIDEO_NOC_CFG_AHB_CLK                   94
-> +#define THROTTLE_VIDEO_CXO_CLK                         95
-> +#define THROTTLE_VIDEO_AHB_CLK                         96
-> +#define THROTTLE_VIDEO_AXI_CLK                         97
-> +#define SMMU_VIDEO_AHB_CLK                             98
-> +#define SMMU_VIDEO_AXI_CLK                             99
-> +#define MMAGIC_BIMC_AXI_CLK                            100
-> +#define MMAGIC_BIMC_NOC_CFG_AHB_CLK                    101
-> +#define GPU_GX_GFX3D_CLK                               102
-> +#define GPU_GX_RBBMTIMER_CLK                           103
-> +#define GPU_AHB_CLK                                    104
-> +#define GPU_AON_ISENSE_CLK                             105
-> +#define VMEM_MAXI_CLK                                  106
-> +#define VMEM_AHB_CLK                                   107
-> +#define MMSS_RBCPR_CLK                                 108
-> +#define MMSS_RBCPR_AHB_CLK                             109
-> +#define VIDEO_CORE_CLK                                 110
-> +#define VIDEO_AXI_CLK                                  111
-> +#define VIDEO_MAXI_CLK                                 112
-> +#define VIDEO_AHB_CLK                                  113
-> +#define VIDEO_SUBCORE0_CLK                             114
-> +#define VIDEO_SUBCORE1_CLK                             115
-> +#define MDSS_AHB_CLK                                   116
-> +#define MDSS_HDMI_AHB_CLK                              117
-> +#define MDSS_AXI_CLK                                   118
-> +#define MDSS_PCLK0_CLK                                 119
-> +#define MDSS_PCLK1_CLK                                 120
-> +#define MDSS_MDP_CLK                                   121
-> +#define MDSS_EXTPCLK_CLK                               122
-> +#define MDSS_VSYNC_CLK                                 123
-> +#define MDSS_HDMI_CLK                                  124
-> +#define MDSS_BYTE0_CLK                                 125
-> +#define MDSS_BYTE1_CLK                                 126
-> +#define MDSS_ESC0_CLK                                  127
-> +#define MDSS_ESC1_CLK                                  128
-> +#define CAMSS_TOP_AHB_CLK                              129
-> +#define CAMSS_AHB_CLK                                  130
-> +#define CAMSS_MICRO_AHB_CLK                            131
-> +#define CAMSS_GP0_CLK                                  132
-> +#define CAMSS_GP1_CLK                                  133
-> +#define CAMSS_MCLK0_CLK                                        134
-> +#define CAMSS_MCLK1_CLK                                        135
-> +#define CAMSS_MCLK2_CLK                                        136
-> +#define CAMSS_MCLK3_CLK                                        137
-> +#define CAMSS_CCI_CLK                                  138
-> +#define CAMSS_CCI_AHB_CLK                              139
-> +#define CAMSS_CSI0PHYTIMER_CLK                         140
-> +#define CAMSS_CSI1PHYTIMER_CLK                         141
-> +#define CAMSS_CSI2PHYTIMER_CLK                         142
-> +#define CAMSS_CSIPHY0_3P_CLK                           143
-> +#define CAMSS_CSIPHY1_3P_CLK                           144
-> +#define CAMSS_CSIPHY2_3P_CLK                           145
-> +#define CAMSS_JPEG0_CLK                                        146
-> +#define CAMSS_JPEG2_CLK                                        147
-> +#define CAMSS_JPEG_DMA_CLK                             148
-> +#define CAMSS_JPEG_AHB_CLK                             149
-> +#define CAMSS_JPEG_AXI_CLK                             150
-> +#define CAMSS_VFE_AHB_CLK                              151
-> +#define CAMSS_VFE_AXI_CLK                              152
-> +#define CAMSS_VFE0_CLK                                 153
-> +#define CAMSS_VFE0_STREAM_CLK                          154
-> +#define CAMSS_VFE0_AHB_CLK                             155
-> +#define CAMSS_VFE1_CLK                                 156
-> +#define CAMSS_VFE1_STREAM_CLK                          157
-> +#define CAMSS_VFE1_AHB_CLK                             158
-> +#define CAMSS_CSI_VFE0_CLK                             159
-> +#define CAMSS_CSI_VFE1_CLK                             160
-> +#define CAMSS_CPP_VBIF_AHB_CLK                         161
-> +#define CAMSS_CPP_AXI_CLK                              162
-> +#define CAMSS_CPP_CLK                                  163
-> +#define CAMSS_CPP_AHB_CLK                              164
-> +#define CAMSS_CSI0_CLK                                 165
-> +#define CAMSS_CSI0_AHB_CLK                             166
-> +#define CAMSS_CSI0PHY_CLK                              167
-> +#define CAMSS_CSI0RDI_CLK                              168
-> +#define CAMSS_CSI0PIX_CLK                              169
-> +#define CAMSS_CSI1_CLK                                 170
-> +#define CAMSS_CSI1_AHB_CLK                             171
-> +#define CAMSS_CSI1PHY_CLK                              172
-> +#define CAMSS_CSI1RDI_CLK                              173
-> +#define CAMSS_CSI1PIX_CLK                              174
-> +#define CAMSS_CSI2_CLK                                 175
-> +#define CAMSS_CSI2_AHB_CLK                             176
-> +#define CAMSS_CSI2PHY_CLK                              177
-> +#define CAMSS_CSI2RDI_CLK                              178
-> +#define CAMSS_CSI2PIX_CLK                              179
-> +#define CAMSS_CSI3_CLK                                 180
-> +#define CAMSS_CSI3_AHB_CLK                             181
-> +#define CAMSS_CSI3PHY_CLK                              182
-> +#define CAMSS_CSI3RDI_CLK                              183
-> +#define CAMSS_CSI3PIX_CLK                              184
-> +#define CAMSS_ISPIF_AHB_CLK                            185
-> +#define FD_CORE_CLK                                    186
-> +#define FD_CORE_UAR_CLK                                        187
-> +#define FD_AHB_CLK                                     188
-> +#define MMSS_SPDM_CSI0_CLK                             189
-> +#define MMSS_SPDM_JPEG_DMA_CLK                         190
-> +#define MMSS_SPDM_CPP_CLK                              191
-> +#define MMSS_SPDM_PCLK0_CLK                            192
-> +#define MMSS_SPDM_AHB_CLK                              193
-> +#define MMSS_SPDM_GFX3D_CLK                            194
-> +#define MMSS_SPDM_PCLK1_CLK                            195
-> +#define MMSS_SPDM_JPEG2_CLK                            196
-> +#define MMSS_SPDM_DEBUG_CLK                            197
-> +#define MMSS_SPDM_VFE1_CLK                             198
-> +#define MMSS_SPDM_VFE0_CLK                             199
-> +#define MMSS_SPDM_VIDEO_CORE_CLK                       200
-> +#define MMSS_SPDM_AXI_CLK                              201
-> +#define MMSS_SPDM_MDP_CLK                              202
-> +#define MMSS_SPDM_JPEG0_CLK                            203
-> +#define MMSS_SPDM_RM_AXI_CLK                           204
-> +#define MMSS_SPDM_RM_MAXI_CLK                          205
+> +       pm8916_0: pmic@0 {
+> +               compatible = "qcom,pm8916", "qcom,spmi-pmic";
+> +               reg = <0x0 SPMI_USID>;
+> +               #address-cells = <1>;
+> +               #size-cells = <0>;
 > +
-> +#define MMAGICAHB_BCR                                  0
-> +#define MMAGIC_CFG_BCR                                 1
-> +#define MISC_BCR                                       2
-> +#define BTO_BCR                                                3
-> +#define MMAGICAXI_BCR                                  4
-> +#define MMAGICMAXI_BCR                                 5
-> +#define DSA_BCR                                                6
-> +#define MMAGIC_CAMSS_BCR                               7
-> +#define THROTTLE_CAMSS_BCR                             8
-> +#define SMMU_VFE_BCR                                   9
-> +#define SMMU_CPP_BCR                                   10
-> +#define SMMU_JPEG_BCR                                  11
-> +#define MMAGIC_MDSS_BCR                                        12
-> +#define THROTTLE_MDSS_BCR                              13
-> +#define SMMU_ROT_BCR                                   14
-> +#define SMMU_MDP_BCR                                   15
-> +#define MMAGIC_VIDEO_BCR                               16
-> +#define THROTTLE_VIDEO_BCR                             17
-> +#define SMMU_VIDEO_BCR                                 18
-> +#define MMAGIC_BIMC_BCR                                        19
-> +#define GPU_GX_BCR                                     20
-> +#define GPU_BCR                                                21
-> +#define GPU_AON_BCR                                    22
-> +#define VMEM_BCR                                       23
-> +#define MMSS_RBCPR_BCR                                 24
-> +#define VIDEO_BCR                                      25
-> +#define MDSS_BCR                                       26
-> +#define CAMSS_TOP_BCR                                  27
-> +#define CAMSS_AHB_BCR                                  28
-> +#define CAMSS_MICRO_BCR                                        29
-> +#define CAMSS_CCI_BCR                                  30
-> +#define CAMSS_PHY0_BCR                                 31
-> +#define CAMSS_PHY1_BCR                                 32
-> +#define CAMSS_PHY2_BCR                                 33
-> +#define CAMSS_CSIPHY0_3P_BCR                           34
-> +#define CAMSS_CSIPHY1_3P_BCR                           35
-> +#define CAMSS_CSIPHY2_3P_BCR                           36
-> +#define CAMSS_JPEG_BCR                                 37
-> +#define CAMSS_VFE_BCR                                  38
-> +#define CAMSS_VFE0_BCR                                 39
-> +#define CAMSS_VFE1_BCR                                 40
-> +#define CAMSS_CSI_VFE0_BCR                             41
-> +#define CAMSS_CSI_VFE1_BCR                             42
-> +#define CAMSS_CPP_TOP_BCR                              43
-> +#define CAMSS_CPP_BCR                                  44
-> +#define CAMSS_CSI0_BCR                                 45
-> +#define CAMSS_CSI0RDI_BCR                              46
-> +#define CAMSS_CSI0PIX_BCR                              47
-> +#define CAMSS_CSI1_BCR                                 48
-> +#define CAMSS_CSI1RDI_BCR                              49
-> +#define CAMSS_CSI1PIX_BCR                              50
-> +#define CAMSS_CSI2_BCR                                 51
-> +#define CAMSS_CSI2RDI_BCR                              52
-> +#define CAMSS_CSI2PIX_BCR                              53
-> +#define CAMSS_CSI3_BCR                                 54
-> +#define CAMSS_CSI3RDI_BCR                              55
-> +#define CAMSS_CSI3PIX_BCR                              56
-> +#define CAMSS_ISPIF_BCR                                        57
-> +#define FD_BCR                                         58
-> +#define MMSS_SPDM_RM_BCR                               59
+> +               pon@800 {
+> +                       compatible = "qcom,pm8916-pon";
+> +                       reg = <0x800>;
+> +                       mode-bootloader = <0x2>;
+> +                       mode-recovery = <0x1>;
 > +
-> +/* Indexes for GDSCs */
-> +#define MMAGIC_VIDEO_GDSC      0
-> +#define MMAGIC_MDSS_GDSC       1
-> +#define MMAGIC_CAMSS_GDSC      2
-> +#define GPU_GDSC               3
-> +#define VENUS_GDSC             4
-> +#define VENUS_CORE0_GDSC       5
-> +#define VENUS_CORE1_GDSC       6
-> +#define CAMSS_GDSC             7
-> +#define VFE0_GDSC              8
-> +#define VFE1_GDSC              9
-> +#define JPEG_GDSC              10
-> +#define CPP_GDSC               11
-> +#define FD_GDSC                        12
-> +#define MDSS_GDSC              13
-> +#define GPU_GX_GDSC            14
-> +#define MMAGIC_BIMC_GDSC       15
+> +                       pwrkey {
+> +                               compatible = "qcom,pm8941-pwrkey";
+> +                               interrupts = <0x0 0x8 0 IRQ_TYPE_EDGE_BOTH>;
+> +                               debounce = <15625>;
+> +                               bias-pull-up;
+> +                               linux,code = <KEY_POWER>;
+> +                       };
 > +
-> +#endif
-> diff --git a/include/dt-bindings/interconnect/qcom,msm8996-cbf.h b/include/dt-bindings/interconnect/qcom,msm8996-cbf.h
-> new file mode 100644
-> index 000000000000..aac5e69f6bd5
-> --- /dev/null
-> +++ b/include/dt-bindings/interconnect/qcom,msm8996-cbf.h
-> @@ -0,0 +1,12 @@
-> +/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-> +/*
-> + * Copyright (C) 2023 Linaro Ltd. All rights reserved.
-> + */
+> +                       pm8916_resin: resin {
+> +                               compatible = "qcom,pm8941-resin";
+> +                               interrupts = <0x0 0x8 1 IRQ_TYPE_EDGE_BOTH>;
+> +                               debounce = <15625>;
+> +                               bias-pull-up;
+> +                               status = "disabled";
+> +                       };
 > +
-> +#ifndef __DT_BINDINGS_INTERCONNECT_QCOM_MSM8996_CBF_H
-> +#define __DT_BINDINGS_INTERCONNECT_QCOM_MSM8996_CBF_H
+> +                       watchdog {
+> +                               compatible = "qcom,pm8916-wdt";
+> +                               interrupts = <0x0 0x8 6 IRQ_TYPE_EDGE_RISING>;
+> +                               timeout-sec = <60>;
+> +                       };
+> +               };
 > +
-> +#define MASTER_CBF_M4M         0
-> +#define SLAVE_CBF_M4M          1
+> +               pm8916_usbin: usb-detect@1300 {
+> +                       compatible = "qcom,pm8941-misc";
+> +                       reg = <0x1300>;
+> +                       interrupts = <0x0 0x13 1 IRQ_TYPE_EDGE_BOTH>;
+> +                       interrupt-names = "usb_vbus";
+> +                       status = "disabled";
+> +               };
 > +
-> +#endif
-> diff --git a/include/dt-bindings/interconnect/qcom,msm8996.h b/include/dt-bindings/interconnect/qcom,msm8996.h
-> new file mode 100644
-> index 000000000000..a0b7c0ec7bed
-> --- /dev/null
-> +++ b/include/dt-bindings/interconnect/qcom,msm8996.h
-> @@ -0,0 +1,163 @@
-> +/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-3-Clause) */
-> +/*
-> + * Qualcomm MSM8996 interconnect IDs
-> + *
-> + * Copyright (c) 2021 Yassine Oudjana <y.oudjana@protonmail.com>
-> + */
+> +               pm8916_temp: temp-alarm@2400 {
+> +                       compatible = "qcom,spmi-temp-alarm";
+> +                       reg = <0x2400>;
+> +                       interrupts = <0 0x24 0 IRQ_TYPE_EDGE_RISING>;
+> +                       io-channels = <&pm8916_vadc VADC_DIE_TEMP>;
+> +                       io-channel-names = "thermal";
+> +                       #thermal-sensor-cells = <0>;
+> +               };
 > +
-> +#ifndef __DT_BINDINGS_INTERCONNECT_QCOM_MSM8996_H
-> +#define __DT_BINDINGS_INTERCONNECT_QCOM_MSM8996_H
+> +               pm8916_vadc: adc@3100 {
+> +                       compatible = "qcom,spmi-vadc";
+> +                       reg = <0x3100>;
+> +                       interrupts = <0x0 0x31 0x0 IRQ_TYPE_EDGE_RISING>;
+> +                       #address-cells = <1>;
+> +                       #size-cells = <0>;
+> +                       #io-channel-cells = <1>;
 > +
-> +/* A0NOC */
-> +#define MASTER_PCIE_0                  0
-> +#define MASTER_PCIE_1                  1
-> +#define MASTER_PCIE_2                  2
+> +                       channel@0 {
+> +                               reg = <VADC_USBIN>;
+> +                               qcom,pre-scaling = <1 10>;
+> +                       };
+> +                       channel@7 {
+> +                               reg = <VADC_VSYS>;
+> +                               qcom,pre-scaling = <1 3>;
+> +                       };
+> +                       channel@8 {
+> +                               reg = <VADC_DIE_TEMP>;
+> +                       };
+> +                       channel@9 {
+> +                               reg = <VADC_REF_625MV>;
+> +                       };
+> +                       channel@a {
+> +                               reg = <VADC_REF_1250MV>;
+> +                       };
+> +                       channel@e {
+> +                               reg = <VADC_GND_REF>;
+> +                       };
+> +                       channel@f {
+> +                               reg = <VADC_VDD_VADC>;
+> +                       };
+> +               };
 > +
-> +/* A1NOC */
-> +#define MASTER_CNOC_A1NOC              0
-> +#define MASTER_CRYPTO_CORE0            1
-> +#define MASTER_PNOC_A1NOC              2
+> +               rtc@6000 {
+> +                       compatible = "qcom,pm8941-rtc";
+> +                       reg = <0x6000>, <0x6100>;
+> +                       reg-names = "rtc", "alarm";
+> +                       interrupts = <0x0 0x61 0x1 IRQ_TYPE_EDGE_RISING>;
+> +               };
 > +
-> +/* A2NOC */
-> +#define MASTER_USB3                    0
-> +#define MASTER_IPA                     1
-> +#define MASTER_UFS                     2
+> +               pm8916_mpps: mpps@a000 {
+> +                       compatible = "qcom,pm8916-mpp", "qcom,spmi-mpp";
+> +                       reg = <0xa000>;
+> +                       gpio-controller;
+> +                       #gpio-cells = <2>;
+> +                       gpio-ranges = <&pm8916_mpps 0 0 4>;
+> +                       interrupt-controller;
+> +                       #interrupt-cells = <2>;
+> +               };
 > +
-> +/* BIMC */
-> +#define MASTER_AMPSS_M0                        0
-> +#define MASTER_GRAPHICS_3D             1
-> +#define MASTER_MNOC_BIMC               2
-> +#define MASTER_SNOC_BIMC               3
-> +#define SLAVE_EBI_CH0                  4
-> +#define SLAVE_HMSS_L3                  5
-> +#define SLAVE_BIMC_SNOC_0              6
-> +#define SLAVE_BIMC_SNOC_1              7
+> +               pm8916_gpios: gpio@c000 {
+> +                       compatible = "qcom,pm8916-gpio", "qcom,spmi-gpio";
+> +                       reg = <0xc000>;
+> +                       gpio-controller;
+> +                       gpio-ranges = <&pm8916_gpios 0 0 4>;
+> +                       #gpio-cells = <2>;
+> +                       interrupt-controller;
+> +                       #interrupt-cells = <2>;
+> +               };
+> +       };
 > +
-> +/* CNOC */
-> +#define MASTER_SNOC_CNOC               0
-> +#define MASTER_QDSS_DAP                        1
-> +#define SLAVE_CNOC_A1NOC               2
-> +#define SLAVE_CLK_CTL                  3
-> +#define SLAVE_TCSR                     4
-> +#define SLAVE_TLMM                     5
-> +#define SLAVE_CRYPTO_0_CFG             6
-> +#define SLAVE_MPM                      7
-> +#define SLAVE_PIMEM_CFG                        8
-> +#define SLAVE_IMEM_CFG                 9
-> +#define SLAVE_MESSAGE_RAM              10
-> +#define SLAVE_BIMC_CFG                 11
-> +#define SLAVE_PMIC_ARB                 12
-> +#define SLAVE_PRNG                     13
-> +#define SLAVE_DCC_CFG                  14
-> +#define SLAVE_RBCPR_MX                 15
-> +#define SLAVE_QDSS_CFG                 16
-> +#define SLAVE_RBCPR_CX                 17
-> +#define SLAVE_QDSS_RBCPR_APU           18
-> +#define SLAVE_CNOC_MNOC_CFG            19
-> +#define SLAVE_SNOC_CFG                 20
-> +#define SLAVE_SNOC_MPU_CFG             21
-> +#define SLAVE_EBI1_PHY_CFG             22
-> +#define SLAVE_A0NOC_CFG                        23
-> +#define SLAVE_PCIE_1_CFG               24
-> +#define SLAVE_PCIE_2_CFG               25
-> +#define SLAVE_PCIE_0_CFG               26
-> +#define SLAVE_PCIE20_AHB2PHY           27
-> +#define SLAVE_A0NOC_MPU_CFG            28
-> +#define SLAVE_UFS_CFG                  29
-> +#define SLAVE_A1NOC_CFG                        30
-> +#define SLAVE_A1NOC_MPU_CFG            31
-> +#define SLAVE_A2NOC_CFG                        32
-> +#define SLAVE_A2NOC_MPU_CFG            33
-> +#define SLAVE_SSC_CFG                  34
-> +#define SLAVE_A0NOC_SMMU_CFG           35
-> +#define SLAVE_A1NOC_SMMU_CFG           36
-> +#define SLAVE_A2NOC_SMMU_CFG           37
-> +#define SLAVE_LPASS_SMMU_CFG           38
-> +#define SLAVE_CNOC_MNOC_MMSS_CFG       39
+> +       pm8916_1: pmic@1 {
+> +               compatible = "qcom,pm8916", "qcom,spmi-pmic";
+> +               reg = <0x1 SPMI_USID>;
+> +               #address-cells = <1>;
+> +               #size-cells = <0>;
 > +
-> +/* MNOC */
-> +#define MASTER_CNOC_MNOC_CFG           0
-> +#define MASTER_CPP                     1
-> +#define MASTER_JPEG                    2
-> +#define MASTER_MDP_PORT0               3
-> +#define MASTER_MDP_PORT1               4
-> +#define MASTER_ROTATOR                 5
-> +#define MASTER_VIDEO_P0                        6
-> +#define MASTER_VFE                     7
-> +#define MASTER_SNOC_VMEM               8
-> +#define MASTER_VIDEO_P0_OCMEM          9
-> +#define MASTER_CNOC_MNOC_MMSS_CFG      10
-> +#define SLAVE_MNOC_BIMC                        11
-> +#define SLAVE_VMEM                     12
-> +#define SLAVE_SERVICE_MNOC             13
-> +#define SLAVE_MMAGIC_CFG               14
-> +#define SLAVE_CPR_CFG                  15
-> +#define SLAVE_MISC_CFG                 16
-> +#define SLAVE_VENUS_THROTTLE_CFG       17
-> +#define SLAVE_VENUS_CFG                        18
-> +#define SLAVE_VMEM_CFG                 19
-> +#define SLAVE_DSA_CFG                  20
-> +#define SLAVE_MMSS_CLK_CFG             21
-> +#define SLAVE_DSA_MPU_CFG              22
-> +#define SLAVE_MNOC_MPU_CFG             23
-> +#define SLAVE_DISPLAY_CFG              24
-> +#define SLAVE_DISPLAY_THROTTLE_CFG     25
-> +#define SLAVE_CAMERA_CFG               26
-> +#define SLAVE_CAMERA_THROTTLE_CFG      27
-> +#define SLAVE_GRAPHICS_3D_CFG          28
-> +#define SLAVE_SMMU_MDP_CFG             29
-> +#define SLAVE_SMMU_ROT_CFG             30
-> +#define SLAVE_SMMU_VENUS_CFG           31
-> +#define SLAVE_SMMU_CPP_CFG             32
-> +#define SLAVE_SMMU_JPEG_CFG            33
-> +#define SLAVE_SMMU_VFE_CFG             34
+> +               pm8916_pwm: pwm {
+> +                       compatible = "qcom,pm8916-pwm";
 > +
-> +/* PNOC */
-> +#define MASTER_SNOC_PNOC               0
-> +#define MASTER_SDCC_1                  1
-> +#define MASTER_SDCC_2                  2
-> +#define MASTER_SDCC_4                  3
-> +#define MASTER_USB_HS                  4
-> +#define MASTER_BLSP_1                  5
-> +#define MASTER_BLSP_2                  6
-> +#define MASTER_TSIF                    7
-> +#define SLAVE_PNOC_A1NOC               8
-> +#define SLAVE_USB_HS                   9
-> +#define SLAVE_SDCC_2                   10
-> +#define SLAVE_SDCC_4                   11
-> +#define SLAVE_TSIF                     12
-> +#define SLAVE_BLSP_2                   13
-> +#define SLAVE_SDCC_1                   14
-> +#define SLAVE_BLSP_1                   15
-> +#define SLAVE_PDM                      16
-> +#define SLAVE_AHB2PHY                  17
+> +                       #pwm-cells = <2>;
 > +
-> +/* SNOC */
-> +#define MASTER_HMSS                    0
-> +#define MASTER_QDSS_BAM                        1
-> +#define MASTER_SNOC_CFG                        2
-> +#define MASTER_BIMC_SNOC_0             3
-> +#define MASTER_BIMC_SNOC_1             4
-> +#define MASTER_A0NOC_SNOC              5
-> +#define MASTER_A1NOC_SNOC              6
-> +#define MASTER_A2NOC_SNOC              7
-> +#define MASTER_QDSS_ETR                        8
-> +#define SLAVE_A0NOC_SNOC               9
-> +#define SLAVE_A1NOC_SNOC               10
-> +#define SLAVE_A2NOC_SNOC               11
-> +#define SLAVE_HMSS                     12
-> +#define SLAVE_LPASS                    13
-> +#define SLAVE_USB3                     14
-> +#define SLAVE_SNOC_BIMC                        15
-> +#define SLAVE_SNOC_CNOC                        16
-> +#define SLAVE_IMEM                     17
-> +#define SLAVE_PIMEM                    18
-> +#define SLAVE_SNOC_VMEM                        19
-> +#define SLAVE_SNOC_PNOC                        20
-> +#define SLAVE_QDSS_STM                 21
-> +#define SLAVE_PCIE_0                   22
-> +#define SLAVE_PCIE_1                   23
-> +#define SLAVE_PCIE_2                   24
-> +#define SLAVE_SERVICE_SNOC             25
+> +                       status = "disabled";
+> +               };
 > +
-> +#endif
-> diff --git a/include/dt-bindings/sound/qcom,wcd9335.h b/include/dt-bindings/sound/qcom,wcd9335.h
-> new file mode 100644
-> index 000000000000..f5e9f1db091e
-> --- /dev/null
-> +++ b/include/dt-bindings/sound/qcom,wcd9335.h
-> @@ -0,0 +1,15 @@
-> +/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+> +               pm8916_vib: vibrator@c000 {
+> +                       compatible = "qcom,pm8916-vib";
+> +                       reg = <0xc000>;
+> +                       status = "disabled";
+> +               };
 > +
-> +#ifndef __DT_SOUND_QCOM_WCD9335_H
-> +#define __DT_SOUND_QCOM_WCD9335_H
-> +
-> +#define AIF1_PB                 0
-> +#define AIF1_CAP                1
-> +#define AIF2_PB                 2
-> +#define AIF2_CAP                3
-> +#define AIF3_PB                 4
-> +#define AIF3_CAP                5
-> +#define AIF4_PB                 6
-> +#define NUM_CODEC_DAIS          7
-> +
-> +#endif
+> +               pm8916_codec: audio-codec@f000 {
+> +                       compatible = "qcom,pm8916-wcd-analog-codec";
+> +                       reg = <0xf000>;
+> +                       interrupt-parent = <&spmi_bus>;
+> +                       interrupts = <0x1 0xf0 0x0 IRQ_TYPE_NONE>,
+> +                                    <0x1 0xf0 0x1 IRQ_TYPE_NONE>,
+> +                                    <0x1 0xf0 0x2 IRQ_TYPE_NONE>,
+> +                                    <0x1 0xf0 0x3 IRQ_TYPE_NONE>,
+> +                                    <0x1 0xf0 0x4 IRQ_TYPE_NONE>,
+> +                                    <0x1 0xf0 0x5 IRQ_TYPE_NONE>,
+> +                                    <0x1 0xf0 0x6 IRQ_TYPE_NONE>,
+> +                                    <0x1 0xf0 0x7 IRQ_TYPE_NONE>,
+> +                                    <0x1 0xf1 0x0 IRQ_TYPE_NONE>,
+> +                                    <0x1 0xf1 0x1 IRQ_TYPE_NONE>,
+> +                                    <0x1 0xf1 0x2 IRQ_TYPE_NONE>,
+> +                                    <0x1 0xf1 0x3 IRQ_TYPE_NONE>,
+> +                                    <0x1 0xf1 0x4 IRQ_TYPE_NONE>,
+> +                                    <0x1 0xf1 0x5 IRQ_TYPE_NONE>;
+> +                       interrupt-names = "cdc_spk_cnp_int",
+> +                                         "cdc_spk_clip_int",
+> +                                         "cdc_spk_ocp_int",
+> +                                         "mbhc_ins_rem_det1",
+> +                                         "mbhc_but_rel_det",
+> +                                         "mbhc_but_press_det",
+> +                                         "mbhc_ins_rem_det",
+> +                                         "mbhc_switch_int",
+> +                                         "cdc_ear_ocp_int",
+> +                                         "cdc_hphr_ocp_int",
+> +                                         "cdc_hphl_ocp_det",
+> +                                         "cdc_ear_cnp_int",
+> +                                         "cdc_hphr_cnp_int",
+> +                                         "cdc_hphl_cnp_int";
+> +                       #sound-dai-cells = <1>;
+> +                       status = "disabled";
+> +               };
+> +       };
+> +};
 >
 > --
 > 2.43.1
