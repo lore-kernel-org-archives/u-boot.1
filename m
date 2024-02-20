@@ -4,83 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BD79C54787
-	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 13:29:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B14C3C5475B
+	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 13:29:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A097F87DC0;
-	Tue, 20 Feb 2024 14:29:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3D51187F75;
+	Tue, 20 Feb 2024 14:29:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="c5bX018I";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="aNasJ+kK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 302AC87C35; Tue, 20 Feb 2024 14:29:20 +0100 (CET)
-Received: from mail-ua1-x929.google.com (mail-ua1-x929.google.com
- [IPv6:2607:f8b0:4864:20::929])
+ id 4E3DD87F67; Tue, 20 Feb 2024 14:29:37 +0100 (CET)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E18D87DC0
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 14:29:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 947F687F7A
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 14:29:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ua1-x929.google.com with SMTP id
- a1e0cc1a2514c-7ce603b9051so2174785241.2
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 05:29:00 -0800 (PST)
+ spf=pass smtp.mailfrom=dan.carpenter@linaro.org
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-a3e91993d73so315677966b.3
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 05:29:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708435739; x=1709040539; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=TjU+PZf9DXVUmSKwrHtd2X/g0gMBWK2Hc+XqvgrDn3w=;
- b=c5bX018I37jy1XutUtBjli7LvisPimxn4vgtQvWrJzZzQ8V3CH29R1/boWp9Ntmybv
- zQ0IEG+cTKYPV92mu3suKaV0YZo5rYyXRXxLn05bJmPDEraXM/CaPwo4cttjjjrtvg0n
- 72Reyp0YjABaH0KuV47XQSbJU5C/TE7B1nefL4FdqH0fOsjNoQbl02AZys5SZ08bMbym
- Jvy+sec0uRiBM2/rbiLGUYA6d7JTuST1LJ3EW50ZphzjIx/ASib1YNIUsuOZ7vXa6T6b
- fsq2onDwoGC3z6oDMR8lhssCBSLYKk7K+2/9b7JB7i3NmknbhuI91QY4laXXdISf9E1Q
- uc8w==
+ d=linaro.org; s=google; t=1708435769; x=1709040569; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=6XKbtpMDXnyM8PaqY7r0rVu521sM1L4FLXF1GktUAO0=;
+ b=aNasJ+kKxuZYTAVWIXs+z+uBzfne7Qd5wak3RV6S6SVFf3vQ1sAPuETJalX4JKiBe1
+ pUpQnzv8Q9F0AOt82ymQRoSn86BnYKv5Lt5Pcm0ESRIeGacKhyoAah0Fla2bO1+vKQL+
+ qvCkiqjK9uBrq4djMMDALclOV9RRMrZpu40EOUeryv58DlQhWNj+G/ayqIqN5FL/lPf/
+ tWa1hQXto+Lr4ik7jwVOgIjO1CvaZhXUguw37aRv6Ka+pSEc04/jaw8O7cLurRgPuPTR
+ wu4Stp5/L/M7vECeqgtLHAVANQ+tRJg1iKbNg0eC9FKJC2E/mZJjjvugsEk1bKwjNEJ9
+ ozrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708435739; x=1709040539;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=TjU+PZf9DXVUmSKwrHtd2X/g0gMBWK2Hc+XqvgrDn3w=;
- b=DqnjG7pDMfaRkCEv/BvfjoFhsJjQspbI8PHNIrHy7I3q78bDKDXEo4i8uU4rrGc5gk
- DgioBmUE66RRuKkAvcvrGSPjcLmtsIJodEqVPszO0xaYkAeaWmWfISApEOAARnWNjAJk
- dZSWxsYLpN8RtF+H7LaVPnzTIiyyXHc5929Hrun2oUslDvzH0XmTqhHUyuOGKTYqAGjU
- vX6DHkqfNbFXs1viIfE3sOiagDfASyg+OOcNiT40IX7X+zuQI4hLWvTECqFLvn7J3L1a
- s0D5rjDdt/IRCvW5Ip7pFe8OoDdAmJy8ZksYvx8gvXIQKcV+YUjAlVypOSuq+PBRYb8a
- Ob4w==
+ d=1e100.net; s=20230601; t=1708435769; x=1709040569;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6XKbtpMDXnyM8PaqY7r0rVu521sM1L4FLXF1GktUAO0=;
+ b=EtyUqkboMLpDMQQG0his3tseMQirA/c1LTzanocdqzY6dggAcxJA/kFSuZLRTeF2as
+ HpOOJEYCQHY/dljEIRV1YmXH15Obvl/H/Ep3ZgNBki/zxvugPcEGQ56B2K8CII6ePTl2
+ nnxjIJ9GvvjoLAhcYzReVbilqaJw8emtRJ3rN1yNAu6dxyW6Q8x/Arxm4fQYq+NpKk3z
+ qOEFg/1WIXfYDurHxgGldq7UReIGivyBk/ukhHcXUGt9gdZt9EN7KXu+PBknpoKZtF1J
+ j8Lm+Efg9/FJ08Z9A+IvSxWANYVsaCZ7xwcMxaGD2scOaWvzsLiMc1WkZxJLa+LNrnw4
+ Tc9A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVHI7ur8AWOYJNbTcDQDi89lXW8WkINgkx+yvEps+5zGTuGSfVWjh6j1zsNWym5ORL750jv2H1/bgSZrbsFx3rFYpyyVw==
-X-Gm-Message-State: AOJu0YxGeu1eOZQdL33bBLL/YpjhjG5xJ16bz0ie9gEr5CfgwdytP1yR
- qhvQhUddQpqOgRDhUUW0tR7xAUDY8iXMhbrOW7LF7UZDeUe7hzxE5gDT/mdQgjlrkc3Hj3I1jlj
- AlzGubDwuioewfHIvliFfdHuPA0MtlKjI1IUESg==
-X-Google-Smtp-Source: AGHT+IGFN6uNaGSDT2WLOySI+MXOJtA/3TF6QR3J568Uwh+9t8RAjsBD4LLzKNn+rdwwe/p9wtTgPp15kGUBhS9yWwU=
-X-Received: by 2002:a05:6102:3bf8:b0:470:52f5:9ea3 with SMTP id
- be24-20020a0561023bf800b0047052f59ea3mr4608101vsb.7.1708435739312; Tue, 20
- Feb 2024 05:28:59 -0800 (PST)
-MIME-Version: 1.0
-References: <20240215-b4-qcom-common-target-v4-0-ed06355c634a@linaro.org>
- <20240215-b4-qcom-common-target-v4-19-ed06355c634a@linaro.org>
-In-Reply-To: <20240215-b4-qcom-common-target-v4-19-ed06355c634a@linaro.org>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Tue, 20 Feb 2024 18:58:48 +0530
-Message-ID: <CAFA6WYPmYsHhn__LMHH17gChHBs3-hBwh88+g94gt760JDboag@mail.gmail.com>
-Subject: Re: [PATCH v4 19/39] board: dragonboard820c: use
- LINUX_KERNEL_IMAGE_HEADER
+ AJvYcCVBpWq/smyTpS7DkswWKJyDdxBjl5QzQAtRbq74R1Vnt+h2VW/m02nG6W+F6boSDMjdXdxGZPqV05NXUoR0M1lLZv3Maw==
+X-Gm-Message-State: AOJu0YwvZAsQgygsYOEIVTjZvTX61obHYXaXgdvXHXzQ3MCl1KRbGzky
+ 9DbgmILjrkv2g73wu6wicIggzV+HalwpsCuPEeqJVq62/w53t0YQIWGUXRLriXGwn1h0BEgpsFj
+ k
+X-Google-Smtp-Source: AGHT+IGRhoiOyT61KSq8n+nuprm/tx0pIg4PihEOepEaIPM0/bO4SVD53/rXQM4Ptdha8Wq0fvRltA==
+X-Received: by 2002:ac2:593b:0:b0:512:b366:6c42 with SMTP id
+ v27-20020ac2593b000000b00512b3666c42mr3687339lfi.32.1708435317117; 
+ Tue, 20 Feb 2024 05:21:57 -0800 (PST)
+Received: from localhost ([102.222.70.76]) by smtp.gmail.com with ESMTPSA id
+ i7-20020aa7c9c7000000b005649f17558bsm1338030edt.42.2024.02.20.05.21.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 20 Feb 2024 05:21:56 -0800 (PST)
+Date: Tue, 20 Feb 2024 16:21:53 +0300
+From: Dan Carpenter <dan.carpenter@linaro.org>
 To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- Ramon Fried <rfried.dev@gmail.com>, 
- Dzmitry Sankouski <dsankouski@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
- Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Cc: Anatolij Gustschin <agust@denx.de>, Tom Rini <trini@konsulko.com>,
+ Rob Clark <robdclark@gmail.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH] video: simplefb: modernise DT parsing
+Message-ID: <4efbc685-4989-4680-9283-81bb0f806671@moroto.mountain>
+References: <20240216183840.879482-1-caleb.connolly@linaro.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240216183840.879482-1-caleb.connolly@linaro.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,204 +93,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 16 Feb 2024 at 02:22, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->
-> db820c predated support for prepending the kernel image header
-> automatically, drop it's custom linker script and head.S in favour of
-> this generic support.
->
-> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->  arch/arm/mach-snapdragon/Kconfig          |   1 +
->  board/qualcomm/dragonboard820c/Makefile   |   1 -
->  board/qualcomm/dragonboard820c/head.S     |  33 ---------
->  board/qualcomm/dragonboard820c/u-boot.lds | 111 ------------------------------
->  4 files changed, 1 insertion(+), 145 deletions(-)
->
+On Fri, Feb 16, 2024 at 06:38:06PM +0000, Caleb Connolly wrote:
+> @@ -41,17 +41,25 @@ static int simple_video_probe(struct udevice *dev)
+>  
+>  	debug("%s: Query resolution...\n", __func__);
+>  
+> -	uc_priv->xsize = fdtdec_get_uint(blob, node, "width", 0);
+> -	uc_priv->ysize = fdtdec_get_uint(blob, node, "height", 0);
+> -	uc_priv->rot = fdtdec_get_uint(blob, node, "rot", 0);
+> -	if (uc_priv->rot > 3) {
+> -		log_debug("%s: invalid rot\n", __func__);
+> -		return log_msg_ret("rot", -EINVAL);
+> +	ret = ofnode_read_u32(node, "width", &width);
+> +	ret = ret ?: ofnode_read_u32(node, "height", &height);
+> +	if (ret || !width || !height) {
+> +		log_err("%s: invalid width or height: %d\n", __func__, ret);
+> +		return ret;
 
-Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
+This should be something like:
 
--Sumit
+	return ret ?: -EINVAL;
 
-> diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
-> index ad6671081910..f897c393464f 100644
-> --- a/arch/arm/mach-snapdragon/Kconfig
-> +++ b/arch/arm/mach-snapdragon/Kconfig
-> @@ -45,6 +45,7 @@ config TARGET_DRAGONBOARD410C
->
->  config TARGET_DRAGONBOARD820C
->         bool "96Boards Dragonboard 820C"
-> +       select LINUX_KERNEL_IMAGE_HEADER
->         imply CLK_QCOM_APQ8096
->         imply PINCTRL_QCOM_APQ8096
->         imply BUTTON_QCOM_PMIC
-> diff --git a/board/qualcomm/dragonboard820c/Makefile b/board/qualcomm/dragonboard820c/Makefile
-> index 643311f5b3ba..2ae6d16364aa 100644
-> --- a/board/qualcomm/dragonboard820c/Makefile
-> +++ b/board/qualcomm/dragonboard820c/Makefile
-> @@ -3,4 +3,3 @@
->  # (C) Copyright 2017 Jorge Ramirez-Ortiz <jorge.ramirez-ortiz@gmail.com>
->
->  obj-y  := dragonboard820c.o
-> -extra-y += head.o
-> diff --git a/board/qualcomm/dragonboard820c/head.S b/board/qualcomm/dragonboard820c/head.S
-> deleted file mode 100644
-> index b052a858fd32..000000000000
-> --- a/board/qualcomm/dragonboard820c/head.S
-> +++ /dev/null
-> @@ -1,33 +0,0 @@
-> -/* SPDX-License-Identifier: GPL-2.0+ */
-> -/*
-> - * ARM64 header for proper chain-loading with Little Kernel.
-> - *
-> - * Little Kernel shipped with Dragonboard820C boots standard Linux images for
-> - * ARM64. This file adds header that is required to boot U-Boot properly.
-> - *
-> - * For details see:
-> - * https://www.kernel.org/doc/Documentation/arm64/booting.txt
-> - *
-> - * (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
-> - */
-> -
-> -#include <config.h>
-> -
-> -/*
-> - *   per document in linux/Doc/arm64/booting.text
-> - */
-> -.global _arm64_header
-> -_arm64_header:
-> -       b _start
-> -       .word 0
-> -       .quad   CONFIG_TEXT_BASE-PHYS_SDRAM_1 /* Image load offset, LE */
-> -       .quad   0    /* Effective size of kernel image, little-endian */
-> -       .quad   0    /* kernel flags, little-endian */
-> -       .quad   0    /* reserved */
-> -       .quad   0    /* reserved */
-> -       .quad   0    /* reserved */
-> -       .byte   0x41 /* Magic number, "ARM\x64" */
-> -       .byte   0x52
-> -       .byte   0x4d
-> -       .byte   0x64
-> -       .word   0    /* reserved (used for PE COFF offset) */
-> diff --git a/board/qualcomm/dragonboard820c/u-boot.lds b/board/qualcomm/dragonboard820c/u-boot.lds
-> deleted file mode 100644
-> index 5251b59fbe76..000000000000
-> --- a/board/qualcomm/dragonboard820c/u-boot.lds
-> +++ /dev/null
-> @@ -1,111 +0,0 @@
-> -/* SPDX-License-Identifier: GPL-2.0+ */
-> -/*
-> - * Override linker script for fastboot-readable images
-> - *
-> - * (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
-> - *
-> - * Based on arch/arm/cpu/armv8/u-boot.lds (Just add header)
-> - */
-> -
-> -OUTPUT_FORMAT("elf64-littleaarch64", "elf64-littleaarch64", "elf64-littleaarch64")
-> -OUTPUT_ARCH(aarch64)
-> -ENTRY(_arm64_header)
-> -SECTIONS
-> -{
-> -       . = 0x00000000;
-> -
-> -       . = ALIGN(8);
-> -       .text :
-> -       {
-> -               *(.__image_copy_start)
-> -               board/qualcomm/dragonboard820c/head.o (.text*)
-> -               CPUDIR/start.o (.text*)
-> -       }
-> -
-> -       /* This needs to come before *(.text*) */
-> -       .efi_runtime : {
-> -                __efi_runtime_start = .;
-> -               *(.text.efi_runtime*)
-> -               *(.rodata.efi_runtime*)
-> -               *(.data.efi_runtime*)
-> -                __efi_runtime_stop = .;
-> -       }
-> -
-> -       .text_rest :
-> -       {
-> -               *(.text*)
-> -       }
-> -
-> -       . = ALIGN(8);
-> -       .rodata : { *(SORT_BY_ALIGNMENT(SORT_BY_NAME(.rodata*))) }
-> -
-> -       . = ALIGN(8);
-> -       .data : {
-> -               *(.data*)
-> -       }
-> -
-> -       . = ALIGN(8);
-> -
-> -       . = .;
-> -
-> -       . = ALIGN(8);
-> -       __u_boot_list : {
-> -               KEEP(*(SORT(__u_boot_list*)));
-> -       }
-> -
-> -       . = ALIGN(8);
-> -
-> -       .efi_runtime_rel : {
-> -                __efi_runtime_rel_start = .;
-> -               *(.rel*.efi_runtime)
-> -               *(.rel*.efi_runtime.*)
-> -                __efi_runtime_rel_stop = .;
-> -       }
-> -
-> -       . = ALIGN(8);
-> -
-> -       .image_copy_end :
-> -       {
-> -               *(.__image_copy_end)
-> -       }
-> -
-> -       . = ALIGN(8);
-> -
-> -       .rel_dyn_start :
-> -       {
-> -               *(.__rel_dyn_start)
-> -       }
-> -
-> -       .rela.dyn : {
-> -               *(.rela*)
-> -       }
-> -
-> -       .rel_dyn_end :
-> -       {
-> -               *(.__rel_dyn_end)
-> -       }
-> -
-> -       _end = .;
-> -
-> -       . = ALIGN(8);
-> -
-> -       .bss_start : {
-> -               KEEP(*(.__bss_start));
-> -       }
-> -
-> -       .bss : {
-> -               *(.bss*)
-> -                . = ALIGN(8);
-> -       }
-> -
-> -       .bss_end : {
-> -               KEEP(*(.__bss_end));
-> -       }
-> -
-> -       /DISCARD/ : { *(.dynsym) }
-> -       /DISCARD/ : { *(.dynstr*) }
-> -       /DISCARD/ : { *(.dynamic*) }
-> -       /DISCARD/ : { *(.plt*) }
-> -       /DISCARD/ : { *(.interp*) }
-> -       /DISCARD/ : { *(.gnu*) }
-> -}
->
-> --
-> 2.43.1
->
+Perhaps print the width and height in the error message as well.
+
+regards,
+dan carpenter
