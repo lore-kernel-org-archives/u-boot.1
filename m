@@ -4,56 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D32EC48BF8
-	for <u-boot@archiver.kernel.org>; Mon, 19 Feb 2024 23:08:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79B0CC48BC3
+	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 00:53:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8007387DA4;
-	Tue, 20 Feb 2024 00:08:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gnu.org
+	by phobos.denx.de (Postfix) with ESMTP id 5CA3887F16;
+	Tue, 20 Feb 2024 01:53:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gnu.org header.i=@gnu.org header.b="BXMgZNl6";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZO0p/txh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 46C9087DA2; Mon, 19 Feb 2024 18:31:22 +0100 (CET)
-Received: from eggs.gnu.org (eggs.gnu.org [IPv6:2001:470:142:3::10])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id BF84487F16; Tue, 20 Feb 2024 01:53:34 +0100 (CET)
+Received: from mail-pg1-x52a.google.com (mail-pg1-x52a.google.com
+ [IPv6:2607:f8b0:4864:20::52a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A1B987F64
- for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 18:30:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 98F9C87F63
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 01:53:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gnu.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=othacehe@gnu.org
-Received: from fencepost.gnu.org ([2001:470:142:3::e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <othacehe@gnu.org>)
- id 1rc7TV-0003nt-Gd; Mon, 19 Feb 2024 12:30:45 -0500
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=gnu.org;
- s=fencepost-gnu-org; h=MIME-Version:Date:References:In-Reply-To:Subject:To:
- From; bh=uRCcqmEwcOwNu4e+RESUs0tggu0ehteORqBHuaHGpXk=; b=BXMgZNl6HP9+hDLxrzMs
- Hl54u3mg67JIHgHGJyZtr/pMSl+xSis2I7X20IBI+5SuXR7OYIhblaXGLiCFCrGyNC4LoEANU1BdB
- Ecg18jvPly6qWOxmWPYyWttjd9iFgVZJFT+ixj5GycEssxA71ptMUt/ctns4z8IJmP9Utg76P4rbp
- fkYw2CdSR4vrLFj+GXkqOZIDxBHfpa50AxiOYEgr4s/w/ji4/6WlAAtBF/1eb0R0xiJduQ4+jv4Mq
- f/Ree/e5XA7zY3LXYkWJb6s6yV+ZOXKKo1fOXvE/CXViA8boYms+VobEOvf6dSS/LC58TWi8WnHu7
- Mh2QUUci8m+FPA==;
-From: Mathieu Othacehe <othacehe@gnu.org>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>,  Marek Vasut <marex@denx.de>,  Peng Fan
- <peng.fan@nxp.com>,  Shiji Yang <yangshiji66@outlook.com>,  Ye Li
- <ye.li@nxp.com>,  =?utf-8?Q?S=C3=A9bastien?= Szymanski
- <sebastien.szymanski@armadeus.com>,
- Simon Glass <sjg@chromium.org>,  u-boot@lists.denx.de
-Subject: Re: [PATCH v2] usb: ehci-mx6: Add i.MX93 support
-In-Reply-To: <CAOMZO5COoMMY6gVc1Bpw2iGLeFtmrhE_G=rTzD7Zsj5i6PBipw@mail.gmail.com>
- (Fabio Estevam's message of "Mon, 19 Feb 2024 14:26:55 -0300")
-References: <20240219170531.14959-1-othacehe@gnu.org>
- <CAOMZO5COoMMY6gVc1Bpw2iGLeFtmrhE_G=rTzD7Zsj5i6PBipw@mail.gmail.com>
-Date: Mon, 19 Feb 2024 18:30:36 +0100
-Message-ID: <878r3g9xab.fsf@gnu.org>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pg1-x52a.google.com with SMTP id
+ 41be03b00d2f7-5cfcf509fbdso1491999a12.1
+ for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 16:53:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1708390381; x=1708995181; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=EvzjHQMa11M/lgylxYi0DBM/rzjPIydEeemFqDnxygU=;
+ b=ZO0p/txhuklxBUknIVO8s4jzE1MAm73yX4RxMiA1kjuz+0ATxu1S+RaiJ1O3fPsZCy
+ 8Mmo1XscxdhL6zGCIvU4HhbsONYm7MdwxznmoJVbV2stL3MBt2z92j6sdaDU9DBPaWH/
+ 12i1fUvwApkPLqhJo6OLVCnfXm2NXSWmGE/NP+sNJLHx5djcdowER7PjbfdoCC2tzVtx
+ 5dzAHEVaS7l5Xo3W6FwhR6GeYgfD4B2Hrs9bwQ7zh97bKQn9Wv4imM8Dk3QoDgfOfP4l
+ pZesaUze0uJdSlc3fKA40R0GeB5gOzj+NlLoebRWSkzIqbZd2VydBroujNNXSKd3RYd8
+ H3vw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1708390381; x=1708995181;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=EvzjHQMa11M/lgylxYi0DBM/rzjPIydEeemFqDnxygU=;
+ b=b9xYCozDONWYH5pLrp/AGgMHF/KB7u4v+TkNUMbfVveU6cXqEmbus3UEhgL4R7r+aN
+ 0K0MvrcFIvXwWNpsLiyu53WdTV98l1/0ZjJJuoUYhzXucjb3ybscrhQqCqlA64LoQPlY
+ e+cGnv1hacA+qw4TyMcCuIPjhbA+1ElEuLEN4rzZfYiT5xoq4pPm0SF/A3ht4XanCZIC
+ ArTtIw+brxnvOev5lQXeF25Rh4b5/MnwmcxWexyufp7YFLRB35RO8bPCnmdAyC0RzNNV
+ shn6LGlOp8xGt4c7/sfeQemVlf2luZ3vToXzTO3emplZUZR5dFxRTTT4QXIdxdsXGwEG
+ txdA==
+X-Gm-Message-State: AOJu0YxFCUlOpNPomuSma67v0wRWexfjqNea9+jV3gZ9MjSX+kgK21Gd
+ 2R2IKM/7bI/rNKsMMuZYUkZmOZgc9ZrPLgdnjoADRAHQDb/RnseWCPoqVU5clcoKqlNWhu0lkRq
+ 2QEfuhKUBu3TTVSx2g9/skrDMaho=
+X-Google-Smtp-Source: AGHT+IGJ6pnVYg1lvpgEHK1ec+yZwlmFQoMCdGpdsB+bgmalWoEQ0bYn9YPNWFohPAnV4lMrJ6bWUudu5Axid/mQoow=
+X-Received: by 2002:a05:6a20:2587:b0:1a0:b3b6:e2c9 with SMTP id
+ k7-20020a056a20258700b001a0b3b6e2c9mr800863pzd.5.1708390380689; Mon, 19 Feb
+ 2024 16:53:00 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Mailman-Approved-At: Tue, 20 Feb 2024 00:07:58 +0100
+References: <20240219230100.2980309-1-Mr.Bossman075@gmail.com>
+In-Reply-To: <20240219230100.2980309-1-Mr.Bossman075@gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Mon, 19 Feb 2024 21:52:50 -0300
+Message-ID: <CAOMZO5B+eZhJOifRiux0n8VXLkQgwc8Q8215ybJgJ-LHE8RAAQ@mail.gmail.com>
+Subject: Re: [PATCH v4 1/2] imx: imxrt1050-evk: Add support for SPI flash
+ booting
+To: Jesse Taube <mr.bossman075@gmail.com>
+Cc: u-boot@lists.denx.de, 
+ Giulio Benetti <giulio.benetti@benettiengineering.com>,
+ Stefano Babic <sbabic@denx.de>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,14 +92,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Mon, Feb 19, 2024 at 8:01=E2=80=AFPM Jesse Taube <mr.bossman075@gmail.co=
+m> wrote:
+>
+> Add support for booting the imxrt1050-evk from spi.
+> Add imximage config and the ability for SPL to boot from NOR.
+> Enable binman in Kconfig and device tree for imxrt* as it is used to
+> prepend fspi_header.bin to SPL and u-boot.img.
+>
+> Signed-off-by: Jesse Taube <Mr.Bossman075@gmail.com>
 
-Hello Fabio,
+I see the following warning when applying this series:
 
-Thanks for having a look.
+$ git am v4-1-2-imx-imxrt1050-evk-Add-support-for-SPI-flash-booting.patch
+Applying: imx: imxrt1050-evk: Add support for SPI flash booting
+.git/rebase-apply/patch:175: new blank line at EOF.
++
+warning: 1 line adds whitespace errors.
+Applying: imx: imxrt1050-evk: Add documentation for SPI boot
 
-> I assume you will add USB support to some i.MX93 boards later.
+checkpatch also complains:
 
-Yes that's the plan for the boards that I own: imx93_var_som and
-imx93-phyboard-segin :)
-
-Mathieu
+CHECK: From:/Signed-off-by: email comments mismatch: 'From: Jesse
+Taube <mr.bossman075@gmail.com>' !=3D 'Signed-off-by: Jesse Taube
+<Mr.Bossman075@gmail.com>'
