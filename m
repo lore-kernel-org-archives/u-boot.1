@@ -4,107 +4,141 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15E0FC48BC4
-	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 07:42:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E255FC48BC4
+	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 07:48:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F30C87F8B;
-	Tue, 20 Feb 2024 08:42:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 3212587F70;
+	Tue, 20 Feb 2024 08:48:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="5ZqXrfmB";
+	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="qL4iHDWh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F08BA87CAB; Tue, 20 Feb 2024 08:42:13 +0100 (CET)
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on20630.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e88::630])
+ id 559EE87F70; Tue, 20 Feb 2024 08:48:33 +0100 (CET)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on20601.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::601])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B5C8987F60
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 08:41:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A53387D1A
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 08:48:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=love.kumar@amd.com
+ spf=pass smtp.mailfrom=jan.kiszka@siemens.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ilTWd97LO2cEAx51uMNI1K+shwG9VR5bP8Kl7acYbrbgvz3dvqL5xtX8b8HYacKrf4TkJQHjVp4grKntvHQqkWD4TfUabHweGX962Oez0nqQ5/r4K52F0S4lN3NL56wV4L0BWEDctzpa7DnzHXCAG3zdmz6RC39wvW7Ost1Zqu5/ZnOo97m49Eon8n1krG83wE72xUabh0YHga4oNYZvTKJkEOs+MJwvCSlMy3wh8kwWdzxPNp1OpxLGMGU1sdyv11fLvMaiXXcKmUM0l0UlgeHmROPLHXyuXhy5Cz9goOO81S4XT9ECykP/ZLfLWJBda5bOoo9jk7wQmRCL23oIag==
+ b=iyj2dYLQG/INvUg/BEwLMaPyH6RU7XuadvfeuDyNATpc3XO7YfdB+RM5GUEHESPyMFW8EFw0dYds9qUjWU63PSoPkeAxEqpW+gczvyDWfxE8OZppqEpeZLx0r1ntPhqAYpjijXrkIOoUDk5Z4a8G31nrcB/ZoccQddNZtumdIKq5PIZCFNOzqBDepvpK3AfhbjyvFDXmSp9v0eX2ammHaB19zQELWVFtmQiHD4/q1uKiaGRw7KaaX4EC9mbWVqdlesZJ5ho++hHg3oVTUK9NYgcVs/xHr/tvulSfYkGzxVTahFHBmBBhjmHWtnCcKd3b2uyyqA58cK4V5OthmVR0Ag==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=PYnEbjxkpHmUfjFl5IO1c/Rr77f7ovTlLFUoFy+U+9k=;
- b=VUWjJAnvQsQDH1T9Pg20hSWj6PzoQRMT5JRM5S5K4O23a0o3hycJmowRA3j2G58/r1iDoA+/vZ4yzZ+0+FkhBrEsJcgYMkLQkynHd2IIFG/XBcm+agGfbpKRNv/GGauX3HijJoxuVnmJ/HOM6DIX30k+LLJ7O7K5MSO81us+qCG7vkvaHGQtWm5aNp6iV1AV1vKUFRVefw+0A8k9RiqYcvuiBYTeA2JhPz+feXoUfPVOtPA9SfqbIuSJhCGz9GypL2fNnVMHBIoXkuzRXXmC2i6wL8mXRpH80NRdtHKgNQ2NcyFg3wRRzq9PUcyE9vaV+XKx5OL7lHtMVu38ljYbFA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ bh=wyeemArMqMGODKOfCcjhTonx4QVfzKs773SM578m+5o=;
+ b=V/ZoYW4E4dW7czQPWPKZ72opvql2gFeN5PnnFCcvrinwmcO/Xad+fLt4XxvGV1BLdxdGQS7CYj6R3OAcy20i+RODUvhJ3IfP/4kQ0N4+QnvPCfW+Ivjo9aAEem7jNRZoKZ9EOZwM632sgsrJhzmPHbjmwilHHIAE7FTjhF7nVdoBJFuyU7qn9VEa0XzHYQnMuI3ykTnc5rJXmNZs2L8eFI9Whwf9WcKmL4bMQY2cvricX1pVpUApKOPdhzDjTZOnWfnaloRHpX/Q0Ykg7m6J1hEAmsH+TVAoDLXbecAWJGCErWa9nHFIXwg++87f1FvdCPThawrn29vG5xdx/n8BnQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
+ dkim=pass header.d=siemens.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
+ s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PYnEbjxkpHmUfjFl5IO1c/Rr77f7ovTlLFUoFy+U+9k=;
- b=5ZqXrfmBRa8hD4A0Lj7CQMPseFVDg4hks07DRl92ZhXtFxVWAXCOwkVTzoa3Op262WPJpimEdmp1Mkt1LBSspwtIYFodtQP6xFUuSn3mh73pFLPMcD6ofN44hTbanp6VcyVPeLqDtRg2KefLXZtZJn4oW40P+H7b4dt2p9+B7YY=
-Received: from CY5PR18CA0030.namprd18.prod.outlook.com (2603:10b6:930:5::32)
- by BY5PR12MB4036.namprd12.prod.outlook.com (2603:10b6:a03:210::16) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7316.20; Tue, 20 Feb
- 2024 07:41:52 +0000
-Received: from CY4PEPF0000E9D8.namprd05.prod.outlook.com
- (2603:10b6:930:5:cafe::bc) by CY5PR18CA0030.outlook.office365.com
- (2603:10b6:930:5::32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7292.39 via Frontend
- Transport; Tue, 20 Feb 2024 07:41:52 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CY4PEPF0000E9D8.mail.protection.outlook.com (10.167.241.83) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7292.25 via Frontend Transport; Tue, 20 Feb 2024 07:41:52 +0000
-Received: from SATLEXMB08.amd.com (10.181.40.132) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Tue, 20 Feb
- 2024 01:41:51 -0600
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB08.amd.com
- (10.181.40.132) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Mon, 19 Feb
- 2024 23:41:51 -0800
-Received: from xhdlovek40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.35 via Frontend
- Transport; Tue, 20 Feb 2024 01:41:49 -0600
-From: Love Kumar <love.kumar@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <git@xilinx.com>
-Subject: [PATCH v3] test/py: saveenv: Add a test for saveenv command
-Date: Tue, 20 Feb 2024 13:11:49 +0530
-Message-ID: <a206af0d5844af9b68d315e6e667db782fc5211b.1708413969.git.love.kumar@amd.com>
-X-Mailer: git-send-email 2.25.1
-MIME-Version: 1.0
+ bh=wyeemArMqMGODKOfCcjhTonx4QVfzKs773SM578m+5o=;
+ b=qL4iHDWhC22g1jmyHJU2N2ICu8I0nPrAk2Ykjln/8P9+k89Zolu3LPsbCIlmbn8uCYZ+m4nIdvGnZ2HM2xd6oyCLkPr7c1ejapvCxRgZn6F2ULZ9ReDadsbq3WYHTThI3xGHH9xZrHqsnYjFPXuE7aRlzR4I5V3LpBc641ggnK5R/vZ8DigkfNhe81uUHzAsD2GGpii2WPtaaDTk1/RuayZ5EkW6HOnCwa19ehGgwjhzcb/eVtv6WlOKbkrq66m0/dYoHVa36thLrvHaN5gfr/ouwN2Ig/mcOXPHziQv1LXdj6zlpJZeH8ZYalK3UA0jqcAB66y0GKtmgieqfdZOGw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=siemens.com;
+Received: from AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:588::19)
+ by DB9PR10MB5257.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:33d::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7292.39; Tue, 20 Feb
+ 2024 07:48:22 +0000
+Received: from AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::8d16:7fbb:4964:94fe]) by AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::8d16:7fbb:4964:94fe%3]) with mapi id 15.20.7292.036; Tue, 20 Feb 2024
+ 07:48:21 +0000
+Message-ID: <782ea2c0-eef5-478d-a122-cc6e2d066762@siemens.com>
+Date: Tue, 20 Feb 2024 08:48:18 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH V6 07/20] configs: am62x_evm_a53_defconfig: Switch to
+ bootstd
+Content-Language: en-US
+From: Jan Kiszka <jan.kiszka@siemens.com>
+To: Alexander Sverdlin <alexander.sverdlin@gmail.com>,
+ Nishanth Menon <nm@ti.com>, Neha Francis <n-francis@ti.com>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@google.com>
+Cc: Bryan <bb@ti.com>, Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>,
+ Robert Nelson <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
+ u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Simon Glass <sjg@chromium.org>, Andreas Dannenberg <dannenberg@ti.com>,
+ Romain Naour <romain.naour@smile.fr>
+References: <20230825180305.69515-1-nm@ti.com>
+ <20230825180305.69515-8-nm@ti.com>
+ <87f154591fee4979570e78cbc8c73eb0a56469eb.camel@gmail.com>
+ <e6222770-cbcd-45e2-94fe-eb55fb0a2f94@siemens.com>
+ <5679ced7e927e1eb858a47d25abbd4025b4b67b7.camel@gmail.com>
+ <dba0d25f-121d-4146-a78b-ac3beeeb1531@siemens.com>
+In-Reply-To: <dba0d25f-121d-4146-a78b-ac3beeeb1531@siemens.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
+X-ClientProxiedBy: FR3P281CA0170.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:a0::18) To AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:20b:588::19)
+MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9D8:EE_|BY5PR12MB4036:EE_
-X-MS-Office365-Filtering-Correlation-Id: f1e3fe23-7e41-437e-7e2a-08dc31e7676b
+X-MS-TrafficTypeDiagnostic: AS4PR10MB6181:EE_|DB9PR10MB5257:EE_
+X-MS-Office365-Filtering-Correlation-Id: d4a6b71e-9144-48fe-971c-08dc31e84f22
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: PhDWBDZlsF9VzOg/1vlslf6mFM/o6JTbSrVZG/CTeW19Ii7C/6oQK4R56rh9oeY2AlWxVSykhLxnht7FGIhKl0a+m46wMJQEq3F5ZGsLlKmFatvpEyypiCyfi2JbfvGHafQdi2N4XpGrnef7vv0m4yO1rkGCUMu7EWMveJBhsYQ5O3Fj7rBnhuNeKDhFAr//MdKSHL2DBeBdoREoOt1o9LcwcAJNv7LyoEpSmc/8e+Fpaxy2/3VGA5AFPYWV3uFg5aUS+9zT0jb5OXHL0wQU6GI5T40SITVBiKgaAMzEJVUQecCErvNF+bYl+ELa3tGLXBeBsgedybrLYgKaPCLHAT62vpqbHoF4+Rmd639EO7zwl4NRQ5M9aCMroX4ZwO90EF8ogmCHTQ8iYv4T96hxvs0MflX5xIGndkH8e4A6AqvLTh6jrRJn1Yh1rlobTqA0IqoQHxdC6LJBiSzbLUdRFz+KOH21Txw3AnVGUaM+dXm3aoeNvLCVaGS1T3TvQ3aQQdE3gyRQlIL6+MattXuzQVed5ledbFuJ0wIMnPc03RvayUU+TDhHCXNETVznzIMbonzFPzMAoMQkhDS+twUsy30wV+8bAZRCU0GnN22qHqQw6cwUKXZ9R42XLBokzfcOO/nOb81EYMwuNkm/low4VNSEjwpF0knwdLCFB0V+tn8=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(230273577357003)(36860700004)(46966006)(40470700004); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Feb 2024 07:41:52.1134 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f1e3fe23-7e41-437e-7e2a-08dc31e7676b
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000E9D8.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR12MB4036
+X-Microsoft-Antispam-Message-Info: jCM9QoWi+/9UBVRX2+LOD5l2o5yzyxNmNo/ZYzAexcutbI7uROyDqTfIgPy+hhn4b2n6F3/H7rVGc3qH1oxQQicz+MB3bP5IDuZDDeaXjIdoNUrXmxMbbY8+722ogPPFhiqg1hOQ20HZzMoaNbQDY//wavAN3O9IedA/zWUMHx5qSDxf4Mm36YxN/wuNoC5ZJs+2CegrcDYH1aamFquS9Yh/ME1+FF0nJ6e4cJ9jIvNu+gSEszHHV8jaRKt3b/gaxhd4Jqct7UtElqqhbL03vvQsgjrMFFucPxTimdDGAu0981CcvQ9GEiFpkU00V4CWLc+nY1Mg5LLr2XKHpA4pBKrE2y8D+at27T4TxNe9YQFdG0VtD5hGW4QCWbbRlpXpGeaagbTbXeuvREqz6qawHzK0FBT5yJ+Alsm+MgW4SOuZmC983TosPUNuuhvzXT7LDG9m2LSoXrjtPRkAPhEf0oqFdENxxTp7M3uh7kWG83362fi14woDQz8CFAQmwHiH5QBz1DfYTA6/E+958NrqwkpQFbZ5K5nAXbFngi9aW/I=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230031); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?OGlmVmlIaE1icUpyRjZNWTNnZ2RpS012eG1ZblphOVJld2pYZHdhU2Y1M3E5?=
+ =?utf-8?B?SWVQcXJDRmhSY1pMbktEMkpPWUhscHh1eVpKZUFWenp4dm9VTnY0VUhiV1Fo?=
+ =?utf-8?B?UFRvSGQvdGpWbzNPYmtibVlPRXJsd2M5R2Yyc0VPTVQ5VXdQL2FwT3dCOHNl?=
+ =?utf-8?B?TjVqRmdiSEdESFpPV0VtdnErRzZ6cGVvZVZwWnFCL3ZsQ1REM3JpQlV4UDRv?=
+ =?utf-8?B?WnQveUxxRVNQRzNjQXdRa0YwWXk1bEUrMUxXbU1kUVdENFRHRUFtYi9nd3Ru?=
+ =?utf-8?B?RGZ1NGIveWFFb1J3QmtMV0dCeENBMldpc0doa0h4VFJ6SXMyNFlySGk4WjFy?=
+ =?utf-8?B?cFhlQUg0OXY3eVRBenNZSUhJS3hnNitRY0ZmOGhzOGxmYm5LWlk2WWZjRFdI?=
+ =?utf-8?B?Nm9wZ0lxVm8rbVZIY1o5cTNkMmVkbkFEUmJrVWFsK00xM2txOUV3RXRlZGlr?=
+ =?utf-8?B?ME5mMDlCbVUxK2YrUDdhWlpnMjg1WkJMYmZqU2F5ck5BdkhoM0YyaVpWSGk1?=
+ =?utf-8?B?bWR0Tmk5aWd2R21CVU84TlM3dWdpSEdOQlE4Y001R3JIek5LRGg5bmorYWpk?=
+ =?utf-8?B?a2gvRGNWMTlxOE0yaUtCR1Z4MG9TODhoSTdRbjZLcTdzTUdHL210YzVibEow?=
+ =?utf-8?B?c00vY082bG1XbFdWeUZtQkR5QjZYbUlWSkhvemFUMkRDei9GeVVjeWhVZjB4?=
+ =?utf-8?B?UDg1U3dmbTZMWm1LVUk2UEdoQ250WDNNUFM2UEQxbEpzQ3Q4YW1yS3M2REJU?=
+ =?utf-8?B?RU5jQTZndE90Ny91RE1PMCszUFhsYmJGMkMwVEVDdGFBa0JlM3J1a2o0TVpF?=
+ =?utf-8?B?WWFJamxpZGI0TFd2amd3WVBJNXNmcVNzaFExZWJzWUlibW5WclpDeHVjVk9X?=
+ =?utf-8?B?NjUrSmZkZWVOYWRRYVlhem5iZFBkR3E1Q0xsNWxoMDkzZ1RoZ1VXMFNOMURq?=
+ =?utf-8?B?Z2JqNWZLTDRRQXB0NkhhYlZCTFdDMkIrKzJKNVdqZkQ4TFIzaFJIL29Zb3FX?=
+ =?utf-8?B?b0V6MjIrY0lnUm9aUTM0VEtWQ1dSaUxjZjRnUEVLTkxEME0rekd6QWNMYnVS?=
+ =?utf-8?B?SGFaZ1d0WmNra2xBZHZqaEdlQWplMjB3ZHNYc3JmcW9xc3daaDJXdXh4eEpY?=
+ =?utf-8?B?N01lUGh1b1F0VjZFU0FpUHY4VURiSHRiZ1UxKzAyVzB6bG93SENHVk5IYUg4?=
+ =?utf-8?B?MGVLa3h6c2cyTW5lNUVDTmR5RGw2Q3RZcWcrQ0V5YkcyS0VOSS91Rmh5WFJl?=
+ =?utf-8?B?ekZnVktjZk5zQktHcGwrWk15SGJwY3pNTDlYZHhUZllCV2g2NTNqMnkxRloz?=
+ =?utf-8?B?SXVzL3c3RGs1YjRmcmdPZzR0bCtBV0dVaFhZNUlCRzdsb2NtQ3dydmtMSm1j?=
+ =?utf-8?B?V3VSRzBJK0JybC9TN2x5Yk03UEpNMk0vTGJrMXluWW1wZDdRdG5sNmJIWUVI?=
+ =?utf-8?B?OVJCd1dVS3R4dllPK3hYWWowZXlNY0ZxR28vUVpOM1pLRHlMN1h1TXFJMUxS?=
+ =?utf-8?B?dkxpd3N6NGsxK2Erb09ycVNHZUNCL0FOTlhZcEs3ZHJRaGpJR096Y3BnSy9W?=
+ =?utf-8?B?bmpFOHhuTGJoU1FSRGFjUGxZV2JFS0hDRlBrUEk2WVVkMEErUVJEWDBsaVdl?=
+ =?utf-8?B?akFGVjdyZjVGa3J2UXovOHJBaGlxZkpkY1grYlV1WmQwbkV1bWRsbXFZSkU3?=
+ =?utf-8?B?bHhHTHdrUm1HMkorWUdVZE03eE5yaDhmNkNmNWtiVGp5NkpMUGNIUWhNTTc2?=
+ =?utf-8?B?V0Q1OWtqVTkxRTNBZFhsQzFWemxjRzZBUjRXL29JV2VLWG1xSDl4NlJEZWZm?=
+ =?utf-8?B?ZkF2TjNXeURlR2xKbW90U1crK2Z2bGswM0hmS1l2TGdpd0N5Vlg3Z0F4SnpN?=
+ =?utf-8?B?YUpxWlpESDJreld1RjIrdWNqOHFqaVJKSkZyamQybTF0Vkh3MTVkMndrbCsw?=
+ =?utf-8?B?N1EwOVl3QWxFejVrSFF3Q283bDRJYVY3V2ErNSs4dGZZcVpNWUZ1alJ2WHdy?=
+ =?utf-8?B?eHYzVDJlN3pZcDAwejEzbU5tK1NpUzZxUEo4b21CYU1aam1YVjl0ZXNqYmhU?=
+ =?utf-8?B?Qy8zMWtNQ2xKcUcyNFFlUWdHaFJBY0FXQ1p5NFZKYjlFNW9qVXpVMUovUlNY?=
+ =?utf-8?B?QmxrZlBSaXpWV0plc1IwTkJDSVUwOHp3bjhLV0VvTisyYVdkTXUreXd1Yndr?=
+ =?utf-8?B?SGc9PQ==?=
+X-OriginatorOrg: siemens.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d4a6b71e-9144-48fe-971c-08dc31e84f22
+X-MS-Exchange-CrossTenant-AuthSource: AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Feb 2024 07:48:21.4477 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: zJvJCqUnJMZc8i3bVy4dmjBrl0JEAB2uhXAVnwavEWvcaTx60q6Y7ISCQJ6/IQJ42baATXIuICYDLPu/K6Js9A==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR10MB5257
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,162 +155,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add test case for saveenv command in non-JTAG bootmode which saves the
-u-boot environment variables in persistent storage.
+On 19.02.24 19:37, Jan Kiszka wrote:
+> On 17.02.24 12:36, Alexander Sverdlin wrote:
+>> Hi Jan!
+>>
+>> On Sat, 2024-02-17 at 09:42 +0100, Jan Kiszka wrote:
+>>>> U-Boot 2024.01 (Feb 15 2024 - 01:43:17 +0100)
+>>>>
+>>>> SoC:   AM62X SR1.0 HS-FS
+>>>> Model: Texas Instruments AM625 SK
+>>>> DRAM:  2 GiB
+>>>> Core:  56 devices, 23 uclasses, devicetree: separate
+>>>> MMC:   mmc@fa10000: 0, mmc@fa00000: 1
+>>>> Loading Environment from nowhere... OK
+>>>> In:    serial@2800000
+>>>> Out:   serial@2800000
+>>>> Err:   serial@2800000
+>>>> Net:   eth0: ethernet@8000000port@1
+>>>> Hit any key to stop autoboot:  0 
+>>>> switch to partitions #0, OK
+>>>> mmc1 is current device
+>>>> SD/MMC found on device 1
+>>>> Failed to load 'uEnv.txt'
+>>>> Scanning for bootflows in all bootdevs
+>>>> Seq  Method       State   Uclass    Part  Name                      Filename
+>>>> ---  -----------  ------  --------  ----  ------------------------  ----------------
+>>>> Scanning global bootmeth 'efi_mgr':
+>>>> No EFI system partition
+>>>> No EFI system partition
+>>>> Failed to persist EFI variables
+>>>> Scanning bootdev 'mmc@fa00000.bootdev':
+>>>> Scanning bootdev 'mmc@fa10000.bootdev':
+>>>> Unknown uclass 'usb' in label
+>>>> link up on port 1, speed 100, full duplex
+>>>> BOOTP broadcast 1
+>>>> BOOTP broadcast 2
+>>>> BOOTP broadcast 3
+>>>> ...
+>>>> ---
+>>>>
+>>>> I suppose TI's BSP has older U-Boot... So it's not providing necessary
+>>>> script for BOOTSTD, I suppose?
+>>>>
+>>>
+>>> You can make the BeagleBone boot via EFI, but it requires a hybrid
+>>> partition table (ROM loader want DOS, EFI needs GPT). A Debian
+>>> integration with this can be found for Isar [1] in this series [2]. It's
+>>> only using upstream sources (plus still one u-boot patch to get wifi
+>>> working).
+>>>
+>>> If you want legacy script booting, I suspect you need to flip some extra
+>>> switches explicitly by now.
+>>
+>> Thanks for the hints!
+>> I'm wondering, if this was a deliberate "let's stop booting all the
+>> pre-existing embedded distros" decision? (buildroot, yocto/meta-ti...)
+>>
+> 
+> FWIW, I'm not seeing other boot methods being specifically disabled in
+> beagleplay in 2024.01 or even newer. I didn't try the result, but this
+> may actually be some other issue and real bug, nothing obviously intended.
+> 
 
-Signed-off-by: Love Kumar <love.kumar@amd.com>
----
-Changes in v2:
- - Set bootmode through boardenv if modeboot is not defined
-Changes in v3:
- - Fix the issue with bad patterns and escape sequence warning
----
- test/py/tests/test_saveenv.py | 136 ++++++++++++++++++++++++++++++++++
- 1 file changed, 136 insertions(+)
- create mode 100644 test/py/tests/test_saveenv.py
+I'm not even sure about this anymore, though there is still a bug, just 
+a different one:
 
-diff --git a/test/py/tests/test_saveenv.py b/test/py/tests/test_saveenv.py
-new file mode 100644
-index 000000000000..fa0863f6d314
---- /dev/null
-+++ b/test/py/tests/test_saveenv.py
-@@ -0,0 +1,136 @@
-+# SPDX-License-Identifier: GPL-2.0
-+# (C) Copyright 2023, Advanced Micro Devices, Inc.
-+
-+"""
-+Note: This test doesn't rely on boardenv_* configuration value but they can
-+change test behavior.
-+
-+For example:
-+
-+# Setup env__saveenv_test_skip to True if saveenv test is not possible or
-+# desired and should be skipped.
-+env__saveenv_test_skip = True
-+
-+# Setup env__saveenv_test to set the bootmode if 'modeboot' u-boot environment
-+# variable is not set. Test will be skipped if bootmode is not set in both
-+# places i.e, boardenv and modeboot u-boot environment variable
-+env__saveenv_test = {
-+    'bootmode': 'qspiboot',
-+}
-+
-+# This test will be also skipped if the bootmode is detected to JTAG.
-+"""
-+
-+import pytest
-+import random
-+import ipaddress
-+import string
-+import uuid
-+
-+# Setup the env
-+def setup_saveenv_env(u_boot_console):
-+    if u_boot_console.config.env.get('env__saveenv_test_skip', False):
-+        pytest.skip('saveenv test is not enabled')
-+
-+    output = u_boot_console.run_command('echo $modeboot')
-+    if output:
-+        bootmode = output
-+    else:
-+        f = u_boot_console.config.env.get('env__saveenv_test', None)
-+        if not f:
-+            pytest.skip('bootmode cannot be determined')
-+        bootmode = f.get('bootmode', 'jtagboot')
-+
-+    if 'jtag' in bootmode:
-+        pytest.skip('skipping saveenv test due to jtag bootmode')
-+
-+# Check return code
-+def ret_code(u_boot_console):
-+    return u_boot_console.run_command('echo $?')
-+
-+# Verify env variable
-+def check_env(u_boot_console, var_name, var_value):
-+    if var_value:
-+        output = u_boot_console.run_command(f'printenv {var_name}')
-+        var_value = str(var_value)
-+        if (var_value.startswith("'") and var_value.endswith("'")) or (
-+            var_value.startswith('"') and var_value.endswith('"')
-+        ):
-+            var_value = var_value.split(var_value[-1])[1]
-+        assert var_value in output
-+        assert ret_code(u_boot_console).endswith('0')
-+    else:
-+        u_boot_console.p.send(f'printenv {var_name}\n')
-+        output = u_boot_console.p.expect(['not defined'])
-+        assert output == 0
-+        assert ret_code(u_boot_console).endswith('1')
-+
-+# Set env variable
-+def set_env(u_boot_console, var_name, var_value):
-+    u_boot_console.run_command(f'setenv {var_name} {var_value}')
-+    assert ret_code(u_boot_console).endswith('0')
-+    check_env(u_boot_console, var_name, var_value)
-+
-+@pytest.mark.buildconfigspec('cmd_saveenv')
-+def test_saveenv(u_boot_console):
-+    """Test the saveenv command in non-JTAG bootmode.
-+    It saves the U-Boot environment in persistent storage.
-+    """
-+    setup_saveenv_env(u_boot_console)
-+
-+    # Set env for random mac address
-+    rand_mac = '%02x:%02x:%02x:%02x:%02x:%02x' % (
-+        random.randint(0, 255),
-+        random.randint(0, 255),
-+        random.randint(0, 255),
-+        random.randint(0, 255),
-+        random.randint(0, 255),
-+        random.randint(0, 255),
-+    )
-+    set_env(u_boot_console, 'mac_addr', rand_mac)
-+
-+    # Set env for random IPv4 address
-+    rand_ipv4 = ipaddress.IPv4Address._string_from_ip_int(
-+        random.randint(0, ipaddress.IPv4Address._ALL_ONES)
-+    )
-+    set_env(u_boot_console, 'ipv4_addr', rand_ipv4)
-+
-+    # Set env for random IPv6 address
-+    rand_ipv6 = ipaddress.IPv6Address._string_from_ip_int(
-+        random.randint(0, ipaddress.IPv6Address._ALL_ONES)
-+    )
-+    set_env(u_boot_console, 'ipv6_addr', rand_ipv6)
-+
-+    # Set env for random number
-+    rand_num = random.randrange(1, 10**9)
-+    set_env(u_boot_console, 'num_var', rand_num)
-+
-+    # Set env for uuid
-+    uuid_str = uuid.uuid4().hex.lower()
-+    set_env(u_boot_console, 'uuid_var', uuid_str)
-+
-+    # Set env for random string including special characters
-+    sc = "!#%&()*+,-./:;<=>?@[\\]^_`{|}~"
-+    rand_str = ''.join(
-+        random.choices(' ' + string.ascii_letters + sc + string.digits, k=300)
-+    )
-+    set_env(u_boot_console, 'str_var', f'"{rand_str}"')
-+
-+    # Set env for empty string
-+    set_env(u_boot_console, 'empty_var', '')
-+
-+    # Save the env variables
-+    u_boot_console.run_command('saveenv')
-+    assert ret_code(u_boot_console).endswith('0')
-+
-+    # Reboot
-+    u_boot_console.run_command('reset', wait_for_reboot=True)
-+
-+    # Verify the saved env variables
-+    check_env(u_boot_console, 'mac_addr', rand_mac)
-+    check_env(u_boot_console, 'ipv4_addr', rand_ipv4)
-+    check_env(u_boot_console, 'ipv6_addr', rand_ipv6)
-+    check_env(u_boot_console, 'num_var', rand_num)
-+    check_env(u_boot_console, 'uuid_var', uuid_str)
-+    check_env(u_boot_console, 'str_var', rand_str)
-+    check_env(u_boot_console, 'empty_var', '')
+...
+U-Boot 2024.04-rc2-00040-g3e6f2a94bfc (Feb 20 2024 - 08:42:59 +0100)
+
+SoC:   AM62X SR1.0 GP
+Model: BeagleBoard.org BeaglePlay
+DRAM:  2 GiB
+Core:  98 devices, 27 uclasses, devicetree: separate
+MMC:   mmc@fa10000: 0, mmc@fa00000: 1, mmc@fa20000: 2
+Loading Environment from nowhere... OK
+In:    serial@2800000
+Out:   serial@2800000
+Err:   serial@2800000
+Net:   No ethernet found.
+
+Press SPACE to abort autoboot in 2 seconds
+=> print bootmeths 
+bootmeths=script extlinux efi pxe
+=> bootflow scan -l
+Scanning for bootflows in all bootdevs
+Seq  Method       State   Uclass    Part  Name                      Filename
+---  -----------  ------  --------  ----  ------------------------  ----------------
+Scanning bootdev 'mmc@fa00000.bootdev':
+  0  efi          ready   mmc          2  mmc@fa00000.bootdev.part_ efi/boot/bootaa64.efi
+Scanning bootdev 'mmc@fa10000.bootdev':
+  1  extlinux     ready   mmc          1  mmc@fa10000.bootdev.part_ /extlinux/extlinux.conf
+Unknown uclass 'usb' in label
+"Synchronous Abort" handler, esr 0x86000004, far 0x3030303030303840
+elr: 3030302fb0bc0840 lr : 3030302fb0bc0840 (reloc)
+elr: 3030303030303840 lr : 3030303030303840
+x0 : 00000000ffffffed x1 : 0000000000000000
+x2 : 0000000000000002 x3 : 00000000ffb49d30
+x4 : 00000000fffd4c00 x5 : 00000000ffb49d50
+x6 : 0000000000000000 x7 : 00000000ffb4e890
+x8 : 0000000000006924 x9 : 00000000ffb1212c
+x10: 0000000000000003 x11: 0000000000006914
+x12: 00000000ffb1221c x13: 00000000ffb12b40
+x14: 00000000ffb12b40 x15: 00000000ffb12535
+x16: 00000000fff8a9d4 x17: 0000000000000000
+x18: 00000000ffb23da0 x19: 0000314074726f70
+x20: 00000000fffed000 x21: 00000000fffef000
+x22: 0000000000000000 x23: 00000000fffef000
+x24: 00000000fffef000 x25: 0000000000000000
+x26: 00000000fffc7174 x27: 0000000000000000
+x28: 0000000000000000 x29: 74656e7265687465
+
+Same with 2024.01 release.
+
+Jan
+
 -- 
-2.25.1
+Siemens AG, Technology
+Linux Expert Center
 
