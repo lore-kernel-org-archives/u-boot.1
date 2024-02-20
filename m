@@ -4,82 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2107DC48BC3
-	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 13:48:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4173CC48BC3
+	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 13:53:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F23A87F8C;
-	Tue, 20 Feb 2024 14:48:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id AEE2487F52;
+	Tue, 20 Feb 2024 14:53:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RH4g41sb";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oIW8I8GQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C45187FB2; Tue, 20 Feb 2024 14:48:01 +0100 (CET)
-Received: from mail-ua1-x936.google.com (mail-ua1-x936.google.com
- [IPv6:2607:f8b0:4864:20::936])
+ id 34EBB87F78; Tue, 20 Feb 2024 14:53:10 +0100 (CET)
+Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
+ [IPv6:2607:f8b0:4864:20::112d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F1AAE87F8C
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 14:47:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EBA7F87F52
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 14:52:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ua1-x936.google.com with SMTP id
- a1e0cc1a2514c-7d625a3ace6so3606016241.0
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 05:47:55 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112d.google.com with SMTP id
+ 00721157ae682-607bfa4c913so51210557b3.3
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 05:52:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708436874; x=1709041674; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=VmGIhxO59SLpouC2dMm8ijXBxyY7dHQBG/cTFp+irEs=;
- b=RH4g41sbTqHihSUkaZpvTvsA6qiHbHuihPSYI7JuNg4aKaMoWzy3wmXsyS247QfPz4
- lkZzbkXxRslMELgVlIYM2NJpH8NNdgEBkE2wPfHHZZhwvNVye2QdLx5OA49dNgwwOyB5
- t3xBm9TVbLZSezTFG+nszRQineF08fRdSf3y0UALoGZGN3wsTYwRQjzhEeNHD7cHGSb+
- rARgWkszsQB7pBGQiFdTh8tr0FGfBATsVZI/Tzjf2kD8htCPPv2Xaj3gdP7gDcPJ/WFE
- hFRPojSeK7w2x031mT8MBel12Dm2viqWhisaa4uMD3dk1ExLCGZLMNZMj/b9+BwYlPHW
- uGxg==
+ d=konsulko.com; s=google; t=1708437170; x=1709041970; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=cFlRBun9HF6/7oAQP03rfmDvwcFqhrfjCDOyQr0WWfs=;
+ b=oIW8I8GQabwzegqZ4H6X04V6tZfr4nGzI3LTg1+KIZR7v5tzHujAbENConMFfafPlU
+ 13MbO8Jp3qnm2MJB3/yNJdBUuCnvHulDq36iEI82hRZMHrMIzY/YKeZIjYidrKq6J4pp
+ vRFmcRgMiBNv4YAAJYWQNlrRi8XHZsh9ssVKQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708436874; x=1709041674;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1708437170; x=1709041970;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=VmGIhxO59SLpouC2dMm8ijXBxyY7dHQBG/cTFp+irEs=;
- b=EL2u9NON5xCfgUTNT2Lr6G3v1pJzZxmH/F/YAMH7DytKKNxgHP5ahCkDeUQvyUp9aH
- 5x4J6V92CQfZr6he8YiT/MDrUn7CzamVi9q28iYC+oH+i2OFtUUxu9Snh3DRafScpZaZ
- YKV8UIRWEX4JM7+UsNwXSEfD03Dih4afwF+Hm5pv4Pbmw6tjLRScWUf59kD+HBRqrEWR
- 5wRZLghtZ54eyCGTfuzponETppjvjvlTIoixpD70xFb8b9+ODXrA1dNXhMd/k5Gnoev1
- tH7fi8x58xuWG6i97hr8U88yPJC/AN7ST0G9SeDsVBUFgzIMO7PR/dTkF1GRNDz2MpX8
- aJkw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXTwS/ryXUrCWNrGFtZpRc0iwTAzhUCMzEqxz2vp/sBjH8o24wCbOx3KVqpuvaprTK0EsLuulAbIwPuEn3rr93x9ZFJcg==
-X-Gm-Message-State: AOJu0YwKuhloKUmd4uqxqqTHLfIwbvCHsNf/L4Em7ZUj36wV91fcp/fr
- CR5djuhp1Mj+gtS5vbiTJdpHHQAzrwxwPxFH4UXC8g4PsdOjXTQo7zMKDtPAu6VOA5mykkkFeWI
- Q/1hfHFp5ujmPXGTXf13d/WJPIifzRi5hHTLS6w==
-X-Google-Smtp-Source: AGHT+IErhcYFiGP6ZYlqbnY3k9fRZm6Q02qSclDWUb5uM/qAtxSmci25wpME0nRW6qCef00sw2RXpDRaGOBPjb/npUA=
-X-Received: by 2002:a67:fe4e:0:b0:470:5b27:dc82 with SMTP id
- m14-20020a67fe4e000000b004705b27dc82mr3690547vsr.8.1708436874622; Tue, 20 Feb
- 2024 05:47:54 -0800 (PST)
+ bh=cFlRBun9HF6/7oAQP03rfmDvwcFqhrfjCDOyQr0WWfs=;
+ b=dSk9mTuCGI+M8DjTrW5H5O41AA8v0KHTxp7zHFrNy0U/srqAYZpxOgmBXYgnBickWY
+ 6u5kW7HYq5LdQK8XBLiAsgSNOp4PoBeG+GYJNZyvF2bbWhYgb95THOsgIZZ+eplh/kJx
+ S3oDBkvSBAJNiHEIsBx8/CECNde8YGFHRW9/lMzBH5lQwk3FZ+Nr1G7idl0lHVYlVwtz
+ 20vRWADjpyEE3nOCreakZa8RqAjAHpaks6EnsRR4dpYn7Ovh+EpcnUiPJZDMbAW44Akf
+ SBSp/NNSyoMwYcXr8RE8qf7o7bT89nfUJXxuxhFTPT79yjliZFEaed6tY3+a+sZV3K2q
+ caoA==
+X-Gm-Message-State: AOJu0Yy6LlYDYGLi7DOY1kQ8X+mDrslFfjavhQQ1jWnk/9uviJxzGOvF
+ x6NOceYwufrzXJMkJvcP3lLZMrDfOS1MndOh9kmNoi5Qo7ygmUg82IttD7Ud+bfdXVLqBDadNcb
+ m
+X-Google-Smtp-Source: AGHT+IExRagDdOmQcLlULkYI/vSIt2W0cmpUrz2LRW1BmkQrieUiCkmip+GW4Q4SMuJigupLMU314w==
+X-Received: by 2002:a81:a1d5:0:b0:604:a51f:c79c with SMTP id
+ y204-20020a81a1d5000000b00604a51fc79cmr14034908ywg.36.1708437170266; 
+ Tue, 20 Feb 2024 05:52:50 -0800 (PST)
+Received: from bill-the-cat.. (065-184-194-195.res.spectrum.com.
+ [65.184.194.195]) by smtp.gmail.com with ESMTPSA id
+ x11-20020a814a0b000000b006085e262414sm407827ywa.81.2024.02.20.05.52.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 20 Feb 2024 05:52:49 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>,
+	Florian Schmaus <flo@geekplace.eu>
+Subject: [PATCH] pylibfdt: Fix "invalid escape sequence '\w'" in setup.py
+Date: Tue, 20 Feb 2024 08:52:48 -0500
+Message-Id: <20240220135248.1277809-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20240215-b4-qcom-common-target-v4-0-ed06355c634a@linaro.org>
- <20240215-b4-qcom-common-target-v4-24-ed06355c634a@linaro.org>
-In-Reply-To: <20240215-b4-qcom-common-target-v4-24-ed06355c634a@linaro.org>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Tue, 20 Feb 2024 19:17:43 +0530
-Message-ID: <CAFA6WYOiq7TFVjr0knd0vGk2GGGus7k2UrjLp=+5NfakERSv6Q@mail.gmail.com>
-Subject: Re: [PATCH v4 24/39] board: qcs404-evb: drop board code
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- Ramon Fried <rfried.dev@gmail.com>, 
- Dzmitry Sankouski <dsankouski@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
- Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,160 +87,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 16 Feb 2024 at 02:22, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->
-> This board is entirely supported by the generic arch code and DTS. The
-> board code used to handle turning on the vbus regulator, however this is
-> now handled via DT.
->
-> With this, the board specific defconfig is also no longer needed, so
-> drop it as well.
->
-> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->  board/qualcomm/qcs404-evb/Makefile     |  6 ----
->  board/qualcomm/qcs404-evb/qcs404-evb.c | 49 -----------------------------
->  configs/qcs404evb_defconfig            | 56 ----------------------------------
->  3 files changed, 111 deletions(-)
->
+From: Florian Schmaus <flo@geekplace.eu>
 
-Glad to see qcs404 being supported by generic defconfig.
+Once u-boot's build system invokes
 
-Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
+python3 scripts/dtc/pylibfdt/setup.py --quiet build_ext --inplace
 
--Sumit
+it may fail with
 
-> diff --git a/board/qualcomm/qcs404-evb/Makefile b/board/qualcomm/qcs404-evb/Makefile
-> deleted file mode 100644
-> index 4665827e0859..000000000000
-> --- a/board/qualcomm/qcs404-evb/Makefile
-> +++ /dev/null
-> @@ -1,6 +0,0 @@
-> -# SPDX-License-Identifier: GPL-2.0+
-> -#
-> -# (C) Copyright 2022 Sumit Garg <sumit.garg@linaro.org>
-> -#
-> -
-> -obj-y += qcs404-evb.o
-> diff --git a/board/qualcomm/qcs404-evb/qcs404-evb.c b/board/qualcomm/qcs404-evb/qcs404-evb.c
-> deleted file mode 100644
-> index 1a4b1f97a3ae..000000000000
-> --- a/board/qualcomm/qcs404-evb/qcs404-evb.c
-> +++ /dev/null
-> @@ -1,49 +0,0 @@
-> -// SPDX-License-Identifier: GPL-2.0+
-> -/*
-> - * Board init file for QCS404-EVB
-> - *
-> - * (C) Copyright 2022 Sumit Garg <sumit.garg@linaro.org>
-> - */
-> -
-> -#include <common.h>
-> -#include <cpu_func.h>
-> -#include <dm.h>
-> -#include <env.h>
-> -#include <init.h>
-> -#include <asm/cache.h>
-> -#include <asm/gpio.h>
-> -#include <asm/global_data.h>
-> -#include <fdt_support.h>
-> -
-> -DECLARE_GLOBAL_DATA_PTR;
-> -
-> -void qcom_board_init(void)
-> -{
-> -       struct udevice *pmic_gpio;
-> -       struct gpio_desc usb_vbus_boost_pin;
-> -       int ret, node;
-> -
-> -       ret = uclass_get_device_by_name(UCLASS_GPIO,
-> -                                       "pms405_gpios@c000",
-> -                                       &pmic_gpio);
-> -       if (ret < 0) {
-> -               printf("Failed to find pms405_gpios@c000 node.\n");
-> -               return;
-> -       }
-> -
-> -       node = fdt_subnode_offset(gd->fdt_blob, dev_of_offset(pmic_gpio),
-> -                                 "usb_vbus_boost_pin");
-> -       if (node < 0) {
-> -               printf("Failed to find usb_hub_reset_pm dt node.\n");
-> -               return;
-> -       }
-> -       ret = gpio_request_by_name_nodev(offset_to_ofnode(node), "gpios", 0,
-> -                                        &usb_vbus_boost_pin, 0);
-> -       if (ret < 0) {
-> -               printf("Failed to request usb_hub_reset_pm gpio.\n");
-> -               return;
-> -       }
-> -
-> -       dm_gpio_set_dir_flags(&usb_vbus_boost_pin,
-> -                             GPIOD_IS_OUT | GPIOD_IS_OUT_ACTIVE);
-> -}
-> diff --git a/configs/qcs404evb_defconfig b/configs/qcs404evb_defconfig
-> deleted file mode 100644
-> index d85d193895b0..000000000000
-> --- a/configs/qcs404evb_defconfig
-> +++ /dev/null
-> @@ -1,56 +0,0 @@
-> -CONFIG_ARM=y
-> -CONFIG_SYS_BOARD="qcs404-evb"
-> -CONFIG_SKIP_LOWLEVEL_INIT=y
-> -CONFIG_COUNTER_FREQUENCY=19000000
-> -CONFIG_POSITION_INDEPENDENT=y
-> -CONFIG_ARCH_SNAPDRAGON=y
-> -CONFIG_DEFAULT_DEVICE_TREE="qcs404-evb"
-> -CONFIG_IDENT_STRING="\nQualcomm QCS404-EVB"
-> -CONFIG_SYS_LOAD_ADDR=0x80000000
-> -CONFIG_FIT=y
-> -CONFIG_FIT_VERBOSE=y
-> -CONFIG_BOOTDELAY=5
-> -CONFIG_USE_BOOTARGS=y
-> -CONFIG_BOOTARGS="earlycon ignore_loglevel root= clk_ignore_unused"
-> -CONFIG_SAVE_PREV_BL_FDT_ADDR=y
-> -CONFIG_SAVE_PREV_BL_INITRAMFS_START_ADDR=y
-> -CONFIG_SYS_CBSIZE=512
-> -# CONFIG_DISPLAY_CPUINFO is not set
-> -CONFIG_HUSH_PARSER=y
-> -CONFIG_SYS_MAXARGS=64
-> -CONFIG_CMD_GPIO=y
-> -CONFIG_CMD_GPT=y
-> -CONFIG_CMD_MMC=y
-> -CONFIG_CMD_PART=y
-> -CONFIG_CMD_USB=y
-> -CONFIG_CMD_EXT2=y
-> -CONFIG_CMD_EXT4=y
-> -CONFIG_CMD_EXT4_WRITE=y
-> -CONFIG_CMD_FAT=y
-> -CONFIG_CMD_FS_GENERIC=y
-> -# CONFIG_NET is not set
-> -CONFIG_CLK=y
-> -CONFIG_CLK_QCOM_QCS404=y
-> -CONFIG_MSM_GPIO=y
-> -CONFIG_QCOM_PMIC_GPIO=y
-> -CONFIG_MISC=y
-> -CONFIG_MMC_HS400_SUPPORT=y
-> -CONFIG_MMC_SDHCI=y
-> -CONFIG_MMC_SDHCI_ADMA=y
-> -CONFIG_MMC_SDHCI_MSM=y
-> -CONFIG_PHY=y
-> -CONFIG_PHY_QCOM_USB_HS_28NM=y
-> -CONFIG_PHY_QCOM_USB_SS=y
-> -CONFIG_PINCTRL=y
-> -CONFIG_PINCTRL_QCOM_QCS404=y
-> -CONFIG_DM_PMIC=y
-> -CONFIG_PMIC_QCOM=y
-> -CONFIG_MSM_SERIAL=y
-> -CONFIG_SPMI_MSM=y
-> -CONFIG_USB=y
-> -CONFIG_USB_XHCI_HCD=y
-> -CONFIG_USB_XHCI_DWC3=y
-> -CONFIG_USB_DWC3=y
-> -CONFIG_USB_DWC3_GENERIC=y
-> -CONFIG_USB_STORAGE=y
-> -CONFIG_LMB_MAX_REGIONS=64
->
-> --
-> 2.43.1
->
+scripts/dtc/pylibfdt/setup.py:40: SyntaxWarning: invalid escape sequence '\w'
+  RE_KEY_VALUE = re.compile('(?P<key>\w+) *(?P<plus>[+])?= *(?P<value>.*)$')
+
+depending on the used Python version.
+
+Explicitly mark the regex string as raw string to avoid the warning.
+
+Signed-off-by: Florian Schmaus <flo@geekplace.eu>
+---
+ scripts/dtc/pylibfdt/setup.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/scripts/dtc/pylibfdt/setup.py b/scripts/dtc/pylibfdt/setup.py
+index 8baae08770ca..c6fe5a6a446f 100755
+--- a/scripts/dtc/pylibfdt/setup.py
++++ b/scripts/dtc/pylibfdt/setup.py
+@@ -37,7 +37,7 @@
+     long_description = fh.read()
+ 
+ # Decodes a Makefile assignment line into key and value (and plus for +=)
+-RE_KEY_VALUE = re.compile('(?P<key>\w+) *(?P<plus>[+])?= *(?P<value>.*)$')
++RE_KEY_VALUE = re.compile(r'(?P<key>\w+) *(?P<plus>[+])?= *(?P<value>.*)$')
+ 
+ def get_top_builddir():
+     if '--top-builddir' in sys.argv:
