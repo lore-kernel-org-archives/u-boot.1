@@ -4,81 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA69BC48BC4
-	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 11:27:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91438C48BC4
+	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 11:39:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0040287CEC;
-	Tue, 20 Feb 2024 12:27:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 273A787F1F;
+	Tue, 20 Feb 2024 12:39:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="N/KYtFrS";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="vbJiOhUg";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uxjIRppQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B90E87DCE; Tue, 20 Feb 2024 12:27:51 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 32DB987F78; Tue, 20 Feb 2024 12:39:13 +0100 (CET)
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5737B879FE
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 12:27:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A76387F1F
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 12:39:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4TfHFW59tHz9spv;
- Tue, 20 Feb 2024 12:27:43 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1708428463;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=5+EBHeW91L11zogGGI3kJjn9Sn4zVpY6V92ZpjK3lfE=;
- b=N/KYtFrSSGCcCw5ypGuMLE8oikGh/d87MU3ElqDemi6FediLugBO3SeFyjwgPR1ZSz47yc
- JAr6VKG/cQhiRz/HeUhIkxHKShF/rPKGYTUT38DkCKr4mc1NFKIcbyvQnVu/tZ0Rkrekn7
- v6vK8tSsf0NZlu50RUkfwi/00yrtOiwSs7YWCmUlrmfQ0YaKBHneodpQqM3rbMamGJX+61
- +3auotQZt6O+UZs//JMnzk4DAkx5lqexqO4Vh8eW3OdjLlVmJlXLsjQ8zEXN2OUrDFDk+e
- jX2z83V/FPrW6oyU8qoGhVwElt1CwdZ0lwGu1U8fuYGpizeuI51oGsJ7hwOfRA==
-Message-ID: <c14ef3f3-fc35-4c7e-b739-ebb8e36dda74@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1708428461;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=5+EBHeW91L11zogGGI3kJjn9Sn4zVpY6V92ZpjK3lfE=;
- b=vbJiOhUgadbjU1BbHh1V9A0pLVUI83GniQhS226j1/0eHxV43zSmO6jj7T1YaA8yGSbtXu
- 67asYA2aRIWn48AVhRue/g7rC7VM/6Zm2nQgUdbCblVqJCkRiFPsPE+iBuUMb6qW/0f9ar
- uh1PiqVw06Iw0rKBaKJ6hw770cvY+SREruS6KvXDSbVhhntCRJYEOFvtKAAXjOV2D/h2YJ
- m5v0HCYcLr5qyXR1lod+LdFG2Wyrfop/lb7ljTjbfr/lSOZh1UBI6D7QENh6ACPcCxxL3N
- QWQwbfqzvRnVVHr1NebubauJN8T79+SY0qnPQehx+5ff0rgEzPcNOyrA4SVqzQ==
-Date: Tue, 20 Feb 2024 12:27:39 +0100
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-512bb2ed1f7so2177034e87.3
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 03:39:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1708429142; x=1709033942; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Bqf2mroSkf9VWPFsUFdiCQ/iYP0FzYaUvFHHCfF0lRM=;
+ b=uxjIRppQ7Nx0sIt1+LdJBDbz5GV/3RSdG62wpRR8UUft5ZqQ1Yejta5giI51Nv8o03
+ fawQXjsp311ZO5cYZLtnMep0gWJZCJeCYg/xj+ZvZhEJUQHugA3f9aMN3fvv0GIWTd/M
+ sv1gnRauKa7HhUrj3E8UhbbV+N91skRBGzSVdaHoOiq4uv5Daqcg2NAW/S/bIwWsQj0s
+ YWOmpCRFzcm3S9YwSPbKGsK9j5PA173x31vmbqjeEnUBXG5aZjMRuql08F/+7ap+pJ23
+ OCUNyOaFKswjqZjgKfqFj/x/AErv2WnwrkLuxiDdg+srXK/apZu6EvdmyR5+AlnBHaZC
+ F+8g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1708429142; x=1709033942;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Bqf2mroSkf9VWPFsUFdiCQ/iYP0FzYaUvFHHCfF0lRM=;
+ b=nTMxwqushmowQuCLjtXrL6WYwgN+2ye0d9WYxu+HYOwy0djuy5koIi66WX2a/sPdlI
+ X23YzeiuwP5FKtWjLAEaChq6tSbG+Q2Cl9iZoOjsvSIVLxlvrVy6YOGXtUsbUXG9F4+e
+ ueWVgGukhkx7cc9VvF82PjKl4h72Kg6il+XT4ke5G4esc0FMOKmzb1/jc/febGI7Ws2c
+ UroN236v7qn7DFtVmLh5XT6nGQ21XhW0JjAYjDLY2Rc2HRKJEV9PcaAmsruQoXtoG7h6
+ UfP7qZg1NfvMyE45Ck2lSq857yNmEPNmhlrNwzwoP+BMP3ehGRVaA74cL433bCAmjPcV
+ wjKA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXJY/3ZX62fLPNcEOlyucRSx6XtSjQEmAD3blffK9fqTbjYvD6TgGQS0aJU/ElQE+aq0oQ1peegsYikf3Rzn1qDajpnLQ==
+X-Gm-Message-State: AOJu0YwQlB1iqoYmPSDPzGVWGDw4Ih9ZpTJs0fcpNvrnNXedhXaZC4Zw
+ yfjF49vxjjmPvV4whkoAQQGnFjZp8wOHr6kYetYRS8ZN58GUvBlVQC0k4aWiNsA=
+X-Google-Smtp-Source: AGHT+IG2SGYNStsJTvmhWr6WQQdk59S5ZtTkFgYpJiBQC9xPjtR8XB/hkppbEGfVQ1/E3+gT9Kxoyg==
+X-Received: by 2002:a05:6512:1321:b0:512:bf09:9313 with SMTP id
+ x33-20020a056512132100b00512bf099313mr2009310lfu.50.1708429141881; 
+ Tue, 20 Feb 2024 03:39:01 -0800 (PST)
+Received: from [192.168.1.78] (host-92-17-96-232.as13285.net. [92.17.96.232])
+ by smtp.gmail.com with ESMTPSA id
+ 23-20020a05600c231700b00410b0ce91b1sm13973751wmo.25.2024.02.20.03.39.01
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 20 Feb 2024 03:39:01 -0800 (PST)
+Message-ID: <f9c81d80-0733-4b84-97ff-32143bfe585e@linaro.org>
+Date: Tue, 20 Feb 2024 11:39:00 +0000
 MIME-Version: 1.0
-Subject: Re: [PATCH 1/3] mmc: Convert hs400_tuning flag from u8 to bool
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 07/39] serial: msm: add debug UART
 Content-Language: en-US
-To: Paul Barker <paul.barker.ct@bp.renesas.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Hai Pham <hai.pham.ud@renesas.com>, Jaehoon Chung
- <jh80.chung@samsung.com>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Peng Fan <peng.fan@nxp.com>, Sean Anderson <seanga2@gmail.com>,
- Tom Rini <trini@konsulko.com>,
- Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
-References: <20240220083755.34449-1-marek.vasut+renesas@mailbox.org>
- <df373095-3c23-4a87-8590-dca3dcf5c2f0@bp.renesas.com>
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <df373095-3c23-4a87-8590-dca3dcf5c2f0@bp.renesas.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>,
+ Ramon Fried <rfried.dev@gmail.com>, Dzmitry Sankouski
+ <dsankouski@gmail.com>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
+ Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de
+References: <20240215-b4-qcom-common-target-v4-0-ed06355c634a@linaro.org>
+ <20240215-b4-qcom-common-target-v4-7-ed06355c634a@linaro.org>
+ <CAFA6WYOUVRNf1hMMty6uTk_cNckrHQ6QNBkPsPiGuw=P+0OV4A@mail.gmail.com>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <CAFA6WYOUVRNf1hMMty6uTk_cNckrHQ6QNBkPsPiGuw=P+0OV4A@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: c4909a5dd09caa7545d
-X-MBO-RS-META: xcet4516ps9p8fs6ppeqer4aswkfxq59
-X-Rspamd-Queue-Id: 4TfHFW59tHz9spv
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,17 +105,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/20/24 11:57, Paul Barker wrote:
-> On 20/02/2024 08:37, Marek Vasut wrote:
->> This hs400_tuning is a flag, make it bool. No functional change.
->> This will be useful in the following patch, which adds another
->> more generic flag, where the compiler can better use the space
->> now reserved for the u8 to store more flags in it.
-> 
-> The minimum size for a bool is one byte so there likely won't be any
-> improvement in struct size from using bool instead of u8 for
-> `hs400_tuning` here and `tuning` added in the next patch. I still think
-> it's a good change to make though, bool is the right type for an on/off
-> flag.
 
-The compiler does not do boolean packing in structures ?
+
+On 20/02/2024 06:08, Sumit Garg wrote:
+> On Fri, 16 Feb 2024 at 02:22, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>>
+>> Introduce support for early debugging. This relies on the previous stage
+>> bootloader to initialise the UART clocks, when running with U-Boot as
+>> the primary bootloader this feature doesn't work. It will require a way
+>> to configure the clocks before the driver model is available.
+>>
+>> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+>> ---
+>>  drivers/serial/Kconfig      |  8 ++++++++
+>>  drivers/serial/serial_msm.c | 37 +++++++++++++++++++++++++++++++++++++
+>>  2 files changed, 45 insertions(+)
+>>
+>> diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig
+>> index 26460c4e0cab..fbd351a47859 100644
+>> --- a/drivers/serial/Kconfig
+>> +++ b/drivers/serial/Kconfig
+>> @@ -319,6 +319,14 @@ config DEBUG_UART_S5P
+>>           will need to provide parameters to make this work. The driver will
+>>           be available until the real driver-model serial is running.
+>>
+>> +config DEBUG_UART_MSM
+>> +       bool "Qualcomm QUP UART debug"
+>> +       depends on ARCH_SNAPDRAGON
+> 
+> Since this debug UART only works for chainloaded configuration, can we
+> somehow add explicit dependency here? Something like !REMAKE_ELF?
+
+With a small patch (which didn't make it into v4 apparently) the
+apq8016_clk_init_uart() function from clock-apq8016 can be adjusted to
+just take a base address rather than "struct msm_clk_priv". It can then
+be called from debug_uart_init() and allows for debug UART to be used
+when U-Boot is running as the first stage.
+
+This is definitely not ideal (although fwiw if the GPLLs were configured
+right then this same function could maybe work on QCS404 as well - the
+RCGs are at the same physical addresses), but I don't think gating it
+behind REMAKE_ELF or something is a great solution here.
+> 
+> -Sumit
+> 
+>> +       help
+>> +         Select this to enable a debug UART using the serial_msm driver. You
+>> +         will need to provide parameters to make this work. The driver will
+>> +         be available until the real driver-model serial is running.
+>> +
+>>  config DEBUG_UART_MSM_GENI
+>>         bool "Qualcomm snapdragon"
+>>         depends on ARCH_SNAPDRAGON
+>> diff --git a/drivers/serial/serial_msm.c b/drivers/serial/serial_msm.c
+>> index f4d96313b931..44b93bd7ff21 100644
+>> --- a/drivers/serial/serial_msm.c
+>> +++ b/drivers/serial/serial_msm.c
+>> @@ -252,3 +252,40 @@ U_BOOT_DRIVER(serial_msm) = {
+>>         .probe = msm_serial_probe,
+>>         .ops    = &msm_serial_ops,
+>>  };
+>> +
+>> +#ifdef CONFIG_DEBUG_UART_MSM
+>> +
+>> +static struct msm_serial_data init_serial_data = {
+>> +       .base = CONFIG_VAL(DEBUG_UART_BASE),
+>> +       .clk_rate = 7372800,
+>> +};
+>> +
+>> +#include <debug_uart.h>
+>> +
+>> +/* Uncomment to turn on UART clocks when debugging U-Boot as aboot on MSM8916 */
+>> +//int apq8016_clk_init_uart(phys_addr_t gcc_base);
+>> +
+>> +static inline void _debug_uart_init(void)
+>> +{
+>> +       /* Uncomment to turn on UART clocks when debugging U-Boot as aboot on MSM8916 */
+>> +       //apq8016_clk_init_uart(0x1800000);
+>> +       uart_dm_init(&init_serial_data);
+>> +}
+>> +
+>> +static inline void _debug_uart_putc(int ch)
+>> +{
+>> +       struct msm_serial_data *priv = &init_serial_data;
+>> +
+>> +       while (!(readl(priv->base + UARTDM_SR) & UARTDM_SR_TX_EMPTY) &&
+>> +              !(readl(priv->base + UARTDM_ISR) & UARTDM_ISR_TX_READY))
+>> +               ;
+>> +
+>> +       writel(UARTDM_CR_CMD_RESET_TX_READY, priv->base + UARTDM_CR);
+>> +
+>> +       writel(1, priv->base + UARTDM_NCF_TX);
+>> +       writel(ch, priv->base + UARTDM_TF);
+>> +}
+>> +
+>> +DEBUG_UART_FUNCS
+>> +
+>> +#endif
+>>
+>> --
+>> 2.43.1
+>>
+
+-- 
+// Caleb (they/them)
