@@ -4,71 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C1E1C48BC4
-	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 05:17:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A9E6C48BC4
+	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 05:41:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 54DA487F4B;
-	Tue, 20 Feb 2024 06:17:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 7504487C2D;
+	Tue, 20 Feb 2024 06:41:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pFUqqIdC";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QDTEfvZa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D9D1187F60; Tue, 20 Feb 2024 06:17:26 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id A278D87C2D; Tue, 20 Feb 2024 06:41:42 +0100 (CET)
+Received: from mail-ua1-x92d.google.com (mail-ua1-x92d.google.com
+ [IPv6:2607:f8b0:4864:20::92d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8496087F3F
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 06:17:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D7C187EAD
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 06:41:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vigneshr@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41K5H6rt114324;
- Mon, 19 Feb 2024 23:17:06 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1708406226;
- bh=HnEeoApseNvCbcVyeoJ4lmx2BLhd9Lo3S3HBOBHQNO8=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=pFUqqIdCkS65GJCXYP9b5d+Cdltd8e8N1qhUJ7DmCcx0niECG2j2aXWONeHW87Rkc
- R2km2y+iQ+N+C6kf9UuSLbE0VefZdwzxqf1JK9pHaqEmqjVsfysuiLK2cEqoj2yOLF
- 1fxD4PKwUeusQNEKR1bMFBDKtiUxr4tIiVLSluhg=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41K5H6dm046542
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 19 Feb 2024 23:17:06 -0600
-Received: from lewvowa01.ent.ti.com (10.180.75.79) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 19
- Feb 2024 23:17:06 -0600
-Received: from DLEE114.ent.ti.com (157.170.170.25) by lewvowa01.ent.ti.com
- (10.180.75.79) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2507.34; Mon, 19 Feb
- 2024 23:17:06 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 19 Feb 2024 23:17:06 -0600
-Received: from [172.24.227.94] (uda0132425.dhcp.ti.com [172.24.227.94])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41K5H4K5032457;
- Mon, 19 Feb 2024 23:17:05 -0600
-Message-ID: <00d656a1-52f2-4f69-a2dc-6e98347780b2@ti.com>
-Date: Tue, 20 Feb 2024 10:47:03 +0530
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-ua1-x92d.google.com with SMTP id
+ a1e0cc1a2514c-7ce603b9051so1967901241.2
+ for <u-boot@lists.denx.de>; Mon, 19 Feb 2024 21:41:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1708407685; x=1709012485; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=w/A4g2BvtQz7nA3iXawAz0skWyhRi91RDACxSrA6geM=;
+ b=QDTEfvZayC+ee8B30Sr+rCBR/nqlhLLEg8ZB9T1gzIwWAO+04STkcvpCes4lUwPLk2
+ /vvwcM88bbINtQ279R/1qG9G5o4LJTIAfXqMq67X/yw9VjjvvbEZNJ1qE8NIIF9c2nK2
+ LUbhf3mHZXGbu07MNmMP2dE0e1pWQdH8OV5H8W4pSVNL7ER5dVaEl2N9AZ7zTgBdKS9T
+ ecJwefVRdB+tWTDyLZtIg7wrByRx1GRykL1pYnhhUc+6HgahGLgx6ZqZWRH5Wg6Yk89A
+ GrflfHG4WpgURIMgAUGm6WeCBrXNNghGPzJT8hQnStT5ogKD0YzHS1aoG79NUm285UGP
+ cHyQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1708407685; x=1709012485;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=w/A4g2BvtQz7nA3iXawAz0skWyhRi91RDACxSrA6geM=;
+ b=PXhTtZMS2TOfHLpR3A38DB8CDAuEV3rZBtp31jKlH2bSblyoKg+Kjg/XGmVC2n2Btv
+ 3JApb6ugHJO9sudPkIZ146+tdtVtdOi7GXS1JQzGYw3XP4v371wxehH9wO2rYAcfE+CB
+ 3uTCLGp53h1JwakAcsaBhVmEqOjZUlw7OA/r3PJOEEcbVoSbVAWukfywseByPynrMGVU
+ RvXrXo3eqJBNnZjVmfrTj40lPKeDJ3T+N/D5ZKStErReFc9qQarN894nCHAl+YOt5xBj
+ h4uefeav17IlvkPTS2JFHUBkasS8XOjTkBJV0yqjSmV4x8DTdaC5uS2xuPlUWnreJhjZ
+ iRsg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXxsjq9JOeWt/Ehw7UaDpbqkjWVs81MeBgXnBEdY91QXVOmEjYVLbhETCA4N9eBXQVulkyJ6kGRG4e33Faj9sEn6qPEtw==
+X-Gm-Message-State: AOJu0YxekXWkzbehFO07SQ08xeszVJPzDmnoaGJhsj3I2MQJIt2s2sKf
+ 1/lRcgU+04tkOWIdK8DfPuG+gN4YGwaL8rllBXG8E1StCGZ3i6Ip4dh+uY76i8drvgARz4GneuK
+ 05uwLTmmJCH2wEHHi6ZS0T2DoLGWKSntpT0iHFA==
+X-Google-Smtp-Source: AGHT+IGSBX53PTUku/XFZ87V2ErZYE2Abcp/uDzdj45t09QHi7Qf8b0tWnmRF8BlW7xGxEybKm6+EK5e659gmrubeO8=
+X-Received: by 2002:a05:6102:903:b0:470:4712:58c with SMTP id
+ x3-20020a056102090300b004704712058cmr4048993vsh.4.1708407685296; Mon, 19 Feb
+ 2024 21:41:25 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm: dts: k3-am625-verdin-r5: Change CPU frequency to
- 1000MHz
-Content-Language: en-US
-To: Vitor Soares <ivitro@gmail.com>, <marcel.ziswiler@toradex.com>,
- <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, Vitor Soares <vitor.soares@toradex.com>
-References: <20240219123408.22054-1-ivitro@gmail.com>
-From: Vignesh Raghavendra <vigneshr@ti.com>
-In-Reply-To: <20240219123408.22054-1-ivitro@gmail.com>
+References: <20240215-b4-qcom-common-target-v4-0-ed06355c634a@linaro.org>
+ <20240215-b4-qcom-common-target-v4-1-ed06355c634a@linaro.org>
+In-Reply-To: <20240215-b4-qcom-common-target-v4-1-ed06355c634a@linaro.org>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Tue, 20 Feb 2024 11:11:14 +0530
+Message-ID: <CAFA6WYP5n8v+i0QuTy8twjyJOTAXV-8PfSpfStY7fC_=Zf42=g@mail.gmail.com>
+Subject: Re: [PATCH v4 01/39] arm: init: export prev_bl_fdt_addr
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>,
+ Ramon Fried <rfried.dev@gmail.com>, 
+ Dzmitry Sankouski <dsankouski@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
+ Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,56 +96,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 19/02/24 18:04, Vitor Soares wrote:
-> From: Vitor Soares <vitor.soares@toradex.com>
-> 
-> The same U-Boot binary is compatible with multiple Verdin AM62 board
-> variants. However, some of the SoC models can only operate at a maximum
-> speed of 1 GHz.
-> 
-> Previously, the boards with lower-speed grades were running at
-> overclocked speeds, leading to kernel complaints about unsupported
-> configurations.
-> 
-> To resolve this issue, the operating speed has been decreased to the
-> maximum allowable value across all Verdin AM62 board variants. As a
-> result, there is a regression in overall boot time, increasing by around
-> 200 milliseconds for the faster SoC variant.
-> 
-
-Patch as such is fine. But one way to avoid boot regression is to fixup
-the clock freq using based on speed grade identified by
-k3_get_speed_grade() and freq mapping table for each letter as show in
-datasheet [0]
-
-This may need VDD_CORE voltage information via PMIC driver. Even w/o
-that could at least bump to 1.25Ghz safely.
-
-[0] https://www.ti.com/lit/ds/symlink/am625.pdf
-Table 7-1. Device Speed Grades
-
-
-> Signed-off-by: Vitor Soares <vitor.soares@toradex.com>
+On Fri, 16 Feb 2024 at 02:22, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>
+> When booting U-Boot on board with a locked down first-stage bootloader,
+> we emulate the Linux boot header. By passing the U-Boot FDT through this
+> first-stage bootloader and retrieving it afterwards we can pre-populate
+> the memory nodes and other info like the KASLR address.
+>
+> Add a function to export the FDT addr so that boards can use it over the
+> built-in FDT.
+>
+> Don't check is_addr_accessible() here because we might not yet have a
+> valid mem_map if it's going to be populated from the FDT, let the board
+> do their own validation instead.
+>
+> Reviewed-by: Tom Rini <trini@konsulko.com>
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->  arch/arm/dts/k3-am625-verdin-r5.dts | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/arch/arm/dts/k3-am625-verdin-r5.dts b/arch/arm/dts/k3-am625-verdin-r5.dts
-> index 305d199678..6b03e7405a 100644
-> --- a/arch/arm/dts/k3-am625-verdin-r5.dts
-> +++ b/arch/arm/dts/k3-am625-verdin-r5.dts
-> @@ -23,7 +23,7 @@
->  		 */
->  		assigned-clocks = <&k3_clks 61 0>, <&k3_clks 135 0>, <&k3_clks 157 20>;
->  		assigned-clock-parents = <&k3_clks 61 2>, <0>, <&k3_clks 157 22>;
-> -		assigned-clock-rates = <200000000>, <1200000000>, <25000000>;
-> +		assigned-clock-rates = <200000000>, <1000000000>, <25000000>;
->  		clocks = <&k3_clks 61 0>;
->  		power-domains = <&k3_pds 61 TI_SCI_PD_EXCLUSIVE>,
->  				<&k3_pds 135 TI_SCI_PD_EXCLUSIVE>,
+>  arch/arm/lib/save_prev_bl_data.c |  5 +++++
+>  include/init.h                   | 11 +++++++++++
+>  2 files changed, 16 insertions(+)
 
--- 
-Regards
-Vignesh
+Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
+
+-Sumit
+
+>
+> diff --git a/arch/arm/lib/save_prev_bl_data.c b/arch/arm/lib/save_prev_bl_data.c
+> index f7b23faf0d66..b286bac9bf00 100644
+> --- a/arch/arm/lib/save_prev_bl_data.c
+> +++ b/arch/arm/lib/save_prev_bl_data.c
+> @@ -45,6 +45,11 @@ bool is_addr_accessible(phys_addr_t addr)
+>         return false;
+>  }
+>
+> +phys_addr_t get_prev_bl_fdt_addr(void)
+> +{
+> +       return reg0;
+> +}
+> +
+>  int save_prev_bl_data(void)
+>  {
+>         struct fdt_header *fdt_blob;
+> diff --git a/include/init.h b/include/init.h
+> index 9a1951d10a01..630d86729c4e 100644
+> --- a/include/init.h
+> +++ b/include/init.h
+> @@ -168,6 +168,17 @@ defined(CONFIG_SAVE_PREV_BL_FDT_ADDR)
+>   * Return: 0 if ok; -ENODATA on error
+>   */
+>  int save_prev_bl_data(void);
+> +
+> +/**
+> + * get_prev_bl_fdt_addr - When u-boot is chainloaded, get the address
+> + * of the FDT passed by the previous bootloader.
+> + *
+> + * Return: the address of the FDT passed by the previous bootloader
+> + * or 0 if not found.
+> + */
+> +phys_addr_t get_prev_bl_fdt_addr(void);
+> +#else
+> +#define get_prev_bl_fdt_addr() 0LLU
+>  #endif
+>
+>  /**
+>
+> --
+> 2.43.1
+>
