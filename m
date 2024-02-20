@@ -4,53 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC581C48BC3
-	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 18:29:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0698C5475B
+	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 18:30:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4774F88009;
-	Tue, 20 Feb 2024 19:29:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B914B87FFC;
+	Tue, 20 Feb 2024 19:29:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="BB2b4/UQ";
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="A2l+KuCE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C7B687FF2; Tue, 20 Feb 2024 19:29:37 +0100 (CET)
-Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
+ id 6EF6488012; Tue, 20 Feb 2024 19:29:41 +0100 (CET)
+Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D65B987FF1
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 19:29:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 225D687FF5
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 19:29:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=francesco@dolcini.it
 Received: from francesco-nb.corp.toradex.com (31-10-206-125.static.upc.ch
  [31.10.206.125])
- by mail11.truemail.it (Postfix) with ESMTPA id D6975225B5;
- Tue, 20 Feb 2024 19:29:30 +0100 (CET)
+ by mail11.truemail.it (Postfix) with ESMTPA id 695D322697;
+ Tue, 20 Feb 2024 19:29:31 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
  s=default; t=1708453771;
- bh=NlLXOZdraIqCjd7vtvrdtBVUQeoPzkkgVYubuK8bdHU=; h=From:To:Subject;
- b=BB2b4/UQRdT6ZC9CsYu+gl1e4x7+jATALXnqMlcfyUf+A+n/ZGJuLWOMbGu8O6LOA
- J+ttXsJ9Y5MMSRTe9Kyd5m3kpLiOu1ynxQ3+PPeauI16oqNmJLH/IMoLtRMHajwOx+
- WE94x7CZnAhE9zRf8pzVQxWoWQR7UEpQwj5OZutV6bkxHZAY6EBjXvZc7Y+B3Yrfr/
- nxx+SXyJOzxwBGBwZqw2A3UPlQfV5lZ/ASfClZMHBrrWI2N2Z6o4gcD+lLPIx2AMu/
- iE4XPZH0tERXYkbVtvWADc8jK7IV9CWUXlatGfDjUhZ/1wt+PDhCNKW1XfmYBmFrW3
- CKYSwdPej7DaQ==
+ bh=rr7DjUrA2GZ1aaZ8q1hJfY/yKXqQvYOmT/BdWNlBI3M=; h=From:To:Subject;
+ b=A2l+KuCEDQStXpyAC5SFAHOKZv72Wh2jzVQB+Fz/+p5PNp9WgSv0fv/RgQEpV9K1z
+ V3JtoNW+cT9m3KR13h6HV67drmC2kzuRmv50VKkdool2Sc+GyP8LZ6k2g0jDjyEuBt
+ z4/HTmdpueIl4Wo+02TbFSrn3oyRBY4UGENJiUulD33Y6ozrPnJWqQLXgx4OaFm8tr
+ a71GGt6NJoW/Pi6jUFLtj2MePyjOrw7LwniAfbdhaWrP62iCAz77AG1/zgNvL6N8YA
+ KcDci4KYYdok3eeDRlMEIcoJHVgtvMziZqPRmiJAh7sFGFHiDh6w+5C1XimikxeApO
+ ebknqH4LJ5HqQ==
 From: Francesco Dolcini <francesco@dolcini.it>
-To: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Tom Rini <trini@konsulko.com>, Thierry Reding <treding@nvidia.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Francesco Dolcini <francesco.dolcini@toradex.com>, u-boot@lists.denx.de,
- Sahaj Sarup <sahaj.sarup@linaro.org>,
- Francesco Dolcini <francesco@dolcini.it>
-Subject: [PATCH v1 0/7] toradex: fix reset and hardware detection regressions
-Date: Tue, 20 Feb 2024 19:29:19 +0100
-Message-Id: <20240220182926.101161-1-francesco@dolcini.it>
+To: Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, u-boot@lists.denx.de,
+ Francesco Dolcini <francesco.dolcini@toradex.com>
+Subject: [PATCH v1 1/7] toradex: Fix recursive call to checkboard
+Date: Tue, 20 Feb 2024 19:29:20 +0100
+Message-Id: <20240220182926.101161-2-francesco@dolcini.it>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240220182926.101161-1-francesco@dolcini.it>
+References: <20240220182926.101161-1-francesco@dolcini.it>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -69,92 +67,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Francesco Dolcini <francesco.dolcini@toradex.com>
+From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 
-This series fixes two regressions affecting multiple Toradex boards
-(i.MX, TI and TEGRA based) and targets the current master, e.g. v2024.04 release.
+Since checkboard() is used instead of show_board_info(), in case toradex
+config block is missing or malformed, checkboard is recursively called.
+It prints a long list of "MISSING TORADEX CONFIG BLOCK" till the stack
+is full.
 
-U-Boot `reset` command is broken on all Tordex i.MX6* based SoMs since
-v2023.07, this series fixes it enabling the `wdt-reboot` driver.
+Fixes: edb0ecd18708 ("toradex: Use checkboard() instead of show_board_info()")
+Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
+Signed-off-by: Francesco Dolcini <francesco.dolcini@toradex.com>
+---
+ board/toradex/common/tdx-common.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-Since v2024.04-rc1 reading the Toradex configuration block is not working
-properly anymore, the serial number and the hardware version are not read
-correctly, preventing the board from functioning correctly (wrong mac address,
-wrong DT, ...). This is fixed by reading the config block in `EVT_SETTINGS_R` and
-adding a toradex sysinfo driver. In addition to that, we now use a random mac
-address in case the config block is invalid.
-
-
-Reported-by: Sahaj Sarup <sahaj.sarup@linaro.org>
-Closes: https://lore.kernel.org/all/CAKZ1LvM45MB8N0CqgU+C7i9=Bjb6kqNTxWo2Tv407HKLWtCMkA@mail.gmail.com/
-Reported-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
-Closes: https://lore.kernel.org/all/e40ed93bd8f371ec56b8fc451dcb458f3ce6dcba.camel@toradex.com/
-Reported-by: Francesco Dolcini <francesco@dolcini.it>
-Closes: https://lore.kernel.org/all/ZY2ZDWAQuTlRjV9H@francesco-nb/
-
-Emanuele Ghidoli (6):
-  toradex: Fix recursive call to checkboard
-  toradex: Remove not necessary model prints from checkboard()
-  toradex: common: Use SETTINGS_R event to read toradex config block
-  arm: dts: Refactor device trees using "&{/aliases}" syntax
-  toradex: common: Add sysinfo driver
-  toradex: common: Use random mac address if toradex config block is
-    missing
-
-Parth Pancholi (1):
-  toradex: imx6*: fix reset using wdt-reboot driver
-
- arch/arm/dts/fsl-imx8qm-apalis-u-boot.dtsi    |   6 +
- arch/arm/dts/fsl-imx8qxp-colibri-u-boot.dtsi  |   6 +
- .../dts/imx6dl-colibri-eval-v3-u-boot.dtsi    |  28 +++-
- arch/arm/dts/imx6q-apalis-eval-u-boot.dtsi    |  36 +++--
- .../dts/imx6ull-colibri-eval-v3-u-boot.dtsi   |  14 ++
- .../arm/dts/imx7d-colibri-eval-v3-u-boot.dtsi |  14 +-
- .../dts/imx8mm-verdin-wifi-dev-u-boot.dtsi    |  16 +-
- .../dts/imx8mp-verdin-wifi-dev-u-boot.dtsi    |  16 +-
- .../dts/k3-am625-verdin-wifi-dev-u-boot.dtsi  |   4 +
- arch/arm/dts/tegra124-apalis-u-boot.dtsi      |  12 ++
- arch/arm/dts/tegra20-colibri-u-boot.dtsi      |  12 ++
- arch/arm/dts/tegra30-apalis-u-boot.dtsi       |  12 ++
- arch/arm/dts/tegra30-colibri-u-boot.dtsi      |  12 ++
- .../arm/dts/vf610-colibri-eval-v3-u-boot.dtsi |   4 +
- board/toradex/apalis-imx8/apalis-imx8.c       |  10 --
- board/toradex/apalis-tk1/apalis-tk1.c         |   7 -
- board/toradex/apalis_imx6/apalis_imx6.c       |  21 ---
- board/toradex/apalis_t30/apalis_t30.c         |   8 -
- .../toradex/colibri-imx6ull/colibri-imx6ull.c |   7 -
- board/toradex/colibri-imx8x/colibri-imx8x.c   |  10 --
- board/toradex/colibri_imx6/colibri_imx6.c     |  20 ---
- board/toradex/colibri_imx7/colibri_imx7.c     |   8 -
- board/toradex/colibri_t20/colibri_t20.c       |  10 --
- board/toradex/colibri_t30/colibri_t30.c       |   7 -
- board/toradex/colibri_vf/colibri_vf.c         |  10 --
- board/toradex/common/Kconfig                  |   1 +
- board/toradex/common/tdx-common.c             | 137 +++++++++++++-----
- board/toradex/common/tdx-common.h             |   1 -
- configs/apalis-imx8_defconfig                 |   1 +
- configs/apalis-tk1_defconfig                  |   1 +
- configs/apalis_imx6_defconfig                 |   4 +
- configs/apalis_t30_defconfig                  |   1 +
- configs/colibri-imx6ull-emmc_defconfig        |   4 +
- configs/colibri-imx6ull_defconfig             |   4 +
- configs/colibri-imx8x_defconfig               |   1 +
- configs/colibri_imx6_defconfig                |   4 +
- configs/colibri_imx7_defconfig                |   1 +
- configs/colibri_imx7_emmc_defconfig           |   1 +
- configs/colibri_t20_defconfig                 |   1 +
- configs/colibri_t30_defconfig                 |   1 +
- configs/colibri_vf_defconfig                  |   1 +
- configs/verdin-am62_a53_defconfig             |   1 +
- configs/verdin-am62_r5_defconfig              |   1 +
- configs/verdin-imx8mm_defconfig               |   1 +
- configs/verdin-imx8mp_defconfig               |   1 +
- 45 files changed, 284 insertions(+), 194 deletions(-)
- create mode 100644 arch/arm/dts/tegra124-apalis-u-boot.dtsi
- create mode 100644 arch/arm/dts/tegra20-colibri-u-boot.dtsi
- create mode 100644 arch/arm/dts/tegra30-apalis-u-boot.dtsi
- create mode 100644 arch/arm/dts/tegra30-colibri-u-boot.dtsi
-
+diff --git a/board/toradex/common/tdx-common.c b/board/toradex/common/tdx-common.c
+index ed8f0a6a4756..ddc4a175da68 100644
+--- a/board/toradex/common/tdx-common.c
++++ b/board/toradex/common/tdx-common.c
+@@ -103,7 +103,6 @@ int tdx_checkboard(void)
+ 	if (read_tdx_cfg_block()) {
+ 		printf("MISSING TORADEX CONFIG BLOCK\n");
+ 		get_mac_from_serial(tdx_serial, &tdx_eth_addr);
+-		checkboard();
+ 	} else {
+ 		snprintf(tdx_serial_str, sizeof(tdx_serial_str),
+ 			 "%08u", tdx_serial);
 -- 
 2.39.2
 
