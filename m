@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30D3BC48BC3
-	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 10:43:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8ED21C48BC4
+	for <u-boot@archiver.kernel.org>; Tue, 20 Feb 2024 10:43:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8B41B87F8A;
-	Tue, 20 Feb 2024 11:42:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 3A21C87F88;
+	Tue, 20 Feb 2024 11:43:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="rQ8C4e+v";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jeTMlCAy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA18587D91; Tue, 20 Feb 2024 11:42:24 +0100 (CET)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id CAA7087D91; Tue, 20 Feb 2024 11:43:18 +0100 (CET)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7CAE987DEB
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 11:42:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9310387F99
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 11:43:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=B.Hahn@phytec.de
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1708425726; x=1711017726;
- h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=2qJQzrK0QmwPQMeAQCSDlVXjKh9RqjrNSI8Jr8cVgsA=;
- b=rQ8C4e+vvzaPTMcBDKEyL1Y1OXEe9cCTMwPkLfNBalavIQsX0D40SNwleN/iPZjP
- TGUZT7NB2WghsQRGNWXEepSzeq1+H9dFcFsBZf7LEQ6ODJlDOu8AxzeP79UJAWgq
- kk+Oc0/fQhJech4nSZViNPL/T7nsa33tmhysGrw6Gr8=;
-X-AuditID: ac14000a-fbefe7000000290d-8b-65d481fe4a72
-Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
- (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 26.CF.10509.EF184D56;
- Tue, 20 Feb 2024 11:42:06 +0100 (CET)
-Received: from llp-hahn.hahn.test (172.25.0.11) by Berlix.phytec.de
- (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Tue, 20 Feb
- 2024 11:42:06 +0100
-From: Benjamin Hahn <B.Hahn@phytec.de>
-Date: Tue, 20 Feb 2024 11:41:43 +0100
-Subject: [PATCH 1/3] phycore-imx8mp_defconfig: Enable CONFIG_IMX_TMU
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=dan.carpenter@linaro.org
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-563d32ee33aso5581226a12.2
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 02:43:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1708425791; x=1709030591; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=L65oWphDHgMlR4eZuh7VdGVaYzP1VkbC55H5WecoR9k=;
+ b=jeTMlCAyQ3PrzmkO+s2oVQ3nH0YWuEoJIK02WZ5QwUP3J1pn8eUZ7cLDTvIFOf64b3
+ wMPMIQPFLpN9WvXtE7Be2kGPdA2HcMnmQS1/0aVV4Vi8bJ/mJrZEV69CHp7aFpXCXeF5
+ k5qkhHVC97+TMxxxD3w1qcjO86PlNl1i4mq6EyWJkCfepAe5OtVgRHATyM6kzKga7u2y
+ Lnbk/DHQxbzWipmw4VXfTWT9SFs8s/bU4slQOIDNanUVmyd94+/rLYl/3SCBaFMeIdok
+ rNrYPSoPBZ5jPlqcHpSEqqs8HnCL0QdAb985OpD7tvdL2zkMUAQeevrdY7sDWKQJ5Bax
+ 3eqA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1708425791; x=1709030591;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=L65oWphDHgMlR4eZuh7VdGVaYzP1VkbC55H5WecoR9k=;
+ b=MzmFRaAhkr6LzW89wI2f9LeNa/qiVf932ozbi/5tLb3TpimVdQ9EDdWXEA8RPHw6pN
+ ItQd7tZDpdYPNK7lsn73364dSF4390b6bBCZS7TpYig3472wNokV2raOA+cU8xWbNBYZ
+ BTVCgYGgZaHHTFJXXXs/Psuuc1uNKis5YWpUeoVWoZfDvPqenKMXFdSDNsbvlCqRrVu3
+ DaJtIuPg/ZA2fgXenwFgRKggq8d2WTh/YfSaiVKzWJQI5Xy5un7uLvlPm8aZLorHgHuQ
+ RAw7PdwqqgPVk2XDNhrVXRmcNdgGU6eKw37INSobL7aQrTFEldsG6s3V1TfZRpguuw09
+ 1Hjw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUqjadJd6TnEIzfOPIGpVU212EaLxBe9JluFiMgn1Zrql5Vnnww6ey+GcFHQ+HhgHXAbinhMlEwvFw1s7YU8Q9imTFrIA==
+X-Gm-Message-State: AOJu0YxOYpRTvMpkD97BHXoqpyLMkoiisDIuW4uWcYJgOsIuX0nDXYM+
+ Cee4c35APNXT78XEb6nHr06EVlJr8T+I5G4P0RI0nq3pTaO8aeMwK4FtP56RFis=
+X-Google-Smtp-Source: AGHT+IGuM1QOliGlc+WZhkfW7hw1LbZFE8JlX/KOP4+4yBDgbF1LShSUN3InGB99ekiu+b9lGgupvg==
+X-Received: by 2002:aa7:d899:0:b0:564:4028:e2cf with SMTP id
+ u25-20020aa7d899000000b005644028e2cfmr3771984edq.24.1708425790913; 
+ Tue, 20 Feb 2024 02:43:10 -0800 (PST)
+Received: from localhost ([102.222.70.76]) by smtp.gmail.com with ESMTPSA id
+ j24-20020aa7ca58000000b00564a2d7da28sm1154746edt.41.2024.02.20.02.43.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 20 Feb 2024 02:43:10 -0800 (PST)
+Date: Tue, 20 Feb 2024 13:43:07 +0300
+From: Dan Carpenter <dan.carpenter@linaro.org>
+To: Siddharth Vadapalli <s-vadapalli@ti.com>
+Cc: trini@konsulko.com, sjg@chromium.org, vigneshr@ti.com,
+ matthias.schiffer@ew.tq-group.com, nm@ti.com, u-boot@lists.denx.de,
+ srk@ti.com
+Subject: Re: [PATCH v2] dma: ti: k3-udma: Fix error handling for
+ setup_resources() in udma_probe()
+Message-ID: <fcec04ca-33a3-4d6a-b9fc-5db9fc002311@moroto.mountain>
+References: <20240220100451.1053667-1-s-vadapalli@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20240220-thermal-support-v1-1-f6a97d8d6481@phytec.de>
-References: <20240220-thermal-support-v1-0-f6a97d8d6481@phytec.de>
-In-Reply-To: <20240220-thermal-support-v1-0-f6a97d8d6481@phytec.de>
-To: Teresa Remmet <t.remmet@phytec.de>, Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>, Benjamin Hahn
- <B.Hahn@phytec.de>
-X-Mailer: b4 0.12.4
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1708425726; l=631;
- i=B.Hahn@phytec.de; s=20240126; h=from:subject:message-id;
- bh=2qJQzrK0QmwPQMeAQCSDlVXjKh9RqjrNSI8Jr8cVgsA=;
- b=ycgh/CnAipe3iwdx3DGfTi52/iN3dJGCyceBQ3BCyB3O012DyLxaKrxBe/Lfp+42P6F5/kSkM
- f6BN6gyhQnYDKZgpCwTw0je8T+hpf1XvnfvcA4zERiTU25hdUXWRYRX
-X-Developer-Key: i=B.Hahn@phytec.de; a=ed25519;
- pk=r04clMulHz6S6js6elPBA+U+zVdDAqJyEyoNd8I3pSw=
-X-Originating-IP: [172.25.0.11]
-X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
- (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrOLMWRmVeSWpSXmKPExsWyRpKBR/df45VUg13fTSymTtrMbvF2bye7
- Rfc7dQdmj1cHVrF7nL2zg9Gjv7uFNYA5issmJTUnsyy1SN8ugStj3vVG5oKfLBX/Ji9mbGCc
- z9LFyMkhIWAi8XT3PfYuRi4OIYHFTBL/Xyxgg3AeMkp03fzOBFLFJqAmsevNa1YQm0VAVWLW
- 5L/MILawgIvE0ulf2EBsXgFBiZMznwBN5eBgFtCUWL9LHyTMLCAvsf3tHGaQMK+Ak8Tr02Ug
- YSEgc3Hvf7ApnALOEv3PloB1igi4SjzdYwgxJEri3cQgEFNCQFhi004tkLskBHYxSVxs+84G
- EU+U2PlaDmKgrMTN81vYIJ6Sl5h27jUzhB0qcWTTaqYJjCKzkFw5C+HKWUiuXMDIvIpRKDcz
- OTu1KDNbryCjsiQ1WS8ldRMjKPBFGLh2MPbN8TjEyMTBeIhRgoNZSYSXpfxKqhBvSmJlVWpR
- fnxRaU5q8SFGaQ4WJXHe1R3BqUIC6YklqdmpqQWpRTBZJg5OqQZG5gWvTssrVt8Vu1rTenH3
- zyOv3yt/3tzEt+D/hItK781rN71v9WwRzNXkSXNvN198ds+L/f/XGbImdWvvvmjkqXH0uNeW
- 7H35HouCF34WO13hYH6UM9wu78SFJdsYvGTVts/nja3RXl119lekqd2cOKNluceWrFM8+4fT
- 4Niaz9uyHsgys60tVGIpzkg01GIuKk4EADbMGbpqAgAA
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240220100451.1053667-1-s-vadapalli@ti.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,27 +94,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable the imx thermal driver to prevent booting when the system is too
-hot.
+On Tue, Feb 20, 2024 at 03:34:51PM +0530, Siddharth Vadapalli wrote:
+> In udma_probe() the return value of setup_resources() is stored in the
+> u32 "ch_count" member of "struct udma_dev", due to which any negative
+> return value which indicates an error is masked.
+> 
+> Fix this by storing the return value of setup_resources() in the already
+> declared integer variable "ret", followed by assigning it to the "ch_count"
+> member of "struct udma_dev" in case of no error.
+> 
+> While at it, change the "return ret" at the end of udma_probe() to a
+> "return 0", to explicitly indicate that probe was successful.
+> 
+> Fixes: a8837cf43839 ("dma: ti: k3-udma: Query DMA channels allocated from Resource Manager")
+> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+> ---
 
-Signed-off-by: Benjamin Hahn <B.Hahn@phytec.de>
----
- configs/phycore-imx8mp_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+Thanks!
 
-diff --git a/configs/phycore-imx8mp_defconfig b/configs/phycore-imx8mp_defconfig
-index 0f37286d5d99..c95554283903 100644
---- a/configs/phycore-imx8mp_defconfig
-+++ b/configs/phycore-imx8mp_defconfig
-@@ -138,6 +138,7 @@ CONFIG_SPL_SYSRESET=y
- CONFIG_SYSRESET_PSCI=y
- CONFIG_SYSRESET_WATCHDOG=y
- CONFIG_DM_THERMAL=y
-+CONFIG_IMX_TMU=y
- CONFIG_USB=y
- CONFIG_DM_USB_GADGET=y
- CONFIG_USB_XHCI_HCD=y
+Reviewed-by: Dan Carpenter <dan.carpenter@linaro.org>
 
--- 
-2.34.1
+regards,
+dan carpenter
 
