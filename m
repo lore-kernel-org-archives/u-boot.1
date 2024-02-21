@@ -4,54 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4398C48BEB
-	for <u-boot@archiver.kernel.org>; Wed, 21 Feb 2024 15:59:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F025CC48BC3
+	for <u-boot@archiver.kernel.org>; Wed, 21 Feb 2024 15:59:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2EDF088050;
-	Wed, 21 Feb 2024 16:58:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 98B0388042;
+	Wed, 21 Feb 2024 16:58:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1708531115;
-	bh=kqBX0JzVkB7wJ5qR0R42KTFV9YGAgPUEFw9oFwILHiE=;
+	s=phobos-20191101; t=1708531114;
+	bh=nEaZiWrG18X6j43qoNpjy45qjkJI8xvN9p+TB4DjtW0=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=rMNGMk4NMdyqkgcAVo+477vqdjOu136fKgWJTatVxSrmeQe+oj7npRyMPKJqypgl5
-	 oii6WAR1iShLrzH/FMscNHG3y2pkehueT1ImsDUtQNHOmYwE4JHIHwzzCXHezjP9iM
-	 CTbMNPoeuIieyhfEOmU0HUqYGYMOeNQ8nOoWgXRILgQrncLCjXmJHvRnnlcrJlBTry
-	 h8y98Rgo4XdYZi3iHTbX7HY5g2pcfaLL9UM/eVeNIrLQICKf0bDyT3KHOZlo9qif8x
-	 f7gyxKlIm1J0GAI1F4jTeM0HsXrJJxwHSQgSa0+yzdZyOQ4hveEQb4q807O7CdcO/q
-	 fQRWkoKZFYbSA==
+	b=tbns3f0Aq1WkoZB8jAB4c7igNqSijvSGPXC/HVeygyM6AIGtWy4Q/lpcEEIbmt5sO
+	 lk57JasajCvjplM4rfO82g8a0MHn3feyRqHEeyRnswbQ9hBq6V1ROp/Rh0DKHg8U4f
+	 kDzeXXwuI1s0AFJuEDW37X+L3sz/6uKDFn4CLKMQxZWJ1sz24quhqG4KUPD4B9mcTk
+	 mGp9OrFbkjBZ80a5MaA4YlVKtP7t0MXTTnfGM1sscZP5vpHI3gK2HCBVrRZGFNSzZC
+	 KQmw6XC6rBfn4EmKKudDRniSRGyIHr6y0JlIaheaqUjGWi9zcuN1WVKaikuv9CxSOE
+	 dyo0bemmpgs3w==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id D21F988022;
+ by phobos.denx.de (Postfix) with ESMTPSA id 441C687E25;
  Wed, 21 Feb 2024 16:58:27 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1708531108;
- bh=kqBX0JzVkB7wJ5qR0R42KTFV9YGAgPUEFw9oFwILHiE=;
+ s=phobos-20191101; t=1708531107;
+ bh=nEaZiWrG18X6j43qoNpjy45qjkJI8xvN9p+TB4DjtW0=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=Z34EDWu0OM+rg4YPB9SuwrgWtuw/HWMgaMXq9RkJvNDD7vEsX7VK424J37n6gMejy
- eVkP1qgOE5367mtVtvzhy8yGDfUnJKSFXuMxZOImsK9Bxah36D9oa2Pl+hHMlWw3uV
- gng7rgfW/ZgCuwu8rgHfB7eg1X7NlrHdVsgaSZCn6RSAMnTXUFvYeCFp0VChjpTEzU
- kW1+Pfir1gHWgE+gyj8blqsh2udUYPYTduAe/mh2hIn9dY8PIdJ+ODiyI/gYvahdUQ
- orkld9CVJOvtJ45ITxvUgKj2y0YYALDIIAPW9suIdbpSqvTmwGAW/aov2ZAxGnZG9g
- yNOhS1RPmWCpw==
-Message-ID: <2acb9976-a40e-4977-b7ca-2462e84251ed@denx.de>
-Date: Wed, 21 Feb 2024 13:41:32 +0100
+ b=Y5m7SwqOCPEF5Vs61sHbvOATwEl5xSZH9TQmx16ywE7vaSDPhsySpmlTIqUMYyqkQ
+ K5FyCoyF5u3cAJzxBYKuxVxCNtp2Amnx4CohRpSSBC6biG1YVScgrv3zHPgRCRNdQW
+ PXE3d213f5RghACaQv8DyzqGaJ7sIZJ1KwPuOHxu/Nc5Yy312zdkda9CtVLw49M0qO
+ iTNUWM6lIpPYF3S8WBLX0llxeCja8MuCXq8q8+KqnFqfFMwzEx63oRry5/8Igpku3v
+ imjMSZypX2tnyQJN7S6M9M0IvNZzZ/rzOL61uPaXL8KHseZIRsmsZuQ/NqsasR4VlX
+ Y1heVawHF1tGw==
+Message-ID: <161786f2-cec2-44f3-b8d6-14e78c243e85@denx.de>
+Date: Wed, 21 Feb 2024 13:40:27 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/6] usb: kbd: Ignore Yubikeys
+Subject: Re: [PATCH 3/6] usb: xhci: Abort transfers with unallocated rings
 Content-Language: en-US
 To: j@jannau.net, Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, asahi@lists.linux.dev,
- Hector Martin <marcan@marcan.st>
+Cc: u-boot@lists.denx.de, asahi@lists.linux.dev
 References: <20240221-asahi-keyboards-v1-0-814b2e741790@jannau.net>
- <20240221-asahi-keyboards-v1-4-814b2e741790@jannau.net>
+ <20240221-asahi-keyboards-v1-3-814b2e741790@jannau.net>
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240221-asahi-keyboards-v1-4-814b2e741790@jannau.net>
+In-Reply-To: <20240221-asahi-keyboards-v1-3-814b2e741790@jannau.net>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -71,62 +70,25 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 2/21/24 08:25, Janne Grunau via B4 Relay wrote:
-> From: Hector Martin <marcan@marcan.st>
+> From: Janne Grunau <j@jannau.net>
 > 
-> We currently only support one USB keyboard device, but some devices
-> emulate keyboards for other purposes. Most commonly, people run into
-> this with Yubikeys, so let's ignore those.
+> Discovered while trying to use the second interface in the USB keyboard
+> driver necessary on Apple USB keyboards.
 > 
-> Even if we end up supporting multiple keyboards in the future, it's
-> safer to ignore known non-keyboard devices.
-> 
-> Signed-off-by: Hector Martin <marcan@marcan.st>
+> Signed-off-by: Janne Grunau <j@jannau.net>
 > ---
->   common/usb_kbd.c | 19 +++++++++++++++++++
->   1 file changed, 19 insertions(+)
+>   drivers/usb/host/xhci-ring.c | 5 +++++
+>   1 file changed, 5 insertions(+)
 > 
-> diff --git a/common/usb_kbd.c b/common/usb_kbd.c
-> index 4cbc9acb73..774d3555d9 100644
-> --- a/common/usb_kbd.c
-> +++ b/common/usb_kbd.c
-> @@ -120,6 +120,15 @@ struct usb_kbd_pdata {
+> diff --git a/drivers/usb/host/xhci-ring.c b/drivers/usb/host/xhci-ring.c
+> index b60661fe05..4446f5f098 100644
+> --- a/drivers/usb/host/xhci-ring.c
+> +++ b/drivers/usb/host/xhci-ring.c
+> @@ -685,6 +685,9 @@ int xhci_bulk_tx(struct usb_device *udev, unsigned long pipe,
+>   		reset_ep(udev, ep_index);
 >   
->   extern int __maybe_unused net_busy_flag;
->   
-> +/*
-> + * Since we only support one usbkbd device in the iomux,
-> + * ignore common keyboard-emulating devices that aren't
-> + * real keyboards.
-> + */
-> +const uint16_t vid_blocklist[] = {
-> +	0x1050, /* Yubico */
-> +};
-> +
->   /* The period of time between two calls of usb_kbd_testc(). */
->   static unsigned long kbd_testc_tms;
->   
-> @@ -465,6 +474,7 @@ static int usb_kbd_probe_dev(struct usb_device *dev, unsigned int ifnum)
->   	struct usb_endpoint_descriptor *ep;
->   	struct usb_kbd_pdata *data;
->   	int epNum;
-> +	int i;
->   
->   	if (dev->descriptor.bNumConfigurations != 1)
->   		return 0;
-> @@ -480,6 +490,15 @@ static int usb_kbd_probe_dev(struct usb_device *dev, unsigned int ifnum)
->   	if (iface->desc.bInterfaceProtocol != USB_PROT_HID_KEYBOARD)
->   		return 0;
->   
-> +	for (i = 0; i < ARRAY_SIZE(vid_blocklist); i++) {
-> +		if (dev->descriptor.idVendor == vid_blocklist[i]) {
-> +			printf("Ignoring keyboard device 0x%x:0x%x\n",
-> +			       dev->descriptor.idVendor,
-> +			       dev->descriptor.idProduct);
-> +			return 0;
-> +		}
-> +	}
+>   	ring = virt_dev->eps[ep_index].ring;
+> +	if (!ring)
+> +		return -1;
 
-I vaguely recall a discussion about previous version of this, I think 
-the suggestion was to make the list of ignored devices configurable via 
-environment variable, so users can add to that list from U-Boot shell. 
-Would it be possible to make it work this way ?
+Would it make sense to return e.g. -EINVAL or some other errno ?
