@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A9BCC48BC3
-	for <u-boot@archiver.kernel.org>; Wed, 21 Feb 2024 05:41:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0228FC5475B
+	for <u-boot@archiver.kernel.org>; Wed, 21 Feb 2024 06:01:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4E05E87DDD;
-	Wed, 21 Feb 2024 06:40:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1958A87DE1;
+	Wed, 21 Feb 2024 07:01:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="X3FnscPv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="J/4aeHZn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3605987DDD; Wed, 21 Feb 2024 06:40:52 +0100 (CET)
-Received: from mail-ua1-x92a.google.com (mail-ua1-x92a.google.com
- [IPv6:2607:f8b0:4864:20::92a])
+ id 8054F87DF8; Wed, 21 Feb 2024 07:01:32 +0100 (CET)
+Received: from mail-ua1-x92c.google.com (mail-ua1-x92c.google.com
+ [IPv6:2607:f8b0:4864:20::92c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5904C87DD4
- for <u-boot@lists.denx.de>; Wed, 21 Feb 2024 06:40:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D1F687DEC
+ for <u-boot@lists.denx.de>; Wed, 21 Feb 2024 07:01:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ua1-x92a.google.com with SMTP id
- a1e0cc1a2514c-7d2e1832d4dso2540054241.2
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 21:40:37 -0800 (PST)
+Received: by mail-ua1-x92c.google.com with SMTP id
+ a1e0cc1a2514c-7d2e1832d4dso2547540241.2
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 22:01:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708494036; x=1709098836; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1708495274; x=1709100074; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=wCnpZCXGc66eTrbrYa+lxFBtj6akthQ0iV3B93GlxSY=;
- b=X3FnscPv2OhT2ahkIOQa+ihv/g4za040kuAaTYvVxGzyRJiXce3tDXp4xloUGqJGOH
- 7Sm6nHRghQsTeZm2aU+bfDer7m5td3mWUKqZDmPewRNCBVfPRq2CgV/h0Fvg7tdU0E8s
- sTKKqKQ7fczk2XxI5u+EOEqlMLL9oC9yq/ENvYAFmFQxvAnTAGXrIcy5udX3BS0uDvGJ
- MYXU9VSy16wTv5PydF/knfbIuKfC927MD8cOj3g7yHSOOCroUaE3ZaA7E3CB7+g0HoN9
- 7bsAERtv1g2QgP9Jgv8ptv00DrMIEr3n3qQiRxK95OP5VPYDfjnx4Znhi+e0CkLeAcpy
- LF6g==
+ bh=4ADv0vG62IHDdB3wZoAodlVawcOMJHTiZA3a7Xvbrb0=;
+ b=J/4aeHZnSntbuqGYEqqtg93dZFvyNpH18RtdGzjS02avdz3Dv66qx6KcqkzjfBOYya
+ JEj97nbI4h+sA5QjjyqAxRXM7D0jlq0R95RFK9YxG4tUCfWRI3+kk3fql80fABNghK/3
+ jAFaf6RR+CkIwJov4ugBquiX2HC0Q0DMg6H98KoJclc1N23RMOL+uHdaNCxowgJMvzhP
+ AaBZomRtbV93LGv9Tab+tWzFjxb1ICOF/xIMfF0pYReXwU3iUNdmCtrrbttyO7NIDjki
+ +0V96EMBh4xDRVOhLM8jKsr4vHyZyPOO5ScE49r1N6WTi8DOp9+eePjafZ0iaDBlZtJB
+ +FjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708494036; x=1709098836;
+ d=1e100.net; s=20230601; t=1708495274; x=1709100074;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=wCnpZCXGc66eTrbrYa+lxFBtj6akthQ0iV3B93GlxSY=;
- b=lXTZKN2XZMvODsuS61Ts8elACCiHBiHxIjtaobXZ58q1srXs6iv37WsON63Hc2zYWE
- 3dLPMvIvjOVnoF6kH73tVsVdBzBY09T2Y+bWf/b14xoJFcbbVjeg2Om2hW1nrR08cYDC
- lcXZ2c0S8YqhuLKjmk/yzTZI5TClFpVXZlW2ZK8hkfxL54lIsS2bRrrBiCt79CaZ45w+
- Z0O+qs5EUsO6VIglqg3p55XDFhUCMUW7UN2o8cGnJvvST/z3lmQa444ooui2KZfycq8E
- idi4t5y8TqIz2K9sO21LYobrOToFZ5S9ilXOVK0lD9yekDsI2fg3BbDJHkOiNoS0/D5j
- HGOg==
-X-Gm-Message-State: AOJu0YyDB79/Fdk2B08NoxAgoSvLvMOzFlBcgF/Bok3GC9XVvRD/TisD
- QoEvpDd4DQGtes9fFCasT7+j+PlreThuNPONqDXwN3RGlhgz4pwEOSuOfSGpfS4GA8CCBggyGuJ
- ZfJRE6mfj3IKsFVZ6H/EWgLjFw2PTULNn1Byglw==
-X-Google-Smtp-Source: AGHT+IGbaeYqLRYmw09jxclmFbHOXcXZo3sPa/QvbFS5jzkM09ZhmeE0it8ShK0zu6mmmjPpWIsmtN76VKESTJK0SmU=
-X-Received: by 2002:a67:c902:0:b0:46d:2b65:aa16 with SMTP id
- w2-20020a67c902000000b0046d2b65aa16mr11099120vsk.34.1708494036644; Tue, 20
- Feb 2024 21:40:36 -0800 (PST)
+ bh=4ADv0vG62IHDdB3wZoAodlVawcOMJHTiZA3a7Xvbrb0=;
+ b=H3LlJi/fl5rDNEADtbZRixjxuWqIm2YdCx0LSB15iMpb00A1F7uLrPHXsgVjAM4Ppx
+ dp+p7FllMkyqgViMxCssx8OsYH6MfZbu4rU7+RjPjLIibW4KOYugKelXt+nn3dSNykRS
+ PR4wLI+V4SdlcJRg6NdAtlctFKQ8fhhr+cWE5Z1488UD82e2V6hl9LUaP1uWBdOh4bUK
+ jkpkKTJHc/UKuG55S2o6yA8GixTJTQ9CcRjzTALN/VtowvnrTIJyv4Tfq8GGK+xb+0a8
+ 1AR1OsmzIaBfn1WuBt4HK9LqN7M1lWe1oj1eSomjUomUxIPsMNL4b5EuHVVQEqro5ojy
+ DDfw==
+X-Gm-Message-State: AOJu0Yw2Pq6mJusogd4KXktYPtdIi/q8vTv1GR5qEyNuuL0M99o8yCJf
+ gH2bSOrCn08Jx9BzYZgi61dWHPKtHEcZ8X3JpeocYdUzIxiaDn7Z7hsCKdSYMVWRSw4H7EyS0MS
+ vBC5FAYjb6iAX+0nhs9vzBfHOJ0Oj6Bgzec1q7w==
+X-Google-Smtp-Source: AGHT+IG29xMVYE/oFdzzNK8W4P2lKeArZhjhuJsJ0P/FtKi7LFST0ggtNqQ3kNzBve3Qbnx0vFi5U371/cZQgqiHPFM=
+X-Received: by 2002:a67:f414:0:b0:470:5b9b:8693 with SMTP id
+ p20-20020a67f414000000b004705b9b8693mr5685382vsn.6.1708495274255; Tue, 20 Feb
+ 2024 22:01:14 -0800 (PST)
 MIME-Version: 1.0
 References: <20240220131056.2962331-1-sumit.garg@linaro.org>
- <20240220131056.2962331-3-sumit.garg@linaro.org>
- <314b12f0-7b5d-44f4-bcf1-69a287a9005d@denx.de>
-In-Reply-To: <314b12f0-7b5d-44f4-bcf1-69a287a9005d@denx.de>
+ <20240220131056.2962331-4-sumit.garg@linaro.org>
+ <d3bd5acf-ad1e-4a99-b7fc-84fbddf33880@denx.de>
+In-Reply-To: <d3bd5acf-ad1e-4a99-b7fc-84fbddf33880@denx.de>
 From: Sumit Garg <sumit.garg@linaro.org>
-Date: Wed, 21 Feb 2024 11:10:25 +0530
-Message-ID: <CAFA6WYPwHdSZwcHQaszVG_0++DRU4ykmsLcxO3m4PJhyGRcy3A@mail.gmail.com>
-Subject: Re: [PATCH 2/7] reset: imx: Add support for i.MX8MP reset controller
+Date: Wed, 21 Feb 2024 11:31:03 +0530
+Message-ID: <CAFA6WYP8ks2hsjUSq51T1E7k7bkyDi+AvYeGJu=maNMJgqrQVA@mail.gmail.com>
+Subject: Re: [PATCH 3/7] imx8mp: power-domain: Add PCIe support
 To: Marek Vasut <marex@denx.de>
 Cc: u-boot@lists.denx.de, marcel.ziswiler@toradex.com, trini@konsulko.com, 
  lukma@denx.de, seanga2@gmail.com, jh80.chung@samsung.com, festevam@denx.de, 
@@ -97,51 +97,89 @@ On Tue, 20 Feb 2024 at 21:02, Marek Vasut <marex@denx.de> wrote:
 > On 2/20/24 14:10, Sumit Garg wrote:
 > > Pre-requisite to enable PCIe support on iMX8MP SoC.
 >
-> Please write a proper commit message .
+> This commit message is useless, write a proper one.
 >
 
 How about the following?
 
-    Add support for i.MX8MP reset controller. It is required
-    to enable PCIe support on the iMX8MP SoC.
+    Add support for GPCv2 power domains and clock handling
+    for PCIe and PCIe PHY. It is required to enable PCIe support
+    on the iMX8MP SoC.
 
 > > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 > > ---
-> >   drivers/reset/reset-imx7.c | 114 +++++++++++++++++++++++++++++++++++++
-> >   1 file changed, 114 insertions(+)
+> >   drivers/power/domain/imx8mp-hsiomix.c | 50 +++++++++++++++++++++++++--
+> >   1 file changed, 48 insertions(+), 2 deletions(-)
 > >
-> > diff --git a/drivers/reset/reset-imx7.c b/drivers/reset/reset-imx7.c
-> > index eaef2cc2cdf..c1de84dea8b 100644
-> > --- a/drivers/reset/reset-imx7.c
-> > +++ b/drivers/reset/reset-imx7.c
-> > @@ -10,6 +10,7 @@
-> >   #include <dm.h>
-> >   #include <dt-bindings/reset/imx7-reset.h>
-> >   #include <dt-bindings/reset/imx8mq-reset.h>
-> > +#include <dt-bindings/reset/imx8mp-reset.h>
-> >   #include <reset-uclass.h>
-> >   #include <linux/bitops.h>
-> >   #include <linux/delay.h>
-> > @@ -252,6 +253,115 @@ static int imx7_reset_assert_imx8mq(struct reset_ctl *rst)
-> >       return 0;
-> >   }
+> > diff --git a/drivers/power/domain/imx8mp-hsiomix.c b/drivers/power/domain/imx8mp-hsiomix.c
+> > index e2d772c5ec7..62145e0261b 100644
+> > --- a/drivers/power/domain/imx8mp-hsiomix.c
+> > +++ b/drivers/power/domain/imx8mp-hsiomix.c
+> > @@ -16,14 +16,19 @@
+> >   #define GPR_REG0            0x0
+> >   #define  PCIE_CLOCK_MODULE_EN       BIT(0)
+> >   #define  USB_CLOCK_MODULE_EN        BIT(1)
+> > +#define  PCIE_PHY_APB_RST    BIT(4)
+> > +#define  PCIE_PHY_INIT_RST   BIT(5)
 > >
-> > +enum imx8mp_src_registers {
-> > +     SRC_SUPERMIX_RCR        = 0x0018,
-> > +     SRC_AUDIOMIX_RCR        = 0x001c,
-> > +     SRC_MLMIX_RCR           = 0x0028,
-> > +     SRC_GPU2D_RCR           = 0x0038,
-> > +     SRC_GPU3D_RCR           = 0x003c,
-> > +     SRC_VPU_G1_RCR          = 0x0048,
-> > +     SRC_VPU_G2_RCR          = 0x004c,
-> > +     SRC_VPUVC8KE_RCR        = 0x0050,
-> > +     SRC_NOC_RCR             = 0x0054,
-> > +};
+> >   struct imx8mp_hsiomix_priv {
+> >       void __iomem *base;
+> >       struct clk clk_usb;
+> > +     struct clk clk_pcie;
+> >       struct power_domain pd_bus;
+> >       struct power_domain pd_usb;
+> > +     struct power_domain pd_pcie;
+> >       struct power_domain pd_usb_phy1;
+> >       struct power_domain pd_usb_phy2;
+> > +     struct power_domain pd_pcie_phy;
+> >   };
+> >
+> >   static int imx8mp_hsiomix_on(struct power_domain *power_domain)
+> > @@ -43,6 +48,10 @@ static int imx8mp_hsiomix_on(struct power_domain *power_domain)
+> >               domain = &priv->pd_usb_phy1;
+> >       } else if (power_domain->id == IMX8MP_HSIOBLK_PD_USB_PHY2) {
+> >               domain = &priv->pd_usb_phy2;
+> > +     } else if (power_domain->id == IMX8MP_HSIOBLK_PD_PCIE) {
+> > +             domain = &priv->pd_pcie;
+> > +     } else if (power_domain->id == IMX8MP_HSIOBLK_PD_PCIE_PHY) {
+> > +             domain = &priv->pd_pcie_phy;
+> >       } else {
+> >               ret = -EINVAL;
+> >               goto err_pd;
+> > @@ -54,14 +63,25 @@ static int imx8mp_hsiomix_on(struct power_domain *power_domain)
+> >
+> >       ret = clk_enable(&priv->clk_usb);
+> >       if (ret)
+> > -             goto err_clk;
+> > +             goto err_clk_usb;
+> > +
+> > +     ret = clk_enable(&priv->clk_pcie);
+> > +     if (ret)
+> > +             goto err_clk_pcie;
 >
-> This seems copied from Linux, include Linux commit ID as of which this
-> was imported from in commit message.
+> Does this mean that when USB power domains get enabled, PCIe clock are
+> also enabled ? Why ?
+>
+> What if the PCIe clock enable fails, do USB clock remain enabled ?
 
-Do you expect imx8mp_src_registers to change? I expect them to be the
-same, so does Linux commit ID add any value here?
+Let me gate them behind corresponding power domain IDs.
+
+>
+> >       if (power_domain->id == IMX8MP_HSIOBLK_PD_USB)
+> >               setbits_le32(priv->base + GPR_REG0, USB_CLOCK_MODULE_EN);
+> > +     else if (power_domain->id == IMX8MP_HSIOBLK_PD_PCIE)
+> > +             setbits_le32(priv->base + GPR_REG0, PCIE_CLOCK_MODULE_EN);
+> > +     else if (power_domain->id == IMX8MP_HSIOBLK_PD_PCIE_PHY)
+> > +             setbits_le32(priv->base + GPR_REG0, PCIE_PHY_APB_RST |
+> > +                                                 PCIE_PHY_INIT_RST);
+>
+> Shouldn't the reset bits be cleared here ?
+>
+
+Although I can't find their reference in the TRM, as per Linux commit
+[1], setting the reset bit is actually deassertion of PCIe PHY reset.
+You can think of it like an active low signal.
+
+[1] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=5506018d3dec41e6678efb92b836586e9ee1d628
 
 -Sumit
