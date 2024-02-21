@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C074C5478A
-	for <u-boot@archiver.kernel.org>; Wed, 21 Feb 2024 17:10:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A47CC5478B
+	for <u-boot@archiver.kernel.org>; Wed, 21 Feb 2024 17:11:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A5A28806F;
-	Wed, 21 Feb 2024 18:08:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F096B8804B;
+	Wed, 21 Feb 2024 18:08:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C5C9E8806F; Wed, 21 Feb 2024 18:08:27 +0100 (CET)
-Received: from smtp-42ab.mail.infomaniak.ch (smtp-42ab.mail.infomaniak.ch
- [IPv6:2001:1600:7:10::42ab])
+ id 2550E8804B; Wed, 21 Feb 2024 18:08:32 +0100 (CET)
+Received: from smtp-42af.mail.infomaniak.ch (smtp-42af.mail.infomaniak.ch
+ [84.16.66.175])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6266088055
- for <u-boot@lists.denx.de>; Wed, 21 Feb 2024 18:08:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0928D8805A
+ for <u-boot@lists.denx.de>; Wed, 21 Feb 2024 18:08:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
  [10.7.10.108])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Tg2lx6ZyLzL75;
- Wed, 21 Feb 2024 18:08:13 +0100 (CET)
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Tg2ly4rkkzMpm;
+ Wed, 21 Feb 2024 18:08:14 +0100 (CET)
 Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4Tg2lx1TlmzYff; Wed, 21 Feb 2024 18:08:13 +0100 (CET)
+ id 4Tg2lx6f6nzXbd; Wed, 21 Feb 2024 18:08:13 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Wed, 21 Feb 2024 18:07:36 +0100
-Subject: [PATCH 07/16] rockchip: adc: rockchip-saradc: use union for
- preparing for v2
+Date: Wed, 21 Feb 2024 18:07:37 +0100
+Subject: [PATCH 08/16] rockchip: adc: rockchip-saradc: factor out
+ channel_data callback
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240221-rk3588-saradc-v1-7-c39a5601d1cc@theobroma-systems.com>
+Message-Id: <20240221-rk3588-saradc-v1-8-c39a5601d1cc@theobroma-systems.com>
 References: <20240221-rk3588-saradc-v1-0-c39a5601d1cc@theobroma-systems.com>
 In-Reply-To: <20240221-rk3588-saradc-v1-0-c39a5601d1cc@theobroma-systems.com>
 To: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>, 
@@ -46,7 +46,8 @@ To: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
  Klaus Goger <klaus.goger@theobroma-systems.com>, 
  Heiko Stuebner <heiko.stuebner@cherry.de>
 Cc: u-boot@lists.denx.de, 
- Quentin Schulz <quentin.schulz@theobroma-systems.com>
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>, 
+ Quentin Schulz <foss+uboot@0leil.net>
 X-Mailer: b4 0.13.0
 X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
@@ -67,101 +68,104 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 
-The registers are entirely different between SARADC v1 and SARADC v2, so
-let's prepare to add another struct for accessing v2 registers by adding
-a union.
+SARADC v1 and v2 have a different way of reading data, therefore let's
+abstract this function so that it can be provided from the udevice.data
+pointer.
 
-Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+Cc: Quentin Schulz <foss+uboot@0leil.net>
 Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 ---
- drivers/adc/rockchip-saradc.c | 23 +++++++++++++----------
- 1 file changed, 13 insertions(+), 10 deletions(-)
+ drivers/adc/rockchip-saradc.c | 37 +++++++++++++++++++++++++++++--------
+ 1 file changed, 29 insertions(+), 8 deletions(-)
 
 diff --git a/drivers/adc/rockchip-saradc.c b/drivers/adc/rockchip-saradc.c
-index 03caca78b5f..4a842556a60 100644
+index 4a842556a60..1cc57beecc2 100644
 --- a/drivers/adc/rockchip-saradc.c
 +++ b/drivers/adc/rockchip-saradc.c
-@@ -23,13 +23,16 @@
- 
- #define SARADC_TIMEOUT			(100 * 1000)
- 
--struct rockchip_saradc_regs {
-+struct rockchip_saradc_regs_v1 {
- 	unsigned int data;
- 	unsigned int stas;
- 	unsigned int ctrl;
- 	unsigned int dly_pu_soc;
- };
- 
-+union rockchip_saradc_regs {
-+	struct rockchip_saradc_regs_v1	*v1;
-+};
- struct rockchip_saradc_data {
+@@ -37,6 +37,7 @@ struct rockchip_saradc_data {
  	int				num_bits;
  	int				num_channels;
-@@ -37,7 +40,7 @@ struct rockchip_saradc_data {
+ 	unsigned long			clk_rate;
++	int (*channel_data)(struct udevice *dev, int channel, unsigned int *data);
  };
  
  struct rockchip_saradc_priv {
--	struct rockchip_saradc_regs		*regs;
-+	union rockchip_saradc_regs		regs;
- 	int					active_channel;
+@@ -45,28 +46,45 @@ struct rockchip_saradc_priv {
  	const struct rockchip_saradc_data	*data;
  };
-@@ -53,16 +56,16 @@ int rockchip_saradc_channel_data(struct udevice *dev, int channel,
+ 
++int rockchip_saradc_channel_data_v1(struct udevice *dev, int channel,
++				    unsigned int *data)
++{
++	struct rockchip_saradc_priv *priv = dev_get_priv(dev);
++
++	if ((readl(&priv->regs.v1->ctrl) & SARADC_CTRL_IRQ_STATUS) !=
++	    SARADC_CTRL_IRQ_STATUS)
++		return -EBUSY;
++
++	/* Read value */
++	*data = readl(&priv->regs.v1->data);
++
++	/* Power down adc */
++	writel(0, &priv->regs.v1->ctrl);
++
++	return 0;
++}
++
+ int rockchip_saradc_channel_data(struct udevice *dev, int channel,
+ 				 unsigned int *data)
+ {
+ 	struct rockchip_saradc_priv *priv = dev_get_priv(dev);
+ 	struct adc_uclass_plat *uc_pdata = dev_get_uclass_plat(dev);
++	int ret;
+ 
+ 	if (channel != priv->active_channel) {
+ 		pr_err("Requested channel is not active!");
  		return -EINVAL;
  	}
  
--	if ((readl(&priv->regs->ctrl) & SARADC_CTRL_IRQ_STATUS) !=
-+	if ((readl(&priv->regs.v1->ctrl) & SARADC_CTRL_IRQ_STATUS) !=
- 	    SARADC_CTRL_IRQ_STATUS)
- 		return -EBUSY;
+-	if ((readl(&priv->regs.v1->ctrl) & SARADC_CTRL_IRQ_STATUS) !=
+-	    SARADC_CTRL_IRQ_STATUS)
+-		return -EBUSY;
++	ret = priv->data->channel_data(dev, channel, data);
++	if (ret) {
++		if (ret != -EBUSY)
++			pr_err("Error reading channel data, %d!", ret);
++		return ret;
++	}
  
- 	/* Read value */
--	*data = readl(&priv->regs->data);
-+	*data = readl(&priv->regs.v1->data);
+-	/* Read value */
+-	*data = readl(&priv->regs.v1->data);
  	*data &= uc_pdata->data_mask;
  
- 	/* Power down adc */
--	writel(0, &priv->regs->ctrl);
-+	writel(0, &priv->regs.v1->ctrl);
- 
+-	/* Power down adc */
+-	writel(0, &priv->regs.v1->ctrl);
+-
  	return 0;
  }
-@@ -77,11 +80,11 @@ int rockchip_saradc_start_channel(struct udevice *dev, int channel)
- 	}
  
- 	/* 8 clock periods as delay between power up and start cmd */
--	writel(8, &priv->regs->dly_pu_soc);
-+	writel(8, &priv->regs.v1->dly_pu_soc);
+@@ -174,18 +192,21 @@ static const struct rockchip_saradc_data saradc_data = {
+ 	.num_bits = 10,
+ 	.num_channels = 3,
+ 	.clk_rate = 1000000,
++	.channel_data = rockchip_saradc_channel_data_v1,
+ };
  
- 	/* Select the channel to be used and trigger conversion */
- 	writel(SARADC_CTRL_POWER_CTRL | (channel & SARADC_CTRL_CHN_MASK) |
--	       SARADC_CTRL_IRQ_ENABLE, &priv->regs->ctrl);
-+	       SARADC_CTRL_IRQ_ENABLE, &priv->regs.v1->ctrl);
+ static const struct rockchip_saradc_data rk3066_tsadc_data = {
+ 	.num_bits = 12,
+ 	.num_channels = 2,
+ 	.clk_rate = 50000,
++	.channel_data = rockchip_saradc_channel_data_v1,
+ };
  
- 	priv->active_channel = channel;
+ static const struct rockchip_saradc_data rk3399_saradc_data = {
+ 	.num_bits = 10,
+ 	.num_channels = 6,
+ 	.clk_rate = 1000000,
++	.channel_data = rockchip_saradc_channel_data_v1,
+ };
  
-@@ -93,7 +96,7 @@ int rockchip_saradc_stop(struct udevice *dev)
- 	struct rockchip_saradc_priv *priv = dev_get_priv(dev);
- 
- 	/* Power down adc */
--	writel(0, &priv->regs->ctrl);
-+	writel(0, &priv->regs.v1->ctrl);
- 
- 	priv->active_channel = -1;
- 
-@@ -146,8 +149,8 @@ int rockchip_saradc_of_to_plat(struct udevice *dev)
- 	struct rockchip_saradc_data *data;
- 
- 	data = (struct rockchip_saradc_data *)dev_get_driver_data(dev);
--	priv->regs = dev_read_addr_ptr(dev);
--	if (!priv->regs) {
-+	priv->regs.v1 = dev_read_addr_ptr(dev);
-+	if (!priv->regs.v1) {
- 		pr_err("Dev: %s - can't get address!", dev->name);
- 		return -EINVAL;
- 	}
+ static const struct udevice_id rockchip_saradc_ids[] = {
 
 -- 
 2.43.2
