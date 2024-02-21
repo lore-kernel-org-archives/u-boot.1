@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DB92C48BF6
-	for <u-boot@archiver.kernel.org>; Wed, 21 Feb 2024 05:26:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A9BCC48BC3
+	for <u-boot@archiver.kernel.org>; Wed, 21 Feb 2024 05:41:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B782B87DA7;
-	Wed, 21 Feb 2024 06:26:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4E05E87DDD;
+	Wed, 21 Feb 2024 06:40:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pSfjC7y2";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="X3FnscPv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6791A87D7E; Wed, 21 Feb 2024 06:26:13 +0100 (CET)
-Received: from mail-vs1-xe31.google.com (mail-vs1-xe31.google.com
- [IPv6:2607:f8b0:4864:20::e31])
+ id 3605987DDD; Wed, 21 Feb 2024 06:40:52 +0100 (CET)
+Received: from mail-ua1-x92a.google.com (mail-ua1-x92a.google.com
+ [IPv6:2607:f8b0:4864:20::92a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D351187DA7
- for <u-boot@lists.denx.de>; Wed, 21 Feb 2024 06:26:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5904C87DD4
+ for <u-boot@lists.denx.de>; Wed, 21 Feb 2024 06:40:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vs1-xe31.google.com with SMTP id
- ada2fe7eead31-47079f43a37so246766137.1
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 21:26:00 -0800 (PST)
+Received: by mail-ua1-x92a.google.com with SMTP id
+ a1e0cc1a2514c-7d2e1832d4dso2540054241.2
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 21:40:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708493159; x=1709097959; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1708494036; x=1709098836; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=CUtobcJh/Du6WHxiL4mG738lH+FZ3WEbv0t2844PYtI=;
- b=pSfjC7y2rL1bhT+H0HnEOO4gqnTdoAPKd1rd4/TVVLawcEFgbuFVbCClDuYDrlnqD9
- PdbFZYa2wwO1IflmXnUhvUVzaPgBXoG/5pIlb8aNPBPk9v6cdaYbXqyyIo49KuZXpp2V
- 5X1acithOCCi+/3xQ1xnW4IlBhCW9XZC4UVL74ktpJX6L1JSzndntwRdi2RV4y4yDLC8
- qRUMX4Jf00OdSxbZBEcFsYAKRq/KQLVvS9nnis9eLNo4/fVkmrMaJKf8GAVFw2uY3la1
- SKbddaEjLmC6TC4FXxmMMTgZ78kELukhfeGLBwZSYHPVLSnP4LMJrMEU+2Y2xtdzfhO+
- LQhA==
+ bh=wCnpZCXGc66eTrbrYa+lxFBtj6akthQ0iV3B93GlxSY=;
+ b=X3FnscPv2OhT2ahkIOQa+ihv/g4za040kuAaTYvVxGzyRJiXce3tDXp4xloUGqJGOH
+ 7Sm6nHRghQsTeZm2aU+bfDer7m5td3mWUKqZDmPewRNCBVfPRq2CgV/h0Fvg7tdU0E8s
+ sTKKqKQ7fczk2XxI5u+EOEqlMLL9oC9yq/ENvYAFmFQxvAnTAGXrIcy5udX3BS0uDvGJ
+ MYXU9VSy16wTv5PydF/knfbIuKfC927MD8cOj3g7yHSOOCroUaE3ZaA7E3CB7+g0HoN9
+ 7bsAERtv1g2QgP9Jgv8ptv00DrMIEr3n3qQiRxK95OP5VPYDfjnx4Znhi+e0CkLeAcpy
+ LF6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708493159; x=1709097959;
+ d=1e100.net; s=20230601; t=1708494036; x=1709098836;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=CUtobcJh/Du6WHxiL4mG738lH+FZ3WEbv0t2844PYtI=;
- b=RHQKXB5W3sODHntWQZ0oFNkHqqghiC/aMQ3QpGW8j60A+TS7QWMSvFObNwVPoUBGS+
- CYwL8rwdkSWAcyq7gsyD0xeTPd7+w0n57BQY8mes25tvn/NNkAhq78RVhr3zwhjp0Z29
- Vc7fHLM5yHYb0JG+wkK+icmD6dz/n8WFjq2nnsGVMRioH7PSW85eoI3Foj8EihMLgSQL
- 7yJWfCbgrcQXEA75EOif8UrLa8dGpJFhz68UXoto41GFuXCdUpAkQHpFySXekPGDtmms
- QoZFp0njBbfygdgAUOUw6y/VquOzNDRPIOsLX9DZT0HZcpIsOR9lUIEiV0PKTi2jU3qS
- 8cqg==
-X-Gm-Message-State: AOJu0YwcPunITkefPIj0Fw7seLzgwfVlJapcMDynoQ6mFNAh19vMZlwW
- GMlx9DjBJSBAYDKbABVK5qxRG/jKW6q47sx6lYuApKl7QQJPrgqm53f50AVrk3YuWWPCDhzMpUO
- Zr9JDalSMy1MDOontu1THJu359aTJr+weMuFumg==
-X-Google-Smtp-Source: AGHT+IH2b+KDPaMIM4yqg5ow84MJN2VSl+1bORwq7WGxk5s7thFZa+A+M3N03dTL4zEcM6oxVRB8Z6KpZVhei/39HvI=
-X-Received: by 2002:a67:cd92:0:b0:470:5546:3d0c with SMTP id
- r18-20020a67cd92000000b0047055463d0cmr7036889vsl.7.1708493159293; Tue, 20 Feb
- 2024 21:25:59 -0800 (PST)
+ bh=wCnpZCXGc66eTrbrYa+lxFBtj6akthQ0iV3B93GlxSY=;
+ b=lXTZKN2XZMvODsuS61Ts8elACCiHBiHxIjtaobXZ58q1srXs6iv37WsON63Hc2zYWE
+ 3dLPMvIvjOVnoF6kH73tVsVdBzBY09T2Y+bWf/b14xoJFcbbVjeg2Om2hW1nrR08cYDC
+ lcXZ2c0S8YqhuLKjmk/yzTZI5TClFpVXZlW2ZK8hkfxL54lIsS2bRrrBiCt79CaZ45w+
+ Z0O+qs5EUsO6VIglqg3p55XDFhUCMUW7UN2o8cGnJvvST/z3lmQa444ooui2KZfycq8E
+ idi4t5y8TqIz2K9sO21LYobrOToFZ5S9ilXOVK0lD9yekDsI2fg3BbDJHkOiNoS0/D5j
+ HGOg==
+X-Gm-Message-State: AOJu0YyDB79/Fdk2B08NoxAgoSvLvMOzFlBcgF/Bok3GC9XVvRD/TisD
+ QoEvpDd4DQGtes9fFCasT7+j+PlreThuNPONqDXwN3RGlhgz4pwEOSuOfSGpfS4GA8CCBggyGuJ
+ ZfJRE6mfj3IKsFVZ6H/EWgLjFw2PTULNn1Byglw==
+X-Google-Smtp-Source: AGHT+IGbaeYqLRYmw09jxclmFbHOXcXZo3sPa/QvbFS5jzkM09ZhmeE0it8ShK0zu6mmmjPpWIsmtN76VKESTJK0SmU=
+X-Received: by 2002:a67:c902:0:b0:46d:2b65:aa16 with SMTP id
+ w2-20020a67c902000000b0046d2b65aa16mr11099120vsk.34.1708494036644; Tue, 20
+ Feb 2024 21:40:36 -0800 (PST)
 MIME-Version: 1.0
 References: <20240220131056.2962331-1-sumit.garg@linaro.org>
- <6111dab9-62e2-4ef6-9007-448bf0f4fc0b@denx.de>
-In-Reply-To: <6111dab9-62e2-4ef6-9007-448bf0f4fc0b@denx.de>
+ <20240220131056.2962331-3-sumit.garg@linaro.org>
+ <314b12f0-7b5d-44f4-bcf1-69a287a9005d@denx.de>
+In-Reply-To: <314b12f0-7b5d-44f4-bcf1-69a287a9005d@denx.de>
 From: Sumit Garg <sumit.garg@linaro.org>
-Date: Wed, 21 Feb 2024 10:55:48 +0530
-Message-ID: <CAFA6WYO3hyZkqvoTBsVTbROH1-csWQ1q3Wmd2LYcjD2iPAsTYQ@mail.gmail.com>
-Subject: Re: [PATCH 0/7] imx8mp: Enable PCIe/NVMe support
+Date: Wed, 21 Feb 2024 11:10:25 +0530
+Message-ID: <CAFA6WYPwHdSZwcHQaszVG_0++DRU4ykmsLcxO3m4PJhyGRcy3A@mail.gmail.com>
+Subject: Re: [PATCH 2/7] reset: imx: Add support for i.MX8MP reset controller
 To: Marek Vasut <marex@denx.de>
 Cc: u-boot@lists.denx.de, marcel.ziswiler@toradex.com, trini@konsulko.com, 
  lukma@denx.de, seanga2@gmail.com, jh80.chung@samsung.com, festevam@denx.de, 
@@ -94,59 +95,53 @@ X-Virus-Status: Clean
 On Tue, 20 Feb 2024 at 21:02, Marek Vasut <marex@denx.de> wrote:
 >
 > On 2/20/24 14:10, Sumit Garg wrote:
-> > pcie_imx doesn't seem to share any useful code for iMX8MP SoC and it is
-> > rather tied to quite old port of pcie_designware driver from Linux which
-> > suffices only iMX6 specific needs.
-> >
-> > But currently we have the common DWC specific bits which alligns pretty
-> > well with DW PCIe controller on iMX8MP SoC. So lets reuse those common
-> > bits instead as a new driver for iMX8 SoCs. It should be fairly easy to
-> > add support for other iMX8 variants to this driver.
-> >
-> > iMX8MP SoC also comes up with standalone PCIe PHY support, so hence we
-> > can reuse the generic PHY infrastructure to power on PCIe PHY.
-> >
-> > Patch #1: Adds PCIe clocks support.
-> > Patch #2: Adds i.MX8MP reset controller support.
-> > Patch #3: Extend i.MX8MP power domain driver with PCIe support
-> > Patch #4: Expose high performance PLL clock required for PCIe PHY
-> >            on verdin board.
-> > Patch #5: Adds standalone PCIe PHY support for i.MX8MP SoC.
-> > Patch #6: Adds DW PCIe controller support for iMX8MP SoC.
-> > Patch #7: Enable PCIe/NVMe support for verdin board.
-> >
-> > Testing with this patch-set included:
-> >
-> > Verdin iMX8MP # pci enum
-> > PCIE-0: Link up (Gen1-x1, Bus0)
-> > Verdin iMX8MP #
-> > Verdin iMX8MP # nvme scan
-> > Verdin iMX8MP #
-> > Verdin iMX8MP # nvme info
-> > Device 0: Vendor: 0x126f Rev: T0828A0  Prod: AA000000000000000720
-> >              Type: Hard Disk
-> >              Capacity: 122104.3 MB = 119.2 GB (250069680 x 512)
-> > Verdin iMX8MP #
-> > Verdin iMX8MP # load nvme 0 $loadaddr <file-name>
-> >
-> > Sumit Garg (7):
-> >    clk: imx8mp: Add support for PCIe clocks
-> >    reset: imx: Add support for i.MX8MP reset controller
-> >    imx8mp: power-domain: Add PCIe support
-> >    imx8mp: power-domain: Expose high performance PLL clock
-> >    phy: phy-imx8m-pcie: Add support for i.MX8M{M/P} PCIe PHY
-> >    pci: Add DW PCIe controller support for iMX8MP SoC
-> >    verdin-imx8mp_defconfig: Enable PCIe/NVMe support
-> >
-> >   configs/verdin-imx8mp_defconfig       |   9 +
-> >   drivers/clk/imx/clk-imx8mp.c          |   6 +
-> >   drivers/pci/Kconfig                   |   8 +
-> >   drivers/pci/Makefile                  |   1 +
-> >   drivers/pci/pcie_dw_imx8.c            | 348 ++++++++++++++++++++++++++
+> > Pre-requisite to enable PCIe support on iMX8MP SoC.
 >
-> You can call this pcie_dw_imx.c , the imx6 support can be converted over
-> to that driver too I guess ?
+> Please write a proper commit message .
+>
 
-Yeah I suppose that should be possible, let me rename it as pcie_dw_imx.c.
+How about the following?
+
+    Add support for i.MX8MP reset controller. It is required
+    to enable PCIe support on the iMX8MP SoC.
+
+> > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+> > ---
+> >   drivers/reset/reset-imx7.c | 114 +++++++++++++++++++++++++++++++++++++
+> >   1 file changed, 114 insertions(+)
+> >
+> > diff --git a/drivers/reset/reset-imx7.c b/drivers/reset/reset-imx7.c
+> > index eaef2cc2cdf..c1de84dea8b 100644
+> > --- a/drivers/reset/reset-imx7.c
+> > +++ b/drivers/reset/reset-imx7.c
+> > @@ -10,6 +10,7 @@
+> >   #include <dm.h>
+> >   #include <dt-bindings/reset/imx7-reset.h>
+> >   #include <dt-bindings/reset/imx8mq-reset.h>
+> > +#include <dt-bindings/reset/imx8mp-reset.h>
+> >   #include <reset-uclass.h>
+> >   #include <linux/bitops.h>
+> >   #include <linux/delay.h>
+> > @@ -252,6 +253,115 @@ static int imx7_reset_assert_imx8mq(struct reset_ctl *rst)
+> >       return 0;
+> >   }
+> >
+> > +enum imx8mp_src_registers {
+> > +     SRC_SUPERMIX_RCR        = 0x0018,
+> > +     SRC_AUDIOMIX_RCR        = 0x001c,
+> > +     SRC_MLMIX_RCR           = 0x0028,
+> > +     SRC_GPU2D_RCR           = 0x0038,
+> > +     SRC_GPU3D_RCR           = 0x003c,
+> > +     SRC_VPU_G1_RCR          = 0x0048,
+> > +     SRC_VPU_G2_RCR          = 0x004c,
+> > +     SRC_VPUVC8KE_RCR        = 0x0050,
+> > +     SRC_NOC_RCR             = 0x0054,
+> > +};
+>
+> This seems copied from Linux, include Linux commit ID as of which this
+> was imported from in commit message.
+
+Do you expect imx8mp_src_registers to change? I expect them to be the
+same, so does Linux commit ID add any value here?
 
 -Sumit
