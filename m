@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81933C5478A
-	for <u-boot@archiver.kernel.org>; Wed, 21 Feb 2024 17:08:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76B2FC5478A
+	for <u-boot@archiver.kernel.org>; Wed, 21 Feb 2024 17:09:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3776388070;
+	by phobos.denx.de (Postfix) with ESMTP id D157B88077;
 	Wed, 21 Feb 2024 18:08:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3801888021; Wed, 21 Feb 2024 18:08:14 +0100 (CET)
-Received: from smtp-8fab.mail.infomaniak.ch (smtp-8fab.mail.infomaniak.ch
- [83.166.143.171])
+ id 44BAE88054; Wed, 21 Feb 2024 18:08:17 +0100 (CET)
+Received: from smtp-8faa.mail.infomaniak.ch (smtp-8faa.mail.infomaniak.ch
+ [83.166.143.170])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 621FE88022
- for <u-boot@lists.denx.de>; Wed, 21 Feb 2024 18:08:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EF4998803E
+ for <u-boot@lists.denx.de>; Wed, 21 Feb 2024 18:08:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
- [10.7.10.108])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Tg2ls75WKzHJK;
- Wed, 21 Feb 2024 18:08:09 +0100 (CET)
+Received: from smtp-4-0001.mail.infomaniak.ch (unknown [10.7.10.108])
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Tg2lv4Z4NzMpx94;
+ Wed, 21 Feb 2024 18:08:11 +0100 (CET)
 Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4Tg2ls1vnnzWsc; Wed, 21 Feb 2024 18:08:09 +0100 (CET)
+ id 4Tg2lt5z4kzYDn; Wed, 21 Feb 2024 18:08:10 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Wed, 21 Feb 2024 18:07:31 +0100
-Subject: [PATCH 02/16] regulator: rk8xx: remove unused functions
+Date: Wed, 21 Feb 2024 18:07:33 +0100
+Subject: [PATCH 04/16] regulator: rk8xx: add indirection level for some ldo
+ callbacks
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240221-rk3588-saradc-v1-2-c39a5601d1cc@theobroma-systems.com>
+Message-Id: <20240221-rk3588-saradc-v1-4-c39a5601d1cc@theobroma-systems.com>
 References: <20240221-rk3588-saradc-v1-0-c39a5601d1cc@theobroma-systems.com>
 In-Reply-To: <20240221-rk3588-saradc-v1-0-c39a5601d1cc@theobroma-systems.com>
 To: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>, 
@@ -67,75 +67,122 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 
-Those two functions had their last user removed in commit f9c68a566c4d
-("rockchip: phycore_rk3288: remove phycore_init() function") part of
-v2023.01 release, so let's do some cleanup here.
+By passing a rk8xx_reg_info directly to the internal get_value, it'd be
+possible to call this same function with a logic for getting the
+rk8xx_reg_info different from the current get_ldo_reg, e.g. for NLDO and
+PLDO support for RK806.
+
+No logic change is expected.
 
 Cc: Quentin Schulz <foss+uboot@0leil.net>
 Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 ---
- drivers/power/regulator/rk8xx.c | 31 -------------------------------
- include/power/rk8xx_pmic.h      |  2 --
- 2 files changed, 33 deletions(-)
+ drivers/power/regulator/rk8xx.c | 48 ++++++++++++++++++++++++++++++-----------
+ 1 file changed, 36 insertions(+), 12 deletions(-)
 
 diff --git a/drivers/power/regulator/rk8xx.c b/drivers/power/regulator/rk8xx.c
-index e80bd6c3723..97d73ac95e0 100644
+index e905df3a800..212bb752a76 100644
 --- a/drivers/power/regulator/rk8xx.c
 +++ b/drivers/power/regulator/rk8xx.c
-@@ -210,14 +210,6 @@ static const struct rk8xx_reg_info rk818_ldo[] = {
- };
- #endif
- 
--static const u16 rk818_chrg_cur_input_array[] = {
--	450, 800, 850, 1000, 1250, 1500, 1750, 2000, 2250, 2500, 2750, 3000
--};
--
--static const uint rk818_chrg_shutdown_vsel_array[] = {
--	2780000, 2850000, 2920000, 2990000, 3060000, 3130000, 3190000, 3260000
--};
--
- static const struct rk8xx_reg_info *get_buck_reg(struct udevice *pmic,
- 						 int num, int uvolt)
- {
-@@ -1160,26 +1152,3 @@ int rk8xx_spl_configure_buck(struct udevice *pmic, int buck, int uvolt)
- 
- 	return _buck_set_enable(pmic, buck, true);
+@@ -780,10 +780,8 @@ static int buck_get_enable(struct udevice *dev)
+ 	return _buck_get_enable(dev->parent, buck);
  }
--
--int rk818_spl_configure_usb_input_current(struct udevice *pmic, int current_ma)
--{
--	uint i;
--
--	for (i = 0; i < ARRAY_SIZE(rk818_chrg_cur_input_array); i++)
--		if (current_ma <= rk818_chrg_cur_input_array[i])
--			break;
--
--	return pmic_clrsetbits(pmic, REG_USB_CTRL, RK818_USB_ILIM_SEL_MASK, i);
--}
--
--int rk818_spl_configure_usb_chrg_shutdown(struct udevice *pmic, int uvolt)
--{
--	uint i;
--
--	for (i = 0; i < ARRAY_SIZE(rk818_chrg_shutdown_vsel_array); i++)
--		if (uvolt <= rk818_chrg_shutdown_vsel_array[i])
--			break;
--
--	return pmic_clrsetbits(pmic, REG_USB_CTRL, RK818_USB_CHG_SD_VSEL_MASK,
--			       i);
--}
-diff --git a/include/power/rk8xx_pmic.h b/include/power/rk8xx_pmic.h
-index 3cbfc021956..0db82419d4f 100644
---- a/include/power/rk8xx_pmic.h
-+++ b/include/power/rk8xx_pmic.h
-@@ -233,7 +233,5 @@ struct rk8xx_priv {
- };
  
- int rk8xx_spl_configure_buck(struct udevice *pmic, int buck, int uvolt);
--int rk818_spl_configure_usb_input_current(struct udevice *pmic, int current_ma);
--int rk818_spl_configure_usb_chrg_shutdown(struct udevice *pmic, int uvolt);
+-static int ldo_get_value(struct udevice *dev)
++static int _ldo_get_value(struct udevice *dev, const struct rk8xx_reg_info *info)
+ {
+-	int ldo = dev->driver_data - 1;
+-	const struct rk8xx_reg_info *info = get_ldo_reg(dev->parent, ldo, 0);
+ 	int mask = info->vsel_mask;
+ 	int ret, val;
  
- #endif
+@@ -797,10 +795,16 @@ static int ldo_get_value(struct udevice *dev)
+ 	return info->min_uv + val * info->step_uv;
+ }
+ 
+-static int ldo_set_value(struct udevice *dev, int uvolt)
++static int ldo_get_value(struct udevice *dev)
+ {
+ 	int ldo = dev->driver_data - 1;
+-	const struct rk8xx_reg_info *info = get_ldo_reg(dev->parent, ldo, uvolt);
++	const struct rk8xx_reg_info *info = get_ldo_reg(dev->parent, ldo, 0);
++
++	return _ldo_get_value(dev, info);
++}
++
++static int _ldo_set_value(struct udevice *dev, const struct rk8xx_reg_info *info, int uvolt)
++{
+ 	int mask = info->vsel_mask;
+ 	int val;
+ 
+@@ -812,16 +816,22 @@ static int ldo_set_value(struct udevice *dev, int uvolt)
+ 	else
+ 		val = ((uvolt - info->min_uv) / info->step_uv) + info->min_sel;
+ 
+-	debug("%s: volt=%d, ldo=%d, reg=0x%x, mask=0x%x, val=0x%x\n",
+-	      __func__, uvolt, ldo + 1, info->vsel_reg, mask, val);
++	debug("%s: volt=%d, reg=0x%x, mask=0x%x, val=0x%x\n",
++	      __func__, uvolt, info->vsel_reg, mask, val);
+ 
+ 	return pmic_clrsetbits(dev->parent, info->vsel_reg, mask, val);
+ }
+ 
+-static int ldo_set_suspend_value(struct udevice *dev, int uvolt)
++static int ldo_set_value(struct udevice *dev, int uvolt)
+ {
+ 	int ldo = dev->driver_data - 1;
+ 	const struct rk8xx_reg_info *info = get_ldo_reg(dev->parent, ldo, uvolt);
++
++	return _ldo_set_value(dev, info, uvolt);
++}
++
++static int _ldo_set_suspend_value(struct udevice *dev, const struct rk8xx_reg_info *info, int uvolt)
++{
+ 	int mask = info->vsel_mask;
+ 	int val;
+ 
+@@ -833,16 +843,22 @@ static int ldo_set_suspend_value(struct udevice *dev, int uvolt)
+ 	else
+ 		val = ((uvolt - info->min_uv) / info->step_uv) + info->min_sel;
+ 
+-	debug("%s: volt=%d, ldo=%d, reg=0x%x, mask=0x%x, val=0x%x\n",
+-	      __func__, uvolt, ldo + 1, info->vsel_sleep_reg, mask, val);
++	debug("%s: volt=%d, reg=0x%x, mask=0x%x, val=0x%x\n",
++	      __func__, uvolt, info->vsel_sleep_reg, mask, val);
+ 
+ 	return pmic_clrsetbits(dev->parent, info->vsel_sleep_reg, mask, val);
+ }
+ 
+-static int ldo_get_suspend_value(struct udevice *dev)
++static int ldo_set_suspend_value(struct udevice *dev, int uvolt)
+ {
+ 	int ldo = dev->driver_data - 1;
+-	const struct rk8xx_reg_info *info = get_ldo_reg(dev->parent, ldo, 0);
++	const struct rk8xx_reg_info *info = get_ldo_reg(dev->parent, ldo, uvolt);
++
++	return _ldo_set_suspend_value(dev->parent, info, uvolt);
++}
++
++static int _ldo_get_suspend_value(struct udevice *dev, const struct rk8xx_reg_info *info)
++{
+ 	int mask = info->vsel_mask;
+ 	int val, ret;
+ 
+@@ -858,6 +874,14 @@ static int ldo_get_suspend_value(struct udevice *dev)
+ 	return info->min_uv + val * info->step_uv;
+ }
+ 
++static int ldo_get_suspend_value(struct udevice *dev)
++{
++	int ldo = dev->driver_data - 1;
++	const struct rk8xx_reg_info *info = get_ldo_reg(dev->parent, ldo, 0);
++
++	return _ldo_get_suspend_value(dev->parent, info);
++}
++
+ static int ldo_set_enable(struct udevice *dev, bool enable)
+ {
+ 	int ldo = dev->driver_data - 1;
 
 -- 
 2.43.2
