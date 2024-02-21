@@ -4,62 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A9B8C48BC3
-	for <u-boot@archiver.kernel.org>; Wed, 21 Feb 2024 10:46:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99A01C48BF6
+	for <u-boot@archiver.kernel.org>; Wed, 21 Feb 2024 10:46:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA93A8805D;
-	Wed, 21 Feb 2024 11:43:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
+	by phobos.denx.de (Postfix) with ESMTP id 5121A88049;
+	Wed, 21 Feb 2024 11:43:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 93F9B88048; Wed, 21 Feb 2024 11:40:48 +0100 (CET)
-Received: from smtp-42a9.mail.infomaniak.ch (smtp-42a9.mail.infomaniak.ch
- [IPv6:2001:1600:7:10::42a9])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1708512189;
+	bh=NOa/N9lSi8sR7m/gPx0SUaIiaYAVgp45nOfbT1tnVJ0=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=WI4V7SWgJ5W+j7XoXDhkvEjq8oItt94YcCQsKBQS3HviWApNRF3InUciuWQuWVvYe
+	 E6CfYjmU1QPSDodApXl6yvkO70tm3DyHPKrPdQoQ8isWPrmPLZ3o5Orw1XFHQKi+pG
+	 n2DswRphVTcjtaYiop2xhYKtf/LVbfuTk03xhWv2tRnswEa+SKZf7XqwZVAGM5JyOi
+	 oCEws7OZo7ftCyiboN8ZYxuoxLLuWJ27EuKeyUM/DcQSI0bCJxlp3kDPmKo8STbH0H
+	 DMUFEVYpcB86UALcA9I11P21Cibu8v7PVXUFx2o5DL0IVhS+VcBir5DYyxDACJ3PuK
+	 aN5DB56lnKHpA==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15BDA8807D
- for <u-boot@lists.denx.de>; Wed, 21 Feb 2024 11:38:20 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=0leil.net
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
- [10.7.10.107])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Tft634gq1zHRJ;
- Wed, 21 Feb 2024 11:38:19 +0100 (CET)
-Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4Tft623PpbzY26; Wed, 21 Feb 2024 11:38:18 +0100 (CET)
-From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Wed, 21 Feb 2024 11:37:46 +0100
-Subject: [PATCH v3 19/20] rockchip: ringneck_px30: migrate README to
- doc/board in rST format
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id A75B88806D;
+ Wed, 21 Feb 2024 11:40:38 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1708512054;
+ bh=NOa/N9lSi8sR7m/gPx0SUaIiaYAVgp45nOfbT1tnVJ0=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=nQy7k0upK6XPPM1zd0rCQpHOyD8mdWTaDwr1FsPRj6jjg+FvXGXqoiXs6UPIJK4SD
+ FQJ5yEcimfF9v1zivnmyREiDN+RceCh1APY8hJlTxvTkK2MygO3HkyjTsed9odcDlM
+ ExVnMq1MO6EgTxNHxJlWf3p6n7QLFDnWrW7TWQEyp2P86mNc6UMAwRuWX/CzfEn/NY
+ O9gpmm3qlQI3gg6x180XjsO/mDkVNHjWjLwHV1d+boR/NzHv9Q9KDWFpE0ORLbPCKp
+ +Ev0ngSuae5wTZxiYld9Zlh6B3+3fUFD800ot+MmBv8c+bNqOKzrvzskuoqp41UTsq
+ ulba9UC275kOQ==
+Message-ID: <f4013fee-be33-4f14-8aea-9d1d64a81695@denx.de>
+Date: Wed, 21 Feb 2024 10:37:36 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20240221-jaguar-v3-19-1f256a82201b@theobroma-systems.com>
-References: <20240221-jaguar-v3-0-1f256a82201b@theobroma-systems.com>
-In-Reply-To: <20240221-jaguar-v3-0-1f256a82201b@theobroma-systems.com>
-To: Simon Glass <sjg@chromium.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Peter Robinson <pbrobinson@gmail.com>, 
- Jagan Teki <jagan@amarulasolutions.com>, 
- Klaus Goger <klaus.goger@theobroma-systems.com>, 
- Heiko Stuebner <heiko.stuebner@cherry.de>, 
- Otavio Salvador <otavio@ossystems.com.br>, 
- Andy Yan <andy.yan@rock-chips.com>, 
- Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>, 
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
- Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Anatolij Gustschin <agust@denx.de>
-Cc: Dragan Simic <dsimic@manjaro.org>, u-boot@lists.denx.de, 
- Quentin Schulz <quentin.schulz@theobroma-systems.com>, 
- Quentin Schulz <foss+uboot@0leil.net>
-X-Mailer: b4 0.13.0
-X-Infomaniak-Routing: alpha
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 4/7] imx8mp: power-domain: Expose high performance PLL
+ clock
+Content-Language: en-US
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: u-boot@lists.denx.de, marcel.ziswiler@toradex.com, trini@konsulko.com,
+ lukma@denx.de, seanga2@gmail.com, jh80.chung@samsung.com, festevam@denx.de,
+ andrejs.cainikovs@toradex.com, sjg@chromium.org, peng.fan@nxp.com,
+ aford173@gmail.com, ilias.apalodimas@linaro.org, sahaj.sarup@linaro.org,
+ fathi.boudra@linaro.org, remi.duraffort@linaro.org,
+ daniel.thompson@linaro.org
+References: <20240220131056.2962331-1-sumit.garg@linaro.org>
+ <20240220131056.2962331-5-sumit.garg@linaro.org>
+ <947bbd39-451b-4ce0-86dc-47d95db2885d@denx.de>
+ <CAFA6WYPzNoZBxpX-ywwHsycX1jjKP7s4Kx_y7F8CnnZnr3nT3Q@mail.gmail.com>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <CAFA6WYPzNoZBxpX-ywwHsycX1jjKP7s4Kx_y7F8CnnZnr3nT3Q@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,219 +77,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+On 2/21/24 07:14, Sumit Garg wrote:
+> On Tue, 20 Feb 2024 at 21:02, Marek Vasut <marex@denx.de> wrote:
+>>
+>> On 2/20/24 14:10, Sumit Garg wrote:
+>>> PCIe PHY can use it when there is no external refclock provided.
+>>
+>> Commit message needs to be fixed.
+> 
+> How about the following?
+> 
+>      Expose high performance PLL clock, so the PCIe PHY can
+>      use it when there is no external refclock provided.
 
-This migrates the plaintext README in
-board/theobroma-systems/ringneck_px30 to doc/board/theobroma-systems and
-while doing so, update the instructions and rewrite it in rST.
+If this code is imported from Linux
+2cbee26e5d59 ("soc: imx: imx8mp-blk-ctrl: expose high performance PLL 
+clock")
+then just include that reference too .
 
-Cc: Quentin Schulz <foss+uboot@0leil.net>
-Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
----
- board/theobroma-systems/ringneck_px30/MAINTAINERS |  1 +
- board/theobroma-systems/ringneck_px30/README      | 70 +----------------
- doc/board/theobroma-systems/index.rst             |  1 +
- doc/board/theobroma-systems/ringneck_px30.rst     | 95 +++++++++++++++++++++++
- 4 files changed, 98 insertions(+), 69 deletions(-)
+[...]
 
-diff --git a/board/theobroma-systems/ringneck_px30/MAINTAINERS b/board/theobroma-systems/ringneck_px30/MAINTAINERS
-index 06e1beaab14..601830fe45b 100644
---- a/board/theobroma-systems/ringneck_px30/MAINTAINERS
-+++ b/board/theobroma-systems/ringneck_px30/MAINTAINERS
-@@ -4,6 +4,7 @@ M:	Klaus Goger <klaus.goger@theobroma-systems.com>
- S:	Maintained
- F:	board/theobroma-systems/ringneck_px30
- F:	board/theobroma-systems/common
-+F:	doc/board/theobroma-systems/
- F:	include/configs/ringneck_px30.h
- F:	arch/arm/dts/px30-ringneck*
- F:	configs/ringneck-px30_defconfig
-diff --git a/board/theobroma-systems/ringneck_px30/README b/board/theobroma-systems/ringneck_px30/README
-index e756b3a8ffc..915baf4a9a0 100644
---- a/board/theobroma-systems/ringneck_px30/README
-+++ b/board/theobroma-systems/ringneck_px30/README
-@@ -1,69 +1 @@
--Introduction
--============
--
--The PX30-uQ7 (Ringneck) SoM is a µQseven-compatible (40mmx70mm, MXM-230
--connector) system-on-module from Theobroma Systems[1], featuring the
--Rockchip PX30.
--
--It provides the following feature set:
--  * up to 4GB DDR4
--  * up to 128GB on-module eMMC (with 8-bit 1.8V interface)
--  * SD card (on a baseboard) via edge connector
--  * Fast Ethernet with on-module TI DP83825I PHY
--  * MIPI-DSI/LVDS
--  * MIPI-CSI
--  * USB
--    - 1x USB 2.0 dual-role
--    - 3x USB 2.0 host
--  * on-module companion controller (STM32 Cortex-M0 or ATtiny), implementing:
--    - low-power RTC functionality (ISL1208 emulation)
--    - fan controller (AMC6821 emulation)
--    - USB<->CAN bridge controller (STM32 only)
--  * on-module Espressif ESP32 for Bluetooth + 2.4GHz WiFi
--  * on-module NXP SE05x Secure Element
--
--Here is the step-by-step to boot to U-Boot on px30.
--
--Get the Source and build ATF binary
--===================================
--
--  > git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git
--
--Compile the ATF
--===============
--
--  > cd trusted-firmware-a
--  > make CROSS_COMPILE=aarch64-linux-gnu- PLAT=px30 bl31
--  > cp build/px30/release/bl31/bl31.elf ../u-boot/bl31.elf
--
--Compile the U-Boot
--==================
--
--  > cd ../u-boot
--  > make CROSS_COMPILE=aarch64-linux-gnu- ringneck-px30_defconfig all
--
--Flash the image
--===============
--
--Copy u-boot-rockchip.bin to offset 32k for SD/eMMC.
--
--SD-Card
---------
--
--  > dd if=u-boot-rockchip.bin of=/dev/sdb seek=64
--
--eMMC
------
--
--rkdeveloptool allows to flash the on-board eMMC via the USB OTG interface with
--help of the Rockchip loader binary.
--
--  > git clone https://github.com/rockchip-linux/rkdeveloptool
--  > cd rkdeveloptool
--  > autoreconf -i && ./configure && make
--  > git clone https://github.com/rockchip-linux/rkbin.git
--  > cd rkbin
--  > ./tools/boot_merger RKBOOT/PX30MINIALL.ini
--  > cd ..
--  > ./rkdeveloptool db rkbin/px30_loader_v1.16.131.bin
--  > ./rkdeveloptool wl 64 ../u-boot-rockchip.bin
-+See doc/board/theobroma-systems/ringneck_px30.rst.
-diff --git a/doc/board/theobroma-systems/index.rst b/doc/board/theobroma-systems/index.rst
-index 0720128ad52..b4da2616c37 100644
---- a/doc/board/theobroma-systems/index.rst
-+++ b/doc/board/theobroma-systems/index.rst
-@@ -8,3 +8,4 @@ Theobroma Systems
- 
-    jaguar_rk3588
-    puma_rk3399
-+   ringneck_px30
-diff --git a/doc/board/theobroma-systems/ringneck_px30.rst b/doc/board/theobroma-systems/ringneck_px30.rst
-new file mode 100644
-index 00000000000..c16b9ed17ed
---- /dev/null
-+++ b/doc/board/theobroma-systems/ringneck_px30.rst
-@@ -0,0 +1,95 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+PX30-uQ7 Ringneck
-+=================
-+
-+The PX30-uQ7 (Ringneck) SoM is a µQseven-compatible (40mmx70mm, MXM-230
-+connector) system-on-module from Theobroma Systems, featuring the Rockchip PX30.
-+
-+It provides the following feature set:
-+
-+  * up to 4GB DDR4
-+  * up to 128GB on-module eMMC (with 8-bit 1.8V interface)
-+  * SD card (on a baseboard) via edge connector
-+  * Fast Ethernet with on-module TI DP83825I PHY
-+  * MIPI-DSI/LVDS
-+  * MIPI-CSI
-+  * USB
-+
-+    - 1x USB 2.0 dual-role
-+    - 3x USB 2.0 host
-+
-+  * on-module companion controller (STM32 Cortex-M0 or ATtiny), implementing:
-+
-+    - low-power RTC functionality (ISL1208 emulation)
-+    - fan controller (AMC6821 emulation)
-+    - USB<->CAN bridge controller (STM32 only)
-+
-+  * on-module Espressif ESP32 for Bluetooth + 2.4GHz WiFi
-+  * on-module NXP SE05x Secure Element
-+
-+Here is the step-by-step to boot to U-Boot on PX30-uQ7 Ringneck from Theobroma
-+Systems.
-+
-+Get the Source and build ATF binary
-+-----------------------------------
-+
-+.. prompt:: bash
-+
-+   git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git
-+   cd trusted-firmware-a
-+   make CROSS_COMPILE=aarch64-linux-gnu- PLAT=px30 bl31
-+   export BL31=$PWD/build/px30/release/bl31/bl31.elf
-+
-+Compile the U-Boot
-+------------------
-+
-+.. prompt:: bash
-+
-+   cd ../u-boot
-+   make CROSS_COMPILE=aarch64-linux-gnu- ringneck-px30_defconfig all
-+
-+This will build ``u-boot-rockchip.bin`` which can be written to an MMC device
-+(eMMC or SD card).
-+
-+Flash the image
-+---------------
-+
-+Copy ``u-boot-rockchip.bin`` to offset 32k for SD/eMMC.
-+
-+SD-Card
-+~~~~~~~
-+
-+.. prompt:: bash
-+
-+   dd if=u-boot-rockchip.bin of=/dev/sdX seek=64
-+
-+.. note::
-+
-+   Replace ``/dev/sdX`` to match your SD card kernel device.
-+
-+eMMC
-+~~~~
-+
-+``rkdeveloptool`` allows to flash the on-board eMMC via the USB OTG interface
-+with help of the Rockchip loader binary.
-+
-+To enter the USB flashing mode on Haikou baseboard, remove any SD card, insert a
-+micro-USB cable in the ``Q7 USB P1`` connector (P8), move ``SW5`` switch into
-+``BIOS Disable`` mode, power cycle or reset the board and move ``SW5`` switch
-+back to ``Normal Boot`` mode. A new USB device should have appeared on your PC
-+(check with ``lsusb -d 2207:330d``).
-+
-+To flash U-Boot on the eMMC with ``rkdeveloptool``:
-+
-+.. prompt:: bash
-+
-+   git clone https://github.com/rockchip-linux/rkdeveloptool
-+   cd rkdeveloptool
-+   autoreconf -i && CPPFLAGS=-Wno-format-truncation ./configure && make
-+   git clone https://github.com/rockchip-linux/rkbin.git
-+   cd rkbin
-+   ./tools/boot_merger RKBOOT/PX30MINIALL.ini
-+   cd ..
-+   ./rkdeveloptool db rkbin/px30_loader_v2.08.135.bin
-+   ./rkdeveloptool wl 64 ../u-boot-rockchip.bin
+>>> @@ -69,16 +127,23 @@ static int imx8mp_hsiomix_on(struct power_domain *power_domain)
+>>>        if (ret)
+>>>                goto err_clk_pcie;
+>>>
+>>> -     if (power_domain->id == IMX8MP_HSIOBLK_PD_USB)
+>>> +     if (power_domain->id == IMX8MP_HSIOBLK_PD_USB) {
+>>>                setbits_le32(priv->base + GPR_REG0, USB_CLOCK_MODULE_EN);
+>>> -     else if (power_domain->id == IMX8MP_HSIOBLK_PD_PCIE)
+>>> +     } else if (power_domain->id == IMX8MP_HSIOBLK_PD_PCIE) {
+>>>                setbits_le32(priv->base + GPR_REG0, PCIE_CLOCK_MODULE_EN);
+>>> -     else if (power_domain->id == IMX8MP_HSIOBLK_PD_PCIE_PHY)
+>>> +     } else if (power_domain->id == IMX8MP_HSIOBLK_PD_PCIE_PHY) {
+>>>                setbits_le32(priv->base + GPR_REG0, PCIE_PHY_APB_RST |
+>>>                                                    PCIE_PHY_INIT_RST);
+>>>
+>>> +             ret = hsio_pll_enable(dev);
+>>
+>> Is this how Linux handles this PLL ?
+>>
+>> Seems like this should be either syscon or clock driver .
+> 
+> It isn't similar to what Linux does but I can't find suitable
+> infrastructure in U-Boot to expose it as a regular clock. Are there
+> any APIs available similar to devm_of_clk_add_hw_provider() in Linux?
 
--- 
-2.43.2
+Have a look at the very end of:
 
+drivers/clk/renesas/clk-rcar-gen3.c
+
+that registers clock and reset drivers for the same IP at the same 
+address. In this case, you would register power domain and clock drivers 
+instead .
