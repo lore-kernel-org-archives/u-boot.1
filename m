@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5B68C48BF6
-	for <u-boot@archiver.kernel.org>; Wed, 21 Feb 2024 10:48:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24B64C48BC3
+	for <u-boot@archiver.kernel.org>; Wed, 21 Feb 2024 10:48:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1447F880DF;
-	Wed, 21 Feb 2024 11:43:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 968B688037;
+	Wed, 21 Feb 2024 11:44:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1708512206;
-	bh=gbHCQVJ7X1iqmmNBdvhZI9jCjpb0ip4V3IAY7oYyytI=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=g/cuiCasx0qPgjekdMn1vpYQ1m6tRNEFbMwqn+IzhkbCu+KUAV/EFaHnGR8NeAg4o
-	 QDPFngVY09DPMjCLGv0jGQD/F4DsJ6yFzYtmZgBBIMIlaI2t4dFHNbKKaJJBYNz1TJ
-	 XfYhkszXqPscqgkKTtyzipK2Bs1yukXi34bO1x6v7Yfm4FUnuwKWp/JUtJfzPktS+M
-	 YKPOjK4VhSw+3UpkNDRwq9n9FQnrwC1U54bhezuWU9ADm66iIzu52sv2O7o6c1+w8P
-	 K/kKxPbWPDaQl0hAjeQvBFh7UY2JX949RowOzd36Irj3rB2NDGe04Y9DJtOmYhEdD2
-	 AyzgHqDmyVWQA==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id CD6A587E01; Wed, 21 Feb 2024 11:39:44 +0100 (CET)
+Received: from smtp-bc09.mail.infomaniak.ch (smtp-bc09.mail.infomaniak.ch
+ [IPv6:2001:1600:7:10::bc09])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id CE5D788062;
- Wed, 21 Feb 2024 11:41:13 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1708512079;
- bh=gbHCQVJ7X1iqmmNBdvhZI9jCjpb0ip4V3IAY7oYyytI=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=qDlKNRXRLnc7aoPNccaJ2LXc0Zh3GGUXNyLfrp8zEN9UCcLPrk5riZ4ug+1W+9Ej9
- hP0l19n2uCEXQtbkMTmBQ/IRDE4w2RPIX5YvEhW7OWu78J5oW/lCs/3+/v3oKVkZGj
- vmdpm6K5BdkE5ZPvCuYEpPNNn2tsmXM1lkY30l8DZ5xMNO1eRlDdkwZib5E2HrGSYj
- TT2kD5GHYUbBNGSVrOC/RvBboNvmNfoSrNznmNqubXbQreMAy1xdMekPlZFJvCczzB
- pprPR+kTs+3Hul+MlwNlytunEtEr+LqPdPIkZP2SB5b9+NAKfOuQ+sC1QqsJqsUXdQ
- GmcsilKuCPZXg==
-Message-ID: <dec0af80-b953-4b45-bd6a-6967865fc03f@denx.de>
-Date: Wed, 21 Feb 2024 10:44:41 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 49DA488061
+ for <u-boot@lists.denx.de>; Wed, 21 Feb 2024 11:38:03 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=0leil.net
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=foss+uboot@0leil.net
+Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
+ [10.7.10.107])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Tft5j6sLGzDDs;
+ Wed, 21 Feb 2024 11:38:01 +0100 (CET)
+Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4Tft5h4HgRzWB8; Wed, 21 Feb 2024 11:38:00 +0100 (CET)
+From: Quentin Schulz <foss+uboot@0leil.net>
+Date: Wed, 21 Feb 2024 11:37:37 +0100
+Subject: [PATCH v3 10/20] rockchip: transform
+ rockchip_capsule_update_board_setup into a weak function symbol
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 6/7] pci: Add DW PCIe controller support for iMX8MP SoC
-Content-Language: en-US
-To: Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot@lists.denx.de, marcel.ziswiler@toradex.com, trini@konsulko.com,
- lukma@denx.de, seanga2@gmail.com, jh80.chung@samsung.com, festevam@denx.de,
- andrejs.cainikovs@toradex.com, sjg@chromium.org, peng.fan@nxp.com,
- aford173@gmail.com, ilias.apalodimas@linaro.org, sahaj.sarup@linaro.org,
- fathi.boudra@linaro.org, remi.duraffort@linaro.org,
- daniel.thompson@linaro.org
-References: <20240220131056.2962331-1-sumit.garg@linaro.org>
- <20240220131056.2962331-7-sumit.garg@linaro.org>
- <61361608-8b4f-4ebb-b7dd-260d08ac5e8b@denx.de>
- <CAFA6WYMoNRKVvzS+6gwXp4gwQXHKZoWA73fcPEy16Qy=qzgy2w@mail.gmail.com>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAFA6WYMoNRKVvzS+6gwXp4gwQXHKZoWA73fcPEy16Qy=qzgy2w@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20240221-jaguar-v3-10-1f256a82201b@theobroma-systems.com>
+References: <20240221-jaguar-v3-0-1f256a82201b@theobroma-systems.com>
+In-Reply-To: <20240221-jaguar-v3-0-1f256a82201b@theobroma-systems.com>
+To: Simon Glass <sjg@chromium.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Jagan Teki <jagan@amarulasolutions.com>, 
+ Klaus Goger <klaus.goger@theobroma-systems.com>, 
+ Heiko Stuebner <heiko.stuebner@cherry.de>, 
+ Otavio Salvador <otavio@ossystems.com.br>, 
+ Andy Yan <andy.yan@rock-chips.com>, 
+ Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>, 
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
+ Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Anatolij Gustschin <agust@denx.de>
+Cc: Dragan Simic <dsimic@manjaro.org>, u-boot@lists.denx.de, 
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>, 
+ Quentin Schulz <foss+uboot@0leil.net>
+X-Mailer: b4 0.13.0
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,42 +76,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/21/24 07:25, Sumit Garg wrote:
+From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 
-[...]
+There's only one user of rockchip_capsule_update_board_setup, which is
+in board.c, and only one board defines it, so instead of having a header
+only for one function symbol, let's just use a weak symbol instead.
 
->>> +static int wait_link_up(struct pcie_dw_imx8 *priv)
->>> +{
->>> +     unsigned long timeout;
->>> +
->>> +     timeout = get_timer(0) + PCIE_LINK_UP_TIMEOUT_MS;
->>
->> wait_for_bit() or read_poll_timeout()
-> 
-> They won't appropriately fit here as I would like to add delay in
-> between consecutive polls too...
-> 
->>
->>> +     while (!is_link_up(priv)) {
->>> +             if (get_timer(0) > timeout)
->>> +                     return 0;
->>> +             mdelay(10);
-> 
-> ...here.
+Cc: Quentin Schulz <foss+uboot@0leil.net>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+Reviewed-by: Dragan Simic <dsimic@manjaro.org>
+Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
+Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+---
+ arch/arm/include/asm/arch-rockchip/misc.h | 9 ---------
+ arch/arm/mach-rockchip/board.c            | 5 ++++-
+ 2 files changed, 4 insertions(+), 10 deletions(-)
 
-include/linux/iopoll.h:#define read_poll_timeout(op, val, cond, 
-sleep_us, timeout_us, args...)  \
+diff --git a/arch/arm/include/asm/arch-rockchip/misc.h b/arch/arm/include/asm/arch-rockchip/misc.h
+deleted file mode 100644
+index ef37ff1661a..00000000000
+--- a/arch/arm/include/asm/arch-rockchip/misc.h
++++ /dev/null
+@@ -1,9 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * RK3399: Architecture common definitions
+- *
+- * Copyright (C) 2019 Collabora Inc - https://www.collabora.com/
+- *      Rohan Garg <rohan.garg@collabora.com>
+- */
+-
+-void rockchip_capsule_update_board_setup(void);
+diff --git a/arch/arm/mach-rockchip/board.c b/arch/arm/mach-rockchip/board.c
+index 80b4514852f..4f666aee706 100644
+--- a/arch/arm/mach-rockchip/board.c
++++ b/arch/arm/mach-rockchip/board.c
+@@ -32,7 +32,6 @@
+ #include <asm/arch-rockchip/boot_mode.h>
+ #include <asm/arch-rockchip/clock.h>
+ #include <asm/arch-rockchip/periph.h>
+-#include <asm/arch-rockchip/misc.h>
+ #include <power/regulator.h>
+ 
+ #if defined(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) && defined(CONFIG_EFI_PARTITION)
+@@ -148,6 +147,10 @@ void set_dfu_alt_info(char *interface, char *devstr)
+ 	env_set("dfu_alt_info", buf);
+ }
+ 
++__weak void rockchip_capsule_update_board_setup(void)
++{
++}
++
+ static void gpt_capsule_update_setup(void)
+ {
+ 	int p, i, ret;
 
-That's the "sleep_us" , is it not ?
+-- 
+2.43.2
 
->>> +     };
->>> +
->>> +     return 1;
->>
->> return -ETIMEDOUT ?
-> 
-> Here 0 represents timeout and 1 represents success condition.
-
-0 generally represents success, non-zero error, please fix.
-
-[...]
