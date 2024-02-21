@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6D1DC48BF6
-	for <u-boot@archiver.kernel.org>; Wed, 21 Feb 2024 06:26:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 124F6C48BC3
+	for <u-boot@archiver.kernel.org>; Wed, 21 Feb 2024 06:27:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 019388803B;
-	Wed, 21 Feb 2024 07:26:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 25DE788033;
+	Wed, 21 Feb 2024 07:26:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UKae8rhZ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="z0d91q2Y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3DAC387E26; Wed, 21 Feb 2024 07:26:23 +0100 (CET)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id 1862788034; Wed, 21 Feb 2024 07:26:35 +0100 (CET)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 69CA887DD4
- for <u-boot@lists.denx.de>; Wed, 21 Feb 2024 07:26:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 565268803F
+ for <u-boot@lists.denx.de>; Wed, 21 Feb 2024 07:26:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dan.carpenter@linaro.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-a28a6cef709so739944566b.1
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 22:26:15 -0800 (PST)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-a3f3d0d2787so29021066b.3
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 22:26:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708496774; x=1709101574; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1708496785; x=1709101585; darn=lists.denx.de;
  h=content-disposition:mime-version:message-id:subject:cc:to:from:date
  :from:to:cc:subject:date:message-id:reply-to;
- bh=E0AkpK6kuSK+BHKjuimBb7NzmN2DKnhqzcGkb0bNfbw=;
- b=UKae8rhZBNhtknT24sASpwePx/vZfg7OOXdj5zLtddBiiwgxA7o2fIe81cm3qDhVNw
- /W9yfqzQfBjwefQ2OXevVirsqiubVyU5QN8x2XZz61bc9zjbKTdYF9jhQn+yLegR2RFv
- SN0gXAIiXvxh0R4xWVXWR632WhCT73kiBdn3tL7v4KaXNBtIdwuqMlH/WPM2S8LvBGmL
- VaRryYXzag0Dbg9qwELnUh79VpQdiEikFov6bNLa7P2ArTd6rVSoFFdydFCN199p/EXr
- n82yQOAgoHh4+stVbnNUXSDcbO02u9ztdlnbxjdAWMp9s4b+pCAsA/vaWDNH/BUqeL3L
- 6pxw==
+ bh=bHberb9gmaFx0f0LhlBmn21j5qZt6WtRLgiOAN3YIDw=;
+ b=z0d91q2YDroGpuDrMOo50KkSNO86w00HycZJp4aZq+/4jas117DXDTY8s+v3FRSlRc
+ epUZqivoQjNqSmTIZwtR5W2EMQaxBIERp0aA7ec/RQGcxpUDZqLiSisS2fAJLx0Xue8Y
+ d+85IDhlKb3E1LvNuXeVrIp31si1HiTCskz9NFfsI1v8ChErY4efC3utdGL/eKRndNPb
+ zR9MFd8k61yfBaJa/4RlRHMjGJAu/3bUVVwvmTdhxxudYS4Vu3KJA7+1HMA4I1oD7Kdl
+ +LqLf4RvWsXwVJfV+NBaivDNb8+1iQFl5n+YIdm97RQ2tPZ96XuDPzQ/NzpNaNHVKv12
+ iLOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708496774; x=1709101574;
+ d=1e100.net; s=20230601; t=1708496785; x=1709101585;
  h=content-disposition:mime-version:message-id:subject:cc:to:from:date
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=E0AkpK6kuSK+BHKjuimBb7NzmN2DKnhqzcGkb0bNfbw=;
- b=VOaP359BE+Sc+iS7Xp+cZZVzmDrJlHxqqJpHphhS3Fdgb3BnK80QaFsdeCShmCezHK
- tydCHp7Y+6FthgpQnT1bZU5MiafBpLQOYLXZHMO8DcT9+V+FrjC9xW8POKcFpDQ3BTgd
- eS62j6FBtsYxdLO7KG4d1y/kqPzIMevVkmq9z3WJFeecuwnMpanEzeUyvBfRbpK0mJl7
- mJzkNL7bIsWEDNClGzo7CMlNSAi3pIp2PvXQEr3QU8NXdYaTJuOsujRgCTNWZ18KzsMO
- 3jX8x2yLlrs6OBkb8A9jConMPRBH2ZCxK1Ii6nF9PSId9b8UX6H2iijEpM5wNgwYhos4
- 66IA==
+ bh=bHberb9gmaFx0f0LhlBmn21j5qZt6WtRLgiOAN3YIDw=;
+ b=hC+3iHDlPFio+UkRmgcHeS5joK35J437xAApT08qiq/NN/mo5oPBAoArhT7K/bjFWM
+ oGkMBIcLPQEOGQpHAPr4cHUZoB7uIlRG0e7uvGX3PP7vwUY3G5h2rfp/yZpJ6gVfhYuN
+ DDo90MWHF/wapqqy3XlMJjoMJU580Ye1cGeKP3I/ZuAwXck/ETVxzvMr50GZQ8V7Z6LX
+ YJ2DMMMthqMdWshS7SWgRf/IjWZKUDWq77NU9uQm09DQ6QZI3dGQkMDKTaDiVjT2m5aV
+ CE6NxsiKDks0UHlu9RtAMOwcSodeUVU/lWzbOtjDFTrEhkglqnu39fRZPZp6Az++9DNz
+ OwtA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUV7bhXqNNILkFX1aKQ3zzuers5ylnk4QwRbm+9V9l4mFHQJPh1XXqovgNKwUSpBfr7mTgGcBrTWROHqOKJUOI2frcwzw==
-X-Gm-Message-State: AOJu0Yy0CRWf9Ux6lQ42HPpA0kOGBuYlgJrNK5K9uCpUVFFdI+/PoJQy
- YgHHrstEpTAHnTQ7qHp080UJYjiRxsIkUNai9Z2gZJEoTJjIV7Enymstw33UJcI=
-X-Google-Smtp-Source: AGHT+IFu5gqlIfd3BMJqrFIMJQeDJ/UtzZf3hh35szKpBcMEJzY8XQBzgYzgZjGBmnCWpijI7Sz/Gw==
-X-Received: by 2002:a17:906:6b0f:b0:a3e:cefe:722f with SMTP id
- q15-20020a1709066b0f00b00a3ecefe722fmr4541915ejr.54.1708496773612; 
- Tue, 20 Feb 2024 22:26:13 -0800 (PST)
+ AJvYcCVH4gWLf3S/mrt2FQzfzapVp5IWWEmqBU7aMUvtwjH6TBZrSuO5q2qpHmzzxjFeUZTohksQLqQnUjMD9DWCjVBxb9JSHA==
+X-Gm-Message-State: AOJu0Yz/uTAR+UJwCw6BFYpcaKMYaHupVOVVCJS/jDyMbT/M4nbkSF9Z
+ qknTsbstj0VBg1GMwwGocnPerfSi7auxCUanbcb0LE5j7TuZjTGysAlagCXTNzEb7irULPKSJnT
+ U
+X-Google-Smtp-Source: AGHT+IFvb8LeQ/Fwfpe9AergWqbKZ2uc9R5GHwZGTd5jP2XKHQoX/BxlzbBqBYdtcT5a8zSpE3wy8g==
+X-Received: by 2002:a17:906:6057:b0:a3d:caa4:2b88 with SMTP id
+ p23-20020a170906605700b00a3dcaa42b88mr10641773ejj.27.1708496784714; 
+ Tue, 20 Feb 2024 22:26:24 -0800 (PST)
 Received: from localhost ([102.222.70.76]) by smtp.gmail.com with ESMTPSA id
- w8-20020a1709067c8800b00a3e9ea30a95sm2597371ejo.5.2024.02.20.22.26.12
+ zh11-20020a170906880b00b00a3ec216ec6csm2179197ejb.45.2024.02.20.22.26.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Feb 2024 22:26:13 -0800 (PST)
-Date: Wed, 21 Feb 2024 09:26:09 +0300
+ Tue, 20 Feb 2024 22:26:24 -0800 (PST)
+Date: Wed, 21 Feb 2024 09:26:21 +0300
 From: Dan Carpenter <dan.carpenter@linaro.org>
 To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>, u-boot@lists.denx.de
-Subject: [PATCH] bootflow: Fix build error when BOOTMETH_CROS is disabled
-Message-ID: <7f33a6aa-5018-484d-af40-bdb7c4e3a70e@moroto.mountain>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Subject: [PATCH] bootstd: fix build error when CONFIG_MMC is disabled
+Message-ID: <e910bbd4-e509-4e6f-a458-d2e00741aec6@moroto.mountain>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
@@ -90,32 +90,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The bootflow testing assumes that BOOTMETH_CROS is enabled but it
-might not be which leads to a build error.
+This code assumes that CONFIG_MMC and it causes a build error when
+the config is disabled.
 
-aarch64-linux-gnu-ld.bfd: test/boot/bootflow.o: in function `prep_mmc_bootdev':
-test/boot/bootflow.c:549:(.text.prep_mmc_bootdev+0x1c8):
-    undefined reference to `_u_boot_list_2_driver_2_bootmeth_cros'
+aarch64-linux-gnu-ld.bfd: test/boot/bootstd_common.o: in function `bootstd_test_check_mmc_hunter':
+test/boot/bootstd_common.c:83:(.text.bootstd_test_check_mmc_hunter+0x70):
+    undefined reference to `_u_boot_list_2_bootdev_hunter_2_mmc_bootdev_hunter'
 
-Fixes: d08db02d2d3d ("bootstd: Add a test for bootmeth_cros")
+Fixes: 66e3dce78750 ("bootstd: Allow hunting for a bootdev by label")
 Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
 ---
- test/boot/bootflow.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ test/boot/bootstd_common.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index fa54dde661c8..4845b7121c84 100644
---- a/test/boot/bootflow.c
-+++ b/test/boot/bootflow.c
-@@ -544,7 +544,7 @@ static int prep_mmc_bootdev(struct unit_test_state *uts, const char *mmc_dev,
- 				"bootmeth_script", 0, ofnode_null(), &dev));
+diff --git a/test/boot/bootstd_common.c b/test/boot/bootstd_common.c
+index e71a2975c53c..cc97e255e5cb 100644
+--- a/test/boot/bootstd_common.c
++++ b/test/boot/bootstd_common.c
+@@ -74,6 +74,9 @@ int bootstd_test_check_mmc_hunter(struct unit_test_state *uts)
+ 	struct bootstd_priv *std;
+ 	uint seq;
  
- 	/* Enable the cros bootmeth if needed */
--	if (bind_cros) {
-+	if (IS_ENABLED(CONFIG_BOOTMETH_CROS) && bind_cros) {
- 		ut_assertok(uclass_first_device_err(UCLASS_BOOTSTD, &bootstd));
- 		ut_assertok(device_bind(bootstd, DM_DRIVER_REF(bootmeth_cros),
- 					"cros", 0, ofnode_null(), &dev));
++	if (!IS_ENABLED(CONFIG_MMC))
++		return 0;
++
+ 	/* get access to the used hunters */
+ 	ut_assertok(bootstd_get_priv(&std));
+ 
 -- 
 2.43.0
 
