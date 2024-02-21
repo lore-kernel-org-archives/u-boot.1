@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32B5EC48BC3
-	for <u-boot@archiver.kernel.org>; Wed, 21 Feb 2024 10:42:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DD75C48BC3
+	for <u-boot@archiver.kernel.org>; Wed, 21 Feb 2024 10:42:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E384880AB;
-	Wed, 21 Feb 2024 11:39:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 06467880A5;
+	Wed, 21 Feb 2024 11:39:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 30A4187E19; Wed, 21 Feb 2024 11:38:47 +0100 (CET)
-Received: from smtp-8faa.mail.infomaniak.ch (smtp-8faa.mail.infomaniak.ch
- [IPv6:2001:1600:4:17::8faa])
+ id C6C0A88094; Wed, 21 Feb 2024 11:39:19 +0100 (CET)
+Received: from smtp-bc0a.mail.infomaniak.ch (smtp-bc0a.mail.infomaniak.ch
+ [45.157.188.10])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C97EB88049
- for <u-boot@lists.denx.de>; Wed, 21 Feb 2024 11:37:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1049388047
+ for <u-boot@lists.denx.de>; Wed, 21 Feb 2024 11:38:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-4-0000.mail.infomaniak.ch (unknown [10.7.10.107])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Tft5c4kbrzMq1Mb;
- Wed, 21 Feb 2024 11:37:56 +0100 (CET)
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Tft5n5cr2zMq0cd;
+ Wed, 21 Feb 2024 11:38:05 +0100 (CET)
 Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4Tft5b1wdxzYGW; Wed, 21 Feb 2024 11:37:55 +0100 (CET)
+ id 4Tft5m3xs1zXZv; Wed, 21 Feb 2024 11:38:04 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Wed, 21 Feb 2024 11:37:33 +0100
-Subject: [PATCH v3 06/20] rockchip: pine64: rockpro64: migrate to
- rockchip_early_misc_init_r
+Date: Wed, 21 Feb 2024 11:37:40 +0100
+Subject: [PATCH v3 13/20] rockchip: migrate hardware.h inclusion into
+ appropriate files
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240221-jaguar-v3-6-1f256a82201b@theobroma-systems.com>
+Message-Id: <20240221-jaguar-v3-13-1f256a82201b@theobroma-systems.com>
 References: <20240221-jaguar-v3-0-1f256a82201b@theobroma-systems.com>
 In-Reply-To: <20240221-jaguar-v3-0-1f256a82201b@theobroma-systems.com>
 To: Simon Glass <sjg@chromium.org>, 
@@ -77,60 +77,174 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 
-Only setup_iodomain() differs from the original misc_init_r from
-Rockchip mach code, so let's use rockchip_early_misc_init_r instead of
-reimplementing the whole misc_init_r from Rockchip.
+hardware.h is only defining macros which are "wrappers" around writel().
+
+writel() is however not available in hardware.h, <asm/io.h> needs to be
+included. This means in order to use the wrappers in hardware.h, one
+also needs to include the <asm/io.h> header.
+
+However, this cannot be done currently because hardware.h is included in
+include/configs files, which are implicitly included by every code file
+by default, which makes the compilation of arch/arm/cpu/armv8/u-boot.lds
+fail because ALIGN (the ARM assembly directive) got redefined by some
+of the include files coming from <asm.io.h>.
+
+Because nothing in the include/configs file actually use hardware.h,
+let's remove the inclusion of hardware.h from the include/configs files
+and explicitly add it wherever it is required.
+
+This prepares for the next commit where <asm/io.h> will be included in
+hardware.h.
 
 Cc: Quentin Schulz <foss+uboot@0leil.net>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
-Reviewed-by: Dragan Simic <dsimic@manjaro.org>
-Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 ---
- board/pine64/rockpro64_rk3399/rockpro64-rk3399.c | 20 ++------------------
- 1 file changed, 2 insertions(+), 18 deletions(-)
+ arch/arm/mach-rockchip/rk3066/rk3066.c | 1 +
+ drivers/ram/rockchip/dmc-rk3368.c      | 1 +
+ drivers/ram/rockchip/sdram_rk3188.c    | 1 +
+ drivers/ram/rockchip/sdram_rk3288.c    | 1 +
+ include/configs/rk3036_common.h        | 1 -
+ include/configs/rk3066_common.h        | 1 -
+ include/configs/rk3188_common.h        | 1 -
+ include/configs/rk322x_common.h        | 1 -
+ include/configs/rk3288_common.h        | 1 -
+ include/configs/rk3368_common.h        | 1 -
+ include/configs/rv1108_common.h        | 1 -
+ 11 files changed, 4 insertions(+), 7 deletions(-)
 
-diff --git a/board/pine64/rockpro64_rk3399/rockpro64-rk3399.c b/board/pine64/rockpro64_rk3399/rockpro64-rk3399.c
-index d79084614f1..d0a694ead1d 100644
---- a/board/pine64/rockpro64_rk3399/rockpro64-rk3399.c
-+++ b/board/pine64/rockpro64_rk3399/rockpro64-rk3399.c
-@@ -11,7 +11,6 @@
+diff --git a/arch/arm/mach-rockchip/rk3066/rk3066.c b/arch/arm/mach-rockchip/rk3066/rk3066.c
+index 78c7d894f90..6661b788295 100644
+--- a/arch/arm/mach-rockchip/rk3066/rk3066.c
++++ b/arch/arm/mach-rockchip/rk3066/rk3066.c
+@@ -7,6 +7,7 @@
+ #include <asm/io.h>
+ #include <asm/arch-rockchip/bootrom.h>
+ #include <asm/arch-rockchip/grf_rk3066.h>
++#include <asm/arch-rockchip/hardware.h>
+ 
+ #define GRF_BASE	0x20008000
+ 
+diff --git a/drivers/ram/rockchip/dmc-rk3368.c b/drivers/ram/rockchip/dmc-rk3368.c
+index f36be941a38..859fc47030f 100644
+--- a/drivers/ram/rockchip/dmc-rk3368.c
++++ b/drivers/ram/rockchip/dmc-rk3368.c
+@@ -17,6 +17,7 @@
  #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/grf_rk3399.h>
- #include <asm/arch-rockchip/hardware.h>
--#include <asm/arch-rockchip/misc.h>
+ #include <asm/arch-rockchip/cru_rk3368.h>
+ #include <asm/arch-rockchip/grf_rk3368.h>
++#include <asm/arch-rockchip/hardware.h>
+ #include <asm/arch-rockchip/ddr_rk3368.h>
+ #include <asm/arch-rockchip/sdram.h>
+ #include <asm/arch-rockchip/sdram_rk3288.h>
+diff --git a/drivers/ram/rockchip/sdram_rk3188.c b/drivers/ram/rockchip/sdram_rk3188.c
+index ad9f936df55..d23d4231798 100644
+--- a/drivers/ram/rockchip/sdram_rk3188.c
++++ b/drivers/ram/rockchip/sdram_rk3188.c
+@@ -22,6 +22,7 @@
+ #include <asm/arch-rockchip/cru_rk3188.h>
+ #include <asm/arch-rockchip/ddr_rk3188.h>
+ #include <asm/arch-rockchip/grf_rk3188.h>
++#include <asm/arch-rockchip/hardware.h>
+ #include <asm/arch-rockchip/pmu_rk3188.h>
+ #include <asm/arch-rockchip/sdram.h>
+ #include <asm/arch-rockchip/sdram_rk3288.h>
+diff --git a/drivers/ram/rockchip/sdram_rk3288.c b/drivers/ram/rockchip/sdram_rk3288.c
+index c99118fd612..3177051dd12 100644
+--- a/drivers/ram/rockchip/sdram_rk3288.c
++++ b/drivers/ram/rockchip/sdram_rk3288.c
+@@ -22,6 +22,7 @@
+ #include <asm/arch-rockchip/cru.h>
+ #include <asm/arch-rockchip/ddr_rk3288.h>
+ #include <asm/arch-rockchip/grf_rk3288.h>
++#include <asm/arch-rockchip/hardware.h>
+ #include <asm/arch-rockchip/pmu_rk3288.h>
+ #include <asm/arch-rockchip/sdram.h>
+ #include <asm/arch-rockchip/sdram_rk3288.h>
+diff --git a/include/configs/rk3036_common.h b/include/configs/rk3036_common.h
+index c2abd14e114..0bf9e8b9a2e 100644
+--- a/include/configs/rk3036_common.h
++++ b/include/configs/rk3036_common.h
+@@ -5,7 +5,6 @@
+ #ifndef __CONFIG_RK3036_COMMON_H
+ #define __CONFIG_RK3036_COMMON_H
  
- #define GRF_IO_VSEL_BT565_SHIFT 0
- #define PMUGRF_CON0_VSEL_SHIFT 8
-@@ -31,26 +30,11 @@ static void setup_iodomain(void)
- 	rk_setreg(&pmugrf->soc_con0, 1 << PMUGRF_CON0_VSEL_SHIFT);
- }
+-#include <asm/arch-rockchip/hardware.h>
+ #include "rockchip-common.h"
  
--int misc_init_r(void)
-+int rockchip_early_misc_init_r(void)
- {
--	const u32 cpuid_offset = 0x7;
--	const u32 cpuid_length = 0x10;
--	u8 cpuid[cpuid_length];
--	int ret;
--
- 	setup_iodomain();
+ #define CFG_SYS_HZ_CLOCK		24000000
+diff --git a/include/configs/rk3066_common.h b/include/configs/rk3066_common.h
+index d70c8f77d48..6a3b6900463 100644
+--- a/include/configs/rk3066_common.h
++++ b/include/configs/rk3066_common.h
+@@ -6,7 +6,6 @@
+ #ifndef __CONFIG_RK3066_COMMON_H
+ #define __CONFIG_RK3066_COMMON_H
  
--	ret = rockchip_cpuid_from_efuse(cpuid_offset, cpuid_length, cpuid);
--	if (ret)
--		return ret;
--
--	ret = rockchip_cpuid_set(cpuid, cpuid_length);
--	if (ret)
--		return ret;
--
--	ret = rockchip_setup_macaddr();
--
--	return ret;
-+	return 0;
- }
+-#include <asm/arch-rockchip/hardware.h>
+ #include "rockchip-common.h"
  
- #endif
+ #define CFG_IRAM_BASE		0x10080000
+diff --git a/include/configs/rk3188_common.h b/include/configs/rk3188_common.h
+index a8cee1e44d4..98f2c25f3cf 100644
+--- a/include/configs/rk3188_common.h
++++ b/include/configs/rk3188_common.h
+@@ -6,7 +6,6 @@
+ #ifndef __CONFIG_RK3188_COMMON_H
+ #define __CONFIG_RK3188_COMMON_H
+ 
+-#include <asm/arch-rockchip/hardware.h>
+ #include "rockchip-common.h"
+ 
+ #define CFG_IRAM_BASE	0x10080000
+diff --git a/include/configs/rk322x_common.h b/include/configs/rk322x_common.h
+index 15f77df3e17..bab4ca015f7 100644
+--- a/include/configs/rk322x_common.h
++++ b/include/configs/rk322x_common.h
+@@ -5,7 +5,6 @@
+ #ifndef __CONFIG_RK322X_COMMON_H
+ #define __CONFIG_RK322X_COMMON_H
+ 
+-#include <asm/arch-rockchip/hardware.h>
+ #include "rockchip-common.h"
+ 
+ #define CFG_SYS_HZ_CLOCK		24000000
+diff --git a/include/configs/rk3288_common.h b/include/configs/rk3288_common.h
+index 3063076a97a..0c449e31099 100644
+--- a/include/configs/rk3288_common.h
++++ b/include/configs/rk3288_common.h
+@@ -6,7 +6,6 @@
+ #ifndef __CONFIG_RK3288_COMMON_H
+ #define __CONFIG_RK3288_COMMON_H
+ 
+-#include <asm/arch-rockchip/hardware.h>
+ #include "rockchip-common.h"
+ 
+ #define CFG_SYS_HZ_CLOCK		24000000
+diff --git a/include/configs/rk3368_common.h b/include/configs/rk3368_common.h
+index ccb5369b901..d488f8d477a 100644
+--- a/include/configs/rk3368_common.h
++++ b/include/configs/rk3368_common.h
+@@ -8,7 +8,6 @@
+ 
+ #include "rockchip-common.h"
+ 
+-#include <asm/arch-rockchip/hardware.h>
+ #include <linux/sizes.h>
+ 
+ #define CFG_SYS_SDRAM_BASE		0
+diff --git a/include/configs/rv1108_common.h b/include/configs/rv1108_common.h
+index 3bf70a0e0ae..ff28236a21d 100644
+--- a/include/configs/rv1108_common.h
++++ b/include/configs/rv1108_common.h
+@@ -5,7 +5,6 @@
+ #ifndef __CONFIG_RV1108_COMMON_H
+ #define __CONFIG_RV1108_COMMON_H
+ 
+-#include <asm/arch-rockchip/hardware.h>
+ #include "rockchip-common.h"
+ 
+ #define CFG_IRAM_BASE		0x10080000
 
 -- 
 2.43.2
