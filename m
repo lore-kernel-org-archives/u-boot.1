@@ -4,67 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF369C48BC3
-	for <u-boot@archiver.kernel.org>; Wed, 21 Feb 2024 11:30:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC5FAC48BF6
+	for <u-boot@archiver.kernel.org>; Wed, 21 Feb 2024 11:30:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 123D387FE7;
-	Wed, 21 Feb 2024 12:29:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 81FF187E06;
+	Wed, 21 Feb 2024 12:29:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="jZ9s0ZoQ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Noil0mpy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 70D7D87BBA; Wed, 21 Feb 2024 09:34:41 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id BCA72876F4; Wed, 21 Feb 2024 10:36:29 +0100 (CET)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A7B587B1D
- for <u-boot@lists.denx.de>; Wed, 21 Feb 2024 09:34:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A65C1879E0
+ for <u-boot@lists.denx.de>; Wed, 21 Feb 2024 10:36:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=j-luthra@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41L8YVcC049950;
- Wed, 21 Feb 2024 02:34:31 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1708504471;
- bh=6JE8lmFCGK11Ey8cKDBHCuPoOYH4pPJ7dXpeEgB72sE=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=jZ9s0ZoQ6xPNgZnWGhUKZ5dXZC88ifM/1srGUISR9JpAg+TKh0wyF/n1zVaIW1nSY
- CvRllYhtmciEQ19CCX4o59mYJUjfPxfAiFlDrbImh7MfSf1IqBhhgRlYpztCQP3RjM
- 8SSCeN2eCSK3CfFQWYR47dris6yP3G7eo36jYr+g=
-Received: from DFLE101.ent.ti.com (dfle101.ent.ti.com [10.64.6.22])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41L8YVUT025125
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 21 Feb 2024 02:34:31 -0600
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 21
- Feb 2024 02:34:30 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 21 Feb 2024 02:34:30 -0600
-Received: from localhost (jluthra.dhcp.ti.com [172.24.227.217])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41L8YTxU127012;
- Wed, 21 Feb 2024 02:34:30 -0600
-Date: Wed, 21 Feb 2024 14:04:29 +0530
-From: Jai Luthra <j-luthra@ti.com>
-To: Udit Kumar <u-kumar1@ti.com>
-CC: <nm@ti.com>, <vigneshr@ti.com>, <danishanwar@ti.com>, <trini@konsulko.com>,
- <sjg@chromium.org>, <matthias.schiffer@ew.tq-group.com>,
- <r-gunasekaran@ti.com>, <u-boot@lists.denx.de>, <j-humphreys@ti.com>
-Subject: Re: [PATCH] dma: ti: k3-udma: Fix ring_idx to pair k3 nav rings"
-Message-ID: <im2622kh25pjh4r4socejvhsvjyjumbeloo5ncfmjsygtmscfb@wq7d6bpsa5s2>
-References: <20240221072825.3645303-1-u-kumar1@ti.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=fathi.boudra@linaro.org
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-a3e87b2de41so313565066b.2
+ for <u-boot@lists.denx.de>; Wed, 21 Feb 2024 01:36:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1708508180; x=1709112980; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=KItjb+zGjqfNZJBwP41vek2kJ71OSYWP0JMUR9K4j8c=;
+ b=Noil0mpyxHFKyBvNoxu9XsuWv6sYD+gJQdT5F65EFDzMVv+j7L2qLvhiWiBshbLMkT
+ fvCaL/picwPCrc+Fj3is97i09skFR7AX6rd/lmnfRaFlN1dLfOOIRagbpv4tqOr8oZTa
+ 796Fwg40ukZJm/2eqyjyErPzQ4+RoIAU2W+SzUvD8EDjwnePfZQJuOvkFchedhHoz8Cl
+ 3wc+bugXi67C0Jsh7HS5IfuURdU/e1UFGYSa7Ma6JhW4oYa5h3a1Icu8N7LbkhmAm9rP
+ +pn2SuZhRZvlXpcL02y2r8mWRXCB1cZstJeKgYHeCKSd/vWZYWp3LvwdohvC4K2oaAgY
+ PoFw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1708508180; x=1709112980;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=KItjb+zGjqfNZJBwP41vek2kJ71OSYWP0JMUR9K4j8c=;
+ b=fewLZLZDcq6EUuGs31lIjVZGU9Er6X7oInLk4WLAiTz3zBSIxFmd7CmpNv1Y7/03kS
+ 24EvzXu4IEL8aHjov6Z0iby16yvVgyU4oLnlvTL0h1IN0xxfYfqZkqS6QH27JZOP6qF6
+ +bA0KJhqbXQiWL2DWnxqOr17CECEd/nf7CPSfqoEb5svVicBIhyfd3aF5ipyk/SulZq6
+ agh4MWbWbMejO1JXg7Xi5YzsmSSr50CA+IcVi09NbJUjjpaNoTqvIkm9stkzWP5yz+vh
+ 1GGBpNnAEcwXjVoJOeB9uHMd/Q+8DVlR8rn6EnmI4nlu53JNlj1u0oUtBtrlbd5THM4t
+ Fsdw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX8seNLfKarp60Y9TxKXwWlsNaY5IyU9FlqtAE8rJmL0l70LEd7eHLJkhEu22/ZAZB0XNjpFfOhFuSpAtvSGOWv9TB/Lw==
+X-Gm-Message-State: AOJu0Yx0qUvc0inakF9by+xbb44U6U30iewIWD73e3PsGF58+9kkaw27
+ NlG+mvYXVdpziAAd287KpZZtx2ePxgNObD6dLhW3zPRzSHr961+3FH2cBQWELBycN8GTQIwdXJs
+ v3spYx09N78abD7r2hR6+WmRIRG4BwCADpk3djA==
+X-Google-Smtp-Source: AGHT+IENzXKh4Dq/NWUmqJiYdH1GNbdarR1RyjMy8+2t8esBAFZEdsdOeRoGdvs+fWUIbnlLObjjyRbsfHw5QGnW4AU=
+X-Received: by 2002:a17:906:69d0:b0:a3c:af7e:1660 with SMTP id
+ g16-20020a17090669d000b00a3caf7e1660mr12493282ejs.22.1708508180053; Wed, 21
+ Feb 2024 01:36:20 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="rsbny4s32rt4dpho"
-Content-Disposition: inline
-In-Reply-To: <20240221072825.3645303-1-u-kumar1@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-X-Mailman-Approved-At: Wed, 21 Feb 2024 12:29:44 +0100
+References: <20240220131056.2962331-1-sumit.garg@linaro.org>
+ <20240220131056.2962331-8-sumit.garg@linaro.org>
+ <20240221075516.GA5131@francesco-nb>
+ <fba9ba00b218a9c0c9be4958b2f08f1dee3e7a15.camel@toradex.com>
+In-Reply-To: <fba9ba00b218a9c0c9be4958b2f08f1dee3e7a15.camel@toradex.com>
+From: Fathi Boudra <fathi.boudra@linaro.org>
+Date: Wed, 21 Feb 2024 10:36:08 +0100
+Message-ID: <CAGNsrLD-prexjvhje6JU-PEKAeB=8-Cr+EipZWt57YCcFNSQNg@mail.gmail.com>
+Subject: Re: [PATCH 7/7] verdin-imx8mp_defconfig: Enable PCIe/NVMe support
+To: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+Cc: "francesco@dolcini.it" <francesco@dolcini.it>,
+ "sumit.garg@linaro.org" <sumit.garg@linaro.org>, 
+ "jh80.chung@samsung.com" <jh80.chung@samsung.com>,
+ "sahaj.sarup@linaro.org" <sahaj.sarup@linaro.org>, 
+ "peng.fan@nxp.com" <peng.fan@nxp.com>,
+ "remi.duraffort@linaro.org" <remi.duraffort@linaro.org>, 
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "trini@konsulko.com" <trini@konsulko.com>, 
+ "marex@denx.de" <marex@denx.de>,
+ "daniel.thompson@linaro.org" <daniel.thompson@linaro.org>, 
+ "lukma@denx.de" <lukma@denx.de>, "aford173@gmail.com" <aford173@gmail.com>, 
+ "seanga2@gmail.com" <seanga2@gmail.com>, "festevam@denx.de" <festevam@denx.de>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
+ "ilias.apalodimas@linaro.org" <ilias.apalodimas@linaro.org>,
+ "sjg@chromium.org" <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailman-Approved-At: Wed, 21 Feb 2024 12:29:45 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,80 +105,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---rsbny4s32rt4dpho
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-Hi Udit,
+On Wed, 21 Feb 2024 at 10:19, Marcel Ziswiler
+<marcel.ziswiler@toradex.com> wrote:
+>
+> Hi Sumit
+>
+> On Wed, 2024-02-21 at 08:55 +0100, Francesco Dolcini wrote:
+> > Hello Sumit,
+> >
+> > On Tue, Feb 20, 2024 at 06:40:56PM +0530, Sumit Garg wrote:
+> > > Also, enable reset driver which is a prerequisite for PCIe support.
+> > >
+> > > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+> > > ---
+> > >  configs/verdin-imx8mp_defconfig | 9 +++++++++
+> > >  1 file changed, 9 insertions(+)
+> > >
+> > > diff --git a/configs/verdin-imx8mp_defconfig b/configs/verdin-imx8mp_defconfig
+> > > index 22b8a334dfa..d8bd644322b 100644
+> > > --- a/configs/verdin-imx8mp_defconfig
+> > > +++ b/configs/verdin-imx8mp_defconfig
+> > > @@ -185,3 +185,12 @@ CONFIG_USB_GADGET_VENDOR_NUM=0x1b67
+> > >  CONFIG_USB_GADGET_PRODUCT_NUM=0x4000
+> > >  CONFIG_IMX_WATCHDOG=y
+> > >  CONFIG_HEXDUMP=y
+> > > +CONFIG_DM_RESET=y
+> > > +CONFIG_RESET_IMX=y
+> > > +CONFIG_PCI=y
+> > > +CONFIG_PCIE_DW_IMX8=y
+> > > +CONFIG_PHY_IMX8M_PCIE=y
+> > > +CONFIG_CMD_PCI=y
+> > > +CONFIG_NVME=y
+> > > +CONFIG_NVME_PCI=y
+> > > +CONFIG_CMD_NVME=y
+> >
+> > This will increase the u-boot proper size
+>
+> Yes, I checked and it is actually slightly more than 32 K.
+>
+> > and marginally increase the
+> > boot time (because of a bigger binary to be read from the eMMC).
+>
+> That was also my concern.
+>
+> > Apart of that do you expect any other impact on those changes? SPL
+> > binary size should not be affected, correct?
+> >
+> > Asking this out loudly to confirm that nothing unexpected is going to
+> > happen because of these changes.
+>
+> Other than that I actually gave it a quick try and PCIe/NVMe does indeed work and the regular boot is not
+> affected (other than the slight size and boot time increase, of course).
+>
+> > For my curiosity, care to share what's the use case? Do you plan to have
+> > the OS stored into an NVME device?
+>
+> For us the question is basically whether that use case does mandate enforcing such changes for each and every
+> customer. Plus the regular expected maintenance effort any such change brings with it, of course.
 
-Subject: Re: [PATCH] dma: ti: k3-udma: Fix ring_idx to pair k3 nav=20
-rings"
+@Francesco that's correct, we have the OS stored on NVME SSD.
+@Marcel wrt enforcing it, we can always fallback to have a config
+fragment for our customers builds.
+That's already the case, we fine tune the config and don't use U-Boot
+defconfig out of the box for shipping to end users.
 
-Trailing quote in the subject
+> > Francesco
+>
+> Cheers
+>
+> Marcel
 
-On Feb 21, 2024 at 12:58:25 +0530, Udit Kumar wrote:
-> ring_idx was not correctly assigned in case of tflow_id is zero.
-> Which leads to wrong pairing of DMA for drivers like OSPI.
->=20
-> Fixes: 4312a1dfca26 ("dma: ti: k3-udma: Use ring_idx to pair k3 nav rings=
-")
-> Signed-off-by: Udit Kumar <u-kumar1@ti.com>
-
-With the subject change,
-
-Reviewed-by: Jai Luthra <j-luthra@ti.com>
-
-> ---
->  drivers/dma/ti/k3-udma.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->=20
-> diff --git a/drivers/dma/ti/k3-udma.c b/drivers/dma/ti/k3-udma.c
-> index eea9ec9659..39866ffff8 100644
-> --- a/drivers/dma/ti/k3-udma.c
-> +++ b/drivers/dma/ti/k3-udma.c
-> @@ -884,10 +884,10 @@ static int udma_alloc_tx_resources(struct udma_chan=
- *uc)
->  		return ret;
-> =20
->  	tchan =3D uc->tchan;
-> -	if (tchan->tflow_id >=3D 0)
-> +	if (tchan->tflow_id > 0)
->  		ring_idx =3D tchan->tflow_id;
->  	else
-> -		ring_idx =3D ud->bchan_cnt + tchan->id;
-> +		ring_idx =3D tchan->id;
-> =20
->  	ret =3D k3_nav_ringacc_request_rings_pair(ud->ringacc, ring_idx, -1,
->  						&uc->tchan->t_ring,
-> --=20
-> 2.34.1
->=20
-
---=20
-Thanks,
-Jai
-
-GPG Fingerprint: 4DE0 D818 E5D5 75E8 D45A AFC5 43DE 91F9 249A 7145
-
---rsbny4s32rt4dpho
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEETeDYGOXVdejUWq/FQ96R+SSacUUFAmXVtZQACgkQQ96R+SSa
-cUWtMBAAmtleKaqFDkynLx4gRqCdooQ7v9h2FwNwps+2MywT2muTjvyuM5GcQxg3
-0kyU7uBetChZdAQofN5xcE12ytcRroFkxP/FsvB/iVXYb/796hYzmzm4H+/BBobX
-6A5LNDVqvoziLGt3ex3U7DQmcnuvONGmBMVHdIII0VQ0xs0ISE8yWVHzRRXhXU/Y
-z+pham3elQ0kIadgAt8lpnA3GIfVC/We68NWgyynyITW4uJAim/BwMTRC7dKQl9M
-h0BEJHf5Ei89Vap7pIY8jViXgGYh0CvM/NQCsTcscvs5niFEv7DfjS1U03Gshum+
-4xRRyYf3+9UMnhC2JlrPvfOv0K9NRV16u3DdQLJS9lh8r5Wd+RMMpuF33WaM6FsJ
-hlkcl7p6v4YHUkJbn51pj9d0tmQ0A0NvM8RUR/SL0LsdC8vNK7x+SlCI0BtGqODB
-1W8Mzr3EGBdWZ67HqdBemAewAvOYhlEEwuRQ/0NmL9Oa3yQGF3HwJjWLBtMgaNuB
-GcmKknrSAwBus0MqdLnG7CAZ3NxX4/vCm8Ok8A3bPZXGc0f/L6Vb3KuW1YP3akdv
-nmBTEVLtpx5HQ/9rq1Rbhj0DQOINsGd3WU1YUT1GdXtQF15Lbk1DBHQGjYScHbfA
-YEAYasnXFo9w2gflh1C86j+JgdX5tht4VIBWqa5Dz5PG8TajAlM=
-=a+mS
------END PGP SIGNATURE-----
-
---rsbny4s32rt4dpho--
+Cheers,
+-- 
+Fathi Boudra
