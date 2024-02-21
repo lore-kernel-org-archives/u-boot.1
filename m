@@ -4,56 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D843BC48BEB
-	for <u-boot@archiver.kernel.org>; Wed, 21 Feb 2024 15:59:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F9C5C5478A
+	for <u-boot@archiver.kernel.org>; Wed, 21 Feb 2024 17:08:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1824488057;
-	Wed, 21 Feb 2024 16:58:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 2F20A87E3A;
+	Wed, 21 Feb 2024 18:08:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1708531116;
-	bh=j4s/eCJe9+xUOvNoe28h+lHhDKA32lj8dxUTf0J9TyE=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=TJOeAjcz9VdyBT3QWjCd+YUcmLSksqoTakWqxpakqLzgzKdDaCr99KuIlKswI2R6h
-	 g9mctpjtuRlePTvYuipv/2BnDAze9TDfx2BOkVm7pcRoSKJwpqbitrV6X8+64X5X3m
-	 //QhSF+N0DiiPJrbTtSSeWVDXsjbES34yKDumoPJqgtY90gJM7koUPKDoJAYW9SB7F
-	 NRE79KatakfASB4zc9a3YDj58bkGbu5AGeYxbGMDAWsZM6lwoRWtLfoz/isZ5MOjEp
-	 vSXZ7NySeOBLcj6R9UvHE1Gg93GmvRYZpaklW7jaXO6azZ9oLp1HYKzJ3tBwX0e478
-	 ZCg3fVpHirSkQ==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 729A288035; Wed, 21 Feb 2024 18:08:11 +0100 (CET)
+Received: from smtp-190f.mail.infomaniak.ch (smtp-190f.mail.infomaniak.ch
+ [185.125.25.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 76D408802E;
- Wed, 21 Feb 2024 16:58:28 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1708531108;
- bh=j4s/eCJe9+xUOvNoe28h+lHhDKA32lj8dxUTf0J9TyE=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=osfoOtDAnEFu8uJrM9V0sdaITY8ymLAE/lOdC3kOtq2/lftboQ0uvYR+EDnojZkOP
- G0peEZceM8Cvg7PX3Mi0PnTo2JxJ6g9bc7zfKN7CdGW8YVg/VzwIN4mCPGIVbDfZ03
- UqU3r5bpmI7UntNNPkrYx86m6esW80DViKOXcJOwXI2OdmlE5SRCHUf9v/39WhGH+B
- 6MWgZSLv5YoHlPnomWDwiIwur93x3mkI1GXzUeOrMg2DZwNOrmYS07GSZeWsbY6Cwo
- WuFZ+VwhBW1DhBnbQmEpzBNaSUXcmGSx9BbBkhKnIS2Gi6H2/QipEmRm1Auy1Gx5WF
- O9ULyN66MHw2w==
-Message-ID: <1f064fc8-6f73-4b55-a1df-b77236c52c82@denx.de>
-Date: Wed, 21 Feb 2024 13:44:10 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id C10B687E3A
+ for <u-boot@lists.denx.de>; Wed, 21 Feb 2024 18:08:08 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=0leil.net
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=foss+uboot@0leil.net
+Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
+ [10.7.10.108])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Tg2lr2N3BzHJF;
+ Wed, 21 Feb 2024 18:08:08 +0100 (CET)
+Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4Tg2lp6dV3zXws; Wed, 21 Feb 2024 18:08:06 +0100 (CET)
+From: Quentin Schulz <foss+uboot@0leil.net>
+Subject: [PATCH 00/16] rockchip: add support for SARADCv2 and RK806 PMIC
+ and regulators
+Date: Wed, 21 Feb 2024 18:07:29 +0100
+Message-Id: <20240221-rk3588-saradc-v1-0-c39a5601d1cc@theobroma-systems.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 6/6] usb: kbd: Add probe quirk for Apple and Keychron
- keyboards
-Content-Language: en-US
-To: j@jannau.net, Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, asahi@lists.linux.dev
-References: <20240221-asahi-keyboards-v1-0-814b2e741790@jannau.net>
- <20240221-asahi-keyboards-v1-6-814b2e741790@jannau.net>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240221-asahi-keyboards-v1-6-814b2e741790@jannau.net>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIANEt1mUC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIxMDI0Mj3aJsY1MLC93ixKLElGTdxCSDRMuklERLYwMzJaCegqLUtMwKsHn
+ RsbW1AK6V8QpfAAAA
+To: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Klaus Goger <klaus.goger@theobroma-systems.com>, 
+ Heiko Stuebner <heiko.stuebner@cherry.de>
+Cc: u-boot@lists.denx.de, 
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>, 
+ Quentin Schulz <foss+uboot@0leil.net>, 
+ William Wu <william.wu@rock-chips.com>
+X-Mailer: b4 0.13.0
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,20 +68,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/21/24 08:25, Janne Grunau via B4 Relay wrote:
-> From: Janne Grunau <j@jannau.net>
-> 
-> Those keyboards do not return the current device state. Polling will
-> timeout unless there are key presses. This is not a problem during
-> operation but the inital device state query during probing will fail.
-> Skip this step in usb_kbd_probe_dev() to make these devices useable.
-> Not all Apple keyboards behave like this. A keyboard with USB
-> vendor/product ID 05ac:0221 is reported to work with the current code.
-> Unfortunately some Keychron keyboards "re-use" Apple's vendor ID and
-> show the same behavior (Keychron C2, 05ac:024f for example).
+The RK3588 has a new IP for SARADC compared to older SoCs of the same
+vendor but most of the boilerplate is shared, so rockchip-saradc.c
+driver is adapted instead of creating a new one.
 
-Uh, fun.
+Because the SARADC requires a vref-supply which is commonly coming from
+a regulator of the RK806 PMIC, support for the RK806 PMIC and regulators
+are also added in this patch series. Finally, RK806 PMIC is the first
+one to actually support SPI as communication layer between the SoC and
+the PMIC (but supports I2C as well according to the datasheet). This
+adds support for RK806 over SPI though there should be no reason for
+RK806 over I2C to not work.
 
-Reviewed-by: Marek Vasut <marex@denx.de>
+Note that the DT now uses a different prefix for the buck and ldo node
+names and the RK806 is the first one to use nldo and pldo and while they
+both are LDOs, they have overlapping indices which makes it impossible
+to simply reuse the rk8xx_ldo driver and need to define new ones (though
+some callbacks can be reused, as is done in this patch series).
 
-Thanks !
+The SARADC was tested by toggling the BIOS button connected over channel
+0 on RK3588 Jaguar and using the adc or button commands to watch over
+the value.
+The PMIC was tested with the pmic command for reading the CHIP_VERS
+registers and writing to the WDT_REG (0x73).
+The regulators were tested by using a modified DT for RK3588 Jaguar and
+playing with the regulator command to enable/disable some buck/nldo/pldo
+and modify their output voltage.
+
+This has a light dependency on
+https://lore.kernel.org/u-boot/20240221-jaguar-v3-0-1f256a82201b@theobroma-systems.com/T/#t
+because of:
+ - remove of asm/io.h include in favor of asm/arch-rockchip/hardware.h
+   (both should be included if applied before the dependency)
+ - Jaguar defconfig modified in this patch series is added in the
+   aforementioned patch series,
+
+Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+---
+Quentin Schulz (15):
+      rockchip: spi: rk_spi: do not write bytes when in read-only mode
+      regulator: rk8xx: remove unused functions
+      regulator: rk8xx: add indirection level for some ldo callbacks
+      power: rk8xx: add support for RK806
+      pmic: reword help text
+      rockchip: adc: rockchip-saradc: use union for preparing for v2
+      rockchip: adc: rockchip-saradc: factor out channel_data callback
+      rockchip: adc: rockchip-saradc: factor out start_channel callback
+      rockchip: adc: rockchip-saradc: factor out stop callback
+      rockchip: adc: rockchip-saradc: add support for RK3588
+      power: pmic: rk8xx: fix duplicate prompt
+      rockchip: jaguar-rk3588: enable SARADC and derivatives
+      adc: add missing depends on ADC for controller drivers
+      button: add missing ADC dependency for BUTTON_ADC
+      rockchip: boot_mode: fix rockchip_dnl_key_pressed requiring ADC support
+
+William Wu (1):
+      regulator: rk8xx: fix SWITCH enable on RK809
+
+ arch/arm/mach-rockchip/boot_mode.c |   4 +
+ cmd/pmic.c                         |   4 +-
+ configs/jaguar-rk3588_defconfig    |  11 +-
+ drivers/adc/Kconfig                |   4 +
+ drivers/adc/rockchip-saradc.c      | 176 +++++++++--
+ drivers/button/Kconfig             |   1 +
+ drivers/power/pmic/Kconfig         |   2 +-
+ drivers/power/pmic/rk8xx.c         |  85 ++++++
+ drivers/power/regulator/rk8xx.c    | 595 ++++++++++++++++++++++++++++++++++---
+ drivers/spi/rk_spi.c               |  20 +-
+ include/power/rk8xx_pmic.h         |  21 +-
+ 11 files changed, 848 insertions(+), 75 deletions(-)
+---
+base-commit: dcf1b0a056cc81dc268d449c6e689fe80ca688ae
+change-id: 20240212-rk3588-saradc-ab0a9bda9306
+
+Best regards,
+-- 
+Quentin Schulz <quentin.schulz@theobroma-systems.com>
+
