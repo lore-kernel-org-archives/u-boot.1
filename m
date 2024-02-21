@@ -4,39 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31C99C48BF6
-	for <u-boot@archiver.kernel.org>; Wed, 21 Feb 2024 10:40:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16A05C54787
+	for <u-boot@archiver.kernel.org>; Wed, 21 Feb 2024 10:40:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8AD508807E;
-	Wed, 21 Feb 2024 11:38:48 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 49B2988075;
+	Wed, 21 Feb 2024 11:38:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 13DEC86EEC; Wed, 21 Feb 2024 11:38:17 +0100 (CET)
-Received: from smtp-8fa9.mail.infomaniak.ch (smtp-8fa9.mail.infomaniak.ch
- [IPv6:2001:1600:7:10::8fa9])
+ id 30B7D87D91; Wed, 21 Feb 2024 11:38:18 +0100 (CET)
+Received: from smtp-42ae.mail.infomaniak.ch (smtp-42ae.mail.infomaniak.ch
+ [IPv6:2001:1600:4:17::42ae])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 97AA388030
- for <u-boot@lists.denx.de>; Wed, 21 Feb 2024 11:37:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4283888026
+ for <u-boot@lists.denx.de>; Wed, 21 Feb 2024 11:37:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
- [10.7.10.107])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Tft5b1sV6zGPr;
- Wed, 21 Feb 2024 11:37:55 +0100 (CET)
+Received: from smtp-4-0000.mail.infomaniak.ch (unknown [10.7.10.107])
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Tft5Y5pr3zMq1Mf;
+ Wed, 21 Feb 2024 11:37:53 +0100 (CET)
 Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4Tft5Y6PvvzX3Z; Wed, 21 Feb 2024 11:37:53 +0100 (CET)
+ id 4Tft5X4WH2zYCy; Wed, 21 Feb 2024 11:37:52 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Wed, 21 Feb 2024 11:37:32 +0100
-Subject: [PATCH v3 05/20] rockchip: pine64: pinephone-pro: migrate to
+Date: Wed, 21 Feb 2024 11:37:31 +0100
+Subject: [PATCH v3 04/20] rockchip: pine64: pinebook-pro: migrate to
  rockchip_early_misc_init_r
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240221-jaguar-v3-5-1f256a82201b@theobroma-systems.com>
+Message-Id: <20240221-jaguar-v3-4-1f256a82201b@theobroma-systems.com>
 References: <20240221-jaguar-v3-0-1f256a82201b@theobroma-systems.com>
 In-Reply-To: <20240221-jaguar-v3-0-1f256a82201b@theobroma-systems.com>
 To: Simon Glass <sjg@chromium.org>, 
@@ -92,22 +91,22 @@ Reviewed-by: Dragan Simic <dsimic@manjaro.org>
 Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 ---
- .../pine64/pinephone-pro-rk3399/pinephone-pro-rk3399.c  | 17 ++---------------
- 1 file changed, 2 insertions(+), 15 deletions(-)
+ board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c | 18 ++----------------
+ 1 file changed, 2 insertions(+), 16 deletions(-)
 
-diff --git a/board/pine64/pinephone-pro-rk3399/pinephone-pro-rk3399.c b/board/pine64/pinephone-pro-rk3399/pinephone-pro-rk3399.c
-index b6ccbb9c1c4..de75ee329d8 100644
---- a/board/pine64/pinephone-pro-rk3399/pinephone-pro-rk3399.c
-+++ b/board/pine64/pinephone-pro-rk3399/pinephone-pro-rk3399.c
-@@ -12,7 +12,6 @@
+diff --git a/board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c b/board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c
+index 4ad780767ea..2408a367305 100644
+--- a/board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c
++++ b/board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c
+@@ -11,7 +11,6 @@
  #include <asm/arch-rockchip/clock.h>
  #include <asm/arch-rockchip/grf_rk3399.h>
  #include <asm/arch-rockchip/hardware.h>
 -#include <asm/arch-rockchip/misc.h>
+ #include <linux/printk.h>
  #include <power/regulator.h>
  
- #define GRF_IO_VSEL_BT565_GPIO2AB 1
-@@ -56,23 +55,11 @@ static void setup_iodomain(void)
+@@ -54,23 +53,10 @@ static void setup_iodomain(void)
  	rk_setreg(&pmugrf->soc_con0, 1 << PMUGRF_CON0_VSEL_SHIFT);
  }
  
@@ -128,9 +127,9 @@ index b6ccbb9c1c4..de75ee329d8 100644
 -	ret = rockchip_cpuid_set(cpuid, cpuid_length);
 -	if (ret)
 -		return ret;
-+	return 0;
- 
+-
 -	return ret;
++	return 0;
  }
  #endif
 
