@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 124F6C48BC3
-	for <u-boot@archiver.kernel.org>; Wed, 21 Feb 2024 06:27:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31A21C48BF6
+	for <u-boot@archiver.kernel.org>; Wed, 21 Feb 2024 06:28:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 25DE788033;
-	Wed, 21 Feb 2024 07:26:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3929B8801E;
+	Wed, 21 Feb 2024 07:28:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="z0d91q2Y";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zZN1zeiP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1862788034; Wed, 21 Feb 2024 07:26:35 +0100 (CET)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id A57E388026; Wed, 21 Feb 2024 07:28:11 +0100 (CET)
+Received: from mail-vs1-xe29.google.com (mail-vs1-xe29.google.com
+ [IPv6:2607:f8b0:4864:20::e29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 565268803F
- for <u-boot@lists.denx.de>; Wed, 21 Feb 2024 07:26:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9969787D29
+ for <u-boot@lists.denx.de>; Wed, 21 Feb 2024 07:28:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dan.carpenter@linaro.org
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-a3f3d0d2787so29021066b.3
- for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 22:26:26 -0800 (PST)
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-vs1-xe29.google.com with SMTP id
+ ada2fe7eead31-4705496ac55so678973137.3
+ for <u-boot@lists.denx.de>; Tue, 20 Feb 2024 22:28:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708496785; x=1709101585; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=bHberb9gmaFx0f0LhlBmn21j5qZt6WtRLgiOAN3YIDw=;
- b=z0d91q2YDroGpuDrMOo50KkSNO86w00HycZJp4aZq+/4jas117DXDTY8s+v3FRSlRc
- epUZqivoQjNqSmTIZwtR5W2EMQaxBIERp0aA7ec/RQGcxpUDZqLiSisS2fAJLx0Xue8Y
- d+85IDhlKb3E1LvNuXeVrIp31si1HiTCskz9NFfsI1v8ChErY4efC3utdGL/eKRndNPb
- zR9MFd8k61yfBaJa/4RlRHMjGJAu/3bUVVwvmTdhxxudYS4Vu3KJA7+1HMA4I1oD7Kdl
- +LqLf4RvWsXwVJfV+NBaivDNb8+1iQFl5n+YIdm97RQ2tPZ96XuDPzQ/NzpNaNHVKv12
- iLOA==
+ d=linaro.org; s=google; t=1708496883; x=1709101683; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=b7YLlP0TwqpXjHEW4OxtqsmsSxjS0wETqb9MInCo9zY=;
+ b=zZN1zeiPvu4NLOACC5EtcBwu9N65SNfkLDokEUe2k3QJQIYGfa+hYmUiMkXa7VM//i
+ LJq/4yaQj2QNz2LYNeXmkKtL6MiztoLnXN4dUQQMYKhbYkDZmq5AHXx9CYFeZvxlAomi
+ FZs1bBb0jgbVwbq01S9OkA1vGCbqKy/rNFLHOQ/G3qUaAMhfHYa0KCkb/zkt0yzfDpid
+ /n4NoJBtSKQ0zky+GvIPmxxRJqMTKDm7WSUm1/w0/g8/Rdo4JoZ81E94baptPcHdE5db
+ 55peb7OUlfl017ON1Pi8lVhlFccuwZzWLjrL1l1kdQsr1WCGeE3BeGHZqdbUKxKSLEDb
+ v0LA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708496785; x=1709101585;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=bHberb9gmaFx0f0LhlBmn21j5qZt6WtRLgiOAN3YIDw=;
- b=hC+3iHDlPFio+UkRmgcHeS5joK35J437xAApT08qiq/NN/mo5oPBAoArhT7K/bjFWM
- oGkMBIcLPQEOGQpHAPr4cHUZoB7uIlRG0e7uvGX3PP7vwUY3G5h2rfp/yZpJ6gVfhYuN
- DDo90MWHF/wapqqy3XlMJjoMJU580Ye1cGeKP3I/ZuAwXck/ETVxzvMr50GZQ8V7Z6LX
- YJ2DMMMthqMdWshS7SWgRf/IjWZKUDWq77NU9uQm09DQ6QZI3dGQkMDKTaDiVjT2m5aV
- CE6NxsiKDks0UHlu9RtAMOwcSodeUVU/lWzbOtjDFTrEhkglqnu39fRZPZp6Az++9DNz
- OwtA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVH4gWLf3S/mrt2FQzfzapVp5IWWEmqBU7aMUvtwjH6TBZrSuO5q2qpHmzzxjFeUZTohksQLqQnUjMD9DWCjVBxb9JSHA==
-X-Gm-Message-State: AOJu0Yz/uTAR+UJwCw6BFYpcaKMYaHupVOVVCJS/jDyMbT/M4nbkSF9Z
- qknTsbstj0VBg1GMwwGocnPerfSi7auxCUanbcb0LE5j7TuZjTGysAlagCXTNzEb7irULPKSJnT
- U
-X-Google-Smtp-Source: AGHT+IFvb8LeQ/Fwfpe9AergWqbKZ2uc9R5GHwZGTd5jP2XKHQoX/BxlzbBqBYdtcT5a8zSpE3wy8g==
-X-Received: by 2002:a17:906:6057:b0:a3d:caa4:2b88 with SMTP id
- p23-20020a170906605700b00a3dcaa42b88mr10641773ejj.27.1708496784714; 
- Tue, 20 Feb 2024 22:26:24 -0800 (PST)
-Received: from localhost ([102.222.70.76]) by smtp.gmail.com with ESMTPSA id
- zh11-20020a170906880b00b00a3ec216ec6csm2179197ejb.45.2024.02.20.22.26.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Feb 2024 22:26:24 -0800 (PST)
-Date: Wed, 21 Feb 2024 09:26:21 +0300
-From: Dan Carpenter <dan.carpenter@linaro.org>
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Subject: [PATCH] bootstd: fix build error when CONFIG_MMC is disabled
-Message-ID: <e910bbd4-e509-4e6f-a458-d2e00741aec6@moroto.mountain>
+ d=1e100.net; s=20230601; t=1708496883; x=1709101683;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=b7YLlP0TwqpXjHEW4OxtqsmsSxjS0wETqb9MInCo9zY=;
+ b=G7FhxXel6e0oXCvS6opfLYrVMWgShpskNi/xGyaV5vThTh+tTxvEB0k3y4ULfKgu+3
+ Nu4oAejRuBWKh4JpBiIei4Wct2q/YZSi9os2ipDB7oI/6Aqq+cwMR5FaHYWgYVUggkR3
+ 6YOq/vZx9MRQgxEgojcLDfvCY8PTS4RpC/TVhTPA5tmI0p6/twifkvsCZh8RCzzsogZv
+ Wp+uWjsuxTrfgAaDujRs88ohlg/30A+JKDMX+RfmJJkNlbeh/Q6b0XbA8c6sXbIwXUYK
+ 8shGkTFwNqQC8U3sNVxmXwZtcGa/eMhybBWV9eagceSKaKk/FC7oDSccOjUevGIcqpch
+ Rkqw==
+X-Gm-Message-State: AOJu0YzQjjCfqjvELDTvQiHNIhPFkfpr2sxwL73mfEQg5NXmQs0MLssQ
+ ahb9UplzEBC/ZqQ7tKI9mMjrm0yYqspFtcgYMjJaHytf74S4fE6gO2q8OxvdZ+93J/oE4yJvmVL
+ XFquOQa21YeKZQvG6ntFqiBc9uUQ8J5Y0zz5vYw==
+X-Google-Smtp-Source: AGHT+IFv1vkxdIRKjXcd+W8TZayAUCmZH4rZdJwMz83iCOcfyDdvIZ7cIRisLqfmxwHUkUQc3ApxNgs2BKKVr9AyHmc=
+X-Received: by 2002:a67:f946:0:b0:46e:e898:7d61 with SMTP id
+ u6-20020a67f946000000b0046ee8987d61mr13838828vsq.15.1708496881901; Tue, 20
+ Feb 2024 22:28:01 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-X-Mailer: git-send-email haha only kidding
+References: <20240220131056.2962331-1-sumit.garg@linaro.org>
+ <20240220131056.2962331-8-sumit.garg@linaro.org>
+ <0d3d4efc-03e1-4236-bcc2-5b8efdc7f340@denx.de>
+In-Reply-To: <0d3d4efc-03e1-4236-bcc2-5b8efdc7f340@denx.de>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Wed, 21 Feb 2024 11:57:51 +0530
+Message-ID: <CAFA6WYNeenqPXtpbOi0ps8e6xfieq9U=XovqqCY1m+CYCNbDsw@mail.gmail.com>
+Subject: Re: [PATCH 7/7] verdin-imx8mp_defconfig: Enable PCIe/NVMe support
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, marcel.ziswiler@toradex.com, trini@konsulko.com, 
+ lukma@denx.de, seanga2@gmail.com, jh80.chung@samsung.com, festevam@denx.de, 
+ andrejs.cainikovs@toradex.com, sjg@chromium.org, peng.fan@nxp.com, 
+ aford173@gmail.com, ilias.apalodimas@linaro.org, sahaj.sarup@linaro.org, 
+ fathi.boudra@linaro.org, remi.duraffort@linaro.org, 
+ daniel.thompson@linaro.org
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,33 +92,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This code assumes that CONFIG_MMC and it causes a build error when
-the config is disabled.
+On Tue, 20 Feb 2024 at 21:02, Marek Vasut <marex@denx.de> wrote:
+>
+> On 2/20/24 14:10, Sumit Garg wrote:
+> > Also, enable reset driver which is a prerequisite for PCIe support.
+>
+> Commit message needs to be fixed.
 
-aarch64-linux-gnu-ld.bfd: test/boot/bootstd_common.o: in function `bootstd_test_check_mmc_hunter':
-test/boot/bootstd_common.c:83:(.text.bootstd_test_check_mmc_hunter+0x70):
-    undefined reference to `_u_boot_list_2_bootdev_hunter_2_mmc_bootdev_hunter'
+Let me reiterate the header here too.
 
-Fixes: 66e3dce78750 ("bootstd: Allow hunting for a bootdev by label")
-Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
----
- test/boot/bootstd_common.c | 3 +++
- 1 file changed, 3 insertions(+)
+    Enable PCIe/NVMe support. Also, enable the reset driver which
+    is a prerequisite for PCIe support.
 
-diff --git a/test/boot/bootstd_common.c b/test/boot/bootstd_common.c
-index e71a2975c53c..cc97e255e5cb 100644
---- a/test/boot/bootstd_common.c
-+++ b/test/boot/bootstd_common.c
-@@ -74,6 +74,9 @@ int bootstd_test_check_mmc_hunter(struct unit_test_state *uts)
- 	struct bootstd_priv *std;
- 	uint seq;
- 
-+	if (!IS_ENABLED(CONFIG_MMC))
-+		return 0;
-+
- 	/* get access to the used hunters */
- 	ut_assertok(bootstd_get_priv(&std));
- 
--- 
-2.43.0
-
+-Sumit
