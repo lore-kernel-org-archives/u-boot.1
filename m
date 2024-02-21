@@ -4,65 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66C74C48BF6
-	for <u-boot@archiver.kernel.org>; Wed, 21 Feb 2024 07:27:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85C58C48BF6
+	for <u-boot@archiver.kernel.org>; Wed, 21 Feb 2024 07:27:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7DB5D8804A;
-	Wed, 21 Feb 2024 08:26:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 13BC587FB0;
+	Wed, 21 Feb 2024 08:26:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="eYNR6xHq";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="De39rTZi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F2CD88032; Wed, 21 Feb 2024 08:25:40 +0100 (CET)
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+ id 3072587FE7; Wed, 21 Feb 2024 08:25:46 +0100 (CET)
+Received: from sin.source.kernel.org (sin.source.kernel.org
+ [IPv6:2604:1380:40e1:4800::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 88CB98801D
+ by phobos.denx.de (Postfix) with ESMTPS id B76B788022
  for <u-boot@lists.denx.de>; Wed, 21 Feb 2024 08:25:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=devnull+j.jannau.net@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 7BD4DCE1C63;
+ by sin.source.kernel.org (Postfix) with ESMTP id 41173CE1C69;
  Wed, 21 Feb 2024 07:25:17 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id A4E8DC433B1;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 7A064C43390;
  Wed, 21 Feb 2024 07:25:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1708500316;
- bh=k2TtkX+pdzAy2Y6EqTPgl2Lc45ZfW3qYeR+/pgHaXpo=;
+ bh=Ry+xFiW7Ja/sbnD/CiKpiEN9ElRw0jmqW7igWzHC8aQ=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=eYNR6xHqykY6JIXz2l1tzJHPzwMjg0R2Fbxp2uqENCascW8uW2OO81KwpFNjF5IXN
- xAgMl68W7sTJPMOaVRVBz+BzTZUF+vQzjzgnYCsObcA0wkSUkauHLTjMjqcvZV79Jk
- o2nJdukkWO5g7DOg6BiWNbihORwdX0mRdZVQOX0AfIQV2jW7gKedGd6KJj8drZEchB
- FAO17YZxSq71cW+kxPBneFNXrw0GTqEoAruaqfP6scNv4p4JeLEymWdpgVo1tvTJEd
- IuixQJX7ifFeoQQVcpdlqFYAdcMKNIdGsLDcfOyPZNq0GSU8Zu/3bKdAvuObjMmJXx
- WqRS/EOndgkAw==
+ b=De39rTZinFoWH7LnP6UjRbkSz5aR5PeOvMPSA0B3txuQnBUuthnFuXnvDPBl0bPMU
+ FJ2q8SScVrhZWAsYqo9Vu6sCTnXMW4nJ2EBDY30ncmFbM2ZCV1+Oc5Rh2SAgBgn6dl
+ vz5W7aQ3fnez26F/IAFPgDa4QJCyM5GazCdDbgqz6Rl3rbigrttEst8f+A0N+zgT6h
+ YIODEB9Yg4MLekoVKQXTgF/ANZ/3rkDJuBkV+cfWaDP3KyT6EYf0BTkiJEUIHSJ0YQ
+ hX/lYdBUhgriieCP/7b1+EpWOY3SA2Js70i6bsemkYQQWCC5OA6YuzHyiSuegardvk
+ /+XcEJMUa3Gsg==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 9437AC48BF6;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 5C26BC54788;
  Wed, 21 Feb 2024 07:25:16 +0000 (UTC)
 From: Janne Grunau via B4 Relay <devnull+j.jannau.net@kernel.org>
-Date: Wed, 21 Feb 2024 08:25:06 +0100
-Subject: [PATCH 6/6] usb: kbd: Add probe quirk for Apple and Keychron keyboards
+Date: Wed, 21 Feb 2024 08:25:02 +0100
+Subject: [PATCH 2/6] usb: xhci: Set up endpoints for the first 2 interfaces
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240221-asahi-keyboards-v1-6-814b2e741790@jannau.net>
+Message-Id: <20240221-asahi-keyboards-v1-2-814b2e741790@jannau.net>
 References: <20240221-asahi-keyboards-v1-0-814b2e741790@jannau.net>
 In-Reply-To: <20240221-asahi-keyboards-v1-0-814b2e741790@jannau.net>
 To: Bin Meng <bmeng.cn@gmail.com>, Marek Vasut <marex@denx.de>, 
  Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, asahi@lists.linux.dev, Janne Grunau <j@jannau.net>
 X-Mailer: b4 0.12.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2536; i=j@jannau.net;
- h=from:subject:message-id; bh=3y8349yV2wtUe41ovy+jezKbAFHoTDxLrAQuuV9nDGw=;
- b=owGbwMvMwCW2UNrmdq9+ahrjabUkhtSrS6OmyH2veiK4vNPh20Fu129K4cwBK/dJ705mOyIf/
- 3VxeaB1RykLgxgXg6yYIkuS9ssOhtU1ijG1D8Jg5rAygQxh4OIUgIlMcWNkeN23YHuGxfecadMk
- r0znjHyfqvIg/+O61rKKGQ/nNLNzWTMynPr5Tnn9Mu0Dhw/typpU8bi05NOKrVd65/anMHJJ+nk
- m8gEA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3079; i=j@jannau.net;
+ h=from:subject:message-id; bh=Hj57V9gw7i+OPqRqLUJzvo8kdj4VAIBRQ+iShMSucUY=;
+ b=owGbwMvMwCW2UNrmdq9+ahrjabUkhtSrS6OqXdxVdsSVHGJmPSOuWnI25ZSr/VYO03U/zNS4N
+ t7Z4buoo5SFQYyLQVZMkSVJ+2UHw+oaxZjaB2Ewc1iZQIYwcHEKwETefWVkWMHdZBdRGByvqjK9
+ 40Ka3nve7L8te3wyeA4xyyv/V4gpZ/jDz1P3ndFiznydi1yqvNc0SyQfB0b2Tv3VaNnTyl33t5I
+ VAA==
 X-Developer-Key: i=j@jannau.net; a=openpgp;
  fpr=8B336A6BE4E5695E89B8532B81E806F586338419
 X-Endpoint-Received: by B4 Relay for j@jannau.net/default with auth_id=62
@@ -86,74 +87,89 @@ X-Virus-Status: Clean
 
 From: Janne Grunau <j@jannau.net>
 
-Those keyboards do not return the current device state. Polling will
-timeout unless there are key presses. This is not a problem during
-operation but the inital device state query during probing will fail.
-Skip this step in usb_kbd_probe_dev() to make these devices useable.
-Not all Apple keyboards behave like this. A keyboard with USB
-vendor/product ID 05ac:0221 is reported to work with the current code.
-Unfortunately some Keychron keyboards "re-use" Apple's vendor ID and
-show the same behavior (Keychron C2, 05ac:024f for example).
-
-Signed-off-by: Janne Grunau <j@jannau.net>
+Apple USB keyboards carry the HID keyboard boot protocol on the second
+interface. Using the second interface in the USB keyboard driver does
+not work since the xhci has not allocated a transfer ring.
 ---
- common/usb_kbd.c | 22 ++++++++++++++++++++++
- 1 file changed, 22 insertions(+)
+ drivers/usb/host/xhci.c | 31 +++++++++++++++++++------------
+ include/usb.h           |  6 ++++++
+ 2 files changed, 25 insertions(+), 12 deletions(-)
 
-diff --git a/common/usb_kbd.c b/common/usb_kbd.c
-index 7aa803eb4e..b0012ce7ad 100644
---- a/common/usb_kbd.c
-+++ b/common/usb_kbd.c
-@@ -31,6 +31,10 @@
- #define USB_DEVICE_ID_APPLE_MAGIC_KEYBOARD_FINGERPRINT_2021	0x029a
- #define USB_DEVICE_ID_APPLE_MAGIC_KEYBOARD_NUMPAD_2021		0x029f
+diff --git a/drivers/usb/host/xhci.c b/drivers/usb/host/xhci.c
+index 534c4b973f..741e186ee0 100644
+--- a/drivers/usb/host/xhci.c
++++ b/drivers/usb/host/xhci.c
+@@ -606,24 +606,28 @@ static int xhci_set_configuration(struct usb_device *udev)
+ 	int slot_id = udev->slot_id;
+ 	struct xhci_virt_device *virt_dev = ctrl->devs[slot_id];
+ 	struct usb_interface *ifdesc;
++	unsigned int ifnum;
++	unsigned int max_ifnum = min((unsigned int)USB_MAX_ACTIVE_INTERFACES,
++				     (unsigned int)udev->config.no_of_if);
  
-+#define USB_VENDOR_ID_KEYCHRON	0x3434
-+
-+#define USB_HID_QUIRK_POLL_NO_REPORT_IDLE	(1 << 0)
-+
- /*
-  * If overwrite_console returns 1, the stdin, stderr and stdout
-  * are switched to the serial port, else the settings in the
-@@ -483,6 +487,7 @@ static int usb_kbd_probe_dev(struct usb_device *dev, unsigned int ifnum)
- 	struct usb_interface *iface;
- 	struct usb_endpoint_descriptor *ep;
- 	struct usb_kbd_pdata *data;
-+	unsigned int quirks = 0;
- 	int epNum;
- 	int i;
+ 	out_ctx = virt_dev->out_ctx;
+ 	in_ctx = virt_dev->in_ctx;
  
-@@ -525,6 +530,15 @@ static int usb_kbd_probe_dev(struct usb_device *dev, unsigned int ifnum)
+-	num_of_ep = udev->config.if_desc[0].no_of_ep;
+-	ifdesc = &udev->config.if_desc[0];
+-
+ 	ctrl_ctx = xhci_get_input_control_ctx(in_ctx);
+ 	/* Initialize the input context control */
+ 	ctrl_ctx->add_flags = cpu_to_le32(SLOT_FLAG);
+ 	ctrl_ctx->drop_flags = 0;
  
- 	debug("USB KBD: found interrupt EP: 0x%x\n", ep->bEndpointAddress);
+-	/* EP_FLAG gives values 1 & 4 for EP1OUT and EP2IN */
+-	for (cur_ep = 0; cur_ep < num_of_ep; cur_ep++) {
+-		ep_flag = xhci_get_ep_index(&ifdesc->ep_desc[cur_ep]);
+-		ctrl_ctx->add_flags |= cpu_to_le32(1 << (ep_flag + 1));
+-		if (max_ep_flag < ep_flag)
+-			max_ep_flag = ep_flag;
++	for (ifnum = 0; ifnum < max_ifnum; ifnum++) {
++		ifdesc = &udev->config.if_desc[ifnum];
++		num_of_ep = ifdesc->no_of_ep;
++		/* EP_FLAG gives values 1 & 4 for EP1OUT and EP2IN */
++		for (cur_ep = 0; cur_ep < num_of_ep; cur_ep++) {
++			ep_flag = xhci_get_ep_index(&ifdesc->ep_desc[cur_ep]);
++			ctrl_ctx->add_flags |= cpu_to_le32(1 << (ep_flag + 1));
++			if (max_ep_flag < ep_flag)
++				max_ep_flag = ep_flag;
++		}
+ 	}
  
-+	switch (dev->descriptor.idVendor) {
-+	case USB_VENDOR_ID_APPLE:
-+	case USB_VENDOR_ID_KEYCHRON:
-+		quirks |= USB_HID_QUIRK_POLL_NO_REPORT_IDLE;
-+		break;
-+	default:
-+		break;
+ 	xhci_inval_cache((uintptr_t)out_ctx->bytes, out_ctx->size);
+@@ -637,9 +641,12 @@ static int xhci_set_configuration(struct usb_device *udev)
+ 	xhci_endpoint_copy(ctrl, in_ctx, out_ctx, 0);
+ 
+ 	/* filling up ep contexts */
+-	err = xhci_init_ep_contexts_if(udev, ctrl, virt_dev, ifdesc);
+-	if (err < 0)
+-		return err;
++	for (ifnum = 0; ifnum < max_ifnum; ifnum++) {
++		ifdesc = &udev->config.if_desc[ifnum];
++		err = xhci_init_ep_contexts_if(udev, ctrl, virt_dev, ifdesc);
++		if (err < 0)
++			return err;
 +	}
-+
- 	data = malloc(sizeof(struct usb_kbd_pdata));
- 	if (!data) {
- 		printf("USB KBD: Error allocating private data\n");
-@@ -565,6 +579,14 @@ static int usb_kbd_probe_dev(struct usb_device *dev, unsigned int ifnum)
- 	usb_set_idle(dev, iface->desc.bInterfaceNumber, 0, 0);
- #endif
  
-+	/*
-+	 * Apple and Keychron keyboards do not report the device state. Reports
-+	 * are only returned during key presses.
-+	 */
-+	if (quirks & USB_HID_QUIRK_POLL_NO_REPORT_IDLE) {
-+		debug("USB KBD: quirk: skip testing device state\n");
-+		return 1;
-+	}
- 	debug("USB KBD: enable interrupt pipe...\n");
- #ifdef CONFIG_SYS_USB_EVENT_POLL_VIA_INT_QUEUE
- 	data->intq = create_int_queue(dev, data->intpipe, 1,
+ 	return xhci_configure_endpoints(udev, false);
+ }
+diff --git a/include/usb.h b/include/usb.h
+index 09e3f0cb30..3aafdc8bfd 100644
+--- a/include/usb.h
++++ b/include/usb.h
+@@ -49,6 +49,12 @@ extern bool usb_started; /* flag for the started/stopped USB status */
+  */
+ #define USB_TIMEOUT_MS(pipe) (usb_pipebulk(pipe) ? 5000 : 1000)
+ 
++/*
++ * The xhcd hcd driver prepares only a limited number interfaces / endpoints.
++ * Define this limit so that drivers do not exceed it.
++ */
++#define USB_MAX_ACTIVE_INTERFACES	2
++
+ /* device request (setup) */
+ struct devrequest {
+ 	__u8	requesttype;
 
 -- 
 2.43.2
