@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E550AC48BC3
-	for <u-boot@archiver.kernel.org>; Wed, 21 Feb 2024 10:47:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CDA1C48BC3
+	for <u-boot@archiver.kernel.org>; Wed, 21 Feb 2024 10:47:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D7E28807C;
-	Wed, 21 Feb 2024 11:43:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 39E058807F;
+	Wed, 21 Feb 2024 11:43:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1708512192;
-	bh=j50eO05yRSVBzkl1TjpExrKB0ptO4wwBhQx8SwppDuE=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=ZKBnqApUln4nWuRYaS+TU4GD/ybKpqM9P+XlIcxp7b0Z8jLZTcVGWxpHd6VPQTWfp
-	 8yk0jFerkljQzRv0SgzMi1rKXc0abLrTmxKKSkGd5V/KhMu899YhDtNUNkNIBIkx8S
-	 3uEhHu9AWZXijQ9aYkYANMHqx6l+l3iG06KWPzvH0MDvNYVx1lg7wnqs53oP9TYQys
-	 01NMmYBtFrJCLDJ5l7d/f0o4k1LMuQcAKwBQuVEKAHNrAMuZdguB6HsLOe3vDO6PwG
-	 e6mktYJpFsoFhuUVi7AY+LrRLVcKoA4wJQU+D3mfLC0FkW6S0Nemmu7KMGLw1Hfjxx
-	 1IPamkHOsdM7Q==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 98EAC88087; Wed, 21 Feb 2024 11:41:10 +0100 (CET)
+Received: from smtp-bc09.mail.infomaniak.ch (smtp-bc09.mail.infomaniak.ch
+ [IPv6:2001:1600:7:10::bc09])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 0EE9B88079;
- Wed, 21 Feb 2024 11:40:55 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1708512063;
- bh=j50eO05yRSVBzkl1TjpExrKB0ptO4wwBhQx8SwppDuE=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=qetZmNAW6Nts3hI6RPluU5Tx639HMiOPf9T3GCon0uvDqmEVOQuXJ1zCtWeJQQpBF
- Od5/h7ttXTSI3Zf8jrllsB0Y0796f6OD8X1rSvZ52gh3g/PmIJZAKv1op4Y+3z1mub
- qesUQO3tBn2TZli6P30RCvSh71kzoMRKHwC6EHqQA9KbwfaO/mJxmMAjP9nKpu8oaw
- bp0DmtnqLVa0aZ45Sq0IEH/+M0tOrFiI9uTNPkiitATyGNsVwDGrgnYnbFSKflBsry
- GaEepvsOhlx5fyiPd61TWfIweHBivu1eB+CPG1C1E1h6hLCqvqvNyJotOONr6OP4Qg
- cjwLH3ulVuJDA==
-Message-ID: <79590f1e-d90c-4d42-9633-7fb9cee17228@denx.de>
-Date: Wed, 21 Feb 2024 10:39:38 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 8BEDE8807F
+ for <u-boot@lists.denx.de>; Wed, 21 Feb 2024 11:38:18 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=0leil.net
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=foss+uboot@0leil.net
+Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
+ [10.7.10.107])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Tft621pYfzF8D;
+ Wed, 21 Feb 2024 11:38:18 +0100 (CET)
+Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4Tft606k6czX68; Wed, 21 Feb 2024 11:38:16 +0100 (CET)
+From: Quentin Schulz <foss+uboot@0leil.net>
+Date: Wed, 21 Feb 2024 11:37:45 +0100
+Subject: [PATCH v3 18/20] rockchip: rk3399-puma: migrate README to
+ doc/board in rST format
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 7/7] verdin-imx8mp_defconfig: Enable PCIe/NVMe support
-Content-Language: en-US
-To: Francesco Dolcini <francesco@dolcini.it>,
- Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot@lists.denx.de, marcel.ziswiler@toradex.com, trini@konsulko.com,
- lukma@denx.de, seanga2@gmail.com, jh80.chung@samsung.com, festevam@denx.de,
- andrejs.cainikovs@toradex.com, sjg@chromium.org, peng.fan@nxp.com,
- aford173@gmail.com, ilias.apalodimas@linaro.org, sahaj.sarup@linaro.org,
- fathi.boudra@linaro.org, remi.duraffort@linaro.org,
- daniel.thompson@linaro.org
-References: <20240220131056.2962331-1-sumit.garg@linaro.org>
- <20240220131056.2962331-8-sumit.garg@linaro.org>
- <20240221075516.GA5131@francesco-nb>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240221075516.GA5131@francesco-nb>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20240221-jaguar-v3-18-1f256a82201b@theobroma-systems.com>
+References: <20240221-jaguar-v3-0-1f256a82201b@theobroma-systems.com>
+In-Reply-To: <20240221-jaguar-v3-0-1f256a82201b@theobroma-systems.com>
+To: Simon Glass <sjg@chromium.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Jagan Teki <jagan@amarulasolutions.com>, 
+ Klaus Goger <klaus.goger@theobroma-systems.com>, 
+ Heiko Stuebner <heiko.stuebner@cherry.de>, 
+ Otavio Salvador <otavio@ossystems.com.br>, 
+ Andy Yan <andy.yan@rock-chips.com>, 
+ Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>, 
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
+ Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Anatolij Gustschin <agust@denx.de>
+Cc: Dragan Simic <dsimic@manjaro.org>, u-boot@lists.denx.de, 
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>, 
+ Quentin Schulz <foss+uboot@0leil.net>
+X-Mailer: b4 0.13.0
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,46 +76,270 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/21/24 08:55, Francesco Dolcini wrote:
-> Hello Sumit,
-> 
-> On Tue, Feb 20, 2024 at 06:40:56PM +0530, Sumit Garg wrote:
->> Also, enable reset driver which is a prerequisite for PCIe support.
->>
->> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
->> ---
->>   configs/verdin-imx8mp_defconfig | 9 +++++++++
->>   1 file changed, 9 insertions(+)
->>
->> diff --git a/configs/verdin-imx8mp_defconfig b/configs/verdin-imx8mp_defconfig
->> index 22b8a334dfa..d8bd644322b 100644
->> --- a/configs/verdin-imx8mp_defconfig
->> +++ b/configs/verdin-imx8mp_defconfig
->> @@ -185,3 +185,12 @@ CONFIG_USB_GADGET_VENDOR_NUM=0x1b67
->>   CONFIG_USB_GADGET_PRODUCT_NUM=0x4000
->>   CONFIG_IMX_WATCHDOG=y
->>   CONFIG_HEXDUMP=y
->> +CONFIG_DM_RESET=y
->> +CONFIG_RESET_IMX=y
->> +CONFIG_PCI=y
->> +CONFIG_PCIE_DW_IMX8=y
->> +CONFIG_PHY_IMX8M_PCIE=y
->> +CONFIG_CMD_PCI=y
->> +CONFIG_NVME=y
->> +CONFIG_NVME_PCI=y
->> +CONFIG_CMD_NVME=y
-> 
-> This will increase the u-boot proper size and marginally increase the
-> boot time (because of a bigger binary to be read from the eMMC).
-> 
-> Apart of that do you expect any other impact on those changes? SPL
-> binary size should not be affected, correct?
-> 
-> Asking this out loudly to confirm that nothing unexpected is going to
-> happen because of these changes.
-> 
-> For my curiosity, care to share what's the use case? Do you plan to have
-> the OS stored into an NVME device?
+From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 
-Boot OS images from NVMe is useful if eMMC size no longer cuts it 
-(because debug symbols or to collect logs over long periods of time).
+This migrates the plaintext README in
+board/theobroma-systems/puma_rk3399 to doc/board/theobroma-systems and
+while doing so, update the instructions and rewrite it in rST.
+
+Cc: Quentin Schulz <foss+uboot@0leil.net>
+Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+---
+ board/theobroma-systems/puma_rk3399/MAINTAINERS |   1 +
+ board/theobroma-systems/puma_rk3399/README      |  90 +----------------
+ doc/board/theobroma-systems/index.rst           |   1 +
+ doc/board/theobroma-systems/puma_rk3399.rst     | 126 ++++++++++++++++++++++++
+ 4 files changed, 129 insertions(+), 89 deletions(-)
+
+diff --git a/board/theobroma-systems/puma_rk3399/MAINTAINERS b/board/theobroma-systems/puma_rk3399/MAINTAINERS
+index 23701b3f0ed..7e84a5be262 100644
+--- a/board/theobroma-systems/puma_rk3399/MAINTAINERS
++++ b/board/theobroma-systems/puma_rk3399/MAINTAINERS
+@@ -4,6 +4,7 @@ M:	Klaus Goger <klaus.goger@theobroma-systems.com>
+ S:	Maintained
+ F:	board/theobroma-systems/puma_rk3399
+ F:	board/theobroma-systems/common
++F:	doc/board/theobroma-systems
+ F:	include/configs/puma_rk3399.h
+ F:	arch/arm/dts/rk3399-puma*
+ F:	configs/puma-rk3399_defconfig
+diff --git a/board/theobroma-systems/puma_rk3399/README b/board/theobroma-systems/puma_rk3399/README
+index 649aa3c543d..39c9d618866 100644
+--- a/board/theobroma-systems/puma_rk3399/README
++++ b/board/theobroma-systems/puma_rk3399/README
+@@ -1,89 +1 @@
+-Introduction
+-============
+-
+-The RK3399-Q7 (Puma) is a system-on-module featuring the Rockchip
+-RK3399 in a Qseven-compatible form-factor.
+-
+-RK3399-Q7 features:
+-	* CPU: ARMv8 64bit Big-Little architecture,
+-		* Big: dual-core Cortex-A72
+-		* Little: quad-core Cortex-A53
+-		* IRAM: 200KB
+-	* DRAM: 4GB-128MB dual-channel
+-	* eMMC: onboard eMMC
+-	* SD/MMC
+-	* GbE (onboard Micrel KSZ9031) Gigabit ethernet PHY
+-	* USB:
+-		* USB3.0 dual role port
+-		* 2x USB3.0 host, 1x USB2.0 host via onboard USB3.0 hub
+-	* Display: HDMI/eDP/MIPI
+-	* Camera: 2x CSI (one on the edge connector, one on the Q7 specified CSI ZIF)
+-	* NOR Flash: onboard SPI NOR
+-	* Companion Controller: onboard additional Cortex-M0 microcontroller
+-		* RTC
+-		* fan controller
+-		* CAN
+-
+-Here is the step-by-step to boot to U-Boot on rk3399.
+-
+-Get the Source and build ATF binary
+-===================================
+-
+-  > git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git
+-
+-Compile the ATF
+-===============
+-
+-  > cd trusted-firmware-a
+-  > make CROSS_COMPILE=aarch64-linux-gnu- PLAT=rk3399 bl31
+-  > cp build/rk3399/release/bl31/bl31.elf ../u-boot/bl31.elf
+-
+-Compile the U-Boot
+-==================
+-
+-  > cd ../u-boot
+-  > make CROSS_COMPILE=aarch64-linux-gnu- puma-rk3399_defconfig all
+-
+-Flash the image
+-===============
+-
+-Copy u-boot-rockchip.bin to offset 32k for SD/eMMC.
+-Copy u-boot-rockchip-spi.bin to offset 0 for NOR-flash.
+-
+-SD-Card
+--------
+-
+-  > dd if=u-boot-rockchip.bin of=/dev/sdb seek=64
+-
+-eMMC
+-----
+-
+-rkdeveloptool allows to flash the on-board eMMC via the USB OTG interface with
+-help of the Rockchip loader binary.
+-
+-  > git clone https://github.com/rockchip-linux/rkdeveloptool
+-  > cd rkdeveloptool
+-  > autoreconf -i && ./configure && make
+-  > git clone https://github.com/rockchip-linux/rkbin.git
+-  > cd rkbin
+-  > ./tools/boot_merger RKBOOT/RK3399MINIALL.ini
+-  > cd ..
+-  > ./rkdeveloptool db rkbin/rk3399_loader_v1.25.126.bin
+-  > ./rkdeveloptool wl 64 ../u-boot-rockchip.bin
+-
+-NOR-Flash
+----------
+-
+-rkdeveloptool allows to flash the on-board SPI via the USB OTG interface with
+-help of the Rockchip loader binary.
+-
+-  > git clone https://github.com/rockchip-linux/rkdeveloptool
+-  > cd rkdeveloptool
+-  > autoreconf -i && ./configure && make
+-  > git clone https://github.com/rockchip-linux/rkbin.git
+-  > cd rkbin
+-  > ./tools/boot_merger RKBOOT/RK3399MINIALL_SPINOR.ini
+-  > cd ..
+-  > ./rkdeveloptool db rkbin/rk3399_loader_spinor_v1.25.114.bin
+-  > ./rkdeveloptool ef
+-  > ./rkdeveloptool wl 0 ../u-boot-rockchip-spi.bin
++See doc/board/theobroma-systems/puma_rk3399.rst.
+diff --git a/doc/board/theobroma-systems/index.rst b/doc/board/theobroma-systems/index.rst
+index 945f7a2f976..0720128ad52 100644
+--- a/doc/board/theobroma-systems/index.rst
++++ b/doc/board/theobroma-systems/index.rst
+@@ -7,3 +7,4 @@ Theobroma Systems
+    :maxdepth: 2
+ 
+    jaguar_rk3588
++   puma_rk3399
+diff --git a/doc/board/theobroma-systems/puma_rk3399.rst b/doc/board/theobroma-systems/puma_rk3399.rst
+new file mode 100644
+index 00000000000..5bc6385e451
+--- /dev/null
++++ b/doc/board/theobroma-systems/puma_rk3399.rst
+@@ -0,0 +1,126 @@
++.. SPDX-License-Identifier: GPL-2.0+
++
++RK3399-Q7 Puma
++==============
++
++The RK3399-Q7 (Puma) is a system-on-module featuring the Rockchip
++RK3399 in a Qseven-compatible form-factor.
++
++RK3399-Q7 features:
++
++ * CPU: ARMv8 64bit Big-Little architecture,
++
++   * Big: dual-core Cortex-A72
++   * Little: quad-core Cortex-A53
++   * IRAM: 200KB
++   * DRAM: 4GB-128MB dual-channel
++
++ * eMMC: onboard eMMC
++ * SD/MMC
++ * GbE (onboard Micrel KSZ9031) Gigabit ethernet PHY
++ * USB:
++
++   * USB3.0 dual role port
++   * 2x USB3.0 host, 1x USB2.0 host via onboard USB3.0 hub
++
++ * Display: HDMI/eDP/MIPI
++ * Camera: 2x CSI (one on the edge connector, one on the Q7 specified CSI ZIF)
++ * NOR Flash: onboard SPI NOR
++ * Companion Controller: onboard additional Cortex-M0 microcontroller
++   * RTC
++   * fan controller
++   * CAN
++
++Here is the step-by-step to boot to U-Boot on RK3399-Q7 from Theobroma Systems.
++
++Get the Source and build ATF binary
++-----------------------------------
++
++.. prompt:: bash
++
++   git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git
++   cd trusted-firmware-a
++   make CROSS_COMPILE=aarch64-linux-gnu- PLAT=rk3399 bl31
++   export BL31=$PWD/build/rk3399/release/bl31/bl31.elf
++
++Compile the U-Boot
++------------------
++
++.. prompt:: bash
++
++   cd ../u-boot
++   make CROSS_COMPILE=aarch64-linux-gnu- puma-rk3399_defconfig all
++
++This will build ``u-boot-rockchip.bin`` which can be written to an MMC device
++(eMMC or SD card), and ``u-boot-rockchip-spi.bin`` which can be written to the
++SPI-NOR flash.
++
++Flash the image
++---------------
++
++Copy ``u-boot-rockchip.bin`` to offset 32k for SD/eMMC.
++Copy ``u-boot-rockchip-spi.bin`` to offset 0 for NOR-flash.
++
++SD-Card
++~~~~~~~
++
++.. prompt:: bash
++
++   dd if=u-boot-rockchip.bin of=/dev/sdX seek=64
++
++.. note::
++
++   Replace ``/dev/sdX`` to match your SD card kernel device.
++
++eMMC
++~~~~
++
++``rkdeveloptool`` allows to flash the on-board eMMC via the USB OTG interface
++with help of the Rockchip loader binary.
++
++To enter the USB flashing mode on Haikou baseboard, remove any SD card, insert a
++micro-USB cable in the ``Q7 USB P1`` connector (P8), move ``SW5`` switch into
++``BIOS Disable`` mode, power cycle or reset the board and move ``SW5`` switch
++back to ``Normal Boot`` mode. A new USB device should have appeared on your PC
++(check with ``lsusb -d 2207:330c``).
++
++To flash U-Boot on the eMMC with ``rkdeveloptool``:
++
++.. prompt:: bash
++
++   git clone https://github.com/rockchip-linux/rkdeveloptool
++   cd rkdeveloptool
++   autoreconf -i && CPPFLAGS=-Wno-format-truncation ./configure && make
++   git clone https://github.com/rockchip-linux/rkbin.git
++   cd rkbin
++   ./tools/boot_merger RKBOOT/RK3399MINIALL.ini
++   cd ..
++   ./rkdeveloptool db rkbin/rk3399_loader_v1.30.130.bin
++   ./rkdeveloptool wl 64 ../u-boot-rockchip.bin
++
++NOR-Flash
++~~~~~~~~~
++
++``rkdeveloptool`` allows to flash the on-board SPI via the USB OTG interface with
++help of the Rockchip loader binary.
++
++To enter the USB flashing mode on Haikou baseboard, remove any SD card, insert a
++micro-USB cable in the ``Q7 USB P1`` connector (P8), move ``SW5`` switch into
++``BIOS Disable`` mode, power cycle or reset the board and move ``SW5`` switch
++back to ``Normal Boot`` mode. A new USB device should have appeared on your PC
++(check with ``lsusb -d 2207:330c``).
++
++To flash U-Boot on the SPI with ``rkdeveloptool``:
++
++.. prompt:: bash
++
++   git clone https://github.com/rockchip-linux/rkdeveloptool
++   cd rkdeveloptool
++   autoreconf -i && CPPFLAGS=-Wno-format-truncation ./configure && make
++   git clone https://github.com/rockchip-linux/rkbin.git
++   cd rkbin
++   ./tools/boot_merger RKBOOT/RK3399MINIALL_SPINOR.ini
++   cd ..
++   ./rkdeveloptool db rkbin/rk3399_loader_spinor_v1.30.114.bin
++   ./rkdeveloptool ef
++   ./rkdeveloptool wl 0 ../u-boot-rockchip-spi.bin
+
+-- 
+2.43.2
+
