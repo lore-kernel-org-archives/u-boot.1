@@ -4,38 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C01C4C5478A
-	for <u-boot@archiver.kernel.org>; Wed, 21 Feb 2024 17:10:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C074C5478A
+	for <u-boot@archiver.kernel.org>; Wed, 21 Feb 2024 17:10:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD7C18807A;
+	by phobos.denx.de (Postfix) with ESMTP id 3A5A28806F;
 	Wed, 21 Feb 2024 18:08:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8FCAF8804E; Wed, 21 Feb 2024 18:08:31 +0100 (CET)
-Received: from smtp-bc0d.mail.infomaniak.ch (smtp-bc0d.mail.infomaniak.ch
- [45.157.188.13])
+ id C5C9E8806F; Wed, 21 Feb 2024 18:08:27 +0100 (CET)
+Received: from smtp-42ab.mail.infomaniak.ch (smtp-42ab.mail.infomaniak.ch
+ [IPv6:2001:1600:7:10::42ab])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 918FC88069
- for <u-boot@lists.denx.de>; Wed, 21 Feb 2024 18:08:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6266088055
+ for <u-boot@lists.denx.de>; Wed, 21 Feb 2024 18:08:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
  [10.7.10.108])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Tg2m16wmczMs7;
- Wed, 21 Feb 2024 18:08:17 +0100 (CET)
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Tg2lx6ZyLzL75;
+ Wed, 21 Feb 2024 18:08:13 +0100 (CET)
 Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4Tg2m12C1TzYW7; Wed, 21 Feb 2024 18:08:17 +0100 (CET)
+ id 4Tg2lx1TlmzYff; Wed, 21 Feb 2024 18:08:13 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Wed, 21 Feb 2024 18:07:41 +0100
-Subject: [PATCH 12/16] power: pmic: rk8xx: fix duplicate prompt
+Date: Wed, 21 Feb 2024 18:07:36 +0100
+Subject: [PATCH 07/16] rockchip: adc: rockchip-saradc: use union for
+ preparing for v2
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240221-rk3588-saradc-v1-12-c39a5601d1cc@theobroma-systems.com>
+Message-Id: <20240221-rk3588-saradc-v1-7-c39a5601d1cc@theobroma-systems.com>
 References: <20240221-rk3588-saradc-v1-0-c39a5601d1cc@theobroma-systems.com>
 In-Reply-To: <20240221-rk3588-saradc-v1-0-c39a5601d1cc@theobroma-systems.com>
 To: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>, 
@@ -45,8 +46,7 @@ To: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
  Klaus Goger <klaus.goger@theobroma-systems.com>, 
  Heiko Stuebner <heiko.stuebner@cherry.de>
 Cc: u-boot@lists.denx.de, 
- Quentin Schulz <quentin.schulz@theobroma-systems.com>, 
- Quentin Schulz <foss+uboot@0leil.net>
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>
 X-Mailer: b4 0.13.0
 X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
@@ -67,29 +67,101 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 
-SPL_PMIC_RK8XX and PMIC_RK8XX both share the same prompt making it
-difficult to know at first glance in menuconfig what's for what, let's
-fix this by adding "in SPL" at the end of the prompt for the SPL symbol.
+The registers are entirely different between SARADC v1 and SARADC v2, so
+let's prepare to add another struct for accessing v2 registers by adding
+a union.
 
-Cc: Quentin Schulz <foss+uboot@0leil.net>
+Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 ---
- drivers/power/pmic/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/adc/rockchip-saradc.c | 23 +++++++++++++----------
+ 1 file changed, 13 insertions(+), 10 deletions(-)
 
-diff --git a/drivers/power/pmic/Kconfig b/drivers/power/pmic/Kconfig
-index 454a6e0cf87..5cf70991f1d 100644
---- a/drivers/power/pmic/Kconfig
-+++ b/drivers/power/pmic/Kconfig
-@@ -250,7 +250,7 @@ config PMIC_RK8XX
- 	This driver implements register read/write operations.
+diff --git a/drivers/adc/rockchip-saradc.c b/drivers/adc/rockchip-saradc.c
+index 03caca78b5f..4a842556a60 100644
+--- a/drivers/adc/rockchip-saradc.c
++++ b/drivers/adc/rockchip-saradc.c
+@@ -23,13 +23,16 @@
  
- config SPL_PMIC_RK8XX
--	bool "Enable support for Rockchip PMIC RK8XX"
-+	bool "Enable support for Rockchip PMIC RK8XX in SPL"
- 	depends on SPL_DM_PMIC
- 	---help---
- 	The Rockchip RK808 PMIC provides four buck DC-DC convertors, 8 LDOs,
+ #define SARADC_TIMEOUT			(100 * 1000)
+ 
+-struct rockchip_saradc_regs {
++struct rockchip_saradc_regs_v1 {
+ 	unsigned int data;
+ 	unsigned int stas;
+ 	unsigned int ctrl;
+ 	unsigned int dly_pu_soc;
+ };
+ 
++union rockchip_saradc_regs {
++	struct rockchip_saradc_regs_v1	*v1;
++};
+ struct rockchip_saradc_data {
+ 	int				num_bits;
+ 	int				num_channels;
+@@ -37,7 +40,7 @@ struct rockchip_saradc_data {
+ };
+ 
+ struct rockchip_saradc_priv {
+-	struct rockchip_saradc_regs		*regs;
++	union rockchip_saradc_regs		regs;
+ 	int					active_channel;
+ 	const struct rockchip_saradc_data	*data;
+ };
+@@ -53,16 +56,16 @@ int rockchip_saradc_channel_data(struct udevice *dev, int channel,
+ 		return -EINVAL;
+ 	}
+ 
+-	if ((readl(&priv->regs->ctrl) & SARADC_CTRL_IRQ_STATUS) !=
++	if ((readl(&priv->regs.v1->ctrl) & SARADC_CTRL_IRQ_STATUS) !=
+ 	    SARADC_CTRL_IRQ_STATUS)
+ 		return -EBUSY;
+ 
+ 	/* Read value */
+-	*data = readl(&priv->regs->data);
++	*data = readl(&priv->regs.v1->data);
+ 	*data &= uc_pdata->data_mask;
+ 
+ 	/* Power down adc */
+-	writel(0, &priv->regs->ctrl);
++	writel(0, &priv->regs.v1->ctrl);
+ 
+ 	return 0;
+ }
+@@ -77,11 +80,11 @@ int rockchip_saradc_start_channel(struct udevice *dev, int channel)
+ 	}
+ 
+ 	/* 8 clock periods as delay between power up and start cmd */
+-	writel(8, &priv->regs->dly_pu_soc);
++	writel(8, &priv->regs.v1->dly_pu_soc);
+ 
+ 	/* Select the channel to be used and trigger conversion */
+ 	writel(SARADC_CTRL_POWER_CTRL | (channel & SARADC_CTRL_CHN_MASK) |
+-	       SARADC_CTRL_IRQ_ENABLE, &priv->regs->ctrl);
++	       SARADC_CTRL_IRQ_ENABLE, &priv->regs.v1->ctrl);
+ 
+ 	priv->active_channel = channel;
+ 
+@@ -93,7 +96,7 @@ int rockchip_saradc_stop(struct udevice *dev)
+ 	struct rockchip_saradc_priv *priv = dev_get_priv(dev);
+ 
+ 	/* Power down adc */
+-	writel(0, &priv->regs->ctrl);
++	writel(0, &priv->regs.v1->ctrl);
+ 
+ 	priv->active_channel = -1;
+ 
+@@ -146,8 +149,8 @@ int rockchip_saradc_of_to_plat(struct udevice *dev)
+ 	struct rockchip_saradc_data *data;
+ 
+ 	data = (struct rockchip_saradc_data *)dev_get_driver_data(dev);
+-	priv->regs = dev_read_addr_ptr(dev);
+-	if (!priv->regs) {
++	priv->regs.v1 = dev_read_addr_ptr(dev);
++	if (!priv->regs.v1) {
+ 		pr_err("Dev: %s - can't get address!", dev->name);
+ 		return -EINVAL;
+ 	}
 
 -- 
 2.43.2
