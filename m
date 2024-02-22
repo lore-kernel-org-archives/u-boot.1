@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 615ADC48BF8
-	for <u-boot@archiver.kernel.org>; Thu, 22 Feb 2024 15:24:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C0D8C54788
+	for <u-boot@archiver.kernel.org>; Thu, 22 Feb 2024 15:24:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 18961880AC;
+	by phobos.denx.de (Postfix) with ESMTP id 6D8FA880B7;
 	Thu, 22 Feb 2024 16:23:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="rgtXRu3n";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="0knYx0v8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 03042880A1; Thu, 22 Feb 2024 16:21:34 +0100 (CET)
-Received: from mail-yw1-x114a.google.com (mail-yw1-x114a.google.com
- [IPv6:2607:f8b0:4864:20::114a])
+ id 8552F87C56; Thu, 22 Feb 2024 16:21:43 +0100 (CET)
+Received: from mail-yw1-x1149.google.com (mail-yw1-x1149.google.com
+ [IPv6:2607:f8b0:4864:20::1149])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2074587C56
- for <u-boot@lists.denx.de>; Thu, 22 Feb 2024 16:21:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7B91C879FE
+ for <u-boot@lists.denx.de>; Thu, 22 Feb 2024 16:21:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=3d2bXZQYKBtY32JF2K8GG8D6.4GEM-3GGLDAKLK.56FP.56@flex--barnas.bounces.google.com
-Received: by mail-yw1-x114a.google.com with SMTP id
- 00721157ae682-607e56f7200so71615997b3.2
- for <u-boot@lists.denx.de>; Thu, 22 Feb 2024 07:21:29 -0800 (PST)
+ smtp.mailfrom=3fmbXZQYKBt0A9QM9RFNNFKD.BNLT-ANNSKHRSR.CDMW.CD@flex--barnas.bounces.google.com
+Received: by mail-yw1-x1149.google.com with SMTP id
+ 00721157ae682-608852fc324so33152387b3.2
+ for <u-boot@lists.denx.de>; Thu, 22 Feb 2024 07:21:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1708615288; x=1709220088; darn=lists.denx.de;
+ d=google.com; s=20230601; t=1708615295; x=1709220095; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:from:subject:message-id:references
  :mime-version:in-reply-to:date:from:to:cc:subject:date:message-id
- :reply-to; bh=rlMFAkrKn4ZcuZeo1F/ZBa8pchDzsFzQllBc4nlGcA4=;
- b=rgtXRu3n32jKGv0nbEVwyUekTvz0iSJinrw5q2GSAcIbYpHMJkTCLtblBkkqI3Jox8
- kRPoGHUsBPg6b+N7txJwaLxglNqkGZ0h0DzHbe/WYBmKQlBpVUv0CQKv7bm3c4eoXmdm
- 5ZPQ1ha7NsAhe/SJwA/7ekGiKybzOcs0gH5zwGjt7uzXYLEsc/ZLBYLcUOTrFUnUUbX6
- l0tRBI7FU82e9cnFz2VFhW8Yb7JptpmQvhsKX/1Z9KAjYQJKon/olvXCkh0R++kB+skE
- CacZuACY4W6Ykk2DjNujXaNF4SCH30dsYREUSIOxTfcaosXsWehydpACTQO7huW6mn0A
- Bexg==
+ :reply-to; bh=tVuWNUWAtuREb+XecFFPGUP4A/T9jN4i08eg1zjGT1o=;
+ b=0knYx0v8OR9RhasuWvlJ5xO9YdVFjvKby+UjTLBaIkFhozhlY3UWMYvpPufSIT+thT
+ bLBnnTaIK7Ve3lm4sC7C9WhMn336hS2SeG7gXvGXfXHVriJNcEbUWpvjNpbK98Gh49zh
+ 7ct3ml8ZZI+XF7ep02dOG+CJgzlFB4t0hr+BEMPrutvCLvFQmL/9rglmaNAaMZb0sPCU
+ NMENeRtbiw1GQiOdwA1sgFxkN9J1EBwakiMFC+vsoQp2uwCd9e/Est7EDn6looSiAJhO
+ kVAm0QilUjgtCYsWIbvbEYvuP2T77Mn0XSAIaWgtgh2u1qbwEliE9tOuzWxok7U3xk0M
+ 8llA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708615288; x=1709220088;
+ d=1e100.net; s=20230601; t=1708615295; x=1709220095;
  h=content-transfer-encoding:cc:to:from:subject:message-id:references
  :mime-version:in-reply-to:date:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=rlMFAkrKn4ZcuZeo1F/ZBa8pchDzsFzQllBc4nlGcA4=;
- b=rZVlM0lYrLhVdFXB/CXaEBIagOAkfYmCZ9K5OSje7WeEBkqcBCTNuTp+GmZ5PXgHrG
- UDtQfR+LY1XRc1OdaGI0scqZtnvcUQ595GZz+KbyPwC5goVyNxXoidzobRHvr9tW7r/+
- YRQzrcES9lQt8wj+qB476eeQkbPq1SE3esuXp/BhX4VFVHShKgqE7p59Ij5ynEzhclgu
- Z/Aq/fcvIOn0JM6g7BM95rNJ0W+M54ON3ykOPBmI2UEtDp9Poo0UBjAH7qaKwEI0ZS3W
- QVr8/Pw4xRrAaiQYL2qPkHAGPOZGlETPJ4KHXHZGJrjbtQAMjG1wlRZ5qFzjVvBRBQm6
- 1RIA==
-X-Gm-Message-State: AOJu0YylSKOCaGm9emZhdfFbaUVS+2A3z0DqLMPtOTxXYkPWPmWuhlcK
- vEuzbVytY5FspqO6T9gCcycpVyOG5tSgFOocpqaRTFyiG5Q45TPH918riFv3BeSaXY8CZkmk2hn
- LUCDXJiF9Zc7xPIygX5+a3WGk9Y6coJJlijck+ojvX9Ol4dtajWpnGd3UB54MJivYJXORu0dpg/
- KQj2Id2zKZ8bMLPV+KNkOIwvdxEfj0Sw==
-X-Google-Smtp-Source: AGHT+IG0p5hwnxCEpe8SbX8d1ojrcOoIy56zFg53F7kz+NbsW6Ufa9jn5UX9yHUumqnM/drreyaxx+V9zbM=
+ bh=tVuWNUWAtuREb+XecFFPGUP4A/T9jN4i08eg1zjGT1o=;
+ b=I7W9W9LljoKa+T+5Cf3Em8yKDBCjvUrfq2bAgLAzXbLJZBez547OeDU4ts7y95vTs2
+ +jd6gW5+LFmzCvUtrZ1a+nzxnImZ3j2TlfQ0fYgzu51+20zDa6nzJYifqd2qyS2S0YvK
+ v+sywaQRleN56rBd27OQFV2e3VSwuiY0qwJgy/GyFzRIiNsIoGOASvuEFzRicXKdj7Wc
+ gy8G9wkfLfa0i+TY28t6tCvmIRYZA7knIESfpfaq5T4dH4jTc1VT6sjauDqXod0mTB8K
+ JD6kBblRGGmPLdJnZrgssRZf6ToXx69a4Jb3AZQA2iBWxJQ0u0te7/107bvBMxqzC1e6
+ +CuQ==
+X-Gm-Message-State: AOJu0YxvoHGGyZRHER+4vIufAP3mZofzTYgGtJ4p6IlNUypk8zMDw2h+
+ MdB8+FF1/tFFi8waCJ3cJjDPjt9jn6NIVoZM08O9gGpR8SQIj01+7Cg9ViAmD4Rq8CzCQ4N8E42
+ X4wVfkwt6jC+ig9S6jGjCEez+OlLtG5jUcgUcynGb1I2m9gfAFlwzjd4PStRgfo7oWY8s67yotE
+ ZQlDMCFn2nVuKp53WqxfRkvYEEppuddg==
+X-Google-Smtp-Source: AGHT+IERl82hc+caVfC0y+M+D5PJa+v9mSwPijkoDQNO3WLq3a7+2SqIcTw0JLG5c3UdDW2qIL5VkCqL33M=
 X-Received: from zombine.c.googlers.com
  ([fda3:e722:ac3:cc00:68:949d:c0a8:7f3e])
- (user=barnas job=sendgmr) by 2002:a81:99d5:0:b0:607:75af:8006 with SMTP id
- q204-20020a8199d5000000b0060775af8006mr3567905ywg.0.1708615287805; Thu, 22
- Feb 2024 07:21:27 -0800 (PST)
-Date: Thu, 22 Feb 2024 15:20:56 +0000
+ (user=barnas job=sendgmr) by 2002:a05:6902:150c:b0:dc6:e1ed:bd1a with SMTP id
+ q12-20020a056902150c00b00dc6e1edbd1amr687711ybu.2.1708615294984; Thu, 22 Feb
+ 2024 07:21:34 -0800 (PST)
+Date: Thu, 22 Feb 2024 15:20:57 +0000
 In-Reply-To: <20240222152102.1677445-1-barnas@google.com>
 Mime-Version: 1.0
 References: <20240222152102.1677445-1-barnas@google.com>
 X-Mailer: git-send-email 2.44.0.rc1.240.g4c46232300-goog
-Message-ID: <20240222152102.1677445-2-barnas@google.com>
-Subject: [PATCH 1/2] arm: socfpga: arria10: add option to reprogram the FPGA
- every reboot
+Message-ID: <20240222152102.1677445-3-barnas@google.com>
+Subject: [PATCH 2/2] chameleonv3: set in defconfig for FPGA to reprogram every
+ reboot
 From: "=?UTF-8?q?Micha=C5=82=20Barna=C5=9B?=" <barnas@google.com>
 To: u-boot@lists.denx.de
 Cc: "=?UTF-8?q?Micha=C5=82=20Barna=C5=9B?=" <barnas@google.com>,
- Dinh Nguyen <dinguyen@kernel.org>, Marek Vasut <marex@denx.de>, 
- Simon Glass <sjg@chromium.org>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>, 
- Tien Fong Chee <tien.fong.chee@intel.com>, Tom Rini <trini@konsulko.com>
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
+ Martyn Welch <martyn.welch@collabora.com>, 
+ "=?UTF-8?q?Pawe=C5=82=20Anikiel?=" <pan@semihalf.com>,
+ Simon Glass <sjg@chromium.org>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Thu, 22 Feb 2024 16:23:55 +0100
@@ -96,65 +97,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add Kconfig that enables FPGA reprogramming with warm boot on Arria 10.
-This option allows to change the bitstream on the filesystem and apply
-changes with warm reboot without the need for a power cycle.
+Set CONFIG_TARGET_SOCFPGA_ARRIA10_ALWAYS_REPROGRAM as enabled in
+chameleon v3 board's defconfig.
 
 Signed-off-by: Micha=C5=82 Barna=C5=9B <barnas@google.com>
 ---
 
- arch/arm/mach-socfpga/Kconfig   | 8 ++++++++
- arch/arm/mach-socfpga/spl_a10.c | 8 ++++++++
- 2 files changed, 16 insertions(+)
+ configs/socfpga_chameleonv3_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/arch/arm/mach-socfpga/Kconfig b/arch/arm/mach-socfpga/Kconfig
-index 114d243812..89303f1f16 100644
---- a/arch/arm/mach-socfpga/Kconfig
-+++ b/arch/arm/mach-socfpga/Kconfig
-@@ -80,6 +80,14 @@ config TARGET_SOCFPGA_ARRIA10
- 	imply FPGA_SOCFPGA
- 	imply SPL_USE_TINY_PRINTF
-=20
-+config TARGET_SOCFPGA_ARRIA10_ALWAYS_REPROGRAM
-+	bool "Always reprogram Arria 10 FPGA"
-+	depends on TARGET_SOCFPGA_ARRIA10
-+	help
-+	  Arria 10 FPGA is only programmed during the cold boot.
-+	  This option forces the FPGA to be reprogrammed every reboot,
-+	  allowing to change the bitstream and apply it with warm reboot.
-+
- config TARGET_SOCFPGA_CYCLONE5
- 	bool
- 	select TARGET_SOCFPGA_GEN5
-diff --git a/arch/arm/mach-socfpga/spl_a10.c b/arch/arm/mach-socfpga/spl_a1=
-0.c
-index 9edbbf4a29..d5d3327a42 100644
---- a/arch/arm/mach-socfpga/spl_a10.c
-+++ b/arch/arm/mach-socfpga/spl_a10.c
-@@ -122,7 +122,11 @@ void spl_board_init(void)
- 	arch_early_init_r();
-=20
- 	/* If the full FPGA is already loaded, ie.from EPCQ, config fpga pins */
-+#ifdef CONFIG_TARGET_SOCFPGA_ARRIA10_ALWAYS_REPROGRAM
-+	if (is_regular_boot_valid()) {
-+#else
- 	if (is_fpgamgr_user_mode()) {
-+#endif
- 		ret =3D config_pins(gd->fdt_blob, "shared");
- 		if (ret)
- 			return;
-@@ -130,7 +134,11 @@ void spl_board_init(void)
- 		ret =3D config_pins(gd->fdt_blob, "fpga");
- 		if (ret)
- 			return;
-+#ifdef CONFIG_TARGET_SOCFPGA_ARRIA10_ALWAYS_REPROGRAM
-+	} else {
-+#else
- 	} else if (!is_fpgamgr_early_user_mode()) {
-+#endif
- 		/* Program IOSSM(early IO release) or full FPGA */
- 		fpgamgr_program(buf, FPGA_BUFSIZ, 0);
-=20
+diff --git a/configs/socfpga_chameleonv3_defconfig b/configs/socfpga_chamel=
+eonv3_defconfig
+index 6ea61ca6ea..25615bb4b4 100644
+--- a/configs/socfpga_chameleonv3_defconfig
++++ b/configs/socfpga_chameleonv3_defconfig
+@@ -7,6 +7,7 @@ CONFIG_DEFAULT_DEVICE_TREE=3D"socfpga_arria10_chameleonv3_4=
+80_2"
+ CONFIG_SPL_TEXT_BASE=3D0xFFE00000
+ CONFIG_SPL_DRIVERS_MISC=3Dy
+ CONFIG_TARGET_SOCFPGA_CHAMELEONV3=3Dy
++CONFIG_TARGET_SOCFPGA_ARRIA10_ALWAYS_REPROGRAM=3Dy
+ CONFIG_SPL_FS_FAT=3Dy
+ CONFIG_FIT=3Dy
+ CONFIG_SPL_FIT=3Dy
 --=20
 2.44.0.rc1.240.g4c46232300-goog
 
