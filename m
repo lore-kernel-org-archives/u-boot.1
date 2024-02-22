@@ -4,71 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E44CC48BEB
-	for <u-boot@archiver.kernel.org>; Thu, 22 Feb 2024 00:53:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BE82C48BEB
+	for <u-boot@archiver.kernel.org>; Thu, 22 Feb 2024 03:15:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 824C288022;
-	Thu, 22 Feb 2024 01:53:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7588288055;
+	Thu, 22 Feb 2024 04:15:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kJQNRIUu";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cMVTIQCk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F7848802E; Thu, 22 Feb 2024 01:27:15 +0100 (CET)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id 207B68805C; Thu, 22 Feb 2024 04:15:22 +0100 (CET)
+Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
+ [IPv6:2607:f8b0:4864:20::72c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5891888022
- for <u-boot@lists.denx.de>; Thu, 22 Feb 2024 01:27:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9AC5C88028
+ for <u-boot@lists.denx.de>; Thu, 22 Feb 2024 04:15:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=bob.wolff68@gmail.com
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-563d56ee65cso7786247a12.2
- for <u-boot@lists.denx.de>; Wed, 21 Feb 2024 16:27:12 -0800 (PST)
+ spf=pass smtp.mailfrom=seanga2@gmail.com
+Received: by mail-qk1-x72c.google.com with SMTP id
+ af79cd13be357-781753f52afso423679285a.2
+ for <u-boot@lists.denx.de>; Wed, 21 Feb 2024 19:15:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1708561631; x=1709166431; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=iDG45T1ntadBkRR699Oaxe0580xdJEHyKyHQ4jf5Eng=;
- b=kJQNRIUuwhHaznEXG0BB3b14PsiqaOEOZEi/0CnuV/lP5vOy1DW9fbZwL+iRaYTe/L
- ulPSoBmImt9PCbVydOyPdi4G4+AYKJXtSnN6baRTF8fG0jsNzIPsf8/SDRDY02IlVrWp
- 3YPmFZFDEfoUxvB9u3eUKikiTAETjg8JKIPIjq0TWCRFXz0RleTVLCkh7FvXMf2oqNso
- VphEfbNixaJyYb3xFO3OI97Jni1iFg7FdBLQwIBxbbo7Y3PxhoEptzN1n9NbyuN0MyTY
- Pr57r6iY3HuNT370jzLgqby6VASJH2+AP+zwiK8ODDWcS+lNz94Jq4eOacXot+M3T0GZ
- PtvA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708561631; x=1709166431;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ d=gmail.com; s=20230601; t=1708571717; x=1709176517; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=iDG45T1ntadBkRR699Oaxe0580xdJEHyKyHQ4jf5Eng=;
- b=gJ1w+sBUokoC2J8bLybItmsDg7iNresS3gJsztuqc/Er/3+uOJWQ668HyC6qA6rmqm
- 8qnjxeBbdITrvgPbvC2OelcgG5npmxfzGl6tJk3K2llyrXOOydy5tR5YNv2Neen226oA
- AAgtnUVikofGaN87sUPVrsoN3cmbGSaFB5DAQdXytohoF/FGtl7ziY0eyGxwfp8GUC0O
- vQSFxTDul7DauF0DJxM+JiHfUFNyoJ3MvYoEiioPvvo1/I7ed7Nm2jCgWoRjZfOvnUn3
- Ytbs62QmjZRIsJHphehwKT1Gn6ukvaiQfjSN0kSfYWSDKjOzp5ItUILRDMoumLoThtk1
- rhMA==
-X-Gm-Message-State: AOJu0YwbCLQxBAiqp/qUuXfyFnT2EQ3oSwvpRWt33/EhgwTH9rz7pIsx
- /wGkysmIlbfhhBa7uTI+tZC860fA9SbeK2iXcIsZCV5lzICxS3ezGj0E0rniTJP6h7KN2Fuxz58
- hmXNwqywKk6XvgbOcGGEgggZpEUKL+ZkU
-X-Google-Smtp-Source: AGHT+IHS+84e0BWXts2YwgGQDXnKbHVwIWpkQCCZEujgk0EhxHjPMhBFwTE7ZVCUHYOW4K86y9r74J/pRrlaykxdgTg=
-X-Received: by 2002:a17:906:3598:b0:a3f:33b2:5ce2 with SMTP id
- o24-20020a170906359800b00a3f33b25ce2mr2392386ejb.35.1708561631254; Wed, 21
- Feb 2024 16:27:11 -0800 (PST)
+ bh=t+C+9komLN71OZZznM69kyzyiL3nMhb6D3s0IUP4XYs=;
+ b=cMVTIQCkkBT+PA/sQD8EQmc96LewLZvwXuPVRgdLyKRRFa5FtNhb9CveeM+7tpKZpF
+ eNfcpR7QhE4p0R1m6eIrecPfDCnF4SGbRhy7akppO76fAGRcaLHAcKFTH3Q8Hvjn0ywC
+ 1TGG57wqgeesSXyUe6Wb5ch/nMXq2IYo3YbUbiwESOqGev8e/yB9DSlmFVdinsgoso9q
+ rreFhC18n4VOWoGkUg5U7ZqFfAFw86kCTaMprMqWKkVPsNG6WrHG10cnxXjB+x9Rqi87
+ uu3YD3HQ0fHKqROp7Ib3eIYs5vQ0ozNe9q8wjgE9EBGbhqINwkPL6X6Xv2r7Thtf8URi
+ zO4g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1708571717; x=1709176517;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=t+C+9komLN71OZZznM69kyzyiL3nMhb6D3s0IUP4XYs=;
+ b=IjxyiSEGkgRSsCGqj8NjG6E6HgjcvBpqTwAtQn9+8yx/HUXOiK1nnp1bzGGeyKD8nG
+ 0NNITVGl+7SR2MloSV59dX/okIExHN4n8fqwe1x9vyHcVJG7IoH0wAsRMK0EP8YHbmDF
+ kiEuhHZtWhzbkuVTZuqy5FNkL36uNeVPi5k4fcI+8eQrcZAOGJLXJGjq46zX8C1okZG7
+ fD/rVhmKgOufw12Tvz9M1SoXQ2wXZjLpUSebscETzNvJ537g5krzEL/eSwQNEnjnkoXd
+ 3xiHJ+yVZmPyr2zzIyt7ypfm5nFVagSL8GxW10RZ6hDMFiPuRqb2+LvDn7Tt2L36u2S9
+ fMHw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUP8Et7Zhm+TpDHf4Lc/wsNJZyWcetW1IHJvm9LuxllOFGQh0UaoUvAYvcjlseadJSBs2s8oCiMLG38sojhMiNOEoI6Nw==
+X-Gm-Message-State: AOJu0YxfNpVACEjwCLClB9WKL5ig852HBdzkX150MDHN8/VfCDGUmyey
+ VUVtpVxLv93UZw6j/vUz+ijPV3NRbDG1OvoTvw3xvl/bQtrf/RSG
+X-Google-Smtp-Source: AGHT+IEW8nfleXVQqqlHRcUSrWZ33b5LgSlNFlGlWajqEdQBRA4KsDB6whomsZQsHPQ8F5drmLKyTw==
+X-Received: by 2002:ae9:e106:0:b0:787:1e17:ed8b with SMTP id
+ g6-20020ae9e106000000b007871e17ed8bmr22315363qkm.60.1708571716695; 
+ Wed, 21 Feb 2024 19:15:16 -0800 (PST)
+Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
+ [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
+ o28-20020a05620a111c00b00787a1c74595sm32957qkk.105.2024.02.21.19.15.15
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 21 Feb 2024 19:15:16 -0800 (PST)
+Message-ID: <89c12695-9c71-7162-a9cd-9e2172ce6a2c@gmail.com>
+Date: Wed, 21 Feb 2024 22:15:15 -0500
 MIME-Version: 1.0
-From: Bob Wolff <bob.wolff68@gmail.com>
-Date: Wed, 21 Feb 2024 16:27:00 -0800
-Message-ID: <CAF1iuRpqKhsDdkmC1jM7gK41JzhwVTKeh=a7Wtixp6Vz4M8Fqg@mail.gmail.com>
-Subject: [PATCH] ecdsa: Avoid null pointer crash in ecdsa-verify due to absent
- property
-To: u-boot@lists.denx.de
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Subject: Re: [PATCH] ecdsa: Avoid null pointer crash in ecdsa-verify due to
+ absent property
+Content-Language: en-US
+To: Bob Wolff <bob.wolff68@gmail.com>, u-boot@lists.denx.de
 Cc: pbrobinson@gmail.com
-X-Mailman-Approved-At: Thu, 22 Feb 2024 01:53:51 +0100
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+References: <CAF1iuRpqKhsDdkmC1jM7gK41JzhwVTKeh=a7Wtixp6Vz4M8Fqg@mail.gmail.com>
+From: Sean Anderson <seanga2@gmail.com>
+In-Reply-To: <CAF1iuRpqKhsDdkmC1jM7gK41JzhwVTKeh=a7Wtixp6Vz4M8Fqg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,35 +97,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If mixed rsa and ecdsa keys are specified in
-dtsi, an rsa key can be sent into the ecdsa
-verify. Without the ecdsa,curve property, this
-function will crash due to lack of checking
-the null pointer return.
+Hi Bob,
 
-Signed-off-by: Bob Wolff <bob.wolff68@gmail.com>
----
+On 2/21/24 19:27, Bob Wolff wrote:
+> If mixed rsa and ecdsa keys are specified in
+> dtsi, an rsa key can be sent into the ecdsa
+> verify. Without the ecdsa,curve property, this
+> function will crash due to lack of checking
+> the null pointer return.
 
- lib/ecdsa/ecdsa-verify.c | 5 +++++
- 1 file changed, 5 insertions(+)
+You can wrap commit messages at 75 characters
 
-diff --git a/lib/ecdsa/ecdsa-verify.c b/lib/ecdsa/ecdsa-verify.c
-index 0601700c4f..01ffc3477c 100644
---- a/lib/ecdsa/ecdsa-verify.c
-+++ b/lib/ecdsa/ecdsa-verify.c
-@@ -31,6 +31,11 @@ static int fdt_get_key(struct ecdsa_public_key *key,
-const void *fdt, int node)
-  int x_len, y_len;
+> Signed-off-by: Bob Wolff <bob.wolff68@gmail.com>
+> ---
+> 
+>   lib/ecdsa/ecdsa-verify.c | 5 +++++
+>   1 file changed, 5 insertions(+)
+> 
+> diff --git a/lib/ecdsa/ecdsa-verify.c b/lib/ecdsa/ecdsa-verify.c
+> index 0601700c4f..01ffc3477c 100644
+> --- a/lib/ecdsa/ecdsa-verify.c
+> +++ b/lib/ecdsa/ecdsa-verify.c
+> @@ -31,6 +31,11 @@ static int fdt_get_key(struct ecdsa_public_key *key,
+> const void *fdt, int node)
+>    int x_len, y_len;
+> 
+>    key->curve_name = fdt_getprop(fdt, node, "ecdsa,curve", NULL);
+> + if (!key->curve_name) {
+> + printf("Error: ecdsa cannot get 'ecdsa,curve' property from key. Likely
+> not an ecdsa key.\n");
 
-  key->curve_name = fdt_getprop(fdt, node, "ecdsa,curve", NULL);
-+ if (!key->curve_name) {
-+ printf("Error: ecdsa cannot get 'ecdsa,curve' property from key. Likely
-not an ecdsa key.\n");
-+ return -ENOMSG;
-+ }
-+
-  key->size_bits = ecdsa_key_size(key->curve_name);
-  if (key->size_bits == 0) {
-  debug("Unknown ECDSA curve '%s'", key->curve_name);
---
-2.39.3 (Apple Git-145)
+this should probably be a debug (like the below message)
+
+> + return -ENOMSG;
+> + }
+> +
+
+and it looks like something ate your indentation
+
+--Sean
+
+>    key->size_bits = ecdsa_key_size(key->curve_name);
+>    if (key->size_bits == 0) {
+>    debug("Unknown ECDSA curve '%s'", key->curve_name);
+> --
+> 2.39.3 (Apple Git-145)
+
