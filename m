@@ -4,82 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B32C2C5478C
-	for <u-boot@archiver.kernel.org>; Thu, 22 Feb 2024 06:48:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73511C48BF8
+	for <u-boot@archiver.kernel.org>; Thu, 22 Feb 2024 06:50:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 200E88802E;
-	Thu, 22 Feb 2024 07:48:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1E6BB88056;
+	Thu, 22 Feb 2024 07:50:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oAlo5zPv";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="p+q5KN+j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 74B7088051; Thu, 22 Feb 2024 07:48:12 +0100 (CET)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8B10E8805F; Thu, 22 Feb 2024 07:50:31 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8C6E68803E
- for <u-boot@lists.denx.de>; Thu, 22 Feb 2024 07:48:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BD9B187E6F
+ for <u-boot@lists.denx.de>; Thu, 22 Feb 2024 07:50:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dan.carpenter@linaro.org
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-41275f1b45aso10319675e9.3
- for <u-boot@lists.denx.de>; Wed, 21 Feb 2024 22:48:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708584482; x=1709189282; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Wp+o4Nz/nYqtKpCioaLTD8CsJQ6aK+axnusdZWEnDj8=;
- b=oAlo5zPvjM4Zx+RR7zZKRE47sDIUNvTWkRhqrxhxvkv0YREKnujhJp50a96Ujz/R8B
- BhpB5ru9ky5r14WNtTMN8jslZ/8/gys8gWfRHBfJGIbzBy5iyzMrBdoUMPEGzGcqn9Sm
- JNDNsExEWICS4zMMQRyoAQK75b9FCIVPl64vS0+FDfKKXgxU9npB4qqGOpOPAFP5t+qs
- dHK+SUMIlFpN0jQHQbxpOCoEQidKZtZ27kcExjp0oLQwUJUXhZEgqrlbwWUQFJw1gKMp
- TIpFKAv8kvaC+0+wlQoeOrxOyTm4KzuCfkPcMdkKVf+zEVApe0noaZcUAOWRcq1/milZ
- onQQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708584482; x=1709189282;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Wp+o4Nz/nYqtKpCioaLTD8CsJQ6aK+axnusdZWEnDj8=;
- b=rlb7gkvbpm/MNi5UrfOgn5mLagPqFhBziY6WvUXCqD0uneMXUmQX4fQ0mWEjmnST8c
- zKcbjLTFwvKMH5DY8KeuKIFZDZRnXzkEysifynmlzWLh9eJ42jcHcgmne7J8Rt5Iwcfd
- ke0Ev60/n70e5H8NipWNC9F4jQfqA8BV/4gXaChkzV4/F9QA+hvVvkeZACc8rkCoOiUV
- 4Rm7cnEc6m7sVtE8iJDfUxWrqo4bLQLfCwUtNZVE2NRezPK4ypH3RyQrdd04gKY7MgMZ
- jAa3CavumDMMFQykAdWA7Ntbxi4cFDQbcAaRo8fwB/84+yNkv08Igi6kRY6QrFGJ/f/b
- i5Dg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVP7Js1BYWDmucDZp/5Qz+BEpeqSK0i4RTZrrLduAYkZ858kdD5X2qVgtn/02u/hfx/lGrFTFZ9/ANN2iQ/CY/NjDhGQw==
-X-Gm-Message-State: AOJu0YzGw/8eLyMDM4VzqpmLxkmZ/i8Pqm1vIM5B2M+iEJjfZqSOSq/o
- q7hZolgZYNyQpvmO0zD3TUTQCqNGbqHli8wQDAqifx5BmnwR3wDJMB1Bis4yW9E=
-X-Google-Smtp-Source: AGHT+IFf1UjLEJnGTOdm88xLPr18SpqendBdw74aqxpJQgBYQ/ybENzyhoYoGafAf2qN0XR/tPDj1A==
-X-Received: by 2002:a05:600c:3590:b0:412:6d65:abd5 with SMTP id
- p16-20020a05600c359000b004126d65abd5mr6515979wmq.10.1708584481981; 
- Wed, 21 Feb 2024 22:48:01 -0800 (PST)
-Received: from localhost ([102.222.70.76]) by smtp.gmail.com with ESMTPSA id
- e6-20020a05600c4e4600b0041276d96349sm4623455wmq.8.2024.02.21.22.48.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 Feb 2024 22:48:01 -0800 (PST)
-Date: Thu, 22 Feb 2024 09:47:58 +0300
-From: Dan Carpenter <dan.carpenter@linaro.org>
-To: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Andrew Davis <afd@ti.com>, Linus Walleij <linus.walleij@linaro.org>,
- Bin Meng <bmeng@tinylab.org>, Sumit Garg <sumit.garg@linaro.org>,
- Fabio Estevam <festevam@denx.de>, Andre Przywara <andre.przywara@arm.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Yang Xiwen <forbidden405@outlook.com>,
- =?iso-8859-1?B?Q3Pza+Fz?= Bence <csokas.bence@prolan.hu>,
- Peng Fan <peng.fan@nxp.com>, u-boot@lists.denx.de
-Subject: [PATCH] ARM: Enable CONFIG_64BIT for static analysis
-Message-ID: <d156b6f6-429e-4c6c-b863-f8554480d74a@moroto.mountain>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41M6oNNG078060
+ for <u-boot@lists.denx.de>; Thu, 22 Feb 2024 00:50:23 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1708584623;
+ bh=hL4tKsyY7Qq5ze/ycNXUIpIs7xFzXhIBzYkG1N1sr9w=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=p+q5KN+jaBcnTq7O9GPmvDnkvu6/98XX5EYiHc+GZwDMda6/ygJ13EXKtkaIBmzUz
+ Z/16H17YmLGz4t1mU5AmR75nsrn6kxCMB459x7W0U7xhDdSTAahY+aKcyYXzIMwSkX
+ u5F84/8U5up8Pm2IRoiUUMITkzn68IQQiuNF6CWU=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41M6oNvf101021
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+ for <u-boot@lists.denx.de>; Thu, 22 Feb 2024 00:50:23 -0600
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 22
+ Feb 2024 00:50:22 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 22 Feb 2024 00:50:22 -0600
+Received: from [172.24.227.36]
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41M6oKS3095004;
+ Thu, 22 Feb 2024 00:50:21 -0600
+Message-ID: <33b708d5-0333-4d8a-b754-94c9bdbb51c3@ti.com>
+Date: Thu, 22 Feb 2024 12:20:20 +0530
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-X-Mailer: git-send-email haha only kidding
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] arch: mach-k3: fix mapping higher DDR addresses as device
+ memory
+Content-Language: en-US
+To: <u-boot@lists.denx.de>, <afd@ti.com>, <nm@ti.com>
+CC: <kamlesh@ti.com>, <u-kumar1@ti.com>
+References: <20240222064556.1051458-1-n-francis@ti.com>
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <20240222064556.1051458-1-n-francis@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,38 +81,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In the Makefile there is a line that says this:
+Hi all,
 
-    # the checker needs the correct machine size
-    CHECKFLAGS += $(if $(CONFIG_64BIT),-m64,-m32)
+Looks like this patch was already merged to u-boot/master
 
-So set CONFIG_64BIT so that we don't pass -m32 to the static checker.
+https://lore.kernel.org/all/20240109084551.21155-1-nsekhar@ti.com/T/#md1fd66ff9f1cb93dfaa0dfb5f67d7452416e2cc2
 
-Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
----
- arch/arm/Kconfig | 4 ++++
- 1 file changed, 4 insertions(+)
+Sorry for the spam!
 
-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index fde85dc0d537..4c7be7cf9c33 100644
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -1,11 +1,15 @@
- menu "ARM architecture"
- 	depends on ARM
- 
-+config 64BIT
-+	bool
-+
- config SYS_ARCH
- 	default "arm"
- 
- config ARM64
- 	bool
-+	select 64BIT
- 	select PHYS_64BIT
- 	select SYS_CACHE_SHIFT_6
- 	imply SPL_SEPARATE_BSS
+On 22/02/24 12:15, Neha Malcom Francis wrote:
+> From: Sekhar Nori <nsekhar@ti.com>
+> 
+> An entry in memory map table for MMU configuration is spilling over and
+> inadvertently mapping DDR available at higher address (above 4GB address
+> space) as device memory (nGnRnE).
+> 
+> Fix this by adjusting entry size. Tested on AM62A SK by enabling
+> CONFIG_CMD_TIME. Before this patch:
+> 
+> => time crc32 0x881000000 0x20000000
+> crc32 for 881000000 ... 8a0ffffff ==> 5a7a5760
+> 
+> time: 1 minutes, 14.715 seconds
+> 
+> After patch:
+> 
+> => time crc32 0x881000000 0x20000000
+> crc32 for 881000000 ... 8a0ffffff ==> 3df1ce02
+> 
+> time: 2.711 seconds
+> 
+> Signed-off-by: Sekhar Nori <nsekhar@ti.com>
+> [n-francis@ti.com: rebased on next, retested on all devices inc. commit]
+> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+> Cc: Andrew Davis <afd@ti.com>
+> ---
+> Boot logs:
+> https://gist.github.com/nehamalcom/7b101ea8b97f5a9433a553ef881166a1
+> 
+>   arch/arm/mach-k3/arm64-mmu.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/arch/arm/mach-k3/arm64-mmu.c b/arch/arm/mach-k3/arm64-mmu.c
+> index b4308205b2..0e07b1b7ce 100644
+> --- a/arch/arm/mach-k3/arm64-mmu.c
+> +++ b/arch/arm/mach-k3/arm64-mmu.c
+> @@ -41,7 +41,7 @@ struct mm_region k3_mem_map[] = {
+>   	}, {
+>   		.virt = 0x500000000UL,
+>   		.phys = 0x500000000UL,
+> -		.size = 0x400000000UL,
+> +		.size = 0x380000000UL,
+>   		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+>   			 PTE_BLOCK_NON_SHARE |
+>   			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
+
 -- 
-2.43.0
-
+Thanking You
+Neha Malcom Francis
