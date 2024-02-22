@@ -4,79 +4,135 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDAAEC48BEB
-	for <u-boot@archiver.kernel.org>; Thu, 22 Feb 2024 08:06:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 188B6C48BEB
+	for <u-boot@archiver.kernel.org>; Thu, 22 Feb 2024 09:28:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E3CBA8803E;
-	Thu, 22 Feb 2024 09:06:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 5178C87E13;
+	Thu, 22 Feb 2024 10:28:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=theobroma-systems.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PIF6hjzR";
+	dkim=pass (2048-bit key; unprotected) header.d=theobroma-systems.com header.i=@theobroma-systems.com header.b="gaAosxe2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C2D2287E6F; Thu, 22 Feb 2024 09:06:13 +0100 (CET)
-Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
- [IPv6:2a00:1450:4864:20::22d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D205688072; Thu, 22 Feb 2024 10:28:15 +0100 (CET)
+Received: from EUR01-VE1-obe.outbound.protection.outlook.com
+ (mail-ve1eur01on071b.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe1f::71b])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 85BC78805F
- for <u-boot@lists.denx.de>; Thu, 22 Feb 2024 09:06:01 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=blemouzy.ml@gmail.com
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-2d180d6bd32so87234851fa.1
- for <u-boot@lists.denx.de>; Thu, 22 Feb 2024 00:06:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1708589160; x=1709193960; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:subject:cc:to:from:date:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PayTRtb8NIGUSdnIv7GWKasq4itRkqCoWUPu7GvUFlw=;
- b=PIF6hjzRrmKZxnMEbu1ETFDQ2RWl3Ldm1fnxyruAnQiOh7putNZzS/LDpi4H7RqfAx
- 68YQiHTm6twoM8J9rZ6D5fN93+4OubIaQTIIf8umAxOKwzvE99bvIT17LGcU4As6eu42
- gAssd1mrVUm9HpZPbgDA22mrkMepqgNw7Ki50V3JrpYRhtmpMXmjPb97s/AXO6/t8Kma
- I+sxvHDGHPm6Uw5usnhu8j47GM6m1sgNeTOBUNeUpBUwPbZbtchCJiKxpU/hP/wqDwRZ
- 78K4hNRx81euFfY8oMtFOYSdxvphcsPX1bzJRh9nle+NTp4ABCM4XJlgbzZgwRK4PQR5
- v+Zg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708589160; x=1709193960;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=PayTRtb8NIGUSdnIv7GWKasq4itRkqCoWUPu7GvUFlw=;
- b=j75xBv/hNPVm8G9fhb2HpNYoABVrbWkbkvquhK0luagFGX1oJhJ8gjMjROyfiFuiFE
- /ikspNI/TWMxRIaCRSVhIS53UNwTTGEHvhLV/80ne4CTxcuUeuZzDZvKKxQgwdzoAhvT
- BvST5ZDVb3mz3Rnt1IeorFYP8BXvKZAxonQ2VXVCB/1M4LFv40bfR//GTTLGTizOSB8P
- 7Fr6JRIHzj3uwQQgvGiI7XB6GXzZEKUystO8U/hsm+wQqcfnpRi2mBb1yKSqIxA47WLo
- 8pzrzCHYy6A8nqLftWIz6d738TV8VHajB83m7Q0qk1g716HUBrk0VoyoBEiAC2Mvznqx
- YGCg==
-X-Gm-Message-State: AOJu0Yze9iOwNlQxmiKa8ibyy7nLE8xE/YPdIl9c0BIPGjs5nirF+EBt
- EBplVntMc598W4ISW6Op9qSgRmZPsfUo2aBdm00e78v41Y5pQJpZ
-X-Google-Smtp-Source: AGHT+IGtj5wMbuKNPeCzkmfW0x1DUgjauUHRN5JXWMB5tQdOjpfKlYrCjAFDa/UUCABzSmcn6g8OYg==
-X-Received: by 2002:a05:651c:9:b0:2d2:555f:b4ae with SMTP id
- n9-20020a05651c000900b002d2555fb4aemr2447806lja.51.1708589159357; 
- Thu, 22 Feb 2024 00:05:59 -0800 (PST)
-Received: from localhost (82-65-95-55.subs.proxad.net. [82.65.95.55])
- by smtp.gmail.com with ESMTPSA id
- k5-20020a5d66c5000000b0033af3a43e91sm19326932wrw.46.2024.02.22.00.05.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 Feb 2024 00:05:59 -0800 (PST)
-Date: Thu, 22 Feb 2024 09:05:56 +0100
-From: Benjamin Lemouzy <blemouzy.ml@gmail.com>
-To: Sean Anderson <sean.anderson@seco.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 83ED287C83
+ for <u-boot@lists.denx.de>; Thu, 22 Feb 2024 10:28:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=theobroma-systems.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=quentin.schulz@theobroma-systems.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=X9Wt6mmgpBVV9f5GgFag8XBWJg5vzONrTWR/EMbtRhoV1bK/EUxi4RPHoc8JIv1tw80Os9h4uV2v7wtSVomOVVEmSHe2HpGCRiyOw6AeQ0dAXALjUfe9Wu3XkOVNQL21Tpt6UQ5XdQgv8KaAoEtQa93n5OXuaPG+QMCWiYb9OmBen/smn2XwtTSH/J6Yvxa7v2cUzaxhceunavfsT58Picma8iDUesBjNhrbQ5rRw00WhoDZmjT3yXJC/GG6oEcHjs9KuLu2uw5ASyZetMujjUNm6+CjyV71F1cZUs0mSMb1uVOASfP+KCmc/wqMXuuET/iiIORZ3Lp3sf6odak0Wg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ovJuCo/YgROcXxu/BuOkPHMxzSeWNhOq/66pIlR3T/Q=;
+ b=UzdkfCflSsQACV1mC2dRZsMtM3Qx0y5dGNzp3rppOKgfGFYN6ji6bzBhB+z9Etz2eLrGh4RU/gQyz2Zn5MPA73hnSl2PZkDt6ZY9YK+oQhWaTTPZ612EBApYs7KbrdhMy77YCuqiLnHurU3m4ascEgmFqHv2OBR34y/VjIthnoFctHbpyWM+YCib8phXh8m3l+7waA7RRzrHegYHhWw6JvnY+oS8aGZGGelrRbN7EYsLdY+ljD7syYUzcjDjuE00jOZqW793K1aaw/gcoAoGij6SNWelvDDeq9Ew9FXSS427Wr4DfwMWIdm11P7hb7Wg4qo4Mk4iltJJgoxkk2BjKA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=theobroma-systems.com; dmarc=pass action=none
+ header.from=theobroma-systems.com; dkim=pass header.d=theobroma-systems.com;
+ arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=theobroma-systems.com; 
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ovJuCo/YgROcXxu/BuOkPHMxzSeWNhOq/66pIlR3T/Q=;
+ b=gaAosxe2C9NmhB3WQcZRciW+JXd0Ovxs+icbE8NIYiRbfeRptyfSWpb6LM1f1TdUFQ/72uagk0HM9uE4E8PDeogsNBVPIldIbJZRe6zAbA766eVGDZvV7dUbS3tScFRJqgGuCtCMkyA9DHX1cevAKwMdat9dQbQct+I5tLX3KHlEYlydnb/LwZzixFz261ZAgeuxUoAwA2h+0AItfoooZ4AA/z7SH4Zcgsz6Q2c5YulV4PRqNjzuph+pAagBp05/jVfajtiJL5DW69GtoMqBEAlyVJZ6awbvRyVdZull/xkw7ogR8XiNZDYLyQ8uxQ3vhrbDGk4XZ/giTQMLAJhr7A==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=theobroma-systems.com;
+Received: from DU2PR04MB8536.eurprd04.prod.outlook.com (2603:10a6:10:2d7::10)
+ by PAXPR04MB8253.eurprd04.prod.outlook.com (2603:10a6:102:1bf::7)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7292.38; Thu, 22 Feb
+ 2024 09:28:09 +0000
+Received: from DU2PR04MB8536.eurprd04.prod.outlook.com
+ ([fe80::550d:ad96:e3cb:9a6e]) by DU2PR04MB8536.eurprd04.prod.outlook.com
+ ([fe80::550d:ad96:e3cb:9a6e%5]) with mapi id 15.20.7316.023; Thu, 22 Feb 2024
+ 09:28:09 +0000
+Message-ID: <7613ea71-663b-459c-9450-710731c74de3@theobroma-systems.com>
+Date: Thu, 22 Feb 2024 10:28:06 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 05/11] rockchip: io-domain: Add support for RK3399
+To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
-Subject: Re: HABv4 with SPL and u-boot-dtb.img on i.MX6
-Message-ID: <20240222090556.00001ea3@gmail.com>
-In-Reply-To: <92a814a0-aaa5-47db-ab8f-7e799ab3e82d@seco.com>
-References: <20240220105049.00000d3c@gmail.com>
- <92a814a0-aaa5-47db-ab8f-7e799ab3e82d@seco.com>
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.38; x86_64-w64-mingw32)
+References: <20240217183610.2621132-1-jonas@kwiboo.se>
+ <20240217183610.2621132-6-jonas@kwiboo.se>
+ <f00195b3-b410-4e1b-ab56-c448e8f530cc@theobroma-systems.com>
+ <5c6e6525-fc93-4a5a-b3bb-f5f6b5341ef3@kwiboo.se>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+In-Reply-To: <5c6e6525-fc93-4a5a-b3bb-f5f6b5341ef3@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+X-ClientProxiedBy: FR0P281CA0169.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:b4::11) To DU2PR04MB8536.eurprd04.prod.outlook.com
+ (2603:10a6:10:2d7::10)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DU2PR04MB8536:EE_|PAXPR04MB8253:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1e64371b-97a2-45ea-47da-08dc33889540
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: i8IwNGgEhaS/o1GpC8/Npmqq8N4WLfeFVzia54iJHxKtU5lqr7lQXsvAac/uP4Nl3hnIgouxr0/DggRX84MGkGEeW63tuliYm9IpmyeENEHbPjyh3JBlqFsioM6bht3K5Run2nU5IoGpwN9rl+NpVcaOkFCtQJTt7y0nVK9EIRenw9h+nmoWBlVoZwxIxbOgMdLFg6dN5+a6HL5Bl992NG9+3iiDnGClLKcL0AyLLYm2j7MScbsG5Njj2/R7tRrr9wurDCLadPIii/Zp2nti3n8Wq0Y/86kZD7xq6IZpE2Q7zUOwOyb/uZpsNgtRBj4tZlA4AG4KzdxMHAYihksdPQJhU4Y4Ri5/qFRwMmS5MKSUlRwaALTKE2Ijl/ukt1ThZ8gvyTD49TIXXa/quCfTr3wKKUKDAIq6aeDwLKuRV3AkeQ2fUNUenGjD4c/C+NhxI9SOclxQfIGXYt2Zsb+mDK+YOQ4+C6RbHbCpmOy358OaB5Dide6DqKqh8yko73iSWxneUzR3Su83a1+lZc0BhA==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DU2PR04MB8536.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031); DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VDF3QWo2TXVaOVRLQkliTWRTQzdvZGE4VkcxNzEvTG5hdUcvbU1IS2VNYTY0?=
+ =?utf-8?B?aVp5MlJsT2UrSTQ2WFk2ci9XbE1WVWlodDVleURWUWdUR1JkMUVVZUhKbWNN?=
+ =?utf-8?B?ODJQRXk1SCtBd0pBWlpLaTFRTjBoanJZTzdvTWwzeCtLTGhuaFZyYTBJNlFH?=
+ =?utf-8?B?c0xZMGVBZVBIT3pZSGdQVnFCZEJsNnhGMmo5bmNHbExqekxHMWMyTDFJcVFz?=
+ =?utf-8?B?NGxjcWRVWDJPOG5UZnREM1ZoM3ZXQXR5TzdJbnkwQXVIbjRKSFlOeTBYNmJz?=
+ =?utf-8?B?U0NkWlp0WUFTczVWdXRpaFMzTVNFbHh3Y1FNZnRpQm9tYzl3RUk4ZitHb3Z4?=
+ =?utf-8?B?U3dZU3kvajNHTDlRTjhKR3Y5SHY5b2taM3JaQ2t3bWRxSVhCcFdtUXNyVHpw?=
+ =?utf-8?B?RmNERFEvUCthLzlsWG9Pd1dOZEhSMVN1NzNRM2kwa2dsUDM5RUpLbHZoa05t?=
+ =?utf-8?B?ZHB1dDVwYVEyV3lXYnZKVzA4WE01c1VJdTdycTVQNm5YaWZGd3o4ZTJxUTZq?=
+ =?utf-8?B?SnRYeHVYYU04OTE3bUVjOXdCclFpUHVhcEYvNVRwek5YNkZjc0lyK0kxWUc2?=
+ =?utf-8?B?bnQrYll5dWZKcHIrc0w4SVlyUnB6aVEvWldoT0FHVkZZV2dlb2l5OGZsTlNp?=
+ =?utf-8?B?YVZKZWpORUt6M1VOUEl6UlExNWFFekdaOXY2YjA0dkV1aHR3bG04NXAvSHA3?=
+ =?utf-8?B?Ujg2WHRjRi92SSszazJKVkZ4czc4ZFJQbWNjOVAydGlkdm5BRDErQUZaM3ZX?=
+ =?utf-8?B?anFDdm5wSEh6RndHZEtLVnRGMHpXZzdYM2RuOFpQNGI3ZTFFblFRejE3QVZU?=
+ =?utf-8?B?SnBkMzRNVlpCU2dsVHAzMGlSL0tDeGcwUU4yL0IvVityYzg4UVJJRzhtT0xN?=
+ =?utf-8?B?Qmk4WDlBQnFuSk5NRUZtNU5VTzZFdzdvdTJ5VWtQQmJrRnJOVVRFbjI5R0NH?=
+ =?utf-8?B?MTU1WDRKSWJmOHJWWVdkS0ozWlZxSlc2d1J4bG0yZDBMajFVWW1rWjM3eU1W?=
+ =?utf-8?B?L2hhcHNVN3NxbjFyN1BnUm01K1dZQ2M2M0FORmpHREdXVmtGaXAyRFhRY1Nn?=
+ =?utf-8?B?dEpJNGZsOU1JVUd6cjJ1OGN0K25KNUVaVm1KVWcwWGc3bDlIeG9qaXpoTWVp?=
+ =?utf-8?B?N1dmSE0yc1RINVcrbGhKc0JQZk9mRWtXMVc4Q1BNME15aHdHRVAvb3d2M0Vh?=
+ =?utf-8?B?T09vRUR6Rkg0WVV6RTBuQkFsaEpxM1hLeEVoam1tWk9ZQXl5MERubTk1emI2?=
+ =?utf-8?B?bWdYVElXOHdnYSs5KzFuNS84dE0zZSsrUFBrZGJyWlZRYlMyZW5HdXZYeHpH?=
+ =?utf-8?B?bFhIb2d3em1NMUI3OUhCQk9DamRBbHlUMGl0cHBjS2tHdERCRy9xcWt3M2Fk?=
+ =?utf-8?B?NDZ6SjZ5ZGRKczVtSk1hTU1HMVlxK2loYzRPRGJ6RTc0UUNOYnlqRnVqRFRs?=
+ =?utf-8?B?MHlJTDk2cThUK3RFOTZ4ZlZXaSt5WUZ5Zy9WTUZUNjRpWnAyazd0MlUrUjYx?=
+ =?utf-8?B?aWx5eFFCdnk3ZXJMMnY0aVM0TzEwd1lkNUh2dFRuRGQvK3dUYUc4WitPbTVF?=
+ =?utf-8?B?ekFCSXhkcTVTMEhwOXRNNEViZ0lyZlpIZmNFUG4wcy81VTdWQ0NQTXVZazU4?=
+ =?utf-8?B?a3didnVDTCs0RUNQV1Boc2tTbG13cjVYMGFBU2U1dmFIYmVKMlhha0lYT21h?=
+ =?utf-8?B?V1hrTUJYUmwrSW91NEo1bWVaYTRmYmdhMHR5bkI3NWVaS1Rqb3libnYwdnVV?=
+ =?utf-8?B?YVA4MTdpdzB4M0ZTeGR4dUhFNUpGVFBjTHVTUWNnbW5ra085TGpuWlpWeFc4?=
+ =?utf-8?B?UWYyRzVGK1pLZEpIS3dvVHJIbGhFd1BobFF5ZDk5VnFoUTMyYStMQUVYeXZR?=
+ =?utf-8?B?TlRmenRwUDh6R0RhZS9VQVNYNGc3cmVDemlnR1Y0bWhsWnhZR0orMGVxS2lK?=
+ =?utf-8?B?NloxdWdOZU9TSzBiRm5IcGp3RU15U3VsbmVQano1WFp0QVI5NkJNempzS1FZ?=
+ =?utf-8?B?cGxrYzk1R3JrMUQ2V0JJYWpRdzVmOW1aVVhuSGxOZXdobnN2dnVDclFxSDUy?=
+ =?utf-8?B?Rlh3SThmZ0wzeVJkUjhMZmNta0dYaFZaZ1N2a1MxYnViR0NsUmpNNmpMQW00?=
+ =?utf-8?B?YXFiN1VNVTRtWFhBNlc0QnRUMk1SM20vaEV2d1p6SU5xSUZGKzRnUlFPQ2F4?=
+ =?utf-8?B?MW5XZmtUbi9KT2k1NlExKzhuS2RCcnFJNkd2elE1bklkQVVVWHhXVHNEUXNn?=
+ =?utf-8?B?TU5jY2Foakx6cTBWQVZDaTZPWS9BPT0=?=
+X-OriginatorOrg: theobroma-systems.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1e64371b-97a2-45ea-47da-08dc33889540
+X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8536.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Feb 2024 09:28:09.3294 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 4/UDW+hxt3D5v0xuXQGHsLQBxA2EcEPMbHO++8IGmkzKRGgA/vdiVfb5AGys39ZCt9NPymq2satEEOy0rB7Ckfoj7G8jI3OPyF+0kzFML7sEVjVK21fCSUWdYoTXI/t6
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8253
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,60 +149,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 20 Feb 2024 11:29:53 -0500
-Sean Anderson <sean.anderson@seco.com> wrote:
+Hi Jonas,
 
-> On 2/20/24 04:50, Benjamin Lemouzy wrote:
-> > Using fdtdump shows that crc32 is used as hash algorithm for FIT image which is a super weak one.
-> > I tried to pass another algo (sha256) using mkimage -o option but that doesn't work.
-> >
-> >   ./tools/mkimage -f auto -A arm -T firmware -C none -O u-boot -a 0x17800000 -e 0x17800000 -p 0x0 -n "U-Boot 2024.04-rc2-00025-g9e00b6993f-dirty for mx6sabresd board" -E -b arch/arm/dts/imx6q-sabresd.dtb -b arch/arm/dts/imx6qp-sabresd.dtb -b arch/arm/dts/imx6dl-sabresd.dtb -d u-boot-nodtb.bin -o sha256 u-boot-dtb.img
-> >
-> > Is there any way to change U-Boot FIT image hash?  
+On 2/21/24 20:05, Jonas Karlman wrote:
+> Hi Quentin,
 > 
-> I believe these options are only used for signed FIT images (e.g. for
-> verified boot [1]). Since you are using an external signing process,
-> they have no effect. I suggest creating your FIT manually (e.g. -f
-> u-boot.its instead of -f auto). You should be able to specify the hashes
-> manually that way.
-
-Using "fdtdump -s u-boot-dtb.img" output as reference to create a u-boot.its file, I now have a u-boot.itb file with sha256 hashes.
-
-> > I also try to use image format and force the HAB to verify the whole u-boot-dtb.img file by patching the FIT image size:
-> >
-> >     image_size=$(stat -tc %s u-boot-dtb.img)
-> >     printf "00000004: %08x" "$image_size" | xxd -r - u-boot-dtb.img
-> >
-> > SPL starts, authentication looks fine but the boot fails.
-> > Is there any chance to make it work or is it insane to try to use this format?  
+> On 2024-02-21 19:18, Quentin Schulz wrote:
+>> Hi Jonas,
+>>
+>> On 2/17/24 19:35, Jonas Karlman wrote:
+>>> Port the RK3399 part of the Rockchip IO-domain driver from linux.
+>>>
+>>> This differs from linux version in that pmu io iodomain bit is enabled
+>>> in the write ops instead of in an init ops as in linux, this way we can
+>>> avoid keeping a full state of all supply that have been configured.
+>>>
+>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>>
+>> Suggestions below, otherwise I only have one concern:
+>>
+>> This actually postpones the moment the IO domain is properly set.
+>> Before, we knew almost for sure when this was set, as it was pretty
+>> early in the boot process (misc_init_r), I hope before any device was
+>> actually probed. Now, because we're using the Device Model for that, we
+>> may probe this IO domain device after another Device requires it? e.g.
+>> for Puma, we need the IO domains set for PCIe to work. I assume if we
+>> were to use PCIe in U-Boot on Puma, we may have this issue (we don't
+>> right now use PCIe in U-Boot and I don't think we have any plan of doing
+>> so).
 > 
-> I have always just used verified boot for U-Boot and the kernel, and
-> only used vendor-specific stuff for SPL.
+> Because this driver makes the following call in its bind ops, the
+> opposite is actually true and the IO domain is configured earlier than
+> it was previously done with misc_init_r.
+> 
+> With this the IO domain driver is probed directly after bind and
+> all regulators that is referenced by io-domain supply nodes will be
+> regulator_autoset() before the uV value is evaluated.
+> 
+> In rockchip_iodomain_bind():
+> 
+>    dev_or_flags(dev, DM_FLAG_PROBE_AFTER_BIND);
+> 
+> On the boards I can test on the GRF got configured exactly as before,
+> just a little bit earlier in the boot process.
+> 
+> Prior to the "rockchip: Port IO-domain driver for RK3568 from linux" [1]
+> series the rk8xx driver had some issues and incorrect voltage could be
+> read for some regulators.
+> 
+> [1] https://patchwork.ozlabs.org/cover/1823769/
+> 
 
-That indeed a good idea but CONFIG_SPL_FIT_SIGNATURE and CONFIG_SPL_DM (as dependency) take a lot of space and SPL overflows i.MX6 OCRAM.
+Well, maybe I should read the source code before raising a potential 
+issue :) Thanks for the correction.
 
-I finally succeed to make U-Boot check with HAB work using the new u-boot.itb image with the following signature format:
+So in short:
 
-            ------- +-----------------------------+ <-- *load_address
-                ^   |                             |
-                |   |                             |
-                |   |          Image data         |
-         Signed |   |                             |
-          Data  |   |                             |
-                |   +-----------------------------+
-                |   |    Padding Next Boundary    |
-                |   +-----------------------------+ <-- *ivt
-                v   |     Image Vector Table      |
-            ------- +-----------------------------+ <-- *csf
-                    |                             |
-                    | Command Sequence File (CSF) |
-                    |                             |
-                    +-----------------------------+
-                    |     Padding (optional)      |
-                    +-----------------------------+
+common/board_r.c:init_sequence_r calls initr_dm before misc_init_r.
 
-I don't really understand what u-boot-dtb.img file is but it doesn't work with U-Boot CONFIG_IMX_HAB.
+initr_dm -> dm_init_and_scan -> dm_scan -> dm_extended_scan which binds 
+the device and because the IO domain driver sets 
+DM_FLAG_PROBE_AFTER_BIND in its bind, dm_probe_devices at the end of 
+dm_scan will probe the device all that before misc_init_r is called.
 
-Thanks for help!
+>>
+>> This all reminds me of the attempts we've made in the Linux kernel to
+>> make sure the IO domain devices are probed before the devices that
+>> require them to be set up. Maybe we'll need something similar in U-Boot
+>> as well.
+> 
+> The main thing missing compared to the linux counterpart is that changes
+> to regulator voltage is not tracked, so there will not be any changes
+> made the initial IO domain voltage configuration made by this driver.
+> 
 
-Benjamin
+There's a common issue for Linux and U-boot parts is that devices 
+dependent on the IO domain being properly configured is not properly 
+handled. Here in U-Boot, if there are devices which also have 
+DM_FLAG_PROBE_AFTER_BIND set, then I think this is dependent on the 
+order in udevice->sibling_node/child_head.
+
+In any case, nothing that is specific to this patch series because it 
+was already the case before.
+
+Therefore,
+
+Reviewed-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+
+Thanks,
+Quentin
