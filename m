@@ -4,64 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3907C54798
-	for <u-boot@archiver.kernel.org>; Thu, 22 Feb 2024 15:42:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D899C54788
+	for <u-boot@archiver.kernel.org>; Thu, 22 Feb 2024 16:09:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DCC4587C80;
-	Thu, 22 Feb 2024 16:42:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 2F09687C6A;
+	Thu, 22 Feb 2024 17:09:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ivT4V8Ne";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ScRF6TeQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C31F887C63; Thu, 22 Feb 2024 16:42:17 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 6448E87C7F; Thu, 22 Feb 2024 17:09:31 +0100 (CET)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2EF8287ABC
- for <u-boot@lists.denx.de>; Thu, 22 Feb 2024 16:42:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 306CB87C63
+ for <u-boot@lists.denx.de>; Thu, 22 Feb 2024 17:09:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41MFgDtU086767
- for <u-boot@lists.denx.de>; Thu, 22 Feb 2024 09:42:13 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1708616533;
- bh=8Cw3gdScaCFX1Y2DUw7OcdSHFj7GwyKbsCBFJ6QRifU=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=ivT4V8Ne9mtIBimzRD3hZTNHYmCSIxG95BImATkXen+r4Nuboa5gqOn8S4yFMZryE
- k8osifJnTLNIedvahM3hX7RvYHHaSoURdesXOdQ61Xr2KIxWfPNbGM1BLMU4FcIvJx
- EmjkCRmJPHefdlmami2tvW1V0x4GlWibW7EJvE34=
-Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41MFgDfi059403
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
- for <u-boot@lists.denx.de>; Thu, 22 Feb 2024 09:42:13 -0600
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 22
- Feb 2024 09:42:12 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 22 Feb 2024 09:42:12 -0600
-Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41MFgClt048773;
- Thu, 22 Feb 2024 09:42:12 -0600
-Date: Thu, 22 Feb 2024 09:42:12 -0600
-From: Nishanth Menon <nm@ti.com>
-To: Neha Malcom Francis <n-francis@ti.com>
-CC: <u-boot@lists.denx.de>, <afd@ti.com>, <kamlesh@ti.com>, <u-kumar1@ti.com>
-Subject: Re: [PATCH] arch: mach-k3: fix mapping higher DDR addresses as
- device memory
-Message-ID: <20240222154212.qpymyhdtbyy3a6ma@phantom>
-References: <20240222064556.1051458-1-n-francis@ti.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-41241f64c6bso14624325e9.0
+ for <u-boot@lists.denx.de>; Thu, 22 Feb 2024 08:09:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1708618165; x=1709222965; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=p2gMXxXNLFZJVYGxMeM0mr43fhBKTmOoctPVRxYCbxM=;
+ b=ScRF6TeQwBVRwRt0f24E1TYBwfv93K+WAtmGgLmrm39yBrLoMOdxDKVOXqDmLCBDhB
+ LnKQ3vnMWzUwr9d3XXQ33TF9Rc3I/styu+0tY1KDNh3PzFwtPai6EIOOkA6yYaASlxar
+ 3otDMC3bFrZHbcaP8cFMUmglfBdBI97KzAvFQHpKY6OexL6cyjj7YUQI0kI6rq3usDCj
+ dknOHQAlMwqroUEcwjUhexJ0fzrt+KE6bUEhz7wKeIY0j36EcpUipHUOF4I1oLwgxp7m
+ 5/H950xW5T0kirLg4AOB0WE+QcUzbRwxGks0nbScssP4bxPtFFgX9ldudVWlzZ0M06AD
+ FUkQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1708618165; x=1709222965;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=p2gMXxXNLFZJVYGxMeM0mr43fhBKTmOoctPVRxYCbxM=;
+ b=VW2c+vm1TYFZReQYS7N5Bef3Mwi8lOO/Hm3TghIbC85vmneypRnFyzbyCipDduvLbR
+ 3q15+UCaPjvmeBNbUPSY9TvkvcOvA6KfMiQY5fSqNCK4nJNf+iaWWhlm/67LgUoTB1DD
+ RoGtJbmMYEra7zcI2yd/lXNsCyEkhj7E+xeOBrFQU6ykJ+ajQnZxkur3tf4uuUvTdZXD
+ K2AIOdrgWPhdljRCaobmSKjUM8rj4xYvzo56STropRfNX5tMfRBW94tZoSE4ITrAbk1n
+ qN3xUYcX8e94PaWqaQHCTySVPyWF5BKcj9MUrprK9vbvGHkN62IfETefUzfXlsk6lWF8
+ MvbA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWG+sBE8zeDhGPhELY159eT7IAzxwXz358aty7Js2t9saaoO2Jg0wd78BLUuBFyXsSRsIhpR1e4zhb6oLazZB7bgM7o8g==
+X-Gm-Message-State: AOJu0YwC9BcqOnusb1w3Emajz998EH4mAwoOu9l2EvagGROiyf9W1Iij
+ rQDDOLz+qekFCtEgOt4Llg+uG+PPHcYVdxM0mjPNoyIFuQU2riB/vXu2gBzcMms=
+X-Google-Smtp-Source: AGHT+IETpzcSYErUhRWVa683oAfYOjaoD9o3zCvRnCiB37Rr3Wyt9Ulx55z+d2EIbzMJZYthCFzheA==
+X-Received: by 2002:adf:e912:0:b0:33d:29d3:1aa6 with SMTP id
+ f18-20020adfe912000000b0033d29d31aa6mr9119590wrm.54.1708618165610; 
+ Thu, 22 Feb 2024 08:09:25 -0800 (PST)
+Received: from lion.caleb.rex.connolly.tech (host-92-17-96-232.as13285.net.
+ [92.17.96.232]) by smtp.gmail.com with ESMTPSA id
+ r3-20020adfce83000000b0033d2541b3e1sm19221287wrn.72.2024.02.22.08.09.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 22 Feb 2024 08:09:25 -0800 (PST)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+To: Tom Rini <trini@konsulko.com>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, u-boot@lists.denx.de,
+ Caleb Connolly <caleb.connolly@linaro.org>
+Subject: [PULL] Please pull qcom/qcom-fixes-2024.04
+Date: Thu, 22 Feb 2024 16:08:45 +0000
+Message-ID: <20240222160915.3196313-1-caleb.connolly@linaro.org>
+X-Mailer: git-send-email 2.43.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20240222064556.1051458-1-n-francis@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,60 +91,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12:15-20240222, Neha Malcom Francis wrote:
-> From: Sekhar Nori <nsekhar@ti.com>
-> 
-> An entry in memory map table for MMU configuration is spilling over and
-> inadvertently mapping DDR available at higher address (above 4GB address
-> space) as device memory (nGnRnE).
-> 
-> Fix this by adjusting entry size. Tested on AM62A SK by enabling
-> CONFIG_CMD_TIME. Before this patch:
-> 
-> => time crc32 0x881000000 0x20000000
-> crc32 for 881000000 ... 8a0ffffff ==> 5a7a5760
-> 
-> time: 1 minutes, 14.715 seconds
-> 
-> After patch:
-> 
-> => time crc32 0x881000000 0x20000000
-> crc32 for 881000000 ... 8a0ffffff ==> 3df1ce02
-> 
-> time: 2.711 seconds
-> 
-> Signed-off-by: Sekhar Nori <nsekhar@ti.com>
-> [n-francis@ti.com: rebased on next, retested on all devices inc. commit]
-> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
-> Cc: Andrew Davis <afd@ti.com>
-> ---
-> Boot logs:
-> https://gist.github.com/nehamalcom/7b101ea8b97f5a9433a553ef881166a1
-> 
->  arch/arm/mach-k3/arm64-mmu.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/arch/arm/mach-k3/arm64-mmu.c b/arch/arm/mach-k3/arm64-mmu.c
-> index b4308205b2..0e07b1b7ce 100644
-> --- a/arch/arm/mach-k3/arm64-mmu.c
-> +++ b/arch/arm/mach-k3/arm64-mmu.c
-> @@ -41,7 +41,7 @@ struct mm_region k3_mem_map[] = {
->  	}, {
->  		.virt = 0x500000000UL,
->  		.phys = 0x500000000UL,
-> -		.size = 0x400000000UL,
-> +		.size = 0x380000000UL,
->  		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
->  			 PTE_BLOCK_NON_SHARE |
->  			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> -- 
-> 2.34.1
-> 
-https://lore.kernel.org/u-boot/20240119160900.GU12635@bill-the-cat/ ??
+Hi Tom,
 
-Something was missing?
+Just a few button fixes that I realise should probably make it in.
 
--- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+The following changes since commit 37345abb97ef0dd9c50a03b2a72617612dcae585:
+
+  Prepare v2024.04-rc2 (2024-02-13 18:16:57 -0500)
+
+are available in the Git repository at:
+
+  git@source.denx.de:/u-boot/custodians/u-boot-snapdragon.git qcom-fixes-2024.04
+
+for you to fetch changes up to 22f391e8be11986bae824509470cf11e7bac31b0:
+
+  button: qcom-pmic: demote "unknown button" message to debug (2024-02-14 17:21:50 +0000)
+
+----------------------------------------------------------------
+Caleb Connolly (1):
+      button: qcom-pmic: demote "unknown button" message to debug
+
+Dan Carpenter (1):
+      button: qcom-pmic: fix some error checking
+
+ drivers/button/button-qcom-pmic.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
