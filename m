@@ -4,65 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73511C48BF8
-	for <u-boot@archiver.kernel.org>; Thu, 22 Feb 2024 06:50:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A621BC48BF8
+	for <u-boot@archiver.kernel.org>; Thu, 22 Feb 2024 06:59:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E6BB88056;
-	Thu, 22 Feb 2024 07:50:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6EFB387E0D;
+	Thu, 22 Feb 2024 07:59:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="p+q5KN+j";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="WwrpZ1mB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B10E8805F; Thu, 22 Feb 2024 07:50:31 +0100 (CET)
+ id B259B87E16; Thu, 22 Feb 2024 07:59:45 +0100 (CET)
 Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BD9B187E6F
- for <u-boot@lists.denx.de>; Thu, 22 Feb 2024 07:50:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DC62587E03
+ for <u-boot@lists.denx.de>; Thu, 22 Feb 2024 07:59:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=r-gunasekaran@ti.com
 Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41M6oNNG078060
- for <u-boot@lists.denx.de>; Thu, 22 Feb 2024 00:50:23 -0600
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41M6xW8R079663;
+ Thu, 22 Feb 2024 00:59:32 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1708584623;
- bh=hL4tKsyY7Qq5ze/ycNXUIpIs7xFzXhIBzYkG1N1sr9w=;
+ s=ti-com-17Q1; t=1708585172;
+ bh=ZvHJga75iDm1t3nFFDvQukb5ZgmEUKeG2EqFYStoc5s=;
  h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=p+q5KN+jaBcnTq7O9GPmvDnkvu6/98XX5EYiHc+GZwDMda6/ygJ13EXKtkaIBmzUz
- Z/16H17YmLGz4t1mU5AmR75nsrn6kxCMB459x7W0U7xhDdSTAahY+aKcyYXzIMwSkX
- u5F84/8U5up8Pm2IRoiUUMITkzn68IQQiuNF6CWU=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41M6oNvf101021
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
- for <u-boot@lists.denx.de>; Thu, 22 Feb 2024 00:50:23 -0600
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ b=WwrpZ1mBQL1f+uAoVMs3KYA3jU87fzevm6wfrovcrE8AyVQlf+BknL6eD2GCTwkFy
+ dhzJ3/oVUmAtyHJBMEp8RQ6e4X3v5shzUmr8DQ86EgbCtay4ynz9ezbbQWz9Xruket
+ MG4i27kMCj8oGkeECg8eDjzfr3g9hX/n0CAUihvM=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41M6xWWU109689
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 22 Feb 2024 00:59:32 -0600
+Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 22
- Feb 2024 00:50:22 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ Feb 2024 00:59:31 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 22 Feb 2024 00:50:22 -0600
-Received: from [172.24.227.36]
- (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41M6oKS3095004;
- Thu, 22 Feb 2024 00:50:21 -0600
-Message-ID: <33b708d5-0333-4d8a-b754-94c9bdbb51c3@ti.com>
-Date: Thu, 22 Feb 2024 12:20:20 +0530
+ Frontend Transport; Thu, 22 Feb 2024 00:59:31 -0600
+Received: from [172.24.227.88] (uda0500640.dhcp.ti.com [172.24.227.88])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41M6xRs8106699;
+ Thu, 22 Feb 2024 00:59:28 -0600
+Message-ID: <da78150d-add5-2d8b-9bb9-b66e336ea419@ti.com>
+Date: Thu, 22 Feb 2024 12:29:27 +0530
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arch: mach-k3: fix mapping higher DDR addresses as device
- memory
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Subject: Re: [PATCH 1/2] net: mdio: Handle bus level GPIO Reset
+To: Roger Quadros <rogerq@kernel.org>, Joe Hershberger
+ <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, Tom Rini
+ <trini@konsulko.com>, <nm@ti.com>
+CC: <srk@ti.com>, <s-vadapalli@ti.com>, <vigneshr@ti.com>,
+ <mripard@kernel.org>, <dannenberg@ti.com>, <danishanwar@ti.com>,
+ <u-boot@lists.denx.de>, Ravi Gunasekaran <r-gunasekaran@ti.com>
+References: <20240219-for-2024-07-am65-cpsw-mdio-v1-0-afe9aaba5801@kernel.org>
+ <20240219-for-2024-07-am65-cpsw-mdio-v1-1-afe9aaba5801@kernel.org>
 Content-Language: en-US
-To: <u-boot@lists.denx.de>, <afd@ti.com>, <nm@ti.com>
-CC: <kamlesh@ti.com>, <u-kumar1@ti.com>
-References: <20240222064556.1051458-1-n-francis@ti.com>
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <20240222064556.1051458-1-n-francis@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+From: Ravi Gunasekaran <r-gunasekaran@ti.com>
+In-Reply-To: <20240219-for-2024-07-am65-cpsw-mdio-v1-1-afe9aaba5801@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
@@ -81,61 +86,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
 
-Looks like this patch was already merged to u-boot/master
 
-https://lore.kernel.org/all/20240109084551.21155-1-nsekhar@ti.com/T/#md1fd66ff9f1cb93dfaa0dfb5f67d7452416e2cc2
-
-Sorry for the spam!
-
-On 22/02/24 12:15, Neha Malcom Francis wrote:
-> From: Sekhar Nori <nsekhar@ti.com>
+On 2/19/24 9:03 PM, Roger Quadros wrote:
+> Some platforms have bus level Reset controlled
+> by a GPIO line. If available then handle bus reset
+> via GPIO.
 > 
-> An entry in memory map table for MMU configuration is spilling over and
-> inadvertently mapping DDR available at higher address (above 4GB address
-> space) as device memory (nGnRnE).
-> 
-> Fix this by adjusting entry size. Tested on AM62A SK by enabling
-> CONFIG_CMD_TIME. Before this patch:
-> 
-> => time crc32 0x881000000 0x20000000
-> crc32 for 881000000 ... 8a0ffffff ==> 5a7a5760
-> 
-> time: 1 minutes, 14.715 seconds
-> 
-> After patch:
-> 
-> => time crc32 0x881000000 0x20000000
-> crc32 for 881000000 ... 8a0ffffff ==> 3df1ce02
-> 
-> time: 2.711 seconds
-> 
-> Signed-off-by: Sekhar Nori <nsekhar@ti.com>
-> [n-francis@ti.com: rebased on next, retested on all devices inc. commit]
-> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
-> Cc: Andrew Davis <afd@ti.com>
+> Signed-off-by: Roger Quadros <rogerq@kernel.org>
 > ---
-> Boot logs:
-> https://gist.github.com/nehamalcom/7b101ea8b97f5a9433a553ef881166a1
+>  include/phy.h     |  7 +++++++
+>  net/mdio-uclass.c | 37 ++++++++++++++++++++++++++++++++++++-
+>  2 files changed, 43 insertions(+), 1 deletion(-)
 > 
->   arch/arm/mach-k3/arm64-mmu.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+> diff --git a/include/phy.h b/include/phy.h
+> index e02cbdb58c..90a595cae4 100644
+> --- a/include/phy.h
+> +++ b/include/phy.h
+> @@ -9,6 +9,7 @@
+>  #ifndef _PHY_H
+>  #define _PHY_H
+>  
+> +#include <asm/gpio.h>
+>  #include <log.h>
+>  #include <phy_interface.h>
+>  #include <dm/ofnode.h>
+> @@ -76,6 +77,12 @@ struct mii_dev {
+>  	int (*reset)(struct mii_dev *bus);
+>  	struct phy_device *phymap[PHY_MAX_ADDR];
+>  	u32 phy_mask;
+> +	/** @reset_delay_us: Bus GPIO reset pulse width in microseconds */
+> +	int reset_delay_us;
+> +	/** @reset_post_delay_us: Bus GPIO reset deassert delay in microseconds */
+> +	int reset_post_delay_us;
+> +	/** @reset_gpiod: Bus Reset GPIO descriptor pointer */
+> +	struct gpio_desc reset_gpiod;
+>  };
+>  
+>  /* struct phy_driver: a structure which defines PHY behavior
+> diff --git a/net/mdio-uclass.c b/net/mdio-uclass.c
+> index e758cc66d7..4500c50430 100644
+> --- a/net/mdio-uclass.c
+> +++ b/net/mdio-uclass.c
+> @@ -14,6 +14,9 @@
+>  #include <dm/of_extra.h>
+>  #include <dm/uclass-internal.h>
+>  #include <linux/compat.h>
+> +#include <linux/delay.h>
+> +
+> +#define DEFAULT_GPIO_RESET_DELAY	10	/* in microseconds */
+>  
+>  void dm_mdio_probe_devices(void)
+>  {
+> @@ -80,6 +83,16 @@ int dm_mdio_write(struct udevice *mdio_dev, int addr, int devad, int reg,
+>  int dm_mdio_reset(struct udevice *mdio_dev)
+>  {
+>  	struct mdio_ops *ops = mdio_get_ops(mdio_dev);
+> +	struct mdio_perdev_priv *pdata = dev_get_uclass_priv(mdio_dev);
+> +	struct mii_dev *mii_bus = pdata->mii_bus;
+> +
+> +	if (dm_gpio_is_valid(&mii_bus->reset_gpiod)) {
+> +		dm_gpio_set_value(&mii_bus->reset_gpiod, 1);
+
+undefined reference to `dm_gpio_set_value'
+Build fails for configs that don't have CONFIG_DM_GPIO defined.
+
+We can have this under "if (IS_ENABLED(CONFIG_DM_GPIO))"
+
+> +		udelay(mii_bus->reset_delay_us);
+> +		dm_gpio_set_value(&mii_bus->reset_gpiod, 0);
+> +		if (mii_bus->reset_post_delay_us > 0)
+> +			udelay(mii_bus->reset_post_delay_us);
+> +	}
+>  
+>  	if (!ops->reset)
+>  		return 0;
+> @@ -111,14 +124,36 @@ static int mdio_reset(struct mii_dev *mii_bus)
+>  static int dm_mdio_post_probe(struct udevice *dev)
+>  {
+>  	struct mdio_perdev_priv *pdata = dev_get_uclass_priv(dev);
+> +	struct mii_dev *mii_bus;
+> +	int ret;
+>  
+> -	pdata->mii_bus = mdio_alloc();
+> +	mii_bus = mdio_alloc();
+> +	if (!mii_bus) {
+> +		dev_err(dev, "couldn't allocate mii_bus\n");
+> +		return -ENOMEM;
+> +	}
+> +	pdata->mii_bus = mii_bus;
+>  	pdata->mii_bus->read = mdio_read;
+>  	pdata->mii_bus->write = mdio_write;
+>  	pdata->mii_bus->reset = mdio_reset;
+>  	pdata->mii_bus->priv = dev;
+>  	strlcpy(pdata->mii_bus->name, dev->name, MDIO_NAME_LEN);
+>  
+> +	if (IS_ENABLED(CONFIG_DM_GPIO)) {
+> +		/* Get bus level PHY reset GPIO details */
+> +		mii_bus->reset_delay_us = dev_read_u32_default(dev, "reset-delay-us",
+> +							       DEFAULT_GPIO_RESET_DELAY);
+> +		mii_bus->reset_post_delay_us = dev_read_u32_default(dev,
+> +								    "reset-post-delay-us",
+> +								    0);
+> +		ret = gpio_request_by_name(dev, "reset-gpios", 0, &mii_bus->reset_gpiod,
+> +					   GPIOD_IS_OUT | GPIOD_IS_OUT_ACTIVE);
+> +		if (ret && ret != -ENOENT) {
+> +			dev_err(dev, "couldn't get reset-gpios: %d\n", ret);
+> +			return ret;
+> +		}
+> +	}
+> +
+>  	return mdio_register(pdata->mii_bus);
+>  }
+>  
 > 
-> diff --git a/arch/arm/mach-k3/arm64-mmu.c b/arch/arm/mach-k3/arm64-mmu.c
-> index b4308205b2..0e07b1b7ce 100644
-> --- a/arch/arm/mach-k3/arm64-mmu.c
-> +++ b/arch/arm/mach-k3/arm64-mmu.c
-> @@ -41,7 +41,7 @@ struct mm_region k3_mem_map[] = {
->   	}, {
->   		.virt = 0x500000000UL,
->   		.phys = 0x500000000UL,
-> -		.size = 0x400000000UL,
-> +		.size = 0x380000000UL,
->   		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
->   			 PTE_BLOCK_NON_SHARE |
->   			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
 
 -- 
-Thanking You
-Neha Malcom Francis
+Regards,
+Ravi
