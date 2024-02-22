@@ -4,77 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D899C54788
-	for <u-boot@archiver.kernel.org>; Thu, 22 Feb 2024 16:09:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40EB9C48BF8
+	for <u-boot@archiver.kernel.org>; Thu, 22 Feb 2024 16:53:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F09687C6A;
-	Thu, 22 Feb 2024 17:09:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 60DB088089;
+	Thu, 22 Feb 2024 17:53:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linux.dev
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ScRF6TeQ";
+	dkim=pass (1024-bit key; unprotected) header.d=linux.dev header.i=@linux.dev header.b="eAAEuDF9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6448E87C7F; Thu, 22 Feb 2024 17:09:31 +0100 (CET)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9E3B288097; Thu, 22 Feb 2024 17:52:40 +0100 (CET)
+Received: from out-179.mta0.migadu.com (out-179.mta0.migadu.com
+ [91.218.175.179])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 306CB87C63
- for <u-boot@lists.denx.de>; Thu, 22 Feb 2024 17:09:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C9B2088087
+ for <u-boot@lists.denx.de>; Thu, 22 Feb 2024 17:52:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=linux.dev
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-41241f64c6bso14624325e9.0
- for <u-boot@lists.denx.de>; Thu, 22 Feb 2024 08:09:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708618165; x=1709222965; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=p2gMXxXNLFZJVYGxMeM0mr43fhBKTmOoctPVRxYCbxM=;
- b=ScRF6TeQwBVRwRt0f24E1TYBwfv93K+WAtmGgLmrm39yBrLoMOdxDKVOXqDmLCBDhB
- LnKQ3vnMWzUwr9d3XXQ33TF9Rc3I/styu+0tY1KDNh3PzFwtPai6EIOOkA6yYaASlxar
- 3otDMC3bFrZHbcaP8cFMUmglfBdBI97KzAvFQHpKY6OexL6cyjj7YUQI0kI6rq3usDCj
- dknOHQAlMwqroUEcwjUhexJ0fzrt+KE6bUEhz7wKeIY0j36EcpUipHUOF4I1oLwgxp7m
- 5/H950xW5T0kirLg4AOB0WE+QcUzbRwxGks0nbScssP4bxPtFFgX9ldudVWlzZ0M06AD
- FUkQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708618165; x=1709222965;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=p2gMXxXNLFZJVYGxMeM0mr43fhBKTmOoctPVRxYCbxM=;
- b=VW2c+vm1TYFZReQYS7N5Bef3Mwi8lOO/Hm3TghIbC85vmneypRnFyzbyCipDduvLbR
- 3q15+UCaPjvmeBNbUPSY9TvkvcOvA6KfMiQY5fSqNCK4nJNf+iaWWhlm/67LgUoTB1DD
- RoGtJbmMYEra7zcI2yd/lXNsCyEkhj7E+xeOBrFQU6ykJ+ajQnZxkur3tf4uuUvTdZXD
- K2AIOdrgWPhdljRCaobmSKjUM8rj4xYvzo56STropRfNX5tMfRBW94tZoSE4ITrAbk1n
- qN3xUYcX8e94PaWqaQHCTySVPyWF5BKcj9MUrprK9vbvGHkN62IfETefUzfXlsk6lWF8
- MvbA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWG+sBE8zeDhGPhELY159eT7IAzxwXz358aty7Js2t9saaoO2Jg0wd78BLUuBFyXsSRsIhpR1e4zhb6oLazZB7bgM7o8g==
-X-Gm-Message-State: AOJu0YwC9BcqOnusb1w3Emajz998EH4mAwoOu9l2EvagGROiyf9W1Iij
- rQDDOLz+qekFCtEgOt4Llg+uG+PPHcYVdxM0mjPNoyIFuQU2riB/vXu2gBzcMms=
-X-Google-Smtp-Source: AGHT+IETpzcSYErUhRWVa683oAfYOjaoD9o3zCvRnCiB37Rr3Wyt9Ulx55z+d2EIbzMJZYthCFzheA==
-X-Received: by 2002:adf:e912:0:b0:33d:29d3:1aa6 with SMTP id
- f18-20020adfe912000000b0033d29d31aa6mr9119590wrm.54.1708618165610; 
- Thu, 22 Feb 2024 08:09:25 -0800 (PST)
-Received: from lion.caleb.rex.connolly.tech (host-92-17-96-232.as13285.net.
- [92.17.96.232]) by smtp.gmail.com with ESMTPSA id
- r3-20020adfce83000000b0033d2541b3e1sm19221287wrn.72.2024.02.22.08.09.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 Feb 2024 08:09:25 -0800 (PST)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Tom Rini <trini@konsulko.com>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>, u-boot@lists.denx.de,
- Caleb Connolly <caleb.connolly@linaro.org>
-Subject: [PULL] Please pull qcom/qcom-fixes-2024.04
-Date: Thu, 22 Feb 2024 16:08:45 +0000
-Message-ID: <20240222160915.3196313-1-caleb.connolly@linaro.org>
-X-Mailer: git-send-email 2.43.1
+ spf=pass smtp.mailfrom=sean.anderson@linux.dev
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+ t=1708620757;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=zeSI54lBghPjacB0rirnOshg39bVdFyZofKano4T5q8=;
+ b=eAAEuDF9XK8a+uLhUZ+X5TqqLl2RMkNn3AN5Eug9f+Q2Sfqo9nxFuAtm79FcxfsMfMigrX
+ /LSxVCch9Ewccns/yt8XWZzV2Gn+I7zaDbX4tVofzpXHFzR/MPNadiMO7aOpP1dKVsja/n
+ lykgRPAPuQs3shZ89ZFUy6da/XQXMg8=
+From: Sean Anderson <sean.anderson@linux.dev>
+To: u-boot@lists.denx.de,
+	Michal Simek <michal.simek@amd.com>
+Cc: Sean Anderson <sean.anderson@seco.com>,
+ Sean Anderson <sean.anderson@linux.dev>
+Subject: [PATCH v2] arm64: zynqmp: Support semihosting boot method
+Date: Thu, 22 Feb 2024 11:52:30 -0500
+Message-Id: <20240222165230.2600974-1-sean.anderson@linux.dev>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Migadu-Flow: FLOW_OUT
+X-Mailman-Approved-At: Thu, 22 Feb 2024 17:52:59 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,28 +65,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+From: Sean Anderson <sean.anderson@seco.com>
 
-Just a few button fixes that I realise should probably make it in.
+Currently, when we boot from JTAG we try to boot U-Boot from RAM.
+However, this is a bit tricky to time, since the debugger has to wait
+for SPL to initialize RAM before it can load U-Boot. This can result in
+long waits, since occasionally initializing RAM (and other things in
+psu_init) takes a long time to complete and the debugger must wait for
+this worst case.
 
-The following changes since commit 37345abb97ef0dd9c50a03b2a72617612dcae585:
+Support semihosting if it is enabled, as it lets U-Boot tell the
+debugger when we are ready for the image. This means we don't have to
+wait any more than necessary. We don't change the default config to
+ensure we don't break compatibility with existing debuggers that don't
+expect us to hit semihosting breakpoints.
 
-  Prepare v2024.04-rc2 (2024-02-13 18:16:57 -0500)
+Signed-off-by: Sean Anderson <sean.anderson@linux.dev>
+---
+I'm resending this from my linux.dev email as my regular email is
+mangling my patches.
 
-are available in the Git repository at:
+Changes in v2:
+- Fix typo in subject
 
-  git@source.denx.de:/u-boot/custodians/u-boot-snapdragon.git qcom-fixes-2024.04
+ arch/arm/mach-zynqmp/spl.c | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
 
-for you to fetch changes up to 22f391e8be11986bae824509470cf11e7bac31b0:
+diff --git a/arch/arm/mach-zynqmp/spl.c b/arch/arm/mach-zynqmp/spl.c
+index a0f35f36faa..5af735aa5ce 100644
+--- a/arch/arm/mach-zynqmp/spl.c
++++ b/arch/arm/mach-zynqmp/spl.c
+@@ -9,6 +9,7 @@
+ #include <image.h>
+ #include <init.h>
+ #include <log.h>
++#include <semihosting.h>
+ #include <spl.h>
+ #include <linux/delay.h>
+ 
+@@ -66,6 +67,11 @@ void spl_board_init(void)
+ }
+ #endif
+ 
++static u32 jtag_boot_device(void)
++{
++	return semihosting_enabled() ? BOOT_DEVICE_SMH : BOOT_DEVICE_RAM;
++}
++
+ void board_boot_order(u32 *spl_boot_list)
+ {
+ 	spl_boot_list[0] = spl_boot_device();
+@@ -75,7 +81,7 @@ void board_boot_order(u32 *spl_boot_list)
+ 	if (spl_boot_list[0] == BOOT_DEVICE_MMC2)
+ 		spl_boot_list[1] = BOOT_DEVICE_MMC1;
+ 
+-	spl_boot_list[2] = BOOT_DEVICE_RAM;
++	spl_boot_list[2] = jtag_boot_device();
+ }
+ 
+ u32 spl_boot_device(void)
+@@ -97,7 +103,7 @@ u32 spl_boot_device(void)
+ 
+ 	switch (bootmode) {
+ 	case JTAG_MODE:
+-		return BOOT_DEVICE_RAM;
++		return jtag_boot_device();
+ #ifdef CONFIG_SPL_MMC
+ 	case SD_MODE1:
+ 	case SD1_LSHFT_MODE: /* not working on silicon v1 */
+-- 
+2.35.1.1320.gc452695387.dirty
 
-  button: qcom-pmic: demote "unknown button" message to debug (2024-02-14 17:21:50 +0000)
-
-----------------------------------------------------------------
-Caleb Connolly (1):
-      button: qcom-pmic: demote "unknown button" message to debug
-
-Dan Carpenter (1):
-      button: qcom-pmic: fix some error checking
-
- drivers/button/button-qcom-pmic.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
