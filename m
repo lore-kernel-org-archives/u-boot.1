@@ -4,51 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59B23C5478C
-	for <u-boot@archiver.kernel.org>; Thu, 22 Feb 2024 20:08:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D05E1C54798
+	for <u-boot@archiver.kernel.org>; Thu, 22 Feb 2024 23:02:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7450880DC;
-	Thu, 22 Feb 2024 21:08:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linux.dev
+	by phobos.denx.de (Postfix) with ESMTP id 6B67487BAF;
+	Fri, 23 Feb 2024 00:02:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=linux.dev header.i=@linux.dev header.b="tiA+6ZZY";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BJeD56tG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 07F86880C9; Thu, 22 Feb 2024 21:05:37 +0100 (CET)
-Received: from out-180.mta0.migadu.com (out-180.mta0.migadu.com
- [IPv6:2001:41d0:1004:224b::b4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9FB2788081; Thu, 22 Feb 2024 23:18:37 +0100 (CET)
+Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
+ [IPv6:2607:f8b0:4864:20::1134])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 554B5880DD
- for <u-boot@lists.denx.de>; Thu, 22 Feb 2024 21:05:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F08C87E21
+ for <u-boot@lists.denx.de>; Thu, 22 Feb 2024 23:18:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linux.dev
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sean.anderson@linux.dev
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
- t=1708632326;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=/kqAp9p/7qFmzVzMYiphu1DX/YfW8Pd+VWLY6epm908=;
- b=tiA+6ZZYRczxyUfQGGFWxdBgd9qVPgmVYxT2tztAvTCEi4dyyBV72UH14OIpuyIKe5XO2T
- 6993/Wr8E3Ziid7Bn4i600EkiueE9JsjWnYJS8jvXMwwEZNTpKIYwZCS/XYwHHrApOuC8Q
- l0oPNQW6r/ZdkmwMQclJb7acrPXrBbM=
-From: Sean Anderson <sean.anderson@linux.dev>
-To: u-boot@lists.denx.de,
-	Michal Simek <michal.simek@amd.com>
-Cc: Sean Anderson <sean.anderson@seco.com>,
- Sean Anderson <sean.anderson@linux.dev>
-Subject: [RESEND PATCH v2] arm64: zynqmp: Support semihosting boot method
-Date: Thu, 22 Feb 2024 15:05:11 -0500
-Message-Id: <20240222200512.2679830-1-sean.anderson@linux.dev>
+ spf=pass smtp.mailfrom=bob.wolff68@gmail.com
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-607d9c4fa90so2839507b3.2
+ for <u-boot@lists.denx.de>; Thu, 22 Feb 2024 14:18:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1708640313; x=1709245113; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=7mb1y3+1sZMjQ99X3U2vmZuG0v1cJV9fYhP3OMRJe2U=;
+ b=BJeD56tGJZsMiy6BlICJTtnOeLpymh6LeN3CXCPNuDI3cZp5s3ugWjgzqIt18dL8nS
+ sC20LEi2qCd3Qztc8XG/UHxBVHDM+wZhSu+SgbnaLMx71fH+DOLzas4qhBu2whG56LEZ
+ BcRNQLniyziheHfzLHKty2V0fCmjNXTquA4kXR4/xovXSR/PNlPoHTb4LgiKITcwTjuw
+ a++9HYLkYj/aNytYwhDfGFOXyT2n/YlSZ8WkzkeokqB8CgbveOAzEI92Z9zFpIPDFg+g
+ BLdhU08bI0QmY3JrYjkkeT1HJSbaWnwBJvKIwJV/uTEq+mHP/kB7S2KJJA1aQGfF6Lms
+ 65qQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1708640313; x=1709245113;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=7mb1y3+1sZMjQ99X3U2vmZuG0v1cJV9fYhP3OMRJe2U=;
+ b=sjUwRoUj9CsvxMzxnVY/Atovz8gMmYY394Q1R/WZ4X+8VdOt9iJujFlHAKsfDxczcs
+ piiKUJIkIZ4lwThI6Vob0+TIgJk1YUMKLT8neMW/Mf9MIIktQAlnyEOCMZuxwt166Bia
+ ozjMiXY9KkkdoBTbFeeNm7IqdlJVVOlib9De3ALFM8lRZnnL9BWllUdBYjmde6Ar0xfV
+ iR+mvkc+e3oZzTG+uFBQEY9AxPf4IVLyWXImTqtuhIwlG5CyiHy1eSz4WONSsgkUnsEo
+ osO6yTRKK77QmVyamI1ekwxbkLin54w2FycXXto0F3nAaWGVK7UYxiBqgxctiCdZdEAO
+ eamg==
+X-Gm-Message-State: AOJu0YwWBwhvhfbBOFLXPNReeBvR/T+8B3C+wZ2SGwBhEU8wLllH6f4l
+ cctawyPDb5F31/+4NcD3OpmX97JgTgMwfNFXH09HK9QA+3emNQVV8GgEeF8x
+X-Google-Smtp-Source: AGHT+IGT6/bYPm/U2Pmk54QqI3NeFUAS2Sckni7uEQ89pCPReS4YffSB/Nvn0domBh3LnyCRsPK4SA==
+X-Received: by 2002:a0d:ea84:0:b0:607:9d64:d68d with SMTP id
+ t126-20020a0dea84000000b006079d64d68dmr478517ywe.11.1708640313278; 
+ Thu, 22 Feb 2024 14:18:33 -0800 (PST)
+Received: from localhost.localdomain
+ ([2600:1700:bad0:373f:6c8f:ac7c:db9e:aac9])
+ by smtp.gmail.com with ESMTPSA id
+ et4-20020a05690c2e0400b0060892566df7sm701561ywb.23.2024.02.22.14.18.32
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Thu, 22 Feb 2024 14:18:32 -0800 (PST)
+From: Bob Wolff <bob.wolff68@gmail.com>
+To: u-boot@lists.denx.de
+Cc: seanga2@gmail.com, pbrobinson@gmail.com, Bob Wolff <bob.wolff68@gmail.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH] Check curve_name for null to avoid crash
+Date: Thu, 22 Feb 2024 14:18:14 -0800
+Message-Id: <20240222221814.3496-1-bob.wolff68@gmail.com>
+X-Mailer: git-send-email 2.39.3 (Apple Git-145)
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Migadu-Flow: FLOW_OUT
-X-Mailman-Approved-At: Thu, 22 Feb 2024 21:08:27 +0100
+X-Mailman-Approved-At: Fri, 23 Feb 2024 00:02:31 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,72 +91,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently, when we boot from JTAG we try to boot U-Boot from RAM.
-However, this is a bit tricky to time, since the debugger has to wait
-for SPL to initialize RAM before it can load U-Boot. This can result in
-long waits, since occasionally initializing RAM (and other things in
-psu_init) takes a long time to complete and the debugger must wait for
-this worst case.
-
-Support semihosting if it is enabled, as it lets U-Boot tell the
-debugger when we are ready for the image. This means we don't have to
-wait any more than necessary. We don't change the default config to
-ensure we don't break compatibility with existing debuggers that don't
-expect us to hit semihosting breakpoints.
-
-Signed-off-by: Sean Anderson <sean.anderson@linux.dev>
+If mixed rsa and ecdsa keys are specified in dtsi, an rsa key can be sent
+into the ecdsa verify. Without the ecdsa,curve property, this function will
+crash due to lack of checking the null pointer return.
+Signed-off-by: Bob Wolff <bob.wolff68@gmail.com>
 ---
-I'm resending this from my linux.dev email as my regular email is
-mangling my patches.
 
-Changes in v2:
-- Fix typo in subject
+ lib/ecdsa/ecdsa-verify.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
- arch/arm/mach-zynqmp/spl.c | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
-
-diff --git a/arch/arm/mach-zynqmp/spl.c b/arch/arm/mach-zynqmp/spl.c
-index a0f35f36faa..5af735aa5ce 100644
---- a/arch/arm/mach-zynqmp/spl.c
-+++ b/arch/arm/mach-zynqmp/spl.c
-@@ -9,6 +9,7 @@
- #include <image.h>
- #include <init.h>
- #include <log.h>
-+#include <semihosting.h>
- #include <spl.h>
- #include <linux/delay.h>
+diff --git a/lib/ecdsa/ecdsa-verify.c b/lib/ecdsa/ecdsa-verify.c
+index 0601700c4f..4d1835b598 100644
+--- a/lib/ecdsa/ecdsa-verify.c
++++ b/lib/ecdsa/ecdsa-verify.c
+@@ -31,6 +31,11 @@ static int fdt_get_key(struct ecdsa_public_key *key, const void *fdt, int node)
+ 	int x_len, y_len;
  
-@@ -66,6 +67,11 @@ void spl_board_init(void)
- }
- #endif
- 
-+static u32 jtag_boot_device(void)
-+{
-+	return semihosting_enabled() ? BOOT_DEVICE_SMH : BOOT_DEVICE_RAM;
-+}
+ 	key->curve_name = fdt_getprop(fdt, node, "ecdsa,curve", NULL);
++	if (!key->curve_name) {
++		debug("Error: ecdsa cannot get 'ecdsa,curve' property from key. Likely not an ecdsa key.\n");
++		return -ENOMSG;
++	}
 +
- void board_boot_order(u32 *spl_boot_list)
- {
- 	spl_boot_list[0] = spl_boot_device();
-@@ -75,7 +81,7 @@ void board_boot_order(u32 *spl_boot_list)
- 	if (spl_boot_list[0] == BOOT_DEVICE_MMC2)
- 		spl_boot_list[1] = BOOT_DEVICE_MMC1;
- 
--	spl_boot_list[2] = BOOT_DEVICE_RAM;
-+	spl_boot_list[2] = jtag_boot_device();
- }
- 
- u32 spl_boot_device(void)
-@@ -97,7 +103,7 @@ u32 spl_boot_device(void)
- 
- 	switch (bootmode) {
- 	case JTAG_MODE:
--		return BOOT_DEVICE_RAM;
-+		return jtag_boot_device();
- #ifdef CONFIG_SPL_MMC
- 	case SD_MODE1:
- 	case SD1_LSHFT_MODE: /* not working on silicon v1 */
+ 	key->size_bits = ecdsa_key_size(key->curve_name);
+ 	if (key->size_bits == 0) {
+ 		debug("Unknown ECDSA curve '%s'", key->curve_name);
 -- 
-2.35.1.1320.gc452695387.dirty
+2.39.3 (Apple Git-145)
 
