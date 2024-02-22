@@ -4,72 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A621BC48BF8
-	for <u-boot@archiver.kernel.org>; Thu, 22 Feb 2024 06:59:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDAAEC48BEB
+	for <u-boot@archiver.kernel.org>; Thu, 22 Feb 2024 08:06:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6EFB387E0D;
-	Thu, 22 Feb 2024 07:59:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id E3CBA8803E;
+	Thu, 22 Feb 2024 09:06:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="WwrpZ1mB";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PIF6hjzR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B259B87E16; Thu, 22 Feb 2024 07:59:45 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id C2D2287E6F; Thu, 22 Feb 2024 09:06:13 +0100 (CET)
+Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
+ [IPv6:2a00:1450:4864:20::22d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC62587E03
- for <u-boot@lists.denx.de>; Thu, 22 Feb 2024 07:59:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 85BC78805F
+ for <u-boot@lists.denx.de>; Thu, 22 Feb 2024 09:06:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=r-gunasekaran@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41M6xW8R079663;
- Thu, 22 Feb 2024 00:59:32 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1708585172;
- bh=ZvHJga75iDm1t3nFFDvQukb5ZgmEUKeG2EqFYStoc5s=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=WwrpZ1mBQL1f+uAoVMs3KYA3jU87fzevm6wfrovcrE8AyVQlf+BknL6eD2GCTwkFy
- dhzJ3/oVUmAtyHJBMEp8RQ6e4X3v5shzUmr8DQ86EgbCtay4ynz9ezbbQWz9Xruket
- MG4i27kMCj8oGkeECg8eDjzfr3g9hX/n0CAUihvM=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41M6xWWU109689
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 22 Feb 2024 00:59:32 -0600
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 22
- Feb 2024 00:59:31 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 22 Feb 2024 00:59:31 -0600
-Received: from [172.24.227.88] (uda0500640.dhcp.ti.com [172.24.227.88])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41M6xRs8106699;
- Thu, 22 Feb 2024 00:59:28 -0600
-Message-ID: <da78150d-add5-2d8b-9bb9-b66e336ea419@ti.com>
-Date: Thu, 22 Feb 2024 12:29:27 +0530
+ spf=pass smtp.mailfrom=blemouzy.ml@gmail.com
+Received: by mail-lj1-x22d.google.com with SMTP id
+ 38308e7fff4ca-2d180d6bd32so87234851fa.1
+ for <u-boot@lists.denx.de>; Thu, 22 Feb 2024 00:06:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1708589160; x=1709193960; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:subject:cc:to:from:date:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=PayTRtb8NIGUSdnIv7GWKasq4itRkqCoWUPu7GvUFlw=;
+ b=PIF6hjzRrmKZxnMEbu1ETFDQ2RWl3Ldm1fnxyruAnQiOh7putNZzS/LDpi4H7RqfAx
+ 68YQiHTm6twoM8J9rZ6D5fN93+4OubIaQTIIf8umAxOKwzvE99bvIT17LGcU4As6eu42
+ gAssd1mrVUm9HpZPbgDA22mrkMepqgNw7Ki50V3JrpYRhtmpMXmjPb97s/AXO6/t8Kma
+ I+sxvHDGHPm6Uw5usnhu8j47GM6m1sgNeTOBUNeUpBUwPbZbtchCJiKxpU/hP/wqDwRZ
+ 78K4hNRx81euFfY8oMtFOYSdxvphcsPX1bzJRh9nle+NTp4ABCM4XJlgbzZgwRK4PQR5
+ v+Zg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1708589160; x=1709193960;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=PayTRtb8NIGUSdnIv7GWKasq4itRkqCoWUPu7GvUFlw=;
+ b=j75xBv/hNPVm8G9fhb2HpNYoABVrbWkbkvquhK0luagFGX1oJhJ8gjMjROyfiFuiFE
+ /ikspNI/TWMxRIaCRSVhIS53UNwTTGEHvhLV/80ne4CTxcuUeuZzDZvKKxQgwdzoAhvT
+ BvST5ZDVb3mz3Rnt1IeorFYP8BXvKZAxonQ2VXVCB/1M4LFv40bfR//GTTLGTizOSB8P
+ 7Fr6JRIHzj3uwQQgvGiI7XB6GXzZEKUystO8U/hsm+wQqcfnpRi2mBb1yKSqIxA47WLo
+ 8pzrzCHYy6A8nqLftWIz6d738TV8VHajB83m7Q0qk1g716HUBrk0VoyoBEiAC2Mvznqx
+ YGCg==
+X-Gm-Message-State: AOJu0Yze9iOwNlQxmiKa8ibyy7nLE8xE/YPdIl9c0BIPGjs5nirF+EBt
+ EBplVntMc598W4ISW6Op9qSgRmZPsfUo2aBdm00e78v41Y5pQJpZ
+X-Google-Smtp-Source: AGHT+IGtj5wMbuKNPeCzkmfW0x1DUgjauUHRN5JXWMB5tQdOjpfKlYrCjAFDa/UUCABzSmcn6g8OYg==
+X-Received: by 2002:a05:651c:9:b0:2d2:555f:b4ae with SMTP id
+ n9-20020a05651c000900b002d2555fb4aemr2447806lja.51.1708589159357; 
+ Thu, 22 Feb 2024 00:05:59 -0800 (PST)
+Received: from localhost (82-65-95-55.subs.proxad.net. [82.65.95.55])
+ by smtp.gmail.com with ESMTPSA id
+ k5-20020a5d66c5000000b0033af3a43e91sm19326932wrw.46.2024.02.22.00.05.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 22 Feb 2024 00:05:59 -0800 (PST)
+Date: Thu, 22 Feb 2024 09:05:56 +0100
+From: Benjamin Lemouzy <blemouzy.ml@gmail.com>
+To: Sean Anderson <sean.anderson@seco.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: HABv4 with SPL and u-boot-dtb.img on i.MX6
+Message-ID: <20240222090556.00001ea3@gmail.com>
+In-Reply-To: <92a814a0-aaa5-47db-ab8f-7e799ab3e82d@seco.com>
+References: <20240220105049.00000d3c@gmail.com>
+ <92a814a0-aaa5-47db-ab8f-7e799ab3e82d@seco.com>
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.38; x86_64-w64-mingw32)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Subject: Re: [PATCH 1/2] net: mdio: Handle bus level GPIO Reset
-To: Roger Quadros <rogerq@kernel.org>, Joe Hershberger
- <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, Tom Rini
- <trini@konsulko.com>, <nm@ti.com>
-CC: <srk@ti.com>, <s-vadapalli@ti.com>, <vigneshr@ti.com>,
- <mripard@kernel.org>, <dannenberg@ti.com>, <danishanwar@ti.com>,
- <u-boot@lists.denx.de>, Ravi Gunasekaran <r-gunasekaran@ti.com>
-References: <20240219-for-2024-07-am65-cpsw-mdio-v1-0-afe9aaba5801@kernel.org>
- <20240219-for-2024-07-am65-cpsw-mdio-v1-1-afe9aaba5801@kernel.org>
-Content-Language: en-US
-From: Ravi Gunasekaran <r-gunasekaran@ti.com>
-In-Reply-To: <20240219-for-2024-07-am65-cpsw-mdio-v1-1-afe9aaba5801@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,121 +93,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Tue, 20 Feb 2024 11:29:53 -0500
+Sean Anderson <sean.anderson@seco.com> wrote:
 
-
-On 2/19/24 9:03 PM, Roger Quadros wrote:
-> Some platforms have bus level Reset controlled
-> by a GPIO line. If available then handle bus reset
-> via GPIO.
+> On 2/20/24 04:50, Benjamin Lemouzy wrote:
+> > Using fdtdump shows that crc32 is used as hash algorithm for FIT image which is a super weak one.
+> > I tried to pass another algo (sha256) using mkimage -o option but that doesn't work.
+> >
+> >   ./tools/mkimage -f auto -A arm -T firmware -C none -O u-boot -a 0x17800000 -e 0x17800000 -p 0x0 -n "U-Boot 2024.04-rc2-00025-g9e00b6993f-dirty for mx6sabresd board" -E -b arch/arm/dts/imx6q-sabresd.dtb -b arch/arm/dts/imx6qp-sabresd.dtb -b arch/arm/dts/imx6dl-sabresd.dtb -d u-boot-nodtb.bin -o sha256 u-boot-dtb.img
+> >
+> > Is there any way to change U-Boot FIT image hash?  
 > 
-> Signed-off-by: Roger Quadros <rogerq@kernel.org>
-> ---
->  include/phy.h     |  7 +++++++
->  net/mdio-uclass.c | 37 ++++++++++++++++++++++++++++++++++++-
->  2 files changed, 43 insertions(+), 1 deletion(-)
+> I believe these options are only used for signed FIT images (e.g. for
+> verified boot [1]). Since you are using an external signing process,
+> they have no effect. I suggest creating your FIT manually (e.g. -f
+> u-boot.its instead of -f auto). You should be able to specify the hashes
+> manually that way.
+
+Using "fdtdump -s u-boot-dtb.img" output as reference to create a u-boot.its file, I now have a u-boot.itb file with sha256 hashes.
+
+> > I also try to use image format and force the HAB to verify the whole u-boot-dtb.img file by patching the FIT image size:
+> >
+> >     image_size=$(stat -tc %s u-boot-dtb.img)
+> >     printf "00000004: %08x" "$image_size" | xxd -r - u-boot-dtb.img
+> >
+> > SPL starts, authentication looks fine but the boot fails.
+> > Is there any chance to make it work or is it insane to try to use this format?  
 > 
-> diff --git a/include/phy.h b/include/phy.h
-> index e02cbdb58c..90a595cae4 100644
-> --- a/include/phy.h
-> +++ b/include/phy.h
-> @@ -9,6 +9,7 @@
->  #ifndef _PHY_H
->  #define _PHY_H
->  
-> +#include <asm/gpio.h>
->  #include <log.h>
->  #include <phy_interface.h>
->  #include <dm/ofnode.h>
-> @@ -76,6 +77,12 @@ struct mii_dev {
->  	int (*reset)(struct mii_dev *bus);
->  	struct phy_device *phymap[PHY_MAX_ADDR];
->  	u32 phy_mask;
-> +	/** @reset_delay_us: Bus GPIO reset pulse width in microseconds */
-> +	int reset_delay_us;
-> +	/** @reset_post_delay_us: Bus GPIO reset deassert delay in microseconds */
-> +	int reset_post_delay_us;
-> +	/** @reset_gpiod: Bus Reset GPIO descriptor pointer */
-> +	struct gpio_desc reset_gpiod;
->  };
->  
->  /* struct phy_driver: a structure which defines PHY behavior
-> diff --git a/net/mdio-uclass.c b/net/mdio-uclass.c
-> index e758cc66d7..4500c50430 100644
-> --- a/net/mdio-uclass.c
-> +++ b/net/mdio-uclass.c
-> @@ -14,6 +14,9 @@
->  #include <dm/of_extra.h>
->  #include <dm/uclass-internal.h>
->  #include <linux/compat.h>
-> +#include <linux/delay.h>
-> +
-> +#define DEFAULT_GPIO_RESET_DELAY	10	/* in microseconds */
->  
->  void dm_mdio_probe_devices(void)
->  {
-> @@ -80,6 +83,16 @@ int dm_mdio_write(struct udevice *mdio_dev, int addr, int devad, int reg,
->  int dm_mdio_reset(struct udevice *mdio_dev)
->  {
->  	struct mdio_ops *ops = mdio_get_ops(mdio_dev);
-> +	struct mdio_perdev_priv *pdata = dev_get_uclass_priv(mdio_dev);
-> +	struct mii_dev *mii_bus = pdata->mii_bus;
-> +
-> +	if (dm_gpio_is_valid(&mii_bus->reset_gpiod)) {
-> +		dm_gpio_set_value(&mii_bus->reset_gpiod, 1);
+> I have always just used verified boot for U-Boot and the kernel, and
+> only used vendor-specific stuff for SPL.
 
-undefined reference to `dm_gpio_set_value'
-Build fails for configs that don't have CONFIG_DM_GPIO defined.
+That indeed a good idea but CONFIG_SPL_FIT_SIGNATURE and CONFIG_SPL_DM (as dependency) take a lot of space and SPL overflows i.MX6 OCRAM.
 
-We can have this under "if (IS_ENABLED(CONFIG_DM_GPIO))"
+I finally succeed to make U-Boot check with HAB work using the new u-boot.itb image with the following signature format:
 
-> +		udelay(mii_bus->reset_delay_us);
-> +		dm_gpio_set_value(&mii_bus->reset_gpiod, 0);
-> +		if (mii_bus->reset_post_delay_us > 0)
-> +			udelay(mii_bus->reset_post_delay_us);
-> +	}
->  
->  	if (!ops->reset)
->  		return 0;
-> @@ -111,14 +124,36 @@ static int mdio_reset(struct mii_dev *mii_bus)
->  static int dm_mdio_post_probe(struct udevice *dev)
->  {
->  	struct mdio_perdev_priv *pdata = dev_get_uclass_priv(dev);
-> +	struct mii_dev *mii_bus;
-> +	int ret;
->  
-> -	pdata->mii_bus = mdio_alloc();
-> +	mii_bus = mdio_alloc();
-> +	if (!mii_bus) {
-> +		dev_err(dev, "couldn't allocate mii_bus\n");
-> +		return -ENOMEM;
-> +	}
-> +	pdata->mii_bus = mii_bus;
->  	pdata->mii_bus->read = mdio_read;
->  	pdata->mii_bus->write = mdio_write;
->  	pdata->mii_bus->reset = mdio_reset;
->  	pdata->mii_bus->priv = dev;
->  	strlcpy(pdata->mii_bus->name, dev->name, MDIO_NAME_LEN);
->  
-> +	if (IS_ENABLED(CONFIG_DM_GPIO)) {
-> +		/* Get bus level PHY reset GPIO details */
-> +		mii_bus->reset_delay_us = dev_read_u32_default(dev, "reset-delay-us",
-> +							       DEFAULT_GPIO_RESET_DELAY);
-> +		mii_bus->reset_post_delay_us = dev_read_u32_default(dev,
-> +								    "reset-post-delay-us",
-> +								    0);
-> +		ret = gpio_request_by_name(dev, "reset-gpios", 0, &mii_bus->reset_gpiod,
-> +					   GPIOD_IS_OUT | GPIOD_IS_OUT_ACTIVE);
-> +		if (ret && ret != -ENOENT) {
-> +			dev_err(dev, "couldn't get reset-gpios: %d\n", ret);
-> +			return ret;
-> +		}
-> +	}
-> +
->  	return mdio_register(pdata->mii_bus);
->  }
->  
-> 
+            ------- +-----------------------------+ <-- *load_address
+                ^   |                             |
+                |   |                             |
+                |   |          Image data         |
+         Signed |   |                             |
+          Data  |   |                             |
+                |   +-----------------------------+
+                |   |    Padding Next Boundary    |
+                |   +-----------------------------+ <-- *ivt
+                v   |     Image Vector Table      |
+            ------- +-----------------------------+ <-- *csf
+                    |                             |
+                    | Command Sequence File (CSF) |
+                    |                             |
+                    +-----------------------------+
+                    |     Padding (optional)      |
+                    +-----------------------------+
 
--- 
-Regards,
-Ravi
+I don't really understand what u-boot-dtb.img file is but it doesn't work with U-Boot CONFIG_IMX_HAB.
+
+Thanks for help!
+
+Benjamin
