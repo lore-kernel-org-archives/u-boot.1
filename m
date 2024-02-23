@@ -4,39 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5425C48BC4
-	for <u-boot@archiver.kernel.org>; Fri, 23 Feb 2024 09:16:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F572C48BC4
+	for <u-boot@archiver.kernel.org>; Fri, 23 Feb 2024 09:16:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 03BDE87C58;
-	Fri, 23 Feb 2024 10:06:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id ECC6F87BB3;
+	Fri, 23 Feb 2024 10:06:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CBD18878EE; Fri, 23 Feb 2024 10:06:17 +0100 (CET)
-Received: from smtp-1909.mail.infomaniak.ch (smtp-1909.mail.infomaniak.ch
- [185.125.25.9])
+ id A4489871C7; Fri, 23 Feb 2024 10:06:14 +0100 (CET)
+Received: from smtp-8fa9.mail.infomaniak.ch (smtp-8fa9.mail.infomaniak.ch
+ [83.166.143.169])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B35E87653
- for <u-boot@lists.denx.de>; Fri, 23 Feb 2024 10:06:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0CA838780E
+ for <u-boot@lists.denx.de>; Fri, 23 Feb 2024 10:06:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-3-0000.mail.infomaniak.ch (smtp-3-0000.mail.infomaniak.ch
  [10.4.36.107])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Th3yj5xDDzDB3;
- Fri, 23 Feb 2024 10:06:05 +0100 (CET)
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Th3yg4l8RzDx5;
+ Fri, 23 Feb 2024 10:06:03 +0100 (CET)
 Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4Th3yj29KKz3k; Fri, 23 Feb 2024 10:06:05 +0100 (CET)
+ id 4Th3yg0ZCJz3d; Fri, 23 Feb 2024 10:06:03 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Fri, 23 Feb 2024 10:05:54 +0100
-Subject: [PATCH v2 07/16] rockchip: adc: rockchip-saradc: use union for
- preparing for v2
+Date: Fri, 23 Feb 2024 10:05:50 +0100
+Subject: [PATCH v2 03/16] regulator: rk8xx: fix SWITCH enable on RK809
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240223-rk3588-saradc-v2-7-11c046b7e94a@theobroma-systems.com>
+Message-Id: <20240223-rk3588-saradc-v2-3-11c046b7e94a@theobroma-systems.com>
 References: <20240223-rk3588-saradc-v2-0-11c046b7e94a@theobroma-systems.com>
 In-Reply-To: <20240223-rk3588-saradc-v2-0-11c046b7e94a@theobroma-systems.com>
 To: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>, 
@@ -46,7 +45,9 @@ To: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
  Klaus Goger <klaus.goger@theobroma-systems.com>, 
  Heiko Stuebner <heiko.stuebner@cherry.de>
 Cc: u-boot@lists.denx.de, 
- Quentin Schulz <quentin.schulz@theobroma-systems.com>
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>, 
+ William Wu <william.wu@rock-chips.com>, 
+ Quentin Schulz <foss+uboot@0leil.net>
 X-Mailer: b4 0.13.0
 X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
@@ -65,103 +66,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+From: William Wu <william.wu@rock-chips.com>
 
-The registers are entirely different between SARADC v1 and SARADC v2, so
-let's prepare to add another struct for accessing v2 registers by adding
-a union.
+On RK809 in PMIC_POWER_ENX registers, in order to set or clear a bit N,
+the bit at offset N + 4 needs to be set otherwise nothing is done.
 
-Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+This fixes the inability to modify the SWITCH state on RK809.
+
+Cc: Quentin Schulz <foss+uboot@0leil.net>
+Signed-off-by: William Wu <william.wu@rock-chips.com>
+[reworded commit log]
 Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 ---
- drivers/adc/rockchip-saradc.c | 23 +++++++++++++----------
- 1 file changed, 13 insertions(+), 10 deletions(-)
+ drivers/power/regulator/rk8xx.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/adc/rockchip-saradc.c b/drivers/adc/rockchip-saradc.c
-index 03caca78b5f..4a842556a60 100644
---- a/drivers/adc/rockchip-saradc.c
-+++ b/drivers/adc/rockchip-saradc.c
-@@ -23,13 +23,16 @@
- 
- #define SARADC_TIMEOUT			(100 * 1000)
- 
--struct rockchip_saradc_regs {
-+struct rockchip_saradc_regs_v1 {
- 	unsigned int data;
- 	unsigned int stas;
- 	unsigned int ctrl;
- 	unsigned int dly_pu_soc;
- };
- 
-+union rockchip_saradc_regs {
-+	struct rockchip_saradc_regs_v1	*v1;
-+};
- struct rockchip_saradc_data {
- 	int				num_bits;
- 	int				num_channels;
-@@ -37,7 +40,7 @@ struct rockchip_saradc_data {
- };
- 
- struct rockchip_saradc_priv {
--	struct rockchip_saradc_regs		*regs;
-+	union rockchip_saradc_regs		regs;
- 	int					active_channel;
- 	const struct rockchip_saradc_data	*data;
- };
-@@ -53,16 +56,16 @@ int rockchip_saradc_channel_data(struct udevice *dev, int channel,
- 		return -EINVAL;
- 	}
- 
--	if ((readl(&priv->regs->ctrl) & SARADC_CTRL_IRQ_STATUS) !=
-+	if ((readl(&priv->regs.v1->ctrl) & SARADC_CTRL_IRQ_STATUS) !=
- 	    SARADC_CTRL_IRQ_STATUS)
- 		return -EBUSY;
- 
- 	/* Read value */
--	*data = readl(&priv->regs->data);
-+	*data = readl(&priv->regs.v1->data);
- 	*data &= uc_pdata->data_mask;
- 
- 	/* Power down adc */
--	writel(0, &priv->regs->ctrl);
-+	writel(0, &priv->regs.v1->ctrl);
- 
- 	return 0;
- }
-@@ -77,11 +80,11 @@ int rockchip_saradc_start_channel(struct udevice *dev, int channel)
- 	}
- 
- 	/* 8 clock periods as delay between power up and start cmd */
--	writel(8, &priv->regs->dly_pu_soc);
-+	writel(8, &priv->regs.v1->dly_pu_soc);
- 
- 	/* Select the channel to be used and trigger conversion */
- 	writel(SARADC_CTRL_POWER_CTRL | (channel & SARADC_CTRL_CHN_MASK) |
--	       SARADC_CTRL_IRQ_ENABLE, &priv->regs->ctrl);
-+	       SARADC_CTRL_IRQ_ENABLE, &priv->regs.v1->ctrl);
- 
- 	priv->active_channel = channel;
- 
-@@ -93,7 +96,7 @@ int rockchip_saradc_stop(struct udevice *dev)
- 	struct rockchip_saradc_priv *priv = dev_get_priv(dev);
- 
- 	/* Power down adc */
--	writel(0, &priv->regs->ctrl);
-+	writel(0, &priv->regs.v1->ctrl);
- 
- 	priv->active_channel = -1;
- 
-@@ -146,8 +149,8 @@ int rockchip_saradc_of_to_plat(struct udevice *dev)
- 	struct rockchip_saradc_data *data;
- 
- 	data = (struct rockchip_saradc_data *)dev_get_driver_data(dev);
--	priv->regs = dev_read_addr_ptr(dev);
--	if (!priv->regs) {
-+	priv->regs.v1 = dev_read_addr_ptr(dev);
-+	if (!priv->regs.v1) {
- 		pr_err("Dev: %s - can't get address!", dev->name);
- 		return -EINVAL;
- 	}
+diff --git a/drivers/power/regulator/rk8xx.c b/drivers/power/regulator/rk8xx.c
+index 97d73ac95e0..e905df3a800 100644
+--- a/drivers/power/regulator/rk8xx.c
++++ b/drivers/power/regulator/rk8xx.c
+@@ -901,7 +901,7 @@ static int switch_set_enable(struct udevice *dev, bool enable)
+ 	case RK809_ID:
+ 		mask = (1 << (sw + 2)) | (1 << (sw + 6));
+ 		ret = pmic_clrsetbits(dev->parent, RK817_POWER_EN(3), mask,
+-				      enable ? mask : 0);
++				      enable ? mask : (1 << (sw + 6)));
+ 		break;
+ 	case RK818_ID:
+ 		mask = 1 << 6;
 
 -- 
 2.43.2
