@@ -4,66 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74E45C48BC4
-	for <u-boot@archiver.kernel.org>; Fri, 23 Feb 2024 05:22:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4029FC48BC4
+	for <u-boot@archiver.kernel.org>; Fri, 23 Feb 2024 07:05:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE29887C6A;
-	Fri, 23 Feb 2024 06:16:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 33164876F3;
+	Fri, 23 Feb 2024 08:05:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Akzlcl6s";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="na5UKSu4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C3BA5876BA; Fri, 23 Feb 2024 05:58:34 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 22BB1876D3; Fri, 23 Feb 2024 08:04:52 +0100 (CET)
+Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
+ [IPv6:2a00:1450:4864:20::236])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 871AC87D97
- for <u-boot@lists.denx.de>; Fri, 23 Feb 2024 05:58:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F242987653
+ for <u-boot@lists.denx.de>; Fri, 23 Feb 2024 08:04:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41N4wKdK011870;
- Thu, 22 Feb 2024 22:58:20 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1708664300;
- bh=yT5OushQx3Ku+9yr3Z342mV3zkIeUPpr7AxD0LvhrbE=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=Akzlcl6sTwhL4mhYisJo2yk0gX3Su326gpitZ4XJaAzUss248+dLy2avtKEXEeaxj
- VTe9l6COIe1sHi6ilK4D4FYBKJdMrwwwMF5/eQCTkL2/acFUosmJEOt37WkuVIOwq2
- 9btJMGG70qBHxvsUcY9Oha2G70d0CUW7qVvKlj74=
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41N4wKX4029920
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 22 Feb 2024 22:58:20 -0600
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 22
- Feb 2024 22:58:20 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 22 Feb 2024 22:58:19 -0600
-Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41N4wKAJ129681;
- Thu, 22 Feb 2024 22:58:20 -0600
-From: Jonathan Humphreys <j-humphreys@ti.com>
-To: <trini@konsulko.com>, <u-kumar1@ti.com>, <vaishnav.a@ti.com>
-CC: <u-boot@lists.denx.de>, Jonathan Humphreys <j-humphreys@ti.com>
-Subject: [PATCH 2/2] arm: mach-k3: j721e: Enable OSPI boot
-Date: Thu, 22 Feb 2024 22:57:25 -0600
-Message-ID: <20240223045725.2010498-3-j-humphreys@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240223045725.2010498-1-j-humphreys@ti.com>
-References: <20240223045725.2010498-1-j-humphreys@ti.com>
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lj1-x236.google.com with SMTP id
+ 38308e7fff4ca-2d22b8c6e0dso213351fa.2
+ for <u-boot@lists.denx.de>; Thu, 22 Feb 2024 23:04:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1708671869; x=1709276669; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=g4IFDzHmF5JTMf1KXfwcP6sPjeTns8Sn3bOL8+CfCsk=;
+ b=na5UKSu4+I8l9zLFWxhj+fmEX3vRYEaJdiT7/SPnlQjxb84awwMLa4xICJMXBT+HC+
+ PoLl5KMarERKXOdafAkwgVWQRcXQAv9unB6nGOCITdUVYCpoGLm/nCWR+pE4oq+0/L2j
+ 7DfXOOqZJYiurMhzKggQFiPHxPhwK1anX/V7HnrXVQagdNOPWWNBiwhJmUpsvUrch4OM
+ z7cBVkoRtdJLL8aJy/y1aYxcPVF18XvszjC3+EZyaolyMY1YJI0XhUuPpTRBxAnLn0UO
+ xmzA2GGoO0S41WD6baJG0673MMNBRXAv4OdsfU1qpHYV4ZFEptH4iMuLfvGWvAErIx83
+ R6zw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1708671869; x=1709276669;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=g4IFDzHmF5JTMf1KXfwcP6sPjeTns8Sn3bOL8+CfCsk=;
+ b=AJEx4OUQm/krtalUMGnGt7u8gGbVIUKghqAW8PkSOSFtnmP/b3m4C96/NKZbXFnQAP
+ wjdraQWGTH6kAb3ysGIcFg1rDrIwx0WrDHr6yeIaI7r0XE4ErRisks/gESk+a8zFCTtO
+ 48UWqpaHSlK6D0gTNdNv/Co80EKETxXMdVnBP50jnk63QjWj6TQW/C2C4Qvz2t28lOik
+ L3/dujiJR6mXho20Zg63GfUASG3FkKtAUPlH3TxOhGdqeejwKVIoOYakt3Xk0G2Pwlkv
+ aaBNTA+vB9IyYileG1JKbi7BOZUhSpPZCcHuluUG8B+fNXjzT6oTnS6KwU7y41Vb1sKj
+ BxJA==
+X-Gm-Message-State: AOJu0YxhhYST5BY+oVrAokF5r5FiXRM4ZExmEwwqCtjHcU17eTDzU+c1
+ XjDU63dcBr5YM9qyzzDKjno2LNgHdL2zFG7/mO3LT4YAvrzTsINSi8ch3/Z9S8nQaGoAw9526gM
+ ZqsxaOPSOMWa/SaS40xbObkRUkjR3IG96TWWUSg==
+X-Google-Smtp-Source: AGHT+IFrT1V/L3erIX0GKoKH1v+r0xj3JJ6ggceSYivwkEOfs3sMW3zQbsYJw+u5/3Do+jzaJClCPZn3U5GmTol83hM=
+X-Received: by 2002:a05:6512:3b11:b0:511:9949:25a3 with SMTP id
+ f17-20020a0565123b1100b00511994925a3mr1019382lfv.7.1708671868798; Thu, 22 Feb
+ 2024 23:04:28 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-X-Mailman-Approved-At: Fri, 23 Feb 2024 06:16:36 +0100
+References: <20240203163631.177508-1-raymond.mao@linaro.org>
+ <20240203163631.177508-5-raymond.mao@linaro.org>
+In-Reply-To: <20240203163631.177508-5-raymond.mao@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 23 Feb 2024 09:03:52 +0200
+Message-ID: <CAC_iWjKdx05wDSTsW1MxJWN2NvgHjkbfB_CGH2ECOQ1H2p3afw@mail.gmail.com>
+Subject: Re: [PATCH v8 4/8] arm: armv7: save boot arguments
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, Ard Biesheuvel <ardb@kernel.org>,
+ Simon Glass <sjg@chromium.org>, 
+ Kevin Chen <kevin_chen@aspeedtech.com>, Sean Anderson <sean.anderson@seco.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
+ Shiji Yang <yangshiji66@outlook.com>, 
+ Michal Simek <michal.simek@amd.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Qu Wenruo <wqu@suse.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,44 +94,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add boot ROM XSPI bootmode, and set to BOOT_DEVICE_SPI if detected.
+On Sat, 3 Feb 2024 at 18:37, Raymond Mao <raymond.mao@linaro.org> wrote:
+>
+> Save boot arguments r[0-3] into an array for handover of bloblist from
+> previous boot stage.
+>
+> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> Suggested-by: Ard Biesheuvel <ardb@kernel.org>
+> ---
+> Changes in v2
+> - New patch file created for v2.
+> Changes in v3
+> - Swap value of r0 with r2.
+> Changes in v4
+> - Fix a bug when saving the boot args.
+> Changes in V5
+> - Drop the dependence on OF_BOARD.
+> Changes in V7
+> - Exclude the saved_args when BLOBLIST is disabled.
+> Changes in V8
+> - Use PC-relative reference for saved_args.
+> - Add 4-byte alignment for saved_args.
+>
+>  arch/arm/cpu/armv7/start.S | 29 +++++++++++++++++++++++++++++
+>  1 file changed, 29 insertions(+)
+>
+> diff --git a/arch/arm/cpu/armv7/start.S b/arch/arm/cpu/armv7/start.S
+> index 69e281b086..7730a16e51 100644
+> --- a/arch/arm/cpu/armv7/start.S
+> +++ b/arch/arm/cpu/armv7/start.S
+> @@ -152,9 +152,38 @@ ENDPROC(c_runtime_cpu_setup)
+>   *
+>   *************************************************************************/
+>  WEAK(save_boot_params)
+> +#if (IS_ENABLED(CONFIG_BLOBLIST))
+> +       /* Calculate the PC-relative address of saved_args */
+> +       adr     r12, saved_args_offset
+> +       ldr     r13, saved_args_offset
+> +       add     r12, r12, r13
+> +
+> +       /*
+> +        * Intentionally swapping r0 with r2 in order to simplify the C
+> +        * function we use later.
+> +        */
+> +       str     r2, [r12]
+> +       str     r1, [r12, #4]
+> +       str     r0, [r12, #8]
+> +       str     r3, [r12, #12]
+> +#endif
+>         b       save_boot_params_ret            @ back to my caller
+>  ENDPROC(save_boot_params)
+>
+> +#if (IS_ENABLED(CONFIG_BLOBLIST))
+> +saved_args_offset:
+> +       .long   saved_args - .  /* offset from current code to save_args */
+> +
+> +       .section .data
+> +       .align 2
+> +       .global saved_args
+> +saved_args:
+> +       .rept 4
+> +       .word 0
+> +       .endr
+> +END(saved_args)
+> +#endif
+> +
+>  #ifdef CONFIG_ARMV7_LPAE
+>  WEAK(switch_to_hypervisor)
+>         b       switch_to_hypervisor_ret
+> --
+> 2.25.1
+>
 
-Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
----
- arch/arm/mach-k3/include/mach/j721e_spl.h | 5 +++--
- arch/arm/mach-k3/j721e_init.c             | 3 ++-
- 2 files changed, 5 insertions(+), 3 deletions(-)
-
-diff --git a/arch/arm/mach-k3/include/mach/j721e_spl.h b/arch/arm/mach-k3/include/mach/j721e_spl.h
-index ed3d7333bd..aaee653537 100644
---- a/arch/arm/mach-k3/include/mach/j721e_spl.h
-+++ b/arch/arm/mach-k3/include/mach/j721e_spl.h
-@@ -24,8 +24,9 @@
- #define BOOT_DEVICE_UFS			0x13
- #define BOOT_DEVIE_GPMC			0x14
- #define BOOT_DEVICE_PCIE		0x15
--#define BOOT_DEVICE_MMC2_2		0x16
--#define BOOT_DEVICE_RAM			0x17
-+#define BOOT_DEVICE_XSPI 		0x16
-+#define BOOT_DEVICE_RAM 		0x17
-+#define BOOT_DEVICE_MMC2_2 		0xFF /* Invalid value */
- 
- /* Backup boot modes with MCU Only = 0 */
- #define BACKUP_BOOT_DEVICE_RAM		0x0
-diff --git a/arch/arm/mach-k3/j721e_init.c b/arch/arm/mach-k3/j721e_init.c
-index c2976c4ea0..7ee9b75de4 100644
---- a/arch/arm/mach-k3/j721e_init.c
-+++ b/arch/arm/mach-k3/j721e_init.c
-@@ -346,7 +346,8 @@ static u32 __get_primary_bootmedia(u32 main_devstat, u32 wkup_devstat)
- 	bootmode |= (main_devstat & MAIN_DEVSTAT_BOOT_MODE_B_MASK) <<
- 			BOOT_MODE_B_SHIFT;
- 
--	if (bootmode == BOOT_DEVICE_OSPI || bootmode ==	BOOT_DEVICE_QSPI)
-+	if (bootmode == BOOT_DEVICE_OSPI || bootmode == BOOT_DEVICE_QSPI ||
-+	    bootmode == BOOT_DEVICE_XSPI)
- 		bootmode = BOOT_DEVICE_SPI;
- 
- 	if (bootmode == BOOT_DEVICE_MMC2) {
--- 
-2.34.1
-
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
