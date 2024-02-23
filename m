@@ -4,91 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32110C5478C
-	for <u-boot@archiver.kernel.org>; Fri, 23 Feb 2024 20:42:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8AA9C5478C
+	for <u-boot@archiver.kernel.org>; Fri, 23 Feb 2024 20:46:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0226B87E6D;
-	Fri, 23 Feb 2024 21:29:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 25B2D87C35;
+	Fri, 23 Feb 2024 21:38:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="cO3CANng";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="N0yi2auE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B378A87B7C; Fri, 23 Feb 2024 21:25:27 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id AABA8863D3; Fri, 23 Feb 2024 21:38:25 +0100 (CET)
+Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
+ [IPv6:2607:f8b0:4864:20::1136])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 68D1187BFE
- for <u-boot@lists.denx.de>; Fri, 23 Feb 2024 21:25:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 74F2487E23
+ for <u-boot@lists.denx.de>; Fri, 23 Feb 2024 21:38:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-nandan@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41NKOfCJ022409;
- Fri, 23 Feb 2024 14:24:41 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1708719881;
- bh=HAheX4o6CLxmpRsGlJZdA2AKil7aBCPnikysgxBTB7E=;
- h=From:To:Subject:Date:In-Reply-To:References;
- b=cO3CANngWikYhH8LspaPJTzoGFQqR3g44Kd2lusGWllFob/tmKAKeceE1I5nQ5AeW
- pC4n5sX49dl39l8uT611hMJfHMp8pjHsEXxulKDf6vfn1Zg6gAZ97XYboASTMxNmPV
- 1E3zWP/a6LLFa2fnJB5KXoeaoLVnIOgS2NprTgds=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41NKOfqB009438
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 23 Feb 2024 14:24:41 -0600
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 23
- Feb 2024 14:24:41 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 23 Feb 2024 14:24:40 -0600
-Received: from TI.dhcp.ti.com (ti.dhcp.ti.com [10.24.68.115] (may be forged))
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41NKLsQn104070; 
- Fri, 23 Feb 2024 14:24:30 -0600
-From: Apurva Nandan <a-nandan@ti.com>
-To: Tom Rini <trini@konsulko.com>, Apurva Nandan <a-nandan@ti.com>, Lukasz
- Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Jaehoon Chung
- <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>, Sumit Garg
- <sumit.garg@linaro.org>, Jesse Taube <mr.bossman075@gmail.com>, Bryan
- Brattlof <bb@ti.com>, Kever Yang <kever.yang@rock-chips.com>, Michal Simek
- <michal.simek@amd.com>, Marek Vasut <marex@denx.de>, Neil Armstrong
- <neil.armstrong@linaro.org>, Jonas Karlman <jonas@kwiboo.se>, Tianling Shen
- <cnsztl@gmail.com>, Svyatoslav Ryhel <clamor95@gmail.com>, Hai Pham
- <hai.pham.ud@renesas.com>, FUKAUMI Naoki <naoki@radxa.com>,
- Christian Hewitt <christianshewitt@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>, Dasnavis Sabiya <sabiya.d@ti.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>, Hari Nagalla <hnagalla@ti.com>,
- Andrew Davis <afd@ti.com>, Nishanth Menon <nm@ti.com>,
- Kamlesh Gurudasani <kamlesh@ti.com>, Christian Gmeiner
- <christian.gmeiner@gmail.com>, Emanuele Ghidoli
- <emanuele.ghidoli@toradex.com>, Francesco Dolcini
- <francesco.dolcini@toradex.com>, Roger Quadros <rogerq@kernel.org>, Aradhya
- Bhatia <a-bhatia1@ti.com>,
- Joao Paulo Goncalves <joao.goncalves@toradex.com>,
- Bhavya Kapoor <b-kapoor@ti.com>, Jonathan Humphreys <j-humphreys@ti.com>,
- Nikhil M Jain <n-jain1@ti.com>, Mattijs Korpershoek
- <mkorpershoek@baylibre.com>, Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Vignesh Raghavendra <vigneshr@ti.com>, Udit Kumar <u-kumar1@ti.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jayesh Choudhary <j-choudhary@ti.com>, Andre
- Przywara <andre.przywara@arm.com>, Yanhong Wang
- <yanhong.wang@starfivetech.com>, Ralph Siemsen <ralph.siemsen@linaro.org>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>
-Subject: [PATCH v10 14/15] configs: am69_sk: Add defconfig for AM69 SK board
-Date: Sat, 24 Feb 2024 01:51:52 +0530
-Message-ID: <20240223202153.3756094-15-a-nandan@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240223202153.3756094-1-a-nandan@ti.com>
-References: <20240223202153.3756094-1-a-nandan@ti.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1136.google.com with SMTP id
+ 00721157ae682-6087396e405so6718357b3.0
+ for <u-boot@lists.denx.de>; Fri, 23 Feb 2024 12:38:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1708720687; x=1709325487; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=g6JKjDQ04JZHhL5hzsg9ce/4ZmB+21NfLSg4IJNjAfc=;
+ b=N0yi2auEJM4H12NNlPSWjWun17ZqfyyOewyRW8Q9HOUMVuK037dIPaTGbjK3UvETH/
+ Vh7/S4mk7QqBM2iv4S58+Q2fE3l+iQRw4e9xvdX0s/8I2xESXJZA7ijxXd5KCYqr0VOw
+ Zr0m6UV8bQIdiRdmvJG7EmGqpq1Tzq2S7uQXI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1708720687; x=1709325487;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=g6JKjDQ04JZHhL5hzsg9ce/4ZmB+21NfLSg4IJNjAfc=;
+ b=qwqAyADce45SUpbjeB7gGqbxpIOCTAhGhGOhJci8ZLPBb5F/nFEm8m/Y+m8lejipRZ
+ DHBfEJeoqfgrz9q9tDf+Y7BKF/+Y3bEoV8hj/ojNO6yQIvInTyUs6izu2AliVd4pXX0q
+ ugOXK3Cff5J5VBgKlOG7+DVIKnRzdHd92WWfDf+Gl6mph5u6AyR+qIhOYkCXjWl+5zSo
+ /Nn0yIEKqDkHBAfDssowKrqnl2Tt/FhJRV4FS7C1Qw7AX9RYuUJMX8b1paGzEXxF0xPH
+ uRc5boMW7INNk0qJDXwgjEOYB8Ch/NfFU+c+QN5UOnp4PNW6i79irKwONJ96824YtIgr
+ Mi6g==
+X-Gm-Message-State: AOJu0YyKH+iTKnq/s+CX5vJCMlTDhOgSZROVlOxKJRfl4emmojrjrUYW
+ N1g5mpZBxmBIiKnESNkRuHPSz/EMP+gep3RBK1vIqqJWI00GtJ56bvvv6isfgwIQDBxOhBx3ahU
+ C
+X-Google-Smtp-Source: AGHT+IEyrsiFgKzpZWl0rAtVQCRRKUOnWdxDMX+2WJa+8zIFojpTiX7lrB8taLF3HGfHr99NQ5wLsA==
+X-Received: by 2002:a0d:cc06:0:b0:608:a89e:be9c with SMTP id
+ o6-20020a0dcc06000000b00608a89ebe9cmr742416ywd.9.1708720686748; 
+ Fri, 23 Feb 2024 12:38:06 -0800 (PST)
+Received: from bill-the-cat (065-184-194-195.res.spectrum.com.
+ [65.184.194.195]) by smtp.gmail.com with ESMTPSA id
+ n81-20020a0dcb54000000b00608cbf547d9sm196510ywd.88.2024.02.23.12.38.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 23 Feb 2024 12:38:06 -0800 (PST)
+Date: Fri, 23 Feb 2024 15:38:04 -0500
+From: Tom Rini <trini@konsulko.com>
+To: =?iso-8859-1?Q?S=E9bastien?= Szymanski <sebastien.szymanski@armadeus.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+Subject: Re: [PATCH v3 1/1] Makefile: pass -undef option to cmd_gen_envp
+Message-ID: <20240223203804.GZ3040305@bill-the-cat>
+References: <20240223114206.21720-1-sebastien.szymanski@armadeus.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-X-Mailman-Approved-At: Fri, 23 Feb 2024 21:26:12 +0100
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="8UsHBvU33a6jDIrJ"
+Content-Disposition: inline
+In-Reply-To: <20240223114206.21720-1-sebastien.szymanski@armadeus.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,65 +91,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Dasnavis Sabiya <sabiya.d@ti.com>
 
-Add defconfig for AM69 SK A72 and R5 configuration.
+--8UsHBvU33a6jDIrJ
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-This inlcudes and modifies the J784S4 EVM defconfigs:
-j784s4_evm_a72_defconfig -> am69_sk_a72_defconfig
-j784s4_evm_r5_defconfig -> am69_sk_r5_defconfig
+On Fri, Feb 23, 2024 at 12:42:06PM +0100, S=E9bastien Szymanski wrote:
 
-Signed-off-by: Dasnavis Sabiya <sabiya.d@ti.com>
-Signed-off-by: Apurva Nandan <a-nandan@ti.com>
----
- board/ti/j784s4/MAINTAINERS   |  2 ++
- configs/am69_sk_a72_defconfig |  9 +++++++++
- configs/am69_sk_r5_defconfig  | 10 ++++++++++
- 3 files changed, 21 insertions(+)
- create mode 100644 configs/am69_sk_a72_defconfig
- create mode 100644 configs/am69_sk_r5_defconfig
+> Without the '-undef' option, the 'linux' string in .env files is
+> replaced with the string '1 '.
+> For example, in the board/armadeus/opos6uldev/opos6uldev.env file,
+>=20
+> kernelimg=3Dopos6ul-linux.bin
+>=20
+> becomes
+>=20
+> kernelimg=3Dopos6ul-1 .bin
+>=20
+> in the include/generated/env.in file.
+>=20
+> That's because 'linux' is a System-specific Predefined Macros. [1]
+>=20
+> Pass the '-undef' option to fix this issue.
+>=20
+> [1] https://gcc.gnu.org/onlinedocs/gcc-13.2.0/cpp/System-specific-Predefi=
+ned-Macros.html
+>=20
+> Signed-off-by: S=E9bastien Szymanski <sebastien.szymanski@armadeus.com>
 
-diff --git a/board/ti/j784s4/MAINTAINERS b/board/ti/j784s4/MAINTAINERS
-index 2b6bff2f5be..46f4ba5da96 100644
---- a/board/ti/j784s4/MAINTAINERS
-+++ b/board/ti/j784s4/MAINTAINERS
-@@ -16,3 +16,5 @@ M:	Apurva Nandan <a-nandan@ti.com>
- S:	Maintained
- F:	arch/arm/dts/k3-am69-sk-u-boot.dtsi
- F:	arch/arm/dts/k3-am69-r5-sk.dts
-+F:	configs/am69_sk_r5_defconfig
-+F:	configs/am69_sk_a72_defconfig
-diff --git a/configs/am69_sk_a72_defconfig b/configs/am69_sk_a72_defconfig
-new file mode 100644
-index 00000000000..452de887258
---- /dev/null
-+++ b/configs/am69_sk_a72_defconfig
-@@ -0,0 +1,9 @@
-+#include <configs/j784s4_evm_a72_defconfig>
-+
-+CONFIG_ARM=y
-+CONFIG_ARCH_K3=y
-+CONFIG_SOC_K3_J784S4=y
-+CONFIG_TARGET_J784S4_A72_EVM=y
-+
-+CONFIG_DEFAULT_DEVICE_TREE="ti/k3-am69-sk"
-+CONFIG_OF_LIST="ti/k3-am69-sk"
-diff --git a/configs/am69_sk_r5_defconfig b/configs/am69_sk_r5_defconfig
-new file mode 100644
-index 00000000000..2186b9a0490
---- /dev/null
-+++ b/configs/am69_sk_r5_defconfig
-@@ -0,0 +1,10 @@
-+#include <configs/j784s4_evm_r5_defconfig>
-+
-+CONFIG_ARM=y
-+CONFIG_ARCH_K3=y
-+CONFIG_SOC_K3_J784S4=y
-+CONFIG_TARGET_J784S4_R5_EVM=y
-+
-+CONFIG_DEFAULT_DEVICE_TREE="k3-am69-r5-sk"
-+CONFIG_SPL_OF_LIST="k3-am69-r5-sk"
-+CONFIG_OF_LIST="k3-am69-r5-sk"
--- 
-2.34.1
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
+--=20
+Tom
+
+--8UsHBvU33a6jDIrJ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXZAiUACgkQFHw5/5Y0
+tyznmgv9FH+8TwL8xk6CZBwNQq1qCdA/qKzfNhzHtG6BKinl2MD4XTO5Sf1rpC2p
+NK/3+fFEhv90YdnV7Dr/Z3G1ASAE2B6/mAJy59N4BkkGmDEB7hzDs6LT9pfI6aS4
+twfl3hZaYjJvQJXkeoG3MCaGwLf0yNQhd6dBntqKh44ov0aaamPeG/vm3fT3Ze+i
+ExtMSq2KAUhhHAdatDzVl0KSesDRgvFI7UsJKMcEjYBhyy8DXUxI67///lonRN6L
+NQtMO2tdl3syMBqgbkmm3cxZSZT+grcDmsZ4AlzggljcK210JiN5p+l/jz4QT9Zf
+RlKPvAXzPfoexbfaVBXHAIWaL3dUbQn3A0qTzaYTm6Z4Wch+Q2ZKjDHK1L4y9Ibo
+EP62Cs6pigc11gdpB7EKDxmhIu5UI1wuyH0N85MPsqwBwEwzj/ABgl4GNnMvd1uz
+ib9+cQQfJEpXtAfrMpAzYNHeh30FgVEqEwpa/3kvht6gaRJoj059mK0jtkwbZkgV
+wZ4GSfys
+=iygr
+-----END PGP SIGNATURE-----
+
+--8UsHBvU33a6jDIrJ--
