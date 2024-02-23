@@ -4,77 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99D3CC54798
-	for <u-boot@archiver.kernel.org>; Fri, 23 Feb 2024 17:41:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04BC7C5478C
+	for <u-boot@archiver.kernel.org>; Fri, 23 Feb 2024 20:25:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E45A88791E;
-	Fri, 23 Feb 2024 18:41:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1F67C87B7C;
+	Fri, 23 Feb 2024 21:25:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YsEpn0vr";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LZKuf20E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5FD5A8795D; Fri, 23 Feb 2024 18:41:34 +0100 (CET)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
+ id D8D28879BB; Fri, 23 Feb 2024 17:59:46 +0100 (CET)
+Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
+ [IPv6:2607:f8b0:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6EA3487653
- for <u-boot@lists.denx.de>; Fri, 23 Feb 2024 18:41:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0D01B8781D
+ for <u-boot@lists.denx.de>; Fri, 23 Feb 2024 17:59:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-33d066f8239so680924f8f.1
- for <u-boot@lists.denx.de>; Fri, 23 Feb 2024 09:41:30 -0800 (PST)
+ spf=pass smtp.mailfrom=hrsourabh1107@gmail.com
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-1dbf1fe91fcso8635215ad.3
+ for <u-boot@lists.denx.de>; Fri, 23 Feb 2024 08:59:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708710090; x=1709314890; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=RaQ4sgxn8yj9Zk6yrhDznr9Lq7Znufh6/YHLt2hqhjU=;
- b=YsEpn0vr+heuwsB5yhHSQ86mtBQRZpwKlyXLEx/ONyUEWPd1UiySiz4UGXqQUE/1w7
- vdKwwHNCc7rfcRGBpcq5ZqGJF0Zl3UvU0ZOuUqfoA9KWt1i+B7lpwKymgq5uSfKKJxm5
- jltjO/MUIc9cRqM3+kAjhBCgiIXJWbh6tZO2to6pmuzc0u2/qYK+K4bUyB+AaeDHmtH3
- HMlfQwuVPgx8zFJ58Ql1MVcRZZlyizua+ugu3JN9QYjVkvTCHvLdzWLV85TPp79uOgl2
- /pPLhLtIA837Iw63dulksx29WWHlFCE9XKAuiN76B32Sljkw6nj9A55A9D+aLqg3i7Zz
- rrKA==
+ d=gmail.com; s=20230601; t=1708707574; x=1709312374; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=VbSShFruXtTbP3+JjVE+5u2ud6HZApIpPSswB3yapoE=;
+ b=LZKuf20EPKGSmy80oiPZbkgryqNuJ5UHm/mBxWEyqhlvNlnX+QKwEONFT4Wr5s8yFk
+ Cjuhqq34+vGYPTBPO4Q1cXxcXhpnbSBuejLx6ay3sTClj2I9i1uumZB3MUk5ZhmqxDnf
+ Eu073k0va8VypayRjeQ2R5hb353cHMpw+LrDO0ghlJMs+l5Jbnntqp2TcSn1G1PCHU2v
+ ag7pL5l33YLBQeMReSByAlUfLpZAlb0zjMmSLfpDU/gi+MegUMiL1Sx7MBNajEB1XGZH
+ 4IYgpzvM4VNhL6/EpF42GiATaqQvKcxZSh+fFuF7OSY1Y+8zCmuwqi9pU9ObReA2Xnb0
+ 30hg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708710090; x=1709314890;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=RaQ4sgxn8yj9Zk6yrhDznr9Lq7Znufh6/YHLt2hqhjU=;
- b=Ceu19OUxNgahD2yRy0JNReLk3nPCNp1CMObvM4572J0CCwU/CNq6eqhUKEeyyuDN4u
- K6Iz8WtGGSq2HYdO7ilFpxVIAyGCbPjhpypA469mFwjpdXUdoMxTuUjbvt13HdSoO1f9
- VchWYN4kFLVpdf45iRdvEqHJ0RVqqJrbgZowHerjcqSKZOI1THOhCOMgmvPBiDxzPm3P
- Z2kMyLTuaGhTgcqP3qKozTKE4bCF8BnhJbIC4ELYStl7k+KIp5kS0BVVHpm+ASraHahQ
- BA28hymmaeQKtKnR8TVUesHqwIKEm/sv0/E+L0rHmcjTh7w/rxWYmrX10ogPvRvCHCZP
- 8fIw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWhpwTAGq39BF4MrdQj8ViGJTHF8bg1ysWIOkMlR6UP10PZSh0SyQ4YsCN8GpAVZUzsNmi4nNg3l3Zf2+fd/Gf5CM5hCw==
-X-Gm-Message-State: AOJu0Yy4QwXa0ueK00JlkW6KU8mc9ttGBVgYAIovSmQZO3XNOkHvev9/
- hZAWB4OSbApGeija9hll3aDU7WcjjwVBY/U1gzT3GCeDmKZwuSgxBvWteqkt+xQ=
-X-Google-Smtp-Source: AGHT+IGe2UARjfOrnupZh46SQeaz08dl65OQw42ThcACfTENK172+AZxyg1xR7pK3aDPdYzd22OTDA==
-X-Received: by 2002:adf:ce83:0:b0:33d:27cf:6208 with SMTP id
- r3-20020adfce83000000b0033d27cf6208mr368779wrn.7.1708710090299; 
- Fri, 23 Feb 2024 09:41:30 -0800 (PST)
-Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
- by smtp.gmail.com with ESMTPSA id
- m3-20020a5d64a3000000b0033b6e26f0f9sm3649827wrp.42.2024.02.23.09.41.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 23 Feb 2024 09:41:29 -0800 (PST)
-From: neil.armstrong@linaro.org
-To: trini@konsulko.com
-Cc: Neil Armstrong <neil.armstrong@linaro.org>, u-boot-amlogic@groups.io,
- u-boot@lists.denx.de
-Subject: [PULL] Please pull u-boot-amlogic-fixes-20240223
-Date: Fri, 23 Feb 2024 18:41:24 +0100
-Message-Id: <20240223174124.866683-1-neil.armstrong@linaro.org>
-X-Mailer: git-send-email 2.34.1
+ d=1e100.net; s=20230601; t=1708707574; x=1709312374;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=VbSShFruXtTbP3+JjVE+5u2ud6HZApIpPSswB3yapoE=;
+ b=b7B7Jhycg4p3lAF89dCdHgOlSTIfSHHU+2pBkPlNk8vklmF7GNrloqubaZuk1AOZzz
+ ThX08YMHQ+dmSiOdmB66Wzhk04SxmVtB+GtTmpmVwLAWpZq0fCG5GlA/TV5518QeGgOD
+ nhncSNDnKURnyVZw72u2KlsnYehURzRqOTQ2OwSOqAi43lg3Df8hhZ14KlDCE7eT56aL
+ 6Davqfakk38LuyU6Ac709lDZG3IvaZdhAG1uZGHBgaM0Mssu+gL9kq/1nP6OVFijLKbD
+ Rhw3aTsuF/sBEEfDBGDgqcpwfkwhFGfxtnfVyWvWcjnwx3v9wZYShiaF2r2V4Os2n1LK
+ o7fA==
+X-Gm-Message-State: AOJu0YzfHcY5u0MLVykLZgRy4q60F4lpw58CHTF+tOnmHZuYby2XYh65
+ 4dbbtBp6SYvUDeqCp8ODim3bKajF+rKHQSOs7GkdnyqP82UvOyVbqtxYyeLgU+AVwipoVGTPFNJ
+ VcpKxnB0vL2oLfzlKHLbUa2t7uTO5Uu4r
+X-Google-Smtp-Source: AGHT+IEQ9wsX+f/x0KJDLr0DQwGo+jwy1x0V6VPoq3ljzfpUicbCtt62RQpWFZ5hrLb+i2/8bGcu3ZDSve0oeMT4vdc=
+X-Received: by 2002:a17:902:d385:b0:1dc:2755:16e4 with SMTP id
+ e5-20020a170902d38500b001dc275516e4mr312012pld.22.1708707574517; Fri, 23 Feb
+ 2024 08:59:34 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+From: Sourabh Hegde Ramu <hrsourabh1107@gmail.com>
+Date: Fri, 23 Feb 2024 17:59:23 +0100
+Message-ID: <CAHseuWAmUbWJtmH8TNtr6_P3ibd6+1yT2kKticNdbfLdMViLqA@mail.gmail.com>
+Subject: Raspberry Pi 3b Plus USB-Ethernet lan78xx_eth address not set
+To: u-boot@lists.denx.de
+X-Mailman-Approved-At: Fri, 23 Feb 2024 21:25:51 +0100
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,35 +83,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Neil Armstrong <neil.armstrong@linaro.org>
+Hello,
 
-Please pull this simple config fixes for the Khadas VIM3 Android
-setup to fix an Out Of Memory error for AVB.
+I have a Raspberry Pi 3B Plus which I want to integrate with U-boot
+(v2023.10) .
 
-Thanks,
-Neil
+I am using rpi_3_32b_defconfig to generate u-boot.bin. But while booting I
+am getting below error
 
-The following changes since commit 5e4a0c7f4a2c9d4670b75a6a2056243b1a56512b:
+Loading Environment from FAT... Unable to read "uboot.env" from mmc0:1...
+In:    serial,usbkbd
+Out:   serial,vidconsole
+Err:   serial,vidconsole
+Net:   No ethernet found.
+starting USB...
+Bus usb@7e980000: USB DWC2
+scanning bus usb@7e980000 for devices...
+Error: lan78xx_eth address not set.
+3 USB Device(s) found
+       scanning usb for storage devices... 0 Storage Device(s) found
+Hit any key to stop autoboot:  0
 
-  Merge branch 'qcom-fixes-2024.04' of https://gitlab.denx.de/u-boot/custodians/u-boot-snapdragon (2024-02-22 11:34:59 -0500)
+In the "bdinfo", "current eth" is not set
 
-are available in the Git repository at:
+U-Boot> bdinfo
+boot_params = 0x00000100
+DRAM bank   = 0x00000000
+-> start    = 0x00000000
+-> size     = 0x3b400000
+flashstart  = 0x00000000
+flashsize   = 0x00000000
+flashoffset = 0x00000000
+baudrate    = 115200 bps
+relocaddr   = 0x3b360000
+reloc off   = 0x3b358000
+Build       = 32-bit
+current eth = unknown
+eth-1addr   = (not set)
+IP addr     = <NULL>
 
-  https://source.denx.de/u-boot/custodians/u-boot-amlogic.git tags/u-boot-amlogic-fixes-20240223
+I also enabled LAN75xx in menuconfig and re-compiled u-boot. But still the
+same error.
 
-for you to fetch changes up to fc0a7431e1729f456690468f2e9570fcc2c18175:
+However on Raspberry Pi 3B, I don't see this error and "current eth" is set
+to "smsc95xx_eth" and "ethaddr" is also available.
 
-  configs: khadas-vim3*_android: fix AVB oom error (2024-02-23 18:22:50 +0100)
+Can anyone please let me know the issue with Raspberry Pi 3b plus?
 
-----------------------------------------------------------------
-- fix AVB oom error for Khadas VIM3 Android configs
-
-----------------------------------------------------------------
-Mattijs Korpershoek (1):
-      configs: khadas-vim3*_android: fix AVB oom error
-
- configs/khadas-vim3_android_ab_defconfig  | 1 +
- configs/khadas-vim3_android_defconfig     | 1 +
- configs/khadas-vim3l_android_ab_defconfig | 1 +
- configs/khadas-vim3l_android_defconfig    | 1 +
- 4 files changed, 4 insertions(+)
+Thanks in advance.
