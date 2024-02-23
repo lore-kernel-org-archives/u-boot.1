@@ -4,55 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89FDFC54798
-	for <u-boot@archiver.kernel.org>; Fri, 23 Feb 2024 14:13:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55D37C5478C
+	for <u-boot@archiver.kernel.org>; Fri, 23 Feb 2024 15:03:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7853387C56;
-	Fri, 23 Feb 2024 15:12:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=codethink.co.uk
+	by phobos.denx.de (Postfix) with ESMTP id E86BB879FC;
+	Fri, 23 Feb 2024 16:03:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=codethink.co.uk header.i=@codethink.co.uk header.b="TkSaTN3M";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ckaWD9gn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D74C38644E; Fri, 23 Feb 2024 15:08:34 +0100 (CET)
-Received: from imap5.colo.codethink.co.uk (imap5.colo.codethink.co.uk
- [78.40.148.171])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A9460879DB; Fri, 23 Feb 2024 16:03:13 +0100 (CET)
+Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
+ [IPv6:2607:f8b0:4864:20::733])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D9F3B875FA
- for <u-boot@lists.denx.de>; Fri, 23 Feb 2024 15:08:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=codethink.co.uk
+ by phobos.denx.de (Postfix) with ESMTPS id 2868087A23
+ for <u-boot@lists.denx.de>; Fri, 23 Feb 2024 16:03:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ivan.orlov@codethink.co.uk
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=codethink.co.uk; s=imap5-20230908; h=Sender:Content-Transfer-Encoding:
- Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
- Message-ID:Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
- List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=5n5cwCShIPK1itnX+oxum1sedS44QEzcOItuZTp8orI=; b=TkSaTN3MLYHJ2frHUgS26Q4Nm5
- UgQ7CHaTPY8ZV9yolfh3qQbBy4G/qhDpFRIP9QegpPukBbtbfaRxx3twQZNy8ZEMJNg5kQTFldSwo
- Oi1XmCbBF77YxdfgXTswU1C71dw4iLSvA7dAnLN3LPje2Osds0BA6COkFMlYp0hRCnsulGOthR4pd
- 8HYsiO6PKgzIw3GK4Wc494sEI3Pizq3ejnWe8fUWkQ9LdRrk7gesm3ie7xsRTBnHyv/K+oa0RjQ+e
- 66YxNbuP574xQdu30YDE2LXPwqAIAwivNZKZ84IMFR1jQAEJkQ3FXnyUKfJgEYmPVaYUVD7/zTUA2
- il740O2A==;
-Received: from [167.98.27.226] (helo=[10.35.4.68])
- by imap5.colo.codethink.co.uk with esmtpsa  (Exim 4.94.2 #2 (Debian))
- id 1rdWDb-005SvN-EW; Fri, 23 Feb 2024 14:08:03 +0000
-Message-ID: <1053cf30-cebb-4b1c-a0e8-6abd6e0a6bbe@codethink.co.uk>
-Date: Fri, 23 Feb 2024 14:08:03 +0000
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=seanga2@gmail.com
+Received: by mail-qk1-x733.google.com with SMTP id
+ af79cd13be357-787a8430006so51520185a.3
+ for <u-boot@lists.denx.de>; Fri, 23 Feb 2024 07:03:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1708700580; x=1709305380; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=N5vxj9nT0r92e8GjPdJno308Oo3GEByNrSguREl3094=;
+ b=ckaWD9gn6XHsVNs6CFArDbHcqp6e3ANgkFKuK+yQAyUSuCx5r90bZTZi7lha427PfZ
+ Uqi/tPRnK2my1keXyjgOf/03y0VIMMBle2Om19jjrI4U6vVXUbrCI4YySeF7ak5icU6u
+ jDmT24DE56Rv0nZc9Mr9MEGfpuS4CqDs8BaEZYTiBlk2qXuJDLC5xuVq5QepFlz0swjD
+ L/HRXDM5CHfh/tTiL28XmYoKemho3HM0BZD5KJobLvXzrPZCcpTPfwQQMiKU7RisEpBv
+ cbciTkzmO0XJ5tC+DcJY8eR/DkW8Oy7yFllGrgDIe/LvZWsCC/Csu1q1zuMXkLF7+Huf
+ kJvA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1708700580; x=1709305380;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=N5vxj9nT0r92e8GjPdJno308Oo3GEByNrSguREl3094=;
+ b=uYUY+KqSW20DUGIrE0dIzBzuhSRdvwOADU68GiWz6EJFdwJVbjWpdc0Lreyh/jNQRY
+ eF75pirGmsBi7Zpo1QMI5L0dClvq2ZI0rNzKpJQCl5dDLzfa9yJZjRWyZWwN6Y6hzDfD
+ C8eevly4sarWdsKKgWGZyQdqeDN69QQ/+NRbSMpepY81+eBunA4FDV9I0BDU2xMzCM8J
+ 36oxAy8pYLgcQpDxK79XUPDkkONBvvV7U0gipO7+gARzB13/SnbGZIkdwjqJX9QXVYz+
+ RBpkPvS6waDdKDhu5ebo/Wp1qMeHIqYBFR0F8cJyvOxlIjyFuqUYD70d7Zd2rOHbLoLl
+ 77pQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUpSJtPOZyRcQHZ5/oooiz2cgtmd5pQIJ6UBJIDMj5D9f9aHXi2DWCnIP6FEHu97icTv3rodzcauDDsx24IjwDuuHx8+g==
+X-Gm-Message-State: AOJu0YwFRpKiXlDLBmxTxGU4aPkAjg3UDFNHd4TEkL1i3nc/xY7HsSKS
+ T3gRYNgh/kunBYOIM5pGmFM6A8CRWP2QjD0IQEh20W/hTJTfOKoB
+X-Google-Smtp-Source: AGHT+IF+mp/TJQYJ9aWhkGeV6ikb3aJPvBjGsSxp63vIavgn3so39xSPE0GkggbdHlR1BXbmRsyNQQ==
+X-Received: by 2002:ae9:e507:0:b0:785:d64e:7165 with SMTP id
+ w7-20020ae9e507000000b00785d64e7165mr29932qkf.27.1708700579671; 
+ Fri, 23 Feb 2024 07:02:59 -0800 (PST)
+Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
+ [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
+ z4-20020ae9c104000000b007874e64c879sm6275718qki.116.2024.02.23.07.02.59
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 23 Feb 2024 07:02:59 -0800 (PST)
+Message-ID: <6ac4ff14-67a0-75e5-5763-d671d3cadcb9@gmail.com>
+Date: Fri, 23 Feb 2024 10:02:58 -0500
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] cmd: eeprom: Fix config dependency
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20240219181838.85391-1-ivan.orlov@codethink.co.uk>
- <20240222174638.GA2599242@bill-the-cat>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Subject: Re: [PATCH] clk: Revise help text for clk_get_parent_rate()
 Content-Language: en-US
-From: Ivan Orlov <ivan.orlov@codethink.co.uk>
-In-Reply-To: <20240222174638.GA2599242@bill-the-cat>
+To: Alexander Dahl <ada@thorsis.com>, u-boot@lists.denx.de
+Cc: Lukasz Majewski <lukma@denx.de>, Peng Fan <peng.fan@nxp.com>,
+ Tom Rini <trini@konsulko.com>
+References: <20240223120120.1605788-1-ada@thorsis.com>
+From: Sean Anderson <seanga2@gmail.com>
+In-Reply-To: <20240223120120.1605788-1-ada@thorsis.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -71,35 +97,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 22/02/2024 17:46, Tom Rini wrote:
-> On Mon, Feb 19, 2024 at 06:18:38PM +0000, Ivan Orlov wrote:
+On 2/23/24 07:01, Alexander Dahl wrote:
+> The function returns the rate of the parent clock, the previous text
+> made no sense at all.
 > 
->> We should have CONFIG_DM_I2C or CONFIG_(SPL_)SYS_I2C_LEGACY enabled in
->> order for `cmd/eeprom.c` to compile as it depends on the i2c functions
->> which are not compiled otherwise. Update the Kconfig entry for the
->> 'eeprom' command correspondingly.
->>
->> Signed-off-by: Ivan Orlov <ivan.orlov@codethink.co.uk>
->> ---
->>   cmd/Kconfig | 1 +
->>   1 file changed, 1 insertion(+)
->>
->> diff --git a/cmd/Kconfig b/cmd/Kconfig
->> index a86b570517..6a1a64566c 100644
->> --- a/cmd/Kconfig
->> +++ b/cmd/Kconfig
->> @@ -740,6 +740,7 @@ config CRC32_VERIFY
->>   
->>   config CMD_EEPROM
->>   	bool "eeprom - EEPROM subsystem"
->> +	depends on DM_I2C || SYS_I2C_LEGACY || SPL_SYS_I2C_LEGACY
+> Fixes: 4aa78300a025 ("dm: clk: Define clk_get_parent_rate() for clk operations")
+> Signed-off-by: Alexander Dahl <ada@thorsis.com>
+> ---
+>   include/clk.h | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> You cannot enable commands in SPL, so SPL_SYS_I2C_LEGACY doesn't make
-> sense here.
+> diff --git a/include/clk.h b/include/clk.h
+> index af23e4f3475..045e923a529 100644
+> --- a/include/clk.h
+> +++ b/include/clk.h
+> @@ -444,7 +444,7 @@ ulong clk_get_rate(struct clk *clk);
+>   struct clk *clk_get_parent(struct clk *clk);
+>   
+>   /**
+> - * clk_get_parent_rate() - Get parent of current clock rate.
+> + * clk_get_parent_rate() - Get rate of current clock's parent.
+>    * @clk:	A clock struct that was previously successfully requested by
+>    *		clk_request/get_by_*().
+>    *
 > 
+> base-commit: 7bb761c42d75b2ebacc7190a76cc5385cbba1045
 
-Ah, alright, I'll fix it and send the V2. Thank you for the review!
--- 
-Kind regards,
-Ivan Orlov
-
+Reviewed-by: Sean Anderson <seanga2@gmail.com>
