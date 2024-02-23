@@ -4,84 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD2EBC54E49
-	for <u-boot@archiver.kernel.org>; Fri, 23 Feb 2024 20:34:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8372C5478C
+	for <u-boot@archiver.kernel.org>; Fri, 23 Feb 2024 20:35:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A847287DA7;
-	Fri, 23 Feb 2024 21:26:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2844787DA0;
+	Fri, 23 Feb 2024 21:26:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="DCsc+uUI";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="abW0t6Bj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 432BE87BAE; Fri, 23 Feb 2024 21:22:34 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id F022587653; Fri, 23 Feb 2024 19:55:32 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 727DA879FC
- for <u-boot@lists.denx.de>; Fri, 23 Feb 2024 21:22:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A59D087BF0
+ for <u-boot@lists.denx.de>; Fri, 23 Feb 2024 19:55:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-nandan@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41NKM62D119141;
- Fri, 23 Feb 2024 14:22:06 -0600
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41NIswsm002339;
+ Fri, 23 Feb 2024 12:54:58 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1708719726;
- bh=TgB4H6G/YlT60dHlJ31WQmATBXGB3tZTzaznmCf5ba4=;
- h=From:To:Subject:Date;
- b=DCsc+uUIfnOWzEiuYT0BeqYNn9wYkni11C+0Pd35ZYGCeCOQ/vRwlj8juOZ3iG0IC
- ZSAj4gVqP79omq/ing4ZNwLo1EqJ/Jtf7f7e2MBMLgTDXxKk3lg/7uwL9MBxEjtGEl
- Ch0vX8Jkbhnpb/yROYlgAUvFqaqnSQ/hfzH9dIwk=
-Received: from DFLE101.ent.ti.com (dfle101.ent.ti.com [10.64.6.22])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41NKM6ow022453
+ s=ti-com-17Q1; t=1708714498;
+ bh=gCKBZgBc4bCWiwOlWbY5RSqXuLt4NhueyxynrAuqQqo=;
+ h=From:To:Subject:Date:In-Reply-To:References;
+ b=abW0t6BjmlXDBeIzyXBsFa+YvcLQp5NRiCilIMHgkEA1DcTB7mS/ku/VsE9fBDoI9
+ l2EZ61hV9NciBkhp1kelC16A2AYvTWIYjv6QEkyttM8JIt3hs4nQ/9c/e1GOiGdhxp
+ luWazDGaDw39fFq9tdeJcP+Oks8wp6HSuKNIZWcQ=
+Received: from DLEE101.ent.ti.com (dlee101.ent.ti.com [157.170.170.31])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41NIsw24101983
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 23 Feb 2024 14:22:06 -0600
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 23 Feb 2024 12:54:58 -0600
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 23
- Feb 2024 14:22:05 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ Feb 2024 12:54:58 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 23 Feb 2024 14:22:05 -0600
+ Frontend Transport; Fri, 23 Feb 2024 12:54:58 -0600
 Received: from TI.dhcp.ti.com (ti.dhcp.ti.com [10.24.68.115] (may be forged))
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41NKLsQZ104070; 
- Fri, 23 Feb 2024 14:21:54 -0600
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41NIpvhw051632; 
+ Fri, 23 Feb 2024 12:54:47 -0600
 From: Apurva Nandan <a-nandan@ti.com>
-To: Tom Rini <trini@konsulko.com>, Apurva Nandan <a-nandan@ti.com>, Lukasz
- Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Jaehoon Chung
+To: Tom Rini <trini@konsulko.com>, Apurva Nandan <a-nandan@ti.com>, "Lukasz
+ Majewski" <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Jaehoon Chung
  <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>, Sumit Garg
- <sumit.garg@linaro.org>, Jesse Taube <mr.bossman075@gmail.com>, Bryan
- Brattlof <bb@ti.com>, Kever Yang <kever.yang@rock-chips.com>, Michal Simek
+ <sumit.garg@linaro.org>, Jesse Taube <mr.bossman075@gmail.com>, "Bryan
+ Brattlof" <bb@ti.com>, Kever Yang <kever.yang@rock-chips.com>, Michal Simek
  <michal.simek@amd.com>, Marek Vasut <marex@denx.de>, Neil Armstrong
  <neil.armstrong@linaro.org>, Jonas Karlman <jonas@kwiboo.se>, Tianling Shen
  <cnsztl@gmail.com>, Svyatoslav Ryhel <clamor95@gmail.com>, Hai Pham
  <hai.pham.ud@renesas.com>, FUKAUMI Naoki <naoki@radxa.com>,
  Christian Hewitt <christianshewitt@gmail.com>,
  Neha Malcom Francis <n-francis@ti.com>, Dasnavis Sabiya <sabiya.d@ti.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>, Hari Nagalla <hnagalla@ti.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>, "Hari Nagalla" <hnagalla@ti.com>,
  Andrew Davis <afd@ti.com>, Nishanth Menon <nm@ti.com>,
  Kamlesh Gurudasani <kamlesh@ti.com>, Christian Gmeiner
  <christian.gmeiner@gmail.com>, Emanuele Ghidoli
  <emanuele.ghidoli@toradex.com>, Francesco Dolcini
- <francesco.dolcini@toradex.com>, Roger Quadros <rogerq@kernel.org>, Aradhya
- Bhatia <a-bhatia1@ti.com>,
- Joao Paulo Goncalves <joao.goncalves@toradex.com>,
- Bhavya Kapoor <b-kapoor@ti.com>, Jonathan Humphreys <j-humphreys@ti.com>,
- Nikhil M Jain <n-jain1@ti.com>, Mattijs Korpershoek
- <mkorpershoek@baylibre.com>, Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Vignesh Raghavendra <vigneshr@ti.com>, Udit Kumar <u-kumar1@ti.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jayesh Choudhary <j-choudhary@ti.com>, Andre
+ <francesco.dolcini@toradex.com>, Roger Quadros <rogerq@kernel.org>,
+ "Aradhya Bhatia" <a-bhatia1@ti.com>, Joao Paulo Goncalves
+ <joao.goncalves@toradex.com>, Bhavya Kapoor <b-kapoor@ti.com>, Jonathan
+ Humphreys <j-humphreys@ti.com>, Nikhil M Jain <n-jain1@ti.com>, Mattijs
+ Korpershoek <mkorpershoek@baylibre.com>, Marcel Ziswiler
+ <marcel.ziswiler@toradex.com>, Vignesh Raghavendra <vigneshr@ti.com>, Udit
+ Kumar <u-kumar1@ti.com>, "Heinrich Schuchardt" <xypron.glpk@gmx.de>, Jason
+ Kacines <j-kacines@ti.com>, "Jayesh Choudhary" <j-choudhary@ti.com>, Andre
  Przywara <andre.przywara@arm.com>, Yanhong Wang
  <yanhong.wang@starfivetech.com>, Ralph Siemsen <ralph.siemsen@linaro.org>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>
-Subject: [PATCH v10 00/15] Introduce initial TI's J784S4 and AM69 support
-Date: Sat, 24 Feb 2024 01:51:38 +0530
-Message-ID: <20240223202153.3756094-1-a-nandan@ti.com>
+Subject: [PATCH v9 15/15] doc: board: ti: k3: Add J784S4 EVM and AM69 SK
+ documentation
+Date: Sat, 24 Feb 2024 00:21:56 +0530
+Message-ID: <20240223185156.3065032-16-a-nandan@ti.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240223185156.3065032-1-a-nandan@ti.com>
+References: <20240223185156.3065032-1-a-nandan@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -103,288 +105,347 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Everyone!
+TI K3 J784S4 and AM69 are new additions to the K3 SoC family.
+Add documentation about the J784S4 EVM and AM69 SK.
 
-This series will introduce basic support (SD and UART) support for Texas
-Instruments J784S4 EVM.
-
-The J784S4 SoC device tree patches are taken from kernel patch submissions
-and will be updated as they are accepted and merged to the kernel tree.
-All other patches are specific to SPL and u-boot and do not have
-dependency on other trees. Appreciate a review for acceptance to u-boot
-tree.
-
-Here are some of the salient features of the J784S4 automotive grade
-application processor:
-
-The J784S4 SoC belongs to the K3 Multicore SoC architecture
-platform, providing advanced system integration in automotive,
-ADAS and industrial applications requiring AI at the network edge.
-This SoC extends the K3 Jacinto 7 family of SoCs with focus on
-raising performance and integration while providing interfaces,
-memory architecture and compute performance for multi-sensor, high
-concurrency applications.
-
-Some highlights of this SoC are:
-* Up to 8 Cortex-A72s, four clusters of lockstep capable dual Cortex-R5F MCUs,
-  4 C7x floating point vector DSPs with Matrix Multiply Accelerator(MMA) for
-  deep learning and CNN.
-* 3D GPU: Automotive grade IMG BXS-4-64 MC1
-* Vision Processing Accelerator (VPAC) with image signal processor and Depth
-  and Motion Processing Accelerator (DMPAC)
-* Three CSI2.0 4L RX plus two CSI2.0 4L TX, two DSI Tx, one eDP/DP and one
-  DPI interface.
-* Integrated gigabit ethernet switch, up to 8 ports (TDA4VH), two ports
-  support 10Gb USXGMII; Two 4 lane PCIe-GEN3 controllers, USB3.0 Dual-role
-  device subsystems, Up to 20 MCANs, among other peripherals.
-
-See J784S4 Technical Reference Manual (SPRUJ52 - JUNE 2022)
-for further details: http://www.ti.com/lit/zip/spruj52
-
-In addtion, the J784S4 EVM board is designed for TI J784S4 SoC. It
-supports the following interfaces:
-* 32 GB DDR4 RAM
-* x2 Gigabit Ethernet interfaces capable of working in Switch and MAC mode
-* x1 Input Audio Jack, x1 Output Audio Jack
-* x1 USB2.0 Hub with two Type A host and x1 USB 3.1 Type-C Port
-* x2 4L PCIe connector
-* x1 UHS-1 capable micro-SD card slot
-* 512 Mbit OSPI flash, 1 Gbit Octal NAND flash, 512 Mbit QSPI flash,
-  UFS flash.
-* x6 UART through UART-USB bridge
-* XDS110 for onboard JTAG debug using USB
-* Temperature sensors, user push buttons and LEDs
-* 40-pin User Expansion Connector
-* x2 ENET Expansion Connector, x1 GESI expander, x2 Display connector
-* x1 15-pin CSI header
-* x6 MCAN instances
-
-Schematics: https://www.ti.com/lit/zip/sprr458
-
-AM69 SD mode bootlog: https://gist.githubusercontent.com/apurvanandan1997/1b2c55d0204ff0f5a47ebbc196a97e99/raw/
-J784S4 SD mode bootlog: https://gist.githubusercontent.com/apurvanandan1997/5e2ef85ee4322798d22b57a60dc917db/raw/
-eMMC UDA moode bootlog: https://gist.githubusercontent.com/apurvanandan1997/3cffada252d50a8aa0c00a91f1f2f856/raw/
-
-Note: This series is dependent on the following series for OF_UPSTREAM support
-https://lore.kernel.org/all/20240222093607.3085545-1-sumit.garg@linaro.org/
-
-And, '[PATCH 01/15] Makefile: remove hardcoded device tree source directory' has been
-cherry-picked from PATCH 11 of https://lore.kernel.org/all/20240201030634.1120963-16-bb@ti.com/ by Bryan Brattlof
-
-Changes in v10:
-1) Fixed build failure due to missing OF_UPSTREAM in a72 defconfigs
-2) Updated paths of board dtbs in binman.dtsi, CONFIG_OF_LIST and CONFIG_DEFAULT_DEVICE_TREE
-
-Changes in v9:
-1) Added support for OF_UPSTREAM and removed Linux dts copy/sync patches
-2) Fixed DRAM enumeration algorithm in j784s4_init.c by adding max no. of controllers
-3) Squashed bootph-all property of memory node into appropriate patch
-4) Moved DDR changes out of the DMA patch
-5) Fixed commit messages, MAINTAINERS file, and removed unnecessary C headers
-6) Added comment for WKUP_UART0
-7) Used #include for defconfig for AM69-SK platform instead of config fragments
-8) Fixed J784S4 EVM boot switch nameing in doc
-
-Link to v8:
-https://lore.kernel.org/u-boot/20240119175043.3904751-1-a-nandan@ti.com/
-
-Changes in v8:
-1) Squashed Linux am69-sk and j784s4-evm dts patches into one
-2) Sorted config addition of SoC in arm/mach-K3/Kconfig
-3) Updated commit messages according to the reviews
-4) Removed #inlcude <config.h>
-5) Removed k3_mmc_stop_clock and k3_mmc_restart_clock
-6) Moved board_init_f logic to separate smaller functions
-7) Removed J784S4 EVM specific Kconfig options in j784s4_int.c
-8) Cleaned up emmc boot flow based on commit 66459346463439c72f84cfd1f985496b8a6142d8
-9) Removed the dependency of findfdt and updated to ti_set_fdt_env
-10) Updated copyright messages
-11) Did cleanup/formatting of yaml files, removing linting errors
-12) Removed k3-am69-sk specific things from k3-j784s4-binman.dtsi
-13) Changed OF_LIST to a single dtb
-14) Added bootph-all tag in EVM and SK dts instead of u-boot.dtsi
-15) Trimmed the defconfig files to minimal
-16) Merged the MAINTAINER file in right patches
-17) Updated OpenOCD tag in U-Boot doc
-18) And fixed other formatting mistakes.
-
-Link to v7:
-https://lore.kernel.org/u-boot/20231219191537.4039361-1-a-nandan@ti.com/
-
-Changes in v7:
-1) Moved to unified memory map in arm64-mmu.c based on
-   https://lore.kernel.org/all/20231128170528.407707-1-afd@ti.com/
-2) Used ARRAY_SIZE in clk-data.c and dev-data.c
-3) Removed I2C board detect from j784s4_init.c
-4) Rebased to latest next
-
-Link to v6:
-https://lore.kernel.org/all/20231206123753.1486031-1-a-nandan@ti.com/
-
-Changes in v6:
-1) Move bootph-all of memory node to u-boot.dtsi
-2) Used a while loop for DRAM controller init, instead of hard-coding for 4 DRAM
-3) Fixed build error by adding board/ti/j784s4/Kconfig
-4) Trimmed out j784s4_evm.h
-5) Fixed checkpatch warnings
-
-Link to v5:
-https://patchwork.ozlabs.org/project/uboot/cover/20231130115552.3580995-1-a-nandan@ti.com/
-
-Changes in v5:
-1) Incorporated Andrew Davis' "Move R5 specific code into new r5/ directory" and
-   "Move board selection to mach-k3" series changes.
-2) Incorporated Neha Francis' "Move to using templated FITs" series changes.
-3) Synced device tree files with Linux v6.7-rc1
-4) Changed ti_mmc to mmc1 target from bootstd
-5) Updated doc based on review comments
-6) Removed remoteproc support from the series
-7) Splitted board files patch into smaller patches
-8) Trimmed j784s4.env to necessary variables
-9) Used fdtdec_setup_mem_size_base fdtdec_setup_memory_banksize in evm.c
-10) Trimmed down evm.c to essential header files.
-11) Switched to multi-dtb fit compilation with config fragments
-
-Link to v4:
-https://lore.kernel.org/u-boot/20231001165545.494212-1-a-nandan@ti.com/
-
-Changes in v4:
-1) Cleaned up Copyright and SPDX identifiers
-2) Synced the device trees to Linux v6.6-rc1 tag
-3) Added cleanup patch for sorting SoC JTAG ID entries
-4) Removed EEPROM board detect from evm.c and added am69 config fragments
-5) Updated MAINTAINERS files and commit messages
-6) Removed struct renaming in ti_k3_r5f_rproc driver
-
-Link to v3:
-https://lore.kernel.org/u-boot/20230908110551.861575-1-a-nandan@ti.com/
-
-Changes in v3:
-1) Added AM69 SK support in the series
-2) Switched from distroboot to bootstd support
-3) Added remoteproc support for J784S4
-4) Added documentation for both SoCs
-5) Added binman support
-6) Removed unnecessarry nodes from r5-evm.dts and evm-u-boot.dtsi
-7) Added HS device support
-8) Added env file for environement variables
-9) Removed ti-serdes-mux bindings
-10) Cleaned up all files and synced with latest
-11) Addressed all previous review comments
-
-Note: The base dts files have been sync from next-20230905 linux tag as per review comment received
-on previous re-roll:
-https://lore.kernel.org/u-boot/20230321155227.GV8135@bill-the-cat/
-
-Link to v2:
-https://lore.kernel.org/u-boot/20230321141028.24456-1-hnagalla@ti.com/
-
-Apurva Nandan (12):
-  arm: mach-k3: Kconfig: Sort SOC_K3 config entries
-  arm: mach-k3: Add basic support for J784S4 SoC definition
-  arm: mach-k3: Sort SoC JTAG_ID entries
-  soc: ti: k3-socinfo: Add entry for J784S4 SoC
-  arm: mach-k3: j784s4: Add clk and power support
-  drivers: dma: Add support for J784S4 SoC
-  board: ti: j784s4: Add board support for J784S4 EVM
-  board: ti: j748s4: Add board config yaml files
-  board: ti: j784s4: Add boot environment variables
-  arm: dts: Introduce j784s4 u-boot dts files
-  configs: j784s4_evm: Add defconfig for J784S4 EVM board
-  doc: board: ti: k3: Add J784S4 EVM and AM69 SK documentation
-
-Bryan Brattlof (1):
-  Makefile: remove hardcoded device tree source directory
-
-Dasnavis Sabiya (2):
-  arm: dts: Introduce am69-sk u-boot dts files
-  configs: am69_sk: Add defconfig for AM69 SK board
-
- Makefile                                      |   18 +-
- arch/arm/dts/Makefile                         |    4 +
- arch/arm/dts/k3-am69-r5-sk.dts                |  106 +
- arch/arm/dts/k3-am69-sk-u-boot.dtsi           |   54 +
- arch/arm/dts/k3-j784s4-binman.dtsi            |  345 +
- arch/arm/dts/k3-j784s4-ddr-evm-lp4-4266.dtsi  | 8757 ++++++++++++++++
- arch/arm/dts/k3-j784s4-ddr.dtsi               | 8858 +++++++++++++++++
- arch/arm/dts/k3-j784s4-evm-u-boot.dtsi        |   31 +
- arch/arm/dts/k3-j784s4-r5-evm.dts             |  106 +
- arch/arm/mach-k3/Kconfig                      |   33 +-
- arch/arm/mach-k3/Makefile                     |    2 +
- arch/arm/mach-k3/include/mach/hardware.h      |   13 +-
- .../mach-k3/include/mach/j784s4_hardware.h    |   59 +
- arch/arm/mach-k3/include/mach/j784s4_spl.h    |   47 +
- arch/arm/mach-k3/include/mach/spl.h           |    4 +
- arch/arm/mach-k3/j784s4/Kconfig               |   34 +
- arch/arm/mach-k3/j784s4_fdt.c                 |   15 +
- arch/arm/mach-k3/j784s4_init.c                |  310 +
- arch/arm/mach-k3/r5/Makefile                  |    1 +
- arch/arm/mach-k3/r5/j784s4/Makefile           |    7 +
- arch/arm/mach-k3/r5/j784s4/clk-data.c         |  428 +
- arch/arm/mach-k3/r5/j784s4/dev-data.c         |   98 +
- board/ti/j784s4/Kconfig                       |   37 +
- board/ti/j784s4/MAINTAINERS                   |   21 +
- board/ti/j784s4/Makefile                      |    7 +
- board/ti/j784s4/board-cfg.yaml                |   37 +
- board/ti/j784s4/evm.c                         |   41 +
- board/ti/j784s4/j784s4.env                    |   17 +
- board/ti/j784s4/pm-cfg.yaml                   |   13 +
- board/ti/j784s4/rm-cfg.yaml                   | 3058 ++++++
- board/ti/j784s4/sec-cfg.yaml                  |  380 +
- board/ti/j784s4/tifs-rm-cfg.yaml              | 2656 +++++
- configs/am69_sk_a72_defconfig                 |    9 +
- configs/am69_sk_r5_defconfig                  |   10 +
- configs/j784s4_evm_a72_defconfig              |  159 +
- configs/j784s4_evm_r5_defconfig               |  153 +
- doc/board/ti/j784s4_evm.rst                   |  299 +
- doc/board/ti/k3.rst                           |    1 +
- drivers/clk/ti/clk-k3.c                       |    6 +
- drivers/dma/ti/Makefile                       |    1 +
- drivers/dma/ti/k3-psil-j784s4.c               |  166 +
- drivers/dma/ti/k3-psil-priv.h                 |    1 +
- drivers/dma/ti/k3-psil.c                      |    2 +
- drivers/firmware/ti_sci_static_data.h         |   34 +
- drivers/power/domain/ti-power-domain.c        |    6 +
- drivers/ram/Kconfig                           |    2 +-
- drivers/soc/soc_ti_k3.c                       |    3 +
- include/configs/j784s4_evm.h                  |   15 +
- include/k3-clk.h                              |    1 +
- include/k3-dev.h                              |    1 +
- scripts/Makefile.spl                          |   17 +-
- 51 files changed, 26455 insertions(+), 28 deletions(-)
- create mode 100644 arch/arm/dts/k3-am69-r5-sk.dts
- create mode 100644 arch/arm/dts/k3-am69-sk-u-boot.dtsi
- create mode 100644 arch/arm/dts/k3-j784s4-binman.dtsi
- create mode 100644 arch/arm/dts/k3-j784s4-ddr-evm-lp4-4266.dtsi
- create mode 100644 arch/arm/dts/k3-j784s4-ddr.dtsi
- create mode 100644 arch/arm/dts/k3-j784s4-evm-u-boot.dtsi
- create mode 100644 arch/arm/dts/k3-j784s4-r5-evm.dts
- create mode 100644 arch/arm/mach-k3/include/mach/j784s4_hardware.h
- create mode 100644 arch/arm/mach-k3/include/mach/j784s4_spl.h
- create mode 100644 arch/arm/mach-k3/j784s4/Kconfig
- create mode 100644 arch/arm/mach-k3/j784s4_fdt.c
- create mode 100644 arch/arm/mach-k3/j784s4_init.c
- create mode 100644 arch/arm/mach-k3/r5/j784s4/Makefile
- create mode 100644 arch/arm/mach-k3/r5/j784s4/clk-data.c
- create mode 100644 arch/arm/mach-k3/r5/j784s4/dev-data.c
- create mode 100644 board/ti/j784s4/Kconfig
- create mode 100644 board/ti/j784s4/MAINTAINERS
- create mode 100644 board/ti/j784s4/Makefile
- create mode 100644 board/ti/j784s4/board-cfg.yaml
- create mode 100644 board/ti/j784s4/evm.c
- create mode 100644 board/ti/j784s4/j784s4.env
- create mode 100644 board/ti/j784s4/pm-cfg.yaml
- create mode 100644 board/ti/j784s4/rm-cfg.yaml
- create mode 100644 board/ti/j784s4/sec-cfg.yaml
- create mode 100644 board/ti/j784s4/tifs-rm-cfg.yaml
- create mode 100644 configs/am69_sk_a72_defconfig
- create mode 100644 configs/am69_sk_r5_defconfig
- create mode 100644 configs/j784s4_evm_a72_defconfig
- create mode 100644 configs/j784s4_evm_r5_defconfig
+Signed-off-by: Dasnavis Sabiya <sabiya.d@ti.com>
+Signed-off-by: Apurva Nandan <a-nandan@ti.com>
+---
+ board/ti/j784s4/MAINTAINERS |   1 +
+ doc/board/ti/j784s4_evm.rst | 299 ++++++++++++++++++++++++++++++++++++
+ doc/board/ti/k3.rst         |   1 +
+ 3 files changed, 301 insertions(+)
  create mode 100644 doc/board/ti/j784s4_evm.rst
- create mode 100644 drivers/dma/ti/k3-psil-j784s4.c
- create mode 100644 include/configs/j784s4_evm.h
 
+diff --git a/board/ti/j784s4/MAINTAINERS b/board/ti/j784s4/MAINTAINERS
+index 46f4ba5da96..b7605ff335b 100644
+--- a/board/ti/j784s4/MAINTAINERS
++++ b/board/ti/j784s4/MAINTAINERS
+@@ -10,6 +10,7 @@ F:	arch/arm/dts/k3-j784s4-evm-u-boot.dtsi
+ F:	arch/arm/dts/k3-j784s4-r5-evm.dts
+ F:	arch/arm/dts/k3-j784s4-ddr.dtsi
+ F:	arch/arm/dts/k3-j784s4-ddr-evm-lp4-4266.dtsi
++F:	doc/board/ti/j784s4_evm.rst
+ 
+ AM69 SK BOARD
+ M:	Apurva Nandan <a-nandan@ti.com>
+diff --git a/doc/board/ti/j784s4_evm.rst b/doc/board/ti/j784s4_evm.rst
+new file mode 100644
+index 00000000000..5c4bd2c927d
+--- /dev/null
++++ b/doc/board/ti/j784s4_evm.rst
+@@ -0,0 +1,299 @@
++.. SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
++.. sectionauthor:: Apurva Nandan <a-nandan@ti.com>
++
++J784S4 and AM69 Platforms
++=========================
++
++Introduction
++------------
++The J784S4 SoC belongs to the K3 Multicore SoC architecture
++platform, providing advanced system integration in automotive,
++ADAS and industrial applications requiring AI at the network edge.
++This SoC extends the K3 Jacinto 7 family of SoCs with focus on
++raising performance and integration while providing interfaces,
++memory architecture and compute performance for multi-sensor, high
++concurrency applications.
++
++The device is partitioned into three functional domains, each containing
++specific processing cores and peripherals:
++
++1. Wake-up (WKUP) domain
++    * ARM Cortex-M4F processor, runs TI Foundational Security (TIFS)
++
++2. Microcontroller (MCU) domain
++    * Dual core ARM Cortex-R5F processor, runs device management
++      and SoC early boot
++
++3. MAIN domain
++    * Two clusters of quad core 64-bit ARM Cortex-A72, runs HLOS
++    * Dual core ARM Cortex-R5F processor used for RTOS applications
++    * Four C7x DSPs used for Machine Learning applications.
++
++
++More info can be found in TRM: http://www.ti.com/lit/zip/spruj52
++
++Platform information:
++
++* https://www.ti.com/tool/J784S4XEVM
++* https://www.ti.com/tool/SK-AM69
++
++Boot Flow
++---------
++Below is the pictorial representation of boot flow:
++
++.. image:: img/boot_diagram_k3_current.svg
++    :alt: K3 boot flow
++
++- On this platform, "TI Foundational Security" (TIFS) functions as the
++  security enclave master. While "Device Manager" (DM), also known as the
++  "TISCI server" in TI terminology, offers all the essential services.
++
++- As illustrated in the diagram above, R5 SPL manages power and clock
++  services independently before handing over control to DM. The A72 or
++  the C7x (Aux core) software components request TIFS/DM to handle
++  security or device management services.
++
++Sources
++-------
++
++.. include::  k3.rst
++    :start-after: .. k3_rst_include_start_boot_sources
++    :end-before: .. k3_rst_include_end_boot_sources
++
++Build procedure
++---------------
++0. Setup the environment variables:
++
++.. include::  k3.rst
++    :start-after: .. k3_rst_include_start_common_env_vars_desc
++    :end-before: .. k3_rst_include_end_common_env_vars_desc
++
++.. include::  k3.rst
++    :start-after: .. k3_rst_include_start_board_env_vars_desc
++    :end-before: .. k3_rst_include_end_board_env_vars_desc
++
++Set the variables corresponding to this platform:
++
++.. include::  k3.rst
++    :start-after: .. k3_rst_include_start_common_env_vars_defn
++    :end-before: .. k3_rst_include_end_common_env_vars_defn
++.. code-block:: bash
++
++ $ export UBOOT_CFG_CORTEXR=j784s4_evm_r5_defconfig
++ $ export UBOOT_CFG_CORTEXA=j784s4_evm_a72_defconfig
++ $ export TFA_BOARD=j784s4
++ $ export TFA_EXTRA_ARGS="K3_USART=0x8"
++ $ export OPTEE_PLATFORM=k3-j784s4
++ $ export OPTEE_EXTRA_ARGS="CFG_CONSOLE_UART=0x8"
++
++.. j784s4_evm_rst_include_start_build_steps
++
++1. Trusted Firmware-A
++
++.. include::  k3.rst
++    :start-after: .. k3_rst_include_start_build_steps_tfa
++    :end-before: .. k3_rst_include_end_build_steps_tfa
++
++
++2. OP-TEE
++
++.. include::  k3.rst
++    :start-after: .. k3_rst_include_start_build_steps_optee
++    :end-before: .. k3_rst_include_end_build_steps_optee
++
++3. U-Boot
++
++.. _j784s4_evm_rst_u_boot_r5:
++
++* 3.1 R5
++
++.. include::  k3.rst
++    :start-after: .. k3_rst_include_start_build_steps_spl_r5
++    :end-before: .. k3_rst_include_end_build_steps_spl_r5
++
++.. _j784s4_evm_rst_u_boot_a72:
++
++* 3.2 A72
++
++.. include::  k3.rst
++    :start-after: .. k3_rst_include_start_build_steps_uboot
++    :end-before: .. k3_rst_include_end_build_steps_uboot
++.. j784s4_evm_rst_include_end_build_steps
++
++Target Images
++-------------
++In order to boot we need tiboot3.bin, tispl.bin and u-boot.img. Each SoC
++variant (GP, HS-FS, HS-SE) requires a different source for these files.
++
++ - GP
++
++    * tiboot3-j784s4-gp-evm.bin from :ref:`step 3.1 <j784s4_evm_rst_u_boot_r5>`
++    * tispl.bin_unsigned, u-boot.img_unsigned from :ref:`step 3.2 <j784s4_evm_rst_u_boot_a72>`
++
++ - HS-FS
++
++    * tiboot3-j784s4-hs-fs-evm.bin from :ref:`step 3.1 <j784s4_evm_rst_u_boot_r5>`
++    * tispl.bin, u-boot.img from :ref:`step 3.2 <j784s4_evm_rst_u_boot_a72>`
++
++ - HS-SE
++
++    * tiboot3-j784s4-hs-evm.bin from :ref:`step 3.1 <j784s4_evm_rst_u_boot_r5>`
++    * tispl.bin, u-boot.img from :ref:`step 3.2 <j784s4_evm_rst_u_boot_a72>`
++
++Image formats
++-------------
++
++- tiboot3.bin
++
++.. image:: img/multi_cert_tiboot3.bin.svg
++    :alt: tiboot3.bin format
++
++- tispl.bin
++
++.. image:: img/dm_tispl.bin.svg
++    :alt: tispl.bin format
++
++R5 Memory Map
++-------------
++
++.. list-table::
++   :widths: 16 16 16
++   :header-rows: 1
++
++   * - Region
++     - Start Address
++     - End Address
++
++   * - SPL
++     - 0x41c00000
++     - 0x41c40000
++
++   * - EMPTY
++     - 0x41c40000
++     - 0x41c61f20
++
++   * - STACK
++     - 0x41c65f20
++     - 0x41c61f20
++
++   * - Global data
++     - 0x41c65f20
++     - 0x41c66000
++
++   * - Heap
++     - 0x41c66000
++     - 0x41c76000
++
++   * - BSS
++     - 0x41c76000
++     - 0x41c80000
++
++   * - DM DATA
++     - 0x41c80000
++     - 0x41c84130
++
++   * - EMPTY
++     - 0x41c84130
++     - 0x41cff9fc
++
++   * - MCU Scratchpad
++     - 0x41cff9fc
++     - 0x41cffbfc
++
++   * - ROM DATA
++     - 0x41cffbfc
++     - 0x41cfffff
++
++Switch Setting for Boot Mode
++----------------------------
++
++Boot Mode pins provide means to select the boot mode and options before the
++device is powered up. After every POR, they are the main source to populate
++the Boot Parameter Tables.
++
++Boot Mode Pins for J784S4-EVM
++^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
++
++The following tables show some common boot modes used on J784S4 EVM platform.
++More details can be found in the Technical Reference Manual:
++http://www.ti.com/lit/zip/spruj52 under the `Boot Mode Pins` section.
++
++.. list-table:: J784S4 EVM Boot Modes
++   :widths: 16 16 16
++   :header-rows: 1
++
++   * - Switch Label
++     - SW11: 12345678
++     - SW7: 12345678
++
++   * - SD
++     - 10000010
++     - 00000000
++
++   * - EMMC
++     - 10000000
++     - 01000000
++
++   * - OSPI
++     - 00000110
++     - 01000000
++
++   * - UART
++     - 00000000
++     - 01110000
++
++For SW7 and SW11, the switch state in the "ON" position = 1.
++
++Boot Mode Pins for AM69-SK
++^^^^^^^^^^^^^^^^^^^^^^^^^^
++
++The following table show some common boot modes used on AM69-SK platform.
++More details can be found in the User Guide for AM69-SK:
++https://www.ti.com/lit/ug/spruj70/spruj70.pdf under the `Bootmode Settings`
++section.
++
++.. list-table:: AM69 SK Boot Modes
++   :widths: 16 16
++   :header-rows: 1
++
++   * - Switch Label
++     - SW2: 1234
++
++   * - SD
++     - 0000
++
++   * - EMMC
++     - 0110
++
++   * - UART
++     - 1010
++
++For SW2, the switch state in the "ON" position = 1.
++
++Debugging U-Boot
++----------------
++
++See :ref:`Common Debugging environment - OpenOCD<k3_rst_refer_openocd>`: for
++detailed setup information.
++
++.. warning::
++
++  **OpenOCD support since**: September 2023 (git master)
++
++  Until the next stable release of OpenOCD is available in your development
++  environment's distribution, it might be necessary to build OpenOCD `from the
++  source <https://github.com/openocd-org/openocd>`_.
++
++Debugging U-Boot on J784S4-EVM and AM69-SK
++^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
++
++.. include::  k3.rst
++    :start-after: .. k3_rst_include_start_openocd_connect_XDS110
++    :end-before: .. k3_rst_include_end_openocd_connect_XDS110
++
++To start OpenOCD and connect to J784S4-EVM or AM69-SK board, use the
++following.
++
++.. code-block:: bash
++
++  openocd -f board/ti_j784s4evm.cfg
+diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
+index 3c33efd2e38..15e1ed232bf 100644
+--- a/doc/board/ti/k3.rst
++++ b/doc/board/ti/k3.rst
+@@ -41,6 +41,7 @@ K3 Based SoCs
+    ../beagle/j721e_beagleboneai64
+    j721e_evm
+    j721s2_evm
++   j784s4_evm
+ 
+ Boot Flow Overview
+ ------------------
 -- 
 2.34.1
 
