@@ -4,81 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11116C5478C
-	for <u-boot@archiver.kernel.org>; Fri, 23 Feb 2024 17:23:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99D3CC54798
+	for <u-boot@archiver.kernel.org>; Fri, 23 Feb 2024 17:41:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E4EE78795D;
-	Fri, 23 Feb 2024 18:23:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E45A88791E;
+	Fri, 23 Feb 2024 18:41:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wIAOzNdl";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YsEpn0vr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B7CE2879DB; Fri, 23 Feb 2024 18:23:12 +0100 (CET)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id 5FD5A8795D; Fri, 23 Feb 2024 18:41:34 +0100 (CET)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 515568791E
- for <u-boot@lists.denx.de>; Fri, 23 Feb 2024 18:23:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6EA3487653
+ for <u-boot@lists.denx.de>; Fri, 23 Feb 2024 18:41:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-41298159608so1956555e9.0
- for <u-boot@lists.denx.de>; Fri, 23 Feb 2024 09:23:08 -0800 (PST)
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-33d066f8239so680924f8f.1
+ for <u-boot@lists.denx.de>; Fri, 23 Feb 2024 09:41:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708708988; x=1709313788; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=bhpfx/ePUICxS06uEeSdou4myF4uuNjCR2pKvdgsQ0I=;
- b=wIAOzNdlIqvttqu6AEGe/18JwYFvDMDmVzy31ECq8g0FndS4jrMtdyVQbdxKsa5HXK
- HV5ssS8oGmKt2tup9Z7TypmjV0KnJcu+L7uI2V60RkULB4rGRDNn62fK4S+lL8RSn9ax
- dG7z0kGYyTjHOmTDL4d/2iqxKe4zLTV22SNMwgXkqG4bcfivcqhes506dY2MlFA/Gox4
- ym+4Usg7sJzwFKgjbjPb/l5bft+VD8vN4NwaPEkweL2ZMuIsf0q8ZQJBwrOh8ONGKq+i
- JooHo0nhMKIrZTkjXaz4gWlz/M04coL6meDPwSX123noLpGx3ItjRNlEc7J47lo6RPig
- Q9BQ==
+ d=linaro.org; s=google; t=1708710090; x=1709314890; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=RaQ4sgxn8yj9Zk6yrhDznr9Lq7Znufh6/YHLt2hqhjU=;
+ b=YsEpn0vr+heuwsB5yhHSQ86mtBQRZpwKlyXLEx/ONyUEWPd1UiySiz4UGXqQUE/1w7
+ vdKwwHNCc7rfcRGBpcq5ZqGJF0Zl3UvU0ZOuUqfoA9KWt1i+B7lpwKymgq5uSfKKJxm5
+ jltjO/MUIc9cRqM3+kAjhBCgiIXJWbh6tZO2to6pmuzc0u2/qYK+K4bUyB+AaeDHmtH3
+ HMlfQwuVPgx8zFJ58Ql1MVcRZZlyizua+ugu3JN9QYjVkvTCHvLdzWLV85TPp79uOgl2
+ /pPLhLtIA837Iw63dulksx29WWHlFCE9XKAuiN76B32Sljkw6nj9A55A9D+aLqg3i7Zz
+ rrKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708708988; x=1709313788;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=bhpfx/ePUICxS06uEeSdou4myF4uuNjCR2pKvdgsQ0I=;
- b=Lexx/lmjGQybtCodNk21cugBVMPGrNNrmLmF4Ihb1zLXRGbWQQ/hPx+QQewI2EZnb1
- PW3GXMgR1DqAzblgQsXzKrB6kcqF0tg854E+8zBpVrP7rbigNIr3LGdCI2ihbmUFf9ya
- pL2N6v1zYCFJOMxbZ5YQjY5lM3CXr895lPRfsu8AmzacNS7CI33T0kgz+DA/2OshJY3w
- Ab33pmcKn67m5KDj0Xu4122YiQbGiIjvK1dp1tCxXUcSxxnkg+BadmIwzmnOjtjC8c9W
- dC+dihD0xA0BomXfvLXxptaEGKkHmaizxzUkc/Z6khOMf1Y0+lSo3GNVj7GosPoUqsw1
- LbRg==
+ d=1e100.net; s=20230601; t=1708710090; x=1709314890;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=RaQ4sgxn8yj9Zk6yrhDznr9Lq7Znufh6/YHLt2hqhjU=;
+ b=Ceu19OUxNgahD2yRy0JNReLk3nPCNp1CMObvM4572J0CCwU/CNq6eqhUKEeyyuDN4u
+ K6Iz8WtGGSq2HYdO7ilFpxVIAyGCbPjhpypA469mFwjpdXUdoMxTuUjbvt13HdSoO1f9
+ VchWYN4kFLVpdf45iRdvEqHJ0RVqqJrbgZowHerjcqSKZOI1THOhCOMgmvPBiDxzPm3P
+ Z2kMyLTuaGhTgcqP3qKozTKE4bCF8BnhJbIC4ELYStl7k+KIp5kS0BVVHpm+ASraHahQ
+ BA28hymmaeQKtKnR8TVUesHqwIKEm/sv0/E+L0rHmcjTh7w/rxWYmrX10ogPvRvCHCZP
+ 8fIw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUvRkIzce0/DqEYnfCrGXFdgL72jLZgBtWElRrKNFfFY/6t1l+gf3AFKxBR1LOZvM9ovktq/koalNaoqIsBJaUqKNSiNg==
-X-Gm-Message-State: AOJu0YzuW+dERtVGNwgvdT428s3QYfqVZwIlHmy8L90X6T1TOUgYOVLO
- e71zMMvaLJtcXiTeDQAbbBhZ0Vgv743WkI1sb5DzGy6nt5WuhnI75pTzNxpC1Tc=
-X-Google-Smtp-Source: AGHT+IGIsSeQZqBaqBWjThOPRbhNoRHLe5uWldTOgRFDmFR0Vf1J5qrEZNLtxGm1BRL07XJLSRhgfQ==
-X-Received: by 2002:a05:600c:19c9:b0:412:8cc3:bf67 with SMTP id
- u9-20020a05600c19c900b004128cc3bf67mr471767wmq.8.1708708987776; 
- Fri, 23 Feb 2024 09:23:07 -0800 (PST)
-Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:8261:5fff:fe11:bdda])
+ AJvYcCWhpwTAGq39BF4MrdQj8ViGJTHF8bg1ysWIOkMlR6UP10PZSh0SyQ4YsCN8GpAVZUzsNmi4nNg3l3Zf2+fd/Gf5CM5hCw==
+X-Gm-Message-State: AOJu0Yy4QwXa0ueK00JlkW6KU8mc9ttGBVgYAIovSmQZO3XNOkHvev9/
+ hZAWB4OSbApGeija9hll3aDU7WcjjwVBY/U1gzT3GCeDmKZwuSgxBvWteqkt+xQ=
+X-Google-Smtp-Source: AGHT+IGe2UARjfOrnupZh46SQeaz08dl65OQw42ThcACfTENK172+AZxyg1xR7pK3aDPdYzd22OTDA==
+X-Received: by 2002:adf:ce83:0:b0:33d:27cf:6208 with SMTP id
+ r3-20020adfce83000000b0033d27cf6208mr368779wrn.7.1708710090299; 
+ Fri, 23 Feb 2024 09:41:30 -0800 (PST)
+Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
  by smtp.gmail.com with ESMTPSA id
- i10-20020a05600c290a00b0040fccf7e8easm3015320wmd.36.2024.02.23.09.23.07
+ m3-20020a5d64a3000000b0033b6e26f0f9sm3649827wrp.42.2024.02.23.09.41.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 23 Feb 2024 09:23:07 -0800 (PST)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: Guillaume La Roque <glaroque@baylibre.com>, u-boot-amlogic@groups.io, 
+ Fri, 23 Feb 2024 09:41:29 -0800 (PST)
+From: neil.armstrong@linaro.org
+To: trini@konsulko.com
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, u-boot-amlogic@groups.io,
  u-boot@lists.denx.de
-In-Reply-To: <20240209-vim3-avb-malloc-v1-1-91427d8c19ab@baylibre.com>
-References: <20240209-vim3-avb-malloc-v1-1-91427d8c19ab@baylibre.com>
-Subject: Re: [PATCH] configs: khadas-vim3*_android: fix AVB oom error
-Message-Id: <170870898716.200337.2390441000812477288.b4-ty@linaro.org>
-Date: Fri, 23 Feb 2024 18:23:07 +0100
+Subject: [PULL] Please pull u-boot-amlogic-fixes-20240223
+Date: Fri, 23 Feb 2024 18:41:24 +0100
+Message-Id: <20240223174124.866683-1-neil.armstrong@linaro.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.12.4
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,26 +91,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+From: Neil Armstrong <neil.armstrong@linaro.org>
 
-On Fri, 09 Feb 2024 09:58:35 +0100, Mattijs Korpershoek wrote:
-> When booting Android with AVB enabled, an OOM is observed:
-> 
->   => avb init ${mmcdev}
->   => avb verify _a
->   ## Android Verified Boot 2.0 version 1.1.0
->   read_is_device_unlocked not supported yet
->   read_rollback_index not supported yet
->   avb_util.c:182: ERROR: Failed to allocate memory.
->   OOM error occurred during verification
-> 
-> [...]
+Please pull this simple config fixes for the Khadas VIM3 Android
+setup to fix an Out Of Memory error for AVB.
 
-Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-amlogic (u-boot-amlogic)
-
-[1/1] configs: khadas-vim3*_android: fix AVB oom error
-      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/fc0a7431e1729f456690468f2e9570fcc2c18175
-
--- 
+Thanks,
 Neil
 
+The following changes since commit 5e4a0c7f4a2c9d4670b75a6a2056243b1a56512b:
+
+  Merge branch 'qcom-fixes-2024.04' of https://gitlab.denx.de/u-boot/custodians/u-boot-snapdragon (2024-02-22 11:34:59 -0500)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-amlogic.git tags/u-boot-amlogic-fixes-20240223
+
+for you to fetch changes up to fc0a7431e1729f456690468f2e9570fcc2c18175:
+
+  configs: khadas-vim3*_android: fix AVB oom error (2024-02-23 18:22:50 +0100)
+
+----------------------------------------------------------------
+- fix AVB oom error for Khadas VIM3 Android configs
+
+----------------------------------------------------------------
+Mattijs Korpershoek (1):
+      configs: khadas-vim3*_android: fix AVB oom error
+
+ configs/khadas-vim3_android_ab_defconfig  | 1 +
+ configs/khadas-vim3_android_defconfig     | 1 +
+ configs/khadas-vim3l_android_ab_defconfig | 1 +
+ configs/khadas-vim3l_android_defconfig    | 1 +
+ 4 files changed, 4 insertions(+)
