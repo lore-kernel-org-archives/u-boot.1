@@ -4,80 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AB6EC5478C
-	for <u-boot@archiver.kernel.org>; Fri, 23 Feb 2024 13:42:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10162C5478C
+	for <u-boot@archiver.kernel.org>; Fri, 23 Feb 2024 14:08:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA44A879DF;
-	Fri, 23 Feb 2024 14:42:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 28B86878A1;
+	Fri, 23 Feb 2024 15:08:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=steffen.cc
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Y+p5/l4i";
+	dkim=pass (2048-bit key; secure) header.d=steffen.cc header.i=@steffen.cc header.b="iBm7ghQZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 373D0879DB; Fri, 23 Feb 2024 14:42:01 +0100 (CET)
-Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
- [IPv6:2607:f8b0:4864:20::102a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C20948573F; Fri, 23 Feb 2024 15:08:00 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 12C3287C52
- for <u-boot@lists.denx.de>; Fri, 23 Feb 2024 14:41:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F50F87CAC
+ for <u-boot@lists.denx.de>; Fri, 23 Feb 2024 15:06:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x102a.google.com with SMTP id
- 98e67ed59e1d1-29964f5c904so126014a91.0
- for <u-boot@lists.denx.de>; Fri, 23 Feb 2024 05:41:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1708695676; x=1709300476; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=qwzT/OX5DB/+CtwCzQhWkSPTb1vR6il8XWDrz+djdYs=;
- b=Y+p5/l4iRX5+f4iP6U15sYKJIp+vRZNi0psUc5j7kSsUow3jPF/CxzVXMztJzE+rAk
- bjkQC5cL+LByNkjPcL4WvAcpv1AZ2JamshsegTKQ2MR0VDTmqEG8TtzDffpIC3BV1UPK
- rzWXrv+/c6WuLoR62fLg1l/1TDqYywvUBTgHDNi+1kLoUy+9B3rKLRNAGiPZ/Oq7rRey
- +lQz8NAxyOfXp7bm4BHxcriZ+dNwX/Xky3EnWPYbArpA6bzFlugIwJIEdYJMmaPmjeSA
- GdN5cVCoIxpGuXM+yFG3MAW2cB5kj/vN+DSh7cdtOwswpoZ8nINA93nNF41I8eIRRVE4
- vDGQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708695676; x=1709300476;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=qwzT/OX5DB/+CtwCzQhWkSPTb1vR6il8XWDrz+djdYs=;
- b=QwbzD42sePMgqLnDgIz3A7Ja0XeY9DX9tECwC6RQ2AfMRwh42X96xjcvFll9oZbqnA
- FabB9SVfQFGvnUhIblNJOuIq82fQ6FpDaLzBMfIyW5t1GgxquB8oliTd5EGUAqyiLgJC
- XQB+1SJCNDoJlXVGjtzLSLBO5GLWj1rjmO7nW2rP0bRO2tq7ti8lDqbEgPkIx4/U5mkt
- C/QzZ4QEXOuw1fXy4P2we9v2Niy5RhDN9Hqh12DJwQSuWEOVqMPguC9CU5N1ozU8HN1h
- fgoFxfa2KVR70kl5oedoLmjkTn6cU642TihBZ5MH2JDdjQZKRgEmn8lfU17c6TF7Uxig
- oL2g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXpd+8wn5Nu5Ixub8xnFENLLSI/lhugSYNa5AB/BgejmQOgMbB8aHq1tgPJmEhSBL/20CzAYpwExfytJUPCuGFZeiOPCw==
-X-Gm-Message-State: AOJu0YwKFIvZ+k+Hm6SodID8kbgaLCf8DsPuLb4xaswpV+Oi5oPtcG/Y
- 7ktp4ZCHAyVEpq6FGvwHlKvetNrdbK+RIaPnlK9vcOVz2ti3D5Yu8e3wP8HkSvHduw+4U1hHmzM
- 3JIJ3kfR3ZQRCckriUG10bm3UE8A=
-X-Google-Smtp-Source: AGHT+IGlJdfh9VZF7uG+u5t+OmSIYntKtSCedgIy/ow9bLvlxNui7ZUQwiWqveXeDzJz2sZUFP4Fi9pa1Nd9LdoyiLs=
-X-Received: by 2002:a17:90a:3ee2:b0:298:c3b4:f6ab with SMTP id
- k89-20020a17090a3ee200b00298c3b4f6abmr1509723pjc.2.1708695675789; Fri, 23 Feb
- 2024 05:41:15 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=steffen.cc
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lists@steffen.cc
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4ThBdl6Bdlz9sp1;
+ Fri, 23 Feb 2024 15:06:51 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=steffen.cc; s=MBO0001; 
+ t=1708697211;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=yvh2qhAkdatPkPvcJgpIX+/WSc5ymXVaamkw5OkrwcM=;
+ b=iBm7ghQZpPT5s/CvxYHwFcNgmRZe246h79Pzi6oNNAeiu4GjO7uXtlRpYtrT1TMu/NnZkO
+ NlHPVKAZNt78LPpY154Fhez0Gby96gMNsYPOQrNEhu4qyeXlt5DPZE7lx6ncBEG+Hgjd6H
+ 4xi2Y4qCTeLyHh7WhGPzzVdB4CgbBxzzequFnEQ10T9rHxJ5Uc5T2ef/MyVaPFkxC8+NGM
+ 6dG7OihfFgn/BirhLuV/q4UufUN7CeJRIQX1a9Hd+08+dQdIbCKCQalMAadmtIXM+g7sxT
+ 67nHSR2YsPoek3k+CwcEuJfrmGlWdJBhi3I2Qc98jVhvnK0XmjycJXKtd2wvyg==
+From: Steffen Dirkwinkel <lists@steffen.cc>
+To: u-boot@lists.denx.de
+Cc: Steffen Dirkwinkel <s.dirkwinkel@beckhoff.com>,
+ Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Johan Jonker <jbx6244@gmail.com>,
+ Michal Simek <michal.simek@amd.com>, Peng Fan <peng.fan@nxp.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 4/5] mmc: zynq_sdhci: disable OTAPDLYENA
+Date: Fri, 23 Feb 2024 15:06:12 +0100
+Message-Id: <20240223140613.1240570-4-lists@steffen.cc>
+In-Reply-To: <20240223140613.1240570-1-lists@steffen.cc>
+References: <20240223140613.1240570-1-lists@steffen.cc>
 MIME-Version: 1.0
-References: <20240223091143.9561-1-francesco@dolcini.it>
-In-Reply-To: <20240223091143.9561-1-francesco@dolcini.it>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 23 Feb 2024 10:41:06 -0300
-Message-ID: <CAOMZO5AshES83w9HqYoLS1UzBhs7FJpzvF8FbRvOfXgCoSrDzw@mail.gmail.com>
-Subject: Re: [PATCH v2 0/7] toradex: fix reset and hardware detection
- regressions
-To: Francesco Dolcini <francesco@dolcini.it>
-Cc: Stefano Babic <sbabic@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, Tom Rini <trini@konsulko.com>, 
- Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>, 
- Francesco Dolcini <francesco.dolcini@toradex.com>, u-boot@lists.denx.de, 
- Sahaj Sarup <sahaj.sarup@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: 4ThBdl6Bdlz9sp1
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,38 +75,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Feb 23, 2024 at 6:11=E2=80=AFAM Francesco Dolcini <francesco@dolcin=
-i.it> wrote:
->
-> From: Francesco Dolcini <francesco.dolcini@toradex.com>
->
-> This series fixes two regressions affecting multiple Toradex boards
-> (i.MX, TI and TEGRA based) and targets the current master, e.g. v2024.04
-> release.
->
-> U-Boot `reset` command is broken on all Tordex i.MX6* based SoMs since
-> v2023.07, this series fixes it enabling the `wdt-reboot` driver.
->
-> Since v2024.04-rc1 reading the Toradex configuration block is not working
-> properly anymore, the serial number and the hardware version are not read
-> correctly, preventing the board from functioning correctly (wrong mac add=
-ress,
-> wrong DT, ...). This is fixed by reading the config block in `EVT_SETTING=
-S_R`
-> and adding a toradex sysinfo driver. In addition to that, we now use a ra=
-ndom
-> mac address in case the config block is invalid.
->
->
-> Reported-by: Sahaj Sarup <sahaj.sarup@linaro.org>
-> Closes: https://lore.kernel.org/all/CAKZ1LvM45MB8N0CqgU+C7i9=3DBjb6kqNTxW=
-o2Tv407HKLWtCMkA@mail.gmail.com/
-> Reported-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
-> Closes: https://lore.kernel.org/all/e40ed93bd8f371ec56b8fc451dcb458f3ce6d=
-cba.camel@toradex.com/
-> Reported-by: Francesco Dolcini <francesco@dolcini.it>
-> Closes: https://lore.kernel.org/all/ZY2ZDWAQuTlRjV9H@francesco-nb/
+From: Steffen Dirkwinkel <s.dirkwinkel@beckhoff.com>
 
-For the series:
+This ports a change from arm-trusted-firmware:
+commit: fe1fa205fca4d1dd4a1b1755942956dbca65d573 in arm-trusted-firmware
+(https://github.com/ARM-software/arm-trusted-firmware/commit/fe1fa205fca4d1dd4a1b1755942956dbca65d573)
+The ITAPDLYENA change is in another commit.
 
-Reviewed-by: Fabio Estevam <festevam@gmail.com>
+We shouldn't have different behavior for u-boot-SPL and u-boot so let's
+use the same logic here.
+
+Message from arm-trusted-firmware:
+plat: zynqmp: Disable ITAPDLYENA bit for zero ITAP delay
+
+This patch disable the ITAPDLYENA bit for ITAP delay value zero.
+As per IP design, it is recommended to disable the ITAPDLYENA bit
+before auto-tuning.
+Also disable OTAPDLYENA bit always as there is one issue in RTL
+where SD0_OTAPDLYENA has been wrongly connected to both SD0 and SD1
+controllers. Hence it is recommended to disable OTAPDLYENA bit always
+for both the controllers.
+
+Signed-off-by: Steffen Dirkwinkel <s.dirkwinkel@beckhoff.com>
+---
+
+ drivers/mmc/zynq_sdhci.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/drivers/mmc/zynq_sdhci.c b/drivers/mmc/zynq_sdhci.c
+index 79bb8ba66d9..06b782eb79a 100644
+--- a/drivers/mmc/zynq_sdhci.c
++++ b/drivers/mmc/zynq_sdhci.c
+@@ -45,6 +45,7 @@
+ #define SD1_TAP_OFFSET			16
+ #define SD0_ITAPCHGWIN			BIT(9)
+ #define SD0_ITAPDLYENA			BIT(8)
++#define SD0_OTAPDLYENA			BIT(6)
+ #define SD0_ITAPDLYSEL_MASK		GENMASK(7, 0)
+ #define SD0_OTAPDLYSEL_MASK		GENMASK(5, 0)
+ 
+@@ -316,6 +317,7 @@ static inline int arasan_zynqmp_set_in_tapdelay(u32 node_id, u32 itap_delay)
+ 
+ static inline int arasan_zynqmp_set_out_tapdelay(u32 node_id, u32 otap_delay)
+ {
++	int ret;
+ 	u32 shift;
+ 
+ 	if (node_id == NODE_SD_0)
+@@ -326,6 +328,12 @@ static inline int arasan_zynqmp_set_out_tapdelay(u32 node_id, u32 otap_delay)
+ 		return -EINVAL;
+ 
+ 	if (IS_ENABLED(CONFIG_SPL_BUILD) || current_el() == 3) {
++		ret = zynqmp_mmio_write(SD_OTAP_DLY,
++					SD0_OTAPDLYENA << shift,
++					0);
++		if (ret)
++			return ret;
++
+ 		return zynqmp_mmio_write(SD_OTAP_DLY,
+ 						SD0_OTAPDLYSEL_MASK << shift,
+ 						otap_delay << shift);
+-- 
+2.39.2
+
