@@ -4,51 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61806C5478C
-	for <u-boot@archiver.kernel.org>; Fri, 23 Feb 2024 09:20:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88594C5478C
+	for <u-boot@archiver.kernel.org>; Fri, 23 Feb 2024 09:21:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F11A87D09;
-	Fri, 23 Feb 2024 10:08:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
+	by phobos.denx.de (Postfix) with ESMTP id D8975878A1;
+	Fri, 23 Feb 2024 10:13:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="GdJI8FIT";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 03DA3879DF; Fri, 23 Feb 2024 10:06:33 +0100 (CET)
-Received: from smtp-bc0d.mail.infomaniak.ch (smtp-bc0d.mail.infomaniak.ch
- [45.157.188.13])
+ id 8BA8087D5E; Fri, 23 Feb 2024 10:12:59 +0100 (CET)
+Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE48B87BE0
- for <u-boot@lists.denx.de>; Fri, 23 Feb 2024 10:06:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 57CCD8791E
+ for <u-boot@lists.denx.de>; Fri, 23 Feb 2024 10:12:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=0leil.net
+ dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-3-0000.mail.infomaniak.ch (smtp-3-0000.mail.infomaniak.ch
- [10.4.36.107])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Th3yq5H2zz1Bb7;
- Fri, 23 Feb 2024 10:06:11 +0100 (CET)
-Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4Th3yp6c44z3b; Fri, 23 Feb 2024 10:06:10 +0100 (CET)
-From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Fri, 23 Feb 2024 10:06:02 +0100
-Subject: [PATCH v2 15/16] button: add missing ADC dependency for BUTTON_ADC
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from francesco-nb.pivistrello.it (93-49-2-63.ip317.fastwebnet.it
+ [93.49.2.63])
+ by mail11.truemail.it (Postfix) with ESMTPA id BCFBD21198;
+ Fri, 23 Feb 2024 10:11:57 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
+ s=default; t=1708679518;
+ bh=HWPXJ+1ulsrUIIsy4IJPomFQHVaD71bhql7sGN2L+X8=; h=From:To:Subject;
+ b=GdJI8FITCY5R5PcMXIPuwx12sulEoaZxIRw335znlSVIpDsgI6AID+m4tJB2vxO1u
+ BSIC7VgkbgVxbtwV8UTg2VIHoXfnUfwUCy0ur7mlxC7TDIJNAhBkbuOXX7ArOnKz/s
+ TnkC3XULNmVUMTt1U2CEuAsXZoTqPa2icYyVm7Y4YM3qiqKERcjHY04JCe/qpE7Zt/
+ 9yTrdGMnzRAZZlWy3Da+mhNRgLraACTt0iPTSiHh8Q6mMo6wmk60MW+cGTAgkDnEzh
+ 9tZkRvrJUtpRwvE4b49gfRURUqC128sKFaSZQWZnT8vYS480jHU5T88oIdFV/7sNJD
+ xja8sD+/UaoUQ==
+From: Francesco Dolcini <francesco@dolcini.it>
+To: Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, u-boot@lists.denx.de,
+ Francesco Dolcini <francesco.dolcini@toradex.com>
+Subject: [PATCH v2 1/7] toradex: Fix recursive call to checkboard
+Date: Fri, 23 Feb 2024 10:11:37 +0100
+Message-Id: <20240223091143.9561-2-francesco@dolcini.it>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240223091143.9561-1-francesco@dolcini.it>
+References: <20240223091143.9561-1-francesco@dolcini.it>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240223-rk3588-saradc-v2-15-11c046b7e94a@theobroma-systems.com>
-References: <20240223-rk3588-saradc-v2-0-11c046b7e94a@theobroma-systems.com>
-In-Reply-To: <20240223-rk3588-saradc-v2-0-11c046b7e94a@theobroma-systems.com>
-To: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Kever Yang <kever.yang@rock-chips.com>, 
- Klaus Goger <klaus.goger@theobroma-systems.com>, 
- Heiko Stuebner <heiko.stuebner@cherry.de>
-Cc: u-boot@lists.denx.de, 
- Quentin Schulz <quentin.schulz@theobroma-systems.com>, 
- Quentin Schulz <foss+uboot@0leil.net>
-X-Mailer: b4 0.13.0
-X-Infomaniak-Routing: alpha
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,34 +67,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 
-The BUTTON_ADC symbol guards the compilation of button-adc driver whose
-name very well makes it explicit that it requires ADC support to be
-enabled.
+Since checkboard() is used instead of show_board_info(), in case toradex
+config block is missing or malformed, checkboard is recursively called.
+It prints a long list of "MISSING TORADEX CONFIG BLOCK" till the stack
+is full.
 
-Fix build issue of button-adc driver when ADC support isn't enabled by
-making sure it cannot be built without ADC support.
-
-Cc: Quentin Schulz <foss+uboot@0leil.net>
-Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+Fixes: edb0ecd18708 ("toradex: Use checkboard() instead of show_board_info()")
+Acked-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+Tested-by: Marcel Ziswiler <marcel.ziswiler@toradex.com> # Verdin iMX8M Plus
+Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
+Signed-off-by: Francesco Dolcini <francesco.dolcini@toradex.com>
 ---
- drivers/button/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+ board/toradex/common/tdx-common.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/drivers/button/Kconfig b/drivers/button/Kconfig
-index 097b05f822e..3918b05ae03 100644
---- a/drivers/button/Kconfig
-+++ b/drivers/button/Kconfig
-@@ -12,6 +12,7 @@ config BUTTON
- config BUTTON_ADC
- 	bool "Button adc"
- 	depends on BUTTON
-+	depends on ADC
- 	help
- 	  Enable support for buttons which are connected to Analog to Digital
- 	  Converter device. The ADC driver must use driver model. Buttons are
-
+diff --git a/board/toradex/common/tdx-common.c b/board/toradex/common/tdx-common.c
+index ed8f0a6a4756..ddc4a175da68 100644
+--- a/board/toradex/common/tdx-common.c
++++ b/board/toradex/common/tdx-common.c
+@@ -103,7 +103,6 @@ int tdx_checkboard(void)
+ 	if (read_tdx_cfg_block()) {
+ 		printf("MISSING TORADEX CONFIG BLOCK\n");
+ 		get_mac_from_serial(tdx_serial, &tdx_eth_addr);
+-		checkboard();
+ 	} else {
+ 		snprintf(tdx_serial_str, sizeof(tdx_serial_str),
+ 			 "%08u", tdx_serial);
 -- 
-2.43.2
+2.39.2
 
