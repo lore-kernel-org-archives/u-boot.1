@@ -4,44 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5696AC54798
-	for <u-boot@archiver.kernel.org>; Fri, 23 Feb 2024 12:01:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABCC8C54798
+	for <u-boot@archiver.kernel.org>; Fri, 23 Feb 2024 13:40:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 751C9863D3;
-	Fri, 23 Feb 2024 13:01:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
+	by phobos.denx.de (Postfix) with ESMTP id DF6BA87BAF;
+	Fri, 23 Feb 2024 14:40:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="vKLfi9hn";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Q/9aM0+X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E816878E9; Fri, 23 Feb 2024 13:01:32 +0100 (CET)
-Received: from mail.thorsis.com (mail.thorsis.com [92.198.35.195])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2970787B84; Fri, 23 Feb 2024 14:40:55 +0100 (CET)
+Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
+ [IPv6:2607:f8b0:4864:20::1033])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB887807EC
- for <u-boot@lists.denx.de>; Fri, 23 Feb 2024 13:01:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=thorsis.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
-From: Alexander Dahl <ada@thorsis.com>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=default;
- t=1708689683;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:content-transfer-encoding:content-transfer-encoding;
- bh=rPJbOzN4YPFcDA0DSnbYrAo8u2tbcDVjN6v6k23oc6M=;
- b=vKLfi9hnRmA2mVIkJztns27b/lSUz9fUu/7JaSryWG50GvENjuhqUVD0uz8RE3MVVfplgi
- 3FOS9wbh5HRNph0ghqfQeDXZpo6aLnDGaneWCd3DoIPZnHn0Oy9YO8+KWxlL863jaVdrnH
- uvAmnI16cnUZ3kFKQu6WcYhmu2camo3KhsS/5cbIWyWenKSdry5YZNz0uJ/T02McNcSeQ3
- XCTzzrvw4WIpSIE75zrEoobTeNUseedqO+9e1I+ehQ3z60SqldwQp0ztRwXyhtSsrVmiAc
- 5jlh4W5fmsqGXW6CwMoBbKntrQv46mny/qcilA+MeAJ0TjmsjIfGYw6ZtMouKA==
-To: u-boot@lists.denx.de
-Cc: Lukasz Majewski <lukma@denx.de>, Peng Fan <peng.fan@nxp.com>,
+ by phobos.denx.de (Postfix) with ESMTPS id C9696879DF
+ for <u-boot@lists.denx.de>; Fri, 23 Feb 2024 14:40:40 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x1033.google.com with SMTP id
+ 98e67ed59e1d1-29a5ed64502so62040a91.0
+ for <u-boot@lists.denx.de>; Fri, 23 Feb 2024 05:40:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1708695639; x=1709300439; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=rUw6ChargoMs9kN666h+7LjFL0e4e2L9iDE/NjzvXPs=;
+ b=Q/9aM0+XDyoEDYlFmv3OXTCM69n+PV61p75hPxJtKrtoZ9cNGGLzOwLwOBPgd1rPQp
+ KOcmnyF9T/IvNZzF99lKrXJuhryg35l2VnCbj5gRLBLObEMdXx7rn/Rt/Lwyxhj+4oPs
+ 1FjJjv2/pKDqVAkKLfCQPSP8GshBeR7jV3CSCQ+Qu0nYVJyhbskI5rz0GSxPd2vsrTMj
+ p6WvuPg/PpjxXbbKXYJXG6beyo9yeKdp8oDQvGPT37js8IfWjHuXj6j7S/HPqFeW4fVj
+ TL0ggYWJ3ZqYbHGPZrRNyAdHyBpn2nA7Thg3mNdQTAgLxd6SqTQKb4uuMOXO8zb3J7pX
+ M7mg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1708695639; x=1709300439;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=rUw6ChargoMs9kN666h+7LjFL0e4e2L9iDE/NjzvXPs=;
+ b=fyN+Tw71a/3G685Jrjt9cCEfFpFlWkhq7gQt5HxSLPKmtqc0jT4Rxll8tjH3DhWb/3
+ xTF4bGBIITSrkxYfzRB0eBHs1IROqzS2jq+cYzpXxPFHN4gXP1xtpXMxNZADSDAGKRSP
+ kwOAqqtnrQMPYEEPks7JcxSrXEDnnJ7qSYemwUBoI18ju6z4/G6yzFnnvTOdK79aCcCe
+ 8wTb4PipZsxlbhc3+SxCi+AAmeJtbszctKojVdyN94a3DbrNoyFECqDikBRpgRIoCbLf
+ Bm0Aj5qrAeYzRobWH9T1QT9yea2+ydhZXcRCt2khkRopJSuzG+D2zZie42myfGYSwtvC
+ Y/3Q==
+X-Gm-Message-State: AOJu0YwzVxJMQGre5rcIfTQgxkc/amZ/1Piw0TekbqTdlrB4Cbi28Oyq
+ cueNpoYAukVqV+jq/XCcMJClsMdffwITjg2t0kdL3sszJHqVdLxtobE+IgkAPgS+4EEKVEE/yP6
+ ghxPYzPN3SvLppN31cB58ab2/Lus=
+X-Google-Smtp-Source: AGHT+IGxsRklsbQ8Ug8GMnQfab4jinUR8Td4D832g0+wgidOBPvyMJyA+T3yRzk6Pc8xuLJN9PzwKrF7QIxho5nRHFM=
+X-Received: by 2002:a17:90a:154c:b0:299:2c43:cd96 with SMTP id
+ y12-20020a17090a154c00b002992c43cd96mr1598885pja.0.1708695638968; Fri, 23 Feb
+ 2024 05:40:38 -0800 (PST)
+MIME-Version: 1.0
+References: <20240223112804.15559-1-sebastien.szymanski@armadeus.com>
+In-Reply-To: <20240223112804.15559-1-sebastien.szymanski@armadeus.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 23 Feb 2024 10:40:29 -0300
+Message-ID: <CAOMZO5DvsLsFHdAb40VT_af+eT1=W6HYAZyDKKyrF2Gixg+3qQ@mail.gmail.com>
+Subject: Re: [PATCH 1/1] opos6uldev: Convert to watchdog driver model
+To: =?UTF-8?Q?S=C3=A9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>
+Cc: u-boot@lists.denx.de, Stefano Babic <sbabic@denx.de>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH] clk: Revise help text for clk_get_parent_rate()
-Date: Fri, 23 Feb 2024 13:01:20 +0100
-Message-Id: <20240223120120.1605788-1-ada@thorsis.com>
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -58,30 +88,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The function returns the rate of the parent clock, the previous text
-made no sense at all.
+On Fri, Feb 23, 2024 at 8:28=E2=80=AFAM S=C3=A9bastien Szymanski
+<sebastien.szymanski@armadeus.com> wrote:
+>
+> Commit 68dcbdd594d4 ("ARM: imx: Add weak default reset_cpu()") caused
+> the 'reset' command in U-Boot to not cause a board reset.
+>
+> Fix it by switching to the watchdog driver model via sysreset, which
+> is the preferred method for implementing the watchdog reset.
+>
+> Signed-off-by: S=C3=A9bastien Szymanski <sebastien.szymanski@armadeus.com=
+>
 
-Fixes: 4aa78300a025 ("dm: clk: Define clk_get_parent_rate() for clk operations")
-Signed-off-by: Alexander Dahl <ada@thorsis.com>
----
- include/clk.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/include/clk.h b/include/clk.h
-index af23e4f3475..045e923a529 100644
---- a/include/clk.h
-+++ b/include/clk.h
-@@ -444,7 +444,7 @@ ulong clk_get_rate(struct clk *clk);
- struct clk *clk_get_parent(struct clk *clk);
- 
- /**
-- * clk_get_parent_rate() - Get parent of current clock rate.
-+ * clk_get_parent_rate() - Get rate of current clock's parent.
-  * @clk:	A clock struct that was previously successfully requested by
-  *		clk_request/get_by_*().
-  *
-
-base-commit: 7bb761c42d75b2ebacc7190a76cc5385cbba1045
--- 
-2.39.2
-
+Reviewed-by: Fabio Estevam <festevam@gmail.com>
