@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1166EC48BC4
-	for <u-boot@archiver.kernel.org>; Fri, 23 Feb 2024 09:22:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B58C8C5478C
+	for <u-boot@archiver.kernel.org>; Fri, 23 Feb 2024 09:23:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C63187D26;
-	Fri, 23 Feb 2024 10:13:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6DF1887D15;
+	Fri, 23 Feb 2024 10:14:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="ROvFkzos";
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="miKXRyBu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D38128795D; Fri, 23 Feb 2024 10:13:17 +0100 (CET)
+ id 401D3807EC; Fri, 23 Feb 2024 10:13:31 +0100 (CET)
 Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 56D7E8786A
+ by phobos.denx.de (Postfix) with ESMTPS id B744C87D08
  for <u-boot@lists.denx.de>; Fri, 23 Feb 2024 10:12:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=dolcini.it
@@ -27,26 +27,28 @@ Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=francesco@dolcini.it
 Received: from francesco-nb.pivistrello.it (93-49-2-63.ip317.fastwebnet.it
  [93.49.2.63])
- by mail11.truemail.it (Postfix) with ESMTPA id 2750D211B3;
- Fri, 23 Feb 2024 10:11:58 +0100 (CET)
+ by mail11.truemail.it (Postfix) with ESMTPA id 7D9A6219F5;
+ Fri, 23 Feb 2024 10:11:59 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1708679518;
- bh=N18MhPBjUIdd5PJubPGzwvh+smRmh+3gBcU2rNys0hY=; h=From:To:Subject;
- b=ROvFkzos95gNw0WNyN1TLkL1wZZsLHzsZJ+5VEkto1Pm/quFLMaSK0OCrwlGL+5L9
- 0ldlJfkaVlsRZ3kmZz78iiMXrZzGRvhqIr4etUgyAVdeVhnrBiBa5NpSjEBNIVpsRL
- 7IgmI5kNtj7gLIVKRrW+Ix1M4ythQcYe22GYxSQXAx0fY36Q7DVybnzwDG+Xf0fVLj
- isnhGiSDxyKSmlA2VafZoJceyp/m48EuUkEIt2z0cD779rN8KQI3D77HCrca0LzFFc
- sznAcPdbhxlmmbioFL2h2dW1N0uJSP8tZDAO1Asqg/n5wrGQ2lso/zxpaiBaHlQHAb
- J4ZeJ/50wj+pg==
+ s=default; t=1708679519;
+ bh=ED7pUs3GQKZI2nv5cpqYwCmEn5bbSGav3z2jA7XTZYQ=; h=From:To:Subject;
+ b=miKXRyBueIUtuUhuebN+DzTloRJnYmT/Gazey0ADUBF4KI+GxCbvr2nLR9MRGPPJc
+ vm+U67YAo3QHd2NHCCQ1JZ4J8xbbC8aams45AyAQQnZpZzIsC5TNmjcRsczw4dscFj
+ /aeyap+K+zts692najs0dZrcCk4UAHIH8hInF3rJw38DjzsOR9W9kVItFaTkCFYaEr
+ C8jTbwdtgGrSEgiaVkiWODW0SxqKYXhMzTHV7uFvXe2OsEv+hxld2B33DNA35KPsna
+ DMlh9UBGKFt3Swx3hMQT77fOA+zFVMa3zShhO3cwz2RgLR+V88vWHlHvOAtMnJRFHn
+ wy3FpAro4j+lw==
 From: Francesco Dolcini <francesco@dolcini.it>
-To: Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Tom Rini <trini@konsulko.com>
+To: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Tom Rini <trini@konsulko.com>, Thierry Reding <treding@nvidia.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>
 Cc: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, u-boot@lists.denx.de,
  Francesco Dolcini <francesco.dolcini@toradex.com>
-Subject: [PATCH v2 2/7] toradex: Remove not necessary model prints from
- checkboard()
-Date: Fri, 23 Feb 2024 10:11:38 +0100
-Message-Id: <20240223091143.9561-3-francesco@dolcini.it>
+Subject: [PATCH v2 5/7] toradex: common: Add sysinfo driver
+Date: Fri, 23 Feb 2024 10:11:41 +0100
+Message-Id: <20240223091143.9561-6-francesco@dolcini.it>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240223091143.9561-1-francesco@dolcini.it>
 References: <20240223091143.9561-1-francesco@dolcini.it>
@@ -70,312 +72,361 @@ X-Virus-Status: Clean
 
 From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 
-Sysinfo prints the model obtained from device tree, checkboard()
-take info from hardware and tdx_checkboard() use the model retrieved by
-toradex config block.
-
-Remove the print from checkboard() function because the model obtained
-from toradex config block is the most complete.
-If toradex config block is missing the model info from device tree is
-enough.
+This commit introduces support for the Toradex sysinfo driver in U-Boot,
+which uses information from Toradex config block to print correct
+board model.
+In case the Toradex config block is not present sysinfo prints the model
+of the board provided by device tree removing per board specific prints.
 
 Acked-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
 Tested-by: Marcel Ziswiler <marcel.ziswiler@toradex.com> # Verdin iMX8M Plus
 Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 Signed-off-by: Francesco Dolcini <francesco.dolcini@toradex.com>
 ---
- board/toradex/apalis-imx8/apalis-imx8.c       | 10 ---------
- board/toradex/apalis-tk1/apalis-tk1.c         |  7 -------
- board/toradex/apalis_imx6/apalis_imx6.c       | 21 -------------------
- board/toradex/apalis_t30/apalis_t30.c         |  8 -------
- .../toradex/colibri-imx6ull/colibri-imx6ull.c |  7 -------
- board/toradex/colibri-imx8x/colibri-imx8x.c   | 10 ---------
- board/toradex/colibri_imx6/colibri_imx6.c     | 20 ------------------
- board/toradex/colibri_imx7/colibri_imx7.c     |  8 -------
- board/toradex/colibri_t20/colibri_t20.c       | 10 ---------
- board/toradex/colibri_t30/colibri_t30.c       |  7 -------
- board/toradex/colibri_vf/colibri_vf.c         | 10 ---------
- board/toradex/common/tdx-common.c             |  9 +++++++-
- board/toradex/common/tdx-common.h             |  1 -
- 13 files changed, 8 insertions(+), 120 deletions(-)
+ arch/arm/dts/fsl-imx8qm-apalis-u-boot.dtsi    |  6 +++
+ arch/arm/dts/fsl-imx8qxp-colibri-u-boot.dtsi  |  6 +++
+ .../dts/imx6dl-colibri-eval-v3-u-boot.dtsi    |  4 ++
+ arch/arm/dts/imx6q-apalis-eval-u-boot.dtsi    |  4 ++
+ .../dts/imx6ull-colibri-eval-v3-u-boot.dtsi   |  4 ++
+ .../arm/dts/imx7d-colibri-eval-v3-u-boot.dtsi |  4 ++
+ .../dts/imx8mm-verdin-wifi-dev-u-boot.dtsi    |  4 ++
+ .../dts/imx8mp-verdin-wifi-dev-u-boot.dtsi    |  4 ++
+ .../dts/k3-am625-verdin-wifi-dev-u-boot.dtsi  |  4 ++
+ arch/arm/dts/tegra124-apalis-u-boot.dtsi      | 12 +++++
+ arch/arm/dts/tegra20-colibri-u-boot.dtsi      | 12 +++++
+ arch/arm/dts/tegra30-apalis-u-boot.dtsi       | 12 +++++
+ arch/arm/dts/tegra30-colibri-u-boot.dtsi      | 12 +++++
+ .../arm/dts/vf610-colibri-eval-v3-u-boot.dtsi |  4 ++
+ board/toradex/common/Kconfig                  |  1 +
+ board/toradex/common/tdx-common.c             | 50 ++++++++++++++++---
+ 16 files changed, 136 insertions(+), 7 deletions(-)
+ create mode 100644 arch/arm/dts/tegra124-apalis-u-boot.dtsi
+ create mode 100644 arch/arm/dts/tegra20-colibri-u-boot.dtsi
+ create mode 100644 arch/arm/dts/tegra30-apalis-u-boot.dtsi
+ create mode 100644 arch/arm/dts/tegra30-colibri-u-boot.dtsi
 
-diff --git a/board/toradex/apalis-imx8/apalis-imx8.c b/board/toradex/apalis-imx8/apalis-imx8.c
-index b351ce64abfc..2483a63c6733 100644
---- a/board/toradex/apalis-imx8/apalis-imx8.c
-+++ b/board/toradex/apalis-imx8/apalis-imx8.c
-@@ -208,16 +208,6 @@ void board_preboot_os(void)
- 	gpio_direction_output(BKL1_GPIO, 0);
- }
+diff --git a/arch/arm/dts/fsl-imx8qm-apalis-u-boot.dtsi b/arch/arm/dts/fsl-imx8qm-apalis-u-boot.dtsi
+index c54a59e89c5d..d73be74d2112 100644
+--- a/arch/arm/dts/fsl-imx8qm-apalis-u-boot.dtsi
++++ b/arch/arm/dts/fsl-imx8qm-apalis-u-boot.dtsi
+@@ -3,6 +3,12 @@
+  * Copyright 2019 Toradex AG
+  */
  
--int checkboard(void)
--{
--	puts("Model: Toradex Apalis iMX8\n");
--
--	build_info();
--	print_bootinfo();
--
--	return tdx_checkboard();
--}
--
- static enum pcb_rev_t get_pcb_revision(void)
- {
- 	unsigned int pcb_vers = 0;
-diff --git a/board/toradex/apalis-tk1/apalis-tk1.c b/board/toradex/apalis-tk1/apalis-tk1.c
-index 79a1c92da0a0..ee87d9f4145f 100644
---- a/board/toradex/apalis-tk1/apalis-tk1.c
-+++ b/board/toradex/apalis-tk1/apalis-tk1.c
-@@ -91,13 +91,6 @@ int arch_misc_init(void)
- 	return 0;
- }
++/ {
++	sysinfo {
++		compatible = "toradex,sysinfo";
++	};
++};
++
+ &mu {
+ 	bootph-some-ram;
+ };
+diff --git a/arch/arm/dts/fsl-imx8qxp-colibri-u-boot.dtsi b/arch/arm/dts/fsl-imx8qxp-colibri-u-boot.dtsi
+index 6ab6b1f9ee69..60c4cd6fc01f 100644
+--- a/arch/arm/dts/fsl-imx8qxp-colibri-u-boot.dtsi
++++ b/arch/arm/dts/fsl-imx8qxp-colibri-u-boot.dtsi
+@@ -3,6 +3,12 @@
+  * Copyright 2019 Toradex AG
+  */
  
--int checkboard(void)
--{
--	puts("Model: Toradex Apalis TK1 2GB\n");
--
--	return tdx_checkboard();
--}
--
- #if defined(CONFIG_OF_LIBFDT) && defined(CONFIG_OF_BOARD_SETUP)
- int ft_board_setup(void *blob, struct bd_info *bd)
- {
-diff --git a/board/toradex/apalis_imx6/apalis_imx6.c b/board/toradex/apalis_imx6/apalis_imx6.c
-index 164fcc41f550..0da245374a0d 100644
---- a/board/toradex/apalis_imx6/apalis_imx6.c
-+++ b/board/toradex/apalis_imx6/apalis_imx6.c
-@@ -716,27 +716,6 @@ int board_late_init(void)
- }
- #endif /* CONFIG_BOARD_LATE_INIT */
++/ {
++	sysinfo {
++		compatible = "toradex,sysinfo";
++	};
++};
++
+ &{/imx8qx-pm} {
  
--int checkboard(void)
--{
--	char it[] = " IT";
--	int minc, maxc;
--
--	switch (get_cpu_temp_grade(&minc, &maxc)) {
--	case TEMP_AUTOMOTIVE:
--	case TEMP_INDUSTRIAL:
--		break;
--	case TEMP_EXTCOMMERCIAL:
--	default:
--		it[0] = 0;
--	};
--	printf("Model: Toradex Apalis iMX6 %s %s%s\n",
--	       is_cpu_type(MXC_CPU_MX6D) ? "Dual" : "Quad",
--	       (gd->ram_size == 0x80000000) ? "2GB" :
--	       (gd->ram_size == 0x40000000) ? "1GB" : "512MB", it);
--
--	return tdx_checkboard();
--}
--
- #if defined(CONFIG_OF_LIBFDT) && defined(CONFIG_OF_BOARD_SETUP)
- int ft_board_setup(void *blob, struct bd_info *bd)
- {
-diff --git a/board/toradex/apalis_t30/apalis_t30.c b/board/toradex/apalis_t30/apalis_t30.c
-index b9a2af33f19f..b10beb447965 100644
---- a/board/toradex/apalis_t30/apalis_t30.c
-+++ b/board/toradex/apalis_t30/apalis_t30.c
-@@ -45,14 +45,6 @@ int arch_misc_init(void)
- 	return 0;
- }
+ 	bootph-some-ram;
+diff --git a/arch/arm/dts/imx6dl-colibri-eval-v3-u-boot.dtsi b/arch/arm/dts/imx6dl-colibri-eval-v3-u-boot.dtsi
+index 0eea4d1862ae..5a91d0aca204 100644
+--- a/arch/arm/dts/imx6dl-colibri-eval-v3-u-boot.dtsi
++++ b/arch/arm/dts/imx6dl-colibri-eval-v3-u-boot.dtsi
+@@ -16,6 +16,10 @@
+ 		mmc0 = &usdhc3;
+ 		mmc1 = &usdhc1;
+ 	};
++
++	sysinfo {
++		compatible = "toradex,sysinfo";
++	};
+ };
  
--int checkboard(void)
--{
--	printf("Model: Toradex Apalis T30 %dGB\n",
--	       (gd->ram_size == 0x40000000) ? 1 : 2);
--
--	return tdx_checkboard();
--}
--
- #if defined(CONFIG_OF_LIBFDT) && defined(CONFIG_OF_BOARD_SETUP)
- int ft_board_setup(void *blob, struct bd_info *bd)
- {
-diff --git a/board/toradex/colibri-imx6ull/colibri-imx6ull.c b/board/toradex/colibri-imx6ull/colibri-imx6ull.c
-index a775f54eb3f4..9b9fb342c9d9 100644
---- a/board/toradex/colibri-imx6ull/colibri-imx6ull.c
-+++ b/board/toradex/colibri-imx6ull/colibri-imx6ull.c
-@@ -205,13 +205,6 @@ int board_late_init(void)
- 	return 0;
- }
+ &wdog1 {
+diff --git a/arch/arm/dts/imx6q-apalis-eval-u-boot.dtsi b/arch/arm/dts/imx6q-apalis-eval-u-boot.dtsi
+index 3c6e503d043b..59412635420a 100644
+--- a/arch/arm/dts/imx6q-apalis-eval-u-boot.dtsi
++++ b/arch/arm/dts/imx6q-apalis-eval-u-boot.dtsi
+@@ -19,6 +19,10 @@
+ 		mmc1 = &usdhc1;
+ 		mmc2 = &usdhc2;
+ 	};
++
++	sysinfo {
++		compatible = "toradex,sysinfo";
++	};
+ };
  
--int checkboard(void)
--{
--	printf("Model: Toradex Colibri iMX6ULL\n");
--
--	return tdx_checkboard();
--}
--
- #if defined(CONFIG_OF_LIBFDT) && defined(CONFIG_OF_BOARD_SETUP)
- int ft_board_setup(void *blob, struct bd_info *bd)
- {
-diff --git a/board/toradex/colibri-imx8x/colibri-imx8x.c b/board/toradex/colibri-imx8x/colibri-imx8x.c
-index d8cc72f323c5..2c673a4a6b06 100644
---- a/board/toradex/colibri-imx8x/colibri-imx8x.c
-+++ b/board/toradex/colibri-imx8x/colibri-imx8x.c
-@@ -114,16 +114,6 @@ int board_phy_config(struct phy_device *phydev)
- }
- #endif
+ &wdog1 {
+diff --git a/arch/arm/dts/imx6ull-colibri-eval-v3-u-boot.dtsi b/arch/arm/dts/imx6ull-colibri-eval-v3-u-boot.dtsi
+index 6823b42d4514..731814216e1f 100644
+--- a/arch/arm/dts/imx6ull-colibri-eval-v3-u-boot.dtsi
++++ b/arch/arm/dts/imx6ull-colibri-eval-v3-u-boot.dtsi
+@@ -9,6 +9,10 @@
+ 		usb0 = &usbotg1; /* required for ums */
+ 		display0 = &lcdif;
+ 	};
++
++	sysinfo {
++		compatible = "toradex,sysinfo";
++	};
+ };
  
--int checkboard(void)
--{
--	puts("Model: Toradex Colibri iMX8X\n");
--
--	build_info();
--	print_bootinfo();
--
--	return tdx_checkboard();
--}
--
- static void select_dt_from_module_version(void)
- {
- 	/*
-diff --git a/board/toradex/colibri_imx6/colibri_imx6.c b/board/toradex/colibri_imx6/colibri_imx6.c
-index 784ca7f65f7b..ce19a9c79752 100644
---- a/board/toradex/colibri_imx6/colibri_imx6.c
-+++ b/board/toradex/colibri_imx6/colibri_imx6.c
-@@ -636,26 +636,6 @@ int board_late_init(void)
- }
- #endif /* CONFIG_BOARD_LATE_INIT */
+ &pinctrl_uart1 {
+diff --git a/arch/arm/dts/imx7d-colibri-eval-v3-u-boot.dtsi b/arch/arm/dts/imx7d-colibri-eval-v3-u-boot.dtsi
+index b2c12a413daf..68142769d360 100644
+--- a/arch/arm/dts/imx7d-colibri-eval-v3-u-boot.dtsi
++++ b/arch/arm/dts/imx7d-colibri-eval-v3-u-boot.dtsi
+@@ -11,6 +11,10 @@
+ 		mmc0 = &usdhc3;
+ 		mmc1 = &usdhc1;
+ 	};
++
++	sysinfo {
++		compatible = "toradex,sysinfo";
++	};
+ };
  
--int checkboard(void)
--{
--	char it[] = " IT";
--	int minc, maxc;
--
--	switch (get_cpu_temp_grade(&minc, &maxc)) {
--	case TEMP_AUTOMOTIVE:
--	case TEMP_INDUSTRIAL:
--		break;
--	case TEMP_EXTCOMMERCIAL:
--	default:
--		it[0] = 0;
--	};
--	printf("Model: Toradex Colibri iMX6 %s %sMB%s\n",
--	       is_cpu_type(MXC_CPU_MX6DL) ? "DualLite" : "Solo",
--	       (gd->ram_size == 0x20000000) ? "512" : "256", it);
--
--	return tdx_checkboard();
--}
--
- #if defined(CONFIG_OF_LIBFDT) && defined(CONFIG_OF_BOARD_SETUP)
- int ft_board_setup(void *blob, struct bd_info *bd)
- {
-diff --git a/board/toradex/colibri_imx7/colibri_imx7.c b/board/toradex/colibri_imx7/colibri_imx7.c
-index 2e5b02f72675..c37c5e0af6d9 100644
---- a/board/toradex/colibri_imx7/colibri_imx7.c
-+++ b/board/toradex/colibri_imx7/colibri_imx7.c
-@@ -273,14 +273,6 @@ void reset_cpu(void)
- }
- #endif
+ &lcdif {
+diff --git a/arch/arm/dts/imx8mm-verdin-wifi-dev-u-boot.dtsi b/arch/arm/dts/imx8mm-verdin-wifi-dev-u-boot.dtsi
+index 515f195ab759..38db56059d69 100644
+--- a/arch/arm/dts/imx8mm-verdin-wifi-dev-u-boot.dtsi
++++ b/arch/arm/dts/imx8mm-verdin-wifi-dev-u-boot.dtsi
+@@ -12,6 +12,10 @@
+ 		eeprom2 = &eeprom_display_adapter;
+ 	};
  
--int checkboard(void)
--{
--	printf("Model: Toradex Colibri iMX7%c\n",
--	       is_cpu_type(MXC_CPU_MX7D) ? 'D' : 'S');
--
--	return tdx_checkboard();
--}
--
- #if defined(CONFIG_OF_LIBFDT) && defined(CONFIG_OF_BOARD_SETUP)
- int ft_board_setup(void *blob, struct bd_info *bd)
- {
-diff --git a/board/toradex/colibri_t20/colibri_t20.c b/board/toradex/colibri_t20/colibri_t20.c
-index 5861cf7dc93e..97e33d00f0d6 100644
---- a/board/toradex/colibri_t20/colibri_t20.c
-+++ b/board/toradex/colibri_t20/colibri_t20.c
-@@ -70,16 +70,6 @@ int arch_misc_init(void)
- 	return 0;
- }
++	sysinfo {
++		compatible = "toradex,sysinfo";
++	};
++
+ 	wdt-reboot {
+ 		compatible = "wdt-reboot";
+ 		bootph-pre-ram;
+diff --git a/arch/arm/dts/imx8mp-verdin-wifi-dev-u-boot.dtsi b/arch/arm/dts/imx8mp-verdin-wifi-dev-u-boot.dtsi
+index 67f1d45ce269..03f211d5f7d3 100644
+--- a/arch/arm/dts/imx8mp-verdin-wifi-dev-u-boot.dtsi
++++ b/arch/arm/dts/imx8mp-verdin-wifi-dev-u-boot.dtsi
+@@ -12,6 +12,10 @@
+ 		eeprom2 = &eeprom_display_adapter;
+ 	};
  
--int checkboard(void)
--{
--	printf("Model: Toradex Colibri T20 %dMB V%s\n",
--	       (gd->ram_size == 0x10000000) ? 256 : 512,
--	       (get_nand_dev_by_index(0)->erasesize >> 10 == 512) ?
--	       ((gd->ram_size == 0x10000000) ? "1.1B" : "1.1C") : "1.2A");
--
--	return tdx_checkboard();
--}
--
- #if defined(CONFIG_OF_LIBFDT) && defined(CONFIG_OF_BOARD_SETUP)
- int ft_board_setup(void *blob, struct bd_info *bd)
- {
-diff --git a/board/toradex/colibri_t30/colibri_t30.c b/board/toradex/colibri_t30/colibri_t30.c
-index 8cef098c8e59..0da247de98f9 100644
---- a/board/toradex/colibri_t30/colibri_t30.c
-+++ b/board/toradex/colibri_t30/colibri_t30.c
-@@ -28,13 +28,6 @@ int arch_misc_init(void)
- 	return 0;
- }
++	sysinfo {
++		compatible = "toradex,sysinfo";
++	};
++
+ 	wdt-reboot {
+ 		compatible = "wdt-reboot";
+ 		bootph-pre-ram;
+diff --git a/arch/arm/dts/k3-am625-verdin-wifi-dev-u-boot.dtsi b/arch/arm/dts/k3-am625-verdin-wifi-dev-u-boot.dtsi
+index 02f34c90c6d7..28b697b67ae0 100644
+--- a/arch/arm/dts/k3-am625-verdin-wifi-dev-u-boot.dtsi
++++ b/arch/arm/dts/k3-am625-verdin-wifi-dev-u-boot.dtsi
+@@ -19,6 +19,10 @@
+ 	memory@80000000 {
+ 		bootph-all;
+ 	};
++
++	sysinfo {
++		compatible = "toradex,sysinfo";
++	};
+ };
  
--int checkboard(void)
--{
--	puts("Model: Toradex Colibri T30 1GB\n");
--
--	return tdx_checkboard();
--}
--
- #if defined(CONFIG_OF_LIBFDT) && defined(CONFIG_OF_BOARD_SETUP)
- int ft_board_setup(void *blob, struct bd_info *bd)
- {
-diff --git a/board/toradex/colibri_vf/colibri_vf.c b/board/toradex/colibri_vf/colibri_vf.c
-index af9f2d379cf4..35920008805f 100644
---- a/board/toradex/colibri_vf/colibri_vf.c
-+++ b/board/toradex/colibri_vf/colibri_vf.c
-@@ -366,16 +366,6 @@ int board_init(void)
- 	return 0;
- }
+ &main_timer0 {
+diff --git a/arch/arm/dts/tegra124-apalis-u-boot.dtsi b/arch/arm/dts/tegra124-apalis-u-boot.dtsi
+new file mode 100644
+index 000000000000..a3614d279439
+--- /dev/null
++++ b/arch/arm/dts/tegra124-apalis-u-boot.dtsi
+@@ -0,0 +1,12 @@
++// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
++/*
++ * Copyright 2023 Toradex
++ */
++
++#include "tegra124-u-boot.dtsi"
++
++/ {
++	sysinfo {
++		compatible = "toradex,sysinfo";
++	};
++};
+diff --git a/arch/arm/dts/tegra20-colibri-u-boot.dtsi b/arch/arm/dts/tegra20-colibri-u-boot.dtsi
+new file mode 100644
+index 000000000000..d4a669a288d8
+--- /dev/null
++++ b/arch/arm/dts/tegra20-colibri-u-boot.dtsi
+@@ -0,0 +1,12 @@
++// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
++/*
++ * Copyright 2023 Toradex
++ */
++
++#include "tegra20-u-boot.dtsi"
++
++/ {
++	sysinfo {
++		compatible = "toradex,sysinfo";
++	};
++};
+diff --git a/arch/arm/dts/tegra30-apalis-u-boot.dtsi b/arch/arm/dts/tegra30-apalis-u-boot.dtsi
+new file mode 100644
+index 000000000000..37cbfbcc3506
+--- /dev/null
++++ b/arch/arm/dts/tegra30-apalis-u-boot.dtsi
+@@ -0,0 +1,12 @@
++// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
++/*
++ * Copyright 2023 Toradex
++ */
++
++#include "tegra30-u-boot.dtsi"
++
++/ {
++	sysinfo {
++		compatible = "toradex,sysinfo";
++	};
++};
+diff --git a/arch/arm/dts/tegra30-colibri-u-boot.dtsi b/arch/arm/dts/tegra30-colibri-u-boot.dtsi
+new file mode 100644
+index 000000000000..37cbfbcc3506
+--- /dev/null
++++ b/arch/arm/dts/tegra30-colibri-u-boot.dtsi
+@@ -0,0 +1,12 @@
++// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
++/*
++ * Copyright 2023 Toradex
++ */
++
++#include "tegra30-u-boot.dtsi"
++
++/ {
++	sysinfo {
++		compatible = "toradex,sysinfo";
++	};
++};
+diff --git a/arch/arm/dts/vf610-colibri-eval-v3-u-boot.dtsi b/arch/arm/dts/vf610-colibri-eval-v3-u-boot.dtsi
+index 572d40877ef9..8c3b86c201fa 100644
+--- a/arch/arm/dts/vf610-colibri-eval-v3-u-boot.dtsi
++++ b/arch/arm/dts/vf610-colibri-eval-v3-u-boot.dtsi
+@@ -7,6 +7,10 @@
+ 	soc {
+ 		bootph-all;
+ 	};
++
++	sysinfo {
++		compatible = "toradex,sysinfo";
++	};
+ };
  
--int checkboard(void)
--{
--	if (is_colibri_vf61())
--		puts("Model: Toradex Colibri VF61\n");
--	else
--		puts("Model: Toradex Colibri VF50\n");
--
--	return tdx_checkboard();
--}
--
- #if defined(CONFIG_OF_LIBFDT) && defined(CONFIG_OF_BOARD_SETUP)
- int ft_board_setup(void *blob, struct bd_info *bd)
- {
+ &aips0 {
+diff --git a/board/toradex/common/Kconfig b/board/toradex/common/Kconfig
+index 1f6a5e4db561..b85893ab44e4 100644
+--- a/board/toradex/common/Kconfig
++++ b/board/toradex/common/Kconfig
+@@ -4,6 +4,7 @@
+ menuconfig TDX_CFG_BLOCK
+ 	bool "Enable Toradex config block support"
+ 	select OF_BOARD_SETUP
++	select SYSINFO
+ 	help
+ 	  The Toradex config block stored production data on the on-module
+ 	  flash device (NAND, NOR or eMMC). The area is normally preserved by
 diff --git a/board/toradex/common/tdx-common.c b/board/toradex/common/tdx-common.c
-index ddc4a175da68..cdf645b14177 100644
+index 6084436b48b4..1f3253f4222e 100644
 --- a/board/toradex/common/tdx-common.c
 +++ b/board/toradex/common/tdx-common.c
-@@ -96,7 +96,12 @@ static const char *get_board_assembly(u16 ver_assembly)
- 	return ver_name;
- }
+@@ -3,15 +3,16 @@
+  * Copyright (c) 2016 Toradex, Inc.
+  */
  
--int tdx_checkboard(void)
-+__weak int print_bootinfo(void)
++#include <dm.h>
+ #include <common.h>
+ #include <env.h>
+ #include <g_dnl.h>
+ #include <init.h>
+ #include <linux/libfdt.h>
++#include <sysinfo.h>
+ 
+ #ifdef CONFIG_VIDEO
+ #include <bmp_logo.h>
+-#include <dm.h>
+ #include <splash.h>
+ #include <video.h>
+ #endif
+@@ -103,13 +104,8 @@ __weak int print_bootinfo(void)
+ 
+ int checkboard(void)
+ {
+-	if (valid_cfgblock) {
+-		printf("Model: Toradex %04d %s %s\n",
+-		       tdx_hw_tag.prodid,
+-		       toradex_modules[tdx_hw_tag.prodid].name,
+-		       tdx_board_rev_str);
++	if (valid_cfgblock)
+ 		printf("Serial#: %s\n", tdx_serial_str);
+-	}
+ 
+ #ifdef CONFIG_TDX_CFG_BLOCK_EXTRA
+ 	if (tdx_carrier_board_name)
+@@ -188,6 +184,46 @@ static int settings_r(void)
+ }
+ EVENT_SPY_SIMPLE(EVT_SETTINGS_R, settings_r);
+ 
++static int tdx_detect(struct udevice *dev)
 +{
-+	return 0;
++	return valid_cfgblock ? 0 : -EINVAL;
 +}
 +
-+int checkboard(void)
- {
- 	unsigned char ethaddr[6];
- 
-@@ -144,6 +149,8 @@ int tdx_checkboard(void)
- #endif
- 	}
- 
-+	print_bootinfo();
++static int tdx_get_str(struct udevice *dev, int id, size_t size, char *val)
++{
++	int ret = -ENOTSUPP;
 +
- 	/*
- 	 * Check if environment contains a valid MAC address,
- 	 * set the one from config block if not
-diff --git a/board/toradex/common/tdx-common.h b/board/toradex/common/tdx-common.h
-index 44234dc49cd7..d446e9f1d5ca 100644
---- a/board/toradex/common/tdx-common.h
-+++ b/board/toradex/common/tdx-common.h
-@@ -11,6 +11,5 @@
- 
- int ft_common_board_setup(void *blob, struct bd_info *bd);
- u32 get_board_revision(void);
--int tdx_checkboard(void);
- 
- #endif /* _TDX_COMMON_H */
++	switch (id) {
++	case SYSINFO_ID_BOARD_MODEL:
++		snprintf(val, size,
++			 "Toradex %04d %s %s",
++			 tdx_hw_tag.prodid,
++			 toradex_modules[tdx_hw_tag.prodid].name,
++			 tdx_board_rev_str);
++
++		ret = 0;
++	}
++
++	return ret;
++}
++
++static const struct udevice_id sysinfo_tdx_ids[] = {
++	{ .compatible = "toradex,sysinfo" },
++	{ /* sentinel */ }
++};
++
++static const struct sysinfo_ops sysinfo_tdx_ops = {
++	.detect		= tdx_detect,
++	.get_str	= tdx_get_str,
++};
++
++U_BOOT_DRIVER(sysinfo_toradex) = {
++	.name		= "sysinfo_toradex",
++	.id		= UCLASS_SYSINFO,
++	.of_match	= sysinfo_tdx_ids,
++	.ops		= &sysinfo_tdx_ops,
++};
++
+ #ifdef CONFIG_TDX_CFG_BLOCK_USB_GADGET_PID
+ int g_dnl_bind_fixup(struct usb_device_descriptor *dev, const char *name)
+ {
 -- 
 2.39.2
 
