@@ -4,55 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 158D0C48BC4
-	for <u-boot@archiver.kernel.org>; Fri, 23 Feb 2024 08:08:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F68DC5478C
+	for <u-boot@archiver.kernel.org>; Fri, 23 Feb 2024 09:06:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 01D97875AF;
-	Fri, 23 Feb 2024 09:08:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id 64E9C8792D;
+	Fri, 23 Feb 2024 10:06:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="AXWcS1Jg";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 955C687663; Fri, 23 Feb 2024 09:07:58 +0100 (CET)
-Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
+ id A2E498786A; Fri, 23 Feb 2024 10:06:05 +0100 (CET)
+Received: from smtp-42ae.mail.infomaniak.ch (smtp-42ae.mail.infomaniak.ch
+ [84.16.66.174])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2842887572
- for <u-boot@lists.denx.de>; Fri, 23 Feb 2024 09:07:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 675638716D
+ for <u-boot@lists.denx.de>; Fri, 23 Feb 2024 10:06:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
+ dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
- by mail11.truemail.it (Postfix) with ESMTPA id 573141F8DC;
- Fri, 23 Feb 2024 09:07:55 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1708675675;
- bh=L86itETyxA6LMrl20E5rp2DghJanyoO0AfU2bhK1VKM=; h=From:To:Subject;
- b=AXWcS1JgSRLprB+1HsOq5JUd4Y9CiZEBhoS1iCJwqi822trfpd25BMHQ2YkHMTsRr
- PghGCIAT+pYLQiTVh3n923zmDD7mIMT6NWluQOOA6pS75L10bXPf1dMDj3H/xgZ94L
- ErnWHj6Wm5DdkiHoKsFyP8oEOCRaaDFZmQCyFy5lCgoKroKjYV/Sl7fl1Lb9MMJEui
- D4As3gdvhCqj+hglA1de9i8CBBT1Wed0Ys8j9dhssT6Vedx2osiswExPFB4JxkQ7i2
- pGB81MDp+pu2cv2ghIReuUPy2QTYKitNR8t6DbM2z9I+WpFsLbiHaFkC8ywpwr81qx
- IQQP9KfZIsDyg==
-Date: Fri, 23 Feb 2024 09:07:51 +0100
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Tom Rini <trini@konsulko.com>
-Cc: Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, u-boot@lists.denx.de,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Francesco Dolcini <francesco@dolcini.it>
-Subject: Re: [PATCH v1 6/7] toradex: common: Use random mac address if
- toradex config block is missing
-Message-ID: <20240223080751.GA4408@francesco-nb>
-References: <20240220182926.101161-1-francesco@dolcini.it>
- <20240220182926.101161-7-francesco@dolcini.it>
+ spf=pass smtp.mailfrom=foss+uboot@0leil.net
+Received: from smtp-3-0000.mail.infomaniak.ch (unknown [10.4.36.107])
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Th3yf08TKzMrkT3;
+ Fri, 23 Feb 2024 10:06:02 +0100 (CET)
+Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4Th3yc5hT9z3f; Fri, 23 Feb 2024 10:05:57 +0100 (CET)
+From: Quentin Schulz <foss+uboot@0leil.net>
+Subject: [PATCH v2 00/16] rockchip: add support for SARADCv2 and RK806 PMIC
+ and regulators
+Date: Fri, 23 Feb 2024 10:05:47 +0100
+Message-Id: <20240223-rk3588-saradc-v2-0-11c046b7e94a@theobroma-systems.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240220182926.101161-7-francesco@dolcini.it>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAOtf2GUC/13MQQ6CMBCF4auQWTumLULAlfcwLIZ2lMZgzQwhE
+ sLdrcSVy/8l71tBWSIrnIsVhOeoMT1zuEMBfqDnnTGG3OCMOxlnHcqjrJoGlYSCR+oNtX2gtjQ
+ 15M9L+Bbfu3ftcg9RpyTLzs/2u/4kZ/+k2aJBX7ZU1cYG6/1lGjj1kkZCXXTiUY8+jdBt2/YB0
+ RQWVrYAAAA=
+To: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Klaus Goger <klaus.goger@theobroma-systems.com>, 
+ Heiko Stuebner <heiko.stuebner@cherry.de>
+Cc: u-boot@lists.denx.de, 
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>, 
+ Quentin Schulz <foss+uboot@0leil.net>, 
+ William Wu <william.wu@rock-chips.com>
+X-Mailer: b4 0.13.0
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,58 +68,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Feb 20, 2024 at 07:29:25PM +0100, Francesco Dolcini wrote:
-> From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
-> 
-> Set CONFIG_NET_RANDOM_ETHADDR=y, which sets random eth address in
-> case there is no toradex config block programmed.
-> In case of missing toradex config block the generated mac address was
-> always the same, linked to serial number 0.
-> Use random generated mac address instead.
-> 
-> Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
-> Signed-off-by: Francesco Dolcini <francesco.dolcini@toradex.com>
-> ---
->  board/toradex/common/tdx-common.c      | 1 -
->  configs/apalis-imx8_defconfig          | 1 +
->  configs/apalis-tk1_defconfig           | 1 +
->  configs/apalis_imx6_defconfig          | 1 +
->  configs/apalis_t30_defconfig           | 1 +
->  configs/colibri-imx6ull-emmc_defconfig | 1 +
->  configs/colibri-imx6ull_defconfig      | 1 +
->  configs/colibri-imx8x_defconfig        | 1 +
->  configs/colibri_imx6_defconfig         | 1 +
->  configs/colibri_imx7_defconfig         | 1 +
->  configs/colibri_imx7_emmc_defconfig    | 1 +
->  configs/colibri_t20_defconfig          | 1 +
->  configs/colibri_t30_defconfig          | 1 +
->  configs/colibri_vf_defconfig           | 1 +
->  configs/verdin-am62_a53_defconfig      | 1 +
->  configs/verdin-am62_r5_defconfig       | 1 +
->  configs/verdin-imx8mm_defconfig        | 1 +
->  configs/verdin-imx8mp_defconfig        | 1 +
->  18 files changed, 17 insertions(+), 1 deletion(-)
+The RK3588 has a new IP for SARADC compared to older SoCs of the same
+vendor but most of the boilerplate is shared, so rockchip-saradc.c
+driver is adapted instead of creating a new one.
 
-...
+Because the SARADC requires a vref-supply which is commonly coming from
+a regulator of the RK806 PMIC, support for the RK806 PMIC and regulators
+are also added in this patch series. Finally, RK806 PMIC is the first
+one to actually support SPI as communication layer between the SoC and
+the PMIC (but supports I2C as well according to the datasheet). This
+adds support for RK806 over SPI though there should be no reason for
+RK806 over I2C to not work.
 
-> diff --git a/configs/verdin-am62_r5_defconfig b/configs/verdin-am62_r5_defconfig
-> index a3febdcb6941..910340ea5a41 100644
-> --- a/configs/verdin-am62_r5_defconfig
-> +++ b/configs/verdin-am62_r5_defconfig
-> @@ -65,6 +65,7 @@ CONFIG_SPL_OF_CONTROL=y
->  CONFIG_SPL_MULTI_DTB_FIT=y
->  CONFIG_SPL_MULTI_DTB_FIT_NO_COMPRESSION=y
->  CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-> +CONFIG_NET_RANDOM_ETHADDR=y
->  CONFIG_SPL_DM=y
->  CONFIG_SPL_DM_SEQ_ALIAS=y
->  CONFIG_REGMAP=y
+Note that the DT now uses a different prefix for the buck and ldo node
+names and the RK806 is the first one to use nldo and pldo and while they
+both are LDOs, they have overlapping indices which makes it impossible
+to simply reuse the rk8xx_ldo driver and need to define new ones (though
+some callbacks can be reused, as is done in this patch series).
 
-This change here is not required, it has no effect since there is no
-network available on the verdin am62 r5, however it is just confusing to
-have it enabled.
+The SARADC was tested by toggling the BIOS button connected over channel
+0 on RK3588 Jaguar and using the adc or button commands to watch over
+the value.
+The PMIC was tested with the pmic command for reading the CHIP_VERS
+registers and writing to the WDT_REG (0x73).
+The regulators were tested by using a modified DT for RK3588 Jaguar and
+playing with the regulator command to enable/disable some buck/nldo/pldo
+and modify their output voltage.
 
-I will send a v2 with this removed.
+This has a light dependency on
+https://lore.kernel.org/u-boot/20240221-jaguar-v3-0-1f256a82201b@theobroma-systems.com/T/#t
+because of:
+ - remove of asm/io.h include in favor of asm/arch-rockchip/hardware.h
+   (both should be included if applied before the dependency)
+ - Jaguar defconfig modified in this patch series is added in the
+   aforementioned patch series,
 
-Francesco
+Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+---
+Changes in v2:
+- fixed incorrect bitmasking when selecting channel
+- added optional controller reset to match downstream U-Boot and both
+  downstream and upstream Linux kernel logic,
+- Link to v1: https://lore.kernel.org/r/20240221-rk3588-saradc-v1-0-c39a5601d1cc@theobroma-systems.com
+
+---
+Quentin Schulz (15):
+      rockchip: spi: rk_spi: do not write bytes when in read-only mode
+      regulator: rk8xx: remove unused functions
+      regulator: rk8xx: add indirection level for some ldo callbacks
+      power: rk8xx: add support for RK806
+      pmic: reword help text
+      rockchip: adc: rockchip-saradc: use union for preparing for v2
+      rockchip: adc: rockchip-saradc: factor out channel_data callback
+      rockchip: adc: rockchip-saradc: factor out start_channel callback
+      rockchip: adc: rockchip-saradc: factor out stop callback
+      rockchip: adc: rockchip-saradc: add support for RK3588
+      power: pmic: rk8xx: fix duplicate prompt
+      rockchip: jaguar-rk3588: enable SARADC and derivatives
+      adc: add missing depends on ADC for controller drivers
+      button: add missing ADC dependency for BUTTON_ADC
+      rockchip: boot_mode: fix rockchip_dnl_key_pressed requiring ADC support
+
+William Wu (1):
+      regulator: rk8xx: fix SWITCH enable on RK809
+
+ arch/arm/mach-rockchip/boot_mode.c |   4 +
+ cmd/pmic.c                         |   4 +-
+ configs/jaguar-rk3588_defconfig    |  11 +-
+ drivers/adc/Kconfig                |   4 +
+ drivers/adc/rockchip-saradc.c      | 202 +++++++++++--
+ drivers/button/Kconfig             |   1 +
+ drivers/power/pmic/Kconfig         |   2 +-
+ drivers/power/pmic/rk8xx.c         |  85 ++++++
+ drivers/power/regulator/rk8xx.c    | 595 ++++++++++++++++++++++++++++++++++---
+ drivers/spi/rk_spi.c               |  20 +-
+ include/power/rk8xx_pmic.h         |  21 +-
+ 11 files changed, 874 insertions(+), 75 deletions(-)
+---
+base-commit: dcf1b0a056cc81dc268d449c6e689fe80ca688ae
+change-id: 20240212-rk3588-saradc-ab0a9bda9306
+
+Best regards,
+-- 
+Quentin Schulz <quentin.schulz@theobroma-systems.com>
 
