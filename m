@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E204BC48BC4
-	for <u-boot@archiver.kernel.org>; Fri, 23 Feb 2024 09:19:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 822A6C5478C
+	for <u-boot@archiver.kernel.org>; Fri, 23 Feb 2024 09:19:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D594F87C80;
-	Fri, 23 Feb 2024 10:06:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AA4A287C62;
+	Fri, 23 Feb 2024 10:06:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC6D1879DF; Fri, 23 Feb 2024 10:06:23 +0100 (CET)
-Received: from smtp-bc0e.mail.infomaniak.ch (smtp-bc0e.mail.infomaniak.ch
- [IPv6:2001:1600:4:17::bc0e])
+ id A9289871C7; Fri, 23 Feb 2024 10:06:24 +0100 (CET)
+Received: from smtp-bc0a.mail.infomaniak.ch (smtp-bc0a.mail.infomaniak.ch
+ [45.157.188.10])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D42818786A
- for <u-boot@lists.denx.de>; Fri, 23 Feb 2024 10:06:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2124287BAF
+ for <u-boot@lists.denx.de>; Fri, 23 Feb 2024 10:06:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-3-0000.mail.infomaniak.ch (unknown [10.4.36.107])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Th3yk3gWnzMq5r6;
- Fri, 23 Feb 2024 10:06:06 +0100 (CET)
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Th3ym4f09zMtHvK;
+ Fri, 23 Feb 2024 10:06:08 +0100 (CET)
 Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4Th3yj5rcsz3g; Fri, 23 Feb 2024 10:06:05 +0100 (CET)
+ id 4Th3ym0dVSz3k; Fri, 23 Feb 2024 10:06:08 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Fri, 23 Feb 2024 10:05:55 +0100
-Subject: [PATCH v2 08/16] rockchip: adc: rockchip-saradc: factor out
- channel_data callback
+Date: Fri, 23 Feb 2024 10:05:59 +0100
+Subject: [PATCH v2 12/16] power: pmic: rk8xx: fix duplicate prompt
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240223-rk3588-saradc-v2-8-11c046b7e94a@theobroma-systems.com>
+Message-Id: <20240223-rk3588-saradc-v2-12-11c046b7e94a@theobroma-systems.com>
 References: <20240223-rk3588-saradc-v2-0-11c046b7e94a@theobroma-systems.com>
 In-Reply-To: <20240223-rk3588-saradc-v2-0-11c046b7e94a@theobroma-systems.com>
 To: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>, 
@@ -67,104 +66,29 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 
-SARADC v1 and v2 have a different way of reading data, therefore let's
-abstract this function so that it can be provided from the udevice.data
-pointer.
+SPL_PMIC_RK8XX and PMIC_RK8XX both share the same prompt making it
+difficult to know at first glance in menuconfig what's for what, let's
+fix this by adding "in SPL" at the end of the prompt for the SPL symbol.
 
 Cc: Quentin Schulz <foss+uboot@0leil.net>
 Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 ---
- drivers/adc/rockchip-saradc.c | 37 +++++++++++++++++++++++++++++--------
- 1 file changed, 29 insertions(+), 8 deletions(-)
+ drivers/power/pmic/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/adc/rockchip-saradc.c b/drivers/adc/rockchip-saradc.c
-index 4a842556a60..1cc57beecc2 100644
---- a/drivers/adc/rockchip-saradc.c
-+++ b/drivers/adc/rockchip-saradc.c
-@@ -37,6 +37,7 @@ struct rockchip_saradc_data {
- 	int				num_bits;
- 	int				num_channels;
- 	unsigned long			clk_rate;
-+	int (*channel_data)(struct udevice *dev, int channel, unsigned int *data);
- };
+diff --git a/drivers/power/pmic/Kconfig b/drivers/power/pmic/Kconfig
+index 454a6e0cf87..5cf70991f1d 100644
+--- a/drivers/power/pmic/Kconfig
++++ b/drivers/power/pmic/Kconfig
+@@ -250,7 +250,7 @@ config PMIC_RK8XX
+ 	This driver implements register read/write operations.
  
- struct rockchip_saradc_priv {
-@@ -45,28 +46,45 @@ struct rockchip_saradc_priv {
- 	const struct rockchip_saradc_data	*data;
- };
- 
-+int rockchip_saradc_channel_data_v1(struct udevice *dev, int channel,
-+				    unsigned int *data)
-+{
-+	struct rockchip_saradc_priv *priv = dev_get_priv(dev);
-+
-+	if ((readl(&priv->regs.v1->ctrl) & SARADC_CTRL_IRQ_STATUS) !=
-+	    SARADC_CTRL_IRQ_STATUS)
-+		return -EBUSY;
-+
-+	/* Read value */
-+	*data = readl(&priv->regs.v1->data);
-+
-+	/* Power down adc */
-+	writel(0, &priv->regs.v1->ctrl);
-+
-+	return 0;
-+}
-+
- int rockchip_saradc_channel_data(struct udevice *dev, int channel,
- 				 unsigned int *data)
- {
- 	struct rockchip_saradc_priv *priv = dev_get_priv(dev);
- 	struct adc_uclass_plat *uc_pdata = dev_get_uclass_plat(dev);
-+	int ret;
- 
- 	if (channel != priv->active_channel) {
- 		pr_err("Requested channel is not active!");
- 		return -EINVAL;
- 	}
- 
--	if ((readl(&priv->regs.v1->ctrl) & SARADC_CTRL_IRQ_STATUS) !=
--	    SARADC_CTRL_IRQ_STATUS)
--		return -EBUSY;
-+	ret = priv->data->channel_data(dev, channel, data);
-+	if (ret) {
-+		if (ret != -EBUSY)
-+			pr_err("Error reading channel data, %d!", ret);
-+		return ret;
-+	}
- 
--	/* Read value */
--	*data = readl(&priv->regs.v1->data);
- 	*data &= uc_pdata->data_mask;
- 
--	/* Power down adc */
--	writel(0, &priv->regs.v1->ctrl);
--
- 	return 0;
- }
- 
-@@ -174,18 +192,21 @@ static const struct rockchip_saradc_data saradc_data = {
- 	.num_bits = 10,
- 	.num_channels = 3,
- 	.clk_rate = 1000000,
-+	.channel_data = rockchip_saradc_channel_data_v1,
- };
- 
- static const struct rockchip_saradc_data rk3066_tsadc_data = {
- 	.num_bits = 12,
- 	.num_channels = 2,
- 	.clk_rate = 50000,
-+	.channel_data = rockchip_saradc_channel_data_v1,
- };
- 
- static const struct rockchip_saradc_data rk3399_saradc_data = {
- 	.num_bits = 10,
- 	.num_channels = 6,
- 	.clk_rate = 1000000,
-+	.channel_data = rockchip_saradc_channel_data_v1,
- };
- 
- static const struct udevice_id rockchip_saradc_ids[] = {
+ config SPL_PMIC_RK8XX
+-	bool "Enable support for Rockchip PMIC RK8XX"
++	bool "Enable support for Rockchip PMIC RK8XX in SPL"
+ 	depends on SPL_DM_PMIC
+ 	---help---
+ 	The Rockchip RK808 PMIC provides four buck DC-DC convertors, 8 LDOs,
 
 -- 
 2.43.2
