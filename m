@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37FC0C5478C
-	for <u-boot@archiver.kernel.org>; Sat, 24 Feb 2024 00:53:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28487C54798
+	for <u-boot@archiver.kernel.org>; Sat, 24 Feb 2024 00:53:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9BA7287CF8;
-	Sat, 24 Feb 2024 01:47:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C215F87D09;
+	Sat, 24 Feb 2024 01:47:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Ukrjzd9L";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RX8IeaED";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B8C48781D; Sat, 24 Feb 2024 01:23:15 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id 945B687BAE; Sat, 24 Feb 2024 01:23:18 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8102A87ABC
- for <u-boot@lists.denx.de>; Sat, 24 Feb 2024 01:23:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7083187BCB
+ for <u-boot@lists.denx.de>; Sat, 24 Feb 2024 01:23:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41O0NAuj040969;
- Fri, 23 Feb 2024 18:23:10 -0600
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41O0NBOL037971;
+ Fri, 23 Feb 2024 18:23:11 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1708734190;
- bh=Zb96n30qzmii/2iFkMQ33I7ucmq7R38HffyuXoRXUZM=;
+ s=ti-com-17Q1; t=1708734191;
+ bh=lpROjSS0lnyDDlSO0Nfsytct4KCKmDszZiLKyeqbm5A=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=Ukrjzd9LadvyFvXBg+fL0YB8VPbM/nDBbty4av1v4wAMdidYX03WcbXkB9SRntdpw
- Z1u3xu2lUHy2xlcuetNQnOr4vBI68LO20Zd9mG27PVHVLi4CbaKPlUQT9V6r956vRw
- 4nDHiE9yxx7Jr1Nt4az93kaHy9AK5OZnMhNT/XTY=
-Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41O0NAQf018956
+ b=RX8IeaED2t9U3CA6rZ9AoFVjqnLSwHl7WCmo7fYL1xpUox9vJoWivYCZ9OJkgtqVe
+ 3ySypSh5xS6kaIaFBePPdt68cM5gwoSXKrK0bpOquW6+rMcIYi0lwtK6roFkV0SyrV
+ asCPk6emU2h1wzqmquKw4V4EDi66JUOUmfqoRxRM=
+Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41O0NBxU124002
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 23 Feb 2024 18:23:10 -0600
-Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 23 Feb 2024 18:23:11 -0600
+Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 23
- Feb 2024 18:23:10 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ Feb 2024 18:23:11 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 23 Feb 2024 18:23:10 -0600
+ Frontend Transport; Fri, 23 Feb 2024 18:23:11 -0600
 Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41O0NAF4078857;
- Fri, 23 Feb 2024 18:23:10 -0600
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41O0NBC1078884;
+ Fri, 23 Feb 2024 18:23:11 -0600
 From: Jonathan Humphreys <j-humphreys@ti.com>
 To: <trini@konsulko.com>, <u-kumar1@ti.com>, <vaishnav.a@ti.com>
 CC: <u-boot@lists.denx.de>, Jonathan Humphreys <j-humphreys@ti.com>
-Subject: [PATCH v2 1/3] configs: j721e: Enable OSPI memory
-Date: Fri, 23 Feb 2024 18:23:05 -0600
-Message-ID: <20240224002307.2284386-2-j-humphreys@ti.com>
+Subject: [PATCH v2 3/3] arm: dts: k3-j721e-sk: Remove OSPI phypattern partition
+Date: Fri, 23 Feb 2024 18:23:07 -0600
+Message-ID: <20240224002307.2284386-4-j-humphreys@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240224002307.2284386-1-j-humphreys@ti.com>
 References: <20240224002307.2284386-1-j-humphreys@ti.com>
@@ -80,65 +80,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Set config values to enable OSPI functionality.
+The phy calibration pattern partition isn't needed as the Cadence driver isn't
+calibrating the phys.
 
 Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
 ---
- configs/j721e_evm_a72_defconfig | 7 +++++++
- configs/j721e_evm_r5_defconfig  | 6 ++++++
- 2 files changed, 13 insertions(+)
+ arch/arm/dts/k3-j721e-sk-u-boot.dtsi | 4 ----
+ 1 file changed, 4 deletions(-)
 
-diff --git a/configs/j721e_evm_a72_defconfig b/configs/j721e_evm_a72_defconfig
-index 74af5bebb5..1b39dd7c86 100644
---- a/configs/j721e_evm_a72_defconfig
-+++ b/configs/j721e_evm_a72_defconfig
-@@ -10,6 +10,7 @@ CONFIG_SOC_K3_J721E=y
- CONFIG_TARGET_J721E_A72_EVM=y
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80480000
-+CONFIG_SF_DEFAULT_SPEED=25000000
- CONFIG_ENV_SIZE=0x20000
- CONFIG_DM_GPIO=y
- CONFIG_SPL_DM_SPI=y
-@@ -142,7 +143,13 @@ CONFIG_FLASH_CFI_MTD=y
- CONFIG_SYS_FLASH_CFI=y
- CONFIG_SYS_MAX_FLASH_BANKS_DETECT=y
- CONFIG_DM_SPI_FLASH=y
-+CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-+CONFIG_SPI_FLASH_SOFT_RESET=y
-+CONFIG_SPI_FLASH_SOFT_RESET_ON_BOOT=y
-+CONFIG_SPI_FLASH_SPANSION=y
-+CONFIG_SPI_FLASH_S28HX_T=y
- CONFIG_SPI_FLASH_STMICRO=y
-+CONFIG_SPI_FLASH_MT35XU=y
- # CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
- CONFIG_SPI_FLASH_MTD=y
- CONFIG_MULTIPLEXER=y
-diff --git a/configs/j721e_evm_r5_defconfig b/configs/j721e_evm_r5_defconfig
-index bc4f35cce1..59c0c4135c 100644
---- a/configs/j721e_evm_r5_defconfig
-+++ b/configs/j721e_evm_r5_defconfig
-@@ -10,6 +10,7 @@ CONFIG_K3_EARLY_CONS=y
- CONFIG_TARGET_J721E_R5_EVM=y
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x41cf59f0
-+CONFIG_SF_DEFAULT_SPEED=25000000
- CONFIG_ENV_SIZE=0x20000
- CONFIG_DM_GPIO=y
- CONFIG_SPL_DM_SPI=y
-@@ -128,7 +129,12 @@ CONFIG_FLASH_CFI_MTD=y
- CONFIG_SYS_FLASH_CFI=y
- CONFIG_DM_SPI_FLASH=y
- CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-+CONFIG_SPI_FLASH_SOFT_RESET=y
-+CONFIG_SPI_FLASH_SOFT_RESET_ON_BOOT=y
-+CONFIG_SPI_FLASH_SPANSION=y
-+CONFIG_SPI_FLASH_S28HX_T=y
- CONFIG_SPI_FLASH_STMICRO=y
-+CONFIG_SPI_FLASH_MT35XU=y
- CONFIG_PINCTRL=y
- # CONFIG_PINCTRL_GENERIC is not set
- CONFIG_SPL_PINCTRL=y
+diff --git a/arch/arm/dts/k3-j721e-sk-u-boot.dtsi b/arch/arm/dts/k3-j721e-sk-u-boot.dtsi
+index 479b7bcd6f..20b76a84ff 100644
+--- a/arch/arm/dts/k3-j721e-sk-u-boot.dtsi
++++ b/arch/arm/dts/k3-j721e-sk-u-boot.dtsi
+@@ -157,9 +157,5 @@
+ 
+ 	flash@0 {
+ 		bootph-all;
+-
+-		partition@3fc0000 {
+-			bootph-all;
+-		};
+ 	};
+ };
 -- 
 2.34.1
 
