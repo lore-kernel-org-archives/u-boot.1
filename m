@@ -4,67 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5172CC48BF6
-	for <u-boot@archiver.kernel.org>; Sat, 24 Feb 2024 18:59:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25ADFC54E41
+	for <u-boot@archiver.kernel.org>; Sat, 24 Feb 2024 22:11:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2DD4987C78;
-	Sat, 24 Feb 2024 19:59:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 1BD0787CAC;
+	Sat, 24 Feb 2024 23:11:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="hLYg1Ebu";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dGIZSu4x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C4C1887C83; Sat, 24 Feb 2024 18:34:41 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id A0F2287CCC; Sat, 24 Feb 2024 23:11:00 +0100 (CET)
+Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
+ [IPv6:2607:f8b0:4864:20::102a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B8B17875FC
- for <u-boot@lists.denx.de>; Sat, 24 Feb 2024 18:34:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0CF0787C9E
+ for <u-boot@lists.denx.de>; Sat, 24 Feb 2024 23:10:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41OHYaW8077936;
- Sat, 24 Feb 2024 11:34:36 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1708796076;
- bh=eWYyGvgE1SiYpl3K9fwR/oQnPLFZUvl47ikXuny5FGU=;
- h=From:To:CC:Subject:In-Reply-To:References:Date;
- b=hLYg1EbuH6NPcSSqgQVNb6LfknTgDhzyMeiWgsAw3tcj+v3ft2chUcYWitQE5u49z
- x/0H7tAzMyJQ1CGh3ccLEsZrSWy678vw3dbzdxPBe8M+JmFjW+/uZbjzp8PBJzJeZu
- 1Bb0Yg3MQOGy6nMJpXTqg7qtU2YFwqy8/e9SQ/sA=
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41OHYaXC004788
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Sat, 24 Feb 2024 11:34:36 -0600
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sat, 24
- Feb 2024 11:34:36 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Sat, 24 Feb 2024 11:34:36 -0600
-Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41OHYaSY126119;
- Sat, 24 Feb 2024 11:34:36 -0600
-From: Jon Humphreys <j-humphreys@ti.com>
-To: Tom Rini <trini@konsulko.com>
-CC: <vigneshr@ti.com>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH v2 2/2] arm: dts: k3-am642-evm/sk: Enable OSPI support
- in SPL
-In-Reply-To: <20240224135959.GC3040305@bill-the-cat>
-References: <20240224001702.2283727-1-j-humphreys@ti.com>
- <20240224001702.2283727-3-j-humphreys@ti.com>
- <20240224135959.GC3040305@bill-the-cat>
-Date: Sat, 24 Feb 2024 11:34:36 -0600
-Message-ID: <86o7c5rck3.fsf@udb0321960.dhcp.ti.com>
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x102a.google.com with SMTP id
+ 98e67ed59e1d1-299d76d3a26so26909a91.1
+ for <u-boot@lists.denx.de>; Sat, 24 Feb 2024 14:10:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1708812655; x=1709417455; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=JslgbPVbRM6VIHowBh9VYpsdjCINBzjn4UGh+t/wzPA=;
+ b=dGIZSu4xiZNc1H28DtenDKv133AyxsthVpH1iH1xk0WFpqi0GogqDCS3GN/dhgBMFF
+ F8CXQQ4dboxPfu25ggPZs3jmE3bAsv4NAMRwz2JD0UGZ8z15HlfH9JgNZDLYQBwmGxgR
+ v4QF3fvgAP/0wWgmV6G/hu0CnPzNI/xXR/vzh8N+k4fMSpZB4cR68zxQFq9O32WSE0C7
+ fCUEXpAxw1roKKhVjM0IMTDHdTeZXQJh5A9wZye5JUg3rBORhlNV7mepwC2MqQVxQh5Q
+ P7gvhE/fHJX0ULxN2uoNdUk37cpqb1IA4wIY8WXCQGyuforTvYdtkDePeHnbUhQlo3je
+ ssbQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1708812655; x=1709417455;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=JslgbPVbRM6VIHowBh9VYpsdjCINBzjn4UGh+t/wzPA=;
+ b=lCnlQ0ZWJnDlxH7cNpc0SXBsDaXinI3Ep+5WWjFvSbjmkHALrtm5QKkyrQfxo/Ofwx
+ FMeSreJ74QzVTQqbcOcG9vXqIhk7kBcY4oyBanW5a5ggjVc7WdKE+7pBlXC/gGMLPuxH
+ Eg8lNNMMoL//Bkjngxfhz/6ODLhyl+v9Q0w6ImSJ6YWfHnSLOUN4tEcx57/xfCNRQTCN
+ Zv1y2lFsczeaW152qpaOzha5HR0tOPfKKy36rIKG9OgiVuZU7H0Ysa8/wby9AatVsiLk
+ +/LRJqPAWYWOJhwtCoV36bWhyMy6UN+XbNqFLLdIQIJhNoNwUnk5kxZCdgrbeU4tn3RW
+ Umqg==
+X-Gm-Message-State: AOJu0YzpDWSuNPp2lPCdeOIWLY/c41CJ3QAAAOfKpIva5uGsHs5LCSue
+ NkQWwWCm6EyrJkzOWb9b0nWBMPRli+plaswxXzzsc9AjZxHc/hBO3EcD65txCgApgSlmRZ1Sq2k
+ fpRG2enticIo3tUU1/zY1JmWKaH8=
+X-Google-Smtp-Source: AGHT+IHFXo0Zk+1FCESnQ+w9K3WNJllUEVuFwxXLr4mlWSvLlAkVEi2jzjqmMSHyrftO5ywWo6UwkKWNgVcYixwBMro=
+X-Received: by 2002:a17:90a:7c44:b0:299:1ae1:51b2 with SMTP id
+ e4-20020a17090a7c4400b002991ae151b2mr2417617pjl.4.1708812655232; Sat, 24 Feb
+ 2024 14:10:55 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-X-Mailman-Approved-At: Sat, 24 Feb 2024 19:59:15 +0100
+References: <20240219230100.2980309-1-Mr.Bossman075@gmail.com>
+ <CAOMZO5B+eZhJOifRiux0n8VXLkQgwc8Q8215ybJgJ-LHE8RAAQ@mail.gmail.com>
+ <CAJFTR8Tjk8b-DZGxu2f4-LBoZdSqE5oDvyTY-DDOJYUU=DSvcA@mail.gmail.com>
+ <CAOMZO5CAev9T_627gV88Rzcc7AE1jYpm0EyBJ-eSPcEJ=X4V-w@mail.gmail.com>
+In-Reply-To: <CAOMZO5CAev9T_627gV88Rzcc7AE1jYpm0EyBJ-eSPcEJ=X4V-w@mail.gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Sat, 24 Feb 2024 19:10:43 -0300
+Message-ID: <CAOMZO5D5TnxkcHEjEwPF3vBmWHwmrF_9C1oawP7vkOFCzXWTVQ@mail.gmail.com>
+Subject: Re: [PATCH v4 1/2] imx: imxrt1050-evk: Add support for SPI flash
+ booting
+To: Jesse T <mr.bossman075@gmail.com>
+Cc: u-boot@lists.denx.de, 
+ Giulio Benetti <giulio.benetti@benettiengineering.com>,
+ Stefano Babic <sbabic@denx.de>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,60 +95,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Tom Rini <trini@konsulko.com> writes:
+On Tue, Feb 20, 2024 at 2:20=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
+wrote:
 
-> On Fri, Feb 23, 2024 at 06:17:02PM -0600, Jonathan Humphreys wrote:
->> Add bootph DT tags to enable OSPI in SPL.
->> Set OSPI regs for R5 SPL to address OSPI's boot region.
->> 
->> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
->> ---
->>  arch/arm/dts/k3-am642-evm-u-boot.dtsi | 16 ++++++++++++++++
->>  arch/arm/dts/k3-am642-r5-evm.dts      |  5 +++++
->>  arch/arm/dts/k3-am642-r5-sk.dts       |  5 +++++
->>  arch/arm/dts/k3-am642-sk-u-boot.dtsi  | 16 ++++++++++++++++
->>  4 files changed, 42 insertions(+)
->> 
->> diff --git a/arch/arm/dts/k3-am642-evm-u-boot.dtsi b/arch/arm/dts/k3-am642-evm-u-boot.dtsi
->> index b843078243..60b219c0be 100644
->> --- a/arch/arm/dts/k3-am642-evm-u-boot.dtsi
->> +++ b/arch/arm/dts/k3-am642-evm-u-boot.dtsi
->> @@ -182,3 +182,19 @@
->>  &cpsw_port2 {
->>  	status = "disabled";
->>  };
->> +
->> +&ospi0_pins_default {
->> +	bootph-all;
->> +};
->> +
->> +&fss {
->> +	bootph-all;
->> +};
->> +
->> +&ospi0 {
->> +	bootph-all;
->> +
->> +	flash@0 {
->> +		bootph-all;
->> +	};
->> +};
->
-> So this gets back to what I was asking in the first series, is this
-> needed in SPL or full U-Boot as well? The bootph-* properties are
-> supposed to be transitive, but originally the tooling didn't handle this
-> and now the tooling handles SPL but not full U-Boot. Which also brings
-> back the is this _needed_ question and is bootph-all right, rather than
-> just the big hammer?
->
-By "this", are you referring to the original phypattern partition nodes,
-or the ospi0 node itself?  The partition nodes are not needed at all, so
-removed.  The ospi node is needed in both SPL and U-Boot.  In that case,
-using the bootph-all tag is the proper way, correct?
+> Please fix both issues and submit a v5.
 
-What do you mean by the 'big hammer'?
-
-Please advise and thanks.
-
-> -- 
-> Tom
+I have fixed these issues myself and applied it, thanks.
