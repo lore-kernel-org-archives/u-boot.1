@@ -4,24 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D790FC48BF6
-	for <u-boot@archiver.kernel.org>; Sat, 24 Feb 2024 22:33:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60A80C54E41
+	for <u-boot@archiver.kernel.org>; Sat, 24 Feb 2024 22:33:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E13D787CFF;
-	Sat, 24 Feb 2024 23:33:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C87C087CE8;
+	Sat, 24 Feb 2024 23:33:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="pMOhTX3l";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="bd7/hv0Z";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="yORF4wLc";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="TanDmX6b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7181087CEC; Sat, 24 Feb 2024 23:33:00 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ id 664FD87CEC; Sat, 24 Feb 2024 23:33:08 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 579F4871C7
- for <u-boot@lists.denx.de>; Sat, 24 Feb 2024 23:32:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B016A87CCC
+ for <u-boot@lists.denx.de>; Sat, 24 Feb 2024 23:32:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -30,31 +31,33 @@ Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4Tj1qG0Pczz9slp;
- Sat, 24 Feb 2024 23:32:58 +0100 (CET)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4Tj1qH4Cbmz9sT2;
+ Sat, 24 Feb 2024 23:32:59 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1708813978;
+ s=mail20150812; t=1708813979;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=aE7FgM4VxulR5Njm9qd9pVpZz9cGGj1BYch/km/bQf4=;
- b=pMOhTX3l/u86LHJHOvI1l59PzcNxLs2pgzaDVDcm+E2VQujuvMcwRRacKdtA4Px755xeKu
- bcPEICSpquWr1J3JYdwQaEngODPM41lsf7XSyWip+M+ZsmIojU44qupkTQz02cQqkoAFZ7
- qAsHn1JOsg62b27P3ef1VsGba/FSGUCnIgTg55ur71rPbjNK6h98/vIhC/xMwVsMR/wH77
- QfMDunhNqKQp6WSJWSumtdlRfkr1WvnqjbwFDXtmvMc/hUpp8uwOAiwS85Y3fLUpksEcz1
- Y7KyeON9nVZ3ByMgUTdG4WV0fAUICCz6F1WFAELbPm9nUOM0oFo9fftsi0MZkQ==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=CzjHDSBOjhA3M8Z9Z1+L2eWghZ5VhIdHuCxIoCGgBWw=;
+ b=yORF4wLcW3rjMOheDKytrx/QhRu3VmLT5p9Naguti49Nuks894NmW6FahZBrpT4MA3QdL/
+ vRgjGWxYTMfoQZ+3CTu/tLGPqwgG+P3QygUYIt3UDC77YqNEktjAUCCmQotERRrNfdiDht
+ 80VXHNuQpKuTsLVOiOunlZKuym12LOUqAsyBtKTmth56l9+Br5aP9LfjdW3ZnUgymnyfeg
+ IaTCw0pzOHMTtokV/vFfCWOZgpGLPzRAGIGCRPW/gMyUd5bvRaJuRAAua+RgbMDxys1pF9
+ /DpKBxRawvIXWUNy6pOJRQAvy4hRKu67wI63wlVFf3Vd/ukuju77TA3a3Wr2Gg==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1708813976;
+ s=mail20150812; t=1708813977;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=aE7FgM4VxulR5Njm9qd9pVpZz9cGGj1BYch/km/bQf4=;
- b=bd7/hv0ZNXaPnYV9pQX+adQozVdV1B3Nc7cyt/qGZdVMBQK1oxco51goQtcSUJ7i2TGdjt
- 0XvIlOz/+TfUk7iYECkiysl7poThTF9hRcThxgt8enq0wJ39twnmfiZvhsdD3CHPPe81zB
- rt/kkVOhEhMnWjaEJ9qH6vZEQSVfs6d2IoCbm0I9V8mknuliGDHLgLgg0SohuksGcn6LJ/
- uI9O9B35Mnihqr7K84W7cDHI4gp0FlpfbLVA3/JRvbps/7OmdCeelgWtCxC1PO2Q4rwGzX
- a7G1DsWsFoigNAvOY+LCb8Zq46v9N3DR2GZu2YsFz5s1WQFppVblMrYTtVRpww==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=CzjHDSBOjhA3M8Z9Z1+L2eWghZ5VhIdHuCxIoCGgBWw=;
+ b=TanDmX6b9ZOXZGdvrx7jjxskye3tS5p61m1rzOEds5aUiimdnLbNJfboxicfhuMXlpFDPo
+ lQBBDU1Z0mt+ytODR5/nDUu7oz5+laAtL/lzLWSxa32t9FYQVVwy7P2g+te2X7wTevERZ9
+ +VvFA0QbQPzRwYX+CfrPtWAohtjlyJDD+Dlc1Fsu2+/0gme+j9vIkcskYWumqZHH6TOZvZ
+ xs2JRpm4qLa2KOvOoHREaeYXYBDIKvQ8ijMn/R9rJQxe+E5kghU9zDBSwxdpx7apVpvKqE
+ PrjjUPonQmlkKKJ9HZBJreljEA5ritrHv6ZIWHBsXsJwhCk1REzcLrpLokhfuw==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Hai Pham <hai.pham.ud@renesas.com>, Jaehoon Chung <jh80.chung@samsung.com>,
@@ -62,13 +65,15 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Paul Barker <paul.barker.ct@bp.renesas.com>, Peng Fan <peng.fan@nxp.com>,
  Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>,
  Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
-Subject: [PATCH v2 1/3] mmc: Convert hs400_tuning flag from u8 to bool
-Date: Sat, 24 Feb 2024 23:32:09 +0100
-Message-ID: <20240224223235.287889-1-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH v2 2/3] mmc: Add generic tuning flag
+Date: Sat, 24 Feb 2024 23:32:10 +0100
+Message-ID: <20240224223235.287889-2-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20240224223235.287889-1-marek.vasut+renesas@mailbox.org>
+References: <20240224223235.287889-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: fnrb1nt4xy71n1wzmoqa356eiif9jz4h
-X-MBO-RS-ID: a2f48e80b415775252e
+X-MBO-RS-META: dawz6q76xfr5cnbkck87z4u3zx9u8k9g
+X-MBO-RS-ID: bda9ee606ecad9e8aac
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,10 +90,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This hs400_tuning is a flag, make it bool. No functional change.
-This will be useful in the following patch, which adds another
-more generic flag, where the compiler can better use the space
-now reserved for the u8 to store more flags in it.
+Set generic mmc->tuning flag when performing tuning to indicate
+this condition to drivers. Drivers may use this to bypass various
+checks during tuning.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
@@ -103,39 +107,41 @@ Cc: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
 ---
 V2: Use bool var:1;
 ---
- drivers/mmc/mmc.c | 4 ++--
- include/mmc.h     | 2 +-
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ drivers/mmc/mmc-uclass.c | 8 +++++++-
+ include/mmc.h            | 1 +
+ 2 files changed, 8 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
-index 83f9ae8bb7d..07d87c993a6 100644
---- a/drivers/mmc/mmc.c
-+++ b/drivers/mmc/mmc.c
-@@ -2027,9 +2027,9 @@ static int mmc_select_hs400(struct mmc *mmc)
- 	mmc_set_clock(mmc, mmc->tran_speed, false);
+diff --git a/drivers/mmc/mmc-uclass.c b/drivers/mmc/mmc-uclass.c
+index 328456831dd..304bd5eaee2 100644
+--- a/drivers/mmc/mmc-uclass.c
++++ b/drivers/mmc/mmc-uclass.c
+@@ -124,7 +124,13 @@ static int dm_mmc_execute_tuning(struct udevice *dev, uint opcode)
  
- 	/* execute tuning if needed */
--	mmc->hs400_tuning = 1;
-+	mmc->hs400_tuning = true;
- 	err = mmc_execute_tuning(mmc, MMC_CMD_SEND_TUNING_BLOCK_HS200);
--	mmc->hs400_tuning = 0;
-+	mmc->hs400_tuning = false;
- 	if (err) {
- 		debug("tuning failed\n");
- 		return err;
+ int mmc_execute_tuning(struct mmc *mmc, uint opcode)
+ {
+-	return dm_mmc_execute_tuning(mmc->dev, opcode);
++	int ret;
++
++	mmc->tuning = true;
++	ret = dm_mmc_execute_tuning(mmc->dev, opcode);
++	mmc->tuning = false;
++
++	return ret;
+ }
+ #endif
+ 
 diff --git a/include/mmc.h b/include/mmc.h
-index 2b9a6aa8ee0..afca123b386 100644
+index afca123b386..5c1be5c5b1e 100644
 --- a/include/mmc.h
 +++ b/include/mmc.h
-@@ -736,7 +736,7 @@ struct mmc {
+@@ -736,6 +736,7 @@ struct mmc {
  				  * accessing the boot partitions
  				  */
  	u32 quirks;
--	u8 hs400_tuning;
-+	bool hs400_tuning:1;
++	bool tuning:1;
+ 	bool hs400_tuning:1;
  
  	enum bus_mode user_speed_mode; /* input speed mode from user */
- };
 -- 
 2.43.0
 
