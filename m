@@ -4,75 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AE32C54E49
-	for <u-boot@archiver.kernel.org>; Sat, 24 Feb 2024 22:21:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D790FC48BF6
+	for <u-boot@archiver.kernel.org>; Sat, 24 Feb 2024 22:33:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A8EF487CB1;
-	Sat, 24 Feb 2024 23:21:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E13D787CFF;
+	Sat, 24 Feb 2024 23:33:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KTVKQ6Tq";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="pMOhTX3l";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="bd7/hv0Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DFC4987C66; Sat, 24 Feb 2024 23:21:26 +0100 (CET)
-Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
- [IPv6:2607:f8b0:4864:20::629])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7181087CEC; Sat, 24 Feb 2024 23:33:00 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 615C087CB1
- for <u-boot@lists.denx.de>; Sat, 24 Feb 2024 23:21:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 579F4871C7
+ for <u-boot@lists.denx.de>; Sat, 24 Feb 2024 23:32:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x629.google.com with SMTP id
- d9443c01a7336-1dbd81000b6so6743605ad.0
- for <u-boot@lists.denx.de>; Sat, 24 Feb 2024 14:21:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1708813281; x=1709418081; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=AJ/0NDQa8+q3Wj/OX2fmMTVVJ65GPzVeyIjJYbpyKFY=;
- b=KTVKQ6TqZIdG7HuMeUfMBCNv3skZAzXZh0ewwEPU4lkO7gwpN2w1dDxJ5octDfABgW
- k+Bt54c2qYc61TRFCHlMkTzYzIAbSUYED75g4gk3k+300P+I2ec6wuTi1a9BOeVCjz/i
- IpKake+O+5wWGJFs3w7PkXkw2Ke3ODxSADx99tefRMWqKsacMYw+SwRM4zjrscPzF/57
- xlnKB+XTfVon6T9ayTmeL/TWv0epPo2NyeoKSlU63sNsF44ztcjEjffmJK+nSxmjceN3
- LKzi4dq/LzTKeZC4GOVk1neXROT5N8g/2Cd1nDVtE8lvSQc/Uozu+ijBrsunE7SbO0rK
- R89A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708813281; x=1709418081;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=AJ/0NDQa8+q3Wj/OX2fmMTVVJ65GPzVeyIjJYbpyKFY=;
- b=gPRlNXU06eO/yD3PVqzjvGJB6l6gYWNszlRj4H0kAfo3/DFhD949Gg2mNeGK3FQ+8O
- xcNGG+N9LPoDQJ98MT7BZBpSl0PpnZLvcbWuDxLPboxEtOxQbzhMKcPUdGNNM4bfzqSw
- NX6Nu9IKlKWcutU4yXmSmh+B6g151ubfDkQXAFcKmd4Wdm4MESShnaiTenskYCSl0li1
- ewmAuB+YcByY0eJq0beeHuQjKwZ1evSpqf+IBzVHpt2dZP7gmB/q8icA9Fe8QONtHyHz
- do7dBbafmtMjHD2uZ9SdcV5lErg9EnxfpKO+5eGVmcBgmWFCZIQ2Xp3KVcxPpn+bty+f
- 5H6g==
-X-Gm-Message-State: AOJu0YzP9J8Du4uWpx6cjOKPA4CbcE7sv/lkHTDoivkG/M74mgNg6zWs
- utQZ8p8D+I+RgvQ0h1Y79lzIEVr3Pyzpqq+K+N5WpRkS8JJz9coYsST1XNGK
-X-Google-Smtp-Source: AGHT+IFOtdzXj/Z5UK2TmR14CeyB83TXAOz/dsawkVEzuxUNdAl9bNOku4tXBUqFc+echoIMz0gX1A==
-X-Received: by 2002:a17:902:fe0c:b0:1db:ce31:96b1 with SMTP id
- g12-20020a170902fe0c00b001dbce3196b1mr3940749plj.6.1708813281611; 
- Sat, 24 Feb 2024 14:21:21 -0800 (PST)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:b6f1:4f9f:6ec0:4244])
- by smtp.gmail.com with ESMTPSA id
- y17-20020a17090322d100b001db9493104fsm1424017plg.79.2024.02.24.14.21.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 24 Feb 2024 14:21:21 -0800 (PST)
-From: Fabio Estevam <festevam@gmail.com>
-To: trini@konsulko.com
-Cc: u-boot@lists.denx.de
-Subject: [GIT PULL] Please pull u-boot-imx-master-20240224
-Date: Sat, 24 Feb 2024 19:21:17 -0300
-Message-Id: <20240224222117.1504690-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4Tj1qG0Pczz9slp;
+ Sat, 24 Feb 2024 23:32:58 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1708813978;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=aE7FgM4VxulR5Njm9qd9pVpZz9cGGj1BYch/km/bQf4=;
+ b=pMOhTX3l/u86LHJHOvI1l59PzcNxLs2pgzaDVDcm+E2VQujuvMcwRRacKdtA4Px755xeKu
+ bcPEICSpquWr1J3JYdwQaEngODPM41lsf7XSyWip+M+ZsmIojU44qupkTQz02cQqkoAFZ7
+ qAsHn1JOsg62b27P3ef1VsGba/FSGUCnIgTg55ur71rPbjNK6h98/vIhC/xMwVsMR/wH77
+ QfMDunhNqKQp6WSJWSumtdlRfkr1WvnqjbwFDXtmvMc/hUpp8uwOAiwS85Y3fLUpksEcz1
+ Y7KyeON9nVZ3ByMgUTdG4WV0fAUICCz6F1WFAELbPm9nUOM0oFo9fftsi0MZkQ==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1708813976;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=aE7FgM4VxulR5Njm9qd9pVpZz9cGGj1BYch/km/bQf4=;
+ b=bd7/hv0ZNXaPnYV9pQX+adQozVdV1B3Nc7cyt/qGZdVMBQK1oxco51goQtcSUJ7i2TGdjt
+ 0XvIlOz/+TfUk7iYECkiysl7poThTF9hRcThxgt8enq0wJ39twnmfiZvhsdD3CHPPe81zB
+ rt/kkVOhEhMnWjaEJ9qH6vZEQSVfs6d2IoCbm0I9V8mknuliGDHLgLgg0SohuksGcn6LJ/
+ uI9O9B35Mnihqr7K84W7cDHI4gp0FlpfbLVA3/JRvbps/7OmdCeelgWtCxC1PO2Q4rwGzX
+ a7G1DsWsFoigNAvOY+LCb8Zq46v9N3DR2GZu2YsFz5s1WQFppVblMrYTtVRpww==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Hai Pham <hai.pham.ud@renesas.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>, Peng Fan <peng.fan@nxp.com>,
+ Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
+Subject: [PATCH v2 1/3] mmc: Convert hs400_tuning flag from u8 to bool
+Date: Sat, 24 Feb 2024 23:32:09 +0100
+Message-ID: <20240224223235.287889-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: fnrb1nt4xy71n1wzmoqa356eiif9jz4h
+X-MBO-RS-ID: a2f48e80b415775252e
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,81 +85,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+This hs400_tuning is a flag, make it bool. No functional change.
+This will be useful in the following patch, which adds another
+more generic flag, where the compiler can better use the space
+now reserved for the u8 to store more flags in it.
 
-Please pull from u-boot-imx, thanks.
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Hai Pham <hai.pham.ud@renesas.com>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Sean Anderson <seanga2@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
+---
+V2: Use bool var:1;
+---
+ drivers/mmc/mmc.c | 4 ++--
+ include/mmc.h     | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-The following changes since commit bb9d6c7f4f6a598e8856b2e19e58c7de078a0d6e:
+diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
+index 83f9ae8bb7d..07d87c993a6 100644
+--- a/drivers/mmc/mmc.c
++++ b/drivers/mmc/mmc.c
+@@ -2027,9 +2027,9 @@ static int mmc_select_hs400(struct mmc *mmc)
+ 	mmc_set_clock(mmc, mmc->tran_speed, false);
+ 
+ 	/* execute tuning if needed */
+-	mmc->hs400_tuning = 1;
++	mmc->hs400_tuning = true;
+ 	err = mmc_execute_tuning(mmc, MMC_CMD_SEND_TUNING_BLOCK_HS200);
+-	mmc->hs400_tuning = 0;
++	mmc->hs400_tuning = false;
+ 	if (err) {
+ 		debug("tuning failed\n");
+ 		return err;
+diff --git a/include/mmc.h b/include/mmc.h
+index 2b9a6aa8ee0..afca123b386 100644
+--- a/include/mmc.h
++++ b/include/mmc.h
+@@ -736,7 +736,7 @@ struct mmc {
+ 				  * accessing the boot partitions
+ 				  */
+ 	u32 quirks;
+-	u8 hs400_tuning;
++	bool hs400_tuning:1;
+ 
+ 	enum bus_mode user_speed_mode; /* input speed mode from user */
+ };
+-- 
+2.43.0
 
-  Merge tag 'u-boot-amlogic-fixes-20240223' of https://source.denx.de/u-boot/custodians/u-boot-amlogic (2024-02-23 12:54:03 -0500)
-
-are available in the Git repository at:
-
-  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-master-20240224
-
-for you to fetch changes up to 7c76b1b91bf67cd09fdf5dbd71590f9e580590fa:
-
-  opos6uldev: Convert to watchdog driver model (2024-02-24 16:29:24 -0300)
-
-u-boot-imx-master-20240224
---------------------------
-
-CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/19725
-
-- Enable the thermal driver for the imx8m phycore boards.
-- Convert imx53-qsb to watchdog driver to fix the 'reset' command.
-- Remove multiline string from imx6dl-sielaff.
-- Add SPI boot support for imxrt1050-evk.
-- Convert opos6uldev to watchdog driver to fix the 'reset' command.
-----------------------------------------------------------------
-Benjamin Hahn (3):
-      phycore-imx8mp_defconfig: Enable CONFIG_IMX_TMU
-      phycore-imx8mm_defconfig: Enable CONFIG_IMX_TMU
-      imx8mm-phygate-tauri-l_defconfig: Enable CONFIG_IMX_TMU
-
-Fabio Estevam (1):
-      imx53-qsb: Convert to watchdog driver model
-
-Frieder Schrempf (1):
-      board: imx6dl-sielaff: spl.c: Remove multiline string
-
-Jesse Taube (2):
-      imx: imxrt1050-evk: Add support for SPI flash booting
-      imx: imxrt1050-evk: Add documentation for SPI boot
-
-Mathieu Othacehe (4):
-      arm: dts: imx93: Add USB support.
-      arm: dts: imx93-var-som-symphony: Add USB support.
-      configs: imx93_var_som: Add USB support.
-      configs: imx93_var_som: Add fastboot support.
-
-Sébastien Szymanski (1):
-      opos6uldev: Convert to watchdog driver model
-
- arch/arm/dts/imx53-qsb-u-boot.dtsi             |  13 ++++
- arch/arm/dts/imx6ul-opos6ul-u-boot.dtsi        |  10 +++
- arch/arm/dts/imx93-var-som-symphony.dts        |  18 +++++
- arch/arm/dts/imx93.dtsi                        |  58 ++++++++++++++
- arch/arm/dts/imxrt1020-evk-u-boot.dtsi         |   4 +
- arch/arm/dts/imxrt1050-evk-u-boot.dtsi         |  31 ++++++++
- arch/arm/dts/imxrt1170-evk-u-boot.dtsi         |   4 +
- arch/arm/mach-imx/imxrt/Kconfig                |   1 +
- board/freescale/imxrt1050-evk/MAINTAINERS      |   1 +
- board/freescale/imxrt1050-evk/imximage-nor.cfg |  41 ++++++++++
- board/freescale/imxrt1050-evk/imximage.cfg     |  10 ++-
- board/freescale/imxrt1050-evk/imxrt1050-evk.c  |   7 +-
- board/sielaff/imx6dl-sielaff/spl.c             |   4 +-
- configs/imx8mm-phygate-tauri-l_defconfig       |   1 +
- configs/imx93_var_som_defconfig                |  15 ++++
- configs/imxrt1050-evk_defconfig                |   8 +-
- configs/imxrt1050-evk_fspi_defconfig           | 100 +++++++++++++++++++++++++
- configs/mx53loco_defconfig                     |   3 +
- configs/opos6uldev_defconfig                   |   3 +
- configs/phycore-imx8mm_defconfig               |   1 +
- configs/phycore-imx8mp_defconfig               |   1 +
- doc/board/nxp/imxrt1050-evk.rst                |  30 ++++++++
- include/configs/imxrt1050-evk.h                |   6 ++
- 23 files changed, 362 insertions(+), 8 deletions(-)
- create mode 100644 arch/arm/dts/imx53-qsb-u-boot.dtsi
- create mode 100644 board/freescale/imxrt1050-evk/imximage-nor.cfg
- create mode 100644 configs/imxrt1050-evk_fspi_defconfig
