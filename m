@@ -4,76 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FEBEC54798
-	for <u-boot@archiver.kernel.org>; Fri, 23 Feb 2024 20:48:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 727CCC5478C
+	for <u-boot@archiver.kernel.org>; Sat, 24 Feb 2024 00:47:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4779C87DEF;
-	Fri, 23 Feb 2024 21:39:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 74DF487725;
+	Sat, 24 Feb 2024 01:47:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ft5vSDqo";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ebI1OVRg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 21DFE87C62; Fri, 23 Feb 2024 21:38:41 +0100 (CET)
-Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
- [IPv6:2607:f8b0:4864:20::112e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0F99787BCB; Sat, 24 Feb 2024 01:00:23 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AFA3387CF8
- for <u-boot@lists.denx.de>; Fri, 23 Feb 2024 21:38:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 471548785A
+ for <u-boot@lists.denx.de>; Sat, 24 Feb 2024 01:00:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-608c73f03a9so7104267b3.0
- for <u-boot@lists.denx.de>; Fri, 23 Feb 2024 12:38:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1708720697; x=1709325497; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=PPxNm/7SowT4kJZv8MU/HC4kaBmSMctudubkf9sJy4g=;
- b=Ft5vSDqoA1Y6NN7h40SGdctaecK64rvNK1E+Xj8jIrSp6JC35taMd5FkM5xL+WW0jz
- Y2DWFJ+NJeMQfHo30eKzIOlB/VuH58+ZMmNGV+hFk0ZIkxTnr0touCKC3izMMUB/in95
- h9NJJpDwE4fWUf4ltzq5dRFhJZM11jVc8ke3U=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708720697; x=1709325497;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PPxNm/7SowT4kJZv8MU/HC4kaBmSMctudubkf9sJy4g=;
- b=NgfXQYuFnn8xyssbrOXF36D1rFdyB0ECqBfilT9vcSmEzynRu2z+iCejcipqmW5oZ8
- mXtxLHyVBCYCj0wjhucd36SelFFtAwMqtlBptsnWjTLE1s+bNuPwK45gYhuK2Vg+rmtN
- t5Wf2M8rehcZQGro6pAjne5ekkF+9WY6ldW0R+62HaUUYiIg3sX89x/FZoa4kNmi0UZO
- vRd3sWx88ki5PM+Z+qgrcFxqJ4MHNszY5hk/eenrW+Dck7Er2xBi5YQL8oJU/x8BZHgD
- rZkjgW0jcOEmzAjPp3FwQitqAYRAjpVrl10mk1axezGTna71UeLREptxY/0fRRhI1Pyt
- RSCQ==
-X-Gm-Message-State: AOJu0Yxrm321ky0373EnTrHzTC9zXCZJOXI/djnigAr7F5uHvsci+0PD
- zkYSCvfxSaUxiWbg7Bpbc5cs7A2ygATp5AozpK4KohbRUcCTIESfLsp/koaScXD2bvM/xzaZ0tl
- C
-X-Google-Smtp-Source: AGHT+IEo3doe6W5nkWFTQ7qXMiAqP9LtFJZMuVjhV85ZlqJQ7zgXlyZ+AEYTD8/SGQfyKMvV7lfMdA==
-X-Received: by 2002:a81:ca4b:0:b0:608:cda9:b735 with SMTP id
- y11-20020a81ca4b000000b00608cda9b735mr731253ywk.39.1708720697434; 
- Fri, 23 Feb 2024 12:38:17 -0800 (PST)
-Received: from bill-the-cat (065-184-194-195.res.spectrum.com.
- [65.184.194.195]) by smtp.gmail.com with ESMTPSA id
- k7-20020a816f07000000b00608ba371690sm436044ywc.94.2024.02.23.12.38.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 23 Feb 2024 12:38:17 -0800 (PST)
-Date: Fri, 23 Feb 2024 15:38:14 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Ivan Orlov <ivan.orlov@codethink.co.uk>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v2] cmd: eeprom: Fix config dependency
-Message-ID: <20240223203814.GB3040305@bill-the-cat>
-References: <20240223171420.9492-1-ivan.orlov@codethink.co.uk>
+ spf=pass smtp.mailfrom=j-humphreys@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41O003q2068555;
+ Fri, 23 Feb 2024 18:00:03 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1708732803;
+ bh=dkWpDiePAow4uzG1JDG7YjdGDOYUYpH8ciIW1qFRE8g=;
+ h=From:To:CC:Subject:In-Reply-To:References:Date;
+ b=ebI1OVRgCM4Ma/9XmJEOH788U9+/OIUM4w/noETDhhNE1zQCPOSCIItOfYTRvg405
+ mDaB89DxaX9S7V9MER+fY5v4llo74gCCnjlRZkg3ZS6Xx5TVdlUE59hFvSE0DMBCMB
+ gb5O58yI9Y6I5ionjonPNmovTN34pVh8eCmVUd3I=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41O003Og125919
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 23 Feb 2024 18:00:03 -0600
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 23
+ Feb 2024 18:00:03 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 23 Feb 2024 18:00:03 -0600
+Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41O003Us047161;
+ Fri, 23 Feb 2024 18:00:03 -0600
+From: Jon Humphreys <j-humphreys@ti.com>
+To: Tom Rini <trini@konsulko.com>
+CC: <vigneshr@ti.com>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH 2/2] arm: dts: k3-am642-evm/sk: Enable OSPI support in SPL
+In-Reply-To: <20240223164120.GY3040305@bill-the-cat>
+References: <20240223052438.2013610-1-j-humphreys@ti.com>
+ <20240223052438.2013610-3-j-humphreys@ti.com>
+ <20240223164120.GY3040305@bill-the-cat>
+Date: Fri, 23 Feb 2024 18:00:02 -0600
+Message-ID: <86r0h2rat9.fsf@udb0321960.dhcp.ti.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="JJmF6AxyZgqOpnYb"
-Content-Disposition: inline
-In-Reply-To: <20240223171420.9492-1-ivan.orlov@codethink.co.uk>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+X-Mailman-Approved-At: Sat, 24 Feb 2024 01:47:06 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,42 +80,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Tom Rini <trini@konsulko.com> writes:
 
---JJmF6AxyZgqOpnYb
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> On Thu, Feb 22, 2024 at 11:24:38PM -0600, Jonathan Humphreys wrote:
+>> Add bootph DT tags to enable OSPI in SPL.
+>> Set OSPI regs for R5 SPL to address OSPI's boot region.
+>> 
+>> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
+>> ---
+>>  arch/arm/dts/k3-am642-evm-u-boot.dtsi | 24 ++++++++++++++++++++++++
+>>  arch/arm/dts/k3-am642-r5-evm.dts      |  5 +++++
+>>  arch/arm/dts/k3-am642-r5-sk.dts       |  5 +++++
+>>  arch/arm/dts/k3-am642-sk-u-boot.dtsi  | 24 ++++++++++++++++++++++++
+>>  4 files changed, 58 insertions(+)
+>> 
+>> diff --git a/arch/arm/dts/k3-am642-evm-u-boot.dtsi b/arch/arm/dts/k3-am642-evm-u-boot.dtsi
+>> index b843078243..f7ab9f9a30 100644
+>> --- a/arch/arm/dts/k3-am642-evm-u-boot.dtsi
+>> +++ b/arch/arm/dts/k3-am642-evm-u-boot.dtsi
+>> @@ -182,3 +182,27 @@
+>>  &cpsw_port2 {
+>>  	status = "disabled";
+>>  };
+>> +
+>> +&ospi0_pins_default {
+>> +	bootph-all;
+>> +};
+>> +
+>> +&fss {
+>> +	bootph-all;
+>> +};
+>> +
+>> +&ospi0 {
+>> +	bootph-all;
+>> +
+>> +	flash@0 {
+>> +		bootph-all;
+>> +
+>> +		partitions {
+>> +			bootph-all;
+>> +
+>> +			partition@3fc0000 {
+>> +				bootph-all;
+>> +			};
+>> +		};
+>> +	};
+>> +};
+>
+> Do we really need these tags on the partition table? And if so, do we
+> need them in main U-Boot, or just SPL?
+>
 
-On Fri, Feb 23, 2024 at 05:14:20PM +0000, Ivan Orlov wrote:
+Tom, these are the OSPI phy calibration patterns.  I added them as they
+are in the J721e u-boot.dtsi and both use the same OSPI interface.
 
-> We should have CONFIG_DM_I2C or CONFIG_SYS_I2C_LEGACY enabled in
-> order for `cmd/eeprom.c` to compile as it depends on the i2c functions
-> which are not compiled otherwise. Update the Kconfig entry for the
-> 'eeprom' command correspondingly.
->=20
-> Signed-off-by: Ivan Orlov <ivan.orlov@codethink.co.uk>
+However, I dug into this more and the upstream Cadence OSPI driver isn't
+calibrating the phys.
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+I will respin this series to remove the .dtsi nodes, and add a patch to
+the J721e series to remove it from there as well.
 
---=20
-Tom
+Thanks for catching.
 
---JJmF6AxyZgqOpnYb
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXZAjYACgkQFHw5/5Y0
-tyyl4AwAtdkA5FOUOD8l4Q+ryapH9h1hfDJTgptt8oGL/S+baVrdwODJd2C2LOyL
-wJydd4CNc9/uJEonyGL/GwbE0cOjupcQENw+IDcXsWEUkLSM3L7PS77qXW4tvNVQ
-87dW4De7wVU7NQ4YJm04rnB5pPN3IltTKlai4N79bqEnQsfqRqDffhzrZYdUp1w0
-te+dt8ZM3KwG5XEhJA08BZUAwDMWBpG4/429f3e2nB2NPxYE8Z5BfPxf0HFpNA/Z
-QNtCPJrLKA9uNmpBcg9jr6IbZN+vRgr7y5BmPIrxKjqFBRHOdX6esRC7S7G1aJ4C
-fedCNxymYlfOro2lgoFDTIBqglMeK3QiMZ0XqvsjhW8+/W/zA/PK745RRq935SZN
-GGE9sgJR8wys1EbiBBTwOMeuyOQDbTfTOeVLTN2c01MMkbAP+VklL7oUcrqzqOx2
-BS0yeWrKDsUX6MPe6z0zjcW1ZWDUd+AJimppJ53i+OjwBQ/X3Wbga85rzUqWK65D
-vndvA82Y
-=q5j8
------END PGP SIGNATURE-----
-
---JJmF6AxyZgqOpnYb--
+> -- 
+> Tom
