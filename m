@@ -4,74 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42EBCC47DD9
-	for <u-boot@archiver.kernel.org>; Sun, 25 Feb 2024 10:05:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E4BEC47DD9
+	for <u-boot@archiver.kernel.org>; Sun, 25 Feb 2024 10:31:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 478F287D71;
-	Sun, 25 Feb 2024 11:05:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A835A87D91;
+	Sun, 25 Feb 2024 11:31:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MRzC1jPg";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NJUsqb4L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C63A687D8F; Sun, 25 Feb 2024 11:05:45 +0100 (CET)
-Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
- [IPv6:2607:f8b0:4864:20::1033])
+ id 1EF4587DB0; Sun, 25 Feb 2024 11:31:53 +0100 (CET)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4AD8187D58
- for <u-boot@lists.denx.de>; Sun, 25 Feb 2024 11:05:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A047187D8F
+ for <u-boot@lists.denx.de>; Sun, 25 Feb 2024 11:31:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=matwey.kornilov@gmail.com
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-2997a92e23bso1309428a91.3
- for <u-boot@lists.denx.de>; Sun, 25 Feb 2024 02:05:42 -0800 (PST)
+ spf=pass smtp.mailfrom=linux.amoon@gmail.com
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-6e49332d014so406181a34.3
+ for <u-boot@lists.denx.de>; Sun, 25 Feb 2024 02:31:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1708855540; x=1709460340; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=FA6fnyMSy/9hPi0fQn5IQbJdvuYMS8iujhvw8qpxMb0=;
- b=MRzC1jPgguYOkUJIFhOilvMbRTD+is6HjgA33ogx1U9Vd+WXrrS1/m3JF91tVjbqqY
- S9+guXBObQCdi62J1beOmBzCnfvxnTCRlpb8a6N1YpaYiLtShTh+j7l2AFOEEJEc/Qse
- 3QGOgi/15sScB4YVPXah4gLVkVlF+FRzZ6K8/u+B0FUay6Ee0m8If9Q0VrGK8/2Mp/HM
- 0l2kSdMr1mFiboyjTeyxoTfvqR3nE0rORQQZBylP59mZ8dwQY4MbFo6R7hJyhFxjpztM
- U33MRvCOia9wc979FXinW7hIWZSnl8y2Sq3ZgmUz+oKVuIQ8b7FdDIHfWrv6+l+48+Zz
- vhtg==
+ d=gmail.com; s=20230601; t=1708857109; x=1709461909; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=yZ5WlsDR6rDQRUu7IGVwq1eAGt135gq4PUvwps53M6Q=;
+ b=NJUsqb4LfK8qvTO/RiTjFov7Dbo51MGn4kS3H8i4qVETBEMSQTU5GTNZlSzo2tCmn3
+ hlTJSrtxS5n7apFM/i5D8RuNYLTDIR7ml5NgR561Ll0ml/tF14GF29KYw4ADQRIv1TWP
+ caYNzx+0TptNO/zSaDeUkt49Sd+kyB9tlKMoioq9wBsfLklUbuJEYXLFwT8gnhHvqOtz
+ R3jh6uVmN9+yc77fqOku896bSGq/e9dvs/r71jlbmrGEnfChREcI8VbCF+ZbLe+dwHIH
+ gIhVitt9fZxPjslUcy3f1O5L9yCxr3wZqyO4oAyDU1Aa+yKEy74EUOTJJUPqPMXV+/r0
+ /qZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708855540; x=1709460340;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=FA6fnyMSy/9hPi0fQn5IQbJdvuYMS8iujhvw8qpxMb0=;
- b=T5sIGBcLmwzzSRS8IiNLc8Ni9mBz2KvYPj00rxDVA7htspDVaY5VTyscB7rGs1V8uc
- EjJ+3ShbjSw4eQ+3xo0z6pos3YhH9oSgHEePwj+DWAtMEiMiXULyyzoTFFNwtFkTMCL5
- hU2qpu9qqhmlzKXM7nXs6NtUXdDZB1LVTUsUPIzIjaZycF+gbLQuX1g83EsnRb62rePZ
- fFVKBX49FvggBdKGNvM+JLDFeTL+lRbNXEkOQ7m9atp97P8irLAZEEXt7xu7LZi1I99v
- kfgkkY4miyxGBEXrZn/h8HrHaEMosbFtRlymMqXcRZSgenpr/gEd9wPtBwEjOpHWqsbw
- abLQ==
-X-Gm-Message-State: AOJu0YyXEISRdf2aTsoIbpEf3ZbHiiwK8Ydo5wv2SqHaqAHt/6i28xID
- NxeOwWQMfzO7devrSqtZldzeSrI2dGb1a5NPckao+ZVW7Kz3saYayJvZQEsCZWqd20gDCreobWV
- xX3ksr60aE25haQfvYmaPaPXQRsw=
-X-Google-Smtp-Source: AGHT+IEQyo/82C/+1h/kV+9i0Y48xDuNuJxBpEkxz+aNC1iohya5LTYkMooXeYTRYKfSkTGDjJWR1WRZVvlfBcOrB3A=
-X-Received: by 2002:a17:90a:ea04:b0:299:1c53:113f with SMTP id
- w4-20020a17090aea0400b002991c53113fmr2818854pjy.0.1708855540273; Sun, 25 Feb
- 2024 02:05:40 -0800 (PST)
+ d=1e100.net; s=20230601; t=1708857109; x=1709461909;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=yZ5WlsDR6rDQRUu7IGVwq1eAGt135gq4PUvwps53M6Q=;
+ b=Fz3Hz5OweRA9MCf0/IaXQ0Rw993rFxbFuz7w+LHRicWViILwPCUlGxsF0qOkC3qNSz
+ l4HY9vPMFmiY0UDJ8arw0jc89wP1O5t5hG0rKBxpyWfE8I+QVBx8/af5UOzb0rYnm+ru
+ J726s4F1fKrnehOUz1QlbRrnkMFjilLhWVsmRdVDdIBKqfK2Ua66U+putlgeskEr7x07
+ ryzpukj6g8+Ti61ZFspy5dgoWp6K3Th1E7fRGRW/77IXdkkpJekj7QG/yu78BGRyzV6z
+ knCGKhKpzZC5/WaUR/UvgbMQi7c42LN/m7gKxc9mtwthchnZ4kU8IdQ3gUf3cHDdvQ5c
+ Y6Fg==
+X-Gm-Message-State: AOJu0Yzf/cXz2YI4Hmcwa66okD3cMo8kYHEhOcgueSXkv38E5il0SvJj
+ ukh4ug+P4bsqSmkkRNpQzgI+MHGW1g2q39qmldOfv9cpwNLHP3x8tuGDFu+OG+oehnG6aBDTJEw
+ d9t3fTyDAy7+zV84MU9DAdXQorok=
+X-Google-Smtp-Source: AGHT+IEkCNMkTGxHXJMyKazkrm+9nRJHgv5bHPocs4shq0MYY4bkVZywpQ1JqKk/Qz13spBEGiPOVbxbVsorhuPo1kY=
+X-Received: by 2002:a05:6830:2a8d:b0:6e4:75cd:85ef with SMTP id
+ s13-20020a0568302a8d00b006e475cd85efmr5251597otu.36.1708857109145; Sun, 25
+ Feb 2024 02:31:49 -0800 (PST)
 MIME-Version: 1.0
-References: <20240224235011.290117-1-benwolsieffer@gmail.com>
-In-Reply-To: <20240224235011.290117-1-benwolsieffer@gmail.com>
-From: "Matwey V. Kornilov" <matwey.kornilov@gmail.com>
-Date: Sun, 25 Feb 2024 13:05:28 +0300
-Message-ID: <CAJs94Eb=O4AHo08tcVOKwws5twWVEzseTWLtGAz35v_Abrxi4w@mail.gmail.com>
-Subject: Re: [PATCH] rockchip: rock64: store env in SPI flash
-To: Ben Wolsieffer <benwolsieffer@gmail.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Kever Yang <kever.yang@rock-chips.com>
+References: <CAHseuWAmUbWJtmH8TNtr6_P3ibd6+1yT2kKticNdbfLdMViLqA@mail.gmail.com>
+ <CANAwSgR-Bd0ck-LkYb9QcNigP3Ht61RxYds5=YFyX58pdeusCw@mail.gmail.com>
+ <CAHseuWD93woj0sq6iMBjdKs2_Ny4=P_3TWtZRGdUFijDMSRzXw@mail.gmail.com>
+In-Reply-To: <CAHseuWD93woj0sq6iMBjdKs2_Ny4=P_3TWtZRGdUFijDMSRzXw@mail.gmail.com>
+From: Anand Moon <linux.amoon@gmail.com>
+Date: Sun, 25 Feb 2024 16:01:33 +0530
+Message-ID: <CANAwSgRQMQwTO0GjFpk0a9LHGhcwC2_C-YvWao8FnuQavZibRw@mail.gmail.com>
+Subject: Re: Raspberry Pi 3b Plus USB-Ethernet lan78xx_eth address not set
+To: Sourabh Hegde Ramu <hrsourabh1107@gmail.com>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,50 +87,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-As far as I remember not all Rock64 are supplied with soldered SPI.
+Hi,
 
-=D0=B2=D1=81, 25 =D1=84=D0=B5=D0=B2=D1=80. 2024=E2=80=AF=D0=B3. =D0=B2 02:5=
-2, Ben Wolsieffer <benwolsieffer@gmail.com>:
+On Sun, 25 Feb 2024 at 12:25, Sourabh Hegde Ramu
+<hrsourabh1107@gmail.com> wrote:
 >
-> Currently, U-Boot attempts to store the environment in MMC 0, which
-> doesn't work when an eMMC is used without an SD card. There is an SPI
-> flash chip on the board, so use that instead which should work in all
-> cases. Additionally, this brings the Rock64 into line with the
-> RockPro64.
+> Hi Anand,
 >
-> Signed-off-by: Ben Wolsieffer <benwolsieffer@gmail.com>
-> ---
->  configs/rock64-rk3328_defconfig | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
+> Thanks for the update.
 >
-> diff --git a/configs/rock64-rk3328_defconfig b/configs/rock64-rk3328_defc=
-onfig
-> index 0297d09876..589e5184ca 100644
-> --- a/configs/rock64-rk3328_defconfig
-> +++ b/configs/rock64-rk3328_defconfig
-> @@ -8,6 +8,7 @@ CONFIG_NR_DRAM_BANKS=3D1
->  CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=3Dy
->  CONFIG_CUSTOM_SYS_INIT_SP_ADDR=3D0x300000
->  CONFIG_SF_DEFAULT_SPEED=3D20000000
-> +CONFIG_ENV_SIZE=3D0x8000
->  CONFIG_ENV_OFFSET=3D0x3F8000
->  CONFIG_DEFAULT_DEVICE_TREE=3D"rk3328-rock64"
->  CONFIG_DM_RESET=3Dy
-> @@ -54,7 +55,7 @@ CONFIG_SPL_OF_CONTROL=3Dy
->  CONFIG_TPL_OF_CONTROL=3Dy
->  CONFIG_OF_SPL_REMOVE_PROPS=3D"clock-names interrupt-parent assigned-cloc=
-ks assigned-clock-rates assigned-clock-parents"
->  CONFIG_TPL_OF_PLATDATA=3Dy
-> -CONFIG_ENV_IS_IN_MMC=3Dy
-> +CONFIG_ENV_IS_IN_SPI_FLASH=3Dy
->  CONFIG_SYS_RELOC_GD_ENV_ADDR=3Dy
->  CONFIG_SYS_MMC_ENV_DEV=3D1
->  CONFIG_NET_RANDOM_ETHADDR=3Dy
-> --
-> 2.43.2
+> Yes, I can set it manually. But this should be done by u-boot, right? Is there any reason why this is not happening on Pi 3b plus?
+> I have other Raspberry Pi (4 & 3b) and they are working fine.
+>
+> Also, is this MAC address for LAN75xx or LAN78xx? The error message shows lan78xx_eth.
 >
 
+Most of the ethernet controllers get the MAC address via EPROM.
+or they used some logic to set the MAC address.
+check CONFIG_NET_RANDOM_ETHADDR this flag is needed for your device.
 
---=20
-With best regards,
-Matwey V. Kornilov
+Thanks
+-Anand
+>
+> On Sun, Feb 25, 2024, 06:50 Anand Moon <linux.amoon@gmail.com> wrote:
+>>
+>> Hi,
+>>
+>> On Sat, 24 Feb 2024 at 01:56, Sourabh Hegde Ramu
+>> <hrsourabh1107@gmail.com> wrote:
+>> >
+>> > Hello,
+>> >
+>> > I have a Raspberry Pi 3B Plus which I want to integrate with U-boot
+>> > (v2023.10) .
+>> >
+>> > I am using rpi_3_32b_defconfig to generate u-boot.bin. But while booting I
+>> > am getting below error
+>> >
+>> > Loading Environment from FAT... Unable to read "uboot.env" from mmc0:1...
+>> > In:    serial,usbkbd
+>> > Out:   serial,vidconsole
+>> > Err:   serial,vidconsole
+>> > Net:   No ethernet found.
+>> > starting USB...
+>> > Bus usb@7e980000: USB DWC2
+>> > scanning bus usb@7e980000 for devices...
+>> > Error: lan78xx_eth address not set.
+>> > 3 USB Device(s) found
+>> >        scanning usb for storage devices... 0 Storage Device(s) found
+>> > Hit any key to stop autoboot:  0
+>> >
+>> > In the "bdinfo", "current eth" is not set
+>> >
+>> > U-Boot> bdinfo
+>> > boot_params = 0x00000100
+>> > DRAM bank   = 0x00000000
+>> > -> start    = 0x00000000
+>> > -> size     = 0x3b400000
+>> > flashstart  = 0x00000000
+>> > flashsize   = 0x00000000
+>> > flashoffset = 0x00000000
+>> > baudrate    = 115200 bps
+>> > relocaddr   = 0x3b360000
+>> > reloc off   = 0x3b358000
+>> > Build       = 32-bit
+>> > current eth = unknown
+>> > eth-1addr   = (not set)
+>> > IP addr     = <NULL>
+>> >
+>> > I also enabled LAN75xx in menuconfig and re-compiled u-boot. But still the
+>> > same error.
+>> >
+>> > However on Raspberry Pi 3B, I don't see this error and "current eth" is set
+>> > to "smsc95xx_eth" and "ethaddr" is also available.
+>> >
+>> > Can anyone please let me know the issue with Raspberry Pi 3b plus?
+>> >
+>> > Thanks in advance.
+>>
+>> Can you set the MAC address in boot environment?
+>>
+>> # setenv ethaddr 00:14:05:42:03:BB
+>> # saveenv
+>>
+>> It should update the mac address for LAN75xx
+>> printenv should display the mac address
+>>
+>> Thanks
+>> -Anand
