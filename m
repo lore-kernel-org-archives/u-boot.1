@@ -4,79 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 374F9C47DD9
-	for <u-boot@archiver.kernel.org>; Sun, 25 Feb 2024 16:05:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41924C47DD9
+	for <u-boot@archiver.kernel.org>; Sun, 25 Feb 2024 16:07:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A86D187DB3;
-	Sun, 25 Feb 2024 17:05:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A98A787DEC;
+	Sun, 25 Feb 2024 17:07:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=jannau.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UWmRwD8K";
+	dkim=pass (2048-bit key; unprotected) header.d=jannau.net header.i=@jannau.net header.b="rUrhTQQH";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="dIXaacT+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E586187DEF; Sun, 25 Feb 2024 17:05:50 +0100 (CET)
-Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
- [IPv6:2607:f8b0:4864:20::1135])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 66A8087D74; Sun, 25 Feb 2024 17:07:52 +0100 (CET)
+Received: from wout5-smtp.messagingengine.com (wout5-smtp.messagingengine.com
+ [64.147.123.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB51687DB3
- for <u-boot@lists.denx.de>; Sun, 25 Feb 2024 17:05:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 676BB87E06
+ for <u-boot@lists.denx.de>; Sun, 25 Feb 2024 17:07:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-6089b64f4eeso22748547b3.2
- for <u-boot@lists.denx.de>; Sun, 25 Feb 2024 08:05:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1708877147; x=1709481947; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=2sVtbgcKtfibt/7SVjW/4A/Sqgi5S7zw1Kpt/1NRwyA=;
- b=UWmRwD8KVBp0QnVHAUolwUMxtGliJqZE1W0hbXjl1ien+41uDC16Zp24RgEujiPLsb
- ar0aaqavEm/Xlc2AlrbNCGf4CtBtwBNiAu3RYOqCa0EJ7oKB850F/s+58mbojEJd0UGj
- wQqAbW2YV9vFHzrH0MBzl93OCuGMroR+DZVU4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708877147; x=1709481947;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=2sVtbgcKtfibt/7SVjW/4A/Sqgi5S7zw1Kpt/1NRwyA=;
- b=X6gRyFqwc5QW6OdKhAyOhMwUonchyb517+K770QvH9mrpSqb4ZDqjmtq+fduMFbu2E
- JQ5sqaACC6mGMA6q3HVxIJhDEOog4NBsnZHX5q3YJhGEpyCZj25NiWdzhFVUeY3E8D2u
- wOrRtC8pPbZqeJMtg97i5y3EGsFlIfEUOrRkwNvuICoL8evTV1KxnOPwF3lwpe6krb5M
- dpwKqR7T3hOXNhgRxqQyY3ZhKr60Hh0/+EBlFQSX8xjxignmuQNInQNabG6Hi4+v6i0+
- lOHNjwe4wjsy9eMZ6ErCBvYvqB1fUjK247DxkDPFSW8JNDcEuqalpHvwc13UxOUlq8cI
- pl+A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWFqO1Gt3g5fUFIag3BRXB0/S0KkfMwgxjLQbfqxEXOsrxTjyW1bNMMaLG+8UgiBFh2wuUaW/wEyO9riSe10/MngdRgIg==
-X-Gm-Message-State: AOJu0YzPcPQtWDsMOWm6hL8IDfYacPFPbfQqlQ+O8UpP9ayxLzbqSOte
- 0Lfh/Ypm5O4r9Z24yixX/5yDdwaXkW3BjC2f2WrSETVSKDJZH4IO1T+Ukgphdu/nY3XKMAZP2yh
- A
-X-Google-Smtp-Source: AGHT+IGEzytIVT+KhEU1D8o4A2RHMnJNnRoFq7nycwa5bxsmEJSfQwnlTMvaysnOrXTLGB1Bpoz07Q==
-X-Received: by 2002:a81:ae53:0:b0:608:a004:13f4 with SMTP id
- g19-20020a81ae53000000b00608a00413f4mr4103610ywk.47.1708877147449; 
- Sun, 25 Feb 2024 08:05:47 -0800 (PST)
-Received: from bill-the-cat (065-184-194-195.res.spectrum.com.
- [65.184.194.195]) by smtp.gmail.com with ESMTPSA id
- p201-20020a0de6d2000000b00608b3e03ec7sm787690ywe.90.2024.02.25.08.05.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 25 Feb 2024 08:05:46 -0800 (PST)
-Date: Sun, 25 Feb 2024 11:05:44 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
-Subject: Re: [PATCH] usb: dwc3-generic: Fix build errors when USB_DWC3_GADGET
- is disabled
-Message-ID: <20240225160544.GG3040305@bill-the-cat>
-References: <20240225152715.1821613-1-jonas@kwiboo.se>
+ dmarc=none (p=none dis=none) header.from=jannau.net
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=j@jannau.net
+Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
+ by mailout.west.internal (Postfix) with ESMTP id EB3EF3200A02;
+ Sun, 25 Feb 2024 11:07:47 -0500 (EST)
+Received: from imap53 ([10.202.2.103])
+ by compute1.internal (MEProxy); Sun, 25 Feb 2024 11:07:48 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jannau.net; h=cc
+ :cc:content-type:content-type:date:date:from:from:in-reply-to
+ :in-reply-to:message-id:mime-version:references:reply-to:subject
+ :subject:to:to; s=fm3; t=1708877267; x=1708963667; bh=OdegtLHjz4
+ PRJTPWkYd1xhplRz7QKuNQCcm0HyxxUlU=; b=rUrhTQQHU+h81IJx4vpj81nwSo
+ J7jMZUx3AirModFLkS4vHWGpvITSFSxbwK+RO/HCEH0rt/HDl4EXHb9WXEoNrZwa
+ 6qJCxHMYfTzdCeYxulHTFpi1RgGtp9cfFxiKGdqNhaDym+nKR4qDauqMtRdEwNNp
+ KxIXay5WZ1pFIf3rqiw50BhushsRrqTwm3vyjdR6S48CzUTlfyjCNMLg/n3O7i3Q
+ siT/7Q6Yjz22EIGJrmo1z4yC8cGW2NJjdKOtte3jySvySdVagF2DECZOSU47/gLG
+ X/NLx6zHL/pPq7fJ71nZUhER0MBxuE2ubWmbTyq5BzMllS1yj155DmJJwLQg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-type:content-type:date:date
+ :feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+ :message-id:mime-version:references:reply-to:subject:subject:to
+ :to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
+ fm1; t=1708877267; x=1708963667; bh=OdegtLHjz4PRJTPWkYd1xhplRz7Q
+ KuNQCcm0HyxxUlU=; b=dIXaacT+aLz8hFHwGHlIMaIyqa2YgEjc90IhM2bPPq6R
+ utYz5ydAjAn734jNI6Frr41wN6Zp5rVKW+Q8SpI/+AZmC5e4QjEo4c4Ae1NLI8p4
+ Y/foL1Kbpvq6Q1Pgtv8+8sGsIztErskhMy/2LhSNsfk1vqIQ0poHCqE1ZG1sjkzq
+ C9c/TS/Ip1+mdIaSChgjKTaT3L1v4nNRK1NcmpkXAN0xDQhpon/FI9ixdVIRRIhD
+ VxY3IzUjnUniAPF9PGjgEeyNiLOTIvmcLAebg0Ba4dhP6VIs223Yg8ZNgjzcboS0
+ jPNIM3CfiqnDqVcen8dADb+9jihdOwqZIF69sZo5Sw==
+X-ME-Sender: <xms:02XbZU3Mr6pkip5kcs_y4jtjLW1tmd7NxRibVe2QJCeTlIn-jLTIrg>
+ <xme:02XbZfFGWQMY9LAretnET-_pu8aH4fy4ll_Xs1nOiG4y8HKUUKlnNXs3MsgMGVvR7
+ 9tH-XFJm2YIq_DaQrg>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrgedtgdekfecutefuodetggdotefrodftvf
+ curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+ uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
+ fjughrpefofgggkfgjfhffhffvvefutgesthdtredtreertdenucfhrhhomhepfdflrghn
+ nhgvucfirhhunhgruhdfuceojhesjhgrnhhnrghurdhnvghtqeenucggtffrrghtthgvrh
+ hnpeevvdfhtddvvddtgffggfeuteduhfeigeevfeffueekheetffekjeehjeefhfeitden
+ ucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehjsehjrg
+ hnnhgruhdrnhgvth
+X-ME-Proxy: <xmx:02XbZc4STP684NXmzRNUj7TrLnFcCkrrNnoM0qSKTGtHYpVJWtp0tQ>
+ <xmx:02XbZd2BFN6Y9Gdm2Wo0t7jrPODRdCzOGoFGXnaK5Br_JDgDnsCQ6Q>
+ <xmx:02XbZXGdZ5VvCRKWypMTazsPqbrMAJaPe-IRPr_UZmFA8N69rdmRrA>
+ <xmx:02XbZfDv1mC8A9Tr0Lc7CN_MO2sKZfTheO-r8h5IwY8unHuHGJ5Ldw>
+Feedback-ID: i47b949f6:Fastmail
+Received: by mailuser.nyi.internal (Postfix, from userid 501)
+ id EF443364006F; Sun, 25 Feb 2024 11:07:46 -0500 (EST)
+X-Mailer: MessagingEngine.com Webmail Interface
+User-Agent: Cyrus-JMAP/3.11.0-alpha0-153-g7e3bb84806-fm-20240215.007-g7e3bb848
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="eqXZCEd11rtATHfK"
-Content-Disposition: inline
-In-Reply-To: <20240225152715.1821613-1-jonas@kwiboo.se>
-X-Clacks-Overhead: GNU Terry Pratchett
+Message-Id: <4c1c6b72-ffe5-4ff3-8d12-9fc0b956643d@app.fastmail.com>
+In-Reply-To: <2acb9976-a40e-4977-b7ca-2462e84251ed@denx.de>
+References: <20240221-asahi-keyboards-v1-0-814b2e741790@jannau.net>
+ <20240221-asahi-keyboards-v1-4-814b2e741790@jannau.net>
+ <2acb9976-a40e-4977-b7ca-2462e84251ed@denx.de>
+Date: Sun, 25 Feb 2024 17:07:26 +0100
+From: "Janne Grunau" <j@jannau.net>
+To: "Marek Vasut" <marex@denx.de>, "Bin Meng" <bmeng.cn@gmail.com>,
+ "Tom Rini" <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, asahi@lists.linux.dev,
+ "Hector Martin" <marcan@marcan.st>
+Subject: Re: [PATCH 4/6] usb: kbd: Ignore Yubikeys
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,54 +103,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hej,
 
---eqXZCEd11rtATHfK
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Wed, Feb 21, 2024, at 13:41, Marek Vasut wrote:
+> On 2/21/24 08:25, Janne Grunau via B4 Relay wrote:
+>> From: Hector Martin <marcan@marcan.st>
+>> 
+>> We currently only support one USB keyboard device, but some devices
+>> emulate keyboards for other purposes. Most commonly, people run into
+>> this with Yubikeys, so let's ignore those.
+>> 
+>> Even if we end up supporting multiple keyboards in the future, it's
+>> safer to ignore known non-keyboard devices.
+>> 
+>> Signed-off-by: Hector Martin <marcan@marcan.st>
+>> ---
+>>   common/usb_kbd.c | 19 +++++++++++++++++++
+>>   1 file changed, 19 insertions(+)
+>> 
+>> diff --git a/common/usb_kbd.c b/common/usb_kbd.c
+>> index 4cbc9acb73..774d3555d9 100644
+>> --- a/common/usb_kbd.c
+>> +++ b/common/usb_kbd.c
+>> @@ -120,6 +120,15 @@ struct usb_kbd_pdata {
+>>   
+>>   extern int __maybe_unused net_busy_flag;
+>>   
+>> +/*
+>> + * Since we only support one usbkbd device in the iomux,
+>> + * ignore common keyboard-emulating devices that aren't
+>> + * real keyboards.
+>> + */
+>> +const uint16_t vid_blocklist[] = {
+>> +	0x1050, /* Yubico */
+>> +};
+>> +
+>>   /* The period of time between two calls of usb_kbd_testc(). */
+>>   static unsigned long kbd_testc_tms;
+>>   
+>> @@ -465,6 +474,7 @@ static int usb_kbd_probe_dev(struct usb_device *dev, unsigned int ifnum)
+>>   	struct usb_endpoint_descriptor *ep;
+>>   	struct usb_kbd_pdata *data;
+>>   	int epNum;
+>> +	int i;
+>>   
+>>   	if (dev->descriptor.bNumConfigurations != 1)
+>>   		return 0;
+>> @@ -480,6 +490,15 @@ static int usb_kbd_probe_dev(struct usb_device *dev, unsigned int ifnum)
+>>   	if (iface->desc.bInterfaceProtocol != USB_PROT_HID_KEYBOARD)
+>>   		return 0;
+>>   
+>> +	for (i = 0; i < ARRAY_SIZE(vid_blocklist); i++) {
+>> +		if (dev->descriptor.idVendor == vid_blocklist[i]) {
+>> +			printf("Ignoring keyboard device 0x%x:0x%x\n",
+>> +			       dev->descriptor.idVendor,
+>> +			       dev->descriptor.idProduct);
+>> +			return 0;
+>> +		}
+>> +	}
+>
+> I vaguely recall a discussion about previous version of this, I think 
+> the suggestion was to make the list of ignored devices configurable via 
+> environment variable, so users can add to that list from U-Boot shell. 
+> Would it be possible to make it work this way ?
 
-On Sun, Feb 25, 2024 at 03:27:13PM +0000, Jonas Karlman wrote:
+oh, I completely forgot that this patch was already submitted. I briefly looked through asahi tree for related patches and did not check whether this was previously submitted.
+I've added environment based blocking as separate patch with blocking either complete vendor IDs or vendor, product ID combinations. A separate patch to simplify authorship tracking and the implementation doesn't share any code.
 
-> Build fail with the following error when DM_USB_GADGET is enabled and
-> USB_DWC3_GADGET is disabled:
->=20
->   dwc3/dwc3-generic.o: in function `dm_usb_gadget_handle_interrupts':
->   dwc3/dwc3-generic.c:201:(.text.dm_usb_gadget_handle_interrupts+0x10):
->     undefined reference to `dwc3_gadget_uboot_handle_interrupt'
->=20
-> Build also fail with the following error when USB_GADGET_DWC2_OTG +
-> DM_USB_GADGET is enabled and USB_DWC3_GADGET is disabled:
->=20
->   gadget/dwc2_udc_otg.o: in function `dm_usb_gadget_handle_interrupts':
->   gadget/dwc2_udc_otg.c:947: multiple definition of `dm_usb_gadget_handle=
-_interrupts';
->     dwc3/dwc3-generic.o:dwc3/dwc3-generic.c:197: first defined here
->=20
-> Fix this by checking for USB_DWC3_GADGET in addition to DM_USB_GADGET.
->=20
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
---=20
-Tom
-
---eqXZCEd11rtATHfK
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXbZVUACgkQFHw5/5Y0
-tyzDsQwAoSRO8lMR9VYQHmOAAyhPGJBgT8CDSQd3mxsVrIgV/rPFRVZa1ASpXc5G
-EHpXaVuk8re2/3DLyd+jh3ASQ1LhsTIbW//DDNO8fmwnPUHLlYPaBso1uOkgIRQu
-RVUI6ZN893VDDE3sV1MGqswFNwhDGAFGH+dtTITRQHFMPXQnm86hGN8uYgHRKFkn
-yN18KPykH/No3csyh8aYEeE7oK6Nbsl8E3MznQXsrD0yw4EG1NdgQPqfU8CrbOh8
-UqcoqzYxj9MZ8AQRxq8+LAppiG/6DxKEiIQBSr7idXLWvVWB/HIMiWgnlSTpC0Ki
-b9FQM3/Il9NNTFJMBGOGU/aAgF+EABbciZoac3QwWuM+sKdWkbJZ3K8WQiuUA7X3
-gc6u0NwqkzCjWunHgxHMmDDatApfRz9GG0aVIoAhquOnSpCLN4+RWt2jMPyz4RT8
-LO64oKxUJKXgX7qsxKfEc4R5SDjZJXlBi4DgwN4tENJDyLZ6dCqtC4LDPHkBHeF8
-zn7tU7UC
-=zfFc
------END PGP SIGNATURE-----
-
---eqXZCEd11rtATHfK--
+Janne
