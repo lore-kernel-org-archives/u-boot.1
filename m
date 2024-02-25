@@ -4,75 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 654CEC47DD9
-	for <u-boot@archiver.kernel.org>; Sun, 25 Feb 2024 13:10:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 224A1C47DD9
+	for <u-boot@archiver.kernel.org>; Sun, 25 Feb 2024 13:10:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7783687DDD;
-	Sun, 25 Feb 2024 14:10:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DC71587DE3;
+	Sun, 25 Feb 2024 14:10:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tSWx2oLU";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="P34fbNhb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E5C6587DD8; Sun, 25 Feb 2024 14:10:20 +0100 (CET)
-Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
- [IPv6:2607:f8b0:4864:20::1136])
+ id 98A9E87DDB; Sun, 25 Feb 2024 14:10:25 +0100 (CET)
+Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
+ [IPv6:2607:f8b0:4864:20::1132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9C56D87D83
- for <u-boot@lists.denx.de>; Sun, 25 Feb 2024 14:10:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9347587D83
+ for <u-boot@lists.denx.de>; Sun, 25 Feb 2024 14:10:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-6087192b092so25109147b3.0
- for <u-boot@lists.denx.de>; Sun, 25 Feb 2024 05:10:18 -0800 (PST)
+Received: by mail-yw1-x1132.google.com with SMTP id
+ 00721157ae682-608959cfcbfso20757457b3.3
+ for <u-boot@lists.denx.de>; Sun, 25 Feb 2024 05:10:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1708866617; x=1709471417; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1708866622; x=1709471422; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=/dvCSBF/XiLgSWcA1r3BZ1+BhdASOLJH2qMOdtuQxoQ=;
- b=tSWx2oLUghh1loSjQAQ8H+TjJmXFqK68LWGh5gj8KcEXDTQMYOlh35DnuM44IOGEWV
- 0CZDyVbViKxa3uFcs6HJH+sgyuohRuuzVsZGTr27APzdW0KdI/HN35tpiaR7efSHXihr
- wKojGQWNHj4LX5tJgsApssVWPlky5WnPgNJMU=
+ bh=g9llo1UjogdPbMPxB6uRVIrzGHfaxFaLe9c1GFwTI7Q=;
+ b=P34fbNhbfcBmeXQ146Mpu1aINK8ToQohoae7ppFj5ELXFzfintTiVFYt3ru2lCRZBw
+ GHFDAu/XSuFITsX+WErdomKcHvZBwJU7AKK8uEXBWwTLeRvGH9KSqaqGB+XsELBbbeL4
+ bZMUHdB2mXQZaAwJ0CecwduC/Zd6l+j4rQOfM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708866617; x=1709471417;
+ d=1e100.net; s=20230601; t=1708866622; x=1709471422;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/dvCSBF/XiLgSWcA1r3BZ1+BhdASOLJH2qMOdtuQxoQ=;
- b=VdCeLKNP2YFO1EstSnS5nV9X42ZffrVYUR17hnrmgrbNd8kZbMwWUEELwfPPztFx8t
- hw6bswt1oz+uyjb4SC3iSK9MLiXQzieAzIiXhLkFLvSSvJnPX1a9kYfbxa+GrvtjEPSq
- F+nWJufev2hUS3WVHsbAIR7DUdYsqZ4MkW8P2zQkMlh74tFnCirI9W35qSpoAA+xZOgJ
- agjxBDUSNgUZzNy+M4CFUKvjyKpAAL+cyjbfx9SBUew7vPjj93f/4GIkXlGs/YjoBo3V
- 6Hk5bJPmbmsma3R0CL9Qr9cfw+eofhzthP/XivtsPAiQWi5nC0ELJ74+Q2o0WJE4jWgy
- FsJg==
-X-Gm-Message-State: AOJu0YxNYPY3S6fuWA8aDGUV4lmOsVYaHrtdG0WoljytpPIF74EJ0s+9
- wBHlVTJmWwZa9de3wY3JAhsXHtCRknetRRp/++42NGfXjqvMTLpyqkGYzN9uTH4LhNAQleP9T6s
- y
-X-Google-Smtp-Source: AGHT+IGAzz52VMAgvv8SUht31qlwK4mQjkPjZrfgTUT07bK0C0nQ+9ScyWKdX8KUKLJ7+MipjJDckQ==
-X-Received: by 2002:a0d:d812:0:b0:608:5136:bd7d with SMTP id
- a18-20020a0dd812000000b006085136bd7dmr3753750ywe.51.1708866617303; 
- Sun, 25 Feb 2024 05:10:17 -0800 (PST)
+ bh=g9llo1UjogdPbMPxB6uRVIrzGHfaxFaLe9c1GFwTI7Q=;
+ b=e2pTA0Ow1Fo+BAo3nsnhYXErRQApS3Dl/ad4hR7DsVnoexlomNjg9s8yPxudnPmmMC
+ d0xVg5AtehcuOOQzS1/s0c3bGs4U8/HyujGukwqOy1TtXI0HoOXO3RUHQTooypVpFPcu
+ nSb9FhWChFm/fwSlgc84bXWQzDboaajo6OoRpBcuj1e6srQFWZAr/owcszQH3HGt+Huf
+ 73tJg8LlrmnaKOau/DeoTkKTwZmAdg8uls3t8/BNOZrquHijXDExB1G4+FtV895sRu1F
+ Xia74GfMDkw2fkILlFq7F3T5joOBEKIugetP2e3TPSD0cMwnOgIcOiF52mOSi55vfVor
+ +DsQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXP18e36aeL8Q838qqyLtbhYyYU/S/38TvfY65iuk29uWYyc9CBbaguSQNs9gmscoDVx5sSMsHQhAWvRYsehEJltKhiQg==
+X-Gm-Message-State: AOJu0YxXwGqZ/ReNxsr1zzgPNbd2gA815HWmN2D10pab1PWV/zvkhgjg
+ APKFGG25eDJWKhcuvCHdWgOytjh8yRfd/DVbJ++K0pCxTdaEKB1uy06pWCQIlcw=
+X-Google-Smtp-Source: AGHT+IEcq2Og6Dm0QhkwhrXTVnSy7ch9VvN6RJSgsvclUy0MpanWv4UA7SbMQYp2KCuhnPFCbzCD4Q==
+X-Received: by 2002:a05:690c:5:b0:608:dc99:b217 with SMTP id
+ bc5-20020a05690c000500b00608dc99b217mr2523806ywb.50.1708866622301; 
+ Sun, 25 Feb 2024 05:10:22 -0800 (PST)
 Received: from bill-the-cat (065-184-194-195.res.spectrum.com.
  [65.184.194.195]) by smtp.gmail.com with ESMTPSA id
- d194-20020a0ddbcb000000b00607afedd0f0sm714812ywe.64.2024.02.25.05.10.16
+ p201-20020a0de6d2000000b00608b3e03ec7sm731809ywe.90.2024.02.25.05.10.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 25 Feb 2024 05:10:16 -0800 (PST)
-Date: Sun, 25 Feb 2024 08:10:15 -0500
+ Sun, 25 Feb 2024 05:10:21 -0800 (PST)
+Date: Sun, 25 Feb 2024 08:10:19 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [GIT PULL] Please pull u-boot-imx-master-20240224
-Message-ID: <20240225131015.GE3040305@bill-the-cat>
-References: <20240224222117.1504690-1-festevam@gmail.com>
+To: "Kumar, Udit" <u-kumar1@ti.com>
+Cc: Jonathan Humphreys <j-humphreys@ti.com>, vaishnav.a@ti.com,
+ u-boot@lists.denx.de, Neha Malcom Francis <n-francis@ti.com>
+Subject: Re: [PATCH v2 3/3] arm: dts: k3-j721e-sk: Remove OSPI phypattern
+ partition
+Message-ID: <20240225131019.GF3040305@bill-the-cat>
+References: <20240224002307.2284386-1-j-humphreys@ti.com>
+ <20240224002307.2284386-4-j-humphreys@ti.com>
+ <90c45918-e0eb-4d09-9e0f-06aea0d4ccb5@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="XejB8Zw2Yx0qURdz"
+ protocol="application/pgp-signature"; boundary="vwxm7V2YMoTJe7d/"
 Content-Disposition: inline
-In-Reply-To: <20240224222117.1504690-1-festevam@gmail.com>
+In-Reply-To: <90c45918-e0eb-4d09-9e0f-06aea0d4ccb5@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,55 +96,48 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---XejB8Zw2Yx0qURdz
+--vwxm7V2YMoTJe7d/
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Feb 24, 2024 at 07:21:17PM -0300, Fabio Estevam wrote:
+On Sun, Feb 25, 2024 at 10:17:06AM +0530, Kumar, Udit wrote:
+> Thanks Jon
+>=20
+> On 2/24/2024 5:53 AM, Jonathan Humphreys wrote:
+> > The phy calibration pattern partition isn't needed as the Cadence drive=
+r isn't
+> > calibrating the phys.
+>=20
+>=20
+> Please do mention Fixes tag here
+>=20
+> 58d61fb5a77e ("arm: dts: k3-j721e-sk: Add initial A72 specific dts suppor=
+t")
 
-> Hi Tom,
->=20
-> Please pull from u-boot-imx, thanks.
->=20
-> The following changes since commit bb9d6c7f4f6a598e8856b2e19e58c7de078a0d=
-6e:
->=20
->   Merge tag 'u-boot-amlogic-fixes-20240223' of https://source.denx.de/u-b=
-oot/custodians/u-boot-amlogic (2024-02-23 12:54:03 -0500)
->=20
-> are available in the Git repository at:
->=20
->   https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx=
--master-20240224
->=20
-> for you to fetch changes up to 7c76b1b91bf67cd09fdf5dbd71590f9e580590fa:
->=20
->   opos6uldev: Convert to watchdog driver model (2024-02-24 16:29:24 -0300)
->=20
-> u-boot-imx-master-20240224
-
-Applied to u-boot/master, thanks!
+Please note that patchwork will just pick up:
+Fixes: 58d61fb5a77e ("arm: dts: k3-j721e-sk: Add initial A72 specific dts s=
+upport")
 
 --=20
 Tom
 
---XejB8Zw2Yx0qURdz
+--vwxm7V2YMoTJe7d/
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXbPDcACgkQFHw5/5Y0
-tyzP7wv/dvrbeHzxTnSM3yKBFZED8VtFAylw5+NicsAx/jKDBHxs08iqaFjRu0s3
-Qj8TrHQGFbkOoqHioOyCrkL40meKR7DcJ+C1XsEUnxqvEGVyuEtWjwrfMt/LuDPB
-mKawzV1lEguEkydj89/L7qzGxXK210PKOdGzj6Z854Q4RKtUHT6nVyZlCVMSnuZg
-/L8iMGpnlBFAR2pp/BccUI2mNTDSVYbnVtsXJPQNoMHg+5ULtfX+VYsKrFxvIihH
-YEzwQ/cyL4WaVsX5QQ9sfkYNJ0YoQX5sXXWa17iKZH+ROtjWhLQrmQihTU1hbEdO
-hOEQ414xY6aqvZXv8XzM8/b2whKAaQfh+0OAOCcZYpT/9w3gWGudf8q28QU0gcXu
-R7x76sKPQsFMuiukOmF3v9eFwNuW6j70PJWMqPAYfWp8/gLRHpp7rLe5YS+SSM2r
-mqtgw1q5tYE9E0pdwLDnYlmsx17is7Ds7HwrbOD8q7MkJd/z8ffQZoZlnmnvrjc7
-1Uh9C6+T
-=6EXc
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXbPDsACgkQFHw5/5Y0
+tyznRAv/RwT40x+oIlMvX7AjTSpLWjUnMlVWJvEbhKNgxyHIj4Y2Z6TWJg7vqbMc
+HxytnG2mEo1v2e/7zF08tWATfrnpNVzSisJJTe0WMLEamVaXiG1yOFMQJ3W9g+j2
+7/z1giidyO52GCq515vxCHvba1SfUPZFmcwxBU1zC2SvthJnomFfiDq4uSbxK0dP
+4pgU+JXEGWwyXZKAHbCcYB4aRgyfdtysvkV8UAnbKVGwhrQQcar8FHv1LRS1aKFZ
+Xzo20NNVQojooFgVGyQve13t8zMPoDsk+LFof6wvrMC9XuvOeqGAHci+YE+7JtKU
+siH8CEsWCarVby6la0iRN3dHnRXFVP9hzG/gJ8t9REvDigFFebGdUBgxrXjVGEeb
+r7E8+w1qacTqHtBnQ/Xk54YvuiEZHeSnwWVkwCwFWGXvCNfle/0x7Ufb3HxFE19Y
+O0JRuP6XfzzHHaDtQAdrXorrX83z+UyvVZbZoh+NmcFefrl4M2yWBoMTgIPDNWt+
+uyHuefAK
+=+LjF
 -----END PGP SIGNATURE-----
 
---XejB8Zw2Yx0qURdz--
+--vwxm7V2YMoTJe7d/--
