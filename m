@@ -4,53 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D643AC47DD9
-	for <u-boot@archiver.kernel.org>; Sun, 25 Feb 2024 16:00:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 374F9C47DD9
+	for <u-boot@archiver.kernel.org>; Sun, 25 Feb 2024 16:05:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E19B87D59;
-	Sun, 25 Feb 2024 17:00:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id A86D187DB3;
+	Sun, 25 Feb 2024 17:05:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="plXC3mW3";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UWmRwD8K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6BD9B87DEB; Sun, 25 Feb 2024 17:00:56 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E586187DEF; Sun, 25 Feb 2024 17:05:50 +0100 (CET)
+Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
+ [IPv6:2607:f8b0:4864:20::1135])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1EC6587D59
- for <u-boot@lists.denx.de>; Sun, 25 Feb 2024 17:00:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CB51687DB3
+ for <u-boot@lists.denx.de>; Sun, 25 Feb 2024 17:05:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=31c0=KD=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
- To: From; q=dns/txt; s=fe-e1b5cab7be; t=1708876822;
- bh=ARNhsnCYjwni01trKDbL6Y7VRyvVktsEhhCpWyRepek=;
- b=plXC3mW3Xquoq7AYviTPtziC7QosFCLHR1clUFdSxY0/zCuB/BWW6BObyw0wU4JVqd+eU2iFp
- 0yV/CICdBIoL9Or2Jb4cRYaPxLwblYCduuqPD5xP+fqhiawMdhK8LU79u7sz77WrF3m6eeKibpA
- yaEI/GOyadzWpRNgpPqv9EMC0BGI9CKziL2w2GjpD8sxQAlskszZNgVuYSs6E3qSzzdfvLehgOo
- SGzWSBkISfPXbalKJ/IJCAaG6BghAQmwhFDXX1a5tT4AubM5kVg0e3fJGyO/j29PDO6W8vo2bjF
- FlELIUQmn5jA2+Z3rolSFFp1eNXS7MxgmrTLJaBzYJxg==
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
-Cc: Jonas Karlman <jonas@kwiboo.se>, u-boot@lists.denx.de
-Subject: [PATCH] usb: dwc3-generic: Fix build errors when USB_DWC3_GADGET is
- disabled
-Date: Sun, 25 Feb 2024 15:27:13 +0000
-Message-ID: <20240225152715.1821613-1-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-6089b64f4eeso22748547b3.2
+ for <u-boot@lists.denx.de>; Sun, 25 Feb 2024 08:05:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1708877147; x=1709481947; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=2sVtbgcKtfibt/7SVjW/4A/Sqgi5S7zw1Kpt/1NRwyA=;
+ b=UWmRwD8KVBp0QnVHAUolwUMxtGliJqZE1W0hbXjl1ien+41uDC16Zp24RgEujiPLsb
+ ar0aaqavEm/Xlc2AlrbNCGf4CtBtwBNiAu3RYOqCa0EJ7oKB850F/s+58mbojEJd0UGj
+ wQqAbW2YV9vFHzrH0MBzl93OCuGMroR+DZVU4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1708877147; x=1709481947;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=2sVtbgcKtfibt/7SVjW/4A/Sqgi5S7zw1Kpt/1NRwyA=;
+ b=X6gRyFqwc5QW6OdKhAyOhMwUonchyb517+K770QvH9mrpSqb4ZDqjmtq+fduMFbu2E
+ JQ5sqaACC6mGMA6q3HVxIJhDEOog4NBsnZHX5q3YJhGEpyCZj25NiWdzhFVUeY3E8D2u
+ wOrRtC8pPbZqeJMtg97i5y3EGsFlIfEUOrRkwNvuICoL8evTV1KxnOPwF3lwpe6krb5M
+ dpwKqR7T3hOXNhgRxqQyY3ZhKr60Hh0/+EBlFQSX8xjxignmuQNInQNabG6Hi4+v6i0+
+ lOHNjwe4wjsy9eMZ6ErCBvYvqB1fUjK247DxkDPFSW8JNDcEuqalpHvwc13UxOUlq8cI
+ pl+A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWFqO1Gt3g5fUFIag3BRXB0/S0KkfMwgxjLQbfqxEXOsrxTjyW1bNMMaLG+8UgiBFh2wuUaW/wEyO9riSe10/MngdRgIg==
+X-Gm-Message-State: AOJu0YzPcPQtWDsMOWm6hL8IDfYacPFPbfQqlQ+O8UpP9ayxLzbqSOte
+ 0Lfh/Ypm5O4r9Z24yixX/5yDdwaXkW3BjC2f2WrSETVSKDJZH4IO1T+Ukgphdu/nY3XKMAZP2yh
+ A
+X-Google-Smtp-Source: AGHT+IGEzytIVT+KhEU1D8o4A2RHMnJNnRoFq7nycwa5bxsmEJSfQwnlTMvaysnOrXTLGB1Bpoz07Q==
+X-Received: by 2002:a81:ae53:0:b0:608:a004:13f4 with SMTP id
+ g19-20020a81ae53000000b00608a00413f4mr4103610ywk.47.1708877147449; 
+ Sun, 25 Feb 2024 08:05:47 -0800 (PST)
+Received: from bill-the-cat (065-184-194-195.res.spectrum.com.
+ [65.184.194.195]) by smtp.gmail.com with ESMTPSA id
+ p201-20020a0de6d2000000b00608b3e03ec7sm787690ywe.90.2024.02.25.08.05.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 25 Feb 2024 08:05:46 -0800 (PST)
+Date: Sun, 25 Feb 2024 11:05:44 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
+Subject: Re: [PATCH] usb: dwc3-generic: Fix build errors when USB_DWC3_GADGET
+ is disabled
+Message-ID: <20240225160544.GG3040305@bill-the-cat>
+References: <20240225152715.1821613-1-jonas@kwiboo.se>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 65db5c58a3b008edc5d443a5
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="eqXZCEd11rtATHfK"
+Content-Disposition: inline
+In-Reply-To: <20240225152715.1821613-1-jonas@kwiboo.se>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,49 +93,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Build fail with the following error when DM_USB_GADGET is enabled and
-USB_DWC3_GADGET is disabled:
 
-  dwc3/dwc3-generic.o: in function `dm_usb_gadget_handle_interrupts':
-  dwc3/dwc3-generic.c:201:(.text.dm_usb_gadget_handle_interrupts+0x10):
-    undefined reference to `dwc3_gadget_uboot_handle_interrupt'
+--eqXZCEd11rtATHfK
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Build also fail with the following error when USB_GADGET_DWC2_OTG +
-DM_USB_GADGET is enabled and USB_DWC3_GADGET is disabled:
+On Sun, Feb 25, 2024 at 03:27:13PM +0000, Jonas Karlman wrote:
 
-  gadget/dwc2_udc_otg.o: in function `dm_usb_gadget_handle_interrupts':
-  gadget/dwc2_udc_otg.c:947: multiple definition of `dm_usb_gadget_handle_interrupts';
-    dwc3/dwc3-generic.o:dwc3/dwc3-generic.c:197: first defined here
+> Build fail with the following error when DM_USB_GADGET is enabled and
+> USB_DWC3_GADGET is disabled:
+>=20
+>   dwc3/dwc3-generic.o: in function `dm_usb_gadget_handle_interrupts':
+>   dwc3/dwc3-generic.c:201:(.text.dm_usb_gadget_handle_interrupts+0x10):
+>     undefined reference to `dwc3_gadget_uboot_handle_interrupt'
+>=20
+> Build also fail with the following error when USB_GADGET_DWC2_OTG +
+> DM_USB_GADGET is enabled and USB_DWC3_GADGET is disabled:
+>=20
+>   gadget/dwc2_udc_otg.o: in function `dm_usb_gadget_handle_interrupts':
+>   gadget/dwc2_udc_otg.c:947: multiple definition of `dm_usb_gadget_handle=
+_interrupts';
+>     dwc3/dwc3-generic.o:dwc3/dwc3-generic.c:197: first defined here
+>=20
+> Fix this by checking for USB_DWC3_GADGET in addition to DM_USB_GADGET.
+>=20
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 
-Fix this by checking for USB_DWC3_GADGET in addition to DM_USB_GADGET.
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
- drivers/usb/dwc3/dwc3-generic.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+--=20
+Tom
 
-diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
-index 6fb2de8a5ace..891d01957619 100644
---- a/drivers/usb/dwc3/dwc3-generic.c
-+++ b/drivers/usb/dwc3/dwc3-generic.c
-@@ -192,7 +192,7 @@ static int dwc3_generic_of_to_plat(struct udevice *dev)
- 	return 0;
- }
- 
--#if CONFIG_IS_ENABLED(DM_USB_GADGET)
-+#if IS_ENABLED(CONFIG_USB_DWC3_GADGET) && CONFIG_IS_ENABLED(DM_USB_GADGET)
- int dm_usb_gadget_handle_interrupts(struct udevice *dev)
- {
- 	struct dwc3_generic_priv *priv = dev_get_priv(dev);
-@@ -435,7 +435,7 @@ static int dwc3_glue_bind_common(struct udevice *parent, ofnode node)
- 	if (!dr_mode)
- 		dr_mode = usb_get_dr_mode(node);
- 
--	if (CONFIG_IS_ENABLED(DM_USB_GADGET) &&
-+	if (IS_ENABLED(CONFIG_USB_DWC3_GADGET) && CONFIG_IS_ENABLED(DM_USB_GADGET) &&
- 	    (dr_mode == USB_DR_MODE_PERIPHERAL || dr_mode == USB_DR_MODE_OTG)) {
- 		debug("%s: dr_mode: OTG or Peripheral\n", __func__);
- 		driver = "dwc3-generic-peripheral";
--- 
-2.43.0
+--eqXZCEd11rtATHfK
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXbZVUACgkQFHw5/5Y0
+tyzDsQwAoSRO8lMR9VYQHmOAAyhPGJBgT8CDSQd3mxsVrIgV/rPFRVZa1ASpXc5G
+EHpXaVuk8re2/3DLyd+jh3ASQ1LhsTIbW//DDNO8fmwnPUHLlYPaBso1uOkgIRQu
+RVUI6ZN893VDDE3sV1MGqswFNwhDGAFGH+dtTITRQHFMPXQnm86hGN8uYgHRKFkn
+yN18KPykH/No3csyh8aYEeE7oK6Nbsl8E3MznQXsrD0yw4EG1NdgQPqfU8CrbOh8
+UqcoqzYxj9MZ8AQRxq8+LAppiG/6DxKEiIQBSr7idXLWvVWB/HIMiWgnlSTpC0Ki
+b9FQM3/Il9NNTFJMBGOGU/aAgF+EABbciZoac3QwWuM+sKdWkbJZ3K8WQiuUA7X3
+gc6u0NwqkzCjWunHgxHMmDDatApfRz9GG0aVIoAhquOnSpCLN4+RWt2jMPyz4RT8
+LO64oKxUJKXgX7qsxKfEc4R5SDjZJXlBi4DgwN4tENJDyLZ6dCqtC4LDPHkBHeF8
+zn7tU7UC
+=zfFc
+-----END PGP SIGNATURE-----
+
+--eqXZCEd11rtATHfK--
