@@ -4,110 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22267C47DD9
-	for <u-boot@archiver.kernel.org>; Sun, 25 Feb 2024 13:10:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A17EC47DD9
+	for <u-boot@archiver.kernel.org>; Sun, 25 Feb 2024 13:49:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 687BE87DC4;
-	Sun, 25 Feb 2024 14:10:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id AF52887DCC;
+	Sun, 25 Feb 2024 14:49:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LS5/13BM";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ntq3fWDa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C573B87D83; Sun, 25 Feb 2024 14:10:17 +0100 (CET)
-Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
- [IPv6:2607:f8b0:4864:20::1129])
+ id E1C3B87DD8; Sun, 25 Feb 2024 14:49:02 +0100 (CET)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0F3887DC4
- for <u-boot@lists.denx.de>; Sun, 25 Feb 2024 14:10:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 057CD87D8F
+ for <u-boot@lists.denx.de>; Sun, 25 Feb 2024 14:49:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-607dec82853so23195367b3.3
- for <u-boot@lists.denx.de>; Sun, 25 Feb 2024 05:10:13 -0800 (PST)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-5643eccad0bso3525438a12.1
+ for <u-boot@lists.denx.de>; Sun, 25 Feb 2024 05:49:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1708866612; x=1709471412; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Bdkl89RSgLtjcsbscTFA9mOMYpzS9V8piHquwKxzh7M=;
- b=LS5/13BMufa5b2q3XG+3WZicWDPvwOtbcF2lAuGyrXLs6Lwrp3uoIQl28g6BffKjqe
- 2VTlHys19qQcJd4HBAd4D0Oce6w8G80bRwev8rK94vXoD8KnUVcqiP0b9CxJKhrcm/Wb
- IZgtOBX97TVyeVbgKjpsXFPJX2OffaZJ0wxEY=
+ d=gmail.com; s=20230601; t=1708868940; x=1709473740; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=TIiFcHoCjtg6YsaClIFiTXOJRw8j8A2VWUOh9Cuwrec=;
+ b=Ntq3fWDaCfRQgKqMV1F0Q7YRiP0pbApWBp6OftdcwP2OOVcg5uyZXZbKsKB2IObWxC
+ W0Wo6O8jDIyYGaMIly3nsst3/G3rPiDrCVEkamj6B/N9ZdnBg8WaD7/yyAE6UST3ytyy
+ E7OGq9/2mKAU+3VPSt1p8n82XpovF4K6aF6dwiIoTHAiQJrNB6PP4LMrCuF8LG1d9hnj
+ 4k2X42E9fVy3giyyvu/gDaGRF8FS+ZAInOpZS2dOZqbC0aIBuJJWrLV+/d0srwxdnYJu
+ yyeR7XDf8GY0SsH6349WUA4clpTEGq2/1MeWpdt39kpuneIx8sJhLNAF7lbvQKrZS4uM
+ M4Lg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708866612; x=1709471412;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Bdkl89RSgLtjcsbscTFA9mOMYpzS9V8piHquwKxzh7M=;
- b=gW7uo1aeGGx812oYr7G/MnxNUALi8tkW3GLk4myXWlLssJ06vwGjenK1bBRHpaglqm
- Umm5nfSp6578PFLDZdN/Q+VhxPMvLEqH/j6rV2cl9anMTo+QGabLSGJNtdzU9n3NCn0i
- VCEyel6RG67ZksVDtc4uAYhhff2U8rTHm6frA4opJGQtKQVlb8SiF07jz+pQZOoiZr6d
- oEi8ZI9zo7XdTUFDSRP5p8j5b8HEAim9osUz1b9YxeOB9pGyoNSeQ0NNH9+jNkPn/kHu
- ESWZgJ9cu0B4pL+d+CJ7VYA9vXKRxF7XPSeU446VbirLHBI+kx7umhERgTWq9oxDIHKj
- ri/g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWqK9+OqZZeSbCiFUK7aoJNZCudDboyYJAFHaC3JAzDu4zdiDI83smpMr8NZ/C9mBc8/4eK/dlOtFlLBe3qb9WErrRrmA==
-X-Gm-Message-State: AOJu0Yx5X9r1gR7+KC+XlBMWSgrJLIPpin++xZf5553HCjtqz4diFL9g
- cFdXxCqlPwhSSHwsRc6DMyNGUivlHbxB85ysxc6uGxZ/0xqqDNeytI+LFcRKWjA=
-X-Google-Smtp-Source: AGHT+IE9ugt2MqXUS6h//qHZ2odm7EFMZMM4JhRAhUKaW+Oj1bgeI49N1mRBIdyi7fqNpEEsSAlnEQ==
-X-Received: by 2002:a81:924e:0:b0:608:f912:c872 with SMTP id
- j75-20020a81924e000000b00608f912c872mr225642ywg.30.1708866612465; 
- Sun, 25 Feb 2024 05:10:12 -0800 (PST)
-Received: from bill-the-cat (065-184-194-195.res.spectrum.com.
- [65.184.194.195]) by smtp.gmail.com with ESMTPSA id
- b3-20020a0dc003000000b0060447768630sm723557ywd.124.2024.02.25.05.10.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 25 Feb 2024 05:10:11 -0800 (PST)
-Date: Sun, 25 Feb 2024 08:10:08 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Apurva Nandan <a-nandan@ti.com>
-Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>,
- Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- Michal Simek <michal.simek@amd.com>, Marek Vasut <marex@denx.de>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>, Tianling Shen <cnsztl@gmail.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Hai Pham <hai.pham.ud@renesas.com>, FUKAUMI Naoki <naoki@radxa.com>,
- Christian Hewitt <christianshewitt@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>, Dasnavis Sabiya <sabiya.d@ti.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>,
- Hari Nagalla <hnagalla@ti.com>, Andrew Davis <afd@ti.com>,
- Nishanth Menon <nm@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>,
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Roger Quadros <rogerq@kernel.org>, Aradhya Bhatia <a-bhatia1@ti.com>,
- Joao Paulo Goncalves <joao.goncalves@toradex.com>,
- Bhavya Kapoor <b-kapoor@ti.com>, Jonathan Humphreys <j-humphreys@ti.com>,
- Nikhil M Jain <n-jain1@ti.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Vignesh Raghavendra <vigneshr@ti.com>, Udit Kumar <u-kumar1@ti.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jayesh Choudhary <j-choudhary@ti.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Yanhong Wang <yanhong.wang@starfivetech.com>,
- Ralph Siemsen <ralph.siemsen@linaro.org>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, u-boot@lists.denx.de
-Subject: Re: [PATCH v10 08/15] board: ti: j784s4: Add board support for
- J784S4 EVM
-Message-ID: <20240225131008.GD3040305@bill-the-cat>
-References: <20240223202153.3756094-1-a-nandan@ti.com>
- <20240223202153.3756094-9-a-nandan@ti.com>
+ d=1e100.net; s=20230601; t=1708868940; x=1709473740;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=TIiFcHoCjtg6YsaClIFiTXOJRw8j8A2VWUOh9Cuwrec=;
+ b=Z4rQgIXrAYHo4p4Ltrmk3J3UsuInGpMMl5dFD0XbV8QTtPpq+KTwgPdgbNDC+8WHvq
+ zJ8H+GyuyxUGNT8RplYmHwk11rIvZKH9ASi2nv9Cs/QS5EXGhVjA0Pu40Tihg0IlXbHv
+ EXbLOCmNyhK/Gjv2H81YtHlAzJMxwjAIj+TVUoFAT2u2zOGockYQiWQhbRaTef0TKaEu
+ 1R1HWjHeRDbY26eWCQ9khBDlKxpXWN3wjVAg5tLFdKNbUZyqCRE+T97JRsDKm1WKI61k
+ WpqjhoICnWkrE/GIdiK3LebVYGoc/Nyxwex/wL/sUNyjCxfS5rT3utQEyKNu2I5XjEWm
+ XM0g==
+X-Gm-Message-State: AOJu0YxtKOl7KsKU8JE8ZKvIwv1Efb5bSu1aHdZ/jbCZIsmvP5BbpSPC
+ UahRRdluH93TCzMVp3G08h4uAJr/3YeNlWwBn/bR8Qnf93jaxeJiCad0itO3MkAZB28bwyrJwi8
+ 61ohYrEaDx86t+9EQ2v18pfuJeqA=
+X-Google-Smtp-Source: AGHT+IGv2gV06R5zNyrBGdqnPCDtJ17HWl4sIzugaywCPSdbKPjs7b40MJhclY+cdHPwEd5D2e42yn7AICMQCfXaIkc=
+X-Received: by 2002:aa7:c3d7:0:b0:565:7ede:c5c4 with SMTP id
+ l23-20020aa7c3d7000000b005657edec5c4mr3249804edr.16.1708868940191; Sun, 25
+ Feb 2024 05:49:00 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="O603SElXF1dG/hv9"
-Content-Disposition: inline
-In-Reply-To: <20240223202153.3756094-9-a-nandan@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-X-Mailman-Approved-At: Sun, 25 Feb 2024 14:10:44 +0100
+References: <CAHseuWAmUbWJtmH8TNtr6_P3ibd6+1yT2kKticNdbfLdMViLqA@mail.gmail.com>
+In-Reply-To: <CAHseuWAmUbWJtmH8TNtr6_P3ibd6+1yT2kKticNdbfLdMViLqA@mail.gmail.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Sun, 25 Feb 2024 13:48:49 +0000
+Message-ID: <CALeDE9Pfd0XC3m-LLscgjPqh2bmQh_bUydb02jHw9prvoLQpKg@mail.gmail.com>
+Subject: Re: Raspberry Pi 3b Plus USB-Ethernet lan78xx_eth address not set
+To: Sourabh Hegde Ramu <hrsourabh1107@gmail.com>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -124,46 +85,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
 
---O603SElXF1dG/hv9
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> I have a Raspberry Pi 3B Plus which I want to integrate with U-boot
+> (v2023.10) .
+>
+> I am using rpi_3_32b_defconfig to generate u-boot.bin. But while booting I
+> am getting below error
+>
+> Loading Environment from FAT... Unable to read "uboot.env" from mmc0:1...
+> In:    serial,usbkbd
+> Out:   serial,vidconsole
+> Err:   serial,vidconsole
+> Net:   No ethernet found.
+> starting USB...
+> Bus usb@7e980000: USB DWC2
+> scanning bus usb@7e980000 for devices...
+> Error: lan78xx_eth address not set.
+> 3 USB Device(s) found
+>        scanning usb for storage devices... 0 Storage Device(s) found
+> Hit any key to stop autoboot:  0
+>
+> In the "bdinfo", "current eth" is not set
 
-On Sat, Feb 24, 2024 at 01:51:46AM +0530, Apurva Nandan wrote:
+The ethernet address is set by the ethaddr variable, it can be viewed
+by running printenv. That is then set to the ethernet0 alias in the
+device tree.
 
-> Add board files for J784S4 EVM.
->=20
-> SYS_DISABLE_DCACHE_OPS is selected in the Kconfig because
-> J784S4/AM69 are a coherent architecture at A72 level by
-> MSMC support.
->=20
-> Signed-off-by: Hari Nagalla <hnagalla@ti.com>
-> Signed-off-by: Dasnavis Sabiya <sabiya.d@ti.com>
-> Signed-off-by: Apurva Nandan <a-nandan@ti.com>
-> Reviewed-by: Tom Rini <trini@konsulko.com>
+> U-Boot> bdinfo
+> boot_params = 0x00000100
+> DRAM bank   = 0x00000000
+> -> start    = 0x00000000
+> -> size     = 0x3b400000
+> flashstart  = 0x00000000
+> flashsize   = 0x00000000
+> flashoffset = 0x00000000
+> baudrate    = 115200 bps
+> relocaddr   = 0x3b360000
+> reloc off   = 0x3b358000
+> Build       = 32-bit
+> current eth = unknown
+> eth-1addr   = (not set)
+> IP addr     = <NULL>
+>
+> I also enabled LAN75xx in menuconfig and re-compiled u-boot. But still the
+> same error.
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+I believe the driver for the USB network interface on the 3B+ is the
+USB_ETHER_LAN78XX driver,
 
---=20
-Tom
+> However on Raspberry Pi 3B, I don't see this error and "current eth" is set
+> to "smsc95xx_eth" and "ethaddr" is also available.
 
---O603SElXF1dG/hv9
-Content-Type: application/pgp-signature; name="signature.asc"
+Do you mean it's set at U-Boot stage or when you boot into Linux?
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXbPC0ACgkQFHw5/5Y0
-tywlJgwAs2RmdtU29thE0qBwQ7R6C96ypU/X3GDEjMccd2yVDYuzLvNLyN0eDkJf
-8cBjmIcUxagHWkkW1D6g7PzvydZtW/iywcsofhl07VUk8Ct+LR4nfwlE18yhIMQe
-Ro/LBmMSraWfpOlQjPH2uXvXlgZEYlHM3xNjnKumAYW1FpoYxdoUVI9ixfCM9D8W
-y9hpyWwjngCUlDmpIWyA8CywBQ7NDqf6hwSwOt9X7ProI2U7cU7j/HVs8iJ7dP2r
-awUlGCp4YkfrwEDlWycC0UHbDTW3BI5SpdNe1p9GKMxFGn7RDgLj2L8aKFGChNZ7
-00XN+Rmf+kIjaQ6nS1tjo0YmrHdl9x28HQG8QMn5dXy8DFkBiV+yhRak/sS4KxSM
-8RtDkMaV7Xo0EW++dDFXEcD7a8h2CVImnS2E6OxkvINxjxX7C7Nmlv/cITKvsSuz
-crEIRQxvxMBO83BzDstFOV5l0zBVNPs/CNf5AeGPJOF/CRMx9BeKhNnXvuPVQs/F
-08G3QDgY
-=31IU
------END PGP SIGNATURE-----
-
---O603SElXF1dG/hv9--
+Peter
