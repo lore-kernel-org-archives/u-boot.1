@@ -4,60 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E9ACC47DD9
-	for <u-boot@archiver.kernel.org>; Sun, 25 Feb 2024 14:23:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7464C54798
+	for <u-boot@archiver.kernel.org>; Sun, 25 Feb 2024 15:28:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F2AA787DCF;
-	Sun, 25 Feb 2024 15:23:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id CF0E387D26;
+	Sun, 25 Feb 2024 16:28:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=jannau.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="mDnlzk44";
+	dkim=pass (2048-bit key; unprotected) header.d=jannau.net header.i=@jannau.net header.b="AK54ryT5";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="fIT3D+n6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0D7F787DDA; Sun, 25 Feb 2024 15:23:55 +0100 (CET)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.185])
+ id 74DF987DEC; Sun, 25 Feb 2024 16:28:46 +0100 (CET)
+Received: from wout5-smtp.messagingengine.com (wout5-smtp.messagingengine.com
+ [64.147.123.21])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3FB7387DCD
- for <u-boot@lists.denx.de>; Sun, 25 Feb 2024 15:23:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 70E6B87D26
+ for <u-boot@lists.denx.de>; Sun, 25 Feb 2024 16:28:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: 6d42530c-d3e9-11ee-99a2-005056999439
-Received: from smtp.kpnmail.nl (unknown [10.31.155.8])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id 6d42530c-d3e9-11ee-99a2-005056999439;
- Sun, 25 Feb 2024 15:23:20 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=1SSfZZTSlwBL8CfEjB6rjZAOE4nUfaLydLJI9yiSNcY=;
- b=mDnlzk441Yi4mY2t5QElzd5sz6hq8uyVsFNPZN4FzessoSo2fF7kgxC8+s8hywNsB6eanp8IouB6i
- 0sCwS62Kc/NGA5KjuYUnOZmnE6cPGN36nCv9uXmVUOsrVvStJ/fJSLXomvqH0EFVVuQ7uW4uA0Su27
- 53x0KGUQtvIO1z2rGLmsHxCxxj7PpDp8aLCDYZErv1jnFWEetYFa6RNVzhpXSitUnDdq5Xdkz9RDia
- yiinqMeevfAMrZ7FieURqVbqMsSd8S3Oj09zfVorcmZqe5Brzm0q4aiNP2+McAYERqJi/XYyy/8CD9
- Ql03n+uRJNkU1Tu1j5OCoU2jr09RgFw==
-X-KPN-MID: 33|+fr02YwibquXrkfMJHNjW+oZTK1oyH/0SqLnACa/X7EKWQShd6It7Xpli7475Vk
- cB2qD+8QS+Zjc3hymrDH0hn758RsPQCBOGypfeyT8ghs=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|QH62rEf75iVk51ClExEWGcI0zOHl121Wm6j3DqyDLH8N2Y4t7JsKUJ5LuzQV6+r
- EUaK+8WLV/wzlgAx/jWsTSw==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id 7f050e01-d3e9-11ee-8952-00505699d6e5;
- Sun, 25 Feb 2024 15:23:51 +0100 (CET)
-Date: Sun, 25 Feb 2024 15:23:50 +0100
-Message-Id: <87h6hwk4g9.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: trini@konsulko.com, sjg@chromium.org, ilias.apalodimas@linaro.org,
- u-boot@lists.denx.de, pbrobinson@gmail.com
-In-Reply-To: <20240225141457.48209-1-pbrobinson@gmail.com> (message from Peter
- Robinson on Sun, 25 Feb 2024 14:14:55 +0000)
-Subject: Re: [PATCH v2] disk: dos: Add all options for EFI System Partitions
-References: <20240225141457.48209-1-pbrobinson@gmail.com>
+ dmarc=none (p=none dis=none) header.from=jannau.net
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=j@jannau.net
+Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
+ by mailout.west.internal (Postfix) with ESMTP id 4C6E83200A06;
+ Sun, 25 Feb 2024 10:28:38 -0500 (EST)
+Received: from imap53 ([10.202.2.103])
+ by compute1.internal (MEProxy); Sun, 25 Feb 2024 10:28:38 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jannau.net; h=cc
+ :cc:content-type:content-type:date:date:from:from:in-reply-to
+ :in-reply-to:message-id:mime-version:references:reply-to:subject
+ :subject:to:to; s=fm3; t=1708874917; x=1708961317; bh=P+oZYz1CBa
+ tTnWBRQmgaBxJYEVx4mXafL25G8t9Ow8Y=; b=AK54ryT54c5VfpoTmwUYZMBBlS
+ LJ5KbEN2oE8B12bpLhNjpQoFs8J7E58TmUOlOthJdCT0mTa72D7G7ZELQMgcHsvw
+ SfibmEC/bdzlzpbKEIe6Ko52OMc7BojIx6sVWpuDIOjsFzM2xvPmymA3Uc3qv2TG
+ 5McZPZ7eIORPJYslCyizFP6ltONLSAISvjn55FP3ocUn/0qJs8C5OZizN3OtHgfH
+ o1zZ24qIycjPbs1lWUIWcxOkbddDYRwCmhydRcdtr83uH/QB1lfT5uG364aFOfov
+ iTJK4qCUEGENpyQsCTEyN1y44XI5XhLuB69tjOYZnHjfF43HmI33FQyRCPhw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-type:content-type:date:date
+ :feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+ :message-id:mime-version:references:reply-to:subject:subject:to
+ :to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
+ fm1; t=1708874917; x=1708961317; bh=P+oZYz1CBatTnWBRQmgaBxJYEVx4
+ mXafL25G8t9Ow8Y=; b=fIT3D+n664QZ5qdwQKXf7898PQJDNclmuA2m1WsSGZ8j
+ T9OgbmghJU2gdYjZAB3CqEnkluNTyqI2FrFRkXUXPTpk6BvVT1RDBWWqHCDe0Yf7
+ sHzJYNuxXOZGOmi2D2JaUxfMC4J3izdQdzeNcSjRRiJqdM6qqbUMKOPDxm+SH6+t
+ THKcLF5BOt/Ai1F3ozT1z4QTntQk1Q/TlqNyXUqF4u60tX1hMBjaPzh3F4oER832
+ YvFURuYzt/ee1UdP/9vEYmGDpRjBqtwaM5OHgaIjoV81kQ8zpJjOE4uKs/4Lg15b
+ doTJnn5Z/ioplAk8NK4wTyv8sPOPifS3+M9ZP3Opjg==
+X-ME-Sender: <xms:pVzbZWRyaYwo-g81BlVMXyW4UbaiSkESZ8G3aOcUGk1DKfFEWre_bw>
+ <xme:pVzbZbyo0fnmp9oA0upAM__CRGQtCLzPRBspz1xlIqCvukhjA5F52yo_Yn4AOCfe9
+ hYkdqkyXwEt_GesxfU>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrgedtgdejhecutefuodetggdotefrodftvf
+ curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+ uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
+ fjughrpefofgggkfgjfhffhffvvefutgesthdtredtreertdenucfhrhhomhepfdflrghn
+ nhgvucfirhhunhgruhdfuceojhesjhgrnhhnrghurdhnvghtqeenucggtffrrghtthgvrh
+ hnpeevvdfhtddvvddtgffggfeuteduhfeigeevfeffueekheetffekjeehjeefhfeitden
+ ucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehjsehjrg
+ hnnhgruhdrnhgvth
+X-ME-Proxy: <xmx:pVzbZT0YjkhrQ2IxNnstNVFZqy55YyMjMhnyV1npPnfHZvt4yMq0VQ>
+ <xmx:pVzbZSCMZhFUw6-kv9Urjv39ayWTDyWu4El_fJ5h1IQG6EDev4YMVw>
+ <xmx:pVzbZfgtUrRikutNT5UqR7U1kn1MuZMAVjGja8T4I00tg0tLu9i_4Q>
+ <xmx:pVzbZSsCyLLsk5m0_gcgpGnmB7dzjpF-i_aBLTmeLYwp9pJMaIYBNA>
+Feedback-ID: i47b949f6:Fastmail
+Received: by mailuser.nyi.internal (Postfix, from userid 501)
+ id 713EC364006F; Sun, 25 Feb 2024 10:28:37 -0500 (EST)
+X-Mailer: MessagingEngine.com Webmail Interface
+User-Agent: Cyrus-JMAP/3.11.0-alpha0-153-g7e3bb84806-fm-20240215.007-g7e3bb848
+MIME-Version: 1.0
+Message-Id: <b0c41f38-abf0-4713-a80a-c78f074b7b4d@app.fastmail.com>
+In-Reply-To: <9cb3370e-770a-40e6-b890-ae9b5a15bd44@denx.de>
+References: <20240221-asahi-keyboards-v1-0-814b2e741790@jannau.net>
+ <20240221-asahi-keyboards-v1-2-814b2e741790@jannau.net>
+ <9cb3370e-770a-40e6-b890-ae9b5a15bd44@denx.de>
+Date: Sun, 25 Feb 2024 16:28:13 +0100
+From: "Janne Grunau" <j@jannau.net>
+To: "Marek Vasut" <marex@denx.de>, "Bin Meng" <bmeng.cn@gmail.com>,
+ "Tom Rini" <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, asahi@lists.linux.dev
+Subject: Re: [PATCH 2/6] usb: xhci: Set up endpoints for the first 2 interfaces
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,68 +102,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> From: Peter Robinson <pbrobinson@gmail.com>
-> Date: Sun, 25 Feb 2024 14:14:55 +0000
-> 
-> The EFI spec states that the ESP can be any of FAT12/16/32 but for
-> compatibility doesn't necssarily require the partition to be the
-> EFI partition table ID of 0xef. A number of arm devices will not
-> find their firmware on a FAT partition with an ID of 0xef so also
-> allow the original FAT12/16/32 partition IDs as they are also
-> permissable for an ESP.
-> 
-> Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
-> ---
-> 
-> v2:
-> - Add 0x0c option
-> - Make hex constants consistent
-> - Move from if to switch statement
 
-Erh...
 
->  disk/part_dos.c | 17 +++++++++++++++--
->  1 file changed, 15 insertions(+), 2 deletions(-)
-> 
-> diff --git a/disk/part_dos.c b/disk/part_dos.c
-> index 567ead7511d..ab855adf347 100644
-> --- a/disk/part_dos.c
-> +++ b/disk/part_dos.c
-> @@ -40,10 +40,23 @@ static int get_bootable(dos_partition_t *p)
->  {
->  	int ret = 0;
->  
-> -	if (p->sys_ind == 0xef)
-> +	switch (p->sys_ind){
-> +	case 0x01:
->  		ret |= PART_EFI_SYSTEM_PARTITION;
-> -	if (p->boot_ind == 0x80)
-> +	case 0x06:
-> +		ret |= PART_EFI_SYSTEM_PARTITION;
-> +	case 0x0b:
-> +		ret |= PART_EFI_SYSTEM_PARTITION;
-> +	case 0x0c:
-> +		ret |= PART_EFI_SYSTEM_PARTITION;
-> +	case 0xef:
-> +		ret |= PART_EFI_SYSTEM_PARTITION;
-> +	case 0x80:
->  		ret |= PART_BOOTABLE;
-> +	default:
-> +		break;
-> +	}
-> +
+On Wed, Feb 21, 2024, at 13:39, Marek Vasut wrote:
+> On 2/21/24 08:25, Janne Grunau via B4 Relay wrote:
+>> From: Janne Grunau <j@jannau.net>
+>> 
+>> Apple USB keyboards carry the HID keyboard boot protocol on the second
+>> interface. Using the second interface in the USB keyboard driver does
+>> not work since the xhci has not allocated a transfer ring.
+>
+> So, what does this patch do ? That is not clear from the commit message.
 
-That really didn't go well.  The 0x80 check was for a different struct
-member and there are missing break statements.  And I suppose the
-suggestion to use a switch was to bunch up the EFI partition type
-cases.
+rewritten for v2:
+| usb: xhci: Set up endpoints for the first 2 interfaces
+|    
+| The xhci driver currently only does the necessary initialization for
+| endpoints found in the first interface descriptor. Apple USB keyboards
+| (released 2021) use the second interface descriptor for the HID keyboard
+| boot protocol. To allow USB drivers to use endpoints from other
+| interface descriptors the xhci driver needs to ensure these endpoints
+| are initialized as well.
+| Use USB_MAX_ACTIVE_INTERFACES to control how many interface descriptors
+| are initialized and useable. Currently defined to 2 as that is enough to
+| make the Apple keyboard usable.
 
-ENOCOFFEE?
+>
+> btw. missing SoB line.
 
->  	return ret;
->  }
->  
-> -- 
-> 2.43.2
-> 
-> 
+added
+
+Thanks
+
+Janne
