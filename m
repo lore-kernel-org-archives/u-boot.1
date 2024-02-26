@@ -4,66 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48568C54E4A
-	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 13:09:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BBE9C48BF6
+	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 13:30:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BFB4487ED6;
-	Mon, 26 Feb 2024 14:09:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 9372587EDE;
+	Mon, 26 Feb 2024 14:30:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1708952975;
-	bh=HzZmEWAG5+iRoGW+z33FgwXFuiaosy6a+J1xxoSfRqI=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=qr1RfrSidS01+ONd1zm+KTbQPyAm4AkQo0Q58ORfaY+paVruPZiop29G+FiWVOK2A
-	 qkW+SUvfi9YTr12DcGvI7L6KqUo+sDMh/N4elfnIOXzZcAWTiS4pyDEVWogTACGKNV
-	 cAMbgcDKqcRdTEPQF/zvA3WPefOKPeBFqA0y7FSjHqTyzMiO1r5f5iQDLQB8JqtQDG
-	 wWdT3mamSglkHgHN93fS2SBxkJsqfWdxwMHcq5QB8NWGXw6FL8BYpbQRCxzvC1iDDj
-	 VWnPJPDOaGi28MYmb2HDLsXK8B8aE6n2ahO3PUmbaqjGtwQdXXEpz+Yo18ISXJe6oI
-	 rlTp/j7SucDKg==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="FKwPvCTn";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 0638D87EFE; Mon, 26 Feb 2024 14:30:18 +0100 (CET)
+Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 2EFE387E40;
- Mon, 26 Feb 2024 14:09:32 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1708952974;
- bh=HzZmEWAG5+iRoGW+z33FgwXFuiaosy6a+J1xxoSfRqI=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=rmWDQeDT9x0rhh2O+44GDqLxUTxoLR0SpH3dSzTF5c+p6bMt7yDvFU5v25g74PR9k
- xLrPJF2hRzLqS8RbFIpObGUIxtSr27s8uDU5PFtj4UimtyNV/TzTrwLGjgemo9BF6u
- pUpWgkydaOxr38Mxze4Tq1fZz0d+BJpTZZ2TuYxBOwQCMraB2B0a5Rd2ATy93qSANc
- Uo5D8NUQO1hZnE7FuiVC+Y0UiSSV4tEg48WL3LSpU24ZlhvVUI8r7VSVjEqUuPtiGK
- udwkWt70NxrqHFO8O/LciaFC4uGYd9hNrhgnOdJqRaaFjA1q4BsB9ELGQ664yEXOrc
- Jh+IAaZ0pD++Q==
-Message-ID: <b0480488-2e79-4641-8674-3a70d921b4c8@denx.de>
-Date: Mon, 26 Feb 2024 14:09:32 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 2F72387EDC
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 14:30:15 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=phytec.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=W.Egorov@phytec.de
+DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
+ q=dns/txt; i=@phytec.de; t=1708954215; x=1711546215;
+ h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=lkhct33U1DRe4k6cbnx5RCB46WgY22edFk85ShYxvU4=;
+ b=FKwPvCTntCEKCabUdYzm0xSwxsrVUnHsJWTnOKol4iSHuNRiVXoBhweYPOwfd84c
+ E0eONwCc9BWXufLVy1mb4tEoU0j9Wo1viPfxc+uBZH9CdRVrovr2e/7Ru/46C4fB
+ Z1+8Utx0FOuddIwAxB256EH/jubbSXeX/D27atHlqCQ=;
+X-AuditID: ac14000a-fadff7000000290d-e2-65dc9267a349
+Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
+ (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (Client did not present a certificate)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id F0.B8.10509.7629CD56;
+ Mon, 26 Feb 2024 14:30:15 +0100 (CET)
+Received: from augenblix2.phytec.de (172.25.0.11) by Berlix.phytec.de
+ (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Mon, 26 Feb
+ 2024 14:30:40 +0100
+From: Wadim Egorov <w.egorov@phytec.de>
+To: <u-boot@lists.denx.de>
+CC: <nm@ti.com>, <upstream@lists.phytec.de>, <bb@ti.com>
+Subject: [PATCH 0/2] *** Introduce get_boot_device() for K3 platform ***
+Date: Mon, 26 Feb 2024 14:30:04 +0100
+Message-ID: <20240226133006.3279993-1-w.egorov@phytec.de>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/8] reset: imx: Add support for i.MX8MP reset
- controller
-Content-Language: en-US
-To: Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot@lists.denx.de, marcel.ziswiler@toradex.com, francesco@dolcini.it,
- trini@konsulko.com, lukma@denx.de, seanga2@gmail.com,
- jh80.chung@samsung.com, festevam@denx.de, andrejs.cainikovs@toradex.com,
- sjg@chromium.org, peng.fan@nxp.com, aford173@gmail.com,
- ilias.apalodimas@linaro.org, sahaj.sarup@linaro.org,
- fathi.boudra@linaro.org, remi.duraffort@linaro.org,
- daniel.thompson@linaro.org
-References: <20240226080433.3307154-1-sumit.garg@linaro.org>
- <20240226080433.3307154-3-sumit.garg@linaro.org>
- <c8f5815a-bbec-4efe-95d0-77dec441a183@denx.de>
- <CAFA6WYOhyHzn+XOsUwrqs5kajHjSFhDcsHGu6=CAB9dT+VCV8Q@mail.gmail.com>
- <583d9f9d-6f95-464d-a912-aebaa837dd7e@denx.de>
- <CAFA6WYNDXmQJ4mPo6HZ8bZnFx0+9qwqHcG20F4vUH3YGRa92aw@mail.gmail.com>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAFA6WYNDXmQJ4mPo6HZ8bZnFx0+9qwqHcG20F4vUH3YGRa92aw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [172.25.0.11]
+X-ClientProxiedBy: Berlix.phytec.de (172.25.0.12) To Berlix.phytec.de
+ (172.25.0.12)
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrILMWRmVeSWpSXmKPExsWyRpKBRzd90p1Ug12PuCzmvjnAavHmx1km
+ i7d7O9ktut+pO7B4nL2zg9Gjv7uF1eP4je1MAcxRXDYpqTmZZalF+nYJXBlbTs5gKXjIXvHy
+ zAKmBsZnrF2MnBwSAiYS605cA7K5OIQEFjNJ3Gr6wgySEBJ4zChxYJUpiM0moC5xZ8M3sAYR
+ ASmJl50bwWqYBSwkzp24wgZiCwt4SFx7/ZcFxGYRUJU4cOw7WJxXwFLixqR7jBDL5CVmXvrO
+ DhEXlDg58wkLxBx5ieats6FmSkgcfPEC6gZ5iReXlrPA9E4795oZwg6V2PplO9MERoFZSEbN
+ QjJqFpJRCxiZVzEK5WYmZ6cWZWbrFWRUlqQm66WkbmIEBasIA9cOxr45HocYmTgYDzFKcDAr
+ ifCGy9xMFeJNSaysSi3Kjy8qzUktPsQozcGiJM67uiM4VUggPbEkNTs1tSC1CCbLxMEp1cBo
+ +veUmFgJu/LrzCVMSTPDy01SEtyKtjT+MeXdEB2y7cuFycaCJ29LWFs8e8z1x++74KNsHe7w
+ gLPFNwN3Lrrz9e9O6btuElcKIuSWpvjx3EycJfz0veHMC0q6C4TK6jbfXZG6wur0zakpzwsL
+ m8XlFmy09vxnuPjDSZOWbzPe+etwCE+2nrRNiaU4I9FQi7moOBEAlHK0XEQCAAA=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,45 +84,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/26/24 2:03 PM, Sumit Garg wrote:
-> On Mon, 26 Feb 2024 at 16:26, Marek Vasut <marex@denx.de> wrote:
->>
->> On 2/26/24 11:43 AM, Sumit Garg wrote:
->>> On Mon, 26 Feb 2024 at 14:24, Marek Vasut <marex@denx.de> wrote:
->>>>
->>>> On 2/26/24 9:04 AM, Sumit Garg wrote:
->>>>
->>>> [...]
->>>>
->>>>> +static int imx7_reset_assert_imx8mp(struct reset_ctl *rst)
->>>>
->>>> Linux calls those imx8mp_reset_set() can co. which is less confusing
->>>> than imx7...imx8mp() , use it.
->>>>
->>>
->>> IMO, it would be more confusing if we choose two different naming
->>> patterns for the same driver, see existing function names
->>> imx7_reset_{deassert/assert}_imx* pattern.
->>
->> Maybe create a patch which updates the naming scheme ?
-> 
-> I can do that as a preparatory patch.
-> 
->>
->> Using two SoC names in one function name is confusing I think .
->>
->>>> In fact, why not copy the code from Linux outright ?
->>>
->>> I suppose the question here is to not convert the driver to use
->>> regmap, right? If it is then that should be done as a separate cleanup
->>> patch.
->>
->> If it isn't too hard, please do the clean up first and then add the
->> MX8MP bits on top.
-> 
-> The coding part is easy but it is rather the testing part which I am
-> worried about as I don't have access to all the platforms which rely
-> on this driver.
+It is handy to have some u-boot environment variables set based on
+the current booting device.
+Provide a way to obtain the boot device for non SPLs by factoring out
+spl_boot_device() into an own function get_boot_device().
 
-Don't worry about that part, I'm reasonably sure if something breaks, it 
-will be spotted sooner rather than later.
+Wadim Egorov (2):
+  arm: mach-k3: am625: copy bootindex to OCRAM for main domain SPL
+  arm: mach-k3: am625: Provide a way to obtain boot device for non SPLs
+
+ arch/arm/mach-k3/Kconfig                      |   3 +-
+ arch/arm/mach-k3/Makefile                     |   1 +
+ arch/arm/mach-k3/am625_init.c                 | 110 +++---------------
+ arch/arm/mach-k3/am62x/Makefile               |   2 +
+ arch/arm/mach-k3/am62x/boot.c                 | 103 ++++++++++++++++
+ arch/arm/mach-k3/include/mach/am62_hardware.h |  15 +++
+ arch/arm/mach-k3/include/mach/hardware.h      |   1 +
+ 7 files changed, 138 insertions(+), 97 deletions(-)
+ create mode 100644 arch/arm/mach-k3/am62x/Makefile
+ create mode 100644 arch/arm/mach-k3/am62x/boot.c
+
+-- 
+2.34.1
+
