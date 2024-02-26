@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D2BBC48BF6
-	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 21:24:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CB10C5478C
+	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 21:24:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8835687F8A;
+	by phobos.denx.de (Postfix) with ESMTP id EBED587FB9;
 	Mon, 26 Feb 2024 22:24:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="fRyrUJDK";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="RMDafSgE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F7C887FB2; Mon, 26 Feb 2024 22:24:12 +0100 (CET)
+ id 8668387F74; Mon, 26 Feb 2024 22:24:12 +0100 (CET)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E364687F74
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 22:24:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F6D887F8B
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 22:24:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,26 +31,26 @@ Received: from LT2ubnt.. (dynamic-046-114-105-150.46.114.pool.telefonica.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id B78B940ED6; 
- Mon, 26 Feb 2024 21:24:05 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 40B2840ED7; 
+ Mon, 26 Feb 2024 21:24:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1708982645;
- bh=aKH8sBe2NYkwVF5UXutJbpmQLwsDXUrqWE8/NV6Do7Y=;
+ s=20210705; t=1708982647;
+ bh=eR50pk103WVrQNw4N39vLgsZci00vipahr0oiB+CAQM=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=fRyrUJDKJB5F4wPgCON6sQSPvIgwjBArUn0ANAaiXO4x2g5DaHsO1gkH0+/Fgn4R5
- dQRZdWlgQxUuL8qtL2T7aAsxjovvEEd7hKB2EdEkQPtbXe+/6cmpQinqLfUOMSdCxw
- YvfSrZe5HO59zmDTzupXsMf9O60/m3tDUvRTSZACCoWHb6LeaY760etR15PSX4vlBM
- 23Q/70hjfh6c1ztHVWqO6JLecAZn2LpAbBmFKTYZlmLAec19sjdjJucKlF7Bej5SP8
- XnVEp+p2zx0Lc/KBkErTomnLYgKXgZVOHAwtKVseMcwyhpa1FFVghB2+YwR7uGvCuX
- S8G3+q26nkkeA==
+ b=RMDafSgE/MBERzLaDwK8bHjfGXNCSGYM055d6oYSCvvbLy8eyEfykrQyZXyT87q/J
+ FSb9JSFLlxiEIU9IrQ3wkRbcyuhwcrb0MfulQJxx4JtkMhN8in46gmcD42oFolAznC
+ 8dnWMKbOebbMniZRwK5xd3D1Ser/Rb+9+WanLzW0Oetf1r1CeH2WuMvT6mJX+ENwax
+ oHd0SwY/TvpcB0h7pCxJ6eDPN1L0Ybbw26L1Xwi5Zg0Fyf0cmDgmbI29cwCJUjJx/a
+ Zrogr8VAIQTapvHKMGfwwGUzDDDyuQCrLTp8zrbzO+9/tbMzLtIapo3AhMWKD6Fi1f
+ D5fIpnAAiHqPA==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 1/2] arm: page align EFI binary section
-Date: Mon, 26 Feb 2024 22:24:07 +0100
-Message-ID: <20240226212408.7535-2-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 2/2] arm: separate .data and .text sections of EFI binaries
+Date: Mon, 26 Feb 2024 22:24:08 +0100
+Message-ID: <20240226212408.7535-3-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240226212408.7535-1-heinrich.schuchardt@canonical.com>
 References: <20240226212408.7535-1-heinrich.schuchardt@canonical.com>
@@ -72,38 +72,151 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Change the alignment of the relocation code in EFI binaries to match page
-boundaries.
+EFI binaries should not contain sections that are both writable and
+executable. Separate the RX .text section from the RW .data section.
+
+We currently don't created relocation sections (.rel.*) for our EFI
+binaries. Anyway these would have to be converted to PE/COFF relocations.
+Enumerate them under DISCARD and add a comment.
+
+Correct the characteristics of the sections.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
 v2:
-	new patch
+	Consider that 32-bit arm uses .rel and not .rela relocations
+	and discard them as they are cannot be used in EFI binaries.
+	Correct the characteristics of the .reloc section.
 ---
- arch/arm/lib/crt0_arm_efi.S | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ arch/arm/lib/crt0_arm_efi.S  | 40 ++++++++++++++++++++++++++++--------
+ arch/arm/lib/elf_arm_efi.lds | 28 ++++++++++++++++++-------
+ 2 files changed, 52 insertions(+), 16 deletions(-)
 
 diff --git a/arch/arm/lib/crt0_arm_efi.S b/arch/arm/lib/crt0_arm_efi.S
-index 75ee37b7d3..7a4e5dff75 100644
+index 7a4e5dff75..7219c0f2fe 100644
 --- a/arch/arm/lib/crt0_arm_efi.S
 +++ b/arch/arm/lib/crt0_arm_efi.S
-@@ -115,14 +115,14 @@ section_table:
- 	.short	0		/* NumberOfLineNumbers  (0 for executables) */
- 	.long	0xe0500020	/* Characteristics (section flags) */
+@@ -23,7 +23,7 @@ pe_header:
+ 	.long	IMAGE_NT_SIGNATURE		/* 'PE' */
+ coff_header:
+ 	.short	IMAGE_FILE_MACHINE_THUMB	/* Mixed ARM/Thumb */
+-	.short	2				/* nr_sections */
++	.short	3				/* nr_sections */
+ 	.long	0				/* TimeDateStamp */
+ 	.long	0				/* PointerToSymbolTable */
+ 	.long	0				/* NumberOfSymbols */
+@@ -98,22 +98,44 @@ section_table:
+ 	.long	0			/* PointerToLineNumbers */
+ 	.short	0			/* NumberOfRelocations */
+ 	.short	0			/* NumberOfLineNumbers */
+-	.long	0x42100040		/* Characteristics (section flags) */
++	/* Characteristics (section flags) */
++	.long	(IMAGE_SCN_MEM_READ | \
++		 IMAGE_SCN_MEM_DISCARDABLE | \
++		 IMAGE_SCN_CNT_INITIALIZED_DATA)
  
--	.align		9
-+	.align		12
+ 	.ascii	".text"
+ 	.byte	0
+ 	.byte	0
+ 	.byte	0			/* end of 0 padding of section name */
+-	.long	_edata - _start		/* VirtualSize */
++	.long	_text_size		/* VirtualSize */
+ 	.long	_start - image_base	/* VirtualAddress */
+-	.long	_edata - _start		/* SizeOfRawData */
++	.long	_text_size		/* SizeOfRawData */
+ 	.long	_start - image_base	/* PointerToRawData */
++	.long	0			/* PointerToRelocations */
++	.long	0			/* PointerToLineNumbers */
++	.short	0			/* NumberOfRelocations */
++	.short	0			/* NumberOfLineNumbers */
++	/* Characteristics (section flags) */
++	.long	(IMAGE_SCN_MEM_READ | \
++		 IMAGE_SCN_MEM_EXECUTE | \
++		 IMAGE_SCN_CNT_CODE)
+ 
+-	.long	0		/* PointerToRelocations (0 for executables) */
+-	.long	0		/* PointerToLineNumbers (0 for executables) */
+-	.short	0		/* NumberOfRelocations  (0 for executables) */
+-	.short	0		/* NumberOfLineNumbers  (0 for executables) */
+-	.long	0xe0500020	/* Characteristics (section flags) */
++	.ascii	".data"
++	.byte	0
++	.byte	0
++	.byte	0			/* end of 0 padding of section name */
++	.long	_data_size		/* VirtualSize */
++	.long	_data - image_base	/* VirtualAddress */
++	.long	_data_size		/* SizeOfRawData */
++	.long	_data - image_base	/* PointerToRawData */
++	.long	0			/* PointerToRelocations */
++	.long	0			/* PointerToLineNumbers */
++	.short	0			/* NumberOfRelocations */
++	.short	0			/* NumberOfLineNumbers */
++	/* Characteristics (section flags) */
++	.long	(IMAGE_SCN_MEM_WRITE | \
++		 IMAGE_SCN_MEM_READ | \
++		 IMAGE_SCN_CNT_INITIALIZED_DATA)
+ 
+ 	.align		12
  _start:
- 	stmfd		sp!, {r0-r2, lr}
+diff --git a/arch/arm/lib/elf_arm_efi.lds b/arch/arm/lib/elf_arm_efi.lds
+index 767ebda635..41440594aa 100644
+--- a/arch/arm/lib/elf_arm_efi.lds
++++ b/arch/arm/lib/elf_arm_efi.lds
+@@ -7,6 +7,12 @@
  
- 	adr		r1, .L_DYNAMIC
- 	ldr		r0, [r1]
- 	add		r1, r0, r1
--	adr		r0, image_base
-+	adrl		r0, image_base
- 	bl		_relocate
- 	teq		r0, #0
- 	bne		0f
+ OUTPUT_FORMAT("elf32-littlearm", "elf32-littlearm", "elf32-littlearm")
+ OUTPUT_ARCH(arm)
++
++PHDRS
++{
++	data PT_LOAD FLAGS(3); /* PF_W | PF_X */
++}
++
+ ENTRY(_start)
+ SECTIONS
+ {
+@@ -18,11 +24,13 @@ SECTIONS
+ 		*(.gnu.linkonce.t.*)
+ 		*(.srodata)
+ 		*(.rodata*)
++		. = ALIGN(16);
++		*(.dynamic);
+ 		. = ALIGN(512);
+ 	}
+ 	_etext = .;
+ 	_text_size = . - _text;
+-	.dynamic  : { *(.dynamic) }
++	. = ALIGN(4096);
+ 	.data : {
+ 		_data = .;
+ 		*(.sdata)
+@@ -47,14 +55,20 @@ SECTIONS
+ 		. = ALIGN(512);
+ 		_bss_end = .;
+ 		_edata = .;
+-	}
+-	.rel.dyn : { *(.rel.dyn) }
+-	.rel.plt : { *(.rel.plt) }
+-	.rel.got : { *(.rel.got) }
+-	.rel.data : { *(.rel.data) *(.rel.data*) }
+-	_data_size = . - _etext;
++	} :data
++	_data_size = . - _data;
+ 
+ 	/DISCARD/ : {
++		/*
++		 * We don't support relocations. These would have to be
++		 * translated from ELF to PE format and added to the .reloc
++		 * section.
++		 */
++		*(.rel.dyn)
++		*(.rel.plt)
++		*(.rel.got)
++		*(.rel.data)
++		*(.rel.data*)
+ 		*(.rel.reloc)
+ 		*(.eh_frame)
+ 		*(.note.GNU-stack)
 -- 
 2.43.0
 
