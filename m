@@ -4,68 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31EC6C48BF6
-	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 14:21:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1075DC48BF6
+	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 15:05:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 794AF87F01;
-	Mon, 26 Feb 2024 15:21:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 2D76787F0A;
+	Mon, 26 Feb 2024 16:05:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1708957277;
-	bh=evUnEWt2blVxOZkC6OPo73ziePvYzi9AfFrDqrR82g4=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=hpRv1PD6l2wyfvb3tiHv4/Ms1FoJoCrqCwFMjUjngEqbDa6UVfc7NIaSVSoOqyb7Y
-	 TDruJOfsLtUXlulhiqqDC8e62LuQiApO440rMYnnTDIlbV4gtFibYcjyQvl7EBk89C
-	 eW8M7U0SxkF57POCmXg9Egyte8eg1gz1UL9On/i1RhcVxhwYQwlYzKUAvJtyOSiLvW
-	 Ikze1TpVApf6l075va2650rLFkKIxkB2kTqnYf5otl5pGcRf7wmQ+un+QMpyzgRplV
-	 TcZ/MAy4/61rU5uGqqnNJQKF9PLxBX89WUV13TaQ/AO8TJsSnsEazWS7F81eURrSzm
-	 NRunDPQJj+Uzw==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 0538A87E9C;
- Mon, 26 Feb 2024 15:21:13 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1708957275;
- bh=evUnEWt2blVxOZkC6OPo73ziePvYzi9AfFrDqrR82g4=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=h3UVRonEIm3FZVHpmMtDBmJHLGxWCBNqvcXouqIt3EYRMTWqnzFFEQpZ90kLhQRaz
- i2s2uvD8yLovavdz3SAuPNkO3OvBBREln2RFOYy12T2A7q+T+bjPUEwnf06zuGCtqR
- j4BOQmKW/QUit6VQpH+c48LTxStyJ5mIDMb3h2mV8MFcq/TASjH0Kt4RATZtO5OvQ2
- u494AxL7xfNtZ59818i63WXlzk4Z4TL1zQ2yfxEEq6yh30btdV0WX9BuPXoZNarXk9
- JrrMfnMCqcTg6/Ngo6GysN2rhfzha6aCuFayRLB/aI81Bhn2xiSSffcTK2aHB6AB4u
- d4NcElYzuTfZA==
-Message-ID: <e0cd3a0e-df45-4162-b1ec-599745fe4504@denx.de>
-Date: Mon, 26 Feb 2024 15:21:13 +0100
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 0A5B487F10; Mon, 26 Feb 2024 16:05:53 +0100 (CET)
+Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
+ [210.160.252.172])
+ by phobos.denx.de (Postfix) with ESMTP id AD93787EFE
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 16:05:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-IronPort-AV: E=Sophos;i="6.06,185,1705330800"; d="scan'208";a="199300393"
+Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
+ by relmlie6.idc.renesas.com with ESMTP; 27 Feb 2024 00:05:47 +0900
+Received: from renesas-deb12.cephei.uk (unknown [10.226.93.126])
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id 757E0400C4F3;
+ Tue, 27 Feb 2024 00:05:45 +0900 (JST)
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Paul Barker <paul.barker.ct@bp.renesas.com>,
+	u-boot@lists.denx.de
+Subject: [PATCH v2 0/7] Add i2c and reset support for Renesas RZ/G2L
+Date: Mon, 26 Feb 2024 15:05:29 +0000
+Message-Id: <20240226150536.1690-1-paul.barker.ct@bp.renesas.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 5/8] phy: phy-imx8m-pcie: Add support for i.MX8M{M/P}
- PCIe PHY
-Content-Language: en-US
-To: Sumit Garg <sumit.garg@linaro.org>
-Cc: lukma@denx.de, seanga2@gmail.com, u-boot@lists.denx.de,
- marcel.ziswiler@toradex.com, francesco@dolcini.it, trini@konsulko.com,
- jh80.chung@samsung.com, festevam@denx.de, andrejs.cainikovs@toradex.com,
- sjg@chromium.org, peng.fan@nxp.com, aford173@gmail.com,
- ilias.apalodimas@linaro.org, sahaj.sarup@linaro.org,
- fathi.boudra@linaro.org, remi.duraffort@linaro.org,
- daniel.thompson@linaro.org
-References: <20240226080433.3307154-1-sumit.garg@linaro.org>
- <20240226080433.3307154-6-sumit.garg@linaro.org>
- <609581c7-d221-4eff-862b-6f172ba9d4e8@denx.de>
- <CAFA6WYPdqsD7Xy1EwX7R_+A3UiskvxaTyvR6D9qP45WhUxxA6A@mail.gmail.com>
- <180d7078-ac13-4d56-8ef5-2b64f7f41937@denx.de>
- <CAFA6WYOGzrM076RJv6Mp_Qaa7Z8h3hUC4mRf8CerkVUB7Ac3oA@mail.gmail.com>
- <9a747aba-df77-405c-b179-4d5e5ee3234e@denx.de>
- <CAFA6WYNhS7Z=3kfOsXmmo1hCUEUMQgwHFVR0vZ8aWFOnBecQTg@mail.gmail.com>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAFA6WYNhS7Z=3kfOsXmmo1hCUEUMQgwHFVR0vZ8aWFOnBecQTg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,47 +54,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/26/24 2:49 PM, Sumit Garg wrote:
-> On Mon, 26 Feb 2024 at 19:06, Marek Vasut <marex@denx.de> wrote:
->>
->> On 2/26/24 2:30 PM, Sumit Garg wrote:
->>> On Mon, 26 Feb 2024 at 18:34, Marek Vasut <marex@denx.de> wrote:
->>>>
->>>> On 2/26/24 1:50 PM, Sumit Garg wrote:
->>>>
->>>> [...]
->>>>
->>>>>>> +     ret = reset_get_by_name(dev, "pciephy", &imx8_phy->reset);
->>>>>>> +     if (ret) {
->>>>>>> +             dev_err(dev, "Failed to get PCIEPHY reset control\n");
->>>>>>> +             return ret;
->>>>>>> +     }
->>>>>>
->>>>>> Some clk_put() and co. fail path is missing here.
->>>>>
->>>>> Ditto for clk_put() not being available. However, I can add the fail
->>>>> path for the other reset.
->>>>
->>>> Oh, maybe reset_free() and clk_release*() then ?
->>>
->>> AFAICS, clk_release*() APIs are internally only a wrapper around
->>> clk_disable(). So actually those APIs don't seem to do anything useful
->>> in the fail path here.
->>>
->>> However, I will let clock tree maintainers chime in here if they plan
->>> to remove clk_release*() APIs on similar lines as with clk_free().
->>
->> Maybe they should be in place so in case in the future clock should be
->> torn down, it wouldn't be necessary to fix so many drivers ?
-> 
-> See the following comparison:
-> 
-> $ git grep -nr clk_get_by_name | wc -l
-> 229
-> 
-> $ git grep -nr clk_release | wc -l
-> 59
-> 
-> There are already many driver instances which don't use clk_release*() APIs.
+This patch series extends the support for the Renesas RZ/G2L SMARC EVK
+board (based on the R9A07G044L2 SoC) to include the following new
+features:
 
-And that's a good argument to make the situation worse ?
+  * I2C bus support, including automatic deblocking if SDA is stuck low
+    due to another device on the board.
+
+  * Basic PMIC support, with the ability to read, write & dump PMIC
+    registers.
+
+  * Support for requesting system reset (SYSRESET_COLD or
+    SYSRESET_POWER) via the PMIC.
+
+Along the way we fix the CPG driver to confirm all clock & reset changes
+before returning, and update the device tree to align with Linux 6.7.
+
+This series has been tested on RZ/G2L hardware, and the full u-boot
+GitLab CI pipeline has been executed in our internal GitLab instance.
+
+Changes from v1:
+  * Rebased on U-Boot v2024.04-rc2 and re-tested.
+  * Sync with Linux v6.7 instead of v6.6.
+  * Add raa215300_bind() as a stub in patch 4.
+  * Split up the addition of sysreset support into 3 patches: patch 5
+    adds the driver, patch 6 binds it with the pmic driver and patch 7
+    enables sysreset for the RZ/G2L.
+
+Paul Barker (7):
+  clk: renesas: Confirm all clock & reset changes on RZ/G2L
+  arm: dts: rzg2l: Sync with Linux v6.7
+  i2c: rzg2l: Add I2C driver for RZ/G2L family
+  pmic: Add Renesas RAA215300 PMIC driver
+  sysreset: Support reset via Renesas RAA215300 PMIC
+  pmic: raa215300: Bind sysreset driver
+  board: rzg2l: Support reset via Renesas RAA215300 PMIC
+
+ arch/arm/dts/r9a07g044.dtsi               |  16 +-
+ arch/arm/dts/r9a07g044l2-smarc.dts        |  21 +
+ arch/arm/dts/rz-smarc-common.dtsi         |  18 +-
+ arch/arm/dts/rzg2l-smarc-pinfunction.dtsi |  20 +
+ arch/arm/dts/rzg2l-smarc-som.dtsi         |  22 +-
+ arch/arm/dts/rzg2l-smarc.dtsi             |  43 +-
+ arch/arm/mach-rmobile/Kconfig             |   1 +
+ board/renesas/rzg2l/rzg2l.c               |   8 -
+ configs/renesas_rzg2l_smarc_defconfig     |   7 +
+ drivers/clk/renesas/rzg2l-cpg.c           |  17 +-
+ drivers/i2c/Kconfig                       |   7 +
+ drivers/i2c/Makefile                      |   1 +
+ drivers/i2c/rz_riic.c                     | 624 ++++++++++++++++++++++
+ drivers/power/pmic/Kconfig                |   9 +
+ drivers/power/pmic/Makefile               |   1 +
+ drivers/power/pmic/raa215300.c            |  50 ++
+ drivers/sysreset/Kconfig                  |   6 +
+ drivers/sysreset/Makefile                 |   1 +
+ drivers/sysreset/sysreset_raa215300.c     |  58 ++
+ 19 files changed, 896 insertions(+), 34 deletions(-)
+ create mode 100644 drivers/i2c/rz_riic.c
+ create mode 100644 drivers/power/pmic/raa215300.c
+ create mode 100644 drivers/sysreset/sysreset_raa215300.c
+
+
+base-commit: 37345abb97ef0dd9c50a03b2a72617612dcae585
+-- 
+2.43.2
+
