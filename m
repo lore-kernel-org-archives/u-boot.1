@@ -4,111 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FC75C48BF6
-	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 15:54:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0A71C48BF6
+	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 16:32:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C4ED879F6;
-	Mon, 26 Feb 2024 16:54:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id ACA1487CED;
+	Mon, 26 Feb 2024 17:32:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="hMHy09Aj";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Sxr2BtFj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 64BCB879F6; Mon, 26 Feb 2024 16:54:24 +0100 (CET)
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on20601.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2418::601])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 6EBA787BFD; Mon, 26 Feb 2024 17:32:43 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC1A483334
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 16:54:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B8E3687EDC
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 17:32:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=e39gLQpLEjICVcdLY1640iRU3b8t09yNSMUGHN6fRywKVu2vJvFa5i8y9EBZe8AduGhmVNdZ4JTumYWnCQoBzjwkEFqoYGNKNazRuJVc3pHox+cSfj0J2I8X+ANWKawxY4rGs6ovzGrnYVdZWJ8Yvf29iMIB12OTBK9sNGhHxF516xBymFKN28CvvNFI7KjCuCb/uq/2DNIydbhahgmLUb3k7dp2+w4v7zNSkOcHI2ZjUZzLgWx+wfBT1CwFpfe9nqEa4VYEl8JzDj2rim+F0GWUmbUi2luQC/acIAve2S0FziesQn4+MBfkzMCAaQhYGNt1TvzdblYjGstcjmFL9g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=9D3Pu/5GyO+CXVhuaPnlDnbLIw5SxqAkCWu8n3DiBUs=;
- b=ai+EIFuyJMy1TsXrdJOD2YU5XZqxJdee6Dd1jFWygtZKvuexKAAmLxBl1b7jwK1LTRDgpm1tKgEGCwwTifcfKpNh25NRMawfDvTAo6ustqymckkGPrp8sy5N7H5WzXUmwNTcxFkjDAiZjU40e8m5CgqNHm6xKMpSecv7fdZ4NL7a4Ab263+z4vezAJNXLNczaF520pg+XV4lP45+g25J48UQw7rReE3VUXYtzVUMScUDvhT4wu+cM7YPEpqGIMOdVGMdpehFnC1FJMm2yXpUT7w5/toqXSejad5u1gul/VV6n169XvtuTBctSuaBqMz1tPDpts5t2VOLvXzzpFih3g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9D3Pu/5GyO+CXVhuaPnlDnbLIw5SxqAkCWu8n3DiBUs=;
- b=hMHy09Aj58YDWd6nm5KipWyofd77sKGjI798ezHHNB3wegi4yBDsyR0ghPadY9/eYYycE5ul2SZapSqcKOwraj4TXsBrZj9/YAR181D8fWD/OJKkF96uMnBcHp1it5B0R7L8wgS1lA91cZPaS+eLuIrSolrWSSUdzWug2Wo8i1Q=
-Received: from MN2PR15CA0063.namprd15.prod.outlook.com (2603:10b6:208:237::32)
- by CH0PR12MB5284.namprd12.prod.outlook.com (2603:10b6:610:d7::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7316.33; Mon, 26 Feb
- 2024 15:54:18 +0000
-Received: from BL02EPF0001A105.namprd05.prod.outlook.com
- (2603:10b6:208:237:cafe::d7) by MN2PR15CA0063.outlook.office365.com
- (2603:10b6:208:237::32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7292.49 via Frontend
- Transport; Mon, 26 Feb 2024 15:54:18 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BL02EPF0001A105.mail.protection.outlook.com (10.167.241.137) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7292.25 via Frontend Transport; Mon, 26 Feb 2024 15:54:17 +0000
-Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Mon, 26 Feb
- 2024 09:54:16 -0600
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Laurent Pinchart <laurent.pinchart@ideasonboard.com>, Piyush Mehta
- <piyush.mehta@amd.com>, Radhey Shyam Pandey <radhey.shyam.pandey@amd.com>,
- Tanmay Shah <tanmay.shah@amd.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] arm64: zynqmp: Remove snps,enable_guctl1_ipd_quirk property
-Date: Mon, 26 Feb 2024 16:54:13 +0100
-Message-ID: <2067eefbad161dee64b1dc7d97c498f09a8307a2.1708962844.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.36.1
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-ej1-f72.google.com (mail-ej1-f72.google.com
+ [209.85.218.72])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 2B7713F6E8
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 16:32:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1708965159;
+ bh=5jCREzHh8KZwx785zYsah8IIsOFJ601ohliO1qgmJT4=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=Sxr2BtFj385JuQb/Qk2fz5buTlJ7ID0lDq02iSkbLIVWW6+jJ7AahVWXjQBG7XihX
+ U/qbVKjbARckamMwB9WT934nQnyuK8Kb008zJk2J81wXVeuHKG5FIGQTfXFN/MCBuR
+ SRxZAE5/gxgx9B3QbDUY2IEVCREoR7HUp9IKWI1GpruiRsF9ZyYSSm7n5ypkNd6hOF
+ rkAK2ywsL1tEzgSc+n1HyhAetP4irL9Q04pEIuKbVrLXns5UvlPdQC7djECabMGcpI
+ oW/53bly5VIkVvYweZ4QLR11MBiy1iuWAJwaHgL2WdGmm8HxBP2332eK01lm34NUzl
+ HVTKE4o8jr/vw==
+Received: by mail-ej1-f72.google.com with SMTP id
+ a640c23a62f3a-a3ee69976dfso125317666b.3
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 08:32:39 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1708965158; x=1709569958;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=5jCREzHh8KZwx785zYsah8IIsOFJ601ohliO1qgmJT4=;
+ b=ajRTELUKr1vFLbmMpVKr7rHbaTNpI7wzr7h8ZoVYdq7yJGWOWEd/DqqTyQsoU4RTa2
+ ViCAfP5Qn6XDttlK1+E8GIL0stXZI0WqrIS4vmn3zf8vQrZcy+LzUtmFyeMPCXEniEvg
+ KyoQ0EnUG3Xo4sDdp8FrlYESdaFKa8+6AJIgCvJrsxjaLL0ZRcftNQCdNBrOWVilenJB
+ V4po3hJuQzvJu6uZeTmvqPPgIku7YkEofFgv2EcIVqyrxiYxGNpNWuVIbDO3+jP4B4ba
+ Z+AxRGX/1b25qMY7UprmdLQ1N4Oa0s5wugK9ow4MDrQu1nSfvtOf10p3xqaFR5RAkELG
+ PUoQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW+4prwoo9gt8Gz4zHlvW1vlUDk9rHEvd9B/G9u+OhiS9rEC1AYH2P4/y3g65JyNipK61wDN/dw7HvtOAly7Yan2ZtZRQ==
+X-Gm-Message-State: AOJu0Yw7cdRgLXQrbkPaAq98BMeYKCxDw4OYQ53TKBzQbvVE3GABuV4o
+ 4Ug1YXtz0zISF/r5md8kqmOesVeFoyiumETUF6wPTrSPjORVhQ4gZKl4kk50Cwe8rpqD4Ww3v4x
+ WS9FfGHnEFFA+udj19PMWlf24OXpnVuQ2ZhzAJG0xM+U68WCbBETrzjcYLSRZC1BlUI4=
+X-Received: by 2002:a17:906:b24c:b0:a43:4107:137f with SMTP id
+ ce12-20020a170906b24c00b00a434107137fmr2541614ejb.18.1708965158831; 
+ Mon, 26 Feb 2024 08:32:38 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHIGxjr2EWlDb5Ofm8xz+9If5UBpS4IUubwH1BqAo1mRFZcZ2++SgxjI3GH2ioABG75B2nXzg==
+X-Received: by 2002:a17:906:b24c:b0:a43:4107:137f with SMTP id
+ ce12-20020a170906b24c00b00a434107137fmr2541604ejb.18.1708965158446; 
+ Mon, 26 Feb 2024 08:32:38 -0800 (PST)
+Received: from workstation5.. (ip-109-42-179-76.web.vodafone.de.
+ [109.42.179.76]) by smtp.gmail.com with ESMTPSA id
+ cw16-20020a170907161000b00a4306ac853fsm2108400ejd.206.2024.02.26.08.32.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 26 Feb 2024 08:32:37 -0800 (PST)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Rick Chen <rick@andestech.com>, Leo Yu-Chi Liang <ycliang@andestech.com>,
+ u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] serial: move sbi_dbcn_available to .data section
+Date: Mon, 26 Feb 2024 17:32:26 +0100
+Message-ID: <20240226163226.126288-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1175; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=RV1ndhEmvgcMX/CgSziF52tQe1W/qb4lOUO1Vfs3uF0=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhtQ7W2SFDzufnBAgGKnLnV8703/316eG2Qymsy+o3lkiF
- uLvODWtI5aFQZCJQVZMkUXa5sqZvZUzpghfPCwHM4eVCWQIAxenAExkoQbD/LjCfUcD+XXteKLz
- 7HYxHFqgMYU7lWF+fpbqmylqydb1PRXRG5ImRmy84TsBAA==
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF0001A105:EE_|CH0PR12MB5284:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7d8ed4b5-f3b2-4534-0dc0-08dc36e33085
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: NGmrVjQ2Gaug3hR8IDIAQNTkwNUfC4sJWO5XXXnk9yF766YtLh1RQtRRD8PFzcnG0BEMW4ZD24mvOCj/18jWkoOVrs8GmiHTa2TbCEW+JgOhtfEGUv0ljrTKMB+eXDmGDzP66fibhoOJnxcFmAjszs3/oyU0wK9DZAp8r6Eg7stoabHuD53Ca1ZpyHEFJFLxcwqRttjx8KIYW8PRQGAfkIHEVYuwIfp8IJyMdzDWPF1hEf802lVfNVDoWdNEck6zLvb2CdTAgWmgvbfJ/t5rj4mIQiR0t4RbSyWjbgAeKOVEyL7YbUbTogLELLiEEmv/ODsxOohzvCOIcphSHWPKL9q4yic2PYk6V9DGRIEPCXu8nwop2F63ZjoUYwlO3hOxw+w4bMOf+bFzNebwK0bc7qXGn+efRvfhYhl1vfdyaxwepGBbwOod0B58z9qvw4MnunarnikS2gFjyJjWuwwEDvibxjNGLua4gaPrgZe8FUFnGpgUi35QAqeOxft3KI6R+KYqhl2UzSUbG9WMjeypLCIdtcQAcRUQ/fVWo4NYBS7k4GWOTWUwB5E0XmaJkkjvjUpvcOQy0MZ3PZnO/pNbiLJb+OZgUupQk+gzt1nNJrymAK0D43KZeOnxSzumqvsAfGT0TbTeUoUH6R44HwbiA4izdhzInVKLr8rySul/oYIfbO3HCzMtTpzPoy/gx6QGfMSBL0GzfSduxlDQQTfk0E+lhSAU6SilcfyJvUM0T5BrT06LIholdmROKhLGkBN7
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(36860700004); DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Feb 2024 15:54:17.8801 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7d8ed4b5-f3b2-4534-0dc0-08dc36e33085
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL02EPF0001A105.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR12MB5284
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -125,39 +102,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove undocumented DT property. Suggested solution was to apply quirk
-via glue logic driver that's why make no sense to have it listed in DT.
+U-Boot SPL loads the device-tree directly behind main U-Boot overlapping
+the .bss section. reserve_fdt() is called in board_init_f() to relocate the
+device-tree to a safe location.
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
+Debug UARTs are enabled before board_init_f(). With sbi_dbcn_available in
+the .bss section the device-tree is corrupted when _debug_uart_init() is
+called in the SBI serial driver. Move the variable to the .data section.
+
+Link: https://bugs.launchpad.net/ubuntu/+source/u-boot/+bug/2054091
+Fixes: dfe08374943c ("risc-v: implement DBCN based debug console")
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
+ drivers/serial/serial_sbi.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-For more information please take a look at:
-https://lore.kernel.org/r/1708023665-1441674-1-git-send-email-radhey.shyam.pandey@amd.com
-https://lore.kernel.org/r/1708717523-4006664-1-git-send-email-radhey.shyam.pandey@amd.com
----
- arch/arm/dts/zynqmp.dtsi | 2 --
- 1 file changed, 2 deletions(-)
-
-diff --git a/arch/arm/dts/zynqmp.dtsi b/arch/arm/dts/zynqmp.dtsi
-index b50b83b7723f..daae23c12b79 100644
---- a/arch/arm/dts/zynqmp.dtsi
-+++ b/arch/arm/dts/zynqmp.dtsi
-@@ -1008,7 +1008,6 @@
- 				/* iommus = <&smmu 0x860>; */
- 				snps,quirk-frame-length-adjustment = <0x20>;
- 				clock-names = "ref";
--				snps,enable_guctl1_ipd_quirk;
- 				snps,resume-hs-terminations;
- 				/* dma-coherent; */
- 			};
-@@ -1040,7 +1039,6 @@
- 				/* iommus = <&smmu 0x861>; */
- 				snps,quirk-frame-length-adjustment = <0x20>;
- 				clock-names = "ref";
--				snps,enable_guctl1_ipd_quirk;
- 				snps,resume-hs-terminations;
- 				/* dma-coherent; */
- 			};
+diff --git a/drivers/serial/serial_sbi.c b/drivers/serial/serial_sbi.c
+index a51a96c1ef0..f3ecfccab43 100644
+--- a/drivers/serial/serial_sbi.c
++++ b/drivers/serial/serial_sbi.c
+@@ -17,7 +17,7 @@ static inline void _debug_uart_putc(int c)
+ 
+ #else
+ 
+-static int sbi_dbcn_available;
++static int sbi_dbcn_available __section(".data");
+ 
+ static inline void _debug_uart_init(void)
+ {
 -- 
-2.36.1
+2.43.0
 
