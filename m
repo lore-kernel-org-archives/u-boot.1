@@ -4,57 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDA08C48BF6
-	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 17:46:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E8D9C48BF6
+	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 17:58:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D7B187F58;
-	Mon, 26 Feb 2024 18:45:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gnu.org
+	by phobos.denx.de (Postfix) with ESMTP id 1E15987F22;
+	Mon, 26 Feb 2024 18:58:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=aurel32.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gnu.org header.i=@gnu.org header.b="aFwtbeoJ";
+	dkim=pass (2048-bit key; secure) header.d=aurel32.net header.i=@aurel32.net header.b="AwpjzDSN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8114987F05; Mon, 26 Feb 2024 18:37:46 +0100 (CET)
-Received: from eggs.gnu.org (eggs.gnu.org [IPv6:2001:470:142:3::10])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 5EEA387F21; Mon, 26 Feb 2024 18:58:31 +0100 (CET)
+Received: from hall.aurel32.net (hall.aurel32.net [IPv6:2001:bc8:30d7:100::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 12CF987F29
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 18:37:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 387D087F2D
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 18:58:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gnu.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=othacehe@gnu.org
-Received: from fencepost.gnu.org ([2001:470:142:3::e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <othacehe@gnu.org>)
- id 1reev6-00071K-Sz; Mon, 26 Feb 2024 12:37:40 -0500
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=gnu.org;
- s=fencepost-gnu-org; h=MIME-Version:References:In-Reply-To:Date:Subject:To:
- From; bh=Zv6Z1wB4Fw/FDoZFv/wHmJLNVKPocyw0bEadKgA9tCY=; b=aFwtbeoJJgbgk89/31L6
- sat8Hw2W5eXX4qg7DetPRsveAaqflCXoNdp+k5AytVflrx51igFDfXzYtOnjqA5LwG//kXWxaB/Mo
- G4RvZZ5e4ssnR7E7gFB4ryRoC23jV8sIzWy6hzsd9M343q0WQwKSTIV6Gn6WlXA7aJQbK9x5TBacw
- KOcEuNoxGFo99j762xOe9NYXeOp6AWGHwE1nZ/6gSEpRnAi6ZBouFdq6YH/1M9DgoK/Pl/y/LUCMN
- OkNLV8XJT+o2ocJX7+smTDxrFQ70S8ewLwwKsSNkDaOzdQD2SBTG+U0doEWP2pXCxItwwhTPl1LrT
- 3+CELrxgopwPHQ==;
-From: Mathieu Othacehe <othacehe@gnu.org>
-To: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
- Peng Fan <peng.fan@nxp.com>, Shiji Yang <yangshiji66@outlook.com>,
- Ye Li <ye.li@nxp.com>, Alice Guo <alice.guo@nxp.com>,
- Stefano Babic <sbabic@denx.de>,
- =?UTF-8?q?S=C3=A9bastien=20Szymanski?= <sebastien.szymanski@armadeus.com>,
- Fabio Estevam <festevam@gmail.com>, Simon Glass <sjg@chromium.org>,
- Mathieu Othacehe <m.othacehe@gmail.com>
-Cc: u-boot@lists.denx.de,
-	Mathieu Othacehe <othacehe@gnu.org>
-Subject: [PATCH 2/2] tools: imx9_image: Reword warning message.
-Date: Mon, 26 Feb 2024 18:37:19 +0100
-Message-ID: <20240226173719.25629-3-othacehe@gnu.org>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20240226173719.25629-1-othacehe@gnu.org>
-References: <20240226173719.25629-1-othacehe@gnu.org>
+ dmarc=pass (p=none dis=none) header.from=aurel32.net
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=aurelien@aurel32.net
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=aurel32.net
+ ; s=202004.hall;
+ h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Content-Transfer-Encoding:From:Reply-To:
+ Subject:Content-ID:Content-Description:X-Debbugs-Cc;
+ bh=cq8fTs66LSBUULx7uG42adfeuHzx+u91Z8hSoDsVQ+s=; b=AwpjzDSNakgBQZnY4ROcRV9uUm
+ a0gEGYDVd7JR89xzDQkwMXpgauuf3KwgNLAvLntK5IEd2VqaV0mISTrf4QWW+4HuhLZAUSg+a14Zl
+ qY4uSGihTGZ0l6n836/ce6G1f91FFyjAiOfA7Ur6USnLKs8KL9aYisse7DUf+Oc6g69EPTxdjyioU
+ sfK3gVHpXmkzglgbnY9+m1JEVkwVfHY26TLKiONQ6E046uZufG92Z6Bp1D01eMM/gnndK/o5bUBGb
+ vIHn/zatYPgDz8ViFHKXEvgvniVEvISHpIkujEgOH52y6IBgYKji6YX7S2Bez+6G+wr1CLWLLEhMB
+ yRv2wgDw==;
+Received: from ohm.aurel32.net ([2001:bc8:30d7:111::2] helo=ohm.rr44.fr)
+ by hall.aurel32.net with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
+ (envelope-from <aurelien@aurel32.net>) id 1refFB-0048F0-0U;
+ Mon, 26 Feb 2024 18:58:25 +0100
+Date: Mon, 26 Feb 2024 18:58:24 +0100
+From: Aurelien Jarno <aurelien@aurel32.net>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/1] serial: move sbi_dbcn_available to .data section
+Message-ID: <ZdzRQK-LmwegGBBV@aurel32.net>
+References: <20240226163226.126288-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Mon, 26 Feb 2024 18:45:46 +0100
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240226163226.126288-1-heinrich.schuchardt@canonical.com>
+User-Agent: Mutt/2.2.12 (2023-09-09)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,27 +70,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If the optional `tee.bin` OP-TEE binary is missing, the image will still be
-functional. Adapt the warning message accordingly.
+On 2024-02-26 17:32, Heinrich Schuchardt wrote:
+> U-Boot SPL loads the device-tree directly behind main U-Boot overlapping
+> the .bss section. reserve_fdt() is called in board_init_f() to relocate the
+> device-tree to a safe location.
+> 
+> Debug UARTs are enabled before board_init_f(). With sbi_dbcn_available in
+> the .bss section the device-tree is corrupted when _debug_uart_init() is
+> called in the SBI serial driver. Move the variable to the .data section.
+> 
+> Link: https://bugs.launchpad.net/ubuntu/+source/u-boot/+bug/2054091
+> Fixes: dfe08374943c ("risc-v: implement DBCN based debug console")
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  drivers/serial/serial_sbi.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/serial/serial_sbi.c b/drivers/serial/serial_sbi.c
+> index a51a96c1ef0..f3ecfccab43 100644
+> --- a/drivers/serial/serial_sbi.c
+> +++ b/drivers/serial/serial_sbi.c
+> @@ -17,7 +17,7 @@ static inline void _debug_uart_putc(int c)
+>  
+>  #else
+>  
+> -static int sbi_dbcn_available;
+> +static int sbi_dbcn_available __section(".data");
+>  
+>  static inline void _debug_uart_init(void)
+>  {
 
-Signed-off-by: Mathieu Othacehe <othacehe@gnu.org>
----
- tools/imx9_image.sh | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Tested-by: Aurelien Jarno <aurelien@aurel32.net>
 
-diff --git a/tools/imx9_image.sh b/tools/imx9_image.sh
-index 88dfcfe606c..ca78a57a19a 100755
---- a/tools/imx9_image.sh
-+++ b/tools/imx9_image.sh
-@@ -19,7 +19,7 @@ for f in $blobs; do
- 	fi
- 
- 	if [ ! -f $tmp ]; then
--		echo "WARNING '$tmp' not found, resulting binary is not-functional" >&2
-+		echo "WARNING '$tmp' not found, resulting binary may be not-functional" >&2
- 
-                 # Comment-out the lines for un-existing files. This way,
-                 # mkimage can keep working. This allows CI tests to pass even
+
 -- 
-2.41.0
-
+Aurelien Jarno                          GPG: 4096R/1DDD8C9B
+aurelien@aurel32.net                     http://aurel32.net
