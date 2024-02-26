@@ -4,74 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA304C48BF6
-	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 12:24:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59E41C54E49
+	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 12:37:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BBAF787EE6;
-	Mon, 26 Feb 2024 13:23:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 83CA387C82;
+	Mon, 26 Feb 2024 13:37:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="M72AZ7dZ";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="UJnFimc1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F9F28644E; Mon, 26 Feb 2024 13:23:52 +0100 (CET)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 5F62F87EE7; Mon, 26 Feb 2024 13:37:44 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E44E87AD2
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 13:23:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4277287A09
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 13:37:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=W.Egorov@phytec.de
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1708950229; x=1711542229;
- h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=zmpVmPm1+3eW4aal05cOHY9Rw/w4L3tJDIGo3OE7Lz4=;
- b=M72AZ7dZQJrdPAXoUZQBmDg54N1mJwsfAzsJ5AtdSnWwPYGcBNclNQQHVhRgBPXd
- zXjoCUuGGmFdpwjH6d/OvDuYgyMY2JC1CVhQwcLpTXcnul+4gPyTNEhkP5QYvKkv
- K5LPbuQ7HDvQ2F5vxReJS8ABA3woDwVSIRmvBmn7aSQ=;
-X-AuditID: ac14000a-fbefe7000000290d-86-65dc82d512c4
-Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
- (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 62.38.10509.5D28CD56;
- Mon, 26 Feb 2024 13:23:49 +0100 (CET)
-Received: from augenblix2.phytec.de (172.25.0.11) by Berlix.phytec.de
- (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Mon, 26 Feb
- 2024 13:23:49 +0100
-From: Wadim Egorov <w.egorov@phytec.de>
-To: <u-boot@lists.denx.de>
-CC: <nm@ti.com>, <trini@konsulko.com>, <upstream@lists.phytec.de>,
- <d-gole@ti.com>
-Subject: [PATCH v2 2/2] doc: board: phytec: Add phyCORE-AM64x
-Date: Mon, 26 Feb 2024 13:23:41 +0100
-Message-ID: <20240226122341.3638748-3-w.egorov@phytec.de>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240226122341.3638748-1-w.egorov@phytec.de>
-References: <20240226122341.3638748-1-w.egorov@phytec.de>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=8b6e=KE=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1708951056;
+ bh=5y+46H79c1mgWeMHHBTDZ+06p5uo61N+LkZs/sONfHQ=;
+ b=UJnFimc14hsIrmKjWL6nbbwraWWKnEf4P1MEzMJQkJAuPzVZYR1JbJGblsl9BnAzDImOzRjd7
+ Xm8d/8KLGQLCRsPPJpDxa/PLIxuC3dkAcDrFs9ntZQiMM/VCMxa083yYxWcwPY54YfJ6sk2IPqu
+ LOVqXMX9S7ks9gWsKUGAQSzh+uVHDXLuhcw2IcuClevphK8RcBPvJ5EXjJmgiTgNdlUocwD+J+9
+ nX+S+2s5zN/CdaE9hTlc8/rD/KIFzGnKOxuk6GHtR2DAUTvYdDSue1x+4a9n4RDIsELb5+uqvvt
+ vv0u/qAppFGWnMuorsVF892ijNFhcGO85UIvi96ujCIw==
+Message-ID: <7805b8d0-fb7c-41d5-8d74-f85dfd40233a@kwiboo.se>
+Date: Mon, 26 Feb 2024 13:36:58 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [172.25.0.11]
-X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
- (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrMLMWRmVeSWpSXmKPExsWyRpKBR/dq051Ug4c3lS1a1npYvPlxlsli
- 6qTN7BZv93ayW3S/U3dg9Xh1YBW7x9k7Oxg9+rtbWD2O39jOFMASxWWTkpqTWZZapG+XwJXR
- dHEie8FW7YoLn7ezNzD+V+pi5OSQEDCR2HbsLVsXIxeHkMBiJolzW3azQziPGSVauxewg1Sx
- CahL3NnwjRXEFhGQknjZuZEZxGYWCJE427ifDcQWFrCVOHf8IJjNIqAq0fz/IFgNr4ClxIGe
- e6wQ2+QlZl76DjaTU8BKYteGNiYQWwioZu7RGUwQ9YISJ2c+YYGYLy/RvHU21C4JiYMvXjBD
- 1MtLvLi0nAVm5rRzr5kh7FCJI5tWM01gFJqFZNQsJKNmIRm1gJF5FaNQbmZydmpRZrZeQUZl
- SWqyXkrqJkZQwIswcO1g7JvjcYiRiYPxEKMEB7OSCG+4zM1UId6UxMqq1KL8+KLSnNTiQ4zS
- HCxK4ryrO4JThQTSE0tSs1NTC1KLYLJMHJxSDYybOlqU5Ps/3H0vcl9d5lTy+QdtU2xb7bSy
- Yt6a/Vd3KetNkF22xb76gNDxF6+rWCfsm2SiwMN+zV6Q6QLXkv54c95r6+ecWR/E0r7D5Yjs
- jIdHr67ZY3RGZ+68oFALbSlTW6VXM6Ls/E/eTBI4/pU37Kh15jPPpXuuJh+b5f2kI7/qpXuh
- q4gSS3FGoqEWc1FxIgBZUNXvZgIAAA==
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] usb: dwc3-generic: Fix build errors when USB_DWC3_GADGET
+ is disabled
+Content-Language: en-US
+To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
+Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>, u-boot@lists.denx.de
+References: <20240225152715.1821613-1-jonas@kwiboo.se>
+ <d9d049c8-d498-48ec-87f6-4127dd7a4ae6@denx.de>
+ <5bafad42-2c61-43eb-8fbb-cec7159132a6@kwiboo.se>
+ <20240226014708.GH3040305@bill-the-cat>
+ <81bdee81-2f8f-4fbf-a729-8fd543492adb@kwiboo.se>
+ <a809eb32-ae70-4f69-b5f0-81488759e838@denx.de>
+ <e14e9c06-ca37-4572-b410-c40a8c52898c@kwiboo.se>
+ <1544e744-bbf7-4460-b2b4-12a971e70d49@denx.de>
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <1544e744-bbf7-4460-b2b4-12a971e70d49@denx.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 167.172.40.54
+X-ForwardEmail-ID: 65dc85eeac28ddaa3a9a7f4d
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,191 +79,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add documentation for PHYTEC phyCORE-AM64x SoM.
+On 2024-02-26 11:18, Marek Vasut wrote:
+> On 2/26/24 10:50 AM, Jonas Karlman wrote:
+>> On 2024-02-26 09:22, Marek Vasut wrote:
+>>> On 2/26/24 8:54 AM, Jonas Karlman wrote:
+>>>> On 2024-02-26 02:47, Tom Rini wrote:
+>>>>> On Mon, Feb 26, 2024 at 01:02:04AM +0100, Jonas Karlman wrote:
+>>>>>> On 2024-02-25 23:01, Marek Vasut wrote:
+>>>>>>> On 2/25/24 4:27 PM, Jonas Karlman wrote:
+>>>>>>>> Build fail with the following error when DM_USB_GADGET is enabled and
+>>>>>>>> USB_DWC3_GADGET is disabled:
+>>>>>>>>
+>>>>>>>>      dwc3/dwc3-generic.o: in function `dm_usb_gadget_handle_interrupts':
+>>>>>>>>      dwc3/dwc3-generic.c:201:(.text.dm_usb_gadget_handle_interrupts+0x10):
+>>>>>>>>        undefined reference to `dwc3_gadget_uboot_handle_interrupt'
+>>>>>>>>
+>>>>>>>> Build also fail with the following error when USB_GADGET_DWC2_OTG +
+>>>>>>>> DM_USB_GADGET is enabled and USB_DWC3_GADGET is disabled:
+>>>>>>>>
+>>>>>>>>      gadget/dwc2_udc_otg.o: in function `dm_usb_gadget_handle_interrupts':
+>>>>>>>>      gadget/dwc2_udc_otg.c:947: multiple definition of `dm_usb_gadget_handle_interrupts';
+>>>>>>>>        dwc3/dwc3-generic.o:dwc3/dwc3-generic.c:197: first defined here
+>>>>>>>>
+>>>>>>>> Fix this by checking for USB_DWC3_GADGET in addition to DM_USB_GADGET.
+>>>>>>>>
+>>>>>>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>>>>>>>> ---
+>>>>>>>>     drivers/usb/dwc3/dwc3-generic.c | 4 ++--
+>>>>>>>>     1 file changed, 2 insertions(+), 2 deletions(-)
+>>>>>>>>
+>>>>>>>> diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
+>>>>>>>> index 6fb2de8a5ace..891d01957619 100644
+>>>>>>>> --- a/drivers/usb/dwc3/dwc3-generic.c
+>>>>>>>> +++ b/drivers/usb/dwc3/dwc3-generic.c
+>>>>>>>> @@ -192,7 +192,7 @@ static int dwc3_generic_of_to_plat(struct udevice *dev)
+>>>>>>>>     	return 0;
+>>>>>>>>     }
+>>>>>>>>     
+>>>>>>>> -#if CONFIG_IS_ENABLED(DM_USB_GADGET)
+>>>>>>>> +#if IS_ENABLED(CONFIG_USB_DWC3_GADGET) && CONFIG_IS_ENABLED(DM_USB_GADGET)
+>>>>>>>
+>>>>>>> Maybe just make USB_DWC3_GADGET depend on (or select?) DM_USB_GADGET ,
+>>>>>>> since I think the DWC3 code doesn't work without DM anyway .
+>>>>>>
+>>>>>> Do you mean in addition to this? I do not think that alone is something
+>>>>>> that will address my intention to be able to disable the gadget part of
+>>>>>> the dwc3-generic driver.
+>>>>>>
+>>>>>> Before this patch it was possible to enable disable host or gadget by
+>>>>>> using USB_HOST/SPL_USB_HOST and DM_USB_GADGET/SPL_DM_USB_GADGET options.
+>>>>>>
+>>>>>> However, Rockchip RK3328 boards have dwc2 otg and dwc3 host, trying to
+>>>>>> use DM_USB_GADGET for dwc2 and USB_HOST for dwc3 is currently not
+>>>>>> possible and result in the build errors reported, i.e. multiple
+>>>>>> definition of dm_usb_gadget_handle_interrupts() and undefined reference
+>>>>>> to dwc3_gadget_uboot_handle_interrupt().
+>>>>>>
+>>>>>> After this patch I can use dm dwc2 gadget and dwc3 host without issue.
+>>>>>
+>>>>> Note that *DM_* symbols can be confusing. At this point, in SPL
+>>>>> SPL_DM_USB and SPL_DM_USB_GADGET are encouraged but not required for
+>>>>> host/gadget drivers. In full U-Boot, DM_USB is required for all host
+>>>>> drivers and really should be enabled in all cases for DM_USB_GADGET. We
+>>>>> can't enforce that at the Kconfig level because of, iirc, some of the
+>>>>> armv7 part gadget drivers (more than one). But for newer and still very
+>>>>> active chips, we should be using DM_USB_GADGET unconditionally in full
+>>>>> U-Boot.
+>>>>
+>>>> The issue is that with DM_USB_GADGET we can only have one driver
+>>>> providing the dm_usb_gadget_handle_interrupts() function.
+>>>
+>>> DM was always intended to permit multiple drivers, so this is a bug and
+>>> should be fixed, e.g. by turning the interrupt handling function into a
+>>> driver-specific callback.
+>>
+>> I fully agree, and I hope that someone can work on that separate issue
+>> and that it does not block this build error fix patch.
+> 
+> Please, let's fix this properly instead of piling up another ifdef 
+> workaround.
 
-Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
----
- doc/board/phytec/index.rst         |   1 +
- doc/board/phytec/phycore-am64x.rst | 159 +++++++++++++++++++++++++++++
- 2 files changed, 160 insertions(+)
- create mode 100644 doc/board/phytec/phycore-am64x.rst
+Reworking the core usb gadget interrupt handling is unfortunately not
+something I can spend any of my already limited hobbyist free time on.
 
-diff --git a/doc/board/phytec/index.rst b/doc/board/phytec/index.rst
-index fea0b07620..99848a9e95 100644
---- a/doc/board/phytec/index.rst
-+++ b/doc/board/phytec/index.rst
-@@ -9,5 +9,6 @@ PHYTEC
-    imx8mm-phygate-tauri-l
-    imx93-phyboard-segin
-    phycore-am62x
-+   phycore-am64x
-    phycore-imx8mm
-    phycore-imx8mp
-diff --git a/doc/board/phytec/phycore-am64x.rst b/doc/board/phytec/phycore-am64x.rst
-new file mode 100644
-index 0000000000..202b756dc4
---- /dev/null
-+++ b/doc/board/phytec/phycore-am64x.rst
-@@ -0,0 +1,159 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+.. sectionauthor:: Wadim Egorov <w.egorov@phytec.de>
-+
-+phyCORE-AM64x
-+=============
-+
-+The `phyCORE-AM64x <https://www.phytec.com/product/phycore-am64x>`_ is a
-+SoM (System on Module) featuring TI's AM64x SoC. It can be used in combination
-+with different carrier boards. This module can come with different sizes and
-+models for DDR, eMMC, SPI NOR Flash and various SoCs from the AM64x family.
-+
-+A development Kit, called `phyBOARD-Lyra <https://www.phytec.com/product/phyboard-am64x>`_
-+is used as a carrier board reference design around the AM64x SoM.
-+
-+Quickstart
-+----------
-+
-+* Download sources and TI firmware blobs
-+* Build Trusted Firmware-A
-+* Build OP-TEE
-+* Build U-Boot for the R5
-+* Build U-Boot for the A53
-+* Create bootable uSD Card
-+* Boot
-+
-+Sources
-+-------
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_boot_sources
-+    :end-before: .. k3_rst_include_end_boot_sources
-+
-+Build procedure
-+---------------
-+
-+Setup the environment variables:
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_common_env_vars_desc
-+    :end-before: .. k3_rst_include_end_common_env_vars_desc
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_board_env_vars_desc
-+    :end-before: .. k3_rst_include_end_board_env_vars_desc
-+
-+Set the variables corresponding to this platform:
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_common_env_vars_defn
-+    :end-before: .. k3_rst_include_end_common_env_vars_defn
-+.. code-block:: bash
-+
-+ $ export UBOOT_CFG_CORTEXR=phycore_am64x_r5_defconfig
-+ $ export UBOOT_CFG_CORTEXA=phycore_am64x_a53_defconfig
-+ $ export TFA_BOARD=lite
-+ $ # we don't use any extra TFA parameters
-+ $ unset TFA_EXTRA_ARGS
-+ $ export OPTEE_PLATFORM=k3-am64x
-+ # we don't use any extra OPTEE parameters
-+ unset OPTEE_EXTRA_ARGS
-+
-+.. include::  ../ti/am62x_sk.rst
-+    :start-after: .. am62x_evm_rst_include_start_build_steps
-+    :end-before: .. am62x_evm_rst_include_end_build_steps
-+
-+uSD Card creation
-+-----------------
-+
-+Use fdisk to partition the uSD card. The layout should look similar to:
-+
-+.. code-block:: bash
-+
-+ $ sudo fdisk -l /dev/mmcblk0
-+ Disk /dev/mmcblk0: 7.56 GiB, 8120172544 bytes, 15859712 sectors
-+ Units: sectors of 1 * 512 = 512 bytes
-+ Sector size (logical/physical): 512 bytes / 512 bytes
-+ I/O size (minimum/optimal): 512 bytes / 512 bytes
-+ Disklabel type: dos
-+ Disk identifier: 0x6583d9a3
-+
-+ Device         Boot  Start     End Sectors   Size Id Type
-+ /dev/mmcblk0p1 *      2048  264191  262144   128M  c W95 FAT32 (LBA)
-+ /dev/mmcblk0p2      264192 1934953 1670762 815.8M 83 Linux
-+
-+
-+Once partitioned, the boot partition has to be formatted with a FAT filesystem.
-+Assuming the uSD card is `/dev/mmcblk0`:
-+
-+.. code-block:: bash
-+
-+ $ mkfs.vfat /dev/mmcblk0p1
-+
-+To boot from a micro SD card on a HSFS device simply copy the following
-+artifacts to the FAT partition:
-+
-+* tiboot3.bin from R5 build as tiboot3.bin
-+* tispl.bin_unsigned from Cortex-A build as tispl.bin
-+* u-boot.img_unsigned from Cortex-A build as u-boot.img
-+
-+Boot
-+----
-+
-+Put the uSD card in the slot on the board and apply power. Check the serial
-+console for output.
-+
-+Flash to SPI NOR
-+----------------
-+
-+Below commands can be used to flash the SPI NOR flash; assuming
-+tiboot3.bin, tispl.bin and u-boot.img are stored on the uSD card.
-+
-+.. code-block:: bash
-+
-+  sf probe
-+  fatload mmc 1 ${loadaddr} tiboot3.bin
-+  sf update $loadaddr 0x0 $filesize
-+  fatload mmc 1 ${loadaddr} tispl.bin
-+  sf update $loadaddr 0x80000 $filesize
-+  fatload mmc 1 ${loadaddr} u-boot.img
-+  sf update $loadaddr 0x280000 $filesize
-+
-+
-+Boot Modes
-+----------
-+
-+The phyCORE-AM64x development kit supports booting from many different
-+interfaces. By default, the development kit is set to boot from the micro-SD
-+card. To change the boot device, DIP switches S5 and S6 can be used.
-+Boot switches should be changed with power off.
-+
-+.. list-table:: Boot Modes
-+   :widths: 16 16 16
-+   :header-rows: 1
-+
-+   * - Switch Label
-+     - SW3: 12345678
-+     - SW4: 12345678
-+
-+   * - uSD
-+     - 11000010
-+     - 01000000
-+
-+   * - eMMC
-+     - 11010010
-+     - 00000000
-+
-+   * - OSPI
-+     - 11010000
-+     - 10000000
-+
-+   * - UART
-+     - 11011100
-+     - 00000000
-+
-+Further Information
-+-------------------
-+
-+Please see :doc:`../ti/am64x_evm` chapter for further AM64 SoC related documentation
-+and https://docs.phytec.com/phycore-am64x for vendor documentation.
--- 
-2.34.1
+If this workaround is not acceptable I can just drop the RK3328 cleanup
+and leave usb in current semi-broken state.
 
+> 
+> Since CI does pass, where is there a build error ?
+
+Currently there is no board with a configuration that cause build errors,
+that happens when I add DM_USB_GADGET=y to RK3328 boards in a separate
+series.
+
+Previously you have requested that I do not send usb patches as part of
+a larger series targeted to rockchip maintainers. So this time I sent
+the usb part as a standalone patch ahead of such series.
+
+Will send out that series later, and if no one wants to pick this up or
+have time to rework gadget interrupt handling that is fine with me :-)
+
+Regards,
+Jonas
