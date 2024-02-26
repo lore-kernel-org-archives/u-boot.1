@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34172C5478C
-	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 20:42:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CF55C48BF6
+	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 20:47:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 82D7E87F38;
-	Mon, 26 Feb 2024 21:42:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 91BBB87F4C;
+	Mon, 26 Feb 2024 21:47:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="FHP+ndbO";
+	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="Jj3upY0Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3549287DF9; Mon, 26 Feb 2024 21:42:40 +0100 (CET)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.186])
+ id 6386787F50; Mon, 26 Feb 2024 21:47:46 +0100 (CET)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.183])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2875D87F42
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 21:42:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2506887ED9
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 21:47:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: 7c14d29e-d4e7-11ee-9a83-00505699b430
-Received: from smtp.kpnmail.nl (unknown [10.31.155.6])
+X-KPN-MessageId: 4721b05c-d4e8-11ee-b571-005056992ed3
+Received: from smtp.kpnmail.nl (unknown [10.31.155.8])
  by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id 7c14d29e-d4e7-11ee-9a83-00505699b430;
- Mon, 26 Feb 2024 21:41:57 +0100 (CET)
+ id 4721b05c-d4e8-11ee-b571-005056992ed3;
+ Mon, 26 Feb 2024 21:47:38 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
  h=subject:to:from:message-id:date;
- bh=UneI8Xe4Ff1nOKUufyYIjo4bpF9uRfY3J/RorEogh2U=;
- b=FHP+ndbOTPdS5pTK98I56xxgHJ+WArqhCrsFlr18Sz2duPvVPitlcLg3dAFRq9fkvEz4GkLIKkyp1
- poLdilrxBPs/pgnH5iO3nPdn5CJTly1e5mmJu63ikZCX+JRIPyapE0kEelwr5LpvBY4O4y7uMetI9P
- z9obdDfcFXRD/khn9R8aiGKRzHRq9lcyMvcPKUpdBOSV3srU/vo0ULvSKamzdJ/5e66FvK3HvIAvI0
- FAuZswIF/8IMY0EGAe9wemAT7Lfy8ai+XzroiFvjyfAtpmwcanhSm9Po43fTAmMl3g8wqLEpWMNyOK
- p6XIKxf/LSIb9HBFlE/SEkz76ZGwb7w==
-X-KPN-MID: 33|KXjChsCSqRVLL54dJelljGWqdFNBgNokVRQTWGuQ9XQTw5r2+bIxO0yHb4/RUEv
- /ogW28ztQj9JHvJLy+uJT9GJocLMnJTvfbvaEYbo8S1I=
+ bh=PoRDmtVxJ0rjyftlZISC6h8oVv9UnIGoPvoj3Ivlv5Y=;
+ b=Jj3upY0ZZu0D+KMVvO37HgqxhNeKaMECBXtGX5gdvsRb1/0PR9tIuQiHsG6VaETMm1H9rCaeu/TPL
+ xe4QC1NbSlDaKGdlg/IptqNf4hvw27wpuqo/bYExyfFrLPKFADtkvJ65v4Op+gEFlYP/OnIh9vq+Po
+ B2s/OgGv4sQP0ZXi2qR+3ZL6+btEtL7/A79Y5b7QCThEFevWuTxhplsGeW34ovyecgO/+D+9PSuNsr
+ axGgLc0VtFpJ5qjpEx+7lh0fnHVkW4opl+vWCLkrJxTnAP94Iqyay7yneqR/pPRRpUQK7v9ov2J8W0
+ Wbg0dbDVeTPvwlJSFbD89bLoBiplB8A==
+X-KPN-MID: 33|qpJncOkMi7nRs8UhdDUPsKXq17GUlXm27XTLcRvByQbu1CSvZQmjvHBib+YiLh9
+ uUol01JFOMDWPgWKZR98zoGL+RkJVsOVwnBmHITU0INU=
 X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|gaEP3jhajUk3iH4Rt08mAHoBfG4vaATU1U5jW1v+Lt1Qvva2BFF9UB6rYVqCylf
- +EsPxSMOYwL1tzCvzOkLMpw==
+X-CMASSUN: 33|FzACM9BNCEJ5gnbGsHVsizNQK9VEp2FQI8Z1c38rSFR5bgt0dj4RPU8o8pU769+
+ +au+CRYUAXIW0QP5A5PJrqQ==
 X-Originating-IP: 80.61.163.207
 Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
  [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id 92f85e84-d4e7-11ee-9e84-00505699772e;
- Mon, 26 Feb 2024 21:42:37 +0100 (CET)
-Date: Mon, 26 Feb 2024 21:42:36 +0100
-Message-Id: <875xybj6tf.fsf@bloch.sibelius.xs4all.nl>
+ id 49517708-d4e8-11ee-8952-00505699d6e5;
+ Mon, 26 Feb 2024 21:47:43 +0100 (CET)
+Date: Mon, 26 Feb 2024 21:47:42 +0100
+Message-Id: <874jdvj6kx.fsf@bloch.sibelius.xs4all.nl>
 From: Mark Kettenis <mark.kettenis@xs4all.nl>
 To: Marek Vasut <marex@denx.de>
 Cc: j@jannau.net, bmeng.cn@gmail.com, trini@konsulko.com,
- u-boot@lists.denx.de, asahi@lists.linux.dev
-In-Reply-To: <52b99ba9-3772-4074-8b64-e01dde80f6a4@denx.de> (message from
- Marek Vasut on Sun, 25 Feb 2024 22:47:41 +0100)
-Subject: Re: [PATCH 2/6] usb: xhci: Set up endpoints for the first 2 interfaces
+ u-boot@lists.denx.de, asahi@lists.linux.dev, marcan@marcan.st
+In-Reply-To: <85d561a6-54cb-4c1c-bfb0-559163e859c0@denx.de> (message from
+ Marek Vasut on Sun, 25 Feb 2024 22:57:23 +0100)
+Subject: Re: [PATCH 4/6] usb: kbd: Ignore Yubikeys
 References: <20240221-asahi-keyboards-v1-0-814b2e741790@jannau.net>
- <20240221-asahi-keyboards-v1-2-814b2e741790@jannau.net>
- <9cb3370e-770a-40e6-b890-ae9b5a15bd44@denx.de>
- <b0c41f38-abf0-4713-a80a-c78f074b7b4d@app.fastmail.com>
- <52b99ba9-3772-4074-8b64-e01dde80f6a4@denx.de>
+ <20240221-asahi-keyboards-v1-4-814b2e741790@jannau.net>
+ <2acb9976-a40e-4977-b7ca-2462e84251ed@denx.de>
+ <4c1c6b72-ffe5-4ff3-8d12-9fc0b956643d@app.fastmail.com>
+ <85d561a6-54cb-4c1c-bfb0-559163e859c0@denx.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,43 +78,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Date: Sun, 25 Feb 2024 22:47:41 +0100
+> Date: Sun, 25 Feb 2024 22:57:23 +0100
 > From: Marek Vasut <marex@denx.de>
 > 
-> On 2/25/24 4:28 PM, Janne Grunau wrote:
+> On 2/25/24 5:07 PM, Janne Grunau wrote:
+> > Hej,
 > > 
-> > 
-> > On Wed, Feb 21, 2024, at 13:39, Marek Vasut wrote:
+> > On Wed, Feb 21, 2024, at 13:41, Marek Vasut wrote:
 > >> On 2/21/24 08:25, Janne Grunau via B4 Relay wrote:
-> >>> From: Janne Grunau <j@jannau.net>
+> >>> From: Hector Martin <marcan@marcan.st>
 > >>>
-> >>> Apple USB keyboards carry the HID keyboard boot protocol on the second
-> >>> interface. Using the second interface in the USB keyboard driver does
-> >>> not work since the xhci has not allocated a transfer ring.
+> >>> We currently only support one USB keyboard device, but some devices
+> >>> emulate keyboards for other purposes. Most commonly, people run into
+> >>> this with Yubikeys, so let's ignore those.
+> >>>
+> >>> Even if we end up supporting multiple keyboards in the future, it's
+> >>> safer to ignore known non-keyboard devices.
+> >>>
+> >>> Signed-off-by: Hector Martin <marcan@marcan.st>
+> >>> ---
+> >>>    common/usb_kbd.c | 19 +++++++++++++++++++
+> >>>    1 file changed, 19 insertions(+)
+> >>>
+> >>> diff --git a/common/usb_kbd.c b/common/usb_kbd.c
+> >>> index 4cbc9acb73..774d3555d9 100644
+> >>> --- a/common/usb_kbd.c
+> >>> +++ b/common/usb_kbd.c
+> >>> @@ -120,6 +120,15 @@ struct usb_kbd_pdata {
+> >>>    
+> >>>    extern int __maybe_unused net_busy_flag;
+> >>>    
+> >>> +/*
+> >>> + * Since we only support one usbkbd device in the iomux,
+> >>> + * ignore common keyboard-emulating devices that aren't
+> >>> + * real keyboards.
+> >>> + */
+> >>> +const uint16_t vid_blocklist[] = {
+> >>> +	0x1050, /* Yubico */
+> >>> +};
+> >>> +
+> >>>    /* The period of time between two calls of usb_kbd_testc(). */
+> >>>    static unsigned long kbd_testc_tms;
+> >>>    
+> >>> @@ -465,6 +474,7 @@ static int usb_kbd_probe_dev(struct usb_device *dev, unsigned int ifnum)
+> >>>    	struct usb_endpoint_descriptor *ep;
+> >>>    	struct usb_kbd_pdata *data;
+> >>>    	int epNum;
+> >>> +	int i;
+> >>>    
+> >>>    	if (dev->descriptor.bNumConfigurations != 1)
+> >>>    		return 0;
+> >>> @@ -480,6 +490,15 @@ static int usb_kbd_probe_dev(struct usb_device *dev, unsigned int ifnum)
+> >>>    	if (iface->desc.bInterfaceProtocol != USB_PROT_HID_KEYBOARD)
+> >>>    		return 0;
+> >>>    
+> >>> +	for (i = 0; i < ARRAY_SIZE(vid_blocklist); i++) {
+> >>> +		if (dev->descriptor.idVendor == vid_blocklist[i]) {
+> >>> +			printf("Ignoring keyboard device 0x%x:0x%x\n",
+> >>> +			       dev->descriptor.idVendor,
+> >>> +			       dev->descriptor.idProduct);
+> >>> +			return 0;
+> >>> +		}
+> >>> +	}
 > >>
-> >> So, what does this patch do ? That is not clear from the commit message.
+> >> I vaguely recall a discussion about previous version of this, I think
+> >> the suggestion was to make the list of ignored devices configurable via
+> >> environment variable, so users can add to that list from U-Boot shell.
+> >> Would it be possible to make it work this way ?
 > > 
-> > rewritten for v2:
-> > | usb: xhci: Set up endpoints for the first 2 interfaces
-> > |
-> > | The xhci driver currently only does the necessary initialization for
-> > | endpoints found in the first interface descriptor. Apple USB keyboards
-> > | (released 2021) use the second interface descriptor for the HID keyboard
-> > | boot protocol. To allow USB drivers to use endpoints from other
-> > | interface descriptors the xhci driver needs to ensure these endpoints
-> > | are initialized as well.
-> > | Use USB_MAX_ACTIVE_INTERFACES to control how many interface descriptors
-> > | are initialized and useable. Currently defined to 2 as that is enough to
-> > | make the Apple keyboard usable.
+> > oh, I completely forgot that this patch was already submitted. I briefly looked through asahi tree for related patches and did not check whether this was previously submitted.
+> > I've added environment based blocking as separate patch with blocking either complete vendor IDs or vendor, product ID combinations. A separate patch to simplify authorship tracking and the implementation doesn't share any code.
 > 
-> Would it make sense to make this a tunable Kconfig option ?
+> It would be better to have only one patch which does not hard-code any 
+> USB IDs, and then add those blocked IDs via U-Boot default environment 
+> for this specific machine. We cannot predict what yubico will do in the 
+> future, whether they might make a device that shouldn't be blocked for 
+> example. If they do, the user should be able to unblock their device by 
+> running e.g. '=> setenv usb_blocklist' instead of updating their bootloader.
+> 
+> I think a simple list of blocked VID:PID pairs, maybe with wildcards, 
+> would be nice, i.e. something like 'usb_blocklist=1234:5678,1050:*' to 
+> block device 0x1234:0x5678 and all devices with VID 0x1050 . That should 
+> be easy to parse with strtok()/strtol() or some such and the code should 
+> not be too complex.
 
-Maybe, but it should probably be enabled everywhere where
-CONFIG_USB_KEYBOARD as folks will connect their Apple keyboard to
-non-Apple hardware as well.  And I think someone mentioned on the
-#asahi irc channel that there are othe keyboards that have the boot
-protocol on the second interface descriptor.
+I do like the idea of having a configurable list of usb devices to
+ignore.  The U-Boot USB stack is still not perfect and there are still
+USB devices that will prevent us from booting when connected.  The
+list will provide a nice workaround for that issue.
 
-Cheers,
-
-Mark
+But the yubikeys will cause the same problem on other boards as well.
+So I think it makes sense to put those in a default list.
