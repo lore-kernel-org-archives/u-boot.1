@@ -4,82 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13C59C48BF6
-	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 12:59:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E58DDC54E49
+	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 13:01:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7E5B4879AF;
-	Mon, 26 Feb 2024 13:59:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6C9E687EF5;
+	Mon, 26 Feb 2024 14:01:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zf9VziI3";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 12139879AF; Mon, 26 Feb 2024 13:59:47 +0100 (CET)
-Received: from mail-vs1-xe35.google.com (mail-vs1-xe35.google.com
- [IPv6:2607:f8b0:4864:20::e35])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1708952494;
+	bh=PbPZzkCWDoEUsgQ2TaJD6HmFNp7M4HO7mAKxCLvIXaA=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=SePIKpcKFUt9cl91Uq7gjaOmuBDAcf2DmN0/tO6gCOer8Ad3CGvnKrpWKdGW7Beaq
+	 8T3i82QGXHMOmlWTADvrgK1Py+QYJl5wtyGMmCp00Q7cYAfR/CQOxYzjRYCXGbCWQT
+	 9q4scqvZycz7WNwL9CF+W3jXHbJQ+izKzHi1Rw66xY5y3QZPNFZ67Wd1nD8rUKkwTO
+	 brUe0kuYTYMDpd0BV2seFXneeRoAE4SDgNaZUfBzUh53FrDXOlAgB0rEZJ4Q4uq5aP
+	 kcjSNUjUPOFCyHreoY77vaGPpLCSxiE/ZNwRelY7oGiuRz2yYNkWv580/Xr96wJ/ob
+	 tveMo0fv3xiCw==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 48D1587CDB
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 13:59:44 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vs1-xe35.google.com with SMTP id
- ada2fe7eead31-4704750edd7so380131137.0
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 04:59:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708952383; x=1709557183; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=LMlYy3V51irdhHvgrZMue0C5NrObO2P3CQL23wHOYoM=;
- b=zf9VziI3umFp2Us++wzr6rIGfRAvgieMNgv04I5HUQ3sl8Zx3PB+gxN+rsjtTov4Qh
- miIk0jXMeEg/kr3HOgpfZAAAGKbMELuOdfNipxpHAag5QpiinekkG8fpsXjBxA3+HiFJ
- iHP3OsQAkgG68MSNDZz6UhO6wJtvk82lVePEyS7QrjRgBZZOp9spzat4RgWXJkfeqnrZ
- yUd+/i6zyvwe7Z7+t7nlGhIxxQpfeZVNHPLYD1I5nFX/xytSU4R260GA0AFF78UFUWWS
- d1rYNw3ugizlDRbtaZ5SG/8MoO5dKqQiKjOheBwshYbJIyVYKs9KxgHgmjo3w4Pe3+pU
- BTvg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708952383; x=1709557183;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=LMlYy3V51irdhHvgrZMue0C5NrObO2P3CQL23wHOYoM=;
- b=q+FIBHPzsvlhfsRyjPePU1dOE1y3XF6n/UWNMSj5Nd9Gx8H0DR+I/3gZeyb0P2nnHz
- OzHxOQ8AKhzuxDBq/JFEYjMSimOu3XiwqML4YKMh7iaA+jDszUQRDIPFGxvk87PkXQAK
- VuHr1cIQUbbTjm6Kp40UMkM8MT8vlAV689oX4HwFp39HW9hveflnlg+Erv350GogIv1k
- 7og6bepjQsRx5y/C3SHDS0Jy6V3Waghdk+F41cyJr/z6oPi8BsvDlIGvaPzOpFscMXBQ
- 3Ltpp+2PIzNIigaSB8wNSNYli5DBFZ9JRfC/rU113PZWMBtPs86tgXpEm+6mEOgs+3E9
- 42VQ==
-X-Gm-Message-State: AOJu0YzDYXQVvRAb8ver336/mEGltUHyBpojZFp/vbVvIyw7r3Nwubi7
- 4csSGda77D2JGRdH+JDCoAHn68MUQtVm8Dj//buTpGu7O5QAHlXmrl5Pdaqqg/uXD7wl4o4L7ws
- WNTlsZCYkamf46mBso/olS2LQlcmbbUp3fUOmaw==
-X-Google-Smtp-Source: AGHT+IGqCFb/uUC3zpCOnqQ7OQU7y7mjvQt+aZbOCmth5qX+CYE3uDF040IGnBVpMLig1c3bBa7HfCAm0wyRtZgQ3aI=
-X-Received: by 2002:a67:f313:0:b0:471:e03e:224c with SMTP id
- p19-20020a67f313000000b00471e03e224cmr3068872vsf.1.1708952383023; Mon, 26 Feb
- 2024 04:59:43 -0800 (PST)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id E6D9887EEA;
+ Mon, 26 Feb 2024 14:01:31 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1708952493;
+ bh=PbPZzkCWDoEUsgQ2TaJD6HmFNp7M4HO7mAKxCLvIXaA=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=Hmq9gFQHVTUlC4VHgg5raRWx3T+hKpTK1UjYch7nRdhy5etjiwOBOTOz/iUMWb/nj
+ Tc3J5VHl5uiE9jTQnM0TLBcnb4sZ/+KXZoJLxIfbknfbhAbxyAbOJXXazOiWbCjM1A
+ wEBX6xZMJYH/GA+H8IqNvKeq7uVJCanwawavgavuHN6pSrn2h9xgG96+aH3x6Wza6N
+ ExJrckUlUiUrglLGEME9IcWzqvufjxzp8uWpzf67iqAWrBD/729I/qw6tPdnFJkbfX
+ lrZkBojRB0PYr9yFLKUanNUFGTlSHlhPyIfLmD11W15n8PA+NurXwf6XVRR087+jSK
+ R+iX8bY/dO5/Q==
+Message-ID: <6aee8c88-f333-4dcc-aba2-cb37d60b5697@denx.de>
+Date: Mon, 26 Feb 2024 14:01:31 +0100
 MIME-Version: 1.0
-References: <20240226080433.3307154-1-sumit.garg@linaro.org>
- <20240226080433.3307154-3-sumit.garg@linaro.org>
- <a5862ce9-8977-47cb-87af-e8da1839867d@denx.de>
- <CAFA6WYNEpg_zgRo_gD3ab3QR1e1j1xZCOb8ui-ZSV27U_Yv4EQ@mail.gmail.com>
- <04b243f4-c89d-4ddc-80b9-4ff83e9076aa@denx.de>
-In-Reply-To: <04b243f4-c89d-4ddc-80b9-4ff83e9076aa@denx.de>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Mon, 26 Feb 2024 18:29:32 +0530
-Message-ID: <CAFA6WYOSPmQwrFC=kqWeYwg8kBETBxBgE2Zp5vmK4gJkUKcPDw@mail.gmail.com>
-Subject: Re: [PATCH v2 2/8] reset: imx: Add support for i.MX8MP reset
- controller
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, marcel.ziswiler@toradex.com, francesco@dolcini.it, 
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 4/8] imx8mp: power-domain: Expose high performance PLL
+ clock
+Content-Language: en-US
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: u-boot@lists.denx.de, marcel.ziswiler@toradex.com, francesco@dolcini.it,
  trini@konsulko.com, lukma@denx.de, seanga2@gmail.com,
- jh80.chung@samsung.com, 
- festevam@denx.de, andrejs.cainikovs@toradex.com, sjg@chromium.org, 
- peng.fan@nxp.com, aford173@gmail.com, ilias.apalodimas@linaro.org, 
- sahaj.sarup@linaro.org, fathi.boudra@linaro.org, remi.duraffort@linaro.org, 
+ jh80.chung@samsung.com, festevam@denx.de, andrejs.cainikovs@toradex.com,
+ sjg@chromium.org, peng.fan@nxp.com, aford173@gmail.com,
+ ilias.apalodimas@linaro.org, sahaj.sarup@linaro.org,
+ fathi.boudra@linaro.org, remi.duraffort@linaro.org,
  daniel.thompson@linaro.org
-Content-Type: text/plain; charset="UTF-8"
+References: <20240226080433.3307154-1-sumit.garg@linaro.org>
+ <20240226080433.3307154-5-sumit.garg@linaro.org>
+ <8c36eac1-2b6b-4810-b4c9-1b8912bfe81e@denx.de>
+ <CAFA6WYO2n-QG7TvSnKyk5O0Pzwcn0jd4iCeLbebbsVZiOq2fdQ@mail.gmail.com>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <CAFA6WYO2n-QG7TvSnKyk5O0Pzwcn0jd4iCeLbebbsVZiOq2fdQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,42 +78,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 26 Feb 2024 at 16:11, Marek Vasut <marex@denx.de> wrote:
->
-> On 2/26/24 11:33 AM, Sumit Garg wrote:
-> > On Mon, 26 Feb 2024 at 14:24, Marek Vasut <marex@denx.de> wrote:
-> >>
-> >> On 2/26/24 9:04 AM, Sumit Garg wrote:
-> >>> Add support for i.MX8MP reset controller, it has same reset IP
-> >>
-> >> Same as what ?
-> >
-> > I can expand it.
->
-> This does not answer the question .
->
+On 2/26/24 1:39 PM, Sumit Garg wrote:
+> On Mon, 26 Feb 2024 at 14:24, Marek Vasut <marex@denx.de> wrote:
+>>
+>> On 2/26/24 9:04 AM, Sumit Garg wrote:
+>>> Expose the high performance PLL as a regular Linux clock, so the
+>>> PCIe PHY can use it when there is no external refclock provided.
+>>>
+>>> Inspired from counterpart Linux kernel v6.8-rc3 driver:
+>>> drivers/pmdomain/imx/imx8mp-blk-ctrl.c
+>>
+>> Commit ID, please, see previous comments in this series.
+>>
+>> [...]
+>>
+>>> +static int hsio_pll_clk_enable(struct clk *clk)
+>>> +{
+>>> +     void *base = (void *)dev_get_driver_data(clk->dev);
+>>> +     u32 val;
+>>> +     int ret;
+>>> +
+>>> +     /* Setup HSIO PLL */
+>>> +     clrsetbits_le32(base + GPR_REG2,
+>>> +                     P_PLL_MASK | M_PLL_MASK | S_PLL_MASK,
+>>> +                     FIELD_PREP(P_PLL_MASK, 12) |
+>>> +                     FIELD_PREP(M_PLL_MASK, 800) |
+>>> +                     FIELD_PREP(S_PLL_MASK, 4));
+>>
+>> These magic numbers 12, 800, 4 could use explanation (why these
+>> numbers?) and a dedicated macro .
+>>
+> 
+> I can't find any information in TRM as to how HSIO PLL computation is
+> done. However, I can extend the comment above to say that this
+> configuration leads to a 100 MHz PHY clock as per
+> clk_hsio_pll_recalc_rate() in Linux kernel driver.
 
-The other iMX7 and iMX8 variants.
+Try the CCM section 5.1.5.4.4 SSCG and Fractional PLLs I think, this is 
+likely PLL14xxx from Samsung, so
 
-> >>> inside
-> >>> but with different module layout.
-> >>>
-> >>> Inspired from counterpart Linux kernel v6.8-rc3 driver:
-> >>> drivers/reset/reset-imx7.c.
-> >>
-> >> Use commit ID of the last change in that driver:
-> >>
-> >> bad8a8afe19f ("reset: Explicitly include correct DT includes")
-> >>
-> >> I guess
-> >
-> > Why isn't the Linux kernel tag sufficient here? I don't see the value
-> > of cross referencing commits across different git projects.
->
-> The commit ID is a unique identifier, tag can be rewritten .
+f_out = f_in * M / P * 2^S
 
-Similar arguments can be made for git commit history. But the question
-is have you come across such instances for Linux kernel where git
-release/RC tags have been rewritten?
+I think f_in is something like 24 MHz, so 24 * 800 / 12 * 16 = 100 MHz
 
--Sumit
+P - predivider
+S - subdivider (output divider)
+M - multiplier
+
+>>> +     /* de-assert PLL reset */
+>>> +     setbits_le32(base + GPR_REG3, PLL_RST);
+>>> +
+>>> +     /* enable PLL */
+>>> +     setbits_le32(base + GPR_REG3, PLL_CKE);
+>>> +
+>>> +     /* Check if PLL is locked */
+>>> +     ret = readl_poll_sleep_timeout(base + GPR_REG1, val,
+>>> +                                    val & PLL_LOCK, 10, 100000);
+>>> +     if (ret)
+>>> +             dev_err(clk->dev, "failed to lock HSIO PLL\n");
+>>> +
+>>> +     return ret;
+>>> +}
+>>> +
+>>> +static int hsio_pll_clk_disable(struct clk *clk)
+>>> +{
+>>> +     void *base = (void *)dev_get_driver_data(clk->dev);
+>>> +
+>>> +     clrbits_le32(base + GPR_REG3, PLL_CKE);
+>>> +     clrbits_le32(base + GPR_REG3, PLL_RST);
+>>
+>> Can you clear both at once, or do they have to be cleared in sequence ?
+> 
+> I generally follow the reverse sequence of how the configuration is
+> done during hsio_pll_clk_enable(). These bits have seperate functions
+> related to clock and reset. So I would prefer to keep them as they
+> are.
+
+Linux does this in drivers/pmdomain/imx/imx8mp-blk-ctrl.c :
+
+120 static void clk_hsio_pll_unprepare(struct clk_hw *hw)
+121 {
+122         struct clk_hsio_pll *clk = to_clk_hsio_pll(hw);
+123
+124         regmap_update_bits(clk->regmap, GPR_REG3, PLL_RST | PLL_CKE, 0);
+125 }
+
+[...]
