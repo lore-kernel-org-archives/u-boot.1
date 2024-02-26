@@ -4,71 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93705C54E49
-	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 12:51:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01458C54E49
+	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 12:52:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF20A87E89;
-	Mon, 26 Feb 2024 13:51:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7C74787EE7;
+	Mon, 26 Feb 2024 13:52:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qSYmTg5Q";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QAPk4UFV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 580BF87BFD; Mon, 26 Feb 2024 13:51:12 +0100 (CET)
-Received: from mail-ua1-x933.google.com (mail-ua1-x933.google.com
- [IPv6:2607:f8b0:4864:20::933])
+ id 9031087BFD; Mon, 26 Feb 2024 13:52:54 +0100 (CET)
+Received: from mail-vs1-xe2f.google.com (mail-vs1-xe2f.google.com
+ [IPv6:2607:f8b0:4864:20::e2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA20B87EC4
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 13:51:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9420E87EED
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 13:52:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ua1-x933.google.com with SMTP id
- a1e0cc1a2514c-7d643a40a91so1791725241.0
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 04:51:07 -0800 (PST)
+Received: by mail-vs1-xe2f.google.com with SMTP id
+ ada2fe7eead31-47051c7635dso346216137.1
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 04:52:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708951866; x=1709556666; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1708951969; x=1709556769; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ef0E9+CQC4iWH9XxWD3PVAAN4B7aBuU//P4TbL8TXLA=;
- b=qSYmTg5QSIyuvMti93GEDGleVHP5X7+ma3GNCWHEw5I7lSOV7buF/MdeS4Ya1vwLjs
- Jq0Dhk3d0qcD+E7PQxXj8ilChA0fbRq75FVfaaiEKtGRkxfxjcHaYBgiy5r8MIrcovBe
- ZSsKorcS9Fsl237aDtLIPx8wrAOzNOZ59BUF7BxV91g//IogwOTG8lsYhou7VcOLA0XK
- i1NK5qwACxI7aa1pN9+/aHFT/HTtD7gAwdoji7yrpfNuh1OYW8H/BtMebUI0eKX8RR7e
- QMWXu/eVYAwjQROETK2OAd4X4LhZMJsZ9jMuKituVJPBcWU/KN7chu/jdknQ6T21SctM
- ykWw==
+ bh=zri7pDB5pfIN/Z5mFLnD5F8Nwk+RPz0wt3KBAqiSRHY=;
+ b=QAPk4UFVUwnCnAmfxL13o+AXg3x8EAvH3xDQ4Ozf42PtMU5ftkL2mVDIrjVH9bbmPa
+ cwrlPYhEYxjeCseVCV1wF6OPJyvN9xA4PLZBnq+QVBLjV72KQyVJgBrudNC5tSDgA8HO
+ emHkFW+rOP0J+S8n/V3KbZ1LPA9IqsEMuu0/P/+9S1poDrdhZgjO75ADwmNWpN+gUW98
+ qqdypqxj7/M2l5lMpC5oud7oHmvYA1rd8a+6DIqU9Fwjg/sDYjvKEIj0EtrRA0AblaGw
+ PYMGmm22dEq6eO1ira+GXobU+MfrTwubUzN9aySOFbR05Qx9vS6hrVJrhMA+uPjZhqMW
+ ER1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708951866; x=1709556666;
+ d=1e100.net; s=20230601; t=1708951969; x=1709556769;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ef0E9+CQC4iWH9XxWD3PVAAN4B7aBuU//P4TbL8TXLA=;
- b=C/IrX3sXBv159g6JhDvBnvR+RBqOBzG3e+X8rqlKIz72QDEEzrC31jIn52yNF+S/8G
- Dln0OMD8k7EI6Y42EAGCAL8tMSAcNC32hK2G4tLRkU+D4AZ6sFSFi6RBOcAu3xmisMR0
- Ht8R1AtuZJMLuazGjcZbL53/DPr0wc+PVehrEK8WWXZ0qBG6RBsxupo/riYP3l59wwMW
- 3sBI/TG8/l0JRWS+h74rWEWIxoCDRlzuh2kiizo2LSCxiEVyX4wr+bzOe4eeOZuZPwW/
- Rqx6U0IJ838yhogWG4fmYkDEZojIA/91rj14mhamB+tyK8kD8hrtoR6NyyoBc59EdKpQ
- YRNA==
-X-Gm-Message-State: AOJu0YxbTG0zMzUsgCgiWCzb2+0dqtf8RlLPCy1CIDxauflAvAUaMWSX
- daJVuN2g9oJ+BTk9IWudsPhSvFHHtg+HPexXdc3E2N65zTs389lCiu2r8g8+iUI74765RRk6l0s
- 3cKjbob3p/GqGt8Q3M/X/Z42lcuLJeIS4AuMWbw==
-X-Google-Smtp-Source: AGHT+IGOZz/MYMyRoBLgFCblc62jyHyZCpbpUYXmUCnxd/vCOsSbTLHiib/Y5/AGMsBWdIsJ9eTzcLvoh+2HvFurWL8=
-X-Received: by 2002:a05:6102:dcd:b0:472:4b21:207e with SMTP id
- e13-20020a0561020dcd00b004724b21207emr247017vst.30.1708951866694; Mon, 26 Feb
- 2024 04:51:06 -0800 (PST)
+ bh=zri7pDB5pfIN/Z5mFLnD5F8Nwk+RPz0wt3KBAqiSRHY=;
+ b=JbtUEIppXBKExLgez6GYJBoUXJMqzyPYV8Gn0HqhOR7rFQWwlOMGRIzy+AG2JOh5F9
+ 3JeRbCBpXRtVDuni76y1ZBtIj8+8HGydXdmGHjpMyUAGJQ3AB4ofFmQ4dXWYdENMtitm
+ lvBkrhl5qsjXCFR5YKdiQi4PEjfa4lnT/8tUQ6gm0Jd+aKuRdBazaboGYVOqGMcCLy8l
+ 0Up/0DuzV91smJpdFdFHz5steehwr/lxUxzqzvWq+SqBwmZHfkGWnTPKxsaDybz4MXuX
+ IO+oLxkUrDoLa0nvfuz4Ts6Jj70965hQgIK7R3cSpoIi5ixmL26RcWb/Ry6KcV/szsA1
+ 8Cbg==
+X-Gm-Message-State: AOJu0Yy6rmKoDOl6rr/3N0RMI3pWhtHtjs+XrVufhMj3aSNyEqhDnmTi
+ 0jgU1yzM5CFvVGA8NnZzWv/22n5/m00Z+ZZxqwz8abxnCv2GCH0/Q16Cv35zDGdv5aLLr+MwdWD
+ gg6LlEFjB1w+l5Kzz8wHxDFsm+T+5DUgFWYsCSQ==
+X-Google-Smtp-Source: AGHT+IHbmyznC+uVzNimWoXzYUkfaQkKnchmC9Yze7+gYhe8lyKMJo9wxHcbyW9ZJLxAzeZgfRJyijMBlz5v3sWNBFk=
+X-Received: by 2002:a67:b914:0:b0:471:e1da:ae79 with SMTP id
+ q20-20020a67b914000000b00471e1daae79mr2813908vsn.15.1708951969343; Mon, 26
+ Feb 2024 04:52:49 -0800 (PST)
 MIME-Version: 1.0
 References: <20240226080433.3307154-1-sumit.garg@linaro.org>
- <20240226080433.3307154-6-sumit.garg@linaro.org>
- <609581c7-d221-4eff-862b-6f172ba9d4e8@denx.de>
-In-Reply-To: <609581c7-d221-4eff-862b-6f172ba9d4e8@denx.de>
+ <20240226080433.3307154-7-sumit.garg@linaro.org>
+ <3f5cf71b-ef9a-4e8b-99c2-cb51d342db7f@denx.de>
+In-Reply-To: <3f5cf71b-ef9a-4e8b-99c2-cb51d342db7f@denx.de>
 From: Sumit Garg <sumit.garg@linaro.org>
-Date: Mon, 26 Feb 2024 18:20:55 +0530
-Message-ID: <CAFA6WYPdqsD7Xy1EwX7R_+A3UiskvxaTyvR6D9qP45WhUxxA6A@mail.gmail.com>
-Subject: Re: [PATCH v2 5/8] phy: phy-imx8m-pcie: Add support for i.MX8M{M/P}
- PCIe PHY
+Date: Mon, 26 Feb 2024 18:22:38 +0530
+Message-ID: <CAFA6WYOb_DiZoe4v=heUTTj4ku0AO1gndF_rTTSd3NBFfDM3ZA@mail.gmail.com>
+Subject: Re: [PATCH v2 6/8] pci: Add DW PCIe controller support for iMX8MP SoC
 To: Marek Vasut <marex@denx.de>
 Cc: u-boot@lists.denx.de, marcel.ziswiler@toradex.com, francesco@dolcini.it, 
  trini@konsulko.com, lukma@denx.de, seanga2@gmail.com,
@@ -97,78 +96,77 @@ X-Virus-Status: Clean
 On Mon, 26 Feb 2024 at 14:24, Marek Vasut <marex@denx.de> wrote:
 >
 > On 2/26/24 9:04 AM, Sumit Garg wrote:
-> > Add initial support for i.MX8M{M/P} PCIe PHY. On i.MX8M{M/P} SoCs PCIe
-> > PHY initialization moved to this standalone PHY driver.
-> >
-> > Inspired from counterpart Linux kernel v6.8-rc3 driver:
-> > drivers/phy/freescale/phy-fsl-imx8m-pcie.c.
+> > pcie_imx doesn't seem to share any useful code for iMX8 SoC and it is
+> > tied to quite old port of pcie_designware driver from Linux which
+> > suffices only iMX6 specific needs.
 >
-> Commit ID , see previous comments.
+> It is probably hand-rolled, but it does suck, that's true.
+>
+> > But currently we have the common DWC specific bits which alligns pretty
+> > well with DW PCIe controller on iMX8MP SoC. So lets reuse those common
+> > bits instead as a new driver for iMX8 SoCs. It should be fairly easy to
+> > add support for other iMX8 variants to this driver.
+> >
+> > iMX8MP SoC also comes up with standalone PCIe PHY support, so hence we
+> > can reuse the generic PHY infrastructure to power on PCIe PHY.
 >
 > [...]
 >
-> > +static int imx8_pcie_phy_probe(struct udevice *dev)
+> > +static int pcie_dw_imx_of_to_plat(struct udevice *dev)
 > > +{
-> > +     struct imx8_pcie_phy *imx8_phy = dev_get_priv(dev);
+> > +     struct pcie_dw_imx *priv = dev_get_priv(dev);
 > > +     ofnode gpr;
-> > +     int ret = 0;
+> > +     int ret;
 > > +
-> > +     imx8_phy->drvdata = (void *)dev_get_driver_data(dev);
-> > +     imx8_phy->base = dev_read_addr(dev);
-> > +     if (!imx8_phy->base)
+> > +     /* Get the controller base address */
+> > +     priv->dw.dbi_base = (void *)dev_read_addr_name(dev, "dbi");
+> > +     if ((fdt_addr_t)priv->dw.dbi_base == FDT_ADDR_T_NONE) {
+> > +             dev_err(dev, "failed to get dbi_base address\n");
 > > +             return -EINVAL;
+> > +     }
 > > +
-> > +     /* get PHY refclk pad mode */
-> > +     dev_read_u32(dev, "fsl,refclk-pad-mode", &imx8_phy->refclk_pad_mode);
+> > +     /* Get the config space base address and size */
+> > +     priv->dw.cfg_base = (void *)dev_read_addr_size_name(dev, "config",
+> > +                                                         &priv->dw.cfg_size);
+> > +     if ((fdt_addr_t)priv->dw.cfg_base == FDT_ADDR_T_NONE) {
+> > +             dev_err(dev, "failed to get cfg_base address\n");
+> > +             return -EINVAL;
+> > +     }
 > > +
-> > +     if (dev_read_u32(dev, "fsl,tx-deemph-gen1", &imx8_phy->tx_deemph_gen1))
-> > +             imx8_phy->tx_deemph_gen1 = 0;
->
-> Use dev_read_u32_default() and you won't need the if (...)
->
-
-Ack.
-
-> > +     if (dev_read_u32(dev, "fsl,tx-deemph-gen2", &imx8_phy->tx_deemph_gen2))
-> > +             imx8_phy->tx_deemph_gen2 = 0;
+> > +     ret = clk_get_bulk(dev, &priv->clks);
+> > +     if (ret) {
+> > +             dev_err(dev, "failed to get PCIe clks\n");
+> > +             return ret;
+> > +     }
 > > +
-> > +     if (dev_read_bool(dev, "fsl,clkreq-unsupported"))
-> > +             imx8_phy->clkreq_unused = true;
-> > +     else
-> > +             imx8_phy->clkreq_unused = false;
+> > +     ret = reset_get_by_name(dev, "apps", &priv->apps_reset);
+> > +     if (ret) {
+> > +             dev_err(dev,
+> > +                     "Failed to get PCIe apps reset control\n");
+> > +             return ret;
+> > +     }
 > > +
-> > +     /* Grab GPR config register range */
-> > +     gpr = ofnode_by_compatible(ofnode_null(), imx8_phy->drvdata->gpr);
+> > +     ret = gpio_request_by_name(dev, "reset-gpio", 0, &priv->reset_gpio,
+> > +                                (GPIOD_IS_OUT | GPIOD_IS_OUT_ACTIVE));
+> > +     if (ret) {
+> > +             dev_err(dev, "unable to get reset-gpio\n");
+> > +             return ret;
+> > +     }
+> > +
+> > +     ret = generic_phy_get_by_name(dev, "pcie-phy", &priv->phy);
+> > +     if (ret) {
+> > +             dev_err(dev, "failed to get pcie phy\n");
+> > +             return ret;
+> > +     }
+> > +
+> > +     gpr = ofnode_by_compatible(ofnode_null(), "fsl,imx8mp-iomuxc-gpr");
 > > +     if (ofnode_equal(gpr, ofnode_null())) {
 > > +             dev_err(dev, "unable to find GPR node\n");
 > > +             return -ENODEV;
 > > +     }
-> > +
-> > +     imx8_phy->iomuxc_gpr = syscon_node_to_regmap(gpr);
-> > +     if (IS_ERR(imx8_phy->iomuxc_gpr)) {
-> > +             dev_err(dev, "unable to find iomuxc registers\n");
-> > +             return PTR_ERR(imx8_phy->iomuxc_gpr);
-> > +     }
-> > +
-> > +     ret = clk_get_by_name(dev, "ref", &imx8_phy->hsio_clk);
-> > +     if (ret) {
-> > +             dev_err(dev, "Failed to get PCIEPHY ref clock\n");
-> > +             return ret;
-> > +     }
-> > +
-> > +     ret = reset_get_by_name(dev, "pciephy", &imx8_phy->reset);
-> > +     if (ret) {
-> > +             dev_err(dev, "Failed to get PCIEPHY reset control\n");
-> > +             return ret;
-> > +     }
 >
-> Some clk_put() and co. fail path is missing here.
+> You likely need a fail path here too, to undo allocation and co.
 
-Ditto for clk_put() not being available. However, I can add the fail
-path for the other reset.
-
-> Also .remove is missing .
-
-Sure, I will add that to release resets.
+Ack.
 
 -Sumit
