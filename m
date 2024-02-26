@@ -4,64 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CF55C48BF6
-	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 20:47:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4C7EC5478C
+	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 20:55:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 91BBB87F4C;
-	Mon, 26 Feb 2024 21:47:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id 459DC87F49;
+	Mon, 26 Feb 2024 21:55:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="Jj3upY0Z";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6386787F50; Mon, 26 Feb 2024 21:47:46 +0100 (CET)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.183])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2506887ED9
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 21:47:44 +0100 (CET)
+ id EEF1F87F4B; Mon, 26 Feb 2024 21:55:14 +0100 (CET)
+Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
+ [210.160.252.172])
+ by phobos.denx.de (Postfix) with ESMTP id D428E87F42
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 21:55:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: 4721b05c-d4e8-11ee-b571-005056992ed3
-Received: from smtp.kpnmail.nl (unknown [10.31.155.8])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id 4721b05c-d4e8-11ee-b571-005056992ed3;
- Mon, 26 Feb 2024 21:47:38 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=PoRDmtVxJ0rjyftlZISC6h8oVv9UnIGoPvoj3Ivlv5Y=;
- b=Jj3upY0ZZu0D+KMVvO37HgqxhNeKaMECBXtGX5gdvsRb1/0PR9tIuQiHsG6VaETMm1H9rCaeu/TPL
- xe4QC1NbSlDaKGdlg/IptqNf4hvw27wpuqo/bYExyfFrLPKFADtkvJ65v4Op+gEFlYP/OnIh9vq+Po
- B2s/OgGv4sQP0ZXi2qR+3ZL6+btEtL7/A79Y5b7QCThEFevWuTxhplsGeW34ovyecgO/+D+9PSuNsr
- axGgLc0VtFpJ5qjpEx+7lh0fnHVkW4opl+vWCLkrJxTnAP94Iqyay7yneqR/pPRRpUQK7v9ov2J8W0
- Wbg0dbDVeTPvwlJSFbD89bLoBiplB8A==
-X-KPN-MID: 33|qpJncOkMi7nRs8UhdDUPsKXq17GUlXm27XTLcRvByQbu1CSvZQmjvHBib+YiLh9
- uUol01JFOMDWPgWKZR98zoGL+RkJVsOVwnBmHITU0INU=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|FzACM9BNCEJ5gnbGsHVsizNQK9VEp2FQI8Z1c38rSFR5bgt0dj4RPU8o8pU769+
- +au+CRYUAXIW0QP5A5PJrqQ==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id 49517708-d4e8-11ee-8952-00505699d6e5;
- Mon, 26 Feb 2024 21:47:43 +0100 (CET)
-Date: Mon, 26 Feb 2024 21:47:42 +0100
-Message-Id: <874jdvj6kx.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Marek Vasut <marex@denx.de>
-Cc: j@jannau.net, bmeng.cn@gmail.com, trini@konsulko.com,
- u-boot@lists.denx.de, asahi@lists.linux.dev, marcan@marcan.st
-In-Reply-To: <85d561a6-54cb-4c1c-bfb0-559163e859c0@denx.de> (message from
- Marek Vasut on Sun, 25 Feb 2024 22:57:23 +0100)
-Subject: Re: [PATCH 4/6] usb: kbd: Ignore Yubikeys
-References: <20240221-asahi-keyboards-v1-0-814b2e741790@jannau.net>
- <20240221-asahi-keyboards-v1-4-814b2e741790@jannau.net>
- <2acb9976-a40e-4977-b7ca-2462e84251ed@denx.de>
- <4c1c6b72-ffe5-4ff3-8d12-9fc0b956643d@app.fastmail.com>
- <85d561a6-54cb-4c1c-bfb0-559163e859c0@denx.de>
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-IronPort-AV: E=Sophos;i="6.06,186,1705330800"; 
+ d="asc'?scan'208";a="199327119"
+Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
+ by relmlie6.idc.renesas.com with ESMTP; 27 Feb 2024 05:55:08 +0900
+Received: from [10.226.92.26] (unknown [10.226.92.26])
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id C34CB40078A0;
+ Tue, 27 Feb 2024 05:55:06 +0900 (JST)
+Message-ID: <7aa39129-d926-407e-bb95-b94bab3412c6@bp.renesas.com>
+Date: Mon, 26 Feb 2024 20:55:05 +0000
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 3/7] i2c: rzg2l: Add I2C driver for RZ/G2L family
+To: Biju Das <biju.das.jz@bp.renesas.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+References: <20240226150536.1690-1-paul.barker.ct@bp.renesas.com>
+ <20240226150536.1690-4-paul.barker.ct@bp.renesas.com>
+ <TYCPR01MB11269A743C5C909887C788AF2865A2@TYCPR01MB11269.jpnprd01.prod.outlook.com>
+Content-Language: en-GB
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+Organization: Renesas Electronics Corporation
+In-Reply-To: <TYCPR01MB11269A743C5C909887C788AF2865A2@TYCPR01MB11269.jpnprd01.prod.outlook.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------n25Pj9YiAdFg3uzwmDvynxpP"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,94 +63,161 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Date: Sun, 25 Feb 2024 22:57:23 +0100
-> From: Marek Vasut <marex@denx.de>
-> 
-> On 2/25/24 5:07 PM, Janne Grunau wrote:
-> > Hej,
-> > 
-> > On Wed, Feb 21, 2024, at 13:41, Marek Vasut wrote:
-> >> On 2/21/24 08:25, Janne Grunau via B4 Relay wrote:
-> >>> From: Hector Martin <marcan@marcan.st>
-> >>>
-> >>> We currently only support one USB keyboard device, but some devices
-> >>> emulate keyboards for other purposes. Most commonly, people run into
-> >>> this with Yubikeys, so let's ignore those.
-> >>>
-> >>> Even if we end up supporting multiple keyboards in the future, it's
-> >>> safer to ignore known non-keyboard devices.
-> >>>
-> >>> Signed-off-by: Hector Martin <marcan@marcan.st>
-> >>> ---
-> >>>    common/usb_kbd.c | 19 +++++++++++++++++++
-> >>>    1 file changed, 19 insertions(+)
-> >>>
-> >>> diff --git a/common/usb_kbd.c b/common/usb_kbd.c
-> >>> index 4cbc9acb73..774d3555d9 100644
-> >>> --- a/common/usb_kbd.c
-> >>> +++ b/common/usb_kbd.c
-> >>> @@ -120,6 +120,15 @@ struct usb_kbd_pdata {
-> >>>    
-> >>>    extern int __maybe_unused net_busy_flag;
-> >>>    
-> >>> +/*
-> >>> + * Since we only support one usbkbd device in the iomux,
-> >>> + * ignore common keyboard-emulating devices that aren't
-> >>> + * real keyboards.
-> >>> + */
-> >>> +const uint16_t vid_blocklist[] = {
-> >>> +	0x1050, /* Yubico */
-> >>> +};
-> >>> +
-> >>>    /* The period of time between two calls of usb_kbd_testc(). */
-> >>>    static unsigned long kbd_testc_tms;
-> >>>    
-> >>> @@ -465,6 +474,7 @@ static int usb_kbd_probe_dev(struct usb_device *dev, unsigned int ifnum)
-> >>>    	struct usb_endpoint_descriptor *ep;
-> >>>    	struct usb_kbd_pdata *data;
-> >>>    	int epNum;
-> >>> +	int i;
-> >>>    
-> >>>    	if (dev->descriptor.bNumConfigurations != 1)
-> >>>    		return 0;
-> >>> @@ -480,6 +490,15 @@ static int usb_kbd_probe_dev(struct usb_device *dev, unsigned int ifnum)
-> >>>    	if (iface->desc.bInterfaceProtocol != USB_PROT_HID_KEYBOARD)
-> >>>    		return 0;
-> >>>    
-> >>> +	for (i = 0; i < ARRAY_SIZE(vid_blocklist); i++) {
-> >>> +		if (dev->descriptor.idVendor == vid_blocklist[i]) {
-> >>> +			printf("Ignoring keyboard device 0x%x:0x%x\n",
-> >>> +			       dev->descriptor.idVendor,
-> >>> +			       dev->descriptor.idProduct);
-> >>> +			return 0;
-> >>> +		}
-> >>> +	}
-> >>
-> >> I vaguely recall a discussion about previous version of this, I think
-> >> the suggestion was to make the list of ignored devices configurable via
-> >> environment variable, so users can add to that list from U-Boot shell.
-> >> Would it be possible to make it work this way ?
-> > 
-> > oh, I completely forgot that this patch was already submitted. I briefly looked through asahi tree for related patches and did not check whether this was previously submitted.
-> > I've added environment based blocking as separate patch with blocking either complete vendor IDs or vendor, product ID combinations. A separate patch to simplify authorship tracking and the implementation doesn't share any code.
-> 
-> It would be better to have only one patch which does not hard-code any 
-> USB IDs, and then add those blocked IDs via U-Boot default environment 
-> for this specific machine. We cannot predict what yubico will do in the 
-> future, whether they might make a device that shouldn't be blocked for 
-> example. If they do, the user should be able to unblock their device by 
-> running e.g. '=> setenv usb_blocklist' instead of updating their bootloader.
-> 
-> I think a simple list of blocked VID:PID pairs, maybe with wildcards, 
-> would be nice, i.e. something like 'usb_blocklist=1234:5678,1050:*' to 
-> block device 0x1234:0x5678 and all devices with VID 0x1050 . That should 
-> be easy to parse with strtok()/strtol() or some such and the code should 
-> not be too complex.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------n25Pj9YiAdFg3uzwmDvynxpP
+Content-Type: multipart/mixed; boundary="------------QPmCm0qJQM5vHOz2eWSxKwmB";
+ protected-headers="v1"
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: Biju Das <biju.das.jz@bp.renesas.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Message-ID: <7aa39129-d926-407e-bb95-b94bab3412c6@bp.renesas.com>
+Subject: Re: [PATCH v2 3/7] i2c: rzg2l: Add I2C driver for RZ/G2L family
+References: <20240226150536.1690-1-paul.barker.ct@bp.renesas.com>
+ <20240226150536.1690-4-paul.barker.ct@bp.renesas.com>
+ <TYCPR01MB11269A743C5C909887C788AF2865A2@TYCPR01MB11269.jpnprd01.prod.outlook.com>
+In-Reply-To: <TYCPR01MB11269A743C5C909887C788AF2865A2@TYCPR01MB11269.jpnprd01.prod.outlook.com>
 
-I do like the idea of having a configurable list of usb devices to
-ignore.  The U-Boot USB stack is still not perfect and there are still
-USB devices that will prevent us from booting when connected.  The
-list will provide a nice workaround for that issue.
+--------------QPmCm0qJQM5vHOz2eWSxKwmB
+Content-Type: multipart/mixed; boundary="------------9uABdatkzGf56obJXgnx6z8C"
 
-But the yubikeys will cause the same problem on other boards as well.
-So I think it makes sense to put those in a default list.
+--------------9uABdatkzGf56obJXgnx6z8C
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+On 26/02/2024 17:43, Biju Das wrote:
+>=20
+>=20
+>> -----Original Message-----
+>> From: U-Boot <u-boot-bounces@lists.denx.de> On Behalf Of Paul Barker
+>> Sent: Monday, February 26, 2024 3:06 PM
+>> To: Marek Vasut <marek.vasut+renesas@mailbox.org>; Nobuhiro Iwamatsu
+>> <iwamatsu@nigauri.org>
+>> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>; u-boot@lists.denx.de
+>> Subject: [PATCH v2 3/7] i2c: rzg2l: Add I2C driver for RZ/G2L family
+>>
+>> This driver supports the I2C module on the Renesas RZ/G2L (R9A07G044) =
+SoC,
+>> also known as the RIIC module.
+>>
+>> This patch is based on both the u-boot driver in the Renesas RZ BSP
+>> 3.0.5 release [1] (commit 7fcc1fdc2534), and the Linux v6.7 driver (co=
+mmit
+>> 0dd3ee311255).
+>>
+>> Support for deblocking the I2C bus is included as this may be needed a=
+fter
+>> triggering a reset via the Power Management IC (PMIC) over I2C (the PM=
+IC
+>> asserts the reset line before the SoC completes the I2C write transact=
+ion
+>> with obvious bus locking effects). If the SDA line is observed to be l=
+ow
+>> during initialisation, we automatically attempt to deblock.
+>>
+>> [1]:
+>>
+>> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+>> eviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>=20
+> Typo. R is missing in the Rb tag.
+
+Good catch - I pasted it right in the first patch but messed it up here
+somehow. Hopefully Marek can fix this when applying if there's nothing
+else that needs changing.
+
+>=20
+> Also change log is missing.
+
+The changelog is in the cover letter [1].
+
+[1]: https://lore.kernel.org/u-boot/20240226150536.1690-1-paul.barker.ct@=
+bp.renesas.com/
+
+Thanks,
+
+--=20
+Paul Barker
+--------------9uABdatkzGf56obJXgnx6z8C
+Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
+Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+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3D
+=3DsIIN
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------9uABdatkzGf56obJXgnx6z8C--
+
+--------------QPmCm0qJQM5vHOz2eWSxKwmB--
+
+--------------n25Pj9YiAdFg3uzwmDvynxpP
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZdz6qQUDAAAAAAAKCRDbaV4Vf/JGvbOb
+AQDkIwhgFmbFCCRtvY85dhoX/leiaJNT8vF72Q5CuxQclQEAjiFwz9sbhVlwweR6eN+hxLOe5ucZ
+7C8R0FKF9vH2uAI=
+=QzGx
+-----END PGP SIGNATURE-----
+
+--------------n25Pj9YiAdFg3uzwmDvynxpP--
