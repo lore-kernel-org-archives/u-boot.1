@@ -4,79 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76423C48BF6
-	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 09:23:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00C77C54E51
+	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 09:50:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 24BBD87E98;
-	Mon, 26 Feb 2024 10:23:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 040EA87E47;
+	Mon, 26 Feb 2024 10:50:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fCkZWQE5";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="j1C230/X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E16D587E9B; Mon, 26 Feb 2024 10:23:42 +0100 (CET)
-Received: from mail-vs1-xe32.google.com (mail-vs1-xe32.google.com
- [IPv6:2607:f8b0:4864:20::e32])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0E55F87EA6; Mon, 26 Feb 2024 10:50:23 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F2D8D87E47
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 10:23:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7E1FD87CA3
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 10:50:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vs1-xe32.google.com with SMTP id
- ada2fe7eead31-47064e95199so340790137.3
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 01:23:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708939417; x=1709544217; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=myU7kBnfAvxnR1VY7ZGtrz1Rmsl8TjZp+rcGH1kzac4=;
- b=fCkZWQE5VK7E7ZWwtuP69SjTWbVs1XH1D+5S3DY9MXAZjaR3jx4cKNFv4KIrId1JOs
- HbBC4FJu/yVYDXmavkEWxxchbfq7WKfyA7jGFHQhtIAyWqWE8CDaMYuai4SzeUoUmu+M
- A6BCY8ETZimDzbjpNh/sYAZTh2VAssdYSL/pCrz20VNhq6ZYZRPMvpbzESZs/15/SmcK
- qbPCIiOCIjEbovnmZ7TIPGFjtFLgHoijc2jXMFDQgza/FfRwOlTYxlk/qhGQ6squEKYA
- f417iLFso9prx4nrfWBCEg9r0ahM/bKw/OvbluSDL6mdoKqv0YvMrAjrmrn/jmWrKVkZ
- opXQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708939417; x=1709544217;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=myU7kBnfAvxnR1VY7ZGtrz1Rmsl8TjZp+rcGH1kzac4=;
- b=TJA+aKilmZtcsJmqcg9gTR6GwS5oFdLh9hrOQHjDJOHSMIEwY/4GHy+lWPBLf3Mces
- kEaxi8VOEq/+0Rw08OCdn93S3W/3ft1mKEKNCLokUpmT7zk1G3rAa73+Qg2mb9RqjUI9
- EwV3if1Kds8eXvhB9vG3jurP/QjBsr1qQ9RzKSXbvlrJr9kTl/eAnFDq6CeYGftZluHb
- WfzAI9ytCkumJf3zBRRin6wyimIVVIUpVdNZEiDcenmmgI9ej/vY//nZbcWr0YE3lV+1
- 7A9jWNEvIGo9hq6Uv8lywjPUvLQSi7moAlwe+oSZjf7V4SgeBtb6BQMNxe+eDA4uvQYV
- XHUQ==
-X-Gm-Message-State: AOJu0Ywk5NSr8sSL/znAFlU08y8/dfehfHBchc0PVjB9vh0qhttiWuw5
- u0lhLf6UenN+GMklgKkjMqJS4XDxTb6C9NsA2BGEyX7m8voG2w2G+k5dmh0xXom1BU8fGJuPZAE
- pVSwo9Fwy6RYc+bXZ8suddmnQUA7lmr4uN0GmKg==
-X-Google-Smtp-Source: AGHT+IFwiX0nOYo3rpP8pHVfGR2QLba+uSnGx6M/MXvb82m4CItOvsqxO4Yv0N5NahQ4VNwAaLdVxRSJoYSj9/qLkRo=
-X-Received: by 2002:a05:6102:18c4:b0:471:c414:83b5 with SMTP id
- jj4-20020a05610218c400b00471c41483b5mr4269638vsb.18.1708939417646; Mon, 26
- Feb 2024 01:23:37 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=31c0=KD=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1708941014;
+ bh=EyrHHzgGQHTqD27WCchfqiIwBIPbxr2HYh8SDDhBCn4=;
+ b=j1C230/XfNHAjk2yDhWOUyLDtDIoeoKpNkK9btEz894THd9VyBpCbOZixRHUcVhM1X4hL/kdl
+ KJQfjQnoBG4FBcawhjlhmPSBosJKd4yrKAQZsGWN+RMJ/O/FVmOu9ur/RDFHNNssnZkY2EmBEbe
+ axZipBp2DMUYL2jqoze4a9HcSx5oxQn8MzV0xjYfWGFSWIQ8id6+FOPq5RQx+p+egqQ+1yUXxLZ
+ 7pFHWON5K/fyGsbdWHn6IMosoAYL2FNa+JR7c9G54p4k1kJMwXMERM2HyQNCMcc3hK9IrAFNWWS
+ H+Pp0yPe2xIBAQBq5c9PdULeJ7sp6+O0dQdssZHLva0Q==
+Message-ID: <e14e9c06-ca37-4572-b410-c40a8c52898c@kwiboo.se>
+Date: Mon, 26 Feb 2024 10:50:09 +0100
 MIME-Version: 1.0
-References: <20240226080433.3307154-1-sumit.garg@linaro.org>
- <20240226080433.3307154-2-sumit.garg@linaro.org>
- <266b30c1-6cfc-4a8a-adef-ec2fe7d9fa4c@denx.de>
-In-Reply-To: <266b30c1-6cfc-4a8a-adef-ec2fe7d9fa4c@denx.de>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Mon, 26 Feb 2024 14:53:26 +0530
-Message-ID: <CAFA6WYPu13cZW2fBOcfSKhxZAcdeZjHMqDz-Mkj5fnh=UiGoSQ@mail.gmail.com>
-Subject: Re: [PATCH v2 1/8] clk: imx8mp: Add support for PCIe clocks
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, marcel.ziswiler@toradex.com, francesco@dolcini.it, 
- trini@konsulko.com, lukma@denx.de, seanga2@gmail.com,
- jh80.chung@samsung.com, 
- festevam@denx.de, andrejs.cainikovs@toradex.com, sjg@chromium.org, 
- peng.fan@nxp.com, aford173@gmail.com, ilias.apalodimas@linaro.org, 
- sahaj.sarup@linaro.org, fathi.boudra@linaro.org, remi.duraffort@linaro.org, 
- daniel.thompson@linaro.org
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] usb: dwc3-generic: Fix build errors when USB_DWC3_GADGET
+ is disabled
+Content-Language: en-US
+To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
+Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>, u-boot@lists.denx.de
+References: <20240225152715.1821613-1-jonas@kwiboo.se>
+ <d9d049c8-d498-48ec-87f6-4127dd7a4ae6@denx.de>
+ <5bafad42-2c61-43eb-8fbb-cec7159132a6@kwiboo.se>
+ <20240226014708.GH3040305@bill-the-cat>
+ <81bdee81-2f8f-4fbf-a729-8fd543492adb@kwiboo.se>
+ <a809eb32-ae70-4f69-b5f0-81488759e838@denx.de>
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <a809eb32-ae70-4f69-b5f0-81488759e838@denx.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 65dc5ed5ee224fc84ce2538e
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,13 +77,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 26 Feb 2024 at 14:24, Marek Vasut <marex@denx.de> wrote:
->
-> On 2/26/24 9:04 AM, Sumit Garg wrote:
-> > Pre-requisite to enable PCIe support on iMX8MP SoC.
->
-> Commit message needs fixing.
+On 2024-02-26 09:22, Marek Vasut wrote:
+> On 2/26/24 8:54 AM, Jonas Karlman wrote:
+>> On 2024-02-26 02:47, Tom Rini wrote:
+>>> On Mon, Feb 26, 2024 at 01:02:04AM +0100, Jonas Karlman wrote:
+>>>> On 2024-02-25 23:01, Marek Vasut wrote:
+>>>>> On 2/25/24 4:27 PM, Jonas Karlman wrote:
+>>>>>> Build fail with the following error when DM_USB_GADGET is enabled and
+>>>>>> USB_DWC3_GADGET is disabled:
+>>>>>>
+>>>>>>     dwc3/dwc3-generic.o: in function `dm_usb_gadget_handle_interrupts':
+>>>>>>     dwc3/dwc3-generic.c:201:(.text.dm_usb_gadget_handle_interrupts+0x10):
+>>>>>>       undefined reference to `dwc3_gadget_uboot_handle_interrupt'
+>>>>>>
+>>>>>> Build also fail with the following error when USB_GADGET_DWC2_OTG +
+>>>>>> DM_USB_GADGET is enabled and USB_DWC3_GADGET is disabled:
+>>>>>>
+>>>>>>     gadget/dwc2_udc_otg.o: in function `dm_usb_gadget_handle_interrupts':
+>>>>>>     gadget/dwc2_udc_otg.c:947: multiple definition of `dm_usb_gadget_handle_interrupts';
+>>>>>>       dwc3/dwc3-generic.o:dwc3/dwc3-generic.c:197: first defined here
+>>>>>>
+>>>>>> Fix this by checking for USB_DWC3_GADGET in addition to DM_USB_GADGET.
+>>>>>>
+>>>>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>>>>>> ---
+>>>>>>    drivers/usb/dwc3/dwc3-generic.c | 4 ++--
+>>>>>>    1 file changed, 2 insertions(+), 2 deletions(-)
+>>>>>>
+>>>>>> diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
+>>>>>> index 6fb2de8a5ace..891d01957619 100644
+>>>>>> --- a/drivers/usb/dwc3/dwc3-generic.c
+>>>>>> +++ b/drivers/usb/dwc3/dwc3-generic.c
+>>>>>> @@ -192,7 +192,7 @@ static int dwc3_generic_of_to_plat(struct udevice *dev)
+>>>>>>    	return 0;
+>>>>>>    }
+>>>>>>    
+>>>>>> -#if CONFIG_IS_ENABLED(DM_USB_GADGET)
+>>>>>> +#if IS_ENABLED(CONFIG_USB_DWC3_GADGET) && CONFIG_IS_ENABLED(DM_USB_GADGET)
+>>>>>
+>>>>> Maybe just make USB_DWC3_GADGET depend on (or select?) DM_USB_GADGET ,
+>>>>> since I think the DWC3 code doesn't work without DM anyway .
+>>>>
+>>>> Do you mean in addition to this? I do not think that alone is something
+>>>> that will address my intention to be able to disable the gadget part of
+>>>> the dwc3-generic driver.
+>>>>
+>>>> Before this patch it was possible to enable disable host or gadget by
+>>>> using USB_HOST/SPL_USB_HOST and DM_USB_GADGET/SPL_DM_USB_GADGET options.
+>>>>
+>>>> However, Rockchip RK3328 boards have dwc2 otg and dwc3 host, trying to
+>>>> use DM_USB_GADGET for dwc2 and USB_HOST for dwc3 is currently not
+>>>> possible and result in the build errors reported, i.e. multiple
+>>>> definition of dm_usb_gadget_handle_interrupts() and undefined reference
+>>>> to dwc3_gadget_uboot_handle_interrupt().
+>>>>
+>>>> After this patch I can use dm dwc2 gadget and dwc3 host without issue.
+>>>
+>>> Note that *DM_* symbols can be confusing. At this point, in SPL
+>>> SPL_DM_USB and SPL_DM_USB_GADGET are encouraged but not required for
+>>> host/gadget drivers. In full U-Boot, DM_USB is required for all host
+>>> drivers and really should be enabled in all cases for DM_USB_GADGET. We
+>>> can't enforce that at the Kconfig level because of, iirc, some of the
+>>> armv7 part gadget drivers (more than one). But for newer and still very
+>>> active chips, we should be using DM_USB_GADGET unconditionally in full
+>>> U-Boot.
+>>
+>> The issue is that with DM_USB_GADGET we can only have one driver
+>> providing the dm_usb_gadget_handle_interrupts() function.
+> 
+> DM was always intended to permit multiple drivers, so this is a bug and 
+> should be fixed, e.g. by turning the interrupt handling function into a 
+> driver-specific callback.
 
-Ack, I missed this one.
+I fully agree, and I hope that someone can work on that separate issue
+and that it does not block this build error fix patch.
 
--Sumit
+Will send out a series that migrates RK3328 boards to use DM_USB_GADGET
+with DWC2_OTG later, a series that will have a dependency on this patch.
+
+Regards,
+Jonas
+
+> 
+> [...]
+
