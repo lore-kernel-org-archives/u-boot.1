@@ -4,69 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E45CCC47DD9
-	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 03:17:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19A25C5478C
+	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 03:38:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 04A6287E1C;
-	Mon, 26 Feb 2024 04:17:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0787D87061;
+	Mon, 26 Feb 2024 04:38:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Xdnz5v3P";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="wmcrKgP/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE66D87E1C; Mon, 26 Feb 2024 04:17:15 +0100 (CET)
+ id CE3D287DEB; Mon, 26 Feb 2024 04:36:27 +0100 (CET)
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1789087E02
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 04:17:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E86087E3F
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 04:36:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41Q3H8aV079745;
- Sun, 25 Feb 2024 21:17:08 -0600
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=j-humphreys@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41Q3aNPJ086043;
+ Sun, 25 Feb 2024 21:36:23 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1708917428;
- bh=4r+AtNirDALY/dGxcCRYXxsM6k/yq8hz6rQtTy1wnL8=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=Xdnz5v3P70DkunQUfX8xLlgS7eK3IYPY1u//PPRSqJ4i3tzKuEV5Be3b3vjblr9dU
- xV35PDtkzHEeDOGJkWJCRHqAYnuBkuwPXcmaFJK73jwznaUvbeKglcO342T8AFLEjb
- nbZad0x8v/Q7XSDitC1HiVXnwbZHVPOxmkdRmGdk=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41Q3H8uI021711
+ s=ti-com-17Q1; t=1708918583;
+ bh=7b0yiUzqed9rvDiC5uyy+0RNaD9PDsQvQysoCt6tv24=;
+ h=From:To:CC:Subject:In-Reply-To:References:Date;
+ b=wmcrKgP/VysQ43SVvQ9eEBDRzY5+csu/lVqVaVc1xjZCT/MQjH3u0eqMZsg6/jgeX
+ qBgllJz2OJMGt5OoUJL5qpou9/vBMqLpHfAYkEdagnqB7YJseUw0K0VOZj7Ip1rgND
+ tuMxbDRPC/LeZk2380laT64mozwLU0s+W6bh+hFM=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41Q3aNUZ086715
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Sun, 25 Feb 2024 21:17:08 -0600
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ Sun, 25 Feb 2024 21:36:23 -0600
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sun, 25
- Feb 2024 21:17:08 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ Feb 2024 21:36:22 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Sun, 25 Feb 2024 21:17:08 -0600
-Received: from [172.24.227.36]
- (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41Q3H5kF109274;
- Sun, 25 Feb 2024 21:17:06 -0600
-Message-ID: <c7a255a0-dbc6-4cdb-b46c-3b81d17ce30c@ti.com>
-Date: Mon, 26 Feb 2024 08:47:04 +0530
+ Frontend Transport; Sun, 25 Feb 2024 21:36:22 -0600
+Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41Q3aMvh001218;
+ Sun, 25 Feb 2024 21:36:22 -0600
+From: Jon Humphreys <j-humphreys@ti.com>
+To: "Kumar, Udit" <u-kumar1@ti.com>, <trini@konsulko.com>, <vaishnav.a@ti.com>
+CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>
+Subject: Re: [PATCH v2 3/3] arm: dts: k3-j721e-sk: Remove OSPI phypattern
+ partition
+In-Reply-To: <90c45918-e0eb-4d09-9e0f-06aea0d4ccb5@ti.com>
+References: <20240224002307.2284386-1-j-humphreys@ti.com>
+ <20240224002307.2284386-4-j-humphreys@ti.com>
+ <90c45918-e0eb-4d09-9e0f-06aea0d4ccb5@ti.com>
+Date: Sun, 25 Feb 2024 21:36:22 -0600
+Message-ID: <86le77rj61.fsf@udb0321960.dhcp.ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm: dts: k3-binman: Make optee optional as requirement
-To: Michael Trimarchi <michael@amarulasolutions.com>, Tom Rini
- <trini@konsulko.com>, <u-boot@lists.denx.de>, "Raghavendra, Vignesh"
- <vigneshr@ti.com>
-CC: Nishanth Menon <nm@ti.com>, Simon Glass <sjg@chromium.org>, Manorit
- Chawdhry <m-chawdhry@ti.com>, <linux-amarula@amarulasolutions.com>
-References: <20240225173834.1637789-1-michael@amarulasolutions.com>
-Content-Language: en-US
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <20240225173834.1637789-1-michael@amarulasolutions.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+X-Mailman-Approved-At: Mon, 26 Feb 2024 04:38:54 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,65 +81,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michael
+"Kumar, Udit" <u-kumar1@ti.com> writes:
 
-+ Vignesh
+> Thanks Jon
+>
+> On 2/24/2024 5:53 AM, Jonathan Humphreys wrote:
+>> The phy calibration pattern partition isn't needed as the Cadence driver isn't
+>> calibrating the phys.
+>
+>
+> Please do mention Fixes tag here
+>
+> 58d61fb5a77e ("arm: dts: k3-j721e-sk: Add initial A72 specific dts support")
+>
 
-On 25/02/24 23:08, Michael Trimarchi wrote:
-> Boards can use the ti_spl_template but avoid to define a tee
-> node to be loaded. This is true form board with 512Mb or less
+I put the fixes tag on the cover letter.  Is there a 'correct' way - to
+add to the cover letter or the individual patches?
 
-s/form board/for boards? I am guessing that is what was meant. I am not really 
-understanding the commit message... does <512MB memory always mean no using 
-OPTEE? (AM62 SIP would be an exception) The commit message is putting out a 
-misleading reason why we don't need OPTEE in some cases, I don't think memory is 
-the primary reason.
+In the case of this particular patch, I don't think the fixes tag is
+appropriate as this isn't changing any observable behavior, it is a
+clean up.
 
-> memory. We can limit this in configuation removing the tee
+Jon
 
-s/configuation/configuration
-
-> node
-> 
-> configurations {
-> 	default = "conf-0";
-> 
-> 	conf-0 {
-> 		description = "k3-am62_ccm_m3";
-> 		firmware = "atf";
-> 		loadables = "dm", "spl";
-> 		fdt = "fdt-0";
-> 	};
-> };
-> 
-> Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
-> ---
->   arch/arm/dts/k3-binman.dtsi | 2 ++
->   1 file changed, 2 insertions(+)
-> 
-> diff --git a/arch/arm/dts/k3-binman.dtsi b/arch/arm/dts/k3-binman.dtsi
-> index 758c8bf6ea..5ef5af315a 100644
-> --- a/arch/arm/dts/k3-binman.dtsi
-> +++ b/arch/arm/dts/k3-binman.dtsi
-> @@ -293,6 +293,7 @@
->   						keyfile = "custMpk.pem";
->   					};
->   					tee: tee-os {
-> +						optional;
->   					};
->   				};
->   
-> @@ -360,6 +361,7 @@
->   					entry = <0x9e800000>;
->   					tee-os {
->   						filename = "tee-raw.bin";
-> +						optional;
->   					};
->   				};
->   
-
-The patch excluding the commit message LGTM.
-
--- 
-Thanking You
-Neha Malcom Francis
+>
+>> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
+>> ---
+>>   arch/arm/dts/k3-j721e-sk-u-boot.dtsi | 4 ----
+>>   1 file changed, 4 deletions(-)
+>>
+>> diff --git a/arch/arm/dts/k3-j721e-sk-u-boot.dtsi b/arch/arm/dts/k3-j721e-sk-u-boot.dtsi
+>> index 479b7bcd6f..20b76a84ff 100644
+>> --- a/arch/arm/dts/k3-j721e-sk-u-boot.dtsi
+>> +++ b/arch/arm/dts/k3-j721e-sk-u-boot.dtsi
+>> @@ -157,9 +157,5 @@
+>>   
+>>   	flash@0 {
+>>   		bootph-all;
+>> -
+>> -		partition@3fc0000 {
+>> -			bootph-all;
+>> -		};
+>>   	};
+>
+>
+> This Patch LTGM,
+>
+>
+> + Neha
+>
+> For further cleanup, we should not have these ospi nodes in u-boot dts file.
+>
+> should be in board dts (k3-j721e-sk.dts) with right bootph properties ,
+>
+> and comes via kernel DT.
+>
+>
+>
+>>   };
