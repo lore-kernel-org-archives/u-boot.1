@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DF9EC48BF6
-	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 13:30:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0644C54E49
+	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 13:30:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EAF0E87F02;
-	Mon, 26 Feb 2024 14:30:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5E23F87EFD;
+	Mon, 26 Feb 2024 14:30:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="PlFbcBlS";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="VWtSsb3R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2162887EDC; Mon, 26 Feb 2024 14:30:18 +0100 (CET)
+ id 0FEE687F07; Mon, 26 Feb 2024 14:30:20 +0100 (CET)
 Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4096387EED
+ by phobos.denx.de (Postfix) with ESMTPS id 4FB0487EFB
  for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 14:30:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=phytec.de
@@ -31,15 +31,15 @@ DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
  Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
  Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
  List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=OMu7i76e3CCP4ZkMwXJcm0h+n0mUrHPEpccVv+yEgQ0=;
- b=PlFbcBlShPWNGBLdknJx+IcWd6CbkpzNGGIQ+RWO8KZjfrIZdPzH6h9rwxobgm8m
- pMIm+e+JEirneoZdWrVcCXpZQqirK49pfl0V1iiLjAdhpqikF/85PuTqVGBZhgcb
- idP52HHQUN7ue9demc9IeIhiuaE268AbDZFcnGyk4xo=;
-X-AuditID: ac14000a-fbefe7000000290d-e3-65dc92677255
+ bh=HjR7zU2/mcDp8qe+SPU6O9jQFC8+xq00yMDVoo/LH8I=;
+ b=VWtSsb3RzZ+LiOjMTs9xBmKmjMqwcULMBaOZHtwYMfmrWvqXQhgv+dqYxQ3TyCOO
+ D4a45BaDSzbpfszJPnr7RJcNxqZln7vDBvpcgwF42FNTVhCSuisyw+93+aN9v7M0
+ tgtZHgFXqVEKTCr/00qJ0whckfyxYDOxoVIqJinvVT0=;
+X-AuditID: ac14000a-fadff7000000290d-e4-65dc92670c69
 Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
  (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 41.B8.10509.7629CD56;
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 91.B8.10509.7629CD56;
  Mon, 26 Feb 2024 14:30:15 +0100 (CET)
 Received: from augenblix2.phytec.de (172.25.0.11) by Berlix.phytec.de
  (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
@@ -48,10 +48,10 @@ Received: from augenblix2.phytec.de (172.25.0.11) by Berlix.phytec.de
 From: Wadim Egorov <w.egorov@phytec.de>
 To: <u-boot@lists.denx.de>
 CC: <nm@ti.com>, <upstream@lists.phytec.de>, <bb@ti.com>
-Subject: [PATCH 1/2] arm: mach-k3: am625: copy bootindex to OCRAM for main
- domain SPL
-Date: Mon, 26 Feb 2024 14:30:05 +0100
-Message-ID: <20240226133006.3279993-2-w.egorov@phytec.de>
+Subject: [PATCH 2/2] arm: mach-k3: am625: Provide a way to obtain boot device
+ for non SPLs
+Date: Mon, 26 Feb 2024 14:30:06 +0100
+Message-ID: <20240226133006.3279993-3-w.egorov@phytec.de>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240226133006.3279993-1-w.egorov@phytec.de>
 References: <20240226133006.3279993-1-w.egorov@phytec.de>
@@ -61,17 +61,17 @@ Content-Type: text/plain
 X-Originating-IP: [172.25.0.11]
 X-ClientProxiedBy: Berlix.phytec.de (172.25.0.12) To Berlix.phytec.de
  (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrJLMWRmVeSWpSXmKPExsWyRpKBRzd90p1Ug9bnIhZz3xxgtXjz4yyT
- xdu9newW3e/UHVg8zt7ZwejR393C6nH8xnamAOYoLpuU1JzMstQifbsEroy7L/YwFpyQr3jW
- +Y25gfGXZBcjJ4eEgInE0afXWboYuTiEBBYzSZzZt54FJCEk8JhR4sAqUxCbTUBd4s6Gb6wg
- toiAlMTLzo3MIDazgIXEuRNX2EBsYYFQiVl/VzKC2CwCqhKNWz+zg9i8ApYSM97MZ4JYJi8x
- 89J3sDingJXE/aWNULssJWav2gZVLyhxcuYTFoj58hLNW2dD7ZKQOPjiBTNEvbzEi0vLWWBm
- Tjv3mhnCDpXY+mU70wRGoVlIRs1CMmoWklELGJlXMQrlZiZnpxZlZusVZFSWpCbrpaRuYgQF
- twgD1w7GvjkehxiZOBgPMUpwMCuJ8IbL3EwV4k1JrKxKLcqPLyrNSS0+xCjNwaIkzru6IzhV
- SCA9sSQ1OzW1ILUIJsvEwSnVwMjWPN1CPJTXhYGP6++bD5cuBCeHH/W/tMM2M2BfgUyH3MNt
- kTIbrPwYY/J/6+9JC9nEu311VopgxbR/RT2p35h7DWKseXZca+gricoJUN63Ivola1CuiPak
- vW8P6S069lHa5QHbf4eDfyYwRYq83X66cs+Kz7MkxD7W9H3lfNo1W2ONd8guUyWW4oxEQy3m
- ouJEAMs/R81cAgAA
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrBLMWRmVeSWpSXmKPExsWyRpKBRzd90p1Ug61nZC3mvjnAavHmx1km
+ i7d7O9ktut+pO7B4nL2zg9Gjv7uF1eP4je1MAcxRXDYpqTmZZalF+nYJXBmzz95gLThtVTH5
+ /XXmBsZuwy5GTg4JAROJ9vOb2EFsIYHFTBJ/JhtB2I8ZJQ6sMgWx2QTUJe5s+MYKYosISEm8
+ 7NzIDGIzC1hInDtxhQ3EFhaIkpjz5hiYzSKgKrF+wj+wGl4BS4lF3aeZIXbJS8y89B1sF6eA
+ lcT9pY0sELssJWav2sYOUS8ocXLmExaI+fISzVtnQ+2SkDj44gUzRL28xItLy1lgZk479xpq
+ fqjE1i/bmSYwCs1CMmoWklGzkIxawMi8ilEoNzM5O7UoM1uvIKOyJDVZLyV1EyMotEUYuHYw
+ 9s3xOMTIxMF4iFGCg1lJhDdc5maqEG9KYmVValF+fFFpTmrxIUZpDhYlcd7VHcGpQgLpiSWp
+ 2ampBalFMFkmDk6pBsZcg5xpUikMJpJpWrvu1/+eIROToX/t0mzFt43Oc3U25O2ZI3/hTdWW
+ 1VwRepqH68w09s/q3er5RVHQVXTRuS15rJMDl+m/lO1njH762l3te0Hhxc4lT2R2eL9u++Sa
+ wh3VelPT9WJBXUXh7Dj/IK+7Ha1BRw4etFx5Ni/GLXpXT+Q3do6H85RYijMSDbWYi4oTAZwX
+ 2s1bAgAA
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,106 +88,263 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Texas Instruments has begun enabling security settings on the SoCs it
-produces to instruct ROM and TIFS to begin protecting the Security
-Management Subsystem (SMS) from other binaries we load into the chip by
-default.
-
-One way ROM and TIFS do this is by enabling firewalls to protect the
-OCSRAM and HSM RAM regions they're using during bootup.
-
-The HSM RAM the wakeup SPL is in is firewalled by TIFS to protect
-itself from the main domain applications. This means the 'bootindex'
-value in HSM RAM, left by ROM to indicate if we're using the primary
-or secondary boot-method, must be moved to OCSRAM (that TIFS has open
-for us) before we make the jump to the main domain so the main domain's
-bootloaders can keep access to this information.
-
-Based on commit
-  b672e8581070 ("arm: mach-k3: copy bootindex to OCRAM for main domain SPL")
+Introduce get_boot_device() to obtain the booting device. Make it also
+available for non SPL builds so u-boot can also know the device it is
+booting from.
 
 Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
 ---
- arch/arm/mach-k3/Kconfig                      |  3 ++-
- arch/arm/mach-k3/am625_init.c                 | 15 +++++++++++++--
- arch/arm/mach-k3/include/mach/am62_hardware.h | 15 +++++++++++++++
- 3 files changed, 30 insertions(+), 3 deletions(-)
+ arch/arm/mach-k3/Makefile                |   1 +
+ arch/arm/mach-k3/am625_init.c            |  95 +--------------------
+ arch/arm/mach-k3/am62x/Makefile          |   2 +
+ arch/arm/mach-k3/am62x/boot.c            | 103 +++++++++++++++++++++++
+ arch/arm/mach-k3/include/mach/hardware.h |   1 +
+ 5 files changed, 108 insertions(+), 94 deletions(-)
+ create mode 100644 arch/arm/mach-k3/am62x/Makefile
+ create mode 100644 arch/arm/mach-k3/am62x/boot.c
 
-diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
-index 03898424c9..f5d06593f7 100644
---- a/arch/arm/mach-k3/Kconfig
-+++ b/arch/arm/mach-k3/Kconfig
-@@ -75,7 +75,8 @@ config SYS_K3_BOOT_PARAM_TABLE_INDEX
- 	default 0x41cffbfc if SOC_K3_J721E
- 	default 0x41cfdbfc if SOC_K3_J721S2
- 	default 0x701bebfc if SOC_K3_AM642
--	default 0x43c3f290 if SOC_K3_AM625
-+	default 0x43c3f290 if SOC_K3_AM625 && CPU_V7R
-+	default 0x7000f290 if SOC_K3_AM625 && ARM64
- 	default 0x43c3f290 if SOC_K3_AM62A7 && CPU_V7R
- 	default 0x7000f290 if SOC_K3_AM62A7 && ARM64
- 	help
+diff --git a/arch/arm/mach-k3/Makefile b/arch/arm/mach-k3/Makefile
+index 4216137646..61ec4ea13c 100644
+--- a/arch/arm/mach-k3/Makefile
++++ b/arch/arm/mach-k3/Makefile
+@@ -22,3 +22,4 @@ obj-$(CONFIG_SOC_K3_AM625) += am625_init.o
+ obj-$(CONFIG_SOC_K3_AM62A7) += am62a7_init.o
+ endif
+ obj-y += common.o security.o
++obj-$(CONFIG_SOC_K3_AM625) += am62x/
 diff --git a/arch/arm/mach-k3/am625_init.c b/arch/arm/mach-k3/am625_init.c
-index 6c96e88114..67cf63b103 100644
+index 67cf63b103..85cd3f895a 100644
 --- a/arch/arm/mach-k3/am625_init.c
 +++ b/arch/arm/mach-k3/am625_init.c
-@@ -35,8 +35,10 @@ static struct rom_extended_boot_data bootdata __section(".data");
- static void store_boot_info_from_rom(void)
- {
- 	bootindex = *(u32 *)(CONFIG_SYS_K3_BOOT_PARAM_TABLE_INDEX);
--	memcpy(&bootdata, (uintptr_t *)ROM_EXTENDED_BOOT_DATA_INFO,
--	       sizeof(struct rom_extended_boot_data));
-+	if (IS_ENABLED(CONFIG_CPU_V7R)) {
-+		memcpy(&bootdata, (uintptr_t *)ROM_EXTENDED_BOOT_DATA_INFO,
-+		       sizeof(struct rom_extended_boot_data));
-+	}
+@@ -246,100 +246,7 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
+ 	}
  }
  
- static void ctrl_mmr_unlock(void)
-@@ -175,6 +177,15 @@ void board_init_f(ulong dummy)
- 		k3_sysfw_loader(true, NULL, NULL);
- 	}
- 
-+#if defined(CONFIG_CPU_V7R)
-+	/*
-+	 * Relocate boot information to OCRAM (after TIFS has opend this
-+	 * region for us) so the next bootloader stages can keep access to
-+	 * primary vs backup bootmodes.
-+	 */
-+	writel(bootindex, K3_BOOT_PARAM_TABLE_INDEX_OCRAM);
-+#endif
-+
- 	/*
- 	 * Force probe of clk_k3 driver here to ensure basic default clock
- 	 * configuration is always done.
-diff --git a/arch/arm/mach-k3/include/mach/am62_hardware.h b/arch/arm/mach-k3/include/mach/am62_hardware.h
-index 54380f36e1..9f504f4642 100644
---- a/arch/arm/mach-k3/include/mach/am62_hardware.h
-+++ b/arch/arm/mach-k3/include/mach/am62_hardware.h
-@@ -76,8 +76,23 @@
- #define CTRLMMR_MCU_RST_CTRL			(MCU_CTRL_MMR0_BASE + 0x18170)
- 
- #define ROM_EXTENDED_BOOT_DATA_INFO		0x43c3f1e0
-+#define K3_BOOT_PARAM_TABLE_INDEX_OCRAM         0x7000F290
- 
-+/*
-+ * During the boot process ROM will kill anything that writes to OCSRAM.
-+ * This means the wakeup SPL cannot use this region during boot. To
-+ * complicate things, TIFS will set a firewall between HSM RAM and the
-+ * main domain.
-+ *
-+ * So, during the wakeup SPL, we will need to store the EEPROM data
-+ * somewhere in HSM RAM, and the main domain's SPL will need to store it
-+ * somewhere in OCSRAM
-+ */
-+#ifdef CONFIG_CPU_V7R
- #define TI_SRAM_SCRATCH_BOARD_EEPROM_START	0x43c30000
-+#else
-+ #define TI_SRAM_SCRATCH_BOARD_EEPROM_START	0x70000001
-+#endif /* CONFIG_CPU_V7R */
- 
- static inline int k3_get_core_nr(void)
+-static u32 __get_backup_bootmedia(u32 devstat)
+-{
+-	u32 bkup_bootmode = (devstat & MAIN_DEVSTAT_BACKUP_BOOTMODE_MASK) >>
+-				MAIN_DEVSTAT_BACKUP_BOOTMODE_SHIFT;
+-	u32 bkup_bootmode_cfg =
+-			(devstat & MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_MASK) >>
+-				MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_SHIFT;
+-
+-	switch (bkup_bootmode) {
+-	case BACKUP_BOOT_DEVICE_UART:
+-		return BOOT_DEVICE_UART;
+-
+-	case BACKUP_BOOT_DEVICE_USB:
+-		return BOOT_DEVICE_USB;
+-
+-	case BACKUP_BOOT_DEVICE_ETHERNET:
+-		return BOOT_DEVICE_ETHERNET;
+-
+-	case BACKUP_BOOT_DEVICE_MMC:
+-		if (bkup_bootmode_cfg)
+-			return BOOT_DEVICE_MMC2;
+-		return BOOT_DEVICE_MMC1;
+-
+-	case BACKUP_BOOT_DEVICE_SPI:
+-		return BOOT_DEVICE_SPI;
+-
+-	case BACKUP_BOOT_DEVICE_I2C:
+-		return BOOT_DEVICE_I2C;
+-
+-	case BACKUP_BOOT_DEVICE_DFU:
+-		if (bkup_bootmode_cfg & MAIN_DEVSTAT_BACKUP_USB_MODE_MASK)
+-			return BOOT_DEVICE_USB;
+-		return BOOT_DEVICE_DFU;
+-	};
+-
+-	return BOOT_DEVICE_RAM;
+-}
+-
+-static u32 __get_primary_bootmedia(u32 devstat)
+-{
+-	u32 bootmode = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_MASK) >>
+-				MAIN_DEVSTAT_PRIMARY_BOOTMODE_SHIFT;
+-	u32 bootmode_cfg = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_MASK) >>
+-				MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_SHIFT;
+-
+-	switch (bootmode) {
+-	case BOOT_DEVICE_OSPI:
+-		fallthrough;
+-	case BOOT_DEVICE_QSPI:
+-		fallthrough;
+-	case BOOT_DEVICE_XSPI:
+-		fallthrough;
+-	case BOOT_DEVICE_SPI:
+-		return BOOT_DEVICE_SPI;
+-
+-	case BOOT_DEVICE_ETHERNET_RGMII:
+-		fallthrough;
+-	case BOOT_DEVICE_ETHERNET_RMII:
+-		return BOOT_DEVICE_ETHERNET;
+-
+-	case BOOT_DEVICE_EMMC:
+-		return BOOT_DEVICE_MMC1;
+-
+-	case BOOT_DEVICE_MMC:
+-		if ((bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_PORT_MASK) >>
+-				MAIN_DEVSTAT_PRIMARY_MMC_PORT_SHIFT)
+-			return BOOT_DEVICE_MMC2;
+-		return BOOT_DEVICE_MMC1;
+-
+-	case BOOT_DEVICE_DFU:
+-		if ((bootmode_cfg & MAIN_DEVSTAT_PRIMARY_USB_MODE_MASK) >>
+-		    MAIN_DEVSTAT_PRIMARY_USB_MODE_SHIFT)
+-			return BOOT_DEVICE_USB;
+-		return BOOT_DEVICE_DFU;
+-
+-	case BOOT_DEVICE_NOBOOT:
+-		return BOOT_DEVICE_RAM;
+-	}
+-
+-	return bootmode;
+-}
+-
+ u32 spl_boot_device(void)
  {
+-	u32 devstat = readl(CTRLMMR_MAIN_DEVSTAT);
+-	u32 bootmedia;
+-
+-	if (bootindex == K3_PRIMARY_BOOTMODE)
+-		bootmedia = __get_primary_bootmedia(devstat);
+-	else
+-		bootmedia = __get_backup_bootmedia(devstat);
+-
+-	debug("am625_init: %s: devstat = 0x%x bootmedia = 0x%x bootindex = %d\n",
+-	      __func__, devstat, bootmedia, bootindex);
+-
+-	return bootmedia;
++	return get_boot_device();
+ }
+diff --git a/arch/arm/mach-k3/am62x/Makefile b/arch/arm/mach-k3/am62x/Makefile
+new file mode 100644
+index 0000000000..acf09c3426
+--- /dev/null
++++ b/arch/arm/mach-k3/am62x/Makefile
+@@ -0,0 +1,2 @@
++# SPDX-License-Identifier:	GPL-2.0+
++obj-y += boot.o
+diff --git a/arch/arm/mach-k3/am62x/boot.c b/arch/arm/mach-k3/am62x/boot.c
+new file mode 100644
+index 0000000000..966500edc9
+--- /dev/null
++++ b/arch/arm/mach-k3/am62x/boot.c
+@@ -0,0 +1,103 @@
++// SPDX-License-Identifier: GPL-2.0+
++#include <asm/io.h>
++#include <asm/arch/hardware.h>
++#include <asm/arch/am62_spl.h>
++
++static u32 __get_backup_bootmedia(u32 devstat)
++{
++	u32 bkup_bootmode = (devstat & MAIN_DEVSTAT_BACKUP_BOOTMODE_MASK) >>
++				MAIN_DEVSTAT_BACKUP_BOOTMODE_SHIFT;
++	u32 bkup_bootmode_cfg =
++			(devstat & MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_MASK) >>
++				MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_SHIFT;
++
++	switch (bkup_bootmode) {
++	case BACKUP_BOOT_DEVICE_UART:
++		return BOOT_DEVICE_UART;
++
++	case BACKUP_BOOT_DEVICE_USB:
++		return BOOT_DEVICE_USB;
++
++	case BACKUP_BOOT_DEVICE_ETHERNET:
++		return BOOT_DEVICE_ETHERNET;
++
++	case BACKUP_BOOT_DEVICE_MMC:
++		if (bkup_bootmode_cfg)
++			return BOOT_DEVICE_MMC2;
++		return BOOT_DEVICE_MMC1;
++
++	case BACKUP_BOOT_DEVICE_SPI:
++		return BOOT_DEVICE_SPI;
++
++	case BACKUP_BOOT_DEVICE_I2C:
++		return BOOT_DEVICE_I2C;
++
++	case BACKUP_BOOT_DEVICE_DFU:
++		if (bkup_bootmode_cfg & MAIN_DEVSTAT_BACKUP_USB_MODE_MASK)
++			return BOOT_DEVICE_USB;
++		return BOOT_DEVICE_DFU;
++	};
++
++	return BOOT_DEVICE_RAM;
++}
++
++static u32 __get_primary_bootmedia(u32 devstat)
++{
++	u32 bootmode = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_MASK) >>
++				MAIN_DEVSTAT_PRIMARY_BOOTMODE_SHIFT;
++	u32 bootmode_cfg = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_MASK) >>
++				MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_SHIFT;
++
++	switch (bootmode) {
++	case BOOT_DEVICE_OSPI:
++		fallthrough;
++	case BOOT_DEVICE_QSPI:
++		fallthrough;
++	case BOOT_DEVICE_XSPI:
++		fallthrough;
++	case BOOT_DEVICE_SPI:
++		return BOOT_DEVICE_SPI;
++
++	case BOOT_DEVICE_ETHERNET_RGMII:
++		fallthrough;
++	case BOOT_DEVICE_ETHERNET_RMII:
++		return BOOT_DEVICE_ETHERNET;
++
++	case BOOT_DEVICE_EMMC:
++		return BOOT_DEVICE_MMC1;
++
++	case BOOT_DEVICE_MMC:
++		if ((bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_PORT_MASK) >>
++				MAIN_DEVSTAT_PRIMARY_MMC_PORT_SHIFT)
++			return BOOT_DEVICE_MMC2;
++		return BOOT_DEVICE_MMC1;
++
++	case BOOT_DEVICE_DFU:
++		if ((bootmode_cfg & MAIN_DEVSTAT_PRIMARY_USB_MODE_MASK) >>
++		    MAIN_DEVSTAT_PRIMARY_USB_MODE_SHIFT)
++			return BOOT_DEVICE_USB;
++		return BOOT_DEVICE_DFU;
++
++	case BOOT_DEVICE_NOBOOT:
++		return BOOT_DEVICE_RAM;
++	}
++
++	return bootmode;
++}
++
++u32 get_boot_device(void)
++{
++	u32 devstat = readl(CTRLMMR_MAIN_DEVSTAT);
++	u32 bootmode = *(u32 *)(CONFIG_SYS_K3_BOOT_PARAM_TABLE_INDEX);
++	u32 bootmedia;
++
++	if (bootmode == K3_PRIMARY_BOOTMODE)
++		bootmedia = __get_primary_bootmedia(devstat);
++	else
++		bootmedia = __get_backup_bootmedia(devstat);
++
++	debug("am625_init: %s: devstat = 0x%x bootmedia = 0x%x bootmode = %d\n",
++	      __func__, devstat, bootmedia, bootmode);
++
++	return bootmedia;
++}
+diff --git a/arch/arm/mach-k3/include/mach/hardware.h b/arch/arm/mach-k3/include/mach/hardware.h
+index a1a9dfbde6..0511d9fbdf 100644
+--- a/arch/arm/mach-k3/include/mach/hardware.h
++++ b/arch/arm/mach-k3/include/mach/hardware.h
+@@ -105,4 +105,5 @@ struct k3_qos_data {
+ extern struct k3_qos_data am62a_qos_data[];
+ extern u32 am62a_qos_count;
+ 
++u32 get_boot_device(void);
+ #endif /* _ASM_ARCH_HARDWARE_H_ */
 -- 
 2.34.1
 
