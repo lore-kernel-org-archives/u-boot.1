@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA854C47DD9
-	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 01:16:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90AC4C47DD9
+	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 01:47:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0B9A387E14;
-	Mon, 26 Feb 2024 02:15:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id B1D0087E25;
+	Mon, 26 Feb 2024 02:47:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Klf0st2I";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AeDBhKQG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D78987E2E; Mon, 26 Feb 2024 02:15:56 +0100 (CET)
-Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
- [IPv6:2607:f8b0:4864:20::22d])
+ id AA54287E2A; Mon, 26 Feb 2024 02:47:14 +0100 (CET)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2175587CED
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 02:15:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 95A158718A
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 02:47:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=benwolsieffer@gmail.com
-Received: by mail-oi1-x22d.google.com with SMTP id
- 5614622812f47-3c1a2f7e1d2so117103b6e.1
- for <u-boot@lists.denx.de>; Sun, 25 Feb 2024 17:15:54 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-608cba5507aso22961407b3.2
+ for <u-boot@lists.denx.de>; Sun, 25 Feb 2024 17:47:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1708910152; x=1709514952; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=gHRlMCDLh4G7ugNBcMd+NFiJ6+nj/saAmnP5ZRh4s04=;
- b=Klf0st2IcUF07JkOiZf1PIJqfGwZjxxr/fl9FVPI3TRWDdVhcspfXCcQcmr7x8Ytm3
- NLADhL80hFI6CWHKuhxQbasJ8v8rxZp++WCpcmYm8176CyW9VFVX/khsvcheOzU3rS/w
- D79LXYg7DUmdsg8tk1NQiYiVInVD24P627+LBYWPQwQ3UCHm7CaqbNyGZB6QF9n9ry0Q
- flyOfeKqqS6vOWbRs48sG0UKrt7IR18dbldp6dtO+x396lKyuFbpMKHU8rRPml3gFCL9
- wLhEGS+BYDBRy6qa968JGuOYZCN/nEc7Pt8N4SDk7wE4Y9HhUyL5dj8DZ5asYT3h9C9x
- C57w==
+ d=konsulko.com; s=google; t=1708912031; x=1709516831; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=y6BY0orspuxyK2aSHFeJezc5EynRatTZ/9vQ+SO5twc=;
+ b=AeDBhKQGv45kf7fTs5N2X1kZ4wWY8HODwWiLTizc/boypfHV9FCdVqipAtgI33Wrmy
+ 7hUVHTrZ9w18si2I23EeA5gOntt6FxUIXxzjk3Sjn91ZJN2vruoA+zJe5iu/44FuvPed
+ jywNQhMbmovZ5gl8u3bjf7h2jSVbpVU8nrChw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708910152; x=1709514952;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=gHRlMCDLh4G7ugNBcMd+NFiJ6+nj/saAmnP5ZRh4s04=;
- b=A6ge1iKEangE2jaFYTfR1UX8Ckjo0pRQ/BXJ53rCEQyVdR5d5b4OFNToWPZRDB5SZa
- I6TFg3079oJeDYd+4eYjRrGmVaTnk/oy1bK9gKBUqeQrwDQBu34irAS2Cl/Kbqvvwfyv
- prCe5des3ieDExf/GAzXyXcWO5Hpl5ohp3s4GtOhQPbnbAWXDTaMtgWQyPfWgSBG+vZr
- 2fu0FEBVFXAtTtGN+WXxfZw3s/FcMzY8LJBqc8WS1cXJQW00z1dxLlXfsDQb3xURSa1W
- gOmlHl4PKRJbO8F3hsIaY0AMzfT5mWiwRxXuX6LQc1q8ZJ5mCEg4YD3WEjbHsWE9M28y
- CSmw==
-X-Gm-Message-State: AOJu0YyQdvl+f8CvT5aYrbeilZ9+JDZB+5hhNn7HoAPvnp8F5Cw48x5m
- vgzqTw7TDtRQfsvjeMdmOpJmNNz57X9dgkaHzlBidD6iNimK6ivVligZZKK+cZM=
-X-Google-Smtp-Source: AGHT+IF6qsHrEDuigi/NkATuP6C3i53OcSEE5oHo9Bt8ZVwKUHKOxAVyfLC31ooyOg2ClKu9toLIrQ==
-X-Received: by 2002:a05:6808:21a4:b0:3c1:533b:55f9 with SMTP id
- be36-20020a05680821a400b003c1533b55f9mr7241667oib.5.1708910152139; 
- Sun, 25 Feb 2024 17:15:52 -0800 (PST)
-Received: from Dell-Inspiron-15.. ([2601:18c:8002:3d40:7920:e10c:26cf:ff86])
- by smtp.gmail.com with ESMTPSA id
- s18-20020ad45252000000b0068efae7d0aesm2307047qvq.125.2024.02.25.17.15.50
+ d=1e100.net; s=20230601; t=1708912031; x=1709516831;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=y6BY0orspuxyK2aSHFeJezc5EynRatTZ/9vQ+SO5twc=;
+ b=j5R3MoNv0LpHfaVAowZy47qwITAA1vcxStg3GhhWfr4y88hTZk0NCdx5btLKFOlAAL
+ XqdN+b+5KXYONqzVkSTpLo5VzCCgIg6LCwRcq3V3L32czFk+SVQBlMTbiDb5Op9gjV9m
+ ARiE/NMTm8PFdBwYGhiW0iwPU7MaYlf66aVchuPM2cBugVKxUC7E9JFR96bJ/qLV63HZ
+ tjxgErjzc+ftBWpO/Lv5CjvD4ocAVq4vaXeIpyBsCvM/yJ5gJUF/PeHlMHJWcq5Lvat+
+ TJYjQVaf2O0aAaZBgmlBXF9uhkoca5Mn1PGQ8n9Ei95FaBclQc8BxQELHjUQA08Czxmf
+ VrBg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUE+MzUbvoW9DGS13ntOx2WwxcOEW1CHJVeg3mW0GzO8mr1ov+4jBfZX94SWNr+/ktuvWcqy+IJbgMF5/91+vtJx7V+Dw==
+X-Gm-Message-State: AOJu0YyvmPqG5J5lIq/Q7kjaNIaILNi88wnLmZ+NPHpsBe9HrReUONgx
+ hZjNv6sMj4vD6C8C6EJ9BmYOz7kp/u0k02KjE4bPhGBxmD8xGkhPUirBRDtGi6k=
+X-Google-Smtp-Source: AGHT+IEJgejNiyjipJBRfy5I/vDqR566LefgHERFbgVYNm9r1wqfSL7Ag1MqaQ26CPsD0kjrjmu/IA==
+X-Received: by 2002:a81:4009:0:b0:608:b5f7:a6cd with SMTP id
+ l9-20020a814009000000b00608b5f7a6cdmr4829663ywn.6.1708912031129; 
+ Sun, 25 Feb 2024 17:47:11 -0800 (PST)
+Received: from bill-the-cat (065-184-194-195.res.spectrum.com.
+ [65.184.194.195]) by smtp.gmail.com with ESMTPSA id
+ r135-20020a0de88d000000b006086a467647sm966579ywe.56.2024.02.25.17.47.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 25 Feb 2024 17:15:51 -0800 (PST)
-From: Ben Wolsieffer <benwolsieffer@gmail.com>
-To: u-boot@lists.denx.de
-Cc: "Matwey V. Kornilov" <matwey.kornilov@gmail.com>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@theobroma-systems.com>,
- Klaus Goger <klaus.goger@theobroma-systems.com>,
- Kever Yang <kever.yang@rock-chips.com>, Lin Huang <hl@rock-chips.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Ben Wolsieffer <benwolsieffer@gmail.com>
-Subject: [PATCH] rockchip: load env from boot MMC device
-Date: Sun, 25 Feb 2024 20:14:14 -0500
-Message-ID: <20240226011413.435713-2-benwolsieffer@gmail.com>
-X-Mailer: git-send-email 2.43.2
+ Sun, 25 Feb 2024 17:47:10 -0800 (PST)
+Date: Sun, 25 Feb 2024 20:47:08 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Marek Vasut <marex@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH] usb: dwc3-generic: Fix build errors when USB_DWC3_GADGET
+ is disabled
+Message-ID: <20240226014708.GH3040305@bill-the-cat>
+References: <20240225152715.1821613-1-jonas@kwiboo.se>
+ <d9d049c8-d498-48ec-87f6-4127dd7a4ae6@denx.de>
+ <5bafad42-2c61-43eb-8fbb-cec7159132a6@kwiboo.se>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="1aYqLJnCdYmYYeRe"
+Content-Disposition: inline
+In-Reply-To: <5bafad42-2c61-43eb-8fbb-cec7159132a6@kwiboo.se>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,141 +95,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently, if the environment is stored on an MMC device, the device
-number is hardcoded by CONFIG_SYS_MMC_ENV_DEV. This is problematic
-because many boards can choose between booting from an SD card or a
-removable eMMC. For example, the Rock64 defconfig sets
-CONFIG_SYS_MMC_ENV_DEV=1, which corresponds to the SD card. If an eMMC
-is used as the boot device and no SD card is installed, it is impossible
-to save the environment.
 
-To avoid this problem, we can choose the environment MMC device based on
-the boot device. The theobroma-systems boards already contain code to do
-this, so this commit simply moves it to the common Rockchip board file,
-with some refactoring. I also removed another implementation of
-mmc_get_env_dev() from tinker_rk3288 that performed MMC boot device
-detection by reading a bootrom register.
+--1aYqLJnCdYmYYeRe
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-This has been tested on a Rock64v2.
+On Mon, Feb 26, 2024 at 01:02:04AM +0100, Jonas Karlman wrote:
+> On 2024-02-25 23:01, Marek Vasut wrote:
+> > On 2/25/24 4:27 PM, Jonas Karlman wrote:
+> >> Build fail with the following error when DM_USB_GADGET is enabled and
+> >> USB_DWC3_GADGET is disabled:
+> >>
+> >>    dwc3/dwc3-generic.o: in function `dm_usb_gadget_handle_interrupts':
+> >>    dwc3/dwc3-generic.c:201:(.text.dm_usb_gadget_handle_interrupts+0x10=
+):
+> >>      undefined reference to `dwc3_gadget_uboot_handle_interrupt'
+> >>
+> >> Build also fail with the following error when USB_GADGET_DWC2_OTG +
+> >> DM_USB_GADGET is enabled and USB_DWC3_GADGET is disabled:
+> >>
+> >>    gadget/dwc2_udc_otg.o: in function `dm_usb_gadget_handle_interrupts=
+':
+> >>    gadget/dwc2_udc_otg.c:947: multiple definition of `dm_usb_gadget_ha=
+ndle_interrupts';
+> >>      dwc3/dwc3-generic.o:dwc3/dwc3-generic.c:197: first defined here
+> >>
+> >> Fix this by checking for USB_DWC3_GADGET in addition to DM_USB_GADGET.
+> >>
+> >> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> >> ---
+> >>   drivers/usb/dwc3/dwc3-generic.c | 4 ++--
+> >>   1 file changed, 2 insertions(+), 2 deletions(-)
+> >>
+> >> diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-g=
+eneric.c
+> >> index 6fb2de8a5ace..891d01957619 100644
+> >> --- a/drivers/usb/dwc3/dwc3-generic.c
+> >> +++ b/drivers/usb/dwc3/dwc3-generic.c
+> >> @@ -192,7 +192,7 @@ static int dwc3_generic_of_to_plat(struct udevice =
+*dev)
+> >>   	return 0;
+> >>   }
+> >>  =20
+> >> -#if CONFIG_IS_ENABLED(DM_USB_GADGET)
+> >> +#if IS_ENABLED(CONFIG_USB_DWC3_GADGET) && CONFIG_IS_ENABLED(DM_USB_GA=
+DGET)
+> >=20
+> > Maybe just make USB_DWC3_GADGET depend on (or select?) DM_USB_GADGET ,=
+=20
+> > since I think the DWC3 code doesn't work without DM anyway .
+>=20
+> Do you mean in addition to this? I do not think that alone is something
+> that will address my intention to be able to disable the gadget part of
+> the dwc3-generic driver.
+>=20
+> Before this patch it was possible to enable disable host or gadget by
+> using USB_HOST/SPL_USB_HOST and DM_USB_GADGET/SPL_DM_USB_GADGET options.
+>=20
+> However, Rockchip RK3328 boards have dwc2 otg and dwc3 host, trying to
+> use DM_USB_GADGET for dwc2 and USB_HOST for dwc3 is currently not
+> possible and result in the build errors reported, i.e. multiple
+> definition of dm_usb_gadget_handle_interrupts() and undefined reference
+> to dwc3_gadget_uboot_handle_interrupt().
+>=20
+> After this patch I can use dm dwc2 gadget and dwc3 host without issue.
 
-Signed-off-by: Ben Wolsieffer <benwolsieffer@gmail.com>
----
- arch/arm/mach-rockchip/board.c               | 28 ++++++++++++++++++
- board/rockchip/tinker_rk3288/tinker-rk3288.c | 12 --------
- board/theobroma-systems/common/common.c      | 30 --------------------
- 3 files changed, 28 insertions(+), 42 deletions(-)
+Note that *DM_* symbols can be confusing. At this point, in SPL
+SPL_DM_USB and SPL_DM_USB_GADGET are encouraged but not required for
+host/gadget drivers. In full U-Boot, DM_USB is required for all host
+drivers and really should be enabled in all cases for DM_USB_GADGET. We
+can't enforce that at the Kconfig level because of, iirc, some of the
+armv7 part gadget drivers (more than one). But for newer and still very
+active chips, we should be using DM_USB_GADGET unconditionally in full
+U-Boot.
 
-diff --git a/arch/arm/mach-rockchip/board.c b/arch/arm/mach-rockchip/board.c
-index 2620530e03..04db809e97 100644
---- a/arch/arm/mach-rockchip/board.c
-+++ b/arch/arm/mach-rockchip/board.c
-@@ -6,6 +6,7 @@
- #include <clk.h>
- #include <cpu_func.h>
- #include <dm.h>
-+#include <dm/uclass-internal.h>
- #include <efi_loader.h>
- #include <fastboot.h>
- #include <init.h>
-@@ -349,3 +350,30 @@ __weak int board_rng_seed(struct abuf *buf)
- 	return 0;
- }
- #endif
-+
-+int mmc_get_env_dev(void)
-+{
-+	int devnum;
-+	const char *boot_device;
-+	struct udevice *dev;
-+
-+	if (IS_ENABLED(CONFIG_SYS_MMC_ENV_DEV))
-+		devnum = CONFIG_SYS_MMC_ENV_DEV;
-+	else
-+		devnum = 0;
-+
-+	boot_device = ofnode_read_chosen_string("u-boot,spl-boot-device");
-+	if (!boot_device) {
-+		debug("%s: /chosen/u-boot,spl-boot-device not set\n", __func__);
-+		return devnum;
-+	}
-+
-+	debug("%s: booted from %s\n", __func__, boot_device);
-+
-+	if (uclass_find_device_by_ofnode(UCLASS_MMC, ofnode_path(boot_device), &dev))
-+		return devnum;
-+
-+	devnum = dev->seq_;
-+	debug("%s: get MMC env from mmc%d\n", __func__, devnum);
-+	return devnum;
-+}
-diff --git a/board/rockchip/tinker_rk3288/tinker-rk3288.c b/board/rockchip/tinker_rk3288/tinker-rk3288.c
-index f85209c649..eff3a00c30 100644
---- a/board/rockchip/tinker_rk3288/tinker-rk3288.c
-+++ b/board/rockchip/tinker_rk3288/tinker-rk3288.c
-@@ -11,8 +11,6 @@
- #include <init.h>
- #include <net.h>
- #include <netdev.h>
--#include <asm/arch-rockchip/bootrom.h>
--#include <asm/io.h>
- 
- static int get_ethaddr_from_eeprom(u8 *addr)
- {
-@@ -38,13 +36,3 @@ int rk3288_board_late_init(void)
- 
- 	return 0;
- }
--
--int mmc_get_env_dev(void)
--{
--	u32 bootdevice_brom_id = readl(BROM_BOOTSOURCE_ID_ADDR);
--
--	if (bootdevice_brom_id == BROM_BOOTSOURCE_EMMC)
--		return 0;
--
--	return 1;
--}
-diff --git a/board/theobroma-systems/common/common.c b/board/theobroma-systems/common/common.c
-index 864bcdd46f..585da43884 100644
---- a/board/theobroma-systems/common/common.c
-+++ b/board/theobroma-systems/common/common.c
-@@ -89,36 +89,6 @@ int setup_boottargets(void)
- 	return 0;
- }
- 
--int mmc_get_env_dev(void)
--{
--	const char *boot_device =
--		ofnode_read_chosen_string("u-boot,spl-boot-device");
--	struct udevice *devp;
--
--	if (!boot_device) {
--		debug("%s: /chosen/u-boot,spl-boot-device not set\n",
--		      __func__);
--#ifdef CONFIG_SYS_MMC_ENV_DEV
--		return CONFIG_SYS_MMC_ENV_DEV;
--#else
--		return 0;
--#endif
--	}
--
--	debug("%s: booted from %s\n", __func__, boot_device);
--
--	if (uclass_find_device_by_ofnode(UCLASS_MMC, ofnode_path(boot_device), &devp))
--#ifdef CONFIG_SYS_MMC_ENV_DEV
--		return CONFIG_SYS_MMC_ENV_DEV;
--#else
--		return 0;
--#endif
--
--	debug("%s: get MMC ENV from mmc%d\n", __func__, devp->seq_);
--
--	return devp->seq_;
--}
--
- enum env_location arch_env_get_location(enum env_operation op, int prio)
- {
- 	const char *boot_device =
--- 
-2.43.2
+So perhaps part of the issue is that dwc2/dwc3 need some hopefully now
+legacy code removed.
 
+--=20
+Tom
+
+--1aYqLJnCdYmYYeRe
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXb7ZkACgkQFHw5/5Y0
+tywrGgv/WZn78MwgCPHlLH1yH4De0KOgMHltQcchmMXpU5FoBGjfJVJ9+3uySWYz
+nZ9kF43XmWkcvT49IdoJoHUrvy9xK858dhQAOwPSPaQ+k+HWq2/HFzj/j/Zysk8x
+fl6ghBDH+DYMGworuomcMYDHpxxbKEw6YgB4FQ6LcfN3wdekW6Iyk7Mk+1bW2IW4
+NA7VAYRI1S9l58mqzaLz7AMLX8zPu08MyhsQCAM6y/qj9sK0dFDFEDojWFgyXEMy
+wNYzCBvCtdZ+ZtZ1hCfNhdzOHwaxOZ1peye98tJgHubTVoRVLqnr/dR68jPFZshq
+yUw7sA+z77mhLcKBSEJpSqupt+0LcTxuwy2AriXXua4vR6gpWETBHfOmvyNHnue+
+tPtyQepi6szPW1HHtbZAYfpQmQM24gyg2hEyodb7sndGx2hhlWC1CxgzOW/fOaYM
+eb2vt+hqIOU01e0q+wZBet8t5brFdOjwIGv54i4eZhYDhbA0BYTdUt9iD9ljJMFe
+wfY2IgSE
+=rzIt
+-----END PGP SIGNATURE-----
+
+--1aYqLJnCdYmYYeRe--
