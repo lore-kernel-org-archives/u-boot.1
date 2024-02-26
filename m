@@ -4,79 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1E79C54E49
-	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 11:46:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB1B9C48BF6
+	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 12:01:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0573B87EB5;
-	Mon, 26 Feb 2024 12:46:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id CD91987E69;
+	Mon, 26 Feb 2024 13:01:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SUUvE1y+";
+	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="L4hmYSy+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B7AE863D3; Mon, 26 Feb 2024 12:46:36 +0100 (CET)
-Received: from mail-ua1-x92b.google.com (mail-ua1-x92b.google.com
- [IPv6:2607:f8b0:4864:20::92b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C9CD087E9F; Mon, 26 Feb 2024 11:09:09 +0100 (CET)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6072887EB5
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 12:46:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F4B787D6F
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 11:09:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ua1-x92b.google.com with SMTP id
- a1e0cc1a2514c-7da6e831958so379944241.0
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 03:46:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708947990; x=1709552790; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=tmKksEZLdH7bBoQbtGqh5NsyAOhUn7vQ8xY0GTgrvC0=;
- b=SUUvE1y+F8jYrXW4177aU1ar8KLUMkYQ85zNkpuWZaH2bNJNtZNrFN4CvBMPTFQIn/
- cqqKIq8JcYDg1vP2VD828dh5TIO+4D0DBhmFv/lRfv2mhLMoRp0gNbBH5aJ95Z3Kdqdz
- HgC9mEp81PLrRBsT9Ba66FIIjhKGZVNVa8sh9zK9XPZNRIcnAFpZQXvzfoh9bipV9iVA
- JiuU1WGm5nlb3YKZo9T/izBA2LdbJHdBwk/hj0E3eid0ElSPyG+FpNtfS1DYaKruI1pg
- qZUgtuYPpAYB3T+FV/U8Iyu/1rsSqXrkMy8Co0w7CJ0hZj9sE+6kFJ6FGY/YaN5kGRQc
- 4CuA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708947990; x=1709552790;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=tmKksEZLdH7bBoQbtGqh5NsyAOhUn7vQ8xY0GTgrvC0=;
- b=IZ4VlAHuQ8EjAjecIVQp6H1N/Ly+egRhVgEK2X6lVFN10QJTNOHBgfKUrSV118YMB6
- bexBUvnZgGcA4DxX7R1oyvXP/6r/bqfKT9KmKl3Gyde9BYEmxSIEZAAN63SterT1AsHC
- a4mnl22t6UfQR8TIESi5tsy/CfqgY5h7dk50EEylLjnrkze2GgDN+ZjPvGRCRHGk0Y1/
- l9k2WscmvWlxRsxtYfknukwA/d4vnKkqPCNafs3oaZzk7LcD9MDB7fDUTghWyyNcypM5
- mt16h9MbGMs87DofywXQ3RTcUqiYYmrud34dtt43ydxcBkKBSSlfb+l3HOQHGABf/GCW
- QPww==
-X-Gm-Message-State: AOJu0Yzes1GX8QkejX07Q85X0+WB7+IodrPKtUvzFOWTr2+82XuH15H6
- z0ceqhI1ZQWlwiQWiN5ibm3el00BuxngZWktaO0ssYrpwDnOUYFUkqTkFFtOodqLwUQ9YLydpBy
- QtIK8eT0CgW10fUOjohCj40AVnjL+VMNE8XUqgw==
-X-Google-Smtp-Source: AGHT+IH4fIu7TEcYUXZEu+VQEapnCzciHKvt557f0nFujXYfWjQrh7fEipKnoC85H2WHOUJLwFinccSuZ1JtC0s/ny8=
-X-Received: by 2002:a05:6102:3082:b0:470:3a99:f3c with SMTP id
- l2-20020a056102308200b004703a990f3cmr3395426vsb.23.1708947989999; Mon, 26 Feb
- 2024 03:46:29 -0800 (PST)
+ spf=pass smtp.mailfrom=quic_varada@quicinc.com
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
+ 41Q5dhWK013271; Mon, 26 Feb 2024 10:09:03 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+ from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding:content-type; s=
+ qcppdkim1; bh=CjIDhc9lYhn7drd1hBYIazV3YttX70juX7ldyJ27P2s=; b=L4
+ hmYSy+RRUZSb1LoGzaRZKgcnkkb9AddDXKpcScSmB/0am4s1uoaDXaXzJDxeuTCV
+ Jz1TNPBUwwTukibEcndinIZ8/2KtpHGGlmWlR8kwgTE/bCL3nDp7jICPwRax+OmU
+ DWnARfgrkmPUqnU9WcI9WckWCweMfDAIQhCSaduZ8uvRo2nnLhcRXbU/Ad4NRZOi
+ XiroRif6GQB2wTlwibkvPee7iI9Lc/F1sFAseskWImUSHAVlthe51Opv4EmrsW91
+ iT3aFTgkbrZccehbigKXYsKARvAaWUssuolWL9YCwm0AbB/m5rmarwD3KyrVKO+Z
+ RV9upvoTuSynL1x8Wg+A==
+Received: from nasanppmta01.qualcomm.com (i-global254.qualcomm.com
+ [199.106.103.254])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3wgkxkrjug-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 26 Feb 2024 10:09:03 +0000 (GMT)
+Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
+ [10.46.141.250])
+ by NASANPPMTA01.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 41QA92Vs017034
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 26 Feb 2024 10:09:02 GMT
+Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
+ nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.40; Mon, 26 Feb 2024 02:09:00 -0800
+From: Varadarajan Narayanan <quic_varada@quicinc.com>
+To: <u-boot@lists.denx.de>
+CC: Varadarajan Narayanan <quic_varada@quicinc.com>, Tom Rini
+ <trini@konsulko.com>
+Subject: [PATCH 02/10] mach-snapdragon: ipq9574: Add SMEM defines needed for
+ IPQ9574
+Date: Mon, 26 Feb 2024 15:37:59 +0530
+Message-ID: <20240226100807.1095607-3-quic_varada@quicinc.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240226100807.1095607-1-quic_varada@quicinc.com>
+References: <20240226100807.1095607-1-quic_varada@quicinc.com>
 MIME-Version: 1.0
-References: <20240226080433.3307154-1-sumit.garg@linaro.org>
- <20240226080433.3307154-4-sumit.garg@linaro.org>
- <73e06c3c-ac55-4fa1-923d-add85eb96505@denx.de>
-In-Reply-To: <73e06c3c-ac55-4fa1-923d-add85eb96505@denx.de>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Mon, 26 Feb 2024 17:16:18 +0530
-Message-ID: <CAFA6WYNJHnMHrkXUmOpXGTyGXPxqxwE0oQdmFUaC7yWGwnoHiQ@mail.gmail.com>
-Subject: Re: [PATCH v2 3/8] imx8mp: power-domain: Add PCIe support
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, marcel.ziswiler@toradex.com, francesco@dolcini.it, 
- trini@konsulko.com, lukma@denx.de, seanga2@gmail.com,
- jh80.chung@samsung.com, 
- festevam@denx.de, andrejs.cainikovs@toradex.com, sjg@chromium.org, 
- peng.fan@nxp.com, aford173@gmail.com, ilias.apalodimas@linaro.org, 
- sahaj.sarup@linaro.org, fathi.boudra@linaro.org, remi.duraffort@linaro.org, 
- daniel.thompson@linaro.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
+ nasanex01b.na.qualcomm.com (10.46.141.250)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
+ signatures=585085
+X-Proofpoint-ORIG-GUID: ktjBVJm1NPfxS4ulmQe87bqB3I5TExWQ
+X-Proofpoint-GUID: ktjBVJm1NPfxS4ulmQe87bqB3I5TExWQ
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-02-26_07,2024-02-23_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0
+ lowpriorityscore=0 phishscore=0 mlxlogscore=771 malwarescore=0
+ suspectscore=0 bulkscore=0 adultscore=0 spamscore=0 clxscore=1015
+ priorityscore=1501 mlxscore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.19.0-2402120000 definitions=main-2402260076
+X-Mailman-Approved-At: Mon, 26 Feb 2024 13:01:24 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,203 +101,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 26 Feb 2024 at 14:24, Marek Vasut <marex@denx.de> wrote:
->
-> On 2/26/24 9:04 AM, Sumit Garg wrote:
-> > Add support for GPCv2 power domains and clock handling for PCIe and
-> > PCIe PHY.
-> >
-> > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-> > ---
-> >   drivers/power/domain/imx8mp-hsiomix.c | 101 ++++++++++++++++++++------
-> >   1 file changed, 78 insertions(+), 23 deletions(-)
-> >
-> > diff --git a/drivers/power/domain/imx8mp-hsiomix.c b/drivers/power/domain/imx8mp-hsiomix.c
-> > index e2d772c5ec78..58cc3f63bb56 100644
-> > --- a/drivers/power/domain/imx8mp-hsiomix.c
-> > +++ b/drivers/power/domain/imx8mp-hsiomix.c
-> > @@ -16,48 +16,73 @@
-> >   #define GPR_REG0            0x0
-> >   #define  PCIE_CLOCK_MODULE_EN       BIT(0)
-> >   #define  USB_CLOCK_MODULE_EN        BIT(1)
-> > +#define  PCIE_PHY_APB_RST    BIT(4)
-> > +#define  PCIE_PHY_INIT_RST   BIT(5)
-> >
-> >   struct imx8mp_hsiomix_priv {
-> >       void __iomem *base;
-> >       struct clk clk_usb;
-> > +     struct clk clk_pcie;
-> >       struct power_domain pd_bus;
-> >       struct power_domain pd_usb;
-> > +     struct power_domain pd_pcie;
-> >       struct power_domain pd_usb_phy1;
-> >       struct power_domain pd_usb_phy2;
-> > +     struct power_domain pd_pcie_phy;
-> >   };
-> >
-> >   static int imx8mp_hsiomix_on(struct power_domain *power_domain)
-> >   {
-> >       struct udevice *dev = power_domain->dev;
-> >       struct imx8mp_hsiomix_priv *priv = dev_get_priv(dev);
-> > -     struct power_domain *domain;
-> > +     struct power_domain *domain = NULL;
-> > +     struct clk *clk = NULL;
-> > +     u32 gpr_reg0_bits = 0;
-> >       int ret;
-> >
-> > -     ret = power_domain_on(&priv->pd_bus);
-> > -     if (ret)
-> > -             return ret;
-> > -
-> > -     if (power_domain->id == IMX8MP_HSIOBLK_PD_USB) {
-> > +     switch (power_domain->id) {
-> > +     case IMX8MP_HSIOBLK_PD_USB:
-> >               domain = &priv->pd_usb;
-> > -     } else if (power_domain->id == IMX8MP_HSIOBLK_PD_USB_PHY1) {
-> > +             clk = &priv->clk_usb;
-> > +             gpr_reg0_bits |= USB_CLOCK_MODULE_EN;
-> > +             break;
-> > +     case IMX8MP_HSIOBLK_PD_USB_PHY1:
-> >               domain = &priv->pd_usb_phy1;
-> > -     } else if (power_domain->id == IMX8MP_HSIOBLK_PD_USB_PHY2) {
-> > +             break;
-> > +     case IMX8MP_HSIOBLK_PD_USB_PHY2:
-> >               domain = &priv->pd_usb_phy2;
-> > -     } else {
-> > -             ret = -EINVAL;
-> > -             goto err_pd;
-> > +             break;
-> > +     case IMX8MP_HSIOBLK_PD_PCIE:
-> > +             domain = &priv->pd_pcie;
-> > +             clk = &priv->clk_pcie;
-> > +             gpr_reg0_bits |= PCIE_CLOCK_MODULE_EN;
-> > +             break;
-> > +     case IMX8MP_HSIOBLK_PD_PCIE_PHY:
-> > +             domain = &priv->pd_pcie_phy;
-> > +             /* Bits to deassert PCIe PHY reset */
-> > +             gpr_reg0_bits |= PCIE_PHY_APB_RST | PCIE_PHY_INIT_RST;
-> > +             break;
-> > +     default:
-> > +             dev_err(dev, "unknown power domain id: %ld\n",
-> > +                     power_domain->id);
-> > +             return -EINVAL;
-> >       }
-> >
-> > +     ret = power_domain_on(&priv->pd_bus);
-> > +     if (ret)
-> > +             return ret;
-> > +
-> >       ret = power_domain_on(domain);
-> >       if (ret)
-> >               goto err_pd;
-> >
-> > -     ret = clk_enable(&priv->clk_usb);
-> > -     if (ret)
-> > -             goto err_clk;
-> > +     if (clk) {
-> > +             ret = clk_enable(clk);
-> > +             if (ret)
-> > +                     goto err_clk;
-> > +     }
-> >
-> > -     if (power_domain->id == IMX8MP_HSIOBLK_PD_USB)
-> > -             setbits_le32(priv->base + GPR_REG0, USB_CLOCK_MODULE_EN);
-> > +     setbits_le32(priv->base + GPR_REG0, gpr_reg0_bits);
->
-> Are you sure it is OK to do this unconditionally ?
->
+Add few SMEM related defines that will be used for
+IPQ9574 based boards.
 
-Although setbits_le32(addr, 0) should be a nop but...
+Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
+---
 
-> Why not this:
->
-> if (gpr_reg0_bits)
->    setbits_le32(priv->base + GPR_REG0, gpr_reg0_bits);
->
+ include/smem.h | 78 ++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 78 insertions(+)
 
-...if we can avoid that then it's better. I will make it conditional.
+diff --git a/include/smem.h b/include/smem.h
+index b19c534ebc..f305354996 100644
+--- a/include/smem.h
++++ b/include/smem.h
+@@ -16,6 +16,84 @@
+ #ifndef _smemh_
+ #define _smemh_
+ 
++enum {
++	SMEM_SPINLOCK_ARRAY		= 7,
++	SMEM_AARM_PARTITION_TABLE	= 9,
++	SMEM_HW_SW_BUILD_ID		= 137,
++	SMEM_USABLE_RAM_PARTITION_TABLE	= 402,
++	SMEM_POWER_ON_STATUS_INFO	= 403,
++	SMEM_MACHID_INFO_LOCATION	= 425,
++	SMEM_IMAGE_VERSION_TABLE	= 469,
++	SMEM_BOOT_FLASH_TYPE		= 498,
++	SMEM_BOOT_FLASH_INDEX		= 499,
++	SMEM_BOOT_FLASH_CHIP_SELECT	= 500,
++	SMEM_BOOT_FLASH_BLOCK_SIZE	= 501,
++	SMEM_BOOT_FLASH_DENSITY		= 502,
++	SMEM_BOOT_DUALPARTINFO		= 503,
++	SMEM_PARTITION_TABLE_OFFSET	= 504,
++	SMEM_SPI_FLASH_ADDR_LEN		= 505,
++	SMEM_FIRST_VALID_TYPE		= SMEM_SPINLOCK_ARRAY,
++	SMEM_LAST_VALID_TYPE		= SMEM_SPI_FLASH_ADDR_LEN,
++	SMEM_MAX_SIZE			= SMEM_SPI_FLASH_ADDR_LEN + 1,
++};
++
++enum {
++	SMEM_BOOT_NO_FLASH		= 0,
++	SMEM_BOOT_NOR_FLASH		= 1,
++	SMEM_BOOT_NAND_FLASH		= 2,
++	SMEM_BOOT_ONENAND_FLASH		= 3,
++	SMEM_BOOT_SDC_FLASH		= 4,
++	SMEM_BOOT_MMC_FLASH		= 5,
++	SMEM_BOOT_SPI_FLASH		= 6,
++	SMEM_BOOT_NORPLUSNAND		= 7,
++	SMEM_BOOT_NORPLUSEMMC		= 8,
++	SMEM_BOOT_QSPI_NAND_FLASH	= 11,
++};
++
++#define BUILD_ID_LEN			32
++#define SOCINFO_VERSION_MAJOR(ver)	(((ver) & 0xffff0000) >> 16)
++#define SOCINFO_VERSION_MINOR(ver)	((ver) & 0x0000ffff)
++
++struct smem_pmic_type {
++	unsigned int pmic_model;
++	unsigned int pmic_die_revision;
++};
++
++struct ipq_platform_v1 {
++	unsigned int	format;
++	unsigned int	id;
++	unsigned int	version;
++	char		build_id[BUILD_ID_LEN];
++	unsigned int	raw_id;
++	unsigned int	raw_version;
++	unsigned int	hw_platform;
++	unsigned int	platform_version;
++	unsigned int	accessory_chip;
++	unsigned int	hw_platform_subtype;
++};
++
++struct ipq_platform_v2 {
++	struct ipq_platform_v1	v1;
++	struct smem_pmic_type	pmic_info[3];
++	unsigned int		foundry_id;
++};
++
++struct ipq_platform_v3 {
++	struct ipq_platform_v2	v2;
++	unsigned int		chip_serial;
++};
++
++union ipq_platform {
++	struct ipq_platform_v1	v1;
++	struct ipq_platform_v2	v2;
++	struct ipq_platform_v3	v3;
++};
++
++struct smem_machid_info {
++	unsigned int format;
++	unsigned int machid;
++};
++
+ /* struct smem_ops: Operations for the SMEM uclass */
+ struct smem_ops {
+ 	/**
+-- 
+2.34.1
 
-> >       return 0;
-> >
-> > @@ -73,17 +98,31 @@ static int imx8mp_hsiomix_off(struct power_domain *power_domain)
-> >       struct udevice *dev = power_domain->dev;
-> >       struct imx8mp_hsiomix_priv *priv = dev_get_priv(dev);
-> >
-> > -     if (power_domain->id == IMX8MP_HSIOBLK_PD_USB)
-> > +     switch (power_domain->id) {
-> > +     case IMX8MP_HSIOBLK_PD_USB:
-> >               clrbits_le32(priv->base + GPR_REG0, USB_CLOCK_MODULE_EN);
-> > -
-> > -     clk_disable(&priv->clk_usb);
-> > -
-> > -     if (power_domain->id == IMX8MP_HSIOBLK_PD_USB)
-> > +             clk_disable(&priv->clk_usb);
-> >               power_domain_off(&priv->pd_usb);
-> > -     else if (power_domain->id == IMX8MP_HSIOBLK_PD_USB_PHY1)
-> > +             break;
-> > +     case IMX8MP_HSIOBLK_PD_USB_PHY1:
-> >               power_domain_off(&priv->pd_usb_phy1);
-> > -     else if (power_domain->id == IMX8MP_HSIOBLK_PD_USB_PHY2)
-> > +             break;
-> > +     case IMX8MP_HSIOBLK_PD_USB_PHY2:
-> >               power_domain_off(&priv->pd_usb_phy2);
-> > +             break;
-> > +     case IMX8MP_HSIOBLK_PD_PCIE:
->
-> Maybe we need some function ... imx8mp_hsiomix_id_to_pd() to avoid this
-> duplicate switch statement:
->
-> pd = imx8mp_hsiomix_id_to_pd(...)
-> ...
-> power_domain_off(fd);
-
-But still we need another switch case for clocks and GPR_REG0 bits to
-be configured.
-
->
-> > +             clrbits_le32(priv->base + GPR_REG0, PCIE_CLOCK_MODULE_EN);
-> > +             clk_disable(&priv->clk_pcie);
-> > +             power_domain_off(&priv->pd_pcie);
-> > +             break;
-> > +     case IMX8MP_HSIOBLK_PD_PCIE_PHY:
-> > +             clrbits_le32(priv->base + GPR_REG0, PCIE_PHY_APB_RST |
-> > +                                                 PCIE_PHY_INIT_RST);
-> > +             power_domain_off(&priv->pd_pcie_phy);
->
-> Is it OK to turn off the bus PD after this ?
-> Please double-check if power_domain_on/off() is refcounted .
-
-I can't see refcounting being implemented in imx8m-power-domain.c.
-This seems to be an existing issue with USB support too.
-
->
-> > +             break;
-> > +     default:
-> > +             break;
-> > +     }
-> >
-> >       power_domain_off(&priv->pd_bus);
-
-I suppose we should just be fine to drop bus PD off from here.
-
-> >
-> > @@ -109,6 +148,10 @@ static int imx8mp_hsiomix_probe(struct udevice *dev)
-> >       if (ret < 0)
-> >               return ret;
-> >
-> > +     ret = clk_get_by_name(dev, "pcie", &priv->clk_pcie);
-> > +     if (ret < 0)
-> > +             return ret;
-> > +
-> >       ret = power_domain_get_by_name(dev, &priv->pd_bus, "bus");
-> >       if (ret < 0)
-> >               return ret;
->
-> Some clk_put() seems to be missing for clk_pcie .
-
-I can't see clk_put() as any generic API. However, there used to be
-clk_free() which was dropped by this commit [1].
-
-[1] https://source.denx.de/u-boot/u-boot/-/commit/c9309f40a6831b1ac5cd0a7227b5c3717d34c812
-
--Sumit
