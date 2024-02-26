@@ -4,77 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B28FC5478C
-	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 06:59:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80033C5478C
+	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 07:07:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D386487E39;
-	Mon, 26 Feb 2024 07:59:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id DC74F87E2E;
+	Mon, 26 Feb 2024 08:07:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="CYyx/uLo";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="npom1dT9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BCA7987E47; Mon, 26 Feb 2024 07:59:23 +0100 (CET)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3B14687E06; Mon, 26 Feb 2024 08:07:15 +0100 (CET)
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.19])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B634D87E06
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 07:59:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 646A187E2E
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 08:07:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-563bb51c36eso2647378a12.2
- for <u-boot@lists.denx.de>; Sun, 25 Feb 2024 22:59:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1708930761; x=1709535561;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=2Kk6XZ9aKDj2nh91jgps2t9icBOwXclaEsDLJw/HpcI=;
- b=CYyx/uLokI2kfvDXAqyHNe63UT1YNSWM4iQXpRNfWOzz1seGG9FzbGkz+6yWGm+CDT
- f/MnPp5d29acNfvfnvoHavnHL+VLpqYPNsfu3wuIdfILUaKqgvUfEZI4vvoHwzdmm1l9
- ssWGZ4uMdlhNxwBr9SB1Hxj5Y43gIXJWrNUV8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708930761; x=1709535561;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=2Kk6XZ9aKDj2nh91jgps2t9icBOwXclaEsDLJw/HpcI=;
- b=EaTYfntzLwKPfI+DVuuQom9bLRNyIIlXpaDvwsfCeStPCSQb25Bpg2RBEPQl4y5w+E
- SR1E7vAXgBGJbTlDQ91ERt+NYg2pZXMAfLhuh0aZJvFKfbhKNCGopF3ju+5BEWBe6tOi
- daEo2BZ1C7fTwjaVYVz8IFiOGZnq7BxDxqkZlUOnC5qSUKKAIHzM33ggGXgwqaphjr5B
- eHEGuk/WPX0ze0R63zMrpcluhx9/3nteDrQ+nx2DxDT7AVAk+HXmnRz5g3qYFhlylovg
- nkLSrTf26AkEZpHh4muae1+Gj8s5BSDwtLysB9q4KgG7E9zLIOGS3XfKl2mOGJM+SLux
- ujGA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWaFA89ceJ5y+w4mbFHMzM9w/4pZPaMi0R+5To+qyAcFXbJ9fg5bWbQWLj8zWiBPpenex9TnP8ro0QiQhVo+D6CPhcGug==
-X-Gm-Message-State: AOJu0YyylqQHaV8DzeU7SNft9PMK+cJv9eb9NqBfvarCEh4ApfKGca4l
- cnDHrxpIP4yUyUOx8ezD2f4PHa6k6UnOSuwpvMyvTYK/0im40kdNaV1zBW0FQ/9RNd2IqhuxYxn
- 4hH2zWJcpOqn0rmTRLecofYy62bZk4n41fVwqCw==
-X-Google-Smtp-Source: AGHT+IEdANcdE/apmlzZuuoF4V5UdLsMlOgWBjXSA0+BNoP9dy8YENBx4tj+Fpo/TNoEhtAVkjhfegUcQTnwggLs4y0=
-X-Received: by 2002:aa7:c919:0:b0:565:ff53:5359 with SMTP id
- b25-20020aa7c919000000b00565ff535359mr479543edt.41.1708930760974; Sun, 25 Feb
- 2024 22:59:20 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: phobos.denx.de;
+ spf=none smtp.mailfrom=jitloonl@ecsmtp.png.intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1708931232; x=1740467232;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=RKSxgMgSK5Hw1xk1TAzErHatYMqWaJAeJty/J12Lxe0=;
+ b=npom1dT9WIzUCqPwHumo79TGo5lMkVpwlJSx7RLwiz/l1n1vsje9z3Eh
+ oRr4iMrv3AT1wkwY1vLroIYhFrjdqLr5m//0XKj9KajbWG2kq4t7oVx3b
+ 9iPjIWkcuDVE7Afgrye3L5jEwpW9xjnDEj5cNfuP7Ofc6kOzFYl+CEzVT
+ AbL/yPQ0Uhmnk8udpBp7XlQ9dVKwpMgb8+aZXu0C+ujzuFTsX0siKsZj7
+ X520zz1lNAb39tONXknuGK8BuXAr0PKgLIq+oXqRKz7Wf36yXXSp6YnTU
+ D75QIFapMeJTzlIQ6tZhUXVZrAtiYcTbBQRnUNnAKTLjJ61OE3FJoMWXv w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10995"; a="3061223"
+X-IronPort-AV: E=Sophos;i="6.06,185,1705392000"; 
+   d="scan'208";a="3061223"
+Received: from fmviesa003.fm.intel.com ([10.60.135.143])
+ by orvoesa111.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 25 Feb 2024 23:07:10 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.06,185,1705392000"; d="scan'208";a="11160119"
+Received: from pglmail07.png.intel.com ([10.126.73.9])
+ by fmviesa003.fm.intel.com with ESMTP; 25 Feb 2024 23:07:07 -0800
+Received: from localhost (pgli0121.png.intel.com [10.221.240.84])
+ by pglmail07.png.intel.com (Postfix) with ESMTP id 831EF1644B;
+ Mon, 26 Feb 2024 15:07:06 +0800 (+08)
+Received: by localhost (Postfix, from userid 12048045)
+ id 7B8B21688D; Mon, 26 Feb 2024 15:07:06 +0800 (+08)
+From: Jit Loon Lim <jit.loon.lim@intel.com>
+To: u-boot@lists.denx.de
+Cc: Jagan Teki <jagan@amarulasolutions.com>, Marek <marex@denx.de>,
+ Simon <simon.k.r.goldschmidt@gmail.com>,
+ Tien Fong <tien.fong.chee@intel.com>, Kok Kiang <kok.kiang.hea@intel.com>,
+ Dinesh <dinesh.maniyam@intel.com>, Boon Khai <boon.khai.ng@intel.com>,
+ Alif <alif.zakuan.yuslaimi@intel.com>,
+ Teik Heng <teik.heng.chong@intel.com>,
+ Hazim <muhammad.hazim.izzat.zamri@intel.com>,
+ Jit Loon Lim <jit.loon.lim@intel.com>,
+ Sieu Mun Tang <sieu.mun.tang@intel.com>, Bin Meng <bmeng.cn@gmail.com>
+Subject: [PATCH v2 0/1] Agilex5 enablement
+Date: Mon, 26 Feb 2024 15:07:03 +0800
+Message-Id: <20240226070704.15153-1-jit.loon.lim@intel.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-References: <20240225173834.1637789-1-michael@amarulasolutions.com>
- <c7a255a0-dbc6-4cdb-b46c-3b81d17ce30c@ti.com>
-In-Reply-To: <c7a255a0-dbc6-4cdb-b46c-3b81d17ce30c@ti.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Mon, 26 Feb 2024 07:59:08 +0100
-Message-ID: <CAOf5uwkVA24aX2_=aJMGa=vayHpKpNF71+iiYYqC1vZPjFKpbA@mail.gmail.com>
-Subject: Re: [PATCH] arm: dts: k3-binman: Make optee optional as requirement
-To: Neha Malcom Francis <n-francis@ti.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
- "Raghavendra, Vignesh" <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>,
- Simon Glass <sjg@chromium.org>, 
- Manorit Chawdhry <m-chawdhry@ti.com>, linux-amarula@amarulasolutions.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,103 +85,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
+V1: https://patchwork.ozlabs.org/project/uboot/patch/20240220143603.22091-1-jit.loon.lim@intel.com/
+V2: Fixed Git auto-merge causing misalignment of code and insert/delete
 
-On Mon, Feb 26, 2024 at 4:17=E2=80=AFAM Neha Malcom Francis <n-francis@ti.c=
-om> wrote:
->
-> Hi Michael
->
-> + Vignesh
->
-> On 25/02/24 23:08, Michael Trimarchi wrote:
-> > Boards can use the ti_spl_template but avoid to define a tee
-> > node to be loaded. This is true form board with 512Mb or less
->
-> s/form board/for boards? I am guessing that is what was meant. I am not r=
-eally
-> understanding the commit message... does <512MB memory always mean no usi=
-ng
-> OPTEE? (AM62 SIP would be an exception) The commit message is putting out=
- a
-> misleading reason why we don't need OPTEE in some cases, I don't think me=
-mory is
-> the primary reason.
->
+Jit Loon Lim (1):
+  arch:arm: Agilex5 enablement
 
-I will adjust commit message. In general when you have module with 256
-Mb of memory you
-try to arrange the available memory to put the essential components.
-Anyway having still not
-submitted board I found out that is convenient to use the template but
-in the same time remove
-from my configuration what is not mandatory and let binman to warning
-and not to fail
+ arch/arm/Kconfig                              |  13 +-
+ arch/arm/dts/Makefile                         |   1 +
+ arch/arm/dts/socfpga_agilex5-u-boot.dtsi      | 458 ++++++++++++
+ arch/arm/dts/socfpga_agilex5.dtsi             | 654 ++++++++++++++++++
+ .../arm/dts/socfpga_agilex5_socdk-u-boot.dtsi | 144 ++++
+ arch/arm/dts/socfpga_agilex5_socdk.dts        | 163 +++++
+ arch/arm/dts/socfpga_soc64_fit-u-boot.dtsi    |  38 +-
+ arch/arm/mach-socfpga/Kconfig                 |  69 +-
+ arch/arm/mach-socfpga/Makefile                |   4 +-
+ arch/arm/mach-socfpga/board.c                 |  56 +-
+ .../include/mach/base_addr_soc64.h            |  44 +-
+ board/intel/agilex5-socdk/MAINTAINERS         |   8 +
+ board/intel/agilex5-socdk/Makefile            |   7 +
+ configs/socfpga_agilex5_defconfig             | 113 +++
+ include/configs/socfpga_agilex5_socdk.h       |  12 +
+ include/configs/socfpga_soc64_common.h        | 209 +++++-
+ 16 files changed, 1957 insertions(+), 36 deletions(-)
+ create mode 100644 arch/arm/dts/socfpga_agilex5-u-boot.dtsi
+ create mode 100644 arch/arm/dts/socfpga_agilex5.dtsi
+ create mode 100644 arch/arm/dts/socfpga_agilex5_socdk-u-boot.dtsi
+ create mode 100644 arch/arm/dts/socfpga_agilex5_socdk.dts
+ create mode 100644 board/intel/agilex5-socdk/MAINTAINERS
+ create mode 100644 board/intel/agilex5-socdk/Makefile
+ create mode 100644 configs/socfpga_agilex5_defconfig
+ create mode 100644 include/configs/socfpga_agilex5_socdk.h
 
-Michael
+-- 
+2.26.2
 
-> > memory. We can limit this in configuation removing the tee
->
-> s/configuation/configuration
->
-> > node
-> >
-> > configurations {
-> >       default =3D "conf-0";
-> >
-> >       conf-0 {
-> >               description =3D "k3-am62_ccm_m3";
-> >               firmware =3D "atf";
-> >               loadables =3D "dm", "spl";
-> >               fdt =3D "fdt-0";
-> >       };
-> > };
-> >
-> > Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
-> > ---
-> >   arch/arm/dts/k3-binman.dtsi | 2 ++
-> >   1 file changed, 2 insertions(+)
-> >
-> > diff --git a/arch/arm/dts/k3-binman.dtsi b/arch/arm/dts/k3-binman.dtsi
-> > index 758c8bf6ea..5ef5af315a 100644
-> > --- a/arch/arm/dts/k3-binman.dtsi
-> > +++ b/arch/arm/dts/k3-binman.dtsi
-> > @@ -293,6 +293,7 @@
-> >                                               keyfile =3D "custMpk.pem"=
-;
-> >                                       };
-> >                                       tee: tee-os {
-> > +                                             optional;
-> >                                       };
-> >                               };
-> >
-> > @@ -360,6 +361,7 @@
-> >                                       entry =3D <0x9e800000>;
-> >                                       tee-os {
-> >                                               filename =3D "tee-raw.bin=
-";
-> > +                                             optional;
-> >                                       };
-> >                               };
-> >
->
-> The patch excluding the commit message LGTM.
->
-> --
-> Thanking You
-> Neha Malcom Francis
-
-
-
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
-
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
