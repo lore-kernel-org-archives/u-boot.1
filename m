@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0228C5478C
-	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 08:06:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D451C48BF6
+	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 08:06:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D70887EB7;
-	Mon, 26 Feb 2024 09:05:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8B6F787ED3;
+	Mon, 26 Feb 2024 09:05:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wnwsUeNd";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UqIKghic";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0583F87EA7; Mon, 26 Feb 2024 09:05:43 +0100 (CET)
-Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com
- [IPv6:2607:f8b0:4864:20::430])
+ id 76E1187ED1; Mon, 26 Feb 2024 09:05:49 +0100 (CET)
+Received: from mail-pg1-x529.google.com (mail-pg1-x529.google.com
+ [IPv6:2607:f8b0:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B0C8A87EB2
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 09:05:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DCDDD87ED8
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 09:05:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-pf1-x430.google.com with SMTP id
- d2e1a72fcca58-6e435542d41so1580680b3a.1
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 00:05:36 -0800 (PST)
+Received: by mail-pg1-x529.google.com with SMTP id
+ 41be03b00d2f7-5ce6b5e3c4eso2103607a12.2
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 00:05:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708934735; x=1709539535; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1708934740; x=1709539540; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=We+fvmTIWTWost47vKSyC3bkS9Lb+gyVjLQt2bCVGyA=;
- b=wnwsUeNdAOFRxylbrpV4ZEQescFfx7u0SdDiuAtCGKOjKijmBo0I77E08ZbIc7/+if
- fEBTJyv3RPsW4e2pHucKPPUvFANVKUX3ct2++Tqa2qNBWWHTL1XZ+JMNAUc1k16XVDlV
- wtgI85wpS4lwl7dm0tQ+b+FB/Nv9sH3FaMz3cIDKzcWcm5q2ZbQNd+7b6cSBVeu/Sl1M
- Pr6ftu3p5WTeip/RXoM23s5LoCiJMTrvV/0jToujg0SIRBSUNKXteHustLq0oazNvCMl
- ILVe1p7ipGY4Gu9PazKzdr1jPq//PovtkeBe0221/Rb1Cdo6JuyspYnE7nxqoCjMdLq8
- w3Dw==
+ bh=6Ax3UQWPrDtMJlo+5w9S8KN3OLCK0Elgjus9aZGI8f0=;
+ b=UqIKghicBXfwZf1PgLIpBGH9SBBqkjO/bV6ub9jzxPisREBsi5iSahDmkd3dG/e+6E
+ qQbPdzsmtiwhNUfAHs8iI2uvCPcyzz1Rm7enXiEo/VGvTS0LDgW/ysmemtvuPoiYIjiN
+ l6JH1DQavPEKCQOBZa9hGxsL8r0J0xZcNPNbVosEL57cp5NcEEITXSDP72uENwkoMlYu
+ 6kBG3bx97mWvZV6gJK/6wvw9K5S7qMzN4WcnJoOiMYYsidqLTn0g45opt0NUKscN2PuY
+ s54roVMAL0JSCaoqnty+5/P08t7/lcyHitYxGkqAfVXLgn4VaBzoHMJsuXC70uAI7+PH
+ V8Zg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708934735; x=1709539535;
+ d=1e100.net; s=20230601; t=1708934740; x=1709539540;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=We+fvmTIWTWost47vKSyC3bkS9Lb+gyVjLQt2bCVGyA=;
- b=Bytp1Jb5RGMn5JX1+jKVeAO3HT+JpYTJAwmUiZkwzpwlydVwtbFnmMWEdw4JEo/yWb
- FbugvM5szq5JrgkOHTXXkP6+xdmNlsKmUcMt/EgF73KaQ/FiptsToTzz21gmDc2NqAdI
- 930/NDPo418ivGrbXcJ97ilKH2NrwlA/1xq91//9oXrREseCunnRxGDjwEqU7vmS+5aF
- XJJmtNKF3BTlMzxByh4Jm+DAMJGstHMm28d17a/5I3gWpY83QP135wsVJ4OsoGk8ynDB
- b48PLHkMgDgDLH9qtzEKK/OhSKTtY5XOOr9FAaNTqz8tXnhvEZI1knUO7X0YLF0Sno1m
- +L/A==
-X-Gm-Message-State: AOJu0YwvOguIO1cLtc1heeWuEzUF7tyw0mILWTA5jYTw+x6eD9cEcWk+
- 3k56YVu0NDrnkPuAX3kp2OyUHxir0EsR4MdrBylC9acRLLKxMxiVqudiSCgI816Du8qdckNEsXI
- L
-X-Google-Smtp-Source: AGHT+IFNEKVTwujBo+6GXmHA2muMx2Ec4xewmS+zeDgpHPSV1bdLY6xX7/UmuRGLAg72STfGrrpMVw==
-X-Received: by 2002:a05:6a00:1b57:b0:6e4:65a7:c806 with SMTP id
- o23-20020a056a001b5700b006e465a7c806mr4589240pfv.8.1708934734742; 
- Mon, 26 Feb 2024 00:05:34 -0800 (PST)
+ bh=6Ax3UQWPrDtMJlo+5w9S8KN3OLCK0Elgjus9aZGI8f0=;
+ b=Ry+f3MguQtt88GRv2KCZ9NUCQrqXc6ZQ6KMDqH9bQJcq5KjxKA3MVthR2EeZn5zOol
+ 4loCGo9FHBkoUDUun+QgNnbg5qBHMJMtys2FzSfpG4daAC6C05SBsy5G+b5ZjvqRXlOP
+ FoYOXnkO0Y/e1k19KJ+1ebT8t0lpImd0Cqrhuiq3yesrbtGZRtbGjHMXSqQ1jcXhqrLN
+ 39Ndx6ybzFoC6q1nsl1D6w5yz+spa5zN8OiyuTiSiZsoO63cIq9BJQAMFS20aT9weTDq
+ xYxIzS6MLOer877yXBVJ2sGD6v832Vy2jHW0eSBvlMsWup3XqbxYi2XEgX8j1cbJaRj9
+ MgjQ==
+X-Gm-Message-State: AOJu0YztiVqzq4QzIyj8N/f/oD2BzJdugp0hQDgD2We1nQFqgAXXyjTF
+ QWenG+AUZXOVG4BXEXK+ItYefn0dDwv1nBcSW1ZraVsFYvEus/hPrbGoMT0+o5f65aoIZ6TE7cr
+ s
+X-Google-Smtp-Source: AGHT+IHrgXMKuJuNB0rAtMTvObO6/khkAEBsioHslkXcV7uRudaDt3zxoncu0NWRc4jSEwWUx6RxfA==
+X-Received: by 2002:a05:6a20:9f99:b0:1a0:726a:6e44 with SMTP id
+ mm25-20020a056a209f9900b001a0726a6e44mr5301337pzb.3.1708934740557; 
+ Mon, 26 Feb 2024 00:05:40 -0800 (PST)
 Received: from sumit-X1.. ([223.178.208.32]) by smtp.gmail.com with ESMTPSA id
- k2-20020aa788c2000000b006e13a88d52esm3392842pff.61.2024.02.26.00.05.29
+ k2-20020aa788c2000000b006e13a88d52esm3392842pff.61.2024.02.26.00.05.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Feb 2024 00:05:34 -0800 (PST)
+ Mon, 26 Feb 2024 00:05:40 -0800 (PST)
 From: Sumit Garg <sumit.garg@linaro.org>
 To: u-boot@lists.denx.de
 Cc: marcel.ziswiler@toradex.com, francesco@dolcini.it, trini@konsulko.com,
@@ -72,9 +72,10 @@ Cc: marcel.ziswiler@toradex.com, francesco@dolcini.it, trini@konsulko.com,
  aford173@gmail.com, marex@denx.de, ilias.apalodimas@linaro.org,
  sahaj.sarup@linaro.org, fathi.boudra@linaro.org, remi.duraffort@linaro.org,
  daniel.thompson@linaro.org, Sumit Garg <sumit.garg@linaro.org>
-Subject: [PATCH v2 4/8] imx8mp: power-domain: Expose high performance PLL clock
-Date: Mon, 26 Feb 2024 13:34:29 +0530
-Message-Id: <20240226080433.3307154-5-sumit.garg@linaro.org>
+Subject: [PATCH v2 5/8] phy: phy-imx8m-pcie: Add support for i.MX8M{M/P} PCIe
+ PHY
+Date: Mon, 26 Feb 2024 13:34:30 +0530
+Message-Id: <20240226080433.3307154-6-sumit.garg@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240226080433.3307154-1-sumit.garg@linaro.org>
 References: <20240226080433.3307154-1-sumit.garg@linaro.org>
@@ -96,130 +97,327 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Expose the high performance PLL as a regular Linux clock, so the
-PCIe PHY can use it when there is no external refclock provided.
+Add initial support for i.MX8M{M/P} PCIe PHY. On i.MX8M{M/P} SoCs PCIe
+PHY initialization moved to this standalone PHY driver.
 
 Inspired from counterpart Linux kernel v6.8-rc3 driver:
-drivers/pmdomain/imx/imx8mp-blk-ctrl.c
+drivers/phy/freescale/phy-fsl-imx8m-pcie.c.
 
 Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 ---
- drivers/power/domain/imx8mp-hsiomix.c | 78 +++++++++++++++++++++++++++
- 1 file changed, 78 insertions(+)
+ drivers/phy/Kconfig          |   9 ++
+ drivers/phy/Makefile         |   1 +
+ drivers/phy/phy-imx8m-pcie.c | 269 +++++++++++++++++++++++++++++++++++
+ 3 files changed, 279 insertions(+)
+ create mode 100644 drivers/phy/phy-imx8m-pcie.c
 
-diff --git a/drivers/power/domain/imx8mp-hsiomix.c b/drivers/power/domain/imx8mp-hsiomix.c
-index 58cc3f63bb56..3e514a603578 100644
---- a/drivers/power/domain/imx8mp-hsiomix.c
-+++ b/drivers/power/domain/imx8mp-hsiomix.c
-@@ -6,9 +6,15 @@
- #include <common.h>
- #include <asm/io.h>
- #include <clk.h>
-+#include <clk-uclass.h>
- #include <dm.h>
- #include <dm/device.h>
- #include <dm/device_compat.h>
-+#include <dm/device-internal.h>
-+#include <dm/lists.h>
+diff --git a/drivers/phy/Kconfig b/drivers/phy/Kconfig
+index 60138beca498..110ec8f5008d 100644
+--- a/drivers/phy/Kconfig
++++ b/drivers/phy/Kconfig
+@@ -284,6 +284,15 @@ config PHY_IMX8MQ_USB
+ 	help
+ 	  Support the USB3.0 PHY in NXP i.MX8MQ or i.MX8MP SoC
+ 
++config PHY_IMX8M_PCIE
++	bool "NXP i.MX8MM/i.MX8MP PCIe PHY Driver"
++	depends on PHY
++	depends on IMX8MM || IMX8MP
++	help
++	  Support the PCIe PHY in NXP i.MX8MM or i.MX8MP SoC
++
++	  This PHY is found on i.MX8M devices supporting PCIe.
++
+ config PHY_XILINX_ZYNQMP
+ 	tristate "Xilinx ZynqMP PHY driver"
+ 	depends on PHY && ARCH_ZYNQMP
+diff --git a/drivers/phy/Makefile b/drivers/phy/Makefile
+index 2e8723186c05..7a2b764492be 100644
+--- a/drivers/phy/Makefile
++++ b/drivers/phy/Makefile
+@@ -38,6 +38,7 @@ obj-$(CONFIG_PHY_DA8XX_USB) += phy-da8xx-usb.o
+ obj-$(CONFIG_PHY_MTK_TPHY) += phy-mtk-tphy.o
+ obj-$(CONFIG_PHY_NPCM_USB) += phy-npcm-usb.o
+ obj-$(CONFIG_PHY_IMX8MQ_USB) += phy-imx8mq-usb.o
++obj-$(CONFIG_PHY_IMX8M_PCIE) += phy-imx8m-pcie.o
+ obj-$(CONFIG_PHY_XILINX_ZYNQMP) += phy-zynqmp.o
+ obj-y += cadence/
+ obj-y += ti/
+diff --git a/drivers/phy/phy-imx8m-pcie.c b/drivers/phy/phy-imx8m-pcie.c
+new file mode 100644
+index 000000000000..e09a7ac97235
+--- /dev/null
++++ b/drivers/phy/phy-imx8m-pcie.c
+@@ -0,0 +1,269 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright 2024 Linaro Ltd.
++ *
++ * Derived from Linux counterpart driver
++ */
++
++#include <asm/io.h>
++#include <clk.h>
++#include <dm.h>
++#include <dm/device_compat.h>
++#include <generic-phy.h>
 +#include <linux/bitfield.h>
-+#include <linux/delay.h>
++#include <linux/clk-provider.h>
 +#include <linux/iopoll.h>
- #include <power-domain-uclass.h>
- 
- #include <dt-bindings/power/imx8mp-power.h>
-@@ -18,6 +24,15 @@
- #define  USB_CLOCK_MODULE_EN	BIT(1)
- #define  PCIE_PHY_APB_RST	BIT(4)
- #define  PCIE_PHY_INIT_RST	BIT(5)
-+#define GPR_REG1		0x4
-+#define  PLL_LOCK		BIT(13)
-+#define GPR_REG2		0x8
-+#define  P_PLL_MASK		GENMASK(5, 0)
-+#define  M_PLL_MASK		GENMASK(15, 6)
-+#define  S_PLL_MASK		GENMASK(18, 16)
-+#define GPR_REG3		0xc
-+#define  PLL_CKE		BIT(17)
-+#define  PLL_RST		BIT(31)
- 
- struct imx8mp_hsiomix_priv {
- 	void __iomem *base;
-@@ -137,6 +152,68 @@ static int imx8mp_hsiomix_of_xlate(struct power_domain *power_domain,
- 	return 0;
- }
- 
-+static int hsio_pll_clk_enable(struct clk *clk)
++#include <syscon.h>
++#include <regmap.h>
++#include <reset.h>
++
++#include <dt-bindings/phy/phy-imx8-pcie.h>
++
++#define IMX8MM_PCIE_PHY_CMN_REG061	0x184
++#define  ANA_PLL_CLK_OUT_TO_EXT_IO_EN	BIT(0)
++#define IMX8MM_PCIE_PHY_CMN_REG062	0x188
++#define  ANA_PLL_CLK_OUT_TO_EXT_IO_SEL	BIT(3)
++#define IMX8MM_PCIE_PHY_CMN_REG063	0x18C
++#define  AUX_PLL_REFCLK_SEL_SYS_PLL	GENMASK(7, 6)
++#define IMX8MM_PCIE_PHY_CMN_REG064	0x190
++#define  ANA_AUX_RX_TX_SEL_TX		BIT(7)
++#define  ANA_AUX_RX_TERM_GND_EN		BIT(3)
++#define  ANA_AUX_TX_TERM		BIT(2)
++#define IMX8MM_PCIE_PHY_CMN_REG065	0x194
++#define  ANA_AUX_RX_TERM		(BIT(7) | BIT(4))
++#define  ANA_AUX_TX_LVL			GENMASK(3, 0)
++#define IMX8MM_PCIE_PHY_CMN_REG075	0x1D4
++#define  ANA_PLL_DONE			0x3
++#define PCIE_PHY_TRSV_REG5		0x414
++#define PCIE_PHY_TRSV_REG6		0x418
++
++#define IMX8MM_GPR_PCIE_REF_CLK_SEL	GENMASK(25, 24)
++#define IMX8MM_GPR_PCIE_REF_CLK_PLL	FIELD_PREP(IMX8MM_GPR_PCIE_REF_CLK_SEL, 0x3)
++#define IMX8MM_GPR_PCIE_REF_CLK_EXT	FIELD_PREP(IMX8MM_GPR_PCIE_REF_CLK_SEL, 0x2)
++#define IMX8MM_GPR_PCIE_AUX_EN		BIT(19)
++#define IMX8MM_GPR_PCIE_CMN_RST		BIT(18)
++#define IMX8MM_GPR_PCIE_POWER_OFF	BIT(17)
++#define IMX8MM_GPR_PCIE_SSC_EN		BIT(16)
++#define IMX8MM_GPR_PCIE_AUX_EN_OVERRIDE	BIT(9)
++
++#define IOMUXC_GPR14_OFFSET		0x38
++
++enum imx8_pcie_phy_type {
++	IMX8MM,
++	IMX8MP,
++};
++
++struct imx8_pcie_phy_drvdata {
++	const	char			*gpr;
++	enum	imx8_pcie_phy_type	variant;
++};
++
++struct imx8_pcie_phy {
++	ulong			base;
++	struct clk		hsio_clk;
++	struct regmap		*iomuxc_gpr;
++	struct reset_ctl	perst;
++	struct reset_ctl	reset;
++	u32			refclk_pad_mode;
++	u32			tx_deemph_gen1;
++	u32			tx_deemph_gen2;
++	bool			clkreq_unused;
++	const struct imx8_pcie_phy_drvdata	*drvdata;
++};
++
++static int imx8_pcie_phy_power_on(struct phy *phy)
 +{
-+	void *base = (void *)dev_get_driver_data(clk->dev);
-+	u32 val;
 +	int ret;
++	u32 val, pad_mode;
++	struct imx8_pcie_phy *imx8_phy = dev_get_priv(phy->dev);
 +
-+	/* Setup HSIO PLL */
-+	clrsetbits_le32(base + GPR_REG2,
-+			P_PLL_MASK | M_PLL_MASK | S_PLL_MASK,
-+			FIELD_PREP(P_PLL_MASK, 12) |
-+			FIELD_PREP(M_PLL_MASK, 800) |
-+			FIELD_PREP(S_PLL_MASK, 4));
++	pad_mode = imx8_phy->refclk_pad_mode;
++	switch (imx8_phy->drvdata->variant) {
++	case IMX8MM:
++		reset_assert(&imx8_phy->reset);
 +
-+	/* de-assert PLL reset */
-+	setbits_le32(base + GPR_REG3, PLL_RST);
++		/* Tune PHY de-emphasis setting to pass PCIe compliance. */
++		if (imx8_phy->tx_deemph_gen1)
++			writel(imx8_phy->tx_deemph_gen1,
++			       imx8_phy->base + PCIE_PHY_TRSV_REG5);
++		if (imx8_phy->tx_deemph_gen2)
++			writel(imx8_phy->tx_deemph_gen2,
++			       imx8_phy->base + PCIE_PHY_TRSV_REG6);
++		break;
++	case IMX8MP: /* Do nothing. */
++		break;
++	}
 +
-+	/* enable PLL */
-+	setbits_le32(base + GPR_REG3, PLL_CKE);
++	if (pad_mode == IMX8_PCIE_REFCLK_PAD_INPUT ||
++	    pad_mode == IMX8_PCIE_REFCLK_PAD_UNUSED) {
++		/* Configure the pad as input */
++		val = readl(imx8_phy->base + IMX8MM_PCIE_PHY_CMN_REG061);
++		writel(val & ~ANA_PLL_CLK_OUT_TO_EXT_IO_EN,
++		       imx8_phy->base + IMX8MM_PCIE_PHY_CMN_REG061);
++	} else {
++		/* Configure the PHY to output the refclock via pad */
++		writel(ANA_PLL_CLK_OUT_TO_EXT_IO_EN,
++		       imx8_phy->base + IMX8MM_PCIE_PHY_CMN_REG061);
++	}
 +
-+	/* Check if PLL is locked */
-+	ret = readl_poll_sleep_timeout(base + GPR_REG1, val,
-+				       val & PLL_LOCK, 10, 100000);
-+	if (ret)
-+		dev_err(clk->dev, "failed to lock HSIO PLL\n");
++	if (pad_mode == IMX8_PCIE_REFCLK_PAD_OUTPUT ||
++	    pad_mode == IMX8_PCIE_REFCLK_PAD_UNUSED) {
++		/* Source clock from SoC internal PLL */
++		writel(ANA_PLL_CLK_OUT_TO_EXT_IO_SEL,
++		       imx8_phy->base + IMX8MM_PCIE_PHY_CMN_REG062);
++		writel(AUX_PLL_REFCLK_SEL_SYS_PLL,
++		       imx8_phy->base + IMX8MM_PCIE_PHY_CMN_REG063);
++		val = ANA_AUX_RX_TX_SEL_TX | ANA_AUX_TX_TERM;
++		writel(val | ANA_AUX_RX_TERM_GND_EN,
++		       imx8_phy->base + IMX8MM_PCIE_PHY_CMN_REG064);
++		writel(ANA_AUX_RX_TERM | ANA_AUX_TX_LVL,
++		       imx8_phy->base + IMX8MM_PCIE_PHY_CMN_REG065);
++	}
 +
++	/* Set AUX_EN_OVERRIDE 1'b0, when the CLKREQ# isn't hooked */
++	regmap_update_bits(imx8_phy->iomuxc_gpr, IOMUXC_GPR14_OFFSET,
++			   IMX8MM_GPR_PCIE_AUX_EN_OVERRIDE,
++			   imx8_phy->clkreq_unused ?
++			   0 : IMX8MM_GPR_PCIE_AUX_EN_OVERRIDE);
++	regmap_update_bits(imx8_phy->iomuxc_gpr, IOMUXC_GPR14_OFFSET,
++			   IMX8MM_GPR_PCIE_AUX_EN,
++			   IMX8MM_GPR_PCIE_AUX_EN);
++	regmap_update_bits(imx8_phy->iomuxc_gpr, IOMUXC_GPR14_OFFSET,
++			   IMX8MM_GPR_PCIE_POWER_OFF, 0);
++	regmap_update_bits(imx8_phy->iomuxc_gpr, IOMUXC_GPR14_OFFSET,
++			   IMX8MM_GPR_PCIE_SSC_EN, 0);
++
++	regmap_update_bits(imx8_phy->iomuxc_gpr, IOMUXC_GPR14_OFFSET,
++			   IMX8MM_GPR_PCIE_REF_CLK_SEL,
++			   pad_mode == IMX8_PCIE_REFCLK_PAD_INPUT ?
++			   IMX8MM_GPR_PCIE_REF_CLK_EXT :
++			   IMX8MM_GPR_PCIE_REF_CLK_PLL);
++	udelay(200);
++
++	/* Do the PHY common block reset */
++	regmap_update_bits(imx8_phy->iomuxc_gpr, IOMUXC_GPR14_OFFSET,
++			   IMX8MM_GPR_PCIE_CMN_RST,
++			   IMX8MM_GPR_PCIE_CMN_RST);
++
++	switch (imx8_phy->drvdata->variant) {
++	case IMX8MP:
++		reset_deassert(&imx8_phy->perst);
++		fallthrough;
++	case IMX8MM:
++		reset_deassert(&imx8_phy->reset);
++		udelay(500);
++		break;
++	}
++
++	/* Polling to check the phy is ready or not. */
++	ret = readl_poll_timeout(imx8_phy->base + IMX8MM_PCIE_PHY_CMN_REG075,
++				 val, val == ANA_PLL_DONE, 20000);
 +	return ret;
 +}
 +
-+static int hsio_pll_clk_disable(struct clk *clk)
++static int imx8_pcie_phy_init(struct phy *phy)
 +{
-+	void *base = (void *)dev_get_driver_data(clk->dev);
++	struct imx8_pcie_phy *imx8_phy = dev_get_priv(phy->dev);
 +
-+	clrbits_le32(base + GPR_REG3, PLL_CKE);
-+	clrbits_le32(base + GPR_REG3, PLL_RST);
++	return clk_enable(&imx8_phy->hsio_clk);
++}
++
++static int imx8_pcie_phy_exit(struct phy *phy)
++{
++	struct imx8_pcie_phy *imx8_phy = dev_get_priv(phy->dev);
++
++	return clk_disable(&imx8_phy->hsio_clk);
++}
++
++static const struct phy_ops imx8_pcie_phy_ops = {
++	.init		= imx8_pcie_phy_init,
++	.exit		= imx8_pcie_phy_exit,
++	.power_on	= imx8_pcie_phy_power_on,
++};
++
++static const struct imx8_pcie_phy_drvdata imx8mm_drvdata = {
++	.gpr = "fsl,imx8mm-iomuxc-gpr",
++	.variant = IMX8MM,
++};
++
++static const struct imx8_pcie_phy_drvdata imx8mp_drvdata = {
++	.gpr = "fsl,imx8mp-iomuxc-gpr",
++	.variant = IMX8MP,
++};
++
++static const struct udevice_id imx8_pcie_phy_of_match[] = {
++	{.compatible = "fsl,imx8mm-pcie-phy", .data = (ulong)&imx8mm_drvdata, },
++	{.compatible = "fsl,imx8mp-pcie-phy", .data = (ulong)&imx8mp_drvdata, },
++	{ },
++};
++
++static int imx8_pcie_phy_probe(struct udevice *dev)
++{
++	struct imx8_pcie_phy *imx8_phy = dev_get_priv(dev);
++	ofnode gpr;
++	int ret = 0;
++
++	imx8_phy->drvdata = (void *)dev_get_driver_data(dev);
++	imx8_phy->base = dev_read_addr(dev);
++	if (!imx8_phy->base)
++		return -EINVAL;
++
++	/* get PHY refclk pad mode */
++	dev_read_u32(dev, "fsl,refclk-pad-mode", &imx8_phy->refclk_pad_mode);
++
++	if (dev_read_u32(dev, "fsl,tx-deemph-gen1", &imx8_phy->tx_deemph_gen1))
++		imx8_phy->tx_deemph_gen1 = 0;
++
++	if (dev_read_u32(dev, "fsl,tx-deemph-gen2", &imx8_phy->tx_deemph_gen2))
++		imx8_phy->tx_deemph_gen2 = 0;
++
++	if (dev_read_bool(dev, "fsl,clkreq-unsupported"))
++		imx8_phy->clkreq_unused = true;
++	else
++		imx8_phy->clkreq_unused = false;
++
++	/* Grab GPR config register range */
++	gpr = ofnode_by_compatible(ofnode_null(), imx8_phy->drvdata->gpr);
++	if (ofnode_equal(gpr, ofnode_null())) {
++		dev_err(dev, "unable to find GPR node\n");
++		return -ENODEV;
++	}
++
++	imx8_phy->iomuxc_gpr = syscon_node_to_regmap(gpr);
++	if (IS_ERR(imx8_phy->iomuxc_gpr)) {
++		dev_err(dev, "unable to find iomuxc registers\n");
++		return PTR_ERR(imx8_phy->iomuxc_gpr);
++	}
++
++	ret = clk_get_by_name(dev, "ref", &imx8_phy->hsio_clk);
++	if (ret) {
++		dev_err(dev, "Failed to get PCIEPHY ref clock\n");
++		return ret;
++	}
++
++	ret = reset_get_by_name(dev, "pciephy", &imx8_phy->reset);
++	if (ret) {
++		dev_err(dev, "Failed to get PCIEPHY reset control\n");
++		return ret;
++	}
++
++	if (imx8_phy->drvdata->variant == IMX8MP) {
++		ret = reset_get_by_name(dev, "perst", &imx8_phy->perst);
++		if (ret) {
++			dev_err(dev,
++				"Failed to get PCIEPHY PHY PERST control\n");
++			return ret;
++		}
++	}
 +
 +	return 0;
 +}
 +
-+static const struct clk_ops hsio_pll_clk_ops = {
-+	.enable = hsio_pll_clk_enable,
-+	.disable = hsio_pll_clk_disable,
++U_BOOT_DRIVER(nxp_imx8_pcie_phy) = {
++	.name = "nxp_imx8_pcie_phy",
++	.id = UCLASS_PHY,
++	.of_match = imx8_pcie_phy_of_match,
++	.probe = imx8_pcie_phy_probe,
++	.ops = &imx8_pcie_phy_ops,
++	.priv_auto	= sizeof(struct imx8_pcie_phy),
 +};
-+
-+U_BOOT_DRIVER(hsio_pll) = {
-+	.name = "hsio-pll",
-+	.id = UCLASS_CLK,
-+	.ops = &hsio_pll_clk_ops,
-+};
-+
-+int imx8mp_hsiomix_bind(struct udevice *dev)
-+{
-+	struct driver *drv;
-+
-+	drv = lists_driver_lookup_name("hsio-pll");
-+	if (!drv)
-+		return -ENOENT;
-+
-+	return device_bind_with_driver_data(dev, drv, "hsio-pll",
-+					    (ulong)dev_read_addr_ptr(dev),
-+					    dev_ofnode(dev), NULL);
-+}
-+
- static int imx8mp_hsiomix_probe(struct udevice *dev)
- {
- 	struct imx8mp_hsiomix_priv *priv = dev_get_priv(dev);
-@@ -207,6 +284,7 @@ U_BOOT_DRIVER(imx8mp_hsiomix) = {
- 	.id		= UCLASS_POWER_DOMAIN,
- 	.of_match	= imx8mp_hsiomix_ids,
- 	.probe		= imx8mp_hsiomix_probe,
-+	.bind		= imx8mp_hsiomix_bind,
- 	.priv_auto	= sizeof(struct imx8mp_hsiomix_priv),
- 	.ops		= &imx8mp_hsiomix_ops,
- };
 -- 
 2.34.1
 
