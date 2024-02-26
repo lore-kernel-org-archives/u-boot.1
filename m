@@ -4,47 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A515FC48BF6
-	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 08:55:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A11A1C54E49
+	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 08:55:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 19F0D87EC6;
+	by phobos.denx.de (Postfix) with ESMTP id 76A7C87EE4;
 	Mon, 26 Feb 2024 09:54:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1708937686;
-	bh=IBC0kLw/QLSJXTTOvHMaDJ17HTBzmSx+RCjwmJHNES8=;
+	bh=As5R0IcDeBLX8erDruc8JHYOkCzHy61LRZi7tEWHfqA=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=dMnvipyEHBsEc95X9GRL4ILPYdNemO03M8tITureQWp9va1jROHnEAemqMvZ4UBqr
-	 RidEAJTDBHOLEvNLjezCfg6cy+bneoyI902NXkJdtDpNphjZwF2PAoATkv9BwH59QO
-	 uP5ohm0Tr7RoJBS1Cb473x/XhzWUfAhWltGaXkv9URfW1DwY1A/KA+jEJbnOUu62aR
-	 z5rwDE3dCu5sNcuZtQ47TDsT88PFE7CNxP+JEQTVySNXc2N7Kt60uzqOeobp0vkmGH
-	 m1JAQ+1oQZiCtQzVaMXiFella9tO/jOc8yvdklyFslimL1Ol4ocB5P03knPWOoAFj8
-	 DTcGu8fsF6dwg==
+	b=kVpL2rZiJ9SZR8NF5QlO3t/bczvc0+fYtrBgUnqE+vx3Z6muBJIsQuBvPbEl+HyT/
+	 qnAhQy0kb4AnLCJon+Z+uPJUnXo5pkEGPci07syv4VjlaIjsCauLzBrkUe35CbxAtU
+	 Ni2GoFQ9L47Q45pEjjeLKsaNFWk2oo58z6tp+naPjGl2qEHDyotWfqRrlZbPTT5axs
+	 5PNjGJRRV7AswFOCo2DT8/1nQirJUOddVo8Wce+LGpVq7jfXARgXG0qCKVDzRsv36k
+	 xVsRB9QNo9RUCFhtszQAGo85NHvkBSGapkWBPIOxBjdfi6YVb32Byewm+XsBq+xOLd
+	 Db755WlQqYeOg==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id A112987EC4;
- Mon, 26 Feb 2024 09:54:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id 5C99287EDA;
+ Mon, 26 Feb 2024 09:54:43 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1708937682;
- bh=IBC0kLw/QLSJXTTOvHMaDJ17HTBzmSx+RCjwmJHNES8=;
+ s=phobos-20191101; t=1708937684;
+ bh=As5R0IcDeBLX8erDruc8JHYOkCzHy61LRZi7tEWHfqA=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=BT4+rPwYhQuvR59bj1YxUDmndTIVjyAIV16XETeuF3Sxdi7KMh3kJ+JtqoZna4ejO
- 17pQFSLjQjdMUe76+wuRr9E9xFxM6F1vSE+p0vsrCfgncihNI5KZcFbekoc+UxVRmp
- Y1Lswja114AOJ5r0VC/W/ZUCA/ilEXA3xuk/a3wt2HePfB+MAQMG/qABDb1CQsZKN6
- MWul7/X5zJ1ikltNJCmxHWV6uar++Ts1q4+Hpo3IgRWjjliyi9aWqya2pFnhxTor2K
- fr+tRRmThoIs6ma4p9Hu80Xh7UYelnOZ83duuf8GGsvrd/wK8OWYWrnfJqBQIEzP3h
- lAST2kk0CPhKw==
-Message-ID: <609581c7-d221-4eff-862b-6f172ba9d4e8@denx.de>
-Date: Mon, 26 Feb 2024 09:42:06 +0100
+ b=V63OhuLE83qbnihg1lXhi08/b8fFUjG7Hcau5+UvTG3QMwd6p10P9tRk1DgQ8GmxU
+ /tO8FO0ohSKvGlbw80IgqtWg+n9CcAzkMfUVyRM1+CKBWBGA+YVerw6W+2603yq9IT
+ UHA1rSH/nMOOBK0fwfP3NavAChj4ase5DW5qu3udXBckFBbqyqsRFT9xgEVhfwXaBq
+ Kj22rPO773+U/sqnt6f6p1ijcCjbv0yvYSBdVVHN2h8M7xNMVDRgqeP+XrGV1N6bwv
+ Vi37jRDM7OrjBkE2DzgIEjcuuS3MZdJXu0N9RcKRjRhvZl5gGCjoeQwcZk5YniE6Ua
+ IEIRMsfeGH8Rg==
+Message-ID: <3f5cf71b-ef9a-4e8b-99c2-cb51d342db7f@denx.de>
+Date: Mon, 26 Feb 2024 09:44:02 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 5/8] phy: phy-imx8m-pcie: Add support for i.MX8M{M/P}
- PCIe PHY
+Subject: Re: [PATCH v2 6/8] pci: Add DW PCIe controller support for iMX8MP SoC
 Content-Language: en-US
 To: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de
 Cc: marcel.ziswiler@toradex.com, francesco@dolcini.it, trini@konsulko.com,
@@ -54,9 +53,9 @@ Cc: marcel.ziswiler@toradex.com, francesco@dolcini.it, trini@konsulko.com,
  fathi.boudra@linaro.org, remi.duraffort@linaro.org,
  daniel.thompson@linaro.org
 References: <20240226080433.3307154-1-sumit.garg@linaro.org>
- <20240226080433.3307154-6-sumit.garg@linaro.org>
+ <20240226080433.3307154-7-sumit.garg@linaro.org>
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240226080433.3307154-6-sumit.garg@linaro.org>
+In-Reply-To: <20240226080433.3307154-7-sumit.garg@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -76,66 +75,73 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 2/26/24 9:04 AM, Sumit Garg wrote:
-> Add initial support for i.MX8M{M/P} PCIe PHY. On i.MX8M{M/P} SoCs PCIe
-> PHY initialization moved to this standalone PHY driver.
-> 
-> Inspired from counterpart Linux kernel v6.8-rc3 driver:
-> drivers/phy/freescale/phy-fsl-imx8m-pcie.c.
+> pcie_imx doesn't seem to share any useful code for iMX8 SoC and it is
+> tied to quite old port of pcie_designware driver from Linux which
+> suffices only iMX6 specific needs.
 
-Commit ID , see previous comments.
+It is probably hand-rolled, but it does suck, that's true.
+
+> But currently we have the common DWC specific bits which alligns pretty
+> well with DW PCIe controller on iMX8MP SoC. So lets reuse those common
+> bits instead as a new driver for iMX8 SoCs. It should be fairly easy to
+> add support for other iMX8 variants to this driver.
+> 
+> iMX8MP SoC also comes up with standalone PCIe PHY support, so hence we
+> can reuse the generic PHY infrastructure to power on PCIe PHY.
 
 [...]
 
-> +static int imx8_pcie_phy_probe(struct udevice *dev)
+> +static int pcie_dw_imx_of_to_plat(struct udevice *dev)
 > +{
-> +	struct imx8_pcie_phy *imx8_phy = dev_get_priv(dev);
+> +	struct pcie_dw_imx *priv = dev_get_priv(dev);
 > +	ofnode gpr;
-> +	int ret = 0;
+> +	int ret;
 > +
-> +	imx8_phy->drvdata = (void *)dev_get_driver_data(dev);
-> +	imx8_phy->base = dev_read_addr(dev);
-> +	if (!imx8_phy->base)
+> +	/* Get the controller base address */
+> +	priv->dw.dbi_base = (void *)dev_read_addr_name(dev, "dbi");
+> +	if ((fdt_addr_t)priv->dw.dbi_base == FDT_ADDR_T_NONE) {
+> +		dev_err(dev, "failed to get dbi_base address\n");
 > +		return -EINVAL;
+> +	}
 > +
-> +	/* get PHY refclk pad mode */
-> +	dev_read_u32(dev, "fsl,refclk-pad-mode", &imx8_phy->refclk_pad_mode);
+> +	/* Get the config space base address and size */
+> +	priv->dw.cfg_base = (void *)dev_read_addr_size_name(dev, "config",
+> +							    &priv->dw.cfg_size);
+> +	if ((fdt_addr_t)priv->dw.cfg_base == FDT_ADDR_T_NONE) {
+> +		dev_err(dev, "failed to get cfg_base address\n");
+> +		return -EINVAL;
+> +	}
 > +
-> +	if (dev_read_u32(dev, "fsl,tx-deemph-gen1", &imx8_phy->tx_deemph_gen1))
-> +		imx8_phy->tx_deemph_gen1 = 0;
-
-Use dev_read_u32_default() and you won't need the if (...)
-
-> +	if (dev_read_u32(dev, "fsl,tx-deemph-gen2", &imx8_phy->tx_deemph_gen2))
-> +		imx8_phy->tx_deemph_gen2 = 0;
+> +	ret = clk_get_bulk(dev, &priv->clks);
+> +	if (ret) {
+> +		dev_err(dev, "failed to get PCIe clks\n");
+> +		return ret;
+> +	}
 > +
-> +	if (dev_read_bool(dev, "fsl,clkreq-unsupported"))
-> +		imx8_phy->clkreq_unused = true;
-> +	else
-> +		imx8_phy->clkreq_unused = false;
+> +	ret = reset_get_by_name(dev, "apps", &priv->apps_reset);
+> +	if (ret) {
+> +		dev_err(dev,
+> +			"Failed to get PCIe apps reset control\n");
+> +		return ret;
+> +	}
 > +
-> +	/* Grab GPR config register range */
-> +	gpr = ofnode_by_compatible(ofnode_null(), imx8_phy->drvdata->gpr);
+> +	ret = gpio_request_by_name(dev, "reset-gpio", 0, &priv->reset_gpio,
+> +				   (GPIOD_IS_OUT | GPIOD_IS_OUT_ACTIVE));
+> +	if (ret) {
+> +		dev_err(dev, "unable to get reset-gpio\n");
+> +		return ret;
+> +	}
+> +
+> +	ret = generic_phy_get_by_name(dev, "pcie-phy", &priv->phy);
+> +	if (ret) {
+> +		dev_err(dev, "failed to get pcie phy\n");
+> +		return ret;
+> +	}
+> +
+> +	gpr = ofnode_by_compatible(ofnode_null(), "fsl,imx8mp-iomuxc-gpr");
 > +	if (ofnode_equal(gpr, ofnode_null())) {
 > +		dev_err(dev, "unable to find GPR node\n");
 > +		return -ENODEV;
 > +	}
-> +
-> +	imx8_phy->iomuxc_gpr = syscon_node_to_regmap(gpr);
-> +	if (IS_ERR(imx8_phy->iomuxc_gpr)) {
-> +		dev_err(dev, "unable to find iomuxc registers\n");
-> +		return PTR_ERR(imx8_phy->iomuxc_gpr);
-> +	}
-> +
-> +	ret = clk_get_by_name(dev, "ref", &imx8_phy->hsio_clk);
-> +	if (ret) {
-> +		dev_err(dev, "Failed to get PCIEPHY ref clock\n");
-> +		return ret;
-> +	}
-> +
-> +	ret = reset_get_by_name(dev, "pciephy", &imx8_phy->reset);
-> +	if (ret) {
-> +		dev_err(dev, "Failed to get PCIEPHY reset control\n");
-> +		return ret;
-> +	}
 
-Some clk_put() and co. fail path is missing here. Also .remove is missing .
+You likely need a fail path here too, to undo allocation and co.
