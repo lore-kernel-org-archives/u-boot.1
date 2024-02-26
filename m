@@ -4,65 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B330C48BF6
-	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 08:05:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C98BAC5478C
+	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 08:05:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C60C87D74;
-	Mon, 26 Feb 2024 09:05:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0520C87EA9;
+	Mon, 26 Feb 2024 09:05:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qxvvIzDj";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="F0CeZ17y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8456B87E93; Mon, 26 Feb 2024 09:05:21 +0100 (CET)
-Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
- [IPv6:2607:f8b0:4864:20::435])
+ id 47E0887EA9; Mon, 26 Feb 2024 09:05:25 +0100 (CET)
+Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
+ [IPv6:2607:f8b0:4864:20::229])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7013B87E95
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 09:05:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BF85E87E9A
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 09:05:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-6e08dd0fa0bso2361291b3a.1
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 00:05:13 -0800 (PST)
+Received: by mail-oi1-x229.google.com with SMTP id
+ 5614622812f47-3c17ac08a38so1099257b6e.1
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 00:05:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708934711; x=1709539511; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ooCHpnNh9uZ8qKAbHOrwEt/rKg4sWi4OjU2q69+ql/0=;
- b=qxvvIzDjQSeCxHvw6YpHGTP7u6SfzJ7iNIT1TqnSSHvnaOZLlVS0Ct7ejCns7aOnWq
- c4JY5x7LFKuPxPbZaxgLI86eTvdndUpdYk6RAgBzmooxq0ocmsdBp0jnKneSqMQxUTbK
- hR+N/wVvHUG2rmFx/RgaVbvL48cABGNwf6W1aVY63CVDfZJMiXT84zaeYdnxcyY41RzL
- ztVZeSZA2dehLBqG1aFrXeq5Zkdc0PEu6KcVs6OydCsoTeoR20DiOZByIejAGSWyIHpb
- ub8l9KRtW/49CR7+GlfZhYCZXpdhJSOEaTmppWC1Qa8XbRCKSae+s1qI+GgmTDbfxLPN
- H+uw==
+ d=linaro.org; s=google; t=1708934717; x=1709539517; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=NS1imNy5cMRkJnAu/Oqwwu6sp0eqePeuXBM/242QSKI=;
+ b=F0CeZ17y3dFZEjSL0TYWr4Vzb3heJD8Ad0TnI7rNypB13LM3aJh9+HEDLXGwOv6ve+
+ 7JdGbQiDoknbKBPlaqNAqIceXDgeNcteq3dPxWy5b4A5F95qv+/JNoJ/qg6mr54h/Jdh
+ 0XdudUdH8bxGI+prc8HzyZuDIIbjwzgXZ0i66/dhpRgot6ytPoiEPbiOrdA6pO/xkzGC
+ R6STP/5I7GR0rUOBw0eICFr75b4BTRKGXkfF5LuxunukPlsLz3oFsRwWf9y9ysiO6kxC
+ W/u2uGzncIjx5dGOyCrX6+coXdX97H8uFK4+0jQ6B2maEhNFiHFxHTpt1b23+/m0+2Tp
+ lPQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708934711; x=1709539511;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ooCHpnNh9uZ8qKAbHOrwEt/rKg4sWi4OjU2q69+ql/0=;
- b=pAS7f4KWwL4ra89NMIi4G6P1RPRkWhjl4/PYsZhBgfjzrH+po168bYKTnuZB57lmaE
- Ssz6OIV/in1v2e6jAmuE24Gh35uh6FgqCY/ETjpcYStJ6KaQMUitI0I4VbDDRQaUCpAX
- ms4A7L9RgaVS8EMOoNH1KTLcInFDBO//EwOpWPmbnTAQFWrpTL1ZtDsZi499/2VFS5F7
- ZEnZ38sYZeSfjIoo7frFrB9sJ/LZgeKO38uZ5BNFE2ely5tCXf85y30ycbMV/2Al8x2G
- aFrhzBMVdEFYniGLVxrbPIGoIzvIIRmf08h42va912XJGg2qF69Y/hI71cQfKuAhxknR
- W7IA==
-X-Gm-Message-State: AOJu0Yw78xSxwa1lkrXl8B4gn21eUfiE29JARwqI9NA7DuJ83g0JOIql
- zgENYxPoc/GxQzZsfGc+YbVn5PqPY8vPI0Fw8wyGvIQkmNxF5DG9X5Qi4aruxEkLmb4hJ5FOkPd
- G
-X-Google-Smtp-Source: AGHT+IGi7qHbMvW3I6Iw5RUVLo7xmft+iw2KLLn6Y+xnN9FmpFRZdPN2L1c9KAXdFtT9UL/FhtAmaQ==
-X-Received: by 2002:a05:6a20:c888:b0:19e:cbe9:63b with SMTP id
- hb8-20020a056a20c88800b0019ecbe9063bmr7296283pzb.3.1708934711347; 
- Mon, 26 Feb 2024 00:05:11 -0800 (PST)
+ d=1e100.net; s=20230601; t=1708934717; x=1709539517;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=NS1imNy5cMRkJnAu/Oqwwu6sp0eqePeuXBM/242QSKI=;
+ b=dLoDy4fvXfny2CagNzAUI8+N4CVzrIFYoOXe+6GCaCxrobFpbkF/idwE8Ng0rEKJMJ
+ L9/8Oq3HUDVdcVsMUqCm5muBqN3rKMRvSzELaYIpKf5GOISDT6Y4Tu7sDz3bwzYUKuDD
+ Fd6N8WqUFVCyrZidakipth3vF6p5EfXRlPsnCH+rd7IisBwWELfP/s3s8jQeYF73AnPO
+ go5kExn2GKtLmI+6ZeiH0KDb1uI0byZpUErW2eHp//q2FUzB/HEaME067LptLORDXg4i
+ H3X4tsqf0fQvgcFCs+FpW/p20G3E/+i/5+k8TN8hTjOEKI3JTy1TO1qoyYufGpdCUlUQ
+ VgRw==
+X-Gm-Message-State: AOJu0YyN3GVRS0XdcnmOmPFbzfglh5ZUohRe0MvjL1FdMBDKLD8vniP1
+ bFkbKf3nzj8Pk3exsAVrNEzPZFGygr8y84skK54xSebpJFbjXvKNvuPkClT48SIHWNTU5nCgh/8
+ i
+X-Google-Smtp-Source: AGHT+IEfiIFXxTGkcvOtHb7BeaUvRbVG4ezy6HBTAshTwJ4DPYs85IwNh+swpYhKCx+57tfHlPBHAg==
+X-Received: by 2002:a05:6808:d54:b0:3c1:9b2b:b592 with SMTP id
+ w20-20020a0568080d5400b003c19b2bb592mr3868372oik.22.1708934717190; 
+ Mon, 26 Feb 2024 00:05:17 -0800 (PST)
 Received: from sumit-X1.. ([223.178.208.32]) by smtp.gmail.com with ESMTPSA id
- k2-20020aa788c2000000b006e13a88d52esm3392842pff.61.2024.02.26.00.05.05
+ k2-20020aa788c2000000b006e13a88d52esm3392842pff.61.2024.02.26.00.05.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Feb 2024 00:05:11 -0800 (PST)
+ Mon, 26 Feb 2024 00:05:16 -0800 (PST)
 From: Sumit Garg <sumit.garg@linaro.org>
 To: u-boot@lists.denx.de
 Cc: marcel.ziswiler@toradex.com, francesco@dolcini.it, trini@konsulko.com,
@@ -71,10 +72,12 @@ Cc: marcel.ziswiler@toradex.com, francesco@dolcini.it, trini@konsulko.com,
  aford173@gmail.com, marex@denx.de, ilias.apalodimas@linaro.org,
  sahaj.sarup@linaro.org, fathi.boudra@linaro.org, remi.duraffort@linaro.org,
  daniel.thompson@linaro.org, Sumit Garg <sumit.garg@linaro.org>
-Subject: [PATCH v2 0/8] imx8mp: Enable PCIe/NVMe support
-Date: Mon, 26 Feb 2024 13:34:25 +0530
-Message-Id: <20240226080433.3307154-1-sumit.garg@linaro.org>
+Subject: [PATCH v2 1/8] clk: imx8mp: Add support for PCIe clocks
+Date: Mon, 26 Feb 2024 13:34:26 +0530
+Message-Id: <20240226080433.3307154-2-sumit.garg@linaro.org>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240226080433.3307154-1-sumit.garg@linaro.org>
+References: <20240226080433.3307154-1-sumit.garg@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -93,77 +96,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-pcie_imx doesn't seem to share any useful code for iMX8MP SoC and it is
-rather tied to quite old port of pcie_designware driver from Linux which
-suffices only iMX6 specific needs.
+Pre-requisite to enable PCIe support on iMX8MP SoC.
 
-But currently we have the common DWC specific bits which alligns pretty
-well with DW PCIe controller on iMX8MP SoC. So lets reuse those common
-bits instead as a new driver for iMX8 SoCs. It should be fairly easy to
-add support for other iMX8 variants to this driver.
+Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+---
+ drivers/clk/imx/clk-imx8mp.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-iMX8MP SoC also comes up with standalone PCIe PHY support, so hence we
-can reuse the generic PHY infrastructure to power on PCIe PHY.
-
-Patch #1: Adds PCIe clocks support.
-Patch #2: Adds i.MX8MP reset controller support.
-Patch #3: Extend i.MX8MP power domain driver with PCIe support
-Patch #4: Expose high performance PLL clock required for PCIe PHY
-          on verdin board.
-Patch #5: Adds standalone PCIe PHY support for i.MX8MP SoC.
-Patch #6: Adds DW PCIe controller support for iMX8MP SoC.
-Patch #7: Enable PCIe/NVMe support for verdin board.
-
-Testing with this patch-set included:
-
-Verdin iMX8MP # pci enum
-PCIE-0: Link up (Gen1-x1, Bus0)
-Verdin iMX8MP # 
-Verdin iMX8MP # nvme scan
-Verdin iMX8MP # 
-Verdin iMX8MP # nvme info
-Device 0: Vendor: 0x126f Rev: T0828A0  Prod: AA000000000000000720
-            Type: Hard Disk
-            Capacity: 122104.3 MB = 119.2 GB (250069680 x 512)
-Verdin iMX8MP # 
-Verdin iMX8MP # load nvme 0 $loadaddr <file-name>
-
-Changes in v2:
-- Renamed PCIe IMX driver pcie_dw_imx8.c -> pcie_dw_imx.c.
-- Added myself as maintainer for PCIe DWC IMX driver support.
-- Incorporated various code and commit message improvement suggestions
-  from Marek, thanks.
-- Patch#3: Gate PCIe and USB clocks behind corresponding power domain
-  IDs.
-- Patch#4: Expose HSIO PLL clocks as a regular clock driver instead
-  similar to what Linux kernel does.
-- Patch#7: Picked up tags.
-
-Sumit Garg (8):
-  clk: imx8mp: Add support for PCIe clocks
-  reset: imx: Add support for i.MX8MP reset controller
-  imx8mp: power-domain: Add PCIe support
-  imx8mp: power-domain: Expose high performance PLL clock
-  phy: phy-imx8m-pcie: Add support for i.MX8M{M/P} PCIe PHY
-  pci: Add DW PCIe controller support for iMX8MP SoC
-  verdin-imx8mp_defconfig: Enable PCIe/NVMe support
-  MAINTAINERS: Add entry for PCIe DWC IMX driver
-
- MAINTAINERS                           |   6 +
- configs/verdin-imx8mp_defconfig       |   6 +
- drivers/clk/imx/clk-imx8mp.c          |   6 +
- drivers/pci/Kconfig                   |   8 +
- drivers/pci/Makefile                  |   1 +
- drivers/pci/pcie_dw_imx.c             | 314 ++++++++++++++++++++++++++
- drivers/phy/Kconfig                   |   9 +
- drivers/phy/Makefile                  |   1 +
- drivers/phy/phy-imx8m-pcie.c          | 269 ++++++++++++++++++++++
- drivers/power/domain/imx8mp-hsiomix.c | 179 +++++++++++++--
- drivers/reset/reset-imx7.c            | 114 ++++++++++
- 11 files changed, 890 insertions(+), 23 deletions(-)
- create mode 100644 drivers/pci/pcie_dw_imx.c
- create mode 100644 drivers/phy/phy-imx8m-pcie.c
-
+diff --git a/drivers/clk/imx/clk-imx8mp.c b/drivers/clk/imx/clk-imx8mp.c
+index a21a3ce34bbc..7dfc829df2c4 100644
+--- a/drivers/clk/imx/clk-imx8mp.c
++++ b/drivers/clk/imx/clk-imx8mp.c
+@@ -62,6 +62,10 @@ static const char *imx8mp_dram_apb_sels[] = {"clock-osc-24m", "sys_pll2_200m", "
+ 					     "sys_pll1_160m", "sys_pll1_800m", "sys_pll3_out",
+ 					     "sys_pll2_250m", "audio_pll2_out", };
+ 
++static const char * const imx8mp_pcie_aux_sels[] = {"clock-osc-24m", "sys_pll2_200m", "sys_pll2_50m",
++						    "sys_pll3_out", "sys_pll2_100m", "sys_pll1_80m",
++						    "sys_pll1_160m", "sys_pll1_200m", };
++
+ static const char *imx8mp_i2c5_sels[] = {"clock-osc-24m", "sys_pll1_160m", "sys_pll2_50m",
+ 					 "sys_pll3_out", "audio_pll1_out", "video_pll1_out",
+ 					 "audio_pll2_out", "sys_pll1_133m", };
+@@ -272,6 +276,7 @@ static int imx8mp_clk_probe(struct udevice *dev)
+ 
+ 	clk_dm(IMX8MP_CLK_DRAM_ALT, imx8m_clk_composite("dram_alt", imx8mp_dram_alt_sels, base + 0xa000));
+ 	clk_dm(IMX8MP_CLK_DRAM_APB, imx8m_clk_composite_critical("dram_apb", imx8mp_dram_apb_sels, base + 0xa080));
++	clk_dm(IMX8MP_CLK_PCIE_AUX, imx8m_clk_composite("pcie_aux", imx8mp_pcie_aux_sels, base + 0xa400));
+ 	clk_dm(IMX8MP_CLK_I2C5, imx8m_clk_composite("i2c5", imx8mp_i2c5_sels, base + 0xa480));
+ 	clk_dm(IMX8MP_CLK_I2C6, imx8m_clk_composite("i2c6", imx8mp_i2c6_sels, base + 0xa500));
+ 	clk_dm(IMX8MP_CLK_ENET_QOS, imx8m_clk_composite("enet_qos", imx8mp_enet_qos_sels, base + 0xa880));
+@@ -322,6 +327,7 @@ static int imx8mp_clk_probe(struct udevice *dev)
+ 	clk_dm(IMX8MP_CLK_I2C2_ROOT, imx_clk_gate4("i2c2_root_clk", "i2c2", base + 0x4180, 0));
+ 	clk_dm(IMX8MP_CLK_I2C3_ROOT, imx_clk_gate4("i2c3_root_clk", "i2c3", base + 0x4190, 0));
+ 	clk_dm(IMX8MP_CLK_I2C4_ROOT, imx_clk_gate4("i2c4_root_clk", "i2c4", base + 0x41a0, 0));
++	clk_dm(IMX8MP_CLK_PCIE_ROOT, imx_clk_gate4("pcie_root_clk", "pcie_aux", base + 0x4250, 0));
+ 	clk_dm(IMX8MP_CLK_PWM1_ROOT, imx_clk_gate4("pwm1_root_clk", "pwm1", base + 0x4280, 0));
+ 	clk_dm(IMX8MP_CLK_PWM2_ROOT, imx_clk_gate4("pwm2_root_clk", "pwm2", base + 0x4290, 0));
+ 	clk_dm(IMX8MP_CLK_PWM3_ROOT, imx_clk_gate4("pwm3_root_clk", "pwm3", base + 0x42a0, 0));
 -- 
 2.34.1
 
