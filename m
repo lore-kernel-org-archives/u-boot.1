@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAE01C5478C
-	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 17:30:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD367C5478C
+	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 17:30:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 31BAA87FFD;
-	Mon, 26 Feb 2024 18:26:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 947CD88008;
+	Mon, 26 Feb 2024 18:26:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tFOt39ED";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LoUDCb5e";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B54BA87FA7; Mon, 26 Feb 2024 18:26:54 +0100 (CET)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
+ id 97F4788008; Mon, 26 Feb 2024 18:26:56 +0100 (CET)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5385987FAC
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 18:26:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8480F87F6D
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 18:26:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-33de4d3483eso439761f8f.3
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 09:26:40 -0800 (PST)
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-33d2b354c72so2449790f8f.1
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 09:26:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708968400; x=1709573200; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1708968402; x=1709573202; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=1F1DchEk4xMXd8YkeR9HRNWocB7RAiAPE10uy1k/kTQ=;
- b=tFOt39EDwjr73YmKzaXuAhEklHoUWLNNuM65hWQ4vwEaXVEe8LsuYkbj8TiCHYq0Un
- uHzZVsATrgk0Sgq5Ob7IZJKeQ6MjmrqbhNediJEIrhVL6IHTNs1yKAGxDEEGXCkhVcsX
- sHD2UIqv7KDJ4Nfoh+OIixas32IxvwVgerxzlmT2X4pjpYEHaj3QicTtsXTeMPDIts+C
- B23TZWGGje/+GtGhcmvMfWcjkOYj1pS2vVfCat83y2lCLgoSzYxf8ywIcfvi8YBAp6dT
- lrMMf/TJUSzZY+xfVFqtaKBEltcJgddFFUvq2qoZ6fWKbAdnLCfeEO2NmbeUA9XwyJed
- tD5Q==
+ :reply-to; bh=mqX9gKzmz6CkmphhXhiOjQ+DBhpxEkZuaVr/s5JSveI=;
+ b=LoUDCb5eZ35UAip8+kbgRNdV3OlK4szjq3xxcDE1mKzMAbTppbzml0aqx1avNl5wUB
+ YMvyk6B882PEXc8m+rmnKf4g+klo6KfEKBeSzEZ/KBmmFHIWFqwiH3spXJ4MdMHaN+la
+ ovY5gPBN447qE10GJDgWzk2ZZEal7YaUuol95C9mTN9yng0XXfsWjoXDUonpF2VpzlM8
+ LlkcCdnxELB71cE6e4Y6t45HummwLJLk9Ois/MuyvZAi2L/L4sA97H97Npb4+sjdt/ZW
+ mUw1hSitUFv0mUX/koeWoCSXwPg75SnCTjcTb9vEWHGk57cFbyNTqFzIpggtB5vE9Qhe
+ 6xiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708968400; x=1709573200;
+ d=1e100.net; s=20230601; t=1708968402; x=1709573202;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=1F1DchEk4xMXd8YkeR9HRNWocB7RAiAPE10uy1k/kTQ=;
- b=lvUKAgl8LgWeXq6EWxlWH2tc0kL2kS0EGjPiTz5EN0CYYNXUqrE4TGK/u2cIOZCMUZ
- 249Sqs54RFnn7E7zeyMdqu3rmof0XYvvzLWXa5Td61wBIKP6lBS6iZbCja3bk1JILt//
- jQvOKDycxz/rnm7sG/V0saI3H9y20VbRVpUFT/HXMbGurGrnw3GVvG2wjG3omOuuwikf
- YIGRoH0fYBOElZKLvlIFnFSf1Z5rsCbZ0FFIBm7/Evl52+jmC3NIACBlpoxxTIrZLYZY
- xJyjdlFpJ+0qD68SJiRerwZSNUxPpBKwA80KPVdgniJZgRAv3OiybCSGM70rdDkZT8vN
- S3uQ==
+ bh=mqX9gKzmz6CkmphhXhiOjQ+DBhpxEkZuaVr/s5JSveI=;
+ b=r/uQ7Rf+khFYiZQLqqQgBEUfmG7R4EgFRrO4a7Te0driL53XQy8LaT6eRnsT1XlWHo
+ P6rkvov/oXKKrPu/FEhqKi7rdoODI2MoLOJFz4aMM7I2lcoGd2k2U0GGHnD6QM/QS8y3
+ aTfzuj972Unojv4MhvSoMuPFCsdEcRSq3B/AASnCJwsx6pC3vZtSk7VRzzVw1ce4tBtK
+ 16+6l/227WuMmIo8Re+g0Dmb/6kWWJlxG5ewaYrIwBUxOYWmxEyBo+70NzwijIYU1hB1
+ tfhl3Ni3YGe2jlCHPM/tNPXnFNmirUoFt9BoYnTzMoxxutnDzxjIwec1LmgBbBspGlCz
+ YWyg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXYZxfpWX38NEdY/98aFQVgjwzf+sWoUMHiiTSo8H3W9iQzJo3WUmaAanIgCtCl/qkjkqnEU1fqj007l/IBxjvNsp2Dqw==
-X-Gm-Message-State: AOJu0YwVtiZf/PtUOsT2cIzzlEOH+APDYwlyEysZfjMs7IDbeiJJ1cia
- F6mge+0NtCSHeASjbrZKga2icdxxsZWN8oAWPOZkllDqZPjy5n0wRdtPd1YNUD4=
-X-Google-Smtp-Source: AGHT+IHS/NK4chbCHD2/hak+Ws88zDV3C4sQMVjfO1nZccNa1s1AWAEPnxN/PpSB6vdbwTYFDB8DEQ==
-X-Received: by 2002:adf:fd8e:0:b0:33d:7606:808b with SMTP id
- d14-20020adffd8e000000b0033d7606808bmr5169236wrr.68.1708968399866; 
- Mon, 26 Feb 2024 09:26:39 -0800 (PST)
+ AJvYcCVjhgfewR9HmxbE6Q3zQfwUzOIH+4UNxaxRANecXEcv6H3bnc0w6sUJsBJ/rCZriiKvw9xTRA8f+lyhulUf/q5t3EGufg==
+X-Gm-Message-State: AOJu0YylItYGM6CfjdjNSwoW/QpPXaI8FiNXG/hiQAn1F0TqiA9u/Jq8
+ 26vA9+rxoWCNPMHXixo+CC4baTRTpG8XxyzHD9xffD6EGDbq8+y0AZnZ+CpWcPo=
+X-Google-Smtp-Source: AGHT+IFw9TI21oJM/x5KXrK6FS9Rr0GfQJIsnhnR4+277/6a8skcm2mWZ9SUltO9UH1klFRvB4ap3w==
+X-Received: by 2002:adf:f08b:0:b0:33d:2012:a2a7 with SMTP id
+ n11-20020adff08b000000b0033d2012a2a7mr4648510wro.64.1708968402100; 
+ Mon, 26 Feb 2024 09:26:42 -0800 (PST)
 Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- bt1-20020a056000080100b0033d9c7eb63csm9142256wrb.84.2024.02.26.09.26.39
+ bt1-20020a056000080100b0033d9c7eb63csm9142256wrb.84.2024.02.26.09.26.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Feb 2024 09:26:39 -0800 (PST)
+ Mon, 26 Feb 2024 09:26:41 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Mon, 26 Feb 2024 17:26:23 +0000
-Subject: [PATCH v5 19/39] board: dragonboard820c: use LINUX_KERNEL_IMAGE_HEADER
+Date: Mon, 26 Feb 2024 17:26:25 +0000
+Subject: [PATCH v5 21/39] mach-snapdragon: dynamic load addresses
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240226-b4-qcom-common-target-v5-19-10c8e078befb@linaro.org>
+Message-Id: <20240226-b4-qcom-common-target-v5-21-10c8e078befb@linaro.org>
 References: <20240226-b4-qcom-common-target-v5-0-10c8e078befb@linaro.org>
 In-Reply-To: <20240226-b4-qcom-common-target-v5-0-10c8e078befb@linaro.org>
 To: Neil Armstrong <neil.armstrong@linaro.org>, 
@@ -83,16 +83,15 @@ To: Neil Armstrong <neil.armstrong@linaro.org>,
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
  Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
  Stephan Gerhold <stephan@gerhold.net>
-Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
 X-Mailer: b4 0.13-dev-4bd13
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5090;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3211;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=R4XlxVlro6ECBMNX/sibK5LqfXD3s/QQuWaBBVFDYjs=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtQ7J3e9/xTmobdsjdU1Af6sNZrJz4NVxEO937vtO2CZd
- m3dgnsfOkpZGAQ5GGTFFFnETyyzbFp72V5j+4ILMHNYmUCGMHBxCsBEyn8yMuxekjCx6O33W0bZ
- SnOMz3P8a1DmmujMFfXrHPutxywei9QZGdb/+Ol4olDZ15hRW3PS5Lt5QhnX4lWq5mzfvzNlaom
- /ngIA
+ bh=f/T3E5TW/4ttTFWkAjM1QFvva3NY1zLyeF0dfoxuyJo=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtQ7J3f/Xz3dT1tV9JuInHKLrplHo9Hixsj61LWmIWtmG
+ WR/fpndUcrCIMjBICumyCJ+Ypll09rL9hrbF1yAmcPKBDKEgYtTACYit4nhv4fsrrZgBZvKrOo/
+ n//0nZkyY6VjidPrf4G1DrtLJ9q2KjEyzGCbsfrxumdPhPbxylmr+fMcmO/f9jNi/nTLmdsiRLr
+ c1wAA
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -111,202 +110,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-db820c predated support for prepending the kernel image header
-automatically, drop it's custom linker script and head.S in favour of
-this generic support.
+Heavily inspired by Apple board code. Use the LMB allocator to configure
+load addresses at runtime, and implement a lookup table for selecting a
+devicetree.
+
+As some Qualcomm RBx boards have different RAM capacities and base
+addresses, it isn't possible to hardcode these regions.
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
 Tested-by: Sumit Garg <sumit.garg@linaro.org> #qcs404
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- arch/arm/mach-snapdragon/Kconfig          |   1 +
- board/qualcomm/dragonboard820c/Makefile   |   1 -
- board/qualcomm/dragonboard820c/head.S     |  33 ---------
- board/qualcomm/dragonboard820c/u-boot.lds | 111 ------------------------------
- 4 files changed, 1 insertion(+), 145 deletions(-)
+ arch/arm/Kconfig                                 |  1 +
+ arch/arm/mach-snapdragon/board.c                 | 34 ++++++++++++++++++++++++
+ board/qualcomm/dragonboard410c/dragonboard410c.c |  2 +-
+ 3 files changed, 36 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
-index ad6671081910..f897c393464f 100644
---- a/arch/arm/mach-snapdragon/Kconfig
-+++ b/arch/arm/mach-snapdragon/Kconfig
-@@ -44,8 +44,9 @@ config TARGET_DRAGONBOARD410C
- 	  - 20-pin low speed and 40-pin high speed expanders, 4 LED, 3 buttons
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index 0c78c1b8e6b4..c7c236bada7a 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -1095,8 +1095,9 @@ config ARCH_SNAPDRAGON
+ 	select OF_CONTROL
+ 	select OF_SEPARATE
+ 	select SMEM
+ 	select SPMI
++	select BOARD_LATE_INIT
+ 	select OF_BOARD
+ 	select SAVE_PREV_BL_FDT_ADDR
+ 	select LINUX_KERNEL_IMAGE_HEADER
+ 	imply CMD_DM
+diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+index a1867852bcca..f445bed3af00 100644
+--- a/arch/arm/mach-snapdragon/board.c
++++ b/arch/arm/mach-snapdragon/board.c
+@@ -21,8 +21,9 @@
+ #include <linux/arm-smccc.h>
+ #include <linux/bug.h>
+ #include <linux/psci.h>
+ #include <linux/sizes.h>
++#include <lmb.h>
+ #include <malloc.h>
+ #include <usb.h>
  
- config TARGET_DRAGONBOARD820C
- 	bool "96Boards Dragonboard 820C"
-+	select LINUX_KERNEL_IMAGE_HEADER
- 	imply CLK_QCOM_APQ8096
- 	imply PINCTRL_QCOM_APQ8096
- 	imply BUTTON_QCOM_PMIC
- 	help
-diff --git a/board/qualcomm/dragonboard820c/Makefile b/board/qualcomm/dragonboard820c/Makefile
-index 643311f5b3ba..2ae6d16364aa 100644
---- a/board/qualcomm/dragonboard820c/Makefile
-+++ b/board/qualcomm/dragonboard820c/Makefile
-@@ -2,5 +2,4 @@
- #
- # (C) Copyright 2017 Jorge Ramirez-Ortiz <jorge.ramirez-ortiz@gmail.com>
+ DECLARE_GLOBAL_DATA_PTR;
+@@ -158,8 +159,41 @@ int board_init(void)
+ 	qcom_board_init();
+ 	return 0;
+ }
  
- obj-y	:= dragonboard820c.o
--extra-y += head.o
-diff --git a/board/qualcomm/dragonboard820c/head.S b/board/qualcomm/dragonboard820c/head.S
-deleted file mode 100644
-index b052a858fd32..000000000000
---- a/board/qualcomm/dragonboard820c/head.S
-+++ /dev/null
-@@ -1,33 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0+ */
--/*
-- * ARM64 header for proper chain-loading with Little Kernel.
-- *
-- * Little Kernel shipped with Dragonboard820C boots standard Linux images for
-- * ARM64. This file adds header that is required to boot U-Boot properly.
-- *
-- * For details see:
-- * https://www.kernel.org/doc/Documentation/arm64/booting.txt
-- *
-- * (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
-- */
--
--#include <config.h>
--
--/*
-- *   per document in linux/Doc/arm64/booting.text
-- */
--.global _arm64_header
--_arm64_header:
--	b _start
--	.word 0
--	.quad   CONFIG_TEXT_BASE-PHYS_SDRAM_1 /* Image load offset, LE */
--	.quad   0    /* Effective size of kernel image, little-endian */
--	.quad   0    /* kernel flags, little-endian */
--	.quad   0    /* reserved */
--	.quad   0    /* reserved */
--	.quad   0    /* reserved */
--	.byte   0x41 /* Magic number, "ARM\x64" */
--	.byte   0x52
--	.byte   0x4d
--	.byte   0x64
--	.word   0    /* reserved (used for PE COFF offset) */
-diff --git a/board/qualcomm/dragonboard820c/u-boot.lds b/board/qualcomm/dragonboard820c/u-boot.lds
-deleted file mode 100644
-index 5251b59fbe76..000000000000
---- a/board/qualcomm/dragonboard820c/u-boot.lds
-+++ /dev/null
-@@ -1,111 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0+ */
--/*
-- * Override linker script for fastboot-readable images
-- *
-- * (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
-- *
-- * Based on arch/arm/cpu/armv8/u-boot.lds (Just add header)
-- */
--
--OUTPUT_FORMAT("elf64-littleaarch64", "elf64-littleaarch64", "elf64-littleaarch64")
--OUTPUT_ARCH(aarch64)
--ENTRY(_arm64_header)
--SECTIONS
--{
--	. = 0x00000000;
--
--	. = ALIGN(8);
--	.text :
--	{
--		*(.__image_copy_start)
--		board/qualcomm/dragonboard820c/head.o (.text*)
--		CPUDIR/start.o (.text*)
--	}
--
--	/* This needs to come before *(.text*) */
--	.efi_runtime : {
--                __efi_runtime_start = .;
--		*(.text.efi_runtime*)
--		*(.rodata.efi_runtime*)
--		*(.data.efi_runtime*)
--                __efi_runtime_stop = .;
--	}
--
--	.text_rest :
--	{
--		*(.text*)
--	}
--
--	. = ALIGN(8);
--	.rodata : { *(SORT_BY_ALIGNMENT(SORT_BY_NAME(.rodata*))) }
--
--	. = ALIGN(8);
--	.data : {
--		*(.data*)
--	}
--
--	. = ALIGN(8);
--
--	. = .;
--
--	. = ALIGN(8);
--	__u_boot_list : {
--		KEEP(*(SORT(__u_boot_list*)));
--	}
--
--	. = ALIGN(8);
--
--	.efi_runtime_rel : {
--                __efi_runtime_rel_start = .;
--		*(.rel*.efi_runtime)
--		*(.rel*.efi_runtime.*)
--                __efi_runtime_rel_stop = .;
--	}
--
--	. = ALIGN(8);
--
--	.image_copy_end :
--	{
--		*(.__image_copy_end)
--	}
--
--	. = ALIGN(8);
--
--	.rel_dyn_start :
--	{
--		*(.__rel_dyn_start)
--	}
--
--	.rela.dyn : {
--		*(.rela*)
--	}
--
--	.rel_dyn_end :
--	{
--		*(.__rel_dyn_end)
--	}
--
--	_end = .;
--
--	. = ALIGN(8);
--
--	.bss_start : {
--		KEEP(*(.__bss_start));
--	}
--
--	.bss : {
--		*(.bss*)
--		 . = ALIGN(8);
--	}
--
--	.bss_end : {
--		KEEP(*(.__bss_end));
--	}
--
--	/DISCARD/ : { *(.dynsym) }
--	/DISCARD/ : { *(.dynstr*) }
--	/DISCARD/ : { *(.dynamic*) }
--	/DISCARD/ : { *(.plt*) }
--	/DISCARD/ : { *(.interp*) }
--	/DISCARD/ : { *(.gnu*) }
--}
++void __weak qcom_late_init(void)
++{
++}
++
++#define KERNEL_COMP_SIZE	SZ_64M
++
++#define addr_alloc(lmb, size) lmb_alloc(lmb, size, SZ_2M)
++
++/* Stolen from arch/arm/mach-apple/board.c */
++int board_late_init(void)
++{
++	struct lmb lmb;
++	u32 status = 0;
++
++	lmb_init_and_reserve(&lmb, gd->bd, (void *)gd->fdt_blob);
++
++	/* We need to be fairly conservative here as we support boards with just 1G of TOTAL RAM */
++	status |= env_set_hex("kernel_addr_r", addr_alloc(&lmb, SZ_128M));
++	status |= env_set_hex("ramdisk_addr_r", addr_alloc(&lmb, SZ_128M));
++	status |= env_set_hex("kernel_comp_addr_r", addr_alloc(&lmb, KERNEL_COMP_SIZE));
++	status |= env_set_hex("kernel_comp_size", KERNEL_COMP_SIZE);
++	status |= env_set_hex("scriptaddr", addr_alloc(&lmb, SZ_4M));
++	status |= env_set_hex("pxefile_addr_r", addr_alloc(&lmb, SZ_4M));
++	status |= env_set_hex("fdt_addr_r", addr_alloc(&lmb, SZ_2M));
++
++	if (status)
++		log_warning("%s: Failed to set run time variables\n", __func__);
++
++	qcom_late_init();
++
++	return 0;
++}
++
+ static void build_mem_map(void)
+ {
+ 	int i;
+ 
+diff --git a/board/qualcomm/dragonboard410c/dragonboard410c.c b/board/qualcomm/dragonboard410c/dragonboard410c.c
+index 0136cc2237de..fbbfc0e65e24 100644
+--- a/board/qualcomm/dragonboard410c/dragonboard410c.c
++++ b/board/qualcomm/dragonboard410c/dragonboard410c.c
+@@ -87,9 +87,9 @@ int misc_init_r(void)
+ 
+ 	return 0;
+ }
+ 
+-int board_late_init(void)
++int qcom_late_init(void)
+ {
+ 	char serial[16];
+ 
+ 	memset(serial, 0, 16);
 
 -- 
 2.43.1
