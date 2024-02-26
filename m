@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFE2AC48BF6
-	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 17:26:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0999C5478C
+	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 17:26:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 085B387F4A;
+	by phobos.denx.de (Postfix) with ESMTP id 6B59387F56;
 	Mon, 26 Feb 2024 18:26:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bSlKOo1p";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UnUX+q1y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B4FE87F28; Mon, 26 Feb 2024 18:26:28 +0100 (CET)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
+ id B254D87F25; Mon, 26 Feb 2024 18:26:28 +0100 (CET)
+Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
+ [IPv6:2a00:1450:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB6C587F25
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 18:26:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F1CC387F2C
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 18:26:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-40fd72f7125so26935505e9.1
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 09:26:23 -0800 (PST)
+Received: by mail-lj1-x235.google.com with SMTP id
+ 38308e7fff4ca-2d2533089f6so40078711fa.1
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 09:26:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708968383; x=1709573183; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1708968384; x=1709573184; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=z0hCDiTNri44tvXyNMJaRxomK4RdMAbxwZTo74BYQs4=;
- b=bSlKOo1psLPZIJpm1JevNhA9qO/DFjSQFkF0BEuM0+tNS6q2/Z+PvfFOPxpR9PG2WS
- CPZm2K0vX+YgINIghVOhYoNjiD42Si1HOEV3NC9mJt4guPXjMdO3nKkWEiYJ4kBDh9nG
- sUWXn4KrDmw24utiUAKnw6nBGpOi+1KTEOvTSsoUiOzhQxlBBSm/2Oa7YXVw28DvO+Bn
- vDlSAjzy7F8jw5SLt6LssGLzEEjD9upiv9SWHqGs38oJ0KUEharGVwjt+Z1s/TkHWzCt
- lC1WQw4PACWjKcpWW4JLhCDhNXdEVGmM+4FnxtyqrlegnO+rfPJYqbVcIi34pIK3om+b
- +8Nw==
+ :reply-to; bh=gT115ImxSsstmDbYl/cOUJ4kQloLdD5lNxvH9PvgL1w=;
+ b=UnUX+q1yM6C5PpotU1U690HCDkRid9RWQf85POdLlFI8MmfYILtr4GqtlCiOXMjTn+
+ P5oCzb/fSh9zM6cA5+1XmS6T+JoXZzbOJLYX2nu/uj1PcuAM1DJYik58yzz0SprrhSuf
+ IWAeV9sHUelk4A9TsIvWECB3dLaE7B20OLOeBJ03FrJvH6Uzln7sB9/vX9vizS2TRllQ
+ 17oA5jIvQseqRSbQAjoWfhlH+d9NCh1mfHjSR7HPUGUj38ecvCTWxORG9SmLNQ+sbfmV
+ zHmcXgtAn3D5+THzBNf+ZlzTWlyXO/n3LVjIZ7TxHFzU936bAO4ja/NuQzMqoQuVUNs/
+ GjOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708968383; x=1709573183;
+ d=1e100.net; s=20230601; t=1708968384; x=1709573184;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=z0hCDiTNri44tvXyNMJaRxomK4RdMAbxwZTo74BYQs4=;
- b=SbCvumzcpxTKpy+JSrd+CHR3xY0rKsRT3O+UHKwDCvis2WyxIlSeVi9lRgjwJR/JNH
- glqEnfA8MtEK4Q+y4SFToVVfmWYGz5tMw93NeBstDy/fFNqhTzh/brBOD5on4H2YI+9K
- mRheaXy3OkrvrI+RbUjZoPUbAClFJmXIYNXUPpAbvz3sDCARCwSghhrcScpEvpkP4XDa
- XeyoPctB6h4+yl7Xj4+3AWykAWqmCGHkkpl+SC8OHbO6fePynYd3tIbGA5M6/RvMHBDi
- FmdxyYMy6rA844y8Tkm79WyddLRsQfQWgChgPfeK8PX4a/ckko9HdcI/rIkVImQKJSMh
- 02xg==
+ bh=gT115ImxSsstmDbYl/cOUJ4kQloLdD5lNxvH9PvgL1w=;
+ b=suVoe4X6qJrR0PUYlM14QLugBtcG3oYv3zQ9rAqo0daDi3Wzo3P1J90W0q3sOSHBZ/
+ +3mDo2kVIBxfqBomOudkiYrtihPGYgS9Y38F+cn8FWC6/dtqQ0CxWgwCdDJPwUjP8VYh
+ zbcOTusLs/V2mSn3YJ5VWSK7KreDnQCtNqr41mHaJg2UWTXhJSwbvUjUOtnYgd7ha7GV
+ UrL22J8ItG6Q8/FQ9hVDF6Mit7eyQCU9+3B8jrIvMaTIWM+irhGH4EXkMUfv0EhDNomh
+ EqNhnFdWdWPVBCRZPvvAHJsH5iHRAHKNcsRCT04HF9MaQgDieqe62My1VMWTbfcOj1A/
+ Z+2Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWXTdLTZFTw4B62gd+ni3/i6o37GV85LHTZxflb24Boz0MrpK0cgpeTvnfpnWTzykVdpyqqZEjDJPajmCKyjCqy5FwX4w==
-X-Gm-Message-State: AOJu0YxU/KHJj6Vq3PYi2L3GkYI21Gy2fGKr/4kM1M+ezxvyRWJ4hin2
- s432ScRoUDI3DEgt3faUtekQB04lJAir4N+KjydwSZTRAoYdEBmL1mf0oKxh1po=
-X-Google-Smtp-Source: AGHT+IFallmb0vCf1MdH36/KNe/mPV/kS4mBz1CLsX+lnXIgqqtVXnD/YZRxuJjFO7QAfpPikR1pUw==
-X-Received: by 2002:a5d:658b:0:b0:33d:2848:79b6 with SMTP id
- q11-20020a5d658b000000b0033d284879b6mr5455248wru.45.1708968383203; 
- Mon, 26 Feb 2024 09:26:23 -0800 (PST)
+ AJvYcCVimJwevkWbdcPZGkgVQaKenn6Vac3EjwTKgRTWaTLn1dVz84K1U/a96iiAB6x1bG0f2/aWJGRymqyoDGijCHpZidlP6g==
+X-Gm-Message-State: AOJu0YxF+D6yKeirYt3j6CMs/C6QN4uaZaEV7WDoa9ygLTiIGQZxgQe9
+ gUH+2B5jVB6a0BJzcyz1j3CkJNkoVmJF1V+v7oiVlB4EDyLiNyD/8nkbM28qhq0=
+X-Google-Smtp-Source: AGHT+IHKFWF5hgLY6tdJK3/f47TxUKm21GwixD9NaPOFQxgvOfTqzECBTngnuBryTJ1naNG6487U+g==
+X-Received: by 2002:a2e:3a0f:0:b0:2d2:373b:5b27 with SMTP id
+ h15-20020a2e3a0f000000b002d2373b5b27mr4506597lja.20.1708968384256; 
+ Mon, 26 Feb 2024 09:26:24 -0800 (PST)
 Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- bt1-20020a056000080100b0033d9c7eb63csm9142256wrb.84.2024.02.26.09.26.22
+ bt1-20020a056000080100b0033d9c7eb63csm9142256wrb.84.2024.02.26.09.26.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Feb 2024 09:26:22 -0800 (PST)
+ Mon, 26 Feb 2024 09:26:23 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Mon, 26 Feb 2024 17:26:05 +0000
-Subject: [PATCH v5 01/39] arm: init: export prev_bl_fdt_addr
+Date: Mon, 26 Feb 2024 17:26:06 +0000
+Subject: [PATCH v5 02/39] usb: dwc3-generic: support external vbus
+ regulator
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240226-b4-qcom-common-target-v5-1-10c8e078befb@linaro.org>
+Message-Id: <20240226-b4-qcom-common-target-v5-2-10c8e078befb@linaro.org>
 References: <20240226-b4-qcom-common-target-v5-0-10c8e078befb@linaro.org>
 In-Reply-To: <20240226-b4-qcom-common-target-v5-0-10c8e078befb@linaro.org>
 To: Neil Armstrong <neil.armstrong@linaro.org>, 
@@ -83,16 +84,15 @@ To: Neil Armstrong <neil.armstrong@linaro.org>,
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
  Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
  Stephan Gerhold <stephan@gerhold.net>
-Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de, 
- Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
 X-Mailer: b4 0.13-dev-4bd13
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2036;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2484;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=rDoYKulwRgfSZJ6WGXOQUTKGJ56bse325sV7t1f3MEU=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtQ7J3esPK14X/jBhcQtqU91hLPaO+0L9zPuj3D9ttRSI
- 2vLx8n8HaUsDIIcDLJiiiziJ5ZZNq29bK+xfcEFmDmsTCBDGLg4BWAiIe8YGVZ+uGz39oDrV8WD
- MS5SHw7qlL2TK2FJYvTM+p/HH38x7hojw/wSnYK7uleaznC291pOjdIqV1Ze9fHmu55HD7k3f7+
- xVR8A
+ bh=zy8d/bLtlahzsjEnrt0CqTXILH2QKUQ9ydQgSemoQQE=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtQ7J3defPrDVH7z9wJHlp3PGuw52iVzXm8IZ2nMObnao
+ ezaVznFjlIWBkEOBlkxRRbxE8ssm9ZettfYvuACzBxWJpAhDFycAjARcWNGhlk8pjtz+Xolb0xK
+ WiusNSkuajdDUpHU6TvzXQv9uFvndjP8z2kUOzaR8279WnuWZF35Bcf6vmxdz/A38vLsOO6Cr2o
+ n5wIA
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -111,69 +111,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When booting U-Boot on board with a locked down first-stage bootloader,
-we emulate the Linux boot header. By passing the U-Boot FDT through this
-first-stage bootloader and retrieving it afterwards we can pre-populate
-the memory nodes and other info like the KASLR address.
+Add support for a vbus-supply regulator specified in devicetree. This
+provides generic support to avoid hardcoded GPIO configuration in board
+init code.
 
-Add a function to export the FDT addr so that boards can use it over the
-built-in FDT.
-
-Don't check is_addr_accessible() here because we might not yet have a
-valid mem_map if it's going to be populated from the FDT, let the board
-do their own validation instead.
-
-Reviewed-by: Tom Rini <trini@konsulko.com>
-Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
-Tested-by: Sumit Garg <sumit.garg@linaro.org> #qcs404
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- arch/arm/lib/save_prev_bl_data.c |  5 +++++
- include/init.h                   | 11 +++++++++++
- 2 files changed, 16 insertions(+)
 
-diff --git a/arch/arm/lib/save_prev_bl_data.c b/arch/arm/lib/save_prev_bl_data.c
-index f7b23faf0d66..b286bac9bf00 100644
---- a/arch/arm/lib/save_prev_bl_data.c
-+++ b/arch/arm/lib/save_prev_bl_data.c
-@@ -44,8 +44,13 @@ bool is_addr_accessible(phys_addr_t addr)
+Cc: Marek Vasut <marex@denx.de>
+---
+ drivers/usb/dwc3/dwc3-generic.c | 24 +++++++++++++++++++++---
+ 1 file changed, 21 insertions(+), 3 deletions(-)
+
+diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
+index 6fb2de8a5ace..a379a0002e77 100644
+--- a/drivers/usb/dwc3/dwc3-generic.c
++++ b/drivers/usb/dwc3/dwc3-generic.c
+@@ -20,8 +20,9 @@
+ #include <linux/printk.h>
+ #include <linux/usb/ch9.h>
+ #include <linux/usb/gadget.h>
+ #include <malloc.h>
++#include <power/regulator.h>
+ #include <usb.h>
+ #include "core.h"
+ #include "gadget.h"
+ #include <reset.h>
+@@ -46,8 +47,9 @@ struct dwc3_generic_priv {
  
- 	return false;
+ struct dwc3_generic_host_priv {
+ 	struct xhci_ctrl xhci_ctrl;
+ 	struct dwc3_generic_priv gen_priv;
++	struct udevice *vbus_supply;
+ };
+ 
+ static int dwc3_generic_probe(struct udevice *dev,
+ 			      struct dwc3_generic_priv *priv)
+@@ -239,23 +241,39 @@ static int dwc3_generic_host_probe(struct udevice *dev)
+ 	rc = dwc3_generic_probe(dev, &priv->gen_priv);
+ 	if (rc)
+ 		return rc;
+ 
++	rc = device_get_supply_regulator(dev, "vbus-supply", &priv->vbus_supply);
++	if (rc)
++		debug("%s: No vbus regulator found: %d\n", dev->name, rc);
++
++	/* Only returns an error if regulator is valid and failed to enable due to a driver issue */
++	rc = regulator_set_enable_if_allowed(priv->vbus_supply, true);
++	if (rc)
++		return rc;
++
+ 	hccr = (struct xhci_hccr *)priv->gen_priv.base;
+ 	hcor = (struct xhci_hcor *)(priv->gen_priv.base +
+ 			HC_LENGTH(xhci_readl(&(hccr)->cr_capbase)));
+ 
+-	return xhci_register(dev, hccr, hcor);
++	rc = xhci_register(dev, hccr, hcor);
++	if (rc)
++		regulator_set_enable_if_allowed(priv->vbus_supply, false);
++
++	return rc;
  }
  
-+phys_addr_t get_prev_bl_fdt_addr(void)
-+{
-+	return reg0;
-+}
-+
- int save_prev_bl_data(void)
+ static int dwc3_generic_host_remove(struct udevice *dev)
  {
- 	struct fdt_header *fdt_blob;
- 	int node;
-diff --git a/include/init.h b/include/init.h
-index 9a1951d10a01..630d86729c4e 100644
---- a/include/init.h
-+++ b/include/init.h
-@@ -167,8 +167,19 @@ defined(CONFIG_SAVE_PREV_BL_FDT_ADDR)
-  *
-  * Return: 0 if ok; -ENODATA on error
-  */
- int save_prev_bl_data(void);
-+
-+/**
-+ * get_prev_bl_fdt_addr - When u-boot is chainloaded, get the address
-+ * of the FDT passed by the previous bootloader.
-+ *
-+ * Return: the address of the FDT passed by the previous bootloader
-+ * or 0 if not found.
-+ */
-+phys_addr_t get_prev_bl_fdt_addr(void);
-+#else
-+#define get_prev_bl_fdt_addr() 0LLU
- #endif
+ 	struct dwc3_generic_host_priv *priv = dev_get_priv(dev);
+ 	int rc;
  
- /**
-  * cpu_secondary_init_r() - CPU-specific secondary initialization
+-	rc = xhci_deregister(dev);
++	/* This function always returns 0 */
++	xhci_deregister(dev);
++
++	rc = regulator_set_enable_if_allowed(priv->vbus_supply, false);
+ 	if (rc)
+-		return rc;
++		debug("%s: Failed to disable vbus regulator: %d\n", dev->name, rc);
+ 
+ 	return dwc3_generic_remove(dev, &priv->gen_priv);
+ }
+ 
 
 -- 
 2.43.1
