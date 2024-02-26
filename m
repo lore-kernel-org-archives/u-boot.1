@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 604C0C48BF6
-	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 17:29:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DD75C48BF6
+	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 17:29:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 69E9487F36;
+	by phobos.denx.de (Postfix) with ESMTP id CA36787FE0;
 	Mon, 26 Feb 2024 18:26:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tkkwrQRt";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gNyYj5Wf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CBDFC87F78; Mon, 26 Feb 2024 18:26:47 +0100 (CET)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
+ id C668E87F4F; Mon, 26 Feb 2024 18:26:48 +0100 (CET)
+Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
+ [IPv6:2a00:1450:4864:20::232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4EC8087F47
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 18:26:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5AD8A87F9B
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 18:26:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-33dd2f0a0c4so984757f8f.0
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 09:26:36 -0800 (PST)
+Received: by mail-lj1-x232.google.com with SMTP id
+ 38308e7fff4ca-2d288bac3caso17215081fa.2
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 09:26:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708968396; x=1709573196; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1708968397; x=1709573197; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=0B3Pm1egxIpPDgXLN/1qgugTQ02Yeu9efC5KpFdqusQ=;
- b=tkkwrQRtmu+NAtPpFpzipy6wk64/v9At2uKlY7o0U2jQm941U3dOm09qCEKPEUY5r2
- D3luCt1l4NJnvfN+CValeXYu7+yLkYkOqIselk5YS5A6fKmZegEuShZmZ4yoMkLYIfY+
- a2Dj6p/PVdaJ2Fm4mMR4MGCtECV8fGYa1wMeq02ERyCzWaO5s4K1DvuIp9z/YiACMPvK
- YusQQ+PDC9ty/Vj9drNCxM1ehgA3A8CESWFhMTZCuyJ3tODVm7xq/gqFeS+A5rI/6uPh
- OOj0g8IVVo7tEP1T7Weh6Z6SDSuNspCRzRB6+4F8Mh26YUJTVM+00obXe00S71eL/HJn
- sqwA==
+ :reply-to; bh=topWasnRLqEapH6DShkxIcdK39V/HsSOrxCBuPqsOyY=;
+ b=gNyYj5WfAw/BwQCIAp1pQyHo0xJiRf/NUO9SC/YkbiuRofyQv/R3I48qrQI0BFNjRs
+ 60rbB54siUWA6LnKo+iYKg9sZzWCU8el63aK9/alw2iQ+vOWZrWMiC8p9NSLpzowuv2b
+ /EQ/1ZI8kX045AYEhZY0qizz71NnNRtMqGQp6GUtURqkOoSvQdMv7AQCqg4u5YtwzIsX
+ 0Ng88yBaVj9sOqAbHiJuzcysI2KgvO78v3R4SFTGH92dIFHeBl/4jGc09TPJa0oI8VPK
+ OW0uJMQB+KvXGi37lKy6xpaudfzV2uEB3qfVVBtktUx1JoidCgf0J16rRVMXtyvhq16I
+ BurQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708968396; x=1709573196;
+ d=1e100.net; s=20230601; t=1708968397; x=1709573197;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0B3Pm1egxIpPDgXLN/1qgugTQ02Yeu9efC5KpFdqusQ=;
- b=fmstoWtN/v2N0sn7WmGOTWPL9tF0vE1Zq+CV43iqHBYEqvfHrEFEUqcL0iwF5uckCB
- nrfjRRUnlN+gj4UOEntFmAQTuJUKqPplqSkJR+cTeRKRP6SAQVTO3e2ryu/F1DIHGMc5
- Ac+NlQyusUi6ERL3gadcH14eBMbU0g5Mjy9LBpIG4lt146PkneZQc6UHrsPztJovqLhG
- /qAJO3CW5iLKXbAnRQtxDEU7hsq2k0PEy3AWuz6stdcI5vJhDjQacnPlg6ZTMBBFmYMX
- v9LV7yT8crB5mR0a5JgPW5IOyNjtjnV9Yhn05A2GA0tuAxC+38+75XSpvkG7vDx1i4YH
- OLtg==
+ bh=topWasnRLqEapH6DShkxIcdK39V/HsSOrxCBuPqsOyY=;
+ b=ajkYVgm67lwMIbk2jSQTu0TPV6pC4uZ/7pMX2yB1YpHiDWvtn1bZqe/kbL2y4IKrOI
+ chCxUms3QCoNveR6nRGtzKZ+pxzG6PVjd3C/YjpzxnzpCT/18ZxekgBWjyFRV4XBnwIQ
+ pTX2J6cdWejiMNQ/qdk1REdAYWo08pHV2rNUcnsmeP8Rdwshd1rG5VD5t9PVWD11T4ao
+ QAdpApfZR9LPiYDnHyxIyrARLd8Fnis686oZCesYhwyn/auRVK9W8y92cw6jc9jTP5NB
+ i8D6bgysK7ZM9fRkKZw2ucFXkVKecQJQve8JYNHW1VRIT0tBeA3nk2aBTV6qUplMx/Ts
+ BSVw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW1lEbNe7tRzAh1Q6ZOJdH97luv0V0hk85jGzaLNPGqTflM3zSiM/0/Kj8NgJ4HtdsZYaOOr2zQCOAxNu8PIyF3RNmKug==
-X-Gm-Message-State: AOJu0Yz6hPITpICMQB1US/uC13L+oKKoV1Bnph9qG8Oe/JWS0dm7Aqcr
- rUMeoNPuV2S9FdRTJuxtWXxNRF0oX3tvnm0jLdHaavdQnKqLZvgjmYZphconaig=
-X-Google-Smtp-Source: AGHT+IF5hlj1oGDBYieB0NiT4vKSFD4O6Tn4TTAAoU7TxdJO4v0qGR/IyWc4SzZ/DO4I1GjXoVywsA==
-X-Received: by 2002:adf:dd82:0:b0:33d:64a3:9bc8 with SMTP id
- x2-20020adfdd82000000b0033d64a39bc8mr4726779wrl.45.1708968395903; 
- Mon, 26 Feb 2024 09:26:35 -0800 (PST)
+ AJvYcCXbos6eq0xgKP0GOUyXDrgVXKrOs38XTzaMf+1cfwWm298TjvX6dok55l3nrnM9ZAkZEsLR1oQAitt7T5F4lK3PU/GKqA==
+X-Gm-Message-State: AOJu0YyqWWhmEX6x5i/B2QrxdhNKux4pqmAjUQwuPLvaX1FBMq3DWanK
+ SraDlVfgqW2V6SRsbf2VvrCvX8RpmgDz5KTx0XsRiCK4gUkV1+6LICql6wNNnBE=
+X-Google-Smtp-Source: AGHT+IGffqnIfwj0wdsLy/IeM8zTQNtj186rfLdvAlpBSkSvi8nz9Yy0ySCZJUdu4QlReWdy79I30A==
+X-Received: by 2002:a2e:a549:0:b0:2d2:6227:d30a with SMTP id
+ e9-20020a2ea549000000b002d26227d30amr5627848ljn.2.1708968396796; 
+ Mon, 26 Feb 2024 09:26:36 -0800 (PST)
 Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
  bt1-20020a056000080100b0033d9c7eb63csm9142256wrb.84.2024.02.26.09.26.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Feb 2024 09:26:35 -0800 (PST)
+ Mon, 26 Feb 2024 09:26:36 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Mon, 26 Feb 2024 17:26:19 +0000
-Subject: [PATCH v5 15/39] pinctrl: qcom: apq8016: init pre-reloaction
+Date: Mon, 26 Feb 2024 17:26:20 +0000
+Subject: [PATCH v5 16/39] board: dragonboard410c: add chainloaded config
+ fragment
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240226-b4-qcom-common-target-v5-15-10c8e078befb@linaro.org>
+Message-Id: <20240226-b4-qcom-common-target-v5-16-10c8e078befb@linaro.org>
 References: <20240226-b4-qcom-common-target-v5-0-10c8e078befb@linaro.org>
 In-Reply-To: <20240226-b4-qcom-common-target-v5-0-10c8e078befb@linaro.org>
 To: Neil Armstrong <neil.armstrong@linaro.org>, 
@@ -85,13 +86,13 @@ To: Neil Armstrong <neil.armstrong@linaro.org>,
  Stephan Gerhold <stephan@gerhold.net>
 Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
 X-Mailer: b4 0.13-dev-4bd13
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1132;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1036;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=HKoQTxKtBqw7jI3iylSvuagOiihXVhg/tcAQ9jNpm64=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtQ7J3cducfGJfMos/aX2M6aX1r7XNtarb222a6csXKi/
- ucfvbesO0pZGAQ5GGTFFFnETyyzbFp72V5j+4ILMHNYmUCGMHBxCsBEjlxi+Gf559j5Se7W3Ieu
- tq076cy/iUduC3MSh+bxZ/zTJvAUzl3G8E+/uPnBRZl804/a7kfz27/kJmzN8p/3br/NBZ/WqWp
- z9p8HAA==
+ bh=uUR57ae7XCl6N80/g8XLDnnOGI5ZqafrsXOFKjVvw0s=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtQ7J3eFLmXVvJhYdOwG66/dAazdDxbx9m+e8Tv2mJDfj
+ Esrr/BodZSyMAhyMMiKKbKIn1hm2bT2sr3G9gUXYOawMoEMYeDiFICJrHvJ8E+P6aqxznvTP3w5
+ FW82Sd5fGduvvW2lWnZi+ITW3HURK7sYGZa1SqoeYJXrE/OYsX5FPlPmn6IExbpPRsd25W374Tx
+ 1Vz0A
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -110,34 +111,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On the DB410c we support running as a first stage bootloader. This
-requires initialising the GPIOs which are muxed to UART before they can
-be used. Add DM_FLAG_PRE_RELOC to the apq8016 pinctrl driver to ensure
-that we do this early enough.
+Add a config fragment for building U-Boot such that it can be
+chainloaded by aboot/LK rather than being flashed directly to the aboot
+partition.
 
-This is required to prevent the first few lines of UART log from being
-dropped.
-
-Reported-by: Sumit Garg <sumit.garg@linaro.org>
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
 Tested-by: Sumit Garg <sumit.garg@linaro.org> #qcs404
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- drivers/pinctrl/qcom/pinctrl-apq8016.c | 1 +
- 1 file changed, 1 insertion(+)
+ board/qualcomm/dragonboard410c/configs/chainloaded.config | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/drivers/pinctrl/qcom/pinctrl-apq8016.c b/drivers/pinctrl/qcom/pinctrl-apq8016.c
-index 796c4b49d578..eb9bf87b6c2e 100644
---- a/drivers/pinctrl/qcom/pinctrl-apq8016.c
-+++ b/drivers/pinctrl/qcom/pinctrl-apq8016.c
-@@ -75,5 +75,6 @@ U_BOOT_DRIVER(pinctrl_apq8016) = {
- 	.id		= UCLASS_NOP,
- 	.of_match	= msm_pinctrl_ids,
- 	.ops		= &msm_pinctrl_ops,
- 	.bind		= msm_pinctrl_bind,
-+	.flags		= DM_FLAG_PRE_RELOC,
- };
+diff --git a/board/qualcomm/dragonboard410c/configs/chainloaded.config b/board/qualcomm/dragonboard410c/configs/chainloaded.config
+new file mode 100644
+index 000000000000..3fd064924a1f
+--- /dev/null
++++ b/board/qualcomm/dragonboard410c/configs/chainloaded.config
+@@ -0,0 +1,7 @@
++# CONFIG_ENABLE_ARM_SOC_BOOT0_HOOK is not set
++CONFIG_TEXT_BASE=0x0
++# CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR is not set
++# CONFIG_REMAKE_ELF is not set
++CONFIG_POSITION_INDEPENDENT=y
++CONFIG_INIT_SP_RELATIVE=y
++CONFIG_SYS_INIT_SP_BSS_OFFSET=524288
 
 -- 
 2.43.1
