@@ -4,80 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B814C54E49
-	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 10:34:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55C2EC54E49
+	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 10:36:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CB57B87DEB;
-	Mon, 26 Feb 2024 11:34:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A927D87DAF;
+	Mon, 26 Feb 2024 11:36:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QF/x9FPN";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=ml.lawnick@gmx.de header.b="silWj/qG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47C64863D3; Mon, 26 Feb 2024 11:34:02 +0100 (CET)
-Received: from mail-vs1-xe2f.google.com (mail-vs1-xe2f.google.com
- [IPv6:2607:f8b0:4864:20::e2f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 72D7487CDB; Mon, 26 Feb 2024 11:36:41 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 41AFD87DF9
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 11:33:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6BC5D87EB4
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 11:36:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vs1-xe2f.google.com with SMTP id
- ada2fe7eead31-471e18cd6e3so123790137.3
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 02:33:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708943637; x=1709548437; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=G/FSjlBmpWU6YKjQEHYV8yQNqZOd72UCkAGbt2ezSJc=;
- b=QF/x9FPNbn87/XUBrTL8GHydV9PaPu8eri5A5W3RpWNrsuMpG/ljvg/uVyCRGKhraV
- yv3BucRxMsUi+gVYP9ckEFdmanJF9UyZ89QoOS1AgvqjgqycabPCYmqa8/jmLf+Splzj
- NF/oNdOvsA5kYq4UVnnLyX8hOHbBZ04nTrivEbYHZqb1uZhD4zTM81fpLtLIH2aOfW0b
- XEc6lF2Rm/pNkOgAkv9PCmlFy1xzC3twtgKuBUJg3qqLwEmJ9u7XapU8fu9mt54/04FC
- YdEI+YV8Gt59tHzGme3x6204sFco0742LF4V8WBpc9NJ+UYdr5ft+lzbwupCk9FVqh6u
- NSXQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708943637; x=1709548437;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=G/FSjlBmpWU6YKjQEHYV8yQNqZOd72UCkAGbt2ezSJc=;
- b=QSzfTk5bSkOIpbfxshx6ovU1NwB/vPPL8XkQ2ObiZ0Rhgnhp/8dTGsQCX+uOy+2b8X
- Kt/yrqhKQkUAbl7VMBUHci8dVPkpCaf7fOuPLTWBqsKf4Jp3lpvtQDsBqslnZu07T/uM
- /FbyXmBuEK06DBojEtyxc1eWSYUy0Lhkv2pIXFGFf1N65LFGPIzAfVOzQsmIEXkU7buw
- CxeUXwKr01NYcZAXhR5DaTIsOjRzXvFiHuvqkuPlH9Dz4n/jTW3ws6s3+0Q/0ITd5SVg
- sMVEMXairWo+7uNhrdyMMa+XQJToVa9j24Dn0gi6EH5gkYA3jXJguHmoFaJ3fG6XCmr2
- lLOg==
-X-Gm-Message-State: AOJu0Yz2eXowHqMjOdxoss8DhW44yuKOiJ4ZltCNYkz0mQ9qYFC8Eead
- JQhQUXoBZOqhMzLMTZGf78ZvE6vhgLvx9uUyoPj60WN3HvR14+UZv7DuaNS1teR8M/aNCbEOPF1
- ylR9eQYBkHHa2R2H4roF6f84UBfOR+im15BoX6Q==
-X-Google-Smtp-Source: AGHT+IFktktlZyonY+nw91DXvSSZYmu+z8KAXkZfION/q87f4KB3NlvD9fzh9ALzQxCGbZTFxJ1tfKx8pRYeVfuU/EE=
-X-Received: by 2002:a67:fb05:0:b0:470:3ab4:3cb4 with SMTP id
- d5-20020a67fb05000000b004703ab43cb4mr2855767vsr.27.1708943636805; Mon, 26 Feb
- 2024 02:33:56 -0800 (PST)
+ spf=pass smtp.mailfrom=ml.lawnick@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1708943796; x=1709548596; i=ml.lawnick@gmx.de;
+ bh=78woSTqt2A0HeC8NFaPI6mC04bprO0D6fuS7H3cSP8A=;
+ h=X-UI-Sender-Class:Date:To:From:Subject;
+ b=silWj/qGum21EChoavZI94c91ysCvGgQS626kUanS+7h9KvfoYQ7kY2QZRh3QKsM
+ PCacRXcitjkkgzYtpzs91J0dCwJ1JNo8S+RBgZuwMQ2VAomQU/6ZmyeeRw3KurX0a
+ 68rlgaZ69djqdS3kTvb8tIIL9JEb1YtYVteZctmZj96y/sU1ZTJFlxiF1lfkhKohD
+ cV2LV27P/CIRqoTf5usTEZO2GxjJDFmrtGXOgbCjyCxODDGg5sTD0ituazqFsWK76
+ CIOcXsNXeWFmOupKgwEWgMClxq32PO6/kK2LVx44hTECPD7xANCNowNE45hJ0hCoa
+ ONK+pyq5YFPk1PLRng==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [172.30.9.6] ([131.228.32.166]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1M9Wyy-1rZ4hL46Cq-005Z0V for
+ <u-boot@lists.denx.de>; Mon, 26 Feb 2024 11:36:36 +0100
+Message-ID: <cea4d88b-3341-4703-82fb-0a594f4ddcd0@gmx.de>
+Date: Mon, 26 Feb 2024 11:36:35 +0100
 MIME-Version: 1.0
-References: <20240226080433.3307154-1-sumit.garg@linaro.org>
- <20240226080433.3307154-3-sumit.garg@linaro.org>
- <a5862ce9-8977-47cb-87af-e8da1839867d@denx.de>
-In-Reply-To: <a5862ce9-8977-47cb-87af-e8da1839867d@denx.de>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Mon, 26 Feb 2024 16:03:45 +0530
-Message-ID: <CAFA6WYNEpg_zgRo_gD3ab3QR1e1j1xZCOb8ui-ZSV27U_Yv4EQ@mail.gmail.com>
-Subject: Re: [PATCH v2 2/8] reset: imx: Add support for i.MX8MP reset
- controller
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, marcel.ziswiler@toradex.com, francesco@dolcini.it, 
- trini@konsulko.com, lukma@denx.de, seanga2@gmail.com,
- jh80.chung@samsung.com, 
- festevam@denx.de, andrejs.cainikovs@toradex.com, sjg@chromium.org, 
- peng.fan@nxp.com, aford173@gmail.com, ilias.apalodimas@linaro.org, 
- sahaj.sarup@linaro.org, fathi.boudra@linaro.org, remi.duraffort@linaro.org, 
- daniel.thompson@linaro.org
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Content-Language: en-GB
+To: u-boot@lists.denx.de
+From: Michael Lawnick <ml.lawnick@gmx.de>
+Subject: Need help: alternative module inclusion - duplicate symbols
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:6fTNKj2IDq4fgKNfj03i5zGNtzNsbxe1/DZbP2FUBHACNa4g06a
+ dBdejc+93LUbJsu3F84Q4mBRRYg25FrwY9OA6//m3Up47zp4oOonFCqkcus+ng+8HR15ilc
+ lyMoSTV79UjAzyoEk8nzAUmk5mdm4FbEdEVwFHxqmKkwPWPzo55uTjgNDKL9Ww4luyVkOFR
+ vdDc+vEt3lEvzTh8Jv15A==
+UI-OutboundReport: notjunk:1;M01:P0:KIiOiZ2R07s=;ip8fQY7b9epWyOytMi6rs/SVISk
+ Xa2ttPk2V0IRx0ShfYNZTBIJ/JtXjDEigKCSCWH5OYxABbcVy/8NHeMw98VdgFi8i2jdrQO5I
+ I+uwv/rxH6AlMFT7OZbTrxqgRQ7d59gdFVHDEhQKdvZvJAPefJE8vdA904kY1NIDIN/RvFFix
+ rmyq8ufbDkD3gwh8CaupIklRSEFTvWOIDrrZYaIV/WNblXUT6ydQnPzimM7zCwMpAylDIF7Ku
+ RcqYVVioJyAo/9QMBe2M3FQblwbchTT8kvrSBzuFfMhBT9SDmt8/tZzXvryca0ISRRL0Gob9L
+ aYOGQ3yXTVh/ottK46Cb/yifxRBcaQ/Zqh6K0eMnmO5stQ2wKuxWoyyWcSb0tGDMNGWbC9zeF
+ sNwMGBT265fFVEFlvxA/fIg/KdnHRBrvHNaO1JlzZ6r2BDOifCU0js1RT8KznrxgeN5F+w5Ox
+ +GU3o63s417rBN/fLtd+xH4agx47gMKUnNfKqPdcXyvpwjZ7P7F5IbmOANae7fXZ5lHdDFSIz
+ GGzI1OM+EJE23LTbO3fc1YedPYe8RUROD+F7t3VAPTCt2x+B2gGjxGGUhcP3EGMjS80nz0aEB
+ JS9DZUwkusaaOO2RMpxrSDG6wzH7lptf7Gv4oD2asBdvF70Fv8HTTaLUlo3Lj+KvjFQoONv9Q
+ wdp0J+2U66YQUHYpP7Cw2B68CIG4wRZQU7iuVJ68SrvG1duA+RiFIRrj5F3WadGVRdwRGEokG
+ 4+FJGtCznmeIXYqHEzJEUEQrdOkLxV0zbl+W+sJ50aYdKNiXx1PRn/DOIyaDZaLTrRhY1aSwe
+ Rqw2CVaSvjB5+mpN8SRAOEemTFGAjUZbhLyLyrZG9HDos=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,29 +82,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 26 Feb 2024 at 14:24, Marek Vasut <marex@denx.de> wrote:
->
-> On 2/26/24 9:04 AM, Sumit Garg wrote:
-> > Add support for i.MX8MP reset controller, it has same reset IP
->
-> Same as what ?
+Hi group,
 
-I can expand it.
+hope you can help me:
+I have modules pci_fpga.c and pci_fpga_emul.c with same functions in
+them but different implementation, one for the real device, the other
+one is an emulation.
 
->
-> > inside
-> > but with different module layout.
-> >
-> > Inspired from counterpart Linux kernel v6.8-rc3 driver:
-> > drivers/reset/reset-imx7.c.
->
-> Use commit ID of the last change in that driver:
->
-> bad8a8afe19f ("reset: Explicitly include correct DT includes")
->
-> I guess
+What I now want is being able to include one of both versions through
+build command. I started with this:
 
-Why isn't the Linux kernel tag sufficient here? I don't see the value
-of cross referencing commits across different git projects.
+Makefile.core.def:
+...
+module =3D {
+  name =3D pci_fpga;
+  common =3D startlib/board/pci_fpga.c;
+  enable =3D efi;
+};
 
--Sumit
+module =3D {
+  name =3D pci_fpga_emul;
+  common =3D startlib/board/pci_fpga_emul.c;
+  enable =3D efi;
+};
+...
+
+and then give pci_fpga or pci_fpga_emu on the build but then I get
+duplicate symbols error.
+
+For using different packages than common like this
+module =3D {
+  name =3D pci_fpga;
+  pci_fpga =3D startlib/board/pci_fpga.c;
+  enable =3D pci_fpga;
+};
+I could not find means to get pci_fpga included.
+
+Same problem if trying to approach it via different enable flag: How to?
+
+Can anybody help? In docs I couldn't find usable hints.
+
+=2D-
+KR
+Michael
