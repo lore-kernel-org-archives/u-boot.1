@@ -4,46 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB63EC48BF6
-	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 08:54:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C23FC5478C
+	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 08:54:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2CFA787E3A;
-	Mon, 26 Feb 2024 09:54:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8A0AD87E9D;
+	Mon, 26 Feb 2024 09:54:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1708937677;
-	bh=aJLA6B0Ix9eIiWYXzNOfA7BzAXFFI052X3e7fIbh/FQ=;
+	s=phobos-20191101; t=1708937679;
+	bh=Uj4XLypXgzVMjFqODvZfA9RN0HZHNlZaGgfGlv74bAA=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=SLlV8Vx+naWW9S18u/eBBWP3pP8RQUEdD9xKqfkXi1Pn8I29wxweCK9OCNcninKAq
-	 +aNtfWzQBNlQIhAJTy5KnxpjOcCddAxbvLpx3LcfhdSI6Oiii6YT/VcS8kHLTDnpkB
-	 3dKt6KxLYRKw78TYYq6BDztYV8q7RaTbQPjH8dF9IRRfFeVrUQYqEl8RvvuD/KqRb0
-	 j+uPvUwKeE5E99PyRX15AQGfECf6N5gNZPJiy4ICN5wI/LnGpd53uyctgBYJpvpMm7
-	 4kkmZrXZfX444UarhQkCLoQ9qrryEzrWLYxqIxetnQLFZILaeDdvMcJieb+S2uuYu9
-	 NRF1tU4vreAFw==
+	b=sEmDFmIKUihHQDYBDhvcEZdnUQGHYFuusUK2Y9cHwfFOHimcExJuqAqq6Dg71IY0G
+	 4HsnjORp+kQ3eCpvSaYviKo29CHoZHCGMoCrtz/g2VLDKEutA9Rq7iB9wwDr4TGgw2
+	 loFxsXTXPpGMCZinCSbsyPpsO4/md47PLqgjAIOdpQo9uaykj5XeTa9iw0CjnnHHOj
+	 v4+GAQ8Uz7qZLCe5gZXNQWp+fpl+lufLC6HObPAmSmQxnqPh8/A3hkX1HA8xzEnz6x
+	 LKEh8fv0yb6s6uQj9pAVHD9WhI5wx4WHaru86r6nSlIoJM8P5VVLhYq+YkDTb5ZtxB
+	 jr+UlSM3MpCrg==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id B109687DAF;
- Mon, 26 Feb 2024 09:54:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id 1A3FE87DEB;
+ Mon, 26 Feb 2024 09:54:36 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1708937675;
- bh=aJLA6B0Ix9eIiWYXzNOfA7BzAXFFI052X3e7fIbh/FQ=;
+ s=phobos-20191101; t=1708937677;
+ bh=Uj4XLypXgzVMjFqODvZfA9RN0HZHNlZaGgfGlv74bAA=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=QpBK/tumORcfnC/xuCZxTLJxUlEH+48N6oNMT4WJ/MoV6LZAN6GS2jY82dtL1BWkI
- Jq/k79WnUG1CkyTxuH1RbIKaTX+9e85t4dGj7G3KQOxlQPeX41LmZL6RXgG4hyPADn
- wREpf2HAnEGaMsDSs+It4gjsXXQxGHGgDLHdCCO3aOo67/Tbxspv3nzIhMI5c0Bp7u
- pzM5x+XSx/AVqQwIJdLxFH8q+M54k//qu/DVKeEcxbL14OzzPsWSdhn837+ROdmKbS
- hIOn2N/pZe/mipITG96HZprajvmiX4/ILOD2a2pIDzjgk0uRK/tjIVI6X3+0EeNLOB
- HtUCs9zr2JaIg==
-Message-ID: <266b30c1-6cfc-4a8a-adef-ec2fe7d9fa4c@denx.de>
-Date: Mon, 26 Feb 2024 09:28:08 +0100
+ b=cESCqionsK0F1tfHmglMJ0ZP/llIJg4alRZyFhAy3QXUgzCWQMXKwP909vdW/hA/M
+ ryTdSwWk+/HcXpvgazadVzBFbyx59fLt9YnbZoV5iDPdMIarAbMfhylHwgy5qzWNZN
+ wKvXKDWfjl0wJ26G1rE6AjC/rpyibs8SeyxTlX9wWC1F+RkOjD/2deaQ8s5wC/otpS
+ 7KAb31Hxi3jX8V1ifzJWQG5PR9RMjXXW9LwSByJRXvWs69h/vcpfi3NdKpXM0S8xUk
+ Lk3mDDjeQYDrJYw2dIG6AfzJeHbbOz/m0A6eQTfi/9mRtzNS8g/5Jr+CPHRGipUzgO
+ uuqlhw0qY11zA==
+Message-ID: <a5862ce9-8977-47cb-87af-e8da1839867d@denx.de>
+Date: Mon, 26 Feb 2024 09:29:34 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/8] clk: imx8mp: Add support for PCIe clocks
+Subject: Re: [PATCH v2 2/8] reset: imx: Add support for i.MX8MP reset
+ controller
 Content-Language: en-US
 To: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de
 Cc: marcel.ziswiler@toradex.com, francesco@dolcini.it, trini@konsulko.com,
@@ -53,9 +54,9 @@ Cc: marcel.ziswiler@toradex.com, francesco@dolcini.it, trini@konsulko.com,
  fathi.boudra@linaro.org, remi.duraffort@linaro.org,
  daniel.thompson@linaro.org
 References: <20240226080433.3307154-1-sumit.garg@linaro.org>
- <20240226080433.3307154-2-sumit.garg@linaro.org>
+ <20240226080433.3307154-3-sumit.garg@linaro.org>
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240226080433.3307154-2-sumit.garg@linaro.org>
+In-Reply-To: <20240226080433.3307154-3-sumit.garg@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -75,6 +76,18 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 2/26/24 9:04 AM, Sumit Garg wrote:
-> Pre-requisite to enable PCIe support on iMX8MP SoC.
+> Add support for i.MX8MP reset controller, it has same reset IP
 
-Commit message needs fixing.
+Same as what ?
+
+> inside
+> but with different module layout.
+> 
+> Inspired from counterpart Linux kernel v6.8-rc3 driver:
+> drivers/reset/reset-imx7.c.
+
+Use commit ID of the last change in that driver:
+
+bad8a8afe19f ("reset: Explicitly include correct DT includes")
+
+I guess
