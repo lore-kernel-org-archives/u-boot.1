@@ -4,59 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D352C5478C
-	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 21:21:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1C7CC48BF6
+	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 21:21:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 131CE87F7E;
-	Mon, 26 Feb 2024 22:19:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7F18E87F75;
+	Mon, 26 Feb 2024 22:19:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Te+xPAWA";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="YkzopK6e";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 95C4A87A80; Mon, 26 Feb 2024 22:19:46 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id 55FBE87A80; Mon, 26 Feb 2024 22:19:47 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E57787F77
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 22:19:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 956A587F4B
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 22:19:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41QLJUiK069703;
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41QLJUcA079081;
  Mon, 26 Feb 2024 15:19:30 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1708982370;
- bh=IF0SPuEaHNSgxzOq9hwGvpHga+T9o35Ui76f+FLGI7g=;
+ bh=4sSgAdcIoeGepRQ1Gig2/8Jgv+IXDSA7d4pvoXxvtFg=;
  h=From:Date:Subject:References:In-Reply-To:To:CC;
- b=Te+xPAWAsqhxDil4o11SPKUjB5kArvbcRlfVyPTG/Y4s5116oQ3TI5Dfl4oTSvNSb
- X6chNSYviGN9VxRPNF/LEp2gWOdW08/S3WKMueuOmzdTZhnHBav9Kls7Wa3Dt7vNek
- xByYESyPiK8itRNsUXourdT01GmKSlc0NYf1j4Vo=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41QLJUgE017103
+ b=YkzopK6eY/g8G2hA+RPtn9IUbYuvhnQuodzUe5BhYQSy5ZoNiO9wWfT23BJHgbE2K
+ vWw5CJSixn7OhuEFcS5ljkw/GWLcGb+RLnHYGiUSHFZUXvZvTTae3ITUhXDG71wuzx
+ eKPkxaJ/ew4pdkDCXgE6hiI1WosuLERdukh5sSXI=
+Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41QLJU0a030255
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Mon, 26 Feb 2024 15:19:30 -0600
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 26
  Feb 2024 15:19:30 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Mon, 26 Feb 2024 15:19:30 -0600
 Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41QLJUTo034717;
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41QLJUQg034724;
  Mon, 26 Feb 2024 15:19:30 -0600
 From: Bryan Brattlof <bb@ti.com>
-Date: Mon, 26 Feb 2024 15:19:13 -0600
-Subject: [PATCH v3 07/13] board: ti: introduce basic board files for the
- am62px family
+Date: Mon, 26 Feb 2024 15:19:18 -0600
+Subject: [PATCH v3 12/13] configs: introduce configs needed for the am62px
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <20240205-am62px-wip-rebasing-v3-7-04cbb42eaa6f@ti.com>
+Message-ID: <20240205-am62px-wip-rebasing-v3-12-04cbb42eaa6f@ti.com>
 References: <20240205-am62px-wip-rebasing-v3-0-04cbb42eaa6f@ti.com>
 In-Reply-To: <20240205-am62px-wip-rebasing-v3-0-04cbb42eaa6f@ti.com>
 To: Tom Rini <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>,
@@ -69,18 +68,18 @@ CC: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass
  <hnagalla@ti.com>, Ravi Gunasekaran <r-gunasekaran@ti.com>, Vaishnav Achath
  <vaishnav.a@ti.com>, Jayesh Choudhary <j-choudhary@ti.com>
 X-Mailer: b4 0.12.1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=72793; i=bb@ti.com;
- h=from:subject:message-id; bh=aEj/x+LKia/34uQY6zzKoKPhO56u//A04m6Z9Bputl8=;
- b=owNCWmg5MUFZJlNZKn5pNgAAcf///v/fW3+3/77du/vX+lrX193+zp/k2075eqxL3/vp6f+wA
- RsYIeo0aGgNDRpo00aGQDQDQaDQAAAAAADTIAGgBoAAAA9Rk9T1PU09TJk9NT9TUQeoAHqDQDNI
- BoNA9JoNMgaAGmgA0AGmJ6mgGIeoNAyB6TT1AMg9R6gNNDRoAAZIPU0MhoAAyGhkGQaBoGTQ0Mg
- ZBkGmg0GQ0yGRoABpiGmjRo0MmE0wmQGgCTBBLhmQBgKBlv4gOKiFe1QCgQvDce/aHx4wQA2HXz
- EIm7+6HyJ4WLmbXl+m4RiolWVdVosiDd8o9KHSoaK8VmdFJdikhIPAg5NcJROuvlR/1VjurQxXv
- QZ/bQHkJH0CjShNf1pzj2Julpn4IAAUgb+t8VZ0pkpjNfWZn5SGxCkIyZjUa8DdUCRCqtQthXkc
- G4Sk83m43DrWBwwXIPjWr1nsKNmLiY9im18JzYb5NmnYAj5OwtwEhPgdTFjQ4HvkN5CLMN+fa3k
- ML8Mv3EpaQq8YnpJXPGNrlGT6yg4K4XOezC6TKXiOn/UMdfsCgVrfogFUsPDrFRkvqB53QcxSwg
- Kn7jjF7mik+6D9CGkwDNgTKQ0l+GkdGDQtXLk2Ehl07EAW4f3tEBBQiEiWwaZU41D+DXZFARBBs
- ynIQ03DoCqz/F3JFOFCQKn5pNg=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=10114; i=bb@ti.com;
+ h=from:subject:message-id; bh=XE8vyUqrr14FoniGHRm5lfG4HQ2YnYub+2dmV5J0A0o=;
+ b=owNCWmg5MUFZJlNZ9CgVjgAAY////79dn/v029/K/5W/2+q3d5q/9/+d/s+T6N9P7/549/6wA
+ RswHagNDQDIaaNGgDQGhpoABo0GjQaAAMgAaAAeoADIGmgZAyaaepgJoxGJsodNGmg0xNAZGRoN
+ NAZADEBoA9INAAaADyj1DIMj0hoBoABoaYTIaNAZDQBoGUHqZMRkME00DRo0GgBiANMQ0BoAAND
+ QNAZBpiZDTTQaAAGgDTTIDJo0yBgINKHXgU4S+BFEN71EizEk+/r2TD6qe6rOX2bJBcEOAhLReB
+ 0O6TylidFPejt4ySsEIKOt6UAc+pDdU1O8VbNoYduuudtQrUsACe1qnxFGoboRSpTOUjMzL2m+v
+ whM68Zh7DKa4USC7DjeZLX/ibRRMEvkJFNL1xd2hn2zIFk10INP2mu/6AFA4iYW8AlheLLq7VL8
+ muI8OJg6i7D7WF29KnkQXOJMwJDotRo3mUv3SrYqQYCikgmhzrR9kWijFpP4T9R86oNrVBk6cbf
+ x97NeqdKIrmir6QhSiNmOMEiPAGAFS+EGgWd0+USKjIZuKHsc8gE2qk3PqngWl5kZS5zWCMp5gt
+ GCi6/xMpCwC/GIsnDjXAHC8xgbf0XFIFjRoCG3AZtybIr+mKBNINUh84Zb+zbeGeakg1wgwnEAm
+ PDJNzQiFEurhP8XckU4UJD0KBWO
 X-Developer-Key: i=bb@ti.com; a=openpgp;
  fpr=D3D177E40A38DF4D1853FEEF41B90D5D71D56CE0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
@@ -100,2463 +99,362 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce the basic files needed to support the am62px family of SoCs
+Introduce the initial configs needed to support the am62px SoC family
 
-Co-developed-by: Hari Nagalla <hnagalla@ti.com>
-Signed-off-by: Hari Nagalla <hnagalla@ti.com>
 Signed-off-by: Bryan Brattlof <bb@ti.com>
 ---
- board/ti/am62px/Kconfig          |  26 ++
- board/ti/am62px/MAINTAINERS      |   9 +
- board/ti/am62px/Makefile         |   7 +
- board/ti/am62px/am62px.env       |  15 +
- board/ti/am62px/board-cfg.yaml   |  37 ++
- board/ti/am62px/evm.c            |  29 ++
- board/ti/am62px/pm-cfg.yaml      |  12 +
- board/ti/am62px/rm-cfg.yaml      | 987 +++++++++++++++++++++++++++++++++++++++
- board/ti/am62px/sec-cfg.yaml     | 378 +++++++++++++++
- board/ti/am62px/tifs-rm-cfg.yaml | 879 ++++++++++++++++++++++++++++++++++
- 10 files changed, 2379 insertions(+)
+ configs/am62px_evm_a53_defconfig | 178 +++++++++++++++++++++++++++++++++++++++
+ configs/am62px_evm_r5_defconfig  | 137 ++++++++++++++++++++++++++++++
+ include/configs/am62px_evm.h     |  14 +++
+ 3 files changed, 329 insertions(+)
 
-diff --git a/board/ti/am62px/Kconfig b/board/ti/am62px/Kconfig
+diff --git a/configs/am62px_evm_a53_defconfig b/configs/am62px_evm_a53_defconfig
 new file mode 100644
-index 0000000000000..9d95ffd9b2908
+index 0000000000000..bd8002108b10c
 --- /dev/null
-+++ b/board/ti/am62px/Kconfig
-@@ -0,0 +1,26 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
-+#
-+
-+if TARGET_AM62P5_R5_EVM || TARGET_AM62P5_A53_EVM
-+
-+config SYS_BOARD
-+       default "am62px"
-+
-+config SYS_VENDOR
-+       default "ti"
-+
-+config SYS_CONFIG_NAME
-+       default "am62px_evm"
-+
-+source "board/ti/common/Kconfig"
-+
-+endif
-+
-+if TARGET_AM62P5_R5_EVM
-+
-+config SPL_LDSCRIPT
-+	default "arch/arm/mach-omap2/u-boot-spl.lds"
-+
-+endif
-diff --git a/board/ti/am62px/MAINTAINERS b/board/ti/am62px/MAINTAINERS
++++ b/configs/am62px_evm_a53_defconfig
+@@ -0,0 +1,178 @@
++CONFIG_ARM=y
++CONFIG_ARCH_K3=y
++CONFIG_TI_SECURE_DEVICE=y
++CONFIG_SYS_MALLOC_F_LEN=0x8000
++CONFIG_SPL_GPIO=y
++CONFIG_SPL_LIBCOMMON_SUPPORT=y
++CONFIG_SPL_LIBGENERIC_SUPPORT=y
++CONFIG_NR_DRAM_BANKS=2
++CONFIG_SOC_K3_AM62P5=y
++CONFIG_K3_ATF_LOAD_ADDR=0x9e780000
++CONFIG_TARGET_AM62P5_A53_EVM=y
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80480000
++CONFIG_SF_DEFAULT_SPEED=25000000
++CONFIG_ENV_SIZE=0x40000
++CONFIG_DM_GPIO=y
++CONFIG_SPL_DM_SPI=y
++CONFIG_OF_UPSTREAM=y
++CONFIG_DEFAULT_DEVICE_TREE="ti/k3-am62p5-sk"
++CONFIG_SPL_TEXT_BASE=0x80080000
++CONFIG_OF_LIBFDT_OVERLAY=y
++CONFIG_DM_RESET=y
++CONFIG_SPL_MMC=y
++CONFIG_SPL_SERIAL=y
++CONFIG_SPL_STACK_R_ADDR=0x82000000
++CONFIG_SPL_FS_FAT=y
++CONFIG_SPL_LIBDISK_SUPPORT=y
++CONFIG_SPL_SPI_FLASH_SUPPORT=y
++CONFIG_SPL_SPI=y
++# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_SPL_LOAD_FIT_ADDRESS=0x81000000
++CONFIG_BOOTSTD_FULL=y
++CONFIG_BOOTSTD_DEFAULTS=y
++CONFIG_BOOTCOMMAND="run envboot; bootflow scan -lb"
++CONFIG_SPL_MAX_SIZE=0x58000
++CONFIG_SPL_PAD_TO=0x0
++CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
++CONFIG_SPL_BSS_START_ADDR=0x80a00000
++CONFIG_SPL_BSS_MAX_SIZE=0x80000
++CONFIG_SPL_SYS_MALLOC_SIMPLE=y
++CONFIG_SPL_STACK_R=y
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1400
++CONFIG_SPL_DMA=y
++CONFIG_SPL_ENV_SUPPORT=y
++CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot.img"
++CONFIG_SPL_I2C=y
++CONFIG_SPL_DM_MAILBOX=y
++CONFIG_SPL_MTD_SUPPORT=y
++CONFIG_SPL_DM_SPI_FLASH=y
++CONFIG_SPL_POWER_DOMAIN=y
++CONFIG_SPL_RAM_SUPPORT=y
++CONFIG_SPL_RAM_DEVICE=y
++# CONFIG_SPL_SPI_FLASH_TINY is not set
++CONFIG_SPL_SPI_FLASH_SFDP_SUPPORT=y
++CONFIG_SPL_SPI_LOAD=y
++CONFIG_SYS_SPI_U_BOOT_OFFS=0x280000
++CONFIG_SPL_THERMAL=y
++CONFIG_SPL_YMODEM_SUPPORT=y
++CONFIG_SYS_MAXARGS=64
++CONFIG_CMD_CLK=y
++CONFIG_CMD_DFU=y
++CONFIG_CMD_DM=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_MTD=y
++CONFIG_CMD_REMOTEPROC=y
++CONFIG_CMD_USB=y
++CONFIG_CMD_USB_MASS_STORAGE=y
++CONFIG_CMD_TIME=y
++CONFIG_CMD_EXT4_WRITE=y
++CONFIG_CMD_MTDPARTS=y
++CONFIG_CMD_UBI=y
++CONFIG_OF_CONTROL=y
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_MULTI_DTB_FIT=y
++CONFIG_SPL_MULTI_DTB_FIT=y
++CONFIG_SPL_MULTI_DTB_FIT_NO_COMPRESSION=y
++CONFIG_NET_RANDOM_ETHADDR=y
++CONFIG_SPL_DM=y
++CONFIG_SPL_DM_DEVICE_REMOVE=y
++CONFIG_SPL_DM_SEQ_ALIAS=y
++CONFIG_REGMAP=y
++CONFIG_SPL_REGMAP=y
++CONFIG_SPL_SYSCON=y
++CONFIG_SPL_OF_TRANSLATE=y
++CONFIG_CLK=y
++CONFIG_SPL_CLK=y
++CONFIG_CLK_TI_SCI=y
++CONFIG_DFU_MMC=y
++CONFIG_DFU_MTD=y
++CONFIG_DFU_RAM=y
++CONFIG_DFU_SF=y
++CONFIG_SYS_DFU_DATA_BUF_SIZE=0x40000
++CONFIG_SYS_DFU_MAX_FILE_SIZE=0x800000
++CONFIG_DMA_CHANNELS=y
++CONFIG_TI_K3_NAVSS_UDMA=y
++CONFIG_USB_FUNCTION_FASTBOOT=y
++CONFIG_FASTBOOT_BUF_ADDR=0xC0000000
++CONFIG_FASTBOOT_BUF_SIZE=0x2F000000
++CONFIG_TI_SCI_PROTOCOL=y
++CONFIG_SPL_DM_GPIO_LOOKUP_LABEL=y
++CONFIG_DA8XX_GPIO=y
++CONFIG_DM_PCA953X=y
++CONFIG_SPL_DM_PCA953X=y
++CONFIG_DM_I2C=y
++CONFIG_SYS_I2C_OMAP24XX=y
++CONFIG_DM_MAILBOX=y
++CONFIG_K3_SEC_PROXY=y
++CONFIG_I2C_EEPROM=y
++CONFIG_SPL_I2C_EEPROM=y
++CONFIG_FS_LOADER=y
++CONFIG_SUPPORT_EMMC_BOOT=y
++CONFIG_MMC_IO_VOLTAGE=y
++CONFIG_SPL_MMC_IO_VOLTAGE=y
++CONFIG_MMC_HS400_SUPPORT=y
++CONFIG_SPL_MMC_HS400_SUPPORT=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_ADMA=y
++CONFIG_SPL_MMC_SDHCI_ADMA=y
++CONFIG_MMC_SDHCI_AM654=y
++CONFIG_MTD=y
++CONFIG_DM_MTD=y
++CONFIG_MTD_SPI_NAND=y
++CONFIG_DM_SPI_FLASH=y
++CONFIG_SPI_FLASH_SFDP_SUPPORT=y
++CONFIG_SPI_FLASH_SOFT_RESET=y
++CONFIG_SPI_FLASH_SOFT_RESET_ON_BOOT=y
++CONFIG_SPI_FLASH_SPANSION=y
++CONFIG_SPI_FLASH_S28HX_T=y
++CONFIG_PHY_TI_DP83867=y
++CONFIG_TI_AM65_CPSW_NUSS=y
++CONFIG_PINCTRL=y
++CONFIG_SPL_PINCTRL=y
++CONFIG_PINCTRL_SINGLE=y
++CONFIG_POWER_DOMAIN=y
++CONFIG_TI_SCI_POWER_DOMAIN=y
++CONFIG_DM_REGULATOR=y
++CONFIG_SPL_DM_REGULATOR=y
++CONFIG_DM_REGULATOR_FIXED=y
++CONFIG_SPL_DM_REGULATOR_FIXED=y
++CONFIG_DM_REGULATOR_GPIO=y
++CONFIG_SPL_DM_REGULATOR_GPIO=y
++CONFIG_K3_SYSTEM_CONTROLLER=y
++CONFIG_REMOTEPROC_TI_K3_ARM64=y
++CONFIG_REMOTEPROC_TI_K3_DSP=y
++CONFIG_REMOTEPROC_TI_K3_R5F=y
++CONFIG_RESET_TI_SCI=y
++CONFIG_DM_SERIAL=y
++CONFIG_SOC_DEVICE=y
++CONFIG_SOC_DEVICE_TI_K3=y
++CONFIG_SOC_TI=y
++CONFIG_SPI=y
++CONFIG_DM_SPI=y
++CONFIG_CADENCE_QSPI=y
++CONFIG_SYSRESET=y
++CONFIG_SPL_SYSRESET=y
++CONFIG_SYSRESET_TI_SCI=y
++CONFIG_DM_THERMAL=y
++CONFIG_USB=y
++CONFIG_DM_USB_GADGET=y
++CONFIG_SPL_DM_USB_GADGET=y
++CONFIG_SPL_USB_HOST=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_DWC3=y
++CONFIG_USB_DWC3_GENERIC=y
++CONFIG_SPL_USB_DWC3_GENERIC=y
++CONFIG_SPL_USB_STORAGE=y
++CONFIG_USB_GADGET=y
++CONFIG_SPL_USB_GADGET=y
++CONFIG_USB_GADGET_MANUFACTURER="Texas Instruments"
++CONFIG_USB_GADGET_VENDOR_NUM=0x0451
++CONFIG_USB_GADGET_PRODUCT_NUM=0x6165
++CONFIG_SPL_DFU=y
++CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
+diff --git a/configs/am62px_evm_r5_defconfig b/configs/am62px_evm_r5_defconfig
 new file mode 100644
-index 0000000000000..57c86ddbc4aef
+index 0000000000000..25505167f018b
 --- /dev/null
-+++ b/board/ti/am62px/MAINTAINERS
-@@ -0,0 +1,9 @@
-+AM62Px BOARD
-+M:	Vignesh Raghavendra <vigneshr@ti.com>
-+M:	Bryan Brattlof <bb@ti.com>
-+M:	Tom Rini <trini@konsulko.com>
-+S:	Maintained
-+F:	board/ti/am62px/
-+F:	include/configs/am62p5_evm.h
-+F:	configs/am62px_evm_r5_defconfig
-+F:	configs/am62px_evm_a53_defconfig
-diff --git a/board/ti/am62px/Makefile b/board/ti/am62px/Makefile
++++ b/configs/am62px_evm_r5_defconfig
+@@ -0,0 +1,137 @@
++CONFIG_ARM=y
++CONFIG_ARCH_K3=y
++CONFIG_TI_SECURE_DEVICE=y
++CONFIG_SYS_MALLOC_F_LEN=0x9000
++CONFIG_SPL_LIBCOMMON_SUPPORT=y
++CONFIG_SPL_LIBGENERIC_SUPPORT=y
++CONFIG_SOC_K3_AM62P5=y
++CONFIG_TARGET_AM62P5_R5_EVM=y
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x43c4a7f0
++CONFIG_SF_DEFAULT_SPEED=25000000
++CONFIG_SF_DEFAULT_MODE=0
++CONFIG_ENV_SIZE=0x20000
++CONFIG_ENV_OFFSET=0x680000
++CONFIG_SPL_DM_SPI=y
++CONFIG_DEFAULT_DEVICE_TREE="k3-am62p5-r5-sk"
++CONFIG_SPL_TEXT_BASE=0x43c00000
++CONFIG_DM_RESET=y
++CONFIG_SPL_MMC=y
++CONFIG_SPL_SERIAL=y
++CONFIG_SPL_STACK_R_ADDR=0x82000000
++CONFIG_SPL_SYS_MALLOC_F_LEN=0x8000
++CONFIG_SPL_SIZE_LIMIT=0x3C000
++CONFIG_SPL_SIZE_LIMIT_PROVIDE_STACK=0x5000
++CONFIG_SPL_FS_FAT=y
++CONFIG_SPL_LIBDISK_SUPPORT=y
++CONFIG_SPL_SPI_FLASH_SUPPORT=y
++CONFIG_SPL_SPI=y
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_SPL_LOAD_FIT_ADDRESS=0x80080000
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_SPL_SIZE_LIMIT_SUBTRACT_GD=y
++CONFIG_SPL_SIZE_LIMIT_SUBTRACT_MALLOC=y
++CONFIG_SPL_MAX_SIZE=0x3B000
++CONFIG_SPL_PAD_TO=0x0
++CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
++CONFIG_SPL_BSS_START_ADDR=0x43c4b000
++CONFIG_SPL_BSS_MAX_SIZE=0x3000
++CONFIG_SPL_SYS_REPORT_STACK_F_USAGE=y
++CONFIG_SPL_SYS_MALLOC_SIMPLE=y
++CONFIG_SPL_STACK_R=y
++CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x200000
++CONFIG_SPL_SEPARATE_BSS=y
++CONFIG_SYS_SPL_MALLOC=y
++CONFIG_HAS_CUSTOM_SPL_MALLOC_START=y
++CONFIG_CUSTOM_SYS_SPL_MALLOC_ADDR=0x84000000
++CONFIG_SYS_SPL_MALLOC_SIZE=0x1000000
++CONFIG_SPL_EARLY_BSS=y
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x400
++CONFIG_SPL_DMA=y
++CONFIG_SPL_DM_MAILBOX=y
++CONFIG_SPL_MTD_SUPPORT=y
++CONFIG_SPL_DM_SPI_FLASH=y
++CONFIG_SPL_DM_RESET=y
++CONFIG_SPL_POWER_DOMAIN=y
++CONFIG_SPL_RAM_SUPPORT=y
++CONFIG_SPL_RAM_DEVICE=y
++CONFIG_SPL_REMOTEPROC=y
++# CONFIG_SPL_SPI_FLASH_TINY is not set
++CONFIG_SPL_SPI_FLASH_SFDP_SUPPORT=y
++CONFIG_SPL_SPI_LOAD=y
++CONFIG_SYS_SPI_U_BOOT_OFFS=0x80000
++CONFIG_SPL_THERMAL=y
++CONFIG_SPL_YMODEM_SUPPORT=y
++CONFIG_HUSH_PARSER=y
++CONFIG_CMD_ASKENV=y
++CONFIG_CMD_DFU=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_REMOTEPROC=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_CMD_TIME=y
++CONFIG_CMD_FAT=y
++CONFIG_OF_CONTROL=y
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_ENV_IS_NOWHERE=y
++CONFIG_ENV_IS_IN_MMC=y
++CONFIG_SYS_RELOC_GD_ENV_ADDR=y
++CONFIG_SYS_MMC_ENV_PART=1
++# CONFIG_NET is not set
++CONFIG_SPL_DM=y
++CONFIG_SPL_DM_DEVICE_REMOVE=y
++CONFIG_SPL_DM_SEQ_ALIAS=y
++CONFIG_REGMAP=y
++CONFIG_SPL_REGMAP=y
++CONFIG_SPL_OF_TRANSLATE=y
++CONFIG_CLK=y
++CONFIG_SPL_CLK=y
++CONFIG_SPL_CLK_CCF=y
++CONFIG_SPL_CLK_K3_PLL=y
++CONFIG_SPL_CLK_K3=y
++CONFIG_DMA_CHANNELS=y
++CONFIG_TI_K3_NAVSS_UDMA=y
++CONFIG_TI_SCI_PROTOCOL=y
++# CONFIG_GPIO is not set
++CONFIG_DM_I2C=y
++CONFIG_SYS_I2C_OMAP24XX=y
++CONFIG_DM_MAILBOX=y
++CONFIG_K3_SEC_PROXY=y
++CONFIG_MMC_HS400_SUPPORT=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_ADMA=y
++CONFIG_SPL_MMC_SDHCI_ADMA=y
++CONFIG_MMC_SDHCI_AM654=y
++CONFIG_MTD=y
++CONFIG_DM_MTD=y
++CONFIG_MTD_SPI_NAND=y
++CONFIG_DM_SPI_FLASH=y
++CONFIG_SPI_FLASH_SFDP_SUPPORT=y
++CONFIG_SPI_FLASH_SOFT_RESET=y
++CONFIG_SPI_FLASH_SOFT_RESET_ON_BOOT=y
++CONFIG_SPI_FLASH_SPANSION=y
++CONFIG_SPI_FLASH_S28HX_T=y
++CONFIG_PINCTRL=y
++# CONFIG_PINCTRL_GENERIC is not set
++CONFIG_SPL_PINCTRL=y
++# CONFIG_SPL_PINCTRL_GENERIC is not set
++CONFIG_PINCTRL_SINGLE=y
++CONFIG_POWER_DOMAIN=y
++CONFIG_TI_POWER_DOMAIN=y
++CONFIG_K3_SYSTEM_CONTROLLER=y
++CONFIG_REMOTEPROC_TI_K3_ARM64=y
++CONFIG_RESET_TI_SCI=y
++CONFIG_SPECIFY_CONSOLE_INDEX=y
++CONFIG_DM_SERIAL=y
++CONFIG_SOC_DEVICE=y
++CONFIG_SOC_DEVICE_TI_K3=y
++CONFIG_SOC_TI=y
++CONFIG_SPI=y
++CONFIG_DM_SPI=y
++CONFIG_CADENCE_QSPI=y
++CONFIG_TIMER=y
++CONFIG_SPL_TIMER=y
++CONFIG_OMAP_TIMER=y
++CONFIG_LIB_RATIONAL=y
++CONFIG_SPL_LIB_RATIONAL=y
+diff --git a/include/configs/am62px_evm.h b/include/configs/am62px_evm.h
 new file mode 100644
-index 0000000000000..921afdff27a24
+index 0000000000000..06b12860e21f7
 --- /dev/null
-+++ b/board/ti/am62px/Makefile
-@@ -0,0 +1,7 @@
-+#
-+# Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
-+#
-+# SPDX-License-Identifier:     GPL-2.0+
-+#
-+
-+obj-y	+= evm.o
-diff --git a/board/ti/am62px/am62px.env b/board/ti/am62px/am62px.env
-new file mode 100644
-index 0000000000000..f8b6aff2c2fdf
---- /dev/null
-+++ b/board/ti/am62px/am62px.env
-@@ -0,0 +1,15 @@
-+#include <env/ti/ti_common.env>
-+#include <env/ti/mmc.env>
-+
-+name_kern=Image
-+console=ttyS2,115200n8
-+args_all=setenv optargs ${optargs} earlycon=ns16550a,mmio32,0x02800000
-+	${mtdparts}
-+run_kern=booti ${loadaddr} ${rd_spec} ${fdtaddr}
-+
-+boot_targets=mmc1 mmc0 pxe dhcp
-+boot=mmc
-+mmcdev=1
-+bootpart=1:2
-+bootdir=/boot
-+rd_spec=-
-diff --git a/board/ti/am62px/board-cfg.yaml b/board/ti/am62px/board-cfg.yaml
-new file mode 100644
-index 0000000000000..d539011aff9f3
---- /dev/null
-+++ b/board/ti/am62px/board-cfg.yaml
-@@ -0,0 +1,37 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
-+#
-+# Board configuration for AM62Px SoCs
-+#
-+
-+---
-+
-+board-cfg:
-+    rev:
-+        boardcfg_abi_maj: 0x0
-+        boardcfg_abi_min: 0x1
-+    control:
-+        subhdr:
-+            magic: 0xC1D3
-+            size: 7
-+        main_isolation_enable: 0x5A
-+        main_isolation_hostid: 0x2
-+    secproxy:
-+        subhdr:
-+            magic: 0x1207
-+            size: 7
-+        scaling_factor: 0x1
-+        scaling_profile: 0x1
-+        disable_main_nav_secure_proxy: 0
-+    msmc:
-+        subhdr:
-+            magic: 0xA5C3
-+            size: 5
-+        msmc_cache_size: 0x10
-+    debug_cfg:
-+        subhdr:
-+            magic: 0x020C
-+            size: 8
-+        trace_dst_enables: 0x00
-+        trace_src_enables: 0x00
-diff --git a/board/ti/am62px/evm.c b/board/ti/am62px/evm.c
-new file mode 100644
-index 0000000000000..97a95ce8cc2d5
---- /dev/null
-+++ b/board/ti/am62px/evm.c
-@@ -0,0 +1,29 @@
-+// SPDX-License-Identifier: GPL-2.0+
++++ b/include/configs/am62px_evm.h
+@@ -0,0 +1,14 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
 +/*
-+ * Board specific initialization for AM62Px platforms
++ * Configuration header file for K3 AM62Px SoC family
 + *
 + * Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
-+ *
 + */
 +
-+#include <asm/arch/hardware.h>
-+#include <asm/io.h>
-+#include <dm/uclass.h>
-+#include <env.h>
-+#include <fdt_support.h>
-+#include <spl.h>
++#ifndef __CONFIG_AM62PX_EVM_H
++#define __CONFIG_AM62PX_EVM_H
 +
-+int board_init(void)
-+{
-+	return 0;
-+}
++/* Now for the remaining common defines */
++#include <configs/ti_armv7_common.h>
 +
-+int dram_init(void)
-+{
-+	return fdtdec_setup_mem_size_base();
-+}
-+
-+int dram_init_banksize(void)
-+{
-+	return fdtdec_setup_memory_banksize();
-+}
-diff --git a/board/ti/am62px/pm-cfg.yaml b/board/ti/am62px/pm-cfg.yaml
-new file mode 100644
-index 0000000000000..3ff27ce702c26
---- /dev/null
-+++ b/board/ti/am62px/pm-cfg.yaml
-@@ -0,0 +1,12 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
-+#
-+# Power management configuration for AM62Px
-+#
-+#
-+---
-+pm-cfg:
-+    rev:
-+        boardcfg_abi_maj: 0x0
-+        boardcfg_abi_min: 0x1
-diff --git a/board/ti/am62px/rm-cfg.yaml b/board/ti/am62px/rm-cfg.yaml
-new file mode 100644
-index 0000000000000..caa2f7a5a83e1
---- /dev/null
-+++ b/board/ti/am62px/rm-cfg.yaml
-@@ -0,0 +1,987 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+# Copyright (C) 2022-2023 Texas Instruments Incorporated - https://www.ti.com/
-+#
-+# Resource management configuration for AM62P
-+#
-+
-+---
-+
-+rm-cfg:
-+    rm_boardcfg:
-+        rev:
-+            boardcfg_abi_maj: 0x0
-+            boardcfg_abi_min: 0x1
-+        host_cfg:
-+            subhdr:
-+                magic: 0x4C41
-+                size: 356
-+            host_cfg_entries:
-+                -  # 1
-+                    host_id: 12
-+                    allowed_atype: 0x2A
-+                    allowed_qos: 0xAAAA
-+                    allowed_orderid: 0xAAAAAAAA
-+                    allowed_priority: 0xAAAA
-+                    allowed_sched_priority: 0xAA
-+                -  # 2
-+                    host_id: 30
-+                    allowed_atype: 0x2A
-+                    allowed_qos: 0xAAAA
-+                    allowed_orderid: 0xAAAAAAAA
-+                    allowed_priority: 0xAAAA
-+                    allowed_sched_priority: 0xAA
-+                -  # 3
-+                    host_id: 36
-+                    allowed_atype: 0x2A
-+                    allowed_qos: 0xAAAA
-+                    allowed_orderid: 0xAAAAAAAA
-+                    allowed_priority: 0xAAAA
-+                    allowed_sched_priority: 0xAA
-+                -  # 4
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 5
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 6
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 7
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 8
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 9
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 10
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 11
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 12
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 13
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 14
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 15
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 16
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 17
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 18
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 19
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 20
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 21
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 22
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 23
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 24
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 25
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 26
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 27
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 28
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 29
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 30
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 31
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                -  # 32
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+        resasg:
-+            subhdr:
-+                magic: 0x7B25
-+                size: 8
-+            resasg_entries_size: 984
-+            reserved: 0
-+    resasg_entries:
-+        -
-+            start_resource: 0
-+            num_resource: 16
-+            type: 192
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 34
-+            num_resource: 2
-+            type: 192
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 2
-+            type: 320
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 2
-+            num_resource: 2
-+            type: 320
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 2
-+            num_resource: 2
-+            type: 320
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 4
-+            num_resource: 4
-+            type: 320
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 26
-+            type: 384
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 50176
-+            num_resource: 164
-+            type: 1666
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 1
-+            type: 1667
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 18
-+            type: 1677
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 18
-+            num_resource: 6
-+            type: 1677
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 18
-+            num_resource: 6
-+            type: 1677
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 24
-+            num_resource: 2
-+            type: 1677
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 26
-+            num_resource: 6
-+            type: 1677
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 57
-+            num_resource: 18
-+            type: 1678
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 75
-+            num_resource: 5
-+            type: 1678
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 75
-+            num_resource: 5
-+            type: 1678
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 80
-+            num_resource: 2
-+            type: 1678
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 32
-+            num_resource: 12
-+            type: 1679
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 44
-+            num_resource: 6
-+            type: 1679
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 44
-+            num_resource: 6
-+            type: 1679
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 50
-+            num_resource: 2
-+            type: 1679
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 52
-+            num_resource: 5
-+            type: 1679
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 18
-+            type: 1696
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 18
-+            num_resource: 6
-+            type: 1696
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 18
-+            num_resource: 6
-+            type: 1696
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 24
-+            num_resource: 2
-+            type: 1696
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 26
-+            num_resource: 6
-+            type: 1696
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 18
-+            type: 1697
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 18
-+            num_resource: 5
-+            type: 1697
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 18
-+            num_resource: 5
-+            type: 1697
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 23
-+            num_resource: 2
-+            type: 1697
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 12
-+            type: 1698
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 12
-+            num_resource: 6
-+            type: 1698
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 12
-+            num_resource: 6
-+            type: 1698
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 18
-+            num_resource: 2
-+            type: 1698
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 20
-+            num_resource: 5
-+            type: 1698
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 5
-+            num_resource: 35
-+            type: 1802
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 45
-+            num_resource: 35
-+            type: 1802
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 45
-+            num_resource: 35
-+            type: 1802
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 168
-+            num_resource: 8
-+            type: 1802
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 14
-+            num_resource: 512
-+            type: 1805
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 526
-+            num_resource: 256
-+            type: 1805
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 526
-+            num_resource: 256
-+            type: 1805
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 782
-+            num_resource: 128
-+            type: 1805
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 910
-+            num_resource: 626
-+            type: 1805
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 4096
-+            num_resource: 29
-+            type: 1807
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 4608
-+            num_resource: 99
-+            type: 1808
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 5120
-+            num_resource: 24
-+            type: 1809
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 5632
-+            num_resource: 51
-+            type: 1810
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 6144
-+            num_resource: 51
-+            type: 1811
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 8192
-+            num_resource: 32
-+            type: 1812
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 8704
-+            num_resource: 32
-+            type: 1813
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 9216
-+            num_resource: 32
-+            type: 1814
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 9728
-+            num_resource: 25
-+            type: 1815
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 10240
-+            num_resource: 25
-+            type: 1816
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 10752
-+            num_resource: 25
-+            type: 1817
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 11264
-+            num_resource: 25
-+            type: 1818
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 11776
-+            num_resource: 25
-+            type: 1819
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 12288
-+            num_resource: 25
-+            type: 1820
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 1
-+            type: 1923
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 10
-+            type: 1936
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 10
-+            num_resource: 3
-+            type: 1936
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 10
-+            num_resource: 3
-+            type: 1936
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 13
-+            num_resource: 3
-+            type: 1936
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 16
-+            num_resource: 3
-+            type: 1936
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 19
-+            num_resource: 64
-+            type: 1937
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 19
-+            num_resource: 64
-+            type: 1937
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 83
-+            num_resource: 8
-+            type: 1938
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 91
-+            num_resource: 8
-+            type: 1939
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 99
-+            num_resource: 10
-+            type: 1942
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 109
-+            num_resource: 3
-+            type: 1942
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 109
-+            num_resource: 3
-+            type: 1942
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 112
-+            num_resource: 3
-+            type: 1942
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 115
-+            num_resource: 3
-+            type: 1942
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 118
-+            num_resource: 16
-+            type: 1943
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 118
-+            num_resource: 16
-+            type: 1943
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 134
-+            num_resource: 8
-+            type: 1944
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 134
-+            num_resource: 8
-+            type: 1945
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 142
-+            num_resource: 8
-+            type: 1946
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 142
-+            num_resource: 8
-+            type: 1947
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 10
-+            type: 1955
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 10
-+            num_resource: 3
-+            type: 1955
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 10
-+            num_resource: 3
-+            type: 1955
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 13
-+            num_resource: 3
-+            type: 1955
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 16
-+            num_resource: 3
-+            type: 1955
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 19
-+            num_resource: 8
-+            type: 1956
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 19
-+            num_resource: 8
-+            type: 1956
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 27
-+            num_resource: 1
-+            type: 1957
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 28
-+            num_resource: 1
-+            type: 1958
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 10
-+            type: 1961
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 10
-+            num_resource: 3
-+            type: 1961
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 10
-+            num_resource: 3
-+            type: 1961
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 13
-+            num_resource: 3
-+            type: 1961
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 16
-+            num_resource: 3
-+            type: 1961
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 10
-+            type: 1962
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 10
-+            num_resource: 3
-+            type: 1962
-+            host_id: 35
-+            reserved: 0
-+        -
-+            start_resource: 10
-+            num_resource: 3
-+            type: 1962
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 13
-+            num_resource: 3
-+            type: 1962
-+            host_id: 30
-+            reserved: 0
-+        -
-+            start_resource: 16
-+            num_resource: 3
-+            type: 1962
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 19
-+            num_resource: 1
-+            type: 1963
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 19
-+            num_resource: 1
-+            type: 1963
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 19
-+            num_resource: 16
-+            type: 1964
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 19
-+            num_resource: 16
-+            type: 1964
-+            host_id: 36
-+            reserved: 0
-+        -
-+            start_resource: 20
-+            num_resource: 1
-+            type: 1965
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 35
-+            num_resource: 8
-+            type: 1966
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 21
-+            num_resource: 1
-+            type: 1967
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 35
-+            num_resource: 8
-+            type: 1968
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 22
-+            num_resource: 1
-+            type: 1969
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 43
-+            num_resource: 8
-+            type: 1970
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 23
-+            num_resource: 1
-+            type: 1971
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 43
-+            num_resource: 8
-+            type: 1972
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 1
-+            type: 2112
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 2
-+            num_resource: 2
-+            type: 2122
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 51200
-+            num_resource: 12
-+            type: 12738
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 1
-+            type: 12739
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 6
-+            type: 12750
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 6
-+            type: 12769
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 0
-+            num_resource: 8
-+            type: 12810
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 12288
-+            num_resource: 128
-+            type: 12813
-+            host_id: 12
-+            reserved: 0
-+        -
-+            start_resource: 3072
-+            num_resource: 6
-+            type: 12826
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 3584
-+            num_resource: 6
-+            type: 12827
-+            host_id: 128
-+            reserved: 0
-+        -
-+            start_resource: 4096
-+            num_resource: 6
-+            type: 12828
-+            host_id: 128
-+            reserved: 0
-diff --git a/board/ti/am62px/sec-cfg.yaml b/board/ti/am62px/sec-cfg.yaml
-new file mode 100644
-index 0000000000000..46be354972afc
---- /dev/null
-+++ b/board/ti/am62px/sec-cfg.yaml
-@@ -0,0 +1,378 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
-+#
-+# Security configuration for AM62Px
-+#
-+---
-+sec-cfg:
-+    rev:
-+        boardcfg_abi_maj: 0x0
-+        boardcfg_abi_min: 0x1
-+    processor_acl_list:
-+        subhdr:
-+            magic: 0xF1EA
-+            size: 164
-+        proc_acl_entries:
-+            -  # 1
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            -  # 2
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            -  # 3
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            -  # 4
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            -  # 5
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            -  # 6
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            -  # 7
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            -  # 8
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            -  # 9
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            -  # 10
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            -  # 11
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            -  # 12
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            -  # 13
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            -  # 14
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            -  # 15
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            -  # 16
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            -  # 17
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            -  # 18
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            -  # 19
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            -  # 20
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            -  # 21
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            -  # 22
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            -  # 23
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            -  # 24
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            -  # 25
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            -  # 26
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            -  # 27
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            -  # 28
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            -  # 29
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            -  # 30
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            -  # 31
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            -  # 32
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+    host_hierarchy:
-+        subhdr:
-+            magic: 0x8D27
-+            size: 68
-+        host_hierarchy_entries:
-+            -  # 1
-+                host_id: 0
-+                supervisor_host_id: 0
-+            -  # 2
-+                host_id: 0
-+                supervisor_host_id: 0
-+            -  # 3
-+                host_id: 0
-+                supervisor_host_id: 0
-+            -  # 4
-+                host_id: 0
-+                supervisor_host_id: 0
-+            -  # 5
-+                host_id: 0
-+                supervisor_host_id: 0
-+            -  # 6
-+                host_id: 0
-+                supervisor_host_id: 0
-+            -  # 7
-+                host_id: 0
-+                supervisor_host_id: 0
-+            -  # 8
-+                host_id: 0
-+                supervisor_host_id: 0
-+            -  # 9
-+                host_id: 0
-+                supervisor_host_id: 0
-+            -  # 10
-+                host_id: 0
-+                supervisor_host_id: 0
-+            -  # 11
-+                host_id: 0
-+                supervisor_host_id: 0
-+            -  # 12
-+                host_id: 0
-+                supervisor_host_id: 0
-+            -  # 13
-+                host_id: 0
-+                supervisor_host_id: 0
-+            -  # 14
-+                host_id: 0
-+                supervisor_host_id: 0
-+            -  # 15
-+                host_id: 0
-+                supervisor_host_id: 0
-+            -  # 16
-+                host_id: 0
-+                supervisor_host_id: 0
-+            -  # 17
-+                host_id: 0
-+                supervisor_host_id: 0
-+            -  # 18
-+                host_id: 0
-+                supervisor_host_id: 0
-+            -  # 19
-+                host_id: 0
-+                supervisor_host_id: 0
-+            -  # 20
-+                host_id: 0
-+                supervisor_host_id: 0
-+            -  # 21
-+                host_id: 0
-+                supervisor_host_id: 0
-+            -  # 22
-+                host_id: 0
-+                supervisor_host_id: 0
-+            -  # 23
-+                host_id: 0
-+                supervisor_host_id: 0
-+            -  # 24
-+                host_id: 0
-+                supervisor_host_id: 0
-+            -  # 25
-+                host_id: 0
-+                supervisor_host_id: 0
-+            -  # 26
-+                host_id: 0
-+                supervisor_host_id: 0
-+            -  # 27
-+                host_id: 0
-+                supervisor_host_id: 0
-+            -  # 28
-+                host_id: 0
-+                supervisor_host_id: 0
-+            -  # 29
-+                host_id: 0
-+                supervisor_host_id: 0
-+            -  # 30
-+                host_id: 0
-+                supervisor_host_id: 0
-+            -  # 31
-+                host_id: 0
-+                supervisor_host_id: 0
-+            -  # 32
-+                host_id: 0
-+                supervisor_host_id: 0
-+    otp_config:
-+        subhdr:
-+            magic: 0x4081
-+            size: 69
-+        write_host_id: 0
-+        otp_entry:
-+            -  # 1
-+                host_id: 0
-+                host_perms: 0
-+            -  # 2
-+                host_id: 0
-+                host_perms: 0
-+            -  # 3
-+                host_id: 0
-+                host_perms: 0
-+            -  # 4
-+                host_id: 0
-+                host_perms: 0
-+            -  # 5
-+                host_id: 0
-+                host_perms: 0
-+            -  # 6
-+                host_id: 0
-+                host_perms: 0
-+            -  # 7
-+                host_id: 0
-+                host_perms: 0
-+            -  # 8
-+                host_id: 0
-+                host_perms: 0
-+            -  # 9
-+                host_id: 0
-+                host_perms: 0
-+            -  # 10
-+                host_id: 0
-+                host_perms: 0
-+            -  # 11
-+                host_id: 0
-+                host_perms: 0
-+            -  # 12
-+                host_id: 0
-+                host_perms: 0
-+            -  # 13
-+                host_id: 0
-+                host_perms: 0
-+            -  # 14
-+                host_id: 0
-+                host_perms: 0
-+            -  # 15
-+                host_id: 0
-+                host_perms: 0
-+            -  # 16
-+                host_id: 0
-+                host_perms: 0
-+            -  # 17
-+                host_id: 0
-+                host_perms: 0
-+            -  # 18
-+                host_id: 0
-+                host_perms: 0
-+            -  # 19
-+                host_id: 0
-+                host_perms: 0
-+            -  # 20
-+                host_id: 0
-+                host_perms: 0
-+            -  # 21
-+                host_id: 0
-+                host_perms: 0
-+            -  # 22
-+                host_id: 0
-+                host_perms: 0
-+            -  # 23
-+                host_id: 0
-+                host_perms: 0
-+            -  # 24
-+                host_id: 0
-+                host_perms: 0
-+            -  # 25
-+                host_id: 0
-+                host_perms: 0
-+            -  # 26
-+                host_id: 0
-+                host_perms: 0
-+            -  # 27
-+                host_id: 0
-+                host_perms: 0
-+            -  # 28
-+                host_id: 0
-+                host_perms: 0
-+            -  # 29
-+                host_id: 0
-+                host_perms: 0
-+            -  # 30
-+                host_id: 0
-+                host_perms: 0
-+            -  # 31
-+                host_id: 0
-+                host_perms: 0
-+            -  # 32
-+                host_id: 0
-+                host_perms: 0
-+    dkek_config:
-+        subhdr:
-+            magic: 0x5170
-+            size: 12
-+        allowed_hosts: [128, 0, 0, 0]
-+        allow_dkek_export_tisci: 0x5A
-+        rsvd: [0, 0, 0]
-+    sa2ul_cfg:
-+        subhdr:
-+            magic: 0x23BE
-+            size: 0
-+        auth_resource_owner: 0
-+        enable_saul_psil_global_config_writes: 0x5A
-+        rsvd: [0, 0]
-+    sec_dbg_config:
-+        subhdr:
-+            magic: 0x42AF
-+            size: 16
-+        allow_jtag_unlock: 0x5A
-+        allow_wildcard_unlock: 0x5A
-+        allowed_debug_level_rsvd: 0
-+        rsvd: 0
-+        min_cert_rev: 0x0
-+        jtag_unlock_hosts: [0, 0, 0, 0]
-+    sec_handover_cfg:
-+        subhdr:
-+            magic: 0x608F
-+            size: 10
-+        handover_msg_sender: 0
-+        handover_to_host_id: 0
-+        rsvd: [0, 0, 0, 0]
-diff --git a/board/ti/am62px/tifs-rm-cfg.yaml b/board/ti/am62px/tifs-rm-cfg.yaml
-new file mode 100644
-index 0000000000000..a80a275046716
---- /dev/null
-+++ b/board/ti/am62px/tifs-rm-cfg.yaml
-@@ -0,0 +1,879 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+# Copyright (C) 2022-2023 Texas Instruments Incorporated - https://www.ti.com/
-+#
-+# Resource management configuration for AM62P
-+#
-+
-+---
-+
-+tifs-rm-cfg:
-+    rm_boardcfg:
-+        rev:
-+            boardcfg_abi_maj : 0x0
-+            boardcfg_abi_min : 0x1
-+        host_cfg:
-+            subhdr:
-+                magic: 0x4C41
-+                size : 356
-+            host_cfg_entries:
-+                - #1
-+                    host_id: 12
-+                    allowed_atype: 0x2A
-+                    allowed_qos: 0xAAAA
-+                    allowed_orderid: 0xAAAAAAAA
-+                    allowed_priority: 0xAAAA
-+                    allowed_sched_priority: 0xAA
-+                - #2
-+                    host_id: 30
-+                    allowed_atype: 0x2A
-+                    allowed_qos: 0xAAAA
-+                    allowed_orderid: 0xAAAAAAAA
-+                    allowed_priority: 0xAAAA
-+                    allowed_sched_priority: 0xAA
-+                - #3
-+                    host_id: 36
-+                    allowed_atype: 0x2A
-+                    allowed_qos: 0xAAAA
-+                    allowed_orderid: 0xAAAAAAAA
-+                    allowed_priority: 0xAAAA
-+                    allowed_sched_priority: 0xAA
-+                - #4
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #5
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #6
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #7
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #8
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #9
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #10
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #11
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #12
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #13
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #14
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #15
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #16
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #17
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #18
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #19
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #20
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #21
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #22
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #23
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #24
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #25
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #26
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #27
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #28
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #29
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #30
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #31
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #32
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+        resasg:
-+            subhdr:
-+                magic: 0x7B25
-+                size: 8
-+            resasg_entries_size: 840
-+            reserved: 0
-+    resasg_entries:
-+        -
-+                start_resource: 0
-+                num_resource: 18
-+                type: 1677
-+                host_id: 12
-+                reserved: 0
-+        -
-+                start_resource: 18
-+                num_resource: 6
-+                type: 1677
-+                host_id: 35
-+                reserved: 0
-+        -
-+                start_resource: 18
-+                num_resource: 6
-+                type: 1677
-+                host_id: 36
-+                reserved: 0
-+        -
-+                start_resource: 24
-+                num_resource: 2
-+                type: 1677
-+                host_id: 30
-+                reserved: 0
-+        -
-+                start_resource: 26
-+                num_resource: 6
-+                type: 1677
-+                host_id: 128
-+                reserved: 0
-+        -
-+                start_resource: 57
-+                num_resource: 18
-+                type: 1678
-+                host_id: 12
-+                reserved: 0
-+        -
-+                start_resource: 75
-+                num_resource: 5
-+                type: 1678
-+                host_id: 35
-+                reserved: 0
-+        -
-+                start_resource: 75
-+                num_resource: 5
-+                type: 1678
-+                host_id: 36
-+                reserved: 0
-+        -
-+                start_resource: 80
-+                num_resource: 2
-+                type: 1678
-+                host_id: 30
-+                reserved: 0
-+        -
-+                start_resource: 32
-+                num_resource: 12
-+                type: 1679
-+                host_id: 12
-+                reserved: 0
-+        -
-+                start_resource: 44
-+                num_resource: 6
-+                type: 1679
-+                host_id: 35
-+                reserved: 0
-+        -
-+                start_resource: 44
-+                num_resource: 6
-+                type: 1679
-+                host_id: 36
-+                reserved: 0
-+        -
-+                start_resource: 50
-+                num_resource: 2
-+                type: 1679
-+                host_id: 30
-+                reserved: 0
-+        -
-+                start_resource: 52
-+                num_resource: 5
-+                type: 1679
-+                host_id: 128
-+                reserved: 0
-+        -
-+                start_resource: 0
-+                num_resource: 18
-+                type: 1696
-+                host_id: 12
-+                reserved: 0
-+        -
-+                start_resource: 18
-+                num_resource: 6
-+                type: 1696
-+                host_id: 35
-+                reserved: 0
-+        -
-+                start_resource: 18
-+                num_resource: 6
-+                type: 1696
-+                host_id: 36
-+                reserved: 0
-+        -
-+                start_resource: 24
-+                num_resource: 2
-+                type: 1696
-+                host_id: 30
-+                reserved: 0
-+        -
-+                start_resource: 26
-+                num_resource: 6
-+                type: 1696
-+                host_id: 128
-+                reserved: 0
-+        -
-+                start_resource: 0
-+                num_resource: 18
-+                type: 1697
-+                host_id: 12
-+                reserved: 0
-+        -
-+                start_resource: 18
-+                num_resource: 5
-+                type: 1697
-+                host_id: 35
-+                reserved: 0
-+        -
-+                start_resource: 18
-+                num_resource: 5
-+                type: 1697
-+                host_id: 36
-+                reserved: 0
-+        -
-+                start_resource: 23
-+                num_resource: 2
-+                type: 1697
-+                host_id: 30
-+                reserved: 0
-+        -
-+                start_resource: 0
-+                num_resource: 12
-+                type: 1698
-+                host_id: 12
-+                reserved: 0
-+        -
-+                start_resource: 12
-+                num_resource: 6
-+                type: 1698
-+                host_id: 35
-+                reserved: 0
-+        -
-+                start_resource: 12
-+                num_resource: 6
-+                type: 1698
-+                host_id: 36
-+                reserved: 0
-+        -
-+                start_resource: 18
-+                num_resource: 2
-+                type: 1698
-+                host_id: 30
-+                reserved: 0
-+        -
-+                start_resource: 20
-+                num_resource: 5
-+                type: 1698
-+                host_id: 128
-+                reserved: 0
-+        -
-+                start_resource: 5
-+                num_resource: 35
-+                type: 1802
-+                host_id: 12
-+                reserved: 0
-+        -
-+                start_resource: 44
-+                num_resource: 36
-+                type: 1802
-+                host_id: 35
-+                reserved: 0
-+        -
-+                start_resource: 44
-+                num_resource: 36
-+                type: 1802
-+                host_id: 36
-+                reserved: 0
-+        -
-+                start_resource: 168
-+                num_resource: 8
-+                type: 1802
-+                host_id: 30
-+                reserved: 0
-+        -
-+                start_resource: 4096
-+                num_resource: 29
-+                type: 1807
-+                host_id: 128
-+                reserved: 0
-+        -
-+                start_resource: 4608
-+                num_resource: 99
-+                type: 1808
-+                host_id: 128
-+                reserved: 0
-+        -
-+                start_resource: 5120
-+                num_resource: 24
-+                type: 1809
-+                host_id: 128
-+                reserved: 0
-+        -
-+                start_resource: 5632
-+                num_resource: 51
-+                type: 1810
-+                host_id: 128
-+                reserved: 0
-+        -
-+                start_resource: 6144
-+                num_resource: 51
-+                type: 1811
-+                host_id: 128
-+                reserved: 0
-+        -
-+                start_resource: 8192
-+                num_resource: 32
-+                type: 1812
-+                host_id: 128
-+                reserved: 0
-+        -
-+                start_resource: 8704
-+                num_resource: 32
-+                type: 1813
-+                host_id: 128
-+                reserved: 0
-+        -
-+                start_resource: 9216
-+                num_resource: 32
-+                type: 1814
-+                host_id: 128
-+                reserved: 0
-+        -
-+                start_resource: 9728
-+                num_resource: 25
-+                type: 1815
-+                host_id: 128
-+                reserved: 0
-+        -
-+                start_resource: 10240
-+                num_resource: 25
-+                type: 1816
-+                host_id: 128
-+                reserved: 0
-+        -
-+                start_resource: 10752
-+                num_resource: 25
-+                type: 1817
-+                host_id: 128
-+                reserved: 0
-+        -
-+                start_resource: 11264
-+                num_resource: 25
-+                type: 1818
-+                host_id: 128
-+                reserved: 0
-+        -
-+                start_resource: 11776
-+                num_resource: 25
-+                type: 1819
-+                host_id: 128
-+                reserved: 0
-+        -
-+                start_resource: 12288
-+                num_resource: 25
-+                type: 1820
-+                host_id: 128
-+                reserved: 0
-+        -
-+                start_resource: 0
-+                num_resource: 10
-+                type: 1936
-+                host_id: 12
-+                reserved: 0
-+        -
-+                start_resource: 10
-+                num_resource: 3
-+                type: 1936
-+                host_id: 35
-+                reserved: 0
-+        -
-+                start_resource: 10
-+                num_resource: 3
-+                type: 1936
-+                host_id: 36
-+                reserved: 0
-+        -
-+                start_resource: 13
-+                num_resource: 3
-+                type: 1936
-+                host_id: 30
-+                reserved: 0
-+        -
-+                start_resource: 16
-+                num_resource: 3
-+                type: 1936
-+                host_id: 128
-+                reserved: 0
-+        -
-+                start_resource: 19
-+                num_resource: 64
-+                type: 1937
-+                host_id: 12
-+                reserved: 0
-+        -
-+                start_resource: 19
-+                num_resource: 64
-+                type: 1937
-+                host_id: 36
-+                reserved: 0
-+        -
-+                start_resource: 83
-+                num_resource: 8
-+                type: 1938
-+                host_id: 12
-+                reserved: 0
-+        -
-+                start_resource: 91
-+                num_resource: 8
-+                type: 1939
-+                host_id: 12
-+                reserved: 0
-+        -
-+                start_resource: 99
-+                num_resource: 10
-+                type: 1942
-+                host_id: 12
-+                reserved: 0
-+        -
-+                start_resource: 109
-+                num_resource: 3
-+                type: 1942
-+                host_id: 35
-+                reserved: 0
-+        -
-+                start_resource: 109
-+                num_resource: 3
-+                type: 1942
-+                host_id: 36
-+                reserved: 0
-+        -
-+                start_resource: 112
-+                num_resource: 3
-+                type: 1942
-+                host_id: 30
-+                reserved: 0
-+        -
-+                start_resource: 115
-+                num_resource: 3
-+                type: 1942
-+                host_id: 128
-+                reserved: 0
-+        -
-+                start_resource: 118
-+                num_resource: 16
-+                type: 1943
-+                host_id: 12
-+                reserved: 0
-+        -
-+                start_resource: 118
-+                num_resource: 16
-+                type: 1943
-+                host_id: 36
-+                reserved: 0
-+        -
-+                start_resource: 134
-+                num_resource: 8
-+                type: 1944
-+                host_id: 12
-+                reserved: 0
-+        -
-+                start_resource: 134
-+                num_resource: 8
-+                type: 1945
-+                host_id: 12
-+                reserved: 0
-+        -
-+                start_resource: 142
-+                num_resource: 8
-+                type: 1946
-+                host_id: 12
-+                reserved: 0
-+        -
-+                start_resource: 142
-+                num_resource: 8
-+                type: 1947
-+                host_id: 12
-+                reserved: 0
-+        -
-+                start_resource: 0
-+                num_resource: 10
-+                type: 1955
-+                host_id: 12
-+                reserved: 0
-+        -
-+                start_resource: 10
-+                num_resource: 3
-+                type: 1955
-+                host_id: 35
-+                reserved: 0
-+        -
-+                start_resource: 10
-+                num_resource: 3
-+                type: 1955
-+                host_id: 36
-+                reserved: 0
-+        -
-+                start_resource: 13
-+                num_resource: 3
-+                type: 1955
-+                host_id: 30
-+                reserved: 0
-+        -
-+                start_resource: 16
-+                num_resource: 3
-+                type: 1955
-+                host_id: 128
-+                reserved: 0
-+        -
-+                start_resource: 19
-+                num_resource: 8
-+                type: 1956
-+                host_id: 12
-+                reserved: 0
-+        -
-+                start_resource: 19
-+                num_resource: 8
-+                type: 1956
-+                host_id: 36
-+                reserved: 0
-+        -
-+                start_resource: 27
-+                num_resource: 1
-+                type: 1957
-+                host_id: 12
-+                reserved: 0
-+        -
-+                start_resource: 28
-+                num_resource: 1
-+                type: 1958
-+                host_id: 12
-+                reserved: 0
-+        -
-+                start_resource: 0
-+                num_resource: 10
-+                type: 1961
-+                host_id: 12
-+                reserved: 0
-+        -
-+                start_resource: 10
-+                num_resource: 3
-+                type: 1961
-+                host_id: 35
-+                reserved: 0
-+        -
-+                start_resource: 10
-+                num_resource: 3
-+                type: 1961
-+                host_id: 36
-+                reserved: 0
-+        -
-+                start_resource: 13
-+                num_resource: 3
-+                type: 1961
-+                host_id: 30
-+                reserved: 0
-+        -
-+                start_resource: 16
-+                num_resource: 3
-+                type: 1961
-+                host_id: 128
-+                reserved: 0
-+        -
-+                start_resource: 0
-+                num_resource: 10
-+                type: 1962
-+                host_id: 12
-+                reserved: 0
-+        -
-+                start_resource: 10
-+                num_resource: 3
-+                type: 1962
-+                host_id: 35
-+                reserved: 0
-+        -
-+                start_resource: 10
-+                num_resource: 3
-+                type: 1962
-+                host_id: 36
-+                reserved: 0
-+        -
-+                start_resource: 13
-+                num_resource: 3
-+                type: 1962
-+                host_id: 30
-+                reserved: 0
-+        -
-+                start_resource: 16
-+                num_resource: 3
-+                type: 1962
-+                host_id: 128
-+                reserved: 0
-+        -
-+                start_resource: 19
-+                num_resource: 1
-+                type: 1963
-+                host_id: 12
-+                reserved: 0
-+        -
-+                start_resource: 19
-+                num_resource: 1
-+                type: 1963
-+                host_id: 36
-+                reserved: 0
-+        -
-+                start_resource: 19
-+                num_resource: 16
-+                type: 1964
-+                host_id: 12
-+                reserved: 0
-+        -
-+                start_resource: 19
-+                num_resource: 16
-+                type: 1964
-+                host_id: 36
-+                reserved: 0
-+        -
-+                start_resource: 20
-+                num_resource: 1
-+                type: 1965
-+                host_id: 12
-+                reserved: 0
-+        -
-+                start_resource: 35
-+                num_resource: 8
-+                type: 1966
-+                host_id: 12
-+                reserved: 0
-+        -
-+                start_resource: 21
-+                num_resource: 1
-+                type: 1967
-+                host_id: 12
-+                reserved: 0
-+        -
-+                start_resource: 35
-+                num_resource: 8
-+                type: 1968
-+                host_id: 12
-+                reserved: 0
-+        -
-+                start_resource: 22
-+                num_resource: 1
-+                type: 1969
-+                host_id: 12
-+                reserved: 0
-+        -
-+                start_resource: 43
-+                num_resource: 8
-+                type: 1970
-+                host_id: 12
-+                reserved: 0
-+        -
-+                start_resource: 23
-+                num_resource: 1
-+                type: 1971
-+                host_id: 12
-+                reserved: 0
-+        -
-+                start_resource: 43
-+                num_resource: 8
-+                type: 1972
-+                host_id: 12
-+                reserved: 0
-+        -
-+                start_resource: 0
-+                num_resource: 1
-+                type: 2112
-+                host_id: 128
-+                reserved: 0
-+        -
-+                start_resource: 2
-+                num_resource: 2
-+                type: 2122
-+                host_id: 12
-+                reserved: 0
-+        -
-+                start_resource: 0
-+                num_resource: 6
-+                type: 12750
-+                host_id: 12
-+                reserved: 0
-+        -
-+                start_resource: 0
-+                num_resource: 6
-+                type: 12769
-+                host_id: 12
-+                reserved: 0
-+        -
-+                start_resource: 0
-+                num_resource: 8
-+                type: 12810
-+                host_id: 12
-+                reserved: 0
-+        -
-+                start_resource: 3072
-+                num_resource: 6
-+                type: 12826
-+                host_id: 128
-+                reserved: 0
-+        -
-+                start_resource: 3584
-+                num_resource: 6
-+                type: 12827
-+                host_id: 128
-+                reserved: 0
-+        -
-+                start_resource: 4096
-+                num_resource: 6
-+                type: 12828
-+                host_id: 128
-+                reserved: 0
++#endif /* __CONFIG_AM62PX_EVM_H */
 
 -- 
 2.43.2
