@@ -4,62 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98096C5478C
-	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 07:55:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B330C48BF6
+	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 08:05:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EDBC287E91;
-	Mon, 26 Feb 2024 08:55:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 9C60C87D74;
+	Mon, 26 Feb 2024 09:05:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="a87n8djJ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qxvvIzDj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 60C7D87BD6; Mon, 26 Feb 2024 08:55:06 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8456B87E93; Mon, 26 Feb 2024 09:05:21 +0100 (CET)
+Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
+ [IPv6:2607:f8b0:4864:20::435])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BBDA987E91
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 08:55:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7013B87E95
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 09:05:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=31c0=KD=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1708934098;
- bh=RzdC2rLpUsuBgYflZD5OH4Z3DiG5hUgLuKFH+fiaVg8=;
- b=a87n8djJi+HjtepE9bobWtqQ3kIYtZ1rgjNSrOmaV+gyRQXHuE0WtLgcsqXVOSv4Lkm6WH3pr
- 5FblTsKMAdq7RrYYqjdLl3VyzdHwf/hSHlubFOz0J7qfk7ks9m7ijBVPMB0k/CTNDnsy96XZhfH
- 0FZOldT3y4v7jQxKd+F8p7ns4orG8lZPQcAduvRJ5gMB+o4x3zpHbFFmsw5MiLkDFaGYoCXp9VS
- oP2ENIuKK+N9nnWQJ+ViexmVuTYrR7S2EONCX8YEFoOSrLIfNaKtHHVE2IF5w2hcb4imb9Yecz5
- Pd7/Hwt1r0tplCYhk+Mtrl/VcTyWTSA7n3NSx6BOtdjw==
-Message-ID: <81bdee81-2f8f-4fbf-a729-8fd543492adb@kwiboo.se>
-Date: Mon, 26 Feb 2024 08:54:52 +0100
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-pf1-x435.google.com with SMTP id
+ d2e1a72fcca58-6e08dd0fa0bso2361291b3a.1
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 00:05:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1708934711; x=1709539511; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ooCHpnNh9uZ8qKAbHOrwEt/rKg4sWi4OjU2q69+ql/0=;
+ b=qxvvIzDjQSeCxHvw6YpHGTP7u6SfzJ7iNIT1TqnSSHvnaOZLlVS0Ct7ejCns7aOnWq
+ c4JY5x7LFKuPxPbZaxgLI86eTvdndUpdYk6RAgBzmooxq0ocmsdBp0jnKneSqMQxUTbK
+ hR+N/wVvHUG2rmFx/RgaVbvL48cABGNwf6W1aVY63CVDfZJMiXT84zaeYdnxcyY41RzL
+ ztVZeSZA2dehLBqG1aFrXeq5Zkdc0PEu6KcVs6OydCsoTeoR20DiOZByIejAGSWyIHpb
+ ub8l9KRtW/49CR7+GlfZhYCZXpdhJSOEaTmppWC1Qa8XbRCKSae+s1qI+GgmTDbfxLPN
+ H+uw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1708934711; x=1709539511;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ooCHpnNh9uZ8qKAbHOrwEt/rKg4sWi4OjU2q69+ql/0=;
+ b=pAS7f4KWwL4ra89NMIi4G6P1RPRkWhjl4/PYsZhBgfjzrH+po168bYKTnuZB57lmaE
+ Ssz6OIV/in1v2e6jAmuE24Gh35uh6FgqCY/ETjpcYStJ6KaQMUitI0I4VbDDRQaUCpAX
+ ms4A7L9RgaVS8EMOoNH1KTLcInFDBO//EwOpWPmbnTAQFWrpTL1ZtDsZi499/2VFS5F7
+ ZEnZ38sYZeSfjIoo7frFrB9sJ/LZgeKO38uZ5BNFE2ely5tCXf85y30ycbMV/2Al8x2G
+ aFrhzBMVdEFYniGLVxrbPIGoIzvIIRmf08h42va912XJGg2qF69Y/hI71cQfKuAhxknR
+ W7IA==
+X-Gm-Message-State: AOJu0Yw78xSxwa1lkrXl8B4gn21eUfiE29JARwqI9NA7DuJ83g0JOIql
+ zgENYxPoc/GxQzZsfGc+YbVn5PqPY8vPI0Fw8wyGvIQkmNxF5DG9X5Qi4aruxEkLmb4hJ5FOkPd
+ G
+X-Google-Smtp-Source: AGHT+IGi7qHbMvW3I6Iw5RUVLo7xmft+iw2KLLn6Y+xnN9FmpFRZdPN2L1c9KAXdFtT9UL/FhtAmaQ==
+X-Received: by 2002:a05:6a20:c888:b0:19e:cbe9:63b with SMTP id
+ hb8-20020a056a20c88800b0019ecbe9063bmr7296283pzb.3.1708934711347; 
+ Mon, 26 Feb 2024 00:05:11 -0800 (PST)
+Received: from sumit-X1.. ([223.178.208.32]) by smtp.gmail.com with ESMTPSA id
+ k2-20020aa788c2000000b006e13a88d52esm3392842pff.61.2024.02.26.00.05.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 26 Feb 2024 00:05:11 -0800 (PST)
+From: Sumit Garg <sumit.garg@linaro.org>
+To: u-boot@lists.denx.de
+Cc: marcel.ziswiler@toradex.com, francesco@dolcini.it, trini@konsulko.com,
+ lukma@denx.de, seanga2@gmail.com, jh80.chung@samsung.com, festevam@denx.de,
+ andrejs.cainikovs@toradex.com, sjg@chromium.org, peng.fan@nxp.com,
+ aford173@gmail.com, marex@denx.de, ilias.apalodimas@linaro.org,
+ sahaj.sarup@linaro.org, fathi.boudra@linaro.org, remi.duraffort@linaro.org,
+ daniel.thompson@linaro.org, Sumit Garg <sumit.garg@linaro.org>
+Subject: [PATCH v2 0/8] imx8mp: Enable PCIe/NVMe support
+Date: Mon, 26 Feb 2024 13:34:25 +0530
+Message-Id: <20240226080433.3307154-1-sumit.garg@linaro.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] usb: dwc3-generic: Fix build errors when USB_DWC3_GADGET
- is disabled
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marex@denx.de>, Mattijs Korpershoek
- <mkorpershoek@baylibre.com>, u-boot@lists.denx.de
-References: <20240225152715.1821613-1-jonas@kwiboo.se>
- <d9d049c8-d498-48ec-87f6-4127dd7a4ae6@denx.de>
- <5bafad42-2c61-43eb-8fbb-cec7159132a6@kwiboo.se>
- <20240226014708.GH3040305@bill-the-cat>
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20240226014708.GH3040305@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 65dc43d00eec80329ab5a533
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,92 +93,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2024-02-26 02:47, Tom Rini wrote:
-> On Mon, Feb 26, 2024 at 01:02:04AM +0100, Jonas Karlman wrote:
->> On 2024-02-25 23:01, Marek Vasut wrote:
->>> On 2/25/24 4:27 PM, Jonas Karlman wrote:
->>>> Build fail with the following error when DM_USB_GADGET is enabled and
->>>> USB_DWC3_GADGET is disabled:
->>>>
->>>>    dwc3/dwc3-generic.o: in function `dm_usb_gadget_handle_interrupts':
->>>>    dwc3/dwc3-generic.c:201:(.text.dm_usb_gadget_handle_interrupts+0x10):
->>>>      undefined reference to `dwc3_gadget_uboot_handle_interrupt'
->>>>
->>>> Build also fail with the following error when USB_GADGET_DWC2_OTG +
->>>> DM_USB_GADGET is enabled and USB_DWC3_GADGET is disabled:
->>>>
->>>>    gadget/dwc2_udc_otg.o: in function `dm_usb_gadget_handle_interrupts':
->>>>    gadget/dwc2_udc_otg.c:947: multiple definition of `dm_usb_gadget_handle_interrupts';
->>>>      dwc3/dwc3-generic.o:dwc3/dwc3-generic.c:197: first defined here
->>>>
->>>> Fix this by checking for USB_DWC3_GADGET in addition to DM_USB_GADGET.
->>>>
->>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->>>> ---
->>>>   drivers/usb/dwc3/dwc3-generic.c | 4 ++--
->>>>   1 file changed, 2 insertions(+), 2 deletions(-)
->>>>
->>>> diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
->>>> index 6fb2de8a5ace..891d01957619 100644
->>>> --- a/drivers/usb/dwc3/dwc3-generic.c
->>>> +++ b/drivers/usb/dwc3/dwc3-generic.c
->>>> @@ -192,7 +192,7 @@ static int dwc3_generic_of_to_plat(struct udevice *dev)
->>>>   	return 0;
->>>>   }
->>>>   
->>>> -#if CONFIG_IS_ENABLED(DM_USB_GADGET)
->>>> +#if IS_ENABLED(CONFIG_USB_DWC3_GADGET) && CONFIG_IS_ENABLED(DM_USB_GADGET)
->>>
->>> Maybe just make USB_DWC3_GADGET depend on (or select?) DM_USB_GADGET , 
->>> since I think the DWC3 code doesn't work without DM anyway .
->>
->> Do you mean in addition to this? I do not think that alone is something
->> that will address my intention to be able to disable the gadget part of
->> the dwc3-generic driver.
->>
->> Before this patch it was possible to enable disable host or gadget by
->> using USB_HOST/SPL_USB_HOST and DM_USB_GADGET/SPL_DM_USB_GADGET options.
->>
->> However, Rockchip RK3328 boards have dwc2 otg and dwc3 host, trying to
->> use DM_USB_GADGET for dwc2 and USB_HOST for dwc3 is currently not
->> possible and result in the build errors reported, i.e. multiple
->> definition of dm_usb_gadget_handle_interrupts() and undefined reference
->> to dwc3_gadget_uboot_handle_interrupt().
->>
->> After this patch I can use dm dwc2 gadget and dwc3 host without issue.
-> 
-> Note that *DM_* symbols can be confusing. At this point, in SPL
-> SPL_DM_USB and SPL_DM_USB_GADGET are encouraged but not required for
-> host/gadget drivers. In full U-Boot, DM_USB is required for all host
-> drivers and really should be enabled in all cases for DM_USB_GADGET. We
-> can't enforce that at the Kconfig level because of, iirc, some of the
-> armv7 part gadget drivers (more than one). But for newer and still very
-> active chips, we should be using DM_USB_GADGET unconditionally in full
-> U-Boot.
+pcie_imx doesn't seem to share any useful code for iMX8MP SoC and it is
+rather tied to quite old port of pcie_designware driver from Linux which
+suffices only iMX6 specific needs.
 
-The issue is that with DM_USB_GADGET we can only have one driver
-providing the dm_usb_gadget_handle_interrupts() function.
+But currently we have the common DWC specific bits which alligns pretty
+well with DW PCIe controller on iMX8MP SoC. So lets reuse those common
+bits instead as a new driver for iMX8 SoCs. It should be fairly easy to
+add support for other iMX8 variants to this driver.
 
-On RK3328 boards there is a dwc2 otg port, a dwc2 host port and a dwc3
-host port. Currently all these ports work without DM_USB_GADGET because
-a board_usb_init() call dwc2_udc_probe().
+iMX8MP SoC also comes up with standalone PCIe PHY support, so hence we
+can reuse the generic PHY infrastructure to power on PCIe PHY.
 
-CONFIG_USB_DWC2=y
-CONFIG_USB_DWC3=y
-# CONFIG_USB_DWC3_GADGET is not set
-CONFIG_USB_DWC3_GENERIC=y
-CONFIG_USB_GADGET=y
-CONFIG_USB_GADGET_DWC2_OTG=y
-# CONFIG_DM_USB_GADGET is not set
+Patch #1: Adds PCIe clocks support.
+Patch #2: Adds i.MX8MP reset controller support.
+Patch #3: Extend i.MX8MP power domain driver with PCIe support
+Patch #4: Expose high performance PLL clock required for PCIe PHY
+          on verdin board.
+Patch #5: Adds standalone PCIe PHY support for i.MX8MP SoC.
+Patch #6: Adds DW PCIe controller support for iMX8MP SoC.
+Patch #7: Enable PCIe/NVMe support for verdin board.
 
-I want to migrate to use DM_USB_GADGET with DWC2_OTG instead of using
-board_usb_init(), this is currently not possible because of the build
-errors reported in this patch.
+Testing with this patch-set included:
 
-Regards,
-Jonas
+Verdin iMX8MP # pci enum
+PCIE-0: Link up (Gen1-x1, Bus0)
+Verdin iMX8MP # 
+Verdin iMX8MP # nvme scan
+Verdin iMX8MP # 
+Verdin iMX8MP # nvme info
+Device 0: Vendor: 0x126f Rev: T0828A0  Prod: AA000000000000000720
+            Type: Hard Disk
+            Capacity: 122104.3 MB = 119.2 GB (250069680 x 512)
+Verdin iMX8MP # 
+Verdin iMX8MP # load nvme 0 $loadaddr <file-name>
 
-> 
-> So perhaps part of the issue is that dwc2/dwc3 need some hopefully now
-> legacy code removed.
+Changes in v2:
+- Renamed PCIe IMX driver pcie_dw_imx8.c -> pcie_dw_imx.c.
+- Added myself as maintainer for PCIe DWC IMX driver support.
+- Incorporated various code and commit message improvement suggestions
+  from Marek, thanks.
+- Patch#3: Gate PCIe and USB clocks behind corresponding power domain
+  IDs.
+- Patch#4: Expose HSIO PLL clocks as a regular clock driver instead
+  similar to what Linux kernel does.
+- Patch#7: Picked up tags.
+
+Sumit Garg (8):
+  clk: imx8mp: Add support for PCIe clocks
+  reset: imx: Add support for i.MX8MP reset controller
+  imx8mp: power-domain: Add PCIe support
+  imx8mp: power-domain: Expose high performance PLL clock
+  phy: phy-imx8m-pcie: Add support for i.MX8M{M/P} PCIe PHY
+  pci: Add DW PCIe controller support for iMX8MP SoC
+  verdin-imx8mp_defconfig: Enable PCIe/NVMe support
+  MAINTAINERS: Add entry for PCIe DWC IMX driver
+
+ MAINTAINERS                           |   6 +
+ configs/verdin-imx8mp_defconfig       |   6 +
+ drivers/clk/imx/clk-imx8mp.c          |   6 +
+ drivers/pci/Kconfig                   |   8 +
+ drivers/pci/Makefile                  |   1 +
+ drivers/pci/pcie_dw_imx.c             | 314 ++++++++++++++++++++++++++
+ drivers/phy/Kconfig                   |   9 +
+ drivers/phy/Makefile                  |   1 +
+ drivers/phy/phy-imx8m-pcie.c          | 269 ++++++++++++++++++++++
+ drivers/power/domain/imx8mp-hsiomix.c | 179 +++++++++++++--
+ drivers/reset/reset-imx7.c            | 114 ++++++++++
+ 11 files changed, 890 insertions(+), 23 deletions(-)
+ create mode 100644 drivers/pci/pcie_dw_imx.c
+ create mode 100644 drivers/phy/phy-imx8m-pcie.c
+
+-- 
+2.34.1
 
