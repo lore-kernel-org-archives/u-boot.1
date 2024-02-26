@@ -4,79 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 237AAC5478C
-	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 15:41:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32E5FC5478C
+	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 15:46:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4633A87EEA;
-	Mon, 26 Feb 2024 16:41:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 357FD87E93;
+	Mon, 26 Feb 2024 16:46:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Qx8motZu";
+	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="oei0YEBn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C861287EFE; Mon, 26 Feb 2024 16:41:09 +0100 (CET)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5D0D587F1E; Mon, 26 Feb 2024 16:46:48 +0100 (CET)
+Received: from mail.thorsis.com (mail.thorsis.com [92.198.35.195])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 45CF287EDC
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 16:41:07 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dan.carpenter@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-41298159608so14952345e9.0
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 07:41:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708962066; x=1709566866; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=dZ09ClLqwt9rELdohj2xL9biKGlmVJzQ5U2s5t2K4A4=;
- b=Qx8motZu/nsuwbIQdCzzGzjG+0BO5cFqxzOE7rUNVx2EkJZrkFVkPUb0WYeKZmArpL
- ar0c+syj74vYfCOEctZ4ef1bNdKdyK1gqwb4A9RCtgLwFlgrzfAyYAcy6xz3j97PzoCu
- R4Q25krOo2gXhwKl3QGt/H1WMshCmNZ06MTu/QNJiTGLdlGRd2ntcH/7ez7qiSStCuNp
- 0yFVyQkSXyBXaUyZ+3l01Nv2snY/a5CM8IYzjTszMacJ9ufzRxBRqYs6KN8H5OhZncjM
- DUHT9r5Eax1MwVQHVMPMJ7DHDAI24vJiOUKhqodOmv+GrmEe9mOJnts5F8mtDbd/9EKu
- Js/g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708962066; x=1709566866;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=dZ09ClLqwt9rELdohj2xL9biKGlmVJzQ5U2s5t2K4A4=;
- b=EqSoYwEkd94we9UpxWnurL5+iSI+XYqcRzkRQsAMFmvkoA64nf7KYOYNVgnlGpTDPo
- XWJGug+5q55noBhfxLCIhEK1sr2dYanbBZOpW+WOEHJinYhxLZqebexeKgs90xKHgOlU
- DHhB6ThXb1XAf5ZJVGB1OdP9xU1A/J2gzeoW09KP0kLgGjqOJfFTMVFeXGseRX9l0000
- TP2Q5bW5rhz42Tlxl/ROZ1DRq9W5VHAXeVRd+xGEC+ca3Gf7Eg5pk5hwaYrP0qHeBUHK
- 8CUQas3A4rqY1cXIeRoTU/mZSJsAJsmQGRaCEIFQQ0SFjgWlkyyy11RUN25xTURmibDk
- h1XQ==
-X-Gm-Message-State: AOJu0YxU3KJ/5TRNX1mjEcoRRmiJ+u1PfCYfOy3r5mCMLaFvwzxAfvhC
- /SxK+bzOGDn9wht8dbOW3zw2DDL3fYvrOeu8ZEyWXlAWywfZwuIizMXvl4s2dME=
-X-Google-Smtp-Source: AGHT+IGcwCiYtqYc/9H25iPTNubdt2XUHUx6kJp1p6LXDsfDv75VKz8PanOXQ1a+3+xDIF8BDKsUbQ==
-X-Received: by 2002:a05:600c:1987:b0:412:a5cb:5aab with SMTP id
- t7-20020a05600c198700b00412a5cb5aabmr2335038wmq.16.1708962066680; 
- Mon, 26 Feb 2024 07:41:06 -0800 (PST)
-Received: from localhost ([102.222.70.76]) by smtp.gmail.com with ESMTPSA id
- n12-20020a05600c294c00b004101f27737asm12223148wmd.29.2024.02.26.07.41.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Feb 2024 07:41:06 -0800 (PST)
-Date: Mon, 26 Feb 2024 18:41:01 +0300
-From: Dan Carpenter <dan.carpenter@linaro.org>
-To: Varadarajan Narayanan <quic_varada@quicinc.com>
-Cc: u-boot@lists.denx.de, Caleb Connolly <caleb.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH 05/10] mach-snapdragon: Update gd->ram_size in
- msm_fixup_memory
-Message-ID: <953a99fe-831d-4b42-ab34-8a9a3b7e8fd5@moroto.mountain>
-References: <20240226100807.1095607-1-quic_varada@quicinc.com>
- <20240226100807.1095607-6-quic_varada@quicinc.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240226100807.1095607-6-quic_varada@quicinc.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 758A987E93
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 16:46:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=thorsis.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
+From: Alexander Dahl <ada@thorsis.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=default;
+ t=1708962405;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:content-transfer-encoding:content-transfer-encoding;
+ bh=4f2xmsyxS1GXV2QEd+pNOuApRky5JM5/soMqtXXSFJA=;
+ b=oei0YEBns3qEqvDzbalLNq6fABoTokSZUsZRTSR3qci85ZEmDEk+twpSJ8rk3Crd4y5At2
+ 2994TTpejh/7I33AxvYZYl7xd6rHkCJyshM7KtnUatmjKgHDn7j2mnuxmLsI41nAIvMSGg
+ o/9jSm5XNmGpn/yecyTYMpbQ1SDpkuUagOkZxDOLD/yCtK4Ce0JkbNnS96HqMk9TOdAD8B
+ 25FAXgVMvLfyw9Ny1SiR0o49Pkk9uLraNGTQf2PfgpAz5nSSiKTPYpArn+NLogAWJ5aVHB
+ ZQVHZGUCkLXH2sAbezCOM1T75jHWOq2moX+yswA1foTjbqWrrs2NmfDUEyOPyA==
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>,
+	Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: [PATCH] doc: develop: commands: Fix function prototype
+Date: Mon, 26 Feb 2024 16:46:43 +0100
+Message-Id: <20240226154643.218732-1-ada@thorsis.com>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,29 +58,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Feb 26, 2024 at 03:38:02PM +0530, Varadarajan Narayanan wrote:
-> 
-> * Update FDT only if 'blob' is not null
+When using the previous prototype you got a compiler warning like this:
 
-It seems that this is patching up a bug that was introduced in patch
-1/10.  Please fold it into patch 1.
+    warning: initialization of 'int (*)(struct cmd_tbl *, int,  int,  char * const*)' from incompatible pointer type 'int (*)(struct cmd_tbl *, int,  int,  const char **)' [-Wincompatible-pointer-types]
 
-> @@ -91,9 +93,9 @@ int msm_fixup_memory(void *blob)
->  		return -ENODEV;
->  	}
->  
-> -	ret = fdt_fixup_memory_banks(blob, bank_start, bank_size, count);
-> -	if (ret)
-> -		return ret;
-> +	if (blob)
-> +		return fdt_fixup_memory_banks(blob, bank_start,
-> +					      bank_size, count);
->  
-> -	return 0;
-> +	return ret;
+Fixes: 3d9640f55cb2 ("doc: expand README.commands")
+Signed-off-by: Alexander Dahl <ada@thorsis.com>
+---
+ doc/develop/commands.rst | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Please leave this as return 0;
+diff --git a/doc/develop/commands.rst b/doc/develop/commands.rst
+index ede880d248c..5ad4e59c838 100644
+--- a/doc/develop/commands.rst
++++ b/doc/develop/commands.rst
+@@ -88,7 +88,7 @@ The command function pointer has to be of type
+ 
+ .. code-block:: c
+ 
+-    int (*cmd)(struct cmd_tbl *cmdtp, int flag, int argc, const char *argv[]);
++    int (*cmd)(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+ 
+ cmdtp
+     Table entry describing the command (see above).
 
-regards,
-dan carpenter
+base-commit: 1a66a7768af7e8106c2cd93a19f4013877fb85ae
+-- 
+2.39.2
 
