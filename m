@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BE9BC54E4A
-	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 17:34:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 456AAC48BF6
+	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 17:34:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1484387FB5;
-	Mon, 26 Feb 2024 18:27:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B78B087FDB;
+	Mon, 26 Feb 2024 18:27:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sM36bwPF";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TOboQ9F0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DC19B88035; Mon, 26 Feb 2024 18:27:18 +0100 (CET)
+ id B400C87F74; Mon, 26 Feb 2024 18:27:23 +0100 (CET)
 Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
  [IPv6:2a00:1450:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2223587FA0
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 18:26:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3287E88017
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 18:26:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
 Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-33de64c91abso190851f8f.1
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 09:26:57 -0800 (PST)
+ ffacd0b85a97d-33d28468666so3072332f8f.0
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 09:26:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708968416; x=1709573216; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1708968418; x=1709573218; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=N8ebA8zI0/m3pqLWFxyvOjpqwVIa0Co3e2G+k+l0Pp0=;
- b=sM36bwPFLN6Bm1nlvoe4zFf0tCJMXsEwgmLLT0CYuZCDUx2JttavidNDcjcmrG7KfQ
- SDTK1+usyHIUQ+tNozpXjm9Y1tZtdUSoZRVhtx2qgejSODj7+UiR0eO6SwKK2zYjV36w
- j95weSxRa8CXglV3G2Lo8UrdlSJ1SBhrCqEQIFUf44En5u5XNBfv+WKGcK5KqnDuGMj4
- jcYt/53P5+nZoCCmK8c2QKqo541qoZm9dK3/zsISSDzd/JMRCXEvwWmGBr1gzIZcSkUO
- G8qIn68Wdg+zP5rg1IutNToR+XYbe6l6q5ebvqEvtP11muxCiT1VLpNH12SOM/D847Ir
- ME7Q==
+ :reply-to; bh=hODeMOfRag1YwNlFG/sUAoPCcpATRYPeZ5Myb9i7fps=;
+ b=TOboQ9F0Q5w/Gr3r2EuZS4XEWjj+K3jViYAkmE1Em8PuY4kpfmiPu89ilfE5ejmix9
+ kc/Va/HnVaA5ltXE8w1TP5h1QsTK4typdpzsE9HqgsugkdGfNirBuLre3/VWffGNz/3c
+ KTktLvzlhySfJ/2iOCtzbIAeupUuj2cuGfaQ7WdEDs+fSCT4NOSdWyKOKyZm3109dPf1
+ jIvcTywMRjzEPcspT0feVMek1W/NBjTtEgpAUP+Ic+6Tf/hB+roRTluDXhENtvBP3s46
+ LxZIuGhwcbHrbW4t5A91ukUUUEFZi2dHMW2Noink4ee2IWS8rEgaWaWjtAks3tKci4y4
+ ayCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708968416; x=1709573216;
+ d=1e100.net; s=20230601; t=1708968418; x=1709573218;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=N8ebA8zI0/m3pqLWFxyvOjpqwVIa0Co3e2G+k+l0Pp0=;
- b=bafaCBlPuUXGELIYXOtlFgred94HuZeEMYR83LnaTaekXXh4LcynWjqMEOoCiLBNoW
- hG04bBz13j3mZlLkedU7qrmXHatqXisuRMb+KDj84xMGSrC9VyOJIH72+2cXFvjZDpfA
- hB4XkTB7FqcIKsa8uaJTunVFpgJ//QHmohcAj7rGjwBJOPgRNPT4o1s3yc2vTiHo/aFS
- WqoT091SR4ny75hLdgIO+HaWk5PtvH58gdCNCt69gkaOip16IAGLdes+YmZEbyHrM5hx
- qWhKyicej4eBe3QFG5aB7sQljWJ70qOEYQuBuFY+EC3qGiaDdjmf02fHeQwsFL0myjWN
- /KFg==
+ bh=hODeMOfRag1YwNlFG/sUAoPCcpATRYPeZ5Myb9i7fps=;
+ b=paRh3IOyQlpqYSYQK3uFQWhZ4eY1sGCqccz4h6iFwep6vlo7EWLalb0uJPLpZZuPlB
+ Rr6Y+qFHk6ipyc3Z33gxOpfvHoFlCUCMI384GrwtPeovu/5PvmXaQKs3/7Ban5++SbHH
+ F9g8a3FGk03xUBZQ1neg1OUbC/acHa+1ySIB4bwnO6m6ZQ+aZ6FMni4TDa+4+MI3rHnv
+ terNlNSC04OWKX3Y3epZtgOAzmevwr2PENNKCBOaP6aJcNIizeyTbPMqq365y+Cj8P9H
+ SsZ4imYoyOXveA/gslVZVZ23Lig4NUx2DUCNVFwcdBT+EJgHuV8u7i7LHOjgKw1c1ddY
+ Zr5w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUheRQqVetS2pUNLPXphOY0Rs1MZJJa6pzCe8OS1VZkRql2H3Ogh0/5q3o/YBWZZCcKBUZ0A+NBgiuVkbD9uxW6+6Jizw==
-X-Gm-Message-State: AOJu0YzVSRz4pYsWyrYx8pOEwyBFZLhOMBqz8EqfSpvv5YorXRD357fz
- xY+RSMn1BPC3EJLS2b7iRNc1tdOW5uxAMT4l8BdfQfEnXGq0CUtW/Qkr9aAobqo=
-X-Google-Smtp-Source: AGHT+IEGoc4a6gzw3HTmPub1Qi3E9yx4Pvweqy3tilNT2+lePkQDeGn9WJGXTvW8S9w8OwLOgNu1OQ==
-X-Received: by 2002:a5d:44c6:0:b0:33b:62c0:6181 with SMTP id
- z6-20020a5d44c6000000b0033b62c06181mr4882207wrr.42.1708968416721; 
- Mon, 26 Feb 2024 09:26:56 -0800 (PST)
+ AJvYcCUulLIQ62x8PcpL2vP5T4VwOIMewIbI7i4lzOdZmRb+0NYRm6Rjnc6clY0Rgcgnkti5m5ffXrF1Boscei43zqwIwcGUmg==
+X-Gm-Message-State: AOJu0YyV5Fvjug4uwEQgVGrEeKPWTKz+hoJThUeo7e9RNCwdjlECsKae
+ P3BQarbw4r5GsW7kqd/2flYfVgLRWewtSfxap40HdvCoaXt9GiIy+o7A2DvXFo8=
+X-Google-Smtp-Source: AGHT+IE8MnHqMnLKuuVL3J1VWcWSuL6Qa+BKVc58KVA2A2YzzoGyOSTF/IJ/mURwE8n8MnZk+93wZg==
+X-Received: by 2002:a5d:6b0f:0:b0:33d:c6de:5b51 with SMTP id
+ v15-20020a5d6b0f000000b0033dc6de5b51mr3262725wrw.33.1708968418793; 
+ Mon, 26 Feb 2024 09:26:58 -0800 (PST)
 Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- bt1-20020a056000080100b0033d9c7eb63csm9142256wrb.84.2024.02.26.09.26.55
+ bt1-20020a056000080100b0033d9c7eb63csm9142256wrb.84.2024.02.26.09.26.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Feb 2024 09:26:56 -0800 (PST)
+ Mon, 26 Feb 2024 09:26:58 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Mon, 26 Feb 2024 17:26:39 +0000
-Subject: [PATCH v5 35/39] dts: dragonboard820c: use correct bindings for clocks
+Date: Mon, 26 Feb 2024 17:26:41 +0000
+Subject: [PATCH v5 37/39] dt-bindings: import headers for qcs404
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240226-b4-qcom-common-target-v5-35-10c8e078befb@linaro.org>
+Message-Id: <20240226-b4-qcom-common-target-v5-37-10c8e078befb@linaro.org>
 References: <20240226-b4-qcom-common-target-v5-0-10c8e078befb@linaro.org>
 In-Reply-To: <20240226-b4-qcom-common-target-v5-0-10c8e078befb@linaro.org>
 To: Neil Armstrong <neil.armstrong@linaro.org>, 
@@ -85,13 +85,13 @@ To: Neil Armstrong <neil.armstrong@linaro.org>,
  Stephan Gerhold <stephan@gerhold.net>
 Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
 X-Mailer: b4 0.13-dev-4bd13
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2332;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1011;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=Xs+XkXLP/c9jecUy+kteFP1vOQtaDmx5AvpzRoRBFzk=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtQ7J/ds/GD87l5n57v4FUa64gujaouWG3i9e7Ulp/my0
- H+H9Z2TOkpZGAQ5GGTFFFnETyyzbFp72V5j+4ILMHNYmUCGMHBxCsBEntkxMmwRO1Fr/9gyjrtv
- x4Mpij+n7tzhdvf0jVzxOptm0zuTppsw/E/eddHh9A+7p18U5q3qUnlhKhK3hrVkuUG0/rmoDTv
- llE4DAA==
+ bh=/HgosspLAlPgKlCjuvcI7D3WR+ylek9WCRNALdnnMIE=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtQ7J/dM3yqjUlH998vMBYkpn2U91zjs8BB/XKq972Bs0
+ v954nt5OkpZGAQ5GGTFFFnETyyzbFp72V5j+4ILMHNYmUCGMHBxCsBEFr9l+B82QWAJ70arNFmV
+ 9An9KuWT8+/mRIbZHbgrP2fNvYh3yoWMDOtO+v+2OX/5lPLfu6I9fzZwcFqGBidNcWgoWGDqLLv
+ k7GIA
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -110,8 +110,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Don't use hardcoded clock IDs, use the IDs from the dt-bindings to be
-compatible with upstream.
+Import the headers needed for QCS404-evb.
 
 Taken from kernel tag v6.7
 
@@ -119,75 +118,30 @@ Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- arch/arm/dts/dragonboard820c.dts | 5 +++--
- drivers/clk/qcom/clock-apq8096.c | 5 +++--
- 2 files changed, 6 insertions(+), 4 deletions(-)
+ include/dt-bindings/clock/qcom,turingcc-qcs404.h | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
 
-diff --git a/arch/arm/dts/dragonboard820c.dts b/arch/arm/dts/dragonboard820c.dts
-index 86b7f83d36d6..282c37e28f42 100644
---- a/arch/arm/dts/dragonboard820c.dts
-+++ b/arch/arm/dts/dragonboard820c.dts
-@@ -7,8 +7,9 @@
- 
- /dts-v1/;
- 
- #include "skeleton64.dtsi"
-+#include <dt-bindings/clock/qcom,gcc-msm8996.h>
- 
- / {
- 	model = "Qualcomm Technologies, Inc. DB820c";
- 	compatible = "arrow,apq8096-db820c", "qcom,apq8096-sbc";
-@@ -77,9 +78,9 @@
- 
- 		blsp2_uart2: serial@75b0000 {
- 			compatible = "qcom,msm-uartdm-v1.4", "qcom,msm-uartdm";
- 			reg = <0x75b0000 0x1000>;
--			clocks = <&gcc 4>;
-+			clocks = <&gcc GCC_BLSP2_UART2_APPS_CLK>;
- 			clock-names = "core";
- 			pinctrl-names = "uart";
- 			pinctrl-0 = <&blsp8_uart>;
- 		};
-@@ -88,9 +89,9 @@
- 			compatible = "qcom,sdhci-msm-v4";
- 			reg = <0x74a4900 0x314>, <0x74a4000 0x800>;
- 			index = <0x0>;
- 			bus-width = <4>;
--			clock = <&gcc 0>;
-+			clock = <&gcc GCC_SDCC1_APPS_CLK>;
- 			clock-frequency = <200000000>;
- 		 };
- 
- 		spmi_bus: spmi@400f000 {
-diff --git a/drivers/clk/qcom/clock-apq8096.c b/drivers/clk/qcom/clock-apq8096.c
-index 1e6fdb5cd42d..a4731613c5e0 100644
---- a/drivers/clk/qcom/clock-apq8096.c
-+++ b/drivers/clk/qcom/clock-apq8096.c
-@@ -12,8 +12,9 @@
- #include <dm.h>
- #include <errno.h>
- #include <asm/io.h>
- #include <linux/bitops.h>
-+#include <dt-bindings/clock/qcom,gcc-msm8996.h>
- 
- #include "clock-qcom.h"
- 
- /* Clocks: (from CLK_CTL_BASE)  */
-@@ -106,12 +107,12 @@ static ulong apq8096_clk_set_rate(struct clk *clk, ulong rate)
- {
- 	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
- 
- 	switch (clk->id) {
--	case 0: /* SDC1 */
-+	case GCC_SDCC1_APPS_CLK: /* SDC1 */
- 		return clk_init_sdc(priv, rate);
- 		break;
--	case 4: /*UART2*/
-+	case GCC_BLSP2_UART2_APPS_CLK: /*UART2*/
- 		return clk_init_uart(priv);
- 	default:
- 		return 0;
- 	}
+diff --git a/include/dt-bindings/clock/qcom,turingcc-qcs404.h b/include/dt-bindings/clock/qcom,turingcc-qcs404.h
+new file mode 100644
+index 000000000000..838faef57c67
+--- /dev/null
++++ b/include/dt-bindings/clock/qcom,turingcc-qcs404.h
+@@ -0,0 +1,15 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * Copyright (c) 2019, Linaro Ltd
++ */
++
++#ifndef _DT_BINDINGS_CLK_TURING_QCS404_H
++#define _DT_BINDINGS_CLK_TURING_QCS404_H
++
++#define TURING_Q6SS_Q6_AXIM_CLK		0
++#define TURING_Q6SS_AHBM_AON_CLK	1
++#define TURING_WRAPPER_AON_CLK		2
++#define TURING_Q6SS_AHBS_AON_CLK	3
++#define TURING_WRAPPER_QOS_AHBS_AON_CLK	4
++
++#endif
 
 -- 
 2.43.1
