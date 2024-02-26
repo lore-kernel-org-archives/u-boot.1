@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6776C5478C
-	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 17:31:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EED46C5478C
+	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 17:31:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 90C248801E;
-	Mon, 26 Feb 2024 18:27:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 163E488021;
+	Mon, 26 Feb 2024 18:27:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GEruE5/5";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Mgtw0Sud";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 014408800B; Mon, 26 Feb 2024 18:26:58 +0100 (CET)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
+ id C9E408801A; Mon, 26 Feb 2024 18:26:59 +0100 (CET)
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [IPv6:2a00:1450:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 86A4087FB8
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 18:26:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8506387F74
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 18:26:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-33d8739ddd4so2608574f8f.2
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 09:26:43 -0800 (PST)
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-33d066f8239so2470774f8f.1
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 09:26:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1708968403; x=1709573203; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1708968404; x=1709573204; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=4bfGjUSY12UuXoCnxk3IB0+8QrNsn8oVVnRQLxMOJqQ=;
- b=GEruE5/5QCtgsUlVtvCDiju7V143AAz3INbDIqGIT2hmt6QHCS4FICofPTveNaqlvN
- yVchaZa1UyPHbMAiTZ6S8ILCsdNzYKC2TZQiMhvlSl9gQK3jnd2+XMOctGWqQd+TesX3
- 2W3wTm5cMt/vq8FKkp8kpNzv2b+GodGjjvS4v6lA37fcVLZP4mYXboTBop7eb8823oe5
- bP9NdtHJt1pCzyxJjrq21Om7yqJ9HuWdcv7zOISSHvdimeYO4AEKZDl6Fzv573h2n+zV
- pgxmdG6kjaOh0a5K/oMYJ32MCd8V6+7Yge51QdIzoyJafcf+YzQ3M4RFbcHYuxJKI0tq
- YilA==
+ :reply-to; bh=bAJ2f0xVGKQxH6y6Atawq6EoONaccWBmEu4VqbWvhMY=;
+ b=Mgtw0SudioYuVZJqFQMEcQQoYQ+lHpCPXe95BJy5EtoYcFMWyKArCcGXnLoqtaIiPu
+ 1wSOGjgu2HZa2ApUHxhayPOgmvjazY8f4l2b2L60QFLZifOlq85zOcUNNsj3Gl6Bvtjs
+ I0IgyEPbh0y4r2Gf5qopGHw44CHEerZRNRWjWrZQaHWbCk7+tnq/0JHnPUZb2tfALn/8
+ fdp8VTs9WdZVwcyY+JMOAm4SjcEVo2MICoJU68ZLru6iJHE2xbVN1DgwkudON7kJATQv
+ tVABC0eua+YgwVtMknOyPQB6O4nbIQR/QVMiO/eRi4GgOutuBA4bXOHkIdKME5ZJXDiI
+ Bbhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708968403; x=1709573203;
+ d=1e100.net; s=20230601; t=1708968404; x=1709573204;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=4bfGjUSY12UuXoCnxk3IB0+8QrNsn8oVVnRQLxMOJqQ=;
- b=dTrDFuWJZlCYYSabhWjMI/htlW2yQs5tnODfZYn52DD7K44JJM8h3R4Gq+4ya/eamY
- tvu8WTAxx8j58fY+2xxnluY+xn6R3eWCXRbJ43S/tTYNDYFFQ1FfrqeBBhty//hMJiqX
- 8Wz0a55vgYqIGntDxiDdLsqj0P4HaUNhvDAbXPDV5FudnZEzEx7mESMNf7EBNiccD3x8
- kCdAHlB8U07D1964RbgMGLvbb+n9cJmNKB+3tdxkcXpc0ZVclmvKf2e8TZsUfZ4o6eKy
- uPMbweSBVrwqxqbD4tOF2EiG4FkpE1wrmyTrYLp2nlunxxqnWHBGpnceepv2ekVYw6zs
- YCGQ==
+ bh=bAJ2f0xVGKQxH6y6Atawq6EoONaccWBmEu4VqbWvhMY=;
+ b=clI5ITsqCDtOCMRsEAUvL5m7/SReAeUSkl1oDX8Mb9vuHvwHSA909SOiPN1K7GfN4w
+ a89e9sDIuV4PsT+GvuXIoZiirk9JEjDHB6P40p00zoD6sUkArnCs5ozDrugbjANaPA00
+ WDi3safqgUid0n4dPEs5Ht90XYL65ujodN4DFiXb80H5VacpDWD3dy4xBdQWYdfJiMXN
+ Zo3ogJLQOm1yHB4U203j6cNfx7KGNYtmBJIUI1dYK4WhJusOn/g0OouAXOiLpSGc5SZP
+ b6WBTGYkVGS7syYcFBPug9D0ksGG2SVmlkcD0J+xJ76pPHKfOXTO4n8l3hHnzNHItVwT
+ owqw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUK3rkTfckT1Drue/jHPc3AJR4SovA64SRHQnKr1Mt2fVERArV73ru/9JUD2vrnmxWoEcMTkPJ8qWIvWWyaDPudyjxFwA==
-X-Gm-Message-State: AOJu0YxCl+iq3VVAUKXm51CisiD18Z/4UJbv7hbIp7aQmM19sUpMlyLq
- +nRExErHJ21GXqgDe7BudDmlgVZY1VI7pGPBf8mO3xkQIeX00j9uGkdf0IFlYR0=
-X-Google-Smtp-Source: AGHT+IG1vZYxsDTPyaofv5s4OZCyAZRg89qsSxO0nFU/qwCIXcVQXj/7f96DzgLEA66yUEHi0F2wmA==
-X-Received: by 2002:a05:6000:1243:b0:33d:b32a:8acb with SMTP id
- j3-20020a056000124300b0033db32a8acbmr5326517wrx.23.1708968403019; 
- Mon, 26 Feb 2024 09:26:43 -0800 (PST)
+ AJvYcCWBnIELmKArSymv9S3sADt6Jz8/QmZqvYZn9eW8rC4knUrkueIeNKby3qL/c+CkW+wZztZX8mvRbp1u2+zHSiSzb2rWCg==
+X-Gm-Message-State: AOJu0YxD7O62xtdlzfS+FYGx54uiWbYRrQWRs/l1DGWt07C0hgp/S7Vm
+ ACiNtEbJD2dRz09re4Sb/JJns/NRe3YICYJ5ZCZh6Lj0wbc57rY94KBcbmTdTFZwbx1VobFHe/q
+ P
+X-Google-Smtp-Source: AGHT+IHuVVEC9qBgqTbwhOabPEEXATYoEUzTX3BizQZrIf0VF8t3xOVJ+g86qBTO9cDz58ACREPAFQ==
+X-Received: by 2002:a05:6000:402c:b0:33d:b2dd:7585 with SMTP id
+ cp44-20020a056000402c00b0033db2dd7585mr7224693wrb.9.1708968404054; 
+ Mon, 26 Feb 2024 09:26:44 -0800 (PST)
 Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- bt1-20020a056000080100b0033d9c7eb63csm9142256wrb.84.2024.02.26.09.26.42
+ bt1-20020a056000080100b0033d9c7eb63csm9142256wrb.84.2024.02.26.09.26.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Feb 2024 09:26:42 -0800 (PST)
+ Mon, 26 Feb 2024 09:26:43 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Mon, 26 Feb 2024 17:26:26 +0000
-Subject: [PATCH v5 22/39] mach-snapdragon: generate fdtfile automatically
+Date: Mon, 26 Feb 2024 17:26:27 +0000
+Subject: [PATCH v5 23/39] mach-snapdragon: carve out no-map regions
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240226-b4-qcom-common-target-v5-22-10c8e078befb@linaro.org>
+Message-Id: <20240226-b4-qcom-common-target-v5-23-10c8e078befb@linaro.org>
 References: <20240226-b4-qcom-common-target-v5-0-10c8e078befb@linaro.org>
 In-Reply-To: <20240226-b4-qcom-common-target-v5-0-10c8e078befb@linaro.org>
 To: Neil Armstrong <neil.armstrong@linaro.org>, 
@@ -85,13 +86,13 @@ To: Neil Armstrong <neil.armstrong@linaro.org>,
  Stephan Gerhold <stephan@gerhold.net>
 Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
 X-Mailer: b4 0.13-dev-4bd13
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4668;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=7679;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=qsVwCcVKBIhHDPA3LlNhly/wSFjfo707sJL8aVKs9H4=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtQ7J3f3rnAXfmfksbXHc8bdtoXbWDRuTjWN+DKxNbv41
- jq7eedMO0pZGAQ5GGTFFFnETyyzbFp72V5j+4ILMHNYmUCGMHBxCsBEvn5lZGgUnL32Y9b7eSHT
- 311aHrvn/JL+qfYX3878IGgQfm0Xn2EdI8OcLP19HNEdit+3lbr01tltfbbIYEvW9hVfFWP3XF6
- asPoGAA==
+ bh=O3sOFeKFE59r7hRH5Orcfhyfu3kaMgGcIO//BXvKaLk=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtQ7J3ff5tr58To/u9b/1tObpVWW/HmiPtdDXZjxZ9avZ
+ 98///jg1VHKwiDIwSArpsgifmKZZdPay/Ya2xdcgJnDygQyhIGLUwAmMrWN4a+kzFOug/vu/IpY
+ saLmtr/qYdXYTw9mpP/4rvHshALzt5Ighv/uU0M2sS/5/e3e0V2zA+r5Xv2uSV+3TGedb1tODku
+ SivJmAA==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -110,145 +111,232 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With just a few basic rules, we can generate the $fdtfile environment
-variable to match the format used in Linux. This uses the root
-compatible property inside u-boot, with specific handling for the
-Dragonboard845c which is a special case, and for the qrb robotics
-boards.
+On Qualcomm platforms, the TZ may already have certain memory regions
+under protection by the time U-Boot starts. There is a rare case on some
+platforms where the prefetcher might speculatively access one of these
+regions resulting in a board crash (TZ traps and then resets the board).
 
-This is known to work on supported platforms, and lets us avoid having a
-big lookup table.
+We shouldn't be accessing these regions from within U-Boot anyway, so
+let's mark them all with PTE_TYPE_FAULT to prevent any speculative
+access and correctly trap in EL1 rather than EL3.
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+This is quite costly with caches off (takes ~2 seconds on SDM845 vs 35ms
+with caches on). So to minimise the impact this is only enabled on
+QCS404 for now (where the issue is known to occur).
+
+In the future, we should try to find a more efficient way to handle
+this, perhaps by turning on the MMU in stages.
+
 Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
 Tested-by: Sumit Garg <sumit.garg@linaro.org> #qcs404
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- arch/arm/mach-snapdragon/board.c | 101 +++++++++++++++++++++++++++++++++++++++
- 1 file changed, 101 insertions(+)
+ arch/arm/mach-snapdragon/board.c | 162 +++++++++++++++++++++++++++++++++------
+ 1 file changed, 140 insertions(+), 22 deletions(-)
 
 diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-index f445bed3af00..5a859aabd5c4 100644
+index 5a859aabd5c4..f12f5791a136 100644
 --- a/arch/arm/mach-snapdragon/board.c
 +++ b/arch/arm/mach-snapdragon/board.c
-@@ -159,8 +159,108 @@ int board_init(void)
- 	qcom_board_init();
- 	return 0;
+@@ -24,8 +24,9 @@
+ #include <linux/sizes.h>
+ #include <lmb.h>
+ #include <malloc.h>
+ #include <usb.h>
++#include <sort.h>
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+ static struct mm_region rbx_mem_map[CONFIG_NR_DRAM_BANKS + 2] = { { 0 } };
+@@ -295,9 +296,9 @@ int board_late_init(void)
  }
  
-+/* Sets up the "board", and "soc" environment variables as well as constructing the devicetree
-+ * path, with a few quirks to handle non-standard dtb filenames. This is not meant to be a
-+ * comprehensive solution to automatically picking the DTB, but aims to be correct for the
-+ * majority case. For most devices it should be possible to make this algorithm work by
-+ * adjusting the root compatible property in the U-Boot DTS. Handling devices with multiple
-+ * variants that are all supported by a single U-Boot image will require implementing device-
-+ * specific detection.
-+ */
-+static void configure_env(void)
+ static void build_mem_map(void)
+ {
+-	int i;
++	int i, j;
+ 
+ 	/*
+ 	 * Ensure the peripheral block is sized to correctly cover the address range
+ 	 * up to the first memory bank.
+@@ -311,40 +312,157 @@ static void build_mem_map(void)
+ 	mem_map[0].attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+ 			 PTE_BLOCK_NON_SHARE |
+ 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN;
+ 
+-	debug("Configured memory map:\n");
+-	debug("  0x%016llx - 0x%016llx: Peripheral block\n",
+-	      mem_map[0].phys, mem_map[0].phys + mem_map[0].size);
+-
+-	/*
+-	 * Now add memory map entries for each DRAM bank, ensuring we don't
+-	 * overwrite the list terminator
+-	 */
+-	for (i = 0; i < ARRAY_SIZE(rbx_mem_map) - 2 && gd->bd->bi_dram[i].size; i++) {
+-		if (i == ARRAY_SIZE(rbx_mem_map) - 1) {
+-			log_warning("Too many DRAM banks!\n");
+-			break;
+-		}
+-		mem_map[i + 1].phys = gd->bd->bi_dram[i].start;
+-		mem_map[i + 1].virt = mem_map[i + 1].phys;
+-		mem_map[i + 1].size = gd->bd->bi_dram[i].size;
+-		mem_map[i + 1].attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+-				     PTE_BLOCK_INNER_SHARE;
+-
+-		debug("  0x%016llx - 0x%016llx: DDR bank %d\n",
+-		      mem_map[i + 1].phys, mem_map[i + 1].phys + mem_map[i + 1].size, i);
++	for (i = 1, j = 0; i < ARRAY_SIZE(rbx_mem_map) - 1 && gd->bd->bi_dram[j].size; i++, j++) {
++		mem_map[i].phys = gd->bd->bi_dram[j].start;
++		mem_map[i].virt = mem_map[i].phys;
++		mem_map[i].size = gd->bd->bi_dram[j].size;
++		mem_map[i].attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | \
++				   PTE_BLOCK_INNER_SHARE;
+ 	}
++
++	mem_map[i].phys = UINT64_MAX;
++	mem_map[i].size = 0;
++
++#ifdef DEBUG
++	debug("Configured memory map:\n");
++	for (i = 0; mem_map[i].size; i++)
++		debug("  0x%016llx - 0x%016llx: entry %d\n",
++		      mem_map[i].phys, mem_map[i].phys + mem_map[i].size, i);
++#endif
+ }
+ 
+ u64 get_page_table_size(void)
+ {
+ 	return SZ_64K;
+ }
+ 
++static int fdt_cmp_res(const void *v1, const void *v2)
 +{
-+	const char *first_compat, *last_compat;
-+	char *tmp;
-+	char buf[32] = { 0 };
-+	/*
-+	 * Most DTB filenames follow the scheme: qcom/<soc>-[vendor]-<board>.dtb
-+	 * The vendor is skipped when it's a Qualcomm reference board, or the
-+	 * db845c.
-+	 */
-+	char dt_path[64] = { 0 };
-+	int compat_count, ret;
-+	ofnode root;
++	const struct fdt_resource *res1 = v1, *res2 = v2;
 +
-+	root = ofnode_root();
-+	/* This is almost always 2, but be explicit that we want the first and last compatibles
-+	 * not the first and second.
-+	 */
-+	compat_count = ofnode_read_string_count(root, "compatible");
-+	if (compat_count < 2) {
-+		log_warning("%s: only one root compatible bailing!\n", __func__);
-+		return;
-+	}
-+
-+	/* The most specific device compatible (e.g. "thundercomm,db845c") */
-+	ret = ofnode_read_string_index(root, "compatible", 0, &first_compat);
-+	if (ret < 0) {
-+		log_warning("Can't read first compatible\n");
-+		return;
-+	}
-+
-+	/* The last compatible is always the SoC compatible */
-+	ret = ofnode_read_string_index(root, "compatible", compat_count - 1, &last_compat);
-+	if (ret < 0) {
-+		log_warning("Can't read second compatible\n");
-+		return;
-+	}
-+
-+	/* Copy the second compat (e.g. "qcom,sdm845") into buf */
-+	strlcpy(buf, last_compat, sizeof(buf) - 1);
-+	tmp = buf;
-+
-+	/* strsep() is destructive, it replaces the comma with a \0 */
-+	if (!strsep(&tmp, ",")) {
-+		log_warning("second compatible '%s' has no ','\n", buf);
-+		return;
-+	}
-+
-+	/* tmp now points to just the "sdm845" part of the string */
-+	env_set("soc", tmp);
-+
-+	/* Now figure out the "board" part from the first compatible */
-+	memset(buf, 0, sizeof(buf));
-+	strlcpy(buf, first_compat, sizeof(buf) - 1);
-+	tmp = buf;
-+
-+	/* The Qualcomm reference boards (RBx, HDK, etc)  */
-+	if (!strncmp("qcom", buf, strlen("qcom"))) {
-+		/*
-+		 * They all have the first compatible as "qcom,<soc>-<board>"
-+		 * (e.g. "qcom,qrb5165-rb5"). We extract just the part after
-+		 * the dash.
-+		 */
-+		if (!strsep(&tmp, "-")) {
-+			log_warning("compatible '%s' has no '-'\n", buf);
-+			return;
-+		}
-+		/* tmp is now "rb5" */
-+		env_set("board", tmp);
-+	} else {
-+		if (!strsep(&tmp, ",")) {
-+			log_warning("compatible '%s' has no ','\n", buf);
-+			return;
-+		}
-+		/* for thundercomm we just want the bit after the comma (e.g. "db845c"),
-+		 * for all other boards we replace the comma with a '-' and take both
-+		 * (e.g. "oneplus-enchilada")
-+		 */
-+		if (!strncmp("thundercomm", buf, strlen("thundercomm"))) {
-+			env_set("board", tmp);
-+		} else {
-+			*(tmp - 1) = '-';
-+			env_set("board", buf);
-+		}
-+	}
-+
-+	/* Now build the full path name */
-+	snprintf(dt_path, sizeof(dt_path), "qcom/%s-%s.dtb",
-+		 env_get("soc"), env_get("board"));
-+	env_set("fdtfile", dt_path);
++	return res1->start - res2->start;
 +}
 +
- void __weak qcom_late_init(void)
++#define N_RESERVED_REGIONS 32
++
++/* Mark all no-map regions as PTE_TYPE_FAULT to prevent speculative access.
++ * On some platforms this is enough to trigger a security violation and trap
++ * to EL3.
++ */
++static void carve_out_reserved_memory(void)
++{
++	static struct fdt_resource res[N_RESERVED_REGIONS] = { 0 };
++	int parent, rmem, count, i = 0;
++	phys_addr_t start;
++	size_t size;
++
++	/* Some reserved nodes must be carved out, as the cache-prefetcher may otherwise
++	 * attempt to access them, causing a security exception.
++	 */
++	parent = fdt_path_offset(gd->fdt_blob, "/reserved-memory");
++	if (parent <= 0) {
++		log_err("No reserved memory regions found\n");
++		return;
++	}
++
++	/* Collect the reserved memory regions */
++	fdt_for_each_subnode(rmem, gd->fdt_blob, parent) {
++		const fdt32_t *ptr;
++		int len;
++		if (!fdt_getprop(gd->fdt_blob, rmem, "no-map", NULL))
++			continue;
++
++		if (i == N_RESERVED_REGIONS) {
++			log_err("Too many reserved regions!\n");
++			break;
++		}
++
++		/* Read the address and size out from the reg property. Doing this "properly" with
++		 * fdt_get_resource() takes ~70ms on SDM845, but open-coding the happy path here
++		 * takes <1ms... Oh the woes of no dcache.
++		 */
++		ptr = fdt_getprop(gd->fdt_blob, rmem, "reg", &len);
++		if (ptr) {
++			/* Qualcomm devices use #address/size-cells = <2> but all reserved regions are within
++			 * the 32-bit address space. So we can cheat here for speed.
++			 */
++			res[i].start = fdt32_to_cpu(ptr[1]);
++			res[i].end = res[i].start + fdt32_to_cpu(ptr[3]);
++			i++;
++		}
++	}
++
++	/* Sort the reserved memory regions by address */
++	count = i;
++	qsort(res, count, sizeof(struct fdt_resource), fdt_cmp_res);
++
++	/* Now set the right attributes for them. Often a lot of the regions are tightly packed together
++	 * so we can optimise the number of calls to mmu_change_region_attr() by combining adjacent
++	 * regions.
++	 */
++	start = ALIGN_DOWN(res[0].start, SZ_2M);
++	size = ALIGN(res[0].end - start, SZ_2M);
++	for (i = 1; i <= count; i++) {
++		/* We ideally want to 2M align everything for more efficient pagetables, but we must avoid
++		 * overwriting reserved memory regions which shouldn't be mapped as FAULT (like those with
++		 * compatible properties).
++		 * If within 2M of the previous region, bump the size to include this region. Otherwise
++		 * start a new region.
++		 */
++		if (i == count || start + size < res[i].start - SZ_2M) {
++			debug("  0x%016llx - 0x%016llx: reserved\n",
++			      start, start + size);
++			mmu_change_region_attr(start, size, PTE_TYPE_FAULT);
++			/* If this is the final region then quit here before we index
++			 * out of bounds...
++			 */
++			if (i == count)
++				break;
++			start = ALIGN_DOWN(res[i].start, SZ_2M);
++			size = ALIGN(res[i].end - start, SZ_2M);
++		} else {
++			/* Bump size if this region is immediately after the previous one */
++			size = ALIGN(res[i].end - start, SZ_2M);
++		}
++	}
++}
++
++/* This function open-codes setup_all_pgtables() so that we can
++ * insert additional mappings *before* turning on the MMU.
++ */
+ void enable_caches(void)
  {
- }
++	u64 tlb_addr = gd->arch.tlb_addr;
++	u64 tlb_size = gd->arch.tlb_size;
++	u64 pt_size;
++	ulong carveout_start;
++
++	gd->arch.tlb_fillptr = tlb_addr;
++
+ 	build_mem_map();
  
-@@ -187,8 +287,9 @@ int board_late_init(void)
- 
- 	if (status)
- 		log_warning("%s: Failed to set run time variables\n", __func__);
- 
-+	configure_env();
- 	qcom_late_init();
- 
- 	return 0;
+ 	icache_enable();
++
++	/* Create normal system page tables */
++	setup_pgtables();
++
++	pt_size = (uintptr_t)gd->arch.tlb_fillptr -
++		  (uintptr_t)gd->arch.tlb_addr;
++	debug("Primary pagetable size: %lluKiB\n", pt_size / 1024);
++
++	/* Create emergency page tables */
++	gd->arch.tlb_size -= pt_size;
++	gd->arch.tlb_addr = gd->arch.tlb_fillptr;
++	setup_pgtables();
++	gd->arch.tlb_emerg = gd->arch.tlb_addr;
++	gd->arch.tlb_addr = tlb_addr;
++	gd->arch.tlb_size = tlb_size;
++
++	carveout_start = get_timer(0);
++	/* Takes ~20-50ms on SDM845 */
++	carve_out_reserved_memory();
++	debug("carveout time: %lums\n", get_timer(carveout_start));
++
+ 	dcache_enable();
  }
 
 -- 
