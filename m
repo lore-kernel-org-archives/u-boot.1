@@ -4,88 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0A71C48BF6
-	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 16:32:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFE2AC48BF6
+	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 17:26:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ACA1487CED;
-	Mon, 26 Feb 2024 17:32:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 085B387F4A;
+	Mon, 26 Feb 2024 18:26:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Sxr2BtFj";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bSlKOo1p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6EBA787BFD; Mon, 26 Feb 2024 17:32:43 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9B4FE87F28; Mon, 26 Feb 2024 18:26:28 +0100 (CET)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B8E3687EDC
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 17:32:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DB6C587F25
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 18:26:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-ej1-f72.google.com (mail-ej1-f72.google.com
- [209.85.218.72])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 2B7713F6E8
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 16:32:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1708965159;
- bh=5jCREzHh8KZwx785zYsah8IIsOFJ601ohliO1qgmJT4=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=Sxr2BtFj385JuQb/Qk2fz5buTlJ7ID0lDq02iSkbLIVWW6+jJ7AahVWXjQBG7XihX
- U/qbVKjbARckamMwB9WT934nQnyuK8Kb008zJk2J81wXVeuHKG5FIGQTfXFN/MCBuR
- SRxZAE5/gxgx9B3QbDUY2IEVCREoR7HUp9IKWI1GpruiRsF9ZyYSSm7n5ypkNd6hOF
- rkAK2ywsL1tEzgSc+n1HyhAetP4irL9Q04pEIuKbVrLXns5UvlPdQC7djECabMGcpI
- oW/53bly5VIkVvYweZ4QLR11MBiy1iuWAJwaHgL2WdGmm8HxBP2332eK01lm34NUzl
- HVTKE4o8jr/vw==
-Received: by mail-ej1-f72.google.com with SMTP id
- a640c23a62f3a-a3ee69976dfso125317666b.3
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 08:32:39 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-40fd72f7125so26935505e9.1
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 09:26:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1708968383; x=1709573183; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=z0hCDiTNri44tvXyNMJaRxomK4RdMAbxwZTo74BYQs4=;
+ b=bSlKOo1psLPZIJpm1JevNhA9qO/DFjSQFkF0BEuM0+tNS6q2/Z+PvfFOPxpR9PG2WS
+ CPZm2K0vX+YgINIghVOhYoNjiD42Si1HOEV3NC9mJt4guPXjMdO3nKkWEiYJ4kBDh9nG
+ sUWXn4KrDmw24utiUAKnw6nBGpOi+1KTEOvTSsoUiOzhQxlBBSm/2Oa7YXVw28DvO+Bn
+ vDlSAjzy7F8jw5SLt6LssGLzEEjD9upiv9SWHqGs38oJ0KUEharGVwjt+Z1s/TkHWzCt
+ lC1WQw4PACWjKcpWW4JLhCDhNXdEVGmM+4FnxtyqrlegnO+rfPJYqbVcIi34pIK3om+b
+ +8Nw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708965158; x=1709569958;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=5jCREzHh8KZwx785zYsah8IIsOFJ601ohliO1qgmJT4=;
- b=ajRTELUKr1vFLbmMpVKr7rHbaTNpI7wzr7h8ZoVYdq7yJGWOWEd/DqqTyQsoU4RTa2
- ViCAfP5Qn6XDttlK1+E8GIL0stXZI0WqrIS4vmn3zf8vQrZcy+LzUtmFyeMPCXEniEvg
- KyoQ0EnUG3Xo4sDdp8FrlYESdaFKa8+6AJIgCvJrsxjaLL0ZRcftNQCdNBrOWVilenJB
- V4po3hJuQzvJu6uZeTmvqPPgIku7YkEofFgv2EcIVqyrxiYxGNpNWuVIbDO3+jP4B4ba
- Z+AxRGX/1b25qMY7UprmdLQ1N4Oa0s5wugK9ow4MDrQu1nSfvtOf10p3xqaFR5RAkELG
- PUoQ==
+ d=1e100.net; s=20230601; t=1708968383; x=1709573183;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=z0hCDiTNri44tvXyNMJaRxomK4RdMAbxwZTo74BYQs4=;
+ b=SbCvumzcpxTKpy+JSrd+CHR3xY0rKsRT3O+UHKwDCvis2WyxIlSeVi9lRgjwJR/JNH
+ glqEnfA8MtEK4Q+y4SFToVVfmWYGz5tMw93NeBstDy/fFNqhTzh/brBOD5on4H2YI+9K
+ mRheaXy3OkrvrI+RbUjZoPUbAClFJmXIYNXUPpAbvz3sDCARCwSghhrcScpEvpkP4XDa
+ XeyoPctB6h4+yl7Xj4+3AWykAWqmCGHkkpl+SC8OHbO6fePynYd3tIbGA5M6/RvMHBDi
+ FmdxyYMy6rA844y8Tkm79WyddLRsQfQWgChgPfeK8PX4a/ckko9HdcI/rIkVImQKJSMh
+ 02xg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW+4prwoo9gt8Gz4zHlvW1vlUDk9rHEvd9B/G9u+OhiS9rEC1AYH2P4/y3g65JyNipK61wDN/dw7HvtOAly7Yan2ZtZRQ==
-X-Gm-Message-State: AOJu0Yw7cdRgLXQrbkPaAq98BMeYKCxDw4OYQ53TKBzQbvVE3GABuV4o
- 4Ug1YXtz0zISF/r5md8kqmOesVeFoyiumETUF6wPTrSPjORVhQ4gZKl4kk50Cwe8rpqD4Ww3v4x
- WS9FfGHnEFFA+udj19PMWlf24OXpnVuQ2ZhzAJG0xM+U68WCbBETrzjcYLSRZC1BlUI4=
-X-Received: by 2002:a17:906:b24c:b0:a43:4107:137f with SMTP id
- ce12-20020a170906b24c00b00a434107137fmr2541614ejb.18.1708965158831; 
- Mon, 26 Feb 2024 08:32:38 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHIGxjr2EWlDb5Ofm8xz+9If5UBpS4IUubwH1BqAo1mRFZcZ2++SgxjI3GH2ioABG75B2nXzg==
-X-Received: by 2002:a17:906:b24c:b0:a43:4107:137f with SMTP id
- ce12-20020a170906b24c00b00a434107137fmr2541604ejb.18.1708965158446; 
- Mon, 26 Feb 2024 08:32:38 -0800 (PST)
-Received: from workstation5.. (ip-109-42-179-76.web.vodafone.de.
- [109.42.179.76]) by smtp.gmail.com with ESMTPSA id
- cw16-20020a170907161000b00a4306ac853fsm2108400ejd.206.2024.02.26.08.32.37
+ AJvYcCWXTdLTZFTw4B62gd+ni3/i6o37GV85LHTZxflb24Boz0MrpK0cgpeTvnfpnWTzykVdpyqqZEjDJPajmCKyjCqy5FwX4w==
+X-Gm-Message-State: AOJu0YxU/KHJj6Vq3PYi2L3GkYI21Gy2fGKr/4kM1M+ezxvyRWJ4hin2
+ s432ScRoUDI3DEgt3faUtekQB04lJAir4N+KjydwSZTRAoYdEBmL1mf0oKxh1po=
+X-Google-Smtp-Source: AGHT+IFallmb0vCf1MdH36/KNe/mPV/kS4mBz1CLsX+lnXIgqqtVXnD/YZRxuJjFO7QAfpPikR1pUw==
+X-Received: by 2002:a5d:658b:0:b0:33d:2848:79b6 with SMTP id
+ q11-20020a5d658b000000b0033d284879b6mr5455248wru.45.1708968383203; 
+ Mon, 26 Feb 2024 09:26:23 -0800 (PST)
+Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
+ by smtp.gmail.com with ESMTPSA id
+ bt1-20020a056000080100b0033d9c7eb63csm9142256wrb.84.2024.02.26.09.26.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Feb 2024 08:32:37 -0800 (PST)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Rick Chen <rick@andestech.com>, Leo Yu-Chi Liang <ycliang@andestech.com>,
- u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] serial: move sbi_dbcn_available to .data section
-Date: Mon, 26 Feb 2024 17:32:26 +0100
-Message-ID: <20240226163226.126288-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.43.0
+ Mon, 26 Feb 2024 09:26:22 -0800 (PST)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+Date: Mon, 26 Feb 2024 17:26:05 +0000
+Subject: [PATCH v5 01/39] arm: init: export prev_bl_fdt_addr
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20240226-b4-qcom-common-target-v5-1-10c8e078befb@linaro.org>
+References: <20240226-b4-qcom-common-target-v5-0-10c8e078befb@linaro.org>
+In-Reply-To: <20240226-b4-qcom-common-target-v5-0-10c8e078befb@linaro.org>
+To: Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, Ramon Fried <rfried.dev@gmail.com>, 
+ Dzmitry Sankouski <dsankouski@gmail.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
+ Stephan Gerhold <stephan@gerhold.net>
+Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de, 
+ Tom Rini <trini@konsulko.com>
+X-Mailer: b4 0.13-dev-4bd13
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2036;
+ i=caleb.connolly@linaro.org; h=from:subject:message-id;
+ bh=rDoYKulwRgfSZJ6WGXOQUTKGJ56bse325sV7t1f3MEU=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtQ7J3esPK14X/jBhcQtqU91hLPaO+0L9zPuj3D9ttRSI
+ 2vLx8n8HaUsDIIcDLJiiiziJ5ZZNq29bK+xfcEFmDmsTCBDGLg4BWAiIe8YGVZ+uGz39oDrV8WD
+ MS5SHw7qlL2TK2FJYvTM+p/HH38x7hojw/wSnYK7uleaznC291pOjdIqV1Ze9fHmu55HD7k3f7+
+ xVR8A
+X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
+ fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,34 +111,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-U-Boot SPL loads the device-tree directly behind main U-Boot overlapping
-the .bss section. reserve_fdt() is called in board_init_f() to relocate the
-device-tree to a safe location.
+When booting U-Boot on board with a locked down first-stage bootloader,
+we emulate the Linux boot header. By passing the U-Boot FDT through this
+first-stage bootloader and retrieving it afterwards we can pre-populate
+the memory nodes and other info like the KASLR address.
 
-Debug UARTs are enabled before board_init_f(). With sbi_dbcn_available in
-the .bss section the device-tree is corrupted when _debug_uart_init() is
-called in the SBI serial driver. Move the variable to the .data section.
+Add a function to export the FDT addr so that boards can use it over the
+built-in FDT.
 
-Link: https://bugs.launchpad.net/ubuntu/+source/u-boot/+bug/2054091
-Fixes: dfe08374943c ("risc-v: implement DBCN based debug console")
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Don't check is_addr_accessible() here because we might not yet have a
+valid mem_map if it's going to be populated from the FDT, let the board
+do their own validation instead.
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
+Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
+Tested-by: Sumit Garg <sumit.garg@linaro.org> #qcs404
+Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- drivers/serial/serial_sbi.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/arm/lib/save_prev_bl_data.c |  5 +++++
+ include/init.h                   | 11 +++++++++++
+ 2 files changed, 16 insertions(+)
 
-diff --git a/drivers/serial/serial_sbi.c b/drivers/serial/serial_sbi.c
-index a51a96c1ef0..f3ecfccab43 100644
---- a/drivers/serial/serial_sbi.c
-+++ b/drivers/serial/serial_sbi.c
-@@ -17,7 +17,7 @@ static inline void _debug_uart_putc(int c)
+diff --git a/arch/arm/lib/save_prev_bl_data.c b/arch/arm/lib/save_prev_bl_data.c
+index f7b23faf0d66..b286bac9bf00 100644
+--- a/arch/arm/lib/save_prev_bl_data.c
++++ b/arch/arm/lib/save_prev_bl_data.c
+@@ -44,8 +44,13 @@ bool is_addr_accessible(phys_addr_t addr)
  
- #else
+ 	return false;
+ }
  
--static int sbi_dbcn_available;
-+static int sbi_dbcn_available __section(".data");
- 
- static inline void _debug_uart_init(void)
++phys_addr_t get_prev_bl_fdt_addr(void)
++{
++	return reg0;
++}
++
+ int save_prev_bl_data(void)
  {
+ 	struct fdt_header *fdt_blob;
+ 	int node;
+diff --git a/include/init.h b/include/init.h
+index 9a1951d10a01..630d86729c4e 100644
+--- a/include/init.h
++++ b/include/init.h
+@@ -167,8 +167,19 @@ defined(CONFIG_SAVE_PREV_BL_FDT_ADDR)
+  *
+  * Return: 0 if ok; -ENODATA on error
+  */
+ int save_prev_bl_data(void);
++
++/**
++ * get_prev_bl_fdt_addr - When u-boot is chainloaded, get the address
++ * of the FDT passed by the previous bootloader.
++ *
++ * Return: the address of the FDT passed by the previous bootloader
++ * or 0 if not found.
++ */
++phys_addr_t get_prev_bl_fdt_addr(void);
++#else
++#define get_prev_bl_fdt_addr() 0LLU
+ #endif
+ 
+ /**
+  * cpu_secondary_init_r() - CPU-specific secondary initialization
+
 -- 
-2.43.0
+2.43.1
 
