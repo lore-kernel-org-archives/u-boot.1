@@ -4,75 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BD41C5478C
-	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 18:36:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0702C5478C
+	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 20:35:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1ECE187AEC;
-	Mon, 26 Feb 2024 19:36:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 02AB787F39;
+	Mon, 26 Feb 2024 21:35:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=openbsd.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PhQtX0Af";
+	dkim=pass (1024-bit key; secure) header.d=kpnmail.nl header.i=@kpnmail.nl header.b="XawCiF7s";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 36EE5877B1; Mon, 26 Feb 2024 19:36:13 +0100 (CET)
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E5C5D87F3B; Mon, 26 Feb 2024 21:35:16 +0100 (CET)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.184])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4425E877B1
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 19:36:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DC61687F38
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 21:35:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=openbsd.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=maximmosk4@gmail.com
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-512e4f4e463so4053930e87.1
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 10:36:11 -0800 (PST)
+ spf=fail smtp.mailfrom=kettenis@openbsd.org
+X-KPN-MessageId: 729878b6-d4e6-11ee-b64d-005056994fde
+Received: from smtp.kpnmail.nl (unknown [10.31.155.8])
+ by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+ id 729878b6-d4e6-11ee-b64d-005056994fde;
+ Mon, 26 Feb 2024 21:34:32 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1708972570; x=1709577370; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Er2eTAt5wxeTCcCzcvh/eUze/dbhtGkrGnfCDwD2690=;
- b=PhQtX0Af3XX5raUYgaulEZU8c3zoRQMODm/GRCRWJK9lpx56Ee2oSWgoSnvt+2geDM
- 9xC7ZJZFyEwiRv+adKo1qkwsD/1lPFioa1Xl7/r4nGrlH/YwZ4ljjf7e6aPgOIiMLoB7
- +2Qak21UygZdHd0crhwfqRUVbD0ccUxU8qqG9iH5ALVcegkuEe8daWWQzydlLLh7+myW
- 2ZXj66Y9E8AYerK//58SJjlyQtt8UB3Fj3EnjJ8Ve2V4k4AdhT76NgOyCPnryyvm4hK6
- 170HaCRB4jW71+qzLE/abcjncIGKdT87ujBltYqi2fkQEIiraRnAtBe4MIfzcqOJTVUo
- SybQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1708972570; x=1709577370;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Er2eTAt5wxeTCcCzcvh/eUze/dbhtGkrGnfCDwD2690=;
- b=NweI9GSNmxVsK6ZCnJN5EovZRr2Tq53l4Lwd6DLOz+NKGy/TmSxjcBGr1ioJ9oFiOO
- TL+8/3CmvHPOsj6wLyUf5i6n6DTXFiuOXLfmNPPl2OZGvN0ZtCGVcolbYcnYNZcy64HH
- Eattw76l7UsiW/4YO+HdMObqumUobX0yyIrufhwpDwlnvOhusxDKmYsUdHpSYEMQECZa
- /hCywhlFXgdQjDlKaoeCv2EsHGycfwxQmVGjP5g79tikLPCxBemUkXEvxVpqrp0C1315
- kaVvKjB79M7Imh2sbFqQzMiU0VOH+WNcqtcQp3sKLxeYgMr4ClQWj76pgGkChoXrEGeo
- wiHQ==
-X-Gm-Message-State: AOJu0Ywrb4olWXKO4Ez42+1L0V9LrEoxTlDQYQk6vY/s/M+JhHF+tJKR
- Z4dSs14QqzmUAJ58yrRqdOAHgkj6r87pHnLR5/2tp48KMP9lP5uXU9qeq48N
-X-Google-Smtp-Source: AGHT+IFAUyxpJ2DGxfzXbHBYDJMFOQoeyTRssL5n9KhTrvUFEIAYJdF/ZDl2QEaNjBm25+tsxRjpAw==
-X-Received: by 2002:a19:2d1d:0:b0:512:adba:2d9d with SMTP id
- k29-20020a192d1d000000b00512adba2d9dmr5366540lfj.14.1708972569921; 
- Mon, 26 Feb 2024 10:36:09 -0800 (PST)
-Received: from localhost.localdomain (109-252-11-244.nat.spd-mgts.ru.
- [109.252.11.244]) by smtp.gmail.com with ESMTPSA id
- l7-20020ac25547000000b00512f2a11d70sm910220lfk.283.2024.02.26.10.36.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Feb 2024 10:36:09 -0800 (PST)
-From: Maxim Moskalets <maximmosk4@gmail.com>
-X-Google-Original-From: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>
+ d=kpnmail.nl; s=kpnmail01;
+ h=mime-version:message-id:date:subject:to:from;
+ bh=Haj6vvtJChuTF8KRxQi2+ewf8Au/nejUFo7+3enTVpg=;
+ b=XawCiF7sf0+T6+jpUEyxKF1ynipjzqT4aNpjcRZMwuG7AbDta0oq1UaubqGffp+obV5QP2cHPhYck
+ wQCfurgTlBVT2jhVqz9opFZJ2Oqov74JFn3r5L1PhC+2U5w9tyKFtaXZFtqLS0sV9reYBBfXB0P61B
+ oqg1ush7FvFcGICA=
+X-KPN-MID: 33|ATeL0beTsR964gOtsQk0U+gAOm7CxVBa9QPWRCH2Idv86G2AgIZtfV/4LgRQl7F
+ mR3C0yUy5nkUJKBJ7nyxfCX0tJLQWzbQuTC6GU9V+LJw=
+X-KPN-VerifiedSender: No
+X-CMASSUN: 33|CR3Us4sutCsxdD6hP9/Qj/pmU4cA8VXShGW5H8agkA3JEiXcXwyzl89Bu9BEuMx
+ uX1QXtZ18gdqCIuGkLdv76g==
+X-Originating-IP: 80.61.163.207
+Received: from copland.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
+ [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
+ id 8ad7e447-d4e6-11ee-8952-00505699d6e5;
+ Mon, 26 Feb 2024 21:35:13 +0100 (CET)
+From: Mark Kettenis <kettenis@openbsd.org>
 To: u-boot@lists.denx.de
-Cc: Maxim Moskalets <maximmosk4@gmail.com>,
- Maxim Moskalets <Maxim.Moskalets@kaspersky.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v4] cmd: add FDT setup for bootelf by flag
-Date: Mon, 26 Feb 2024 21:35:53 +0300
-Message-Id: <20240226183553.11615-1-Maxim.Moskalets@kaspersky.com>
-X-Mailer: git-send-email 2.39.2
+Cc: xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, sjg@chromium.org,
+ philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
+ Mark Kettenis <kettenis@openbsd.org>
+Subject: [PATCH v2] efi_loader: Don't carve out memory reservations too early
+Date: Mon, 26 Feb 2024 21:35:09 +0100
+Message-ID: <20240226203509.36563-1-kettenis@openbsd.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -91,85 +74,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Maxim Moskalets <maximmosk4@gmail.com>
+Moving the efi_carve_out_dt_rsv() call in commit 1be415b21b2d
+("efi_loader: create memory reservations in ACPI case")
+broke boards that create additional memory reservations in
+ft_board_setup() since it is now called before those additional
+memory reservations are made.  This is the case for the rk3588
+boards and breaks booting OpenBSD on those boards.
 
-Added the ability to use FDT for ELF applications, required to run some
-OS. To make FDT setup, you need to set the -d fdt_addr_r cmd option for
-bootelf command.
+Move the call back to its original location and add a call in
+the code path used for ACPI after calling image_setup_libfdt()
+such that memory reservations made by ft_board_setup() are
+applied when booting with ACPI too.
 
-Signed-off-by: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>
-
-Cc: Tom Rini <trini@konsulko.com>
+Fixes: 1be415b21b2d ("efi_loader: create memory reservations in ACPI case")
+Signed-off-by: Mark Kettenis <kettenis@openbsd.org>
 ---
- cmd/elf.c | 27 ++++++++++++++++++++++++---
- 1 file changed, 24 insertions(+), 3 deletions(-)
 
-diff --git a/cmd/elf.c b/cmd/elf.c
-index b7b9f506a5..2fa28448c0 100644
---- a/cmd/elf.c
-+++ b/cmd/elf.c
-@@ -38,6 +38,8 @@ static unsigned long do_bootelf_exec(ulong (*entry)(int, char * const[]),
- /* Interpreter command to boot an arbitrary ELF image from memory */
- int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- {
-+	struct bootm_headers img = {0};
-+	unsigned long fdt_addr = 0; /* Address of the FDT */
- 	unsigned long addr; /* Address of the ELF image */
- 	unsigned long rc; /* Return value from user code */
- 	char *sload = NULL;
-@@ -46,13 +48,23 @@ int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	/* Consume 'bootelf' */
- 	argc--; argv++;
+ChangeLog:
 
--	/* Check for flag. */
-+	/* Check for [-p|-s] flag. */
- 	if (argc >= 1 && (argv[0][0] == '-' && \
- 				(argv[0][1] == 'p' || argv[0][1] == 's'))) {
- 		sload = argv[0];
- 		/* Consume flag. */
- 		argc--; argv++;
+v2: - Call image_setup_libfdt() in the ACPI code path
+
+
+ lib/efi_loader/efi_helper.c | 14 +++++++++++---
+ 1 file changed, 11 insertions(+), 3 deletions(-)
+
+diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
+index 5dd9cc876e..5f8d9a17fd 100644
+--- a/lib/efi_loader/efi_helper.c
++++ b/lib/efi_loader/efi_helper.c
+@@ -456,11 +456,16 @@ efi_status_t efi_install_fdt(void *fdt)
+ 		return EFI_LOAD_ERROR;
  	}
-+
-+	/* Check for [-d fdt_addr_r] option. */
-+	if ((argc >= 2) && (argv[0][0] == '-') && (argv[0][1] == 'd')) {
-+		if (strict_strtoul(argv[1], 16, &fdt_addr) != 0)
-+			return CMD_RET_USAGE;
-+		/* Consume option. */
-+		argc -= 2;
-+		argv += 2;
+ 
+-	/* Create memory reservations as indicated by the device tree */
+-	efi_carve_out_dt_rsv(fdt);
++	if (CONFIG_IS_ENABLED(GENERATE_ACPI_TABLE)) {
++		if (image_setup_libfdt(&img, fdt, NULL)) {
++			log_err("ERROR: failed to process device tree\n");
++			return EFI_LOAD_ERROR;
++		}
+ 
+-	if (CONFIG_IS_ENABLED(GENERATE_ACPI_TABLE))
++		/* Create memory reservations as indicated by the device tree */
++		efi_carve_out_dt_rsv(fdt);
+ 		return EFI_SUCCESS;
 +	}
-+
- 	/* Check for address. */
- 	if (argc >= 1 && strict_strtoul(argv[0], 16, &addr) != -EINVAL) {
- 		/* Consume address */
-@@ -68,6 +80,14 @@ int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	else
- 		addr = load_elf_image_shdr(addr);
  
-+	if (fdt_addr) {
-+		printf("## Setting up FDT at 0x%08lx ...\n", fdt_addr);
-+		flush();
-+
-+		if (image_setup_libfdt(&img, (void *)fdt_addr, NULL))
-+			return 1;
-+	}
-+
- 	if (!env_get_autostart())
- 		return rcode;
+ 	/* Prepare device tree for payload */
+ 	ret = copy_fdt(&fdt);
+@@ -474,6 +479,9 @@ efi_status_t efi_install_fdt(void *fdt)
+ 		return EFI_LOAD_ERROR;
+ 	}
  
-@@ -298,9 +318,10 @@ int do_bootvx(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- U_BOOT_CMD(
- 	bootelf, CONFIG_SYS_MAXARGS, 0, do_bootelf,
- 	"Boot from an ELF image in memory",
--	"[-p|-s] [address]\n"
-+	"[-p|-s] [-d fdt_addr_r] [address]\n"
- 	"\t- load ELF image at [address] via program headers (-p)\n"
--	"\t  or via section headers (-s)"
-+	"\t  or via section headers (-s)\n"
-+	"\t- setup FDT image at [fdt_addr_r] (-d)"
- );
++	/* Create memory reservations as indicated by the device tree */
++	efi_carve_out_dt_rsv(fdt);
++
+ 	efi_try_purge_kaslr_seed(fdt);
  
- U_BOOT_CMD(
+ 	if (CONFIG_IS_ENABLED(EFI_TCG2_PROTOCOL_MEASURE_DTB)) {
 -- 
-2.39.2
+2.43.0
 
