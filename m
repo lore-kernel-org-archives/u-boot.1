@@ -4,70 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77280C5478C
-	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 18:48:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 119E2C5478C
+	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 20:40:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA28E88005;
-	Tue, 27 Feb 2024 19:47:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 2F6E488018;
+	Tue, 27 Feb 2024 21:40:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pK+jLUzH";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 895B587FFB; Tue, 27 Feb 2024 19:40:21 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C3D8C87FFF
- for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 19:40:18 +0100 (CET)
+ id 969ED88012; Tue, 27 Feb 2024 21:40:48 +0100 (CET)
+Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
+ [210.160.252.171])
+ by phobos.denx.de (Postfix) with ESMTP id 313C987E53
+ for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 21:40:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41RIeEhm003148;
- Tue, 27 Feb 2024 12:40:14 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1709059214;
- bh=l3aYv1IppZYUcNYgmSHx32yr4dlJUhCxE0Y0HKamV8M=;
- h=From:To:CC:Subject:In-Reply-To:References:Date;
- b=pK+jLUzHUlyxpt9lq08ElR1PUD/lPz0IKXTYo3hNa4zi+LNBpWCOCnGZCJ8Q4Jk4L
- PPxUXztSauiGdI5ttef7+p1xiUv0Osuy1n7ghtXXnN8E8STh/rCrGO7qLe0PkeocMn
- vrNjby6xar6AjNf4YBFFrNPB+/m6oo7DIx63gSfM=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41RIeDGv041149
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 27 Feb 2024 12:40:14 -0600
-Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 27
- Feb 2024 12:40:13 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 27 Feb 2024 12:40:13 -0600
-Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41RIeDWe070781;
- Tue, 27 Feb 2024 12:40:13 -0600
-From: Jon Humphreys <j-humphreys@ti.com>
-To: Tom Rini <trini@konsulko.com>
-CC: <vigneshr@ti.com>, <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [PATCH v2 2/2] arm: dts: k3-am642-evm/sk: Enable OSPI support
- in SPL
-In-Reply-To: <20240227181656.GL3040305@bill-the-cat>
-References: <20240224001702.2283727-1-j-humphreys@ti.com>
- <20240224001702.2283727-3-j-humphreys@ti.com>
- <20240224135959.GC3040305@bill-the-cat>
- <86o7c5rck3.fsf@udb0321960.dhcp.ti.com>
- <20240227181656.GL3040305@bill-the-cat>
-Date: Tue, 27 Feb 2024 12:40:13 -0600
-Message-ID: <86frxdrbsi.fsf@udb0321960.dhcp.ti.com>
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-IronPort-AV: E=Sophos;i="6.06,188,1705330800"; d="scan'208";a="195553905"
+Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
+ by relmlie5.idc.renesas.com with ESMTP; 28 Feb 2024 05:40:42 +0900
+Received: from renesas-deb12.mshome.net (unknown [10.226.92.31])
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id E9F2C400C4EC;
+ Wed, 28 Feb 2024 05:40:40 +0900 (JST)
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Paul Barker <paul.barker.ct@bp.renesas.com>,
+	u-boot@lists.denx.de
+Subject: [PATCH v3 0/8] Add i2c and reset support for Renesas RZ/G2L
+Date: Tue, 27 Feb 2024 20:40:27 +0000
+Message-Id: <20240227204035.3761-1-paul.barker.ct@bp.renesas.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-X-Mailman-Approved-At: Tue, 27 Feb 2024 19:47:50 +0100
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,87 +54,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Tom Rini <trini@konsulko.com> writes:
+This patch series extends the support for the Renesas RZ/G2L SMARC EVK
+board (based on the R9A07G044L2 SoC) to include the following new
+features:
 
-> On Sat, Feb 24, 2024 at 11:34:36AM -0600, Jon Humphreys wrote:
->> Tom Rini <trini@konsulko.com> writes:
->> 
->> > On Fri, Feb 23, 2024 at 06:17:02PM -0600, Jonathan Humphreys wrote:
->> >> Add bootph DT tags to enable OSPI in SPL.
->> >> Set OSPI regs for R5 SPL to address OSPI's boot region.
->> >> 
->> >> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
->> >> ---
->> >>  arch/arm/dts/k3-am642-evm-u-boot.dtsi | 16 ++++++++++++++++
->> >>  arch/arm/dts/k3-am642-r5-evm.dts      |  5 +++++
->> >>  arch/arm/dts/k3-am642-r5-sk.dts       |  5 +++++
->> >>  arch/arm/dts/k3-am642-sk-u-boot.dtsi  | 16 ++++++++++++++++
->> >>  4 files changed, 42 insertions(+)
->> >> 
->> >> diff --git a/arch/arm/dts/k3-am642-evm-u-boot.dtsi b/arch/arm/dts/k3-am642-evm-u-boot.dtsi
->> >> index b843078243..60b219c0be 100644
->> >> --- a/arch/arm/dts/k3-am642-evm-u-boot.dtsi
->> >> +++ b/arch/arm/dts/k3-am642-evm-u-boot.dtsi
->> >> @@ -182,3 +182,19 @@
->> >>  &cpsw_port2 {
->> >>  	status = "disabled";
->> >>  };
->> >> +
->> >> +&ospi0_pins_default {
->> >> +	bootph-all;
->> >> +};
->> >> +
->> >> +&fss {
->> >> +	bootph-all;
->> >> +};
->> >> +
->> >> +&ospi0 {
->> >> +	bootph-all;
->> >> +
->> >> +	flash@0 {
->> >> +		bootph-all;
->> >> +	};
->> >> +};
->> >
->> > So this gets back to what I was asking in the first series, is this
->> > needed in SPL or full U-Boot as well? The bootph-* properties are
->> > supposed to be transitive, but originally the tooling didn't handle this
->> > and now the tooling handles SPL but not full U-Boot. Which also brings
->> > back the is this _needed_ question and is bootph-all right, rather than
->> > just the big hammer?
->> >
->> By "this", are you referring to the original phypattern partition nodes,
->> or the ospi0 node itself?  The partition nodes are not needed at all, so
->> removed.  The ospi node is needed in both SPL and U-Boot.  In that case,
->> using the bootph-all tag is the proper way, correct?
->> 
->> What do you mean by the 'big hammer'?
->> 
->> Please advise and thanks.
->
-> So, part of the answer is that the documentation isn't as clear and well
-> formatted as I'd like (aside, include/dm/ofnode.h::ofnode_pre_reloc
-> comment should be reworded to render better). First, I want to point to
-> the schema itself:
-> https://github.com/devicetree-org/dt-schema/blob/main/dtschema/schemas/bootph.yaml
-> and then next:
-> https://docs.u-boot.org/en/latest/develop/driver-model/design.html#pre-relocation-support
->
-> And in this case, the "pre" options are a bit less clear as TI platforms
-> don't do the TPL->SPL->Full U-Boot dance that others like say Rockchip
-> do but instead the Cortex-R/Cortex-A dance for the K3 architecture.
->
-> Which gets back to what I was trying to ask. What, functionally,
-> requires that property to be present? And then, for the cortex-a
-> platforms these should be in the upstream dtb and I forget if you said
-> that's in progress for these platforms or not.
+  * I2C bus support, including automatic deblocking if SDA is stuck low
+    due to another device on the board.
 
-Without those properties, the on-board OSPI flash is not available to
-u-boot.
+  * Basic PMIC support, with the ability to read, write & dump PMIC
+    registers.
 
-There is a separate action to move the bootph properities (not just the
-above) to the upstream DT.
+  * Support for requesting system reset (SYSRESET_COLD or
+    SYSRESET_POWER) via the PMIC.
 
->
-> -- 
-> Tom
+Along the way we fix the CPG driver to confirm all clock & reset changes
+before returning, and update the device tree to align with Linux 6.7.
+
+This series has been tested on RZ/G2L hardware, and the full u-boot
+GitLab CI pipeline has been executed in our internal GitLab instance.
+
+Changes from v2:
+  * Split the addition of RZ/G2L PMIC support into two patches: one to
+    add the PMIC driver and one to modify the defconfig.
+  * Collected Marek's Reviewed-by tags.
+
+Changes from v1:
+  * Rebased on U-Boot v2024.04-rc2 and re-tested.
+  * Sync with Linux v6.7 instead of v6.6.
+  * Add raa215300_bind() as a stub in patch 4.
+  * Split up the addition of sysreset support into 3 patches: patch 5
+    adds the driver, patch 6 binds it with the pmic driver and patch 7
+    enables sysreset for the RZ/G2L.
+
+Paul Barker (8):
+  clk: renesas: Confirm all clock & reset changes on RZ/G2L
+  arm: dts: rzg2l: Sync with Linux v6.7
+  i2c: rzg2l: Add I2C driver for RZ/G2L family
+  pmic: Add Renesas RAA215300 PMIC driver
+  board: rzg2l: Enable access to Renesas RAA215300 PMIC
+  sysreset: Support reset via Renesas RAA215300 PMIC
+  pmic: raa215300: Bind sysreset driver
+  board: rzg2l: Support reset via Renesas RAA215300 PMIC
+
+ arch/arm/dts/r9a07g044.dtsi               |  16 +-
+ arch/arm/dts/r9a07g044l2-smarc.dts        |  21 +
+ arch/arm/dts/rz-smarc-common.dtsi         |  18 +-
+ arch/arm/dts/rzg2l-smarc-pinfunction.dtsi |  20 +
+ arch/arm/dts/rzg2l-smarc-som.dtsi         |  22 +-
+ arch/arm/dts/rzg2l-smarc.dtsi             |  43 +-
+ arch/arm/mach-rmobile/Kconfig             |   1 +
+ board/renesas/rzg2l/rzg2l.c               |   8 -
+ configs/renesas_rzg2l_smarc_defconfig     |   7 +
+ drivers/clk/renesas/rzg2l-cpg.c           |  17 +-
+ drivers/i2c/Kconfig                       |   7 +
+ drivers/i2c/Makefile                      |   1 +
+ drivers/i2c/rz_riic.c                     | 624 ++++++++++++++++++++++
+ drivers/power/pmic/Kconfig                |   9 +
+ drivers/power/pmic/Makefile               |   1 +
+ drivers/power/pmic/raa215300.c            |  50 ++
+ drivers/sysreset/Kconfig                  |   6 +
+ drivers/sysreset/Makefile                 |   1 +
+ drivers/sysreset/sysreset_raa215300.c     |  58 ++
+ 19 files changed, 896 insertions(+), 34 deletions(-)
+ create mode 100644 drivers/i2c/rz_riic.c
+ create mode 100644 drivers/power/pmic/raa215300.c
+ create mode 100644 drivers/sysreset/sysreset_raa215300.c
+
+
+base-commit: d49fa3defa50c6d3f04acbb52fd486c13c14ab6a
+-- 
+2.44.0
+
