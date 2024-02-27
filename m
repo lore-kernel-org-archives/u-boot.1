@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C98AC54798
-	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 16:12:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0156C54798
+	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 16:12:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A18A8804C;
+	by phobos.denx.de (Postfix) with ESMTP id ACE1B88053;
 	Tue, 27 Feb 2024 17:10:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ewQgRK/b";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="aocaiJTv";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="NWKM+720";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="ItXFNosy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D046D88059; Tue, 27 Feb 2024 17:10:24 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ id 744A988027; Tue, 27 Feb 2024 17:10:25 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 156C988002
- for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 17:10:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 029BC88045
+ for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 17:10:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4TkjBN5qfXz9ssG;
- Tue, 27 Feb 2024 17:10:20 +0100 (CET)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4TkjBP50F1z9stG;
+ Tue, 27 Feb 2024 17:10:21 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1709050220;
+ s=mail20150812; t=1709050221;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=5jgABRf0pHcho/Kjs8tZDBYAl+IOC1mjyoKw8LeV5zU=;
- b=ewQgRK/b+uUtPC9Iu69Of1VgfFd7fPDpdlrZw+gPFkNLqKNN5tYaZrFZTyWd/Zn+sp411A
- VvVMD2G9dl2ZsbpQ+zXkM8W9L7cEn155uu7kuWW8o54tMkT2jeF2BxNd1qI/RRBJ0+xfzJ
- W67zy6qhG2Opo0g92nfuw+C7/ukM9ufia20bfjFDC1uFv+fMxlJGQqDZ72Gw7nS4nzZYaj
- e35bwubZr6N5qsDLPg65nSs+xtOY5LtGv0GKbaE+kRPsvaTh3VtYf1bi0D1wgol8lRpyxR
- +Iy1883so2zRTExrugL/L8CQfh1v1bnZyRfh1Qz0e0CFUFrEqzBvJ589UJytpA==
+ bh=B207M/SSqsLXGBPHqbTWaTjMnIE30/KCPkJpkS1vS/s=;
+ b=NWKM+720aTdJAhQ0u8YdlFyp92Wat4o05I3+whQKbM/Ec8PpAlivn51i4OAE7HVJzZUBw0
+ ffaS/CunA4sKfRGy5JDAxKBhZ97CrE9XOMu9d4tSAP6H81XGCisfyMvgMBE8BR+WPEEe35
+ lRHsLpaekY9VvP+YmuJhefrZ8J4r5re9Jt9uoEOobyyGn3WiGtSZ1z926i52na8+gX+I1f
+ rvCmQz73VXLkYvbt63igxAQmyqkyCCTY5gywjCDGAL/kW+urzbkMiVoSYGROoozbkpQygg
+ P7OmBVsO98fRxT+90ZLbCe/fJbLlrZhR3Ol772NCdi+5UZBMbcuOAcy1s+fYdg==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1709050219;
@@ -52,26 +52,25 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=5jgABRf0pHcho/Kjs8tZDBYAl+IOC1mjyoKw8LeV5zU=;
- b=aocaiJTvSKoTdCM60DnN9QW0MUPjGXxu4SDAcJfNBc2yNtPTu3qzFJZv7+g7Vo8Ba66+lM
- Wie4pD7kmCKDGKGiKTaYRmsaXLfPbuEknVsKmJvfGci8vOwn8FGnxozOO8kPtP1ZK2HxLM
- qHrGUiOfznHWf6eKIGNrTvkrrKD3/nLnzrSW2dEplLGzLJPGmiwBJPzoGbLhbdv7AAZM3n
- nSseIHejwInpvlwbSi3wSOp9ZwJIVLZkbP+n3u6JNCal35GDi3974Lyzmmfn1ZvfN8Z/sy
- BFxS1l5JKRUvb0E4OrEhp0v1o3SmUwjorM/0aTQwz7kg9lLv9DQJtnFjerh6tw==
+ bh=B207M/SSqsLXGBPHqbTWaTjMnIE30/KCPkJpkS1vS/s=;
+ b=ItXFNosyLDgT5IUZ/XxdaBgbj+CURJeJkOkWwGLTAcgAGIGVfhRWC2tFeuh7qUWcP3zW+s
+ 8Tat3y3fynI1rbdeikzi/ZYOMiZQdBZnLSPLadYIDiNFldq4RYqO+nyK8epE+3V6rVsOW6
+ XiWC6FhwUNz4JmGTZ8eKwEw+FE/tBzvs8LGuPThYGvQRUl2mQroZlKjrZruK5dtiZ0+mn9
+ 1bEa6IF+jaPZP2ayJ1bso7sj7kKipKMcyy1ObR23vr9Wjk0NlNwiOhyIz4rDSK7gq5Fq7h
+ etp52U2MrsJ1W+kw5jWYhPcl/w1iPEBnhQXWS5LtKjcmxkAjWpE/a6D89ne39A==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Paul Barker <paul.barker.ct@bp.renesas.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 14/19] ARM: renesas: Rename rmobile.h to renesas.h
-Date: Tue, 27 Feb 2024 17:05:54 +0100
-Message-ID: <20240227160912.412181-15-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 15/19] ARM: renesas: Rename ARCH_RMOBILE to ARCH_RENESAS
+Date: Tue, 27 Feb 2024 17:05:55 +0100
+Message-ID: <20240227160912.412181-16-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20240227160912.412181-1-marek.vasut+renesas@mailbox.org>
 References: <20240227160912.412181-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: qszhskaquysk3463w1jyuiro8md8skqn
-X-MBO-RS-ID: b70d305b6515371a110
-X-Rspamd-Queue-Id: 4TkjBN5qfXz9ssG
+X-MBO-RS-META: ywby7qksudxdck5xcq45pijsop1nmj8r
+X-MBO-RS-ID: ac987c476cf2627803f
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,15 +87,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rename rmobile.h to renesas.h because all the chips are made
+Rename ARCH_RMOBILE to ARCH_RENESAS because all the chips are made
 by Renesas, while only a subset of them is from the R-Mobile
 line.
 
 Use the following command to perform the rename:
 
 "
-$ git grep -l 'include.*rmobile.h' | \
-  xargs -I {} sed -i '/include.*rmobile.h/ s@rmobile.h@renesas.h@g' {}
+$ git grep -l 'ARCH_RMOBILE' | xargs -I {} sed -i 's@ARCH_RMOBILE@ARCH_RENESAS@g' {}
 "
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
@@ -105,560 +103,615 @@ Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
 Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
 Cc: Tom Rini <trini@konsulko.com>
 ---
- arch/arm/mach-rmobile/cpu_info-rzg2l.c                      | 2 +-
- arch/arm/mach-rmobile/include/mach/{rmobile.h => renesas.h} | 0
- board/hoperun/hihope-rzg2/hihope-rzg2.c                     | 2 +-
- board/renesas/alt/alt.c                                     | 2 +-
- board/renesas/alt/alt_spl.c                                 | 2 +-
- board/renesas/alt/qos.c                                     | 2 +-
- board/renesas/blanche/blanche.c                             | 2 +-
- board/renesas/blanche/qos.c                                 | 2 +-
- board/renesas/draak/draak.c                                 | 2 +-
- board/renesas/falcon/falcon.c                               | 2 +-
- board/renesas/gose/gose.c                                   | 2 +-
- board/renesas/gose/gose_spl.c                               | 2 +-
- board/renesas/gose/qos.c                                    | 2 +-
- board/renesas/grayhawk/grayhawk.c                           | 2 +-
- board/renesas/koelsch/koelsch.c                             | 2 +-
- board/renesas/koelsch/koelsch_spl.c                         | 2 +-
- board/renesas/koelsch/qos.c                                 | 2 +-
- board/renesas/lager/lager.c                                 | 2 +-
- board/renesas/lager/lager_spl.c                             | 2 +-
- board/renesas/lager/qos.c                                   | 2 +-
- board/renesas/porter/porter.c                               | 2 +-
- board/renesas/porter/porter_spl.c                           | 2 +-
- board/renesas/porter/qos.c                                  | 2 +-
- board/renesas/rcar-common/common.c                          | 2 +-
- board/renesas/rcar-common/v3-common.c                       | 2 +-
- board/renesas/salvator-x/salvator-x.c                       | 2 +-
- board/renesas/silk/qos.c                                    | 2 +-
- board/renesas/silk/silk.c                                   | 2 +-
- board/renesas/silk/silk_spl.c                               | 2 +-
- board/renesas/spider/spider.c                               | 2 +-
- board/renesas/stout/qos.c                                   | 2 +-
- board/renesas/stout/stout.c                                 | 2 +-
- board/renesas/stout/stout_spl.c                             | 2 +-
- board/renesas/ulcb/ulcb.c                                   | 2 +-
- board/renesas/whitehawk/whitehawk.c                         | 2 +-
- drivers/spi/sh_qspi.c                                       | 2 +-
- include/configs/rcar-gen2-common.h                          | 2 +-
- include/configs/rcar-gen3-common.h                          | 2 +-
- include/configs/rcar-gen4-common.h                          | 2 +-
- include/configs/rzg2l-smarc.h                               | 2 +-
- 40 files changed, 39 insertions(+), 39 deletions(-)
- rename arch/arm/mach-rmobile/include/mach/{rmobile.h => renesas.h} (100%)
+ arch/arm/Kconfig                             |  2 +-
+ arch/arm/Makefile                            |  2 +-
+ arch/arm/mach-rmobile/Kconfig                |  4 ++--
+ arch/arm/mach-rmobile/include/mach/renesas.h | 10 +++++-----
+ arch/sh/lib/time.c                           |  2 +-
+ configs/alt_defconfig                        |  2 +-
+ configs/blanche_defconfig                    |  2 +-
+ configs/gose_defconfig                       |  2 +-
+ configs/grpeach_defconfig                    |  2 +-
+ configs/hihope_rzg2_defconfig                |  2 +-
+ configs/koelsch_defconfig                    |  2 +-
+ configs/lager_defconfig                      |  2 +-
+ configs/porter_defconfig                     |  2 +-
+ configs/r8a77970_eagle_defconfig             |  2 +-
+ configs/r8a77970_v3msk_defconfig             |  2 +-
+ configs/r8a77980_condor_defconfig            |  2 +-
+ configs/r8a77980_v3hsk_defconfig             |  2 +-
+ configs/r8a77990_ebisu_defconfig             |  2 +-
+ configs/r8a77995_draak_defconfig             |  2 +-
+ configs/r8a779a0_falcon_defconfig            |  2 +-
+ configs/r8a779f0_spider_defconfig            |  2 +-
+ configs/r8a779g0_whitehawk_defconfig         |  2 +-
+ configs/r8a779h0_grayhawk_defconfig          |  2 +-
+ configs/rcar3_salvator-x_defconfig           |  2 +-
+ configs/rcar3_ulcb_defconfig                 |  2 +-
+ configs/renesas_rzg2l_smarc_defconfig        |  2 +-
+ configs/rzg2_beacon_defconfig                |  2 +-
+ configs/rzn1_snarc_defconfig                 |  2 +-
+ configs/silinux_ek874_defconfig              |  2 +-
+ configs/silk_defconfig                       |  2 +-
+ configs/stout_defconfig                      |  2 +-
+ drivers/clk/renesas/Kconfig                  |  2 +-
+ drivers/gpio/Kconfig                         |  2 +-
+ drivers/i2c/Kconfig                          |  2 +-
+ drivers/mmc/Kconfig                          |  4 ++--
+ drivers/mmc/sh_mmcif.h                       |  2 +-
+ drivers/pinctrl/Makefile                     |  2 +-
+ drivers/pinctrl/renesas/Kconfig              |  4 ++--
+ drivers/ram/Makefile                         |  2 +-
+ drivers/serial/Kconfig                       |  4 ++--
+ drivers/usb/host/Kconfig                     |  2 +-
+ 41 files changed, 49 insertions(+), 49 deletions(-)
 
-diff --git a/arch/arm/mach-rmobile/cpu_info-rzg2l.c b/arch/arm/mach-rmobile/cpu_info-rzg2l.c
-index a1683a26e35..ab95ce76388 100644
---- a/arch/arm/mach-rmobile/cpu_info-rzg2l.c
-+++ b/arch/arm/mach-rmobile/cpu_info-rzg2l.c
-@@ -4,7 +4,7 @@
-  *
-  */
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index fde85dc0d53..dbd7e014245 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -1071,7 +1071,7 @@ config ARCH_QEMU
+ 	imply USB_KEYBOARD
+ 	imply CMD_USB
  
--#include <mach/rmobile.h>
-+#include <mach/renesas.h>
- #include <asm/io.h>
- #include <linux/libfdt.h>
+-config ARCH_RMOBILE
++config ARCH_RENESAS
+ 	bool "Renesas ARM SoCs"
+ 	select DM
+ 	select DM_SERIAL
+diff --git a/arch/arm/Makefile b/arch/arm/Makefile
+index 5ebe0619d39..d7ca8715a3f 100644
+--- a/arch/arm/Makefile
++++ b/arch/arm/Makefile
+@@ -75,7 +75,7 @@ machine-$(CONFIG_ARCH_NPCM)             += npcm
+ machine-$(CONFIG_ARCH_OMAP2PLUS)	+= omap2
+ machine-$(CONFIG_ARCH_ORION5X)		+= orion5x
+ machine-$(CONFIG_ARCH_OWL)		+= owl
+-machine-$(CONFIG_ARCH_RMOBILE)		+= rmobile
++machine-$(CONFIG_ARCH_RENESAS)		+= rmobile
+ machine-$(CONFIG_ARCH_ROCKCHIP)		+= rockchip
+ machine-$(CONFIG_ARCH_S5PC1XX)		+= s5pc1xx
+ machine-$(CONFIG_ARCH_SNAPDRAGON)	+= snapdragon
+diff --git a/arch/arm/mach-rmobile/Kconfig b/arch/arm/mach-rmobile/Kconfig
+index 2bb96749fc0..c1db9531a3c 100644
+--- a/arch/arm/mach-rmobile/Kconfig
++++ b/arch/arm/mach-rmobile/Kconfig
+@@ -1,4 +1,4 @@
+-if ARCH_RMOBILE
++if ARCH_RENESAS
  
-diff --git a/arch/arm/mach-rmobile/include/mach/rmobile.h b/arch/arm/mach-rmobile/include/mach/renesas.h
-similarity index 100%
-rename from arch/arm/mach-rmobile/include/mach/rmobile.h
-rename to arch/arm/mach-rmobile/include/mach/renesas.h
-diff --git a/board/hoperun/hihope-rzg2/hihope-rzg2.c b/board/hoperun/hihope-rzg2/hihope-rzg2.c
-index 3372290120b..68d3d300dc4 100644
---- a/board/hoperun/hihope-rzg2/hihope-rzg2.c
-+++ b/board/hoperun/hihope-rzg2/hihope-rzg2.c
-@@ -10,7 +10,7 @@
- #include <asm/global_data.h>
- #include <asm/io.h>
- #include <asm/processor.h>
--#include <asm/arch/rmobile.h>
-+#include <asm/arch/renesas.h>
- #include <asm/arch/rcar-mstp.h>
- #include <linux/bitops.h>
- #include <linux/delay.h>
-diff --git a/board/renesas/alt/alt.c b/board/renesas/alt/alt.c
-index c61273489a0..d4283202394 100644
---- a/board/renesas/alt/alt.c
-+++ b/board/renesas/alt/alt.c
+ # Renesas ARM SoCs R-Car Gen3/Gen4 (64bit)
+ config RCAR_64
+@@ -88,7 +88,7 @@ config RZG2L
+ endchoice
+ 
+ config SYS_SOC
+-	default "rmobile" if ARCH_RMOBILE
++	default "rmobile" if ARCH_RENESAS
+ 
+ source "arch/arm/mach-rmobile/Kconfig.32"
+ source "arch/arm/mach-rmobile/Kconfig.64"
+diff --git a/arch/arm/mach-rmobile/include/mach/renesas.h b/arch/arm/mach-rmobile/include/mach/renesas.h
+index 67c480048de..c69c764adb8 100644
+--- a/arch/arm/mach-rmobile/include/mach/renesas.h
++++ b/arch/arm/mach-rmobile/include/mach/renesas.h
+@@ -1,7 +1,7 @@
+-#ifndef __ASM_ARCH_RMOBILE_H
+-#define __ASM_ARCH_RMOBILE_H
++#ifndef __ASM_ARCH_RENESAS_H
++#define __ASM_ARCH_RENESAS_H
+ 
+-#if defined(CONFIG_ARCH_RMOBILE)
++#if defined(CONFIG_ARCH_RENESAS)
+ #if defined(CONFIG_R8A7790)
+ #include <asm/arch/r8a7790.h>
+ #elif defined(CONFIG_R8A7791)
 @@ -22,7 +22,7 @@
- #include <linux/errno.h>
- #include <asm/arch/sys_proto.h>
- #include <asm/gpio.h>
--#include <asm/arch/rmobile.h>
-+#include <asm/arch/renesas.h>
- #include <asm/arch/rcar-mstp.h>
- #include <netdev.h>
- #include <miiphy.h>
-diff --git a/board/renesas/alt/alt_spl.c b/board/renesas/alt/alt_spl.c
-index fc9dac55e6a..260863fd0e2 100644
---- a/board/renesas/alt/alt_spl.c
-+++ b/board/renesas/alt/alt_spl.c
+ #else
+ #error "SOC Name not defined"
+ #endif
+-#endif /* CONFIG_ARCH_RMOBILE */
++#endif /* CONFIG_ARCH_RENESAS */
+ 
+ /* PRR CPU IDs */
+ #define RENESAS_CPU_TYPE_R8A7740	0x40
+@@ -53,4 +53,4 @@ u32 renesas_get_cpu_rev_integer(void);
+ u32 renesas_get_cpu_rev_fraction(void);
+ #endif /* __ASSEMBLY__ */
+ 
+-#endif /* __ASM_ARCH_RMOBILE_H */
++#endif /* __ASM_ARCH_RENESAS_H */
+diff --git a/arch/sh/lib/time.c b/arch/sh/lib/time.c
+index 366500d90be..19c8e3ca3e7 100644
+--- a/arch/sh/lib/time.c
++++ b/arch/sh/lib/time.c
 @@ -16,7 +16,7 @@
- #include <linux/errno.h>
- #include <asm/arch/sys_proto.h>
- #include <asm/gpio.h>
--#include <asm/arch/rmobile.h>
-+#include <asm/arch/renesas.h>
- #include <asm/arch/rcar-mstp.h>
- 
- #include <spl.h>
-diff --git a/board/renesas/alt/qos.c b/board/renesas/alt/qos.c
-index f0cdad4a80f..b8edd5412aa 100644
---- a/board/renesas/alt/qos.c
-+++ b/board/renesas/alt/qos.c
-@@ -9,7 +9,7 @@
- #include <asm/processor.h>
- #include <asm/mach-types.h>
- #include <asm/io.h>
--#include <asm/arch/rmobile.h>
-+#include <asm/arch/renesas.h>
- 
- #if defined(CONFIG_RENESAS_EXTRAM_BOOT)
- /* QoS version 0.311 for ES1 and version 0.321 for ES2 */
-diff --git a/board/renesas/blanche/blanche.c b/board/renesas/blanche/blanche.c
-index 80faae62624..7f00d25a1ca 100644
---- a/board/renesas/blanche/blanche.c
-+++ b/board/renesas/blanche/blanche.c
-@@ -10,7 +10,7 @@
- #include <init.h>
- #include <net.h>
- #include <asm/arch/rcar-mstp.h>
--#include <asm/arch/rmobile.h>
-+#include <asm/arch/renesas.h>
- #include <asm/arch/sys_proto.h>
- #include <asm/global_data.h>
- #include <asm/gpio.h>
-diff --git a/board/renesas/blanche/qos.c b/board/renesas/blanche/qos.c
-index d18877ee6db..f0bc7f7698b 100644
---- a/board/renesas/blanche/qos.c
-+++ b/board/renesas/blanche/qos.c
-@@ -8,7 +8,7 @@
- #include <asm/processor.h>
- #include <asm/mach-types.h>
- #include <asm/io.h>
--#include <asm/arch/rmobile.h>
-+#include <asm/arch/renesas.h>
- 
- #if defined(CONFIG_RENESAS_EXTRAM_BOOT)
- enum {
-diff --git a/board/renesas/draak/draak.c b/board/renesas/draak/draak.c
-index 6242d2858dc..a51bf65674f 100644
---- a/board/renesas/draak/draak.c
-+++ b/board/renesas/draak/draak.c
-@@ -22,7 +22,7 @@
- #include <asm/arch/sys_proto.h>
- #include <asm/gpio.h>
- #include <asm/arch/gpio.h>
--#include <asm/arch/rmobile.h>
-+#include <asm/arch/renesas.h>
- #include <asm/arch/rcar-mstp.h>
- #include <i2c.h>
- #include <mmc.h>
-diff --git a/board/renesas/falcon/falcon.c b/board/renesas/falcon/falcon.c
-index cd86bb3108c..27fccacf6f8 100644
---- a/board/renesas/falcon/falcon.c
-+++ b/board/renesas/falcon/falcon.c
-@@ -6,7 +6,7 @@
-  * Copyright (C) 2020 Renesas Electronics Corp.
-  */
- 
--#include <asm/arch/rmobile.h>
-+#include <asm/arch/renesas.h>
- #include <asm/arch/sys_proto.h>
- #include <asm/global_data.h>
- #include <asm/io.h>
-diff --git a/board/renesas/gose/gose.c b/board/renesas/gose/gose.c
-index 74e6bca7893..b4b70d3a5b2 100644
---- a/board/renesas/gose/gose.c
-+++ b/board/renesas/gose/gose.c
-@@ -23,7 +23,7 @@
- #include <linux/errno.h>
- #include <asm/arch/sys_proto.h>
- #include <asm/gpio.h>
--#include <asm/arch/rmobile.h>
-+#include <asm/arch/renesas.h>
- #include <asm/arch/rcar-mstp.h>
- #include <netdev.h>
- #include <miiphy.h>
-diff --git a/board/renesas/gose/gose_spl.c b/board/renesas/gose/gose_spl.c
-index 87126a0fc15..f6fc96f5cbd 100644
---- a/board/renesas/gose/gose_spl.c
-+++ b/board/renesas/gose/gose_spl.c
-@@ -16,7 +16,7 @@
- #include <linux/errno.h>
- #include <asm/arch/sys_proto.h>
- #include <asm/gpio.h>
--#include <asm/arch/rmobile.h>
-+#include <asm/arch/renesas.h>
- #include <asm/arch/rcar-mstp.h>
- 
- #include <spl.h>
-diff --git a/board/renesas/gose/qos.c b/board/renesas/gose/qos.c
-index fca30185231..29817e1841e 100644
---- a/board/renesas/gose/qos.c
-+++ b/board/renesas/gose/qos.c
-@@ -9,7 +9,7 @@
- #include <asm/processor.h>
- #include <asm/mach-types.h>
- #include <asm/io.h>
--#include <asm/arch/rmobile.h>
-+#include <asm/arch/renesas.h>
- 
- #if defined(CONFIG_RENESAS_EXTRAM_BOOT)
- /* QoS version 0.311 */
-diff --git a/board/renesas/grayhawk/grayhawk.c b/board/renesas/grayhawk/grayhawk.c
-index 6f2e73f7d38..6c8fca89679 100644
---- a/board/renesas/grayhawk/grayhawk.c
-+++ b/board/renesas/grayhawk/grayhawk.c
-@@ -6,7 +6,7 @@
-  * Copyright (C) 2023 Renesas Electronics Corp.
-  */
- 
--#include <asm/arch/rmobile.h>
-+#include <asm/arch/renesas.h>
- #include <asm/arch/sys_proto.h>
- #include <asm/global_data.h>
- #include <asm/io.h>
-diff --git a/board/renesas/koelsch/koelsch.c b/board/renesas/koelsch/koelsch.c
-index 4d59b82a8ad..78f3f90ae3b 100644
---- a/board/renesas/koelsch/koelsch.c
-+++ b/board/renesas/koelsch/koelsch.c
-@@ -24,7 +24,7 @@
- #include <linux/errno.h>
- #include <asm/arch/sys_proto.h>
- #include <asm/gpio.h>
--#include <asm/arch/rmobile.h>
-+#include <asm/arch/renesas.h>
- #include <asm/arch/rcar-mstp.h>
- #include <netdev.h>
- #include <miiphy.h>
-diff --git a/board/renesas/koelsch/koelsch_spl.c b/board/renesas/koelsch/koelsch_spl.c
-index 7581920f577..2950b8df1dc 100644
---- a/board/renesas/koelsch/koelsch_spl.c
-+++ b/board/renesas/koelsch/koelsch_spl.c
-@@ -16,7 +16,7 @@
- #include <linux/errno.h>
- #include <asm/arch/sys_proto.h>
- #include <asm/gpio.h>
--#include <asm/arch/rmobile.h>
-+#include <asm/arch/renesas.h>
- #include <asm/arch/rcar-mstp.h>
- 
- #include <spl.h>
-diff --git a/board/renesas/koelsch/qos.c b/board/renesas/koelsch/qos.c
-index c947fff75c7..ee893510060 100644
---- a/board/renesas/koelsch/qos.c
-+++ b/board/renesas/koelsch/qos.c
-@@ -9,7 +9,7 @@
- #include <asm/processor.h>
- #include <asm/mach-types.h>
- #include <asm/io.h>
--#include <asm/arch/rmobile.h>
-+#include <asm/arch/renesas.h>
- 
- /* QoS version 0.240 for ES1 and version 0.411 for ES2 */
- #if defined(CONFIG_RENESAS_EXTRAM_BOOT)
-diff --git a/board/renesas/lager/lager.c b/board/renesas/lager/lager.c
-index ab06078c511..0ec8e3da4c2 100644
---- a/board/renesas/lager/lager.c
-+++ b/board/renesas/lager/lager.c
-@@ -26,7 +26,7 @@
- #include <linux/errno.h>
- #include <asm/arch/sys_proto.h>
- #include <asm/gpio.h>
--#include <asm/arch/rmobile.h>
-+#include <asm/arch/renesas.h>
- #include <asm/arch/rcar-mstp.h>
- #include <miiphy.h>
- #include <i2c.h>
-diff --git a/board/renesas/lager/lager_spl.c b/board/renesas/lager/lager_spl.c
-index df3e240599a..0799ba136d5 100644
---- a/board/renesas/lager/lager_spl.c
-+++ b/board/renesas/lager/lager_spl.c
-@@ -16,7 +16,7 @@
- #include <linux/errno.h>
- #include <asm/arch/sys_proto.h>
- #include <asm/gpio.h>
--#include <asm/arch/rmobile.h>
-+#include <asm/arch/renesas.h>
- #include <asm/arch/rcar-mstp.h>
- 
- #include <spl.h>
-diff --git a/board/renesas/lager/qos.c b/board/renesas/lager/qos.c
-index d12fdf0f11f..80e57107a94 100644
---- a/board/renesas/lager/qos.c
-+++ b/board/renesas/lager/qos.c
-@@ -8,7 +8,7 @@
- #include <asm/processor.h>
- #include <asm/mach-types.h>
- #include <asm/io.h>
--#include <asm/arch/rmobile.h>
-+#include <asm/arch/renesas.h>
- 
- /* QoS version 0.955 for ES1 and version 0.973 for ES2 */
- #if defined(CONFIG_RENESAS_EXTRAM_BOOT)
-diff --git a/board/renesas/porter/porter.c b/board/renesas/porter/porter.c
-index c0f91c75627..f38263cd944 100644
---- a/board/renesas/porter/porter.c
-+++ b/board/renesas/porter/porter.c
-@@ -24,7 +24,7 @@
- #include <linux/errno.h>
- #include <asm/arch/sys_proto.h>
- #include <asm/gpio.h>
--#include <asm/arch/rmobile.h>
-+#include <asm/arch/renesas.h>
- #include <asm/arch/rcar-mstp.h>
- #include <netdev.h>
- #include <miiphy.h>
-diff --git a/board/renesas/porter/porter_spl.c b/board/renesas/porter/porter_spl.c
-index 039fc7b719e..1643446c763 100644
---- a/board/renesas/porter/porter_spl.c
-+++ b/board/renesas/porter/porter_spl.c
-@@ -16,7 +16,7 @@
- #include <linux/errno.h>
- #include <asm/arch/sys_proto.h>
- #include <asm/gpio.h>
--#include <asm/arch/rmobile.h>
-+#include <asm/arch/renesas.h>
- #include <asm/arch/rcar-mstp.h>
- 
- #include <spl.h>
-diff --git a/board/renesas/porter/qos.c b/board/renesas/porter/qos.c
-index da6ae9ac559..87274eeb6d9 100644
---- a/board/renesas/porter/qos.c
-+++ b/board/renesas/porter/qos.c
-@@ -10,7 +10,7 @@
- #include <asm/processor.h>
- #include <asm/mach-types.h>
- #include <asm/io.h>
--#include <asm/arch/rmobile.h>
-+#include <asm/arch/renesas.h>
- 
- /* QoS version 0.240 for ES1 and version 0.334 for ES2 */
- #if defined(CONFIG_RENESAS_EXTRAM_BOOT)
-diff --git a/board/renesas/rcar-common/common.c b/board/renesas/rcar-common/common.c
-index 66eb6a2002c..499c31408f6 100644
---- a/board/renesas/rcar-common/common.c
-+++ b/board/renesas/rcar-common/common.c
-@@ -14,7 +14,7 @@
- #include <asm/global_data.h>
- #include <asm/io.h>
- #include <dm/uclass-internal.h>
--#include <asm/arch/rmobile.h>
-+#include <asm/arch/renesas.h>
- #include <linux/libfdt.h>
- 
- #ifdef CONFIG_RCAR_64
-diff --git a/board/renesas/rcar-common/v3-common.c b/board/renesas/rcar-common/v3-common.c
-index 26c589d03e9..5d057edb0a6 100644
---- a/board/renesas/rcar-common/v3-common.c
-+++ b/board/renesas/rcar-common/v3-common.c
-@@ -4,7 +4,7 @@
-  */
- 
- #include <clock_legacy.h>
--#include <asm/arch/rmobile.h>
-+#include <asm/arch/renesas.h>
- #include <asm/io.h>
- 
- #define CPGWPR  0xE6150900
-diff --git a/board/renesas/salvator-x/salvator-x.c b/board/renesas/salvator-x/salvator-x.c
-index ca05285a09b..8c47246ae8b 100644
---- a/board/renesas/salvator-x/salvator-x.c
-+++ b/board/renesas/salvator-x/salvator-x.c
-@@ -23,7 +23,7 @@
- #include <asm/arch/sys_proto.h>
- #include <asm/gpio.h>
- #include <asm/arch/gpio.h>
--#include <asm/arch/rmobile.h>
-+#include <asm/arch/renesas.h>
- #include <asm/arch/rcar-mstp.h>
- #include <i2c.h>
- #include <mmc.h>
-diff --git a/board/renesas/silk/qos.c b/board/renesas/silk/qos.c
-index c1d4c612df8..00e5e792e19 100644
---- a/board/renesas/silk/qos.c
-+++ b/board/renesas/silk/qos.c
-@@ -10,7 +10,7 @@
- #include <asm/processor.h>
- #include <asm/mach-types.h>
- #include <asm/io.h>
--#include <asm/arch/rmobile.h>
-+#include <asm/arch/renesas.h>
- 
- #if defined(CONFIG_RENESAS_EXTRAM_BOOT)
- /* QoS version 0.11 */
-diff --git a/board/renesas/silk/silk.c b/board/renesas/silk/silk.c
-index 7dfbd412f6d..cc64e44c0f7 100644
---- a/board/renesas/silk/silk.c
-+++ b/board/renesas/silk/silk.c
-@@ -23,7 +23,7 @@
- #include <linux/errno.h>
- #include <asm/arch/sys_proto.h>
- #include <asm/gpio.h>
--#include <asm/arch/rmobile.h>
-+#include <asm/arch/renesas.h>
- #include <asm/arch/rcar-mstp.h>
- #include <netdev.h>
- #include <miiphy.h>
-diff --git a/board/renesas/silk/silk_spl.c b/board/renesas/silk/silk_spl.c
-index b899442c25a..19b2e5ff87c 100644
---- a/board/renesas/silk/silk_spl.c
-+++ b/board/renesas/silk/silk_spl.c
-@@ -16,7 +16,7 @@
- #include <linux/errno.h>
- #include <asm/arch/sys_proto.h>
- #include <asm/gpio.h>
--#include <asm/arch/rmobile.h>
-+#include <asm/arch/renesas.h>
- #include <asm/arch/rcar-mstp.h>
- 
- #include <spl.h>
-diff --git a/board/renesas/spider/spider.c b/board/renesas/spider/spider.c
-index 1eb75a6397f..414948f1831 100644
---- a/board/renesas/spider/spider.c
-+++ b/board/renesas/spider/spider.c
-@@ -6,7 +6,7 @@
-  * Copyright (C) 2021 Renesas Electronics Corp.
-  */
- 
--#include <asm/arch/rmobile.h>
-+#include <asm/arch/renesas.h>
- #include <asm/arch/sys_proto.h>
- #include <asm/global_data.h>
- #include <asm/io.h>
-diff --git a/board/renesas/stout/qos.c b/board/renesas/stout/qos.c
-index 10f99f340b8..a3e512c4423 100644
---- a/board/renesas/stout/qos.c
-+++ b/board/renesas/stout/qos.c
-@@ -10,7 +10,7 @@
- #include <asm/processor.h>
- #include <asm/mach-types.h>
- #include <asm/io.h>
--#include <asm/arch/rmobile.h>
-+#include <asm/arch/renesas.h>
- 
- /* QoS version 0.955 for ES1 and version 0.973 for ES2 */
- #if defined(CONFIG_RENESAS_EXTRAM_BOOT)
-diff --git a/board/renesas/stout/stout.c b/board/renesas/stout/stout.c
-index 109e19a292d..f1d84b5a446 100644
---- a/board/renesas/stout/stout.c
-+++ b/board/renesas/stout/stout.c
-@@ -25,7 +25,7 @@
- #include <linux/errno.h>
- #include <asm/arch/sys_proto.h>
- #include <asm/gpio.h>
--#include <asm/arch/rmobile.h>
-+#include <asm/arch/renesas.h>
- #include <asm/arch/rcar-mstp.h>
- #include <miiphy.h>
- #include <i2c.h>
-diff --git a/board/renesas/stout/stout_spl.c b/board/renesas/stout/stout_spl.c
-index 8ec02168106..3c7cac809eb 100644
---- a/board/renesas/stout/stout_spl.c
-+++ b/board/renesas/stout/stout_spl.c
-@@ -16,7 +16,7 @@
- #include <linux/errno.h>
- #include <asm/arch/sys_proto.h>
- #include <asm/gpio.h>
--#include <asm/arch/rmobile.h>
-+#include <asm/arch/renesas.h>
- #include <asm/arch/rcar-mstp.h>
- 
- #include <spl.h>
-diff --git a/board/renesas/ulcb/ulcb.c b/board/renesas/ulcb/ulcb.c
-index 6addf2bc8b4..8f5de216995 100644
---- a/board/renesas/ulcb/ulcb.c
-+++ b/board/renesas/ulcb/ulcb.c
-@@ -21,7 +21,7 @@
- #include <asm/arch/sys_proto.h>
- #include <asm/gpio.h>
- #include <asm/arch/gpio.h>
--#include <asm/arch/rmobile.h>
-+#include <asm/arch/renesas.h>
- #include <asm/arch/rcar-mstp.h>
- #include <i2c.h>
- #include <mmc.h>
-diff --git a/board/renesas/whitehawk/whitehawk.c b/board/renesas/whitehawk/whitehawk.c
-index a72f5e0a7a5..3a10b0220d1 100644
---- a/board/renesas/whitehawk/whitehawk.c
-+++ b/board/renesas/whitehawk/whitehawk.c
-@@ -6,7 +6,7 @@
-  * Copyright (C) 2021 Renesas Electronics Corp.
-  */
- 
--#include <asm/arch/rmobile.h>
-+#include <asm/arch/renesas.h>
- #include <asm/arch/sys_proto.h>
- #include <asm/global_data.h>
- #include <asm/io.h>
-diff --git a/drivers/spi/sh_qspi.c b/drivers/spi/sh_qspi.c
-index 7dd1fe75e04..72594993853 100644
---- a/drivers/spi/sh_qspi.c
-+++ b/drivers/spi/sh_qspi.c
-@@ -13,7 +13,7 @@
- #include <malloc.h>
- #include <spi.h>
- #include <wait_bit.h>
--#include <asm/arch/rmobile.h>
-+#include <asm/arch/renesas.h>
  #include <asm/io.h>
  #include <linux/bitops.h>
  
-diff --git a/include/configs/rcar-gen2-common.h b/include/configs/rcar-gen2-common.h
-index 291c2a43d4d..67c9faeca57 100644
---- a/include/configs/rcar-gen2-common.h
-+++ b/include/configs/rcar-gen2-common.h
-@@ -8,7 +8,7 @@
- #ifndef __RCAR_GEN2_COMMON_H
- #define __RCAR_GEN2_COMMON_H
+-#if defined(CONFIG_CPU_SH4) || defined(CONFIG_ARCH_RMOBILE)
++#if defined(CONFIG_CPU_SH4) || defined(CONFIG_ARCH_RENESAS)
+ #define TSTR	0x4
+ #define TCR0	0x10
+ #endif /* CONFIG_CPU_SH4 */
+diff --git a/configs/alt_defconfig b/configs/alt_defconfig
+index ff2f7d22bbc..e4007ab8f71 100644
+--- a/configs/alt_defconfig
++++ b/configs/alt_defconfig
+@@ -3,7 +3,7 @@ CONFIG_ARCH_CPU_INIT=y
+ CONFIG_ENABLE_ARM_SOC_BOOT0_HOOK=y
+ # CONFIG_SPL_USE_ARCH_MEMCPY is not set
+ # CONFIG_SPL_USE_ARCH_MEMSET is not set
+-CONFIG_ARCH_RMOBILE=y
++CONFIG_ARCH_RENESAS=y
+ CONFIG_TEXT_BASE=0x50000000
+ CONFIG_SYS_MALLOC_LEN=0x100000
+ CONFIG_SYS_MALLOC_F_LEN=0x8000
+diff --git a/configs/blanche_defconfig b/configs/blanche_defconfig
+index d8c0f784176..af7622a88af 100644
+--- a/configs/blanche_defconfig
++++ b/configs/blanche_defconfig
+@@ -1,7 +1,7 @@
+ CONFIG_ARM=y
+ CONFIG_ARCH_CPU_INIT=y
+ CONFIG_ENABLE_ARM_SOC_BOOT0_HOOK=y
+-CONFIG_ARCH_RMOBILE=y
++CONFIG_ARCH_RENESAS=y
+ CONFIG_TEXT_BASE=0x00000000
+ CONFIG_SYS_MALLOC_LEN=0x100000
+ CONFIG_SYS_MALLOC_F_LEN=0x8000
+diff --git a/configs/gose_defconfig b/configs/gose_defconfig
+index 6f2a015d3e9..1eadf7c14d3 100644
+--- a/configs/gose_defconfig
++++ b/configs/gose_defconfig
+@@ -3,7 +3,7 @@ CONFIG_ARCH_CPU_INIT=y
+ CONFIG_ENABLE_ARM_SOC_BOOT0_HOOK=y
+ # CONFIG_SPL_USE_ARCH_MEMCPY is not set
+ # CONFIG_SPL_USE_ARCH_MEMSET is not set
+-CONFIG_ARCH_RMOBILE=y
++CONFIG_ARCH_RENESAS=y
+ CONFIG_TEXT_BASE=0x50000000
+ CONFIG_SYS_MALLOC_LEN=0x100000
+ CONFIG_SYS_MALLOC_F_LEN=0x8000
+diff --git a/configs/grpeach_defconfig b/configs/grpeach_defconfig
+index 6738424f2e8..eef3bad4e65 100644
+--- a/configs/grpeach_defconfig
++++ b/configs/grpeach_defconfig
+@@ -1,6 +1,6 @@
+ CONFIG_ARM=y
+ CONFIG_ARCH_CPU_INIT=y
+-CONFIG_ARCH_RMOBILE=y
++CONFIG_ARCH_RENESAS=y
+ CONFIG_TEXT_BASE=0x18000000
+ CONFIG_SYS_MALLOC_LEN=0x100000
+ CONFIG_SYS_MALLOC_F_LEN=0x400
+diff --git a/configs/hihope_rzg2_defconfig b/configs/hihope_rzg2_defconfig
+index cad490eb240..c2d2e8ebae4 100644
+--- a/configs/hihope_rzg2_defconfig
++++ b/configs/hihope_rzg2_defconfig
+@@ -1,7 +1,7 @@
+ CONFIG_ARM=y
+ CONFIG_COUNTER_FREQUENCY=16666666
+ CONFIG_ARCH_CPU_INIT=y
+-CONFIG_ARCH_RMOBILE=y
++CONFIG_ARCH_RENESAS=y
+ CONFIG_TEXT_BASE=0x50000000
+ CONFIG_SYS_MALLOC_LEN=0x4000000
+ CONFIG_ENV_SIZE=0x20000
+diff --git a/configs/koelsch_defconfig b/configs/koelsch_defconfig
+index 37511f8fe9a..963e02d6b54 100644
+--- a/configs/koelsch_defconfig
++++ b/configs/koelsch_defconfig
+@@ -3,7 +3,7 @@ CONFIG_ARCH_CPU_INIT=y
+ CONFIG_ENABLE_ARM_SOC_BOOT0_HOOK=y
+ # CONFIG_SPL_USE_ARCH_MEMCPY is not set
+ # CONFIG_SPL_USE_ARCH_MEMSET is not set
+-CONFIG_ARCH_RMOBILE=y
++CONFIG_ARCH_RENESAS=y
+ CONFIG_TEXT_BASE=0x50000000
+ CONFIG_SYS_MALLOC_LEN=0x100000
+ CONFIG_SYS_MALLOC_F_LEN=0x8000
+diff --git a/configs/lager_defconfig b/configs/lager_defconfig
+index 30582bfa3b1..605909e812f 100644
+--- a/configs/lager_defconfig
++++ b/configs/lager_defconfig
+@@ -3,7 +3,7 @@ CONFIG_ARCH_CPU_INIT=y
+ CONFIG_ENABLE_ARM_SOC_BOOT0_HOOK=y
+ # CONFIG_SPL_USE_ARCH_MEMCPY is not set
+ # CONFIG_SPL_USE_ARCH_MEMSET is not set
+-CONFIG_ARCH_RMOBILE=y
++CONFIG_ARCH_RENESAS=y
+ CONFIG_TEXT_BASE=0x50000000
+ CONFIG_SYS_MALLOC_LEN=0x100000
+ CONFIG_SYS_MALLOC_F_LEN=0x8000
+diff --git a/configs/porter_defconfig b/configs/porter_defconfig
+index 2f4f03d27f2..021e521745f 100644
+--- a/configs/porter_defconfig
++++ b/configs/porter_defconfig
+@@ -3,7 +3,7 @@ CONFIG_ARCH_CPU_INIT=y
+ CONFIG_ENABLE_ARM_SOC_BOOT0_HOOK=y
+ # CONFIG_SPL_USE_ARCH_MEMCPY is not set
+ # CONFIG_SPL_USE_ARCH_MEMSET is not set
+-CONFIG_ARCH_RMOBILE=y
++CONFIG_ARCH_RENESAS=y
+ CONFIG_TEXT_BASE=0x50000000
+ CONFIG_SYS_MALLOC_LEN=0x100000
+ CONFIG_SYS_MALLOC_F_LEN=0x8000
+diff --git a/configs/r8a77970_eagle_defconfig b/configs/r8a77970_eagle_defconfig
+index 5af9d09d18b..6095825aa77 100644
+--- a/configs/r8a77970_eagle_defconfig
++++ b/configs/r8a77970_eagle_defconfig
+@@ -1,7 +1,7 @@
+ CONFIG_ARM=y
+ CONFIG_COUNTER_FREQUENCY=16666666
+ CONFIG_ARCH_CPU_INIT=y
+-CONFIG_ARCH_RMOBILE=y
++CONFIG_ARCH_RENESAS=y
+ CONFIG_TEXT_BASE=0x50000000
+ CONFIG_SYS_MALLOC_LEN=0x4000000
+ CONFIG_SYS_MALLOC_F_LEN=0x2000
+diff --git a/configs/r8a77970_v3msk_defconfig b/configs/r8a77970_v3msk_defconfig
+index 458e4cb1e44..c90efa1e6e8 100644
+--- a/configs/r8a77970_v3msk_defconfig
++++ b/configs/r8a77970_v3msk_defconfig
+@@ -1,7 +1,7 @@
+ CONFIG_ARM=y
+ CONFIG_COUNTER_FREQUENCY=16666666
+ CONFIG_ARCH_CPU_INIT=y
+-CONFIG_ARCH_RMOBILE=y
++CONFIG_ARCH_RENESAS=y
+ CONFIG_TEXT_BASE=0x50000000
+ CONFIG_SYS_MALLOC_LEN=0x4000000
+ CONFIG_SYS_MALLOC_F_LEN=0x2000
+diff --git a/configs/r8a77980_condor_defconfig b/configs/r8a77980_condor_defconfig
+index 8d30392ed98..f33dfefcc98 100644
+--- a/configs/r8a77980_condor_defconfig
++++ b/configs/r8a77980_condor_defconfig
+@@ -1,7 +1,7 @@
+ CONFIG_ARM=y
+ CONFIG_COUNTER_FREQUENCY=16666666
+ CONFIG_ARCH_CPU_INIT=y
+-CONFIG_ARCH_RMOBILE=y
++CONFIG_ARCH_RENESAS=y
+ CONFIG_SYS_MALLOC_LEN=0x4000000
+ CONFIG_SYS_MALLOC_F_LEN=0x2000
+ CONFIG_ENV_SIZE=0x40000
+diff --git a/configs/r8a77980_v3hsk_defconfig b/configs/r8a77980_v3hsk_defconfig
+index cb6800ef510..9e304f8d3d8 100644
+--- a/configs/r8a77980_v3hsk_defconfig
++++ b/configs/r8a77980_v3hsk_defconfig
+@@ -1,7 +1,7 @@
+ CONFIG_ARM=y
+ CONFIG_COUNTER_FREQUENCY=16666666
+ CONFIG_ARCH_CPU_INIT=y
+-CONFIG_ARCH_RMOBILE=y
++CONFIG_ARCH_RENESAS=y
+ CONFIG_SYS_MALLOC_LEN=0x4000000
+ CONFIG_SYS_MALLOC_F_LEN=0x2000
+ CONFIG_ENV_SIZE=0x40000
+diff --git a/configs/r8a77990_ebisu_defconfig b/configs/r8a77990_ebisu_defconfig
+index 41a789da598..cb3816d4e01 100644
+--- a/configs/r8a77990_ebisu_defconfig
++++ b/configs/r8a77990_ebisu_defconfig
+@@ -1,7 +1,7 @@
+ CONFIG_ARM=y
+ CONFIG_COUNTER_FREQUENCY=16666666
+ CONFIG_ARCH_CPU_INIT=y
+-CONFIG_ARCH_RMOBILE=y
++CONFIG_ARCH_RENESAS=y
+ CONFIG_TEXT_BASE=0x50000000
+ CONFIG_SYS_MALLOC_LEN=0x4000000
+ CONFIG_SYS_MALLOC_F_LEN=0x2000
+diff --git a/configs/r8a77995_draak_defconfig b/configs/r8a77995_draak_defconfig
+index f7446b9e621..739ea4618d8 100644
+--- a/configs/r8a77995_draak_defconfig
++++ b/configs/r8a77995_draak_defconfig
+@@ -1,7 +1,7 @@
+ CONFIG_ARM=y
+ CONFIG_COUNTER_FREQUENCY=16666666
+ CONFIG_ARCH_CPU_INIT=y
+-CONFIG_ARCH_RMOBILE=y
++CONFIG_ARCH_RENESAS=y
+ CONFIG_TEXT_BASE=0x50000000
+ CONFIG_SYS_MALLOC_LEN=0x4000000
+ CONFIG_SYS_MALLOC_F_LEN=0x2000
+diff --git a/configs/r8a779a0_falcon_defconfig b/configs/r8a779a0_falcon_defconfig
+index f124dea66ce..6ffff2250b3 100644
+--- a/configs/r8a779a0_falcon_defconfig
++++ b/configs/r8a779a0_falcon_defconfig
+@@ -1,7 +1,7 @@
+ CONFIG_ARM=y
+ CONFIG_COUNTER_FREQUENCY=16666666
+ CONFIG_ARCH_CPU_INIT=y
+-CONFIG_ARCH_RMOBILE=y
++CONFIG_ARCH_RENESAS=y
+ CONFIG_TEXT_BASE=0x50000000
+ CONFIG_SYS_MALLOC_LEN=0x4000000
+ CONFIG_ENV_SIZE=0x40000
+diff --git a/configs/r8a779f0_spider_defconfig b/configs/r8a779f0_spider_defconfig
+index 2d27dfeaa59..21b488a3f5a 100644
+--- a/configs/r8a779f0_spider_defconfig
++++ b/configs/r8a779f0_spider_defconfig
+@@ -1,6 +1,6 @@
+ CONFIG_ARM=y
+ CONFIG_ARCH_CPU_INIT=y
+-CONFIG_ARCH_RMOBILE=y
++CONFIG_ARCH_RENESAS=y
+ CONFIG_SYS_MALLOC_LEN=0x4000000
+ CONFIG_ENV_SIZE=0x40000
+ CONFIG_ENV_OFFSET=0xD00000
+diff --git a/configs/r8a779g0_whitehawk_defconfig b/configs/r8a779g0_whitehawk_defconfig
+index 727c33926f0..94f12ad1bde 100644
+--- a/configs/r8a779g0_whitehawk_defconfig
++++ b/configs/r8a779g0_whitehawk_defconfig
+@@ -1,6 +1,6 @@
+ CONFIG_ARM=y
+ CONFIG_ARCH_CPU_INIT=y
+-CONFIG_ARCH_RMOBILE=y
++CONFIG_ARCH_RENESAS=y
+ CONFIG_SYS_MALLOC_LEN=0x4000000
+ CONFIG_ENV_SIZE=0x20000
+ CONFIG_ENV_OFFSET=0xFFFE0000
+diff --git a/configs/r8a779h0_grayhawk_defconfig b/configs/r8a779h0_grayhawk_defconfig
+index 41aa0207086..d295bc899d1 100644
+--- a/configs/r8a779h0_grayhawk_defconfig
++++ b/configs/r8a779h0_grayhawk_defconfig
+@@ -1,6 +1,6 @@
+ CONFIG_ARM=y
+ CONFIG_ARCH_CPU_INIT=y
+-CONFIG_ARCH_RMOBILE=y
++CONFIG_ARCH_RENESAS=y
+ CONFIG_SYS_MALLOC_LEN=0x4000000
+ CONFIG_ENV_SIZE=0x20000
+ CONFIG_ENV_OFFSET=0xFFFE0000
+diff --git a/configs/rcar3_salvator-x_defconfig b/configs/rcar3_salvator-x_defconfig
+index bc03bbc5140..89aa8b537d4 100644
+--- a/configs/rcar3_salvator-x_defconfig
++++ b/configs/rcar3_salvator-x_defconfig
+@@ -1,7 +1,7 @@
+ CONFIG_ARM=y
+ CONFIG_COUNTER_FREQUENCY=16666666
+ CONFIG_ARCH_CPU_INIT=y
+-CONFIG_ARCH_RMOBILE=y
++CONFIG_ARCH_RENESAS=y
+ CONFIG_SYS_MALLOC_LEN=0x4000000
+ CONFIG_ENV_SIZE=0x20000
+ CONFIG_ENV_OFFSET=0xFFFE0000
+diff --git a/configs/rcar3_ulcb_defconfig b/configs/rcar3_ulcb_defconfig
+index d9f696b2a89..10a8492bb20 100644
+--- a/configs/rcar3_ulcb_defconfig
++++ b/configs/rcar3_ulcb_defconfig
+@@ -1,7 +1,7 @@
+ CONFIG_ARM=y
+ CONFIG_COUNTER_FREQUENCY=16666666
+ CONFIG_ARCH_CPU_INIT=y
+-CONFIG_ARCH_RMOBILE=y
++CONFIG_ARCH_RENESAS=y
+ CONFIG_SYS_MALLOC_LEN=0x4000000
+ CONFIG_SYS_MALLOC_F_LEN=0x2000
+ CONFIG_ENV_SIZE=0x20000
+diff --git a/configs/renesas_rzg2l_smarc_defconfig b/configs/renesas_rzg2l_smarc_defconfig
+index e45579ae6b9..c1dc3d7b89d 100644
+--- a/configs/renesas_rzg2l_smarc_defconfig
++++ b/configs/renesas_rzg2l_smarc_defconfig
+@@ -2,7 +2,7 @@ CONFIG_ARM=y
+ CONFIG_COUNTER_FREQUENCY=16666666
+ CONFIG_SYS_INIT_SP_BSS_OFFSET=1048576
+ CONFIG_ARCH_CPU_INIT=y
+-CONFIG_ARCH_RMOBILE=y
++CONFIG_ARCH_RENESAS=y
+ CONFIG_TEXT_BASE=0x50000000
+ CONFIG_SYS_MALLOC_LEN=0x4000000
+ CONFIG_SYS_MALLOC_F_LEN=0x80000
+diff --git a/configs/rzg2_beacon_defconfig b/configs/rzg2_beacon_defconfig
+index c7cefb9d1dc..df0a8385b3e 100644
+--- a/configs/rzg2_beacon_defconfig
++++ b/configs/rzg2_beacon_defconfig
+@@ -1,5 +1,5 @@
+ CONFIG_ARM=y
+-CONFIG_ARCH_RMOBILE=y
++CONFIG_ARCH_RENESAS=y
+ CONFIG_TEXT_BASE=0x50000000
+ CONFIG_SYS_MALLOC_LEN=0x4000000
+ CONFIG_SYS_MALLOC_F_LEN=0x2000
+diff --git a/configs/rzn1_snarc_defconfig b/configs/rzn1_snarc_defconfig
+index 5c657271355..29a96d1aefe 100644
+--- a/configs/rzn1_snarc_defconfig
++++ b/configs/rzn1_snarc_defconfig
+@@ -1,6 +1,6 @@
+ CONFIG_ARM=y
+ CONFIG_SYS_ARCH_TIMER=y
+-CONFIG_ARCH_RMOBILE=y
++CONFIG_ARCH_RENESAS=y
+ CONFIG_SYS_MALLOC_LEN=0xb0000
+ CONFIG_SYS_MALLOC_F_LEN=0x800
+ CONFIG_NR_DRAM_BANKS=1
+diff --git a/configs/silinux_ek874_defconfig b/configs/silinux_ek874_defconfig
+index e74fbb892c8..000bc261732 100644
+--- a/configs/silinux_ek874_defconfig
++++ b/configs/silinux_ek874_defconfig
+@@ -1,7 +1,7 @@
+ CONFIG_ARM=y
+ CONFIG_COUNTER_FREQUENCY=16666666
+ CONFIG_ARCH_CPU_INIT=y
+-CONFIG_ARCH_RMOBILE=y
++CONFIG_ARCH_RENESAS=y
+ CONFIG_TEXT_BASE=0x50000000
+ CONFIG_SYS_MALLOC_LEN=0x4000000
+ CONFIG_SYS_MALLOC_F_LEN=0x2000
+diff --git a/configs/silk_defconfig b/configs/silk_defconfig
+index e0ed90fa7e1..939ccc9c478 100644
+--- a/configs/silk_defconfig
++++ b/configs/silk_defconfig
+@@ -3,7 +3,7 @@ CONFIG_ARCH_CPU_INIT=y
+ CONFIG_ENABLE_ARM_SOC_BOOT0_HOOK=y
+ # CONFIG_SPL_USE_ARCH_MEMCPY is not set
+ # CONFIG_SPL_USE_ARCH_MEMSET is not set
+-CONFIG_ARCH_RMOBILE=y
++CONFIG_ARCH_RENESAS=y
+ CONFIG_TEXT_BASE=0x50000000
+ CONFIG_SYS_MALLOC_LEN=0x100000
+ CONFIG_SYS_MALLOC_F_LEN=0x8000
+diff --git a/configs/stout_defconfig b/configs/stout_defconfig
+index 9f5c61d0e1d..1022ee9e71a 100644
+--- a/configs/stout_defconfig
++++ b/configs/stout_defconfig
+@@ -3,7 +3,7 @@ CONFIG_ARCH_CPU_INIT=y
+ CONFIG_ENABLE_ARM_SOC_BOOT0_HOOK=y
+ # CONFIG_SPL_USE_ARCH_MEMCPY is not set
+ # CONFIG_SPL_USE_ARCH_MEMSET is not set
+-CONFIG_ARCH_RMOBILE=y
++CONFIG_ARCH_RENESAS=y
+ CONFIG_TEXT_BASE=0x50000000
+ CONFIG_SYS_MALLOC_LEN=0x100000
+ CONFIG_SYS_MALLOC_F_LEN=0x8000
+diff --git a/drivers/clk/renesas/Kconfig b/drivers/clk/renesas/Kconfig
+index e9296ed9fe2..a093027eb0e 100644
+--- a/drivers/clk/renesas/Kconfig
++++ b/drivers/clk/renesas/Kconfig
+@@ -1,6 +1,6 @@
+ config CLK_RENESAS
+ 	bool "Renesas clock drivers"
+-	depends on CLK && ARCH_RMOBILE
++	depends on CLK && ARCH_RENESAS
+ 	help
+ 	  Enable support for clock present on Renesas SoCs.
  
--#include <asm/arch/rmobile.h>
-+#include <asm/arch/renesas.h>
+diff --git a/drivers/gpio/Kconfig b/drivers/gpio/Kconfig
+index 27df5d88d40..2df3dc42d0f 100644
+--- a/drivers/gpio/Kconfig
++++ b/drivers/gpio/Kconfig
+@@ -333,7 +333,7 @@ config PCF8575_GPIO
  
- /* console */
- #define CFG_SYS_BAUDRATE_TABLE	{ 38400, 115200 }
-diff --git a/include/configs/rcar-gen3-common.h b/include/configs/rcar-gen3-common.h
-index 213caa75238..5f4d5ced78f 100644
---- a/include/configs/rcar-gen3-common.h
-+++ b/include/configs/rcar-gen3-common.h
-@@ -9,7 +9,7 @@
- #ifndef __RCAR_GEN3_COMMON_H
- #define __RCAR_GEN3_COMMON_H
+ config RCAR_GPIO
+ 	bool "Renesas RCar GPIO driver"
+-	depends on DM_GPIO && ARCH_RMOBILE
++	depends on DM_GPIO && ARCH_RENESAS
+ 	help
+ 	  This driver supports the GPIO banks on Renesas RCar SoCs.
  
--#include <asm/arch/rmobile.h>
-+#include <asm/arch/renesas.h>
+diff --git a/drivers/i2c/Kconfig b/drivers/i2c/Kconfig
+index 4f42200f392..5f919f201b3 100644
+--- a/drivers/i2c/Kconfig
++++ b/drivers/i2c/Kconfig
+@@ -544,7 +544,7 @@ config SPL_SYS_I2C_SANDBOX
  
- /* boot option */
+ config SYS_I2C_SH
+ 	bool "Legacy SuperH I2C interface"
+-	depends on ARCH_RMOBILE && SYS_I2C_LEGACY
++	depends on ARCH_RENESAS && SYS_I2C_LEGACY
+ 	help
+ 	  Enable the legacy SuperH I2C interface.
  
-diff --git a/include/configs/rcar-gen4-common.h b/include/configs/rcar-gen4-common.h
-index c4f506df62d..3465b4d1821 100644
---- a/include/configs/rcar-gen4-common.h
-+++ b/include/configs/rcar-gen4-common.h
-@@ -9,7 +9,7 @@
- #ifndef __RCAR_GEN4_COMMON_H
- #define __RCAR_GEN4_COMMON_H
+diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
+index 17618c3bdcc..cef05790dd9 100644
+--- a/drivers/mmc/Kconfig
++++ b/drivers/mmc/Kconfig
+@@ -393,7 +393,7 @@ config HSMMC2_8BIT
  
--#include <asm/arch/rmobile.h>
-+#include <asm/arch/renesas.h>
+ config SH_MMCIF
+ 	bool "SuperH/Renesas ARM SoCs on-chip MMCIF host controller support"
+-	depends on ARCH_RMOBILE || SH
++	depends on ARCH_RENESAS || SH
+ 	help
+ 	  Support for the on-chip MMCIF host controller on SuperH/Renesas ARM SoCs platform
  
- /* Console */
- #define CFG_SYS_BAUDRATE_TABLE	{ 38400, 115200, 921600, 1843200 }
-diff --git a/include/configs/rzg2l-smarc.h b/include/configs/rzg2l-smarc.h
-index ea57d280cb8..580613068b1 100644
---- a/include/configs/rzg2l-smarc.h
-+++ b/include/configs/rzg2l-smarc.h
-@@ -6,7 +6,7 @@
- #ifndef __RENESAS_RZG2L_H
- #define __RENESAS_RZG2L_H
+@@ -408,7 +408,7 @@ config MMC_UNIPHIER
  
--#include <asm/arch/rmobile.h>
-+#include <asm/arch/renesas.h>
+ config RENESAS_SDHI
+ 	bool "Renesas R-Car SD/MMC Host Controller support"
+-	depends on ARCH_RMOBILE
++	depends on ARCH_RENESAS
+ 	depends on BLK && DM_MMC
+ 	depends on OF_CONTROL
+ 	select BOUNCE_BUFFER
+diff --git a/drivers/mmc/sh_mmcif.h b/drivers/mmc/sh_mmcif.h
+index 66341e51d26..b131b8c2833 100644
+--- a/drivers/mmc/sh_mmcif.h
++++ b/drivers/mmc/sh_mmcif.h
+@@ -195,7 +195,7 @@ struct sh_mmcif_regs {
+ #define SOFT_RST_OFF		(0 << 31)
  
- /* console */
- #define CFG_SYS_BAUDRATE_TABLE	{ 115200, 38400 }
+ #define CLKDEV_EMMC_DATA	52000000	/* 52MHz */
+-#ifdef CONFIG_ARCH_RMOBILE
++#ifdef CONFIG_ARCH_RENESAS
+ #define MMC_CLK_DIV_MIN(clk)	(clk / (1 << 9))
+ #define MMC_CLK_DIV_MAX(clk)	(clk / (1 << 1))
+ #else
+diff --git a/drivers/pinctrl/Makefile b/drivers/pinctrl/Makefile
+index 0e929d8ca04..6d7b7cd9051 100644
+--- a/drivers/pinctrl/Makefile
++++ b/drivers/pinctrl/Makefile
+@@ -14,7 +14,7 @@ obj-$(CONFIG_PINCTRL_INTEL) += intel/
+ obj-$(CONFIG_ARCH_MTMIPS) += mtmips/
+ obj-$(CONFIG_ARCH_NPCM)         += nuvoton/
+ obj-$(CONFIG_PINCTRL_QCOM) += qcom/
+-obj-$(CONFIG_ARCH_RMOBILE) += renesas/
++obj-$(CONFIG_ARCH_RENESAS) += renesas/
+ obj-$(CONFIG_ARCH_RZN1) += renesas/
+ obj-$(CONFIG_PINCTRL_SANDBOX)	+= pinctrl-sandbox.o
+ obj-$(CONFIG_PINCTRL_SUNXI)	+= sunxi/
+diff --git a/drivers/pinctrl/renesas/Kconfig b/drivers/pinctrl/renesas/Kconfig
+index 171cd374b81..57e88604aa2 100644
+--- a/drivers/pinctrl/renesas/Kconfig
++++ b/drivers/pinctrl/renesas/Kconfig
+@@ -1,8 +1,8 @@
+-if ARCH_RMOBILE
++if ARCH_RENESAS
+ 
+ config PINCTRL_PFC
+ 	bool "Renesas pin control drivers"
+-	depends on DM && ARCH_RMOBILE
++	depends on DM && ARCH_RENESAS
+ 	default n if CPU_RZA1
+ 	help
+ 	  Support pin multiplexing control on Renesas SoCs.
+diff --git a/drivers/ram/Makefile b/drivers/ram/Makefile
+index 985990ab5ac..c9c46cc17a8 100644
+--- a/drivers/ram/Makefile
++++ b/drivers/ram/Makefile
+@@ -28,5 +28,5 @@ obj-$(CONFIG_DRAM_SUN20I_D1) += sunxi/
+ 
+ obj-$(CONFIG_ARCH_OCTEON) += octeon/
+ 
+-obj-$(CONFIG_ARCH_RMOBILE) += renesas/
++obj-$(CONFIG_ARCH_RENESAS) += renesas/
+ obj-$(CONFIG_CADENCE_DDR_CTRL) += cadence/
+diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig
+index 26460c4e0ca..88d678654e7 100644
+--- a/drivers/serial/Kconfig
++++ b/drivers/serial/Kconfig
+@@ -433,7 +433,7 @@ config DEBUG_UART_SEMIHOSTING
+ 
+ config DEBUG_UART_SCIF
+ 	bool "Renesas SCIF UART"
+-	depends on SH || ARCH_RMOBILE
++	depends on SH || ARCH_RENESAS
+ 	help
+ 	  Select this to enable a debug UART using the serial_sh driver. You
+ 	  will need to provide parameters to make this work. The driver will
+@@ -893,7 +893,7 @@ config SANDBOX_SERIAL
+ 
+ config SCIF_CONSOLE
+ 	bool "Renesas SCIF UART support"
+-	depends on SH || ARCH_RMOBILE
++	depends on SH || ARCH_RENESAS
+ 	help
+ 	  Select this to enable Renesas SCIF UART. To operate serial ports
+ 	  on systems with RCar or SH SoCs, say Y to this option. If unsure,
+diff --git a/drivers/usb/host/Kconfig b/drivers/usb/host/Kconfig
+index f96027d7bd2..6e10b629a3c 100644
+--- a/drivers/usb/host/Kconfig
++++ b/drivers/usb/host/Kconfig
+@@ -97,7 +97,7 @@ config USB_XHCI_PCI
+ config USB_XHCI_RCAR
+ 	bool "Renesas RCar USB 3.0 support"
+ 	default y
+-	depends on ARCH_RMOBILE
++	depends on ARCH_RENESAS
+ 	help
+ 	  Choose this option to add support for USB 3.0 driver on Renesas
+ 	  RCar Gen3 SoCs.
 -- 
 2.43.0
 
