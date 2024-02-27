@@ -4,74 +4,160 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9707BC54798
-	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 16:26:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C750C54798
+	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 16:26:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9D52A88050;
-	Tue, 27 Feb 2024 17:25:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 1B6DB88058;
+	Tue, 27 Feb 2024 17:25:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=toradex.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ibub1Obw";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="oGGRHILQ";
+	dkim=pass (1024-bit key; unprotected) header.d=toradex.com header.i=@toradex.com header.b="QYFzchFb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E87698801D; Tue, 27 Feb 2024 17:10:12 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ id 6489787E53; Tue, 27 Feb 2024 17:15:20 +0100 (CET)
+Received: from de-smtp-delivery-113.mimecast.com
+ (de-smtp-delivery-113.mimecast.com [194.104.109.113])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF1B787FFF
- for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 17:10:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3042787E63
+ for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 17:15:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=toradex.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4TkjB73NVBz9ss0;
- Tue, 27 Feb 2024 17:10:07 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1709050207;
+ spf=pass smtp.mailfrom=marcel.ziswiler@toradex.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=toradex.com;
+ s=toradex-com; t=1709050514;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=ioOP89ZrREeonOKqw1SHP+ec82AVr/KbPX3BGRqv4L0=;
- b=ibub1ObwZC6vPpHsMJzYQNa8shqUp4jEH305kGU9KfimhwiBoRjHAxZkXFIYOKikGPXJbL
- Wh21m86jCK6zDtRo2KLgvH4cH+2h/xYex7Mw0GhnYJZDUkXble7wAuL35+nxErtHCRmtbW
- kaw+ksdExAi1goYJU6XnPFn54irf4drODDLXEhjYttsfGP/Ka/amlK8ypOy0Dytr9GjHlE
- jJ4u2XvZAvf+4TEQ4s00Fj6Dpf1yJxIe1wx1occm/OE5JSspqC6IjpaCgDdOHBRa0eQt7W
- LBbg9AqR+0pI6Ei6WtIuJw3bqkLTBwNom+gJx2Peb6d2Pjt3KKVJZXXsrWkgig==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1709050205;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=ioOP89ZrREeonOKqw1SHP+ec82AVr/KbPX3BGRqv4L0=;
- b=oGGRHILQM3R/cPncBh0ka9e1Utzw0BxF+AgUfxbkLvYbU0Z7+4fjXw9cSjehT8L8qXKyks
- fvvl8zgDU8LDOqubxMVbUwmsGddviLx5EiLoWn1ZQDLSBlXaHvVqJmbho6D9Cpdcd+IuHU
- VQSB0l3HcQaACiK7pDb85cEWcbVdb9ZohzLEbQSReLWUWXw+MngOIBdPcSL5MCRdPjiUkB
- ud21WRwR7EbOuOCYhYN1sEhFCm+XC7lmCT7GylzyspZ9tYVSus6DUZ4epKPB/NSk7+opqZ
- RgiLFjfjhiiIjUW74vONG/3G4mSethz75vhFpW0XId4AzXLfpfVmJBthT3zmmQ==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 01/19] ARM: renesas: Drop remnants of R8A7740 support
-Date: Tue, 27 Feb 2024 17:05:41 +0100
-Message-ID: <20240227160912.412181-2-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20240227160912.412181-1-marek.vasut+renesas@mailbox.org>
-References: <20240227160912.412181-1-marek.vasut+renesas@mailbox.org>
+ bh=8JFU+4GBglu2UTMvCRd41uvD1QsoK++H4PWcVuo8kvE=;
+ b=QYFzchFbP5HbrPF1Bh7Yn4X2nKQZzL6++3tXhpjmy0trzNSaRtcExXqA/XNV9NSMTedCet
+ ijVgsAnxqwCwJsC7udE1/RSLzWkLzM1eTK17nH5VnS3X6WbURzqshDP95xTLt5pSgK/4CD
+ M1UrPiF/quANqPOi+IWGcZrhdT0qQ+4=
+Received: from CHE01-ZR0-obe.outbound.protection.outlook.com
+ (mail-zr0che01lp2105.outbound.protection.outlook.com [104.47.22.105]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ de-mta-45-zajbxiqAM0uT7n7ggjMWLw-2; Tue, 27 Feb 2024 17:15:12 +0100
+X-MC-Unique: zajbxiqAM0uT7n7ggjMWLw-2
+Received: from ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:3b::9) by
+ GVAP278MB0037.CHEP278.PROD.OUTLOOK.COM (2603:10a6:710:23::11) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7316.39; Tue, 27 Feb 2024 16:15:08 +0000
+Received: from ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::36ff:9449:ac0a:edd6]) by ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::36ff:9449:ac0a:edd6%5]) with mapi id 15.20.7316.034; Tue, 27 Feb 2024
+ 16:15:08 +0000
+From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+To: "seanga2@gmail.com" <seanga2@gmail.com>, "hnagalla@ti.com"
+ <hnagalla@ti.com>, "rogerq@kernel.org" <rogerq@kernel.org>, "afd@ti.com"
+ <afd@ti.com>, "christianshewitt@gmail.com" <christianshewitt@gmail.com>,
+ "yanhong.wang@starfivetech.com" <yanhong.wang@starfivetech.com>,
+ "ralph.siemsen@linaro.org" <ralph.siemsen@linaro.org>, "vigneshr@ti.com"
+ <vigneshr@ti.com>, "j-choudhary@ti.com" <j-choudhary@ti.com>,
+ "sumit.garg@linaro.org" <sumit.garg@linaro.org>, "mkorpershoek@baylibre.com"
+ <mkorpershoek@baylibre.com>, "naoki@radxa.com" <naoki@radxa.com>,
+ "a-nandan@ti.com" <a-nandan@ti.com>, "bb@ti.com" <bb@ti.com>,
+ "kamlesh@ti.com" <kamlesh@ti.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>, "andre.przywara@arm.com" <andre.przywara@arm.com>,
+ "clamor95@gmail.com" <clamor95@gmail.com>,
+ =?utf-8?B?Sm/Do28gUGF1bG8gU2lsdmEgR29uw6dhbHZlcw==?=
+ <joao.goncalves@toradex.com>, Emanuele Ghidoli
+ <emanuele.ghidoli@toradex.com>, "n-jain1@ti.com" <n-jain1@ti.com>,
+ "b-kapoor@ti.com" <b-kapoor@ti.com>, "jh80.chung@samsung.com"
+ <jh80.chung@samsung.com>, "xypron.glpk@gmx.de" <xypron.glpk@gmx.de>,
+ "a-bhatia1@ti.com" <a-bhatia1@ti.com>, "kever.yang@rock-chips.com"
+ <kever.yang@rock-chips.com>, "sjg@chromium.org" <sjg@chromium.org>,
+ "n-francis@ti.com" <n-francis@ti.com>, "christian.gmeiner@gmail.com"
+ <christian.gmeiner@gmail.com>, "mr.bossman075@gmail.com"
+ <mr.bossman075@gmail.com>, "marex@denx.de" <marex@denx.de>,
+ "m-chawdhry@ti.com" <m-chawdhry@ti.com>, "lukma@denx.de" <lukma@denx.de>,
+ "michal.simek@amd.com" <michal.simek@amd.com>, "sabiya.d@ti.com"
+ <sabiya.d@ti.com>, "nm@ti.com" <nm@ti.com>, "j-humphreys@ti.com"
+ <j-humphreys@ti.com>, "neil.armstrong@linaro.org"
+ <neil.armstrong@linaro.org>, "trini@konsulko.com" <trini@konsulko.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>, "u-kumar1@ti.com"
+ <u-kumar1@ti.com>, "hai.pham.ud@renesas.com" <hai.pham.ud@renesas.com>,
+ "jonas@kwiboo.se" <jonas@kwiboo.se>, "cnsztl@gmail.com" <cnsztl@gmail.com>,
+ "rasmus.villemoes@prevas.dk" <rasmus.villemoes@prevas.dk>
+Subject: Re: [PATCH v10 00/15] Introduce initial TI's J784S4 and AM69 support
+Thread-Topic: [PATCH v10 00/15] Introduce initial TI's J784S4 and AM69 support
+Thread-Index: AQHaZpYZhGqg4xUhVkW8gjwunFUChLEeYxWA
+Date: Tue, 27 Feb 2024 16:15:08 +0000
+Message-ID: <4f418aa56f55f984a3c096732eb02124545b79eb.camel@toradex.com>
+References: <20240223202153.3756094-1-a-nandan@ti.com>
+In-Reply-To: <20240223202153.3756094-1-a-nandan@ti.com>
+Accept-Language: en-GB, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: ZR0P278MB0683:EE_|GVAP278MB0037:EE_
+x-ms-office365-filtering-correlation-id: d62f0406-b052-41c3-1a22-08dc37af446d
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0
+x-microsoft-antispam-message-info: 1Fu7r3MMo7VVuTEJzQRTVCNdfdnEubgaQBbG9GJwPrrRVKrtc6wFyC6lKan71grSg6LhIf6/D3+PACkTjqyGGvyLLiWqJ/90E2xGISP+BIfxLCm7z4QKJP+Qd/ws/OA8g+VzwSzSsjUMQy8fNuikpknlhj6JOSbvwcj/E8CeoKMnOJwdnYWqjLhIDqqFmM3k2S2e2rV7/ubkuKv0Noq8ONsVG3iZ4MzFqzQsTen9PFeeUL4ke4u/3dhjbXL39lYaG+TmAD1YAXt93M6dPZ3oKYOLhZzhzEM6uFKcEiZe/wR1+PTOjHl30Kd+JwZrxAzg9KPqPKgciVMPmWmSpoMsIbXTNRM3P97KNBSW6/GimwCBdinh8mX+DiOyWOkS97b5zLcsc2h5RahXcsvp3EaMlZY3HMAQ73unHnM44ZJ830W+3JjR0cyiEIBzXFoZ9zC5KC4L+2YoeB/60LB/u2WenUB72BEp1YAIhjzrB0eCvPPnAlw+3ZEWQfE+sWniT6VNY+3h3hWa4oXrYeH2D9eXr3MmYAZRhEuWmnVbWY33ZInutEmmhE07iz/b1iVC8CAotuoJhjraWSUAna+G0KEaXYcOSdHxn/XB7Mx/WQnXhoa0Cp/Bs+/TJyW8PT3NTx3KtVS6P6xxJ4BOvPM5xLyvOUcMmXIn2Q98xL9GTe4lSbezbQfzpHouf/uBPtFVCGMM5256CXcjuHP4dMcC/oSj9g==
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230031)(230273577357003)(921011)(38070700009); DIR:OUT; SFP:1102
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?dVBGdlZLbGY1TUpFR3JxQkM3YmtMR2tHT09lK0t5MVlWb1RJOG1adVpVaHdH?=
+ =?utf-8?B?WW9rSTN2QWdicENiVk1JZUR2SU1ZbVJjRGo5dnFBTG9OUG9KcEZRckJoNlRX?=
+ =?utf-8?B?MlVRYy9QL29XQXdhTjFESW9UUFBOL2RVRVBxQUE2TFJMdmhudWNJdG5JKzNZ?=
+ =?utf-8?B?T05mZ1ZQdlZSTE1NSjNXTk1XcE9iMUl1b2VYUzk4U3RadGhINCs1VUJ5SHVv?=
+ =?utf-8?B?ZUt4MVZmU3ZaWTQ3VkgrdnZlMzBWaE94TklBSnl4QzdINnZQQTVYZTJkdGc5?=
+ =?utf-8?B?S05CbmUrelI0WE5LUG1ZMHRBckVIb0NyalZtOWtSTFQ2YmFLLytCTCtrTHI3?=
+ =?utf-8?B?Um9LM29odVRKekhKK25WYTRUUHBJQUkweGlsM1B5NVYrd21FYnBuSFRPY3RW?=
+ =?utf-8?B?Z25ZLzcvNkM1d2xnOVZsOUlHRFh3SG1WTWRwY0xWMTU1YnB2RmVndkZFbE1H?=
+ =?utf-8?B?WnV1UGdjMFBZeTF1UFhiZU1qemlpZlVoQ0ljckZtYWZzYi81MGJiR1loTTgy?=
+ =?utf-8?B?VlBCSlI2VWgvdk9RSWt6R293TzdWbFNyY2ZCbTRmWlh3NEdMc2d6dnUyZGEr?=
+ =?utf-8?B?QmJYd3RLcXBWMEFnRmFNa1B6UjhvTzVvMGFhUkpsdTlqaktBeUJXY3BUSDkw?=
+ =?utf-8?B?clZKRnE0MTFwY2FTaWxNa0xJSDBGMHRZSEwwTXFMWmZpUEZOK2VwVmtjalJj?=
+ =?utf-8?B?c3Nna0NxZmo3VEswVmszWWNQMW5ycGljK2RpOEUxdjNNekRaenM4NzNBdUpu?=
+ =?utf-8?B?NGYyOW45SzBQV09OWTc3T1FtWW1wbm56T3VyUTNwZVhWMjJvM2M1bUppVUpK?=
+ =?utf-8?B?MmtZWm5nOE93Y25vRmVRWk1BRG9qOWlFck1JQ0NxNGQrUDNFRTJwYXlvNjZL?=
+ =?utf-8?B?aWtwMmcvcExjODFoVHdRWC9NVnRLS2J1STNWQzZZanpvbDdTbDdMWXhDUHQv?=
+ =?utf-8?B?dTRvMFg3V3EyNG51V0E3ckM0VmpManovc3JPVXBIdU5xM0I2ZzdBYUFsYmpE?=
+ =?utf-8?B?clB4cFZvd2MxeXE4NDVTbGdORUFjSTFxeU5ZMTVQK2ExbVA0d0JyOTM2dnAw?=
+ =?utf-8?B?ejM1dGhTdlpSbFd2VUNsM1VGeWlaNkEvTWoybjhmUGVrRzNIUTd1WDNQNWRx?=
+ =?utf-8?B?bkRXTk9xeFlHNExmZHlhUWJ3Qm9WZ0VzZzg1amRkd055NnlLQW13Y2ZieFhs?=
+ =?utf-8?B?K1RmeStic2ZmLy8wMWExSW5QbkswWTl4RHc2VEx5ZTRINDVFNWIyREtTM0tE?=
+ =?utf-8?B?RkVzVEtBVm1Wd1RXUEtEVUpsamxTdGhTd0tWMGwxQVI0RXg3cUxDZXBUSGxJ?=
+ =?utf-8?B?eEtBd1B4NjhPbmpFM2VmNFVLS0VaeGFSdXk0L243SUVubEtveGR1bzBSQ0sr?=
+ =?utf-8?B?K01XemhtV2tBSDA4MkJrdDhpK1BoQ0hUdDhjRGJSQW9Od1BZWThLTjY2VlVh?=
+ =?utf-8?B?MHBhY0pyK3NiVDNUeDdMQ1BrZ1ZqNnpTNU9ubGZSWW9GOFcwK3lEK1R5VFR1?=
+ =?utf-8?B?K21aRklabnMzcXllUWlDZHJ1U2x1MzZCUHNPSkxNLzhSN3hpeE1OS250YkRR?=
+ =?utf-8?B?R2VCTHkzY0RvQnNtWWVIcHFSMG8vYURJKzJ1Zm5JZkZqWUwvdDZYZWtnTkVy?=
+ =?utf-8?B?UDdKdmYzZFpweU4rN3h0bm1aYmdGSks1VGdTdTU2MjdwZkNvTldKbFJxc1Zt?=
+ =?utf-8?B?c01TNk5ZWFZyUFRQeEw1aEZOdnhqSm5FejNCRzJuVEwrdTk5cnE3dENJUndN?=
+ =?utf-8?B?SjRPMjZOZ0lzVDIzZ3Jwd0Q2WEVtY2tsTUxHM01IZmRKUjlKM2lBcWFZTFFy?=
+ =?utf-8?B?NWluUDdqWHhpNG9FVDZvcmxnODZTOFNsOFBHVkVvMWRKTDlRVDJPQ29PNkpN?=
+ =?utf-8?B?a2dLT2EzWU5WQ0ZFM3g2QlRZc1Yzc3A1MW1mZyszZU40K1c5ZU5jNkl5aWpY?=
+ =?utf-8?B?bWNOVlBQSzlyK2ZJZ0dZOXZ0NFVrT2Y4R0ZvR0hnRFNZdDIxUitrVTMwNnRy?=
+ =?utf-8?B?WmYyb2plWmRFVlNjUjN5ZGNKcXlrMk1vZkZnQnNrWTRGSnlCUUJYNkhGMXdx?=
+ =?utf-8?B?amNJL0g3c1k5U1JLYmNnVGVEV3BlZVhHS29XRFRoVlVWZ2R6cnAxUW1VUEMw?=
+ =?utf-8?B?ejRYWS9QZ1c0RGdvZk5kRUlOSWd3TjVGeHVwVXhYMGwwSXArNVJHa0F4UU5u?=
+ =?utf-8?B?Wnc9PQ==?=
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: qb3juu1odozjw76irwqa4zxgmg9omb84
-X-MBO-RS-ID: 52f4816567dcef3dce4
-X-Rspamd-Queue-Id: 4TkjB73NVBz9ss0
+X-OriginatorOrg: toradex.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: d62f0406-b052-41c3-1a22-08dc37af446d
+X-MS-Exchange-CrossTenant-originalarrivaltime: 27 Feb 2024 16:15:08.6077 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: d9995866-0d9b-4251-8315-093f062abab4
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: tubIkzFOty9gtUX3389Ebtv7agbWbgQ+IWWH9ImB1r+qWcNMBmlbqIfahXgldoh4xD3zCTD7iw/iGBf1ck3N58p7ytR2yfpjjNd9AL6efTU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVAP278MB0037
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: toradex.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8
+Content-ID: <889C78BB8F6D4E408A70CBF767C64FCB@CHEP278.PROD.OUTLOOK.COM>
+Content-Transfer-Encoding: base64
 X-Mailman-Approved-At: Tue, 27 Feb 2024 17:25:20 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,3691 +175,324 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Last board with this SoC has been removed in commit
-0fb054b3f7ea ("arm: Remove armadillo-800eva board")
-in August 2022. Drop the rest of unused code.
-
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-Cc: Tom Rini <trini@konsulko.com>
----
- arch/arm/mach-rmobile/Kconfig.32              |    3 -
- arch/arm/mach-rmobile/Makefile                |    1 -
- arch/arm/mach-rmobile/cpu_info-r8a7740.c      |   31 -
- arch/arm/mach-rmobile/cpu_info.c              |    1 -
- arch/arm/mach-rmobile/include/mach/gpio.h     |    5 -
- .../mach-rmobile/include/mach/r8a7740-gpio.h  |  572 ----
- arch/arm/mach-rmobile/include/mach/r8a7740.h  |  274 --
- arch/arm/mach-rmobile/include/mach/rmobile.h  |    4 +-
- arch/arm/mach-rmobile/lowlevel_init.S         |   72 -
- arch/arm/mach-rmobile/pfc-r8a7740.c           | 2612 -----------------
- 10 files changed, 1 insertion(+), 3574 deletions(-)
- delete mode 100644 arch/arm/mach-rmobile/cpu_info-r8a7740.c
- delete mode 100644 arch/arm/mach-rmobile/include/mach/r8a7740-gpio.h
- delete mode 100644 arch/arm/mach-rmobile/include/mach/r8a7740.h
- delete mode 100644 arch/arm/mach-rmobile/lowlevel_init.S
- delete mode 100644 arch/arm/mach-rmobile/pfc-r8a7740.c
-
-diff --git a/arch/arm/mach-rmobile/Kconfig.32 b/arch/arm/mach-rmobile/Kconfig.32
-index 1ac31c29d82..f7079a26b06 100644
---- a/arch/arm/mach-rmobile/Kconfig.32
-+++ b/arch/arm/mach-rmobile/Kconfig.32
-@@ -10,9 +10,6 @@ config RCAR_GEN2
- 	select PHY_RCAR_GEN2
- 	select TMU_TIMER
- 
--config R8A7740
--	bool "Renesas SoC R8A7740"
--
- config R8A7790
- 	bool "Renesas SoC R8A7790"
- 	select RCAR_GEN2
-diff --git a/arch/arm/mach-rmobile/Makefile b/arch/arm/mach-rmobile/Makefile
-index ff8b0c7bae2..71e12e00aba 100644
---- a/arch/arm/mach-rmobile/Makefile
-+++ b/arch/arm/mach-rmobile/Makefile
-@@ -8,7 +8,6 @@ obj-y += emac.o
- 
- obj-$(CONFIG_DISPLAY_BOARDINFO) += board.o
- obj-$(CONFIG_TMU_TIMER) += ../../sh/lib/time.o
--obj-$(CONFIG_R8A7740) += lowlevel_init.o cpu_info-r8a7740.o pfc-r8a7740.o
- obj-$(CONFIG_RCAR_GEN2) += lowlevel_init_ca15.o cpu_info-rcar.o
- obj-$(CONFIG_RCAR_64) += lowlevel_init_gen3.o
- obj-$(CONFIG_RCAR_GEN3) += cpu_info-rcar.o memmap-gen3.o
-diff --git a/arch/arm/mach-rmobile/cpu_info-r8a7740.c b/arch/arm/mach-rmobile/cpu_info-r8a7740.c
-deleted file mode 100644
-index 5a94235c4b9..00000000000
---- a/arch/arm/mach-rmobile/cpu_info-r8a7740.c
-+++ /dev/null
-@@ -1,31 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+
--/*
-- * (C) Copyright 2012 Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>
-- * (C) Copyright 2012 Renesas Solutions Corp.
-- */
--
--#include <asm/io.h>
--
--u32 rmobile_get_cpu_type(void)
--{
--	u32 id;
--	u32 type;
--	struct r8a7740_hpb *hpb = (struct r8a7740_hpb *)HPB_BASE;
--
--	id = readl(hpb->cccr);
--	type = (id >> 8) & 0xFF;
--
--	return type;
--}
--
--u32 rmobile_get_cpu_rev(void)
--{
--	u32 id;
--	u32 rev;
--	struct r8a7740_hpb *hpb = (struct r8a7740_hpb *)HPB_BASE;
--
--	id = readl(hpb->cccr);
--	rev = (id >> 4) & 0xF;
--
--	return rev;
--}
-diff --git a/arch/arm/mach-rmobile/cpu_info.c b/arch/arm/mach-rmobile/cpu_info.c
-index 3d5d5ba79a9..adb7fff0c48 100644
---- a/arch/arm/mach-rmobile/cpu_info.c
-+++ b/arch/arm/mach-rmobile/cpu_info.c
-@@ -62,7 +62,6 @@ static const struct {
- 	u16 cpu_type;
- 	u8 cpu_name[10];
- } rmobile_cpuinfo[] = {
--	{ RMOBILE_CPU_TYPE_R8A7740, "R8A7740" },
- 	{ RMOBILE_CPU_TYPE_R8A7790, "R8A7790" },
- 	{ RMOBILE_CPU_TYPE_R8A7791, "R8A7791" },
- 	{ RMOBILE_CPU_TYPE_R8A7792, "R8A7792" },
-diff --git a/arch/arm/mach-rmobile/include/mach/gpio.h b/arch/arm/mach-rmobile/include/mach/gpio.h
-index 150aa46034d..efdde0ae0a4 100644
---- a/arch/arm/mach-rmobile/include/mach/gpio.h
-+++ b/arch/arm/mach-rmobile/include/mach/gpio.h
-@@ -1,9 +1,4 @@
- #ifndef __ASM_ARCH_GPIO_H
- #define __ASM_ARCH_GPIO_H
- 
--#if defined(CONFIG_R8A7740)
--#include "r8a7740-gpio.h"
--void r8a7740_pinmux_init(void);
--#endif
--
- #endif /* __ASM_ARCH_GPIO_H */
-diff --git a/arch/arm/mach-rmobile/include/mach/r8a7740-gpio.h b/arch/arm/mach-rmobile/include/mach/r8a7740-gpio.h
-deleted file mode 100644
-index 125b3b4fffa..00000000000
---- a/arch/arm/mach-rmobile/include/mach/r8a7740-gpio.h
-+++ /dev/null
-@@ -1,572 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0 */
--/*
-- * Copyright (C) 2011  Renesas Solutions Corp.
-- * Copyright (C) 2011  Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>
-- */
--
--#ifndef __ASM_R8A7740_H__
--#define __ASM_R8A7740_H__
--
--/*
-- * MD_CKx pin
-- */
--#define MD_CK2	(1 << 2)
--#define MD_CK1	(1 << 1)
--#define MD_CK0	(1 << 0)
--
--/*
-- * Pin Function Controller:
-- *	GPIO_FN_xx - GPIO used to select pin function
-- *	GPIO_PORTxx - GPIO mapped to real I/O pin on CPU
-- */
--enum {
--	/* PORT */
--	GPIO_PORT0, GPIO_PORT1, GPIO_PORT2, GPIO_PORT3, GPIO_PORT4,
--	GPIO_PORT5, GPIO_PORT6, GPIO_PORT7, GPIO_PORT8, GPIO_PORT9,
--
--	GPIO_PORT10, GPIO_PORT11, GPIO_PORT12, GPIO_PORT13, GPIO_PORT14,
--	GPIO_PORT15, GPIO_PORT16, GPIO_PORT17, GPIO_PORT18, GPIO_PORT19,
--
--	GPIO_PORT20, GPIO_PORT21, GPIO_PORT22, GPIO_PORT23, GPIO_PORT24,
--	GPIO_PORT25, GPIO_PORT26, GPIO_PORT27, GPIO_PORT28, GPIO_PORT29,
--
--	GPIO_PORT30, GPIO_PORT31, GPIO_PORT32, GPIO_PORT33, GPIO_PORT34,
--	GPIO_PORT35, GPIO_PORT36, GPIO_PORT37, GPIO_PORT38, GPIO_PORT39,
--
--	GPIO_PORT40, GPIO_PORT41, GPIO_PORT42, GPIO_PORT43, GPIO_PORT44,
--	GPIO_PORT45, GPIO_PORT46, GPIO_PORT47, GPIO_PORT48, GPIO_PORT49,
--
--	GPIO_PORT50, GPIO_PORT51, GPIO_PORT52, GPIO_PORT53, GPIO_PORT54,
--	GPIO_PORT55, GPIO_PORT56, GPIO_PORT57, GPIO_PORT58, GPIO_PORT59,
--
--	GPIO_PORT60, GPIO_PORT61, GPIO_PORT62, GPIO_PORT63, GPIO_PORT64,
--	GPIO_PORT65, GPIO_PORT66, GPIO_PORT67, GPIO_PORT68, GPIO_PORT69,
--
--	GPIO_PORT70, GPIO_PORT71, GPIO_PORT72, GPIO_PORT73, GPIO_PORT74,
--	GPIO_PORT75, GPIO_PORT76, GPIO_PORT77, GPIO_PORT78, GPIO_PORT79,
--
--	GPIO_PORT80, GPIO_PORT81, GPIO_PORT82, GPIO_PORT83, GPIO_PORT84,
--	GPIO_PORT85, GPIO_PORT86, GPIO_PORT87, GPIO_PORT88, GPIO_PORT89,
--
--	GPIO_PORT90, GPIO_PORT91, GPIO_PORT92, GPIO_PORT93, GPIO_PORT94,
--	GPIO_PORT95, GPIO_PORT96, GPIO_PORT97, GPIO_PORT98, GPIO_PORT99,
--
--	GPIO_PORT100, GPIO_PORT101, GPIO_PORT102, GPIO_PORT103, GPIO_PORT104,
--	GPIO_PORT105, GPIO_PORT106, GPIO_PORT107, GPIO_PORT108, GPIO_PORT109,
--
--	GPIO_PORT110, GPIO_PORT111, GPIO_PORT112, GPIO_PORT113, GPIO_PORT114,
--	GPIO_PORT115, GPIO_PORT116, GPIO_PORT117, GPIO_PORT118, GPIO_PORT119,
--
--	GPIO_PORT120, GPIO_PORT121, GPIO_PORT122, GPIO_PORT123, GPIO_PORT124,
--	GPIO_PORT125, GPIO_PORT126, GPIO_PORT127, GPIO_PORT128, GPIO_PORT129,
--
--	GPIO_PORT130, GPIO_PORT131, GPIO_PORT132, GPIO_PORT133, GPIO_PORT134,
--	GPIO_PORT135, GPIO_PORT136, GPIO_PORT137, GPIO_PORT138, GPIO_PORT139,
--
--	GPIO_PORT140, GPIO_PORT141, GPIO_PORT142, GPIO_PORT143, GPIO_PORT144,
--	GPIO_PORT145, GPIO_PORT146, GPIO_PORT147, GPIO_PORT148, GPIO_PORT149,
--
--	GPIO_PORT150, GPIO_PORT151, GPIO_PORT152, GPIO_PORT153, GPIO_PORT154,
--	GPIO_PORT155, GPIO_PORT156, GPIO_PORT157, GPIO_PORT158, GPIO_PORT159,
--
--	GPIO_PORT160, GPIO_PORT161, GPIO_PORT162, GPIO_PORT163, GPIO_PORT164,
--	GPIO_PORT165, GPIO_PORT166, GPIO_PORT167, GPIO_PORT168, GPIO_PORT169,
--
--	GPIO_PORT170, GPIO_PORT171, GPIO_PORT172, GPIO_PORT173, GPIO_PORT174,
--	GPIO_PORT175, GPIO_PORT176, GPIO_PORT177, GPIO_PORT178, GPIO_PORT179,
--
--	GPIO_PORT180, GPIO_PORT181, GPIO_PORT182, GPIO_PORT183, GPIO_PORT184,
--	GPIO_PORT185, GPIO_PORT186, GPIO_PORT187, GPIO_PORT188, GPIO_PORT189,
--
--	GPIO_PORT190, GPIO_PORT191, GPIO_PORT192, GPIO_PORT193, GPIO_PORT194,
--	GPIO_PORT195, GPIO_PORT196, GPIO_PORT197, GPIO_PORT198, GPIO_PORT199,
--
--	GPIO_PORT200, GPIO_PORT201, GPIO_PORT202, GPIO_PORT203, GPIO_PORT204,
--	GPIO_PORT205, GPIO_PORT206, GPIO_PORT207, GPIO_PORT208, GPIO_PORT209,
--
--	GPIO_PORT210, GPIO_PORT211,
--
--	/* IRQ */
--	GPIO_FN_IRQ0_PORT2,	GPIO_FN_IRQ0_PORT13,
--	GPIO_FN_IRQ1,
--	GPIO_FN_IRQ2_PORT11,	GPIO_FN_IRQ2_PORT12,
--	GPIO_FN_IRQ3_PORT10,	GPIO_FN_IRQ3_PORT14,
--	GPIO_FN_IRQ4_PORT15,	GPIO_FN_IRQ4_PORT172,
--	GPIO_FN_IRQ5_PORT0,	GPIO_FN_IRQ5_PORT1,
--	GPIO_FN_IRQ6_PORT121,	GPIO_FN_IRQ6_PORT173,
--	GPIO_FN_IRQ7_PORT120,	GPIO_FN_IRQ7_PORT209,
--	GPIO_FN_IRQ8,
--	GPIO_FN_IRQ9_PORT118,	GPIO_FN_IRQ9_PORT210,
--	GPIO_FN_IRQ10,
--	GPIO_FN_IRQ11,
--	GPIO_FN_IRQ12_PORT42,	GPIO_FN_IRQ12_PORT97,
--	GPIO_FN_IRQ13_PORT64,	GPIO_FN_IRQ13_PORT98,
--	GPIO_FN_IRQ14_PORT63,	GPIO_FN_IRQ14_PORT99,
--	GPIO_FN_IRQ15_PORT62,	GPIO_FN_IRQ15_PORT100,
--	GPIO_FN_IRQ16_PORT68,	GPIO_FN_IRQ16_PORT211,
--	GPIO_FN_IRQ17,
--	GPIO_FN_IRQ18,
--	GPIO_FN_IRQ19,
--	GPIO_FN_IRQ20,
--	GPIO_FN_IRQ21,
--	GPIO_FN_IRQ22,
--	GPIO_FN_IRQ23,
--	GPIO_FN_IRQ24,
--	GPIO_FN_IRQ25,
--	GPIO_FN_IRQ26_PORT58,	GPIO_FN_IRQ26_PORT81,
--	GPIO_FN_IRQ27_PORT57,	GPIO_FN_IRQ27_PORT168,
--	GPIO_FN_IRQ28_PORT56,	GPIO_FN_IRQ28_PORT169,
--	GPIO_FN_IRQ29_PORT50,	GPIO_FN_IRQ29_PORT170,
--	GPIO_FN_IRQ30_PORT49,	GPIO_FN_IRQ30_PORT171,
--	GPIO_FN_IRQ31_PORT41,	GPIO_FN_IRQ31_PORT167,
--
--	/* Function */
--
--	/* DBGT */
--	GPIO_FN_DBGMDT2,	GPIO_FN_DBGMDT1,	GPIO_FN_DBGMDT0,
--	GPIO_FN_DBGMD10,	GPIO_FN_DBGMD11,	GPIO_FN_DBGMD20,
--	GPIO_FN_DBGMD21,
--
--	/* FSI */
--	GPIO_FN_FSIAISLD_PORT0,		/* FSIAISLD Port 0/5 */
--	GPIO_FN_FSIAISLD_PORT5,
--	GPIO_FN_FSIASPDIF_PORT9,	/* FSIASPDIF Port 9/18 */
--	GPIO_FN_FSIASPDIF_PORT18,
--	GPIO_FN_FSIAOSLD1,	GPIO_FN_FSIAOSLD2,
--	GPIO_FN_FSIAOLR,	GPIO_FN_FSIAOBT,
--	GPIO_FN_FSIAOSLD,	GPIO_FN_FSIAOMC,
--	GPIO_FN_FSIACK,		GPIO_FN_FSIAILR,
--	GPIO_FN_FSIAIBT,
--
--	/* FMSI */
--	GPIO_FN_FMSISLD_PORT1, /* FMSISLD Port 1/6 */
--	GPIO_FN_FMSISLD_PORT6,
--	GPIO_FN_FMSIILR,	GPIO_FN_FMSIIBT,
--	GPIO_FN_FMSIOLR,	GPIO_FN_FMSIOBT,
--	GPIO_FN_FMSICK,		GPIO_FN_FMSOILR,
--	GPIO_FN_FMSOIBT,	GPIO_FN_FMSOOLR,
--	GPIO_FN_FMSOOBT,	GPIO_FN_FMSOSLD,
--	GPIO_FN_FMSOCK,
--
--	/* SCIFA0 */
--	GPIO_FN_SCIFA0_SCK,	GPIO_FN_SCIFA0_CTS,
--	GPIO_FN_SCIFA0_RTS,	GPIO_FN_SCIFA0_RXD,
--	GPIO_FN_SCIFA0_TXD,
--
--	/* SCIFA1 */
--	GPIO_FN_SCIFA1_CTS,	GPIO_FN_SCIFA1_SCK,
--	GPIO_FN_SCIFA1_RXD,	GPIO_FN_SCIFA1_TXD,
--	GPIO_FN_SCIFA1_RTS,
--
--	/* SCIFA2 */
--	GPIO_FN_SCIFA2_SCK_PORT22, /* SCIFA2_SCK Port 22/199 */
--	GPIO_FN_SCIFA2_SCK_PORT199,
--	GPIO_FN_SCIFA2_RXD,	GPIO_FN_SCIFA2_TXD,
--	GPIO_FN_SCIFA2_CTS,	GPIO_FN_SCIFA2_RTS,
--
--	/* SCIFA3 */
--	GPIO_FN_SCIFA3_RTS_PORT105, /* MSEL5CR_8_0 */
--	GPIO_FN_SCIFA3_SCK_PORT116,
--	GPIO_FN_SCIFA3_CTS_PORT117,
--	GPIO_FN_SCIFA3_RXD_PORT174,
--	GPIO_FN_SCIFA3_TXD_PORT175,
--
--	GPIO_FN_SCIFA3_RTS_PORT161, /* MSEL5CR_8_1 */
--	GPIO_FN_SCIFA3_SCK_PORT158,
--	GPIO_FN_SCIFA3_CTS_PORT162,
--	GPIO_FN_SCIFA3_RXD_PORT159,
--	GPIO_FN_SCIFA3_TXD_PORT160,
--
--	/* SCIFA4 */
--	GPIO_FN_SCIFA4_RXD_PORT12, /* MSEL5CR[12:11] = 00 */
--	GPIO_FN_SCIFA4_TXD_PORT13,
--
--	GPIO_FN_SCIFA4_RXD_PORT204, /* MSEL5CR[12:11] = 01 */
--	GPIO_FN_SCIFA4_TXD_PORT203,
--
--	GPIO_FN_SCIFA4_RXD_PORT94, /* MSEL5CR[12:11] = 10 */
--	GPIO_FN_SCIFA4_TXD_PORT93,
--
--	GPIO_FN_SCIFA4_SCK_PORT21, /* SCIFA4_SCK Port 21/205 */
--	GPIO_FN_SCIFA4_SCK_PORT205,
--
--	/* SCIFA5 */
--	GPIO_FN_SCIFA5_TXD_PORT20, /* MSEL5CR[15:14] = 00 */
--	GPIO_FN_SCIFA5_RXD_PORT10,
--
--	GPIO_FN_SCIFA5_RXD_PORT207, /* MSEL5CR[15:14] = 01 */
--	GPIO_FN_SCIFA5_TXD_PORT208,
--
--	GPIO_FN_SCIFA5_TXD_PORT91, /* MSEL5CR[15:14] = 10 */
--	GPIO_FN_SCIFA5_RXD_PORT92,
--
--	GPIO_FN_SCIFA5_SCK_PORT23, /* SCIFA5_SCK Port 23/206 */
--	GPIO_FN_SCIFA5_SCK_PORT206,
--
--	/* SCIFA6 */
--	GPIO_FN_SCIFA6_SCK,	GPIO_FN_SCIFA6_RXD,	GPIO_FN_SCIFA6_TXD,
--
--	/* SCIFA7 */
--	GPIO_FN_SCIFA7_TXD,	GPIO_FN_SCIFA7_RXD,
--
--	/* SCIFAB */
--	GPIO_FN_SCIFB_SCK_PORT190, /* MSEL5CR_17_0 */
--	GPIO_FN_SCIFB_RXD_PORT191,
--	GPIO_FN_SCIFB_TXD_PORT192,
--	GPIO_FN_SCIFB_RTS_PORT186,
--	GPIO_FN_SCIFB_CTS_PORT187,
--
--	GPIO_FN_SCIFB_SCK_PORT2, /* MSEL5CR_17_1 */
--	GPIO_FN_SCIFB_RXD_PORT3,
--	GPIO_FN_SCIFB_TXD_PORT4,
--	GPIO_FN_SCIFB_RTS_PORT172,
--	GPIO_FN_SCIFB_CTS_PORT173,
--
--	/* LCD0 */
--	GPIO_FN_LCDC0_SELECT,
--	GPIO_FN_LCD0_D0,	GPIO_FN_LCD0_D1,	GPIO_FN_LCD0_D2,
--	GPIO_FN_LCD0_D3,	GPIO_FN_LCD0_D4,	GPIO_FN_LCD0_D5,
--	GPIO_FN_LCD0_D6,	GPIO_FN_LCD0_D7,	GPIO_FN_LCD0_D8,
--	GPIO_FN_LCD0_D9,	GPIO_FN_LCD0_D10,	GPIO_FN_LCD0_D11,
--	GPIO_FN_LCD0_D12,	GPIO_FN_LCD0_D13,	GPIO_FN_LCD0_D14,
--	GPIO_FN_LCD0_D15,	GPIO_FN_LCD0_D16,	GPIO_FN_LCD0_D17,
--	GPIO_FN_LCD0_DON,	GPIO_FN_LCD0_VCPWC,	GPIO_FN_LCD0_VEPWC,
--
--	GPIO_FN_LCD0_DCK,	GPIO_FN_LCD0_VSYN, /* for RGB */
--	GPIO_FN_LCD0_HSYN,	GPIO_FN_LCD0_DISP, /* for RGB */
--
--	GPIO_FN_LCD0_WR,	GPIO_FN_LCD0_RD, /* for SYS */
--	GPIO_FN_LCD0_CS,	GPIO_FN_LCD0_RS, /* for SYS */
--
--	GPIO_FN_LCD0_D18_PORT163,	GPIO_FN_LCD0_D19_PORT162,
--	GPIO_FN_LCD0_D20_PORT161,	GPIO_FN_LCD0_D21_PORT158,
--	GPIO_FN_LCD0_D22_PORT160,	GPIO_FN_LCD0_D23_PORT159,
--	GPIO_FN_LCD0_LCLK_PORT165,	 /* MSEL5CR_6_1 */
--
--	GPIO_FN_LCD0_D18_PORT40,	GPIO_FN_LCD0_D19_PORT4,
--	GPIO_FN_LCD0_D20_PORT3,		GPIO_FN_LCD0_D21_PORT2,
--	GPIO_FN_LCD0_D22_PORT0,		GPIO_FN_LCD0_D23_PORT1,
--	GPIO_FN_LCD0_LCLK_PORT102,	/* MSEL5CR_6_0 */
--
--	/* LCD1 */
--	GPIO_FN_LCDC1_SELECT,
--	GPIO_FN_LCD1_D0,	GPIO_FN_LCD1_D1,	GPIO_FN_LCD1_D2,
--	GPIO_FN_LCD1_D3,	GPIO_FN_LCD1_D4,	GPIO_FN_LCD1_D5,
--	GPIO_FN_LCD1_D6,	GPIO_FN_LCD1_D7,	GPIO_FN_LCD1_D8,
--	GPIO_FN_LCD1_D9,	GPIO_FN_LCD1_D10,	GPIO_FN_LCD1_D11,
--	GPIO_FN_LCD1_D12,	GPIO_FN_LCD1_D13,	GPIO_FN_LCD1_D14,
--	GPIO_FN_LCD1_D15,	GPIO_FN_LCD1_D16,	GPIO_FN_LCD1_D17,
--	GPIO_FN_LCD1_D18,	GPIO_FN_LCD1_D19,	GPIO_FN_LCD1_D20,
--	GPIO_FN_LCD1_D21,	GPIO_FN_LCD1_D22,	GPIO_FN_LCD1_D23,
--	GPIO_FN_LCD1_DON,	GPIO_FN_LCD1_VCPWC,
--	GPIO_FN_LCD1_LCLK,	GPIO_FN_LCD1_VEPWC,
--
--	GPIO_FN_LCD1_DCK,	GPIO_FN_LCD1_VSYN, /* for RGB */
--	GPIO_FN_LCD1_HSYN,	GPIO_FN_LCD1_DISP, /* for RGB */
--
--	GPIO_FN_LCD1_WR,	GPIO_FN_LCD1_RD, /* for SYS */
--	GPIO_FN_LCD1_CS,	GPIO_FN_LCD1_RS, /* for SYS */
--
--	/* RSPI */
--	GPIO_FN_RSPI_SSL0_A,	GPIO_FN_RSPI_SSL1_A,
--	GPIO_FN_RSPI_SSL2_A,	GPIO_FN_RSPI_SSL3_A,
--	GPIO_FN_RSPI_MOSI_A,	GPIO_FN_RSPI_MISO_A,
--	GPIO_FN_RSPI_CK_A,
--
--	/* VIO CKO */
--	GPIO_FN_VIO_CKO1,
--	GPIO_FN_VIO_CKO2,
--	GPIO_FN_VIO_CKO_1,
--	GPIO_FN_VIO_CKO,
--
--	/* VIO0 */
--	GPIO_FN_VIO0_D0,	GPIO_FN_VIO0_D1,	GPIO_FN_VIO0_D2,
--	GPIO_FN_VIO0_D3,	GPIO_FN_VIO0_D4,	GPIO_FN_VIO0_D5,
--	GPIO_FN_VIO0_D6,	GPIO_FN_VIO0_D7,	GPIO_FN_VIO0_D8,
--	GPIO_FN_VIO0_D9,	GPIO_FN_VIO0_D10,	GPIO_FN_VIO0_D11,
--	GPIO_FN_VIO0_D12,	GPIO_FN_VIO0_VD,	GPIO_FN_VIO0_HD,
--	GPIO_FN_VIO0_CLK,	GPIO_FN_VIO0_FIELD,
--
--	GPIO_FN_VIO0_D13_PORT26, /* MSEL5CR_27_0 */
--	GPIO_FN_VIO0_D14_PORT25,
--	GPIO_FN_VIO0_D15_PORT24,
--
--	GPIO_FN_VIO0_D13_PORT22, /* MSEL5CR_27_1 */
--	GPIO_FN_VIO0_D14_PORT95,
--	GPIO_FN_VIO0_D15_PORT96,
--
--	/* VIO1 */
--	GPIO_FN_VIO1_D0,	GPIO_FN_VIO1_D1,	GPIO_FN_VIO1_D2,
--	GPIO_FN_VIO1_D3,	GPIO_FN_VIO1_D4,	GPIO_FN_VIO1_D5,
--	GPIO_FN_VIO1_D6,	GPIO_FN_VIO1_D7,	GPIO_FN_VIO1_VD,
--	GPIO_FN_VIO1_HD,	GPIO_FN_VIO1_CLK,	GPIO_FN_VIO1_FIELD,
--
--	/* TPU0 */
--	GPIO_FN_TPU0TO0,	GPIO_FN_TPU0TO1,
--	GPIO_FN_TPU0TO3,
--	GPIO_FN_TPU0TO2_PORT66, /* TPU0TO2 Port 66/202 */
--	GPIO_FN_TPU0TO2_PORT202,
--
--	/* SSP1 0 */
--	GPIO_FN_STP0_IPD0,	GPIO_FN_STP0_IPD1,	GPIO_FN_STP0_IPD2,
--	GPIO_FN_STP0_IPD3,	GPIO_FN_STP0_IPD4,	GPIO_FN_STP0_IPD5,
--	GPIO_FN_STP0_IPD6,	GPIO_FN_STP0_IPD7,	GPIO_FN_STP0_IPEN,
--	GPIO_FN_STP0_IPCLK,	GPIO_FN_STP0_IPSYNC,
--
--	/* SSP1 1 */
--	GPIO_FN_STP1_IPD1,	GPIO_FN_STP1_IPD2,	GPIO_FN_STP1_IPD3,
--	GPIO_FN_STP1_IPD4,	GPIO_FN_STP1_IPD5,	GPIO_FN_STP1_IPD6,
--	GPIO_FN_STP1_IPD7,	GPIO_FN_STP1_IPCLK,	GPIO_FN_STP1_IPSYNC,
--
--	GPIO_FN_STP1_IPD0_PORT186, /* MSEL5CR_23_0 */
--	GPIO_FN_STP1_IPEN_PORT187,
--
--	GPIO_FN_STP1_IPD0_PORT194, /* MSEL5CR_23_1 */
--	GPIO_FN_STP1_IPEN_PORT193,
--
--	/* SIM */
--	GPIO_FN_SIM_RST,	GPIO_FN_SIM_CLK,
--	GPIO_FN_SIM_D_PORT22, /* SIM_D  Port 22/199 */
--	GPIO_FN_SIM_D_PORT199,
--
--	/* SDHI0 */
--	GPIO_FN_SDHI0_D0,	GPIO_FN_SDHI0_D1,	GPIO_FN_SDHI0_D2,
--	GPIO_FN_SDHI0_D3,	GPIO_FN_SDHI0_CD,	GPIO_FN_SDHI0_WP,
--	GPIO_FN_SDHI0_CMD,	GPIO_FN_SDHI0_CLK,
--
--	/* SDHI1 */
--	GPIO_FN_SDHI1_D0,	GPIO_FN_SDHI1_D1,	GPIO_FN_SDHI1_D2,
--	GPIO_FN_SDHI1_D3,	GPIO_FN_SDHI1_CD,	GPIO_FN_SDHI1_WP,
--	GPIO_FN_SDHI1_CMD,	GPIO_FN_SDHI1_CLK,
--
--	/* SDHI2 */
--	GPIO_FN_SDHI2_D0,	GPIO_FN_SDHI2_D1,	GPIO_FN_SDHI2_D2,
--	GPIO_FN_SDHI2_D3,	GPIO_FN_SDHI2_CLK,	GPIO_FN_SDHI2_CMD,
--
--	GPIO_FN_SDHI2_CD_PORT24, /* MSEL5CR_19_0 */
--	GPIO_FN_SDHI2_WP_PORT25,
--
--	GPIO_FN_SDHI2_WP_PORT177, /* MSEL5CR_19_1 */
--	GPIO_FN_SDHI2_CD_PORT202,
--
--	/* MSIOF2 */
--	GPIO_FN_MSIOF2_TXD,	GPIO_FN_MSIOF2_RXD,	GPIO_FN_MSIOF2_TSCK,
--	GPIO_FN_MSIOF2_SS2,	GPIO_FN_MSIOF2_TSYNC,	GPIO_FN_MSIOF2_SS1,
--	GPIO_FN_MSIOF2_MCK1,	GPIO_FN_MSIOF2_MCK0,	GPIO_FN_MSIOF2_RSYNC,
--	GPIO_FN_MSIOF2_RSCK,
--
--	/* KEYSC */
--	GPIO_FN_KEYIN4,		GPIO_FN_KEYIN5,
--	GPIO_FN_KEYIN6,		GPIO_FN_KEYIN7,
--	GPIO_FN_KEYOUT0,	GPIO_FN_KEYOUT1,	GPIO_FN_KEYOUT2,
--	GPIO_FN_KEYOUT3,	GPIO_FN_KEYOUT4,	GPIO_FN_KEYOUT5,
--	GPIO_FN_KEYOUT6,	GPIO_FN_KEYOUT7,
--
--	GPIO_FN_KEYIN0_PORT43, /* MSEL4CR_18_0 */
--	GPIO_FN_KEYIN1_PORT44,
--	GPIO_FN_KEYIN2_PORT45,
--	GPIO_FN_KEYIN3_PORT46,
--
--	GPIO_FN_KEYIN0_PORT58, /* MSEL4CR_18_1 */
--	GPIO_FN_KEYIN1_PORT57,
--	GPIO_FN_KEYIN2_PORT56,
--	GPIO_FN_KEYIN3_PORT55,
--
--	/* VOU */
--	GPIO_FN_DV_D0,	GPIO_FN_DV_D1,	GPIO_FN_DV_D2,	GPIO_FN_DV_D3,
--	GPIO_FN_DV_D4,	GPIO_FN_DV_D5,	GPIO_FN_DV_D6,	GPIO_FN_DV_D7,
--	GPIO_FN_DV_D8,	GPIO_FN_DV_D9,	GPIO_FN_DV_D10,	GPIO_FN_DV_D11,
--	GPIO_FN_DV_D12,	GPIO_FN_DV_D13,	GPIO_FN_DV_D14,	GPIO_FN_DV_D15,
--	GPIO_FN_DV_CLK,
--	GPIO_FN_DV_VSYNC,
--	GPIO_FN_DV_HSYNC,
--
--	/* MEMC */
--	GPIO_FN_MEMC_AD0,	GPIO_FN_MEMC_AD1,	GPIO_FN_MEMC_AD2,
--	GPIO_FN_MEMC_AD3,	GPIO_FN_MEMC_AD4,	GPIO_FN_MEMC_AD5,
--	GPIO_FN_MEMC_AD6,	GPIO_FN_MEMC_AD7,	GPIO_FN_MEMC_AD8,
--	GPIO_FN_MEMC_AD9,	GPIO_FN_MEMC_AD10,	GPIO_FN_MEMC_AD11,
--	GPIO_FN_MEMC_AD12,	GPIO_FN_MEMC_AD13,	GPIO_FN_MEMC_AD14,
--	GPIO_FN_MEMC_AD15,	GPIO_FN_MEMC_CS0,	GPIO_FN_MEMC_INT,
--	GPIO_FN_MEMC_NWE,	GPIO_FN_MEMC_NOE,
--
--	GPIO_FN_MEMC_CS1, /* MSEL4CR_6_0 */
--	GPIO_FN_MEMC_ADV,
--	GPIO_FN_MEMC_WAIT,
--	GPIO_FN_MEMC_BUSCLK,
--
--	GPIO_FN_MEMC_A1, /* MSEL4CR_6_1 */
--	GPIO_FN_MEMC_DREQ0,
--	GPIO_FN_MEMC_DREQ1,
--	GPIO_FN_MEMC_A0,
--
--	/* MMC */
--	GPIO_FN_MMC0_D0_PORT68,		GPIO_FN_MMC0_D1_PORT69,
--	GPIO_FN_MMC0_D2_PORT70,		GPIO_FN_MMC0_D3_PORT71,
--	GPIO_FN_MMC0_D4_PORT72,		GPIO_FN_MMC0_D5_PORT73,
--	GPIO_FN_MMC0_D6_PORT74,		GPIO_FN_MMC0_D7_PORT75,
--	GPIO_FN_MMC0_CLK_PORT66,
--	GPIO_FN_MMC0_CMD_PORT67,	/* MSEL4CR_15_0 */
--
--	GPIO_FN_MMC1_D0_PORT149,	GPIO_FN_MMC1_D1_PORT148,
--	GPIO_FN_MMC1_D2_PORT147,	GPIO_FN_MMC1_D3_PORT146,
--	GPIO_FN_MMC1_D4_PORT145,	GPIO_FN_MMC1_D5_PORT144,
--	GPIO_FN_MMC1_D6_PORT143,	GPIO_FN_MMC1_D7_PORT142,
--	GPIO_FN_MMC1_CLK_PORT103,
--	GPIO_FN_MMC1_CMD_PORT104,	/* MSEL4CR_15_1 */
--
--	/* MSIOF0 */
--	GPIO_FN_MSIOF0_SS1,	GPIO_FN_MSIOF0_SS2,
--	GPIO_FN_MSIOF0_RXD,	GPIO_FN_MSIOF0_TXD,
--	GPIO_FN_MSIOF0_MCK0,	GPIO_FN_MSIOF0_MCK1,
--	GPIO_FN_MSIOF0_RSYNC,	GPIO_FN_MSIOF0_RSCK,
--	GPIO_FN_MSIOF0_TSCK,	GPIO_FN_MSIOF0_TSYNC,
--
--	/* MSIOF1 */
--	GPIO_FN_MSIOF1_RSCK,	GPIO_FN_MSIOF1_RSYNC,
--	GPIO_FN_MSIOF1_MCK0,	GPIO_FN_MSIOF1_MCK1,
--
--	GPIO_FN_MSIOF1_SS2_PORT116,	GPIO_FN_MSIOF1_SS1_PORT117,
--	GPIO_FN_MSIOF1_RXD_PORT118,	GPIO_FN_MSIOF1_TXD_PORT119,
--	GPIO_FN_MSIOF1_TSYNC_PORT120,
--	GPIO_FN_MSIOF1_TSCK_PORT121,	/* MSEL4CR_10_0 */
--
--	GPIO_FN_MSIOF1_SS1_PORT67,	GPIO_FN_MSIOF1_TSCK_PORT72,
--	GPIO_FN_MSIOF1_TSYNC_PORT73,	GPIO_FN_MSIOF1_TXD_PORT74,
--	GPIO_FN_MSIOF1_RXD_PORT75,
--	GPIO_FN_MSIOF1_SS2_PORT202,	/* MSEL4CR_10_1 */
--
--	/* GPIO */
--	GPIO_FN_GPO0,	GPIO_FN_GPI0,
--	GPIO_FN_GPO1,	GPIO_FN_GPI1,
--
--	/* USB0 */
--	GPIO_FN_USB0_OCI,	GPIO_FN_USB0_PPON,	GPIO_FN_VBUS,
--
--	/* USB1 */
--	GPIO_FN_USB1_OCI,	GPIO_FN_USB1_PPON,
--
--	/* BBIF1 */
--	GPIO_FN_BBIF1_RXD,	GPIO_FN_BBIF1_TXD,	GPIO_FN_BBIF1_TSYNC,
--	GPIO_FN_BBIF1_TSCK,	GPIO_FN_BBIF1_RSCK,	GPIO_FN_BBIF1_RSYNC,
--	GPIO_FN_BBIF1_FLOW,	GPIO_FN_BBIF1_RX_FLOW_N,
--
--	/* BBIF2 */
--	GPIO_FN_BBIF2_TXD2_PORT5, /* MSEL5CR_0_0 */
--	GPIO_FN_BBIF2_RXD2_PORT60,
--	GPIO_FN_BBIF2_TSYNC2_PORT6,
--	GPIO_FN_BBIF2_TSCK2_PORT59,
--
--	GPIO_FN_BBIF2_RXD2_PORT90, /* MSEL5CR_0_1 */
--	GPIO_FN_BBIF2_TXD2_PORT183,
--	GPIO_FN_BBIF2_TSCK2_PORT89,
--	GPIO_FN_BBIF2_TSYNC2_PORT184,
--
--	/* BSC / FLCTL / PCMCIA */
--	GPIO_FN_CS0,	GPIO_FN_CS2,	GPIO_FN_CS4,
--	GPIO_FN_CS5B,	GPIO_FN_CS6A,
--	GPIO_FN_CS5A_PORT105, /* CS5A PORT 19/105 */
--	GPIO_FN_CS5A_PORT19,
--	GPIO_FN_IOIS16, /* ? */
--
--	GPIO_FN_A0,	GPIO_FN_A1,	GPIO_FN_A2,	GPIO_FN_A3,
--	GPIO_FN_A4_FOE,		/* share with FLCTL */
--	GPIO_FN_A5_FCDE,	/* share with FLCTL */
--	GPIO_FN_A6,	GPIO_FN_A7,	GPIO_FN_A8,	GPIO_FN_A9,
--	GPIO_FN_A10,	GPIO_FN_A11,	GPIO_FN_A12,	GPIO_FN_A13,
--	GPIO_FN_A14,	GPIO_FN_A15,	GPIO_FN_A16,	GPIO_FN_A17,
--	GPIO_FN_A18,	GPIO_FN_A19,	GPIO_FN_A20,	GPIO_FN_A21,
--	GPIO_FN_A22,	GPIO_FN_A23,	GPIO_FN_A24,	GPIO_FN_A25,
--	GPIO_FN_A26,
--
--	GPIO_FN_D0_NAF0,	GPIO_FN_D1_NAF1,	/* share with FLCTL */
--	GPIO_FN_D2_NAF2,	GPIO_FN_D3_NAF3,	/* share with FLCTL */
--	GPIO_FN_D4_NAF4,	GPIO_FN_D5_NAF5,	/* share with FLCTL */
--	GPIO_FN_D6_NAF6,	GPIO_FN_D7_NAF7,	/* share with FLCTL */
--	GPIO_FN_D8_NAF8,	GPIO_FN_D9_NAF9,	/* share with FLCTL */
--	GPIO_FN_D10_NAF10,	GPIO_FN_D11_NAF11,	/* share with FLCTL */
--	GPIO_FN_D12_NAF12,	GPIO_FN_D13_NAF13,	/* share with FLCTL */
--	GPIO_FN_D14_NAF14,	GPIO_FN_D15_NAF15,	/* share with FLCTL */
--
--	GPIO_FN_D16,	GPIO_FN_D17,	GPIO_FN_D18,	GPIO_FN_D19,
--	GPIO_FN_D20,	GPIO_FN_D21,	GPIO_FN_D22,	GPIO_FN_D23,
--	GPIO_FN_D24,	GPIO_FN_D25,	GPIO_FN_D26,	GPIO_FN_D27,
--	GPIO_FN_D28,	GPIO_FN_D29,	GPIO_FN_D30,	GPIO_FN_D31,
--
--	GPIO_FN_WE0_FWE,	/* share with FLCTL */
--	GPIO_FN_WE1,
--	GPIO_FN_WE2_ICIORD,	/* share with PCMCIA */
--	GPIO_FN_WE3_ICIOWR,	/* share with PCMCIA */
--	GPIO_FN_CKO,	GPIO_FN_BS,	GPIO_FN_RDWR,
--	GPIO_FN_RD_FSC,		/* share with FLCTL */
--	GPIO_FN_WAIT_PORT177,	/* WAIT Port 90/177 */
--	GPIO_FN_WAIT_PORT90,
--
--	GPIO_FN_FCE0,	GPIO_FN_FCE1,	GPIO_FN_FRB, /* FLCTL */
--
--	/* IRDA */
--	GPIO_FN_IRDA_FIRSEL,	GPIO_FN_IRDA_IN,	GPIO_FN_IRDA_OUT,
--
--	/* ATAPI */
--	GPIO_FN_IDE_D0,		GPIO_FN_IDE_D1,		GPIO_FN_IDE_D2,
--	GPIO_FN_IDE_D3,		GPIO_FN_IDE_D4,		GPIO_FN_IDE_D5,
--	GPIO_FN_IDE_D6,		GPIO_FN_IDE_D7,		GPIO_FN_IDE_D8,
--	GPIO_FN_IDE_D9,		GPIO_FN_IDE_D10,	GPIO_FN_IDE_D11,
--	GPIO_FN_IDE_D12,	GPIO_FN_IDE_D13,	GPIO_FN_IDE_D14,
--	GPIO_FN_IDE_D15,	GPIO_FN_IDE_A0,		GPIO_FN_IDE_A1,
--	GPIO_FN_IDE_A2,		GPIO_FN_IDE_CS0,	GPIO_FN_IDE_CS1,
--	GPIO_FN_IDE_IOWR,	GPIO_FN_IDE_IORD,	GPIO_FN_IDE_IORDY,
--	GPIO_FN_IDE_INT,	GPIO_FN_IDE_RST,	GPIO_FN_IDE_DIRECTION,
--	GPIO_FN_IDE_EXBUF_ENB,	GPIO_FN_IDE_IODACK,	GPIO_FN_IDE_IODREQ,
--
--	/* RMII */
--	GPIO_FN_RMII_CRS_DV,	GPIO_FN_RMII_RX_ER,	GPIO_FN_RMII_RXD0,
--	GPIO_FN_RMII_RXD1,	GPIO_FN_RMII_TX_EN,	GPIO_FN_RMII_TXD0,
--	GPIO_FN_RMII_MDC,	GPIO_FN_RMII_TXD1,	GPIO_FN_RMII_MDIO,
--	GPIO_FN_RMII_REF50CK,	/* for RMII */
--	GPIO_FN_RMII_REF125CK,	/* for GMII */
--
--	/* GEther */
--	GPIO_FN_ET_TX_CLK,	GPIO_FN_ET_TX_EN,	GPIO_FN_ET_ETXD0,
--	GPIO_FN_ET_ETXD1,	GPIO_FN_ET_ETXD2,	GPIO_FN_ET_ETXD3,
--	GPIO_FN_ET_ETXD4,	GPIO_FN_ET_ETXD5, /* for GEther */
--	GPIO_FN_ET_ETXD6,	GPIO_FN_ET_ETXD7, /* for GEther */
--	GPIO_FN_ET_COL,		GPIO_FN_ET_TX_ER,
--	GPIO_FN_ET_RX_CLK,	GPIO_FN_ET_RX_DV,
--	GPIO_FN_ET_ERXD0,	GPIO_FN_ET_ERXD1,
--	GPIO_FN_ET_ERXD2,	GPIO_FN_ET_ERXD3,
--	GPIO_FN_ET_ERXD4,	GPIO_FN_ET_ERXD5, /* for GEther */
--	GPIO_FN_ET_ERXD6,	GPIO_FN_ET_ERXD7, /* for GEther */
--	GPIO_FN_ET_RX_ER,	GPIO_FN_ET_CRS,
--	GPIO_FN_ET_MDC,		GPIO_FN_ET_MDIO,
--	GPIO_FN_ET_LINK,	GPIO_FN_ET_PHY_INT,
--	GPIO_FN_ET_WOL,		GPIO_FN_ET_GTX_CLK,
--
--	/* DMA0 */
--	GPIO_FN_DREQ0,		GPIO_FN_DACK0,
--
--	/* DMA1 */
--	GPIO_FN_DREQ1,		GPIO_FN_DACK1,
--
--	/* SYSC */
--	GPIO_FN_RESETOUTS,
--	GPIO_FN_RESETP_PULLUP,
--	GPIO_FN_RESETP_PLAIN,
--
--	/* SDENC */
--	GPIO_FN_SDENC_CPG,
--	GPIO_FN_SDENC_DV_CLKI,
--
--	/* IRREM */
--	GPIO_FN_IROUT,
--
--	/* DEBUG */
--	GPIO_FN_EDEBGREQ_PULLDOWN,
--	GPIO_FN_EDEBGREQ_PULLUP,
--
--	GPIO_FN_TRACEAUD_FROM_VIO,
--	GPIO_FN_TRACEAUD_FROM_LCDC0,
--	GPIO_FN_TRACEAUD_FROM_MEMC,
--};
--
--#endif /* __ASM_R8A7740_H__ */
-diff --git a/arch/arm/mach-rmobile/include/mach/r8a7740.h b/arch/arm/mach-rmobile/include/mach/r8a7740.h
-deleted file mode 100644
-index f1fcfe19e4e..00000000000
---- a/arch/arm/mach-rmobile/include/mach/r8a7740.h
-+++ /dev/null
-@@ -1,274 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0 */
--/*
-- * Copyright (C) 2012 Renesas Solutions Corp.
-- */
--
--#ifndef __ASM_ARCH_R8A7740_H
--#define __ASM_ARCH_R8A7740_H
--
--/*
-- * R8A7740 I/O Addresses
-- */
--
--#define MERAM_BASE	0xE5580000
--#define DDRP_BASE	0xC12A0000
--#define HPB_BASE	0xE6000000
--#define RWDT0_BASE	0xE6020000
--#define RWDT1_BASE	0xE6030000
--#define GPIO_BASE	0xE6050000
--#define CMT1_BASE	0xE6138000
--#define CPG_BASE	0xE6150000
--#define SYSC_BASE	0xE6180000
--#define SDHI0_BASE	0xE6850000
--#define SDHI1_BASE	0xE6860000
--#define MMCIF_BASE	0xE6BD0000
--#define SCIF5_BASE	0xE6CB0000
--#define SCIF6_BASE	0xE6CC0000
--#define DBSC_BASE	0xFE400000
--#define BSC_BASE	0xFEC10000
--#define I2C0_BASE	0xFFF20000
--#define I2C1_BASE	0xE6C20000
--#define TMU_BASE	0xFFF80000
--
--#ifndef __ASSEMBLY__
--#include <asm/types.h>
--
--/* RWDT */
--struct r8a7740_rwdt {
--	u16 rwtcnt0;	/* 0x00 */
--	u16 dummy0;		/* 0x02 */
--	u16 rwtcsra0;	/* 0x04 */
--	u16 dummy1;		/* 0x06 */
--	u16 rwtcsrb0;	/* 0x08 */
--	u16 dummy2;		/* 0x0A */
--};
--
--/* HPB Semaphore Control Registers */
--struct r8a7740_hpb {
--	u32 hpbctrl0;
--	u32 hpbctrl1;
--	u32 hpbctrl2;
--	u32 cccr;
--	u32 dummy0; /* 0x20 */
--	u32 hpbctrl4;
--	u32 hpbctrl5;
--};
--
--/* CPG */
--struct r8a7740_cpg {
--	u32 frqcra;
--	u32 frqcrb;
--	u32 vclkcr1;
--	u32 vclkcr2;
--	u32 fmsickcr;
--	u32 fmsockcr;
--	u32 fsiackcr;
--	u32 dummy0; /* 0x1c */
--	u32 rtstbcr;
--	u32 systbcr;
--	u32 pllc01cr;
--	u32 pllc2cr;
--	u32 mstpsr0;
--	u32 dummy1; /* 0x34 */
--	u32 mstpsr1;
--	u32 mstpsr5;
--	u32 mstpsr2;
--	u32 dummy2; /* 0x44 */
--	u32 mstpsr3;
--	u32 mstpsr4;
--	u32 dummy3; /* 0x50 */
--	u32 astat;
--	u32 dummy4[4]; /* 0x58 .. 0x64 */
--	u32 ztrckcr;
--	u32 dummy5[5]; /* 0x6c .. 0x7c */
--	u32 subckcr;
--	u32 spuckcr;
--	u32 vouckcr;
--	u32 usbckcr;
--	u32 dummy6[3]; /* 0x90 .. 0x98 */
--	u32 stprckcr;
--	u32 srcr0;
--	u32 dummy7; /* 0xa4 */
--	u32 srcr1;
--	u32 dummy8; /* 0xac */
--	u32 srcr2;
--	u32 dummy9; /* 0xb4 */
--	u32 srcr3;
--	u32 srcr4;
--	u32 dummy10; /* 0xc0 */
--	u32 srcr5;
--	u32 pllc01stpcr;
--	u32 dummy11[5]; /* 0xcc .. 0xdc */
--	u32 frqcrc;
--	u32 frqcrd;
--	u32 dummy12[10]; /* 0xe8 .. 0x10c */
--	u32 rmstpcr0;
--	u32 rmstpcr1;
--	u32 rmstpcr2;
--	u32 rmstpcr3;
--	u32 rmstpcr4;
--	u32 rmstpcr5;
--	u32 dummy13[2]; /* 0x128 .. 0x12c */
--	u32 smstpcr0;
--	u32 smstpcr1;
--	u32 smstpcr2;
--	u32 smstpcr3;
--	u32 smstpcr4;
--	u32 smstpcr5;
--};
--
--/* BSC */
--struct r8a7740_bsc {
--	u32 cmncr;
--	u32 cs0bcr;
--	u32 cs2bcr;
--	u32 dummy0; /* 0x0c */
--	u32 cs4bcr;
--	u32 cs5abcr;
--	u32 cs5bbcr;
--	u32 cs6abcr;
--	u32 dummy1; /* 0x20 */
--	u32 cs0wcr;
--	u32 cs2wcr;
--	u32 dummy2; /* 0x2c */
--	u32 cs4wcr;
--	u32 cs5awcr;
--	u32 cs5bwcr;
--	u32 cs6awcr;
--	u32 dummy3[5]; /* 0x40 .. 0x50 */
--	u32 rbwtcnt;
--	u32 busycr;
--	u32 dummy4[5]; /* 0x5c .. 0x6c */
--	u32 bromtimcr;
--	u32 dummy5[7]; /* 0x74 .. 0x8c */
--	u32 bptcr00;
--	u32 bptcr01;
--	u32 bptcr02;
--	u32 bptcr03;
--	u32 bptcr04;
--	u32 bptcr05;
--	u32 bptcr06;
--	u32 bptcr07;
--	u32 bptcr08;
--	u32 bptcr09;
--	u32 bptcr10;
--	u32 bptcr11;
--	u32 bptcr12;
--	u32 bptcr13;
--	u32 bptcr14;
--	u32 bptcr15;
--	u32 bptcr16;
--	u32 bptcr17;
--	u32 bptcr18;
--	u32 bptcr19;
--	u32 bptcr20;
--	u32 bptcr21;
--	u32 bptcr22;
--	u32 bptcr23;
--	u32 bptcr24;
--	u32 bptcr25;
--	u32 bptcr26;
--	u32 bptcr27;
--	u32 bptcr28;
--	u32 bptcr29;
--	u32 bptcr30;
--	u32 bptcr31;
--	u32 bswcr;
--	u32 dummy6[68]; /* 0x114 .. 0x220 */
--	u32 cs0wcr2;
--	u32 cs2wcr2;
--	u32 dummy7; /* 0x22c */
--	u32 cs4wcr2;
--};
--
--#define CS0WCR2 0xFEC10224
--#define CS2WCR2 0xFEC10228
--#define CS4WCR2 0xFEC10230
--
--/* DDRP */
--struct r8a7740_ddrp {
--	u32 funcctrl;
--	u32 dllctrl;
--	u32 zqcalctrl;
--	u32 zqodtctrl;
--	u32 rdctrl;
--	u32 rdtmg;
--	u32 fifoinit;
--	u32 outctrl;
--	u32 dummy0[50]; /* 0x20 .. 0xe4 */
--	u32 dqcalofs1;
--	u32 dqcalofs2;
--	u32 dummy1[2]; /* 0xf0 .. 0xf4 */
--	u32 dqcalexp;
--};
--
--#define DDRPNCNT 0xE605803C
--#define DDRVREFCNT 0xE61500EC
--
--/* DBSC */
--struct r8a7740_dbsc {
--	u32 dummy0;
--	u32 dbsvcr;
--	u32 dbstate0;
--	u32 dbstate1;
--	u32 dbacen;
--	u32 dbrfen;
--	u32 dbcmd;
--	u32 dbwait;
--	u32 dbkind;
--	u32 dbconf0;
--	u32 dummy1[2]; /* 0x28 .. 0x2c */
--	u32 dbphytype;
--	u32 dummy2[3]; /* 0x34 .. 0x3c */
--	u32 dbtr0;
--	u32 dbtr1;
--	u32 dbtr2;
--	u32 dummy3; /* 0x4c */
--	u32 dbtr3;
--	u32 dbtr4;
--	u32 dbtr5;
--	u32 dbtr6;
--	u32 dbtr7;
--	u32 dbtr8;
--	u32 dbtr9;
--	u32 dbtr10;
--	u32 dbtr11;
--	u32 dbtr12;
--	u32 dbtr13;
--	u32 dbtr14;
--	u32 dbtr15;
--	u32 dbtr16;
--	u32 dbtr17;
--	u32 dbtr18;
--	u32 dbtr19;
--	u32 dummy4[7]; /* 0x94 .. 0xac */
--	u32 dbbl;
--	u32 dummy5[3]; /* 0xb4 .. 0xbc */
--	u32 dbadj0;
--	u32 dbadj1;
--	u32 dbadj2;
--	u32 dummy6[5]; /* 0xcc .. 0xdc */
--	u32 dbrfcnf0;
--	u32 dbrfcnf1;
--	u32 dbrfcnf2;
--	u32 dbrfcnf3;
--	u32 dummy7; /* 0xf0 */
--	u32 dbcalcnf;
--	u32 dbcaltr;
--	u32 dummy8; /* 0xfc */;
--	u32 dbrnk0;
--	u32 dummy9[31]; /* 0x104 .. 0x17C */
--	u32 dbpdncnf;
--	u32 dummy10[7]; /* 0x184 .. 0x19C */
--	u32 dbmrrdr;
--	u32 dummy11[39]; /* 0x1A4 .. 0x23C */
--	u32 dbdfistat;
--	u32 dbdficnt;
--	u32 dummy12[46]; /* 0x248 .. 0x2FC */
--	u32 dbbs0cnt0;
--	u32 dbbs0cnt1;
--};
--
--#endif
--
--#endif /* __ASM_ARCH_R8A7740_H */
-diff --git a/arch/arm/mach-rmobile/include/mach/rmobile.h b/arch/arm/mach-rmobile/include/mach/rmobile.h
-index f0216210ba9..bed91f07ad4 100644
---- a/arch/arm/mach-rmobile/include/mach/rmobile.h
-+++ b/arch/arm/mach-rmobile/include/mach/rmobile.h
-@@ -2,9 +2,7 @@
- #define __ASM_ARCH_RMOBILE_H
- 
- #if defined(CONFIG_ARCH_RMOBILE)
--#if defined(CONFIG_R8A7740)
--#include <asm/arch/r8a7740.h>
--#elif defined(CONFIG_R8A7790)
-+#if defined(CONFIG_R8A7790)
- #include <asm/arch/r8a7790.h>
- #elif defined(CONFIG_R8A7791)
- #include <asm/arch/r8a7791.h>
-diff --git a/arch/arm/mach-rmobile/lowlevel_init.S b/arch/arm/mach-rmobile/lowlevel_init.S
-deleted file mode 100644
-index 212e95539bc..00000000000
---- a/arch/arm/mach-rmobile/lowlevel_init.S
-+++ /dev/null
-@@ -1,72 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0+ */
--/*
-- * Copyright (C) 2012 Nobuhiro Iwamatsu <nobuhiro.Iwamatsu.yj@renesas.com>
-- * Copyright (C) 2012 Renesas Solutions Corp.
-- */
--
--#include <config.h>
--#include <linux/linkage.h>
--#include <system-constants.h>
--
--ENTRY(lowlevel_init)
--	ldr		r0, =MERAM_BASE
--	mov		r1, #0x0
--	str		r1, [r0]
--
--	mrc		p15, 0, r0, c0, c0, 5
--	ands	r0, r0, #0xF
--	beq		lowlevel_init__
--	b		wait_interrupt
--
--	.pool
--	.align 4
--
--wait_interrupt:
--#ifdef ICCICR
--	ldr     r1, =ICCICR
--	mov     r2, #0x0
--	str     r2, [r1]
--	mov     r2, #0xF0
--	adds    r1, r1, #4 /* ICCPMR */
--	str     r2, [r1]
--	ldr     r1, =ICCICR
--	mov     r2, #0x1
--	str     r2, [r1]
--#endif
--
--wait_loop:
--	.long	0xE320F003 /* wfi */
--
--	ldr		r2, [r1, #0xC]
--	str		r2, [r1, #0x10]
--
--	ldr		r0, =MERAM_BASE
--	ldr		r2, [r0]
--	cmp		r2, #0
--	movne	pc, r2
--
--	b		wait_loop
--
--wait_loop_end:
--	.pool
--	.align 4
--
--lowlevel_init__:
--
--	mov r0, #0x200000
--
--loop0:
--	subs r0, r0, #1
--	bne  loop0
--
--	ldr sp, MERAM_STACK
--	b s_init
--
--	.pool
--	.align 4
--
--ENDPROC(lowlevel_init)
--	.ltorg
--
--MERAM_STACK:
--	.word LOW_LEVEL_MERAM_STACK
-diff --git a/arch/arm/mach-rmobile/pfc-r8a7740.c b/arch/arm/mach-rmobile/pfc-r8a7740.c
-deleted file mode 100644
-index 4f4847699b0..00000000000
---- a/arch/arm/mach-rmobile/pfc-r8a7740.c
-+++ /dev/null
-@@ -1,2612 +0,0 @@
--/*
-- * R8A7740 processor support
-- *
-- * Copyright (C) 2011  Renesas Solutions Corp.
-- * Copyright (C) 2011  Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>
-- *
-- * This program is free software; you can redistribute it and/or
-- * modify it under the terms of the GNU General Public License as
-- * published by the Free Software Foundation; version 2 of the
-- * License.
-- *
-- * This program is distributed in the hope that it will be useful,
-- * but WITHOUT ANY WARRANTY; without even the implied warranty of
-- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-- * GNU General Public License for more details.
-- *
-- * You should have received a copy of the GNU General Public License
-- * along with this program; if not, write to the Free Software
-- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-- */
--
--#include <sh_pfc.h>
--#include <asm/gpio.h>
--#include <asm/arch/irqs.h>
--
--#define CPU_ALL_PORT(fn, pfx, sfx)					\
--	PORT_10(fn, pfx, sfx),		PORT_90(fn, pfx, sfx),		\
--	PORT_10(fn, pfx##10, sfx),	PORT_90(fn, pfx##1, sfx),	\
--	PORT_10(fn, pfx##20, sfx),					\
--	PORT_1(fn, pfx##210, sfx),	PORT_1(fn, pfx##211, sfx)
--
--enum {
--	PINMUX_RESERVED = 0,
--
--	/* PORT0_DATA -> PORT211_DATA */
--	PINMUX_DATA_BEGIN,
--	PORT_ALL(DATA),
--	PINMUX_DATA_END,
--
--	/* PORT0_IN -> PORT211_IN */
--	PINMUX_INPUT_BEGIN,
--	PORT_ALL(IN),
--	PINMUX_INPUT_END,
--
--	/* PORT0_IN_PU -> PORT211_IN_PU */
--	PINMUX_INPUT_PULLUP_BEGIN,
--	PORT_ALL(IN_PU),
--	PINMUX_INPUT_PULLUP_END,
--
--	/* PORT0_IN_PD -> PORT211_IN_PD */
--	PINMUX_INPUT_PULLDOWN_BEGIN,
--	PORT_ALL(IN_PD),
--	PINMUX_INPUT_PULLDOWN_END,
--
--	/* PORT0_OUT -> PORT211_OUT */
--	PINMUX_OUTPUT_BEGIN,
--	PORT_ALL(OUT),
--	PINMUX_OUTPUT_END,
--
--	PINMUX_FUNCTION_BEGIN,
--	PORT_ALL(FN_IN),	/* PORT0_FN_IN -> PORT211_FN_IN */
--	PORT_ALL(FN_OUT),	/* PORT0_FN_OUT -> PORT211_FN_OUT */
--	PORT_ALL(FN0),		/* PORT0_FN0 -> PORT211_FN0 */
--	PORT_ALL(FN1),		/* PORT0_FN1 -> PORT211_FN1 */
--	PORT_ALL(FN2),		/* PORT0_FN2 -> PORT211_FN2 */
--	PORT_ALL(FN3),		/* PORT0_FN3 -> PORT211_FN3 */
--	PORT_ALL(FN4),		/* PORT0_FN4 -> PORT211_FN4 */
--	PORT_ALL(FN5),		/* PORT0_FN5 -> PORT211_FN5 */
--	PORT_ALL(FN6),		/* PORT0_FN6 -> PORT211_FN6 */
--	PORT_ALL(FN7),		/* PORT0_FN7 -> PORT211_FN7 */
--
--	MSEL1CR_31_0,	MSEL1CR_31_1,
--	MSEL1CR_30_0,	MSEL1CR_30_1,
--	MSEL1CR_29_0,	MSEL1CR_29_1,
--	MSEL1CR_28_0,	MSEL1CR_28_1,
--	MSEL1CR_27_0,	MSEL1CR_27_1,
--	MSEL1CR_26_0,	MSEL1CR_26_1,
--	MSEL1CR_16_0,	MSEL1CR_16_1,
--	MSEL1CR_15_0,	MSEL1CR_15_1,
--	MSEL1CR_14_0,	MSEL1CR_14_1,
--	MSEL1CR_13_0,	MSEL1CR_13_1,
--	MSEL1CR_12_0,	MSEL1CR_12_1,
--	MSEL1CR_9_0,	MSEL1CR_9_1,
--	MSEL1CR_7_0,	MSEL1CR_7_1,
--	MSEL1CR_6_0,	MSEL1CR_6_1,
--	MSEL1CR_5_0,	MSEL1CR_5_1,
--	MSEL1CR_4_0,	MSEL1CR_4_1,
--	MSEL1CR_3_0,	MSEL1CR_3_1,
--	MSEL1CR_2_0,	MSEL1CR_2_1,
--	MSEL1CR_0_0,	MSEL1CR_0_1,
--
--	MSEL3CR_15_0,	MSEL3CR_15_1, /* Trace / Debug ? */
--	MSEL3CR_6_0,	MSEL3CR_6_1,
--
--	MSEL4CR_19_0,	MSEL4CR_19_1,
--	MSEL4CR_18_0,	MSEL4CR_18_1,
--	MSEL4CR_15_0,	MSEL4CR_15_1,
--	MSEL4CR_10_0,	MSEL4CR_10_1,
--	MSEL4CR_6_0,	MSEL4CR_6_1,
--	MSEL4CR_4_0,	MSEL4CR_4_1,
--	MSEL4CR_1_0,	MSEL4CR_1_1,
--
--	MSEL5CR_31_0,	MSEL5CR_31_1, /* irq/fiq output */
--	MSEL5CR_30_0,	MSEL5CR_30_1,
--	MSEL5CR_29_0,	MSEL5CR_29_1,
--	MSEL5CR_27_0,	MSEL5CR_27_1,
--	MSEL5CR_25_0,	MSEL5CR_25_1,
--	MSEL5CR_23_0,	MSEL5CR_23_1,
--	MSEL5CR_21_0,	MSEL5CR_21_1,
--	MSEL5CR_19_0,	MSEL5CR_19_1,
--	MSEL5CR_17_0,	MSEL5CR_17_1,
--	MSEL5CR_15_0,	MSEL5CR_15_1,
--	MSEL5CR_14_0,	MSEL5CR_14_1,
--	MSEL5CR_13_0,	MSEL5CR_13_1,
--	MSEL5CR_12_0,	MSEL5CR_12_1,
--	MSEL5CR_11_0,	MSEL5CR_11_1,
--	MSEL5CR_10_0,	MSEL5CR_10_1,
--	MSEL5CR_8_0,	MSEL5CR_8_1,
--	MSEL5CR_7_0,	MSEL5CR_7_1,
--	MSEL5CR_6_0,	MSEL5CR_6_1,
--	MSEL5CR_5_0,	MSEL5CR_5_1,
--	MSEL5CR_4_0,	MSEL5CR_4_1,
--	MSEL5CR_3_0,	MSEL5CR_3_1,
--	MSEL5CR_2_0,	MSEL5CR_2_1,
--	MSEL5CR_0_0,	MSEL5CR_0_1,
--	PINMUX_FUNCTION_END,
--
--	PINMUX_MARK_BEGIN,
--
--	/* IRQ */
--	IRQ0_PORT2_MARK,	IRQ0_PORT13_MARK,
--	IRQ1_MARK,
--	IRQ2_PORT11_MARK,	IRQ2_PORT12_MARK,
--	IRQ3_PORT10_MARK,	IRQ3_PORT14_MARK,
--	IRQ4_PORT15_MARK,	IRQ4_PORT172_MARK,
--	IRQ5_PORT0_MARK,	IRQ5_PORT1_MARK,
--	IRQ6_PORT121_MARK,	IRQ6_PORT173_MARK,
--	IRQ7_PORT120_MARK,	IRQ7_PORT209_MARK,
--	IRQ8_MARK,
--	IRQ9_PORT118_MARK,	IRQ9_PORT210_MARK,
--	IRQ10_MARK,
--	IRQ11_MARK,
--	IRQ12_PORT42_MARK,	IRQ12_PORT97_MARK,
--	IRQ13_PORT64_MARK,	IRQ13_PORT98_MARK,
--	IRQ14_PORT63_MARK,	IRQ14_PORT99_MARK,
--	IRQ15_PORT62_MARK,	IRQ15_PORT100_MARK,
--	IRQ16_PORT68_MARK,	IRQ16_PORT211_MARK,
--	IRQ17_MARK,
--	IRQ18_MARK,
--	IRQ19_MARK,
--	IRQ20_MARK,
--	IRQ21_MARK,
--	IRQ22_MARK,
--	IRQ23_MARK,
--	IRQ24_MARK,
--	IRQ25_MARK,
--	IRQ26_PORT58_MARK,	IRQ26_PORT81_MARK,
--	IRQ27_PORT57_MARK,	IRQ27_PORT168_MARK,
--	IRQ28_PORT56_MARK,	IRQ28_PORT169_MARK,
--	IRQ29_PORT50_MARK,	IRQ29_PORT170_MARK,
--	IRQ30_PORT49_MARK,	IRQ30_PORT171_MARK,
--	IRQ31_PORT41_MARK,	IRQ31_PORT167_MARK,
--
--	/* Function */
--
--	/* DBGT */
--	DBGMDT2_MARK,	DBGMDT1_MARK,	DBGMDT0_MARK,
--	DBGMD10_MARK,	DBGMD11_MARK,	DBGMD20_MARK,
--	DBGMD21_MARK,
--
--	/* FSI */
--	FSIAISLD_PORT0_MARK,	/* FSIAISLD Port 0/5 */
--	FSIAISLD_PORT5_MARK,
--	FSIASPDIF_PORT9_MARK,	/* FSIASPDIF Port 9/18 */
--	FSIASPDIF_PORT18_MARK,
--	FSIAOSLD1_MARK,	FSIAOSLD2_MARK,	FSIAOLR_MARK,
--	FSIAOBT_MARK,	FSIAOSLD_MARK,	FSIAOMC_MARK,
--	FSIACK_MARK,	FSIAILR_MARK,	FSIAIBT_MARK,
--
--	/* FMSI */
--	FMSISLD_PORT1_MARK, /* FMSISLD Port 1/6 */
--	FMSISLD_PORT6_MARK,
--	FMSIILR_MARK,	FMSIIBT_MARK,	FMSIOLR_MARK,	FMSIOBT_MARK,
--	FMSICK_MARK,	FMSOILR_MARK,	FMSOIBT_MARK,	FMSOOLR_MARK,
--	FMSOOBT_MARK,	FMSOSLD_MARK,	FMSOCK_MARK,
--
--	/* SCIFA0 */
--	SCIFA0_SCK_MARK,	SCIFA0_CTS_MARK,	SCIFA0_RTS_MARK,
--	SCIFA0_RXD_MARK,	SCIFA0_TXD_MARK,
--
--	/* SCIFA1 */
--	SCIFA1_CTS_MARK,	SCIFA1_SCK_MARK,	SCIFA1_RXD_MARK,
--	SCIFA1_TXD_MARK,	SCIFA1_RTS_MARK,
--
--	/* SCIFA2 */
--	SCIFA2_SCK_PORT22_MARK, /* SCIFA2_SCK Port 22/199 */
--	SCIFA2_SCK_PORT199_MARK,
--	SCIFA2_RXD_MARK,	SCIFA2_TXD_MARK,
--	SCIFA2_CTS_MARK,	SCIFA2_RTS_MARK,
--
--	/* SCIFA3 */
--	SCIFA3_RTS_PORT105_MARK, /* MSEL5CR_8_0 */
--	SCIFA3_SCK_PORT116_MARK,
--	SCIFA3_CTS_PORT117_MARK,
--	SCIFA3_RXD_PORT174_MARK,
--	SCIFA3_TXD_PORT175_MARK,
--
--	SCIFA3_RTS_PORT161_MARK, /* MSEL5CR_8_1 */
--	SCIFA3_SCK_PORT158_MARK,
--	SCIFA3_CTS_PORT162_MARK,
--	SCIFA3_RXD_PORT159_MARK,
--	SCIFA3_TXD_PORT160_MARK,
--
--	/* SCIFA4 */
--	SCIFA4_RXD_PORT12_MARK, /* MSEL5CR[12:11] = 00 */
--	SCIFA4_TXD_PORT13_MARK,
--
--	SCIFA4_RXD_PORT204_MARK, /* MSEL5CR[12:11] = 01 */
--	SCIFA4_TXD_PORT203_MARK,
--
--	SCIFA4_RXD_PORT94_MARK, /* MSEL5CR[12:11] = 10 */
--	SCIFA4_TXD_PORT93_MARK,
--
--	SCIFA4_SCK_PORT21_MARK, /* SCIFA4_SCK Port 21/205 */
--	SCIFA4_SCK_PORT205_MARK,
--
--	/* SCIFA5 */
--	SCIFA5_TXD_PORT20_MARK, /* MSEL5CR[15:14] = 00 */
--	SCIFA5_RXD_PORT10_MARK,
--
--	SCIFA5_RXD_PORT207_MARK, /* MSEL5CR[15:14] = 01 */
--	SCIFA5_TXD_PORT208_MARK,
--
--	SCIFA5_TXD_PORT91_MARK, /* MSEL5CR[15:14] = 10 */
--	SCIFA5_RXD_PORT92_MARK,
--
--	SCIFA5_SCK_PORT23_MARK, /* SCIFA5_SCK Port 23/206 */
--	SCIFA5_SCK_PORT206_MARK,
--
--	/* SCIFA6 */
--	SCIFA6_SCK_MARK,	SCIFA6_RXD_MARK,	SCIFA6_TXD_MARK,
--
--	/* SCIFA7 */
--	SCIFA7_TXD_MARK,	SCIFA7_RXD_MARK,
--
--	/* SCIFAB */
--	SCIFB_SCK_PORT190_MARK, /* MSEL5CR_17_0 */
--	SCIFB_RXD_PORT191_MARK,
--	SCIFB_TXD_PORT192_MARK,
--	SCIFB_RTS_PORT186_MARK,
--	SCIFB_CTS_PORT187_MARK,
--
--	SCIFB_SCK_PORT2_MARK, /* MSEL5CR_17_1 */
--	SCIFB_RXD_PORT3_MARK,
--	SCIFB_TXD_PORT4_MARK,
--	SCIFB_RTS_PORT172_MARK,
--	SCIFB_CTS_PORT173_MARK,
--
--	/* LCD0 */
--	LCDC0_SELECT_MARK,
--
--	LCD0_D0_MARK,	LCD0_D1_MARK,	LCD0_D2_MARK,	LCD0_D3_MARK,
--	LCD0_D4_MARK,	LCD0_D5_MARK,	LCD0_D6_MARK,	LCD0_D7_MARK,
--	LCD0_D8_MARK,	LCD0_D9_MARK,	LCD0_D10_MARK,	LCD0_D11_MARK,
--	LCD0_D12_MARK,	LCD0_D13_MARK,	LCD0_D14_MARK,	LCD0_D15_MARK,
--	LCD0_D16_MARK,	LCD0_D17_MARK,
--	LCD0_DON_MARK,	LCD0_VCPWC_MARK,	LCD0_VEPWC_MARK,
--	LCD0_DCK_MARK,	LCD0_VSYN_MARK,	/* for RGB */
--	LCD0_HSYN_MARK,	LCD0_DISP_MARK,	/* for RGB */
--	LCD0_WR_MARK,	LCD0_RD_MARK,	/* for SYS */
--	LCD0_CS_MARK,	LCD0_RS_MARK,	/* for SYS */
--
--	LCD0_D21_PORT158_MARK,	LCD0_D23_PORT159_MARK, /* MSEL5CR_6_1 */
--	LCD0_D22_PORT160_MARK,	LCD0_D20_PORT161_MARK,
--	LCD0_D19_PORT162_MARK,	LCD0_D18_PORT163_MARK,
--	LCD0_LCLK_PORT165_MARK,
--
--	LCD0_D18_PORT40_MARK,	LCD0_D22_PORT0_MARK, /* MSEL5CR_6_0 */
--	LCD0_D23_PORT1_MARK,	LCD0_D21_PORT2_MARK,
--	LCD0_D20_PORT3_MARK,	LCD0_D19_PORT4_MARK,
--	LCD0_LCLK_PORT102_MARK,
--
--	/* LCD1 */
--	LCDC1_SELECT_MARK,
--
--	LCD1_D0_MARK,	LCD1_D1_MARK,	LCD1_D2_MARK,	LCD1_D3_MARK,
--	LCD1_D4_MARK,	LCD1_D5_MARK,	LCD1_D6_MARK,	LCD1_D7_MARK,
--	LCD1_D8_MARK,	LCD1_D9_MARK,	LCD1_D10_MARK,	LCD1_D11_MARK,
--	LCD1_D12_MARK,	LCD1_D13_MARK,	LCD1_D14_MARK,	LCD1_D15_MARK,
--	LCD1_D16_MARK,	LCD1_D17_MARK,	LCD1_D18_MARK,	LCD1_D19_MARK,
--	LCD1_D20_MARK,	LCD1_D21_MARK,	LCD1_D22_MARK,	LCD1_D23_MARK,
--	LCD1_DON_MARK,	LCD1_VCPWC_MARK,
--	LCD1_LCLK_MARK,	LCD1_VEPWC_MARK,
--
--	LCD1_DCK_MARK,	LCD1_VSYN_MARK,	/* for RGB */
--	LCD1_HSYN_MARK,	LCD1_DISP_MARK,	/* for RGB */
--	LCD1_RS_MARK,	LCD1_CS_MARK,	/* for SYS */
--	LCD1_RD_MARK,	LCD1_WR_MARK,	/* for SYS */
--
--	/* RSPI */
--	RSPI_SSL0_A_MARK,	RSPI_SSL1_A_MARK,	RSPI_SSL2_A_MARK,
--	RSPI_SSL3_A_MARK,	RSPI_CK_A_MARK,		RSPI_MOSI_A_MARK,
--	RSPI_MISO_A_MARK,
--
--	/* VIO CKO */
--	VIO_CKO1_MARK, /* needs fixup */
--	VIO_CKO2_MARK,
--	VIO_CKO_1_MARK,
--	VIO_CKO_MARK,
--
--	/* VIO0 */
--	VIO0_D0_MARK,	VIO0_D1_MARK,	VIO0_D2_MARK,	VIO0_D3_MARK,
--	VIO0_D4_MARK,	VIO0_D5_MARK,	VIO0_D6_MARK,	VIO0_D7_MARK,
--	VIO0_D8_MARK,	VIO0_D9_MARK,	VIO0_D10_MARK,	VIO0_D11_MARK,
--	VIO0_D12_MARK,	VIO0_VD_MARK,	VIO0_HD_MARK,	VIO0_CLK_MARK,
--	VIO0_FIELD_MARK,
--
--	VIO0_D13_PORT26_MARK, /* MSEL5CR_27_0 */
--	VIO0_D14_PORT25_MARK,
--	VIO0_D15_PORT24_MARK,
--
--	VIO0_D13_PORT22_MARK, /* MSEL5CR_27_1 */
--	VIO0_D14_PORT95_MARK,
--	VIO0_D15_PORT96_MARK,
--
--	/* VIO1 */
--	VIO1_D0_MARK,	VIO1_D1_MARK,	VIO1_D2_MARK,	VIO1_D3_MARK,
--	VIO1_D4_MARK,	VIO1_D5_MARK,	VIO1_D6_MARK,	VIO1_D7_MARK,
--	VIO1_VD_MARK,	VIO1_HD_MARK,	VIO1_CLK_MARK,	VIO1_FIELD_MARK,
--
--	/* TPU0 */
--	TPU0TO0_MARK,	TPU0TO1_MARK,	TPU0TO3_MARK,
--	TPU0TO2_PORT66_MARK, /* TPU0TO2 Port 66/202 */
--	TPU0TO2_PORT202_MARK,
--
--	/* SSP1 0 */
--	STP0_IPD0_MARK,	STP0_IPD1_MARK,	STP0_IPD2_MARK,	STP0_IPD3_MARK,
--	STP0_IPD4_MARK,	STP0_IPD5_MARK,	STP0_IPD6_MARK,	STP0_IPD7_MARK,
--	STP0_IPEN_MARK,	STP0_IPCLK_MARK,	STP0_IPSYNC_MARK,
--
--	/* SSP1 1 */
--	STP1_IPD1_MARK,	STP1_IPD2_MARK,	STP1_IPD3_MARK,	STP1_IPD4_MARK,
--	STP1_IPD5_MARK,	STP1_IPD6_MARK,	STP1_IPD7_MARK,	STP1_IPCLK_MARK,
--	STP1_IPSYNC_MARK,
--
--	STP1_IPD0_PORT186_MARK, /* MSEL5CR_23_0 */
--	STP1_IPEN_PORT187_MARK,
--
--	STP1_IPD0_PORT194_MARK, /* MSEL5CR_23_1 */
--	STP1_IPEN_PORT193_MARK,
--
--	/* SIM */
--	SIM_RST_MARK,	SIM_CLK_MARK,
--	SIM_D_PORT22_MARK, /* SIM_D  Port 22/199 */
--	SIM_D_PORT199_MARK,
--
--	/* SDHI0 */
--	SDHI0_D0_MARK,	SDHI0_D1_MARK,	SDHI0_D2_MARK,	SDHI0_D3_MARK,
--	SDHI0_CD_MARK,	SDHI0_WP_MARK,	SDHI0_CMD_MARK,	SDHI0_CLK_MARK,
--
--	/* SDHI1 */
--	SDHI1_D0_MARK,	SDHI1_D1_MARK,	SDHI1_D2_MARK,	SDHI1_D3_MARK,
--	SDHI1_CD_MARK,	SDHI1_WP_MARK,	SDHI1_CMD_MARK,	SDHI1_CLK_MARK,
--
--	/* SDHI2 */
--	SDHI2_D0_MARK,	SDHI2_D1_MARK,	SDHI2_D2_MARK,	SDHI2_D3_MARK,
--	SDHI2_CLK_MARK,	SDHI2_CMD_MARK,
--
--	SDHI2_CD_PORT24_MARK, /* MSEL5CR_19_0 */
--	SDHI2_WP_PORT25_MARK,
--
--	SDHI2_WP_PORT177_MARK, /* MSEL5CR_19_1 */
--	SDHI2_CD_PORT202_MARK,
--
--	/* MSIOF2 */
--	MSIOF2_TXD_MARK,	MSIOF2_RXD_MARK,	MSIOF2_TSCK_MARK,
--	MSIOF2_SS2_MARK,	MSIOF2_TSYNC_MARK,	MSIOF2_SS1_MARK,
--	MSIOF2_MCK1_MARK,	MSIOF2_MCK0_MARK,	MSIOF2_RSYNC_MARK,
--	MSIOF2_RSCK_MARK,
--
--	/* KEYSC */
--	KEYIN4_MARK,	KEYIN5_MARK,	KEYIN6_MARK,	KEYIN7_MARK,
--	KEYOUT0_MARK,	KEYOUT1_MARK,	KEYOUT2_MARK,	KEYOUT3_MARK,
--	KEYOUT4_MARK,	KEYOUT5_MARK,	KEYOUT6_MARK,	KEYOUT7_MARK,
--
--	KEYIN0_PORT43_MARK, /* MSEL4CR_18_0 */
--	KEYIN1_PORT44_MARK,
--	KEYIN2_PORT45_MARK,
--	KEYIN3_PORT46_MARK,
--
--	KEYIN0_PORT58_MARK, /* MSEL4CR_18_1 */
--	KEYIN1_PORT57_MARK,
--	KEYIN2_PORT56_MARK,
--	KEYIN3_PORT55_MARK,
--
--	/* VOU */
--	DV_D0_MARK,	DV_D1_MARK,	DV_D2_MARK,	DV_D3_MARK,
--	DV_D4_MARK,	DV_D5_MARK,	DV_D6_MARK,	DV_D7_MARK,
--	DV_D8_MARK,	DV_D9_MARK,	DV_D10_MARK,	DV_D11_MARK,
--	DV_D12_MARK,	DV_D13_MARK,	DV_D14_MARK,	DV_D15_MARK,
--	DV_CLK_MARK,	DV_VSYNC_MARK,	DV_HSYNC_MARK,
--
--	/* MEMC */
--	MEMC_AD0_MARK,	MEMC_AD1_MARK,	MEMC_AD2_MARK,	MEMC_AD3_MARK,
--	MEMC_AD4_MARK,	MEMC_AD5_MARK,	MEMC_AD6_MARK,	MEMC_AD7_MARK,
--	MEMC_AD8_MARK,	MEMC_AD9_MARK,	MEMC_AD10_MARK,	MEMC_AD11_MARK,
--	MEMC_AD12_MARK,	MEMC_AD13_MARK,	MEMC_AD14_MARK,	MEMC_AD15_MARK,
--	MEMC_CS0_MARK,	MEMC_INT_MARK,	MEMC_NWE_MARK,	MEMC_NOE_MARK,
--
--	MEMC_CS1_MARK, /* MSEL4CR_6_0 */
--	MEMC_ADV_MARK,
--	MEMC_WAIT_MARK,
--	MEMC_BUSCLK_MARK,
--
--	MEMC_A1_MARK, /* MSEL4CR_6_1 */
--	MEMC_DREQ0_MARK,
--	MEMC_DREQ1_MARK,
--	MEMC_A0_MARK,
--
--	/* MMC */
--	MMC0_D0_PORT68_MARK,	MMC0_D1_PORT69_MARK,	MMC0_D2_PORT70_MARK,
--	MMC0_D3_PORT71_MARK,	MMC0_D4_PORT72_MARK,	MMC0_D5_PORT73_MARK,
--	MMC0_D6_PORT74_MARK,	MMC0_D7_PORT75_MARK,	MMC0_CLK_PORT66_MARK,
--	MMC0_CMD_PORT67_MARK,	/* MSEL4CR_15_0 */
--
--	MMC1_D0_PORT149_MARK,	MMC1_D1_PORT148_MARK,	MMC1_D2_PORT147_MARK,
--	MMC1_D3_PORT146_MARK,	MMC1_D4_PORT145_MARK,	MMC1_D5_PORT144_MARK,
--	MMC1_D6_PORT143_MARK,	MMC1_D7_PORT142_MARK,	MMC1_CLK_PORT103_MARK,
--	MMC1_CMD_PORT104_MARK,	/* MSEL4CR_15_1 */
--
--	/* MSIOF0 */
--	MSIOF0_SS1_MARK,	MSIOF0_SS2_MARK,	MSIOF0_RXD_MARK,
--	MSIOF0_TXD_MARK,	MSIOF0_MCK0_MARK,	MSIOF0_MCK1_MARK,
--	MSIOF0_RSYNC_MARK,	MSIOF0_RSCK_MARK,	MSIOF0_TSCK_MARK,
--	MSIOF0_TSYNC_MARK,
--
--	/* MSIOF1 */
--	MSIOF1_RSCK_MARK,	MSIOF1_RSYNC_MARK,
--	MSIOF1_MCK0_MARK,	MSIOF1_MCK1_MARK,
--
--	MSIOF1_SS2_PORT116_MARK,	MSIOF1_SS1_PORT117_MARK,
--	MSIOF1_RXD_PORT118_MARK,	MSIOF1_TXD_PORT119_MARK,
--	MSIOF1_TSYNC_PORT120_MARK,
--	MSIOF1_TSCK_PORT121_MARK,	/* MSEL4CR_10_0 */
--
--	MSIOF1_SS1_PORT67_MARK,		MSIOF1_TSCK_PORT72_MARK,
--	MSIOF1_TSYNC_PORT73_MARK,	MSIOF1_TXD_PORT74_MARK,
--	MSIOF1_RXD_PORT75_MARK,
--	MSIOF1_SS2_PORT202_MARK,	/* MSEL4CR_10_1 */
--
--	/* GPIO */
--	GPO0_MARK,	GPI0_MARK,	GPO1_MARK,	GPI1_MARK,
--
--	/* USB0 */
--	USB0_OCI_MARK,	USB0_PPON_MARK,	VBUS_MARK,
--
--	/* USB1 */
--	USB1_OCI_MARK,	USB1_PPON_MARK,
--
--	/* BBIF1 */
--	BBIF1_RXD_MARK,		BBIF1_TXD_MARK,		BBIF1_TSYNC_MARK,
--	BBIF1_TSCK_MARK,	BBIF1_RSCK_MARK,	BBIF1_RSYNC_MARK,
--	BBIF1_FLOW_MARK,	BBIF1_RX_FLOW_N_MARK,
--
--	/* BBIF2 */
--	BBIF2_TXD2_PORT5_MARK, /* MSEL5CR_0_0 */
--	BBIF2_RXD2_PORT60_MARK,
--	BBIF2_TSYNC2_PORT6_MARK,
--	BBIF2_TSCK2_PORT59_MARK,
--
--	BBIF2_RXD2_PORT90_MARK, /* MSEL5CR_0_1 */
--	BBIF2_TXD2_PORT183_MARK,
--	BBIF2_TSCK2_PORT89_MARK,
--	BBIF2_TSYNC2_PORT184_MARK,
--
--	/* BSC / FLCTL / PCMCIA */
--	CS0_MARK,	CS2_MARK,	CS4_MARK,
--	CS5B_MARK,	CS6A_MARK,
--	CS5A_PORT105_MARK, /* CS5A PORT 19/105 */
--	CS5A_PORT19_MARK,
--	IOIS16_MARK, /* ? */
--
--	A0_MARK,	A1_MARK,	A2_MARK,	A3_MARK,
--	A4_FOE_MARK,	/* share with FLCTL */
--	A5_FCDE_MARK,	/* share with FLCTL */
--	A6_MARK,	A7_MARK,	A8_MARK,	A9_MARK,
--	A10_MARK,	A11_MARK,	A12_MARK,	A13_MARK,
--	A14_MARK,	A15_MARK,	A16_MARK,	A17_MARK,
--	A18_MARK,	A19_MARK,	A20_MARK,	A21_MARK,
--	A22_MARK,	A23_MARK,	A24_MARK,	A25_MARK,
--	A26_MARK,
--
--	D0_NAF0_MARK,	D1_NAF1_MARK,	D2_NAF2_MARK,	/* share with FLCTL */
--	D3_NAF3_MARK,	D4_NAF4_MARK,	D5_NAF5_MARK,	/* share with FLCTL */
--	D6_NAF6_MARK,	D7_NAF7_MARK,	D8_NAF8_MARK,	/* share with FLCTL */
--	D9_NAF9_MARK,	D10_NAF10_MARK,	D11_NAF11_MARK,	/* share with FLCTL */
--	D12_NAF12_MARK,	D13_NAF13_MARK,	D14_NAF14_MARK,	/* share with FLCTL */
--	D15_NAF15_MARK,					/* share with FLCTL */
--	D16_MARK,	D17_MARK,	D18_MARK,	D19_MARK,
--	D20_MARK,	D21_MARK,	D22_MARK,	D23_MARK,
--	D24_MARK,	D25_MARK,	D26_MARK,	D27_MARK,
--	D28_MARK,	D29_MARK,	D30_MARK,	D31_MARK,
--
--	WE0_FWE_MARK,	/* share with FLCTL */
--	WE1_MARK,
--	WE2_ICIORD_MARK,	/* share with PCMCIA */
--	WE3_ICIOWR_MARK,	/* share with PCMCIA */
--	CKO_MARK,	BS_MARK,	RDWR_MARK,
--	RD_FSC_MARK,	/* share with FLCTL */
--	WAIT_PORT177_MARK, /* WAIT Port 90/177 */
--	WAIT_PORT90_MARK,
--
--	FCE0_MARK,	FCE1_MARK,	FRB_MARK, /* FLCTL */
--
--	/* IRDA */
--	IRDA_FIRSEL_MARK,	IRDA_IN_MARK,	IRDA_OUT_MARK,
--
--	/* ATAPI */
--	IDE_D0_MARK,	IDE_D1_MARK,	IDE_D2_MARK,	IDE_D3_MARK,
--	IDE_D4_MARK,	IDE_D5_MARK,	IDE_D6_MARK,	IDE_D7_MARK,
--	IDE_D8_MARK,	IDE_D9_MARK,	IDE_D10_MARK,	IDE_D11_MARK,
--	IDE_D12_MARK,	IDE_D13_MARK,	IDE_D14_MARK,	IDE_D15_MARK,
--	IDE_A0_MARK,	IDE_A1_MARK,	IDE_A2_MARK,	IDE_CS0_MARK,
--	IDE_CS1_MARK,	IDE_IOWR_MARK,	IDE_IORD_MARK,	IDE_IORDY_MARK,
--	IDE_INT_MARK,		IDE_RST_MARK,		IDE_DIRECTION_MARK,
--	IDE_EXBUF_ENB_MARK,	IDE_IODACK_MARK,	IDE_IODREQ_MARK,
--
--	/* RMII */
--	RMII_CRS_DV_MARK,	RMII_RX_ER_MARK,	RMII_RXD0_MARK,
--	RMII_RXD1_MARK,		RMII_TX_EN_MARK,	RMII_TXD0_MARK,
--	RMII_MDC_MARK,		RMII_TXD1_MARK,		RMII_MDIO_MARK,
--	RMII_REF50CK_MARK,	/* for RMII */
--	RMII_REF125CK_MARK,	/* for GMII */
--
--	/* GEther */
--	ET_TX_CLK_MARK,	ET_TX_EN_MARK,	ET_ETXD0_MARK,	ET_ETXD1_MARK,
--	ET_ETXD2_MARK,	ET_ETXD3_MARK,
--	ET_ETXD4_MARK,	ET_ETXD5_MARK, /* for GEther */
--	ET_ETXD6_MARK,	ET_ETXD7_MARK, /* for GEther */
--	ET_COL_MARK,	ET_TX_ER_MARK,	ET_RX_CLK_MARK,	ET_RX_DV_MARK,
--	ET_ERXD0_MARK,	ET_ERXD1_MARK,	ET_ERXD2_MARK,	ET_ERXD3_MARK,
--	ET_ERXD4_MARK,	ET_ERXD5_MARK, /* for GEther */
--	ET_ERXD6_MARK,	ET_ERXD7_MARK, /* for GEther */
--	ET_RX_ER_MARK,	ET_CRS_MARK,		ET_MDC_MARK,	ET_MDIO_MARK,
--	ET_LINK_MARK,	ET_PHY_INT_MARK,	ET_WOL_MARK,	ET_GTX_CLK_MARK,
--
--	/* DMA0 */
--	DREQ0_MARK,	DACK0_MARK,
--
--	/* DMA1 */
--	DREQ1_MARK,	DACK1_MARK,
--
--	/* SYSC */
--	RESETOUTS_MARK,		RESETP_PULLUP_MARK,	RESETP_PLAIN_MARK,
--
--	/* IRREM */
--	IROUT_MARK,
--
--	/* SDENC */
--	SDENC_CPG_MARK,		SDENC_DV_CLKI_MARK,
--
--	/* DEBUG */
--	EDEBGREQ_PULLUP_MARK,	/* for JTAG */
--	EDEBGREQ_PULLDOWN_MARK,
--
--	TRACEAUD_FROM_VIO_MARK,	/* for TRACE/AUD */
--	TRACEAUD_FROM_LCDC0_MARK,
--	TRACEAUD_FROM_MEMC_MARK,
--
--	PINMUX_MARK_END,
--};
--
--static unsigned short pinmux_data[] = {
--	/* specify valid pin states for each pin in GPIO mode */
--
--	/* I/O and Pull U/D */
--	PORT_DATA_IO_PD(0),		PORT_DATA_IO_PD(1),
--	PORT_DATA_IO_PD(2),		PORT_DATA_IO_PD(3),
--	PORT_DATA_IO_PD(4),		PORT_DATA_IO_PD(5),
--	PORT_DATA_IO_PD(6),		PORT_DATA_IO(7),
--	PORT_DATA_IO(8),		PORT_DATA_IO(9),
--
--	PORT_DATA_IO_PD(10),		PORT_DATA_IO_PD(11),
--	PORT_DATA_IO_PD(12),		PORT_DATA_IO_PU_PD(13),
--	PORT_DATA_IO_PD(14),		PORT_DATA_IO_PD(15),
--	PORT_DATA_IO_PD(16),		PORT_DATA_IO_PD(17),
--	PORT_DATA_IO(18),		PORT_DATA_IO_PU(19),
--
--	PORT_DATA_IO_PU_PD(20),		PORT_DATA_IO_PD(21),
--	PORT_DATA_IO_PU_PD(22),		PORT_DATA_IO(23),
--	PORT_DATA_IO_PU(24),		PORT_DATA_IO_PU(25),
--	PORT_DATA_IO_PU(26),		PORT_DATA_IO_PU(27),
--	PORT_DATA_IO_PU(28),		PORT_DATA_IO_PU(29),
--
--	PORT_DATA_IO_PU(30),		PORT_DATA_IO_PD(31),
--	PORT_DATA_IO_PD(32),		PORT_DATA_IO_PD(33),
--	PORT_DATA_IO_PD(34),		PORT_DATA_IO_PU(35),
--	PORT_DATA_IO_PU(36),		PORT_DATA_IO_PD(37),
--	PORT_DATA_IO_PU(38),		PORT_DATA_IO_PD(39),
--
--	PORT_DATA_IO_PU_PD(40),		PORT_DATA_IO_PD(41),
--	PORT_DATA_IO_PD(42),		PORT_DATA_IO_PU_PD(43),
--	PORT_DATA_IO_PU_PD(44),		PORT_DATA_IO_PU_PD(45),
--	PORT_DATA_IO_PU_PD(46),		PORT_DATA_IO_PU_PD(47),
--	PORT_DATA_IO_PU_PD(48),		PORT_DATA_IO_PU_PD(49),
--
--	PORT_DATA_IO_PU_PD(50),		PORT_DATA_IO_PD(51),
--	PORT_DATA_IO_PD(52),		PORT_DATA_IO_PD(53),
--	PORT_DATA_IO_PD(54),		PORT_DATA_IO_PU_PD(55),
--	PORT_DATA_IO_PU_PD(56),		PORT_DATA_IO_PU_PD(57),
--	PORT_DATA_IO_PU_PD(58),		PORT_DATA_IO_PU_PD(59),
--
--	PORT_DATA_IO_PU_PD(60),		PORT_DATA_IO_PD(61),
--	PORT_DATA_IO_PD(62),		PORT_DATA_IO_PD(63),
--	PORT_DATA_IO_PD(64),		PORT_DATA_IO_PD(65),
--	PORT_DATA_IO_PU_PD(66),		PORT_DATA_IO_PU_PD(67),
--	PORT_DATA_IO_PU_PD(68),		PORT_DATA_IO_PU_PD(69),
--
--	PORT_DATA_IO_PU_PD(70),		PORT_DATA_IO_PU_PD(71),
--	PORT_DATA_IO_PU_PD(72),		PORT_DATA_IO_PU_PD(73),
--	PORT_DATA_IO_PU_PD(74),		PORT_DATA_IO_PU_PD(75),
--	PORT_DATA_IO_PU_PD(76),		PORT_DATA_IO_PU_PD(77),
--	PORT_DATA_IO_PU_PD(78),		PORT_DATA_IO_PU_PD(79),
--
--	PORT_DATA_IO_PU_PD(80),		PORT_DATA_IO_PU_PD(81),
--	PORT_DATA_IO(82),		PORT_DATA_IO_PU_PD(83),
--	PORT_DATA_IO(84),		PORT_DATA_IO_PD(85),
--	PORT_DATA_IO_PD(86),		PORT_DATA_IO_PD(87),
--	PORT_DATA_IO_PD(88),		PORT_DATA_IO_PD(89),
--
--	PORT_DATA_IO_PD(90),		PORT_DATA_IO_PU_PD(91),
--	PORT_DATA_IO_PU_PD(92),		PORT_DATA_IO_PU_PD(93),
--	PORT_DATA_IO_PU_PD(94),		PORT_DATA_IO_PU_PD(95),
--	PORT_DATA_IO_PU_PD(96),		PORT_DATA_IO_PU_PD(97),
--	PORT_DATA_IO_PU_PD(98),		PORT_DATA_IO_PU_PD(99),
--
--	PORT_DATA_IO_PU_PD(100),	PORT_DATA_IO(101),
--	PORT_DATA_IO_PU(102),		PORT_DATA_IO_PU_PD(103),
--	PORT_DATA_IO_PU(104),		PORT_DATA_IO_PU(105),
--	PORT_DATA_IO_PU_PD(106),	PORT_DATA_IO(107),
--	PORT_DATA_IO(108),		PORT_DATA_IO(109),
--
--	PORT_DATA_IO(110),		PORT_DATA_IO(111),
--	PORT_DATA_IO(112),		PORT_DATA_IO(113),
--	PORT_DATA_IO_PU_PD(114),	PORT_DATA_IO(115),
--	PORT_DATA_IO_PD(116),		PORT_DATA_IO_PD(117),
--	PORT_DATA_IO_PD(118),		PORT_DATA_IO_PD(119),
--
--	PORT_DATA_IO_PD(120),		PORT_DATA_IO_PD(121),
--	PORT_DATA_IO_PD(122),		PORT_DATA_IO_PD(123),
--	PORT_DATA_IO_PD(124),		PORT_DATA_IO(125),
--	PORT_DATA_IO(126),		PORT_DATA_IO(127),
--	PORT_DATA_IO(128),		PORT_DATA_IO(129),
--
--	PORT_DATA_IO(130),		PORT_DATA_IO(131),
--	PORT_DATA_IO(132),		PORT_DATA_IO(133),
--	PORT_DATA_IO(134),		PORT_DATA_IO(135),
--	PORT_DATA_IO(136),		PORT_DATA_IO(137),
--	PORT_DATA_IO(138),		PORT_DATA_IO(139),
--
--	PORT_DATA_IO(140),		PORT_DATA_IO(141),
--	PORT_DATA_IO_PU(142),		PORT_DATA_IO_PU(143),
--	PORT_DATA_IO_PU(144),		PORT_DATA_IO_PU(145),
--	PORT_DATA_IO_PU(146),		PORT_DATA_IO_PU(147),
--	PORT_DATA_IO_PU(148),		PORT_DATA_IO_PU(149),
--
--	PORT_DATA_IO_PU(150),		PORT_DATA_IO_PU(151),
--	PORT_DATA_IO_PU(152),		PORT_DATA_IO_PU(153),
--	PORT_DATA_IO_PU(154),		PORT_DATA_IO_PU(155),
--	PORT_DATA_IO_PU(156),		PORT_DATA_IO_PU(157),
--	PORT_DATA_IO_PD(158),		PORT_DATA_IO_PD(159),
--
--	PORT_DATA_IO_PU_PD(160),	PORT_DATA_IO_PD(161),
--	PORT_DATA_IO_PD(162),		PORT_DATA_IO_PD(163),
--	PORT_DATA_IO_PD(164),		PORT_DATA_IO_PD(165),
--	PORT_DATA_IO_PU(166),		PORT_DATA_IO_PU(167),
--	PORT_DATA_IO_PU(168),		PORT_DATA_IO_PU(169),
--
--	PORT_DATA_IO_PU(170),		PORT_DATA_IO_PU(171),
--	PORT_DATA_IO_PD(172),		PORT_DATA_IO_PD(173),
--	PORT_DATA_IO_PD(174),		PORT_DATA_IO_PD(175),
--	PORT_DATA_IO_PU(176),		PORT_DATA_IO_PU_PD(177),
--	PORT_DATA_IO_PU(178),		PORT_DATA_IO_PD(179),
--
--	PORT_DATA_IO_PD(180),		PORT_DATA_IO_PU(181),
--	PORT_DATA_IO_PU(182),		PORT_DATA_IO(183),
--	PORT_DATA_IO_PD(184),		PORT_DATA_IO_PD(185),
--	PORT_DATA_IO_PD(186),		PORT_DATA_IO_PD(187),
--	PORT_DATA_IO_PD(188),		PORT_DATA_IO_PD(189),
--
--	PORT_DATA_IO_PD(190),		PORT_DATA_IO_PD(191),
--	PORT_DATA_IO_PD(192),		PORT_DATA_IO_PU_PD(193),
--	PORT_DATA_IO_PU_PD(194),	PORT_DATA_IO_PD(195),
--	PORT_DATA_IO_PU_PD(196),	PORT_DATA_IO_PD(197),
--	PORT_DATA_IO_PU_PD(198),	PORT_DATA_IO_PU_PD(199),
--
--	PORT_DATA_IO_PU_PD(200),	PORT_DATA_IO_PU(201),
--	PORT_DATA_IO_PU_PD(202),	PORT_DATA_IO(203),
--	PORT_DATA_IO_PU_PD(204),	PORT_DATA_IO_PU_PD(205),
--	PORT_DATA_IO_PU_PD(206),	PORT_DATA_IO_PU_PD(207),
--	PORT_DATA_IO_PU_PD(208),	PORT_DATA_IO_PD(209),
--
--	PORT_DATA_IO_PD(210),		PORT_DATA_IO_PD(211),
--
--	/* Port0 */
--	PINMUX_DATA(DBGMDT2_MARK,		PORT0_FN1),
--	PINMUX_DATA(FSIAISLD_PORT0_MARK,	PORT0_FN2,	MSEL5CR_3_0),
--	PINMUX_DATA(FSIAOSLD1_MARK,		PORT0_FN3),
--	PINMUX_DATA(LCD0_D22_PORT0_MARK,	PORT0_FN4,	MSEL5CR_6_0),
--	PINMUX_DATA(SCIFA7_RXD_MARK,		PORT0_FN6),
--	PINMUX_DATA(LCD1_D4_MARK,		PORT0_FN7),
--	PINMUX_DATA(IRQ5_PORT0_MARK,		PORT0_FN0,	MSEL1CR_5_0),
--
--	/* Port1 */
--	PINMUX_DATA(DBGMDT1_MARK,		PORT1_FN1),
--	PINMUX_DATA(FMSISLD_PORT1_MARK,		PORT1_FN2,	MSEL5CR_5_0),
--	PINMUX_DATA(FSIAOSLD2_MARK,		PORT1_FN3),
--	PINMUX_DATA(LCD0_D23_PORT1_MARK,	PORT1_FN4,	MSEL5CR_6_0),
--	PINMUX_DATA(SCIFA7_TXD_MARK,		PORT1_FN6),
--	PINMUX_DATA(LCD1_D3_MARK,		PORT1_FN7),
--	PINMUX_DATA(IRQ5_PORT1_MARK,		PORT1_FN0,	MSEL1CR_5_1),
--
--	/* Port2 */
--	PINMUX_DATA(DBGMDT0_MARK,		PORT2_FN1),
--	PINMUX_DATA(SCIFB_SCK_PORT2_MARK,	PORT2_FN2,	MSEL5CR_17_1),
--	PINMUX_DATA(LCD0_D21_PORT2_MARK,	PORT2_FN4,	MSEL5CR_6_0),
--	PINMUX_DATA(LCD1_D2_MARK,		PORT2_FN7),
--	PINMUX_DATA(IRQ0_PORT2_MARK,		PORT2_FN0,	MSEL1CR_0_1),
--
--	/* Port3 */
--	PINMUX_DATA(DBGMD21_MARK,		PORT3_FN1),
--	PINMUX_DATA(SCIFB_RXD_PORT3_MARK,	PORT3_FN2,	MSEL5CR_17_1),
--	PINMUX_DATA(LCD0_D20_PORT3_MARK,	PORT3_FN4,	MSEL5CR_6_0),
--	PINMUX_DATA(LCD1_D1_MARK,		PORT3_FN7),
--
--	/* Port4 */
--	PINMUX_DATA(DBGMD20_MARK,		PORT4_FN1),
--	PINMUX_DATA(SCIFB_TXD_PORT4_MARK,	PORT4_FN2,	MSEL5CR_17_1),
--	PINMUX_DATA(LCD0_D19_PORT4_MARK,	PORT4_FN4,	MSEL5CR_6_0),
--	PINMUX_DATA(LCD1_D0_MARK,		PORT4_FN7),
--
--	/* Port5 */
--	PINMUX_DATA(DBGMD11_MARK,		PORT5_FN1),
--	PINMUX_DATA(BBIF2_TXD2_PORT5_MARK,	PORT5_FN2,	MSEL5CR_0_0),
--	PINMUX_DATA(FSIAISLD_PORT5_MARK,	PORT5_FN4,	MSEL5CR_3_1),
--	PINMUX_DATA(RSPI_SSL0_A_MARK,		PORT5_FN6),
--	PINMUX_DATA(LCD1_VCPWC_MARK,		PORT5_FN7),
--
--	/* Port6 */
--	PINMUX_DATA(DBGMD10_MARK,		PORT6_FN1),
--	PINMUX_DATA(BBIF2_TSYNC2_PORT6_MARK,	PORT6_FN2,	MSEL5CR_0_0),
--	PINMUX_DATA(FMSISLD_PORT6_MARK,		PORT6_FN4,	MSEL5CR_5_1),
--	PINMUX_DATA(RSPI_SSL1_A_MARK,		PORT6_FN6),
--	PINMUX_DATA(LCD1_VEPWC_MARK,		PORT6_FN7),
--
--	/* Port7 */
--	PINMUX_DATA(FSIAOLR_MARK,		PORT7_FN1),
--
--	/* Port8 */
--	PINMUX_DATA(FSIAOBT_MARK,		PORT8_FN1),
--
--	/* Port9 */
--	PINMUX_DATA(FSIAOSLD_MARK,		PORT9_FN1),
--	PINMUX_DATA(FSIASPDIF_PORT9_MARK,	PORT9_FN2,	MSEL5CR_4_0),
--
--	/* Port10 */
--	PINMUX_DATA(FSIAOMC_MARK,		PORT10_FN1),
--	PINMUX_DATA(SCIFA5_RXD_PORT10_MARK,	PORT10_FN3,	MSEL5CR_14_0,
--			MSEL5CR_15_0),
--	PINMUX_DATA(IRQ3_PORT10_MARK,		PORT10_FN0,	MSEL1CR_3_0),
--
--	/* Port11 */
--	PINMUX_DATA(FSIACK_MARK,		PORT11_FN1),
--	PINMUX_DATA(IRQ2_PORT11_MARK,		PORT11_FN0,	MSEL1CR_2_0),
--
--	/* Port12 */
--	PINMUX_DATA(FSIAILR_MARK,		PORT12_FN1),
--	PINMUX_DATA(SCIFA4_RXD_PORT12_MARK,	PORT12_FN2,	MSEL5CR_12_0,
--			MSEL5CR_11_0),
--	PINMUX_DATA(LCD1_RS_MARK,		PORT12_FN6),
--	PINMUX_DATA(LCD1_DISP_MARK,		PORT12_FN7),
--	PINMUX_DATA(IRQ2_PORT12_MARK,		PORT12_FN0,	MSEL1CR_2_1),
--
--	/* Port13 */
--	PINMUX_DATA(FSIAIBT_MARK,		PORT13_FN1),
--	PINMUX_DATA(SCIFA4_TXD_PORT13_MARK,	PORT13_FN2,	MSEL5CR_12_0,
--			MSEL5CR_11_0),
--	PINMUX_DATA(LCD1_RD_MARK,		PORT13_FN7),
--	PINMUX_DATA(IRQ0_PORT13_MARK,		PORT13_FN0,	MSEL1CR_0_0),
--
--	/* Port14 */
--	PINMUX_DATA(FMSOILR_MARK,		PORT14_FN1),
--	PINMUX_DATA(FMSIILR_MARK,		PORT14_FN2),
--	PINMUX_DATA(VIO_CKO1_MARK,		PORT14_FN3),
--	PINMUX_DATA(LCD1_D23_MARK,		PORT14_FN7),
--	PINMUX_DATA(IRQ3_PORT14_MARK,		PORT14_FN0,	MSEL1CR_3_1),
--
--	/* Port15 */
--	PINMUX_DATA(FMSOIBT_MARK,		PORT15_FN1),
--	PINMUX_DATA(FMSIIBT_MARK,		PORT15_FN2),
--	PINMUX_DATA(VIO_CKO2_MARK,		PORT15_FN3),
--	PINMUX_DATA(LCD1_D22_MARK,		PORT15_FN7),
--	PINMUX_DATA(IRQ4_PORT15_MARK,		PORT15_FN0,	MSEL1CR_4_0),
--
--	/* Port16 */
--	PINMUX_DATA(FMSOOLR_MARK,		PORT16_FN1),
--	PINMUX_DATA(FMSIOLR_MARK,		PORT16_FN2),
--
--	/* Port17 */
--	PINMUX_DATA(FMSOOBT_MARK,		PORT17_FN1),
--	PINMUX_DATA(FMSIOBT_MARK,		PORT17_FN2),
--
--	/* Port18 */
--	PINMUX_DATA(FMSOSLD_MARK,		PORT18_FN1),
--	PINMUX_DATA(FSIASPDIF_PORT18_MARK,	PORT18_FN2,	MSEL5CR_4_1),
--
--	/* Port19 */
--	PINMUX_DATA(FMSICK_MARK,		PORT19_FN1),
--	PINMUX_DATA(CS5A_PORT19_MARK,		PORT19_FN7,	MSEL5CR_2_1),
--	PINMUX_DATA(IRQ10_MARK,			PORT19_FN0),
--
--	/* Port20 */
--	PINMUX_DATA(FMSOCK_MARK,		PORT20_FN1),
--	PINMUX_DATA(SCIFA5_TXD_PORT20_MARK,	PORT20_FN3,	MSEL5CR_15_0,
--			MSEL5CR_14_0),
--	PINMUX_DATA(IRQ1_MARK,			PORT20_FN0),
--
--	/* Port21 */
--	PINMUX_DATA(SCIFA1_CTS_MARK,		PORT21_FN1),
--	PINMUX_DATA(SCIFA4_SCK_PORT21_MARK,	PORT21_FN2,	MSEL5CR_10_0),
--	PINMUX_DATA(TPU0TO1_MARK,		PORT21_FN4),
--	PINMUX_DATA(VIO1_FIELD_MARK,		PORT21_FN5),
--	PINMUX_DATA(STP0_IPD5_MARK,		PORT21_FN6),
--	PINMUX_DATA(LCD1_D10_MARK,		PORT21_FN7),
--
--	/* Port22 */
--	PINMUX_DATA(SCIFA2_SCK_PORT22_MARK,	PORT22_FN1,	MSEL5CR_7_0),
--	PINMUX_DATA(SIM_D_PORT22_MARK,		PORT22_FN4,	MSEL5CR_21_0),
--	PINMUX_DATA(VIO0_D13_PORT22_MARK,	PORT22_FN7,	MSEL5CR_27_1),
--
--	/* Port23 */
--	PINMUX_DATA(SCIFA1_RTS_MARK,		PORT23_FN1),
--	PINMUX_DATA(SCIFA5_SCK_PORT23_MARK,	PORT23_FN3,	MSEL5CR_13_0),
--	PINMUX_DATA(TPU0TO0_MARK,		PORT23_FN4),
--	PINMUX_DATA(VIO_CKO_1_MARK,		PORT23_FN5),
--	PINMUX_DATA(STP0_IPD2_MARK,		PORT23_FN6),
--	PINMUX_DATA(LCD1_D7_MARK,		PORT23_FN7),
--
--	/* Port24 */
--	PINMUX_DATA(VIO0_D15_PORT24_MARK,	PORT24_FN1,	MSEL5CR_27_0),
--	PINMUX_DATA(VIO1_D7_MARK,		PORT24_FN5),
--	PINMUX_DATA(SCIFA6_SCK_MARK,		PORT24_FN6),
--	PINMUX_DATA(SDHI2_CD_PORT24_MARK,	PORT24_FN7,	MSEL5CR_19_0),
--
--	/* Port25 */
--	PINMUX_DATA(VIO0_D14_PORT25_MARK,	PORT25_FN1,	MSEL5CR_27_0),
--	PINMUX_DATA(VIO1_D6_MARK,		PORT25_FN5),
--	PINMUX_DATA(SCIFA6_RXD_MARK,		PORT25_FN6),
--	PINMUX_DATA(SDHI2_WP_PORT25_MARK,	PORT25_FN7,	MSEL5CR_19_0),
--
--	/* Port26 */
--	PINMUX_DATA(VIO0_D13_PORT26_MARK,	PORT26_FN1,	MSEL5CR_27_0),
--	PINMUX_DATA(VIO1_D5_MARK,		PORT26_FN5),
--	PINMUX_DATA(SCIFA6_TXD_MARK,		PORT26_FN6),
--
--	/* Port27 - Port39 Function */
--	PINMUX_DATA(VIO0_D7_MARK,		PORT27_FN1),
--	PINMUX_DATA(VIO0_D6_MARK,		PORT28_FN1),
--	PINMUX_DATA(VIO0_D5_MARK,		PORT29_FN1),
--	PINMUX_DATA(VIO0_D4_MARK,		PORT30_FN1),
--	PINMUX_DATA(VIO0_D3_MARK,		PORT31_FN1),
--	PINMUX_DATA(VIO0_D2_MARK,		PORT32_FN1),
--	PINMUX_DATA(VIO0_D1_MARK,		PORT33_FN1),
--	PINMUX_DATA(VIO0_D0_MARK,		PORT34_FN1),
--	PINMUX_DATA(VIO0_CLK_MARK,		PORT35_FN1),
--	PINMUX_DATA(VIO_CKO_MARK,		PORT36_FN1),
--	PINMUX_DATA(VIO0_HD_MARK,		PORT37_FN1),
--	PINMUX_DATA(VIO0_FIELD_MARK,		PORT38_FN1),
--	PINMUX_DATA(VIO0_VD_MARK,		PORT39_FN1),
--
--	/* Port38 IRQ */
--	PINMUX_DATA(IRQ25_MARK,			PORT38_FN0),
--
--	/* Port40 */
--	PINMUX_DATA(LCD0_D18_PORT40_MARK,	PORT40_FN4,	MSEL5CR_6_0),
--	PINMUX_DATA(RSPI_CK_A_MARK,		PORT40_FN6),
--	PINMUX_DATA(LCD1_LCLK_MARK,		PORT40_FN7),
--
--	/* Port41 */
--	PINMUX_DATA(LCD0_D17_MARK,		PORT41_FN1),
--	PINMUX_DATA(MSIOF2_SS1_MARK,		PORT41_FN2),
--	PINMUX_DATA(IRQ31_PORT41_MARK,		PORT41_FN0,	MSEL1CR_31_1),
--
--	/* Port42 */
--	PINMUX_DATA(LCD0_D16_MARK,		PORT42_FN1),
--	PINMUX_DATA(MSIOF2_MCK1_MARK,		PORT42_FN2),
--	PINMUX_DATA(IRQ12_PORT42_MARK,		PORT42_FN0,	MSEL1CR_12_1),
--
--	/* Port43 */
--	PINMUX_DATA(LCD0_D15_MARK,		PORT43_FN1),
--	PINMUX_DATA(MSIOF2_MCK0_MARK,		PORT43_FN2),
--	PINMUX_DATA(KEYIN0_PORT43_MARK,		PORT43_FN3,	MSEL4CR_18_0),
--	PINMUX_DATA(DV_D15_MARK,		PORT43_FN6),
--
--	/* Port44 */
--	PINMUX_DATA(LCD0_D14_MARK,		PORT44_FN1),
--	PINMUX_DATA(MSIOF2_RSYNC_MARK,		PORT44_FN2),
--	PINMUX_DATA(KEYIN1_PORT44_MARK,		PORT44_FN3,	MSEL4CR_18_0),
--	PINMUX_DATA(DV_D14_MARK,		PORT44_FN6),
--
--	/* Port45 */
--	PINMUX_DATA(LCD0_D13_MARK,		PORT45_FN1),
--	PINMUX_DATA(MSIOF2_RSCK_MARK,		PORT45_FN2),
--	PINMUX_DATA(KEYIN2_PORT45_MARK,		PORT45_FN3,	MSEL4CR_18_0),
--	PINMUX_DATA(DV_D13_MARK,		PORT45_FN6),
--
--	/* Port46 */
--	PINMUX_DATA(LCD0_D12_MARK,		PORT46_FN1),
--	PINMUX_DATA(KEYIN3_PORT46_MARK,		PORT46_FN3,	MSEL4CR_18_0),
--	PINMUX_DATA(DV_D12_MARK,		PORT46_FN6),
--
--	/* Port47 */
--	PINMUX_DATA(LCD0_D11_MARK,		PORT47_FN1),
--	PINMUX_DATA(KEYIN4_MARK,		PORT47_FN3),
--	PINMUX_DATA(DV_D11_MARK,		PORT47_FN6),
--
--	/* Port48 */
--	PINMUX_DATA(LCD0_D10_MARK,		PORT48_FN1),
--	PINMUX_DATA(KEYIN5_MARK,		PORT48_FN3),
--	PINMUX_DATA(DV_D10_MARK,		PORT48_FN6),
--
--	/* Port49 */
--	PINMUX_DATA(LCD0_D9_MARK,		PORT49_FN1),
--	PINMUX_DATA(KEYIN6_MARK,		PORT49_FN3),
--	PINMUX_DATA(DV_D9_MARK,			PORT49_FN6),
--	PINMUX_DATA(IRQ30_PORT49_MARK,		PORT49_FN0,	MSEL1CR_30_1),
--
--	/* Port50 */
--	PINMUX_DATA(LCD0_D8_MARK,		PORT50_FN1),
--	PINMUX_DATA(KEYIN7_MARK,		PORT50_FN3),
--	PINMUX_DATA(DV_D8_MARK,			PORT50_FN6),
--	PINMUX_DATA(IRQ29_PORT50_MARK,		PORT50_FN0,	MSEL1CR_29_1),
--
--	/* Port51 */
--	PINMUX_DATA(LCD0_D7_MARK,		PORT51_FN1),
--	PINMUX_DATA(KEYOUT0_MARK,		PORT51_FN3),
--	PINMUX_DATA(DV_D7_MARK,			PORT51_FN6),
--
--	/* Port52 */
--	PINMUX_DATA(LCD0_D6_MARK,		PORT52_FN1),
--	PINMUX_DATA(KEYOUT1_MARK,		PORT52_FN3),
--	PINMUX_DATA(DV_D6_MARK,			PORT52_FN6),
--
--	/* Port53 */
--	PINMUX_DATA(LCD0_D5_MARK,		PORT53_FN1),
--	PINMUX_DATA(KEYOUT2_MARK,		PORT53_FN3),
--	PINMUX_DATA(DV_D5_MARK,			PORT53_FN6),
--
--	/* Port54 */
--	PINMUX_DATA(LCD0_D4_MARK,		PORT54_FN1),
--	PINMUX_DATA(KEYOUT3_MARK,		PORT54_FN3),
--	PINMUX_DATA(DV_D4_MARK,			PORT54_FN6),
--
--	/* Port55 */
--	PINMUX_DATA(LCD0_D3_MARK,		PORT55_FN1),
--	PINMUX_DATA(KEYOUT4_MARK,		PORT55_FN3),
--	PINMUX_DATA(KEYIN3_PORT55_MARK,		PORT55_FN4,	MSEL4CR_18_1),
--	PINMUX_DATA(DV_D3_MARK,			PORT55_FN6),
--
--	/* Port56 */
--	PINMUX_DATA(LCD0_D2_MARK,		PORT56_FN1),
--	PINMUX_DATA(KEYOUT5_MARK,		PORT56_FN3),
--	PINMUX_DATA(KEYIN2_PORT56_MARK,		PORT56_FN4,	MSEL4CR_18_1),
--	PINMUX_DATA(DV_D2_MARK,			PORT56_FN6),
--	PINMUX_DATA(IRQ28_PORT56_MARK,		PORT56_FN0,	MSEL1CR_28_1),
--
--	/* Port57 */
--	PINMUX_DATA(LCD0_D1_MARK,		PORT57_FN1),
--	PINMUX_DATA(KEYOUT6_MARK,		PORT57_FN3),
--	PINMUX_DATA(KEYIN1_PORT57_MARK,		PORT57_FN4,	MSEL4CR_18_1),
--	PINMUX_DATA(DV_D1_MARK,			PORT57_FN6),
--	PINMUX_DATA(IRQ27_PORT57_MARK,		PORT57_FN0,	MSEL1CR_27_1),
--
--	/* Port58 */
--	PINMUX_DATA(LCD0_D0_MARK,		PORT58_FN1),
--	PINMUX_DATA(KEYOUT7_MARK,		PORT58_FN3),
--	PINMUX_DATA(KEYIN0_PORT58_MARK,		PORT58_FN4,	MSEL4CR_18_1),
--	PINMUX_DATA(DV_D0_MARK,			PORT58_FN6),
--	PINMUX_DATA(IRQ26_PORT58_MARK,		PORT58_FN0,	MSEL1CR_26_1),
--
--	/* Port59 */
--	PINMUX_DATA(LCD0_VCPWC_MARK,		PORT59_FN1),
--	PINMUX_DATA(BBIF2_TSCK2_PORT59_MARK,	PORT59_FN2,	MSEL5CR_0_0),
--	PINMUX_DATA(RSPI_MOSI_A_MARK,		PORT59_FN6),
--
--	/* Port60 */
--	PINMUX_DATA(LCD0_VEPWC_MARK,		PORT60_FN1),
--	PINMUX_DATA(BBIF2_RXD2_PORT60_MARK,	PORT60_FN2,	MSEL5CR_0_0),
--	PINMUX_DATA(RSPI_MISO_A_MARK,		PORT60_FN6),
--
--	/* Port61 */
--	PINMUX_DATA(LCD0_DON_MARK,		PORT61_FN1),
--	PINMUX_DATA(MSIOF2_TXD_MARK,		PORT61_FN2),
--
--	/* Port62 */
--	PINMUX_DATA(LCD0_DCK_MARK,		PORT62_FN1),
--	PINMUX_DATA(LCD0_WR_MARK,		PORT62_FN4),
--	PINMUX_DATA(DV_CLK_MARK,		PORT62_FN6),
--	PINMUX_DATA(IRQ15_PORT62_MARK,		PORT62_FN0,	MSEL1CR_15_1),
--
--	/* Port63 */
--	PINMUX_DATA(LCD0_VSYN_MARK,		PORT63_FN1),
--	PINMUX_DATA(DV_VSYNC_MARK,		PORT63_FN6),
--	PINMUX_DATA(IRQ14_PORT63_MARK,		PORT63_FN0,	MSEL1CR_14_1),
--
--	/* Port64 */
--	PINMUX_DATA(LCD0_HSYN_MARK,		PORT64_FN1),
--	PINMUX_DATA(LCD0_CS_MARK,		PORT64_FN4),
--	PINMUX_DATA(DV_HSYNC_MARK,		PORT64_FN6),
--	PINMUX_DATA(IRQ13_PORT64_MARK,		PORT64_FN0,	MSEL1CR_13_1),
--
--	/* Port65 */
--	PINMUX_DATA(LCD0_DISP_MARK,		PORT65_FN1),
--	PINMUX_DATA(MSIOF2_TSCK_MARK,		PORT65_FN2),
--	PINMUX_DATA(LCD0_RS_MARK,		PORT65_FN4),
--
--	/* Port66 */
--	PINMUX_DATA(MEMC_INT_MARK,		PORT66_FN1),
--	PINMUX_DATA(TPU0TO2_PORT66_MARK,	PORT66_FN3,	MSEL5CR_25_0),
--	PINMUX_DATA(MMC0_CLK_PORT66_MARK,	PORT66_FN4,	MSEL4CR_15_0),
--	PINMUX_DATA(SDHI1_CLK_MARK,		PORT66_FN6),
--
--	/* Port67 - Port73 Function1 */
--	PINMUX_DATA(MEMC_CS0_MARK,		PORT67_FN1),
--	PINMUX_DATA(MEMC_AD8_MARK,		PORT68_FN1),
--	PINMUX_DATA(MEMC_AD9_MARK,		PORT69_FN1),
--	PINMUX_DATA(MEMC_AD10_MARK,		PORT70_FN1),
--	PINMUX_DATA(MEMC_AD11_MARK,		PORT71_FN1),
--	PINMUX_DATA(MEMC_AD12_MARK,		PORT72_FN1),
--	PINMUX_DATA(MEMC_AD13_MARK,		PORT73_FN1),
--
--	/* Port67 - Port73 Function2 */
--	PINMUX_DATA(MSIOF1_SS1_PORT67_MARK,	PORT67_FN2,	MSEL4CR_10_1),
--	PINMUX_DATA(MSIOF1_RSCK_MARK,		PORT68_FN2),
--	PINMUX_DATA(MSIOF1_RSYNC_MARK,		PORT69_FN2),
--	PINMUX_DATA(MSIOF1_MCK0_MARK,		PORT70_FN2),
--	PINMUX_DATA(MSIOF1_MCK1_MARK,		PORT71_FN2),
--	PINMUX_DATA(MSIOF1_TSCK_PORT72_MARK,	PORT72_FN2,	MSEL4CR_10_1),
--	PINMUX_DATA(MSIOF1_TSYNC_PORT73_MARK,	PORT73_FN2,	MSEL4CR_10_1),
--
--	/* Port67 - Port73 Function4 */
--	PINMUX_DATA(MMC0_CMD_PORT67_MARK,	PORT67_FN4,	MSEL4CR_15_0),
--	PINMUX_DATA(MMC0_D0_PORT68_MARK,	PORT68_FN4,	MSEL4CR_15_0),
--	PINMUX_DATA(MMC0_D1_PORT69_MARK,	PORT69_FN4,	MSEL4CR_15_0),
--	PINMUX_DATA(MMC0_D2_PORT70_MARK,	PORT70_FN4,	MSEL4CR_15_0),
--	PINMUX_DATA(MMC0_D3_PORT71_MARK,	PORT71_FN4,	MSEL4CR_15_0),
--	PINMUX_DATA(MMC0_D4_PORT72_MARK,	PORT72_FN4,	MSEL4CR_15_0),
--	PINMUX_DATA(MMC0_D5_PORT73_MARK,	PORT73_FN4,	MSEL4CR_15_0),
--
--	/* Port67 - Port73 Function6 */
--	PINMUX_DATA(SDHI1_CMD_MARK,		PORT67_FN6),
--	PINMUX_DATA(SDHI1_D0_MARK,		PORT68_FN6),
--	PINMUX_DATA(SDHI1_D1_MARK,		PORT69_FN6),
--	PINMUX_DATA(SDHI1_D2_MARK,		PORT70_FN6),
--	PINMUX_DATA(SDHI1_D3_MARK,		PORT71_FN6),
--	PINMUX_DATA(SDHI1_CD_MARK,		PORT72_FN6),
--	PINMUX_DATA(SDHI1_WP_MARK,		PORT73_FN6),
--
--	/* Port67 - Port71 IRQ */
--	PINMUX_DATA(IRQ20_MARK,			PORT67_FN0),
--	PINMUX_DATA(IRQ16_PORT68_MARK,		PORT68_FN0,	MSEL1CR_16_0),
--	PINMUX_DATA(IRQ17_MARK,			PORT69_FN0),
--	PINMUX_DATA(IRQ18_MARK,			PORT70_FN0),
--	PINMUX_DATA(IRQ19_MARK,			PORT71_FN0),
--
--	/* Port74 */
--	PINMUX_DATA(MEMC_AD14_MARK,		PORT74_FN1),
--	PINMUX_DATA(MSIOF1_TXD_PORT74_MARK,	PORT74_FN2,	MSEL4CR_10_1),
--	PINMUX_DATA(MMC0_D6_PORT74_MARK,	PORT74_FN4,	MSEL4CR_15_0),
--	PINMUX_DATA(STP1_IPD7_MARK,		PORT74_FN6),
--	PINMUX_DATA(LCD1_D21_MARK,		PORT74_FN7),
--
--	/* Port75 */
--	PINMUX_DATA(MEMC_AD15_MARK,		PORT75_FN1),
--	PINMUX_DATA(MSIOF1_RXD_PORT75_MARK,	PORT75_FN2,	MSEL4CR_10_1),
--	PINMUX_DATA(MMC0_D7_PORT75_MARK,	PORT75_FN4,	MSEL4CR_15_0),
--	PINMUX_DATA(STP1_IPD6_MARK,		PORT75_FN6),
--	PINMUX_DATA(LCD1_D20_MARK,		PORT75_FN7),
--
--	/* Port76 - Port80 Function */
--	PINMUX_DATA(SDHI0_CMD_MARK,		PORT76_FN1),
--	PINMUX_DATA(SDHI0_D0_MARK,		PORT77_FN1),
--	PINMUX_DATA(SDHI0_D1_MARK,		PORT78_FN1),
--	PINMUX_DATA(SDHI0_D2_MARK,		PORT79_FN1),
--	PINMUX_DATA(SDHI0_D3_MARK,		PORT80_FN1),
--
--	/* Port81 */
--	PINMUX_DATA(SDHI0_CD_MARK,		PORT81_FN1),
--	PINMUX_DATA(IRQ26_PORT81_MARK,		PORT81_FN0,	MSEL1CR_26_0),
--
--	/* Port82 - Port88 Function */
--	PINMUX_DATA(SDHI0_CLK_MARK,		PORT82_FN1),
--	PINMUX_DATA(SDHI0_WP_MARK,		PORT83_FN1),
--	PINMUX_DATA(RESETOUTS_MARK,		PORT84_FN1),
--	PINMUX_DATA(USB0_PPON_MARK,		PORT85_FN1),
--	PINMUX_DATA(USB0_OCI_MARK,		PORT86_FN1),
--	PINMUX_DATA(USB1_PPON_MARK,		PORT87_FN1),
--	PINMUX_DATA(USB1_OCI_MARK,		PORT88_FN1),
--
--	/* Port89 */
--	PINMUX_DATA(DREQ0_MARK,			PORT89_FN1),
--	PINMUX_DATA(BBIF2_TSCK2_PORT89_MARK,	PORT89_FN2,	MSEL5CR_0_1),
--	PINMUX_DATA(RSPI_SSL3_A_MARK,		PORT89_FN6),
--
--	/* Port90 */
--	PINMUX_DATA(DACK0_MARK,			PORT90_FN1),
--	PINMUX_DATA(BBIF2_RXD2_PORT90_MARK,	PORT90_FN2,	MSEL5CR_0_1),
--	PINMUX_DATA(RSPI_SSL2_A_MARK,		PORT90_FN6),
--	PINMUX_DATA(WAIT_PORT90_MARK,		PORT90_FN7,	MSEL5CR_2_1),
--
--	/* Port91 */
--	PINMUX_DATA(MEMC_AD0_MARK,		PORT91_FN1),
--	PINMUX_DATA(BBIF1_RXD_MARK,		PORT91_FN2),
--	PINMUX_DATA(SCIFA5_TXD_PORT91_MARK,	PORT91_FN3,	MSEL5CR_15_1,
--			MSEL5CR_14_0),
--	PINMUX_DATA(LCD1_D5_MARK,		PORT91_FN7),
--
--	/* Port92 */
--	PINMUX_DATA(MEMC_AD1_MARK,		PORT92_FN1),
--	PINMUX_DATA(BBIF1_TSYNC_MARK,		PORT92_FN2),
--	PINMUX_DATA(SCIFA5_RXD_PORT92_MARK,	PORT92_FN3,	MSEL5CR_15_1,
--			MSEL5CR_14_0),
--	PINMUX_DATA(STP0_IPD1_MARK,		PORT92_FN6),
--	PINMUX_DATA(LCD1_D6_MARK,		PORT92_FN7),
--
--	/* Port93 */
--	PINMUX_DATA(MEMC_AD2_MARK,		PORT93_FN1),
--	PINMUX_DATA(BBIF1_TSCK_MARK,		PORT93_FN2),
--	PINMUX_DATA(SCIFA4_TXD_PORT93_MARK,	PORT93_FN3,	MSEL5CR_12_1,
--			MSEL5CR_11_0),
--	PINMUX_DATA(STP0_IPD3_MARK,		PORT93_FN6),
--	PINMUX_DATA(LCD1_D8_MARK,		PORT93_FN7),
--
--	/* Port94 */
--	PINMUX_DATA(MEMC_AD3_MARK,		PORT94_FN1),
--	PINMUX_DATA(BBIF1_TXD_MARK,		PORT94_FN2),
--	PINMUX_DATA(SCIFA4_RXD_PORT94_MARK,	PORT94_FN3,	MSEL5CR_12_1,
--			MSEL5CR_11_0),
--	PINMUX_DATA(STP0_IPD4_MARK,		PORT94_FN6),
--	PINMUX_DATA(LCD1_D9_MARK,		PORT94_FN7),
--
--	/* Port95 */
--	PINMUX_DATA(MEMC_CS1_MARK,		PORT95_FN1,	MSEL4CR_6_0),
--	PINMUX_DATA(MEMC_A1_MARK,		PORT95_FN1,	MSEL4CR_6_1),
--
--	PINMUX_DATA(SCIFA2_CTS_MARK,		PORT95_FN2),
--	PINMUX_DATA(SIM_RST_MARK,		PORT95_FN4),
--	PINMUX_DATA(VIO0_D14_PORT95_MARK,	PORT95_FN7,	MSEL5CR_27_1),
--	PINMUX_DATA(IRQ22_MARK,			PORT95_FN0),
--
--	/* Port96 */
--	PINMUX_DATA(MEMC_ADV_MARK,		PORT96_FN1,	MSEL4CR_6_0),
--	PINMUX_DATA(MEMC_DREQ0_MARK,		PORT96_FN1,	MSEL4CR_6_1),
--
--	PINMUX_DATA(SCIFA2_RTS_MARK,		PORT96_FN2),
--	PINMUX_DATA(SIM_CLK_MARK,		PORT96_FN4),
--	PINMUX_DATA(VIO0_D15_PORT96_MARK,	PORT96_FN7,	MSEL5CR_27_1),
--	PINMUX_DATA(IRQ23_MARK,			PORT96_FN0),
--
--	/* Port97 */
--	PINMUX_DATA(MEMC_AD4_MARK,		PORT97_FN1),
--	PINMUX_DATA(BBIF1_RSCK_MARK,		PORT97_FN2),
--	PINMUX_DATA(LCD1_CS_MARK,		PORT97_FN6),
--	PINMUX_DATA(LCD1_HSYN_MARK,		PORT97_FN7),
--	PINMUX_DATA(IRQ12_PORT97_MARK,		PORT97_FN0,	MSEL1CR_12_0),
--
--	/* Port98 */
--	PINMUX_DATA(MEMC_AD5_MARK,		PORT98_FN1),
--	PINMUX_DATA(BBIF1_RSYNC_MARK,		PORT98_FN2),
--	PINMUX_DATA(LCD1_VSYN_MARK,		PORT98_FN7),
--	PINMUX_DATA(IRQ13_PORT98_MARK,		PORT98_FN0,	MSEL1CR_13_0),
--
--	/* Port99 */
--	PINMUX_DATA(MEMC_AD6_MARK,		PORT99_FN1),
--	PINMUX_DATA(BBIF1_FLOW_MARK,		PORT99_FN2),
--	PINMUX_DATA(LCD1_WR_MARK,		PORT99_FN6),
--	PINMUX_DATA(LCD1_DCK_MARK,		PORT99_FN7),
--	PINMUX_DATA(IRQ14_PORT99_MARK,		PORT99_FN0,	MSEL1CR_14_0),
--
--	/* Port100 */
--	PINMUX_DATA(MEMC_AD7_MARK,		PORT100_FN1),
--	PINMUX_DATA(BBIF1_RX_FLOW_N_MARK,	PORT100_FN2),
--	PINMUX_DATA(LCD1_DON_MARK,		PORT100_FN7),
--	PINMUX_DATA(IRQ15_PORT100_MARK,		PORT100_FN0,	MSEL1CR_15_0),
--
--	/* Port101 */
--	PINMUX_DATA(FCE0_MARK,			PORT101_FN1),
--
--	/* Port102 */
--	PINMUX_DATA(FRB_MARK,			PORT102_FN1),
--	PINMUX_DATA(LCD0_LCLK_PORT102_MARK,	PORT102_FN4,	MSEL5CR_6_0),
--
--	/* Port103 */
--	PINMUX_DATA(CS5B_MARK,			PORT103_FN1),
--	PINMUX_DATA(FCE1_MARK,			PORT103_FN2),
--	PINMUX_DATA(MMC1_CLK_PORT103_MARK,	PORT103_FN3,	MSEL4CR_15_1),
--
--	/* Port104 */
--	PINMUX_DATA(CS6A_MARK,			PORT104_FN1),
--	PINMUX_DATA(MMC1_CMD_PORT104_MARK,	PORT104_FN3,	MSEL4CR_15_1),
--	PINMUX_DATA(IRQ11_MARK,			PORT104_FN0),
--
--	/* Port105 */
--	PINMUX_DATA(CS5A_PORT105_MARK,		PORT105_FN1,	MSEL5CR_2_0),
--	PINMUX_DATA(SCIFA3_RTS_PORT105_MARK,	PORT105_FN4,	MSEL5CR_8_0),
--
--	/* Port106 */
--	PINMUX_DATA(IOIS16_MARK,		PORT106_FN1),
--	PINMUX_DATA(IDE_EXBUF_ENB_MARK,		PORT106_FN6),
--
--	/* Port107 - Port115 Function */
--	PINMUX_DATA(WE3_ICIOWR_MARK,		PORT107_FN1),
--	PINMUX_DATA(WE2_ICIORD_MARK,		PORT108_FN1),
--	PINMUX_DATA(CS0_MARK,			PORT109_FN1),
--	PINMUX_DATA(CS2_MARK,			PORT110_FN1),
--	PINMUX_DATA(CS4_MARK,			PORT111_FN1),
--	PINMUX_DATA(WE1_MARK,			PORT112_FN1),
--	PINMUX_DATA(WE0_FWE_MARK,		PORT113_FN1),
--	PINMUX_DATA(RDWR_MARK,			PORT114_FN1),
--	PINMUX_DATA(RD_FSC_MARK,		PORT115_FN1),
--
--	/* Port116 */
--	PINMUX_DATA(A25_MARK,			PORT116_FN1),
--	PINMUX_DATA(MSIOF0_SS2_MARK,		PORT116_FN2),
--	PINMUX_DATA(MSIOF1_SS2_PORT116_MARK,	PORT116_FN3,	MSEL4CR_10_0),
--	PINMUX_DATA(SCIFA3_SCK_PORT116_MARK,	PORT116_FN4,	MSEL5CR_8_0),
--	PINMUX_DATA(GPO1_MARK,			PORT116_FN5),
--
--	/* Port117 */
--	PINMUX_DATA(A24_MARK,			PORT117_FN1),
--	PINMUX_DATA(MSIOF0_SS1_MARK,		PORT117_FN2),
--	PINMUX_DATA(MSIOF1_SS1_PORT117_MARK,	PORT117_FN3,	MSEL4CR_10_0),
--	PINMUX_DATA(SCIFA3_CTS_PORT117_MARK,	PORT117_FN4,	MSEL5CR_8_0),
--	PINMUX_DATA(GPO0_MARK,			PORT117_FN5),
--
--	/* Port118 */
--	PINMUX_DATA(A23_MARK,			PORT118_FN1),
--	PINMUX_DATA(MSIOF0_MCK1_MARK,		PORT118_FN2),
--	PINMUX_DATA(MSIOF1_RXD_PORT118_MARK,	PORT118_FN3,	MSEL4CR_10_0),
--	PINMUX_DATA(GPI1_MARK,			PORT118_FN5),
--	PINMUX_DATA(IRQ9_PORT118_MARK,		PORT118_FN0,	MSEL1CR_9_0),
--
--	/* Port119 */
--	PINMUX_DATA(A22_MARK,			PORT119_FN1),
--	PINMUX_DATA(MSIOF0_MCK0_MARK,		PORT119_FN2),
--	PINMUX_DATA(MSIOF1_TXD_PORT119_MARK,	PORT119_FN3,	MSEL4CR_10_0),
--	PINMUX_DATA(GPI0_MARK,			PORT119_FN5),
--	PINMUX_DATA(IRQ8_MARK,			PORT119_FN0),
--
--	/* Port120 */
--	PINMUX_DATA(A21_MARK,			PORT120_FN1),
--	PINMUX_DATA(MSIOF0_RSYNC_MARK,		PORT120_FN2),
--	PINMUX_DATA(MSIOF1_TSYNC_PORT120_MARK,	PORT120_FN3,	MSEL4CR_10_0),
--	PINMUX_DATA(IRQ7_PORT120_MARK,		PORT120_FN0,	MSEL1CR_7_0),
--
--	/* Port121 */
--	PINMUX_DATA(A20_MARK,			PORT121_FN1),
--	PINMUX_DATA(MSIOF0_RSCK_MARK,		PORT121_FN2),
--	PINMUX_DATA(MSIOF1_TSCK_PORT121_MARK,	PORT121_FN3,	MSEL4CR_10_0),
--	PINMUX_DATA(IRQ6_PORT121_MARK,		PORT121_FN0,	MSEL1CR_6_0),
--
--	/* Port122 */
--	PINMUX_DATA(A19_MARK,			PORT122_FN1),
--	PINMUX_DATA(MSIOF0_RXD_MARK,		PORT122_FN2),
--
--	/* Port123 */
--	PINMUX_DATA(A18_MARK,			PORT123_FN1),
--	PINMUX_DATA(MSIOF0_TSCK_MARK,		PORT123_FN2),
--
--	/* Port124 */
--	PINMUX_DATA(A17_MARK,			PORT124_FN1),
--	PINMUX_DATA(MSIOF0_TSYNC_MARK,		PORT124_FN2),
--
--	/* Port125 - Port141 Function */
--	PINMUX_DATA(A16_MARK,			PORT125_FN1),
--	PINMUX_DATA(A15_MARK,			PORT126_FN1),
--	PINMUX_DATA(A14_MARK,			PORT127_FN1),
--	PINMUX_DATA(A13_MARK,			PORT128_FN1),
--	PINMUX_DATA(A12_MARK,			PORT129_FN1),
--	PINMUX_DATA(A11_MARK,			PORT130_FN1),
--	PINMUX_DATA(A10_MARK,			PORT131_FN1),
--	PINMUX_DATA(A9_MARK,			PORT132_FN1),
--	PINMUX_DATA(A8_MARK,			PORT133_FN1),
--	PINMUX_DATA(A7_MARK,			PORT134_FN1),
--	PINMUX_DATA(A6_MARK,			PORT135_FN1),
--	PINMUX_DATA(A5_FCDE_MARK,		PORT136_FN1),
--	PINMUX_DATA(A4_FOE_MARK,		PORT137_FN1),
--	PINMUX_DATA(A3_MARK,			PORT138_FN1),
--	PINMUX_DATA(A2_MARK,			PORT139_FN1),
--	PINMUX_DATA(A1_MARK,			PORT140_FN1),
--	PINMUX_DATA(CKO_MARK,			PORT141_FN1),
--
--	/* Port142 - Port157 Function1 */
--	PINMUX_DATA(D15_NAF15_MARK,		PORT142_FN1),
--	PINMUX_DATA(D14_NAF14_MARK,		PORT143_FN1),
--	PINMUX_DATA(D13_NAF13_MARK,		PORT144_FN1),
--	PINMUX_DATA(D12_NAF12_MARK,		PORT145_FN1),
--	PINMUX_DATA(D11_NAF11_MARK,		PORT146_FN1),
--	PINMUX_DATA(D10_NAF10_MARK,		PORT147_FN1),
--	PINMUX_DATA(D9_NAF9_MARK,		PORT148_FN1),
--	PINMUX_DATA(D8_NAF8_MARK,		PORT149_FN1),
--	PINMUX_DATA(D7_NAF7_MARK,		PORT150_FN1),
--	PINMUX_DATA(D6_NAF6_MARK,		PORT151_FN1),
--	PINMUX_DATA(D5_NAF5_MARK,		PORT152_FN1),
--	PINMUX_DATA(D4_NAF4_MARK,		PORT153_FN1),
--	PINMUX_DATA(D3_NAF3_MARK,		PORT154_FN1),
--	PINMUX_DATA(D2_NAF2_MARK,		PORT155_FN1),
--	PINMUX_DATA(D1_NAF1_MARK,		PORT156_FN1),
--	PINMUX_DATA(D0_NAF0_MARK,		PORT157_FN1),
--
--	/* Port142 - Port149 Function3 */
--	PINMUX_DATA(MMC1_D7_PORT142_MARK,	PORT142_FN3,	MSEL4CR_15_1),
--	PINMUX_DATA(MMC1_D6_PORT143_MARK,	PORT143_FN3,	MSEL4CR_15_1),
--	PINMUX_DATA(MMC1_D5_PORT144_MARK,	PORT144_FN3,	MSEL4CR_15_1),
--	PINMUX_DATA(MMC1_D4_PORT145_MARK,	PORT145_FN3,	MSEL4CR_15_1),
--	PINMUX_DATA(MMC1_D3_PORT146_MARK,	PORT146_FN3,	MSEL4CR_15_1),
--	PINMUX_DATA(MMC1_D2_PORT147_MARK,	PORT147_FN3,	MSEL4CR_15_1),
--	PINMUX_DATA(MMC1_D1_PORT148_MARK,	PORT148_FN3,	MSEL4CR_15_1),
--	PINMUX_DATA(MMC1_D0_PORT149_MARK,	PORT149_FN3,	MSEL4CR_15_1),
--
--	/* Port158 */
--	PINMUX_DATA(D31_MARK,			PORT158_FN1),
--	PINMUX_DATA(SCIFA3_SCK_PORT158_MARK,	PORT158_FN2,	MSEL5CR_8_1),
--	PINMUX_DATA(RMII_REF125CK_MARK,		PORT158_FN3),
--	PINMUX_DATA(LCD0_D21_PORT158_MARK,	PORT158_FN4,	MSEL5CR_6_1),
--	PINMUX_DATA(IRDA_FIRSEL_MARK,		PORT158_FN5),
--	PINMUX_DATA(IDE_D15_MARK,		PORT158_FN6),
--
--	/* Port159 */
--	PINMUX_DATA(D30_MARK,			PORT159_FN1),
--	PINMUX_DATA(SCIFA3_RXD_PORT159_MARK,	PORT159_FN2,	MSEL5CR_8_1),
--	PINMUX_DATA(RMII_REF50CK_MARK,		PORT159_FN3),
--	PINMUX_DATA(LCD0_D23_PORT159_MARK,	PORT159_FN4,	MSEL5CR_6_1),
--	PINMUX_DATA(IDE_D14_MARK,		PORT159_FN6),
--
--	/* Port160 */
--	PINMUX_DATA(D29_MARK,			PORT160_FN1),
--	PINMUX_DATA(SCIFA3_TXD_PORT160_MARK,	PORT160_FN2,	MSEL5CR_8_1),
--	PINMUX_DATA(LCD0_D22_PORT160_MARK,	PORT160_FN4,	MSEL5CR_6_1),
--	PINMUX_DATA(VIO1_HD_MARK,		PORT160_FN5),
--	PINMUX_DATA(IDE_D13_MARK,		PORT160_FN6),
--
--	/* Port161 */
--	PINMUX_DATA(D28_MARK,			PORT161_FN1),
--	PINMUX_DATA(SCIFA3_RTS_PORT161_MARK,	PORT161_FN2,	MSEL5CR_8_1),
--	PINMUX_DATA(ET_RX_DV_MARK,		PORT161_FN3),
--	PINMUX_DATA(LCD0_D20_PORT161_MARK,	PORT161_FN4,	MSEL5CR_6_1),
--	PINMUX_DATA(IRDA_IN_MARK,		PORT161_FN5),
--	PINMUX_DATA(IDE_D12_MARK,		PORT161_FN6),
--
--	/* Port162 */
--	PINMUX_DATA(D27_MARK,			PORT162_FN1),
--	PINMUX_DATA(SCIFA3_CTS_PORT162_MARK,	PORT162_FN2,	MSEL5CR_8_1),
--	PINMUX_DATA(LCD0_D19_PORT162_MARK,	PORT162_FN4,	MSEL5CR_6_1),
--	PINMUX_DATA(IRDA_OUT_MARK,		PORT162_FN5),
--	PINMUX_DATA(IDE_D11_MARK,		PORT162_FN6),
--
--	/* Port163 */
--	PINMUX_DATA(D26_MARK,			PORT163_FN1),
--	PINMUX_DATA(MSIOF2_SS2_MARK,		PORT163_FN2),
--	PINMUX_DATA(ET_COL_MARK,		PORT163_FN3),
--	PINMUX_DATA(LCD0_D18_PORT163_MARK,	PORT163_FN4,	MSEL5CR_6_1),
--	PINMUX_DATA(IROUT_MARK,			PORT163_FN5),
--	PINMUX_DATA(IDE_D10_MARK,		PORT163_FN6),
--
--	/* Port164 */
--	PINMUX_DATA(D25_MARK,			PORT164_FN1),
--	PINMUX_DATA(MSIOF2_TSYNC_MARK,		PORT164_FN2),
--	PINMUX_DATA(ET_PHY_INT_MARK,		PORT164_FN3),
--	PINMUX_DATA(LCD0_RD_MARK,		PORT164_FN4),
--	PINMUX_DATA(IDE_D9_MARK,		PORT164_FN6),
--
--	/* Port165 */
--	PINMUX_DATA(D24_MARK,			PORT165_FN1),
--	PINMUX_DATA(MSIOF2_RXD_MARK,		PORT165_FN2),
--	PINMUX_DATA(LCD0_LCLK_PORT165_MARK,	PORT165_FN4,	MSEL5CR_6_1),
--	PINMUX_DATA(IDE_D8_MARK,		PORT165_FN6),
--
--	/* Port166 - Port171 Function1 */
--	PINMUX_DATA(D21_MARK,			PORT166_FN1),
--	PINMUX_DATA(D20_MARK,			PORT167_FN1),
--	PINMUX_DATA(D19_MARK,			PORT168_FN1),
--	PINMUX_DATA(D18_MARK,			PORT169_FN1),
--	PINMUX_DATA(D17_MARK,			PORT170_FN1),
--	PINMUX_DATA(D16_MARK,			PORT171_FN1),
--
--	/* Port166 - Port171 Function3 */
--	PINMUX_DATA(ET_ETXD5_MARK,		PORT166_FN3),
--	PINMUX_DATA(ET_ETXD4_MARK,		PORT167_FN3),
--	PINMUX_DATA(ET_ETXD3_MARK,		PORT168_FN3),
--	PINMUX_DATA(ET_ETXD2_MARK,		PORT169_FN3),
--	PINMUX_DATA(ET_ETXD1_MARK,		PORT170_FN3),
--	PINMUX_DATA(ET_ETXD0_MARK,		PORT171_FN3),
--
--	/* Port166 - Port171 Function6 */
--	PINMUX_DATA(IDE_D5_MARK,		PORT166_FN6),
--	PINMUX_DATA(IDE_D4_MARK,		PORT167_FN6),
--	PINMUX_DATA(IDE_D3_MARK,		PORT168_FN6),
--	PINMUX_DATA(IDE_D2_MARK,		PORT169_FN6),
--	PINMUX_DATA(IDE_D1_MARK,		PORT170_FN6),
--	PINMUX_DATA(IDE_D0_MARK,		PORT171_FN6),
--
--	/* Port167 - Port171 IRQ */
--	PINMUX_DATA(IRQ31_PORT167_MARK,		PORT167_FN0,	MSEL1CR_31_0),
--	PINMUX_DATA(IRQ27_PORT168_MARK,		PORT168_FN0,	MSEL1CR_27_0),
--	PINMUX_DATA(IRQ28_PORT169_MARK,		PORT169_FN0,	MSEL1CR_28_0),
--	PINMUX_DATA(IRQ29_PORT170_MARK,		PORT170_FN0,	MSEL1CR_29_0),
--	PINMUX_DATA(IRQ30_PORT171_MARK,		PORT171_FN0,	MSEL1CR_30_0),
--
--	/* Port172 */
--	PINMUX_DATA(D23_MARK,			PORT172_FN1),
--	PINMUX_DATA(SCIFB_RTS_PORT172_MARK,	PORT172_FN2,	MSEL5CR_17_1),
--	PINMUX_DATA(ET_ETXD7_MARK,		PORT172_FN3),
--	PINMUX_DATA(IDE_D7_MARK,		PORT172_FN6),
--	PINMUX_DATA(IRQ4_PORT172_MARK,		PORT172_FN0,	MSEL1CR_4_1),
--
--	/* Port173 */
--	PINMUX_DATA(D22_MARK,			PORT173_FN1),
--	PINMUX_DATA(SCIFB_CTS_PORT173_MARK,	PORT173_FN2,	MSEL5CR_17_1),
--	PINMUX_DATA(ET_ETXD6_MARK,		PORT173_FN3),
--	PINMUX_DATA(IDE_D6_MARK,		PORT173_FN6),
--	PINMUX_DATA(IRQ6_PORT173_MARK,		PORT173_FN0,	MSEL1CR_6_1),
--
--	/* Port174 */
--	PINMUX_DATA(A26_MARK,			PORT174_FN1),
--	PINMUX_DATA(MSIOF0_TXD_MARK,		PORT174_FN2),
--	PINMUX_DATA(ET_RX_CLK_MARK,		PORT174_FN3),
--	PINMUX_DATA(SCIFA3_RXD_PORT174_MARK,	PORT174_FN4,	MSEL5CR_8_0),
--
--	/* Port175 */
--	PINMUX_DATA(A0_MARK,			PORT175_FN1),
--	PINMUX_DATA(BS_MARK,			PORT175_FN2),
--	PINMUX_DATA(ET_WOL_MARK,		PORT175_FN3),
--	PINMUX_DATA(SCIFA3_TXD_PORT175_MARK,	PORT175_FN4,	MSEL5CR_8_0),
--
--	/* Port176 */
--	PINMUX_DATA(ET_GTX_CLK_MARK,		PORT176_FN3),
--
--	/* Port177 */
--	PINMUX_DATA(WAIT_PORT177_MARK,		PORT177_FN1,	MSEL5CR_2_0),
--	PINMUX_DATA(ET_LINK_MARK,		PORT177_FN3),
--	PINMUX_DATA(IDE_IOWR_MARK,		PORT177_FN6),
--	PINMUX_DATA(SDHI2_WP_PORT177_MARK,	PORT177_FN7,	MSEL5CR_19_1),
--
--	/* Port178 */
--	PINMUX_DATA(VIO0_D12_MARK,		PORT178_FN1),
--	PINMUX_DATA(VIO1_D4_MARK,		PORT178_FN5),
--	PINMUX_DATA(IDE_IORD_MARK,		PORT178_FN6),
--
--	/* Port179 */
--	PINMUX_DATA(VIO0_D11_MARK,		PORT179_FN1),
--	PINMUX_DATA(VIO1_D3_MARK,		PORT179_FN5),
--	PINMUX_DATA(IDE_IORDY_MARK,		PORT179_FN6),
--
--	/* Port180 */
--	PINMUX_DATA(VIO0_D10_MARK,		PORT180_FN1),
--	PINMUX_DATA(TPU0TO3_MARK,		PORT180_FN4),
--	PINMUX_DATA(VIO1_D2_MARK,		PORT180_FN5),
--	PINMUX_DATA(IDE_INT_MARK,		PORT180_FN6),
--	PINMUX_DATA(IRQ24_MARK,			PORT180_FN0),
--
--	/* Port181 */
--	PINMUX_DATA(VIO0_D9_MARK,		PORT181_FN1),
--	PINMUX_DATA(VIO1_D1_MARK,		PORT181_FN5),
--	PINMUX_DATA(IDE_RST_MARK,		PORT181_FN6),
--
--	/* Port182 */
--	PINMUX_DATA(VIO0_D8_MARK,		PORT182_FN1),
--	PINMUX_DATA(VIO1_D0_MARK,		PORT182_FN5),
--	PINMUX_DATA(IDE_DIRECTION_MARK,		PORT182_FN6),
--
--	/* Port183 */
--	PINMUX_DATA(DREQ1_MARK,			PORT183_FN1),
--	PINMUX_DATA(BBIF2_TXD2_PORT183_MARK,	PORT183_FN2,	MSEL5CR_0_1),
--	PINMUX_DATA(ET_TX_EN_MARK,		PORT183_FN3),
--
--	/* Port184 */
--	PINMUX_DATA(DACK1_MARK,			PORT184_FN1),
--	PINMUX_DATA(BBIF2_TSYNC2_PORT184_MARK,	PORT184_FN2,	MSEL5CR_0_1),
--	PINMUX_DATA(ET_TX_CLK_MARK,		PORT184_FN3),
--
--	/* Port185 - Port192 Function1 */
--	PINMUX_DATA(SCIFA1_SCK_MARK,		PORT185_FN1),
--	PINMUX_DATA(SCIFB_RTS_PORT186_MARK,	PORT186_FN1,	MSEL5CR_17_0),
--	PINMUX_DATA(SCIFB_CTS_PORT187_MARK,	PORT187_FN1,	MSEL5CR_17_0),
--	PINMUX_DATA(SCIFA0_SCK_MARK,		PORT188_FN1),
--	PINMUX_DATA(SCIFB_SCK_PORT190_MARK,	PORT190_FN1,	MSEL5CR_17_0),
--	PINMUX_DATA(SCIFB_RXD_PORT191_MARK,	PORT191_FN1,	MSEL5CR_17_0),
--	PINMUX_DATA(SCIFB_TXD_PORT192_MARK,	PORT192_FN1,	MSEL5CR_17_0),
--
--	/* Port185 - Port192 Function3 */
--	PINMUX_DATA(ET_ERXD0_MARK,		PORT185_FN3),
--	PINMUX_DATA(ET_ERXD1_MARK,		PORT186_FN3),
--	PINMUX_DATA(ET_ERXD2_MARK,		PORT187_FN3),
--	PINMUX_DATA(ET_ERXD3_MARK,		PORT188_FN3),
--	PINMUX_DATA(ET_ERXD4_MARK,		PORT189_FN3),
--	PINMUX_DATA(ET_ERXD5_MARK,		PORT190_FN3),
--	PINMUX_DATA(ET_ERXD6_MARK,		PORT191_FN3),
--	PINMUX_DATA(ET_ERXD7_MARK,		PORT192_FN3),
--
--	/* Port185 - Port192 Function6 */
--	PINMUX_DATA(STP1_IPCLK_MARK,		PORT185_FN6),
--	PINMUX_DATA(STP1_IPD0_PORT186_MARK,	PORT186_FN6,	MSEL5CR_23_0),
--	PINMUX_DATA(STP1_IPEN_PORT187_MARK,	PORT187_FN6,	MSEL5CR_23_0),
--	PINMUX_DATA(STP1_IPSYNC_MARK,		PORT188_FN6),
--	PINMUX_DATA(STP0_IPCLK_MARK,		PORT189_FN6),
--	PINMUX_DATA(STP0_IPD0_MARK,		PORT190_FN6),
--	PINMUX_DATA(STP0_IPEN_MARK,		PORT191_FN6),
--	PINMUX_DATA(STP0_IPSYNC_MARK,		PORT192_FN6),
--
--	/* Port193 */
--	PINMUX_DATA(SCIFA0_CTS_MARK,		PORT193_FN1),
--	PINMUX_DATA(RMII_CRS_DV_MARK,		PORT193_FN3),
--	PINMUX_DATA(STP1_IPEN_PORT193_MARK,	PORT193_FN6,	MSEL5CR_23_1),
--	PINMUX_DATA(LCD1_D17_MARK,		PORT193_FN7),
--
--	/* Port194 */
--	PINMUX_DATA(SCIFA0_RTS_MARK,		PORT194_FN1),
--	PINMUX_DATA(RMII_RX_ER_MARK,		PORT194_FN3),
--	PINMUX_DATA(STP1_IPD0_PORT194_MARK,	PORT194_FN6,	MSEL5CR_23_1),
--	PINMUX_DATA(LCD1_D16_MARK,		PORT194_FN7),
--
--	/* Port195 */
--	PINMUX_DATA(SCIFA1_RXD_MARK,		PORT195_FN1),
--	PINMUX_DATA(RMII_RXD0_MARK,		PORT195_FN3),
--	PINMUX_DATA(STP1_IPD3_MARK,		PORT195_FN6),
--	PINMUX_DATA(LCD1_D15_MARK,		PORT195_FN7),
--
--	/* Port196 */
--	PINMUX_DATA(SCIFA1_TXD_MARK,		PORT196_FN1),
--	PINMUX_DATA(RMII_RXD1_MARK,		PORT196_FN3),
--	PINMUX_DATA(STP1_IPD2_MARK,		PORT196_FN6),
--	PINMUX_DATA(LCD1_D14_MARK,		PORT196_FN7),
--
--	/* Port197 */
--	PINMUX_DATA(SCIFA0_RXD_MARK,		PORT197_FN1),
--	PINMUX_DATA(VIO1_CLK_MARK,		PORT197_FN5),
--	PINMUX_DATA(STP1_IPD5_MARK,		PORT197_FN6),
--	PINMUX_DATA(LCD1_D19_MARK,		PORT197_FN7),
--
--	/* Port198 */
--	PINMUX_DATA(SCIFA0_TXD_MARK,		PORT198_FN1),
--	PINMUX_DATA(VIO1_VD_MARK,		PORT198_FN5),
--	PINMUX_DATA(STP1_IPD4_MARK,		PORT198_FN6),
--	PINMUX_DATA(LCD1_D18_MARK,		PORT198_FN7),
--
--	/* Port199 */
--	PINMUX_DATA(MEMC_NWE_MARK,		PORT199_FN1),
--	PINMUX_DATA(SCIFA2_SCK_PORT199_MARK,	PORT199_FN2,	MSEL5CR_7_1),
--	PINMUX_DATA(RMII_TX_EN_MARK,		PORT199_FN3),
--	PINMUX_DATA(SIM_D_PORT199_MARK,		PORT199_FN4,	MSEL5CR_21_1),
--	PINMUX_DATA(STP1_IPD1_MARK,		PORT199_FN6),
--	PINMUX_DATA(LCD1_D13_MARK,		PORT199_FN7),
--
--	/* Port200 */
--	PINMUX_DATA(MEMC_NOE_MARK,		PORT200_FN1),
--	PINMUX_DATA(SCIFA2_RXD_MARK,		PORT200_FN2),
--	PINMUX_DATA(RMII_TXD0_MARK,		PORT200_FN3),
--	PINMUX_DATA(STP0_IPD7_MARK,		PORT200_FN6),
--	PINMUX_DATA(LCD1_D12_MARK,		PORT200_FN7),
--
--	/* Port201 */
--	PINMUX_DATA(MEMC_WAIT_MARK,		PORT201_FN1,	MSEL4CR_6_0),
--	PINMUX_DATA(MEMC_DREQ1_MARK,		PORT201_FN1,	MSEL4CR_6_1),
--
--	PINMUX_DATA(SCIFA2_TXD_MARK,		PORT201_FN2),
--	PINMUX_DATA(RMII_TXD1_MARK,		PORT201_FN3),
--	PINMUX_DATA(STP0_IPD6_MARK,		PORT201_FN6),
--	PINMUX_DATA(LCD1_D11_MARK,		PORT201_FN7),
--
--	/* Port202 */
--	PINMUX_DATA(MEMC_BUSCLK_MARK,		PORT202_FN1,	MSEL4CR_6_0),
--	PINMUX_DATA(MEMC_A0_MARK,		PORT202_FN1,	MSEL4CR_6_1),
--
--	PINMUX_DATA(MSIOF1_SS2_PORT202_MARK,	PORT202_FN2,	MSEL4CR_10_1),
--	PINMUX_DATA(RMII_MDC_MARK,		PORT202_FN3),
--	PINMUX_DATA(TPU0TO2_PORT202_MARK,	PORT202_FN4,	MSEL5CR_25_1),
--	PINMUX_DATA(IDE_CS0_MARK,		PORT202_FN6),
--	PINMUX_DATA(SDHI2_CD_PORT202_MARK,	PORT202_FN7,	MSEL5CR_19_1),
--	PINMUX_DATA(IRQ21_MARK,			PORT202_FN0),
--
--	/* Port203 - Port208 Function1 */
--	PINMUX_DATA(SDHI2_CLK_MARK,		PORT203_FN1),
--	PINMUX_DATA(SDHI2_CMD_MARK,		PORT204_FN1),
--	PINMUX_DATA(SDHI2_D0_MARK,		PORT205_FN1),
--	PINMUX_DATA(SDHI2_D1_MARK,		PORT206_FN1),
--	PINMUX_DATA(SDHI2_D2_MARK,		PORT207_FN1),
--	PINMUX_DATA(SDHI2_D3_MARK,		PORT208_FN1),
--
--	/* Port203 - Port208 Function3 */
--	PINMUX_DATA(ET_TX_ER_MARK,		PORT203_FN3),
--	PINMUX_DATA(ET_RX_ER_MARK,		PORT204_FN3),
--	PINMUX_DATA(ET_CRS_MARK,		PORT205_FN3),
--	PINMUX_DATA(ET_MDC_MARK,		PORT206_FN3),
--	PINMUX_DATA(ET_MDIO_MARK,		PORT207_FN3),
--	PINMUX_DATA(RMII_MDIO_MARK,		PORT208_FN3),
--
--	/* Port203 - Port208 Function6 */
--	PINMUX_DATA(IDE_A2_MARK,		PORT203_FN6),
--	PINMUX_DATA(IDE_A1_MARK,		PORT204_FN6),
--	PINMUX_DATA(IDE_A0_MARK,		PORT205_FN6),
--	PINMUX_DATA(IDE_IODACK_MARK,		PORT206_FN6),
--	PINMUX_DATA(IDE_IODREQ_MARK,		PORT207_FN6),
--	PINMUX_DATA(IDE_CS1_MARK,		PORT208_FN6),
--
--	/* Port203 - Port208 Function7 */
--	PINMUX_DATA(SCIFA4_TXD_PORT203_MARK, PORT203_FN7, MSEL5CR_12_0,
--			MSEL5CR_11_1),
--	PINMUX_DATA(SCIFA4_RXD_PORT204_MARK, PORT204_FN7, MSEL5CR_12_0,
--			MSEL5CR_11_1),
--	PINMUX_DATA(SCIFA4_SCK_PORT205_MARK, PORT205_FN7, MSEL5CR_10_1),
--	PINMUX_DATA(SCIFA5_SCK_PORT206_MARK, PORT206_FN7, MSEL5CR_13_1),
--	PINMUX_DATA(SCIFA5_RXD_PORT207_MARK, PORT207_FN7, MSEL5CR_15_0,
--			MSEL5CR_14_1),
--	PINMUX_DATA(SCIFA5_TXD_PORT208_MARK, PORT208_FN7, MSEL5CR_15_0,
--			MSEL5CR_14_1),
--
--	/* Port209 */
--	PINMUX_DATA(VBUS_MARK, PORT209_FN1),
--	PINMUX_DATA(IRQ7_PORT209_MARK, PORT209_FN0, MSEL1CR_7_1),
--
--	/* Port210 */
--	PINMUX_DATA(IRQ9_PORT210_MARK, PORT210_FN0, MSEL1CR_9_1),
--
--	/* Port211 */
--	PINMUX_DATA(IRQ16_PORT211_MARK, PORT211_FN0, MSEL1CR_16_1),
--
--	/* LCDC select */
--	PINMUX_DATA(LCDC0_SELECT_MARK, MSEL3CR_6_0),
--	PINMUX_DATA(LCDC1_SELECT_MARK, MSEL3CR_6_1),
--
--	/* SDENC */
--	PINMUX_DATA(SDENC_CPG_MARK,	MSEL4CR_19_0),
--	PINMUX_DATA(SDENC_DV_CLKI_MARK,	MSEL4CR_19_1),
--
--	/* SYSC */
--	PINMUX_DATA(RESETP_PULLUP_MARK,	MSEL4CR_4_0),
--	PINMUX_DATA(RESETP_PLAIN_MARK, MSEL4CR_4_1),
--
--	/* DEBUG */
--	PINMUX_DATA(EDEBGREQ_PULLDOWN_MARK, MSEL4CR_1_0),
--	PINMUX_DATA(EDEBGREQ_PULLUP_MARK, MSEL4CR_1_1),
--
--	PINMUX_DATA(TRACEAUD_FROM_VIO_MARK,	MSEL5CR_30_0, MSEL5CR_29_0),
--	PINMUX_DATA(TRACEAUD_FROM_LCDC0_MARK, MSEL5CR_30_0, MSEL5CR_29_1),
--	PINMUX_DATA(TRACEAUD_FROM_MEMC_MARK, MSEL5CR_30_1, MSEL5CR_29_0),
--};
--
--static struct pinmux_gpio pinmux_gpios[] = {
--
--	/* PORT */
--	GPIO_PORT_ALL(),
--
--	/* IRQ */
--	GPIO_FN(IRQ0_PORT2),	GPIO_FN(IRQ0_PORT13),
--	GPIO_FN(IRQ1),
--	GPIO_FN(IRQ2_PORT11),	GPIO_FN(IRQ2_PORT12),
--	GPIO_FN(IRQ3_PORT10),	GPIO_FN(IRQ3_PORT14),
--	GPIO_FN(IRQ4_PORT15),	GPIO_FN(IRQ4_PORT172),
--	GPIO_FN(IRQ5_PORT0),	GPIO_FN(IRQ5_PORT1),
--	GPIO_FN(IRQ6_PORT121),	GPIO_FN(IRQ6_PORT173),
--	GPIO_FN(IRQ7_PORT120),	GPIO_FN(IRQ7_PORT209),
--	GPIO_FN(IRQ8),
--	GPIO_FN(IRQ9_PORT118),	GPIO_FN(IRQ9_PORT210),
--	GPIO_FN(IRQ10),
--	GPIO_FN(IRQ11),
--	GPIO_FN(IRQ12_PORT42),	GPIO_FN(IRQ12_PORT97),
--	GPIO_FN(IRQ13_PORT64),	GPIO_FN(IRQ13_PORT98),
--	GPIO_FN(IRQ14_PORT63),	GPIO_FN(IRQ14_PORT99),
--	GPIO_FN(IRQ15_PORT62),	GPIO_FN(IRQ15_PORT100),
--	GPIO_FN(IRQ16_PORT68),	GPIO_FN(IRQ16_PORT211),
--	GPIO_FN(IRQ17),
--	GPIO_FN(IRQ18),
--	GPIO_FN(IRQ19),
--	GPIO_FN(IRQ20),
--	GPIO_FN(IRQ21),
--	GPIO_FN(IRQ22),
--	GPIO_FN(IRQ23),
--	GPIO_FN(IRQ24),
--	GPIO_FN(IRQ25),
--	GPIO_FN(IRQ26_PORT58),	GPIO_FN(IRQ26_PORT81),
--	GPIO_FN(IRQ27_PORT57),	GPIO_FN(IRQ27_PORT168),
--	GPIO_FN(IRQ28_PORT56),	GPIO_FN(IRQ28_PORT169),
--	GPIO_FN(IRQ29_PORT50),	GPIO_FN(IRQ29_PORT170),
--	GPIO_FN(IRQ30_PORT49),	GPIO_FN(IRQ30_PORT171),
--	GPIO_FN(IRQ31_PORT41),	GPIO_FN(IRQ31_PORT167),
--
--	/* Function */
--
--	/* DBGT */
--	GPIO_FN(DBGMDT2),	GPIO_FN(DBGMDT1),	GPIO_FN(DBGMDT0),
--	GPIO_FN(DBGMD10),	GPIO_FN(DBGMD11),	GPIO_FN(DBGMD20),
--	GPIO_FN(DBGMD21),
--
--	/* FSI */
--	GPIO_FN(FSIAISLD_PORT0),	/* FSIAISLD Port 0/5 */
--	GPIO_FN(FSIAISLD_PORT5),
--	GPIO_FN(FSIASPDIF_PORT9),	/* FSIASPDIF Port 9/18 */
--	GPIO_FN(FSIASPDIF_PORT18),
--	GPIO_FN(FSIAOSLD1),	GPIO_FN(FSIAOSLD2),	GPIO_FN(FSIAOLR),
--	GPIO_FN(FSIAOBT),	GPIO_FN(FSIAOSLD),	GPIO_FN(FSIAOMC),
--	GPIO_FN(FSIACK),	GPIO_FN(FSIAILR),	GPIO_FN(FSIAIBT),
--
--	/* FMSI */
--	GPIO_FN(FMSISLD_PORT1), /* FMSISLD Port 1/6 */
--	GPIO_FN(FMSISLD_PORT6),
--	GPIO_FN(FMSIILR),	GPIO_FN(FMSIIBT),	GPIO_FN(FMSIOLR),
--	GPIO_FN(FMSIOBT),	GPIO_FN(FMSICK),	GPIO_FN(FMSOILR),
--	GPIO_FN(FMSOIBT),	GPIO_FN(FMSOOLR),	GPIO_FN(FMSOOBT),
--	GPIO_FN(FMSOSLD),	GPIO_FN(FMSOCK),
--
--	/* SCIFA0 */
--	GPIO_FN(SCIFA0_SCK),	GPIO_FN(SCIFA0_CTS),	GPIO_FN(SCIFA0_RTS),
--	GPIO_FN(SCIFA0_RXD),	GPIO_FN(SCIFA0_TXD),
--
--	/* SCIFA1 */
--	GPIO_FN(SCIFA1_CTS),	GPIO_FN(SCIFA1_SCK),
--	GPIO_FN(SCIFA1_RXD),	GPIO_FN(SCIFA1_TXD),	GPIO_FN(SCIFA1_RTS),
--
--	/* SCIFA2 */
--	GPIO_FN(SCIFA2_SCK_PORT22), /* SCIFA2_SCK Port 22/199 */
--	GPIO_FN(SCIFA2_SCK_PORT199),
--	GPIO_FN(SCIFA2_RXD),	GPIO_FN(SCIFA2_TXD),
--	GPIO_FN(SCIFA2_CTS),	GPIO_FN(SCIFA2_RTS),
--
--	/* SCIFA3 */
--	GPIO_FN(SCIFA3_RTS_PORT105), /* MSEL5CR_8_0 */
--	GPIO_FN(SCIFA3_SCK_PORT116),
--	GPIO_FN(SCIFA3_CTS_PORT117),
--	GPIO_FN(SCIFA3_RXD_PORT174),
--	GPIO_FN(SCIFA3_TXD_PORT175),
--
--	GPIO_FN(SCIFA3_RTS_PORT161), /* MSEL5CR_8_1 */
--	GPIO_FN(SCIFA3_SCK_PORT158),
--	GPIO_FN(SCIFA3_CTS_PORT162),
--	GPIO_FN(SCIFA3_RXD_PORT159),
--	GPIO_FN(SCIFA3_TXD_PORT160),
--
--	/* SCIFA4 */
--	GPIO_FN(SCIFA4_RXD_PORT12), /* MSEL5CR[12:11] = 00 */
--	GPIO_FN(SCIFA4_TXD_PORT13),
--
--	GPIO_FN(SCIFA4_RXD_PORT204), /* MSEL5CR[12:11] = 01 */
--	GPIO_FN(SCIFA4_TXD_PORT203),
--
--	GPIO_FN(SCIFA4_RXD_PORT94), /* MSEL5CR[12:11] = 10 */
--	GPIO_FN(SCIFA4_TXD_PORT93),
--
--	GPIO_FN(SCIFA4_SCK_PORT21), /* SCIFA4_SCK Port 21/205 */
--	GPIO_FN(SCIFA4_SCK_PORT205),
--
--	/* SCIFA5 */
--	GPIO_FN(SCIFA5_TXD_PORT20), /* MSEL5CR[15:14] = 00 */
--	GPIO_FN(SCIFA5_RXD_PORT10),
--
--	GPIO_FN(SCIFA5_RXD_PORT207), /* MSEL5CR[15:14] = 01 */
--	GPIO_FN(SCIFA5_TXD_PORT208),
--
--	GPIO_FN(SCIFA5_TXD_PORT91), /* MSEL5CR[15:14] = 10 */
--	GPIO_FN(SCIFA5_RXD_PORT92),
--
--	GPIO_FN(SCIFA5_SCK_PORT23), /* SCIFA5_SCK Port 23/206 */
--	GPIO_FN(SCIFA5_SCK_PORT206),
--
--	/* SCIFA6 */
--	GPIO_FN(SCIFA6_SCK),	GPIO_FN(SCIFA6_RXD),	GPIO_FN(SCIFA6_TXD),
--
--	/* SCIFA7 */
--	GPIO_FN(SCIFA7_TXD),	GPIO_FN(SCIFA7_RXD),
--
--	/* SCIFAB */
--	GPIO_FN(SCIFB_SCK_PORT190), /* MSEL5CR_17_0 */
--	GPIO_FN(SCIFB_RXD_PORT191),
--	GPIO_FN(SCIFB_TXD_PORT192),
--	GPIO_FN(SCIFB_RTS_PORT186),
--	GPIO_FN(SCIFB_CTS_PORT187),
--
--	GPIO_FN(SCIFB_SCK_PORT2), /* MSEL5CR_17_1 */
--	GPIO_FN(SCIFB_RXD_PORT3),
--	GPIO_FN(SCIFB_TXD_PORT4),
--	GPIO_FN(SCIFB_RTS_PORT172),
--	GPIO_FN(SCIFB_CTS_PORT173),
--
--	/* LCD0 */
--	GPIO_FN(LCD0_D0),	GPIO_FN(LCD0_D1),	GPIO_FN(LCD0_D2),
--	GPIO_FN(LCD0_D3),	GPIO_FN(LCD0_D4),	GPIO_FN(LCD0_D5),
--	GPIO_FN(LCD0_D6),	GPIO_FN(LCD0_D7),	GPIO_FN(LCD0_D8),
--	GPIO_FN(LCD0_D9),	GPIO_FN(LCD0_D10),	GPIO_FN(LCD0_D11),
--	GPIO_FN(LCD0_D12),	GPIO_FN(LCD0_D13),	GPIO_FN(LCD0_D14),
--	GPIO_FN(LCD0_D15),	GPIO_FN(LCD0_D16),	GPIO_FN(LCD0_D17),
--	GPIO_FN(LCD0_DON),	GPIO_FN(LCD0_VCPWC),	GPIO_FN(LCD0_VEPWC),
--	GPIO_FN(LCD0_DCK),	GPIO_FN(LCD0_VSYN),
--	GPIO_FN(LCD0_HSYN),	GPIO_FN(LCD0_DISP),
--	GPIO_FN(LCD0_WR),	GPIO_FN(LCD0_RD),
--	GPIO_FN(LCD0_CS),	GPIO_FN(LCD0_RS),
--
--	GPIO_FN(LCD0_D18_PORT163),	GPIO_FN(LCD0_D19_PORT162),
--	GPIO_FN(LCD0_D20_PORT161),	GPIO_FN(LCD0_D21_PORT158),
--	GPIO_FN(LCD0_D22_PORT160),	GPIO_FN(LCD0_D23_PORT159),
--	GPIO_FN(LCD0_LCLK_PORT165),	/* MSEL5CR_6_1 */
--
--	GPIO_FN(LCD0_D18_PORT40),	GPIO_FN(LCD0_D19_PORT4),
--	GPIO_FN(LCD0_D20_PORT3),	GPIO_FN(LCD0_D21_PORT2),
--	GPIO_FN(LCD0_D22_PORT0),	GPIO_FN(LCD0_D23_PORT1),
--	GPIO_FN(LCD0_LCLK_PORT102),	/* MSEL5CR_6_0 */
--
--	/* LCD1 */
--	GPIO_FN(LCD1_D0),	GPIO_FN(LCD1_D1),	GPIO_FN(LCD1_D2),
--	GPIO_FN(LCD1_D3),	GPIO_FN(LCD1_D4),	GPIO_FN(LCD1_D5),
--	GPIO_FN(LCD1_D6),	GPIO_FN(LCD1_D7),	GPIO_FN(LCD1_D8),
--	GPIO_FN(LCD1_D9),	GPIO_FN(LCD1_D10),	GPIO_FN(LCD1_D11),
--	GPIO_FN(LCD1_D12),	GPIO_FN(LCD1_D13),	GPIO_FN(LCD1_D14),
--	GPIO_FN(LCD1_D15),	GPIO_FN(LCD1_D16),	GPIO_FN(LCD1_D17),
--	GPIO_FN(LCD1_D18),	GPIO_FN(LCD1_D19),	GPIO_FN(LCD1_D20),
--	GPIO_FN(LCD1_D21),	GPIO_FN(LCD1_D22),	GPIO_FN(LCD1_D23),
--	GPIO_FN(LCD1_RS),	GPIO_FN(LCD1_RD),	GPIO_FN(LCD1_CS),
--	GPIO_FN(LCD1_WR),	GPIO_FN(LCD1_DCK),	GPIO_FN(LCD1_DON),
--	GPIO_FN(LCD1_VCPWC),	GPIO_FN(LCD1_LCLK),	GPIO_FN(LCD1_HSYN),
--	GPIO_FN(LCD1_VSYN),	GPIO_FN(LCD1_VEPWC),	GPIO_FN(LCD1_DISP),
--
--	/* RSPI */
--	GPIO_FN(RSPI_SSL0_A),	GPIO_FN(RSPI_SSL1_A),	GPIO_FN(RSPI_SSL2_A),
--	GPIO_FN(RSPI_SSL3_A),	GPIO_FN(RSPI_CK_A),	GPIO_FN(RSPI_MOSI_A),
--	GPIO_FN(RSPI_MISO_A),
--
--	/* VIO CKO */
--	GPIO_FN(VIO_CKO1),
--	GPIO_FN(VIO_CKO2),
--	GPIO_FN(VIO_CKO_1),
--	GPIO_FN(VIO_CKO),
--
--	/* VIO0 */
--	GPIO_FN(VIO0_D0),	GPIO_FN(VIO0_D1),	GPIO_FN(VIO0_D2),
--	GPIO_FN(VIO0_D3),	GPIO_FN(VIO0_D4),	GPIO_FN(VIO0_D5),
--	GPIO_FN(VIO0_D6),	GPIO_FN(VIO0_D7),	GPIO_FN(VIO0_D8),
--	GPIO_FN(VIO0_D9),	GPIO_FN(VIO0_D10),	GPIO_FN(VIO0_D11),
--	GPIO_FN(VIO0_D12),	GPIO_FN(VIO0_VD),	GPIO_FN(VIO0_HD),
--	GPIO_FN(VIO0_CLK),	GPIO_FN(VIO0_FIELD),
--
--	GPIO_FN(VIO0_D13_PORT26), /* MSEL5CR_27_0 */
--	GPIO_FN(VIO0_D14_PORT25),
--	GPIO_FN(VIO0_D15_PORT24),
--
--	GPIO_FN(VIO0_D13_PORT22), /* MSEL5CR_27_1 */
--	GPIO_FN(VIO0_D14_PORT95),
--	GPIO_FN(VIO0_D15_PORT96),
--
--	/* VIO1 */
--	GPIO_FN(VIO1_D0),	GPIO_FN(VIO1_D1),	GPIO_FN(VIO1_D2),
--	GPIO_FN(VIO1_D3),	GPIO_FN(VIO1_D4),	GPIO_FN(VIO1_D5),
--	GPIO_FN(VIO1_D6),	GPIO_FN(VIO1_D7),	GPIO_FN(VIO1_VD),
--	GPIO_FN(VIO1_HD),	GPIO_FN(VIO1_CLK),	GPIO_FN(VIO1_FIELD),
--
--	/* TPU0 */
--	GPIO_FN(TPU0TO0),	GPIO_FN(TPU0TO1),	GPIO_FN(TPU0TO3),
--	GPIO_FN(TPU0TO2_PORT66), /* TPU0TO2 Port 66/202 */
--	GPIO_FN(TPU0TO2_PORT202),
--
--	/* SSP1 0 */
--	GPIO_FN(STP0_IPD0),	GPIO_FN(STP0_IPD1),	GPIO_FN(STP0_IPD2),
--	GPIO_FN(STP0_IPD3),	GPIO_FN(STP0_IPD4),	GPIO_FN(STP0_IPD5),
--	GPIO_FN(STP0_IPD6),	GPIO_FN(STP0_IPD7),	GPIO_FN(STP0_IPEN),
--	GPIO_FN(STP0_IPCLK),	GPIO_FN(STP0_IPSYNC),
--
--	/* SSP1 1 */
--	GPIO_FN(STP1_IPD1),	GPIO_FN(STP1_IPD2),	GPIO_FN(STP1_IPD3),
--	GPIO_FN(STP1_IPD4),	GPIO_FN(STP1_IPD5),	GPIO_FN(STP1_IPD6),
--	GPIO_FN(STP1_IPD7),	GPIO_FN(STP1_IPCLK),	GPIO_FN(STP1_IPSYNC),
--
--	GPIO_FN(STP1_IPD0_PORT186), /* MSEL5CR_23_0 */
--	GPIO_FN(STP1_IPEN_PORT187),
--
--	GPIO_FN(STP1_IPD0_PORT194), /* MSEL5CR_23_1 */
--	GPIO_FN(STP1_IPEN_PORT193),
--
--	/* SIM */
--	GPIO_FN(SIM_RST),	GPIO_FN(SIM_CLK),
--	GPIO_FN(SIM_D_PORT22), /* SIM_D  Port 22/199 */
--	GPIO_FN(SIM_D_PORT199),
--
--	/* SDHI0 */
--	GPIO_FN(SDHI0_D0),	GPIO_FN(SDHI0_D1),	GPIO_FN(SDHI0_D2),
--	GPIO_FN(SDHI0_D3),	GPIO_FN(SDHI0_CD),	GPIO_FN(SDHI0_WP),
--	GPIO_FN(SDHI0_CMD),	GPIO_FN(SDHI0_CLK),
--
--	/* SDHI1 */
--	GPIO_FN(SDHI1_D0),	GPIO_FN(SDHI1_D1),	GPIO_FN(SDHI1_D2),
--	GPIO_FN(SDHI1_D3),	GPIO_FN(SDHI1_CD),	GPIO_FN(SDHI1_WP),
--	GPIO_FN(SDHI1_CMD),	GPIO_FN(SDHI1_CLK),
--
--	/* SDHI2 */
--	GPIO_FN(SDHI2_D0),	GPIO_FN(SDHI2_D1),	GPIO_FN(SDHI2_D2),
--	GPIO_FN(SDHI2_D3),	GPIO_FN(SDHI2_CLK),	GPIO_FN(SDHI2_CMD),
--
--	GPIO_FN(SDHI2_CD_PORT24), /* MSEL5CR_19_0 */
--	GPIO_FN(SDHI2_WP_PORT25),
--
--	GPIO_FN(SDHI2_WP_PORT177), /* MSEL5CR_19_1 */
--	GPIO_FN(SDHI2_CD_PORT202),
--
--	/* MSIOF2 */
--	GPIO_FN(MSIOF2_TXD),	GPIO_FN(MSIOF2_RXD),	GPIO_FN(MSIOF2_TSCK),
--	GPIO_FN(MSIOF2_SS2),	GPIO_FN(MSIOF2_TSYNC),	GPIO_FN(MSIOF2_SS1),
--	GPIO_FN(MSIOF2_MCK1),	GPIO_FN(MSIOF2_MCK0),	GPIO_FN(MSIOF2_RSYNC),
--	GPIO_FN(MSIOF2_RSCK),
--
--	/* KEYSC */
--	GPIO_FN(KEYIN4),	GPIO_FN(KEYIN5),
--	GPIO_FN(KEYIN6),	GPIO_FN(KEYIN7),
--	GPIO_FN(KEYOUT0),	GPIO_FN(KEYOUT1),	GPIO_FN(KEYOUT2),
--	GPIO_FN(KEYOUT3),	GPIO_FN(KEYOUT4),	GPIO_FN(KEYOUT5),
--	GPIO_FN(KEYOUT6),	GPIO_FN(KEYOUT7),
--
--	GPIO_FN(KEYIN0_PORT43), /* MSEL4CR_18_0 */
--	GPIO_FN(KEYIN1_PORT44),
--	GPIO_FN(KEYIN2_PORT45),
--	GPIO_FN(KEYIN3_PORT46),
--
--	GPIO_FN(KEYIN0_PORT58), /* MSEL4CR_18_1 */
--	GPIO_FN(KEYIN1_PORT57),
--	GPIO_FN(KEYIN2_PORT56),
--	GPIO_FN(KEYIN3_PORT55),
--
--	/* VOU */
--	GPIO_FN(DV_D0),		GPIO_FN(DV_D1),		GPIO_FN(DV_D2),
--	GPIO_FN(DV_D3),		GPIO_FN(DV_D4),		GPIO_FN(DV_D5),
--	GPIO_FN(DV_D6),		GPIO_FN(DV_D7),		GPIO_FN(DV_D8),
--	GPIO_FN(DV_D9),		GPIO_FN(DV_D10),	GPIO_FN(DV_D11),
--	GPIO_FN(DV_D12),	GPIO_FN(DV_D13),	GPIO_FN(DV_D14),
--	GPIO_FN(DV_D15),	GPIO_FN(DV_CLK),
--	GPIO_FN(DV_VSYNC),	GPIO_FN(DV_HSYNC),
--
--	/* MEMC */
--	GPIO_FN(MEMC_AD0),	GPIO_FN(MEMC_AD1),	GPIO_FN(MEMC_AD2),
--	GPIO_FN(MEMC_AD3),	GPIO_FN(MEMC_AD4),	GPIO_FN(MEMC_AD5),
--	GPIO_FN(MEMC_AD6),	GPIO_FN(MEMC_AD7),	GPIO_FN(MEMC_AD8),
--	GPIO_FN(MEMC_AD9),	GPIO_FN(MEMC_AD10),	GPIO_FN(MEMC_AD11),
--	GPIO_FN(MEMC_AD12),	GPIO_FN(MEMC_AD13),	GPIO_FN(MEMC_AD14),
--	GPIO_FN(MEMC_AD15),	GPIO_FN(MEMC_CS0),	GPIO_FN(MEMC_INT),
--	GPIO_FN(MEMC_NWE),	GPIO_FN(MEMC_NOE),	GPIO_FN(MEMC_CS1),
--	GPIO_FN(MEMC_A1),	GPIO_FN(MEMC_ADV),	GPIO_FN(MEMC_DREQ0),
--	GPIO_FN(MEMC_WAIT),	GPIO_FN(MEMC_DREQ1),	GPIO_FN(MEMC_BUSCLK),
--	GPIO_FN(MEMC_A0),
--
--	/* MMC */
--	GPIO_FN(MMC0_D0_PORT68),	GPIO_FN(MMC0_D1_PORT69),
--	GPIO_FN(MMC0_D2_PORT70),	GPIO_FN(MMC0_D3_PORT71),
--	GPIO_FN(MMC0_D4_PORT72),	GPIO_FN(MMC0_D5_PORT73),
--	GPIO_FN(MMC0_D6_PORT74),	GPIO_FN(MMC0_D7_PORT75),
--	GPIO_FN(MMC0_CLK_PORT66),
--	GPIO_FN(MMC0_CMD_PORT67),	/* MSEL4CR_15_0 */
--
--	GPIO_FN(MMC1_D0_PORT149),	GPIO_FN(MMC1_D1_PORT148),
--	GPIO_FN(MMC1_D2_PORT147),	GPIO_FN(MMC1_D3_PORT146),
--	GPIO_FN(MMC1_D4_PORT145),	GPIO_FN(MMC1_D5_PORT144),
--	GPIO_FN(MMC1_D6_PORT143),	GPIO_FN(MMC1_D7_PORT142),
--	GPIO_FN(MMC1_CLK_PORT103),
--	GPIO_FN(MMC1_CMD_PORT104),	/* MSEL4CR_15_1 */
--
--	/* MSIOF0 */
--	GPIO_FN(MSIOF0_SS1),	GPIO_FN(MSIOF0_SS2),	GPIO_FN(MSIOF0_RXD),
--	GPIO_FN(MSIOF0_TXD),	GPIO_FN(MSIOF0_MCK0),	GPIO_FN(MSIOF0_MCK1),
--	GPIO_FN(MSIOF0_RSYNC),	GPIO_FN(MSIOF0_RSCK),	GPIO_FN(MSIOF0_TSCK),
--	GPIO_FN(MSIOF0_TSYNC),
--
--	/* MSIOF1 */
--	GPIO_FN(MSIOF1_RSCK),	GPIO_FN(MSIOF1_RSYNC),
--	GPIO_FN(MSIOF1_MCK0),	GPIO_FN(MSIOF1_MCK1),
--
--	GPIO_FN(MSIOF1_SS2_PORT116),	GPIO_FN(MSIOF1_SS1_PORT117),
--	GPIO_FN(MSIOF1_RXD_PORT118),	GPIO_FN(MSIOF1_TXD_PORT119),
--	GPIO_FN(MSIOF1_TSYNC_PORT120),
--	GPIO_FN(MSIOF1_TSCK_PORT121),	/* MSEL4CR_10_0 */
--
--	GPIO_FN(MSIOF1_SS1_PORT67),	GPIO_FN(MSIOF1_TSCK_PORT72),
--	GPIO_FN(MSIOF1_TSYNC_PORT73),	GPIO_FN(MSIOF1_TXD_PORT74),
--	GPIO_FN(MSIOF1_RXD_PORT75),
--	GPIO_FN(MSIOF1_SS2_PORT202),	/* MSEL4CR_10_1 */
--
--	/* GPIO */
--	GPIO_FN(GPO0),	GPIO_FN(GPI0),
--	GPIO_FN(GPO1),	GPIO_FN(GPI1),
--
--	/* USB0 */
--	GPIO_FN(USB0_OCI),	GPIO_FN(USB0_PPON),	GPIO_FN(VBUS),
--
--	/* USB1 */
--	GPIO_FN(USB1_OCI),	GPIO_FN(USB1_PPON),
--
--	/* BBIF1 */
--	GPIO_FN(BBIF1_RXD),	GPIO_FN(BBIF1_TXD),	GPIO_FN(BBIF1_TSYNC),
--	GPIO_FN(BBIF1_TSCK),	GPIO_FN(BBIF1_RSCK),	GPIO_FN(BBIF1_RSYNC),
--	GPIO_FN(BBIF1_FLOW),	GPIO_FN(BBIF1_RX_FLOW_N),
--
--	/* BBIF2 */
--	GPIO_FN(BBIF2_TXD2_PORT5), /* MSEL5CR_0_0 */
--	GPIO_FN(BBIF2_RXD2_PORT60),
--	GPIO_FN(BBIF2_TSYNC2_PORT6),
--	GPIO_FN(BBIF2_TSCK2_PORT59),
--
--	GPIO_FN(BBIF2_RXD2_PORT90), /* MSEL5CR_0_1 */
--	GPIO_FN(BBIF2_TXD2_PORT183),
--	GPIO_FN(BBIF2_TSCK2_PORT89),
--	GPIO_FN(BBIF2_TSYNC2_PORT184),
--
--	/* BSC / FLCTL / PCMCIA */
--	GPIO_FN(CS0),	GPIO_FN(CS2),	GPIO_FN(CS4),
--	GPIO_FN(CS5B),	GPIO_FN(CS6A),
--	GPIO_FN(CS5A_PORT105), /* CS5A PORT 19/105 */
--	GPIO_FN(CS5A_PORT19),
--	GPIO_FN(IOIS16), /* ? */
--
--	GPIO_FN(A0),	GPIO_FN(A1),	GPIO_FN(A2),	GPIO_FN(A3),
--	GPIO_FN(A4_FOE),	GPIO_FN(A5_FCDE),	/* share with FLCTL */
--	GPIO_FN(A6),	GPIO_FN(A7),	GPIO_FN(A8),	GPIO_FN(A9),
--	GPIO_FN(A10),	GPIO_FN(A11),	GPIO_FN(A12),	GPIO_FN(A13),
--	GPIO_FN(A14),	GPIO_FN(A15),	GPIO_FN(A16),	GPIO_FN(A17),
--	GPIO_FN(A18),	GPIO_FN(A19),	GPIO_FN(A20),	GPIO_FN(A21),
--	GPIO_FN(A22),	GPIO_FN(A23),	GPIO_FN(A24),	GPIO_FN(A25),
--	GPIO_FN(A26),
--
--	GPIO_FN(D0_NAF0),	GPIO_FN(D1_NAF1),	/* share with FLCTL */
--	GPIO_FN(D2_NAF2),	GPIO_FN(D3_NAF3),	/* share with FLCTL */
--	GPIO_FN(D4_NAF4),	GPIO_FN(D5_NAF5),	/* share with FLCTL */
--	GPIO_FN(D6_NAF6),	GPIO_FN(D7_NAF7),	/* share with FLCTL */
--	GPIO_FN(D8_NAF8),	GPIO_FN(D9_NAF9),	/* share with FLCTL */
--	GPIO_FN(D10_NAF10),	GPIO_FN(D11_NAF11),	/* share with FLCTL */
--	GPIO_FN(D12_NAF12),	GPIO_FN(D13_NAF13),	/* share with FLCTL */
--	GPIO_FN(D14_NAF14),	GPIO_FN(D15_NAF15),	/* share with FLCTL */
--	GPIO_FN(D16),	GPIO_FN(D17),	GPIO_FN(D18),	GPIO_FN(D19),
--	GPIO_FN(D20),	GPIO_FN(D21),	GPIO_FN(D22),	GPIO_FN(D23),
--	GPIO_FN(D24),	GPIO_FN(D25),	GPIO_FN(D26),	GPIO_FN(D27),
--	GPIO_FN(D28),	GPIO_FN(D29),	GPIO_FN(D30),	GPIO_FN(D31),
--
--	GPIO_FN(WE0_FWE),	/* share with FLCTL */
--	GPIO_FN(WE1),
--	GPIO_FN(WE2_ICIORD),	/* share with PCMCIA */
--	GPIO_FN(WE3_ICIOWR),	/* share with PCMCIA */
--	GPIO_FN(CKO),	GPIO_FN(BS),	GPIO_FN(RDWR),
--	GPIO_FN(RD_FSC),	/* share with FLCTL */
--	GPIO_FN(WAIT_PORT177), /* WAIT Port 90/177 */
--	GPIO_FN(WAIT_PORT90),
--
--	GPIO_FN(FCE0),	GPIO_FN(FCE1),	GPIO_FN(FRB), /* FLCTL */
--
--	/* IRDA */
--	GPIO_FN(IRDA_FIRSEL),	GPIO_FN(IRDA_IN),	GPIO_FN(IRDA_OUT),
--
--	/* ATAPI */
--	GPIO_FN(IDE_D0),	GPIO_FN(IDE_D1),	GPIO_FN(IDE_D2),
--	GPIO_FN(IDE_D3),	GPIO_FN(IDE_D4),	GPIO_FN(IDE_D5),
--	GPIO_FN(IDE_D6),	GPIO_FN(IDE_D7),	GPIO_FN(IDE_D8),
--	GPIO_FN(IDE_D9),	GPIO_FN(IDE_D10),	GPIO_FN(IDE_D11),
--	GPIO_FN(IDE_D12),	GPIO_FN(IDE_D13),	GPIO_FN(IDE_D14),
--	GPIO_FN(IDE_D15),	GPIO_FN(IDE_A0),	GPIO_FN(IDE_A1),
--	GPIO_FN(IDE_A2),	GPIO_FN(IDE_CS0),	GPIO_FN(IDE_CS1),
--	GPIO_FN(IDE_IOWR),	GPIO_FN(IDE_IORD),	GPIO_FN(IDE_IORDY),
--	GPIO_FN(IDE_INT),	GPIO_FN(IDE_RST),	GPIO_FN(IDE_DIRECTION),
--	GPIO_FN(IDE_EXBUF_ENB),	GPIO_FN(IDE_IODACK),	GPIO_FN(IDE_IODREQ),
--
--	/* RMII */
--	GPIO_FN(RMII_CRS_DV),	GPIO_FN(RMII_RX_ER),	GPIO_FN(RMII_RXD0),
--	GPIO_FN(RMII_RXD1),	GPIO_FN(RMII_TX_EN),	GPIO_FN(RMII_TXD0),
--	GPIO_FN(RMII_MDC),	GPIO_FN(RMII_TXD1),	GPIO_FN(RMII_MDIO),
--	GPIO_FN(RMII_REF50CK),	GPIO_FN(RMII_REF125CK),	/* for GMII */
--
--	/* GEther */
--	GPIO_FN(ET_TX_CLK),	GPIO_FN(ET_TX_EN),	GPIO_FN(ET_ETXD0),
--	GPIO_FN(ET_ETXD1),	GPIO_FN(ET_ETXD2),	GPIO_FN(ET_ETXD3),
--	GPIO_FN(ET_ETXD4),	GPIO_FN(ET_ETXD5), /* for GEther */
--	GPIO_FN(ET_ETXD6),	GPIO_FN(ET_ETXD7), /* for GEther */
--	GPIO_FN(ET_COL),	GPIO_FN(ET_TX_ER),	GPIO_FN(ET_RX_CLK),
--	GPIO_FN(ET_RX_DV),	GPIO_FN(ET_ERXD0),	GPIO_FN(ET_ERXD1),
--	GPIO_FN(ET_ERXD2),	GPIO_FN(ET_ERXD3),
--	GPIO_FN(ET_ERXD4),	GPIO_FN(ET_ERXD5), /* for GEther */
--	GPIO_FN(ET_ERXD6),	GPIO_FN(ET_ERXD7), /* for GEther */
--	GPIO_FN(ET_RX_ER),	GPIO_FN(ET_CRS),	GPIO_FN(ET_MDC),
--	GPIO_FN(ET_MDIO),	GPIO_FN(ET_LINK),	GPIO_FN(ET_PHY_INT),
--	GPIO_FN(ET_WOL),	GPIO_FN(ET_GTX_CLK),
--
--	/* DMA0 */
--	GPIO_FN(DREQ0),	GPIO_FN(DACK0),
--
--	/* DMA1 */
--	GPIO_FN(DREQ1),	GPIO_FN(DACK1),
--
--	/* SYSC */
--	GPIO_FN(RESETOUTS),
--
--	/* IRREM */
--	GPIO_FN(IROUT),
--
--	/* LCDC */
--	GPIO_FN(LCDC0_SELECT),
--	GPIO_FN(LCDC1_SELECT),
--
--	/* SDENC */
--	GPIO_FN(SDENC_CPG),
--	GPIO_FN(SDENC_DV_CLKI),
--
--	/* SYSC */
--	GPIO_FN(RESETP_PULLUP),
--	GPIO_FN(RESETP_PLAIN),
--
--	/* DEBUG */
--	GPIO_FN(EDEBGREQ_PULLDOWN),
--	GPIO_FN(EDEBGREQ_PULLUP),
--
--	GPIO_FN(TRACEAUD_FROM_VIO),
--	GPIO_FN(TRACEAUD_FROM_LCDC0),
--	GPIO_FN(TRACEAUD_FROM_MEMC),
--};
--
--static struct pinmux_cfg_reg pinmux_config_regs[] = {
--	PORTCR(0,	0xe6050000), /* PORT0CR */
--	PORTCR(1,	0xe6050001), /* PORT1CR */
--	PORTCR(2,	0xe6050002), /* PORT2CR */
--	PORTCR(3,	0xe6050003), /* PORT3CR */
--	PORTCR(4,	0xe6050004), /* PORT4CR */
--	PORTCR(5,	0xe6050005), /* PORT5CR */
--	PORTCR(6,	0xe6050006), /* PORT6CR */
--	PORTCR(7,	0xe6050007), /* PORT7CR */
--	PORTCR(8,	0xe6050008), /* PORT8CR */
--	PORTCR(9,	0xe6050009), /* PORT9CR */
--	PORTCR(10,	0xe605000a), /* PORT10CR */
--	PORTCR(11,	0xe605000b), /* PORT11CR */
--	PORTCR(12,	0xe605000c), /* PORT12CR */
--	PORTCR(13,	0xe605000d), /* PORT13CR */
--	PORTCR(14,	0xe605000e), /* PORT14CR */
--	PORTCR(15,	0xe605000f), /* PORT15CR */
--	PORTCR(16,	0xe6050010), /* PORT16CR */
--	PORTCR(17,	0xe6050011), /* PORT17CR */
--	PORTCR(18,	0xe6050012), /* PORT18CR */
--	PORTCR(19,	0xe6050013), /* PORT19CR */
--	PORTCR(20,	0xe6050014), /* PORT20CR */
--	PORTCR(21,	0xe6050015), /* PORT21CR */
--	PORTCR(22,	0xe6050016), /* PORT22CR */
--	PORTCR(23,	0xe6050017), /* PORT23CR */
--	PORTCR(24,	0xe6050018), /* PORT24CR */
--	PORTCR(25,	0xe6050019), /* PORT25CR */
--	PORTCR(26,	0xe605001a), /* PORT26CR */
--	PORTCR(27,	0xe605001b), /* PORT27CR */
--	PORTCR(28,	0xe605001c), /* PORT28CR */
--	PORTCR(29,	0xe605001d), /* PORT29CR */
--	PORTCR(30,	0xe605001e), /* PORT30CR */
--	PORTCR(31,	0xe605001f), /* PORT31CR */
--	PORTCR(32,	0xe6050020), /* PORT32CR */
--	PORTCR(33,	0xe6050021), /* PORT33CR */
--	PORTCR(34,	0xe6050022), /* PORT34CR */
--	PORTCR(35,	0xe6050023), /* PORT35CR */
--	PORTCR(36,	0xe6050024), /* PORT36CR */
--	PORTCR(37,	0xe6050025), /* PORT37CR */
--	PORTCR(38,	0xe6050026), /* PORT38CR */
--	PORTCR(39,	0xe6050027), /* PORT39CR */
--	PORTCR(40,	0xe6050028), /* PORT40CR */
--	PORTCR(41,	0xe6050029), /* PORT41CR */
--	PORTCR(42,	0xe605002a), /* PORT42CR */
--	PORTCR(43,	0xe605002b), /* PORT43CR */
--	PORTCR(44,	0xe605002c), /* PORT44CR */
--	PORTCR(45,	0xe605002d), /* PORT45CR */
--	PORTCR(46,	0xe605002e), /* PORT46CR */
--	PORTCR(47,	0xe605002f), /* PORT47CR */
--	PORTCR(48,	0xe6050030), /* PORT48CR */
--	PORTCR(49,	0xe6050031), /* PORT49CR */
--	PORTCR(50,	0xe6050032), /* PORT50CR */
--	PORTCR(51,	0xe6050033), /* PORT51CR */
--	PORTCR(52,	0xe6050034), /* PORT52CR */
--	PORTCR(53,	0xe6050035), /* PORT53CR */
--	PORTCR(54,	0xe6050036), /* PORT54CR */
--	PORTCR(55,	0xe6050037), /* PORT55CR */
--	PORTCR(56,	0xe6050038), /* PORT56CR */
--	PORTCR(57,	0xe6050039), /* PORT57CR */
--	PORTCR(58,	0xe605003a), /* PORT58CR */
--	PORTCR(59,	0xe605003b), /* PORT59CR */
--	PORTCR(60,	0xe605003c), /* PORT60CR */
--	PORTCR(61,	0xe605003d), /* PORT61CR */
--	PORTCR(62,	0xe605003e), /* PORT62CR */
--	PORTCR(63,	0xe605003f), /* PORT63CR */
--	PORTCR(64,	0xe6050040), /* PORT64CR */
--	PORTCR(65,	0xe6050041), /* PORT65CR */
--	PORTCR(66,	0xe6050042), /* PORT66CR */
--	PORTCR(67,	0xe6050043), /* PORT67CR */
--	PORTCR(68,	0xe6050044), /* PORT68CR */
--	PORTCR(69,	0xe6050045), /* PORT69CR */
--	PORTCR(70,	0xe6050046), /* PORT70CR */
--	PORTCR(71,	0xe6050047), /* PORT71CR */
--	PORTCR(72,	0xe6050048), /* PORT72CR */
--	PORTCR(73,	0xe6050049), /* PORT73CR */
--	PORTCR(74,	0xe605004a), /* PORT74CR */
--	PORTCR(75,	0xe605004b), /* PORT75CR */
--	PORTCR(76,	0xe605004c), /* PORT76CR */
--	PORTCR(77,	0xe605004d), /* PORT77CR */
--	PORTCR(78,	0xe605004e), /* PORT78CR */
--	PORTCR(79,	0xe605004f), /* PORT79CR */
--	PORTCR(80,	0xe6050050), /* PORT80CR */
--	PORTCR(81,	0xe6050051), /* PORT81CR */
--	PORTCR(82,	0xe6050052), /* PORT82CR */
--	PORTCR(83,	0xe6050053), /* PORT83CR */
--
--	PORTCR(84,	0xe6051054), /* PORT84CR */
--	PORTCR(85,	0xe6051055), /* PORT85CR */
--	PORTCR(86,	0xe6051056), /* PORT86CR */
--	PORTCR(87,	0xe6051057), /* PORT87CR */
--	PORTCR(88,	0xe6051058), /* PORT88CR */
--	PORTCR(89,	0xe6051059), /* PORT89CR */
--	PORTCR(90,	0xe605105a), /* PORT90CR */
--	PORTCR(91,	0xe605105b), /* PORT91CR */
--	PORTCR(92,	0xe605105c), /* PORT92CR */
--	PORTCR(93,	0xe605105d), /* PORT93CR */
--	PORTCR(94,	0xe605105e), /* PORT94CR */
--	PORTCR(95,	0xe605105f), /* PORT95CR */
--	PORTCR(96,	0xe6051060), /* PORT96CR */
--	PORTCR(97,	0xe6051061), /* PORT97CR */
--	PORTCR(98,	0xe6051062), /* PORT98CR */
--	PORTCR(99,	0xe6051063), /* PORT99CR */
--	PORTCR(100,	0xe6051064), /* PORT100CR */
--	PORTCR(101,	0xe6051065), /* PORT101CR */
--	PORTCR(102,	0xe6051066), /* PORT102CR */
--	PORTCR(103,	0xe6051067), /* PORT103CR */
--	PORTCR(104,	0xe6051068), /* PORT104CR */
--	PORTCR(105,	0xe6051069), /* PORT105CR */
--	PORTCR(106,	0xe605106a), /* PORT106CR */
--	PORTCR(107,	0xe605106b), /* PORT107CR */
--	PORTCR(108,	0xe605106c), /* PORT108CR */
--	PORTCR(109,	0xe605106d), /* PORT109CR */
--	PORTCR(110,	0xe605106e), /* PORT110CR */
--	PORTCR(111,	0xe605106f), /* PORT111CR */
--	PORTCR(112,	0xe6051070), /* PORT112CR */
--	PORTCR(113,	0xe6051071), /* PORT113CR */
--	PORTCR(114,	0xe6051072), /* PORT114CR */
--
--	PORTCR(115,	0xe6052073), /* PORT115CR */
--	PORTCR(116,	0xe6052074), /* PORT116CR */
--	PORTCR(117,	0xe6052075), /* PORT117CR */
--	PORTCR(118,	0xe6052076), /* PORT118CR */
--	PORTCR(119,	0xe6052077), /* PORT119CR */
--	PORTCR(120,	0xe6052078), /* PORT120CR */
--	PORTCR(121,	0xe6052079), /* PORT121CR */
--	PORTCR(122,	0xe605207a), /* PORT122CR */
--	PORTCR(123,	0xe605207b), /* PORT123CR */
--	PORTCR(124,	0xe605207c), /* PORT124CR */
--	PORTCR(125,	0xe605207d), /* PORT125CR */
--	PORTCR(126,	0xe605207e), /* PORT126CR */
--	PORTCR(127,	0xe605207f), /* PORT127CR */
--	PORTCR(128,	0xe6052080), /* PORT128CR */
--	PORTCR(129,	0xe6052081), /* PORT129CR */
--	PORTCR(130,	0xe6052082), /* PORT130CR */
--	PORTCR(131,	0xe6052083), /* PORT131CR */
--	PORTCR(132,	0xe6052084), /* PORT132CR */
--	PORTCR(133,	0xe6052085), /* PORT133CR */
--	PORTCR(134,	0xe6052086), /* PORT134CR */
--	PORTCR(135,	0xe6052087), /* PORT135CR */
--	PORTCR(136,	0xe6052088), /* PORT136CR */
--	PORTCR(137,	0xe6052089), /* PORT137CR */
--	PORTCR(138,	0xe605208a), /* PORT138CR */
--	PORTCR(139,	0xe605208b), /* PORT139CR */
--	PORTCR(140,	0xe605208c), /* PORT140CR */
--	PORTCR(141,	0xe605208d), /* PORT141CR */
--	PORTCR(142,	0xe605208e), /* PORT142CR */
--	PORTCR(143,	0xe605208f), /* PORT143CR */
--	PORTCR(144,	0xe6052090), /* PORT144CR */
--	PORTCR(145,	0xe6052091), /* PORT145CR */
--	PORTCR(146,	0xe6052092), /* PORT146CR */
--	PORTCR(147,	0xe6052093), /* PORT147CR */
--	PORTCR(148,	0xe6052094), /* PORT148CR */
--	PORTCR(149,	0xe6052095), /* PORT149CR */
--	PORTCR(150,	0xe6052096), /* PORT150CR */
--	PORTCR(151,	0xe6052097), /* PORT151CR */
--	PORTCR(152,	0xe6052098), /* PORT152CR */
--	PORTCR(153,	0xe6052099), /* PORT153CR */
--	PORTCR(154,	0xe605209a), /* PORT154CR */
--	PORTCR(155,	0xe605209b), /* PORT155CR */
--	PORTCR(156,	0xe605209c), /* PORT156CR */
--	PORTCR(157,	0xe605209d), /* PORT157CR */
--	PORTCR(158,	0xe605209e), /* PORT158CR */
--	PORTCR(159,	0xe605209f), /* PORT159CR */
--	PORTCR(160,	0xe60520a0), /* PORT160CR */
--	PORTCR(161,	0xe60520a1), /* PORT161CR */
--	PORTCR(162,	0xe60520a2), /* PORT162CR */
--	PORTCR(163,	0xe60520a3), /* PORT163CR */
--	PORTCR(164,	0xe60520a4), /* PORT164CR */
--	PORTCR(165,	0xe60520a5), /* PORT165CR */
--	PORTCR(166,	0xe60520a6), /* PORT166CR */
--	PORTCR(167,	0xe60520a7), /* PORT167CR */
--	PORTCR(168,	0xe60520a8), /* PORT168CR */
--	PORTCR(169,	0xe60520a9), /* PORT169CR */
--	PORTCR(170,	0xe60520aa), /* PORT170CR */
--	PORTCR(171,	0xe60520ab), /* PORT171CR */
--	PORTCR(172,	0xe60520ac), /* PORT172CR */
--	PORTCR(173,	0xe60520ad), /* PORT173CR */
--	PORTCR(174,	0xe60520ae), /* PORT174CR */
--	PORTCR(175,	0xe60520af), /* PORT175CR */
--	PORTCR(176,	0xe60520b0), /* PORT176CR */
--	PORTCR(177,	0xe60520b1), /* PORT177CR */
--	PORTCR(178,	0xe60520b2), /* PORT178CR */
--	PORTCR(179,	0xe60520b3), /* PORT179CR */
--	PORTCR(180,	0xe60520b4), /* PORT180CR */
--	PORTCR(181,	0xe60520b5), /* PORT181CR */
--	PORTCR(182,	0xe60520b6), /* PORT182CR */
--	PORTCR(183,	0xe60520b7), /* PORT183CR */
--	PORTCR(184,	0xe60520b8), /* PORT184CR */
--	PORTCR(185,	0xe60520b9), /* PORT185CR */
--	PORTCR(186,	0xe60520ba), /* PORT186CR */
--	PORTCR(187,	0xe60520bb), /* PORT187CR */
--	PORTCR(188,	0xe60520bc), /* PORT188CR */
--	PORTCR(189,	0xe60520bd), /* PORT189CR */
--	PORTCR(190,	0xe60520be), /* PORT190CR */
--	PORTCR(191,	0xe60520bf), /* PORT191CR */
--	PORTCR(192,	0xe60520c0), /* PORT192CR */
--	PORTCR(193,	0xe60520c1), /* PORT193CR */
--	PORTCR(194,	0xe60520c2), /* PORT194CR */
--	PORTCR(195,	0xe60520c3), /* PORT195CR */
--	PORTCR(196,	0xe60520c4), /* PORT196CR */
--	PORTCR(197,	0xe60520c5), /* PORT197CR */
--	PORTCR(198,	0xe60520c6), /* PORT198CR */
--	PORTCR(199,	0xe60520c7), /* PORT199CR */
--	PORTCR(200,	0xe60520c8), /* PORT200CR */
--	PORTCR(201,	0xe60520c9), /* PORT201CR */
--	PORTCR(202,	0xe60520ca), /* PORT202CR */
--	PORTCR(203,	0xe60520cb), /* PORT203CR */
--	PORTCR(204,	0xe60520cc), /* PORT204CR */
--	PORTCR(205,	0xe60520cd), /* PORT205CR */
--	PORTCR(206,	0xe60520ce), /* PORT206CR */
--	PORTCR(207,	0xe60520cf), /* PORT207CR */
--	PORTCR(208,	0xe60520d0), /* PORT208CR */
--	PORTCR(209,	0xe60520d1), /* PORT209CR */
--
--	PORTCR(210,	0xe60530d2), /* PORT210CR */
--	PORTCR(211,	0xe60530d3), /* PORT211CR */
--
--	{ PINMUX_CFG_REG("MSEL1CR", 0xe605800c, 32, 1) {
--			MSEL1CR_31_0,	MSEL1CR_31_1,
--			MSEL1CR_30_0,	MSEL1CR_30_1,
--			MSEL1CR_29_0,	MSEL1CR_29_1,
--			MSEL1CR_28_0,	MSEL1CR_28_1,
--			MSEL1CR_27_0,	MSEL1CR_27_1,
--			MSEL1CR_26_0,	MSEL1CR_26_1,
--			0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
--			0, 0, 0, 0, 0, 0, 0, 0,
--			MSEL1CR_16_0,	MSEL1CR_16_1,
--			MSEL1CR_15_0,	MSEL1CR_15_1,
--			MSEL1CR_14_0,	MSEL1CR_14_1,
--			MSEL1CR_13_0,	MSEL1CR_13_1,
--			MSEL1CR_12_0,	MSEL1CR_12_1,
--			0, 0, 0, 0,
--			MSEL1CR_9_0,	MSEL1CR_9_1,
--			0, 0,
--			MSEL1CR_7_0,	MSEL1CR_7_1,
--			MSEL1CR_6_0,	MSEL1CR_6_1,
--			MSEL1CR_5_0,	MSEL1CR_5_1,
--			MSEL1CR_4_0,	MSEL1CR_4_1,
--			MSEL1CR_3_0,	MSEL1CR_3_1,
--			MSEL1CR_2_0,	MSEL1CR_2_1,
--			0, 0,
--			MSEL1CR_0_0,	MSEL1CR_0_1,
--		}
--	},
--	{ PINMUX_CFG_REG("MSEL3CR", 0xE6058020, 32, 1) {
--			0, 0, 0, 0, 0, 0, 0, 0,
--			0, 0, 0, 0, 0, 0, 0, 0,
--			0, 0, 0, 0, 0, 0, 0, 0,
--			0, 0, 0, 0, 0, 0, 0, 0,
--			MSEL3CR_15_0,	MSEL3CR_15_1,
--			0, 0, 0, 0, 0, 0, 0, 0,
--			0, 0, 0, 0, 0, 0, 0, 0,
--			MSEL3CR_6_0,	MSEL3CR_6_1,
--			0, 0, 0, 0, 0, 0, 0, 0,
--			0, 0, 0, 0,
--			}
--	},
--	{ PINMUX_CFG_REG("MSEL4CR", 0xE6058024, 32, 1) {
--			0, 0, 0, 0, 0, 0, 0, 0,
--			0, 0, 0, 0, 0, 0, 0, 0,
--			0, 0, 0, 0, 0, 0, 0, 0,
--			MSEL4CR_19_0,	MSEL4CR_19_1,
--			MSEL4CR_18_0,	MSEL4CR_18_1,
--			0, 0, 0, 0,
--			MSEL4CR_15_0,	MSEL4CR_15_1,
--			0, 0, 0, 0, 0, 0, 0, 0,
--			MSEL4CR_10_0,	MSEL4CR_10_1,
--			0, 0, 0, 0, 0, 0,
--			MSEL4CR_6_0,	MSEL4CR_6_1,
--			0, 0,
--			MSEL4CR_4_0,	MSEL4CR_4_1,
--			0, 0, 0, 0,
--			MSEL4CR_1_0,	MSEL4CR_1_1,
--			0, 0,
--		}
--	},
--	{ PINMUX_CFG_REG("MSEL5CR", 0xE6058028, 32, 1) {
--			MSEL5CR_31_0,	MSEL5CR_31_1,
--			MSEL5CR_30_0,	MSEL5CR_30_1,
--			MSEL5CR_29_0,	MSEL5CR_29_1,
--			0, 0,
--			MSEL5CR_27_0,	MSEL5CR_27_1,
--			0, 0,
--			MSEL5CR_25_0,	MSEL5CR_25_1,
--			0, 0,
--			MSEL5CR_23_0,	MSEL5CR_23_1,
--			0, 0,
--			MSEL5CR_21_0,	MSEL5CR_21_1,
--			0, 0,
--			MSEL5CR_19_0,	MSEL5CR_19_1,
--			0, 0,
--			MSEL5CR_17_0,	MSEL5CR_17_1,
--			0, 0,
--			MSEL5CR_15_0,	MSEL5CR_15_1,
--			MSEL5CR_14_0,	MSEL5CR_14_1,
--			MSEL5CR_13_0,	MSEL5CR_13_1,
--			MSEL5CR_12_0,	MSEL5CR_12_1,
--			MSEL5CR_11_0,	MSEL5CR_11_1,
--			MSEL5CR_10_0,	MSEL5CR_10_1,
--			0, 0,
--			MSEL5CR_8_0,	MSEL5CR_8_1,
--			MSEL5CR_7_0,	MSEL5CR_7_1,
--			MSEL5CR_6_0,	MSEL5CR_6_1,
--			MSEL5CR_5_0,	MSEL5CR_5_1,
--			MSEL5CR_4_0,	MSEL5CR_4_1,
--			MSEL5CR_3_0,	MSEL5CR_3_1,
--			MSEL5CR_2_0,	MSEL5CR_2_1,
--			0, 0,
--			MSEL5CR_0_0,	MSEL5CR_0_1,
--		}
--	},
--	{ },
--};
--
--static struct pinmux_data_reg pinmux_data_regs[] = {
--	{ PINMUX_DATA_REG("PORTL031_000DR", 0xe6054800, 32) {
--		PORT31_DATA,	PORT30_DATA,	PORT29_DATA,	PORT28_DATA,
--		PORT27_DATA,	PORT26_DATA,	PORT25_DATA,	PORT24_DATA,
--		PORT23_DATA,	PORT22_DATA,	PORT21_DATA,	PORT20_DATA,
--		PORT19_DATA,	PORT18_DATA,	PORT17_DATA,	PORT16_DATA,
--		PORT15_DATA,	PORT14_DATA,	PORT13_DATA,	PORT12_DATA,
--		PORT11_DATA,	PORT10_DATA,	PORT9_DATA,	PORT8_DATA,
--		PORT7_DATA,	PORT6_DATA,	PORT5_DATA,	PORT4_DATA,
--		PORT3_DATA,	PORT2_DATA,	PORT1_DATA,	PORT0_DATA }
--	},
--	{ PINMUX_DATA_REG("PORTL063_032DR", 0xe6054804, 32) {
--		PORT63_DATA,	PORT62_DATA,	PORT61_DATA,	PORT60_DATA,
--		PORT59_DATA,	PORT58_DATA,	PORT57_DATA,	PORT56_DATA,
--		PORT55_DATA,	PORT54_DATA,	PORT53_DATA,	PORT52_DATA,
--		PORT51_DATA,	PORT50_DATA,	PORT49_DATA,	PORT48_DATA,
--		PORT47_DATA,	PORT46_DATA,	PORT45_DATA,	PORT44_DATA,
--		PORT43_DATA,	PORT42_DATA,	PORT41_DATA,	PORT40_DATA,
--		PORT39_DATA,	PORT38_DATA,	PORT37_DATA,	PORT36_DATA,
--		PORT35_DATA,	PORT34_DATA,	PORT33_DATA,	PORT32_DATA }
--	},
--	{ PINMUX_DATA_REG("PORTL095_064DR", 0xe6054808, 32) {
--		0, 0, 0, 0,
--		0, 0, 0, 0,
--		0, 0, 0, 0,
--		PORT83_DATA,	PORT82_DATA,	PORT81_DATA,	PORT80_DATA,
--		PORT79_DATA,	PORT78_DATA,	PORT77_DATA,	PORT76_DATA,
--		PORT75_DATA,	PORT74_DATA,	PORT73_DATA,	PORT72_DATA,
--		PORT71_DATA,	PORT70_DATA,	PORT69_DATA,	PORT68_DATA,
--		PORT67_DATA,	PORT66_DATA,	PORT65_DATA,	PORT64_DATA }
--	},
--	{ PINMUX_DATA_REG("PORTD095_064DR", 0xe6055808, 32) {
--		PORT95_DATA,	PORT94_DATA,	PORT93_DATA,	PORT92_DATA,
--		PORT91_DATA,	PORT90_DATA,	PORT89_DATA,	PORT88_DATA,
--		PORT87_DATA,	PORT86_DATA,	PORT85_DATA,	PORT84_DATA,
--		0, 0, 0, 0,
--		0, 0, 0, 0,
--		0, 0, 0, 0,
--		0, 0, 0, 0,
--		0, 0, 0, 0 }
--	},
--	{ PINMUX_DATA_REG("PORTD127_096DR", 0xe605580c, 32) {
--		0, 0, 0, 0,
--		0, 0, 0, 0,
--		0, 0, 0, 0,
--		0,		PORT114_DATA,	PORT113_DATA,	PORT112_DATA,
--		PORT111_DATA,	PORT110_DATA,	PORT109_DATA,	PORT108_DATA,
--		PORT107_DATA,	PORT106_DATA,	PORT105_DATA,	PORT104_DATA,
--		PORT103_DATA,	PORT102_DATA,	PORT101_DATA,	PORT100_DATA,
--		PORT99_DATA,	PORT98_DATA,	PORT97_DATA,	PORT96_DATA }
--	},
--	{ PINMUX_DATA_REG("PORTR127_096DR", 0xe605680C, 32) {
--		PORT127_DATA,	PORT126_DATA,	PORT125_DATA,	PORT124_DATA,
--		PORT123_DATA,	PORT122_DATA,	PORT121_DATA,	PORT120_DATA,
--		PORT119_DATA,	PORT118_DATA,	PORT117_DATA,	PORT116_DATA,
--		PORT115_DATA,	0, 0, 0,
--		0, 0, 0, 0,
--		0, 0, 0, 0,
--		0, 0, 0, 0,
--		0, 0, 0, 0 }
--	},
--	{ PINMUX_DATA_REG("PORTR159_128DR", 0xe6056810, 32) {
--		PORT159_DATA,	PORT158_DATA,	PORT157_DATA,	PORT156_DATA,
--		PORT155_DATA,	PORT154_DATA,	PORT153_DATA,	PORT152_DATA,
--		PORT151_DATA,	PORT150_DATA,	PORT149_DATA,	PORT148_DATA,
--		PORT147_DATA,	PORT146_DATA,	PORT145_DATA,	PORT144_DATA,
--		PORT143_DATA,	PORT142_DATA,	PORT141_DATA,	PORT140_DATA,
--		PORT139_DATA,	PORT138_DATA,	PORT137_DATA,	PORT136_DATA,
--		PORT135_DATA,	PORT134_DATA,	PORT133_DATA,	PORT132_DATA,
--		PORT131_DATA,	PORT130_DATA,	PORT129_DATA,	PORT128_DATA }
--	},
--	{ PINMUX_DATA_REG("PORTR191_160DR", 0xe6056814, 32) {
--		PORT191_DATA,	PORT190_DATA,	PORT189_DATA,	PORT188_DATA,
--		PORT187_DATA,	PORT186_DATA,	PORT185_DATA,	PORT184_DATA,
--		PORT183_DATA,	PORT182_DATA,	PORT181_DATA,	PORT180_DATA,
--		PORT179_DATA,	PORT178_DATA,	PORT177_DATA,	PORT176_DATA,
--		PORT175_DATA,	PORT174_DATA,	PORT173_DATA,	PORT172_DATA,
--		PORT171_DATA,	PORT170_DATA,	PORT169_DATA,	PORT168_DATA,
--		PORT167_DATA,	PORT166_DATA,	PORT165_DATA,	PORT164_DATA,
--		PORT163_DATA,	PORT162_DATA,	PORT161_DATA,	PORT160_DATA }
--	},
--	{ PINMUX_DATA_REG("PORTR223_192DR", 0xe6056818, 32) {
--		0, 0, 0, 0,
--		0, 0, 0, 0,
--		0, 0, 0, 0,
--		0, 0,				PORT209_DATA,	PORT208_DATA,
--		PORT207_DATA,	PORT206_DATA,	PORT205_DATA,	PORT204_DATA,
--		PORT203_DATA,	PORT202_DATA,	PORT201_DATA,	PORT200_DATA,
--		PORT199_DATA,	PORT198_DATA,	PORT197_DATA,	PORT196_DATA,
--		PORT195_DATA,	PORT194_DATA,	PORT193_DATA,	PORT192_DATA }
--	},
--	{ PINMUX_DATA_REG("PORTU223_192DR", 0xe6057818, 32) {
--		0, 0, 0, 0,
--		0, 0, 0, 0,
--		0, 0, 0, 0,
--		PORT211_DATA,	PORT210_DATA, 0, 0,
--		0, 0, 0, 0,
--		0, 0, 0, 0,
--		0, 0, 0, 0,
--		0, 0, 0, 0 }
--	},
--	{ },
--};
--
--static struct pinmux_irq pinmux_irqs[] = {
--	PINMUX_IRQ(evt2irq(0x0200), PORT2_FN0,	 PORT13_FN0),	/* IRQ0A */
--	PINMUX_IRQ(evt2irq(0x0220), PORT20_FN0),		/* IRQ1A */
--	PINMUX_IRQ(evt2irq(0x0240), PORT11_FN0,	 PORT12_FN0),	/* IRQ2A */
--	PINMUX_IRQ(evt2irq(0x0260), PORT10_FN0,	 PORT14_FN0),	/* IRQ3A */
--	PINMUX_IRQ(evt2irq(0x0280), PORT15_FN0,	 PORT172_FN0),	/* IRQ4A */
--	PINMUX_IRQ(evt2irq(0x02A0), PORT0_FN0,	 PORT1_FN0),	/* IRQ5A */
--	PINMUX_IRQ(evt2irq(0x02C0), PORT121_FN0, PORT173_FN0),	/* IRQ6A */
--	PINMUX_IRQ(evt2irq(0x02E0), PORT120_FN0, PORT209_FN0),	/* IRQ7A */
--	PINMUX_IRQ(evt2irq(0x0300), PORT119_FN0),		/* IRQ8A */
--	PINMUX_IRQ(evt2irq(0x0320), PORT118_FN0, PORT210_FN0),	/* IRQ9A */
--	PINMUX_IRQ(evt2irq(0x0340), PORT19_FN0),		/* IRQ10A */
--	PINMUX_IRQ(evt2irq(0x0360), PORT104_FN0),		/* IRQ11A */
--	PINMUX_IRQ(evt2irq(0x0380), PORT42_FN0,	 PORT97_FN0),	/* IRQ12A */
--	PINMUX_IRQ(evt2irq(0x03A0), PORT64_FN0,	 PORT98_FN0),	/* IRQ13A */
--	PINMUX_IRQ(evt2irq(0x03C0), PORT63_FN0,	 PORT99_FN0),	/* IRQ14A */
--	PINMUX_IRQ(evt2irq(0x03E0), PORT62_FN0,	 PORT100_FN0),	/* IRQ15A */
--	PINMUX_IRQ(evt2irq(0x3200), PORT68_FN0,	 PORT211_FN0),	/* IRQ16A */
--	PINMUX_IRQ(evt2irq(0x3220), PORT69_FN0),		/* IRQ17A */
--	PINMUX_IRQ(evt2irq(0x3240), PORT70_FN0),		/* IRQ18A */
--	PINMUX_IRQ(evt2irq(0x3260), PORT71_FN0),		/* IRQ19A */
--	PINMUX_IRQ(evt2irq(0x3280), PORT67_FN0),		/* IRQ20A */
--	PINMUX_IRQ(evt2irq(0x32A0), PORT202_FN0),		/* IRQ21A */
--	PINMUX_IRQ(evt2irq(0x32C0), PORT95_FN0),		/* IRQ22A */
--	PINMUX_IRQ(evt2irq(0x32E0), PORT96_FN0),		/* IRQ23A */
--	PINMUX_IRQ(evt2irq(0x3300), PORT180_FN0),		/* IRQ24A */
--	PINMUX_IRQ(evt2irq(0x3320), PORT38_FN0),		/* IRQ25A */
--	PINMUX_IRQ(evt2irq(0x3340), PORT58_FN0,	 PORT81_FN0),	/* IRQ26A */
--	PINMUX_IRQ(evt2irq(0x3360), PORT57_FN0,	 PORT168_FN0),	/* IRQ27A */
--	PINMUX_IRQ(evt2irq(0x3380), PORT56_FN0,	 PORT169_FN0),	/* IRQ28A */
--	PINMUX_IRQ(evt2irq(0x33A0), PORT50_FN0,	 PORT170_FN0),	/* IRQ29A */
--	PINMUX_IRQ(evt2irq(0x33C0), PORT49_FN0,	 PORT171_FN0),	/* IRQ30A */
--	PINMUX_IRQ(evt2irq(0x33E0), PORT41_FN0,	 PORT167_FN0),	/* IRQ31A */
--};
--
--static struct pinmux_info r8a7740_pinmux_info = {
--	.name		= "r8a7740_pfc",
--	.reserved_id	= PINMUX_RESERVED,
--	.data		= { PINMUX_DATA_BEGIN,
--			    PINMUX_DATA_END },
--	.input		= { PINMUX_INPUT_BEGIN,
--			    PINMUX_INPUT_END },
--	.input_pu	= { PINMUX_INPUT_PULLUP_BEGIN,
--			    PINMUX_INPUT_PULLUP_END },
--	.input_pd	= { PINMUX_INPUT_PULLDOWN_BEGIN,
--			    PINMUX_INPUT_PULLDOWN_END },
--	.output		= { PINMUX_OUTPUT_BEGIN,
--			    PINMUX_OUTPUT_END },
--	.mark		= { PINMUX_MARK_BEGIN,
--			    PINMUX_MARK_END },
--	.function	= { PINMUX_FUNCTION_BEGIN,
--			    PINMUX_FUNCTION_END },
--
--	.first_gpio	= GPIO_PORT0,
--	.last_gpio	= GPIO_FN_TRACEAUD_FROM_MEMC,
--
--	.gpios		= pinmux_gpios,
--	.cfg_regs	= pinmux_config_regs,
--	.data_regs	= pinmux_data_regs,
--
--	.gpio_data	= pinmux_data,
--	.gpio_data_size	= ARRAY_SIZE(pinmux_data),
--
--	.gpio_irq	= pinmux_irqs,
--	.gpio_irq_size	= ARRAY_SIZE(pinmux_irqs),
--};
--
--void r8a7740_pinmux_init(void)
--{
--	register_pinmux(&r8a7740_pinmux_info);
--}
--- 
-2.43.0
+SGkgQXB1cnZhDQoNCk9uIFNhdCwgMjAyNC0wMi0yNCBhdCAwMTo1MSArMDUzMCwgQXB1cnZhIE5h
+bmRhbiB3cm90ZToNCj4gSGVsbG8gRXZlcnlvbmUhDQo+IA0KPiBUaGlzIHNlcmllcyB3aWxsIGlu
+dHJvZHVjZSBiYXNpYyBzdXBwb3J0IChTRCBhbmQgVUFSVCkgc3VwcG9ydCBmb3IgVGV4YXMNCj4g
+SW5zdHJ1bWVudHMgSjc4NFM0IEVWTS4NCj4gDQo+IFRoZSBKNzg0UzQgU29DIGRldmljZSB0cmVl
+IHBhdGNoZXMgYXJlIHRha2VuIGZyb20ga2VybmVsIHBhdGNoIHN1Ym1pc3Npb25zDQo+IGFuZCB3
+aWxsIGJlIHVwZGF0ZWQgYXMgdGhleSBhcmUgYWNjZXB0ZWQgYW5kIG1lcmdlZCB0byB0aGUga2Vy
+bmVsIHRyZWUuDQoNClRoaXMgcGF0Y2ggc2V0IGRvZXMgbm90IGluY2x1ZGUgYW55IHN1Y2gsIHJp
+Z2h0Pw0KDQpBbnl3YXksIGZvciBteSB0ZXN0cyBJIHRvb2sgdGhlbSBmcm9tIGxpbnV4LW5leHQg
+b24ga2VybmVsLm9yZy4NCg0KSG93ZXZlciwgSSBjb3VsZCBub3QgZ2V0IHRoZSBTRCBjYXJkIHdv
+cmtpbmcgYXBhcnQgZnJvbSBpdCBib290aW5nIFUtQm9vdCBvZmYgb2YgaXQ6DQoNClUtQm9vdCBT
+UEwgMjAyNC4wNC1yYzMtMDAwMTUtZzcxODY2OTdmMWZmIChGZWIgMjcgMjAyNCAtIDE0OjI3OjI5
+ICswMTAwKQ0KU1lTRlcgQUJJOiAzLjEgKGZpcm13YXJlIHJldiAweDAwMDkgJzkuMS45LS12MDku
+MDEuMDkgKEtvb2wgS29hbGEpJykNCkluaXRpYWxpemVkIDQgRFJBTSBjb250cm9sbGVycw0KU1BM
+IGluaXRpYWwgc3RhY2sgdXNhZ2U6IDEzNDE2IGJ5dGVzDQpUcnlpbmcgdG8gYm9vdCBmcm9tIE1N
+QzINCkF1dGhlbnRpY2F0aW9uIHBhc3NlZA0KQXV0aGVudGljYXRpb24gcGFzc2VkDQpBdXRoZW50
+aWNhdGlvbiBwYXNzZWQNCkxvYWRpbmcgRW52aXJvbm1lbnQgZnJvbSBub3doZXJlLi4uIE9LDQpB
+dXRoZW50aWNhdGlvbiBwYXNzZWQNCkF1dGhlbnRpY2F0aW9uIHBhc3NlZA0KU3RhcnRpbmcgQVRG
+IG9uIEFSTTY0IGNvcmUuLi4NCiAgIA0KTk9USUNFOiAgQkwzMTogdjIuMTAuMChyZWxlYXNlKTp2
+Mi4xMC4wLTQxMi1nODg1ZTkzZjkwDQpOT1RJQ0U6ICBCTDMxOiBCdWlsdCA6IDA5OjQ4OjE1LCBG
+ZWIgMjcgMjAyNA0KSS9UQzoNCkkvVEM6IE9QLVRFRSB2ZXJzaW9uOiA0LjEuMC0xNDAtZzQwNzhi
+Y2RlOSAoZ2NjIHZlcnNpb24gMTMuMi4xIDIwMjMxMDA5IChBcm0gR05VDQogVG9vbGNoYWluIDEz
+LjIucmVsMSAoQnVpbGQgYXJtLTEzLjcpKSkgIzEgVHVlIEZlYiAyNyAwODo1NDoyNCBVVEMgMjAy
+NCBhYXJjaDY0DQpJL1RDOiBXQVJOSU5HOiBUaGlzIE9QLVRFRSBjb25maWd1cmF0aW9uIG1pZ2h0
+IGJlIGluc2VjdXJlIQ0KSS9UQzogV0FSTklORzogUGxlYXNlIGNoZWNrIGh0dHBzOi8vb3B0ZWUu
+cmVhZHRoZWRvY3MuaW8vZW4vbGF0ZXN0L2FyY2hpdGVjdHVyZS8NCnBvcnRpbmdfZ3VpZGVsaW5l
+cy5odG1sDQpJL1RDOiBQcmltYXJ5IENQVSBpbml0aWFsaXppbmcNCkkvVEM6IEdJQyByZWRpc3Ry
+aWJ1dG9yIGJhc2UgYWRkcmVzcyBub3QgcHJvdmlkZWQNCkkvVEM6IEFzc3VtaW5nIGRlZmF1bHQg
+R0lDIGdyb3VwIHN0YXR1cyBhbmQgbW9kaWZpZXINCkkvVEM6IFNZU0ZXIEFCSTogMy4xIChmaXJt
+d2FyZSByZXYgMHgwMDA5ICc5LjEuOS0tdjA5LjAxLjA5IChLb29sIEtvYWxhKScpDQpJL1RDOiBI
+VUsgSW5pdGlhbGl6ZWQNCkkvVEM6IEFjdGl2YXRlZCBTQTJVTCBkZXZpY2UNCkkvVEM6IEVuYWJs
+ZWQgZmlyZXdhbGxzIGZvciBTQTJVTCBUUk5HIGRldmljZQ0KSS9UQzogU0EyVUwgVFJORyBpbml0
+aWFsaXplZA0KSS9UQzogU0EyVUwgRHJpdmVycyBpbml0aWFsaXplZA0KSS9UQzogUHJpbWFyeSBD
+UFUgc3dpdGNoaW5nIHRvIG5vcm1hbCB3b3JsZCBib290DQogICANClUtQm9vdCBTUEwgMjAyNC4w
+NC1yYzMtMDAwMTUtZzcxODY2OTdmMWZmLWRpcnR5IChGZWIgMjcgMjAyNCAtIDE2OjQwOjA3ICsw
+MTAwKQ0KU1lTRlcgQUJJOiAzLjEgKGZpcm13YXJlIHJldiAweDAwMDkgJzkuMS45LS12MDkuMDEu
+MDkgKEtvb2wgS29hbGEpJykNClRyeWluZyB0byBib290IGZyb20gTU1DMg0KQXV0aGVudGljYXRp
+b24gcGFzc2VkDQpBdXRoZW50aWNhdGlvbiBwYXNzZWQNCg0KDQpVLUJvb3QgMjAyNC4wNC1yYzMt
+MDAwMTUtZzcxODY2OTdmMWZmLWRpcnR5IChGZWIgMjcgMjAyNCAtIDE2OjQwOjA3ICswMTAwKQ0K
+DQpTb0M6ICAgSjc4NFM0IFNSMS4wIEhTLUZTDQpNb2RlbDogVGV4YXMgSW5zdHJ1bWVudHMgSjc4
+NFM0IEVWTQ0KRFJBTTogIDIgR2lCIChlZmZlY3RpdmUgMzIgR2lCKQ0KQ29yZTogIDg3IGRldmlj
+ZXMsIDMwIHVjbGFzc2VzLCBkZXZpY2V0cmVlOiBzZXBhcmF0ZQ0KRmxhc2g6IDAgQnl0ZXMNCk1N
+QzogICBtbWNANGY4MDAwMDogMCwgbW1jQDRmYjAwMDA6IDENCkxvYWRpbmcgRW52aXJvbm1lbnQg
+ZnJvbSBub3doZXJlLi4uIE9LDQpJbjogICAgc2VyaWFsQDI4ODAwMDANCk91dDogICBzZXJpYWxA
+Mjg4MDAwMA0KRXJyOiAgIHNlcmlhbEAyODgwMDAwDQphbTY1X2Nwc3dfbnVzcyBldGhlcm5ldEA0
+NjAwMDAwMDogSzMgQ1BTVzogbnVzc192ZXI6IDB4NkJBMDIxMDIgY3Bzd192ZXI6IDB4NkJBODIx
+MDIgYWxlX3ZlcjogMHgwMDI5MzkwNA0KUG9ydHM6MSBtZGlvX2ZyZXE6MTAwMDAwMA0KTmV0OiAg
+IGV0aDA6IGV0aGVybmV0QDQ2MDAwMDAwcG9ydEAxDQpIaXQgYW55IGtleSB0byBzdG9wIGF1dG9i
+b290OiAgMA0KPT4gbW1jIGRldiAwDQpzd2l0Y2ggdG8gcGFydGl0aW9ucyAjMCwgT0sNCm1tYzAo
+cGFydCAwKSBpcyBjdXJyZW50IGRldmljZQ0KPT4gbW1jIGluZm8NCkRldmljZTogbW1jQDRmODAw
+MDANCk1hbnVmYWN0dXJlciBJRDogMTMNCk9FTTogNGUNCk5hbWU6IEcxTTE1TA0KQnVzIFNwZWVk
+OiAyMDAwMDAwMDANCk1vZGU6IEhTNDAwICgyMDBNSHopDQpSZCBCbG9jayBMZW46IDUxMg0KTU1D
+IHZlcnNpb24gNS4xDQpIaWdoIENhcGFjaXR5OiBZZXMNCkNhcGFjaXR5OiAyOS42IEdpQg0KQnVz
+IFdpZHRoOiA4LWJpdCBERFINCkVyYXNlIEdyb3VwIFNpemU6IDUxMiBLaUINCkhDIFdQIEdyb3Vw
+IFNpemU6IDggTWlCDQpVc2VyIENhcGFjaXR5OiAyOS42IEdpQiBXUlJFTA0KQm9vdCBDYXBhY2l0
+eTogMzEuNSBNaUIgRU5IDQpSUE1CIENhcGFjaXR5OiA0IE1pQiBFTkgNCkJvb3QgYXJlYSAwIGlz
+IG5vdCB3cml0ZSBwcm90ZWN0ZWQNCkJvb3QgYXJlYSAxIGlzIG5vdCB3cml0ZSBwcm90ZWN0ZWQN
+Cj0+IG1tYyBkZXYgMQ0KaTJjX3dyaXRlOiBlcnJvciB3YWl0aW5nIGZvciBkYXRhIEFDSyAoc3Rh
+dHVzPTB4MTE2KQ0KcGNhOTUzeCBncGlvQDIyOiBFcnJvciByZWFkaW5nIG91dHB1dCByZWdpc3Rl
+cg0KQ2FyZCBkaWQgbm90IHJlc3BvbmQgdG8gdm9sdGFnZSBzZWxlY3QhIDogLTExMA0KbW1jX2lu
+aXQ6IC05NSwgdGltZSAxMTQNCj0+IA0KDQpOb3Qgc3VyZSB3aGF0IHRoZSBpc3N1ZSBtYXkgYmUu
+DQoNCj4gQWxsIG90aGVyIHBhdGNoZXMgYXJlIHNwZWNpZmljIHRvIFNQTCBhbmQgdS1ib290IGFu
+ZCBkbyBub3QgaGF2ZQ0KPiBkZXBlbmRlbmN5IG9uIG90aGVyIHRyZWVzLiBBcHByZWNpYXRlIGEg
+cmV2aWV3IGZvciBhY2NlcHRhbmNlIHRvIHUtYm9vdA0KPiB0cmVlLg0KPiANCj4gSGVyZSBhcmUg
+c29tZSBvZiB0aGUgc2FsaWVudCBmZWF0dXJlcyBvZiB0aGUgSjc4NFM0IGF1dG9tb3RpdmUgZ3Jh
+ZGUNCj4gYXBwbGljYXRpb24gcHJvY2Vzc29yOg0KPiANCj4gVGhlIEo3ODRTNCBTb0MgYmVsb25n
+cyB0byB0aGUgSzMgTXVsdGljb3JlIFNvQyBhcmNoaXRlY3R1cmUNCj4gcGxhdGZvcm0sIHByb3Zp
+ZGluZyBhZHZhbmNlZCBzeXN0ZW0gaW50ZWdyYXRpb24gaW4gYXV0b21vdGl2ZSwNCj4gQURBUyBh
+bmQgaW5kdXN0cmlhbCBhcHBsaWNhdGlvbnMgcmVxdWlyaW5nIEFJIGF0IHRoZSBuZXR3b3JrIGVk
+Z2UuDQo+IFRoaXMgU29DIGV4dGVuZHMgdGhlIEszIEphY2ludG8gNyBmYW1pbHkgb2YgU29DcyB3
+aXRoIGZvY3VzIG9uDQo+IHJhaXNpbmcgcGVyZm9ybWFuY2UgYW5kIGludGVncmF0aW9uIHdoaWxl
+IHByb3ZpZGluZyBpbnRlcmZhY2VzLA0KPiBtZW1vcnkgYXJjaGl0ZWN0dXJlIGFuZCBjb21wdXRl
+IHBlcmZvcm1hbmNlIGZvciBtdWx0aS1zZW5zb3IsIGhpZ2gNCj4gY29uY3VycmVuY3kgYXBwbGlj
+YXRpb25zLg0KPiANCj4gU29tZSBoaWdobGlnaHRzIG9mIHRoaXMgU29DIGFyZToNCj4gKiBVcCB0
+byA4IENvcnRleC1BNzJzLCBmb3VyIGNsdXN0ZXJzIG9mIGxvY2tzdGVwIGNhcGFibGUgZHVhbCBD
+b3J0ZXgtUjVGIE1DVXMsDQo+IMKgIDQgQzd4IGZsb2F0aW5nIHBvaW50IHZlY3RvciBEU1BzIHdp
+dGggTWF0cml4IE11bHRpcGx5IEFjY2VsZXJhdG9yKE1NQSkgZm9yDQo+IMKgIGRlZXAgbGVhcm5p
+bmcgYW5kIENOTi4NCj4gKiAzRCBHUFU6IEF1dG9tb3RpdmUgZ3JhZGUgSU1HIEJYUy00LTY0IE1D
+MQ0KPiAqIFZpc2lvbiBQcm9jZXNzaW5nIEFjY2VsZXJhdG9yIChWUEFDKSB3aXRoIGltYWdlIHNp
+Z25hbCBwcm9jZXNzb3IgYW5kIERlcHRoDQo+IMKgIGFuZCBNb3Rpb24gUHJvY2Vzc2luZyBBY2Nl
+bGVyYXRvciAoRE1QQUMpDQo+ICogVGhyZWUgQ1NJMi4wIDRMIFJYIHBsdXMgdHdvIENTSTIuMCA0
+TCBUWCwgdHdvIERTSSBUeCwgb25lIGVEUC9EUCBhbmQgb25lDQo+IMKgIERQSSBpbnRlcmZhY2Uu
+DQo+ICogSW50ZWdyYXRlZCBnaWdhYml0IGV0aGVybmV0IHN3aXRjaCwgdXAgdG8gOCBwb3J0cyAo
+VERBNFZIKSwgdHdvIHBvcnRzDQo+IMKgIHN1cHBvcnQgMTBHYiBVU1hHTUlJOyBUd28gNCBsYW5l
+IFBDSWUtR0VOMyBjb250cm9sbGVycywgVVNCMy4wIER1YWwtcm9sZQ0KPiDCoCBkZXZpY2Ugc3Vi
+c3lzdGVtcywgVXAgdG8gMjAgTUNBTnMsIGFtb25nIG90aGVyIHBlcmlwaGVyYWxzLg0KPiANCj4g
+U2VlIEo3ODRTNCBUZWNobmljYWwgUmVmZXJlbmNlIE1hbnVhbCAoU1BSVUo1MiAtIEpVTkUgMjAy
+MikNCj4gZm9yIGZ1cnRoZXIgZGV0YWlsczogaHR0cDovL3d3dy50aS5jb20vbGl0L3ppcC9zcHJ1
+ajUyDQo+IA0KPiBJbiBhZGR0aW9uLCB0aGUgSjc4NFM0IEVWTSBib2FyZCBpcyBkZXNpZ25lZCBm
+b3IgVEkgSjc4NFM0IFNvQy4gSXQNCj4gc3VwcG9ydHMgdGhlIGZvbGxvd2luZyBpbnRlcmZhY2Vz
+Og0KPiAqIDMyIEdCIEREUjQgUkFNDQo+ICogeDIgR2lnYWJpdCBFdGhlcm5ldCBpbnRlcmZhY2Vz
+IGNhcGFibGUgb2Ygd29ya2luZyBpbiBTd2l0Y2ggYW5kIE1BQyBtb2RlDQo+ICogeDEgSW5wdXQg
+QXVkaW8gSmFjaywgeDEgT3V0cHV0IEF1ZGlvIEphY2sNCj4gKiB4MSBVU0IyLjAgSHViIHdpdGgg
+dHdvIFR5cGUgQSBob3N0IGFuZCB4MSBVU0IgMy4xIFR5cGUtQyBQb3J0DQo+ICogeDIgNEwgUENJ
+ZSBjb25uZWN0b3INCj4gKiB4MSBVSFMtMSBjYXBhYmxlIG1pY3JvLVNEIGNhcmQgc2xvdA0KPiAq
+IDUxMiBNYml0IE9TUEkgZmxhc2gsIDEgR2JpdCBPY3RhbCBOQU5EIGZsYXNoLCA1MTIgTWJpdCBR
+U1BJIGZsYXNoLA0KPiDCoCBVRlMgZmxhc2guDQo+ICogeDYgVUFSVCB0aHJvdWdoIFVBUlQtVVNC
+IGJyaWRnZQ0KPiAqIFhEUzExMCBmb3Igb25ib2FyZCBKVEFHIGRlYnVnIHVzaW5nIFVTQg0KPiAq
+IFRlbXBlcmF0dXJlIHNlbnNvcnMsIHVzZXIgcHVzaCBidXR0b25zIGFuZCBMRURzDQo+ICogNDAt
+cGluIFVzZXIgRXhwYW5zaW9uIENvbm5lY3Rvcg0KPiAqIHgyIEVORVQgRXhwYW5zaW9uIENvbm5l
+Y3RvciwgeDEgR0VTSSBleHBhbmRlciwgeDIgRGlzcGxheSBjb25uZWN0b3INCj4gKiB4MSAxNS1w
+aW4gQ1NJIGhlYWRlcg0KPiAqIHg2IE1DQU4gaW5zdGFuY2VzDQo+IA0KPiBTY2hlbWF0aWNzOiBo
+dHRwczovL3d3dy50aS5jb20vbGl0L3ppcC9zcHJyNDU4DQo+IA0KPiBBTTY5IFNEIG1vZGUgYm9v
+dGxvZzoNCj4gaHR0cHM6Ly9naXN0LmdpdGh1YnVzZXJjb250ZW50LmNvbS9hcHVydmFuYW5kYW4x
+OTk3LzFiMmM1NWQwMjA0ZmYwZjVhNDdlYmJjMTk2YTk3ZTk5L3Jhdy8NCj4gSjc4NFM0IFNEIG1v
+ZGUgYm9vdGxvZzoNCj4gaHR0cHM6Ly9naXN0LmdpdGh1YnVzZXJjb250ZW50LmNvbS9hcHVydmFu
+YW5kYW4xOTk3LzVlMmVmODVlZTQzMjI3OThkMjJiNTdhNjBkYzkxN2RiL3Jhdy8NCj4gZU1NQyBV
+REEgbW9vZGUgYm9vdGxvZzoNCj4gaHR0cHM6Ly9naXN0LmdpdGh1YnVzZXJjb250ZW50LmNvbS9h
+cHVydmFuYW5kYW4xOTk3LzNjZmZhZGEyNTJkNTBhOGFhMGMwMGE5MWYxZjJmODU2L3Jhdy8NCj4g
+DQo+IE5vdGU6IFRoaXMgc2VyaWVzIGlzIGRlcGVuZGVudCBvbiB0aGUgZm9sbG93aW5nIHNlcmll
+cyBmb3IgT0ZfVVBTVFJFQU0gc3VwcG9ydA0KPiBodHRwczovL2xvcmUua2VybmVsLm9yZy9hbGwv
+MjAyNDAyMjIwOTM2MDcuMzA4NTU0NS0xLXN1bWl0LmdhcmdAbGluYXJvLm9yZy8NCj4gDQo+IEFu
+ZCwgJ1tQQVRDSCAwMS8xNV0gTWFrZWZpbGU6IHJlbW92ZSBoYXJkY29kZWQgZGV2aWNlIHRyZWUg
+c291cmNlIGRpcmVjdG9yeScgaGFzIGJlZW4NCj4gY2hlcnJ5LXBpY2tlZCBmcm9tIFBBVENIIDEx
+IG9mIGh0dHBzOi8vbG9yZS5rZXJuZWwub3JnL2FsbC8yMDI0MDIwMTAzMDYzNC4xMTIwOTYzLTE2
+LWJiQHRpLmNvbS/CoGJ5IEJyeWFuDQo+IEJyYXR0bG9mDQo+IA0KPiBDaGFuZ2VzIGluIHYxMDoN
+Cj4gMSkgRml4ZWQgYnVpbGQgZmFpbHVyZSBkdWUgdG8gbWlzc2luZyBPRl9VUFNUUkVBTSBpbiBh
+NzIgZGVmY29uZmlncw0KPiAyKSBVcGRhdGVkIHBhdGhzIG9mIGJvYXJkIGR0YnMgaW4gYmlubWFu
+LmR0c2ksIENPTkZJR19PRl9MSVNUIGFuZCBDT05GSUdfREVGQVVMVF9ERVZJQ0VfVFJFRQ0KPiAN
+Cj4gQ2hhbmdlcyBpbiB2OToNCj4gMSkgQWRkZWQgc3VwcG9ydCBmb3IgT0ZfVVBTVFJFQU0gYW5k
+IHJlbW92ZWQgTGludXggZHRzIGNvcHkvc3luYyBwYXRjaGVzDQo+IDIpIEZpeGVkIERSQU0gZW51
+bWVyYXRpb24gYWxnb3JpdGhtIGluIGo3ODRzNF9pbml0LmMgYnkgYWRkaW5nIG1heCBuby4gb2Yg
+Y29udHJvbGxlcnMNCj4gMykgU3F1YXNoZWQgYm9vdHBoLWFsbCBwcm9wZXJ0eSBvZiBtZW1vcnkg
+bm9kZSBpbnRvIGFwcHJvcHJpYXRlIHBhdGNoDQo+IDQpIE1vdmVkIEREUiBjaGFuZ2VzIG91dCBv
+ZiB0aGUgRE1BIHBhdGNoDQo+IDUpIEZpeGVkIGNvbW1pdCBtZXNzYWdlcywgTUFJTlRBSU5FUlMg
+ZmlsZSwgYW5kIHJlbW92ZWQgdW5uZWNlc3NhcnkgQyBoZWFkZXJzDQo+IDYpIEFkZGVkIGNvbW1l
+bnQgZm9yIFdLVVBfVUFSVDANCj4gNykgVXNlZCAjaW5jbHVkZSBmb3IgZGVmY29uZmlnIGZvciBB
+TTY5LVNLIHBsYXRmb3JtIGluc3RlYWQgb2YgY29uZmlnIGZyYWdtZW50cw0KPiA4KSBGaXhlZCBK
+Nzg0UzQgRVZNIGJvb3Qgc3dpdGNoIG5hbWVpbmcgaW4gZG9jDQo+IA0KPiBMaW5rIHRvIHY4Og0K
+PiBodHRwczovL2xvcmUua2VybmVsLm9yZy91LWJvb3QvMjAyNDAxMTkxNzUwNDMuMzkwNDc1MS0x
+LWEtbmFuZGFuQHRpLmNvbS8NCj4gDQo+IENoYW5nZXMgaW4gdjg6DQo+IDEpIFNxdWFzaGVkIExp
+bnV4IGFtNjktc2sgYW5kIGo3ODRzNC1ldm0gZHRzIHBhdGNoZXMgaW50byBvbmUNCj4gMikgU29y
+dGVkIGNvbmZpZyBhZGRpdGlvbiBvZiBTb0MgaW4gYXJtL21hY2gtSzMvS2NvbmZpZw0KPiAzKSBV
+cGRhdGVkIGNvbW1pdCBtZXNzYWdlcyBhY2NvcmRpbmcgdG8gdGhlIHJldmlld3MNCj4gNCkgUmVt
+b3ZlZCAjaW5sY3VkZSA8Y29uZmlnLmg+DQo+IDUpIFJlbW92ZWQgazNfbW1jX3N0b3BfY2xvY2sg
+YW5kIGszX21tY19yZXN0YXJ0X2Nsb2NrDQo+IDYpIE1vdmVkIGJvYXJkX2luaXRfZiBsb2dpYyB0
+byBzZXBhcmF0ZSBzbWFsbGVyIGZ1bmN0aW9ucw0KPiA3KSBSZW1vdmVkIEo3ODRTNCBFVk0gc3Bl
+Y2lmaWMgS2NvbmZpZyBvcHRpb25zIGluIGo3ODRzNF9pbnQuYw0KPiA4KSBDbGVhbmVkIHVwIGVt
+bWMgYm9vdCBmbG93IGJhc2VkIG9uIGNvbW1pdCA2NjQ1OTM0NjQ2MzQzOWM3MmY4NGNmZDFmOTg1
+NDk2YjhhNjE0MmQ4DQo+IDkpIFJlbW92ZWQgdGhlIGRlcGVuZGVuY3kgb2YgZmluZGZkdCBhbmQg
+dXBkYXRlZCB0byB0aV9zZXRfZmR0X2Vudg0KPiAxMCkgVXBkYXRlZCBjb3B5cmlnaHQgbWVzc2Fn
+ZXMNCj4gMTEpIERpZCBjbGVhbnVwL2Zvcm1hdHRpbmcgb2YgeWFtbCBmaWxlcywgcmVtb3Zpbmcg
+bGludGluZyBlcnJvcnMNCj4gMTIpIFJlbW92ZWQgazMtYW02OS1zayBzcGVjaWZpYyB0aGluZ3Mg
+ZnJvbSBrMy1qNzg0czQtYmlubWFuLmR0c2kNCj4gMTMpIENoYW5nZWQgT0ZfTElTVCB0byBhIHNp
+bmdsZSBkdGINCj4gMTQpIEFkZGVkIGJvb3RwaC1hbGwgdGFnIGluIEVWTSBhbmQgU0sgZHRzIGlu
+c3RlYWQgb2YgdS1ib290LmR0c2kNCj4gMTUpIFRyaW1tZWQgdGhlIGRlZmNvbmZpZyBmaWxlcyB0
+byBtaW5pbWFsDQo+IDE2KSBNZXJnZWQgdGhlIE1BSU5UQUlORVIgZmlsZSBpbiByaWdodCBwYXRj
+aGVzDQo+IDE3KSBVcGRhdGVkIE9wZW5PQ0QgdGFnIGluIFUtQm9vdCBkb2MNCj4gMTgpIEFuZCBm
+aXhlZCBvdGhlciBmb3JtYXR0aW5nIG1pc3Rha2VzLg0KPiANCj4gTGluayB0byB2NzoNCj4gaHR0
+cHM6Ly9sb3JlLmtlcm5lbC5vcmcvdS1ib290LzIwMjMxMjE5MTkxNTM3LjQwMzkzNjEtMS1hLW5h
+bmRhbkB0aS5jb20vDQo+IA0KPiBDaGFuZ2VzIGluIHY3Og0KPiAxKSBNb3ZlZCB0byB1bmlmaWVk
+IG1lbW9yeSBtYXAgaW4gYXJtNjQtbW11LmMgYmFzZWQgb24NCj4gwqDCoCBodHRwczovL2xvcmUu
+a2VybmVsLm9yZy9hbGwvMjAyMzExMjgxNzA1MjguNDA3NzA3LTEtYWZkQHRpLmNvbS8NCj4gMikg
+VXNlZCBBUlJBWV9TSVpFIGluIGNsay1kYXRhLmMgYW5kIGRldi1kYXRhLmMNCj4gMykgUmVtb3Zl
+ZCBJMkMgYm9hcmQgZGV0ZWN0IGZyb20gajc4NHM0X2luaXQuYw0KPiA0KSBSZWJhc2VkIHRvIGxh
+dGVzdCBuZXh0DQo+IA0KPiBMaW5rIHRvIHY2Og0KPiBodHRwczovL2xvcmUua2VybmVsLm9yZy9h
+bGwvMjAyMzEyMDYxMjM3NTMuMTQ4NjAzMS0xLWEtbmFuZGFuQHRpLmNvbS8NCj4gDQo+IENoYW5n
+ZXMgaW4gdjY6DQo+IDEpIE1vdmUgYm9vdHBoLWFsbCBvZiBtZW1vcnkgbm9kZSB0byB1LWJvb3Qu
+ZHRzaQ0KPiAyKSBVc2VkIGEgd2hpbGUgbG9vcCBmb3IgRFJBTSBjb250cm9sbGVyIGluaXQsIGlu
+c3RlYWQgb2YgaGFyZC1jb2RpbmcgZm9yIDQgRFJBTQ0KPiAzKSBGaXhlZCBidWlsZCBlcnJvciBi
+eSBhZGRpbmcgYm9hcmQvdGkvajc4NHM0L0tjb25maWcNCj4gNCkgVHJpbW1lZCBvdXQgajc4NHM0
+X2V2bS5oDQo+IDUpIEZpeGVkIGNoZWNrcGF0Y2ggd2FybmluZ3MNCj4gDQo+IExpbmsgdG8gdjU6
+DQo+IGh0dHBzOi8vcGF0Y2h3b3JrLm96bGFicy5vcmcvcHJvamVjdC91Ym9vdC9jb3Zlci8yMDIz
+MTEzMDExNTU1Mi4zNTgwOTk1LTEtYS1uYW5kYW5AdGkuY29tLw0KPiANCj4gQ2hhbmdlcyBpbiB2
+NToNCj4gMSkgSW5jb3Jwb3JhdGVkIEFuZHJldyBEYXZpcycgIk1vdmUgUjUgc3BlY2lmaWMgY29k
+ZSBpbnRvIG5ldyByNS8gZGlyZWN0b3J5IiBhbmQNCj4gwqDCoCAiTW92ZSBib2FyZCBzZWxlY3Rp
+b24gdG8gbWFjaC1rMyIgc2VyaWVzIGNoYW5nZXMuDQo+IDIpIEluY29ycG9yYXRlZCBOZWhhIEZy
+YW5jaXMnICJNb3ZlIHRvIHVzaW5nIHRlbXBsYXRlZCBGSVRzIiBzZXJpZXMgY2hhbmdlcy4NCj4g
+MykgU3luY2VkIGRldmljZSB0cmVlIGZpbGVzIHdpdGggTGludXggdjYuNy1yYzENCj4gNCkgQ2hh
+bmdlZCB0aV9tbWMgdG8gbW1jMSB0YXJnZXQgZnJvbSBib290c3RkDQo+IDUpIFVwZGF0ZWQgZG9j
+IGJhc2VkIG9uIHJldmlldyBjb21tZW50cw0KPiA2KSBSZW1vdmVkIHJlbW90ZXByb2Mgc3VwcG9y
+dCBmcm9tIHRoZSBzZXJpZXMNCj4gNykgU3BsaXR0ZWQgYm9hcmQgZmlsZXMgcGF0Y2ggaW50byBz
+bWFsbGVyIHBhdGNoZXMNCj4gOCkgVHJpbW1lZCBqNzg0czQuZW52IHRvIG5lY2Vzc2FyeSB2YXJp
+YWJsZXMNCj4gOSkgVXNlZCBmZHRkZWNfc2V0dXBfbWVtX3NpemVfYmFzZSBmZHRkZWNfc2V0dXBf
+bWVtb3J5X2JhbmtzaXplIGluIGV2bS5jDQo+IDEwKSBUcmltbWVkIGRvd24gZXZtLmMgdG8gZXNz
+ZW50aWFsIGhlYWRlciBmaWxlcy4NCj4gMTEpIFN3aXRjaGVkIHRvIG11bHRpLWR0YiBmaXQgY29t
+cGlsYXRpb24gd2l0aCBjb25maWcgZnJhZ21lbnRzDQo+IA0KPiBMaW5rIHRvIHY0Og0KPiBodHRw
+czovL2xvcmUua2VybmVsLm9yZy91LWJvb3QvMjAyMzEwMDExNjU1NDUuNDk0MjEyLTEtYS1uYW5k
+YW5AdGkuY29tLw0KPiANCj4gQ2hhbmdlcyBpbiB2NDoNCj4gMSkgQ2xlYW5lZCB1cCBDb3B5cmln
+aHQgYW5kIFNQRFggaWRlbnRpZmllcnMNCj4gMikgU3luY2VkIHRoZSBkZXZpY2UgdHJlZXMgdG8g
+TGludXggdjYuNi1yYzEgdGFnDQo+IDMpIEFkZGVkIGNsZWFudXAgcGF0Y2ggZm9yIHNvcnRpbmcg
+U29DIEpUQUcgSUQgZW50cmllcw0KPiA0KSBSZW1vdmVkIEVFUFJPTSBib2FyZCBkZXRlY3QgZnJv
+bSBldm0uYyBhbmQgYWRkZWQgYW02OSBjb25maWcgZnJhZ21lbnRzDQo+IDUpIFVwZGF0ZWQgTUFJ
+TlRBSU5FUlMgZmlsZXMgYW5kIGNvbW1pdCBtZXNzYWdlcw0KPiA2KSBSZW1vdmVkIHN0cnVjdCBy
+ZW5hbWluZyBpbiB0aV9rM19yNWZfcnByb2MgZHJpdmVyDQo+IA0KPiBMaW5rIHRvIHYzOg0KPiBo
+dHRwczovL2xvcmUua2VybmVsLm9yZy91LWJvb3QvMjAyMzA5MDgxMTA1NTEuODYxNTc1LTEtYS1u
+YW5kYW5AdGkuY29tLw0KPiANCj4gQ2hhbmdlcyBpbiB2MzoNCj4gMSkgQWRkZWQgQU02OSBTSyBz
+dXBwb3J0IGluIHRoZSBzZXJpZXMNCj4gMikgU3dpdGNoZWQgZnJvbSBkaXN0cm9ib290IHRvIGJv
+b3RzdGQgc3VwcG9ydA0KPiAzKSBBZGRlZCByZW1vdGVwcm9jIHN1cHBvcnQgZm9yIEo3ODRTNA0K
+PiA0KSBBZGRlZCBkb2N1bWVudGF0aW9uIGZvciBib3RoIFNvQ3MNCj4gNSkgQWRkZWQgYmlubWFu
+IHN1cHBvcnQNCj4gNikgUmVtb3ZlZCB1bm5lY2Vzc2Fycnkgbm9kZXMgZnJvbSByNS1ldm0uZHRz
+IGFuZCBldm0tdS1ib290LmR0c2kNCj4gNykgQWRkZWQgSFMgZGV2aWNlIHN1cHBvcnQNCj4gOCkg
+QWRkZWQgZW52IGZpbGUgZm9yIGVudmlyb25lbWVudCB2YXJpYWJsZXMNCj4gOSkgUmVtb3ZlZCB0
+aS1zZXJkZXMtbXV4IGJpbmRpbmdzDQo+IDEwKSBDbGVhbmVkIHVwIGFsbCBmaWxlcyBhbmQgc3lu
+Y2VkIHdpdGggbGF0ZXN0DQo+IDExKSBBZGRyZXNzZWQgYWxsIHByZXZpb3VzIHJldmlldyBjb21t
+ZW50cw0KPiANCj4gTm90ZTogVGhlIGJhc2UgZHRzIGZpbGVzIGhhdmUgYmVlbiBzeW5jIGZyb20g
+bmV4dC0yMDIzMDkwNSBsaW51eCB0YWcgYXMgcGVyIHJldmlldyBjb21tZW50IHJlY2VpdmVkDQo+
+IG9uIHByZXZpb3VzIHJlLXJvbGw6DQo+IGh0dHBzOi8vbG9yZS5rZXJuZWwub3JnL3UtYm9vdC8y
+MDIzMDMyMTE1NTIyNy5HVjgxMzVAYmlsbC10aGUtY2F0Lw0KPiANCj4gTGluayB0byB2MjoNCj4g
+aHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvdS1ib290LzIwMjMwMzIxMTQxMDI4LjI0NDU2LTEtaG5h
+Z2FsbGFAdGkuY29tLw0KPiANCj4gQXB1cnZhIE5hbmRhbiAoMTIpOg0KPiDCoCBhcm06IG1hY2gt
+azM6IEtjb25maWc6IFNvcnQgU09DX0szIGNvbmZpZyBlbnRyaWVzDQo+IMKgIGFybTogbWFjaC1r
+MzogQWRkIGJhc2ljIHN1cHBvcnQgZm9yIEo3ODRTNCBTb0MgZGVmaW5pdGlvbg0KPiDCoCBhcm06
+IG1hY2gtazM6IFNvcnQgU29DIEpUQUdfSUQgZW50cmllcw0KPiDCoCBzb2M6IHRpOiBrMy1zb2Np
+bmZvOiBBZGQgZW50cnkgZm9yIEo3ODRTNCBTb0MNCj4gwqAgYXJtOiBtYWNoLWszOiBqNzg0czQ6
+IEFkZCBjbGsgYW5kIHBvd2VyIHN1cHBvcnQNCj4gwqAgZHJpdmVyczogZG1hOiBBZGQgc3VwcG9y
+dCBmb3IgSjc4NFM0IFNvQw0KPiDCoCBib2FyZDogdGk6IGo3ODRzNDogQWRkIGJvYXJkIHN1cHBv
+cnQgZm9yIEo3ODRTNCBFVk0NCj4gwqAgYm9hcmQ6IHRpOiBqNzQ4czQ6IEFkZCBib2FyZCBjb25m
+aWcgeWFtbCBmaWxlcw0KPiDCoCBib2FyZDogdGk6IGo3ODRzNDogQWRkIGJvb3QgZW52aXJvbm1l
+bnQgdmFyaWFibGVzDQo+IMKgIGFybTogZHRzOiBJbnRyb2R1Y2Ugajc4NHM0IHUtYm9vdCBkdHMg
+ZmlsZXMNCj4gwqAgY29uZmlnczogajc4NHM0X2V2bTogQWRkIGRlZmNvbmZpZyBmb3IgSjc4NFM0
+IEVWTSBib2FyZA0KPiDCoCBkb2M6IGJvYXJkOiB0aTogazM6IEFkZCBKNzg0UzQgRVZNIGFuZCBB
+TTY5IFNLIGRvY3VtZW50YXRpb24NCj4gDQo+IEJyeWFuIEJyYXR0bG9mICgxKToNCj4gwqAgTWFr
+ZWZpbGU6IHJlbW92ZSBoYXJkY29kZWQgZGV2aWNlIHRyZWUgc291cmNlIGRpcmVjdG9yeQ0KPiAN
+Cj4gRGFzbmF2aXMgU2FiaXlhICgyKToNCj4gwqAgYXJtOiBkdHM6IEludHJvZHVjZSBhbTY5LXNr
+IHUtYm9vdCBkdHMgZmlsZXMNCj4gwqAgY29uZmlnczogYW02OV9zazogQWRkIGRlZmNvbmZpZyBm
+b3IgQU02OSBTSyBib2FyZA0KPiANCj4gwqBNYWtlZmlsZcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoMKg
+IDE4ICstDQo+IMKgYXJjaC9hcm0vZHRzL01ha2VmaWxlwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoMKgwqAgNCArDQo+IMKgYXJjaC9hcm0vZHRzL2sz
+LWFtNjktcjUtc2suZHRzwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoCAxMDYgKw0K
+PiDCoGFyY2gvYXJtL2R0cy9rMy1hbTY5LXNrLXUtYm9vdC5kdHNpwqDCoMKgwqDCoMKgwqDCoMKg
+wqAgfMKgwqAgNTQgKw0KPiDCoGFyY2gvYXJtL2R0cy9rMy1qNzg0czQtYmlubWFuLmR0c2nCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgIHzCoCAzNDUgKw0KPiDCoGFyY2gvYXJtL2R0cy9rMy1qNzg0czQt
+ZGRyLWV2bS1scDQtNDI2Ni5kdHNpwqAgfCA4NzU3ICsrKysrKysrKysrKysrKysNCj4gwqBhcmNo
+L2FybS9kdHMvazMtajc4NHM0LWRkci5kdHNpwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8
+IDg4NTggKysrKysrKysrKysrKysrKysNCj4gwqBhcmNoL2FybS9kdHMvazMtajc4NHM0LWV2bS11
+LWJvb3QuZHRzacKgwqDCoMKgwqDCoMKgIHzCoMKgIDMxICsNCj4gwqBhcmNoL2FybS9kdHMvazMt
+ajc4NHM0LXI1LWV2bS5kdHPCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgIDEwNiArDQo+IMKg
+YXJjaC9hcm0vbWFjaC1rMy9LY29uZmlnwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgIHzCoMKgIDMzICstDQo+IMKgYXJjaC9hcm0vbWFjaC1rMy9NYWtlZmlsZcKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgwqDCoCAyICsNCj4gwqBhcmNo
+L2FybS9tYWNoLWszL2luY2x1ZGUvbWFjaC9oYXJkd2FyZS5owqDCoMKgwqDCoCB8wqDCoCAxMyAr
+LQ0KPiDCoC4uLi9tYWNoLWszL2luY2x1ZGUvbWFjaC9qNzg0czRfaGFyZHdhcmUuaMKgwqDCoCB8
+wqDCoCA1OSArDQo+IMKgYXJjaC9hcm0vbWFjaC1rMy9pbmNsdWRlL21hY2gvajc4NHM0X3NwbC5o
+wqDCoMKgIHzCoMKgIDQ3ICsNCj4gwqBhcmNoL2FybS9tYWNoLWszL2luY2x1ZGUvbWFjaC9zcGwu
+aMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoMKgwqAgNCArDQo+IMKgYXJjaC9hcm0vbWFjaC1rMy9q
+Nzg0czQvS2NvbmZpZ8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgwqAgMzQgKw0KPiDC
+oGFyY2gvYXJtL21hY2gtazMvajc4NHM0X2ZkdC5jwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqAgfMKgwqAgMTUgKw0KPiDCoGFyY2gvYXJtL21hY2gtazMvajc4NHM0X2luaXQuY8KgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqAgMzEwICsNCj4gwqBhcmNoL2FybS9tYWNoLWsz
+L3I1L01ha2VmaWxlwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqDCoMKgIDEg
+Kw0KPiDCoGFyY2gvYXJtL21hY2gtazMvcjUvajc4NHM0L01ha2VmaWxlwqDCoMKgwqDCoMKgwqDC
+oMKgwqAgfMKgwqDCoCA3ICsNCj4gwqBhcmNoL2FybS9tYWNoLWszL3I1L2o3ODRzNC9jbGstZGF0
+YS5jwqDCoMKgwqDCoMKgwqDCoCB8wqAgNDI4ICsNCj4gwqBhcmNoL2FybS9tYWNoLWszL3I1L2o3
+ODRzNC9kZXYtZGF0YS5jwqDCoMKgwqDCoMKgwqDCoCB8wqDCoCA5OCArDQo+IMKgYm9hcmQvdGkv
+ajc4NHM0L0tjb25maWfCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oCB8wqDCoCAzNyArDQo+IMKgYm9hcmQvdGkvajc4NHM0L01BSU5UQUlORVJTwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoMKgIDIxICsNCj4gwqBib2FyZC90aS9qNzg0czQv
+TWFrZWZpbGXCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgwqDC
+oCA3ICsNCj4gwqBib2FyZC90aS9qNzg0czQvYm9hcmQtY2ZnLnlhbWzCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqAgfMKgwqAgMzcgKw0KPiDCoGJvYXJkL3RpL2o3ODRzNC9ldm0uY8KgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqDCoCA0MSArDQo+
+IMKgYm9hcmQvdGkvajc4NHM0L2o3ODRzNC5lbnbCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoCB8wqDCoCAxNyArDQo+IMKgYm9hcmQvdGkvajc4NHM0L3BtLWNmZy55YW1swqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoMKgIDEzICsNCj4gwqBib2FyZC90
+aS9qNzg0czQvcm0tY2ZnLnlhbWzCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
+fCAzMDU4ICsrKysrKw0KPiDCoGJvYXJkL3RpL2o3ODRzNC9zZWMtY2ZnLnlhbWzCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoCAzODAgKw0KPiDCoGJvYXJkL3RpL2o3ODRzNC90
+aWZzLXJtLWNmZy55YW1swqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfCAyNjU2ICsrKysrDQo+
+IMKgY29uZmlncy9hbTY5X3NrX2E3Ml9kZWZjb25maWfCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoCB8wqDCoMKgIDkgKw0KPiDCoGNvbmZpZ3MvYW02OV9za19yNV9kZWZjb25maWfCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoMKgIDEwICsNCj4gwqBjb25maWdzL2o3
+ODRzNF9ldm1fYTcyX2RlZmNvbmZpZ8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoCAxNTkg
+Kw0KPiDCoGNvbmZpZ3Mvajc4NHM0X2V2bV9yNV9kZWZjb25maWfCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgIHzCoCAxNTMgKw0KPiDCoGRvYy9ib2FyZC90aS9qNzg0czRfZXZtLnJzdMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqAgMjk5ICsNCj4gwqBkb2MvYm9hcmQv
+dGkvazMucnN0wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoCB8wqDCoMKgIDEgKw0KPiDCoGRyaXZlcnMvY2xrL3RpL2Nsay1rMy5jwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgwqDCoCA2ICsNCj4gwqBkcml2ZXJz
+L2RtYS90aS9NYWtlZmlsZcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgIHzCoMKgwqAgMSArDQo+IMKgZHJpdmVycy9kbWEvdGkvazMtcHNpbC1qNzg0czQuY8KgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgIDE2NiArDQo+IMKgZHJpdmVycy9kbWEvdGkvazMt
+cHNpbC1wcml2LmjCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqDCoMKgIDEgKw0K
+PiDCoGRyaXZlcnMvZG1hL3RpL2szLXBzaWwuY8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoCB8wqDCoMKgIDIgKw0KPiDCoGRyaXZlcnMvZmlybXdhcmUvdGlfc2NpX3N0
+YXRpY19kYXRhLmjCoMKgwqDCoMKgwqDCoMKgIHzCoMKgIDM0ICsNCj4gwqBkcml2ZXJzL3Bvd2Vy
+L2RvbWFpbi90aS1wb3dlci1kb21haW4uY8KgwqDCoMKgwqDCoMKgIHzCoMKgwqAgNiArDQo+IMKg
+ZHJpdmVycy9yYW0vS2NvbmZpZ8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqAgfMKgwqDCoCAyICstDQo+IMKgZHJpdmVycy9zb2Mvc29jX3RpX2szLmPC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqDCoMKgIDMgKw0K
+PiDCoGluY2x1ZGUvY29uZmlncy9qNzg0czRfZXZtLmjCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgIHzCoMKgIDE1ICsNCj4gwqBpbmNsdWRlL2szLWNsay5owqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqDCoMKgIDEgKw0K
+PiDCoGluY2x1ZGUvazMtZGV2LmjCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoMKgwqAgMSArDQo+IMKgc2NyaXB0cy9NYWtlZmlsZS5z
+cGzCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqDC
+oCAxNyArLQ0KPiDCoDUxIGZpbGVzIGNoYW5nZWQsIDI2NDU1IGluc2VydGlvbnMoKyksIDI4IGRl
+bGV0aW9ucygtKQ0KPiDCoGNyZWF0ZSBtb2RlIDEwMDY0NCBhcmNoL2FybS9kdHMvazMtYW02OS1y
+NS1zay5kdHMNCj4gwqBjcmVhdGUgbW9kZSAxMDA2NDQgYXJjaC9hcm0vZHRzL2szLWFtNjktc2st
+dS1ib290LmR0c2kNCj4gwqBjcmVhdGUgbW9kZSAxMDA2NDQgYXJjaC9hcm0vZHRzL2szLWo3ODRz
+NC1iaW5tYW4uZHRzaQ0KPiDCoGNyZWF0ZSBtb2RlIDEwMDY0NCBhcmNoL2FybS9kdHMvazMtajc4
+NHM0LWRkci1ldm0tbHA0LTQyNjYuZHRzaQ0KPiDCoGNyZWF0ZSBtb2RlIDEwMDY0NCBhcmNoL2Fy
+bS9kdHMvazMtajc4NHM0LWRkci5kdHNpDQo+IMKgY3JlYXRlIG1vZGUgMTAwNjQ0IGFyY2gvYXJt
+L2R0cy9rMy1qNzg0czQtZXZtLXUtYm9vdC5kdHNpDQo+IMKgY3JlYXRlIG1vZGUgMTAwNjQ0IGFy
+Y2gvYXJtL2R0cy9rMy1qNzg0czQtcjUtZXZtLmR0cw0KPiDCoGNyZWF0ZSBtb2RlIDEwMDY0NCBh
+cmNoL2FybS9tYWNoLWszL2luY2x1ZGUvbWFjaC9qNzg0czRfaGFyZHdhcmUuaA0KPiDCoGNyZWF0
+ZSBtb2RlIDEwMDY0NCBhcmNoL2FybS9tYWNoLWszL2luY2x1ZGUvbWFjaC9qNzg0czRfc3BsLmgN
+Cj4gwqBjcmVhdGUgbW9kZSAxMDA2NDQgYXJjaC9hcm0vbWFjaC1rMy9qNzg0czQvS2NvbmZpZw0K
+PiDCoGNyZWF0ZSBtb2RlIDEwMDY0NCBhcmNoL2FybS9tYWNoLWszL2o3ODRzNF9mZHQuYw0KPiDC
+oGNyZWF0ZSBtb2RlIDEwMDY0NCBhcmNoL2FybS9tYWNoLWszL2o3ODRzNF9pbml0LmMNCj4gwqBj
+cmVhdGUgbW9kZSAxMDA2NDQgYXJjaC9hcm0vbWFjaC1rMy9yNS9qNzg0czQvTWFrZWZpbGUNCj4g
+wqBjcmVhdGUgbW9kZSAxMDA2NDQgYXJjaC9hcm0vbWFjaC1rMy9yNS9qNzg0czQvY2xrLWRhdGEu
+Yw0KPiDCoGNyZWF0ZSBtb2RlIDEwMDY0NCBhcmNoL2FybS9tYWNoLWszL3I1L2o3ODRzNC9kZXYt
+ZGF0YS5jDQo+IMKgY3JlYXRlIG1vZGUgMTAwNjQ0IGJvYXJkL3RpL2o3ODRzNC9LY29uZmlnDQo+
+IMKgY3JlYXRlIG1vZGUgMTAwNjQ0IGJvYXJkL3RpL2o3ODRzNC9NQUlOVEFJTkVSUw0KPiDCoGNy
+ZWF0ZSBtb2RlIDEwMDY0NCBib2FyZC90aS9qNzg0czQvTWFrZWZpbGUNCj4gwqBjcmVhdGUgbW9k
+ZSAxMDA2NDQgYm9hcmQvdGkvajc4NHM0L2JvYXJkLWNmZy55YW1sDQo+IMKgY3JlYXRlIG1vZGUg
+MTAwNjQ0IGJvYXJkL3RpL2o3ODRzNC9ldm0uYw0KPiDCoGNyZWF0ZSBtb2RlIDEwMDY0NCBib2Fy
+ZC90aS9qNzg0czQvajc4NHM0LmVudg0KPiDCoGNyZWF0ZSBtb2RlIDEwMDY0NCBib2FyZC90aS9q
+Nzg0czQvcG0tY2ZnLnlhbWwNCj4gwqBjcmVhdGUgbW9kZSAxMDA2NDQgYm9hcmQvdGkvajc4NHM0
+L3JtLWNmZy55YW1sDQo+IMKgY3JlYXRlIG1vZGUgMTAwNjQ0IGJvYXJkL3RpL2o3ODRzNC9zZWMt
+Y2ZnLnlhbWwNCj4gwqBjcmVhdGUgbW9kZSAxMDA2NDQgYm9hcmQvdGkvajc4NHM0L3RpZnMtcm0t
+Y2ZnLnlhbWwNCj4gwqBjcmVhdGUgbW9kZSAxMDA2NDQgY29uZmlncy9hbTY5X3NrX2E3Ml9kZWZj
+b25maWcNCj4gwqBjcmVhdGUgbW9kZSAxMDA2NDQgY29uZmlncy9hbTY5X3NrX3I1X2RlZmNvbmZp
+Zw0KPiDCoGNyZWF0ZSBtb2RlIDEwMDY0NCBjb25maWdzL2o3ODRzNF9ldm1fYTcyX2RlZmNvbmZp
+Zw0KPiDCoGNyZWF0ZSBtb2RlIDEwMDY0NCBjb25maWdzL2o3ODRzNF9ldm1fcjVfZGVmY29uZmln
+DQo+IMKgY3JlYXRlIG1vZGUgMTAwNjQ0IGRvYy9ib2FyZC90aS9qNzg0czRfZXZtLnJzdA0KPiDC
+oGNyZWF0ZSBtb2RlIDEwMDY0NCBkcml2ZXJzL2RtYS90aS9rMy1wc2lsLWo3ODRzNC5jDQo+IMKg
+Y3JlYXRlIG1vZGUgMTAwNjQ0IGluY2x1ZGUvY29uZmlncy9qNzg0czRfZXZtLmgNCg0KQ2hlZXJz
+DQoNCk1hcmNlbA0K
 
