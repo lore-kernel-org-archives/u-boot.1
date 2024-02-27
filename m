@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EE8AC54798
-	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 20:41:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84CCDC54798
+	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 20:41:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E154688012;
-	Tue, 27 Feb 2024 21:40:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6BC6A87E92;
+	Tue, 27 Feb 2024 21:41:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB6C98805C; Tue, 27 Feb 2024 21:40:56 +0100 (CET)
-Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
- [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id 7A5808803A
- for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 21:40:54 +0100 (CET)
+ id 3010F8803A; Tue, 27 Feb 2024 21:41:00 +0100 (CET)
+Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
+ [210.160.252.171])
+ by phobos.denx.de (Postfix) with ESMTP id B042F88051
+ for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 21:40:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-IronPort-AV: E=Sophos;i="6.06,188,1705330800"; d="scan'208";a="199492142"
+X-IronPort-AV: E=Sophos;i="6.06,188,1705330800"; d="scan'208";a="195553917"
 Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie6.idc.renesas.com with ESMTP; 28 Feb 2024 05:40:54 +0900
+ by relmlie5.idc.renesas.com with ESMTP; 28 Feb 2024 05:40:56 +0900
 Received: from renesas-deb12.mshome.net (unknown [10.226.92.31])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id 54D8440083FB;
- Wed, 28 Feb 2024 05:40:52 +0900 (JST)
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id 9454740083FB;
+ Wed, 28 Feb 2024 05:40:54 +0900 (JST)
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
 Cc: Paul Barker <paul.barker.ct@bp.renesas.com>,
 	u-boot@lists.denx.de
-Subject: [PATCH v3 5/8] board: rzg2l: Enable access to Renesas RAA215300 PMIC
-Date: Tue, 27 Feb 2024 20:40:32 +0000
-Message-Id: <20240227204035.3761-6-paul.barker.ct@bp.renesas.com>
+Subject: [PATCH v3 6/8] sysreset: Support reset via Renesas RAA215300 PMIC
+Date: Tue, 27 Feb 2024 20:40:33 +0000
+Message-Id: <20240227204035.3761-7-paul.barker.ct@bp.renesas.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240227204035.3761-1-paul.barker.ct@bp.renesas.com>
 References: <20240227204035.3761-1-paul.barker.ct@bp.renesas.com>
@@ -56,34 +56,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable the appropriate PMIC driver as well as the `pmic` command.
+This patch adds support for resetting a board via the RAA215300 PMIC.
+
+Note that the RAA215300 documentation names the available reset types
+differently to u-boot:
+
+  * A "warm" reset via the RAA215300 PMIC will fully reset the SoC
+    (CPU & GPIOs), so this corresponds to SYSRESET_COLD.
+
+  * A "cold" reset via the RAA215300 PMIC will cycle all power supply
+    rails, so this corresponds to SYSRESET_POWER.
 
 Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
- configs/renesas_rzg2l_smarc_defconfig | 3 +++
- 1 file changed, 3 insertions(+)
+ drivers/sysreset/Kconfig              |  6 +++
+ drivers/sysreset/Makefile             |  1 +
+ drivers/sysreset/sysreset_raa215300.c | 58 +++++++++++++++++++++++++++
+ 3 files changed, 65 insertions(+)
+ create mode 100644 drivers/sysreset/sysreset_raa215300.c
 
-diff --git a/configs/renesas_rzg2l_smarc_defconfig b/configs/renesas_rzg2l_smarc_defconfig
-index ad46297c6619..2cab79329db4 100644
---- a/configs/renesas_rzg2l_smarc_defconfig
-+++ b/configs/renesas_rzg2l_smarc_defconfig
-@@ -27,6 +27,7 @@ CONFIG_CMD_GPIO=y
- CONFIG_CMD_I2C=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_PART=y
-+CONFIG_CMD_PMIC=y
- CONFIG_CMD_EXT2=y
- CONFIG_CMD_EXT4=y
- CONFIG_CMD_EXT4_WRITE=y
-@@ -49,6 +50,8 @@ CONFIG_DM_I2C=y
- CONFIG_MMC_IO_VOLTAGE=y
- CONFIG_MMC_UHS_SUPPORT=y
- CONFIG_MMC_HS400_SUPPORT=y
-+CONFIG_DM_PMIC=y
-+CONFIG_PMIC_RAA215300=y
- CONFIG_DM_REGULATOR=y
- CONFIG_DM_REGULATOR_FIXED=y
- CONFIG_DM_REGULATOR_GPIO=y
+diff --git a/drivers/sysreset/Kconfig b/drivers/sysreset/Kconfig
+index 0e52f996283c..49c0787b26d8 100644
+--- a/drivers/sysreset/Kconfig
++++ b/drivers/sysreset/Kconfig
+@@ -229,6 +229,12 @@ config SYSRESET_MPC83XX
+ 	help
+ 	  Reboot support for NXP MPC83xx SoCs.
+ 
++config SYSRESET_RAA215300
++	bool "Support sysreset via Renesas RAA215300 PMIC"
++	depends on PMIC_RAA215300
++	help
++	  Add support for the system reboot via the Renesas RAA215300 PMIC.
++
+ endif
+ 
+ endmenu
+diff --git a/drivers/sysreset/Makefile b/drivers/sysreset/Makefile
+index c9f1c625aebb..e0e732205df3 100644
+--- a/drivers/sysreset/Makefile
++++ b/drivers/sysreset/Makefile
+@@ -27,4 +27,5 @@ obj-$(CONFIG_SYSRESET_WATCHDOG) += sysreset_watchdog.o
+ obj-$(CONFIG_SYSRESET_RESETCTL) += sysreset_resetctl.o
+ obj-$(CONFIG_$(SPL_TPL_)SYSRESET_AT91) += sysreset_at91.o
+ obj-$(CONFIG_$(SPL_TPL_)SYSRESET_X86) += sysreset_x86.o
++obj-$(CONFIG_SYSRESET_RAA215300) += sysreset_raa215300.o
+ obj-$(CONFIG_TARGET_XTFPGA) += sysreset_xtfpga.o
+diff --git a/drivers/sysreset/sysreset_raa215300.c b/drivers/sysreset/sysreset_raa215300.c
+new file mode 100644
+index 000000000000..32dfcb0aec84
+--- /dev/null
++++ b/drivers/sysreset/sysreset_raa215300.c
+@@ -0,0 +1,58 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2023 Renesas Electronics Corporation
++ */
++
++#include <dm.h>
++#include <power/pmic.h>
++#include <sysreset.h>
++
++#define RAA215300_REG_SWRESET	0x6D
++#define RAA215300_COLD_RESET	BIT(0)
++#define RAA215300_WARM_RESET	BIT(1)
++
++static int raa215300_sysreset_request(struct udevice *dev, enum sysreset_t type)
++{
++	struct udevice *pmic = dev_get_parent(dev);
++	int ret;
++	u8 val;
++
++	/*
++	 * The RAA215300 documentation names the available reset types
++	 * differently to u-boot:
++	 *
++	 *   - A "warm" reset via the RAA215300 PMIC will fully reset the SoC
++	 *     (CPU & GPIOs), so this corresponds to SYSRESET_COLD.
++	 *
++	 *   - A "cold" reset via the RAA215300 PMIC will cycle all power supply
++	 *     rails, so this corresponds to SYSRESET_POWER.
++	 */
++	switch (type) {
++	case SYSRESET_COLD:
++		val = RAA215300_WARM_RESET;
++		break;
++
++	case SYSRESET_POWER:
++		val = RAA215300_COLD_RESET;
++		break;
++
++	default:
++		return -EPROTONOSUPPORT;
++	}
++
++	ret = pmic_reg_write(pmic, RAA215300_REG_SWRESET, val);
++	if (ret)
++		return ret;
++
++	return -EINPROGRESS;
++}
++
++static struct sysreset_ops raa215300_sysreset_ops = {
++	.request = raa215300_sysreset_request,
++};
++
++U_BOOT_DRIVER(raa215300_sysreset) = {
++	.name = "raa215300_sysreset",
++	.id = UCLASS_SYSRESET,
++	.ops = &raa215300_sysreset_ops,
++};
 -- 
 2.44.0
 
