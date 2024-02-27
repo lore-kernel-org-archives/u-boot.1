@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0156C54798
-	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 16:12:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39623C5478C
+	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 16:13:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ACE1B88053;
-	Tue, 27 Feb 2024 17:10:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 236B588027;
+	Tue, 27 Feb 2024 17:10:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="NWKM+720";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="ItXFNosy";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="kDFmh16U";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="BVtyh9w+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 744A988027; Tue, 27 Feb 2024 17:10:25 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
+ id 75FA48806E; Tue, 27 Feb 2024 17:10:26 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 029BC88045
- for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 17:10:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F93E88005
+ for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 17:10:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,46 +31,47 @@ Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4TkjBP50F1z9stG;
- Tue, 27 Feb 2024 17:10:21 +0100 (CET)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4TkjBQ6tX0z9ss0;
+ Tue, 27 Feb 2024 17:10:22 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1709050221;
+ s=mail20150812; t=1709050222;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=B207M/SSqsLXGBPHqbTWaTjMnIE30/KCPkJpkS1vS/s=;
- b=NWKM+720aTdJAhQ0u8YdlFyp92Wat4o05I3+whQKbM/Ec8PpAlivn51i4OAE7HVJzZUBw0
- ffaS/CunA4sKfRGy5JDAxKBhZ97CrE9XOMu9d4tSAP6H81XGCisfyMvgMBE8BR+WPEEe35
- lRHsLpaekY9VvP+YmuJhefrZ8J4r5re9Jt9uoEOobyyGn3WiGtSZ1z926i52na8+gX+I1f
- rvCmQz73VXLkYvbt63igxAQmyqkyCCTY5gywjCDGAL/kW+urzbkMiVoSYGROoozbkpQygg
- P7OmBVsO98fRxT+90ZLbCe/fJbLlrZhR3Ol772NCdi+5UZBMbcuOAcy1s+fYdg==
+ bh=TpG6WBb/r66+IT5K+At0mbkZqVQjZQFSR1OzTjf3i4M=;
+ b=kDFmh16U891ByAvMt476r3lvtWtqbjEzXCFJPR7h9NT0cYDVspQn9gM3ONYDVsXddLQsDC
+ 85MGZE3zpCOeb8cKxgNBCoWitDLGqZvc+0sygLO11z0bKE/NKTQjNTyY3nLolcf5/rZyQW
+ nFtmYt8yrElsAslOTCHaNg90FdDCcl6CuUS9zDmRH461RR3zaEnQdShz1xq0BKRI5wVG3x
+ XfgqnZbyP1MWUUnhIZhwra7j85ShkKuIPK/SvQl6imdF5qxXk9ykLDU3twO5AqKTptgP5d
+ QTn7jUz7xNhRtMvaCc9b13vXPRQ9clsXmy/6YNu4WDSyJhqTZOCXhi0+a7/vSg==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1709050219;
+ s=mail20150812; t=1709050220;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=B207M/SSqsLXGBPHqbTWaTjMnIE30/KCPkJpkS1vS/s=;
- b=ItXFNosyLDgT5IUZ/XxdaBgbj+CURJeJkOkWwGLTAcgAGIGVfhRWC2tFeuh7qUWcP3zW+s
- 8Tat3y3fynI1rbdeikzi/ZYOMiZQdBZnLSPLadYIDiNFldq4RYqO+nyK8epE+3V6rVsOW6
- XiWC6FhwUNz4JmGTZ8eKwEw+FE/tBzvs8LGuPThYGvQRUl2mQroZlKjrZruK5dtiZ0+mn9
- 1bEa6IF+jaPZP2ayJ1bso7sj7kKipKMcyy1ObR23vr9Wjk0NlNwiOhyIz4rDSK7gq5Fq7h
- etp52U2MrsJ1W+kw5jWYhPcl/w1iPEBnhQXWS5LtKjcmxkAjWpE/a6D89ne39A==
+ bh=TpG6WBb/r66+IT5K+At0mbkZqVQjZQFSR1OzTjf3i4M=;
+ b=BVtyh9w+phasHyKQgzbzpEaVp5BZcwURb5sx1zjiw14hqElv25k0KzYI6b2N3PhHbwxO+n
+ Mm7J4B52sxFiRIN1ZTT6GHS0A/zEcQmQfwF9vj/n91HQqdShWjGOUZYoBK723Z7x/qboNY
+ 8+tIUWjKAq5TiKpIhQwMq+5YEkylyUnZgbouB03Y69QclcJmiIERvxPyxddseA4ssfW5ib
+ +PKLtUUz77wjTizVz6FWaQx3dlCS9fFoGJg7YfGyjsHyf/aDpc4LI/RHWIpCbAnKhzRIm7
+ DnS6LPYl+TmW448Z19qKAEG92vdaBCUJTNq+GFebv4pZ6mvL8zoTsSiDmwhpJA==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Paul Barker <paul.barker.ct@bp.renesas.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 15/19] ARM: renesas: Rename ARCH_RMOBILE to ARCH_RENESAS
-Date: Tue, 27 Feb 2024 17:05:55 +0100
-Message-ID: <20240227160912.412181-16-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 16/19] ARM: renesas: Rename arch-/mach-rmobile to
+ arch-/mach-renesas
+Date: Tue, 27 Feb 2024 17:05:56 +0100
+Message-ID: <20240227160912.412181-17-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20240227160912.412181-1-marek.vasut+renesas@mailbox.org>
 References: <20240227160912.412181-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: ywby7qksudxdck5xcq45pijsop1nmj8r
-X-MBO-RS-ID: ac987c476cf2627803f
+X-MBO-RS-META: t4bjhotny7wj5yqwh6ypqec81y9g36ah
+X-MBO-RS-ID: db84c048e40ec36ae66
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,14 +88,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rename ARCH_RMOBILE to ARCH_RENESAS because all the chips are made
-by Renesas, while only a subset of them is from the R-Mobile
-line.
+Rename arch-rmobile to arch-renesas and mach-rmobile to mach-renesas
+because all the chips are made by Renesas, while only a subset of
+them is from the R-Mobile line.
 
-Use the following command to perform the rename:
+Use the following command to perform the rename, with manual move of
+the directories using git mv and manual fix up to arch/arm/Makefile:
 
 "
-$ git grep -l 'ARCH_RMOBILE' | xargs -I {} sed -i 's@ARCH_RMOBILE@ARCH_RENESAS@g' {}
+$ git grep -l '\<\(arch\|mach\)-rmobile\>' | \
+  xargs -I {} sed -i 's@\<\(arch\|mach\)-rmobile\>@\1-renesas@g' {}
+$ sed -i 's@rmobile@renesas@' board/*/*/Kconfig
 "
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
@@ -103,615 +107,632 @@ Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
 Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
 Cc: Tom Rini <trini@konsulko.com>
 ---
- arch/arm/Kconfig                             |  2 +-
- arch/arm/Makefile                            |  2 +-
- arch/arm/mach-rmobile/Kconfig                |  4 ++--
- arch/arm/mach-rmobile/include/mach/renesas.h | 10 +++++-----
- arch/sh/lib/time.c                           |  2 +-
- configs/alt_defconfig                        |  2 +-
- configs/blanche_defconfig                    |  2 +-
- configs/gose_defconfig                       |  2 +-
- configs/grpeach_defconfig                    |  2 +-
- configs/hihope_rzg2_defconfig                |  2 +-
- configs/koelsch_defconfig                    |  2 +-
- configs/lager_defconfig                      |  2 +-
- configs/porter_defconfig                     |  2 +-
- configs/r8a77970_eagle_defconfig             |  2 +-
- configs/r8a77970_v3msk_defconfig             |  2 +-
- configs/r8a77980_condor_defconfig            |  2 +-
- configs/r8a77980_v3hsk_defconfig             |  2 +-
- configs/r8a77990_ebisu_defconfig             |  2 +-
- configs/r8a77995_draak_defconfig             |  2 +-
- configs/r8a779a0_falcon_defconfig            |  2 +-
- configs/r8a779f0_spider_defconfig            |  2 +-
- configs/r8a779g0_whitehawk_defconfig         |  2 +-
- configs/r8a779h0_grayhawk_defconfig          |  2 +-
- configs/rcar3_salvator-x_defconfig           |  2 +-
- configs/rcar3_ulcb_defconfig                 |  2 +-
- configs/renesas_rzg2l_smarc_defconfig        |  2 +-
- configs/rzg2_beacon_defconfig                |  2 +-
- configs/rzn1_snarc_defconfig                 |  2 +-
- configs/silinux_ek874_defconfig              |  2 +-
- configs/silk_defconfig                       |  2 +-
- configs/stout_defconfig                      |  2 +-
- drivers/clk/renesas/Kconfig                  |  2 +-
- drivers/gpio/Kconfig                         |  2 +-
- drivers/i2c/Kconfig                          |  2 +-
- drivers/mmc/Kconfig                          |  4 ++--
- drivers/mmc/sh_mmcif.h                       |  2 +-
- drivers/pinctrl/Makefile                     |  2 +-
- drivers/pinctrl/renesas/Kconfig              |  4 ++--
- drivers/ram/Makefile                         |  2 +-
- drivers/serial/Kconfig                       |  4 ++--
- drivers/usb/host/Kconfig                     |  2 +-
- 41 files changed, 49 insertions(+), 49 deletions(-)
+ MAINTAINERS                                          |  2 +-
+ Makefile                                             |  2 +-
+ arch/arm/Kconfig                                     |  2 +-
+ arch/arm/Makefile                                    |  2 +-
+ arch/arm/{mach-rmobile => mach-renesas}/Kconfig      | 12 ++++++------
+ arch/arm/{mach-rmobile => mach-renesas}/Kconfig.32   |  0
+ arch/arm/{mach-rmobile => mach-renesas}/Kconfig.64   |  4 ++--
+ .../arm/{mach-rmobile => mach-renesas}/Kconfig.rcar3 |  0
+ .../arm/{mach-rmobile => mach-renesas}/Kconfig.rcar4 |  0
+ arch/arm/{mach-rmobile => mach-renesas}/Kconfig.rza1 |  0
+ .../arm/{mach-rmobile => mach-renesas}/Kconfig.rzg2l |  0
+ arch/arm/{mach-rmobile => mach-renesas}/Kconfig.rzn1 |  0
+ arch/arm/{mach-rmobile => mach-renesas}/Makefile     |  0
+ arch/arm/{mach-rmobile => mach-renesas}/board.c      |  0
+ .../{mach-rmobile => mach-renesas}/cpu_info-rcar.c   |  0
+ .../{mach-rmobile => mach-renesas}/cpu_info-rzg.c    |  0
+ .../{mach-rmobile => mach-renesas}/cpu_info-rzg2l.c  |  0
+ arch/arm/{mach-rmobile => mach-renesas}/cpu_info.c   |  0
+ arch/arm/{mach-rmobile => mach-renesas}/emac.c       |  0
+ .../include/mach/boot0.h                             |  0
+ .../include/mach/gpio.h                              |  0
+ .../include/mach/irqs.h                              |  0
+ .../include/mach/r8a7790.h                           |  2 +-
+ .../include/mach/r8a7791.h                           |  2 +-
+ .../include/mach/r8a7792.h                           |  2 +-
+ .../include/mach/r8a7793.h                           |  2 +-
+ .../include/mach/r8a7794.h                           |  2 +-
+ .../include/mach/rcar-base.h                         |  2 +-
+ .../include/mach/rcar-gen3-base.h                    |  2 +-
+ .../include/mach/rcar-gen4-base.h                    |  2 +-
+ .../include/mach/rcar-mstp.h                         |  2 +-
+ .../include/mach/renesas.h                           |  0
+ .../include/mach/rzg2l.h                             |  0
+ .../include/mach/sys_proto.h                         |  0
+ .../lowlevel_init_ca15.S                             |  0
+ .../lowlevel_init_gen3.S                             |  0
+ .../arm/{mach-rmobile => mach-renesas}/memmap-gen3.c |  0
+ .../{mach-rmobile => mach-renesas}/memmap-rzg2l.c    |  0
+ .../{mach-rmobile => mach-renesas}/psci-r8a779a0.c   |  0
+ board/beacon/beacon-rzg2m/Kconfig                    |  2 +-
+ board/hoperun/hihope-rzg2/Kconfig                    |  2 +-
+ board/renesas/condor/Kconfig                         |  2 +-
+ board/renesas/draak/Kconfig                          |  2 +-
+ board/renesas/eagle/Kconfig                          |  2 +-
+ board/renesas/ebisu/Kconfig                          |  2 +-
+ board/renesas/falcon/Kconfig                         |  2 +-
+ board/renesas/grayhawk/Kconfig                       |  2 +-
+ board/renesas/rzg2l/Kconfig                          |  2 +-
+ board/renesas/salvator-x/Kconfig                     |  2 +-
+ board/renesas/spider/Kconfig                         |  2 +-
+ board/renesas/ulcb/Kconfig                           |  2 +-
+ board/renesas/v3hsk/Kconfig                          |  2 +-
+ board/renesas/v3msk/Kconfig                          |  2 +-
+ board/renesas/whitehawk/Kconfig                      |  2 +-
+ board/silinux/ek874/Kconfig                          |  2 +-
+ 55 files changed, 37 insertions(+), 37 deletions(-)
+ rename arch/arm/{mach-rmobile => mach-renesas}/Kconfig (88%)
+ rename arch/arm/{mach-rmobile => mach-renesas}/Kconfig.32 (100%)
+ rename arch/arm/{mach-rmobile => mach-renesas}/Kconfig.64 (56%)
+ rename arch/arm/{mach-rmobile => mach-renesas}/Kconfig.rcar3 (100%)
+ rename arch/arm/{mach-rmobile => mach-renesas}/Kconfig.rcar4 (100%)
+ rename arch/arm/{mach-rmobile => mach-renesas}/Kconfig.rza1 (100%)
+ rename arch/arm/{mach-rmobile => mach-renesas}/Kconfig.rzg2l (100%)
+ rename arch/arm/{mach-rmobile => mach-renesas}/Kconfig.rzn1 (100%)
+ rename arch/arm/{mach-rmobile => mach-renesas}/Makefile (100%)
+ rename arch/arm/{mach-rmobile => mach-renesas}/board.c (100%)
+ rename arch/arm/{mach-rmobile => mach-renesas}/cpu_info-rcar.c (100%)
+ rename arch/arm/{mach-rmobile => mach-renesas}/cpu_info-rzg.c (100%)
+ rename arch/arm/{mach-rmobile => mach-renesas}/cpu_info-rzg2l.c (100%)
+ rename arch/arm/{mach-rmobile => mach-renesas}/cpu_info.c (100%)
+ rename arch/arm/{mach-rmobile => mach-renesas}/emac.c (100%)
+ rename arch/arm/{mach-rmobile => mach-renesas}/include/mach/boot0.h (100%)
+ rename arch/arm/{mach-rmobile => mach-renesas}/include/mach/gpio.h (100%)
+ rename arch/arm/{mach-rmobile => mach-renesas}/include/mach/irqs.h (100%)
+ rename arch/arm/{mach-rmobile => mach-renesas}/include/mach/r8a7790.h (94%)
+ rename arch/arm/{mach-rmobile => mach-renesas}/include/mach/r8a7791.h (97%)
+ rename arch/arm/{mach-rmobile => mach-renesas}/include/mach/r8a7792.h (93%)
+ rename arch/arm/{mach-rmobile => mach-renesas}/include/mach/r8a7793.h (97%)
+ rename arch/arm/{mach-rmobile => mach-renesas}/include/mach/r8a7794.h (94%)
+ rename arch/arm/{mach-rmobile => mach-renesas}/include/mach/rcar-base.h (99%)
+ rename arch/arm/{mach-rmobile => mach-renesas}/include/mach/rcar-gen3-base.h (97%)
+ rename arch/arm/{mach-rmobile => mach-renesas}/include/mach/rcar-gen4-base.h (96%)
+ rename arch/arm/{mach-rmobile => mach-renesas}/include/mach/rcar-mstp.h (97%)
+ rename arch/arm/{mach-rmobile => mach-renesas}/include/mach/renesas.h (100%)
+ rename arch/arm/{mach-rmobile => mach-renesas}/include/mach/rzg2l.h (100%)
+ rename arch/arm/{mach-rmobile => mach-renesas}/include/mach/sys_proto.h (100%)
+ rename arch/arm/{mach-rmobile => mach-renesas}/lowlevel_init_ca15.S (100%)
+ rename arch/arm/{mach-rmobile => mach-renesas}/lowlevel_init_gen3.S (100%)
+ rename arch/arm/{mach-rmobile => mach-renesas}/memmap-gen3.c (100%)
+ rename arch/arm/{mach-rmobile => mach-renesas}/memmap-rzg2l.c (100%)
+ rename arch/arm/{mach-rmobile => mach-renesas}/psci-r8a779a0.c (100%)
 
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 0b08ca19239..cd9b2d42e83 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -497,7 +497,7 @@ M:	Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+ M:	Marek Vasut <marek.vasut+renesas@mailbox.org>
+ S:	Maintained
+ T:	git https://source.denx.de/u-boot/custodians/u-boot-sh.git
+-F:	arch/arm/mach-rmobile/
++F:	arch/arm/mach-renesas/
+ F:	drivers/clk/renesas/
+ F:	drivers/gpio/gpio-rcar.c
+ F:	drivers/i2c/rcar_*
+diff --git a/Makefile b/Makefile
+index 3b5db90df6f..f308d7884dd 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1266,7 +1266,7 @@ spl/u-boot-spl.srec: spl/u-boot-spl FORCE
+ 	$(call if_changed,objcopy)
+ 
+ %.scif: %.srec
+-	$(Q)$(MAKE) $(build)=arch/arm/mach-rmobile $@
++	$(Q)$(MAKE) $(build)=arch/arm/mach-renesas $@
+ 
+ OBJCOPYFLAGS_u-boot-nodtb.bin := -O binary \
+ 		$(if $(CONFIG_X86_16BIT_INIT),-R .start16 -R .resetvec) \
 diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index fde85dc0d53..dbd7e014245 100644
+index dbd7e014245..01d6556c42b 100644
 --- a/arch/arm/Kconfig
 +++ b/arch/arm/Kconfig
-@@ -1071,7 +1071,7 @@ config ARCH_QEMU
- 	imply USB_KEYBOARD
- 	imply CMD_USB
+@@ -2269,7 +2269,7 @@ source "arch/arm/mach-orion5x/Kconfig"
  
--config ARCH_RMOBILE
-+config ARCH_RENESAS
- 	bool "Renesas ARM SoCs"
- 	select DM
- 	select DM_SERIAL
+ source "arch/arm/mach-owl/Kconfig"
+ 
+-source "arch/arm/mach-rmobile/Kconfig"
++source "arch/arm/mach-renesas/Kconfig"
+ 
+ source "arch/arm/mach-meson/Kconfig"
+ 
 diff --git a/arch/arm/Makefile b/arch/arm/Makefile
-index 5ebe0619d39..d7ca8715a3f 100644
+index d7ca8715a3f..a4266a3e366 100644
 --- a/arch/arm/Makefile
 +++ b/arch/arm/Makefile
 @@ -75,7 +75,7 @@ machine-$(CONFIG_ARCH_NPCM)             += npcm
  machine-$(CONFIG_ARCH_OMAP2PLUS)	+= omap2
  machine-$(CONFIG_ARCH_ORION5X)		+= orion5x
  machine-$(CONFIG_ARCH_OWL)		+= owl
--machine-$(CONFIG_ARCH_RMOBILE)		+= rmobile
-+machine-$(CONFIG_ARCH_RENESAS)		+= rmobile
+-machine-$(CONFIG_ARCH_RENESAS)		+= rmobile
++machine-$(CONFIG_ARCH_RENESAS)		+= renesas
  machine-$(CONFIG_ARCH_ROCKCHIP)		+= rockchip
  machine-$(CONFIG_ARCH_S5PC1XX)		+= s5pc1xx
  machine-$(CONFIG_ARCH_SNAPDRAGON)	+= snapdragon
-diff --git a/arch/arm/mach-rmobile/Kconfig b/arch/arm/mach-rmobile/Kconfig
-index 2bb96749fc0..c1db9531a3c 100644
+diff --git a/arch/arm/mach-rmobile/Kconfig b/arch/arm/mach-renesas/Kconfig
+similarity index 88%
+rename from arch/arm/mach-rmobile/Kconfig
+rename to arch/arm/mach-renesas/Kconfig
+index c1db9531a3c..5aacc6f58f3 100644
 --- a/arch/arm/mach-rmobile/Kconfig
-+++ b/arch/arm/mach-rmobile/Kconfig
-@@ -1,4 +1,4 @@
--if ARCH_RMOBILE
-+if ARCH_RENESAS
- 
- # Renesas ARM SoCs R-Car Gen3/Gen4 (64bit)
- config RCAR_64
-@@ -88,7 +88,7 @@ config RZG2L
++++ b/arch/arm/mach-renesas/Kconfig
+@@ -88,12 +88,12 @@ config RZG2L
  endchoice
  
  config SYS_SOC
--	default "rmobile" if ARCH_RMOBILE
-+	default "rmobile" if ARCH_RENESAS
+-	default "rmobile" if ARCH_RENESAS
++	default "renesas" if ARCH_RENESAS
  
- source "arch/arm/mach-rmobile/Kconfig.32"
- source "arch/arm/mach-rmobile/Kconfig.64"
-diff --git a/arch/arm/mach-rmobile/include/mach/renesas.h b/arch/arm/mach-rmobile/include/mach/renesas.h
-index 67c480048de..c69c764adb8 100644
---- a/arch/arm/mach-rmobile/include/mach/renesas.h
-+++ b/arch/arm/mach-rmobile/include/mach/renesas.h
-@@ -1,7 +1,7 @@
--#ifndef __ASM_ARCH_RMOBILE_H
--#define __ASM_ARCH_RMOBILE_H
-+#ifndef __ASM_ARCH_RENESAS_H
-+#define __ASM_ARCH_RENESAS_H
+-source "arch/arm/mach-rmobile/Kconfig.32"
+-source "arch/arm/mach-rmobile/Kconfig.64"
+-source "arch/arm/mach-rmobile/Kconfig.rza1"
+-source "arch/arm/mach-rmobile/Kconfig.rzn1"
+-source "arch/arm/mach-rmobile/Kconfig.rzg2l"
++source "arch/arm/mach-renesas/Kconfig.32"
++source "arch/arm/mach-renesas/Kconfig.64"
++source "arch/arm/mach-renesas/Kconfig.rza1"
++source "arch/arm/mach-renesas/Kconfig.rzn1"
++source "arch/arm/mach-renesas/Kconfig.rzg2l"
  
--#if defined(CONFIG_ARCH_RMOBILE)
-+#if defined(CONFIG_ARCH_RENESAS)
- #if defined(CONFIG_R8A7790)
- #include <asm/arch/r8a7790.h>
- #elif defined(CONFIG_R8A7791)
-@@ -22,7 +22,7 @@
- #else
- #error "SOC Name not defined"
- #endif
--#endif /* CONFIG_ARCH_RMOBILE */
-+#endif /* CONFIG_ARCH_RENESAS */
+ endif
+diff --git a/arch/arm/mach-rmobile/Kconfig.32 b/arch/arm/mach-renesas/Kconfig.32
+similarity index 100%
+rename from arch/arm/mach-rmobile/Kconfig.32
+rename to arch/arm/mach-renesas/Kconfig.32
+diff --git a/arch/arm/mach-rmobile/Kconfig.64 b/arch/arm/mach-renesas/Kconfig.64
+similarity index 56%
+rename from arch/arm/mach-rmobile/Kconfig.64
+rename to arch/arm/mach-renesas/Kconfig.64
+index 57ed1d6c50d..b5067d0a8f0 100644
+--- a/arch/arm/mach-rmobile/Kconfig.64
++++ b/arch/arm/mach-renesas/Kconfig.64
+@@ -6,7 +6,7 @@ config SYS_MALLOC_F_LEN
+ config OF_LIBFDT_OVERLAY
+ 	default y if RCAR_64
  
- /* PRR CPU IDs */
- #define RENESAS_CPU_TYPE_R8A7740	0x40
-@@ -53,4 +53,4 @@ u32 renesas_get_cpu_rev_integer(void);
- u32 renesas_get_cpu_rev_fraction(void);
- #endif /* __ASSEMBLY__ */
+-source "arch/arm/mach-rmobile/Kconfig.rcar3"
+-source "arch/arm/mach-rmobile/Kconfig.rcar4"
++source "arch/arm/mach-renesas/Kconfig.rcar3"
++source "arch/arm/mach-renesas/Kconfig.rcar4"
  
--#endif /* __ASM_ARCH_RMOBILE_H */
-+#endif /* __ASM_ARCH_RENESAS_H */
-diff --git a/arch/sh/lib/time.c b/arch/sh/lib/time.c
-index 366500d90be..19c8e3ca3e7 100644
---- a/arch/sh/lib/time.c
-+++ b/arch/sh/lib/time.c
-@@ -16,7 +16,7 @@
- #include <asm/io.h>
- #include <linux/bitops.h>
- 
--#if defined(CONFIG_CPU_SH4) || defined(CONFIG_ARCH_RMOBILE)
-+#if defined(CONFIG_CPU_SH4) || defined(CONFIG_ARCH_RENESAS)
- #define TSTR	0x4
- #define TCR0	0x10
- #endif /* CONFIG_CPU_SH4 */
-diff --git a/configs/alt_defconfig b/configs/alt_defconfig
-index ff2f7d22bbc..e4007ab8f71 100644
---- a/configs/alt_defconfig
-+++ b/configs/alt_defconfig
-@@ -3,7 +3,7 @@ CONFIG_ARCH_CPU_INIT=y
- CONFIG_ENABLE_ARM_SOC_BOOT0_HOOK=y
- # CONFIG_SPL_USE_ARCH_MEMCPY is not set
- # CONFIG_SPL_USE_ARCH_MEMSET is not set
--CONFIG_ARCH_RMOBILE=y
-+CONFIG_ARCH_RENESAS=y
- CONFIG_TEXT_BASE=0x50000000
- CONFIG_SYS_MALLOC_LEN=0x100000
- CONFIG_SYS_MALLOC_F_LEN=0x8000
-diff --git a/configs/blanche_defconfig b/configs/blanche_defconfig
-index d8c0f784176..af7622a88af 100644
---- a/configs/blanche_defconfig
-+++ b/configs/blanche_defconfig
-@@ -1,7 +1,7 @@
- CONFIG_ARM=y
- CONFIG_ARCH_CPU_INIT=y
- CONFIG_ENABLE_ARM_SOC_BOOT0_HOOK=y
--CONFIG_ARCH_RMOBILE=y
-+CONFIG_ARCH_RENESAS=y
- CONFIG_TEXT_BASE=0x00000000
- CONFIG_SYS_MALLOC_LEN=0x100000
- CONFIG_SYS_MALLOC_F_LEN=0x8000
-diff --git a/configs/gose_defconfig b/configs/gose_defconfig
-index 6f2a015d3e9..1eadf7c14d3 100644
---- a/configs/gose_defconfig
-+++ b/configs/gose_defconfig
-@@ -3,7 +3,7 @@ CONFIG_ARCH_CPU_INIT=y
- CONFIG_ENABLE_ARM_SOC_BOOT0_HOOK=y
- # CONFIG_SPL_USE_ARCH_MEMCPY is not set
- # CONFIG_SPL_USE_ARCH_MEMSET is not set
--CONFIG_ARCH_RMOBILE=y
-+CONFIG_ARCH_RENESAS=y
- CONFIG_TEXT_BASE=0x50000000
- CONFIG_SYS_MALLOC_LEN=0x100000
- CONFIG_SYS_MALLOC_F_LEN=0x8000
-diff --git a/configs/grpeach_defconfig b/configs/grpeach_defconfig
-index 6738424f2e8..eef3bad4e65 100644
---- a/configs/grpeach_defconfig
-+++ b/configs/grpeach_defconfig
+ endif
+diff --git a/arch/arm/mach-rmobile/Kconfig.rcar3 b/arch/arm/mach-renesas/Kconfig.rcar3
+similarity index 100%
+rename from arch/arm/mach-rmobile/Kconfig.rcar3
+rename to arch/arm/mach-renesas/Kconfig.rcar3
+diff --git a/arch/arm/mach-rmobile/Kconfig.rcar4 b/arch/arm/mach-renesas/Kconfig.rcar4
+similarity index 100%
+rename from arch/arm/mach-rmobile/Kconfig.rcar4
+rename to arch/arm/mach-renesas/Kconfig.rcar4
+diff --git a/arch/arm/mach-rmobile/Kconfig.rza1 b/arch/arm/mach-renesas/Kconfig.rza1
+similarity index 100%
+rename from arch/arm/mach-rmobile/Kconfig.rza1
+rename to arch/arm/mach-renesas/Kconfig.rza1
+diff --git a/arch/arm/mach-rmobile/Kconfig.rzg2l b/arch/arm/mach-renesas/Kconfig.rzg2l
+similarity index 100%
+rename from arch/arm/mach-rmobile/Kconfig.rzg2l
+rename to arch/arm/mach-renesas/Kconfig.rzg2l
+diff --git a/arch/arm/mach-rmobile/Kconfig.rzn1 b/arch/arm/mach-renesas/Kconfig.rzn1
+similarity index 100%
+rename from arch/arm/mach-rmobile/Kconfig.rzn1
+rename to arch/arm/mach-renesas/Kconfig.rzn1
+diff --git a/arch/arm/mach-rmobile/Makefile b/arch/arm/mach-renesas/Makefile
+similarity index 100%
+rename from arch/arm/mach-rmobile/Makefile
+rename to arch/arm/mach-renesas/Makefile
+diff --git a/arch/arm/mach-rmobile/board.c b/arch/arm/mach-renesas/board.c
+similarity index 100%
+rename from arch/arm/mach-rmobile/board.c
+rename to arch/arm/mach-renesas/board.c
+diff --git a/arch/arm/mach-rmobile/cpu_info-rcar.c b/arch/arm/mach-renesas/cpu_info-rcar.c
+similarity index 100%
+rename from arch/arm/mach-rmobile/cpu_info-rcar.c
+rename to arch/arm/mach-renesas/cpu_info-rcar.c
+diff --git a/arch/arm/mach-rmobile/cpu_info-rzg.c b/arch/arm/mach-renesas/cpu_info-rzg.c
+similarity index 100%
+rename from arch/arm/mach-rmobile/cpu_info-rzg.c
+rename to arch/arm/mach-renesas/cpu_info-rzg.c
+diff --git a/arch/arm/mach-rmobile/cpu_info-rzg2l.c b/arch/arm/mach-renesas/cpu_info-rzg2l.c
+similarity index 100%
+rename from arch/arm/mach-rmobile/cpu_info-rzg2l.c
+rename to arch/arm/mach-renesas/cpu_info-rzg2l.c
+diff --git a/arch/arm/mach-rmobile/cpu_info.c b/arch/arm/mach-renesas/cpu_info.c
+similarity index 100%
+rename from arch/arm/mach-rmobile/cpu_info.c
+rename to arch/arm/mach-renesas/cpu_info.c
+diff --git a/arch/arm/mach-rmobile/emac.c b/arch/arm/mach-renesas/emac.c
+similarity index 100%
+rename from arch/arm/mach-rmobile/emac.c
+rename to arch/arm/mach-renesas/emac.c
+diff --git a/arch/arm/mach-rmobile/include/mach/boot0.h b/arch/arm/mach-renesas/include/mach/boot0.h
+similarity index 100%
+rename from arch/arm/mach-rmobile/include/mach/boot0.h
+rename to arch/arm/mach-renesas/include/mach/boot0.h
+diff --git a/arch/arm/mach-rmobile/include/mach/gpio.h b/arch/arm/mach-renesas/include/mach/gpio.h
+similarity index 100%
+rename from arch/arm/mach-rmobile/include/mach/gpio.h
+rename to arch/arm/mach-renesas/include/mach/gpio.h
+diff --git a/arch/arm/mach-rmobile/include/mach/irqs.h b/arch/arm/mach-renesas/include/mach/irqs.h
+similarity index 100%
+rename from arch/arm/mach-rmobile/include/mach/irqs.h
+rename to arch/arm/mach-renesas/include/mach/irqs.h
+diff --git a/arch/arm/mach-rmobile/include/mach/r8a7790.h b/arch/arm/mach-renesas/include/mach/r8a7790.h
+similarity index 94%
+rename from arch/arm/mach-rmobile/include/mach/r8a7790.h
+rename to arch/arm/mach-renesas/include/mach/r8a7790.h
+index 233531cb4ab..61101df3f1a 100644
+--- a/arch/arm/mach-rmobile/include/mach/r8a7790.h
++++ b/arch/arm/mach-renesas/include/mach/r8a7790.h
 @@ -1,6 +1,6 @@
- CONFIG_ARM=y
- CONFIG_ARCH_CPU_INIT=y
--CONFIG_ARCH_RMOBILE=y
-+CONFIG_ARCH_RENESAS=y
- CONFIG_TEXT_BASE=0x18000000
- CONFIG_SYS_MALLOC_LEN=0x100000
- CONFIG_SYS_MALLOC_F_LEN=0x400
-diff --git a/configs/hihope_rzg2_defconfig b/configs/hihope_rzg2_defconfig
-index cad490eb240..c2d2e8ebae4 100644
---- a/configs/hihope_rzg2_defconfig
-+++ b/configs/hihope_rzg2_defconfig
-@@ -1,7 +1,7 @@
- CONFIG_ARM=y
- CONFIG_COUNTER_FREQUENCY=16666666
- CONFIG_ARCH_CPU_INIT=y
--CONFIG_ARCH_RMOBILE=y
-+CONFIG_ARCH_RENESAS=y
- CONFIG_TEXT_BASE=0x50000000
- CONFIG_SYS_MALLOC_LEN=0x4000000
- CONFIG_ENV_SIZE=0x20000
-diff --git a/configs/koelsch_defconfig b/configs/koelsch_defconfig
-index 37511f8fe9a..963e02d6b54 100644
---- a/configs/koelsch_defconfig
-+++ b/configs/koelsch_defconfig
-@@ -3,7 +3,7 @@ CONFIG_ARCH_CPU_INIT=y
- CONFIG_ENABLE_ARM_SOC_BOOT0_HOOK=y
- # CONFIG_SPL_USE_ARCH_MEMCPY is not set
- # CONFIG_SPL_USE_ARCH_MEMSET is not set
--CONFIG_ARCH_RMOBILE=y
-+CONFIG_ARCH_RENESAS=y
- CONFIG_TEXT_BASE=0x50000000
- CONFIG_SYS_MALLOC_LEN=0x100000
- CONFIG_SYS_MALLOC_F_LEN=0x8000
-diff --git a/configs/lager_defconfig b/configs/lager_defconfig
-index 30582bfa3b1..605909e812f 100644
---- a/configs/lager_defconfig
-+++ b/configs/lager_defconfig
-@@ -3,7 +3,7 @@ CONFIG_ARCH_CPU_INIT=y
- CONFIG_ENABLE_ARM_SOC_BOOT0_HOOK=y
- # CONFIG_SPL_USE_ARCH_MEMCPY is not set
- # CONFIG_SPL_USE_ARCH_MEMSET is not set
--CONFIG_ARCH_RMOBILE=y
-+CONFIG_ARCH_RENESAS=y
- CONFIG_TEXT_BASE=0x50000000
- CONFIG_SYS_MALLOC_LEN=0x100000
- CONFIG_SYS_MALLOC_F_LEN=0x8000
-diff --git a/configs/porter_defconfig b/configs/porter_defconfig
-index 2f4f03d27f2..021e521745f 100644
---- a/configs/porter_defconfig
-+++ b/configs/porter_defconfig
-@@ -3,7 +3,7 @@ CONFIG_ARCH_CPU_INIT=y
- CONFIG_ENABLE_ARM_SOC_BOOT0_HOOK=y
- # CONFIG_SPL_USE_ARCH_MEMCPY is not set
- # CONFIG_SPL_USE_ARCH_MEMSET is not set
--CONFIG_ARCH_RMOBILE=y
-+CONFIG_ARCH_RENESAS=y
- CONFIG_TEXT_BASE=0x50000000
- CONFIG_SYS_MALLOC_LEN=0x100000
- CONFIG_SYS_MALLOC_F_LEN=0x8000
-diff --git a/configs/r8a77970_eagle_defconfig b/configs/r8a77970_eagle_defconfig
-index 5af9d09d18b..6095825aa77 100644
---- a/configs/r8a77970_eagle_defconfig
-+++ b/configs/r8a77970_eagle_defconfig
-@@ -1,7 +1,7 @@
- CONFIG_ARM=y
- CONFIG_COUNTER_FREQUENCY=16666666
- CONFIG_ARCH_CPU_INIT=y
--CONFIG_ARCH_RMOBILE=y
-+CONFIG_ARCH_RENESAS=y
- CONFIG_TEXT_BASE=0x50000000
- CONFIG_SYS_MALLOC_LEN=0x4000000
- CONFIG_SYS_MALLOC_F_LEN=0x2000
-diff --git a/configs/r8a77970_v3msk_defconfig b/configs/r8a77970_v3msk_defconfig
-index 458e4cb1e44..c90efa1e6e8 100644
---- a/configs/r8a77970_v3msk_defconfig
-+++ b/configs/r8a77970_v3msk_defconfig
-@@ -1,7 +1,7 @@
- CONFIG_ARM=y
- CONFIG_COUNTER_FREQUENCY=16666666
- CONFIG_ARCH_CPU_INIT=y
--CONFIG_ARCH_RMOBILE=y
-+CONFIG_ARCH_RENESAS=y
- CONFIG_TEXT_BASE=0x50000000
- CONFIG_SYS_MALLOC_LEN=0x4000000
- CONFIG_SYS_MALLOC_F_LEN=0x2000
-diff --git a/configs/r8a77980_condor_defconfig b/configs/r8a77980_condor_defconfig
-index 8d30392ed98..f33dfefcc98 100644
---- a/configs/r8a77980_condor_defconfig
-+++ b/configs/r8a77980_condor_defconfig
-@@ -1,7 +1,7 @@
- CONFIG_ARM=y
- CONFIG_COUNTER_FREQUENCY=16666666
- CONFIG_ARCH_CPU_INIT=y
--CONFIG_ARCH_RMOBILE=y
-+CONFIG_ARCH_RENESAS=y
- CONFIG_SYS_MALLOC_LEN=0x4000000
- CONFIG_SYS_MALLOC_F_LEN=0x2000
- CONFIG_ENV_SIZE=0x40000
-diff --git a/configs/r8a77980_v3hsk_defconfig b/configs/r8a77980_v3hsk_defconfig
-index cb6800ef510..9e304f8d3d8 100644
---- a/configs/r8a77980_v3hsk_defconfig
-+++ b/configs/r8a77980_v3hsk_defconfig
-@@ -1,7 +1,7 @@
- CONFIG_ARM=y
- CONFIG_COUNTER_FREQUENCY=16666666
- CONFIG_ARCH_CPU_INIT=y
--CONFIG_ARCH_RMOBILE=y
-+CONFIG_ARCH_RENESAS=y
- CONFIG_SYS_MALLOC_LEN=0x4000000
- CONFIG_SYS_MALLOC_F_LEN=0x2000
- CONFIG_ENV_SIZE=0x40000
-diff --git a/configs/r8a77990_ebisu_defconfig b/configs/r8a77990_ebisu_defconfig
-index 41a789da598..cb3816d4e01 100644
---- a/configs/r8a77990_ebisu_defconfig
-+++ b/configs/r8a77990_ebisu_defconfig
-@@ -1,7 +1,7 @@
- CONFIG_ARM=y
- CONFIG_COUNTER_FREQUENCY=16666666
- CONFIG_ARCH_CPU_INIT=y
--CONFIG_ARCH_RMOBILE=y
-+CONFIG_ARCH_RENESAS=y
- CONFIG_TEXT_BASE=0x50000000
- CONFIG_SYS_MALLOC_LEN=0x4000000
- CONFIG_SYS_MALLOC_F_LEN=0x2000
-diff --git a/configs/r8a77995_draak_defconfig b/configs/r8a77995_draak_defconfig
-index f7446b9e621..739ea4618d8 100644
---- a/configs/r8a77995_draak_defconfig
-+++ b/configs/r8a77995_draak_defconfig
-@@ -1,7 +1,7 @@
- CONFIG_ARM=y
- CONFIG_COUNTER_FREQUENCY=16666666
- CONFIG_ARCH_CPU_INIT=y
--CONFIG_ARCH_RMOBILE=y
-+CONFIG_ARCH_RENESAS=y
- CONFIG_TEXT_BASE=0x50000000
- CONFIG_SYS_MALLOC_LEN=0x4000000
- CONFIG_SYS_MALLOC_F_LEN=0x2000
-diff --git a/configs/r8a779a0_falcon_defconfig b/configs/r8a779a0_falcon_defconfig
-index f124dea66ce..6ffff2250b3 100644
---- a/configs/r8a779a0_falcon_defconfig
-+++ b/configs/r8a779a0_falcon_defconfig
-@@ -1,7 +1,7 @@
- CONFIG_ARM=y
- CONFIG_COUNTER_FREQUENCY=16666666
- CONFIG_ARCH_CPU_INIT=y
--CONFIG_ARCH_RMOBILE=y
-+CONFIG_ARCH_RENESAS=y
- CONFIG_TEXT_BASE=0x50000000
- CONFIG_SYS_MALLOC_LEN=0x4000000
- CONFIG_ENV_SIZE=0x40000
-diff --git a/configs/r8a779f0_spider_defconfig b/configs/r8a779f0_spider_defconfig
-index 2d27dfeaa59..21b488a3f5a 100644
---- a/configs/r8a779f0_spider_defconfig
-+++ b/configs/r8a779f0_spider_defconfig
+ /* SPDX-License-Identifier: GPL-2.0 */
+ /*
+- * arch/arm/include/asm/arch-rmobile/r8a7790.h
++ * arch/arm/include/asm/arch-renesas/r8a7790.h
+  *
+  * Copyright (C) 2013,2014 Renesas Electronics Corporation
+  */
+diff --git a/arch/arm/mach-rmobile/include/mach/r8a7791.h b/arch/arm/mach-renesas/include/mach/r8a7791.h
+similarity index 97%
+rename from arch/arm/mach-rmobile/include/mach/r8a7791.h
+rename to arch/arm/mach-renesas/include/mach/r8a7791.h
+index 78a910cfdd2..40524d77d84 100644
+--- a/arch/arm/mach-rmobile/include/mach/r8a7791.h
++++ b/arch/arm/mach-renesas/include/mach/r8a7791.h
 @@ -1,6 +1,6 @@
- CONFIG_ARM=y
- CONFIG_ARCH_CPU_INIT=y
--CONFIG_ARCH_RMOBILE=y
-+CONFIG_ARCH_RENESAS=y
- CONFIG_SYS_MALLOC_LEN=0x4000000
- CONFIG_ENV_SIZE=0x40000
- CONFIG_ENV_OFFSET=0xD00000
-diff --git a/configs/r8a779g0_whitehawk_defconfig b/configs/r8a779g0_whitehawk_defconfig
-index 727c33926f0..94f12ad1bde 100644
---- a/configs/r8a779g0_whitehawk_defconfig
-+++ b/configs/r8a779g0_whitehawk_defconfig
+ /* SPDX-License-Identifier: GPL-2.0 */
+ /*
+- * arch/arm/include/asm/arch-rmobile/r8a7791.h
++ * arch/arm/include/asm/arch-renesas/r8a7791.h
+  *
+  * Copyright (C) 2013,2014 Renesas Electronics Corporation
+  */
+diff --git a/arch/arm/mach-rmobile/include/mach/r8a7792.h b/arch/arm/mach-renesas/include/mach/r8a7792.h
+similarity index 93%
+rename from arch/arm/mach-rmobile/include/mach/r8a7792.h
+rename to arch/arm/mach-renesas/include/mach/r8a7792.h
+index cc1b00db33f..51c0d63eefb 100644
+--- a/arch/arm/mach-rmobile/include/mach/r8a7792.h
++++ b/arch/arm/mach-renesas/include/mach/r8a7792.h
 @@ -1,6 +1,6 @@
- CONFIG_ARM=y
- CONFIG_ARCH_CPU_INIT=y
--CONFIG_ARCH_RMOBILE=y
-+CONFIG_ARCH_RENESAS=y
- CONFIG_SYS_MALLOC_LEN=0x4000000
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_OFFSET=0xFFFE0000
-diff --git a/configs/r8a779h0_grayhawk_defconfig b/configs/r8a779h0_grayhawk_defconfig
-index 41aa0207086..d295bc899d1 100644
---- a/configs/r8a779h0_grayhawk_defconfig
-+++ b/configs/r8a779h0_grayhawk_defconfig
+ /* SPDX-License-Identifier: GPL-2.0 */
+ /*
+- * arch/arm/include/asm/arch-rmobile/r8a7792.h
++ * arch/arm/include/asm/arch-renesas/r8a7792.h
+  *
+  * Copyright (C) 2016 Renesas Electronics Corporation
+  */
+diff --git a/arch/arm/mach-rmobile/include/mach/r8a7793.h b/arch/arm/mach-renesas/include/mach/r8a7793.h
+similarity index 97%
+rename from arch/arm/mach-rmobile/include/mach/r8a7793.h
+rename to arch/arm/mach-renesas/include/mach/r8a7793.h
+index 4cb064731ca..f15f8236059 100644
+--- a/arch/arm/mach-rmobile/include/mach/r8a7793.h
++++ b/arch/arm/mach-renesas/include/mach/r8a7793.h
 @@ -1,6 +1,6 @@
- CONFIG_ARM=y
- CONFIG_ARCH_CPU_INIT=y
--CONFIG_ARCH_RMOBILE=y
-+CONFIG_ARCH_RENESAS=y
- CONFIG_SYS_MALLOC_LEN=0x4000000
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_OFFSET=0xFFFE0000
-diff --git a/configs/rcar3_salvator-x_defconfig b/configs/rcar3_salvator-x_defconfig
-index bc03bbc5140..89aa8b537d4 100644
---- a/configs/rcar3_salvator-x_defconfig
-+++ b/configs/rcar3_salvator-x_defconfig
+ /* SPDX-License-Identifier: GPL-2.0 */
+ /*
+- * arch/arm/include/asm/arch-rmobile/r8a7793.h
++ * arch/arm/include/asm/arch-renesas/r8a7793.h
+  *
+  * Copyright (C) 2014 Renesas Electronics Corporation
+  */
+diff --git a/arch/arm/mach-rmobile/include/mach/r8a7794.h b/arch/arm/mach-renesas/include/mach/r8a7794.h
+similarity index 94%
+rename from arch/arm/mach-rmobile/include/mach/r8a7794.h
+rename to arch/arm/mach-renesas/include/mach/r8a7794.h
+index 6d0d729bb12..592625e6e9a 100644
+--- a/arch/arm/mach-rmobile/include/mach/r8a7794.h
++++ b/arch/arm/mach-renesas/include/mach/r8a7794.h
+@@ -1,6 +1,6 @@
+ /* SPDX-License-Identifier: GPL-2.0 */
+ /*
+- * arch/arm/include/asm/arch-rmobile/r8a7794.h
++ * arch/arm/include/asm/arch-renesas/r8a7794.h
+  *
+  * Copyright (C) 2014 Renesas Electronics Corporation
+  */
+diff --git a/arch/arm/mach-rmobile/include/mach/rcar-base.h b/arch/arm/mach-renesas/include/mach/rcar-base.h
+similarity index 99%
+rename from arch/arm/mach-rmobile/include/mach/rcar-base.h
+rename to arch/arm/mach-renesas/include/mach/rcar-base.h
+index e422e9100a8..4c2ee8187e0 100644
+--- a/arch/arm/mach-rmobile/include/mach/rcar-base.h
++++ b/arch/arm/mach-renesas/include/mach/rcar-base.h
+@@ -1,6 +1,6 @@
+ /* SPDX-License-Identifier: GPL-2.0 */
+ /*
+- * arch/arm/include/asm/arch-rmobile/rcar-base.h
++ * arch/arm/include/asm/arch-renesas/rcar-base.h
+  *
+  * Copyright (C) 2013,2014 Renesas Electronics Corporation
+  */
+diff --git a/arch/arm/mach-rmobile/include/mach/rcar-gen3-base.h b/arch/arm/mach-renesas/include/mach/rcar-gen3-base.h
+similarity index 97%
+rename from arch/arm/mach-rmobile/include/mach/rcar-gen3-base.h
+rename to arch/arm/mach-renesas/include/mach/rcar-gen3-base.h
+index ca1274272d3..5e2e9eca452 100644
+--- a/arch/arm/mach-rmobile/include/mach/rcar-gen3-base.h
++++ b/arch/arm/mach-renesas/include/mach/rcar-gen3-base.h
+@@ -1,6 +1,6 @@
+ /* SPDX-License-Identifier: GPL-2.0+ */
+ /*
+- * ./arch/arm/mach-rmobile/include/mach/rcar-gen3-base.h
++ * ./arch/arm/mach-renesas/include/mach/rcar-gen3-base.h
+  *
+  * Copyright (C) 2015 Renesas Electronics Corporation
+  */
+diff --git a/arch/arm/mach-rmobile/include/mach/rcar-gen4-base.h b/arch/arm/mach-renesas/include/mach/rcar-gen4-base.h
+similarity index 96%
+rename from arch/arm/mach-rmobile/include/mach/rcar-gen4-base.h
+rename to arch/arm/mach-renesas/include/mach/rcar-gen4-base.h
+index ac57698849a..f34473db35a 100644
+--- a/arch/arm/mach-rmobile/include/mach/rcar-gen4-base.h
++++ b/arch/arm/mach-renesas/include/mach/rcar-gen4-base.h
+@@ -1,6 +1,6 @@
+ /* SPDX-License-Identifier: GPL-2.0+ */
+ /*
+- * ./arch/arm/mach-rmobile/include/mach/rcar-gen4-base.h
++ * ./arch/arm/mach-renesas/include/mach/rcar-gen4-base.h
+  *
+  * Copyright (C) 2021 Renesas Electronics Corp.
+  */
+diff --git a/arch/arm/mach-rmobile/include/mach/rcar-mstp.h b/arch/arm/mach-renesas/include/mach/rcar-mstp.h
+similarity index 97%
+rename from arch/arm/mach-rmobile/include/mach/rcar-mstp.h
+rename to arch/arm/mach-renesas/include/mach/rcar-mstp.h
+index d241652641f..7ca362e519c 100644
+--- a/arch/arm/mach-rmobile/include/mach/rcar-mstp.h
++++ b/arch/arm/mach-renesas/include/mach/rcar-mstp.h
+@@ -1,6 +1,6 @@
+ /* SPDX-License-Identifier: GPL-2.0 */
+ /*
+- * arch/arm/include/asm/arch-rmobile/rcar-mstp.h
++ * arch/arm/include/asm/arch-renesas/rcar-mstp.h
+  *
+  * Copyright (C) 2013, 2014 Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>
+  * Copyright (C) 2013, 2014 Renesas Electronics Corporation
+diff --git a/arch/arm/mach-rmobile/include/mach/renesas.h b/arch/arm/mach-renesas/include/mach/renesas.h
+similarity index 100%
+rename from arch/arm/mach-rmobile/include/mach/renesas.h
+rename to arch/arm/mach-renesas/include/mach/renesas.h
+diff --git a/arch/arm/mach-rmobile/include/mach/rzg2l.h b/arch/arm/mach-renesas/include/mach/rzg2l.h
+similarity index 100%
+rename from arch/arm/mach-rmobile/include/mach/rzg2l.h
+rename to arch/arm/mach-renesas/include/mach/rzg2l.h
+diff --git a/arch/arm/mach-rmobile/include/mach/sys_proto.h b/arch/arm/mach-renesas/include/mach/sys_proto.h
+similarity index 100%
+rename from arch/arm/mach-rmobile/include/mach/sys_proto.h
+rename to arch/arm/mach-renesas/include/mach/sys_proto.h
+diff --git a/arch/arm/mach-rmobile/lowlevel_init_ca15.S b/arch/arm/mach-renesas/lowlevel_init_ca15.S
+similarity index 100%
+rename from arch/arm/mach-rmobile/lowlevel_init_ca15.S
+rename to arch/arm/mach-renesas/lowlevel_init_ca15.S
+diff --git a/arch/arm/mach-rmobile/lowlevel_init_gen3.S b/arch/arm/mach-renesas/lowlevel_init_gen3.S
+similarity index 100%
+rename from arch/arm/mach-rmobile/lowlevel_init_gen3.S
+rename to arch/arm/mach-renesas/lowlevel_init_gen3.S
+diff --git a/arch/arm/mach-rmobile/memmap-gen3.c b/arch/arm/mach-renesas/memmap-gen3.c
+similarity index 100%
+rename from arch/arm/mach-rmobile/memmap-gen3.c
+rename to arch/arm/mach-renesas/memmap-gen3.c
+diff --git a/arch/arm/mach-rmobile/memmap-rzg2l.c b/arch/arm/mach-renesas/memmap-rzg2l.c
+similarity index 100%
+rename from arch/arm/mach-rmobile/memmap-rzg2l.c
+rename to arch/arm/mach-renesas/memmap-rzg2l.c
+diff --git a/arch/arm/mach-rmobile/psci-r8a779a0.c b/arch/arm/mach-renesas/psci-r8a779a0.c
+similarity index 100%
+rename from arch/arm/mach-rmobile/psci-r8a779a0.c
+rename to arch/arm/mach-renesas/psci-r8a779a0.c
+diff --git a/board/beacon/beacon-rzg2m/Kconfig b/board/beacon/beacon-rzg2m/Kconfig
+index c03857cf2fe..1eb9e0dda94 100644
+--- a/board/beacon/beacon-rzg2m/Kconfig
++++ b/board/beacon/beacon-rzg2m/Kconfig
 @@ -1,7 +1,7 @@
- CONFIG_ARM=y
- CONFIG_COUNTER_FREQUENCY=16666666
- CONFIG_ARCH_CPU_INIT=y
--CONFIG_ARCH_RMOBILE=y
-+CONFIG_ARCH_RENESAS=y
- CONFIG_SYS_MALLOC_LEN=0x4000000
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_OFFSET=0xFFFE0000
-diff --git a/configs/rcar3_ulcb_defconfig b/configs/rcar3_ulcb_defconfig
-index d9f696b2a89..10a8492bb20 100644
---- a/configs/rcar3_ulcb_defconfig
-+++ b/configs/rcar3_ulcb_defconfig
+ if TARGET_BEACON_RZG2M
+ 
+ config SYS_SOC
+-	default "rmobile"
++	default "renesas"
+ 
+ config SYS_BOARD
+ 	default "beacon-rzg2m"
+diff --git a/board/hoperun/hihope-rzg2/Kconfig b/board/hoperun/hihope-rzg2/Kconfig
+index ee422ba6c8f..e15b54ae5ce 100644
+--- a/board/hoperun/hihope-rzg2/Kconfig
++++ b/board/hoperun/hihope-rzg2/Kconfig
 @@ -1,7 +1,7 @@
- CONFIG_ARM=y
- CONFIG_COUNTER_FREQUENCY=16666666
- CONFIG_ARCH_CPU_INIT=y
--CONFIG_ARCH_RMOBILE=y
-+CONFIG_ARCH_RENESAS=y
- CONFIG_SYS_MALLOC_LEN=0x4000000
- CONFIG_SYS_MALLOC_F_LEN=0x2000
- CONFIG_ENV_SIZE=0x20000
-diff --git a/configs/renesas_rzg2l_smarc_defconfig b/configs/renesas_rzg2l_smarc_defconfig
-index e45579ae6b9..c1dc3d7b89d 100644
---- a/configs/renesas_rzg2l_smarc_defconfig
-+++ b/configs/renesas_rzg2l_smarc_defconfig
-@@ -2,7 +2,7 @@ CONFIG_ARM=y
- CONFIG_COUNTER_FREQUENCY=16666666
- CONFIG_SYS_INIT_SP_BSS_OFFSET=1048576
- CONFIG_ARCH_CPU_INIT=y
--CONFIG_ARCH_RMOBILE=y
-+CONFIG_ARCH_RENESAS=y
- CONFIG_TEXT_BASE=0x50000000
- CONFIG_SYS_MALLOC_LEN=0x4000000
- CONFIG_SYS_MALLOC_F_LEN=0x80000
-diff --git a/configs/rzg2_beacon_defconfig b/configs/rzg2_beacon_defconfig
-index c7cefb9d1dc..df0a8385b3e 100644
---- a/configs/rzg2_beacon_defconfig
-+++ b/configs/rzg2_beacon_defconfig
-@@ -1,5 +1,5 @@
- CONFIG_ARM=y
--CONFIG_ARCH_RMOBILE=y
-+CONFIG_ARCH_RENESAS=y
- CONFIG_TEXT_BASE=0x50000000
- CONFIG_SYS_MALLOC_LEN=0x4000000
- CONFIG_SYS_MALLOC_F_LEN=0x2000
-diff --git a/configs/rzn1_snarc_defconfig b/configs/rzn1_snarc_defconfig
-index 5c657271355..29a96d1aefe 100644
---- a/configs/rzn1_snarc_defconfig
-+++ b/configs/rzn1_snarc_defconfig
-@@ -1,6 +1,6 @@
- CONFIG_ARM=y
- CONFIG_SYS_ARCH_TIMER=y
--CONFIG_ARCH_RMOBILE=y
-+CONFIG_ARCH_RENESAS=y
- CONFIG_SYS_MALLOC_LEN=0xb0000
- CONFIG_SYS_MALLOC_F_LEN=0x800
- CONFIG_NR_DRAM_BANKS=1
-diff --git a/configs/silinux_ek874_defconfig b/configs/silinux_ek874_defconfig
-index e74fbb892c8..000bc261732 100644
---- a/configs/silinux_ek874_defconfig
-+++ b/configs/silinux_ek874_defconfig
+ if TARGET_HIHOPE_RZG2
+ 
+ config SYS_SOC
+-	default "rmobile"
++	default "renesas"
+ 
+ config SYS_BOARD
+ 	default "hihope-rzg2"
+diff --git a/board/renesas/condor/Kconfig b/board/renesas/condor/Kconfig
+index 2286d88de7f..fbfb12cc4f9 100644
+--- a/board/renesas/condor/Kconfig
++++ b/board/renesas/condor/Kconfig
 @@ -1,7 +1,7 @@
- CONFIG_ARM=y
- CONFIG_COUNTER_FREQUENCY=16666666
- CONFIG_ARCH_CPU_INIT=y
--CONFIG_ARCH_RMOBILE=y
-+CONFIG_ARCH_RENESAS=y
- CONFIG_TEXT_BASE=0x50000000
- CONFIG_SYS_MALLOC_LEN=0x4000000
- CONFIG_SYS_MALLOC_F_LEN=0x2000
-diff --git a/configs/silk_defconfig b/configs/silk_defconfig
-index e0ed90fa7e1..939ccc9c478 100644
---- a/configs/silk_defconfig
-+++ b/configs/silk_defconfig
-@@ -3,7 +3,7 @@ CONFIG_ARCH_CPU_INIT=y
- CONFIG_ENABLE_ARM_SOC_BOOT0_HOOK=y
- # CONFIG_SPL_USE_ARCH_MEMCPY is not set
- # CONFIG_SPL_USE_ARCH_MEMSET is not set
--CONFIG_ARCH_RMOBILE=y
-+CONFIG_ARCH_RENESAS=y
- CONFIG_TEXT_BASE=0x50000000
- CONFIG_SYS_MALLOC_LEN=0x100000
- CONFIG_SYS_MALLOC_F_LEN=0x8000
-diff --git a/configs/stout_defconfig b/configs/stout_defconfig
-index 9f5c61d0e1d..1022ee9e71a 100644
---- a/configs/stout_defconfig
-+++ b/configs/stout_defconfig
-@@ -3,7 +3,7 @@ CONFIG_ARCH_CPU_INIT=y
- CONFIG_ENABLE_ARM_SOC_BOOT0_HOOK=y
- # CONFIG_SPL_USE_ARCH_MEMCPY is not set
- # CONFIG_SPL_USE_ARCH_MEMSET is not set
--CONFIG_ARCH_RMOBILE=y
-+CONFIG_ARCH_RENESAS=y
- CONFIG_TEXT_BASE=0x50000000
- CONFIG_SYS_MALLOC_LEN=0x100000
- CONFIG_SYS_MALLOC_F_LEN=0x8000
-diff --git a/drivers/clk/renesas/Kconfig b/drivers/clk/renesas/Kconfig
-index e9296ed9fe2..a093027eb0e 100644
---- a/drivers/clk/renesas/Kconfig
-+++ b/drivers/clk/renesas/Kconfig
-@@ -1,6 +1,6 @@
- config CLK_RENESAS
- 	bool "Renesas clock drivers"
--	depends on CLK && ARCH_RMOBILE
-+	depends on CLK && ARCH_RENESAS
- 	help
- 	  Enable support for clock present on Renesas SoCs.
+ if TARGET_CONDOR
  
-diff --git a/drivers/gpio/Kconfig b/drivers/gpio/Kconfig
-index 27df5d88d40..2df3dc42d0f 100644
---- a/drivers/gpio/Kconfig
-+++ b/drivers/gpio/Kconfig
-@@ -333,7 +333,7 @@ config PCF8575_GPIO
+ config SYS_SOC
+-	default "rmobile"
++	default "renesas"
  
- config RCAR_GPIO
- 	bool "Renesas RCar GPIO driver"
--	depends on DM_GPIO && ARCH_RMOBILE
-+	depends on DM_GPIO && ARCH_RENESAS
- 	help
- 	  This driver supports the GPIO banks on Renesas RCar SoCs.
+ config SYS_BOARD
+ 	default "condor"
+diff --git a/board/renesas/draak/Kconfig b/board/renesas/draak/Kconfig
+index 9106387bb99..8f3d904f9d7 100644
+--- a/board/renesas/draak/Kconfig
++++ b/board/renesas/draak/Kconfig
+@@ -1,7 +1,7 @@
+ if TARGET_DRAAK
  
-diff --git a/drivers/i2c/Kconfig b/drivers/i2c/Kconfig
-index 4f42200f392..5f919f201b3 100644
---- a/drivers/i2c/Kconfig
-+++ b/drivers/i2c/Kconfig
-@@ -544,7 +544,7 @@ config SPL_SYS_I2C_SANDBOX
+ config SYS_SOC
+-	default "rmobile"
++	default "renesas"
  
- config SYS_I2C_SH
- 	bool "Legacy SuperH I2C interface"
--	depends on ARCH_RMOBILE && SYS_I2C_LEGACY
-+	depends on ARCH_RENESAS && SYS_I2C_LEGACY
- 	help
- 	  Enable the legacy SuperH I2C interface.
+ config SYS_BOARD
+ 	default "draak"
+diff --git a/board/renesas/eagle/Kconfig b/board/renesas/eagle/Kconfig
+index 4d12843b4e9..04895d2bb4b 100644
+--- a/board/renesas/eagle/Kconfig
++++ b/board/renesas/eagle/Kconfig
+@@ -1,7 +1,7 @@
+ if TARGET_EAGLE
  
-diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
-index 17618c3bdcc..cef05790dd9 100644
---- a/drivers/mmc/Kconfig
-+++ b/drivers/mmc/Kconfig
-@@ -393,7 +393,7 @@ config HSMMC2_8BIT
+ config SYS_SOC
+-	default "rmobile"
++	default "renesas"
  
- config SH_MMCIF
- 	bool "SuperH/Renesas ARM SoCs on-chip MMCIF host controller support"
--	depends on ARCH_RMOBILE || SH
-+	depends on ARCH_RENESAS || SH
- 	help
- 	  Support for the on-chip MMCIF host controller on SuperH/Renesas ARM SoCs platform
+ config SYS_BOARD
+ 	default "eagle"
+diff --git a/board/renesas/ebisu/Kconfig b/board/renesas/ebisu/Kconfig
+index f500a94c9a3..a9049b6d5ad 100644
+--- a/board/renesas/ebisu/Kconfig
++++ b/board/renesas/ebisu/Kconfig
+@@ -1,7 +1,7 @@
+ if TARGET_EBISU
  
-@@ -408,7 +408,7 @@ config MMC_UNIPHIER
+ config SYS_SOC
+-	default "rmobile"
++	default "renesas"
  
- config RENESAS_SDHI
- 	bool "Renesas R-Car SD/MMC Host Controller support"
--	depends on ARCH_RMOBILE
-+	depends on ARCH_RENESAS
- 	depends on BLK && DM_MMC
- 	depends on OF_CONTROL
- 	select BOUNCE_BUFFER
-diff --git a/drivers/mmc/sh_mmcif.h b/drivers/mmc/sh_mmcif.h
-index 66341e51d26..b131b8c2833 100644
---- a/drivers/mmc/sh_mmcif.h
-+++ b/drivers/mmc/sh_mmcif.h
-@@ -195,7 +195,7 @@ struct sh_mmcif_regs {
- #define SOFT_RST_OFF		(0 << 31)
+ config SYS_BOARD
+ 	default "ebisu"
+diff --git a/board/renesas/falcon/Kconfig b/board/renesas/falcon/Kconfig
+index 1fcefa7e3cd..44a2e5651ae 100644
+--- a/board/renesas/falcon/Kconfig
++++ b/board/renesas/falcon/Kconfig
+@@ -1,7 +1,7 @@
+ if TARGET_FALCON
  
- #define CLKDEV_EMMC_DATA	52000000	/* 52MHz */
--#ifdef CONFIG_ARCH_RMOBILE
-+#ifdef CONFIG_ARCH_RENESAS
- #define MMC_CLK_DIV_MIN(clk)	(clk / (1 << 9))
- #define MMC_CLK_DIV_MAX(clk)	(clk / (1 << 1))
- #else
-diff --git a/drivers/pinctrl/Makefile b/drivers/pinctrl/Makefile
-index 0e929d8ca04..6d7b7cd9051 100644
---- a/drivers/pinctrl/Makefile
-+++ b/drivers/pinctrl/Makefile
-@@ -14,7 +14,7 @@ obj-$(CONFIG_PINCTRL_INTEL) += intel/
- obj-$(CONFIG_ARCH_MTMIPS) += mtmips/
- obj-$(CONFIG_ARCH_NPCM)         += nuvoton/
- obj-$(CONFIG_PINCTRL_QCOM) += qcom/
--obj-$(CONFIG_ARCH_RMOBILE) += renesas/
-+obj-$(CONFIG_ARCH_RENESAS) += renesas/
- obj-$(CONFIG_ARCH_RZN1) += renesas/
- obj-$(CONFIG_PINCTRL_SANDBOX)	+= pinctrl-sandbox.o
- obj-$(CONFIG_PINCTRL_SUNXI)	+= sunxi/
-diff --git a/drivers/pinctrl/renesas/Kconfig b/drivers/pinctrl/renesas/Kconfig
-index 171cd374b81..57e88604aa2 100644
---- a/drivers/pinctrl/renesas/Kconfig
-+++ b/drivers/pinctrl/renesas/Kconfig
-@@ -1,8 +1,8 @@
--if ARCH_RMOBILE
-+if ARCH_RENESAS
+ config SYS_SOC
+-	default "rmobile"
++	default "renesas"
  
- config PINCTRL_PFC
- 	bool "Renesas pin control drivers"
--	depends on DM && ARCH_RMOBILE
-+	depends on DM && ARCH_RENESAS
- 	default n if CPU_RZA1
- 	help
- 	  Support pin multiplexing control on Renesas SoCs.
-diff --git a/drivers/ram/Makefile b/drivers/ram/Makefile
-index 985990ab5ac..c9c46cc17a8 100644
---- a/drivers/ram/Makefile
-+++ b/drivers/ram/Makefile
-@@ -28,5 +28,5 @@ obj-$(CONFIG_DRAM_SUN20I_D1) += sunxi/
+ config SYS_BOARD
+ 	default "falcon"
+diff --git a/board/renesas/grayhawk/Kconfig b/board/renesas/grayhawk/Kconfig
+index 97621a30ad0..a6dbfb50e73 100644
+--- a/board/renesas/grayhawk/Kconfig
++++ b/board/renesas/grayhawk/Kconfig
+@@ -1,7 +1,7 @@
+ if TARGET_GRAYHAWK
  
- obj-$(CONFIG_ARCH_OCTEON) += octeon/
+ config SYS_SOC
+-	default "rmobile"
++	default "renesas"
  
--obj-$(CONFIG_ARCH_RMOBILE) += renesas/
-+obj-$(CONFIG_ARCH_RENESAS) += renesas/
- obj-$(CONFIG_CADENCE_DDR_CTRL) += cadence/
-diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig
-index 26460c4e0ca..88d678654e7 100644
---- a/drivers/serial/Kconfig
-+++ b/drivers/serial/Kconfig
-@@ -433,7 +433,7 @@ config DEBUG_UART_SEMIHOSTING
+ config SYS_BOARD
+ 	default "grayhawk"
+diff --git a/board/renesas/rzg2l/Kconfig b/board/renesas/rzg2l/Kconfig
+index 1335fc7ae80..c7b75704beb 100644
+--- a/board/renesas/rzg2l/Kconfig
++++ b/board/renesas/rzg2l/Kconfig
+@@ -4,7 +4,7 @@
+ if TARGET_RZG2L_SMARC_EVK
  
- config DEBUG_UART_SCIF
- 	bool "Renesas SCIF UART"
--	depends on SH || ARCH_RMOBILE
-+	depends on SH || ARCH_RENESAS
- 	help
- 	  Select this to enable a debug UART using the serial_sh driver. You
- 	  will need to provide parameters to make this work. The driver will
-@@ -893,7 +893,7 @@ config SANDBOX_SERIAL
+ config SYS_SOC
+-	default "rmobile"
++	default "renesas"
  
- config SCIF_CONSOLE
- 	bool "Renesas SCIF UART support"
--	depends on SH || ARCH_RMOBILE
-+	depends on SH || ARCH_RENESAS
- 	help
- 	  Select this to enable Renesas SCIF UART. To operate serial ports
- 	  on systems with RCar or SH SoCs, say Y to this option. If unsure,
-diff --git a/drivers/usb/host/Kconfig b/drivers/usb/host/Kconfig
-index f96027d7bd2..6e10b629a3c 100644
---- a/drivers/usb/host/Kconfig
-+++ b/drivers/usb/host/Kconfig
-@@ -97,7 +97,7 @@ config USB_XHCI_PCI
- config USB_XHCI_RCAR
- 	bool "Renesas RCar USB 3.0 support"
- 	default y
--	depends on ARCH_RMOBILE
-+	depends on ARCH_RENESAS
- 	help
- 	  Choose this option to add support for USB 3.0 driver on Renesas
- 	  RCar Gen3 SoCs.
+ config SYS_BOARD
+ 	default "rzg2l"
+diff --git a/board/renesas/salvator-x/Kconfig b/board/renesas/salvator-x/Kconfig
+index ed4c479f7ca..52955e144a6 100644
+--- a/board/renesas/salvator-x/Kconfig
++++ b/board/renesas/salvator-x/Kconfig
+@@ -1,7 +1,7 @@
+ if TARGET_SALVATOR_X
+ 
+ config SYS_SOC
+-	default "rmobile"
++	default "renesas"
+ 
+ config SYS_BOARD
+ 	default "salvator-x"
+diff --git a/board/renesas/spider/Kconfig b/board/renesas/spider/Kconfig
+index 8df2e85fc9c..bd5825ef56c 100644
+--- a/board/renesas/spider/Kconfig
++++ b/board/renesas/spider/Kconfig
+@@ -1,7 +1,7 @@
+ if TARGET_SPIDER
+ 
+ config SYS_SOC
+-	default "rmobile"
++	default "renesas"
+ 
+ config SYS_BOARD
+ 	default "spider"
+diff --git a/board/renesas/ulcb/Kconfig b/board/renesas/ulcb/Kconfig
+index 1e9a10d2814..318603608ce 100644
+--- a/board/renesas/ulcb/Kconfig
++++ b/board/renesas/ulcb/Kconfig
+@@ -1,7 +1,7 @@
+ if TARGET_ULCB
+ 
+ config SYS_SOC
+-	default "rmobile"
++	default "renesas"
+ 
+ config SYS_BOARD
+ 	default "ulcb"
+diff --git a/board/renesas/v3hsk/Kconfig b/board/renesas/v3hsk/Kconfig
+index 531ceb788f4..da595a493b5 100644
+--- a/board/renesas/v3hsk/Kconfig
++++ b/board/renesas/v3hsk/Kconfig
+@@ -1,7 +1,7 @@
+ if TARGET_V3HSK
+ 
+ config SYS_SOC
+-	default "rmobile"
++	default "renesas"
+ 
+ config SYS_BOARD
+ 	default "v3hsk"
+diff --git a/board/renesas/v3msk/Kconfig b/board/renesas/v3msk/Kconfig
+index fe037fd98f0..8f423868962 100644
+--- a/board/renesas/v3msk/Kconfig
++++ b/board/renesas/v3msk/Kconfig
+@@ -1,7 +1,7 @@
+ if TARGET_V3MSK
+ 
+ config SYS_SOC
+-	default "rmobile"
++	default "renesas"
+ 
+ config SYS_BOARD
+ 	default "v3msk"
+diff --git a/board/renesas/whitehawk/Kconfig b/board/renesas/whitehawk/Kconfig
+index 05a87894fac..8adb24c2d2e 100644
+--- a/board/renesas/whitehawk/Kconfig
++++ b/board/renesas/whitehawk/Kconfig
+@@ -1,7 +1,7 @@
+ if TARGET_WHITEHAWK
+ 
+ config SYS_SOC
+-	default "rmobile"
++	default "renesas"
+ 
+ config SYS_BOARD
+ 	default "whitehawk"
+diff --git a/board/silinux/ek874/Kconfig b/board/silinux/ek874/Kconfig
+index 60b390a121e..5b34087bff8 100644
+--- a/board/silinux/ek874/Kconfig
++++ b/board/silinux/ek874/Kconfig
+@@ -1,7 +1,7 @@
+ if TARGET_SILINUX_EK874
+ 
+ config SYS_SOC
+-	default "rmobile"
++	default "renesas"
+ 
+ config SYS_BOARD
+ 	default "ek874"
 -- 
 2.43.0
 
