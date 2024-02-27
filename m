@@ -4,42 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70C77C54798
-	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 20:42:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C5ABC5478C
+	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 21:02:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B72B8805B;
-	Tue, 27 Feb 2024 21:41:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
+	by phobos.denx.de (Postfix) with ESMTP id 249D98800F;
+	Tue, 27 Feb 2024 22:02:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 3890A8800F; Tue, 27 Feb 2024 21:41:05 +0100 (CET)
-Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
- [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id 3B66E87E92
- for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 21:41:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-IronPort-AV: E=Sophos;i="6.06,188,1705330800"; d="scan'208";a="195553921"
-Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie5.idc.renesas.com with ESMTP; 28 Feb 2024 05:41:00 +0900
-Received: from renesas-deb12.mshome.net (unknown [10.226.92.31])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id 15DC6400C4EC;
- Wed, 28 Feb 2024 05:40:58 +0900 (JST)
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Cc: Paul Barker <paul.barker.ct@bp.renesas.com>,
-	u-boot@lists.denx.de
-Subject: [PATCH v3 8/8] board: rzg2l: Support reset via Renesas RAA215300 PMIC
-Date: Tue, 27 Feb 2024 20:40:35 +0000
-Message-Id: <20240227204035.3761-9-paul.barker.ct@bp.renesas.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240227204035.3761-1-paul.barker.ct@bp.renesas.com>
-References: <20240227204035.3761-1-paul.barker.ct@bp.renesas.com>
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="yI+Nz3EW";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="XgKAdHzw";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 9C6C187FEB; Tue, 27 Feb 2024 21:19:22 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 1BCE887DAB
+ for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 21:19:20 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=cmax@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4Tkpjg5mVFz9sWt;
+ Tue, 27 Feb 2024 21:19:19 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1709065159;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=TDHgqB5EfxmNY681AsPhRvmF9dTlcURxwPZPiRbCRvk=;
+ b=yI+Nz3EWGiFw0Q8/6YTtcxyGaSi5hbhzXgUAY7M95xOBBDniqa4Mng1b8lJmGRUNRBRiO5
+ FSluxR9pw+GGI3sazW2pnTdLTyRhPjFgCRrFzSNGYy83jZvQRMsSj/2jFJg23bjfIBljD+
+ rTwNOUqLxjSHruxIb1xQnJIy32VXnYGmhW7X2WEuW6dzVJg7ZEv3I+VUIDMQVYGQ8/vR3p
+ j9NWBI0NvgXWgbnt//kR6aZN3kZbVO1oVttUcz/59W2VBeVFXePyRLGDIrBQbS/RAnW+AT
+ skItaG4sgPakUVPl6IrZmA1nPXgJANf9ZZHNvOzyIKgO6ewcuglJRwf2kTkKiQ==
+From: cmax@mailbox.org
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1709065158;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=TDHgqB5EfxmNY681AsPhRvmF9dTlcURxwPZPiRbCRvk=;
+ b=XgKAdHzwi8bU1RhkwEUMNHCVLc1ew4ABWXpvnxZ+CDlpRCn7ZdqXuuT+H28KJV9sI/FwIJ
+ vlkANXkjLcoWaV3MFcDXAwaN1N+z8m3cIcHj46okNDNngiY3bo3D2oHzLFOn8MzJwfuEr7
+ 2xU7Pyg4BHyX+/CW+NTzI373CpsuymhRhbOimLelY3dvN2j0+GXSnKjKrj+8b11PEc+tAo
+ GyTuv5nom3TbofUcAsyhLAJQGQY4y025pQO9XtDvMZmF+xCCf4iEeHUzJczM8jBYydaWhr
+ XBydvR9d5Ut+id4/v5CXi+ESknK/IAcCMIsB4XFMGpdBcdSWVz8Z5Wd7X2txxw==
+To: u-boot@lists.denx.de
+Cc: max <cmax@mailbox.org>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>
+Subject: [PATCH] mmc: arm_pl180: Limit data transfer to U16_MAX
+Date: Tue, 27 Feb 2024 21:18:57 +0100
+Message-ID: <20240227201857.25814-1-cmax@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 078011d5e2a630da61d
+X-MBO-RS-META: bcc79i3i8rmfsqdpfczaey1t6yiamb57
+X-Rspamd-Queue-Id: 4Tkpjg5mVFz9sWt
+X-Mailman-Approved-At: Tue, 27 Feb 2024 22:02:15 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -56,42 +83,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With the SYSRESET subsystem enabled we do not need to implement
-reset_cpu() in the board directory.
+From: max <cmax@mailbox.org>
 
-Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
-Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Currently fetching files bigger that cause a data transfer greater than
+U16_MAX fails.
+
+The reason is that the specification defines the datalength register
+as a 16 bit wide register, but in u-boot it is used as if it is an
+32 bit register. Therefore values greater than U16_MAX cause an
+infinite loop inside u-boot. U-boot expects to get more data from
+interface/hardware then it will ever get and therefore inifintely waits
+for more data that will never come.
+
+Signed-off-by: max <cmax@mailbox.org>
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>
 ---
- board/renesas/rzg2l/rzg2l.c           | 8 --------
- configs/renesas_rzg2l_smarc_defconfig | 2 ++
- 2 files changed, 2 insertions(+), 8 deletions(-)
+ drivers/mmc/arm_pl180_mmci.c | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-diff --git a/board/renesas/rzg2l/rzg2l.c b/board/renesas/rzg2l/rzg2l.c
-index 73201a8c69e5..0f6d6e7f514f 100644
---- a/board/renesas/rzg2l/rzg2l.c
-+++ b/board/renesas/rzg2l/rzg2l.c
-@@ -56,11 +56,3 @@ int board_init(void)
- {
+diff --git a/drivers/mmc/arm_pl180_mmci.c b/drivers/mmc/arm_pl180_mmci.c
+index 5cf5502ed5..af2f9a5a84 100644
+--- a/drivers/mmc/arm_pl180_mmci.c
++++ b/drivers/mmc/arm_pl180_mmci.c
+@@ -231,6 +231,7 @@ static int do_data_transfer(struct mmc *dev,
+ 	u32 blksz = 0;
+ 	u32 data_ctrl = 0;
+ 	u32 data_len = (u32) (data->blocks * data->blocksize);
++	assert(data_len < U16_MAX); // should be ensured by arm_pl180_get_b_max
+ 
+ 	if (!host->version2) {
+ 		blksz = (ffs(data->blocksize) - 1);
+@@ -358,6 +359,14 @@ static int  host_set_ios(struct mmc *dev)
  	return 0;
  }
--
--void reset_cpu(void)
--{
--	/*
--	 * TODO: Implement reset support once TrustedFirmware supports
--	 * the appropriate call.
--	 */
--}
-diff --git a/configs/renesas_rzg2l_smarc_defconfig b/configs/renesas_rzg2l_smarc_defconfig
-index 2cab79329db4..21365a21fe8c 100644
---- a/configs/renesas_rzg2l_smarc_defconfig
-+++ b/configs/renesas_rzg2l_smarc_defconfig
-@@ -55,3 +55,5 @@ CONFIG_PMIC_RAA215300=y
- CONFIG_DM_REGULATOR=y
- CONFIG_DM_REGULATOR_FIXED=y
- CONFIG_DM_REGULATOR_GPIO=y
-+CONFIG_SYSRESET=y
-+CONFIG_SYSRESET_RAA215300=y
+ 
++static int arm_pl180_get_b_max(struct udevice *dev, void *dst, lbaint_t blkcnt)
++{
++	struct mmc_uclass_priv *upriv = dev_get_uclass_priv(dev);
++	struct mmc *mmc = upriv->mmc;
++
++	return U16_MAX / mmc->read_bl_len;
++}
++
+ #ifndef CONFIG_DM_MMC
+ /* MMC uses open drain drivers in the enumeration phase */
+ static int mmc_host_reset(struct mmc *dev)
+@@ -373,6 +382,7 @@ static const struct mmc_ops arm_pl180_mmci_ops = {
+ 	.send_cmd = host_request,
+ 	.set_ios = host_set_ios,
+ 	.init = mmc_host_reset,
++	.get_b_max = arm_pl180_get_b_max,
+ };
+ 
+ /*
+@@ -531,6 +541,7 @@ static const struct dm_mmc_ops arm_pl180_dm_mmc_ops = {
+ 	.send_cmd = dm_host_request,
+ 	.set_ios = dm_host_set_ios,
+ 	.get_cd = dm_mmc_getcd,
++	.get_b_max = arm_pl180_get_b_max,
+ };
+ 
+ static int arm_pl180_mmc_of_to_plat(struct udevice *dev)
 -- 
-2.44.0
+2.43.0
 
