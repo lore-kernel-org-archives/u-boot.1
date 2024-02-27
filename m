@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D50F3C54798
-	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 05:34:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11979C54798
+	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 05:38:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 25D1887FAC;
-	Tue, 27 Feb 2024 06:34:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2F24987FBE;
+	Tue, 27 Feb 2024 06:38:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="A9WWPab7";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DZfB9sUV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6CD5B87FB8; Tue, 27 Feb 2024 06:34:40 +0100 (CET)
-Received: from mail-vs1-xe2f.google.com (mail-vs1-xe2f.google.com
- [IPv6:2607:f8b0:4864:20::e2f])
+ id 7FE9087FC1; Tue, 27 Feb 2024 06:38:32 +0100 (CET)
+Received: from mail-ua1-x932.google.com (mail-ua1-x932.google.com
+ [IPv6:2607:f8b0:4864:20::932])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9C7AE87FAC
- for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 06:34:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DE2D187FC2
+ for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 06:38:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vs1-xe2f.google.com with SMTP id
- ada2fe7eead31-471e55434e9so999086137.0
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 21:34:35 -0800 (PST)
+Received: by mail-ua1-x932.google.com with SMTP id
+ a1e0cc1a2514c-7d5bbbe592dso2022165241.0
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 21:38:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709012074; x=1709616874; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1709012308; x=1709617108; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xGDFsUFMaAd0cuI6cvXw0doyrOIpqohQaxx5QQmSxO8=;
- b=A9WWPab7erzBdNA47Pdlya3AYq6XDYqTUc6YUemgys1+ikH4VXLQfcI1riGsUWWoil
- GwR4d53X7UiTTw7i+TwGRlNwUyzvGFapTkHNaE7KZrPIX/4YwAZJAxpqi1rv6Aip5hQZ
- W2DUmSPGH16Rc2tEK1DP/4cnqhpRSrh/SRkoFpS2TMb1L5dd2gQfi3WeKw5ETfn2WtFC
- Pw4+rYBuaj4ZBFlqArgLgHdWPoRHD7Hv8OuB8bTXqjb44Gldx9eivwhHSrDRHK/ZwbPi
- 8ImQDiU0Ol2ECY13GghGwRwsNyN9HNdQ7m/9NZFUd0JkjT8E/g6nD1YN6PQU3XU7jGKi
- 9LYg==
+ bh=W6g8SZunBIl2hdwYTikeKEaNd1LqI4A0bA+5fBg5bKg=;
+ b=DZfB9sUVtBsPYYi6VsKZytA0F4jxmUxM2y1hCLhd/dIsvKePewbZ8e9MZHwV/neye0
+ H0dSv84Kjk/kocUHMjqQtpamauYT9iZkEKCB4Zro+28pdqlROtStFQ9lcCQiPfGHSu/T
+ lBjH7zTUlnT8MFfP+c4Yjqq++Tg/I7ioJlSKOZjxIIP5Q9Q/VjB5lC9uRP4lDpC424ae
+ jW33DaeEaTufM04s6U54JtwDYqmniOyc+3/7FM+LXCArDdeWvdtkj1zFezfhAJnksz9R
+ pvjYs1pMhleA4+Xe5kFvOlsbogIskUQxaLjU/rmMdXSyxiJu1UXyNoEzIdv9pOYBSM+D
+ +Ydw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709012074; x=1709616874;
+ d=1e100.net; s=20230601; t=1709012308; x=1709617108;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=xGDFsUFMaAd0cuI6cvXw0doyrOIpqohQaxx5QQmSxO8=;
- b=sLTRet62FX8/325y335I5ScplESKnQlPQU7P7dUfdf9qpEU9WOQoNl0FDErLwGOpyT
- 9j/R78uthjuMzOMz4iJ1TJaMd/bYq4rlMZhXgc8fZzbPGSRtLmN0KFbcsjXO/LB9mDE1
- a2awXxcFO3i1X+RM4w7obccLdwrBSstsJAoqWxOQzarVE3Fr2VZduzIX4yztviJM92JL
- XrMFq0gpguSYUsdyucUaiRKdcHux+6HPHW80NQFBVQPf8kQiXWGpEHPaU4n4CtbJhhx1
- oG+ei8b32NxX2KWe4fJUGRDdHA0fHs+hgEE6JUBgn+gJsF69yDbOe9970Cf8khqMWtWV
- dJsw==
+ bh=W6g8SZunBIl2hdwYTikeKEaNd1LqI4A0bA+5fBg5bKg=;
+ b=ZN9oe20Zpf+Esd2QC3a2aQUgUV50a9uByiTPXLZyL5/5SqIlHfF2hvjww5apgZl1rh
+ LmDsYb8qkYNc0iq9iABBrHt/3sw/Ddj07zobMbcYInyFKxN+MXHlCE4SHLqaI9FL3Yb4
+ 5CfFghXdjGYSecBXQEJEIAJDoAM44UFBmi1+ovpQEdQeNFniOHPCtW7MCujen+upwJD+
+ aFACNXNsycz5o45sy4YOf25fdiOSSXtKT2Ks9QjUA+wHtW620r59LZtKxFKVewob7s/u
+ IAxc4V/WDVdTWbKrD3/4+KUnCxM+ZW/qVzOxSbXzVXR3Xu54b8XgGqAjvIncb7FsNYuf
+ IE6w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUwun0FKvNU893wC9c9s9FuHhvfQ7d/7GEtL6g3lgnBvPslu37AHaLce/4ZCtq6Myg+nBYSENPvkXAUf0G6qM/x0NEIXQ==
-X-Gm-Message-State: AOJu0YylPnGigKWbBud5f36UxhbeOaVTclADyc5k0XcOD4mj0sVfGm0f
- SkmJ3AJJG4q+ybBFmPyDK+0KD7Zfu5fdh8CWyFNm7DbHc3wplek7alt1EmM5vay9XkbScr2Ao4o
- wb9ZnCHz9Zbh6ZeMKx6nWx98CXCitF6kvS2p7Fg==
-X-Google-Smtp-Source: AGHT+IGbGhK7nREUzF6WoR12DNP2bsSsQdXxeABde0vvrqHDi3DIE5zsp8hfqbHLbe8jlVS+W25p7LipoQr6/R6JpTM=
-X-Received: by 2002:a05:6102:3713:b0:470:44e4:27d0 with SMTP id
- s19-20020a056102371300b0047044e427d0mr7211592vst.6.1709012074205; Mon, 26 Feb
- 2024 21:34:34 -0800 (PST)
+ AJvYcCV1XvsMj88dSl4qsNt1MToPojjJCTF3fM20yQvEu1u5XUBSi9vRYZWcOfiahBm7DkzRTEAYrZgTcKC4JJFP10JEXc7E8Q==
+X-Gm-Message-State: AOJu0YxH6rP/+2vSd2MJXPgLuJavtykDoWDTmX0/3HuOPTWVsHLk1+8K
+ o5lPkMC3tPbsfgg3l5VOokVSdu3d45AxFIPqIy6iuR05llk5NWA+8kojp06pkOQpCVgL4Jzkq6j
+ km0FnKE8ezcbplGMGfBhUOkBfRvtfFk8noNEESw==
+X-Google-Smtp-Source: AGHT+IFyuw7jcdoeGHblNsscaw0twH/2hwtD+FXUNAyZY8ZnUCx/N71uYZJWAe1oereZfcaenkSAXrhacWq/kMfwEjU=
+X-Received: by 2002:a67:ec16:0:b0:470:51c8:1992 with SMTP id
+ d22-20020a67ec16000000b0047051c81992mr6069211vso.15.1709012308634; Mon, 26
+ Feb 2024 21:38:28 -0800 (PST)
 MIME-Version: 1.0
 References: <20240226-b4-qcom-common-target-v5-0-10c8e078befb@linaro.org>
- <20240226-b4-qcom-common-target-v5-23-10c8e078befb@linaro.org>
-In-Reply-To: <20240226-b4-qcom-common-target-v5-23-10c8e078befb@linaro.org>
+ <20240226-b4-qcom-common-target-v5-7-10c8e078befb@linaro.org>
+In-Reply-To: <20240226-b4-qcom-common-target-v5-7-10c8e078befb@linaro.org>
 From: Sumit Garg <sumit.garg@linaro.org>
-Date: Tue, 27 Feb 2024 11:04:23 +0530
-Message-ID: <CAFA6WYMs_WunGr_1E2L6rKj7rJpTo1W5nfFc43bkfGAv4c5skA@mail.gmail.com>
-Subject: Re: [PATCH v5 23/39] mach-snapdragon: carve out no-map regions
+Date: Tue, 27 Feb 2024 11:08:17 +0530
+Message-ID: <CAFA6WYOnQxJ_eGBh0O=imUHwk0krKS_QUR+9mx3SqgXF-cB56w@mail.gmail.com>
+Subject: Re: [PATCH v5 07/39] serial: msm: add debug UART
 To: Caleb Connolly <caleb.connolly@linaro.org>
 Cc: Neil Armstrong <neil.armstrong@linaro.org>,
  Ramon Fried <rfried.dev@gmail.com>, 
@@ -98,241 +98,93 @@ X-Virus-Status: Clean
 
 On Mon, 26 Feb 2024 at 22:56, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >
-> On Qualcomm platforms, the TZ may already have certain memory regions
-> under protection by the time U-Boot starts. There is a rare case on some
-> platforms where the prefetcher might speculatively access one of these
-> regions resulting in a board crash (TZ traps and then resets the board).
+> Introduce support for early debugging. This relies on the previous stage
+> bootloader to initialise the UART clocks, when running with U-Boot as
+> the primary bootloader this feature doesn't work. It will require a way
+> to configure the clocks before the driver model is available.
 >
-> We shouldn't be accessing these regions from within U-Boot anyway, so
-> let's mark them all with PTE_TYPE_FAULT to prevent any speculative
-> access and correctly trap in EL1 rather than EL3.
->
-> This is quite costly with caches off (takes ~2 seconds on SDM845 vs 35ms
-> with caches on). So to minimise the impact this is only enabled on
-> QCS404 for now (where the issue is known to occur).
->
-> In the future, we should try to find a more efficient way to handle
-> this, perhaps by turning on the MMU in stages.
->
-> Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
-> Tested-by: Sumit Garg <sumit.garg@linaro.org> #qcs404
+> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->  arch/arm/mach-snapdragon/board.c | 162 +++++++++++++++++++++++++++++++++------
->  1 file changed, 140 insertions(+), 22 deletions(-)
+>  drivers/serial/Kconfig      |  8 ++++++++
+>  drivers/serial/serial_msm.c | 37 +++++++++++++++++++++++++++++++++++++
+>  2 files changed, 45 insertions(+)
 >
+> diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig
+> index 26460c4e0cab..fbd351a47859 100644
+> --- a/drivers/serial/Kconfig
+> +++ b/drivers/serial/Kconfig
+> @@ -318,8 +318,16 @@ config DEBUG_UART_S5P
+>           Select this to enable a debug UART using the serial_s5p driver. You
+>           will need to provide parameters to make this work. The driver will
+>           be available until the real driver-model serial is running.
+>
+> +config DEBUG_UART_MSM
+> +       bool "Qualcomm QUP UART debug"
+> +       depends on ARCH_SNAPDRAGON
+> +       help
+> +         Select this to enable a debug UART using the serial_msm driver. You
+> +         will need to provide parameters to make this work. The driver will
+> +         be available until the real driver-model serial is running.
+> +
+>  config DEBUG_UART_MSM_GENI
+>         bool "Qualcomm snapdragon"
+>         depends on ARCH_SNAPDRAGON
+>         help
+> diff --git a/drivers/serial/serial_msm.c b/drivers/serial/serial_msm.c
+> index f4d96313b931..44b93bd7ff21 100644
+> --- a/drivers/serial/serial_msm.c
+> +++ b/drivers/serial/serial_msm.c
+> @@ -251,4 +251,41 @@ U_BOOT_DRIVER(serial_msm) = {
+>         .priv_auto      = sizeof(struct msm_serial_data),
+>         .probe = msm_serial_probe,
+>         .ops    = &msm_serial_ops,
+>  };
+> +
+> +#ifdef CONFIG_DEBUG_UART_MSM
+> +
+> +static struct msm_serial_data init_serial_data = {
+> +       .base = CONFIG_VAL(DEBUG_UART_BASE),
+> +       .clk_rate = 7372800,
+> +};
+> +
+> +#include <debug_uart.h>
+> +
+> +/* Uncomment to turn on UART clocks when debugging U-Boot as aboot on MSM8916 */
+> +//int apq8016_clk_init_uart(phys_addr_t gcc_base);
+> +
 
-I still can't see commit message updates as per [1], probably you can
-take care of them while applying this patch-set.
+Okay I can live with these comments such that the user is aware before
+enabling debug UART on db410c.
 
-[1] https://lore.kernel.org/all/CAFA6WYPg=mBRvLqtdaQ1omzeKU6WcbNt_dWBqV4H36sWb3-ibA@mail.gmail.com/#t
+Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
 
 -Sumit
 
-> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-> index 5a859aabd5c4..f12f5791a136 100644
-> --- a/arch/arm/mach-snapdragon/board.c
-> +++ b/arch/arm/mach-snapdragon/board.c
-> @@ -24,8 +24,9 @@
->  #include <linux/sizes.h>
->  #include <lmb.h>
->  #include <malloc.h>
->  #include <usb.h>
-> +#include <sort.h>
->
->  DECLARE_GLOBAL_DATA_PTR;
->
->  static struct mm_region rbx_mem_map[CONFIG_NR_DRAM_BANKS + 2] = { { 0 } };
-> @@ -295,9 +296,9 @@ int board_late_init(void)
->  }
->
->  static void build_mem_map(void)
->  {
-> -       int i;
-> +       int i, j;
->
->         /*
->          * Ensure the peripheral block is sized to correctly cover the address range
->          * up to the first memory bank.
-> @@ -311,40 +312,157 @@ static void build_mem_map(void)
->         mem_map[0].attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
->                          PTE_BLOCK_NON_SHARE |
->                          PTE_BLOCK_PXN | PTE_BLOCK_UXN;
->
-> -       debug("Configured memory map:\n");
-> -       debug("  0x%016llx - 0x%016llx: Peripheral block\n",
-> -             mem_map[0].phys, mem_map[0].phys + mem_map[0].size);
-> -
-> -       /*
-> -        * Now add memory map entries for each DRAM bank, ensuring we don't
-> -        * overwrite the list terminator
-> -        */
-> -       for (i = 0; i < ARRAY_SIZE(rbx_mem_map) - 2 && gd->bd->bi_dram[i].size; i++) {
-> -               if (i == ARRAY_SIZE(rbx_mem_map) - 1) {
-> -                       log_warning("Too many DRAM banks!\n");
-> -                       break;
-> -               }
-> -               mem_map[i + 1].phys = gd->bd->bi_dram[i].start;
-> -               mem_map[i + 1].virt = mem_map[i + 1].phys;
-> -               mem_map[i + 1].size = gd->bd->bi_dram[i].size;
-> -               mem_map[i + 1].attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-> -                                    PTE_BLOCK_INNER_SHARE;
-> -
-> -               debug("  0x%016llx - 0x%016llx: DDR bank %d\n",
-> -                     mem_map[i + 1].phys, mem_map[i + 1].phys + mem_map[i + 1].size, i);
-> +       for (i = 1, j = 0; i < ARRAY_SIZE(rbx_mem_map) - 1 && gd->bd->bi_dram[j].size; i++, j++) {
-> +               mem_map[i].phys = gd->bd->bi_dram[j].start;
-> +               mem_map[i].virt = mem_map[i].phys;
-> +               mem_map[i].size = gd->bd->bi_dram[j].size;
-> +               mem_map[i].attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | \
-> +                                  PTE_BLOCK_INNER_SHARE;
->         }
+> +static inline void _debug_uart_init(void)
+> +{
+> +       /* Uncomment to turn on UART clocks when debugging U-Boot as aboot on MSM8916 */
+> +       //apq8016_clk_init_uart(0x1800000);
+> +       uart_dm_init(&init_serial_data);
+> +}
 > +
-> +       mem_map[i].phys = UINT64_MAX;
-> +       mem_map[i].size = 0;
+> +static inline void _debug_uart_putc(int ch)
+> +{
+> +       struct msm_serial_data *priv = &init_serial_data;
 > +
-> +#ifdef DEBUG
-> +       debug("Configured memory map:\n");
-> +       for (i = 0; mem_map[i].size; i++)
-> +               debug("  0x%016llx - 0x%016llx: entry %d\n",
-> +                     mem_map[i].phys, mem_map[i].phys + mem_map[i].size, i);
+> +       while (!(readl(priv->base + UARTDM_SR) & UARTDM_SR_TX_EMPTY) &&
+> +              !(readl(priv->base + UARTDM_ISR) & UARTDM_ISR_TX_READY))
+> +               ;
+> +
+> +       writel(UARTDM_CR_CMD_RESET_TX_READY, priv->base + UARTDM_CR);
+> +
+> +       writel(1, priv->base + UARTDM_NCF_TX);
+> +       writel(ch, priv->base + UARTDM_TF);
+> +}
+> +
+> +DEBUG_UART_FUNCS
+> +
 > +#endif
->  }
->
->  u64 get_page_table_size(void)
->  {
->         return SZ_64K;
->  }
->
-> +static int fdt_cmp_res(const void *v1, const void *v2)
-> +{
-> +       const struct fdt_resource *res1 = v1, *res2 = v2;
-> +
-> +       return res1->start - res2->start;
-> +}
-> +
-> +#define N_RESERVED_REGIONS 32
-> +
-> +/* Mark all no-map regions as PTE_TYPE_FAULT to prevent speculative access.
-> + * On some platforms this is enough to trigger a security violation and trap
-> + * to EL3.
-> + */
-> +static void carve_out_reserved_memory(void)
-> +{
-> +       static struct fdt_resource res[N_RESERVED_REGIONS] = { 0 };
-> +       int parent, rmem, count, i = 0;
-> +       phys_addr_t start;
-> +       size_t size;
-> +
-> +       /* Some reserved nodes must be carved out, as the cache-prefetcher may otherwise
-> +        * attempt to access them, causing a security exception.
-> +        */
-> +       parent = fdt_path_offset(gd->fdt_blob, "/reserved-memory");
-> +       if (parent <= 0) {
-> +               log_err("No reserved memory regions found\n");
-> +               return;
-> +       }
-> +
-> +       /* Collect the reserved memory regions */
-> +       fdt_for_each_subnode(rmem, gd->fdt_blob, parent) {
-> +               const fdt32_t *ptr;
-> +               int len;
-> +               if (!fdt_getprop(gd->fdt_blob, rmem, "no-map", NULL))
-> +                       continue;
-> +
-> +               if (i == N_RESERVED_REGIONS) {
-> +                       log_err("Too many reserved regions!\n");
-> +                       break;
-> +               }
-> +
-> +               /* Read the address and size out from the reg property. Doing this "properly" with
-> +                * fdt_get_resource() takes ~70ms on SDM845, but open-coding the happy path here
-> +                * takes <1ms... Oh the woes of no dcache.
-> +                */
-> +               ptr = fdt_getprop(gd->fdt_blob, rmem, "reg", &len);
-> +               if (ptr) {
-> +                       /* Qualcomm devices use #address/size-cells = <2> but all reserved regions are within
-> +                        * the 32-bit address space. So we can cheat here for speed.
-> +                        */
-> +                       res[i].start = fdt32_to_cpu(ptr[1]);
-> +                       res[i].end = res[i].start + fdt32_to_cpu(ptr[3]);
-> +                       i++;
-> +               }
-> +       }
-> +
-> +       /* Sort the reserved memory regions by address */
-> +       count = i;
-> +       qsort(res, count, sizeof(struct fdt_resource), fdt_cmp_res);
-> +
-> +       /* Now set the right attributes for them. Often a lot of the regions are tightly packed together
-> +        * so we can optimise the number of calls to mmu_change_region_attr() by combining adjacent
-> +        * regions.
-> +        */
-> +       start = ALIGN_DOWN(res[0].start, SZ_2M);
-> +       size = ALIGN(res[0].end - start, SZ_2M);
-> +       for (i = 1; i <= count; i++) {
-> +               /* We ideally want to 2M align everything for more efficient pagetables, but we must avoid
-> +                * overwriting reserved memory regions which shouldn't be mapped as FAULT (like those with
-> +                * compatible properties).
-> +                * If within 2M of the previous region, bump the size to include this region. Otherwise
-> +                * start a new region.
-> +                */
-> +               if (i == count || start + size < res[i].start - SZ_2M) {
-> +                       debug("  0x%016llx - 0x%016llx: reserved\n",
-> +                             start, start + size);
-> +                       mmu_change_region_attr(start, size, PTE_TYPE_FAULT);
-> +                       /* If this is the final region then quit here before we index
-> +                        * out of bounds...
-> +                        */
-> +                       if (i == count)
-> +                               break;
-> +                       start = ALIGN_DOWN(res[i].start, SZ_2M);
-> +                       size = ALIGN(res[i].end - start, SZ_2M);
-> +               } else {
-> +                       /* Bump size if this region is immediately after the previous one */
-> +                       size = ALIGN(res[i].end - start, SZ_2M);
-> +               }
-> +       }
-> +}
-> +
-> +/* This function open-codes setup_all_pgtables() so that we can
-> + * insert additional mappings *before* turning on the MMU.
-> + */
->  void enable_caches(void)
->  {
-> +       u64 tlb_addr = gd->arch.tlb_addr;
-> +       u64 tlb_size = gd->arch.tlb_size;
-> +       u64 pt_size;
-> +       ulong carveout_start;
-> +
-> +       gd->arch.tlb_fillptr = tlb_addr;
-> +
->         build_mem_map();
->
->         icache_enable();
-> +
-> +       /* Create normal system page tables */
-> +       setup_pgtables();
-> +
-> +       pt_size = (uintptr_t)gd->arch.tlb_fillptr -
-> +                 (uintptr_t)gd->arch.tlb_addr;
-> +       debug("Primary pagetable size: %lluKiB\n", pt_size / 1024);
-> +
-> +       /* Create emergency page tables */
-> +       gd->arch.tlb_size -= pt_size;
-> +       gd->arch.tlb_addr = gd->arch.tlb_fillptr;
-> +       setup_pgtables();
-> +       gd->arch.tlb_emerg = gd->arch.tlb_addr;
-> +       gd->arch.tlb_addr = tlb_addr;
-> +       gd->arch.tlb_size = tlb_size;
-> +
-> +       carveout_start = get_timer(0);
-> +       /* Takes ~20-50ms on SDM845 */
-> +       carve_out_reserved_memory();
-> +       debug("carveout time: %lums\n", get_timer(carveout_start));
-> +
->         dcache_enable();
->  }
 >
 > --
 > 2.43.1
