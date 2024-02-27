@@ -4,59 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56EA0C48BF6
-	for <u-boot@archiver.kernel.org>; Mon, 26 Feb 2024 23:09:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16452C5478C
+	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 01:30:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6EBB887F8B;
-	Tue, 27 Feb 2024 00:09:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 0CC4E87F71;
+	Tue, 27 Feb 2024 02:30:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=outlook.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="daih6DlO";
+	dkim=pass (2048-bit key; unprotected) header.d=outlook.com header.i=@outlook.com header.b="QwZhV+xw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1493687F7D; Tue, 27 Feb 2024 00:09:01 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9C67787F6D; Tue, 27 Feb 2024 02:30:11 +0100 (CET)
+Received: from APC01-SG2-obe.outbound.protection.outlook.com
+ (mail-sgaapc01olkn20823.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:feab::823])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE33287F7C
- for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 00:08:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1BDA387F5E
+ for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 02:30:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=8b6e=KE=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1708988923; bh=KR8O2pxctZWflNU3M1Y1NEcT//VikihEXElxxDAQoTA=;
- b=daih6DlOgjxanLHy/so99U8xFXzk4ulUFFw5BDiBcT9rukpYM0IL/mv+Atvz1e+cQ/yFnzjdy
- NDOpM6nJ8+YRstz8JaDmrS/uo743vmydQD5h3OgB+JLA2NnjNsoDcyUTMeeXuLDHDyQ6lGNc47g
- FbM2/bvOOyx5nwk91gfgelODKmthdAhhqGBw4Xe8bLR55rZvbzucXRiUvaG2pcO3eAnkS1zlcDN
- ae9mym0wjBxSe8idF5ya+MDv8gutk+V88WEunjIamBMD974MTsapoggY71aduCfzxQEMZZlXDEs
- CC5mHwS1EpcbOLn4kwIxrqhOZG4WVRz/EqaGwzFsmcog==
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- David Bauer <mail@david-bauer.net>, Tianling Shen <cnsztl@gmail.com>, Loic
- Devulder <ldevulder@suse.com>, "Chen-Yu Tsai" <wens@csie.org>, Jonas
- Karlman <jonas@kwiboo.se>, Banglang Huang <banglang.huang@foxmail.com>,
- "Matwey V. Kornilov" <matwey.kornilov@gmail.com>
-Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
-Subject: [PATCH 4/4] rockchip: Migrate to use DM_USB_GADGET on RK3328
-Date: Mon, 26 Feb 2024 23:08:16 +0000
-Message-ID: <20240226230822.2430391-5-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240226230822.2430391-1-jonas@kwiboo.se>
-References: <20240226230822.2430391-1-jonas@kwiboo.se>
+ dmarc=pass (p=none dis=none) header.from=outlook.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=forbidden405@outlook.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=bcsVjHsGPN3TDT1AEB8D2GhX+cntSUei+G3Hjtwdx/ZH2sk6CUW9KC26+06yJ8zzHdPEKWIAeuNuN0eG79oCN8LUrwPanRNmp9PnX1exClhavDcSedF3U+IP8mNQpIPacHbAEGdU75eMQBbd1npT5epzTV/lb7KiN508/2RHsLovs05AASzVzzdfFKr+ybPb1NpJmbcVmc3+Kjo0ubmuwzQ4+Gpz7uYrFYcvR1B/+iYdRtm1jyXiODgWLeYwPo7RHXqnXlozrhAm+DPZ1QBYdEjwJt4cWcItM9hM13JrPaoexr89m4D3OMiLyWqZixjmS9MdBIVY9+KQgPJ19ZvhCQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=IKPgWFgvoRslClwmVpWth66drREUhBm7TBWykoQu3ro=;
+ b=UJ364oexhcH6BynHn/s4rdxI1c4X+ypfVrrK+TI1iqhRZ354gqZgDj1wJTjsXd54c9STv9lmyv6At8oBH5BrMrTZ7503Fzs3phti8PHccIbMbonjoJomEUtEuSyqSXvHhx1SBUvnCJN5DbKT59bAfPVxzevLIGGIe0jGustB7PCBu3S1w5H8B3XYbM3ytW+k/TI64cXiTNHpXrWFUmnxdJI5hn8y4NrzZMeKwHw37YI8Vt9p6sqJdKjqxBTl4mj0cfq0d3sqNM5OBdgjiOaMDVc/ZJNSuwmm9TkxH/w/64TFKGAunHnF9qQMinL9JLPzbQ+jaBKM9EGnzIomJoEBEQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=IKPgWFgvoRslClwmVpWth66drREUhBm7TBWykoQu3ro=;
+ b=QwZhV+xwQGq6eV2MQ6vCA1RYX7wPv7y3JNprt4Yq+Od0ehKZ123sJOlg901j7FWtlV7k11hjpdQ/BTaDdU/xFBFWzdeqYVqub1QovitzONvZ+ZgUMjbvQkGH8dSjBHTswmNEQ1sAFjSeEiTiVNSv3E9xlw0ULWkexl/NoO4r2FrL3FeQdEqKk41nVLTgZFosU2c4wHRA2srtpvSCM+OzhCS05mdcDDlYyGQaxjiyRVwXBG1aGKtVRzVigUodp56xlWW/AeU5o/kAsUlTe4sG+I84TzxadxsGk40JgxWblsqKQqQXOfgaaNYVgs7EoIPOiVCcvuEx6ZfXdt0KoyJKqw==
+Received: from SEZPR06MB6959.apcprd06.prod.outlook.com (2603:1096:101:1ed::14)
+ by TY0PR06MB5706.apcprd06.prod.outlook.com (2603:1096:400:272::6)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7316.22; Tue, 27 Feb
+ 2024 01:30:05 +0000
+Received: from SEZPR06MB6959.apcprd06.prod.outlook.com
+ ([fe80::53da:a8a:83cb:b9ad]) by SEZPR06MB6959.apcprd06.prod.outlook.com
+ ([fe80::53da:a8a:83cb:b9ad%4]) with mapi id 15.20.7316.035; Tue, 27 Feb 2024
+ 01:30:05 +0000
+Message-ID: <SEZPR06MB6959E1A4AE0D95ACD879E09D96592@SEZPR06MB6959.apcprd06.prod.outlook.com>
+Date: Tue, 27 Feb 2024 09:29:57 +0800
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RESEND] serial: pl01x: set baudrate when probing
+To: Dan Carpenter <dan.carpenter@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Lukasz Majewski <lukma@denx.de>
+References: <20240225-b4-pl011-v1-1-2686496c1a17@outlook.com>
+ <55c3b1b2-f384-44bb-8cf3-d47884124b6f@moroto.mountain>
+Content-Language: en-US
+From: Yang Xiwen <forbidden405@outlook.com>
+In-Reply-To: <55c3b1b2-f384-44bb-8cf3-d47884124b6f@moroto.mountain>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-TMN: [w0DVZKdBum2QnupV+VjBRGYR0w8ppOAHxOODNmHsvMw9tc3+yfFi3/IjStUcAQUL]
+X-ClientProxiedBy: SI2PR01CA0022.apcprd01.prod.exchangelabs.com
+ (2603:1096:4:192::14) To SEZPR06MB6959.apcprd06.prod.outlook.com
+ (2603:1096:101:1ed::14)
+X-Microsoft-Original-Message-ID: <91a184c4-1491-46c4-a38e-8b0b503a2a7d@outlook.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 65dd19fb81fb330034973f3d
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SEZPR06MB6959:EE_|TY0PR06MB5706:EE_
+X-MS-Office365-Filtering-Correlation-Id: 99bec8b1-b47d-4008-3b61-08dc3733a047
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: sAhwfj9QudSx51KchQyA6uy6II7Hst4OJaj2fASJ/MFgHlyFZLRrf6in4Q/nsnUuCeYVob5h2sQWoyGbkeSlQraIwKXRP3D7AFvSdwl0MXg0Z4RVLs6pEPjXvFNuoMIYMDJ+s8bd/DdWB4NqK4+IvwaMIUZASID7Zjlf4Ytk9ELa8OP5/smOb5XnGymtFg4Q1cpMeSyBg2YRFMJ1iVH6xxy9JRfWX9Zlnhfy0UvcdEojobau5TfdjMp6kQyiF+LqPL3W8k3dWgI2h7mttPLgozIQ7je9WMN16K87pe7zKJFRW+x9093a86n7Gio4PcD8jlVu1pK3E3t0pMZzFcrP5oPApNU/fdJUQA5UEXdCKZclRdrqGuxbJkcKjJ9uKqxFXnNB2xsQJ9r1/NqppSNLfiN8fYrJy7ZHbkkFBr+2WVRl1zIIcdXCYYZYVIAxL+KNhzb4rynv3VXxLZW3VxrKv5U31jybKUTdY9nDV4cRFp6+eeqmG+a5qMZNBUfRk0l5hyIJNcGP/E9DhvsgobZp50PLvmi0icoNUHfwdCcYxtvHAsgCn+/9RlJg0Xp3xVNM
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UVBWQWh1aTRXczl3VlRlc1VaNnFsZDRRSVk1OWQ1Q0VsVkxOb2t1OUF2UnFV?=
+ =?utf-8?B?Y3o2aWkxQmNIV2JQMUdXa0N2R1VBY0xjK0IzeW8yNGpha2dkbTJGdXc3TDNY?=
+ =?utf-8?B?aFRJWnpIRXF6dnFNcEU3bkRTRmcvY3BmcUh5ZUszUEVpc2QxUXpwcGpJaWJZ?=
+ =?utf-8?B?Z1JORHQ4UXdmREZnWG1iL1hnODdKSHlGWHU5dWs0eW5BUVAzY3I3TjZHNWZr?=
+ =?utf-8?B?MDM2OEtJRjljR3JvaXdZUCtZQkdoczdyQmR0TUYwRThIblRmWk42eGQwNlNw?=
+ =?utf-8?B?LzZ3b0NFckRmMit6S2xqOWdtdDVrekc2VkpETzRwckxSci9kWkZYUzFKcDhs?=
+ =?utf-8?B?N2QrR1pJTGNFY3M1UTdERWVYaGQ5aUdHT1MyUzVFWi80WFlmd2xJWjEvckFT?=
+ =?utf-8?B?RnVFbDFNN2ROT2N3UXljY2l1QWI5MExsU25OMlpNbUk0aFdMbEhHd2xqRSts?=
+ =?utf-8?B?OXZtOGZKalVWKzIzdkUvN1hkRE1uTDJESmhXT1hyVVh6TS9IVjNRTzk2YWpj?=
+ =?utf-8?B?QkwzOVoyeFV4WWNWTDdMYUNRenNSeVI3bDBjWW52Qk8ya1VXNmY5Nm9ER1RE?=
+ =?utf-8?B?ZDBBWXJzWFFUSmhVVDdVUlc1QU9uQVB4VkJJV3Fhbmd3endnL1JDQ2hBcTNC?=
+ =?utf-8?B?cDR4WFhLNE8vLzFhUFNaYmJIbkdudGswUmhIUkg0RGpmTkRoWWNIU0xybThL?=
+ =?utf-8?B?SjFDc3dBazROdjkwbVp2TktKeDI5YzB0ek5zTzlVMlZwSytLeW82ak1kcmx5?=
+ =?utf-8?B?amd1NHMzbGZsRlJRNFpNZ2w4c2VVRGNnTGM2ZEhueHBSa0tYTVNRRU5lMm13?=
+ =?utf-8?B?TTh6M3NCcnNuV3J5RjVSRE02cFRzZXVrOVdUQ2taRXdkcHptbmtRdW1Na3c2?=
+ =?utf-8?B?SFBIWUVQckdqSFQ0cDgrcXl5cTlSMWVrbUJLQmY1OHpmcHNUMWRGQmNlY004?=
+ =?utf-8?B?YWwzUC9aU3R5VVB1QUFYSVVYWnR2QXNvTDZrSVdKcjV6bDZwa0pqbFJIYjNx?=
+ =?utf-8?B?bHB0K0NlUExuM1Q5RGE1SEVEOHUxL0JseEo4aTczaVZiaGswdE1EN25xazhm?=
+ =?utf-8?B?dmtMUmUwWG54VHZUL3dwVFh0QW1qZkw3YmVJSTZINVZNcnJJbEIxVG84TTlQ?=
+ =?utf-8?B?R2tpaTY5SndZZk1TbzN4NEl6Ty9Wem5hbmRNeXdrVzY3ZzBmMkRWc3dwemtK?=
+ =?utf-8?B?dnVmYU0wamg3a041VzgzbEVWdm9lREpFd3BmdTBseHRDaUhQUStuWGZNbGI3?=
+ =?utf-8?B?aksrRWxLMjVPTWlXWjVXbk13WHdDRlpKMzRoMUkvREUxcXJBVzRTTXhBcW1Q?=
+ =?utf-8?B?RWZEYzVlckZ4cGoxc0VGZDJpcEd0UkkyWGN2aTlLWFlXaC9xMFlBTnRVdzRZ?=
+ =?utf-8?B?WTFObjZkUGVRYStCM1o0MDgrY2trajlocU0yVTZVYVZBc3Z1QWphQkVYbWVs?=
+ =?utf-8?B?dy9ScmhHcGFCTlZyZ3gzSGJEMzc5SnhMWW9tQmFad0VrUnozb1ZkM0l5U0Fx?=
+ =?utf-8?B?eGZKckZ0MkswL2dQTnhiZVltamJJWlFlMWhnYysyV3hrS3RRV05VNFJISUZz?=
+ =?utf-8?B?YmV2YnM5M0VLcnZML1lBOTRQbXNOZ3VMc0YyTHVnMlRjSzZvdEpJcjNkUGo2?=
+ =?utf-8?B?R1pIVUZibFdxbFlESmxCTG81cHBlM1lBdS92eFF3bk5zZEFNMEpNMTZNc25t?=
+ =?utf-8?B?WXBOKzVRK1RPSDA3aTZUOEZqRS9mbSs4SC9WcWx5S3FHMFNVWXpmQVlnd3ow?=
+ =?utf-8?Q?hyKBOS9X5rTIR2c/BwUyYq248eemI8RaAaYYbMV?=
+X-OriginatorOrg: outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 99bec8b1-b47d-4008-3b61-08dc3733a047
+X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB6959.apcprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Feb 2024 01:30:05.4813 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TY0PR06MB5706
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,536 +132,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-USB gadget is not working fully as expected on RK3328, it uses a
-board_usb_init() function to initialize the DWC2 OTG port.
+On 2/26/2024 4:23 PM, Dan Carpenter wrote:
+> On Sun, Feb 25, 2024 at 08:38:33AM +0800, Yang Xiwen via B4 Relay wrote:
+>>  #if CONFIG_IS_ENABLED(OF_PLATDATA)
+>>  	struct dtd_serial_pl01x *dtplat = &plat->dtplat;
+>> @@ -301,10 +302,14 @@ int pl01x_serial_probe(struct udevice *dev)
+>>  #endif
+>>  	priv->type = plat->type;
+>>  
+>> -	if (!plat->skip_init)
+>> -		return pl01x_generic_serial_init(priv->regs, priv->type);
+>> -	else
+>> +	if (!plat->skip_init) {
+>> +		ret = pl01x_generic_serial_init(priv->regs, priv->type);
+>> +		if (!ret)
+>                     ^^^^
+> This if statement seems to be reversed.
 
-The board_usb_init() function does not intgrate with the generic phy
-framework and as a result the USB phy is not properly configured before
-or after USB gadget use.
+Seems correct. Maybe i sent the wrong version.
 
-Having both USB_DWC2 and DWC2_OTG enabled for the same board is also
-causing some issues.
+> 
+> regards,
+> dan carpenter
+> 
+>> +			return ret;
+>> +		return pl01x_serial_setbrg(dev, gd->baudrate);
+>> +	} else {
+>>  		return 0;
+>> +	}
+>>  }
+> 
 
-Trying to use rockusb or ums command after usb stop result in a freeze
-due to usb stop is putting the phy in a suspended state.
-
-  => usb start
-  => usb stop
-  => ums 0 mmc 0
-  --> freeze due to usb phy is suspended <--
-
-Fix this by only using one of USB_DWC2 (host) or DWC2_OTG (peripheral)
-depending on the most likely usage of the otg port.
-
-The nanopi-r2 and orangepi-r1-plus variants share OTG and power using a
-Type-C connector, mark these boards dr_mode as peripheral, the most
-likely usage is for recovery and image download.
-
-The rock64 and roc-cc currently use dr_mode as host, remove the DWC2_OTG
-driver from these boards to ensure that the USB_DWC2 driver is used.
-
-The rock-pi-e board does not enable the usb20_otg node so both USB_DWC2
-and DWC2_OTG is removed from this board.
-
-Enable RockUSB and UMS on all boards with a otg port in peripheral mode.
-
-Also with the migration to DM_USB_GADGET completed the U-Boot specific
-change to reorder usb nodes in the device tree can be reverted.
-
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
- arch/arm/dts/rk3328-nanopi-r2s-u-boot.dtsi    |  4 ++
- .../rk3328-orangepi-r1-plus-lts-u-boot.dtsi   |  4 ++
- .../dts/rk3328-orangepi-r1-plus-u-boot.dtsi   |  4 ++
- arch/arm/dts/rk3328-roc-cc-u-boot.dtsi        |  4 ++
- arch/arm/dts/rk3328-rock-pi-e-u-boot.dtsi     |  9 ++++
- arch/arm/dts/rk3328-rock64-u-boot.dtsi        |  4 ++
- arch/arm/dts/rk3328-u-boot.dtsi               |  4 --
- arch/arm/dts/rk3328.dtsi                      | 41 ++++++++-----------
- configs/evb-rk3328_defconfig                  |  5 ++-
- configs/nanopi-r2c-plus-rk3328_defconfig      |  5 ++-
- configs/nanopi-r2c-rk3328_defconfig           |  5 ++-
- configs/nanopi-r2s-rk3328_defconfig           |  5 ++-
- configs/orangepi-r1-plus-lts-rk3328_defconfig |  5 ++-
- configs/orangepi-r1-plus-rk3328_defconfig     |  5 ++-
- configs/roc-cc-rk3328_defconfig               |  7 ----
- configs/rock-pi-e-rk3328_defconfig            |  7 ----
- configs/rock64-rk3328_defconfig               |  6 ---
- 17 files changed, 69 insertions(+), 55 deletions(-)
-
-diff --git a/arch/arm/dts/rk3328-nanopi-r2s-u-boot.dtsi b/arch/arm/dts/rk3328-nanopi-r2s-u-boot.dtsi
-index cca4f06145cf..4fa170eeaf8d 100644
---- a/arch/arm/dts/rk3328-nanopi-r2s-u-boot.dtsi
-+++ b/arch/arm/dts/rk3328-nanopi-r2s-u-boot.dtsi
-@@ -15,6 +15,10 @@
- 	bootph-all;
- };
- 
-+&usb20_otg {
-+	dr_mode = "peripheral";
-+};
-+
- &vcc_io_sdio {
- 	bootph-pre-ram;
- };
-diff --git a/arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi b/arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi
-index 0dbe5a01f986..0a9423cd9c7e 100644
---- a/arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi
-+++ b/arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi
-@@ -33,6 +33,10 @@
- 	bootph-pre-ram;
- };
- 
-+&usb20_otg {
-+	dr_mode = "peripheral";
-+};
-+
- &vcc_sd {
- 	bootph-pre-ram;
- };
-diff --git a/arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi b/arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi
-index 1af75ada1a62..1096821fc5d3 100644
---- a/arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi
-+++ b/arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi
-@@ -33,6 +33,10 @@
- 	bootph-pre-ram;
- };
- 
-+&usb20_otg {
-+	dr_mode = "peripheral";
-+};
-+
- &vcc_sd {
- 	bootph-pre-ram;
- };
-diff --git a/arch/arm/dts/rk3328-roc-cc-u-boot.dtsi b/arch/arm/dts/rk3328-roc-cc-u-boot.dtsi
-index 47d74964fd0c..582d6ba49b4e 100644
---- a/arch/arm/dts/rk3328-roc-cc-u-boot.dtsi
-+++ b/arch/arm/dts/rk3328-roc-cc-u-boot.dtsi
-@@ -29,6 +29,10 @@
- 	};
- };
- 
-+&usb20_otg {
-+	hnp-srp-disable;
-+};
-+
- &vcc_sd {
- 	bootph-pre-ram;
- };
-diff --git a/arch/arm/dts/rk3328-rock-pi-e-u-boot.dtsi b/arch/arm/dts/rk3328-rock-pi-e-u-boot.dtsi
-index 9ed0aef1ecc9..d314bfad6fc0 100644
---- a/arch/arm/dts/rk3328-rock-pi-e-u-boot.dtsi
-+++ b/arch/arm/dts/rk3328-rock-pi-e-u-boot.dtsi
-@@ -29,6 +29,15 @@
- 	};
- };
- 
-+&u2phy_host {
-+	phy-supply = <&vcc_host_5v>;
-+};
-+
-+&vcc_host_5v {
-+	/delete-property/ regulator-always-on;
-+	/delete-property/ regulator-boot-on;
-+};
-+
- &vcc_sd {
- 	bootph-pre-ram;
- };
-diff --git a/arch/arm/dts/rk3328-rock64-u-boot.dtsi b/arch/arm/dts/rk3328-rock64-u-boot.dtsi
-index 85426495c3d8..551cff6f24f6 100644
---- a/arch/arm/dts/rk3328-rock64-u-boot.dtsi
-+++ b/arch/arm/dts/rk3328-rock64-u-boot.dtsi
-@@ -55,6 +55,10 @@
- 	bootph-pre-ram;
- };
- 
-+&usb20_otg {
-+	hnp-srp-disable;
-+};
-+
- &vcc_sd {
- 	bootph-pre-ram;
- };
-diff --git a/arch/arm/dts/rk3328-u-boot.dtsi b/arch/arm/dts/rk3328-u-boot.dtsi
-index 4d43fe2fb51a..e0c6aee58aba 100644
---- a/arch/arm/dts/rk3328-u-boot.dtsi
-+++ b/arch/arm/dts/rk3328-u-boot.dtsi
-@@ -130,10 +130,6 @@
- 	bootph-all;
- };
- 
--&usb20_otg {
--	hnp-srp-disable;
--};
--
- #ifdef CONFIG_ROCKCHIP_SPI_IMAGE
- &binman {
- 	simple-bin-spi {
-diff --git a/arch/arm/dts/rk3328.dtsi b/arch/arm/dts/rk3328.dtsi
-index fe81b97bbe78..fb5dcf6e9327 100644
---- a/arch/arm/dts/rk3328.dtsi
-+++ b/arch/arm/dts/rk3328.dtsi
-@@ -965,6 +965,22 @@
- 		};
- 	};
- 
-+	usb20_otg: usb@ff580000 {
-+		compatible = "rockchip,rk3328-usb", "rockchip,rk3066-usb",
-+			     "snps,dwc2";
-+		reg = <0x0 0xff580000 0x0 0x40000>;
-+		interrupts = <GIC_SPI 23 IRQ_TYPE_LEVEL_HIGH>;
-+		clocks = <&cru HCLK_OTG>;
-+		clock-names = "otg";
-+		dr_mode = "otg";
-+		g-np-tx-fifo-size = <16>;
-+		g-rx-fifo-size = <280>;
-+		g-tx-fifo-size = <256 128 128 64 32 16>;
-+		phys = <&u2phy_otg>;
-+		phy-names = "usb2-phy";
-+		status = "disabled";
-+	};
-+
- 	usb_host0_ehci: usb@ff5c0000 {
- 		compatible = "generic-ehci";
- 		reg = <0x0 0xff5c0000 0x0 0x10000>;
-@@ -1004,31 +1020,6 @@
- 		status = "disabled";
- 	};
- 
--	/*
--	 * U-Boot Specific Change
--	 *
--	 * The OTG controller must come after the USB host pair for it
--	 * to work. This is likely due to lack of support for the USB
--	 * PHYs. This must be manually changed after each device tree
--	 * sync. There is no clean way to handle this in -u-boot.dtsi
--	 * files.
--	 */
--	usb20_otg: usb@ff580000 {
--		compatible = "rockchip,rk3328-usb", "rockchip,rk3066-usb",
--			     "snps,dwc2";
--		reg = <0x0 0xff580000 0x0 0x40000>;
--		interrupts = <GIC_SPI 23 IRQ_TYPE_LEVEL_HIGH>;
--		clocks = <&cru HCLK_OTG>;
--		clock-names = "otg";
--		dr_mode = "otg";
--		g-np-tx-fifo-size = <16>;
--		g-rx-fifo-size = <280>;
--		g-tx-fifo-size = <256 128 128 64 32 16>;
--		phys = <&u2phy_otg>;
--		phy-names = "usb2-phy";
--		status = "disabled";
--	};
--
- 	gic: interrupt-controller@ff811000 {
- 		compatible = "arm,gic-400";
- 		#interrupt-cells = <3>;
-diff --git a/configs/evb-rk3328_defconfig b/configs/evb-rk3328_defconfig
-index 4fa8a7d365a4..c9683711dec2 100644
---- a/configs/evb-rk3328_defconfig
-+++ b/configs/evb-rk3328_defconfig
-@@ -31,6 +31,8 @@ CONFIG_CMD_GPIO=y
- CONFIG_CMD_GPT=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_USB=y
-+CONFIG_CMD_ROCKUSB=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_TIME=y
- CONFIG_CMD_REGULATOR=y
-@@ -83,17 +85,18 @@ CONFIG_SYSINFO=y
- CONFIG_SYSRESET=y
- # CONFIG_TPL_SYSRESET is not set
- CONFIG_USB=y
-+CONFIG_DM_USB_GADGET=y
- CONFIG_USB_XHCI_HCD=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
- CONFIG_USB_OHCI_HCD=y
- CONFIG_USB_OHCI_GENERIC=y
--CONFIG_USB_DWC2=y
- CONFIG_USB_DWC3=y
- # CONFIG_USB_DWC3_GADGET is not set
- CONFIG_USB_DWC3_GENERIC=y
- CONFIG_USB_GADGET=y
- CONFIG_USB_GADGET_DWC2_OTG=y
-+CONFIG_USB_FUNCTION_ROCKUSB=y
- CONFIG_SPL_TINY_MEMSET=y
- CONFIG_TPL_TINY_MEMSET=y
- CONFIG_ERRNO_STR=y
-diff --git a/configs/nanopi-r2c-plus-rk3328_defconfig b/configs/nanopi-r2c-plus-rk3328_defconfig
-index 5302fd91a0f5..ffcead53f398 100644
---- a/configs/nanopi-r2c-plus-rk3328_defconfig
-+++ b/configs/nanopi-r2c-plus-rk3328_defconfig
-@@ -33,6 +33,8 @@ CONFIG_CMD_GPIO=y
- CONFIG_CMD_GPT=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_USB=y
-+CONFIG_CMD_ROCKUSB=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_TIME=y
- CONFIG_CMD_REGULATOR=y
-@@ -90,17 +92,18 @@ CONFIG_SYSINFO=y
- CONFIG_SYSRESET=y
- # CONFIG_TPL_SYSRESET is not set
- CONFIG_USB=y
-+CONFIG_DM_USB_GADGET=y
- CONFIG_USB_XHCI_HCD=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
- CONFIG_USB_OHCI_HCD=y
- CONFIG_USB_OHCI_GENERIC=y
--CONFIG_USB_DWC2=y
- CONFIG_USB_DWC3=y
- # CONFIG_USB_DWC3_GADGET is not set
- CONFIG_USB_DWC3_GENERIC=y
- CONFIG_USB_GADGET=y
- CONFIG_USB_GADGET_DWC2_OTG=y
-+CONFIG_USB_FUNCTION_ROCKUSB=y
- CONFIG_SPL_TINY_MEMSET=y
- CONFIG_TPL_TINY_MEMSET=y
- CONFIG_ERRNO_STR=y
-diff --git a/configs/nanopi-r2c-rk3328_defconfig b/configs/nanopi-r2c-rk3328_defconfig
-index 5a722c182631..966627033212 100644
---- a/configs/nanopi-r2c-rk3328_defconfig
-+++ b/configs/nanopi-r2c-rk3328_defconfig
-@@ -33,6 +33,8 @@ CONFIG_CMD_GPIO=y
- CONFIG_CMD_GPT=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_USB=y
-+CONFIG_CMD_ROCKUSB=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_TIME=y
- CONFIG_CMD_REGULATOR=y
-@@ -90,17 +92,18 @@ CONFIG_SYSINFO=y
- CONFIG_SYSRESET=y
- # CONFIG_TPL_SYSRESET is not set
- CONFIG_USB=y
-+CONFIG_DM_USB_GADGET=y
- CONFIG_USB_XHCI_HCD=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
- CONFIG_USB_OHCI_HCD=y
- CONFIG_USB_OHCI_GENERIC=y
--CONFIG_USB_DWC2=y
- CONFIG_USB_DWC3=y
- # CONFIG_USB_DWC3_GADGET is not set
- CONFIG_USB_DWC3_GENERIC=y
- CONFIG_USB_GADGET=y
- CONFIG_USB_GADGET_DWC2_OTG=y
-+CONFIG_USB_FUNCTION_ROCKUSB=y
- CONFIG_SPL_TINY_MEMSET=y
- CONFIG_TPL_TINY_MEMSET=y
- CONFIG_ERRNO_STR=y
-diff --git a/configs/nanopi-r2s-rk3328_defconfig b/configs/nanopi-r2s-rk3328_defconfig
-index 985d02475ece..5dff7d9a14a7 100644
---- a/configs/nanopi-r2s-rk3328_defconfig
-+++ b/configs/nanopi-r2s-rk3328_defconfig
-@@ -33,6 +33,8 @@ CONFIG_CMD_GPIO=y
- CONFIG_CMD_GPT=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_USB=y
-+CONFIG_CMD_ROCKUSB=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_TIME=y
- CONFIG_CMD_REGULATOR=y
-@@ -90,17 +92,18 @@ CONFIG_SYSINFO=y
- CONFIG_SYSRESET=y
- # CONFIG_TPL_SYSRESET is not set
- CONFIG_USB=y
-+CONFIG_DM_USB_GADGET=y
- CONFIG_USB_XHCI_HCD=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
- CONFIG_USB_OHCI_HCD=y
- CONFIG_USB_OHCI_GENERIC=y
--CONFIG_USB_DWC2=y
- CONFIG_USB_DWC3=y
- # CONFIG_USB_DWC3_GADGET is not set
- CONFIG_USB_DWC3_GENERIC=y
- CONFIG_USB_GADGET=y
- CONFIG_USB_GADGET_DWC2_OTG=y
-+CONFIG_USB_FUNCTION_ROCKUSB=y
- CONFIG_SPL_TINY_MEMSET=y
- CONFIG_TPL_TINY_MEMSET=y
- CONFIG_ERRNO_STR=y
-diff --git a/configs/orangepi-r1-plus-lts-rk3328_defconfig b/configs/orangepi-r1-plus-lts-rk3328_defconfig
-index e9f7a1306923..b7a4ff7efefe 100644
---- a/configs/orangepi-r1-plus-lts-rk3328_defconfig
-+++ b/configs/orangepi-r1-plus-lts-rk3328_defconfig
-@@ -38,6 +38,8 @@ CONFIG_CMD_GPIO=y
- CONFIG_CMD_GPT=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_USB=y
-+CONFIG_CMD_ROCKUSB=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_TIME=y
- CONFIG_CMD_REGULATOR=y
-@@ -100,17 +102,18 @@ CONFIG_SYSINFO=y
- CONFIG_SYSRESET=y
- # CONFIG_TPL_SYSRESET is not set
- CONFIG_USB=y
-+CONFIG_DM_USB_GADGET=y
- CONFIG_USB_XHCI_HCD=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
- CONFIG_USB_OHCI_HCD=y
- CONFIG_USB_OHCI_GENERIC=y
--CONFIG_USB_DWC2=y
- CONFIG_USB_DWC3=y
- # CONFIG_USB_DWC3_GADGET is not set
- CONFIG_USB_DWC3_GENERIC=y
- CONFIG_USB_GADGET=y
- CONFIG_USB_GADGET_DWC2_OTG=y
-+CONFIG_USB_FUNCTION_ROCKUSB=y
- CONFIG_SPL_TINY_MEMSET=y
- CONFIG_TPL_TINY_MEMSET=y
- CONFIG_ERRNO_STR=y
-diff --git a/configs/orangepi-r1-plus-rk3328_defconfig b/configs/orangepi-r1-plus-rk3328_defconfig
-index 6019f33ae3f5..4b0dc1441a6f 100644
---- a/configs/orangepi-r1-plus-rk3328_defconfig
-+++ b/configs/orangepi-r1-plus-rk3328_defconfig
-@@ -38,6 +38,8 @@ CONFIG_CMD_GPIO=y
- CONFIG_CMD_GPT=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_USB=y
-+CONFIG_CMD_ROCKUSB=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_TIME=y
- CONFIG_CMD_REGULATOR=y
-@@ -100,17 +102,18 @@ CONFIG_SYSINFO=y
- CONFIG_SYSRESET=y
- # CONFIG_TPL_SYSRESET is not set
- CONFIG_USB=y
-+CONFIG_DM_USB_GADGET=y
- CONFIG_USB_XHCI_HCD=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
- CONFIG_USB_OHCI_HCD=y
- CONFIG_USB_OHCI_GENERIC=y
--CONFIG_USB_DWC2=y
- CONFIG_USB_DWC3=y
- # CONFIG_USB_DWC3_GADGET is not set
- CONFIG_USB_DWC3_GENERIC=y
- CONFIG_USB_GADGET=y
- CONFIG_USB_GADGET_DWC2_OTG=y
-+CONFIG_USB_FUNCTION_ROCKUSB=y
- CONFIG_SPL_TINY_MEMSET=y
- CONFIG_TPL_TINY_MEMSET=y
- CONFIG_ERRNO_STR=y
-diff --git a/configs/roc-cc-rk3328_defconfig b/configs/roc-cc-rk3328_defconfig
-index 191dbff928bb..6526d2606e72 100644
---- a/configs/roc-cc-rk3328_defconfig
-+++ b/configs/roc-cc-rk3328_defconfig
-@@ -13,7 +13,6 @@ CONFIG_DEBUG_UART_BASE=0xFF130000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART=y
--# CONFIG_ANDROID_BOOT_IMAGE is not set
- CONFIG_FIT=y
- CONFIG_FIT_VERBOSE=y
- CONFIG_SPL_FIT_SIGNATURE=y
-@@ -34,7 +33,6 @@ CONFIG_CMD_GPT=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_POWEROFF=y
- CONFIG_CMD_USB=y
--CONFIG_CMD_USB_MASS_STORAGE=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_TIME=y
- CONFIG_CMD_REGULATOR=y
-@@ -55,8 +53,6 @@ CONFIG_SPL_SYSCON=y
- CONFIG_TPL_SYSCON=y
- CONFIG_CLK=y
- CONFIG_SPL_CLK=y
--CONFIG_FASTBOOT_BUF_ADDR=0x800800
--CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
- CONFIG_MMC_DW=y
-@@ -97,10 +93,7 @@ CONFIG_USB_OHCI_HCD=y
- CONFIG_USB_OHCI_GENERIC=y
- CONFIG_USB_DWC2=y
- CONFIG_USB_DWC3=y
--# CONFIG_USB_DWC3_GADGET is not set
- CONFIG_USB_DWC3_GENERIC=y
--CONFIG_USB_GADGET=y
--CONFIG_USB_GADGET_DWC2_OTG=y
- CONFIG_SPL_TINY_MEMSET=y
- CONFIG_TPL_TINY_MEMSET=y
- CONFIG_ERRNO_STR=y
-diff --git a/configs/rock-pi-e-rk3328_defconfig b/configs/rock-pi-e-rk3328_defconfig
-index e4f2123e0b17..23029255bca2 100644
---- a/configs/rock-pi-e-rk3328_defconfig
-+++ b/configs/rock-pi-e-rk3328_defconfig
-@@ -13,7 +13,6 @@ CONFIG_DEBUG_UART_BASE=0xFF130000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART=y
--# CONFIG_ANDROID_BOOT_IMAGE is not set
- CONFIG_FIT=y
- CONFIG_FIT_VERBOSE=y
- CONFIG_SPL_FIT_SIGNATURE=y
-@@ -52,8 +51,6 @@ CONFIG_SPL_SYSCON=y
- CONFIG_TPL_SYSCON=y
- CONFIG_CLK=y
- CONFIG_SPL_CLK=y
--CONFIG_FASTBOOT_BUF_ADDR=0x800800
--CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
- CONFIG_MMC_DW=y
-@@ -92,12 +89,8 @@ CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
- CONFIG_USB_OHCI_HCD=y
- CONFIG_USB_OHCI_GENERIC=y
--CONFIG_USB_DWC2=y
- CONFIG_USB_DWC3=y
--# CONFIG_USB_DWC3_GADGET is not set
- CONFIG_USB_DWC3_GENERIC=y
--CONFIG_USB_GADGET=y
--CONFIG_USB_GADGET_DWC2_OTG=y
- CONFIG_SPL_TINY_MEMSET=y
- CONFIG_TPL_TINY_MEMSET=y
- CONFIG_ERRNO_STR=y
-diff --git a/configs/rock64-rk3328_defconfig b/configs/rock64-rk3328_defconfig
-index f38431891bf8..b0be1d1d7633 100644
---- a/configs/rock64-rk3328_defconfig
-+++ b/configs/rock64-rk3328_defconfig
-@@ -16,7 +16,6 @@ CONFIG_SPL_SPI_FLASH_SUPPORT=y
- CONFIG_SPL_SPI=y
- CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART=y
--# CONFIG_ANDROID_BOOT_IMAGE is not set
- CONFIG_FIT=y
- CONFIG_FIT_VERBOSE=y
- CONFIG_SPL_FIT_SIGNATURE=y
-@@ -59,8 +58,6 @@ CONFIG_SPL_SYSCON=y
- CONFIG_TPL_SYSCON=y
- CONFIG_CLK=y
- CONFIG_SPL_CLK=y
--CONFIG_FASTBOOT_BUF_ADDR=0x800800
--CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
- CONFIG_MMC_DW=y
-@@ -106,10 +103,7 @@ CONFIG_USB_OHCI_HCD=y
- CONFIG_USB_OHCI_GENERIC=y
- CONFIG_USB_DWC2=y
- CONFIG_USB_DWC3=y
--# CONFIG_USB_DWC3_GADGET is not set
- CONFIG_USB_DWC3_GENERIC=y
--CONFIG_USB_GADGET=y
--CONFIG_USB_GADGET_DWC2_OTG=y
- CONFIG_SPL_TINY_MEMSET=y
- CONFIG_TPL_TINY_MEMSET=y
- CONFIG_ERRNO_STR=y
 -- 
-2.43.0
+Best regards,
+Yang Xiwen
 
