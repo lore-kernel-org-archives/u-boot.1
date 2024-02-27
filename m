@@ -4,118 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16452C5478C
-	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 01:30:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B1BAC5478C
+	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 01:33:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0CC4E87F71;
-	Tue, 27 Feb 2024 02:30:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=outlook.com
+	by phobos.denx.de (Postfix) with ESMTP id CE43587F9F;
+	Tue, 27 Feb 2024 02:33:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=outlook.com header.i=@outlook.com header.b="QwZhV+xw";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 9C67787F6D; Tue, 27 Feb 2024 02:30:11 +0100 (CET)
-Received: from APC01-SG2-obe.outbound.protection.outlook.com
- (mail-sgaapc01olkn20823.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:feab::823])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1708997619;
+	bh=iF8RmXGTY6CBmGYipiSCAE2RxWD51LSUgPJhHy0u1go=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=l18cUOncNxrZ1Gi3lMYqUL2W7nGXxrCrDmltK+SUh0FkJcP+sc+ASroy+01Gm9WMD
+	 6LBCxflmZh1pURPuj+MJSRZtkuVPdCiECVdxw6EhY1++sOgAMMPnft9IHYGAEpZ/ig
+	 vKTDtNgv/Sl4WjVUNBnm8xAVGgdk+cwKvL2hzPyGmzW2rGFyfA74iAt+i8ivNqP32v
+	 eG8+aBtmLz1vLpMkJzFdxwUDkIRNlzW2ce3s8cjqJLFVoEqHEgltkZXqM7enB1PIr5
+	 nDa8BSS7OuWZyYAhRZPcCG62qeDr9NI23MmvnBB+NI1wDtPn6w3sA1475wwCM552ul
+	 cvbt6K2xqpv2Q==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1BDA387F5E
- for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 02:30:09 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=outlook.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=forbidden405@outlook.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=bcsVjHsGPN3TDT1AEB8D2GhX+cntSUei+G3Hjtwdx/ZH2sk6CUW9KC26+06yJ8zzHdPEKWIAeuNuN0eG79oCN8LUrwPanRNmp9PnX1exClhavDcSedF3U+IP8mNQpIPacHbAEGdU75eMQBbd1npT5epzTV/lb7KiN508/2RHsLovs05AASzVzzdfFKr+ybPb1NpJmbcVmc3+Kjo0ubmuwzQ4+Gpz7uYrFYcvR1B/+iYdRtm1jyXiODgWLeYwPo7RHXqnXlozrhAm+DPZ1QBYdEjwJt4cWcItM9hM13JrPaoexr89m4D3OMiLyWqZixjmS9MdBIVY9+KQgPJ19ZvhCQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=IKPgWFgvoRslClwmVpWth66drREUhBm7TBWykoQu3ro=;
- b=UJ364oexhcH6BynHn/s4rdxI1c4X+ypfVrrK+TI1iqhRZ354gqZgDj1wJTjsXd54c9STv9lmyv6At8oBH5BrMrTZ7503Fzs3phti8PHccIbMbonjoJomEUtEuSyqSXvHhx1SBUvnCJN5DbKT59bAfPVxzevLIGGIe0jGustB7PCBu3S1w5H8B3XYbM3ytW+k/TI64cXiTNHpXrWFUmnxdJI5hn8y4NrzZMeKwHw37YI8Vt9p6sqJdKjqxBTl4mj0cfq0d3sqNM5OBdgjiOaMDVc/ZJNSuwmm9TkxH/w/64TFKGAunHnF9qQMinL9JLPzbQ+jaBKM9EGnzIomJoEBEQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=IKPgWFgvoRslClwmVpWth66drREUhBm7TBWykoQu3ro=;
- b=QwZhV+xwQGq6eV2MQ6vCA1RYX7wPv7y3JNprt4Yq+Od0ehKZ123sJOlg901j7FWtlV7k11hjpdQ/BTaDdU/xFBFWzdeqYVqub1QovitzONvZ+ZgUMjbvQkGH8dSjBHTswmNEQ1sAFjSeEiTiVNSv3E9xlw0ULWkexl/NoO4r2FrL3FeQdEqKk41nVLTgZFosU2c4wHRA2srtpvSCM+OzhCS05mdcDDlYyGQaxjiyRVwXBG1aGKtVRzVigUodp56xlWW/AeU5o/kAsUlTe4sG+I84TzxadxsGk40JgxWblsqKQqQXOfgaaNYVgs7EoIPOiVCcvuEx6ZfXdt0KoyJKqw==
-Received: from SEZPR06MB6959.apcprd06.prod.outlook.com (2603:1096:101:1ed::14)
- by TY0PR06MB5706.apcprd06.prod.outlook.com (2603:1096:400:272::6)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7316.22; Tue, 27 Feb
- 2024 01:30:05 +0000
-Received: from SEZPR06MB6959.apcprd06.prod.outlook.com
- ([fe80::53da:a8a:83cb:b9ad]) by SEZPR06MB6959.apcprd06.prod.outlook.com
- ([fe80::53da:a8a:83cb:b9ad%4]) with mapi id 15.20.7316.035; Tue, 27 Feb 2024
- 01:30:05 +0000
-Message-ID: <SEZPR06MB6959E1A4AE0D95ACD879E09D96592@SEZPR06MB6959.apcprd06.prod.outlook.com>
-Date: Tue, 27 Feb 2024 09:29:57 +0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RESEND] serial: pl01x: set baudrate when probing
-To: Dan Carpenter <dan.carpenter@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Lukasz Majewski <lukma@denx.de>
-References: <20240225-b4-pl011-v1-1-2686496c1a17@outlook.com>
- <55c3b1b2-f384-44bb-8cf3-d47884124b6f@moroto.mountain>
-Content-Language: en-US
-From: Yang Xiwen <forbidden405@outlook.com>
-In-Reply-To: <55c3b1b2-f384-44bb-8cf3-d47884124b6f@moroto.mountain>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-TMN: [w0DVZKdBum2QnupV+VjBRGYR0w8ppOAHxOODNmHsvMw9tc3+yfFi3/IjStUcAQUL]
-X-ClientProxiedBy: SI2PR01CA0022.apcprd01.prod.exchangelabs.com
- (2603:1096:4:192::14) To SEZPR06MB6959.apcprd06.prod.outlook.com
- (2603:1096:101:1ed::14)
-X-Microsoft-Original-Message-ID: <91a184c4-1491-46c4-a38e-8b0b503a2a7d@outlook.com>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id E98D687EF3;
+ Tue, 27 Feb 2024 02:33:38 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1708997619;
+ bh=iF8RmXGTY6CBmGYipiSCAE2RxWD51LSUgPJhHy0u1go=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=e8FvQ/HSEAQRbpWPLaUGhCWpM9BNVPhQ5mUuv/C0bO04WP9OlGNM5Fwxo+wktB95b
+ 92U9+ahh/orko9mzPDBEImphvjRZ2jjT4Dz45qKjbrlvM2eL4aBB2K12WZhhwLYzRQ
+ ACaJZd9IOG+LFIcANGW9vmIbX6m+7p96hpchDABuTonhrUcTVuVy2vZ6TwCBHu4hOn
+ mEBtCPe56pkhvFEWvTWgEwq+yfuD3Cr85jfeCWhQ35xE6q4i0CFSL/4w7BTPzipyHb
+ Hvu2tVZwff83+/7++9j75zT9PMjzlOBPqQuELUmSIbyYquQ7Tkm5s8J/EFVtZksX2B
+ gfuNZ41AuPaGw==
+Message-ID: <fd68838d-b040-4c20-be55-3f9e5a407bf1@denx.de>
+Date: Tue, 27 Feb 2024 02:20:55 +0100
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SEZPR06MB6959:EE_|TY0PR06MB5706:EE_
-X-MS-Office365-Filtering-Correlation-Id: 99bec8b1-b47d-4008-3b61-08dc3733a047
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: sAhwfj9QudSx51KchQyA6uy6II7Hst4OJaj2fASJ/MFgHlyFZLRrf6in4Q/nsnUuCeYVob5h2sQWoyGbkeSlQraIwKXRP3D7AFvSdwl0MXg0Z4RVLs6pEPjXvFNuoMIYMDJ+s8bd/DdWB4NqK4+IvwaMIUZASID7Zjlf4Ytk9ELa8OP5/smOb5XnGymtFg4Q1cpMeSyBg2YRFMJ1iVH6xxy9JRfWX9Zlnhfy0UvcdEojobau5TfdjMp6kQyiF+LqPL3W8k3dWgI2h7mttPLgozIQ7je9WMN16K87pe7zKJFRW+x9093a86n7Gio4PcD8jlVu1pK3E3t0pMZzFcrP5oPApNU/fdJUQA5UEXdCKZclRdrqGuxbJkcKjJ9uKqxFXnNB2xsQJ9r1/NqppSNLfiN8fYrJy7ZHbkkFBr+2WVRl1zIIcdXCYYZYVIAxL+KNhzb4rynv3VXxLZW3VxrKv5U31jybKUTdY9nDV4cRFp6+eeqmG+a5qMZNBUfRk0l5hyIJNcGP/E9DhvsgobZp50PLvmi0icoNUHfwdCcYxtvHAsgCn+/9RlJg0Xp3xVNM
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UVBWQWh1aTRXczl3VlRlc1VaNnFsZDRRSVk1OWQ1Q0VsVkxOb2t1OUF2UnFV?=
- =?utf-8?B?Y3o2aWkxQmNIV2JQMUdXa0N2R1VBY0xjK0IzeW8yNGpha2dkbTJGdXc3TDNY?=
- =?utf-8?B?aFRJWnpIRXF6dnFNcEU3bkRTRmcvY3BmcUh5ZUszUEVpc2QxUXpwcGpJaWJZ?=
- =?utf-8?B?Z1JORHQ4UXdmREZnWG1iL1hnODdKSHlGWHU5dWs0eW5BUVAzY3I3TjZHNWZr?=
- =?utf-8?B?MDM2OEtJRjljR3JvaXdZUCtZQkdoczdyQmR0TUYwRThIblRmWk42eGQwNlNw?=
- =?utf-8?B?LzZ3b0NFckRmMit6S2xqOWdtdDVrekc2VkpETzRwckxSci9kWkZYUzFKcDhs?=
- =?utf-8?B?N2QrR1pJTGNFY3M1UTdERWVYaGQ5aUdHT1MyUzVFWi80WFlmd2xJWjEvckFT?=
- =?utf-8?B?RnVFbDFNN2ROT2N3UXljY2l1QWI5MExsU25OMlpNbUk0aFdMbEhHd2xqRSts?=
- =?utf-8?B?OXZtOGZKalVWKzIzdkUvN1hkRE1uTDJESmhXT1hyVVh6TS9IVjNRTzk2YWpj?=
- =?utf-8?B?QkwzOVoyeFV4WWNWTDdMYUNRenNSeVI3bDBjWW52Qk8ya1VXNmY5Nm9ER1RE?=
- =?utf-8?B?ZDBBWXJzWFFUSmhVVDdVUlc1QU9uQVB4VkJJV3Fhbmd3endnL1JDQ2hBcTNC?=
- =?utf-8?B?cDR4WFhLNE8vLzFhUFNaYmJIbkdudGswUmhIUkg0RGpmTkRoWWNIU0xybThL?=
- =?utf-8?B?SjFDc3dBazROdjkwbVp2TktKeDI5YzB0ek5zTzlVMlZwSytLeW82ak1kcmx5?=
- =?utf-8?B?amd1NHMzbGZsRlJRNFpNZ2w4c2VVRGNnTGM2ZEhueHBSa0tYTVNRRU5lMm13?=
- =?utf-8?B?TTh6M3NCcnNuV3J5RjVSRE02cFRzZXVrOVdUQ2taRXdkcHptbmtRdW1Na3c2?=
- =?utf-8?B?SFBIWUVQckdqSFQ0cDgrcXl5cTlSMWVrbUJLQmY1OHpmcHNUMWRGQmNlY004?=
- =?utf-8?B?YWwzUC9aU3R5VVB1QUFYSVVYWnR2QXNvTDZrSVdKcjV6bDZwa0pqbFJIYjNx?=
- =?utf-8?B?bHB0K0NlUExuM1Q5RGE1SEVEOHUxL0JseEo4aTczaVZiaGswdE1EN25xazhm?=
- =?utf-8?B?dmtMUmUwWG54VHZUL3dwVFh0QW1qZkw3YmVJSTZINVZNcnJJbEIxVG84TTlQ?=
- =?utf-8?B?R2tpaTY5SndZZk1TbzN4NEl6Ty9Wem5hbmRNeXdrVzY3ZzBmMkRWc3dwemtK?=
- =?utf-8?B?dnVmYU0wamg3a041VzgzbEVWdm9lREpFd3BmdTBseHRDaUhQUStuWGZNbGI3?=
- =?utf-8?B?aksrRWxLMjVPTWlXWjVXbk13WHdDRlpKMzRoMUkvREUxcXJBVzRTTXhBcW1Q?=
- =?utf-8?B?RWZEYzVlckZ4cGoxc0VGZDJpcEd0UkkyWGN2aTlLWFlXaC9xMFlBTnRVdzRZ?=
- =?utf-8?B?WTFObjZkUGVRYStCM1o0MDgrY2trajlocU0yVTZVYVZBc3Z1QWphQkVYbWVs?=
- =?utf-8?B?dy9ScmhHcGFCTlZyZ3gzSGJEMzc5SnhMWW9tQmFad0VrUnozb1ZkM0l5U0Fx?=
- =?utf-8?B?eGZKckZ0MkswL2dQTnhiZVltamJJWlFlMWhnYysyV3hrS3RRV05VNFJISUZz?=
- =?utf-8?B?YmV2YnM5M0VLcnZML1lBOTRQbXNOZ3VMc0YyTHVnMlRjSzZvdEpJcjNkUGo2?=
- =?utf-8?B?R1pIVUZibFdxbFlESmxCTG81cHBlM1lBdS92eFF3bk5zZEFNMEpNMTZNc25t?=
- =?utf-8?B?WXBOKzVRK1RPSDA3aTZUOEZqRS9mbSs4SC9WcWx5S3FHMFNVWXpmQVlnd3ow?=
- =?utf-8?Q?hyKBOS9X5rTIR2c/BwUyYq248eemI8RaAaYYbMV?=
-X-OriginatorOrg: outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 99bec8b1-b47d-4008-3b61-08dc3733a047
-X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB6959.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Feb 2024 01:30:05.4813 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TY0PR06MB5706
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 4/6] usb: kbd: Ignore Yubikeys
+Content-Language: en-US
+To: Mark Kettenis <mark.kettenis@xs4all.nl>
+Cc: j@jannau.net, bmeng.cn@gmail.com, trini@konsulko.com,
+ u-boot@lists.denx.de, asahi@lists.linux.dev, marcan@marcan.st
+References: <20240221-asahi-keyboards-v1-0-814b2e741790@jannau.net>
+ <20240221-asahi-keyboards-v1-4-814b2e741790@jannau.net>
+ <2acb9976-a40e-4977-b7ca-2462e84251ed@denx.de>
+ <4c1c6b72-ffe5-4ff3-8d12-9fc0b956643d@app.fastmail.com>
+ <85d561a6-54cb-4c1c-bfb0-559163e859c0@denx.de>
+ <874jdvj6kx.fsf@bloch.sibelius.xs4all.nl>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <874jdvj6kx.fsf@bloch.sibelius.xs4all.nl>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -132,38 +74,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/26/2024 4:23 PM, Dan Carpenter wrote:
-> On Sun, Feb 25, 2024 at 08:38:33AM +0800, Yang Xiwen via B4 Relay wrote:
->>  #if CONFIG_IS_ENABLED(OF_PLATDATA)
->>  	struct dtd_serial_pl01x *dtplat = &plat->dtplat;
->> @@ -301,10 +302,14 @@ int pl01x_serial_probe(struct udevice *dev)
->>  #endif
->>  	priv->type = plat->type;
->>  
->> -	if (!plat->skip_init)
->> -		return pl01x_generic_serial_init(priv->regs, priv->type);
->> -	else
->> +	if (!plat->skip_init) {
->> +		ret = pl01x_generic_serial_init(priv->regs, priv->type);
->> +		if (!ret)
->                     ^^^^
-> This if statement seems to be reversed.
-
-Seems correct. Maybe i sent the wrong version.
-
+On 2/26/24 9:47 PM, Mark Kettenis wrote:
+>> Date: Sun, 25 Feb 2024 22:57:23 +0100
+>> From: Marek Vasut <marex@denx.de>
+>>
+>> On 2/25/24 5:07 PM, Janne Grunau wrote:
+>>> Hej,
+>>>
+>>> On Wed, Feb 21, 2024, at 13:41, Marek Vasut wrote:
+>>>> On 2/21/24 08:25, Janne Grunau via B4 Relay wrote:
+>>>>> From: Hector Martin <marcan@marcan.st>
+>>>>>
+>>>>> We currently only support one USB keyboard device, but some devices
+>>>>> emulate keyboards for other purposes. Most commonly, people run into
+>>>>> this with Yubikeys, so let's ignore those.
+>>>>>
+>>>>> Even if we end up supporting multiple keyboards in the future, it's
+>>>>> safer to ignore known non-keyboard devices.
+>>>>>
+>>>>> Signed-off-by: Hector Martin <marcan@marcan.st>
+>>>>> ---
+>>>>>     common/usb_kbd.c | 19 +++++++++++++++++++
+>>>>>     1 file changed, 19 insertions(+)
+>>>>>
+>>>>> diff --git a/common/usb_kbd.c b/common/usb_kbd.c
+>>>>> index 4cbc9acb73..774d3555d9 100644
+>>>>> --- a/common/usb_kbd.c
+>>>>> +++ b/common/usb_kbd.c
+>>>>> @@ -120,6 +120,15 @@ struct usb_kbd_pdata {
+>>>>>     
+>>>>>     extern int __maybe_unused net_busy_flag;
+>>>>>     
+>>>>> +/*
+>>>>> + * Since we only support one usbkbd device in the iomux,
+>>>>> + * ignore common keyboard-emulating devices that aren't
+>>>>> + * real keyboards.
+>>>>> + */
+>>>>> +const uint16_t vid_blocklist[] = {
+>>>>> +	0x1050, /* Yubico */
+>>>>> +};
+>>>>> +
+>>>>>     /* The period of time between two calls of usb_kbd_testc(). */
+>>>>>     static unsigned long kbd_testc_tms;
+>>>>>     
+>>>>> @@ -465,6 +474,7 @@ static int usb_kbd_probe_dev(struct usb_device *dev, unsigned int ifnum)
+>>>>>     	struct usb_endpoint_descriptor *ep;
+>>>>>     	struct usb_kbd_pdata *data;
+>>>>>     	int epNum;
+>>>>> +	int i;
+>>>>>     
+>>>>>     	if (dev->descriptor.bNumConfigurations != 1)
+>>>>>     		return 0;
+>>>>> @@ -480,6 +490,15 @@ static int usb_kbd_probe_dev(struct usb_device *dev, unsigned int ifnum)
+>>>>>     	if (iface->desc.bInterfaceProtocol != USB_PROT_HID_KEYBOARD)
+>>>>>     		return 0;
+>>>>>     
+>>>>> +	for (i = 0; i < ARRAY_SIZE(vid_blocklist); i++) {
+>>>>> +		if (dev->descriptor.idVendor == vid_blocklist[i]) {
+>>>>> +			printf("Ignoring keyboard device 0x%x:0x%x\n",
+>>>>> +			       dev->descriptor.idVendor,
+>>>>> +			       dev->descriptor.idProduct);
+>>>>> +			return 0;
+>>>>> +		}
+>>>>> +	}
+>>>>
+>>>> I vaguely recall a discussion about previous version of this, I think
+>>>> the suggestion was to make the list of ignored devices configurable via
+>>>> environment variable, so users can add to that list from U-Boot shell.
+>>>> Would it be possible to make it work this way ?
+>>>
+>>> oh, I completely forgot that this patch was already submitted. I briefly looked through asahi tree for related patches and did not check whether this was previously submitted.
+>>> I've added environment based blocking as separate patch with blocking either complete vendor IDs or vendor, product ID combinations. A separate patch to simplify authorship tracking and the implementation doesn't share any code.
+>>
+>> It would be better to have only one patch which does not hard-code any
+>> USB IDs, and then add those blocked IDs via U-Boot default environment
+>> for this specific machine. We cannot predict what yubico will do in the
+>> future, whether they might make a device that shouldn't be blocked for
+>> example. If they do, the user should be able to unblock their device by
+>> running e.g. '=> setenv usb_blocklist' instead of updating their bootloader.
+>>
+>> I think a simple list of blocked VID:PID pairs, maybe with wildcards,
+>> would be nice, i.e. something like 'usb_blocklist=1234:5678,1050:*' to
+>> block device 0x1234:0x5678 and all devices with VID 0x1050 . That should
+>> be easy to parse with strtok()/strtol() or some such and the code should
+>> not be too complex.
 > 
-> regards,
-> dan carpenter
-> 
->> +			return ret;
->> +		return pl01x_serial_setbrg(dev, gd->baudrate);
->> +	} else {
->>  		return 0;
->> +	}
->>  }
-> 
+> I do like the idea of having a configurable list of usb devices to
+> ignore.  The U-Boot USB stack is still not perfect
 
--- 
-Best regards,
-Yang Xiwen
+Very far from perfect, yes.
 
+> and there are still
+> USB devices that will prevent us from booting when connected.  The
+> list will provide a nice workaround for that issue.
+> 
+> But the yubikeys will cause the same problem on other boards as well.
+> So I think it makes sense to put those in a default list.
+
+I agree.
