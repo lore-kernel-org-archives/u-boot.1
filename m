@@ -4,67 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D50F6C5478C
-	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 13:45:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4024CC5478C
+	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 13:51:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0F28788013;
-	Tue, 27 Feb 2024 14:44:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=microchip.com
+	by phobos.denx.de (Postfix) with ESMTP id A886787FFC;
+	Tue, 27 Feb 2024 14:51:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="IBNnvzEL";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="sNOdPV/O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 16DAA8800C; Tue, 27 Feb 2024 14:44:56 +0100 (CET)
-Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
- [68.232.153.233])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 85EF388002; Tue, 27 Feb 2024 14:51:20 +0100 (CET)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 87B658800A
- for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 14:44:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=microchip.com
+ by phobos.denx.de (Postfix) with ESMTPS id 3539387FF2
+ for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 14:51:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Mihai.Sain@microchip.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1709041494; x=1740577494;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=ZoVxxGgeY3LnwM5dj/L6cW/9omY+WK2BJ5dtgIfpM5g=;
- b=IBNnvzEL7RQSYYcMCQVdNvWdYIWQ9TGW6RuFd8tk45vrp/uJlyHW6DXT
- VWPIvU8QpjEt5b3kfUnvRZIVmE8W7y2a/zYZ5pWFSBxYNNWL2uzoeZ3db
- 92NFGsWHPD1bmW0l1wlrOGrTv+P7HLSASE2HQcsB3vFozSovPRjiN7J4z
- q9sgiljYdT37JXBP0oE79ZFYKRO52DXCEsc3SaYDYYqYQJ9dDRti1ACWs
- X5TJ4hf24Iv28c+g+jHTe11ky/jWduaihRsKuKOV1UHoyHFo+NewgNMVf
- 65swNHeXAIwbAVhvZSBXzevFsew88YUgWj3MusQOev8LAQZyh79yBM4QG A==;
-X-CSE-ConnectionGUID: HJeNXA3BRTuID+cAO3ulFQ==
-X-CSE-MsgGUID: hzwdzKpHSLGKNYogIqjyqw==
-X-IronPort-AV: E=Sophos;i="6.06,187,1705388400"; d="scan'208";a="247638377"
-X-Amp-Result: SKIPPED(no attachment in message)
-Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa5.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 27 Feb 2024 06:44:51 -0700
-Received: from chn-vm-ex03.mchp-main.com (10.10.85.151) by
- chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35; Tue, 27 Feb 2024 06:44:13 -0700
-Received: from archlinux.microchip.com (10.10.85.11) by
- chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server id
- 15.1.2507.35 via Frontend Transport; Tue, 27 Feb 2024 06:44:12 -0700
-From: Mihai Sain <mihai.sain@microchip.com>
-To: <eugen.hristev@collabora.com>, <u-boot@lists.denx.de>
-CC: <cristian.birsan@microchip.com>, Mihai Sain <mihai.sain@microchip.com>
-Subject: [PATCH v2 4/4] configs: at91: sama7g54_curiosity: Add initial default
- configs
-Date: Tue, 27 Feb 2024 15:44:03 +0200
-Message-ID: <20240227134403.10686-5-mihai.sain@microchip.com>
-X-Mailer: git-send-email 2.44.0
-In-Reply-To: <20240227134403.10686-1-mihai.sain@microchip.com>
-References: <20240227134403.10686-1-mihai.sain@microchip.com>
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id 0FBE6CE1B72;
+ Tue, 27 Feb 2024 13:51:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 97CC2C433C7;
+ Tue, 27 Feb 2024 13:51:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1709041875;
+ bh=09mlgvZXWs9luBnUX1/sK9XDz9LpgI98f1CX4MqlS6k=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=sNOdPV/Oye0xUyoBgIcyqgi1Ibcb+XubeaWQM1scM7ppzlxhJeY5SLqBiLBNbPunx
+ 1FZuQmJ6UNAn1qZamHJ5nOO9PwGw9R0tbqLmnXICYH7TY2uU2g4Cko0IudCM1R6z6c
+ JonNi6puSNBUkmdraOOovfcdm6p7P4cuulcHdSvZpPGjuj+Xxk93v08fyV//OZ6JKD
+ E8JSfyxLzB/peV3IFVht6Ig+3Vl7IjYQrLRtRSR/ghxghetr/RD8Bi81N3pEnYoYlY
+ qLWtAQJb2nURE67EKL8nC+VN+5nQ5pRE+6y4Nsc4rFD1MClsiGtpvIiX++KhO9JdsA
+ eyMScy8AMnKZw==
+Message-ID: <4a5c8ac5-0423-4642-8972-f794da79b423@kernel.org>
+Date: Tue, 27 Feb 2024 15:51:09 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] net: mdio: Handle bus level GPIO Reset
+Content-Language: en-US
+To: Ravi Gunasekaran <r-gunasekaran@ti.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>, nm@ti.com
+Cc: srk@ti.com, s-vadapalli@ti.com, vigneshr@ti.com, mripard@kernel.org,
+ dannenberg@ti.com, danishanwar@ti.com, u-boot@lists.denx.de
+References: <20240219-for-2024-07-am65-cpsw-mdio-v1-0-afe9aaba5801@kernel.org>
+ <20240219-for-2024-07-am65-cpsw-mdio-v1-1-afe9aaba5801@kernel.org>
+ <da78150d-add5-2d8b-9bb9-b66e336ea419@ti.com>
+From: Roger Quadros <rogerq@kernel.org>
+In-Reply-To: <da78150d-add5-2d8b-9bb9-b66e336ea419@ti.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,431 +74,128 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add default configuration for nand-flash to boot the linux kernel.
-Add default configuration for qspi-flash to boot the linux kernel.
-Add default configuration for sd-card to boot the linux kernel.
-Configs are synced with savedefconfig.
 
-Signed-off-by: Mihai Sain <mihai.sain@microchip.com>
----
- configs/sama7g54_curiosity_mmc_defconfig      | 123 ++++++++++++++++++
- .../sama7g54_curiosity_nandflash_defconfig    | 122 +++++++++++++++++
- .../sama7g54_curiosity_qspiflash_defconfig    | 122 +++++++++++++++++
- include/configs/sama7g54_curiosity.h          |  17 +++
- 4 files changed, 384 insertions(+)
- create mode 100644 configs/sama7g54_curiosity_mmc_defconfig
- create mode 100644 configs/sama7g54_curiosity_nandflash_defconfig
- create mode 100644 configs/sama7g54_curiosity_qspiflash_defconfig
- create mode 100644 include/configs/sama7g54_curiosity.h
 
-diff --git a/configs/sama7g54_curiosity_mmc_defconfig b/configs/sama7g54_curiosity_mmc_defconfig
-new file mode 100644
-index 0000000000..fa3636828e
---- /dev/null
-+++ b/configs/sama7g54_curiosity_mmc_defconfig
-@@ -0,0 +1,123 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_AT91=y
-+CONFIG_TEXT_BASE=0x66f00000
-+CONFIG_SYS_MALLOC_LEN=0x1000000
-+CONFIG_SYS_MALLOC_F_LEN=0x40000
-+CONFIG_TARGET_SAMA7G54_CURIOSITY=y
-+CONFIG_NR_DRAM_BANKS=1
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x60044000
-+CONFIG_SF_DEFAULT_SPEED=50000000
-+CONFIG_ENV_SIZE=0x4000
-+CONFIG_DM_GPIO=y
-+CONFIG_DEFAULT_DEVICE_TREE="at91-sama7g54_curiosity"
-+CONFIG_OF_LIBFDT_OVERLAY=y
-+CONFIG_DM_RESET=y
-+CONFIG_SYS_LOAD_ADDR=0x62000000
-+CONFIG_SYS_MEMTEST_START=0x60000000
-+CONFIG_SYS_MEMTEST_END=0x68000000
-+CONFIG_ENV_VARS_UBOOT_CONFIG=y
-+CONFIG_FIT=y
-+# CONFIG_BOOTSTD is not set
-+CONFIG_SYS_BOOTM_LEN=0x2000000
-+CONFIG_NAND_BOOT=y
-+CONFIG_QSPI_BOOT=y
-+CONFIG_SD_BOOT=y
-+CONFIG_BOOTDELAY=3
-+CONFIG_USE_BOOTARGS=y
-+CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/mmcblk1p2 rw rootwait"
-+CONFIG_USE_BOOTCOMMAND=y
-+CONFIG_BOOTCOMMAND="fatload mmc 1:1 0x61000000 at91-sama7g54_curiosity.dtb; fatload mmc 1:1 0x62000000 zImage; bootz 0x62000000 - 0x61000000"
-+CONFIG_LOGLEVEL=6
-+CONFIG_BOARD_TYPES=y
-+CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_HUSH_PARSER=y
-+CONFIG_CMD_CPU=y
-+CONFIG_CMD_BOOTZ=y
-+CONFIG_CMD_MEMINFO=y
-+CONFIG_CMD_MEM_SEARCH=y
-+CONFIG_CMD_MX_CYCLIC=y
-+CONFIG_CMD_MEMTEST=y
-+CONFIG_CMD_STRINGS=y
-+CONFIG_CMD_CLK=y
-+CONFIG_CMD_DM=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_I2C=y
-+# CONFIG_CMD_LOADB is not set
-+# CONFIG_CMD_LOADS is not set
-+CONFIG_CMD_LSBLK=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_MTD=y
-+CONFIG_CMD_NAND=y
-+CONFIG_CMD_NAND_TRIMFFS=y
-+CONFIG_CMD_NAND_LOCK_UNLOCK=y
-+CONFIG_CMD_NAND_TORTURE=y
-+CONFIG_CMD_SF_TEST=y
-+CONFIG_CMD_CAT=y
-+CONFIG_CMD_XXD=y
-+CONFIG_CMD_RTC=y
-+CONFIG_CMD_TIME=y
-+CONFIG_CMD_EXT4=y
-+CONFIG_CMD_EXT4_WRITE=y
-+CONFIG_CMD_FAT=y
-+CONFIG_CMD_FS_GENERIC=y
-+CONFIG_CMD_MTDPARTS=y
-+CONFIG_CMD_MTDPARTS_SPREAD=y
-+CONFIG_CMD_MTDPARTS_SHOW_NET_SIZES=y
-+CONFIG_MTDIDS_DEFAULT="nand0=nand0,nor0=nor0"
-+CONFIG_MTDPARTS_DEFAULT="mtdparts=nand0:256k(bootstrap-nand)ro,1M(u-boot-nand)ro,256k(env-nand)ro,512k(dtb-nand)ro,6M(kernel-nand)ro,-(rootfs-nand)ro;nor0:256k(bootstrap-nor)ro,1M(u-boot-nor)ro,256k(env-nor)ro,512k(dtb-nor)ro,6M(kernel-nor)ro"
-+CONFIG_OF_CONTROL=y
-+# CONFIG_OF_TAG_MIGRATE is not set
-+CONFIG_ENV_IS_IN_FAT=y
-+CONFIG_ENV_FAT_DEVICE_AND_PART="1:1"
-+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_USE_HOSTNAME=y
-+CONFIG_HOSTNAME="SAMA7G54"
-+CONFIG_VERSION_VARIABLE=y
-+# CONFIG_NET is not set
-+CONFIG_CLK=y
-+CONFIG_CLK_CCF=y
-+CONFIG_CLK_AT91=y
-+CONFIG_AT91_UTMI=y
-+CONFIG_AT91_GENERIC_CLK=y
-+CONFIG_AT91_SAM9X60_PLL=y
-+CONFIG_CPU=y
-+CONFIG_ATMEL_PIO4=y
-+CONFIG_DM_I2C=y
-+CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
-+CONFIG_SYS_I2C_AT91=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
-+CONFIG_ATMEL_EBI=y
-+CONFIG_MFD_ATMEL_SMC=y
-+CONFIG_I2C_EEPROM=y
-+CONFIG_MICROCHIP_FLEXCOM=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_ATMEL=y
-+CONFIG_MTD=y
-+CONFIG_DM_MTD=y
-+CONFIG_DM_NAND_ATMEL=y
-+CONFIG_SYS_NAND_ONFI_DETECTION=y
-+CONFIG_DM_SPI_FLASH=y
-+CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-+CONFIG_SPI_FLASH_SST=y
-+# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
-+CONFIG_SPI_FLASH_MTD=y
-+CONFIG_PINCTRL=y
-+CONFIG_PINCTRL_AT91PIO4=y
-+CONFIG_RESET_AT91=y
-+CONFIG_DM_RTC=y
-+CONFIG_RTC_EMULATION=y
-+CONFIG_DM_SERIAL=y
-+CONFIG_ATMEL_USART=y
-+CONFIG_SPI=y
-+CONFIG_DM_SPI=y
-+CONFIG_ATMEL_QSPI=y
-+CONFIG_SYSRESET=y
-+CONFIG_SYSRESET_AT91=y
-+CONFIG_TIMER=y
-+CONFIG_MCHP_PIT64B_TIMER=y
-+CONFIG_FAT_WRITE=y
-+CONFIG_CMD_DHRYSTONE=y
-+# CONFIG_EFI_LOADER is not set
-+CONFIG_PHANDLE_CHECK_SEQ=y
-diff --git a/configs/sama7g54_curiosity_nandflash_defconfig b/configs/sama7g54_curiosity_nandflash_defconfig
-new file mode 100644
-index 0000000000..331bb8d0fe
---- /dev/null
-+++ b/configs/sama7g54_curiosity_nandflash_defconfig
-@@ -0,0 +1,122 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_AT91=y
-+CONFIG_TEXT_BASE=0x66f00000
-+CONFIG_SYS_MALLOC_LEN=0x1000000
-+CONFIG_SYS_MALLOC_F_LEN=0x40000
-+CONFIG_TARGET_SAMA7G54_CURIOSITY=y
-+CONFIG_NR_DRAM_BANKS=1
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x60044000
-+CONFIG_SF_DEFAULT_SPEED=50000000
-+CONFIG_ENV_SECT_SIZE=0x1000
-+CONFIG_DM_GPIO=y
-+CONFIG_DEFAULT_DEVICE_TREE="at91-sama7g54_curiosity"
-+CONFIG_OF_LIBFDT_OVERLAY=y
-+CONFIG_DM_RESET=y
-+CONFIG_SYS_LOAD_ADDR=0x62000000
-+CONFIG_SYS_MEMTEST_START=0x60000000
-+CONFIG_SYS_MEMTEST_END=0x68000000
-+CONFIG_ENV_VARS_UBOOT_CONFIG=y
-+CONFIG_FIT=y
-+# CONFIG_BOOTSTD is not set
-+CONFIG_SYS_BOOTM_LEN=0x2000000
-+CONFIG_NAND_BOOT=y
-+CONFIG_QSPI_BOOT=y
-+CONFIG_SD_BOOT=y
-+CONFIG_BOOTDELAY=3
-+CONFIG_USE_BOOTARGS=y
-+CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/mmcblk1p2 rw rootwait"
-+CONFIG_USE_BOOTCOMMAND=y
-+CONFIG_BOOTCOMMAND="nand read 0x61000000 0x180000 0x80000; nand read 0x62000000 0x200000 0x600000; bootz 0x62000000 - 0x61000000"
-+CONFIG_LOGLEVEL=6
-+CONFIG_BOARD_TYPES=y
-+CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_HUSH_PARSER=y
-+CONFIG_CMD_CPU=y
-+CONFIG_CMD_BOOTZ=y
-+CONFIG_CMD_MEMINFO=y
-+CONFIG_CMD_MEM_SEARCH=y
-+CONFIG_CMD_MX_CYCLIC=y
-+CONFIG_CMD_MEMTEST=y
-+CONFIG_CMD_STRINGS=y
-+CONFIG_CMD_CLK=y
-+CONFIG_CMD_DM=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_I2C=y
-+# CONFIG_CMD_LOADB is not set
-+# CONFIG_CMD_LOADS is not set
-+CONFIG_CMD_LSBLK=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_MTD=y
-+CONFIG_CMD_NAND=y
-+CONFIG_CMD_NAND_TRIMFFS=y
-+CONFIG_CMD_NAND_LOCK_UNLOCK=y
-+CONFIG_CMD_NAND_TORTURE=y
-+CONFIG_CMD_SF_TEST=y
-+CONFIG_CMD_CAT=y
-+CONFIG_CMD_XXD=y
-+CONFIG_CMD_RTC=y
-+CONFIG_CMD_TIME=y
-+CONFIG_CMD_EXT4=y
-+CONFIG_CMD_EXT4_WRITE=y
-+CONFIG_CMD_FAT=y
-+CONFIG_CMD_FS_GENERIC=y
-+CONFIG_CMD_MTDPARTS=y
-+CONFIG_CMD_MTDPARTS_SPREAD=y
-+CONFIG_CMD_MTDPARTS_SHOW_NET_SIZES=y
-+CONFIG_MTDIDS_DEFAULT="nand0=nand0,nor0=nor0"
-+CONFIG_MTDPARTS_DEFAULT="mtdparts=nand0:256k(bootstrap-nand)ro,1M(u-boot-nand)ro,256k(env-nand)ro,512k(dtb-nand)ro,6M(kernel-nand)ro,-(rootfs-nand)ro;nor0:256k(bootstrap-nor)ro,1M(u-boot-nor)ro,256k(env-nor)ro,512k(dtb-nor)ro,6M(kernel-nor)ro"
-+CONFIG_OF_CONTROL=y
-+# CONFIG_OF_TAG_MIGRATE is not set
-+CONFIG_ENV_IS_IN_NAND=y
-+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_USE_HOSTNAME=y
-+CONFIG_HOSTNAME="SAMA7G54"
-+CONFIG_VERSION_VARIABLE=y
-+# CONFIG_NET is not set
-+CONFIG_CLK=y
-+CONFIG_CLK_CCF=y
-+CONFIG_CLK_AT91=y
-+CONFIG_AT91_UTMI=y
-+CONFIG_AT91_GENERIC_CLK=y
-+CONFIG_AT91_SAM9X60_PLL=y
-+CONFIG_CPU=y
-+CONFIG_ATMEL_PIO4=y
-+CONFIG_DM_I2C=y
-+CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
-+CONFIG_SYS_I2C_AT91=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
-+CONFIG_ATMEL_EBI=y
-+CONFIG_MFD_ATMEL_SMC=y
-+CONFIG_I2C_EEPROM=y
-+CONFIG_MICROCHIP_FLEXCOM=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_ATMEL=y
-+CONFIG_MTD=y
-+CONFIG_DM_MTD=y
-+CONFIG_DM_NAND_ATMEL=y
-+CONFIG_SYS_NAND_ONFI_DETECTION=y
-+CONFIG_DM_SPI_FLASH=y
-+CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-+CONFIG_SPI_FLASH_SST=y
-+# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
-+CONFIG_SPI_FLASH_MTD=y
-+CONFIG_PINCTRL=y
-+CONFIG_PINCTRL_AT91PIO4=y
-+CONFIG_RESET_AT91=y
-+CONFIG_DM_RTC=y
-+CONFIG_RTC_EMULATION=y
-+CONFIG_DM_SERIAL=y
-+CONFIG_ATMEL_USART=y
-+CONFIG_SPI=y
-+CONFIG_DM_SPI=y
-+CONFIG_ATMEL_QSPI=y
-+CONFIG_SYSRESET=y
-+CONFIG_SYSRESET_AT91=y
-+CONFIG_TIMER=y
-+CONFIG_MCHP_PIT64B_TIMER=y
-+CONFIG_FAT_WRITE=y
-+CONFIG_CMD_DHRYSTONE=y
-+# CONFIG_EFI_LOADER is not set
-+CONFIG_PHANDLE_CHECK_SEQ=y
-diff --git a/configs/sama7g54_curiosity_qspiflash_defconfig b/configs/sama7g54_curiosity_qspiflash_defconfig
-new file mode 100644
-index 0000000000..00e5362a1f
---- /dev/null
-+++ b/configs/sama7g54_curiosity_qspiflash_defconfig
-@@ -0,0 +1,122 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_AT91=y
-+CONFIG_TEXT_BASE=0x66f00000
-+CONFIG_SYS_MALLOC_LEN=0x1000000
-+CONFIG_SYS_MALLOC_F_LEN=0x40000
-+CONFIG_TARGET_SAMA7G54_CURIOSITY=y
-+CONFIG_NR_DRAM_BANKS=1
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x60044000
-+CONFIG_SF_DEFAULT_SPEED=50000000
-+CONFIG_ENV_SECT_SIZE=0x10000
-+CONFIG_DM_GPIO=y
-+CONFIG_DEFAULT_DEVICE_TREE="at91-sama7g54_curiosity"
-+CONFIG_OF_LIBFDT_OVERLAY=y
-+CONFIG_DM_RESET=y
-+CONFIG_SYS_LOAD_ADDR=0x62000000
-+CONFIG_SYS_MEMTEST_START=0x60000000
-+CONFIG_SYS_MEMTEST_END=0x68000000
-+CONFIG_ENV_VARS_UBOOT_CONFIG=y
-+CONFIG_FIT=y
-+# CONFIG_BOOTSTD is not set
-+CONFIG_SYS_BOOTM_LEN=0x2000000
-+CONFIG_NAND_BOOT=y
-+CONFIG_QSPI_BOOT=y
-+CONFIG_SD_BOOT=y
-+CONFIG_BOOTDELAY=3
-+CONFIG_USE_BOOTARGS=y
-+CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/mmcblk1p2 rw rootwait"
-+CONFIG_USE_BOOTCOMMAND=y
-+CONFIG_BOOTCOMMAND="sf probe 0; sf read 0x61000000 0x180000 0x80000; sf read 0x62000000 0x200000 0x600000; bootz 0x62000000 - 0x61000000"
-+CONFIG_LOGLEVEL=6
-+CONFIG_BOARD_TYPES=y
-+CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_HUSH_PARSER=y
-+CONFIG_CMD_CPU=y
-+CONFIG_CMD_BOOTZ=y
-+CONFIG_CMD_MEMINFO=y
-+CONFIG_CMD_MEM_SEARCH=y
-+CONFIG_CMD_MX_CYCLIC=y
-+CONFIG_CMD_MEMTEST=y
-+CONFIG_CMD_STRINGS=y
-+CONFIG_CMD_CLK=y
-+CONFIG_CMD_DM=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_I2C=y
-+# CONFIG_CMD_LOADB is not set
-+# CONFIG_CMD_LOADS is not set
-+CONFIG_CMD_LSBLK=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_MTD=y
-+CONFIG_CMD_NAND=y
-+CONFIG_CMD_NAND_TRIMFFS=y
-+CONFIG_CMD_NAND_LOCK_UNLOCK=y
-+CONFIG_CMD_NAND_TORTURE=y
-+CONFIG_CMD_SF_TEST=y
-+CONFIG_CMD_CAT=y
-+CONFIG_CMD_XXD=y
-+CONFIG_CMD_RTC=y
-+CONFIG_CMD_TIME=y
-+CONFIG_CMD_EXT4=y
-+CONFIG_CMD_EXT4_WRITE=y
-+CONFIG_CMD_FAT=y
-+CONFIG_CMD_FS_GENERIC=y
-+CONFIG_CMD_MTDPARTS=y
-+CONFIG_CMD_MTDPARTS_SPREAD=y
-+CONFIG_CMD_MTDPARTS_SHOW_NET_SIZES=y
-+CONFIG_MTDIDS_DEFAULT="nand0=nand0,nor0=nor0"
-+CONFIG_MTDPARTS_DEFAULT="mtdparts=nand0:256k(bootstrap-nand)ro,1M(u-boot-nand)ro,256k(env-nand)ro,512k(dtb-nand)ro,6M(kernel-nand)ro,-(rootfs-nand)ro;nor0:256k(bootstrap-nor)ro,1M(u-boot-nor)ro,256k(env-nor)ro,512k(dtb-nor)ro,6M(kernel-nor)ro"
-+CONFIG_OF_CONTROL=y
-+# CONFIG_OF_TAG_MIGRATE is not set
-+CONFIG_ENV_IS_IN_SPI_FLASH=y
-+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_USE_HOSTNAME=y
-+CONFIG_HOSTNAME="SAMA7G54"
-+CONFIG_VERSION_VARIABLE=y
-+# CONFIG_NET is not set
-+CONFIG_CLK=y
-+CONFIG_CLK_CCF=y
-+CONFIG_CLK_AT91=y
-+CONFIG_AT91_UTMI=y
-+CONFIG_AT91_GENERIC_CLK=y
-+CONFIG_AT91_SAM9X60_PLL=y
-+CONFIG_CPU=y
-+CONFIG_ATMEL_PIO4=y
-+CONFIG_DM_I2C=y
-+CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
-+CONFIG_SYS_I2C_AT91=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
-+CONFIG_ATMEL_EBI=y
-+CONFIG_MFD_ATMEL_SMC=y
-+CONFIG_I2C_EEPROM=y
-+CONFIG_MICROCHIP_FLEXCOM=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_ATMEL=y
-+CONFIG_MTD=y
-+CONFIG_DM_MTD=y
-+CONFIG_DM_NAND_ATMEL=y
-+CONFIG_SYS_NAND_ONFI_DETECTION=y
-+CONFIG_DM_SPI_FLASH=y
-+CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-+CONFIG_SPI_FLASH_SST=y
-+# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
-+CONFIG_SPI_FLASH_MTD=y
-+CONFIG_PINCTRL=y
-+CONFIG_PINCTRL_AT91PIO4=y
-+CONFIG_RESET_AT91=y
-+CONFIG_DM_RTC=y
-+CONFIG_RTC_EMULATION=y
-+CONFIG_DM_SERIAL=y
-+CONFIG_ATMEL_USART=y
-+CONFIG_SPI=y
-+CONFIG_DM_SPI=y
-+CONFIG_ATMEL_QSPI=y
-+CONFIG_SYSRESET=y
-+CONFIG_SYSRESET_AT91=y
-+CONFIG_TIMER=y
-+CONFIG_MCHP_PIT64B_TIMER=y
-+CONFIG_FAT_WRITE=y
-+CONFIG_CMD_DHRYSTONE=y
-+# CONFIG_EFI_LOADER is not set
-+CONFIG_PHANDLE_CHECK_SEQ=y
-diff --git a/include/configs/sama7g54_curiosity.h b/include/configs/sama7g54_curiosity.h
-new file mode 100644
-index 0000000000..fe47236158
---- /dev/null
-+++ b/include/configs/sama7g54_curiosity.h
-@@ -0,0 +1,17 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Configuration file for the SAMA7G54 CURIOSITY board.
-+ *
-+ * Copyright (C) 2024 Microchip Technology Inc. and its subsidiaries
-+ *
-+ * Author: Mihai Sain <mihai.sain@microchip.com>
-+ *
-+ */
-+
-+#ifndef __CONFIG_H
-+#define __CONFIG_H
-+
-+#define CFG_SYS_AT91_SLOW_CLOCK		32768
-+#define CFG_SYS_AT91_MAIN_CLOCK		24000000
-+
-+#endif
+On 22/02/2024 08:59, Ravi Gunasekaran wrote:
+> 
+> 
+> On 2/19/24 9:03 PM, Roger Quadros wrote:
+>> Some platforms have bus level Reset controlled
+>> by a GPIO line. If available then handle bus reset
+>> via GPIO.
+>>
+>> Signed-off-by: Roger Quadros <rogerq@kernel.org>
+>> ---
+>>  include/phy.h     |  7 +++++++
+>>  net/mdio-uclass.c | 37 ++++++++++++++++++++++++++++++++++++-
+>>  2 files changed, 43 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/include/phy.h b/include/phy.h
+>> index e02cbdb58c..90a595cae4 100644
+>> --- a/include/phy.h
+>> +++ b/include/phy.h
+>> @@ -9,6 +9,7 @@
+>>  #ifndef _PHY_H
+>>  #define _PHY_H
+>>  
+>> +#include <asm/gpio.h>
+>>  #include <log.h>
+>>  #include <phy_interface.h>
+>>  #include <dm/ofnode.h>
+>> @@ -76,6 +77,12 @@ struct mii_dev {
+>>  	int (*reset)(struct mii_dev *bus);
+>>  	struct phy_device *phymap[PHY_MAX_ADDR];
+>>  	u32 phy_mask;
+>> +	/** @reset_delay_us: Bus GPIO reset pulse width in microseconds */
+>> +	int reset_delay_us;
+>> +	/** @reset_post_delay_us: Bus GPIO reset deassert delay in microseconds */
+>> +	int reset_post_delay_us;
+>> +	/** @reset_gpiod: Bus Reset GPIO descriptor pointer */
+>> +	struct gpio_desc reset_gpiod;
+>>  };
+>>  
+>>  /* struct phy_driver: a structure which defines PHY behavior
+>> diff --git a/net/mdio-uclass.c b/net/mdio-uclass.c
+>> index e758cc66d7..4500c50430 100644
+>> --- a/net/mdio-uclass.c
+>> +++ b/net/mdio-uclass.c
+>> @@ -14,6 +14,9 @@
+>>  #include <dm/of_extra.h>
+>>  #include <dm/uclass-internal.h>
+>>  #include <linux/compat.h>
+>> +#include <linux/delay.h>
+>> +
+>> +#define DEFAULT_GPIO_RESET_DELAY	10	/* in microseconds */
+>>  
+>>  void dm_mdio_probe_devices(void)
+>>  {
+>> @@ -80,6 +83,16 @@ int dm_mdio_write(struct udevice *mdio_dev, int addr, int devad, int reg,
+>>  int dm_mdio_reset(struct udevice *mdio_dev)
+>>  {
+>>  	struct mdio_ops *ops = mdio_get_ops(mdio_dev);
+>> +	struct mdio_perdev_priv *pdata = dev_get_uclass_priv(mdio_dev);
+>> +	struct mii_dev *mii_bus = pdata->mii_bus;
+>> +
+>> +	if (dm_gpio_is_valid(&mii_bus->reset_gpiod)) {
+>> +		dm_gpio_set_value(&mii_bus->reset_gpiod, 1);
+> 
+> undefined reference to `dm_gpio_set_value'
+> Build fails for configs that don't have CONFIG_DM_GPIO defined.
+> 
+> We can have this under "if (IS_ENABLED(CONFIG_DM_GPIO))"
+
+Thanks. I'll check this.
+
+> 
+>> +		udelay(mii_bus->reset_delay_us);
+>> +		dm_gpio_set_value(&mii_bus->reset_gpiod, 0);
+>> +		if (mii_bus->reset_post_delay_us > 0)
+>> +			udelay(mii_bus->reset_post_delay_us);
+>> +	}
+>>  
+>>  	if (!ops->reset)
+>>  		return 0;
+>> @@ -111,14 +124,36 @@ static int mdio_reset(struct mii_dev *mii_bus)
+>>  static int dm_mdio_post_probe(struct udevice *dev)
+>>  {
+>>  	struct mdio_perdev_priv *pdata = dev_get_uclass_priv(dev);
+>> +	struct mii_dev *mii_bus;
+>> +	int ret;
+>>  
+>> -	pdata->mii_bus = mdio_alloc();
+>> +	mii_bus = mdio_alloc();
+>> +	if (!mii_bus) {
+>> +		dev_err(dev, "couldn't allocate mii_bus\n");
+>> +		return -ENOMEM;
+>> +	}
+>> +	pdata->mii_bus = mii_bus;
+>>  	pdata->mii_bus->read = mdio_read;
+>>  	pdata->mii_bus->write = mdio_write;
+>>  	pdata->mii_bus->reset = mdio_reset;
+>>  	pdata->mii_bus->priv = dev;
+>>  	strlcpy(pdata->mii_bus->name, dev->name, MDIO_NAME_LEN);
+>>  
+>> +	if (IS_ENABLED(CONFIG_DM_GPIO)) {
+>> +		/* Get bus level PHY reset GPIO details */
+>> +		mii_bus->reset_delay_us = dev_read_u32_default(dev, "reset-delay-us",
+>> +							       DEFAULT_GPIO_RESET_DELAY);
+>> +		mii_bus->reset_post_delay_us = dev_read_u32_default(dev,
+>> +								    "reset-post-delay-us",
+>> +								    0);
+>> +		ret = gpio_request_by_name(dev, "reset-gpios", 0, &mii_bus->reset_gpiod,
+>> +					   GPIOD_IS_OUT | GPIOD_IS_OUT_ACTIVE);
+>> +		if (ret && ret != -ENOENT) {
+>> +			dev_err(dev, "couldn't get reset-gpios: %d\n", ret);
+>> +			return ret;
+>> +		}
+>> +	}
+>> +
+>>  	return mdio_register(pdata->mii_bus);
+>>  }
+>>  
+>>
+> 
+
 -- 
-2.44.0
-
+cheers,
+-roger
