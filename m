@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 474F8C54798
-	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 15:57:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0939C5478C
+	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 15:59:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AEBC887FE3;
-	Tue, 27 Feb 2024 16:57:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 57E9B87FDD;
+	Tue, 27 Feb 2024 16:59:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="tqANEbU+";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="QuohI9Mj";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="NZsy3T1C";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="p1XLkaoD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 83E5087FF5; Tue, 27 Feb 2024 16:57:09 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
+ id A987E8800C; Tue, 27 Feb 2024 16:59:12 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A970887FDD
- for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 16:57:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 869C687D87
+ for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 16:59:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4Tkhv73yR6z9spN;
- Tue, 27 Feb 2024 16:57:07 +0100 (CET)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4TkhxV0Zbtz9sWB;
+ Tue, 27 Feb 2024 16:59:10 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1709049427;
+ s=mail20150812; t=1709049550;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=O5RUWuj9hw5fMPtLJ1jqnrIMk9aB/sLvrfsii+G5Ock=;
- b=tqANEbU+6l62PxPzxxhwJKkqUBMN26alaivHqOivplH4jw0yRdhzuj16VT1mYSH/mheWo4
- ZeAn8s/UocdkkImsvLDG9xxOTAIi6dyb5OLSWl+z3990SPx0YQfeMXSxFcN4JSi+idclXx
- EB21c197EMaaK+tNVUAS3HWJLFSWCraXyrKr5JJl0ko92JSlRzmZCUcVy4y2FFpJYNhCB+
- uMRNOiX8p80uHoFPGmGOJ3p2KYFBX36pZJbncGebP7QosZlQBflM3Y7Xh7F3D1g6jetDeN
- 9yPg0zVECf7zsUzzPK34bZ43sSPrECc+GmISj7vydpVu2wHnAZo5SXbrJGXfOw==
-Message-ID: <782925c7-5d52-485c-811d-b316ce7881a0@mailbox.org>
+ bh=ysdHx98mYLRhPOIglJcuM+MIeKmHJ+BwczPMehxu+Do=;
+ b=NZsy3T1Cxl4HIXjSjK7imzCWh8Cgf3AaZpxFJiRalU6mpaWuSITdU7A5SLtcSqCoyFdjR3
+ u+Hkk1ve121BddVxKXBTn2RlxtwS26lBOKFbpIniIMKC/u6iIMhSp8zJCbKBQOR7i191EW
+ C4o9QBDMPkfxprJME9JigcQYxfH84m6Y7NC0c4nV1mj6LKjf7PqOdaAZz/aHYjPg+nz0rg
+ JSSgKyZUR/K2zpdQGVD/YgzkVYCprE7aUmNFiGOpFEKr25eLKQjn1Ej8LYlsAFF3lutpMP
+ R6vpec6YfU3na+oWIGrPRZE5/aStIzyBv3A0a/epTsNEr3jGSG0KZmZNiYP8Rw==
+Message-ID: <76775acb-c6cf-4099-adf3-aeaef3e8743f@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1709049425;
+ s=mail20150812; t=1709049548;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=O5RUWuj9hw5fMPtLJ1jqnrIMk9aB/sLvrfsii+G5Ock=;
- b=QuohI9MjMtPeq3ScEi1K9MLZpLl6KefHtiWMTRIZS69DszX064agiiTI46fVCry8A97QDs
- zy650gIcIt19JU64s6oPM1/iMt5h9LZ7jFjuc3CYmekg7LPlg8/XLlPhWx1xHAViXkpT09
- R30Re/IAgLmNC+aLle8IKlcq1DCPmYTaZ3+MVuMxmN2UE1tWH1yt90JntlydgpRT8WHTN5
- idrY12Rn3DJcFFHvetZ/Ll1s0ojCcjk6koqljlGs4yQZBZ5QpBkUJJ6UfVc5r9GNQDN35E
- 9qC0BzbEPbuTRmQ6f+O/NdgbsuGjj8ohFLH+ymXnO4hH00u63LeoHiAbPxHMiw==
-Date: Tue, 27 Feb 2024 16:57:04 +0100
+ bh=ysdHx98mYLRhPOIglJcuM+MIeKmHJ+BwczPMehxu+Do=;
+ b=p1XLkaoDadwqQ/V2ufmKjkTvpSZEX7A7i6r7PCZlENYreVJADIoi3XSx/4LUNmJHJatLnO
+ 2RKMkZyVJF7EuJoXhyx55Ke9nABGPr0elIvXsy4YRbfXWibnrb3Z0qwsbAG7TqNUqGBzWj
+ yUP6FURomi+LesSDoyeJnB72cB85f4FrkQx8SsFSa/vzIQ9u7LihjfnE39S1ugvTofu7vn
+ 9aVNqV1qbmxpGZt7tQXmjzhAiKbBO0AUrz2iJKONibFZSI/zHmhBSYeMeRYCR4DGrlUbWX
+ zLMhV91TerENpwt9P2i8zTn+TnH+pgGS8W5tOctR34dwo/snxKbMoCRbNun2DA==
+Date: Tue, 27 Feb 2024 16:59:06 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 4/7] pmic: Add Renesas RAA215300 PMIC driver
+Subject: Re: [PATCH v2 3/7] i2c: rzg2l: Add I2C driver for RZ/G2L family
 Content-Language: en-US
 To: Paul Barker <paul.barker.ct@bp.renesas.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
 Cc: u-boot@lists.denx.de
 References: <20240226150536.1690-1-paul.barker.ct@bp.renesas.com>
- <20240226150536.1690-5-paul.barker.ct@bp.renesas.com>
+ <20240226150536.1690-4-paul.barker.ct@bp.renesas.com>
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20240226150536.1690-5-paul.barker.ct@bp.renesas.com>
+In-Reply-To: <20240226150536.1690-4-paul.barker.ct@bp.renesas.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: nxn1keeeb4yk7tyuiz85macaq3ryfoc4
-X-MBO-RS-ID: a1e478d5459a4760675
-X-Rspamd-Queue-Id: 4Tkhv73yR6z9spN
+X-MBO-RS-META: thpy1im16hxrb73wdzmdzdwh5o5or4ap
+X-MBO-RS-ID: 8c9dbf0ab567f19faa9
+X-Rspamd-Queue-Id: 4TkhxV0Zbtz9sWB
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,47 +93,22 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 2/26/24 4:05 PM, Paul Barker wrote:
-> The RZ/G2L SMARC module is powered via a Renesas RAA215300 PMIC which
-> provides several voltage converters, a real time clock (RTC) and reset
-> control. A basic driver is implemented for this device so that we can
-> read, write and dump the PMIC registers.
+> This driver supports the I2C module on the Renesas RZ/G2L (R9A07G044)
+> SoC, also known as the RIIC module.
 > 
-> The raa215300_bind() function is added as a stub, binding of the
-> sysreset driver will be added in a later patch.
+> This patch is based on both the u-boot driver in the Renesas RZ BSP
+> 3.0.5 release [1] (commit 7fcc1fdc2534), and the Linux v6.7 driver
+> (commit 0dd3ee311255).
 > 
-> Additional features of this PMIC (such as reset control) may be
-> supported by future patches.
+> Support for deblocking the I2C bus is included as this may be needed
+> after triggering a reset via the Power Management IC (PMIC) over I2C
+> (the PMIC asserts the reset line before the SoC completes the I2C write
+> transaction with obvious bus locking effects). If the SDA line is
+> observed to be low during initialisation, we automatically attempt to
+> deblock.
+> 
+> [1]: https://github.com/renesas-rz/renesas-u-boot-cip
 > 
 > Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
-> ---
->   configs/renesas_rzg2l_smarc_defconfig |  3 ++
->   drivers/power/pmic/Kconfig            |  9 ++++++
->   drivers/power/pmic/Makefile           |  1 +
->   drivers/power/pmic/raa215300.c        | 41 +++++++++++++++++++++++++++
->   4 files changed, 54 insertions(+)
->   create mode 100644 drivers/power/pmic/raa215300.c
-> 
-> diff --git a/configs/renesas_rzg2l_smarc_defconfig b/configs/renesas_rzg2l_smarc_defconfig
-> index ad46297c6619..2cab79329db4 100644
-> --- a/configs/renesas_rzg2l_smarc_defconfig
-> +++ b/configs/renesas_rzg2l_smarc_defconfig
-> @@ -27,6 +27,7 @@ CONFIG_CMD_GPIO=y
->   CONFIG_CMD_I2C=y
->   CONFIG_CMD_MMC=y
->   CONFIG_CMD_PART=y
-> +CONFIG_CMD_PMIC=y
->   CONFIG_CMD_EXT2=y
->   CONFIG_CMD_EXT4=y
->   CONFIG_CMD_EXT4_WRITE=y
-> @@ -49,6 +50,8 @@ CONFIG_DM_I2C=y
->   CONFIG_MMC_IO_VOLTAGE=y
->   CONFIG_MMC_UHS_SUPPORT=y
->   CONFIG_MMC_HS400_SUPPORT=y
-> +CONFIG_DM_PMIC=y
-> +CONFIG_PMIC_RAA215300=y
->   CONFIG_DM_REGULATOR=y
->   CONFIG_DM_REGULATOR_FIXED=y
->   CONFIG_DM_REGULATOR_GPIO=y
 
-Would it be possible to split the enablement (config change) from the 
-driver in two separate patches ?
+Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
