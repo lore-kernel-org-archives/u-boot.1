@@ -4,55 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B72CAC54798
-	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 21:51:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 916C4C5478C
+	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 22:08:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 38F408801C;
-	Tue, 27 Feb 2024 22:51:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C552E878F4;
+	Tue, 27 Feb 2024 23:07:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="N7MGteNB";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="vnDRcdNO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2AE8E88019; Tue, 27 Feb 2024 22:51:45 +0100 (CET)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ id DEA3887FFE; Tue, 27 Feb 2024 23:07:57 +0100 (CET)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C79A288031
- for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 22:51:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DF4578744F
+ for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 23:07:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.fritz.box (ip-095-222-037-056.um34.pools.vodafone-ip.de
+Received: from [192.168.123.161] (ip-095-222-037-056.um34.pools.vodafone-ip.de
  [95.222.37.56])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 0D4CE3F3C0; 
- Tue, 27 Feb 2024 21:51:41 +0000 (UTC)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 362923F304; 
+ Tue, 27 Feb 2024 22:07:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1709070701;
- bh=yB+NngQuV2OKZJoFZIDyZ+Qtwoovv8S5JGMHcC6GB9w=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=N7MGteNB85YsvzgKRA3tXeYwFid8Wx6TPULWYgI4MYFNhjtnzWwuWxKH5dQriM/E4
- BrO9oFjfg342fsergVbv1X3M3cdZ1T4vKTFQwFUUBp/4JdACsJJcIzQVoO4nvHSTY8
- Hj1Mo2vIqEqC/4dpojhEg4zcGj306J2aLkAygP6Di/eQI5Gm8o8OeAxqzaBqmY8iN3
- e1U1n4SDVXXawGo3speyLobSPeJx8yUPzWVVezHDN2FU7iAkGd27z7LsY2ZWW+PbY7
- gxiydBZnfepMIV76+/Du0ZjKTv9r40CAuzKWnCCScYudT327IzPGvZg3n7juI/NzoE
- ++wUdmOGr2Auw==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] pylibfdt: fix invalid escape sequence '\w'
-Date: Tue, 27 Feb 2024 22:52:04 +0100
-Message-ID: <20240227215204.236447-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.43.0
+ s=20210705; t=1709071675;
+ bh=dHLrKZLgoZKHq6qS2DzS9ICSxQei5HSG1eAkTsPIfP0=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=vnDRcdNOT2+5BjBwv/dfktHP7W4cQnQyzsi9y1smB5xn8cBXf6q9yRyK2MDAAY35W
+ 5Z9OC44zjPkOxrzsNfHwLNN5dvLfHzXDhb6lyWfk5LGKd8H1jtkCb1udq30ZearvjH
+ JP24rkZ0BnFIoBQsNSlzwQWXKTGCGSxhK7RNjmsDa7OyrJLOwDcJeDHHE8RYBnzAHA
+ AYSoO3qhuuF7FC/HjF5FJCePwUWbD0atvIAY7o9K00FUJrPSl2Jyxv3EgJ2Ks/VMwA
+ qff1Qbadz8atjbnZvWoTXZQJUTXCk025xVzkeefsPqsIbBuHJz9br9fCy9Wr3i+Dfz
+ AYx2/3CagA01A==
+Message-ID: <7508709a-378d-40d9-8afb-a9c4b9666001@canonical.com>
+Date: Tue, 27 Feb 2024 23:08:19 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] pylibfdt: Fix "invalid escape sequence '\w'" in setup.py
+Content-Language: en-US, de-DE
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, Florian Schmaus <flo@geekplace.eu>,
+ u-boot@lists.denx.de
+References: <20240220135248.1277809-1-trini@konsulko.com>
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240220135248.1277809-1-trini@konsulko.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,27 +74,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-\w is not allowed as escape sequence is strings.
-Mark the regular expression with r''.
+On 2/20/24 14:52, Tom Rini wrote:
+> From: Florian Schmaus <flo@geekplace.eu>
+> 
+> Once u-boot's build system invokes
+> 
+> python3 scripts/dtc/pylibfdt/setup.py --quiet build_ext --inplace
+> 
+> it may fail with
+> 
+> scripts/dtc/pylibfdt/setup.py:40: SyntaxWarning: invalid escape sequence '\w'
+>    RE_KEY_VALUE = re.compile('(?P<key>\w+) *(?P<plus>[+])?= *(?P<value>.*)$')
+> 
+> depending on the used Python version.
+> 
+> Explicitly mark the regex string as raw string to avoid the warning.
+> 
+> Signed-off-by: Florian Schmaus <flo@geekplace.eu>
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- scripts/dtc/pylibfdt/setup.py | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
-diff --git a/scripts/dtc/pylibfdt/setup.py b/scripts/dtc/pylibfdt/setup.py
-index 8baae08770..c6fe5a6a44 100755
---- a/scripts/dtc/pylibfdt/setup.py
-+++ b/scripts/dtc/pylibfdt/setup.py
-@@ -37,7 +37,7 @@ with open(os.path.join(srcdir, "../README"), "r") as fh:
-     long_description = fh.read()
- 
- # Decodes a Makefile assignment line into key and value (and plus for +=)
--RE_KEY_VALUE = re.compile('(?P<key>\w+) *(?P<plus>[+])?= *(?P<value>.*)$')
-+RE_KEY_VALUE = re.compile(r'(?P<key>\w+) *(?P<plus>[+])?= *(?P<value>.*)$')
- 
- def get_top_builddir():
-     if '--top-builddir' in sys.argv:
--- 
-2.43.0
+> ---
+>   scripts/dtc/pylibfdt/setup.py | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/scripts/dtc/pylibfdt/setup.py b/scripts/dtc/pylibfdt/setup.py
+> index 8baae08770ca..c6fe5a6a446f 100755
+> --- a/scripts/dtc/pylibfdt/setup.py
+> +++ b/scripts/dtc/pylibfdt/setup.py
+> @@ -37,7 +37,7 @@
+>       long_description = fh.read()
+>   
+>   # Decodes a Makefile assignment line into key and value (and plus for +=)
+> -RE_KEY_VALUE = re.compile('(?P<key>\w+) *(?P<plus>[+])?= *(?P<value>.*)$')
+> +RE_KEY_VALUE = re.compile(r'(?P<key>\w+) *(?P<plus>[+])?= *(?P<value>.*)$')
+>   
+>   def get_top_builddir():
+>       if '--top-builddir' in sys.argv:
 
