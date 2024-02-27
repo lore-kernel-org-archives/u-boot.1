@@ -4,73 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07DCDC54E49
-	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 16:11:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE2A9C5478C
+	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 16:11:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7B38B88028;
-	Tue, 27 Feb 2024 17:10:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EB78C8802D;
+	Tue, 27 Feb 2024 17:10:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="oK6GnZ4/";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="A9wlR0Hk";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="eo0hhjI+";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="s2A8EC1D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF89188031; Tue, 27 Feb 2024 17:10:15 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ id 776B08801F; Tue, 27 Feb 2024 17:10:17 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8FAAE8800E
- for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 17:10:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7FE2B88028
+ for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 17:10:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4TkjBF2FzMz9spV;
- Tue, 27 Feb 2024 17:10:13 +0100 (CET)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4TkjBG1Ltzz9t2Z;
+ Tue, 27 Feb 2024 17:10:14 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1709050213;
+ s=mail20150812; t=1709050214;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=ApGX2/NfpEHSim2oqbBf8IxcvK1kO+yi0yY6/lzCfsA=;
- b=oK6GnZ4/YFUWGf5e0xMA3mtFRcy6wPAz7u2W6VmSvJRKonNZXRZ3lLBwJ8LuTNbZwvvzhf
- fPvW5vN+6ybfuLB5+sncJ3PwkEJSbjOLB5f1H2JaD2sRXyFyT6cvkA3Pw1jLiRdyjoDmxB
- CmxIQBkOgn6qM/TZruySuwCRK0YNOgj24ktlfACcCQjznINya7Nm4+Fqg5CqpmQhdOD+8D
- 0N7pU6dlHY2a4Q5WYpeBjUzhj6SIskZ31Mbvj3oK2jgENL4dtPaj8eynulvQbi2kuWLE4g
- eq6BgjmvJgG8mnkTpggU4UHGr1ZKuD1bQUAj6qAyCVN+oRG07fF9ApkSlu77IA==
+ bh=nRzxNM7ViScOekdlU9mk8DwV3h4rL9A1blpnF8rslUs=;
+ b=eo0hhjI+wKp2lV+moUbB43+1w45au+3vOFE8mexvwQ6dBvdHH9a3qDDyGNs1Gi9P6IT/GC
+ EocYhBd1MH8/MErj0mwdC6zPefNLVDdeIPjYdPS++gfqFhq+kP/pQkXCBr0HAFjlNf7dQ4
+ ln443tmEBf9kmPaZDormH1uaRx6afXkVFlkKYXNWICamXmToA75JcN5xTI8Alp+BtucuHD
+ myQXss8uLjUKCRjwfOOx09fqyajY/HA1ty6iHC36IWWgCqGhCreCvYhXfIAljln76a43Uo
+ FRZI/88pNq+rP1MFFiflQJPRqwEe9gUiOETpGgPLFGA0BYH6z3DBC0ZF4EiAtw==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1709050211;
+ s=mail20150812; t=1709050212;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=ApGX2/NfpEHSim2oqbBf8IxcvK1kO+yi0yY6/lzCfsA=;
- b=A9wlR0Hkzzqzy3sd6D2bKRILzsVDhPUBTg9KEr6YVskD1t4pDeo0nOEnFayIo6ShSonn1t
- mog5c+R6k9dTHhUB81TohQ6AL7O27NEzhfQuDdC3hk825QCNTb6IrlsuwAjYTt6oO7v6rf
- 4pGxMv9FGIiHY/OOzxOjx0+Peu9UKomciq9Zwc2sysXyG30HKzNLks5EyEXEr9Q3uQH7TO
- cIE679v9H0pE4RVDMGPIIkiFBpdFVLS5NC+TCgocehm1Dy5gjbolxafMhRlnJTBqOIPDYd
- cdX7w/3g1lYgMa82/QeOTpimxF121iBf05vyEhQ52/O5O3zDNIFrVxc6fTjEfA==
+ bh=nRzxNM7ViScOekdlU9mk8DwV3h4rL9A1blpnF8rslUs=;
+ b=s2A8EC1DfvI+IFw6h4LXWdJu5Yi7hyrQs+ZQzOW9RlKoF/o9LAWbOHrmBLnd3eqWEMbdZI
+ +rh/ezRfFqusAkBFOOA3C3f4FceHMRcWOe5NmiPL9kTM8YZd/5wYWdUdLnZiY10GY4RJ8j
+ x7SJEufCaRoSApJWw9NNYdwgwFCSRS6b08+hHZa6eBTVEIeoyfcF0E6c8WZZXAZtDTt7Mo
+ DmYfZyy2hikDNvQ9+BC7Tey45uDYIrsu5jS3NA1FqS501Pqul0fQaHNDtKu+3TcpwQAkic
+ S49Ll+IkVej4z2lK5N/gApjYrAXah1XU6VRsALopOy2a6B/bPWekDCl+RR70DQ==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Paul Barker <paul.barker.ct@bp.renesas.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 06/19] ARM: renesas: Rename rmobile_get_cpu_rev_*() to
- renesas_get_cpu_rev_*()
-Date: Tue, 27 Feb 2024 17:05:46 +0100
-Message-ID: <20240227160912.412181-7-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 07/19] ARM: renesas: Rename RMOBILE_CPU_TYPE_* to
+ RENESAS_CPU_TYPE_*
+Date: Tue, 27 Feb 2024 17:05:47 +0100
+Message-ID: <20240227160912.412181-8-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20240227160912.412181-1-marek.vasut+renesas@mailbox.org>
 References: <20240227160912.412181-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 3ea7f907e6f8d549795
-X-MBO-RS-META: ds65pbs677m8x6owwmyhs14tut3p8q3c
+X-MBO-RS-ID: cddd9aae20e71a3b83a
+X-MBO-RS-META: gcdwsxji83n7yo6r6846n86d8tkphqtk
+X-Rspamd-Queue-Id: 4TkjBG1Ltzz9t2Z
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,15 +90,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rename rmobile_get_cpu_rev_*() to renesas_get_cpu_rev_*() because
-all the chips are made by Renesas, while only a subset of them is
+Rename RMOBILE_CPU_TYPE_* to RENESAS_CPU_TYPE_* because all
+the chips are made by Renesas, while only a subset of them is
 from the R-Mobile line.
 
 Use the following command to perform the rename:
 
 "
-$ git grep -l '\<rmobile_get_cpu_rev_\(integer\|fraction\)\>' | \
-  xargs -I {} sed -i 's@\<rmobile_get_cpu_rev_\(integer\|fraction\)\>@renesas_get_cpu_rev_\1@g' {}
+$ git grep -l '\<RMOBILE_CPU_TYPE_[A-Z0-9]\+\>' | \
+  xargs -I {} sed -i 's@\<RMOBILE\(_CPU_TYPE_[A-Z0-9]\+\)\>@RENESAS\1@g' {}
 "
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
@@ -104,343 +107,308 @@ Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
 Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
 Cc: Tom Rini <trini@konsulko.com>
 ---
- arch/arm/mach-rmobile/cpu_info-rcar.c        |  4 +--
- arch/arm/mach-rmobile/cpu_info-rzg2l.c       |  4 +--
- arch/arm/mach-rmobile/cpu_info.c             | 12 ++++----
- arch/arm/mach-rmobile/include/mach/r8a7790.h |  2 +-
- arch/arm/mach-rmobile/include/mach/r8a7791.h |  2 +-
- arch/arm/mach-rmobile/include/mach/r8a7793.h |  2 +-
- arch/arm/mach-rmobile/include/mach/r8a7794.h |  2 +-
- arch/arm/mach-rmobile/include/mach/rmobile.h |  4 +--
- board/renesas/lager/lager.c                  |  2 +-
- board/renesas/lager/qos.c                    |  2 +-
- board/renesas/stout/qos.c                    |  2 +-
- board/renesas/stout/stout.c                  |  2 +-
- drivers/mmc/renesas-sdhi.c                   | 32 ++++++++++----------
- drivers/pinctrl/renesas/pfc-r8a7790.c        |  4 +--
- drivers/pinctrl/renesas/pfc-r8a7794.c        |  4 +--
- drivers/spi/renesas_rpc_spi.c                |  2 +-
- 16 files changed, 41 insertions(+), 41 deletions(-)
+ arch/arm/mach-rmobile/cpu_info-rzg2l.c       |  2 +-
+ arch/arm/mach-rmobile/cpu_info.c             | 34 +++++++++---------
+ arch/arm/mach-rmobile/include/mach/rmobile.h | 36 ++++++++++----------
+ board/renesas/salvator-x/salvator-x.c        |  6 ++--
+ board/renesas/ulcb/ulcb.c                    |  6 ++--
+ drivers/mmc/renesas-sdhi.c                   | 34 +++++++++---------
+ drivers/net/ravb.c                           |  4 +--
+ drivers/spi/renesas_rpc_spi.c                |  8 ++---
+ 8 files changed, 65 insertions(+), 65 deletions(-)
 
-diff --git a/arch/arm/mach-rmobile/cpu_info-rcar.c b/arch/arm/mach-rmobile/cpu_info-rcar.c
-index fe1795cec81..4c439adfdd6 100644
---- a/arch/arm/mach-rmobile/cpu_info-rcar.c
-+++ b/arch/arm/mach-rmobile/cpu_info-rcar.c
-@@ -26,7 +26,7 @@ u32 renesas_get_cpu_type(void)
- 	return (rmobile_get_prr() & 0x00007F00) >> 8;
- }
- 
--u32 rmobile_get_cpu_rev_integer(void)
-+u32 renesas_get_cpu_rev_integer(void)
- {
- 	const u32 prr = rmobile_get_prr();
- 	const u32 rev = prr & PRR_MASK;
-@@ -38,7 +38,7 @@ u32 rmobile_get_cpu_rev_integer(void)
- 		return ((prr & 0x000000F0) >> 4) + 1;
- }
- 
--u32 rmobile_get_cpu_rev_fraction(void)
-+u32 renesas_get_cpu_rev_fraction(void)
- {
- 	const u32 prr = rmobile_get_prr();
- 	const u32 rev = prr & PRR_MASK;
 diff --git a/arch/arm/mach-rmobile/cpu_info-rzg2l.c b/arch/arm/mach-rmobile/cpu_info-rzg2l.c
-index 6c0b50ffd40..ce7cc2a28db 100644
+index ce7cc2a28db..a1683a26e35 100644
 --- a/arch/arm/mach-rmobile/cpu_info-rzg2l.c
 +++ b/arch/arm/mach-rmobile/cpu_info-rzg2l.c
-@@ -52,12 +52,12 @@ u32 renesas_get_cpu_type(void)
- 	return get_tfa_info()->cpu_type;
- }
+@@ -21,7 +21,7 @@ struct tfa_info {
+ };
  
--u32 rmobile_get_cpu_rev_integer(void)
-+u32 renesas_get_cpu_rev_integer(void)
- {
- 	return (readl(SYSC_LSI_DEVID) >> 28) + 1;
- }
+ static const struct tfa_info tfa_info[] = {
+-	{ "renesas,r9a07g044l2", "R9A07G044L", RMOBILE_CPU_TYPE_R9A07G044L },
++	{ "renesas,r9a07g044l2", "R9A07G044L", RENESAS_CPU_TYPE_R9A07G044L },
+ };
  
--u32 rmobile_get_cpu_rev_fraction(void)
-+u32 renesas_get_cpu_rev_fraction(void)
- {
- 	return 0;
- }
+ static const struct tfa_info invalid_tfa_info = { NULL, "(invalid)", 0 };
 diff --git a/arch/arm/mach-rmobile/cpu_info.c b/arch/arm/mach-rmobile/cpu_info.c
-index c7fbf39cedb..35cfef2e1ab 100644
+index 35cfef2e1ab..9c5ea4e6cd5 100644
 --- a/arch/arm/mach-rmobile/cpu_info.c
 +++ b/arch/arm/mach-rmobile/cpu_info.c
-@@ -47,14 +47,14 @@ static u32 __rmobile_get_cpu_rev_integer(void)
- {
- 	return 0;
- }
--u32 rmobile_get_cpu_rev_integer(void)
-+u32 renesas_get_cpu_rev_integer(void)
- 		__attribute__((weak, alias("__rmobile_get_cpu_rev_integer")));
+@@ -62,22 +62,22 @@ static const struct {
+ 	u16 cpu_type;
+ 	u8 cpu_name[10];
+ } rmobile_cpuinfo[] = {
+-	{ RMOBILE_CPU_TYPE_R8A7790, "R8A7790" },
+-	{ RMOBILE_CPU_TYPE_R8A7791, "R8A7791" },
+-	{ RMOBILE_CPU_TYPE_R8A7792, "R8A7792" },
+-	{ RMOBILE_CPU_TYPE_R8A7793, "R8A7793" },
+-	{ RMOBILE_CPU_TYPE_R8A7794, "R8A7794" },
+-	{ RMOBILE_CPU_TYPE_R8A7795, "R8A7795" },
+-	{ RMOBILE_CPU_TYPE_R8A7796, "R8A7796" },
+-	{ RMOBILE_CPU_TYPE_R8A77965, "R8A77965" },
+-	{ RMOBILE_CPU_TYPE_R8A77970, "R8A77970" },
+-	{ RMOBILE_CPU_TYPE_R8A77980, "R8A77980" },
+-	{ RMOBILE_CPU_TYPE_R8A77990, "R8A77990" },
+-	{ RMOBILE_CPU_TYPE_R8A77995, "R8A77995" },
+-	{ RMOBILE_CPU_TYPE_R8A779A0, "R8A779A0" },
+-	{ RMOBILE_CPU_TYPE_R8A779F0, "R8A779F0" },
+-	{ RMOBILE_CPU_TYPE_R8A779G0, "R8A779G0" },
+-	{ RMOBILE_CPU_TYPE_R8A779H0, "R8A779H0" },
++	{ RENESAS_CPU_TYPE_R8A7790, "R8A7790" },
++	{ RENESAS_CPU_TYPE_R8A7791, "R8A7791" },
++	{ RENESAS_CPU_TYPE_R8A7792, "R8A7792" },
++	{ RENESAS_CPU_TYPE_R8A7793, "R8A7793" },
++	{ RENESAS_CPU_TYPE_R8A7794, "R8A7794" },
++	{ RENESAS_CPU_TYPE_R8A7795, "R8A7795" },
++	{ RENESAS_CPU_TYPE_R8A7796, "R8A7796" },
++	{ RENESAS_CPU_TYPE_R8A77965, "R8A77965" },
++	{ RENESAS_CPU_TYPE_R8A77970, "R8A77970" },
++	{ RENESAS_CPU_TYPE_R8A77980, "R8A77980" },
++	{ RENESAS_CPU_TYPE_R8A77990, "R8A77990" },
++	{ RENESAS_CPU_TYPE_R8A77995, "R8A77995" },
++	{ RENESAS_CPU_TYPE_R8A779A0, "R8A779A0" },
++	{ RENESAS_CPU_TYPE_R8A779F0, "R8A779F0" },
++	{ RENESAS_CPU_TYPE_R8A779G0, "R8A779G0" },
++	{ RENESAS_CPU_TYPE_R8A779H0, "R8A779H0" },
+ 	{ 0x0, "CPU" },
+ };
  
- static u32 __rmobile_get_cpu_rev_fraction(void)
+@@ -121,7 +121,7 @@ int print_cpuinfo(void)
  {
- 	return 0;
- }
--u32 rmobile_get_cpu_rev_fraction(void)
-+u32 renesas_get_cpu_rev_fraction(void)
- 		__attribute__((weak, alias("__rmobile_get_cpu_rev_fraction")));
- 
- /* CPU information table */
-@@ -122,15 +122,15 @@ int print_cpuinfo(void)
  	int i = rmobile_cpuinfo_idx();
  
- 	if (rmobile_cpuinfo[i].cpu_type == RMOBILE_CPU_TYPE_R8A7796 &&
--	    rmobile_get_cpu_rev_integer() == 1 &&
--	    rmobile_get_cpu_rev_fraction() == 1) {
-+	    renesas_get_cpu_rev_integer() == 1 &&
-+	    renesas_get_cpu_rev_fraction() == 1) {
+-	if (rmobile_cpuinfo[i].cpu_type == RMOBILE_CPU_TYPE_R8A7796 &&
++	if (rmobile_cpuinfo[i].cpu_type == RENESAS_CPU_TYPE_R8A7796 &&
+ 	    renesas_get_cpu_rev_integer() == 1 &&
+ 	    renesas_get_cpu_rev_fraction() == 1) {
  		printf("CPU:   Renesas Electronics %s rev 1.1/1.2\n", get_cpu_name(i));
- 		return 0;
- 	}
- 
- 	printf("CPU:   Renesas Electronics %s rev %d.%d\n",
--		get_cpu_name(i), rmobile_get_cpu_rev_integer(),
--		rmobile_get_cpu_rev_fraction());
-+		get_cpu_name(i), renesas_get_cpu_rev_integer(),
-+		renesas_get_cpu_rev_fraction());
- 
- 	return 0;
- }
-diff --git a/arch/arm/mach-rmobile/include/mach/r8a7790.h b/arch/arm/mach-rmobile/include/mach/r8a7790.h
-index 485ea7e28d1..233531cb4ab 100644
---- a/arch/arm/mach-rmobile/include/mach/r8a7790.h
-+++ b/arch/arm/mach-rmobile/include/mach/r8a7790.h
-@@ -28,6 +28,6 @@
- 
- #define R8A7790_CUT_ES2X	2
- #define IS_R8A7790_ES2()	\
--	(rmobile_get_cpu_rev_integer() == R8A7790_CUT_ES2X)
-+	(renesas_get_cpu_rev_integer() == R8A7790_CUT_ES2X)
- 
- #endif /* __ASM_ARCH_R8A7790_H */
-diff --git a/arch/arm/mach-rmobile/include/mach/r8a7791.h b/arch/arm/mach-rmobile/include/mach/r8a7791.h
-index 2006ad58a52..78a910cfdd2 100644
---- a/arch/arm/mach-rmobile/include/mach/r8a7791.h
-+++ b/arch/arm/mach-rmobile/include/mach/r8a7791.h
-@@ -65,6 +65,6 @@
- 
- #define R8A7791_CUT_ES2X	2
- #define IS_R8A7791_ES2()	\
--	(rmobile_get_cpu_rev_integer() == R8A7791_CUT_ES2X)
-+	(renesas_get_cpu_rev_integer() == R8A7791_CUT_ES2X)
- 
- #endif /* __ASM_ARCH_R8A7791_H */
-diff --git a/arch/arm/mach-rmobile/include/mach/r8a7793.h b/arch/arm/mach-rmobile/include/mach/r8a7793.h
-index 02f4286ef1a..4cb064731ca 100644
---- a/arch/arm/mach-rmobile/include/mach/r8a7793.h
-+++ b/arch/arm/mach-rmobile/include/mach/r8a7793.h
-@@ -71,6 +71,6 @@
- 
- #define R8A7793_CUT_ES2X	2
- #define IS_R8A7793_ES2() \
--	(rmobile_get_cpu_rev_integer() == R8A7793_CUT_ES2X)
-+	(renesas_get_cpu_rev_integer() == R8A7793_CUT_ES2X)
- 
- #endif /* __ASM_ARCH_R8A7793_H */
-diff --git a/arch/arm/mach-rmobile/include/mach/r8a7794.h b/arch/arm/mach-rmobile/include/mach/r8a7794.h
-index a2a949d4d61..6d0d729bb12 100644
---- a/arch/arm/mach-rmobile/include/mach/r8a7794.h
-+++ b/arch/arm/mach-rmobile/include/mach/r8a7794.h
-@@ -28,6 +28,6 @@
- 
- #define R8A7794_CUT_ES2		2
- #define IS_R8A7794_ES2()	\
--	(rmobile_get_cpu_rev_integer() == R8A7794_CUT_ES2)
-+	(renesas_get_cpu_rev_integer() == R8A7794_CUT_ES2)
- 
- #endif /* __ASM_ARCH_R8A7794_H */
 diff --git a/arch/arm/mach-rmobile/include/mach/rmobile.h b/arch/arm/mach-rmobile/include/mach/rmobile.h
-index 464a67f78d2..d41b737d6b1 100644
+index d41b737d6b1..67c480048de 100644
 --- a/arch/arm/mach-rmobile/include/mach/rmobile.h
 +++ b/arch/arm/mach-rmobile/include/mach/rmobile.h
-@@ -49,8 +49,8 @@
+@@ -25,24 +25,24 @@
+ #endif /* CONFIG_ARCH_RMOBILE */
  
- const u8 *rzg_get_cpu_name(void);
- u32 renesas_get_cpu_type(void);
--u32 rmobile_get_cpu_rev_integer(void);
--u32 rmobile_get_cpu_rev_fraction(void);
-+u32 renesas_get_cpu_rev_integer(void);
-+u32 renesas_get_cpu_rev_fraction(void);
- #endif /* __ASSEMBLY__ */
+ /* PRR CPU IDs */
+-#define RMOBILE_CPU_TYPE_R8A7740	0x40
+-#define RMOBILE_CPU_TYPE_R8A7790	0x45
+-#define RMOBILE_CPU_TYPE_R8A7791	0x47
+-#define RMOBILE_CPU_TYPE_R8A7792	0x4A
+-#define RMOBILE_CPU_TYPE_R8A7793	0x4B
+-#define RMOBILE_CPU_TYPE_R8A7794	0x4C
+-#define RMOBILE_CPU_TYPE_R8A7795	0x4F
+-#define RMOBILE_CPU_TYPE_R8A7796	0x52
+-#define RMOBILE_CPU_TYPE_R8A77965	0x55
+-#define RMOBILE_CPU_TYPE_R8A77970	0x54
+-#define RMOBILE_CPU_TYPE_R8A77980	0x56
+-#define RMOBILE_CPU_TYPE_R8A77990	0x57
+-#define RMOBILE_CPU_TYPE_R8A77995	0x58
+-#define RMOBILE_CPU_TYPE_R8A779A0	0x59
+-#define RMOBILE_CPU_TYPE_R8A779F0	0x5A
+-#define RMOBILE_CPU_TYPE_R8A779G0	0x5C
+-#define RMOBILE_CPU_TYPE_R8A779H0	0x5D
+-#define RMOBILE_CPU_TYPE_R9A07G044L	0x9A070440
++#define RENESAS_CPU_TYPE_R8A7740	0x40
++#define RENESAS_CPU_TYPE_R8A7790	0x45
++#define RENESAS_CPU_TYPE_R8A7791	0x47
++#define RENESAS_CPU_TYPE_R8A7792	0x4A
++#define RENESAS_CPU_TYPE_R8A7793	0x4B
++#define RENESAS_CPU_TYPE_R8A7794	0x4C
++#define RENESAS_CPU_TYPE_R8A7795	0x4F
++#define RENESAS_CPU_TYPE_R8A7796	0x52
++#define RENESAS_CPU_TYPE_R8A77965	0x55
++#define RENESAS_CPU_TYPE_R8A77970	0x54
++#define RENESAS_CPU_TYPE_R8A77980	0x56
++#define RENESAS_CPU_TYPE_R8A77990	0x57
++#define RENESAS_CPU_TYPE_R8A77995	0x58
++#define RENESAS_CPU_TYPE_R8A779A0	0x59
++#define RENESAS_CPU_TYPE_R8A779F0	0x5A
++#define RENESAS_CPU_TYPE_R8A779G0	0x5C
++#define RENESAS_CPU_TYPE_R8A779H0	0x5D
++#define RENESAS_CPU_TYPE_R9A07G044L	0x9A070440
  
- #endif /* __ASM_ARCH_RMOBILE_H */
-diff --git a/board/renesas/lager/lager.c b/board/renesas/lager/lager.c
-index d9d460834b2..ab06078c511 100644
---- a/board/renesas/lager/lager.c
-+++ b/board/renesas/lager/lager.c
-@@ -46,7 +46,7 @@ void s_init(void)
- 	writel(0xA5A5A500, &swdt->swtcsra);
+ #ifndef __ASSEMBLY__
+ #include <asm/types.h>
+diff --git a/board/renesas/salvator-x/salvator-x.c b/board/renesas/salvator-x/salvator-x.c
+index 01571625e71..ca05285a09b 100644
+--- a/board/renesas/salvator-x/salvator-x.c
++++ b/board/renesas/salvator-x/salvator-x.c
+@@ -78,15 +78,15 @@ int board_fit_config_name_match(const char *name)
+ 	/* PRR driver is not available yet */
+ 	u32 cpu_type = renesas_get_cpu_type();
  
- 	/* CPU frequency setting. Set to 1.4GHz */
--	if (rmobile_get_cpu_rev_integer() >= R8A7790_CUT_ES2X) {
-+	if (renesas_get_cpu_rev_integer() >= R8A7790_CUT_ES2X) {
- 		u32 stat = 0;
- 		u32 stc = ((1400 / CLK2MHZ(get_board_sys_clk())) - 1)
- 			<< PLL0_STC_BIT;
-diff --git a/board/renesas/lager/qos.c b/board/renesas/lager/qos.c
-index ddc831c0c21..f7eade2ed11 100644
---- a/board/renesas/lager/qos.c
-+++ b/board/renesas/lager/qos.c
-@@ -2419,7 +2419,7 @@ static void qos_init_es2(void)
+-	if ((cpu_type == RMOBILE_CPU_TYPE_R8A7795) &&
++	if ((cpu_type == RENESAS_CPU_TYPE_R8A7795) &&
+ 	    !strcmp(name, "r8a77950-salvator-x-u-boot"))
+ 		return 0;
  
- void qos_init(void)
- {
--	if (rmobile_get_cpu_rev_integer() >= R8A7790_CUT_ES2X)
-+	if (renesas_get_cpu_rev_integer() >= R8A7790_CUT_ES2X)
- 		qos_init_es2();
- 	else
- 		qos_init_es1();
-diff --git a/board/renesas/stout/qos.c b/board/renesas/stout/qos.c
-index 9030ba7f61f..8a878123a5d 100644
---- a/board/renesas/stout/qos.c
-+++ b/board/renesas/stout/qos.c
-@@ -2421,7 +2421,7 @@ static void qos_init_es2(void)
+-	if ((cpu_type == RMOBILE_CPU_TYPE_R8A7796) &&
++	if ((cpu_type == RENESAS_CPU_TYPE_R8A7796) &&
+ 	    !strcmp(name, "r8a77960-salvator-x-u-boot"))
+ 		return 0;
  
- void qos_init(void)
- {
--	if (rmobile_get_cpu_rev_integer() >= R8A7790_CUT_ES2X)
-+	if (renesas_get_cpu_rev_integer() >= R8A7790_CUT_ES2X)
- 		qos_init_es2();
- 	else
- 		qos_init_es1();
-diff --git a/board/renesas/stout/stout.c b/board/renesas/stout/stout.c
-index 46c48dff0a0..109e19a292d 100644
---- a/board/renesas/stout/stout.c
-+++ b/board/renesas/stout/stout.c
-@@ -46,7 +46,7 @@ void s_init(void)
- 	writel(0xA5A5A500, &swdt->swtcsra);
+-	if ((cpu_type == RMOBILE_CPU_TYPE_R8A77965) &&
++	if ((cpu_type == RENESAS_CPU_TYPE_R8A77965) &&
+ 	    !strcmp(name, "r8a77965-salvator-x-u-boot"))
+ 		return 0;
  
- 	/* CPU frequency setting. Set to 1.4GHz */
--	if (rmobile_get_cpu_rev_integer() >= R8A7790_CUT_ES2X) {
-+	if (renesas_get_cpu_rev_integer() >= R8A7790_CUT_ES2X) {
- 		u32 stat = 0;
- 		u32 stc = ((1400 / CLK2MHZ(get_board_sys_clk())) - 1)
- 			<< PLL0_STC_BIT;
+diff --git a/board/renesas/ulcb/ulcb.c b/board/renesas/ulcb/ulcb.c
+index 5d7ebbd922f..6addf2bc8b4 100644
+--- a/board/renesas/ulcb/ulcb.c
++++ b/board/renesas/ulcb/ulcb.c
+@@ -69,15 +69,15 @@ int board_fit_config_name_match(const char *name)
+ 	/* PRR driver is not available yet */
+ 	u32 cpu_type = renesas_get_cpu_type();
+ 
+-	if ((cpu_type == RMOBILE_CPU_TYPE_R8A7795) &&
++	if ((cpu_type == RENESAS_CPU_TYPE_R8A7795) &&
+ 	    !strcmp(name, "r8a77950-ulcb-u-boot"))
+ 		return 0;
+ 
+-	if ((cpu_type == RMOBILE_CPU_TYPE_R8A7796) &&
++	if ((cpu_type == RENESAS_CPU_TYPE_R8A7796) &&
+ 	    !strcmp(name, "r8a77960-ulcb-u-boot"))
+ 		return 0;
+ 
+-	if ((cpu_type == RMOBILE_CPU_TYPE_R8A77965) &&
++	if ((cpu_type == RENESAS_CPU_TYPE_R8A77965) &&
+ 	    !strcmp(name, "r8a77965-ulcb-u-boot"))
+ 		return 0;
+ 
 diff --git a/drivers/mmc/renesas-sdhi.c b/drivers/mmc/renesas-sdhi.c
-index 4b7cf773243..03e360ec1a2 100644
+index 03e360ec1a2..82237ef3dbd 100644
 --- a/drivers/mmc/renesas-sdhi.c
 +++ b/drivers/mmc/renesas-sdhi.c
-@@ -886,29 +886,29 @@ static void renesas_sdhi_filter_caps(struct udevice *dev)
+@@ -885,28 +885,28 @@ static void renesas_sdhi_filter_caps(struct udevice *dev)
+ 	struct tmio_sd_plat *plat = dev_get_plat(dev);
  
  	/* HS400 is not supported on H3 ES1.x, M3W ES1.[012], V3M, V3H ES1.x, D3 */
- 	if (((renesas_get_cpu_type() == RMOBILE_CPU_TYPE_R8A7795) &&
--	    (rmobile_get_cpu_rev_integer() <= 1)) ||
-+	    (renesas_get_cpu_rev_integer() <= 1)) ||
- 	    ((renesas_get_cpu_type() == RMOBILE_CPU_TYPE_R8A7796) &&
--	    (rmobile_get_cpu_rev_integer() == 1) &&
--	    (rmobile_get_cpu_rev_fraction() <= 2)) ||
-+	    (renesas_get_cpu_rev_integer() == 1) &&
-+	    (renesas_get_cpu_rev_fraction() <= 2)) ||
- 	    (renesas_get_cpu_type() == RMOBILE_CPU_TYPE_R8A77970) ||
- 	    ((renesas_get_cpu_type() == RMOBILE_CPU_TYPE_R8A77980) &&
--	    (rmobile_get_cpu_rev_integer() <= 1)) ||
-+	    (renesas_get_cpu_rev_integer() <= 1)) ||
- 	    (renesas_get_cpu_type() == RMOBILE_CPU_TYPE_R8A77995))
+-	if (((renesas_get_cpu_type() == RMOBILE_CPU_TYPE_R8A7795) &&
++	if (((renesas_get_cpu_type() == RENESAS_CPU_TYPE_R8A7795) &&
+ 	    (renesas_get_cpu_rev_integer() <= 1)) ||
+-	    ((renesas_get_cpu_type() == RMOBILE_CPU_TYPE_R8A7796) &&
++	    ((renesas_get_cpu_type() == RENESAS_CPU_TYPE_R8A7796) &&
+ 	    (renesas_get_cpu_rev_integer() == 1) &&
+ 	    (renesas_get_cpu_rev_fraction() <= 2)) ||
+-	    (renesas_get_cpu_type() == RMOBILE_CPU_TYPE_R8A77970) ||
+-	    ((renesas_get_cpu_type() == RMOBILE_CPU_TYPE_R8A77980) &&
++	    (renesas_get_cpu_type() == RENESAS_CPU_TYPE_R8A77970) ||
++	    ((renesas_get_cpu_type() == RENESAS_CPU_TYPE_R8A77980) &&
+ 	    (renesas_get_cpu_rev_integer() <= 1)) ||
+-	    (renesas_get_cpu_type() == RMOBILE_CPU_TYPE_R8A77995))
++	    (renesas_get_cpu_type() == RENESAS_CPU_TYPE_R8A77995))
  		plat->cfg.host_caps &= ~MMC_MODE_HS400;
  
  	/* H3 ES2.0, ES3.0 and M3W ES1.2 and M3N bad taps */
- 	if (((renesas_get_cpu_type() == RMOBILE_CPU_TYPE_R8A7795) &&
--	    (rmobile_get_cpu_rev_integer() >= 2)) ||
-+	    (renesas_get_cpu_rev_integer() >= 2)) ||
- 	    ((renesas_get_cpu_type() == RMOBILE_CPU_TYPE_R8A7796) &&
--	    (rmobile_get_cpu_rev_integer() == 1) &&
--	    (rmobile_get_cpu_rev_fraction() == 2)) ||
-+	    (renesas_get_cpu_rev_integer() == 1) &&
-+	    (renesas_get_cpu_rev_fraction() == 2)) ||
- 	    (renesas_get_cpu_type() == RMOBILE_CPU_TYPE_R8A77965))
+-	if (((renesas_get_cpu_type() == RMOBILE_CPU_TYPE_R8A7795) &&
++	if (((renesas_get_cpu_type() == RENESAS_CPU_TYPE_R8A7795) &&
+ 	    (renesas_get_cpu_rev_integer() >= 2)) ||
+-	    ((renesas_get_cpu_type() == RMOBILE_CPU_TYPE_R8A7796) &&
++	    ((renesas_get_cpu_type() == RENESAS_CPU_TYPE_R8A7796) &&
+ 	    (renesas_get_cpu_rev_integer() == 1) &&
+ 	    (renesas_get_cpu_rev_fraction() == 2)) ||
+-	    (renesas_get_cpu_type() == RMOBILE_CPU_TYPE_R8A77965))
++	    (renesas_get_cpu_type() == RENESAS_CPU_TYPE_R8A77965))
  		priv->hs400_bad_tap = BIT(2) | BIT(3) | BIT(6) | BIT(7);
  
  	/* M3W ES1.x for x>2 can use HS400 with manual adjustment and taps */
- 	if ((renesas_get_cpu_type() == RMOBILE_CPU_TYPE_R8A7796) &&
--	    (rmobile_get_cpu_rev_integer() == 1) &&
--	    (rmobile_get_cpu_rev_fraction() > 2)) {
-+	    (renesas_get_cpu_rev_integer() == 1) &&
-+	    (renesas_get_cpu_rev_fraction() > 2)) {
+-	if ((renesas_get_cpu_type() == RMOBILE_CPU_TYPE_R8A7796) &&
++	if ((renesas_get_cpu_type() == RENESAS_CPU_TYPE_R8A7796) &&
+ 	    (renesas_get_cpu_rev_integer() == 1) &&
+ 	    (renesas_get_cpu_rev_fraction() > 2)) {
  		priv->adjust_hs400_enable = true;
- 		priv->adjust_hs400_offset = 3;
- 		priv->hs400_bad_tap = BIT(1) | BIT(3) | BIT(5) | BIT(7);
-@@ -918,7 +918,7 @@ static void renesas_sdhi_filter_caps(struct udevice *dev)
+@@ -917,12 +917,12 @@ static void renesas_sdhi_filter_caps(struct udevice *dev)
+ 	}
  
  	/* M3W+ bad taps */
- 	if ((renesas_get_cpu_type() == RMOBILE_CPU_TYPE_R8A7796) &&
--	    (rmobile_get_cpu_rev_integer() == 3))
-+	    (renesas_get_cpu_rev_integer() == 3))
+-	if ((renesas_get_cpu_type() == RMOBILE_CPU_TYPE_R8A7796) &&
++	if ((renesas_get_cpu_type() == RENESAS_CPU_TYPE_R8A7796) &&
+ 	    (renesas_get_cpu_rev_integer() == 3))
  		priv->hs400_bad_tap = BIT(1) | BIT(3) | BIT(5) | BIT(7);
  
  	/* M3N can use HS400 with manual adjustment */
-@@ -939,20 +939,20 @@ static void renesas_sdhi_filter_caps(struct udevice *dev)
+-	if (renesas_get_cpu_type() == RMOBILE_CPU_TYPE_R8A77965) {
++	if (renesas_get_cpu_type() == RENESAS_CPU_TYPE_R8A77965) {
+ 		priv->adjust_hs400_enable = true;
+ 		priv->adjust_hs400_offset = 3;
+ 		priv->adjust_hs400_calib_table =
+@@ -930,7 +930,7 @@ static void renesas_sdhi_filter_caps(struct udevice *dev)
+ 	}
+ 
+ 	/* E3 can use HS400 with manual adjustment */
+-	if (renesas_get_cpu_type() == RMOBILE_CPU_TYPE_R8A77990) {
++	if (renesas_get_cpu_type() == RENESAS_CPU_TYPE_R8A77990) {
+ 		priv->adjust_hs400_enable = true;
+ 		priv->adjust_hs400_offset = 3;
+ 		priv->adjust_hs400_calib_table =
+@@ -938,9 +938,9 @@ static void renesas_sdhi_filter_caps(struct udevice *dev)
+ 	}
  
  	/* H3 ES1.x, ES2.0 and M3W ES1.[0123] uses 4 tuning taps */
- 	if (((renesas_get_cpu_type() == RMOBILE_CPU_TYPE_R8A7795) &&
--	    (rmobile_get_cpu_rev_integer() <= 2)) ||
-+	    (renesas_get_cpu_rev_integer() <= 2)) ||
- 	    ((renesas_get_cpu_type() == RMOBILE_CPU_TYPE_R8A7796) &&
--	    (rmobile_get_cpu_rev_integer() == 1) &&
--	    (rmobile_get_cpu_rev_fraction() <= 3)))
-+	    (renesas_get_cpu_rev_integer() == 1) &&
-+	    (renesas_get_cpu_rev_fraction() <= 3)))
+-	if (((renesas_get_cpu_type() == RMOBILE_CPU_TYPE_R8A7795) &&
++	if (((renesas_get_cpu_type() == RENESAS_CPU_TYPE_R8A7795) &&
+ 	    (renesas_get_cpu_rev_integer() <= 2)) ||
+-	    ((renesas_get_cpu_type() == RMOBILE_CPU_TYPE_R8A7796) &&
++	    ((renesas_get_cpu_type() == RENESAS_CPU_TYPE_R8A7796) &&
+ 	    (renesas_get_cpu_rev_integer() == 1) &&
+ 	    (renesas_get_cpu_rev_fraction() <= 3)))
  		priv->nrtaps = 4;
- 	else
+@@ -948,9 +948,9 @@ static void renesas_sdhi_filter_caps(struct udevice *dev)
  		priv->nrtaps = 8;
  #endif
  	/* H3 ES1.x and M3W ES1.0 uses bit 17 for DTRAEND */
- 	if (((renesas_get_cpu_type() == RMOBILE_CPU_TYPE_R8A7795) &&
--	    (rmobile_get_cpu_rev_integer() <= 1)) ||
-+	    (renesas_get_cpu_rev_integer() <= 1)) ||
- 	    ((renesas_get_cpu_type() == RMOBILE_CPU_TYPE_R8A7796) &&
--	    (rmobile_get_cpu_rev_integer() == 1) &&
--	    (rmobile_get_cpu_rev_fraction() == 0)))
-+	    (renesas_get_cpu_rev_integer() == 1) &&
-+	    (renesas_get_cpu_rev_fraction() == 0)))
+-	if (((renesas_get_cpu_type() == RMOBILE_CPU_TYPE_R8A7795) &&
++	if (((renesas_get_cpu_type() == RENESAS_CPU_TYPE_R8A7795) &&
+ 	    (renesas_get_cpu_rev_integer() <= 1)) ||
+-	    ((renesas_get_cpu_type() == RMOBILE_CPU_TYPE_R8A7796) &&
++	    ((renesas_get_cpu_type() == RENESAS_CPU_TYPE_R8A7796) &&
+ 	    (renesas_get_cpu_rev_integer() == 1) &&
+ 	    (renesas_get_cpu_rev_fraction() == 0)))
  		priv->read_poll_flag = TMIO_SD_DMA_INFO1_END_RD;
- 	else
+@@ -958,7 +958,7 @@ static void renesas_sdhi_filter_caps(struct udevice *dev)
  		priv->read_poll_flag = TMIO_SD_DMA_INFO1_END_RD2;
-diff --git a/drivers/pinctrl/renesas/pfc-r8a7790.c b/drivers/pinctrl/renesas/pfc-r8a7790.c
-index e1811c4c908..acd6b01f497 100644
---- a/drivers/pinctrl/renesas/pfc-r8a7790.c
-+++ b/drivers/pinctrl/renesas/pfc-r8a7790.c
-@@ -6117,8 +6117,8 @@ static const struct pinmux_bias_reg pinmux_bias_regs[] = {
- static int r8a7790_pinmux_soc_init(struct sh_pfc *pfc)
- {
- 	/* Initialize TDSEL on old revisions */
--	if ((rmobile_get_cpu_rev_integer() == 1) &&
--	    (rmobile_get_cpu_rev_fraction() == 0))
-+	if ((renesas_get_cpu_rev_integer() == 1) &&
-+	    (renesas_get_cpu_rev_fraction() == 0))
- 		sh_pfc_write(pfc, 0xe6060088, 0x00155554);
  
- 	return 0;
-diff --git a/drivers/pinctrl/renesas/pfc-r8a7794.c b/drivers/pinctrl/renesas/pfc-r8a7794.c
-index 29eab2610c1..2f550218182 100644
---- a/drivers/pinctrl/renesas/pfc-r8a7794.c
-+++ b/drivers/pinctrl/renesas/pfc-r8a7794.c
-@@ -5818,8 +5818,8 @@ static const struct pinmux_bias_reg pinmux_bias_regs[] = {
- static int r8a7794_pinmux_soc_init(struct sh_pfc *pfc)
- {
- 	/* Initialize TDSEL on old revisions */
--	if ((rmobile_get_cpu_rev_integer() == 1) &&
--	    (rmobile_get_cpu_rev_fraction() == 0))
-+	if ((renesas_get_cpu_rev_integer() == 1) &&
-+	    (renesas_get_cpu_rev_fraction() == 0))
- 		sh_pfc_write(pfc, 0xe6060068, 0x55555500);
+ 	/* V3M handles SD0H differently than other Gen3 SoCs */
+-	if (renesas_get_cpu_type() == RMOBILE_CPU_TYPE_R8A77970)
++	if (renesas_get_cpu_type() == RENESAS_CPU_TYPE_R8A77970)
+ 		priv->needs_clkh_fallback = true;
+ 	else
+ 		priv->needs_clkh_fallback = false;
+diff --git a/drivers/net/ravb.c b/drivers/net/ravb.c
+index 733f08ad4ea..4764bca7082 100644
+--- a/drivers/net/ravb.c
++++ b/drivers/net/ravb.c
+@@ -392,8 +392,8 @@ static int ravb_dmac_init(struct udevice *dev)
+ 	writel(0x00222210, eth->iobase + RAVB_REG_TGC);
  
- 	return 0;
+ 	/* Delay CLK: 2ns (not applicable on R-Car E3/D3) */
+-	if ((renesas_get_cpu_type() == RMOBILE_CPU_TYPE_R8A77990) ||
+-	    (renesas_get_cpu_type() == RMOBILE_CPU_TYPE_R8A77995))
++	if ((renesas_get_cpu_type() == RENESAS_CPU_TYPE_R8A77990) ||
++	    (renesas_get_cpu_type() == RENESAS_CPU_TYPE_R8A77995))
+ 		return 0;
+ 
+ 	if (!dev_read_u32(dev, "rx-internal-delay-ps", &delay)) {
 diff --git a/drivers/spi/renesas_rpc_spi.c b/drivers/spi/renesas_rpc_spi.c
-index 8a93d1b1bfd..165c0a1351a 100644
+index 165c0a1351a..8aff2238645 100644
 --- a/drivers/spi/renesas_rpc_spi.c
 +++ b/drivers/spi/renesas_rpc_spi.c
-@@ -212,7 +212,7 @@ static u32 rpc_spi_get_strobe_delay(void)
+@@ -212,11 +212,11 @@ static u32 rpc_spi_get_strobe_delay(void)
  	 *       7: On other R-Car Gen3
  	 *      15: On R-Car Gen4
  	 */
--	if (cpu_type == RMOBILE_CPU_TYPE_R8A7796 && rmobile_get_cpu_rev_integer() == 1)
-+	if (cpu_type == RMOBILE_CPU_TYPE_R8A7796 && renesas_get_cpu_rev_integer() == 1)
+-	if (cpu_type == RMOBILE_CPU_TYPE_R8A7796 && renesas_get_cpu_rev_integer() == 1)
++	if (cpu_type == RENESAS_CPU_TYPE_R8A7796 && renesas_get_cpu_rev_integer() == 1)
  		return RPC_PHYCNT_STRTIM(6);
- 	else if (cpu_type == RMOBILE_CPU_TYPE_R8A779F0 ||
- 		 cpu_type == RMOBILE_CPU_TYPE_R8A779G0 ||
+-	else if (cpu_type == RMOBILE_CPU_TYPE_R8A779F0 ||
+-		 cpu_type == RMOBILE_CPU_TYPE_R8A779G0 ||
+-		 cpu_type == RMOBILE_CPU_TYPE_R8A779H0)
++	else if (cpu_type == RENESAS_CPU_TYPE_R8A779F0 ||
++		 cpu_type == RENESAS_CPU_TYPE_R8A779G0 ||
++		 cpu_type == RENESAS_CPU_TYPE_R8A779H0)
+ 		return RPC_PHYCNT_STRTIM2(15);
+ 	else
+ #endif
 -- 
 2.43.0
 
