@@ -4,72 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AABEC54798
-	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 11:24:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84090C54798
+	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 13:12:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 482CC87FFA;
-	Tue, 27 Feb 2024 12:24:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 8EB1B87FD6;
+	Tue, 27 Feb 2024 14:12:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="u6IvXM34";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 3812587FEE; Tue, 27 Feb 2024 12:24:20 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1709039563;
+	bh=6dodOHl7/PjrTpT92xuIt9y7/DV67W1N+5EGuC1ODYs=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=z7OCgOqYkjB/zpYwJlCb0JgjkI7nNGOr7PWdOJSoE4/Fc9TJguqeeAWITsgcnu2BB
+	 DlGaLLJx60c2SoY4pCqMJRm01rejBMyBE/IOpgaTT3iVyax9ry6fhxbn899CY0EVxD
+	 5QAQ/u0jYMklwGaXrYE3//P0Lgewps8pksvFuyj7dysHrciXkblrsPbBfuYSVT4rM4
+	 LLM7Sxe24rz7PC2EIiG1jR71/J6yXO0EuYl1g/d/tuvfN3Pp3Vne4fe7sPbHGq2SXW
+	 fiRsxi5MylmXyLHvd53vRp6jpcOaOOjfy/BWcxn833ue+91WTwIbVwkQ9rF8cPTeAv
+	 XlAXHahd2Q0bg==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C2EAB87F64
- for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 12:24:17 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41RBODQB037585;
- Tue, 27 Feb 2024 05:24:13 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1709033053;
- bh=QImEEQKpYW2qXe5+tWCF4J3le3acpESvfE+sG/sFbWw=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=u6IvXM34TNGq8TxipXmHBkjg3J/2TE4ELDUmB8gRlbLzlz7NZKBeRW/su47LEHlUT
- s5IpsVYQ93qMGfni4m/IU4k2R14Eh3EXHWWFN0oFdwsrFRG8lR3NTfKQIS2ZvKJwVj
- 6BfCv7HKt3o9l1kXHCAk7rxoRrHihKX77SO4lQwU=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41RBOD5C024868
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 27 Feb 2024 05:24:13 -0600
-Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 27
- Feb 2024 05:24:13 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 27 Feb 2024 05:24:13 -0600
-Received: from [172.24.227.220] (chintan-thinkstation-p360-tower.dhcp.ti.com
- [172.24.227.220])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41RBOAEi006785;
- Tue, 27 Feb 2024 05:24:10 -0600
-Message-ID: <ee1d16fd-b99b-4b07-97bb-a896e179157a@ti.com>
-Date: Tue, 27 Feb 2024 16:54:09 +0530
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 91E2887DAB;
+ Tue, 27 Feb 2024 14:12:39 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1709039562;
+ bh=6dodOHl7/PjrTpT92xuIt9y7/DV67W1N+5EGuC1ODYs=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=FwwSqARa49EQqvKKSWUvP8HOm2oNkVuWmGYx90F+fj+nZLSWnWM2CaaHWhz4olDE4
+ gOA2fQtjJGgzjsaBkU1gwIadmD1jExC/xVvgrx9/LG+eHZpTzX2aA6vkjIduOpWyjA
+ b1LuMaIVVZk5PY1vv4rSLg7Sot8zBS/8awy96aRAr20NzYJ2l9M+LhVHy11aeRKFRN
+ OAOuTBbLxgEnRPuTvoBM7I0AOV/XbVn5sE1oEF0G4cpLhbG1uHFZjc1qB5wf34q0Wu
+ DXpy0cd8AGqXhP99k3pObedX0iQDDaePagNuuKPeEVpJvtC8fK7QFT1A77fxultO+v
+ Kt6CZ44TtO/fg==
+Message-ID: <7ab604fb-0fec-4f5e-8708-7a3a7e2cb568@denx.de>
+Date: Tue, 27 Feb 2024 13:01:56 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 07/10] arm: mach-k3: am625_init: Probe AM65 CPSW NUSS
+Subject: Re: [PATCH 4/6] usb: kbd: Ignore Yubikeys
 Content-Language: en-US
-To: Nishanth Menon <nm@ti.com>
-CC: Siddharth Vadapalli <s-vadapalli@ti.com>, <trini@konsulko.com>,
- <sjg@chromium.org>, <afd@ti.com>, <vigneshr@ti.com>,
- <u-boot@lists.denx.de>, <dannenberg@ti.com>, <srk@ti.com>
-References: <20240112064759.1801600-1-s-vadapalli@ti.com>
- <20240112064759.1801600-8-s-vadapalli@ti.com>
- <20240112123055.5h3qio3w55godccy@gallstone>
- <1c0040f2-0113-4580-9af7-510d9320407b@ti.com>
- <20240123205720.vqfua5i2qkfuryms@flatness>
-From: Chintan Vankar <c-vankar@ti.com>
-In-Reply-To: <20240123205720.vqfua5i2qkfuryms@flatness>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+To: Janne Grunau <j@jannau.net>, Mark Kettenis <mark.kettenis@xs4all.nl>
+Cc: Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de, asahi@lists.linux.dev, Hector Martin <marcan@marcan.st>
+References: <20240221-asahi-keyboards-v1-0-814b2e741790@jannau.net>
+ <20240221-asahi-keyboards-v1-4-814b2e741790@jannau.net>
+ <2acb9976-a40e-4977-b7ca-2462e84251ed@denx.de>
+ <4c1c6b72-ffe5-4ff3-8d12-9fc0b956643d@app.fastmail.com>
+ <85d561a6-54cb-4c1c-bfb0-559163e859c0@denx.de>
+ <874jdvj6kx.fsf@bloch.sibelius.xs4all.nl>
+ <99e1b526-e791-46a0-8d58-d9bcbf48d3f8@app.fastmail.com>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <99e1b526-e791-46a0-8d58-d9bcbf48d3f8@app.fastmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,30 +75,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 24/01/24 02:27, Nishanth Menon wrote:
-> On 15:49-20240122, Chintan Vankar wrote:
->>
->> On 12/01/24 18:00, Nishanth Menon wrote:
->>> On 12:17-20240112, Siddharth Vadapalli wrote:
->>>> From: Kishon Vijay Abraham I <kishon@ti.com>
+On 2/27/24 8:13 AM, Janne Grunau wrote:
+> Hej,
+> 
+> On Mon, Feb 26, 2024, at 21:47, Mark Kettenis wrote:
+>>> Date: Sun, 25 Feb 2024 22:57:23 +0100
+>>> From: Marek Vasut <marex@denx.de>
+>>>
+>>> On 2/25/24 5:07 PM, Janne Grunau wrote:
+>>>> Hej,
 >>>>
->>>> In order to support Ethernet boot on AM62x, probe AM65 CPSW NUSS driver
->>>> in board_init_f().
->>> Why? doesn't the DM framework handle this?
-Hello,
-In board_init_f(), the ESM driver which is modeled as UClASS_MISC driver
-seems to be probed explicitly. So it appears to me that the DM framework 
-is probably not capable of handling probe of UCLASS_MISC. The am65-cpsw 
-driver is also a UCLASS_MISC driver because of which it has to be probed 
-similar to the ESM driver. Can someone suggest me if there is a way to 
-trigger probe of all UCLASS_MISC drivers using the DM framework or 
-am65-cpsw should be probed in this way only ?
+>>>> On Wed, Feb 21, 2024, at 13:41, Marek Vasut wrote:
+>>>>> On 2/21/24 08:25, Janne Grunau via B4 Relay wrote:
+>>>>>> From: Hector Martin <marcan@marcan.st>
+>>>>>>
+>>>>>> We currently only support one USB keyboard device, but some devices
+>>>>>> emulate keyboards for other purposes. Most commonly, people run into
+>>>>>> this with Yubikeys, so let's ignore those.
+>>>>>>
+>>>>>> Even if we end up supporting multiple keyboards in the future, it's
+>>>>>> safer to ignore known non-keyboard devices.
+>>>>>>
+>>>>>> Signed-off-by: Hector Martin <marcan@marcan.st>
+>>>>>> ---
+>>>>>>     common/usb_kbd.c | 19 +++++++++++++++++++
+>>>>>>     1 file changed, 19 insertions(+)
+>>>>>>
+>>>>>> diff --git a/common/usb_kbd.c b/common/usb_kbd.c
+>>>>>> index 4cbc9acb73..774d3555d9 100644
+>>>>>> --- a/common/usb_kbd.c
+>>>>>> +++ b/common/usb_kbd.c
+>>>>>> @@ -120,6 +120,15 @@ struct usb_kbd_pdata {
+>>>>>>     
+>>>>>>     extern int __maybe_unused net_busy_flag;
+>>>>>>     
+>>>>>> +/*
+>>>>>> + * Since we only support one usbkbd device in the iomux,
+>>>>>> + * ignore common keyboard-emulating devices that aren't
+>>>>>> + * real keyboards.
+>>>>>> + */
+>>>>>> +const uint16_t vid_blocklist[] = {
+>>>>>> +	0x1050, /* Yubico */
+>>>>>> +};
+>>>>>> +
+>>>>>>     /* The period of time between two calls of usb_kbd_testc(). */
+>>>>>>     static unsigned long kbd_testc_tms;
+>>>>>>     
+>>>>>> @@ -465,6 +474,7 @@ static int usb_kbd_probe_dev(struct usb_device *dev, unsigned int ifnum)
+>>>>>>     	struct usb_endpoint_descriptor *ep;
+>>>>>>     	struct usb_kbd_pdata *data;
+>>>>>>     	int epNum;
+>>>>>> +	int i;
+>>>>>>     
+>>>>>>     	if (dev->descriptor.bNumConfigurations != 1)
+>>>>>>     		return 0;
+>>>>>> @@ -480,6 +490,15 @@ static int usb_kbd_probe_dev(struct usb_device *dev, unsigned int ifnum)
+>>>>>>     	if (iface->desc.bInterfaceProtocol != USB_PROT_HID_KEYBOARD)
+>>>>>>     		return 0;
+>>>>>>     
+>>>>>> +	for (i = 0; i < ARRAY_SIZE(vid_blocklist); i++) {
+>>>>>> +		if (dev->descriptor.idVendor == vid_blocklist[i]) {
+>>>>>> +			printf("Ignoring keyboard device 0x%x:0x%x\n",
+>>>>>> +			       dev->descriptor.idVendor,
+>>>>>> +			       dev->descriptor.idProduct);
+>>>>>> +			return 0;
+>>>>>> +		}
+>>>>>> +	}
+>>>>>
+>>>>> I vaguely recall a discussion about previous version of this, I think
+>>>>> the suggestion was to make the list of ignored devices configurable via
+>>>>> environment variable, so users can add to that list from U-Boot shell.
+>>>>> Would it be possible to make it work this way ?
+>>>>
+>>>> oh, I completely forgot that this patch was already submitted. I briefly looked through asahi tree for related patches and did not check whether this was previously submitted.
+>>>> I've added environment based blocking as separate patch with blocking either complete vendor IDs or vendor, product ID combinations. A separate patch to simplify authorship tracking and the implementation doesn't share any code.
+>>>
+>>> It would be better to have only one patch which does not hard-code any
+>>> USB IDs, and then add those blocked IDs via U-Boot default environment
+>>> for this specific machine. We cannot predict what yubico will do in the
+>>> future, whether they might make a device that shouldn't be blocked for
+>>> example. If they do, the user should be able to unblock their device by
+>>> running e.g. '=> setenv usb_blocklist' instead of updating their bootloader.
+>>>
+>>> I think a simple list of blocked VID:PID pairs, maybe with wildcards,
+>>> would be nice, i.e. something like 'usb_blocklist=1234:5678,1050:*' to
+>>> block device 0x1234:0x5678 and all devices with VID 0x1050 . That should
+>>> be easy to parse with strtok()/strtol() or some such and the code should
+>>> not be too complex.
+>>
+>> I do like the idea of having a configurable list of usb devices to
+>> ignore.  The U-Boot USB stack is still not perfect and there are still
+>> USB devices that will prevent us from booting when connected.  The
+>> list will provide a nice workaround for that issue.
 > 
->> Can you suggest how can we do this ?
+> That sounds like we should ignore USB devices in usb_scan_device() and not in the keyboard driver.
+
+Maybe that is even better and more generic solution ?
+
+>> But the yubikeys will cause the same problem on other boards as well.
+>> So I think it makes sense to put those in a default list.
 > 
-> Did'nt you guys  just discuss this in
-> https://lore.kernel.org/all/48c63fc4-9f06-4066-b206-a0a548936dcd@ti.com/
-> ?
-> 
+> We could move the list to a CONFIG symbol which has Yubikey's vendor ID as default value now that we do string parsing anyway.
+
+There is include/env_default.h to define default env variable values too.
