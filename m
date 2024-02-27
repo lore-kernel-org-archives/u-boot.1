@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9A2AC5478C
-	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 20:42:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70C77C54798
+	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 20:42:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF5A68803A;
-	Tue, 27 Feb 2024 21:41:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6B72B8805B;
+	Tue, 27 Feb 2024 21:41:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 220FE8800A; Tue, 27 Feb 2024 21:41:05 +0100 (CET)
-Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
- [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id F1A0D8800F
- for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 21:40:58 +0100 (CET)
+ id 3890A8800F; Tue, 27 Feb 2024 21:41:05 +0100 (CET)
+Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
+ [210.160.252.171])
+ by phobos.denx.de (Postfix) with ESMTP id 3B66E87E92
+ for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 21:41:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-IronPort-AV: E=Sophos;i="6.06,188,1705330800"; d="scan'208";a="199492148"
+X-IronPort-AV: E=Sophos;i="6.06,188,1705330800"; d="scan'208";a="195553921"
 Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie6.idc.renesas.com with ESMTP; 28 Feb 2024 05:40:58 +0900
+ by relmlie5.idc.renesas.com with ESMTP; 28 Feb 2024 05:41:00 +0900
 Received: from renesas-deb12.mshome.net (unknown [10.226.92.31])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id CA73A400C4EC;
- Wed, 28 Feb 2024 05:40:56 +0900 (JST)
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id 15DC6400C4EC;
+ Wed, 28 Feb 2024 05:40:58 +0900 (JST)
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
 Cc: Paul Barker <paul.barker.ct@bp.renesas.com>,
 	u-boot@lists.denx.de
-Subject: [PATCH v3 7/8] pmic: raa215300: Bind sysreset driver
-Date: Tue, 27 Feb 2024 20:40:34 +0000
-Message-Id: <20240227204035.3761-8-paul.barker.ct@bp.renesas.com>
+Subject: [PATCH v3 8/8] board: rzg2l: Support reset via Renesas RAA215300 PMIC
+Date: Tue, 27 Feb 2024 20:40:35 +0000
+Message-Id: <20240227204035.3761-9-paul.barker.ct@bp.renesas.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240227204035.3761-1-paul.barker.ct@bp.renesas.com>
 References: <20240227204035.3761-1-paul.barker.ct@bp.renesas.com>
@@ -56,35 +56,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If SYSRESET support is enabled for the RAA215300 PMIC, we need to bind
-the raa215300_sysreset driver as a child device of the PMIC.
+With the SYSRESET subsystem enabled we do not need to implement
+reset_cpu() in the board directory.
 
 Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
- drivers/power/pmic/raa215300.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ board/renesas/rzg2l/rzg2l.c           | 8 --------
+ configs/renesas_rzg2l_smarc_defconfig | 2 ++
+ 2 files changed, 2 insertions(+), 8 deletions(-)
 
-diff --git a/drivers/power/pmic/raa215300.c b/drivers/power/pmic/raa215300.c
-index b93a0d3a084a..a581a1f6dc15 100644
---- a/drivers/power/pmic/raa215300.c
-+++ b/drivers/power/pmic/raa215300.c
-@@ -29,6 +29,15 @@ static const struct udevice_id raa215300_ids[] = {
- 
- static int raa215300_bind(struct udevice *dev)
+diff --git a/board/renesas/rzg2l/rzg2l.c b/board/renesas/rzg2l/rzg2l.c
+index 73201a8c69e5..0f6d6e7f514f 100644
+--- a/board/renesas/rzg2l/rzg2l.c
++++ b/board/renesas/rzg2l/rzg2l.c
+@@ -56,11 +56,3 @@ int board_init(void)
  {
-+	if (IS_ENABLED(CONFIG_SYSRESET_RAA215300)) {
-+		struct driver *drv = lists_driver_lookup_name("raa215300_sysreset");
-+		if (!drv)
-+			return -ENOENT;
-+
-+		return device_bind(dev, drv, dev->name, NULL, dev_ofnode(dev),
-+				   NULL);
-+	}
-+
  	return 0;
  }
- 
+-
+-void reset_cpu(void)
+-{
+-	/*
+-	 * TODO: Implement reset support once TrustedFirmware supports
+-	 * the appropriate call.
+-	 */
+-}
+diff --git a/configs/renesas_rzg2l_smarc_defconfig b/configs/renesas_rzg2l_smarc_defconfig
+index 2cab79329db4..21365a21fe8c 100644
+--- a/configs/renesas_rzg2l_smarc_defconfig
++++ b/configs/renesas_rzg2l_smarc_defconfig
+@@ -55,3 +55,5 @@ CONFIG_PMIC_RAA215300=y
+ CONFIG_DM_REGULATOR=y
+ CONFIG_DM_REGULATOR_FIXED=y
+ CONFIG_DM_REGULATOR_GPIO=y
++CONFIG_SYSRESET=y
++CONFIG_SYSRESET_RAA215300=y
 -- 
 2.44.0
 
