@@ -4,72 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E1B2C48BF6
-	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 02:25:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 980FEC5478C
+	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 02:37:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D3F387FA5;
-	Tue, 27 Feb 2024 03:25:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A861387F4B;
+	Tue, 27 Feb 2024 03:37:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VtuUo3f9";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yBoUFc0J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1EFF987BFD; Tue, 27 Feb 2024 03:25:27 +0100 (CET)
-Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
- [IPv6:2607:f8b0:4864:20::b36])
+ id A528D87F6D; Tue, 27 Feb 2024 03:37:32 +0100 (CET)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 57D1187F6D
- for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 03:25:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1136587F4B
+ for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 03:37:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb36.google.com with SMTP id
- 3f1490d57ef6-dcd94fb9e4dso4077048276.2
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 18:25:23 -0800 (PST)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-412ad927275so524315e9.3
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 18:37:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1709000721; x=1709605521; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ d=linaro.org; s=google; t=1709001447; x=1709606247; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=VufDSU/qx5WGJqvicnMNt/PdXj1HsFP60F4EYkoY47Y=;
- b=VtuUo3f9qa89thrKKhZXis+bmkxDRLGAKDbKTfsQFCg/DQkRzpredMiQXXqesXqAsT
- NAMWEBlqGxsYCqfZt7RHk6Ybrq4eh/6WHdORnpyiNNZN5aLd1TMp3K/g/LpbwQ57ZoCo
- 7LCo/LHUytRaG75/VXcFFySFomW3+9y82GpIw=
+ bh=T7jUBPZ5js/lDQdT/8Pipf1ZmsaR6/CGCl7LeCu89qs=;
+ b=yBoUFc0Jhb3ZcAYUIDk5tgbkrX1uQEuQtn4zYBKGPDIi75+RgbnUbWN6QNUGGqg5TJ
+ 9k6O9/HslmUIMh4CwVoA6nBC+ieAyY+VFhvMx97BVZ0Z1xJaZhD24UAX/BSc4PE5PDGZ
+ UWnp5nfqBDMFMcSjs35i2II2FvTmkm3KaZuvvyKfr87KxkuEKzbpBYvyP8CYJ7APs7DF
+ +mJFzqGi/0OmId8ruIN/kr1h11FGul7GOxEKlWe4Ihh8fS75Xzfz95mvAi00ek7zQqCm
+ tN/2AdOjO5NWmqqQ7Oq5w6BPQhyXALntr8f9Iz4r2Ppfte9nzRx3E2Kff88Lb9mw3LvF
+ 3euQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709000721; x=1709605521;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ d=1e100.net; s=20230601; t=1709001447; x=1709606247;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=VufDSU/qx5WGJqvicnMNt/PdXj1HsFP60F4EYkoY47Y=;
- b=afG6Kres/UgxhP9pCjiYPm8WFY4L710tSQ+h2Mxdo8Y58wMb8OC8LckqGAr39CKHJd
- w9JdYWt4LaNY7KQLaLLCIR0bBSTPPX/3zLIvwmK26xjIxQ/HPKsQAhQG6HK/psnt5bRr
- pUDXbfHwEU7yI8mlP7gxoTmEmi8ADF9vdi6zl15IUi0OUWGCCNtkXvWqvRO8cazEDzIc
- 8IJTmiCdsgvmAGbOTtjtotWdjggyGYa8GHXu6rY+LwC5B5qGDo4NxPsJIupAsYizSvP+
- vFGhd+ifZ0C0d8FPHIzrJExI1eM/UYaWnXiqjaX4epKiWjsNmCmxgfSi8adtb/E+QhDL
- A9Bw==
-X-Gm-Message-State: AOJu0YwhE5B+mObNsDTq2CkxDJF46eYS6oMy3d/bjwX19gC/AACtnlPl
- JHEcm8mXAXBzFYA9HHEOiN4ZV8p8nKfUuGJDOqlxB5CsCXLBOxOE47vdH08ExBZTx9NzPX2zCa3
- v
-X-Google-Smtp-Source: AGHT+IHYrkxEsFZQiVvG3gjA2Y8GIH3zBXtgUa2mepNon2MUx6z1eicbhcwesVCReh/GqJ5a1dISew==
-X-Received: by 2002:a25:c5c8:0:b0:dcf:47b6:9155 with SMTP id
- v191-20020a25c5c8000000b00dcf47b69155mr1037705ybe.54.1709000721596; 
- Mon, 26 Feb 2024 18:25:21 -0800 (PST)
-Received: from bill-the-cat (065-184-194-195.res.spectrum.com.
- [65.184.194.195]) by smtp.gmail.com with ESMTPSA id
- y14-20020a25860e000000b00dcdac51bad9sm1169783ybk.49.2024.02.26.18.25.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Feb 2024 18:25:20 -0800 (PST)
-Date: Mon, 26 Feb 2024 21:25:18 -0500
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
-Subject: [ANN] U-Boot v2024.04-rc3 released
-Message-ID: <20240227022518.GJ3040305@bill-the-cat>
+ bh=T7jUBPZ5js/lDQdT/8Pipf1ZmsaR6/CGCl7LeCu89qs=;
+ b=eNHHAjl2Yt+zNe3bZQno9Kgnj7FZKTnOStB+mgFf/ypPk7cYGTFU9kUVdc9fr+JRG2
+ nKAwTMiqRiYZwd3QsLZ1KFqwr6z5tJpF9krRjq5ap0DwxhNX9IPRCznNoY536sJ4XDyK
+ mabEVyZXEzZGUrHsH4Z9hqUGAej6ZDss3OxhoxAY4ktS5a3I/F56Stu9/F54cRYkDUfX
+ r966SBLEChkWLDvu9YbZm7nrU2p5/Ldfd2leTYYnoSKtGpXAvuA0LIAPt+AfcI2yWqmw
+ Y8KTvNA1XPDJmfcGLxeVTJrhRXrtXhp04Jp6RYh77XuAAlSoj23GFxfqpQCHXFgwi8sy
+ 8WTw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUt8mDuMCJpLP1RmAF70EHE/JjjACRNzcfKYn7BjSdg7/6zVstsA8U/5WeIGYW9hkYSTae8FSM332kWtuxRzVPteaI/6w==
+X-Gm-Message-State: AOJu0YysPN68VLZ9CR9cGHRxQIAZCXHyEYZeRViyVKGfT22o1H+SwqPg
+ 3MT1ca6kfCds6OF9u5qCsTSI+74Byh4EEcI8Y/PpfuBpxA+w3RH8qMHhrYuXF1I=
+X-Google-Smtp-Source: AGHT+IEfLpc7ve4htnYqkyf7UwBF5RfLXzqvdvHRj24dOqbbT25Vb3R6Xt7JvF7kwOZBeQaLWiXYhQ==
+X-Received: by 2002:a05:600c:138f:b0:411:a5f9:26f5 with SMTP id
+ u15-20020a05600c138f00b00411a5f926f5mr7220220wmf.38.1709001447434; 
+ Mon, 26 Feb 2024 18:37:27 -0800 (PST)
+Received: from [192.168.1.78] (host-92-17-96-232.as13285.net. [92.17.96.232])
+ by smtp.gmail.com with ESMTPSA id
+ y5-20020a1c4b05000000b004129f87a2c6sm106473wma.1.2024.02.26.18.37.26
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 26 Feb 2024 18:37:26 -0800 (PST)
+Message-ID: <940ef1ef-0f70-42ab-8503-f1a2965cc297@linaro.org>
+Date: Tue, 27 Feb 2024 02:37:25 +0000
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="rvipUUSNoOQRg2Gm"
-Content-Disposition: inline
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 00/10] Add initial support for IPQ9574 based boards
+Content-Language: en-US
+To: Varadarajan Narayanan <quic_varada@quicinc.com>, u-boot@lists.denx.de
+Cc: FUKAUMI Naoki <naoki@radxa.com>, Hai Pham <hai.pham.ud@renesas.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Konrad Dybcio <konrad.dybcio@linaro.org>, Lukasz Majewski <lukma@denx.de>,
+ Marek Vasut <marex@denx.de>, Mathieu Othacehe <othacehe@gnu.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Peng Fan
+ <peng.fan@nxp.com>, Sean Anderson <seanga2@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tianling Shen <cnsztl@gmail.com>,
+ Tom Rini <trini@konsulko.com>
+References: <20240226100807.1095607-1-quic_varada@quicinc.com>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20240226100807.1095607-1-quic_varada@quicinc.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,45 +107,153 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+HI Varada,
 
---rvipUUSNoOQRg2Gm
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 26/02/2024 10:07, Varadarajan Narayanan wrote:
+> These patches introduce the initial support code needed
+> for the QTI IPQ9574 SoC and RDP433 board.
 
-Hey all,
+Awesome!
+> 
+> 	SoC	: QTI IPQ9574
+> 	RAM	: 2GB DDR4
+> 	Flash	: eMMC 8GB
+> 	WiFi	: 1 x 2.4GHz, 1 x 5GHz, 1 x 6GHz
+> 
+> New to both patman and posting to U-Boot. Please let
+> me know if something is not correct, will try to
+> rectify to the best of my abilities.
 
-It's late in the day, but still release day and so here's -rc3. I've
-also pushed this to the next branch and that is now open.
+Patches came through just fine, thanks! I haven't used patman
+personally, but I have used the b4 tool, I'd recommend giving it a spin
+if you haven't yet. Your get_maintainers.pl options might need some
+tweaking too (the defaults from b4 seem to work better ime).
 
-In terms of a changelog,=20
-git log --merges v2024.04-rc2..v2024.04-rc3
-contains what I've pulled but as always, better PR messages and tags
-will provide better results here.
+I've spent some time going through your series and there's a lot to go
+over, so apologies if this gets a bit long.
 
-I hope to get back on schedule and that means the rest of the rcs every
-other Monday, and with final release on Tuesday, April 2nd, 2024. Thanks
-all!
+I'm planning to pick up this[1] patch series this week and I'm sorry to
+say it has some fairly major conflicts with your work here. My series
+makes some fairly significant changes to Qualcomm support in U-Boot
+(moving to upstream Linux DT and getting rid of most of the compile time
+board configuration among other things).
 
---=20
-Tom
+The thing I'm mostly concerned with is the totally custom init code and
+linker script. I discovered this branch[2] which seems to have a fairly
+complete git history, but there's still a lot of unknowns.
 
---rvipUUSNoOQRg2Gm
-Content-Type: application/pgp-signature; name="signature.asc"
+* What is the custom linker script for (which isn't handled by the
+default one)?
+* Why do you skip U-Boot relocation (GD_FLG_SKIP_RELOC)?
+* How is U-Boot expected to be flashed and consequently loaded on this
+platform? I get the impression that SBL1 jumps to it directly? Is it
+built into an XBL image like on the mobile/IoT platforms, or flashed to
+it's own partition, or to SPI flash?
 
------BEGIN PGP SIGNATURE-----
+In general there is very little context around the code being added
+here, and as a result it's hard to understand what exactly is going on
+and why things have been done a certain way.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXdSA4ACgkQFHw5/5Y0
-tyxiCAv+KMfiW/LconySScZAKhodTm+C7ghn4YLKY7vm0003Bnh2kyAcVr+c1Gwa
-FnBA+E0C1ry2lqu02LEStlibVA4z+0/otin6YmjFHb8k2wa5+M3clYn7ve6kPGtq
-x+yhwW2yZIRfSmfNHlpLd9dGmW3csZYDIVgDRBhtz6oKpfjV3N0M80GQ4tV9SyIj
-kIrbHCnX2vI5tYmA8O2f+W4og1o82Okcyz8f2RLGLtD4jaSNfJOcfdNsqiUKnmM1
-YsjoGo9VKoPOFNzuuy6/rnthb5N2p3iJNSZXPbB92c220484gfjTkwcFJ3JLRbRp
-WMeuYlyeLyOzeGVBLgHExUkxiPQF5M3O5R5pt91BymTu2W6tE0+lPRdtUh5v/uzl
-TdAp/24DX/yQFcO0688663HH3fBWnU4RS5virkR/fnQHSuKimVYNMP3eIa8xln01
-75n3egp5hkxgiLf7GiCZVNtiTvPnSSZk3yaOMjVb+RdDppLYVZYmEUDOeUwrNuxo
-vVxiNprd
-=b7tl
------END PGP SIGNATURE-----
+I'll leave some more detailed comments in line, but I think initially I
+would just like to get a better understanding of the situation here, so
+answers to the questions above would be most helpful!
 
---rvipUUSNoOQRg2Gm--
+Please also have a look at reworking this series on top of my patches
+linked at [1], if you have any issues or questions then please do get in
+touch with me via email, or better via the #u-boot IRC channel on OFTC,
+my nick there is calebccff.
+
+Regarding my series, the notable changes are in how mach-snapdragon is
+handled: the target specific memory maps have been dropped in favour of
+reading the memory map from DT. The sysmap headers are also gone,
+instead the defines are moved to the relevant driver (mostly clock/pinctrl).
+
+I think it would be sensible to (for example) introduce
+mach-snapdragon/smem.c for handling stuff like your env_get_location()
+implementation (it would provide smem_env_get_location() which would be
+called from env_get_location() in board.c).
+
+You'll probably also want to skip the carve_out_reserved_memory() call
+for now.
+
+[1]:
+https://lore.kernel.org/u-boot/20240226-b4-qcom-common-target-v5-0-10c8e078befb@linaro.org/
+[2]:
+https://git.codelinaro.org/clo/qsdk/oss/boot/u-boot/-/tree/NHSS.QSDK.12.4.5
+> 
+> Thanks
+> Varada
+
+Kind regards,
+> 
+> 
+> Varadarajan Narayanan (10):
+>   mach-snapdragon: Add support for IPQ9574
+>   mach-snapdragon: ipq9574: Add SMEM defines needed for IPQ9574
+>   clk/qcom: Add support for clock registers in IPQ9574
+>   clk/qcom: Include IPQ9574
+>   mach-snapdragon: Update gd->ram_size in msm_fixup_memory
+>   pinctrl: qcom: Add support for 'pull-down'
+>   pinctrl: qcom: Include IPQ9574
+>   mmc: msm_sdhci: Handle different vendor cap register offsets
+>   mmc: msm_sdhci: Reset clocks before reconfiguration
+>   board: qualcomm: Add support for IPQ9574 RDP433
+> 
+>  arch/arm/dts/Makefile                         |    2 +
+>  arch/arm/dts/ipq9574-default.dts              |  167 +++
+>  arch/arm/dts/ipq9574-rdp433-mht-phy.dts       |  208 +++
+>  arch/arm/dts/ipq9574.dtsi                     |  771 ++++++++++
+>  arch/arm/mach-snapdragon/Kconfig              |   15 +
+>  arch/arm/mach-snapdragon/Makefile             |    1 +
+>  arch/arm/mach-snapdragon/dram.c               |   10 +-
+>  .../include/mach/sysmap-ipq9574.h             |  252 ++++
+>  arch/arm/mach-snapdragon/init_ipq9574.c       |   81 +
+>  board/qualcomm/ipq9574/Kconfig                |   15 +
+>  board/qualcomm/ipq9574/Makefile               |    4 +
+>  board/qualcomm/ipq9574/board_init.c           |  326 ++++
+>  board/qualcomm/ipq9574/ipq9574.c              |  170 +++
+>  board/qualcomm/ipq9574/ipq9574.h              |   75 +
+>  board/qualcomm/ipq9574/u-boot-x32.lds         |  250 ++++
+>  board/qualcomm/ipq9574/u-boot-x64.lds         |  188 +++
+>  configs/ipq9574_mmc_defconfig                 |  118 ++
+>  drivers/clk/qcom/Kconfig                      |    8 +
+>  drivers/clk/qcom/Makefile                     |    1 +
+>  drivers/clk/qcom/clock-ipq9574.c              | 1320 +++++++++++++++++
+>  drivers/clk/qcom/clock-qcom.c                 |   32 +
+>  drivers/clk/qcom/clock-qcom.h                 |    8 +
+>  drivers/mmc/msm_sdhci.c                       |   21 +-
+>  drivers/pinctrl/qcom/Kconfig                  |    7 +
+>  drivers/pinctrl/qcom/Makefile                 |    1 +
+>  drivers/pinctrl/qcom/pinctrl-ipq9574.c        |   77 +
+>  drivers/pinctrl/qcom/pinctrl-qcom.c           |    2 +
+>  include/configs/ipq9574.h                     |  111 ++
+>  include/dt-bindings/clock/gcc-ipq9574.h       |  156 ++
+>  include/dt-bindings/net/qti-ipqsoc.h          |   20 +
+>  include/dt-bindings/pinctrl/pinctrl-ipqsoc.h  |   19 +
+>  include/dt-bindings/reset/ipq9574-reset.h     |   54 +
+>  include/smem.h                                |   78 +
+>  33 files changed, 4563 insertions(+), 5 deletions(-)
+>  create mode 100644 arch/arm/dts/ipq9574-default.dts
+>  create mode 100644 arch/arm/dts/ipq9574-rdp433-mht-phy.dts
+>  create mode 100644 arch/arm/dts/ipq9574.dtsi
+>  create mode 100644 arch/arm/mach-snapdragon/include/mach/sysmap-ipq9574.h
+>  create mode 100644 arch/arm/mach-snapdragon/init_ipq9574.c
+>  create mode 100644 board/qualcomm/ipq9574/Kconfig
+>  create mode 100644 board/qualcomm/ipq9574/Makefile
+>  create mode 100644 board/qualcomm/ipq9574/board_init.c
+>  create mode 100644 board/qualcomm/ipq9574/ipq9574.c
+>  create mode 100644 board/qualcomm/ipq9574/ipq9574.h
+>  create mode 100644 board/qualcomm/ipq9574/u-boot-x32.lds
+>  create mode 100644 board/qualcomm/ipq9574/u-boot-x64.lds
+>  create mode 100644 configs/ipq9574_mmc_defconfig
+>  create mode 100644 drivers/clk/qcom/clock-ipq9574.c
+>  create mode 100644 drivers/pinctrl/qcom/pinctrl-ipq9574.c
+>  create mode 100644 include/configs/ipq9574.h
+>  create mode 100644 include/dt-bindings/clock/gcc-ipq9574.h
+>  create mode 100644 include/dt-bindings/net/qti-ipqsoc.h
+>  create mode 100644 include/dt-bindings/pinctrl/pinctrl-ipqsoc.h
+>  create mode 100644 include/dt-bindings/reset/ipq9574-reset.h
+> 
+
+-- 
+// Caleb (they/them)
