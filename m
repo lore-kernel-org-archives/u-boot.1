@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92838C5478C
-	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 16:25:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27347C54798
+	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 16:26:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC0BD88039;
-	Tue, 27 Feb 2024 17:25:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2266C87FF5;
+	Tue, 27 Feb 2024 17:25:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="ikEEJMTd";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="ioOiA/V3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A431C87F37; Tue, 27 Feb 2024 11:05:06 +0100 (CET)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
+ id D91C287E62; Tue, 27 Feb 2024 11:05:07 +0100 (CET)
+Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B023287F64
- for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 11:04:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F10D187FD6
+ for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 11:05:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=avromanov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 3AD75120550;
- Tue, 27 Feb 2024 13:04:58 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 3AD75120550
+Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 6AE53100538;
+ Tue, 27 Feb 2024 13:04:59 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 6AE53100538
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1709028298;
- bh=zKZFprH8/tCHcKIr/KKupFDbPeIYAUI9SNVpstQPpm8=;
+ s=mail; t=1709028299;
+ bh=eUYktXAPsIFitmc7Qncvqq6bA1BeQXp1QXVzM5Zzq4w=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=ikEEJMTdeH3DPcVyWO08TgAbf91vJ1PLw3H8SH3C8xGiMdJzK3UdSBofqE9tGbldh
- IKz3X7zMa4qPwO+0HcAMVXEtM3rZdbalgArF31BhCK3RnSqX5TJN75tV4MJfYabWO9
- 2Eei5ZqigoD3Lvp9uJGqUset3O7ikAwLEFtqgiwV0YHR3tHO3lMJwED0ZAbWzH/erm
- /ENAzu6Hxdm2jcTBwM+dSD3ajRtn9muQYgBXL2Jcpv3JpCCeLDuCdDoHjLkENpGyMd
- 8DVgauxAcT0kyyQc1Eq9s2CHFYEKAOh5lKf6u+hvEJBGiQ6L3Xpsx/e5eMAITJRIQF
- zM2YaQBskfSxw==
+ b=ioOiA/V3gTJ8cbNUzwcHcXcz1FpFuhyM7bwz5EUQd8Mc+rDt1aV5r0M2MRw5B7AR2
+ iDt2dXFNXEMcDiX0JAV0b0quQN4tGSY/bQG8OPlKKSDoZJ0RL+G9evpM/PWoTorvNK
+ QkKBc7DVhZ/s5QwO0wDbtRT0U0VV5B85kOdWtFnS7KJAyb5OezMZUOX29ABa9NoJbB
+ leVQXTAwRwcFTGYxN8X0hz59m8vjZCu7GbaYAVHOSUaCuyr3/09d0b+6qLfAYARQs6
+ tctCl0eXuIxbEaTO/aOeddjWWsJLrgoiIlLhUvEi/r4u45WqNPzJQRW/D+YnOtkP8Y
+ vuEu+09bHp2Zg==
 Received: from smtp.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
  [172.16.192.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Tue, 27 Feb 2024 13:04:58 +0300 (MSK)
+ Tue, 27 Feb 2024 13:04:59 +0300 (MSK)
 Received: from user-A520M-DS3H.sigma.sbrf.ru (100.64.160.123) by
  p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Tue, 27 Feb 2024 13:04:56 +0300
+ 15.2.1118.40; Tue, 27 Feb 2024 13:04:58 +0300
 From: Alexey Romanov <avromanov@salutedevices.com>
 To: <dario.binacchi@amarulasolutions.com>, <michael@amarulasolutions.com>,
  <frieder.schrempf@kontron.de>, <xypron.glpk@gmx.de>,
@@ -59,9 +59,9 @@ To: <dario.binacchi@amarulasolutions.com>, <michael@amarulasolutions.com>,
  <mikhail.kshevetskiy@iopsys.eu>, <patrice.chotard@foss.st.com>
 CC: <kernel@salutedevices.com>, <u-boot@lists.denx.de>, Alexey Romanov
  <avromanov@salutedevices.com>
-Subject: [PATCH v1 2/4] disk: support MTD partitions
-Date: Tue, 27 Feb 2024 13:04:39 +0300
-Message-ID: <20240227100441.1811047-3-avromanov@salutedevices.com>
+Subject: [PATCH v1 3/4] spinand: bind mtdblock
+Date: Tue, 27 Feb 2024 13:04:40 +0300
+Message-ID: <20240227100441.1811047-4-avromanov@salutedevices.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240227100441.1811047-1-avromanov@salutedevices.com>
 References: <20240227100441.1811047-1-avromanov@salutedevices.com>
@@ -82,10 +82,11 @@ X-KSMG-AntiSpam-Method: none
 X-KSMG-AntiSpam-Auth: dkim=none
 X-KSMG-AntiSpam-Info: LuaCore: 7 0.3.7
  6d6bf5bd8eea7373134f756a2fd73e9456bb7d1a,
- {Tracking_from_domain_doesnt_match_to}, 100.64.160.123:7.1.2;
- smtp.sberdevices.ru:7.1.1,5.0.1; 127.0.0.199:7.1.2; salutedevices.com:7.1.1;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1, FromAlignment: s,
- ApMailHostAddress: 100.64.160.123
+ {Tracking_from_domain_doesnt_match_to}, salutedevices.com:7.1.1;
+ 100.64.160.123:7.1.2; d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
+ 127.0.0.199:7.1.2;
+ smtp.sberdevices.ru:5.0.1,7.1.1, FromAlignment: s, ApMailHostAddress:
+ 100.64.160.123
 X-MS-Exchange-Organization-SCL: -1
 X-KSMG-AntiSpam-Interceptor-Info: scan successful
 X-KSMG-AntiPhishing: Clean
@@ -110,155 +111,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add new MTD partition driver, which can be useful with
-mtdblock driver combination.
+Bind SPI-NAND driver to MTD block driver.
 
 Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
 ---
- disk/part.c           |  5 +++-
- drivers/mtd/Kconfig   |  1 +
- drivers/mtd/mtdpart.c | 69 +++++++++++++++++++++++++++++++++++++++++++
- include/part.h        |  2 ++
- 4 files changed, 76 insertions(+), 1 deletion(-)
+ drivers/mtd/nand/spi/core.c | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
 
-diff --git a/disk/part.c b/disk/part.c
-index 36b88205ec..0fc5cc0419 100644
---- a/disk/part.c
-+++ b/disk/part.c
-@@ -304,7 +304,8 @@ static void print_part_header(const char *type, struct blk_desc *desc)
- 	CONFIG_IS_ENABLED(DOS_PARTITION) || \
- 	CONFIG_IS_ENABLED(ISO_PARTITION) || \
- 	CONFIG_IS_ENABLED(AMIGA_PARTITION) || \
--	CONFIG_IS_ENABLED(EFI_PARTITION)
-+	CONFIG_IS_ENABLED(EFI_PARTITION) || \
-+	CONFIG_IS_ENABLED(MTD_PARTITIONS)
- 	puts ("\nPartition Map for ");
- 	switch (desc->uclass_id) {
- 	case UCLASS_IDE:
-@@ -343,6 +344,8 @@ static void print_part_header(const char *type, struct blk_desc *desc)
- 	case UCLASS_BLKMAP:
- 		puts("BLKMAP");
- 		break;
-+	case UCLASS_MTD:
-+		puts("MTD");
- 	default:
- 		printf("UNKNOWN(%d)", desc->uclass_id);
- 		break;
-diff --git a/drivers/mtd/Kconfig b/drivers/mtd/Kconfig
-index 1902351719..40272f7e50 100644
---- a/drivers/mtd/Kconfig
-+++ b/drivers/mtd/Kconfig
-@@ -2,6 +2,7 @@ menu "MTD Support"
+diff --git a/drivers/mtd/nand/spi/core.c b/drivers/mtd/nand/spi/core.c
+index 2a3dbcfcb4..1d9cf66e4a 100644
+--- a/drivers/mtd/nand/spi/core.c
++++ b/drivers/mtd/nand/spi/core.c
+@@ -36,6 +36,10 @@
+ #include <linux/printk.h>
+ #endif
  
- config MTD_PARTITIONS
- 	bool
-+	select PARTITIONS
- 
- config MTD
- 	bool "Enable MTD layer"
-diff --git a/drivers/mtd/mtdpart.c b/drivers/mtd/mtdpart.c
-index 4886392a1c..608908c193 100644
---- a/drivers/mtd/mtdpart.c
-+++ b/drivers/mtd/mtdpart.c
-@@ -21,6 +21,8 @@
- 
- #include <common.h>
- #include <malloc.h>
-+#include <memalign.h>
-+#include <part.h>
- #include <linux/bug.h>
- #include <linux/errno.h>
- #include <linux/compat.h>
-@@ -1055,3 +1057,70 @@ uint64_t mtd_get_device_size(const struct mtd_info *mtd)
- 	return mtd->size;
- }
- EXPORT_SYMBOL_GPL(mtd_get_device_size);
-+
-+static struct mtd_info *mtd_get_partition_by_index(struct mtd_info *mtd, int index)
-+{
-+	struct mtd_info *part;
-+	int i = 0;
-+
-+	list_for_each_entry(part, &mtd->partitions, node)
-+		if (i++ == index)
-+			return part;
-+
-+	debug("Partition with idx=%d not found on MTD device %s\n", index, mtd->name);
-+	return NULL;
-+}
-+
-+static int __maybe_unused part_get_info_mtd(struct blk_desc *dev_desc, int part_idx,
-+					    struct disk_partition *info)
-+{
-+	struct mtd_info *master = blk_desc_to_mtd(dev_desc);
-+	struct mtd_info *part;
-+
-+	if (!master) {
-+		pr_err("MTD device is NULL\n");
-+		return -EINVAL;
-+	}
-+
-+	part = mtd_get_partition_by_index(master, part_idx);
-+	if (!part) {
-+		debug("Failed to find partition with idx=%d\n", part_idx);
-+		return -EINVAL;
-+	}
-+
-+	snprintf(info->name, PART_NAME_LEN, part->name);
-+	info->start = part->offset / dev_desc->blksz;
-+	info->size = part->size / dev_desc->blksz;
-+	info->blksz = dev_desc->blksz;
-+
-+	return 0;
-+}
-+
-+static void __maybe_unused part_print_mtd(struct blk_desc *dev_desc)
-+{
-+	struct mtd_info *master = blk_desc_to_mtd(dev_desc);
-+	struct mtd_info *part;
-+
-+	list_for_each_entry(part, &master->partitions, node)
-+		printf("- 0x%012llx-0x%012llx : \"%s\"\n",
-+		       part->offset, part->offset + part->size, part->name);
-+}
-+
-+static int part_test_mtd(struct blk_desc *dev_desc)
-+{
-+	ALLOC_CACHE_ALIGN_BUFFER(unsigned char, buffer, dev_desc->blksz);
-+
-+	if (blk_dread(dev_desc, 0, 1, (ulong *)buffer) != 1)
-+		return -1;
-+
-+	return 0;
-+}
-+
-+U_BOOT_PART_TYPE(mtd) = {
-+	.name		= "MTD",
-+	.part_type	= PART_TYPE_MTD,
-+	.max_entries	= MTD_ENTRY_NUMBERS,
-+	.get_info	= part_get_info_ptr(part_get_info_mtd),
-+	.print		= part_print_ptr(part_print_mtd),
-+	.test		= part_test_mtd,
++struct spinand_plat {
++	struct mtd_info *mtd;
 +};
-diff --git a/include/part.h b/include/part.h
-index db34bc6bb7..f7f3773a95 100644
---- a/include/part.h
-+++ b/include/part.h
-@@ -30,12 +30,14 @@ struct block_drvr {
- #define PART_TYPE_ISO		0x03
- #define PART_TYPE_AMIGA		0x04
- #define PART_TYPE_EFI		0x05
-+#define PART_TYPE_MTD		0x06
++
+ /* SPI NAND index visible in MTD names */
+ static int spi_nand_idx;
  
- /* maximum number of partition entries supported by search */
- #define DOS_ENTRY_NUMBERS	8
- #define ISO_ENTRY_NUMBERS	64
- #define MAC_ENTRY_NUMBERS	64
- #define AMIGA_ENTRY_NUMBERS	8
-+#define MTD_ENTRY_NUMBERS	64
- /*
-  * Type string for U-Boot bootable partitions
-  */
+@@ -1174,12 +1178,22 @@ static void spinand_cleanup(struct spinand_device *spinand)
+ 	kfree(spinand->scratchbuf);
+ }
+ 
++#if CONFIG_IS_ENABLED(BLK)
++static int spinand_bind(struct udevice *dev)
++{
++	struct spinand_plat *plat = dev_get_plat(dev);
++
++	return mtd_bind(dev, &plat->mtd);
++}
++#endif
++
+ static int spinand_probe(struct udevice *dev)
+ {
+ 	struct spinand_device *spinand = dev_get_priv(dev);
+ 	struct spi_slave *slave = dev_get_parent_priv(dev);
+ 	struct mtd_info *mtd = dev_get_uclass_priv(dev);
+ 	struct nand_device *nand = spinand_to_nand(spinand);
++	struct spinand_plat *plat = dev_get_plat(dev);
+ 	int ret;
+ 
+ #ifndef __UBOOT__
+@@ -1219,6 +1233,8 @@ static int spinand_probe(struct udevice *dev)
+ 	if (ret)
+ 		goto err_spinand_cleanup;
+ 
++	plat->mtd = mtd;
++
+ 	return 0;
+ 
+ err_spinand_cleanup:
+@@ -1288,6 +1304,10 @@ U_BOOT_DRIVER(spinand) = {
+ 	.of_match = spinand_ids,
+ 	.priv_auto	= sizeof(struct spinand_device),
+ 	.probe = spinand_probe,
++#if CONFIG_IS_ENABLED(BLK)
++	.bind = spinand_bind,
++#endif
++	.plat_auto = sizeof(struct spinand_plat),
+ };
+ 
+ void board_nand_init(void)
 -- 
 2.34.1
 
