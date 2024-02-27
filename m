@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA484C5478C
-	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 16:13:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBCBCC54798
+	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 16:13:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1869888015;
+	by phobos.denx.de (Postfix) with ESMTP id 835B388047;
 	Tue, 27 Feb 2024 17:10:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="g3Spqroa";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="S8vpra97";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="fT3kK0MY";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="E30fWP36";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5750888053; Tue, 27 Feb 2024 17:10:28 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
+ id 2161888049; Tue, 27 Feb 2024 17:10:29 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 818BE8803D
- for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 17:10:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 91C3188027
+ for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 17:10:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4TkjBS2tyqz9sHC;
- Tue, 27 Feb 2024 17:10:24 +0100 (CET)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4TkjBT2ZVdz9snc;
+ Tue, 27 Feb 2024 17:10:25 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1709050224;
+ s=mail20150812; t=1709050225;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=rGzIfnGBFAkBn9AWYxhSm/zHaLwNkJu2jbw+dW4Thrc=;
- b=g3SpqroaMDIwT7ueEW8xOyF6bam7CSi5FKVxEmOQJqDsIVQMN7OMj35PUcOtxcXgzRsnS9
- GrpQwvXsCY58YvxQdfO/Dnwc0P2GXTQ/3kzfvhocdYkzS0ko4eO8TmYgZvkzhNiMLNuHuT
- 3zaAmqcc89zpZ1N1n7s1r2KToRAvMBYqhJfP4JZ6oJhhnCSASdIhBiMOWNsAxAlv1RF8a/
- O16QzNXasFti97EKmGn4jmzIp7F3yCMDmUrdaHsoxOJY5jIvCIH/9mcPtcOp7HsvfdTQr7
- tQUC+tJXbk7tg6WVYVEVb4/iO7m8j3232JePGpoqetkuL1AFSCMWZH/X/6I8ZQ==
+ bh=PesjVh+xCY4KzF1lcXQxcPG/f5XZBjuHl/o0n3n7YAM=;
+ b=fT3kK0MYbYg1r764/igQem1w8qtOfAHrNXAYo1rciVKHMhw2tQ9cQFg/gLdtZwK5/e8x+5
+ Zk51MQUyTit/k8nwv0m+845ZkkdQc9Fi88HYzwPwMVvUhooVn5/JyHcVjH8iuulc0Lwg5f
+ XPX1E4V1SMEzQDgm5orhBq8VtcyjNHZFJ3gg62nMrnHN1lzKNCQRpZ4RFI7axdoQez+8w/
+ qxq3TbCcJwxJo4GnVlocyoADx+JO55uzJDa1g1gSqdJl0WVrRNRodm0M1VdqtMMgJuEWs+
+ v8T/SDhfsQUfR4N6BTLWRpM1ylWhohLzHg9IxmQrXW88Be06xMCzx48t8mkTkQ==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1709050222;
+ s=mail20150812; t=1709050223;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=rGzIfnGBFAkBn9AWYxhSm/zHaLwNkJu2jbw+dW4Thrc=;
- b=S8vpra97xaW/k7SzPgHAcDG/g+REZPjGNJ3dAvlnGW6HJc/47ONXZX89YeHRfMnwldum/X
- ONUsj5C9vF7zyP07cJ/JvvlBOV7/fyUGee87ue3t2HIXD1Ffm6mKgZqCKlGsvXztDlPDYw
- sCTnDKSHxPYgQAB3FyU0M6kN+UYXc1A/PndGt8qx+K0REgYscTgTcO23b/5JHueRmdYkQ4
- RwzURQJDV8alzS6Q4Er3y86kqWWOVp3zY6Xys8e9BmbeEeljDDUlce+Lct092dPE14SGdM
- sN7+8Fg5xob6rugoXXcU9rEcgoGYMBhIX2bEYnro+pgVMAQ8NsqSENXngByVEw==
+ bh=PesjVh+xCY4KzF1lcXQxcPG/f5XZBjuHl/o0n3n7YAM=;
+ b=E30fWP36iuWlq/axnNWHFrgEV/+jaX6XI6YSKrlOMaqGvMKE6DMAynCgrJu+iT4rc8B/Jn
+ /TN3CU8j9JiRE7GLWoTVcA8izF36mdEJllu9agwUwXrqzYG1ovoQWWUzd27un0ng158xa6
+ u0EJe3NJTKke9EtbpqqVPQduuv3uoCTXd/aaxs3NbiA8xPINS6PAG3oDvAt1cevI4mnoZA
+ eaWl4aq8dsulnGmCk6XFpXvrg0M9sX/Tip2swEwUpY0tB4arDD69sXlq5p+G6OLefHVJKI
+ 4JHj0v4EpEnLD89XzEkVrwKEEiEyzADe42iKmRZDXcBURKwYrKEZnKvG24T65Q==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Paul Barker <paul.barker.ct@bp.renesas.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 18/19] mmc: renesas-sdhi: Rename rmobile_is_gen3_mmc0() to
- rcar_is_gen3_mmc0()
-Date: Tue, 27 Feb 2024 17:05:58 +0100
-Message-ID: <20240227160912.412181-19-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 19/19] git-mailrc: Add renesas entry and update rmobile entry
+Date: Tue, 27 Feb 2024 17:05:59 +0100
+Message-ID: <20240227160912.412181-20-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20240227160912.412181-1-marek.vasut+renesas@mailbox.org>
 References: <20240227160912.412181-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 29a3c00502ea3b5c6db
-X-MBO-RS-META: 86y3d4db6zg3tcp3uubmngqgoy5e5bqk
+X-MBO-RS-META: o99zodmagufk4rbh5tn7whrcuytyy894
+X-MBO-RS-ID: 435c01bb6cbe5f948f0
+X-Rspamd-Queue-Id: 4TkjBT2ZVdz9snc
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,8 +88,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rename rmobile_is_gen3_mmc0() to rcar_is_gen3_mmc0() because
-this particular function is specific to Renesas R-Car Gen3.
+Add new renesas entry and update rmobile entry to match.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
@@ -97,49 +96,23 @@ Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
 Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
 Cc: Tom Rini <trini@konsulko.com>
 ---
- drivers/mmc/renesas-sdhi.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ doc/git-mailrc | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/mmc/renesas-sdhi.c b/drivers/mmc/renesas-sdhi.c
-index 82237ef3dbd..20b1e9277eb 100644
---- a/drivers/mmc/renesas-sdhi.c
-+++ b/drivers/mmc/renesas-sdhi.c
-@@ -92,7 +92,7 @@ static const u8 r8a77990_calib_table[2][CALIB_TABLE_MAX] = {
- 	 11, 12, 13, 15, 16, 17, 17, 18, 18, 19, 20, 22, 24, 25, 26, 26 }
- };
- 
--static int rmobile_is_gen3_mmc0(struct tmio_sd_priv *priv)
-+static int rcar_is_gen3_mmc0(struct tmio_sd_priv *priv)
- {
- 	/* On R-Car Gen3, MMC0 is at 0xee140000 */
- 	return (uintptr_t)(priv->regbase) == 0xee140000;
-@@ -913,7 +913,7 @@ static void renesas_sdhi_filter_caps(struct udevice *dev)
- 		priv->adjust_hs400_offset = 3;
- 		priv->hs400_bad_tap = BIT(1) | BIT(3) | BIT(5) | BIT(7);
- 		priv->adjust_hs400_calib_table =
--			r8a7796_rev13_calib_table[!rmobile_is_gen3_mmc0(priv)];
-+			r8a7796_rev13_calib_table[!rcar_is_gen3_mmc0(priv)];
- 	}
- 
- 	/* M3W+ bad taps */
-@@ -926,7 +926,7 @@ static void renesas_sdhi_filter_caps(struct udevice *dev)
- 		priv->adjust_hs400_enable = true;
- 		priv->adjust_hs400_offset = 3;
- 		priv->adjust_hs400_calib_table =
--			r8a77965_calib_table[!rmobile_is_gen3_mmc0(priv)];
-+			r8a77965_calib_table[!rcar_is_gen3_mmc0(priv)];
- 	}
- 
- 	/* E3 can use HS400 with manual adjustment */
-@@ -934,7 +934,7 @@ static void renesas_sdhi_filter_caps(struct udevice *dev)
- 		priv->adjust_hs400_enable = true;
- 		priv->adjust_hs400_offset = 3;
- 		priv->adjust_hs400_calib_table =
--			r8a77990_calib_table[!rmobile_is_gen3_mmc0(priv)];
-+			r8a77990_calib_table[!rcar_is_gen3_mmc0(priv)];
- 	}
- 
- 	/* H3 ES1.x, ES2.0 and M3W ES1.[0123] uses 4 tuning taps */
+diff --git a/doc/git-mailrc b/doc/git-mailrc
+index 0ceb9eb88b5..ca2f67a3b6e 100644
+--- a/doc/git-mailrc
++++ b/doc/git-mailrc
+@@ -66,7 +66,8 @@ alias imx            uboot, sbabic
+ alias kirkwood       uboot, stroese
+ alias omap           ti
+ alias pxa            uboot, marex
+-alias rmobile        uboot, iwamatsu
++alias renesas        uboot, marex, iwamatsu
++alias rmobile        uboot, marex, iwamatsu
+ alias s3c            samsung
+ alias s5pc           samsung
+ alias samsung        uboot, prom
 -- 
 2.43.0
 
