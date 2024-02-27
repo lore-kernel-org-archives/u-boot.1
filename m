@@ -4,77 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62470C5478C
-	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 09:16:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6467BC54798
+	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 09:41:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C144787F60;
-	Tue, 27 Feb 2024 10:16:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 9828C87FDF;
+	Tue, 27 Feb 2024 10:41:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="uaJIixgb";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yW5xSeLP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD5D187F73; Tue, 27 Feb 2024 10:16:50 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 02AAF87FD6; Tue, 27 Feb 2024 10:41:35 +0100 (CET)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 54A6187F51
- for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 10:16:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D7E287F51
+ for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 10:41:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41R9Gd8v007266;
- Tue, 27 Feb 2024 03:16:39 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1709025399;
- bh=YTht03ia/hYzw8oGISB4LBIHSVICF50hDhTC2SniV9k=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=uaJIixgboH2eAuOPcxJliRagYx3hzhC0Vu4siDHaVEwpUo0jWk/euDdcHs5FzyX6r
- h4SlNel0jDW1FSOrjyqph6mCT4RPdpbhsPb+j2qz75AZoLJAlUoVwNyC8+KoT0g+Tg
- g7Wz7NaklN5G5pTQLgiDgq2INY0jEmXuSYpoz2pw=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41R9GdVM075192
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 27 Feb 2024 03:16:39 -0600
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 27
- Feb 2024 03:16:38 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 27 Feb 2024 03:16:38 -0600
-Received: from [172.24.227.36]
- (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41R9GXjn127586;
- Tue, 27 Feb 2024 03:16:34 -0600
-Message-ID: <b3b07d94-eb91-4533-ac76-963ee422a5bb@ti.com>
-Date: Tue, 27 Feb 2024 14:46:33 +0530
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-412af574501so1288325e9.2
+ for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 01:41:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1709026892; x=1709631692; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=YlBfsYhLZq98VpP/vYSe8MR6HasYw7vqzvcaM2SyuEc=;
+ b=yW5xSeLPj+Qb/Mbnxevn6WlooS7p9F0zSGKQWKhgc3kbdLotko8Xrmy5+tsH1612pZ
+ Bu+TS55SoG9CPHP+Ecp16iwiM+QkdfJOo7yzq1MuFjDzTfmsTkEU7cyzAinhDfSD2ehq
+ tF+bAfLQ/IjLAj3wlXE1edZqmmzZJ6ThlmWsOMZUMNHo1VDMCnHhDmqHvQZmn4Ex5h1O
+ 3Na6Za2pLO/DFw495Bmh2rZwTEP7FSTwKVUD+1mxtKXqxSI/3gA+5ycgvm0zqtFW1J4C
+ Zd6YZwJquWMXQvCOQJ6OrwulbW3kzncW+8dpMlLxCY8L7kmb9zDwoxSCdV5z/UYKS4Ad
+ c9dw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1709026892; x=1709631692;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=YlBfsYhLZq98VpP/vYSe8MR6HasYw7vqzvcaM2SyuEc=;
+ b=ZUZtyCqL5PhiS75NhF+n0jEctvFEPXAmHwb9Bub9Sf7h2z6F6xJWZG43/Mujb6WG1M
+ xMW2fn4phSTgccq7zjAArmCEEcz8872bVl11fyNSksiEQ5qxwMdrUiJpMFlJcaE6YwvF
+ 5b3tUs2FN5Ssm9dkhzHngkxELFg3Nf6F8llxFkfYzb8rr2blKpbJ9SBdrFvoQbfWmBCi
+ OZpG4KlMWmUYTogkWPgzscf19SNJMW0tyJLz1MvmPhl1zq7j2XWBP0nRRuEFpe2Wyt6f
+ 1RjX+2CDr/fg8DLhRJnVwXl16ZCyskhrOPalO05cvcfmmInw1fzEhDiblPCuF1IwGbct
+ fBTQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVL+ScDSHjhKQh5bWp4OMHq95iwALIQ+6gCQlM3eZLC8zlSOGRx3rOI6PHa5/KWnB2ZhlA269xRb7gCzOpPfGaplbXuBw==
+X-Gm-Message-State: AOJu0YwKIMDqvVF7VbT2JLos2vVdyC9myXmizu3hRug+sOO6cTB1OvEu
+ Zldy+/27aCEt8vks0+rlUnhI36gOLXZFGVx7xcnWyZYuaQu/yB29t4aAHCufnpqNn95pCI18DwO
+ W
+X-Google-Smtp-Source: AGHT+IG5MOXDs0FSXjNlTMeKROxeSDSxtc5fHsOVpB32z3RxewBbYAIW11qMqx66MzWYVIofQVf5xQ==
+X-Received: by 2002:a05:600c:3514:b0:412:ab27:a13f with SMTP id
+ h20-20020a05600c351400b00412ab27a13fmr1166782wmq.1.1709026891908; 
+ Tue, 27 Feb 2024 01:41:31 -0800 (PST)
+Received: from [192.168.1.78] (host-92-17-96-232.as13285.net. [92.17.96.232])
+ by smtp.gmail.com with ESMTPSA id
+ o25-20020a05600c379900b004129051a8f7sm14191173wmr.41.2024.02.27.01.41.31
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 27 Feb 2024 01:41:31 -0800 (PST)
+Message-ID: <decfd7de-f07f-435c-9b61-e1af54284150@linaro.org>
+Date: Tue, 27 Feb 2024 09:41:31 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 11/13] Makefile: remove hardcoded device tree source
- directory
+Subject: Re: [PATCH 02/10] mach-snapdragon: ipq9574: Add SMEM defines needed
+ for IPQ9574
 Content-Language: en-US
-To: Sumit Garg <sumit.garg@linaro.org>
-CC: Bryan Brattlof <bb@ti.com>, Tom Rini <trini@konsulko.com>, Jaehoon Chung
- <jh80.chung@samsung.com>, Lukasz Majewski <lukma@denx.de>, Sean Anderson
- <seanga2@gmail.com>, Vignesh Raghavendra <vigneshr@ti.com>, U-Boot Mailing
- List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>, Nishanth Menon
- <nm@ti.com>, Andrew Davis <afd@ti.com>, Igor Opaniuk
- <igor.opaniuk@foundries.io>, Hari Nagalla <hnagalla@ti.com>,
- Ravi Gunasekaran <r-gunasekaran@ti.com>,
- Vaishnav Achath <vaishnav.a@ti.com>, Jayesh Choudhary <j-choudhary@ti.com>
-References: <20240205-am62px-wip-rebasing-v3-0-04cbb42eaa6f@ti.com>
- <20240205-am62px-wip-rebasing-v3-11-04cbb42eaa6f@ti.com>
- <f0a0f05e-054e-4a19-ae0a-cd9bc442238b@ti.com>
- <CAFA6WYPPcqxds=rNB1LjGvM=dnVL=YdbdBxnTrJXTyTCwJqQMQ@mail.gmail.com>
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <CAFA6WYPPcqxds=rNB1LjGvM=dnVL=YdbdBxnTrJXTyTCwJqQMQ@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+To: Varadarajan Narayanan <quic_varada@quicinc.com>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>
+References: <20240226100807.1095607-1-quic_varada@quicinc.com>
+ <20240226100807.1095607-3-quic_varada@quicinc.com>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20240226100807.1095607-3-quic_varada@quicinc.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,138 +98,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sumit
 
-On 27/02/24 14:29, Sumit Garg wrote:
-> Hi Neha,
-> 
-> On Tue, 27 Feb 2024 at 13:53, Neha Malcom Francis <n-francis@ti.com> wrote:
->>
->> Hi Bryan
->>
->> On 27/02/24 02:49, Bryan Brattlof wrote:
->>> Some boards that choose to utilize the OF_UPSTREAM directory for their
->>> device tree files will need to specify that directory instead of the
->>> traditional arch/$(ARCH)/dts/* path.
->>>
->>> Include the correct path to the board's dtbs depending on if OF_UPSTREAM
->>> is selected or not.
->>>
->>> Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
->>> Signed-off-by: Bryan Brattlof <bb@ti.com>
->>> ---
->>>    Makefile             | 18 ++++++++++++++----
->>>    scripts/Makefile.spl | 17 +++++++++++++----
->>>    2 files changed, 27 insertions(+), 8 deletions(-)
->>>
->>> diff --git a/Makefile b/Makefile
->>> index 0f0c7f30d2717..51b57d26857f1 100644
->>> --- a/Makefile
->>> +++ b/Makefile
->>> @@ -1184,6 +1184,16 @@ dt_binding_check: scripts_dtc
->>>    quiet_cmd_copy = COPY    $@
->>>          cmd_copy = cp $< $@
->>>
->>> +ifeq ($(CONFIG_OF_UPSTREAM),y)
->>> +ifeq ($(CONFIG_ARM64),y)
->>
->> This would fail in case of R5 builds, is there any reason why you choose not to
->> use OF_UPSTREAM for R5 builds?
-> 
-> Although I will let Bryan elaborate more here, the essence here is
-> that OF_UPSTREAM=y means that the target DTS files come from
-> dts/upstream/src/<arch>/.
-> 
->>
->> I understand that R5 builds will require U-Boot DTS (from U-Boot code base) that
->> (ideally) should inherit the kernel core DTS (from upstream), is this support
->> not there at present? Let me know if I understand incorrectly.
->>
-> 
-> However, with OF_UPSTREAM=n you can have U-Boot DTS placed in
-> arch/$(ARCH)/dts/ like the R5 case but you can include whatever common
-> pieces required from dts/upstream/src/<arch>/.
-> 
 
-Ah understood. That makes sense, thanks!
+On 26/02/2024 10:07, Varadarajan Narayanan wrote:
+> Add few SMEM related defines that will be used for
+> IPQ9574 based boards.
 
-> -Sumit
+The tiny To/Cc list above is probably because this file isn't mentioned
+in MAINTAINERS, please add myself, Neil, and Sumit (see the ARM
+SNAPDRAGON section in MAINTAINERS) on the next revision, thanks.
 > 
->>> +dt_dir := dts/upstream/src/arm64
->>> +else
->>> +dt_dir := dts/upstream/src/$(ARCH)
->>> +endif
->>> +else
->>> +dt_dir := arch/$(ARCH)/dts
->>> +endif
->>> +
->>>    ifeq ($(CONFIG_MULTI_DTB_FIT),y)
->>>
->>>    ifeq ($(CONFIG_MULTI_DTB_FIT_LZO),y)
->>> @@ -1209,7 +1219,7 @@ endif
->>>
->>>    MKIMAGEFLAGS_fit-dtb.blob = -f auto -A $(ARCH) -T firmware -C none -O u-boot \
->>>        -a 0 -e 0 -E \
->>> -     $(patsubst %,-b arch/$(ARCH)/dts/%.dtb,$(subst ",,$(CONFIG_OF_LIST))) -d /dev/null
->>> +     $(patsubst %,-b $(dt_dir)/%.dtb,$(subst ",,$(CONFIG_OF_LIST))) -d /dev/null
->>>
->>>    MKIMAGEFLAGS_fit-dtb.blob += -B 0x8
->>>
->>> @@ -1407,9 +1417,9 @@ MKIMAGEFLAGS_u-boot.img = -f auto -A $(ARCH) -T firmware -C none -O u-boot \
->>>        -a $(CONFIG_TEXT_BASE) -e $(CONFIG_SYS_UBOOT_START) \
->>>        -p $(CONFIG_FIT_EXTERNAL_OFFSET) \
->>>        -n "U-Boot $(UBOOTRELEASE) for $(BOARD) board" -E \
->>> -     $(patsubst %,-b arch/$(ARCH)/dts/%.dtb,$(subst ",,$(DEVICE_TREE))) \
->>> -     $(patsubst %,-b arch/$(ARCH)/dts/%.dtb,$(subst ",,$(CONFIG_OF_LIST))) \
->>> -     $(patsubst %,-b arch/$(ARCH)/dts/%.dtbo,$(subst ",,$(CONFIG_OF_OVERLAY_LIST)))
->>> +     $(patsubst %,-b $(dt_dir)/%.dtb,$(subst ",,$(DEVICE_TREE))) \
->>> +     $(patsubst %,-b $(dt_dir)/%.dtb,$(subst ",,$(CONFIG_OF_LIST))) \
->>> +     $(patsubst %,-b $(dt_dir)/%.dtbo,$(subst ",,$(CONFIG_OF_OVERLAY_LIST)))
->>>    else
->>>    MKIMAGEFLAGS_u-boot.img = -A $(ARCH) -T firmware -C none -O u-boot \
->>>        -a $(CONFIG_TEXT_BASE) -e $(CONFIG_SYS_UBOOT_START) \
->>> diff --git a/scripts/Makefile.spl b/scripts/Makefile.spl
->>> index 407fc52376a50..d074ba2350065 100644
->>> --- a/scripts/Makefile.spl
->>> +++ b/scripts/Makefile.spl
->>> @@ -559,9 +559,15 @@ FORCE:
->>>    $(obj)/dts/dt-$(SPL_NAME).dtb: dts/dt.dtb
->>>        $(Q)$(MAKE) $(build)=$(obj)/dts spl_dtbs
->>>
->>> -PHONY += dts_dir
->>> -dts_dir:
->>> -     $(shell [ -d $(obj)/dts ] || mkdir -p $(obj)/dts)
->>> +ifeq ($(CONFIG_OF_UPSTREAM),y)
->>> +ifeq ($(CONFIG_ARM64),y)
->>> +dt_dir := dts/upstream/src/arm64
->>> +else
->>> +dt_dir := dts/upstream/src/$(ARCH)
->>> +endif
->>> +else
->>> +dt_dir := arch/$(ARCH)/dts
->>> +endif
->>>
->>>    # Declare the contents of the .PHONY variable as phony.  We keep that
->>>    # information in a variable so we can use it in if_changed and friends.
->>> @@ -569,8 +575,11 @@ dts_dir:
->>>
->>>    SPL_OF_LIST_TARGETS = $(patsubst %,dts/%.dtb,$(subst ",,$(CONFIG_SPL_OF_LIST)))
->>>    SHRUNK_ARCH_DTB = $(addprefix $(obj)/,$(SPL_OF_LIST_TARGETS))
->>> +$(dir $(SHRUNK_ARCH_DTB)):
->>> +     $(shell [ -d $@ ] || mkdir -p $@)
->>> +
->>>    .SECONDEXPANSION:
->>> -$(SHRUNK_ARCH_DTB): $$(patsubst $(obj)/dts/%, arch/$(ARCH)/dts/%, $$@) dts_dir
->>> +$(SHRUNK_ARCH_DTB): $$(patsubst $(obj)/dts/%, $(dt_dir)/%, $$@) $(dir $(SHRUNK_ARCH_DTB))
->>>        $(call if_changed,fdtgrep)
->>>
->>>    targets += $(SPL_OF_LIST_TARGETS)
->>>
->>
->> --
->> Thanking You
->> Neha Malcom Francis
+> Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
+> ---
+> 
+>  include/smem.h | 78 ++++++++++++++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 78 insertions(+)
+> 
+> diff --git a/include/smem.h b/include/smem.h
+> index b19c534ebc..f305354996 100644
+> --- a/include/smem.h
+> +++ b/include/smem.h
+> @@ -16,6 +16,84 @@
+>  #ifndef _smemh_
+>  #define _smemh_
+>  
+> +enum {
+> +	SMEM_SPINLOCK_ARRAY		= 7,
+> +	SMEM_AARM_PARTITION_TABLE	= 9,
+> +	SMEM_HW_SW_BUILD_ID		= 137,
+As I understand it, smem is a bit of a dumping ground of various
+different data, some of which is standard across all boards and some is
+not... A lot of the values you're adding here seem specific to this
+modern set of IPQ-based dev boards. Could you document what each of
+these values actually does.
+> +	SMEM_USABLE_RAM_PARTITION_TABLE	= 402,
+> +	SMEM_POWER_ON_STATUS_INFO	= 403,
+> +	SMEM_MACHID_INFO_LOCATION	= 425,
+> +	SMEM_IMAGE_VERSION_TABLE	= 469,
+> +	SMEM_BOOT_FLASH_TYPE		= 498,
+> +	SMEM_BOOT_FLASH_INDEX		= 499,
+> +	SMEM_BOOT_FLASH_CHIP_SELECT	= 500,
+> +	SMEM_BOOT_FLASH_BLOCK_SIZE	= 501,
+> +	SMEM_BOOT_FLASH_DENSITY		= 502,
+> +	SMEM_BOOT_DUALPARTINFO		= 503,
+> +	SMEM_PARTITION_TABLE_OFFSET	= 504,
+> +	SMEM_SPI_FLASH_ADDR_LEN		= 505,
+> +	SMEM_FIRST_VALID_TYPE		= SMEM_SPINLOCK_ARRAY,
+> +	SMEM_LAST_VALID_TYPE		= SMEM_SPI_FLASH_ADDR_LEN,
+> +	SMEM_MAX_SIZE			= SMEM_SPI_FLASH_ADDR_LEN + 1,
+> +};
+> +
+> +enum {
+> +	SMEM_BOOT_NO_FLASH		= 0,
+Likewise what what smem property do these correspond to?
+> +	SMEM_BOOT_NOR_FLASH		= 1,
+> +	SMEM_BOOT_NAND_FLASH		= 2,
+> +	SMEM_BOOT_ONENAND_FLASH		= 3,
+> +	SMEM_BOOT_SDC_FLASH		= 4,
+> +	SMEM_BOOT_MMC_FLASH		= 5,
+> +	SMEM_BOOT_SPI_FLASH		= 6,
+> +	SMEM_BOOT_NORPLUSNAND		= 7,
+> +	SMEM_BOOT_NORPLUSEMMC		= 8,
+> +	SMEM_BOOT_QSPI_NAND_FLASH	= 11,
+> +};
+> +
+> +#define BUILD_ID_LEN			32
+> +#define SOCINFO_VERSION_MAJOR(ver)	(((ver) & 0xffff0000) >> 16)
+> +#define SOCINFO_VERSION_MINOR(ver)	((ver) & 0x0000ffff)
+> +
+> +struct smem_pmic_type {
+Please document these structs, and which SMEM property they represent.
+> +	unsigned int pmic_model;
+> +	unsigned int pmic_die_revision;
+> +};
+> +
+> +struct ipq_platform_v1 {
+> +	unsigned int	format;
+> +	unsigned int	id;
+> +	unsigned int	version;
+> +	char		build_id[BUILD_ID_LEN];
+> +	unsigned int	raw_id;
+> +	unsigned int	raw_version;
+> +	unsigned int	hw_platform;
+> +	unsigned int	platform_version;
+> +	unsigned int	accessory_chip;
+> +	unsigned int	hw_platform_subtype;
+> +};
+> +
+> +struct ipq_platform_v2 {
+> +	struct ipq_platform_v1	v1;
+> +	struct smem_pmic_type	pmic_info[3];
+> +	unsigned int		foundry_id;
+> +};
+> +
+> +struct ipq_platform_v3 {
+> +	struct ipq_platform_v2	v2;
+> +	unsigned int		chip_serial;
+> +};
+> +
+> +union ipq_platform {
+> +	struct ipq_platform_v1	v1;
+> +	struct ipq_platform_v2	v2;
+> +	struct ipq_platform_v3	v3;
+> +};
+> +
+> +struct smem_machid_info {
+> +	unsigned int format;
+> +	unsigned int machid;
+> +};
+> +
+>  /* struct smem_ops: Operations for the SMEM uclass */
+>  struct smem_ops {
+>  	/**
 
 -- 
-Thanking You
-Neha Malcom Francis
+// Caleb (they/them)
