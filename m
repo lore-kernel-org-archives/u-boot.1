@@ -4,79 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBD8DC5478C
-	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 13:37:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD378C5478C
+	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 13:38:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 299B287FD2;
-	Tue, 27 Feb 2024 14:37:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 555A287C94;
+	Tue, 27 Feb 2024 14:38:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="j3hCY3Z8";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VkREIxX/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A6A6887FDE; Tue, 27 Feb 2024 14:37:38 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4EEB387FF7; Tue, 27 Feb 2024 14:38:35 +0100 (CET)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E79B87EDF
- for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 14:37:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 92ED287EDF
+ for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 14:38:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1709041039; x=1709645839; i=xypron.glpk@gmx.de;
- bh=A+bUu1cR8vibvkuV5EBCR20h0I2uLoFZe/pwI9IEcOU=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
- In-Reply-To;
- b=j3hCY3Z8M1nsDctqfz22wQN6+uIW6mhwXKVOeeTdOXwncWAKSinAtfvMPpQ1nIKa
- XWOr8GliTC67hJA6rIJLT77jZr0+urSpMUtIt5IvkYiBHO7ibP4TG0/gfnZJsHP/E
- i6tyBRU/gL1rLymq8ozZuefeD6xb+hcTcsLoU+m4uRFqfcT1DpWAPVT0bJbi/nODS
- vChGE9o2hdw/1hIV6ZAmpNlVgcSv6pcyLEDtsW1PavsP7Hk+E+bElMdeALXariLjO
- 63upDTXO9RZAkolXvS0xVqjdIlsPOmyxjBmfWlOivfrVgU1rFu4eZ1piE1GZAjBoV
- zojDDxcMFdYZoTVV8g==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.67] ([95.222.37.56]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MQ5vW-1rIuYZ0bNg-00M4xb; Tue, 27
- Feb 2024 14:37:19 +0100
-Message-ID: <083f018d-d22e-455f-98c9-9c21730e4a7d@gmx.de>
-Date: Tue, 27 Feb 2024 14:37:17 +0100
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-412ad927275so4167065e9.3
+ for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 05:38:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1709041112; x=1709645912; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=0CdQ4/Hgyvzk3UCjyq88zPjz9SAcY+jYYLOA4hojJ+4=;
+ b=VkREIxX/3tJB9MX4z9UjW0cT59OIprChGhQPyknSvXAQjtpgxx9NzGto/Cu6PjaLp+
+ AUiADhjRpfDSxeXbBmSRLF3oPqPFhiBdqSHt586+rgOeyN+yg39clYcTE1NOByCKwhJP
+ SseegkTLzPP8yrG4h9+9KK3MRPS/8SQ01DKWnbKtQgfQ+nM6f+01R10QsOjvkR0J4ueW
+ shug/w80UkIdeXqDeoOM87/x0Nc3HOvjDylgeo+vcnRIqNsXIY38L6B6gsKVxMv6zLHA
+ WZjLI/WtFo3ktxO6CEE5Glihpa2IUoP4eisM8skTTP+zi35f1Jgo/90VjWac4yGPuA5p
+ vjTQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1709041112; x=1709645912;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=0CdQ4/Hgyvzk3UCjyq88zPjz9SAcY+jYYLOA4hojJ+4=;
+ b=ce+pZTamqTrNb040T0Gbey0ZBzDZheyENKHzG78EoW28su5CrAoECveSTNrc4M3iZl
+ qM17RJD++lv60dH8mTMjVAkU4l2N8DMr/Z/NHsqYQqRC59hDoF6lgsZKr98TSnyOMkLd
+ mQJMN91jeQ7RJUq3STfPsr+i2xEXhDAa8Ka7ekFxBogtxIxk1fZJUUHdEoFhbmIcIHL6
+ ew3Wcc8CvosGApfM7VR4CkLEl2zvTIgNJgqK46O1Grb77RmK2nZ6s8ePHSxd6Vciewig
+ moqv/YCm8NNGX5A1DyZZKDlU4dy+DJ+J+GhiAnjulxHYmTEfOPkG4iTWmQ3t/9wHD7y3
+ KWTw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWgRWTwRwKRMTIi3EDIZfTKytA7DVhMRzi9AOVudzoYXdX3mZJbedCDynBY6RgpX+wEjZ6MBjItlNqp81HMK8I0fh6FDw==
+X-Gm-Message-State: AOJu0Ywt77AVUKi64TJnkKEby/x9S/68fZOj+QcpMDiuWriANQSjhpCs
+ B0G+8WiNhCALE+Dqbs9m9FggYNMNeBfvTjAdXS6gxKBBmgtSDn+VdfiBAm0mzVY=
+X-Google-Smtp-Source: AGHT+IFVfs2AU9hSrINcdJEhaNoVykQcYIj3k4IFCtS/jvv0eDaNtS68+iAFO586Js5LEsSS/+SXWQ==
+X-Received: by 2002:a05:600c:6b07:b0:412:117d:949c with SMTP id
+ jn7-20020a05600c6b0700b00412117d949cmr9553196wmb.41.1709041111945; 
+ Tue, 27 Feb 2024 05:38:31 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:982:cbb0:68ee:e3d3:74d9:c0d1?
+ ([2a01:e0a:982:cbb0:68ee:e3d3:74d9:c0d1])
+ by smtp.gmail.com with ESMTPSA id
+ n1-20020a05600c4f8100b004127ead18aasm11485160wmq.22.2024.02.27.05.38.31
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 27 Feb 2024 05:38:31 -0800 (PST)
+Message-ID: <6d57d749-7967-4475-b84f-326bfbffc5f2@linaro.org>
+Date: Tue, 27 Feb 2024 14:38:30 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 1/4] drivers: introduce mtdblock abstraction
-Content-Language: en-US
-To: Alexey Romanov <avromanov@salutedevices.com>
-Cc: kernel@salutedevices.com, u-boot@lists.denx.de,
- dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com,
- frieder.schrempf@kontron.de, ilias.apalodimas@linaro.org, sjg@chromium.org,
- bmeng@tinylab.org, tobias@waldekranz.com, jpewhacker@gmail.com,
- marek.vasut+renesas@mailbox.org, kever.yang@rock-chips.com,
- jbx6244@gmail.com, abdellatif.elkhlifi@arm.com, michal.simek@amd.com,
- mikhail.kshevetskiy@iopsys.eu, patrice.chotard@foss.st.com
-References: <20240227100441.1811047-1-avromanov@salutedevices.com>
- <20240227100441.1811047-2-avromanov@salutedevices.com>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240227100441.1811047-2-avromanov@salutedevices.com>
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH v1 0/3] board: amlogic: jethubj100: small updates
+To: Viacheslav Bocharov <adeep@lexina.in>, Tom Rini <trini@konsulko.com>,
+ u-boot-amlogic@groups.io, u-boot@lists.denx.de
+References: <20240227065551.580199-1-adeep@lexina.in>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro Developer Services
+In-Reply-To: <20240227065551.580199-1-adeep@lexina.in>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:8tdnMwY/gRRuZazJ4xD6mWg9/VdElOLfZGBCjvptnrSa1XQk26M
- ghWOEJOjIepBir/vEiJmTewjzLwo32+EaSXWlDOHf/5nAF4zgEvr3UD5BEnPPhcgz2W1A2N
- qvH4t831Qa8KVmIMPMCduC+0AomBv4vYbzj+NxEsdHdq9x2KUuYD5LtLY8ZnV9V6SWnslki
- 9Sl3tqLmX9LUOxmGeJP5g==
-UI-OutboundReport: notjunk:1;M01:P0:6iEmw3g2lIo=;lTnUAy6kAEDtcS6qtK5eWAz0txl
- XrPtza1wgst7cr7b7HRAPo+TGvVvAirTBOMifoo7YXECxsRdtplkXSQ6Z9+He0pqNuGYrmnPO
- CDRoJI9IvfPFiE/IkYVXouIenwnv5jjkByB2Z4o7Fg1Cw43KL8F+jTLGO3BF62e2c/gzqlKDK
- XabmPdJKUzfzdC/NsAAoe+PWLEnh7+3P+tq2rt29aWBPPcylNQJHpNWtSL9uNQPboj+FN9ztX
- pdMefOSGIZ17SBtYnPUwjh7CAbfO+DMS4ZvWSrOlDrxG50X5lCzrXPrCSwFHFicVT8tGevmXe
- LeofauHsp8FXv309nYY29lytAyq+OEcI4nPZrPvqFkpFUm34Gmp+5+lyfc6RHSUigFx80oJ04
- r7o8Bb4x5Ok4S5XOixTw/EhVbwWaDUY1sIfT5GHUWPiCDIp81I/p1AUQQd+CIWZPFOaAneaJY
- 43Uze4XBspi9/NhEWRQ0qcuxPdzVOGqhbqG2NCpzm+8Pj/1kwDmmUKqLxjzPWg37xwXq7x15v
- /nsKhNHnEipardzk2knKRi8AxOCTgXBWDL5EX3aEBNaVOeOkSoyxP/1HAFE3vJIm5rSctdMg6
- g8YTZG/9O0OokWzBl3uFRIRCUibEZ+kPmx7vkhE53QoJjAeWn55BeqAWmR8mkvfIrON4fS+WC
- eOOtydf45Feoi74dA7cZU1mpHfaJ1maEdxTCOkDPtrSTcNikhZ5YDjxxUCbPQLMEhgAkQqs3G
- a1cY1JGo9UO+tYF+6Nfw8eZTPh3ne+zdQyPvP4xpNG8wNUDN9NEMLWQ7oyTqziFFCae/aX3xy
- r58fWz8PKrLWvP4ByM2I4rpyfR2QYpf+u088XHZdgilZk=
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,319 +117,26 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 27.02.24 11:04, Alexey Romanov wrote:
-> MTD block - abstraction over MTD subsystem, allowing
-> to read and write in blocks using BLK UCLASS.
->
-> - Read algorithm:
->
->    1. Convert start block number to start address.
->    2. Read block_dev->blksz bytes using mtd_read() and
->       add to start address pointer block_dev->blksz bytes,
->       until the requested number of blocks have been read.
->
-> - Write algorithm:
->
->    1. Convert start block number to start address.
->    2. Round this address down by mtd->erasesize.
->
->    Erase addr      Start addr
->       |                |
->       v                v
->       +----------------+----------------+----------------+
->       |     blksz      |      blksz     |      blksz     |
->       +----------------+----------------+----------------+
->
->    3. Calculate offset between this two addresses.
->    4. Read mtd->erasesize bytes using mtd_read() into
->       temporary buffer from erase address.
->
->    Erase addr      Start addr
->       |                |
->       v                v
->       +----------------+----------------+----------------+
->       |     blksz      |      blksz     |      blksz     |
->       +----------------+----------------+----------------+
->       ^            mtd->erasesize =3D blksz * 3
+On 27/02/2024 07:54, Viacheslav Bocharov wrote:
+> Update JetHub D1/D1+ board support files.
+> 
+> Viacheslav Bocharov (3):
+>    board: amlogic: jethubj100: fix common config header
+>    board: amlogic: jethubj100: update MAINTAINERS
+>    board: amlogic: jethubj100: update docs
+> 
+>   board/amlogic/jethub-j100/MAINTAINERS | 2 +-
+>   doc/board/amlogic/jethub-j100.rst     | 9 ++++++---
+>   include/configs/jethub.h              | 2 +-
+>   3 files changed, 8 insertions(+), 5 deletions(-)
+> 
+> 
+> base-commit: d49fa3defa50c6d3f04acbb52fd486c13c14ab6a
 
-Can you really erase only the start of the erase block?
-
-Wouldn't you have also to round the end address up to the end of an
-erase block and read and rewrite the data between the end address and
-the end of the last erase block?
-
->       |
->       |
->       |
->
->    mtd_read()
->    from here
->
->    5. Copy data from user buffer to temporary buffer with offset,
->       calculated at step 3.
->    6. Erase and write mtd->erasesize bytes at erase address
->       pointer using mtd_erase/mtd_write().
->    7. Add to erase address pointer mtd->erasesize bytes.
->    8. goto 1 until the requested number of blocks have
->       been written.
-
-Commit messages is not were developers typically look for documentation.
-Please, add the information to /doc/develop/ or to the source code.
-
-Best regards
-
-Heinrich
-
->
-> Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
-> ---
->   drivers/block/blk-uclass.c |   1 +
->   drivers/mtd/Makefile       |   1 +
->   drivers/mtd/mtdblock.c     | 170 +++++++++++++++++++++++++++++++++++++
->   include/linux/mtd/mtd.h    |  12 +++
->   4 files changed, 184 insertions(+)
->   create mode 100644 drivers/mtd/mtdblock.c
->
-> diff --git a/drivers/block/blk-uclass.c b/drivers/block/blk-uclass.c
-> index 77066da352..ab0a9105c9 100644
-> --- a/drivers/block/blk-uclass.c
-> +++ b/drivers/block/blk-uclass.c
-> @@ -37,6 +37,7 @@ static struct {
->   	{ UCLASS_PVBLOCK, "pvblock" },
->   	{ UCLASS_BLKMAP, "blkmap" },
->   	{ UCLASS_RKMTD, "rkmtd" },
-> +	{ UCLASS_MTD, "mtd" },
->   };
->
->   static enum uclass_id uclass_name_to_iftype(const char *uclass_idname)
-> diff --git a/drivers/mtd/Makefile b/drivers/mtd/Makefile
-> index c638980ea2..993b122ac4 100644
-> --- a/drivers/mtd/Makefile
-> +++ b/drivers/mtd/Makefile
-> @@ -26,6 +26,7 @@ obj-y +=3D onenand/
->   obj-y +=3D spi/
->   obj-$(CONFIG_MTD_UBI) +=3D ubi/
->   obj-$(CONFIG_NVMXIP) +=3D nvmxip/
-> +obj-$(CONFIG_BLK) +=3D mtdblock.o
->
->   #SPL/TPL build
->   else
-> diff --git a/drivers/mtd/mtdblock.c b/drivers/mtd/mtdblock.c
-> new file mode 100644
-> index 0000000000..0563d0b795
-> --- /dev/null
-> +++ b/drivers/mtd/mtdblock.c
-> @@ -0,0 +1,170 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * (C) Copyright 2024 SaluteDevices, Inc.
-> + *
-> + * Author: Alexey Romanov <avromanov@salutedevices.com>
-> + */
-> +
-> +#include <blk.h>
-> +#include <dm/device.h>
-> +#include <dm/device-internal.h>
-> +#include <linux/mtd/mtd.h>
-> +
-> +int mtd_bind(struct udevice *dev, struct mtd_info **mtd)
-> +{
-> +	struct blk_desc *bdesc;
-> +	struct udevice *bdev;
-> +	int ret;
-> +
-> +	ret =3D blk_create_devicef(dev, "mtd_blk", "blk", UCLASS_MTD,
-> +				 dev_seq(dev), 512, 0, &bdev);
-> +	if (ret) {
-> +		pr_err("Cannot create block device");
-> +		return ret;
-> +	}
-> +
-> +	bdesc =3D dev_get_uclass_plat(bdev);
-> +	dev_set_priv(bdev, mtd);
-> +	bdesc->bdev =3D bdev;
-> +
-> +	return 0;
-> +}
-> +
-> +static ulong mtd_bread(struct udevice *dev, lbaint_t start, lbaint_t bl=
-kcnt,
-> +		       void *dst)
-> +{
-> +	struct blk_desc *block_dev =3D dev_get_uclass_plat(dev);
-> +	struct mtd_info *mtd =3D blk_desc_to_mtd(block_dev);
-> +	unsigned int sect_size =3D block_dev->blksz;
-> +	lbaint_t cur =3D start;
-> +	ulong read_cnt =3D 0;
-> +
-> +	while (read_cnt < blkcnt) {
-> +		int ret;
-> +		loff_t sect_start =3D cur * sect_size;
-> +		size_t retlen;
-> +
-> +		ret =3D mtd_read(mtd, sect_start, sect_size, &retlen, dst);
-> +		if (ret)
-> +			return ret;
-> +
-> +		if (retlen !=3D sect_size) {
-> +			pr_err("mtdblock: failed to read block 0x%lx\n", cur);
-> +			return -EIO;
-> +		}
-> +
-> +		cur++;
-> +		dst +=3D sect_size;
-> +		read_cnt++;
-> +	}
-> +
-> +	return read_cnt;
-> +}
-> +
-> +static int mtd_erase_write(struct mtd_info *mtd, uint64_t start, const =
-void *src)
-> +{
-> +	int ret;
-> +	size_t retlen;
-> +	struct erase_info erase =3D { 0 };
-> +
-> +	erase.mtd =3D mtd;
-> +	erase.addr =3D start;
-> +	erase.len =3D mtd->erasesize;
-> +
-> +	ret =3D mtd_erase(mtd, &erase);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret =3D mtd_write(mtd, start, mtd->erasesize, &retlen, src);
-> +	if (ret)
-> +		return ret;
-> +
-> +	if (retlen !=3D mtd->erasesize) {
-> +		pr_err("mtdblock: failed to read block at 0x%llx\n", start);
-> +		return -EIO;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static ulong mtd_bwrite(struct udevice *dev, lbaint_t start, lbaint_t b=
-lkcnt,
-> +			const void *src)
-> +{
-> +	struct blk_desc *block_dev =3D dev_get_uclass_plat(dev);
-> +	struct mtd_info *mtd =3D blk_desc_to_mtd(block_dev);
-> +	unsigned int sect_size =3D block_dev->blksz;
-> +	lbaint_t cur =3D start, blocks_todo =3D blkcnt;
-> +	ulong write_cnt =3D 0;
-> +	u8 *buf;
-> +	int ret =3D 0;
-> +
-> +	buf =3D malloc(mtd->erasesize);
-> +	if (!buf)
-> +		return -ENOMEM;
-> +
-> +	while (blocks_todo > 0) {
-> +		loff_t sect_start =3D cur * sect_size;
-> +		loff_t erase_start =3D ALIGN_DOWN(sect_start, mtd->erasesize);
-> +		u32 offset =3D sect_start - erase_start;
-> +		size_t cur_size =3D min_t(size_t,  mtd->erasesize - offset,
-> +					blocks_todo * sect_size);
-> +		size_t retlen;
-> +		lbaint_t written;
-> +
-> +		ret =3D mtd_read(mtd, erase_start, mtd->erasesize, &retlen, buf);
-> +		if (ret)
-> +			goto out;
-> +
-> +		if (retlen !=3D mtd->erasesize) {
-> +			pr_err("mtdblock: failed to read block 0x%lx\n", cur);
-> +			ret =3D -EIO;
-> +			goto out;
-> +		}
-> +
-> +		memcpy(buf + offset, src, cur_size);
-> +
-> +		ret =3D mtd_erase_write(mtd, erase_start, buf);
-> +		if (ret)
-> +			goto out;
-> +
-> +		written =3D cur_size / sect_size;
-> +
-> +		blocks_todo -=3D written;
-> +		cur +=3D written;
-> +		src +=3D cur_size;
-> +		write_cnt +=3D written;
-> +	}
-> +
-> +out:
-> +	free(buf);
-> +
-> +	if (ret)
-> +		return ret;
-> +
-> +	return write_cnt;
-> +}
-> +
-> +static int mtd_blk_probe(struct udevice *dev)
-> +{
-> +	int ret;
-> +
-> +	ret =3D device_probe(dev);
-> +	if (ret) {
-> +		pr_err("Probing %s failed (err=3D%d)\n", dev->name, ret);
-> +		return ret;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static const struct blk_ops mtd_blk_ops =3D {
-> +	.read =3D mtd_bread,
-> +	.write =3D mtd_bwrite,
-> +};
-> +
-> +U_BOOT_DRIVER(mtd_blk) =3D {
-> +	.name =3D "mtd_blk",
-> +	.id =3D UCLASS_BLK,
-> +	.ops =3D &mtd_blk_ops,
-> +	.probe =3D mtd_blk_probe,
-> +};
-> diff --git a/include/linux/mtd/mtd.h b/include/linux/mtd/mtd.h
-> index 09f5269887..9b997fadd1 100644
-> --- a/include/linux/mtd/mtd.h
-> +++ b/include/linux/mtd/mtd.h
-> @@ -26,6 +26,9 @@
->   #include <dm/device.h>
->   #endif
->   #include <dm/ofnode.h>
-> +#if IS_ENABLED(CONFIG_BLK)
-> +#include <blk.h>
-> +#endif
->
->   #define MAX_MTD_DEVICES 32
->   #endif
-> @@ -412,6 +415,15 @@ int mtd_write(struct mtd_info *mtd, loff_t to, size=
-_t len, size_t *retlen,
->   int mtd_panic_write(struct mtd_info *mtd, loff_t to, size_t len, size_=
-t *retlen,
->   		    const u_char *buf);
->
-> +#if IS_ENABLED(CONFIG_BLK)
-> +static inline struct mtd_info *blk_desc_to_mtd(struct blk_desc *bdesc)
-> +{
-> +	return *((struct mtd_info **)dev_get_priv(bdesc->bdev));
-> +}
-> +
-> +int mtd_bind(struct udevice *dev, struct mtd_info **mtd);
-> +#endif
-> +
->   int mtd_read_oob(struct mtd_info *mtd, loff_t from, struct mtd_oob_ops=
- *ops);
->   int mtd_write_oob(struct mtd_info *mtd, loff_t to, struct mtd_oob_ops =
-*ops);
->
-
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
