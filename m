@@ -4,60 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAF1DC54E51
-	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 13:12:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF5BBC5478C
+	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 13:18:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0CE8087FBF;
-	Tue, 27 Feb 2024 14:12:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id D8F0C87F7B;
+	Tue, 27 Feb 2024 14:18:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1709039565;
-	bh=fXEv76m2IYxeaKNB49FiT81DQdpYMh0GurOb78tk6Oc=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=kLaXfCe+yrol/Z39rK0T8SVuNB/pJK+rjJKtKYJFuWpKJaaQKOBN53sjI1piQ53tN
-	 BMwTtAy58MsMLQ31xF/BsK9pJ5nxADU1zEI0H4+ZiU9VVios8WhLjqDEuTrN8zuBeF
-	 n9C8v7mHWgWAJiVGIV06AkzWji89ErtNLWA4pGVQ0+J4XGTMNcq7LrS0X2lhnwiFJf
-	 yAGRGIMBEEB2hxC3n3w+kQv/jcnKH0BGyU/We/TsWdzbN+Rr6kiBYKfZKs01EKKDO+
-	 kvTcjd3QP1eBLiTH2bdudUnl80uUGPnDSyPFyoP0T9+CKTi3GFGsuxh7cGSsIgFl7D
-	 /Kqcqn++JbGXg==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="BgHEcID2";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 510348751B; Tue, 27 Feb 2024 14:18:40 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id A46DF87F7B;
- Tue, 27 Feb 2024 14:12:42 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1709039563;
- bh=fXEv76m2IYxeaKNB49FiT81DQdpYMh0GurOb78tk6Oc=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=Yy9xz6UdYcLXz4DTM7gh/fWU1Cr3MmJWS7qRG4GA+OV23BSU154ApvjBsLRpaMdhx
- A+EX8afGX/d/3PL1lUtbksCDesWS8JS2EWdBNxHRSI+KLnVy9d2YOijDNj11rYBm6n
- zadcnqRslbH13Td6RqVy8eranLESeMwbNn+2uOAQe6hihOv5d2NP4DS3slvN8k44EG
- UGeWVMIyQ06OW6puqABUVQ2f6UiTHhnyjXa3Yvx303DT4+0EqIpQMqEBbxjxSVH2xC
- CwfiHDjwzkLFG0/Bz7alIx2XqV5pFehYxPY0JOtk3650m/2GORPX4Kn8385bNjewdA
- 7dmwUprMlIyhA==
-Message-ID: <71ab8e0f-eda5-42e1-b0f9-1bd958b68397@denx.de>
-Date: Tue, 27 Feb 2024 13:02:31 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 5751587FAA
+ for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 14:18:38 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1709039902; x=1709644702; i=xypron.glpk@gmx.de;
+ bh=cUkKjakjJ31US787xwPmR976p4+3JFDp9pclaGZNaz4=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=BgHEcID2V1Us2jdlL/5BdiGkJKr6rxQIBu3t7+FsEmecM5KxgUKl2m9EnMV0JUnz
+ kdU/oE9WOSro81/45H7s0r8MqJEMIu2XFyYuzGcwD3HdVPeTt+W0E1cqiP4oGfrln
+ w0wMBT0n9gPZPgTAu0+Gy5r15oaeJRAwEL7kRz/O8/ET0fUt7IBsrdfdhCV4anKcg
+ MvuN88bjRJ40udhCFr2en7knfnIezQma6jvkWWYCEY+W1+pO1cli+SXOHlBP19V7E
+ ORCnBl8i9VBIDVVMuYREGUdDGisI0583OwxZHvCpJSF9dn5LbHMRexabK2mx18ng2
+ UVgMWWF7NypvcQcTag==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.67] ([95.222.37.56]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MCbEf-1rnzuI3UW3-009gHB; Tue, 27
+ Feb 2024 14:18:21 +0100
+Message-ID: <e9a4ff30-d854-4f34-bc40-95a9e385e9d2@gmx.de>
+Date: Tue, 27 Feb 2024 14:18:14 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/6] usb: xhci: Set up endpoints for the first 2 interfaces
+Subject: Re: [PATCH v1 4/4] efi: block: compile only if CONFIG_EFI_PARTITION
+ enabled
 Content-Language: en-US
-To: Janne Grunau <j@jannau.net>, Bin Meng <bmeng.cn@gmail.com>,
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, asahi@lists.linux.dev
-References: <20240221-asahi-keyboards-v1-0-814b2e741790@jannau.net>
- <20240221-asahi-keyboards-v1-2-814b2e741790@jannau.net>
- <9cb3370e-770a-40e6-b890-ae9b5a15bd44@denx.de>
- <b0c41f38-abf0-4713-a80a-c78f074b7b4d@app.fastmail.com>
- <52b99ba9-3772-4074-8b64-e01dde80f6a4@denx.de>
- <0ec5ded2-f3f7-4e79-afbd-f6f560ab0627@app.fastmail.com>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <0ec5ded2-f3f7-4e79-afbd-f6f560ab0627@app.fastmail.com>
+To: Alexey Romanov <avromanov@salutedevices.com>
+Cc: kernel@salutedevices.com, u-boot@lists.denx.de,
+ dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com,
+ frieder.schrempf@kontron.de, ilias.apalodimas@linaro.org, sjg@chromium.org,
+ bmeng@tinylab.org, tobias@waldekranz.com, jpewhacker@gmail.com,
+ marek.vasut+renesas@mailbox.org, kever.yang@rock-chips.com,
+ jbx6244@gmail.com, abdellatif.elkhlifi@arm.com, michal.simek@amd.com,
+ mikhail.kshevetskiy@iopsys.eu, patrice.chotard@foss.st.com
+References: <20240227100441.1811047-1-avromanov@salutedevices.com>
+ <20240227100441.1811047-5-avromanov@salutedevices.com>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240227100441.1811047-5-avromanov@salutedevices.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:Kupa6IWgOntHqEE16yUIkQ+aBKe9jHKAZ2vgHnz8/Yuu9F0ByJQ
+ JsAyl6CD6EnyyCy2QGHN8RtBRuCKvaoesUvlaNVUs6YSjFYvmLfFwez2fClDP5AGzjTzUaN
+ tkwYdk85LgQduRuaJ52FD7DDWVzn/GFujCeFBTAuPnjv/+ZtqWyvemHaScmEazIEaFRnL7B
+ rODzkd6386VjnWZiF8G7w==
+UI-OutboundReport: notjunk:1;M01:P0:ZkIMvrNbzj4=;f3SuuqqPq6Q1J8LiwnUQadznmYN
+ iPQ2CveeE1BJoy9xmXxnMNIRnI8M8O+kl2t0SvwiHQovR0WmYydN2Xsz+nVM8ICBE+O2KbgxR
+ 9RCvuJ+zpzKinewC/8f8zpcCiP0BRqr4vYqYikQppXYB5Ve3PhbsHIvQ5csV7uqPE8pb2gcmD
+ lgB4J5w0fAz9YEcHwdHum/BzwCkHHTSW11q61SFZnS9zI7nbb/dubyvZBmpqTxaK9f5u7uj2P
+ ooHbbBroU448NXawMuJ7HRWMo51Y64x7WokPlYzyrte/YGNIgHwEKYSUG3jQqJz1QfOFBX7Dc
+ KvXiogyzVmvpSzd7VUFugHAZoQFy19W6uXn/N1IZ69G9ht5sYUGzfX4+h6VDmcUBmyTbiiIbg
+ 4D6dqc71BUnZgHaC7K72xZTU6Sola8BTt6uL/gUBwlJWynqiSrFSwp2bS+3fOY4uZP29mQaW1
+ 7z4rje4oRnzUXXpN7ZX93zwWx9Zl4NORUtkF9y1xjWy4B3JyIfjOAD0EdCtvXL9SCrvCg6Nfu
+ h90yIpQLTXDa6En6DBEJ30mG4oFmXw5DJbT9TyDl0qR5peHAIsbUQM7NGo18O+p+vU2kT+Rxy
+ XWTzih8Thiv2XL8yuihKcTFI7+nkMV39/fDmB2YlG6yvLqU0XDElOZ/JGU/2DQNsbbOUw+2kc
+ 0GO5U5r/pk/Yc5OblwSZulEAkE3AV9JnlDBosAWAMsa0uYw/jiXQLeb7F3tCgxDW/RRRMHZsZ
+ f+L9Rn+dfsKg778CuhhPyshiP0I3jbUez5dDSCXLKCAcPtyt4/vcSSUIROyZrckMXk5TL501Q
+ L0Qwd1nJ+No/mxKa+d+ImDtZuGL18nCyEr/ZJ55Hg0wJI=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,41 +94,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/27/24 8:38 AM, Janne Grunau wrote:
-> Hej,
-> 
-> On Sun, Feb 25, 2024, at 22:47, Marek Vasut wrote:
->> On 2/25/24 4:28 PM, Janne Grunau wrote:
->>>
->>>
->>> On Wed, Feb 21, 2024, at 13:39, Marek Vasut wrote:
->>>> On 2/21/24 08:25, Janne Grunau via B4 Relay wrote:
->>>>> From: Janne Grunau <j@jannau.net>
->>>>>
->>>>> Apple USB keyboards carry the HID keyboard boot protocol on the second
->>>>> interface. Using the second interface in the USB keyboard driver does
->>>>> not work since the xhci has not allocated a transfer ring.
->>>>
->>>> So, what does this patch do ? That is not clear from the commit message.
->>>
->>> rewritten for v2:
->>> | usb: xhci: Set up endpoints for the first 2 interfaces
->>> |
->>> | The xhci driver currently only does the necessary initialization for
->>> | endpoints found in the first interface descriptor. Apple USB keyboards
->>> | (released 2021) use the second interface descriptor for the HID keyboard
->>> | boot protocol. To allow USB drivers to use endpoints from other
->>> | interface descriptors the xhci driver needs to ensure these endpoints
->>> | are initialized as well.
->>> | Use USB_MAX_ACTIVE_INTERFACES to control how many interface descriptors
->>> | are initialized and useable. Currently defined to 2 as that is enough to
->>> | make the Apple keyboard usable.
->>
->> Would it make sense to make this a tunable Kconfig option ?
-> 
-> I thought about that but I don't think it's worth it. We would have to default it to 2 (at least when the USB keyboard driver is enabled) since we can't predict which devices will be connected.
-> Why would anyone chose a different value than the fixed value? I can't think of convincing reasons.
+On 27.02.24 11:04, Alexey Romanov wrote:
+> We have to compile efi_block abstraction only if option
+> EFI_PARTITION is enabled. For example, if the user
+> only enabled MTD_PARTITIONS, we would still compile
+> efi_block. This is incorrect.
+>
+> Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
+> ---
+>   lib/efi_driver/Makefile | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/lib/efi_driver/Makefile b/lib/efi_driver/Makefile
+> index f2b6c05cc2..1fc85ce6f9 100644
+> --- a/lib/efi_driver/Makefile
+> +++ b/lib/efi_driver/Makefile
+> @@ -6,6 +6,6 @@
+>   # object inclusion implicitly depends on it
+>
+>   obj-y +=3D efi_uclass.o
+> -ifeq ($(CONFIG_PARTITIONS),y)
+> +ifeq ($(CONFIG_EFI_PARTITION),y)
 
-All right
+The symbol CONFIG_EFI_PARTITION is not related to UEFI. It provides
+support for GPT partition tables.
 
-Reviewed-by: Marek Vasut <marex@denx.de>
+efi_block_device.c provides support for block devices provided by EFI
+applications. This should not depend on GPT partition table support
+(EFI_PARTITION) as it well usable with other partition tables too.
+
+I would not know why iPXE loaded from an MTD block device should not be
+able allowed to provide an iSCSI drive.
+
+Please, drop this patch.
+
+Best regards
+
+Heinrich
+
+>   obj-y +=3D efi_block_device.o
+>   endif
+
