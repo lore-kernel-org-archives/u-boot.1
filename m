@@ -4,86 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 754E3C54798
-	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 14:04:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C7C1C5478C
+	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 15:40:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE19187971;
-	Tue, 27 Feb 2024 15:04:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 9B27387F9B;
+	Tue, 27 Feb 2024 16:40:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=armadeus.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Baydg4qa";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DFD1D87E01; Tue, 27 Feb 2024 15:04:00 +0100 (CET)
-Received: from mail-qt1-x82d.google.com (mail-qt1-x82d.google.com
- [IPv6:2607:f8b0:4864:20::82d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D3D2287FAA; Tue, 27 Feb 2024 16:40:17 +0100 (CET)
+Received: from 16.mo581.mail-out.ovh.net (16.mo581.mail-out.ovh.net
+ [46.105.72.216])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C332F86FCE
- for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 15:03:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0034287DE9
+ for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 16:40:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qt1-x82d.google.com with SMTP id
- d75a77b69052e-42a31b90edcso30303651cf.0
- for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 06:03:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1709042637; x=1709647437; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=hFfQNzkMR2nqKG5NSyIG+dFnVZQeVZzlKOVaGigrv4I=;
- b=Baydg4qam3zd32ozyyWNugvoiIIZpKDPHj9ENHlsK0zYYwlJmnH2LcnHtbS3CTjExQ
- pijSjQ8QbbRRHYSgxqnjLjg3Bhc1rqPgx5SOfLKEwwdY/Bz2CyIfJ5QvtpCvshs1VlUN
- dBK0+duXPJEOCDJACVfIJphFy/d2MJugYo0AuMI2ktbdbiRn5TF6F4EPJJzMyVgvTxyq
- XE+CYcdK0B15ANimHpV7uFknTZPDzCvRmCJoUkFams+QIl7EOVccteHgoSKkcGMFgVBT
- xnLdt82Ug2mPnFu5G++JV0ZpjKghnBxEi+kWgBrFlCm+imcU8zLA/IEpxiiYD8WsEGlo
- 6suw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709042637; x=1709647437;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=hFfQNzkMR2nqKG5NSyIG+dFnVZQeVZzlKOVaGigrv4I=;
- b=deOMalVlKK34qgvc0OAx9OYTP6D2QKZVBMhCWuulKNP2sK/0ygXgVNmiaCIfD1ivSq
- xr968rE8JgP9MqqrOuzj1v0Rb//F6jqvuA0XOvQWSE1Qyplso7kQm3kVkbAb2iDGAVHQ
- Fu+TDSL+Vm7KBe2m3XJ9SM8DYl5aMpYnVnKiw4ycYQFnOHWQGsypPb2lC6AVALnrx79I
- lu8+kld22fnuf1DmHpfPUMBoaAO9tZZCFvk+wCJ8810copmyYp6O5nPOJzVkzoXThzxv
- m1k+42sT30IbYsLeBjehVXMOs6uuk/+jA9+US8NGQUzNh6m7CdDciiBnkCiEFXkpwQjL
- ut9A==
-X-Gm-Message-State: AOJu0YzvNTB+0mBun+uPvnqvkyrG3TxJTn0pPN9Xj/P4OC/wzvF7MW7q
- k1ByUDfl1/oKrDRajzjw6YTQOOZqrexG5s+H3D1fTLuUbjaO/74b
-X-Google-Smtp-Source: AGHT+IFI0ifcM6OpOShDK8gAXc3uJQ/RMyUoTiAXr8vpbCoM8moqChfANuqK7Yx4zhvtCqTidEqcAA==
-X-Received: by 2002:a05:6214:2a4c:b0:68e:f75c:59ba with SMTP id
- jf12-20020a0562142a4c00b0068ef75c59bamr2492969qvb.47.1709042637431; 
- Tue, 27 Feb 2024 06:03:57 -0800 (PST)
-Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- om24-20020a0562143d9800b0068f5da018e3sm4196390qvb.9.2024.02.27.06.03.56
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 27 Feb 2024 06:03:57 -0800 (PST)
-Message-ID: <04e7a4b8-a264-5d9c-a0b5-c985d5f35cb8@gmail.com>
-Date: Tue, 27 Feb 2024 09:03:56 -0500
+ dmarc=none (p=none dis=none) header.from=armadeus.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=sebastien.szymanski@armadeus.com
+Received: from director9.ghost.mail-out.ovh.net (unknown [10.108.9.163])
+ by mo581.mail-out.ovh.net (Postfix) with ESMTP id 4TkhWc2GBXz19pX
+ for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 15:40:12 +0000 (UTC)
+Received: from ghost-submission-6684bf9d7b-snnsd (unknown [10.110.113.248])
+ by director9.ghost.mail-out.ovh.net (Postfix) with ESMTPS id CC4441FE67;
+ Tue, 27 Feb 2024 15:40:11 +0000 (UTC)
+Received: from armadeus.com ([37.59.142.95])
+ by ghost-submission-6684bf9d7b-snnsd with ESMTPSA
+ id k/0BLVsC3mVV3AAAJ0sS3Q
+ (envelope-from <sebastien.szymanski@armadeus.com>);
+ Tue, 27 Feb 2024 15:40:11 +0000
+Authentication-Results: garm.ovh; auth=pass
+ (GARM-95G0015a83a7b5-80c2-4656-ab25-1ec390085e5a,
+ 6291C1F48E860526C1A48BF1F3918837323A844E)
+ smtp.auth=sebastien.szymanski@armadeus.com
+X-OVh-ClientIp: 92.148.253.243
+From: =?UTF-8?q?S=C3=A9bastien=20Szymanski?= <sebastien.szymanski@armadeus.com>
+To: u-boot@lists.denx.de
+Cc: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
+ Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>,
+ =?UTF-8?q?S=C3=A9bastien=20Szymanski?= <sebastien.szymanski@armadeus.com>
+Subject: [PATCH 1/2] opos6uldev: make the LCD work again
+Date: Tue, 27 Feb 2024 16:40:01 +0100
+Message-ID: <20240227154002.30257-1-sebastien.szymanski@armadeus.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [PATCH v5] misc: fs-loader: Use fw_storage_interface instead of
- storage_interface
-Content-Language: en-US
-To: MD Danish Anwar <danishanwar@ti.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Michal Simek <michal.simek@amd.com>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, srk@ti.com, Vignesh Raghavendra <vigneshr@ti.com>,
- r-gunasekaran@ti.com, Roger Quadros <rogerq@kernel.org>
-References: <20240209100829.1079401-1-danishanwar@ti.com>
- <40bd8620-9fad-4c7b-9f28-4ab8a3e0365a@ti.com>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <40bd8620-9fad-4c7b-9f28-4ab8a3e0365a@ti.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Ovh-Tracer-Id: 170010889292934123
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedvledrgeehgdehgecutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefhvfevufffkffogggtgfesthekredtredtjeenucfhrhhomhepuforsggrshhtihgvnhcuufiihihmrghnshhkihcuoehsvggsrghsthhivghnrdhsiiihmhgrnhhskhhisegrrhhmrgguvghushdrtghomheqnecuggftrfgrthhtvghrnhepffeufffgveeiffelteelgfetjeffueffuefhffeikefhkefghfejjeeufeduteegnecukfhppeduvdejrddtrddtrddupdelvddrudegkedrvdehfedrvdegfedpfeejrdehledrudegvddrleehnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpehsvggsrghsthhivghnrdhsiiihmhgrnhhskhhisegrrhhmrgguvghushdrtghomhdpnhgspghrtghpthhtohepuddprhgtphhtthhopehuqdgsohhotheslhhishhtshdruggvnhigrdguvgdpoffvtefjohhsthepmhhoheekuddpmhhouggvpehsmhhtphhouhht
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,36 +72,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Danish,
+Commit 5d7a95f49999 ("imx6ul/imx6ull: synchronise device trees with
+linux") removed the display timings from the board device tree whereas
+they are still needed by the mxsfb driver.
+Add the timings back (the correct ones) in the
+imx6ul-opos6uldev-u-boot.dtsi file and remove them from the
+opos6uldev.env file.
 
-On 2/27/24 05:26, MD Danish Anwar wrote:
-> On 09/02/24 3:38 pm, MD Danish Anwar wrote:
->> The fs-loader driver reads env storage_interface and uses it to load
->> firmware file into memory using the medium set by env. Update the driver
->> to use env fw_storage_interface as this variable is only used to load
->> firmwares. This is to keep all variables used by fs-loader driver with
->> 'fw_' prefix. All other variables have 'fw_' prefix except for
->> storage_interface.
->>
->> The env storage_interface will act as fallback so that the
->> existing implementations do not break.
->>
->> Also update the FS Loader documentation accordingly.
->>
->> Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
->> ---
-> 
-> Hi Tom / Sean, can you please pick this patch if there is no pending
-> comments to address.
-> 
+Update the opos6uldev_defconfig file so that the LCD turns on at boot.
 
-Sorry, I forgot to respond to this earlier.
+Fixes: 5d7a95f49999 ("imx6ul/imx6ull: synchronise device trees with linux")
+Signed-off-by: Sébastien Szymanski <sebastien.szymanski@armadeus.com>
+---
+ arch/arm/dts/imx6ul-opos6uldev-u-boot.dtsi | 28 +++++++++++++++++-----
+ board/armadeus/opos6uldev/opos6uldev.env   |  1 -
+ configs/opos6uldev_defconfig               |  3 ---
+ 3 files changed, 22 insertions(+), 10 deletions(-)
 
-To be honest, I'm not really convinced. We have plenty of environmental
-variables which are inconsistent (e.g. ethaddr, eth2addr, eth3addr) and it
-doesn't cause any issues. While fixing code has no cost, the environment
-is an ABI which we can't break. So we'd have to support both of these
-variables forever. I'm not really a fan of doing that without good reason,
-and I think aesthetics of the variable name isn't really compelling.
+diff --git a/arch/arm/dts/imx6ul-opos6uldev-u-boot.dtsi b/arch/arm/dts/imx6ul-opos6uldev-u-boot.dtsi
+index aa88964f210d..3b52d6bbd9b9 100644
+--- a/arch/arm/dts/imx6ul-opos6uldev-u-boot.dtsi
++++ b/arch/arm/dts/imx6ul-opos6uldev-u-boot.dtsi
+@@ -7,12 +7,6 @@
+ 
+ #include "imx6ul-opos6ul-u-boot.dtsi"
+ 
+-/ {
+-	aliases {
+-		display0 = &lcdif;
+-	};
+-};
+-
+ &aips1 {
+ 	bootph-pre-ram;
+ 
+@@ -22,7 +16,29 @@
+ };
+ 
+ &lcdif {
++	display = <&display0>;
+ 	bootph-some-ram;
++
++	display0: display0 {
++		bits-per-pixel = <18>;
++		bus-width = <18>;
++
++		display-timings {
++			timing0 {
++				clock-frequency = <33300000>;
++				hactive = <800>;
++				vactive = <480>;
++				hback-porch = <36>;
++				hfront-porch = <210>;
++				vback-porch = <13>;
++				vfront-porch = <22>;
++				hsync-len = <10>;
++				vsync-len = <10>;
++				de-active = <1>;
++				pixelclk-active = <0>;
++			};
++		};
++	};
+ };
+ 
+ &pinctrl_uart1 {
+diff --git a/board/armadeus/opos6uldev/opos6uldev.env b/board/armadeus/opos6uldev/opos6uldev.env
+index f90029787104..2e7b65968d1d 100644
+--- a/board/armadeus/opos6uldev/opos6uldev.env
++++ b/board/armadeus/opos6uldev/opos6uldev.env
+@@ -24,7 +24,6 @@ mmcrootfstype=ext4 rootwait
+ kernelimg=opos6ul-linux.bin
+ splashpos=0,0
+ splashimage=CONFIG_SYS_LOAD_ADDR
+-videomode=video=ctfb:x:800,y:480,depth:18,pclk:33033,le:96,ri:96,up:20,lo:21,hs:64,vs:4,sync:0,vmode:0
+ check_env=if test -n ${flash_env_version};
+ 	then env default env_version;
+ 	else env set flash_env_version ${env_version}; env save;
+diff --git a/configs/opos6uldev_defconfig b/configs/opos6uldev_defconfig
+index e1884df9dd23..7d21a6fe93c5 100644
+--- a/configs/opos6uldev_defconfig
++++ b/configs/opos6uldev_defconfig
+@@ -115,13 +115,10 @@ CONFIG_CI_UDC=y
+ CONFIG_USB_GADGET_DOWNLOAD=y
+ CONFIG_VIDEO=y
+ CONFIG_VIDEO_LOGO=y
+-# CONFIG_VIDEO_BPP8 is not set
+-# CONFIG_VIDEO_BPP32 is not set
+ CONFIG_SYS_WHITE_ON_BLACK=y
+ CONFIG_VIDEO_MXS=y
+ CONFIG_SPLASH_SCREEN=y
+ CONFIG_SPLASH_SCREEN_ALIGN=y
+-CONFIG_SPLASH_SOURCE=y
+ CONFIG_BMP_16BPP=y
+ CONFIG_BMP_24BPP=y
+ CONFIG_BMP_32BPP=y
+-- 
+2.43.0
 
---Sean
