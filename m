@@ -4,60 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B1BAC5478C
-	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 01:33:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E1B2C48BF6
+	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 02:25:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE43587F9F;
-	Tue, 27 Feb 2024 02:33:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 6D3F387FA5;
+	Tue, 27 Feb 2024 03:25:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1708997619;
-	bh=iF8RmXGTY6CBmGYipiSCAE2RxWD51LSUgPJhHy0u1go=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=l18cUOncNxrZ1Gi3lMYqUL2W7nGXxrCrDmltK+SUh0FkJcP+sc+ASroy+01Gm9WMD
-	 6LBCxflmZh1pURPuj+MJSRZtkuVPdCiECVdxw6EhY1++sOgAMMPnft9IHYGAEpZ/ig
-	 vKTDtNgv/Sl4WjVUNBnm8xAVGgdk+cwKvL2hzPyGmzW2rGFyfA74iAt+i8ivNqP32v
-	 eG8+aBtmLz1vLpMkJzFdxwUDkIRNlzW2ce3s8cjqJLFVoEqHEgltkZXqM7enB1PIr5
-	 nDa8BSS7OuWZyYAhRZPcCG62qeDr9NI23MmvnBB+NI1wDtPn6w3sA1475wwCM552ul
-	 cvbt6K2xqpv2Q==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VtuUo3f9";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 1EFF987BFD; Tue, 27 Feb 2024 03:25:27 +0100 (CET)
+Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
+ [IPv6:2607:f8b0:4864:20::b36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id E98D687EF3;
- Tue, 27 Feb 2024 02:33:38 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1708997619;
- bh=iF8RmXGTY6CBmGYipiSCAE2RxWD51LSUgPJhHy0u1go=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=e8FvQ/HSEAQRbpWPLaUGhCWpM9BNVPhQ5mUuv/C0bO04WP9OlGNM5Fwxo+wktB95b
- 92U9+ahh/orko9mzPDBEImphvjRZ2jjT4Dz45qKjbrlvM2eL4aBB2K12WZhhwLYzRQ
- ACaJZd9IOG+LFIcANGW9vmIbX6m+7p96hpchDABuTonhrUcTVuVy2vZ6TwCBHu4hOn
- mEBtCPe56pkhvFEWvTWgEwq+yfuD3Cr85jfeCWhQ35xE6q4i0CFSL/4w7BTPzipyHb
- Hvu2tVZwff83+/7++9j75zT9PMjzlOBPqQuELUmSIbyYquQ7Tkm5s8J/EFVtZksX2B
- gfuNZ41AuPaGw==
-Message-ID: <fd68838d-b040-4c20-be55-3f9e5a407bf1@denx.de>
-Date: Tue, 27 Feb 2024 02:20:55 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 57D1187F6D
+ for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 03:25:23 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb36.google.com with SMTP id
+ 3f1490d57ef6-dcd94fb9e4dso4077048276.2
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 18:25:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1709000721; x=1709605521; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=VufDSU/qx5WGJqvicnMNt/PdXj1HsFP60F4EYkoY47Y=;
+ b=VtuUo3f9qa89thrKKhZXis+bmkxDRLGAKDbKTfsQFCg/DQkRzpredMiQXXqesXqAsT
+ NAMWEBlqGxsYCqfZt7RHk6Ybrq4eh/6WHdORnpyiNNZN5aLd1TMp3K/g/LpbwQ57ZoCo
+ 7LCo/LHUytRaG75/VXcFFySFomW3+9y82GpIw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1709000721; x=1709605521;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=VufDSU/qx5WGJqvicnMNt/PdXj1HsFP60F4EYkoY47Y=;
+ b=afG6Kres/UgxhP9pCjiYPm8WFY4L710tSQ+h2Mxdo8Y58wMb8OC8LckqGAr39CKHJd
+ w9JdYWt4LaNY7KQLaLLCIR0bBSTPPX/3zLIvwmK26xjIxQ/HPKsQAhQG6HK/psnt5bRr
+ pUDXbfHwEU7yI8mlP7gxoTmEmi8ADF9vdi6zl15IUi0OUWGCCNtkXvWqvRO8cazEDzIc
+ 8IJTmiCdsgvmAGbOTtjtotWdjggyGYa8GHXu6rY+LwC5B5qGDo4NxPsJIupAsYizSvP+
+ vFGhd+ifZ0C0d8FPHIzrJExI1eM/UYaWnXiqjaX4epKiWjsNmCmxgfSi8adtb/E+QhDL
+ A9Bw==
+X-Gm-Message-State: AOJu0YwhE5B+mObNsDTq2CkxDJF46eYS6oMy3d/bjwX19gC/AACtnlPl
+ JHEcm8mXAXBzFYA9HHEOiN4ZV8p8nKfUuGJDOqlxB5CsCXLBOxOE47vdH08ExBZTx9NzPX2zCa3
+ v
+X-Google-Smtp-Source: AGHT+IHYrkxEsFZQiVvG3gjA2Y8GIH3zBXtgUa2mepNon2MUx6z1eicbhcwesVCReh/GqJ5a1dISew==
+X-Received: by 2002:a25:c5c8:0:b0:dcf:47b6:9155 with SMTP id
+ v191-20020a25c5c8000000b00dcf47b69155mr1037705ybe.54.1709000721596; 
+ Mon, 26 Feb 2024 18:25:21 -0800 (PST)
+Received: from bill-the-cat (065-184-194-195.res.spectrum.com.
+ [65.184.194.195]) by smtp.gmail.com with ESMTPSA id
+ y14-20020a25860e000000b00dcdac51bad9sm1169783ybk.49.2024.02.26.18.25.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 26 Feb 2024 18:25:20 -0800 (PST)
+Date: Mon, 26 Feb 2024 21:25:18 -0500
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
+Subject: [ANN] U-Boot v2024.04-rc3 released
+Message-ID: <20240227022518.GJ3040305@bill-the-cat>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/6] usb: kbd: Ignore Yubikeys
-Content-Language: en-US
-To: Mark Kettenis <mark.kettenis@xs4all.nl>
-Cc: j@jannau.net, bmeng.cn@gmail.com, trini@konsulko.com,
- u-boot@lists.denx.de, asahi@lists.linux.dev, marcan@marcan.st
-References: <20240221-asahi-keyboards-v1-0-814b2e741790@jannau.net>
- <20240221-asahi-keyboards-v1-4-814b2e741790@jannau.net>
- <2acb9976-a40e-4977-b7ca-2462e84251ed@denx.de>
- <4c1c6b72-ffe5-4ff3-8d12-9fc0b956643d@app.fastmail.com>
- <85d561a6-54cb-4c1c-bfb0-559163e859c0@denx.de>
- <874jdvj6kx.fsf@bloch.sibelius.xs4all.nl>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <874jdvj6kx.fsf@bloch.sibelius.xs4all.nl>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="rvipUUSNoOQRg2Gm"
+Content-Disposition: inline
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,101 +86,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/26/24 9:47 PM, Mark Kettenis wrote:
->> Date: Sun, 25 Feb 2024 22:57:23 +0100
->> From: Marek Vasut <marex@denx.de>
->>
->> On 2/25/24 5:07 PM, Janne Grunau wrote:
->>> Hej,
->>>
->>> On Wed, Feb 21, 2024, at 13:41, Marek Vasut wrote:
->>>> On 2/21/24 08:25, Janne Grunau via B4 Relay wrote:
->>>>> From: Hector Martin <marcan@marcan.st>
->>>>>
->>>>> We currently only support one USB keyboard device, but some devices
->>>>> emulate keyboards for other purposes. Most commonly, people run into
->>>>> this with Yubikeys, so let's ignore those.
->>>>>
->>>>> Even if we end up supporting multiple keyboards in the future, it's
->>>>> safer to ignore known non-keyboard devices.
->>>>>
->>>>> Signed-off-by: Hector Martin <marcan@marcan.st>
->>>>> ---
->>>>>     common/usb_kbd.c | 19 +++++++++++++++++++
->>>>>     1 file changed, 19 insertions(+)
->>>>>
->>>>> diff --git a/common/usb_kbd.c b/common/usb_kbd.c
->>>>> index 4cbc9acb73..774d3555d9 100644
->>>>> --- a/common/usb_kbd.c
->>>>> +++ b/common/usb_kbd.c
->>>>> @@ -120,6 +120,15 @@ struct usb_kbd_pdata {
->>>>>     
->>>>>     extern int __maybe_unused net_busy_flag;
->>>>>     
->>>>> +/*
->>>>> + * Since we only support one usbkbd device in the iomux,
->>>>> + * ignore common keyboard-emulating devices that aren't
->>>>> + * real keyboards.
->>>>> + */
->>>>> +const uint16_t vid_blocklist[] = {
->>>>> +	0x1050, /* Yubico */
->>>>> +};
->>>>> +
->>>>>     /* The period of time between two calls of usb_kbd_testc(). */
->>>>>     static unsigned long kbd_testc_tms;
->>>>>     
->>>>> @@ -465,6 +474,7 @@ static int usb_kbd_probe_dev(struct usb_device *dev, unsigned int ifnum)
->>>>>     	struct usb_endpoint_descriptor *ep;
->>>>>     	struct usb_kbd_pdata *data;
->>>>>     	int epNum;
->>>>> +	int i;
->>>>>     
->>>>>     	if (dev->descriptor.bNumConfigurations != 1)
->>>>>     		return 0;
->>>>> @@ -480,6 +490,15 @@ static int usb_kbd_probe_dev(struct usb_device *dev, unsigned int ifnum)
->>>>>     	if (iface->desc.bInterfaceProtocol != USB_PROT_HID_KEYBOARD)
->>>>>     		return 0;
->>>>>     
->>>>> +	for (i = 0; i < ARRAY_SIZE(vid_blocklist); i++) {
->>>>> +		if (dev->descriptor.idVendor == vid_blocklist[i]) {
->>>>> +			printf("Ignoring keyboard device 0x%x:0x%x\n",
->>>>> +			       dev->descriptor.idVendor,
->>>>> +			       dev->descriptor.idProduct);
->>>>> +			return 0;
->>>>> +		}
->>>>> +	}
->>>>
->>>> I vaguely recall a discussion about previous version of this, I think
->>>> the suggestion was to make the list of ignored devices configurable via
->>>> environment variable, so users can add to that list from U-Boot shell.
->>>> Would it be possible to make it work this way ?
->>>
->>> oh, I completely forgot that this patch was already submitted. I briefly looked through asahi tree for related patches and did not check whether this was previously submitted.
->>> I've added environment based blocking as separate patch with blocking either complete vendor IDs or vendor, product ID combinations. A separate patch to simplify authorship tracking and the implementation doesn't share any code.
->>
->> It would be better to have only one patch which does not hard-code any
->> USB IDs, and then add those blocked IDs via U-Boot default environment
->> for this specific machine. We cannot predict what yubico will do in the
->> future, whether they might make a device that shouldn't be blocked for
->> example. If they do, the user should be able to unblock their device by
->> running e.g. '=> setenv usb_blocklist' instead of updating their bootloader.
->>
->> I think a simple list of blocked VID:PID pairs, maybe with wildcards,
->> would be nice, i.e. something like 'usb_blocklist=1234:5678,1050:*' to
->> block device 0x1234:0x5678 and all devices with VID 0x1050 . That should
->> be easy to parse with strtok()/strtol() or some such and the code should
->> not be too complex.
-> 
-> I do like the idea of having a configurable list of usb devices to
-> ignore.  The U-Boot USB stack is still not perfect
 
-Very far from perfect, yes.
+--rvipUUSNoOQRg2Gm
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> and there are still
-> USB devices that will prevent us from booting when connected.  The
-> list will provide a nice workaround for that issue.
-> 
-> But the yubikeys will cause the same problem on other boards as well.
-> So I think it makes sense to put those in a default list.
+Hey all,
 
-I agree.
+It's late in the day, but still release day and so here's -rc3. I've
+also pushed this to the next branch and that is now open.
+
+In terms of a changelog,=20
+git log --merges v2024.04-rc2..v2024.04-rc3
+contains what I've pulled but as always, better PR messages and tags
+will provide better results here.
+
+I hope to get back on schedule and that means the rest of the rcs every
+other Monday, and with final release on Tuesday, April 2nd, 2024. Thanks
+all!
+
+--=20
+Tom
+
+--rvipUUSNoOQRg2Gm
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXdSA4ACgkQFHw5/5Y0
+tyxiCAv+KMfiW/LconySScZAKhodTm+C7ghn4YLKY7vm0003Bnh2kyAcVr+c1Gwa
+FnBA+E0C1ry2lqu02LEStlibVA4z+0/otin6YmjFHb8k2wa5+M3clYn7ve6kPGtq
+x+yhwW2yZIRfSmfNHlpLd9dGmW3csZYDIVgDRBhtz6oKpfjV3N0M80GQ4tV9SyIj
+kIrbHCnX2vI5tYmA8O2f+W4og1o82Okcyz8f2RLGLtD4jaSNfJOcfdNsqiUKnmM1
+YsjoGo9VKoPOFNzuuy6/rnthb5N2p3iJNSZXPbB92c220484gfjTkwcFJ3JLRbRp
+WMeuYlyeLyOzeGVBLgHExUkxiPQF5M3O5R5pt91BymTu2W6tE0+lPRdtUh5v/uzl
+TdAp/24DX/yQFcO0688663HH3fBWnU4RS5virkR/fnQHSuKimVYNMP3eIa8xln01
+75n3egp5hkxgiLf7GiCZVNtiTvPnSSZk3yaOMjVb+RdDppLYVZYmEUDOeUwrNuxo
+vVxiNprd
+=b7tl
+-----END PGP SIGNATURE-----
+
+--rvipUUSNoOQRg2Gm--
