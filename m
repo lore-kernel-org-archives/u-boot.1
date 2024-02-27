@@ -4,81 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21B07C48BF6
-	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 02:52:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C64B7C48BF6
+	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 03:04:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A4DB687FBC;
-	Tue, 27 Feb 2024 03:52:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2F43C87FA6;
+	Tue, 27 Feb 2024 04:04:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vlZvQ9bq";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="b4OGrSb1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A02487FBE; Tue, 27 Feb 2024 03:52:25 +0100 (CET)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id 4E57187FA7; Tue, 27 Feb 2024 04:04:23 +0100 (CET)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 484FE87FAD
- for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 03:52:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4819187F9E
+ for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 04:04:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-412a9ea61adso4725845e9.0
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 18:52:23 -0800 (PST)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-412a87f0d8eso8082215e9.2
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 19:04:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709002343; x=1709607143; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1709003060; x=1709607860; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=hDzwr5loYLwdiczTKyI4ZwrH9DitXFOz194Vpb6o5J0=;
- b=vlZvQ9bq7uh5mnJ03Gn0mAZxQnhmg/I3J1eHrB7uMIgPjtNpLiH14BiNFmystL/8AZ
- gV6yMkWZgNs/sRm/GZVoFA+9J/owkhufzum0Q8c6DRmj2diSxuP0TV09fe2Bz/82uh+o
- oDgnLTZMsqBWi1QFsLjO0R2qNiLkk2jvs2eXNAo9wiUcVsfYGBzDtbaas2qEK/kGzdhk
- QwSxyJw9q+N5d0ax9iC+sONKha7FEnnDblYaD2lYYlevRoJHWoZpcNs15GLlxVsl63Xm
- KdQbsQ/mdwrKKl3LwpFAwp9alj/f/J8lsN3lDdcApGvCVYOJf4gYlT3TqpelHFNZJ4z/
- 7KlA==
+ bh=6KdF1Svt3bCUXQ60CK/fKpGOjBjuMOBF6q2JIdtHJD0=;
+ b=b4OGrSb1JaCJuJAOgg06ibIbbfc6vfbV5RGGkh7eETE6tWKa1gZK364M+K0mwlOmY9
+ mC2L8o0DdNx/MJ79HGTDymp/+paGnccFu1GGWFUgxTERhmKz6taYDcbwdtUTPI2ECzyu
+ EBgrfBd+G3YjpWfEJsmjyy2ghdO05sz8ZICmyaQSki6SQZrbFFatgeQ9Rk4GG3B3aU4V
+ stzs8mvrkCuUSzWkq6NuT0Wiz2KONtBObFMLg71O2AfpovOaTj2lvZrHfbGm5ow50pyZ
+ 9q5aQGcGvAAFgRnlA687+zRd621M3MUMSLxR3xSQVgoIe7ka60+CRFhfczgOT6PPeu0L
+ RMtg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709002343; x=1709607143;
+ d=1e100.net; s=20230601; t=1709003060; x=1709607860;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=hDzwr5loYLwdiczTKyI4ZwrH9DitXFOz194Vpb6o5J0=;
- b=NgnBGZALNFijWJUNpHzGlBY3cxStT7txL1Ce30jqtqwf8tIhcMI/sUmb4+NNNTLWMh
- srAZflD2cJn/WP+TDlu/JndJqGQAIndCrW+hwokfEvKg0/p/Sd7/KDnmPh1d2HgNEmQ2
- WHHsmSzmjJSqc547tciJMb1i3NwE5f5USYeUtgVY6bUP/M+vaG5yARk1XyiHlMPPIu3Z
- gM06LaDomc+rWInFezghQ7XPxCr4zDF8M7iPsAecZ5FSms5DURF8u684hWcEnsFpCGZ4
- /Eq5ZEOfk835NYv5fwwJ3AByIIyRIOeX2cAe4h2VLNp16HZCW9gsPa1/eUE/rerTTnoB
- g5zA==
+ bh=6KdF1Svt3bCUXQ60CK/fKpGOjBjuMOBF6q2JIdtHJD0=;
+ b=JrEjr0r84jfo3xCBNMBMh112xE6u5V81yMlvP2f0ojyK8mppSrB4XilIUNVJtT17B9
+ wdzvySAiKxMQ9N73cj3JgkIpZMY+OGDKnYy39nvY/474akhePl6ZtY09U931GqX0u0mi
+ NH2ANCIkJfmX8VQzykj7iTag+YhvpTIPNHE6Powd/SnRycys7CJGtiTjnrEWw37Pu5aW
+ UEIPs/LuXnhrt8nCy60Y8da9EoIzco2M/Q5PsxbtoHm8tEuNMgOkkL7vPT01OwJdqWxK
+ APulPhDcZ0y8wMvh2pM7g7yFfzaqGGIP8FDWNSH3VMVZH0ukOD5g73oojav4cbPe7Xrg
+ k+3w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXu6iM5hCoBD7Ni03bl7wmMgIj41DRRXUyyZiv+Vo1D9cKHanaaHpgOWl+Y9eqXO8rgjfBL+HFqAoEqe5rhEGZJmXCbDQ==
-X-Gm-Message-State: AOJu0YzP4TkHP+jRXfHNro/+liDNXHGKuDg3Kxiv+eWXCK6g/ZWyAOxm
- pkUmrg5Uu9Wlr9U4GoBC92iHhSX0cZG9eUrOcPQ+209aqR093Gc8N9AEN/VrY5s=
-X-Google-Smtp-Source: AGHT+IHdCI5yBnUZZvSOh1MatvPn+VK0+uOutG9zkNLbbV3saKKkdbA6ll5wYd1TRkoR8tjTE03RAw==
-X-Received: by 2002:a05:600c:358f:b0:412:a7da:8286 with SMTP id
- p15-20020a05600c358f00b00412a7da8286mr2204701wmq.4.1709002342768; 
- Mon, 26 Feb 2024 18:52:22 -0800 (PST)
+ AJvYcCUxaHVKxkNg7CcxxuKKr9hTeAey/ymEe2wlMOTrUyPNQMnxG1JGMg7YSdQn4ay2BythJ44Mc+i7aJqAomqPWtdEYT9aAA==
+X-Gm-Message-State: AOJu0YwHSaTy6zGbfwnZhMwyhknzNO4KnOAqL4fTTQu9dSfA2++mSqng
+ NMAoqNXj0VWD9RTUKvCNEht9tiSBGuvpsCyIcUb36MEzaUtBj4Gvl/AoO/wsdi4=
+X-Google-Smtp-Source: AGHT+IEo9wL9nAbVg9zAc9hoeSMVcajG2OxICXRnMBfnDIjjUOzFdGgkWWKNHEh8RoNeymZSHRJXWQ==
+X-Received: by 2002:adf:f089:0:b0:33b:187c:4ca0 with SMTP id
+ n9-20020adff089000000b0033b187c4ca0mr5322595wro.62.1709003060501; 
+ Mon, 26 Feb 2024 19:04:20 -0800 (PST)
 Received: from [192.168.1.78] (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- m26-20020a05600c3b1a00b00412a5cb5a76sm4149563wms.23.2024.02.26.18.52.22
+ cl7-20020a5d5f07000000b0033dc931eb06sm7163600wrb.0.2024.02.26.19.04.19
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 26 Feb 2024 18:52:22 -0800 (PST)
-Message-ID: <e6d6b02e-4826-4190-817b-f6ad07e4a387@linaro.org>
-Date: Tue, 27 Feb 2024 02:52:22 +0000
+ Mon, 26 Feb 2024 19:04:20 -0800 (PST)
+Message-ID: <2bcd24b3-7b2c-46fe-b6bb-8b61068f14c2@linaro.org>
+Date: Tue, 27 Feb 2024 03:04:19 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 07/10] pinctrl: qcom: Include IPQ9574
+Subject: Re: [PATCH 08/10] mmc: msm_sdhci: Handle different vendor cap
+ register offsets
 Content-Language: en-US
 To: Varadarajan Narayanan <quic_varada@quicinc.com>, u-boot@lists.denx.de
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
+ Sean Anderson <seanga2@gmail.com>, Sumit Garg <sumit.garg@linaro.org>,
+ Tom Rini <trini@konsulko.com>
 References: <20240226100807.1095607-1-quic_varada@quicinc.com>
- <20240226100807.1095607-8-quic_varada@quicinc.com>
+ <20240226100807.1095607-9-quic_varada@quicinc.com>
 From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20240226100807.1095607-8-quic_varada@quicinc.com>
+In-Reply-To: <20240226100807.1095607-9-quic_varada@quicinc.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -100,48 +103,74 @@ X-Virus-Status: Clean
 
 
 On 26/02/2024 10:08, Varadarajan Narayanan wrote:
-> Add support for IPQ9574 under pinctrl/qcom.
-Likewise, squash this into a patch introducing the whole pinctrl driver.
-There isn't much to review here while all the actual code is in one huge
-patch.
+> In the IPQ9574, the vendor capabilities register is at a
+> different offset than in other SoCs. Hence add a vendor_cap
+> field to msm_sdhc_variant_info structure to get the correct
+> register offset.
 > 
 > Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
+With below feedback addressed, please add
+
+Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
 > 
->  drivers/pinctrl/qcom/Kconfig  | 7 +++++++
->  drivers/pinctrl/qcom/Makefile | 1 +
->  2 files changed, 8 insertions(+)
+>  drivers/mmc/msm_sdhci.c | 11 ++++++++++-
+>  1 file changed, 10 insertions(+), 1 deletion(-)
 > 
-> diff --git a/drivers/pinctrl/qcom/Kconfig b/drivers/pinctrl/qcom/Kconfig
-> index 2fe6398147..558a4d9bbd 100644
-> --- a/drivers/pinctrl/qcom/Kconfig
-> +++ b/drivers/pinctrl/qcom/Kconfig
-> @@ -27,6 +27,13 @@ config PINCTRL_QCOM_IPQ4019
->  	  Say Y here to enable support for pinctrl on the IPQ4019 SoC,
->  	  as well as the associated GPIO driver.
+> diff --git a/drivers/mmc/msm_sdhci.c b/drivers/mmc/msm_sdhci.c
+> index fe1e754bfd..9285d412fe 100644
+> --- a/drivers/mmc/msm_sdhci.c
+> +++ b/drivers/mmc/msm_sdhci.c
+> @@ -48,6 +48,7 @@ struct msm_sdhc {
 >  
-> +config PINCTRL_QCOM_IPQ9574
-> +	bool "Qualcomm IPQ9574 GCC"
-> +	select PINCTRL_QCOM
-> +	help
-> +	  Say Y here to enable support for pinctrl on the IPQ9574 SoC,
-> +	  as well as the associated GPIO driver.
+>  struct msm_sdhc_variant_info {
+>  	bool mci_removed;
+> +	u32  vendor_cap;	/* Non standard (?) SDHCI register */
+>  };
+>  
+>  DECLARE_GLOBAL_DATA_PTR;
+> @@ -158,7 +159,7 @@ static int msm_sdc_probe(struct udevice *dev)
+>  	if (core_major >= 1 && core_minor != 0x11 && core_minor != 0x12) {
+>  		caps = readl(host->ioaddr + SDHCI_CAPABILITIES);
+>  		caps |= SDHCI_CAN_VDD_300 | SDHCI_CAN_DO_8BIT;
+> -		writel(caps, host->ioaddr + SDHCI_VENDOR_SPEC_CAPABILITIES0);
+> +		writel(caps, host->ioaddr + var_info->vendor_cap);
+>  	}
+>  
+>  	ret = mmc_of_parse(dev, &plat->cfg);
+> @@ -219,15 +220,23 @@ static int msm_sdc_bind(struct udevice *dev)
+>  
+>  static const struct msm_sdhc_variant_info msm_sdhc_mci_var = {
+>  	.mci_removed = false,
+> +	.vendor_cap = SDHCI_VENDOR_SPEC_CAPABILITIES0,
+>  };
+>  
+>  static const struct msm_sdhc_variant_info msm_sdhc_v5_var = {
+>  	.mci_removed = true,
+> +	.vendor_cap = SDHCI_VENDOR_SPEC_CAPABILITIES0,
+This is wrong, it should be 0x21c for all v5 controllers (see
+drivers/mmc/host/sdhci-msm.c in Linux).
+> +};
 > +
->  config PINCTRL_QCOM_QCS404
->  	bool "Qualcomm QCS404 GCC"
->  	select PINCTRL_QCOM
-> diff --git a/drivers/pinctrl/qcom/Makefile b/drivers/pinctrl/qcom/Makefile
-> index 6d9aca6d7b..90e85510fa 100644
-> --- a/drivers/pinctrl/qcom/Makefile
-> +++ b/drivers/pinctrl/qcom/Makefile
-> @@ -5,6 +5,7 @@
->  obj-$(CONFIG_PINCTRL_QCOM) += pinctrl-qcom.o
->  obj-$(CONFIG_PINCTRL_QCOM_APQ8016) += pinctrl-apq8016.o
->  obj-$(CONFIG_PINCTRL_QCOM_IPQ4019) += pinctrl-ipq4019.o
-> +obj-$(CONFIG_PINCTRL_QCOM_IPQ9574) += pinctrl-ipq9574.o
->  obj-$(CONFIG_PINCTRL_QCOM_APQ8096) += pinctrl-apq8096.o
->  obj-$(CONFIG_PINCTRL_QCOM_QCS404) += pinctrl-qcs404.o
->  obj-$(CONFIG_PINCTRL_QCOM_SDM845) += pinctrl-sdm845.o
+> +static const struct msm_sdhc_variant_info msm_sdhc_v5_ipq_var = {
+So this can be dropped
+> +	.mci_removed = true,
+> +	.vendor_cap = 0x21c,
+>  };
+>  
+>  static const struct udevice_id msm_mmc_ids[] = {
+>  	{ .compatible = "qcom,sdhci-msm-v4", .data = (ulong)&msm_sdhc_mci_var },
+>  	{ .compatible = "qcom,sdhci-msm-v5", .data = (ulong)&msm_sdhc_v5_var },
+> +	{ .compatible = "qti,sdhci-msm-v5", .data = (ulong)&msm_sdhc_v5_ipq_var },
+This can be dropped too.
+
+For future reference as I really don't want to deal with these, please
+never submit a patch using or otherwise referencing a compatible string
+starting with "qti,". There is never a reason such a compatible should
+appear in upstream code or DT.
+>  	{ }
+>  };
+>  
 
 -- 
 // Caleb (they/them)
