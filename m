@@ -4,96 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27347C54798
-	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 16:26:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9707BC54798
+	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 16:26:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2266C87FF5;
+	by phobos.denx.de (Postfix) with ESMTP id 9D52A88050;
 	Tue, 27 Feb 2024 17:25:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="ioOiA/V3";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ibub1Obw";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="oGGRHILQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D91C287E62; Tue, 27 Feb 2024 11:05:07 +0100 (CET)
-Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E87698801D; Tue, 27 Feb 2024 17:10:12 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F10D187FD6
- for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 11:05:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id CF1B787FFF
+ for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 17:10:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=avromanov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 6AE53100538;
- Tue, 27 Feb 2024 13:04:59 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 6AE53100538
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1709028299;
- bh=eUYktXAPsIFitmc7Qncvqq6bA1BeQXp1QXVzM5Zzq4w=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=ioOiA/V3gTJ8cbNUzwcHcXcz1FpFuhyM7bwz5EUQd8Mc+rDt1aV5r0M2MRw5B7AR2
- iDt2dXFNXEMcDiX0JAV0b0quQN4tGSY/bQG8OPlKKSDoZJ0RL+G9evpM/PWoTorvNK
- QkKBc7DVhZ/s5QwO0wDbtRT0U0VV5B85kOdWtFnS7KJAyb5OezMZUOX29ABa9NoJbB
- leVQXTAwRwcFTGYxN8X0hz59m8vjZCu7GbaYAVHOSUaCuyr3/09d0b+6qLfAYARQs6
- tctCl0eXuIxbEaTO/aOeddjWWsJLrgoiIlLhUvEi/r4u45WqNPzJQRW/D+YnOtkP8Y
- vuEu+09bHp2Zg==
-Received: from smtp.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
- [172.16.192.107])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Tue, 27 Feb 2024 13:04:59 +0300 (MSK)
-Received: from user-A520M-DS3H.sigma.sbrf.ru (100.64.160.123) by
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Tue, 27 Feb 2024 13:04:58 +0300
-From: Alexey Romanov <avromanov@salutedevices.com>
-To: <dario.binacchi@amarulasolutions.com>, <michael@amarulasolutions.com>,
- <frieder.schrempf@kontron.de>, <xypron.glpk@gmx.de>,
- <ilias.apalodimas@linaro.org>, <sjg@chromium.org>, <bmeng@tinylab.org>,
- <tobias@waldekranz.com>, <jpewhacker@gmail.com>,
- <marek.vasut+renesas@mailbox.org>, <kever.yang@rock-chips.com>,
- <jbx6244@gmail.com>, <abdellatif.elkhlifi@arm.com>, <michal.simek@amd.com>,
- <mikhail.kshevetskiy@iopsys.eu>, <patrice.chotard@foss.st.com>
-CC: <kernel@salutedevices.com>, <u-boot@lists.denx.de>, Alexey Romanov
- <avromanov@salutedevices.com>
-Subject: [PATCH v1 3/4] spinand: bind mtdblock
-Date: Tue, 27 Feb 2024 13:04:40 +0300
-Message-ID: <20240227100441.1811047-4-avromanov@salutedevices.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240227100441.1811047-1-avromanov@salutedevices.com>
-References: <20240227100441.1811047-1-avromanov@salutedevices.com>
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4TkjB73NVBz9ss0;
+ Tue, 27 Feb 2024 17:10:07 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1709050207;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=ioOP89ZrREeonOKqw1SHP+ec82AVr/KbPX3BGRqv4L0=;
+ b=ibub1ObwZC6vPpHsMJzYQNa8shqUp4jEH305kGU9KfimhwiBoRjHAxZkXFIYOKikGPXJbL
+ Wh21m86jCK6zDtRo2KLgvH4cH+2h/xYex7Mw0GhnYJZDUkXble7wAuL35+nxErtHCRmtbW
+ kaw+ksdExAi1goYJU6XnPFn54irf4drODDLXEhjYttsfGP/Ka/amlK8ypOy0Dytr9GjHlE
+ jJ4u2XvZAvf+4TEQ4s00Fj6Dpf1yJxIe1wx1occm/OE5JSspqC6IjpaCgDdOHBRa0eQt7W
+ LBbg9AqR+0pI6Ei6WtIuJw3bqkLTBwNom+gJx2Peb6d2Pjt3KKVJZXXsrWkgig==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1709050205;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=ioOP89ZrREeonOKqw1SHP+ec82AVr/KbPX3BGRqv4L0=;
+ b=oGGRHILQM3R/cPncBh0ka9e1Utzw0BxF+AgUfxbkLvYbU0Z7+4fjXw9cSjehT8L8qXKyks
+ fvvl8zgDU8LDOqubxMVbUwmsGddviLx5EiLoWn1ZQDLSBlXaHvVqJmbho6D9Cpdcd+IuHU
+ VQSB0l3HcQaACiK7pDb85cEWcbVdb9ZohzLEbQSReLWUWXw+MngOIBdPcSL5MCRdPjiUkB
+ ud21WRwR7EbOuOCYhYN1sEhFCm+XC7lmCT7GylzyspZ9tYVSus6DUZ4epKPB/NSk7+opqZ
+ RgiLFjfjhiiIjUW74vONG/3G4mSethz75vhFpW0XId4AzXLfpfVmJBthT3zmmQ==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 01/19] ARM: renesas: Drop remnants of R8A7740 support
+Date: Tue, 27 Feb 2024 17:05:41 +0100
+Message-ID: <20240227160912.412181-2-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20240227160912.412181-1-marek.vasut+renesas@mailbox.org>
+References: <20240227160912.412181-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [100.64.160.123]
-X-ClientProxiedBy: p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) To
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 183764 [Feb 27 2024]
-X-KSMG-AntiSpam-Version: 6.1.0.3
-X-KSMG-AntiSpam-Envelope-From: avromanov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 7 0.3.7
- 6d6bf5bd8eea7373134f756a2fd73e9456bb7d1a,
- {Tracking_from_domain_doesnt_match_to}, salutedevices.com:7.1.1;
- 100.64.160.123:7.1.2; d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
- 127.0.0.199:7.1.2;
- smtp.sberdevices.ru:5.0.1,7.1.1, FromAlignment: s, ApMailHostAddress:
- 100.64.160.123
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean
-X-KSMG-LinksScanning: Clean
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2024/02/27 05:19:00 #23841006
-X-KSMG-AntiVirus-Status: Clean, skipped
+X-MBO-RS-META: qb3juu1odozjw76irwqa4zxgmg9omb84
+X-MBO-RS-ID: 52f4816567dcef3dce4
+X-Rspamd-Queue-Id: 4TkjB73NVBz9ss0
 X-Mailman-Approved-At: Tue, 27 Feb 2024 17:25:20 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -111,71 +89,3691 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Bind SPI-NAND driver to MTD block driver.
+Last board with this SoC has been removed in commit
+0fb054b3f7ea ("arm: Remove armadillo-800eva board")
+in August 2022. Drop the rest of unused code.
 
-Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
- drivers/mtd/nand/spi/core.c | 20 ++++++++++++++++++++
- 1 file changed, 20 insertions(+)
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+Cc: Tom Rini <trini@konsulko.com>
+---
+ arch/arm/mach-rmobile/Kconfig.32              |    3 -
+ arch/arm/mach-rmobile/Makefile                |    1 -
+ arch/arm/mach-rmobile/cpu_info-r8a7740.c      |   31 -
+ arch/arm/mach-rmobile/cpu_info.c              |    1 -
+ arch/arm/mach-rmobile/include/mach/gpio.h     |    5 -
+ .../mach-rmobile/include/mach/r8a7740-gpio.h  |  572 ----
+ arch/arm/mach-rmobile/include/mach/r8a7740.h  |  274 --
+ arch/arm/mach-rmobile/include/mach/rmobile.h  |    4 +-
+ arch/arm/mach-rmobile/lowlevel_init.S         |   72 -
+ arch/arm/mach-rmobile/pfc-r8a7740.c           | 2612 -----------------
+ 10 files changed, 1 insertion(+), 3574 deletions(-)
+ delete mode 100644 arch/arm/mach-rmobile/cpu_info-r8a7740.c
+ delete mode 100644 arch/arm/mach-rmobile/include/mach/r8a7740-gpio.h
+ delete mode 100644 arch/arm/mach-rmobile/include/mach/r8a7740.h
+ delete mode 100644 arch/arm/mach-rmobile/lowlevel_init.S
+ delete mode 100644 arch/arm/mach-rmobile/pfc-r8a7740.c
 
-diff --git a/drivers/mtd/nand/spi/core.c b/drivers/mtd/nand/spi/core.c
-index 2a3dbcfcb4..1d9cf66e4a 100644
---- a/drivers/mtd/nand/spi/core.c
-+++ b/drivers/mtd/nand/spi/core.c
-@@ -36,6 +36,10 @@
- #include <linux/printk.h>
- #endif
+diff --git a/arch/arm/mach-rmobile/Kconfig.32 b/arch/arm/mach-rmobile/Kconfig.32
+index 1ac31c29d82..f7079a26b06 100644
+--- a/arch/arm/mach-rmobile/Kconfig.32
++++ b/arch/arm/mach-rmobile/Kconfig.32
+@@ -10,9 +10,6 @@ config RCAR_GEN2
+ 	select PHY_RCAR_GEN2
+ 	select TMU_TIMER
  
-+struct spinand_plat {
-+	struct mtd_info *mtd;
-+};
-+
- /* SPI NAND index visible in MTD names */
- static int spi_nand_idx;
+-config R8A7740
+-	bool "Renesas SoC R8A7740"
+-
+ config R8A7790
+ 	bool "Renesas SoC R8A7790"
+ 	select RCAR_GEN2
+diff --git a/arch/arm/mach-rmobile/Makefile b/arch/arm/mach-rmobile/Makefile
+index ff8b0c7bae2..71e12e00aba 100644
+--- a/arch/arm/mach-rmobile/Makefile
++++ b/arch/arm/mach-rmobile/Makefile
+@@ -8,7 +8,6 @@ obj-y += emac.o
  
-@@ -1174,12 +1178,22 @@ static void spinand_cleanup(struct spinand_device *spinand)
- 	kfree(spinand->scratchbuf);
- }
+ obj-$(CONFIG_DISPLAY_BOARDINFO) += board.o
+ obj-$(CONFIG_TMU_TIMER) += ../../sh/lib/time.o
+-obj-$(CONFIG_R8A7740) += lowlevel_init.o cpu_info-r8a7740.o pfc-r8a7740.o
+ obj-$(CONFIG_RCAR_GEN2) += lowlevel_init_ca15.o cpu_info-rcar.o
+ obj-$(CONFIG_RCAR_64) += lowlevel_init_gen3.o
+ obj-$(CONFIG_RCAR_GEN3) += cpu_info-rcar.o memmap-gen3.o
+diff --git a/arch/arm/mach-rmobile/cpu_info-r8a7740.c b/arch/arm/mach-rmobile/cpu_info-r8a7740.c
+deleted file mode 100644
+index 5a94235c4b9..00000000000
+--- a/arch/arm/mach-rmobile/cpu_info-r8a7740.c
++++ /dev/null
+@@ -1,31 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * (C) Copyright 2012 Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>
+- * (C) Copyright 2012 Renesas Solutions Corp.
+- */
+-
+-#include <asm/io.h>
+-
+-u32 rmobile_get_cpu_type(void)
+-{
+-	u32 id;
+-	u32 type;
+-	struct r8a7740_hpb *hpb = (struct r8a7740_hpb *)HPB_BASE;
+-
+-	id = readl(hpb->cccr);
+-	type = (id >> 8) & 0xFF;
+-
+-	return type;
+-}
+-
+-u32 rmobile_get_cpu_rev(void)
+-{
+-	u32 id;
+-	u32 rev;
+-	struct r8a7740_hpb *hpb = (struct r8a7740_hpb *)HPB_BASE;
+-
+-	id = readl(hpb->cccr);
+-	rev = (id >> 4) & 0xF;
+-
+-	return rev;
+-}
+diff --git a/arch/arm/mach-rmobile/cpu_info.c b/arch/arm/mach-rmobile/cpu_info.c
+index 3d5d5ba79a9..adb7fff0c48 100644
+--- a/arch/arm/mach-rmobile/cpu_info.c
++++ b/arch/arm/mach-rmobile/cpu_info.c
+@@ -62,7 +62,6 @@ static const struct {
+ 	u16 cpu_type;
+ 	u8 cpu_name[10];
+ } rmobile_cpuinfo[] = {
+-	{ RMOBILE_CPU_TYPE_R8A7740, "R8A7740" },
+ 	{ RMOBILE_CPU_TYPE_R8A7790, "R8A7790" },
+ 	{ RMOBILE_CPU_TYPE_R8A7791, "R8A7791" },
+ 	{ RMOBILE_CPU_TYPE_R8A7792, "R8A7792" },
+diff --git a/arch/arm/mach-rmobile/include/mach/gpio.h b/arch/arm/mach-rmobile/include/mach/gpio.h
+index 150aa46034d..efdde0ae0a4 100644
+--- a/arch/arm/mach-rmobile/include/mach/gpio.h
++++ b/arch/arm/mach-rmobile/include/mach/gpio.h
+@@ -1,9 +1,4 @@
+ #ifndef __ASM_ARCH_GPIO_H
+ #define __ASM_ARCH_GPIO_H
  
-+#if CONFIG_IS_ENABLED(BLK)
-+static int spinand_bind(struct udevice *dev)
-+{
-+	struct spinand_plat *plat = dev_get_plat(dev);
-+
-+	return mtd_bind(dev, &plat->mtd);
-+}
-+#endif
-+
- static int spinand_probe(struct udevice *dev)
- {
- 	struct spinand_device *spinand = dev_get_priv(dev);
- 	struct spi_slave *slave = dev_get_parent_priv(dev);
- 	struct mtd_info *mtd = dev_get_uclass_priv(dev);
- 	struct nand_device *nand = spinand_to_nand(spinand);
-+	struct spinand_plat *plat = dev_get_plat(dev);
- 	int ret;
+-#if defined(CONFIG_R8A7740)
+-#include "r8a7740-gpio.h"
+-void r8a7740_pinmux_init(void);
+-#endif
+-
+ #endif /* __ASM_ARCH_GPIO_H */
+diff --git a/arch/arm/mach-rmobile/include/mach/r8a7740-gpio.h b/arch/arm/mach-rmobile/include/mach/r8a7740-gpio.h
+deleted file mode 100644
+index 125b3b4fffa..00000000000
+--- a/arch/arm/mach-rmobile/include/mach/r8a7740-gpio.h
++++ /dev/null
+@@ -1,572 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * Copyright (C) 2011  Renesas Solutions Corp.
+- * Copyright (C) 2011  Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>
+- */
+-
+-#ifndef __ASM_R8A7740_H__
+-#define __ASM_R8A7740_H__
+-
+-/*
+- * MD_CKx pin
+- */
+-#define MD_CK2	(1 << 2)
+-#define MD_CK1	(1 << 1)
+-#define MD_CK0	(1 << 0)
+-
+-/*
+- * Pin Function Controller:
+- *	GPIO_FN_xx - GPIO used to select pin function
+- *	GPIO_PORTxx - GPIO mapped to real I/O pin on CPU
+- */
+-enum {
+-	/* PORT */
+-	GPIO_PORT0, GPIO_PORT1, GPIO_PORT2, GPIO_PORT3, GPIO_PORT4,
+-	GPIO_PORT5, GPIO_PORT6, GPIO_PORT7, GPIO_PORT8, GPIO_PORT9,
+-
+-	GPIO_PORT10, GPIO_PORT11, GPIO_PORT12, GPIO_PORT13, GPIO_PORT14,
+-	GPIO_PORT15, GPIO_PORT16, GPIO_PORT17, GPIO_PORT18, GPIO_PORT19,
+-
+-	GPIO_PORT20, GPIO_PORT21, GPIO_PORT22, GPIO_PORT23, GPIO_PORT24,
+-	GPIO_PORT25, GPIO_PORT26, GPIO_PORT27, GPIO_PORT28, GPIO_PORT29,
+-
+-	GPIO_PORT30, GPIO_PORT31, GPIO_PORT32, GPIO_PORT33, GPIO_PORT34,
+-	GPIO_PORT35, GPIO_PORT36, GPIO_PORT37, GPIO_PORT38, GPIO_PORT39,
+-
+-	GPIO_PORT40, GPIO_PORT41, GPIO_PORT42, GPIO_PORT43, GPIO_PORT44,
+-	GPIO_PORT45, GPIO_PORT46, GPIO_PORT47, GPIO_PORT48, GPIO_PORT49,
+-
+-	GPIO_PORT50, GPIO_PORT51, GPIO_PORT52, GPIO_PORT53, GPIO_PORT54,
+-	GPIO_PORT55, GPIO_PORT56, GPIO_PORT57, GPIO_PORT58, GPIO_PORT59,
+-
+-	GPIO_PORT60, GPIO_PORT61, GPIO_PORT62, GPIO_PORT63, GPIO_PORT64,
+-	GPIO_PORT65, GPIO_PORT66, GPIO_PORT67, GPIO_PORT68, GPIO_PORT69,
+-
+-	GPIO_PORT70, GPIO_PORT71, GPIO_PORT72, GPIO_PORT73, GPIO_PORT74,
+-	GPIO_PORT75, GPIO_PORT76, GPIO_PORT77, GPIO_PORT78, GPIO_PORT79,
+-
+-	GPIO_PORT80, GPIO_PORT81, GPIO_PORT82, GPIO_PORT83, GPIO_PORT84,
+-	GPIO_PORT85, GPIO_PORT86, GPIO_PORT87, GPIO_PORT88, GPIO_PORT89,
+-
+-	GPIO_PORT90, GPIO_PORT91, GPIO_PORT92, GPIO_PORT93, GPIO_PORT94,
+-	GPIO_PORT95, GPIO_PORT96, GPIO_PORT97, GPIO_PORT98, GPIO_PORT99,
+-
+-	GPIO_PORT100, GPIO_PORT101, GPIO_PORT102, GPIO_PORT103, GPIO_PORT104,
+-	GPIO_PORT105, GPIO_PORT106, GPIO_PORT107, GPIO_PORT108, GPIO_PORT109,
+-
+-	GPIO_PORT110, GPIO_PORT111, GPIO_PORT112, GPIO_PORT113, GPIO_PORT114,
+-	GPIO_PORT115, GPIO_PORT116, GPIO_PORT117, GPIO_PORT118, GPIO_PORT119,
+-
+-	GPIO_PORT120, GPIO_PORT121, GPIO_PORT122, GPIO_PORT123, GPIO_PORT124,
+-	GPIO_PORT125, GPIO_PORT126, GPIO_PORT127, GPIO_PORT128, GPIO_PORT129,
+-
+-	GPIO_PORT130, GPIO_PORT131, GPIO_PORT132, GPIO_PORT133, GPIO_PORT134,
+-	GPIO_PORT135, GPIO_PORT136, GPIO_PORT137, GPIO_PORT138, GPIO_PORT139,
+-
+-	GPIO_PORT140, GPIO_PORT141, GPIO_PORT142, GPIO_PORT143, GPIO_PORT144,
+-	GPIO_PORT145, GPIO_PORT146, GPIO_PORT147, GPIO_PORT148, GPIO_PORT149,
+-
+-	GPIO_PORT150, GPIO_PORT151, GPIO_PORT152, GPIO_PORT153, GPIO_PORT154,
+-	GPIO_PORT155, GPIO_PORT156, GPIO_PORT157, GPIO_PORT158, GPIO_PORT159,
+-
+-	GPIO_PORT160, GPIO_PORT161, GPIO_PORT162, GPIO_PORT163, GPIO_PORT164,
+-	GPIO_PORT165, GPIO_PORT166, GPIO_PORT167, GPIO_PORT168, GPIO_PORT169,
+-
+-	GPIO_PORT170, GPIO_PORT171, GPIO_PORT172, GPIO_PORT173, GPIO_PORT174,
+-	GPIO_PORT175, GPIO_PORT176, GPIO_PORT177, GPIO_PORT178, GPIO_PORT179,
+-
+-	GPIO_PORT180, GPIO_PORT181, GPIO_PORT182, GPIO_PORT183, GPIO_PORT184,
+-	GPIO_PORT185, GPIO_PORT186, GPIO_PORT187, GPIO_PORT188, GPIO_PORT189,
+-
+-	GPIO_PORT190, GPIO_PORT191, GPIO_PORT192, GPIO_PORT193, GPIO_PORT194,
+-	GPIO_PORT195, GPIO_PORT196, GPIO_PORT197, GPIO_PORT198, GPIO_PORT199,
+-
+-	GPIO_PORT200, GPIO_PORT201, GPIO_PORT202, GPIO_PORT203, GPIO_PORT204,
+-	GPIO_PORT205, GPIO_PORT206, GPIO_PORT207, GPIO_PORT208, GPIO_PORT209,
+-
+-	GPIO_PORT210, GPIO_PORT211,
+-
+-	/* IRQ */
+-	GPIO_FN_IRQ0_PORT2,	GPIO_FN_IRQ0_PORT13,
+-	GPIO_FN_IRQ1,
+-	GPIO_FN_IRQ2_PORT11,	GPIO_FN_IRQ2_PORT12,
+-	GPIO_FN_IRQ3_PORT10,	GPIO_FN_IRQ3_PORT14,
+-	GPIO_FN_IRQ4_PORT15,	GPIO_FN_IRQ4_PORT172,
+-	GPIO_FN_IRQ5_PORT0,	GPIO_FN_IRQ5_PORT1,
+-	GPIO_FN_IRQ6_PORT121,	GPIO_FN_IRQ6_PORT173,
+-	GPIO_FN_IRQ7_PORT120,	GPIO_FN_IRQ7_PORT209,
+-	GPIO_FN_IRQ8,
+-	GPIO_FN_IRQ9_PORT118,	GPIO_FN_IRQ9_PORT210,
+-	GPIO_FN_IRQ10,
+-	GPIO_FN_IRQ11,
+-	GPIO_FN_IRQ12_PORT42,	GPIO_FN_IRQ12_PORT97,
+-	GPIO_FN_IRQ13_PORT64,	GPIO_FN_IRQ13_PORT98,
+-	GPIO_FN_IRQ14_PORT63,	GPIO_FN_IRQ14_PORT99,
+-	GPIO_FN_IRQ15_PORT62,	GPIO_FN_IRQ15_PORT100,
+-	GPIO_FN_IRQ16_PORT68,	GPIO_FN_IRQ16_PORT211,
+-	GPIO_FN_IRQ17,
+-	GPIO_FN_IRQ18,
+-	GPIO_FN_IRQ19,
+-	GPIO_FN_IRQ20,
+-	GPIO_FN_IRQ21,
+-	GPIO_FN_IRQ22,
+-	GPIO_FN_IRQ23,
+-	GPIO_FN_IRQ24,
+-	GPIO_FN_IRQ25,
+-	GPIO_FN_IRQ26_PORT58,	GPIO_FN_IRQ26_PORT81,
+-	GPIO_FN_IRQ27_PORT57,	GPIO_FN_IRQ27_PORT168,
+-	GPIO_FN_IRQ28_PORT56,	GPIO_FN_IRQ28_PORT169,
+-	GPIO_FN_IRQ29_PORT50,	GPIO_FN_IRQ29_PORT170,
+-	GPIO_FN_IRQ30_PORT49,	GPIO_FN_IRQ30_PORT171,
+-	GPIO_FN_IRQ31_PORT41,	GPIO_FN_IRQ31_PORT167,
+-
+-	/* Function */
+-
+-	/* DBGT */
+-	GPIO_FN_DBGMDT2,	GPIO_FN_DBGMDT1,	GPIO_FN_DBGMDT0,
+-	GPIO_FN_DBGMD10,	GPIO_FN_DBGMD11,	GPIO_FN_DBGMD20,
+-	GPIO_FN_DBGMD21,
+-
+-	/* FSI */
+-	GPIO_FN_FSIAISLD_PORT0,		/* FSIAISLD Port 0/5 */
+-	GPIO_FN_FSIAISLD_PORT5,
+-	GPIO_FN_FSIASPDIF_PORT9,	/* FSIASPDIF Port 9/18 */
+-	GPIO_FN_FSIASPDIF_PORT18,
+-	GPIO_FN_FSIAOSLD1,	GPIO_FN_FSIAOSLD2,
+-	GPIO_FN_FSIAOLR,	GPIO_FN_FSIAOBT,
+-	GPIO_FN_FSIAOSLD,	GPIO_FN_FSIAOMC,
+-	GPIO_FN_FSIACK,		GPIO_FN_FSIAILR,
+-	GPIO_FN_FSIAIBT,
+-
+-	/* FMSI */
+-	GPIO_FN_FMSISLD_PORT1, /* FMSISLD Port 1/6 */
+-	GPIO_FN_FMSISLD_PORT6,
+-	GPIO_FN_FMSIILR,	GPIO_FN_FMSIIBT,
+-	GPIO_FN_FMSIOLR,	GPIO_FN_FMSIOBT,
+-	GPIO_FN_FMSICK,		GPIO_FN_FMSOILR,
+-	GPIO_FN_FMSOIBT,	GPIO_FN_FMSOOLR,
+-	GPIO_FN_FMSOOBT,	GPIO_FN_FMSOSLD,
+-	GPIO_FN_FMSOCK,
+-
+-	/* SCIFA0 */
+-	GPIO_FN_SCIFA0_SCK,	GPIO_FN_SCIFA0_CTS,
+-	GPIO_FN_SCIFA0_RTS,	GPIO_FN_SCIFA0_RXD,
+-	GPIO_FN_SCIFA0_TXD,
+-
+-	/* SCIFA1 */
+-	GPIO_FN_SCIFA1_CTS,	GPIO_FN_SCIFA1_SCK,
+-	GPIO_FN_SCIFA1_RXD,	GPIO_FN_SCIFA1_TXD,
+-	GPIO_FN_SCIFA1_RTS,
+-
+-	/* SCIFA2 */
+-	GPIO_FN_SCIFA2_SCK_PORT22, /* SCIFA2_SCK Port 22/199 */
+-	GPIO_FN_SCIFA2_SCK_PORT199,
+-	GPIO_FN_SCIFA2_RXD,	GPIO_FN_SCIFA2_TXD,
+-	GPIO_FN_SCIFA2_CTS,	GPIO_FN_SCIFA2_RTS,
+-
+-	/* SCIFA3 */
+-	GPIO_FN_SCIFA3_RTS_PORT105, /* MSEL5CR_8_0 */
+-	GPIO_FN_SCIFA3_SCK_PORT116,
+-	GPIO_FN_SCIFA3_CTS_PORT117,
+-	GPIO_FN_SCIFA3_RXD_PORT174,
+-	GPIO_FN_SCIFA3_TXD_PORT175,
+-
+-	GPIO_FN_SCIFA3_RTS_PORT161, /* MSEL5CR_8_1 */
+-	GPIO_FN_SCIFA3_SCK_PORT158,
+-	GPIO_FN_SCIFA3_CTS_PORT162,
+-	GPIO_FN_SCIFA3_RXD_PORT159,
+-	GPIO_FN_SCIFA3_TXD_PORT160,
+-
+-	/* SCIFA4 */
+-	GPIO_FN_SCIFA4_RXD_PORT12, /* MSEL5CR[12:11] = 00 */
+-	GPIO_FN_SCIFA4_TXD_PORT13,
+-
+-	GPIO_FN_SCIFA4_RXD_PORT204, /* MSEL5CR[12:11] = 01 */
+-	GPIO_FN_SCIFA4_TXD_PORT203,
+-
+-	GPIO_FN_SCIFA4_RXD_PORT94, /* MSEL5CR[12:11] = 10 */
+-	GPIO_FN_SCIFA4_TXD_PORT93,
+-
+-	GPIO_FN_SCIFA4_SCK_PORT21, /* SCIFA4_SCK Port 21/205 */
+-	GPIO_FN_SCIFA4_SCK_PORT205,
+-
+-	/* SCIFA5 */
+-	GPIO_FN_SCIFA5_TXD_PORT20, /* MSEL5CR[15:14] = 00 */
+-	GPIO_FN_SCIFA5_RXD_PORT10,
+-
+-	GPIO_FN_SCIFA5_RXD_PORT207, /* MSEL5CR[15:14] = 01 */
+-	GPIO_FN_SCIFA5_TXD_PORT208,
+-
+-	GPIO_FN_SCIFA5_TXD_PORT91, /* MSEL5CR[15:14] = 10 */
+-	GPIO_FN_SCIFA5_RXD_PORT92,
+-
+-	GPIO_FN_SCIFA5_SCK_PORT23, /* SCIFA5_SCK Port 23/206 */
+-	GPIO_FN_SCIFA5_SCK_PORT206,
+-
+-	/* SCIFA6 */
+-	GPIO_FN_SCIFA6_SCK,	GPIO_FN_SCIFA6_RXD,	GPIO_FN_SCIFA6_TXD,
+-
+-	/* SCIFA7 */
+-	GPIO_FN_SCIFA7_TXD,	GPIO_FN_SCIFA7_RXD,
+-
+-	/* SCIFAB */
+-	GPIO_FN_SCIFB_SCK_PORT190, /* MSEL5CR_17_0 */
+-	GPIO_FN_SCIFB_RXD_PORT191,
+-	GPIO_FN_SCIFB_TXD_PORT192,
+-	GPIO_FN_SCIFB_RTS_PORT186,
+-	GPIO_FN_SCIFB_CTS_PORT187,
+-
+-	GPIO_FN_SCIFB_SCK_PORT2, /* MSEL5CR_17_1 */
+-	GPIO_FN_SCIFB_RXD_PORT3,
+-	GPIO_FN_SCIFB_TXD_PORT4,
+-	GPIO_FN_SCIFB_RTS_PORT172,
+-	GPIO_FN_SCIFB_CTS_PORT173,
+-
+-	/* LCD0 */
+-	GPIO_FN_LCDC0_SELECT,
+-	GPIO_FN_LCD0_D0,	GPIO_FN_LCD0_D1,	GPIO_FN_LCD0_D2,
+-	GPIO_FN_LCD0_D3,	GPIO_FN_LCD0_D4,	GPIO_FN_LCD0_D5,
+-	GPIO_FN_LCD0_D6,	GPIO_FN_LCD0_D7,	GPIO_FN_LCD0_D8,
+-	GPIO_FN_LCD0_D9,	GPIO_FN_LCD0_D10,	GPIO_FN_LCD0_D11,
+-	GPIO_FN_LCD0_D12,	GPIO_FN_LCD0_D13,	GPIO_FN_LCD0_D14,
+-	GPIO_FN_LCD0_D15,	GPIO_FN_LCD0_D16,	GPIO_FN_LCD0_D17,
+-	GPIO_FN_LCD0_DON,	GPIO_FN_LCD0_VCPWC,	GPIO_FN_LCD0_VEPWC,
+-
+-	GPIO_FN_LCD0_DCK,	GPIO_FN_LCD0_VSYN, /* for RGB */
+-	GPIO_FN_LCD0_HSYN,	GPIO_FN_LCD0_DISP, /* for RGB */
+-
+-	GPIO_FN_LCD0_WR,	GPIO_FN_LCD0_RD, /* for SYS */
+-	GPIO_FN_LCD0_CS,	GPIO_FN_LCD0_RS, /* for SYS */
+-
+-	GPIO_FN_LCD0_D18_PORT163,	GPIO_FN_LCD0_D19_PORT162,
+-	GPIO_FN_LCD0_D20_PORT161,	GPIO_FN_LCD0_D21_PORT158,
+-	GPIO_FN_LCD0_D22_PORT160,	GPIO_FN_LCD0_D23_PORT159,
+-	GPIO_FN_LCD0_LCLK_PORT165,	 /* MSEL5CR_6_1 */
+-
+-	GPIO_FN_LCD0_D18_PORT40,	GPIO_FN_LCD0_D19_PORT4,
+-	GPIO_FN_LCD0_D20_PORT3,		GPIO_FN_LCD0_D21_PORT2,
+-	GPIO_FN_LCD0_D22_PORT0,		GPIO_FN_LCD0_D23_PORT1,
+-	GPIO_FN_LCD0_LCLK_PORT102,	/* MSEL5CR_6_0 */
+-
+-	/* LCD1 */
+-	GPIO_FN_LCDC1_SELECT,
+-	GPIO_FN_LCD1_D0,	GPIO_FN_LCD1_D1,	GPIO_FN_LCD1_D2,
+-	GPIO_FN_LCD1_D3,	GPIO_FN_LCD1_D4,	GPIO_FN_LCD1_D5,
+-	GPIO_FN_LCD1_D6,	GPIO_FN_LCD1_D7,	GPIO_FN_LCD1_D8,
+-	GPIO_FN_LCD1_D9,	GPIO_FN_LCD1_D10,	GPIO_FN_LCD1_D11,
+-	GPIO_FN_LCD1_D12,	GPIO_FN_LCD1_D13,	GPIO_FN_LCD1_D14,
+-	GPIO_FN_LCD1_D15,	GPIO_FN_LCD1_D16,	GPIO_FN_LCD1_D17,
+-	GPIO_FN_LCD1_D18,	GPIO_FN_LCD1_D19,	GPIO_FN_LCD1_D20,
+-	GPIO_FN_LCD1_D21,	GPIO_FN_LCD1_D22,	GPIO_FN_LCD1_D23,
+-	GPIO_FN_LCD1_DON,	GPIO_FN_LCD1_VCPWC,
+-	GPIO_FN_LCD1_LCLK,	GPIO_FN_LCD1_VEPWC,
+-
+-	GPIO_FN_LCD1_DCK,	GPIO_FN_LCD1_VSYN, /* for RGB */
+-	GPIO_FN_LCD1_HSYN,	GPIO_FN_LCD1_DISP, /* for RGB */
+-
+-	GPIO_FN_LCD1_WR,	GPIO_FN_LCD1_RD, /* for SYS */
+-	GPIO_FN_LCD1_CS,	GPIO_FN_LCD1_RS, /* for SYS */
+-
+-	/* RSPI */
+-	GPIO_FN_RSPI_SSL0_A,	GPIO_FN_RSPI_SSL1_A,
+-	GPIO_FN_RSPI_SSL2_A,	GPIO_FN_RSPI_SSL3_A,
+-	GPIO_FN_RSPI_MOSI_A,	GPIO_FN_RSPI_MISO_A,
+-	GPIO_FN_RSPI_CK_A,
+-
+-	/* VIO CKO */
+-	GPIO_FN_VIO_CKO1,
+-	GPIO_FN_VIO_CKO2,
+-	GPIO_FN_VIO_CKO_1,
+-	GPIO_FN_VIO_CKO,
+-
+-	/* VIO0 */
+-	GPIO_FN_VIO0_D0,	GPIO_FN_VIO0_D1,	GPIO_FN_VIO0_D2,
+-	GPIO_FN_VIO0_D3,	GPIO_FN_VIO0_D4,	GPIO_FN_VIO0_D5,
+-	GPIO_FN_VIO0_D6,	GPIO_FN_VIO0_D7,	GPIO_FN_VIO0_D8,
+-	GPIO_FN_VIO0_D9,	GPIO_FN_VIO0_D10,	GPIO_FN_VIO0_D11,
+-	GPIO_FN_VIO0_D12,	GPIO_FN_VIO0_VD,	GPIO_FN_VIO0_HD,
+-	GPIO_FN_VIO0_CLK,	GPIO_FN_VIO0_FIELD,
+-
+-	GPIO_FN_VIO0_D13_PORT26, /* MSEL5CR_27_0 */
+-	GPIO_FN_VIO0_D14_PORT25,
+-	GPIO_FN_VIO0_D15_PORT24,
+-
+-	GPIO_FN_VIO0_D13_PORT22, /* MSEL5CR_27_1 */
+-	GPIO_FN_VIO0_D14_PORT95,
+-	GPIO_FN_VIO0_D15_PORT96,
+-
+-	/* VIO1 */
+-	GPIO_FN_VIO1_D0,	GPIO_FN_VIO1_D1,	GPIO_FN_VIO1_D2,
+-	GPIO_FN_VIO1_D3,	GPIO_FN_VIO1_D4,	GPIO_FN_VIO1_D5,
+-	GPIO_FN_VIO1_D6,	GPIO_FN_VIO1_D7,	GPIO_FN_VIO1_VD,
+-	GPIO_FN_VIO1_HD,	GPIO_FN_VIO1_CLK,	GPIO_FN_VIO1_FIELD,
+-
+-	/* TPU0 */
+-	GPIO_FN_TPU0TO0,	GPIO_FN_TPU0TO1,
+-	GPIO_FN_TPU0TO3,
+-	GPIO_FN_TPU0TO2_PORT66, /* TPU0TO2 Port 66/202 */
+-	GPIO_FN_TPU0TO2_PORT202,
+-
+-	/* SSP1 0 */
+-	GPIO_FN_STP0_IPD0,	GPIO_FN_STP0_IPD1,	GPIO_FN_STP0_IPD2,
+-	GPIO_FN_STP0_IPD3,	GPIO_FN_STP0_IPD4,	GPIO_FN_STP0_IPD5,
+-	GPIO_FN_STP0_IPD6,	GPIO_FN_STP0_IPD7,	GPIO_FN_STP0_IPEN,
+-	GPIO_FN_STP0_IPCLK,	GPIO_FN_STP0_IPSYNC,
+-
+-	/* SSP1 1 */
+-	GPIO_FN_STP1_IPD1,	GPIO_FN_STP1_IPD2,	GPIO_FN_STP1_IPD3,
+-	GPIO_FN_STP1_IPD4,	GPIO_FN_STP1_IPD5,	GPIO_FN_STP1_IPD6,
+-	GPIO_FN_STP1_IPD7,	GPIO_FN_STP1_IPCLK,	GPIO_FN_STP1_IPSYNC,
+-
+-	GPIO_FN_STP1_IPD0_PORT186, /* MSEL5CR_23_0 */
+-	GPIO_FN_STP1_IPEN_PORT187,
+-
+-	GPIO_FN_STP1_IPD0_PORT194, /* MSEL5CR_23_1 */
+-	GPIO_FN_STP1_IPEN_PORT193,
+-
+-	/* SIM */
+-	GPIO_FN_SIM_RST,	GPIO_FN_SIM_CLK,
+-	GPIO_FN_SIM_D_PORT22, /* SIM_D  Port 22/199 */
+-	GPIO_FN_SIM_D_PORT199,
+-
+-	/* SDHI0 */
+-	GPIO_FN_SDHI0_D0,	GPIO_FN_SDHI0_D1,	GPIO_FN_SDHI0_D2,
+-	GPIO_FN_SDHI0_D3,	GPIO_FN_SDHI0_CD,	GPIO_FN_SDHI0_WP,
+-	GPIO_FN_SDHI0_CMD,	GPIO_FN_SDHI0_CLK,
+-
+-	/* SDHI1 */
+-	GPIO_FN_SDHI1_D0,	GPIO_FN_SDHI1_D1,	GPIO_FN_SDHI1_D2,
+-	GPIO_FN_SDHI1_D3,	GPIO_FN_SDHI1_CD,	GPIO_FN_SDHI1_WP,
+-	GPIO_FN_SDHI1_CMD,	GPIO_FN_SDHI1_CLK,
+-
+-	/* SDHI2 */
+-	GPIO_FN_SDHI2_D0,	GPIO_FN_SDHI2_D1,	GPIO_FN_SDHI2_D2,
+-	GPIO_FN_SDHI2_D3,	GPIO_FN_SDHI2_CLK,	GPIO_FN_SDHI2_CMD,
+-
+-	GPIO_FN_SDHI2_CD_PORT24, /* MSEL5CR_19_0 */
+-	GPIO_FN_SDHI2_WP_PORT25,
+-
+-	GPIO_FN_SDHI2_WP_PORT177, /* MSEL5CR_19_1 */
+-	GPIO_FN_SDHI2_CD_PORT202,
+-
+-	/* MSIOF2 */
+-	GPIO_FN_MSIOF2_TXD,	GPIO_FN_MSIOF2_RXD,	GPIO_FN_MSIOF2_TSCK,
+-	GPIO_FN_MSIOF2_SS2,	GPIO_FN_MSIOF2_TSYNC,	GPIO_FN_MSIOF2_SS1,
+-	GPIO_FN_MSIOF2_MCK1,	GPIO_FN_MSIOF2_MCK0,	GPIO_FN_MSIOF2_RSYNC,
+-	GPIO_FN_MSIOF2_RSCK,
+-
+-	/* KEYSC */
+-	GPIO_FN_KEYIN4,		GPIO_FN_KEYIN5,
+-	GPIO_FN_KEYIN6,		GPIO_FN_KEYIN7,
+-	GPIO_FN_KEYOUT0,	GPIO_FN_KEYOUT1,	GPIO_FN_KEYOUT2,
+-	GPIO_FN_KEYOUT3,	GPIO_FN_KEYOUT4,	GPIO_FN_KEYOUT5,
+-	GPIO_FN_KEYOUT6,	GPIO_FN_KEYOUT7,
+-
+-	GPIO_FN_KEYIN0_PORT43, /* MSEL4CR_18_0 */
+-	GPIO_FN_KEYIN1_PORT44,
+-	GPIO_FN_KEYIN2_PORT45,
+-	GPIO_FN_KEYIN3_PORT46,
+-
+-	GPIO_FN_KEYIN0_PORT58, /* MSEL4CR_18_1 */
+-	GPIO_FN_KEYIN1_PORT57,
+-	GPIO_FN_KEYIN2_PORT56,
+-	GPIO_FN_KEYIN3_PORT55,
+-
+-	/* VOU */
+-	GPIO_FN_DV_D0,	GPIO_FN_DV_D1,	GPIO_FN_DV_D2,	GPIO_FN_DV_D3,
+-	GPIO_FN_DV_D4,	GPIO_FN_DV_D5,	GPIO_FN_DV_D6,	GPIO_FN_DV_D7,
+-	GPIO_FN_DV_D8,	GPIO_FN_DV_D9,	GPIO_FN_DV_D10,	GPIO_FN_DV_D11,
+-	GPIO_FN_DV_D12,	GPIO_FN_DV_D13,	GPIO_FN_DV_D14,	GPIO_FN_DV_D15,
+-	GPIO_FN_DV_CLK,
+-	GPIO_FN_DV_VSYNC,
+-	GPIO_FN_DV_HSYNC,
+-
+-	/* MEMC */
+-	GPIO_FN_MEMC_AD0,	GPIO_FN_MEMC_AD1,	GPIO_FN_MEMC_AD2,
+-	GPIO_FN_MEMC_AD3,	GPIO_FN_MEMC_AD4,	GPIO_FN_MEMC_AD5,
+-	GPIO_FN_MEMC_AD6,	GPIO_FN_MEMC_AD7,	GPIO_FN_MEMC_AD8,
+-	GPIO_FN_MEMC_AD9,	GPIO_FN_MEMC_AD10,	GPIO_FN_MEMC_AD11,
+-	GPIO_FN_MEMC_AD12,	GPIO_FN_MEMC_AD13,	GPIO_FN_MEMC_AD14,
+-	GPIO_FN_MEMC_AD15,	GPIO_FN_MEMC_CS0,	GPIO_FN_MEMC_INT,
+-	GPIO_FN_MEMC_NWE,	GPIO_FN_MEMC_NOE,
+-
+-	GPIO_FN_MEMC_CS1, /* MSEL4CR_6_0 */
+-	GPIO_FN_MEMC_ADV,
+-	GPIO_FN_MEMC_WAIT,
+-	GPIO_FN_MEMC_BUSCLK,
+-
+-	GPIO_FN_MEMC_A1, /* MSEL4CR_6_1 */
+-	GPIO_FN_MEMC_DREQ0,
+-	GPIO_FN_MEMC_DREQ1,
+-	GPIO_FN_MEMC_A0,
+-
+-	/* MMC */
+-	GPIO_FN_MMC0_D0_PORT68,		GPIO_FN_MMC0_D1_PORT69,
+-	GPIO_FN_MMC0_D2_PORT70,		GPIO_FN_MMC0_D3_PORT71,
+-	GPIO_FN_MMC0_D4_PORT72,		GPIO_FN_MMC0_D5_PORT73,
+-	GPIO_FN_MMC0_D6_PORT74,		GPIO_FN_MMC0_D7_PORT75,
+-	GPIO_FN_MMC0_CLK_PORT66,
+-	GPIO_FN_MMC0_CMD_PORT67,	/* MSEL4CR_15_0 */
+-
+-	GPIO_FN_MMC1_D0_PORT149,	GPIO_FN_MMC1_D1_PORT148,
+-	GPIO_FN_MMC1_D2_PORT147,	GPIO_FN_MMC1_D3_PORT146,
+-	GPIO_FN_MMC1_D4_PORT145,	GPIO_FN_MMC1_D5_PORT144,
+-	GPIO_FN_MMC1_D6_PORT143,	GPIO_FN_MMC1_D7_PORT142,
+-	GPIO_FN_MMC1_CLK_PORT103,
+-	GPIO_FN_MMC1_CMD_PORT104,	/* MSEL4CR_15_1 */
+-
+-	/* MSIOF0 */
+-	GPIO_FN_MSIOF0_SS1,	GPIO_FN_MSIOF0_SS2,
+-	GPIO_FN_MSIOF0_RXD,	GPIO_FN_MSIOF0_TXD,
+-	GPIO_FN_MSIOF0_MCK0,	GPIO_FN_MSIOF0_MCK1,
+-	GPIO_FN_MSIOF0_RSYNC,	GPIO_FN_MSIOF0_RSCK,
+-	GPIO_FN_MSIOF0_TSCK,	GPIO_FN_MSIOF0_TSYNC,
+-
+-	/* MSIOF1 */
+-	GPIO_FN_MSIOF1_RSCK,	GPIO_FN_MSIOF1_RSYNC,
+-	GPIO_FN_MSIOF1_MCK0,	GPIO_FN_MSIOF1_MCK1,
+-
+-	GPIO_FN_MSIOF1_SS2_PORT116,	GPIO_FN_MSIOF1_SS1_PORT117,
+-	GPIO_FN_MSIOF1_RXD_PORT118,	GPIO_FN_MSIOF1_TXD_PORT119,
+-	GPIO_FN_MSIOF1_TSYNC_PORT120,
+-	GPIO_FN_MSIOF1_TSCK_PORT121,	/* MSEL4CR_10_0 */
+-
+-	GPIO_FN_MSIOF1_SS1_PORT67,	GPIO_FN_MSIOF1_TSCK_PORT72,
+-	GPIO_FN_MSIOF1_TSYNC_PORT73,	GPIO_FN_MSIOF1_TXD_PORT74,
+-	GPIO_FN_MSIOF1_RXD_PORT75,
+-	GPIO_FN_MSIOF1_SS2_PORT202,	/* MSEL4CR_10_1 */
+-
+-	/* GPIO */
+-	GPIO_FN_GPO0,	GPIO_FN_GPI0,
+-	GPIO_FN_GPO1,	GPIO_FN_GPI1,
+-
+-	/* USB0 */
+-	GPIO_FN_USB0_OCI,	GPIO_FN_USB0_PPON,	GPIO_FN_VBUS,
+-
+-	/* USB1 */
+-	GPIO_FN_USB1_OCI,	GPIO_FN_USB1_PPON,
+-
+-	/* BBIF1 */
+-	GPIO_FN_BBIF1_RXD,	GPIO_FN_BBIF1_TXD,	GPIO_FN_BBIF1_TSYNC,
+-	GPIO_FN_BBIF1_TSCK,	GPIO_FN_BBIF1_RSCK,	GPIO_FN_BBIF1_RSYNC,
+-	GPIO_FN_BBIF1_FLOW,	GPIO_FN_BBIF1_RX_FLOW_N,
+-
+-	/* BBIF2 */
+-	GPIO_FN_BBIF2_TXD2_PORT5, /* MSEL5CR_0_0 */
+-	GPIO_FN_BBIF2_RXD2_PORT60,
+-	GPIO_FN_BBIF2_TSYNC2_PORT6,
+-	GPIO_FN_BBIF2_TSCK2_PORT59,
+-
+-	GPIO_FN_BBIF2_RXD2_PORT90, /* MSEL5CR_0_1 */
+-	GPIO_FN_BBIF2_TXD2_PORT183,
+-	GPIO_FN_BBIF2_TSCK2_PORT89,
+-	GPIO_FN_BBIF2_TSYNC2_PORT184,
+-
+-	/* BSC / FLCTL / PCMCIA */
+-	GPIO_FN_CS0,	GPIO_FN_CS2,	GPIO_FN_CS4,
+-	GPIO_FN_CS5B,	GPIO_FN_CS6A,
+-	GPIO_FN_CS5A_PORT105, /* CS5A PORT 19/105 */
+-	GPIO_FN_CS5A_PORT19,
+-	GPIO_FN_IOIS16, /* ? */
+-
+-	GPIO_FN_A0,	GPIO_FN_A1,	GPIO_FN_A2,	GPIO_FN_A3,
+-	GPIO_FN_A4_FOE,		/* share with FLCTL */
+-	GPIO_FN_A5_FCDE,	/* share with FLCTL */
+-	GPIO_FN_A6,	GPIO_FN_A7,	GPIO_FN_A8,	GPIO_FN_A9,
+-	GPIO_FN_A10,	GPIO_FN_A11,	GPIO_FN_A12,	GPIO_FN_A13,
+-	GPIO_FN_A14,	GPIO_FN_A15,	GPIO_FN_A16,	GPIO_FN_A17,
+-	GPIO_FN_A18,	GPIO_FN_A19,	GPIO_FN_A20,	GPIO_FN_A21,
+-	GPIO_FN_A22,	GPIO_FN_A23,	GPIO_FN_A24,	GPIO_FN_A25,
+-	GPIO_FN_A26,
+-
+-	GPIO_FN_D0_NAF0,	GPIO_FN_D1_NAF1,	/* share with FLCTL */
+-	GPIO_FN_D2_NAF2,	GPIO_FN_D3_NAF3,	/* share with FLCTL */
+-	GPIO_FN_D4_NAF4,	GPIO_FN_D5_NAF5,	/* share with FLCTL */
+-	GPIO_FN_D6_NAF6,	GPIO_FN_D7_NAF7,	/* share with FLCTL */
+-	GPIO_FN_D8_NAF8,	GPIO_FN_D9_NAF9,	/* share with FLCTL */
+-	GPIO_FN_D10_NAF10,	GPIO_FN_D11_NAF11,	/* share with FLCTL */
+-	GPIO_FN_D12_NAF12,	GPIO_FN_D13_NAF13,	/* share with FLCTL */
+-	GPIO_FN_D14_NAF14,	GPIO_FN_D15_NAF15,	/* share with FLCTL */
+-
+-	GPIO_FN_D16,	GPIO_FN_D17,	GPIO_FN_D18,	GPIO_FN_D19,
+-	GPIO_FN_D20,	GPIO_FN_D21,	GPIO_FN_D22,	GPIO_FN_D23,
+-	GPIO_FN_D24,	GPIO_FN_D25,	GPIO_FN_D26,	GPIO_FN_D27,
+-	GPIO_FN_D28,	GPIO_FN_D29,	GPIO_FN_D30,	GPIO_FN_D31,
+-
+-	GPIO_FN_WE0_FWE,	/* share with FLCTL */
+-	GPIO_FN_WE1,
+-	GPIO_FN_WE2_ICIORD,	/* share with PCMCIA */
+-	GPIO_FN_WE3_ICIOWR,	/* share with PCMCIA */
+-	GPIO_FN_CKO,	GPIO_FN_BS,	GPIO_FN_RDWR,
+-	GPIO_FN_RD_FSC,		/* share with FLCTL */
+-	GPIO_FN_WAIT_PORT177,	/* WAIT Port 90/177 */
+-	GPIO_FN_WAIT_PORT90,
+-
+-	GPIO_FN_FCE0,	GPIO_FN_FCE1,	GPIO_FN_FRB, /* FLCTL */
+-
+-	/* IRDA */
+-	GPIO_FN_IRDA_FIRSEL,	GPIO_FN_IRDA_IN,	GPIO_FN_IRDA_OUT,
+-
+-	/* ATAPI */
+-	GPIO_FN_IDE_D0,		GPIO_FN_IDE_D1,		GPIO_FN_IDE_D2,
+-	GPIO_FN_IDE_D3,		GPIO_FN_IDE_D4,		GPIO_FN_IDE_D5,
+-	GPIO_FN_IDE_D6,		GPIO_FN_IDE_D7,		GPIO_FN_IDE_D8,
+-	GPIO_FN_IDE_D9,		GPIO_FN_IDE_D10,	GPIO_FN_IDE_D11,
+-	GPIO_FN_IDE_D12,	GPIO_FN_IDE_D13,	GPIO_FN_IDE_D14,
+-	GPIO_FN_IDE_D15,	GPIO_FN_IDE_A0,		GPIO_FN_IDE_A1,
+-	GPIO_FN_IDE_A2,		GPIO_FN_IDE_CS0,	GPIO_FN_IDE_CS1,
+-	GPIO_FN_IDE_IOWR,	GPIO_FN_IDE_IORD,	GPIO_FN_IDE_IORDY,
+-	GPIO_FN_IDE_INT,	GPIO_FN_IDE_RST,	GPIO_FN_IDE_DIRECTION,
+-	GPIO_FN_IDE_EXBUF_ENB,	GPIO_FN_IDE_IODACK,	GPIO_FN_IDE_IODREQ,
+-
+-	/* RMII */
+-	GPIO_FN_RMII_CRS_DV,	GPIO_FN_RMII_RX_ER,	GPIO_FN_RMII_RXD0,
+-	GPIO_FN_RMII_RXD1,	GPIO_FN_RMII_TX_EN,	GPIO_FN_RMII_TXD0,
+-	GPIO_FN_RMII_MDC,	GPIO_FN_RMII_TXD1,	GPIO_FN_RMII_MDIO,
+-	GPIO_FN_RMII_REF50CK,	/* for RMII */
+-	GPIO_FN_RMII_REF125CK,	/* for GMII */
+-
+-	/* GEther */
+-	GPIO_FN_ET_TX_CLK,	GPIO_FN_ET_TX_EN,	GPIO_FN_ET_ETXD0,
+-	GPIO_FN_ET_ETXD1,	GPIO_FN_ET_ETXD2,	GPIO_FN_ET_ETXD3,
+-	GPIO_FN_ET_ETXD4,	GPIO_FN_ET_ETXD5, /* for GEther */
+-	GPIO_FN_ET_ETXD6,	GPIO_FN_ET_ETXD7, /* for GEther */
+-	GPIO_FN_ET_COL,		GPIO_FN_ET_TX_ER,
+-	GPIO_FN_ET_RX_CLK,	GPIO_FN_ET_RX_DV,
+-	GPIO_FN_ET_ERXD0,	GPIO_FN_ET_ERXD1,
+-	GPIO_FN_ET_ERXD2,	GPIO_FN_ET_ERXD3,
+-	GPIO_FN_ET_ERXD4,	GPIO_FN_ET_ERXD5, /* for GEther */
+-	GPIO_FN_ET_ERXD6,	GPIO_FN_ET_ERXD7, /* for GEther */
+-	GPIO_FN_ET_RX_ER,	GPIO_FN_ET_CRS,
+-	GPIO_FN_ET_MDC,		GPIO_FN_ET_MDIO,
+-	GPIO_FN_ET_LINK,	GPIO_FN_ET_PHY_INT,
+-	GPIO_FN_ET_WOL,		GPIO_FN_ET_GTX_CLK,
+-
+-	/* DMA0 */
+-	GPIO_FN_DREQ0,		GPIO_FN_DACK0,
+-
+-	/* DMA1 */
+-	GPIO_FN_DREQ1,		GPIO_FN_DACK1,
+-
+-	/* SYSC */
+-	GPIO_FN_RESETOUTS,
+-	GPIO_FN_RESETP_PULLUP,
+-	GPIO_FN_RESETP_PLAIN,
+-
+-	/* SDENC */
+-	GPIO_FN_SDENC_CPG,
+-	GPIO_FN_SDENC_DV_CLKI,
+-
+-	/* IRREM */
+-	GPIO_FN_IROUT,
+-
+-	/* DEBUG */
+-	GPIO_FN_EDEBGREQ_PULLDOWN,
+-	GPIO_FN_EDEBGREQ_PULLUP,
+-
+-	GPIO_FN_TRACEAUD_FROM_VIO,
+-	GPIO_FN_TRACEAUD_FROM_LCDC0,
+-	GPIO_FN_TRACEAUD_FROM_MEMC,
+-};
+-
+-#endif /* __ASM_R8A7740_H__ */
+diff --git a/arch/arm/mach-rmobile/include/mach/r8a7740.h b/arch/arm/mach-rmobile/include/mach/r8a7740.h
+deleted file mode 100644
+index f1fcfe19e4e..00000000000
+--- a/arch/arm/mach-rmobile/include/mach/r8a7740.h
++++ /dev/null
+@@ -1,274 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * Copyright (C) 2012 Renesas Solutions Corp.
+- */
+-
+-#ifndef __ASM_ARCH_R8A7740_H
+-#define __ASM_ARCH_R8A7740_H
+-
+-/*
+- * R8A7740 I/O Addresses
+- */
+-
+-#define MERAM_BASE	0xE5580000
+-#define DDRP_BASE	0xC12A0000
+-#define HPB_BASE	0xE6000000
+-#define RWDT0_BASE	0xE6020000
+-#define RWDT1_BASE	0xE6030000
+-#define GPIO_BASE	0xE6050000
+-#define CMT1_BASE	0xE6138000
+-#define CPG_BASE	0xE6150000
+-#define SYSC_BASE	0xE6180000
+-#define SDHI0_BASE	0xE6850000
+-#define SDHI1_BASE	0xE6860000
+-#define MMCIF_BASE	0xE6BD0000
+-#define SCIF5_BASE	0xE6CB0000
+-#define SCIF6_BASE	0xE6CC0000
+-#define DBSC_BASE	0xFE400000
+-#define BSC_BASE	0xFEC10000
+-#define I2C0_BASE	0xFFF20000
+-#define I2C1_BASE	0xE6C20000
+-#define TMU_BASE	0xFFF80000
+-
+-#ifndef __ASSEMBLY__
+-#include <asm/types.h>
+-
+-/* RWDT */
+-struct r8a7740_rwdt {
+-	u16 rwtcnt0;	/* 0x00 */
+-	u16 dummy0;		/* 0x02 */
+-	u16 rwtcsra0;	/* 0x04 */
+-	u16 dummy1;		/* 0x06 */
+-	u16 rwtcsrb0;	/* 0x08 */
+-	u16 dummy2;		/* 0x0A */
+-};
+-
+-/* HPB Semaphore Control Registers */
+-struct r8a7740_hpb {
+-	u32 hpbctrl0;
+-	u32 hpbctrl1;
+-	u32 hpbctrl2;
+-	u32 cccr;
+-	u32 dummy0; /* 0x20 */
+-	u32 hpbctrl4;
+-	u32 hpbctrl5;
+-};
+-
+-/* CPG */
+-struct r8a7740_cpg {
+-	u32 frqcra;
+-	u32 frqcrb;
+-	u32 vclkcr1;
+-	u32 vclkcr2;
+-	u32 fmsickcr;
+-	u32 fmsockcr;
+-	u32 fsiackcr;
+-	u32 dummy0; /* 0x1c */
+-	u32 rtstbcr;
+-	u32 systbcr;
+-	u32 pllc01cr;
+-	u32 pllc2cr;
+-	u32 mstpsr0;
+-	u32 dummy1; /* 0x34 */
+-	u32 mstpsr1;
+-	u32 mstpsr5;
+-	u32 mstpsr2;
+-	u32 dummy2; /* 0x44 */
+-	u32 mstpsr3;
+-	u32 mstpsr4;
+-	u32 dummy3; /* 0x50 */
+-	u32 astat;
+-	u32 dummy4[4]; /* 0x58 .. 0x64 */
+-	u32 ztrckcr;
+-	u32 dummy5[5]; /* 0x6c .. 0x7c */
+-	u32 subckcr;
+-	u32 spuckcr;
+-	u32 vouckcr;
+-	u32 usbckcr;
+-	u32 dummy6[3]; /* 0x90 .. 0x98 */
+-	u32 stprckcr;
+-	u32 srcr0;
+-	u32 dummy7; /* 0xa4 */
+-	u32 srcr1;
+-	u32 dummy8; /* 0xac */
+-	u32 srcr2;
+-	u32 dummy9; /* 0xb4 */
+-	u32 srcr3;
+-	u32 srcr4;
+-	u32 dummy10; /* 0xc0 */
+-	u32 srcr5;
+-	u32 pllc01stpcr;
+-	u32 dummy11[5]; /* 0xcc .. 0xdc */
+-	u32 frqcrc;
+-	u32 frqcrd;
+-	u32 dummy12[10]; /* 0xe8 .. 0x10c */
+-	u32 rmstpcr0;
+-	u32 rmstpcr1;
+-	u32 rmstpcr2;
+-	u32 rmstpcr3;
+-	u32 rmstpcr4;
+-	u32 rmstpcr5;
+-	u32 dummy13[2]; /* 0x128 .. 0x12c */
+-	u32 smstpcr0;
+-	u32 smstpcr1;
+-	u32 smstpcr2;
+-	u32 smstpcr3;
+-	u32 smstpcr4;
+-	u32 smstpcr5;
+-};
+-
+-/* BSC */
+-struct r8a7740_bsc {
+-	u32 cmncr;
+-	u32 cs0bcr;
+-	u32 cs2bcr;
+-	u32 dummy0; /* 0x0c */
+-	u32 cs4bcr;
+-	u32 cs5abcr;
+-	u32 cs5bbcr;
+-	u32 cs6abcr;
+-	u32 dummy1; /* 0x20 */
+-	u32 cs0wcr;
+-	u32 cs2wcr;
+-	u32 dummy2; /* 0x2c */
+-	u32 cs4wcr;
+-	u32 cs5awcr;
+-	u32 cs5bwcr;
+-	u32 cs6awcr;
+-	u32 dummy3[5]; /* 0x40 .. 0x50 */
+-	u32 rbwtcnt;
+-	u32 busycr;
+-	u32 dummy4[5]; /* 0x5c .. 0x6c */
+-	u32 bromtimcr;
+-	u32 dummy5[7]; /* 0x74 .. 0x8c */
+-	u32 bptcr00;
+-	u32 bptcr01;
+-	u32 bptcr02;
+-	u32 bptcr03;
+-	u32 bptcr04;
+-	u32 bptcr05;
+-	u32 bptcr06;
+-	u32 bptcr07;
+-	u32 bptcr08;
+-	u32 bptcr09;
+-	u32 bptcr10;
+-	u32 bptcr11;
+-	u32 bptcr12;
+-	u32 bptcr13;
+-	u32 bptcr14;
+-	u32 bptcr15;
+-	u32 bptcr16;
+-	u32 bptcr17;
+-	u32 bptcr18;
+-	u32 bptcr19;
+-	u32 bptcr20;
+-	u32 bptcr21;
+-	u32 bptcr22;
+-	u32 bptcr23;
+-	u32 bptcr24;
+-	u32 bptcr25;
+-	u32 bptcr26;
+-	u32 bptcr27;
+-	u32 bptcr28;
+-	u32 bptcr29;
+-	u32 bptcr30;
+-	u32 bptcr31;
+-	u32 bswcr;
+-	u32 dummy6[68]; /* 0x114 .. 0x220 */
+-	u32 cs0wcr2;
+-	u32 cs2wcr2;
+-	u32 dummy7; /* 0x22c */
+-	u32 cs4wcr2;
+-};
+-
+-#define CS0WCR2 0xFEC10224
+-#define CS2WCR2 0xFEC10228
+-#define CS4WCR2 0xFEC10230
+-
+-/* DDRP */
+-struct r8a7740_ddrp {
+-	u32 funcctrl;
+-	u32 dllctrl;
+-	u32 zqcalctrl;
+-	u32 zqodtctrl;
+-	u32 rdctrl;
+-	u32 rdtmg;
+-	u32 fifoinit;
+-	u32 outctrl;
+-	u32 dummy0[50]; /* 0x20 .. 0xe4 */
+-	u32 dqcalofs1;
+-	u32 dqcalofs2;
+-	u32 dummy1[2]; /* 0xf0 .. 0xf4 */
+-	u32 dqcalexp;
+-};
+-
+-#define DDRPNCNT 0xE605803C
+-#define DDRVREFCNT 0xE61500EC
+-
+-/* DBSC */
+-struct r8a7740_dbsc {
+-	u32 dummy0;
+-	u32 dbsvcr;
+-	u32 dbstate0;
+-	u32 dbstate1;
+-	u32 dbacen;
+-	u32 dbrfen;
+-	u32 dbcmd;
+-	u32 dbwait;
+-	u32 dbkind;
+-	u32 dbconf0;
+-	u32 dummy1[2]; /* 0x28 .. 0x2c */
+-	u32 dbphytype;
+-	u32 dummy2[3]; /* 0x34 .. 0x3c */
+-	u32 dbtr0;
+-	u32 dbtr1;
+-	u32 dbtr2;
+-	u32 dummy3; /* 0x4c */
+-	u32 dbtr3;
+-	u32 dbtr4;
+-	u32 dbtr5;
+-	u32 dbtr6;
+-	u32 dbtr7;
+-	u32 dbtr8;
+-	u32 dbtr9;
+-	u32 dbtr10;
+-	u32 dbtr11;
+-	u32 dbtr12;
+-	u32 dbtr13;
+-	u32 dbtr14;
+-	u32 dbtr15;
+-	u32 dbtr16;
+-	u32 dbtr17;
+-	u32 dbtr18;
+-	u32 dbtr19;
+-	u32 dummy4[7]; /* 0x94 .. 0xac */
+-	u32 dbbl;
+-	u32 dummy5[3]; /* 0xb4 .. 0xbc */
+-	u32 dbadj0;
+-	u32 dbadj1;
+-	u32 dbadj2;
+-	u32 dummy6[5]; /* 0xcc .. 0xdc */
+-	u32 dbrfcnf0;
+-	u32 dbrfcnf1;
+-	u32 dbrfcnf2;
+-	u32 dbrfcnf3;
+-	u32 dummy7; /* 0xf0 */
+-	u32 dbcalcnf;
+-	u32 dbcaltr;
+-	u32 dummy8; /* 0xfc */;
+-	u32 dbrnk0;
+-	u32 dummy9[31]; /* 0x104 .. 0x17C */
+-	u32 dbpdncnf;
+-	u32 dummy10[7]; /* 0x184 .. 0x19C */
+-	u32 dbmrrdr;
+-	u32 dummy11[39]; /* 0x1A4 .. 0x23C */
+-	u32 dbdfistat;
+-	u32 dbdficnt;
+-	u32 dummy12[46]; /* 0x248 .. 0x2FC */
+-	u32 dbbs0cnt0;
+-	u32 dbbs0cnt1;
+-};
+-
+-#endif
+-
+-#endif /* __ASM_ARCH_R8A7740_H */
+diff --git a/arch/arm/mach-rmobile/include/mach/rmobile.h b/arch/arm/mach-rmobile/include/mach/rmobile.h
+index f0216210ba9..bed91f07ad4 100644
+--- a/arch/arm/mach-rmobile/include/mach/rmobile.h
++++ b/arch/arm/mach-rmobile/include/mach/rmobile.h
+@@ -2,9 +2,7 @@
+ #define __ASM_ARCH_RMOBILE_H
  
- #ifndef __UBOOT__
-@@ -1219,6 +1233,8 @@ static int spinand_probe(struct udevice *dev)
- 	if (ret)
- 		goto err_spinand_cleanup;
- 
-+	plat->mtd = mtd;
-+
- 	return 0;
- 
- err_spinand_cleanup:
-@@ -1288,6 +1304,10 @@ U_BOOT_DRIVER(spinand) = {
- 	.of_match = spinand_ids,
- 	.priv_auto	= sizeof(struct spinand_device),
- 	.probe = spinand_probe,
-+#if CONFIG_IS_ENABLED(BLK)
-+	.bind = spinand_bind,
-+#endif
-+	.plat_auto = sizeof(struct spinand_plat),
- };
- 
- void board_nand_init(void)
+ #if defined(CONFIG_ARCH_RMOBILE)
+-#if defined(CONFIG_R8A7740)
+-#include <asm/arch/r8a7740.h>
+-#elif defined(CONFIG_R8A7790)
++#if defined(CONFIG_R8A7790)
+ #include <asm/arch/r8a7790.h>
+ #elif defined(CONFIG_R8A7791)
+ #include <asm/arch/r8a7791.h>
+diff --git a/arch/arm/mach-rmobile/lowlevel_init.S b/arch/arm/mach-rmobile/lowlevel_init.S
+deleted file mode 100644
+index 212e95539bc..00000000000
+--- a/arch/arm/mach-rmobile/lowlevel_init.S
++++ /dev/null
+@@ -1,72 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * Copyright (C) 2012 Nobuhiro Iwamatsu <nobuhiro.Iwamatsu.yj@renesas.com>
+- * Copyright (C) 2012 Renesas Solutions Corp.
+- */
+-
+-#include <config.h>
+-#include <linux/linkage.h>
+-#include <system-constants.h>
+-
+-ENTRY(lowlevel_init)
+-	ldr		r0, =MERAM_BASE
+-	mov		r1, #0x0
+-	str		r1, [r0]
+-
+-	mrc		p15, 0, r0, c0, c0, 5
+-	ands	r0, r0, #0xF
+-	beq		lowlevel_init__
+-	b		wait_interrupt
+-
+-	.pool
+-	.align 4
+-
+-wait_interrupt:
+-#ifdef ICCICR
+-	ldr     r1, =ICCICR
+-	mov     r2, #0x0
+-	str     r2, [r1]
+-	mov     r2, #0xF0
+-	adds    r1, r1, #4 /* ICCPMR */
+-	str     r2, [r1]
+-	ldr     r1, =ICCICR
+-	mov     r2, #0x1
+-	str     r2, [r1]
+-#endif
+-
+-wait_loop:
+-	.long	0xE320F003 /* wfi */
+-
+-	ldr		r2, [r1, #0xC]
+-	str		r2, [r1, #0x10]
+-
+-	ldr		r0, =MERAM_BASE
+-	ldr		r2, [r0]
+-	cmp		r2, #0
+-	movne	pc, r2
+-
+-	b		wait_loop
+-
+-wait_loop_end:
+-	.pool
+-	.align 4
+-
+-lowlevel_init__:
+-
+-	mov r0, #0x200000
+-
+-loop0:
+-	subs r0, r0, #1
+-	bne  loop0
+-
+-	ldr sp, MERAM_STACK
+-	b s_init
+-
+-	.pool
+-	.align 4
+-
+-ENDPROC(lowlevel_init)
+-	.ltorg
+-
+-MERAM_STACK:
+-	.word LOW_LEVEL_MERAM_STACK
+diff --git a/arch/arm/mach-rmobile/pfc-r8a7740.c b/arch/arm/mach-rmobile/pfc-r8a7740.c
+deleted file mode 100644
+index 4f4847699b0..00000000000
+--- a/arch/arm/mach-rmobile/pfc-r8a7740.c
++++ /dev/null
+@@ -1,2612 +0,0 @@
+-/*
+- * R8A7740 processor support
+- *
+- * Copyright (C) 2011  Renesas Solutions Corp.
+- * Copyright (C) 2011  Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>
+- *
+- * This program is free software; you can redistribute it and/or
+- * modify it under the terms of the GNU General Public License as
+- * published by the Free Software Foundation; version 2 of the
+- * License.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+- */
+-
+-#include <sh_pfc.h>
+-#include <asm/gpio.h>
+-#include <asm/arch/irqs.h>
+-
+-#define CPU_ALL_PORT(fn, pfx, sfx)					\
+-	PORT_10(fn, pfx, sfx),		PORT_90(fn, pfx, sfx),		\
+-	PORT_10(fn, pfx##10, sfx),	PORT_90(fn, pfx##1, sfx),	\
+-	PORT_10(fn, pfx##20, sfx),					\
+-	PORT_1(fn, pfx##210, sfx),	PORT_1(fn, pfx##211, sfx)
+-
+-enum {
+-	PINMUX_RESERVED = 0,
+-
+-	/* PORT0_DATA -> PORT211_DATA */
+-	PINMUX_DATA_BEGIN,
+-	PORT_ALL(DATA),
+-	PINMUX_DATA_END,
+-
+-	/* PORT0_IN -> PORT211_IN */
+-	PINMUX_INPUT_BEGIN,
+-	PORT_ALL(IN),
+-	PINMUX_INPUT_END,
+-
+-	/* PORT0_IN_PU -> PORT211_IN_PU */
+-	PINMUX_INPUT_PULLUP_BEGIN,
+-	PORT_ALL(IN_PU),
+-	PINMUX_INPUT_PULLUP_END,
+-
+-	/* PORT0_IN_PD -> PORT211_IN_PD */
+-	PINMUX_INPUT_PULLDOWN_BEGIN,
+-	PORT_ALL(IN_PD),
+-	PINMUX_INPUT_PULLDOWN_END,
+-
+-	/* PORT0_OUT -> PORT211_OUT */
+-	PINMUX_OUTPUT_BEGIN,
+-	PORT_ALL(OUT),
+-	PINMUX_OUTPUT_END,
+-
+-	PINMUX_FUNCTION_BEGIN,
+-	PORT_ALL(FN_IN),	/* PORT0_FN_IN -> PORT211_FN_IN */
+-	PORT_ALL(FN_OUT),	/* PORT0_FN_OUT -> PORT211_FN_OUT */
+-	PORT_ALL(FN0),		/* PORT0_FN0 -> PORT211_FN0 */
+-	PORT_ALL(FN1),		/* PORT0_FN1 -> PORT211_FN1 */
+-	PORT_ALL(FN2),		/* PORT0_FN2 -> PORT211_FN2 */
+-	PORT_ALL(FN3),		/* PORT0_FN3 -> PORT211_FN3 */
+-	PORT_ALL(FN4),		/* PORT0_FN4 -> PORT211_FN4 */
+-	PORT_ALL(FN5),		/* PORT0_FN5 -> PORT211_FN5 */
+-	PORT_ALL(FN6),		/* PORT0_FN6 -> PORT211_FN6 */
+-	PORT_ALL(FN7),		/* PORT0_FN7 -> PORT211_FN7 */
+-
+-	MSEL1CR_31_0,	MSEL1CR_31_1,
+-	MSEL1CR_30_0,	MSEL1CR_30_1,
+-	MSEL1CR_29_0,	MSEL1CR_29_1,
+-	MSEL1CR_28_0,	MSEL1CR_28_1,
+-	MSEL1CR_27_0,	MSEL1CR_27_1,
+-	MSEL1CR_26_0,	MSEL1CR_26_1,
+-	MSEL1CR_16_0,	MSEL1CR_16_1,
+-	MSEL1CR_15_0,	MSEL1CR_15_1,
+-	MSEL1CR_14_0,	MSEL1CR_14_1,
+-	MSEL1CR_13_0,	MSEL1CR_13_1,
+-	MSEL1CR_12_0,	MSEL1CR_12_1,
+-	MSEL1CR_9_0,	MSEL1CR_9_1,
+-	MSEL1CR_7_0,	MSEL1CR_7_1,
+-	MSEL1CR_6_0,	MSEL1CR_6_1,
+-	MSEL1CR_5_0,	MSEL1CR_5_1,
+-	MSEL1CR_4_0,	MSEL1CR_4_1,
+-	MSEL1CR_3_0,	MSEL1CR_3_1,
+-	MSEL1CR_2_0,	MSEL1CR_2_1,
+-	MSEL1CR_0_0,	MSEL1CR_0_1,
+-
+-	MSEL3CR_15_0,	MSEL3CR_15_1, /* Trace / Debug ? */
+-	MSEL3CR_6_0,	MSEL3CR_6_1,
+-
+-	MSEL4CR_19_0,	MSEL4CR_19_1,
+-	MSEL4CR_18_0,	MSEL4CR_18_1,
+-	MSEL4CR_15_0,	MSEL4CR_15_1,
+-	MSEL4CR_10_0,	MSEL4CR_10_1,
+-	MSEL4CR_6_0,	MSEL4CR_6_1,
+-	MSEL4CR_4_0,	MSEL4CR_4_1,
+-	MSEL4CR_1_0,	MSEL4CR_1_1,
+-
+-	MSEL5CR_31_0,	MSEL5CR_31_1, /* irq/fiq output */
+-	MSEL5CR_30_0,	MSEL5CR_30_1,
+-	MSEL5CR_29_0,	MSEL5CR_29_1,
+-	MSEL5CR_27_0,	MSEL5CR_27_1,
+-	MSEL5CR_25_0,	MSEL5CR_25_1,
+-	MSEL5CR_23_0,	MSEL5CR_23_1,
+-	MSEL5CR_21_0,	MSEL5CR_21_1,
+-	MSEL5CR_19_0,	MSEL5CR_19_1,
+-	MSEL5CR_17_0,	MSEL5CR_17_1,
+-	MSEL5CR_15_0,	MSEL5CR_15_1,
+-	MSEL5CR_14_0,	MSEL5CR_14_1,
+-	MSEL5CR_13_0,	MSEL5CR_13_1,
+-	MSEL5CR_12_0,	MSEL5CR_12_1,
+-	MSEL5CR_11_0,	MSEL5CR_11_1,
+-	MSEL5CR_10_0,	MSEL5CR_10_1,
+-	MSEL5CR_8_0,	MSEL5CR_8_1,
+-	MSEL5CR_7_0,	MSEL5CR_7_1,
+-	MSEL5CR_6_0,	MSEL5CR_6_1,
+-	MSEL5CR_5_0,	MSEL5CR_5_1,
+-	MSEL5CR_4_0,	MSEL5CR_4_1,
+-	MSEL5CR_3_0,	MSEL5CR_3_1,
+-	MSEL5CR_2_0,	MSEL5CR_2_1,
+-	MSEL5CR_0_0,	MSEL5CR_0_1,
+-	PINMUX_FUNCTION_END,
+-
+-	PINMUX_MARK_BEGIN,
+-
+-	/* IRQ */
+-	IRQ0_PORT2_MARK,	IRQ0_PORT13_MARK,
+-	IRQ1_MARK,
+-	IRQ2_PORT11_MARK,	IRQ2_PORT12_MARK,
+-	IRQ3_PORT10_MARK,	IRQ3_PORT14_MARK,
+-	IRQ4_PORT15_MARK,	IRQ4_PORT172_MARK,
+-	IRQ5_PORT0_MARK,	IRQ5_PORT1_MARK,
+-	IRQ6_PORT121_MARK,	IRQ6_PORT173_MARK,
+-	IRQ7_PORT120_MARK,	IRQ7_PORT209_MARK,
+-	IRQ8_MARK,
+-	IRQ9_PORT118_MARK,	IRQ9_PORT210_MARK,
+-	IRQ10_MARK,
+-	IRQ11_MARK,
+-	IRQ12_PORT42_MARK,	IRQ12_PORT97_MARK,
+-	IRQ13_PORT64_MARK,	IRQ13_PORT98_MARK,
+-	IRQ14_PORT63_MARK,	IRQ14_PORT99_MARK,
+-	IRQ15_PORT62_MARK,	IRQ15_PORT100_MARK,
+-	IRQ16_PORT68_MARK,	IRQ16_PORT211_MARK,
+-	IRQ17_MARK,
+-	IRQ18_MARK,
+-	IRQ19_MARK,
+-	IRQ20_MARK,
+-	IRQ21_MARK,
+-	IRQ22_MARK,
+-	IRQ23_MARK,
+-	IRQ24_MARK,
+-	IRQ25_MARK,
+-	IRQ26_PORT58_MARK,	IRQ26_PORT81_MARK,
+-	IRQ27_PORT57_MARK,	IRQ27_PORT168_MARK,
+-	IRQ28_PORT56_MARK,	IRQ28_PORT169_MARK,
+-	IRQ29_PORT50_MARK,	IRQ29_PORT170_MARK,
+-	IRQ30_PORT49_MARK,	IRQ30_PORT171_MARK,
+-	IRQ31_PORT41_MARK,	IRQ31_PORT167_MARK,
+-
+-	/* Function */
+-
+-	/* DBGT */
+-	DBGMDT2_MARK,	DBGMDT1_MARK,	DBGMDT0_MARK,
+-	DBGMD10_MARK,	DBGMD11_MARK,	DBGMD20_MARK,
+-	DBGMD21_MARK,
+-
+-	/* FSI */
+-	FSIAISLD_PORT0_MARK,	/* FSIAISLD Port 0/5 */
+-	FSIAISLD_PORT5_MARK,
+-	FSIASPDIF_PORT9_MARK,	/* FSIASPDIF Port 9/18 */
+-	FSIASPDIF_PORT18_MARK,
+-	FSIAOSLD1_MARK,	FSIAOSLD2_MARK,	FSIAOLR_MARK,
+-	FSIAOBT_MARK,	FSIAOSLD_MARK,	FSIAOMC_MARK,
+-	FSIACK_MARK,	FSIAILR_MARK,	FSIAIBT_MARK,
+-
+-	/* FMSI */
+-	FMSISLD_PORT1_MARK, /* FMSISLD Port 1/6 */
+-	FMSISLD_PORT6_MARK,
+-	FMSIILR_MARK,	FMSIIBT_MARK,	FMSIOLR_MARK,	FMSIOBT_MARK,
+-	FMSICK_MARK,	FMSOILR_MARK,	FMSOIBT_MARK,	FMSOOLR_MARK,
+-	FMSOOBT_MARK,	FMSOSLD_MARK,	FMSOCK_MARK,
+-
+-	/* SCIFA0 */
+-	SCIFA0_SCK_MARK,	SCIFA0_CTS_MARK,	SCIFA0_RTS_MARK,
+-	SCIFA0_RXD_MARK,	SCIFA0_TXD_MARK,
+-
+-	/* SCIFA1 */
+-	SCIFA1_CTS_MARK,	SCIFA1_SCK_MARK,	SCIFA1_RXD_MARK,
+-	SCIFA1_TXD_MARK,	SCIFA1_RTS_MARK,
+-
+-	/* SCIFA2 */
+-	SCIFA2_SCK_PORT22_MARK, /* SCIFA2_SCK Port 22/199 */
+-	SCIFA2_SCK_PORT199_MARK,
+-	SCIFA2_RXD_MARK,	SCIFA2_TXD_MARK,
+-	SCIFA2_CTS_MARK,	SCIFA2_RTS_MARK,
+-
+-	/* SCIFA3 */
+-	SCIFA3_RTS_PORT105_MARK, /* MSEL5CR_8_0 */
+-	SCIFA3_SCK_PORT116_MARK,
+-	SCIFA3_CTS_PORT117_MARK,
+-	SCIFA3_RXD_PORT174_MARK,
+-	SCIFA3_TXD_PORT175_MARK,
+-
+-	SCIFA3_RTS_PORT161_MARK, /* MSEL5CR_8_1 */
+-	SCIFA3_SCK_PORT158_MARK,
+-	SCIFA3_CTS_PORT162_MARK,
+-	SCIFA3_RXD_PORT159_MARK,
+-	SCIFA3_TXD_PORT160_MARK,
+-
+-	/* SCIFA4 */
+-	SCIFA4_RXD_PORT12_MARK, /* MSEL5CR[12:11] = 00 */
+-	SCIFA4_TXD_PORT13_MARK,
+-
+-	SCIFA4_RXD_PORT204_MARK, /* MSEL5CR[12:11] = 01 */
+-	SCIFA4_TXD_PORT203_MARK,
+-
+-	SCIFA4_RXD_PORT94_MARK, /* MSEL5CR[12:11] = 10 */
+-	SCIFA4_TXD_PORT93_MARK,
+-
+-	SCIFA4_SCK_PORT21_MARK, /* SCIFA4_SCK Port 21/205 */
+-	SCIFA4_SCK_PORT205_MARK,
+-
+-	/* SCIFA5 */
+-	SCIFA5_TXD_PORT20_MARK, /* MSEL5CR[15:14] = 00 */
+-	SCIFA5_RXD_PORT10_MARK,
+-
+-	SCIFA5_RXD_PORT207_MARK, /* MSEL5CR[15:14] = 01 */
+-	SCIFA5_TXD_PORT208_MARK,
+-
+-	SCIFA5_TXD_PORT91_MARK, /* MSEL5CR[15:14] = 10 */
+-	SCIFA5_RXD_PORT92_MARK,
+-
+-	SCIFA5_SCK_PORT23_MARK, /* SCIFA5_SCK Port 23/206 */
+-	SCIFA5_SCK_PORT206_MARK,
+-
+-	/* SCIFA6 */
+-	SCIFA6_SCK_MARK,	SCIFA6_RXD_MARK,	SCIFA6_TXD_MARK,
+-
+-	/* SCIFA7 */
+-	SCIFA7_TXD_MARK,	SCIFA7_RXD_MARK,
+-
+-	/* SCIFAB */
+-	SCIFB_SCK_PORT190_MARK, /* MSEL5CR_17_0 */
+-	SCIFB_RXD_PORT191_MARK,
+-	SCIFB_TXD_PORT192_MARK,
+-	SCIFB_RTS_PORT186_MARK,
+-	SCIFB_CTS_PORT187_MARK,
+-
+-	SCIFB_SCK_PORT2_MARK, /* MSEL5CR_17_1 */
+-	SCIFB_RXD_PORT3_MARK,
+-	SCIFB_TXD_PORT4_MARK,
+-	SCIFB_RTS_PORT172_MARK,
+-	SCIFB_CTS_PORT173_MARK,
+-
+-	/* LCD0 */
+-	LCDC0_SELECT_MARK,
+-
+-	LCD0_D0_MARK,	LCD0_D1_MARK,	LCD0_D2_MARK,	LCD0_D3_MARK,
+-	LCD0_D4_MARK,	LCD0_D5_MARK,	LCD0_D6_MARK,	LCD0_D7_MARK,
+-	LCD0_D8_MARK,	LCD0_D9_MARK,	LCD0_D10_MARK,	LCD0_D11_MARK,
+-	LCD0_D12_MARK,	LCD0_D13_MARK,	LCD0_D14_MARK,	LCD0_D15_MARK,
+-	LCD0_D16_MARK,	LCD0_D17_MARK,
+-	LCD0_DON_MARK,	LCD0_VCPWC_MARK,	LCD0_VEPWC_MARK,
+-	LCD0_DCK_MARK,	LCD0_VSYN_MARK,	/* for RGB */
+-	LCD0_HSYN_MARK,	LCD0_DISP_MARK,	/* for RGB */
+-	LCD0_WR_MARK,	LCD0_RD_MARK,	/* for SYS */
+-	LCD0_CS_MARK,	LCD0_RS_MARK,	/* for SYS */
+-
+-	LCD0_D21_PORT158_MARK,	LCD0_D23_PORT159_MARK, /* MSEL5CR_6_1 */
+-	LCD0_D22_PORT160_MARK,	LCD0_D20_PORT161_MARK,
+-	LCD0_D19_PORT162_MARK,	LCD0_D18_PORT163_MARK,
+-	LCD0_LCLK_PORT165_MARK,
+-
+-	LCD0_D18_PORT40_MARK,	LCD0_D22_PORT0_MARK, /* MSEL5CR_6_0 */
+-	LCD0_D23_PORT1_MARK,	LCD0_D21_PORT2_MARK,
+-	LCD0_D20_PORT3_MARK,	LCD0_D19_PORT4_MARK,
+-	LCD0_LCLK_PORT102_MARK,
+-
+-	/* LCD1 */
+-	LCDC1_SELECT_MARK,
+-
+-	LCD1_D0_MARK,	LCD1_D1_MARK,	LCD1_D2_MARK,	LCD1_D3_MARK,
+-	LCD1_D4_MARK,	LCD1_D5_MARK,	LCD1_D6_MARK,	LCD1_D7_MARK,
+-	LCD1_D8_MARK,	LCD1_D9_MARK,	LCD1_D10_MARK,	LCD1_D11_MARK,
+-	LCD1_D12_MARK,	LCD1_D13_MARK,	LCD1_D14_MARK,	LCD1_D15_MARK,
+-	LCD1_D16_MARK,	LCD1_D17_MARK,	LCD1_D18_MARK,	LCD1_D19_MARK,
+-	LCD1_D20_MARK,	LCD1_D21_MARK,	LCD1_D22_MARK,	LCD1_D23_MARK,
+-	LCD1_DON_MARK,	LCD1_VCPWC_MARK,
+-	LCD1_LCLK_MARK,	LCD1_VEPWC_MARK,
+-
+-	LCD1_DCK_MARK,	LCD1_VSYN_MARK,	/* for RGB */
+-	LCD1_HSYN_MARK,	LCD1_DISP_MARK,	/* for RGB */
+-	LCD1_RS_MARK,	LCD1_CS_MARK,	/* for SYS */
+-	LCD1_RD_MARK,	LCD1_WR_MARK,	/* for SYS */
+-
+-	/* RSPI */
+-	RSPI_SSL0_A_MARK,	RSPI_SSL1_A_MARK,	RSPI_SSL2_A_MARK,
+-	RSPI_SSL3_A_MARK,	RSPI_CK_A_MARK,		RSPI_MOSI_A_MARK,
+-	RSPI_MISO_A_MARK,
+-
+-	/* VIO CKO */
+-	VIO_CKO1_MARK, /* needs fixup */
+-	VIO_CKO2_MARK,
+-	VIO_CKO_1_MARK,
+-	VIO_CKO_MARK,
+-
+-	/* VIO0 */
+-	VIO0_D0_MARK,	VIO0_D1_MARK,	VIO0_D2_MARK,	VIO0_D3_MARK,
+-	VIO0_D4_MARK,	VIO0_D5_MARK,	VIO0_D6_MARK,	VIO0_D7_MARK,
+-	VIO0_D8_MARK,	VIO0_D9_MARK,	VIO0_D10_MARK,	VIO0_D11_MARK,
+-	VIO0_D12_MARK,	VIO0_VD_MARK,	VIO0_HD_MARK,	VIO0_CLK_MARK,
+-	VIO0_FIELD_MARK,
+-
+-	VIO0_D13_PORT26_MARK, /* MSEL5CR_27_0 */
+-	VIO0_D14_PORT25_MARK,
+-	VIO0_D15_PORT24_MARK,
+-
+-	VIO0_D13_PORT22_MARK, /* MSEL5CR_27_1 */
+-	VIO0_D14_PORT95_MARK,
+-	VIO0_D15_PORT96_MARK,
+-
+-	/* VIO1 */
+-	VIO1_D0_MARK,	VIO1_D1_MARK,	VIO1_D2_MARK,	VIO1_D3_MARK,
+-	VIO1_D4_MARK,	VIO1_D5_MARK,	VIO1_D6_MARK,	VIO1_D7_MARK,
+-	VIO1_VD_MARK,	VIO1_HD_MARK,	VIO1_CLK_MARK,	VIO1_FIELD_MARK,
+-
+-	/* TPU0 */
+-	TPU0TO0_MARK,	TPU0TO1_MARK,	TPU0TO3_MARK,
+-	TPU0TO2_PORT66_MARK, /* TPU0TO2 Port 66/202 */
+-	TPU0TO2_PORT202_MARK,
+-
+-	/* SSP1 0 */
+-	STP0_IPD0_MARK,	STP0_IPD1_MARK,	STP0_IPD2_MARK,	STP0_IPD3_MARK,
+-	STP0_IPD4_MARK,	STP0_IPD5_MARK,	STP0_IPD6_MARK,	STP0_IPD7_MARK,
+-	STP0_IPEN_MARK,	STP0_IPCLK_MARK,	STP0_IPSYNC_MARK,
+-
+-	/* SSP1 1 */
+-	STP1_IPD1_MARK,	STP1_IPD2_MARK,	STP1_IPD3_MARK,	STP1_IPD4_MARK,
+-	STP1_IPD5_MARK,	STP1_IPD6_MARK,	STP1_IPD7_MARK,	STP1_IPCLK_MARK,
+-	STP1_IPSYNC_MARK,
+-
+-	STP1_IPD0_PORT186_MARK, /* MSEL5CR_23_0 */
+-	STP1_IPEN_PORT187_MARK,
+-
+-	STP1_IPD0_PORT194_MARK, /* MSEL5CR_23_1 */
+-	STP1_IPEN_PORT193_MARK,
+-
+-	/* SIM */
+-	SIM_RST_MARK,	SIM_CLK_MARK,
+-	SIM_D_PORT22_MARK, /* SIM_D  Port 22/199 */
+-	SIM_D_PORT199_MARK,
+-
+-	/* SDHI0 */
+-	SDHI0_D0_MARK,	SDHI0_D1_MARK,	SDHI0_D2_MARK,	SDHI0_D3_MARK,
+-	SDHI0_CD_MARK,	SDHI0_WP_MARK,	SDHI0_CMD_MARK,	SDHI0_CLK_MARK,
+-
+-	/* SDHI1 */
+-	SDHI1_D0_MARK,	SDHI1_D1_MARK,	SDHI1_D2_MARK,	SDHI1_D3_MARK,
+-	SDHI1_CD_MARK,	SDHI1_WP_MARK,	SDHI1_CMD_MARK,	SDHI1_CLK_MARK,
+-
+-	/* SDHI2 */
+-	SDHI2_D0_MARK,	SDHI2_D1_MARK,	SDHI2_D2_MARK,	SDHI2_D3_MARK,
+-	SDHI2_CLK_MARK,	SDHI2_CMD_MARK,
+-
+-	SDHI2_CD_PORT24_MARK, /* MSEL5CR_19_0 */
+-	SDHI2_WP_PORT25_MARK,
+-
+-	SDHI2_WP_PORT177_MARK, /* MSEL5CR_19_1 */
+-	SDHI2_CD_PORT202_MARK,
+-
+-	/* MSIOF2 */
+-	MSIOF2_TXD_MARK,	MSIOF2_RXD_MARK,	MSIOF2_TSCK_MARK,
+-	MSIOF2_SS2_MARK,	MSIOF2_TSYNC_MARK,	MSIOF2_SS1_MARK,
+-	MSIOF2_MCK1_MARK,	MSIOF2_MCK0_MARK,	MSIOF2_RSYNC_MARK,
+-	MSIOF2_RSCK_MARK,
+-
+-	/* KEYSC */
+-	KEYIN4_MARK,	KEYIN5_MARK,	KEYIN6_MARK,	KEYIN7_MARK,
+-	KEYOUT0_MARK,	KEYOUT1_MARK,	KEYOUT2_MARK,	KEYOUT3_MARK,
+-	KEYOUT4_MARK,	KEYOUT5_MARK,	KEYOUT6_MARK,	KEYOUT7_MARK,
+-
+-	KEYIN0_PORT43_MARK, /* MSEL4CR_18_0 */
+-	KEYIN1_PORT44_MARK,
+-	KEYIN2_PORT45_MARK,
+-	KEYIN3_PORT46_MARK,
+-
+-	KEYIN0_PORT58_MARK, /* MSEL4CR_18_1 */
+-	KEYIN1_PORT57_MARK,
+-	KEYIN2_PORT56_MARK,
+-	KEYIN3_PORT55_MARK,
+-
+-	/* VOU */
+-	DV_D0_MARK,	DV_D1_MARK,	DV_D2_MARK,	DV_D3_MARK,
+-	DV_D4_MARK,	DV_D5_MARK,	DV_D6_MARK,	DV_D7_MARK,
+-	DV_D8_MARK,	DV_D9_MARK,	DV_D10_MARK,	DV_D11_MARK,
+-	DV_D12_MARK,	DV_D13_MARK,	DV_D14_MARK,	DV_D15_MARK,
+-	DV_CLK_MARK,	DV_VSYNC_MARK,	DV_HSYNC_MARK,
+-
+-	/* MEMC */
+-	MEMC_AD0_MARK,	MEMC_AD1_MARK,	MEMC_AD2_MARK,	MEMC_AD3_MARK,
+-	MEMC_AD4_MARK,	MEMC_AD5_MARK,	MEMC_AD6_MARK,	MEMC_AD7_MARK,
+-	MEMC_AD8_MARK,	MEMC_AD9_MARK,	MEMC_AD10_MARK,	MEMC_AD11_MARK,
+-	MEMC_AD12_MARK,	MEMC_AD13_MARK,	MEMC_AD14_MARK,	MEMC_AD15_MARK,
+-	MEMC_CS0_MARK,	MEMC_INT_MARK,	MEMC_NWE_MARK,	MEMC_NOE_MARK,
+-
+-	MEMC_CS1_MARK, /* MSEL4CR_6_0 */
+-	MEMC_ADV_MARK,
+-	MEMC_WAIT_MARK,
+-	MEMC_BUSCLK_MARK,
+-
+-	MEMC_A1_MARK, /* MSEL4CR_6_1 */
+-	MEMC_DREQ0_MARK,
+-	MEMC_DREQ1_MARK,
+-	MEMC_A0_MARK,
+-
+-	/* MMC */
+-	MMC0_D0_PORT68_MARK,	MMC0_D1_PORT69_MARK,	MMC0_D2_PORT70_MARK,
+-	MMC0_D3_PORT71_MARK,	MMC0_D4_PORT72_MARK,	MMC0_D5_PORT73_MARK,
+-	MMC0_D6_PORT74_MARK,	MMC0_D7_PORT75_MARK,	MMC0_CLK_PORT66_MARK,
+-	MMC0_CMD_PORT67_MARK,	/* MSEL4CR_15_0 */
+-
+-	MMC1_D0_PORT149_MARK,	MMC1_D1_PORT148_MARK,	MMC1_D2_PORT147_MARK,
+-	MMC1_D3_PORT146_MARK,	MMC1_D4_PORT145_MARK,	MMC1_D5_PORT144_MARK,
+-	MMC1_D6_PORT143_MARK,	MMC1_D7_PORT142_MARK,	MMC1_CLK_PORT103_MARK,
+-	MMC1_CMD_PORT104_MARK,	/* MSEL4CR_15_1 */
+-
+-	/* MSIOF0 */
+-	MSIOF0_SS1_MARK,	MSIOF0_SS2_MARK,	MSIOF0_RXD_MARK,
+-	MSIOF0_TXD_MARK,	MSIOF0_MCK0_MARK,	MSIOF0_MCK1_MARK,
+-	MSIOF0_RSYNC_MARK,	MSIOF0_RSCK_MARK,	MSIOF0_TSCK_MARK,
+-	MSIOF0_TSYNC_MARK,
+-
+-	/* MSIOF1 */
+-	MSIOF1_RSCK_MARK,	MSIOF1_RSYNC_MARK,
+-	MSIOF1_MCK0_MARK,	MSIOF1_MCK1_MARK,
+-
+-	MSIOF1_SS2_PORT116_MARK,	MSIOF1_SS1_PORT117_MARK,
+-	MSIOF1_RXD_PORT118_MARK,	MSIOF1_TXD_PORT119_MARK,
+-	MSIOF1_TSYNC_PORT120_MARK,
+-	MSIOF1_TSCK_PORT121_MARK,	/* MSEL4CR_10_0 */
+-
+-	MSIOF1_SS1_PORT67_MARK,		MSIOF1_TSCK_PORT72_MARK,
+-	MSIOF1_TSYNC_PORT73_MARK,	MSIOF1_TXD_PORT74_MARK,
+-	MSIOF1_RXD_PORT75_MARK,
+-	MSIOF1_SS2_PORT202_MARK,	/* MSEL4CR_10_1 */
+-
+-	/* GPIO */
+-	GPO0_MARK,	GPI0_MARK,	GPO1_MARK,	GPI1_MARK,
+-
+-	/* USB0 */
+-	USB0_OCI_MARK,	USB0_PPON_MARK,	VBUS_MARK,
+-
+-	/* USB1 */
+-	USB1_OCI_MARK,	USB1_PPON_MARK,
+-
+-	/* BBIF1 */
+-	BBIF1_RXD_MARK,		BBIF1_TXD_MARK,		BBIF1_TSYNC_MARK,
+-	BBIF1_TSCK_MARK,	BBIF1_RSCK_MARK,	BBIF1_RSYNC_MARK,
+-	BBIF1_FLOW_MARK,	BBIF1_RX_FLOW_N_MARK,
+-
+-	/* BBIF2 */
+-	BBIF2_TXD2_PORT5_MARK, /* MSEL5CR_0_0 */
+-	BBIF2_RXD2_PORT60_MARK,
+-	BBIF2_TSYNC2_PORT6_MARK,
+-	BBIF2_TSCK2_PORT59_MARK,
+-
+-	BBIF2_RXD2_PORT90_MARK, /* MSEL5CR_0_1 */
+-	BBIF2_TXD2_PORT183_MARK,
+-	BBIF2_TSCK2_PORT89_MARK,
+-	BBIF2_TSYNC2_PORT184_MARK,
+-
+-	/* BSC / FLCTL / PCMCIA */
+-	CS0_MARK,	CS2_MARK,	CS4_MARK,
+-	CS5B_MARK,	CS6A_MARK,
+-	CS5A_PORT105_MARK, /* CS5A PORT 19/105 */
+-	CS5A_PORT19_MARK,
+-	IOIS16_MARK, /* ? */
+-
+-	A0_MARK,	A1_MARK,	A2_MARK,	A3_MARK,
+-	A4_FOE_MARK,	/* share with FLCTL */
+-	A5_FCDE_MARK,	/* share with FLCTL */
+-	A6_MARK,	A7_MARK,	A8_MARK,	A9_MARK,
+-	A10_MARK,	A11_MARK,	A12_MARK,	A13_MARK,
+-	A14_MARK,	A15_MARK,	A16_MARK,	A17_MARK,
+-	A18_MARK,	A19_MARK,	A20_MARK,	A21_MARK,
+-	A22_MARK,	A23_MARK,	A24_MARK,	A25_MARK,
+-	A26_MARK,
+-
+-	D0_NAF0_MARK,	D1_NAF1_MARK,	D2_NAF2_MARK,	/* share with FLCTL */
+-	D3_NAF3_MARK,	D4_NAF4_MARK,	D5_NAF5_MARK,	/* share with FLCTL */
+-	D6_NAF6_MARK,	D7_NAF7_MARK,	D8_NAF8_MARK,	/* share with FLCTL */
+-	D9_NAF9_MARK,	D10_NAF10_MARK,	D11_NAF11_MARK,	/* share with FLCTL */
+-	D12_NAF12_MARK,	D13_NAF13_MARK,	D14_NAF14_MARK,	/* share with FLCTL */
+-	D15_NAF15_MARK,					/* share with FLCTL */
+-	D16_MARK,	D17_MARK,	D18_MARK,	D19_MARK,
+-	D20_MARK,	D21_MARK,	D22_MARK,	D23_MARK,
+-	D24_MARK,	D25_MARK,	D26_MARK,	D27_MARK,
+-	D28_MARK,	D29_MARK,	D30_MARK,	D31_MARK,
+-
+-	WE0_FWE_MARK,	/* share with FLCTL */
+-	WE1_MARK,
+-	WE2_ICIORD_MARK,	/* share with PCMCIA */
+-	WE3_ICIOWR_MARK,	/* share with PCMCIA */
+-	CKO_MARK,	BS_MARK,	RDWR_MARK,
+-	RD_FSC_MARK,	/* share with FLCTL */
+-	WAIT_PORT177_MARK, /* WAIT Port 90/177 */
+-	WAIT_PORT90_MARK,
+-
+-	FCE0_MARK,	FCE1_MARK,	FRB_MARK, /* FLCTL */
+-
+-	/* IRDA */
+-	IRDA_FIRSEL_MARK,	IRDA_IN_MARK,	IRDA_OUT_MARK,
+-
+-	/* ATAPI */
+-	IDE_D0_MARK,	IDE_D1_MARK,	IDE_D2_MARK,	IDE_D3_MARK,
+-	IDE_D4_MARK,	IDE_D5_MARK,	IDE_D6_MARK,	IDE_D7_MARK,
+-	IDE_D8_MARK,	IDE_D9_MARK,	IDE_D10_MARK,	IDE_D11_MARK,
+-	IDE_D12_MARK,	IDE_D13_MARK,	IDE_D14_MARK,	IDE_D15_MARK,
+-	IDE_A0_MARK,	IDE_A1_MARK,	IDE_A2_MARK,	IDE_CS0_MARK,
+-	IDE_CS1_MARK,	IDE_IOWR_MARK,	IDE_IORD_MARK,	IDE_IORDY_MARK,
+-	IDE_INT_MARK,		IDE_RST_MARK,		IDE_DIRECTION_MARK,
+-	IDE_EXBUF_ENB_MARK,	IDE_IODACK_MARK,	IDE_IODREQ_MARK,
+-
+-	/* RMII */
+-	RMII_CRS_DV_MARK,	RMII_RX_ER_MARK,	RMII_RXD0_MARK,
+-	RMII_RXD1_MARK,		RMII_TX_EN_MARK,	RMII_TXD0_MARK,
+-	RMII_MDC_MARK,		RMII_TXD1_MARK,		RMII_MDIO_MARK,
+-	RMII_REF50CK_MARK,	/* for RMII */
+-	RMII_REF125CK_MARK,	/* for GMII */
+-
+-	/* GEther */
+-	ET_TX_CLK_MARK,	ET_TX_EN_MARK,	ET_ETXD0_MARK,	ET_ETXD1_MARK,
+-	ET_ETXD2_MARK,	ET_ETXD3_MARK,
+-	ET_ETXD4_MARK,	ET_ETXD5_MARK, /* for GEther */
+-	ET_ETXD6_MARK,	ET_ETXD7_MARK, /* for GEther */
+-	ET_COL_MARK,	ET_TX_ER_MARK,	ET_RX_CLK_MARK,	ET_RX_DV_MARK,
+-	ET_ERXD0_MARK,	ET_ERXD1_MARK,	ET_ERXD2_MARK,	ET_ERXD3_MARK,
+-	ET_ERXD4_MARK,	ET_ERXD5_MARK, /* for GEther */
+-	ET_ERXD6_MARK,	ET_ERXD7_MARK, /* for GEther */
+-	ET_RX_ER_MARK,	ET_CRS_MARK,		ET_MDC_MARK,	ET_MDIO_MARK,
+-	ET_LINK_MARK,	ET_PHY_INT_MARK,	ET_WOL_MARK,	ET_GTX_CLK_MARK,
+-
+-	/* DMA0 */
+-	DREQ0_MARK,	DACK0_MARK,
+-
+-	/* DMA1 */
+-	DREQ1_MARK,	DACK1_MARK,
+-
+-	/* SYSC */
+-	RESETOUTS_MARK,		RESETP_PULLUP_MARK,	RESETP_PLAIN_MARK,
+-
+-	/* IRREM */
+-	IROUT_MARK,
+-
+-	/* SDENC */
+-	SDENC_CPG_MARK,		SDENC_DV_CLKI_MARK,
+-
+-	/* DEBUG */
+-	EDEBGREQ_PULLUP_MARK,	/* for JTAG */
+-	EDEBGREQ_PULLDOWN_MARK,
+-
+-	TRACEAUD_FROM_VIO_MARK,	/* for TRACE/AUD */
+-	TRACEAUD_FROM_LCDC0_MARK,
+-	TRACEAUD_FROM_MEMC_MARK,
+-
+-	PINMUX_MARK_END,
+-};
+-
+-static unsigned short pinmux_data[] = {
+-	/* specify valid pin states for each pin in GPIO mode */
+-
+-	/* I/O and Pull U/D */
+-	PORT_DATA_IO_PD(0),		PORT_DATA_IO_PD(1),
+-	PORT_DATA_IO_PD(2),		PORT_DATA_IO_PD(3),
+-	PORT_DATA_IO_PD(4),		PORT_DATA_IO_PD(5),
+-	PORT_DATA_IO_PD(6),		PORT_DATA_IO(7),
+-	PORT_DATA_IO(8),		PORT_DATA_IO(9),
+-
+-	PORT_DATA_IO_PD(10),		PORT_DATA_IO_PD(11),
+-	PORT_DATA_IO_PD(12),		PORT_DATA_IO_PU_PD(13),
+-	PORT_DATA_IO_PD(14),		PORT_DATA_IO_PD(15),
+-	PORT_DATA_IO_PD(16),		PORT_DATA_IO_PD(17),
+-	PORT_DATA_IO(18),		PORT_DATA_IO_PU(19),
+-
+-	PORT_DATA_IO_PU_PD(20),		PORT_DATA_IO_PD(21),
+-	PORT_DATA_IO_PU_PD(22),		PORT_DATA_IO(23),
+-	PORT_DATA_IO_PU(24),		PORT_DATA_IO_PU(25),
+-	PORT_DATA_IO_PU(26),		PORT_DATA_IO_PU(27),
+-	PORT_DATA_IO_PU(28),		PORT_DATA_IO_PU(29),
+-
+-	PORT_DATA_IO_PU(30),		PORT_DATA_IO_PD(31),
+-	PORT_DATA_IO_PD(32),		PORT_DATA_IO_PD(33),
+-	PORT_DATA_IO_PD(34),		PORT_DATA_IO_PU(35),
+-	PORT_DATA_IO_PU(36),		PORT_DATA_IO_PD(37),
+-	PORT_DATA_IO_PU(38),		PORT_DATA_IO_PD(39),
+-
+-	PORT_DATA_IO_PU_PD(40),		PORT_DATA_IO_PD(41),
+-	PORT_DATA_IO_PD(42),		PORT_DATA_IO_PU_PD(43),
+-	PORT_DATA_IO_PU_PD(44),		PORT_DATA_IO_PU_PD(45),
+-	PORT_DATA_IO_PU_PD(46),		PORT_DATA_IO_PU_PD(47),
+-	PORT_DATA_IO_PU_PD(48),		PORT_DATA_IO_PU_PD(49),
+-
+-	PORT_DATA_IO_PU_PD(50),		PORT_DATA_IO_PD(51),
+-	PORT_DATA_IO_PD(52),		PORT_DATA_IO_PD(53),
+-	PORT_DATA_IO_PD(54),		PORT_DATA_IO_PU_PD(55),
+-	PORT_DATA_IO_PU_PD(56),		PORT_DATA_IO_PU_PD(57),
+-	PORT_DATA_IO_PU_PD(58),		PORT_DATA_IO_PU_PD(59),
+-
+-	PORT_DATA_IO_PU_PD(60),		PORT_DATA_IO_PD(61),
+-	PORT_DATA_IO_PD(62),		PORT_DATA_IO_PD(63),
+-	PORT_DATA_IO_PD(64),		PORT_DATA_IO_PD(65),
+-	PORT_DATA_IO_PU_PD(66),		PORT_DATA_IO_PU_PD(67),
+-	PORT_DATA_IO_PU_PD(68),		PORT_DATA_IO_PU_PD(69),
+-
+-	PORT_DATA_IO_PU_PD(70),		PORT_DATA_IO_PU_PD(71),
+-	PORT_DATA_IO_PU_PD(72),		PORT_DATA_IO_PU_PD(73),
+-	PORT_DATA_IO_PU_PD(74),		PORT_DATA_IO_PU_PD(75),
+-	PORT_DATA_IO_PU_PD(76),		PORT_DATA_IO_PU_PD(77),
+-	PORT_DATA_IO_PU_PD(78),		PORT_DATA_IO_PU_PD(79),
+-
+-	PORT_DATA_IO_PU_PD(80),		PORT_DATA_IO_PU_PD(81),
+-	PORT_DATA_IO(82),		PORT_DATA_IO_PU_PD(83),
+-	PORT_DATA_IO(84),		PORT_DATA_IO_PD(85),
+-	PORT_DATA_IO_PD(86),		PORT_DATA_IO_PD(87),
+-	PORT_DATA_IO_PD(88),		PORT_DATA_IO_PD(89),
+-
+-	PORT_DATA_IO_PD(90),		PORT_DATA_IO_PU_PD(91),
+-	PORT_DATA_IO_PU_PD(92),		PORT_DATA_IO_PU_PD(93),
+-	PORT_DATA_IO_PU_PD(94),		PORT_DATA_IO_PU_PD(95),
+-	PORT_DATA_IO_PU_PD(96),		PORT_DATA_IO_PU_PD(97),
+-	PORT_DATA_IO_PU_PD(98),		PORT_DATA_IO_PU_PD(99),
+-
+-	PORT_DATA_IO_PU_PD(100),	PORT_DATA_IO(101),
+-	PORT_DATA_IO_PU(102),		PORT_DATA_IO_PU_PD(103),
+-	PORT_DATA_IO_PU(104),		PORT_DATA_IO_PU(105),
+-	PORT_DATA_IO_PU_PD(106),	PORT_DATA_IO(107),
+-	PORT_DATA_IO(108),		PORT_DATA_IO(109),
+-
+-	PORT_DATA_IO(110),		PORT_DATA_IO(111),
+-	PORT_DATA_IO(112),		PORT_DATA_IO(113),
+-	PORT_DATA_IO_PU_PD(114),	PORT_DATA_IO(115),
+-	PORT_DATA_IO_PD(116),		PORT_DATA_IO_PD(117),
+-	PORT_DATA_IO_PD(118),		PORT_DATA_IO_PD(119),
+-
+-	PORT_DATA_IO_PD(120),		PORT_DATA_IO_PD(121),
+-	PORT_DATA_IO_PD(122),		PORT_DATA_IO_PD(123),
+-	PORT_DATA_IO_PD(124),		PORT_DATA_IO(125),
+-	PORT_DATA_IO(126),		PORT_DATA_IO(127),
+-	PORT_DATA_IO(128),		PORT_DATA_IO(129),
+-
+-	PORT_DATA_IO(130),		PORT_DATA_IO(131),
+-	PORT_DATA_IO(132),		PORT_DATA_IO(133),
+-	PORT_DATA_IO(134),		PORT_DATA_IO(135),
+-	PORT_DATA_IO(136),		PORT_DATA_IO(137),
+-	PORT_DATA_IO(138),		PORT_DATA_IO(139),
+-
+-	PORT_DATA_IO(140),		PORT_DATA_IO(141),
+-	PORT_DATA_IO_PU(142),		PORT_DATA_IO_PU(143),
+-	PORT_DATA_IO_PU(144),		PORT_DATA_IO_PU(145),
+-	PORT_DATA_IO_PU(146),		PORT_DATA_IO_PU(147),
+-	PORT_DATA_IO_PU(148),		PORT_DATA_IO_PU(149),
+-
+-	PORT_DATA_IO_PU(150),		PORT_DATA_IO_PU(151),
+-	PORT_DATA_IO_PU(152),		PORT_DATA_IO_PU(153),
+-	PORT_DATA_IO_PU(154),		PORT_DATA_IO_PU(155),
+-	PORT_DATA_IO_PU(156),		PORT_DATA_IO_PU(157),
+-	PORT_DATA_IO_PD(158),		PORT_DATA_IO_PD(159),
+-
+-	PORT_DATA_IO_PU_PD(160),	PORT_DATA_IO_PD(161),
+-	PORT_DATA_IO_PD(162),		PORT_DATA_IO_PD(163),
+-	PORT_DATA_IO_PD(164),		PORT_DATA_IO_PD(165),
+-	PORT_DATA_IO_PU(166),		PORT_DATA_IO_PU(167),
+-	PORT_DATA_IO_PU(168),		PORT_DATA_IO_PU(169),
+-
+-	PORT_DATA_IO_PU(170),		PORT_DATA_IO_PU(171),
+-	PORT_DATA_IO_PD(172),		PORT_DATA_IO_PD(173),
+-	PORT_DATA_IO_PD(174),		PORT_DATA_IO_PD(175),
+-	PORT_DATA_IO_PU(176),		PORT_DATA_IO_PU_PD(177),
+-	PORT_DATA_IO_PU(178),		PORT_DATA_IO_PD(179),
+-
+-	PORT_DATA_IO_PD(180),		PORT_DATA_IO_PU(181),
+-	PORT_DATA_IO_PU(182),		PORT_DATA_IO(183),
+-	PORT_DATA_IO_PD(184),		PORT_DATA_IO_PD(185),
+-	PORT_DATA_IO_PD(186),		PORT_DATA_IO_PD(187),
+-	PORT_DATA_IO_PD(188),		PORT_DATA_IO_PD(189),
+-
+-	PORT_DATA_IO_PD(190),		PORT_DATA_IO_PD(191),
+-	PORT_DATA_IO_PD(192),		PORT_DATA_IO_PU_PD(193),
+-	PORT_DATA_IO_PU_PD(194),	PORT_DATA_IO_PD(195),
+-	PORT_DATA_IO_PU_PD(196),	PORT_DATA_IO_PD(197),
+-	PORT_DATA_IO_PU_PD(198),	PORT_DATA_IO_PU_PD(199),
+-
+-	PORT_DATA_IO_PU_PD(200),	PORT_DATA_IO_PU(201),
+-	PORT_DATA_IO_PU_PD(202),	PORT_DATA_IO(203),
+-	PORT_DATA_IO_PU_PD(204),	PORT_DATA_IO_PU_PD(205),
+-	PORT_DATA_IO_PU_PD(206),	PORT_DATA_IO_PU_PD(207),
+-	PORT_DATA_IO_PU_PD(208),	PORT_DATA_IO_PD(209),
+-
+-	PORT_DATA_IO_PD(210),		PORT_DATA_IO_PD(211),
+-
+-	/* Port0 */
+-	PINMUX_DATA(DBGMDT2_MARK,		PORT0_FN1),
+-	PINMUX_DATA(FSIAISLD_PORT0_MARK,	PORT0_FN2,	MSEL5CR_3_0),
+-	PINMUX_DATA(FSIAOSLD1_MARK,		PORT0_FN3),
+-	PINMUX_DATA(LCD0_D22_PORT0_MARK,	PORT0_FN4,	MSEL5CR_6_0),
+-	PINMUX_DATA(SCIFA7_RXD_MARK,		PORT0_FN6),
+-	PINMUX_DATA(LCD1_D4_MARK,		PORT0_FN7),
+-	PINMUX_DATA(IRQ5_PORT0_MARK,		PORT0_FN0,	MSEL1CR_5_0),
+-
+-	/* Port1 */
+-	PINMUX_DATA(DBGMDT1_MARK,		PORT1_FN1),
+-	PINMUX_DATA(FMSISLD_PORT1_MARK,		PORT1_FN2,	MSEL5CR_5_0),
+-	PINMUX_DATA(FSIAOSLD2_MARK,		PORT1_FN3),
+-	PINMUX_DATA(LCD0_D23_PORT1_MARK,	PORT1_FN4,	MSEL5CR_6_0),
+-	PINMUX_DATA(SCIFA7_TXD_MARK,		PORT1_FN6),
+-	PINMUX_DATA(LCD1_D3_MARK,		PORT1_FN7),
+-	PINMUX_DATA(IRQ5_PORT1_MARK,		PORT1_FN0,	MSEL1CR_5_1),
+-
+-	/* Port2 */
+-	PINMUX_DATA(DBGMDT0_MARK,		PORT2_FN1),
+-	PINMUX_DATA(SCIFB_SCK_PORT2_MARK,	PORT2_FN2,	MSEL5CR_17_1),
+-	PINMUX_DATA(LCD0_D21_PORT2_MARK,	PORT2_FN4,	MSEL5CR_6_0),
+-	PINMUX_DATA(LCD1_D2_MARK,		PORT2_FN7),
+-	PINMUX_DATA(IRQ0_PORT2_MARK,		PORT2_FN0,	MSEL1CR_0_1),
+-
+-	/* Port3 */
+-	PINMUX_DATA(DBGMD21_MARK,		PORT3_FN1),
+-	PINMUX_DATA(SCIFB_RXD_PORT3_MARK,	PORT3_FN2,	MSEL5CR_17_1),
+-	PINMUX_DATA(LCD0_D20_PORT3_MARK,	PORT3_FN4,	MSEL5CR_6_0),
+-	PINMUX_DATA(LCD1_D1_MARK,		PORT3_FN7),
+-
+-	/* Port4 */
+-	PINMUX_DATA(DBGMD20_MARK,		PORT4_FN1),
+-	PINMUX_DATA(SCIFB_TXD_PORT4_MARK,	PORT4_FN2,	MSEL5CR_17_1),
+-	PINMUX_DATA(LCD0_D19_PORT4_MARK,	PORT4_FN4,	MSEL5CR_6_0),
+-	PINMUX_DATA(LCD1_D0_MARK,		PORT4_FN7),
+-
+-	/* Port5 */
+-	PINMUX_DATA(DBGMD11_MARK,		PORT5_FN1),
+-	PINMUX_DATA(BBIF2_TXD2_PORT5_MARK,	PORT5_FN2,	MSEL5CR_0_0),
+-	PINMUX_DATA(FSIAISLD_PORT5_MARK,	PORT5_FN4,	MSEL5CR_3_1),
+-	PINMUX_DATA(RSPI_SSL0_A_MARK,		PORT5_FN6),
+-	PINMUX_DATA(LCD1_VCPWC_MARK,		PORT5_FN7),
+-
+-	/* Port6 */
+-	PINMUX_DATA(DBGMD10_MARK,		PORT6_FN1),
+-	PINMUX_DATA(BBIF2_TSYNC2_PORT6_MARK,	PORT6_FN2,	MSEL5CR_0_0),
+-	PINMUX_DATA(FMSISLD_PORT6_MARK,		PORT6_FN4,	MSEL5CR_5_1),
+-	PINMUX_DATA(RSPI_SSL1_A_MARK,		PORT6_FN6),
+-	PINMUX_DATA(LCD1_VEPWC_MARK,		PORT6_FN7),
+-
+-	/* Port7 */
+-	PINMUX_DATA(FSIAOLR_MARK,		PORT7_FN1),
+-
+-	/* Port8 */
+-	PINMUX_DATA(FSIAOBT_MARK,		PORT8_FN1),
+-
+-	/* Port9 */
+-	PINMUX_DATA(FSIAOSLD_MARK,		PORT9_FN1),
+-	PINMUX_DATA(FSIASPDIF_PORT9_MARK,	PORT9_FN2,	MSEL5CR_4_0),
+-
+-	/* Port10 */
+-	PINMUX_DATA(FSIAOMC_MARK,		PORT10_FN1),
+-	PINMUX_DATA(SCIFA5_RXD_PORT10_MARK,	PORT10_FN3,	MSEL5CR_14_0,
+-			MSEL5CR_15_0),
+-	PINMUX_DATA(IRQ3_PORT10_MARK,		PORT10_FN0,	MSEL1CR_3_0),
+-
+-	/* Port11 */
+-	PINMUX_DATA(FSIACK_MARK,		PORT11_FN1),
+-	PINMUX_DATA(IRQ2_PORT11_MARK,		PORT11_FN0,	MSEL1CR_2_0),
+-
+-	/* Port12 */
+-	PINMUX_DATA(FSIAILR_MARK,		PORT12_FN1),
+-	PINMUX_DATA(SCIFA4_RXD_PORT12_MARK,	PORT12_FN2,	MSEL5CR_12_0,
+-			MSEL5CR_11_0),
+-	PINMUX_DATA(LCD1_RS_MARK,		PORT12_FN6),
+-	PINMUX_DATA(LCD1_DISP_MARK,		PORT12_FN7),
+-	PINMUX_DATA(IRQ2_PORT12_MARK,		PORT12_FN0,	MSEL1CR_2_1),
+-
+-	/* Port13 */
+-	PINMUX_DATA(FSIAIBT_MARK,		PORT13_FN1),
+-	PINMUX_DATA(SCIFA4_TXD_PORT13_MARK,	PORT13_FN2,	MSEL5CR_12_0,
+-			MSEL5CR_11_0),
+-	PINMUX_DATA(LCD1_RD_MARK,		PORT13_FN7),
+-	PINMUX_DATA(IRQ0_PORT13_MARK,		PORT13_FN0,	MSEL1CR_0_0),
+-
+-	/* Port14 */
+-	PINMUX_DATA(FMSOILR_MARK,		PORT14_FN1),
+-	PINMUX_DATA(FMSIILR_MARK,		PORT14_FN2),
+-	PINMUX_DATA(VIO_CKO1_MARK,		PORT14_FN3),
+-	PINMUX_DATA(LCD1_D23_MARK,		PORT14_FN7),
+-	PINMUX_DATA(IRQ3_PORT14_MARK,		PORT14_FN0,	MSEL1CR_3_1),
+-
+-	/* Port15 */
+-	PINMUX_DATA(FMSOIBT_MARK,		PORT15_FN1),
+-	PINMUX_DATA(FMSIIBT_MARK,		PORT15_FN2),
+-	PINMUX_DATA(VIO_CKO2_MARK,		PORT15_FN3),
+-	PINMUX_DATA(LCD1_D22_MARK,		PORT15_FN7),
+-	PINMUX_DATA(IRQ4_PORT15_MARK,		PORT15_FN0,	MSEL1CR_4_0),
+-
+-	/* Port16 */
+-	PINMUX_DATA(FMSOOLR_MARK,		PORT16_FN1),
+-	PINMUX_DATA(FMSIOLR_MARK,		PORT16_FN2),
+-
+-	/* Port17 */
+-	PINMUX_DATA(FMSOOBT_MARK,		PORT17_FN1),
+-	PINMUX_DATA(FMSIOBT_MARK,		PORT17_FN2),
+-
+-	/* Port18 */
+-	PINMUX_DATA(FMSOSLD_MARK,		PORT18_FN1),
+-	PINMUX_DATA(FSIASPDIF_PORT18_MARK,	PORT18_FN2,	MSEL5CR_4_1),
+-
+-	/* Port19 */
+-	PINMUX_DATA(FMSICK_MARK,		PORT19_FN1),
+-	PINMUX_DATA(CS5A_PORT19_MARK,		PORT19_FN7,	MSEL5CR_2_1),
+-	PINMUX_DATA(IRQ10_MARK,			PORT19_FN0),
+-
+-	/* Port20 */
+-	PINMUX_DATA(FMSOCK_MARK,		PORT20_FN1),
+-	PINMUX_DATA(SCIFA5_TXD_PORT20_MARK,	PORT20_FN3,	MSEL5CR_15_0,
+-			MSEL5CR_14_0),
+-	PINMUX_DATA(IRQ1_MARK,			PORT20_FN0),
+-
+-	/* Port21 */
+-	PINMUX_DATA(SCIFA1_CTS_MARK,		PORT21_FN1),
+-	PINMUX_DATA(SCIFA4_SCK_PORT21_MARK,	PORT21_FN2,	MSEL5CR_10_0),
+-	PINMUX_DATA(TPU0TO1_MARK,		PORT21_FN4),
+-	PINMUX_DATA(VIO1_FIELD_MARK,		PORT21_FN5),
+-	PINMUX_DATA(STP0_IPD5_MARK,		PORT21_FN6),
+-	PINMUX_DATA(LCD1_D10_MARK,		PORT21_FN7),
+-
+-	/* Port22 */
+-	PINMUX_DATA(SCIFA2_SCK_PORT22_MARK,	PORT22_FN1,	MSEL5CR_7_0),
+-	PINMUX_DATA(SIM_D_PORT22_MARK,		PORT22_FN4,	MSEL5CR_21_0),
+-	PINMUX_DATA(VIO0_D13_PORT22_MARK,	PORT22_FN7,	MSEL5CR_27_1),
+-
+-	/* Port23 */
+-	PINMUX_DATA(SCIFA1_RTS_MARK,		PORT23_FN1),
+-	PINMUX_DATA(SCIFA5_SCK_PORT23_MARK,	PORT23_FN3,	MSEL5CR_13_0),
+-	PINMUX_DATA(TPU0TO0_MARK,		PORT23_FN4),
+-	PINMUX_DATA(VIO_CKO_1_MARK,		PORT23_FN5),
+-	PINMUX_DATA(STP0_IPD2_MARK,		PORT23_FN6),
+-	PINMUX_DATA(LCD1_D7_MARK,		PORT23_FN7),
+-
+-	/* Port24 */
+-	PINMUX_DATA(VIO0_D15_PORT24_MARK,	PORT24_FN1,	MSEL5CR_27_0),
+-	PINMUX_DATA(VIO1_D7_MARK,		PORT24_FN5),
+-	PINMUX_DATA(SCIFA6_SCK_MARK,		PORT24_FN6),
+-	PINMUX_DATA(SDHI2_CD_PORT24_MARK,	PORT24_FN7,	MSEL5CR_19_0),
+-
+-	/* Port25 */
+-	PINMUX_DATA(VIO0_D14_PORT25_MARK,	PORT25_FN1,	MSEL5CR_27_0),
+-	PINMUX_DATA(VIO1_D6_MARK,		PORT25_FN5),
+-	PINMUX_DATA(SCIFA6_RXD_MARK,		PORT25_FN6),
+-	PINMUX_DATA(SDHI2_WP_PORT25_MARK,	PORT25_FN7,	MSEL5CR_19_0),
+-
+-	/* Port26 */
+-	PINMUX_DATA(VIO0_D13_PORT26_MARK,	PORT26_FN1,	MSEL5CR_27_0),
+-	PINMUX_DATA(VIO1_D5_MARK,		PORT26_FN5),
+-	PINMUX_DATA(SCIFA6_TXD_MARK,		PORT26_FN6),
+-
+-	/* Port27 - Port39 Function */
+-	PINMUX_DATA(VIO0_D7_MARK,		PORT27_FN1),
+-	PINMUX_DATA(VIO0_D6_MARK,		PORT28_FN1),
+-	PINMUX_DATA(VIO0_D5_MARK,		PORT29_FN1),
+-	PINMUX_DATA(VIO0_D4_MARK,		PORT30_FN1),
+-	PINMUX_DATA(VIO0_D3_MARK,		PORT31_FN1),
+-	PINMUX_DATA(VIO0_D2_MARK,		PORT32_FN1),
+-	PINMUX_DATA(VIO0_D1_MARK,		PORT33_FN1),
+-	PINMUX_DATA(VIO0_D0_MARK,		PORT34_FN1),
+-	PINMUX_DATA(VIO0_CLK_MARK,		PORT35_FN1),
+-	PINMUX_DATA(VIO_CKO_MARK,		PORT36_FN1),
+-	PINMUX_DATA(VIO0_HD_MARK,		PORT37_FN1),
+-	PINMUX_DATA(VIO0_FIELD_MARK,		PORT38_FN1),
+-	PINMUX_DATA(VIO0_VD_MARK,		PORT39_FN1),
+-
+-	/* Port38 IRQ */
+-	PINMUX_DATA(IRQ25_MARK,			PORT38_FN0),
+-
+-	/* Port40 */
+-	PINMUX_DATA(LCD0_D18_PORT40_MARK,	PORT40_FN4,	MSEL5CR_6_0),
+-	PINMUX_DATA(RSPI_CK_A_MARK,		PORT40_FN6),
+-	PINMUX_DATA(LCD1_LCLK_MARK,		PORT40_FN7),
+-
+-	/* Port41 */
+-	PINMUX_DATA(LCD0_D17_MARK,		PORT41_FN1),
+-	PINMUX_DATA(MSIOF2_SS1_MARK,		PORT41_FN2),
+-	PINMUX_DATA(IRQ31_PORT41_MARK,		PORT41_FN0,	MSEL1CR_31_1),
+-
+-	/* Port42 */
+-	PINMUX_DATA(LCD0_D16_MARK,		PORT42_FN1),
+-	PINMUX_DATA(MSIOF2_MCK1_MARK,		PORT42_FN2),
+-	PINMUX_DATA(IRQ12_PORT42_MARK,		PORT42_FN0,	MSEL1CR_12_1),
+-
+-	/* Port43 */
+-	PINMUX_DATA(LCD0_D15_MARK,		PORT43_FN1),
+-	PINMUX_DATA(MSIOF2_MCK0_MARK,		PORT43_FN2),
+-	PINMUX_DATA(KEYIN0_PORT43_MARK,		PORT43_FN3,	MSEL4CR_18_0),
+-	PINMUX_DATA(DV_D15_MARK,		PORT43_FN6),
+-
+-	/* Port44 */
+-	PINMUX_DATA(LCD0_D14_MARK,		PORT44_FN1),
+-	PINMUX_DATA(MSIOF2_RSYNC_MARK,		PORT44_FN2),
+-	PINMUX_DATA(KEYIN1_PORT44_MARK,		PORT44_FN3,	MSEL4CR_18_0),
+-	PINMUX_DATA(DV_D14_MARK,		PORT44_FN6),
+-
+-	/* Port45 */
+-	PINMUX_DATA(LCD0_D13_MARK,		PORT45_FN1),
+-	PINMUX_DATA(MSIOF2_RSCK_MARK,		PORT45_FN2),
+-	PINMUX_DATA(KEYIN2_PORT45_MARK,		PORT45_FN3,	MSEL4CR_18_0),
+-	PINMUX_DATA(DV_D13_MARK,		PORT45_FN6),
+-
+-	/* Port46 */
+-	PINMUX_DATA(LCD0_D12_MARK,		PORT46_FN1),
+-	PINMUX_DATA(KEYIN3_PORT46_MARK,		PORT46_FN3,	MSEL4CR_18_0),
+-	PINMUX_DATA(DV_D12_MARK,		PORT46_FN6),
+-
+-	/* Port47 */
+-	PINMUX_DATA(LCD0_D11_MARK,		PORT47_FN1),
+-	PINMUX_DATA(KEYIN4_MARK,		PORT47_FN3),
+-	PINMUX_DATA(DV_D11_MARK,		PORT47_FN6),
+-
+-	/* Port48 */
+-	PINMUX_DATA(LCD0_D10_MARK,		PORT48_FN1),
+-	PINMUX_DATA(KEYIN5_MARK,		PORT48_FN3),
+-	PINMUX_DATA(DV_D10_MARK,		PORT48_FN6),
+-
+-	/* Port49 */
+-	PINMUX_DATA(LCD0_D9_MARK,		PORT49_FN1),
+-	PINMUX_DATA(KEYIN6_MARK,		PORT49_FN3),
+-	PINMUX_DATA(DV_D9_MARK,			PORT49_FN6),
+-	PINMUX_DATA(IRQ30_PORT49_MARK,		PORT49_FN0,	MSEL1CR_30_1),
+-
+-	/* Port50 */
+-	PINMUX_DATA(LCD0_D8_MARK,		PORT50_FN1),
+-	PINMUX_DATA(KEYIN7_MARK,		PORT50_FN3),
+-	PINMUX_DATA(DV_D8_MARK,			PORT50_FN6),
+-	PINMUX_DATA(IRQ29_PORT50_MARK,		PORT50_FN0,	MSEL1CR_29_1),
+-
+-	/* Port51 */
+-	PINMUX_DATA(LCD0_D7_MARK,		PORT51_FN1),
+-	PINMUX_DATA(KEYOUT0_MARK,		PORT51_FN3),
+-	PINMUX_DATA(DV_D7_MARK,			PORT51_FN6),
+-
+-	/* Port52 */
+-	PINMUX_DATA(LCD0_D6_MARK,		PORT52_FN1),
+-	PINMUX_DATA(KEYOUT1_MARK,		PORT52_FN3),
+-	PINMUX_DATA(DV_D6_MARK,			PORT52_FN6),
+-
+-	/* Port53 */
+-	PINMUX_DATA(LCD0_D5_MARK,		PORT53_FN1),
+-	PINMUX_DATA(KEYOUT2_MARK,		PORT53_FN3),
+-	PINMUX_DATA(DV_D5_MARK,			PORT53_FN6),
+-
+-	/* Port54 */
+-	PINMUX_DATA(LCD0_D4_MARK,		PORT54_FN1),
+-	PINMUX_DATA(KEYOUT3_MARK,		PORT54_FN3),
+-	PINMUX_DATA(DV_D4_MARK,			PORT54_FN6),
+-
+-	/* Port55 */
+-	PINMUX_DATA(LCD0_D3_MARK,		PORT55_FN1),
+-	PINMUX_DATA(KEYOUT4_MARK,		PORT55_FN3),
+-	PINMUX_DATA(KEYIN3_PORT55_MARK,		PORT55_FN4,	MSEL4CR_18_1),
+-	PINMUX_DATA(DV_D3_MARK,			PORT55_FN6),
+-
+-	/* Port56 */
+-	PINMUX_DATA(LCD0_D2_MARK,		PORT56_FN1),
+-	PINMUX_DATA(KEYOUT5_MARK,		PORT56_FN3),
+-	PINMUX_DATA(KEYIN2_PORT56_MARK,		PORT56_FN4,	MSEL4CR_18_1),
+-	PINMUX_DATA(DV_D2_MARK,			PORT56_FN6),
+-	PINMUX_DATA(IRQ28_PORT56_MARK,		PORT56_FN0,	MSEL1CR_28_1),
+-
+-	/* Port57 */
+-	PINMUX_DATA(LCD0_D1_MARK,		PORT57_FN1),
+-	PINMUX_DATA(KEYOUT6_MARK,		PORT57_FN3),
+-	PINMUX_DATA(KEYIN1_PORT57_MARK,		PORT57_FN4,	MSEL4CR_18_1),
+-	PINMUX_DATA(DV_D1_MARK,			PORT57_FN6),
+-	PINMUX_DATA(IRQ27_PORT57_MARK,		PORT57_FN0,	MSEL1CR_27_1),
+-
+-	/* Port58 */
+-	PINMUX_DATA(LCD0_D0_MARK,		PORT58_FN1),
+-	PINMUX_DATA(KEYOUT7_MARK,		PORT58_FN3),
+-	PINMUX_DATA(KEYIN0_PORT58_MARK,		PORT58_FN4,	MSEL4CR_18_1),
+-	PINMUX_DATA(DV_D0_MARK,			PORT58_FN6),
+-	PINMUX_DATA(IRQ26_PORT58_MARK,		PORT58_FN0,	MSEL1CR_26_1),
+-
+-	/* Port59 */
+-	PINMUX_DATA(LCD0_VCPWC_MARK,		PORT59_FN1),
+-	PINMUX_DATA(BBIF2_TSCK2_PORT59_MARK,	PORT59_FN2,	MSEL5CR_0_0),
+-	PINMUX_DATA(RSPI_MOSI_A_MARK,		PORT59_FN6),
+-
+-	/* Port60 */
+-	PINMUX_DATA(LCD0_VEPWC_MARK,		PORT60_FN1),
+-	PINMUX_DATA(BBIF2_RXD2_PORT60_MARK,	PORT60_FN2,	MSEL5CR_0_0),
+-	PINMUX_DATA(RSPI_MISO_A_MARK,		PORT60_FN6),
+-
+-	/* Port61 */
+-	PINMUX_DATA(LCD0_DON_MARK,		PORT61_FN1),
+-	PINMUX_DATA(MSIOF2_TXD_MARK,		PORT61_FN2),
+-
+-	/* Port62 */
+-	PINMUX_DATA(LCD0_DCK_MARK,		PORT62_FN1),
+-	PINMUX_DATA(LCD0_WR_MARK,		PORT62_FN4),
+-	PINMUX_DATA(DV_CLK_MARK,		PORT62_FN6),
+-	PINMUX_DATA(IRQ15_PORT62_MARK,		PORT62_FN0,	MSEL1CR_15_1),
+-
+-	/* Port63 */
+-	PINMUX_DATA(LCD0_VSYN_MARK,		PORT63_FN1),
+-	PINMUX_DATA(DV_VSYNC_MARK,		PORT63_FN6),
+-	PINMUX_DATA(IRQ14_PORT63_MARK,		PORT63_FN0,	MSEL1CR_14_1),
+-
+-	/* Port64 */
+-	PINMUX_DATA(LCD0_HSYN_MARK,		PORT64_FN1),
+-	PINMUX_DATA(LCD0_CS_MARK,		PORT64_FN4),
+-	PINMUX_DATA(DV_HSYNC_MARK,		PORT64_FN6),
+-	PINMUX_DATA(IRQ13_PORT64_MARK,		PORT64_FN0,	MSEL1CR_13_1),
+-
+-	/* Port65 */
+-	PINMUX_DATA(LCD0_DISP_MARK,		PORT65_FN1),
+-	PINMUX_DATA(MSIOF2_TSCK_MARK,		PORT65_FN2),
+-	PINMUX_DATA(LCD0_RS_MARK,		PORT65_FN4),
+-
+-	/* Port66 */
+-	PINMUX_DATA(MEMC_INT_MARK,		PORT66_FN1),
+-	PINMUX_DATA(TPU0TO2_PORT66_MARK,	PORT66_FN3,	MSEL5CR_25_0),
+-	PINMUX_DATA(MMC0_CLK_PORT66_MARK,	PORT66_FN4,	MSEL4CR_15_0),
+-	PINMUX_DATA(SDHI1_CLK_MARK,		PORT66_FN6),
+-
+-	/* Port67 - Port73 Function1 */
+-	PINMUX_DATA(MEMC_CS0_MARK,		PORT67_FN1),
+-	PINMUX_DATA(MEMC_AD8_MARK,		PORT68_FN1),
+-	PINMUX_DATA(MEMC_AD9_MARK,		PORT69_FN1),
+-	PINMUX_DATA(MEMC_AD10_MARK,		PORT70_FN1),
+-	PINMUX_DATA(MEMC_AD11_MARK,		PORT71_FN1),
+-	PINMUX_DATA(MEMC_AD12_MARK,		PORT72_FN1),
+-	PINMUX_DATA(MEMC_AD13_MARK,		PORT73_FN1),
+-
+-	/* Port67 - Port73 Function2 */
+-	PINMUX_DATA(MSIOF1_SS1_PORT67_MARK,	PORT67_FN2,	MSEL4CR_10_1),
+-	PINMUX_DATA(MSIOF1_RSCK_MARK,		PORT68_FN2),
+-	PINMUX_DATA(MSIOF1_RSYNC_MARK,		PORT69_FN2),
+-	PINMUX_DATA(MSIOF1_MCK0_MARK,		PORT70_FN2),
+-	PINMUX_DATA(MSIOF1_MCK1_MARK,		PORT71_FN2),
+-	PINMUX_DATA(MSIOF1_TSCK_PORT72_MARK,	PORT72_FN2,	MSEL4CR_10_1),
+-	PINMUX_DATA(MSIOF1_TSYNC_PORT73_MARK,	PORT73_FN2,	MSEL4CR_10_1),
+-
+-	/* Port67 - Port73 Function4 */
+-	PINMUX_DATA(MMC0_CMD_PORT67_MARK,	PORT67_FN4,	MSEL4CR_15_0),
+-	PINMUX_DATA(MMC0_D0_PORT68_MARK,	PORT68_FN4,	MSEL4CR_15_0),
+-	PINMUX_DATA(MMC0_D1_PORT69_MARK,	PORT69_FN4,	MSEL4CR_15_0),
+-	PINMUX_DATA(MMC0_D2_PORT70_MARK,	PORT70_FN4,	MSEL4CR_15_0),
+-	PINMUX_DATA(MMC0_D3_PORT71_MARK,	PORT71_FN4,	MSEL4CR_15_0),
+-	PINMUX_DATA(MMC0_D4_PORT72_MARK,	PORT72_FN4,	MSEL4CR_15_0),
+-	PINMUX_DATA(MMC0_D5_PORT73_MARK,	PORT73_FN4,	MSEL4CR_15_0),
+-
+-	/* Port67 - Port73 Function6 */
+-	PINMUX_DATA(SDHI1_CMD_MARK,		PORT67_FN6),
+-	PINMUX_DATA(SDHI1_D0_MARK,		PORT68_FN6),
+-	PINMUX_DATA(SDHI1_D1_MARK,		PORT69_FN6),
+-	PINMUX_DATA(SDHI1_D2_MARK,		PORT70_FN6),
+-	PINMUX_DATA(SDHI1_D3_MARK,		PORT71_FN6),
+-	PINMUX_DATA(SDHI1_CD_MARK,		PORT72_FN6),
+-	PINMUX_DATA(SDHI1_WP_MARK,		PORT73_FN6),
+-
+-	/* Port67 - Port71 IRQ */
+-	PINMUX_DATA(IRQ20_MARK,			PORT67_FN0),
+-	PINMUX_DATA(IRQ16_PORT68_MARK,		PORT68_FN0,	MSEL1CR_16_0),
+-	PINMUX_DATA(IRQ17_MARK,			PORT69_FN0),
+-	PINMUX_DATA(IRQ18_MARK,			PORT70_FN0),
+-	PINMUX_DATA(IRQ19_MARK,			PORT71_FN0),
+-
+-	/* Port74 */
+-	PINMUX_DATA(MEMC_AD14_MARK,		PORT74_FN1),
+-	PINMUX_DATA(MSIOF1_TXD_PORT74_MARK,	PORT74_FN2,	MSEL4CR_10_1),
+-	PINMUX_DATA(MMC0_D6_PORT74_MARK,	PORT74_FN4,	MSEL4CR_15_0),
+-	PINMUX_DATA(STP1_IPD7_MARK,		PORT74_FN6),
+-	PINMUX_DATA(LCD1_D21_MARK,		PORT74_FN7),
+-
+-	/* Port75 */
+-	PINMUX_DATA(MEMC_AD15_MARK,		PORT75_FN1),
+-	PINMUX_DATA(MSIOF1_RXD_PORT75_MARK,	PORT75_FN2,	MSEL4CR_10_1),
+-	PINMUX_DATA(MMC0_D7_PORT75_MARK,	PORT75_FN4,	MSEL4CR_15_0),
+-	PINMUX_DATA(STP1_IPD6_MARK,		PORT75_FN6),
+-	PINMUX_DATA(LCD1_D20_MARK,		PORT75_FN7),
+-
+-	/* Port76 - Port80 Function */
+-	PINMUX_DATA(SDHI0_CMD_MARK,		PORT76_FN1),
+-	PINMUX_DATA(SDHI0_D0_MARK,		PORT77_FN1),
+-	PINMUX_DATA(SDHI0_D1_MARK,		PORT78_FN1),
+-	PINMUX_DATA(SDHI0_D2_MARK,		PORT79_FN1),
+-	PINMUX_DATA(SDHI0_D3_MARK,		PORT80_FN1),
+-
+-	/* Port81 */
+-	PINMUX_DATA(SDHI0_CD_MARK,		PORT81_FN1),
+-	PINMUX_DATA(IRQ26_PORT81_MARK,		PORT81_FN0,	MSEL1CR_26_0),
+-
+-	/* Port82 - Port88 Function */
+-	PINMUX_DATA(SDHI0_CLK_MARK,		PORT82_FN1),
+-	PINMUX_DATA(SDHI0_WP_MARK,		PORT83_FN1),
+-	PINMUX_DATA(RESETOUTS_MARK,		PORT84_FN1),
+-	PINMUX_DATA(USB0_PPON_MARK,		PORT85_FN1),
+-	PINMUX_DATA(USB0_OCI_MARK,		PORT86_FN1),
+-	PINMUX_DATA(USB1_PPON_MARK,		PORT87_FN1),
+-	PINMUX_DATA(USB1_OCI_MARK,		PORT88_FN1),
+-
+-	/* Port89 */
+-	PINMUX_DATA(DREQ0_MARK,			PORT89_FN1),
+-	PINMUX_DATA(BBIF2_TSCK2_PORT89_MARK,	PORT89_FN2,	MSEL5CR_0_1),
+-	PINMUX_DATA(RSPI_SSL3_A_MARK,		PORT89_FN6),
+-
+-	/* Port90 */
+-	PINMUX_DATA(DACK0_MARK,			PORT90_FN1),
+-	PINMUX_DATA(BBIF2_RXD2_PORT90_MARK,	PORT90_FN2,	MSEL5CR_0_1),
+-	PINMUX_DATA(RSPI_SSL2_A_MARK,		PORT90_FN6),
+-	PINMUX_DATA(WAIT_PORT90_MARK,		PORT90_FN7,	MSEL5CR_2_1),
+-
+-	/* Port91 */
+-	PINMUX_DATA(MEMC_AD0_MARK,		PORT91_FN1),
+-	PINMUX_DATA(BBIF1_RXD_MARK,		PORT91_FN2),
+-	PINMUX_DATA(SCIFA5_TXD_PORT91_MARK,	PORT91_FN3,	MSEL5CR_15_1,
+-			MSEL5CR_14_0),
+-	PINMUX_DATA(LCD1_D5_MARK,		PORT91_FN7),
+-
+-	/* Port92 */
+-	PINMUX_DATA(MEMC_AD1_MARK,		PORT92_FN1),
+-	PINMUX_DATA(BBIF1_TSYNC_MARK,		PORT92_FN2),
+-	PINMUX_DATA(SCIFA5_RXD_PORT92_MARK,	PORT92_FN3,	MSEL5CR_15_1,
+-			MSEL5CR_14_0),
+-	PINMUX_DATA(STP0_IPD1_MARK,		PORT92_FN6),
+-	PINMUX_DATA(LCD1_D6_MARK,		PORT92_FN7),
+-
+-	/* Port93 */
+-	PINMUX_DATA(MEMC_AD2_MARK,		PORT93_FN1),
+-	PINMUX_DATA(BBIF1_TSCK_MARK,		PORT93_FN2),
+-	PINMUX_DATA(SCIFA4_TXD_PORT93_MARK,	PORT93_FN3,	MSEL5CR_12_1,
+-			MSEL5CR_11_0),
+-	PINMUX_DATA(STP0_IPD3_MARK,		PORT93_FN6),
+-	PINMUX_DATA(LCD1_D8_MARK,		PORT93_FN7),
+-
+-	/* Port94 */
+-	PINMUX_DATA(MEMC_AD3_MARK,		PORT94_FN1),
+-	PINMUX_DATA(BBIF1_TXD_MARK,		PORT94_FN2),
+-	PINMUX_DATA(SCIFA4_RXD_PORT94_MARK,	PORT94_FN3,	MSEL5CR_12_1,
+-			MSEL5CR_11_0),
+-	PINMUX_DATA(STP0_IPD4_MARK,		PORT94_FN6),
+-	PINMUX_DATA(LCD1_D9_MARK,		PORT94_FN7),
+-
+-	/* Port95 */
+-	PINMUX_DATA(MEMC_CS1_MARK,		PORT95_FN1,	MSEL4CR_6_0),
+-	PINMUX_DATA(MEMC_A1_MARK,		PORT95_FN1,	MSEL4CR_6_1),
+-
+-	PINMUX_DATA(SCIFA2_CTS_MARK,		PORT95_FN2),
+-	PINMUX_DATA(SIM_RST_MARK,		PORT95_FN4),
+-	PINMUX_DATA(VIO0_D14_PORT95_MARK,	PORT95_FN7,	MSEL5CR_27_1),
+-	PINMUX_DATA(IRQ22_MARK,			PORT95_FN0),
+-
+-	/* Port96 */
+-	PINMUX_DATA(MEMC_ADV_MARK,		PORT96_FN1,	MSEL4CR_6_0),
+-	PINMUX_DATA(MEMC_DREQ0_MARK,		PORT96_FN1,	MSEL4CR_6_1),
+-
+-	PINMUX_DATA(SCIFA2_RTS_MARK,		PORT96_FN2),
+-	PINMUX_DATA(SIM_CLK_MARK,		PORT96_FN4),
+-	PINMUX_DATA(VIO0_D15_PORT96_MARK,	PORT96_FN7,	MSEL5CR_27_1),
+-	PINMUX_DATA(IRQ23_MARK,			PORT96_FN0),
+-
+-	/* Port97 */
+-	PINMUX_DATA(MEMC_AD4_MARK,		PORT97_FN1),
+-	PINMUX_DATA(BBIF1_RSCK_MARK,		PORT97_FN2),
+-	PINMUX_DATA(LCD1_CS_MARK,		PORT97_FN6),
+-	PINMUX_DATA(LCD1_HSYN_MARK,		PORT97_FN7),
+-	PINMUX_DATA(IRQ12_PORT97_MARK,		PORT97_FN0,	MSEL1CR_12_0),
+-
+-	/* Port98 */
+-	PINMUX_DATA(MEMC_AD5_MARK,		PORT98_FN1),
+-	PINMUX_DATA(BBIF1_RSYNC_MARK,		PORT98_FN2),
+-	PINMUX_DATA(LCD1_VSYN_MARK,		PORT98_FN7),
+-	PINMUX_DATA(IRQ13_PORT98_MARK,		PORT98_FN0,	MSEL1CR_13_0),
+-
+-	/* Port99 */
+-	PINMUX_DATA(MEMC_AD6_MARK,		PORT99_FN1),
+-	PINMUX_DATA(BBIF1_FLOW_MARK,		PORT99_FN2),
+-	PINMUX_DATA(LCD1_WR_MARK,		PORT99_FN6),
+-	PINMUX_DATA(LCD1_DCK_MARK,		PORT99_FN7),
+-	PINMUX_DATA(IRQ14_PORT99_MARK,		PORT99_FN0,	MSEL1CR_14_0),
+-
+-	/* Port100 */
+-	PINMUX_DATA(MEMC_AD7_MARK,		PORT100_FN1),
+-	PINMUX_DATA(BBIF1_RX_FLOW_N_MARK,	PORT100_FN2),
+-	PINMUX_DATA(LCD1_DON_MARK,		PORT100_FN7),
+-	PINMUX_DATA(IRQ15_PORT100_MARK,		PORT100_FN0,	MSEL1CR_15_0),
+-
+-	/* Port101 */
+-	PINMUX_DATA(FCE0_MARK,			PORT101_FN1),
+-
+-	/* Port102 */
+-	PINMUX_DATA(FRB_MARK,			PORT102_FN1),
+-	PINMUX_DATA(LCD0_LCLK_PORT102_MARK,	PORT102_FN4,	MSEL5CR_6_0),
+-
+-	/* Port103 */
+-	PINMUX_DATA(CS5B_MARK,			PORT103_FN1),
+-	PINMUX_DATA(FCE1_MARK,			PORT103_FN2),
+-	PINMUX_DATA(MMC1_CLK_PORT103_MARK,	PORT103_FN3,	MSEL4CR_15_1),
+-
+-	/* Port104 */
+-	PINMUX_DATA(CS6A_MARK,			PORT104_FN1),
+-	PINMUX_DATA(MMC1_CMD_PORT104_MARK,	PORT104_FN3,	MSEL4CR_15_1),
+-	PINMUX_DATA(IRQ11_MARK,			PORT104_FN0),
+-
+-	/* Port105 */
+-	PINMUX_DATA(CS5A_PORT105_MARK,		PORT105_FN1,	MSEL5CR_2_0),
+-	PINMUX_DATA(SCIFA3_RTS_PORT105_MARK,	PORT105_FN4,	MSEL5CR_8_0),
+-
+-	/* Port106 */
+-	PINMUX_DATA(IOIS16_MARK,		PORT106_FN1),
+-	PINMUX_DATA(IDE_EXBUF_ENB_MARK,		PORT106_FN6),
+-
+-	/* Port107 - Port115 Function */
+-	PINMUX_DATA(WE3_ICIOWR_MARK,		PORT107_FN1),
+-	PINMUX_DATA(WE2_ICIORD_MARK,		PORT108_FN1),
+-	PINMUX_DATA(CS0_MARK,			PORT109_FN1),
+-	PINMUX_DATA(CS2_MARK,			PORT110_FN1),
+-	PINMUX_DATA(CS4_MARK,			PORT111_FN1),
+-	PINMUX_DATA(WE1_MARK,			PORT112_FN1),
+-	PINMUX_DATA(WE0_FWE_MARK,		PORT113_FN1),
+-	PINMUX_DATA(RDWR_MARK,			PORT114_FN1),
+-	PINMUX_DATA(RD_FSC_MARK,		PORT115_FN1),
+-
+-	/* Port116 */
+-	PINMUX_DATA(A25_MARK,			PORT116_FN1),
+-	PINMUX_DATA(MSIOF0_SS2_MARK,		PORT116_FN2),
+-	PINMUX_DATA(MSIOF1_SS2_PORT116_MARK,	PORT116_FN3,	MSEL4CR_10_0),
+-	PINMUX_DATA(SCIFA3_SCK_PORT116_MARK,	PORT116_FN4,	MSEL5CR_8_0),
+-	PINMUX_DATA(GPO1_MARK,			PORT116_FN5),
+-
+-	/* Port117 */
+-	PINMUX_DATA(A24_MARK,			PORT117_FN1),
+-	PINMUX_DATA(MSIOF0_SS1_MARK,		PORT117_FN2),
+-	PINMUX_DATA(MSIOF1_SS1_PORT117_MARK,	PORT117_FN3,	MSEL4CR_10_0),
+-	PINMUX_DATA(SCIFA3_CTS_PORT117_MARK,	PORT117_FN4,	MSEL5CR_8_0),
+-	PINMUX_DATA(GPO0_MARK,			PORT117_FN5),
+-
+-	/* Port118 */
+-	PINMUX_DATA(A23_MARK,			PORT118_FN1),
+-	PINMUX_DATA(MSIOF0_MCK1_MARK,		PORT118_FN2),
+-	PINMUX_DATA(MSIOF1_RXD_PORT118_MARK,	PORT118_FN3,	MSEL4CR_10_0),
+-	PINMUX_DATA(GPI1_MARK,			PORT118_FN5),
+-	PINMUX_DATA(IRQ9_PORT118_MARK,		PORT118_FN0,	MSEL1CR_9_0),
+-
+-	/* Port119 */
+-	PINMUX_DATA(A22_MARK,			PORT119_FN1),
+-	PINMUX_DATA(MSIOF0_MCK0_MARK,		PORT119_FN2),
+-	PINMUX_DATA(MSIOF1_TXD_PORT119_MARK,	PORT119_FN3,	MSEL4CR_10_0),
+-	PINMUX_DATA(GPI0_MARK,			PORT119_FN5),
+-	PINMUX_DATA(IRQ8_MARK,			PORT119_FN0),
+-
+-	/* Port120 */
+-	PINMUX_DATA(A21_MARK,			PORT120_FN1),
+-	PINMUX_DATA(MSIOF0_RSYNC_MARK,		PORT120_FN2),
+-	PINMUX_DATA(MSIOF1_TSYNC_PORT120_MARK,	PORT120_FN3,	MSEL4CR_10_0),
+-	PINMUX_DATA(IRQ7_PORT120_MARK,		PORT120_FN0,	MSEL1CR_7_0),
+-
+-	/* Port121 */
+-	PINMUX_DATA(A20_MARK,			PORT121_FN1),
+-	PINMUX_DATA(MSIOF0_RSCK_MARK,		PORT121_FN2),
+-	PINMUX_DATA(MSIOF1_TSCK_PORT121_MARK,	PORT121_FN3,	MSEL4CR_10_0),
+-	PINMUX_DATA(IRQ6_PORT121_MARK,		PORT121_FN0,	MSEL1CR_6_0),
+-
+-	/* Port122 */
+-	PINMUX_DATA(A19_MARK,			PORT122_FN1),
+-	PINMUX_DATA(MSIOF0_RXD_MARK,		PORT122_FN2),
+-
+-	/* Port123 */
+-	PINMUX_DATA(A18_MARK,			PORT123_FN1),
+-	PINMUX_DATA(MSIOF0_TSCK_MARK,		PORT123_FN2),
+-
+-	/* Port124 */
+-	PINMUX_DATA(A17_MARK,			PORT124_FN1),
+-	PINMUX_DATA(MSIOF0_TSYNC_MARK,		PORT124_FN2),
+-
+-	/* Port125 - Port141 Function */
+-	PINMUX_DATA(A16_MARK,			PORT125_FN1),
+-	PINMUX_DATA(A15_MARK,			PORT126_FN1),
+-	PINMUX_DATA(A14_MARK,			PORT127_FN1),
+-	PINMUX_DATA(A13_MARK,			PORT128_FN1),
+-	PINMUX_DATA(A12_MARK,			PORT129_FN1),
+-	PINMUX_DATA(A11_MARK,			PORT130_FN1),
+-	PINMUX_DATA(A10_MARK,			PORT131_FN1),
+-	PINMUX_DATA(A9_MARK,			PORT132_FN1),
+-	PINMUX_DATA(A8_MARK,			PORT133_FN1),
+-	PINMUX_DATA(A7_MARK,			PORT134_FN1),
+-	PINMUX_DATA(A6_MARK,			PORT135_FN1),
+-	PINMUX_DATA(A5_FCDE_MARK,		PORT136_FN1),
+-	PINMUX_DATA(A4_FOE_MARK,		PORT137_FN1),
+-	PINMUX_DATA(A3_MARK,			PORT138_FN1),
+-	PINMUX_DATA(A2_MARK,			PORT139_FN1),
+-	PINMUX_DATA(A1_MARK,			PORT140_FN1),
+-	PINMUX_DATA(CKO_MARK,			PORT141_FN1),
+-
+-	/* Port142 - Port157 Function1 */
+-	PINMUX_DATA(D15_NAF15_MARK,		PORT142_FN1),
+-	PINMUX_DATA(D14_NAF14_MARK,		PORT143_FN1),
+-	PINMUX_DATA(D13_NAF13_MARK,		PORT144_FN1),
+-	PINMUX_DATA(D12_NAF12_MARK,		PORT145_FN1),
+-	PINMUX_DATA(D11_NAF11_MARK,		PORT146_FN1),
+-	PINMUX_DATA(D10_NAF10_MARK,		PORT147_FN1),
+-	PINMUX_DATA(D9_NAF9_MARK,		PORT148_FN1),
+-	PINMUX_DATA(D8_NAF8_MARK,		PORT149_FN1),
+-	PINMUX_DATA(D7_NAF7_MARK,		PORT150_FN1),
+-	PINMUX_DATA(D6_NAF6_MARK,		PORT151_FN1),
+-	PINMUX_DATA(D5_NAF5_MARK,		PORT152_FN1),
+-	PINMUX_DATA(D4_NAF4_MARK,		PORT153_FN1),
+-	PINMUX_DATA(D3_NAF3_MARK,		PORT154_FN1),
+-	PINMUX_DATA(D2_NAF2_MARK,		PORT155_FN1),
+-	PINMUX_DATA(D1_NAF1_MARK,		PORT156_FN1),
+-	PINMUX_DATA(D0_NAF0_MARK,		PORT157_FN1),
+-
+-	/* Port142 - Port149 Function3 */
+-	PINMUX_DATA(MMC1_D7_PORT142_MARK,	PORT142_FN3,	MSEL4CR_15_1),
+-	PINMUX_DATA(MMC1_D6_PORT143_MARK,	PORT143_FN3,	MSEL4CR_15_1),
+-	PINMUX_DATA(MMC1_D5_PORT144_MARK,	PORT144_FN3,	MSEL4CR_15_1),
+-	PINMUX_DATA(MMC1_D4_PORT145_MARK,	PORT145_FN3,	MSEL4CR_15_1),
+-	PINMUX_DATA(MMC1_D3_PORT146_MARK,	PORT146_FN3,	MSEL4CR_15_1),
+-	PINMUX_DATA(MMC1_D2_PORT147_MARK,	PORT147_FN3,	MSEL4CR_15_1),
+-	PINMUX_DATA(MMC1_D1_PORT148_MARK,	PORT148_FN3,	MSEL4CR_15_1),
+-	PINMUX_DATA(MMC1_D0_PORT149_MARK,	PORT149_FN3,	MSEL4CR_15_1),
+-
+-	/* Port158 */
+-	PINMUX_DATA(D31_MARK,			PORT158_FN1),
+-	PINMUX_DATA(SCIFA3_SCK_PORT158_MARK,	PORT158_FN2,	MSEL5CR_8_1),
+-	PINMUX_DATA(RMII_REF125CK_MARK,		PORT158_FN3),
+-	PINMUX_DATA(LCD0_D21_PORT158_MARK,	PORT158_FN4,	MSEL5CR_6_1),
+-	PINMUX_DATA(IRDA_FIRSEL_MARK,		PORT158_FN5),
+-	PINMUX_DATA(IDE_D15_MARK,		PORT158_FN6),
+-
+-	/* Port159 */
+-	PINMUX_DATA(D30_MARK,			PORT159_FN1),
+-	PINMUX_DATA(SCIFA3_RXD_PORT159_MARK,	PORT159_FN2,	MSEL5CR_8_1),
+-	PINMUX_DATA(RMII_REF50CK_MARK,		PORT159_FN3),
+-	PINMUX_DATA(LCD0_D23_PORT159_MARK,	PORT159_FN4,	MSEL5CR_6_1),
+-	PINMUX_DATA(IDE_D14_MARK,		PORT159_FN6),
+-
+-	/* Port160 */
+-	PINMUX_DATA(D29_MARK,			PORT160_FN1),
+-	PINMUX_DATA(SCIFA3_TXD_PORT160_MARK,	PORT160_FN2,	MSEL5CR_8_1),
+-	PINMUX_DATA(LCD0_D22_PORT160_MARK,	PORT160_FN4,	MSEL5CR_6_1),
+-	PINMUX_DATA(VIO1_HD_MARK,		PORT160_FN5),
+-	PINMUX_DATA(IDE_D13_MARK,		PORT160_FN6),
+-
+-	/* Port161 */
+-	PINMUX_DATA(D28_MARK,			PORT161_FN1),
+-	PINMUX_DATA(SCIFA3_RTS_PORT161_MARK,	PORT161_FN2,	MSEL5CR_8_1),
+-	PINMUX_DATA(ET_RX_DV_MARK,		PORT161_FN3),
+-	PINMUX_DATA(LCD0_D20_PORT161_MARK,	PORT161_FN4,	MSEL5CR_6_1),
+-	PINMUX_DATA(IRDA_IN_MARK,		PORT161_FN5),
+-	PINMUX_DATA(IDE_D12_MARK,		PORT161_FN6),
+-
+-	/* Port162 */
+-	PINMUX_DATA(D27_MARK,			PORT162_FN1),
+-	PINMUX_DATA(SCIFA3_CTS_PORT162_MARK,	PORT162_FN2,	MSEL5CR_8_1),
+-	PINMUX_DATA(LCD0_D19_PORT162_MARK,	PORT162_FN4,	MSEL5CR_6_1),
+-	PINMUX_DATA(IRDA_OUT_MARK,		PORT162_FN5),
+-	PINMUX_DATA(IDE_D11_MARK,		PORT162_FN6),
+-
+-	/* Port163 */
+-	PINMUX_DATA(D26_MARK,			PORT163_FN1),
+-	PINMUX_DATA(MSIOF2_SS2_MARK,		PORT163_FN2),
+-	PINMUX_DATA(ET_COL_MARK,		PORT163_FN3),
+-	PINMUX_DATA(LCD0_D18_PORT163_MARK,	PORT163_FN4,	MSEL5CR_6_1),
+-	PINMUX_DATA(IROUT_MARK,			PORT163_FN5),
+-	PINMUX_DATA(IDE_D10_MARK,		PORT163_FN6),
+-
+-	/* Port164 */
+-	PINMUX_DATA(D25_MARK,			PORT164_FN1),
+-	PINMUX_DATA(MSIOF2_TSYNC_MARK,		PORT164_FN2),
+-	PINMUX_DATA(ET_PHY_INT_MARK,		PORT164_FN3),
+-	PINMUX_DATA(LCD0_RD_MARK,		PORT164_FN4),
+-	PINMUX_DATA(IDE_D9_MARK,		PORT164_FN6),
+-
+-	/* Port165 */
+-	PINMUX_DATA(D24_MARK,			PORT165_FN1),
+-	PINMUX_DATA(MSIOF2_RXD_MARK,		PORT165_FN2),
+-	PINMUX_DATA(LCD0_LCLK_PORT165_MARK,	PORT165_FN4,	MSEL5CR_6_1),
+-	PINMUX_DATA(IDE_D8_MARK,		PORT165_FN6),
+-
+-	/* Port166 - Port171 Function1 */
+-	PINMUX_DATA(D21_MARK,			PORT166_FN1),
+-	PINMUX_DATA(D20_MARK,			PORT167_FN1),
+-	PINMUX_DATA(D19_MARK,			PORT168_FN1),
+-	PINMUX_DATA(D18_MARK,			PORT169_FN1),
+-	PINMUX_DATA(D17_MARK,			PORT170_FN1),
+-	PINMUX_DATA(D16_MARK,			PORT171_FN1),
+-
+-	/* Port166 - Port171 Function3 */
+-	PINMUX_DATA(ET_ETXD5_MARK,		PORT166_FN3),
+-	PINMUX_DATA(ET_ETXD4_MARK,		PORT167_FN3),
+-	PINMUX_DATA(ET_ETXD3_MARK,		PORT168_FN3),
+-	PINMUX_DATA(ET_ETXD2_MARK,		PORT169_FN3),
+-	PINMUX_DATA(ET_ETXD1_MARK,		PORT170_FN3),
+-	PINMUX_DATA(ET_ETXD0_MARK,		PORT171_FN3),
+-
+-	/* Port166 - Port171 Function6 */
+-	PINMUX_DATA(IDE_D5_MARK,		PORT166_FN6),
+-	PINMUX_DATA(IDE_D4_MARK,		PORT167_FN6),
+-	PINMUX_DATA(IDE_D3_MARK,		PORT168_FN6),
+-	PINMUX_DATA(IDE_D2_MARK,		PORT169_FN6),
+-	PINMUX_DATA(IDE_D1_MARK,		PORT170_FN6),
+-	PINMUX_DATA(IDE_D0_MARK,		PORT171_FN6),
+-
+-	/* Port167 - Port171 IRQ */
+-	PINMUX_DATA(IRQ31_PORT167_MARK,		PORT167_FN0,	MSEL1CR_31_0),
+-	PINMUX_DATA(IRQ27_PORT168_MARK,		PORT168_FN0,	MSEL1CR_27_0),
+-	PINMUX_DATA(IRQ28_PORT169_MARK,		PORT169_FN0,	MSEL1CR_28_0),
+-	PINMUX_DATA(IRQ29_PORT170_MARK,		PORT170_FN0,	MSEL1CR_29_0),
+-	PINMUX_DATA(IRQ30_PORT171_MARK,		PORT171_FN0,	MSEL1CR_30_0),
+-
+-	/* Port172 */
+-	PINMUX_DATA(D23_MARK,			PORT172_FN1),
+-	PINMUX_DATA(SCIFB_RTS_PORT172_MARK,	PORT172_FN2,	MSEL5CR_17_1),
+-	PINMUX_DATA(ET_ETXD7_MARK,		PORT172_FN3),
+-	PINMUX_DATA(IDE_D7_MARK,		PORT172_FN6),
+-	PINMUX_DATA(IRQ4_PORT172_MARK,		PORT172_FN0,	MSEL1CR_4_1),
+-
+-	/* Port173 */
+-	PINMUX_DATA(D22_MARK,			PORT173_FN1),
+-	PINMUX_DATA(SCIFB_CTS_PORT173_MARK,	PORT173_FN2,	MSEL5CR_17_1),
+-	PINMUX_DATA(ET_ETXD6_MARK,		PORT173_FN3),
+-	PINMUX_DATA(IDE_D6_MARK,		PORT173_FN6),
+-	PINMUX_DATA(IRQ6_PORT173_MARK,		PORT173_FN0,	MSEL1CR_6_1),
+-
+-	/* Port174 */
+-	PINMUX_DATA(A26_MARK,			PORT174_FN1),
+-	PINMUX_DATA(MSIOF0_TXD_MARK,		PORT174_FN2),
+-	PINMUX_DATA(ET_RX_CLK_MARK,		PORT174_FN3),
+-	PINMUX_DATA(SCIFA3_RXD_PORT174_MARK,	PORT174_FN4,	MSEL5CR_8_0),
+-
+-	/* Port175 */
+-	PINMUX_DATA(A0_MARK,			PORT175_FN1),
+-	PINMUX_DATA(BS_MARK,			PORT175_FN2),
+-	PINMUX_DATA(ET_WOL_MARK,		PORT175_FN3),
+-	PINMUX_DATA(SCIFA3_TXD_PORT175_MARK,	PORT175_FN4,	MSEL5CR_8_0),
+-
+-	/* Port176 */
+-	PINMUX_DATA(ET_GTX_CLK_MARK,		PORT176_FN3),
+-
+-	/* Port177 */
+-	PINMUX_DATA(WAIT_PORT177_MARK,		PORT177_FN1,	MSEL5CR_2_0),
+-	PINMUX_DATA(ET_LINK_MARK,		PORT177_FN3),
+-	PINMUX_DATA(IDE_IOWR_MARK,		PORT177_FN6),
+-	PINMUX_DATA(SDHI2_WP_PORT177_MARK,	PORT177_FN7,	MSEL5CR_19_1),
+-
+-	/* Port178 */
+-	PINMUX_DATA(VIO0_D12_MARK,		PORT178_FN1),
+-	PINMUX_DATA(VIO1_D4_MARK,		PORT178_FN5),
+-	PINMUX_DATA(IDE_IORD_MARK,		PORT178_FN6),
+-
+-	/* Port179 */
+-	PINMUX_DATA(VIO0_D11_MARK,		PORT179_FN1),
+-	PINMUX_DATA(VIO1_D3_MARK,		PORT179_FN5),
+-	PINMUX_DATA(IDE_IORDY_MARK,		PORT179_FN6),
+-
+-	/* Port180 */
+-	PINMUX_DATA(VIO0_D10_MARK,		PORT180_FN1),
+-	PINMUX_DATA(TPU0TO3_MARK,		PORT180_FN4),
+-	PINMUX_DATA(VIO1_D2_MARK,		PORT180_FN5),
+-	PINMUX_DATA(IDE_INT_MARK,		PORT180_FN6),
+-	PINMUX_DATA(IRQ24_MARK,			PORT180_FN0),
+-
+-	/* Port181 */
+-	PINMUX_DATA(VIO0_D9_MARK,		PORT181_FN1),
+-	PINMUX_DATA(VIO1_D1_MARK,		PORT181_FN5),
+-	PINMUX_DATA(IDE_RST_MARK,		PORT181_FN6),
+-
+-	/* Port182 */
+-	PINMUX_DATA(VIO0_D8_MARK,		PORT182_FN1),
+-	PINMUX_DATA(VIO1_D0_MARK,		PORT182_FN5),
+-	PINMUX_DATA(IDE_DIRECTION_MARK,		PORT182_FN6),
+-
+-	/* Port183 */
+-	PINMUX_DATA(DREQ1_MARK,			PORT183_FN1),
+-	PINMUX_DATA(BBIF2_TXD2_PORT183_MARK,	PORT183_FN2,	MSEL5CR_0_1),
+-	PINMUX_DATA(ET_TX_EN_MARK,		PORT183_FN3),
+-
+-	/* Port184 */
+-	PINMUX_DATA(DACK1_MARK,			PORT184_FN1),
+-	PINMUX_DATA(BBIF2_TSYNC2_PORT184_MARK,	PORT184_FN2,	MSEL5CR_0_1),
+-	PINMUX_DATA(ET_TX_CLK_MARK,		PORT184_FN3),
+-
+-	/* Port185 - Port192 Function1 */
+-	PINMUX_DATA(SCIFA1_SCK_MARK,		PORT185_FN1),
+-	PINMUX_DATA(SCIFB_RTS_PORT186_MARK,	PORT186_FN1,	MSEL5CR_17_0),
+-	PINMUX_DATA(SCIFB_CTS_PORT187_MARK,	PORT187_FN1,	MSEL5CR_17_0),
+-	PINMUX_DATA(SCIFA0_SCK_MARK,		PORT188_FN1),
+-	PINMUX_DATA(SCIFB_SCK_PORT190_MARK,	PORT190_FN1,	MSEL5CR_17_0),
+-	PINMUX_DATA(SCIFB_RXD_PORT191_MARK,	PORT191_FN1,	MSEL5CR_17_0),
+-	PINMUX_DATA(SCIFB_TXD_PORT192_MARK,	PORT192_FN1,	MSEL5CR_17_0),
+-
+-	/* Port185 - Port192 Function3 */
+-	PINMUX_DATA(ET_ERXD0_MARK,		PORT185_FN3),
+-	PINMUX_DATA(ET_ERXD1_MARK,		PORT186_FN3),
+-	PINMUX_DATA(ET_ERXD2_MARK,		PORT187_FN3),
+-	PINMUX_DATA(ET_ERXD3_MARK,		PORT188_FN3),
+-	PINMUX_DATA(ET_ERXD4_MARK,		PORT189_FN3),
+-	PINMUX_DATA(ET_ERXD5_MARK,		PORT190_FN3),
+-	PINMUX_DATA(ET_ERXD6_MARK,		PORT191_FN3),
+-	PINMUX_DATA(ET_ERXD7_MARK,		PORT192_FN3),
+-
+-	/* Port185 - Port192 Function6 */
+-	PINMUX_DATA(STP1_IPCLK_MARK,		PORT185_FN6),
+-	PINMUX_DATA(STP1_IPD0_PORT186_MARK,	PORT186_FN6,	MSEL5CR_23_0),
+-	PINMUX_DATA(STP1_IPEN_PORT187_MARK,	PORT187_FN6,	MSEL5CR_23_0),
+-	PINMUX_DATA(STP1_IPSYNC_MARK,		PORT188_FN6),
+-	PINMUX_DATA(STP0_IPCLK_MARK,		PORT189_FN6),
+-	PINMUX_DATA(STP0_IPD0_MARK,		PORT190_FN6),
+-	PINMUX_DATA(STP0_IPEN_MARK,		PORT191_FN6),
+-	PINMUX_DATA(STP0_IPSYNC_MARK,		PORT192_FN6),
+-
+-	/* Port193 */
+-	PINMUX_DATA(SCIFA0_CTS_MARK,		PORT193_FN1),
+-	PINMUX_DATA(RMII_CRS_DV_MARK,		PORT193_FN3),
+-	PINMUX_DATA(STP1_IPEN_PORT193_MARK,	PORT193_FN6,	MSEL5CR_23_1),
+-	PINMUX_DATA(LCD1_D17_MARK,		PORT193_FN7),
+-
+-	/* Port194 */
+-	PINMUX_DATA(SCIFA0_RTS_MARK,		PORT194_FN1),
+-	PINMUX_DATA(RMII_RX_ER_MARK,		PORT194_FN3),
+-	PINMUX_DATA(STP1_IPD0_PORT194_MARK,	PORT194_FN6,	MSEL5CR_23_1),
+-	PINMUX_DATA(LCD1_D16_MARK,		PORT194_FN7),
+-
+-	/* Port195 */
+-	PINMUX_DATA(SCIFA1_RXD_MARK,		PORT195_FN1),
+-	PINMUX_DATA(RMII_RXD0_MARK,		PORT195_FN3),
+-	PINMUX_DATA(STP1_IPD3_MARK,		PORT195_FN6),
+-	PINMUX_DATA(LCD1_D15_MARK,		PORT195_FN7),
+-
+-	/* Port196 */
+-	PINMUX_DATA(SCIFA1_TXD_MARK,		PORT196_FN1),
+-	PINMUX_DATA(RMII_RXD1_MARK,		PORT196_FN3),
+-	PINMUX_DATA(STP1_IPD2_MARK,		PORT196_FN6),
+-	PINMUX_DATA(LCD1_D14_MARK,		PORT196_FN7),
+-
+-	/* Port197 */
+-	PINMUX_DATA(SCIFA0_RXD_MARK,		PORT197_FN1),
+-	PINMUX_DATA(VIO1_CLK_MARK,		PORT197_FN5),
+-	PINMUX_DATA(STP1_IPD5_MARK,		PORT197_FN6),
+-	PINMUX_DATA(LCD1_D19_MARK,		PORT197_FN7),
+-
+-	/* Port198 */
+-	PINMUX_DATA(SCIFA0_TXD_MARK,		PORT198_FN1),
+-	PINMUX_DATA(VIO1_VD_MARK,		PORT198_FN5),
+-	PINMUX_DATA(STP1_IPD4_MARK,		PORT198_FN6),
+-	PINMUX_DATA(LCD1_D18_MARK,		PORT198_FN7),
+-
+-	/* Port199 */
+-	PINMUX_DATA(MEMC_NWE_MARK,		PORT199_FN1),
+-	PINMUX_DATA(SCIFA2_SCK_PORT199_MARK,	PORT199_FN2,	MSEL5CR_7_1),
+-	PINMUX_DATA(RMII_TX_EN_MARK,		PORT199_FN3),
+-	PINMUX_DATA(SIM_D_PORT199_MARK,		PORT199_FN4,	MSEL5CR_21_1),
+-	PINMUX_DATA(STP1_IPD1_MARK,		PORT199_FN6),
+-	PINMUX_DATA(LCD1_D13_MARK,		PORT199_FN7),
+-
+-	/* Port200 */
+-	PINMUX_DATA(MEMC_NOE_MARK,		PORT200_FN1),
+-	PINMUX_DATA(SCIFA2_RXD_MARK,		PORT200_FN2),
+-	PINMUX_DATA(RMII_TXD0_MARK,		PORT200_FN3),
+-	PINMUX_DATA(STP0_IPD7_MARK,		PORT200_FN6),
+-	PINMUX_DATA(LCD1_D12_MARK,		PORT200_FN7),
+-
+-	/* Port201 */
+-	PINMUX_DATA(MEMC_WAIT_MARK,		PORT201_FN1,	MSEL4CR_6_0),
+-	PINMUX_DATA(MEMC_DREQ1_MARK,		PORT201_FN1,	MSEL4CR_6_1),
+-
+-	PINMUX_DATA(SCIFA2_TXD_MARK,		PORT201_FN2),
+-	PINMUX_DATA(RMII_TXD1_MARK,		PORT201_FN3),
+-	PINMUX_DATA(STP0_IPD6_MARK,		PORT201_FN6),
+-	PINMUX_DATA(LCD1_D11_MARK,		PORT201_FN7),
+-
+-	/* Port202 */
+-	PINMUX_DATA(MEMC_BUSCLK_MARK,		PORT202_FN1,	MSEL4CR_6_0),
+-	PINMUX_DATA(MEMC_A0_MARK,		PORT202_FN1,	MSEL4CR_6_1),
+-
+-	PINMUX_DATA(MSIOF1_SS2_PORT202_MARK,	PORT202_FN2,	MSEL4CR_10_1),
+-	PINMUX_DATA(RMII_MDC_MARK,		PORT202_FN3),
+-	PINMUX_DATA(TPU0TO2_PORT202_MARK,	PORT202_FN4,	MSEL5CR_25_1),
+-	PINMUX_DATA(IDE_CS0_MARK,		PORT202_FN6),
+-	PINMUX_DATA(SDHI2_CD_PORT202_MARK,	PORT202_FN7,	MSEL5CR_19_1),
+-	PINMUX_DATA(IRQ21_MARK,			PORT202_FN0),
+-
+-	/* Port203 - Port208 Function1 */
+-	PINMUX_DATA(SDHI2_CLK_MARK,		PORT203_FN1),
+-	PINMUX_DATA(SDHI2_CMD_MARK,		PORT204_FN1),
+-	PINMUX_DATA(SDHI2_D0_MARK,		PORT205_FN1),
+-	PINMUX_DATA(SDHI2_D1_MARK,		PORT206_FN1),
+-	PINMUX_DATA(SDHI2_D2_MARK,		PORT207_FN1),
+-	PINMUX_DATA(SDHI2_D3_MARK,		PORT208_FN1),
+-
+-	/* Port203 - Port208 Function3 */
+-	PINMUX_DATA(ET_TX_ER_MARK,		PORT203_FN3),
+-	PINMUX_DATA(ET_RX_ER_MARK,		PORT204_FN3),
+-	PINMUX_DATA(ET_CRS_MARK,		PORT205_FN3),
+-	PINMUX_DATA(ET_MDC_MARK,		PORT206_FN3),
+-	PINMUX_DATA(ET_MDIO_MARK,		PORT207_FN3),
+-	PINMUX_DATA(RMII_MDIO_MARK,		PORT208_FN3),
+-
+-	/* Port203 - Port208 Function6 */
+-	PINMUX_DATA(IDE_A2_MARK,		PORT203_FN6),
+-	PINMUX_DATA(IDE_A1_MARK,		PORT204_FN6),
+-	PINMUX_DATA(IDE_A0_MARK,		PORT205_FN6),
+-	PINMUX_DATA(IDE_IODACK_MARK,		PORT206_FN6),
+-	PINMUX_DATA(IDE_IODREQ_MARK,		PORT207_FN6),
+-	PINMUX_DATA(IDE_CS1_MARK,		PORT208_FN6),
+-
+-	/* Port203 - Port208 Function7 */
+-	PINMUX_DATA(SCIFA4_TXD_PORT203_MARK, PORT203_FN7, MSEL5CR_12_0,
+-			MSEL5CR_11_1),
+-	PINMUX_DATA(SCIFA4_RXD_PORT204_MARK, PORT204_FN7, MSEL5CR_12_0,
+-			MSEL5CR_11_1),
+-	PINMUX_DATA(SCIFA4_SCK_PORT205_MARK, PORT205_FN7, MSEL5CR_10_1),
+-	PINMUX_DATA(SCIFA5_SCK_PORT206_MARK, PORT206_FN7, MSEL5CR_13_1),
+-	PINMUX_DATA(SCIFA5_RXD_PORT207_MARK, PORT207_FN7, MSEL5CR_15_0,
+-			MSEL5CR_14_1),
+-	PINMUX_DATA(SCIFA5_TXD_PORT208_MARK, PORT208_FN7, MSEL5CR_15_0,
+-			MSEL5CR_14_1),
+-
+-	/* Port209 */
+-	PINMUX_DATA(VBUS_MARK, PORT209_FN1),
+-	PINMUX_DATA(IRQ7_PORT209_MARK, PORT209_FN0, MSEL1CR_7_1),
+-
+-	/* Port210 */
+-	PINMUX_DATA(IRQ9_PORT210_MARK, PORT210_FN0, MSEL1CR_9_1),
+-
+-	/* Port211 */
+-	PINMUX_DATA(IRQ16_PORT211_MARK, PORT211_FN0, MSEL1CR_16_1),
+-
+-	/* LCDC select */
+-	PINMUX_DATA(LCDC0_SELECT_MARK, MSEL3CR_6_0),
+-	PINMUX_DATA(LCDC1_SELECT_MARK, MSEL3CR_6_1),
+-
+-	/* SDENC */
+-	PINMUX_DATA(SDENC_CPG_MARK,	MSEL4CR_19_0),
+-	PINMUX_DATA(SDENC_DV_CLKI_MARK,	MSEL4CR_19_1),
+-
+-	/* SYSC */
+-	PINMUX_DATA(RESETP_PULLUP_MARK,	MSEL4CR_4_0),
+-	PINMUX_DATA(RESETP_PLAIN_MARK, MSEL4CR_4_1),
+-
+-	/* DEBUG */
+-	PINMUX_DATA(EDEBGREQ_PULLDOWN_MARK, MSEL4CR_1_0),
+-	PINMUX_DATA(EDEBGREQ_PULLUP_MARK, MSEL4CR_1_1),
+-
+-	PINMUX_DATA(TRACEAUD_FROM_VIO_MARK,	MSEL5CR_30_0, MSEL5CR_29_0),
+-	PINMUX_DATA(TRACEAUD_FROM_LCDC0_MARK, MSEL5CR_30_0, MSEL5CR_29_1),
+-	PINMUX_DATA(TRACEAUD_FROM_MEMC_MARK, MSEL5CR_30_1, MSEL5CR_29_0),
+-};
+-
+-static struct pinmux_gpio pinmux_gpios[] = {
+-
+-	/* PORT */
+-	GPIO_PORT_ALL(),
+-
+-	/* IRQ */
+-	GPIO_FN(IRQ0_PORT2),	GPIO_FN(IRQ0_PORT13),
+-	GPIO_FN(IRQ1),
+-	GPIO_FN(IRQ2_PORT11),	GPIO_FN(IRQ2_PORT12),
+-	GPIO_FN(IRQ3_PORT10),	GPIO_FN(IRQ3_PORT14),
+-	GPIO_FN(IRQ4_PORT15),	GPIO_FN(IRQ4_PORT172),
+-	GPIO_FN(IRQ5_PORT0),	GPIO_FN(IRQ5_PORT1),
+-	GPIO_FN(IRQ6_PORT121),	GPIO_FN(IRQ6_PORT173),
+-	GPIO_FN(IRQ7_PORT120),	GPIO_FN(IRQ7_PORT209),
+-	GPIO_FN(IRQ8),
+-	GPIO_FN(IRQ9_PORT118),	GPIO_FN(IRQ9_PORT210),
+-	GPIO_FN(IRQ10),
+-	GPIO_FN(IRQ11),
+-	GPIO_FN(IRQ12_PORT42),	GPIO_FN(IRQ12_PORT97),
+-	GPIO_FN(IRQ13_PORT64),	GPIO_FN(IRQ13_PORT98),
+-	GPIO_FN(IRQ14_PORT63),	GPIO_FN(IRQ14_PORT99),
+-	GPIO_FN(IRQ15_PORT62),	GPIO_FN(IRQ15_PORT100),
+-	GPIO_FN(IRQ16_PORT68),	GPIO_FN(IRQ16_PORT211),
+-	GPIO_FN(IRQ17),
+-	GPIO_FN(IRQ18),
+-	GPIO_FN(IRQ19),
+-	GPIO_FN(IRQ20),
+-	GPIO_FN(IRQ21),
+-	GPIO_FN(IRQ22),
+-	GPIO_FN(IRQ23),
+-	GPIO_FN(IRQ24),
+-	GPIO_FN(IRQ25),
+-	GPIO_FN(IRQ26_PORT58),	GPIO_FN(IRQ26_PORT81),
+-	GPIO_FN(IRQ27_PORT57),	GPIO_FN(IRQ27_PORT168),
+-	GPIO_FN(IRQ28_PORT56),	GPIO_FN(IRQ28_PORT169),
+-	GPIO_FN(IRQ29_PORT50),	GPIO_FN(IRQ29_PORT170),
+-	GPIO_FN(IRQ30_PORT49),	GPIO_FN(IRQ30_PORT171),
+-	GPIO_FN(IRQ31_PORT41),	GPIO_FN(IRQ31_PORT167),
+-
+-	/* Function */
+-
+-	/* DBGT */
+-	GPIO_FN(DBGMDT2),	GPIO_FN(DBGMDT1),	GPIO_FN(DBGMDT0),
+-	GPIO_FN(DBGMD10),	GPIO_FN(DBGMD11),	GPIO_FN(DBGMD20),
+-	GPIO_FN(DBGMD21),
+-
+-	/* FSI */
+-	GPIO_FN(FSIAISLD_PORT0),	/* FSIAISLD Port 0/5 */
+-	GPIO_FN(FSIAISLD_PORT5),
+-	GPIO_FN(FSIASPDIF_PORT9),	/* FSIASPDIF Port 9/18 */
+-	GPIO_FN(FSIASPDIF_PORT18),
+-	GPIO_FN(FSIAOSLD1),	GPIO_FN(FSIAOSLD2),	GPIO_FN(FSIAOLR),
+-	GPIO_FN(FSIAOBT),	GPIO_FN(FSIAOSLD),	GPIO_FN(FSIAOMC),
+-	GPIO_FN(FSIACK),	GPIO_FN(FSIAILR),	GPIO_FN(FSIAIBT),
+-
+-	/* FMSI */
+-	GPIO_FN(FMSISLD_PORT1), /* FMSISLD Port 1/6 */
+-	GPIO_FN(FMSISLD_PORT6),
+-	GPIO_FN(FMSIILR),	GPIO_FN(FMSIIBT),	GPIO_FN(FMSIOLR),
+-	GPIO_FN(FMSIOBT),	GPIO_FN(FMSICK),	GPIO_FN(FMSOILR),
+-	GPIO_FN(FMSOIBT),	GPIO_FN(FMSOOLR),	GPIO_FN(FMSOOBT),
+-	GPIO_FN(FMSOSLD),	GPIO_FN(FMSOCK),
+-
+-	/* SCIFA0 */
+-	GPIO_FN(SCIFA0_SCK),	GPIO_FN(SCIFA0_CTS),	GPIO_FN(SCIFA0_RTS),
+-	GPIO_FN(SCIFA0_RXD),	GPIO_FN(SCIFA0_TXD),
+-
+-	/* SCIFA1 */
+-	GPIO_FN(SCIFA1_CTS),	GPIO_FN(SCIFA1_SCK),
+-	GPIO_FN(SCIFA1_RXD),	GPIO_FN(SCIFA1_TXD),	GPIO_FN(SCIFA1_RTS),
+-
+-	/* SCIFA2 */
+-	GPIO_FN(SCIFA2_SCK_PORT22), /* SCIFA2_SCK Port 22/199 */
+-	GPIO_FN(SCIFA2_SCK_PORT199),
+-	GPIO_FN(SCIFA2_RXD),	GPIO_FN(SCIFA2_TXD),
+-	GPIO_FN(SCIFA2_CTS),	GPIO_FN(SCIFA2_RTS),
+-
+-	/* SCIFA3 */
+-	GPIO_FN(SCIFA3_RTS_PORT105), /* MSEL5CR_8_0 */
+-	GPIO_FN(SCIFA3_SCK_PORT116),
+-	GPIO_FN(SCIFA3_CTS_PORT117),
+-	GPIO_FN(SCIFA3_RXD_PORT174),
+-	GPIO_FN(SCIFA3_TXD_PORT175),
+-
+-	GPIO_FN(SCIFA3_RTS_PORT161), /* MSEL5CR_8_1 */
+-	GPIO_FN(SCIFA3_SCK_PORT158),
+-	GPIO_FN(SCIFA3_CTS_PORT162),
+-	GPIO_FN(SCIFA3_RXD_PORT159),
+-	GPIO_FN(SCIFA3_TXD_PORT160),
+-
+-	/* SCIFA4 */
+-	GPIO_FN(SCIFA4_RXD_PORT12), /* MSEL5CR[12:11] = 00 */
+-	GPIO_FN(SCIFA4_TXD_PORT13),
+-
+-	GPIO_FN(SCIFA4_RXD_PORT204), /* MSEL5CR[12:11] = 01 */
+-	GPIO_FN(SCIFA4_TXD_PORT203),
+-
+-	GPIO_FN(SCIFA4_RXD_PORT94), /* MSEL5CR[12:11] = 10 */
+-	GPIO_FN(SCIFA4_TXD_PORT93),
+-
+-	GPIO_FN(SCIFA4_SCK_PORT21), /* SCIFA4_SCK Port 21/205 */
+-	GPIO_FN(SCIFA4_SCK_PORT205),
+-
+-	/* SCIFA5 */
+-	GPIO_FN(SCIFA5_TXD_PORT20), /* MSEL5CR[15:14] = 00 */
+-	GPIO_FN(SCIFA5_RXD_PORT10),
+-
+-	GPIO_FN(SCIFA5_RXD_PORT207), /* MSEL5CR[15:14] = 01 */
+-	GPIO_FN(SCIFA5_TXD_PORT208),
+-
+-	GPIO_FN(SCIFA5_TXD_PORT91), /* MSEL5CR[15:14] = 10 */
+-	GPIO_FN(SCIFA5_RXD_PORT92),
+-
+-	GPIO_FN(SCIFA5_SCK_PORT23), /* SCIFA5_SCK Port 23/206 */
+-	GPIO_FN(SCIFA5_SCK_PORT206),
+-
+-	/* SCIFA6 */
+-	GPIO_FN(SCIFA6_SCK),	GPIO_FN(SCIFA6_RXD),	GPIO_FN(SCIFA6_TXD),
+-
+-	/* SCIFA7 */
+-	GPIO_FN(SCIFA7_TXD),	GPIO_FN(SCIFA7_RXD),
+-
+-	/* SCIFAB */
+-	GPIO_FN(SCIFB_SCK_PORT190), /* MSEL5CR_17_0 */
+-	GPIO_FN(SCIFB_RXD_PORT191),
+-	GPIO_FN(SCIFB_TXD_PORT192),
+-	GPIO_FN(SCIFB_RTS_PORT186),
+-	GPIO_FN(SCIFB_CTS_PORT187),
+-
+-	GPIO_FN(SCIFB_SCK_PORT2), /* MSEL5CR_17_1 */
+-	GPIO_FN(SCIFB_RXD_PORT3),
+-	GPIO_FN(SCIFB_TXD_PORT4),
+-	GPIO_FN(SCIFB_RTS_PORT172),
+-	GPIO_FN(SCIFB_CTS_PORT173),
+-
+-	/* LCD0 */
+-	GPIO_FN(LCD0_D0),	GPIO_FN(LCD0_D1),	GPIO_FN(LCD0_D2),
+-	GPIO_FN(LCD0_D3),	GPIO_FN(LCD0_D4),	GPIO_FN(LCD0_D5),
+-	GPIO_FN(LCD0_D6),	GPIO_FN(LCD0_D7),	GPIO_FN(LCD0_D8),
+-	GPIO_FN(LCD0_D9),	GPIO_FN(LCD0_D10),	GPIO_FN(LCD0_D11),
+-	GPIO_FN(LCD0_D12),	GPIO_FN(LCD0_D13),	GPIO_FN(LCD0_D14),
+-	GPIO_FN(LCD0_D15),	GPIO_FN(LCD0_D16),	GPIO_FN(LCD0_D17),
+-	GPIO_FN(LCD0_DON),	GPIO_FN(LCD0_VCPWC),	GPIO_FN(LCD0_VEPWC),
+-	GPIO_FN(LCD0_DCK),	GPIO_FN(LCD0_VSYN),
+-	GPIO_FN(LCD0_HSYN),	GPIO_FN(LCD0_DISP),
+-	GPIO_FN(LCD0_WR),	GPIO_FN(LCD0_RD),
+-	GPIO_FN(LCD0_CS),	GPIO_FN(LCD0_RS),
+-
+-	GPIO_FN(LCD0_D18_PORT163),	GPIO_FN(LCD0_D19_PORT162),
+-	GPIO_FN(LCD0_D20_PORT161),	GPIO_FN(LCD0_D21_PORT158),
+-	GPIO_FN(LCD0_D22_PORT160),	GPIO_FN(LCD0_D23_PORT159),
+-	GPIO_FN(LCD0_LCLK_PORT165),	/* MSEL5CR_6_1 */
+-
+-	GPIO_FN(LCD0_D18_PORT40),	GPIO_FN(LCD0_D19_PORT4),
+-	GPIO_FN(LCD0_D20_PORT3),	GPIO_FN(LCD0_D21_PORT2),
+-	GPIO_FN(LCD0_D22_PORT0),	GPIO_FN(LCD0_D23_PORT1),
+-	GPIO_FN(LCD0_LCLK_PORT102),	/* MSEL5CR_6_0 */
+-
+-	/* LCD1 */
+-	GPIO_FN(LCD1_D0),	GPIO_FN(LCD1_D1),	GPIO_FN(LCD1_D2),
+-	GPIO_FN(LCD1_D3),	GPIO_FN(LCD1_D4),	GPIO_FN(LCD1_D5),
+-	GPIO_FN(LCD1_D6),	GPIO_FN(LCD1_D7),	GPIO_FN(LCD1_D8),
+-	GPIO_FN(LCD1_D9),	GPIO_FN(LCD1_D10),	GPIO_FN(LCD1_D11),
+-	GPIO_FN(LCD1_D12),	GPIO_FN(LCD1_D13),	GPIO_FN(LCD1_D14),
+-	GPIO_FN(LCD1_D15),	GPIO_FN(LCD1_D16),	GPIO_FN(LCD1_D17),
+-	GPIO_FN(LCD1_D18),	GPIO_FN(LCD1_D19),	GPIO_FN(LCD1_D20),
+-	GPIO_FN(LCD1_D21),	GPIO_FN(LCD1_D22),	GPIO_FN(LCD1_D23),
+-	GPIO_FN(LCD1_RS),	GPIO_FN(LCD1_RD),	GPIO_FN(LCD1_CS),
+-	GPIO_FN(LCD1_WR),	GPIO_FN(LCD1_DCK),	GPIO_FN(LCD1_DON),
+-	GPIO_FN(LCD1_VCPWC),	GPIO_FN(LCD1_LCLK),	GPIO_FN(LCD1_HSYN),
+-	GPIO_FN(LCD1_VSYN),	GPIO_FN(LCD1_VEPWC),	GPIO_FN(LCD1_DISP),
+-
+-	/* RSPI */
+-	GPIO_FN(RSPI_SSL0_A),	GPIO_FN(RSPI_SSL1_A),	GPIO_FN(RSPI_SSL2_A),
+-	GPIO_FN(RSPI_SSL3_A),	GPIO_FN(RSPI_CK_A),	GPIO_FN(RSPI_MOSI_A),
+-	GPIO_FN(RSPI_MISO_A),
+-
+-	/* VIO CKO */
+-	GPIO_FN(VIO_CKO1),
+-	GPIO_FN(VIO_CKO2),
+-	GPIO_FN(VIO_CKO_1),
+-	GPIO_FN(VIO_CKO),
+-
+-	/* VIO0 */
+-	GPIO_FN(VIO0_D0),	GPIO_FN(VIO0_D1),	GPIO_FN(VIO0_D2),
+-	GPIO_FN(VIO0_D3),	GPIO_FN(VIO0_D4),	GPIO_FN(VIO0_D5),
+-	GPIO_FN(VIO0_D6),	GPIO_FN(VIO0_D7),	GPIO_FN(VIO0_D8),
+-	GPIO_FN(VIO0_D9),	GPIO_FN(VIO0_D10),	GPIO_FN(VIO0_D11),
+-	GPIO_FN(VIO0_D12),	GPIO_FN(VIO0_VD),	GPIO_FN(VIO0_HD),
+-	GPIO_FN(VIO0_CLK),	GPIO_FN(VIO0_FIELD),
+-
+-	GPIO_FN(VIO0_D13_PORT26), /* MSEL5CR_27_0 */
+-	GPIO_FN(VIO0_D14_PORT25),
+-	GPIO_FN(VIO0_D15_PORT24),
+-
+-	GPIO_FN(VIO0_D13_PORT22), /* MSEL5CR_27_1 */
+-	GPIO_FN(VIO0_D14_PORT95),
+-	GPIO_FN(VIO0_D15_PORT96),
+-
+-	/* VIO1 */
+-	GPIO_FN(VIO1_D0),	GPIO_FN(VIO1_D1),	GPIO_FN(VIO1_D2),
+-	GPIO_FN(VIO1_D3),	GPIO_FN(VIO1_D4),	GPIO_FN(VIO1_D5),
+-	GPIO_FN(VIO1_D6),	GPIO_FN(VIO1_D7),	GPIO_FN(VIO1_VD),
+-	GPIO_FN(VIO1_HD),	GPIO_FN(VIO1_CLK),	GPIO_FN(VIO1_FIELD),
+-
+-	/* TPU0 */
+-	GPIO_FN(TPU0TO0),	GPIO_FN(TPU0TO1),	GPIO_FN(TPU0TO3),
+-	GPIO_FN(TPU0TO2_PORT66), /* TPU0TO2 Port 66/202 */
+-	GPIO_FN(TPU0TO2_PORT202),
+-
+-	/* SSP1 0 */
+-	GPIO_FN(STP0_IPD0),	GPIO_FN(STP0_IPD1),	GPIO_FN(STP0_IPD2),
+-	GPIO_FN(STP0_IPD3),	GPIO_FN(STP0_IPD4),	GPIO_FN(STP0_IPD5),
+-	GPIO_FN(STP0_IPD6),	GPIO_FN(STP0_IPD7),	GPIO_FN(STP0_IPEN),
+-	GPIO_FN(STP0_IPCLK),	GPIO_FN(STP0_IPSYNC),
+-
+-	/* SSP1 1 */
+-	GPIO_FN(STP1_IPD1),	GPIO_FN(STP1_IPD2),	GPIO_FN(STP1_IPD3),
+-	GPIO_FN(STP1_IPD4),	GPIO_FN(STP1_IPD5),	GPIO_FN(STP1_IPD6),
+-	GPIO_FN(STP1_IPD7),	GPIO_FN(STP1_IPCLK),	GPIO_FN(STP1_IPSYNC),
+-
+-	GPIO_FN(STP1_IPD0_PORT186), /* MSEL5CR_23_0 */
+-	GPIO_FN(STP1_IPEN_PORT187),
+-
+-	GPIO_FN(STP1_IPD0_PORT194), /* MSEL5CR_23_1 */
+-	GPIO_FN(STP1_IPEN_PORT193),
+-
+-	/* SIM */
+-	GPIO_FN(SIM_RST),	GPIO_FN(SIM_CLK),
+-	GPIO_FN(SIM_D_PORT22), /* SIM_D  Port 22/199 */
+-	GPIO_FN(SIM_D_PORT199),
+-
+-	/* SDHI0 */
+-	GPIO_FN(SDHI0_D0),	GPIO_FN(SDHI0_D1),	GPIO_FN(SDHI0_D2),
+-	GPIO_FN(SDHI0_D3),	GPIO_FN(SDHI0_CD),	GPIO_FN(SDHI0_WP),
+-	GPIO_FN(SDHI0_CMD),	GPIO_FN(SDHI0_CLK),
+-
+-	/* SDHI1 */
+-	GPIO_FN(SDHI1_D0),	GPIO_FN(SDHI1_D1),	GPIO_FN(SDHI1_D2),
+-	GPIO_FN(SDHI1_D3),	GPIO_FN(SDHI1_CD),	GPIO_FN(SDHI1_WP),
+-	GPIO_FN(SDHI1_CMD),	GPIO_FN(SDHI1_CLK),
+-
+-	/* SDHI2 */
+-	GPIO_FN(SDHI2_D0),	GPIO_FN(SDHI2_D1),	GPIO_FN(SDHI2_D2),
+-	GPIO_FN(SDHI2_D3),	GPIO_FN(SDHI2_CLK),	GPIO_FN(SDHI2_CMD),
+-
+-	GPIO_FN(SDHI2_CD_PORT24), /* MSEL5CR_19_0 */
+-	GPIO_FN(SDHI2_WP_PORT25),
+-
+-	GPIO_FN(SDHI2_WP_PORT177), /* MSEL5CR_19_1 */
+-	GPIO_FN(SDHI2_CD_PORT202),
+-
+-	/* MSIOF2 */
+-	GPIO_FN(MSIOF2_TXD),	GPIO_FN(MSIOF2_RXD),	GPIO_FN(MSIOF2_TSCK),
+-	GPIO_FN(MSIOF2_SS2),	GPIO_FN(MSIOF2_TSYNC),	GPIO_FN(MSIOF2_SS1),
+-	GPIO_FN(MSIOF2_MCK1),	GPIO_FN(MSIOF2_MCK0),	GPIO_FN(MSIOF2_RSYNC),
+-	GPIO_FN(MSIOF2_RSCK),
+-
+-	/* KEYSC */
+-	GPIO_FN(KEYIN4),	GPIO_FN(KEYIN5),
+-	GPIO_FN(KEYIN6),	GPIO_FN(KEYIN7),
+-	GPIO_FN(KEYOUT0),	GPIO_FN(KEYOUT1),	GPIO_FN(KEYOUT2),
+-	GPIO_FN(KEYOUT3),	GPIO_FN(KEYOUT4),	GPIO_FN(KEYOUT5),
+-	GPIO_FN(KEYOUT6),	GPIO_FN(KEYOUT7),
+-
+-	GPIO_FN(KEYIN0_PORT43), /* MSEL4CR_18_0 */
+-	GPIO_FN(KEYIN1_PORT44),
+-	GPIO_FN(KEYIN2_PORT45),
+-	GPIO_FN(KEYIN3_PORT46),
+-
+-	GPIO_FN(KEYIN0_PORT58), /* MSEL4CR_18_1 */
+-	GPIO_FN(KEYIN1_PORT57),
+-	GPIO_FN(KEYIN2_PORT56),
+-	GPIO_FN(KEYIN3_PORT55),
+-
+-	/* VOU */
+-	GPIO_FN(DV_D0),		GPIO_FN(DV_D1),		GPIO_FN(DV_D2),
+-	GPIO_FN(DV_D3),		GPIO_FN(DV_D4),		GPIO_FN(DV_D5),
+-	GPIO_FN(DV_D6),		GPIO_FN(DV_D7),		GPIO_FN(DV_D8),
+-	GPIO_FN(DV_D9),		GPIO_FN(DV_D10),	GPIO_FN(DV_D11),
+-	GPIO_FN(DV_D12),	GPIO_FN(DV_D13),	GPIO_FN(DV_D14),
+-	GPIO_FN(DV_D15),	GPIO_FN(DV_CLK),
+-	GPIO_FN(DV_VSYNC),	GPIO_FN(DV_HSYNC),
+-
+-	/* MEMC */
+-	GPIO_FN(MEMC_AD0),	GPIO_FN(MEMC_AD1),	GPIO_FN(MEMC_AD2),
+-	GPIO_FN(MEMC_AD3),	GPIO_FN(MEMC_AD4),	GPIO_FN(MEMC_AD5),
+-	GPIO_FN(MEMC_AD6),	GPIO_FN(MEMC_AD7),	GPIO_FN(MEMC_AD8),
+-	GPIO_FN(MEMC_AD9),	GPIO_FN(MEMC_AD10),	GPIO_FN(MEMC_AD11),
+-	GPIO_FN(MEMC_AD12),	GPIO_FN(MEMC_AD13),	GPIO_FN(MEMC_AD14),
+-	GPIO_FN(MEMC_AD15),	GPIO_FN(MEMC_CS0),	GPIO_FN(MEMC_INT),
+-	GPIO_FN(MEMC_NWE),	GPIO_FN(MEMC_NOE),	GPIO_FN(MEMC_CS1),
+-	GPIO_FN(MEMC_A1),	GPIO_FN(MEMC_ADV),	GPIO_FN(MEMC_DREQ0),
+-	GPIO_FN(MEMC_WAIT),	GPIO_FN(MEMC_DREQ1),	GPIO_FN(MEMC_BUSCLK),
+-	GPIO_FN(MEMC_A0),
+-
+-	/* MMC */
+-	GPIO_FN(MMC0_D0_PORT68),	GPIO_FN(MMC0_D1_PORT69),
+-	GPIO_FN(MMC0_D2_PORT70),	GPIO_FN(MMC0_D3_PORT71),
+-	GPIO_FN(MMC0_D4_PORT72),	GPIO_FN(MMC0_D5_PORT73),
+-	GPIO_FN(MMC0_D6_PORT74),	GPIO_FN(MMC0_D7_PORT75),
+-	GPIO_FN(MMC0_CLK_PORT66),
+-	GPIO_FN(MMC0_CMD_PORT67),	/* MSEL4CR_15_0 */
+-
+-	GPIO_FN(MMC1_D0_PORT149),	GPIO_FN(MMC1_D1_PORT148),
+-	GPIO_FN(MMC1_D2_PORT147),	GPIO_FN(MMC1_D3_PORT146),
+-	GPIO_FN(MMC1_D4_PORT145),	GPIO_FN(MMC1_D5_PORT144),
+-	GPIO_FN(MMC1_D6_PORT143),	GPIO_FN(MMC1_D7_PORT142),
+-	GPIO_FN(MMC1_CLK_PORT103),
+-	GPIO_FN(MMC1_CMD_PORT104),	/* MSEL4CR_15_1 */
+-
+-	/* MSIOF0 */
+-	GPIO_FN(MSIOF0_SS1),	GPIO_FN(MSIOF0_SS2),	GPIO_FN(MSIOF0_RXD),
+-	GPIO_FN(MSIOF0_TXD),	GPIO_FN(MSIOF0_MCK0),	GPIO_FN(MSIOF0_MCK1),
+-	GPIO_FN(MSIOF0_RSYNC),	GPIO_FN(MSIOF0_RSCK),	GPIO_FN(MSIOF0_TSCK),
+-	GPIO_FN(MSIOF0_TSYNC),
+-
+-	/* MSIOF1 */
+-	GPIO_FN(MSIOF1_RSCK),	GPIO_FN(MSIOF1_RSYNC),
+-	GPIO_FN(MSIOF1_MCK0),	GPIO_FN(MSIOF1_MCK1),
+-
+-	GPIO_FN(MSIOF1_SS2_PORT116),	GPIO_FN(MSIOF1_SS1_PORT117),
+-	GPIO_FN(MSIOF1_RXD_PORT118),	GPIO_FN(MSIOF1_TXD_PORT119),
+-	GPIO_FN(MSIOF1_TSYNC_PORT120),
+-	GPIO_FN(MSIOF1_TSCK_PORT121),	/* MSEL4CR_10_0 */
+-
+-	GPIO_FN(MSIOF1_SS1_PORT67),	GPIO_FN(MSIOF1_TSCK_PORT72),
+-	GPIO_FN(MSIOF1_TSYNC_PORT73),	GPIO_FN(MSIOF1_TXD_PORT74),
+-	GPIO_FN(MSIOF1_RXD_PORT75),
+-	GPIO_FN(MSIOF1_SS2_PORT202),	/* MSEL4CR_10_1 */
+-
+-	/* GPIO */
+-	GPIO_FN(GPO0),	GPIO_FN(GPI0),
+-	GPIO_FN(GPO1),	GPIO_FN(GPI1),
+-
+-	/* USB0 */
+-	GPIO_FN(USB0_OCI),	GPIO_FN(USB0_PPON),	GPIO_FN(VBUS),
+-
+-	/* USB1 */
+-	GPIO_FN(USB1_OCI),	GPIO_FN(USB1_PPON),
+-
+-	/* BBIF1 */
+-	GPIO_FN(BBIF1_RXD),	GPIO_FN(BBIF1_TXD),	GPIO_FN(BBIF1_TSYNC),
+-	GPIO_FN(BBIF1_TSCK),	GPIO_FN(BBIF1_RSCK),	GPIO_FN(BBIF1_RSYNC),
+-	GPIO_FN(BBIF1_FLOW),	GPIO_FN(BBIF1_RX_FLOW_N),
+-
+-	/* BBIF2 */
+-	GPIO_FN(BBIF2_TXD2_PORT5), /* MSEL5CR_0_0 */
+-	GPIO_FN(BBIF2_RXD2_PORT60),
+-	GPIO_FN(BBIF2_TSYNC2_PORT6),
+-	GPIO_FN(BBIF2_TSCK2_PORT59),
+-
+-	GPIO_FN(BBIF2_RXD2_PORT90), /* MSEL5CR_0_1 */
+-	GPIO_FN(BBIF2_TXD2_PORT183),
+-	GPIO_FN(BBIF2_TSCK2_PORT89),
+-	GPIO_FN(BBIF2_TSYNC2_PORT184),
+-
+-	/* BSC / FLCTL / PCMCIA */
+-	GPIO_FN(CS0),	GPIO_FN(CS2),	GPIO_FN(CS4),
+-	GPIO_FN(CS5B),	GPIO_FN(CS6A),
+-	GPIO_FN(CS5A_PORT105), /* CS5A PORT 19/105 */
+-	GPIO_FN(CS5A_PORT19),
+-	GPIO_FN(IOIS16), /* ? */
+-
+-	GPIO_FN(A0),	GPIO_FN(A1),	GPIO_FN(A2),	GPIO_FN(A3),
+-	GPIO_FN(A4_FOE),	GPIO_FN(A5_FCDE),	/* share with FLCTL */
+-	GPIO_FN(A6),	GPIO_FN(A7),	GPIO_FN(A8),	GPIO_FN(A9),
+-	GPIO_FN(A10),	GPIO_FN(A11),	GPIO_FN(A12),	GPIO_FN(A13),
+-	GPIO_FN(A14),	GPIO_FN(A15),	GPIO_FN(A16),	GPIO_FN(A17),
+-	GPIO_FN(A18),	GPIO_FN(A19),	GPIO_FN(A20),	GPIO_FN(A21),
+-	GPIO_FN(A22),	GPIO_FN(A23),	GPIO_FN(A24),	GPIO_FN(A25),
+-	GPIO_FN(A26),
+-
+-	GPIO_FN(D0_NAF0),	GPIO_FN(D1_NAF1),	/* share with FLCTL */
+-	GPIO_FN(D2_NAF2),	GPIO_FN(D3_NAF3),	/* share with FLCTL */
+-	GPIO_FN(D4_NAF4),	GPIO_FN(D5_NAF5),	/* share with FLCTL */
+-	GPIO_FN(D6_NAF6),	GPIO_FN(D7_NAF7),	/* share with FLCTL */
+-	GPIO_FN(D8_NAF8),	GPIO_FN(D9_NAF9),	/* share with FLCTL */
+-	GPIO_FN(D10_NAF10),	GPIO_FN(D11_NAF11),	/* share with FLCTL */
+-	GPIO_FN(D12_NAF12),	GPIO_FN(D13_NAF13),	/* share with FLCTL */
+-	GPIO_FN(D14_NAF14),	GPIO_FN(D15_NAF15),	/* share with FLCTL */
+-	GPIO_FN(D16),	GPIO_FN(D17),	GPIO_FN(D18),	GPIO_FN(D19),
+-	GPIO_FN(D20),	GPIO_FN(D21),	GPIO_FN(D22),	GPIO_FN(D23),
+-	GPIO_FN(D24),	GPIO_FN(D25),	GPIO_FN(D26),	GPIO_FN(D27),
+-	GPIO_FN(D28),	GPIO_FN(D29),	GPIO_FN(D30),	GPIO_FN(D31),
+-
+-	GPIO_FN(WE0_FWE),	/* share with FLCTL */
+-	GPIO_FN(WE1),
+-	GPIO_FN(WE2_ICIORD),	/* share with PCMCIA */
+-	GPIO_FN(WE3_ICIOWR),	/* share with PCMCIA */
+-	GPIO_FN(CKO),	GPIO_FN(BS),	GPIO_FN(RDWR),
+-	GPIO_FN(RD_FSC),	/* share with FLCTL */
+-	GPIO_FN(WAIT_PORT177), /* WAIT Port 90/177 */
+-	GPIO_FN(WAIT_PORT90),
+-
+-	GPIO_FN(FCE0),	GPIO_FN(FCE1),	GPIO_FN(FRB), /* FLCTL */
+-
+-	/* IRDA */
+-	GPIO_FN(IRDA_FIRSEL),	GPIO_FN(IRDA_IN),	GPIO_FN(IRDA_OUT),
+-
+-	/* ATAPI */
+-	GPIO_FN(IDE_D0),	GPIO_FN(IDE_D1),	GPIO_FN(IDE_D2),
+-	GPIO_FN(IDE_D3),	GPIO_FN(IDE_D4),	GPIO_FN(IDE_D5),
+-	GPIO_FN(IDE_D6),	GPIO_FN(IDE_D7),	GPIO_FN(IDE_D8),
+-	GPIO_FN(IDE_D9),	GPIO_FN(IDE_D10),	GPIO_FN(IDE_D11),
+-	GPIO_FN(IDE_D12),	GPIO_FN(IDE_D13),	GPIO_FN(IDE_D14),
+-	GPIO_FN(IDE_D15),	GPIO_FN(IDE_A0),	GPIO_FN(IDE_A1),
+-	GPIO_FN(IDE_A2),	GPIO_FN(IDE_CS0),	GPIO_FN(IDE_CS1),
+-	GPIO_FN(IDE_IOWR),	GPIO_FN(IDE_IORD),	GPIO_FN(IDE_IORDY),
+-	GPIO_FN(IDE_INT),	GPIO_FN(IDE_RST),	GPIO_FN(IDE_DIRECTION),
+-	GPIO_FN(IDE_EXBUF_ENB),	GPIO_FN(IDE_IODACK),	GPIO_FN(IDE_IODREQ),
+-
+-	/* RMII */
+-	GPIO_FN(RMII_CRS_DV),	GPIO_FN(RMII_RX_ER),	GPIO_FN(RMII_RXD0),
+-	GPIO_FN(RMII_RXD1),	GPIO_FN(RMII_TX_EN),	GPIO_FN(RMII_TXD0),
+-	GPIO_FN(RMII_MDC),	GPIO_FN(RMII_TXD1),	GPIO_FN(RMII_MDIO),
+-	GPIO_FN(RMII_REF50CK),	GPIO_FN(RMII_REF125CK),	/* for GMII */
+-
+-	/* GEther */
+-	GPIO_FN(ET_TX_CLK),	GPIO_FN(ET_TX_EN),	GPIO_FN(ET_ETXD0),
+-	GPIO_FN(ET_ETXD1),	GPIO_FN(ET_ETXD2),	GPIO_FN(ET_ETXD3),
+-	GPIO_FN(ET_ETXD4),	GPIO_FN(ET_ETXD5), /* for GEther */
+-	GPIO_FN(ET_ETXD6),	GPIO_FN(ET_ETXD7), /* for GEther */
+-	GPIO_FN(ET_COL),	GPIO_FN(ET_TX_ER),	GPIO_FN(ET_RX_CLK),
+-	GPIO_FN(ET_RX_DV),	GPIO_FN(ET_ERXD0),	GPIO_FN(ET_ERXD1),
+-	GPIO_FN(ET_ERXD2),	GPIO_FN(ET_ERXD3),
+-	GPIO_FN(ET_ERXD4),	GPIO_FN(ET_ERXD5), /* for GEther */
+-	GPIO_FN(ET_ERXD6),	GPIO_FN(ET_ERXD7), /* for GEther */
+-	GPIO_FN(ET_RX_ER),	GPIO_FN(ET_CRS),	GPIO_FN(ET_MDC),
+-	GPIO_FN(ET_MDIO),	GPIO_FN(ET_LINK),	GPIO_FN(ET_PHY_INT),
+-	GPIO_FN(ET_WOL),	GPIO_FN(ET_GTX_CLK),
+-
+-	/* DMA0 */
+-	GPIO_FN(DREQ0),	GPIO_FN(DACK0),
+-
+-	/* DMA1 */
+-	GPIO_FN(DREQ1),	GPIO_FN(DACK1),
+-
+-	/* SYSC */
+-	GPIO_FN(RESETOUTS),
+-
+-	/* IRREM */
+-	GPIO_FN(IROUT),
+-
+-	/* LCDC */
+-	GPIO_FN(LCDC0_SELECT),
+-	GPIO_FN(LCDC1_SELECT),
+-
+-	/* SDENC */
+-	GPIO_FN(SDENC_CPG),
+-	GPIO_FN(SDENC_DV_CLKI),
+-
+-	/* SYSC */
+-	GPIO_FN(RESETP_PULLUP),
+-	GPIO_FN(RESETP_PLAIN),
+-
+-	/* DEBUG */
+-	GPIO_FN(EDEBGREQ_PULLDOWN),
+-	GPIO_FN(EDEBGREQ_PULLUP),
+-
+-	GPIO_FN(TRACEAUD_FROM_VIO),
+-	GPIO_FN(TRACEAUD_FROM_LCDC0),
+-	GPIO_FN(TRACEAUD_FROM_MEMC),
+-};
+-
+-static struct pinmux_cfg_reg pinmux_config_regs[] = {
+-	PORTCR(0,	0xe6050000), /* PORT0CR */
+-	PORTCR(1,	0xe6050001), /* PORT1CR */
+-	PORTCR(2,	0xe6050002), /* PORT2CR */
+-	PORTCR(3,	0xe6050003), /* PORT3CR */
+-	PORTCR(4,	0xe6050004), /* PORT4CR */
+-	PORTCR(5,	0xe6050005), /* PORT5CR */
+-	PORTCR(6,	0xe6050006), /* PORT6CR */
+-	PORTCR(7,	0xe6050007), /* PORT7CR */
+-	PORTCR(8,	0xe6050008), /* PORT8CR */
+-	PORTCR(9,	0xe6050009), /* PORT9CR */
+-	PORTCR(10,	0xe605000a), /* PORT10CR */
+-	PORTCR(11,	0xe605000b), /* PORT11CR */
+-	PORTCR(12,	0xe605000c), /* PORT12CR */
+-	PORTCR(13,	0xe605000d), /* PORT13CR */
+-	PORTCR(14,	0xe605000e), /* PORT14CR */
+-	PORTCR(15,	0xe605000f), /* PORT15CR */
+-	PORTCR(16,	0xe6050010), /* PORT16CR */
+-	PORTCR(17,	0xe6050011), /* PORT17CR */
+-	PORTCR(18,	0xe6050012), /* PORT18CR */
+-	PORTCR(19,	0xe6050013), /* PORT19CR */
+-	PORTCR(20,	0xe6050014), /* PORT20CR */
+-	PORTCR(21,	0xe6050015), /* PORT21CR */
+-	PORTCR(22,	0xe6050016), /* PORT22CR */
+-	PORTCR(23,	0xe6050017), /* PORT23CR */
+-	PORTCR(24,	0xe6050018), /* PORT24CR */
+-	PORTCR(25,	0xe6050019), /* PORT25CR */
+-	PORTCR(26,	0xe605001a), /* PORT26CR */
+-	PORTCR(27,	0xe605001b), /* PORT27CR */
+-	PORTCR(28,	0xe605001c), /* PORT28CR */
+-	PORTCR(29,	0xe605001d), /* PORT29CR */
+-	PORTCR(30,	0xe605001e), /* PORT30CR */
+-	PORTCR(31,	0xe605001f), /* PORT31CR */
+-	PORTCR(32,	0xe6050020), /* PORT32CR */
+-	PORTCR(33,	0xe6050021), /* PORT33CR */
+-	PORTCR(34,	0xe6050022), /* PORT34CR */
+-	PORTCR(35,	0xe6050023), /* PORT35CR */
+-	PORTCR(36,	0xe6050024), /* PORT36CR */
+-	PORTCR(37,	0xe6050025), /* PORT37CR */
+-	PORTCR(38,	0xe6050026), /* PORT38CR */
+-	PORTCR(39,	0xe6050027), /* PORT39CR */
+-	PORTCR(40,	0xe6050028), /* PORT40CR */
+-	PORTCR(41,	0xe6050029), /* PORT41CR */
+-	PORTCR(42,	0xe605002a), /* PORT42CR */
+-	PORTCR(43,	0xe605002b), /* PORT43CR */
+-	PORTCR(44,	0xe605002c), /* PORT44CR */
+-	PORTCR(45,	0xe605002d), /* PORT45CR */
+-	PORTCR(46,	0xe605002e), /* PORT46CR */
+-	PORTCR(47,	0xe605002f), /* PORT47CR */
+-	PORTCR(48,	0xe6050030), /* PORT48CR */
+-	PORTCR(49,	0xe6050031), /* PORT49CR */
+-	PORTCR(50,	0xe6050032), /* PORT50CR */
+-	PORTCR(51,	0xe6050033), /* PORT51CR */
+-	PORTCR(52,	0xe6050034), /* PORT52CR */
+-	PORTCR(53,	0xe6050035), /* PORT53CR */
+-	PORTCR(54,	0xe6050036), /* PORT54CR */
+-	PORTCR(55,	0xe6050037), /* PORT55CR */
+-	PORTCR(56,	0xe6050038), /* PORT56CR */
+-	PORTCR(57,	0xe6050039), /* PORT57CR */
+-	PORTCR(58,	0xe605003a), /* PORT58CR */
+-	PORTCR(59,	0xe605003b), /* PORT59CR */
+-	PORTCR(60,	0xe605003c), /* PORT60CR */
+-	PORTCR(61,	0xe605003d), /* PORT61CR */
+-	PORTCR(62,	0xe605003e), /* PORT62CR */
+-	PORTCR(63,	0xe605003f), /* PORT63CR */
+-	PORTCR(64,	0xe6050040), /* PORT64CR */
+-	PORTCR(65,	0xe6050041), /* PORT65CR */
+-	PORTCR(66,	0xe6050042), /* PORT66CR */
+-	PORTCR(67,	0xe6050043), /* PORT67CR */
+-	PORTCR(68,	0xe6050044), /* PORT68CR */
+-	PORTCR(69,	0xe6050045), /* PORT69CR */
+-	PORTCR(70,	0xe6050046), /* PORT70CR */
+-	PORTCR(71,	0xe6050047), /* PORT71CR */
+-	PORTCR(72,	0xe6050048), /* PORT72CR */
+-	PORTCR(73,	0xe6050049), /* PORT73CR */
+-	PORTCR(74,	0xe605004a), /* PORT74CR */
+-	PORTCR(75,	0xe605004b), /* PORT75CR */
+-	PORTCR(76,	0xe605004c), /* PORT76CR */
+-	PORTCR(77,	0xe605004d), /* PORT77CR */
+-	PORTCR(78,	0xe605004e), /* PORT78CR */
+-	PORTCR(79,	0xe605004f), /* PORT79CR */
+-	PORTCR(80,	0xe6050050), /* PORT80CR */
+-	PORTCR(81,	0xe6050051), /* PORT81CR */
+-	PORTCR(82,	0xe6050052), /* PORT82CR */
+-	PORTCR(83,	0xe6050053), /* PORT83CR */
+-
+-	PORTCR(84,	0xe6051054), /* PORT84CR */
+-	PORTCR(85,	0xe6051055), /* PORT85CR */
+-	PORTCR(86,	0xe6051056), /* PORT86CR */
+-	PORTCR(87,	0xe6051057), /* PORT87CR */
+-	PORTCR(88,	0xe6051058), /* PORT88CR */
+-	PORTCR(89,	0xe6051059), /* PORT89CR */
+-	PORTCR(90,	0xe605105a), /* PORT90CR */
+-	PORTCR(91,	0xe605105b), /* PORT91CR */
+-	PORTCR(92,	0xe605105c), /* PORT92CR */
+-	PORTCR(93,	0xe605105d), /* PORT93CR */
+-	PORTCR(94,	0xe605105e), /* PORT94CR */
+-	PORTCR(95,	0xe605105f), /* PORT95CR */
+-	PORTCR(96,	0xe6051060), /* PORT96CR */
+-	PORTCR(97,	0xe6051061), /* PORT97CR */
+-	PORTCR(98,	0xe6051062), /* PORT98CR */
+-	PORTCR(99,	0xe6051063), /* PORT99CR */
+-	PORTCR(100,	0xe6051064), /* PORT100CR */
+-	PORTCR(101,	0xe6051065), /* PORT101CR */
+-	PORTCR(102,	0xe6051066), /* PORT102CR */
+-	PORTCR(103,	0xe6051067), /* PORT103CR */
+-	PORTCR(104,	0xe6051068), /* PORT104CR */
+-	PORTCR(105,	0xe6051069), /* PORT105CR */
+-	PORTCR(106,	0xe605106a), /* PORT106CR */
+-	PORTCR(107,	0xe605106b), /* PORT107CR */
+-	PORTCR(108,	0xe605106c), /* PORT108CR */
+-	PORTCR(109,	0xe605106d), /* PORT109CR */
+-	PORTCR(110,	0xe605106e), /* PORT110CR */
+-	PORTCR(111,	0xe605106f), /* PORT111CR */
+-	PORTCR(112,	0xe6051070), /* PORT112CR */
+-	PORTCR(113,	0xe6051071), /* PORT113CR */
+-	PORTCR(114,	0xe6051072), /* PORT114CR */
+-
+-	PORTCR(115,	0xe6052073), /* PORT115CR */
+-	PORTCR(116,	0xe6052074), /* PORT116CR */
+-	PORTCR(117,	0xe6052075), /* PORT117CR */
+-	PORTCR(118,	0xe6052076), /* PORT118CR */
+-	PORTCR(119,	0xe6052077), /* PORT119CR */
+-	PORTCR(120,	0xe6052078), /* PORT120CR */
+-	PORTCR(121,	0xe6052079), /* PORT121CR */
+-	PORTCR(122,	0xe605207a), /* PORT122CR */
+-	PORTCR(123,	0xe605207b), /* PORT123CR */
+-	PORTCR(124,	0xe605207c), /* PORT124CR */
+-	PORTCR(125,	0xe605207d), /* PORT125CR */
+-	PORTCR(126,	0xe605207e), /* PORT126CR */
+-	PORTCR(127,	0xe605207f), /* PORT127CR */
+-	PORTCR(128,	0xe6052080), /* PORT128CR */
+-	PORTCR(129,	0xe6052081), /* PORT129CR */
+-	PORTCR(130,	0xe6052082), /* PORT130CR */
+-	PORTCR(131,	0xe6052083), /* PORT131CR */
+-	PORTCR(132,	0xe6052084), /* PORT132CR */
+-	PORTCR(133,	0xe6052085), /* PORT133CR */
+-	PORTCR(134,	0xe6052086), /* PORT134CR */
+-	PORTCR(135,	0xe6052087), /* PORT135CR */
+-	PORTCR(136,	0xe6052088), /* PORT136CR */
+-	PORTCR(137,	0xe6052089), /* PORT137CR */
+-	PORTCR(138,	0xe605208a), /* PORT138CR */
+-	PORTCR(139,	0xe605208b), /* PORT139CR */
+-	PORTCR(140,	0xe605208c), /* PORT140CR */
+-	PORTCR(141,	0xe605208d), /* PORT141CR */
+-	PORTCR(142,	0xe605208e), /* PORT142CR */
+-	PORTCR(143,	0xe605208f), /* PORT143CR */
+-	PORTCR(144,	0xe6052090), /* PORT144CR */
+-	PORTCR(145,	0xe6052091), /* PORT145CR */
+-	PORTCR(146,	0xe6052092), /* PORT146CR */
+-	PORTCR(147,	0xe6052093), /* PORT147CR */
+-	PORTCR(148,	0xe6052094), /* PORT148CR */
+-	PORTCR(149,	0xe6052095), /* PORT149CR */
+-	PORTCR(150,	0xe6052096), /* PORT150CR */
+-	PORTCR(151,	0xe6052097), /* PORT151CR */
+-	PORTCR(152,	0xe6052098), /* PORT152CR */
+-	PORTCR(153,	0xe6052099), /* PORT153CR */
+-	PORTCR(154,	0xe605209a), /* PORT154CR */
+-	PORTCR(155,	0xe605209b), /* PORT155CR */
+-	PORTCR(156,	0xe605209c), /* PORT156CR */
+-	PORTCR(157,	0xe605209d), /* PORT157CR */
+-	PORTCR(158,	0xe605209e), /* PORT158CR */
+-	PORTCR(159,	0xe605209f), /* PORT159CR */
+-	PORTCR(160,	0xe60520a0), /* PORT160CR */
+-	PORTCR(161,	0xe60520a1), /* PORT161CR */
+-	PORTCR(162,	0xe60520a2), /* PORT162CR */
+-	PORTCR(163,	0xe60520a3), /* PORT163CR */
+-	PORTCR(164,	0xe60520a4), /* PORT164CR */
+-	PORTCR(165,	0xe60520a5), /* PORT165CR */
+-	PORTCR(166,	0xe60520a6), /* PORT166CR */
+-	PORTCR(167,	0xe60520a7), /* PORT167CR */
+-	PORTCR(168,	0xe60520a8), /* PORT168CR */
+-	PORTCR(169,	0xe60520a9), /* PORT169CR */
+-	PORTCR(170,	0xe60520aa), /* PORT170CR */
+-	PORTCR(171,	0xe60520ab), /* PORT171CR */
+-	PORTCR(172,	0xe60520ac), /* PORT172CR */
+-	PORTCR(173,	0xe60520ad), /* PORT173CR */
+-	PORTCR(174,	0xe60520ae), /* PORT174CR */
+-	PORTCR(175,	0xe60520af), /* PORT175CR */
+-	PORTCR(176,	0xe60520b0), /* PORT176CR */
+-	PORTCR(177,	0xe60520b1), /* PORT177CR */
+-	PORTCR(178,	0xe60520b2), /* PORT178CR */
+-	PORTCR(179,	0xe60520b3), /* PORT179CR */
+-	PORTCR(180,	0xe60520b4), /* PORT180CR */
+-	PORTCR(181,	0xe60520b5), /* PORT181CR */
+-	PORTCR(182,	0xe60520b6), /* PORT182CR */
+-	PORTCR(183,	0xe60520b7), /* PORT183CR */
+-	PORTCR(184,	0xe60520b8), /* PORT184CR */
+-	PORTCR(185,	0xe60520b9), /* PORT185CR */
+-	PORTCR(186,	0xe60520ba), /* PORT186CR */
+-	PORTCR(187,	0xe60520bb), /* PORT187CR */
+-	PORTCR(188,	0xe60520bc), /* PORT188CR */
+-	PORTCR(189,	0xe60520bd), /* PORT189CR */
+-	PORTCR(190,	0xe60520be), /* PORT190CR */
+-	PORTCR(191,	0xe60520bf), /* PORT191CR */
+-	PORTCR(192,	0xe60520c0), /* PORT192CR */
+-	PORTCR(193,	0xe60520c1), /* PORT193CR */
+-	PORTCR(194,	0xe60520c2), /* PORT194CR */
+-	PORTCR(195,	0xe60520c3), /* PORT195CR */
+-	PORTCR(196,	0xe60520c4), /* PORT196CR */
+-	PORTCR(197,	0xe60520c5), /* PORT197CR */
+-	PORTCR(198,	0xe60520c6), /* PORT198CR */
+-	PORTCR(199,	0xe60520c7), /* PORT199CR */
+-	PORTCR(200,	0xe60520c8), /* PORT200CR */
+-	PORTCR(201,	0xe60520c9), /* PORT201CR */
+-	PORTCR(202,	0xe60520ca), /* PORT202CR */
+-	PORTCR(203,	0xe60520cb), /* PORT203CR */
+-	PORTCR(204,	0xe60520cc), /* PORT204CR */
+-	PORTCR(205,	0xe60520cd), /* PORT205CR */
+-	PORTCR(206,	0xe60520ce), /* PORT206CR */
+-	PORTCR(207,	0xe60520cf), /* PORT207CR */
+-	PORTCR(208,	0xe60520d0), /* PORT208CR */
+-	PORTCR(209,	0xe60520d1), /* PORT209CR */
+-
+-	PORTCR(210,	0xe60530d2), /* PORT210CR */
+-	PORTCR(211,	0xe60530d3), /* PORT211CR */
+-
+-	{ PINMUX_CFG_REG("MSEL1CR", 0xe605800c, 32, 1) {
+-			MSEL1CR_31_0,	MSEL1CR_31_1,
+-			MSEL1CR_30_0,	MSEL1CR_30_1,
+-			MSEL1CR_29_0,	MSEL1CR_29_1,
+-			MSEL1CR_28_0,	MSEL1CR_28_1,
+-			MSEL1CR_27_0,	MSEL1CR_27_1,
+-			MSEL1CR_26_0,	MSEL1CR_26_1,
+-			0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+-			0, 0, 0, 0, 0, 0, 0, 0,
+-			MSEL1CR_16_0,	MSEL1CR_16_1,
+-			MSEL1CR_15_0,	MSEL1CR_15_1,
+-			MSEL1CR_14_0,	MSEL1CR_14_1,
+-			MSEL1CR_13_0,	MSEL1CR_13_1,
+-			MSEL1CR_12_0,	MSEL1CR_12_1,
+-			0, 0, 0, 0,
+-			MSEL1CR_9_0,	MSEL1CR_9_1,
+-			0, 0,
+-			MSEL1CR_7_0,	MSEL1CR_7_1,
+-			MSEL1CR_6_0,	MSEL1CR_6_1,
+-			MSEL1CR_5_0,	MSEL1CR_5_1,
+-			MSEL1CR_4_0,	MSEL1CR_4_1,
+-			MSEL1CR_3_0,	MSEL1CR_3_1,
+-			MSEL1CR_2_0,	MSEL1CR_2_1,
+-			0, 0,
+-			MSEL1CR_0_0,	MSEL1CR_0_1,
+-		}
+-	},
+-	{ PINMUX_CFG_REG("MSEL3CR", 0xE6058020, 32, 1) {
+-			0, 0, 0, 0, 0, 0, 0, 0,
+-			0, 0, 0, 0, 0, 0, 0, 0,
+-			0, 0, 0, 0, 0, 0, 0, 0,
+-			0, 0, 0, 0, 0, 0, 0, 0,
+-			MSEL3CR_15_0,	MSEL3CR_15_1,
+-			0, 0, 0, 0, 0, 0, 0, 0,
+-			0, 0, 0, 0, 0, 0, 0, 0,
+-			MSEL3CR_6_0,	MSEL3CR_6_1,
+-			0, 0, 0, 0, 0, 0, 0, 0,
+-			0, 0, 0, 0,
+-			}
+-	},
+-	{ PINMUX_CFG_REG("MSEL4CR", 0xE6058024, 32, 1) {
+-			0, 0, 0, 0, 0, 0, 0, 0,
+-			0, 0, 0, 0, 0, 0, 0, 0,
+-			0, 0, 0, 0, 0, 0, 0, 0,
+-			MSEL4CR_19_0,	MSEL4CR_19_1,
+-			MSEL4CR_18_0,	MSEL4CR_18_1,
+-			0, 0, 0, 0,
+-			MSEL4CR_15_0,	MSEL4CR_15_1,
+-			0, 0, 0, 0, 0, 0, 0, 0,
+-			MSEL4CR_10_0,	MSEL4CR_10_1,
+-			0, 0, 0, 0, 0, 0,
+-			MSEL4CR_6_0,	MSEL4CR_6_1,
+-			0, 0,
+-			MSEL4CR_4_0,	MSEL4CR_4_1,
+-			0, 0, 0, 0,
+-			MSEL4CR_1_0,	MSEL4CR_1_1,
+-			0, 0,
+-		}
+-	},
+-	{ PINMUX_CFG_REG("MSEL5CR", 0xE6058028, 32, 1) {
+-			MSEL5CR_31_0,	MSEL5CR_31_1,
+-			MSEL5CR_30_0,	MSEL5CR_30_1,
+-			MSEL5CR_29_0,	MSEL5CR_29_1,
+-			0, 0,
+-			MSEL5CR_27_0,	MSEL5CR_27_1,
+-			0, 0,
+-			MSEL5CR_25_0,	MSEL5CR_25_1,
+-			0, 0,
+-			MSEL5CR_23_0,	MSEL5CR_23_1,
+-			0, 0,
+-			MSEL5CR_21_0,	MSEL5CR_21_1,
+-			0, 0,
+-			MSEL5CR_19_0,	MSEL5CR_19_1,
+-			0, 0,
+-			MSEL5CR_17_0,	MSEL5CR_17_1,
+-			0, 0,
+-			MSEL5CR_15_0,	MSEL5CR_15_1,
+-			MSEL5CR_14_0,	MSEL5CR_14_1,
+-			MSEL5CR_13_0,	MSEL5CR_13_1,
+-			MSEL5CR_12_0,	MSEL5CR_12_1,
+-			MSEL5CR_11_0,	MSEL5CR_11_1,
+-			MSEL5CR_10_0,	MSEL5CR_10_1,
+-			0, 0,
+-			MSEL5CR_8_0,	MSEL5CR_8_1,
+-			MSEL5CR_7_0,	MSEL5CR_7_1,
+-			MSEL5CR_6_0,	MSEL5CR_6_1,
+-			MSEL5CR_5_0,	MSEL5CR_5_1,
+-			MSEL5CR_4_0,	MSEL5CR_4_1,
+-			MSEL5CR_3_0,	MSEL5CR_3_1,
+-			MSEL5CR_2_0,	MSEL5CR_2_1,
+-			0, 0,
+-			MSEL5CR_0_0,	MSEL5CR_0_1,
+-		}
+-	},
+-	{ },
+-};
+-
+-static struct pinmux_data_reg pinmux_data_regs[] = {
+-	{ PINMUX_DATA_REG("PORTL031_000DR", 0xe6054800, 32) {
+-		PORT31_DATA,	PORT30_DATA,	PORT29_DATA,	PORT28_DATA,
+-		PORT27_DATA,	PORT26_DATA,	PORT25_DATA,	PORT24_DATA,
+-		PORT23_DATA,	PORT22_DATA,	PORT21_DATA,	PORT20_DATA,
+-		PORT19_DATA,	PORT18_DATA,	PORT17_DATA,	PORT16_DATA,
+-		PORT15_DATA,	PORT14_DATA,	PORT13_DATA,	PORT12_DATA,
+-		PORT11_DATA,	PORT10_DATA,	PORT9_DATA,	PORT8_DATA,
+-		PORT7_DATA,	PORT6_DATA,	PORT5_DATA,	PORT4_DATA,
+-		PORT3_DATA,	PORT2_DATA,	PORT1_DATA,	PORT0_DATA }
+-	},
+-	{ PINMUX_DATA_REG("PORTL063_032DR", 0xe6054804, 32) {
+-		PORT63_DATA,	PORT62_DATA,	PORT61_DATA,	PORT60_DATA,
+-		PORT59_DATA,	PORT58_DATA,	PORT57_DATA,	PORT56_DATA,
+-		PORT55_DATA,	PORT54_DATA,	PORT53_DATA,	PORT52_DATA,
+-		PORT51_DATA,	PORT50_DATA,	PORT49_DATA,	PORT48_DATA,
+-		PORT47_DATA,	PORT46_DATA,	PORT45_DATA,	PORT44_DATA,
+-		PORT43_DATA,	PORT42_DATA,	PORT41_DATA,	PORT40_DATA,
+-		PORT39_DATA,	PORT38_DATA,	PORT37_DATA,	PORT36_DATA,
+-		PORT35_DATA,	PORT34_DATA,	PORT33_DATA,	PORT32_DATA }
+-	},
+-	{ PINMUX_DATA_REG("PORTL095_064DR", 0xe6054808, 32) {
+-		0, 0, 0, 0,
+-		0, 0, 0, 0,
+-		0, 0, 0, 0,
+-		PORT83_DATA,	PORT82_DATA,	PORT81_DATA,	PORT80_DATA,
+-		PORT79_DATA,	PORT78_DATA,	PORT77_DATA,	PORT76_DATA,
+-		PORT75_DATA,	PORT74_DATA,	PORT73_DATA,	PORT72_DATA,
+-		PORT71_DATA,	PORT70_DATA,	PORT69_DATA,	PORT68_DATA,
+-		PORT67_DATA,	PORT66_DATA,	PORT65_DATA,	PORT64_DATA }
+-	},
+-	{ PINMUX_DATA_REG("PORTD095_064DR", 0xe6055808, 32) {
+-		PORT95_DATA,	PORT94_DATA,	PORT93_DATA,	PORT92_DATA,
+-		PORT91_DATA,	PORT90_DATA,	PORT89_DATA,	PORT88_DATA,
+-		PORT87_DATA,	PORT86_DATA,	PORT85_DATA,	PORT84_DATA,
+-		0, 0, 0, 0,
+-		0, 0, 0, 0,
+-		0, 0, 0, 0,
+-		0, 0, 0, 0,
+-		0, 0, 0, 0 }
+-	},
+-	{ PINMUX_DATA_REG("PORTD127_096DR", 0xe605580c, 32) {
+-		0, 0, 0, 0,
+-		0, 0, 0, 0,
+-		0, 0, 0, 0,
+-		0,		PORT114_DATA,	PORT113_DATA,	PORT112_DATA,
+-		PORT111_DATA,	PORT110_DATA,	PORT109_DATA,	PORT108_DATA,
+-		PORT107_DATA,	PORT106_DATA,	PORT105_DATA,	PORT104_DATA,
+-		PORT103_DATA,	PORT102_DATA,	PORT101_DATA,	PORT100_DATA,
+-		PORT99_DATA,	PORT98_DATA,	PORT97_DATA,	PORT96_DATA }
+-	},
+-	{ PINMUX_DATA_REG("PORTR127_096DR", 0xe605680C, 32) {
+-		PORT127_DATA,	PORT126_DATA,	PORT125_DATA,	PORT124_DATA,
+-		PORT123_DATA,	PORT122_DATA,	PORT121_DATA,	PORT120_DATA,
+-		PORT119_DATA,	PORT118_DATA,	PORT117_DATA,	PORT116_DATA,
+-		PORT115_DATA,	0, 0, 0,
+-		0, 0, 0, 0,
+-		0, 0, 0, 0,
+-		0, 0, 0, 0,
+-		0, 0, 0, 0 }
+-	},
+-	{ PINMUX_DATA_REG("PORTR159_128DR", 0xe6056810, 32) {
+-		PORT159_DATA,	PORT158_DATA,	PORT157_DATA,	PORT156_DATA,
+-		PORT155_DATA,	PORT154_DATA,	PORT153_DATA,	PORT152_DATA,
+-		PORT151_DATA,	PORT150_DATA,	PORT149_DATA,	PORT148_DATA,
+-		PORT147_DATA,	PORT146_DATA,	PORT145_DATA,	PORT144_DATA,
+-		PORT143_DATA,	PORT142_DATA,	PORT141_DATA,	PORT140_DATA,
+-		PORT139_DATA,	PORT138_DATA,	PORT137_DATA,	PORT136_DATA,
+-		PORT135_DATA,	PORT134_DATA,	PORT133_DATA,	PORT132_DATA,
+-		PORT131_DATA,	PORT130_DATA,	PORT129_DATA,	PORT128_DATA }
+-	},
+-	{ PINMUX_DATA_REG("PORTR191_160DR", 0xe6056814, 32) {
+-		PORT191_DATA,	PORT190_DATA,	PORT189_DATA,	PORT188_DATA,
+-		PORT187_DATA,	PORT186_DATA,	PORT185_DATA,	PORT184_DATA,
+-		PORT183_DATA,	PORT182_DATA,	PORT181_DATA,	PORT180_DATA,
+-		PORT179_DATA,	PORT178_DATA,	PORT177_DATA,	PORT176_DATA,
+-		PORT175_DATA,	PORT174_DATA,	PORT173_DATA,	PORT172_DATA,
+-		PORT171_DATA,	PORT170_DATA,	PORT169_DATA,	PORT168_DATA,
+-		PORT167_DATA,	PORT166_DATA,	PORT165_DATA,	PORT164_DATA,
+-		PORT163_DATA,	PORT162_DATA,	PORT161_DATA,	PORT160_DATA }
+-	},
+-	{ PINMUX_DATA_REG("PORTR223_192DR", 0xe6056818, 32) {
+-		0, 0, 0, 0,
+-		0, 0, 0, 0,
+-		0, 0, 0, 0,
+-		0, 0,				PORT209_DATA,	PORT208_DATA,
+-		PORT207_DATA,	PORT206_DATA,	PORT205_DATA,	PORT204_DATA,
+-		PORT203_DATA,	PORT202_DATA,	PORT201_DATA,	PORT200_DATA,
+-		PORT199_DATA,	PORT198_DATA,	PORT197_DATA,	PORT196_DATA,
+-		PORT195_DATA,	PORT194_DATA,	PORT193_DATA,	PORT192_DATA }
+-	},
+-	{ PINMUX_DATA_REG("PORTU223_192DR", 0xe6057818, 32) {
+-		0, 0, 0, 0,
+-		0, 0, 0, 0,
+-		0, 0, 0, 0,
+-		PORT211_DATA,	PORT210_DATA, 0, 0,
+-		0, 0, 0, 0,
+-		0, 0, 0, 0,
+-		0, 0, 0, 0,
+-		0, 0, 0, 0 }
+-	},
+-	{ },
+-};
+-
+-static struct pinmux_irq pinmux_irqs[] = {
+-	PINMUX_IRQ(evt2irq(0x0200), PORT2_FN0,	 PORT13_FN0),	/* IRQ0A */
+-	PINMUX_IRQ(evt2irq(0x0220), PORT20_FN0),		/* IRQ1A */
+-	PINMUX_IRQ(evt2irq(0x0240), PORT11_FN0,	 PORT12_FN0),	/* IRQ2A */
+-	PINMUX_IRQ(evt2irq(0x0260), PORT10_FN0,	 PORT14_FN0),	/* IRQ3A */
+-	PINMUX_IRQ(evt2irq(0x0280), PORT15_FN0,	 PORT172_FN0),	/* IRQ4A */
+-	PINMUX_IRQ(evt2irq(0x02A0), PORT0_FN0,	 PORT1_FN0),	/* IRQ5A */
+-	PINMUX_IRQ(evt2irq(0x02C0), PORT121_FN0, PORT173_FN0),	/* IRQ6A */
+-	PINMUX_IRQ(evt2irq(0x02E0), PORT120_FN0, PORT209_FN0),	/* IRQ7A */
+-	PINMUX_IRQ(evt2irq(0x0300), PORT119_FN0),		/* IRQ8A */
+-	PINMUX_IRQ(evt2irq(0x0320), PORT118_FN0, PORT210_FN0),	/* IRQ9A */
+-	PINMUX_IRQ(evt2irq(0x0340), PORT19_FN0),		/* IRQ10A */
+-	PINMUX_IRQ(evt2irq(0x0360), PORT104_FN0),		/* IRQ11A */
+-	PINMUX_IRQ(evt2irq(0x0380), PORT42_FN0,	 PORT97_FN0),	/* IRQ12A */
+-	PINMUX_IRQ(evt2irq(0x03A0), PORT64_FN0,	 PORT98_FN0),	/* IRQ13A */
+-	PINMUX_IRQ(evt2irq(0x03C0), PORT63_FN0,	 PORT99_FN0),	/* IRQ14A */
+-	PINMUX_IRQ(evt2irq(0x03E0), PORT62_FN0,	 PORT100_FN0),	/* IRQ15A */
+-	PINMUX_IRQ(evt2irq(0x3200), PORT68_FN0,	 PORT211_FN0),	/* IRQ16A */
+-	PINMUX_IRQ(evt2irq(0x3220), PORT69_FN0),		/* IRQ17A */
+-	PINMUX_IRQ(evt2irq(0x3240), PORT70_FN0),		/* IRQ18A */
+-	PINMUX_IRQ(evt2irq(0x3260), PORT71_FN0),		/* IRQ19A */
+-	PINMUX_IRQ(evt2irq(0x3280), PORT67_FN0),		/* IRQ20A */
+-	PINMUX_IRQ(evt2irq(0x32A0), PORT202_FN0),		/* IRQ21A */
+-	PINMUX_IRQ(evt2irq(0x32C0), PORT95_FN0),		/* IRQ22A */
+-	PINMUX_IRQ(evt2irq(0x32E0), PORT96_FN0),		/* IRQ23A */
+-	PINMUX_IRQ(evt2irq(0x3300), PORT180_FN0),		/* IRQ24A */
+-	PINMUX_IRQ(evt2irq(0x3320), PORT38_FN0),		/* IRQ25A */
+-	PINMUX_IRQ(evt2irq(0x3340), PORT58_FN0,	 PORT81_FN0),	/* IRQ26A */
+-	PINMUX_IRQ(evt2irq(0x3360), PORT57_FN0,	 PORT168_FN0),	/* IRQ27A */
+-	PINMUX_IRQ(evt2irq(0x3380), PORT56_FN0,	 PORT169_FN0),	/* IRQ28A */
+-	PINMUX_IRQ(evt2irq(0x33A0), PORT50_FN0,	 PORT170_FN0),	/* IRQ29A */
+-	PINMUX_IRQ(evt2irq(0x33C0), PORT49_FN0,	 PORT171_FN0),	/* IRQ30A */
+-	PINMUX_IRQ(evt2irq(0x33E0), PORT41_FN0,	 PORT167_FN0),	/* IRQ31A */
+-};
+-
+-static struct pinmux_info r8a7740_pinmux_info = {
+-	.name		= "r8a7740_pfc",
+-	.reserved_id	= PINMUX_RESERVED,
+-	.data		= { PINMUX_DATA_BEGIN,
+-			    PINMUX_DATA_END },
+-	.input		= { PINMUX_INPUT_BEGIN,
+-			    PINMUX_INPUT_END },
+-	.input_pu	= { PINMUX_INPUT_PULLUP_BEGIN,
+-			    PINMUX_INPUT_PULLUP_END },
+-	.input_pd	= { PINMUX_INPUT_PULLDOWN_BEGIN,
+-			    PINMUX_INPUT_PULLDOWN_END },
+-	.output		= { PINMUX_OUTPUT_BEGIN,
+-			    PINMUX_OUTPUT_END },
+-	.mark		= { PINMUX_MARK_BEGIN,
+-			    PINMUX_MARK_END },
+-	.function	= { PINMUX_FUNCTION_BEGIN,
+-			    PINMUX_FUNCTION_END },
+-
+-	.first_gpio	= GPIO_PORT0,
+-	.last_gpio	= GPIO_FN_TRACEAUD_FROM_MEMC,
+-
+-	.gpios		= pinmux_gpios,
+-	.cfg_regs	= pinmux_config_regs,
+-	.data_regs	= pinmux_data_regs,
+-
+-	.gpio_data	= pinmux_data,
+-	.gpio_data_size	= ARRAY_SIZE(pinmux_data),
+-
+-	.gpio_irq	= pinmux_irqs,
+-	.gpio_irq_size	= ARRAY_SIZE(pinmux_irqs),
+-};
+-
+-void r8a7740_pinmux_init(void)
+-{
+-	register_pinmux(&r8a7740_pinmux_info);
+-}
 -- 
-2.34.1
+2.43.0
 
