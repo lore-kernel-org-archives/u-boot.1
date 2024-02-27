@@ -4,64 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43291C54798
-	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 13:44:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAC35C54798
+	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 13:44:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A775587F17;
-	Tue, 27 Feb 2024 14:44:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 28E4287FEF;
+	Tue, 27 Feb 2024 14:44:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="SEAickLw";
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="nsM0BcQ/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 29D2987FAA; Tue, 27 Feb 2024 14:44:16 +0100 (CET)
+ id A7D1E87FEE; Tue, 27 Feb 2024 14:44:27 +0100 (CET)
 Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
  [68.232.154.123])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 902B687EEE
- for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 14:44:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 54AAD87FF5
+ for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 14:44:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=microchip.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=Mihai.Sain@microchip.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1709041453; x=1740577453;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=UbIwXvhQpfvFz197xVxjGPr9qtNKW5QwfiYR8M21I+0=;
- b=SEAickLw3QrqEx06Ubil9RoW4MGre5QnERJEz3SuyU279n1z6GWChn3p
- IKAaqfX8KArt+4fFCX+HuvkkmZck1ZigeLdsytmOI3AGAGMWyXaFPCt1a
- MlB3xAW9UWkvRlYMBGtG96W+MEt+vM2PxwpdwmUsVd178vJDTMi40uTk/
- DDgQ324bgZys3pORxE65RIO89t/OsETh3R3ypROFr9x7MMUR9Kb5YyT6c
- gKSoVOLlybKKl4xfpTPlnECpSM3QagC9d1XaLnf4X6iV1QUnua8qwWCVI
- EVORgL35XjdLGTX8K8WzeXNcBQwwDjwKVa/MH4q2LKBnETl9FUYPpMqH6 A==;
-X-CSE-ConnectionGUID: 6tAf7EvWSfmfwdRag0jHrQ==
-X-CSE-MsgGUID: /UQX/LJWQuqqRuxZkLvj8A==
-X-IronPort-AV: E=Sophos;i="6.06,187,1705388400"; d="scan'208";a="184160783"
+ t=1709041465; x=1740577465;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=s9YSV2iSBIpwQHtXo4h1zezLc3X3a2f/lBlNy/bF0AM=;
+ b=nsM0BcQ/DGEvj4wue8fhsemHq2bpsunuDLqb3zM0OOhDtzFODsqzLLxc
+ x0UqVt2aSnCLELmu+HavFdOhedPFrItis37X0X2xN0c0GFXVKq4ZAwG7U
+ 2aaY5ooW1iM4yy6+0SU9ykrN5VyDsULm1ehUXCO9Kw3PBoX9W4bRhzXAD
+ AkjFdNaoA1DCC0nRJ0URkyG23luRipS27NnLYe5zXCZW7uUCtiwy7R9XS
+ yIvBl8iKVIyccOHbk4TAGcpo6aXdacR6Xc+B66gjktaTW10vYWvlQvKZ6
+ ZgF5YnthLtCt4mZR6viX30RZYgKPkS6YW5V3My1lUtJjXdjZ7Zvklmwls w==;
+X-CSE-ConnectionGUID: rMT+by1bQ1ie1abVCT+3tw==
+X-CSE-MsgGUID: 6/R8JGtZSY+ibOGuL93sgQ==
+X-IronPort-AV: E=Sophos;i="6.06,187,1705388400"; d="scan'208";a="17418740"
 X-Amp-Result: SKIPPED(no attachment in message)
 Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa6.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 27 Feb 2024 06:44:11 -0700
+ by esa2.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 27 Feb 2024 06:44:23 -0700
 Received: from chn-vm-ex03.mchp-main.com (10.10.85.151) by
- chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server
+ chn-vm-ex01.mchp-main.com (10.10.85.143) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35; Tue, 27 Feb 2024 06:44:10 -0700
+ 15.1.2507.35; Tue, 27 Feb 2024 06:44:07 -0700
 Received: from archlinux.microchip.com (10.10.85.11) by
  chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server id
- 15.1.2507.35 via Frontend Transport; Tue, 27 Feb 2024 06:44:09 -0700
+ 15.1.2507.35 via Frontend Transport; Tue, 27 Feb 2024 06:44:06 -0700
 From: Mihai Sain <mihai.sain@microchip.com>
 To: <eugen.hristev@collabora.com>, <u-boot@lists.denx.de>
 CC: <cristian.birsan@microchip.com>, Mihai Sain <mihai.sain@microchip.com>
-Subject: [PATCH v2 2/4] ARM: dts: at91: sama7g54_curiosity: Add initial device
- tree of the board
-Date: Tue, 27 Feb 2024 15:44:01 +0200
-Message-ID: <20240227134403.10686-3-mihai.sain@microchip.com>
+Subject: [PATCH v2 0/4] Add initial support for Microchip SAMA7G54 Curiosity
+ board
+Date: Tue, 27 Feb 2024 15:43:59 +0200
+Message-ID: <20240227134403.10686-1-mihai.sain@microchip.com>
 X-Mailer: git-send-email 2.44.0
-In-Reply-To: <20240227134403.10686-1-mihai.sain@microchip.com>
-References: <20240227134403.10686-1-mihai.sain@microchip.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -81,344 +79,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add initial device tree of the SAMA7G54 Curiosity board.
+This patch series adds initial support for Microchip SAMA7G54 Curiosity board.
 
-Signed-off-by: Mihai Sain <mihai.sain@microchip.com>
----
+Changes in v2:
+--------------
+
+* Update flexcom 10 node in order to match previous flexcom definitions.
+* Sort in alphabetical order all nodes and pinctrl.
+* Remove status okay from leds, nand, eeprom, flash.
+* Add CONFIG_ENV_SIZE=0x4000 in mmc defconfig.
+* Set CONFIG_ENV_SECT_SIZE=0x10000 in qspiflash defconfig.
+
+Mihai Sain (4):
+  ARM: dts: at91: sama7g5: Add flexcom 10 node
+  ARM: dts: at91: sama7g54_curiosity: Add initial device tree of the board
+  board: at91: sama7g54_curiosity: Add initial board support
+  configs: at91: sama7g54_curiosity: Add initial default configs
+
  arch/arm/dts/Makefile                         |   3 +
  .../dts/at91-sama7g54_curiosity-u-boot.dtsi   |  59 +++++
  arch/arm/dts/at91-sama7g54_curiosity.dts      | 242 ++++++++++++++++++
- 3 files changed, 304 insertions(+)
+ arch/arm/dts/sama7g5.dtsi                     |  24 ++
+ arch/arm/mach-at91/Kconfig                    |  10 +
+ board/atmel/sama7g54_curiosity/Kconfig        |  15 ++
+ board/atmel/sama7g54_curiosity/MAINTAINERS    |   9 +
+ board/atmel/sama7g54_curiosity/Makefile       |   7 +
+ .../sama7g54_curiosity/sama7g54_curiosity.c   |  36 +++
+ configs/sama7g54_curiosity_mmc_defconfig      | 123 +++++++++
+ .../sama7g54_curiosity_nandflash_defconfig    | 122 +++++++++
+ .../sama7g54_curiosity_qspiflash_defconfig    | 122 +++++++++
+ include/configs/sama7g54_curiosity.h          |  17 ++
+ 13 files changed, 789 insertions(+)
  create mode 100644 arch/arm/dts/at91-sama7g54_curiosity-u-boot.dtsi
  create mode 100644 arch/arm/dts/at91-sama7g54_curiosity.dts
+ create mode 100644 board/atmel/sama7g54_curiosity/Kconfig
+ create mode 100644 board/atmel/sama7g54_curiosity/MAINTAINERS
+ create mode 100644 board/atmel/sama7g54_curiosity/Makefile
+ create mode 100644 board/atmel/sama7g54_curiosity/sama7g54_curiosity.c
+ create mode 100644 configs/sama7g54_curiosity_mmc_defconfig
+ create mode 100644 configs/sama7g54_curiosity_nandflash_defconfig
+ create mode 100644 configs/sama7g54_curiosity_qspiflash_defconfig
+ create mode 100644 include/configs/sama7g54_curiosity.h
 
-diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index d9725030d5..45069047ad 100644
---- a/arch/arm/dts/Makefile
-+++ b/arch/arm/dts/Makefile
-@@ -1266,6 +1266,9 @@ dtb-$(CONFIG_TARGET_OMAP4_SDP4430) += \
- dtb-$(CONFIG_TARGET_SAMA7G5EK) += \
- 	at91-sama7g5ek.dtb
- 
-+dtb-$(CONFIG_TARGET_SAMA7G54_CURIOSITY) += \
-+	at91-sama7g54_curiosity.dtb
-+
- dtb-$(CONFIG_TARGET_SAMA5D2_PTC_EK) += \
- 	at91-sama5d2_ptc_ek.dtb
- 
-diff --git a/arch/arm/dts/at91-sama7g54_curiosity-u-boot.dtsi b/arch/arm/dts/at91-sama7g54_curiosity-u-boot.dtsi
-new file mode 100644
-index 0000000000..04d7d9e522
---- /dev/null
-+++ b/arch/arm/dts/at91-sama7g54_curiosity-u-boot.dtsi
-@@ -0,0 +1,59 @@
-+// SPDX-License-Identifier: GPL-2.0+ OR MIT
-+/*
-+ * at91-sama7g54_curiosity-u-boot.dtsi - Device Tree file for SAMA7G5 SoC u-boot properties.
-+ *
-+ * Copyright (C) 2024 Microchip Technology Inc. and its subsidiaries
-+ *
-+ * Author: Mihai Sain <mihai.sain@microchip.com>
-+ *
-+ */
-+
-+/ {
-+	chosen {
-+		bootph-all;
-+	};
-+};
-+
-+&main_rc {
-+	bootph-all;
-+};
-+
-+&main_xtal {
-+	bootph-all;
-+};
-+
-+&pioA {
-+	bootph-all;
-+};
-+
-+&pinctrl_flx3_default {
-+	bootph-all;
-+};
-+
-+&pinctrl_sdmmc1_default {
-+	bootph-all;
-+};
-+
-+&pit64b0 {
-+	bootph-all;
-+};
-+
-+&pmc {
-+	bootph-all;
-+};
-+
-+&sdmmc1 {
-+	bootph-all;
-+};
-+
-+&slow_rc_osc {
-+	bootph-all;
-+};
-+
-+&slow_xtal {
-+	bootph-all;
-+};
-+
-+&uart3 {
-+	bootph-all;
-+};
-diff --git a/arch/arm/dts/at91-sama7g54_curiosity.dts b/arch/arm/dts/at91-sama7g54_curiosity.dts
-new file mode 100644
-index 0000000000..93c230be0a
---- /dev/null
-+++ b/arch/arm/dts/at91-sama7g54_curiosity.dts
-@@ -0,0 +1,242 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+/*
-+ * at91-sama7g54_curiosity.dts - Device Tree file for SAMA7G54 CURIOSITY board
-+ *
-+ * Copyright (C) 2024 Microchip Technology Inc. and its subsidiaries
-+ *
-+ * Author: Mihai Sain <mihai.sain@microchip.com>
-+ *
-+ */
-+/dts-v1/;
-+#include "sama7g5-pinfunc.h"
-+#include "sama7g5.dtsi"
-+#include <dt-bindings/input/input.h>
-+#include <dt-bindings/mfd/atmel-flexcom.h>
-+#include <dt-bindings/pinctrl/at91.h>
-+
-+/ {
-+	model = "Microchip SAMA7G54 Curiosity";
-+	compatible = "microchip,sama7g54-curiosity", "microchip,sama7g5", "microchip,sama7";
-+
-+	aliases {
-+		serial0 = &uart3;
-+		i2c0 = &i2c10;
-+	};
-+
-+	chosen {
-+		bootargs = "console=ttyS0,115200 root=/dev/mmcblk1p2 rw rootwait";
-+		stdout-path = "serial0:115200n8";
-+	};
-+
-+	clocks {
-+		slow_xtal {
-+			clock-frequency = <32768>;
-+		};
-+
-+		main_xtal {
-+			clock-frequency = <24000000>;
-+		};
-+	};
-+
-+	leds {
-+		compatible = "gpio-leds";
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&pinctrl_led_gpio_default>;
-+
-+		led-red {
-+			label = "red";
-+			gpios = <&pioA PIN_PD13 GPIO_ACTIVE_HIGH>;
-+			default-state = "off";
-+		};
-+
-+		led-green {
-+			label = "green";
-+			gpios = <&pioA PIN_PD14 GPIO_ACTIVE_HIGH>;
-+			default-state = "off";
-+		};
-+
-+		led-blue {
-+			label = "blue";
-+			gpios = <&pioA PIN_PB15 GPIO_ACTIVE_HIGH>;
-+			default-state = "on";
-+		};
-+	};
-+
-+	memory {
-+		device_type = "memory";
-+		reg = <0x60000000 0x10000000>; // 256 MiB DDR3L-1066 16-bit
-+	};
-+};
-+
-+&ebi {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pinctrl_nand_default>;
-+	status = "okay";
-+
-+	nand_controller: nand-controller {
-+		status = "okay";
-+
-+		nand@3 {
-+			reg = <0x3 0x0 0x800000>;
-+			atmel,rb = <0>;
-+			nand-bus-width = <8>;
-+			nand-ecc-mode = "hw";
-+			nand-ecc-strength = <8>;
-+			nand-ecc-step-size = <512>;
-+			nand-on-flash-bbt;
-+		};
-+	};
-+};
-+
-+&flx3 {
-+	atmel,flexcom-mode = <ATMEL_FLEXCOM_MODE_USART>;
-+	status = "okay";
-+
-+	uart3: serial@200 {
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&pinctrl_flx3_default>;
-+		status = "okay";
-+	};
-+};
-+
-+&flx10 {
-+	atmel,flexcom-mode = <ATMEL_FLEXCOM_MODE_TWI>;
-+	status = "okay";
-+
-+	i2c10: i2c@600 {
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&pinctrl_flx10_default>;
-+		i2c-analog-filter;
-+		i2c-digital-filter;
-+		i2c-digital-filter-width-ns = <35>;
-+		status = "okay";
-+
-+		adc@1f {
-+			compatible = "microchip,pac1934";
-+			reg = <0x1f>;
-+		};
-+
-+		eeprom@51 {
-+			compatible = "atmel,24c02";
-+			reg = <0x51>;
-+			pagesize = <16>;
-+			size = <256>;
-+		};
-+
-+		pmic@5b {
-+			compatible = "microchip,mcp16502";
-+			reg = <0x5b>;
-+		};
-+	};
-+};
-+
-+&pioA {
-+	pinctrl_flx3_default: flx3-default {
-+		pinmux = <PIN_PD16__FLEXCOM3_IO0>,
-+			 <PIN_PD17__FLEXCOM3_IO1>;
-+		bias-pull-up;
-+	};
-+
-+	pinctrl_flx10_default: flx10-default {
-+		pinmux = <PIN_PC30__FLEXCOM10_IO0>,
-+			 <PIN_PC31__FLEXCOM10_IO1>;
-+		bias-pull-up;
-+	};
-+
-+	pinctrl_led_gpio_default: led-gpio-default {
-+		pinmux = <PIN_PD13__GPIO>,
-+			 <PIN_PD14__GPIO>,
-+			 <PIN_PB15__GPIO>;
-+		bias-pull-up;
-+	};
-+
-+	pinctrl_nand_default: nand-default {
-+		pinmux = <PIN_PD9__D0>,
-+			 <PIN_PD10__D1>,
-+			 <PIN_PD11__D2>,
-+			 <PIN_PC21__D3>,
-+			 <PIN_PC22__D4>,
-+			 <PIN_PC23__D5>,
-+			 <PIN_PC24__D6>,
-+			 <PIN_PD2__D7>,
-+			 <PIN_PD3__NANDRDY>,
-+			 <PIN_PD4__NCS3_NANDCS>,
-+			 <PIN_PD5__NWE_NWR0_NANDWE>,
-+			 <PIN_PD6__NRD_NANDOE>,
-+			 <PIN_PD7__A21_NANDALE>,
-+			 <PIN_PD8__A22_NANDCLE>;
-+		bias-disable;
-+		slew-rate = <0>;
-+	};
-+
-+	pinctrl_qspi1_default: qspi1-default {
-+		pinmux = <PIN_PB22__QSPI1_IO3>,
-+			 <PIN_PB23__QSPI1_IO2>,
-+			 <PIN_PB24__QSPI1_IO1>,
-+			 <PIN_PB25__QSPI1_IO0>,
-+			 <PIN_PB26__QSPI1_CS>,
-+			 <PIN_PB27__QSPI1_SCK>;
-+		bias-pull-up;
-+		slew-rate = <0>;
-+	};
-+
-+	pinctrl_sdmmc0_default: sdmmc0-default {
-+		pinmux = <PIN_PA0__SDMMC0_CK>,
-+			 <PIN_PA1__SDMMC0_CMD>,
-+			 <PIN_PA2__SDMMC0_RSTN>,
-+			 <PIN_PA3__SDMMC0_DAT0>,
-+			 <PIN_PA4__SDMMC0_DAT1>,
-+			 <PIN_PA5__SDMMC0_DAT2>,
-+			 <PIN_PA6__SDMMC0_DAT3>;
-+		bias-pull-up;
-+		slew-rate = <0>;
-+	};
-+
-+	pinctrl_sdmmc1_default: sdmmc1-default {
-+		pinmux = <PIN_PB29__SDMMC1_CMD>,
-+			 <PIN_PB30__SDMMC1_CK>,
-+			 <PIN_PB31__SDMMC1_DAT0>,
-+			 <PIN_PC0__SDMMC1_DAT1>,
-+			 <PIN_PC1__SDMMC1_DAT2>,
-+			 <PIN_PC2__SDMMC1_DAT3>,
-+			 <PIN_PC4__SDMMC1_CD>;
-+		bias-pull-up;
-+		slew-rate = <0>;
-+	};
-+};
-+
-+&qspi1 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pinctrl_qspi1_default>;
-+	status = "okay";
-+
-+	flash@0 {
-+		compatible = "jedec,spi-nor";
-+		reg = <0x0>;
-+		spi-max-frequency = <100000000>;
-+		spi-tx-bus-width = <4>;
-+		spi-rx-bus-width = <4>;
-+		m25p,fast-read;
-+	};
-+};
-+
-+// M.2 slot for wireless card
-+&sdmmc0 {
-+	bus-width = <4>;
-+	cd-gpios = <&pioA 31 GPIO_ACTIVE_LOW>;
-+	disable-wp;
-+	max-frequency = <50000000>;
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pinctrl_sdmmc0_default>;
-+	status = "okay";
-+};
-+
-+// micro SD socket
-+&sdmmc1 {
-+	bus-width = <4>;
-+	disable-wp;
-+	max-frequency = <50000000>;
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pinctrl_sdmmc1_default>;
-+	status = "okay";
-+};
 -- 
 2.44.0
 
