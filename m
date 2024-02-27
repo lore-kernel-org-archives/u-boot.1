@@ -4,74 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C64B7C48BF6
-	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 03:04:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 981C3C54E4A
+	for <u-boot@archiver.kernel.org>; Tue, 27 Feb 2024 03:15:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F43C87FA6;
-	Tue, 27 Feb 2024 04:04:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E42CE87F80;
+	Tue, 27 Feb 2024 04:15:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="b4OGrSb1";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oqUUd1UW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E57187FA7; Tue, 27 Feb 2024 04:04:23 +0100 (CET)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
+ id 5950B87FAD; Tue, 27 Feb 2024 04:15:23 +0100 (CET)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4819187F9E
- for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 04:04:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 389EA87F7C
+ for <u-boot@lists.denx.de>; Tue, 27 Feb 2024 04:15:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-412a87f0d8eso8082215e9.2
- for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 19:04:21 -0800 (PST)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-412a57832fcso11872535e9.1
+ for <u-boot@lists.denx.de>; Mon, 26 Feb 2024 19:15:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709003060; x=1709607860; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1709003720; x=1709608520; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=6KdF1Svt3bCUXQ60CK/fKpGOjBjuMOBF6q2JIdtHJD0=;
- b=b4OGrSb1JaCJuJAOgg06ibIbbfc6vfbV5RGGkh7eETE6tWKa1gZK364M+K0mwlOmY9
- mC2L8o0DdNx/MJ79HGTDymp/+paGnccFu1GGWFUgxTERhmKz6taYDcbwdtUTPI2ECzyu
- EBgrfBd+G3YjpWfEJsmjyy2ghdO05sz8ZICmyaQSki6SQZrbFFatgeQ9Rk4GG3B3aU4V
- stzs8mvrkCuUSzWkq6NuT0Wiz2KONtBObFMLg71O2AfpovOaTj2lvZrHfbGm5ow50pyZ
- 9q5aQGcGvAAFgRnlA687+zRd621M3MUMSLxR3xSQVgoIe7ka60+CRFhfczgOT6PPeu0L
- RMtg==
+ bh=68aSGmjhHNC8KeeaqxTdKNhRtTQNrFJS+zSvDFkfdMM=;
+ b=oqUUd1UWDjvJmraJvCChq4Gf34BBfgnIxJMrHrb6adeXcnpv0BM6e66bKTNuiIpgJL
+ NeDJU/NzEojrvj+QagX/pDlqSub3kMfSO1KV1gzCbEJ5MJRKBclPvD5DLIx1vVQl0DSU
+ Sj654Y1COXwPwrnNZ3jj8eSbMl+RjuUC7hlRY4MywRivCi+tm/gO+Z+zgeRjHCE10cDF
+ qNacwrgubSQu6tjWlVyfD3JjyD71D2uaaCVvfu9htmGHZZ3uL5cMByunUCOongHbL/hc
+ 2Jkd9lMNJrnft4tlsZddnNRIRL88e0EszO0CyrDWcwXCdsu8sV8+w2VBnj0CmqpJJMsJ
+ 0KBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709003060; x=1709607860;
+ d=1e100.net; s=20230601; t=1709003720; x=1709608520;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=6KdF1Svt3bCUXQ60CK/fKpGOjBjuMOBF6q2JIdtHJD0=;
- b=JrEjr0r84jfo3xCBNMBMh112xE6u5V81yMlvP2f0ojyK8mppSrB4XilIUNVJtT17B9
- wdzvySAiKxMQ9N73cj3JgkIpZMY+OGDKnYy39nvY/474akhePl6ZtY09U931GqX0u0mi
- NH2ANCIkJfmX8VQzykj7iTag+YhvpTIPNHE6Powd/SnRycys7CJGtiTjnrEWw37Pu5aW
- UEIPs/LuXnhrt8nCy60Y8da9EoIzco2M/Q5PsxbtoHm8tEuNMgOkkL7vPT01OwJdqWxK
- APulPhDcZ0y8wMvh2pM7g7yFfzaqGGIP8FDWNSH3VMVZH0ukOD5g73oojav4cbPe7Xrg
- k+3w==
+ bh=68aSGmjhHNC8KeeaqxTdKNhRtTQNrFJS+zSvDFkfdMM=;
+ b=HDhXlGMVoFUDMMBR8Uy2X3aJiHzHxiC7creTxZ4bLcokGrmph21tb98JjszI+kk+Zx
+ wt0EIHXNPuCDQHiHzl+AyqQSCKWt4eR8mGLfWO6keacpjSE2D+P/QAFcWpA6NLKLF8hP
+ cBgMnXULyJ4SCjY329ICFYpF/TDJ8KDEPqotaxzLdODy3kPW2F7EQXQTCwLSvKjNCkE1
+ hDv/hjLf/bEYulFLYi/Rg43IClBmWsAKJqaZ8TXElteFEqHnf72QO2DHpYiAX1EtBY4O
+ oO8hkYxhXicEZjGaeMi1zCzlF6kp/Z5RgX8wpmKC9uaI+mRGdvn6IBmpO0/Pbe/H/ySU
+ JyzQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUxaHVKxkNg7CcxxuKKr9hTeAey/ymEe2wlMOTrUyPNQMnxG1JGMg7YSdQn4ay2BythJ44Mc+i7aJqAomqPWtdEYT9aAA==
-X-Gm-Message-State: AOJu0YwHSaTy6zGbfwnZhMwyhknzNO4KnOAqL4fTTQu9dSfA2++mSqng
- NMAoqNXj0VWD9RTUKvCNEht9tiSBGuvpsCyIcUb36MEzaUtBj4Gvl/AoO/wsdi4=
-X-Google-Smtp-Source: AGHT+IEo9wL9nAbVg9zAc9hoeSMVcajG2OxICXRnMBfnDIjjUOzFdGgkWWKNHEh8RoNeymZSHRJXWQ==
-X-Received: by 2002:adf:f089:0:b0:33b:187c:4ca0 with SMTP id
- n9-20020adff089000000b0033b187c4ca0mr5322595wro.62.1709003060501; 
- Mon, 26 Feb 2024 19:04:20 -0800 (PST)
+ AJvYcCXgHqOWT4V2FcrNnnAaM+3s/sUssxAkwWq+I8BXI9jY2ZIS18vvyDCo9a0Btq6H58TqTxH80Zj7yXG3/n7jJw/x8BGgsA==
+X-Gm-Message-State: AOJu0Yw1MCLD3kXUrz9+3OrZiov2hECZihIbgse5ul0WDv+KpKqtiq/E
+ Vzqp8kjdWaqJ1rnhC0VKLYJoB8S4lQohqu1/ZS0jXEiPMKwrxl++/8602saprYs=
+X-Google-Smtp-Source: AGHT+IFcnWu14nOFAFSWNMORQsWMzuPiCFiXutnVlczpVCrzsxFewOnKe3HH8NnkLcNoDW6NBM7XIg==
+X-Received: by 2002:a05:600c:4c92:b0:412:8d27:b757 with SMTP id
+ g18-20020a05600c4c9200b004128d27b757mr6215458wmp.37.1709003720597; 
+ Mon, 26 Feb 2024 19:15:20 -0800 (PST)
 Received: from [192.168.1.78] (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- cl7-20020a5d5f07000000b0033dc931eb06sm7163600wrb.0.2024.02.26.19.04.19
+ p7-20020a7bcc87000000b00412656ba919sm13435403wma.20.2024.02.26.19.15.19
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 26 Feb 2024 19:04:20 -0800 (PST)
-Message-ID: <2bcd24b3-7b2c-46fe-b6bb-8b61068f14c2@linaro.org>
-Date: Tue, 27 Feb 2024 03:04:19 +0000
+ Mon, 26 Feb 2024 19:15:20 -0800 (PST)
+Message-ID: <458ee39d-7c04-41df-82aa-1dc37d2fddcc@linaro.org>
+Date: Tue, 27 Feb 2024 03:15:19 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 08/10] mmc: msm_sdhci: Handle different vendor cap
- register offsets
+Subject: Re: [PATCH 09/10] mmc: msm_sdhci: Reset clocks before reconfiguration
 Content-Language: en-US
 To: Varadarajan Narayanan <quic_varada@quicinc.com>, u-boot@lists.denx.de
 Cc: Jaehoon Chung <jh80.chung@samsung.com>,
@@ -79,9 +78,9 @@ Cc: Jaehoon Chung <jh80.chung@samsung.com>,
  Sean Anderson <seanga2@gmail.com>, Sumit Garg <sumit.garg@linaro.org>,
  Tom Rini <trini@konsulko.com>
 References: <20240226100807.1095607-1-quic_varada@quicinc.com>
- <20240226100807.1095607-9-quic_varada@quicinc.com>
+ <20240226100807.1095607-10-quic_varada@quicinc.com>
 From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20240226100807.1095607-9-quic_varada@quicinc.com>
+In-Reply-To: <20240226100807.1095607-10-quic_varada@quicinc.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -103,10 +102,10 @@ X-Virus-Status: Clean
 
 
 On 26/02/2024 10:08, Varadarajan Narayanan wrote:
-> In the IPQ9574, the vendor capabilities register is at a
-> different offset than in other SoCs. Hence add a vendor_cap
-> field to msm_sdhc_variant_info structure to get the correct
-> register offset.
+> U-Boot has to reconfigure the clocks that were set in the boot
+> loaders. However, in IPQ9574, the clocks have to be reset before
+> they can be reconfigured. Hence add code to do the relevant
+> resets.
 > 
 > Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
 With below feedback addressed, please add
@@ -114,63 +113,46 @@ With below feedback addressed, please add
 Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
 > 
->  drivers/mmc/msm_sdhci.c | 11 ++++++++++-
->  1 file changed, 10 insertions(+), 1 deletion(-)
+>  drivers/mmc/msm_sdhci.c | 10 ++++++++++
+>  1 file changed, 10 insertions(+)
 > 
 > diff --git a/drivers/mmc/msm_sdhci.c b/drivers/mmc/msm_sdhci.c
-> index fe1e754bfd..9285d412fe 100644
+> index 9285d412fe..2e9d521159 100644
 > --- a/drivers/mmc/msm_sdhci.c
 > +++ b/drivers/mmc/msm_sdhci.c
-> @@ -48,6 +48,7 @@ struct msm_sdhc {
+> @@ -16,6 +16,7 @@
+>  #include <asm/global_data.h>
+>  #include <asm/io.h>
+>  #include <linux/bitops.h>
+> +#include <reset.h>
 >  
->  struct msm_sdhc_variant_info {
->  	bool mci_removed;
-> +	u32  vendor_cap;	/* Non standard (?) SDHCI register */
->  };
+>  /* Non-standard registers needed for SDHCI startup */
+>  #define SDCC_MCI_POWER   0x0
+> @@ -122,10 +123,19 @@ static int msm_sdc_probe(struct udevice *dev)
+>  	struct msm_sdhc *prv = dev_get_priv(dev);
+>  	const struct msm_sdhc_variant_info *var_info;
+>  	struct sdhci_host *host = &prv->host;
+> +	struct reset_ctl bcr_rst;
+>  	u32 core_version, core_minor, core_major;
+>  	u32 caps;
+>  	int ret;
 >  
->  DECLARE_GLOBAL_DATA_PTR;
-> @@ -158,7 +159,7 @@ static int msm_sdc_probe(struct udevice *dev)
->  	if (core_major >= 1 && core_minor != 0x11 && core_minor != 0x12) {
->  		caps = readl(host->ioaddr + SDHCI_CAPABILITIES);
->  		caps |= SDHCI_CAN_VDD_300 | SDHCI_CAN_DO_8BIT;
-> -		writel(caps, host->ioaddr + SDHCI_VENDOR_SPEC_CAPABILITIES0);
-> +		writel(caps, host->ioaddr + var_info->vendor_cap);
->  	}
->  
->  	ret = mmc_of_parse(dev, &plat->cfg);
-> @@ -219,15 +220,23 @@ static int msm_sdc_bind(struct udevice *dev)
->  
->  static const struct msm_sdhc_variant_info msm_sdhc_mci_var = {
->  	.mci_removed = false,
-> +	.vendor_cap = SDHCI_VENDOR_SPEC_CAPABILITIES0,
->  };
->  
->  static const struct msm_sdhc_variant_info msm_sdhc_v5_var = {
->  	.mci_removed = true,
-> +	.vendor_cap = SDHCI_VENDOR_SPEC_CAPABILITIES0,
-This is wrong, it should be 0x21c for all v5 controllers (see
-drivers/mmc/host/sdhci-msm.c in Linux).
-> +};
+> +	ret = reset_get_by_name(dev, "bcr_rst", &bcr_rst);
+reset-names is not not valid according to the DT bindings, please use
+reset_get_by_index() instead.
+> +	if (!ret) {
+> +		reset_assert(&bcr_rst);
+> +		mdelay(10);
+Is 10ms really necessary here? The equivalent code in Linux suggests
+that only 125us are needed (with a 32.7KHz sleep clock) and uses 200us
+to be "on the safe side". So maybe udelay(200) here instead?
+> +		reset_deassert(&bcr_rst);
+> +		mdelay(10);
+> +	}
 > +
-> +static const struct msm_sdhc_variant_info msm_sdhc_v5_ipq_var = {
-So this can be dropped
-> +	.mci_removed = true,
-> +	.vendor_cap = 0x21c,
->  };
+>  	host->quirks = SDHCI_QUIRK_WAIT_SEND_CMD | SDHCI_QUIRK_BROKEN_R1B;
 >  
->  static const struct udevice_id msm_mmc_ids[] = {
->  	{ .compatible = "qcom,sdhci-msm-v4", .data = (ulong)&msm_sdhc_mci_var },
->  	{ .compatible = "qcom,sdhci-msm-v5", .data = (ulong)&msm_sdhc_v5_var },
-> +	{ .compatible = "qti,sdhci-msm-v5", .data = (ulong)&msm_sdhc_v5_ipq_var },
-This can be dropped too.
-
-For future reference as I really don't want to deal with these, please
-never submit a patch using or otherwise referencing a compatible string
-starting with "qti,". There is never a reason such a compatible should
-appear in upstream code or DT.
->  	{ }
->  };
->  
+>  	host->max_clk = 0;
 
 -- 
 // Caleb (they/them)
