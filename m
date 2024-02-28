@@ -4,74 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 084BDC47DD9
-	for <u-boot@archiver.kernel.org>; Wed, 28 Feb 2024 11:09:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A092FC54E41
+	for <u-boot@archiver.kernel.org>; Wed, 28 Feb 2024 11:11:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 539188804B;
-	Wed, 28 Feb 2024 12:09:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E4A1F8805D;
+	Wed, 28 Feb 2024 12:11:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="aFCVqvUS";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MqWfUFo9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 76C5888079; Wed, 28 Feb 2024 12:09:15 +0100 (CET)
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
- [IPv6:2a00:1450:4864:20::12f])
+ id E881388060; Wed, 28 Feb 2024 12:11:51 +0100 (CET)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 34C6388061
- for <u-boot@lists.denx.de>; Wed, 28 Feb 2024 12:09:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D4F8D87E7B
+ for <u-boot@lists.denx.de>; Wed, 28 Feb 2024 12:11:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-512f3e75391so4516469e87.2
- for <u-boot@lists.denx.de>; Wed, 28 Feb 2024 03:09:07 -0800 (PST)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-5656e5754ccso6635030a12.0
+ for <u-boot@lists.denx.de>; Wed, 28 Feb 2024 03:11:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709118546; x=1709723346; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1709118709; x=1709723509; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=4oVGVfEKpQCAbo7FeFn9htP2gGXt1H6fv3GoA4S8Dqo=;
- b=aFCVqvUSRAc7mg+/tma7fyoX6neHDDZd99kLRnNvNJHkkcmhzocAt2AY5e5NJ+BnGn
- becNp734Tfa9W8iLICbNuRMAZokarhRt75WKhuxTTV7Y5pmGnXItWHzqrrheEByYx9/r
- AQ/hlgYZPtMWEnvaQQiC1+/iuawEMn+L6v/M1yIrrm4RUCLr4BQ9XB4cvnYI6VeR62yB
- kISH/frIdCF/WBgHgwsJ/pInnda3N6BX+gKKiU2V5hAo1MKRrG8SgQ+fkETYMUPPZ7dh
- /g1D5LAl4758BGP1Tpd978zpM+QoyYWDXi9Z+WLuO1wt27qkTrNw9QC3xEaZe6U46se4
- JRgA==
+ bh=+PFedHOJKeDDADe/byIJHg3SmTK6dTO0k95RZJf6TOo=;
+ b=MqWfUFo94dZtaYHPjKTSpBrp6+4egEMKDMh9GwoW7qOHFnW954wkg7Sny6i4HrMqWk
+ 0MIULhAnsM49tjtLqsPX//dt9RN6saf64r+jtVFDdTtyNb0F+FDeUaTjxERwSh/QFUlJ
+ CC/dl+xguS3SYc4wd0Vkj0OdigEDgbIuAv+CbpL5jL2G+TmZ9wLAEdDWWWAPeq5qbFey
+ BWPPb4dQeTyvie0RqCK+QTsPuXVEsWGxIa4gIxIKLlcYdNWgC+77yZD7fxEGxVxzQTWg
+ Oc6oBhVJ7o6g5obD1LmMcFWxtbC6Xj1fGOENVb4lmmqEL9Ub1aSGjbN0t/8SkYy/6COw
+ NgIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709118546; x=1709723346;
+ d=1e100.net; s=20230601; t=1709118709; x=1709723509;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=4oVGVfEKpQCAbo7FeFn9htP2gGXt1H6fv3GoA4S8Dqo=;
- b=DXGrT0rfyc8EUPYf0hyZ6M4XOC7a/y/uIdlEi9gBrgjYbE86iw28eRf/fcCGcHEtbn
- wtCVv4tGW71coybsXbUmik2wYFheHCWb/Cn7oSAZnZSO77xkWWlIh1U1ek19NV931Mb0
- aS7g9vv4Kosz9vHpyfZ5yqcRCB3173CiIQaIiaNSoN+H6y7cK3vAHzHQ+Vps6EcCyjkG
- 06XRQZsGKTWIvINm/YdeGkvL/pA/Un7x31ynUJUXYqOZMEXalyK8QtSt4n3p/kZlZYoV
- S++bo4mXhuueluBNHdsFOFT75LIEmnthzUPv6ZZTgdDij+Cc93yHcyIRiyN/MosjrZDY
- bcJQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXNYhTqELtESdrOqP332geBz7qLE/KQxiv+kK9BLpZIqAGmfHSy6vZi3caTGgXk372qhEGqwAbs2xJTigT7DUmMd7WL2Q==
-X-Gm-Message-State: AOJu0YyaKFvb7ZVA9RpmYRaw0snGb6UUWASTTOq4TocgrtadmTAIN60P
- OAb+mKXcdgDaF91jSbdkhRxxbwf6WU029E32GlpyrZV1PqLHds3lW1JbdyR7nQ8Y4WmgHG0Qby9
- tfYaRtIQgz9LFp7Zg/mztBP0Ui7mNro5ms1nvsw==
-X-Google-Smtp-Source: AGHT+IEMXolxf4poVaW4lMqgvwgbEmvPZI+PtSmo3Aq0sIIf0WpPkQZ1xbqHA2WnRv3c5Upa/03aDJ0R+za3i/PutCY=
-X-Received: by 2002:a05:6512:3f06:b0:512:dab0:836d with SMTP id
- y6-20020a0565123f0600b00512dab0836dmr10942832lfa.43.1709118546396; Wed, 28
- Feb 2024 03:09:06 -0800 (PST)
+ bh=+PFedHOJKeDDADe/byIJHg3SmTK6dTO0k95RZJf6TOo=;
+ b=nEwTVoWY4WQ+wpVKhAogI87lnDFwUPW6gEuFA1mcXlXmDpZUBkv993X6THxWW29y74
+ tyak2lTKq2jp1X8UIcO8in2V9RfFC0EGdNMMYUH/Xi1hO6dhgAcSxiOeQFcjDNAO/YtE
+ z0bQZ6aeVDqB0GWtycaPKzhkpcYZU6qjPpgMMZIGi+3xalNHpSTfG3GhhRL7XVXOclrF
+ ULuqug021njCh17px+qiz61jY/TYTgLqsUXqhyOPyyjh2iYNHBYXk+4KwZ6ELXokge0v
+ OGRViXgYR8AzOgwgT6mdomEGnrqT4Wl2lI8zHGUG93luxA6NN+xOxYFimLTK+Q4qiceT
+ ssBA==
+X-Gm-Message-State: AOJu0YwoNMrRX6eLx4pywUYCLF4RUAL7fSv/zo7aCbsAlgDBbtnZ5N9O
+ /oc4IjMQ7yZpMtbgG1tjruss9ptzgWK9ahEYFJK54z/9+ENnwT2dDjVPgwwhyB3sWEYqQ771mCi
+ +HLccj6r5xiCjnE9ph9+Z8ZxMKp8=
+X-Google-Smtp-Source: AGHT+IH3kNb7XTGuQ4oO44mW2Y5GxIKj25p8dubzZokDzlAiLHLzZ0NAJOD4MyOGBMQq8dl0Ta95t3cOeKhtlT3iAbI=
+X-Received: by 2002:aa7:dd12:0:b0:564:7bff:8472 with SMTP id
+ i18-20020aa7dd12000000b005647bff8472mr9102304edv.2.1709118709132; Wed, 28 Feb
+ 2024 03:11:49 -0800 (PST)
 MIME-Version: 1.0
-References: <20240226212408.7535-1-heinrich.schuchardt@canonical.com>
- <20240226212408.7535-3-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20240226212408.7535-3-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 28 Feb 2024 13:08:30 +0200
-Message-ID: <CAC_iWj+wYUqdzgWenzWjZgNDKSTx6WThBgKbZnCwFfVNajvrcg@mail.gmail.com>
-Subject: Re: [PATCH v2 2/2] arm: separate .data and .text sections of EFI
- binaries
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20240228104811.1366694-1-ilias.apalodimas@linaro.org>
+In-Reply-To: <20240228104811.1366694-1-ilias.apalodimas@linaro.org>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Wed, 28 Feb 2024 11:11:37 +0000
+Message-ID: <CALeDE9OGc5ePPThdHc7RwUGkp67HGjZJZwq8GhtwGSBPXRYXWQ@mail.gmail.com>
+Subject: Re: [RFC PATCH 0/6] Clean up arm linker scripts
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, cfsworks@gmail.com, 
+ caleb.connolly@linaro.org, sumit.garg@linaro.org, 
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>, Michal Simek <michal.simek@amd.com>, 
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
+ Yegor Yefremov <yegorslists@googlemail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Shiji Yang <yangshiji66@outlook.com>,
+ Bin Meng <bmeng@tinylab.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,156 +92,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 26 Feb 2024 at 23:24, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+On Wed, 28 Feb 2024 at 10:58, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
 >
-> EFI binaries should not contain sections that are both writable and
-> executable. Separate the RX .text section from the RW .data section.
+> The arm linker scripts had a mix of symbols and C defined variables in an
+> effort to emit relative references instead of absolute ones e.g [0].
+> This has led to confusion over the years, ending up with mixed section
+> definitions. Some sections being defined with overlays and different
+> definitions between v7 and v8 architectures.
+> For example __efi_runtime_rel_start/end is defined as a linker symbol for
+> armv8 and a C variable in armv7.
 >
-> We currently don't created relocation sections (.rel.*) for our EFI
-> binaries. Anyway these would have to be converted to PE/COFF relocations.
-> Enumerate them under DISCARD and add a comment.
->
-> Correct the characteristics of the sections.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
-> v2:
->         Consider that 32-bit arm uses .rel and not .rela relocations
->         and discard them as they are cannot be used in EFI binaries.
->         Correct the characteristics of the .reloc section.
-> ---
->  arch/arm/lib/crt0_arm_efi.S  | 40 ++++++++++++++++++++++++++++--------
->  arch/arm/lib/elf_arm_efi.lds | 28 ++++++++++++++++++-------
->  2 files changed, 52 insertions(+), 16 deletions(-)
->
-> diff --git a/arch/arm/lib/crt0_arm_efi.S b/arch/arm/lib/crt0_arm_efi.S
-> index 7a4e5dff75..7219c0f2fe 100644
-> --- a/arch/arm/lib/crt0_arm_efi.S
-> +++ b/arch/arm/lib/crt0_arm_efi.S
-> @@ -23,7 +23,7 @@ pe_header:
->         .long   IMAGE_NT_SIGNATURE              /* 'PE' */
->  coff_header:
->         .short  IMAGE_FILE_MACHINE_THUMB        /* Mixed ARM/Thumb */
-> -       .short  2                               /* nr_sections */
-> +       .short  3                               /* nr_sections */
->         .long   0                               /* TimeDateStamp */
->         .long   0                               /* PointerToSymbolTable */
->         .long   0                               /* NumberOfSymbols */
-> @@ -98,22 +98,44 @@ section_table:
->         .long   0                       /* PointerToLineNumbers */
->         .short  0                       /* NumberOfRelocations */
->         .short  0                       /* NumberOfLineNumbers */
-> -       .long   0x42100040              /* Characteristics (section flags) */
-> +       /* Characteristics (section flags) */
-> +       .long   (IMAGE_SCN_MEM_READ | \
-> +                IMAGE_SCN_MEM_DISCARDABLE | \
-> +                IMAGE_SCN_CNT_INITIALIZED_DATA)
->
->         .ascii  ".text"
->         .byte   0
->         .byte   0
->         .byte   0                       /* end of 0 padding of section name */
-> -       .long   _edata - _start         /* VirtualSize */
-> +       .long   _text_size              /* VirtualSize */
->         .long   _start - image_base     /* VirtualAddress */
-> -       .long   _edata - _start         /* SizeOfRawData */
-> +       .long   _text_size              /* SizeOfRawData */
->         .long   _start - image_base     /* PointerToRawData */
-> +       .long   0                       /* PointerToRelocations */
-> +       .long   0                       /* PointerToLineNumbers */
-> +       .short  0                       /* NumberOfRelocations */
-> +       .short  0                       /* NumberOfLineNumbers */
-> +       /* Characteristics (section flags) */
-> +       .long   (IMAGE_SCN_MEM_READ | \
-> +                IMAGE_SCN_MEM_EXECUTE | \
-> +                IMAGE_SCN_CNT_CODE)
->
-> -       .long   0               /* PointerToRelocations (0 for executables) */
-> -       .long   0               /* PointerToLineNumbers (0 for executables) */
-> -       .short  0               /* NumberOfRelocations  (0 for executables) */
-> -       .short  0               /* NumberOfLineNumbers  (0 for executables) */
-> -       .long   0xe0500020      /* Characteristics (section flags) */
-> +       .ascii  ".data"
-> +       .byte   0
-> +       .byte   0
-> +       .byte   0                       /* end of 0 padding of section name */
-> +       .long   _data_size              /* VirtualSize */
-> +       .long   _data - image_base      /* VirtualAddress */
-> +       .long   _data_size              /* SizeOfRawData */
-> +       .long   _data - image_base      /* PointerToRawData */
-> +       .long   0                       /* PointerToRelocations */
-> +       .long   0                       /* PointerToLineNumbers */
-> +       .short  0                       /* NumberOfRelocations */
-> +       .short  0                       /* NumberOfLineNumbers */
-> +       /* Characteristics (section flags) */
-> +       .long   (IMAGE_SCN_MEM_WRITE | \
-> +                IMAGE_SCN_MEM_READ | \
-> +                IMAGE_SCN_CNT_INITIALIZED_DATA)
->
->         .align          12
->  _start:
-> diff --git a/arch/arm/lib/elf_arm_efi.lds b/arch/arm/lib/elf_arm_efi.lds
-> index 767ebda635..41440594aa 100644
-> --- a/arch/arm/lib/elf_arm_efi.lds
-> +++ b/arch/arm/lib/elf_arm_efi.lds
-> @@ -7,6 +7,12 @@
->
->  OUTPUT_FORMAT("elf32-littlearm", "elf32-littlearm", "elf32-littlearm")
->  OUTPUT_ARCH(arm)
-> +
-> +PHDRS
-> +{
-> +       data PT_LOAD FLAGS(3); /* PF_W | PF_X */
-> +}
-> +
->  ENTRY(_start)
->  SECTIONS
->  {
-> @@ -18,11 +24,13 @@ SECTIONS
->                 *(.gnu.linkonce.t.*)
->                 *(.srodata)
->                 *(.rodata*)
-> +               . = ALIGN(16);
-> +               *(.dynamic);
->                 . = ALIGN(512);
->         }
->         _etext = .;
->         _text_size = . - _text;
-> -       .dynamic  : { *(.dynamic) }
-> +       . = ALIGN(4096);
->         .data : {
->                 _data = .;
->                 *(.sdata)
-> @@ -47,14 +55,20 @@ SECTIONS
->                 . = ALIGN(512);
->                 _bss_end = .;
->                 _edata = .;
-> -       }
-> -       .rel.dyn : { *(.rel.dyn) }
-> -       .rel.plt : { *(.rel.plt) }
-> -       .rel.got : { *(.rel.got) }
-> -       .rel.data : { *(.rel.data) *(.rel.data*) }
-> -       _data_size = . - _etext;
-> +       } :data
-> +       _data_size = . - _data;
->
->         /DISCARD/ : {
-> +               /*
-> +                * We don't support relocations. These would have to be
-> +                * translated from ELF to PE format and added to the .reloc
-> +                * section.
-> +                */
-> +               *(.rel.dyn)
-> +               *(.rel.plt)
-> +               *(.rel.got)
-> +               *(.rel.data)
-> +               *(.rel.data*)
->                 *(.rel.reloc)
->                 *(.eh_frame)
->                 *(.note.GNU-stack)
-> --
-> 2.43.0
->
+> I am not sure if this used to be a compiler bug, but linker scripts nowadays
+> can emit relative references, as long as the symbol definition is contained
+> within the section definition. So let's switch most of the C defined variables
 
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Should we be setting/upping the minimum version of the linker version
+as part of this?
+
+> and clean up the arm sections.c file. There's still a few symbols remaining --
+> __secure_start/end, __secure_stack_start/end and __end which can be cleaned up
+> in a followup series.
+>
+> The resulting binary (tested in QEMU v7/v8) had no size differences apart from
+> the emited sections and object types of those variables. I've also added prints
+> throughout the U-Boot init sequence. The offsets and delta for 'end - start'
+> section sizes is unchanged.
+>
+> For example on QEMU v8:
+> $~ ./scripts/bloat-o-meter u-boot u-boot.new
+> add/remove: 0/0 grow/shrink: 0/0 up/down: 0/0 (0)
+> Function                                     old     new   delta
+> Total: Before=798861, After=798861, chg +0.00%
+>
+> $~ readelf -sW u-boot | grep bss_s
+>     12: 00000000001029b8     0 SECTION LOCAL  DEFAULT   12 .bss_start
+>   8088: 0000000000000018     0 NOTYPE  GLOBAL DEFAULT    1 _bss_start_ofs
+>   8376: 00000000001029b8     0 OBJECT  GLOBAL DEFAULT   12 __bss_start
+> $~ readelf -sW u-boot.new | grep bss_s
+>   8085: 0000000000000018     0 NOTYPE  GLOBAL DEFAULT    1 _bss_start_ofs
+>   8373: 00000000001029b8     0 NOTYPE  GLOBAL DEFAULT   12 __bss_start
+>
+> For QEMU v7 the differences are a bit bigger but only affect the variables
+> placed in the .bss section because that was defined as an OVERLAY in the
+> existing linker script.
+> For example:
+> $~ nm u-boot | grep tftp_prev_block
+> 000ca0dc ? tftp_prev_block
+> $~ nm u-boot.new | grep tftp_prev_block
+> 000e0a5c b tftp_prev_block -----> The symbol is now placed into .bss
+>
+> It's worth noting that since the efi regions are affected by the change, booting
+> with EFI is preferable while testing. Booting the kernel only should be enough
+> since the efi stub and the kernel proper do request boottime and runtime
+> services respectively.
+> Something along the lines of
+> > virtio scan && load virtio 0 $kernel_addr_r Image && bootefi $kernel_addr_r
+> will work for QEMU aarch64.
+>
+> Tested platforms:
+> - QEMU aarch64
+> - Xilinx kv260 kria starter kit & zynq
+> - QEMU armv7
+> - STM32MP157C-DK2
+>
+> [0] commit 3ebd1cbc49f0 ("arm: make __bss_start and __bss_end__ compiler-generated")
+>
+> Ilias Apalodimas (6):
+>   arm: baltos: remove custom linker script
+>   arm: clean up v7 and v8 linker scripts for bss_start/end
+>   arm: fix __efi_runtime_rel_start/end definitions
+>   arm: clean up v7 and v8 linker scripts for __rel_dyn_start/end
+>   arm: fix __efi_runtime_start/end definitions
+>   arm: move image_copy_start/end to linker symbols
+>
+>  arch/arm/cpu/armv8/u-boot-spl.lds         |  14 +--
+>  arch/arm/cpu/armv8/u-boot.lds             |  45 ++------
+>  arch/arm/cpu/u-boot.lds                   |  74 +++----------
+>  arch/arm/lib/sections.c                   |  10 --
+>  arch/arm/mach-rockchip/u-boot-tpl-v8.lds  |  22 +---
+>  arch/arm/mach-zynq/u-boot.lds             |  72 +++---------
+>  board/qualcomm/dragonboard820c/u-boot.lds |  41 ++-----
+>  board/vscom/baltos/u-boot.lds             | 128 ----------------------
+>  include/asm-generic/sections.h            |   3 +
+>  lib/efi_loader/efi_runtime.c              |   1 +
+>  10 files changed, 58 insertions(+), 352 deletions(-)
+>  delete mode 100644 board/vscom/baltos/u-boot.lds
+>
+> --
+> 2.37.2
+>
