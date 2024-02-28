@@ -4,65 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A34F7C54E41
-	for <u-boot@archiver.kernel.org>; Wed, 28 Feb 2024 09:15:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C19F4C47DD9
+	for <u-boot@archiver.kernel.org>; Wed, 28 Feb 2024 09:45:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E6AA9876F3;
-	Wed, 28 Feb 2024 10:15:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id BA84587D8E;
+	Wed, 28 Feb 2024 10:45:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="WmUtVwMm";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="CpkGzOOy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F06A087776; Wed, 28 Feb 2024 10:15:12 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E1CB087E03; Wed, 28 Feb 2024 10:45:48 +0100 (CET)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46A37876BA
- for <u-boot@lists.denx.de>; Wed, 28 Feb 2024 10:15:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 00B2187D84
+ for <u-boot@lists.denx.de>; Wed, 28 Feb 2024 10:45:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41S9F4JJ083468;
- Wed, 28 Feb 2024 03:15:04 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1709111704;
- bh=sgS4fRoB/gMw5m7In9zz7x6pgx7x8snsvVMBkyLp22A=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=WmUtVwMmUS/LyZ0XgC7lruV0AKA1LXuTM43diTnCOeAVyy+Nu5hi5HNddtFJyXbj2
- it/pSbTfnr2MngbSEl9uUGv2fxG9Pm2uuYUq8YkQSsq7ub3l5ZTl4FbQrNJhXYaVxU
- kwQIAGT1YG3D+fuLE07GLHmr1wDzi4JmqgN6o1YM=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41S9F3FV025698
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 28 Feb 2024 03:15:03 -0600
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 28
- Feb 2024 03:15:02 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 28 Feb 2024 03:15:02 -0600
-Received: from [172.24.227.68] (dhruva.dhcp.ti.com [172.24.227.68])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41S9F1gf118866;
- Wed, 28 Feb 2024 03:15:01 -0600
-Message-ID: <ca61d995-9872-4685-b768-85db9348cc24@ti.com>
-Date: Wed, 28 Feb 2024 14:45:00 +0530
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id CC888CE207D;
+ Wed, 28 Feb 2024 09:45:41 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8B515C433F1;
+ Wed, 28 Feb 2024 09:45:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1709113541;
+ bh=x8Y+x1Eq2TsYiQPryLekWbQJPL/6d7RXSNmZNvU3dA4=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=CpkGzOOyPu4/bsx8qfDVIa8JwwxCTV9wEAuSH+dZLaqx0ll0kYf0EVkvmIHlZfdx1
+ SnDBotq4Pp0Dym9gGuD5Y4HT0wG+lISQEuz1QYcE2RZYcZmjIbPyhTUXdFdXI6V9pK
+ ytuHK/AguB22b7CZVSpkca8+IUP6VifAN/jzHs+/A9FcaAFTcV6NU1tiVkDwpWzU9u
+ X44aG4KxS6bvmgmqCp9k+ePgOFXSe0x3ySOvZAXwWsAifIOKH6zXPvWGzLyIbTQAkA
+ zclp0+JTGw1zAAH1tDkJvo4wwtVMqibXtkHbqGqNYwcWx2mF3g/UHmQCbWtRa+XWD6
+ IQh3enM46oFWg==
+Message-ID: <f02fc4d8-e74f-4a24-a866-80267d972f72@kernel.org>
+Date: Wed, 28 Feb 2024 11:45:35 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] doc: board: phytec: phycore-am62x: Update artifact names
+Subject: Re: [PATCH v5] misc: fs-loader: Use fw_storage_interface instead of
+ storage_interface
+To: MD Danish Anwar <danishanwar@ti.com>, Sean Anderson <seanga2@gmail.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Michal Simek <michal.simek@amd.com>, Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, srk@ti.com, Vignesh Raghavendra <vigneshr@ti.com>,
+ r-gunasekaran@ti.com
+References: <20240209100829.1079401-1-danishanwar@ti.com>
+ <40bd8620-9fad-4c7b-9f28-4ab8a3e0365a@ti.com>
+ <04e7a4b8-a264-5d9c-a0b5-c985d5f35cb8@gmail.com>
+ <2ec93e9f-fbe5-4c9f-83d5-bbc820efff0a@ti.com>
 Content-Language: en-US
-To: Wadim Egorov <w.egorov@phytec.de>, <u-boot@lists.denx.de>
-CC: <upstream@lists.phytec.de>, Tom Rini <trini@konsulko.com>
-References: <20240228085848.1230795-1-w.egorov@phytec.de>
-From: Dhruva Gole <d-gole@ti.com>
-In-Reply-To: <20240228085848.1230795-1-w.egorov@phytec.de>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+From: Roger Quadros <rogerq@kernel.org>
+In-Reply-To: <2ec93e9f-fbe5-4c9f-83d5-bbc820efff0a@ti.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,41 +77,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-+ Tom
 
-On 28/02/24 14:28, Wadim Egorov wrote:
-> Use proper binary artifact names for HSFS devices.
-> Do not use the *_unsigned binaries.
+On 28/02/2024 11:02, MD Danish Anwar wrote:
 > 
-> Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
-> ---
-
-
-Reviewed-by: Dhruva Gole <d-gole@ti.com>
-
->   doc/board/phytec/phycore-am62x.rst | 6 +++---
->   1 file changed, 3 insertions(+), 3 deletions(-)
+> On 27/02/24 7:33 pm, Sean Anderson wrote:
+>> Hi Danish,
+>>
+>> On 2/27/24 05:26, MD Danish Anwar wrote:
+>>> On 09/02/24 3:38 pm, MD Danish Anwar wrote:
+>>>> The fs-loader driver reads env storage_interface and uses it to load
+>>>> firmware file into memory using the medium set by env. Update the driver
+>>>> to use env fw_storage_interface as this variable is only used to load
+>>>> firmwares. This is to keep all variables used by fs-loader driver with
+>>>> 'fw_' prefix. All other variables have 'fw_' prefix except for
+>>>> storage_interface.
+>>>>
+>>>> The env storage_interface will act as fallback so that the
+>>>> existing implementations do not break.
+>>>>
+>>>> Also update the FS Loader documentation accordingly.
+>>>>
+>>>> Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
+>>>> ---
+>>>
+>>> Hi Tom / Sean, can you please pick this patch if there is no pending
+>>> comments to address.
+>>>
+>>
+>> Sorry, I forgot to respond to this earlier.
+>>
+>> To be honest, I'm not really convinced. We have plenty of environmental
+>> variables which are inconsistent (e.g. ethaddr, eth2addr, eth3addr) and it
+>> doesn't cause any issues. While fixing code has no cost, the environment
+>> is an ABI which we can't break. So we'd have to support both of these
+>> variables forever. I'm not really a fan of doing that without good reason,
+>> and I think aesthetics of the variable name isn't really compelling.
+>>
 > 
-> diff --git a/doc/board/phytec/phycore-am62x.rst b/doc/board/phytec/phycore-am62x.rst
-> index 1d641a78cf..bc6d524669 100644
-> --- a/doc/board/phytec/phycore-am62x.rst
-> +++ b/doc/board/phytec/phycore-am62x.rst
-> @@ -92,9 +92,9 @@ Assuming the uSD card is `/dev/mmcblk0`:
->   To boot from a micro SD card on a HSFS device simply copy the following
->   artifacts to the FAT partition:
->   
-> -* tiboot3.bin from R5 build as tiboot3.bin
-> -* tispl.bin_unsigned from Cortex-A build as tispl.bin
-> -* u-boot.img_unsigned from Cortex-A build as u-boot.img
-> +* tiboot3.bin from R5 build
-> +* tispl.bin from Cortex-A build
-> +* u-boot.img from Cortex-A build
+> Roger, should I keep the env variable name as it is and don't rename it?
+> Sean's concern seems valid, can you please comment here.
 
-LGTM.
-
+Sure.
 
 -- 
-Thanks and Regards,
-Dhruva Gole
+cheers,
+-roger
