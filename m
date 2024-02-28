@@ -4,78 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7305EC5478C
-	for <u-boot@archiver.kernel.org>; Wed, 28 Feb 2024 19:52:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA5A1C5475B
+	for <u-boot@archiver.kernel.org>; Wed, 28 Feb 2024 23:31:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 909A588078;
-	Wed, 28 Feb 2024 20:52:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=foundries.io
+	by phobos.denx.de (Postfix) with ESMTP id EB0DE880AF;
+	Thu, 29 Feb 2024 00:31:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=foundries.io header.i=@foundries.io header.b="FcFkHarS";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OvrnfTQj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DC7E687F73; Wed, 28 Feb 2024 20:52:06 +0100 (CET)
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
+ id 93170880A1; Thu, 29 Feb 2024 00:31:48 +0100 (CET)
+Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
+ [IPv6:2607:f8b0:4864:20::1134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8BC4D88094
- for <u-boot@lists.denx.de>; Wed, 28 Feb 2024 20:52:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=foundries.io
+ by phobos.denx.de (Postfix) with ESMTPS id 584B1880A8
+ for <u-boot@lists.denx.de>; Thu, 29 Feb 2024 00:31:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=igor.opaniuk@foundries.io
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-5131be81f12so44575e87.3
- for <u-boot@lists.denx.de>; Wed, 28 Feb 2024 11:52:04 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-608c40666e0so3384847b3.2
+ for <u-boot@lists.denx.de>; Wed, 28 Feb 2024 15:31:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=foundries.io; s=google; t=1709149924; x=1709754724; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6CVVF6dBELaAzB/Ql8nj3Ifz3WTq5iPumxLXx4MlAWM=;
- b=FcFkHarSgjEhxc7C0t6/+r3I37gLOKBOfOTDqsdW+wt9jFV557HJVtK069/XaibURM
- NZ3IFLplnHaBHpvJFSV0vxFKRUGNFMm+/mGT6gtO0z/wIIQgA1m0cm60H4+EtE/0j99H
- O134AsN60uCLi6fwVkl5UTWK5dcAQUAMasBZRBfOc/lKGtmQ9/e/oO/b46E6ddTn9aZN
- SdvcoDYdNyCN6lykXESjG0QNHeZtw3CFo4UArF4cTZFwPzPGIs+kfhic0xhWxMLb4Bb8
- tAg8zHFv+ub2uK1hKGyAIfsGZ182VnseE0107jPEEdQhgePssTw5/VHEhSYV+fz6euGq
- 0hNg==
+ d=konsulko.com; s=google; t=1709163104; x=1709767904; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=JCjKJTVVnX0iI9Rgilai4ZUZ9e0An4rUyGSUzNoU26s=;
+ b=OvrnfTQjK9N/lEiAIK8eYb+DXCXYG293XCjnmaGweqK1Qx9gArGlYOoQGQTRq24oox
+ PJBBXfCiGWxlyJjqnrS0rydkM073uFnkLH+YenhuQiTBWM/bjVqseuGD0S+Cry8TCSTV
+ zpgL3JRJalJO6LqdVmcnw/mAMzkGkCP2dn6R8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709149924; x=1709754724;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=6CVVF6dBELaAzB/Ql8nj3Ifz3WTq5iPumxLXx4MlAWM=;
- b=ognjv3nfH74cgCMwQ7idGbG4pwv3XAbUJWWB1nqqRXA+eZqso2T7+m2iOp0kCzdlR2
- XbjduV/i30IkTQpuHsbCa8NAzl27z5lS9Ycku5vRM2rOz5UU4cMZnmGIIgGg0hyrdmmn
- /OgqY/xA2MmbKuOpzN0OpjgxO0F2/3R4bXCpYzCZPQJaIf7+YLjNlDjvKQozCY/8nXjg
- i6PfOup0s8QB/60S4YhCVET0AU9tt/o76T7cCprlx7wmBlAdsB5ETxy8CJJxqVMoY8as
- akhLQIjHvskRiUHOk6byVGMvkp5jmJ+uYEQYGhtI4w4Fsfg49pmkIHpICpHBskwR2NUz
- 76vw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVykDgSbDL97OdZCiU7jOijKejrx2Uw6WlMXfm+lPC4uYXkTf7TLLp55XIBwcRMLUKq30+Y2nZGhImyIdcJQ4kK8vLcMQ==
-X-Gm-Message-State: AOJu0YxH3e6zmVk7249wDT7Aiz36GHGsfuU+7RVvUSVKetNwxLCpZbOB
- PHAat2ZBYRgHRK8Vgr0rcf0ciKfn0mnO3Qd9jKhyx8qfj1rxT2TwYAmJl8RKwQ5OUkrsvM2DhfW
- 0dDZ+gZ/ze5WRe6mMFf3zhvv19sol6q3oJ2uTTw==
-X-Google-Smtp-Source: AGHT+IFygCEwe/GGXk7loLZHnQjcMPRX0mBN4A6gMchtqtbpgXeFoYA2fGxiBSKNfkIIIl00sIyXmvxi+E9GRUn/5RA=
-X-Received: by 2002:a05:6512:473:b0:513:1817:189e with SMTP id
- x19-20020a056512047300b005131817189emr407322lfd.9.1709149923727; Wed, 28 Feb
- 2024 11:52:03 -0800 (PST)
+ d=1e100.net; s=20230601; t=1709163104; x=1709767904;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=JCjKJTVVnX0iI9Rgilai4ZUZ9e0An4rUyGSUzNoU26s=;
+ b=gzqXLwiKFZXLhIRHDSD0gkcNJiJsgBuC2duu9r/cBrTaKeKkRBQK6DsomdSGMbYt81
+ 82Mgg7u7Y1Z3CEGyDScwk+Bx3K5Vgrz7YQ5EgyD3gZJ0eL8dXTs8ddXt/pMYJN4ovWEs
+ Wk0GDOucRApUJZWpuVCWcevccVtB4hGt0JvXO3vHP73lW6RWbfyVHtuJPLUO0j/OEPoy
+ RcW6Ho4AZfynzo/Evu1BBkbkWBMp8Q/zKGXcxBFyvyXMebh+Jm0dYGrfwCoUFyWJzvF6
+ O1TJvuXS0rYZyJN/aknajDH+S7AnmEyPCwQeD6ZGzzX8JwDa+mrHrZQHNZ4xX8rXV1oI
+ AN+g==
+X-Gm-Message-State: AOJu0YzVEtpTYB+1P7JK0la02J0EPWqxyeUoVkmfGebE9del6j3jtnHl
+ 7EJzUJ+4KFW6ByMAR3MPKCzMJOoxJ5K33ZfOhEriwaEkV0Ckywi50W/d5OKrZnU=
+X-Google-Smtp-Source: AGHT+IGIUXeiodDxNF+ZSCXYWB9gYj1P2gp1V/sbqh8+fOSdlyyNaJsjkoXtHGh+eIXGQKGpDsekqQ==
+X-Received: by 2002:a81:5714:0:b0:5ff:a9bc:3893 with SMTP id
+ l20-20020a815714000000b005ffa9bc3893mr578467ywb.12.1709163103863; 
+ Wed, 28 Feb 2024 15:31:43 -0800 (PST)
+Received: from bill-the-cat (065-184-194-195.res.spectrum.com.
+ [65.184.194.195]) by smtp.gmail.com with ESMTPSA id
+ fr2-20020a05690c358200b006079f55766bsm32330ywb.68.2024.02.28.15.31.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 28 Feb 2024 15:31:42 -0800 (PST)
+Date: Wed, 28 Feb 2024 18:31:40 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, cfsworks@gmail.com, caleb.connolly@linaro.org,
+ sumit.garg@linaro.org, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
+ Yegor Yefremov <yegorslists@googlemail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Shiji Yang <yangshiji66@outlook.com>, Bin Meng <bmeng@tinylab.org>
+Subject: Re: [RFC PATCH 1/6] arm: baltos: remove custom linker script
+Message-ID: <20240228233140.GO3040305@bill-the-cat>
+References: <20240228104811.1366694-1-ilias.apalodimas@linaro.org>
+ <20240228104811.1366694-2-ilias.apalodimas@linaro.org>
 MIME-Version: 1.0
-References: <CAF1iuRr6q15aApGB8zPb8M7yWrUahT8H0BjDHnWRp1_Q__KDng@mail.gmail.com>
- <CALeDE9MSQwGU0JXs96egk8y8rc=f+JxtNm3U6u4Fxb8L+jWtkg@mail.gmail.com>
- <CAF1iuRqyTu5xO9JJ-8__w8y7_uQ5SHNd6wunP1sND7QiT7K60A@mail.gmail.com>
- <CAF1iuRr5CfOuKJk_SDUwurKb74vpsb_N8Ke_Gw+TLFE2E5kNmA@mail.gmail.com>
-In-Reply-To: <CAF1iuRr5CfOuKJk_SDUwurKb74vpsb_N8Ke_Gw+TLFE2E5kNmA@mail.gmail.com>
-From: Igor Opaniuk <igor.opaniuk@foundries.io>
-Date: Wed, 28 Feb 2024 20:51:52 +0100
-Message-ID: <CAL6CDMFDOrRza-O3BhKS3DnjH1TR5vb=USmBuh5fzpFyeBruPw@mail.gmail.com>
-Subject: Re: ECDSA related PRs
-To: Bob Wolff <bob.wolff68@gmail.com>
-Cc: Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="CKQqm+mTANpruZEX"
+Content-Disposition: inline
+In-Reply-To: <20240228104811.1366694-2-ilias.apalodimas@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,113 +98,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Bob,
 
-On Wed, Feb 28, 2024 at 7:14=E2=80=AFPM Bob Wolff <bob.wolff68@gmail.com> w=
-rote:
->
-> Any thoughts on how to proceed with the issue mentioned about tinycrypt
-> warnings/checks?
->
-> Also, I'd like your advice - I was thinking for the larger patch that I'd
-> do it in two commits. The first would be the addition of the tinycrypt
-> files and the second is the actual changes and additions to support ecdsa
-> verification. I doubt that's controversial. However when I run a trial
-> `patman` against the tinycrypt commit, I geta huge number of issues:
->     *checkpatch.pl <http://checkpatch.pl> found 186 error(s), 380
-> warning(s), 481 checks(s)*
->
-> What's your advice on this? I would tend to think we'd want to /not/ chan=
-ge
-> the source files directly for such purposes so that updates could be
-> brought in with greater ease.
+--CKQqm+mTANpruZEX
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I didn't form any opinion on that, hence asking.
-Why not to backport existing ECC/ECDSA implementation from
-Linux kernel (crypto/ecc.c, ./crypto/ecdsa.c), like it was already done
-for RSA, X509 parser, ASN.1 decoder. Pulling the whole library into the
-U-Boot source tree only just for ECDSA is a bit overkill IMO.
+On Wed, Feb 28, 2024 at 12:48:04PM +0200, Ilias Apalodimas wrote:
 
+> commit 3d74a0977f514 ("ti: am335x: Remove unused linker script") removed
+> the linker script for the TI variant. This linker script doesn't seem to
+> do anything special and on top of that, has no definitions for the EFI
+> runtime sections.
+>=20
+> So let's get rid of it and use the generic linker script which defines
+> those correctly
+>=20
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
->
->
-> On Thu, Feb 22, 2024 at 3:07=E2=80=AFPM Bob Wolff <bob.wolff68@gmail.com>=
- wrote:
->
-> > Peter,
-> > Thanks for helping lead me down the right path here.
-> >
-> > WRT tinycrypt, the license is quite permissive.
-> > https://github.com/intel/tinycrypt
-> >
-> > Also, I'd like your advice - I was thinking for the larger patch that I=
-'d
-> > do it in two commits. The first would be the addition of the tinycrypt
-> > files and the second is the actual changes and additions to support ecd=
-sa
-> > verification. I doubt that's controversial. However when I run a trial
-> > `patman` against the tinycrypt commit, I geta huge number of issues:
-> >     *checkpatch.pl <http://checkpatch.pl> found 186 error(s), 380
-> > warning(s), 481 checks(s)*
-> >
-> > What's your advice on this? I would tend to think we'd want to /not/
-> > change the source files directly for such purposes so that updates coul=
-d be
-> > brought in with greater ease.
-> >
-> > Let me know your thoughts.
-> >
-> > Thanks,
-> > Bob Wolff
-> >
-> >
-> >
-> > On Wed, Feb 21, 2024 at 6:03=E2=80=AFAM Peter Robinson <pbrobinson@gmai=
-l.com>
-> > wrote:
-> >
-> >>
-> >>
-> >> On Wed, 21 Feb 2024, 11:30 Bob Wolff, <bob.wolff68@gmail.com> wrote:
-> >>
-> >>> Hi there,
-> >>> I have two separate but related pull requests I'd like to contribute.
-> >>> They
-> >>> both have to do with ECDSA support.
-> >>> - The simple one is a lack of null-pointer check that can cause a cra=
-sh
-> >>> in
-> >>> certain situations. Easy peasy.
-> >>>
-> >>
-> >> Just send that one on it's own
-> >>
-> >> - The less simple one (and hopefully not too controversial) adds an ec=
-dsa
-> >>> verify driver (UCLASS_ECDSA) which utilizes tinycrypt to do the crypt=
-o
-> >>> work.
-> >>>
-> >>
-> >> Do we already use tiny crypt in the project, if not things like licens=
-e
-> >> need to be taken into account in the context of the GPLv2
-> >>
-> >> Please advise on how best to proceed. Happy to work within the confine=
-s of
-> >>> what works best for the larger group.
-> >>>
-> >>> Thanks,
-> >>> Bob Wolff
-> >>>
-> >>
-
-
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
-Best regards - Freundliche Gr=C3=BCsse - Meilleures salutations
+Tom
 
-Igor Opaniuk
-Senior Software Engineer, Embedded & Security
-E: igor.opaniuk@foundries.io
-W: www.foundries.io
+--CKQqm+mTANpruZEX
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXfwlYACgkQFHw5/5Y0
+tyxdXAwAjgQo1hn9SwlBRTso/0QKeLQst5dd1ZC6rCkav6tuhDaHy/KYXgGlWSRc
+dkA38BuFA9KchC0esVXqIccRcL4klwUtf/l4kcgIzUTm+dlN38tabRJizEIayZgs
+KAcRKCb2kzo82M+PK0A0jjQThVuaYaGYtcCdgZ+Rj+H1qn1y2Te5PLR9WvWiWwCN
+Lbewb2n516zwAUCDS18wFOqFH3HGwNuSV2oap1ADKXVTG2wzkgU10diE33lZ8cC1
+m+Ou75TaOfATXlw+eUnUYMbwLUBWJA/skdwW0SfDf9/abFi90rix3kTqQu20SjDZ
+I1/j/6luzdJgDxS17t4Ja4qnD52WHxBeztN1NDlf85F4BS/8RazfuJQsEyYvtzPa
+vUNG2EROTBbho5VAVFij3VhLwHiR4R2/BTA2UYgRjHbtPmDNqH1gEhi7LiQg9TNB
++I1jwImrWlcKy1LpBjvPBDn3A4Q9bSGWubmkFs7LNKPUIS3s06OaUzs/V+qjG5Ko
+zy6YCjRN
+=1eFu
+-----END PGP SIGNATURE-----
+
+--CKQqm+mTANpruZEX--
