@@ -4,79 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB62BC54E41
-	for <u-boot@archiver.kernel.org>; Wed, 28 Feb 2024 11:16:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60CBEC47DD9
+	for <u-boot@archiver.kernel.org>; Wed, 28 Feb 2024 11:21:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1999F88079;
-	Wed, 28 Feb 2024 12:16:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id BB04988048;
+	Wed, 28 Feb 2024 12:20:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="f3iekFIp";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="GC6StMPC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 876008806F; Wed, 28 Feb 2024 12:16:07 +0100 (CET)
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [IPv6:2a00:1450:4864:20::12e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4341787F95; Wed, 28 Feb 2024 12:20:58 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 116DC88069
- for <u-boot@lists.denx.de>; Wed, 28 Feb 2024 12:16:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3B28087FEB
+ for <u-boot@lists.denx.de>; Wed, 28 Feb 2024 12:20:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-513181719easo787607e87.3
- for <u-boot@lists.denx.de>; Wed, 28 Feb 2024 03:16:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709118962; x=1709723762; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Ig2uOGgH6CfG+MzYsxIzNjwWLPHITB+jRVIc0cqADWo=;
- b=f3iekFIpgiBvzmiIrTWTiiv94MfkBh+8JBKDO1BDqkpr7229VNql5ziqHg+FhAx3Tj
- i9LVshS8p5kRSzsqq/OLM4KXC+HwUibm0set6JdND3eOLI4SCmthExyXEoQpjW9CPD84
- y8xoG0a4W8E52CNl3muoLsRkPlr+L8lhHnXUWD0bz1ocdWukpOUq0GWizde3Ik+rKlSv
- lTSeEaN33mdeOD9KY8rOrLUuD7+xAjgjE6jZn3EeBPa2A0lkjKA1AJl+BK1Fz7m2CPpa
- EgYXes5oULjuM+vWODVfTGmkUUR+i/tjYnHBIPwwvfYohVtMClGPErt5xXMJtUHUHKJG
- z3Kg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709118962; x=1709723762;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Ig2uOGgH6CfG+MzYsxIzNjwWLPHITB+jRVIc0cqADWo=;
- b=XjJ5BprRkhTMyQN0O7Oz2BvgARQN7j+AYU/mYKZjO5Pa3GRqeT+lD+ej3s9rk5LJIp
- U20vF15efm7JZR7fIoDeBbMmwQF8bp2/0Vz3na7WrZXbuGWB/TyBNy8ag0vWBTnudJ9j
- ltPDmyWBoypiCB0vEyoZzHyIMctS0v3OXlu0UeSZJ3BbpP8MNZR9qJLnGOt7plkCeirD
- V4+4Kxt2cza+O2vQGKThQWayjSHzO0qssFrg3EFCYvKr2x2vPn3VzMagwBJmewIm+TiF
- h5sK3d+YwG8MqyqxBA2FFuLaxZ8A1BEOUWK5d1wjQNcp//BgO8R77sDm9pOfGby7hR/T
- 2GpA==
-X-Gm-Message-State: AOJu0Yxk06wYQulx5k/DEucNzgJyHpyQnm0Goa45B4AHCtNaQL2eJmuI
- sYwUry2KrFJnjjJ5SCT3YKqxjEVtVBbzIvFdjEdjcsB6HUnwyDZjekQpKdYLbR+umxYgwkUqo8O
- S8Z0Fi1nei1CQY1B4fTclWEcm0SVsJeamc5v9Ig==
-X-Google-Smtp-Source: AGHT+IEA1pVvy/0d9gnxzOoXPe2NFNFmDW/xR9CRFITZ1aW2lOjlK7tAEh+/asAAZQiNAJtXJDuPKcYnOf0X1cCe3TU=
-X-Received: by 2002:a19:f70b:0:b0:513:1456:f2c9 with SMTP id
- z11-20020a19f70b000000b005131456f2c9mr2165225lfe.55.1709118962246; Wed, 28
- Feb 2024 03:16:02 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41SBKlZf005771;
+ Wed, 28 Feb 2024 05:20:47 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1709119247;
+ bh=DQxABsF0QZyLt4qvlwaWrsdyFD/8ZHEcroO+cQCxP3c=;
+ h=From:To:CC:Subject:Date;
+ b=GC6StMPCgWGLRpT3BguLf6nlEO1poVVJG9VEuukKAFM4z6EimC8Q2hw75Hwgf9a6k
+ 8xN75Gvl3d7MhhFaeVQMA40Nh3R8AjTwx6Ig8iS9q2jIQ0hfoD8Oz+rh22iiaVo2Yu
+ Vkw5+Jcd/Pjqtxf98//Orf6ZME+X+YaY6QysQfYQ=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41SBKlLI014500
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 28 Feb 2024 05:20:47 -0600
+Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 28
+ Feb 2024 05:20:47 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 28 Feb 2024 05:20:47 -0600
+Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41SBKgNf027918;
+ Wed, 28 Feb 2024 05:20:43 -0600
+From: Neha Malcom Francis <n-francis@ti.com>
+To: <u-boot@lists.denx.de>, <trini@konsulko.com>, <sjg@chromium.org>,
+ <alpernebiyasak@gmail.com>, <bb@ti.com>, <nm@ti.com>,
+ <sumit.garg@linaro.org>
+CC: <michal.simek@amd.com>, <marex@denx.de>, <neil.armstrong@linaro.org>,
+ <afd@ti.com>, <vigneshr@ti.com>, <kamlesh@ti.com>, <m-chawdhry@ti.com>,
+ <u-kumar1@ti.com>, <n-francis@ti.com>
+Subject: [RFC PATCH 0/4] Cleanup J721E EVM and SK
+Date: Wed, 28 Feb 2024 16:50:38 +0530
+Message-ID: <20240228112042.3437691-1-n-francis@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20240228104811.1366694-1-ilias.apalodimas@linaro.org>
- <CALeDE9OGc5ePPThdHc7RwUGkp67HGjZJZwq8GhtwGSBPXRYXWQ@mail.gmail.com>
-In-Reply-To: <CALeDE9OGc5ePPThdHc7RwUGkp67HGjZJZwq8GhtwGSBPXRYXWQ@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 28 Feb 2024 13:15:26 +0200
-Message-ID: <CAC_iWjKAyUs2JrYN9OLrNKaOyChigdi7QH_780ZbXtRSFH2icw@mail.gmail.com>
-Subject: Re: [RFC PATCH 0/6] Clean up arm linker scripts
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, cfsworks@gmail.com, 
- caleb.connolly@linaro.org, sumit.garg@linaro.org, 
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Kever Yang <kever.yang@rock-chips.com>, Michal Simek <michal.simek@amd.com>, 
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
- Yegor Yefremov <yegorslists@googlemail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Shiji Yang <yangshiji66@outlook.com>,
- Bin Meng <bmeng@tinylab.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,100 +81,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 28 Feb 2024 at 13:11, Peter Robinson <pbrobinson@gmail.com> wrote:
->
-> On Wed, 28 Feb 2024 at 10:58, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > The arm linker scripts had a mix of symbols and C defined variables in an
-> > effort to emit relative references instead of absolute ones e.g [0].
-> > This has led to confusion over the years, ending up with mixed section
-> > definitions. Some sections being defined with overlays and different
-> > definitions between v7 and v8 architectures.
-> > For example __efi_runtime_rel_start/end is defined as a linker symbol for
-> > armv8 and a C variable in armv7.
-> >
-> > I am not sure if this used to be a compiler bug, but linker scripts nowadays
-> > can emit relative references, as long as the symbol definition is contained
-> > within the section definition. So let's switch most of the C defined variables
->
-> Should we be setting/upping the minimum version of the linker version
-> as part of this?
+This series does primarily three things:
+	1. Split out the common J721E defconfig for both EVM and SK
+	2. Cleanup k3-j721e-binman.dtsi to be SoC specific binman nodes
+	   and -u-boot.dtsi files of the respective boards can pick and
+	   edit according to their board. This is based on the
+	   discussion [1]
+	3. Move J721E EVM and SK to using OF_UPSTREAM
 
-The patch that added those as C-defined variables, was in 2013. So any
-linker that's not ancient history should emit those correctly.
+This series depends on series [2] and patch [3] which implement
+OF_UPSTREAM. Hopefully we get an idea of whether this is what we want to
+see across all K3 SoCs by the next release.
 
+[1] https://lore.kernel.org/u-boot/20240123205255.i7eynu6vdpoxwybf@irregular/
+[2] https://lore.kernel.org/u-boot/20240222093607.3085545-1-sumit.garg@linaro.org/
+[3] https://lore.kernel.org/u-boot/20240205-am62px-wip-rebasing-v3-11-04cbb42eaa6f@ti.com/
 
->
-> > and clean up the arm sections.c file. There's still a few symbols remaining --
-> > __secure_start/end, __secure_stack_start/end and __end which can be cleaned up
-> > in a followup series.
-> >
-> > The resulting binary (tested in QEMU v7/v8) had no size differences apart from
-> > the emited sections and object types of those variables. I've also added prints
-> > throughout the U-Boot init sequence. The offsets and delta for 'end - start'
-> > section sizes is unchanged.
-> >
-> > For example on QEMU v8:
-> > $~ ./scripts/bloat-o-meter u-boot u-boot.new
-> > add/remove: 0/0 grow/shrink: 0/0 up/down: 0/0 (0)
-> > Function                                     old     new   delta
-> > Total: Before=798861, After=798861, chg +0.00%
-> >
-> > $~ readelf -sW u-boot | grep bss_s
-> >     12: 00000000001029b8     0 SECTION LOCAL  DEFAULT   12 .bss_start
-> >   8088: 0000000000000018     0 NOTYPE  GLOBAL DEFAULT    1 _bss_start_ofs
-> >   8376: 00000000001029b8     0 OBJECT  GLOBAL DEFAULT   12 __bss_start
-> > $~ readelf -sW u-boot.new | grep bss_s
-> >   8085: 0000000000000018     0 NOTYPE  GLOBAL DEFAULT    1 _bss_start_ofs
-> >   8373: 00000000001029b8     0 NOTYPE  GLOBAL DEFAULT   12 __bss_start
-> >
-> > For QEMU v7 the differences are a bit bigger but only affect the variables
-> > placed in the .bss section because that was defined as an OVERLAY in the
-> > existing linker script.
-> > For example:
-> > $~ nm u-boot | grep tftp_prev_block
-> > 000ca0dc ? tftp_prev_block
-> > $~ nm u-boot.new | grep tftp_prev_block
-> > 000e0a5c b tftp_prev_block -----> The symbol is now placed into .bss
-> >
-> > It's worth noting that since the efi regions are affected by the change, booting
-> > with EFI is preferable while testing. Booting the kernel only should be enough
-> > since the efi stub and the kernel proper do request boottime and runtime
-> > services respectively.
-> > Something along the lines of
-> > > virtio scan && load virtio 0 $kernel_addr_r Image && bootefi $kernel_addr_r
-> > will work for QEMU aarch64.
-> >
-> > Tested platforms:
-> > - QEMU aarch64
-> > - Xilinx kv260 kria starter kit & zynq
-> > - QEMU armv7
-> > - STM32MP157C-DK2
-> >
-> > [0] commit 3ebd1cbc49f0 ("arm: make __bss_start and __bss_end__ compiler-generated")
-> >
-> > Ilias Apalodimas (6):
-> >   arm: baltos: remove custom linker script
-> >   arm: clean up v7 and v8 linker scripts for bss_start/end
-> >   arm: fix __efi_runtime_rel_start/end definitions
-> >   arm: clean up v7 and v8 linker scripts for __rel_dyn_start/end
-> >   arm: fix __efi_runtime_start/end definitions
-> >   arm: move image_copy_start/end to linker symbols
-> >
-> >  arch/arm/cpu/armv8/u-boot-spl.lds         |  14 +--
-> >  arch/arm/cpu/armv8/u-boot.lds             |  45 ++------
-> >  arch/arm/cpu/u-boot.lds                   |  74 +++----------
-> >  arch/arm/lib/sections.c                   |  10 --
-> >  arch/arm/mach-rockchip/u-boot-tpl-v8.lds  |  22 +---
-> >  arch/arm/mach-zynq/u-boot.lds             |  72 +++---------
-> >  board/qualcomm/dragonboard820c/u-boot.lds |  41 ++-----
-> >  board/vscom/baltos/u-boot.lds             | 128 ----------------------
-> >  include/asm-generic/sections.h            |   3 +
-> >  lib/efi_loader/efi_runtime.c              |   1 +
-> >  10 files changed, 58 insertions(+), 352 deletions(-)
-> >  delete mode 100644 board/vscom/baltos/u-boot.lds
-> >
-> > --
-> > 2.37.2
-> >
+Boot logs:
+https://gist.github.com/nehamalcom/3b578dfa1ef83b59f3c309557606ed63
+
+Neha Malcom Francis (4):
+  configs: j721e_sk: Move to separate defconfig for J721E SK board
+  tools: binman: control.py: Delete template nodes after parsing
+  arm: dts: k3-j721e: Separate boot binary build
+  arm: dts: k3-j721e: Move to OF_UPSTREAM
+
+ arch/arm/dts/Makefile                         |    4 +-
+ arch/arm/dts/k3-j721e-binman.dtsi             |  178 +-
+ .../k3-j721e-common-proc-board-u-boot.dtsi    |  138 +
+ arch/arm/dts/k3-j721e-common-proc-board.dts   |  976 ------
+ arch/arm/dts/k3-j721e-main.dtsi               | 2741 -----------------
+ arch/arm/dts/k3-j721e-mcu-wakeup.dtsi         |  681 ----
+ arch/arm/dts/k3-j721e-sk-u-boot.dtsi          |  104 +
+ arch/arm/dts/k3-j721e-sk.dts                  | 1074 -------
+ arch/arm/dts/k3-j721e-som-p0.dtsi             |  446 ---
+ arch/arm/dts/k3-j721e-thermal.dtsi            |   75 -
+ arch/arm/dts/k3-j721e.dtsi                    |  176 --
+ board/ti/j721e/MAINTAINERS                    |    2 +
+ configs/j721e_evm_a72_defconfig               |    5 +-
+ configs/j721e_evm_r5_defconfig                |    2 +-
+ configs/j721e_sk_a72_defconfig                |    4 +
+ configs/j721e_sk_r5_defconfig                 |    5 +
+ tools/binman/control.py                       |    6 +-
+ 17 files changed, 305 insertions(+), 6312 deletions(-)
+ delete mode 100644 arch/arm/dts/k3-j721e-common-proc-board.dts
+ delete mode 100644 arch/arm/dts/k3-j721e-main.dtsi
+ delete mode 100644 arch/arm/dts/k3-j721e-mcu-wakeup.dtsi
+ delete mode 100644 arch/arm/dts/k3-j721e-sk.dts
+ delete mode 100644 arch/arm/dts/k3-j721e-som-p0.dtsi
+ delete mode 100644 arch/arm/dts/k3-j721e-thermal.dtsi
+ delete mode 100644 arch/arm/dts/k3-j721e.dtsi
+ create mode 100644 configs/j721e_sk_a72_defconfig
+ create mode 100644 configs/j721e_sk_r5_defconfig
+
+-- 
+2.34.1
+
