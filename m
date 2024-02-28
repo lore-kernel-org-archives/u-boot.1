@@ -4,72 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D512AC47DD9
-	for <u-boot@archiver.kernel.org>; Wed, 28 Feb 2024 15:48:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B79CC5478C
+	for <u-boot@archiver.kernel.org>; Wed, 28 Feb 2024 16:15:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 085F287933;
-	Wed, 28 Feb 2024 16:48:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C5D2487BF4;
+	Wed, 28 Feb 2024 17:15:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ideasonboard.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qgoFd64t";
+	dkim=pass (1024-bit key; unprotected) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="NqqOllCv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 79B3A87B3D; Wed, 28 Feb 2024 16:48:50 +0100 (CET)
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
- [IPv6:2607:f8b0:4864:20::f2d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3F27687BC9; Wed, 28 Feb 2024 17:15:02 +0100 (CET)
+Received: from perceval.ideasonboard.com (perceval.ideasonboard.com
+ [IPv6:2001:4b98:dc2:55:216:3eff:fef7:d647])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E96B877B1
- for <u-boot@lists.denx.de>; Wed, 28 Feb 2024 16:48:47 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jaswinder.singh@linaro.org
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-68f748cdc8bso23630786d6.1
- for <u-boot@lists.denx.de>; Wed, 28 Feb 2024 07:48:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709135326; x=1709740126; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=sYBNLUW4dQNK6JRB4fHa1231W3M/mMZ+JrDIvTKc83E=;
- b=qgoFd64tUX1vGu3sS9unZ8ZyuNye1x/xqw+OlM7lP0IOcayCaX2B2RJXLMANJuWMR7
- TG6owYn/v6yOyndlOvPDi1iAwKaNbkkl9XtBtH1QGoQ/CL6TKX9wZt8cFCAwin7WOSBf
- qXCTpMlUZg2V7ZjW2NbZg6gOlSpapCQuFd99LntpVUzutGvfgDn3oFmYpoolzp1GIC4Y
- 8ldaXfzPXXRIu5RsefeiD41USUjkDxjW2D3v1Tbp7YDx4itgRFHpMypRXJohZyv9W2DF
- +zeBcPumjfbiGRuq7eN6e+fil2k6IBeD5FAxLCd+K9TjSvh99Io6TqNeY40sDWcAM8Hy
- WrIw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709135326; x=1709740126;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=sYBNLUW4dQNK6JRB4fHa1231W3M/mMZ+JrDIvTKc83E=;
- b=toF+YMEq3o7eV7wUmWaQNNorLa2QMP+/kSdn42Etus9RgmvbPe2b8ekiEJonWCErIx
- lOWKBF7i4wtndzmokdGhY8NjIv4e7FIACG0sHaTgBJ3LcKDd9nrWYIEd5skouheYVV0Q
- nZpgJcRy3TsAS5d6PKF/q1MnrLmbP9vSqOkKrmSiiUIDVX6NQTSZkDrJArcM9//XZYbQ
- PHkZ6XrtNd0U0Z+EKD5E7hTtNufwBL6DP/JCA6Bj5FrPxxCO/CWDzaOgRv1pkW9qrhPr
- rNerF//uB93ZiTqEXaZv48HPCPRc8zq0bPRACxwn0Z6lHfxnAyfqbtA3sp9knwqT4YoF
- wmwQ==
-X-Gm-Message-State: AOJu0YwQ6XYak2GyTPsg8VlOnwE5rw6T8PE6P/76r7X9TFrnbRmeNxXx
- lklxzMoWzRGPz9Y3vC9LHoDqAjOEzUTyZ96su6m75YFJYjFOlq0OsM7Sgt+EG/dLHy2yF6nFtYj
- TcNm00Eon6B1r/SJRMhlUWDNkVnqdXN9Umf6w1g==
-X-Google-Smtp-Source: AGHT+IGIYc1EjkYPS9KoUy33NkFZi2FiRavyIT2pPSnz6wpaVE14h5AEjb9KJJG32+/pEXLNMLVbaoOJYjoddG3W2Z8=
-X-Received: by 2002:a05:6214:300a:b0:690:197d:e235 with SMTP id
- ke10-20020a056214300a00b00690197de235mr5713297qvb.37.1709135321670; Wed, 28
- Feb 2024 07:48:41 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id 87B0787D6C
+ for <u-boot@lists.denx.de>; Wed, 28 Feb 2024 17:14:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=ideasonboard.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=laurent.pinchart@ideasonboard.com
+Received: from pendragon.ideasonboard.com (89-27-53-110.bb.dnainternet.fi
+ [89.27.53.110])
+ by perceval.ideasonboard.com (Postfix) with ESMTPSA id 1E3429CE;
+ Wed, 28 Feb 2024 17:14:44 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
+ s=mail; t=1709136884;
+ bh=+9q7BN4p8uCCYYkRcN3D4l4kBe6gYTl5YMK9KkLym3s=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=NqqOllCvE4WEXBtV5uq+GqOZgFW6fz7JT65pBPZY6jwdFv1SIDEsam7ZtHpGA0sR5
+ M4yQnubR2iHNRUaRPiO0zR0p6Uy357O2z3M/GiJ4fEa1orSmqR6cmEHzILIhUlCk7W
+ ilzscHSzHOQ7OZkkDwEeX/Q98gLZYj5CxzL28At8=
+Date: Wed, 28 Feb 2024 18:14:58 +0200
+From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de, git@xilinx.com, Piyush Mehta <piyush.mehta@amd.com>,
+ Radhey Shyam Pandey <radhey.shyam.pandey@amd.com>,
+ Tanmay Shah <tanmay.shah@amd.com>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH] arm64: zynqmp: Remove snps,enable_guctl1_ipd_quirk
+ property
+Message-ID: <20240228161458.GF9863@pendragon.ideasonboard.com>
+References: <2067eefbad161dee64b1dc7d97c498f09a8307a2.1708962844.git.michal.simek@amd.com>
 MIME-Version: 1.0
-References: <20240228055344.2335332-1-kojima.masahisa@socionext.com>
-In-Reply-To: <20240228055344.2335332-1-kojima.masahisa@socionext.com>
-From: Jassi Brar <jaswinder.singh@linaro.org>
-Date: Wed, 28 Feb 2024 09:48:30 -0600
-Message-ID: <CAJe_Zhfjpzi1Ds0_Csbis-3NenDUwHXxeha0Fpn=49kKp3WVJg@mail.gmail.com>
-Subject: Re: [PATCH v2] FWU: developerbox: read boot index from NOR flash
-To: Masahisa Kojima <kojima.masahisa@socionext.com>
-Cc: u-boot@lists.denx.de, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <2067eefbad161dee64b1dc7d97c498f09a8307a2.1708962844.git.michal.simek@amd.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,15 +67,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 27 Feb 2024 at 23:53, Masahisa Kojima
-<kojima.masahisa@socionext.com> wrote:
->
-> The FWU Multi Bank Update feature allows the platform to boot the
-> firmware images from one of the partitions(banks).
-> On the Developerbox, SCP-firmware running on the SCB(Cortex-M3)
-> passes the value of the boot index on the NOR flash.
-> Add a function to read the boot index value from the NOR flash.
->
-> Signed-off-by: Masahisa Kojima <kojima.masahisa@socionext.com>
+Hi Michal,
 
-Acked-by: Jassi Brar <jaswinder.singh@linaro.org>
+Thank you for the patch.
+
+On Mon, Feb 26, 2024 at 04:54:13PM +0100, Michal Simek wrote:
+> Remove undocumented DT property. Suggested solution was to apply quirk
+> via glue logic driver that's why make no sense to have it listed in DT.
+> 
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
+
+Reviewed-by: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+
+> ---
+> 
+> For more information please take a look at:
+> https://lore.kernel.org/r/1708023665-1441674-1-git-send-email-radhey.shyam.pandey@amd.com
+> https://lore.kernel.org/r/1708717523-4006664-1-git-send-email-radhey.shyam.pandey@amd.com
+> ---
+>  arch/arm/dts/zynqmp.dtsi | 2 --
+>  1 file changed, 2 deletions(-)
+> 
+> diff --git a/arch/arm/dts/zynqmp.dtsi b/arch/arm/dts/zynqmp.dtsi
+> index b50b83b7723f..daae23c12b79 100644
+> --- a/arch/arm/dts/zynqmp.dtsi
+> +++ b/arch/arm/dts/zynqmp.dtsi
+> @@ -1008,7 +1008,6 @@
+>  				/* iommus = <&smmu 0x860>; */
+>  				snps,quirk-frame-length-adjustment = <0x20>;
+>  				clock-names = "ref";
+> -				snps,enable_guctl1_ipd_quirk;
+>  				snps,resume-hs-terminations;
+>  				/* dma-coherent; */
+>  			};
+> @@ -1040,7 +1039,6 @@
+>  				/* iommus = <&smmu 0x861>; */
+>  				snps,quirk-frame-length-adjustment = <0x20>;
+>  				clock-names = "ref";
+> -				snps,enable_guctl1_ipd_quirk;
+>  				snps,resume-hs-terminations;
+>  				/* dma-coherent; */
+>  			};
+
+-- 
+Regards,
+
+Laurent Pinchart
