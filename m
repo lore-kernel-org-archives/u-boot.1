@@ -4,70 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C952C47DD9
-	for <u-boot@archiver.kernel.org>; Wed, 28 Feb 2024 10:58:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 539FBC54E41
+	for <u-boot@archiver.kernel.org>; Wed, 28 Feb 2024 11:08:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8B3E188007;
-	Wed, 28 Feb 2024 11:57:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 8F20B88073;
+	Wed, 28 Feb 2024 12:08:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="tBAgqV2Y";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qRfiNn/o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7923C87E7B; Wed, 28 Feb 2024 11:57:58 +0100 (CET)
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EDB6A8800D; Wed, 28 Feb 2024 12:08:12 +0100 (CET)
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [IPv6:2a00:1450:4864:20::12d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9630788007
- for <u-boot@lists.denx.de>; Wed, 28 Feb 2024 11:57:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7A69D8800D
+ for <u-boot@lists.denx.de>; Wed, 28 Feb 2024 12:08:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=devnull+forbidden405.outlook.com@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 6789ACE20EC;
- Wed, 28 Feb 2024 10:57:53 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id A50CFC433C7;
- Wed, 28 Feb 2024 10:57:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1709117872;
- bh=bwQo3yCi8PC9jOvUI1M44a84Ie4YFivuVDh6Xc1qwa0=;
- h=From:Date:Subject:To:Cc:Reply-To:From;
- b=tBAgqV2YYYiwes0qNilhYZArd8cRNjesDWca6cNebkajX6poX58Dwa8RoJHjQjGlf
- JqvMYHOkpdNsXH5EHm/3FZML+RY4C8JB8pmwMU8xZ7yLBx4h/MPOAWtSjR+WMTC2y9
- IfXa216Nt/OUa9J0EBFAgiWXi+qvsMA8CtMEtG1i9tjOu1alxLB2nHQt/0kYwomQBZ
- WOnjs4LlY4oZltbeX875KYc+4+aFJJV77od9w1kI7OmzH2Lc9tzsQsnPBJ0zvnwR3V
- 84YHkv4yn85C6dTmmL5GOKKm2a+d/rgZEkgPs2kYKhRSRp+wr3KfrltVLtgYzCqnIV
- wLRCU2T881KNg==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
- (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 8DAA0C54E41;
- Wed, 28 Feb 2024 10:57:52 +0000 (UTC)
-From: Yang Xiwen via B4 Relay <devnull+forbidden405.outlook.com@kernel.org>
-Date: Wed, 28 Feb 2024 18:57:52 +0800
-Subject: [PATCH v2] serial: pl01x: set baudrate when probing
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-512be9194b7so5533970e87.1
+ for <u-boot@lists.denx.de>; Wed, 28 Feb 2024 03:08:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1709118486; x=1709723286; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=VWNeZ9M+Z33LaWsDLK8FSJo6x/sBDvNy5QaWEVERxXU=;
+ b=qRfiNn/oCzCdV/ubY04b4Rc9GInr81iKdzxp8P2pplvYiIyNqsAoc7iCXLR50mMtAO
+ /+l4w/cAQ34RLVnKQSanQiZ6L8mPTwYgJe8Zp8RQXp+xKgM3k8/LNz1nkIqO4A4seriJ
+ SlpUMyh3Vl33gZEjV11HwJdIyNj/aUg2wcG/Ev4cC7fMz/PKFD2rUvtJyulm1GGQQs8M
+ Q+NHw8riM0ValG2UiXGQSDMuOFtoAF7yAdoP53iyLnw8U/lDX/jAr0e9hBfzoUHHWGDF
+ tEQRopRPCyiaa/pUwj1ilVC5kM1AoqZ5iZYj4xi3QhBzqJIzXeptgpPATzx7+SoHSort
+ t8MA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1709118486; x=1709723286;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=VWNeZ9M+Z33LaWsDLK8FSJo6x/sBDvNy5QaWEVERxXU=;
+ b=pBYwH9B5+2PMeIGoCocOkVouNHSCqZPM0DRVEVmVpbvX+NdXy6SBZyBrM0HLhyMvlo
+ RpVND6TkEqs1LFaOWH2MQeaTmdzuE6cLUf9Hqdo3SLEDjCtvuEqdObJ/G3RB1qxr0T87
+ onI95FNaGBL1Sy/lFeRJLs3JMyLdo4PI+VXz5D8+1GreQOdspFExIWE/P6NRh3Cr73vH
+ 2ytzjvlwMK5U0xc9ahxbPvr6b3+bmXRVfi8JFUlP1RH0rGso39/xOcUEjuUfvDn2C1rD
+ daK1C4l0CJ503Jqa0wDTNIGCgpJH4A9/ean4oocTiixqTe6YI07vtAMPuatLp1i5QIuu
+ FxoQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUdVi//AmGHsB19xkvNdRgjfW5C/o0EHImNTtOofXc4QKxMMG36Kij+pfmsAnuOnnKFr8UHRiNE7BEmQPSHxgGnRzAvGQ==
+X-Gm-Message-State: AOJu0Yydzi98T4SGLyopzHoYof+KX6DXA7UozMWW1O8b11axQlA3iXxI
+ 2ofsnJOqstRsBYj4LVvZpejAUcNJOVOa9GWDfVtCNsXsGDHdnGqf6td5oYlCiO13fq2pKqXe4lW
+ OHXsPFX8CTIxZaoStUer7fcDnkfbeVQ8K6n/RxA==
+X-Google-Smtp-Source: AGHT+IHfzmuPG+5LxDjMUPZlVAZbzJfuPyF/Kh5/SYUrN7ZHHJtsDrcpX6O4DHSjCr+lWCKwlfGnlNk3VqPQm4k9pp4=
+X-Received: by 2002:a05:6512:360b:b0:512:cda1:9bab with SMTP id
+ f11-20020a056512360b00b00512cda19babmr7490194lfs.13.1709118485716; Wed, 28
+ Feb 2024 03:08:05 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240228-b4-pl011-v2-1-92129ba2e23a@outlook.com>
-X-B4-Tracking: v=1; b=H4sIAK8R32UC/23MQQ7CIBCF4as0sxbDUBDtynuYLmg7WGItDVSia
- bi72LXL/+Xl2yBScBShqTYIlFx0fi4hDhX0o5nvxNxQGgQXkqOoWSfZMnFERnRRWlkrTH2Gcl8
- CWffeqVtbenRx9eGzywl/6x8kIUNmO6VPAzcapb361zp5/zj2/gltzvkLgRpTSaIAAAA=
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Lukasz Majewski <lukma@denx.de>
-Cc: Yang Xiwen <forbidden405@outlook.com>
-X-Mailer: b4 0.12.4
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1709117872; l=1620;
- i=forbidden405@outlook.com; s=20230724; h=from:subject:message-id;
- bh=SF9Ay5KAqk/WshEdgSQMu8Q+ALCWAg7OLJOzuEFI0Hg=;
- b=7frSEL61EkT4Zz8Nee7Azzk7gawOkSW6mvlIQ2J4yrz/hcSBy8i0ldwitKx8zLUn6WAVc/J3X
- t1jkuevRTq1BKA2mZ9tfMV+JMc3kpnilYA7ZRowwr8LXbSW2uHFnWHq
-X-Developer-Key: i=forbidden405@outlook.com; a=ed25519;
- pk=qOD5jhp891/Xzc+H/PZ8LWVSWE3O/XCQnAg+5vdU2IU=
-X-Endpoint-Received: by B4 Relay for forbidden405@outlook.com/20230724 with
- auth_id=67
-X-Original-From: Yang Xiwen <forbidden405@outlook.com>
+References: <20240226212408.7535-1-heinrich.schuchardt@canonical.com>
+ <20240226212408.7535-2-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240226212408.7535-2-heinrich.schuchardt@canonical.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 28 Feb 2024 13:07:29 +0200
+Message-ID: <CAC_iWjL8MU4=q0PyEghUGQCfdxVYWygyVViM7rZTaao53-h+Dw@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] arm: page align EFI binary section
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,64 +83,48 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: forbidden405@outlook.com
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Yang Xiwen <forbidden405@outlook.com>
+On Mon, 26 Feb 2024 at 23:24, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> Change the alignment of the relocation code in EFI binaries to match page
+> boundaries.
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+> v2:
+>         new patch
+> ---
+>  arch/arm/lib/crt0_arm_efi.S | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/arch/arm/lib/crt0_arm_efi.S b/arch/arm/lib/crt0_arm_efi.S
+> index 75ee37b7d3..7a4e5dff75 100644
+> --- a/arch/arm/lib/crt0_arm_efi.S
+> +++ b/arch/arm/lib/crt0_arm_efi.S
+> @@ -115,14 +115,14 @@ section_table:
+>         .short  0               /* NumberOfLineNumbers  (0 for executables) */
+>         .long   0xe0500020      /* Characteristics (section flags) */
+>
+> -       .align          9
+> +       .align          12
+>  _start:
+>         stmfd           sp!, {r0-r2, lr}
+>
+>         adr             r1, .L_DYNAMIC
+>         ldr             r0, [r1]
+>         add             r1, r0, r1
+> -       adr             r0, image_base
+> +       adrl            r0, image_base
+>         bl              _relocate
+>         teq             r0, #0
+>         bne             0f
+> --
+> 2.43.0
+>
 
-It is found that when DM is enabled, only generic init function is
-called in .probe(). Baudrate is never honored. Add a function call
-to .setbrg() when probing so that we can update the baudrate of the
-serial device.
-
-Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
----
-Changes in v2:
-- reverse if statement (Dan Carpenter)
-- Link to v1: https://lore.kernel.org/r/20240123-b4-pl011-v1-1-fb576d0a714f@outlook.com
----
- drivers/serial/serial_pl01x.c | 11 ++++++++---
- 1 file changed, 8 insertions(+), 3 deletions(-)
-
-diff --git a/drivers/serial/serial_pl01x.c b/drivers/serial/serial_pl01x.c
-index 428a4d210de5..f04c21e08264 100644
---- a/drivers/serial/serial_pl01x.c
-+++ b/drivers/serial/serial_pl01x.c
-@@ -290,6 +290,7 @@ int pl01x_serial_probe(struct udevice *dev)
- {
- 	struct pl01x_serial_plat *plat = dev_get_plat(dev);
- 	struct pl01x_priv *priv = dev_get_priv(dev);
-+	int ret;
- 
- #if CONFIG_IS_ENABLED(OF_PLATDATA)
- 	struct dtd_serial_pl01x *dtplat = &plat->dtplat;
-@@ -301,10 +302,14 @@ int pl01x_serial_probe(struct udevice *dev)
- #endif
- 	priv->type = plat->type;
- 
--	if (!plat->skip_init)
--		return pl01x_generic_serial_init(priv->regs, priv->type);
--	else
-+	if (!plat->skip_init) {
-+		ret = pl01x_generic_serial_init(priv->regs, priv->type);
-+		if (ret)
-+			return ret;
-+		return pl01x_serial_setbrg(dev, gd->baudrate);
-+	} else {
- 		return 0;
-+	}
- }
- 
- int pl01x_serial_getc(struct udevice *dev)
-
----
-base-commit: f7cca7ccc5117eaafcc2bde91ad1bed6fee7cfc3
-change-id: 20240123-b4-pl011-ee9575ff2a38
-
-Best regards,
--- 
-Yang Xiwen <forbidden405@outlook.com>
-
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
