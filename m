@@ -4,87 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3A8EC54E41
-	for <u-boot@archiver.kernel.org>; Wed, 28 Feb 2024 10:50:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C952C47DD9
+	for <u-boot@archiver.kernel.org>; Wed, 28 Feb 2024 10:58:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2473687ECC;
-	Wed, 28 Feb 2024 11:49:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 8B3E188007;
+	Wed, 28 Feb 2024 11:57:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Z1/ReKJ+";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="tBAgqV2Y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D3DE087D6B; Wed, 28 Feb 2024 11:48:58 +0100 (CET)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7923C87E7B; Wed, 28 Feb 2024 11:57:58 +0100 (CET)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE06688082
- for <u-boot@lists.denx.de>; Wed, 28 Feb 2024 11:48:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9630788007
+ for <u-boot@lists.denx.de>; Wed, 28 Feb 2024 11:57:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-412a3371133so24253185e9.2
- for <u-boot@lists.denx.de>; Wed, 28 Feb 2024 02:48:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709117334; x=1709722134; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=YUnSc/D4gSPARvE0QDoHE4cFvXwZ0/qZG6/9oqeUf7U=;
- b=Z1/ReKJ+LI8j/HkudaToxMn7WY5F4yR2ZJhb8Do0rhSlzNH3wIM0ES26++uTaoZFna
- cfB1Nr0nrZKkYLpa7DPVhp2yHTHbRUihafzi0jh7UK+Amq9nk/qLEc5tQr00JPcXtxpx
- jcF/5C4KUqFYwwGh5PCaichba2Rq/vHD1e46u/nd2tgEZXQ1ADVAW/wDcktF1no1xAze
- vmmG/RB7Q87X7oSM4vmPXy/2UN/AnKLgKMN0+mErADsLjh/bPTV5zu2Im09z9Dowd1KY
- y6E2Md1MkOxUfu9O4TRh9nbt8hVSxwETETzuL9L/uujxQRCLWvHz0R6DIj/3ybJLmiFr
- Nzqg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709117334; x=1709722134;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=YUnSc/D4gSPARvE0QDoHE4cFvXwZ0/qZG6/9oqeUf7U=;
- b=f6GxQnk/oMBS88Z49agAtegLGspD8YW+GdVxOnxJPJnL35CdqYeAK9CPGMS+5249FB
- 42Zds7bKhrSptcTZjWTnhqOtIIc3AAXYzSuT5T8GBVL2eH92qd3ax0nxWa9GYbm+M3yK
- aZ8t/cGvQlFEh3Evxp9H3lMxrHAb6RQDi1+MGVLnqO3O78HEyDRU18FbXTaxZ86YV9g3
- Ydve0pVtVjW/TWn86CcD+gPGPjAPWme7SUVIjpAdu22pMVckkfMPlvGjmzAYe8T5e1PH
- BjUaEeSFqlTkdLwPrzvDtCSYy2AhHsSH/HsJK46oab4qMF88vr0p75w/EOaM/ACxCZO9
- sqxA==
-X-Gm-Message-State: AOJu0YziLBsNJiqIs/hZtzKGUkGq0p3StgLs6Z8jvJbMSzC+n4+DvCUl
- 34JHw+jUr6cuSfrtOPyvjOUUIwTcaCzfzMLb+WPGjoZ/FwELnYt4UYdFC8IKna56uPDl3tJ+3BQ
- KDac=
-X-Google-Smtp-Source: AGHT+IH7lgYTtooYnNWqznuYTlhYPnNWJwo7DesuWEBncmKDyZsldYk9+AlPTLEOQfyWAGLp3buDGw==
-X-Received: by 2002:a05:600c:138f:b0:411:a5f9:26f5 with SMTP id
- u15-20020a05600c138f00b00411a5f926f5mr10541180wmf.38.1709117334311; 
- Wed, 28 Feb 2024 02:48:54 -0800 (PST)
-Received: from hades.. ([78.87.146.252]) by smtp.gmail.com with ESMTPSA id
- x1-20020a05600c2a4100b00410dd253008sm1680314wme.42.2024.02.28.02.48.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Feb 2024 02:48:54 -0800 (PST)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: u-boot@lists.denx.de,
-	trini@konsulko.com,
-	cfsworks@gmail.com
-Cc: caleb.connolly@linaro.org, sumit.garg@linaro.org,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>,
- Michal Simek <michal.simek@amd.com>,
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
- Yegor Yefremov <yegorslists@googlemail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Shiji Yang <yangshiji66@outlook.com>, Bin Meng <bmeng@tinylab.org>
-Subject: [RFC PATCH 6/6] arm: move image_copy_start/end to linker symbols
-Date: Wed, 28 Feb 2024 12:48:09 +0200
-Message-Id: <20240228104811.1366694-7-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.37.2
-In-Reply-To: <20240228104811.1366694-1-ilias.apalodimas@linaro.org>
-References: <20240228104811.1366694-1-ilias.apalodimas@linaro.org>
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=devnull+forbidden405.outlook.com@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id 6789ACE20EC;
+ Wed, 28 Feb 2024 10:57:53 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id A50CFC433C7;
+ Wed, 28 Feb 2024 10:57:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1709117872;
+ bh=bwQo3yCi8PC9jOvUI1M44a84Ie4YFivuVDh6Xc1qwa0=;
+ h=From:Date:Subject:To:Cc:Reply-To:From;
+ b=tBAgqV2YYYiwes0qNilhYZArd8cRNjesDWca6cNebkajX6poX58Dwa8RoJHjQjGlf
+ JqvMYHOkpdNsXH5EHm/3FZML+RY4C8JB8pmwMU8xZ7yLBx4h/MPOAWtSjR+WMTC2y9
+ IfXa216Nt/OUa9J0EBFAgiWXi+qvsMA8CtMEtG1i9tjOu1alxLB2nHQt/0kYwomQBZ
+ WOnjs4LlY4oZltbeX875KYc+4+aFJJV77od9w1kI7OmzH2Lc9tzsQsnPBJ0zvnwR3V
+ 84YHkv4yn85C6dTmmL5GOKKm2a+d/rgZEkgPs2kYKhRSRp+wr3KfrltVLtgYzCqnIV
+ wLRCU2T881KNg==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 8DAA0C54E41;
+ Wed, 28 Feb 2024 10:57:52 +0000 (UTC)
+From: Yang Xiwen via B4 Relay <devnull+forbidden405.outlook.com@kernel.org>
+Date: Wed, 28 Feb 2024 18:57:52 +0800
+Subject: [PATCH v2] serial: pl01x: set baudrate when probing
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20240228-b4-pl011-v2-1-92129ba2e23a@outlook.com>
+X-B4-Tracking: v=1; b=H4sIAK8R32UC/23MQQ7CIBCF4as0sxbDUBDtynuYLmg7WGItDVSia
+ bi72LXL/+Xl2yBScBShqTYIlFx0fi4hDhX0o5nvxNxQGgQXkqOoWSfZMnFERnRRWlkrTH2Gcl8
+ CWffeqVtbenRx9eGzywl/6x8kIUNmO6VPAzcapb361zp5/zj2/gltzvkLgRpTSaIAAAA=
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Lukasz Majewski <lukma@denx.de>
+Cc: Yang Xiwen <forbidden405@outlook.com>
+X-Mailer: b4 0.12.4
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1709117872; l=1620;
+ i=forbidden405@outlook.com; s=20230724; h=from:subject:message-id;
+ bh=SF9Ay5KAqk/WshEdgSQMu8Q+ALCWAg7OLJOzuEFI0Hg=;
+ b=7frSEL61EkT4Zz8Nee7Azzk7gawOkSW6mvlIQ2J4yrz/hcSBy8i0ldwitKx8zLUn6WAVc/J3X
+ t1jkuevRTq1BKA2mZ9tfMV+JMc3kpnilYA7ZRowwr8LXbSW2uHFnWHq
+X-Developer-Key: i=forbidden405@outlook.com; a=ed25519;
+ pk=qOD5jhp891/Xzc+H/PZ8LWVSWE3O/XCQnAg+5vdU2IU=
+X-Endpoint-Received: by B4 Relay for forbidden405@outlook.com/20230724 with
+ auth_id=67
+X-Original-From: Yang Xiwen <forbidden405@outlook.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,182 +79,64 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: forbidden405@outlook.com
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-image_copy_start/end are defined as c variables in order to force the compiler
-emit relative references. However, defining those within a section definition
-will do the same thing.
+From: Yang Xiwen <forbidden405@outlook.com>
 
-So let's remove the special sections from the linker scripts, the
-variable definitions from sections.c and define them as a symbols within
-a section.
+It is found that when DM is enabled, only generic init function is
+called in .probe(). Baudrate is never honored. Add a function call
+to .setbrg() when probing so that we can update the baudrate of the
+serial device.
 
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
 ---
- arch/arm/cpu/armv8/u-boot.lds             | 10 ++--------
- arch/arm/cpu/u-boot.lds                   | 10 ++--------
- arch/arm/lib/sections.c                   |  2 --
- arch/arm/mach-rockchip/u-boot-tpl-v8.lds  |  8 ++------
- arch/arm/mach-zynq/u-boot.lds             |  9 ++-------
- board/qualcomm/dragonboard820c/u-boot.lds | 11 ++---------
- 6 files changed, 10 insertions(+), 40 deletions(-)
+Changes in v2:
+- reverse if statement (Dan Carpenter)
+- Link to v1: https://lore.kernel.org/r/20240123-b4-pl011-v1-1-fb576d0a714f@outlook.com
+---
+ drivers/serial/serial_pl01x.c | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
 
-diff --git a/arch/arm/cpu/armv8/u-boot.lds b/arch/arm/cpu/armv8/u-boot.lds
-index e737de761a9d..340acf5c043b 100644
---- a/arch/arm/cpu/armv8/u-boot.lds
-+++ b/arch/arm/cpu/armv8/u-boot.lds
-@@ -23,7 +23,7 @@ SECTIONS
- 	. = ALIGN(8);
- 	.text :
- 	{
--		*(.__image_copy_start)
-+		__image_copy_start = .;
- 		CPUDIR/start.o (.text*)
- 	}
+diff --git a/drivers/serial/serial_pl01x.c b/drivers/serial/serial_pl01x.c
+index 428a4d210de5..f04c21e08264 100644
+--- a/drivers/serial/serial_pl01x.c
++++ b/drivers/serial/serial_pl01x.c
+@@ -290,6 +290,7 @@ int pl01x_serial_probe(struct udevice *dev)
+ {
+ 	struct pl01x_serial_plat *plat = dev_get_plat(dev);
+ 	struct pl01x_priv *priv = dev_get_priv(dev);
++	int ret;
+ 
+ #if CONFIG_IS_ENABLED(OF_PLATDATA)
+ 	struct dtd_serial_pl01x *dtplat = &plat->dtplat;
+@@ -301,10 +302,14 @@ int pl01x_serial_probe(struct udevice *dev)
+ #endif
+ 	priv->type = plat->type;
+ 
+-	if (!plat->skip_init)
+-		return pl01x_generic_serial_init(priv->regs, priv->type);
+-	else
++	if (!plat->skip_init) {
++		ret = pl01x_generic_serial_init(priv->regs, priv->type);
++		if (ret)
++			return ret;
++		return pl01x_serial_setbrg(dev, gd->baudrate);
++	} else {
+ 		return 0;
++	}
+ }
+ 
+ int pl01x_serial_getc(struct udevice *dev)
 
-@@ -120,13 +120,7 @@ SECTIONS
- 		*(.rel*.efi_runtime)
- 		*(.rel*.efi_runtime.*)
-                 __efi_runtime_rel_stop = .;
--	}
--
--	. = ALIGN(8);
--
--	.image_copy_end :
--	{
--		*(.__image_copy_end)
-+		__image_copy_end = .;
- 	}
+---
+base-commit: f7cca7ccc5117eaafcc2bde91ad1bed6fee7cfc3
+change-id: 20240123-b4-pl011-ee9575ff2a38
 
- 	.rela.dyn ALIGN(8) : {
-diff --git a/arch/arm/cpu/u-boot.lds b/arch/arm/cpu/u-boot.lds
-index df55bb716e35..7c4f9c2d4dd3 100644
---- a/arch/arm/cpu/u-boot.lds
-+++ b/arch/arm/cpu/u-boot.lds
-@@ -37,7 +37,7 @@ SECTIONS
- 	. = ALIGN(4);
- 	.text :
- 	{
--		*(.__image_copy_start)
-+		__image_copy_start = .;
- 		*(.vectors)
- 		CPUDIR/start.o (.text*)
- 	}
-@@ -151,13 +151,7 @@ SECTIONS
- 		*(.rel*.efi_runtime)
- 		*(.rel*.efi_runtime.*)
- 		__efi_runtime_rel_stop = .;
--	}
--
--	. = ALIGN(4);
--
--	.image_copy_end :
--	{
--		*(.__image_copy_end)
-+		__image_copy_end = .;
- 	}
-
- 	.rel.dyn ALIGN(4) : {
-diff --git a/arch/arm/lib/sections.c b/arch/arm/lib/sections.c
-index a4d4202e99f5..db5463b2bbbc 100644
---- a/arch/arm/lib/sections.c
-+++ b/arch/arm/lib/sections.c
-@@ -19,8 +19,6 @@
-  * aliasing warnings.
-  */
-
--char __image_copy_start[0] __section(".__image_copy_start");
--char __image_copy_end[0] __section(".__image_copy_end");
- char __secure_start[0] __section(".__secure_start");
- char __secure_end[0] __section(".__secure_end");
- char __secure_stack_start[0] __section(".__secure_stack_start");
-diff --git a/arch/arm/mach-rockchip/u-boot-tpl-v8.lds b/arch/arm/mach-rockchip/u-boot-tpl-v8.lds
-index b7887194026e..4b480ebb0c4d 100644
---- a/arch/arm/mach-rockchip/u-boot-tpl-v8.lds
-+++ b/arch/arm/mach-rockchip/u-boot-tpl-v8.lds
-@@ -24,7 +24,7 @@ SECTIONS
-
- 	.text : {
- 		. = ALIGN(8);
--		*(.__image_copy_start)
-+		__image_copy_start = .;
- 		CPUDIR/start.o (.text*)
- 		*(.text*)
- 	}
-@@ -42,11 +42,7 @@ SECTIONS
- 	__u_boot_list : {
- 		. = ALIGN(8);
- 		KEEP(*(SORT(__u_boot_list*)));
--	}
--
--	.image_copy_end : {
--		. = ALIGN(8);
--		*(.__image_copy_end)
-+		__image_copy_end = .;
- 	}
-
- 	.end : {
-diff --git a/arch/arm/mach-zynq/u-boot.lds b/arch/arm/mach-zynq/u-boot.lds
-index fcd0f42a7106..553bcf182272 100644
---- a/arch/arm/mach-zynq/u-boot.lds
-+++ b/arch/arm/mach-zynq/u-boot.lds
-@@ -16,7 +16,7 @@ SECTIONS
- 	. = ALIGN(4);
- 	.text :
- 	{
--		*(.__image_copy_start)
-+		__image_copy_start = .;
- 		*(.vectors)
- 		CPUDIR/start.o (.text*)
- 	}
-@@ -57,12 +57,7 @@ SECTIONS
- 		*(.rel*.efi_runtime)
- 		*(.rel*.efi_runtime.*)
- 		__efi_runtime_rel_stop = .;
--	}
--
--	. = ALIGN(8);
--	.image_copy_end :
--	{
--		*(.__image_copy_end)
-+		__image_copy_end = .;
- 	}
-
- 	.rel.dyn ALIGN(8) : {
-diff --git a/board/qualcomm/dragonboard820c/u-boot.lds b/board/qualcomm/dragonboard820c/u-boot.lds
-index 2969f139bfd2..f8d3c030ef32 100644
---- a/board/qualcomm/dragonboard820c/u-boot.lds
-+++ b/board/qualcomm/dragonboard820c/u-boot.lds
-@@ -17,7 +17,7 @@ SECTIONS
- 	. = ALIGN(8);
- 	.text :
- 	{
--		*(.__image_copy_start)
-+		__image_copy_start = .;
- 		board/qualcomm/dragonboard820c/head.o (.text*)
- 		CPUDIR/start.o (.text*)
- 	}
-@@ -60,16 +60,9 @@ SECTIONS
- 		*(.rel*.efi_runtime)
- 		*(.rel*.efi_runtime.*)
-                 __efi_runtime_rel_stop = .;
-+		__image_copy_end = .;
- 	}
-
--	. = ALIGN(8);
--
--	.image_copy_end :
--	{
--		*(.__image_copy_end)
--	}
--
--
- 	.rela.dyn ALIGN(8) : {
- 		__rel_dyn_start = .;
- 		*(.rela*)
---
-2.37.2
+Best regards,
+-- 
+Yang Xiwen <forbidden405@outlook.com>
 
