@@ -4,54 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29F4EC47DD9
-	for <u-boot@archiver.kernel.org>; Wed, 28 Feb 2024 10:36:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 578FFC47DD9
+	for <u-boot@archiver.kernel.org>; Wed, 28 Feb 2024 10:36:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 096D788023;
-	Wed, 28 Feb 2024 11:36:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 39A1888063;
+	Wed, 28 Feb 2024 11:36:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Kpr3HVTh";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="k7cMlyP1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C86987FEB; Wed, 28 Feb 2024 11:36:08 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
+ id 4A9F787FEB; Wed, 28 Feb 2024 11:36:12 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E631E8800C
- for <u-boot@lists.denx.de>; Wed, 28 Feb 2024 11:36:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1CFC988048
+ for <u-boot@lists.denx.de>; Wed, 28 Feb 2024 11:36:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rogerq@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 6485F6175D;
+ by dfw.source.kernel.org (Postfix) with ESMTP id 8C59D61473;
+ Wed, 28 Feb 2024 10:36:05 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7C055C43399;
  Wed, 28 Feb 2024 10:36:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3574AC433F1;
- Wed, 28 Feb 2024 10:35:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1709116562;
- bh=JxQDVWh/sj8yOIj4Ue6SHLwqbiRLOv2YQtOnWc1+rvA=;
- h=From:Subject:Date:To:Cc:From;
- b=Kpr3HVThtI0OFIpBjS3q+5tQQr5Q4dmaWcphX/bIX3a/WQXljDro7E/52Gm68ky4e
- XAIbc9/mlBlPpo18BDho0UWUomdX/ogWGSUYm/X6ofBhMVtK2aVSPnMJ7Lu53a0+ak
- 5Y0ytJ22b9lgLzi7DSXoDD6dA6btZdvdGDb9A6x9+JN13nkcYh1p8w9TiezVFe+kKd
- /26FGUPNZzFp4hr2DaAr7IZgfzB0VnIeCrQJNVf8V0EZysX8+oHqHXSjWghphWIfWr
- rOE0yqse1a8A0RSdfJQacVGb5ybfe9qEX0ywA1X90k0ybCBiB4zG9JX0wdj9o6ZQ6e
- LAwcprg2XXuEw==
+ s=k20201202; t=1709116565;
+ bh=ZwYfCAgSMH7fq0XfK/UcE69H0dJlhOx/5qTQ+rm6p8A=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
+ b=k7cMlyP1vu6FB+VAvBugn1xK+suIZmfki7fQFnL/nKw19w3m0veT4SJ6BXGMlgU7o
+ jqGeAuFDxsVRyiGzjLiIAP9xOgAHmQ3lCsh+/keMWKnTgB8cbc1wM2HU0aMKPOo4bo
+ RR1GKg9LNbFy5JljJZ4UY5IrMxqK3SA/B0cuarFKThxMXdcTdfawk1JxZVeW/mFel7
+ gwFfexSZQtWqfNpd3SUiWzLSjjNpBgd2xUtsnrY8bIW2CHtXWTYU+ChsGHzXfIurCY
+ M39tnR6xqSpXIbaflMq4wm8ezPH2z2RUd1ObAGhyC0AhJnDATG/2BL3R+rrnDKwFvZ
+ zX2LAw2Z8/JyA==
 From: Roger Quadros <rogerq@kernel.org>
-Subject: [PATCH v2 0/2] net: ti: am65-cpsw / cpsw-mdio: Switch to DM MDIO
-Date: Wed, 28 Feb 2024 12:35:25 +0200
-Message-Id: <20240228-for-2024-07-am65-cpsw-mdio-v2-0-f74f972eafeb@kernel.org>
+Date: Wed, 28 Feb 2024 12:35:26 +0200
+Subject: [PATCH v2 1/2] net: mdio: Handle bus level GPIO Reset
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAG0M32UC/33Nyw6CMBCF4Vchs3ZMW7mIK9/DsCgwwERpydSgh
- vDuFhK3Lr+z+M8CgYQpwCVZQGjmwN5FmEMCzWBdT8htNBhlUmV0jp0X3ICqQDvmGTZTeOHYskc
- 6NTqrTVmkqYEYmIQ6fu/xWxU9cHh6+exfs97WX7b8l501KrQdldbWNjsrfb2TOHocvfRQrev6B
- fXE9DfFAAAA
+Message-Id: <20240228-for-2024-07-am65-cpsw-mdio-v2-1-f74f972eafeb@kernel.org>
+References: <20240228-for-2024-07-am65-cpsw-mdio-v2-0-f74f972eafeb@kernel.org>
+In-Reply-To: <20240228-for-2024-07-am65-cpsw-mdio-v2-0-f74f972eafeb@kernel.org>
 To: Joe Hershberger <joe.hershberger@ni.com>, 
  Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>, 
  nm@ti.com
@@ -59,20 +56,20 @@ Cc: srk@ti.com, s-vadapalli@ti.com, vigneshr@ti.com, mripard@kernel.org,
  dannenberg@ti.com, r-gunasekaran@ti.com, danishanwar@ti.com, 
  u-boot@lists.denx.de, Roger Quadros <rogerq@kernel.org>
 X-Mailer: b4 0.12.4
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1431; i=rogerq@kernel.org;
- h=from:subject:message-id; bh=JxQDVWh/sj8yOIj4Ue6SHLwqbiRLOv2YQtOnWc1+rvA=;
- b=owEBbQKS/ZANAwAIAdJaa9O+djCTAcsmYgBl3wyKPxV0lzJNMfpBCgb6ScDhCaL7BWXQ5/QCz
- W+7dOpMC6OJAjMEAAEIAB0WIQRBIWXUTJ9SeA+rEFjSWmvTvnYwkwUCZd8MigAKCRDSWmvTvnYw
- k57nD/4q7MYx9Fi7JS3qvofIwcUyq/qXQ5axdAe+YDXhun3zel0KxoXIiho/G4ttHUUVu2pgUb6
- D9rxWU+w1tqaznoiC1zHEWG7hbS04bagf16UwfQ6Tz+SXsUAEuu43HkEj4aLBEUZZQKqqwew0gR
- //2N7Kp+moD3cgjybASpbAOJ47eUAuml7oe0z6+2QBEtQKYpR6QtueZnWRWzyhaa+U07Nf5iUtf
- U+KhsdK5u5nwjLs7zmsx8tIz9q0t20AZYooPoH68pQFUqvqMOhG6g0zlyKZ17+CH0vTNW9ZCmaX
- mRspCN7Q6RW+zCC++0d1fcz4a9nJJa50fzh8/LSeM9HNs2/rLky+Ps2BnQxX7nkM12AbKzImO57
- 60KSeE7NZTe6YdRalus/rkacOwucttXanHUtADAQd96+FvGYWCiNfeQuMMqAt0kaofZb6XVukg/
- tvA4srWi3tQsO/tH8V6+QICx8+W69qu7PP3IjTxveANh1oyKMHrN0YHU96x2UPpy6v+mglRJHFl
- D4qaocu3mvzHNsRcdyiiQdtygnD2JIGunRye06//IzH6kfBk87hJ3f9ZnDPgjRcD/pdOEWRxidh
- jBmf/X34mHcV8CzClhRdscOIsrdcIxXEyWo4UmTdhqP8Mb6AZTSq1S2EB0E7cuVPtP/hv0Bt7XJ
- 9jI/NH0F/wR+4nA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3518; i=rogerq@kernel.org;
+ h=from:subject:message-id; bh=ZwYfCAgSMH7fq0XfK/UcE69H0dJlhOx/5qTQ+rm6p8A=;
+ b=owEBbQKS/ZANAwAIAdJaa9O+djCTAcsmYgBl3wyOg8dDxipub2I0v0JZ4uwlzxBYR51ws0thi
+ FiNFgFRIjWJAjMEAAEIAB0WIQRBIWXUTJ9SeA+rEFjSWmvTvnYwkwUCZd8MjgAKCRDSWmvTvnYw
+ kwELEADQALoxkIjpd0/EdRptd6Nmdo58cE9a4cWCa1Ara4FrLIXldurI1D2UaWJYjeetcPDdO6v
+ KbV+MUk+tZob3dXU7w9oH/k2MoPDzzj5arZE8LajSByroPuewev1FCERSwjK5UuAqG+FR6xLi3F
+ KHbvCZZ7itez6wW6eJaq/wRdcxXSh6HgG5RVVLacUSfTA2ASkqDt/9soVQmU4XRrCGzR1hwtZZ0
+ Zk/e+eX49/CE+D26OVklOvvkOJgKD731VUaCWi9a8Qa8WZVeWBt4yZWFxvT57mh1S8zwWeU1a41
+ wPN/tTAWn3TOr92BaLLc6qD5vqEoWe/rNcy9MUT9+SnmcJNzwXNxSj5NdvCSmrSZql8kHv5iSFQ
+ S4c2vljj3g2C6mQOGWxUNnosIJIkPzE2hwnanuWQcqaS88zW3ZV775SbMef/lAP87JhZOerrQKN
+ 3+xhw/Zi28Px8OJSt+0AZkhPe44T5Lh8a3AWMrO6dtGjwBm4Sm69lbs5G/MLrNTwGDJ2x0CZ9SO
+ aqQpAx4nX0q2Iuf5fUe0mwjgPbPo8X+fHGbhKEcCBUgbZRS1w+lqbcDcRP8W84mIx7qiTxLZBAw
+ PoPZ2o7IO6QRWSDf405mdSoDfKnEiDdsVTaw5s7OP1AQbLgpJ75h3a789v2nZ3ovbm0H+bUpzs0
+ 5++2KBxPtRj2s2w==
 X-Developer-Key: i=rogerq@kernel.org; a=openpgp;
  fpr=412165D44C9F52780FAB1058D25A6BD3BE763093
 X-BeenThere: u-boot@lists.denx.de
@@ -91,45 +88,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
-
-This converts cpsw-mdio into a proper Driver Model
-driver and introduces the new Config symbol CONFIG_MDIO_TI_CPSW.
-
-It also cleans up the am65-cpsw driver so it porperly uses
-the DM PHY interface.
-
-It does not convert the legacy cpsw and keystone-net drivers.
-
-Tested on SK-AM62, SK-AM64, j721e_beagleboneai64 and AM335x BeagleBone.
-
-CI tests: https://github.com/u-boot/u-boot/pull/493
+Some platforms have bus level Reset controlled
+by a GPIO line. If available then handle bus reset
+via GPIO.
 
 Signed-off-by: Roger Quadros <rogerq@kernel.org>
 ---
-Changes in v2:
-- Fix build if DM_GPIO not set.
-- Fix build on platforms that don't define <asm/gpio.h>
-- Link to v1: https://lore.kernel.org/r/20240219-for-2024-07-am65-cpsw-mdio-v1-0-afe9aaba5801@kernel.org
-
+Changelog:
+v2:
+- Fix build if DM_GPIO not set
+- Fix build on platforms that don't have <asm/gpio.h>
+  by using <asm-generic/gpio.h>
 ---
-Roger Quadros (2):
-      net: mdio: Handle bus level GPIO Reset
-      net: am65-cpsw: cpsw_mdio: Switch to proper DM_MDIO framework
+ include/phy.h     |  7 +++++++
+ net/mdio-uclass.c | 37 ++++++++++++++++++++++++++++++++++++-
+ 2 files changed, 43 insertions(+), 1 deletion(-)
 
- drivers/net/ti/Kconfig          |   8 ++
- drivers/net/ti/Makefile         |   3 +-
- drivers/net/ti/am65-cpsw-nuss.c | 190 ++------------------------------------
- drivers/net/ti/cpsw_mdio.c      | 198 +++++++++++++++++++++++++++++++++++-----
- drivers/net/ti/cpsw_mdio.h      |   2 +
- include/phy.h                   |   7 ++
- net/mdio-uclass.c               |  37 +++++++-
- 7 files changed, 239 insertions(+), 206 deletions(-)
----
-base-commit: d49fa3defa50c6d3f04acbb52fd486c13c14ab6a
-change-id: 20240216-for-2024-07-am65-cpsw-mdio-e3c15b297442
+diff --git a/include/phy.h b/include/phy.h
+index e02cbdb58c..ae23814bbf 100644
+--- a/include/phy.h
++++ b/include/phy.h
+@@ -9,6 +9,7 @@
+ #ifndef _PHY_H
+ #define _PHY_H
+ 
++#include <asm-generic/gpio.h>
+ #include <log.h>
+ #include <phy_interface.h>
+ #include <dm/ofnode.h>
+@@ -76,6 +77,12 @@ struct mii_dev {
+ 	int (*reset)(struct mii_dev *bus);
+ 	struct phy_device *phymap[PHY_MAX_ADDR];
+ 	u32 phy_mask;
++	/** @reset_delay_us: Bus GPIO reset pulse width in microseconds */
++	int reset_delay_us;
++	/** @reset_post_delay_us: Bus GPIO reset deassert delay in microseconds */
++	int reset_post_delay_us;
++	/** @reset_gpiod: Bus Reset GPIO descriptor pointer */
++	struct gpio_desc reset_gpiod;
+ };
+ 
+ /* struct phy_driver: a structure which defines PHY behavior
+diff --git a/net/mdio-uclass.c b/net/mdio-uclass.c
+index e758cc66d7..6fc7034111 100644
+--- a/net/mdio-uclass.c
++++ b/net/mdio-uclass.c
+@@ -14,6 +14,9 @@
+ #include <dm/of_extra.h>
+ #include <dm/uclass-internal.h>
+ #include <linux/compat.h>
++#include <linux/delay.h>
++
++#define DEFAULT_GPIO_RESET_DELAY	10	/* in microseconds */
+ 
+ void dm_mdio_probe_devices(void)
+ {
+@@ -80,6 +83,16 @@ int dm_mdio_write(struct udevice *mdio_dev, int addr, int devad, int reg,
+ int dm_mdio_reset(struct udevice *mdio_dev)
+ {
+ 	struct mdio_ops *ops = mdio_get_ops(mdio_dev);
++	struct mdio_perdev_priv *pdata = dev_get_uclass_priv(mdio_dev);
++	struct mii_dev *mii_bus = pdata->mii_bus;
++
++	if (CONFIG_IS_ENABLED(DM_GPIO) && dm_gpio_is_valid(&mii_bus->reset_gpiod)) {
++		dm_gpio_set_value(&mii_bus->reset_gpiod, 1);
++		udelay(mii_bus->reset_delay_us);
++		dm_gpio_set_value(&mii_bus->reset_gpiod, 0);
++		if (mii_bus->reset_post_delay_us > 0)
++			udelay(mii_bus->reset_post_delay_us);
++	}
+ 
+ 	if (!ops->reset)
+ 		return 0;
+@@ -111,14 +124,36 @@ static int mdio_reset(struct mii_dev *mii_bus)
+ static int dm_mdio_post_probe(struct udevice *dev)
+ {
+ 	struct mdio_perdev_priv *pdata = dev_get_uclass_priv(dev);
++	struct mii_dev *mii_bus;
++	int ret;
+ 
+-	pdata->mii_bus = mdio_alloc();
++	mii_bus = mdio_alloc();
++	if (!mii_bus) {
++		dev_err(dev, "couldn't allocate mii_bus\n");
++		return -ENOMEM;
++	}
++	pdata->mii_bus = mii_bus;
+ 	pdata->mii_bus->read = mdio_read;
+ 	pdata->mii_bus->write = mdio_write;
+ 	pdata->mii_bus->reset = mdio_reset;
+ 	pdata->mii_bus->priv = dev;
+ 	strlcpy(pdata->mii_bus->name, dev->name, MDIO_NAME_LEN);
+ 
++	if (IS_ENABLED(CONFIG_DM_GPIO)) {
++		/* Get bus level PHY reset GPIO details */
++		mii_bus->reset_delay_us = dev_read_u32_default(dev, "reset-delay-us",
++							       DEFAULT_GPIO_RESET_DELAY);
++		mii_bus->reset_post_delay_us = dev_read_u32_default(dev,
++								    "reset-post-delay-us",
++								    0);
++		ret = gpio_request_by_name(dev, "reset-gpios", 0, &mii_bus->reset_gpiod,
++					   GPIOD_IS_OUT | GPIOD_IS_OUT_ACTIVE);
++		if (ret && ret != -ENOENT) {
++			dev_err(dev, "couldn't get reset-gpios: %d\n", ret);
++			return ret;
++		}
++	}
++
+ 	return mdio_register(pdata->mii_bus);
+ }
+ 
 
-Best regards,
 -- 
-Roger Quadros <rogerq@kernel.org>
+2.34.1
 
