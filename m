@@ -4,70 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F00AC54E41
-	for <u-boot@archiver.kernel.org>; Wed, 28 Feb 2024 08:59:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C1B3C54E41
+	for <u-boot@archiver.kernel.org>; Wed, 28 Feb 2024 09:03:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D94508796B;
-	Wed, 28 Feb 2024 09:59:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id B2189879F2;
+	Wed, 28 Feb 2024 10:03:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="oSqtdiIw";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="PToPPrf9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F3C787DD1; Wed, 28 Feb 2024 09:59:02 +0100 (CET)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ id 2B6D08804F; Wed, 28 Feb 2024 10:03:00 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C22468785E
- for <u-boot@lists.denx.de>; Wed, 28 Feb 2024 09:58:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 46AC587E62
+ for <u-boot@lists.denx.de>; Wed, 28 Feb 2024 10:02:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=W.Egorov@phytec.de
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1709110738; x=1711702738;
- h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8LWwcrY36OvUeQQbVD2WYbqPPr8cZiPRDc4s/39bW/k=;
- b=oSqtdiIw7GTvBOYam1q7aUV18kRaonQ3TqXWNRE5a0+rikO19P/xVhhSMWoObLD7
- LtCnuBfx1ZCepWh31OmLIHu2uEv2vndcOcjJ4uAE1TSoShUCL1dO1ETZ0nzm1cqn
- Rs5QRve1Z+s/0EzbJZhv1eoSGeK9IPF5MYPnQPU03Bs=;
-X-AuditID: ac14000a-fbefe7000000290d-5e-65def5d20723
-Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
- (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id B9.C3.10509.2D5FED56;
- Wed, 28 Feb 2024 09:58:58 +0100 (CET)
-Received: from augenblix2.phytec.de (172.25.0.11) by Berlix.phytec.de
- (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Wed, 28 Feb
- 2024 09:58:58 +0100
-From: Wadim Egorov <w.egorov@phytec.de>
-To: <u-boot@lists.denx.de>
-CC: <upstream@lists.phytec.de>, <d-gole@ti.com>
-Subject: [PATCH] doc: board: phytec: phycore-am62x: Update artifact names
-Date: Wed, 28 Feb 2024 09:58:48 +0100
-Message-ID: <20240228085848.1230795-1-w.egorov@phytec.de>
-X-Mailer: git-send-email 2.25.1
+ spf=pass smtp.mailfrom=danishanwar@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41S92jlm080611;
+ Wed, 28 Feb 2024 03:02:45 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1709110965;
+ bh=TrR9wnQIYYPgK0BIdBBfpxRfZvCapahas0/N6/dzRbE=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=PToPPrf907SEdam2WfPmAU5JSX5VfboUggkceER95oBvpINACSW8IqePjkmnLjcPp
+ zOVKMcNR4uPBY3ikXFiuHAheFuUfFjcMLSh5dCtKGLc+e/KfkdHd15Gc+vFR7alHGk
+ f10GfKD2vyg1Je4g/WaiIs7ek7TnDGxSjSyerKNk=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41S92jQW121761
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 28 Feb 2024 03:02:45 -0600
+Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 28
+ Feb 2024 03:02:44 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 28 Feb 2024 03:02:44 -0600
+Received: from [10.24.69.25] (danish-tpc.dhcp.ti.com [10.24.69.25])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41S92ex6100119;
+ Wed, 28 Feb 2024 03:02:41 -0600
+Message-ID: <2ec93e9f-fbe5-4c9f-83d5-bbc820efff0a@ti.com>
+Date: Wed, 28 Feb 2024 14:32:40 +0530
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [172.25.0.11]
-X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
- (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrFLMWRmVeSWpSXmKPExsWyRpKBR/fS13upBrO6FS1a1npYvN3byW7R
- /U7dgdnj7J0djB793S2sHsdvbGcKYI7isklJzcksSy3St0vgyli5soe1YBJ7xc6T3xkbGH+y
- djFyckgImEic7t/H0sXIxSEksJhJYv7yncwQzmNGiad3H7OBVLEJqEvc2fANrENEQEriZedG
- ZhCbWUBfYuqZXWA1wgKeEntXLAKKc3CwCKhKbLqaA2LyClhKHH3pDbFLXmLmpe/sIDavgKDE
- yZlPWCCmyEs0b50NNVFC4uCLF2C2EFD8xaXlLDC90869ZoawQyWObFrNNIFRYBaSUbOQjJqF
- ZNQCRuZVjEK5mcnZqUWZ2XoFGZUlqcl6KambGEHhKcLAtYOxb47HIUYmDsZDjBIczEoivDKC
- d1OFeFMSK6tSi/Lji0pzUosPMUpzsCiJ867uCE4VEkhPLEnNTk0tSC2CyTJxcEo1MBpsbVET
- rIm3KZkmfZJFLoSbbd6egl9/+ULcwxY/VcooUl89nXtj0/W0z2oXmmM0ZMXTX+zSFbwhzrfG
- e/prWTdZm3qF9klT90lJaH3TOh773MQu+33FjYoFam7sB70zm5lkT9x/LSFRcj1W5PeH+nW5
- H2bPUlkU03PkmtT9yM9fDRpa/nkwKbEUZyQaajEXFScCAJgf3tw9AgAA
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5] misc: fs-loader: Use fw_storage_interface instead of
+ storage_interface
+Content-Language: en-US
+To: Sean Anderson <seanga2@gmail.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>,
+ Michal Simek <michal.simek@amd.com>, Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini
+ <trini@konsulko.com>, Roger Quadros <rogerq@kernel.org>
+CC: <u-boot@lists.denx.de>, <srk@ti.com>, Vignesh Raghavendra
+ <vigneshr@ti.com>, <r-gunasekaran@ti.com>
+References: <20240209100829.1079401-1-danishanwar@ti.com>
+ <40bd8620-9fad-4c7b-9f28-4ab8a3e0365a@ti.com>
+ <04e7a4b8-a264-5d9c-a0b5-c985d5f35cb8@gmail.com>
+From: MD Danish Anwar <danishanwar@ti.com>
+In-Reply-To: <04e7a4b8-a264-5d9c-a0b5-c985d5f35cb8@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,31 +88,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use proper binary artifact names for HSFS devices.
-Do not use the *_unsigned binaries.
 
-Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
----
- doc/board/phytec/phycore-am62x.rst | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+On 27/02/24 7:33 pm, Sean Anderson wrote:
+> Hi Danish,
+> 
+> On 2/27/24 05:26, MD Danish Anwar wrote:
+>> On 09/02/24 3:38 pm, MD Danish Anwar wrote:
+>>> The fs-loader driver reads env storage_interface and uses it to load
+>>> firmware file into memory using the medium set by env. Update the driver
+>>> to use env fw_storage_interface as this variable is only used to load
+>>> firmwares. This is to keep all variables used by fs-loader driver with
+>>> 'fw_' prefix. All other variables have 'fw_' prefix except for
+>>> storage_interface.
+>>>
+>>> The env storage_interface will act as fallback so that the
+>>> existing implementations do not break.
+>>>
+>>> Also update the FS Loader documentation accordingly.
+>>>
+>>> Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
+>>> ---
+>>
+>> Hi Tom / Sean, can you please pick this patch if there is no pending
+>> comments to address.
+>>
+> 
+> Sorry, I forgot to respond to this earlier.
+> 
+> To be honest, I'm not really convinced. We have plenty of environmental
+> variables which are inconsistent (e.g. ethaddr, eth2addr, eth3addr) and it
+> doesn't cause any issues. While fixing code has no cost, the environment
+> is an ABI which we can't break. So we'd have to support both of these
+> variables forever. I'm not really a fan of doing that without good reason,
+> and I think aesthetics of the variable name isn't really compelling.
+> 
 
-diff --git a/doc/board/phytec/phycore-am62x.rst b/doc/board/phytec/phycore-am62x.rst
-index 1d641a78cf..bc6d524669 100644
---- a/doc/board/phytec/phycore-am62x.rst
-+++ b/doc/board/phytec/phycore-am62x.rst
-@@ -92,9 +92,9 @@ Assuming the uSD card is `/dev/mmcblk0`:
- To boot from a micro SD card on a HSFS device simply copy the following
- artifacts to the FAT partition:
- 
--* tiboot3.bin from R5 build as tiboot3.bin
--* tispl.bin_unsigned from Cortex-A build as tispl.bin
--* u-boot.img_unsigned from Cortex-A build as u-boot.img
-+* tiboot3.bin from R5 build
-+* tispl.bin from Cortex-A build
-+* u-boot.img from Cortex-A build
- 
- Boot
- ----
+Roger, should I keep the env variable name as it is and don't rename it?
+Sean's concern seems valid, can you please comment here.
+
+> --Sean
+
 -- 
-2.34.1
-
+Thanks and Regards,
+Danish
