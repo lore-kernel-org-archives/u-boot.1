@@ -4,78 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFDECC5475B
-	for <u-boot@archiver.kernel.org>; Thu, 29 Feb 2024 03:05:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 405FFC48BF6
+	for <u-boot@archiver.kernel.org>; Thu, 29 Feb 2024 04:45:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D872787C5B;
-	Thu, 29 Feb 2024 04:05:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 655AA8795D;
+	Thu, 29 Feb 2024 05:45:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="s9eBFvib";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="QN0oq2vj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82AF18806E; Thu, 29 Feb 2024 04:05:10 +0100 (CET)
-Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
- [IPv6:2607:f8b0:4864:20::b2e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8458487811; Thu, 29 Feb 2024 05:45:25 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6FEE187B41
- for <u-boot@lists.denx.de>; Thu, 29 Feb 2024 04:05:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F05B787811
+ for <u-boot@lists.denx.de>; Thu, 29 Feb 2024 05:45:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2e.google.com with SMTP id
- 3f1490d57ef6-dc6dcd9124bso492061276.1
- for <u-boot@lists.denx.de>; Wed, 28 Feb 2024 19:05:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1709175907; x=1709780707; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Ws+xEYa73DURK+0vKM7AmsaTKtUgBntMLTNiMlx3rI0=;
- b=s9eBFvibsmCxnN/Ew2tT44gra7C5xKQlxWFlLyHoPWkOyQafiDRMECVVDNUjOIVOs4
- H6hpQ/EQ+Xc2wc7WBgLE5iGmFjf9jDK1ih5s+rNFS6nBq6z6N7CRjjBOwK0Fl1AOkLb4
- /Kp9s1BykPjXpMO8JnoPkW1dIb0bmLrqZ4Wbk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709175907; x=1709780707;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Ws+xEYa73DURK+0vKM7AmsaTKtUgBntMLTNiMlx3rI0=;
- b=qFwEt1XGj2QA/FpG9CwkC7YJPPQ+n39yvAfKVAddY8wS8H9TlEe+67CMQ5aVROVQYW
- TUd3lv78ueDd89S2PCIZ28lFxxUCt4do89cOuirFfhkIYRa/ZaHdPIi5JuHNe2fQl4Wk
- C1h8/WDzEjf7fy1gHs/b7TLWdHH3XLvOi48LMVfcULoUk4b03aqpTEz18n/GWKkz1cj6
- QQHou6mPU0lUyrlLDKUftpuf/TFabVHmCdcVwlefUB1J/IHzmRg8zqQWOWn8aOdWnmQK
- xsanmlHhtxwOhbOV/q4RZfQ5PwVMooaCQzv3cBi7gLnoCTa+syw0gi4571C9NRXepXCG
- CTcw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWNysj/rZJNyzJceECH1oCyvOZUhPBK7qkyT+9eZhsG6BC/QKMKnjxnn6Rds5u/0y/BncJWYep/UZSsmsrmH3/dyHGSNQ==
-X-Gm-Message-State: AOJu0YwDN/bbeAIa57Txeog3UOG+8Ca3jd12+LRyMcMmuuF62OFwNMNR
- juDAGlNy/IYQboc4ppzrGpSvechaqlRVioJmUlxY1f9LYbKOOpilKlaJpAV/jWU=
-X-Google-Smtp-Source: AGHT+IHze3UPINBwq21Kn3hgeLyHqo+uzIn3FJdDcqJNJ8+8O9uYM0yURmltB2tZN7erIMSipZUHaQ==
-X-Received: by 2002:a25:c5c7:0:b0:dcf:477e:c82e with SMTP id
- v190-20020a25c5c7000000b00dcf477ec82emr1068740ybe.50.1709175907142; 
- Wed, 28 Feb 2024 19:05:07 -0800 (PST)
-Received: from [127.0.1.1] (065-184-194-195.res.spectrum.com. [65.184.194.195])
- by smtp.gmail.com with ESMTPSA id
- a9-20020a5b0909000000b00dc22f4bf808sm99664ybq.32.2024.02.28.19.05.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Feb 2024 19:05:06 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: nm@ti.com, Roger Quadros <rogerq@kernel.org>
-Cc: vigneshr@ti.com, s-vadapalli@ti.com, srk@ti.com, r-gunasekaran@ti.com, 
- u-boot@lists.denx.de
-In-Reply-To: <20240131133348.182987-1-rogerq@kernel.org>
-References: <20240131133348.182987-1-rogerq@kernel.org>
-Subject: Re: [PATCH 0/3] mux: Drop usage of "u-boot,mux-autoprobe"
-Message-Id: <170917590614.3675981.13765235171591951762.b4-ty@konsulko.com>
-Date: Wed, 28 Feb 2024 22:05:06 -0500
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41T4jFcG014304;
+ Wed, 28 Feb 2024 22:45:15 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1709181915;
+ bh=hDPkQt9zbwoMXuBWsa6IxZTIQibm7QQ2GCIvDQGIC+E=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=QN0oq2vjLPRdSsNaOgkKtuKwl//DPurkqtVIj3vk1xjNIRC0Kee0wGCODKt7Ynery
+ 1lWMaaFdq0rX47R8/5GVlqEjSYHNv7m2zKQTFDxS3t84xJZLcA1Mgrk/LTB32ncdWT
+ ihGfhtG5D2g8nw67uZsVKn8xSa7K5MXtGXpiJqiw=
+Received: from DFLE101.ent.ti.com (dfle101.ent.ti.com [10.64.6.22])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41T4jFqx011823
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 28 Feb 2024 22:45:15 -0600
+Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 28
+ Feb 2024 22:45:14 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 28 Feb 2024 22:45:14 -0600
+Received: from [172.24.227.36]
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41T4j961021027;
+ Wed, 28 Feb 2024 22:45:10 -0600
+Message-ID: <279929c8-3c5b-4a69-b291-884732d06d69@ti.com>
+Date: Thu, 29 Feb 2024 10:15:08 +0530
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.12.4
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH 1/4] configs: j721e_sk: Move to separate defconfig for
+ J721E SK board
+To: Andrew Davis <afd@ti.com>, <u-boot@lists.denx.de>, <trini@konsulko.com>,
+ <sjg@chromium.org>, <alpernebiyasak@gmail.com>, <bb@ti.com>,
+ <nm@ti.com>, <sumit.garg@linaro.org>
+CC: <michal.simek@amd.com>, <marex@denx.de>, <neil.armstrong@linaro.org>,
+ <vigneshr@ti.com>, <kamlesh@ti.com>, <m-chawdhry@ti.com>, <u-kumar1@ti.com>
+References: <20240228112042.3437691-1-n-francis@ti.com>
+ <20240228112042.3437691-2-n-francis@ti.com>
+ <5de538d9-76d4-480f-9381-9a39d629ac3f@ti.com>
+Content-Language: en-US
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <5de538d9-76d4-480f-9381-9a39d629ac3f@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,20 +86,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 31 Jan 2024 15:33:45 +0200, Roger Quadros wrote:
+Hi Andrew
 
-> MUX driver should autoprobe if the device tree has "idle-states"
-> property. Drop using the custom "u-boot,mux-autoprobe" property
-> in TI device trees.
+On 28/02/24 20:41, Andrew Davis wrote:
+> On 2/28/24 5:20 AM, Neha Malcom Francis wrote:
+>> Add defconfig for J721E SK R5 and A72 configuration.
+>>
+>> This includes and modifies the J721E EVM defconfigs:
+>> j721e_evm_r5_defconfig -> j721e_sk_r5_defconfig
+>> j721e_evm_a72_defconfig -> j721e_sk_a72_defconfig
+>>
+>> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+>> ---
+>>   board/ti/j721e/MAINTAINERS      | 2 ++
+>>   configs/j721e_evm_a72_defconfig | 2 +-
+>>   configs/j721e_evm_r5_defconfig  | 2 +-
+>>   configs/j721e_sk_a72_defconfig  | 4 ++++
+>>   configs/j721e_sk_r5_defconfig   | 5 +++++
+>>   5 files changed, 13 insertions(+), 2 deletions(-)
+>>   create mode 100644 configs/j721e_sk_a72_defconfig
+>>   create mode 100644 configs/j721e_sk_r5_defconfig
+>>
+>> diff --git a/board/ti/j721e/MAINTAINERS b/board/ti/j721e/MAINTAINERS
+>> index f5ca7d06a34..06aba53d9b0 100644
+>> --- a/board/ti/j721e/MAINTAINERS
+>> +++ b/board/ti/j721e/MAINTAINERS
+>> @@ -5,5 +5,7 @@ F:    board/ti/j721e
+>>   F:    include/configs/j721e_evm.h
+>>   F:    configs/j721e_evm_r5_defconfig
+>>   F:    configs/j721e_evm_a72_defconfig
+>> +F:    configs/j721e_sk_r5_defconfig
+>> +F:    configs/j721e_sk_a72_defconfig
+>>   F:    configs/j7200_evm_r5_defconfig
+>>   F:    configs/j7200_evm_a72_defconfig
+>> diff --git a/configs/j721e_evm_a72_defconfig b/configs/j721e_evm_a72_defconfig
+>> index 74af5bebb51..21081a2a684 100644
+>> --- a/configs/j721e_evm_a72_defconfig
+>> +++ b/configs/j721e_evm_a72_defconfig
+>> @@ -86,7 +86,7 @@ CONFIG_MMC_SPEED_MODE_SET=y
+>>   # CONFIG_SPL_EFI_PARTITION is not set
+>>   CONFIG_OF_CONTROL=y
+>>   CONFIG_SPL_OF_CONTROL=y
+>> -CONFIG_OF_LIST="k3-j721e-common-proc-board k3-j721e-sk"
+>> +CONFIG_OF_LIST="k3-j721e-common-proc-board"
+>>   CONFIG_MULTI_DTB_FIT=y
+>>   CONFIG_SPL_MULTI_DTB_FIT=y
+>>   CONFIG_SPL_MULTI_DTB_FIT_NO_COMPRESSION=y
+>> diff --git a/configs/j721e_evm_r5_defconfig b/configs/j721e_evm_r5_defconfig
+>> index bc4f35cce11..ce2b7df58cf 100644
+>> --- a/configs/j721e_evm_r5_defconfig
+>> +++ b/configs/j721e_evm_r5_defconfig
+>> @@ -81,7 +81,7 @@ CONFIG_CMD_MTDPARTS=y
+>>   CONFIG_OF_CONTROL=y
+>>   CONFIG_SPL_OF_CONTROL=y
+>>   CONFIG_SPL_MULTI_DTB_FIT=y
+>> -CONFIG_SPL_OF_LIST="k3-j721e-r5-common-proc-board k3-j721e-r5-sk"
+>> +CONFIG_SPL_OF_LIST="k3-j721e-r5-common-proc-board"
+>>   CONFIG_SPL_MULTI_DTB_FIT_NO_COMPRESSION=y
+>>   CONFIG_ENV_OVERWRITE=y
+>>   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+>> diff --git a/configs/j721e_sk_a72_defconfig b/configs/j721e_sk_a72_defconfig
+>> new file mode 100644
+>> index 00000000000..c47ad4a7616
+>> --- /dev/null
+>> +++ b/configs/j721e_sk_a72_defconfig
+>> @@ -0,0 +1,4 @@
+>> +#include <configs/j721e_evm_a72_defconfig>
+>> +
+>> +CONFIG_DEFAULT_DEVICE_TREE="k3-j721e-sk"
+>> +CONFIG_OF_LIST="k3-j721e-sk"
 > 
-> cheers,
-> -roger
+> These two overrides should be all that is needed, but currently the `buildman`
+> tool parses the *_defconfigs directly to determine what arch to build every
+> defconfig  for when doing testing. So you also for now need to re-define the
+> ARCH, even though it comes in from the include. See how it was done here[0].
 > 
-> [...]
+> Basically just add here:
+> 
+> CONFIG_ARM=y
+> CONFIG_ARCH_K3=y
+> CONFIG_SOC_K3_J721E=y
+> CONFIG_TARGET_J721E_A72_EVM=y
+> 
+> Andrew
+> 
+> [0] https://lore.kernel.org/u-boot/20240223202153.3756094-15-a-nandan@ti.com/
+> 
 
-Applied to u-boot/next, thanks!
+Ah didn't realise that thanks!
+
+>> diff --git a/configs/j721e_sk_r5_defconfig b/configs/j721e_sk_r5_defconfig
+>> new file mode 100644
+>> index 00000000000..077e8606d57
+>> --- /dev/null
+>> +++ b/configs/j721e_sk_r5_defconfig
+>> @@ -0,0 +1,5 @@
+>> +#include <configs/j721e_evm_r5_defconfig>
+>> +
+>> +CONFIG_DEFAULT_DEVICE_TREE="k3-j721e-r5-sk"
+>> +CONFIG_SPL_OF_LIST="k3-j721e-r5-sk"
+>> +CONFIG_OF_LIST="k3-j721e-r5-sk"
 
 -- 
-Tom
-
-
+Thanking You
+Neha Malcom Francis
