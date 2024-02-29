@@ -4,53 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 799F0C48BF6
-	for <u-boot@archiver.kernel.org>; Thu, 29 Feb 2024 20:45:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67B3CC48BF6
+	for <u-boot@archiver.kernel.org>; Thu, 29 Feb 2024 20:50:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C9FC488116;
-	Thu, 29 Feb 2024 21:45:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B12078811F;
+	Thu, 29 Feb 2024 21:50:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="r4qtazYH";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="mUVKx2pV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A23F488116; Thu, 29 Feb 2024 21:45:54 +0100 (CET)
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+ id 373C388121; Thu, 29 Feb 2024 21:50:26 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3965E8811A
- for <u-boot@lists.denx.de>; Thu, 29 Feb 2024 21:45:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A50B88119
+ for <u-boot@lists.denx.de>; Thu, 29 Feb 2024 21:50:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=krzk@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id F3E5BCE0A1F;
- Thu, 29 Feb 2024 20:45:48 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 51F9CC433C7;
- Thu, 29 Feb 2024 20:45:46 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 6DC7D6130E;
+ Thu, 29 Feb 2024 20:50:22 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0AD51C433F1;
+ Thu, 29 Feb 2024 20:50:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1709239548;
- bh=38cgMGScOzbbx4CS+b6rUi/zoiLDvtPvkm1YUNJY8Lk=;
+ s=k20201202; t=1709239822;
+ bh=9gWe/9QdHbp8CAct8/iqyJFuthrBnM9nVpOm096KfwI=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=r4qtazYH3W5H9p2Y3V3/QHALXZs66bK6dNEXzpMuoJA7Yzpr/GlEbNUVNQof0YMr6
- d1GzwHU19iqjh05oX3PBTLgHSY7Tp3JeBiy3HQi/0eDwV+jTXDxK9OYR5ZIG5njJXM
- YDubTmJHAHX9CdVyc5c8GKvZyXDV1UZ03dN01kCdZKxNpgEE43Q05zMZLrLJA/1v5O
- Bl7HAgolYFAEu3w/KfN2NSqDVLyUJYeQ9iuXAmrobfDiCKYUlueVaekJAwXhSGC4Az
- bekRLCTCRNnEA9iXm0v7721k6Zs0yC/Nf2kc5XMPjJ+Ghe3SQ888/Z+LEv+hd9KRGZ
- boX/uMZCxpNzA==
-Message-ID: <d112e5f7-7530-4afc-bb2f-ede7144f12b8@kernel.org>
-Date: Thu, 29 Feb 2024 21:45:41 +0100
+ b=mUVKx2pV/TU5KRVz/9IPc0z6BN+A4pa3sZ/MhuwCo6twPZ4vXC/IeslnMTJwpblFa
+ /PwyyvlWZpFru7clb7lPbvaraAwmdwAkokbSvR/R+uNQobeSfi+q893J+qlbMTbn/i
+ UI9ll288B0ah5P6zvIcNbnmNSOX5DyUYFOBOd4Ge/3OTc8laCH3F7zr+y0LZthcrGC
+ nAzFBE995XoOCwFmk9ulovJmydV/1o5v9aFmaZNU2gJ9PtMTro0Nz66KsxsQBKuEhs
+ OUok4PqHFAnl7tvRQv+xC/zTFsrHauF43fm984sTHJxO8ZWA83txeSXVDWT+WYuwO/
+ imRQ/g3wo+gnA==
+Message-ID: <4fa5cede-def3-4ad0-8433-72495e4c8e3b@kernel.org>
+Date: Thu, 29 Feb 2024 21:50:11 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/8] dts: qcom: import device trees and bindings for
- SA8155P-ADP
+Subject: Re: [PATCH 01/10] mach-snapdragon: Add support for IPQ9574
 Content-Language: en-US
-To: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>
-References: <20240229142043.1263690-1-volodymyr_babchuk@epam.com>
- <20240229142043.1263690-3-volodymyr_babchuk@epam.com>
+To: Varadarajan Narayanan <quic_varada@quicinc.com>, u-boot@lists.denx.de
+Cc: Caleb Connolly <caleb.connolly@linaro.org>,
+ FUKAUMI Naoki <naoki@radxa.com>, Hai Pham <hai.pham.ud@renesas.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>,
+ Mathieu Othacehe <othacehe@gnu.org>, Michal Simek <michal.simek@amd.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Tianling Shen <cnsztl@gmail.com>, Tom Rini <trini@konsulko.com>
+References: <20240226100807.1095607-1-quic_varada@quicinc.com>
+ <20240226100807.1095607-2-quic_varada@quicinc.com>
 From: Krzysztof Kozlowski <krzk@kernel.org>
 Autocrypt: addr=krzk@kernel.org; keydata=
  xsFNBFVDQq4BEAC6KeLOfFsAvFMBsrCrJ2bCalhPv5+KQF2PS2+iwZI8BpRZoV+Bd5kWvN79
@@ -95,7 +104,7 @@ Autocrypt: addr=krzk@kernel.org; keydata=
  uZwJCLykjad45hsWcOGk3OcaAGQS6NDlfhM6O9aYNwGL6tGt/6BkRikNOs7VDEa4/HlbaSJo
  7FgndGw1kWmkeL6oQh7wBvYll2buKod4qYntmNKEicoHGU+x91Gcan8mCoqhJkbqrL7+nXG2
  5Q/GS5M9RFWS+nYyJh+c3OcfKqVcZQNANItt7+ULzdNJuhvTRRdC3g9hmCEuNSr+CLMdnRBY fv0=
-In-Reply-To: <20240229142043.1263690-3-volodymyr_babchuk@epam.com>
+In-Reply-To: <20240226100807.1095607-2-quic_varada@quicinc.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -114,16 +123,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 29/02/2024 15:21, Volodymyr Babchuk wrote:
-> Add device tree bindings and actual device trees for SM8150 SoC and
-> SA8155P-ADP board. Those files were imported from Linux kernel 6.8-rc5
-> as is. In this configuration they will not work with U-Boot for couple
-> reasons:
+On 26/02/2024 11:07, Varadarajan Narayanan wrote:
+> Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
+> ---
 > 
+>  arch/arm/dts/Makefile                         |    2 +
+>  arch/arm/dts/ipq9574-default.dts              |  167 +++
+>  arch/arm/dts/ipq9574-rdp433-mht-phy.dts       |  208 +++
+>  arch/arm/dts/ipq9574.dtsi                     |  771 ++++++++++
+>  .../include/mach/sysmap-ipq9574.h             |  252 ++++
+>  arch/arm/mach-snapdragon/init_ipq9574.c       |   81 +
+>  board/qualcomm/ipq9574/Kconfig                |   15 +
+>  board/qualcomm/ipq9574/Makefile               |    4 +
+>  board/qualcomm/ipq9574/board_init.c           |  326 ++++
+>  board/qualcomm/ipq9574/ipq9574.c              |  170 +++
+>  board/qualcomm/ipq9574/ipq9574.h              |   75 +
+>  board/qualcomm/ipq9574/u-boot-x32.lds         |  250 ++++
+>  board/qualcomm/ipq9574/u-boot-x64.lds         |  188 +++
+>  drivers/clk/qcom/clock-ipq9574.c              | 1320 +++++++++++++++++
+>  drivers/pinctrl/qcom/pinctrl-ipq9574.c        |   77 +
+>  include/configs/ipq9574.h                     |  111 ++
+>  include/dt-bindings/clock/gcc-ipq9574.h       |  156 ++
+>  include/dt-bindings/net/qti-ipqsoc.h          |   20 +
+>  include/dt-bindings/pinctrl/pinctrl-ipqsoc.h  |   19 +
+>  include/dt-bindings/reset/ipq9574-reset.h     |   54 +
+>  20 files changed, 4266 insertions(+)
+>  create mode 100644 arch/arm/dts/ipq9574-default.dts
+>  create mode 100644 arch/arm/dts/ipq9574-rdp433-mht-phy.dts
+>  create mode 100644 arch/arm/dts/ipq9574.dtsi
+>  create mode 100644 arch/arm/mach-snapdragon/include/mach/sysmap-ipq9574.h
+>  create mode 100644 arch/arm/mach-snapdragon/init_ipq9574.c
+>  create mode 100644 board/qualcomm/ipq9574/Kconfig
+>  create mode 100644 board/qualcomm/ipq9574/Makefile
+>  create mode 100644 board/qualcomm/ipq9574/board_init.c
+>  create mode 100644 board/qualcomm/ipq9574/ipq9574.c
+>  create mode 100644 board/qualcomm/ipq9574/ipq9574.h
+>  create mode 100644 board/qualcomm/ipq9574/u-boot-x32.lds
+>  create mode 100644 board/qualcomm/ipq9574/u-boot-x64.lds
+>  create mode 100644 drivers/clk/qcom/clock-ipq9574.c
+>  create mode 100644 drivers/pinctrl/qcom/pinctrl-ipq9574.c
+>  create mode 100644 include/configs/ipq9574.h
+>  create mode 100644 include/dt-bindings/clock/gcc-ipq9574.h
+>  create mode 100644 include/dt-bindings/net/qti-ipqsoc.h
+>  create mode 100644 include/dt-bindings/pinctrl/pinctrl-ipqsoc.h
+>  create mode 100644 include/dt-bindings/reset/ipq9574-reset.h
+> 
+> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+> index d9725030d5..8931dfa2aa 100644
+> --- a/arch/arm/dts/Makefile
+> +++ b/arch/arm/dts/Makefile
+> @@ -1523,6 +1523,8 @@ dtb-$(CONFIG_ARCH_QEMU) += qemu-arm.dtb qemu-arm64.dtb
+>  dtb-$(CONFIG_TARGET_CORSTONE1000) += corstone1000-mps3.dtb \
+>  				corstone1000-fvp.dtb
+>  
+> +dtb-$(CONFIG_TARGET_IPQ9574) += ipq9574-rdp433-mht-phy.dtb
+> +
+>  include $(srctree)/scripts/Makefile.dts
+>  
+>  targets += $(dtb-y)
+> diff --git a/arch/arm/dts/ipq9574-default.dts b/arch/arm/dts/ipq9574-default.dts
+> new file mode 100644
+> index 0000000000..501c9492df
+> --- /dev/null
+> +++ b/arch/arm/dts/ipq9574-default.dts
+> @@ -0,0 +1,167 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +/*
+> + * Copyright (c) 2024, Qualcomm Innovation Center, Inc. All rights reserved.
+> + */
+> +
+> +/dts-v1/;
+> +
+> +#include "ipq9574.dtsi"
+> +
+> +/ {
+> +	config_name = "config-default";
+> +
+> +	aliases {
+> +		console = &blsp1_uart2_console;
+> +		uart2 = &blsp1_uart3_additional;
+> +		sdhci = &mmc;
+> +	};
+> +
+> +	soc: soc {
+> +		tlmm: pinctrl@1000000 {
+> +
+> +			sdhci_pinmux: mmc {
+> +				pinconfig;
+> +				emmc_data {
 
-Aren't you now duplicating dts/upstream/qcom?
+No, please use upstream DTS.
 
-https://lore.kernel.org/all/20240222093607.3085545-1-sumit.garg@linaro.org/
+You imported here a lot of vendor junk. There is no way this will pass
+any System Ready tests if you hand over this DTB to Linux. Plus really,
+that's ugly DTS to look at.
+
+I am not a maintainer of DTS in U-Boot, so up to the folks here, but I
+really recommend to NAK such DTS. It just re-adds all the issues we
+fixed in upstream kernel!
+
+I suggest using dts/upstream/qcom, but if you cannot then please import
+kernel DTS.
 
 Best regards,
 Krzysztof
