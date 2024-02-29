@@ -4,87 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E952C54798
-	for <u-boot@archiver.kernel.org>; Thu, 29 Feb 2024 05:47:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B6A9C54E41
+	for <u-boot@archiver.kernel.org>; Thu, 29 Feb 2024 06:57:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 73D1487A80;
-	Thu, 29 Feb 2024 06:47:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DA63B88094;
+	Thu, 29 Feb 2024 07:57:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jRBgLifs";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Win2b23d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 96858880AA; Thu, 29 Feb 2024 06:47:43 +0100 (CET)
-Received: from mail-vk1-xa2f.google.com (mail-vk1-xa2f.google.com
- [IPv6:2607:f8b0:4864:20::a2f])
+ id DCCC18809C; Thu, 29 Feb 2024 07:57:35 +0100 (CET)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1BE4187A80
- for <u-boot@lists.denx.de>; Thu, 29 Feb 2024 06:47:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D07287E03
+ for <u-boot@lists.denx.de>; Thu, 29 Feb 2024 07:57:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vk1-xa2f.google.com with SMTP id
- 71dfb90a1353d-4d34144d710so289324e0c.1
- for <u-boot@lists.denx.de>; Wed, 28 Feb 2024 21:47:41 -0800 (PST)
+ spf=pass smtp.mailfrom=dan.carpenter@linaro.org
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-33de6da5565so315956f8f.2
+ for <u-boot@lists.denx.de>; Wed, 28 Feb 2024 22:57:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709185660; x=1709790460; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Xr8+zhp/nNpivSjChJvMAo5ErVoIp3CVf93m5oB6fZA=;
- b=jRBgLifsEMLQqSQYmj+F3+W4065qySH8TzR8MPMNXqjwlkUvim6a1h1RNvfJJSBZUg
- qndCRJ1ycJE6z2G7kezbU1wI7g6e0GzzzX/eyRTzhp5IS8qvnA8ge/Zc9ORxZNB03q5Y
- xgdY5YMamzDOviE0uTTTe4cjFMCVN4hG6UL+hpvzxoB2fkcYptt9VkLN3Jw9Se4s6aSc
- UBF6PyG63xkBDs9D3hotC9CNW0p4OwDDWpBrkg9k5SFJB6WlA8eJT+1I1lwBx4gLnCXX
- R435bl/FJWfNK0AzRy07N5wqZrhnzdmAJyr5B6vetbfm3OmNh1pMf/w0bUgP7nalspEw
- MMnQ==
+ d=linaro.org; s=google; t=1709189853; x=1709794653; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=/A06XTG1pDDs8S8dhY9UE8FWKMaF6x1FYQc21Ar1Uag=;
+ b=Win2b23dZxxHH/XgT8Cg6+q/5O4EX1AatTD3mrLKSvziXihgSgkJ6t1b+idw+ADjt2
+ FTG5JSIyOuoVfHAnLZrjsCtmwG2zOAHtnBJg0TqCs7nQceMsZHj5AK6OHgKwC5EFzr8Y
+ IexWZaBATODzH67Ka1FswKTVZaBbaYovz9EJ10YHoIiafNwPuJS64IhMtXs1/rvcpetx
+ VxXlqoBjEdBtSvht+dCWSLqXwERzybxWaA8GS0ZiAYvgLOTlB9TVeObxJhn5sL8KA3R7
+ 3SUXnHVVR+hpEM7mbpBSuYBh3de8FgoENZdEr4M6gXCfaYEcRf3wusOzqKAvI8wVkZuu
+ N1rA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709185660; x=1709790460;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Xr8+zhp/nNpivSjChJvMAo5ErVoIp3CVf93m5oB6fZA=;
- b=JyJU4YToGmIbbIY6HoSWO0v1sbUlOqCRUMDuulmwFkC4dfNi2WSN6mi5Gsz1yga4v7
- lzFZ8LRX72hdRyiDClPQdvvmb7paI9Nk7SQZdrDgel7JFGZSmFqrf6DxGzqqyiglxrmA
- qEOjKeCR/GnbJZ99T7TA2Sepf64kaL5av6Xcjb/bw8qpkaqzD4Q/a6NK7Kx+EB4/tbp2
- Rg+uXcnJP2sWemOb8y2DQzR1bc8KDHeZygGe5fhRKO7XcYc/gMqiEFsB5R8iaU/7+a3F
- Sc2XKM3Jx6lKJvnONbgoKeoLMB7R+MlHmwp5zVRPKEWyb6uLWsFLmV1kDWa8dFaIEKwg
- 1Xiw==
+ d=1e100.net; s=20230601; t=1709189853; x=1709794653;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/A06XTG1pDDs8S8dhY9UE8FWKMaF6x1FYQc21Ar1Uag=;
+ b=nQwUQ/aGOWwu5nIz3sytzbHze7GwMHH7Wi22BM+3RcfZxce0VDRQZrE7XNQRQwBhTN
+ Qx/m4YK8yV01cPaNQPGyCRHdw84cHW0yV5qFBOJinP6kdPvVozgzmfHxaSL62rzzoE4E
+ ZEtZd+qpo2y4oj0LHu+FhSXYvPCQTYYtR/1A3tgs0GIbF3fbnnaXOHU2jwiE0ANRPslI
+ DBEfPacN96vfOvOnKkbpIcjOF1QTsEtxMxYZyvWOeDbJ6pRKtrJIbutU7yAV0ovDYjIm
+ eeFu0s+1r1dzIyWSqVjEL4oxfInooxwiLnW3Wv3IHDyOvxDFFPm3D53zabgNFmER6Wzi
+ F5iQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVeJvr7qk2GiE53JMRvr/Qpa6r6N+Zt5WU++BJmhw6x78g4i8SNaoWpZOHBTJul9wY5JU95e3z1hxEPBzLn67nCJXz6qg==
-X-Gm-Message-State: AOJu0YxEUX5oNtCwxjJJj5GWgZZAzciq3pG4Pnux/SWv35kXYgB93WDZ
- c/BijuD0DeyhUuu/eTz9sDkMbn7TLm6vy0y3OWIg8LgXFID1HhJV4UzkdbGtLQJjWiaCpCBwVUh
- cfB4NsweobOncn/TM2hIIqgugieY8kPnGVJyW1g==
-X-Google-Smtp-Source: AGHT+IGBIccP+3ySu7WNL+3SUfOhXdQnG5ZFgC/WWAFdJdoBMQWSaa0KnVsBkTmiIU3mfwkgQfXHv1xWzP9UBZJMH+A=
-X-Received: by 2002:a05:6122:1b85:b0:4ce:96b7:c2f6 with SMTP id
- es5-20020a0561221b8500b004ce96b7c2f6mr396280vkb.5.1709185659762; Wed, 28 Feb
- 2024 21:47:39 -0800 (PST)
+ AJvYcCXutmVKMhbvZkqNNsaTivUm7xR3uq6pzBGGteY4MiPs0nhpXZYfGqC5r05muKtEgTAuj9QXMXnHcjuRZtlaqYDbTPwAZQ==
+X-Gm-Message-State: AOJu0Yy7lZR6vWrn1DLFbaX9NHwFcMPqIOyUY1TnD14S9pWwiLcdRJwc
+ 3fLxBBRuhrSJxw76wRsHCNnWOa7QZy7gGt4CzXm3DBzBfN9Tf7bu04fV/KHVaUkbqO8UXyyPPgI
+ 8
+X-Google-Smtp-Source: AGHT+IF1rBNrEh2/aXUqWz8X/Ab+aCn8QoORMAbUfblc7J+8Pkde7Xp+zWZOfpBTmAYvErJWHyB+7Q==
+X-Received: by 2002:a5d:5987:0:b0:33d:d358:19f6 with SMTP id
+ n7-20020a5d5987000000b0033dd35819f6mr1100138wri.11.1709189852960; 
+ Wed, 28 Feb 2024 22:57:32 -0800 (PST)
+Received: from localhost ([102.222.70.76]) by smtp.gmail.com with ESMTPSA id
+ cc19-20020a5d5c13000000b0033daa63807fsm876139wrb.24.2024.02.28.22.57.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 28 Feb 2024 22:57:32 -0800 (PST)
+Date: Thu, 29 Feb 2024 09:57:28 +0300
+From: Dan Carpenter <dan.carpenter@linaro.org>
+To: Bob Wolff <bob.wolff68@gmail.com>
+Cc: Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de
+Subject: Re: ECDSA related PRs
+Message-ID: <a7a99523-3e8d-4fde-adf4-3cb6fdc2e94c@moroto.mountain>
+References: <CAF1iuRr6q15aApGB8zPb8M7yWrUahT8H0BjDHnWRp1_Q__KDng@mail.gmail.com>
+ <CALeDE9MSQwGU0JXs96egk8y8rc=f+JxtNm3U6u4Fxb8L+jWtkg@mail.gmail.com>
+ <CAF1iuRqyTu5xO9JJ-8__w8y7_uQ5SHNd6wunP1sND7QiT7K60A@mail.gmail.com>
 MIME-Version: 1.0
-References: <20240227154002.30257-1-sebastien.szymanski@armadeus.com>
- <47c12ca3-ea7c-4097-90b5-0333c74b05aa@moroto.mountain>
- <20240228131029.GM3040305@bill-the-cat>
- <CAFA6WYN4sCk9Q66i_n+aXxRkGEbh66dh+Sr_C5SbioQ_s5BBbQ@mail.gmail.com>
- <20240228152034.GN3040305@bill-the-cat>
-In-Reply-To: <20240228152034.GN3040305@bill-the-cat>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Thu, 29 Feb 2024 11:17:28 +0530
-Message-ID: <CAFA6WYMkdjE6Vrd2_fV_6Rzj8MOiPhO4EJ4kkik1_9vQnhzMqQ@mail.gmail.com>
-Subject: Re: [PATCH 1/2] opos6uldev: make the LCD work again
-To: Tom Rini <trini@konsulko.com>
-Cc: Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
- Conor Dooley <conor@kernel.org>, 
- shawnguo@kernel.org, Dan Carpenter <dan.carpenter@linaro.org>, 
- Rob Herring <robh@kernel.org>,
- =?UTF-8?Q?S=C3=A9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>, 
- u-boot@lists.denx.de, Stefano Babic <sbabic@denx.de>,
- Fabio Estevam <festevam@gmail.com>, 
- "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
- Anatolij Gustschin <agust@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAF1iuRqyTu5xO9JJ-8__w8y7_uQ5SHNd6wunP1sND7QiT7K60A@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,104 +94,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 28 Feb 2024 at 20:50, Tom Rini <trini@konsulko.com> wrote:
->
-> On Wed, Feb 28, 2024 at 07:44:42PM +0530, Sumit Garg wrote:
-> > + Shawn, Krzysztof, Conor
-> >
-> > Hi Tom,
-> >
-> > On Wed, 28 Feb 2024 at 18:40, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Wed, Feb 28, 2024 at 10:09:13AM +0300, Dan Carpenter wrote:
-> > > > On Tue, Feb 27, 2024 at 04:40:01PM +0100, S=C3=A9bastien Szymanski =
-wrote:
-> > > > > Commit 5d7a95f49999 ("imx6ul/imx6ull: synchronise device trees wi=
-th
-> > > > > linux") removed the display timings from the board device tree wh=
-ereas
-> > > > > they are still needed by the mxsfb driver.
-> > > > > Add the timings back (the correct ones) in the
-> > > > > imx6ul-opos6uldev-u-boot.dtsi file and remove them from the
-> > > > > opos6uldev.env file.
-> > > > >
-> > > > > Update the opos6uldev_defconfig file so that the LCD turns on at =
-boot.
-> > > > >
-> > > > > Fixes: 5d7a95f49999 ("imx6ul/imx6ull: synchronise device trees wi=
-th linux")
-> > > > > Signed-off-by: S=C3=A9bastien Szymanski <sebastien.szymanski@arma=
-deus.com>
-> > > >
-> > > > Huh.  This is the commit that did that upstream.
-> > > >
-> > > > https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/=
-commit/?id=3Dd9aa4d4fca67823838fe9861456201430c545e69
-> > > >
-> > > > It's interesting how the timings in linux were always slightly diff=
-erent
-> > > > from in u-boot.
-> > >
-> > > Thanks for tracking that down, Dan. I'm adding in Sumit and Rob here
-> > > because this is a recent (rather than ancient) example of one of the
-> > > concerns about OF_UPSTREAM.
-> >
-> > I rather think about this as an opportunity to improve with
-> > OF_UPSTREAM. We can feed these kinds of DT ABI breakages to
-> > corresponding Linux kernel sub-arch maintainers. Especially once we
-> > move to OF_UPSTREAM and a sub-arch maintainer profile in Linux kernel
-> > to keep them aware that U-Boot should be considered too.
->
-> Yes, a more extensive check around when removing information from dts
-> files would be good.
->
-> > > I think the commit in question can be
-> > > summarized as "remove a bunch of explicit HW information because ther=
-e's
-> > > now a Linux Kernel driver that determines that dynamically". What do =
-we
-> > > do next? The old information is in a presumably valid binding still, =
-can
-> > > we just put it back and comment that consumers outside of Linux use t=
-his
-> > > still so it's not removed again later? Or am I just missing where we =
-can
-> > > instead get this information from the DT still and not need to come u=
-p
-> > > with a new driver and subsystems?
-> >
-> > I can see following two paths forward:
-> >
-> > 1) Partially revert the Linux kernel commit to add back the display
-> > timings in DT.
-> > 2) Extend drivers/video/simple_panel.c in U-Boot to add support for
-> > compatible: "armadeus,st0700-adapt".
-> >
-> > If possible then I would be in favour of (2) rather than the current
-> > patch to do this properly.
->
-> Well, looking at the kernel drivers/gpu/drm/panel/panel-simple.c driver
-> and then our drivers/video/simple_panel.c it sure would be nice if it's
-> just a matter of adding a compatible but I wouldn't be surprised if it
-> ends up needing more information being passed along too?
+On Thu, Feb 22, 2024 at 03:07:01PM -0800, Bob Wolff wrote:
+> Peter,
+> Thanks for helping lead me down the right path here.
+> 
+> WRT tinycrypt, the license is quite permissive.
+> https://github.com/intel/tinycrypt
+> 
+> Also, I'd like your advice - I was thinking for the larger patch that I'd
+> do it in two commits. The first would be the addition of the tinycrypt
+> files and the second is the actual changes and additions to support ecdsa
+> verification. I doubt that's controversial. However when I run a trial
+> `patman` against the tinycrypt commit, I geta huge number of issues:
+>     *checkpatch.pl <http://checkpatch.pl> found 186 error(s), 380
+> warning(s), 481 checks(s)*
+> 
+> What's your advice on this? I would tend to think we'd want to /not/ change
+> the source files directly for such purposes so that updates could be
+> brought in with greater ease.
 
-Although I am not a LCD panel expert but looking at the kernel driver
-code [1], the display timings are rather taken from a static data
-structure matching the compatible "armadeus,st0700-adapt".
+Yeah.  For this kind of thing you wouldn't want to make a bunch of
+checkpatch changes.  They sometimes pull crypto and compression
+libraries into the Linux kernel pretty much unmodified as well for the
+same reason.
 
-[1] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree=
-/drivers/gpu/drm/panel/panel-simple.c#n901
+Igor's proposal about pull this stuff from the Linux kernel instead
+seems like a good idea though.
 
-> And I'm going
-> assume there's good reasons for the design change in how the drivers
-> work in Linux now and note that it might make things more challenging
-> for us when we do care about space.
+regards,
+dan carpenter
 
-I agree it is always going to be challenging to use DT during SPL
-stage which is mostly constrained by limited on-chip RAM.
-
--Sumit
-
->
-> --
-> Tom
