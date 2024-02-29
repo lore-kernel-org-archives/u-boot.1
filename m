@@ -4,61 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22D47C54798
-	for <u-boot@archiver.kernel.org>; Thu, 29 Feb 2024 10:13:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAB5DC54E55
+	for <u-boot@archiver.kernel.org>; Thu, 29 Feb 2024 10:23:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 281C3880B2;
-	Thu, 29 Feb 2024 11:13:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 24B5787B41;
+	Thu, 29 Feb 2024 11:23:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="QwHmqHbi";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kZK7Lvxf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BFB1187F73; Thu, 29 Feb 2024 11:13:54 +0100 (CET)
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1946187B63; Thu, 29 Feb 2024 11:23:46 +0100 (CET)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB05F87B41
- for <u-boot@lists.denx.de>; Thu, 29 Feb 2024 11:13:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DDF5B879DF
+ for <u-boot@lists.denx.de>; Thu, 29 Feb 2024 11:23:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rogerq@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 43D15CE1EF8;
- Thu, 29 Feb 2024 10:13:50 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1AE08C433C7;
- Thu, 29 Feb 2024 10:13:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1709201629;
- bh=rLfRNXFWlOnhIyjVxxML1HWgozrMtXO8KcTdRmsDew4=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=QwHmqHbiivcm0mgzJ3v/xDYZy3quZMWNGX7RynVvSMWOliLjuLHVqqsgE1p2F4FCK
- X0Yrw07X26+Y7zqIPcqN8ozrqgo68kClc9ovL5crQi4rGeQl9HR/+RB1bvxCSwxBcL
- RJJbFlir8h4QHj0Z9kDIgmBESoalQR1VqVRyGwv0ovZCvFnA4jgKKbE1hnTWY29/QX
- HeK6iisxYjCv7cLZ0Zy2yeuG/awkjg56Gpbyx5wxoGx3SSINGR1ApAD6iapfb/xN29
- 52Ggu5XP4X4deh9OlBIY7l8utXWtjJjLzRYYX8W5itrIF1QxPyYIkQw3bpqIKSphKJ
- WTCGoM8CtmBPA==
-Message-ID: <34e1f240-1a5a-4982-aca5-43a508c469f5@kernel.org>
-Date: Thu, 29 Feb 2024 12:13:44 +0200
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-513235b5975so887667e87.2
+ for <u-boot@lists.denx.de>; Thu, 29 Feb 2024 02:23:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1709202223; x=1709807023; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=D8M2+YJ/MT7yF2lssmgrFwul8i01yrTVBzld8HSUX4k=;
+ b=kZK7Lvxfw63zxtSNEaZQy+Ri80nXUlBYwQt8yNdu8PxA/cRBiAJNuDvceKvxL0p7mK
+ dBU7x01GvEr19I0W+Ci3nN+BY/zk2DmmE7LupeNyyxZCYlnpN1o/zSToJu3XzfthnkDc
+ TmHgS4X30DnR/HKqyH+hirvOQ8MNQAMj9uoa0WiYRD7UOCwKNpLfTLe+agtxoFBvuMUB
+ KGDIC/LVgj9Z8zURKvnTP9ksQKp24nftBgjpexx5FUbcvbECTq3jJfqNGgYVqZwITiUT
+ honhocrUT5wB9XEAUB6x/vl7hrfhp9zEaxvJTepM2b/hpGJEAuwWAfFEqWJPiFtXRJnK
+ qA/g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1709202223; x=1709807023;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=D8M2+YJ/MT7yF2lssmgrFwul8i01yrTVBzld8HSUX4k=;
+ b=Vg61a2+UGMVc56Xv3dwCcpMnxVjdezIzOwKJYuHISj2AKUlAq34PC3QsP7h4hvY3G4
+ 7bjNiIKIVeZkicgMMH0JupVrlnfN/ACvwoh5m7O/rflvm+1aBll/ONO/4s+kvrXa5J8G
+ G5MJpbBGiizOS6Mc+4a4TrRL/iAuDgMxU8zsyll0SjcXxs26cQYRtxyVkcJlcRSbjpmR
+ Sp/8FLNjnDeOj8eNCXYZllkjn5fM0+t4r17mQlsZxPPrJ3h5QcVzdf+wL1CHZ5oC36Ja
+ 7l/F+59SxudHp81LFDnGQ0LqzdsQhI9NOrIaEkBwMCUBzgg0kZpOMlgPLJ7RP+XT2/gn
+ n3Tw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVz2mHA3o/Pyy/xQljPuwlc/H+tP8+XiTn+PUrpHy45WKFNsH/EBTXJ+6WafHwgoSGeUF83SKYOPLNK9dIdaRugM1xBmg==
+X-Gm-Message-State: AOJu0YxRo+q0j4Z69y+cXLXQo7rq3/hirn3qTvKMrsej/qGRtTuFlh+g
+ GOCCAic3lKQoFaW9SBZ+e1f5Vc7eQ0A0vShroAjHSFQ6leSRMu0x+2HRo3W/4ssdcBEcc8thlJc
+ YB1UnynFfM0BxJWy2qKKeNYIcXFE=
+X-Google-Smtp-Source: AGHT+IFnV7JG8idznDcjtM0/6zTo1Ch1pAukrSpuqxw/G9lTB4Y3viNW7SeGbRvTpse3QWjsu8SThlz7Yu9+jHnSJok=
+X-Received: by 2002:ac2:554e:0:b0:513:26b5:139a with SMTP id
+ l14-20020ac2554e000000b0051326b5139amr800216lfk.23.1709202222873; Thu, 29 Feb
+ 2024 02:23:42 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6] remoteproc: uclass: Add methods to load firmware to
- rproc and boot rproc
-Content-Language: en-US
-To: MD Danish Anwar <danishanwar@ti.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Max Krummenacher <max.krummenacher@toradex.com>,
- Dan Carpenter <dan.carpenter@linaro.org>, Simon Glass <sjg@chromium.org>,
- Ravi Gunasekaran <r-gunasekaran@ti.com>, Nishanth Menon <nm@ti.com>,
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, srk@ti.com, Vignesh Raghavendra <vigneshr@ti.com>
-References: <20240228120645.958316-1-danishanwar@ti.com>
-From: Roger Quadros <rogerq@kernel.org>
-In-Reply-To: <20240228120645.958316-1-danishanwar@ti.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20240125201654.17685-1-clamor95@gmail.com>
+In-Reply-To: <20240125201654.17685-1-clamor95@gmail.com>
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+Date: Thu, 29 Feb 2024 12:23:31 +0200
+Message-ID: <CAPVz0n0x22t6x1Zu-GRqLYXjJVpyme-PikhB=_KyKyLEFreyvg@mail.gmail.com>
+Subject: Re: [PATCH v2 0/1] Fix booting kernels with ATAGS and extlinux
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, 
+ Thomas Mittelstaedt <thomas.mittelstaedt@de.bosch.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, 
+ Sean Edmond <seanedmond@microsoft.com>,
+ Dan Carpenter <dan.carpenter@linaro.org>, 
+ =?UTF-8?Q?Jonas_Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>, 
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,23 +96,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+=D1=87=D1=82, 25 =D1=81=D1=96=D1=87. 2024=E2=80=AF=D1=80. =D0=BE 22:17 Svya=
+toslav Ryhel <clamor95@gmail.com> =D0=BF=D0=B8=D1=88=D0=B5:
+>
+> Currently, if boot with extlinux.conf and do not set the fdt
+> U-Boot will provide its own device tree. This behavior is
+> beneficial if the U-Boot device tree is in sync with Linux,
+> but it totally halts the booting of pre-dtb kernels (3.4 for
+> example) since it uses ATAGs. To fix this, pass `-` in the
+> fdt extlinux field as a signal that no tree should be used.
+>
+> Tested with 3.4 legacy kernel and mainline 6.7 kernel on
+> P895 (lg_x3 board).
+>
+> ---
+> Changes form v1
+>  - Added CONFIG guards
+>  - Clarified documentation
+> ---
+>
+> Svyatoslav Ryhel (1):
+>   boot: pxe_utils: skip fdt setup in case legacy kernel is booted
+>
+>  boot/pxe_utils.c       | 27 ++++++++++++++++++++++-----
+>  doc/develop/distro.rst |  6 ++++++
+>  2 files changed, 28 insertions(+), 5 deletions(-)
+>
+> --
+> 2.40.1
+>
 
-
-On 28/02/2024 14:06, MD Danish Anwar wrote:
-> Add APIs to set a firmware_name to a rproc and boot the rproc with the
-> same firmware.
-> 
-> Clients can call rproc_set_firmware() API to set firmware_name for a rproc
-> whereas rproc_boot() will load the firmware set by rproc_set_firmware() to
-> a buffer by calling request_firmware_into_buf(). rproc_boot() will then
-> load the firmware file to the remote processor and start the remote
-> processor.
-> 
-> Also include "fs-loader.h" and make remoteproc driver select FS_LOADER in
-> Kconfig so that we can call request_firmware_into_buf() from remoteproc
-> driver.
-> 
-> Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
-> Acked-by: Ravi Gunasekaran <r-gunasekaran@ti.com>
-
-Reviewed-by: Roger Quadros <rogerq@kernel.org>
+Hello, Tom! A month passed since v2 was pushed without any actions,
+should I re-send it or maybe some adjustments are needed?
