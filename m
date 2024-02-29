@@ -4,108 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67B3CC48BF6
-	for <u-boot@archiver.kernel.org>; Thu, 29 Feb 2024 20:50:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C6FDC48BF6
+	for <u-boot@archiver.kernel.org>; Thu, 29 Feb 2024 21:07:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B12078811F;
-	Thu, 29 Feb 2024 21:50:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 2E4F78811E;
+	Thu, 29 Feb 2024 22:07:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="mUVKx2pV";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="N3KxFwKi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 373C388121; Thu, 29 Feb 2024 21:50:26 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 62FEA8811A; Thu, 29 Feb 2024 22:07:45 +0100 (CET)
+Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
+ [IPv6:2607:f8b0:4864:20::d33])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A50B88119
- for <u-boot@lists.denx.de>; Thu, 29 Feb 2024 21:50:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 25C8288120
+ for <u-boot@lists.denx.de>; Thu, 29 Feb 2024 22:07:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=krzk@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 6DC7D6130E;
- Thu, 29 Feb 2024 20:50:22 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0AD51C433F1;
- Thu, 29 Feb 2024 20:50:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1709239822;
- bh=9gWe/9QdHbp8CAct8/iqyJFuthrBnM9nVpOm096KfwI=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=mUVKx2pV/TU5KRVz/9IPc0z6BN+A4pa3sZ/MhuwCo6twPZ4vXC/IeslnMTJwpblFa
- /PwyyvlWZpFru7clb7lPbvaraAwmdwAkokbSvR/R+uNQobeSfi+q893J+qlbMTbn/i
- UI9ll288B0ah5P6zvIcNbnmNSOX5DyUYFOBOd4Ge/3OTc8laCH3F7zr+y0LZthcrGC
- nAzFBE995XoOCwFmk9ulovJmydV/1o5v9aFmaZNU2gJ9PtMTro0Nz66KsxsQBKuEhs
- OUok4PqHFAnl7tvRQv+xC/zTFsrHauF43fm984sTHJxO8ZWA83txeSXVDWT+WYuwO/
- imRQ/g3wo+gnA==
-Message-ID: <4fa5cede-def3-4ad0-8433-72495e4c8e3b@kernel.org>
-Date: Thu, 29 Feb 2024 21:50:11 +0100
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=cfsworks@gmail.com
+Received: by mail-io1-xd33.google.com with SMTP id
+ ca18e2360f4ac-7c403dbf3adso76821839f.1
+ for <u-boot@lists.denx.de>; Thu, 29 Feb 2024 13:07:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1709240862; x=1709845662; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=a4ia6j7qrJNATB1xGN1Cj5KI/yJbCt0+r5cEuHhh7AI=;
+ b=N3KxFwKiKOf4i6DBu1n7/NgZoqX5yLyUCeTmQ+qXRytD4mLFJooJPMoVWyi4kTo9RI
+ RxpX804EmvOxv81kwIVH8jHAMAHJ7EEBgGb2c0/5xpgRb7KbJYk+wEzkoV7U3eadxyN+
+ pegr8D7ZXhoVyOXkrPGysqyNjbMnO8JUAkhWZ68C7mHvN78aRHwPMWsxwBvu7v1kZ7lw
+ q5d56U39xqNfAq9APMurRJ6WFPJShjcwu+XqmSmjHRHqqpCZPGFYJ9O9cOCK+L7m/Sva
+ Iudo2lJ1G/8UgdVcr7W3wkbmeV38QmeNSFlnIVL7rvYoutUtNaQN4YHpU8SNJIvP9lWu
+ vdDA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1709240862; x=1709845662;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=a4ia6j7qrJNATB1xGN1Cj5KI/yJbCt0+r5cEuHhh7AI=;
+ b=KDN4Lfbsyxw8dSl4BjrSQ5HJnDYxWy/Ka15OUT+poHx+in1xRpeRvIawDG3vsUaPCa
+ DixNYj3CJH784VhFPtQPZPsDMN8/yE9v/Do34vVE27dQZTuF91l4b2bxCh5PFlD0BwZ+
+ 7lACuLbwu8diQ774V8agCgEJKVRla21eFzwGXpCRy/034C1eCM0U4dy1GrlZLT+yu72s
+ Pvo2exrjHwbDt8ghgG5rSozLVu+u65h7idvq7wL2A0Sc7whgJJtcWhikRVBFKCXDkoJy
+ 8qgi7INR2PnRwN8Ans2HRwBFTHg7PNpcpitW/C1bJ3UGCEic+p+5tcVKvclNTOIx5SBF
+ miKg==
+X-Gm-Message-State: AOJu0Yy/s0P7sjlCIwREW/CH/MayO0WdEPVFEX6XgLdup4Xqy9ZS5mLS
+ paTks/mme8PJyvbJoQcHgyxIQFWFOIf+xcbcWbEXN4DClptUKnlv
+X-Google-Smtp-Source: AGHT+IGjozqCVcZquGtXpBHAFq8lDHgrNDOYB4teD++oGovAECe8IEsNWIKexl/UxmUUt+Kal4Z2kw==
+X-Received: by 2002:a5e:db4b:0:b0:7c8:e2e:da3c with SMTP id
+ r11-20020a5edb4b000000b007c80e2eda3cmr193891iop.10.1709240861690; 
+ Thu, 29 Feb 2024 13:07:41 -0800 (PST)
+Received: from ?IPV6:2001:470:42c4:101:4cbf:637e:271f:139?
+ ([2001:470:42c4:101:4cbf:637e:271f:139])
+ by smtp.gmail.com with ESMTPSA id
+ u7-20020a02b1c7000000b00474a1ac6434sm482740jah.162.2024.02.29.13.07.40
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 29 Feb 2024 13:07:41 -0800 (PST)
+Message-ID: <c0c1387a-8bc2-450d-a9f1-5106ac83d67f@gmail.com>
+Date: Thu, 29 Feb 2024 14:07:39 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 01/10] mach-snapdragon: Add support for IPQ9574
+Subject: Re: [RFC PATCH 0/6] Clean up arm linker scripts
 Content-Language: en-US
-To: Varadarajan Narayanan <quic_varada@quicinc.com>, u-boot@lists.denx.de
-Cc: Caleb Connolly <caleb.connolly@linaro.org>,
- FUKAUMI Naoki <naoki@radxa.com>, Hai Pham <hai.pham.ud@renesas.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>,
- Mathieu Othacehe <othacehe@gnu.org>, Michal Simek <michal.simek@amd.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Sumit Garg <sumit.garg@linaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Tianling Shen <cnsztl@gmail.com>, Tom Rini <trini@konsulko.com>
-References: <20240226100807.1095607-1-quic_varada@quicinc.com>
- <20240226100807.1095607-2-quic_varada@quicinc.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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 fv0=
-In-Reply-To: <20240226100807.1095607-2-quic_varada@quicinc.com>
-Content-Type: text/plain; charset=UTF-8
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, caleb.connolly@linaro.org,
+ sumit.garg@linaro.org, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, Michal Simek <michal.simek@amd.com>,
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
+ Yegor Yefremov <yegorslists@googlemail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Shiji Yang <yangshiji66@outlook.com>, Bin Meng <bmeng@tinylab.org>
+References: <20240228104811.1366694-1-ilias.apalodimas@linaro.org>
+ <CALeDE9OGc5ePPThdHc7RwUGkp67HGjZJZwq8GhtwGSBPXRYXWQ@mail.gmail.com>
+ <CAC_iWjKAyUs2JrYN9OLrNKaOyChigdi7QH_780ZbXtRSFH2icw@mail.gmail.com>
+From: Sam Edwards <cfsworks@gmail.com>
+In-Reply-To: <CAC_iWjKAyUs2JrYN9OLrNKaOyChigdi7QH_780ZbXtRSFH2icw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -123,108 +104,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 26/02/2024 11:07, Varadarajan Narayanan wrote:
-> Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
-> ---
+
+
+On 2/28/24 04:15, Ilias Apalodimas wrote:
+> On Wed, 28 Feb 2024 at 13:11, Peter Robinson <pbrobinson@gmail.com> wrote:
+>>
+>> On Wed, 28 Feb 2024 at 10:58, Ilias Apalodimas
+>> <ilias.apalodimas@linaro.org> wrote:
+>>>
+>>> The arm linker scripts had a mix of symbols and C defined variables in an
+>>> effort to emit relative references instead of absolute ones e.g [0].
+>>> This has led to confusion over the years, ending up with mixed section
+>>> definitions. Some sections being defined with overlays and different
+>>> definitions between v7 and v8 architectures.
+>>> For example __efi_runtime_rel_start/end is defined as a linker symbol for
+>>> armv8 and a C variable in armv7.
+>>>
+>>> I am not sure if this used to be a compiler bug, but linker scripts nowadays
+>>> can emit relative references, as long as the symbol definition is contained
+>>> within the section definition. So let's switch most of the C defined variables
+>>
+>> Should we be setting/upping the minimum version of the linker version
+>> as part of this?
 > 
->  arch/arm/dts/Makefile                         |    2 +
->  arch/arm/dts/ipq9574-default.dts              |  167 +++
->  arch/arm/dts/ipq9574-rdp433-mht-phy.dts       |  208 +++
->  arch/arm/dts/ipq9574.dtsi                     |  771 ++++++++++
->  .../include/mach/sysmap-ipq9574.h             |  252 ++++
->  arch/arm/mach-snapdragon/init_ipq9574.c       |   81 +
->  board/qualcomm/ipq9574/Kconfig                |   15 +
->  board/qualcomm/ipq9574/Makefile               |    4 +
->  board/qualcomm/ipq9574/board_init.c           |  326 ++++
->  board/qualcomm/ipq9574/ipq9574.c              |  170 +++
->  board/qualcomm/ipq9574/ipq9574.h              |   75 +
->  board/qualcomm/ipq9574/u-boot-x32.lds         |  250 ++++
->  board/qualcomm/ipq9574/u-boot-x64.lds         |  188 +++
->  drivers/clk/qcom/clock-ipq9574.c              | 1320 +++++++++++++++++
->  drivers/pinctrl/qcom/pinctrl-ipq9574.c        |   77 +
->  include/configs/ipq9574.h                     |  111 ++
->  include/dt-bindings/clock/gcc-ipq9574.h       |  156 ++
->  include/dt-bindings/net/qti-ipqsoc.h          |   20 +
->  include/dt-bindings/pinctrl/pinctrl-ipqsoc.h  |   19 +
->  include/dt-bindings/reset/ipq9574-reset.h     |   54 +
->  20 files changed, 4266 insertions(+)
->  create mode 100644 arch/arm/dts/ipq9574-default.dts
->  create mode 100644 arch/arm/dts/ipq9574-rdp433-mht-phy.dts
->  create mode 100644 arch/arm/dts/ipq9574.dtsi
->  create mode 100644 arch/arm/mach-snapdragon/include/mach/sysmap-ipq9574.h
->  create mode 100644 arch/arm/mach-snapdragon/init_ipq9574.c
->  create mode 100644 board/qualcomm/ipq9574/Kconfig
->  create mode 100644 board/qualcomm/ipq9574/Makefile
->  create mode 100644 board/qualcomm/ipq9574/board_init.c
->  create mode 100644 board/qualcomm/ipq9574/ipq9574.c
->  create mode 100644 board/qualcomm/ipq9574/ipq9574.h
->  create mode 100644 board/qualcomm/ipq9574/u-boot-x32.lds
->  create mode 100644 board/qualcomm/ipq9574/u-boot-x64.lds
->  create mode 100644 drivers/clk/qcom/clock-ipq9574.c
->  create mode 100644 drivers/pinctrl/qcom/pinctrl-ipq9574.c
->  create mode 100644 include/configs/ipq9574.h
->  create mode 100644 include/dt-bindings/clock/gcc-ipq9574.h
->  create mode 100644 include/dt-bindings/net/qti-ipqsoc.h
->  create mode 100644 include/dt-bindings/pinctrl/pinctrl-ipqsoc.h
->  create mode 100644 include/dt-bindings/reset/ipq9574-reset.h
+> The patch that added those as C-defined variables, was in 2013. So any
+> linker that's not ancient history should emit those correctly.
 > 
-> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-> index d9725030d5..8931dfa2aa 100644
-> --- a/arch/arm/dts/Makefile
-> +++ b/arch/arm/dts/Makefile
-> @@ -1523,6 +1523,8 @@ dtb-$(CONFIG_ARCH_QEMU) += qemu-arm.dtb qemu-arm64.dtb
->  dtb-$(CONFIG_TARGET_CORSTONE1000) += corstone1000-mps3.dtb \
->  				corstone1000-fvp.dtb
->  
-> +dtb-$(CONFIG_TARGET_IPQ9574) += ipq9574-rdp433-mht-phy.dtb
-> +
->  include $(srctree)/scripts/Makefile.dts
->  
->  targets += $(dtb-y)
-> diff --git a/arch/arm/dts/ipq9574-default.dts b/arch/arm/dts/ipq9574-default.dts
-> new file mode 100644
-> index 0000000000..501c9492df
-> --- /dev/null
-> +++ b/arch/arm/dts/ipq9574-default.dts
-> @@ -0,0 +1,167 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
-> +/*
-> + * Copyright (c) 2024, Qualcomm Innovation Center, Inc. All rights reserved.
-> + */
-> +
-> +/dts-v1/;
-> +
-> +#include "ipq9574.dtsi"
-> +
-> +/ {
-> +	config_name = "config-default";
-> +
-> +	aliases {
-> +		console = &blsp1_uart2_console;
-> +		uart2 = &blsp1_uart3_additional;
-> +		sdhci = &mmc;
-> +	};
-> +
-> +	soc: soc {
-> +		tlmm: pinctrl@1000000 {
-> +
-> +			sdhci_pinmux: mmc {
-> +				pinconfig;
-> +				emmc_data {
 
-No, please use upstream DTS.
+GNU ld fixed the problem on 2016-02-23, with this entry in the bfd 
+changelog:
 
-You imported here a lot of vendor junk. There is no way this will pass
-any System Ready tests if you hand over this DTB to Linux. Plus really,
-that's ugly DTS to look at.
+	* elflink.c (bfd_elf_record_link_assignment): Check for shared
+	library, instead of PIC, and don't check PDE when making linker
+	assigned symbol dynamic.
 
-I am not a maintainer of DTS in U-Boot, so up to the folks here, but I
-really recommend to NAK such DTS. It just re-adds all the issues we
-fixed in upstream kernel!
+It looks like the change was first included in binutils 2.27, released 
+2016-08-03. I don't know where the minimum linker version requirement is 
+memorialized but there's a good chance that U-Boot already requires a 
+version more recent than that. (Someone who knows where that is will 
+have to check.)
 
-I suggest using dts/upstream/qcom, but if you cannot then please import
-kernel DTS.
+In either case, I strongly agree: sections.c is an unnecessary 
+workaround with any reasonably recent linker version, it's 
+fickle/incompatible with non-GNU linkers such as LLD, and the marker 
+symbols belong in the linker script. This patchset is a big step in the 
+right direction!
 
-Best regards,
-Krzysztof
-
+> 
+>>
+>>> and clean up the arm sections.c file. There's still a few symbols remaining --
+>>> __secure_start/end, __secure_stack_start/end and __end which can be cleaned up
+>>> in a followup series.
+>>>
+>>> The resulting binary (tested in QEMU v7/v8) had no size differences apart from
+>>> the emited sections and object types of those variables. I've also added prints
+>>> throughout the U-Boot init sequence. The offsets and delta for 'end - start'
+>>> section sizes is unchanged.
+>>>
+>>> For example on QEMU v8:
+>>> $~ ./scripts/bloat-o-meter u-boot u-boot.new
+>>> add/remove: 0/0 grow/shrink: 0/0 up/down: 0/0 (0)
+>>> Function                                     old     new   delta
+>>> Total: Before=798861, After=798861, chg +0.00%
+>>>
+>>> $~ readelf -sW u-boot | grep bss_s
+>>>      12: 00000000001029b8     0 SECTION LOCAL  DEFAULT   12 .bss_start
+>>>    8088: 0000000000000018     0 NOTYPE  GLOBAL DEFAULT    1 _bss_start_ofs
+>>>    8376: 00000000001029b8     0 OBJECT  GLOBAL DEFAULT   12 __bss_start
+>>> $~ readelf -sW u-boot.new | grep bss_s
+>>>    8085: 0000000000000018     0 NOTYPE  GLOBAL DEFAULT    1 _bss_start_ofs
+>>>    8373: 00000000001029b8     0 NOTYPE  GLOBAL DEFAULT   12 __bss_start
+>>>
+>>> For QEMU v7 the differences are a bit bigger but only affect the variables
+>>> placed in the .bss section because that was defined as an OVERLAY in the
+>>> existing linker script.
+>>> For example:
+>>> $~ nm u-boot | grep tftp_prev_block
+>>> 000ca0dc ? tftp_prev_block
+>>> $~ nm u-boot.new | grep tftp_prev_block
+>>> 000e0a5c b tftp_prev_block -----> The symbol is now placed into .bss
+>>>
+>>> It's worth noting that since the efi regions are affected by the change, booting
+>>> with EFI is preferable while testing. Booting the kernel only should be enough
+>>> since the efi stub and the kernel proper do request boottime and runtime
+>>> services respectively.
+>>> Something along the lines of
+>>>> virtio scan && load virtio 0 $kernel_addr_r Image && bootefi $kernel_addr_r
+>>> will work for QEMU aarch64.
+>>>
+>>> Tested platforms:
+>>> - QEMU aarch64
+>>> - Xilinx kv260 kria starter kit & zynq
+>>> - QEMU armv7
+>>> - STM32MP157C-DK2
+>>>
+>>> [0] commit 3ebd1cbc49f0 ("arm: make __bss_start and __bss_end__ compiler-generated")
+>>>
+>>> Ilias Apalodimas (6):
+>>>    arm: baltos: remove custom linker script
+>>>    arm: clean up v7 and v8 linker scripts for bss_start/end
+>>>    arm: fix __efi_runtime_rel_start/end definitions
+>>>    arm: clean up v7 and v8 linker scripts for __rel_dyn_start/end
+>>>    arm: fix __efi_runtime_start/end definitions
+>>>    arm: move image_copy_start/end to linker symbols
+>>>
+>>>   arch/arm/cpu/armv8/u-boot-spl.lds         |  14 +--
+>>>   arch/arm/cpu/armv8/u-boot.lds             |  45 ++------
+>>>   arch/arm/cpu/u-boot.lds                   |  74 +++----------
+>>>   arch/arm/lib/sections.c                   |  10 --
+>>>   arch/arm/mach-rockchip/u-boot-tpl-v8.lds  |  22 +---
+>>>   arch/arm/mach-zynq/u-boot.lds             |  72 +++---------
+>>>   board/qualcomm/dragonboard820c/u-boot.lds |  41 ++-----
+>>>   board/vscom/baltos/u-boot.lds             | 128 ----------------------
+>>>   include/asm-generic/sections.h            |   3 +
+>>>   lib/efi_loader/efi_runtime.c              |   1 +
+>>>   10 files changed, 58 insertions(+), 352 deletions(-)
+>>>   delete mode 100644 board/vscom/baltos/u-boot.lds
+>>>
+>>> --
+>>> 2.37.2
+>>>
