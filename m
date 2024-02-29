@@ -4,93 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13BADC48BF6
-	for <u-boot@archiver.kernel.org>; Thu, 29 Feb 2024 17:17:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60F1FC54E49
+	for <u-boot@archiver.kernel.org>; Thu, 29 Feb 2024 17:26:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5B689879BB;
-	Thu, 29 Feb 2024 18:17:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 95A4F880E9;
+	Thu, 29 Feb 2024 18:26:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Vm57L1Ui";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="L0I2qpY6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE813880E5; Thu, 29 Feb 2024 18:06:17 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id B934C880E9; Thu, 29 Feb 2024 18:26:05 +0100 (CET)
+Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
+ [IPv6:2607:f8b0:4864:20::1130])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C003687C80
- for <u-boot@lists.denx.de>; Thu, 29 Feb 2024 18:06:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ACE4687DC2
+ for <u-boot@lists.denx.de>; Thu, 29 Feb 2024 18:26:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41TH5jin113350;
- Thu, 29 Feb 2024 11:05:45 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1709226345;
- bh=T0WTBnbfGrbOazDs8ndhNuswjLba/D1dnwLYtJSd0gk=;
- h=Date:Subject:To:References:From:In-Reply-To;
- b=Vm57L1UiT0oel+R2JRQ4VliE5DEUyK9s28JhZl4b2gt3l+JsURhm2+XH5C2Hx+QoA
- 2NJOwqXzv3ZKTQ6cqeWu8zrmlRAc/gMpxT+NMKUMxYCjGnAj+EpDaame+sXw5t6mr/
- tt2wVfdUGcvzTL+n+m5neaFesBVHONhPNUil7QV0=
-Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41TH5iJE037652
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 29 Feb 2024 11:05:45 -0600
-Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 29
- Feb 2024 11:05:44 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 29 Feb 2024 11:05:44 -0600
-Received: from [10.249.42.149] ([10.249.42.149])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41TH5gAL104859;
- Thu, 29 Feb 2024 11:05:43 -0600
-Message-ID: <bfd1ddac-3dd2-492d-beb4-4e4b046ab83a@ti.com>
-Date: Thu, 29 Feb 2024 11:05:42 -0600
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1130.google.com with SMTP id
+ 00721157ae682-607e54b6cf5so8564087b3.0
+ for <u-boot@lists.denx.de>; Thu, 29 Feb 2024 09:26:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1709227562; x=1709832362; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ZuhK0OWsyoUF5n5J9XAKnW12hORbmwPNdTeiZs+YTm8=;
+ b=L0I2qpY6I61Pddv94kT+ODaLzpcabWAmQku912LYLYd2z/HiMquEsV/9+Ab3Iahvs2
+ h2RpQKuIRqFt2plEdh4s/md/DpgRLSSngOoAhe6SUBv3zwOL4p2eVY2Zp97LhhYBzmCC
+ W9PbRTtBPcJtVleXzKy/fvTDV/o0OACmu60rw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1709227562; x=1709832362;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ZuhK0OWsyoUF5n5J9XAKnW12hORbmwPNdTeiZs+YTm8=;
+ b=GF5rAfnY6c3nhvUnkQOyTCk7sXTjtC+AQipovih0+gmY6W5CyUcH9H83AoxZxUpoVa
+ DBSvrIxc+0KSaepi5wADmsIzM9wiQTY0n6AYlAujHEXG1bgHHuNypFceGWzu0QzWSnH5
+ TDm832nKK9NAnQH1spBPmodZxA5+VfJznIRG+V+I39FSd3V3q6M5ha8BIbxExzYHAb+g
+ BwR9GbPSsVFxt3z8ly2faRigDT8bnmpn7PdvltyH1By557QDYOFX19dsQWol7z/QUxMF
+ QtGQ++fdXe/zXPpLO37KYJ3MKI4uREn1tCTVS6p/th4rXKuBmwqMM6i56dF39x0ZrdxV
+ B9fA==
+X-Gm-Message-State: AOJu0YwA2CKQ0AJq02Yt6S+We/td4Eyn8j/HQytDFKyga322pN1rRx4Q
+ 0S1LHWv9XIl+f5g0KACi+Hh02KNGDYMDL83Ayb7zNtn6OnRz9LIuBHUpqOkyg6g=
+X-Google-Smtp-Source: AGHT+IG/TFovA3BCS5d6+PjWi6LGGybVu7cANC7evzqnAXj0sw2cwuYCfugC7g/PURCl1UdvRAvvsg==
+X-Received: by 2002:a81:83ce:0:b0:609:6338:2c6a with SMTP id
+ t197-20020a8183ce000000b0060963382c6amr2069386ywf.7.1709227562366; 
+ Thu, 29 Feb 2024 09:26:02 -0800 (PST)
+Received: from [127.0.1.1] (065-184-194-195.res.spectrum.com. [65.184.194.195])
+ by smtp.gmail.com with ESMTPSA id
+ d10-20020a81e90a000000b006095684c480sm510469ywm.30.2024.02.29.09.26.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 29 Feb 2024 09:26:01 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Raymond Mao <raymond.mao@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, Kevin Chen <kevin_chen@aspeedtech.com>, 
+ Sean Anderson <sean.anderson@seco.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Nikhil M Jain <n-jain1@ti.com>, Bin Meng <bmeng.cn@gmail.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Shiji Yang <yangshiji66@outlook.com>, Michal Simek <michal.simek@amd.com>, 
+ Stefan Roese <sr@denx.de>, Qu Wenruo <wqu@suse.com>
+In-Reply-To: <20240203163631.177508-1-raymond.mao@linaro.org>
+References: <20240203163631.177508-1-raymond.mao@linaro.org>
+Subject: Re: [PATCH v8 0/8] Handoff bloblist from previous boot stage
+Message-Id: <170922756122.3874330.6522939540605415810.b4-ty@konsulko.com>
+Date: Thu, 29 Feb 2024 12:26:01 -0500
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v10 14/15] configs: am69_sk: Add defconfig for AM69 SK
- board
-To: Apurva Nandan <a-nandan@ti.com>, Tom Rini <trini@konsulko.com>, Lukasz
- Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Jaehoon Chung
- <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>, Sumit Garg
- <sumit.garg@linaro.org>, Jesse Taube <mr.bossman075@gmail.com>, Bryan
- Brattlof <bb@ti.com>, Kever Yang <kever.yang@rock-chips.com>, Michal Simek
- <michal.simek@amd.com>, Marek Vasut <marex@denx.de>, Neil Armstrong
- <neil.armstrong@linaro.org>, Jonas Karlman <jonas@kwiboo.se>, Tianling Shen
- <cnsztl@gmail.com>, Svyatoslav Ryhel <clamor95@gmail.com>, Hai Pham
- <hai.pham.ud@renesas.com>, FUKAUMI Naoki <naoki@radxa.com>,
- Christian Hewitt <christianshewitt@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>, Dasnavis Sabiya <sabiya.d@ti.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>, Hari Nagalla <hnagalla@ti.com>,
- Nishanth Menon <nm@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>,
- Christian Gmeiner <christian.gmeiner@gmail.com>, Emanuele
- Ghidoli <emanuele.ghidoli@toradex.com>, Francesco Dolcini
- <francesco.dolcini@toradex.com>, Roger Quadros <rogerq@kernel.org>, Aradhya
- Bhatia <a-bhatia1@ti.com>,
- Joao Paulo Goncalves <joao.goncalves@toradex.com>,
- Bhavya Kapoor <b-kapoor@ti.com>, Jonathan Humphreys <j-humphreys@ti.com>,
- Nikhil M Jain <n-jain1@ti.com>, Mattijs Korpershoek
- <mkorpershoek@baylibre.com>, Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Vignesh Raghavendra <vigneshr@ti.com>, Udit Kumar <u-kumar1@ti.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jayesh Choudhary <j-choudhary@ti.com>, Andre
- Przywara <andre.przywara@arm.com>, Yanhong Wang
- <yanhong.wang@starfivetech.com>, Ralph Siemsen <ralph.siemsen@linaro.org>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>
-References: <20240223202153.3756094-1-a-nandan@ti.com>
- <20240223202153.3756094-15-a-nandan@ti.com>
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20240223202153.3756094-15-a-nandan@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-X-Mailman-Approved-At: Thu, 29 Feb 2024 18:17:27 +0100
+X-Mailer: b4 0.12.4
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,66 +95,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/23/24 2:21 PM, Apurva Nandan wrote:
-> From: Dasnavis Sabiya <sabiya.d@ti.com>
-> 
-> Add defconfig for AM69 SK A72 and R5 configuration.
-> 
-> This inlcudes and modifies the J784S4 EVM defconfigs:
-> j784s4_evm_a72_defconfig -> am69_sk_a72_defconfig
-> j784s4_evm_r5_defconfig -> am69_sk_r5_defconfig
-> 
-> Signed-off-by: Dasnavis Sabiya <sabiya.d@ti.com>
-> Signed-off-by: Apurva Nandan <a-nandan@ti.com>
-> ---
+On Sat, 03 Feb 2024 08:36:19 -0800, Raymond Mao wrote:
 
-Reviewed-by: Andrew Davis <afd@ti.com>
-
->   board/ti/j784s4/MAINTAINERS   |  2 ++
->   configs/am69_sk_a72_defconfig |  9 +++++++++
->   configs/am69_sk_r5_defconfig  | 10 ++++++++++
->   3 files changed, 21 insertions(+)
->   create mode 100644 configs/am69_sk_a72_defconfig
->   create mode 100644 configs/am69_sk_r5_defconfig
+> This patch set adds/adapts a few bloblist APIs and implements Arm arch
+> custom function to retrieve the bloblist (aka. Transfer List) from
+> previous loader via boot arguments when BLOBLIST option is enabled and
+> all boot arguments are compliant to the register conventions defined
+> in the Firmware Handoff spec v0.9.
 > 
-> diff --git a/board/ti/j784s4/MAINTAINERS b/board/ti/j784s4/MAINTAINERS
-> index 2b6bff2f5be..46f4ba5da96 100644
-> --- a/board/ti/j784s4/MAINTAINERS
-> +++ b/board/ti/j784s4/MAINTAINERS
-> @@ -16,3 +16,5 @@ M:	Apurva Nandan <a-nandan@ti.com>
->   S:	Maintained
->   F:	arch/arm/dts/k3-am69-sk-u-boot.dtsi
->   F:	arch/arm/dts/k3-am69-r5-sk.dts
-> +F:	configs/am69_sk_r5_defconfig
-> +F:	configs/am69_sk_a72_defconfig
-> diff --git a/configs/am69_sk_a72_defconfig b/configs/am69_sk_a72_defconfig
-> new file mode 100644
-> index 00000000000..452de887258
-> --- /dev/null
-> +++ b/configs/am69_sk_a72_defconfig
-> @@ -0,0 +1,9 @@
-> +#include <configs/j784s4_evm_a72_defconfig>
-> +
-> +CONFIG_ARM=y
-> +CONFIG_ARCH_K3=y
-> +CONFIG_SOC_K3_J784S4=y
-> +CONFIG_TARGET_J784S4_A72_EVM=y
-> +
-> +CONFIG_DEFAULT_DEVICE_TREE="ti/k3-am69-sk"
-> +CONFIG_OF_LIST="ti/k3-am69-sk"
-> diff --git a/configs/am69_sk_r5_defconfig b/configs/am69_sk_r5_defconfig
-> new file mode 100644
-> index 00000000000..2186b9a0490
-> --- /dev/null
-> +++ b/configs/am69_sk_r5_defconfig
-> @@ -0,0 +1,10 @@
-> +#include <configs/j784s4_evm_r5_defconfig>
-> +
-> +CONFIG_ARM=y
-> +CONFIG_ARCH_K3=y
-> +CONFIG_SOC_K3_J784S4=y
-> +CONFIG_TARGET_J784S4_R5_EVM=y
-> +
-> +CONFIG_DEFAULT_DEVICE_TREE="k3-am69-r5-sk"
-> +CONFIG_SPL_OF_LIST="k3-am69-r5-sk"
-> +CONFIG_OF_LIST="k3-am69-r5-sk"
+> If an arch wishes to have different behaviors for loading bloblist
+> from the previous boot stage, it is required to implement the custom
+> function xferlist_from_boot_arg().
+> 
+> [...]
+
+Applied to u-boot/next, thanks!
+
+-- 
+Tom
+
+
