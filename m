@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39F6BC54E41
-	for <u-boot@archiver.kernel.org>; Thu, 29 Feb 2024 14:23:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41544C48BF6
+	for <u-boot@archiver.kernel.org>; Thu, 29 Feb 2024 14:23:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E5032880D7;
-	Thu, 29 Feb 2024 15:22:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6633E880F9;
+	Thu, 29 Feb 2024 15:22:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=epam.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=epam.com header.i=@epam.com header.b="kJAveIUR";
+	dkim=pass (2048-bit key; unprotected) header.d=epam.com header.i=@epam.com header.b="C58Gvpgd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A961B880D5; Thu, 29 Feb 2024 15:21:23 +0100 (CET)
+ id 608B2880E1; Thu, 29 Feb 2024 15:21:24 +0100 (CET)
 Received: from mx0b-0039f301.pphosted.com (mx0b-0039f301.pphosted.com
  [148.163.137.242])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A60C4880D7
- for <u-boot@lists.denx.de>; Thu, 29 Feb 2024 15:21:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CCF6387C61
+ for <u-boot@lists.denx.de>; Thu, 29 Feb 2024 15:21:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=epam.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=978922fd78=volodymyr_babchuk@epam.com
 Received: from pps.filterd (m0174683.ppops.net [127.0.0.1])
  by mx0b-0039f301.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 41TEGl6b018534; Thu, 29 Feb 2024 14:21:14 GMT
+ 41TEGl6Z018534; Thu, 29 Feb 2024 14:21:12 GMT
 Received: from eur04-vi1-obe.outbound.protection.outlook.com
  (mail-vi1eur04lp2051.outbound.protection.outlook.com [104.47.14.51])
- by mx0b-0039f301.pphosted.com (PPS) with ESMTPS id 3wjuj380gr-5
+ by mx0b-0039f301.pphosted.com (PPS) with ESMTPS id 3wjuj380gr-3
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 29 Feb 2024 14:21:13 +0000 (GMT)
+ Thu, 29 Feb 2024 14:21:11 +0000 (GMT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=GGmSi2ZpcCKeiuvQp4BO2vHThDUqxbi1ahEkjlH7nKP+jkBeLvDe3LDztZ/66+mZDL2nzne7BO4KsJ0+HW46ilSLWXkyAsPdI+kHVgzS/qKhXKfJTZsjzXAeMSdnzeCy+CQH08BTjq2ZGiSQsfLJCCobCzw8b69AGsYKna7GgREEuluNwRDjD6x5ZA4KE/FbH5pa88v5X5dwBSYceaUU9mz7EAyw8O65Lx1igznXVxsVxFszeBfXyX4QoAAHEYW5iJquYGnXmUoaC/4e3cgGhTPZ7KK7Iscx3E9l97Aw3mVv/iPmoLcukln2xfmuCLW4T1/DkxTAuWt/Ib3d5U20uw==
+ b=M/ho6Tzgv9X1u+UYXKu/97pTRAM3OyZc5u7w3oeLSP0SmfMyBfCyiYcy9oincktvfknLQgNXwXNr09rhhikWAlOxMS6vuayrnFWJC1niTIFuFOydFqBqBsHibPrc0o10/NyI25afoeIgAbj3wUjq5dp7wtwJgv3zmKbkhoDN9DYgl1K0XdGM8aXvcfHRLbQiWGEtDakZzgiNh1R/fqINoH3HwdhybiFMK3kdLB6DyoSB7SITSglx+LpzmBmA91ZAbKG5qTysKulYHkKbEaMFt2AguuZrtEPdd5SfLl8pbx/0mkp/ayBoWXhm46kXFjmCTqSqfzMVBT/4C2PLDRvjmQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=mchtusPVyuxpw0CJz3+M+UJtwWdJWGaRcdbDorKaVI0=;
- b=UnBFI71uXvN1CPKp8QlMID8FHur/kJ80spQWXa58ASMAnWENz+dTsn9u9rs+4bPmpqlD6XL+9EZpl/M/X4HEDKkfPdrsYFCAIiq2JdOtyZsDyijH6+rHKlhBPKtDzB9lv1i8FtBU9uUIl1tiQRIBjXWbrnganWaR9lSl+NUB1biFMU3i1RXH2NHJoKlBIVkEjWtElEbWJudcA4GqiRKK0Ke5lqakzN6aM1FII/YVRYRo6cc48mCxgBKas9XX+ctSF9Y/+0Ho64QwG7PMw1Ruk9R8D+oMVKRzJ5oks7AF3YbXGHJVX/cDV63ybqqG4exWU3uA1eGq+XSCBMaXXmLAlw==
+ bh=8ZXgb89rG9OFJXz9Zu6EnEfI80/ri4RDylsgshiV5rE=;
+ b=GCIAu0m3owHDgmYCfW6TBMv541SOBAzxfilO8hL9Fbk7sOXXsxdMKw+oe80nNb/LD4TrMnlzwmIaWTvyzYT5VkYabrdgQtSbbWHv0FdD/uDuqgZEE2n8IIs2W45QBUFwSgaCuekwyq4cmwqyGYmWITVL2y2/VQgokuWTwdEd8YquRY7HmdejL4VVI+fAYaozQMKPcC48z1JF2cp/iWzGyspf2JexN7li8xk8uFMQsbfou0pXFnjLltesp3YxDdRuTrGqOAcekOWxzq74tNpro8OYr7ju9Uq41jvrgLdKNun4WGcvOmx7AmvXxhUNY+ew6gHzl6NNvqgP/L/T1lTJOQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector2; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=mchtusPVyuxpw0CJz3+M+UJtwWdJWGaRcdbDorKaVI0=;
- b=kJAveIURsnVlAQzr3hJQMVoxKB4SCjla8rCSGTyrRt7mZOfnRsUUobJMED600s2LNLrGBsue7RysU8lPRzLqQzoQVoEy1ugvQmoA6TOTW36hYeoTE2P5v1uE3avry45vPdZvdiqDaMRNQF4x7v7qbO6h+VKMduailRPTKJNoky+WbCvkQKk4B1JyDC9xKyfD1ZY+Cue6+8NxgChwY7MmD2G4lwau3IIR+AiA5iyawe4xsGnzt2rIxmuB7MOhmAbL6v+DhXmV23bK54ZljykcXZSWakKqq9ylTHHrDCHLO4jJfMXWyJ+ketHypFVC6NW9jCmcQMK63Y1rhUkwXHJEcQ==
+ bh=8ZXgb89rG9OFJXz9Zu6EnEfI80/ri4RDylsgshiV5rE=;
+ b=C58GvpgdSm2ADZ69vbVGQSjgwT284NDEzzap1o6gJsc5or9GrtLWS9FN0DU//3VU6ZwwWhL2UIdsBTfs1saOFHtLlJwT6dEUMRguPX6QKkVRTKB742q+x2xDpqPaXIVSSByGFqzzCgk1LiKN2gqtjL/YLTZnoYU8rMB9w+bxnHWbitsjXzQ17lD/sjNJGgQGfjrVVhXzq0HkJMJwWSlB3A2FHKtlpL28t4KZJnmJkY+RwonRlwaRcBL+/oNQ9MFHhn7yiwUk+3SaiS4LubAidr3vH9cV9NZWdSUoJXcdvBa4yF+STrm2yK9lAO057BCSmKV/T4f3dGprvoHYNwSzig==
 Received: from DU5PR03MB10441.eurprd03.prod.outlook.com (2603:10a6:10:516::14)
  by AS8PR03MB7735.eurprd03.prod.outlook.com (2603:10a6:20b:405::11)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7316.41; Thu, 29 Feb
- 2024 14:21:08 +0000
+ 2024 14:21:07 +0000
 Received: from DU5PR03MB10441.eurprd03.prod.outlook.com
  ([fe80::e157:6b89:169f:d30c]) by DU5PR03MB10441.eurprd03.prod.outlook.com
  ([fe80::e157:6b89:169f:d30c%7]) with mapi id 15.20.7316.039; Thu, 29 Feb 2024
- 14:21:08 +0000
+ 14:21:07 +0000
 From: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Caleb Connolly
- <caleb.connolly@linaro.org>, Konrad Dybcio <konrad.dybcio@linaro.org>,
- Lukasz Majewski <lukma@denx.de>,
- Neil Armstrong <neil.armstrong@linaro.org>, Sean
- Anderson <seanga2@gmail.com>, Sumit Garg <sumit.garg@linaro.org>, Tom Rini
- <trini@konsulko.com>
-Subject: [PATCH 5/8] clk: qcom: add driver for SM8150 SoC
-Thread-Topic: [PATCH 5/8] clk: qcom: add driver for SM8150 SoC
-Thread-Index: AQHaaxqJOA4ENkIqJ0y0V3cEXU8mPA==
-Date: Thu, 29 Feb 2024 14:21:08 +0000
-Message-ID: <20240229142043.1263690-6-volodymyr_babchuk@epam.com>
+CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Elmar Psilog
+ <epsi@gmx.de>, Joe Hershberger <joe.hershberger@ni.com>, Jonas Karlman
+ <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>, Ley Foon Tan
+ <leyfoon.tan@starfivetech.com>, Marek Vasut <marex@denx.de>, Ramon Fried
+ <rfried.dev@gmail.com>, Sean Anderson <seanga2@gmail.com>, Simon Glass
+ <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Yanhong Wang
+ <yanhong.wang@starfivetech.com>
+Subject: [PATCH 3/8] net: dw_eth_qos: add support for Qualcomm SM8150 SoC
+Thread-Topic: [PATCH 3/8] net: dw_eth_qos: add support for Qualcomm SM8150 SoC
+Thread-Index: AQHaaxqJLio8kYWjfkmVdlPXNrUzeQ==
+Date: Thu, 29 Feb 2024 14:21:07 +0000
+Message-ID: <20240229142043.1263690-4-volodymyr_babchuk@epam.com>
 References: <20240229142043.1263690-1-volodymyr_babchuk@epam.com>
 In-Reply-To: <20240229142043.1263690-1-volodymyr_babchuk@epam.com>
 Accept-Language: en-US
@@ -79,43 +80,43 @@ X-MS-TNEF-Correlator:
 x-mailer: git-send-email 2.43.0
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: DU5PR03MB10441:EE_|AS8PR03MB7735:EE_
-x-ms-office365-filtering-correlation-id: 5883a5a8-2ff4-4468-fd3e-08dc3931ac65
+x-ms-office365-filtering-correlation-id: cc6bf71d-5f75-4997-9223-08dc3931abcc
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: xf2Awkdmn0IgVeWfaY7cItiEwElikr13Gq4WFBUfUW2d2i0Ys3HNCn9a/d2u7J7koFFTabb8BW/royYDM4whzTHdQDs798Xcdy5ZEaA7hE29k411ort6hrF0d9N0uMfHLF7K9j36sIWWbpzc9pYtJQ8cHUaHpfNQsEWeH9Qs5Bv4yO+Bq0d/zAvJXgimyNsLpMskdO73MgmRUV+QAn2Z4WOQtKKRh7xE0RFjrIpmJ1vigajCIUS1hnTBxOyixC+5jeNEnvTWsyDEGZnsEZc31KE+hftiStFBRvSw9wvYYLxEo0uevrNPkpu9QiLMPx8D1osEeQyjMA8RxPGGyNGUTA8u9aPLTwDoM0XrAdYZuId8dfymieXjGgfgTIhn5JTNC2mEjB1eem3WqS56VWStujgJ/5R52Et/oqs79GeJR4VUCaysQYjzMDgKjMpmBlz3jg0ORH7xoibQe6zXsuLhIr7C+uxIcvCSDbmFROirAA3Qq+4rbKMbSFSecyhauNf/I8VQPoBokoRNNB4f4Gp/8lYrxKryna57MNvT9yvc1Qo3GpNYlBnKbvaDbYErwHfBMdA2cUQTkR747k5eifWydatH6CvS2luKERz8KrRH7k+3ARwAj+V32KQFLrJ9iSm6ASOl9TcZyC6yQW6gTyCpBKgycK064vuYzfkRJSoD0JLqOJYRoHG6+IcbdHYkadjnGeIVxipsggHjhKAk+ixJqA==
+x-microsoft-antispam-message-info: I6DkDu/lw60OwHv027sdK0gQS62dIUeXNeaIrpejD9q3c914yhVNRtTMjHXXJme98TWeCwBhIGYdQVKzggjUy1VKJ4jch2TXkygYyPdqIh/T8eg5p402fIqEyj4jMUr3FftFvvliUBd57xh2YFeOqw8akLFXfSzFw0mx8Mz9YBXN98g/8K75SUfntw+6bq0djzSCaJU+VEL7O4fXLc+UxXqCUKqILEaGYO/Lv+h21qQsZ30F2AwF72NTEExb5OZjCHGC/XiBeu4HwK+OwWvR+BZ1AGL0Ix7zqX787U3Avc2+lqgpHprG8/IaaAopt9hNzhIZW8KxCjsR0m0xGW+BhPbP25rrTcpFe4spoEVOtCnHVwg9ZoRYt4TueLRDnNihBIrG49iNDtcj9SaF3TQwoDoY9KxsKncUxsvpqtY442pZ5gp3n++XjOG32ikNd9nu5JtI4FDhnqAee3TMPxq1R/tXKXMSEaPFypbkNK87vI2uNpLIN6O9hcp6tfpnKrVc3k8lP57BtE1kWoXGLSfH7XHqs3aqZLuNvB9/0WXLHDOoKsGyQSK51wLdse8GXDFo7nKGavYsFeTX34MdNT7764S6x7ug1XtEp2NoCnE65tVadNw5d+X8xOKyOCfpuqMncwq4Vko1NijPpr1CTKRG+AjaKyjIrDhvlCSekjKY2tutD5jIMJQLeTFlxEDvC+zMOGb2DTqMd+PF5XXIkbvN5cyTHfNkLjqkBjjyms7lo9E=
 x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DU5PR03MB10441.eurprd03.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230031)(38070700009); DIR:OUT; SFP:1102; 
 x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?iVmOvnOPcOANzYDlr96W4NuAo3Nge2MvO/LMY3SnS55KTiFgOi5qoq6n2V?=
- =?iso-8859-1?Q?Jvmy6TH2z81PXDydyso5VgcrvQKHM1rYYJ3DWIw7qNM5X/amJYtPXDXXaP?=
- =?iso-8859-1?Q?0J64zNfGxdnRIyLshdXmR24TXf6NNETmG/F5Uod1sf5A+706tRoIZSqaY6?=
- =?iso-8859-1?Q?HHvxg2X5DiPFp3JLzVgdTfkek4MRWls7nLeFKrgT5oHF5QzbOhwNweMr8k?=
- =?iso-8859-1?Q?eaQublcP0RS9m0F63IGKZKcOcfG+VIcMj1qlMdnOw/ymEOzyfN8uKfFOKk?=
- =?iso-8859-1?Q?Gd2ZlC8SWt25bbjxUiZmexFISTe/bnBnYXkz19mKO9CJFBaDB8JcgwJVH5?=
- =?iso-8859-1?Q?sjJpH55FVD+8QPttqSYIdyHpJOuwXuIJznlVhQv8oZnLvVw57bi7urKlFn?=
- =?iso-8859-1?Q?JwkFWg8Dr/lfY4LdZeT1nTEygM9YBms+2EvtKZuorRK1cxZKI3QOVAWviq?=
- =?iso-8859-1?Q?KYebavphf28qV1pJO28ljDs2WhkCmOhkome7hKsr+gh22XwNBIKvgHkVss?=
- =?iso-8859-1?Q?y8CPmv2nQrqXberae7/U0KtzKzCfN0hcyEYgWLW27h8Jcazcts5cuGtXrq?=
- =?iso-8859-1?Q?FBS6GZO9S4oswT38DGAqXMQI+fQhvtqg0x2XymXFmQI6B8dFXl/zqHF3np?=
- =?iso-8859-1?Q?1HP6HKVzMgxyo8VaumCfTb8Age344iNcxz9xm7DnvbQ9+9NFFKmConiQAF?=
- =?iso-8859-1?Q?lbySh+Z5+r2e/4ocAuuPmJYND0j+abHDICKan+ziIR3gwZZeRkCBv8Fpql?=
- =?iso-8859-1?Q?k6CWY7oExC9LnqO5e0lkNmhnKcyuWMaqYKwaqicBJyg5lPWLjbc6m6shpz?=
- =?iso-8859-1?Q?h7q2KqamHmRBohSDqWRx+WDAbY8/Nvb/ANIoo82pIvl4N/mPrGwiPP/My4?=
- =?iso-8859-1?Q?17QqqcZPVDp/soAwryZfLHc9xpc6Gh5Wg3pWHklSmVCg6d6SXzuOxjHkJz?=
- =?iso-8859-1?Q?oT6LHK9EZ5FkWIv0soc50gt1V/KZMTw5rwO+aTAjShVqiL+B+VRoC1ZcJY?=
- =?iso-8859-1?Q?IgSHZhz1dunLFvG7MRaw92rYina/qJ8ty1zz3Hj8AMThR3ZQ4C1bdZMwtf?=
- =?iso-8859-1?Q?1qnK8Zgm2EPnWX17oGSACFlc39Ji8aS/icKtKzAhFsPvMUS4tKNRFIeYYA?=
- =?iso-8859-1?Q?TyvKP8/d0oCRJjtolKTSLk/1rJ7qPfBlFx/j2GArwLWmCDEo1sbmJjJuXd?=
- =?iso-8859-1?Q?3SOZyUui3nB0cun121koFNfYjqzbH6PXeB4z5V/wVj5e5LIopnCBS2JgAv?=
- =?iso-8859-1?Q?4R+L9X2Ad4PD7gH2Rg0ej7aAClBER9xctNnrocPkJ8fFLbFWs2zBd31vhk?=
- =?iso-8859-1?Q?+Y2Lg1bpHr1PwWDF+c5Gg2yIyCsuxqMdGxKETDeVXijGolKhvroWxmwa7O?=
- =?iso-8859-1?Q?dzn3aSDvQJhxnmm3o5vyLWDRdNWYIegLNeT3Q6HJK/3SELmsAj+/PSQJzO?=
- =?iso-8859-1?Q?6eIQp4ybvA0yIcKXu+lkeuW8NuH71YvbPN61oXFimjdwhEkPdk/wl+uCor?=
- =?iso-8859-1?Q?qoyAAZVSomPy+C+I1spupLxRMws72Ru3VX7D3vbVSbk4qURSjBp9+9Omki?=
- =?iso-8859-1?Q?AyKRxK58QRih6+/zD1ogPv6m1kUIPUA4LTzPsXDNoeCkbAwiQHfmKF67nl?=
- =?iso-8859-1?Q?sYGER0d4nh0GRjCz3vXZmj5qUFuS1kj3A83gTxC2stKlxda1oHdA6wCg?=
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?Q14SaiA1RioJU5s371MQHWaBLt0O4aBDFOnwYA0w8jnVXGmeGSp53Iz8QP?=
+ =?iso-8859-1?Q?dik3mXSbdJDAkpovKijM3n3Pf4kaKcaAWJI9akPlEkW+M+ZE/6/egGgUTH?=
+ =?iso-8859-1?Q?ybZxWa0mFj1gpt0sKc3W3EoNg5ko1tyFz+re5avTyB6GubZY3ImOxarSpe?=
+ =?iso-8859-1?Q?+wmO2KBjBOyqhxtrNIufZWPciTDxV0Xcgn4TnJVK6atNhNyQOr8i7pkD4y?=
+ =?iso-8859-1?Q?hQ6s+uWkNBZEZc0duyOjlruujJP39tji4vBI+YjCXlNZ1cd9YDk/MK7Ge0?=
+ =?iso-8859-1?Q?UDB3sAgMsk6Zlt6p+FJCjNe0V7PPgG+1EQHe3SeaZQnUODq3Tc1wGEoAj5?=
+ =?iso-8859-1?Q?2ObNfGoy2I3/qUjERIOwm7s/w5m57hW6GStrBoyUbC9MzvxdxFhWlRjgAx?=
+ =?iso-8859-1?Q?8Yyn/3+eVyLJ78HCesrRkWdCetUjHoaHJPc9WzgtsNFOucXYfMEyvbZ0u7?=
+ =?iso-8859-1?Q?GnlAdua23grM64Uv5+KEcbu1V/ahc07tQ8zlCfT/nq04rJ4By5vP2ZDKq9?=
+ =?iso-8859-1?Q?AG6f+MAwhxIinU+zja14sZUSbK1s39I0uWSdGnwtbH1sX2VTNQevl6puYZ?=
+ =?iso-8859-1?Q?j4EJsyfmM2KpCf6iVqmSwRD4sL9Xwr1HCoM7fNIGQCF9JevfuQ5sy8Yn+g?=
+ =?iso-8859-1?Q?+Y8iIE6thqIqrULH4QJpxTNywz30dqhz4BgakM1bfO948Jd7iVkYw1jKTi?=
+ =?iso-8859-1?Q?KF+17ippkkW5N9Lq85icmgY5wSDh1TWT30BvAjP+j9YD/ExeK2Yk0BtZ53?=
+ =?iso-8859-1?Q?iXNSbM3nlGjJ03OV0vTXlEhuo/y82WzZrcMISIFTZ/3/dghbDYXXEvXe+L?=
+ =?iso-8859-1?Q?ci9VzaldXRQBM/zTYudbuWjaEqHUIjFLXQkRgGJh/lG2NpOOSH7zcuz5n/?=
+ =?iso-8859-1?Q?rS0h6FzkKYh4isrX88sKA84Md5WJl33BgeBZ37KKwQ2YPKkbY49FrICGCt?=
+ =?iso-8859-1?Q?E3Xjfx6bAFEkTtRojnPMZMACPw92izrsALh94E7h+9UtFuYZxUpcnjT789?=
+ =?iso-8859-1?Q?y9LYHRM2A654emHUldowdxS5kvEGMsLfAd8h6RlRFe/FbnRzebuGtutJNo?=
+ =?iso-8859-1?Q?Fla0A6c3DBx9CdAPUWTEuKivJuTNtzuUHRGfNqHDk7/KgN03a3mUfLcsnD?=
+ =?iso-8859-1?Q?hh6k3GyBSflEc/jnHb4fRbN/nj8MSnoUyhoIAfq87/AIqwu272RqGuFfOF?=
+ =?iso-8859-1?Q?scpX8+SmMpiMFD6rrZQ5+28Egyj0JbeDM7nirGjAez+JA0V94gB8mLzYXv?=
+ =?iso-8859-1?Q?4PCqPaM8JB5Rdm6AW7u3J7GPupoMIYXSA1IuJrgwxIz5GO01YeeR41mUwG?=
+ =?iso-8859-1?Q?nEAltNviGhLG06fI7BmxIGgj18bI0ZJvxtE6OLU9tBvXcbNqAPidVxPedO?=
+ =?iso-8859-1?Q?0zrihoUn9IUm3vNa0a19LPFguNVBHrRq1Qb7e9uk+RkM8cTbygAf+xEBOj?=
+ =?iso-8859-1?Q?CgcFYYWjHxXAe+s0HX1TYPsillCGu6dSY1AvMzw2zJcIMlzBaNmPzpzftr?=
+ =?iso-8859-1?Q?S7n7BaXn6a0+/AMTh3LPjzW+Xl/ClGlqfJOZXoLKhdQuIdvOStPVL4fYzs?=
+ =?iso-8859-1?Q?oyM5qGihdgwnh/pQpusq7I0gRNy415otWGmA5TQR2H0Myp5pPzEJYiBiJr?=
+ =?iso-8859-1?Q?hLWxhSqSDlMQSQvh7iBBu7UwQHpYXj03vhtsCAVgQFn+WPYpsmEVQz2g?=
  =?iso-8859-1?Q?=3D=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -123,15 +124,15 @@ MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: DU5PR03MB10441.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5883a5a8-2ff4-4468-fd3e-08dc3931ac65
-X-MS-Exchange-CrossTenant-originalarrivaltime: 29 Feb 2024 14:21:08.5136 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: cc6bf71d-5f75-4997-9223-08dc3931abcc
+X-MS-Exchange-CrossTenant-originalarrivaltime: 29 Feb 2024 14:21:07.7430 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: mZsGIE+HO0LnYCPXS87orVduYSLVHmMz0HOvkkPC3HLjRB3ZHb7WNpTDqUTvX2+P7O3ihej0ewMw2RdYbe2wzGEzVTtQzxs83xqWtS/u8r8=
+X-MS-Exchange-CrossTenant-userprincipalname: OB0hGcrJ5JiPMJkoc2RWqXNUo+3XWMr27zdmnMVIYy4W7iDbup3p9Sy2Q436BXv3uzDSN8usdgjQMHrb4Xh5ph1bewzKYJZNCkoxuGFlxIA=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR03MB7735
-X-Proofpoint-GUID: vsyJvuYnakdWvslwFLh4zhOZKcqvrRvo
-X-Proofpoint-ORIG-GUID: vsyJvuYnakdWvslwFLh4zhOZKcqvrRvo
+X-Proofpoint-GUID: E10TuUsZk86k1puEJsm6S14pM8CHHUp1
+X-Proofpoint-ORIG-GUID: E10TuUsZk86k1puEJsm6S14pM8CHHUp1
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
  definitions=2024-02-29_02,2024-02-29_01,2023-05-22_02
@@ -158,304 +159,164 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add clock, reset and power domain driver for SM8150. Driver code is
-based on the similar U-Boot drivers. All constants are taken from the
-corresponding Linux driver.
+Add support for Qualcomm SM8150 SoC to the EQOS driver. SM8150 has two
+main differences from already supported QCS404: it has another RGMII
+configuration registers set and it does require RGMII loopback to
+be disabled.
 
-This driver supports clock rate setting only for the debug UART and
-RGMII/Ethernet modules, because this is all I can test right now.
+To support different variants of QCOM SoC we had to add two new fields
+to the eqos_priv struct: eqos_qcom_rgmii_regs and
+qcom_enable_loopback.
 
 Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
 ---
 
- drivers/clk/qcom/Kconfig        |   8 ++
- drivers/clk/qcom/Makefile       |   1 +
- drivers/clk/qcom/clock-qcom.h   |   1 +
- drivers/clk/qcom/clock-sm8150.c | 234 ++++++++++++++++++++++++++++++++
- 4 files changed, 244 insertions(+)
- create mode 100644 drivers/clk/qcom/clock-sm8150.c
+ drivers/net/dwc_eth_qos.c      |  4 +++
+ drivers/net/dwc_eth_qos.h      |  2 ++
+ drivers/net/dwc_eth_qos_qcom.c | 47 +++++++++++++++++++++++++++-------
+ 3 files changed, 44 insertions(+), 9 deletions(-)
 
-diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
-index 0df0d1881a..18ccf6a45e 100644
---- a/drivers/clk/qcom/Kconfig
-+++ b/drivers/clk/qcom/Kconfig
-@@ -47,6 +47,14 @@ config CLK_QCOM_SDM845
- 	  on the Snapdragon 845 SoC. This driver supports the clocks
- 	  and resets exposed by the GCC hardware block.
-=20
-+config CLK_QCOM_SM8150
-+	bool "Qualcomm SM8150 GCC"
-+	select CLK_QCOM
-+	help
-+	  Say Y here to enable support for the Global Clock Controller
-+	  on the Snapdragon 8150 SoC. This driver supports the clocks
-+	  and resets exposed by the GCC hardware block.
-+
- endmenu
-=20
- endif
-diff --git a/drivers/clk/qcom/Makefile b/drivers/clk/qcom/Makefile
-index cb179fdac5..12c09ba19e 100644
---- a/drivers/clk/qcom/Makefile
-+++ b/drivers/clk/qcom/Makefile
-@@ -8,3 +8,4 @@ obj-$(CONFIG_CLK_QCOM_APQ8016) +=3D clock-apq8016.o
- obj-$(CONFIG_CLK_QCOM_APQ8096) +=3D clock-apq8096.o
- obj-$(CONFIG_CLK_QCOM_IPQ4019) +=3D clock-ipq4019.o
- obj-$(CONFIG_CLK_QCOM_QCS404) +=3D clock-qcs404.o
-+obj-$(CONFIG_CLK_QCOM_SM8150) +=3D clock-sm8150.o
-diff --git a/drivers/clk/qcom/clock-qcom.h b/drivers/clk/qcom/clock-qcom.h
-index 12a1eaec2b..41107df216 100644
---- a/drivers/clk/qcom/clock-qcom.h
-+++ b/drivers/clk/qcom/clock-qcom.h
-@@ -9,6 +9,7 @@
-=20
- #define CFG_CLK_SRC_CXO   (0 << 8)
- #define CFG_CLK_SRC_GPLL0 (1 << 8)
-+#define CFG_CLK_SRC_GPLL7_MAIN (3 << 8)
- #define CFG_CLK_SRC_GPLL0_EVEN (6 << 8)
- #define CFG_CLK_SRC_MASK  (7 << 8)
-=20
-diff --git a/drivers/clk/qcom/clock-sm8150.c b/drivers/clk/qcom/clock-sm815=
-0.c
-new file mode 100644
-index 0000000000..e23dbccdd3
---- /dev/null
-+++ b/drivers/clk/qcom/clock-sm8150.c
-@@ -0,0 +1,234 @@
-+// SPDX-License-Identifier: BSD-3-Clause
-+/*
-+ * Clock drivers for Qualcomm SM8150
-+ *
-+ * Volodymyr Babchuk <volodymyr_babchuk@epam.com>
-+ * Copyright (c) 2024 EPAM Systems.
-+ *
-+ * Based on U-Boot driver for SDM845. Constants are taken from the Linux d=
-river.
-+ */
-+
-+#include <clk-uclass.h>
-+#include <dm.h>
-+#include <linux/delay.h>
-+#include <errno.h>
-+#include <asm/io.h>
-+#include <linux/bitops.h>
-+#include <dt-bindings/clock/qcom,gcc-sm8150.h>
-+
-+#include "clock-qcom.h"
-+
-+static struct pll_vote_clk gpll7_vote_clk =3D {
-+	.status =3D 0x1a000,
-+	.status_bit =3D BIT(31),
-+	.ena_vote =3D 0x52000,
-+	.vote_bit =3D BIT(7),
-+};
-+
-+static const struct freq_tbl ftbl_gcc_qupv3_wrap0_s0_clk_src[] =3D {
-+	F(7372800, CFG_CLK_SRC_GPLL0_EVEN, 1, 384, 15625),
-+	F(14745600, CFG_CLK_SRC_GPLL0_EVEN, 1, 768, 15625),
-+	F(19200000, CFG_CLK_SRC_CXO, 1, 0, 0),
-+	F(29491200, CFG_CLK_SRC_GPLL0_EVEN, 1, 1536, 15625),
-+	F(32000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 8, 75),
-+	F(48000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 4, 25),
-+	F(64000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 16, 75),
-+	F(80000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 4, 15),
-+	F(96000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 8, 25),
-+	F(100000000, CFG_CLK_SRC_GPLL0_EVEN, 3, 0, 0),
-+	F(102400000, CFG_CLK_SRC_GPLL0_EVEN, 1, 128, 375),
-+	F(112000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 28, 75),
-+	F(117964800, CFG_CLK_SRC_GPLL0_EVEN, 1, 6144, 15625),
-+	F(120000000, CFG_CLK_SRC_GPLL0_EVEN, 2.5, 0, 0),
-+	F(128000000, CFG_CLK_SRC_GPLL0, 1, 16, 75),
-+	{ }
-+};
-+
-+static const struct freq_tbl ftbl_gcc_emac_rgmii_clk_src[] =3D {
-+	F(2500000, CFG_CLK_SRC_CXO, 1, 25, 192),
-+	F(5000000, CFG_CLK_SRC_CXO, 1, 25, 96),
-+	F(19200000, CFG_CLK_SRC_CXO, 1, 0, 0),
-+	F(25000000, CFG_CLK_SRC_GPLL0_EVEN, 12, 0, 0),
-+	F(50000000, CFG_CLK_SRC_GPLL0_EVEN, 6, 0, 0),
-+	F(125000000, CFG_CLK_SRC_GPLL7_MAIN, 4, 0, 0),
-+	F(250000000, CFG_CLK_SRC_GPLL7_MAIN, 2, 0, 0),
-+	{ }
-+};
-+
-+static const struct bcr_regs uart2_regs =3D {
-+	.cfg_rcgr =3D 0x1814C,
-+	.cmd_rcgr =3D 0x18148,
-+	.M =3D 0x18150,
-+	.N =3D 0x18154,
-+	.D =3D 0x18158,
-+};
-+
-+static const struct bcr_regs rgmii_regs =3D {
-+	.cfg_rcgr =3D 0x6020,
-+	.cmd_rcgr =3D 0x601C,
-+	.M =3D 0x6024,
-+	.N =3D 0x6028,
-+	.D =3D 0x602C,
-+};
-+
-+static ulong sm8150_clk_set_rate(struct clk *clk, ulong rate)
-+{
-+	struct msm_clk_priv *priv =3D dev_get_priv(clk->dev);
-+	const struct freq_tbl *freq;
-+
-+	switch (clk->id) {
-+	case GCC_QUPV3_WRAP1_S4_CLK: /* UART2 aka debug-uart */
-+		freq =3D qcom_find_freq(ftbl_gcc_qupv3_wrap0_s0_clk_src, rate);
-+		clk_rcg_set_rate_mnd(priv->base, &uart2_regs,
-+				     freq->pre_div, freq->m, freq->n, freq->src, 16);
-+		return freq->freq;
-+	case GCC_EMAC_RGMII_CLK:
-+		freq =3D qcom_find_freq(ftbl_gcc_emac_rgmii_clk_src, rate);
-+		clk_rcg_set_rate_mnd(priv->base, &rgmii_regs,
-+				     freq->pre_div, freq->m, freq->n, freq->src, 8);
-+
-+		return freq->freq;
-+	default:
-+		pr_err("Don't know how to set clk id %ld\n", clk->id);
-+		return -ENODEV;
-+	}
-+}
-+
-+static const struct gate_clk sm8150_clks[] =3D {
-+	GATE_CLK(GCC_QUPV3_WRAP0_S0_CLK,		0x5200c, 0x00000400),
-+	GATE_CLK(GCC_QUPV3_WRAP0_S1_CLK,		0x5200c, 0x00000800),
-+	GATE_CLK(GCC_QUPV3_WRAP0_S2_CLK,		0x5200c, 0x00001000),
-+	GATE_CLK(GCC_QUPV3_WRAP0_S3_CLK,		0x5200c, 0x00002000),
-+	GATE_CLK(GCC_QUPV3_WRAP0_S4_CLK,		0x5200c, 0x00004000),
-+	GATE_CLK(GCC_QUPV3_WRAP0_S5_CLK,		0x5200c, 0x00008000),
-+	GATE_CLK(GCC_QUPV3_WRAP1_S0_CLK,		0x5200c, 0x00400000),
-+	GATE_CLK(GCC_QUPV3_WRAP1_S1_CLK,		0x5200c, 0x00800000),
-+	GATE_CLK(GCC_QUPV3_WRAP1_S3_CLK,		0x5200c, 0x02000000),
-+	GATE_CLK(GCC_QUPV3_WRAP1_S4_CLK,		0x5200c, 0x04000000),
-+	GATE_CLK(GCC_QUPV3_WRAP1_S5_CLK,		0x5200c, 0x08000000),
-+	GATE_CLK(GCC_QUPV3_WRAP_0_M_AHB_CLK,		0x5200c, 0x00000040),
-+	GATE_CLK(GCC_QUPV3_WRAP_0_S_AHB_CLK,		0x5200c, 0x00000080),
-+	GATE_CLK(GCC_QUPV3_WRAP_1_M_AHB_CLK,		0x5200c, 0x00100000),
-+	GATE_CLK(GCC_QUPV3_WRAP_1_S_AHB_CLK,		0x5200c, 0x00200000),
-+	GATE_CLK(GCC_SDCC2_AHB_CLK,			0x14008, 0x00000001),
-+	GATE_CLK(GCC_SDCC2_APPS_CLK,			0x14004, 0x00000001),
-+	GATE_CLK(GCC_SDCC4_AHB_CLK,			0x16008, 0x00000001),
-+	GATE_CLK(GCC_SDCC4_APPS_CLK,			0x16004, 0x00000001),
-+	GATE_CLK(GCC_UFS_CARD_AHB_CLK,			0x75010, 0x00000001),
-+	GATE_CLK(GCC_UFS_CARD_AXI_CLK,			0x7500c, 0x00000001),
-+	GATE_CLK(GCC_UFS_CARD_CLKREF_CLK,		0x8c004, 0x00000001),
-+	GATE_CLK(GCC_UFS_CARD_ICE_CORE_CLK,		0x75058, 0x00000001),
-+	GATE_CLK(GCC_UFS_CARD_PHY_AUX_CLK,		0x7508c, 0x00000001),
-+	GATE_CLK(GCC_UFS_CARD_RX_SYMBOL_0_CLK,		0x75018, 0x00000001),
-+	GATE_CLK(GCC_UFS_CARD_RX_SYMBOL_1_CLK,		0x750a8, 0x00000001),
-+	GATE_CLK(GCC_UFS_CARD_TX_SYMBOL_0_CLK,		0x75014, 0x00000001),
-+	GATE_CLK(GCC_UFS_CARD_UNIPRO_CORE_CLK,		0x75054, 0x00000001),
-+	GATE_CLK(GCC_UFS_MEM_CLKREF_CLK,		0x8c000, 0x00000001),
-+	GATE_CLK(GCC_UFS_PHY_AHB_CLK,			0x77010, 0x00000001),
-+	GATE_CLK(GCC_UFS_PHY_AXI_CLK,			0x7700c, 0x00000001),
-+	GATE_CLK(GCC_UFS_PHY_ICE_CORE_CLK,		0x77058, 0x00000001),
-+	GATE_CLK(GCC_UFS_PHY_PHY_AUX_CLK,		0x7708c, 0x00000001),
-+	GATE_CLK(GCC_UFS_PHY_RX_SYMBOL_0_CLK,		0x77018, 0x00000001),
-+	GATE_CLK(GCC_UFS_PHY_RX_SYMBOL_1_CLK,		0x770a8, 0x00000001),
-+	GATE_CLK(GCC_UFS_PHY_TX_SYMBOL_0_CLK,		0x77014, 0x00000001),
-+	GATE_CLK(GCC_UFS_PHY_UNIPRO_CORE_CLK,		0x77054, 0x00000001),
-+	GATE_CLK(GCC_USB30_PRIM_MASTER_CLK,		0x0f00c, 0x00000001),
-+	GATE_CLK(GCC_USB30_PRIM_MOCK_UTMI_CLK,		0x0f014, 0x00000001),
-+	GATE_CLK(GCC_USB30_PRIM_SLEEP_CLK,		0x0f010, 0x00000001),
-+	GATE_CLK(GCC_USB30_SEC_MASTER_CLK,		0x1000c, 0x00000001),
-+	GATE_CLK(GCC_USB30_SEC_MOCK_UTMI_CLK,		0x10014, 0x00000001),
-+	GATE_CLK(GCC_USB30_SEC_SLEEP_CLK,		0x10010, 0x00000001),
-+	GATE_CLK(GCC_USB3_PRIM_CLKREF_CLK,		0x8c008, 0x00000001),
-+	GATE_CLK(GCC_USB3_PRIM_PHY_AUX_CLK,		0x0f04c, 0x00000001),
-+	GATE_CLK(GCC_USB3_PRIM_PHY_COM_AUX_CLK,		0x0f050, 0x00000001),
-+	GATE_CLK(GCC_USB3_PRIM_PHY_PIPE_CLK,		0x0f054, 0x00000001),
-+	GATE_CLK(GCC_USB3_SEC_CLKREF_CLK,		0x8c028, 0x00000001),
-+	GATE_CLK(GCC_USB3_SEC_PHY_AUX_CLK,		0x1004c, 0x00000001),
-+	GATE_CLK(GCC_USB3_SEC_PHY_PIPE_CLK,		0x10054, 0x00000001),
-+	GATE_CLK(GCC_USB3_SEC_PHY_COM_AUX_CLK,		0x10050, 0x00000001),
-+	GATE_CLK(GCC_EMAC_AXI_CLK,			0x06010, 0x00000001),
-+	GATE_CLK(GCC_EMAC_SLV_AHB_CLK,			0x06014, 0x00000001),
-+	GATE_CLK(GCC_EMAC_PTP_CLK,			0x06034, 0x00000001),
-+	GATE_CLK(GCC_EMAC_RGMII_CLK,			0x06018, 0x00000001),
-+};
-+
-+static int sm8150_clk_enable(struct clk *clk)
-+{
-+	struct msm_clk_priv *priv =3D dev_get_priv(clk->dev);
-+
-+	clk_enable_gpll0(priv->base, &gpll7_vote_clk);
-+	qcom_gate_clk_en(priv, clk->id);
-+
-+	return 0;
-+}
-+
-+static const struct qcom_reset_map sm8150_gcc_resets[] =3D {
-+	[GCC_EMAC_BCR] =3D { 0x6000 },
-+	[GCC_GPU_BCR] =3D { 0x71000 },
-+	[GCC_MMSS_BCR] =3D { 0xb000 },
-+	[GCC_NPU_BCR] =3D { 0x4d000 },
-+	[GCC_PCIE_0_BCR] =3D { 0x6b000 },
-+	[GCC_PCIE_0_PHY_BCR] =3D { 0x6c01c },
-+	[GCC_PCIE_1_BCR] =3D { 0x8d000 },
-+	[GCC_PCIE_1_PHY_BCR] =3D { 0x8e01c },
-+	[GCC_PCIE_PHY_BCR] =3D { 0x6f000 },
-+	[GCC_PDM_BCR] =3D { 0x33000 },
-+	[GCC_PRNG_BCR] =3D { 0x34000 },
-+	[GCC_QSPI_BCR] =3D { 0x24008 },
-+	[GCC_QUPV3_WRAPPER_0_BCR] =3D { 0x17000 },
-+	[GCC_QUPV3_WRAPPER_1_BCR] =3D { 0x18000 },
-+	[GCC_QUPV3_WRAPPER_2_BCR] =3D { 0x1e000 },
-+	[GCC_QUSB2PHY_PRIM_BCR] =3D { 0x12000 },
-+	[GCC_QUSB2PHY_SEC_BCR] =3D { 0x12004 },
-+	[GCC_USB3_PHY_PRIM_BCR] =3D { 0x50000 },
-+	[GCC_USB3_DP_PHY_PRIM_BCR] =3D { 0x50008 },
-+	[GCC_USB3_PHY_SEC_BCR] =3D { 0x5000c },
-+	[GCC_USB3PHY_PHY_SEC_BCR] =3D { 0x50010 },
-+	[GCC_SDCC2_BCR] =3D { 0x14000 },
-+	[GCC_SDCC4_BCR] =3D { 0x16000 },
-+	[GCC_TSIF_BCR] =3D { 0x36000 },
-+	[GCC_UFS_CARD_BCR] =3D { 0x75000 },
-+	[GCC_UFS_PHY_BCR] =3D { 0x77000 },
-+	[GCC_USB30_PRIM_BCR] =3D { 0xf000 },
-+	[GCC_USB30_SEC_BCR] =3D { 0x10000 },
-+	[GCC_USB_PHY_CFG_AHB2PHY_BCR] =3D { 0x6a000 },
-+};
-+
-+static const struct qcom_power_map sm8150_gcc_power_domains[] =3D {
-+	[EMAC_GDSC] =3D { 0x6004 },
-+	[PCIE_0_GDSC] =3D { 0x6b004 },
-+	[PCIE_1_GDSC] =3D { 0x8d004 },
-+	[UFS_CARD_GDSC] =3D { 0x75004 },
-+	[UFS_PHY_GDSC] =3D { 0x7704 },
-+	[USB30_PRIM_GDSC] =3D { 0x6004 },
-+	[USB30_SEC_GDSC] =3D { 0x10004 },
-+};
-+
-+
-+static struct msm_clk_data sm8150_clk_data =3D {
-+	.resets =3D sm8150_gcc_resets,
-+	.num_resets =3D ARRAY_SIZE(sm8150_gcc_resets),
-+	.clks =3D sm8150_clks,
-+	.num_clks =3D ARRAY_SIZE(sm8150_clks),
-+	.power_domains =3D sm8150_gcc_power_domains,
-+	.num_power_domains =3D ARRAY_SIZE(sm8150_gcc_power_domains),
-+
-+	.enable =3D sm8150_clk_enable,
-+	.set_rate =3D sm8150_clk_set_rate,
-+};
-+
-+static const struct udevice_id gcc_sm8150_of_match[] =3D {
+diff --git a/drivers/net/dwc_eth_qos.c b/drivers/net/dwc_eth_qos.c
+index 9b3bce1dc8..882b854697 100644
+--- a/drivers/net/dwc_eth_qos.c
++++ b/drivers/net/dwc_eth_qos.c
+@@ -1700,6 +1700,10 @@ static const struct udevice_id eqos_ids[] =3D {
+ 		.compatible =3D "qcom,qcs404-ethqos",
+ 		.data =3D (ulong)&eqos_qcom_config
+ 	},
 +	{
-+		.compatible =3D "qcom,gcc-sm8150",
-+		.data =3D (ulong)&sm8150_clk_data,
++		.compatible =3D "qcom,sm8150-ethqos",
++		.data =3D (ulong)&eqos_qcom_config
 +	},
-+	{ }
+ #endif
+ #if IS_ENABLED(CONFIG_DWC_ETH_QOS_STARFIVE)
+ 	{
+diff --git a/drivers/net/dwc_eth_qos.h b/drivers/net/dwc_eth_qos.h
+index e3222e1e17..216e1afe53 100644
+--- a/drivers/net/dwc_eth_qos.h
++++ b/drivers/net/dwc_eth_qos.h
+@@ -255,6 +255,7 @@ struct eqos_priv {
+ 	struct eqos_dma_regs *dma_regs;
+ 	struct eqos_tegra186_regs *tegra186_regs;
+ 	void *eqos_qcom_rgmii_regs;
++	struct dwmac_rgmii_regs *eqos_qcom_por;
+ 	struct reset_ctl reset_ctl;
+ 	struct gpio_desc phy_reset_gpio;
+ 	struct clk clk_master_bus;
+@@ -277,6 +278,7 @@ struct eqos_priv {
+ 	bool started;
+ 	bool reg_access_ok;
+ 	bool clk_ck_enabled;
++	bool qcom_enable_loopback;
+ 	unsigned int tx_fifo_sz, rx_fifo_sz;
+ 	u32 reset_delays[3];
+ };
+diff --git a/drivers/net/dwc_eth_qos_qcom.c b/drivers/net/dwc_eth_qos_qcom.=
+c
+index 8178138fc6..e9592ff686 100644
+--- a/drivers/net/dwc_eth_qos_qcom.c
++++ b/drivers/net/dwc_eth_qos_qcom.c
+@@ -95,6 +95,15 @@ static struct dwmac_rgmii_regs emac_v2_3_0_por =3D {
+ 	.io_macro_config2 =3D 0x00002060
+ };
+=20
++static struct dwmac_rgmii_regs emac_v2_1_0_por =3D {
++	.io_macro_config =3D 0x40C01343,
++	.sdcc_hc_dll_config =3D 0x2004642C,
++	.sdcc_hc_ddr_config =3D 0x00000000,
++	.sdcc_hc_dll_config2 =3D 0x00200000,
++	.sdcc_usr_ctl =3D 0x00010800,
++	.io_macro_config2 =3D 0x00002060
 +};
 +
-+U_BOOT_DRIVER(gcc_sm8150) =3D {
-+	.name		=3D "gcc_sm8150",
-+	.id		=3D UCLASS_NOP,
-+	.of_match	=3D gcc_sm8150_of_match,
-+	.bind		=3D qcom_cc_bind,
-+	.flags		=3D DM_FLAG_PRE_RELOC,
-+};
+ static void ethqos_set_func_clk_en(struct dwmac_rgmii_regs *regs)
+ {
+ 	setbits_le32(&regs->io_macro_config, RGMII_CONFIG_FUNC_CLK_EN);
+@@ -172,6 +181,8 @@ static int ethqos_rgmii_macro_init(struct udevice *dev,
+ 				   struct dwmac_rgmii_regs *regs,
+ 				   unsigned long speed)
+ {
++	struct eqos_priv *eqos =3D dev_get_priv(dev);
++
+ 	/* Disable loopback mode */
+ 	clrbits_le32(&regs->io_macro_config2,
+ 		     RGMII_CONFIG2_TX_TO_RX_LOOPBACK_EN);
+@@ -202,7 +213,9 @@ static int ethqos_rgmii_macro_init(struct udevice *dev,
+ 				SDCC_DDR_CONFIG_PRG_RCLK_DLY, 57);
+ 		setbits_le32(&regs->sdcc_hc_ddr_config, SDCC_DDR_CONFIG_PRG_DLY_EN);
+=20
+-		setbits_le32(&regs->io_macro_config, RGMII_CONFIG_LOOPBACK_EN);
++		if (eqos->qcom_enable_loopback)
++			setbits_le32(&regs->io_macro_config,
++				     RGMII_CONFIG_LOOPBACK_EN);
+ 		break;
+=20
+ 	case SPEED_100:
+@@ -233,7 +246,9 @@ static int ethqos_rgmii_macro_init(struct udevice *dev,
+ 		setbits_le32(&regs->sdcc_hc_ddr_config,
+ 			     SDCC_DDR_CONFIG_EXT_PRG_RCLK_DLY_EN);
+=20
+-		setbits_le32(&regs->io_macro_config, RGMII_CONFIG_LOOPBACK_EN);
++		if (eqos->qcom_enable_loopback)
++			setbits_le32(&regs->io_macro_config,
++				     RGMII_CONFIG_LOOPBACK_EN);
+ 		break;
+=20
+ 	case SPEED_10:
+@@ -265,7 +280,9 @@ static int ethqos_rgmii_macro_init(struct udevice *dev,
+ 		setbits_le32(&regs->sdcc_hc_ddr_config,
+ 			     SDCC_DDR_CONFIG_EXT_PRG_RCLK_DLY_EN);
+=20
+-		setbits_le32(&regs->io_macro_config, RGMII_CONFIG_LOOPBACK_EN);
++		if (eqos->qcom_enable_loopback)
++			setbits_le32(&regs->io_macro_config,
++				     RGMII_CONFIG_LOOPBACK_EN);
+ 		break;
+=20
+ 	default:
+@@ -281,14 +298,15 @@ static int ethqos_configure(struct udevice *dev,
+ 			    unsigned long speed)
+ {
+ 	unsigned int retry =3D 1000;
++	struct eqos_priv *eqos =3D dev_get_priv(dev);
+=20
+ 	/* Reset to POR values and enable clk */
+-	writel(emac_v2_3_0_por.io_macro_config, &regs->io_macro_config);
+-	writel(emac_v2_3_0_por.sdcc_hc_dll_config, &regs->sdcc_hc_dll_config);
+-	writel(emac_v2_3_0_por.sdcc_hc_ddr_config, &regs->sdcc_hc_ddr_config);
+-	writel(emac_v2_3_0_por.sdcc_hc_dll_config2, &regs->sdcc_hc_dll_config2);
+-	writel(emac_v2_3_0_por.sdcc_usr_ctl, &regs->sdcc_usr_ctl);
+-	writel(emac_v2_3_0_por.io_macro_config2, &regs->io_macro_config2);
++	writel(eqos->eqos_qcom_por->io_macro_config, &regs->io_macro_config);
++	writel(eqos->eqos_qcom_por->sdcc_hc_dll_config, &regs->sdcc_hc_dll_config=
+);
++	writel(eqos->eqos_qcom_por->sdcc_hc_ddr_config, &regs->sdcc_hc_ddr_config=
+);
++	writel(eqos->eqos_qcom_por->sdcc_hc_dll_config2, &regs->sdcc_hc_dll_confi=
+g2);
++	writel(eqos->eqos_qcom_por->sdcc_usr_ctl, &regs->sdcc_usr_ctl);
++	writel(eqos->eqos_qcom_por->io_macro_config2, &regs->io_macro_config2);
+=20
+ 	ethqos_set_func_clk_en(regs);
+=20
+@@ -565,6 +583,17 @@ static int eqos_probe_resources_qcom(struct udevice *d=
+ev)
+ 		return -EINVAL;
+ 	}
+=20
++	if (device_is_compatible(dev, "qcom,qcs404-ethqos")) {
++		eqos->eqos_qcom_por =3D &emac_v2_3_0_por;
++		eqos->qcom_enable_loopback =3D true;
++	} else if (device_is_compatible(dev, "qcom,sm8150-ethqos")) {
++		eqos->eqos_qcom_por =3D &emac_v2_1_0_por;
++		eqos->qcom_enable_loopback =3D false;
++	} else {
++		pr_err("Unknown QCOM ethernet device\n");
++		return -EINVAL;
++	}
++
+ 	debug("%s: OK\n", __func__);
+ 	return 0;
+ }
 --=20
 2.43.0
