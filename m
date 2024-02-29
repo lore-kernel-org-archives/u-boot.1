@@ -4,76 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA8C0C48BF6
-	for <u-boot@archiver.kernel.org>; Thu, 29 Feb 2024 22:53:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9912AC54798
+	for <u-boot@archiver.kernel.org>; Thu, 29 Feb 2024 22:59:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B30B487E78;
-	Thu, 29 Feb 2024 23:53:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id BC72587E53;
+	Thu, 29 Feb 2024 23:59:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kXxH4FyV";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="s10Q8sSw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 80EF287F73; Thu, 29 Feb 2024 23:32:49 +0100 (CET)
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [IPv6:2a00:1450:4864:20::130])
+ id 2F38487E53; Thu, 29 Feb 2024 23:59:15 +0100 (CET)
+Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
+ [IPv6:2607:f8b0:4864:20::112e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 95D068765B
- for <u-boot@lists.denx.de>; Thu, 29 Feb 2024 23:32:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0127C880BF
+ for <u-boot@lists.denx.de>; Thu, 29 Feb 2024 23:59:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=maks.mishinfz@gmail.com
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-5131bec457eso1367978e87.0
- for <u-boot@lists.denx.de>; Thu, 29 Feb 2024 14:32:47 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112e.google.com with SMTP id
+ 00721157ae682-60908e5fb9eso15729837b3.2
+ for <u-boot@lists.denx.de>; Thu, 29 Feb 2024 14:59:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1709245966; x=1709850766; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=r8LNRzDgCaKyltHX1kF7iyphhft2LCh9mMOOcEBjnc4=;
- b=kXxH4FyVbf4+lo6fsYJaSzGJf71JhFKiTyx7hfKnqoeqiYfaW0lwzq4zEa8dGRHC+f
- FhqWCzAQHEs+zSrw9pMT3zrS0owdiKEYaqmQkKNe+8dywEEP35/m9dzdRiWqGNaN6FsJ
- rIaq4baKHqXfznZAJAAAHTJZlPmcKn8eTuxffdEsnomPO4qEjheIKfLgZcBMcPN/X85R
- s0XURkoNqrH8nufsMbSJ5LVh+glu2EleJQxyKsNUi3ZQqnHOyBoyv5luQW0IrbmE0oEa
- kJ/mWk7+FKi0u4YzhGSuJODQ4y/yrE/xpcUmirvTfsMZ6f/Sjcl8/6A1JvkVYqw9JWgd
- YU1Q==
+ d=konsulko.com; s=google; t=1709247551; x=1709852351; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=TXmCKD6cMJTZYTv0v65wyQZW05mz99ETMX1bCRZG0sY=;
+ b=s10Q8sSwMDTWQ8CLuoHpzLHxdQP2gPnOE2k47FSCVwSlEbYPW4JlukImYolEdsYABe
+ 305bELsrIdfQJUWQJNDFb9IFpc7mBYrpPA4yC7Ed/+v4FJBC0E4lcSBXAK3JedH+4pmL
+ kGK6r5ClFWAjTxYuzLhkUPeAK7kwl993aJXqc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709245966; x=1709850766;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=r8LNRzDgCaKyltHX1kF7iyphhft2LCh9mMOOcEBjnc4=;
- b=s2RZbelkZ9jgKeU8nNnLZmh/a+q2lucZc7h9Qw7ozEd/qIUuF5Z88VAz9MTB0lw4yn
- JrDfWsRCm805nsQMoytVy4cfgZOlPkSb4KMHwrrghhsfi4bbk+VLup4R+j7q62UQKUPQ
- 5mW9UvCO3Oq3xQydNs36EI2PVzX1/9ewtaVhNoaZJKaarGaLoMmrC6lyHfkS7icYul4A
- oFMAzltvHh7ONiey8+Dnon822P+r1zBz15Cvg2DLqZGrehtzRJV1Ar3+Eo2V4h8Lo85E
- IBU2l3IwitwA50eTKV+a5rp9CUxdjrnQ+lbtfhVCNEsaqvmJue0ihITejNWnh4qyD0sG
- O6kQ==
-X-Gm-Message-State: AOJu0YyctZYKFiCu7C9+UFOcrhvnlh+sA9UtZrg/A0PB+zMG6mxT60G2
- 2kjUiyX3awhJle1RblAeRO8hcr8jaxfT0yb/X4yhBVtv8nQ/U5Tp/Zz3wJR2
-X-Google-Smtp-Source: AGHT+IG2kMVAkmbKyPfvMCXfC4z6ENFEYSuyZsUqfRVH2/3DCwVF4ORCmrbuxihkT2X4WwRqDeIpCA==
-X-Received: by 2002:a05:6512:3c95:b0:513:2508:d2f with SMTP id
- h21-20020a0565123c9500b0051325080d2fmr1694012lfv.12.1709245966148; 
- Thu, 29 Feb 2024 14:32:46 -0800 (PST)
-Received: from mishin.sarov.local (95-37-3-243.dynamic.mts-nn.ru.
- [95.37.3.243]) by smtp.gmail.com with ESMTPSA id
- j15-20020a056512028f00b00513172d5b40sm394262lfp.67.2024.02.29.14.32.45
+ d=1e100.net; s=20230601; t=1709247551; x=1709852351;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TXmCKD6cMJTZYTv0v65wyQZW05mz99ETMX1bCRZG0sY=;
+ b=EHdfDXsVgyLBz5X+w0spN4y7suNazjQq8K331iO4wF8XmbwfprMxZ3sEFQcSvMjANJ
+ MzMRI1Dg3asmanFAc5pUzOI1aIX5aimmOYF+qJhrOEpOJWJ0SKUr6XcmmHcCeqamAFP1
+ WhMB5SS0U4Y2yKUBKQwoXP2ppdCqAB9jZKewv9tt0QIa4U3VX9tARburdBYdaCZu5Zay
+ 2siWFmAe5ioSgCzCu06pAhGa7/ZoioF6WHe9+VW+jEwUIllyoFblykwttEXaVI2E5ezU
+ gZ57SUgqzzk3zVGcfsAeZPDQNGCyfS0H9uNXTTQBnhSj5YDsnTdXFJ5wlwOhzAPhle6B
+ BvmQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXECbB8kfSgOEwbpsN0SBsnKaLSBPr4Gb0AUrZ8txL6GuOyLh5gY48WfCrQFlj8BY+2eO8U99vRc4luOJuvod7Saha/2w==
+X-Gm-Message-State: AOJu0YzqZ9+60tHWxS2g3xYw+nle1zG666s2uONVyHJlDbBNTURwEQRc
+ m1uWD+FgCObAvvjjdTWYSVlhXP7oyATWFjd0RPlyvYnIt9zVkNsPu3o7H+oRTC4=
+X-Google-Smtp-Source: AGHT+IFF7yu4PPOOnk+RA10XNJjLd2n1NIiEHuMTLsAm9VKY9gqcSPGLXHHu0xKYQsNjBOXJibxNbQ==
+X-Received: by 2002:a0d:d48e:0:b0:608:4ca9:6aa0 with SMTP id
+ w136-20020a0dd48e000000b006084ca96aa0mr500955ywd.20.1709247551524; 
+ Thu, 29 Feb 2024 14:59:11 -0800 (PST)
+Received: from bill-the-cat (065-184-194-195.res.spectrum.com.
+ [65.184.194.195]) by smtp.gmail.com with ESMTPSA id
+ d8-20020a818d08000000b00604a0aedd92sm644498ywg.108.2024.02.29.14.59.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 29 Feb 2024 14:32:45 -0800 (PST)
-From: Maks Mishin <maks.mishinfz@gmail.com>
-X-Google-Original-From: Maks Mishin <maks.mishinFZ@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Maks Mishin <maks.mishinFZ@gmail.com>
-Subject: [PATCH] autoboot: Add check for result of malloc_cache_aligned()
-Date: Fri,  1 Mar 2024 01:32:11 +0300
-Message-Id: <20240229223211.22489-1-maks.mishinFZ@gmail.com>
-X-Mailer: git-send-email 2.30.2
+ Thu, 29 Feb 2024 14:59:10 -0800 (PST)
+Date: Thu, 29 Feb 2024 17:59:07 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Sam Edwards <cfsworks@gmail.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de,
+ caleb.connolly@linaro.org, sumit.garg@linaro.org,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
+ Yegor Yefremov <yegorslists@googlemail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Shiji Yang <yangshiji66@outlook.com>, Bin Meng <bmeng@tinylab.org>
+Subject: Re: [RFC PATCH 0/6] Clean up arm linker scripts
+Message-ID: <20240229225907.GY3040305@bill-the-cat>
+References: <20240228104811.1366694-1-ilias.apalodimas@linaro.org>
+ <CALeDE9OGc5ePPThdHc7RwUGkp67HGjZJZwq8GhtwGSBPXRYXWQ@mail.gmail.com>
+ <CAC_iWjKAyUs2JrYN9OLrNKaOyChigdi7QH_780ZbXtRSFH2icw@mail.gmail.com>
+ <c0c1387a-8bc2-450d-a9f1-5106ac83d67f@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 29 Feb 2024 23:53:15 +0100
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="T/hP7FIVZ2lMi+v9"
+Content-Disposition: inline
+In-Reply-To: <c0c1387a-8bc2-450d-a9f1-5106ac83d67f@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,31 +103,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Return value of a function 'malloc_cache_aligned'
-is dereferenced at autoboot.c:207 without checking for NULL,
-but it is usually checked for this function.
 
-Found by RASU JSC.
+--T/hP7FIVZ2lMi+v9
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Maks Mishin <maks.mishinFZ@gmail.com>
----
- common/autoboot.c | 3 +++
- 1 file changed, 3 insertions(+)
+On Thu, Feb 29, 2024 at 02:07:39PM -0700, Sam Edwards wrote:
+>=20
+>=20
+> On 2/28/24 04:15, Ilias Apalodimas wrote:
+> > On Wed, 28 Feb 2024 at 13:11, Peter Robinson <pbrobinson@gmail.com> wro=
+te:
+> > >=20
+> > > On Wed, 28 Feb 2024 at 10:58, Ilias Apalodimas
+> > > <ilias.apalodimas@linaro.org> wrote:
+> > > >=20
+> > > > The arm linker scripts had a mix of symbols and C defined variables=
+ in an
+> > > > effort to emit relative references instead of absolute ones e.g [0].
+> > > > This has led to confusion over the years, ending up with mixed sect=
+ion
+> > > > definitions. Some sections being defined with overlays and different
+> > > > definitions between v7 and v8 architectures.
+> > > > For example __efi_runtime_rel_start/end is defined as a linker symb=
+ol for
+> > > > armv8 and a C variable in armv7.
+> > > >=20
+> > > > I am not sure if this used to be a compiler bug, but linker scripts=
+ nowadays
+> > > > can emit relative references, as long as the symbol definition is c=
+ontained
+> > > > within the section definition. So let's switch most of the C define=
+d variables
+> > >=20
+> > > Should we be setting/upping the minimum version of the linker version
+> > > as part of this?
+> >=20
+> > The patch that added those as C-defined variables, was in 2013. So any
+> > linker that's not ancient history should emit those correctly.
+> >=20
+>=20
+> GNU ld fixed the problem on 2016-02-23, with this entry in the bfd
+> changelog:
+>=20
+> 	* elflink.c (bfd_elf_record_link_assignment): Check for shared
+> 	library, instead of PIC, and don't check PDE when making linker
+> 	assigned symbol dynamic.
+>=20
+> It looks like the change was first included in binutils 2.27, released
+> 2016-08-03. I don't know where the minimum linker version requirement is
+> memorialized but there's a good chance that U-Boot already requires a
+> version more recent than that. (Someone who knows where that is will have=
+ to
+> check.)
+>=20
+> In either case, I strongly agree: sections.c is an unnecessary workaround
+> with any reasonably recent linker version, it's fickle/incompatible with
+> non-GNU linkers such as LLD, and the marker symbols belong in the linker
+> script. This patchset is a big step in the right direction!
 
-diff --git a/common/autoboot.c b/common/autoboot.c
-index 5d331991c1..6f0aeae6bf 100644
---- a/common/autoboot.c
-+++ b/common/autoboot.c
-@@ -167,6 +167,9 @@ static int passwd_abort_sha256(uint64_t etime)
- 		sha_env_str = AUTOBOOT_STOP_STR_SHA256;
- 
- 	presskey = malloc_cache_aligned(DELAY_STOP_STR_MAX_LENGTH);
-+	if (!presskey)
-+		return -ENOMEM;
-+
- 	c = strstr(sha_env_str, ":");
- 	if (c && (c - sha_env_str < DELAY_STOP_STR_MAX_LENGTH)) {
- 		/* preload presskey with salt */
--- 
-2.30.2
+We have the ld-version check logic same as the kernel but do not today
+enforce any minimum version. On ARM we only enforce gcc 6.0.0 being a
+minimum version, and that's likely too old too, in reality. So adding a
+check would be nice, but not required I think, given the age of the fix.
+Thanks for digging in to this!
 
+--=20
+Tom
+
+--T/hP7FIVZ2lMi+v9
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXhDDQACgkQFHw5/5Y0
+tyzRyQv+ImVb1/RVSLd61tXJtMtulojOlVAZGBkH1r4gCQrDvLtwGCbjmsi7AStT
+JJ74mx7Rm/8HyOeumLoFHBhIixginEPAzFnLcx2rq2RKH2Z6hvqJFZ7Vpz4N/qBB
+/B3N7Ul28sIXqKxjha7APba9xFHapssOktJH8vRksq5aJaLLYXbbTdBcLEitLf09
+c9d9An58QEtdIi06lBTXJqer6cP1IMDJ9wnXCVOcQZPpgfpdbNt5S4IeFKwqap07
+Y/URUZF8YMzFiYKWUkj+N098VtVgNl22mBpKOgw4KKOs349g2STqYXr+s3MXC2Mz
+Y1TAsJqyju+ml3LgDx84yk7dUtMqAuHUb4MUWd8Nt+xzKTrZTq2kEXvb63zVpiXt
+0Q4rCQ2DSu+ZBkce5gapRb3oBY4AEXtrRENsT9dqBnt53jQLRn0jQufd+Ldeo2H5
+F9r2711jqz0tzfc+cFBN2yU6IQKqNsqiRQKPFXRkgDzBjUz0NgaWUmXzbnfIiMzu
+hfqR9uos
+=GxvG
+-----END PGP SIGNATURE-----
+
+--T/hP7FIVZ2lMi+v9--
