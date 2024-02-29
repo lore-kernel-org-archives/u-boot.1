@@ -4,77 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A97F5C54E49
-	for <u-boot@archiver.kernel.org>; Thu, 29 Feb 2024 15:08:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEB99C54E41
+	for <u-boot@archiver.kernel.org>; Thu, 29 Feb 2024 15:43:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C3CAB880D9;
-	Thu, 29 Feb 2024 16:08:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 182FD880B6;
+	Thu, 29 Feb 2024 16:43:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AlZ+B18q";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TtKZ11Yk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF3DF880DA; Thu, 29 Feb 2024 16:08:41 +0100 (CET)
-Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
- [IPv6:2607:f8b0:4864:20::c31])
+ id 28A97880DE; Thu, 29 Feb 2024 16:43:11 +0100 (CET)
+Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
+ [IPv6:2607:f8b0:4864:20::b33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 45F018752B
- for <u-boot@lists.denx.de>; Thu, 29 Feb 2024 16:08:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5DD5587C60
+ for <u-boot@lists.denx.de>; Thu, 29 Feb 2024 16:43:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc31.google.com with SMTP id
- 006d021491bc7-5a05923b689so387635eaf.0
- for <u-boot@lists.denx.de>; Thu, 29 Feb 2024 07:08:38 -0800 (PST)
+Received: by mail-yb1-xb33.google.com with SMTP id
+ 3f1490d57ef6-dcc73148611so1162605276.3
+ for <u-boot@lists.denx.de>; Thu, 29 Feb 2024 07:43:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1709219317; x=1709824117; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1709221386; x=1709826186; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=KKDhKg+MQhRwGrgAYX7P9m9/C7GMI89fPYFN8ajsSZ8=;
- b=AlZ+B18qlnw1W00ppQLLpQPn/yi7Fj7AhQwLsM5JtLbfn6fo3KUO0IhcTeuRFESN2+
- kQv8BS82oK8i87ulzcFwW/zxzLiCbXOOJfflG5b6KEJhpWyf9n+xxnxxCkQejc0Tp65g
- rwpTMcdKVQesK6fQO0S/XHX0cMti/5vlGmgdk=
+ bh=/Rn1o3wKBQ3zW8XhduJZc0yk83nxnx1eg5wgEffKtMc=;
+ b=TtKZ11YkEOyNcvFXZFKfEbMUzlWxIkNbTmUEbBre9Ux1zOihzLsijSy//YT8mnT3d3
+ u1ac7YDk7U2Ia4A6Pk0L6sr6LEtAEHkjB+J63KaQZnRO6rZQbtYlsqC1J/zODu2newPl
+ Enm3KZ35JavUK8vEeqlLE0TOkZnN9/j+d4CG0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709219317; x=1709824117;
+ d=1e100.net; s=20230601; t=1709221386; x=1709826186;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KKDhKg+MQhRwGrgAYX7P9m9/C7GMI89fPYFN8ajsSZ8=;
- b=kwOpmPCCZ/qWQRGEclAkVkUHBv+CWLpLk2GWldCEI8jNhca6tdqeyIUtJmcMQ16xIr
- IgWGr3E+D1f/+SP2n9Bh1JOilgspw12855SZfwFvkgl2FuAkhvj8OyVo8OzwLq60itP7
- Hh+jcCQYY/MO6DeZUNToVxPOnSvEedzAYd/ADRzrxjPgUUkZLba1Tv9El7B8lbL8BDAx
- 3+ChR7giZQvRWZRXI8uVOQkkZnelmFEbIi0dgd3KptlXZh0ljejSEr6PKvUz9gvZdmfV
- Kg7GSr9a5EP0igJBz+dyfu/4eyEoJuKLxnmmLxdelXaqCncTaStGLuYCI10XcI5IchN8
- h9IA==
+ bh=/Rn1o3wKBQ3zW8XhduJZc0yk83nxnx1eg5wgEffKtMc=;
+ b=ABjViVvNU3nNOsDw0gqgjgZ13seLwsVb1i4VNWw/kZq4Ps5Ve7rDMAQyR3aBuO3zOp
+ M/4vIS9VjC001K02vTtnA/A5wF2yxeh8GhljSn8u7uQcH7rtzz2PAjC1Ee0JVGx29PjS
+ y01qhQfOyUWStsjkQpojJN6coByXg9H+VDtWozH8v5NrBOELotADPfV6FDUS/G/XDORe
+ NqH7WPDMOcPWIWQ9khYyOH1q3hEBZEf2Occ/OKf0euVw2b+zTMOuLm2grqV3pka2OCtw
+ sEuxH9trGeEvYiM+eaGcRA0ANtHPZV9bYbxSb1+TAHsWqsqNo7wrmHljgAQW/fI9KB7n
+ s2zw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWD0O+EMPcnz6Sqi58vdv/VCzlPp+97JRSslPs59h2eMe/StNsd+vV/334p3okURfVY3bu/PBlQUWVR2YmN0tmcXy3zNQ==
-X-Gm-Message-State: AOJu0YzNg5MmIQyG89NZXkCYxCY9pK/pgsjneSNC0/UQFuXylw2ZZZ/r
- 69wuJ+cT+3N1hffHYozz+j3OzB9Y+weS5/IB+/M8uWyh6Uxo0uCkJ/sFH81koeQ=
-X-Google-Smtp-Source: AGHT+IFOuVv/o0EWl3e469DDjmRxJRAZrBoHZNUGGJyhu/p9bGAGm/HFv49drv9kuJ/EHpUEsS0Uvg==
-X-Received: by 2002:a05:6358:d59b:b0:17b:7de:bab6 with SMTP id
- ms27-20020a056358d59b00b0017b07debab6mr3523312rwb.28.1709219316767; 
- Thu, 29 Feb 2024 07:08:36 -0800 (PST)
+ AJvYcCVckCkY5odgGnvROkEZKm6M/ZIlrQ+0NkbweOOpmEzpXvQE2fe0nUjKdZ+Ogp6g8M6PXLMK8gpos4+4Z6o9DP6RBz5EXA==
+X-Gm-Message-State: AOJu0Yz9O4fbWzkw9uyJun0vlPul1kDn+YeNzcue0tTKq+hrrantmHpI
+ B8SdF3UIMSvLf1B0MsVnGPxvgq50BkIKbPaigUYZKcRCLhEalWSR3E0VaMJ3wMI=
+X-Google-Smtp-Source: AGHT+IHvDfwxjNPsmPRwl8Yh0kC/y805OU8C7M66WWraacPmxUOOtnbE+3p+n0Uo/XA+hJM/tE5DCA==
+X-Received: by 2002:a5b:78d:0:b0:dc7:464c:e979 with SMTP id
+ b13-20020a5b078d000000b00dc7464ce979mr2615311ybq.28.1709221386063; 
+ Thu, 29 Feb 2024 07:43:06 -0800 (PST)
 Received: from bill-the-cat (065-184-194-195.res.spectrum.com.
  [65.184.194.195]) by smtp.gmail.com with ESMTPSA id
- g12-20020a25ef0c000000b00dc74d5e3ff7sm360297ybd.31.2024.02.29.07.08.35
+ g17-20020a25b111000000b00dcc3c85f6a1sm392603ybj.6.2024.02.29.07.43.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 29 Feb 2024 07:08:36 -0800 (PST)
-Date: Thu, 29 Feb 2024 10:08:34 -0500
+ Thu, 29 Feb 2024 07:43:05 -0800 (PST)
+Date: Thu, 29 Feb 2024 10:43:03 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Elon Zhang <zhangzj@rock-chips.com>
-Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
- weizhao.ouyang@arm.com, u-boot@lists.denx.de
-Subject: Re: [PATCH] board: rockchip: add Rockchip Toybrick TB-RK3588X board
-Message-ID: <20240229150834.GU3040305@bill-the-cat>
-References: <20240229120416.998975-1-zhangzj@rock-chips.com>
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>,
+ Thomas Mittelstaedt <thomas.mittelstaedt@de.bosch.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Sean Edmond <seanedmond@microsoft.com>,
+ Dan Carpenter <dan.carpenter@linaro.org>,
+ Jonas =?iso-8859-1?Q?Schw=F6bel?= <jonasschwoebel@yahoo.de>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v2 0/1] Fix booting kernels with ATAGS and extlinux
+Message-ID: <20240229154303.GW3040305@bill-the-cat>
+References: <20240125201654.17685-1-clamor95@gmail.com>
+ <CAPVz0n0x22t6x1Zu-GRqLYXjJVpyme-PikhB=_KyKyLEFreyvg@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="npYLmQhVMydENsLd"
+ protocol="application/pgp-signature"; boundary="Ifkm8xs7mLsbGmbO"
 Content-Disposition: inline
-In-Reply-To: <20240229120416.998975-1-zhangzj@rock-chips.com>
+In-Reply-To: <CAPVz0n0x22t6x1Zu-GRqLYXjJVpyme-PikhB=_KyKyLEFreyvg@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,70 +99,66 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---npYLmQhVMydENsLd
-Content-Type: text/plain; charset=iso-8859-1
+--Ifkm8xs7mLsbGmbO
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Feb 29, 2024 at 08:04:16PM +0800, Elon Zhang wrote:
+On Thu, Feb 29, 2024 at 12:23:31PM +0200, Svyatoslav Ryhel wrote:
+> =D1=87=D1=82, 25 =D1=81=D1=96=D1=87. 2024=E2=80=AF=D1=80. =D0=BE 22:17 Sv=
+yatoslav Ryhel <clamor95@gmail.com> =D0=BF=D0=B8=D1=88=D0=B5:
+> >
+> > Currently, if boot with extlinux.conf and do not set the fdt
+> > U-Boot will provide its own device tree. This behavior is
+> > beneficial if the U-Boot device tree is in sync with Linux,
+> > but it totally halts the booting of pre-dtb kernels (3.4 for
+> > example) since it uses ATAGs. To fix this, pass `-` in the
+> > fdt extlinux field as a signal that no tree should be used.
+> >
+> > Tested with 3.4 legacy kernel and mainline 6.7 kernel on
+> > P895 (lg_x3 board).
+> >
+> > ---
+> > Changes form v1
+> >  - Added CONFIG guards
+> >  - Clarified documentation
+> > ---
+> >
+> > Svyatoslav Ryhel (1):
+> >   boot: pxe_utils: skip fdt setup in case legacy kernel is booted
+> >
+> >  boot/pxe_utils.c       | 27 ++++++++++++++++++++++-----
+> >  doc/develop/distro.rst |  6 ++++++
+> >  2 files changed, 28 insertions(+), 5 deletions(-)
+> >
+> > --
+> > 2.40.1
+> >
+>=20
+> Hello, Tom! A month passed since v2 was pushed without any actions,
+> should I re-send it or maybe some adjustments are needed?
 
-> TB-RK3588X board is a Rockchip Toybrick RK3588 based development board.
->=20
-> Specification:
-> 	Rockchip Rk3588 SoC
-> 	4x ARM Cortex-A76, 4x ARM Cortex-A55
-> 	8/16GB Memory LPDDR4x
-> 	Mali G610MC4 GPU
-> 	2=D7 MIPI-CSI0 Connector
-> 	1x 2Lanes PCIe3.0 Connector
-> 	1x SATA3.0 Connector
-> 	32GB eMMC Module
-> 	2x USB 2.0, 2x USB 3.0
-> 	1x HDMI Output, 1x HDMI Input
-> 	2x Ethernet Port
->=20
-> Functions work normally:
-> 	[1] USB2.0 Host
-> 	[2] Ethernet0 with PHY RTL8211F
->=20
-> More information can be obtained from the following websites:
-> 	[1] https://t.rock-chips.com/en/wiki/EN/tb-rk3588x_en/index.html
-> 	[2] http://t.rock-chips.com/
->=20
-> Kernel commits:
-> 	8ffe365f8dc7 ("arm64: dts: rockchip: Add devicetree support for TB-RK358=
-8X board")
-> 	7140387ff49d ("dt-bindings: arm: rockchip: Add Toybrick TB-RK3588X")
->=20
-> Signed-off-by: Elon Zhang <zhangzj@rock-chips.com>
-[snip]
-> +config BOARD_SPECIFIC_OPTIONS # dummy
-> +	def_bool y
-
-Is this just a copy/paste thing that keeps getting re-used? Ideally,
-BOARD_SPECIFIC_OPTIONS shouldn't exist and it's either a select/imply at
-the TARGET_... level or something in the defconfig. But having an empty
-one is very confusing.
+I should pick it up at some point for -next, thanks.
 
 --=20
 Tom
 
---npYLmQhVMydENsLd
+--Ifkm8xs7mLsbGmbO
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXgne4ACgkQFHw5/5Y0
-tywadAwAtRSFbuFSnPvQ1VZnGdMEH+W25u+LwVpiiPO80oFiYXu9/f2YXUFPXNDK
-0HgQz51fLiWaRkhdsVOY+1hncFKOdDcwo3GFR7o+Y7OJt0BrVs9RF11Y/2gAG34R
-wJxYBFANq7fu12pFsTZ0n9EzqMLwaHg2VOZwDSd6iX+OGJAKl5TAXwX/zVIsMRRf
-M7kSIleFSofZqs2bvXIOLdFargueCeiEHnFpIISfDF7xqKZeTI4TTtLaAI2YZTFB
-YPc+Z28yneN9NG7d6lr7eSf/+4IJSWYPgc2AU6IxUN/+Ssw/UQjeOVPxfpS6W/qc
-7n+kays3RXRwS88rtL9jFNCHc5dMEIUbhs/ekJRu7ijiLPOGxpnNupaUwctvJ1fW
-brFL1SCWnZeNW1HY3ry3cXX4SCYftbuLZNFIr+46FE7f98aKKp9MMgDJxdGCWs6f
-XYs1IM2wwjYyIoNUp1aY7eCOOStEGLsJFJ37nK9V4Z4WQqjg/KaTe2SOrdACYJXW
-lq6OTZwg
-=8uBz
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXgpgAACgkQFHw5/5Y0
+tyw3NgwArWfwiRcvjocXOxYa2Qd0nvoEkovc5oz5bVK0nBQd0P9M8hfKtj6lKbMX
+IUdjJj+g5LLjikx9EvDEieTRJU4oGR9npNcNA1FVnVziW3IZKfe0nSXGuolfgew8
+ZupaegZtCGBFEwhRd5iiEHNOmQG2HWkPiK/iU/djLlp8OxQ1aKje/vsxTRUX2hde
+LczQiqctQXhgQpE5nlZUYQRV+tOoL/gyi2YU+pGwQTW6yX3NkuSW8SkSjIBdcWbh
+uPRgydSxqrCO3ywpOg1JJJ/tFvMorFiy08eE8U95vgooFjxGtnZOkgU4Hs8k0x2G
+UdeEoYj/pe7p9m1f/Drw5x5yh3yBBlE6WEzTjPAyboZvLUXL9m6oyN0oOJNikMJF
+qaQjMofPVn17BLpS0l1tCI1MjnEHPnZpdYOR5eFR8HLj16mMaJff0Zcdw2KvFMla
+VYWKbyUdFqY4p9qGgsh6FgUkT1muE8PclKCkty/sPP4LeAlPS/rg6G6jUF/O9Hp3
+raq2Nl0+
+=+WsB
 -----END PGP SIGNATURE-----
 
---npYLmQhVMydENsLd--
+--Ifkm8xs7mLsbGmbO--
