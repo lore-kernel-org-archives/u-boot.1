@@ -4,85 +4,149 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E7A0C5475B
-	for <u-boot@archiver.kernel.org>; Fri,  1 Mar 2024 19:31:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9A00C5475B
+	for <u-boot@archiver.kernel.org>; Fri,  1 Mar 2024 20:30:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B024A8814D;
-	Fri,  1 Mar 2024 20:31:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id DD07F8812F;
+	Fri,  1 Mar 2024 21:30:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=epam.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qxvnbrH3";
+	dkim=pass (2048-bit key; unprotected) header.d=epam.com header.i=@epam.com header.b="oK4VOllb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B1AB88147; Fri,  1 Mar 2024 20:31:34 +0100 (CET)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C291A87DC4; Fri,  1 Mar 2024 19:26:00 +0100 (CET)
+Received: from mx0a-0039f301.pphosted.com (mx0a-0039f301.pphosted.com
+ [148.163.133.242])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15BA68814D
- for <u-boot@lists.denx.de>; Fri,  1 Mar 2024 20:31:31 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-33d7b8f563eso1463620f8f.0
- for <u-boot@lists.denx.de>; Fri, 01 Mar 2024 11:31:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709321490; x=1709926290; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=w85y9oaIQjDlzBwbpflCbtK2AJ5lrRO35ICTsA8deg8=;
- b=qxvnbrH3GJQpwzzmADie5uIRYZc0Zz2p7fP9OU+NSpsWRkusJRtImAaWlUt9erXdOp
- 9IDqvLZSF/VqRIQY0INL+IERk6bOxV417yHeNlTeDOvkTvFSm/1fCwOg3/sxZnbkuYGT
- w6TJc0y8zYQ0BBrO1lajD2xYsRkQ8sFdiwCbW2aWHeWpY9FWfhUcY4iLPE6ibT0y6PsM
- vD3Lgqy3zYKXVG0hWgqMdFUlNQfc1vMzZmkfIg98JNd62vE9Tm0uBRaGS80j/g+j9+n1
- vv29GA5jMHy0h4XTxFqcc12gB6sNslqF4PLlYf6lBNgmrBjOSVxT01wsQo0+iPSM/UvB
- 3hgA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709321490; x=1709926290;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=w85y9oaIQjDlzBwbpflCbtK2AJ5lrRO35ICTsA8deg8=;
- b=HYloMeOPeyfAk3GxzJUBLsBjHv4JD5JxG3Jkkx5IvNTdgO2+P0D4bLobFJFxh6eqN+
- l8sSLJPE0dATaKdw6HHF7py+8XkfOuzF2tV23iq84V5B1i3WuZ4VLWPDYcKYxGaOQmNO
- mDYuTQtB9c9ofkLN5d7p7AR+7vFouBGyqr7D1k8QzBCl8r6+xA+1Ij0q23hfUL2/HyVx
- mlaMnEow5dVbSHP6LStBvUtyjNg0aWg6+csQGl6Ilb4cI/GlIOpoRTG8yJZ09B1lOnBV
- g7eW7AtwQ97QNs767qLOZoco9AdUNICQ4jlER9YERDBl10LnBki0a0o2/o6gUWyUsTVs
- pf5Q==
-X-Gm-Message-State: AOJu0YwvKIS9S4MIMM2hR4vOO8gW5URKRPVgzPNrONO1glL4a+2S/5dr
- fVW68FXhO4ey3H2xpMXw6D92Uf99eT/hxHybiHTo+ANYlh+yxN1qS0GKUV8RXQc=
-X-Google-Smtp-Source: AGHT+IF28pOXNHsOkql4FD5s6zBg+H0XXhLR5fJSJRwI333THxWCrKk3mxjYPuY4zvOGySrNrYI6lQ==
-X-Received: by 2002:adf:dd89:0:b0:33d:2775:1e64 with SMTP id
- x9-20020adfdd89000000b0033d27751e64mr2069953wrl.27.1709321490370; 
- Fri, 01 Mar 2024 11:31:30 -0800 (PST)
-Received: from [192.168.1.78] (host-92-17-96-232.as13285.net. [92.17.96.232])
- by smtp.gmail.com with ESMTPSA id
- h18-20020a5d5052000000b0033cf4e47496sm5263952wrt.51.2024.03.01.11.31.28
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 01 Mar 2024 11:31:29 -0800 (PST)
-Message-ID: <c2dcee0d-336f-4042-89c7-4d60f3a498cc@linaro.org>
-Date: Fri, 1 Mar 2024 19:31:28 +0000
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 5/8] clk: qcom: add driver for SM8150 SoC
-Content-Language: en-US
-To: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Konrad Dybcio <konrad.dybcio@linaro.org>, Lukasz Majewski <lukma@denx.de>,
- Neil Armstrong <neil.armstrong@linaro.org>, Sean Anderson
- <seanga2@gmail.com>, Sumit Garg <sumit.garg@linaro.org>,
- Tom Rini <trini@konsulko.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 993A887D37
+ for <u-boot@lists.denx.de>; Fri,  1 Mar 2024 19:25:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=epam.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=97901b73a3=volodymyr_babchuk@epam.com
+Received: from pps.filterd (m0174678.ppops.net [127.0.0.1])
+ by mx0a-0039f301.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
+ 421E8Iv8021506; Fri, 1 Mar 2024 18:25:44 GMT
+Received: from eur01-he1-obe.outbound.protection.outlook.com
+ (mail-he1eur01lp2051.outbound.protection.outlook.com [104.47.0.51])
+ by mx0a-0039f301.pphosted.com (PPS) with ESMTPS id 3wjvvq3wu4-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 01 Mar 2024 18:25:44 +0000 (GMT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=BwJvTyiEiQR6dl8hDaBBrla/9SM5CU1xehUW24hThdOMOhkfJYqKFywSE5LSoItNAj+8jk0MNYeOr9Pfdn1EEdo/gnMMG1Q/awxnbaj/HslS9AO+mHuVfl9mtX5zmgFUPgTXqhKnbzw56HctblcNIFz61Gf3b5Z0vBDG1hfX4mAVylTT+PmDbsLVtarJ664K8YvO7tir/iZSkhVcuz5uE6m+qgZGdNRL9wYOtPS9CcJjcph+w7LgUbXZZ3ul/KIWgyjUPeJTq/BR5LHBPYZo0me5dCvZqD6GJJLrJOKE11JtcBh7exx9AZhbGYBtxQG/k2SBZGLl7ZvvVf4UeXNtFQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=vvQ3TMIW+/JDW4QQnU0p2xmqPslA3WuUyoOKZwZIyrM=;
+ b=Pe4BaI6jGSvH4jOyCUGu8C6QN1AJtl4qjXlpsSzq5l29t/Ac5tYq7QTYzWXDzrysSzhSpjSH+UItXEkKSQC+M0Skt7sDgZtzSlRyp4IfpW/bshoHomtiiFN3uIWun65EOMHfSrzgcHzaPFub7wfg1lfYxbvj55AMp2rq0LhWzd0js8SNdWRZUqYIWb8aCBFeeSLaK97Lx4aiKfRtLW2oc+E9qrU7KAlOuN5rG/YjoR341rUh4XaeadLKEyD9sTTTTIMYvduiwKUKz4mYjl44+tqCVn4aB6FDW8hsRiLaIdNSq8pe3fNV14BG3wDFso7ykCo2MP3mNAAkOaPjaF8yzQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector2; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=vvQ3TMIW+/JDW4QQnU0p2xmqPslA3WuUyoOKZwZIyrM=;
+ b=oK4VOllbCLM9PlUHet8EKQRFO6cJzAprE5ZbDEkmPMdstPmI2E8IxS06d0q1ijz+OLZeNCsEMUvbefr+Cc9ljfNlP+8spAPnY4YrwzOi7ayQDmZpMzT7SpMe4mh1j4mwZVQyO4k0K4vCbTuIfuAXI+9PFQSGUphF/Y7fw9z9dH3Yi2Kp5AuAPuN/rY7jxN5PZAnEUURLoJ79/qcDkCHPcDhpWjhzr2yO/6AG/YjcLTRoL7rQG8JTs7TRT+FLk1S6zUnfh2Ac/HnEfYHO4zhHGT8mNVXqPBG8mqB33yTkeVNZz/8FMXJjUG4DlwlemCNqxEoKTUIFnaEGvTqLCyYNSw==
+Received: from GV1PR03MB10456.eurprd03.prod.outlook.com
+ (2603:10a6:150:16a::21) by AS4PR03MB8673.eurprd03.prod.outlook.com
+ (2603:10a6:20b:589::22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7316.41; Fri, 1 Mar
+ 2024 18:25:40 +0000
+Received: from GV1PR03MB10456.eurprd03.prod.outlook.com
+ ([fe80::bfa8:3549:ac92:d0d8]) by GV1PR03MB10456.eurprd03.prod.outlook.com
+ ([fe80::bfa8:3549:ac92:d0d8%4]) with mapi id 15.20.7339.031; Fri, 1 Mar 2024
+ 18:25:39 +0000
+From: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+To: Caleb Connolly <caleb.connolly@linaro.org>
+CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Elmar Psilog <epsi@gmx.de>, 
+ Joe Hershberger <joe.hershberger@ni.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>, Konrad Dybcio
+ <konrad.dybcio@linaro.org>, Ley Foon Tan <leyfoon.tan@starfivetech.com>,
+ Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>, Michal Simek
+ <michal.simek@amd.com>, Neil Armstrong <neil.armstrong@linaro.org>, Ramon
+ Fried <rfried.dev@gmail.com>, Sean Anderson <seanga2@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Yanhong Wang <yanhong.wang@starfivetech.com>
+Subject: Re: [PATCH 0/8] Add support for Qualcomm SA8155-ADP board
+Thread-Topic: [PATCH 0/8] Add support for Qualcomm SA8155-ADP board
+Thread-Index: AQHaaxqISgHy6uye4kSlwIGnnVXBNbEjE/qAgAAemoA=
+Date: Fri, 1 Mar 2024 18:25:39 +0000
+Message-ID: <87bk7x6c88.fsf@epam.com>
 References: <20240229142043.1263690-1-volodymyr_babchuk@epam.com>
- <20240229142043.1263690-6-volodymyr_babchuk@epam.com>
- <c1dc5e6b-7289-4671-ba55-1a26add7e99c@linaro.org> <871q8t6bbl.fsf@epam.com>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <871q8t6bbl.fsf@epam.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+ <dc97490e-4029-41e2-bbbd-b1351f5cf9eb@linaro.org>
+In-Reply-To: <dc97490e-4029-41e2-bbbd-b1351f5cf9eb@linaro.org>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: mu4e 1.10.7; emacs 29.1
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: GV1PR03MB10456:EE_|AS4PR03MB8673:EE_
+x-ms-office365-filtering-correlation-id: 2a2024a5-360d-4023-a0c5-08dc3a1cff75
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: vM9e4r7e+KDRudrFn4cCUFQhwbjgfus33BsZSYs4xVNlCa8wCsL0ZyxsacszRldUBAhQNLOk71PHtPeMaBzhVKJ47+i635Lf5EqrAHyVtert/ozvgr2cG5AEBgU2faKAsfMUReLv9od5mOr84vHbDBdzA+z38F9Rbksx2mBzubd/FDvvO/RSSK31Rz75r+8726InKUg3MMIrI1I27mWbYznXbGTkWkoR5f6BxJmFzk7B0YL9Ue3AjcHFVq1iFRmwPfzDc7CpjkM+MQueB78GMurMaJd9z+1o+cQXwyPU18r3eT0cfFMiHRqGpxr9KJwdxSFZ4xO2Nh7byL/3Bp34zx9ntw1ThthJ1aa2ycuOHQfcpinflFoSxaK5T6HviPNXgZPGjo1+K86pPP66xkxk5AQzKKGi/yCMj4ziRBYr5zeH7C8oJXOWbHnvlq0eGTcfhZju3AJWVTb0qh8KqYOt0l9q/j6vmEeOzS2VSWpz347dKKjsmPLMNyb619aA904ElqdO+jsxNQMySGx+rYLZb7KvaozIUqK0yxBqkw6BkfQ+Isc0sxyTkBlQQhcESGDqQ+jrbfgxYwuU2jJql3kPh2LddDUP0HDSqU6f7LJ0y68DlWwgxJDyguC5SABT1N7NF+dcET/29h5repoPlgp7km8dKr72veTWjl0gGsGV91fGdPivGWmX5QoZ0Gi73HzlRQmZGtZtW3jGt1iLIqVLxvjhfptUFWsXsyu7Zi8fp2w=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GV1PR03MB10456.eurprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(38070700009); DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?EKOaxIN6sRhR2SVLhJJ+ValPiZw/Vxl0HrQdsw2NGTrbjxaTwyH5V7WTSg?=
+ =?iso-8859-1?Q?iajuEMtGrtX9XNPbDXlT32RZTFZhEO3JpK5kYK96H+bEw5kJ4qFA0h+UPH?=
+ =?iso-8859-1?Q?KsphV2Hc80mwNQ+2/rCFHdArM4z/OVhnimwNpOeoyOEchrn/DrTRHzsZ37?=
+ =?iso-8859-1?Q?WjYs3fIlDtqpFsRiHkXrms9L+QWssPxYxl5Pi4jDQK0zO3EjLMKcGszEiE?=
+ =?iso-8859-1?Q?ujWP3fvjuz2MaCj0v8vabKGjFTrmQwQWIgKXx3cmGWi17H1nAIGLeRyR15?=
+ =?iso-8859-1?Q?mLR0O1d8CKvtrdBa4L7Q1YWMAQeUqFNXetGxyanpp0lTRjEYbRCQLvgxYy?=
+ =?iso-8859-1?Q?iP6gfOB5tS1DojCNASDIsmBQXFIkMjNSrHK40IEP1CIaBJfMrNu2Q/aahH?=
+ =?iso-8859-1?Q?uwZZA5rAH1UK2VMkWrxu13KYUkRfhOrC9psEyomrm9nMljESng41kscZ+g?=
+ =?iso-8859-1?Q?AA9kDz6RZ1r/4Z8XaEk+4rJg1QKyWh9kGuMcXFjrgy7h6+ZKaf9KLKbHjV?=
+ =?iso-8859-1?Q?rjwOD92fiPYUkbNbbPh46IFDnj/d2G7TOTxL8uJecNYk7xbD2idzSk8oaa?=
+ =?iso-8859-1?Q?0v3d+VaJISrAnIdO7rrygm0OCH2sdnTVE9R++o7LF+Q/dEzrocMh5kxgwy?=
+ =?iso-8859-1?Q?EvdMubo6MIrFCgIVMJPohf6r4Am0PIMpl4L5gbRltl2kxclTLpTLmt69Ly?=
+ =?iso-8859-1?Q?h2CSTo0lFkYTjvRdCqG2qo2pDykmJJnnGfkKvoext/dwcL0KANs8OAElwy?=
+ =?iso-8859-1?Q?f2+1FmfK5rEk6vLICRi7Qm4YFW6XAlvFixWWZTVEOV2kwdsO8GvWVZKFoN?=
+ =?iso-8859-1?Q?FC/EynDqruCXNRFLWf8KYN2oGDT193hpTBnaAuEbXj2XVYB/NstJM4ONXR?=
+ =?iso-8859-1?Q?cMwcppgbLKDR2/NWVrlwSQx2KXuNmGy0Zl40AWNLQBO/K7fbzN0IvDSqpz?=
+ =?iso-8859-1?Q?PEdKv8Y6Qy14LK6oKL6Ad6BqVG96pF24RanP2eD8JdW1bPp66188IKDnbk?=
+ =?iso-8859-1?Q?9leyqcZwavOgL+af5PkeKX8Vwyz58AR+/+H5poSNhtCpyf+bNBE4rJN0zp?=
+ =?iso-8859-1?Q?c3c5j/ufkjJi6V4tnqGd4iFl9nb/GWR1FzSNFzoWRMZeeWkMdGoFPOW4Ga?=
+ =?iso-8859-1?Q?zB8yQc42lc21etlqMr+BIxNHfelWyzJ+AxamIDQ3f90L0e7HaYjfIU5pKE?=
+ =?iso-8859-1?Q?6ZUIHprQjV/Gsyug6XczV+duMkuWc40NWq5EE7JpjIUdP452D2EZnmXhZs?=
+ =?iso-8859-1?Q?LNiTNvu+3NqoXqHGrxU71BncSCdvmYS0ivws9dOut+eFt1wPTlCOQqTPV5?=
+ =?iso-8859-1?Q?6I469hyNxvtAe2FArKDLho5iqQwez34RM9Sx0BXXzcSZfyZk76yFBHIhlP?=
+ =?iso-8859-1?Q?DdSZ9mV0LhoyaMS7rSfjMls2gyJ9t+GgWHv93K9xW6ko8T7eP0iTiTVkgI?=
+ =?iso-8859-1?Q?M9K0ykgwpWqqvu+1FIuu6uR4sK/w4lkG9fGsUzPnbL/BwxUg5FUiaLVuqq?=
+ =?iso-8859-1?Q?LrlcqW1CwlYbf/4F57CXeRozeNobJjgarrB9rj923XgmemaliOPLl1Ej57?=
+ =?iso-8859-1?Q?fjhKfBjEGVqQWETj3coyqopDU3gcGejwINGfUlGhPkDdU0aWo0dJIVrWN1?=
+ =?iso-8859-1?Q?TATyD2XEow7tZTFmoo2tMDwl2KBiPHPPocokl911kcxrxuhNu+2roNYg?=
+ =?iso-8859-1?Q?=3D=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: GV1PR03MB10456.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2a2024a5-360d-4023-a0c5-08dc3a1cff75
+X-MS-Exchange-CrossTenant-originalarrivaltime: 01 Mar 2024 18:25:39.8868 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: jdndYRDddAPXg0ftqwhKX2R2SuucwzoDYm8tBcVhZIfexuU7y29dCdaBsGZLDqBGlm5AmBb+QGg2kxX8MhOr0VaK9VQ0q0bkPJzgUrVJ64w=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4PR03MB8673
+X-Proofpoint-GUID: 1ypyLNuwQJoalTe3GXxFwfEnFdd-HqjT
+X-Proofpoint-ORIG-GUID: 1ypyLNuwQJoalTe3GXxFwfEnFdd-HqjT
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-03-01_20,2024-03-01_02,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 bulkscore=0
+ lowpriorityscore=0 phishscore=0 spamscore=0 suspectscore=0 impostorscore=0
+ mlxscore=0 priorityscore=1501 adultscore=0 mlxlogscore=282 malwarescore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2402120000
+ definitions=main-2403010152
+X-Mailman-Approved-At: Fri, 01 Mar 2024 21:30:21 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,63 +164,38 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
->> Please reorder the patches so that the power domain driver is added
->> before this so we don't break future bisects.
-> 
-> power domain driver is added in the previous patch: "[PATCH 4/8] clk:
-> qcom: add support for power domains uclass"
+Hi Caleb,
 
-Ah, my mistake!
+Caleb Connolly <caleb.connolly@linaro.org> writes:
 
->>
->> Just in case it's useful to you, I have some work in progress patches
->> for dumping the clock configuration, I hope to upstream these eventually
->> but in the mean time you can find them here:
-> 
-> This is what bothers me now. Looks like I jumped in the middle of your
-> USB series and Sumit's Qulacom device tree binding series. I don't want
-> to interfere with the ongoing work, so probably I postpone posting my v2
-> unless at least Sumit's series are taken into the mainline. On other
-> hand, there are couple of patches that are not directly related to the
-> SM8155P-ADP, like my fix to the clock driver or already mentioned "clk:
-> qcom: add support for power domains uclass", which you can reuse. So I
-> can post them separately or you can include them into your series if you
-> want. What is your opinion?
+> On 29/02/2024 14:21, Volodymyr Babchuk wrote:
+>>=20
+>> This patch series adds support for Qualcomm SA8155-ADP development
+>> board. Main motivation for this series is to allow running
+>> virtualization software on this board and U-Boot is a good way to
+>> break Qualcomm's boot chain at EL2 with more convenient ways for
+>> uploading and running the code. With this patches applied it is
+>> possible to upload and run Xen on this board. KVM probably should work
+>> too.
+>
+> This is really cool! I've experimented with this on SDM845 and SM8250
+> but never really did anything with it... I'd love to take a look at your
+> Xen branch?
 
-The big conflict is really just the board support stuff and DTS. The
-other patches would definitely be good to have.
+Honestly, there is nothing to look at right now. I just implemented
+early printk serial driver for the qcom, made hacks to the device tree
+and trying to boot Dom0. I already expecting issues with the GPU,
+because it has own SMMU without virtualization support and Xen already
+complains about it. So I had to remove it from the DTS for a time being.
 
-Could you rebase this series on top of qcom-next [1]? The big series has
-gone in now (and should be in U-Boot next shortly) so we shouldn't have
-to delay yours.
+Anyways, right now my Dom0 does not want to boot due to some issues with
+UFS. I suspect that some power domain or clock is disabled or some
+other bit of initialization is missing in the mainline Linux. And
+reason why bare Linux kernel have no issues with UFS is because
+aboot/xbl does proper UFS initialization, while in my case I am skipping
+the android bootloader completely...
 
-Your last patch introducing the board support will conflict, but you
-don't have any heavily board specific features so it should be pretty easy:
+I'll publish my work when I'll get Dom0 running.
 
-* Drop init_sm8150.c and sysmap-sm8150.c (everything they do is handled
-generically in board.c)
-* Drop your changes to mach-snapdragon/Kconfig
-* Delete board/qualcomm/sa8155p-adp/Kconfig
-* Replace CONFIG_TARGET_SA8155P_ADP=y with
-CONFIG_SYS_BOARD="sa8155p-adp" in your defconfig
-* Set CONFIG_SYS_CONFIG_NAME="sa8155p_adp" (or rename the config file to
-use a '-' instead).
-
-It's now possible to use pre-processor directives from defconfigs, so
-you could also rework your defconfig to #include "qcom_defconfig" and
-that way only have to define your board specific options, but I guess
-there isn't much room in the hyp partition so you might not want all the
-bells and whistles - totally up to you.
-
-If you could split this into series, one with your fixes and drivers,
-and another adding the DTS and board changes I think that would be fine.
-
-Regarding the DT stuff, you probably drop your sm8150 DTS patch and
-instead select OF_UPSTREAM for ARCH_SNAPDRAGON, I'll likely send a patch
-for this soon.
-
-[1]: https://source.denx.de/u-boot/custodians/u-boot-snapdragon
-> 
-
--- 
-// Caleb (they/them)
+--=20
+WBR, Volodymyr=
