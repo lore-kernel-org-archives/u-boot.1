@@ -4,86 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26AA4C5475B
-	for <u-boot@archiver.kernel.org>; Fri,  1 Mar 2024 12:58:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC03AC5475B
+	for <u-boot@archiver.kernel.org>; Fri,  1 Mar 2024 13:11:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 63AF687E02;
-	Fri,  1 Mar 2024 13:58:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0502588132;
+	Fri,  1 Mar 2024 14:11:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ew9ENzJv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="obP0ntYk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA05087E02; Fri,  1 Mar 2024 13:57:24 +0100 (CET)
-Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
- [IPv6:2607:f8b0:4864:20::112a])
+ id 1989488136; Fri,  1 Mar 2024 14:11:04 +0100 (CET)
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [IPv6:2a00:1450:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4DDFD87EAF
- for <u-boot@lists.denx.de>; Fri,  1 Mar 2024 13:57:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9642D8812F
+ for <u-boot@lists.denx.de>; Fri,  1 Mar 2024 14:11:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112a.google.com with SMTP id
- 00721157ae682-608e3530941so22703797b3.1
- for <u-boot@lists.denx.de>; Fri, 01 Mar 2024 04:57:21 -0800 (PST)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-5132b1e66ddso1410785e87.3
+ for <u-boot@lists.denx.de>; Fri, 01 Mar 2024 05:11:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1709297840; x=1709902640; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ZfyMlUMzx3VQsS3R7T2GSZESD8+Lnpcy3TEyzInipfc=;
- b=ew9ENzJvMekPN3Vja4EwGDbPIkUQ0sxP/mhoMcJyjldy0wxLPoYI6Kafv/4EF3lltc
- 5iC9m+wb4HhRwY/pB15SIwQgGY9+ziip1S9EHlLI5Cs75Pw8QsjY/KDdMwJ0pNlXWh+v
- LZlIhNLy3n7u60RbURPRqhsoSd9gbuEh+4iIc=
+ d=linaro.org; s=google; t=1709298661; x=1709903461; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=rSXZGnuWLi3xW0YwxhKMZkkCbTvpSqaxo/5LUAHVrQw=;
+ b=obP0ntYkSGocadzJVWaQAVzZJ4trTFMvH2t/LG40b7MgiB6aQtUQHFrnAV3ys/THfk
+ cTWX3RFBd9DwjoY9CFlF55ZJmfd/iCM0D3raeLLMNiA9SYy7ozBl65LO3lfkPHSjY5jC
+ xAGuwCK1os4eLgVxTly0jGVR6HIaqWYLRnQkvEnqYseRGqSlXNVFj44NsNa3OH8E4fMo
+ ZiwIasHvrsf8Um7Z8t4g9a+lIoNiIP8ECFyoZquSerGHqgoxXVPEaesvigr5aPduzHuE
+ P/Kq7rV1nNp4/9zVzX5ppJFPnnEdPZInncCztB8v8ikmaFL+GsHeIoBOqaeRBcMnbYHe
+ Di1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709297840; x=1709902640;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ZfyMlUMzx3VQsS3R7T2GSZESD8+Lnpcy3TEyzInipfc=;
- b=Ve4iQmFggU8k/tz+VwTxx6AEsqdKiZaNmbql+MXuDIeWfuFAS+wWhLzLHZXVrWJhyL
- /KJhKmGbMUQVZNbXWDcmvsdas2j9sfDepOxmSBJZAuFSL2vz/+aqtloIt9CXSF9iEefs
- TKX3lVJCBvSiyHtp25b4CUcYrk63fP6y/MsVA6gfp4pSzoCirZmJkdoIDA7DKvHZnAJK
- L7e6UKtguDzsGrCyrAFB2Rq81iJTyeLacTN3cFDneUWoBa3afS1d9Sfhzah7ihUJGIiw
- xyeLll0NylJXGGP+glPZ0+bgEOwmM+rBtugJ/u1+wFlHc8pPQGiHRGrTLM7pbOyJpuJC
- rvyQ==
-X-Gm-Message-State: AOJu0Yy/4ftSgckCb6iHEn04sB6OANTDerKGQOBqC4xxhug16eP90WmG
- igaBX4Dd0Q5cPMqMiSUR7BOzZf8kXel0wYJqwUbiCc6g6y6KUoqnrNta6iArwJw=
-X-Google-Smtp-Source: AGHT+IE36fYDLRMwuBncyAlDNJME588hBikKsruL2lYhp4q3b15W/ENqtUFEHz1leqG8GNPy2YaFNw==
-X-Received: by 2002:a81:4ad4:0:b0:608:7f87:fceb with SMTP id
- x203-20020a814ad4000000b006087f87fcebmr1323914ywa.38.1709297840040; 
- Fri, 01 Mar 2024 04:57:20 -0800 (PST)
-Received: from [127.0.1.1] (065-184-194-195.res.spectrum.com. [65.184.194.195])
- by smtp.gmail.com with ESMTPSA id
- u125-20020a0deb83000000b00604ad97f2d9sm941660ywe.110.2024.03.01.04.57.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 01 Mar 2024 04:57:19 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
- u-boot-custodians@lists.denx.de, Sumit Garg <sumit.garg@linaro.org>
-Cc: sjg@chromium.org, robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org, 
- conor@kernel.org, neil.armstrong@linaro.org, caleb.connolly@linaro.org, 
- ff@shokubai.tech, daniel.thompson@linaro.org, dgilmore@fedoraproject.org, 
- pbrobinson@gmail.com, ilias.apalodimas@linaro.org, b.galvani@gmail.com, 
- xypron.glpk@gmx.de, michal.simek@amd.com, seanga2@gmail.com, 
- rasmus.villemoes@prevas.dk, peng.fan@nxp.com, jh80.chung@samsung.com, 
- rfried.dev@gmail.com, marex@denx.de, mibodhi@gmail.com, bb@ti.com, 
- mark.kettenis@xs4all.nl, festevam@gmail.com, nm@ti.com, 
- andre.przywara@arm.com, ijc@hellion.org.uk, paul.barker.ct@bp.renesas.com
-In-Reply-To: <20240222093607.3085545-1-sumit.garg@linaro.org>
-References: <20240222093607.3085545-1-sumit.garg@linaro.org>
-Subject: Re: [PATCH v6 00/11] An effort to bring DT bindings compliance
- within U-Boot
-Message-Id: <170929783825.70492.4756963077870833230.b4-ty@konsulko.com>
-Date: Fri, 01 Mar 2024 07:57:18 -0500
+ d=1e100.net; s=20230601; t=1709298661; x=1709903461;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=rSXZGnuWLi3xW0YwxhKMZkkCbTvpSqaxo/5LUAHVrQw=;
+ b=PM+eGEop8KmcxjbBCwbboc6uM8aTtwQwRPeJpI9mwkHcHW5Tjz0w7vhFtZ6v69zx5+
+ dPbiBCdJPihWlZPDoXh2HDjWK7ApXoMsuUfhuOS7RGPcOZNrLJRAS+5ZO/HKg452Ot2t
+ pJoL9wKdTlKlqZq3Hh9jUWZm2fRHbFF8xXhaC78BB4m+7trLdb1fHF7T4odokvk+TmFP
+ qssOaBmT1wEop9Lpiu/hOrTntiiI+KHFe19rUdzkNPIrfPwjktfa7MNh/wKx/QGR4g/i
+ JgMK91aBF32Ysl6zM6yiNeGJGuZ7XRa9xgikCoXtdTkUyjxNxHMmlW55TzV/kLVWy2J5
+ DZfQ==
+X-Gm-Message-State: AOJu0YxkgHuVTH+Ww7OKnVt7jnI1VFlThHi1kD4dTKitgHVvoaKh9FBY
+ hp24QAesA06PyKlgf0ik3Iv4WnZOCGTCQgR1m2NH/NizfUKN5e3ifIJGCMVJyD2dm27OgR019M3
+ ZQDUfQwa3rjPUBw1F86HTOuagxnRQWDAY4Rs4VQ==
+X-Google-Smtp-Source: AGHT+IHzvinkDMCo6PvNCIUzulTOjZEb4kQ9t/VKS/GjysuyfOtnN6/dKcemHyYe7dYFzgueCVsrm8j8u0OxuB4ywR4=
+X-Received: by 2002:a05:6512:344c:b0:512:f860:2705 with SMTP id
+ j12-20020a056512344c00b00512f8602705mr1085486lfr.35.1709298660747; Fri, 01
+ Mar 2024 05:11:00 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
-X-Mailman-Approved-At: Fri, 01 Mar 2024 13:57:59 +0100
+References: <20240228104811.1366694-1-ilias.apalodimas@linaro.org>
+ <20240228104811.1366694-3-ilias.apalodimas@linaro.org>
+ <d46da3fc-614d-4559-b795-aaae4d563d06@linaro.org>
+In-Reply-To: <d46da3fc-614d-4559-b795-aaae4d563d06@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 1 Mar 2024 15:10:24 +0200
+Message-ID: <CAC_iWj+grgnXqyB9oVadV3aiyD81p_H94WY4JdshrO5sAThpxw@mail.gmail.com>
+Subject: Re: [RFC PATCH 2/6] arm: clean up v7 and v8 linker scripts for
+ bss_start/end
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, cfsworks@gmail.com, 
+ sumit.garg@linaro.org, Simon Glass <sjg@chromium.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Michal Simek <michal.simek@amd.com>,
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
+ Yegor Yefremov <yegorslists@googlemail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Shiji Yang <yangshiji66@outlook.com>, Bin Meng <bmeng@tinylab.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,20 +96,248 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 22 Feb 2024 15:05:56 +0530, Sumit Garg wrote:
+Thanks for testing Caleb,
 
-> Changes in v6:
-> --------------
-> - v6_dt: https://github.com/b49020/u-boot/tree/v6_dt
-> - Patch #3: Incorporate fix for sandbox CI failure.
-> - Patch #6: Incorporate shell script comments from Marek.
-> - Patch #8: Incorporate documentation review comments from Paul.
-> 
-> [...]
+On Thu, 29 Feb 2024 at 15:49, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>
+>
+>
+> On 28/02/2024 10:48, Ilias Apalodimas wrote:
+> > commit 3ebd1cbc49f0 ("arm: make __bss_start and __bss_end__ compiler-generated")
+> > and
+> > commit f84a7b8f54db ("ARM: Fix __bss_start and __bss_end in linker scripts")
+> > were moving the bss_start/end on c generated variables that were
+> > injected in their own sections. The reason was that we needed relative
+> > relocations for position independent code.
+> >
+> > However, the linker documentation pages states that symbols that are
+> > defined within a section definition will create a relocatable
+> > type with the value being a fixed offset from the base of a section.
+> >
+> > So let's start cleaning this up starting with the bss_start and bss_end
+> > variables. Convert them into symbols within the .bss section definition.
+> >
+> > [0] https://ftp.gnu.org/old-gnu/Manuals/ld-2.9.1/html_mono/ld.html#SEC13
+> >
+> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Tested-by: Caleb Connolly <caleb.connolly@linaro.org> # Qualcomm sdm845
+>
+> This patch and a few others in this series conflict with my patch [1]
+> which drops the dragonboard820c linker script. My patch doesn't have any
+> external dependencies, so would it be easier for you to take it along
+> with this series? Or how best should we avoid the merge conflicts here?
 
-Applied to u-boot/next, thanks!
+Yes, I can carry the snapdragon lds removal. Rebasing on top is of it
+is pretty easy
 
--- 
-Tom
-
-
+/Ilias
+>
+> [1]:
+> https://lore.kernel.org/u-boot/20240226-b4-qcom-common-target-v5-19-10c8e078befb@linaro.org/
+>
+> Thanks and regards,
+> > ---
+> >   arch/arm/cpu/armv8/u-boot-spl.lds         | 14 +++-----------
+> >   arch/arm/cpu/armv8/u-boot.lds             | 15 +++------------
+> >   arch/arm/cpu/u-boot.lds                   | 22 ++++------------------
+> >   arch/arm/lib/sections.c                   |  2 --
+> >   arch/arm/mach-rockchip/u-boot-tpl-v8.lds  | 14 +++-----------
+> >   arch/arm/mach-zynq/u-boot.lds             | 21 +++------------------
+> >   board/qualcomm/dragonboard820c/u-boot.lds | 15 +++------------
+> >   7 files changed, 19 insertions(+), 84 deletions(-)
+> >
+> > diff --git a/arch/arm/cpu/armv8/u-boot-spl.lds b/arch/arm/cpu/armv8/u-boot-spl.lds
+> > index 7cb9d731246d..16fddb46e9cb 100644
+> > --- a/arch/arm/cpu/armv8/u-boot-spl.lds
+> > +++ b/arch/arm/cpu/armv8/u-boot-spl.lds
+> > @@ -63,18 +63,10 @@ SECTIONS
+> >
+> >       _image_binary_end = .;
+> >
+> > -     .bss_start (NOLOAD) : {
+> > -             . = ALIGN(8);
+> > -             KEEP(*(.__bss_start));
+> > -     } >.sdram
+> > -
+> > -     .bss (NOLOAD) : {
+> > +     .bss : {
+> > +             __bss_start = .;
+> >               *(.bss*)
+> > -              . = ALIGN(8);
+> > -     } >.sdram
+> > -
+> > -     .bss_end (NOLOAD) : {
+> > -             KEEP(*(.__bss_end));
+> > +             __bss_end = .;
+> >       } >.sdram
+> >
+> >       /DISCARD/ : { *(.rela*) }
+> > diff --git a/arch/arm/cpu/armv8/u-boot.lds b/arch/arm/cpu/armv8/u-boot.lds
+> > index fb6a30c922f7..c4ee10ebc3ff 100644
+> > --- a/arch/arm/cpu/armv8/u-boot.lds
+> > +++ b/arch/arm/cpu/armv8/u-boot.lds
+> > @@ -149,19 +149,10 @@ SECTIONS
+> >
+> >       _end = .;
+> >
+> > -     . = ALIGN(8);
+> > -
+> > -     .bss_start : {
+> > -             KEEP(*(.__bss_start));
+> > -     }
+> > -
+> > -     .bss : {
+> > +     .bss ALIGN(8): {
+> > +             __bss_start = .;
+> >               *(.bss*)
+> > -              . = ALIGN(8);
+> > -     }
+> > -
+> > -     .bss_end : {
+> > -             KEEP(*(.__bss_end));
+> > +             __bss_end = .;
+> >       }
+> >
+> >       /DISCARD/ : { *(.dynsym) }
+> > diff --git a/arch/arm/cpu/u-boot.lds b/arch/arm/cpu/u-boot.lds
+> > index 7724c9332c3b..90d329b1ebe0 100644
+> > --- a/arch/arm/cpu/u-boot.lds
+> > +++ b/arch/arm/cpu/u-boot.lds
+> > @@ -206,27 +206,13 @@ SECTIONS
+> >               *(.mmutable)
+> >       }
+> >
+> > -/*
+> > - * Compiler-generated __bss_start and __bss_end, see arch/arm/lib/bss.c
+> > - * __bss_base and __bss_limit are for linker only (overlay ordering)
+> > - */
+> > -
+> > -     .bss_start __rel_dyn_start (OVERLAY) : {
+> > -             KEEP(*(.__bss_start));
+> > -             __bss_base = .;
+> > -     }
+> > -
+> > -     .bss __bss_base (OVERLAY) : {
+> > +     .bss ALIGN(4): {
+> > +             __bss_start = .;
+> >               *(.bss*)
+> > -              . = ALIGN(4);
+> > -              __bss_limit = .;
+> > -     }
+> > -
+> > -     .bss_end __bss_limit (OVERLAY) : {
+> > -             KEEP(*(.__bss_end));
+> > +             __bss_end = .;
+> >       }
+> >
+> > -     .dynsym _image_binary_end : { *(.dynsym) }
+> > +     .dynsym  : { *(.dynsym) }
+> >       .dynbss : { *(.dynbss) }
+> >       .dynstr : { *(.dynstr*) }
+> >       .dynamic : { *(.dynamic*) }
+> > diff --git a/arch/arm/lib/sections.c b/arch/arm/lib/sections.c
+> > index 857879711c6a..8e8bd5797e16 100644
+> > --- a/arch/arm/lib/sections.c
+> > +++ b/arch/arm/lib/sections.c
+> > @@ -19,8 +19,6 @@
+> >    * aliasing warnings.
+> >    */
+> >
+> > -char __bss_start[0] __section(".__bss_start");
+> > -char __bss_end[0] __section(".__bss_end");
+> >   char __image_copy_start[0] __section(".__image_copy_start");
+> >   char __image_copy_end[0] __section(".__image_copy_end");
+> >   char __rel_dyn_start[0] __section(".__rel_dyn_start");
+> > diff --git a/arch/arm/mach-rockchip/u-boot-tpl-v8.lds b/arch/arm/mach-rockchip/u-boot-tpl-v8.lds
+> > index 74618eba591b..b7887194026e 100644
+> > --- a/arch/arm/mach-rockchip/u-boot-tpl-v8.lds
+> > +++ b/arch/arm/mach-rockchip/u-boot-tpl-v8.lds
+> > @@ -56,18 +56,10 @@ SECTIONS
+> >
+> >       _image_binary_end = .;
+> >
+> > -     .bss_start (NOLOAD) : {
+> > -             . = ALIGN(8);
+> > -             KEEP(*(.__bss_start));
+> > -     }
+> > -
+> > -     .bss (NOLOAD) : {
+> > +     .bss ALIGN(8) : {
+> > +             __bss_start = .;
+> >               *(.bss*)
+> > -              . = ALIGN(8);
+> > -     }
+> > -
+> > -     .bss_end (NOLOAD) : {
+> > -             KEEP(*(.__bss_end));
+> > +             __bss_end = .;
+> >       }
+> >
+> >       /DISCARD/ : { *(.dynsym) }
+> > diff --git a/arch/arm/mach-zynq/u-boot.lds b/arch/arm/mach-zynq/u-boot.lds
+> > index 3b7c9d515f8b..8d3259821719 100644
+> > --- a/arch/arm/mach-zynq/u-boot.lds
+> > +++ b/arch/arm/mach-zynq/u-boot.lds
+> > @@ -102,26 +102,11 @@ SECTIONS
+> >
+> >       _image_binary_end = .;
+> >
+> > -/*
+> > - * Compiler-generated __bss_start and __bss_end, see arch/arm/lib/bss.c
+> > - * __bss_base and __bss_limit are for linker only (overlay ordering)
+> > - */
+> > -
+> > -     .bss_start __rel_dyn_start (OVERLAY) : {
+> > -             KEEP(*(.__bss_start));
+> > -             __bss_base = .;
+> > -     }
+> > -
+> > -     .bss __bss_base (OVERLAY) : {
+> > +     .bss ALIGN(4): {
+> > +             __bss_start = .;
+> >               *(.bss*)
+> > -              . = ALIGN(8);
+> > -              __bss_limit = .;
+> > -     }
+> > -
+> > -     .bss_end __bss_limit (OVERLAY) : {
+> > -             KEEP(*(.__bss_end));
+> > +             __bss_end = .;
+> >       }
+> > -
+> >       /*
+> >        * Zynq needs to discard these sections because the user
+> >        * is expected to pass this image on to tools for boot.bin
+> > diff --git a/board/qualcomm/dragonboard820c/u-boot.lds b/board/qualcomm/dragonboard820c/u-boot.lds
+> > index 5251b59fbe76..d3cc5278b610 100644
+> > --- a/board/qualcomm/dragonboard820c/u-boot.lds
+> > +++ b/board/qualcomm/dragonboard820c/u-boot.lds
+> > @@ -87,19 +87,10 @@ SECTIONS
+> >
+> >       _end = .;
+> >
+> > -     . = ALIGN(8);
+> > -
+> > -     .bss_start : {
+> > -             KEEP(*(.__bss_start));
+> > -     }
+> > -
+> > -     .bss : {
+> > +     .bss ALIGN(8): {
+> > +             __bss_start = .;
+> >               *(.bss*)
+> > -              . = ALIGN(8);
+> > -     }
+> > -
+> > -     .bss_end : {
+> > -             KEEP(*(.__bss_end));
+> > +             __bss_end = .;
+> >       }
+> >
+> >       /DISCARD/ : { *(.dynsym) }
+> > --
+> > 2.37.2
+> >
+>
+> --
+> // Caleb (they/them)
