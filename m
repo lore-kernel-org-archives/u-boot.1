@@ -4,76 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67DE3C5475B
-	for <u-boot@archiver.kernel.org>; Fri,  1 Mar 2024 13:25:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52D21C5478C
+	for <u-boot@archiver.kernel.org>; Fri,  1 Mar 2024 13:33:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE00D87ABC;
-	Fri,  1 Mar 2024 14:25:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id AEC2687DB1;
+	Fri,  1 Mar 2024 14:33:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zZEHdLEz";
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="P40GbJ3n";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1136087EAF; Fri,  1 Mar 2024 14:25:10 +0100 (CET)
-Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
- [IPv6:2607:f8b0:4864:20::1035])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5A05A87D9C; Fri,  1 Mar 2024 14:33:54 +0100 (CET)
+Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
+ [68.232.154.123])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3AB07875FC
- for <u-boot@lists.denx.de>; Fri,  1 Mar 2024 14:25:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6D0B587DB1
+ for <u-boot@lists.denx.de>; Fri,  1 Mar 2024 14:33:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=microchip.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-pj1-x1035.google.com with SMTP id
- 98e67ed59e1d1-299354e5f01so2535896a91.1
- for <u-boot@lists.denx.de>; Fri, 01 Mar 2024 05:25:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709299505; x=1709904305; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=UTDmFkKQiHsEDj4xEh96L6UqewC8Q7WO/418BH2YH90=;
- b=zZEHdLEzcitBvEdIVYT2B4IK+oDRH9f1djGhcjxcJEQHE1gljSkk1qXjrS3cZiU0rW
- bhfH1hz7EAxgkoCvrdR1Gqo0RM5RnBp+iRStR9QGWpQ/fbmo+txYV8I9Uf5UgS3KkPs5
- Ikck04OwbzFKBkuskYDfix3qQfzvJvrwVhtQ8itx1jLZicKGqjVC9SdyuRbDkbRjOzR1
- 2/6nipYCid5cFoVENmxzJahWN8spVOSITvn19k5Lk7y9WUGrmqXVveqnqQOW0IIYp77f
- X3FW8eMDnj3fJtsogic3q97U4PcFDDzEbDaY2KDPXCgcy46Cn9ZGargdlQV0LoogmdVu
- M/Dw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709299505; x=1709904305;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=UTDmFkKQiHsEDj4xEh96L6UqewC8Q7WO/418BH2YH90=;
- b=VB52JTBBxEOkUjPiLEVDzKAmv23M7ZR1xYV29xPPd3gn2YnbxeVUS3zI53H1tBq6ub
- bI39qDrmHFLPKiQbDCMCkz/p8VmD+wQzoZ7xQvAQZlKkui0FUANmIW3IR5Gv8MawMChM
- lfB/TBKlVIW9H+xlSE/LUpbpKg0awk7x0aL8MnV+WN7u4818KKEIouGIZwu51eQp+RF7
- tOUDf5zQkMgdCuXt6apWOQwCIuYJwLERqWgXEsC8YG3C9tYvDtPR/A6baZK/166nuWsL
- 4MuKoDLsQ07AYdByaHwEj66nEZTbT5tLYD1UZ4g60sCzH4dXuNB0lTrWVUFAta06sTLf
- rBWw==
-X-Gm-Message-State: AOJu0YzFyTh5TJHTPMtRP3oQjdXGRAs03gjFucbHFZPjj8aqq9k+yeZq
- gjWmXHX7+5/y8R5xfV2TLWGjob12f9bYD0C//Ekh1VP1bZun5yg8yOpe/OWIylCsST77cFXtslz
- h
-X-Google-Smtp-Source: AGHT+IHeVbBpx4uMykWgIk6mm/er5FVYd/nYOEdT07zTVU1wZUv0ocDlGAwcXUAkGfY27X5J4rrBZQ==
-X-Received: by 2002:a17:90a:101:b0:29a:ea3d:5776 with SMTP id
- b1-20020a17090a010100b0029aea3d5776mr2473793pjb.11.1709299505057; 
- Fri, 01 Mar 2024 05:25:05 -0800 (PST)
-Received: from sumit-X1.. ([223.178.213.98]) by smtp.gmail.com with ESMTPSA id
- l22-20020a17090b079600b0029a8e5355fcsm3171078pjz.53.2024.03.01.05.25.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 01 Mar 2024 05:25:04 -0800 (PST)
-From: Sumit Garg <sumit.garg@linaro.org>
-To: u-boot@lists.denx.de
-Cc: trini@konsulko.com, paul.barker.ct@bp.renesas.com, sjg@chromium.org,
- ilias.apalodimas@linaro.org, xypron.glpk@gmx.de,
- Sumit Garg <sumit.garg@linaro.org>
-Subject: [PATCH] doc: devicetree: Lets avoid short reference link names
-Date: Fri,  1 Mar 2024 18:54:53 +0530
-Message-Id: <20240301132454.3492762-1-sumit.garg@linaro.org>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=Conor.Dooley@microchip.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
+ t=1709300030; x=1740836030;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=rwaWdq22D1D08vcaLRupAJJFGR+FLw5VOQ8RDWQPokU=;
+ b=P40GbJ3nkObNMwxfwC51fCJtUUEim6VvPNkAOb5VrN7xTMVLnM+RClfd
+ 53HOBZQSpsfVtL7IvomNwy4faAA3tLTTBu3PTr5geFnNosDVQeP2LFAFf
+ csY6939CC6IW9UZglyjhXgo1fp6bFOtw3VF+tEcXDtwx+X0CKEtiS3dCT
+ Ubjy9CTEh8usdCbbPIXpwL+dJJEz3XLkkhFRBOvLKrxjAuFI0rwqCNlLp
+ I6K7ZrS/zTTny6xSJq9Pr3KVbnTqa4y84D0j+F3thRvWHPSBu/WgsS2SD
+ n7ZRe82XP75S3nULfcQwSSErP8VobNGQylhRuU0Un0WDGAsd1kdk4MOlg Q==;
+X-CSE-ConnectionGUID: ISGyRnTiQ9aBhAgLfUzybA==
+X-CSE-MsgGUID: L3ID/KuDQcKqmiHzqCbh7Q==
+X-IronPort-AV: E=Sophos;i="6.06,196,1705388400"; 
+ d="asc'?scan'208";a="17603279"
+X-Amp-Result: UNKNOWN
+X-Amp-Original-Verdict: FILE UNKNOWN
+Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
+ by esa2.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 01 Mar 2024 06:33:48 -0700
+Received: from chn-vm-ex04.mchp-main.com (10.10.85.152) by
+ chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.35; Fri, 1 Mar 2024 06:33:38 -0700
+Received: from wendy (10.10.85.11) by chn-vm-ex04.mchp-main.com (10.10.85.152)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35 via Frontend
+ Transport; Fri, 1 Mar 2024 06:33:36 -0700
+Date: Fri, 1 Mar 2024 13:32:53 +0000
+From: Conor Dooley <conor.dooley@microchip.com>
+To: =?iso-8859-1?Q?S=E9bastien?= Szymanski <sebastien.szymanski@armadeus.com>
+CC: Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>,
+ <shawnguo@kernel.org>, Fabio Estevam <festevam@gmail.com>, Krzysztof
+ Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley
+ <conor@kernel.org>, Dan Carpenter <dan.carpenter@linaro.org>, Rob Herring
+ <robh@kernel.org>, <u-boot@lists.denx.de>, Stefano Babic <sbabic@denx.de>,
+ "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>, Anatolij Gustschin
+ <agust@denx.de>
+Subject: Re: [PATCH 1/2] opos6uldev: make the LCD work again
+Message-ID: <20240301-unstuffed-sixtyfold-0a875a031043@wendy>
+References: <20240227154002.30257-1-sebastien.szymanski@armadeus.com>
+ <47c12ca3-ea7c-4097-90b5-0333c74b05aa@moroto.mountain>
+ <20240228131029.GM3040305@bill-the-cat>
+ <CAFA6WYN4sCk9Q66i_n+aXxRkGEbh66dh+Sr_C5SbioQ_s5BBbQ@mail.gmail.com>
+ <20240228152034.GN3040305@bill-the-cat>
+ <CAFA6WYMkdjE6Vrd2_fV_6Rzj8MOiPhO4EJ4kkik1_9vQnhzMqQ@mail.gmail.com>
+ <20240229134242.GR3040305@bill-the-cat>
+ <20240229140140.GS3040305@bill-the-cat>
+ <CAFA6WYPkSd=roYiZrK-9oKOse+zTsbtBj8mrgV=HHFVHtCwHGg@mail.gmail.com>
+ <3f6e7fef-b1ee-4c1a-9ca6-fad4959631b3@armadeus.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="jUbsZ8zn4IPGoYG7"
+Content-Disposition: inline
+In-Reply-To: <3f6e7fef-b1ee-4c1a-9ca6-fad4959631b3@armadeus.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,78 +98,125 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Short reference link names like "dtspec", "dtrepo", "dttweaks" etc.
-interrupt the flow of the document text. Lets avoid them and instead
-expand in place for better readability.
+--jUbsZ8zn4IPGoYG7
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Suggested-by: Paul Barker <paul.barker.ct@bp.renesas.com>
-Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
----
- doc/develop/devicetree/control.rst | 24 ++++++++++++------------
- 1 file changed, 12 insertions(+), 12 deletions(-)
+Hey,
 
-diff --git a/doc/develop/devicetree/control.rst b/doc/develop/devicetree/control.rst
-index c94d84192b71..4cc1457d4ea8 100644
---- a/doc/develop/devicetree/control.rst
-+++ b/doc/develop/devicetree/control.rst
-@@ -36,10 +36,10 @@ What is a Flattened Devicetree?
- -------------------------------
- 
- An fdt can be specified in source format as a text file. To read about
--the fdt syntax, take a look at the specification (dtspec_).
-+the fdt syntax, take a look at `the devicetree specification`_.
- 
--There is also a mailing list (dtlist_) for the compiler and associated
--tools.
-+There is also a `devicetree compiler mailing list`_ for the compiler and
-+associated tools.
- 
- In case you are wondering, OF stands for Open Firmware. This follows the
- convention used in Linux.
-@@ -89,7 +89,7 @@ Failing that, you could write one from scratch yourself!
- Resyncing with devicetree-rebasing
- ----------------------------------
- 
--The devicetee-rebasing repository (dtrepo_) maintains a fork cum mirror copy of
-+The `devicetree-rebasing repository`_ maintains a fork cum mirror copy of
- devicetree files along with the bindings synced at every Linux kernel major
- release or intermediate release candidates. The U-Boot maintainers regularly
- sync the `dts/upstream/` subtree from the devicetree-rebasing repo whenever
-@@ -118,7 +118,7 @@ as `arch/<arch>/dts/<name>.dts`. To select that add `# CONFIG_OF_UPSTREAM is not
- set` and set `DEFAULT_DEVICE_TREE=<name>` when prompted by Kconfig.
- 
- This should include your CPU or SoC's devicetree file. On top of that any U-Boot
--specific tweaks (see: dttweaks_) can be made for your board.
-+specific tweaks (see: :ref:`dttweaks`) can be made for your board.
- 
- If `OF_EMBED` is selected by Kconfig, then it will be picked up and built into
- the U-Boot image (including u-boot.bin). This is suitable for debugging
-@@ -243,7 +243,7 @@ Dependencies
- 
- The DT schema project must be installed in order to validate the DT schema
- binding documents and validate DTS files using the DT schema. For installation
--instructions, refer to the DT schema project page (dtschema_).
-+instructions, refer to the `DT schema project page`_.
- 
- Several executables (dt-doc-validate, dt-mk-schema, dt-validate) will be
- installed. Ensure they are in your PATH (~/.local/bin by default).
-@@ -333,10 +333,10 @@ used it before Linux (e.g. snow). The two projects developed in parallel
- and there are still some differences in the bindings for certain boards.
- While there has been discussion of having a separate repository for devicetree
- files, in practice the Linux kernel Git repository has become the place where
--these are stored, with U-Boot taking copies via devicetree-rebasing repo
--(see: dtrepo_) and adding tweaks with u-boot.dtsi files.
-+these are stored, with U-Boot taking copies via
-+`devicetree-rebasing repository`_ and adding tweaks with u-boot.dtsi files.
- 
--.. _dtspec: https://www.devicetree.org/specifications/
--.. _dtlist: https://www.spinics.net/lists/devicetree-compiler/
--.. _dtrepo: https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git
--.. _dtschema: https://github.com/devicetree-org/dt-schema/tree/main
-+.. _the devicetree specification: https://www.devicetree.org/specifications/
-+.. _devicetree compiler mailing list: https://www.spinics.net/lists/devicetree-compiler/
-+.. _devicetree-rebasing repository: https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git
-+.. _DT schema project page: https://github.com/devicetree-org/dt-schema/tree/main
--- 
-2.34.1
+Replying here because this is only version of this in my inbox atm.
 
+On Fri, Mar 01, 2024 at 10:17:35AM +0100, S=E9bastien Szymanski wrote:
+> On 3/1/24 07:02, Sumit Garg wrote:
+> > On Thu, 29 Feb 2024 at 19:31, Tom Rini <trini@konsulko.com> wrote:
+> > > On Thu, Feb 29, 2024 at 08:42:42AM -0500, Tom Rini wrote:
+> > > > On Thu, Feb 29, 2024 at 11:17:28AM +0530, Sumit Garg wrote:
+> > > > > On Wed, 28 Feb 2024 at 20:50, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > On Wed, Feb 28, 2024 at 07:44:42PM +0530, Sumit Garg wrote:
+> > > > > > > On Wed, 28 Feb 2024 at 18:40, Tom Rini <trini@konsulko.com> w=
+rote:
+> > > > > > > >=20
+> > > > > > > > On Wed, Feb 28, 2024 at 10:09:13AM +0300, Dan Carpenter wro=
+te:
+> > > > > > > > > On Tue, Feb 27, 2024 at 04:40:01PM +0100, S=E9bastien Szy=
+manski wrote:
+> > > > > > > > > > Commit 5d7a95f49999 ("imx6ul/imx6ull: synchronise devic=
+e trees with
+> > > > > > > > > > linux") removed the display timings from the board devi=
+ce tree whereas
+> > > > > > > > > > they are still needed by the mxsfb driver.
+> > > > > > > > > > Add the timings back (the correct ones) in the
+> > > > > > > > > > imx6ul-opos6uldev-u-boot.dtsi file and remove them from=
+ the
+> > > > > > > > > > opos6uldev.env file.
+> > > > > > > > > >=20
+> > > > > > > > > > Update the opos6uldev_defconfig file so that the LCD tu=
+rns on at boot.
+> > > > > > > > > >=20
+> > > > > > > > > > Fixes: 5d7a95f49999 ("imx6ul/imx6ull: synchronise devic=
+e trees with linux")
+> > > > > > > > > > Signed-off-by: S=E9bastien Szymanski <sebastien.szymans=
+ki@armadeus.com>
+> > > > > > > > >=20
+> > > > > > > > > Huh.  This is the commit that did that upstream.
+> > > > > > > > >=20
+> > > > > > > > > https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/=
+linux.git/commit/?id=3Dd9aa4d4fca67823838fe9861456201430c545e69
+> > > > > > > > >=20
+> > > > > > > > > It's interesting how the timings in linux were always sli=
+ghtly different
+> > > > > > > > > from in u-boot.
+> > > > > > > >=20
+> > > > > > > > Thanks for tracking that down, Dan. I'm adding in Sumit and=
+ Rob here
+> > > > > > > > because this is a recent (rather than ancient) example of o=
+ne of the
+> > > > > > > > concerns about OF_UPSTREAM.
+> > > > > > >=20
+> > > > > > > I rather think about this as an opportunity to improve with
+> > > > > > > OF_UPSTREAM. We can feed these kinds of DT ABI breakages to
+> > > > > > > corresponding Linux kernel sub-arch maintainers. Especially o=
+nce we
+> > > > > > > move to OF_UPSTREAM and a sub-arch maintainer profile in Linu=
+x kernel
+> > > > > > > to keep them aware that U-Boot should be considered too.
+> > > > > >=20
+> > > > > > Yes, a more extensive check around when removing information fr=
+om dts
+> > > > > > files would be good.
+
+Whenever people remove things from bindings (or from being required) we
+do ask them "have you checked that there's no users for this outside of
+linux" - but for me at least I don't apply that scrutiny for most (read
+arm{,64}) devicetrees. There's just too much volume if I went asking
+those questions on every removal, it's up to the platform maintainers to
+keep an eye on that.
+
+That said, modifications to a devicetree are fixable with a revert,
+while modifications to a binding may not really be fixable in a way that
+isn't disruptive for some user, so I think that I am spending my time
+wisely.
+
+> > > > > > > > I think the commit in question can be
+> > > > > > > > summarized as "remove a bunch of explicit HW information be=
+cause there's
+> > > > > > > > now a Linux Kernel driver that determines that dynamically"=
+=2E What do we
+> > > > > > > > do next? The old information is in a presumably valid bindi=
+ng still, can
+> > > > > > > > we just put it back and comment that consumers outside of L=
+inux use this
+> > > > > > > > still so it's not removed again later? Or am I just missing=
+ where we can
+> > > > > > > > instead get this information from the DT still and not need=
+ to come up
+> > > > > > > > with a new driver and subsystems?
+
+I don't think this is an accurate summary. The "explict hw information"
+was never allowed for an imx6ul, only for some older devices, so "the
+old information is in a presumably valid binding" is not accurate.
+See 7b920aae917d ("dt-bindings: mxsfb: Add new bindings for the MXSFB
+driver") for when doing things that way was deprecated. The imx6ul was
+only documented several years after it was introduced (so likely several
+years after it started incorrectly using that binding).
+
+Seeing that, I am not sure that I would even question the kernel patch
+cited above, the change was done for binding compliance and I would not
+be inclined to think twice, given the bindings are the ABI.
+
+Cheers,
+Conor.
+
+--jUbsZ8zn4IPGoYG7
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZeHZBQAKCRB4tDGHoIJi
+0uK/APsHFL51GX4crJQ1oL/Jq5CtQYFSy8euf4w7gddMX4VC/gEA8vIrJJ4wBTf+
+46PPILKko3DhS8e5hlexIpx3gCP4qgg=
+=nHw/
+-----END PGP SIGNATURE-----
+
+--jUbsZ8zn4IPGoYG7--
