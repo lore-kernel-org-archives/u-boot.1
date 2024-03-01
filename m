@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C9FFC5478C
-	for <u-boot@archiver.kernel.org>; Fri,  1 Mar 2024 18:53:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43143C5478C
+	for <u-boot@archiver.kernel.org>; Fri,  1 Mar 2024 18:54:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A5DF87DE3;
-	Fri,  1 Mar 2024 19:53:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 08AB288168;
+	Fri,  1 Mar 2024 19:54:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="faThf2an";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Q1iL7oO3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 877388815A; Fri,  1 Mar 2024 19:53:55 +0100 (CET)
-Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
- [IPv6:2607:f8b0:4864:20::b34])
+ id C3FE58815F; Fri,  1 Mar 2024 19:54:00 +0100 (CET)
+Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
+ [IPv6:2607:f8b0:4864:20::1136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7BDB187903
- for <u-boot@lists.denx.de>; Fri,  1 Mar 2024 19:53:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A3B558815E
+ for <u-boot@lists.denx.de>; Fri,  1 Mar 2024 19:53:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb34.google.com with SMTP id
- 3f1490d57ef6-dbed179f0faso2613121276.1
- for <u-boot@lists.denx.de>; Fri, 01 Mar 2024 10:53:53 -0800 (PST)
+Received: by mail-yw1-x1136.google.com with SMTP id
+ 00721157ae682-6095dfcb461so23830137b3.2
+ for <u-boot@lists.denx.de>; Fri, 01 Mar 2024 10:53:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1709319232; x=1709924032; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1709319237; x=1709924037; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=JO0afBI9cLs1F+4JNhZhI9icLHf9ul0JwD+NPpFymyM=;
- b=faThf2an2EgF+eNL4do3/dM4qEbs9HKXqDpvgNXnjtMFkeGj42g7CZwgcUHQ90FH7/
- LRU7McM+BuqAikBz6knQZrYk8yOdjdHRWJcUb4T3IbYVO84ElqI87EPlV3HM3zsiFp9n
- jetKGVO5JZ4nWVI/xSyEr88hK6tiv9AvD5Iys=
+ bh=YoVIrX1uEaOdTIYUS6eUZDHtZP1B8ZeJRuXaLzYEyYo=;
+ b=Q1iL7oO3NWkymefZJfQU73ZToCk9RXduoTEMd25uyCyxnqvYmuBOa1Oq/9q5NRNPZc
+ iZyCNgKEaTbyf/anntOM16646KmMVuZg1OsqzvOdpSak0BRNM0d/szPGB1+wNs/FPFKk
+ x5VfTFMgYdMhbUjV8mtX3QNEjCsRLzmNIH7Js=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709319232; x=1709924032;
+ d=1e100.net; s=20230601; t=1709319237; x=1709924037;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JO0afBI9cLs1F+4JNhZhI9icLHf9ul0JwD+NPpFymyM=;
- b=JZOCiyQzeBGaBavHSJAnp4zmLbb4ChbB7CT6AEoR72ewjUHA59LDDMMtxHji0geYA6
- y9+/g0CPASM8y74+VagYbxlWBn2U4vBxs1uatlwx6k87YHeNScPud0qUXIV11cPeB0Dv
- wq3wf081OMSU+ryq6WSctOkdOeNwvrx3Rcr2PpStsZXHu+Pf11kvd78Lthll7KJZ21cn
- QhRjn4TpE12A92lc265vbvk9wxuon0wLbYHivJY1VGsxZXQ+aIone9fvhtHFxRWMCox9
- /UIlqmI4DuYKpwCdlNttAbThUQABmtMtuZRg2CA7t7lc9GBlfN+Y5TCA3NkExDiINUcE
- d/0A==
-X-Gm-Message-State: AOJu0YxhctBjgmrH1bM8wyxtbHb6Sq/itAJhJ5Q1aYPc6FkYVlF9ILEE
- jghfILQsn/UwnOWIDF2BSTLOB/gvWHTS6nzpymnWvVSz1CNGOjcTPnEp4CydboL0q/JC7rBgEE8
- m
-X-Google-Smtp-Source: AGHT+IFjfjjod8QAHPWGkrl69VE8Ph6g7QURZbWUqH/8PIztjfs/mi2Ugipsw2PsX1Au+ZpTHtw0tw==
-X-Received: by 2002:a5b:147:0:b0:dc6:f0ac:6b53 with SMTP id
- c7-20020a5b0147000000b00dc6f0ac6b53mr2080926ybp.15.1709319232197; 
- Fri, 01 Mar 2024 10:53:52 -0800 (PST)
+ bh=YoVIrX1uEaOdTIYUS6eUZDHtZP1B8ZeJRuXaLzYEyYo=;
+ b=lB0aN+CKn/6QAaYfe1i4VUxQ12lYoM5icMF6vezEh6EBBGwPcdDiKf532y3o5JXUYW
+ ivOtyEpa+62r5bRKfaIsOvTsznDVzqmCQKWiXIZgDEN27izQhwuUgcCr1ELfFlYUR/o7
+ stxBb+GJmZ+Lf430HAeL987PPEYsXVlGfMHRd8mvNAEVLALPnRjy0KEJYSx+totjGpfM
+ GTL1XI6Kc65i7DW06HwtlqIBN/Tnki7jC0//A7Iasr6bUUtcvq1GK3+bG+zckUzXi8hj
+ G5l9Pxxa4U3LMscXKYevgZn1AyXWjOCn36ouACc2AM0xvO+bBROcYHgvdZzfhKzMCnAK
+ 4w8g==
+X-Gm-Message-State: AOJu0YwC0No3IPGHh27t2qgqrBIoNZGsdhxO/vi8VwyIch+9OEbiqcR3
+ f5vunlLqPk5BHiVnlmINmISVSI4zjMJ95sl+sdHR4PoGGpvW+3YydJi6shrzBC5szGNxOtYI/DS
+ x
+X-Google-Smtp-Source: AGHT+IHbogyafeZByvIMsDfaLLR0gmiGILtZSrdmuURD4uNv6vVgeUwba4Tvw/vEHxsrkcfhc/QnJw==
+X-Received: by 2002:a05:690c:ec8:b0:609:87d8:50b7 with SMTP id
+ cs8-20020a05690c0ec800b0060987d850b7mr2318029ywb.18.1709319236889; 
+ Fri, 01 Mar 2024 10:53:56 -0800 (PST)
 Received: from bill-the-cat (065-184-194-195.res.spectrum.com.
  [65.184.194.195]) by smtp.gmail.com with ESMTPSA id
- e72-20020a25694b000000b00dc701e0bdbcsm944340ybc.44.2024.03.01.10.53.51
+ u128-20020a0dd286000000b006079e8f3572sm1094754ywd.85.2024.03.01.10.53.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 01 Mar 2024 10:53:51 -0800 (PST)
-Date: Fri, 1 Mar 2024 13:53:49 -0500
+ Fri, 01 Mar 2024 10:53:56 -0800 (PST)
+Date: Fri, 1 Mar 2024 13:53:54 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH 1/1] dtoc: avoid invalid escape sequence '\s'
-Message-ID: <20240301185349.GA3040305@bill-the-cat>
-References: <20240227215138.236403-1-heinrich.schuchardt@canonical.com>
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, Florian Schmaus <flo@geekplace.eu>
+Subject: Re: [PATCH] pylibfdt: Fix "invalid escape sequence '\w'" in setup.py
+Message-ID: <20240301185354.GB3040305@bill-the-cat>
+References: <20240220135248.1277809-1-trini@konsulko.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="tDhGkVm1IX7Ihawd"
+ protocol="application/pgp-signature"; boundary="6W/qrUKnSqlSRAro"
 Content-Disposition: inline
-In-Reply-To: <20240227215138.236403-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240220135248.1277809-1-trini@konsulko.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,39 +91,54 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---tDhGkVm1IX7Ihawd
+--6W/qrUKnSqlSRAro
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Feb 27, 2024 at 10:51:38PM +0100, Heinrich Schuchardt wrote:
+On Tue, Feb 20, 2024 at 08:52:48AM -0500, Tom Rini wrote:
 
-> \s is not a valid escape sequence in strings.
-> Mark regular expressions with r''.
+> From: Florian Schmaus <flo@geekplace.eu>
 >=20
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Once u-boot's build system invokes
+>=20
+> python3 scripts/dtc/pylibfdt/setup.py --quiet build_ext --inplace
+>=20
+> it may fail with
+>=20
+> scripts/dtc/pylibfdt/setup.py:40: SyntaxWarning: invalid escape sequence =
+'\w'
+>   RE_KEY_VALUE =3D re.compile('(?P<key>\w+) *(?P<plus>[+])?=3D *(?P<value=
+>.*)$')
+>=20
+> depending on the used Python version.
+>=20
+> Explicitly mark the regex string as raw string to avoid the warning.
+>=20
+> Signed-off-by: Florian Schmaus <flo@geekplace.eu>
+> Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---tDhGkVm1IX7Ihawd
+--6W/qrUKnSqlSRAro
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXiJDMACgkQFHw5/5Y0
-tyxhFwv+JeZCGo0D9238ZHG0CaZaZXmlayeI8QoYvtolOV7eemZDKmLxsnLJgaNd
-u4qwfOTx93dzmidOXPNQOksZmdzPsNgEEVS4QGQHGBAb0MnYZuS4gLcysMKB/kK2
-SKMQjVx32Kh6S9d6TnMf4Cbb7m2utT/RAst4e79oIT7zlrz0D01rYtEo4qKQg2vg
-S6II+UYkzQllSqnbZPr/eVgSRyl1QiqQ2CrS5Va+xvTt+1SzcmM3OmsVsa+NDxrj
-SYGvivNoXn61qOpysD35JiIlKhJVp8w0VfqxKgqryq5ESNYtvJFTpWMAyGh+ZXnK
-trLhxEjnhM+9NIS40FQmVKcdda3VP/fZuu2nz1xNHHOz3XvuDk9WkIcsrGci44v5
-RXUNgk24RG/6+Y8fmwOsUyDlo55QfWCKwPOecGkLzb44/Q9VQL5qHZVJO1sigPuQ
-VCLgWPPvZugRRRlJkwPbsspOZM6bkWKVcx03Bqt1zs7S7ejaJyP+1VrJCCYK92/2
-Lacvlt1o
-=CqHV
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXiJEIACgkQFHw5/5Y0
+tyy/xAwAp+/lEL78H+UxmVoqngpEJmfzuh8x8AiJp9ukQxLk7Sjt9a/hg0nJ4YR4
+zvoN0aJqhlTXNFU7FY5qazHrxhKSJLbzIU362e7Vr0Z75/fkQ5v2HFOrm3L0Nmz0
+ChRfBhABM9CvI1OihSSHp+GSEyBiyFO1qZuT45Dtxr5mRr6ebNYns4Br1A4Bq4bh
+a2R89g+LA+denMWH40lmvORR7kVOLRXjY2PFgInv3LCTzm7y+nUYgJ5Fiz0SvbV/
+b9t5c/vJ++scKAmOa9D3UX/K2lhBXacc2q77EToGoISOBQHZ3hYnT36rIzH+2FfT
+Z+cHCBWIiV7OePLYv/1cngs41uVpynEtIQKfCApEPW2bfYEYWuaoaRfMMJS6MvpD
+aKsHhKgkNn7Wjw/i3Cs5DzzeHOlreA2jvsvSr89CmY/AW5Jz+X/j6G6ulpxc7Llg
+5tgSQN4tAbN7pevISpll3QZdiECFof4JHxc5uUL0XirbVChM7Sk1+eL8XcQTAg43
+yZhf2lvb
+=T0QW
 -----END PGP SIGNATURE-----
 
---tDhGkVm1IX7Ihawd--
+--6W/qrUKnSqlSRAro--
