@@ -4,86 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA46DC5478C
-	for <u-boot@archiver.kernel.org>; Fri,  1 Mar 2024 10:07:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB9E8C5475B
+	for <u-boot@archiver.kernel.org>; Fri,  1 Mar 2024 10:16:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 23C0788120;
-	Fri,  1 Mar 2024 11:07:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2A8D58812C;
+	Fri,  1 Mar 2024 11:16:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pE430DZo";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="scykq7Dz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1125187BAE; Fri,  1 Mar 2024 11:07:30 +0100 (CET)
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [IPv6:2a00:1450:4864:20::130])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4F18F8812F; Fri,  1 Mar 2024 11:16:18 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2B14488129
- for <u-boot@lists.denx.de>; Fri,  1 Mar 2024 11:07:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0780D88129
+ for <u-boot@lists.denx.de>; Fri,  1 Mar 2024 11:16:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-51326436876so1739531e87.1
- for <u-boot@lists.denx.de>; Fri, 01 Mar 2024 02:07:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709287645; x=1709892445; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=oQSahxREKPADjvWFCxdp/6ul9irC+FBMqDHf3TYyI9s=;
- b=pE430DZoDrtJxDtQz6IlQIi5nhP/lypBAnq3BI02/IQaifCl0UgQGcuMZOeKKV+Mqq
- 4Ovo2o3Gwv8wVpu7XjVLrt94DIKR4nIeRW5BPsp4EzqvczAF6kYVm6MYTQK5EaJxVS6P
- 0hrvqw21jMiTeaTA7OqGKbZtmj8iHDKsdUAM1LEVo7NQJpdt9lgrm1qxwauUt016oeyh
- swO4ChzkRS6doByvuONCl3r3/CppzQmPWJrx57wofqaMacr0MeH2DVAqtKlwlqlV1Rz2
- ZA1hTk7Wly2/NDQdfewpRLcDJBsAx/behLRufFUZ9iRrvReU+Q1hRjUGvNeFSPBzsZD3
- OfkA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709287645; x=1709892445;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=oQSahxREKPADjvWFCxdp/6ul9irC+FBMqDHf3TYyI9s=;
- b=pYok735GiRQA467oPD/PuEwAGjX1Q/UTDKkIMw3UurHBKxAXXgwrtR6Arh+Zrsncoe
- wgTOTC0vpQjJCGa7vav1CYiFAPq61dXjGF4PmZ88KjYhWm3k6gxaAY7LvksVl8WhHfuZ
- OkgzPLKoMibIryEvkv4aQEIz1BJBkyrWx995Szn+Ks0ZaigiyHSH8x/rHvcDE0I6Gz/g
- wHZjUdC1kAhAyLLeF1btfRBAvSXqm00JwNwGB+MYLuxWuNsV7WHN3VGUvSyQQmwTo8Xe
- WncBb9V+hbWPDqaEq+ARBpfoEtK9g+tDgZmyNshkstz1MDPHp/6y1JUnePGAMENtBgkE
- 207w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU8KvAUVV2AdNBIznpJXJDX0lMDVFh7rmowDSeOR8sO0+y4pefvVxoGSbpIp01/fUIoipg519CprPGtrIvf6b9MRATohg==
-X-Gm-Message-State: AOJu0Yy0kvaAtownHCkNtaFYPAZHJT6KbKDT5Lft5ICRXJ2a4Hk9ILAk
- yADoq588ZwPbESi8rFGGuASKiFwYmwvHzdsvC6VoI7a+7GImhBQ+3i+I0tS9A1B1ThO2tkE2rT6
- fEYtUWgC/ispa4wuLjo9D9eSu5QmzmHGof9LleQ==
-X-Google-Smtp-Source: AGHT+IHxwa/+/ZQZ8Iuop3u0hlheT5bY53l8ffa2M3AJWimKYPiEz8YLTzEBwiMqqZYPwA+zmP7mRlFsjPPyVczyYFA=
-X-Received: by 2002:a05:6512:238f:b0:513:3309:cc62 with SMTP id
- c15-20020a056512238f00b005133309cc62mr936964lfv.47.1709287645281; Fri, 01 Mar
- 2024 02:07:25 -0800 (PST)
+ spf=pass smtp.mailfrom=r-gunasekaran@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 421AG5dC011605;
+ Fri, 1 Mar 2024 04:16:05 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1709288165;
+ bh=0DJLEBfXsMmRAWH35hNbVGPRkPUkVWCCEfY53ZIQ1c0=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=scykq7DzBU/zbDWvBtnl3djj6k6h/zMZJhof4pmJGqVchQFKzq/1W8Kaua01p85Ce
+ n6oFivJ1gBjzeENqaKbDB3OcBWJR6K4hdzZ0DMU0gZ7VjbXgPMSygVU7vZc2sFNNRy
+ A8Z7Zg1lTh91q/9c7ph79g51+nuSyA0QPAZ1dDpQ=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 421AG567062310
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 1 Mar 2024 04:16:05 -0600
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 1
+ Mar 2024 04:16:04 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 1 Mar 2024 04:16:04 -0600
+Received: from [172.24.227.88] (uda0500640.dhcp.ti.com [172.24.227.88])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 421AG0dF052384;
+ Fri, 1 Mar 2024 04:16:01 -0600
+Message-ID: <1c9eff98-3615-7779-3e47-8dc1df8a4573@ti.com>
+Date: Fri, 1 Mar 2024 15:45:59 +0530
 MIME-Version: 1.0
-References: <20240226100807.1095607-1-quic_varada@quicinc.com>
- <20240226100807.1095607-2-quic_varada@quicinc.com>
- <4fa5cede-def3-4ad0-8433-72495e4c8e3b@kernel.org>
-In-Reply-To: <4fa5cede-def3-4ad0-8433-72495e4c8e3b@kernel.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 1 Mar 2024 12:06:49 +0200
-Message-ID: <CAC_iWjJXyo1KGWFeimMSqi4zVTcBWZ_VGCjbtiRJWVf1mA383w@mail.gmail.com>
-Subject: Re: [PATCH 01/10] mach-snapdragon: Add support for IPQ9574
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: Varadarajan Narayanan <quic_varada@quicinc.com>, u-boot@lists.denx.de, 
- Caleb Connolly <caleb.connolly@linaro.org>, FUKAUMI Naoki <naoki@radxa.com>, 
- Hai Pham <hai.pham.ud@renesas.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Kever Yang <kever.yang@rock-chips.com>, Lukasz Majewski <lukma@denx.de>,
- Marek Vasut <marex@denx.de>, 
- Mathieu Othacehe <othacehe@gnu.org>, Michal Simek <michal.simek@amd.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Sumit Garg <sumit.garg@linaro.org>, 
- Svyatoslav Ryhel <clamor95@gmail.com>, Tianling Shen <cnsztl@gmail.com>,
- Tom Rini <trini@konsulko.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Subject: Re: [PATCH v2 2/2] net: am65-cpsw: cpsw_mdio: Switch to proper
+ DM_MDIO framework
+To: Roger Quadros <rogerq@kernel.org>, Joe Hershberger
+ <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, Tom Rini
+ <trini@konsulko.com>, <nm@ti.com>
+CC: <srk@ti.com>, <s-vadapalli@ti.com>, <vigneshr@ti.com>,
+ <mripard@kernel.org>, <dannenberg@ti.com>, <danishanwar@ti.com>,
+ <u-boot@lists.denx.de>, Ravi Gunasekaran <r-gunasekaran@ti.com>
+References: <20240228-for-2024-07-am65-cpsw-mdio-v2-0-f74f972eafeb@kernel.org>
+ <20240228-for-2024-07-am65-cpsw-mdio-v2-2-f74f972eafeb@kernel.org>
+Content-Language: en-US
+From: Ravi Gunasekaran <r-gunasekaran@ti.com>
+In-Reply-To: <20240228-for-2024-07-am65-cpsw-mdio-v2-2-f74f972eafeb@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,117 +87,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Krzysztof,
 
-On Thu, 29 Feb 2024 at 22:50, Krzysztof Kozlowski <krzk@kernel.org> wrote:
->
-> On 26/02/2024 11:07, Varadarajan Narayanan wrote:
-> > Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
-> > ---
-> >
-> >  arch/arm/dts/Makefile                         |    2 +
-> >  arch/arm/dts/ipq9574-default.dts              |  167 +++
-> >  arch/arm/dts/ipq9574-rdp433-mht-phy.dts       |  208 +++
-> >  arch/arm/dts/ipq9574.dtsi                     |  771 ++++++++++
-> >  .../include/mach/sysmap-ipq9574.h             |  252 ++++
-> >  arch/arm/mach-snapdragon/init_ipq9574.c       |   81 +
-> >  board/qualcomm/ipq9574/Kconfig                |   15 +
-> >  board/qualcomm/ipq9574/Makefile               |    4 +
-> >  board/qualcomm/ipq9574/board_init.c           |  326 ++++
-> >  board/qualcomm/ipq9574/ipq9574.c              |  170 +++
-> >  board/qualcomm/ipq9574/ipq9574.h              |   75 +
-> >  board/qualcomm/ipq9574/u-boot-x32.lds         |  250 ++++
-> >  board/qualcomm/ipq9574/u-boot-x64.lds         |  188 +++
-> >  drivers/clk/qcom/clock-ipq9574.c              | 1320 +++++++++++++++++
-> >  drivers/pinctrl/qcom/pinctrl-ipq9574.c        |   77 +
-> >  include/configs/ipq9574.h                     |  111 ++
-> >  include/dt-bindings/clock/gcc-ipq9574.h       |  156 ++
-> >  include/dt-bindings/net/qti-ipqsoc.h          |   20 +
-> >  include/dt-bindings/pinctrl/pinctrl-ipqsoc.h  |   19 +
-> >  include/dt-bindings/reset/ipq9574-reset.h     |   54 +
-> >  20 files changed, 4266 insertions(+)
-> >  create mode 100644 arch/arm/dts/ipq9574-default.dts
-> >  create mode 100644 arch/arm/dts/ipq9574-rdp433-mht-phy.dts
-> >  create mode 100644 arch/arm/dts/ipq9574.dtsi
-> >  create mode 100644 arch/arm/mach-snapdragon/include/mach/sysmap-ipq9574.h
-> >  create mode 100644 arch/arm/mach-snapdragon/init_ipq9574.c
-> >  create mode 100644 board/qualcomm/ipq9574/Kconfig
-> >  create mode 100644 board/qualcomm/ipq9574/Makefile
-> >  create mode 100644 board/qualcomm/ipq9574/board_init.c
-> >  create mode 100644 board/qualcomm/ipq9574/ipq9574.c
-> >  create mode 100644 board/qualcomm/ipq9574/ipq9574.h
-> >  create mode 100644 board/qualcomm/ipq9574/u-boot-x32.lds
-> >  create mode 100644 board/qualcomm/ipq9574/u-boot-x64.lds
-> >  create mode 100644 drivers/clk/qcom/clock-ipq9574.c
-> >  create mode 100644 drivers/pinctrl/qcom/pinctrl-ipq9574.c
-> >  create mode 100644 include/configs/ipq9574.h
-> >  create mode 100644 include/dt-bindings/clock/gcc-ipq9574.h
-> >  create mode 100644 include/dt-bindings/net/qti-ipqsoc.h
-> >  create mode 100644 include/dt-bindings/pinctrl/pinctrl-ipqsoc.h
-> >  create mode 100644 include/dt-bindings/reset/ipq9574-reset.h
-> >
-> > diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-> > index d9725030d5..8931dfa2aa 100644
-> > --- a/arch/arm/dts/Makefile
-> > +++ b/arch/arm/dts/Makefile
-> > @@ -1523,6 +1523,8 @@ dtb-$(CONFIG_ARCH_QEMU) += qemu-arm.dtb qemu-arm64.dtb
-> >  dtb-$(CONFIG_TARGET_CORSTONE1000) += corstone1000-mps3.dtb \
-> >                               corstone1000-fvp.dtb
-> >
-> > +dtb-$(CONFIG_TARGET_IPQ9574) += ipq9574-rdp433-mht-phy.dtb
-> > +
-> >  include $(srctree)/scripts/Makefile.dts
-> >
-> >  targets += $(dtb-y)
-> > diff --git a/arch/arm/dts/ipq9574-default.dts b/arch/arm/dts/ipq9574-default.dts
-> > new file mode 100644
-> > index 0000000000..501c9492df
-> > --- /dev/null
-> > +++ b/arch/arm/dts/ipq9574-default.dts
-> > @@ -0,0 +1,167 @@
-> > +// SPDX-License-Identifier: GPL-2.0-only
-> > +/*
-> > + * Copyright (c) 2024, Qualcomm Innovation Center, Inc. All rights reserved.
-> > + */
-> > +
-> > +/dts-v1/;
-> > +
-> > +#include "ipq9574.dtsi"
-> > +
-> > +/ {
-> > +     config_name = "config-default";
-> > +
-> > +     aliases {
-> > +             console = &blsp1_uart2_console;
-> > +             uart2 = &blsp1_uart3_additional;
-> > +             sdhci = &mmc;
-> > +     };
-> > +
-> > +     soc: soc {
-> > +             tlmm: pinctrl@1000000 {
-> > +
-> > +                     sdhci_pinmux: mmc {
-> > +                             pinconfig;
-> > +                             emmc_data {
->
-> No, please use upstream DTS.
->
-> You imported here a lot of vendor junk. There is no way this will pass
-> any System Ready tests if you hand over this DTB to Linux. Plus really,
-> that's ugly DTS to look at.
->
-> I am not a maintainer of DTS in U-Boot, so up to the folks here, but I
-> really recommend to NAK such DTS. It just re-adds all the issues we
-> fixed in upstream kernel!
->
-> I suggest using dts/upstream/qcom, but if you cannot then please import
-> kernel DTS.
 
-Yes, please. There's a lot of effort updating the dts file in u-boot
-and using as much as we can verbatim from the upstream repos. Let's
-not take any steps backwards
+On 2/28/24 4:05 PM, Roger Quadros wrote:
+> Add a new Kconfig symbol MDIO_TI_CPSW for the CPSW MDIO
+> driver and build it with proper DM support if enabled.
+> 
+> If MDIO_TI_CPSW is not enabled then we continue to
+> behave like before.
+> 
+> Clean up MDIO custom handling in am65-cpsw and use
+> dm_eth_phy_connect() to get the PHY.
+> 
+> Signed-off-by: Roger Quadros <rogerq@kernel.org>
+> ---
+> Changelog:
+> 
+> v2: no change
+> ---
+>  drivers/net/ti/Kconfig          |   8 ++
+>  drivers/net/ti/Makefile         |   3 +-
+>  drivers/net/ti/am65-cpsw-nuss.c | 190 ++------------------------------------
+>  drivers/net/ti/cpsw_mdio.c      | 198 +++++++++++++++++++++++++++++++++++-----
+>  drivers/net/ti/cpsw_mdio.h      |   2 +
+>  5 files changed, 196 insertions(+), 205 deletions(-)
+> 
 
->
-> Best regards,
-> Krzysztof
->
+Tested dhcp and ping in u-boot on J721S2-EVM, SK-AM62B
+Tested-by: Ravi Gunasekaran <r-gunasekaran@ti.com>
+
+-- 
+Regards,
+Ravi
