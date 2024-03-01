@@ -4,85 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4448C5478C
-	for <u-boot@archiver.kernel.org>; Fri,  1 Mar 2024 16:28:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63BFDC5475B
+	for <u-boot@archiver.kernel.org>; Fri,  1 Mar 2024 16:50:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4ADFE87DED;
-	Fri,  1 Mar 2024 17:28:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C2EDB88142;
+	Fri,  1 Mar 2024 17:50:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZLx42KJx";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="d/C4hJd7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA7B488142; Fri,  1 Mar 2024 17:28:10 +0100 (CET)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 4D9E588142; Fri,  1 Mar 2024 17:50:16 +0100 (CET)
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AFA1C87DE3
- for <u-boot@lists.denx.de>; Fri,  1 Mar 2024 17:28:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6112687D65
+ for <u-boot@lists.denx.de>; Fri,  1 Mar 2024 17:50:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-563bb51c36eso3441594a12.2
- for <u-boot@lists.denx.de>; Fri, 01 Mar 2024 08:28:08 -0800 (PST)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-1dbd81000b6so6212505ad.0
+ for <u-boot@lists.denx.de>; Fri, 01 Mar 2024 08:50:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709310488; x=1709915288; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=JZeV0vkq0n2CGddyng+/Wd98DWwboM6UUyr7tQ4TgwY=;
- b=ZLx42KJxAUlYBruEvQs2W4Lw5T8KKIVxGDS2SAxo/vCIfwoJnq4PlSKyoTCGoPupdi
- bnJCntScbOsLXrebf4RZRMUITwLzUvqqH26eP5Xqm+GPiiuF64G41cpkF4J9TzQJZpsD
- oEMVqpIw+91o/ReHCb3e5wrer/BjOpgMc9FjSPR1tQjcf5pUWPwIWDSQ6CKKo3GXpIpI
- jVoy1Lv2UC5siAG64flnAwsc1lrupNLqRHhTtCDA7ec1Dv5aMvPhgBYQss1M6XomN+/B
- 5E3nb6KFRDSUk9BybV6t2i/gzFh0OhDXe+CRVJWRcaV99GRO46S+ABQmwyTI1LcAGG+l
- 3/dQ==
+ d=gmail.com; s=20230601; t=1709311812; x=1709916612; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=bAHdv1wOLsskB/fdjI7U1MVzzLVAK/rywVTe1L7gPQ8=;
+ b=d/C4hJd7oqc5POtdR5sbn2kO/6rXUsaAiJ1owyKLaEW0YnYi1MIAdSrqgJaw2m9l37
+ JEzYCN4t7K429g8YgC0Dmr0XwU8EKmvAeDn5HsCetg4jo90HNc5pjTIOPvFOwYQ/ztIO
+ wqJCEtXZSKJVJssWmn65xvy27ow59BJ1RJPYldyEDswK5s1SrxXy3AjQos9YUJkb2D0/
+ FFrLqlX7hdSPPT/ivDhQEvcoIqRfshQ7gbpmZ4LPx6Le7Uy2e/pOE8tPGXgGuQMv90GB
+ 0QivYwUNGQy9IlaEH4AwmYZwgM4CzeZ326cxVdeyfIWGXVQBiB4okRcLCS27ymglZOZU
+ Dmpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709310488; x=1709915288;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=JZeV0vkq0n2CGddyng+/Wd98DWwboM6UUyr7tQ4TgwY=;
- b=qI4aagQmw4brObnjWn/0bbL/XNCWCT8jk1kkmSFJ5gY6yn+7pNQgZJmfz0ZOdT9ltW
- uAdGWxpND8k9wSuN7sxpuVqIStc0bJv0k6xMkO6BoxjaOPD0uYrD/hFfXEezL4y0cZep
- HQtHmZyS0HkkXM16jpDn4L4iqH60GmlnLEI+Fmd2FObLl2RAjN3zl3QKM1hmJxQEbuT6
- CLUh1NKoHRnMzkx3p3kWUmRoyHnU9Ehe6DSUvzjV9E4NEVwte/otphJg5/+GOsuDT+M1
- erY/g8SY8Ixj70l7S/bS8haLmx5DfHCVA1rJRwwe3Cwm0114+81wsAU97x6klxBkvRac
- gA/g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVIDbAHNmwuafmksELQKQsKn02KdQmGahD9+HrnrZQgQETgbVAkwcLF+GYuYZ6FLPURCxYM/OGCH0alV7CXTjs9aZuhog==
-X-Gm-Message-State: AOJu0YxqzFWN6qqJPU5bAFCbo4iVkvtGALaGh/3aSAFSbTSiiU3wBy/w
- se88rC1qH0WxUQCYl6KDyTAWPgiayYgk5trz0hpDZvHXBoEiHOdcttQoaD3Ct8c=
-X-Google-Smtp-Source: AGHT+IHxRDLUh2MssxKJo9nx3fkq5XSgMMGmKM9OLZXzf5SrqXfDhv2XTT/s/W6qNeTP2j4mWP9HmA==
-X-Received: by 2002:a05:6402:2683:b0:566:db5a:eae4 with SMTP id
- w3-20020a056402268300b00566db5aeae4mr1701432edd.16.1709310488109; 
- Fri, 01 Mar 2024 08:28:08 -0800 (PST)
-Received: from [192.168.1.78] (host-92-17-96-232.as13285.net. [92.17.96.232])
- by smtp.gmail.com with ESMTPSA id
- m5-20020a509305000000b0056676b80a38sm1776465eda.3.2024.03.01.08.28.07
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 01 Mar 2024 08:28:07 -0800 (PST)
-Message-ID: <7d67cef8-5505-4046-92ec-1d2bc24b204a@linaro.org>
-Date: Fri, 1 Mar 2024 16:28:06 +0000
+ d=1e100.net; s=20230601; t=1709311812; x=1709916612;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=bAHdv1wOLsskB/fdjI7U1MVzzLVAK/rywVTe1L7gPQ8=;
+ b=EktIozSueBk2jbkwjh0WUsMqI5qXWRek/wWJ73IO5RhnDyWQYicLDh3IQgiLihvwqc
+ e8jQkSzBHsGm1cEPH2qc9leY+7SIlSsaXdZOyVmh3iQkPLkDDZHOg9J1NF+tBbGEGAS2
+ jjBuSnFKiusvHypl+rkBnXFnWQwMATlKz2QUHsdeFYStyTdIU+F91rHyRs09mcv3taqw
+ sn4WiyG3288zin7N6bj+y3zbL4qOWObyhTJArfcDy3oKW75r2pT3Qspx+opw7EHb2xHo
+ lZBQPbI/0Zfw9Pkt5jZoZ/RlKseK5qY4uXLZQ6J+DM8fztHW7o2c0P2jrDZxe9Rd9Jd6
+ LKyQ==
+X-Gm-Message-State: AOJu0YxxVpvur5quakStBwNPhplmZmOV+pYT2LzYpF/SAUWw2bjDtntW
+ O+d4dRsxtuUjsFWk9sswJQ8B4pNNURXgsaal4qDQYYsvQ4YJ21YrvLJQ5mD6OW/YLG+no0piYX9
+ Q9kc1XhkIyLA0KsbbS/pEneb8k+Y=
+X-Google-Smtp-Source: AGHT+IEr98czgYle/k1TwTb/yzE2lXBuUTjtCSKE294u+JUHfiQYiM9o9+0rbIyQ9g4djEhsOq8V/3Y+L83Lm+eq06E=
+X-Received: by 2002:a17:90b:1909:b0:298:b736:ecf7 with SMTP id
+ mp9-20020a17090b190900b00298b736ecf7mr2145967pjb.0.1709311811670; Fri, 01 Mar
+ 2024 08:50:11 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 6/8] pinctr: qcom: pass pin number to get_function_mux
- callback
-Content-Language: en-US
-To: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-References: <20240229142043.1263690-1-volodymyr_babchuk@epam.com>
- <20240229142043.1263690-7-volodymyr_babchuk@epam.com>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20240229142043.1263690-7-volodymyr_babchuk@epam.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20240222093607.3085545-1-sumit.garg@linaro.org>
+ <170929783825.70492.4756963077870833230.b4-ty@konsulko.com>
+In-Reply-To: <170929783825.70492.4756963077870833230.b4-ty@konsulko.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 1 Mar 2024 13:49:59 -0300
+Message-ID: <CAOMZO5CjeUhFfLBs3FRt4Hbk0ULXrRoOZaZqvSRzWbNySdsOhQ@mail.gmail.com>
+Subject: Re: [PATCH v6 00/11] An effort to bring DT bindings compliance within
+ U-Boot
+To: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>
+Cc: u-boot@lists.denx.de, peng.fan@nxp.com, marex@denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,130 +89,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Sumit,
 
+On Fri, Mar 1, 2024 at 9:57=E2=80=AFAM Tom Rini <trini@konsulko.com> wrote:
+>
+> On Thu, 22 Feb 2024 15:05:56 +0530, Sumit Garg wrote:
+>
+> > Changes in v6:
+> > --------------
+> > - v6_dt: https://github.com/b49020/u-boot/tree/v6_dt
+> > - Patch #3: Incorporate fix for sandbox CI failure.
+> > - Patch #6: Incorporate shell script comments from Marek.
+> > - Patch #8: Incorporate documentation review comments from Paul.
+> >
+> > [...]
+>
+> Applied to u-boot/next, thanks!
 
-On 29/02/2024 14:21, Volodymyr Babchuk wrote:
-> This patch is the preparation for SM8150 support. This new SoC
-> depending on the particular pin can have different numbers for the
-> same function. For example "rgmii" function for GPIO4 has id=2 while
-> for GPIO59 it has id=1. So, to support this type of SoCs,
-> get_function_mux() callback needs to know for which pin the function
-> is requested.
-> 
-> Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
-Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
-> 
->  drivers/pinctrl/qcom/pinctrl-apq8016.c | 3 ++-
->  drivers/pinctrl/qcom/pinctrl-apq8096.c | 3 ++-
->  drivers/pinctrl/qcom/pinctrl-ipq4019.c | 3 ++-
->  drivers/pinctrl/qcom/pinctrl-qcom.c    | 4 ++--
->  drivers/pinctrl/qcom/pinctrl-qcom.h    | 3 ++-
->  drivers/pinctrl/qcom/pinctrl-qcs404.c  | 3 ++-
->  drivers/pinctrl/qcom/pinctrl-sdm845.c  | 3 ++-
->  7 files changed, 14 insertions(+), 8 deletions(-)
-> 
-> diff --git a/drivers/pinctrl/qcom/pinctrl-apq8016.c b/drivers/pinctrl/qcom/pinctrl-apq8016.c
-> index 8149ffd83c..53042b6e05 100644
-> --- a/drivers/pinctrl/qcom/pinctrl-apq8016.c
-> +++ b/drivers/pinctrl/qcom/pinctrl-apq8016.c
-> @@ -49,7 +49,8 @@ static const char *apq8016_get_pin_name(struct udevice *dev,
->  	}
->  }
->  
-> -static unsigned int apq8016_get_function_mux(unsigned int selector)
-> +static unsigned int apq8016_get_function_mux(__maybe_unused unsigned int pin,
-> +					     unsigned int selector)
->  {
->  	return msm_pinctrl_functions[selector].val;
->  }
-> diff --git a/drivers/pinctrl/qcom/pinctrl-apq8096.c b/drivers/pinctrl/qcom/pinctrl-apq8096.c
-> index d64ab1ff7b..8dcd171259 100644
-> --- a/drivers/pinctrl/qcom/pinctrl-apq8096.c
-> +++ b/drivers/pinctrl/qcom/pinctrl-apq8096.c
-> @@ -44,7 +44,8 @@ static const char *apq8096_get_pin_name(struct udevice *dev,
->  	}
->  }
->  
-> -static unsigned int apq8096_get_function_mux(unsigned int selector)
-> +static unsigned int apq8096_get_function_mux(__maybe_unused unsigned int pin,
-> +					     unsigned int selector)
->  {
->  	return msm_pinctrl_functions[selector].val;
->  }
-> diff --git a/drivers/pinctrl/qcom/pinctrl-ipq4019.c b/drivers/pinctrl/qcom/pinctrl-ipq4019.c
-> index 2d99f99e1e..c2c358f556 100644
-> --- a/drivers/pinctrl/qcom/pinctrl-ipq4019.c
-> +++ b/drivers/pinctrl/qcom/pinctrl-ipq4019.c
-> @@ -40,7 +40,8 @@ static const char *ipq4019_get_pin_name(struct udevice *dev,
->  	return pin_name;
->  }
->  
-> -static unsigned int ipq4019_get_function_mux(unsigned int selector)
-> +static unsigned int ipq4019_get_function_mux(__maybe_unused unsigned int pin,
-> +					     unsigned int selector)
->  {
->  	return msm_pinctrl_functions[selector].val;
->  }
-> diff --git a/drivers/pinctrl/qcom/pinctrl-qcom.c b/drivers/pinctrl/qcom/pinctrl-qcom.c
-> index dc3d8c4d90..de0bb4de0a 100644
-> --- a/drivers/pinctrl/qcom/pinctrl-qcom.c
-> +++ b/drivers/pinctrl/qcom/pinctrl-qcom.c
-> @@ -82,10 +82,10 @@ static int msm_pinmux_set(struct udevice *dev, unsigned int pin_selector,
->  			  unsigned int func_selector)
->  {
->  	struct msm_pinctrl_priv *priv = dev_get_priv(dev);
-> +	u32 func = priv->data->get_function_mux(pin_selector, func_selector);
->  
->  	clrsetbits_le32(priv->base + GPIO_CONFIG_REG(priv, pin_selector),
-> -			TLMM_FUNC_SEL_MASK | TLMM_GPIO_DISABLE,
-> -			priv->data->get_function_mux(func_selector) << 2);
-> +			TLMM_FUNC_SEL_MASK | TLMM_GPIO_DISABLE, func << 2);
->  	return 0;
->  }
->  
-> diff --git a/drivers/pinctrl/qcom/pinctrl-qcom.h b/drivers/pinctrl/qcom/pinctrl-qcom.h
-> index 07f2eae9ba..49b7bfbc00 100644
-> --- a/drivers/pinctrl/qcom/pinctrl-qcom.h
-> +++ b/drivers/pinctrl/qcom/pinctrl-qcom.h
-> @@ -18,7 +18,8 @@ struct msm_pinctrl_data {
->  	int functions_count;
->  	const char *(*get_function_name)(struct udevice *dev,
->  					 unsigned int selector);
-> -	unsigned int (*get_function_mux)(unsigned int selector);
-> +	unsigned int (*get_function_mux)(unsigned int pin,
-> +					 unsigned int selector);
->  	const char *(*get_pin_name)(struct udevice *dev,
->  				    unsigned int selector);
->  };
-> diff --git a/drivers/pinctrl/qcom/pinctrl-qcs404.c b/drivers/pinctrl/qcom/pinctrl-qcs404.c
-> index ac00afa2a1..977f7b2ac3 100644
-> --- a/drivers/pinctrl/qcom/pinctrl-qcs404.c
-> +++ b/drivers/pinctrl/qcom/pinctrl-qcs404.c
-> @@ -56,7 +56,8 @@ static const char *qcs404_get_pin_name(struct udevice *dev,
->  	}
->  }
->  
-> -static unsigned int qcs404_get_function_mux(unsigned int selector)
-> +static unsigned int qcs404_get_function_mux(__maybe_unused unsigned int pin,
-> +					    unsigned int selector)
->  {
->  	return msm_pinctrl_functions[selector].val;
->  }
-> diff --git a/drivers/pinctrl/qcom/pinctrl-sdm845.c b/drivers/pinctrl/qcom/pinctrl-sdm845.c
-> index 9f0f4085ce..64ce1bf15e 100644
-> --- a/drivers/pinctrl/qcom/pinctrl-sdm845.c
-> +++ b/drivers/pinctrl/qcom/pinctrl-sdm845.c
-> @@ -70,7 +70,8 @@ static const char *sdm845_get_pin_name(struct udevice *dev,
->  	return pin_name;
->  }
->  
-> -static unsigned int sdm845_get_function_mux(unsigned int selector)
-> +static unsigned int sdm845_get_function_mux(__maybe_unused unsigned int pin,
-> +					    unsigned int selector)
->  {
->  	return msm_pinctrl_functions[selector].val;
->  }
+I am trying to use OF_UPSTREAM with imx8mp_evk_defconfig:
 
--- 
-// Caleb (they/them)
+diff --git a/arch/arm/mach-imx/imx8m/Kconfig b/arch/arm/mach-imx/imx8m/Kcon=
+fig
+index 328c3e388051..29d0c5ce6485 100644
+--- a/arch/arm/mach-imx/imx8m/Kconfig
++++ b/arch/arm/mach-imx/imx8m/Kconfig
+@@ -8,6 +8,7 @@ config IMX8M
+        select LTO
+        select ROM_UNIFIED_SECTIONS
+        select ARMV8_CRYPTO
++       imply OF_UPSTREAM
+
+ config IMX8MQ
+        bool
+diff --git a/configs/imx8mp_evk_defconfig b/configs/imx8mp_evk_defconfig
+index 2350d2f409b7..cdf840c683c0 100644
+--- a/configs/imx8mp_evk_defconfig
++++ b/configs/imx8mp_evk_defconfig
+@@ -8,7 +8,7 @@ CONFIG_SPL_LIBGENERIC_SUPPORT=3Dy
+ CONFIG_ENV_SIZE=3D0x1000
+ CONFIG_ENV_OFFSET=3D0x400000
+ CONFIG_DM_GPIO=3Dy
+-CONFIG_DEFAULT_DEVICE_TREE=3D"imx8mp-evk"
++CONFIG_DEFAULT_DEVICE_TREE=3D"freescale/imx8mp-evk"
+ CONFIG_SPL_TEXT_BASE=3D0x920000
+ CONFIG_TARGET_IMX8MP_EVK=3Dy
+ CONFIG_SYS_MONITOR_LEN=3D524288
+
+I ran "./dts/update-dts-subtree.sh pull v6.8-rc6-dts".
+
+make mrproper
+make imx8mp_evk_defconfig
+make
+
+The dtb is built: dts/upstream/src/arm64/freescale/imx8mp-evk.dtb
+
+but mkimage still looks for the old path:
+
+ MKIMAGE u-boot.img
+./tools/mkimage: Can't open arch/arm/dts/freescale/imx8mp-evk.dtb: No
+such file or directory
+./tools/mkimage: failed to build FIT
+
+Any suggestions?
+
+Thanks
