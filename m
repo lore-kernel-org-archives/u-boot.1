@@ -4,86 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F2BCC5478C
-	for <u-boot@archiver.kernel.org>; Fri,  1 Mar 2024 09:41:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA46DC5478C
+	for <u-boot@archiver.kernel.org>; Fri,  1 Mar 2024 10:07:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7979888128;
-	Fri,  1 Mar 2024 10:41:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 23C0788120;
+	Fri,  1 Mar 2024 11:07:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zklWQgdB";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pE430DZo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F07188129; Fri,  1 Mar 2024 10:41:29 +0100 (CET)
-Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
- [IPv6:2a00:1450:4864:20::22d])
+ id 1125187BAE; Fri,  1 Mar 2024 11:07:30 +0100 (CET)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F2CC288126
- for <u-boot@lists.denx.de>; Fri,  1 Mar 2024 10:41:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2B14488129
+ for <u-boot@lists.denx.de>; Fri,  1 Mar 2024 11:07:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-2d204e102a9so18634621fa.0
- for <u-boot@lists.denx.de>; Fri, 01 Mar 2024 01:41:26 -0800 (PST)
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-51326436876so1739531e87.1
+ for <u-boot@lists.denx.de>; Fri, 01 Mar 2024 02:07:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709286086; x=1709890886; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=jwn7rij1IGl4y5rf8+A8zesMejg3jQlb2cfcXixUJ0c=;
- b=zklWQgdBAuLVZtmg/p4yHYqhNs8/n0LsnCPIO2ZWghWeduY971up4TPmEjhmFgk7q4
- K/9y+KENWLjanmWelO4AF/clL0Mzzxat4axvr6VtdtH8rqfGq8U+/+op5qLybjwkrs5h
- Gi14TlGZiTU+xxrpGYrgDiAb3l8IJ47PPQI70X0aiI/qHkgGXM7E2GNlB/pbDuvc4nmd
- Fzt94ertMSVeVSPjmjnr9sypOTUx1ANTtHNXLr2lrxvg4F0I6DiA2jKDWW2jZhnzQSpZ
- fANH2VXup3K+36nci/BBaALvLsJVu6BK3V/85uRlgOrBshVBidA7J8Rt4rwyYoYqYn4w
- /PHw==
+ d=linaro.org; s=google; t=1709287645; x=1709892445; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=oQSahxREKPADjvWFCxdp/6ul9irC+FBMqDHf3TYyI9s=;
+ b=pE430DZoDrtJxDtQz6IlQIi5nhP/lypBAnq3BI02/IQaifCl0UgQGcuMZOeKKV+Mqq
+ 4Ovo2o3Gwv8wVpu7XjVLrt94DIKR4nIeRW5BPsp4EzqvczAF6kYVm6MYTQK5EaJxVS6P
+ 0hrvqw21jMiTeaTA7OqGKbZtmj8iHDKsdUAM1LEVo7NQJpdt9lgrm1qxwauUt016oeyh
+ swO4ChzkRS6doByvuONCl3r3/CppzQmPWJrx57wofqaMacr0MeH2DVAqtKlwlqlV1Rz2
+ ZA1hTk7Wly2/NDQdfewpRLcDJBsAx/behLRufFUZ9iRrvReU+Q1hRjUGvNeFSPBzsZD3
+ OfkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709286086; x=1709890886;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=jwn7rij1IGl4y5rf8+A8zesMejg3jQlb2cfcXixUJ0c=;
- b=va1pGSTtidBeLSE/e6cYlJMFH4dvcVNdY41ZNLqe17o/yWsnVH9NXxXWiRNUnlCWww
- pQMowoMWN1ozqPgB/Kjt9B5CeTJk9WoQv8wGNFakbS1ZT97WRcgjUvZFSoqziVIka25G
- rHBwQm6DWKSNZBMQjHO/9gMiaFYh5vlJP5Qp9NxbsYwcAIDg0gt1vpFz1+0dSuE96/rR
- 0eboNuITA+89M12DoZ795d4wI9ggxhyw1uZConQ5dR2XvZpqiC4MXRr5aT0S/7rX1aef
- W+h/x0n9lp/pFJ9Qe+fcmR9cMIuD+F+3MdIE/Y3UuBhDM6eerFZSfshhWJTdnvpiY36R
- IBsA==
-X-Gm-Message-State: AOJu0YwVqsJl4XdIwJv6nVgi8qcY6uTSCvIihwD9hKbs4LNzkKDjUtPo
- sitmHZRCbKvMlbwk/dAtQ4WHSqa9K2D+E6aSsLRaIHW90t6cWiYoqBRfdpzNIO3rjKetxkOUc2p
- 5KD64o4NEMH+IssheZD6vcFoCcfH7kOBoRhSn2g==
-X-Google-Smtp-Source: AGHT+IH15NkqJg+cWOXdLSDhkKfQcb27kqKJm7qSiQlAw+mFyEwq/dS4paFdbVRG67A2PW7ei7b7tRG5A1O6ZQrgyLk=
-X-Received: by 2002:a05:6512:304f:b0:513:3429:88f8 with SMTP id
- b15-20020a056512304f00b00513342988f8mr464189lfb.68.1709286085842; Fri, 01 Mar
- 2024 01:41:25 -0800 (PST)
+ d=1e100.net; s=20230601; t=1709287645; x=1709892445;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=oQSahxREKPADjvWFCxdp/6ul9irC+FBMqDHf3TYyI9s=;
+ b=pYok735GiRQA467oPD/PuEwAGjX1Q/UTDKkIMw3UurHBKxAXXgwrtR6Arh+Zrsncoe
+ wgTOTC0vpQjJCGa7vav1CYiFAPq61dXjGF4PmZ88KjYhWm3k6gxaAY7LvksVl8WhHfuZ
+ OkgzPLKoMibIryEvkv4aQEIz1BJBkyrWx995Szn+Ks0ZaigiyHSH8x/rHvcDE0I6Gz/g
+ wHZjUdC1kAhAyLLeF1btfRBAvSXqm00JwNwGB+MYLuxWuNsV7WHN3VGUvSyQQmwTo8Xe
+ WncBb9V+hbWPDqaEq+ARBpfoEtK9g+tDgZmyNshkstz1MDPHp/6y1JUnePGAMENtBgkE
+ 207w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU8KvAUVV2AdNBIznpJXJDX0lMDVFh7rmowDSeOR8sO0+y4pefvVxoGSbpIp01/fUIoipg519CprPGtrIvf6b9MRATohg==
+X-Gm-Message-State: AOJu0Yy0kvaAtownHCkNtaFYPAZHJT6KbKDT5Lft5ICRXJ2a4Hk9ILAk
+ yADoq588ZwPbESi8rFGGuASKiFwYmwvHzdsvC6VoI7a+7GImhBQ+3i+I0tS9A1B1ThO2tkE2rT6
+ fEYtUWgC/ispa4wuLjo9D9eSu5QmzmHGof9LleQ==
+X-Google-Smtp-Source: AGHT+IHxwa/+/ZQZ8Iuop3u0hlheT5bY53l8ffa2M3AJWimKYPiEz8YLTzEBwiMqqZYPwA+zmP7mRlFsjPPyVczyYFA=
+X-Received: by 2002:a05:6512:238f:b0:513:3309:cc62 with SMTP id
+ c15-20020a056512238f00b005133309cc62mr936964lfv.47.1709287645281; Fri, 01 Mar
+ 2024 02:07:25 -0800 (PST)
 MIME-Version: 1.0
-References: <20240214183444.493629-1-igor.opaniuk@gmail.com>
- <CAByghJY_Eyf6s=V+5Hjo1gVxkzCPieABkk_NpFK5HM_K=SE_+g@mail.gmail.com>
-In-Reply-To: <CAByghJY_Eyf6s=V+5Hjo1gVxkzCPieABkk_NpFK5HM_K=SE_+g@mail.gmail.com>
+References: <20240226100807.1095607-1-quic_varada@quicinc.com>
+ <20240226100807.1095607-2-quic_varada@quicinc.com>
+ <4fa5cede-def3-4ad0-8433-72495e4c8e3b@kernel.org>
+In-Reply-To: <4fa5cede-def3-4ad0-8433-72495e4c8e3b@kernel.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 1 Mar 2024 11:40:49 +0200
-Message-ID: <CAC_iWjJv-v0pu9cZza0WghJ-rPJdD8Lmng_ms7d17a=K4nSzjw@mail.gmail.com>
-Subject: Re: [PATCH v1 0/5] TEE: minor cleanup
-To: Igor Opaniuk <igor.opaniuk@gmail.com>
-Cc: u-boot@lists.denx.de, AKASHI Takahiro <takahiro.akashi@linaro.org>, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Bin Meng <bmeng@tinylab.org>, 
- Etienne Carriere <etienne.carriere@foss.st.com>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jens Wiklander <jens.wiklander@linaro.org>, 
- Jorge Ramirez-Ortiz <jorge@foundries.io>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Roger Knecht <rknecht@pm.me>, Sean Edmond <seanedmond@microsoft.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Date: Fri, 1 Mar 2024 12:06:49 +0200
+Message-ID: <CAC_iWjJXyo1KGWFeimMSqi4zVTcBWZ_VGCjbtiRJWVf1mA383w@mail.gmail.com>
+Subject: Re: [PATCH 01/10] mach-snapdragon: Add support for IPQ9574
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: Varadarajan Narayanan <quic_varada@quicinc.com>, u-boot@lists.denx.de, 
+ Caleb Connolly <caleb.connolly@linaro.org>, FUKAUMI Naoki <naoki@radxa.com>, 
+ Hai Pham <hai.pham.ud@renesas.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ Kever Yang <kever.yang@rock-chips.com>, Lukasz Majewski <lukma@denx.de>,
+ Marek Vasut <marex@denx.de>, 
+ Mathieu Othacehe <othacehe@gnu.org>, Michal Simek <michal.simek@amd.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Sumit Garg <sumit.garg@linaro.org>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tianling Shen <cnsztl@gmail.com>,
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,62 +100,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Igor,
+Hi Krzysztof,
 
-On Thu, 29 Feb 2024 at 21:11, Igor Opaniuk <igor.opaniuk@gmail.com> wrote:
+On Thu, 29 Feb 2024 at 22:50, Krzysztof Kozlowski <krzk@kernel.org> wrote:
 >
-> Hi Ilias,
+> On 26/02/2024 11:07, Varadarajan Narayanan wrote:
+> > Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
+> > ---
+> >
+> >  arch/arm/dts/Makefile                         |    2 +
+> >  arch/arm/dts/ipq9574-default.dts              |  167 +++
+> >  arch/arm/dts/ipq9574-rdp433-mht-phy.dts       |  208 +++
+> >  arch/arm/dts/ipq9574.dtsi                     |  771 ++++++++++
+> >  .../include/mach/sysmap-ipq9574.h             |  252 ++++
+> >  arch/arm/mach-snapdragon/init_ipq9574.c       |   81 +
+> >  board/qualcomm/ipq9574/Kconfig                |   15 +
+> >  board/qualcomm/ipq9574/Makefile               |    4 +
+> >  board/qualcomm/ipq9574/board_init.c           |  326 ++++
+> >  board/qualcomm/ipq9574/ipq9574.c              |  170 +++
+> >  board/qualcomm/ipq9574/ipq9574.h              |   75 +
+> >  board/qualcomm/ipq9574/u-boot-x32.lds         |  250 ++++
+> >  board/qualcomm/ipq9574/u-boot-x64.lds         |  188 +++
+> >  drivers/clk/qcom/clock-ipq9574.c              | 1320 +++++++++++++++++
+> >  drivers/pinctrl/qcom/pinctrl-ipq9574.c        |   77 +
+> >  include/configs/ipq9574.h                     |  111 ++
+> >  include/dt-bindings/clock/gcc-ipq9574.h       |  156 ++
+> >  include/dt-bindings/net/qti-ipqsoc.h          |   20 +
+> >  include/dt-bindings/pinctrl/pinctrl-ipqsoc.h  |   19 +
+> >  include/dt-bindings/reset/ipq9574-reset.h     |   54 +
+> >  20 files changed, 4266 insertions(+)
+> >  create mode 100644 arch/arm/dts/ipq9574-default.dts
+> >  create mode 100644 arch/arm/dts/ipq9574-rdp433-mht-phy.dts
+> >  create mode 100644 arch/arm/dts/ipq9574.dtsi
+> >  create mode 100644 arch/arm/mach-snapdragon/include/mach/sysmap-ipq9574.h
+> >  create mode 100644 arch/arm/mach-snapdragon/init_ipq9574.c
+> >  create mode 100644 board/qualcomm/ipq9574/Kconfig
+> >  create mode 100644 board/qualcomm/ipq9574/Makefile
+> >  create mode 100644 board/qualcomm/ipq9574/board_init.c
+> >  create mode 100644 board/qualcomm/ipq9574/ipq9574.c
+> >  create mode 100644 board/qualcomm/ipq9574/ipq9574.h
+> >  create mode 100644 board/qualcomm/ipq9574/u-boot-x32.lds
+> >  create mode 100644 board/qualcomm/ipq9574/u-boot-x64.lds
+> >  create mode 100644 drivers/clk/qcom/clock-ipq9574.c
+> >  create mode 100644 drivers/pinctrl/qcom/pinctrl-ipq9574.c
+> >  create mode 100644 include/configs/ipq9574.h
+> >  create mode 100644 include/dt-bindings/clock/gcc-ipq9574.h
+> >  create mode 100644 include/dt-bindings/net/qti-ipqsoc.h
+> >  create mode 100644 include/dt-bindings/pinctrl/pinctrl-ipqsoc.h
+> >  create mode 100644 include/dt-bindings/reset/ipq9574-reset.h
+> >
+> > diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+> > index d9725030d5..8931dfa2aa 100644
+> > --- a/arch/arm/dts/Makefile
+> > +++ b/arch/arm/dts/Makefile
+> > @@ -1523,6 +1523,8 @@ dtb-$(CONFIG_ARCH_QEMU) += qemu-arm.dtb qemu-arm64.dtb
+> >  dtb-$(CONFIG_TARGET_CORSTONE1000) += corstone1000-mps3.dtb \
+> >                               corstone1000-fvp.dtb
+> >
+> > +dtb-$(CONFIG_TARGET_IPQ9574) += ipq9574-rdp433-mht-phy.dtb
+> > +
+> >  include $(srctree)/scripts/Makefile.dts
+> >
+> >  targets += $(dtb-y)
+> > diff --git a/arch/arm/dts/ipq9574-default.dts b/arch/arm/dts/ipq9574-default.dts
+> > new file mode 100644
+> > index 0000000000..501c9492df
+> > --- /dev/null
+> > +++ b/arch/arm/dts/ipq9574-default.dts
+> > @@ -0,0 +1,167 @@
+> > +// SPDX-License-Identifier: GPL-2.0-only
+> > +/*
+> > + * Copyright (c) 2024, Qualcomm Innovation Center, Inc. All rights reserved.
+> > + */
+> > +
+> > +/dts-v1/;
+> > +
+> > +#include "ipq9574.dtsi"
+> > +
+> > +/ {
+> > +     config_name = "config-default";
+> > +
+> > +     aliases {
+> > +             console = &blsp1_uart2_console;
+> > +             uart2 = &blsp1_uart3_additional;
+> > +             sdhci = &mmc;
+> > +     };
+> > +
+> > +     soc: soc {
+> > +             tlmm: pinctrl@1000000 {
+> > +
+> > +                     sdhci_pinmux: mmc {
+> > +                             pinconfig;
+> > +                             emmc_data {
 >
-> On Wed, Feb 14, 2024 at 7:34=E2=80=AFPM Igor Opaniuk <igor.opaniuk@foundr=
-ies.io> wrote:
->>
->> - Address some spelling errors and typos
->> - Support CMD_OPTEE_RPMB for SANDBOX configurations and add python tests
->> - Remove common.h inclusion for drivers/tee
+> No, please use upstream DTS.
+>
+> You imported here a lot of vendor junk. There is no way this will pass
+> any System Ready tests if you hand over this DTB to Linux. Plus really,
+> that's ugly DTS to look at.
+>
+> I am not a maintainer of DTS in U-Boot, so up to the folks here, but I
+> really recommend to NAK such DTS. It just re-adds all the issues we
+> fixed in upstream kernel!
+>
+> I suggest using dts/upstream/qcom, but if you cannot then please import
+> kernel DTS.
 
-CI fails on https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines=
-/19780
-Can you have a look?
+Yes, please. There's a lot of effort updating the dts file in u-boot
+and using as much as we can verbatim from the upstream repos. Let's
+not take any steps backwards
 
-Thanks
-/Ilias
->>
->> Igor Opaniuk (5):
->>   tee: optee: fix description in Kconfig
->>   tee: sandbox: fix spelling errors
->>   cmd: optee_rpmb: build cmd for sandbox
->>   test: py: add optee_rpmb tests
->>   tee: remove common.h inclusion
->>
->>  cmd/Kconfig                        |  4 +++-
->>  drivers/tee/broadcom/chimp_optee.c |  2 +-
->>  drivers/tee/optee/Kconfig          |  2 +-
->>  drivers/tee/optee/core.c           |  1 -
->>  drivers/tee/optee/i2c.c            |  1 -
->>  drivers/tee/optee/rpmb.c           |  1 -
->>  drivers/tee/optee/supplicant.c     |  2 +-
->>  drivers/tee/sandbox.c              | 10 +++++-----
->>  drivers/tee/tee-uclass.c           |  1 -
->>  test/py/tests/test_optee_rpmb.py   | 20 ++++++++++++++++++++
->>  10 files changed, 31 insertions(+), 13 deletions(-)
->>  create mode 100644 test/py/tests/test_optee_rpmb.py
->>
->> --
->> 2.34.1
->>
 >
-> Are there currently any comments/objections that can prevent these cosmet=
-ic
-> changes from being applied? If there are - just let me know, thanks
+> Best regards,
+> Krzysztof
 >
-> Regards,
-> Igor
->
-> --
-> Best regards - Atentamente - Meilleures salutations
->
-> Igor Opaniuk
->
-> mailto: igor.opaniuk@gmail.com
-> skype: igor.opanyuk
-> http://ua.linkedin.com/in/iopaniuk
