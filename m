@@ -4,91 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4ADA6C5475B
-	for <u-boot@archiver.kernel.org>; Fri,  1 Mar 2024 18:50:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFC47C5478C
+	for <u-boot@archiver.kernel.org>; Fri,  1 Mar 2024 18:53:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 69D2887DE8;
-	Fri,  1 Mar 2024 19:49:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1DFB888154;
+	Fri,  1 Mar 2024 19:53:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yzlHHM39";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="I+0jTU0Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A1E987DE8; Fri,  1 Mar 2024 19:49:55 +0100 (CET)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id C66F388157; Fri,  1 Mar 2024 19:53:36 +0100 (CET)
+Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
+ [IPv6:2607:f8b0:4864:20::1132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F0BF87F00
- for <u-boot@lists.denx.de>; Fri,  1 Mar 2024 19:49:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0762E87DE3
+ for <u-boot@lists.denx.de>; Fri,  1 Mar 2024 19:53:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-412cf3c5cdeso1018165e9.2
- for <u-boot@lists.denx.de>; Fri, 01 Mar 2024 10:49:52 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1132.google.com with SMTP id
+ 00721157ae682-6084e809788so28965537b3.1
+ for <u-boot@lists.denx.de>; Fri, 01 Mar 2024 10:53:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709318991; x=1709923791; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=xLChBSwKTcgCcac8L2xgBPyg3Y3xe4jwzvbLDkmBWz8=;
- b=yzlHHM3960jlCDjh+wmArRG2GtmHNVv5hvWJeWZ0jVvL0+wxAX9Irr4bFfqLTx5Gg3
- sf6boMgkYD/piqbNm/Z+tza13gHcpkR2fdntluZNaLQGTYx8Y93sd4E1fRQfRPgQF7tB
- Z/HBFyvpgAZ62thml4HuKoqQ3Fl9u1Ivzi7ZrxGlehx8NHNrOVnSvIfg4FQVDPNkBD7/
- B7gWEH6rhZvJXv/JaHIgAoKhwUHdBpdlVAX1nPLLvFcc/sdEKDUEDyJq+urdQ9Jm+k+m
- SWcwgzj3WLNdjKnjURVB3UGozhbH/x671oWkPyGy9kZBjTgrjS59MiCD8EbfskvuwUhF
- ipnA==
+ d=konsulko.com; s=google; t=1709319211; x=1709924011; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=cc8wTtWLJ/imMC66wII0Hl8vZEj+h5PpFUSrKDBJr3c=;
+ b=I+0jTU0ZOsAxjiSnpls3lCx5gYJaHh0korcNMvJK3Y6FMreH1l+q6xgvGQsDWSfCQ0
+ zoqq+uj//S2hcjUSjlRuYq3EojtuXMBKrkfpWYSiW0rbF/xHkjiDZ8YBDXTxI7M+k4A8
+ uyvDcT0KkJJfjwIvqeDYH/0FFx5QG4bJgpRCU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709318991; x=1709923791;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=xLChBSwKTcgCcac8L2xgBPyg3Y3xe4jwzvbLDkmBWz8=;
- b=VlM0GJaUzqyC3mkMbXX2sIg0r/yDI11OL9ujCOh1uSP1EUy4Z6oPXFg0zewTwiRs/k
- 7T2G1eVDq4UL8q7FtafmY0w3HIdrfTz6nMYzAhOxYgeMmzIbWD/RcSryL52+JDzTSzSU
- T1PGNpuS/z/ttAoZjyNRIrky1d7iAbYMG1iFeBJVBW7n+YXZxnRbezD76pvE7I3fYFPd
- aSAbnpLvXswZOTXBijC4wGbpKK7I/q0i8RFgu4twVkfj6yM64DH+Vxhnfe5Sf1I5N89d
- UHsLUw62v6mgaeI66vDJzBkmjTXqUuNA2sV/07cYrn7tI4v4YIR3zo+r/HMpYkUlq03Q
- Sr/g==
-X-Gm-Message-State: AOJu0YzErbZBO98RRwL0cwTSE1jILeREBNtiMXAeHpDI2M53/lnNkTy+
- w06ZIAZV0OlJsSJdwPAW8JfZCBSFVye7w525js+FFjDTN4oVKJ8gwS2Eojutom4=
-X-Google-Smtp-Source: AGHT+IEiYjDIY059HL/18W9Hl5n17Wq+WDD3ocLpJkrPOWzbrS2JIPBeZGravlPsOCz1UiCI4cFrAg==
-X-Received: by 2002:adf:e690:0:b0:33d:3b72:d2c8 with SMTP id
- r16-20020adfe690000000b0033d3b72d2c8mr1690044wrm.71.1709318991477; 
- Fri, 01 Mar 2024 10:49:51 -0800 (PST)
-Received: from [192.168.1.78] (host-92-17-96-232.as13285.net. [92.17.96.232])
+ d=1e100.net; s=20230601; t=1709319211; x=1709924011;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=cc8wTtWLJ/imMC66wII0Hl8vZEj+h5PpFUSrKDBJr3c=;
+ b=VtQW+Illh/nMm0fQ7+YVH3zZAMcAfNmhirtCUb31l9qxZP/Mr+iT31CMUKMlYAAlt2
+ N3lCUMSeflKNTkQtwzRzTjiQIP4HVhaZmYaB15VDwtZsbfKP4jZNZxb4g3iDccK1ptSd
+ 7EXMidcpE+8A8Dqcg89dN1CK70FBScmBSWySksnjOg/yffBToluTpGui5VMVKcz43O4m
+ W+gfRlJ1P8/uUeKpupvRKcsP+lg21lrhXcJsD2fLoXqp2zG24jtPJYApBC8xOx7LRE8S
+ kFzNMQi9z7fDU6FjjZj1XzUXWWlfw/4RR1ACZCSYOfjMxt+yLPtVRYpJP182hX6g6wcb
+ 1Xqg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV5135yBul4VY+nmcmzxgo0vKcG826VT5XtGgbwvtJbi9MsEBMqdwDpkXQio4eYAE95lwVhQm6qeaeCyqu+PaY9x3qbUQ==
+X-Gm-Message-State: AOJu0YxDHTckmFfaCVEOlCc+fYiYc3ez2eMyAUA5lIdA9d8sMfAPcAg8
+ TgOXObLDsi4y7iid/KwTYTO/ydz0IkTkEy5akdDLFlPEcGMqQCiQxDf0MIFDiAo=
+X-Google-Smtp-Source: AGHT+IH6OK9TT1bpKF1J904bdQColt2hrhj0pq2RAfgVKCQkHMBTt9l5Ywu5qxdSCqUqkyEb+bwafQ==
+X-Received: by 2002:a0d:dbc2:0:b0:608:b8bb:f0e4 with SMTP id
+ d185-20020a0ddbc2000000b00608b8bbf0e4mr2055645ywe.25.1709319211627; 
+ Fri, 01 Mar 2024 10:53:31 -0800 (PST)
+Received: from [127.0.1.1] (065-184-194-195.res.spectrum.com. [65.184.194.195])
  by smtp.gmail.com with ESMTPSA id
- u20-20020adfcb14000000b0033b7ce8b496sm5209963wrh.108.2024.03.01.10.49.50
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 01 Mar 2024 10:49:51 -0800 (PST)
-Message-ID: <30138296-d0c8-4664-af34-94be5b84fa7a@linaro.org>
-Date: Fri, 1 Mar 2024 18:49:50 +0000
+ z81-20020a814c54000000b0060851e1095bsm1083179ywa.96.2024.03.01.10.53.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 01 Mar 2024 10:53:31 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
+ Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>, 
+ Francesco Dolcini <francesco@dolcini.it>
+Cc: Francesco Dolcini <francesco.dolcini@toradex.com>, u-boot@lists.denx.de, 
+ Sahaj Sarup <sahaj.sarup@linaro.org>
+In-Reply-To: <20240223091143.9561-1-francesco@dolcini.it>
+References: <20240223091143.9561-1-francesco@dolcini.it>
+Subject: Re: [PATCH v2 0/7] toradex: fix reset and hardware detection
+ regressions
+Message-Id: <170931921063.1228636.17279914845817206379.b4-ty@konsulko.com>
+Date: Fri, 01 Mar 2024 13:53:30 -0500
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/8] Add support for Qualcomm SA8155-ADP board
-Content-Language: en-US
-To: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Elmar Psilog
- <epsi@gmx.de>, Joe Hershberger <joe.hershberger@ni.com>,
- Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Konrad Dybcio <konrad.dybcio@linaro.org>,
- Ley Foon Tan <leyfoon.tan@starfivetech.com>, Lukasz Majewski
- <lukma@denx.de>, Marek Vasut <marex@denx.de>,
- Michal Simek <michal.simek@amd.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Ramon Fried <rfried.dev@gmail.com>, Sean Anderson <seanga2@gmail.com>,
- Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>,
- Yanhong Wang <yanhong.wang@starfivetech.com>
-References: <20240229142043.1263690-1-volodymyr_babchuk@epam.com>
- <dc97490e-4029-41e2-bbbd-b1351f5cf9eb@linaro.org> <87bk7x6c88.fsf@epam.com>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <87bk7x6c88.fsf@epam.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,55 +97,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Fri, 23 Feb 2024 10:11:36 +0100, Francesco Dolcini wrote:
 
+> From: Francesco Dolcini <francesco.dolcini@toradex.com>
+> 
+> This series fixes two regressions affecting multiple Toradex boards
+> (i.MX, TI and TEGRA based) and targets the current master, e.g. v2024.04
+> release.
+> 
+> U-Boot `reset` command is broken on all Tordex i.MX6* based SoMs since
+> v2023.07, this series fixes it enabling the `wdt-reboot` driver.
+> 
+> [...]
 
-On 01/03/2024 18:25, Volodymyr Babchuk wrote:
-> 
-> Hi Caleb,
-> 
-> Caleb Connolly <caleb.connolly@linaro.org> writes:
-> 
->> On 29/02/2024 14:21, Volodymyr Babchuk wrote:
->>>
->>> This patch series adds support for Qualcomm SA8155-ADP development
->>> board. Main motivation for this series is to allow running
->>> virtualization software on this board and U-Boot is a good way to
->>> break Qualcomm's boot chain at EL2 with more convenient ways for
->>> uploading and running the code. With this patches applied it is
->>> possible to upload and run Xen on this board. KVM probably should work
->>> too.
->>
->> This is really cool! I've experimented with this on SDM845 and SM8250
->> but never really did anything with it... I'd love to take a look at your
->> Xen branch?
-> 
-> Honestly, there is nothing to look at right now. I just implemented
-> early printk serial driver for the qcom, made hacks to the device tree
-> and trying to boot Dom0. I already expecting issues with the GPU,
-> because it has own SMMU without virtualization support and Xen already
-> complains about it. So I had to remove it from the DTS for a time being.
-
-Hmm, I see. You'll also definitely start running into issues with the
-DSPs and probably anything else that loads firmware. Qualcomm's
-hypervisor seems to be involved in booting a lot of the peripherals. The
-sc7180 Chromebook support is probably a good reference for how to do
-this in Linux as they also run in EL2.
-> 
-> Anyways, right now my Dom0 does not want to boot due to some issues with
-> UFS. I suspect that some power domain or clock is disabled or some
-> other bit of initialization is missing in the mainline Linux. And
-> reason why bare Linux kernel have no issues with UFS is because
-> aboot/xbl does proper UFS initialization, while in my case I am skipping
-> the android bootloader completely...
-
-Oh that's always fun...
-> 
-> I'll publish my work when I'll get Dom0 running.
-
-For sure, I'd love to try it out!
-
-It's really exciting to know you're working on this :D
-> 
+Applied to u-boot/master, thanks!
 
 -- 
-// Caleb (they/them)
+Tom
+
+
