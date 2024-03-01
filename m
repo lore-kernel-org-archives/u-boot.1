@@ -4,74 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28CABC5475B
-	for <u-boot@archiver.kernel.org>; Fri,  1 Mar 2024 23:31:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BD66C5475B
+	for <u-boot@archiver.kernel.org>; Fri,  1 Mar 2024 23:33:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2FF8C87D7C;
-	Sat,  2 Mar 2024 00:31:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 166DC88151;
+	Sat,  2 Mar 2024 00:33:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UDh/dwDQ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Sd1zuNCY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 112FB87DFA; Sat,  2 Mar 2024 00:31:23 +0100 (CET)
-Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
- [IPv6:2607:f8b0:4864:20::1132])
+ id F2D3188157; Sat,  2 Mar 2024 00:33:37 +0100 (CET)
+Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
+ [IPv6:2607:f8b0:4864:20::1129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EEAD6879FC
- for <u-boot@lists.denx.de>; Sat,  2 Mar 2024 00:31:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C22F4877EC
+ for <u-boot@lists.denx.de>; Sat,  2 Mar 2024 00:33:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-608342633b8so27496367b3.1
- for <u-boot@lists.denx.de>; Fri, 01 Mar 2024 15:31:20 -0800 (PST)
+Received: by mail-yw1-x1129.google.com with SMTP id
+ 00721157ae682-60978e6f9a3so22058227b3.3
+ for <u-boot@lists.denx.de>; Fri, 01 Mar 2024 15:33:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1709335879; x=1709940679; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1709336013; x=1709940813; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=YV81UKNFloTDk1l1n+tHBTT0+k556uITEVdg3LYtFoU=;
- b=UDh/dwDQQJZHH2H2/lS2ddIxKwjqY0nAiEWwz0+jCnW6Fq6itJ8bp4jBA7vGmvtkNw
- kNh95YsDOwEkge9TuNiQiJLBb8S/cNTXTAlEBSahZR8b/wFwvt58H9kYjs2NEZmfJJdQ
- D1p964lIlbZ83bG4gbacBJtJiMOHCRAsUo2nQ=
+ bh=WyKeZZUOTEb0ydzWQ1bHxDvJ0v++N/NRr5hdMn+9X18=;
+ b=Sd1zuNCYlmVJuMgWIyowY3N4NKzaWThi0OjTNQ7yywKhaM/uHx8MfIV+hxN7T8pGP0
+ 6b9yFMZduCNHDqqTqXXd+iJ00qxu8aA2mkDq330JFjXSA0bJp08JQnDMSMcuBRMsmiJy
+ HJccP42+oOapHpbYLX34Ks2jx5nMp1cJUYk/s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709335879; x=1709940679;
+ d=1e100.net; s=20230601; t=1709336013; x=1709940813;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YV81UKNFloTDk1l1n+tHBTT0+k556uITEVdg3LYtFoU=;
- b=M8wUUmr5S46NS8ojT/aRV+c0ZyqdL+jwzhc/spHva9FS0keIAQRyQx9Srw4v1nVFzr
- pzsUDooXjgZbx9CNugPTkK7RQPBktAybZeXCFf8NNxlY+ksKBS1jW7+A8USNZwYyxIpR
- IPCbNiq+FRruLNheJGhrYzb0J8IqiH7FuYrNAdMYUGwpaFcMqwZ258pslQ7k9qmkpAMT
- T0PoPuNl4q6CeBo5bqCRkgz4WGlDB+6JFDjE1DJX4zNInG9n6aoqQFet86Uan+H3zMDh
- hLT+Qhl0aajiYC0P3OHqNKh540GL6mV2cj3cTcKEnhEJfiCNx4ESP+2NwN/l1wqRGucH
- dajg==
-X-Gm-Message-State: AOJu0Yxs7EHfDmHzom3ouRIF0vjljKJKjj0gu5ueYs9e8Kmf9Jo/yviI
- DAHHQ7XDhXSnZU9YALr6eEm9sjZStd79xXr6ym0KJN0ek+rkrCW03gUV9Hs6Apc=
-X-Google-Smtp-Source: AGHT+IGMnahVaJmlXVArXymxC4wK2+VnBJ+TgxdH2yNo2nj4e5UapsyDdtnI5MZde1w7ZDsTfmczOg==
-X-Received: by 2002:a05:690c:fce:b0:608:9758:9256 with SMTP id
- dg14-20020a05690c0fce00b0060897589256mr3575223ywb.36.1709335879599; 
- Fri, 01 Mar 2024 15:31:19 -0800 (PST)
+ bh=WyKeZZUOTEb0ydzWQ1bHxDvJ0v++N/NRr5hdMn+9X18=;
+ b=cEpG/lhTXDkXc0WLTj3fpZWWwtUw3xSs+TSPUXIcm9hnvjZL58p7h5nPZom/3vfJ/M
+ j3t6CYOGH4KtYnJLy8ICEPP34vtTNUhGObMjH2nFXFe/PzHP5g987JqtNMX+CMhAjkFD
+ m2ycWsk7pEXgcaQQzpZv098nYz7wtuB/TcwxGWY8nsMmSLbFSo5rt1qdL+u0jbvbQrXO
+ dSPafQwzLTqi2GNLCvXbUF2VcSIeUsk/uKC2lnZa+gA1krZsmucxSVMnKtvbsuOTCP3B
+ E+JN4IU82V/BTPNmTjpqMvW5Aul7twlkkrBCsPvWBWhKW9af+D+uHveFGc++AQx5TaXD
+ LKWA==
+X-Gm-Message-State: AOJu0YzfxuTTvlYc/XR/r68bplaFssDiWXwu8BPO7qjhYPDFdWsyTicS
+ L5xtr3HWKotyNWVCiXInNS7NL5AeziVtqJ0w62CvEtXWKS3e1gjPe5l1fMAdfaA=
+X-Google-Smtp-Source: AGHT+IFO55SY/RJsdjvCyTX/WXzlU9n/ndwU6KY2uA6f2LsrbrSS59u/snqDClBi9UAZLAW0i/oHYw==
+X-Received: by 2002:a25:c713:0:b0:dcd:3338:a3c5 with SMTP id
+ w19-20020a25c713000000b00dcd3338a3c5mr2910694ybe.33.1709336012939; 
+ Fri, 01 Mar 2024 15:33:32 -0800 (PST)
 Received: from bill-the-cat (065-184-194-195.res.spectrum.com.
  [65.184.194.195]) by smtp.gmail.com with ESMTPSA id
- q63-20020a819942000000b006092cc38381sm1185170ywg.106.2024.03.01.15.31.18
+ x16-20020a056902051000b00dcdb990f93bsm986574ybs.64.2024.03.01.15.33.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 01 Mar 2024 15:31:18 -0800 (PST)
-Date: Fri, 1 Mar 2024 18:31:17 -0500
+ Fri, 01 Mar 2024 15:33:32 -0800 (PST)
+Date: Fri, 1 Mar 2024 18:33:30 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Igor Opaniuk <igor.opaniuk@foundries.io>
-Cc: u-boot@lists.denx.de, Igor Opaniuk <igor.opaniuk@gmail.com>
-Subject: Re: [PATCH v1] cmd: md5sum: use hash_command
-Message-ID: <20240301233117.GA1492435@bill-the-cat>
-References: <20240211185616.1041356-1-igor.opaniuk@foundries.io>
+To: Mayuresh Chitale <mchitale@ventanamicro.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Sean Anderson <seanga2@gmail.com>, Marek Vasut <marex@denx.de>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Xavier Drudis Ferran <xdrudis@tinet.cat>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: Re: [PATCH v3 2/2] spl: Add support for booting from ESP
+Message-ID: <20240301233330.GA1496871@bill-the-cat>
+References: <20240122111022.229805-1-mchitale@ventanamicro.com>
+ <20240122111022.229805-3-mchitale@ventanamicro.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="FppptOFe69AmpBix"
+ protocol="application/pgp-signature"; boundary="XuqrKa5LmQGX0NaU"
 Content-Disposition: inline
-In-Reply-To: <20240211185616.1041356-1-igor.opaniuk@foundries.io>
+In-Reply-To: <20240122111022.229805-3-mchitale@ventanamicro.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,49 +97,68 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---FppptOFe69AmpBix
+--XuqrKa5LmQGX0NaU
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Feb 11, 2024 at 07:56:16PM +0100, Igor Opaniuk wrote:
+On Mon, Jan 22, 2024 at 04:40:22PM +0530, Mayuresh Chitale wrote:
 
-> From: Igor Opaniuk <igor.opaniuk@gmail.com>
+> Some platforms as described by EBBR specification may store images in
+> the FIRMWARE directory of the UEFI system partition(ESP). Add support
+> to boot from the EFI system partition if it is enabled for a platform.
 >=20
-> Drop old implementation and use hash_command() instead, as
-> how it's currently done for crc32 and sha1sum cmds.
->=20
-> Test:
-> =3D> md5sum 0x60000000 0x200
-> md5 for 60000000 ... 600001ff =3D=3D> e6bbbe95f5b41996f4a9b9af7bbd4050
->=20
-> Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
-> ---
->=20
->  cmd/md5sum.c | 149 ++++-----------------------------------------------
->  1 file changed, 9 insertions(+), 140 deletions(-)
+> Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
+> Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+[snip]
+> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+> index cf7ffc9b112..48e4e43196a 100644
+> --- a/common/spl/Kconfig
+> +++ b/common/spl/Kconfig
+> @@ -1292,6 +1292,14 @@ config SPL_SATA_RAW_U_BOOT_SECTOR
+>  	  Sector on the SATA disk to load U-Boot from, when the SATA disk is be=
+ing
+>  	  used in raw mode. Units: SATA disk sectors (1 sector =3D 512 bytes).
+> =20
+> +config SPL_ESP_BOOT
+> +	bool "Load next stage boot image from the UEFI system partition"
+> +	default y if BOOT_DEFAULTS
+> +	select SPL_PARTITION_TYPE_GUID
+> +	help
+> +	  When enabled, first try to boot from the UEFI system partition as
+> +	  described in the Ch.4 of the EBBR specification.
+> +
+>  config SPL_NVME
+>  	bool "NVM Express device support"
+>  	depends on BLK
 
-This breaks building of imx8mm_phg.
+This introduces:
+WARNING: unmet direct dependencies detected for SPL_PARTITION_TYPE_GUID
+  Depends on [n]: SPL_EFI_PARTITION [=3Dn]
+  Selected by [y]:
+  - SPL_ESP_BOOT [=3Dy] && SPL [=3Dy]
+
+On for example coreboot64.
 
 --=20
 Tom
 
---FppptOFe69AmpBix
+--XuqrKa5LmQGX0NaU
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXiZTsACgkQFHw5/5Y0
-tyznRAv/b8pc9dBfVByX1NtiuyT2rfaxzwPXgjn83Lk7i/3iBZaog2zx8wz4Rz90
-rq1PdHe7vNXmWoJZIomTBjVCg0osDeWnI9oA10DkLSYoix/Xn1rLgwIhekSwh2Rz
-oyUiEDRkxAZSANSkRTIOmXYUiuBp7AXOEayQ6ZT35c6zADBIfdUMrfJlGeHcWU3z
-8ZQ/BDj/vpOVXhnnaSIadkjrCm0fhA6v5WWWkYH94nexnc6GI6dc7VqjDsXXy/lj
-mkDNafW2Z6F8VdSPOwF6DjAxfINUUBppz6QY5yl22HNTXZGffDYCS6UrN6l78oyT
-eT8bdc3dOK6Ob75taG5g6IjCN9+mNVepAubaC+qUajliYclcSebLbAQDOynYg8T7
-mltPSYNi4iKuOT5KVjqv9r40jdjfseL00sdvMfKtLewPqS1ZA48HAh9GwThUwGNR
-O/8RPIgdcuX2Y8xRKO7cP9Gz3oKDwNyLZiJDVB2FxDLogHJjziUI45tLMEdwgti0
-FnDrsYoz
-=R9jM
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXiZcoACgkQFHw5/5Y0
+tyyqjgwAgEERUeaEnQlU0/mJ4G5aOubIJFAFtcfCe1YDwPKA+Osg3OQN4Pg4/P2V
+Thi0x2UFEE6Ue7mjk99+7lb7JBpXl363R33RjQu7D0e9sG0y6beMaDDJL2/3bPXN
+/KqoNOf48YF6jsiaWh0g1/A5aw+XRq4+Sn8yamE8q8lS1HDcro0Oz9jYPzhj4gBZ
+1BSmQsK7pM69Q1FICvCOngewrwUVD9nAYr1kR/mmkfMAxuiWAraUCv9OquD+8Y5x
+fgiK2MYNzBelmUhe3STLGpYqFLHa7g6Hu8/Zke81VwMMU4vkyhQ6LBcZEz3u/Q39
+pACNU+GXTfzr/Z3cKxZDoOloPX5vN5VYT6XJuOD/L354GMFU12PCcOifliE936Ue
+Ku2PkNLH3VozgWBhX5y3gXUowvm/A/OMivO3Xq9QXu28z6kzRRo/dySpXUksLkX8
+5Cjh3wD6Q4OE/eCCLQp8A7jfqoLNCZrpW9IIRrvL5YQ+uFvtepVPucSNV0HwHH7N
+z9qOkGHT
+=JLa0
 -----END PGP SIGNATURE-----
 
---FppptOFe69AmpBix--
+--XuqrKa5LmQGX0NaU--
