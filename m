@@ -4,78 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64A18C5478C
-	for <u-boot@archiver.kernel.org>; Fri,  1 Mar 2024 15:07:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 740DFC5475B
+	for <u-boot@archiver.kernel.org>; Fri,  1 Mar 2024 15:10:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE71B87D31;
-	Fri,  1 Mar 2024 16:07:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BC1A287DF6;
+	Fri,  1 Mar 2024 16:10:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GUUkwFkA";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ejWVfi4o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 04C7687D06; Fri,  1 Mar 2024 16:07:18 +0100 (CET)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id 6F1D588153; Fri,  1 Mar 2024 15:54:03 +0100 (CET)
+Received: from mail-ua1-x92d.google.com (mail-ua1-x92d.google.com
+ [IPv6:2607:f8b0:4864:20::92d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB26F87DED
- for <u-boot@lists.denx.de>; Fri,  1 Mar 2024 16:07:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C07FF87CB1
+ for <u-boot@lists.denx.de>; Fri,  1 Mar 2024 15:54:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-412ce4f62d9so737315e9.1
- for <u-boot@lists.denx.de>; Fri, 01 Mar 2024 07:07:14 -0800 (PST)
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-ua1-x92d.google.com with SMTP id
+ a1e0cc1a2514c-7da763255b7so904858241.2
+ for <u-boot@lists.denx.de>; Fri, 01 Mar 2024 06:54:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709305634; x=1709910434; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=UorTf1gyoKpk6eLMIM9vRw1AESuTeaYz0UGhxwG9BDY=;
- b=GUUkwFkAZWO0KXWW2MEawRQCWHpRp9D/XRLmAmeWq/8GtlwqMwO7bzHwQ0wdFT5Pe/
- UYWHhfizOBRGBLCLUi/6CvXabe1N0BvIJpkeAoc91OaZ/qMjiJ2YcSnDzN5qnJJ7RWZp
- QO2mwCd5ccqQs3zSUa88He4K3iBbHk76t4Tp179EZJxq2sPGamqmB2yJNPdV4F60iGUn
- AzvWZPJgl4qlDbGQSZO2q+pG1vkev9vAXEG9u2ql3V3VqROqK2/3iMd/pF7SeTyDfVtJ
- T/AT3pwMzOmjy+UVV6sdGqiwi5qB6UrLwJi/0g8TZrouwOm2iRwObswpwjplcDEMjcxS
- ts4w==
+ d=linaro.org; s=google; t=1709304839; x=1709909639; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=8a6gwz+4kECklsxG9tY4ZGKIuUUT3fCgDi4EGSlyEcc=;
+ b=ejWVfi4ot5k9Vm408fjWFT5MXQM5HNj2kDVUepBcFXPdq+spr507AftxLiuLNVpCbF
+ n5Gp8vd3wrCmvgr/rVaIQ5m+15ybcwH9VeaXNLedp+dd5mY+89KL+xtCpx5IMQAHMspP
+ gdKwhxe5MngoygnTk5ta2Exj/zdX5y48mXR6OySlncfjx31bkywUfSbAYqJvZ1eekVUJ
+ 66yCCoX2RgYFd2Uj6kzQNdyQnAOLbsf5viSxmTrqWN2rR8YjU45wZlXF0nst1IfWgvNh
+ z8CSmYUomLx5Ob9dfulbJWZJaikUZLwTt/bj9gWtYr6Mj0s6DtxUfMVxsfw7wNv9a5xw
+ 9VRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709305634; x=1709910434;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1709304839; x=1709909639;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=UorTf1gyoKpk6eLMIM9vRw1AESuTeaYz0UGhxwG9BDY=;
- b=rtdpycP/EPQPgGrf+8YGY+tqnObYWliKZihlMlTpWja62Lc8F1UFpWhMCc2Em3W27E
- 0D5xvC1YYqmMofZ2Eu3nAp2l+nZ7RGdFJHTm/xvrl3mqvonOQEbdsnum33rXofv9YpYk
- Anntake+ylC9ooD9bWrJfJRq8Hw4R1vOBhpt4/k0y4kZOLMqGFDLLzZz6iUT3EiRS3FQ
- JvRnSiOnMhSYo+NVlLpzcduCy0SwdBl7CHC/oW4dvK2+zhRqQ8xRKKPv+uK892C+P/D5
- ShlrF1zlikN8h7MuSgdxYEtFookxJHNrQVJ6u/QGCgH2Sv9t+fARDsCsDZ/FdJMhI+ZM
- 5Cfw==
-X-Gm-Message-State: AOJu0Yzbns2vAVM92big7HI1K+bK4mTN36RmetEY7YgWOxAm4s8stGQV
- O+vjXYRjrzoJOiO9CCyBrsIvrPdN6qBYEyenbhyziShu0csJOFQBecMNLy3gQcY=
-X-Google-Smtp-Source: AGHT+IFWCOyY48osn2AZ2SDwaFZa0ErNU6Y3VyyArXI0HwHW85vYLZ9C2Q4z877OmflxuyNoOUL26A==
-X-Received: by 2002:a05:600c:1d8d:b0:412:a436:e5d2 with SMTP id
- p13-20020a05600c1d8d00b00412a436e5d2mr1672886wms.9.1709305634100; 
- Fri, 01 Mar 2024 07:07:14 -0800 (PST)
-Received: from lion.caleb.rex.connolly.tech (host-92-17-96-232.as13285.net.
- [92.17.96.232]) by smtp.gmail.com with ESMTPSA id
- z9-20020a05600c114900b00410bca333b7sm8601636wmz.27.2024.03.01.07.07.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 01 Mar 2024 07:07:13 -0800 (PST)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>
-Cc: u-boot@lists.denx.de,
-	Caleb Connolly <caleb.connolly@linaro.org>
-Subject: [PATCH] clk/qcom: apq8016: allow apq8016_clk_init_uart() to be called
- externally
-Date: Fri,  1 Mar 2024 15:00:24 +0000
-Message-ID: <20240301150651.4181574-1-caleb.connolly@linaro.org>
-X-Mailer: git-send-email 2.43.1
+ bh=8a6gwz+4kECklsxG9tY4ZGKIuUUT3fCgDi4EGSlyEcc=;
+ b=Nvwnt5xQ6+TYWmEboWGjTLgbOrJSy67csonVkjuQN5lxH//4x3SWrGIoWNV4FUmubn
+ SPYbzI5QGZb8FYcW27da7lGhORYgM8ZzTm4zmpJhRwOmf128WZidVTMxmoyHZ72U8bbI
+ vzzN6QL5TacstSRbXIo8ufcH1Ayor7G7ehhl0Y2jjlrRVwp5cMboS2F6WS1mmbLbUXWs
+ enXmHIbR8NB+Ou7SP/xMCy/4t0MuwmZgPO9pLA12CsAQ3IhwE0Rtewnrpz+h09AVqjcN
+ Q9va9Ve7d2oH9B56ObZqt/AQZohYxlGn/cSLsiEgLfP4P6MkuvmYbR6x4sL14luQUjbP
+ Pe8Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVGxaEh8xYoFpm5D6IQbNFZcKIFw9QWsnz3rXV31Bc/sO23JFjmImmCB9vH1Qg5eLjEIH3FzEjQXNDF5ZT+UI0bqlO3jg==
+X-Gm-Message-State: AOJu0YyZ+OreU6oeyw/uWFKpQupa+uhVWXVx1vhv07DJt8L+OW0eK/pd
+ VbAk155bwpm0JsMKgzy52UxKqHeClZZZ+FZbDYmWCItlbJTuj4xWqn11lfVzqBTrDYMXxd3Ppw4
+ grlAg55g+ZyAi1W1vK/Y0t8/7J17ahF/7w+IUvw==
+X-Google-Smtp-Source: AGHT+IF9KjM5YPdbhw8JwwBKAju62yFFF+HvTtJ+ArTAhyqnA9ei87OXd9thQUazPbonvMBSlpwniskBzu7Bj+m68vk=
+X-Received: by 2002:a05:6102:2758:b0:472:69ab:f7bf with SMTP id
+ p24-20020a056102275800b0047269abf7bfmr1390880vsu.9.1709304839441; Fri, 01 Mar
+ 2024 06:53:59 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240222093607.3085545-1-sumit.garg@linaro.org>
+ <170929783825.70492.4756963077870833230.b4-ty@konsulko.com>
+ <CAFA6WYMBMQH10cHnsfmC5efkkohfzftz=6u0N4RMXrVrByZzOw@mail.gmail.com>
+ <0ef45d67-1428-4d8a-b157-2ee65a3c9948@linaro.org>
+In-Reply-To: <0ef45d67-1428-4d8a-b157-2ee65a3c9948@linaro.org>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Fri, 1 Mar 2024 20:23:48 +0530
+Message-ID: <CAFA6WYOb3B6unesNLMJrqQihJK7ydwUkJPO3Aa6kn0+SC6T2oA@mail.gmail.com>
+Subject: Re: [PATCH v6 00/11] An effort to bring DT bindings compliance within
+ U-Boot
+To: neil.armstrong@linaro.org
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ u-boot-amlogic@groups.io, 
+ u-boot-custodians@lists.denx.de, sjg@chromium.org, robh+dt@kernel.org, 
+ krzysztof.kozlowski+dt@linaro.org, conor@kernel.org, 
+ caleb.connolly@linaro.org, ff@shokubai.tech, daniel.thompson@linaro.org, 
+ dgilmore@fedoraproject.org, pbrobinson@gmail.com, ilias.apalodimas@linaro.org, 
+ b.galvani@gmail.com, xypron.glpk@gmx.de, michal.simek@amd.com, 
+ seanga2@gmail.com, rasmus.villemoes@prevas.dk, peng.fan@nxp.com, 
+ jh80.chung@samsung.com, rfried.dev@gmail.com, marex@denx.de, 
+ mibodhi@gmail.com, bb@ti.com, mark.kettenis@xs4all.nl, festevam@gmail.com, 
+ nm@ti.com, andre.przywara@arm.com, ijc@hellion.org.uk, 
+ paul.barker.ct@bp.renesas.com
+Content-Type: text/plain; charset="UTF-8"
+X-Mailman-Approved-At: Fri, 01 Mar 2024 16:10:34 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,71 +103,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When U-Boot as running as the first stage bootloader on MSM8916 devices,
-early debug UART requires turning on the clocks (for some reason the
-pre-loader turns them off?!).
+On Fri, 1 Mar 2024 at 19:18, <neil.armstrong@linaro.org> wrote:
+>
+> On 01/03/2024 14:30, Sumit Garg wrote:
+> > On Fri, 1 Mar 2024 at 18:27, Tom Rini <trini@konsulko.com> wrote:
+> >>
+> >> On Thu, 22 Feb 2024 15:05:56 +0530, Sumit Garg wrote:
+> >>
+> >>> Changes in v6:
+> >>> --------------
+> >>> - v6_dt: https://github.com/b49020/u-boot/tree/v6_dt
+> >>> - Patch #3: Incorporate fix for sandbox CI failure.
+> >>> - Patch #6: Incorporate shell script comments from Marek.
+> >>> - Patch #8: Incorporate documentation review comments from Paul.
+> >>>
+> >>> [...]
+> >>
+> >> Applied to u-boot/next, thanks!
+> >>
+> >
+> > Thanks Tom and everyone involved with the reviews. I hope we can carry
+> > forward from this effort towards a healthy devicetree story for
+> > U-Boot.
+>
+> Thanks Sumit!
+>
+> I'll try to submit patches for Amlogic GXL & G12A to switch to this!
+>
 
-To simplify developing for this platform, allow the
-apq8016_clk_init_uart() function to be called externally. Developers can
-call this from the serial_msm debug uart driver to configure the clocks
-before the driver model is available.
+Thanks Neil for your support to be the first volunteer for this
+OF_UPSTREAM switch.
 
-As it is only possible to enable early debug UART in custom builds of
-U-Boot, this solution at least gives developers the option.
+-Sumit
 
-Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
----
-This patch was meant to be in v5 of my Qualcomm generic board support series[1],
-but got lost somewhere in the mix.
-
-[1]: https://lore.kernel.org/u-boot/CAFA6WYNXE3x8sKRB8BBpODCfXbZeeVpKPu0-qt7ezsY-R7unQQ@mail.gmail.com/
----
- drivers/clk/qcom/clock-apq8016.c | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
-
-diff --git a/drivers/clk/qcom/clock-apq8016.c b/drivers/clk/qcom/clock-apq8016.c
-index 9de0ad5ed32d..e6647f7c41dd 100644
---- a/drivers/clk/qcom/clock-apq8016.c
-+++ b/drivers/clk/qcom/clock-apq8016.c
-@@ -102,22 +102,22 @@ static const struct bcr_regs uart2_regs = {
- 	.D = BLSP1_UART2_APPS_D,
- };
- 
- /* UART: 115200 */
--static int clk_init_uart(struct msm_clk_priv *priv)
-+int apq8016_clk_init_uart(phys_addr_t base)
- {
- 	/* Enable AHB clock */
--	clk_enable_vote_clk(priv->base, &gcc_blsp1_ahb_clk);
-+	clk_enable_vote_clk(base, &gcc_blsp1_ahb_clk);
- 
- 	/* 7372800 uart block clock @ GPLL0 */
--	clk_rcg_set_rate_mnd(priv->base, &uart2_regs, 1, 144, 15625,
-+	clk_rcg_set_rate_mnd(base, &uart2_regs, 1, 144, 15625,
- 			     CFG_CLK_SRC_GPLL0, 16);
- 
- 	/* Vote for gpll0 clock */
--	clk_enable_gpll0(priv->base, &gpll0_vote_clk);
-+	clk_enable_gpll0(base, &gpll0_vote_clk);
- 
- 	/* Enable core clk */
--	clk_enable_cbc(priv->base + BLSP1_UART2_APPS_CBCR);
-+	clk_enable_cbc(base + BLSP1_UART2_APPS_CBCR);
- 
- 	return 0;
- }
- 
-@@ -132,9 +132,9 @@ static ulong apq8016_clk_set_rate(struct clk *clk, ulong rate)
- 	case GCC_SDCC2_APPS_CLK: /* SDC2 */
- 		return clk_init_sdc(priv, 1, rate);
- 		break;
- 	case GCC_BLSP1_UART2_APPS_CLK: /* UART2 */
--		return clk_init_uart(priv);
-+		return apq8016_clk_init_uart(priv->base);
- 		break;
- 	default:
- 		return 0;
- 	}
--- 
-2.43.1
-
+> Neil
+>
+> >
+> > -Sumit
+> >
+> >> --
+> >> Tom
+> >>
+> >>
+>
