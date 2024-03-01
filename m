@@ -4,168 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AE5AC5478C
-	for <u-boot@archiver.kernel.org>; Fri,  1 Mar 2024 08:14:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CAEEC5478C
+	for <u-boot@archiver.kernel.org>; Fri,  1 Mar 2024 08:50:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E96887776;
-	Fri,  1 Mar 2024 09:14:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
+	by phobos.denx.de (Postfix) with ESMTP id DB11C8786C;
+	Fri,  1 Mar 2024 09:50:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="chdevLO4";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Xn3hYoBt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A22338332E; Fri,  1 Mar 2024 09:14:19 +0100 (CET)
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.15])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id AFCDA88125; Fri,  1 Mar 2024 09:50:41 +0100 (CET)
+Received: from mail-m11876.qiye.163.com (mail-m11876.qiye.163.com
+ [115.236.118.76])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46D1E8723E
- for <u-boot@lists.denx.de>; Fri,  1 Mar 2024 09:14:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DE0FC8785E
+ for <u-boot@lists.denx.de>; Fri,  1 Mar 2024 09:50:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tien.fong.chee@intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1709280858; x=1740816858;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-transfer-encoding:mime-version;
- bh=1BUEpENFWpLpiafgt+nshG8WDx31pBIDPlVe6OR6rec=;
- b=chdevLO4NYdwcnDH/Jt/wIEu4JBHeJP7rORmFm+Er4nQ7NYh8bpU+ejm
- DEObD+ZjsJENie0w1UsMyKM6PWOdk9pT8Hj/izIYEgN8mh4VUKJD9BoPU
- 8s0aOAsVAnMs++a+GzNwBB448k1BX1IzEFhJXAJYlR9NVNkYdsDqJ3ty5
- hqRQ2BKVWUFpRIMRYLiEC1Kcx6JtdGhBeVnE2qdi923B4lUtbArtryaYI
- +ktRJ+Ttl8k0FHuE38i87LEBedgIGLA2lKDHFN0aCsi7vaAFcWihHzfHt
- lmePEJ7w6DmKsQ1DyFFmMh8zaNW/N0QwXeuqXhL1KiJiuspaWfVhGGo5f g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10999"; a="7628165"
-X-IronPort-AV: E=Sophos;i="6.06,195,1705392000"; 
-   d="scan'208";a="7628165"
-Received: from orviesa007.jf.intel.com ([10.64.159.147])
- by orvoesa107.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 01 Mar 2024 00:14:16 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.06,195,1705392000"; 
-   d="scan'208";a="8527639"
-Received: from orsmsx603.amr.corp.intel.com ([10.22.229.16])
- by orviesa007.jf.intel.com with ESMTP/TLS/AES256-GCM-SHA384;
- 01 Mar 2024 00:14:15 -0800
-Received: from orsmsx612.amr.corp.intel.com (10.22.229.25) by
- ORSMSX603.amr.corp.intel.com (10.22.229.16) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35; Fri, 1 Mar 2024 00:14:15 -0800
-Received: from orsmsx603.amr.corp.intel.com (10.22.229.16) by
- ORSMSX612.amr.corp.intel.com (10.22.229.25) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35; Fri, 1 Mar 2024 00:14:14 -0800
-Received: from ORSEDG601.ED.cps.intel.com (10.7.248.6) by
- orsmsx603.amr.corp.intel.com (10.22.229.16) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35 via Frontend Transport; Fri, 1 Mar 2024 00:14:14 -0800
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com (104.47.58.168)
- by edgegateway.intel.com (134.134.137.102) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.1.2507.35; Fri, 1 Mar 2024 00:14:14 -0800
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=CMsD8de0CmJuaGvrvD9ol1HWRn6aKdSnNO46UMj74azxuvuhPSjdK56uuu6ZoE/OIJlkeAOBjBQJpA/s7kX+1ERAto8s8BPeErRiP8TgSNM2qAnl1aJ4De1tDPiCey3rT6Blpm/YxB5pyQsq6KGZbB/NyAtT8ILNY/Dil7zYnWYhCSkjdNLznVvCxvJqop8nzulhl76Vd78+c6JwzLAjDjablUpF0lc5LYxgy5bPE3MzzaXF1RYjFCK0UM4RlwL9bH22q9JhltmCGKZYBmhlUmzDRQzZ7nz9ioGj9S0HNl/z/strMk6akq6BBsOtUdZYIL2HTWNktPeMKXqK4BvMaw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1BUEpENFWpLpiafgt+nshG8WDx31pBIDPlVe6OR6rec=;
- b=GVMdg89HjXldVU/uxRSDqtG+beUXGAcG/pauC2jsKXbHPzZ0aVhw1R1XqzZVaxjx4uVSO3xrMYsfETYs5Jfw0jtvQL+pyXq32HG8ycIwPSZlaVfBjsEYa0wdr7PpHdW8nJ0jieRChlI7baJMh1X9YNhfmLaB1lX0hgbAjmBShg+d6qnHNtvMcT1wCaXkv3gixLiudXHA7VdHh8tmPnaydGK/RtOlbuBy9su4NftFOVBE0QJ6gQBD9idMwoKP6X29TmyDgPwajBgvsQ/uML5TTd/v1djjLpIv5CxFJfDVHPUisQpJR3N7rCIsXLO+CeOjjc1HmKY6yKBKjCkPc3aCDA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
-Received: from DM8PR11MB5592.namprd11.prod.outlook.com (2603:10b6:8:35::6) by
- DM4PR11MB5246.namprd11.prod.outlook.com (2603:10b6:5:389::11) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7339.25; Fri, 1 Mar 2024 08:14:12 +0000
-Received: from DM8PR11MB5592.namprd11.prod.outlook.com
- ([fe80::d4e:e166:9da2:571]) by DM8PR11MB5592.namprd11.prod.outlook.com
- ([fe80::d4e:e166:9da2:571%4]) with mapi id 15.20.7339.026; Fri, 1 Mar 2024
- 08:14:12 +0000
-From: "Chee, Tien Fong" <tien.fong.chee@intel.com>
-To: =?utf-8?B?TWljaGHFgiBCYXJuYcWb?= <barnas@google.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: Dinh Nguyen <dinguyen@kernel.org>, Marek Vasut <marex@denx.de>, "Simon
- Glass" <sjg@chromium.org>, Simon Goldschmidt
- <simon.k.r.goldschmidt@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: RE: [PATCH 1/2] arm: socfpga: arria10: add option to reprogram the
- FPGA every reboot
-Thread-Topic: [PATCH 1/2] arm: socfpga: arria10: add option to reprogram the
- FPGA every reboot
-Thread-Index: AQHaZaLV1vcd0JS5S0u/f6Fr1S5VLLEilWdw
-Date: Fri, 1 Mar 2024 08:14:12 +0000
-Message-ID: <DM8PR11MB55922996298353279B537436D25E2@DM8PR11MB5592.namprd11.prod.outlook.com>
-References: <20240222152102.1677445-1-barnas@google.com>
- <20240222152102.1677445-2-barnas@google.com>
-In-Reply-To: <20240222152102.1677445-2-barnas@google.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=intel.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: DM8PR11MB5592:EE_|DM4PR11MB5246:EE_
-x-ms-office365-filtering-correlation-id: c3ec274e-2cde-4887-d870-08dc39c793f4
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 49iVSnCODpydgSCfh+HgahLYu/gB67QbZU1D7s15jDZD6iqW56hAE5XJTq/bAi2t8+fKC8AgJi7dYek5Lo/pyJflZJ5MMc+gNxIszKTcJVGUQb2mPyn4+jRG70YPHfzA0rDe//5XZxMSfX1YwgWDkocEQqneF7esj3rOLMGB4bDQC2uLpmD23p+bPSL4D8Wk7+yj8jd8xgFEAeI7rlaAGperWVbWoTaUFuN43tdryqJo43HIlXgXnSWcQPcrAVKkKXm3kZoSM4R1AB7eoM/dpq74NB2/uB4D6tmaX+IVzGXUzKMfDVsAj8ArFbe2tAg0jPFZA2SoUad93LJJ53gEr/JfE2gGDh5QdmHYM71+CgUCkNPxFnJU5Fz94x9D5sd1MK5NUfZi5BYWR7rCa1Rv/K9z03dPdDT2eWx4kXQSeQIZAkUHwu2uYYJllF1U8JrQqJnkRVlYH8n/kjihBjTUTIlSVSvMgEPPFI37IZot4w72e4eqzwhNQ3QV50GcTNC5/V+GjG1CMNcq71YW2VpNPfA9AoquouEUbN+ifhM4z+/2tVhBqggp5bAZhczTMV6L+0i2WC1sdbipBx+mF2254RmZF8cbZREVTq8ZOHDVMYpDYcfvX78v72e2ykKfpnLWgZCQ3Bt0351kgpcukbsH9+y4gaQjX4xDqstDz11jNMKpaoutNmHIzJxuZw9ivlZVc2mauQa0+JH1RIzppvgm2Xg296s17jIBDiUHL+0zzDw=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DM8PR11MB5592.namprd11.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(38070700009); DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?RDdJYkpUd1NKK1NubW1wdW9JNTNJVms3NEt0OThkNFRYM2oya1AwenZRS2Zh?=
- =?utf-8?B?SmlMUUZyd2N1bVJrRTdkbHpnS24yQzBiZHE1bUlIMnQxN3pkbFl2V29SWDVz?=
- =?utf-8?B?TXJjTTdyUkVVV2tOYlRPSlBpS3puQ3kyYnhsQUxHaXFtYUlqNnM5cVNobHhk?=
- =?utf-8?B?TEZ3SUo1Q0xXSlB4REFzOFNodmR2YVV5WkZ1RHBhS1o1YVEvTWlJQW9XSXZl?=
- =?utf-8?B?K2JvUW9ad1BaT1FpeEJsRE91MkVWOW52S3ZvLzZRVHk3TzZJWjY3RVN0VDNm?=
- =?utf-8?B?WldLOFFsZnRTNUtpV2dGTkpBc2FQWlNwQ0lOUVBpMnJUaVdGdnArODlHblVv?=
- =?utf-8?B?OHROWkRPeWh4OGVpUVlON0NPcXB4UHB0U29pQ21YUURMZENpczJ2UTRVekMy?=
- =?utf-8?B?amhXbzBhMjl4bHU4WnFxTGtYUGdFdzNVYUhYbmhDb3FBUUxoKzVWS2F5REV1?=
- =?utf-8?B?N0NOeVBnSjJxL05EZWJMSTNXM2Fpb01YczAxTzVCWmF1Z1lsZzhBVUdSSUdt?=
- =?utf-8?B?amJSVStuMGhvQWdmblppSit5NzFnOEpicDVlTE9yWVdRZE15ekFTUVRqeXRw?=
- =?utf-8?B?V0lLcVlEVW5hTXAydFJBT3dSSW9pS21TMjE0VmFaYzVRS3VGMkdpZS9mZWtK?=
- =?utf-8?B?S1NtVWJZOTFPc2pFUWFTOVpGY1JJYncwamtheDlHZWpyWGtBWVB5aDFBQ1p5?=
- =?utf-8?B?YTQ5TTFwTFVCcDR3OWN5d2J0NlFLRDlWYitJUm5wS2ErMEV2WXAyQUFTSjhK?=
- =?utf-8?B?dlM2M1paZkIvZUxtWkRzZUZlbUhGU0NtbE4vUnViVnBsUmZrc3d0ZVM2a2dr?=
- =?utf-8?B?dnplakVzaG9oVllvaXRLRXJoN2JiTnFCdzVyYk85WVZ4dlkxMGhubUw2RllK?=
- =?utf-8?B?SHYyaHdDTUxQODRLaFdPN0RjZWVDVXUvRXFjTGV1d0J4bWIwbjk0NXdRczVa?=
- =?utf-8?B?U3VKOWtaM2p5KytvMmVwOWN6UnFHQllnb1g1VVFjQjFyRVhzYVl2amdheDlh?=
- =?utf-8?B?U3c0NExjSUpicXJ0OGV0aVlaVG1OcUFZQWpXdUVvejkxeFpYV1BBR3ZlREhQ?=
- =?utf-8?B?aS92dmp1S3FMK0VCbGprT1VZWlpCaXdvems3YVZxZ3dzVExLcGdmZ2t5SUhO?=
- =?utf-8?B?NS9WOE1NSHNuZU5EOXppSnNHOW5oOUxKTXBQVkU5WldFZDJlY04wVzlZb2FE?=
- =?utf-8?B?YlRlVVVFckZ3eGRRaXN6RDJaU1VNU0NudEs2TGpISUMza2tSSnhROUhYZW1a?=
- =?utf-8?B?cnUvd0hWNmVDQ1d4enVqdlVvTEI1a2VlU1RFMkZJbkJRWGpqeC9pMmhyUkYr?=
- =?utf-8?B?OFkyaDhBdm5CTDkzL3Y3WHZtNjFyYVF2T0JFbEhUYmlQZHEycjZrN3F5amRv?=
- =?utf-8?B?Yi9RQVhmMFZtdjUybnE0U3lJMzlNYy81RG5jNkxmUlFYUlRhTlI3Ti9xV3B2?=
- =?utf-8?B?UFJMTzFUVnloek9RMzhCTm45MmxTTUxsRGgrZlFiRTN3SVZZaXRrOWZLYVZR?=
- =?utf-8?B?RXIyV3RweFhOdFVEMUoxclZscytYSHZWUnFvOURvNUVOQnp0SmxxclF3cERr?=
- =?utf-8?B?bWhsWFBRRG40cWh2NHU3VWUydFc4dDdraGNFeUlqWXcwUU0reStRck5xNUgz?=
- =?utf-8?B?VjBVNVpOM1EvcGFDRWRwTFVpaXNsenRFeDVGRkJtRVZMaWJiemV1WExIQ282?=
- =?utf-8?B?OFhDUXk3cTdoTlFBdUxLSEIzVlBoY3E1TzQvQ0tEbERhdEdvYWJUNStYQTNT?=
- =?utf-8?B?aWg1aGpnelBSY21kRndZd3FKOEVEcTd4ZXNLemhxY09jRU14NnBnNUFXckh2?=
- =?utf-8?B?UURvdDBpSm04YjgvVzJzZEdBUkVnNUxkSVEyTWpLZmR6TURYSzFJZC8xeUdo?=
- =?utf-8?B?Z1JlT3FvNjNWV3RpQkpST01GYS9NaHBKdXZBdGhSQ2ZPMDErdDJiNGMzb0dt?=
- =?utf-8?B?Zm1VdzRVYXpYb1pISE00VEtDQnF0ZjF1akhURTBCMngzSUFicHVyVWVCMXN5?=
- =?utf-8?B?YTR0Y2hDSkVaUndNOTZFd2s4eWNLeE1XZmsydElpVzlqMnlQTkJzZDRmR1Zw?=
- =?utf-8?B?MTNLQ2hxNHBKWHE0T2tMTkxIa2xaY0xib1ordkNYWVZuK2ZYUXRVZS84a2xT?=
- =?utf-8?Q?utLHl3XOa6smIDwPvbhH2oYW/?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ spf=pass smtp.mailfrom=zhangzj@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=Xn3hYoBtm35v9KrIaB9PKvP/Nn/Sj3aziWu2StH4eL0XK6OC9RC8dMGmHNKL34mYRt9ez6GGociBhAeobbEDPyBc2H3hAgkfC48oahVXyp3VGTf9fhpRqOnpmgda5So1Nj4dB+VD2+HsQ+kDoUDgFFcAxGfB7L+jRFeRO87pYxc=;
+ s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
+ bh=nyUjawaZq2j1pBntta3smSZWpbErzF/8ILYmQrtO8+k=;
+ h=date:mime-version:subject:message-id:from;
+Received: from zhangzj-rk.. (unknown [58.22.7.114])
+ by smtp.qiye.163.com (Hmail) with ESMTPA id B188F2A0330;
+ Fri,  1 Mar 2024 16:50:25 +0800 (CST)
+From: Elon Zhang <zhangzj@rock-chips.com>
+To: sjg@chromium.org,
+	philipp.tomsich@vrull.eu,
+	kever.yang@rock-chips.com
+Cc: weizhao.ouyang@arm.com, trini@konsulko.com, u-boot@lists.denx.de,
+ Elon Zhang <zhangzj@rock-chips.com>
+Subject: [PATCH v2] board: rockchip: add Rockchip Toybrick TB-RK3588X board
+Date: Fri,  1 Mar 2024 16:50:04 +0800
+Message-Id: <20240301085004.1005425-1-zhangzj@rock-chips.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DM8PR11MB5592.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c3ec274e-2cde-4887-d870-08dc39c793f4
-X-MS-Exchange-CrossTenant-originalarrivaltime: 01 Mar 2024 08:14:12.3154 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: I3bSrWBjgi3QmIC9Sl0Lm8xGsVOo3eSyBRJdc/joWzodl465Ht1ccQ+bQFUsPhiiFMGDQGl31HJY+LvsRxjZRiVKV+2a5sV/Oo9M5hU1Vuo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR11MB5246
-X-OriginatorOrg: intel.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQkkYH1YYQ09DH0kaSxoYSk5VEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSUxOVUpLS1VKQk
+ tLWQY+
+X-HM-Tid: 0a8df935249803aakunmb188f2a0330
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MiI6Hxw*CDMUKQJCTUsNFiot
+ GhcKFDFVSlVKTEtCSUNIS0lNQk9CVTMWGhIXVQETGhUcARE7CRQYEFYYExILCFUYFBZFWVdZEgtZ
+ QVlOQ1VJSVVMVUpKT1lXWQgBWUFJTEhOSDcG
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -182,52 +72,1006 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-DQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogTWljaGHFgiBCYXJuYcWb
-IDxiYXJuYXNAZ29vZ2xlLmNvbT4NCj4gU2VudDogVGh1cnNkYXksIEZlYnJ1YXJ5IDIyLCAyMDI0
-IDExOjIxIFBNDQo+IFRvOiB1LWJvb3RAbGlzdHMuZGVueC5kZQ0KPiBDYzogTWljaGHFgiBCYXJu
-YcWbIDxiYXJuYXNAZ29vZ2xlLmNvbT47IERpbmggTmd1eWVuDQo+IDxkaW5ndXllbkBrZXJuZWwu
-b3JnPjsgTWFyZWsgVmFzdXQgPG1hcmV4QGRlbnguZGU+OyBTaW1vbiBHbGFzcw0KPiA8c2pnQGNo
-cm9taXVtLm9yZz47IFNpbW9uIEdvbGRzY2htaWR0DQo+IDxzaW1vbi5rLnIuZ29sZHNjaG1pZHRA
-Z21haWwuY29tPjsgQ2hlZSwgVGllbiBGb25nDQo+IDx0aWVuLmZvbmcuY2hlZUBpbnRlbC5jb20+
-OyBUb20gUmluaSA8dHJpbmlAa29uc3Vsa28uY29tPg0KPiBTdWJqZWN0OiBbUEFUQ0ggMS8yXSBh
-cm06IHNvY2ZwZ2E6IGFycmlhMTA6IGFkZCBvcHRpb24gdG8gcmVwcm9ncmFtIHRoZQ0KPiBGUEdB
-IGV2ZXJ5IHJlYm9vdA0KPiANCj4gQWRkIEtjb25maWcgdGhhdCBlbmFibGVzIEZQR0EgcmVwcm9n
-cmFtbWluZyB3aXRoIHdhcm0gYm9vdCBvbiBBcnJpYSAxMC4NCj4gVGhpcyBvcHRpb24gYWxsb3dz
-IHRvIGNoYW5nZSB0aGUgYml0c3RyZWFtIG9uIHRoZSBmaWxlc3lzdGVtIGFuZCBhcHBseQ0KPiBj
-aGFuZ2VzIHdpdGggd2FybSByZWJvb3Qgd2l0aG91dCB0aGUgbmVlZCBmb3IgYSBwb3dlciBjeWNs
-ZS4NCj4gDQo+IFNpZ25lZC1vZmYtYnk6IE1pY2hhxYIgQmFybmHFmyA8YmFybmFzQGdvb2dsZS5j
-b20+DQo+IC0tLQ0KPiANCj4gIGFyY2gvYXJtL21hY2gtc29jZnBnYS9LY29uZmlnICAgfCA4ICsr
-KysrKysrDQo+ICBhcmNoL2FybS9tYWNoLXNvY2ZwZ2Evc3BsX2ExMC5jIHwgOCArKysrKysrKw0K
-PiAgMiBmaWxlcyBjaGFuZ2VkLCAxNiBpbnNlcnRpb25zKCspDQo+IA0KPiBkaWZmIC0tZ2l0IGEv
-YXJjaC9hcm0vbWFjaC1zb2NmcGdhL0tjb25maWcgYi9hcmNoL2FybS9tYWNoLQ0KPiBzb2NmcGdh
-L0tjb25maWcgaW5kZXggMTE0ZDI0MzgxMi4uODkzMDNmMWYxNiAxMDA2NDQNCj4gLS0tIGEvYXJj
-aC9hcm0vbWFjaC1zb2NmcGdhL0tjb25maWcNCj4gKysrIGIvYXJjaC9hcm0vbWFjaC1zb2NmcGdh
-L0tjb25maWcNCj4gQEAgLTgwLDYgKzgwLDE0IEBAIGNvbmZpZyBUQVJHRVRfU09DRlBHQV9BUlJJ
-QTEwDQo+ICAJaW1wbHkgRlBHQV9TT0NGUEdBDQo+ICAJaW1wbHkgU1BMX1VTRV9USU5ZX1BSSU5U
-Rg0KPiANCj4gK2NvbmZpZyBUQVJHRVRfU09DRlBHQV9BUlJJQTEwX0FMV0FZU19SRVBST0dSQU0N
-Cj4gKwlib29sICJBbHdheXMgcmVwcm9ncmFtIEFycmlhIDEwIEZQR0EiDQo+ICsJZGVwZW5kcyBv
-biBUQVJHRVRfU09DRlBHQV9BUlJJQTEwDQo+ICsJaGVscA0KPiArCSAgQXJyaWEgMTAgRlBHQSBp
-cyBvbmx5IHByb2dyYW1tZWQgZHVyaW5nIHRoZSBjb2xkIGJvb3QuDQo+ICsJICBUaGlzIG9wdGlv
-biBmb3JjZXMgdGhlIEZQR0EgdG8gYmUgcmVwcm9ncmFtbWVkIGV2ZXJ5IHJlYm9vdCwNCj4gKwkg
-IGFsbG93aW5nIHRvIGNoYW5nZSB0aGUgYml0c3RyZWFtIGFuZCBhcHBseSBpdCB3aXRoIHdhcm0g
-cmVib290Lg0KPiArDQo+ICBjb25maWcgVEFSR0VUX1NPQ0ZQR0FfQ1lDTE9ORTUNCj4gIAlib29s
-DQo+ICAJc2VsZWN0IFRBUkdFVF9TT0NGUEdBX0dFTjUNCj4gZGlmZiAtLWdpdCBhL2FyY2gvYXJt
-L21hY2gtc29jZnBnYS9zcGxfYTEwLmMgYi9hcmNoL2FybS9tYWNoLQ0KPiBzb2NmcGdhL3NwbF9h
-MTAuYyBpbmRleCA5ZWRiYmY0YTI5Li5kNWQzMzI3YTQyIDEwMDY0NA0KPiAtLS0gYS9hcmNoL2Fy
-bS9tYWNoLXNvY2ZwZ2Evc3BsX2ExMC5jDQo+ICsrKyBiL2FyY2gvYXJtL21hY2gtc29jZnBnYS9z
-cGxfYTEwLmMNCj4gQEAgLTEyMiw3ICsxMjIsMTEgQEAgdm9pZCBzcGxfYm9hcmRfaW5pdCh2b2lk
-KQ0KPiAgCWFyY2hfZWFybHlfaW5pdF9yKCk7DQo+IA0KPiAgCS8qIElmIHRoZSBmdWxsIEZQR0Eg
-aXMgYWxyZWFkeSBsb2FkZWQsIGllLmZyb20gRVBDUSwgY29uZmlnIGZwZ2EgcGlucyAqLw0KPiAr
-I2lmZGVmIENPTkZJR19UQVJHRVRfU09DRlBHQV9BUlJJQTEwX0FMV0FZU19SRVBST0dSQU0NCj4g
-KwlpZiAoaXNfcmVndWxhcl9ib290X3ZhbGlkKCkpIHsNCj4gKyNlbHNlDQo+ICAJaWYgKGlzX2Zw
-Z2FtZ3JfdXNlcl9tb2RlKCkpIHsNCj4gKyNlbmRpZg0KPiAgCQlyZXQgPSBjb25maWdfcGlucyhn
-ZC0+ZmR0X2Jsb2IsICJzaGFyZWQiKTsNCj4gIAkJaWYgKHJldCkNCj4gIAkJCXJldHVybjsNCj4g
-QEAgLTEzMCw3ICsxMzQsMTEgQEAgdm9pZCBzcGxfYm9hcmRfaW5pdCh2b2lkKQ0KPiAgCQlyZXQg
-PSBjb25maWdfcGlucyhnZC0+ZmR0X2Jsb2IsICJmcGdhIik7DQo+ICAJCWlmIChyZXQpDQo+ICAJ
-CQlyZXR1cm47DQo+ICsjaWZkZWYgQ09ORklHX1RBUkdFVF9TT0NGUEdBX0FSUklBMTBfQUxXQVlT
-X1JFUFJPR1JBTQ0KPiArCX0gZWxzZSB7DQo+ICsjZWxzZQ0KPiAgCX0gZWxzZSBpZiAoIWlzX2Zw
-Z2FtZ3JfZWFybHlfdXNlcl9tb2RlKCkpIHsNCj4gKyNlbmRpZg0KPiAgCQkvKiBQcm9ncmFtIElP
-U1NNKGVhcmx5IElPIHJlbGVhc2UpIG9yIGZ1bGwgRlBHQSAqLw0KPiAgCQlmcGdhbWdyX3Byb2dy
-YW0oYnVmLCBGUEdBX0JVRlNJWiwgMCk7DQo+IA0KPiAtLQ0KPiAyLjQ0LjAucmMxLjI0MC5nNGM0
-NjIzMjMwMC1nb29nDQoNClJldmlld2VkLWJ5OiBUaWVuIEZvbmcgQ2hlZSA8dGllbi5mb25nLmNo
-ZWVAaW50ZWwuY29tPg0KDQpSZWdhcmRzDQpUaWVuIEZvbmcNCg==
+TB-RK3588X board is a Rockchip Toybrick RK3588 based development board.
+
+Specification:
+	Rockchip Rk3588 SoC
+	4x ARM Cortex-A76, 4x ARM Cortex-A55
+	8/16GB Memory LPDDR4x
+	Mali G610MC4 GPU
+	2× MIPI-CSI0 Connector
+	1x 2Lanes PCIe3.0 Connector
+	1x SATA3.0 Connector
+	32GB eMMC Module
+	2x USB 2.0, 2x USB 3.0
+	1x HDMI Output, 1x HDMI Input
+	2x Ethernet Port
+
+Functions work normally:
+	[1] USB2.0 Host
+	[2] Ethernet0 with PHY RTL8211F
+
+More information can be obtained from the following websites:
+	[1] https://t.rock-chips.com/en/wiki/EN/tb-rk3588x_en/index.html
+	[2] http://t.rock-chips.com/
+
+Kernel commits:
+	8ffe365f8dc7 ("arm64: dts: rockchip: Add devicetree support for TB-RK3588X board")
+	7140387ff49d ("dt-bindings: arm: rockchip: Add Toybrick TB-RK3588X")
+
+Signed-off-by: Elon Zhang <zhangzj@rock-chips.com>
+---
+Changes since v1:
+  - Remove BOARD_SPECIFIC_OPTIONS in board Kconfig
+---
+ arch/arm/dts/rk3588-toybrick-x0-u-boot.dtsi   |  12 +
+ arch/arm/dts/rk3588-toybrick-x0.dts           | 672 ++++++++++++++++++
+ arch/arm/mach-rockchip/rk3588/Kconfig         |  25 +
+ board/rockchip/toybrick_rk3588/Kconfig        |  12 +
+ board/rockchip/toybrick_rk3588/MAINTAINERS    |   8 +
+ board/rockchip/toybrick_rk3588/Makefile       |   6 +
+ .../toybrick_rk3588/toybrick-rk3588.c         |  39 +
+ configs/toybrick-rk3588_defconfig             |  82 +++
+ doc/board/rockchip/rockchip.rst               |   1 +
+ include/configs/toybrick_rk3588.h             |  15 +
+ 10 files changed, 872 insertions(+)
+ create mode 100644 arch/arm/dts/rk3588-toybrick-x0-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3588-toybrick-x0.dts
+ create mode 100644 board/rockchip/toybrick_rk3588/Kconfig
+ create mode 100644 board/rockchip/toybrick_rk3588/MAINTAINERS
+ create mode 100644 board/rockchip/toybrick_rk3588/Makefile
+ create mode 100644 board/rockchip/toybrick_rk3588/toybrick-rk3588.c
+ create mode 100644 configs/toybrick-rk3588_defconfig
+ create mode 100644 include/configs/toybrick_rk3588.h
+
+diff --git a/arch/arm/dts/rk3588-toybrick-x0-u-boot.dtsi b/arch/arm/dts/rk3588-toybrick-x0-u-boot.dtsi
+new file mode 100644
+index 0000000000..1aeb5410e4
+--- /dev/null
++++ b/arch/arm/dts/rk3588-toybrick-x0-u-boot.dtsi
+@@ -0,0 +1,12 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2024 Rockchip Electronics Co., Ltd.
++ */
++
++#include "rk3588-u-boot.dtsi"
++
++/ {
++	chosen {
++		u-boot,spl-boot-order = "same-as-spl", &sdhci;
++	};
++};
+diff --git a/arch/arm/dts/rk3588-toybrick-x0.dts b/arch/arm/dts/rk3588-toybrick-x0.dts
+new file mode 100644
+index 0000000000..f3f7c1d35e
+--- /dev/null
++++ b/arch/arm/dts/rk3588-toybrick-x0.dts
+@@ -0,0 +1,672 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2024 Rockchip Electronics Co., Ltd.
++ *
++ */
++
++/dts-v1/;
++
++#include <dt-bindings/gpio/gpio.h>
++#include <dt-bindings/input/input.h>
++#include <dt-bindings/pinctrl/rockchip.h>
++#include "rk3588.dtsi"
++
++/ {
++	model = "Rockchip Toybrick TB-RK3588X Board";
++	compatible = "rockchip,rk3588-toybrick-x0", "rockchip,rk3588";
++
++	aliases {
++		mmc0 = &sdhci;
++		serial2 = &uart2;
++	};
++
++	chosen {
++		stdout-path = "serial2:1500000n8";
++	};
++
++	adc-keys {
++		compatible = "adc-keys";
++		io-channels = <&saradc 1>;
++		io-channel-names = "buttons";
++		keyup-threshold-microvolt = <1800000>;
++		poll-interval = <100>;
++
++		button-vol-up {
++			label = "Volume Up";
++			linux,code = <KEY_VOLUMEUP>;
++			press-threshold-microvolt = <17000>;
++		};
++
++		button-vol-down {
++			label = "Volume Down";
++			linux,code = <KEY_VOLUMEDOWN>;
++			press-threshold-microvolt = <417000>;
++		};
++
++		button-menu {
++			label = "Menu";
++			linux,code = <KEY_MENU>;
++			press-threshold-microvolt = <890000>;
++		};
++
++		button-escape {
++			label = "Escape";
++			linux,code = <KEY_ESC>;
++			press-threshold-microvolt = <1235000>;
++		};
++	};
++
++	backlight: backlight {
++		compatible = "pwm-backlight";
++		power-supply = <&vcc12v_dcin>;
++		pwms = <&pwm2 0 25000 0>;
++	};
++
++	pcie20_avdd0v85: pcie20-avdd0v85-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "pcie20_avdd0v85";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <850000>;
++		regulator-max-microvolt = <850000>;
++		vin-supply = <&vdd_0v85_s0>;
++	};
++
++	pcie20_avdd1v8: pcie20-avdd1v8-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "pcie20_avdd1v8";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <1800000>;
++		regulator-max-microvolt = <1800000>;
++		vin-supply = <&avcc_1v8_s0>;
++	};
++
++	pcie30_avdd0v75: pcie30-avdd0v75-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "pcie30_avdd0v75";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <750000>;
++		regulator-max-microvolt = <750000>;
++		vin-supply = <&avdd_0v75_s0>;
++	};
++
++	pcie30_avdd1v8: pcie30-avdd1v8-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "pcie30_avdd1v8";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <1800000>;
++		regulator-max-microvolt = <1800000>;
++		vin-supply = <&avcc_1v8_s0>;
++	};
++
++	vcc12v_dcin: vcc12v-dcin-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc12v_dcin";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <12000000>;
++		regulator-max-microvolt = <12000000>;
++	};
++
++	vcc5v0_host: vcc5v0-host-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc5v0_host";
++		regulator-boot-on;
++		regulator-always-on;
++		regulator-min-microvolt = <5000000>;
++		regulator-max-microvolt = <5000000>;
++		enable-active-high;
++		gpio = <&gpio4 RK_PB0 GPIO_ACTIVE_HIGH>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&vcc5v0_host_en>;
++		vin-supply = <&vcc5v0_usb>;
++	};
++
++	vcc5v0_sys: vcc5v0-sys-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc5v0_sys";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <5000000>;
++		regulator-max-microvolt = <5000000>;
++		vin-supply = <&vcc12v_dcin>;
++	};
++
++	vcc5v0_usbdcin: vcc5v0-usbdcin-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc5v0_usbdcin";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <5000000>;
++		regulator-max-microvolt = <5000000>;
++		vin-supply = <&vcc12v_dcin>;
++	};
++
++	vcc5v0_usb: vcc5v0-usb-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc5v0_usb";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <5000000>;
++		regulator-max-microvolt = <5000000>;
++		vin-supply = <&vcc5v0_usbdcin>;
++	};
++
++	vcc_1v1_nldo_s3: vcc-1v1-nldo-s3-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc_1v1_nldo_s3";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <1100000>;
++		regulator-max-microvolt = <1100000>;
++		vin-supply = <&vcc5v0_sys>;
++	};
++};
++
++&combphy0_ps {
++	status = "okay";
++};
++
++&combphy2_psu {
++	status = "okay";
++};
++
++&cpu_b0 {
++	cpu-supply = <&vdd_cpu_big0_s0>;
++};
++
++&cpu_b1 {
++	cpu-supply = <&vdd_cpu_big0_s0>;
++};
++
++&cpu_b2 {
++	cpu-supply = <&vdd_cpu_big1_s0>;
++};
++
++&cpu_b3 {
++	cpu-supply = <&vdd_cpu_big1_s0>;
++};
++
++&cpu_l0 {
++	cpu-supply = <&vdd_cpu_lit_s0>;
++};
++
++&cpu_l1 {
++	cpu-supply = <&vdd_cpu_lit_s0>;
++};
++
++&cpu_l2 {
++	cpu-supply = <&vdd_cpu_lit_s0>;
++};
++
++&cpu_l3 {
++	cpu-supply = <&vdd_cpu_lit_s0>;
++};
++
++&gmac0 {
++	clock_in_out = "output";
++	phy-handle = <&rgmii_phy>;
++	phy-mode = "rgmii-rxid";
++	pinctrl-0 = <&gmac0_miim
++		     &gmac0_tx_bus2
++		     &gmac0_rx_bus2
++		     &gmac0_rgmii_clk
++		     &gmac0_rgmii_bus>;
++	pinctrl-names = "default";
++	rx_delay = <0x00>;
++	tx_delay = <0x43>;
++	status = "okay";
++};
++
++&i2c0 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&i2c0m2_xfer>;
++	status = "okay";
++
++	vdd_cpu_big0_s0: regulator@42 {
++		compatible = "rockchip,rk8602";
++		reg = <0x42>;
++		fcs,suspend-voltage-selector = <1>;
++		regulator-name = "vdd_cpu_big0_s0";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <550000>;
++		regulator-max-microvolt = <1050000>;
++		regulator-ramp-delay = <2300>;
++		vin-supply = <&vcc5v0_sys>;
++
++		regulator-state-mem {
++			regulator-off-in-suspend;
++		};
++	};
++
++	vdd_cpu_big1_s0: regulator@43 {
++		compatible = "rockchip,rk8603", "rockchip,rk8602";
++		reg = <0x43>;
++		fcs,suspend-voltage-selector = <1>;
++		regulator-name = "vdd_cpu_big1_s0";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <550000>;
++		regulator-max-microvolt = <1050000>;
++		regulator-ramp-delay = <2300>;
++		vin-supply = <&vcc5v0_sys>;
++
++		regulator-state-mem {
++			regulator-off-in-suspend;
++		};
++	};
++};
++
++&i2c2 {
++	status = "okay";
++
++	hym8563: rtc@51 {
++		compatible = "haoyu,hym8563";
++		reg = <0x51>;
++		#clock-cells = <0>;
++		clock-output-names = "hym8563";
++		pinctrl-names = "default";
++		pinctrl-0 = <&hym8563_int>;
++		interrupt-parent = <&gpio0>;
++		interrupts = <RK_PD4 IRQ_TYPE_LEVEL_LOW>;
++		wakeup-source;
++	};
++};
++
++&mdio0 {
++	rgmii_phy: ethernet-phy@1 {
++		/* RTL8211F */
++		compatible = "ethernet-phy-id001c.c916";
++		reg = <0x1>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&rtl8211f_rst>;
++		reset-assert-us = <20000>;
++		reset-deassert-us = <100000>;
++		reset-gpios = <&gpio4 RK_PB3 GPIO_ACTIVE_LOW>;
++	};
++};
++
++&pinctrl {
++	rtl8211f {
++		rtl8211f_rst: rtl8211f-rst {
++			rockchip,pins = <4 RK_PB3 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++
++	};
++
++	hym8563 {
++		hym8563_int: hym8563-int {
++			rockchip,pins = <0 RK_PD4 RK_FUNC_GPIO &pcfg_pull_up>;
++		};
++	};
++
++	usb {
++		vcc5v0_host_en: vcc5v0-host-en {
++			rockchip,pins = <4 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++	};
++};
++
++&pwm2 {
++	status = "okay";
++};
++
++&saradc {
++	vref-supply = <&vcc_1v8_s0>;
++	status = "okay";
++};
++
++&sdhci {
++	bus-width = <8>;
++	no-sdio;
++	no-sd;
++	non-removable;
++	mmc-hs400-1_8v;
++	mmc-hs400-enhanced-strobe;
++	status = "okay";
++};
++
++&spi2 {
++	status = "okay";
++	assigned-clocks = <&cru CLK_SPI2>;
++	assigned-clock-rates = <200000000>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&spi2m2_cs0 &spi2m2_pins>;
++	num-cs = <1>;
++
++	pmic@0 {
++		compatible = "rockchip,rk806";
++		spi-max-frequency = <1000000>;
++		reg = <0x0>;
++
++		interrupt-parent = <&gpio0>;
++		interrupts = <7 IRQ_TYPE_LEVEL_LOW>;
++
++		pinctrl-names = "default";
++		pinctrl-0 = <&pmic_pins>, <&rk806_dvs1_null>,
++			    <&rk806_dvs2_null>, <&rk806_dvs3_null>;
++
++		system-power-controller;
++
++		vcc1-supply = <&vcc5v0_sys>;
++		vcc2-supply = <&vcc5v0_sys>;
++		vcc3-supply = <&vcc5v0_sys>;
++		vcc4-supply = <&vcc5v0_sys>;
++		vcc5-supply = <&vcc5v0_sys>;
++		vcc6-supply = <&vcc5v0_sys>;
++		vcc7-supply = <&vcc5v0_sys>;
++		vcc8-supply = <&vcc5v0_sys>;
++		vcc9-supply = <&vcc5v0_sys>;
++		vcc10-supply = <&vcc5v0_sys>;
++		vcc11-supply = <&vcc_2v0_pldo_s3>;
++		vcc12-supply = <&vcc5v0_sys>;
++		vcc13-supply = <&vcc_1v1_nldo_s3>;
++		vcc14-supply = <&vcc_1v1_nldo_s3>;
++		vcca-supply = <&vcc5v0_sys>;
++
++		gpio-controller;
++		#gpio-cells = <2>;
++
++		rk806_dvs1_null: dvs1-null-pins {
++			pins = "gpio_pwrctrl1";
++			function = "pin_fun0";
++		};
++
++		rk806_dvs2_null: dvs2-null-pins {
++			pins = "gpio_pwrctrl2";
++			function = "pin_fun0";
++		};
++
++		rk806_dvs3_null: dvs3-null-pins {
++			pins = "gpio_pwrctrl3";
++			function = "pin_fun0";
++		};
++
++		regulators {
++			vdd_gpu_s0: vdd_gpu_mem_s0: dcdc-reg1 {
++				regulator-boot-on;
++				regulator-min-microvolt = <550000>;
++				regulator-max-microvolt = <950000>;
++				regulator-ramp-delay = <12500>;
++				regulator-name = "vdd_gpu_s0";
++				regulator-enable-ramp-delay = <400>;
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vdd_cpu_lit_s0: vdd_cpu_lit_mem_s0: dcdc-reg2 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <550000>;
++				regulator-max-microvolt = <950000>;
++				regulator-ramp-delay = <12500>;
++				regulator-name = "vdd_cpu_lit_s0";
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vdd_log_s0: dcdc-reg3 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <675000>;
++				regulator-max-microvolt = <750000>;
++				regulator-ramp-delay = <12500>;
++				regulator-name = "vdd_log_s0";
++				regulator-state-mem {
++					regulator-off-in-suspend;
++					regulator-suspend-microvolt = <750000>;
++				};
++			};
++
++			vdd_vdenc_s0: vdd_vdenc_mem_s0: dcdc-reg4 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <550000>;
++				regulator-max-microvolt = <950000>;
++				regulator-init-microvolt = <750000>;
++				regulator-ramp-delay = <12500>;
++				regulator-name = "vdd_vdenc_s0";
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vdd_ddr_s0: dcdc-reg5 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <675000>;
++				regulator-max-microvolt = <900000>;
++				regulator-ramp-delay = <12500>;
++				regulator-name = "vdd_ddr_s0";
++				regulator-state-mem {
++					regulator-off-in-suspend;
++					regulator-suspend-microvolt = <850000>;
++				};
++			};
++
++			vdd2_ddr_s3: dcdc-reg6 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-name = "vdd2_ddr_s3";
++				regulator-state-mem {
++					regulator-on-in-suspend;
++				};
++			};
++
++			vcc_2v0_pldo_s3: dcdc-reg7 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <2000000>;
++				regulator-max-microvolt = <2000000>;
++				regulator-name = "vdd_2v0_pldo_s3";
++				regulator-state-mem {
++					regulator-on-in-suspend;
++					regulator-suspend-microvolt = <2000000>;
++				};
++			};
++
++			vcc_3v3_s3: dcdc-reg8 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <3300000>;
++				regulator-max-microvolt = <3300000>;
++				regulator-name = "vcc_3v3_s3";
++				regulator-state-mem {
++					regulator-on-in-suspend;
++					regulator-suspend-microvolt = <3300000>;
++				};
++			};
++
++			vddq_ddr_s0: dcdc-reg9 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-name = "vddq_ddr_s0";
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vcc_1v8_s3: dcdc-reg10 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <1800000>;
++				regulator-name = "vcc_1v8_s3";
++				regulator-state-mem {
++					regulator-on-in-suspend;
++					regulator-suspend-microvolt = <1800000>;
++				};
++			};
++
++			avcc_1v8_s0: pldo-reg1 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <1800000>;
++				regulator-name = "avcc_1v8_s0";
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vcc_1v8_s0: pldo-reg2 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <1800000>;
++				regulator-name = "vcc_1v8_s0";
++				regulator-state-mem {
++					regulator-off-in-suspend;
++					regulator-suspend-microvolt = <1800000>;
++				};
++			};
++
++			avdd_1v2_s0: pldo-reg3 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <1200000>;
++				regulator-max-microvolt = <1200000>;
++				regulator-name = "avdd_1v2_s0";
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vcc_3v3_s0: pldo-reg4 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <3300000>;
++				regulator-max-microvolt = <3300000>;
++				regulator-name = "vcc_3v3_s0";
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vccio_sd_s0: pldo-reg5 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <3300000>;
++				regulator-name = "vccio_sd_s0";
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			pldo6_s3: pldo-reg6 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <1800000>;
++				regulator-name = "pldo6_s3";
++				regulator-state-mem {
++					regulator-on-in-suspend;
++					regulator-suspend-microvolt = <1800000>;
++				};
++			};
++
++			vdd_0v75_s3: nldo-reg1 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <750000>;
++				regulator-max-microvolt = <750000>;
++				regulator-name = "vdd_0v75_s3";
++				regulator-state-mem {
++					regulator-on-in-suspend;
++					regulator-suspend-microvolt = <750000>;
++				};
++			};
++
++			vdd_ddr_pll_s0: nldo-reg2 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <850000>;
++				regulator-max-microvolt = <850000>;
++				regulator-name = "vdd_ddr_pll_s0";
++				regulator-state-mem {
++					regulator-off-in-suspend;
++					regulator-suspend-microvolt = <850000>;
++				};
++			};
++
++			avdd_0v75_s0: nldo-reg3 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <837500>;
++				regulator-max-microvolt = <837500>;
++				regulator-name = "avdd_0v75_s0";
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vdd_0v85_s0: nldo-reg4 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <850000>;
++				regulator-max-microvolt = <850000>;
++				regulator-name = "vdd_0v85_s0";
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vdd_0v75_s0: nldo-reg5 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <750000>;
++				regulator-max-microvolt = <750000>;
++				regulator-name = "vdd_0v75_s0";
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++		};
++	};
++};
++
++&u2phy2 {
++	status = "okay";
++};
++
++&u2phy2_host {
++	phy-supply = <&vcc5v0_host>;
++	status = "okay";
++};
++
++&u2phy3 {
++	status = "okay";
++};
++
++&u2phy3_host {
++	phy-supply = <&vcc5v0_host>;
++	status = "okay";
++};
++
++&uart2 {
++	pinctrl-0 = <&uart2m0_xfer>;
++	status = "okay";
++};
++
++&usb_host0_ehci {
++	status = "okay";
++};
++
++&usb_host0_ohci {
++	status = "okay";
++};
++
++&usb_host1_ehci {
++	status = "okay";
++};
++
++&usb_host1_ohci {
++	status = "okay";
++};
+diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockchip/rk3588/Kconfig
+index a2193fbd41..ff6c12903d 100644
+--- a/arch/arm/mach-rockchip/rk3588/Kconfig
++++ b/arch/arm/mach-rockchip/rk3588/Kconfig
+@@ -155,6 +155,30 @@ config TARGET_TURINGRK1_RK3588
+ 	  Gigabit Ethernet
+ 	  Size: 69.6mm x 45mm (260-pin SO-DIMM connector)
+ 
++config TARGET_TOYBRICK_RK3588
++	bool "Toybrick TB-RK3588X board"
++	select BOARD_LATE_INIT
++	help
++	  Rockchip Toybrick TB-RK3588X is a Rockchip RK3588 based development board.
++	  TB-RK3588X adopts core board and mainboard design. The core board is connected
++	  with the mainboard through the MXM314Pin standard interface, which can form
++	  a complete industry development board.
++
++	  Specifications:
++
++	  Rockchip RK3588 SoC
++	  4x ARM Cortex-A76, 4x ARM Cortex-A55
++	  8/16GB Memory LPDDR4x
++	  Mali G610MC4 GPU
++	  2× MIPI-CSI0 Connector
++	  1x 2Lanes PCIe3.0 Connector
++	  1x SATA3.0 Connector
++	  32GB eMMC Module
++	  2x USB2.0, 2x USB3.0
++	  1x HDMI Output, 1x HDMI Input
++	  2x Ethernet Port
++
++
+ config ROCKCHIP_BOOT_MODE_REG
+ 	default 0xfd588080
+ 
+@@ -174,5 +198,6 @@ source board/turing/turing-rk1-rk3588/Kconfig
+ source board/rockchip/evb_rk3588/Kconfig
+ source board/radxa/rock5a-rk3588s/Kconfig
+ source board/radxa/rock5b-rk3588/Kconfig
++source board/rockchip/toybrick_rk3588/Kconfig
+ 
+ endif
+diff --git a/board/rockchip/toybrick_rk3588/Kconfig b/board/rockchip/toybrick_rk3588/Kconfig
+new file mode 100644
+index 0000000000..8e781a18d9
+--- /dev/null
++++ b/board/rockchip/toybrick_rk3588/Kconfig
+@@ -0,0 +1,12 @@
++if TARGET_TOYBRICK_RK3588
++
++config SYS_BOARD
++	default "toybrick_rk3588"
++
++config SYS_VENDOR
++	default "rockchip"
++
++config SYS_CONFIG_NAME
++	default "toybrick_rk3588"
++
++endif
+diff --git a/board/rockchip/toybrick_rk3588/MAINTAINERS b/board/rockchip/toybrick_rk3588/MAINTAINERS
+new file mode 100644
+index 0000000000..cd4401c24f
+--- /dev/null
++++ b/board/rockchip/toybrick_rk3588/MAINTAINERS
+@@ -0,0 +1,8 @@
++TOYBRICK-RK3588
++M:	Elon Zhang <zhangzj@rock-chips.com>
++S:	Maintained
++F:	board/rockchip/toybrick_rk3588
++F:	include/configs/toybrick_rk3588.h
++F:	configs/toybrick-rk3588_defconfig
++F:	arch/arm/dts/rk3588-toybrick-x0.dts
++F:	arch/arm/dts/rk3588-toybrick-x0-u-boot.dtsi
+diff --git a/board/rockchip/toybrick_rk3588/Makefile b/board/rockchip/toybrick_rk3588/Makefile
+new file mode 100644
+index 0000000000..75d4d9438f
+--- /dev/null
++++ b/board/rockchip/toybrick_rk3588/Makefile
+@@ -0,0 +1,6 @@
++# SPDX-License-Identifier:     GPL-2.0+
++#
++# Copyright (c) 2024 Rockchip Electronics Co,. Ltd.
++#
++
++obj-y += toybrick-rk3588.o
+diff --git a/board/rockchip/toybrick_rk3588/toybrick-rk3588.c b/board/rockchip/toybrick_rk3588/toybrick-rk3588.c
+new file mode 100644
+index 0000000000..dfbfba22c6
+--- /dev/null
++++ b/board/rockchip/toybrick_rk3588/toybrick-rk3588.c
+@@ -0,0 +1,39 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (c) 2024 Rockchip Electronics Co,. Ltd.
++ */
++
++#include <fdtdec.h>
++#include <fdt_support.h>
++
++#ifdef CONFIG_OF_BOARD_SETUP
++static int rk3588_add_reserved_memory_fdt_nodes(void *new_blob)
++{
++	struct fdt_memory gap1 = {
++		.start = 0x3fc000000,
++		.end = 0x3fc4fffff,
++	};
++	struct fdt_memory gap2 = {
++		.start = 0x3fff00000,
++		.end = 0x3ffffffff,
++	};
++	unsigned long flags = FDTDEC_RESERVED_MEMORY_NO_MAP;
++	unsigned int ret;
++
++	/*
++	 * Inject the reserved-memory nodes into the DTS
++	 */
++	ret = fdtdec_add_reserved_memory(new_blob, "gap1", &gap1,  NULL, 0,
++					 NULL, flags);
++	if (ret)
++		return ret;
++
++	return fdtdec_add_reserved_memory(new_blob, "gap2", &gap2,  NULL, 0,
++					  NULL, flags);
++}
++
++int ft_board_setup(void *blob, struct bd_info *bd)
++{
++	return rk3588_add_reserved_memory_fdt_nodes(blob);
++}
++#endif
+diff --git a/configs/toybrick-rk3588_defconfig b/configs/toybrick-rk3588_defconfig
+new file mode 100644
+index 0000000000..0b6016955d
+--- /dev/null
++++ b/configs/toybrick-rk3588_defconfig
+@@ -0,0 +1,82 @@
++CONFIG_ARM=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_COUNTER_FREQUENCY=24000000
++CONFIG_ARCH_ROCKCHIP=y
++CONFIG_TEXT_BASE=0x00a00000
++CONFIG_SPL_LIBCOMMON_SUPPORT=y
++CONFIG_SPL_LIBGENERIC_SUPPORT=y
++CONFIG_NR_DRAM_BANKS=2
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc00000
++CONFIG_ENV_SIZE=0x1f000
++CONFIG_DEFAULT_DEVICE_TREE="rk3588-toybrick-x0"
++CONFIG_ROCKCHIP_RK3588=y
++CONFIG_SPL_ROCKCHIP_COMMON_BOARD=y
++CONFIG_SPL_SERIAL=y
++CONFIG_SPL_STACK_R_ADDR=0x600000
++CONFIG_TARGET_TOYBRICK_RK3588=y
++CONFIG_SPL_STACK=0x400000
++CONFIG_DEBUG_UART_BASE=0xFEB50000
++CONFIG_DEBUG_UART_CLOCK=24000000
++CONFIG_SYS_LOAD_ADDR=0xc00800
++CONFIG_DEBUG_UART=y
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_SPL_FIT_SIGNATURE=y
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_LEGACY_IMAGE_FORMAT=y
++CONFIG_OF_BOARD_SETUP=y
++CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-toybrick-x0.dtb"
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_SPL_MAX_SIZE=0x40000
++CONFIG_SPL_PAD_TO=0x7f8000
++CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
++CONFIG_SPL_BSS_START_ADDR=0x4000000
++CONFIG_SPL_BSS_MAX_SIZE=0x4000
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
++# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
++CONFIG_SPL_STACK_R=y
++CONFIG_SPL_ATF=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_USB=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_CMD_REGULATOR=y
++# CONFIG_SPL_DOS_PARTITION is not set
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_OF_LIVE=y
++CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
++CONFIG_ENV_IS_IN_MMC=y
++CONFIG_SPL_REGMAP=y
++CONFIG_SPL_SYSCON=y
++CONFIG_SPL_CLK=y
++CONFIG_ROCKCHIP_GPIO=y
++CONFIG_SYS_I2C_ROCKCHIP=y
++CONFIG_MISC=y
++CONFIG_SUPPORT_EMMC_RPMB=y
++CONFIG_MMC_HS400_ES_SUPPORT=y
++CONFIG_MMC_HS400_SUPPORT=y
++CONFIG_MMC_DW=y
++CONFIG_MMC_DW_ROCKCHIP=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_SDMA=y
++CONFIG_MMC_SDHCI_ROCKCHIP=y
++CONFIG_PHY_REALTEK=y
++CONFIG_DWC_ETH_QOS=y
++CONFIG_DWC_ETH_QOS_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_INNO_USB2=y
++CONFIG_REGULATOR_PWM=y
++CONFIG_PWM_ROCKCHIP=y
++CONFIG_SPL_RAM=y
++CONFIG_BAUDRATE=1500000
++CONFIG_DEBUG_UART_SHIFT=2
++CONFIG_SYS_NS16550_MEM32=y
++CONFIG_SYSRESET=y
++CONFIG_USB=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_EHCI_GENERIC=y
++CONFIG_USB_OHCI_HCD=y
++CONFIG_USB_OHCI_GENERIC=y
++CONFIG_ERRNO_STR=y
+diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+index e23ca4231c..d5b6ee956e 100644
+--- a/doc/board/rockchip/rockchip.rst
++++ b/doc/board/rockchip/rockchip.rst
+@@ -120,6 +120,7 @@ List of mainline supported Rockchip boards:
+      - Turing Machines RK1 (turing-rk1-rk3588)
+      - Radxa ROCK 5A (rock5a-rk3588s)
+      - Radxa ROCK 5B (rock5b-rk3588)
++     - Rockchip Toybrick TB-RK3588X (toybrick-rk3588)
+      - Xunlong Orange Pi 5 (orangepi-5-rk3588s)
+      - Xunlong Orange Pi 5 Plus (orangepi-5-plus-rk3588)
+ 
+diff --git a/include/configs/toybrick_rk3588.h b/include/configs/toybrick_rk3588.h
+new file mode 100644
+index 0000000000..faa2e6c19c
+--- /dev/null
++++ b/include/configs/toybrick_rk3588.h
+@@ -0,0 +1,15 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (c) 2024 Rockchip Electronics Co., Ltd.
++ */
++
++#ifndef __TOYBRICK_RK3588_H
++#define __TOYBRICK_RK3588_H
++
++#include <configs/rk3588_common.h>
++
++#define ROCKCHIP_DEVICE_SETTINGS \
++		"stdout=serial,vidconsole\0" \
++		"stderr=serial,vidconsole\0"
++
++#endif
+-- 
+2.34.1
+
