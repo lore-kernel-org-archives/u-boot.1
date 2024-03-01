@@ -4,84 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9099C5475B
-	for <u-boot@archiver.kernel.org>; Fri,  1 Mar 2024 13:37:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7BF2C5475B
+	for <u-boot@archiver.kernel.org>; Fri,  1 Mar 2024 13:48:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 554D688145;
-	Fri,  1 Mar 2024 14:37:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id CF0C287EAF;
+	Fri,  1 Mar 2024 14:48:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="stQ4div0";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="ok+iCO0y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4207887DB1; Fri,  1 Mar 2024 14:31:00 +0100 (CET)
-Received: from mail-ua1-x92e.google.com (mail-ua1-x92e.google.com
- [IPv6:2607:f8b0:4864:20::92e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id DE6278814A; Fri,  1 Mar 2024 14:42:48 +0100 (CET)
+Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DFED687D9C
- for <u-boot@lists.denx.de>; Fri,  1 Mar 2024 14:30:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CDEE587808
+ for <u-boot@lists.denx.de>; Fri,  1 Mar 2024 14:42:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ua1-x92e.google.com with SMTP id
- a1e0cc1a2514c-7dac7cfbea0so396058241.3
- for <u-boot@lists.denx.de>; Fri, 01 Mar 2024 05:30:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709299855; x=1709904655; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=fmW+Gom+bQZQ9DAn5I4HIlirJESHqzEAWADW2X4dBGQ=;
- b=stQ4div0D54M9vnxVqcmrUJFUvpcpEJDZOmiTAOjrqW3OD/3/qkuwCmrx6cYl0s3gV
- kxgSxrrARBDTrWe5vCmO8xtASnFjSUs2exvXS/fIG9DqSwXs9EXxFaDkkMShISGIpUnp
- sB4Rb2CAe93SFUICospC0uHKhuRfuvu6KL/J8Y53lvUe7Ysb4HDn6RYyCNKG59DHGK3S
- ufIF+bcOh+N5dDAZypeg2gkzKSft9d7q+ABNrwYP4pyEK8ht9hI1DqtxutE1cJX+ew/w
- edhK8cKMbHnN8FK8jEPbizesdGkG36Q3IKG2DegT9FMSepiMcyZJ5hjH1BBVdX00qt0W
- hreQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709299855; x=1709904655;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=fmW+Gom+bQZQ9DAn5I4HIlirJESHqzEAWADW2X4dBGQ=;
- b=w0I+N8aaFp4n7Bvzw9Iulf3z21SSJNeq1g2b7J196K5NPhS5LfyAdounWgamWv/gyC
- NHFfQMbuIZY14fmqiANBY5TONA/qpCWR//lMjhFzOuwa7I9R493jrWdPUYm8iEmMHvRO
- 9FENPt5klwznGZeMvEosNNlOrO2chhRJ4dNuRwqo8MFIxT5tGC/yalWIc/xJkS9NvSj3
- wuG+FUZIO9EBQ695wU+L7sme4nuokY2B/dbgzE2OouWHExidOQDLuczcJWT3m9WWO1/p
- e//E1D2GYs+MIfF7SAfc6WDeHHRMg2o2Tl1Eam4pEy9ojwzhgxPrU6Hdn3+2DKFC5VRe
- Vqsg==
-X-Gm-Message-State: AOJu0Ywfl5RGDtCxnPqsrv4v2yxq/CN+ZLX4EJtn7N6y9JajgKK4lxPB
- n0/mGjpS71llLWaLHqn5Fw5j6FUNQrbK4N/uklYR9X0dWpkoJ5eaCi/jHC08Ko/BiO0f3LLC+M+
- vhdFmXRK88kNGw/Z6vjjpgq1xi8WlGwc17HiWew==
-X-Google-Smtp-Source: AGHT+IERYN6FD+ce26rlSrhxwegOZictuCUZmOkr0vsqMniZ6brEcuJ3cqv+Fr4oghr0FA+r7sP5efET26N5AfxoigI=
-X-Received: by 2002:a67:f8c3:0:b0:472:9ce3:dccb with SMTP id
- c3-20020a67f8c3000000b004729ce3dccbmr1122941vsp.30.1709299855481; Fri, 01 Mar
- 2024 05:30:55 -0800 (PST)
+ spf=pass smtp.mailfrom=avromanov@salutedevices.com
+Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 168F11000D7;
+ Fri,  1 Mar 2024 16:42:46 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 168F11000D7
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
+ s=mail; t=1709300566;
+ bh=S2Tc6nE2oEO56wflp7eSChxmNxeQluVxvcaQ7N498dM=;
+ h=From:To:Subject:Date:Message-ID:Content-Type:MIME-Version:From;
+ b=ok+iCO0yFrZ6l51Ch2v/jFTvpJBhlvLk3Hgm4H66PbwSDltuexTqv0xxaCLnpu4UN
+ Kk2mKGz4viE1gaKPE3XoBufmDdQTBxXA77pFs4QpKdwQ3Y4CZ4GjW4kLSPMpFLD4vk
+ j0G0U0te8/nvSQjkSQVNeOpHnTtHTc2eSDcsxaCBr1sutJy6cGnsiXiOxdqDlUlPjC
+ TJkBx83L50d6PYrql6k5H1V2sDiGpxWJna/0AggJUJdRWrSfzMT0P10aKSrQYUBMo+
+ pxyw7482iHMNxrZ+pgMMF+Bef+UOpA0awQKy9iluElZN308koMCHvfw0vGOkORGbA1
+ v/07ciFzeQWKA==
+Received: from smtp.sberdevices.ru (p-i-exch-sc-m02.sberdevices.ru
+ [172.16.192.103])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Fri,  1 Mar 2024 16:42:45 +0300 (MSK)
+Received: from p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) by
+ p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.40; Fri, 1 Mar 2024 16:42:45 +0300
+Received: from p-i-exch-sc-m01.sberdevices.ru ([fe80::6d41:e8f1:b95e:ba1]) by
+ p-i-exch-sc-m01.sberdevices.ru ([fe80::6d41:e8f1:b95e:ba1%7]) with
+ mapi id 15.02.1118.040; Fri, 1 Mar 2024 16:42:45 +0300
+From: Alexey Romanov <avromanov@salutedevices.com>
+To: Frieder Schrempf <frieder.schrempf@kontron.de>
+CC: "dario.binacchi@amarulasolutions.com"
+ <dario.binacchi@amarulasolutions.com>, "michael@amarulasolutions.com"
+ <michael@amarulasolutions.com>, "xypron.glpk@gmx.de" <xypron.glpk@gmx.de>,
+ "ilias.apalodimas@linaro.org" <ilias.apalodimas@linaro.org>,
+ "sjg@chromium.org" <sjg@chromium.org>, "bmeng@tinylab.org"
+ <bmeng@tinylab.org>, "tobias@waldekranz.com" <tobias@waldekranz.com>,
+ "jpewhacker@gmail.com" <jpewhacker@gmail.com>,
+ "marek.vasut+renesas@mailbox.org" <marek.vasut+renesas@mailbox.org>,
+ "kever.yang@rock-chips.com" <kever.yang@rock-chips.com>, "jbx6244@gmail.com"
+ <jbx6244@gmail.com>, "abdellatif.elkhlifi@arm.com"
+ <abdellatif.elkhlifi@arm.com>, "michal.simek@amd.com" <michal.simek@amd.com>, 
+ "mikhail.kshevetskiy@iopsys.eu" <mikhail.kshevetskiy@iopsys.eu>,
+ "patrice.chotard@foss.st.com" <patrice.chotard@foss.st.com>, kernel
+ <kernel@sberdevices.ru>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: [PATCH v1 0/4] Introduce mtdblock device
+Thread-Topic: [PATCH v1 0/4] Introduce mtdblock device
+Thread-Index: AQHaaWRoW9wzhSiDc0OOvYc4t7P69LEg08cA/MfFUgA=
+Date: Fri, 1 Mar 2024 13:42:45 +0000
+Message-ID: <20220922220252.2r5ldxs626lqiwos@cab-wsm-0029881.sigma.sbrf.ru>
+References: <20240227100441.1811047-1-avromanov@salutedevices.com>
+ <985f8309-7622-40fe-9352-36cdf7853556@kontron.de>
+In-Reply-To: <985f8309-7622-40fe-9352-36cdf7853556@kontron.de>
+Accept-Language: ru-RU, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [172.16.18.93]
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <32614EA9A4A6B643B67468C4AE223B1C@sberdevices.ru>
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-References: <20240222093607.3085545-1-sumit.garg@linaro.org>
- <170929783825.70492.4756963077870833230.b4-ty@konsulko.com>
-In-Reply-To: <170929783825.70492.4756963077870833230.b4-ty@konsulko.com>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Fri, 1 Mar 2024 19:00:44 +0530
-Message-ID: <CAFA6WYMBMQH10cHnsfmC5efkkohfzftz=6u0N4RMXrVrByZzOw@mail.gmail.com>
-Subject: Re: [PATCH v6 00/11] An effort to bring DT bindings compliance within
- U-Boot
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
- u-boot-custodians@lists.denx.de, sjg@chromium.org, robh+dt@kernel.org, 
- krzysztof.kozlowski+dt@linaro.org, conor@kernel.org, 
- neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech, 
- daniel.thompson@linaro.org, dgilmore@fedoraproject.org, pbrobinson@gmail.com, 
- ilias.apalodimas@linaro.org, b.galvani@gmail.com, xypron.glpk@gmx.de, 
- michal.simek@amd.com, seanga2@gmail.com, rasmus.villemoes@prevas.dk, 
- peng.fan@nxp.com, jh80.chung@samsung.com, rfried.dev@gmail.com, marex@denx.de, 
- mibodhi@gmail.com, bb@ti.com, mark.kettenis@xs4all.nl, festevam@gmail.com, 
- nm@ti.com, andre.przywara@arm.com, ijc@hellion.org.uk, 
- paul.barker.ct@bp.renesas.com
-Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Fri, 01 Mar 2024 14:37:28 +0100
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 183875 [Feb 29 2024]
+X-KSMG-AntiSpam-Version: 6.1.0.3
+X-KSMG-AntiSpam-Envelope-From: avromanov@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 7 0.3.7
+ 6d6bf5bd8eea7373134f756a2fd73e9456bb7d1a, {Track_E25351},
+ {Tracking_from_domain_doesnt_match_to}, FromAlignment: s
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean
+X-KSMG-LinksScanning: Clean
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2024/02/29 19:21:00 #23899999
+X-KSMG-AntiVirus-Status: Clean, skipped
+X-Mailman-Approved-At: Fri, 01 Mar 2024 14:48:40 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,29 +121,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 1 Mar 2024 at 18:27, Tom Rini <trini@konsulko.com> wrote:
->
-> On Thu, 22 Feb 2024 15:05:56 +0530, Sumit Garg wrote:
->
-> > Changes in v6:
-> > --------------
-> > - v6_dt: https://github.com/b49020/u-boot/tree/v6_dt
-> > - Patch #3: Incorporate fix for sandbox CI failure.
-> > - Patch #6: Incorporate shell script comments from Marek.
-> > - Patch #8: Incorporate documentation review comments from Paul.
-> >
-> > [...]
->
-> Applied to u-boot/next, thanks!
->
+Hi Frieder,
 
-Thanks Tom and everyone involved with the reviews. I hope we can carry
-forward from this effort towards a healthy devicetree story for
-U-Boot.
+On Thu, Feb 29, 2024 at 09:51:04AM +0100, Frieder Schrempf wrote:
+> Hi Alexey,
+>=20
+> On 27.02.24 11:04, Alexey Romanov wrote:
+> > Hello!
+> >=20
+> > This series adds support for the mtdblock device, which
+> > allows to read/write data block by block. For example,
+> > it can now be used for BCB or Android AB command:
+> >=20
+> >   $ bcb load mtd 0 part_name
+> >=20
+> > Tested only on SPI NAND, so bind is made only for
+> > SPI NAND drivers.
+>=20
+> I don't know much about Android, but as far as I understand you are
+> trying to store dynamic, boot-related information on the MTD device.
+>=20
+> This might be acceptable if the underlying device is a NOR flash, but
+> for any type of NAND device it sounds like a rather bad idea.
+>=20
+> NAND devices need some kind of FTL (flash translation layer) in order to
+> work reliably. Using a block filesystem directly on the NAND MTD device
+> will cause problems as soon as any bad blocks or bit flips occur.
+>=20
+> People are therefore discouraged to use mtdblock on NAND and in the
+> kernel there is even a warning if you try to mount a NAND mtdblock
+> partition.
 
--Sumit
+You are completely right. But, unfortunately, these are legacy ones that
+need to be supported. On some boards this approach was chosen a long
+time ago and mistakenly, so I think we need to support this for NAND.
 
-> --
-> Tom
->
->
+>=20
+> Maybe you should reconsider this and look into how to use UBIFS as a
+> FTL. On the other hand I'm not quite sure if the UBIFS layer in U-Boot
+> is really stable and maintained. So this might not be a good idea either.
+
+Yeah, on our new boards we switched to using UBI, and we already have=20
+an implementation UBI block device for U-Boot. Will send this to
+mailing list in the near future.
+
+>=20
+> Anyway, I'm against implementing mtdblock for SPI NAND (or any other NAND=
+).
+
+Maybe we'll just add warning like it's done in the Linux?
+
+>=20
+> Best regards
+> Frieder
+
+--=20
+Thank you,
+Alexey=
