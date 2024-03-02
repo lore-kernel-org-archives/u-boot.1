@@ -4,74 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2D0CC5478C
-	for <u-boot@archiver.kernel.org>; Sat,  2 Mar 2024 15:06:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAE22C5478C
+	for <u-boot@archiver.kernel.org>; Sat,  2 Mar 2024 15:18:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5CF1887E87;
-	Sat,  2 Mar 2024 16:06:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 582378785F;
+	Sat,  2 Mar 2024 16:18:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CH/R1GAy";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="COc8cRHH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C080B87E9A; Sat,  2 Mar 2024 16:06:49 +0100 (CET)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id 3D65787E69; Sat,  2 Mar 2024 16:18:20 +0100 (CET)
+Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
+ [IPv6:2607:f8b0:4864:20::c36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9176B87E80
- for <u-boot@lists.denx.de>; Sat,  2 Mar 2024 16:06:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E005687DB3
+ for <u-boot@lists.denx.de>; Sat,  2 Mar 2024 16:18:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-33d855caf7dso373040f8f.0
- for <u-boot@lists.denx.de>; Sat, 02 Mar 2024 07:06:47 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc36.google.com with SMTP id
+ 006d021491bc7-5a11b781a79so327302eaf.1
+ for <u-boot@lists.denx.de>; Sat, 02 Mar 2024 07:18:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1709392007; x=1709996807; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=htBEO1k2mQgdDscTclUGfQyLsnolV2lgWzoPBmQvG90=;
- b=CH/R1GAyKYQuWDjnix7SzzTEhTss+ggCbAKcg3wHzI+WJxvUNfGvmi9ieletYtjNOo
- QIK0DEnBtHLHcNhql7i8yG5Xq8k1SgyHrfaKDwo4p07FvVuP3QuOzGzkmBouWpi3gIPf
- Dcf/UCcnwofp6UUy+Jtc1YwZ9PYE77d1WlbhzqXs4v7qdwhHHp3bYP49kVRn2kTrnkD7
- HVFFguO6wYKsh80bi5KCESCZtBUkKUeEVdAXfFq+7byK+A3mODr9JutJOHYfDJukFV0S
- DJrMWigdUNmVPAmuMjOfcXRMxvGF5WmktxhOQkRoxu86GLSUVC10yqRmz3rtchaEMJoa
- B26g==
+ d=konsulko.com; s=google; t=1709392696; x=1709997496; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=+ix3IutbnK9YYauMdQE56UD9nLiU/cI4vzt+SYzsULQ=;
+ b=COc8cRHHuRHKXej069terZCGXq/wiDtk7VwLxTCXNEIIw1+N4I38cq8aWLZsa17vxk
+ u4HHBP+dtkuZLXtqaINi182bzw/Gvnthr7ALJm/GfUd1EHbeJPAaI3ESOyiy4dVEsc6h
+ m4C0GY1TZAIE1TbwnBLfqwuH4zj+Km/hHQ+v0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709392007; x=1709996807;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=htBEO1k2mQgdDscTclUGfQyLsnolV2lgWzoPBmQvG90=;
- b=csB/p0A0KPUWegM7sfGn/h3rJn870IattQOqxGT3uPmAxIhve6IYmNBGDGUF1cSnBh
- 6PYvpdyebqg1YLiKN+x0JVSjE0vcdsuHsTiY4mokkcCX/xgAKNBPK2EvuWbEghx3dOW/
- HWN8tQGW7lJSsabuIuCg2WqMBYXScnxC8g8xeqWUesWiHzt8hyZAXW8d9KiZLgDwy68j
- 8pzmd8EdwT2r4iAHss0mU4oV8WYGP9WcQ8FF1/dULaikJGi176NlrHaQWqn08d6Yr2c6
- 6f4/C/psZigykE07oUxAHBVYuVcfcerOaJ9gVSUi1hnZxy2fsAgcoRDP+VZqVMccPgot
- 2aaQ==
-X-Gm-Message-State: AOJu0YwN9ondsMYchNnyY2sPhfWnnhidrPDjcVkrPMrYTjWoVqjGTxZ1
- UATKDpFC2ObIi4v9x1kW+Id6I07kDX1jC4LAOiWQ7fVN5wcB1RLRLwOM+J38dlUFsP9Xr7Qrkr7
- b28TbhlRukzk9VtAezVIYYbtoB+Z7kXns
-X-Google-Smtp-Source: AGHT+IFLGtzyFIsrDrWTg6L4gzz2uwXuPIIAMg2WEssTXgcAB27sQYA/ySM3AUO9kLyq+u6QAAdpOM00fBjClR27MEM=
-X-Received: by 2002:a5d:550c:0:b0:33e:1b4e:5a0d with SMTP id
- b12-20020a5d550c000000b0033e1b4e5a0dmr3372149wrv.6.1709392006856; Sat, 02 Mar
- 2024 07:06:46 -0800 (PST)
+ d=1e100.net; s=20230601; t=1709392696; x=1709997496;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+ix3IutbnK9YYauMdQE56UD9nLiU/cI4vzt+SYzsULQ=;
+ b=ksENalo9uyFIbfjvfCPZ5y39RFJw6X/LLGbRNBkzHkSAAn42eW+BfVny2CF7Nqb0s6
+ 6obogfzKIt4awzabRGp8KO9aqRqCyyigEDSQ0+7Ib7+qVBGLmmt9HlyH9DBe20Hq+LXj
+ 4zHnROqsZlZEBRav0HihOI5WqDuR4mlcJe9EQE7aax4wccmEz3xCoZ6f9HBJIb/vPYkC
+ RHfkPcVbmGGe44sf6GTFafJaBcjNyLQ+AM3yIitWC0/noVNdfaWbsqTOWgkme9HbUmeo
+ tSO+YFRJaAM+kUGb/vS7Rr9xcpGi44KXhzQ+hz1HB7USljqJyqEyXMchkGfyb3rH3r3z
+ XDrQ==
+X-Gm-Message-State: AOJu0YyMJuyHlv1BwjBUlZmvUFowh4ZeYPrwJcGuZGVV+cDu7oCOj5fU
+ 2JjGVYcYq4AfE4fiA9t1uWLypjtUsQcmHd7cooOJOxyYurskQgWjMB7OlCnEhI4=
+X-Google-Smtp-Source: AGHT+IGBuQEAkT/3lfpK3DYBIdkcFEOAITnugXJm0AFk0Wo63tJRdI4q9PEIn5NEXFlhdVq/h7i1jQ==
+X-Received: by 2002:a05:6358:8a0:b0:17b:6453:d696 with SMTP id
+ m32-20020a05635808a000b0017b6453d696mr4586018rwj.0.1709392696265; 
+ Sat, 02 Mar 2024 07:18:16 -0800 (PST)
+Received: from bill-the-cat (065-184-194-195.res.spectrum.com.
+ [65.184.194.195]) by smtp.gmail.com with ESMTPSA id
+ r8-20020a0ccc08000000b0068f6e1c3582sm3008499qvk.146.2024.03.02.07.18.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 02 Mar 2024 07:18:15 -0800 (PST)
+Date: Sat, 2 Mar 2024 10:18:13 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Love Kumar <love.kumar@amd.com>
+Cc: u-boot@lists.denx.de, michal.simek@amd.com, git@xilinx.com,
+ Angelo Dureghello <angelo@kernel-space.org>, Marek Vasut <marex@denx.de>
+Subject: Re: [PATCH v3] test/py: reset: Add a test for reset command
+Message-ID: <20240302151813.GA1652651@bill-the-cat>
+References: <4b7c5e82165b009cf8b28701ca3f1e182fbc3c09.1708414720.git.love.kumar@amd.com>
 MIME-Version: 1.0
-References: <20240211185616.1041356-1-igor.opaniuk@foundries.io>
- <20240301233117.GA1492435@bill-the-cat>
-In-Reply-To: <20240301233117.GA1492435@bill-the-cat>
-From: Igor Opaniuk <igor.opaniuk@gmail.com>
-Date: Sat, 2 Mar 2024 16:06:34 +0100
-Message-ID: <CAByghJZ5k-h48tUBQoikkuCNe1eSYpJWryW33E-n791c36zTig@mail.gmail.com>
-Subject: Re: [PATCH v1] cmd: md5sum: use hash_command
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ngWwtbdpgIzFy8N6"
+Content-Disposition: inline
+In-Reply-To: <4b7c5e82165b009cf8b28701ca3f1e182fbc3c09.1708414720.git.love.kumar@amd.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,44 +90,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-On Sat, Mar 2, 2024 at 12:31=E2=80=AFAM Tom Rini <trini@konsulko.com> wrote=
-:
+--ngWwtbdpgIzFy8N6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> On Sun, Feb 11, 2024 at 07:56:16PM +0100, Igor Opaniuk wrote:
->
-> > From: Igor Opaniuk <igor.opaniuk@gmail.com>
-> >
-> > Drop old implementation and use hash_command() instead, as
-> > how it's currently done for crc32 and sha1sum cmds.
-> >
-> > Test:
-> > =3D> md5sum 0x60000000 0x200
-> > md5 for 60000000 ... 600001ff =3D=3D> e6bbbe95f5b41996f4a9b9af7bbd4050
-> >
-> > Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
-> > ---
-> >
-> >  cmd/md5sum.c | 149 ++++-----------------------------------------------
-> >  1 file changed, 9 insertions(+), 140 deletions(-)
->
-> This breaks building of imx8mm_phg.
->
-Thanks, fixed and sent v2.
+On Tue, Feb 20, 2024 at 01:11:38PM +0530, Love Kumar wrote:
 
+> Add a test for reset commands which performs resetting of CPU, It does
+> COLD reset by default and WARM reset with -w option.
+>=20
+> Signed-off-by: Love Kumar <love.kumar@amd.com>
+> Reviewed-by: Tom Rini <trini@konsulko.com>
+> ---
+> Changes in v2:
+>  - Set bootmode through boardenv if modeboot is not defined
+> Changes in v3:
+>  - Fix the issue with bad pattern found on console
+> ---
+>  test/py/tests/test_reset.py | 61 +++++++++++++++++++++++++++++++++++++
+>  1 file changed, 61 insertions(+)
+>  create mode 100644 test/py/tests/test_reset.py
 
-> --
-> Tom
->
-
-
+I had hoped this was all sorted out now, but both this and the saveenv
+test cause qemu_m68k to fail now.  See:
+https://source.denx.de/u-boot/u-boot/-/jobs/791635
 
 --=20
-Best regards - Atentamente - Meilleures salutations
+Tom
 
-Igor Opaniuk
+--ngWwtbdpgIzFy8N6
+Content-Type: application/pgp-signature; name="signature.asc"
 
-mailto: igor.opaniuk@gmail.com
-skype: igor.opanyuk
-http://ua.linkedin.com/in/iopaniuk
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXjQzIACgkQFHw5/5Y0
+tyzUHQv/XVpY+KxwBAZPxs2VBisI8P62dCPO743NTeX9eIJDotMDE2JkadUkaORR
+ENSZ+TWYLhLHWlsVjAjQHMhCSm9oRCFZ0fL2AeL4Rr3VHgMkkFi99op2Li3IIEYY
+30gHZfZJoUji4lYqJwmscJ4vj0qlqdcqimP7OlIarjt4hFshbvIpvikIH8DnvcuQ
+wKAKGF+uZ7/0IOaYlCoWBuKE48H0x+WMqPdwDSdPOl3Z2IVNnwNUlJ3xIPZvqSUV
+P2+0wAcTYWj1drpGJOO5Z8LB4YZ8qvePcKsdnp6yXkMbQP66IoYPZkj6TQ3WeWhX
+TcUe8C6FsRujjDJ2WqViH1UqI2DERA9GoFsW0DHgUziKZFxIr/SC0gMFR0UAIkCm
+tKcBI2mWOds0HHXTSoQ71wnDG0K8nRnps92Rd9OWRGRSRcR5URwmlod7Et85XtRB
+ENIQHLddno/y7fjYVwEXG6vnPVFkUVemfVQSPkgc+KuZBWpbxbyucr0ZkJAQZqvY
+fIL5YXMu
+=UIEm
+-----END PGP SIGNATURE-----
+
+--ngWwtbdpgIzFy8N6--
