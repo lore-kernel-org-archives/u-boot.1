@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A6DDC5478C
-	for <u-boot@archiver.kernel.org>; Sat,  2 Mar 2024 14:51:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E487CC54798
+	for <u-boot@archiver.kernel.org>; Sat,  2 Mar 2024 14:51:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 92F5B87D80;
-	Sat,  2 Mar 2024 15:51:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 70AE287E83;
+	Sat,  2 Mar 2024 15:51:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="BUtotu9v";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="KayB/z7X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 348CF87E45; Sat,  2 Mar 2024 15:51:17 +0100 (CET)
+ id 7C46787D37; Sat,  2 Mar 2024 15:51:17 +0100 (CET)
 Received: from madrid.collaboradmins.com (madrid.collaboradmins.com
  [46.235.227.194])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0823387D37
+ by phobos.denx.de (Postfix) with ESMTPS id ACA0E87DB3
  for <u-boot@lists.denx.de>; Sat,  2 Mar 2024 15:51:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=collabora.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=chris.obbard@collabora.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1709391074;
- bh=8Zr+9ae3J2CzZ1iDSojAOosd6UwhB1Ns4MhvbicsH88=;
- h=From:To:Cc:Subject:Date:From;
- b=BUtotu9vWxmUKZMFpvJLFos4tb9N5Da1mp15L4vgrLOgwKQWhEEmeBco6m+c5SaIk
- v/VJdMrTF1a+dyLQw/fuWxOf8Q7HSBQsgJXvjW5n3k6auA0NlVoXJkwHSbeVsp5x5J
- z0w3gGcDlUGI2cCGV5Te7iq+r7um2wxNP1DHqW/g73tV/h92jK9s0mPmVAwhuoFSaf
- QNAHyXjZuguCQGTNYYfRmXu/eGII/hJBEgDjat2qgilUbzdGs9MuUUIhFIiz4cnoHu
- /Mj6jghd2eZfB1ygyxtil8lnm6LXPrdg0LrTYvYE8knf40bdIzzhmQRun9MhhaAXnM
- Xnx373VNWA/Rw==
+ s=mail; t=1709391075;
+ bh=GGT8lXqtkapMo0opBoSr8bYufuq81lIN4q/lMeRaN2A=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=KayB/z7XJASiAtdOW+A3bd0ysGvUhsNwSVaypHrqxpSAzoy7v33T0IVJ/DonfIn4g
+ aEjXX+NBSiTvmk92xDdoAaaVAbqvF0KivnigTBtXi788DdqNIgfiYJx9DuvBSOLFvp
+ Ko5S1onw1x3x+2ot0Ut9w67xZt4RuMofkPDhnpHP4SztjDsRIgDeQhxHJZzOCw8uaM
+ Mxgc80XxpBhmtm6ZVDy3Zb49iMarCSHk3aUUq5D1fXIzfhVKINrPjgwJEn2I9DpEkq
+ fTbONV/eFXtvS7rjtXqnWCd4HJZq+ycANGc/6hI3LThq+hXoWietWKaqBEB7qKrzvM
+ pxZze+PyXWCnA==
 Received: from obbardc-t14.home (cola.collaboradmins.com [195.201.22.229])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested) (Authenticated sender: obbardc)
- by madrid.collaboradmins.com (Postfix) with ESMTPSA id EDFAE3780016;
- Sat,  2 Mar 2024 14:51:13 +0000 (UTC)
+ by madrid.collaboradmins.com (Postfix) with ESMTPSA id D43ED378208D;
+ Sat,  2 Mar 2024 14:51:14 +0000 (UTC)
 From: Christopher Obbard <chris.obbard@collabora.com>
 To: u-boot@lists.denx.de
 Cc: kernel@collabora.com, Christopher Obbard <chris.obbard@collabora.com>,
@@ -50,10 +50,13 @@ Cc: kernel@collabora.com, Christopher Obbard <chris.obbard@collabora.com>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Quentin Schulz <quentin.schulz@theobroma-systems.com>,
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v1 0/2] Trivial fixes for Rockchip's SPL boot order
-Date: Sat,  2 Mar 2024 14:50:55 +0000
-Message-ID: <20240302145107.168080-1-chris.obbard@collabora.com>
+Subject: [PATCH v1 1/2] =?UTF-8?q?rockchip:=20spl-boot-order:=20Fix=20spel?=
+ =?UTF-8?q?ling=20succes=E2=86=92success?=
+Date: Sat,  2 Mar 2024 14:50:56 +0000
+Message-ID: <20240302145107.168080-2-chris.obbard@collabora.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240302145107.168080-1-chris.obbard@collabora.com>
+References: <20240302145107.168080-1-chris.obbard@collabora.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -73,26 +76,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series contains some trivial fixes.
+Fix a simple spelling mistake in a comment.
 
-The first patch fixes a spelling mistake in a comment.
+Signed-off-by: Christopher Obbard <chris.obbard@collabora.com>
+---
 
-The second patch adds the full devicetree node path (rather than just the
-ID) in the debug message when a boot device can't be found.
+ arch/arm/mach-rockchip/spl-boot-order.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-This series may be found at [0].
-
-[0]: https://gitlab.collabora.com/obbardc/u-boot/-/tree/wip/obbardc/rockchip-spl-boot-order-fixes-v1
-
-
-Christopher Obbard (2):
-  rockchip: spl-boot-order: Fix spelling succes→success
-  rockchip: spl-boot-order: Improve debugging message when device isn't
-    found
-
- arch/arm/mach-rockchip/spl-boot-order.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
-
+diff --git a/arch/arm/mach-rockchip/spl-boot-order.c b/arch/arm/mach-rockchip/spl-boot-order.c
+index 2c39a215c10..e548a7dc718 100644
+--- a/arch/arm/mach-rockchip/spl-boot-order.c
++++ b/arch/arm/mach-rockchip/spl-boot-order.c
+@@ -29,7 +29,7 @@
+  *   -ENOSYS, if the device matching the node can not be mapped onto a
+  *            SPL boot device (e.g. the third MMC device)
+  *   -1, for unspecified failures
+- *   a positive integer (from the BOOT_DEVICE_... family) on succes.
++ *   a positive integer (from the BOOT_DEVICE_... family) on success.
+  */
+ 
+ static int spl_node_to_boot_device(int node)
 -- 
 2.43.0
 
