@@ -4,45 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98D7FC54798
-	for <u-boot@archiver.kernel.org>; Sat,  2 Mar 2024 08:36:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7A84C54798
+	for <u-boot@archiver.kernel.org>; Sat,  2 Mar 2024 10:54:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9832C87E29;
-	Sat,  2 Mar 2024 09:36:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
+	by phobos.denx.de (Postfix) with ESMTP id 007F287DC1;
+	Sat,  2 Mar 2024 11:54:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 2877B87E49; Sat,  2 Mar 2024 09:36:40 +0100 (CET)
-Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
- [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id 914EE87DF1
- for <u-boot@lists.denx.de>; Sat,  2 Mar 2024 09:36:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-IronPort-AV: E=Sophos;i="6.06,199,1705330800"; 
- d="asc'?scan'208";a="200019998"
-Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie6.idc.renesas.com with ESMTP; 02 Mar 2024 17:36:31 +0900
-Received: from [10.226.92.29] (unknown [10.226.92.29])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id 32DE54000071;
- Sat,  2 Mar 2024 17:36:29 +0900 (JST)
-Message-ID: <2791fccc-d711-4370-ac18-f2ae63877e42@bp.renesas.com>
-Date: Sat, 2 Mar 2024 08:36:28 +0000
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QVnNHiV+";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 4D2CD87DCA; Sat,  2 Mar 2024 11:54:37 +0100 (CET)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A21A87DAF
+ for <u-boot@lists.denx.de>; Sat,  2 Mar 2024 11:54:35 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-5640fef9fa6so4076665a12.0
+ for <u-boot@lists.denx.de>; Sat, 02 Mar 2024 02:54:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1709376875; x=1709981675; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=CJDYUAUAo6ken4yr4Svz6RVeo5HUzeZcRBSLN6yMU10=;
+ b=QVnNHiV+b2TJlwnFPHBQhDnj6k96n89wYJj54pop0oSxrkS+Ue4PSfz1ALm2XW8H9B
+ xNMZstMH1d4H8Yjmkkcrpcx/Sc0v+PA23CF5SsaVRJ8a9LxT1yPg9RWgX8orDs3BqFMv
+ GupcGoWvT7cBs1dH4LlU7JoUEIxcpjHQhQMkcd6414rgR8aoDaVh0rbWlug5Gn9TEMlT
+ iWz7Ye4gpYVBFzqJ4ElMbOgr8bBxwv8h455ZsfcuMIS+fbbB577q3e7sBdPeuiWj8vCP
+ oypzmfstyjFIedTCGdrM7wjJnrczOtuciYHIB2ZE7CXei6WNBT258kwVJb3tlRrx1+Sr
+ Xk3w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1709376875; x=1709981675;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=CJDYUAUAo6ken4yr4Svz6RVeo5HUzeZcRBSLN6yMU10=;
+ b=fucu69+AmaKsJsGX8xuZGBXOD7b9BhHxWU74SJwlEGa1BWxLqYClegwbizohJQA16c
+ WcWm2DsgyYE/gNH0JpDYa8AuR5CdbgSGseqpKWfeqK4b9X3rwJrG/lX00Nv+MbkWJB/j
+ 96GqLMx2WE8uaT88SITLdGl4BdJVf1w9JnO6UPurXxs9ZK6GG62AL7HbNC/waFZMxmAa
+ edqQBUVHqvJ4cl3dJUEh0SaDLz8YUzoH0Crs99uV67sJXF6lznLgbOJ1NbozaqQ1PpeM
+ J5IZg1mJVmEsEZnK8KllgHRxyBXv9zE+d8IpQSQ9vRb6NyUD8haKYHTFmQHOOQhxzpQs
+ DsYQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUTCkcu4WzcnwHMJGdl0M8Shc4rXLzYUp1yTq8z2SExyWr3a3M18SUxtAi5Y8qA2K40756rPcRNqdImAqPTzqgzbvFD2w==
+X-Gm-Message-State: AOJu0YxfC6F3oDiHreXdbW7MOOyq7yKFUHy30RqYoZVtk3/i99le2lVt
+ MuBAgKh5lSkc2FXgLOhH0/2ytSKRb+BSGgSRyv1ivp3yT/e3aPgvdtgPFRJGL83G5HSSz5iCczV
+ 4asn4FeEQbcpV4uhWVvNqSqquiOg=
+X-Google-Smtp-Source: AGHT+IFwNnb8wXjn8sF2Bi2UKdSS0AvKlV9ciLuDhcpS1PvKP5dDOm3mQtc3wgw5612yNs34D8wqxIpUAi0J4yLrkP0=
+X-Received: by 2002:a50:c8cb:0:b0:566:a235:9355 with SMTP id
+ k11-20020a50c8cb000000b00566a2359355mr3131087edh.33.1709376874529; Sat, 02
+ Mar 2024 02:54:34 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 00/19] ARM: renesas: Rename R-Mobile to Renesas
-Content-Language: en-GB
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
-References: <20240227160912.412181-1-marek.vasut+renesas@mailbox.org>
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-Organization: Renesas Electronics Corporation
-In-Reply-To: <20240227160912.412181-1-marek.vasut+renesas@mailbox.org>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------CLJDKr0xuIG3XWOZysf0FVqk"
+References: <20240225141457.48209-1-pbrobinson@gmail.com>
+ <87h6hwk4g9.fsf@bloch.sibelius.xs4all.nl>
+In-Reply-To: <87h6hwk4g9.fsf@bloch.sibelius.xs4all.nl>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Sat, 2 Mar 2024 10:54:23 +0000
+Message-ID: <CALeDE9Oo-8c93=EKqm7O9P3eMLYWz_VV5xaqDbbm8uW7r_Sk2A@mail.gmail.com>
+Subject: Re: [PATCH v2] disk: dos: Add all options for EFI System Partitions
+To: Mark Kettenis <mark.kettenis@xs4all.nl>
+Cc: trini@konsulko.com, sjg@chromium.org, ilias.apalodimas@linaro.org, 
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -59,143 +89,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------CLJDKr0xuIG3XWOZysf0FVqk
-Content-Type: multipart/mixed; boundary="------------cKEOT2O8D7g3mDU6mgUHPkYQ";
- protected-headers="v1"
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
-Message-ID: <2791fccc-d711-4370-ac18-f2ae63877e42@bp.renesas.com>
-Subject: Re: [PATCH 00/19] ARM: renesas: Rename R-Mobile to Renesas
-References: <20240227160912.412181-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20240227160912.412181-1-marek.vasut+renesas@mailbox.org>
+On Sun, 25 Feb 2024 at 14:23, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
+>
+> > From: Peter Robinson <pbrobinson@gmail.com>
+> > Date: Sun, 25 Feb 2024 14:14:55 +0000
+> >
+> > The EFI spec states that the ESP can be any of FAT12/16/32 but for
+> > compatibility doesn't necssarily require the partition to be the
+> > EFI partition table ID of 0xef. A number of arm devices will not
+> > find their firmware on a FAT partition with an ID of 0xef so also
+> > allow the original FAT12/16/32 partition IDs as they are also
+> > permissable for an ESP.
+> >
+> > Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
+> > ---
+> >
+> > v2:
+> > - Add 0x0c option
+> > - Make hex constants consistent
+> > - Move from if to switch statement
+>
+> Erh...
+>
+> >  disk/part_dos.c | 17 +++++++++++++++--
+> >  1 file changed, 15 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/disk/part_dos.c b/disk/part_dos.c
+> > index 567ead7511d..ab855adf347 100644
+> > --- a/disk/part_dos.c
+> > +++ b/disk/part_dos.c
+> > @@ -40,10 +40,23 @@ static int get_bootable(dos_partition_t *p)
+> >  {
+> >       int ret = 0;
+> >
+> > -     if (p->sys_ind == 0xef)
+> > +     switch (p->sys_ind){
+> > +     case 0x01:
+> >               ret |= PART_EFI_SYSTEM_PARTITION;
+> > -     if (p->boot_ind == 0x80)
+> > +     case 0x06:
+> > +             ret |= PART_EFI_SYSTEM_PARTITION;
+> > +     case 0x0b:
+> > +             ret |= PART_EFI_SYSTEM_PARTITION;
+> > +     case 0x0c:
+> > +             ret |= PART_EFI_SYSTEM_PARTITION;
+> > +     case 0xef:
+> > +             ret |= PART_EFI_SYSTEM_PARTITION;
+> > +     case 0x80:
+> >               ret |= PART_BOOTABLE;
+> > +     default:
+> > +             break;
+> > +     }
+> > +
+>
+> That really didn't go well.  The 0x80 check was for a different struct
+> member and there are missing break statements.  And I suppose the
+> suggestion to use a switch was to bunch up the EFI partition type
+> cases.
+>
+> ENOCOFFEE?
 
---------------cKEOT2O8D7g3mDU6mgUHPkYQ
-Content-Type: multipart/mixed; boundary="------------BE6Q0J2MhCbs6xGdr2kl5ebk"
+It  was worse, no coffee and an early start for a flight.... OOPS!
 
---------------BE6Q0J2MhCbs6xGdr2kl5ebk
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-On 27/02/2024 16:05, Marek Vasut wrote:
-> Rename R-Mobile to Renesas all over the place because the chips are
-> made by Renesas, while only a subset of them is from the R-Mobile line.=
-
->=20
-> Marek Vasut (19):
->   ARM: renesas: Drop remnants of R8A7740 support
->   ARM: renesas: Drop unused sh_sdhi.h
->   ARM: renesas: Drop unused mmc.h
->   ARM: renesas: Drop unused pfc-r8a7790.h
->   ARM: renesas: Rename rmobile_get_cpu_type() to renesas_get_cpu_type()=
-
->   ARM: renesas: Rename rmobile_get_cpu_rev_*() to
->     renesas_get_cpu_rev_*()
->   ARM: renesas: Rename RMOBILE_CPU_TYPE_* to RENESAS_CPU_TYPE_*
->   ARM: renesas: Rename rmobile_cpuinfo_idx() to renesas_cpuinfo_idx()
->   ARM: renesas: Rename rmobile_cpuinfo[] to renesas_cpuinfo[]
->   ARM: renesas: Simplify weak symbols
->   ARM: renesas: Rename rmobile_get_prr() to renesas_get_prr()
->   ARM: renesas: Rename ARCH_RMOBILE_BOARD_STRING to
->     ARCH_RENESAS_BOARD_STRING
->   ARM: renesas: Rename CONFIG_ARCH_RMOBILE_EXTRAM_BOOT to
->     CONFIG_RENESAS_EXTRAM_BOOT
->   ARM: renesas: Rename rmobile.h to renesas.h
->   ARM: renesas: Rename ARCH_RMOBILE to ARCH_RENESAS
->   ARM: renesas: Rename arch-/mach-rmobile to arch-/mach-renesas
->   ARM: renesas: Post rename fix ups
->   mmc: renesas-sdhi: Rename rmobile_is_gen3_mmc0() to
->     rcar_is_gen3_mmc0()
->   git-mailrc: Add renesas entry and update rmobile entry
->=20
-
-For every patch in the series:
-
-Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
-
---=20
-Paul Barker
-
---------------BE6Q0J2MhCbs6xGdr2kl5ebk
-Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
-Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
-
------BEGIN PGP PUBLIC KEY BLOCK-----
-
-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3D
-=3DsIIN
------END PGP PUBLIC KEY BLOCK-----
-
---------------BE6Q0J2MhCbs6xGdr2kl5ebk--
-
---------------cKEOT2O8D7g3mDU6mgUHPkYQ--
-
---------------CLJDKr0xuIG3XWOZysf0FVqk
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZeLlDAUDAAAAAAAKCRDbaV4Vf/JGvULB
-AQCwziXGEL1kV7VaQMy/+vE6OZTJ3dM8/LtLoXkUNWFRfAEA/TLDVDoH3oXQEs17wwOINsf1asls
-tdOp6jCcbzH/awQ=
-=jGAQ
------END PGP SIGNATURE-----
-
---------------CLJDKr0xuIG3XWOZysf0FVqk--
+> >       return ret;
+> >  }
+> >
+> > --
+> > 2.43.2
+> >
+> >
