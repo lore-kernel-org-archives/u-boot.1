@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 069CAC5478C
-	for <u-boot@archiver.kernel.org>; Sat,  2 Mar 2024 22:25:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84C82C54798
+	for <u-boot@archiver.kernel.org>; Sat,  2 Mar 2024 22:25:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 41E6487D60;
-	Sat,  2 Mar 2024 23:25:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BB1C187EA9;
+	Sat,  2 Mar 2024 23:25:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="jNXdKP/l";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="tgjJgIOc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BCF2187D65; Sat,  2 Mar 2024 23:25:06 +0100 (CET)
+ id 311D487EB2; Sat,  2 Mar 2024 23:25:26 +0100 (CET)
 Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1D67687AEC
- for <u-boot@lists.denx.de>; Sat,  2 Mar 2024 23:25:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2F73787EA9
+ for <u-boot@lists.denx.de>; Sat,  2 Mar 2024 23:25:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1709418303;
+ t=1709418323;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=fOt7JWvVvJcdJ2hnYPmXBeLj7ZNr9z+965APGGeJZ6Y=;
- b=jNXdKP/lC37dgHG+Kar8V3BMkl5t6HemRL7mCBceotZjQBtluO946cdrmQNlFGZYiRWZdY
- 8/Qr0Np3TSkpKtcTRB47NfDs0kN5NnSYWvq5Z4JyWpECms7xHUazuaB/+hcuAsDlYA79wI
- 0Vi69BBoMehKTjzRq16pT/hM1qBnRpiUkDJb4acu2D6Cxd0tBNze20vRFiaLpuJAwF1PWS
- 8HWxQES56i1ljm2miKUM9gaxE0GpkJhBfc3LtsEpu+yKIU/iiaSlGFzYRkbLBBrtK9xT0z
- M5ujyJdpu1SzFz1j+uYhrU9Pi2+hIs3SspzpIDwNfo2EjDbRojLjvUXI73YO3w==
-Date: Sat, 02 Mar 2024 23:25:02 +0100
+ bh=JgINfTSDsTipbOMBk6UteXhp1gX+8LvP63XZMFOSZyo=;
+ b=tgjJgIOcXalE6JK2m5wlgAM9cmEXbCjUv++V7AMeZ3mzfQkxdk8VeoaCDiUFzd3SVEU9Ie
+ 1GZjY7CVoGCPFrDPjzvQLGRIslfh+ozByeVb2GC/c13H6FCgmmB1XM+9DOBbyVI0AByTDm
+ Um4mtIWkGCMlegrfrBLwnLwDl9i5kbprv9EQo2kSTQZtRg6MKPuTNGE94awgKIHlr2sadl
+ rjgY1KIl7bIBA/gL5wy64A67WNvrh50ZlSZFkQgsOGbSHVznLjgvKMaBcB+KBKoqzA9i96
+ 0jljhyvHwc844N+6GAujGFZu7cagfqrOlaC9upHSJXwhBLEjmsv6nrFfFcJG0A==
+Date: Sat, 02 Mar 2024 23:25:23 +0100
 From: Dragan Simic <dsimic@manjaro.org>
 To: Christopher Obbard <chris.obbard@collabora.com>
 Cc: u-boot@lists.denx.de, kernel@collabora.com, Kever Yang
@@ -47,12 +47,12 @@ Cc: u-boot@lists.denx.de, kernel@collabora.com, Kever Yang
  <philipp.tomsich@vrull.eu>, Quentin Schulz
  <quentin.schulz@theobroma-systems.com>, Simon Glass <sjg@chromium.org>, Tom
  Rini <trini@konsulko.com>
-Subject: =?UTF-8?Q?Re=3A_=5BPATCH_v1_1/2=5D_rockchip=3A_spl-boot-order=3A?=
- =?UTF-8?Q?_Fix_spelling_succes=E2=86=92success?=
-In-Reply-To: <20240302145107.168080-2-chris.obbard@collabora.com>
+Subject: Re: [PATCH v1 2/2] rockchip: spl-boot-order: Improve debugging
+ message when device isn't found
+In-Reply-To: <20240302145107.168080-3-chris.obbard@collabora.com>
 References: <20240302145107.168080-1-chris.obbard@collabora.com>
- <20240302145107.168080-2-chris.obbard@collabora.com>
-Message-ID: <6fcd5781e17e23732a8176f34a658548@manjaro.org>
+ <20240302145107.168080-3-chris.obbard@collabora.com>
+Message-ID: <c55e8ab6b10f4ae15f117d3ef9c7a518@manjaro.org>
 X-Sender: dsimic@manjaro.org
 Content-Type: text/plain; charset=US-ASCII;
  format=flowed
@@ -78,10 +78,23 @@ X-Virus-Status: Clean
 Hello Christopher,
 
 On 2024-03-02 15:50, Christopher Obbard wrote:
-> Fix a simple spelling mistake in a comment.
+> When debugging the SPL boot order, the node ID of a device which hasn't
+> been found is printed but it can be quite hard to relate that to the
+> specific devicetree node. To aid debugging, print the node path as well 
+> as
+> the ID.
+> 
+> Original debug message:
+> 
+>     board_boot_order: could not map node @73c to a boot-device
+> 
+> With this patch applied this becomes e.g:
+> 
+>    board_boot_order: could not map node @73c (/spi@ff1d0000/flash@0)
+> to a boot-device
 
 I'd suggest that the main part of the patch subject is adjusted
-a bit, e.g. to something like "fix a typo".
+a bit, e.g. to something like "show DT path for missing device".
 
 Otherwise, looking good to me.
 
@@ -90,20 +103,21 @@ Reviewed-by: Dragan Simic <dsimic@manjaro.org>
 > Signed-off-by: Christopher Obbard <chris.obbard@collabora.com>
 > ---
 > 
->  arch/arm/mach-rockchip/spl-boot-order.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  arch/arm/mach-rockchip/spl-boot-order.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 > 
 > diff --git a/arch/arm/mach-rockchip/spl-boot-order.c
 > b/arch/arm/mach-rockchip/spl-boot-order.c
-> index 2c39a215c10..e548a7dc718 100644
+> index e548a7dc718..b23666fb017 100644
 > --- a/arch/arm/mach-rockchip/spl-boot-order.c
 > +++ b/arch/arm/mach-rockchip/spl-boot-order.c
-> @@ -29,7 +29,7 @@
->   *   -ENOSYS, if the device matching the node can not be mapped onto a
->   *            SPL boot device (e.g. the third MMC device)
->   *   -1, for unspecified failures
-> - *   a positive integer (from the BOOT_DEVICE_... family) on succes.
-> + *   a positive integer (from the BOOT_DEVICE_... family) on success.
->   */
-> 
->  static int spl_node_to_boot_device(int node)
+> @@ -151,8 +151,8 @@ void board_boot_order(u32 *spl_boot_list)
+>  		/* Try to map this back onto SPL boot devices */
+>  		boot_device = spl_node_to_boot_device(node);
+>  		if (boot_device < 0) {
+> -			debug("%s: could not map node @%x to a boot-device\n",
+> -			      __func__, node);
+> +			debug("%s: could not map node @%x (%s) to a boot-device\n",
+> +			      __func__, node, conf);
+>  			continue;
+>  		}
