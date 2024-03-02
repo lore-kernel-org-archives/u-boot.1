@@ -4,85 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 649C5C5478C
-	for <u-boot@archiver.kernel.org>; Sat,  2 Mar 2024 22:01:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51BA8C5478C
+	for <u-boot@archiver.kernel.org>; Sat,  2 Mar 2024 22:01:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8775887D9C;
-	Sat,  2 Mar 2024 23:01:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EE08A87EA8;
+	Sat,  2 Mar 2024 23:01:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="C4Wjpw6s";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Q5xf+ohA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 41A9A87D8D; Sat,  2 Mar 2024 23:01:16 +0100 (CET)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
+ id A654C87E96; Sat,  2 Mar 2024 23:01:18 +0100 (CET)
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6343687D37
- for <u-boot@lists.denx.de>; Sat,  2 Mar 2024 23:01:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A4E3F87D37
+ for <u-boot@lists.denx.de>; Sat,  2 Mar 2024 23:01:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-33d855caf7dso425725f8f.0
- for <u-boot@lists.denx.de>; Sat, 02 Mar 2024 14:01:14 -0800 (PST)
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-33db19538d0so555930f8f.1
+ for <u-boot@lists.denx.de>; Sat, 02 Mar 2024 14:01:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1709416873; x=1710021673; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=jUXDBg7ty+Q7wPaVwujyBgA7YPWCoMv6Pq3RqkR+bjA=;
- b=C4Wjpw6swcYDmqddoHvVDlJr0fUcaeVPXFGBl1XrmoFrL2UpBTlZkNgGPr1YLDluy3
- xc4ZAl9O9EHgSqdFomWhIFpezb+xVLQ12d/VrZm+WWLtLhMb2XOyOGQA+8ElLIB5lHv3
- BFuAlsUlme7GFTLt5De7VnbyDOCdpa8gS4EFy34Pqw5fBL47yxS/BtbSrnHqPwhRWVwQ
- K0Cra8Wdds+mj1G5t1em1nMY6DxtIdB5yVxTLMDnGPYDe3IyEf0Sg5RVRH/mNstFaNJZ
- lB72pz7xVFP00YexHvBLONdXKXKSGjuXIDzV9+RZWKotanr77GlMxm9X81gAi0n0Sb7Q
- lrVA==
+ d=gmail.com; s=20230601; t=1709416875; x=1710021675; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=yrYpm3Mdloq0Imvrx+n4MXvSM5vtYi5gsMBr9D/7E4U=;
+ b=Q5xf+ohAlSXCxwiShtEniG9fbb+yaegw1gyV5Af4kGoimhKLvY/8gsNf3YtduXR/GV
+ l6EvPz2zL5h/C1D5VK+Po8kcvp28u/NxSb2NuZrzioSdaw0zOCupOqEqs8OvaKWEd2xE
+ dIGmEBMuqBHM6AOAhXeoO7YwW8119sqg2xjfPjC1JuHTIx0uRtgZJL9CAG7glyTUS3hI
+ WjUsIN0x2rqD+PbOuvFLPqi5RNC4iYamRP7k8DVxLGr1XA5cW3I2D+pXipOy5MyF7axf
+ FvHTq2WhQMVHJu00sca71xk/WzvnNxrpKGrBbWL8ld59GDk7GIXs6m6pfa7tpWqi4Xsm
+ W/gQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709416873; x=1710021673;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=jUXDBg7ty+Q7wPaVwujyBgA7YPWCoMv6Pq3RqkR+bjA=;
- b=bwH1TovdQ6pCm1PoMaN5QRCEJjDszPuhfOIPqEO8hUOqKBItFo1a23q4Pc0qx7bREr
- aqw4Oq0tQdssvHqOr80EjeCqpbVmTTb3viyQ3v7grxS2J7fUBmUAvvNymDvDtC97u8oP
- gFMK/0ItZdeW/WruND/872jJwRp0i54mQHt/op1vm19ljCzS8jLzPZMPu76P4Qmyarsk
- nMEurGl8kXbff+mspHBKSmgv8gGlFQMcM0Ifh4Bf4z/JR6L3L7rFRcDB6dOfID2RDF/J
- tlDJFQaYtvHFZA0Xp7hKlPs/1KKS3iNC575mHUA9tXmqi5P6bDEruxOJYttSSmtGD7T5
- PWdQ==
-X-Gm-Message-State: AOJu0YwjYalVARbv3MYDK4ZQDOvbFSmc20nN2naO95aPIDNGLaUI1gJU
- 3RSbiWcl5oQY1nOuhsTzGrrsK9up8OzCSO/kOEfp++bgnhQcjAkgW6l0IQs6
-X-Google-Smtp-Source: AGHT+IEQgvqbV5GEafJa9uDrIlVQjZfPmqOBfjES0XdnU1XOaWEpSxOD9mvVcgjCg7+sfJbJCO6yXw==
-X-Received: by 2002:a05:600c:4f0e:b0:412:ae70:9934 with SMTP id
- l14-20020a05600c4f0e00b00412ae709934mr4404936wmq.3.1709416872717; 
- Sat, 02 Mar 2024 14:01:12 -0800 (PST)
+ d=1e100.net; s=20230601; t=1709416875; x=1710021675;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=yrYpm3Mdloq0Imvrx+n4MXvSM5vtYi5gsMBr9D/7E4U=;
+ b=Q7gvPOKnmi9YHfQ0+68/Nt0aYL9plNGVTxAdu36t0dKX1MN+fZ46y/DowKGxNFPrsn
+ P5DnZaP+NiXXuad0pYCsPynJxdEhd1HoDJSGizqqx4SvgbtqPpxFqDnWmpjk+XXld1Vk
+ Q+p76inZXAM4eH7jQDsn9NTDuv3eDCYmT9+1aYmKjjFx1RBWkwip04iFDslPGUGbWM7v
+ L6otysSWGRk8Vo1lh5FUkk1zj9lGyj/D6vUTX1IZATKPqNloXQfWWfe2O1X5YKkgznYL
+ 6gn/W2y2SEp0CAzzeykMhFs3WPYp4RlTVwRih7tfvRKfwDCZZ37Pf734ds7YaPHa9nRq
+ l9gw==
+X-Gm-Message-State: AOJu0YxU8/6WAkbBn35+HQ3jqrNRpjCWK001ly3BE7rMqU2FeeQiNfJZ
+ dCBAS7fCyTTZ5QYBnRdukqyzPYVk9sQgSvdPRF4FRu6FIW8c+pODtEt9AKBu
+X-Google-Smtp-Source: AGHT+IGMGCZ6+6zP5HprSJkVZdRXHTdFqItMq4S/yQ0RpLbMQE7cUoaj2rhByA7+tiBe026DTtzHOw==
+X-Received: by 2002:a5d:550c:0:b0:33e:1b4e:5a0d with SMTP id
+ b12-20020a5d550c000000b0033e1b4e5a0dmr3787412wrv.6.1709416875077; 
+ Sat, 02 Mar 2024 14:01:15 -0800 (PST)
 Received: from localhost ([185.186.156.113]) by smtp.gmail.com with ESMTPSA id
- i4-20020a05600c354400b004101f27737asm13063636wmq.29.2024.03.02.14.01.11
+ e13-20020a5d594d000000b0033e12b2e567sm7399471wri.35.2024.03.02.14.01.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 02 Mar 2024 14:01:11 -0800 (PST)
+ Sat, 02 Mar 2024 14:01:13 -0800 (PST)
 From: Igor Opaniuk <igor.opaniuk@gmail.com>
 To: u-boot@lists.denx.de
 Cc: Igor Opaniuk <igor.opaniuk@gmail.com>,
- AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Bin Meng <bmeng@tinylab.org>,
- Etienne Carriere <etienne.carriere@foss.st.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jens Wiklander <jens.wiklander@linaro.org>,
- Jorge Ramirez-Ortiz <jorge@foundries.io>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Roger Knecht <rknecht@pm.me>, Sean Edmond <seanedmond@microsoft.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 0/5] TEE: minor cleanup
-Date: Sat,  2 Mar 2024 23:01:03 +0100
-Message-Id: <20240302220108.720637-1-igor.opaniuk@gmail.com>
+ Jens Wiklander <jens.wiklander@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 1/5] tee: optee: fix description in Kconfig
+Date: Sat,  2 Mar 2024 23:01:04 +0100
+Message-Id: <20240302220108.720637-2-igor.opaniuk@gmail.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240302220108.720637-1-igor.opaniuk@gmail.com>
+References: <20240302220108.720637-1-igor.opaniuk@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -101,35 +93,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Fix OPTEE_TA_AVB symbol description in Kconfig:
+s/"write"rb"/"write_rb"/g
 
-- Address some spelling errors and typos
-- Support CMD_OPTEE_RPMB for SANDBOX configurations and add python tests
-- Remove common.h inclusion for drivers/tee
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
+---
 
 Changes in v2:
-- Fixed chimp_optee.c:37:9: error: implicit declaration of function 'memset'
-- Applied R-b and T-b tags
+- Applied R-b tags
 
-Igor Opaniuk (5):
-  tee: optee: fix description in Kconfig
-  tee: sandbox: fix spelling errors
-  cmd: optee_rpmb: build cmd for sandbox
-  test: py: add optee_rpmb tests
-  tee: remove common.h inclusion
+ drivers/tee/optee/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
- cmd/Kconfig                        |  4 +++-
- drivers/tee/broadcom/chimp_optee.c |  3 ++-
- drivers/tee/optee/Kconfig          |  2 +-
- drivers/tee/optee/core.c           |  1 -
- drivers/tee/optee/i2c.c            |  1 -
- drivers/tee/optee/rpmb.c           |  1 -
- drivers/tee/optee/supplicant.c     |  2 +-
- drivers/tee/sandbox.c              | 10 +++++-----
- drivers/tee/tee-uclass.c           |  1 -
- test/py/tests/test_optee_rpmb.py   | 20 ++++++++++++++++++++
- 10 files changed, 32 insertions(+), 13 deletions(-)
- create mode 100644 test/py/tests/test_optee_rpmb.py
-
+diff --git a/drivers/tee/optee/Kconfig b/drivers/tee/optee/Kconfig
+index 9dc65b0501e..db0bcfa6f15 100644
+--- a/drivers/tee/optee/Kconfig
++++ b/drivers/tee/optee/Kconfig
+@@ -19,7 +19,7 @@ config OPTEE_TA_AVB
+ 	default y
+ 	help
+ 	  Enables support for the AVB Trusted Application (TA) in OP-TEE.
+-	  The TA can support the "avb" subcommands "read_rb", "write"rb"
++	  The TA can support the "avb" subcommands "read_rb", "write_rb"
+ 	  and "is_unlocked".
+ 
+ config OPTEE_TA_RPC_TEST
 -- 
 2.34.1
 
