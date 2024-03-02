@@ -4,61 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84C82C54798
-	for <u-boot@archiver.kernel.org>; Sat,  2 Mar 2024 22:25:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6689C54798
+	for <u-boot@archiver.kernel.org>; Sat,  2 Mar 2024 22:55:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB1C187EA9;
-	Sat,  2 Mar 2024 23:25:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B1BCD87D65;
+	Sat,  2 Mar 2024 23:55:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="tgjJgIOc";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Bl/T+For";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="x7qrdkRg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 311D487EB2; Sat,  2 Mar 2024 23:25:26 +0100 (CET)
-Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
+ id 2EF5C87D74; Sat,  2 Mar 2024 23:55:47 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F73787EA9
- for <u-boot@lists.denx.de>; Sat,  2 Mar 2024 23:25:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
+ by phobos.denx.de (Postfix) with ESMTPS id B68C787D5E
+ for <u-boot@lists.denx.de>; Sat,  2 Mar 2024 23:55:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
-MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1709418323;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4TnL0J2nW4z9t3m;
+ Sat,  2 Mar 2024 23:55:44 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1709420144;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=JgINfTSDsTipbOMBk6UteXhp1gX+8LvP63XZMFOSZyo=;
- b=tgjJgIOcXalE6JK2m5wlgAM9cmEXbCjUv++V7AMeZ3mzfQkxdk8VeoaCDiUFzd3SVEU9Ie
- 1GZjY7CVoGCPFrDPjzvQLGRIslfh+ozByeVb2GC/c13H6FCgmmB1XM+9DOBbyVI0AByTDm
- Um4mtIWkGCMlegrfrBLwnLwDl9i5kbprv9EQo2kSTQZtRg6MKPuTNGE94awgKIHlr2sadl
- rjgY1KIl7bIBA/gL5wy64A67WNvrh50ZlSZFkQgsOGbSHVznLjgvKMaBcB+KBKoqzA9i96
- 0jljhyvHwc844N+6GAujGFZu7cagfqrOlaC9upHSJXwhBLEjmsv6nrFfFcJG0A==
-Date: Sat, 02 Mar 2024 23:25:23 +0100
-From: Dragan Simic <dsimic@manjaro.org>
-To: Christopher Obbard <chris.obbard@collabora.com>
-Cc: u-boot@lists.denx.de, kernel@collabora.com, Kever Yang
- <kever.yang@rock-chips.com>, Philipp Tomsich
- <philipp.tomsich@theobroma-systems.com>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, Quentin Schulz
- <quentin.schulz@theobroma-systems.com>, Simon Glass <sjg@chromium.org>, Tom
- Rini <trini@konsulko.com>
-Subject: Re: [PATCH v1 2/2] rockchip: spl-boot-order: Improve debugging
- message when device isn't found
-In-Reply-To: <20240302145107.168080-3-chris.obbard@collabora.com>
-References: <20240302145107.168080-1-chris.obbard@collabora.com>
- <20240302145107.168080-3-chris.obbard@collabora.com>
-Message-ID: <c55e8ab6b10f4ae15f117d3ef9c7a518@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
+ content-transfer-encoding:content-transfer-encoding;
+ bh=DnbM8RxYdQAl3XQ7pmyWxw7N9+oLBjfFqL8dREJxSfs=;
+ b=Bl/T+For6D81hjYY5NwUXEYZtIXx2lXEqx0yG4p6Lqcu3hLHJA8D5lRAT0Q8Ub+mKElRrA
+ ueZFsWDpEUahzYzxpBzfP2NsFIww7y/0S1E7fII84qJOCYEDi6ccLfGvZKJPnFvtAWpDe7
+ tg7kn+bDON3lQeMG09vw9J7LiqdGP7/SczOsFxuXvU4kCt1xdLDKdwwM6gOr7Gy8zqSgwb
+ mQJZ9BGe/hCeK9IVj2aZXPR//fOOPfM1Rls3RcDWXE7zqTHeDUnkft3BGuyGFXlAyMMIrl
+ HwQh+wzq+tx/rWKKxZcrcBjVNQCTdKoHoS1NxBagO9y9HRx9IgHbAHsgU/9oUA==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1709420142;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=DnbM8RxYdQAl3XQ7pmyWxw7N9+oLBjfFqL8dREJxSfs=;
+ b=x7qrdkRggsBd3fxqDd9kF7bIED4mE94l+jpSXmy+kgNZm9CrUhsqylv9cCaVAN6x97Ouem
+ vLlJcu6h8CyFr2Sl0oLrsYTHuD1W6NJ9Nn/lPfexo3zANiup3SFG1zA7yIHE8JeAB76YNi
+ wqLeK52xwNHunczBGBca/hq1MgDBQZQDd0/71nkE5QNxkVN8hhvMglFiIEnEWW5N0khsv4
+ 8LWha/EjiXXs8/fS/2J0pwy0HRWupsSjl1hUOs/V7VVe7DB/52UxMEziEKaFtePykTj4R5
+ NS3VzqRjMT59Zks/pNpzFdvSmu2ZVNOQX+DzqaF21hihsIpRYIIb3WBs1s5Dfw==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Geert Uytterhoeven <geert@linux-m68k.org>,
+ Hans Verkuil <hverkuil-cisco@xs4all.nl>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ =?UTF-8?q?Niklas=20S=C3=B6derlund?= <niklas.soderlund@ragnatech.se>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Wolfram Sang <wsa@kernel.org>
+Subject: [PATCH] fdt: Fix bootm_low handling
+Date: Sat,  2 Mar 2024 23:54:02 +0100
+Message-ID: <20240302225527.179601-1-marek.vasut+renesas@mailbox.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: fi7gufjquf9resfit9p4pcc3gbddqx65
+X-MBO-RS-ID: 43b70a76d72cb120a9a
+X-Rspamd-Queue-Id: 4TnL0J2nW4z9t3m
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,49 +92,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Christopher,
+According to README CFG_SYS_BOOTMAPSZ section, in case both "bootm_low" and
+"bootm_size" variables are defined, "bootm_mapsize" variable is not defined
+and CFG_SYS_BOOTMAPSZ macro is not defined, all data for the Linux kernel
+must be between "bootm_low" and "bootm_low" + "bootm_size".
 
-On 2024-03-02 15:50, Christopher Obbard wrote:
-> When debugging the SPL boot order, the node ID of a device which hasn't
-> been found is printed but it can be quite hard to relate that to the
-> specific devicetree node. To aid debugging, print the node path as well 
-> as
-> the ID.
-> 
-> Original debug message:
-> 
->     board_boot_order: could not map node @73c to a boot-device
-> 
-> With this patch applied this becomes e.g:
-> 
->    board_boot_order: could not map node @73c (/spi@ff1d0000/flash@0)
-> to a boot-device
+Currently, for systems with DRAM between 0x4000_0000..0x7fff_ffff and with
+e.g. bootm_low=0x60000000 and bootm_size=0x10000000, the code will attempt
+to reserve memory from 0x4000_0000..0x4fff_ffff, which is incorrect. This
+is because "bootm_low" is not taken into consideration correctly.
 
-I'd suggest that the main part of the patch subject is adjusted
-a bit, e.g. to something like "show DT path for missing device".
+The last parameter of lmb_alloc_base() is the maximum physical address of
+the to be reserved LMB area. Currently this is the start of DRAM bank that
+is considered for LMB area reservation + min(DRAM bank size, bootm_size).
+In case bootm_low is set to non-zero, this maximum physical address has to
+be shifted upward, to min(DRAM bank start + size, bootm_low + bootm_size),
+otherwise the reserved memory may be below bootm_low address.
 
-Otherwise, looking good to me.
+In case of multiple DRAM banks, the current change reserves top part of
+the first bank, and reserves the rest of memory in the follow up banks.
 
-Reviewed-by: Dragan Simic <dsimic@manjaro.org>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Geert Uytterhoeven <geert@linux-m68k.org>
+Cc: Hans Verkuil <hverkuil-cisco@xs4all.nl>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>
+Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+Cc: Niklas Söderlund <niklas.soderlund@ragnatech.se>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Wolfram Sang <wsa@kernel.org>
+---
+ boot/image-fdt.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-> Signed-off-by: Christopher Obbard <chris.obbard@collabora.com>
-> ---
-> 
->  arch/arm/mach-rockchip/spl-boot-order.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/arch/arm/mach-rockchip/spl-boot-order.c
-> b/arch/arm/mach-rockchip/spl-boot-order.c
-> index e548a7dc718..b23666fb017 100644
-> --- a/arch/arm/mach-rockchip/spl-boot-order.c
-> +++ b/arch/arm/mach-rockchip/spl-boot-order.c
-> @@ -151,8 +151,8 @@ void board_boot_order(u32 *spl_boot_list)
->  		/* Try to map this back onto SPL boot devices */
->  		boot_device = spl_node_to_boot_device(node);
->  		if (boot_device < 0) {
-> -			debug("%s: could not map node @%x to a boot-device\n",
-> -			      __func__, node);
-> +			debug("%s: could not map node @%x (%s) to a boot-device\n",
-> +			      __func__, node, conf);
->  			continue;
->  		}
+diff --git a/boot/image-fdt.c b/boot/image-fdt.c
+index 75bdd55f326..5e4aa9de0d2 100644
+--- a/boot/image-fdt.c
++++ b/boot/image-fdt.c
+@@ -217,14 +217,14 @@ int boot_relocate_fdt(struct lmb *lmb, char **of_flat_tree, ulong *of_size)
+ 			if (start + size < low)
+ 				continue;
+ 
+-			usable = min(size, (u64)mapsize);
++			usable = min(start + size, (u64)(low + mapsize));
+ 
+ 			/*
+ 			 * At least part of this DRAM bank is usable, try
+ 			 * using it for LMB allocation.
+ 			 */
+ 			of_start = map_sysmem((ulong)lmb_alloc_base(lmb,
+-				    of_len, 0x1000, start + usable), of_len);
++				    of_len, 0x1000, usable), of_len);
+ 			/* Allocation succeeded, use this block. */
+ 			if (of_start != NULL)
+ 				break;
+-- 
+2.43.0
+
