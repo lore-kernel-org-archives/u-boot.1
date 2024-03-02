@@ -4,79 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37AE4C5478C
-	for <u-boot@archiver.kernel.org>; Sat,  2 Mar 2024 10:54:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A39CAC54798
+	for <u-boot@archiver.kernel.org>; Sat,  2 Mar 2024 11:07:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 867F987E6D;
-	Sat,  2 Mar 2024 11:54:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0CCFB87D91;
+	Sat,  2 Mar 2024 12:07:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Gv//yyh8";
+	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="uyXrLHP9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1AF2487E91; Sat,  2 Mar 2024 11:54:46 +0100 (CET)
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3EEAD87DAF; Sat,  2 Mar 2024 12:07:49 +0100 (CET)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.183])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BBA1787E3A
- for <u-boot@lists.denx.de>; Sat,  2 Mar 2024 11:54:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5EE5687D91
+ for <u-boot@lists.denx.de>; Sat,  2 Mar 2024 12:07:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-33d6f26ff33so1718853f8f.0
- for <u-boot@lists.denx.de>; Sat, 02 Mar 2024 02:54:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1709376883; x=1709981683; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=AY3IkEQ/pTO15arfJBJnYVFh2XxdST66agXr4vxoQKc=;
- b=Gv//yyh8iplQryNlDib+uq47t50943npfiAvQjmIAOSybrhipF/YpxEdXDbvrZ6HfT
- OBvCVVpBfAC4snacgPt95z847vGKEth+4WGAb/VESYGE5YtlODL9ud2bHJuQUjNhfvqs
- O6KFLMe2wriZQMpulO9NCcTRrd11nZJE/QI8p2c2C8KqnLmbypIAZCE3o1oU1PvdjLz+
- wpwWWjyrbZ34MvNdzxJ2zkDNlA7tWzkTolelb4XeBBtzcxuVIBYV9svpyHr4fIOhVhDv
- KpCp9gUw2UHhWo5LcODzFAHKhsHAvTQKMnE1k8SNJ7fWM9z6SI81ptXtaASnVgoFm3ON
- yVSQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709376883; x=1709981683;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=AY3IkEQ/pTO15arfJBJnYVFh2XxdST66agXr4vxoQKc=;
- b=GGSRLDJFUqXcLox73KSvdc5Boq6CA2JZHgwCFzW+jGkMoZfplhHuIMOiL8YB9rMqYQ
- pzeEeFGB/1f013VaE2AJC0mjdN29bXK6tc258c8BWOMkqNzlTWw2sT+WFI6GnHtucwFM
- acMbWHDgiaRaGtEMjdT15REaYcy0navUNImHOrBVunVj7mxvYOr+OMD4itjPQVfopMy5
- XAzip6kw/tPeSBbnn292Kimcv+CDwhbj8PiHCg57nniehnaRw3lLPNjthTFRp4fu+WUS
- YWf3efeIhkjK5iop7UJkRf2D4bym1wCi9ngVif0k1XjjEJY4LssO/MK3qWWik6hE8QFg
- dOVQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVzKtQlbzIR3YtLtsDA5W22Z33BLsGd8WSMZesxXsuO9PrtXQ9c/Icg0owzQXPxBAtCVFCsay9H96fTVviwX9JkSqfDdQ==
-X-Gm-Message-State: AOJu0Yw5huZjwB3fNdS/amML29XL28xdgTfppNTdDLztWwtM5XYDpwaJ
- nqjZ4vMLvJf0tMnHa4sqGZcZwZmQBW1zp++Tsq9u44zKna15SA1p
-X-Google-Smtp-Source: AGHT+IH4++SOp2mmvAqjcAx36nlH+8aLLr509Y280t8TwwoPuSsV/6PlHahpz1JnixWMKtJWwdLeMQ==
-X-Received: by 2002:a5d:6e90:0:b0:33e:d27:4f8c with SMTP id
- k16-20020a5d6e90000000b0033e0d274f8cmr3207981wrz.6.1709376882818; 
- Sat, 02 Mar 2024 02:54:42 -0800 (PST)
-Received: from morpheus.home.roving-it.com
- (8.c.1.0.0.0.0.0.0.0.0.0.0.0.0.0.1.8.6.2.1.1.b.f.0.b.8.0.1.0.0.2.ip6.arpa.
- [2001:8b0:fb11:2681::1c8]) by smtp.googlemail.com with ESMTPSA id
- by1-20020a056000098100b0033e22341942sm3620391wrb.78.2024.03.02.02.54.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 02 Mar 2024 02:54:42 -0800 (PST)
-From: Peter Robinson <pbrobinson@gmail.com>
-To: mark.kettenis@xs4all.nl, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-Cc: Peter Robinson <pbrobinson@gmail.com>
-Subject: [PATCH v3] disk: dos: Add all options for EFI System Partitions
-Date: Sat,  2 Mar 2024 10:54:36 +0000
-Message-ID: <20240302105440.587680-1-pbrobinson@gmail.com>
-X-Mailer: git-send-email 2.44.0
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+ spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
+X-KPN-MessageId: 155c18d3-d885-11ee-b571-005056992ed3
+Received: from smtp.kpnmail.nl (unknown [10.31.155.8])
+ by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+ id 155c18d3-d885-11ee-b571-005056992ed3;
+ Sat, 02 Mar 2024 12:07:39 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
+ h=subject:to:from:message-id:date;
+ bh=wytwv9jnmuqlfCLqE4/CLeNLmEoo6kd7r7mQTiMHLYA=;
+ b=uyXrLHP9IT1VcN4pjGQa25OqvoAure5xOnX8OG7Zb2PGYknAlDRAmtn9UFPW+v/YIRpLPjUhjWLwO
+ 0dAOatk0zC12U1YuJzJmUF+pN7Gq78LSrR+KR7Nf+tIf6atSckIOIxN6y/DeSidsFWLqoAgxdshrH+
+ CKjRt3/8E2LvoQ68i9vTt4Zn4KmpWPg4Y8nZ8QgiGGPM6hcRUMtvrZ7NzhDdY921h9mGOS0zdUB6Ap
+ jKg1uj8S6ivwDZP/7BH2dT685fcA/ElgMo+tUGJ+ud7pXCTopD6xfWV51/FZF96sWI0Y63lQDQsBe2
+ bXXdfOrFasvuv0A8md3Z4QNXw9ayUtQ==
+X-KPN-MID: 33|2Km89LxySDqG+uwwG3Oi2HdWGwzqUiGR13Rknnsa5Un1TSL1C97b2iDgLbehQLk
+ H5KOsV7tBZ1Wy3e12JtZbWIRNCvBDul97nrgK5CnVU/Q=
+X-KPN-VerifiedSender: Yes
+X-CMASSUN: 33|zEuXQIUlnreJYPz6V7NxelFh3T8V4mJpziw2d35L4qsOraGSe3pjY9nl5J6vgfq
+ oNR3nNpcBzZzwNexfojClMw==
+X-Originating-IP: 80.61.163.207
+Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
+ [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
+ id 187e3ada-d885-11ee-8956-00505699d6e5;
+ Sat, 02 Mar 2024 12:07:45 +0100 (CET)
+Date: Sat, 02 Mar 2024 12:07:44 +0100
+Message-Id: <87jzmkhoxr.fsf@bloch.sibelius.xs4all.nl>
+From: Mark Kettenis <mark.kettenis@xs4all.nl>
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: trini@konsulko.com, sjg@chromium.org, ilias.apalodimas@linaro.org,
+ u-boot@lists.denx.de, pbrobinson@gmail.com
+In-Reply-To: <20240302105440.587680-1-pbrobinson@gmail.com> (message from
+ Peter Robinson on Sat, 2 Mar 2024 10:54:36 +0000)
+Subject: Re: [PATCH v3] disk: dos: Add all options for EFI System Partitions
+References: <20240302105440.587680-1-pbrobinson@gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,54 +74,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The EFI spec states that the ESP can be any of FAT12/16/32 but for
-compatibility doesn't necssarily require the partition to be the
-EFI partition table ID of 0xef. A number of arm devices will not
-find their firmware on a FAT partition with an ID of 0xef so also
-allow the original FAT12/16/32 partition IDs as they are also
-permissable for an ESP.
+> From: Peter Robinson <pbrobinson@gmail.com>
+> Date: Sat,  2 Mar 2024 10:54:36 +0000
 
-Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
----
+Hi Peter,
 
-v2:
-- Add 0x0c option
-- Make hex constants consistent
-- Move from if to switch statement
-v3:
-- Fix switch brain fart
+> The EFI spec states that the ESP can be any of FAT12/16/32 but for
+> compatibility doesn't necssarily require the partition to be the
+> EFI partition table ID of 0xef. A number of arm devices will not
+> find their firmware on a FAT partition with an ID of 0xef so also
+> allow the original FAT12/16/32 partition IDs as they are also
+> permissable for an ESP.
+> 
+> Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
+> ---
+> 
+> v2:
+> - Add 0x0c option
+> - Make hex constants consistent
+> - Move from if to switch statement
+> v3:
+> - Fix switch brain fart
 
- disk/part_dos.c | 15 +++++++++++++--
- 1 file changed, 13 insertions(+), 2 deletions(-)
+Sorry, still not quite right...
 
-diff --git a/disk/part_dos.c b/disk/part_dos.c
-index 567ead7511d..97f4ce32bed 100644
---- a/disk/part_dos.c
-+++ b/disk/part_dos.c
-@@ -40,10 +40,21 @@ static int get_bootable(dos_partition_t *p)
- {
- 	int ret = 0;
- 
--	if (p->sys_ind == 0xef)
-+	switch (p->sys_ind) {
-+	case 0x01:
-+	case 0x06:
-+	case 0x0b:
-+	case 0x0c:
-+	case 0xef:
- 		ret |= PART_EFI_SYSTEM_PARTITION;
--	if (p->boot_ind == 0x80)
-+		break;
-+	case 0x80:
- 		ret |= PART_BOOTABLE;
-+		break;
-+	default:
-+		break;
-+	}
-+
- 	return ret;
- }
- 
--- 
-2.44.0
+>  disk/part_dos.c | 15 +++++++++++++--
+>  1 file changed, 13 insertions(+), 2 deletions(-)
+> 
+> diff --git a/disk/part_dos.c b/disk/part_dos.c
+> index 567ead7511d..97f4ce32bed 100644
+> --- a/disk/part_dos.c
+> +++ b/disk/part_dos.c
+> @@ -40,10 +40,21 @@ static int get_bootable(dos_partition_t *p)
+>  {
+>  	int ret = 0;
+>  
+> -	if (p->sys_ind == 0xef)
+> +	switch (p->sys_ind) {
+> +	case 0x01:
+> +	case 0x06:
+> +	case 0x0b:
+> +	case 0x0c:
+> +	case 0xef:
+>  		ret |= PART_EFI_SYSTEM_PARTITION;
+> -	if (p->boot_ind == 0x80)
 
+The boot flag is part of p->boot_ind but the switch is for p->sys_ind
+(the partition type).  You can't handle the boot flag in the same
+switch!  Probably best to keep the if-statement for that bit.
+
+> +		break;
+> +	case 0x80:
+>  		ret |= PART_BOOTABLE;
+> +		break;
+> +	default:
+> +		break;
+> +	}
+> +
+>  	return ret;
+>  }
+>  
+> -- 
+> 2.44.0
+> 
+> 
