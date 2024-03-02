@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 535F0C54798
-	for <u-boot@archiver.kernel.org>; Sat,  2 Mar 2024 19:17:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DF5DC54798
+	for <u-boot@archiver.kernel.org>; Sat,  2 Mar 2024 19:18:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6769D87EBA;
-	Sat,  2 Mar 2024 20:17:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DBE9F87ED1;
+	Sat,  2 Mar 2024 20:17:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="JznspknA";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="X+leJkrw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15D3887EAC; Sat,  2 Mar 2024 20:17:48 +0100 (CET)
+ id AFA0687ECA; Sat,  2 Mar 2024 20:17:49 +0100 (CET)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C1D387D9C
- for <u-boot@lists.denx.de>; Sat,  2 Mar 2024 20:17:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A688C87DBB
+ for <u-boot@lists.denx.de>; Sat,  2 Mar 2024 20:17:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,23 +28,27 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1709407051; bh=q6Gx3Yl3vNnxES/2+Y3gxme5y89B4h5NG+sIGz260xY=;
- b=JznspknAazqoaA1xMoM2vdk7o/R4gSPEaRooz5ePwfZhU2wjqQ/NTYIUR2E6Y+YywAhezDv19
- 2X/kjWqPpfldTWwwPYWhSsCBbiDjtNeJqhHRSQKBsy9n+6q3aWFV6VVqbX6u2AAaLWp1mmthTAH
- 5x2xx3gNJt6uG3am9FKeSgzGRzU2t0qrC8Ky53wZ5yI+M/VP+JiXGKV3BQomr9MlyH4p2DyFxMb
- BkWFZDsZFYdXJG2GPfltaRJG/WJZUVE2/pX+lpNAdOfXq3ioAcCyYG1JYgkEgdpTYHuYP0NNVtO
- CY+v3LWzHvb7lhK47W9OjLn5/ZdGc7BqSKQMz2hi/TwA==
+ t=1709407039; bh=0pAUNd5m/xg1W/TuyEFjkHJo9PToHFVzmrX7CZ5QESk=;
+ b=X+leJkrwmyuwE5oRjFfWu5rZ4K/jImNzh/QhnTPBzBTtz8l8AMik/+9CQfw00S+kTXL6PfU7A
+ udozzbeRh/LzUebvTuA8UdTbJr7SnFofWImoEAqSo2pWzBGZlL7Heq22fg0TxsItKIgPpoGEU+F
+ govt7RD04auUIMwAL0+qY/bZfaFyJ/V+pfI+707pC/o52Jw/9wUBvBYHmx6l8T2rDmpg8a2zctO
+ JIAt+Z5mQQ8byOi0MBjkPhEoVuk3G0NCfbNNVZT9nzB49yh5nGtcF3kSMLv+WDUAvmrvMuScigp
+ Epixtl+36LGZlADEB2pBS9K0zJ/eQXzWM4vdqVfEs/aQ==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- John Clark <inindev@gmail.com>, Jonas Karlman <jonas@kwiboo.se>, Jagan
- Teki <jagan@edgeble.ai>, Tom Fitzhenry <tom@tom-fitzhenry.me.uk>, Eugen
- Hristev <eugen.hristev@collabora.com>, Joshua Riek <jjriek@verizon.net>
-Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>, Christopher
- Obbard <chris.obbard@collabora.com>, u-boot@lists.denx.de
-Subject: [PATCH v3 6/6] rockchip: Use common bss and stack addresses on RK3588
-Date: Sat,  2 Mar 2024 19:16:16 +0000
-Message-ID: <20240302191629.322562-7-jonas@kwiboo.se>
+ Andy Yan <andy.yan@rock-chips.com>, Nick Xie <nick@khadas.com>, Jagan Teki
+ <jagan@amarulasolutions.com>, Deepak Das <deepakdas.linux@gmail.com>,
+ Alexandre Vicenzi <linux@alxd.me>, Xiaobo Tian <peterwillcn@gmail.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Levin Du <djw@t-chip.com.cn>,
+ Suniel Mahesh <sunil@amarulasolutions.com>, FUKAUMI Naoki
+ <naoki@radxa.com>, Christopher Obbard <chris.obbard@collabora.com>,
+ Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>
+Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH v3 4/6] rockchip: Use common bss and stack addresses on RK3399
+Date: Sat,  2 Mar 2024 19:16:14 +0000
+Message-ID: <20240302191629.322562-5-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240302191629.322562-1-jonas@kwiboo.se>
 References: <20240302191629.322562-1-jonas@kwiboo.se>
@@ -56,7 +60,7 @@ X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
-X-ForwardEmail-ID: 65e37b48aae288b7577bf2cd
+X-ForwardEmail-ID: 65e37b3daae288b7577bf2a7
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,451 +77,966 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently the following memory layout is typically used on RK3588:
+With the stack and text base used by U-Boot SPL and proper on RK3399
+there is a high likelihood of overlapping when U-Boot proper + FDT nears
+or exceeded 1 MiB in size.
+
+Currently the following memory layout is typically used on RK3399:
 [    0, 256K) - SPL binary
 [ 256K,   2M) - TF-A / reserved
+[   2M,   +X) - U-Boot proper binary (TEXT_BASE)
+[   -X,   3M) - U-Boot proper pre-reloc stack (CUSTOM_SYS_INIT_SP_ADDR)
+[ -16K,   3M)   - pre-reloc malloc heap (SYS_MALLOC_F_LEN)
 [   -X,   4M) - SPL pre-reloc stack (SPL_STACK)
-[ 3.5M,   4M)   - pre-reloc malloc heap (SPL_SYS_MALLOC_F_LEN)
-[   -X,   6M) - SPL reloc stack (SPL_STACK_R_ADDR)
-[   5M,   6M)   - reloc malloc heap (SPL_STACK_R_MALLOC_SIMPLE_LEN)
-[  10M,   +X) - U-Boot proper binary (TEXT_BASE)
-[   -X,  12M) - U-Boot proper pre-reloc stack (CUSTOM_SYS_INIT_SP_ADDR)
-[11.5M,  12M)   - pre-reloc malloc heap (SYS_MALLOC_F_LEN)
-[  64M, +16K) - SPL bss (SPL_BSS_START_ADDR, SPL_BSS_MAX_SIZE)
+[ -16K,   4M)   - pre-reloc malloc heap (SPL_SYS_MALLOC_F_LEN)
+[   4M,  +8K) - SPL bss (SPL_BSS_START_ADDR, SPL_BSS_MAX_SIZE)
+[   -X,  64M) - SPL reloc stack (SPL_STACK_R_ADDR)
+[  63M,  64M)   - reloc malloc heap (SPL_STACK_R_MALLOC_SIMPLE_LEN)
 
-SPL can safely load U-Boot proper + FDT to [10M, 11.5M) with this layout.
-
-However, on ROCK 5A the SPL stacks is overlapping:
-[   -X,  16M) - SPL pre-reloc stack (SPL_STACK)
-[15.5M,  16M)   - pre-reloc malloc heap (SPL_SYS_MALLOC_F_LEN)
-[   -X,  16M) - SPL reloc stack (SPL_STACK_R_ADDR)
-[  15M,  16M)   - reloc malloc heap (SPL_STACK_R_MALLOC_SIMPLE_LEN)
-
-Because bind and probe udevice instanses is allocated on the pre-reloc
-malloc heap, there is going to be an overlap when reloc malloc heap
-reaches close to 512 KiB of usage.
+SPL can safely load U-Boot proper + FDT to [2M, 4M-16K) with this layout.
+However, the stack at [-X, 3M) used during U-Boot proper pre-reloc is
+restricting the safe size of U-Boot proper + FDT to be less than 1 MiB.
 
 Migrate to use common bss, stack and malloc heap size and addresses to
-mitigate these limitations and allow for a larger U-Boot proper size.
+fix this restriction and allow for a larger U-Boot proper image size.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- arch/arm/mach-rockchip/rk3588/Kconfig    |  7 +++++--
- configs/evb-rk3588_defconfig             | 13 -------------
- configs/nanopc-t6-rk3588_defconfig       | 13 -------------
- configs/neu6a-io-rk3588_defconfig        | 13 -------------
- configs/neu6b-io-rk3588_defconfig        | 13 -------------
- configs/orangepi-5-plus-rk3588_defconfig | 13 -------------
- configs/orangepi-5-rk3588s_defconfig     | 13 -------------
- configs/quartzpro64-rk3588_defconfig     | 13 -------------
- configs/rock5a-rk3588s_defconfig         | 13 -------------
- configs/rock5b-rk3588_defconfig          | 13 -------------
- configs/turing-rk1-rk3588_defconfig      | 13 -------------
- 11 files changed, 5 insertions(+), 132 deletions(-)
+ arch/arm/mach-rockchip/rk3399/Kconfig        |  7 +++++--
+ configs/eaidk-610-rk3399_defconfig           | 10 ----------
+ configs/evb-rk3399_defconfig                 | 10 ----------
+ configs/firefly-rk3399_defconfig             | 10 ----------
+ configs/khadas-edge-captain-rk3399_defconfig | 10 ----------
+ configs/khadas-edge-rk3399_defconfig         | 10 ----------
+ configs/khadas-edge-v-rk3399_defconfig       | 10 ----------
+ configs/leez-rk3399_defconfig                | 10 ----------
+ configs/nanopc-t4-rk3399_defconfig           | 10 ----------
+ configs/nanopi-m4-2gb-rk3399_defconfig       | 10 ----------
+ configs/nanopi-m4-rk3399_defconfig           | 10 ----------
+ configs/nanopi-m4b-rk3399_defconfig          | 10 ----------
+ configs/nanopi-neo4-rk3399_defconfig         | 10 ----------
+ configs/nanopi-r4s-rk3399_defconfig          | 10 ----------
+ configs/orangepi-rk3399_defconfig            | 10 ----------
+ configs/pinebook-pro-rk3399_defconfig        | 10 ----------
+ configs/pinephone-pro-rk3399_defconfig       | 10 ----------
+ configs/roc-pc-mezzanine-rk3399_defconfig    | 10 ----------
+ configs/roc-pc-rk3399_defconfig              | 10 ----------
+ configs/rock-4c-plus-rk3399_defconfig        | 10 ----------
+ configs/rock-4se-rk3399_defconfig            | 10 ----------
+ configs/rock-pi-4-rk3399_defconfig           | 10 ----------
+ configs/rock-pi-4c-rk3399_defconfig          | 10 ----------
+ configs/rock-pi-n10-rk3399pro_defconfig      | 10 ----------
+ configs/rock960-rk3399_defconfig             | 10 ----------
+ configs/rockpro64-rk3399_defconfig           | 10 ----------
+ 26 files changed, 5 insertions(+), 252 deletions(-)
 
-diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockchip/rk3588/Kconfig
-index a2193fbd41fe..1ce65566261b 100644
---- a/arch/arm/mach-rockchip/rk3588/Kconfig
-+++ b/arch/arm/mach-rockchip/rk3588/Kconfig
-@@ -164,8 +164,11 @@ config ROCKCHIP_STIMER_BASE
+diff --git a/arch/arm/mach-rockchip/rk3399/Kconfig b/arch/arm/mach-rockchip/rk3399/Kconfig
+index d01063ac98b6..38904291dfa6 100644
+--- a/arch/arm/mach-rockchip/rk3399/Kconfig
++++ b/arch/arm/mach-rockchip/rk3399/Kconfig
+@@ -138,8 +138,11 @@ config ROCKCHIP_STIMER_BASE
  config SYS_SOC
- 	default "rk3588"
+ 	default "rk3399"
  
--config SYS_MALLOC_F_LEN
--	default 0x80000
 +config ROCKCHIP_COMMON_STACK_ADDR
 +	default y
 +
-+config TEXT_BASE
-+	default 0x00a00000
+ config SYS_MALLOC_F_LEN
+-	default 0x4000
++	default 0x4000 if !SPL_SHARES_INIT_SP_ADDR
  
- source board/edgeble/neural-compute-module-6/Kconfig
- source board/friendlyelec/nanopc-t6-rk3588/Kconfig
-diff --git a/configs/evb-rk3588_defconfig b/configs/evb-rk3588_defconfig
-index 8a6aa91cb29a..c8db04c076ef 100644
---- a/configs/evb-rk3588_defconfig
-+++ b/configs/evb-rk3588_defconfig
-@@ -2,19 +2,11 @@ CONFIG_ARM=y
+ config SPL_LIBCOMMON_SUPPORT
+ 	default y
+@@ -157,7 +160,7 @@ config TPL_TEXT_BASE
+         default 0xff8c2000
+ 
+ config SPL_STACK_R_ADDR
+-	default 0x04000000
++	default 0x04000000 if !SPL_SHARES_INIT_SP_ADDR
+ 
+ if BOOTCOUNT_LIMIT
+ 
+diff --git a/configs/eaidk-610-rk3399_defconfig b/configs/eaidk-610-rk3399_defconfig
+index 0ca4cebc4d90..4d8b495ccfec 100644
+--- a/configs/eaidk-610-rk3399_defconfig
++++ b/configs/eaidk-610-rk3399_defconfig
+@@ -2,15 +2,11 @@ CONFIG_ARM=y
  CONFIG_SKIP_LOWLEVEL_INIT=y
  CONFIG_COUNTER_FREQUENCY=24000000
  CONFIG_ARCH_ROCKCHIP=y
--CONFIG_TEXT_BASE=0x00a00000
--CONFIG_SPL_LIBCOMMON_SUPPORT=y
--CONFIG_SPL_LIBGENERIC_SUPPORT=y
- CONFIG_NR_DRAM_BANKS=2
+-CONFIG_TEXT_BASE=0x00200000
+ CONFIG_NR_DRAM_BANKS=1
 -CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc00000
- CONFIG_DEFAULT_DEVICE_TREE="rk3588-evb1-v10"
- CONFIG_ROCKCHIP_RK3588=y
--CONFIG_SPL_ROCKCHIP_COMMON_BOARD=y
- CONFIG_SPL_SERIAL=y
--CONFIG_SPL_STACK_R_ADDR=0x600000
- CONFIG_TARGET_EVB_RK3588=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
+ CONFIG_ENV_OFFSET=0x3F8000
+ CONFIG_DEFAULT_DEVICE_TREE="rk3399-eaidk-610"
+ CONFIG_ROCKCHIP_RK3399=y
+ CONFIG_TARGET_EVB_RK3399=y
 -CONFIG_SPL_STACK=0x400000
- CONFIG_DEBUG_UART_BASE=0xFEB50000
+ CONFIG_DEBUG_UART_BASE=0xFF1A0000
  CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_SYS_LOAD_ADDR=0xc00800
-@@ -30,12 +22,7 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-evb1-v10.dtb"
+ CONFIG_SYS_LOAD_ADDR=0x800800
+@@ -19,13 +15,7 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-eaidk-610.dtb"
  CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_MAX_SIZE=0x2e000
  CONFIG_SPL_PAD_TO=0x7f8000
 -CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
--CONFIG_SPL_BSS_START_ADDR=0x4000000
--CONFIG_SPL_BSS_MAX_SIZE=0x4000
+-CONFIG_SPL_BSS_START_ADDR=0x400000
+-CONFIG_SPL_BSS_MAX_SIZE=0x2000
  # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
 -# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
 -CONFIG_SPL_STACK_R=y
- CONFIG_SPL_ATF=y
- CONFIG_CMD_GPIO=y
- CONFIG_CMD_GPT=y
-diff --git a/configs/nanopc-t6-rk3588_defconfig b/configs/nanopc-t6-rk3588_defconfig
-index 760993220929..5c7bc0b71968 100644
---- a/configs/nanopc-t6-rk3588_defconfig
-+++ b/configs/nanopc-t6-rk3588_defconfig
-@@ -3,22 +3,14 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_SYS_HAS_NONCACHED_MEMORY=y
- CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
--CONFIG_TEXT_BASE=0x00a00000
--CONFIG_SPL_LIBCOMMON_SUPPORT=y
--CONFIG_SPL_LIBGENERIC_SUPPORT=y
- CONFIG_NR_DRAM_BANKS=2
--CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc00000
- CONFIG_SF_DEFAULT_SPEED=24000000
- CONFIG_SF_DEFAULT_MODE=0x2000
- CONFIG_DEFAULT_DEVICE_TREE="rk3588-nanopc-t6"
- CONFIG_ROCKCHIP_RK3588=y
--CONFIG_SPL_ROCKCHIP_COMMON_BOARD=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_SPL_SERIAL=y
--CONFIG_SPL_STACK_R_ADDR=0x600000
- CONFIG_TARGET_NANOPCT6_RK3588=y
--CONFIG_SPL_STACK=0x400000
- CONFIG_DEBUG_UART_BASE=0xFEB50000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_SPL_SPI_FLASH_SUPPORT=y
-@@ -37,12 +29,7 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-nanopc-t6.dtb"
- CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_SPL_MAX_SIZE=0x40000
- CONFIG_SPL_PAD_TO=0x7f8000
--CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
--CONFIG_SPL_BSS_START_ADDR=0x4000000
--CONFIG_SPL_BSS_MAX_SIZE=0x4000
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
--# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
--CONFIG_SPL_STACK_R=y
- CONFIG_SPL_SPI_LOAD=y
- CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
- CONFIG_SPL_ATF=y
-diff --git a/configs/neu6a-io-rk3588_defconfig b/configs/neu6a-io-rk3588_defconfig
-index d5301c630b2a..307a540f4249 100644
---- a/configs/neu6a-io-rk3588_defconfig
-+++ b/configs/neu6a-io-rk3588_defconfig
-@@ -2,19 +2,11 @@ CONFIG_ARM=y
+-CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x10000
+ CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+ CONFIG_TPL=y
+ CONFIG_CMD_BOOTZ=y
+diff --git a/configs/evb-rk3399_defconfig b/configs/evb-rk3399_defconfig
+index 1d1e55162290..d81c7f9604e1 100644
+--- a/configs/evb-rk3399_defconfig
++++ b/configs/evb-rk3399_defconfig
+@@ -2,17 +2,13 @@ CONFIG_ARM=y
  CONFIG_SKIP_LOWLEVEL_INIT=y
  CONFIG_COUNTER_FREQUENCY=24000000
  CONFIG_ARCH_ROCKCHIP=y
--CONFIG_TEXT_BASE=0x00a00000
--CONFIG_SPL_LIBCOMMON_SUPPORT=y
--CONFIG_SPL_LIBGENERIC_SUPPORT=y
- CONFIG_NR_DRAM_BANKS=2
+-CONFIG_TEXT_BASE=0x00200000
+ CONFIG_NR_DRAM_BANKS=1
 -CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc00000
- CONFIG_DEFAULT_DEVICE_TREE="rk3588-edgeble-neu6a-io"
- CONFIG_ROCKCHIP_RK3588=y
--CONFIG_SPL_ROCKCHIP_COMMON_BOARD=y
- CONFIG_SPL_SERIAL=y
--CONFIG_SPL_STACK_R_ADDR=0x600000
- CONFIG_TARGET_RK3588_NEU6=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
+ CONFIG_SF_DEFAULT_SPEED=20000000
+ CONFIG_ENV_OFFSET=0x3F8000
+ CONFIG_DEFAULT_DEVICE_TREE="rk3399-evb"
+ CONFIG_DM_RESET=y
+ CONFIG_ROCKCHIP_RK3399=y
+ CONFIG_TARGET_EVB_RK3399=y
 -CONFIG_SPL_STACK=0x400000
- CONFIG_DEBUG_UART_BASE=0xFEB50000
+ CONFIG_DEBUG_UART_BASE=0xFF1A0000
  CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_SYS_LOAD_ADDR=0xc00800
-@@ -27,12 +19,7 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-edgeble-neu6a-io.dtb"
+ CONFIG_SYS_LOAD_ADDR=0x800800
+@@ -21,13 +17,7 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-evb.dtb"
  CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_SPL_MAX_SIZE=0x20000
+ CONFIG_SPL_MAX_SIZE=0x2e000
  CONFIG_SPL_PAD_TO=0x7f8000
 -CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
--CONFIG_SPL_BSS_START_ADDR=0x4000000
--CONFIG_SPL_BSS_MAX_SIZE=0x4000
+-CONFIG_SPL_BSS_START_ADDR=0x400000
+-CONFIG_SPL_BSS_MAX_SIZE=0x2000
  # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
 -# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
 -CONFIG_SPL_STACK_R=y
- CONFIG_SPL_ATF=y
- CONFIG_CMD_GPT=y
- CONFIG_CMD_MMC=y
-diff --git a/configs/neu6b-io-rk3588_defconfig b/configs/neu6b-io-rk3588_defconfig
-index b13c9b5db1b0..9ef2bb21fffa 100644
---- a/configs/neu6b-io-rk3588_defconfig
-+++ b/configs/neu6b-io-rk3588_defconfig
-@@ -2,19 +2,11 @@ CONFIG_ARM=y
+-CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x10000
+ CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+ CONFIG_TPL=y
+ CONFIG_CMD_BOOTZ=y
+diff --git a/configs/firefly-rk3399_defconfig b/configs/firefly-rk3399_defconfig
+index 2fe38f81c50d..545c047c6df8 100644
+--- a/configs/firefly-rk3399_defconfig
++++ b/configs/firefly-rk3399_defconfig
+@@ -2,17 +2,13 @@ CONFIG_ARM=y
  CONFIG_SKIP_LOWLEVEL_INIT=y
  CONFIG_COUNTER_FREQUENCY=24000000
  CONFIG_ARCH_ROCKCHIP=y
--CONFIG_TEXT_BASE=0x00a00000
--CONFIG_SPL_LIBCOMMON_SUPPORT=y
--CONFIG_SPL_LIBGENERIC_SUPPORT=y
- CONFIG_NR_DRAM_BANKS=2
+-CONFIG_TEXT_BASE=0x00200000
+ CONFIG_NR_DRAM_BANKS=1
 -CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc00000
- CONFIG_DEFAULT_DEVICE_TREE="rk3588-edgeble-neu6b-io"
- CONFIG_ROCKCHIP_RK3588=y
--CONFIG_SPL_ROCKCHIP_COMMON_BOARD=y
- CONFIG_SPL_SERIAL=y
--CONFIG_SPL_STACK_R_ADDR=0x600000
- CONFIG_TARGET_RK3588_NEU6=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
+ CONFIG_SF_DEFAULT_SPEED=20000000
+ CONFIG_ENV_OFFSET=0x3F8000
+ CONFIG_DEFAULT_DEVICE_TREE="rk3399-firefly"
+ CONFIG_DM_RESET=y
+ CONFIG_ROCKCHIP_RK3399=y
+ CONFIG_TARGET_EVB_RK3399=y
 -CONFIG_SPL_STACK=0x400000
- CONFIG_DEBUG_UART_BASE=0xFEB50000
+ CONFIG_DEBUG_UART_BASE=0xFF1A0000
  CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_SYS_LOAD_ADDR=0xc00800
-@@ -27,12 +19,7 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-edgeble-neu6b-io.dtb"
+ CONFIG_SYS_LOAD_ADDR=0x800800
+@@ -22,13 +18,7 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-firefly.dtb"
  CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_SPL_MAX_SIZE=0x20000
+ CONFIG_SPL_MAX_SIZE=0x2e000
  CONFIG_SPL_PAD_TO=0x7f8000
 -CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
--CONFIG_SPL_BSS_START_ADDR=0x4000000
--CONFIG_SPL_BSS_MAX_SIZE=0x4000
+-CONFIG_SPL_BSS_START_ADDR=0x400000
+-CONFIG_SPL_BSS_MAX_SIZE=0x2000
  # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
 -# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
 -CONFIG_SPL_STACK_R=y
- CONFIG_SPL_ATF=y
- CONFIG_CMD_GPT=y
- CONFIG_CMD_MMC=y
-diff --git a/configs/orangepi-5-plus-rk3588_defconfig b/configs/orangepi-5-plus-rk3588_defconfig
-index a58f96d57798..d6e23c154f15 100644
---- a/configs/orangepi-5-plus-rk3588_defconfig
-+++ b/configs/orangepi-5-plus-rk3588_defconfig
-@@ -3,22 +3,14 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_SYS_HAS_NONCACHED_MEMORY=y
- CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
--CONFIG_TEXT_BASE=0x00a00000
--CONFIG_SPL_LIBCOMMON_SUPPORT=y
--CONFIG_SPL_LIBGENERIC_SUPPORT=y
- CONFIG_NR_DRAM_BANKS=2
--CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc00000
- CONFIG_SF_DEFAULT_SPEED=24000000
- CONFIG_SF_DEFAULT_MODE=0x2000
- CONFIG_DEFAULT_DEVICE_TREE="rk3588-orangepi-5-plus"
- CONFIG_ROCKCHIP_RK3588=y
--CONFIG_SPL_ROCKCHIP_COMMON_BOARD=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_SPL_SERIAL=y
--CONFIG_SPL_STACK_R_ADDR=0x600000
- CONFIG_TARGET_EVB_RK3588=y
--CONFIG_SPL_STACK=0x400000
- CONFIG_DEBUG_UART_BASE=0xFEB50000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_SPL_SPI_FLASH_SUPPORT=y
-@@ -38,12 +30,7 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-orangepi-5-plus.dtb"
- CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_SPL_MAX_SIZE=0x40000
- CONFIG_SPL_PAD_TO=0x7f8000
--CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
--CONFIG_SPL_BSS_START_ADDR=0x4000000
--CONFIG_SPL_BSS_MAX_SIZE=0x4000
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
--# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
--CONFIG_SPL_STACK_R=y
- CONFIG_SPL_SPI_LOAD=y
- CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
- CONFIG_SPL_ATF=y
-diff --git a/configs/orangepi-5-rk3588s_defconfig b/configs/orangepi-5-rk3588s_defconfig
-index a9404c912ea3..e6b3da1dc593 100644
---- a/configs/orangepi-5-rk3588s_defconfig
-+++ b/configs/orangepi-5-rk3588s_defconfig
-@@ -2,22 +2,14 @@ CONFIG_ARM=y
+-CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x10000
+ CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+ CONFIG_TPL=y
+ CONFIG_CMD_BOOTZ=y
+diff --git a/configs/khadas-edge-captain-rk3399_defconfig b/configs/khadas-edge-captain-rk3399_defconfig
+index 28a59899e1cb..310250ed4a52 100644
+--- a/configs/khadas-edge-captain-rk3399_defconfig
++++ b/configs/khadas-edge-captain-rk3399_defconfig
+@@ -2,15 +2,11 @@ CONFIG_ARM=y
  CONFIG_SKIP_LOWLEVEL_INIT=y
  CONFIG_COUNTER_FREQUENCY=24000000
  CONFIG_ARCH_ROCKCHIP=y
--CONFIG_TEXT_BASE=0x00a00000
--CONFIG_SPL_LIBCOMMON_SUPPORT=y
--CONFIG_SPL_LIBGENERIC_SUPPORT=y
- CONFIG_NR_DRAM_BANKS=2
+-CONFIG_TEXT_BASE=0x00200000
+ CONFIG_NR_DRAM_BANKS=1
 -CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc00000
- CONFIG_SF_DEFAULT_SPEED=24000000
- CONFIG_SF_DEFAULT_MODE=0x2000
- CONFIG_DEFAULT_DEVICE_TREE="rk3588s-orangepi-5"
- CONFIG_ROCKCHIP_RK3588=y
--CONFIG_SPL_ROCKCHIP_COMMON_BOARD=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_SPL_SERIAL=y
--CONFIG_SPL_STACK_R_ADDR=0x600000
- CONFIG_TARGET_EVB_RK3588=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
+ CONFIG_ENV_OFFSET=0x3F8000
+ CONFIG_DEFAULT_DEVICE_TREE="rk3399-khadas-edge-captain"
+ CONFIG_ROCKCHIP_RK3399=y
+ CONFIG_TARGET_EVB_RK3399=y
 -CONFIG_SPL_STACK=0x400000
- CONFIG_DEBUG_UART_BASE=0xFEB50000
+ CONFIG_DEBUG_UART_BASE=0xFF1A0000
  CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_SPL_SPI_FLASH_SUPPORT=y
-@@ -37,12 +29,7 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588s-orangepi-5.dtb"
+ CONFIG_SYS_LOAD_ADDR=0x800800
+@@ -20,13 +16,7 @@ CONFIG_SYS_PBSIZE=1048
  CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_MAX_SIZE=0x2e000
  CONFIG_SPL_PAD_TO=0x7f8000
 -CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
--CONFIG_SPL_BSS_START_ADDR=0x4000000
--CONFIG_SPL_BSS_MAX_SIZE=0x4000
+-CONFIG_SPL_BSS_START_ADDR=0x400000
+-CONFIG_SPL_BSS_MAX_SIZE=0x2000
  # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
 -# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
 -CONFIG_SPL_STACK_R=y
- CONFIG_SPL_SPI_LOAD=y
- CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
- CONFIG_SPL_ATF=y
-diff --git a/configs/quartzpro64-rk3588_defconfig b/configs/quartzpro64-rk3588_defconfig
-index 9cc4eb02e089..b2a66d3f2db0 100644
---- a/configs/quartzpro64-rk3588_defconfig
-+++ b/configs/quartzpro64-rk3588_defconfig
-@@ -3,19 +3,11 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_SYS_HAS_NONCACHED_MEMORY=y
- CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
--CONFIG_TEXT_BASE=0x00a00000
--CONFIG_SPL_LIBCOMMON_SUPPORT=y
--CONFIG_SPL_LIBGENERIC_SUPPORT=y
- CONFIG_NR_DRAM_BANKS=2
--CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc00000
- CONFIG_DEFAULT_DEVICE_TREE="rk3588-quartzpro64"
- CONFIG_ROCKCHIP_RK3588=y
--CONFIG_SPL_ROCKCHIP_COMMON_BOARD=y
- CONFIG_SPL_SERIAL=y
--CONFIG_SPL_STACK_R_ADDR=0x600000
- CONFIG_TARGET_QUARTZPRO64_RK3588=y
--CONFIG_SPL_STACK=0x400000
- CONFIG_DEBUG_UART_BASE=0xFEB50000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_SYS_LOAD_ADDR=0xc00800
-@@ -33,12 +25,7 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-quartzpro64.dtb"
- CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_SPL_MAX_SIZE=0x40000
- CONFIG_SPL_PAD_TO=0x7f8000
--CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
--CONFIG_SPL_BSS_START_ADDR=0x4000000
--CONFIG_SPL_BSS_MAX_SIZE=0x4000
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
--# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
--CONFIG_SPL_STACK_R=y
- CONFIG_SPL_ATF=y
- CONFIG_CMD_GPIO=y
- CONFIG_CMD_GPT=y
-diff --git a/configs/rock5a-rk3588s_defconfig b/configs/rock5a-rk3588s_defconfig
-index efa7bcbdcda6..ebe2d4a2d810 100644
---- a/configs/rock5a-rk3588s_defconfig
-+++ b/configs/rock5a-rk3588s_defconfig
-@@ -2,19 +2,11 @@ CONFIG_ARM=y
+-CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x10000
+ CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+ CONFIG_TPL=y
+ CONFIG_SYS_PROMPT="kedge# "
+diff --git a/configs/khadas-edge-rk3399_defconfig b/configs/khadas-edge-rk3399_defconfig
+index 075e28a509f4..3fe5542d1256 100644
+--- a/configs/khadas-edge-rk3399_defconfig
++++ b/configs/khadas-edge-rk3399_defconfig
+@@ -2,15 +2,11 @@ CONFIG_ARM=y
  CONFIG_SKIP_LOWLEVEL_INIT=y
  CONFIG_COUNTER_FREQUENCY=24000000
  CONFIG_ARCH_ROCKCHIP=y
--CONFIG_TEXT_BASE=0x00a00000
--CONFIG_SPL_LIBCOMMON_SUPPORT=y
--CONFIG_SPL_LIBGENERIC_SUPPORT=y
- CONFIG_NR_DRAM_BANKS=2
+-CONFIG_TEXT_BASE=0x00200000
+ CONFIG_NR_DRAM_BANKS=1
 -CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc00000
- CONFIG_DEFAULT_DEVICE_TREE="rk3588s-rock-5a"
- CONFIG_ROCKCHIP_RK3588=y
--CONFIG_SPL_ROCKCHIP_COMMON_BOARD=y
- CONFIG_SPL_SERIAL=y
--CONFIG_SPL_STACK_R_ADDR=0x1000000
- CONFIG_TARGET_ROCK5A_RK3588=y
--CONFIG_SPL_STACK=0x1000000
- CONFIG_DEBUG_UART_BASE=0xFEB50000
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
+ CONFIG_ENV_OFFSET=0x3F8000
+ CONFIG_DEFAULT_DEVICE_TREE="rk3399-khadas-edge"
+ CONFIG_ROCKCHIP_RK3399=y
+ CONFIG_TARGET_EVB_RK3399=y
+-CONFIG_SPL_STACK=0x400000
+ CONFIG_DEBUG_UART_BASE=0xFF1A0000
  CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_SYS_LOAD_ADDR=0xc00800
-@@ -30,12 +22,7 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588s-rock-5a.dtb"
+ CONFIG_SYS_LOAD_ADDR=0x800800
+@@ -20,13 +16,7 @@ CONFIG_SYS_PBSIZE=1048
  CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_MAX_SIZE=0x2e000
  CONFIG_SPL_PAD_TO=0x7f8000
 -CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
--CONFIG_SPL_BSS_START_ADDR=0x4000000
--CONFIG_SPL_BSS_MAX_SIZE=0x4000
+-CONFIG_SPL_BSS_START_ADDR=0x400000
+-CONFIG_SPL_BSS_MAX_SIZE=0x2000
  # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
 -# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
 -CONFIG_SPL_STACK_R=y
- CONFIG_SPL_ATF=y
- CONFIG_CMD_GPIO=y
- CONFIG_CMD_GPT=y
-diff --git a/configs/rock5b-rk3588_defconfig b/configs/rock5b-rk3588_defconfig
-index a0678ff1290c..58c7c44fb4f7 100644
---- a/configs/rock5b-rk3588_defconfig
-+++ b/configs/rock5b-rk3588_defconfig
-@@ -3,22 +3,14 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_SYS_HAS_NONCACHED_MEMORY=y
+-CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x10000
+ CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+ CONFIG_TPL=y
+ CONFIG_SYS_PROMPT="kedge# "
+diff --git a/configs/khadas-edge-v-rk3399_defconfig b/configs/khadas-edge-v-rk3399_defconfig
+index c65690ce3da7..4b41454d710d 100644
+--- a/configs/khadas-edge-v-rk3399_defconfig
++++ b/configs/khadas-edge-v-rk3399_defconfig
+@@ -2,15 +2,11 @@ CONFIG_ARM=y
+ CONFIG_SKIP_LOWLEVEL_INIT=y
  CONFIG_COUNTER_FREQUENCY=24000000
  CONFIG_ARCH_ROCKCHIP=y
--CONFIG_TEXT_BASE=0x00a00000
--CONFIG_SPL_LIBCOMMON_SUPPORT=y
--CONFIG_SPL_LIBGENERIC_SUPPORT=y
- CONFIG_NR_DRAM_BANKS=2
+-CONFIG_TEXT_BASE=0x00200000
+ CONFIG_NR_DRAM_BANKS=1
 -CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc00000
- CONFIG_SF_DEFAULT_SPEED=24000000
- CONFIG_SF_DEFAULT_MODE=0x2000
- CONFIG_DEFAULT_DEVICE_TREE="rk3588-rock-5b"
- CONFIG_ROCKCHIP_RK3588=y
--CONFIG_SPL_ROCKCHIP_COMMON_BOARD=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_SPL_SERIAL=y
--CONFIG_SPL_STACK_R_ADDR=0x600000
- CONFIG_TARGET_ROCK5B_RK3588=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
+ CONFIG_ENV_OFFSET=0x3F8000
+ CONFIG_DEFAULT_DEVICE_TREE="rk3399-khadas-edge-v"
+ CONFIG_ROCKCHIP_RK3399=y
+ CONFIG_TARGET_EVB_RK3399=y
 -CONFIG_SPL_STACK=0x400000
- CONFIG_DEBUG_UART_BASE=0xFEB50000
+ CONFIG_DEBUG_UART_BASE=0xFF1A0000
  CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_SPL_SPI_FLASH_SUPPORT=y
-@@ -38,12 +30,7 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-rock-5b.dtb"
+ CONFIG_SYS_LOAD_ADDR=0x800800
+@@ -20,13 +16,7 @@ CONFIG_SYS_PBSIZE=1048
  CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_MAX_SIZE=0x2e000
  CONFIG_SPL_PAD_TO=0x7f8000
 -CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
--CONFIG_SPL_BSS_START_ADDR=0x4000000
--CONFIG_SPL_BSS_MAX_SIZE=0x4000
+-CONFIG_SPL_BSS_START_ADDR=0x400000
+-CONFIG_SPL_BSS_MAX_SIZE=0x2000
  # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
 -# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
 -CONFIG_SPL_STACK_R=y
- CONFIG_SPL_SPI_LOAD=y
- CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
- CONFIG_SPL_ATF=y
-diff --git a/configs/turing-rk1-rk3588_defconfig b/configs/turing-rk1-rk3588_defconfig
-index 0f903cf6e8b9..07f7b848529e 100644
---- a/configs/turing-rk1-rk3588_defconfig
-+++ b/configs/turing-rk1-rk3588_defconfig
-@@ -3,22 +3,14 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_SYS_HAS_NONCACHED_MEMORY=y
+-CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x10000
+ CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+ CONFIG_TPL=y
+ CONFIG_SYS_PROMPT="kedge# "
+diff --git a/configs/leez-rk3399_defconfig b/configs/leez-rk3399_defconfig
+index 2122018e7a3e..e5088341389a 100644
+--- a/configs/leez-rk3399_defconfig
++++ b/configs/leez-rk3399_defconfig
+@@ -2,15 +2,11 @@ CONFIG_ARM=y
+ CONFIG_SKIP_LOWLEVEL_INIT=y
  CONFIG_COUNTER_FREQUENCY=24000000
  CONFIG_ARCH_ROCKCHIP=y
--CONFIG_TEXT_BASE=0x00a00000
--CONFIG_SPL_LIBCOMMON_SUPPORT=y
--CONFIG_SPL_LIBGENERIC_SUPPORT=y
- CONFIG_NR_DRAM_BANKS=2
+-CONFIG_TEXT_BASE=0x00200000
+ CONFIG_NR_DRAM_BANKS=1
 -CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc00000
- CONFIG_SF_DEFAULT_SPEED=24000000
- CONFIG_SF_DEFAULT_MODE=0x2000
- CONFIG_DEFAULT_DEVICE_TREE="rk3588-turing-rk1"
- CONFIG_ROCKCHIP_RK3588=y
--CONFIG_SPL_ROCKCHIP_COMMON_BOARD=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_SPL_SERIAL=y
--CONFIG_SPL_STACK_R_ADDR=0x600000
- CONFIG_TARGET_TURINGRK1_RK3588=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
+ CONFIG_ENV_OFFSET=0x3F8000
+ CONFIG_DEFAULT_DEVICE_TREE="rk3399-leez-p710"
+ CONFIG_ROCKCHIP_RK3399=y
+ CONFIG_TARGET_EVB_RK3399=y
 -CONFIG_SPL_STACK=0x400000
- CONFIG_DEBUG_UART_BASE=0xFEBC0000
+ CONFIG_DEBUG_UART_BASE=0xFF1A0000
+ CONFIG_DEBUG_UART_CLOCK=24000000
+ CONFIG_SYS_LOAD_ADDR=0x800800
+@@ -19,12 +15,6 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-leez-p710.dtb"
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x2e000
+ CONFIG_SPL_PAD_TO=0x7f8000
+-CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+-CONFIG_SPL_BSS_START_ADDR=0x400000
+-CONFIG_SPL_BSS_MAX_SIZE=0x2000
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-CONFIG_SPL_STACK_R=y
+-CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x10000
+ CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+ CONFIG_TPL=y
+ CONFIG_CMD_BOOTZ=y
+diff --git a/configs/nanopc-t4-rk3399_defconfig b/configs/nanopc-t4-rk3399_defconfig
+index c1617d740112..cdfacb66e678 100644
+--- a/configs/nanopc-t4-rk3399_defconfig
++++ b/configs/nanopc-t4-rk3399_defconfig
+@@ -2,16 +2,12 @@ CONFIG_ARM=y
+ CONFIG_SKIP_LOWLEVEL_INIT=y
+ CONFIG_COUNTER_FREQUENCY=24000000
+ CONFIG_ARCH_ROCKCHIP=y
+-CONFIG_TEXT_BASE=0x00200000
+ CONFIG_NR_DRAM_BANKS=1
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
+ CONFIG_ENV_OFFSET=0x3F8000
+ CONFIG_DEFAULT_DEVICE_TREE="rk3399-nanopc-t4"
+ CONFIG_DM_RESET=y
+ CONFIG_ROCKCHIP_RK3399=y
+ CONFIG_TARGET_EVB_RK3399=y
+-CONFIG_SPL_STACK=0x400000
+ CONFIG_DEBUG_UART_BASE=0xFF1A0000
+ CONFIG_DEBUG_UART_CLOCK=24000000
+ CONFIG_SYS_LOAD_ADDR=0x800800
+@@ -21,13 +17,7 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-nanopc-t4.dtb"
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x2e000
+ CONFIG_SPL_PAD_TO=0x7f8000
+-CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+-CONFIG_SPL_BSS_START_ADDR=0x400000
+-CONFIG_SPL_BSS_MAX_SIZE=0x2000
+ # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-CONFIG_SPL_STACK_R=y
+-CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x10000
+ CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+ CONFIG_TPL=y
+ CONFIG_CMD_BOOTZ=y
+diff --git a/configs/nanopi-m4-2gb-rk3399_defconfig b/configs/nanopi-m4-2gb-rk3399_defconfig
+index 4d70fde6b14d..51596f57ae35 100644
+--- a/configs/nanopi-m4-2gb-rk3399_defconfig
++++ b/configs/nanopi-m4-2gb-rk3399_defconfig
+@@ -2,15 +2,11 @@ CONFIG_ARM=y
+ CONFIG_SKIP_LOWLEVEL_INIT=y
+ CONFIG_COUNTER_FREQUENCY=24000000
+ CONFIG_ARCH_ROCKCHIP=y
+-CONFIG_TEXT_BASE=0x00200000
+ CONFIG_NR_DRAM_BANKS=1
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
+ CONFIG_ENV_OFFSET=0x3F8000
+ CONFIG_DEFAULT_DEVICE_TREE="rk3399-nanopi-m4-2gb"
+ CONFIG_ROCKCHIP_RK3399=y
+ CONFIG_TARGET_EVB_RK3399=y
+-CONFIG_SPL_STACK=0x400000
+ CONFIG_DEBUG_UART_BASE=0xFF1A0000
+ CONFIG_DEBUG_UART_CLOCK=24000000
+ CONFIG_SYS_LOAD_ADDR=0x800800
+@@ -19,13 +15,7 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-nanopi-m4-2gb.dtb"
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x2e000
+ CONFIG_SPL_PAD_TO=0x7f8000
+-CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+-CONFIG_SPL_BSS_START_ADDR=0x400000
+-CONFIG_SPL_BSS_MAX_SIZE=0x2000
+ # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-CONFIG_SPL_STACK_R=y
+-CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x10000
+ CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+ CONFIG_TPL=y
+ CONFIG_CMD_BOOTZ=y
+diff --git a/configs/nanopi-m4-rk3399_defconfig b/configs/nanopi-m4-rk3399_defconfig
+index a96fe0306dad..2af84fb6ff17 100644
+--- a/configs/nanopi-m4-rk3399_defconfig
++++ b/configs/nanopi-m4-rk3399_defconfig
+@@ -2,15 +2,11 @@ CONFIG_ARM=y
+ CONFIG_SKIP_LOWLEVEL_INIT=y
+ CONFIG_COUNTER_FREQUENCY=24000000
+ CONFIG_ARCH_ROCKCHIP=y
+-CONFIG_TEXT_BASE=0x00200000
+ CONFIG_NR_DRAM_BANKS=1
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
+ CONFIG_ENV_OFFSET=0x3F8000
+ CONFIG_DEFAULT_DEVICE_TREE="rk3399-nanopi-m4"
+ CONFIG_ROCKCHIP_RK3399=y
+ CONFIG_TARGET_EVB_RK3399=y
+-CONFIG_SPL_STACK=0x400000
+ CONFIG_DEBUG_UART_BASE=0xFF1A0000
+ CONFIG_DEBUG_UART_CLOCK=24000000
+ CONFIG_SYS_LOAD_ADDR=0x800800
+@@ -19,13 +15,7 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-nanopi-m4.dtb"
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x2e000
+ CONFIG_SPL_PAD_TO=0x7f8000
+-CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+-CONFIG_SPL_BSS_START_ADDR=0x400000
+-CONFIG_SPL_BSS_MAX_SIZE=0x2000
+ # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-CONFIG_SPL_STACK_R=y
+-CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x10000
+ CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+ CONFIG_TPL=y
+ CONFIG_CMD_BOOTZ=y
+diff --git a/configs/nanopi-m4b-rk3399_defconfig b/configs/nanopi-m4b-rk3399_defconfig
+index c8faccb233a5..1b76f98e0df7 100644
+--- a/configs/nanopi-m4b-rk3399_defconfig
++++ b/configs/nanopi-m4b-rk3399_defconfig
+@@ -2,15 +2,11 @@ CONFIG_ARM=y
+ CONFIG_SKIP_LOWLEVEL_INIT=y
+ CONFIG_COUNTER_FREQUENCY=24000000
+ CONFIG_ARCH_ROCKCHIP=y
+-CONFIG_TEXT_BASE=0x00200000
+ CONFIG_NR_DRAM_BANKS=1
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
+ CONFIG_ENV_OFFSET=0x3F8000
+ CONFIG_DEFAULT_DEVICE_TREE="rk3399-nanopi-m4b"
+ CONFIG_ROCKCHIP_RK3399=y
+ CONFIG_TARGET_EVB_RK3399=y
+-CONFIG_SPL_STACK=0x400000
+ CONFIG_DEBUG_UART_BASE=0xFF1A0000
+ CONFIG_DEBUG_UART_CLOCK=24000000
+ CONFIG_SYS_LOAD_ADDR=0x800800
+@@ -19,13 +15,7 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-nanopi-m4b.dtb"
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x2e000
+ CONFIG_SPL_PAD_TO=0x7f8000
+-CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+-CONFIG_SPL_BSS_START_ADDR=0x400000
+-CONFIG_SPL_BSS_MAX_SIZE=0x2000
+ # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-CONFIG_SPL_STACK_R=y
+-CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x10000
+ CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+ CONFIG_TPL=y
+ CONFIG_CMD_BOOTZ=y
+diff --git a/configs/nanopi-neo4-rk3399_defconfig b/configs/nanopi-neo4-rk3399_defconfig
+index 1c4ffbb44041..c176c5a12111 100644
+--- a/configs/nanopi-neo4-rk3399_defconfig
++++ b/configs/nanopi-neo4-rk3399_defconfig
+@@ -2,15 +2,11 @@ CONFIG_ARM=y
+ CONFIG_SKIP_LOWLEVEL_INIT=y
+ CONFIG_COUNTER_FREQUENCY=24000000
+ CONFIG_ARCH_ROCKCHIP=y
+-CONFIG_TEXT_BASE=0x00200000
+ CONFIG_NR_DRAM_BANKS=1
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
+ CONFIG_ENV_OFFSET=0x3F8000
+ CONFIG_DEFAULT_DEVICE_TREE="rk3399-nanopi-neo4"
+ CONFIG_ROCKCHIP_RK3399=y
+ CONFIG_TARGET_EVB_RK3399=y
+-CONFIG_SPL_STACK=0x400000
+ CONFIG_DEBUG_UART_BASE=0xFF1A0000
+ CONFIG_DEBUG_UART_CLOCK=24000000
+ CONFIG_SYS_LOAD_ADDR=0x800800
+@@ -19,13 +15,7 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-nanopi-neo4.dtb"
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x2e000
+ CONFIG_SPL_PAD_TO=0x7f8000
+-CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+-CONFIG_SPL_BSS_START_ADDR=0x400000
+-CONFIG_SPL_BSS_MAX_SIZE=0x2000
+ # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-CONFIG_SPL_STACK_R=y
+-CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x10000
+ CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+ CONFIG_TPL=y
+ CONFIG_CMD_BOOTZ=y
+diff --git a/configs/nanopi-r4s-rk3399_defconfig b/configs/nanopi-r4s-rk3399_defconfig
+index 50dbd7a854d4..ea01d323541b 100644
+--- a/configs/nanopi-r4s-rk3399_defconfig
++++ b/configs/nanopi-r4s-rk3399_defconfig
+@@ -2,15 +2,11 @@ CONFIG_ARM=y
+ CONFIG_SKIP_LOWLEVEL_INIT=y
+ CONFIG_COUNTER_FREQUENCY=24000000
+ CONFIG_ARCH_ROCKCHIP=y
+-CONFIG_TEXT_BASE=0x00200000
+ CONFIG_NR_DRAM_BANKS=1
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
+ CONFIG_ENV_OFFSET=0x3F8000
+ CONFIG_DEFAULT_DEVICE_TREE="rk3399-nanopi-r4s"
+ CONFIG_ROCKCHIP_RK3399=y
+ CONFIG_TARGET_EVB_RK3399=y
+-CONFIG_SPL_STACK=0x400000
+ CONFIG_DEBUG_UART_BASE=0xFF1A0000
+ CONFIG_DEBUG_UART_CLOCK=24000000
+ CONFIG_SYS_LOAD_ADDR=0x800800
+@@ -19,13 +15,7 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-nanopi-r4s.dtb"
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x2e000
+ CONFIG_SPL_PAD_TO=0x7f8000
+-CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+-CONFIG_SPL_BSS_START_ADDR=0x400000
+-CONFIG_SPL_BSS_MAX_SIZE=0x2000
+ # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-CONFIG_SPL_STACK_R=y
+-CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x10000
+ CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+ CONFIG_TPL=y
+ CONFIG_CMD_BOOTZ=y
+diff --git a/configs/orangepi-rk3399_defconfig b/configs/orangepi-rk3399_defconfig
+index bc2c4782efbc..c6a92b2decf3 100644
+--- a/configs/orangepi-rk3399_defconfig
++++ b/configs/orangepi-rk3399_defconfig
+@@ -2,15 +2,11 @@ CONFIG_ARM=y
+ CONFIG_SKIP_LOWLEVEL_INIT=y
+ CONFIG_COUNTER_FREQUENCY=24000000
+ CONFIG_ARCH_ROCKCHIP=y
+-CONFIG_TEXT_BASE=0x00200000
+ CONFIG_NR_DRAM_BANKS=1
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
+ CONFIG_ENV_OFFSET=0x3F8000
+ CONFIG_DEFAULT_DEVICE_TREE="rk3399-orangepi"
+ CONFIG_ROCKCHIP_RK3399=y
+ CONFIG_TARGET_EVB_RK3399=y
+-CONFIG_SPL_STACK=0x400000
+ CONFIG_DEBUG_UART_BASE=0xFF1A0000
+ CONFIG_DEBUG_UART_CLOCK=24000000
+ CONFIG_SYS_LOAD_ADDR=0x800800
+@@ -19,13 +15,7 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-orangepi.dtb"
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x2e000
+ CONFIG_SPL_PAD_TO=0x7f8000
+-CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+-CONFIG_SPL_BSS_START_ADDR=0x400000
+-CONFIG_SPL_BSS_MAX_SIZE=0x2000
+ # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-CONFIG_SPL_STACK_R=y
+-CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x10000
+ CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+ CONFIG_TPL=y
+ CONFIG_CMD_BOOTZ=y
+diff --git a/configs/pinebook-pro-rk3399_defconfig b/configs/pinebook-pro-rk3399_defconfig
+index 3083d0a8bb77..57e614c314e9 100644
+--- a/configs/pinebook-pro-rk3399_defconfig
++++ b/configs/pinebook-pro-rk3399_defconfig
+@@ -2,10 +2,7 @@ CONFIG_ARM=y
+ CONFIG_SKIP_LOWLEVEL_INIT=y
+ CONFIG_COUNTER_FREQUENCY=24000000
+ CONFIG_ARCH_ROCKCHIP=y
+-CONFIG_TEXT_BASE=0x00200000
+ CONFIG_NR_DRAM_BANKS=1
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
+ CONFIG_SF_DEFAULT_SPEED=20000000
+ CONFIG_ENV_SIZE=0x8000
+ CONFIG_ENV_OFFSET=0x3F8000
+@@ -14,7 +11,6 @@ CONFIG_DM_RESET=y
+ CONFIG_ROCKCHIP_RK3399=y
+ CONFIG_ROCKCHIP_SPI_IMAGE=y
+ CONFIG_TARGET_PINEBOOK_PRO_RK3399=y
+-CONFIG_SPL_STACK=0x400000
+ CONFIG_DEBUG_UART_BASE=0xFF1A0000
  CONFIG_DEBUG_UART_CLOCK=24000000
  CONFIG_SPL_SPI_FLASH_SUPPORT=y
-@@ -38,12 +30,7 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-turing-rk1.dtb"
+@@ -28,13 +24,7 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-pinebook-pro.dtb"
  CONFIG_DISPLAY_BOARDINFO_LATE=y
  CONFIG_SPL_MAX_SIZE=0x40000
  CONFIG_SPL_PAD_TO=0x7f8000
 -CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
--CONFIG_SPL_BSS_START_ADDR=0x4000000
--CONFIG_SPL_BSS_MAX_SIZE=0x4000
+-CONFIG_SPL_BSS_START_ADDR=0x400000
+-CONFIG_SPL_BSS_MAX_SIZE=0x2000
  # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
 -# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
 -CONFIG_SPL_STACK_R=y
+-CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x10000
  CONFIG_SPL_SPI_LOAD=y
- CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
- CONFIG_SPL_ATF=y
+ CONFIG_SYS_SPI_U_BOOT_OFFS=0xE0000
+ CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+diff --git a/configs/pinephone-pro-rk3399_defconfig b/configs/pinephone-pro-rk3399_defconfig
+index 454cb7eec76b..49d3d0456b57 100644
+--- a/configs/pinephone-pro-rk3399_defconfig
++++ b/configs/pinephone-pro-rk3399_defconfig
+@@ -2,10 +2,7 @@ CONFIG_ARM=y
+ CONFIG_SKIP_LOWLEVEL_INIT=y
+ CONFIG_COUNTER_FREQUENCY=24000000
+ CONFIG_ARCH_ROCKCHIP=y
+-CONFIG_TEXT_BASE=0x00200000
+ CONFIG_NR_DRAM_BANKS=1
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
+ CONFIG_SF_DEFAULT_SPEED=20000000
+ CONFIG_ENV_SIZE=0x8000
+ CONFIG_ENV_OFFSET=0x3F8000
+@@ -14,7 +11,6 @@ CONFIG_DM_RESET=y
+ CONFIG_ROCKCHIP_RK3399=y
+ CONFIG_ROCKCHIP_SPI_IMAGE=y
+ CONFIG_TARGET_PINEPHONE_PRO_RK3399=y
+-CONFIG_SPL_STACK=0x400000
+ CONFIG_DEBUG_UART_BASE=0xFF1A0000
+ CONFIG_DEBUG_UART_CLOCK=24000000
+ CONFIG_SPL_SPI_FLASH_SUPPORT=y
+@@ -27,13 +23,7 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-pinephone-pro.dtb"
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_PAD_TO=0x7f8000
+-CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+-CONFIG_SPL_BSS_START_ADDR=0x400000
+-CONFIG_SPL_BSS_MAX_SIZE=0x2000
+ # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-CONFIG_SPL_STACK_R=y
+-CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x10000
+ CONFIG_SPL_SPI_LOAD=y
+ CONFIG_SYS_SPI_U_BOOT_OFFS=0xE0000
+ CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+diff --git a/configs/roc-pc-mezzanine-rk3399_defconfig b/configs/roc-pc-mezzanine-rk3399_defconfig
+index 8d4153ea5f0e..1ff4e15c8c10 100644
+--- a/configs/roc-pc-mezzanine-rk3399_defconfig
++++ b/configs/roc-pc-mezzanine-rk3399_defconfig
+@@ -2,11 +2,8 @@ CONFIG_ARM=y
+ CONFIG_SKIP_LOWLEVEL_INIT=y
+ CONFIG_COUNTER_FREQUENCY=24000000
+ CONFIG_ARCH_ROCKCHIP=y
+-CONFIG_TEXT_BASE=0x00200000
+ CONFIG_SPL_GPIO=y
+ CONFIG_NR_DRAM_BANKS=1
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
+ CONFIG_ENV_SIZE=0x8000
+ CONFIG_ENV_OFFSET=0x3F8000
+ CONFIG_ENV_SECT_SIZE=0x1000
+@@ -15,7 +12,6 @@ CONFIG_DM_RESET=y
+ CONFIG_ROCKCHIP_RK3399=y
+ CONFIG_ROCKCHIP_SPI_IMAGE=y
+ CONFIG_TARGET_ROC_PC_RK3399=y
+-CONFIG_SPL_STACK=0x400000
+ CONFIG_DEBUG_UART_BASE=0xFF1A0000
+ CONFIG_DEBUG_UART_CLOCK=24000000
+ CONFIG_SPL_SPI_FLASH_SUPPORT=y
+@@ -28,13 +24,7 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-roc-pc-mezzanine.dtb"
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_PAD_TO=0x7f8000
+-CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+-CONFIG_SPL_BSS_START_ADDR=0x400000
+-CONFIG_SPL_BSS_MAX_SIZE=0x2000
+ # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-CONFIG_SPL_STACK_R=y
+-CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x20000
+ CONFIG_SPL_ENV_SUPPORT=y
+ CONFIG_SPL_SPI_LOAD=y
+ CONFIG_SYS_SPI_U_BOOT_OFFS=0xE0000
+diff --git a/configs/roc-pc-rk3399_defconfig b/configs/roc-pc-rk3399_defconfig
+index 3824eb22d3da..a41f71d9e167 100644
+--- a/configs/roc-pc-rk3399_defconfig
++++ b/configs/roc-pc-rk3399_defconfig
+@@ -2,11 +2,8 @@ CONFIG_ARM=y
+ CONFIG_SKIP_LOWLEVEL_INIT=y
+ CONFIG_COUNTER_FREQUENCY=24000000
+ CONFIG_ARCH_ROCKCHIP=y
+-CONFIG_TEXT_BASE=0x00200000
+ CONFIG_SPL_GPIO=y
+ CONFIG_NR_DRAM_BANKS=1
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
+ CONFIG_SF_DEFAULT_SPEED=30000000
+ CONFIG_ENV_SIZE=0x8000
+ CONFIG_ENV_OFFSET=0x3F8000
+@@ -16,7 +13,6 @@ CONFIG_DM_RESET=y
+ CONFIG_ROCKCHIP_RK3399=y
+ CONFIG_ROCKCHIP_SPI_IMAGE=y
+ CONFIG_TARGET_ROC_PC_RK3399=y
+-CONFIG_SPL_STACK=0x400000
+ CONFIG_DEBUG_UART_BASE=0xFF1A0000
+ CONFIG_DEBUG_UART_CLOCK=24000000
+ CONFIG_SPL_SPI_FLASH_SUPPORT=y
+@@ -29,13 +25,7 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-roc-pc.dtb"
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_PAD_TO=0x7f8000
+-CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+-CONFIG_SPL_BSS_START_ADDR=0x400000
+-CONFIG_SPL_BSS_MAX_SIZE=0x2000
+ # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-CONFIG_SPL_STACK_R=y
+-CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x20000
+ CONFIG_SPL_ENV_SUPPORT=y
+ CONFIG_SPL_SPI_LOAD=y
+ CONFIG_SYS_SPI_U_BOOT_OFFS=0xE0000
+diff --git a/configs/rock-4c-plus-rk3399_defconfig b/configs/rock-4c-plus-rk3399_defconfig
+index 67ad54610a72..1652da5b6ca6 100644
+--- a/configs/rock-4c-plus-rk3399_defconfig
++++ b/configs/rock-4c-plus-rk3399_defconfig
+@@ -2,17 +2,13 @@ CONFIG_ARM=y
+ CONFIG_SKIP_LOWLEVEL_INIT=y
+ CONFIG_COUNTER_FREQUENCY=24000000
+ CONFIG_ARCH_ROCKCHIP=y
+-CONFIG_TEXT_BASE=0x00200000
+ CONFIG_NR_DRAM_BANKS=1
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
+ CONFIG_ENV_OFFSET=0x3F8000
+ CONFIG_DEFAULT_DEVICE_TREE="rk3399-rock-4c-plus"
+ CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_DM_RESET=y
+ CONFIG_ROCKCHIP_RK3399=y
+ CONFIG_TARGET_EVB_RK3399=y
+-CONFIG_SPL_STACK=0x400000
+ CONFIG_DEBUG_UART_BASE=0xFF1A0000
+ CONFIG_DEBUG_UART_CLOCK=24000000
+ CONFIG_SYS_LOAD_ADDR=0x800800
+@@ -23,13 +19,7 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-rock-4c-plus.dtb"
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x2e000
+ CONFIG_SPL_PAD_TO=0x7f8000
+-CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+-CONFIG_SPL_BSS_START_ADDR=0x400000
+-CONFIG_SPL_BSS_MAX_SIZE=0x2000
+ # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-CONFIG_SPL_STACK_R=y
+-CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x10000
+ CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+ CONFIG_TPL=y
+ CONFIG_CMD_BOOTZ=y
+diff --git a/configs/rock-4se-rk3399_defconfig b/configs/rock-4se-rk3399_defconfig
+index b0993bb81020..e51a074a2972 100644
+--- a/configs/rock-4se-rk3399_defconfig
++++ b/configs/rock-4se-rk3399_defconfig
+@@ -2,17 +2,13 @@ CONFIG_ARM=y
+ CONFIG_SKIP_LOWLEVEL_INIT=y
+ CONFIG_COUNTER_FREQUENCY=24000000
+ CONFIG_ARCH_ROCKCHIP=y
+-CONFIG_TEXT_BASE=0x00200000
+ CONFIG_NR_DRAM_BANKS=1
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
+ CONFIG_ENV_OFFSET=0x3F8000
+ CONFIG_DEFAULT_DEVICE_TREE="rk3399-rock-4se"
+ CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_DM_RESET=y
+ CONFIG_ROCKCHIP_RK3399=y
+ CONFIG_TARGET_EVB_RK3399=y
+-CONFIG_SPL_STACK=0x400000
+ CONFIG_DEBUG_UART_BASE=0xFF1A0000
+ CONFIG_DEBUG_UART_CLOCK=24000000
+ CONFIG_SYS_LOAD_ADDR=0x800800
+@@ -25,13 +21,7 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-rock-4se.dtb"
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x2e000
+ CONFIG_SPL_PAD_TO=0x7f8000
+-CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+-CONFIG_SPL_BSS_START_ADDR=0x400000
+-CONFIG_SPL_BSS_MAX_SIZE=0x2000
+ # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-CONFIG_SPL_STACK_R=y
+-CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x10000
+ CONFIG_TPL=y
+ CONFIG_CMD_BOOTZ=y
+ CONFIG_CMD_NVEDIT_EFI=y
+diff --git a/configs/rock-pi-4-rk3399_defconfig b/configs/rock-pi-4-rk3399_defconfig
+index 2df3cd41e16c..6dc607590050 100644
+--- a/configs/rock-pi-4-rk3399_defconfig
++++ b/configs/rock-pi-4-rk3399_defconfig
+@@ -2,17 +2,13 @@ CONFIG_ARM=y
+ CONFIG_SKIP_LOWLEVEL_INIT=y
+ CONFIG_COUNTER_FREQUENCY=24000000
+ CONFIG_ARCH_ROCKCHIP=y
+-CONFIG_TEXT_BASE=0x00200000
+ CONFIG_NR_DRAM_BANKS=1
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
+ CONFIG_ENV_OFFSET=0x3F8000
+ CONFIG_DEFAULT_DEVICE_TREE="rk3399-rock-pi-4a"
+ CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_DM_RESET=y
+ CONFIG_ROCKCHIP_RK3399=y
+ CONFIG_TARGET_EVB_RK3399=y
+-CONFIG_SPL_STACK=0x400000
+ CONFIG_DEBUG_UART_BASE=0xFF1A0000
+ CONFIG_DEBUG_UART_CLOCK=24000000
+ CONFIG_SYS_LOAD_ADDR=0x800800
+@@ -25,13 +21,7 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-rock-pi-4a.dtb"
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x2e000
+ CONFIG_SPL_PAD_TO=0x7f8000
+-CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+-CONFIG_SPL_BSS_START_ADDR=0x400000
+-CONFIG_SPL_BSS_MAX_SIZE=0x2000
+ # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-CONFIG_SPL_STACK_R=y
+-CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x10000
+ CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+ CONFIG_TPL=y
+ CONFIG_CMD_BOOTZ=y
+diff --git a/configs/rock-pi-4c-rk3399_defconfig b/configs/rock-pi-4c-rk3399_defconfig
+index bac745202bc7..5c71f0bd9e8e 100644
+--- a/configs/rock-pi-4c-rk3399_defconfig
++++ b/configs/rock-pi-4c-rk3399_defconfig
+@@ -2,17 +2,13 @@ CONFIG_ARM=y
+ CONFIG_SKIP_LOWLEVEL_INIT=y
+ CONFIG_COUNTER_FREQUENCY=24000000
+ CONFIG_ARCH_ROCKCHIP=y
+-CONFIG_TEXT_BASE=0x00200000
+ CONFIG_NR_DRAM_BANKS=1
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
+ CONFIG_ENV_OFFSET=0x3F8000
+ CONFIG_DEFAULT_DEVICE_TREE="rk3399-rock-pi-4c"
+ CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_DM_RESET=y
+ CONFIG_ROCKCHIP_RK3399=y
+ CONFIG_TARGET_EVB_RK3399=y
+-CONFIG_SPL_STACK=0x400000
+ CONFIG_DEBUG_UART_BASE=0xFF1A0000
+ CONFIG_DEBUG_UART_CLOCK=24000000
+ CONFIG_SYS_LOAD_ADDR=0x800800
+@@ -23,13 +19,7 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-rock-pi-4c.dtb"
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x2e000
+ CONFIG_SPL_PAD_TO=0x7f8000
+-CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+-CONFIG_SPL_BSS_START_ADDR=0x400000
+-CONFIG_SPL_BSS_MAX_SIZE=0x2000
+ # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-CONFIG_SPL_STACK_R=y
+-CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x10000
+ CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+ CONFIG_TPL=y
+ CONFIG_CMD_BOOTZ=y
+diff --git a/configs/rock-pi-n10-rk3399pro_defconfig b/configs/rock-pi-n10-rk3399pro_defconfig
+index e86df4b7456a..6889cdcbf7d8 100644
+--- a/configs/rock-pi-n10-rk3399pro_defconfig
++++ b/configs/rock-pi-n10-rk3399pro_defconfig
+@@ -2,17 +2,13 @@ CONFIG_ARM=y
+ CONFIG_SKIP_LOWLEVEL_INIT=y
+ CONFIG_COUNTER_FREQUENCY=24000000
+ CONFIG_ARCH_ROCKCHIP=y
+-CONFIG_TEXT_BASE=0x00200000
+ CONFIG_SPL_GPIO=y
+ CONFIG_NR_DRAM_BANKS=1
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
+ CONFIG_ENV_OFFSET=0x3F8000
+ CONFIG_DEFAULT_DEVICE_TREE="rk3399pro-rock-pi-n10"
+ CONFIG_DM_RESET=y
+ CONFIG_ROCKCHIP_RK3399=y
+ CONFIG_TARGET_EVB_RK3399=y
+-CONFIG_SPL_STACK=0x400000
+ CONFIG_DEBUG_UART_BASE=0xFF1A0000
+ CONFIG_DEBUG_UART_CLOCK=24000000
+ CONFIG_SYS_LOAD_ADDR=0x800800
+@@ -24,13 +20,7 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399pro-rock-pi-n10.dtb"
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x2e000
+ CONFIG_SPL_PAD_TO=0x7f8000
+-CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+-CONFIG_SPL_BSS_START_ADDR=0x400000
+-CONFIG_SPL_BSS_MAX_SIZE=0x2000
+ # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-CONFIG_SPL_STACK_R=y
+-CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x10000
+ CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+ CONFIG_TPL=y
+ CONFIG_CMD_BOOTZ=y
+diff --git a/configs/rock960-rk3399_defconfig b/configs/rock960-rk3399_defconfig
+index a9cae27ccd2f..5c0b95f10bd1 100644
+--- a/configs/rock960-rk3399_defconfig
++++ b/configs/rock960-rk3399_defconfig
+@@ -2,15 +2,11 @@ CONFIG_ARM=y
+ CONFIG_SKIP_LOWLEVEL_INIT=y
+ CONFIG_COUNTER_FREQUENCY=24000000
+ CONFIG_ARCH_ROCKCHIP=y
+-CONFIG_TEXT_BASE=0x00200000
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
+ CONFIG_ENV_OFFSET=0x3F8000
+ CONFIG_DEFAULT_DEVICE_TREE="rk3399-rock960"
+ CONFIG_DM_RESET=y
+ CONFIG_ROCKCHIP_RK3399=y
+ CONFIG_TARGET_ROCK960_RK3399=y
+-CONFIG_SPL_STACK=0x400000
+ CONFIG_DEBUG_UART_BASE=0xFF1A0000
+ CONFIG_DEBUG_UART_CLOCK=24000000
+ CONFIG_SYS_LOAD_ADDR=0x800800
+@@ -22,13 +18,7 @@ CONFIG_SYS_PBSIZE=1052
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x2e000
+ CONFIG_SPL_PAD_TO=0x7f8000
+-CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+-CONFIG_SPL_BSS_START_ADDR=0x400000
+-CONFIG_SPL_BSS_MAX_SIZE=0x2000
+ # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-CONFIG_SPL_STACK_R=y
+-CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x10000
+ CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+ CONFIG_TPL=y
+ CONFIG_SYS_PROMPT="rock960 => "
+diff --git a/configs/rockpro64-rk3399_defconfig b/configs/rockpro64-rk3399_defconfig
+index b9c885cfee55..4de3d5b1c7f8 100644
+--- a/configs/rockpro64-rk3399_defconfig
++++ b/configs/rockpro64-rk3399_defconfig
+@@ -2,10 +2,7 @@ CONFIG_ARM=y
+ CONFIG_SKIP_LOWLEVEL_INIT=y
+ CONFIG_COUNTER_FREQUENCY=24000000
+ CONFIG_ARCH_ROCKCHIP=y
+-CONFIG_TEXT_BASE=0x00200000
+ CONFIG_NR_DRAM_BANKS=1
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
+ CONFIG_ENV_SIZE=0x8000
+ CONFIG_ENV_OFFSET=0x3F8000
+ CONFIG_DEFAULT_DEVICE_TREE="rk3399-rockpro64"
+@@ -13,7 +10,6 @@ CONFIG_DM_RESET=y
+ CONFIG_ROCKCHIP_RK3399=y
+ CONFIG_ROCKCHIP_SPI_IMAGE=y
+ CONFIG_TARGET_ROCKPRO64_RK3399=y
+-CONFIG_SPL_STACK=0x400000
+ CONFIG_DEBUG_UART_BASE=0xFF1A0000
+ CONFIG_DEBUG_UART_CLOCK=24000000
+ CONFIG_SPL_SPI_FLASH_SUPPORT=y
+@@ -30,13 +26,7 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-rockpro64.dtb"
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_PAD_TO=0x7f8000
+-CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+-CONFIG_SPL_BSS_START_ADDR=0x400000
+-CONFIG_SPL_BSS_MAX_SIZE=0x2000
+ # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-CONFIG_SPL_STACK_R=y
+-CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x10000
+ CONFIG_SPL_SPI_LOAD=y
+ CONFIG_SYS_SPI_U_BOOT_OFFS=0xE0000
+ CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
 -- 
 2.43.0
 
