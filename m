@@ -4,83 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03C7CC54798
-	for <u-boot@archiver.kernel.org>; Sat,  2 Mar 2024 22:02:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EED53C5478C
+	for <u-boot@archiver.kernel.org>; Sat,  2 Mar 2024 22:02:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3461887EE3;
-	Sat,  2 Mar 2024 23:01:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 76C8187EE0;
+	Sat,  2 Mar 2024 23:02:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="S2HHBuD6";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Xw2s0+FD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D81FF87EDD; Sat,  2 Mar 2024 23:01:26 +0100 (CET)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
+ id B580C87EE7; Sat,  2 Mar 2024 23:02:49 +0100 (CET)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC08087EEB
- for <u-boot@lists.denx.de>; Sat,  2 Mar 2024 23:01:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 67D8D87D97
+ for <u-boot@lists.denx.de>; Sat,  2 Mar 2024 23:02:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-33e12bcf6adso973764f8f.1
- for <u-boot@lists.denx.de>; Sat, 02 Mar 2024 14:01:24 -0800 (PST)
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-33e12bcf6adso974205f8f.1
+ for <u-boot@lists.denx.de>; Sat, 02 Mar 2024 14:02:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1709416883; x=1710021683; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=29ZfrGGPw9deOi4jp/M1SFPGboRFKNilOsGHVs2N7NM=;
- b=S2HHBuD6HPKW17Yt9usmSgk9vWRQtR1HALXOXEHIJUuE09ayXQJwj4+Ida0ctVtWV7
- yqxm6nfGcHHgQz0uz6rJ3xTRCZJIZG5yg7pUQ5dfBZG60bsHk2pC+a4j/tBpRHG1EORZ
- DP7a31+x4MMnUG6ZKvP12LbR1tcBj9MYBtd0Em+qmwk6yeNQ4SPDwGP1t6rmuCFx4R2G
- weFZlyeYytxaqfbL8WlIu2dG2sVixYKNZOFd5dqNpkEkwvhw0Ui6VhoBIKDlo8lQg0n0
- mB0W5+AFqiQSqgtUcbAanznitByN3BnNgc+/Cxde0L16fO+u3U+HWQpZGQy2mWvjPU5q
- 8TDA==
+ d=gmail.com; s=20230601; t=1709416967; x=1710021767; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=RhSgUzi/HSzJT2BDf58iZeFu0zkWVHHqYbXNSrkdQqw=;
+ b=Xw2s0+FDGXRJ6c5W6N6mMC6FhE5cwInJ/Yg5B4tjesBtkX1enLkjW8rXu5vbtlIfH5
+ f70iY+jH+Y3KBj/KNSYgylTQ5s6akSQXZz5XjPN8WSBN0IJoNDRPxHXrp0EyaI3I8s84
+ GdbUlwDhANA7s1K2hBxCeL3d+FzK+KzCe2u8KFp7u4aZYzNpDFlyAyxoQl1X37V4NJpx
+ gFIkAt8Mj6gq9S/DDtVEGa2Pg8KjgKI892oz2cmGPTg+pUjHPkH3P3e8f5PZm7enJ7gj
+ vS5SrXTAQSc3mm7OXaafQhIAcMA1APJuZwjYUEtbR2F+ReUO52KU2I+2S4iYmQB4q9X4
+ /qkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709416883; x=1710021683;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=29ZfrGGPw9deOi4jp/M1SFPGboRFKNilOsGHVs2N7NM=;
- b=WBRTYSU7dK8QvmGRJlTe+WRulZE54CSN7NEzHAz/OoEdAkvVgjkWWsQIZIvQGldA4c
- Ur3ngzXl9lmZbm4nWGBN94FisPxr6uMWyjmCvQPXNmFK4JZzVPn9h2hDit4RLj8HHMrj
- rUB1rwFE0vGPsiIAIPSCO+OdrnJ5MY9xuA+LZmrzfxG3MExFuRtgKBVvSEPCZuIS+zZL
- sI6YGyvpPd0Dhrpzcbv2/zOO4Yrny+gaCfI9y7VCC13U5aNSxvDu8LpcXJF7G9dXQDsr
- itzjBqjmr7eSD8FAOGc+rIRNU32qmBRzeoZlg7f53CECeoeu7TH5JdQSC77nk424Jr3E
- HKZQ==
-X-Gm-Message-State: AOJu0YzzxHxRVkAxi9GCHbMqI/BeguxMoCXvTvq3CSGMgDirhcRHNreG
- tW8nxOLKKWucrD55NWvp4xyFAaMkFDAxvS7Y3NUqfVY/M5+LDiq7QGYb+YnO
-X-Google-Smtp-Source: AGHT+IGzKIvvGpLr0KIrpeUgkE7SVkizbJXp0Pbe0k8kCuhteF2+vehFOU/8J33C8UO8j7nuF73/wQ==
-X-Received: by 2002:a5d:42c1:0:b0:33e:527:e1a7 with SMTP id
- t1-20020a5d42c1000000b0033e0527e1a7mr3740990wrr.2.1709416883182; 
- Sat, 02 Mar 2024 14:01:23 -0800 (PST)
-Received: from localhost ([185.186.156.113]) by smtp.gmail.com with ESMTPSA id
- bp22-20020a5d5a96000000b0033d8b1ace25sm8588062wrb.2.2024.03.02.14.01.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 02 Mar 2024 14:01:22 -0800 (PST)
-From: Igor Opaniuk <igor.opaniuk@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Igor Opaniuk <igor.opaniuk@gmail.com>,
- Etienne Carriere <etienne.carriere@foss.st.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jens Wiklander <jens.wiklander@linaro.org>,
- Jorge Ramirez-Ortiz <jorge@foundries.io>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 5/5] tee: remove common.h inclusion
-Date: Sat,  2 Mar 2024 23:01:08 +0100
-Message-Id: <20240302220108.720637-6-igor.opaniuk@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240302220108.720637-1-igor.opaniuk@gmail.com>
-References: <20240302220108.720637-1-igor.opaniuk@gmail.com>
+ d=1e100.net; s=20230601; t=1709416967; x=1710021767;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=RhSgUzi/HSzJT2BDf58iZeFu0zkWVHHqYbXNSrkdQqw=;
+ b=dOKdN1ECaGWJaz7PJoe6i4r1idWohPRBMjuGF+AOuQ5DukxY07GMz2ayB+flJHUiEo
+ iUjPxPA787lJtt4oW3LtoBCqN+n4iBHzu1DrqT2kqd5rV0jPAdbSwKe7e63O5uqyDrV2
+ YUWouxmHgWdFPxbPjIs0FRpbUy5o9WRXFXzGXdW2uxYr0jPYm6opDuj2qdsF7MPjEdwz
+ vfsr6npXg2Y4D6bNGBjQpyyEIDiQUNuUgHrM607nE3f8CJLphahMcx3JgT+miJcR61Rz
+ OrOUE8HlrFJx8V+6BHPlQAAUFC7tKhZPI1TUNH0q+54JfKtFD5iz5KbbU/IqBGUc2htD
+ W09A==
+X-Gm-Message-State: AOJu0YwweBiquDk65UXJwzDLuuaiVBJR+4M7MY2TALzIiH0B+azUbUlK
+ K3yIBx82fZI30cnmyMas7eid+0XOTDFIfRVd6rxUOgtrBO9A0uHi1a6DL69PQgiJ2T1qV72zFj+
+ NvyqLt9pdoTzCU8UNOumLGIiklnE=
+X-Google-Smtp-Source: AGHT+IEJi3MGl5xKoX+BQULnWCcPcII/+FACtLuVdj2O3wWkvX2n1uEAxkqNmwq8Ln0oXSIzV0Xkn7TSDq3NbS2JyGs=
+X-Received: by 2002:a05:600c:1c8a:b0:412:a0a3:cea with SMTP id
+ k10-20020a05600c1c8a00b00412a0a30ceamr4294023wms.1.1709416966609; Sat, 02 Mar
+ 2024 14:02:46 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240214183444.493629-1-igor.opaniuk@gmail.com>
+ <CAByghJY_Eyf6s=V+5Hjo1gVxkzCPieABkk_NpFK5HM_K=SE_+g@mail.gmail.com>
+ <CAC_iWjJv-v0pu9cZza0WghJ-rPJdD8Lmng_ms7d17a=K4nSzjw@mail.gmail.com>
+In-Reply-To: <CAC_iWjJv-v0pu9cZza0WghJ-rPJdD8Lmng_ms7d17a=K4nSzjw@mail.gmail.com>
+From: Igor Opaniuk <igor.opaniuk@gmail.com>
+Date: Sat, 2 Mar 2024 23:02:34 +0100
+Message-ID: <CAByghJaTbGGOvcQghGKUuQKSnrLrKR0-X-833yAmo7fmETn_sw@mail.gmail.com>
+Subject: Re: [PATCH v1 0/5] TEE: minor cleanup
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, AKASHI Takahiro <takahiro.akashi@linaro.org>, 
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Bin Meng <bmeng@tinylab.org>, 
+ Etienne Carriere <etienne.carriere@foss.st.com>, 
+ Francis Laniel <francis.laniel@amarulasolutions.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jens Wiklander <jens.wiklander@linaro.org>, 
+ Jorge Ramirez-Ortiz <jorge@foundries.io>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Roger Knecht <rknecht@pm.me>, Sean Edmond <seanedmond@microsoft.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,121 +101,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The usage of the common.h include file is deprecated [1], and has already
-been removed from several files.
-Get rid of all inclusions in the "drivers/tee" directory, and replace it
-with required include files directly where needed.
+Hello Ilias,
 
-[1] doc/develop/codingstyle.rst
+On Fri, Mar 1, 2024 at 10:41=E2=80=AFAM Ilias Apalodimas <
+ilias.apalodimas@linaro.org> wrote:
 
-Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
----
+> Hi Igor,
+>
+> On Thu, 29 Feb 2024 at 21:11, Igor Opaniuk <igor.opaniuk@gmail.com> wrote=
+:
+> >
+> > Hi Ilias,
+> >
+> > On Wed, Feb 14, 2024 at 7:34=E2=80=AFPM Igor Opaniuk <igor.opaniuk@foun=
+dries.io>
+> wrote:
+> >>
+> >> - Address some spelling errors and typos
+> >> - Support CMD_OPTEE_RPMB for SANDBOX configurations and add python tes=
+ts
+> >> - Remove common.h inclusion for drivers/tee
+>
+> CI fails on
+> https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines/19780
+> Can you have a look?
+>
+I've fixed and sent v2, thanks!
 
-Changes in v2:
-- Fixed chimp_optee.c:37:9: error: implicit declaration of function 'memset'
 
- drivers/tee/broadcom/chimp_optee.c | 3 ++-
- drivers/tee/optee/core.c           | 1 -
- drivers/tee/optee/i2c.c            | 1 -
- drivers/tee/optee/rpmb.c           | 1 -
- drivers/tee/optee/supplicant.c     | 2 +-
- drivers/tee/sandbox.c              | 2 +-
- drivers/tee/tee-uclass.c           | 1 -
- 7 files changed, 4 insertions(+), 7 deletions(-)
+>
+> Thanks
+> /Ilias
+> >>
+> >> Igor Opaniuk (5):
+> >>   tee: optee: fix description in Kconfig
+> >>   tee: sandbox: fix spelling errors
+> >>   cmd: optee_rpmb: build cmd for sandbox
+> >>   test: py: add optee_rpmb tests
+> >>   tee: remove common.h inclusion
+> >>
+> >>  cmd/Kconfig                        |  4 +++-
+> >>  drivers/tee/broadcom/chimp_optee.c |  2 +-
+> >>  drivers/tee/optee/Kconfig          |  2 +-
+> >>  drivers/tee/optee/core.c           |  1 -
+> >>  drivers/tee/optee/i2c.c            |  1 -
+> >>  drivers/tee/optee/rpmb.c           |  1 -
+> >>  drivers/tee/optee/supplicant.c     |  2 +-
+> >>  drivers/tee/sandbox.c              | 10 +++++-----
+> >>  drivers/tee/tee-uclass.c           |  1 -
+> >>  test/py/tests/test_optee_rpmb.py   | 20 ++++++++++++++++++++
+> >>  10 files changed, 31 insertions(+), 13 deletions(-)
+> >>  create mode 100644 test/py/tests/test_optee_rpmb.py
+> >>
+> >> --
+> >> 2.34.1
+> >>
+> >
+> > Are there currently any comments/objections that can prevent these
+> cosmetic
+> > changes from being applied? If there are - just let me know, thanks
+> >
+> > Regards,
+> > Igor
+> >
+> > --
+> > Best regards - Atentamente - Meilleures salutations
+> >
+> > Igor Opaniuk
+> >
+> > mailto: igor.opaniuk@gmail.com
+> > skype: igor.opanyuk
+> > http://ua.linkedin.com/in/iopaniuk
+>
 
-diff --git a/drivers/tee/broadcom/chimp_optee.c b/drivers/tee/broadcom/chimp_optee.c
-index 37f9b094f76..bd146ef2899 100644
---- a/drivers/tee/broadcom/chimp_optee.c
-+++ b/drivers/tee/broadcom/chimp_optee.c
-@@ -3,9 +3,10 @@
-  * Copyright 2020 Broadcom.
-  */
- 
--#include <common.h>
- #include <tee.h>
- #include <broadcom/chimp.h>
-+#include <linux/errno.h>
-+#include <string.h>
- 
- #ifdef CONFIG_CHIMP_OPTEE
- 
-diff --git a/drivers/tee/optee/core.c b/drivers/tee/optee/core.c
-index 47f845cffe3..5fc0505c788 100644
---- a/drivers/tee/optee/core.c
-+++ b/drivers/tee/optee/core.c
-@@ -3,7 +3,6 @@
-  * Copyright (c) 2018-2020 Linaro Limited
-  */
- 
--#include <common.h>
- #include <cpu_func.h>
- #include <dm.h>
- #include <dm/device_compat.h>
-diff --git a/drivers/tee/optee/i2c.c b/drivers/tee/optee/i2c.c
-index ef4e10f9912..e3fb99897c5 100644
---- a/drivers/tee/optee/i2c.c
-+++ b/drivers/tee/optee/i2c.c
-@@ -3,7 +3,6 @@
-  * Copyright (c) 2020 Foundries.io Ltd
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <i2c.h>
- #include <tee.h>
-diff --git a/drivers/tee/optee/rpmb.c b/drivers/tee/optee/rpmb.c
-index 5bc13757ea8..bacced6af6c 100644
---- a/drivers/tee/optee/rpmb.c
-+++ b/drivers/tee/optee/rpmb.c
-@@ -3,7 +3,6 @@
-  * Copyright (c) 2018 Linaro Limited
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <log.h>
- #include <tee.h>
-diff --git a/drivers/tee/optee/supplicant.c b/drivers/tee/optee/supplicant.c
-index f9dd874b594..8a426f53ba8 100644
---- a/drivers/tee/optee/supplicant.c
-+++ b/drivers/tee/optee/supplicant.c
-@@ -3,10 +3,10 @@
-  * Copyright (c) 2018, Linaro Limited
-  */
- 
--#include <common.h>
- #include <log.h>
- #include <malloc.h>
- #include <tee.h>
-+#include <linux/errno.h>
- #include <linux/types.h>
- 
- #include "optee_msg.h"
-diff --git a/drivers/tee/sandbox.c b/drivers/tee/sandbox.c
-index ec66401878c..8ad7c09efdd 100644
---- a/drivers/tee/sandbox.c
-+++ b/drivers/tee/sandbox.c
-@@ -2,7 +2,7 @@
- /*
-  * Copyright (C) 2018 Linaro Limited
-  */
--#include <common.h>
-+
- #include <dm.h>
- #include <sandboxtee.h>
- #include <tee.h>
-diff --git a/drivers/tee/tee-uclass.c b/drivers/tee/tee-uclass.c
-index 52412a4098e..0194d732193 100644
---- a/drivers/tee/tee-uclass.c
-+++ b/drivers/tee/tee-uclass.c
-@@ -5,7 +5,6 @@
- 
- #define LOG_CATEGORY UCLASS_TEE
- 
--#include <common.h>
- #include <cpu_func.h>
- #include <dm.h>
- #include <log.h>
--- 
-2.34.1
 
+--=20
+Best regards - Atentamente - Meilleures salutations
+
+Igor Opaniuk
+
+mailto: igor.opaniuk@gmail.com
+skype: igor.opanyuk
+http://ua.linkedin.com/in/iopaniuk
