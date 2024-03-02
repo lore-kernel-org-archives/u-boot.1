@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6689C54798
-	for <u-boot@archiver.kernel.org>; Sat,  2 Mar 2024 22:55:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDA38C54798
+	for <u-boot@archiver.kernel.org>; Sat,  2 Mar 2024 23:48:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B1BCD87D65;
-	Sat,  2 Mar 2024 23:55:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 1E75B87E40;
+	Sun,  3 Mar 2024 00:48:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Bl/T+For";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="x7qrdkRg";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JDwR1DdH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2EF5C87D74; Sat,  2 Mar 2024 23:55:47 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 84F9787E91; Sun,  3 Mar 2024 00:47:56 +0100 (CET)
+Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
+ [IPv6:2607:f8b0:4864:20::f2a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B68C787D5E
- for <u-boot@lists.denx.de>; Sat,  2 Mar 2024 23:55:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 79CDD87D97
+ for <u-boot@lists.denx.de>; Sun,  3 Mar 2024 00:47:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4TnL0J2nW4z9t3m;
- Sat,  2 Mar 2024 23:55:44 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1709420144;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=DnbM8RxYdQAl3XQ7pmyWxw7N9+oLBjfFqL8dREJxSfs=;
- b=Bl/T+For6D81hjYY5NwUXEYZtIXx2lXEqx0yG4p6Lqcu3hLHJA8D5lRAT0Q8Ub+mKElRrA
- ueZFsWDpEUahzYzxpBzfP2NsFIww7y/0S1E7fII84qJOCYEDi6ccLfGvZKJPnFvtAWpDe7
- tg7kn+bDON3lQeMG09vw9J7LiqdGP7/SczOsFxuXvU4kCt1xdLDKdwwM6gOr7Gy8zqSgwb
- mQJZ9BGe/hCeK9IVj2aZXPR//fOOPfM1Rls3RcDWXE7zqTHeDUnkft3BGuyGFXlAyMMIrl
- HwQh+wzq+tx/rWKKxZcrcBjVNQCTdKoHoS1NxBagO9y9HRx9IgHbAHsgU/9oUA==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1709420142;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=DnbM8RxYdQAl3XQ7pmyWxw7N9+oLBjfFqL8dREJxSfs=;
- b=x7qrdkRggsBd3fxqDd9kF7bIED4mE94l+jpSXmy+kgNZm9CrUhsqylv9cCaVAN6x97Ouem
- vLlJcu6h8CyFr2Sl0oLrsYTHuD1W6NJ9Nn/lPfexo3zANiup3SFG1zA7yIHE8JeAB76YNi
- wqLeK52xwNHunczBGBca/hq1MgDBQZQDd0/71nkE5QNxkVN8hhvMglFiIEnEWW5N0khsv4
- 8LWha/EjiXXs8/fS/2J0pwy0HRWupsSjl1hUOs/V7VVe7DB/52UxMEziEKaFtePykTj4R5
- NS3VzqRjMT59Zks/pNpzFdvSmu2ZVNOQX+DzqaF21hihsIpRYIIb3WBs1s5Dfw==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Geert Uytterhoeven <geert@linux-m68k.org>,
- Hans Verkuil <hverkuil-cisco@xs4all.nl>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>,
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
- =?UTF-8?q?Niklas=20S=C3=B6derlund?= <niklas.soderlund@ragnatech.se>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Wolfram Sang <wsa@kernel.org>
-Subject: [PATCH] fdt: Fix bootm_low handling
-Date: Sat,  2 Mar 2024 23:54:02 +0100
-Message-ID: <20240302225527.179601-1-marek.vasut+renesas@mailbox.org>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-690508d70e3so12226266d6.1
+ for <u-boot@lists.denx.de>; Sat, 02 Mar 2024 15:47:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1709423273; x=1710028073; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=hZSnTZy/ieZyj6ywa5VrVg6ypqmpfmdG0ZN5ieobbdw=;
+ b=JDwR1DdHeuyaIGSwtouDviyJnGcApA1t/e1Ievr/Syww+/weTSN+lsk5NW+Z3pkv2s
+ KQ93X0yXJgwdyAK18u9mEuMLAlhOhi7HwrWEEusVMRAiMz/SIcbC+WVA8Szz6a+VFYHj
+ VZabRRVETb2W54pSNO1Cdv9YyaT+U96a7Asao=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1709423273; x=1710028073;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=hZSnTZy/ieZyj6ywa5VrVg6ypqmpfmdG0ZN5ieobbdw=;
+ b=V8JZ3PvlHwFLhAq+rS+V4eXOkt5Qd+mySqRNqAKLNdQ/5Ui6Qo0i4OTDU+VFTHPjge
+ 0ItZEPu8HzfyawIGE0lXJP3rkGkgT98iL1+geLj1T38nJxWlqjB+O9Iu4ZSRdDmIVP2a
+ q3C12B2+TFqOGqujJ6MXY4kpBrhk674UX31XrJSWSkImDPPbzw+12JsF7wayKgGiS/ax
+ BwiFomLVFxRpmS5RH2z5XHxREXcp69XeM0aGSmNOfIb8eT8klCsJSB8IEN40Ig3A7vBe
+ YeUzLKKdq8cK2gVDIsiV9U9Ap3gOfJ8JwoV2YPNC1u+zPiwtZeO0CgbvHDqDH0zcDCWh
+ Q4eA==
+X-Gm-Message-State: AOJu0YzkN/Ofh1FnfWO9qm2dshNg9ctYGrdVdU2BKaWtPsjWysd1cFxQ
+ +JSlb97+Nc7uwaDD1tPQCrHixFPTNXYQQZY0PYjP5FQMB5mbH/Ptz6lre+/es88=
+X-Google-Smtp-Source: AGHT+IE2hMqlTe1sRHgFTsXAxo/M+IAGb7Zs1DEjhSfs/QI/KUcGTydiPLgHc/gQvmZPKvlRliWMRg==
+X-Received: by 2002:ad4:4f14:0:b0:690:57bc:643b with SMTP id
+ fb20-20020ad44f14000000b0069057bc643bmr4864937qvb.13.1709423273130; 
+ Sat, 02 Mar 2024 15:47:53 -0800 (PST)
+Received: from [127.0.1.1]
+ (2603-6081-7b00-007f-0000-0000-0000-1002.res6.spectrum.com.
+ [2603:6081:7b00:7f::1002]) by smtp.gmail.com with ESMTPSA id
+ kr23-20020a0562142b9700b0068f52a6f4besm3423017qvb.103.2024.03.02.15.47.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 02 Mar 2024 15:47:52 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
+ Paul Barker <paul.barker.ct@bp.renesas.com>
+In-Reply-To: <20240227160912.412181-1-marek.vasut+renesas@mailbox.org>
+References: <20240227160912.412181-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH 00/19] ARM: renesas: Rename R-Mobile to Renesas
+Message-Id: <170942327163.1817453.10347583559664217287.b4-ty@konsulko.com>
+Date: Sat, 02 Mar 2024 18:47:51 -0500
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: fi7gufjquf9resfit9p4pcc3gbddqx65
-X-MBO-RS-ID: 43b70a76d72cb120a9a
-X-Rspamd-Queue-Id: 4TnL0J2nW4z9t3m
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,62 +91,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-According to README CFG_SYS_BOOTMAPSZ section, in case both "bootm_low" and
-"bootm_size" variables are defined, "bootm_mapsize" variable is not defined
-and CFG_SYS_BOOTMAPSZ macro is not defined, all data for the Linux kernel
-must be between "bootm_low" and "bootm_low" + "bootm_size".
+On Tue, 27 Feb 2024 17:05:40 +0100, Marek Vasut wrote:
 
-Currently, for systems with DRAM between 0x4000_0000..0x7fff_ffff and with
-e.g. bootm_low=0x60000000 and bootm_size=0x10000000, the code will attempt
-to reserve memory from 0x4000_0000..0x4fff_ffff, which is incorrect. This
-is because "bootm_low" is not taken into consideration correctly.
+> Rename R-Mobile to Renesas all over the place because the chips are
+> made by Renesas, while only a subset of them is from the R-Mobile line.
+> 
+> Marek Vasut (19):
+>   ARM: renesas: Drop remnants of R8A7740 support
+>   ARM: renesas: Drop unused sh_sdhi.h
+>   ARM: renesas: Drop unused mmc.h
+>   ARM: renesas: Drop unused pfc-r8a7790.h
+>   ARM: renesas: Rename rmobile_get_cpu_type() to renesas_get_cpu_type()
+>   ARM: renesas: Rename rmobile_get_cpu_rev_*() to
+>     renesas_get_cpu_rev_*()
+>   ARM: renesas: Rename RMOBILE_CPU_TYPE_* to RENESAS_CPU_TYPE_*
+>   ARM: renesas: Rename rmobile_cpuinfo_idx() to renesas_cpuinfo_idx()
+>   ARM: renesas: Rename rmobile_cpuinfo[] to renesas_cpuinfo[]
+>   ARM: renesas: Simplify weak symbols
+>   ARM: renesas: Rename rmobile_get_prr() to renesas_get_prr()
+>   ARM: renesas: Rename ARCH_RMOBILE_BOARD_STRING to
+>     ARCH_RENESAS_BOARD_STRING
+>   ARM: renesas: Rename CONFIG_ARCH_RMOBILE_EXTRAM_BOOT to
+>     CONFIG_RENESAS_EXTRAM_BOOT
+>   ARM: renesas: Rename rmobile.h to renesas.h
+>   ARM: renesas: Rename ARCH_RMOBILE to ARCH_RENESAS
+>   ARM: renesas: Rename arch-/mach-rmobile to arch-/mach-renesas
+>   ARM: renesas: Post rename fix ups
+>   mmc: renesas-sdhi: Rename rmobile_is_gen3_mmc0() to
+>     rcar_is_gen3_mmc0()
+>   git-mailrc: Add renesas entry and update rmobile entry
+> 
+> [...]
 
-The last parameter of lmb_alloc_base() is the maximum physical address of
-the to be reserved LMB area. Currently this is the start of DRAM bank that
-is considered for LMB area reservation + min(DRAM bank size, bootm_size).
-In case bootm_low is set to non-zero, this maximum physical address has to
-be shifted upward, to min(DRAM bank start + size, bootm_low + bootm_size),
-otherwise the reserved memory may be below bootm_low address.
+Applied to u-boot/master, thanks!
 
-In case of multiple DRAM banks, the current change reserves top part of
-the first bank, and reserves the rest of memory in the follow up banks.
-
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Geert Uytterhoeven <geert@linux-m68k.org>
-Cc: Hans Verkuil <hverkuil-cisco@xs4all.nl>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>
-Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-Cc: Niklas Söderlund <niklas.soderlund@ragnatech.se>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Wolfram Sang <wsa@kernel.org>
----
- boot/image-fdt.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/boot/image-fdt.c b/boot/image-fdt.c
-index 75bdd55f326..5e4aa9de0d2 100644
---- a/boot/image-fdt.c
-+++ b/boot/image-fdt.c
-@@ -217,14 +217,14 @@ int boot_relocate_fdt(struct lmb *lmb, char **of_flat_tree, ulong *of_size)
- 			if (start + size < low)
- 				continue;
- 
--			usable = min(size, (u64)mapsize);
-+			usable = min(start + size, (u64)(low + mapsize));
- 
- 			/*
- 			 * At least part of this DRAM bank is usable, try
- 			 * using it for LMB allocation.
- 			 */
- 			of_start = map_sysmem((ulong)lmb_alloc_base(lmb,
--				    of_len, 0x1000, start + usable), of_len);
-+				    of_len, 0x1000, usable), of_len);
- 			/* Allocation succeeded, use this block. */
- 			if (of_start != NULL)
- 				break;
 -- 
-2.43.0
+Tom
+
 
