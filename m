@@ -4,54 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5A5AC5478C
-	for <u-boot@archiver.kernel.org>; Sat,  2 Mar 2024 13:10:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53A9BC5478C
+	for <u-boot@archiver.kernel.org>; Sat,  2 Mar 2024 13:49:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4075C87E30;
-	Sat,  2 Mar 2024 14:10:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 679D28744F;
+	Sat,  2 Mar 2024 14:49:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=georgemail.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="EjFwiNQF";
+	dkim=pass (2048-bit key; unprotected) header.d=georgemail.de header.i=@georgemail.de header.b="k56wgYPa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 817A387E45; Sat,  2 Mar 2024 14:10:12 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id 7378887B30; Sat,  2 Mar 2024 14:17:41 +0100 (CET)
+Received: from smtp052.goneo.de (smtp052.goneo.de [85.220.129.60])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 472DA87A23
- for <u-boot@lists.denx.de>; Sat,  2 Mar 2024 14:10:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 76A1C87E7F
+ for <u-boot@lists.denx.de>; Sat,  2 Mar 2024 14:17:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=8beb=KJ=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
- To: From; q=dns/txt; s=fe-e1b5cab7be; t=1709384997;
- bh=bBVe1sm8EQxRcK3TdwfWwElRF4i++SiK7sOgkhHi0xQ=;
- b=EjFwiNQFjtGuNul00FhrLdNlaptZUuDK1KmDOm28zgq0VBOY20019QlmpoT7pOfhTinYuD/bH
- TypN5MBEAEJgugw/sgMvBpoC+9w5fJdlqRDzJ6vEwXjaKbc5mOtH+SKFRGcgg1jiiLK+P33KBwM
- Qe39AEAoqtySjBAdKE1p1FDYOj15Rcbl8n6KANQdPmP/NLqF3aXKcGTWD32b34L+bxqd4iA/P4E
- hDAKrRS5BxcGJ+Cjb8sKjAA4qlhYEEdBFsa5XhcVvjuN2r3arroq8UCyN53ja6sKIlc5YnxkPMb
- 2OAJbESG7NikuGw4/pduYtYD52PNczln7o1jm9fTAHWw==
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Bin Meng <bmeng.cn@gmail.com>, Marek Vasut <marex@denx.de>, Tom Rini
- <trini@konsulko.com>, Kever Yang <kever.yang@rock-chips.com>, Mark
- Kettenis <kettenis@openbsd.org>
-Cc: Jonas Karlman <jonas@kwiboo.se>, u-boot@lists.denx.de
-Subject: [PATCH] usb: xhci-dwc3: Fix support for dis_enblslpm_quirk
-Date: Sat,  2 Mar 2024 13:09:49 +0000
-Message-ID: <20240302130951.4123405-1-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.43.0
+ dmarc=none (p=none dis=none) header.from=georgemail.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=leon@georgemail.de
+Received: from hub1.goneo.de (hub1.goneo.de [IPv6:2001:1640:5::8:52])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits))
+ (No client certificate requested)
+ by smtp5.goneo.de (Postfix) with ESMTPS id 407E0240458
+ for <u-boot@lists.denx.de>; Sat,  2 Mar 2024 14:17:39 +0100 (CET)
+Received: from hub1.goneo.de (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits))
+ (No client certificate requested)
+ by hub1.goneo.de (Postfix) with ESMTPS id A4EBD240128
+ for <u-boot@lists.denx.de>; Sat,  2 Mar 2024 14:17:37 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=georgemail.de;
+ s=DKIM001; t=1709385457;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=hgoVj0HBxpwFXS8QscxsnFNiCPbt/bA3YFEFfC4iu1g=;
+ b=k56wgYPauNEj92f2ZZUUZdA92F7PAfvN7FUcaRBDsQ9Gt40BP+xlRkigjgqFPc/K9Wmv86
+ 8pTUpANYLaFCLOBoJACBo9tAXS0pq4c5abDDOnHbIe4UcohF3jqMawd7APl0LmecoKzVYT
+ 2AZNSJ3lcAFPwtTGSLroU+ZtyRk5rrIR1JuHeaUhTExkrlx84Qbsqmb3+mAKA6Np+gJMDo
+ AsakgYG3zf/mStoDqGMBRABdge+CkE5wcz4ZTbxO3Q2HKi26d+dX/8AVif2xVBrjkoVRd9
+ VIVMFz1KlOuJCnsL7UatEA+EeWYZJT/OzKoRy5iZoEULJRm/Zhgk0awBJrgvKQ==
+Received: from couch-potassium.fritz.box (unknown
+ [IPv6:2a02:8071:5250:1240:f4e6:f6d2:6d95:e0c4])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by hub1.goneo.de (Postfix) with ESMTPSA id 76D79240030
+ for <u-boot@lists.denx.de>; Sat,  2 Mar 2024 14:17:37 +0100 (CET)
+From: "Leon M. Busch-George" <leon@georgemail.de>
+To: u-boot@lists.denx.de
+Subject: [PATCH] Makefile: use shell to calculate map_size
+Date: Sat,  2 Mar 2024 14:17:19 +0100
+Message-ID: <20240302131728.148251-1-leon@georgemail.de>
+X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 65e3252552a4f89a74917dce
+X-Rspamd-UID: 4c936b
+X-Rspamd-UID: 7d9926
+X-Mailman-Approved-At: Sat, 02 Mar 2024 14:49:18 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,29 +82,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-No device tree in U-Boot or linux use the wrong spelling used in code.
+From: "Leon M. Busch-George" <leon@georgemail.eu>
 
-Use correct property name as defined in dwc3 bindings.
+The error message "bc: command not found" is easily missed since the
+build continues.
+bc is not a part of coreutils or base-devel. POSIX sh can also do the
+calculation.
 
-Fixes: 062790f46131 ("usb: xhci-dwc3: Add USB2 PHY configuration")
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+Signed-off-by: Leon M. Busch-George <leon@georgemail.eu>
 ---
- drivers/usb/host/xhci-dwc3.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ Makefile | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/usb/host/xhci-dwc3.c b/drivers/usb/host/xhci-dwc3.c
-index 1dbd65dfaa34..6cebe1cc30cb 100644
---- a/drivers/usb/host/xhci-dwc3.c
-+++ b/drivers/usb/host/xhci-dwc3.c
-@@ -197,7 +197,7 @@ static int xhci_dwc3_probe(struct udevice *dev)
- 		reg |= DWC3_GUSB2PHYCFG_USBTRDTIM_16BIT;
- 	}
- 
--	if (dev_read_bool(dev, "snps,dis_enblslpm-quirk"))
-+	if (dev_read_bool(dev, "snps,dis_enblslpm_quirk"))
- 		reg &= ~DWC3_GUSB2PHYCFG_ENBLSLPM;
- 
- 	if (dev_read_bool(dev, "snps,dis-u2-freeclk-exists-quirk"))
+diff --git a/Makefile b/Makefile
+index 7a3209bd9e..41dc4baad2 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1275,9 +1275,9 @@ OBJCOPYFLAGS_u-boot-nodtb.bin := -O binary \
+ binary_size_check: u-boot-nodtb.bin FORCE
+ 	@file_size=$(shell wc -c u-boot-nodtb.bin | awk '{print $$1}') ; \
+ 	map_size=$(shell cat u-boot.map | \
+-		awk '/_image_copy_start/ {start = $$1} /_image_binary_end/ {end = $$1} END {if (start != "" && end != "") print "ibase=16; " toupper(end) " - " toupper(start)}' \
++		awk '/_image_copy_start/ {start = $$1} /_image_binary_end/ {end = $$1} END {if (start != "" && end != "") print "echo $$((0x" toupper(end) " - 0x" toupper(start) "))"}' \
+ 		| sed 's/0X//g' \
+-		| bc); \
++		| sh); \
+ 	if [ "" != "$$map_size" ]; then \
+ 		if test $$map_size -ne $$file_size; then \
+ 			echo "u-boot.map shows a binary size of $$map_size" >&2 ; \
 -- 
-2.43.0
+2.44.0
 
