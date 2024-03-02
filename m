@@ -4,70 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8617DC54E41
-	for <u-boot@archiver.kernel.org>; Sat,  2 Mar 2024 04:35:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35854C5478C
+	for <u-boot@archiver.kernel.org>; Sat,  2 Mar 2024 07:39:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7AC9887E21;
-	Sat,  2 Mar 2024 05:35:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=qq.com
+	by phobos.denx.de (Postfix) with ESMTP id 6226C87E2E;
+	Sat,  2 Mar 2024 08:39:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=qq.com header.i=@qq.com header.b="XUSddaNH";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8EF6987E3F; Sat,  2 Mar 2024 05:35:33 +0100 (CET)
-Received: from out162-62-58-211.mail.qq.com (out162-62-58-211.mail.qq.com
- [162.62.58.211])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0753187811
- for <u-boot@lists.denx.de>; Sat,  2 Mar 2024 05:35:28 +0100 (CET)
+ id CF89B87E75; Sat,  2 Mar 2024 08:39:49 +0100 (CET)
+Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
+ [210.160.252.171])
+ by phobos.denx.de (Postfix) with ESMTP id B187587DDE
+ for <u-boot@lists.denx.de>; Sat,  2 Mar 2024 08:39:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=qq.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hanyuan-z@qq.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
- t=1709354125; bh=2ysOsLIlzA6THQ+7jeTfKBrXa6nEmgpceknekPOwg2s=;
- h=From:Subject:Date:In-Reply-To:Cc:To:References;
- b=XUSddaNHJipAU2d8iuf6I3MeBp3eha4lYOqs8+eNM3I48loICpvTdcvnB9186EH+R
- 3a/0KNf40KPQLIutdYDq2MrLHyYxxNSPImJowbqEkQodsPDF1sBX/rWNYioZ8u2G2t
- +P2lWsPfONdtvWwG8k84X0TW2SONQhCpEeijjtjc=
-Received: from smtpclient.apple ([125.38.24.202])
- by newxmesmtplogicsvrsza10-0.qq.com (NewEsmtp) with SMTP
- id 8D6B34B1; Sat, 02 Mar 2024 12:35:22 +0800
-X-QQ-mid: xmsmtpt1709354122txv1l0elj
-Message-ID: <tencent_53D7126DB3F29FBEA48E430D60D298FA4B05@qq.com>
-X-QQ-XMAILINFO: MmpliBmRb3iCMx/JDxSuZ1NvnBQuesq0JlSF7P+7ssxuFBXRn9WP7dAReGT0wz
- u5tDvUBJNBA/RM9vrm+b9ESmSYfPxnfg/fSB2jmjmV+xYICGAbVYBLWCbP1YqTrGKuuxldE3vY8s
- zbcqA12z/3JeiNm19Ltu1CwWObs7dtadI9KRisi3cmtCy7PQT/phUZK2OrM4X46Y98GT5aYJYege
- rmEEXgD4O2c7FaTklc4g9WMSUED4xKcOPyFfzGLHdhnWTg6rAua0vzW6Up+3sEJMa4B1+8Fh6R7t
- sxy8VHZA/gUdmmxSvCF/3Wueu6HuAwvWzW+fpm/po8SJrwSDjVxQe55oCBim/Ak3ONnwjHh9Za1f
- xdkyCEPhkNvCA2l0zMpUb7iqoR3Y9upnXv/jTeUzHZwSqb/HHiirODwYweKOVBmvP+6jEJ2ipAlx
- oHXj0KbGPTG1toEmylQV3o2EbIiX/h069FAq1mT1T7JO5sqPNMPDgbm3+8SrzMXk2fSW5/l/6Uga
- D+xIYp2B2FlHa1u2H9GetQv0MP8K/zgh8s7A1vpaqcmQ9BgrypApHwfBem03UO/BxpPdDatYi3H2
- e3mhzAzV64Qca8i3KSBul45w4t3KDqivnY4iJGZRL7KirQReABPCe4EdUYGj7zgt+aQXoLBUr1SD
- CDWKh/Z1a1TcopBV8wzdjeAZtlzwdTXWkVcA8Ab+6PGb/U14HGZfyMGx//z5pGUzd2gnHxe8l85f
- N7tRJ3fLsoQSROnb1xcSdhxcOVyEs9eUPXGTnNF90tyvNRM/DMKy9/GL+a2tkTCNrOtl4vpwcC0x
- CRJnWQxVcJJAY27C5EkuyRfgkVQaKesBvdmoWkpduSaVkT0hoiB73JhZmAl/m7D4aQOSTfCckjMY
- pOvgNxe6sI65PYGHNKQTGxKUMy2wCx2kq9pvgR36X3+1VyIxmgix5walrEg/YOPa5h7yQTllgjao
- Qna1IexVkpGrIzBxH9GVxWhjcFzeCn2ql+wZUvpbF2ER6mKKe6BUCgys5GP3KDpcoI8UusKGiYUK
- 9uuC7xvg==
-X-QQ-XMRINFO: NI4Ajvh11aEj8Xl/2s1/T8w=
-From: hanyuan <hanyuan-z@qq.com>
-X-OQ-MSGID: <56EF1CC7-1DD5-48E4-94DC-D1C69855A1D5@qq.com>
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3774.300.61.1.2\))
-Subject: Re: [PATCH 1/2] cli: allow users to disable history if unused at all
-Date: Sat, 2 Mar 2024 12:35:12 +0800
-In-Reply-To: <20240301213702.GA1401112@bill-the-cat>
-Cc: u-boot@lists.denx.de,
- Simon Glass <sjg@chromium.org>
-To: Tom Rini <trini@konsulko.com>
-References: <tencent_411A9B7DA959D26CCAFCE7961870C400E80A@qq.com>
- <20240301213702.GA1401112@bill-the-cat>
-X-Mailer: Apple Mail (2.3774.300.61.1.2)
-Content-Type: text/plain;
-	charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-IronPort-AV: E=Sophos;i="6.06,199,1705330800"; 
+ d="asc'?scan'208";a="196078082"
+Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
+ by relmlie5.idc.renesas.com with ESMTP; 02 Mar 2024 16:39:41 +0900
+Received: from [10.226.92.29] (unknown [10.226.92.29])
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id 0E68640062A9;
+ Sat,  2 Mar 2024 16:39:38 +0900 (JST)
+Message-ID: <ce51eabf-e3a6-4822-a920-4846d5898f09@bp.renesas.com>
+Date: Sat, 2 Mar 2024 07:39:33 +0000
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] doc: devicetree: Lets avoid short reference link names
+To: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de
+Cc: trini@konsulko.com, sjg@chromium.org, ilias.apalodimas@linaro.org,
+ xypron.glpk@gmx.de
+References: <20240301132454.3492762-1-sumit.garg@linaro.org>
+Content-Language: en-GB
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+Organization: Renesas Electronics Corporation
+In-Reply-To: <20240301132454.3492762-1-sumit.garg@linaro.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------QrqshNnO4bWp1JM5oapTeM9z"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,47 +60,212 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------QrqshNnO4bWp1JM5oapTeM9z
+Content-Type: multipart/mixed; boundary="------------KaRhcBrWcJosmYIj33qEpVBu";
+ protected-headers="v1"
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de
+Cc: trini@konsulko.com, sjg@chromium.org, ilias.apalodimas@linaro.org,
+ xypron.glpk@gmx.de
+Message-ID: <ce51eabf-e3a6-4822-a920-4846d5898f09@bp.renesas.com>
+Subject: Re: [PATCH] doc: devicetree: Lets avoid short reference link names
+References: <20240301132454.3492762-1-sumit.garg@linaro.org>
+In-Reply-To: <20240301132454.3492762-1-sumit.garg@linaro.org>
 
-Thanks for reviewing! I am not quite sure about the tests which
-you refer to. Is it the CI in the gitlab? I think this patch is simple
-and it doesn=E2=80=99t occur any errors during my work these days, thus =
-I tested
-it manually which didn=E2=80=99t throw any problems, and sent it. Could =
-you
-please give me some hints about the broken tests? If it is a CI, could
-you please give me the link to the error information?
+--------------KaRhcBrWcJosmYIj33qEpVBu
+Content-Type: multipart/mixed; boundary="------------psGSoVOCR0MeF0PT2o7xEC1W"
 
-Thanks!
+--------------psGSoVOCR0MeF0PT2o7xEC1W
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Regards,
-Hanyuan
-
-> 2024=E5=B9=B43=E6=9C=882=E6=97=A5 05:37=EF=BC=8CTom Rini =
-<trini@konsulko.com> =E5=86=99=E9=81=93=EF=BC=9A
+On 01/03/2024 13:24, Sumit Garg wrote:
+> Short reference link names like "dtspec", "dtrepo", "dttweaks" etc.
+> interrupt the flow of the document text. Lets avoid them and instead
+> expand in place for better readability.
 >=20
-> On Sat, Feb 17, 2024 at 09:54:43PM +0800, Hanyuan Zhao wrote:
+> Suggested-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+> ---
+>  doc/develop/devicetree/control.rst | 24 ++++++++++++------------
+>  1 file changed, 12 insertions(+), 12 deletions(-)
 >=20
->> This commit allows user to determine whether to have history =
-recording
->> in command-line. Previously the history data as uninitialized static
->> array would not directly take much space in binary file since it only
->> marks size in the binary. However now it asks to allocate space. By
->> connecting the original CMD_HISTORY flag in Kconfig, users could =
-unset
->> the whole history function, and the memory usage could be eased, if =
-the
->> history function is not used at all.
->>=20
->> Signed-off-by: Hanyuan Zhao <hanyuan-z@qq.com>
->> ---
->> cmd/Kconfig           |  1 +
->> common/cli_readline.c | 44 =
-++++++++++++++++++++++++-------------------
->> 2 files changed, 26 insertions(+), 19 deletions(-)
->=20
-> This breaks current tests, please re-test, thanks.
->=20
-> --=20
-> Tom
+> diff --git a/doc/develop/devicetree/control.rst b/doc/develop/devicetre=
+e/control.rst
+> index c94d84192b71..4cc1457d4ea8 100644
+> --- a/doc/develop/devicetree/control.rst
+> +++ b/doc/develop/devicetree/control.rst
+> @@ -36,10 +36,10 @@ What is a Flattened Devicetree?
+>  -------------------------------
+> =20
+>  An fdt can be specified in source format as a text file. To read about=
 
+> -the fdt syntax, take a look at the specification (dtspec_).
+> +the fdt syntax, take a look at `the devicetree specification`_.
+> =20
+> -There is also a mailing list (dtlist_) for the compiler and associated=
+
+> -tools.
+> +There is also a `devicetree compiler mailing list`_ for the compiler a=
+nd
+> +associated tools.
+> =20
+>  In case you are wondering, OF stands for Open Firmware. This follows t=
+he
+>  convention used in Linux.
+> @@ -89,7 +89,7 @@ Failing that, you could write one from scratch yourse=
+lf!
+>  Resyncing with devicetree-rebasing
+>  ----------------------------------
+> =20
+> -The devicetee-rebasing repository (dtrepo_) maintains a fork cum mirro=
+r copy of
+> +The `devicetree-rebasing repository`_ maintains a fork cum mirror copy=
+ of
+>  devicetree files along with the bindings synced at every Linux kernel =
+major
+>  release or intermediate release candidates. The U-Boot maintainers reg=
+ularly
+>  sync the `dts/upstream/` subtree from the devicetree-rebasing repo whe=
+never
+> @@ -118,7 +118,7 @@ as `arch/<arch>/dts/<name>.dts`. To select that add=
+ `# CONFIG_OF_UPSTREAM is not
+>  set` and set `DEFAULT_DEVICE_TREE=3D<name>` when prompted by Kconfig.
+> =20
+>  This should include your CPU or SoC's devicetree file. On top of that =
+any U-Boot
+> -specific tweaks (see: dttweaks_) can be made for your board.
+> +specific tweaks (see: :ref:`dttweaks`) can be made for your board.
+> =20
+>  If `OF_EMBED` is selected by Kconfig, then it will be picked up and bu=
+ilt into
+>  the U-Boot image (including u-boot.bin). This is suitable for debuggin=
+g
+> @@ -243,7 +243,7 @@ Dependencies
+> =20
+>  The DT schema project must be installed in order to validate the DT sc=
+hema
+>  binding documents and validate DTS files using the DT schema. For inst=
+allation
+> -instructions, refer to the DT schema project page (dtschema_).
+> +instructions, refer to the `DT schema project page`_.
+> =20
+>  Several executables (dt-doc-validate, dt-mk-schema, dt-validate) will =
+be
+>  installed. Ensure they are in your PATH (~/.local/bin by default).
+> @@ -333,10 +333,10 @@ used it before Linux (e.g. snow). The two project=
+s developed in parallel
+>  and there are still some differences in the bindings for certain board=
+s.
+>  While there has been discussion of having a separate repository for de=
+vicetree
+>  files, in practice the Linux kernel Git repository has become the plac=
+e where
+> -these are stored, with U-Boot taking copies via devicetree-rebasing re=
+po
+> -(see: dtrepo_) and adding tweaks with u-boot.dtsi files.
+> +these are stored, with U-Boot taking copies via
+> +`devicetree-rebasing repository`_ and adding tweaks with u-boot.dtsi f=
+iles.
+> =20
+> -.. _dtspec: https://www.devicetree.org/specifications/
+> -.. _dtlist: https://www.spinics.net/lists/devicetree-compiler/
+> -.. _dtrepo: https://git.kernel.org/pub/scm/linux/kernel/git/devicetree=
+/devicetree-rebasing.git
+> -.. _dtschema: https://github.com/devicetree-org/dt-schema/tree/main
+> +.. _the devicetree specification: https://www.devicetree.org/specifica=
+tions/
+> +.. _devicetree compiler mailing list: https://www.spinics.net/lists/de=
+vicetree-compiler/
+> +.. _devicetree-rebasing repository: https://git.kernel.org/pub/scm/lin=
+ux/kernel/git/devicetree/devicetree-rebasing.git
+> +.. _DT schema project page: https://github.com/devicetree-org/dt-schem=
+a/tree/main
+
+Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+
+--=20
+Paul Barker
+--------------psGSoVOCR0MeF0PT2o7xEC1W
+Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
+Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+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3D
+=3DsIIN
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------psGSoVOCR0MeF0PT2o7xEC1W--
+
+--------------KaRhcBrWcJosmYIj33qEpVBu--
+
+--------------QrqshNnO4bWp1JM5oapTeM9z
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZeLXtQUDAAAAAAAKCRDbaV4Vf/JGvZ+h
+AP9/KcjzNgaGNG8Wb7iMwSlLQh0IBE+ExvUoFFMJ4wk2IQD+KiDkoMt2EBwBEqodK7pH1L2xFcFD
+AX2o6BllSgWq0Q8=
+=JuSw
+-----END PGP SIGNATURE-----
+
+--------------QrqshNnO4bWp1JM5oapTeM9z--
