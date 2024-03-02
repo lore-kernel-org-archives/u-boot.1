@@ -4,46 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35854C5478C
-	for <u-boot@archiver.kernel.org>; Sat,  2 Mar 2024 07:39:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98D7FC54798
+	for <u-boot@archiver.kernel.org>; Sat,  2 Mar 2024 08:36:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6226C87E2E;
-	Sat,  2 Mar 2024 08:39:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9832C87E29;
+	Sat,  2 Mar 2024 09:36:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CF89B87E75; Sat,  2 Mar 2024 08:39:49 +0100 (CET)
-Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
- [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id B187587DDE
- for <u-boot@lists.denx.de>; Sat,  2 Mar 2024 08:39:43 +0100 (CET)
+ id 2877B87E49; Sat,  2 Mar 2024 09:36:40 +0100 (CET)
+Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
+ [210.160.252.172])
+ by phobos.denx.de (Postfix) with ESMTP id 914EE87DF1
+ for <u-boot@lists.denx.de>; Sat,  2 Mar 2024 09:36:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
 X-IronPort-AV: E=Sophos;i="6.06,199,1705330800"; 
- d="asc'?scan'208";a="196078082"
+ d="asc'?scan'208";a="200019998"
 Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie5.idc.renesas.com with ESMTP; 02 Mar 2024 16:39:41 +0900
+ by relmlie6.idc.renesas.com with ESMTP; 02 Mar 2024 17:36:31 +0900
 Received: from [10.226.92.29] (unknown [10.226.92.29])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id 0E68640062A9;
- Sat,  2 Mar 2024 16:39:38 +0900 (JST)
-Message-ID: <ce51eabf-e3a6-4822-a920-4846d5898f09@bp.renesas.com>
-Date: Sat, 2 Mar 2024 07:39:33 +0000
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id 32DE54000071;
+ Sat,  2 Mar 2024 17:36:29 +0900 (JST)
+Message-ID: <2791fccc-d711-4370-ac18-f2ae63877e42@bp.renesas.com>
+Date: Sat, 2 Mar 2024 08:36:28 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] doc: devicetree: Lets avoid short reference link names
-To: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de
-Cc: trini@konsulko.com, sjg@chromium.org, ilias.apalodimas@linaro.org,
- xypron.glpk@gmx.de
-References: <20240301132454.3492762-1-sumit.garg@linaro.org>
+Subject: Re: [PATCH 00/19] ARM: renesas: Rename R-Mobile to Renesas
 Content-Language: en-GB
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
+References: <20240227160912.412181-1-marek.vasut+renesas@mailbox.org>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 Organization: Renesas Electronics Corporation
-In-Reply-To: <20240301132454.3492762-1-sumit.garg@linaro.org>
+In-Reply-To: <20240227160912.412181-1-marek.vasut+renesas@mailbox.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------QrqshNnO4bWp1JM5oapTeM9z"
+ boundary="------------CLJDKr0xuIG3XWOZysf0FVqk"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -61,133 +60,64 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------QrqshNnO4bWp1JM5oapTeM9z
-Content-Type: multipart/mixed; boundary="------------KaRhcBrWcJosmYIj33qEpVBu";
+--------------CLJDKr0xuIG3XWOZysf0FVqk
+Content-Type: multipart/mixed; boundary="------------cKEOT2O8D7g3mDU6mgUHPkYQ";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de
-Cc: trini@konsulko.com, sjg@chromium.org, ilias.apalodimas@linaro.org,
- xypron.glpk@gmx.de
-Message-ID: <ce51eabf-e3a6-4822-a920-4846d5898f09@bp.renesas.com>
-Subject: Re: [PATCH] doc: devicetree: Lets avoid short reference link names
-References: <20240301132454.3492762-1-sumit.garg@linaro.org>
-In-Reply-To: <20240301132454.3492762-1-sumit.garg@linaro.org>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
+Message-ID: <2791fccc-d711-4370-ac18-f2ae63877e42@bp.renesas.com>
+Subject: Re: [PATCH 00/19] ARM: renesas: Rename R-Mobile to Renesas
+References: <20240227160912.412181-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20240227160912.412181-1-marek.vasut+renesas@mailbox.org>
 
---------------KaRhcBrWcJosmYIj33qEpVBu
-Content-Type: multipart/mixed; boundary="------------psGSoVOCR0MeF0PT2o7xEC1W"
+--------------cKEOT2O8D7g3mDU6mgUHPkYQ
+Content-Type: multipart/mixed; boundary="------------BE6Q0J2MhCbs6xGdr2kl5ebk"
 
---------------psGSoVOCR0MeF0PT2o7xEC1W
+--------------BE6Q0J2MhCbs6xGdr2kl5ebk
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On 01/03/2024 13:24, Sumit Garg wrote:
-> Short reference link names like "dtspec", "dtrepo", "dttweaks" etc.
-> interrupt the flow of the document text. Lets avoid them and instead
-> expand in place for better readability.
->=20
-> Suggested-by: Paul Barker <paul.barker.ct@bp.renesas.com>
-> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-> ---
->  doc/develop/devicetree/control.rst | 24 ++++++++++++------------
->  1 file changed, 12 insertions(+), 12 deletions(-)
->=20
-> diff --git a/doc/develop/devicetree/control.rst b/doc/develop/devicetre=
-e/control.rst
-> index c94d84192b71..4cc1457d4ea8 100644
-> --- a/doc/develop/devicetree/control.rst
-> +++ b/doc/develop/devicetree/control.rst
-> @@ -36,10 +36,10 @@ What is a Flattened Devicetree?
->  -------------------------------
-> =20
->  An fdt can be specified in source format as a text file. To read about=
+On 27/02/2024 16:05, Marek Vasut wrote:
+> Rename R-Mobile to Renesas all over the place because the chips are
+> made by Renesas, while only a subset of them is from the R-Mobile line.=
 
-> -the fdt syntax, take a look at the specification (dtspec_).
-> +the fdt syntax, take a look at `the devicetree specification`_.
-> =20
-> -There is also a mailing list (dtlist_) for the compiler and associated=
+>=20
+> Marek Vasut (19):
+>   ARM: renesas: Drop remnants of R8A7740 support
+>   ARM: renesas: Drop unused sh_sdhi.h
+>   ARM: renesas: Drop unused mmc.h
+>   ARM: renesas: Drop unused pfc-r8a7790.h
+>   ARM: renesas: Rename rmobile_get_cpu_type() to renesas_get_cpu_type()=
 
-> -tools.
-> +There is also a `devicetree compiler mailing list`_ for the compiler a=
-nd
-> +associated tools.
-> =20
->  In case you are wondering, OF stands for Open Firmware. This follows t=
-he
->  convention used in Linux.
-> @@ -89,7 +89,7 @@ Failing that, you could write one from scratch yourse=
-lf!
->  Resyncing with devicetree-rebasing
->  ----------------------------------
-> =20
-> -The devicetee-rebasing repository (dtrepo_) maintains a fork cum mirro=
-r copy of
-> +The `devicetree-rebasing repository`_ maintains a fork cum mirror copy=
- of
->  devicetree files along with the bindings synced at every Linux kernel =
-major
->  release or intermediate release candidates. The U-Boot maintainers reg=
-ularly
->  sync the `dts/upstream/` subtree from the devicetree-rebasing repo whe=
-never
-> @@ -118,7 +118,7 @@ as `arch/<arch>/dts/<name>.dts`. To select that add=
- `# CONFIG_OF_UPSTREAM is not
->  set` and set `DEFAULT_DEVICE_TREE=3D<name>` when prompted by Kconfig.
-> =20
->  This should include your CPU or SoC's devicetree file. On top of that =
-any U-Boot
-> -specific tweaks (see: dttweaks_) can be made for your board.
-> +specific tweaks (see: :ref:`dttweaks`) can be made for your board.
-> =20
->  If `OF_EMBED` is selected by Kconfig, then it will be picked up and bu=
-ilt into
->  the U-Boot image (including u-boot.bin). This is suitable for debuggin=
-g
-> @@ -243,7 +243,7 @@ Dependencies
-> =20
->  The DT schema project must be installed in order to validate the DT sc=
-hema
->  binding documents and validate DTS files using the DT schema. For inst=
-allation
-> -instructions, refer to the DT schema project page (dtschema_).
-> +instructions, refer to the `DT schema project page`_.
-> =20
->  Several executables (dt-doc-validate, dt-mk-schema, dt-validate) will =
-be
->  installed. Ensure they are in your PATH (~/.local/bin by default).
-> @@ -333,10 +333,10 @@ used it before Linux (e.g. snow). The two project=
-s developed in parallel
->  and there are still some differences in the bindings for certain board=
-s.
->  While there has been discussion of having a separate repository for de=
-vicetree
->  files, in practice the Linux kernel Git repository has become the plac=
-e where
-> -these are stored, with U-Boot taking copies via devicetree-rebasing re=
-po
-> -(see: dtrepo_) and adding tweaks with u-boot.dtsi files.
-> +these are stored, with U-Boot taking copies via
-> +`devicetree-rebasing repository`_ and adding tweaks with u-boot.dtsi f=
-iles.
-> =20
-> -.. _dtspec: https://www.devicetree.org/specifications/
-> -.. _dtlist: https://www.spinics.net/lists/devicetree-compiler/
-> -.. _dtrepo: https://git.kernel.org/pub/scm/linux/kernel/git/devicetree=
-/devicetree-rebasing.git
-> -.. _dtschema: https://github.com/devicetree-org/dt-schema/tree/main
-> +.. _the devicetree specification: https://www.devicetree.org/specifica=
-tions/
-> +.. _devicetree compiler mailing list: https://www.spinics.net/lists/de=
-vicetree-compiler/
-> +.. _devicetree-rebasing repository: https://git.kernel.org/pub/scm/lin=
-ux/kernel/git/devicetree/devicetree-rebasing.git
-> +.. _DT schema project page: https://github.com/devicetree-org/dt-schem=
-a/tree/main
+>   ARM: renesas: Rename rmobile_get_cpu_rev_*() to
+>     renesas_get_cpu_rev_*()
+>   ARM: renesas: Rename RMOBILE_CPU_TYPE_* to RENESAS_CPU_TYPE_*
+>   ARM: renesas: Rename rmobile_cpuinfo_idx() to renesas_cpuinfo_idx()
+>   ARM: renesas: Rename rmobile_cpuinfo[] to renesas_cpuinfo[]
+>   ARM: renesas: Simplify weak symbols
+>   ARM: renesas: Rename rmobile_get_prr() to renesas_get_prr()
+>   ARM: renesas: Rename ARCH_RMOBILE_BOARD_STRING to
+>     ARCH_RENESAS_BOARD_STRING
+>   ARM: renesas: Rename CONFIG_ARCH_RMOBILE_EXTRAM_BOOT to
+>     CONFIG_RENESAS_EXTRAM_BOOT
+>   ARM: renesas: Rename rmobile.h to renesas.h
+>   ARM: renesas: Rename ARCH_RMOBILE to ARCH_RENESAS
+>   ARM: renesas: Rename arch-/mach-rmobile to arch-/mach-renesas
+>   ARM: renesas: Post rename fix ups
+>   mmc: renesas-sdhi: Rename rmobile_is_gen3_mmc0() to
+>     rcar_is_gen3_mmc0()
+>   git-mailrc: Add renesas entry and update rmobile entry
+>=20
+
+For every patch in the series:
 
 Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 
 --=20
 Paul Barker
---------------psGSoVOCR0MeF0PT2o7xEC1W
+
+--------------BE6Q0J2MhCbs6xGdr2kl5ebk
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -251,21 +181,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------psGSoVOCR0MeF0PT2o7xEC1W--
+--------------BE6Q0J2MhCbs6xGdr2kl5ebk--
 
---------------KaRhcBrWcJosmYIj33qEpVBu--
+--------------cKEOT2O8D7g3mDU6mgUHPkYQ--
 
---------------QrqshNnO4bWp1JM5oapTeM9z
+--------------CLJDKr0xuIG3XWOZysf0FVqk
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZeLXtQUDAAAAAAAKCRDbaV4Vf/JGvZ+h
-AP9/KcjzNgaGNG8Wb7iMwSlLQh0IBE+ExvUoFFMJ4wk2IQD+KiDkoMt2EBwBEqodK7pH1L2xFcFD
-AX2o6BllSgWq0Q8=
-=JuSw
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZeLlDAUDAAAAAAAKCRDbaV4Vf/JGvULB
+AQCwziXGEL1kV7VaQMy/+vE6OZTJ3dM8/LtLoXkUNWFRfAEA/TLDVDoH3oXQEs17wwOINsf1asls
+tdOp6jCcbzH/awQ=
+=jGAQ
 -----END PGP SIGNATURE-----
 
---------------QrqshNnO4bWp1JM5oapTeM9z--
+--------------CLJDKr0xuIG3XWOZysf0FVqk--
