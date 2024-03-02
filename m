@@ -4,68 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53A9BC5478C
-	for <u-boot@archiver.kernel.org>; Sat,  2 Mar 2024 13:49:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8003C54798
+	for <u-boot@archiver.kernel.org>; Sat,  2 Mar 2024 14:04:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 679D28744F;
-	Sat,  2 Mar 2024 14:49:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=georgemail.de
+	by phobos.denx.de (Postfix) with ESMTP id 1113687D16;
+	Sat,  2 Mar 2024 15:04:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=georgemail.de header.i=@georgemail.de header.b="k56wgYPa";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZHpQWXY2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7378887B30; Sat,  2 Mar 2024 14:17:41 +0100 (CET)
-Received: from smtp052.goneo.de (smtp052.goneo.de [85.220.129.60])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 47AD487D26; Sat,  2 Mar 2024 15:04:24 +0100 (CET)
+Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
+ [IPv6:2607:f8b0:4864:20::829])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 76A1C87E7F
- for <u-boot@lists.denx.de>; Sat,  2 Mar 2024 14:17:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5B945875B9
+ for <u-boot@lists.denx.de>; Sat,  2 Mar 2024 15:04:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=georgemail.de
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=leon@georgemail.de
-Received: from hub1.goneo.de (hub1.goneo.de [IPv6:2001:1640:5::8:52])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits))
- (No client certificate requested)
- by smtp5.goneo.de (Postfix) with ESMTPS id 407E0240458
- for <u-boot@lists.denx.de>; Sat,  2 Mar 2024 14:17:39 +0100 (CET)
-Received: from hub1.goneo.de (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits))
- (No client certificate requested)
- by hub1.goneo.de (Postfix) with ESMTPS id A4EBD240128
- for <u-boot@lists.denx.de>; Sat,  2 Mar 2024 14:17:37 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=georgemail.de;
- s=DKIM001; t=1709385457;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=hgoVj0HBxpwFXS8QscxsnFNiCPbt/bA3YFEFfC4iu1g=;
- b=k56wgYPauNEj92f2ZZUUZdA92F7PAfvN7FUcaRBDsQ9Gt40BP+xlRkigjgqFPc/K9Wmv86
- 8pTUpANYLaFCLOBoJACBo9tAXS0pq4c5abDDOnHbIe4UcohF3jqMawd7APl0LmecoKzVYT
- 2AZNSJ3lcAFPwtTGSLroU+ZtyRk5rrIR1JuHeaUhTExkrlx84Qbsqmb3+mAKA6Np+gJMDo
- AsakgYG3zf/mStoDqGMBRABdge+CkE5wcz4ZTbxO3Q2HKi26d+dX/8AVif2xVBrjkoVRd9
- VIVMFz1KlOuJCnsL7UatEA+EeWYZJT/OzKoRy5iZoEULJRm/Zhgk0awBJrgvKQ==
-Received: from couch-potassium.fritz.box (unknown
- [IPv6:2a02:8071:5250:1240:f4e6:f6d2:6d95:e0c4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by hub1.goneo.de (Postfix) with ESMTPSA id 76D79240030
- for <u-boot@lists.denx.de>; Sat,  2 Mar 2024 14:17:37 +0100 (CET)
-From: "Leon M. Busch-George" <leon@georgemail.de>
-To: u-boot@lists.denx.de
-Subject: [PATCH] Makefile: use shell to calculate map_size
-Date: Sat,  2 Mar 2024 14:17:19 +0100
-Message-ID: <20240302131728.148251-1-leon@georgemail.de>
-X-Mailer: git-send-email 2.44.0
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x829.google.com with SMTP id
+ d75a77b69052e-42eb3821a2dso24249781cf.1
+ for <u-boot@lists.denx.de>; Sat, 02 Mar 2024 06:04:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1709388260; x=1709993060; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Ngg2ppW2bh6DI6a4mB2t08sxWcwwyrr3S4rV8cSMh+w=;
+ b=ZHpQWXY217JymoZbietCH7t7KPh3QSM24LmZEllhglaRN4y9rjym38Rj8nvNPx7jQZ
+ 6JLcwGkQO5ELOogllPD5wM8qjtW3RVZDyXCP1bOxTXK+pJVOdOKyDP+fLCY5bLQUP457
+ 3suEbxSMPNj3q3//Ys8CaTKqj8wss3XciE8ic=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1709388260; x=1709993060;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Ngg2ppW2bh6DI6a4mB2t08sxWcwwyrr3S4rV8cSMh+w=;
+ b=mGtHBF4ck3xsvFRCHjYeo+By0Woy1WUPRuJuxBAA/gQ9NPhLvfhWtbzyOcVqPgFcTR
+ VY9ZWecmNOOInjt6uAO+zzAvv9JdyQYaoZsLW6dADVTYklEwhuSkkCoJZKyriwcKcmo5
+ a97MY7AwoS4DDtFfOSiZHwdG1CO/6oXNfFgVj/3Vyov/O3ChU7i/u1E+AjbYzKQqi+bA
+ NJxyrb5C7fgrWbQNvkZvfruAIXCVHmlLR7ab95u69xfnug9n0IgGQHDdKtZvNzsFSoDn
+ PO0K5Q/Tqf5BFvauSYkFF7yPYr9oyEhNAgruAAlEd3Hdm9Y5W/2XJ6BG69j9vFPbyGhG
+ FIVA==
+X-Gm-Message-State: AOJu0Yxi0j+7A+YyTGyFRR9y1npbzkcf4brnMaWJ3oRy9px//+m2VNSg
+ 532bzgt9IpHmDB22yGTQ/5G8p4fF9VpyMV227fD4/jDrXOC/J8mmH75CHnUbzkY=
+X-Google-Smtp-Source: AGHT+IFa6l86TmUr10eTCSNxN2Y7AXu8HaL9Dufu/jiHaMzorjY4toyQhS/aYrogu2FT6kkkYj6ocQ==
+X-Received: by 2002:ac8:580a:0:b0:42e:c1b7:81ec with SMTP id
+ g10-20020ac8580a000000b0042ec1b781ecmr5548986qtg.10.1709388260098; 
+ Sat, 02 Mar 2024 06:04:20 -0800 (PST)
+Received: from bill-the-cat (065-184-194-195.res.spectrum.com.
+ [65.184.194.195]) by smtp.gmail.com with ESMTPSA id
+ d14-20020a05620a158e00b007874e64c879sm2573781qkk.116.2024.03.02.06.04.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 02 Mar 2024 06:04:18 -0800 (PST)
+Date: Sat, 2 Mar 2024 09:04:16 -0500
+From: Tom Rini <trini@konsulko.com>
+To: hanyuan <hanyuan-z@qq.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH 1/2] cli: allow users to disable history if unused at all
+Message-ID: <20240302140416.GA1523872@bill-the-cat>
+References: <tencent_411A9B7DA959D26CCAFCE7961870C400E80A@qq.com>
+ <20240301213702.GA1401112@bill-the-cat>
+ <tencent_53D7126DB3F29FBEA48E430D60D298FA4B05@qq.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Rspamd-UID: 4c936b
-X-Rspamd-UID: 7d9926
-X-Mailman-Approved-At: Sat, 02 Mar 2024 14:49:18 +0100
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="n9cNm3xrd6MiHEwp"
+Content-Disposition: inline
+In-Reply-To: <tencent_53D7126DB3F29FBEA48E430D60D298FA4B05@qq.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,34 +91,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: "Leon M. Busch-George" <leon@georgemail.eu>
 
-The error message "bc: command not found" is easily missed since the
-build continues.
-bc is not a part of coreutils or base-devel. POSIX sh can also do the
-calculation.
+--n9cNm3xrd6MiHEwp
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Leon M. Busch-George <leon@georgemail.eu>
----
- Makefile | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+On Sat, Mar 02, 2024 at 12:35:12PM +0800, hanyuan wrote:
 
-diff --git a/Makefile b/Makefile
-index 7a3209bd9e..41dc4baad2 100644
---- a/Makefile
-+++ b/Makefile
-@@ -1275,9 +1275,9 @@ OBJCOPYFLAGS_u-boot-nodtb.bin := -O binary \
- binary_size_check: u-boot-nodtb.bin FORCE
- 	@file_size=$(shell wc -c u-boot-nodtb.bin | awk '{print $$1}') ; \
- 	map_size=$(shell cat u-boot.map | \
--		awk '/_image_copy_start/ {start = $$1} /_image_binary_end/ {end = $$1} END {if (start != "" && end != "") print "ibase=16; " toupper(end) " - " toupper(start)}' \
-+		awk '/_image_copy_start/ {start = $$1} /_image_binary_end/ {end = $$1} END {if (start != "" && end != "") print "echo $$((0x" toupper(end) " - 0x" toupper(start) "))"}' \
- 		| sed 's/0X//g' \
--		| bc); \
-+		| sh); \
- 	if [ "" != "$$map_size" ]; then \
- 		if test $$map_size -ne $$file_size; then \
- 			echo "u-boot.map shows a binary size of $$map_size" >&2 ; \
--- 
-2.44.0
+> Hi Tom,
+>=20
+> Thanks for reviewing! I am not quite sure about the tests which
+> you refer to. Is it the CI in the gitlab? I think this patch is simple
+> and it doesn=E2=80=99t occur any errors during my work these days, thus I=
+ tested
+> it manually which didn=E2=80=99t throw any problems, and sent it. Could y=
+ou
+> please give me some hints about the broken tests? If it is a CI, could
+> you please give me the link to the error information?
 
+Yes, our pytests for sandbox failed, see
+https://docs.u-boot.org/en/latest/develop/ci_testing.html and
+https://docs.u-boot.org/en/latest/develop/tests_sandbox.html
+
+--=20
+Tom
+
+--n9cNm3xrd6MiHEwp
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXjMd4ACgkQFHw5/5Y0
+tyzGlQv/U5yaBauf9WDtyYiliHLgywLsNQofbceogdGqSlvrHxwmSxMAB6nd7Pqk
+gAl2uVKKqnFUQOURjHjQVYlqf24Xb2FyZmICmxkXx2xWomNSMd1zwf1Xssii+6Sk
+ifp/aby/nzWBZ6fjUQwCgZg5ERSC33azFhg0/RJPMUFkbpVmcITh+Jk05zmUy4nT
+JrGSZjL4ZD3FOqUr6/I4gFO1DeCyzzQakrL2Zl+X39w9jQ7FVLcsx8llmsYLA9xW
+rzjfm2XJJsOJlDadQX9Wl30EkYln9jdUJRUVoHa2x+uLecZswhbdl9oHlJMIChZ9
+ci8kYm0VLS+btyBugY6yJ2tnbJYkd+/hKwOE8wEOMMtVHW9ZOZvU5H2JhDRVtHDf
+lpZHVG9Xh5xTn/8IU+t0ZKoeMbpdGxOuwMMG+yLuiUYzJx/f0z5/KD+2wA2yGA+J
+rJXSFqRwwFKG6nqI2TYM1FCq+M7LwQSpsVID+eE9hDyI9bLmiGrdarj0ZkpfYjQa
+MR6XEQw7
+=DkZQ
+-----END PGP SIGNATURE-----
+
+--n9cNm3xrd6MiHEwp--
