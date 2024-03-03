@@ -4,75 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69651C48BF6
-	for <u-boot@archiver.kernel.org>; Sun,  3 Mar 2024 11:07:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58201C5475B
+	for <u-boot@archiver.kernel.org>; Sun,  3 Mar 2024 13:01:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F9F087EF7;
-	Sun,  3 Mar 2024 12:07:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 85F7F87F0D;
+	Sun,  3 Mar 2024 14:01:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ngMkM86R";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="EWCBENF6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4FF2B87EFA; Sun,  3 Mar 2024 12:07:04 +0100 (CET)
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [IPv6:2a00:1450:4864:20::129])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 225D487F0C; Sun,  3 Mar 2024 14:01:29 +0100 (CET)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5323E87E96
- for <u-boot@lists.denx.de>; Sun,  3 Mar 2024 12:07:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 139BF87CDB
+ for <u-boot@lists.denx.de>; Sun,  3 Mar 2024 14:01:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=maximmosk4@gmail.com
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-5131f3fc695so3673515e87.1
- for <u-boot@lists.denx.de>; Sun, 03 Mar 2024 03:07:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1709464021; x=1710068821; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Er2eTAt5wxeTCcCzcvh/eUze/dbhtGkrGnfCDwD2690=;
- b=ngMkM86R1SPxZDfqvcGWDaInh2jGwp/dsAIQh0CJMKeajL2I36v8If05aG7hK3qkl8
- UQY4n4bcYKJIjJ1Y8VnxW2tLbrED7+R2Ohd837L7nzWa8ckzpwqnUklQbB6wltdytIxB
- KlBQP0s0h1vNioTyn6TeO+2O0IkIL0xlS+VUTjRNg5Sna2+dGJX8tV9+bzQ+yz57jNE/
- C0Bs6+2eJsZfHAC3ykQTem5ptnjij3P+nFdo+GdK1K0hRk6M7puo1qf60v4tQXOLtI8m
- VrmsaCcUeAG1imTzbR3tcIE1LngTKPfA8zglFX8PxijCVRQiJGP1PTntbUV4wOhbyuz9
- rliw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709464021; x=1710068821;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Er2eTAt5wxeTCcCzcvh/eUze/dbhtGkrGnfCDwD2690=;
- b=Bw2nHMyljMhMfzuCD2Pu0bKWx4L4+qh1nVMMse1ArJnATYFnCwnyx24nR0iIh7C3RT
- n1MGF/kE3jQ7QfOx6oiPMuE9KdFHO8pFPUbFvgBoK92WvO3HmM/c5o+mzCBZXrxsn22N
- oyUVaQzU1sSDuz0v1c0/Ac9ztewAyUPkQizjkw2fgdZyRy9D0z6dnLW4gYftM6Ra0FNB
- nfieTzYHhIlUrVp79ftdhdON7bjgh6IZlvHl9i2NuA4zqyDy4EHertvARH+h2E7gW04p
- mceh3HsYNHtEPiPFlSZETeh5bDy7WIWum+M9rhQiEVuu7ebhyWJmpKK6qRTe1rvaZuSN
- QAcw==
-X-Gm-Message-State: AOJu0YzaPDb8aT9dt3J9p5Mbj/SCKtvmlkzl7sVMuxg4AjycCzvX3G7y
- tlL1u1m6RxvMmPoqdOm4JRuh1mcPSJwm324Nh6gA/eZCF6rQNnu8C2Y5KB2c0T/Iqg==
-X-Google-Smtp-Source: AGHT+IE1YtG1RNr7/IgXazVJBtqOn2957NgWTJF+l4O1J0Xe4ZJ3iai1ERi+WWIDCnB0YKOk76dq1g==
-X-Received: by 2002:ac2:5e24:0:b0:513:2010:6d93 with SMTP id
- o4-20020ac25e24000000b0051320106d93mr3962097lfg.56.1709464021143; 
- Sun, 03 Mar 2024 03:07:01 -0800 (PST)
-Received: from moskalets-nb.kdtln.ru (109-252-11-244.nat.spd-mgts.ru.
- [109.252.11.244]) by smtp.gmail.com with ESMTPSA id
- z17-20020a195e51000000b0051320e19a74sm1333291lfi.34.2024.03.03.03.07.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 03 Mar 2024 03:07:00 -0800 (PST)
-From: Maxim Moskalets <maximmosk4@gmail.com>
-X-Google-Original-From: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>
-To: u-boot@lists.denx.de
-Cc: Maxim Moskalets <maximmosk4@gmail.com>,
- Maxim Moskalets <Maxim.Moskalets@kaspersky.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v4 RESEND] cmd: add FDT setup for bootelf by flag
-Date: Sun,  3 Mar 2024 14:06:52 +0300
-Message-Id: <20240303110652.15490-1-Maxim.Moskalets@kaspersky.com>
-X-Mailer: git-send-email 2.39.2
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT2ubnt.fritz.box (ip-095-222-037-056.um34.pools.vodafone-ip.de
+ [95.222.37.56])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 241363F280; 
+ Sun,  3 Mar 2024 13:01:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1709470885;
+ bh=c/MOiLwoH8JzVoooQC0IJQu36Bs8Wry7Rh5HOnCxLX8=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=EWCBENF6pLIONcO7yIYm4KmM0ZQZy3J2yU9b/Cpm3a3bRpUvHJZbfUT6yYKNKWg3L
+ BNWc5KMjzU7TYFFa7WOOCRrMQwtFDlT37Kz2BFjgEQygXnxGHakld4ui6xZQYlhzHj
+ FY7zZPl5Me3rkuS6BzdOlmmK/PgX1abW88JVbe1tIv7jE39en9zGjqJAhLa4O9lAHd
+ 92mY4vr3EvtGRM6nDdK0W1jtmQttMVbhWpUuJrKijcoyxB3XOIHULZI1kCJpOABKvA
+ orHJbu/F+0VkF+TTDTa+zoqiOP5wGLP5OvVDqrTd4eGtq6uPTXIM22YC8J6JeY0WMm
+ /iXgM+NaxB+PQ==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Yanhong Wang <yanhong.wang@starfivetech.com>,
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>
+Cc: Lukasz Tekieli <tekieli.lukasz@gmail.com>,
+ Aurelien Jarno <aurelien@aurel32.net>,
+ Chanho Park <chanho61.park@samsung.com>,
+ Shiji Yang <yangshiji66@outlook.com>, Shengyu Qu <wiagn233@outlook.com>,
+ Seung-Woo Kim <sw0312.kim@samsung.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [RFC 0/5] riscv: add support for Milk-V Mars board
+Date: Sun,  3 Mar 2024 14:01:17 +0100
+Message-ID: <20240303130122.29983-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -91,85 +74,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Maxim Moskalets <maximmosk4@gmail.com>
+The Milk-V Mars board is technically very close to the StarFive
+VisionFive 2 board.
 
-Added the ability to use FDT for ELF applications, required to run some
-OS. To make FDT setup, you need to set the -d fdt_addr_r cmd option for
-bootelf command.
+With this patch series the VisionFive 2 U-Boot SPL will detect that it
+is runing on a Milk-V board and patch the device-tree accordingly.
+This is the same approach that has been taken to handle the differences
+between the Visionfive 2 1.2B and 1.3A revisions.
 
-Signed-off-by: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>
+An alternative approach would use a separate defconfig and separate board
+files. As this would incur a higher effort I chose the SPL approach.
 
-Cc: Tom Rini <trini@konsulko.com>
----
- cmd/elf.c | 27 ++++++++++++++++++++++++---
- 1 file changed, 24 insertions(+), 3 deletions(-)
+Heinrich Schuchardt (5):
+  eeprom: starfive: function get_product_id_from_eeprom()
+  riscv: set fdtfile on Milk-V Mars
+  board: starfive: support Milk-V Mars board
+  riscv: starfive: avoid including common.h
+  doc: describe Milk-V Mars board
 
-diff --git a/cmd/elf.c b/cmd/elf.c
-index b7b9f506a5..2fa28448c0 100644
---- a/cmd/elf.c
-+++ b/cmd/elf.c
-@@ -38,6 +38,8 @@ static unsigned long do_bootelf_exec(ulong (*entry)(int, char * const[]),
- /* Interpreter command to boot an arbitrary ELF image from memory */
- int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- {
-+	struct bootm_headers img = {0};
-+	unsigned long fdt_addr = 0; /* Address of the FDT */
- 	unsigned long addr; /* Address of the ELF image */
- 	unsigned long rc; /* Return value from user code */
- 	char *sload = NULL;
-@@ -46,13 +48,23 @@ int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	/* Consume 'bootelf' */
- 	argc--; argv++;
+ arch/riscv/include/asm/arch-jh7110/eeprom.h   |   9 ++
+ board/starfive/visionfive2/spl.c              | 102 +++++++++++++++---
+ .../visionfive2/starfive_visionfive2.c        |  44 +++++---
+ .../visionfive2/visionfive2-i2c-eeprom.c      |   9 +-
+ doc/board/starfive/index.rst                  |   1 +
+ doc/board/starfive/milk-v_mars.rst            |  93 ++++++++++++++++
+ 6 files changed, 230 insertions(+), 28 deletions(-)
+ create mode 100644 doc/board/starfive/milk-v_mars.rst
 
--	/* Check for flag. */
-+	/* Check for [-p|-s] flag. */
- 	if (argc >= 1 && (argv[0][0] == '-' && \
- 				(argv[0][1] == 'p' || argv[0][1] == 's'))) {
- 		sload = argv[0];
- 		/* Consume flag. */
- 		argc--; argv++;
- 	}
-+
-+	/* Check for [-d fdt_addr_r] option. */
-+	if ((argc >= 2) && (argv[0][0] == '-') && (argv[0][1] == 'd')) {
-+		if (strict_strtoul(argv[1], 16, &fdt_addr) != 0)
-+			return CMD_RET_USAGE;
-+		/* Consume option. */
-+		argc -= 2;
-+		argv += 2;
-+	}
-+
- 	/* Check for address. */
- 	if (argc >= 1 && strict_strtoul(argv[0], 16, &addr) != -EINVAL) {
- 		/* Consume address */
-@@ -68,6 +80,14 @@ int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	else
- 		addr = load_elf_image_shdr(addr);
- 
-+	if (fdt_addr) {
-+		printf("## Setting up FDT at 0x%08lx ...\n", fdt_addr);
-+		flush();
-+
-+		if (image_setup_libfdt(&img, (void *)fdt_addr, NULL))
-+			return 1;
-+	}
-+
- 	if (!env_get_autostart())
- 		return rcode;
- 
-@@ -298,9 +318,10 @@ int do_bootvx(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- U_BOOT_CMD(
- 	bootelf, CONFIG_SYS_MAXARGS, 0, do_bootelf,
- 	"Boot from an ELF image in memory",
--	"[-p|-s] [address]\n"
-+	"[-p|-s] [-d fdt_addr_r] [address]\n"
- 	"\t- load ELF image at [address] via program headers (-p)\n"
--	"\t  or via section headers (-s)"
-+	"\t  or via section headers (-s)\n"
-+	"\t- setup FDT image at [fdt_addr_r] (-d)"
- );
- 
- U_BOOT_CMD(
 -- 
-2.39.2
+2.43.0
 
