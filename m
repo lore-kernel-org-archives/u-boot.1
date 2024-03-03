@@ -4,57 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 771FFC48BF6
-	for <u-boot@archiver.kernel.org>; Sun,  3 Mar 2024 21:26:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A515BC5475B
+	for <u-boot@archiver.kernel.org>; Sun,  3 Mar 2024 21:59:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7019387EB3;
-	Sun,  3 Mar 2024 22:26:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ideasonboard.com
+	by phobos.denx.de (Postfix) with ESMTP id BFDAF87EE6;
+	Sun,  3 Mar 2024 22:59:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=kernel-space.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="bBeaOcHT";
+	dkim=pass (1024-bit key; unprotected) header.d=kernel-space.org header.i=@kernel-space.org header.b="wfDE47Sx";
+	dkim=pass (1024-bit key) header.d=kernel-space.org header.i=@kernel-space.org header.b="O97xrIRf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C16687EEA; Sun,  3 Mar 2024 22:26:50 +0100 (CET)
-Received: from perceval.ideasonboard.com (perceval.ideasonboard.com
- [213.167.242.64])
+ id 2DEE787F31; Sun,  3 Mar 2024 22:59:17 +0100 (CET)
+Received: from mail.kernel-space.org (unknown [IPv6:2a01:4f8:c2c:5a84::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C918A87D5E
- for <u-boot@lists.denx.de>; Sun,  3 Mar 2024 22:26:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=ideasonboard.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=laurent.pinchart@ideasonboard.com
-Received: from pendragon.ideasonboard.com (89-27-53-110.bb.dnainternet.fi
- [89.27.53.110])
- by perceval.ideasonboard.com (Postfix) with ESMTPSA id 53F029D5;
- Sun,  3 Mar 2024 22:26:30 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
- s=mail; t=1709501190;
- bh=3oOp+W7sJpUDLi3obPFHcoRzrTMiszreNUbX3gx9csU=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=bBeaOcHTauVeVeBU1Bdl6T1NEt2+x83GXv4qJ3hsvGecPrOYX+ttv9v4SMlbYhEH0
- m1pAQrF6fHXa9fMFmmwTUJtNqse85mxSoPyzqpTtkH2tGJb/XhKWGkl30okhC9Ux1k
- Ca34T5aX3+e5uUqEY8ZNxlKJ0h9m9YxXGQoEdGeo=
-Date: Sun, 3 Mar 2024 23:26:48 +0200
-From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de, Geert Uytterhoeven <geert@linux-m68k.org>,
- Hans Verkuil <hverkuil-cisco@xs4all.nl>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>,
- Niklas =?utf-8?Q?S=C3=B6derlund?= <niklas.soderlund@ragnatech.se>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Wolfram Sang <wsa@kernel.org>
-Subject: Re: [PATCH] fdt: Fix bootm_low handling
-Message-ID: <20240303212648.GD11285@pendragon.ideasonboard.com>
-References: <20240302225527.179601-1-marek.vasut+renesas@mailbox.org>
+ by phobos.denx.de (Postfix) with ESMTPS id 292B883414
+ for <u-boot@lists.denx.de>; Sun,  3 Mar 2024 22:59:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=kernel-space.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=angelo@kernel-space.org
+Received: from kernel-space.org (localhost [127.0.0.1])
+ by kernel-space.org (OpenSMTPD) with ESMTP id f23712b4;
+ Sun, 3 Mar 2024 21:56:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=kernel-space.org; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; s=s1; bh=UF
+ Vd2jdHQaI1zxBbC9TLlshEnjk=; b=wfDE47SxgG1wbpMOWFJ7uMFvSeCvF26VRS
+ 2rN8O6PDgBhw0Rn1fwa+pdgg98bDeuTtmzFh2ISO0AbseLsAA3obfxmZibLDRkvj
+ oMXU2xiFVC6veb+2p82WDylhe74vKkxLTGcUyczy/4VPnpgYU6Ib2tfXmcW+IPz6
+ AFwQd9SXo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=kernel-space.org; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; q=dns; s=s1; b=
+ DNYAmDUuO1u+WYHUHKVAA0YfAtr+9aLX0Nc+V4ujrp5UKiGkKhTcsaKjwQ2IeDAU
+ CuCOWh6cNsmHji9D1WqpN7EXUjkEqY45FbCIXgF2nBfk25xSy7MttoZitWryuIMB
+ yohz40HOzVJ+3cAJ5j5w4Zk5yUbeqm3nZS71V8YaXyQ=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel-space.org;
+ s=s1; t=1709503009;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=E51gSW7qASfgoCWO0eyOutEF8k7M6wAy1POby2Lw3yI=;
+ b=O97xrIRfWmzxLIHhHOBz012eozBeEBOebz9P4UZLZAS0PX3bvVvpq5LXmOjTTEU3VxWNZp
+ QgOVY9/iLX5UFrssCgdKiaildo6YcTZBQtDB1f/6J/LdG3G2+1eCIm/5yKAocHGvZkWU5T
+ vbLoIIG/xbAaT2TbzfwOwg9Ypk6Z7wI=
+Received: from [192.168.0.101] (host-79-50-209-47.retail.telecomitalia.it
+ [79.50.209.47])
+ by kernel-space.org (OpenSMTPD) with ESMTPSA id 1859a0a8
+ (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO); 
+ Sun, 3 Mar 2024 21:56:49 +0000 (UTC)
+Message-ID: <bd0b13b0-0554-b280-a40a-17056a1e2c5e@kernel-space.org>
+Date: Sun, 3 Mar 2024 22:58:22 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20240302225527.179601-1-marek.vasut+renesas@mailbox.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Betterbird/102.11.0
+Subject: Re: [PATCH v3] test/py: reset: Add a test for reset command
+To: Tom Rini <trini@konsulko.com>, Love Kumar <love.kumar@amd.com>
+Cc: u-boot@lists.denx.de, michal.simek@amd.com, git@xilinx.com,
+ Marek Vasut <marex@denx.de>
+References: <4b7c5e82165b009cf8b28701ca3f1e182fbc3c09.1708414720.git.love.kumar@amd.com>
+ <20240302151813.GA1652651@bill-the-cat>
+Content-Language: en-US, it
+From: Angelo Dureghello <angelo@kernel-space.org>
+In-Reply-To: <20240302151813.GA1652651@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,87 +89,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+Hi Tom,
+> On Tue, Feb 20, 2024 at 01:11:38PM +0530, Love Kumar wrote:
+>> Add a test for reset commands which performs resetting of CPU, It 
+>> does COLD reset by default and WARM reset with -w option. 
+>> Signed-off-by: Love Kumar <love.kumar@amd.com> Reviewed-by: Tom Rini 
+>> <trini@konsulko.com> --- Changes in v2: - Set bootmode through 
+>> boardenv if modeboot is not defined Changes in v3: - Fix the issue 
+>> with bad pattern found on console --- test/py/tests/test_reset.py | 
+>> 61 +++++++++++++++++++++++++++++++++++++ 1 file changed, 61 
+>> insertions(+) create mode 100644 test/py/tests/test_reset.py 
+> I had hoped this was all sorted out now, but both this and the saveenv 
+> test cause qemu_m68k to fail now. See: 
+> https://source.denx.de/u-boot/u-boot/-/jobs/791635 
+looking into this.
 
-Thank you for the patch.
-
-On Sat, Mar 02, 2024 at 11:54:02PM +0100, Marek Vasut wrote:
-> According to README CFG_SYS_BOOTMAPSZ section, in case both "bootm_low" and
-> "bootm_size" variables are defined, "bootm_mapsize" variable is not defined
-> and CFG_SYS_BOOTMAPSZ macro is not defined, all data for the Linux kernel
-> must be between "bootm_low" and "bootm_low" + "bootm_size".
-> 
-> Currently, for systems with DRAM between 0x4000_0000..0x7fff_ffff and with
-> e.g. bootm_low=0x60000000 and bootm_size=0x10000000, the code will attempt
-> to reserve memory from 0x4000_0000..0x4fff_ffff, which is incorrect. This
-> is because "bootm_low" is not taken into consideration correctly.
-> 
-> The last parameter of lmb_alloc_base() is the maximum physical address of
-> the to be reserved LMB area. Currently this is the start of DRAM bank that
-> is considered for LMB area reservation + min(DRAM bank size, bootm_size).
-> In case bootm_low is set to non-zero, this maximum physical address has to
-> be shifted upward, to min(DRAM bank start + size, bootm_low + bootm_size),
-> otherwise the reserved memory may be below bootm_low address.
-> 
-> In case of multiple DRAM banks, the current change reserves top part of
-> the first bank, and reserves the rest of memory in the follow up banks.
-> 
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> ---
-> Cc: Geert Uytterhoeven <geert@linux-m68k.org>
-> Cc: Hans Verkuil <hverkuil-cisco@xs4all.nl>
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>
-> Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-> Cc: Niklas Söderlund <niklas.soderlund@ragnatech.se>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Wolfram Sang <wsa@kernel.org>
-> ---
->  boot/image-fdt.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/boot/image-fdt.c b/boot/image-fdt.c
-> index 75bdd55f326..5e4aa9de0d2 100644
-> --- a/boot/image-fdt.c
-> +++ b/boot/image-fdt.c
-> @@ -217,14 +217,14 @@ int boot_relocate_fdt(struct lmb *lmb, char **of_flat_tree, ulong *of_size)
->  			if (start + size < low)
->  				continue;
->  
-> -			usable = min(size, (u64)mapsize);
-> +			usable = min(start + size, (u64)(low + mapsize));
-
-low and mapsize are ulong, is there a risk this could overflow on 32-bit
-platforms ?
-
-I would rename usable to usable_end to make it clearer.
-
->  
->  			/*
->  			 * At least part of this DRAM bank is usable, try
->  			 * using it for LMB allocation.
->  			 */
->  			of_start = map_sysmem((ulong)lmb_alloc_base(lmb,
-> -				    of_len, 0x1000, start + usable), of_len);
-> +				    of_len, 0x1000, usable), of_len);
->  			/* Allocation succeeded, use this block. */
->  			if (of_start != NULL)
->  				break;
-
-The code continue with
-
-			/*
-			 * Reduce the mapping size in the next bank
-			 * by the size of attempt in current bank.
-			 */
-			mapsize -= usable - max(start, (u64)low);
-			if (!mapsize)
-				break;
-
-which seems to be correct now, but interestingly was not before :-)
-
--- 
 Regards,
+angelo
 
-Laurent Pinchart
+
+On 02/03/24 4:18 PM, Tom Rini wrote:
