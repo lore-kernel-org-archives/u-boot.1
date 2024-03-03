@@ -4,78 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1BD2C48BF6
-	for <u-boot@archiver.kernel.org>; Sun,  3 Mar 2024 14:14:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4386CC48BF6
+	for <u-boot@archiver.kernel.org>; Sun,  3 Mar 2024 14:37:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A95A87EDD;
-	Sun,  3 Mar 2024 15:14:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8BBDC87F06;
+	Sun,  3 Mar 2024 15:37:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=qq.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="G/Rrbsaa";
+	dkim=pass (1024-bit key; unprotected) header.d=qq.com header.i=@qq.com header.b="zlOmr5h1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 01F2B87F0A; Sun,  3 Mar 2024 15:14:54 +0100 (CET)
-Received: from mail-qt1-x831.google.com (mail-qt1-x831.google.com
- [IPv6:2607:f8b0:4864:20::831])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 660B787F0A; Sun,  3 Mar 2024 15:37:40 +0100 (CET)
+Received: from out203-205-221-239.mail.qq.com (out203-205-221-239.mail.qq.com
+ [203.205.221.239])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 008CF87CE8
- for <u-boot@lists.denx.de>; Sun,  3 Mar 2024 15:14:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1DA5087DFC
+ for <u-boot@lists.denx.de>; Sun,  3 Mar 2024 15:37:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x831.google.com with SMTP id
- d75a77b69052e-42ee23c64e3so3996961cf.2
- for <u-boot@lists.denx.de>; Sun, 03 Mar 2024 06:14:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1709475290; x=1710080090; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=+6oB9/8OKGJKr6xSTLh3ZpI6JQIxAlArN4aHP5GB93s=;
- b=G/RrbsaaoLyRiVaxqVEll1kyT1O+aCKVnn/K4Rl0FAqwdYoroGcgzz4DhhMtFYhEqy
- GecwzAl0AmziemtcQvnt//12khbU7SYpXvj1lvh9n0SmFUazmmIIax6+x7YcrJrI72D/
- lugt7FIJtL4qETAnanEqgNV6YrwP6/1sbpjs0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709475290; x=1710080090;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=+6oB9/8OKGJKr6xSTLh3ZpI6JQIxAlArN4aHP5GB93s=;
- b=MRG7xBb48ycuzHPKc+SAAf59uyw+y6nKJespgRvGGGDEhnvk5Jg2wvZX3EdQrXistn
- cZN3p2oLQeQG0s3vxLVfTr0x9O3MmdN1SrSUUMDKd1nbFmfESwQn+V6o8Ln5zYOMi4KQ
- RAgJXEFZnI84g6pSVUULa3v31Ok5KsOktuKHM7KZAuBGfjvt8ztga7D369NioNS6UfgS
- zoS5YjgNP6j7QjlkaG60TU/biYyOjbcpk6tc0v+vX5TcwQvwCVYK5JZwL+rEnqVBWypK
- YY0Q8+F4Y7d/NUCziToHxESjThzHK8EgPvhbZcdRVOeXPI7ziM5XAd3YLYE+Z8qufDjk
- UKfg==
-X-Gm-Message-State: AOJu0YymH+1/SnMIa31ZFEgcdO+85vtJPhXaEdo52WceLUWfL8eoIUc2
- DYefAIxULUcjMnEqcfzchSFVYjbZk0maTLLjDYXTh5RlpLsgCbaSMrcbOk5so00GH4PBMITm1v8
- 4
-X-Google-Smtp-Source: AGHT+IFIN1aIkmiTbfy4GhjyNNgbkz+QiHJW3dZQfUkfS+6L+0SpbhFEfDdtP1mbaOsvYPjX1d1uxw==
-X-Received: by 2002:a05:622a:11c2:b0:42e:8d45:8889 with SMTP id
- n2-20020a05622a11c200b0042e8d458889mr7505221qtk.5.1709475290611; 
- Sun, 03 Mar 2024 06:14:50 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-007f-0000-0000-0000-1002.res6.spectrum.com.
- [2603:6081:7b00:7f::1002]) by smtp.gmail.com with ESMTPSA id
- js8-20020a05622a808800b0042eea22a420sm680668qtb.59.2024.03.03.06.14.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 03 Mar 2024 06:14:50 -0800 (PST)
-Date: Sun, 3 Mar 2024 09:14:47 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH 1/1] doc: invalid escape sequences in
- maintainers_include.py
-Message-ID: <20240303141447.GC1523872@bill-the-cat>
-References: <20240303134022.33062-1-heinrich.schuchardt@canonical.com>
+ dmarc=pass (p=quarantine dis=none) header.from=qq.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hanyuan-z@qq.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
+ t=1709476649; bh=xZeySlevRlUCF1ClBBMg3pQnA4Vl9NgCLalXGQs9BcA=;
+ h=From:To:Cc:Subject:Date;
+ b=zlOmr5h19f82adKX0MCpxw7htVF9vgMz0J1lYWmgx9yPnwNUyplRBs1whovLZ9QsE
+ PMshVPvEyel0lpg/3Ghdnc7vS52JqdQLGzH6MVH5hueghnBEGViM4fBO6plfcFDf2b
+ WCH6enIEohQP9DLdyBjcKZctkhbcMbvMkf0hXlao=
+Received: from localhost.localdomain ([183.172.216.136])
+ by newxmesmtplogicsvrszc5-0.qq.com (NewEsmtp) with SMTP
+ id 95A9DA66; Sun, 03 Mar 2024 22:37:26 +0800
+X-QQ-mid: xmsmtpt1709476646t2gg7qof7
+Message-ID: <tencent_68E23FA4C49CA30D00D138F38BC53267D305@qq.com>
+X-QQ-XMAILINFO: OC704IrkdJt6z2Ib1fSBb1KSATyaJ75SUBp0LN8DTV5jlwZzagAXDpuYmxcBJC
+ eS/F0EmhCsdrhE0qMqb/qESXBzAztyvMUGnMVAn08oFNVeeTZGUmDxSwcJqrgIEfAoR1p/2eeRIW
+ t6QpUBxGGDc2Shr79NF31VRByj17ogDSid6lO/kD8Ypa/O7ZsBqH+VlQNkBQZu8yA4GIRPq9oOhD
+ JkcthlAH2WR3tmDK7mTM3U8O1C7NGZP/Od17kKhvf0jVD8p4BMv3H/TZJW3x52tz8m49953GQ20O
+ DVjmPvmu9FsnCq1Tc/XKYFUssW9UytTNxNrNYeBEMuo+l40PTbl0pTC8k6QNLbEJW28itAn+fwjn
+ qS0bVzoqIzusCh3V4NhwG+3OIPgtL+GcQjVgYyrjWValAT0jYjlU7c/KzHxRr5fR1WB4ghlOFAN6
+ iko1wQuR0/4FmFwaZ0quj0Ofmspm3XeCV1JYxCgOTnMOnQd+VapZfwef9h9DM/FaHR/IFQEsSbYA
+ z8Swp5oWPA/0kJ9V779bHURMQB8U3z9P7X9l3GnFapYMTWtYh7GDaDUOEj+q2bFynwJL76u7BZb6
+ 77beptJ5M7QOXAcrmAhMcm65WWUQXXo2KUxxt2nctvPeaAjMEcmUWhdSScDUYqYsEWCigv77hWiE
+ H04n/uDFEh8crX3zgY/wv+pfwQwOGY52cGxuze/jysXcX5OSDpaR/WagBAjhUHtlDauY+P5aqJIa
+ Vq05Z9JO0a8GAMZ27nMsblPVIkXGoz8CjByXDLxP9CniBwa5QWeMZBm/LaZcxQ/WAWaaGu1KMwX+
+ TkRB622gpcJkjMVtmmHKBlBkRdckm/DPDGg07GMBOg/nYZYETxgpAsuDzT4Nk9xgXCUIWxPxZlW+
+ /8quANlHT6s8Js8gOgVWit+2HwHTscJEEe2RYAD02I6YZ9ZLKdzwjpnDJuVMn0TyT/9GsA0GZjys
+ c9KKQeFZA/MHTmIcFEf9fgvQLNbpK7VE165AIaZwoSJK1ICoBQTG+lAEdViyaN
+X-QQ-XMRINFO: M/715EihBoGSf6IYSX1iLFg=
+From: Hanyuan Zhao <hanyuan-z@qq.com>
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Hanyuan Zhao <hanyuan-z@qq.com>
+Subject: [PATCH v2 1/2] cli: panic when failed to allocate memory for the
+ history buffer
+Date: Sun,  3 Mar 2024 22:34:45 +0800
+X-OQ-MSGID: <20240303143445.7030-1-hanyuan-z@qq.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="bqRkEpC2rtWkPVTG"
-Content-Disposition: inline
-In-Reply-To: <20240303134022.33062-1-heinrich.schuchardt@canonical.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,37 +78,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This commit simply modifies the history initialize function,
+replacing the return value by panic with reasons. The calling
+chains of hist_init don't have steps explicitly throwing or
+dealing with the ENOMEM error, and once the init fails, the
+whole system is died. Using panic here to provide error
+information instead.
 
---bqRkEpC2rtWkPVTG
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Hanyuan Zhao <hanyuan-z@qq.com>
+---
+This is v2 of patch series cli: allow users to disable history if unused at all
+---
+Changes v1 -> v2:
+  - Remove the lines surrounded by macro CONFIG_CMD_HISTORY, since if the
+user says N to CMD_HISTORY, the whole C file won't be compiled, i.e. the
+history is disabled already.
+  - Remove default y to CMD_HISTORY. Here we should follow the original one.
+---
+ common/cli_readline.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-On Sun, Mar 03, 2024 at 02:40:22PM +0100, Heinrich Schuchardt wrote:
+diff --git a/common/cli_readline.c b/common/cli_readline.c
+index 2507be2295..99e7efdfe5 100644
+--- a/common/cli_readline.c
++++ b/common/cli_readline.c
+@@ -110,7 +110,7 @@ static int hist_init(void)
+ 
+ 	hist = calloc(HIST_MAX, HIST_SIZE + 1);
+ 	if (!hist)
+-		return -ENOMEM;
++		panic("%s: calloc: out of memory!\n", __func__);
+ 
+ 	for (i = 0; i < HIST_MAX; i++)
+ 		hist_list[i] = hist + (i * (HIST_SIZE + 1));
+-- 
+2.34.1
 
-> Update maintainers_include.py from Linux next-20240202.
-
-Is there no better upstream tag/commit to base this from?
-
---=20
-Tom
-
---bqRkEpC2rtWkPVTG
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXkhdEACgkQFHw5/5Y0
-tyxhrAv/Z+cNAVLolfJlb4CYgVbXMB6m8yc2OrxrItiKZ/pRMCw+R0i+axsPhTAT
-BfHFkB1FJs6OBDdrfj7pVZLHQeZLLr7ZJz0hTB8MBFJa600LrCRuVuyrCqji1oJ7
-/xDrbxjXN5T02nAS9sz12Q+95wh5/voqwlbWcxI2FV5/2VpNRhfKrJRc1V8AdqWx
-lEWlmsIys4454l6L3ISSERDMEfowPeBtkhxqzfeXq2F/wwnj+7AkI3yePOm3xE2a
-sUVUG4P3gBMox8qkGeXg4gIq/MtN9ozlVG0N2Qq1qPJBeJb1MPHK4XDXtHGw3ZHo
-B9vVuQpRtUvkvpBHxJFBURAtCYjYtLFXoXcKVW+YVVkt6w05gYJNW3ETw9+krW/P
-L7oMSCK1TMfZecpC0x6YjKirnA+iAqmKFBA/Dk2CBW9TUly+o/Y191hEvxkI4nBx
-CX+iilN9/AUGPBlF4+9yneEufKUiIAyedlYlkpAG3c8tffcct1fPy9WCFfNU7xpF
-zXz6pdnl
-=nSpT
------END PGP SIGNATURE-----
-
---bqRkEpC2rtWkPVTG--
