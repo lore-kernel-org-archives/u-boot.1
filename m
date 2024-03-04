@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E385C48BF6
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 23:44:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44004C54E49
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 23:44:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 14D2787FCC;
-	Tue,  5 Mar 2024 00:44:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8E8A287FEE;
+	Tue,  5 Mar 2024 00:44:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IROOYEH8";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="s4/jytUx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 877E887FCC; Tue,  5 Mar 2024 00:44:21 +0100 (CET)
-Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
- [IPv6:2607:f8b0:4864:20::234])
+ id BECB1871C7; Tue,  5 Mar 2024 00:44:25 +0100 (CET)
+Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
+ [IPv6:2607:f8b0:4864:20::f2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6847987FDE
- for <u-boot@lists.denx.de>; Tue,  5 Mar 2024 00:44:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6591A87FDC
+ for <u-boot@lists.denx.de>; Tue,  5 Mar 2024 00:44:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-3c19b7d9de7so3327842b6e.2
- for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 15:44:16 -0800 (PST)
+Received: by mail-qv1-xf2f.google.com with SMTP id
+ 6a1803df08f44-69076df51daso7467796d6.3
+ for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 15:44:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1709595853; x=1710200653; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1709595862; x=1710200662; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=0dmBryKudjW0uuW2uPzW4/rv1ZxQSGz7SwFUZap10Iw=;
- b=IROOYEH8LmXwzl0BbDaKVKSwZdZ9df2anX7BUpagMfNK/e8K45uB5B14CfhL0Y1wSO
- B3hpVxLKHhaecNZem/oJVECcF1+aBR+E+7LUwiz48itFdXXz+QU0KjmXqy6CyErv8Bv7
- l0J3eJxdZur/MdVO8SMqlc5Krjh2ppgaEXLvg=
+ bh=yhYccH7w6Nz1CksNawZMg1yX/rS6aMmst5lpAj81B9c=;
+ b=s4/jytUxKyBYMEkDA+FqW76FncqAb8Z7iJHUue3NJrg/Rc0lDZO+PcioT10MKRNs2K
+ s06nvPODxVVIk1Uf5N4P03uy+d/uppr0NbfMWVpXP3zlLPwg0lj/+APEVebTE/6HGHb5
+ xXMAljHp1KavHARYkjdGhECC3yApFOxr106uI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709595853; x=1710200653;
+ d=1e100.net; s=20230601; t=1709595862; x=1710200662;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0dmBryKudjW0uuW2uPzW4/rv1ZxQSGz7SwFUZap10Iw=;
- b=gSPthjSH3lBGgR2ciYVzUKKzCqDew9YiB+Es0f7pMDX193Jou06Z69HfF1tqJBSWCU
- XQxyRnifJ13r5cO8qwxwoCs3qjhk3pqfKL8yc2i0a3QCnpkRlJ0v1b+C7gxl/AcNEpN7
- 9ECAOWexEz+5+yNgp3yjaxlB2fGWJGeOrZ9yFr7Sz8euf+S+SFibIZcyyyjE6juLtv2B
- bdv1nvWcecjcowsVtfVLORbQza4h//TE4KWSBrG5VEJmwkD+M6jN5EacASLwuX5dJD2O
- +qG4mxg3/Aakh/k8ehmpUt/2BjfZalK6xQoyzK6Ycfk4Zby9kbXgG6Eim9XoFGqq20+O
- wKow==
+ bh=yhYccH7w6Nz1CksNawZMg1yX/rS6aMmst5lpAj81B9c=;
+ b=WTf2nSZtB7fzqpXgoLjVFES7phfavFBIfn1bo2wcAY8M/Bx0Zvv8PrbRZgWh/E4NRB
+ GOKHWfscDNF0p8BzrpRGnAX83rvC/jdZg/onEwkXSnA3pGXiH4TZ1GYQmJEdtbWnPazy
+ JyEcIqfe7zFFMbA7oMyNDAYP2TEw07OLjx8owN1T3meVn8LIJCWOnRocaGaSvDP9T/Sm
+ CH9IncAMXXwuiIEEV3WnG0pH8rQR1V3skiARg+7NB0s5tM8Mq8u+ssziBKqSsJw985sD
+ GZCHK5nNcC+VteHJNwhkuAXuX9jp40phEjC45gnxGy1lvLhQuKJrZYlk7TgeWV9+0hYm
+ 6gzQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVOqxRKuhL9asLr7ka+a84nOUmlqPreP6CymhaiMBt5kxMOZHTnhzgQDfw5q6VAr2VqIazSyB1/bJzJ5cJ/jkwQYNvq5g==
-X-Gm-Message-State: AOJu0YwP+mkDqudVwuoEOJDJTpmFj2GUant4XeXGOgSZyYf6amCju4vG
- 4K2r0Kh8/40q81Dg1uh3OPWKFZjGPbpx01SqvHx89rOvDaAyjaQe92609PRkLxU=
-X-Google-Smtp-Source: AGHT+IGCilLCK+0CyToqIfeeYAOLLU86X28uUFpdikZPeByTs004MZbKAbGVA1AXTCLsqSI5DhQhKA==
-X-Received: by 2002:a05:6870:d608:b0:220:8d30:8e8e with SMTP id
- a8-20020a056870d60800b002208d308e8emr183466oaq.51.1709595853338; 
- Mon, 04 Mar 2024 15:44:13 -0800 (PST)
+ AJvYcCXGEsdG/GusGax2a0h2LOvq4x3TvN8pSBf8AjjmzvJMmL8nT13GaB8on8hc2ReOMGd0kFHjSXLcI3N+g6gv63j15fTK/A==
+X-Gm-Message-State: AOJu0Yze0OAfF78Ai7zQUamv/BEwBPtYG7WRNBbJxUNA75YjlkJyEyHs
+ rTzT1dHmxyx86Lt8hzggxxWh/lm5Ivgpmiev2GacYqQLNfbU/33Odz4ZBdKDtfA=
+X-Google-Smtp-Source: AGHT+IFZYpBHuDSHvcUMgXtJxLZOt2Bs9iau8a60+6RW0KHwupMZyNjFXn6bayk0ozjO5H8JFUrB+w==
+X-Received: by 2002:a05:6214:4953:b0:690:74a0:16af with SMTP id
+ pe19-20020a056214495300b0069074a016afmr427787qvb.50.1709595862158; 
+ Mon, 04 Mar 2024 15:44:22 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-007f-0000-0000-0000-1002.res6.spectrum.com.
  [2603:6081:7b00:7f::1002]) by smtp.gmail.com with ESMTPSA id
- c6-20020a05620a11a600b0078823804a9asm2035691qkk.18.2024.03.04.15.44.12
+ ld7-20020a056214418700b0068fe6f0d7e3sm5604496qvb.39.2024.03.04.15.44.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Mar 2024 15:44:12 -0800 (PST)
-Date: Mon, 4 Mar 2024 18:44:10 -0500
+ Mon, 04 Mar 2024 15:44:21 -0800 (PST)
+Date: Mon, 4 Mar 2024 18:44:19 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Thomas =?iso-8859-1?Q?Wei=DFschuh?= <thomas.weissschuh@linutronix.de>
-Cc: Vignesh Raghavendra <vigneshr@ti.com>,
- Benedikt Spranger <b.spranger@linutronix.de>, u-boot@lists.denx.de
-Subject: Re: [PATCH] configs: am64x_evm_r5_defconfig: enlarge simple malloc
- pool
-Message-ID: <20240304234410.GS1523872@bill-the-cat>
-References: <20240209-am64x_evm_r5_defconfig-malloc-simple-len-v1-1-4a779a8bd557@linutronix.de>
+To: Siddharth Vadapalli <s-vadapalli@ti.com>
+Cc: sjg@chromium.org, vigneshr@ti.com, matthias.schiffer@ew.tq-group.com,
+ nm@ti.com, dan.carpenter@linaro.org, u-boot@lists.denx.de, srk@ti.com
+Subject: Re: [PATCH v2] dma: ti: k3-udma: Fix error handling for
+ setup_resources() in udma_probe()
+Message-ID: <20240304234419.GT1523872@bill-the-cat>
+References: <20240220100451.1053667-1-s-vadapalli@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="uKGbqr8WJZ1zIUhn"
+ protocol="application/pgp-signature"; boundary="SHcA5EWYDOA0qsw4"
 Content-Disposition: inline
-In-Reply-To: <20240209-am64x_evm_r5_defconfig-malloc-simple-len-v1-1-4a779a8bd557@linutronix.de>
+In-Reply-To: <20240220100451.1053667-1-s-vadapalli@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,39 +95,51 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---uKGbqr8WJZ1zIUhn
-Content-Type: text/plain; charset=iso-8859-1
+--SHcA5EWYDOA0qsw4
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Feb 09, 2024 at 09:06:53AM +0100, Thomas Wei=DFschuh wrote:
+On Tue, Feb 20, 2024 at 03:34:51PM +0530, Siddharth Vadapalli wrote:
 
-> With the default size the stack grows into the malloc, pool leading to
-> stack corruption and boot failure.
+> In udma_probe() the return value of setup_resources() is stored in the
+> u32 "ch_count" member of "struct udma_dev", due to which any negative
+> return value which indicates an error is masked.
 >=20
-> Signed-off-by: Thomas Wei=DFschuh <thomas.weissschuh@linutronix.de>
+> Fix this by storing the return value of setup_resources() in the already
+> declared integer variable "ret", followed by assigning it to the "ch_coun=
+t"
+> member of "struct udma_dev" in case of no error.
+>=20
+> While at it, change the "return ret" at the end of udma_probe() to a
+> "return 0", to explicitly indicate that probe was successful.
+>=20
+> Fixes: a8837cf43839 ("dma: ti: k3-udma: Query DMA channels allocated from=
+ Resource Manager")
+> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+> Reviewed-by: Dan Carpenter <dan.carpenter@linaro.org>
 
 Applied to u-boot/next, thanks!
 
 --=20
 Tom
 
---uKGbqr8WJZ1zIUhn
+--SHcA5EWYDOA0qsw4
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXmXMoACgkQFHw5/5Y0
-tyzKgAv/UbbQUbPoCpNWb7E5ZI6MnytP8nESZgBBh7IsdJR8vqhJjXL3bXfHy3AW
-mb2MonZzzWiENDjdK/mDvsnPh/OUBsvcXJnochxeUrAAk20WhkiwSSZj4XipxW/h
-hWQ5OxudCz7HkQ9Kw3M9vKvGR735Fsp2EZSer+d4In5JJPMlWBBDMMdyiOXtC58j
-1zW9pGVL41WZq0LdGqvu1Gvmn7KUmTVprQEsYPQpZSxrVLsfGAZ8lJqtXY6OVbom
-nb5NDyzovfUJscMqpL5JfhQcIYLwVfBq5jsocOTnFSbgDjGayM/BzmfdlMFgaI5N
-mO6ZeG6woYPMj5SBl2PylgZJDdMAVY0kw/+HgTk1q18oAKM3lPc65hzAVzGoWC9d
-q/Z10fknaIt7/Uqykkzv+0Dce8vcy5NRW1Vl48MDIwgKb8Sweqo+Jxz2+4J8Gggp
-GDHCUQkNfpSvZ9XlvboyS9Ufkcn7+Xtn17sUa+TwLe1DYogSCyj8DB1ZYgXC0HvK
-Bla/l2Vf
-=ck25
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXmXNMACgkQFHw5/5Y0
+tyzqSQwAlnzsNdpuN/2Sx2HWiLtkVReypZVCDiStQTCb936AmRESS3EDcMIJ1rtz
+V7YhbNlWamWLfURf0Zs/lYR0NfqF/fQx9BrmBHo+AVJaSFJMQQ4p4v456LuKIMDT
+/xyorekt8kqEaxE5zNw4rTR6k0G44ap3DpVpLwzhxWDPBzBULFxZZaiapYMgTcIq
+3Kg1uTVMGQF869mEo/tHLBwHy5OY7yXNjqtw9n3ERSQROlSwpTJ8jPJ36FOaxhus
+fPnUNcDQWF1HkbEkoDsa6DRzmD11+xqhe3IRxBGF5qAt32bW7s0bEh5KcufQFoWd
+I6T+lsn7HkUKLpiugXsb5Z8RLTKupmZB1gxwjVTmi796ciALItLGW2nsFh2S4zyA
+sHG8gKPLgFe+EZhZ2LQplKb+qgu2JnHTAJ4pII7QrgOm8k2ek98HaUxfMMmu2GPX
+ZFN+Ep/WpPGfCz8nQc7MCuqDerm0KtW4cGJ29h0scz+Azs6mvT+JuU9GzSwHYEPR
+FRPw/wwu
+=UG8j
 -----END PGP SIGNATURE-----
 
---uKGbqr8WJZ1zIUhn--
+--SHcA5EWYDOA0qsw4--
