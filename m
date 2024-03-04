@@ -4,135 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2728AC54E41
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 09:45:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DABD3C54E41
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 09:49:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A1DC87F63;
-	Mon,  4 Mar 2024 10:45:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=theobroma-systems.com
+	by phobos.denx.de (Postfix) with ESMTP id 2BBDD87971;
+	Mon,  4 Mar 2024 10:49:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=theobroma-systems.com header.i=@theobroma-systems.com header.b="LL4cXEkW";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="PrQBqnsv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A414687F5B; Mon,  4 Mar 2024 10:45:41 +0100 (CET)
-Received: from EUR01-DB5-obe.outbound.protection.outlook.com
- (mail-db5eur01on0705.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe02::705])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id BBA52878F4; Mon,  4 Mar 2024 10:49:41 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E90487F63
- for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 10:45:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=theobroma-systems.com
+ by phobos.denx.de (Postfix) with ESMTPS id 5A2A08709C
+ for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 10:49:36 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=quentin.schulz@theobroma-systems.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=aIVEqAvuHOI1qQNc3uCjvDyQX2TnVyM+dqXdQKNvnp4Ih/LZR0LWiJu/jR9z7A6xjlREF+83w5RhL4TeMCwirvK9XDx7YBi55j35Ym11KgBMGaDCFzfFB7EEWwBs0pOU+0uJJJFcuMjjUNMFOm0jSTV2jP9WZdUcZJLmlc330Z/Is37u9FKEZprC+oNs9n7BNMfI3DMtVYhHnJIfQO8nBEjDBXMM4AttBEixPHjxVCIorAme/yMgRiuipbdZZkiWqX9xT07EwCUO5g3H0P1DMe8YJGTPaMDi42RnwHUHikyHsucKVuHKp7rBIRApeQ52RsQ+ccWf2WTFq0iwR/22GQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=PPtknU+u6o4F4lLZTukWIuXgV9EsHQaULvzY08XVG2o=;
- b=ibw9zTpVJsU92Fk0hnW2UxofOmVuHe8jCtTHcQSN/FBC/UUvu3LV51oB2xB6OetA/kgPn+uEcnZzdNp+7YW69jDB7HmFiHPMylSv5837Wqv71Dsax3OD/13GFSjVXKM9pPb4iz4MGbAZSul9c1jZeu5HyDlVG9bLtxfz5AMUW5aRC/PAOCDKB5QMtOLuzw0gzRBvNyaKMRH/5rvycUIMrAK+UujY8F1nKwFj2fa1cqnBQgMhpz10zw34k39uEJQTYPKUO8rraG41ynYkQlbbqDDczvTeiLrn/jpPG7SetYQdtREJ8/xTHfQpSFbIyLkvB7M3uSY3G8ms38q7zA8r/w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=theobroma-systems.com; dmarc=pass action=none
- header.from=theobroma-systems.com; dkim=pass header.d=theobroma-systems.com;
- arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=theobroma-systems.com; 
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PPtknU+u6o4F4lLZTukWIuXgV9EsHQaULvzY08XVG2o=;
- b=LL4cXEkWW4ALEO5bw+UCOtrFvY431JD4kjb+lYzHpCoVfZO+l88ZovrBx5ItUBPRpzH9al/2gs+S/Uk4JuK3b4vBYDmZj5Fpbzo6Vgp2Dx3CoMnv1NN7NVSG5ZP5CNG7bc4iaHNBDvo0C7FhVpNePKXLAo9+Ln/qxKnBH0kES8nBmmPo0of7+Pm/1VYqNvph3xyZsEiRFQ/DPE77jj574Ye25MUr71L2eL0tYrMvVex2cMr6G8JU7NQKiSTWNr0TmW4fOnswjxliqThF40kbtgxQtoK2TZ9sKATq1w7ABWHOdsyQyJwp05gA9mO5xQmGKLwcqTjUiRsDTiBiHC2Gpw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=theobroma-systems.com;
-Received: from DU2PR04MB8536.eurprd04.prod.outlook.com (2603:10a6:10:2d7::10)
- by GV1PR04MB9152.eurprd04.prod.outlook.com (2603:10a6:150:27::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7339.34; Mon, 4 Mar
- 2024 09:45:28 +0000
-Received: from DU2PR04MB8536.eurprd04.prod.outlook.com
- ([fe80::23:4118:ae4a:8dda]) by DU2PR04MB8536.eurprd04.prod.outlook.com
- ([fe80::23:4118:ae4a:8dda%5]) with mapi id 15.20.7339.033; Mon, 4 Mar 2024
- 09:45:28 +0000
-Message-ID: <a3be3512-21e1-437e-b94b-79790121eca7@theobroma-systems.com>
-Date: Mon, 4 Mar 2024 10:45:27 +0100
-User-Agent: Mozilla Thunderbird
-Subject: =?UTF-8?Q?Re=3A_=5BPATCH_v1_1/2=5D_rockchip=3A_spl-boot-order=3A_Fi?=
- =?UTF-8?Q?x_spelling_succes=E2=86=92success?=
-Content-Language: en-US
-To: Christopher Obbard <chris.obbard@collabora.com>, u-boot@lists.denx.de
-Cc: kernel@collabora.com, Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-References: <20240302145107.168080-1-chris.obbard@collabora.com>
- <20240302145107.168080-2-chris.obbard@collabora.com>
-From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
-In-Reply-To: <20240302145107.168080-2-chris.obbard@collabora.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: ZR0P278CA0204.CHEP278.PROD.OUTLOOK.COM
- (2603:10a6:910:6a::13) To DU2PR04MB8536.eurprd04.prod.outlook.com
- (2603:10a6:10:2d7::10)
+ smtp.mailfrom=SRS0=3b93=KK=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: References: Cc:
+ To: From: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1709545764;
+ bh=mM2SFM751OjcRll7tyBpTT5ChOsSwm4Fdzg82w/22Kk=;
+ b=PrQBqnsvoKlIqeQu9xjrz5pS4jtITdjl4guaGmMgqxesLu0f9cidBzF3iSMj92IO1eW2fUpcw
+ ywmdqi430GEHG+mDuqpGRKLsbXk2AqSjE8oApgSWrur/wIwW3laK72Ek7iAlFdhvcw5wx4qdSlQ
+ TkPZQgOHqMUT9hYyuBwa8aIh9sHBJRcx0Of+BAxsBmgOWmXgK3hlM4WSHHiY53bm3NXdP3BdSZn
+ AVaTi+0bxqEzrAAid0sHmTHeGyhsGn9xYPG1fGjkBpvF+HLWf66yOM+fzA4b60EZR7mH1POZ+eF
+ CFvdrtQMn7LdYO6s6+oIdHY35qPPbABML8x7qxGhc/OA==
+Message-ID: <a286ad0e-950c-45ab-a81b-3746a2ade314@kwiboo.se>
+Date: Mon, 4 Mar 2024 10:49:18 +0100
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PR04MB8536:EE_|GV1PR04MB9152:EE_
-X-MS-Office365-Filtering-Correlation-Id: 93d8a3b0-5a32-4a07-245c-08dc3c2fd338
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: HAS4vkNbQ3Ujsyl6oxeAK9oEVigXeW2B4/j9NLTI2BqlvuIiU/WoVRuMMa1UEC+SBei4LYBpDmuQa8tz3oqcF/LHFWcFhTjAEHtdfMjoMGV5eBtXPMYrUkB+LNFPonNPvtlPo3m3cWBp8Cdqlfc8OHop4lDT6uKo2fzkKezeDjGW7nl608tC8T1BbtghXKM+fzR4RmEa6C++unUz+w00WON5ytsdncs+eI/iDW+pvsYl7veWVCDqQepZYwR8N8quxufwnUbqr4kcDMW2q8J5AzcilfhZIQIVU7OS5nQYY4gCxfqnsy4NnGAGhqyY0m2lI5uyMkqdbdsRKUSysFDo0RIHYChjakwW/5TsLOi6uGQlRsRxDeuoVI4bKz/q8+oyZAqyiVExbx2DtOQlgCNUcexFcexI8+wi6uUYmRmmKxjE7hC0SEDUbzPVfK+xkQ4MomRxNMbgwAn7jPzqoD+InFNApaUC1jEc82d9FlUVI189gY+s6JIUZgPiSCacCODNaUm1JKCS6WzL9yIL+fXbhUhro7LQOYHq0cgauAn5m0T3Yh49Gz6iwSZSgCTryg6/BncWYzX9D+wLheKl1tk0nWFGSayS6RPAVsrrsP5/9fBsJzy/hMJvEgZATQt0UMTvp6BRwpHJ3IXaZjdQ5FOUdxOoiq1RXSCvMYgL4O/tSEI=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DU2PR04MB8536.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(376005); DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dHZjVkZIbW1FZXBUc2I3NFFLbThPZ2liY25KK2NKN2lqSDcrZGc0d3daNFVN?=
- =?utf-8?B?WXVnQVB1RUpPRDJFVmd2UHp3ZTFKNlhVanZ2UnA2TjhRYjE4MlhsRTczU2Q1?=
- =?utf-8?B?OXptUkV6SFRWSVg4WUpWcFhHNUtNT1NOaDhPTzJvemJxZm81UUdCR1dXM0J2?=
- =?utf-8?B?TVBDaWlwd0wvVlU1UDcrOHovY21jSS9vaGxGdFpXTjBGRDRIcmdDMlhaUlVY?=
- =?utf-8?B?eWsxWHFGV0Jndk9xcWJ3V2NsY2wrWVB0UG5odnJkNndPN3BQcy9WUDNFYkhJ?=
- =?utf-8?B?U1NiQ2crcUhMalNEcVdkK3pWd1UvT3ErVGI4YnA4MEM2c2ZRTnJyU1ZqaGM1?=
- =?utf-8?B?bXNVYzRNRVlRaFdoYzUwQ1NPUG1TaUJaalBSckZoL0hkbFNhQjlOVWZNek1p?=
- =?utf-8?B?TUQvNS91dnRwU3V4eDIwRlU2b2JOVEJRSjd3dk5vSmQ1a3oxRlZ0RTVnRlJS?=
- =?utf-8?B?dlIyNzhXd1V1Z2JiSVBiKzA2Y1Rsd2dBQ1BiU1lEOXlKY3c2KzhPRU5ndGUy?=
- =?utf-8?B?bFpUcTRLTGRkZmtZMjRsYldiY3gwN0JXZ2xjUXh5cTN1SlRkNWZ4Mmg4eHFv?=
- =?utf-8?B?aFZYc2gxVzZOUXhteVg1NEZuTUtxRk1DcnhZamtPV2hOdFNqSDlkQnluZTN5?=
- =?utf-8?B?dTljMW5FUjRrbWpOdGF4R1RXcXdiajFONGlEeEVNQnFFTlBHVlhWd3JQZWda?=
- =?utf-8?B?RHc0YTRRdnZCakJTc2p4azFuQkp4QmwvZnB2VWxlbHpHNTRHS0FieU5QaVlk?=
- =?utf-8?B?THhUeXhKVFkzeHhDeWhLUExlUTh4WExVOWl6UDVLd3hyS3RBUFNvWUxJYVIv?=
- =?utf-8?B?VUhCbGVWOE9OTWRDSVZZMDI0Y3pEVTRCOVl6am9mbmdhQlZ3VjV0YXpPdEZH?=
- =?utf-8?B?eFhXb1JpOEY3NmprZENZTGxrWG4vL0VSVG8vQytlYnU5SE5sWVRIb0dMUFdu?=
- =?utf-8?B?TVlBY3pXMFRXRFpkSzhodnBlY0NHK251QzIvZ3RYdmJWeTVLZ1p6R1laTmVV?=
- =?utf-8?B?Q21aRnVmRU56bkx3b2E5M2s0eGxXUG9IR3E1K2hMbk4xTHlUY25reWhxdVQy?=
- =?utf-8?B?TGQrWThNQmozNnVGZ0N4UVgrM1pmK3BQQU1CYVNqcFdFc0pVeVlpdzQ1NktK?=
- =?utf-8?B?Z2lCcHFsdWUxN3oxdnFLQ0l1ZWFtb05lR2Z6bmpLU2tqbXJVUTNvbW9IL3ZY?=
- =?utf-8?B?dW5wSW0reVcxUmVkYUVGVTFzQjBMa0lHZDFDT0xhMzVQZjJZVnBUU3N5bjh0?=
- =?utf-8?B?bUdIQjN4WDNYN1VkVnRhNFdHeG5HcG1xZEhSeWhpdm44aTZLQTE3MFdDUlJF?=
- =?utf-8?B?cHJoZGE1NHR2bUFjL2lIK0dqbnZhbkhNVUNiUVkzZGNHdDU3cEd2MXRpamI2?=
- =?utf-8?B?c2Z5cVRVajg1WGNPaGxHZFdxQ0R4ZU9pZWszL25VM1RROE82alZhR1lDVTh5?=
- =?utf-8?B?UXFrS2hHbnQ4bHRFcndybnF2LzFKblNNT0ZlZmpYMmM1eWY2bWVuZWJNMFUz?=
- =?utf-8?B?bFViRFRReGFBM2VTZ2I0ZnAzSmp1Z3BSZkVDRUZTNjdQSWdjZ01vMXlQTXJu?=
- =?utf-8?B?MlVFZzJCSVd0TTFsRHpOSDhrV3A0alZBTkVCRmNxWjZ5aUpoQTZuNVJUSTNJ?=
- =?utf-8?B?K1ljUmd6bmp3RzZnYW9qUnFKS1ZiNStGWVdYSjlBSVp1TDNzUVdJMFFGb0hi?=
- =?utf-8?B?eldjZkRXejRabm9rMy82ZW5ZTExPaXNvL1BSN2VFRnZUTUYwRHluNTlERFVs?=
- =?utf-8?B?ODVNa2NrVkc4Qm5INkRlZmFkUlZzZGVpejEvT0NNODl1S29vbVdqWENjMU95?=
- =?utf-8?B?WUJ6VStUS1gyZ05pV0xxTE5NVlEwWjIvdHhlSWF2L2pROGZnWFo1K3FYdzQv?=
- =?utf-8?B?NXArTlhONmp0WEZvbnAwdjZyQ0lzTWY0b1Bqb2lwRWQrL3l6R2k0NDJCMGpH?=
- =?utf-8?B?aVZKMjNURFI0czQ0dHMrOTdzYU4vN2ZxbnVZcExPUkpIWjAzTklVakZVSU5R?=
- =?utf-8?B?RnpBUXdmYUV4NC9sOVcySTVKVFJ1NTEzeVJCRXJDN1dST2VNejNvMlZBTGgy?=
- =?utf-8?B?RGF2c0xMQXlJb2VtbmxvU3VXSEtLdjN1ZGxKRDdOWDBmK3ZpaDdYbnMvdlJF?=
- =?utf-8?B?ZksvY01haitkeFVpNlNaKzlxSVM3Y3RmekpFUEZ1T2NmTXVnay8zbFJYdVhL?=
- =?utf-8?Q?tmH2LfVlO7H+WlADAI6Kw8E=3D?=
-X-OriginatorOrg: theobroma-systems.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 93d8a3b0-5a32-4a07-245c-08dc3c2fd338
-X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8536.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Mar 2024 09:45:28.6701 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Cue1NdiyXHWSgZnFN+p8PDNP2OqTro3n0z6QIH6r7flsbWlPHeOVPa/IIJ1ZHcbaIpcXKmQIqBqSLI18fOvbMuwNhME80L+w7cOeNaBLzUHPrBtO2ZHUM4Gz/3PcnZXB
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR04MB9152
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 2/2] rockchip: rock-pi-4-rk3399: Enable booting from
+ SPI flash
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Christopher Obbard <chris.obbard@collabora.com>
+Cc: kernel@collabora.com, FUKAUMI Naoki <naoki@radxa.com>, Jagan Teki
+ <jagan@amarulasolutions.com>, Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@theobroma-systems.com>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Quentin Schulz
+ <quentin.schulz@theobroma-systems.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20240302143417.164560-1-chris.obbard@collabora.com>
+ <20240302143417.164560-3-chris.obbard@collabora.com>
+ <abdd421f-49d3-4442-ab0a-0c2c143aa199@kwiboo.se>
+ <5e9f1b5f008193eea447b7506080af855189b3e1.camel@collabora.com>
+ <0bcd9559-8f0c-4017-9433-f794c9ccc5e1@kwiboo.se>
+Content-Language: en-US
+In-Reply-To: <0bcd9559-8f0c-4017-9433-f794c9ccc5e1@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 65e59923478ebeec4ee59946
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -151,14 +83,318 @@ X-Virus-Status: Clean
 
 Hi Christopher,
 
-On 3/2/24 15:50, Christopher Obbard wrote:
-> [You don't often get email from chris.obbard@collabora.com. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
+On 2024-03-02 22:15, Jonas Karlman wrote:
+> Hi Christopher,
 > 
-> Fix a simple spelling mistake in a comment.
+> On 2024-03-02 17:12, Christopher Obbard wrote:
+>> Hi Jonas,
+>>
+>> On Sat, 2024-03-02 at 16:28 +0100, Jonas Karlman wrote:
+>>> Hi Christopher,
+>>>
+>>> On 2024-03-02 15:34, Christopher Obbard wrote:
+>>>> Some variants of the ROCK Pi 4 series contain an SPI flash chip, which can
+>>>> be booted from. This patch enables support in U-Boot for building the
+>>>> image for the SPI flash, support for booting U-Boot from the SPI flash
+>>>> chip and support in U-Boot for accessing the SPI flash using `sf`
+>>>> commands.
+>>>>
+>>>> Not all variants (e.g. ROCK Pi 4B, ROCK 4 Model C Plus, ROCK 4SE) come
+>>>> populated with an SPI flash chip, but have the footprint on the board so
+>>>> a user could solder their own to the board. With this patchset applied,
+>>>> these board variants without an SPI flash chip still boot from MMC.
+>>>>
+>>>> I have enabled support for both Winbond and XTX SPI flash devices since
+>>>> different hardware variants have different devices populated:
+>>>>
+>>>>  - `rockpi4_v13_sch_20181112.pdf` contains a Winbond part `W25Q64FWZPIG`
+>>>>  - `rockpi4_v14_sch_20210114.pdf` contains an XTX part `XT25F32BWOIGT`
+>>>>
+>>>> The ROCK Pi 4 I have is marked as "ROCK PI 4 v1.48" and contains an SPI
+>>>> flash chip from XTX:
+>>>>
+>>>>     => sf probe
+>>>>     SF: Detected xt25f32 with page size 256 Bytes, erase size 4 KiB, total
+>>>> 4 MiB
+>>>>
+>>>> In the interest of supporting all board variants and not regressing
+>>>> existing users who boot from MMC, I have enabled support for booting from
+>>>> both SPI flash chip variants in the defconfig and left the environment
+>>>> storage location as MMC to not break existing users who have the
+>>>> environment stored on MMC.
+>>>>
+>>>> I have also enabled GigaDevice SPI flash chip support, since without it
+>>>> U-Boot (unexplainably) fails to load with an error:
+>>>>
+>>>>     U-Boot SPL 2024.04-rc3-00002-g06b486900e2 (Mar 02 2024 - 13:20:45
+>>>> +0000)
+>>>>     Trying to boot from SPI
+>>>>     load_simple_fit: Skip load 'atf-5': image size is 0!
+>>>>     initcall failed at call 000000000029beec (err=-11: Try again)
+>>>>     ### ERROR ### Please RESET the board ###
+>>>
+>>> This is possibly because of pinctrl no being configured in SPL. I have a
+>>> big incoming rk3399 series that tries to fix this for most rk3399 boards.
+>>> It will be a variant of what I did in [1] for rk3328.
+>>
+>> Sounds good! Let me know if you want to take these patches in that series, or
+>> how you wish to work together to not duplicate work. I am open to suggestions
+>> if it makes things easier for Kever to merge ;-).
+>>
 > 
-> Signed-off-by: Christopher Obbard <chris.obbard@collabora.com>
+> Yeah, there is currently a small mountain of patches targeted rockchip
+> and some even have tricky depends and some will no longer apply clean.
+> 
+> I can probably take your patches as part of such bigger series to try
+> and make it easier for Kever :-). Will try to get something ready for
+> list by tomorrow.
 
-Reviewed-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+I have not been able to finish breaking the series up into smaller
+patches but current work-in-progress changes can be found here:
+https://github.com/Kwiboo/u-boot-rockchip/commits/rk3399-pinctrl-defconfig-v0
 
-Thanks,
-Quentin
+I also have a few other patches in the works, related to rk3308, rk3328
+and rk35xx:
+https://github.com/Kwiboo/u-boot-rockchip/commits/rk3xxx-misc-wip
+
+Hopefully everything will hit the list throughout the week :-)
+
+Please verify that your issues reported in the commit message gets fixed
+by any of the above three linked branches.
+
+> 
+> For now I have pushed your patches on top of current pending rockchip
+> patches at:
+> https://github.com/Kwiboo/u-boot-rockchip/commits/rk3399-rock-pi-4-spi
+> 
+> Also added a small fixup patch with my suggested changes, and got it to
+> boot from SPI on my Rock Pi 4 v1.5.
+> 
+> However, it looks like there was an issue with resolving spl-boot-device
+> without the spi flash node being added to spl-boot-order prop.
+> 
+>   U-Boot SPL 2024.04-rc3 (Mar 02 2024 - 19:49:44 +0000)
+>   board_spl_was_booted_from: brom_bootdevice_id 3 maps to '/spi@ff1d0000/flash@0'
+>   Trying to boot from SPI
+>   rockchip_rk3288_spi spi@ff1d0000: spi_find_chip_select: plat=3ef8a80, cs=0
+>   jedec_spi_nor flash@0: from 0x000e0000, len d
+>   jedec_spi_nor flash@0: from 0x000e0000, len d
+>   ## Checking hash(es) for config config-1 ... OK
+>   jedec_spi_nor flash@0: from 0x001d2600, len d
+>   ## Checking hash(es) for Image atf-1 ... sha256+ OK
+>   jedec_spi_nor flash@0: from 0x000e0a00, len d
+>   ## Checking hash(es) for Image u-boot ... sha256+ OK
+>   jedec_spi_nor flash@0: from 0x0020ea00, len d
+>   ## Checking hash(es) for Image fdt-1 ... sha256+ OK
+>   jedec_spi_nor flash@0: from 0x00205a00, len d
+>   ## Checking hash(es) for Image atf-2 ... sha256+ OK
+>   jedec_spi_nor flash@0: from 0x00207a00, len d
+>   ## Checking hash(es) for Image atf-3 ... sha256+ OK
+>   board_spl_was_booted_from: failed to resolve brom_bootdevice_id 0
+>   spl_decode_boot_device: could not find udevice for /mmc@fe330000
+>   spl_decode_boot_device: could not find udevice for /mmc@fe320000
+>   spl_perform_fixups: could not map boot_device to ofpath: -19
+> 
+> There is an issue with board_spl_was_booted_from() not using same boot
+> source id when spl_perform_fixups() is run. Before loading images id is
+> 3 and after loading atf images it the boot id is 0.
+> 
+> Looks like both open source and rockchip TF-A wants to load data to
+> 0xff8c0000 so SPL happily overwrites the BROM_BOOTSOURCE_ID_ADDR.
+> 
+> Maybe we need to save the bootsource id for later use to make
+> spl_perform_fixups() work correctly when booting from SPI.
+> 
+> Guess we do need to keep the flash node in spl-boot-order until
+> spl_perform_fixups() is fixed.
+
+Using a static variable on bss worked like a charm and I pushed a
+WIP patch on the branch mentioned above.
+
+Regards,
+Jonas
+
+> 
+>>
+>>>
+>>> BROM will only configure pinctrl for each device it tries to locate IDB
+>>> from, so if it locates IDB in SPL it will not have configured emmc or
+>>> sd-card. So for SPL to be able to fall back on other storage it will
+>>> need to do proper pinctrl.
+>>>
+>>> [1] https://patchwork.ozlabs.org/cover/1900345/
+>>>
+>>>>
+>>>> Building with `CONFIG_SPL_FIT_SIGNATURE=y` causes an error when booting
+>>>> from SPI flash, so I disabled it:
+>>>>
+>>>>     U-Boot 2024.04-rc3-00010-g2e7974a13b9 (Mar 02 2024 - 14:00:17 +0000)
+>>>>     SoC: Rockchip rk3399
+>>>>     Reset cause: unknown reset
+>>>>     Model: Radxa ROCK Pi 4A
+>>>>     DRAM:  initcall failed at call 0000000000228efc (err=-19: No such
+>>>> device)
+>>>>     ### ERROR ### Please RESET the board ###
+>>>
+>>> This is unexpected but if your u-boot.bin is close to or larger then 1
+>>> MiB the stack and pre-alloc heap may be overlapping with U-Boot proper
+>>> or the FDT. That can cause all sort of strange and unexpected issues :-)
+>>>
+>>> Have another incoming series to address this for RK3328, RK3399 and
+>>> ROCK 5A [2]. Should hit list later today, it will be a rework of [3].
+>>
+>> Great, please keep me in CC of those series and I will test & rebase my work
+>> on top.
+> 
+> Patches to allow for u-boot.bin bigger than around 1000+ KiB on RK3399
+> have now been posted.
+> 
+> Please verify if that series solved the unexplainable behavior you
+> described in commit message, and if it makes fit signature check work
+> again.
+> 
+> Regards,
+> Jonas
+> 
+>>
+>>
+>> Thanks!
+>> Chris
+>>
+>>>
+>>> [2]
+>>> https://github.com/Kwiboo/u-boot-rockchip/compare/2011cf069a8b...9767374d6a8a
+>>> [3] https://patchwork.ozlabs.org/cover/1900376/
+>>>
+>>>>
+>>>> Signed-off-by: Christopher Obbard <chris.obbard@collabora.com>
+>>>> ---
+>>>>
+>>>>  arch/arm/dts/rk3399-rock-pi-4a-u-boot.dtsi | 12 ++++++++++++
+>>>>  configs/rock-pi-4-rk3399_defconfig         | 15 +++++++++++++--
+>>>>  2 files changed, 25 insertions(+), 2 deletions(-)
+>>>>
+>>>> diff --git a/arch/arm/dts/rk3399-rock-pi-4a-u-boot.dtsi
+>>>> b/arch/arm/dts/rk3399-rock-pi-4a-u-boot.dtsi
+>>>> index 85ee5770add..04c152a291f 100644
+>>>> --- a/arch/arm/dts/rk3399-rock-pi-4a-u-boot.dtsi
+>>>> +++ b/arch/arm/dts/rk3399-rock-pi-4a-u-boot.dtsi
+>>>> @@ -4,3 +4,15 @@
+>>>>   */
+>>>>  
+>>>>  #include "rk3399-rock-pi-4-u-boot.dtsi"
+>>>> +
+>>>> +/ {
+>>>> +	chosen {
+>>>> +		u-boot,spl-boot-order = "same-as-spl", &spi_flash,
+>>>> &sdhci, &sdmmc;
+>>>
+>>> I would not recommend adding spi_flash here, especially if you have
+>>> SPL_FIT_SIGNATURE disabled, and even more so if someone accidentally
+>>> enable SPL_RAW_IMAGE_SUPPORT.
+>>>
+>>> Ideally, we only load TPL/SPL+FIT from same storage, as provided by
+>>> same-as-spl, however, if we cannot load from the same storage that
+>>> TPL/SPL was loaded from, for recovery purposes it is typically easier to
+>>> fall back on sd-card followed by emmc.
+>>>
+>>> Normally I would expect that if board does not boot TPL/SPL from SPI,
+>>> there is no real reason to try and load FIT from SPI.
+>>>
+>>> If the FIT cannot be loaded from SPI with same-as-spl alone there is
+>>> possible some other issue that we need to resolve.
+>>>
+>>>> +	};
+>>>> +};
+>>>> +
+>>>> +&spi1 {
+>>>> +	spi_flash: flash@0 {
+>>>> +		bootph-all;
+>>>> +	};
+>>>> +};
+>>>> diff --git a/configs/rock-pi-4-rk3399_defconfig b/configs/rock-pi-4-
+>>>> rk3399_defconfig
+>>>> index 83fc4ad7dab..3a38b51c46b 100644
+>>>> --- a/configs/rock-pi-4-rk3399_defconfig
+>>>> +++ b/configs/rock-pi-4-rk3399_defconfig
+>>>> @@ -6,25 +6,28 @@ CONFIG_TEXT_BASE=0x00200000
+>>>>  CONFIG_NR_DRAM_BANKS=1
+>>>>  CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+>>>>  CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
+>>>> +CONFIG_SF_DEFAULT_SPEED=10000000
+>>>>  CONFIG_ENV_OFFSET=0x3F8000
+>>>>  CONFIG_DEFAULT_DEVICE_TREE="rk3399-rock-pi-4a"
+>>>>  CONFIG_OF_LIBFDT_OVERLAY=y
+>>>>  CONFIG_DM_RESET=y
+>>>>  CONFIG_ROCKCHIP_RK3399=y
+>>>> +CONFIG_ROCKCHIP_SPI_IMAGE=y
+>>>>  CONFIG_TARGET_EVB_RK3399=y
+>>>>  CONFIG_SPL_STACK=0x400000
+>>>>  CONFIG_DEBUG_UART_BASE=0xFF1A0000
+>>>>  CONFIG_DEBUG_UART_CLOCK=24000000
+>>>> +CONFIG_SPL_SPI_FLASH_SUPPORT=y
+>>>> +CONFIG_SPL_SPI=y
+>>>>  CONFIG_SYS_LOAD_ADDR=0x800800
+>>>>  CONFIG_PCI=y
+>>>>  CONFIG_DEBUG_UART=y
+>>>>  # CONFIG_ANDROID_BOOT_IMAGE is not set
+>>>> -CONFIG_SPL_FIT_SIGNATURE=y
+>>>>  CONFIG_LEGACY_IMAGE_FORMAT=y
+>>>>  CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-rock-pi-4a.dtb"
+>>>>  CONFIG_DISPLAY_BOARDINFO_LATE=y
+>>>>  CONFIG_MISC_INIT_R=y
+>>>> -CONFIG_SPL_MAX_SIZE=0x2e000
+>>>> +CONFIG_SPL_MAX_SIZE=0x40000
+>>>>  CONFIG_SPL_PAD_TO=0x7f8000
+>>>>  CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+>>>>  CONFIG_SPL_BSS_START_ADDR=0x400000
+>>>> @@ -33,6 +36,8 @@ CONFIG_SPL_BSS_MAX_SIZE=0x2000
+>>>>  # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+>>>>  CONFIG_SPL_STACK_R=y
+>>>>  CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x10000
+>>>> +CONFIG_SPL_SPI_LOAD=y
+>>>> +CONFIG_SYS_SPI_U_BOOT_OFFS=0xE0000
+>>>>  CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+>>>>  CONFIG_TPL=y
+>>>>  CONFIG_CMD_BOOTZ=y
+>>>> @@ -52,6 +57,7 @@ CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names
+>>>> clock-names interrupt-parent
+>>>>  CONFIG_ENV_IS_IN_MMC=y
+>>>>  CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+>>>>  CONFIG_DFU_MMC=y
+>>>> +CONFIG_SPL_DM_SEQ_ALIAS=y
+>>>>  CONFIG_ROCKCHIP_GPIO=y
+>>>>  CONFIG_SYS_I2C_ROCKCHIP=y
+>>>>  CONFIG_MISC=y
+>>>> @@ -61,6 +67,10 @@ CONFIG_MMC_DW_ROCKCHIP=y
+>>>>  CONFIG_MMC_SDHCI=y
+>>>>  CONFIG_MMC_SDHCI_SDMA=y
+>>>>  CONFIG_MMC_SDHCI_ROCKCHIP=y
+>>>> +CONFIG_SF_DEFAULT_BUS=1
+>>>
+>>> Would recommend adding following to allow reading SFDP properties from
+>>> flash, it is what I am doing to all other rk boards with spi flash:
+>>>
+>>> CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+>>>
+>>> Regards,
+>>> Jonas
+>>>
+>>>> +CONFIG_SPI_FLASH_GIGADEVICE=y
+>>>> +CONFIG_SPI_FLASH_WINBOND=y
+>>>> +CONFIG_SPI_FLASH_XTX=y
+>>>>  CONFIG_ETH_DESIGNWARE=y
+>>>>  CONFIG_GMAC_ROCKCHIP=y
+>>>>  CONFIG_NVME_PCI=y
+>>>> @@ -74,6 +84,7 @@ CONFIG_RAM_ROCKCHIP_LPDDR4=y
+>>>>  CONFIG_BAUDRATE=1500000
+>>>>  CONFIG_DEBUG_UART_SHIFT=2
+>>>>  CONFIG_SYS_NS16550_MEM32=y
+>>>> +CONFIG_ROCKCHIP_SPI=y
+>>>>  CONFIG_SYSRESET=y
+>>>>  CONFIG_USB=y
+>>>>  CONFIG_USB_XHCI_HCD=y
+>>>
+> 
+> 
+
