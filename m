@@ -4,68 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3479C48BF6
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 20:52:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05468C54E41
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 22:11:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3BB7C87F65;
-	Mon,  4 Mar 2024 21:52:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=georgemail.de
+	by phobos.denx.de (Postfix) with ESMTP id 342E387E3E;
+	Mon,  4 Mar 2024 23:11:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=georgemail.de header.i=@georgemail.de header.b="AkLjC0dO";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="WrDW8cJ1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 543B987FAA; Mon,  4 Mar 2024 21:52:38 +0100 (CET)
-Received: from smtp6.goneo.de (smtp6.goneo.de [IPv6:2001:1640:5::8:31])
+ id 3B47287E4F; Mon,  4 Mar 2024 23:10:58 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5ECBA87EB0
- for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 21:52:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0567687E1D
+ for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 23:10:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=georgemail.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=leon@georgemail.de
-Received: from hub1.goneo.de (hub1.goneo.de [85.220.129.52])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits))
- (No client certificate requested)
- by smtp6.goneo.de (Postfix) with ESMTPS id 1A4CF240A59;
- Mon,  4 Mar 2024 21:52:35 +0100 (CET)
-Received: from hub1.goneo.de (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits))
- (No client certificate requested)
- by hub1.goneo.de (Postfix) with ESMTPS id 46B80240879;
- Mon,  4 Mar 2024 21:52:34 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=georgemail.de;
- s=DKIM001; t=1709585554;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=QYE3aJQdHIVbr8GpkEUvC3O4vS1nHM91VCnjxWliVO0=;
- b=AkLjC0dOblhfOU3epogPcWdXNcLqwCOcgABK5cX46/3G1jQrjhMfmypQEJ96adgGsGP0pU
- b8/WhpTgFL+P9KrWMtkjdiwgNPf+kt/Wct7CBv7apbojJ7F+3mKTPnwIoKFj/xLzCAatY5
- EjUYnwOymDn7MA8m3Ah4BD3QhzPZNkbo/5sY2eG9pol9lntj+vVBw9GNCNUU8e+0+O/fWD
- qdvQKcBvFl61Zi8TPufwXIq5tlrTEWyLHWp0Kr2PSr4owJp6OnMLgwYCNZD6efHnjtv+el
- 6EK0TQxKNONU2MBKl3LNqBrCW7g0gmlu7MXKQNwkrBvUOfzTbA/a61d50g4ODQ==
-Received: from couch-potassium.fritz.box (unknown
- [IPv6:2a02:8071:5250:1240:f4e6:f6d2:6d95:e0c4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by hub1.goneo.de (Postfix) with ESMTPSA id F2D17240128;
- Mon,  4 Mar 2024 21:52:33 +0100 (CET)
-From: "Leon M. Busch-George" <leon@georgemail.de>
-To: Rick Chen <rick@andestech.com>,
-	u-boot@lists.denx.de
-Subject: [PATCH] riscv: dts: jh7110: fix indentation
-Date: Mon,  4 Mar 2024 21:51:47 +0100
-Message-ID: <20240304205203.64664-1-leon@georgemail.de>
-X-Mailer: git-send-email 2.44.0
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=conor@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 5AE6561058;
+ Mon,  4 Mar 2024 22:10:54 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9D324C433C7;
+ Mon,  4 Mar 2024 22:10:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1709590254;
+ bh=yWKELBRBqesTAOFLwNiNijD3O3CetsWniWL5e3guPEw=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=WrDW8cJ1e8/hlNdPWdFpj2jscM5KCKhaT+azRpzuAnpvmHE95yKe6tPSb5e8ppKX+
+ 1uXLHn1701hK1V+sfImq6NcgLmVgRg9lkhTXkZe0stEA7uFvWEBnLkunkAaKXckS74
+ sSl+jbw9MhSkVYTbXH0PVj+7Ur95mRIoRnepEUQByTZ8qPMzT5i+IFhj3KKIQPX9Ha
+ oIT77DbWyB5F2Bi3Cfl2MvBIZXGYovzV+AGSkox5NgRL1MSXm6EeMCndKis6JoCNDt
+ c6Gtkf04lmda+C8LiCWOnxO4Ci8dJEVAQOK/3pjjSz5SbO4vfZkZcwUrmDlj3QN7S3
+ BjFn3OrANBRmA==
+Date: Mon, 4 Mar 2024 22:10:50 +0000
+From: Conor Dooley <conor@kernel.org>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de
+Subject: Re: riscv: supports_extension() broken for long isa strings
+Message-ID: <20240304-erasure-circling-4591736b70f8@spud>
+References: <20240221-daycare-reliably-8ec86f95fe71@spud>
+ <d6ce764a-e04d-46d4-bb28-84323f250eaf@gmx.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Rspamd-UID: 38849a
-X-Rspamd-UID: b2d5ff
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="CauiKzpVDJbH07LJ"
+Content-Disposition: inline
+In-Reply-To: <d6ce764a-e04d-46d4-bb28-84323f250eaf@gmx.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,25 +71,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: "Leon M. Busch-George" <leon@georgemail.eu>
 
-Signed-off-by: Leon M. Busch-George <leon@georgemail.eu>
----
- arch/riscv/dts/jh7110-starfive-visionfive-2-u-boot.dtsi | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+--CauiKzpVDJbH07LJ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/arch/riscv/dts/jh7110-starfive-visionfive-2-u-boot.dtsi b/arch/riscv/dts/jh7110-starfive-visionfive-2-u-boot.dtsi
-index 55185314dd..3012466b30 100644
---- a/arch/riscv/dts/jh7110-starfive-visionfive-2-u-boot.dtsi
-+++ b/arch/riscv/dts/jh7110-starfive-visionfive-2-u-boot.dtsi
-@@ -112,6 +112,6 @@
- 
- 			u-boot-spl {
- 			};
-+		};
- 	};
- };
--};
--- 
-2.44.0
+Apologies for the delay replying here.
 
+On Thu, Feb 22, 2024 at 01:36:41PM +0100, Heinrich Schuchardt wrote:
+> On 21.02.24 18:59, Conor Dooley wrote:
+> > I mentioned this last night to Heinrich on IRC, supports_extension() is
+> > broken for ISA strings longer than 32 characters. M-Mode U-Boot doesn't
+> > parse a devicetree, so this doesn't apply there, but for S-mode
+> > supports_extension() looks like:
+> >=20
+> > static inline bool supports_extension(char ext)
+> > {
+> >=20
+> > 	struct udevice *dev;
+> > 	char desc[32];
+> > 	int i;
+> >=20
+> > 	uclass_find_first_device(UCLASS_CPU, &dev);
+> > 	if (!dev) {
+> > 		debug("unable to find the RISC-V cpu device\n");
+> > 		return false;
+> > 	}
+> > 	if (!cpu_get_desc(dev, desc, sizeof(desc))) {
+> > 		/*
+> > 		 * skip the first 4 characters (rv32|rv64) and
+> > 		 * check until underscore
+> > 		 */
+> > 		for (i =3D 4; i < sizeof(desc); i++) {
+> > 			if (desc[i] =3D=3D '_' || desc[i] =3D=3D '\0')
+> > 				break;
+> > 			if (desc[i] =3D=3D ext)
+> > 				return true;
+> > 		}
+> > 	}
+> >=20
+> > 	return false;
+> > }
+> >=20
+> > cpu_get_desc is implemented by riscv_cpu_get_desc():
+> > static int riscv_cpu_get_desc(const struct udevice *dev, char *buf, int=
+ size)
+>=20
+> Thanks Conor for reporting the issue. We should change all cpu_get_desc
+> implementations to:
+>=20
+> int riscv_cpu_get_desc(const struct udevice *dev, char *buf, size_t *size)
+> {
+> 	size_t old_size =3D *size;
+>=20
+> 	*size =3D snprintf(buf, *size, "%s", info) + 1;
+> 	if (*size > old_size)
+> 		return -ENOSPC;
+> 	return 0;
+> }
+>=20
+> With this change
+>=20
+> size =3D 0;
+> cpu_get_desc(dev, desc, &size);
+>=20
+> can be used to get the size of the information before allocating a buffer.
+>=20
+> desc =3D malloc(size);
+> cpu_get_desc(dev, desc, size);
+
+That seems overcomplicated to me, if we are just looking to fix this in
+the short term. Could we just write to the provided buffer up to a max
+of size and report ENOSPC if it does not fit?
+That way the calling code in 90% of cases does not need to change and
+the supports_extension() code, which does not care about anything other
+than single-letter extensions that have to be in the first 32 characters
+of the string, can opt to ignore the ENOSPC?
+
+Cheers,
+Conor.
+
+--CauiKzpVDJbH07LJ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZeZG6gAKCRB4tDGHoIJi
+0vcGAQCaLoUFt6eVTD4xBeE7iRwQkSS1oBbm85ktjH4MEEL0RQD+O1K/sfMgvlc9
+Vl7hypXLy1TwLsb1nAr4H553TalU5AY=
+=quIq
+-----END PGP SIGNATURE-----
+
+--CauiKzpVDJbH07LJ--
