@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CAC4C48BF6
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 11:31:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A2C8C5478C
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 11:31:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB46587FA5;
-	Mon,  4 Mar 2024 12:30:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6396487FB6;
+	Mon,  4 Mar 2024 12:30:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C0F2D87F9E; Mon,  4 Mar 2024 12:30:41 +0100 (CET)
-Received: from smtp-8fac.mail.infomaniak.ch (smtp-8fac.mail.infomaniak.ch
- [83.166.143.172])
+ id 96CCF87F9E; Mon,  4 Mar 2024 12:30:42 +0100 (CET)
+Received: from smtp-42ab.mail.infomaniak.ch (smtp-42ab.mail.infomaniak.ch
+ [84.16.66.171])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C8B187F80
- for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 12:30:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E59987F7E
+ for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 12:30:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0000.mail.infomaniak.ch (unknown [10.7.10.107])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4TpGhn6PvGzN0W04;
+Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
+ [10.7.10.107])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4TpGhn1RDXz8Gf;
  Mon,  4 Mar 2024 12:30:33 +0100 (CET)
 Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4TpGhn1RnFzrn4; Mon,  4 Mar 2024 12:30:33 +0100 (CET)
+ id 4TpGhm3LKkzrCr; Mon,  4 Mar 2024 12:30:32 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Mon, 04 Mar 2024 12:29:57 +0100
-Subject: [PATCH v3 03/16] regulator: rk8xx: fix SWITCH enable on RK809
+Date: Mon, 04 Mar 2024 12:29:56 +0100
+Subject: [PATCH v3 02/16] regulator: rk8xx: remove unused functions
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240304-rk3588-saradc-v3-3-7424e2ed5d3b@theobroma-systems.com>
+Message-Id: <20240304-rk3588-saradc-v3-2-7424e2ed5d3b@theobroma-systems.com>
 References: <20240304-rk3588-saradc-v3-0-7424e2ed5d3b@theobroma-systems.com>
 In-Reply-To: <20240304-rk3588-saradc-v3-0-7424e2ed5d3b@theobroma-systems.com>
 To: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>, 
@@ -45,7 +46,6 @@ To: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
  Heiko Stuebner <heiko.stuebner@cherry.de>
 Cc: u-boot@lists.denx.de, 
  Quentin Schulz <quentin.schulz@theobroma-systems.com>, 
- William Wu <william.wu@rock-chips.com>, 
  Quentin Schulz <foss+uboot@0leil.net>
 X-Mailer: b4 0.13.0
 X-Infomaniak-Routing: alpha
@@ -65,34 +65,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: William Wu <william.wu@rock-chips.com>
+From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 
-On RK809 in PMIC_POWER_ENX registers, in order to set or clear a bit N,
-the bit at offset N + 4 needs to be set otherwise nothing is done.
-
-This fixes the inability to modify the SWITCH state on RK809.
+Those two functions had their last user removed in commit f9c68a566c4d
+("rockchip: phycore_rk3288: remove phycore_init() function") part of
+v2023.01 release, so let's do some cleanup here.
 
 Cc: Quentin Schulz <foss+uboot@0leil.net>
-Signed-off-by: William Wu <william.wu@rock-chips.com>
-[reworded commit log]
 Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 ---
- drivers/power/regulator/rk8xx.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/power/regulator/rk8xx.c | 31 -------------------------------
+ include/power/rk8xx_pmic.h      |  2 --
+ 2 files changed, 33 deletions(-)
 
 diff --git a/drivers/power/regulator/rk8xx.c b/drivers/power/regulator/rk8xx.c
-index 97d73ac95e0..e905df3a800 100644
+index e80bd6c3723..97d73ac95e0 100644
 --- a/drivers/power/regulator/rk8xx.c
 +++ b/drivers/power/regulator/rk8xx.c
-@@ -901,7 +901,7 @@ static int switch_set_enable(struct udevice *dev, bool enable)
- 	case RK809_ID:
- 		mask = (1 << (sw + 2)) | (1 << (sw + 6));
- 		ret = pmic_clrsetbits(dev->parent, RK817_POWER_EN(3), mask,
--				      enable ? mask : 0);
-+				      enable ? mask : (1 << (sw + 6)));
- 		break;
- 	case RK818_ID:
- 		mask = 1 << 6;
+@@ -210,14 +210,6 @@ static const struct rk8xx_reg_info rk818_ldo[] = {
+ };
+ #endif
+ 
+-static const u16 rk818_chrg_cur_input_array[] = {
+-	450, 800, 850, 1000, 1250, 1500, 1750, 2000, 2250, 2500, 2750, 3000
+-};
+-
+-static const uint rk818_chrg_shutdown_vsel_array[] = {
+-	2780000, 2850000, 2920000, 2990000, 3060000, 3130000, 3190000, 3260000
+-};
+-
+ static const struct rk8xx_reg_info *get_buck_reg(struct udevice *pmic,
+ 						 int num, int uvolt)
+ {
+@@ -1160,26 +1152,3 @@ int rk8xx_spl_configure_buck(struct udevice *pmic, int buck, int uvolt)
+ 
+ 	return _buck_set_enable(pmic, buck, true);
+ }
+-
+-int rk818_spl_configure_usb_input_current(struct udevice *pmic, int current_ma)
+-{
+-	uint i;
+-
+-	for (i = 0; i < ARRAY_SIZE(rk818_chrg_cur_input_array); i++)
+-		if (current_ma <= rk818_chrg_cur_input_array[i])
+-			break;
+-
+-	return pmic_clrsetbits(pmic, REG_USB_CTRL, RK818_USB_ILIM_SEL_MASK, i);
+-}
+-
+-int rk818_spl_configure_usb_chrg_shutdown(struct udevice *pmic, int uvolt)
+-{
+-	uint i;
+-
+-	for (i = 0; i < ARRAY_SIZE(rk818_chrg_shutdown_vsel_array); i++)
+-		if (uvolt <= rk818_chrg_shutdown_vsel_array[i])
+-			break;
+-
+-	return pmic_clrsetbits(pmic, REG_USB_CTRL, RK818_USB_CHG_SD_VSEL_MASK,
+-			       i);
+-}
+diff --git a/include/power/rk8xx_pmic.h b/include/power/rk8xx_pmic.h
+index 3cbfc021956..0db82419d4f 100644
+--- a/include/power/rk8xx_pmic.h
++++ b/include/power/rk8xx_pmic.h
+@@ -233,7 +233,5 @@ struct rk8xx_priv {
+ };
+ 
+ int rk8xx_spl_configure_buck(struct udevice *pmic, int buck, int uvolt);
+-int rk818_spl_configure_usb_input_current(struct udevice *pmic, int current_ma);
+-int rk818_spl_configure_usb_chrg_shutdown(struct udevice *pmic, int uvolt);
+ 
+ #endif
 
 -- 
 2.44.0
