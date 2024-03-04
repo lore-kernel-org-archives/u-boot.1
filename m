@@ -4,115 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A0C3C5478C
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 17:14:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF1BBC5478C
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 17:43:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 73890880AD;
-	Mon,  4 Mar 2024 18:09:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D032F87EBB;
+	Mon,  4 Mar 2024 18:43:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PBQbFEEq";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hTvQ1+Sf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D02A987E63; Mon,  4 Mar 2024 17:52:07 +0100 (CET)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id D5C13876A9; Mon,  4 Mar 2024 18:43:23 +0100 (CET)
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [IPv6:2a00:1450:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C78887FAE
- for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 17:52:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DD13D87F8F
+ for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 18:43:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-412e72b0d96so5255025e9.0
- for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 08:52:04 -0800 (PST)
+ spf=pass smtp.mailfrom=konrad.dybcio@linaro.org
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-512f3e75391so3770889e87.2
+ for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 09:43:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709571124; x=1710175924; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=5pCWnqR2w3MK2Z9hkofhscjBJ0Hj19Lc+xpshC15mCg=;
- b=PBQbFEEqc+4d3y/RnMqLBWSMaIeZWxAwOEoWdV4DhghhXyffgIbLBa+mEkaxxwCyyl
- YMSiST0wp5kSYGumkA+llNkPl8CRaf3Z8AV0q8+2olt6BKSAv4uFG3dyt4YmS9+aR3ag
- BSkqxmFSFFfsSc+dtRnsr6yG1njunbccSA7/Xd9vWcqJaW39c3+svmLNTzIS/zRxzKOp
- cZJTfg1AEcFhMJqTJv3+LJ0bsAQkNEmfMGJznbSSRWogAqHQVwSCJy47PMPBuWc8iW4p
- dXN+OQdFuhrfX9QDayHAw+e02qAP9x7iLJk9qjpfxftJITstHWT+E0lmrlqciT0UnTuu
- 2wyA==
+ d=linaro.org; s=google; t=1709574200; x=1710179000; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=iY/C0FgdaeuMeMQQ1dOaWJMNlwu28TeGsbgHAFT/vwo=;
+ b=hTvQ1+Sfoky/Mp7lNLoIKth67PU8x0korjK22TdVaOjKBUAew+wUjyx2qmudfrybe5
+ jINrpE8U3+cUDVFRXVrkpyB2aO4R5qK2XnCjUezf7bVfrK7AvAfeiJS4szznsY35V9Z1
+ pXSGy/qYF+rz0botLTzqBITu05pzfnkf4Fy/ZbYyGwnJdYFOkFl7Y5Ee9AIJ5AzyI7xk
+ D2XHkkspqFCFJl8M44LKiAvWWdqb0iGUCInVuPYVFtSoVcvtMDy0FIDnW3UojXX2buqW
+ 5MXm4chwvIQUpptSLqGuivB4xDUYKkT8QVoN4vDAtfdCQTsKTIQ9/0JcAs95d4UxEk9O
+ 2xsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709571124; x=1710175924;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=5pCWnqR2w3MK2Z9hkofhscjBJ0Hj19Lc+xpshC15mCg=;
- b=wrNJKhmk9RDCSzKGTcgoC6BMNTpmQr/cHu/5CN9o6cUbf0Xl9KGgq8bBsN4/UT3kiX
- y6Gk0w4Au9uPfVDXm8IAGMTh7zdbkCNGgBrArOEpdDUsrjY65+dkFxWjY5aLRKpUqZaZ
- OwhSBE0jj+m1mpQV/sQgU6+sqd3MzNLamOPaq/vgBhEYtTkFyGiBoDRM1/DBJkAQMs5z
- l05aZD9sVENMkSsxjkboSilJfqU5yZCMQclZ7ZcBwxnA16/wLCrK4xMwfRnbpsz/wjth
- QrnFQBi4qwv0dUYboGAC6+4srfiQ88yrP2QPpjEBZ4Jc/hO51UOBnlhPUx4h4aFh9K+s
- WtVQ==
-X-Gm-Message-State: AOJu0Yye/c6j14LN6Cfv/Ad0CYJZp0RdPfYaNA4qEXLdmrfw8G4C9brN
- ewRcznGCBP1PXP8OiALjQuDXZywLs0WXAzAlYk0JZEawZBfV7ArFmlg5dbeU8b8=
-X-Google-Smtp-Source: AGHT+IEjhPNnOmvxE//lUchMMMtq5k9u+YYlSzW/hTU5ohirwvcPfzQHUgu607vQs5iIsLuuIPMRVQ==
-X-Received: by 2002:a05:600c:1c9c:b0:412:e580:2dbc with SMTP id
- k28-20020a05600c1c9c00b00412e5802dbcmr1575430wms.19.1709571123950; 
- Mon, 04 Mar 2024 08:52:03 -0800 (PST)
-Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
- by smtp.gmail.com with ESMTPSA id
- c21-20020a05600c0a5500b00412cb0961fasm10598517wmq.6.2024.03.04.08.52.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Mar 2024 08:52:03 -0800 (PST)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Mon, 04 Mar 2024 16:51:34 +0000
-Subject: [PATCH RFC 26/26] dts: support building all dtb files for a
- specific vendor
+ d=1e100.net; s=20230601; t=1709574200; x=1710179000;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=iY/C0FgdaeuMeMQQ1dOaWJMNlwu28TeGsbgHAFT/vwo=;
+ b=kRLN2pGjoCUvK0nZ13YxHZNz0dendFylgzj+a7MpUnAMsMzhPQ5tcK5jD7/sQKEsZk
+ jFl7HA0y+pNK/ZrFzzipAGDWln1acagYiadRwajVOpakzFl7TsDn32/Zu3eOhnRWN1d5
+ Bnr56BXz91kdvcAE4oCmMeKpaoslkFdjTPrWGS1tWUcjq93epcldYk9wstg7Kl+Bh0Ma
+ KC5OYF1l/YKALl/iouysIiLkwZQd/5uMerX+r8gEufqnlcBf0HS46YoYDj67N4KTcSlK
+ 2LUn1Gi9RKI+nMD9Cj9X4EtbSjLlBGIpMJAl0Q6WoNcLKP2gnnGRqT8wehtdbnlf0Z3X
+ p/6g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUtbUqkZjH/211kXSJKtr0bCg61hy0EAWIPdCgz9j2hlfcqziqxyH/pV1r12kr7e/6lOrkNq4c9zubjvPsw9nboMgv64g==
+X-Gm-Message-State: AOJu0Yyv3sHRWVXefgnl0UPvh9ScJWYpSzmBALxmsTpBSOBxMsA8PjKi
+ 5t7xrxqUwOPkLF25BDzFbZPmR5lidtpYT0ihY4qzLXZaSmh1fF9LA0DY6KxTi10=
+X-Google-Smtp-Source: AGHT+IHPOjVrcr8Bjj7pgjyVFy1zfDRelP8j6KA6v8E+6z46MB8ri4c7BlZdrFgcg+UoJ1fDOrLYIQ==
+X-Received: by 2002:a05:6512:318f:b0:513:3ea7:770a with SMTP id
+ i15-20020a056512318f00b005133ea7770amr4788393lfe.17.1709574200136; 
+ Mon, 04 Mar 2024 09:43:20 -0800 (PST)
+Received: from [172.30.204.149] (UNUSED.212-182-62-129.lubman.net.pl.
+ [212.182.62.129]) by smtp.gmail.com with ESMTPSA id
+ j10-20020a19f50a000000b005129e5d7f11sm1791373lfb.125.2024.03.04.09.43.17
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 04 Mar 2024 09:43:19 -0800 (PST)
+Message-ID: <cd98b326-eafd-4be1-87d8-09bef5108c0e@linaro.org>
+Date: Mon, 4 Mar 2024 18:43:13 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/8] Add support for Qualcomm SA8155-ADP board
+Content-Language: en-US
+To: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Stephan Gerhold <stephan@gerhold.net>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Elmar Psilog <epsi@gmx.de>,
+ Joe Hershberger <joe.hershberger@ni.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Ley Foon Tan <leyfoon.tan@starfivetech.com>, Lukasz Majewski
+ <lukma@denx.de>, Marek Vasut <marex@denx.de>,
+ Michal Simek <michal.simek@amd.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Ramon Fried <rfried.dev@gmail.com>, Sean Anderson <seanga2@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Yanhong Wang <yanhong.wang@starfivetech.com>
+References: <20240229142043.1263690-1-volodymyr_babchuk@epam.com>
+ <dc97490e-4029-41e2-bbbd-b1351f5cf9eb@linaro.org> <87bk7x6c88.fsf@epam.com>
+ <ZeXN7EZHU89qS5PF@gerhold.net> <87r0gq3shy.fsf@epam.com>
+From: Konrad Dybcio <konrad.dybcio@linaro.org>
+In-Reply-To: <87r0gq3shy.fsf@epam.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240304-b4-upstream-dt-headers-v1-26-b7ff41925f92@linaro.org>
-References: <20240304-b4-upstream-dt-headers-v1-0-b7ff41925f92@linaro.org>
-In-Reply-To: <20240304-b4-upstream-dt-headers-v1-0-b7ff41925f92@linaro.org>
-To: Tom Rini <trini@konsulko.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Jagan Teki <jagan@amarulasolutions.com>, Simon Glass <sjg@chromium.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Kever Yang <kever.yang@rock-chips.com>, Lukasz Majewski <lukma@denx.de>, 
- Sean Anderson <seanga2@gmail.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Matthias Brugger <mbrugger@suse.com>, Peter Robinson <pbrobinson@gmail.com>, 
- Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Thierry Reding <treding@nvidia.com>, 
- Svyatoslav Ryhel <clamor95@gmail.com>, Michal Simek <michal.simek@amd.com>, 
- Paul Barker <paul.barker.ct@bp.renesas.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Ryder Lee <ryder.lee@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Eugen Hristev <eugen.hristev@collabora.com>, Rick Chen <rick@andestech.com>, 
- Leo <ycliang@andestech.com>, Ryan Chen <ryan_chen@aspeedtech.com>, 
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>, 
- Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>, 
- Kunihiko Hayashi <hayashi.kunihiko@socionext.com>, 
- Dai Okamura <okamura.dai@socionext.com>, 
- Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>
-Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
- uboot-stm32@st-md-mailman.stormreply.com, uboot-snps-arc@synopsys.com, 
- Caleb Connolly <caleb.connolly@linaro.org>
-X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2654;
- i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=EI2CDzUz7yZMpQs2UznMDgZqFxlWcF+fQMMDPec6VAA=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtSnfzjZbFzqomcFzWZeWP/p0l6fZTdzdJim2HT2/J9QI
- 97Z+Syvo5SFQZCDQVZMkUX8xDLLprWX7TW2L7gAM4eVCWQIAxenAEzk0TJGhoXmeT1fj8vPurep
- 9Q7bLMMl2cdYfhQcNPokvMWK8dNF0X5GhmluS6/N3bfIY5Kaq0mF0cmI6Iyp/PNehy++Fn40UJb
- P6CAA
-X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
- fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
-X-Mailman-Approved-At: Mon, 04 Mar 2024 18:09:04 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -129,79 +109,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This adjusts OF_UPSTREAM to behave more like the kernel by allowing for
-all the devicetree files for a given vendor to be compiled. This is
-useful for Qualcomm in particular as most boards are supported by a
-single U-Boot build just provided with a different DT.
 
-Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
----
- dts/Kconfig          | 24 ++++++++++++++++++++++++
- scripts/Makefile.dts | 17 ++++++++++++++++-
- 2 files changed, 40 insertions(+), 1 deletion(-)
 
-diff --git a/dts/Kconfig b/dts/Kconfig
-index b9b6367154ef..67d9dc489856 100644
---- a/dts/Kconfig
-+++ b/dts/Kconfig
-@@ -100,8 +100,32 @@ config OF_UPSTREAM
- 	  However, newer boards whose devicetree source files haven't landed in
- 	  the dts/upstream subtree, they can override this option to have the
- 	  DT build from existing U-Boot tree location instead.
- 
-+config OF_UPSTREAM_BUILD_VENDOR
-+	bool "Build all devicetree files for a particular vendor"
-+	depends on OF_UPSTREAM
-+	help
-+	  Enable building all devicetree files for a particular vendor. This
-+	  is useful for generic U-Boot configurations where many boards can
-+	  be supported with a single binary.
-+
-+	  This is only available for platforms using upstream devicetree.
-+
-+config OF_UPSTREAM_VENDOR
-+	string "Vendor to build all upstream devicetree files for"
-+	depends on OF_UPSTREAM_BUILD_VENDOR
-+	default "qcom" if ARCH_SNAPDRAGON
-+	default "rockchip" if ARCH_ROCKCHIP
-+	default "amlogic" if ARCH_MESON
-+	default "allwinner" if ARCH_SUNXI
-+	default "mediatek" if ARCH_MEDIATEK
-+	default "marvell" if ARCH_MVEBU
-+	default "xilinx" if ARCH_VERSAL || ARCH_ZYNQ
-+	default "nvidia" if ARCH_TEGRA
-+	help
-+	  Select the vendor to build all devicetree files for.
-+
- choice
- 	prompt "Provider of DTB for DT control"
- 	depends on OF_CONTROL
- 
-diff --git a/scripts/Makefile.dts b/scripts/Makefile.dts
-index 5e2429c6170c..8005527f3df7 100644
---- a/scripts/Makefile.dts
-+++ b/scripts/Makefile.dts
-@@ -1,3 +1,18 @@
- # SPDX-License-Identifier: GPL-2.0+
- 
--dtb-y += $(patsubst %,%.dtb,$(subst ",,$(CONFIG_DEFAULT_DEVICE_TREE) $(CONFIG_OF_LIST) $(CONFIG_SPL_OF_LIST)))
-+dtb-y += $(patsubst %,%.dtb,\
-+	$(subst ",,$(CONFIG_DEFAULT_DEVICE_TREE) $(CONFIG_OF_LIST) $(CONFIG_SPL_OF_LIST)))
-+
-+ifeq ($(CONFIG_OF_UPSTREAM_BUILD_VENDOR),y)
-+ifeq ($(CONFIG_ARM64),y)
-+dt_dir := $(srctree)/dts/upstream/src/arm64
-+else
-+dt_dir := $(srctree)/dts/upstream/src/$(ARCH)
-+endif
-+
-+dtb-vendor_dts := $(patsubst %.dts,%.dtb, \
-+	$(wildcard $(dt_dir)/$(subst ",,$(CONFIG_OF_UPSTREAM_VENDOR))/*.dts))
-+
-+dtb-y += $(subst $(dt_dir)/,,$(dtb-vendor_dts))
-+
-+endif
+On 3/4/24 16:51, Volodymyr Babchuk wrote:
+> 
+> Hi Stephan,
+> 
+> Stephan Gerhold <stephan@gerhold.net> writes:
+> 
+>> On Fri, Mar 01, 2024 at 06:25:39PM +0000, Volodymyr Babchuk wrote:
+>>> Caleb Connolly <caleb.connolly@linaro.org> writes:
+>>>> On 29/02/2024 14:21, Volodymyr Babchuk wrote:
+>>>>> This patch series adds support for Qualcomm SA8155-ADP development
+>>>>> board. Main motivation for this series is to allow running
+>>>>> virtualization software on this board and U-Boot is a good way to
+>>>>> break Qualcomm's boot chain at EL2 with more convenient ways for
+>>>>> uploading and running the code. With this patches applied it is
+>>>>> possible to upload and run Xen on this board. KVM probably should work
+>>>>> too.
+>>>>
+>>>> This is really cool! I've experimented with this on SDM845 and SM8250
+>>>> but never really did anything with it... I'd love to take a look at your
+>>>> Xen branch?
+>>>
+>>> Honestly, there is nothing to look at right now. I just implemented
+>>> early printk serial driver for the qcom, made hacks to the device tree
+>>> and trying to boot Dom0. I already expecting issues with the GPU,
+>>> because it has own SMMU without virtualization support and Xen already
+>>> complains about it. So I had to remove it from the DTS for a time being.
+>>>
+>>
+>> Did you enable all the clocks/power domains/etc for the GPU SMMU? If I
+>> remember correctly it is off by default and all registers read as
+>> zeroes. The SMMU driver could easily get confused about the capabilities
+>> of the SMMU (e.g. the stage 2/virtualization support) if all the ID
+>> registers read as zeroes.
+> 
+> Ah, this is a great idea, thanks. I tried a quick test by enabling only
+> clocks that are provided by GCC, but looks like I need to enable GPUCC
+> clocks as well. So I need to write a driver for GPUCC or at least
+> figure which registers to write with a debugger. I'll try this later.
 
--- 
-2.44.0
+You'll probably also need to enable the CX GDSC (not sure about the
+order, probably GDSC and then clocks)
 
+Konrad
