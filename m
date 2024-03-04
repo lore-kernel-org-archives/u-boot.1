@@ -4,132 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1371C48BF6
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 11:34:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F2D1C5478C
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 11:49:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1581987F7D;
-	Mon,  4 Mar 2024 12:34:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=theobroma-systems.com
+	by phobos.denx.de (Postfix) with ESMTP id 1642187E6F;
+	Mon,  4 Mar 2024 12:49:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=theobroma-systems.com header.i=@theobroma-systems.com header.b="ipJcNKbE";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="Lj4h1h2W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D601287F7E; Mon,  4 Mar 2024 12:34:24 +0100 (CET)
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on20700.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2613::700])
+ id 0574187ECC; Mon,  4 Mar 2024 12:49:09 +0100 (CET)
+Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7AA1587E92
- for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 12:34:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=theobroma-systems.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=quentin.schulz@theobroma-systems.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=aNT7ABvPHkFrgO8HNxJWNl22RUUZwXXYES4SpSjZFqUZg8ipE+BTmk9J9qMKCTQ19UxmNpwmrEZ/ykEMqCrSERn9ycOOkz6Z3XkMSKTq2McC3JI6UuiXdc3YG7svJ+IZWj8GVrlYGmThrUugUyugaaXVzxBMhApp+zaYREyJIVTZKAcW/hbztw0rdcQiCNAhRdQ1F5jZoYZ7hDU3ugz/cQbB3i4SJeS2ibEWZ80ZXBPlMC5pf8U4xIqNdU4TyOqdM4iNQ1e9NbEbeCtle6zr7Qp16vr84UKAt35vEanmUBTPGVMjG6znNaTU4jTckuGe60onRA7QvIKjM8jnA8f7Gw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=mrXIjhYGupD/SqkhiVSYvxAKeoNDJeubg3wLBL4v2oY=;
- b=SzgvZJV1cJPUgr3URcIrukWp0Dxx0E5PuXqJCrOs75y9f1ImBHu9G/NRG+U8fvJF1QIOl/Ogen4smM3hMLnzKqbuah825jVnoDE9tqP3xnhHeaR/KCwGfXUGSTMti7YlFJhvIF4mxyVS+OYaZZNHrpAhbE+A4UTk9fCpIsoV/kStibJzSjL+M5alHMFyduM+XM9GGG4hmvwDXpvy5MpKFun3/qOPxx1KLGjIx+ngWkuPCZElmxBMvsCttMx7xAS2l+y/OAXNBfBMd9C+OKQPwcmbrr6ZTeY/aeqtO9hS4a5NIBnMz/BvkV7IyJfIaMwwUDweTBiDXg9i9D+1njhmJQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=theobroma-systems.com; dmarc=pass action=none
- header.from=theobroma-systems.com; dkim=pass header.d=theobroma-systems.com;
- arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=theobroma-systems.com; 
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=mrXIjhYGupD/SqkhiVSYvxAKeoNDJeubg3wLBL4v2oY=;
- b=ipJcNKbEHDRpRWVvC+2sHwR++IY+DocXdohQLGp7cO+5MrM7ftirKTCDAzIEMYbo6lA2cnE0p9C1gQBOH0VkyIK5C45PsVIzgUJEPgpMjSkBXQn9mepSdSV9g93FC8FJKkM9oQRf0Jwsu4vvH0sRB7pTgAASbwbO43t71bAZcsXri7Q5I34O1cenlzkBeSq0GZ2ypT6rOUUul9Y0NxFK0afPAETgYg2b0jutBq3fWbTwk/I7TKkSr3fxcjCakqEAbXrcp98AfZ0EUVQH1tltBv0HOgqWt8qwtp8J1v6hTLRWyODfQqFbhrId8OqdQmhvJtdRWIxfBK6o6CHeRCuRHg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=theobroma-systems.com;
-Received: from DU2PR04MB8536.eurprd04.prod.outlook.com (2603:10a6:10:2d7::10)
- by AM8PR04MB7220.eurprd04.prod.outlook.com (2603:10a6:20b:1d7::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7339.39; Mon, 4 Mar
- 2024 11:34:20 +0000
-Received: from DU2PR04MB8536.eurprd04.prod.outlook.com
- ([fe80::23:4118:ae4a:8dda]) by DU2PR04MB8536.eurprd04.prod.outlook.com
- ([fe80::23:4118:ae4a:8dda%5]) with mapi id 15.20.7339.033; Mon, 4 Mar 2024
- 11:34:20 +0000
-Message-ID: <0e2fba0a-3bb4-4aa2-aaa7-33b15a6dff6e@theobroma-systems.com>
-Date: Mon, 4 Mar 2024 12:34:18 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] pinctrl: Check pinconfig nodes pre-reloc status
- recursively
-Content-Language: en-US
-To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Cc: Massimo Pegorer <massimo.pegorer+oss@gmail.com>, u-boot@lists.denx.de
-References: <20240217120842.2381465-1-jonas@kwiboo.se>
-From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
-In-Reply-To: <20240217120842.2381465-1-jonas@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: ZR0P278CA0165.CHEP278.PROD.OUTLOOK.COM
- (2603:10a6:910:45::18) To DU2PR04MB8536.eurprd04.prod.outlook.com
- (2603:10a6:10:2d7::10)
+ by phobos.denx.de (Postfix) with ESMTPS id 1E81D87E4F
+ for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 12:49:07 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=phytec.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=B.Hahn@phytec.de
+DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
+ q=dns/txt; i=@phytec.de; t=1709552946; x=1712144946;
+ h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=Ir+wDywwrTcS/vcW390tytbpYn6S4hyWLNtSR5OYkrQ=;
+ b=Lj4h1h2WED3L0hbZjwLjfaF8kplSzqDFdgleEQZkRQJRaLPdyNetPLnx/8blEQSP
+ 245e2sjZC0tS/iAkNX7u+4X9y+Io0Bbfm5OcJ/QIqi/mk1S7+ymRM47ZrTfv32U7
+ YKESwEDJONFGRDcOsyvmGyI+pr3wUSPL0INA4LddzFo=;
+X-AuditID: ac14000a-fbefe7000000290d-78-65e5b532b354
+Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
+ (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (Client did not present a certificate)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 81.06.10509.235B5E56;
+ Mon,  4 Mar 2024 12:49:06 +0100 (CET)
+Received: from llp-hahn.hahn.test (172.25.0.11) by Berlix.phytec.de
+ (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Mon, 4 Mar 2024
+ 12:49:32 +0100
+From: Benjamin Hahn <B.Hahn@phytec.de>
+Date: Mon, 4 Mar 2024 12:48:54 +0100
+Subject: [PATCH] drivers: imx_tmu: Select polling-rate from cpu-thermal
+ devicetree node
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PR04MB8536:EE_|AM8PR04MB7220:EE_
-X-MS-Office365-Filtering-Correlation-Id: 41f05251-da81-40f7-6a9f-08dc3c3f0861
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: OCac0iBS8129prAU3nJIqFq7bHnuoHuGjYxyUBeEQC6aOzaBKkHh7trN4VUjj+kOi0qri3alXxbhRBlJxUCnxhs9CJxPdVF1BfBICQWv3X8X4c6i0hnIzGKC+Je8Eh2Ppyt0+vRicaJRI2CZio+4bZv0SfTTYejG4A3ojNFgYly678UQRYb+7nSdJZdgi9IB58KOOJa5YkbmjJIVMT6k72sOrKo87c/IBODd+JO9ZWmawuLEZdmtOItasd3n976Q/Qr+4fikP72qMGqUpjrSqKaUdRz8rGhqPdX+zJuZd5zF6NsCb3MgMSSh98l6/1kJJ17Umv+H6lIkE9FKRJ1KEtZTZ+t+QzwMTuQPNTX2FS3YNpTcNgmlt8HnkAUXzMMR2ABzCBZFeuUcjLtfeNziwFRYwVnop1+cdflsOTFIlD4tgx+c9+pTix9rSa4GU2Vtyz6r0Xosgi4gse5fDF+TrbtJNBJaRyfCmiMabM+1Loh6MlyANbLE4abZUE72BDQFl7kF3VMaRIyTzLyb4LwsDKvZ4PfAcFWfKpCXkv1nbqZFp64Be2fWJL5tXWQN63V3gUMpX/qRgTvlE3g+cpaI6deSzyoUekdNopFHirB9jcs=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DU2PR04MB8536.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(376005); DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SFc0bmlYakpsOG5NR1BXU0hBTnBNNXZJYW1ob21HU3lncEJXMGh6NjZLN0pI?=
- =?utf-8?B?cEdrb3JiaUNKV1BCZ1k1bThpNVFkNE5WbkpqQkhMeW54UlRwUzZVUUNvNXkr?=
- =?utf-8?B?K1ZUSlVjb3NtVUQ2NnRUUU5aT1RsOGM3Tzljd1dxWkpldFlTalRJUFM2aGd5?=
- =?utf-8?B?WHZNV3psYWJhc2wyQ09TZEpqRGdrdUlHd1d0MHFmWmppRTVxTTV0RnJaSUpj?=
- =?utf-8?B?L0ZzdnhCTFVoSjNsSjloQU4veVluYUlud2RXT0I2T2p3U3ZnQ2NrVnIvZGxS?=
- =?utf-8?B?ZVNwbG1rWitDdi9pcHFReDdRN2V5Yy80N090MWVmaWxJVjN6Q3FhdDExNXdU?=
- =?utf-8?B?N25VM20zVEFmWlN1SUk1Unk5RDRxVmhFUW1ZMWxPSXNLa0hYVXJIUGpWM0li?=
- =?utf-8?B?QUNxSFFNWDVPTElobWlUVjkwRURmbXJLV1BISkd2THZEQW80Wlh6WTlOSzNz?=
- =?utf-8?B?Rkh6dE1wNDJPZWwwRjJwQVJORHV1ZGU2cHJpUDh2U3ZrbTVNajJjaXdZZUpY?=
- =?utf-8?B?dUNyUXFwWnFrY29mWDUrTVo3TG9IMFEybndaeFJUcy9XbDkvK0Z3dFAwaW96?=
- =?utf-8?B?UXdISWVVcHQ4Zml2elhJZW00U1BxT3BscHcwTU9iUUdtNWxxL3h1OU91bExn?=
- =?utf-8?B?ZnU5RnJIbmFOREVQMWo2WTlIYklVc0tURVZWVkZ5K3Jqa1ArTXpveEhJRzE2?=
- =?utf-8?B?TzhnREpXQVozUWI5Y1A0UW5WRWVEZGl0bmdzbEs3SldmUmlUaXI3R0VIL2ZH?=
- =?utf-8?B?TnRxbFE2UWVLSDZ4N1V2Y0xPb2NaTC80Q25kWDF2VjFHOWVkcGp2L1NaNjV4?=
- =?utf-8?B?MXpEbjlXdE1BYUZPM243VWZRcFZyOEdMZWZCdEF6b2o0MmhrWUZSN3R6a1ZM?=
- =?utf-8?B?VlZQWElNQmNlVDY1Tm9DdGtRbjZPMWlvdmlRbzRZRU9vRnJjSXFVZlBBY0dl?=
- =?utf-8?B?MTVvOHBYM1JYMGNYdCsvWGxrR3JoYVYySkJnMWkvMUNXbkpaZFFNb0NCQ0Zq?=
- =?utf-8?B?QnFwelYwM0FKODRUNDJqSkRpbHpoV3dXZlJlKy9IMURoaUZlRkJIdmxseFdi?=
- =?utf-8?B?WmhENjl1SjhMK1pWaFZSeEpMS0NpSC9JU0xkMEVERzhuVllzUGtLSmhQbmFM?=
- =?utf-8?B?SXU2ODZINURMV21kK1J2U2cyQkhENEd6cTQzRnA5RE9vNVU5Y3ZBNGZ2ZDJz?=
- =?utf-8?B?RWx4cjZXOTRmNDUrRzgvL1YwaThEeUtSQjRnUFhXaFMwY2pvc2hjQ1pEK0tZ?=
- =?utf-8?B?M05abDlwSmlQUDRRRnhMMTFSL0xIVFNFSDJzNlVIVGx5UW9rRWw5Sk5hSzkr?=
- =?utf-8?B?ZHZJbG43VGwvYzdJZ2lJTWQrdGJkZkp2QXFtRFBiRitkUmFwMElHbGZCREVU?=
- =?utf-8?B?a1N5bXo1VU9uVU4xR0k2UXVCSi9WZ0ZTTnJkS1FrUU5QTUpzVkUyQjRyMzhl?=
- =?utf-8?B?K1kzUHVrY1REZHFrU3phbFNkR2VTUmROMUVLMlJsanhyQ2crK1FzMU94Z3lE?=
- =?utf-8?B?UXdMNFgxdkVFUmlLRWh6bmE1UUxoYWVBcGF4ZE12UVpNM2ZCVWttWDE2TGRm?=
- =?utf-8?B?MFMzTUtyZnhlRUx3R2E3U1N4SDdiQURmdVNmU29TOVlVMzZQU3R6R290cnJn?=
- =?utf-8?B?NWQxSEx4d2ExVmpiSEJIaXdYdS80M3dUbzcyRktMZTRRczZJRTBQdGtlZG4w?=
- =?utf-8?B?R0ZEbG1ORVhzdFVXa1FVaFFXeHBjRlYzL1cyWnpSeGh0dE4xTGJPd2FYek9s?=
- =?utf-8?B?TkV3VzFURHhsb2ZCNng2M1gra0lIanBKMVFmNFNKZDUxZ3BreGlTdytwc2dD?=
- =?utf-8?B?RjI1c1RGMGoxVlFkTElmc3VYdzFTWVM5bEhvVGI1N241WUNqaXBwL0RoRlJN?=
- =?utf-8?B?VUZzT2JhaEl4VjJNd0ZjQnc2OXF4TU1UamNYSllRQnNjbXFyRWN6MTRsWTdH?=
- =?utf-8?B?S3ZRM0tXNk4vNHBscnp2d3g2Qm9MWmVobDdVNnRwL1dYRis4Unk0eGdGN0ZO?=
- =?utf-8?B?dnJmS3R1SGsxU2hkQzZ1RllPUzBFVnRrTjRzazcwY1VrY09ycHJyWXlRTnF4?=
- =?utf-8?B?cHB2T3JIZWk5SlN5M2FZR3JoZGJNZ0JPUXhIOG8xSHhKZ0Zwb3grSVFDYi9Z?=
- =?utf-8?B?SHFQVSsrZU9rRWpjUE85ajh4dktMVTMwNXlvTVpNU1NPM1RMK2JXREtnZW4w?=
- =?utf-8?Q?qwAYgZooeZTDW2FVvOPfNJQ=3D?=
-X-OriginatorOrg: theobroma-systems.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 41f05251-da81-40f7-6a9f-08dc3c3f0861
-X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8536.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Mar 2024 11:34:20.3436 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 0U+Cib6IG4EuZggcEZ/wS1ObMK2nAKVOH2t0tYZnyLv9joHwA7eX4Px4rVMps2EN7BpEcZ4mfrpFDKigkDk6tZ0z/XOcQE0HIGTQ2j6l/O66i/CrqaenuYM9fzfhZ9LG
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR04MB7220
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-ID: <20240304-fix-thermal-driver-issue-v1-1-f30daeaf1055@phytec.de>
+X-B4-Tracking: v=1; b=H4sIACW15WUC/x2MQQqDQAwAvyI5G0h3Uw9+pXhY3NgNqC2JiiD+v
+ UuPAzNzgYupOPTNBSaHun7WCo+2gbGk9S2ouTIECkyRGCc9cStiS5oxmx5iqO67YGQifoYuJZ6
+ g5l+T6v7Xr+G+f8jucGxqAAAA
+To: Tom Rini <trini@konsulko.com>, Fabio Estevam <festevam@gmail.com>
+CC: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>, Benjamin Hahn
+ <B.Hahn@phytec.de>
+X-Mailer: b4 0.12.4
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1709552946; l=1575;
+ i=B.Hahn@phytec.de; s=20240126; h=from:subject:message-id;
+ bh=Ir+wDywwrTcS/vcW390tytbpYn6S4hyWLNtSR5OYkrQ=;
+ b=ZA6osgmOOGR/DwBTVyfNdn/evYKlY8wNbi6z61XIWbRnSChsgsOhVtNwkITN+qwE+0wOKb47J
+ JJB+K7GzvQrCgFTTqbwevoQK4sS6Zalc53E3qoT0diwMEmxIx4Q7qXC
+X-Developer-Key: i=B.Hahn@phytec.de; a=ed25519;
+ pk=r04clMulHz6S6js6elPBA+U+zVdDAqJyEyoNd8I3pSw=
+X-Originating-IP: [172.25.0.11]
+X-ClientProxiedBy: Berlix.phytec.de (172.25.0.12) To Berlix.phytec.de
+ (172.25.0.12)
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrOLMWRmVeSWpSXmKPExsWyRpKBR9do69NUg96PGhYPr/pbTJ20md3i
+ 7d5Odovud+oOLB47Z91l93h1YBW7x9k7Oxg9+rtbWANYorhsUlJzMstSi/TtErgyVp7uZi5Y
+ yVPR1/aBrYFxNVcXIyeHhICJxO6pu5i6GLk4hAQWM0mcvtDDDOE8YJRYenMWE0gVm4CaxK43
+ r1lBbBYBFYndZ7uYQWxhgUiJxVfPsIDYvAKCEidnPgGyOTiYBTQl1u/SBwkzC8hLbH87hxmi
+ xFvi4pZrbCDzJQS2MEpc2LCNESQhIuAqcWPVclaI3iiJdxODQEwJAWGJTTu1IMp3M0lcO/GU
+ CSKeKLHztRxIp5CArMTN81vYIH6Rl5h27jUzhB0qsfXLdqYJjMKzkBw3C+G4WUiOW8DIvIpR
+ KDczOTu1KDNbryCjsiQ1WS8ldRMjKPBFGLh2MPbN8TjEyMTBeIhRgoNZSYS35teTVCHelMTK
+ qtSi/Pii0pzU4kOM0hwsSuK8qzuCU4UE0hNLUrNTUwtSi2CyTBycUg2MS9+nqh9z4hU/4ful
+ 1PjR7pLw4NK0pjAHjcLa+P0RLUvyX/ydurd0k+L9hzkyFrMmOiYolq1gXyJvfbe2Uant8abw
+ bzvrn8n+/OrvlnLTsVE5sXd3iZ+p6OrTko9+6h441ZTTwTmHv/mVVVmKocR24XOZZ46WG9k8
+ OHFxj6uh0L4rM1TrNyoosRRnJBpqMRcVJwIAxBXhy2oCAAA=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -146,73 +96,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
+The polling rate is already specified in some devicetrees, like
+imx8mp.dtsi for example, but was not selected so far. For the
+trippoints, the cpu-thermal node is used. Also get the polling rate from
+this node. Use the default of 5000ms if the polling rate should not be
+specified in the devicetree.
 
-On 2/17/24 13:08, Jonas Karlman wrote:
-> Pinconfig nodes normally bind recursively with PINCTRL_FULL and
-> PINCONF_RECURSIVE enabled. However, during U-Boot proper pre-relocation
-> any node marked with e.g. bootph-all will not bind unless its parent is
-> also marked for pre-reloc.
-> 
->    group1 {
->        pinconf1 {
->            bootph-all;
->        };
->    };
-> 
-> This cause the following warning message to be shown during U-Boot
-> proper pre-reloc stage on Rockchip devices, e.g on RK3568:
-> 
->    ns16550_serial serial@fe660000: pinctrl_select_state_full: uclass_get_device_by_phandle_id: err=-19
-> 
-> and on RK3328:
-> 
->    ns16550_serial serial@ff130000: pinctrl_select_state_full: uclass_get_device_by_phandle_id: err=-19
-> 
-> Check pinconfig nodes pre-reloc status recursively to fix this and to
-> make pinconfig_post_bind work same at both U-Boot proper pre-reloc and
-> at TPL/SPL stage.
-> 
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> ---
-> v2:
-> - No change
-> 
-> A recent change to fdtgrep was believed to solve this however, fdtgrep
-> is only applied to control fdt for xPL so this issue still exist at
-> U-Boot proper pre-reloc stage.
-> 
-> Link to v1: https://patchwork.ozlabs.org/patch/1817296/
-> ---
->   drivers/pinctrl/pinctrl-uclass.c | 18 +++++++++++++++++-
->   1 file changed, 17 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/pinctrl/pinctrl-uclass.c b/drivers/pinctrl/pinctrl-uclass.c
-> index 73dd7b1038bb..fe2ba5021a78 100644
-> --- a/drivers/pinctrl/pinctrl-uclass.c
-> +++ b/drivers/pinctrl/pinctrl-uclass.c
-> @@ -100,6 +100,22 @@ static int pinctrl_select_state_full(struct udevice *dev, const char *statename)
->   	return 0;
->   }
->   
-> +static bool ofnode_pre_reloc_recursive(ofnode parent)
-> +{
-> +	ofnode child;
-> +
-> +	if (ofnode_pre_reloc(parent))
-> +		return true;
-> +
-> +	if (CONFIG_IS_ENABLED(PINCONF_RECURSIVE)) {
+NOTE: The polling rate from the devicetree will be used after this
+patch. In imx8*.dtsi devicetrees the polling delay is set to 2000ms for
+example.
 
-You could move the ofnode child declaration here for limiting the scope.
+Signed-off-by: Benjamin Hahn <B.Hahn@phytec.de>
+---
+ drivers/thermal/imx_tmu.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-I also got confused by "parent" name, as it isn't actually the parent 
-we're looking at right now, but the node itself, so it was a bit 
-misleading. I would have kept "node" and the "child" one is explicit enough.
+diff --git a/drivers/thermal/imx_tmu.c b/drivers/thermal/imx_tmu.c
+index 4721cfbc0218..c7fe0f07a607 100644
+--- a/drivers/thermal/imx_tmu.c
++++ b/drivers/thermal/imx_tmu.c
+@@ -570,12 +570,14 @@ static int imx_tmu_parse_fdt(struct udevice *dev)
+ {
+ 	struct imx_tmu_plat *pdata = dev_get_plat(dev), *p_parent_data;
+ 	struct ofnode_phandle_args args;
+-	ofnode trips_np;
++	ofnode trips_np, cpu_thermal_np;
+ 	int ret;
+ 
+ 	dev_dbg(dev, "%s\n", __func__);
+ 
+-	pdata->polling_delay = IMX_TMU_POLLING_DELAY_MS;
++	cpu_thermal_np = ofnode_path("/thermal-zones/cpu-thermal");
++	pdata->polling_delay = ofnode_read_u32_default(cpu_thermal_np, "polling-delay",
++						       IMX_TMU_POLLING_DELAY_MS);
+ 
+ 	if (pdata->zone_node) {
+ 		pdata->regs = (union tmu_regs *)dev_read_addr_ptr(dev);
 
-In any case,
+---
+base-commit: eac52e4be4e234d563d6911737ee7ccdc0ada1f1
+change-id: 20240304-fix-thermal-driver-issue-34004526aa4f
 
-Reviewed-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+Best regards,
+-- 
+Benjamin Hahn <B.Hahn@phytec.de>
 
-Thanks,
-Quentin
