@@ -4,83 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7642C5478C
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 11:16:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6FB8C48BF6
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 11:24:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2CE3F87E92;
-	Mon,  4 Mar 2024 12:16:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 0751E87BA8;
+	Mon,  4 Mar 2024 12:24:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Jc4Q+tTT";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FtO5Drv7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6667C87F10; Mon,  4 Mar 2024 12:16:49 +0100 (CET)
-Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
- [IPv6:2a00:1450:4864:20::22d])
+ id 9994C87F74; Mon,  4 Mar 2024 12:24:52 +0100 (CET)
+Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
+ [IPv6:2607:f8b0:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D4EA87E4D
- for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 12:16:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 369BE87BA8
+ for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 12:24:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-2d09cf00214so53942521fa.0
- for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 03:16:45 -0800 (PST)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pf1-x435.google.com with SMTP id
+ d2e1a72fcca58-6e59bc0d8eeso781055b3a.0
+ for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 03:24:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709551005; x=1710155805; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=jCGJKi3vfYkuo65wd51kNl6IuqX2ZLLig1NQjKjKvvg=;
- b=Jc4Q+tTT+wc22Q3adVtLuE3wT4gGZ1wtfKCCj646x0OCp4DLD+cITjS6azekLwNANy
- qbKr07hFj6P6/4ip49PL8LVT76NJDyE+6Kdnwk3oNl0oe9NS87tBHZGkB/HkTDuRGKXQ
- +lC41n5BL0MVPRdl+rGNMvM3uOKY5gxLQXIRqmMgfWfGMJGd+hC2hTOH8OS22b/lHSBl
- NIrwahkUOZ2bDAjECfNbD7M6Ph4SvcRzx51BI0flWjKpXMQgkhbqWpPHByB5qgCjKG+A
- Lzrjd610ex/ZcetB4ztURIQtz0H+9xdK8EJcjCNhMVFu0HnqtefcXptx1g3IdQrO4R1i
- 3k3A==
+ d=gmail.com; s=20230601; t=1709551488; x=1710156288; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=H0cgMRtTAuZBD5nDBR0Z3s/Gkx7xJpm0/yjKhqd1zcA=;
+ b=FtO5Drv7g5W/VQnJYCQjcob6yP/AvRQpEXml4mHvHCehB5d+klluwo56spL2SJxs98
+ Ns+sK3Ccksxi/DznFGzrbb2DzTVYDU3g+LWSlhw8BC6orBJiGdVLnJTicWwxrQeQJbVr
+ lYNZRDiGdWThgGNzLbcbkMFUG72shwyqNE8O+QS60G3O4hPXVOoPv+QEdDwfM2c5pdgM
+ fYldYrA2qgRcWaeieuMviVYm/rffjMNOAlJK/qYMGOmg9bZ7gfaWnWhPDhOUKuBS7Zko
+ BF8de6p0r7GxqlJ9aMSsWDyGqZAdYnF7/UdPhr1kZzWhmbKR6R33Ctq/4tQlKEB/yko0
+ GyGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709551005; x=1710155805;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=jCGJKi3vfYkuo65wd51kNl6IuqX2ZLLig1NQjKjKvvg=;
- b=KhA2WaQ0ViVWe+hZWh31kpTTCJTN1zCwCJbnI2P1HRHF7zt627kRZqm3trFr7jB0Xz
- WVmf7xBc7SpYI38iZyEXqgcHk7uzPXs7PNJGqcwJVfc1JIWPv+UrvfaH6EKoUfWW5Bza
- P56lxJOPMrX5cAmiT7bZ864mxbrLOWoXPF+rfeE1EE7SvFh/m0G0LmgejhwwFDrqx6hY
- UWDpzeoff5+1Ood2KXzGomBX/y+GSiLGCNxrfk+VF9BKMkgsAUNdZB+1bPed/3f4EB5r
- KScFl2FWlqXLA/typ5xuCXMf1PjUZPE5xD/6GchadTYYISePWJMoezJA/d3qWJZujYHZ
- ueJw==
-X-Gm-Message-State: AOJu0Yy+Om/Uq1VQ+QNx51ATHrVjAiNZPeTGamSM1BvPPeEBdnyDmD9s
- KWEaJvHv6XIX3KOUQL8gmlQ4aWDorSlj6vK+6jvhgvAuGhSocDrND1OpGr8NhOBBUXAkSe58KkT
- LQmAlIdlyQFwTIXxvcyyrQc/w3YbwBcTB4lxfcw==
-X-Google-Smtp-Source: AGHT+IEhC7PD/7dlXXfetnmlvbwGa4NzyrFNlQQKs+/TopYioCDo5wqqvDXFwK3Nhqj75hNVaJgYQw0l4F7yYxhASfA=
-X-Received: by 2002:ac2:4834:0:b0:513:1829:57f with SMTP id
- 20-20020ac24834000000b005131829057fmr5959048lft.5.1709551004918; Mon, 04 Mar
- 2024 03:16:44 -0800 (PST)
+ d=1e100.net; s=20230601; t=1709551488; x=1710156288;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=H0cgMRtTAuZBD5nDBR0Z3s/Gkx7xJpm0/yjKhqd1zcA=;
+ b=TtTf7jDL7DHjUzeq8CRHkNa7xKuVV2DqHOUIv1jjUIdu8eoyNWwUfNv3rrZWsemFvd
+ B1ZhvP/fCFljC6D4uhtsjcBxgdtYW3iv7it2O2i1BuaZSQVzRzwPRrgjf6g8kZBZMZnA
+ zHxOqRpfFlkTYbgxtAg10mDTDRNGM/nZjNXPFR/65omSAPgoWdlysGQm/LOIadJY/kW2
+ 5gwCJiSez1Pb98qmxLl8uBUl5KxRIo8ep6iDI7Ehd9euGH2/YBEQ990XqesNmISOQQ7T
+ ndrclKrG/GNAYtYPg5ZxwJeCSAk09F74KrjMExCGqq7G0ccJntKpOTXFXyJtXP5BBYrt
+ CM3Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWE+ZL3slBwRkAMftGeybk4vXQtmiSUe6VwGic0U36l/tVpW4FRpwGPtW5cLoCUA54i6sGlMrEIx2+9SyEG8VJ1qW1uKg==
+X-Gm-Message-State: AOJu0YyuoExuan+R3yYA0ME+rPOl4rmlG5Kgu81wMXXE9YUuwvc4S7y9
+ hmMoL2GTH9Mq+TuTkL2FOPB/adjc8M0UJhKHTSem5Hski5RrxwA0Aiu0y0mjnFF8k7nxzTM52RB
+ Gi9g94MDnFjkpHut/Up04u7VAyjI=
+X-Google-Smtp-Source: AGHT+IFY2tlsvImAFY2qjQ9m76ukVO6GCZvRVCZpqh72GWJxy+gU5CvRmz9jDXr4rPS6LlsXmoW66ORczymQEqhtrtQ=
+X-Received: by 2002:a17:90a:d98b:b0:296:db75:c240 with SMTP id
+ d11-20020a17090ad98b00b00296db75c240mr7089140pjv.1.1709551488553; Mon, 04 Mar
+ 2024 03:24:48 -0800 (PST)
 MIME-Version: 1.0
-References: <20240302220108.720637-1-igor.opaniuk@gmail.com>
-In-Reply-To: <20240302220108.720637-1-igor.opaniuk@gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 4 Mar 2024 13:16:08 +0200
-Message-ID: <CAC_iWjK+f-ZBKT=Mf6629HxV=NCgoZ_taRMFhGK04aA1Xw-BCA@mail.gmail.com>
-Subject: Re: [PATCH v2 0/5] TEE: minor cleanup
-To: Igor Opaniuk <igor.opaniuk@gmail.com>
-Cc: u-boot@lists.denx.de, AKASHI Takahiro <takahiro.akashi@linaro.org>, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Bin Meng <bmeng@tinylab.org>, 
- Etienne Carriere <etienne.carriere@foss.st.com>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jens Wiklander <jens.wiklander@linaro.org>, 
- Jorge Ramirez-Ortiz <jorge@foundries.io>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Roger Knecht <rknecht@pm.me>, Sean Edmond <seanedmond@microsoft.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+References: <20240222093607.3085545-1-sumit.garg@linaro.org>
+ <170929783825.70492.4756963077870833230.b4-ty@konsulko.com>
+ <CAOMZO5CjeUhFfLBs3FRt4Hbk0ULXrRoOZaZqvSRzWbNySdsOhQ@mail.gmail.com>
+ <CAFA6WYMf7Z-sW8pSHzYUJ_O9fqfunBEhyigJj3BW-DYuujxDbw@mail.gmail.com>
+In-Reply-To: <CAFA6WYMf7Z-sW8pSHzYUJ_O9fqfunBEhyigJj3BW-DYuujxDbw@mail.gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Mon, 4 Mar 2024 08:24:36 -0300
+Message-ID: <CAOMZO5AhTGskhEX9mv8oMJ1k4cbZzfZ2Vck5VcrVrYUvBA2r7w@mail.gmail.com>
+Subject: Re: [PATCH v6 00/11] An effort to bring DT bindings compliance within
+ U-Boot
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, peng.fan@nxp.com, 
+ marex@denx.de, Bryan Brattlof <bb@ti.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,45 +94,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Igor,
+Hi Sumit,
 
-On Sun, 3 Mar 2024 at 00:01, Igor Opaniuk <igor.opaniuk@gmail.com> wrote:
->
->
-> - Address some spelling errors and typos
-> - Support CMD_OPTEE_RPMB for SANDBOX configurations and add python tests
-> - Remove common.h inclusion for drivers/tee
->
-> Changes in v2:
-> - Fixed chimp_optee.c:37:9: error: implicit declaration of function 'memset'
-> - Applied R-b and T-b tags
+On Mon, Mar 4, 2024 at 3:33=E2=80=AFAM Sumit Garg <sumit.garg@linaro.org> w=
+rote:
 
-https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines/19808
-this seems to have a few failures
+> I think you also need Bryan's patch [1] to be incorporated as well.
+> Give it a try and let me know if you still see any further issues.
+>
+> [1] https://patchwork.ozlabs.org/project/uboot/patch/20240205-am62px-wip-=
+rebasing-v3-11-04cbb42eaa6f@ti.com/
 
-Cheers
-/Ilias
->
-> Igor Opaniuk (5):
->   tee: optee: fix description in Kconfig
->   tee: sandbox: fix spelling errors
->   cmd: optee_rpmb: build cmd for sandbox
->   test: py: add optee_rpmb tests
->   tee: remove common.h inclusion
->
->  cmd/Kconfig                        |  4 +++-
->  drivers/tee/broadcom/chimp_optee.c |  3 ++-
->  drivers/tee/optee/Kconfig          |  2 +-
->  drivers/tee/optee/core.c           |  1 -
->  drivers/tee/optee/i2c.c            |  1 -
->  drivers/tee/optee/rpmb.c           |  1 -
->  drivers/tee/optee/supplicant.c     |  2 +-
->  drivers/tee/sandbox.c              | 10 +++++-----
->  drivers/tee/tee-uclass.c           |  1 -
->  test/py/tests/test_optee_rpmb.py   | 20 ++++++++++++++++++++
->  10 files changed, 32 insertions(+), 13 deletions(-)
->  create mode 100644 test/py/tests/test_optee_rpmb.py
->
-> --
-> 2.34.1
->
+I applied this patch, but now I get a different error:
+
+  BINMAN  .binman_stamp
+Wrote map file './itb.map' to show errors
+binman: Filename 'freescale/imx8mp-evk.dtb' not found in input path
+(.,.,./board/freescale/imx8mp_evk,arch/arm/dts)
+(cwd=3D'/home/fabio/denx/u-boot')
+make: *** [Makefile:1126: .binman_stamp] Error 1
