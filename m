@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44676C48BF6
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 15:31:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A200DC5478C
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 15:31:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B7A7388081;
-	Mon,  4 Mar 2024 16:28:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 36B9F8813F;
+	Mon,  4 Mar 2024 16:29:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TIY+l80k";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="G9S8vYrA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 85C8188095; Mon,  4 Mar 2024 16:28:52 +0100 (CET)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
+ id CB52F8813F; Mon,  4 Mar 2024 16:28:57 +0100 (CET)
+Received: from mail-qt1-x82c.google.com (mail-qt1-x82c.google.com
+ [IPv6:2607:f8b0:4864:20::82c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8977088035
- for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 16:28:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C5A7D880A7
+ for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 16:28:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-6906a7870f3so6271396d6.0
- for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 07:28:50 -0800 (PST)
+Received: by mail-qt1-x82c.google.com with SMTP id
+ d75a77b69052e-42ef605f8e5so2934741cf.3
+ for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 07:28:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1709566129; x=1710170929; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1709566134; x=1710170934; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=gYxCje38xLmnixFopIjcULpGN1QvVpGHBiE6EYovhgs=;
- b=TIY+l80k3bUWCZFp65yKZ44qrEuMXEwHAkNLEPqdPGiVm3lhVf3P0oJGb/A3OPnyYK
- oeZ4NGarZp8fOx5oNWrj0cdKojOaJDUVdB3cSV7lp/rxPmDjaV7Me/8axdYIMH/0A6Gt
- ScZTbN3pirmtrzCFpn0669WZluoEEgOjR8JWo=
+ bh=IOHDWE3u/immNs/NJ2q/N51CabmzM7HOqHq9zrtKjcQ=;
+ b=G9S8vYrAohCRbikWLe1mfD6sSPogLzvNnCRKZVu2WxiK6NToeH4FkVUy3PCY4Mv8lR
+ Kp8CShqouu4O7ahAkrl7lXHzmWZAV95F6vxAvjpQ8v8hCbnTVKxy6o8A3E+g9YvDauOH
+ OX1qE/jDJCfGuTEOr6/jACgltoqkwgDPH4YdE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709566129; x=1710170929;
+ d=1e100.net; s=20230601; t=1709566134; x=1710170934;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gYxCje38xLmnixFopIjcULpGN1QvVpGHBiE6EYovhgs=;
- b=KiuohTZPvTC1C6RU0cQS/d5AGIHU/Q5Gr/EjflUMdfVv0DUZTXkQIaWljgfK5lXl2Y
- Bb0PxUr+8ShDJpcsDSYWZRAXwrOUJYBlt7YBkm67Ve69nEPMzrr+TeXqzwRjXLMKXjCy
- ZFax5UhFwMiOcXd6/WLID5tYkFcvG+EJT0kZFfHbOSn7GW7SFkI7G3Ajli7A0QWulsh1
- EeTMHGN1N9qS3E5FYebDl27WtPlBNUSAGBNMTOo5lo3s5GA1yk401JdYqE+hv80OdC8o
- Rcxl5+2pd6H2edEAnqM22+v51iJNlyxSvutgLp928x3iJxsfhZNMaBJ8rz8eRvjyiOLy
- 1ABA==
+ bh=IOHDWE3u/immNs/NJ2q/N51CabmzM7HOqHq9zrtKjcQ=;
+ b=wbBnZtFRbwtatOuXKT5mbaU/tm28XnprbNSnzbHuKkBBKr47MVijR2hhcVmHHaCvSz
+ XUS61BMhPuHAmeQs4HFm2dA/K4lg6CdR5VxBBZdzPIsJwTjs2MbePqOAr2+gitKeopBS
+ aTLRFoElO6fucXXh303kS0ByMVwvf+7HBNWVrc2dmOpp+5a009bUzo3cGXJ4FwJ6Otoj
+ Hjcpn4f5zCiL0P12jgI5sB4exmESt8AM8s6xqGexSOdksPUfUtyuN0Xr0z2AFdiKyqit
+ J71DbxYDedhyPeACSXymjNik0joZ1xsmmy7BYogtdqKd3Vv3C7iAI/r9+9109rHPGprh
+ De3w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUycmnd7a5UsozfrasWLzqZlEroT2OYfX6MBAIn+jjrVFb4R8q7j8zvieJU2oBtXtG+jv84LCjpzYZdRoKxQsXtAYYvGw==
-X-Gm-Message-State: AOJu0YwbLruqd0Z0pDMJMuD2szgyFZX6dRKGL0GA5XWClPftoKZUJ3dM
- VhFpq31WL6pp3n486cujQ7/0SfuzWRxW9DL43ZoKexWyHN4TsUWYKdFth/haqZk=
-X-Google-Smtp-Source: AGHT+IGCNNWyX6eGm8qQNKEY0QAs74VJn7VfD85FMZ1Buefu1M7kK4O47f22sZ9bLt2UMoZuIA62gQ==
-X-Received: by 2002:ad4:5890:0:b0:68f:ddf5:abac with SMTP id
- dz16-20020ad45890000000b0068fddf5abacmr8774087qvb.7.1709566129449; 
- Mon, 04 Mar 2024 07:28:49 -0800 (PST)
+ AJvYcCXTfPeIjFUSefZgWC2ZtSwGVKRhGlZIsqByJLlbtZgeDfrSFDYQQbynVfSeXIY0LtYx5A06WQThClljcye5BqgFkw8uuw==
+X-Gm-Message-State: AOJu0YwrSfyLhs6gJr85s5T3so0vRdT+OvMzEfQGWwcBgJHva+ObQZVB
+ jXCWXIdb3qbY9KmgnDZvbZsz5Kg8rZlU7HcTQvpdwoM+OND/fisd2kIXpmg2scQ=
+X-Google-Smtp-Source: AGHT+IE6rmv6UTobN3ewQXzu/2fZSoliFUq9JDMjX0myctV7dUreXDHNLNLXRKlzGfsOzGwSWxbL1g==
+X-Received: by 2002:ac8:5d8a:0:b0:42e:eba2:fac9 with SMTP id
+ d10-20020ac85d8a000000b0042eeba2fac9mr5501151qtx.19.1709566134624; 
+ Mon, 04 Mar 2024 07:28:54 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-007f-0000-0000-0000-1002.res6.spectrum.com.
  [2603:6081:7b00:7f::1002]) by smtp.gmail.com with ESMTPSA id
- y17-20020a0cead1000000b0069051255b1bsm2013664qvp.77.2024.03.04.07.28.48
+ q13-20020a05622a04cd00b0042ed1f20e61sm2895905qtx.24.2024.03.04.07.28.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Mar 2024 07:28:49 -0800 (PST)
-Date: Mon, 4 Mar 2024 10:28:47 -0500
+ Mon, 04 Mar 2024 07:28:54 -0800 (PST)
+Date: Mon, 4 Mar 2024 10:28:52 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Maksim Kiselev <bigunclemax@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH v1] pci-host-ecam-generic: Convert to ofnode functions
-Message-ID: <20240304152847.GG1523872@bill-the-cat>
-References: <20240214203001.150942-1-bigunclemax@gmail.com>
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Simon Glass <sjg@chromium.org>,
+ Massimo Pegorer <massimo.pegorer+oss@gmail.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2] pinctrl: Check pinconfig nodes pre-reloc status
+ recursively
+Message-ID: <20240304152852.GH1523872@bill-the-cat>
+References: <20240217120842.2381465-1-jonas@kwiboo.se>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="gj3XbKZ4pGYhLkkJ"
+ protocol="application/pgp-signature"; boundary="VHv5DdbbtDkjdyXm"
 Content-Disposition: inline
-In-Reply-To: <20240214203001.150942-1-bigunclemax@gmail.com>
+In-Reply-To: <20240217120842.2381465-1-jonas@kwiboo.se>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,39 +95,62 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---gj3XbKZ4pGYhLkkJ
+--VHv5DdbbtDkjdyXm
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Feb 14, 2024 at 11:30:01PM +0300, Maksim Kiselev wrote:
+On Sat, Feb 17, 2024 at 12:08:40PM +0000, Jonas Karlman wrote:
 
-> FDT functions is not working when OF_LIVE is enabled.
-> Convert fdt parsing functions to ofnode parsing functions
+> Pinconfig nodes normally bind recursively with PINCTRL_FULL and
+> PINCONF_RECURSIVE enabled. However, during U-Boot proper pre-relocation
+> any node marked with e.g. bootph-all will not bind unless its parent is
+> also marked for pre-reloc.
 >=20
-> Signed-off-by: Maksim Kiselev <bigunclemax@gmail.com>
+>   group1 {
+>       pinconf1 {
+>           bootph-all;
+>       };
+>   };
+>=20
+> This cause the following warning message to be shown during U-Boot
+> proper pre-reloc stage on Rockchip devices, e.g on RK3568:
+>=20
+>   ns16550_serial serial@fe660000: pinctrl_select_state_full: uclass_get_d=
+evice_by_phandle_id: err=3D-19
+>=20
+> and on RK3328:
+>=20
+>   ns16550_serial serial@ff130000: pinctrl_select_state_full: uclass_get_d=
+evice_by_phandle_id: err=3D-19
+>=20
+> Check pinconfig nodes pre-reloc status recursively to fix this and to
+> make pinconfig_post_bind work same at both U-Boot proper pre-reloc and
+> at TPL/SPL stage.
+>=20
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 
 Applied to u-boot/next, thanks!
 
 --=20
 Tom
 
---gj3XbKZ4pGYhLkkJ
+--VHv5DdbbtDkjdyXm
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXl6K4ACgkQFHw5/5Y0
-tyyZnQv/ZlYaMz289Irv/lkvdDNmw1IoGsfWFChDyX9kC/1+6U7ytLncejfxjX42
-OZzc1nbmIM/Bqy5qpRZpFEu+ImEHUwmVwTqXMU523Kaemnl9DP0Kq/z3OuXNMIdH
-d2N7Vy6mtZsyqL1ONYhehBUSBHxBBU0vVUhwppGs+dqXWjfN8A9tZkHUghDedhOA
-lNnLudnyaOQkbdbKergPy1go0gQ0a14uJlNpqi9lQ5HP8wfdoODHBy8uNqJ7s+7f
-nzvdX0ozW3DUJJZqFJGdcsC/lUVc5G7/2FtQUEshlFfdxwB029R/er7ma7jdpc4a
-eozdD8WQujLqIpB8wp0e8yywrqL+v38CnuQNrjpZF4HSCk/xSF1XUsyml5+uirAo
-G4mNj5ljUXMOs2UpHXdUBjJj72gpOgPx1Md/fpxbbEepo+vgX/36UCqFmYFmXyN5
-uwGuhFwITrpvuPAxeyi+p8/j7hsHEZeF5SORC1iD6BUqBbxoCQx4pYdQZ5zx7Vmg
-N4kXWsto
-=xH4R
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXl6LQACgkQFHw5/5Y0
+tywQLQwApmOW8hLGy5GjhLPpmMk0vvpITJzzmnKMoiwejVWDtV8ieX7f6u0+QXfh
+WKw+ypMNmLxClEDsjDg2Zjl3eKr/iTYLBngIDQ8YPKdZQNAJIrvIFqLY/JYkUvUV
+dAVHv+CXo8JTboAs1oA4HOrocO8Y6FnnbIKNffjjZSIvn0r2qgqDu8PlwC6eqg2+
+a8upvIyGlTg3v+hEL4fQ2z6a0qZfztcV6Ujni2+s5BtNJdAJrUJZ59SdojrStZK2
+YDmamXzsc8ETyobKscrnO7yK3hM1rGDNaUUOLyUFH82TtEMv+vTKG99xS0Y9oVBy
+p58dvbG6CX02RQ2jqbnSWij1OfbQA25Eq9OAJOPvjfPmr+TVRIt4Hk52tXaMTLV6
+v2kM3uIasx4zcfPI6SeBGr/6JMg7sX2l1pn5hJsFPfh3qdeDFCZqeqXLhFnAFeZ1
+3h4K7gITefDglFzsEkI7Ke6wynYjadllClbJpkfHqfDYp9lVB9Q4vVyUTLhnbRi5
+BMEzYSIi
+=xWaB
 -----END PGP SIGNATURE-----
 
---gj3XbKZ4pGYhLkkJ--
+--VHv5DdbbtDkjdyXm--
