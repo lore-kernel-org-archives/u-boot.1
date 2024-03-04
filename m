@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53262C5478C
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 17:13:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6BF8C5478C
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 17:13:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 95BFF88173;
-	Mon,  4 Mar 2024 18:09:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4D3588817B;
+	Mon,  4 Mar 2024 18:09:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OhiH9KOx";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="e07sSvIN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1EDAF87FC9; Mon,  4 Mar 2024 17:52:04 +0100 (CET)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id 1A57587FC6; Mon,  4 Mar 2024 17:52:05 +0100 (CET)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C572B87FED
- for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 17:51:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8348187E63
+ for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 17:52:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-412ea23a750so1008735e9.0
- for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 08:51:59 -0800 (PST)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-412e66b801fso6042975e9.3
+ for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 08:52:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709571119; x=1710175919; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1709571121; x=1710175921; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=Y/+SVMMI5waVWQXUrNSncjcixWniskosBnovcw0l6e0=;
- b=OhiH9KOx4KSnTGy+NPx8eDVbE9LSdor2XBiO8/eQIJTmm6XoSTQkYMakTLkOHPl5mv
- bbwn5t+vJO3f5rV3WUixgY+tdSg7aEz3PFbrVPrdXsRRgJAX0MsHKAH3iaAs3f4ymsya
- hCY1chB6fdqsGgLTrgfnhyc4mI48eDcp3OssAxXBa/S/i/K0jZ6mfInbS0BktbPqzZif
- WglYSOApJQkwLcNxs8gcw5kMeGDAmlthVG2me4mhv4sal9ZvDHiXgVFbQLea+mBt9z3Y
- tr7J2EqgqHEH3mnv5KYztiVwXLhGZe/69PNul4Yjgwl4qbe5TOt5OBITuSb0+zzqdqJS
- /IKQ==
+ :reply-to; bh=ffIVDJz1y7OM3JJ24KwM/uzflOAKoEDYymvtlDYXFbg=;
+ b=e07sSvINZXbVz3ZiKCLgTlEmxyv0SpdiUVqAnlDFOMvcfGkrW/wCA78TEif4u6wTFw
+ liklhzvCtpHOn1mYtXdT0VP/CySXsrE06BkmLbxl83fDcLLWt+LVPeq9VcTZ/1ELv07s
+ r004UkERNrcQWvoJsrRmmvjHPdat17I2d9DFsIhrFnrzNZOUiZD4/jfh4NA/2LZbjN7Y
+ /1T255yYNZr1VmX9+XV+KIHG5iHxaLeZMXTyVuvhRKHWTguPQniJxmq36Tcr2SE4umf9
+ fGhZlm3NxO24pBdWDKiQVSw8NLYE8yRHhxmtZN0FTnx+3Ku55eeu7DuoJWKKpIU7Dguz
+ 4Ang==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709571119; x=1710175919;
+ d=1e100.net; s=20230601; t=1709571121; x=1710175921;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Y/+SVMMI5waVWQXUrNSncjcixWniskosBnovcw0l6e0=;
- b=eHxDk7U16oQGGurFqs0roUZwCgpV4jimfBVVOkVBguUf5EFIKJmycVMN+3J04eMCol
- cEjdqriFA/RbysWuk9d5tDm14U68Xppr6o1R+h9HUIVjXLG2wOZUpHlJek2V0Qeu9vCB
- MJCTb70vtbLUdnJfm3coJky0dDlqeOqrRpZV0RmukD8vzaDPqHF4II4xf5sTRWGjl3Du
- 06Pf83tk9WLR+12CTc1PE8ny+wse2FqS0Pf2CbA7w8CiFs1+v5azcLI4Q9FRgjnyJM8u
- gjpG2ReLKb/Usw1rGHNWTpp93T7m9AtUvdWeohTOYNAhOJbwMmRrXgrEsqIhaj/Jb2UC
- fWaw==
-X-Gm-Message-State: AOJu0YyaGRry9AmZuSifSwgcv2yfVHc8RKiAoUDalAF3kxOE3Fuy7E1y
- +UJdtTzVsAq84OkbECklFqBnxmufhav0WxPKOmWjm8H02J7QfQ72rdTMBrqx5Kw=
-X-Google-Smtp-Source: AGHT+IFIwueQ3edNeDzUQidXqD7AnQcbtew6iCsDljmpT3CVAYKXRYBmo6RdtFZVrVnNMW7hg/i0aw==
-X-Received: by 2002:a05:600c:1550:b0:412:db74:41f8 with SMTP id
- f16-20020a05600c155000b00412db7441f8mr48907wmg.17.1709571119125; 
- Mon, 04 Mar 2024 08:51:59 -0800 (PST)
+ bh=ffIVDJz1y7OM3JJ24KwM/uzflOAKoEDYymvtlDYXFbg=;
+ b=g2IV+rAJs6UHLtrs5Wu6QLzYBDFt/5oE/RJ3IWU8LUvwqHmM+Zsrk1gdc1Rk7GQtaJ
+ snUjibPuXVD/PX8qKCg8TFDwFydU4fszzh0OYIi2ZGpjFQ8Ru24Wcik0N7RZWB9MqyzW
+ JUP6mhX9CIFAmw/uVK9z5Gne/f0vfSNb+JSU/aHSwI3CUYr9r3YqOZBQ4MM83OprdeEZ
+ TIpNSZAmH7svo2sRPH3V0bi2s8IjBmhOKbSE2N3gVbkvhFPcBqXX7ltXGShQIBS6adKz
+ 4YTsTXfroOwhit5Gp8stQf0IwBUeLm3KeugYtGwGwxdCtdRnsDAdVJQsw9ycCjyFpehO
+ s1Iw==
+X-Gm-Message-State: AOJu0YzgCDM1SqwqhzEUPLISk8X9SHX0oqNTdzxGCQUWRfT2PEceJwI9
+ 5eaU0k2fqwTHZ/0ajhJDCsqmUOD5zrrdJptko/+YYX9vcgNgRDebvImhEpiqHAk=
+X-Google-Smtp-Source: AGHT+IG8km1VoKJfK6LIaFVD9WX/dZDukT84YSowXR7wZAp5buqvdd8X1TOYCzPdPgHzvGg+GTATcA==
+X-Received: by 2002:a05:600c:3c86:b0:412:8d98:78a with SMTP id
+ bg6-20020a05600c3c8600b004128d98078amr8107504wmb.13.1709571120734; 
+ Mon, 04 Mar 2024 08:52:00 -0800 (PST)
 Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- c21-20020a05600c0a5500b00412cb0961fasm10598517wmq.6.2024.03.04.08.51.57
+ c21-20020a05600c0a5500b00412cb0961fasm10598517wmq.6.2024.03.04.08.51.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Mar 2024 08:51:58 -0800 (PST)
+ Mon, 04 Mar 2024 08:52:00 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Mon, 04 Mar 2024 16:51:31 +0000
-Subject: [PATCH RFC 23/26] dt-bindings: drop clock headers
+Date: Mon, 04 Mar 2024 16:51:32 +0000
+Subject: [PATCH RFC 24/26] dt-bindings: drop remaining device headers
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240304-b4-upstream-dt-headers-v1-23-b7ff41925f92@linaro.org>
+Content-Transfer-Encoding: 8bit
+Message-Id: <20240304-b4-upstream-dt-headers-v1-24-b7ff41925f92@linaro.org>
 References: <20240304-b4-upstream-dt-headers-v1-0-b7ff41925f92@linaro.org>
 In-Reply-To: <20240304-b4-upstream-dt-headers-v1-0-b7ff41925f92@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -102,13 +102,13 @@ Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io,
  uboot-stm32@st-md-mailman.stormreply.com, uboot-snps-arc@synopsys.com, 
  Caleb Connolly <caleb.connolly@linaro.org>
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=44813;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=57159;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=WjsynvMSQzUmlh1QiQ/boRtu0hi3Zj/aCiEsN7GD+k0=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtSnfziMrqQJij1OzpvEtMf66/o/s1/nb2K7WV47/e7b4
- jdruPtiOkpZGAQ5GGTFFFnETyyzbFp72V5j+4ILMHNYmUCGMHBxCsBEEpcx/E9UEuD4uEciesu/
- XRXrMhgTJ7Kp79W7dnEf36rrE1KZlwkyMswQvW34XC7kasJyeb2mE9NvTWv+Ga5QfbA7Wq01dtu
- 1e38B
+ bh=+SaR/YUeWm39ABYr58Q5GGX1LKEkWFRSigvbnu2j7NE=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtSnfzh6JWTqZ+Ve7imNtGk/d6r9crXEvjrtlQG5xdtq/
+ Tt9LuR1lLIwCHIwyIopsoifWGbZtPayvcb2BRdg5rAygQxh4OIUgInEtjMy9K3fJ9ftpGity3Zo
+ xe2duenMH9b9fbU+Tj8kwGKJmfqOZIb/BWtF/v4vjkzn75hk+uLqJZGGgo1H139I3e/3UPfH8rv
+ SqQA=
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-Mailman-Approved-At: Mon, 04 Mar 2024 18:09:04 +0100
@@ -130,539 +130,950 @@ X-Virus-Status: Clean
 
 Drop in favour of dts/upstream.
 
-Clock headers for remaining smaller vendors that are compatible with
-dts/upstream.
+Remaining device headers for small vendors
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- include/dt-bindings/clock/actions,s700-cmu.h      | 118 -------
- include/dt-bindings/clock/actions,s900-cmu.h      | 129 --------
- include/dt-bindings/clock/agilex-clock.h          |  71 -----
- include/dt-bindings/clock/ast2600-clock.h         |  62 ----
- include/dt-bindings/clock/boston-clock.h          |  12 -
- include/dt-bindings/clock/fsl,qoriq-clockgen.h    |  15 -
- include/dt-bindings/clock/lpc32xx-clock.h         |  58 ----
- include/dt-bindings/clock/maxim,max77802.h        |  22 --
- include/dt-bindings/clock/nuvoton,npcm7xx-clock.h |  46 ---
- include/dt-bindings/clock/rv1108-cru.h            | 356 ----------------------
- include/dt-bindings/clock/starfive,jh7110-crg.h   | 258 ----------------
- include/dt-bindings/clock/versaclock.h            |  13 -
- include/dt-bindings/clock/vf610-clock.h           | 202 ------------
- 13 files changed, 1362 deletions(-)
+ include/dt-bindings/arm/coresight-cti-dt.h         |  37 -----
+ include/dt-bindings/arm/ux500_pm_domains.h         |  15 --
+ include/dt-bindings/bus/moxtet.h                   |  16 --
+ include/dt-bindings/display/tda998x.h              |   8 -
+ include/dt-bindings/gpio/aspeed-gpio.h             |  51 ------
+ include/dt-bindings/gpio/uniphier-gpio.h           |  18 --
+ .../dt-bindings/interrupt-controller/apple-aic.h   |  15 --
+ include/dt-bindings/interrupt-controller/arm-gic.h |  23 ---
+ include/dt-bindings/interrupt-controller/irq-st.h  |  30 ----
+ .../dt-bindings/interrupt-controller/irqc-rzg2l.h  |  25 ---
+ .../dt-bindings/interrupt-controller/mips-gic.h    |   9 -
+ include/dt-bindings/leds/leds-netxbig.h            |  18 --
+ include/dt-bindings/leds/leds-ns2.h                |   9 -
+ include/dt-bindings/leds/leds-pca9532.h            |  18 --
+ include/dt-bindings/media/tda1997x.h               |  74 ---------
+ include/dt-bindings/media/video-interfaces.h       |  16 --
+ include/dt-bindings/mfd/atmel-flexcom.h            |  15 --
+ include/dt-bindings/mfd/dbx500-prcmu.h             |  84 ----------
+ include/dt-bindings/net/mscc-phy-vsc8531.h         |  31 ----
+ include/dt-bindings/net/qca-ar803x.h               |  13 --
+ include/dt-bindings/phy/phy-am654-serdes.h         |  13 --
+ include/dt-bindings/phy/phy-cadence.h              |  24 ---
+ include/dt-bindings/pinctrl/apple.h                |  13 --
+ include/dt-bindings/pinctrl/dra.h                  |  79 ---------
+ include/dt-bindings/power/owl-s700-powergate.h     |  19 ---
+ include/dt-bindings/power/raspberrypi-power.h      |  41 -----
+ .../dt-bindings/regulator/dlg,da9063-regulator.h   |  16 --
+ include/dt-bindings/regulator/maxim,max77802.h     |  18 --
+ include/dt-bindings/reset/actions,s700-reset.h     |  34 ----
+ include/dt-bindings/reset/actions,s900-reset.h     |  65 --------
+ include/dt-bindings/reset/altr,rst-mgr-a10.h       | 110 -------------
+ include/dt-bindings/reset/altr,rst-mgr-s10.h       |  96 -----------
+ include/dt-bindings/reset/altr,rst-mgr.h           |  82 ---------
+ include/dt-bindings/reset/nuvoton,npcm7xx-reset.h  |  91 ----------
+ .../dt-bindings/reset/raspberrypi,firmware-reset.h |  13 --
+ include/dt-bindings/reset/sama7g5-reset.h          |  10 --
+ include/dt-bindings/reset/snps,hsdk-reset.h        |  17 --
+ include/dt-bindings/reset/starfive,jh7110-crg.h    | 183 ---------------------
+ include/dt-bindings/sound/apq8016-lpass.h          |   9 -
+ include/dt-bindings/sound/tlv320aic31xx.h          |  14 --
+ 40 files changed, 1472 deletions(-)
 
-diff --git a/include/dt-bindings/clock/actions,s700-cmu.h b/include/dt-bindings/clock/actions,s700-cmu.h
+diff --git a/include/dt-bindings/arm/coresight-cti-dt.h b/include/dt-bindings/arm/coresight-cti-dt.h
 deleted file mode 100644
-index 3e1942996724..000000000000
---- a/include/dt-bindings/clock/actions,s700-cmu.h
+index 61e7bdf8ea6e..000000000000
+--- a/include/dt-bindings/arm/coresight-cti-dt.h
 +++ /dev/null
-@@ -1,118 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0
-- *
-- * Device Tree binding constants for Actions Semi S700 Clock Management Unit
-- *
-- * Copyright (c) 2014 Actions Semi Inc.
-- * Author: David Liu <liuwei@actions-semi.com>
-- *
-- * Author: Pathiban Nallathambi <pn@denx.de>
-- * Author: Saravanan Sekar <sravanhome@gmail.com>
-- */
--
--#ifndef __DT_BINDINGS_CLOCK_S700_H
--#define __DT_BINDINGS_CLOCK_S700_H
--
--#define CLK_NONE			0
--
--/* pll clocks */
--#define CLK_CORE_PLL			1
--#define CLK_DEV_PLL			2
--#define CLK_DDR_PLL			3
--#define CLK_NAND_PLL			4
--#define CLK_DISPLAY_PLL			5
--#define CLK_TVOUT_PLL			6
--#define CLK_CVBS_PLL			7
--#define CLK_AUDIO_PLL			8
--#define CLK_ETHERNET_PLL		9
--
--/* system clock */
--#define CLK_CPU				10
--#define CLK_DEV				11
--#define CLK_AHB				12
--#define CLK_APB				13
--#define CLK_DMAC			14
--#define CLK_NOC0_CLK_MUX		15
--#define CLK_NOC1_CLK_MUX		16
--#define CLK_HP_CLK_MUX			17
--#define CLK_HP_CLK_DIV			18
--#define CLK_NOC1_CLK_DIV		19
--#define CLK_NOC0			20
--#define CLK_NOC1			21
--#define CLK_SENOR_SRC			22
--
--/* peripheral device clock */
--#define CLK_GPIO			23
--#define CLK_TIMER			24
--#define CLK_DSI				25
--#define CLK_CSI				26
--#define CLK_SI				27
--#define CLK_DE				28
--#define CLK_HDE				29
--#define CLK_VDE				30
--#define CLK_VCE				31
--#define CLK_NAND			32
--#define CLK_SD0				33
--#define CLK_SD1				34
--#define CLK_SD2				35
--
--#define CLK_UART0			36
--#define CLK_UART1			37
--#define CLK_UART2			38
--#define CLK_UART3			39
--#define CLK_UART4			40
--#define CLK_UART5			41
--#define CLK_UART6			42
--
--#define CLK_PWM0			43
--#define CLK_PWM1			44
--#define CLK_PWM2			45
--#define CLK_PWM3			46
--#define CLK_PWM4			47
--#define CLK_PWM5			48
--#define CLK_GPU3D			49
--
--#define CLK_I2C0			50
--#define CLK_I2C1			51
--#define CLK_I2C2			52
--#define CLK_I2C3			53
--
--#define CLK_SPI0			54
--#define CLK_SPI1			55
--#define CLK_SPI2			56
--#define CLK_SPI3			57
--
--#define CLK_USB3_480MPLL0		58
--#define CLK_USB3_480MPHY0		59
--#define CLK_USB3_5GPHY			60
--#define CLK_USB3_CCE			61
--#define CLK_USB3_MAC			62
--
--#define CLK_LCD				63
--#define CLK_HDMI_AUDIO			64
--#define CLK_I2SRX			65
--#define CLK_I2STX			66
--
--#define CLK_SENSOR0			67
--#define CLK_SENSOR1			68
--
--#define CLK_HDMI_DEV			69
--
--#define CLK_ETHERNET			70
--#define CLK_RMII_REF			71
--
--#define CLK_USB2H0_PLLEN		72
--#define CLK_USB2H0_PHY			73
--#define CLK_USB2H0_CCE			74
--#define CLK_USB2H1_PLLEN		75
--#define CLK_USB2H1_PHY			76
--#define CLK_USB2H1_CCE			77
--
--#define CLK_TVOUT			78
--
--#define CLK_THERMAL_SENSOR		79
--
--#define CLK_IRC_SWITCH			80
--#define CLK_PCM1			81
--#define CLK_NR_CLKS			(CLK_PCM1 + 1)
--
--#endif /* __DT_BINDINGS_CLOCK_S700_H */
-diff --git a/include/dt-bindings/clock/actions,s900-cmu.h b/include/dt-bindings/clock/actions,s900-cmu.h
-deleted file mode 100644
-index 7c1251565f43..000000000000
---- a/include/dt-bindings/clock/actions,s900-cmu.h
-+++ /dev/null
-@@ -1,129 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+
--//
--// Device Tree binding constants for Actions Semi S900 Clock Management Unit
--//
--// Copyright (c) 2014 Actions Semi Inc.
--// Copyright (c) 2018 Linaro Ltd.
--
--#ifndef __DT_BINDINGS_CLOCK_S900_CMU_H
--#define __DT_BINDINGS_CLOCK_S900_CMU_H
--
--#define CLK_NONE			0
--
--/* fixed rate clocks */
--#define CLK_LOSC			1
--#define CLK_HOSC			2
--
--/* pll clocks */
--#define CLK_CORE_PLL			3
--#define CLK_DEV_PLL			4
--#define CLK_DDR_PLL			5
--#define CLK_NAND_PLL			6
--#define CLK_DISPLAY_PLL			7
--#define CLK_DSI_PLL			8
--#define CLK_ASSIST_PLL			9
--#define CLK_AUDIO_PLL			10
--
--/* system clock */
--#define CLK_CPU				15
--#define CLK_DEV				16
--#define CLK_NOC				17
--#define CLK_NOC_MUX			18
--#define CLK_NOC_DIV			19
--#define CLK_AHB				20
--#define CLK_APB				21
--#define CLK_DMAC			22
--
--/* peripheral device clock */
--#define CLK_GPIO			23
--
--#define CLK_BISP			24
--#define CLK_CSI0			25
--#define CLK_CSI1			26
--
--#define CLK_DE0				27
--#define CLK_DE1				28
--#define CLK_DE2				29
--#define CLK_DE3				30
--#define CLK_DSI				32
--
--#define CLK_GPU				33
--#define CLK_GPU_CORE			34
--#define CLK_GPU_MEM			35
--#define CLK_GPU_SYS			36
--
--#define CLK_HDE				37
--#define CLK_I2C0			38
--#define CLK_I2C1			39
--#define CLK_I2C2			40
--#define CLK_I2C3			41
--#define CLK_I2C4			42
--#define CLK_I2C5			43
--#define CLK_I2SRX			44
--#define CLK_I2STX			45
--#define CLK_IMX				46
--#define CLK_LCD				47
--#define CLK_NAND0			48
--#define CLK_NAND1			49
--#define CLK_PWM0			50
--#define CLK_PWM1			51
--#define CLK_PWM2			52
--#define CLK_PWM3			53
--#define CLK_PWM4			54
--#define CLK_PWM5			55
--#define CLK_SD0				56
--#define CLK_SD1				57
--#define CLK_SD2				58
--#define CLK_SD3				59
--#define CLK_SENSOR			60
--#define CLK_SPEED_SENSOR		61
--#define CLK_SPI0			62
--#define CLK_SPI1			63
--#define CLK_SPI2			64
--#define CLK_SPI3			65
--#define CLK_THERMAL_SENSOR		66
--#define CLK_UART0			67
--#define CLK_UART1			68
--#define CLK_UART2			69
--#define CLK_UART3			70
--#define CLK_UART4			71
--#define CLK_UART5			72
--#define CLK_UART6			73
--#define CLK_VCE				74
--#define CLK_VDE				75
--
--#define CLK_USB3_480MPLL0		76
--#define CLK_USB3_480MPHY0		77
--#define CLK_USB3_5GPHY			78
--#define CLK_USB3_CCE			79
--#define CLK_USB3_MAC			80
--
--#define CLK_TIMER			83
--
--#define CLK_HDMI_AUDIO			84
--
--#define CLK_24M				85
--
--#define CLK_EDP				86
--
--#define CLK_24M_EDP			87
--#define CLK_EDP_PLL			88
--#define CLK_EDP_LINK			89
--
--#define CLK_USB2H0_PLLEN		90
--#define CLK_USB2H0_PHY			91
--#define CLK_USB2H0_CCE			92
--#define CLK_USB2H1_PLLEN		93
--#define CLK_USB2H1_PHY			94
--#define CLK_USB2H1_CCE			95
--
--#define CLK_DDR0			96
--#define CLK_DDR1			97
--#define CLK_DMM				98
--
--#define CLK_ETH_MAC			99
--#define CLK_RMII_REF			100
--
--#define CLK_NR_CLKS			(CLK_RMII_REF + 1)
--
--#endif /* __DT_BINDINGS_CLOCK_S900_CMU_H */
-diff --git a/include/dt-bindings/clock/agilex-clock.h b/include/dt-bindings/clock/agilex-clock.h
-deleted file mode 100644
-index f751aad4dafc..000000000000
---- a/include/dt-bindings/clock/agilex-clock.h
-+++ /dev/null
-@@ -1,71 +0,0 @@
+@@ -1,37 +0,0 @@
 -/* SPDX-License-Identifier: GPL-2.0 */
 -/*
-- * Copyright (C) 2019, Intel Corporation
+- * This header provides constants for the defined trigger signal
+- * types on CoreSight CTI.
 - */
 -
--#ifndef __AGILEX_CLOCK_H
--#define __AGILEX_CLOCK_H
+-#ifndef _DT_BINDINGS_ARM_CORESIGHT_CTI_DT_H
+-#define _DT_BINDINGS_ARM_CORESIGHT_CTI_DT_H
 -
--/* fixed rate clocks */
--#define AGILEX_OSC1			0
--#define AGILEX_CB_INTOSC_HS_DIV2_CLK	1
--#define AGILEX_CB_INTOSC_LS_CLK		2
--#define AGILEX_L4_SYS_FREE_CLK		3
--#define AGILEX_F2S_FREE_CLK		4
+-#define GEN_IO		0
+-#define GEN_INTREQ	1
+-#define GEN_INTACK	2
+-#define GEN_HALTREQ	3
+-#define GEN_RESTARTREQ	4
+-#define PE_EDBGREQ	5
+-#define PE_DBGRESTART	6
+-#define PE_CTIIRQ	7
+-#define PE_PMUIRQ	8
+-#define PE_DBGTRIGGER	9
+-#define ETM_EXTOUT	10
+-#define ETM_EXTIN	11
+-#define SNK_FULL	12
+-#define SNK_ACQCOMP	13
+-#define SNK_FLUSHCOMP	14
+-#define SNK_FLUSHIN	15
+-#define SNK_TRIGIN	16
+-#define STM_ASYNCOUT	17
+-#define STM_TOUT_SPTE	18
+-#define STM_TOUT_SW	19
+-#define STM_TOUT_HETE	20
+-#define STM_HWEVENT	21
+-#define ELA_TSTART	22
+-#define ELA_TSTOP	23
+-#define ELA_DBGREQ	24
+-#define CTI_TRIG_MAX	25
 -
--/* PLL clocks */
--#define AGILEX_MAIN_PLL_CLK		5
--#define AGILEX_MAIN_PLL_C0_CLK		6
--#define AGILEX_MAIN_PLL_C1_CLK		7
--#define AGILEX_MAIN_PLL_C2_CLK		8
--#define AGILEX_MAIN_PLL_C3_CLK		9
--#define AGILEX_PERIPH_PLL_CLK		10
--#define AGILEX_PERIPH_PLL_C0_CLK	11
--#define AGILEX_PERIPH_PLL_C1_CLK	12
--#define AGILEX_PERIPH_PLL_C2_CLK	13
--#define AGILEX_PERIPH_PLL_C3_CLK	14
--#define AGILEX_MPU_FREE_CLK		15
--#define AGILEX_MPU_CCU_CLK		16
--#define AGILEX_BOOT_CLK			17
--
--/* fixed factor clocks */
--#define AGILEX_L3_MAIN_FREE_CLK		18
--#define AGILEX_NOC_FREE_CLK		19
--#define AGILEX_S2F_USR0_CLK		20
--#define AGILEX_NOC_CLK			21
--#define AGILEX_EMAC_A_FREE_CLK		22
--#define AGILEX_EMAC_B_FREE_CLK		23
--#define AGILEX_EMAC_PTP_FREE_CLK	24
--#define AGILEX_GPIO_DB_FREE_CLK		25
--#define AGILEX_SDMMC_FREE_CLK		26
--#define AGILEX_S2F_USER0_FREE_CLK	27
--#define AGILEX_S2F_USER1_FREE_CLK	28
--#define AGILEX_PSI_REF_FREE_CLK		29
--
--/* Gate clocks */
--#define AGILEX_MPU_CLK			30
--#define AGILEX_MPU_PERIPH_CLK		31
--#define AGILEX_L4_MAIN_CLK		32
--#define AGILEX_L4_MP_CLK		33
--#define AGILEX_L4_SP_CLK		34
--#define AGILEX_CS_AT_CLK		35
--#define AGILEX_CS_TRACE_CLK		36
--#define AGILEX_CS_PDBG_CLK		37
--#define AGILEX_CS_TIMER_CLK		38
--#define AGILEX_S2F_USER0_CLK		39
--#define AGILEX_EMAC0_CLK		40
--#define AGILEX_EMAC1_CLK		41
--#define AGILEX_EMAC2_CLK		42
--#define AGILEX_EMAC_PTP_CLK		43
--#define AGILEX_GPIO_DB_CLK		44
--#define AGILEX_NAND_CLK			45
--#define AGILEX_PSI_REF_CLK		46
--#define AGILEX_S2F_USER1_CLK		47
--#define AGILEX_SDMMC_CLK		48
--#define AGILEX_SPI_M_CLK		49
--#define AGILEX_USB_CLK			50
--#define AGILEX_NAND_X_CLK		51
--#define AGILEX_NAND_ECC_CLK		52
--#define AGILEX_NUM_CLKS			53
--
--#endif	/* __AGILEX_CLOCK_H */
-diff --git a/include/dt-bindings/clock/ast2600-clock.h b/include/dt-bindings/clock/ast2600-clock.h
+-#endif /*_DT_BINDINGS_ARM_CORESIGHT_CTI_DT_H */
+diff --git a/include/dt-bindings/arm/ux500_pm_domains.h b/include/dt-bindings/arm/ux500_pm_domains.h
 deleted file mode 100644
-index 36294a5140b0..000000000000
---- a/include/dt-bindings/clock/ast2600-clock.h
-+++ /dev/null
-@@ -1,62 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0+ */
--/*
-- * Copyright (C) ASPEED Technology Inc.
-- */
--
--#define ASPEED_CLK_GATE_ECLK		0
--#define ASPEED_CLK_GATE_GCLK		1
--#define ASPEED_CLK_GATE_MCLK		2
--#define ASPEED_CLK_GATE_VCLK		3
--#define ASPEED_CLK_GATE_BCLK		4
--#define ASPEED_CLK_GATE_DCLK		5
--#define ASPEED_CLK_GATE_LCLK		6
--#define ASPEED_CLK_GATE_YCLK		7
--#define ASPEED_CLK_GATE_LHCCLK		8
--#define ASPEED_CLK_GATE_REFCLK		9
--#define ASPEED_CLK_GATE_ESPICLK		10
--#define ASPEED_CLK_GATE_UART1CLK	11
--#define ASPEED_CLK_GATE_UART2CLK	12
--#define ASPEED_CLK_GATE_UART3CLK	13
--#define ASPEED_CLK_GATE_UART4CLK	14
--#define ASPEED_CLK_GATE_UART5CLK	15
--#define ASPEED_CLK_GATE_UART6CLK	16
--#define ASPEED_CLK_GATE_UART7CLK	17
--#define ASPEED_CLK_GATE_UART8CLK	18
--#define ASPEED_CLK_GATE_UART9CLK	19
--#define ASPEED_CLK_GATE_UART10CLK	20
--#define ASPEED_CLK_GATE_UART11CLK	21
--#define ASPEED_CLK_GATE_UART12CLK	22
--#define ASPEED_CLK_GATE_UART13CLK	23
--#define ASPEED_CLK_GATE_MAC1CLK		24
--#define ASPEED_CLK_GATE_MAC2CLK		25
--#define ASPEED_CLK_GATE_MAC3CLK		26
--#define ASPEED_CLK_GATE_MAC4CLK		27
--#define ASPEED_CLK_GATE_RSACLK		28
--#define ASPEED_CLK_GATE_SDCLK		29
--#define ASPEED_CLK_GATE_SDEXTCLK	30
--#define ASPEED_CLK_GATE_EMMCCLK		31
--#define ASPEED_CLK_GATE_EMMCEXTCLK	32
--#define ASPEED_CLK_GATE_USBUHCICLK	33
--#define ASPEED_CLK_GATE_USBPORT1CLK	34
--#define ASPEED_CLK_GATE_USBPORT2CLK	35
--#define ASPEED_CLK_GATE_FSICLK		36
--
--#define ASPEED_CLK_APLL			37
--#define ASPEED_CLK_EPLL			38
--#define ASPEED_CLK_DPLL			39
--#define ASPEED_CLK_HPLL			40
--#define ASPEED_CLK_AHB			41
--#define ASPEED_CLK_APB1			42
--#define ASPEED_CLK_APB2			43
--#define ASPEED_CLK_UART			44
--#define ASPEED_CLK_SDIO			45
--#define ASPEED_CLK_ECLK			46
--#define ASPEED_CLK_ECLK_MUX		47
--#define ASPEED_CLK_LHCLK		48
--#define ASPEED_CLK_MAC			49
--#define ASPEED_CLK_BCLK			50
--#define ASPEED_CLK_MPLL			51
--#define ASPEED_CLK_24M			52
--#define ASPEED_CLK_EMMC			53
--#define ASPEED_CLK_UARTX		54
--#define ASPEED_CLK_HUARTX		55
-diff --git a/include/dt-bindings/clock/boston-clock.h b/include/dt-bindings/clock/boston-clock.h
-deleted file mode 100644
-index 0b3906247c8b..000000000000
---- a/include/dt-bindings/clock/boston-clock.h
-+++ /dev/null
-@@ -1,12 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0 */
--/*
-- * Copyright (C) 2016 Imagination Technologies
-- */
--
--#ifndef __DT_BINDINGS_CLOCK_BOSTON_CLOCK_H__
--#define __DT_BINDINGS_CLOCK_BOSTON_CLOCK_H__
--
--#define BOSTON_CLK_SYS 0
--#define BOSTON_CLK_CPU 1
--
--#endif /* __DT_BINDINGS_CLOCK_BOSTON_CLOCK_H__ */
-diff --git a/include/dt-bindings/clock/fsl,qoriq-clockgen.h b/include/dt-bindings/clock/fsl,qoriq-clockgen.h
-deleted file mode 100644
-index ddec7d0bdc7f..000000000000
---- a/include/dt-bindings/clock/fsl,qoriq-clockgen.h
+index 9bd764f0c9e6..000000000000
+--- a/include/dt-bindings/arm/ux500_pm_domains.h
 +++ /dev/null
 @@ -1,15 +0,0 @@
 -/* SPDX-License-Identifier: GPL-2.0-only */
--
--#ifndef DT_CLOCK_FSL_QORIQ_CLOCKGEN_H
--#define DT_CLOCK_FSL_QORIQ_CLOCKGEN_H
--
--#define QORIQ_CLK_SYSCLK	0
--#define QORIQ_CLK_CMUX		1
--#define QORIQ_CLK_HWACCEL	2
--#define QORIQ_CLK_FMAN		3
--#define QORIQ_CLK_PLATFORM_PLL	4
--#define QORIQ_CLK_CORECLK	5
--
--#define QORIQ_CLK_PLL_DIV(x)	((x) - 1)
--
--#endif /* DT_CLOCK_FSL_QORIQ_CLOCKGEN_H */
-diff --git a/include/dt-bindings/clock/lpc32xx-clock.h b/include/dt-bindings/clock/lpc32xx-clock.h
-deleted file mode 100644
-index e624d3a52798..000000000000
---- a/include/dt-bindings/clock/lpc32xx-clock.h
-+++ /dev/null
-@@ -1,58 +0,0 @@
 -/*
-- * Copyright (c) 2015 Vladimir Zapolskiy <vz@mleia.com>
+- * Copyright (C) 2014 Linaro Ltd.
 - *
-- * This code is released using a dual license strategy: BSD/GPL
-- * You can choose the licence that better fits your requirements.
+- * Author: Ulf Hansson <ulf.hansson@linaro.org>
+- */
+-#ifndef _DT_BINDINGS_ARM_UX500_PM_DOMAINS_H
+-#define _DT_BINDINGS_ARM_UX500_PM_DOMAINS_H
+-
+-#define DOMAIN_VAPE		0
+-
+-/* Number of PM domains. */
+-#define NR_DOMAINS		(DOMAIN_VAPE + 1)
+-
+-#endif
+diff --git a/include/dt-bindings/bus/moxtet.h b/include/dt-bindings/bus/moxtet.h
+deleted file mode 100644
+index 10528de7b3ef..000000000000
+--- a/include/dt-bindings/bus/moxtet.h
++++ /dev/null
+@@ -1,16 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * Constant for device tree bindings for Turris Mox module configuration bus
 - *
-- * Released under the terms of 3-clause BSD License
-- * Released under the terms of GNU General Public License Version 2.0
+- * Copyright (C) 2019 Marek Behún <kabel@kernel.org>
+- */
+-
+-#ifndef _DT_BINDINGS_BUS_MOXTET_H
+-#define _DT_BINDINGS_BUS_MOXTET_H
+-
+-#define MOXTET_IRQ_PCI		0
+-#define MOXTET_IRQ_USB3		4
+-#define MOXTET_IRQ_PERIDOT(n)	(8 + (n))
+-#define MOXTET_IRQ_TOPAZ	12
+-
+-#endif /* _DT_BINDINGS_BUS_MOXTET_H */
+diff --git a/include/dt-bindings/display/tda998x.h b/include/dt-bindings/display/tda998x.h
+deleted file mode 100644
+index 746831ff396c..000000000000
+--- a/include/dt-bindings/display/tda998x.h
++++ /dev/null
+@@ -1,8 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-#ifndef _DT_BINDINGS_TDA998X_H
+-#define _DT_BINDINGS_TDA998X_H
+-
+-#define TDA998x_SPDIF	1
+-#define TDA998x_I2S	2
+-
+-#endif /*_DT_BINDINGS_TDA998X_H */
+diff --git a/include/dt-bindings/gpio/aspeed-gpio.h b/include/dt-bindings/gpio/aspeed-gpio.h
+deleted file mode 100644
+index a49f5d5b5af0..000000000000
+--- a/include/dt-bindings/gpio/aspeed-gpio.h
++++ /dev/null
+@@ -1,51 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * Copyright 2022 IBM Corp.
+- *
+- * This header provides constants for binding aspeed,*-gpio.
+- *
+- * The first cell in Aspeed's GPIO specifier is the GPIO ID. The macros below
+- * provide names for this.
+- *
+- * The second cell contains standard flag values specified in gpio.h.
+- */
+-
+-#ifndef _DT_BINDINGS_GPIO_ASPEED_GPIO_H
+-#define _DT_BINDINGS_GPIO_ASPEED_GPIO_H
+-
+-#include <dt-bindings/gpio/gpio.h>
+-
+-#define ASPEED_GPIO_PORT_A 0
+-#define ASPEED_GPIO_PORT_B 1
+-#define ASPEED_GPIO_PORT_C 2
+-#define ASPEED_GPIO_PORT_D 3
+-#define ASPEED_GPIO_PORT_E 4
+-#define ASPEED_GPIO_PORT_F 5
+-#define ASPEED_GPIO_PORT_G 6
+-#define ASPEED_GPIO_PORT_H 7
+-#define ASPEED_GPIO_PORT_I 8
+-#define ASPEED_GPIO_PORT_J 9
+-#define ASPEED_GPIO_PORT_K 10
+-#define ASPEED_GPIO_PORT_L 11
+-#define ASPEED_GPIO_PORT_M 12
+-#define ASPEED_GPIO_PORT_N 13
+-#define ASPEED_GPIO_PORT_O 14
+-#define ASPEED_GPIO_PORT_P 15
+-#define ASPEED_GPIO_PORT_Q 16
+-#define ASPEED_GPIO_PORT_R 17
+-#define ASPEED_GPIO_PORT_S 18
+-#define ASPEED_GPIO_PORT_T 19
+-#define ASPEED_GPIO_PORT_U 20
+-#define ASPEED_GPIO_PORT_V 21
+-#define ASPEED_GPIO_PORT_W 22
+-#define ASPEED_GPIO_PORT_X 23
+-#define ASPEED_GPIO_PORT_Y 24
+-#define ASPEED_GPIO_PORT_Z 25
+-#define ASPEED_GPIO_PORT_AA 26
+-#define ASPEED_GPIO_PORT_AB 27
+-#define ASPEED_GPIO_PORT_AC 28
+-
+-#define ASPEED_GPIO(port, offset) \
+-	((ASPEED_GPIO_PORT_##port * 8) + (offset))
+-
+-#endif
+diff --git a/include/dt-bindings/gpio/uniphier-gpio.h b/include/dt-bindings/gpio/uniphier-gpio.h
+deleted file mode 100644
+index 9f0ad174f61c..000000000000
+--- a/include/dt-bindings/gpio/uniphier-gpio.h
++++ /dev/null
+@@ -1,18 +0,0 @@
+-/*
+- * Copyright (C) 2017 Socionext Inc.
+- *   Author: Masahiro Yamada <yamada.masahiro@socionext.com>
+- */
+-
+-#ifndef _DT_BINDINGS_GPIO_UNIPHIER_H
+-#define _DT_BINDINGS_GPIO_UNIPHIER_H
+-
+-#define UNIPHIER_GPIO_LINES_PER_BANK	8
+-
+-#define UNIPHIER_GPIO_IRQ_OFFSET	((UNIPHIER_GPIO_LINES_PER_BANK) * 15)
+-
+-#define UNIPHIER_GPIO_PORT(bank, line)	\
+-			((UNIPHIER_GPIO_LINES_PER_BANK) * (bank) + (line))
+-
+-#define UNIPHIER_GPIO_IRQ(n)		((UNIPHIER_GPIO_IRQ_OFFSET) + (n))
+-
+-#endif /* _DT_BINDINGS_GPIO_UNIPHIER_H */
+diff --git a/include/dt-bindings/interrupt-controller/apple-aic.h b/include/dt-bindings/interrupt-controller/apple-aic.h
+deleted file mode 100644
+index 9ac56a7e6d3f..000000000000
+--- a/include/dt-bindings/interrupt-controller/apple-aic.h
++++ /dev/null
+@@ -1,15 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause */
+-#ifndef _DT_BINDINGS_INTERRUPT_CONTROLLER_APPLE_AIC_H
+-#define _DT_BINDINGS_INTERRUPT_CONTROLLER_APPLE_AIC_H
+-
+-#include <dt-bindings/interrupt-controller/irq.h>
+-
+-#define AIC_IRQ	0
+-#define AIC_FIQ	1
+-
+-#define AIC_TMR_HV_PHYS		0
+-#define AIC_TMR_HV_VIRT		1
+-#define AIC_TMR_GUEST_PHYS	2
+-#define AIC_TMR_GUEST_VIRT	3
+-
+-#endif
+diff --git a/include/dt-bindings/interrupt-controller/arm-gic.h b/include/dt-bindings/interrupt-controller/arm-gic.h
+deleted file mode 100644
+index 35b6f69b7db6..000000000000
+--- a/include/dt-bindings/interrupt-controller/arm-gic.h
++++ /dev/null
+@@ -1,23 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 OR MIT */
+-/*
+- * This header provides constants for the ARM GIC.
+- */
+-
+-#ifndef _DT_BINDINGS_INTERRUPT_CONTROLLER_ARM_GIC_H
+-#define _DT_BINDINGS_INTERRUPT_CONTROLLER_ARM_GIC_H
+-
+-#include <dt-bindings/interrupt-controller/irq.h>
+-
+-/* interrupt specifier cell 0 */
+-
+-#define GIC_SPI 0
+-#define GIC_PPI 1
+-
+-/*
+- * Interrupt specifier cell 2.
+- * The flags in irq.h are valid, plus those below.
+- */
+-#define GIC_CPU_MASK_RAW(x) ((x) << 8)
+-#define GIC_CPU_MASK_SIMPLE(num) GIC_CPU_MASK_RAW((1 << (num)) - 1)
+-
+-#endif
+diff --git a/include/dt-bindings/interrupt-controller/irq-st.h b/include/dt-bindings/interrupt-controller/irq-st.h
+deleted file mode 100644
+index 6baa9ad2644c..000000000000
+--- a/include/dt-bindings/interrupt-controller/irq-st.h
++++ /dev/null
+@@ -1,30 +0,0 @@
+-/*
+- *  include/linux/irqchip/irq-st.h
+- *
+- *  Copyright (C) 2014 STMicroelectronics All Rights Reserved
+- *
+- *  Author: Lee Jones <lee.jones@linaro.org>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License version 2 as
+- * published by the Free Software Foundation.
+- */
+-
+-#ifndef _DT_BINDINGS_INTERRUPT_CONTROLLER_ST_H
+-#define _DT_BINDINGS_INTERRUPT_CONTROLLER_ST_H
+-
+-#define ST_IRQ_SYSCFG_EXT_0		0
+-#define ST_IRQ_SYSCFG_EXT_1		1
+-#define ST_IRQ_SYSCFG_EXT_2		2
+-#define ST_IRQ_SYSCFG_CTI_0		3
+-#define ST_IRQ_SYSCFG_CTI_1		4
+-#define ST_IRQ_SYSCFG_PMU_0		5
+-#define ST_IRQ_SYSCFG_PMU_1		6
+-#define ST_IRQ_SYSCFG_pl310_L2		7
+-#define ST_IRQ_SYSCFG_DISABLED		0xFFFFFFFF
+-
+-#define ST_IRQ_SYSCFG_EXT_1_INV		0x1
+-#define ST_IRQ_SYSCFG_EXT_2_INV		0x2
+-#define ST_IRQ_SYSCFG_EXT_3_INV		0x4
+-
+-#endif
+diff --git a/include/dt-bindings/interrupt-controller/irqc-rzg2l.h b/include/dt-bindings/interrupt-controller/irqc-rzg2l.h
+deleted file mode 100644
+index 34ce778885a1..000000000000
+--- a/include/dt-bindings/interrupt-controller/irqc-rzg2l.h
++++ /dev/null
+@@ -1,25 +0,0 @@
+-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+-/*
+- * This header provides constants for Renesas RZ/G2L family IRQC bindings.
+- *
+- * Copyright (C) 2022 Renesas Electronics Corp.
 - *
 - */
 -
--#ifndef __DT_BINDINGS_LPC32XX_CLOCK_H
--#define __DT_BINDINGS_LPC32XX_CLOCK_H
+-#ifndef __DT_BINDINGS_IRQC_RZG2L_H
+-#define __DT_BINDINGS_IRQC_RZG2L_H
 -
--/* LPC32XX System Control Block clocks */
--#define LPC32XX_CLK_RTC		1
--#define LPC32XX_CLK_DMA		2
--#define LPC32XX_CLK_MLC		3
--#define LPC32XX_CLK_SLC		4
--#define LPC32XX_CLK_LCD		5
--#define LPC32XX_CLK_MAC		6
--#define LPC32XX_CLK_SD		7
--#define LPC32XX_CLK_DDRAM	8
--#define LPC32XX_CLK_SSP0	9
--#define LPC32XX_CLK_SSP1	10
--#define LPC32XX_CLK_UART3	11
--#define LPC32XX_CLK_UART4	12
--#define LPC32XX_CLK_UART5	13
--#define LPC32XX_CLK_UART6	14
--#define LPC32XX_CLK_IRDA	15
--#define LPC32XX_CLK_I2C1	16
--#define LPC32XX_CLK_I2C2	17
--#define LPC32XX_CLK_TIMER0	18
--#define LPC32XX_CLK_TIMER1	19
--#define LPC32XX_CLK_TIMER2	20
--#define LPC32XX_CLK_TIMER3	21
--#define LPC32XX_CLK_TIMER4	22
--#define LPC32XX_CLK_TIMER5	23
--#define LPC32XX_CLK_WDOG	24
--#define LPC32XX_CLK_I2S0	25
--#define LPC32XX_CLK_I2S1	26
--#define LPC32XX_CLK_SPI1	27
--#define LPC32XX_CLK_SPI2	28
--#define LPC32XX_CLK_MCPWM	29
--#define LPC32XX_CLK_HSTIMER	30
--#define LPC32XX_CLK_KEY		31
--#define LPC32XX_CLK_PWM1	32
--#define LPC32XX_CLK_PWM2	33
--#define LPC32XX_CLK_ADC		34
--#define LPC32XX_CLK_HCLK_PLL	35
--#define LPC32XX_CLK_PERIPH	36
+-/* NMI maps to SPI0 */
+-#define RZG2L_NMI	0
 -
--/* LPC32XX USB clocks */
--#define LPC32XX_USB_CLK_I2C	1
--#define LPC32XX_USB_CLK_DEVICE	2
--#define LPC32XX_USB_CLK_HOST	3
+-/* IRQ0-7 map to SPI1-8 */
+-#define RZG2L_IRQ0	1
+-#define RZG2L_IRQ1	2
+-#define RZG2L_IRQ2	3
+-#define RZG2L_IRQ3	4
+-#define RZG2L_IRQ4	5
+-#define RZG2L_IRQ5	6
+-#define RZG2L_IRQ6	7
+-#define RZG2L_IRQ7	8
 -
--#endif /* __DT_BINDINGS_LPC32XX_CLOCK_H */
-diff --git a/include/dt-bindings/clock/maxim,max77802.h b/include/dt-bindings/clock/maxim,max77802.h
+-#endif /* __DT_BINDINGS_IRQC_RZG2L_H */
+diff --git a/include/dt-bindings/interrupt-controller/mips-gic.h b/include/dt-bindings/interrupt-controller/mips-gic.h
 deleted file mode 100644
-index 997312edcbb5..000000000000
---- a/include/dt-bindings/clock/maxim,max77802.h
+index cf35a577e371..000000000000
+--- a/include/dt-bindings/interrupt-controller/mips-gic.h
 +++ /dev/null
-@@ -1,22 +0,0 @@
+@@ -1,9 +0,0 @@
+-#ifndef _DT_BINDINGS_INTERRUPT_CONTROLLER_MIPS_GIC_H
+-#define _DT_BINDINGS_INTERRUPT_CONTROLLER_MIPS_GIC_H
+-
+-#include <dt-bindings/interrupt-controller/irq.h>
+-
+-#define GIC_SHARED 0
+-#define GIC_LOCAL 1
+-
+-#endif
+diff --git a/include/dt-bindings/leds/leds-netxbig.h b/include/dt-bindings/leds/leds-netxbig.h
+deleted file mode 100644
+index 92658b0310b2..000000000000
+--- a/include/dt-bindings/leds/leds-netxbig.h
++++ /dev/null
+@@ -1,18 +0,0 @@
+-/*
+- * This header provides constants for netxbig LED bindings.
+- *
+- * This file is licensed under the terms of the GNU General Public
+- * License version 2.  This program is licensed "as is" without any
+- * warranty of any kind, whether express or implied.
+- */
+-
+-#ifndef _DT_BINDINGS_LEDS_NETXBIG_H
+-#define _DT_BINDINGS_LEDS_NETXBIG_H
+-
+-#define NETXBIG_LED_OFF		0
+-#define NETXBIG_LED_ON		1
+-#define NETXBIG_LED_SATA	2
+-#define NETXBIG_LED_TIMER1	3
+-#define NETXBIG_LED_TIMER2	4
+-
+-#endif /* _DT_BINDINGS_LEDS_NETXBIG_H */
+diff --git a/include/dt-bindings/leds/leds-ns2.h b/include/dt-bindings/leds/leds-ns2.h
+deleted file mode 100644
+index fd615749e703..000000000000
+--- a/include/dt-bindings/leds/leds-ns2.h
++++ /dev/null
+@@ -1,9 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-#ifndef _DT_BINDINGS_LEDS_NS2_H
+-#define _DT_BINDINGS_LEDS_NS2_H
+-
+-#define NS_V2_LED_OFF	0
+-#define NS_V2_LED_ON	1
+-#define NS_V2_LED_SATA	2
+-
+-#endif
+diff --git a/include/dt-bindings/leds/leds-pca9532.h b/include/dt-bindings/leds/leds-pca9532.h
+deleted file mode 100644
+index 4d917aab7e1e..000000000000
+--- a/include/dt-bindings/leds/leds-pca9532.h
++++ /dev/null
+@@ -1,18 +0,0 @@
+-/*
+- * This header provides constants for pca9532 LED bindings.
+- *
+- * This file is licensed under the terms of the GNU General Public
+- * License version 2.  This program is licensed "as is" without any
+- * warranty of any kind, whether express or implied.
+- */
+-
+-#ifndef _DT_BINDINGS_LEDS_PCA9532_H
+-#define _DT_BINDINGS_LEDS_PCA9532_H
+-
+-#define PCA9532_TYPE_NONE         0
+-#define PCA9532_TYPE_LED          1
+-#define PCA9532_TYPE_N2100_BEEP   2
+-#define PCA9532_TYPE_GPIO         3
+-#define PCA9532_LED_TIMER2        4
+-
+-#endif /* _DT_BINDINGS_LEDS_PCA9532_H */
+diff --git a/include/dt-bindings/media/tda1997x.h b/include/dt-bindings/media/tda1997x.h
+deleted file mode 100644
+index bd9fbd718ec9..000000000000
+--- a/include/dt-bindings/media/tda1997x.h
++++ /dev/null
+@@ -1,74 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * Copyright (C) 2017 Gateworks Corporation
+- */
+-#ifndef _DT_BINDINGS_MEDIA_TDA1997X_H
+-#define _DT_BINDINGS_MEDIA_TDA1997X_H
+-
+-/* TDA19973 36bit Video Port control registers */
+-#define TDA1997X_VP36_35_32	0
+-#define TDA1997X_VP36_31_28	1
+-#define TDA1997X_VP36_27_24	2
+-#define TDA1997X_VP36_23_20	3
+-#define TDA1997X_VP36_19_16	4
+-#define TDA1997X_VP36_15_12	5
+-#define TDA1997X_VP36_11_08	6
+-#define TDA1997X_VP36_07_04	7
+-#define TDA1997X_VP36_03_00	8
+-
+-/* TDA19971 24bit Video Port control registers */
+-#define TDA1997X_VP24_V23_20	0
+-#define TDA1997X_VP24_V19_16	1
+-#define TDA1997X_VP24_V15_12	3
+-#define TDA1997X_VP24_V11_08	4
+-#define TDA1997X_VP24_V07_04	6
+-#define TDA1997X_VP24_V03_00	7
+-
+-/* Pin groups */
+-#define TDA1997X_VP_OUT_EN        0x80	/* enable output group */
+-#define TDA1997X_VP_HIZ           0x40	/* hi-Z output group when not used */
+-#define TDA1997X_VP_SWP           0x10	/* pin-swap output group */
+-#define TDA1997X_R_CR_CBCR_3_0    (0 | TDA1997X_VP_OUT_EN | TDA1997X_VP_HIZ)
+-#define TDA1997X_R_CR_CBCR_7_4    (1 | TDA1997X_VP_OUT_EN | TDA1997X_VP_HIZ)
+-#define TDA1997X_R_CR_CBCR_11_8   (2 | TDA1997X_VP_OUT_EN | TDA1997X_VP_HIZ)
+-#define TDA1997X_B_CB_3_0         (3 | TDA1997X_VP_OUT_EN | TDA1997X_VP_HIZ)
+-#define TDA1997X_B_CB_7_4         (4 | TDA1997X_VP_OUT_EN | TDA1997X_VP_HIZ)
+-#define TDA1997X_B_CB_11_8        (5 | TDA1997X_VP_OUT_EN | TDA1997X_VP_HIZ)
+-#define TDA1997X_G_Y_3_0          (6 | TDA1997X_VP_OUT_EN | TDA1997X_VP_HIZ)
+-#define TDA1997X_G_Y_7_4          (7 | TDA1997X_VP_OUT_EN | TDA1997X_VP_HIZ)
+-#define TDA1997X_G_Y_11_8         (8 | TDA1997X_VP_OUT_EN | TDA1997X_VP_HIZ)
+-/* pinswapped groups */
+-#define TDA1997X_R_CR_CBCR_3_0_S  (TDA1997X_R_CR_CBCR_3_0 | TDA1997X_VP_SWAP)
+-#define TDA1997X_R_CR_CBCR_7_4_S  (TDA1997X_R_CR_CBCR_7_4 | TDA1997X_VP_SWAP)
+-#define TDA1997X_R_CR_CBCR_11_8_S (TDA1997X_R_CR_CBCR_11_8 | TDA1997X_VP_SWAP)
+-#define TDA1997X_B_CB_3_0_S       (TDA1997X_B_CB_3_0 | TDA1997X_VP_SWAP)
+-#define TDA1997X_B_CB_7_4_S       (TDA1997X_B_CB_7_4 | TDA1997X_VP_SWAP)
+-#define TDA1997X_B_CB_11_8_S      (TDA1997X_B_CB_11_8 | TDA1997X_VP_SWAP)
+-#define TDA1997X_G_Y_3_0_S        (TDA1997X_G_Y_3_0 | TDA1997X_VP_SWAP)
+-#define TDA1997X_G_Y_7_4_S        (TDA1997X_G_Y_7_4 | TDA1997X_VP_SWAP)
+-#define TDA1997X_G_Y_11_8_S       (TDA1997X_G_Y_11_8 | TDA1997X_VP_SWAP)
+-
+-/* Audio bus DAI format */
+-#define TDA1997X_I2S16			1 /* I2S 16bit */
+-#define TDA1997X_I2S32			2 /* I2S 32bit */
+-#define TDA1997X_SPDIF			3 /* SPDIF */
+-#define TDA1997X_OBA			4 /* One Bit Audio */
+-#define TDA1997X_DST			5 /* Direct Stream Transfer */
+-#define TDA1997X_I2S16_HBR		6 /* HBR straight in I2S 16bit mode */
+-#define TDA1997X_I2S16_HBR_DEMUX	7 /* HBR demux in I2S 16bit mode */
+-#define TDA1997X_I2S32_HBR_DEMUX	8 /* HBR demux in I2S 32bit mode */
+-#define TDA1997X_SPDIF_HBR_DEMUX	9 /* HBR demux in SPDIF mode */
+-
+-/* Audio bus channel layout */
+-#define TDA1997X_LAYOUT0	0	/* 2-channel */
+-#define TDA1997X_LAYOUT1	1	/* 8-channel */
+-
+-/* Audio bus clock */
+-#define TDA1997X_ACLK_16FS	0
+-#define TDA1997X_ACLK_32FS	1
+-#define TDA1997X_ACLK_64FS	2
+-#define TDA1997X_ACLK_128FS	3
+-#define TDA1997X_ACLK_256FS	4
+-#define TDA1997X_ACLK_512FS	5
+-
+-#endif /* _DT_BINDINGS_MEDIA_TDA1997X_H */
+diff --git a/include/dt-bindings/media/video-interfaces.h b/include/dt-bindings/media/video-interfaces.h
+deleted file mode 100644
+index 68ac4e05e37f..000000000000
+--- a/include/dt-bindings/media/video-interfaces.h
++++ /dev/null
+@@ -1,16 +0,0 @@
+-/* SPDX-License-Identifier: (GPL-2.0-only OR MIT) */
+-/*
+- * Copyright (C) 2022 Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+- */
+-
+-#ifndef __DT_BINDINGS_MEDIA_VIDEO_INTERFACES_H__
+-#define __DT_BINDINGS_MEDIA_VIDEO_INTERFACES_H__
+-
+-#define MEDIA_BUS_TYPE_CSI2_CPHY		1
+-#define MEDIA_BUS_TYPE_CSI1			2
+-#define MEDIA_BUS_TYPE_CCP2			3
+-#define MEDIA_BUS_TYPE_CSI2_DPHY		4
+-#define MEDIA_BUS_TYPE_PARALLEL			5
+-#define MEDIA_BUS_TYPE_BT656			6
+-
+-#endif /* __DT_BINDINGS_MEDIA_VIDEO_INTERFACES_H__ */
+diff --git a/include/dt-bindings/mfd/atmel-flexcom.h b/include/dt-bindings/mfd/atmel-flexcom.h
+deleted file mode 100644
+index 4e2fc3236394..000000000000
+--- a/include/dt-bindings/mfd/atmel-flexcom.h
++++ /dev/null
+@@ -1,15 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0-only */
+-/*
+- * This header provides macros for Atmel Flexcom DT bindings.
+- *
+- * Copyright (C) 2015 Cyrille Pitchen <cyrille.pitchen@atmel.com>
+- */
+-
+-#ifndef __DT_BINDINGS_ATMEL_FLEXCOM_H__
+-#define __DT_BINDINGS_ATMEL_FLEXCOM_H__
+-
+-#define ATMEL_FLEXCOM_MODE_USART	1
+-#define ATMEL_FLEXCOM_MODE_SPI		2
+-#define ATMEL_FLEXCOM_MODE_TWI		3
+-
+-#endif /* __DT_BINDINGS_ATMEL_FLEXCOM_H__ */
+diff --git a/include/dt-bindings/mfd/dbx500-prcmu.h b/include/dt-bindings/mfd/dbx500-prcmu.h
+deleted file mode 100644
+index 7266ae67b03a..000000000000
+--- a/include/dt-bindings/mfd/dbx500-prcmu.h
++++ /dev/null
+@@ -1,84 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * This header provides constants for the PRCMU bindings.
+- *
+- */
+-
+-#ifndef _DT_BINDINGS_MFD_PRCMU_H
+-#define _DT_BINDINGS_MFD_PRCMU_H
+-
+-/*
+- * Clock identifiers.
+- */
+-#define ARMCLK			0
+-#define PRCMU_ACLK		1
+-#define PRCMU_SVAMMCSPCLK	2
+-#define PRCMU_SDMMCHCLK		2  /* DBx540 only. */
+-#define PRCMU_SIACLK		3
+-#define PRCMU_SIAMMDSPCLK	3  /* DBx540 only. */
+-#define PRCMU_SGACLK		4
+-#define PRCMU_UARTCLK		5
+-#define PRCMU_MSP02CLK		6
+-#define PRCMU_MSP1CLK		7
+-#define PRCMU_I2CCLK		8
+-#define PRCMU_SDMMCCLK		9
+-#define PRCMU_SLIMCLK		10
+-#define PRCMU_CAMCLK		10 /* DBx540 only. */
+-#define PRCMU_PER1CLK		11
+-#define PRCMU_PER2CLK		12
+-#define PRCMU_PER3CLK		13
+-#define PRCMU_PER5CLK		14
+-#define PRCMU_PER6CLK		15
+-#define PRCMU_PER7CLK		16
+-#define PRCMU_LCDCLK		17
+-#define PRCMU_BMLCLK		18
+-#define PRCMU_HSITXCLK		19
+-#define PRCMU_HSIRXCLK		20
+-#define PRCMU_HDMICLK		21
+-#define PRCMU_APEATCLK		22
+-#define PRCMU_APETRACECLK	23
+-#define PRCMU_MCDECLK		24
+-#define PRCMU_IPI2CCLK		25
+-#define PRCMU_DSIALTCLK		26
+-#define PRCMU_DMACLK		27
+-#define PRCMU_B2R2CLK		28
+-#define PRCMU_TVCLK		29
+-#define SPARE_UNIPROCLK		30
+-#define PRCMU_SSPCLK		31
+-#define PRCMU_RNGCLK		32
+-#define PRCMU_UICCCLK		33
+-#define PRCMU_G1CLK             34 /* DBx540 only. */
+-#define PRCMU_HVACLK            35 /* DBx540 only. */
+-#define PRCMU_SPARE1CLK		36
+-#define PRCMU_SPARE2CLK		37
+-
+-#define PRCMU_NUM_REG_CLOCKS	38
+-
+-#define PRCMU_RTCCLK		PRCMU_NUM_REG_CLOCKS
+-#define PRCMU_SYSCLK		39
+-#define PRCMU_CDCLK		40
+-#define PRCMU_TIMCLK		41
+-#define PRCMU_PLLSOC0		42
+-#define PRCMU_PLLSOC1		43
+-#define PRCMU_ARMSS		44
+-#define PRCMU_PLLDDR		45
+-
+-/* DSI Clocks */
+-#define PRCMU_PLLDSI		46
+-#define PRCMU_DSI0CLK		47
+-#define PRCMU_DSI1CLK		48
+-#define PRCMU_DSI0ESCCLK	49
+-#define PRCMU_DSI1ESCCLK	50
+-#define PRCMU_DSI2ESCCLK	51
+-
+-/* LCD DSI PLL - Ux540 only */
+-#define PRCMU_PLLDSI_LCD        52
+-#define PRCMU_DSI0CLK_LCD       53
+-#define PRCMU_DSI1CLK_LCD       54
+-#define PRCMU_DSI0ESCCLK_LCD    55
+-#define PRCMU_DSI1ESCCLK_LCD    56
+-#define PRCMU_DSI2ESCCLK_LCD    57
+-
+-#define PRCMU_NUM_CLKS		58
+-
+-#endif
+diff --git a/include/dt-bindings/net/mscc-phy-vsc8531.h b/include/dt-bindings/net/mscc-phy-vsc8531.h
+deleted file mode 100644
+index c340437414fb..000000000000
+--- a/include/dt-bindings/net/mscc-phy-vsc8531.h
++++ /dev/null
+@@ -1,31 +0,0 @@
+-/* SPDX-License-Identifier: (GPL-2.0+ OR MIT) */
+-/*
+- * Device Tree constants for Microsemi VSC8531 PHY
+- *
+- * Author: Nagaraju Lakkaraju
+- *
+- * Copyright (c) 2017 Microsemi Corporation
+- */
+-
+-#ifndef _DT_BINDINGS_MSCC_VSC8531_H
+-#define _DT_BINDINGS_MSCC_VSC8531_H
+-
+-/* PHY LED Modes */
+-#define VSC8531_LINK_ACTIVITY			0
+-#define VSC8531_LINK_1000_ACTIVITY		1
+-#define VSC8531_LINK_100_ACTIVITY		2
+-#define VSC8531_LINK_10_ACTIVITY		3
+-#define VSC8531_LINK_100_1000_ACTIVITY		4
+-#define VSC8531_LINK_10_1000_ACTIVITY		5
+-#define VSC8531_LINK_10_100_ACTIVITY		6
+-#define VSC8584_LINK_100FX_1000X_ACTIVITY	7
+-#define VSC8531_DUPLEX_COLLISION		8
+-#define VSC8531_COLLISION			9
+-#define VSC8531_ACTIVITY			10
+-#define VSC8584_100FX_1000X_ACTIVITY		11
+-#define VSC8531_AUTONEG_FAULT			12
+-#define VSC8531_SERIAL_MODE			13
+-#define VSC8531_FORCE_LED_OFF			14
+-#define VSC8531_FORCE_LED_ON			15
+-
+-#endif
+diff --git a/include/dt-bindings/net/qca-ar803x.h b/include/dt-bindings/net/qca-ar803x.h
+deleted file mode 100644
+index 9c046c7242ed..000000000000
+--- a/include/dt-bindings/net/qca-ar803x.h
++++ /dev/null
+@@ -1,13 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0-only */
+-/*
+- * Device Tree constants for the Qualcomm Atheros AR803x PHYs
+- */
+-
+-#ifndef _DT_BINDINGS_QCA_AR803X_H
+-#define _DT_BINDINGS_QCA_AR803X_H
+-
+-#define AR803X_STRENGTH_FULL		0
+-#define AR803X_STRENGTH_HALF		1
+-#define AR803X_STRENGTH_QUARTER		2
+-
+-#endif
+diff --git a/include/dt-bindings/phy/phy-am654-serdes.h b/include/dt-bindings/phy/phy-am654-serdes.h
+deleted file mode 100644
+index e8d901729ed9..000000000000
+--- a/include/dt-bindings/phy/phy-am654-serdes.h
++++ /dev/null
+@@ -1,13 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * This header provides constants for AM654 SERDES.
+- */
+-
+-#ifndef _DT_BINDINGS_AM654_SERDES
+-#define _DT_BINDINGS_AM654_SERDES
+-
+-#define AM654_SERDES_CMU_REFCLK	0
+-#define AM654_SERDES_LO_REFCLK	1
+-#define AM654_SERDES_RO_REFCLK	2
+-
+-#endif /* _DT_BINDINGS_AM654_SERDES */
+diff --git a/include/dt-bindings/phy/phy-cadence.h b/include/dt-bindings/phy/phy-cadence.h
+deleted file mode 100644
+index 0122c6067b17..000000000000
+--- a/include/dt-bindings/phy/phy-cadence.h
++++ /dev/null
+@@ -1,24 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * This header provides constants for Cadence SERDES.
+- */
+-
+-#ifndef _DT_BINDINGS_CADENCE_SERDES_H
+-#define _DT_BINDINGS_CADENCE_SERDES_H
+-
+-/* Torrent */
+-#define TORRENT_SERDES_NO_SSC		0
+-#define TORRENT_SERDES_EXTERNAL_SSC	1
+-#define TORRENT_SERDES_INTERNAL_SSC	2
+-
+-#define CDNS_TORRENT_REFCLK_DRIVER      0
+-
+-/* Sierra */
+-#define CDNS_SIERRA_PLL_CMNLC		0
+-#define CDNS_SIERRA_PLL_CMNLC1		1
+-
+-#define SIERRA_SERDES_NO_SSC		0
+-#define SIERRA_SERDES_EXTERNAL_SSC	1
+-#define SIERRA_SERDES_INTERNAL_SSC	2
+-
+-#endif /* _DT_BINDINGS_CADENCE_SERDES_H */
+diff --git a/include/dt-bindings/pinctrl/apple.h b/include/dt-bindings/pinctrl/apple.h
+deleted file mode 100644
+index ea0a6f466592..000000000000
+--- a/include/dt-bindings/pinctrl/apple.h
++++ /dev/null
+@@ -1,13 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ OR MIT */
+-/*
+- * This header provides constants for Apple pinctrl bindings.
+- */
+-
+-#ifndef _DT_BINDINGS_PINCTRL_APPLE_H
+-#define _DT_BINDINGS_PINCTRL_APPLE_H
+-
+-#define APPLE_PINMUX(pin, func) ((pin) | ((func) << 16))
+-#define APPLE_PIN(pinmux) ((pinmux) & 0xffff)
+-#define APPLE_FUNC(pinmux) ((pinmux) >> 16)
+-
+-#endif /* _DT_BINDINGS_PINCTRL_APPLE_H */
+diff --git a/include/dt-bindings/pinctrl/dra.h b/include/dt-bindings/pinctrl/dra.h
+deleted file mode 100644
+index 765c385f7b2c..000000000000
+--- a/include/dt-bindings/pinctrl/dra.h
++++ /dev/null
+@@ -1,79 +0,0 @@
+-/*
+- * This header provides constants for DRA pinctrl bindings.
+- *
+- * Copyright (C) 2013 Texas Instruments Incorporated - https://www.ti.com/
+- * Author: Rajendra Nayak <rnayak@ti.com>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License version 2 as
+- * published by the Free Software Foundation.
+- */
+-
+-#ifndef _DT_BINDINGS_PINCTRL_DRA_H
+-#define _DT_BINDINGS_PINCTRL_DRA_H
+-
+-/* DRA7 mux mode options for each pin. See TRM for options */
+-#define MUX_MODE0	0x0
+-#define MUX_MODE1	0x1
+-#define MUX_MODE2	0x2
+-#define MUX_MODE3	0x3
+-#define MUX_MODE4	0x4
+-#define MUX_MODE5	0x5
+-#define MUX_MODE6	0x6
+-#define MUX_MODE7	0x7
+-#define MUX_MODE8	0x8
+-#define MUX_MODE9	0x9
+-#define MUX_MODE10	0xa
+-#define MUX_MODE11	0xb
+-#define MUX_MODE12	0xc
+-#define MUX_MODE13	0xd
+-#define MUX_MODE14	0xe
+-#define MUX_MODE15	0xf
+-
+-/* Certain pins need virtual mode, but note: they may glitch */
+-#define MUX_VIRTUAL_MODE0	(MODE_SELECT | (0x0 << 4))
+-#define MUX_VIRTUAL_MODE1	(MODE_SELECT | (0x1 << 4))
+-#define MUX_VIRTUAL_MODE2	(MODE_SELECT | (0x2 << 4))
+-#define MUX_VIRTUAL_MODE3	(MODE_SELECT | (0x3 << 4))
+-#define MUX_VIRTUAL_MODE4	(MODE_SELECT | (0x4 << 4))
+-#define MUX_VIRTUAL_MODE5	(MODE_SELECT | (0x5 << 4))
+-#define MUX_VIRTUAL_MODE6	(MODE_SELECT | (0x6 << 4))
+-#define MUX_VIRTUAL_MODE7	(MODE_SELECT | (0x7 << 4))
+-#define MUX_VIRTUAL_MODE8	(MODE_SELECT | (0x8 << 4))
+-#define MUX_VIRTUAL_MODE9	(MODE_SELECT | (0x9 << 4))
+-#define MUX_VIRTUAL_MODE10	(MODE_SELECT | (0xa << 4))
+-#define MUX_VIRTUAL_MODE11	(MODE_SELECT | (0xb << 4))
+-#define MUX_VIRTUAL_MODE12	(MODE_SELECT | (0xc << 4))
+-#define MUX_VIRTUAL_MODE13	(MODE_SELECT | (0xd << 4))
+-#define MUX_VIRTUAL_MODE14	(MODE_SELECT | (0xe << 4))
+-#define MUX_VIRTUAL_MODE15	(MODE_SELECT | (0xf << 4))
+-
+-#define MODE_SELECT		(1 << 8)
+-
+-#define PULL_ENA		(0 << 16)
+-#define PULL_DIS		(1 << 16)
+-#define PULL_UP			(1 << 17)
+-#define INPUT_EN		(1 << 18)
+-#define SLEWCONTROL		(1 << 19)
+-#define WAKEUP_EN		(1 << 24)
+-#define WAKEUP_EVENT		(1 << 25)
+-
+-/* Active pin states */
+-#define PIN_OUTPUT		(0 | PULL_DIS)
+-#define PIN_OUTPUT_PULLUP	(PULL_UP)
+-#define PIN_OUTPUT_PULLDOWN	(0)
+-#define PIN_INPUT		(INPUT_EN | PULL_DIS)
+-#define PIN_INPUT_SLEW		(INPUT_EN | SLEWCONTROL)
+-#define PIN_INPUT_PULLUP	(PULL_ENA | INPUT_EN | PULL_UP)
+-#define PIN_INPUT_PULLDOWN	(PULL_ENA | INPUT_EN)
+-
+-/*
+- * Macro to allow using the absolute physical address instead of the
+- * padconf registers instead of the offset from padconf base.
+- */
+-#define DRA7XX_CORE_IOPAD(pa, val)	(((pa) & 0xffff) - 0x3400) (val)
+-
+-/* DRA7 IODELAY configuration parameters */
+-#define A_DELAY_PS(val)			((val) & 0xffff)
+-#define G_DELAY_PS(val)			((val) & 0xffff)
+-#endif
+diff --git a/include/dt-bindings/power/owl-s700-powergate.h b/include/dt-bindings/power/owl-s700-powergate.h
+deleted file mode 100644
+index 4cf1aefbf09c..000000000000
+--- a/include/dt-bindings/power/owl-s700-powergate.h
++++ /dev/null
+@@ -1,19 +0,0 @@
+-// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+-/*
+- * Actions Semi S700 SPS
+- *
+- * Copyright (c) 2017 Andreas Färber
+- */
+-#ifndef DT_BINDINGS_POWER_OWL_S700_POWERGATE_H
+-#define DT_BINDINGS_POWER_OWL_S700_POWERGATE_H
+-
+-#define S700_PD_VDE	0
+-#define S700_PD_VCE_SI	1
+-#define S700_PD_USB2_1	2
+-#define S700_PD_HDE	3
+-#define S700_PD_DMA	4
+-#define S700_PD_DS	5
+-#define S700_PD_USB3	6
+-#define S700_PD_USB2_0	7
+-
+-#endif
+diff --git a/include/dt-bindings/power/raspberrypi-power.h b/include/dt-bindings/power/raspberrypi-power.h
+deleted file mode 100644
+index b3ff8e09a78f..000000000000
+--- a/include/dt-bindings/power/raspberrypi-power.h
++++ /dev/null
+@@ -1,41 +0,0 @@
+-/*
+- *  Copyright © 2015 Broadcom
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License version 2 as
+- * published by the Free Software Foundation.
+- */
+-
+-#ifndef _DT_BINDINGS_ARM_BCM2835_RPI_POWER_H
+-#define _DT_BINDINGS_ARM_BCM2835_RPI_POWER_H
+-
+-/* These power domain indices are the firmware interface's indices
+- * minus one.
+- */
+-#define RPI_POWER_DOMAIN_I2C0		0
+-#define RPI_POWER_DOMAIN_I2C1		1
+-#define RPI_POWER_DOMAIN_I2C2		2
+-#define RPI_POWER_DOMAIN_VIDEO_SCALER	3
+-#define RPI_POWER_DOMAIN_VPU1		4
+-#define RPI_POWER_DOMAIN_HDMI		5
+-#define RPI_POWER_DOMAIN_USB		6
+-#define RPI_POWER_DOMAIN_VEC		7
+-#define RPI_POWER_DOMAIN_JPEG		8
+-#define RPI_POWER_DOMAIN_H264		9
+-#define RPI_POWER_DOMAIN_V3D		10
+-#define RPI_POWER_DOMAIN_ISP		11
+-#define RPI_POWER_DOMAIN_UNICAM0	12
+-#define RPI_POWER_DOMAIN_UNICAM1	13
+-#define RPI_POWER_DOMAIN_CCP2RX		14
+-#define RPI_POWER_DOMAIN_CSI2		15
+-#define RPI_POWER_DOMAIN_CPI		16
+-#define RPI_POWER_DOMAIN_DSI0		17
+-#define RPI_POWER_DOMAIN_DSI1		18
+-#define RPI_POWER_DOMAIN_TRANSPOSER	19
+-#define RPI_POWER_DOMAIN_CCP2TX		20
+-#define RPI_POWER_DOMAIN_CDP		21
+-#define RPI_POWER_DOMAIN_ARM		22
+-
+-#define RPI_POWER_DOMAIN_COUNT		23
+-
+-#endif /* _DT_BINDINGS_ARM_BCM2835_RPI_POWER_H */
+diff --git a/include/dt-bindings/regulator/dlg,da9063-regulator.h b/include/dt-bindings/regulator/dlg,da9063-regulator.h
+deleted file mode 100644
+index 1de710dd0899..000000000000
+--- a/include/dt-bindings/regulator/dlg,da9063-regulator.h
++++ /dev/null
+@@ -1,16 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-
+-#ifndef _DT_BINDINGS_REGULATOR_DLG_DA9063_H
+-#define _DT_BINDINGS_REGULATOR_DLG_DA9063_H
+-
+-/*
+- * These buck mode constants may be used to specify values in device tree
+- * properties (e.g. regulator-initial-mode).
+- * A description of the following modes is in the manufacturers datasheet.
+- */
+-
+-#define DA9063_BUCK_MODE_SLEEP		1
+-#define DA9063_BUCK_MODE_SYNC		2
+-#define DA9063_BUCK_MODE_AUTO		3
+-
+-#endif
+diff --git a/include/dt-bindings/regulator/maxim,max77802.h b/include/dt-bindings/regulator/maxim,max77802.h
+deleted file mode 100644
+index cf28631d7109..000000000000
+--- a/include/dt-bindings/regulator/maxim,max77802.h
++++ /dev/null
+@@ -1,18 +0,0 @@
 -/*
 - * Copyright (C) 2014 Google, Inc
 - *
@@ -670,441 +1081,595 @@ index 997312edcbb5..000000000000
 - * it under the terms of the GNU General Public License version 2 as
 - * published by the Free Software Foundation.
 - *
-- * Device Tree binding constants clocks for the Maxim 77802 PMIC.
+- * Device Tree binding constants for the Maxim 77802 PMIC regulators
 - */
 -
--#ifndef _DT_BINDINGS_CLOCK_MAXIM_MAX77802_CLOCK_H
--#define _DT_BINDINGS_CLOCK_MAXIM_MAX77802_CLOCK_H
+-#ifndef _DT_BINDINGS_REGULATOR_MAXIM_MAX77802_H
+-#define _DT_BINDINGS_REGULATOR_MAXIM_MAX77802_H
 -
--/* Fixed rate clocks. */
+-/* Regulator operating modes */
+-#define MAX77802_OPMODE_LP	1
+-#define MAX77802_OPMODE_NORMAL	3
 -
--#define MAX77802_CLK_32K_AP		0
--#define MAX77802_CLK_32K_CP		1
--
--/* Total number of clocks. */
--#define MAX77802_CLKS_NUM		(MAX77802_CLK_32K_CP + 1)
--
--#endif /* _DT_BINDINGS_CLOCK_MAXIM_MAX77802_CLOCK_H */
-diff --git a/include/dt-bindings/clock/nuvoton,npcm7xx-clock.h b/include/dt-bindings/clock/nuvoton,npcm7xx-clock.h
+-#endif /* _DT_BINDINGS_REGULATOR_MAXIM_MAX77802_H */
+diff --git a/include/dt-bindings/reset/actions,s700-reset.h b/include/dt-bindings/reset/actions,s700-reset.h
 deleted file mode 100644
-index 65e6bc4eeea0..000000000000
---- a/include/dt-bindings/clock/nuvoton,npcm7xx-clock.h
+index 5e3b16b8ef53..000000000000
+--- a/include/dt-bindings/reset/actions,s700-reset.h
 +++ /dev/null
-@@ -1,46 +0,0 @@
+@@ -1,34 +0,0 @@
+-// SPDX-License-Identifier: (GPL-2.0-or-later OR MIT)
+-//
+-// Device Tree binding constants for Actions Semi S700 Reset Management Unit
+-//
+-// Copyright (c) 2018 Linaro Ltd.
+-
+-#ifndef __DT_BINDINGS_ACTIONS_S700_RESET_H
+-#define __DT_BINDINGS_ACTIONS_S700_RESET_H
+-
+-#define RESET_AUDIO				0
+-#define RESET_CSI				1
+-#define RESET_DE				2
+-#define RESET_DSI				3
+-#define RESET_GPIO				4
+-#define RESET_I2C0				5
+-#define RESET_I2C1				6
+-#define RESET_I2C2				7
+-#define RESET_I2C3				8
+-#define RESET_KEY				9
+-#define RESET_LCD0				10
+-#define RESET_SI				11
+-#define RESET_SPI0				12
+-#define RESET_SPI1				13
+-#define RESET_SPI2				14
+-#define RESET_SPI3				15
+-#define RESET_UART0				16
+-#define RESET_UART1				17
+-#define RESET_UART2				18
+-#define RESET_UART3				19
+-#define RESET_UART4				20
+-#define RESET_UART5				21
+-#define RESET_UART6				22
+-
+-#endif /* __DT_BINDINGS_ACTIONS_S700_RESET_H */
+diff --git a/include/dt-bindings/reset/actions,s900-reset.h b/include/dt-bindings/reset/actions,s900-reset.h
+deleted file mode 100644
+index 42c19d02e43b..000000000000
+--- a/include/dt-bindings/reset/actions,s900-reset.h
++++ /dev/null
+@@ -1,65 +0,0 @@
+-// SPDX-License-Identifier: (GPL-2.0-or-later OR MIT)
+-//
+-// Device Tree binding constants for Actions Semi S900 Reset Management Unit
+-//
+-// Copyright (c) 2018 Linaro Ltd.
+-
+-#ifndef __DT_BINDINGS_ACTIONS_S900_RESET_H
+-#define __DT_BINDINGS_ACTIONS_S900_RESET_H
+-
+-#define RESET_CHIPID				0
+-#define RESET_CPU_SCNT				1
+-#define RESET_SRAMI				2
+-#define RESET_DDR_CTL_PHY			3
+-#define RESET_DMAC				4
+-#define RESET_GPIO				5
+-#define RESET_BISP_AXI				6
+-#define RESET_CSI0				7
+-#define RESET_CSI1				8
+-#define RESET_DE				9
+-#define RESET_DSI				10
+-#define RESET_GPU3D_PA				11
+-#define RESET_GPU3D_PB				12
+-#define RESET_HDE				13
+-#define RESET_I2C0				14
+-#define RESET_I2C1				15
+-#define RESET_I2C2				16
+-#define RESET_I2C3				17
+-#define RESET_I2C4				18
+-#define RESET_I2C5				19
+-#define RESET_IMX				20
+-#define RESET_NANDC0				21
+-#define RESET_NANDC1				22
+-#define RESET_SD0				23
+-#define RESET_SD1				24
+-#define RESET_SD2				25
+-#define RESET_SD3				26
+-#define RESET_SPI0				27
+-#define RESET_SPI1				28
+-#define RESET_SPI2				29
+-#define RESET_SPI3				30
+-#define RESET_UART0				31
+-#define RESET_UART1				32
+-#define RESET_UART2				33
+-#define RESET_UART3				34
+-#define RESET_UART4				35
+-#define RESET_UART5				36
+-#define RESET_UART6				37
+-#define RESET_HDMI				38
+-#define RESET_LVDS				39
+-#define RESET_EDP				40
+-#define RESET_USB2HUB				41
+-#define RESET_USB2HSIC				42
+-#define RESET_USB3				43
+-#define RESET_PCM1				44
+-#define RESET_AUDIO				45
+-#define RESET_PCM0				46
+-#define RESET_SE				47
+-#define RESET_GIC				48
+-#define RESET_DDR_CTL_PHY_AXI			49
+-#define RESET_CMU_DDR				50
+-#define RESET_DMM				51
+-#define RESET_HDCP2TX				52
+-#define RESET_ETHERNET				53
+-
+-#endif /* __DT_BINDINGS_ACTIONS_S900_RESET_H */
+diff --git a/include/dt-bindings/reset/altr,rst-mgr-a10.h b/include/dt-bindings/reset/altr,rst-mgr-a10.h
+deleted file mode 100644
+index acb0bbf4f9f5..000000000000
+--- a/include/dt-bindings/reset/altr,rst-mgr-a10.h
++++ /dev/null
+@@ -1,110 +0,0 @@
+-/*
+- * Copyright (c) 2014, Steffen Trumtrar <s.trumtrar@pengutronix.de>
+- *
+- * This software is licensed under the terms of the GNU General Public
+- * License version 2, as published by the Free Software Foundation, and
+- * may be copied, distributed, and modified under those terms.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU General Public License for more details.
+- */
+-
+-#ifndef _DT_BINDINGS_RESET_ALTR_RST_MGR_A10_H
+-#define _DT_BINDINGS_RESET_ALTR_RST_MGR_A10_H
+-
+-/* MPUMODRST */
+-#define CPU0_RESET		0
+-#define CPU1_RESET		1
+-#define WDS_RESET		2
+-#define SCUPER_RESET		3
+-
+-/* PER0MODRST */
+-#define EMAC0_RESET		32
+-#define EMAC1_RESET		33
+-#define EMAC2_RESET		34
+-#define USB0_RESET		35
+-#define USB1_RESET		36
+-#define NAND_RESET		37
+-#define QSPI_RESET		38
+-#define SDMMC_RESET		39
+-#define EMAC0_OCP_RESET		40
+-#define EMAC1_OCP_RESET		41
+-#define EMAC2_OCP_RESET		42
+-#define USB0_OCP_RESET		43
+-#define USB1_OCP_RESET		44
+-#define NAND_OCP_RESET		45
+-#define QSPI_OCP_RESET		46
+-#define SDMMC_OCP_RESET		47
+-#define DMA_RESET		48
+-#define SPIM0_RESET		49
+-#define SPIM1_RESET		50
+-#define SPIS0_RESET		51
+-#define SPIS1_RESET		52
+-#define DMA_OCP_RESET		53
+-#define EMAC_PTP_RESET		54
+-/* 55 is empty*/
+-#define DMAIF0_RESET		56
+-#define DMAIF1_RESET		57
+-#define DMAIF2_RESET		58
+-#define DMAIF3_RESET		59
+-#define DMAIF4_RESET		60
+-#define DMAIF5_RESET		61
+-#define DMAIF6_RESET		62
+-#define DMAIF7_RESET		63
+-
+-/* PER1MODRST */
+-#define L4WD0_RESET		64
+-#define L4WD1_RESET		65
+-#define L4SYSTIMER0_RESET	66
+-#define L4SYSTIMER1_RESET	67
+-#define SPTIMER0_RESET		68
+-#define SPTIMER1_RESET		69
+-/* 70-71 is reserved */
+-#define I2C0_RESET		72
+-#define I2C1_RESET		73
+-#define I2C2_RESET		74
+-#define I2C3_RESET		75
+-#define I2C4_RESET		76
+-/* 77-79 is reserved */
+-#define UART0_RESET		80
+-#define UART1_RESET		81
+-/* 82-87 is reserved */
+-#define GPIO0_RESET		88
+-#define GPIO1_RESET		89
+-#define GPIO2_RESET		90
+-
+-/* BRGMODRST */
+-#define HPS2FPGA_RESET		96
+-#define LWHPS2FPGA_RESET	97
+-#define FPGA2HPS_RESET		98
+-#define F2SSDRAM0_RESET		99
+-#define F2SSDRAM1_RESET		100
+-#define F2SSDRAM2_RESET		101
+-#define DDRSCH_RESET		102
+-
+-/* SYSMODRST*/
+-#define ROM_RESET		128
+-#define OCRAM_RESET		129
+-/* 130 is reserved */
+-#define FPGAMGR_RESET		131
+-#define S2F_RESET		132
+-#define SYSDBG_RESET		133
+-#define OCRAM_OCP_RESET		134
+-
+-/* COLDMODRST */
+-#define CLKMGRCOLD_RESET	160
+-/* 161-162 is reserved */
+-#define S2FCOLD_RESET		163
+-#define TIMESTAMPCOLD_RESET	164
+-#define TAPCOLD_RESET		165
+-#define HMCCOLD_RESET		166
+-#define IOMGRCOLD_RESET		167
+-
+-/* NRSTMODRST */
+-#define NRSTPINOE_RESET		192
+-
+-/* DBGMODRST */
+-#define DBG_RESET		224
+-#endif
+diff --git a/include/dt-bindings/reset/altr,rst-mgr-s10.h b/include/dt-bindings/reset/altr,rst-mgr-s10.h
+deleted file mode 100644
+index 1fdcf8ae1531..000000000000
+--- a/include/dt-bindings/reset/altr,rst-mgr-s10.h
++++ /dev/null
+@@ -1,96 +0,0 @@
 -/* SPDX-License-Identifier: GPL-2.0 */
 -/*
-- * Nuvoton NPCM7xx Clock Generator binding
-- * clock binding number for all clocks supportted by nuvoton,npcm7xx-clk
-- *
-- * Copyright (C) 2018 Nuvoton Technologies tali.perry@nuvoton.com
-- *
+- * Copyright (C) 2016-2018 Intel Corporation. All rights reserved
+- * Copyright (C) 2016 Altera Corporation. All rights reserved
+- * derived from Steffen Trumtrar's "altr,rst-mgr-a10.h"
 - */
 -
--#ifndef __DT_BINDINGS_CLOCK_NPCM7XX_H
--#define __DT_BINDINGS_CLOCK_NPCM7XX_H
+-#ifndef _DT_BINDINGS_RESET_ALTR_RST_MGR_S10_H
+-#define _DT_BINDINGS_RESET_ALTR_RST_MGR_S10_H
 -
--#define NPCM7XX_CLK_CPU		0
--#define NPCM7XX_CLK_GFX_PIXEL	1
--#define NPCM7XX_CLK_MC		2
--#define NPCM7XX_CLK_ADC		3
--#define NPCM7XX_CLK_AHB		4
--#define NPCM7XX_CLK_TIMER	5
--#define NPCM7XX_CLK_UART	6
--#define NPCM7XX_CLK_MMC		7
--#define NPCM7XX_CLK_SPI3	8
--#define NPCM7XX_CLK_PCI		9
--#define NPCM7XX_CLK_AXI		10
--#define NPCM7XX_CLK_APB4	11
--#define NPCM7XX_CLK_APB3	12
--#define NPCM7XX_CLK_APB2	13
--#define NPCM7XX_CLK_APB1	14
--#define NPCM7XX_CLK_APB5	15
--#define NPCM7XX_CLK_CLKOUT	16
--#define NPCM7XX_CLK_GFX		17
--#define NPCM7XX_CLK_SU		18
--#define NPCM7XX_CLK_SU48	19
--#define NPCM7XX_CLK_SDHC	20
--#define NPCM7XX_CLK_SPI0	21
--#define NPCM7XX_CLK_SPIX	22
--#define NPCM7XX_CLK_REFCLK	23
--#define NPCM7XX_CLK_SYSBYPCK	24
--#define NPCM7XX_CLK_MCBYPCK	25
--#define NPCM7XX_CLK_PLL0	26
--#define NPCM7XX_CLK_PLL1	27
--#define NPCM7XX_CLK_PLL2	28
--#define NPCM7XX_CLK_PLL2DIV2	29
--#define NPCM7XX_NUM_CLOCKS	(NPCM7XX_CLK_PLL2DIV2 + 1)
+-/* MPUMODRST */
+-#define CPU0_RESET		0
+-#define CPU1_RESET		1
+-#define CPU2_RESET		2
+-#define CPU3_RESET		3
+-
+-/* PER0MODRST */
+-#define EMAC0_RESET		32
+-#define EMAC1_RESET		33
+-#define EMAC2_RESET		34
+-#define USB0_RESET		35
+-#define USB1_RESET		36
+-#define NAND_RESET		37
+-/* 38 is empty */
+-#define SDMMC_RESET		39
+-#define EMAC0_OCP_RESET		40
+-#define EMAC1_OCP_RESET		41
+-#define EMAC2_OCP_RESET		42
+-#define USB0_OCP_RESET		43
+-#define USB1_OCP_RESET		44
+-#define NAND_OCP_RESET		45
+-/* 46 is empty */
+-#define SDMMC_OCP_RESET		47
+-#define DMA_RESET		48
+-#define SPIM0_RESET		49
+-#define SPIM1_RESET		50
+-#define SPIS0_RESET		51
+-#define SPIS1_RESET		52
+-#define DMA_OCP_RESET		53
+-#define EMAC_PTP_RESET		54
+-/* 55 is empty*/
+-#define DMAIF0_RESET		56
+-#define DMAIF1_RESET		57
+-#define DMAIF2_RESET		58
+-#define DMAIF3_RESET		59
+-#define DMAIF4_RESET		60
+-#define DMAIF5_RESET		61
+-#define DMAIF6_RESET		62
+-#define DMAIF7_RESET		63
+-
+-/* PER1MODRST */
+-#define WATCHDOG0_RESET		64
+-#define WATCHDOG1_RESET		65
+-#define WATCHDOG2_RESET		66
+-#define WATCHDOG3_RESET		67
+-#define L4SYSTIMER0_RESET	68
+-#define L4SYSTIMER1_RESET	69
+-#define SPTIMER0_RESET		70
+-#define SPTIMER1_RESET		71
+-#define I2C0_RESET		72
+-#define I2C1_RESET		73
+-#define I2C2_RESET		74
+-#define I2C3_RESET		75
+-#define I2C4_RESET		76
+-/* 77-79 is empty */
+-#define UART0_RESET		80
+-#define UART1_RESET		81
+-/* 82-87 is empty */
+-#define GPIO0_RESET		88
+-#define GPIO1_RESET		89
+-
+-/* BRGMODRST */
+-#define SOC2FPGA_RESET		96
+-#define LWHPS2FPGA_RESET	97
+-#define FPGA2SOC_RESET		98
+-#define F2SSDRAM0_RESET		99
+-#define F2SSDRAM1_RESET		100
+-#define F2SSDRAM2_RESET		101
+-#define DDRSCH_RESET		102
+-
+-/* COLDMODRST */
+-#define CPUPO0_RESET		160
+-#define CPUPO1_RESET		161
+-#define CPUPO2_RESET		162
+-#define CPUPO3_RESET		163
+-/* 164-167 is empty */
+-#define L2_RESET		168
+-
+-/* DBGMODRST */
+-#define DBG_RESET		224
+-#define CSDAP_RESET		225
+-
+-/* TAPMODRST */
+-#define TAP_RESET		256
 -
 -#endif
--
-diff --git a/include/dt-bindings/clock/rv1108-cru.h b/include/dt-bindings/clock/rv1108-cru.h
+diff --git a/include/dt-bindings/reset/altr,rst-mgr.h b/include/dt-bindings/reset/altr,rst-mgr.h
 deleted file mode 100644
-index 10ed9d140f4b..000000000000
---- a/include/dt-bindings/clock/rv1108-cru.h
+index 5b7ad7396524..000000000000
+--- a/include/dt-bindings/reset/altr,rst-mgr.h
 +++ /dev/null
-@@ -1,356 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0+ */
+@@ -1,82 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
 -/*
-- * Copyright (c) 2017 Rockchip Electronics Co. Ltd.
-- * Author: Shawn Lin <shawn.lin@rock-chips.com>
+- * Copyright (c) 2014, Steffen Trumtrar <s.trumtrar@pengutronix.de>
 - */
 -
--#ifndef _DT_BINDINGS_CLK_ROCKCHIP_RV1108_H
--#define _DT_BINDINGS_CLK_ROCKCHIP_RV1108_H
+-#ifndef _DT_BINDINGS_RESET_ALTR_RST_MGR_H
+-#define _DT_BINDINGS_RESET_ALTR_RST_MGR_H
 -
--/* pll id */
--#define PLL_APLL			0
--#define PLL_DPLL			1
--#define PLL_GPLL			2
--#define ARMCLK				3
+-/* MPUMODRST */
+-#define CPU0_RESET		0
+-#define CPU1_RESET		1
+-#define WDS_RESET		2
+-#define SCUPER_RESET		3
+-#define L2_RESET		4
 -
--/* sclk gates (special clocks) */
--#define SCLK_SPI0			65
--#define SCLK_NANDC			67
--#define SCLK_SDMMC			68
--#define SCLK_SDIO			69
--#define SCLK_EMMC			71
--#define SCLK_UART0			72
--#define SCLK_UART1			73
--#define SCLK_UART2			74
--#define SCLK_I2S0			75
--#define SCLK_I2S1			76
--#define SCLK_I2S2			77
--#define SCLK_TIMER0			78
--#define SCLK_TIMER1			79
--#define SCLK_SFC			80
--#define SCLK_SDMMC_DRV			81
--#define SCLK_SDIO_DRV			82
--#define SCLK_EMMC_DRV			83
--#define SCLK_SDMMC_SAMPLE		84
--#define SCLK_SDIO_SAMPLE		85
--#define SCLK_EMMC_SAMPLE		86
--#define SCLK_VENC_CORE			87
--#define SCLK_HEVC_CORE			88
--#define SCLK_HEVC_CABAC			89
--#define SCLK_PWM0_PMU			90
--#define SCLK_I2C0_PMU			91
--#define SCLK_WIFI			92
--#define SCLK_CIFOUT			93
--#define SCLK_MIPI_CSI_OUT		94
--#define SCLK_CIF0			95
--#define SCLK_CIF1			96
--#define SCLK_CIF2			97
--#define SCLK_CIF3			98
--#define SCLK_DSP			99
--#define SCLK_DSP_IOP			100
--#define SCLK_DSP_EPP			101
--#define SCLK_DSP_EDP			102
--#define SCLK_DSP_EDAP			103
--#define SCLK_CVBS_HOST			104
--#define SCLK_HDMI_SFR			105
--#define SCLK_HDMI_CEC			106
--#define SCLK_CRYPTO			107
--#define SCLK_SPI			108
--#define SCLK_SARADC			109
--#define SCLK_TSADC			110
--#define SCLK_MAC_PRE			111
--#define SCLK_MAC			112
--#define SCLK_MAC_RX			113
--#define SCLK_MAC_REF			114
--#define SCLK_MAC_REFOUT			115
--#define SCLK_DSP_PFM			116
--#define SCLK_RGA			117
--#define SCLK_I2C1			118
--#define SCLK_I2C2			119
--#define SCLK_I2C3			120
--#define SCLK_PWM			121
--#define SCLK_ISP			122
--#define SCLK_USBPHY			123
--#define SCLK_I2S0_SRC			124
--#define SCLK_I2S1_SRC			125
--#define SCLK_I2S2_SRC			126
--#define SCLK_UART0_SRC			127
--#define SCLK_UART1_SRC			128
--#define SCLK_UART2_SRC			129
--#define SCLK_MAC_TX			130
--#define SCLK_MACREF			131
--#define SCLK_MACREF_OUT			132
+-/* PERMODRST */
+-#define EMAC0_RESET		32
+-#define EMAC1_RESET		33
+-#define USB0_RESET		34
+-#define USB1_RESET		35
+-#define NAND_RESET		36
+-#define QSPI_RESET		37
+-#define L4WD0_RESET		38
+-#define L4WD1_RESET		39
+-#define OSC1TIMER0_RESET	40
+-#define OSC1TIMER1_RESET	41
+-#define SPTIMER0_RESET		42
+-#define SPTIMER1_RESET		43
+-#define I2C0_RESET		44
+-#define I2C1_RESET		45
+-#define I2C2_RESET		46
+-#define I2C3_RESET		47
+-#define UART0_RESET		48
+-#define UART1_RESET		49
+-#define SPIM0_RESET		50
+-#define SPIM1_RESET		51
+-#define SPIS0_RESET		52
+-#define SPIS1_RESET		53
+-#define SDMMC_RESET		54
+-#define CAN0_RESET		55
+-#define CAN1_RESET		56
+-#define GPIO0_RESET		57
+-#define GPIO1_RESET		58
+-#define GPIO2_RESET		59
+-#define DMA_RESET		60
+-#define SDR_RESET		61
 -
--#define DCLK_VOP_SRC			185
--#define DCLK_HDMIPHY			186
--#define DCLK_VOP			187
+-/* PER2MODRST */
+-#define DMAIF0_RESET		64
+-#define DMAIF1_RESET		65
+-#define DMAIF2_RESET		66
+-#define DMAIF3_RESET		67
+-#define DMAIF4_RESET		68
+-#define DMAIF5_RESET		69
+-#define DMAIF6_RESET		70
+-#define DMAIF7_RESET		71
 -
--/* aclk gates */
--#define ACLK_DMAC			192
--#define ACLK_PRE			193
--#define ACLK_CORE			194
--#define ACLK_ENMCORE			195
--#define ACLK_RKVENC			196
--#define ACLK_RKVDEC			197
--#define ACLK_VPU			198
--#define ACLK_CIF0			199
--#define ACLK_VIO0			200
--#define ACLK_VIO1			201
--#define ACLK_VOP			202
--#define ACLK_IEP			203
--#define ACLK_RGA			204
--#define ACLK_ISP			205
--#define ACLK_CIF1			206
--#define ACLK_CIF2			207
--#define ACLK_CIF3			208
--#define ACLK_PERI			209
--#define ACLK_GMAC			210
+-/* BRGMODRST */
+-#define HPS2FPGA_RESET		96
+-#define LWHPS2FPGA_RESET	97
+-#define FPGA2HPS_RESET		98
 -
--/* pclk gates */
--#define PCLK_GPIO1			256
--#define PCLK_GPIO2			257
--#define PCLK_GPIO3			258
--#define PCLK_GRF			259
--#define PCLK_I2C1			260
--#define PCLK_I2C2			261
--#define PCLK_I2C3			262
--#define PCLK_SPI			263
--#define PCLK_SFC			264
--#define PCLK_UART0			265
--#define PCLK_UART1			266
--#define PCLK_UART2			267
--#define PCLK_TSADC			268
--#define PCLK_PWM			269
--#define PCLK_TIMER			270
--#define PCLK_PERI			271
--#define PCLK_GPIO0_PMU			272
--#define PCLK_I2C0_PMU			273
--#define PCLK_PWM0_PMU			274
--#define PCLK_ISP			275
--#define PCLK_VIO			276
--#define PCLK_MIPI_DSI			277
--#define PCLK_HDMI_CTRL			278
--#define PCLK_SARADC			279
--#define PCLK_DSP_CFG			280
--#define PCLK_BUS			281
--#define PCLK_EFUSE0			282
--#define PCLK_EFUSE1			283
--#define PCLK_WDT			284
--#define PCLK_GMAC			285
+-/* MISCMODRST*/
+-#define ROM_RESET		128
+-#define OCRAM_RESET		129
+-#define SYSMGR_RESET		130
+-#define SYSMGRCOLD_RESET	131
+-#define FPGAMGR_RESET		132
+-#define ACPIDMAP_RESET		133
+-#define S2F_RESET		134
+-#define S2FCOLD_RESET		135
+-#define NRSTPIN_RESET		136
+-#define TIMESTAMPCOLD_RESET	137
+-#define CLKMGRCOLD_RESET	138
+-#define SCANMGR_RESET		139
+-#define FRZCTRLCOLD_RESET	140
+-#define SYSDBG_RESET		141
+-#define DBG_RESET		142
+-#define TAPCOLD_RESET		143
+-#define SDRCOLD_RESET		144
 -
--/* hclk gates */
--#define HCLK_I2S0_8CH			320
--#define HCLK_I2S1_2CH			321
--#define HCLK_I2S2_2CH			322
--#define HCLK_NANDC			323
--#define HCLK_SDMMC			324
--#define HCLK_SDIO			325
--#define HCLK_EMMC			326
--#define HCLK_PERI			327
--#define HCLK_SFC			328
--#define HCLK_RKVENC			329
--#define HCLK_RKVDEC			330
--#define HCLK_CIF0			331
--#define HCLK_VIO			332
--#define HCLK_VOP			333
--#define HCLK_IEP			334
--#define HCLK_RGA			335
--#define HCLK_ISP			336
--#define HCLK_CRYPTO_MST			337
--#define HCLK_CRYPTO_SLV			338
--#define HCLK_HOST0			339
--#define HCLK_OTG			340
--#define HCLK_CIF1			341
--#define HCLK_CIF2			342
--#define HCLK_CIF3			343
--#define HCLK_BUS			344
--#define HCLK_VPU			345
--
--#define CLK_NR_CLKS			(HCLK_VPU + 1)
--
--/* reset id */
--#define SRST_CORE_PO_AD			0
--#define SRST_CORE_AD			1
--#define SRST_L2_AD			2
--#define SRST_CPU_NIU_AD			3
--#define SRST_CORE_PO			4
--#define SRST_CORE			5
--#define SRST_L2				6
--#define SRST_CORE_DBG			8
--#define PRST_DBG			9
--#define RST_DAP				10
--#define PRST_DBG_NIU			11
--#define ARST_STRC_SYS_AD		15
--
--#define SRST_DDRPHY_CLKDIV		16
--#define SRST_DDRPHY			17
--#define PRST_DDRPHY			18
--#define PRST_HDMIPHY			19
--#define PRST_VDACPHY			20
--#define PRST_VADCPHY			21
--#define PRST_MIPI_CSI_PHY		22
--#define PRST_MIPI_DSI_PHY		23
--#define PRST_ACODEC			24
--#define ARST_BUS_NIU			25
--#define PRST_TOP_NIU			26
--#define ARST_INTMEM			27
--#define HRST_ROM			28
--#define ARST_DMAC			29
--#define SRST_MSCH_NIU			30
--#define PRST_MSCH_NIU			31
--
--#define PRST_DDRUPCTL			32
--#define NRST_DDRUPCTL			33
--#define PRST_DDRMON			34
--#define HRST_I2S0_8CH			35
--#define MRST_I2S0_8CH			36
--#define HRST_I2S1_2CH			37
--#define MRST_IS21_2CH			38
--#define HRST_I2S2_2CH			39
--#define MRST_I2S2_2CH			40
--#define HRST_CRYPTO			41
--#define SRST_CRYPTO			42
--#define PRST_SPI			43
--#define SRST_SPI			44
--#define PRST_UART0			45
--#define PRST_UART1			46
--#define PRST_UART2			47
--
--#define SRST_UART0			48
--#define SRST_UART1			49
--#define SRST_UART2			50
--#define PRST_I2C1			51
--#define PRST_I2C2			52
--#define PRST_I2C3			53
--#define SRST_I2C1			54
--#define SRST_I2C2			55
--#define SRST_I2C3			56
--#define PRST_PWM1			58
--#define SRST_PWM1			60
--#define PRST_WDT			61
--#define PRST_GPIO1			62
--#define PRST_GPIO2			63
--
--#define PRST_GPIO3			64
--#define PRST_GRF			65
--#define PRST_EFUSE			66
--#define PRST_EFUSE512			67
--#define PRST_TIMER0			68
--#define SRST_TIMER0			69
--#define SRST_TIMER1			70
--#define PRST_TSADC			71
--#define SRST_TSADC			72
--#define PRST_SARADC			73
--#define SRST_SARADC			74
--#define HRST_SYSBUS			75
--#define PRST_USBGRF			76
--
--#define ARST_PERIPH_NIU			80
--#define HRST_PERIPH_NIU			81
--#define PRST_PERIPH_NIU			82
--#define HRST_PERIPH			83
--#define HRST_SDMMC			84
--#define HRST_SDIO			85
--#define HRST_EMMC			86
--#define HRST_NANDC			87
--#define NRST_NANDC			88
--#define HRST_SFC			89
--#define SRST_SFC			90
--#define ARST_GMAC			91
--#define HRST_OTG			92
--#define SRST_OTG			93
--#define SRST_OTG_ADP			94
--#define HRST_HOST0			95
--
--#define HRST_HOST0_AUX			96
--#define HRST_HOST0_ARB			97
--#define SRST_HOST0_EHCIPHY		98
--#define SRST_HOST0_UTMI			99
--#define SRST_USBPOR			100
--#define SRST_UTMI0			101
--#define SRST_UTMI1			102
--
--#define ARST_VIO0_NIU			102
--#define ARST_VIO1_NIU			103
--#define HRST_VIO_NIU			104
--#define PRST_VIO_NIU			105
--#define ARST_VOP			106
--#define HRST_VOP			107
--#define DRST_VOP			108
--#define ARST_IEP			109
--#define HRST_IEP			110
--#define ARST_RGA			111
--#define HRST_RGA			112
--#define SRST_RGA			113
--#define PRST_CVBS			114
--#define PRST_HDMI			115
--#define SRST_HDMI			116
--#define PRST_MIPI_DSI			117
--
--#define ARST_ISP_NIU			118
--#define HRST_ISP_NIU			119
--#define HRST_ISP			120
--#define SRST_ISP			121
--#define ARST_VIP0			122
--#define HRST_VIP0			123
--#define PRST_VIP0			124
--#define ARST_VIP1			125
--#define HRST_VIP1			126
--#define PRST_VIP1			127
--#define ARST_VIP2			128
--#define HRST_VIP2			129
--#define PRST_VIP2			120
--#define ARST_VIP3			121
--#define HRST_VIP3			122
--#define PRST_VIP4			123
--
--#define PRST_CIF1TO4			124
--#define SRST_CVBS_CLK			125
--#define HRST_CVBS			126
--
--#define ARST_VPU_NIU			140
--#define HRST_VPU_NIU			141
--#define ARST_VPU			142
--#define HRST_VPU			143
--#define ARST_RKVDEC_NIU			144
--#define HRST_RKVDEC_NIU			145
--#define ARST_RKVDEC			146
--#define HRST_RKVDEC			147
--#define SRST_RKVDEC_CABAC		148
--#define SRST_RKVDEC_CORE		149
--#define ARST_RKVENC_NIU			150
--#define HRST_RKVENC_NIU			151
--#define ARST_RKVENC			152
--#define HRST_RKVENC			153
--#define SRST_RKVENC_CORE		154
--
--#define SRST_DSP_CORE			156
--#define SRST_DSP_SYS			157
--#define SRST_DSP_GLOBAL			158
--#define SRST_DSP_OECM			159
--#define PRST_DSP_IOP_NIU		160
--#define ARST_DSP_EPP_NIU		161
--#define ARST_DSP_EDP_NIU		162
--#define PRST_DSP_DBG_NIU		163
--#define PRST_DSP_CFG_NIU		164
--#define PRST_DSP_GRF			165
--#define PRST_DSP_MAILBOX		166
--#define PRST_DSP_INTC			167
--#define PRST_DSP_PFM_MON		169
--#define SRST_DSP_PFM_MON		170
--#define ARST_DSP_EDAP_NIU		171
--
--#define SRST_PMU			172
--#define SRST_PMU_I2C0			173
--#define PRST_PMU_I2C0			174
--#define PRST_PMU_GPIO0			175
--#define PRST_PMU_INTMEM			176
--#define PRST_PMU_PWM0			177
--#define SRST_PMU_PWM0			178
--#define PRST_PMU_GRF			179
--#define SRST_PMU_NIU			180
--#define SRST_PMU_PVTM			181
--#define ARST_DSP_EDP_PERF		184
--#define ARST_DSP_EPP_PERF		185
--
--#endif /* _DT_BINDINGS_CLK_ROCKCHIP_RV1108_H */
-diff --git a/include/dt-bindings/clock/starfive,jh7110-crg.h b/include/dt-bindings/clock/starfive,jh7110-crg.h
+-#endif
+diff --git a/include/dt-bindings/reset/nuvoton,npcm7xx-reset.h b/include/dt-bindings/reset/nuvoton,npcm7xx-reset.h
 deleted file mode 100644
-index b51e3829ff48..000000000000
---- a/include/dt-bindings/clock/starfive,jh7110-crg.h
+index 757f5e34c814..000000000000
+--- a/include/dt-bindings/reset/nuvoton,npcm7xx-reset.h
 +++ /dev/null
-@@ -1,258 +0,0 @@
+@@ -1,91 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-// Copyright (c) 2020 Nuvoton Technology corporation.
+-
+-#ifndef _DT_BINDINGS_NPCM7XX_RESET_H
+-#define _DT_BINDINGS_NPCM7XX_RESET_H
+-
+-#define NPCM7XX_RESET_IPSRST1		0x20
+-#define NPCM7XX_RESET_IPSRST2		0x24
+-#define NPCM7XX_RESET_IPSRST3		0x34
+-
+-/* Reset lines on IP1 reset module (NPCM7XX_RESET_IPSRST1) */
+-#define NPCM7XX_RESET_FIU3		1
+-#define NPCM7XX_RESET_UDC1		5
+-#define NPCM7XX_RESET_EMC1		6
+-#define NPCM7XX_RESET_UART_2_3		7
+-#define NPCM7XX_RESET_UDC2		8
+-#define NPCM7XX_RESET_PECI		9
+-#define NPCM7XX_RESET_AES		10
+-#define NPCM7XX_RESET_UART_0_1		11
+-#define NPCM7XX_RESET_MC		12
+-#define NPCM7XX_RESET_SMB2		13
+-#define NPCM7XX_RESET_SMB3		14
+-#define NPCM7XX_RESET_SMB4		15
+-#define NPCM7XX_RESET_SMB5		16
+-#define NPCM7XX_RESET_PWM_M0		18
+-#define NPCM7XX_RESET_TIMER_0_4		19
+-#define NPCM7XX_RESET_TIMER_5_9		20
+-#define NPCM7XX_RESET_EMC2		21
+-#define NPCM7XX_RESET_UDC4		22
+-#define NPCM7XX_RESET_UDC5		23
+-#define NPCM7XX_RESET_UDC6		24
+-#define NPCM7XX_RESET_UDC3		25
+-#define NPCM7XX_RESET_ADC		27
+-#define NPCM7XX_RESET_SMB6		28
+-#define NPCM7XX_RESET_SMB7		29
+-#define NPCM7XX_RESET_SMB0		30
+-#define NPCM7XX_RESET_SMB1		31
+-
+-/* Reset lines on IP2 reset module (NPCM7XX_RESET_IPSRST2) */
+-#define NPCM7XX_RESET_MFT0		0
+-#define NPCM7XX_RESET_MFT1		1
+-#define NPCM7XX_RESET_MFT2		2
+-#define NPCM7XX_RESET_MFT3		3
+-#define NPCM7XX_RESET_MFT4		4
+-#define NPCM7XX_RESET_MFT5		5
+-#define NPCM7XX_RESET_MFT6		6
+-#define NPCM7XX_RESET_MFT7		7
+-#define NPCM7XX_RESET_MMC		8
+-#define NPCM7XX_RESET_SDHC		9
+-#define NPCM7XX_RESET_GFX_SYS		10
+-#define NPCM7XX_RESET_AHB_PCIBRG	11
+-#define NPCM7XX_RESET_VDMA		12
+-#define NPCM7XX_RESET_ECE		13
+-#define NPCM7XX_RESET_VCD		14
+-#define NPCM7XX_RESET_OTP		16
+-#define NPCM7XX_RESET_SIOX1		18
+-#define NPCM7XX_RESET_SIOX2		19
+-#define NPCM7XX_RESET_3DES		21
+-#define NPCM7XX_RESET_PSPI1		22
+-#define NPCM7XX_RESET_PSPI2		23
+-#define NPCM7XX_RESET_GMAC2		25
+-#define NPCM7XX_RESET_USB_HOST		26
+-#define NPCM7XX_RESET_GMAC1		28
+-#define NPCM7XX_RESET_CP		31
+-
+-/* Reset lines on IP3 reset module (NPCM7XX_RESET_IPSRST3) */
+-#define NPCM7XX_RESET_PWM_M1		0
+-#define NPCM7XX_RESET_SMB12		1
+-#define NPCM7XX_RESET_SPIX		2
+-#define NPCM7XX_RESET_SMB13		3
+-#define NPCM7XX_RESET_UDC0		4
+-#define NPCM7XX_RESET_UDC7		5
+-#define NPCM7XX_RESET_UDC8		6
+-#define NPCM7XX_RESET_UDC9		7
+-#define NPCM7XX_RESET_PCI_MAILBOX	9
+-#define NPCM7XX_RESET_SMB14		12
+-#define NPCM7XX_RESET_SHA		13
+-#define NPCM7XX_RESET_SEC_ECC		14
+-#define NPCM7XX_RESET_PCIE_RC		15
+-#define NPCM7XX_RESET_TIMER_10_14	16
+-#define NPCM7XX_RESET_RNG		17
+-#define NPCM7XX_RESET_SMB15		18
+-#define NPCM7XX_RESET_SMB8		19
+-#define NPCM7XX_RESET_SMB9		20
+-#define NPCM7XX_RESET_SMB10		21
+-#define NPCM7XX_RESET_SMB11		22
+-#define NPCM7XX_RESET_ESPI		23
+-#define NPCM7XX_RESET_USB_PHY_1		24
+-#define NPCM7XX_RESET_USB_PHY_2		25
+-
+-#endif
+diff --git a/include/dt-bindings/reset/raspberrypi,firmware-reset.h b/include/dt-bindings/reset/raspberrypi,firmware-reset.h
+deleted file mode 100644
+index 1a4f4c792723..000000000000
+--- a/include/dt-bindings/reset/raspberrypi,firmware-reset.h
++++ /dev/null
+@@ -1,13 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * Copyright (c) 2020 Nicolas Saenz Julienne
+- * Author: Nicolas Saenz Julienne <nsaenzjulienne@suse.com>
+- */
+-
+-#ifndef _DT_BINDINGS_RASPBERRYPI_FIRMWARE_RESET_H
+-#define _DT_BINDINGS_RASPBERRYPI_FIRMWARE_RESET_H
+-
+-#define RASPBERRYPI_FIRMWARE_RESET_ID_USB	0
+-#define RASPBERRYPI_FIRMWARE_RESET_NUM_IDS	1
+-
+-#endif
+diff --git a/include/dt-bindings/reset/sama7g5-reset.h b/include/dt-bindings/reset/sama7g5-reset.h
+deleted file mode 100644
+index 2116f41d04e0..000000000000
+--- a/include/dt-bindings/reset/sama7g5-reset.h
++++ /dev/null
+@@ -1,10 +0,0 @@
+-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+-
+-#ifndef __DT_BINDINGS_RESET_SAMA7G5_H
+-#define __DT_BINDINGS_RESET_SAMA7G5_H
+-
+-#define SAMA7G5_RESET_USB_PHY1		4
+-#define SAMA7G5_RESET_USB_PHY2		5
+-#define SAMA7G5_RESET_USB_PHY3		6
+-
+-#endif /* __DT_BINDINGS_RESET_SAMA7G5_H */
+diff --git a/include/dt-bindings/reset/snps,hsdk-reset.h b/include/dt-bindings/reset/snps,hsdk-reset.h
+deleted file mode 100644
+index e1a643e4bc91..000000000000
+--- a/include/dt-bindings/reset/snps,hsdk-reset.h
++++ /dev/null
+@@ -1,17 +0,0 @@
+-/**
+- * This header provides index for the HSDK reset controller.
+- */
+-#ifndef _DT_BINDINGS_RESET_CONTROLLER_SNPS_HSDK
+-#define _DT_BINDINGS_RESET_CONTROLLER_SNPS_HSDK
+-
+-#define HSDK_APB_RESET	0
+-#define HSDK_AXI_RESET	1
+-#define HSDK_ETH_RESET	2
+-#define HSDK_USB_RESET	3
+-#define HSDK_SDIO_RESET	4
+-#define HSDK_HDMI_RESET	5
+-#define HSDK_GFX_RESET	6
+-#define HSDK_DMAC_RESET	7
+-#define HSDK_EBI_RESET	8
+-
+-#endif /*_DT_BINDINGS_RESET_CONTROLLER_SNPS_HSDK*/
+diff --git a/include/dt-bindings/reset/starfive,jh7110-crg.h b/include/dt-bindings/reset/starfive,jh7110-crg.h
+deleted file mode 100644
+index 1d596581da7b..000000000000
+--- a/include/dt-bindings/reset/starfive,jh7110-crg.h
++++ /dev/null
+@@ -1,183 +0,0 @@
 -/* SPDX-License-Identifier: GPL-2.0+ */
 -/*
 - * Copyright (C) 2022 StarFive Technology Co., Ltd.
@@ -1112,484 +1677,217 @@ index b51e3829ff48..000000000000
 - * Author: Yanhong Wang <yanhong.wang@starfivetech.com>
 - */
 -
--#ifndef __DT_BINDINGS_CLOCK_STARFIVE_JH7110_H__
--#define __DT_BINDINGS_CLOCK_STARFIVE_JH7110_H__
+-#ifndef __DT_BINDINGS_RESET_STARFIVE_JH7110_H__
+-#define __DT_BINDINGS_RESET_STARFIVE_JH7110_H__
 -
--#define JH7110_SYSCLK_PLL0_OUT			0
--#define JH7110_SYSCLK_PLL1_OUT			1
--#define JH7110_SYSCLK_PLL2_OUT			2
--#define JH7110_PLLCLK_END			3
+-/* SYSCRG resets */
+-#define JH7110_SYSRST_JTAG2APB			0
+-#define JH7110_SYSRST_SYSCON			1
+-#define JH7110_SYSRST_IOMUX_APB		2
+-#define JH7110_SYSRST_BUS			3
+-#define JH7110_SYSRST_DEBUG			4
+-#define JH7110_SYSRST_CORE0			5
+-#define JH7110_SYSRST_CORE1			6
+-#define JH7110_SYSRST_CORE2			7
+-#define JH7110_SYSRST_CORE3			8
+-#define JH7110_SYSRST_CORE4			9
+-#define JH7110_SYSRST_CORE0_ST			10
+-#define JH7110_SYSRST_CORE1_ST			11
+-#define JH7110_SYSRST_CORE2_ST			12
+-#define JH7110_SYSRST_CORE3_ST			13
+-#define JH7110_SYSRST_CORE4_ST			14
+-#define JH7110_SYSRST_TRACE0			15
+-#define JH7110_SYSRST_TRACE1			16
+-#define JH7110_SYSRST_TRACE2			17
+-#define JH7110_SYSRST_TRACE3			18
+-#define JH7110_SYSRST_TRACE4			19
+-#define JH7110_SYSRST_TRACE_COM		20
+-#define JH7110_SYSRST_GPU_APB			21
+-#define JH7110_SYSRST_GPU_DOMA			22
+-#define JH7110_SYSRST_NOC_BUS_APB_BUS		23
+-#define JH7110_SYSRST_NOC_BUS_AXICFG0_AXI	24
+-#define JH7110_SYSRST_NOC_BUS_CPU_AXI		25
+-#define JH7110_SYSRST_NOC_BUS_DISP_AXI		26
+-#define JH7110_SYSRST_NOC_BUS_GPU_AXI		27
+-#define JH7110_SYSRST_NOC_BUS_ISP_AXI		28
+-#define JH7110_SYSRST_NOC_BUS_DDRC		29
+-#define JH7110_SYSRST_NOC_BUS_STG_AXI		30
+-#define JH7110_SYSRST_NOC_BUS_VDEC_AXI		31
 -
--#define JH7110_SYSCLK_CPU_ROOT			0
--#define JH7110_SYSCLK_CPU_CORE			1
--#define JH7110_SYSCLK_CPU_BUS			2
--#define JH7110_SYSCLK_GPU_ROOT			3
--#define JH7110_SYSCLK_PERH_ROOT		4
--#define JH7110_SYSCLK_BUS_ROOT			5
--#define JH7110_SYSCLK_NOCSTG_BUS		6
--#define JH7110_SYSCLK_AXI_CFG0			7
--#define JH7110_SYSCLK_STG_AXIAHB		8
--#define JH7110_SYSCLK_AHB0			9
--#define JH7110_SYSCLK_AHB1			10
--#define JH7110_SYSCLK_APB_BUS			11
--#define JH7110_SYSCLK_APB0			12
--#define JH7110_SYSCLK_PLL0_DIV2		13
--#define JH7110_SYSCLK_PLL1_DIV2		14
--#define JH7110_SYSCLK_PLL2_DIV2		15
--#define JH7110_SYSCLK_AUDIO_ROOT		16
--#define JH7110_SYSCLK_MCLK_INNER		17
--#define JH7110_SYSCLK_MCLK			18
--#define JH7110_SYSCLK_MCLK_OUT			19
--#define JH7110_SYSCLK_ISP_2X			20
--#define JH7110_SYSCLK_ISP_AXI			21
--#define JH7110_SYSCLK_GCLK0			22
--#define JH7110_SYSCLK_GCLK1			23
--#define JH7110_SYSCLK_GCLK2			24
--#define JH7110_SYSCLK_CORE			25
--#define JH7110_SYSCLK_CORE1			26
--#define JH7110_SYSCLK_CORE2			27
--#define JH7110_SYSCLK_CORE3			28
--#define JH7110_SYSCLK_CORE4			29
--#define JH7110_SYSCLK_DEBUG			30
--#define JH7110_SYSCLK_RTC_TOGGLE		31
--#define JH7110_SYSCLK_TRACE0			32
--#define JH7110_SYSCLK_TRACE1			33
--#define JH7110_SYSCLK_TRACE2			34
--#define JH7110_SYSCLK_TRACE3			35
--#define JH7110_SYSCLK_TRACE4			36
--#define JH7110_SYSCLK_TRACE_COM		37
--#define JH7110_SYSCLK_NOC_BUS_CPU_AXI		38
--#define JH7110_SYSCLK_NOC_BUS_AXICFG0_AXI	39
--#define JH7110_SYSCLK_OSC_DIV2			40
--#define JH7110_SYSCLK_PLL1_DIV4		41
--#define JH7110_SYSCLK_PLL1_DIV8		42
--#define JH7110_SYSCLK_DDR_BUS			43
--#define JH7110_SYSCLK_DDR_AXI			44
--#define JH7110_SYSCLK_GPU_CORE			45
--#define JH7110_SYSCLK_GPU_CORE_CLK		46
--#define JH7110_SYSCLK_GPU_SYS_CLK		47
--#define JH7110_SYSCLK_GPU_APB			48
--#define JH7110_SYSCLK_GPU_RTC_TOGGLE		49
--#define JH7110_SYSCLK_NOC_BUS_GPU_AXI		50
--#define JH7110_SYSCLK_ISP_TOP_CLK_ISPCORE_2X	51
--#define JH7110_SYSCLK_ISP_TOP_CLK_ISP_AXI	52
--#define JH7110_SYSCLK_NOC_BUS_ISP_AXI		53
--#define JH7110_SYSCLK_HIFI4_CORE		54
--#define JH7110_SYSCLK_HIFI4_AXI		55
--#define JH7110_SYSCLK_AXI_CFG1_DEC_MAIN	56
--#define JH7110_SYSCLK_AXI_CFG1_DEC_AHB		57
--#define JH7110_SYSCLK_VOUT_SRC			58
--#define JH7110_SYSCLK_VOUT_AXI			59
--#define JH7110_SYSCLK_NOC_BUS_DISP_AXI		60
--#define JH7110_SYSCLK_VOUT_TOP_CLK_VOUT_AHB		61
--#define JH7110_SYSCLK_VOUT_TOP_CLK_VOUT_AXI		62
--#define JH7110_SYSCLK_VOUT_TOP_CLK_HDMITX0_MCLK	63
--#define JH7110_SYSCLK_VOUT_TOP_CLK_MIPIPHY_REF		64
--#define JH7110_SYSCLK_JPEGC_AXI		65
--#define JH7110_SYSCLK_CODAJ12_AXI		66
--#define JH7110_SYSCLK_CODAJ12_CORE		67
--#define JH7110_SYSCLK_CODAJ12_APB		68
--#define JH7110_SYSCLK_VDEC_AXI			69
--#define JH7110_SYSCLK_WAVE511_AXI		70
--#define JH7110_SYSCLK_WAVE511_BPU		71
--#define JH7110_SYSCLK_WAVE511_VCE		72
--#define JH7110_SYSCLK_WAVE511_APB		73
--#define JH7110_SYSCLK_VDEC_JPG_ARB_JPG		74
--#define JH7110_SYSCLK_VDEC_JPG_ARB_MAIN	75
--#define JH7110_SYSCLK_NOC_BUS_VDEC_AXI		76
--#define JH7110_SYSCLK_VENC_AXI			77
--#define JH7110_SYSCLK_WAVE420L_AXI		78
--#define JH7110_SYSCLK_WAVE420L_BPU		79
--#define JH7110_SYSCLK_WAVE420L_VCE		80
--#define JH7110_SYSCLK_WAVE420L_APB		81
--#define JH7110_SYSCLK_NOC_BUS_VENC_AXI		82
--#define JH7110_SYSCLK_AXI_CFG0_DEC_MAIN_DIV	83
--#define JH7110_SYSCLK_AXI_CFG0_DEC_MAIN	84
--#define JH7110_SYSCLK_AXI_CFG0_DEC_HIFI4	85
--#define JH7110_SYSCLK_AXIMEM2_AXI		86
--#define JH7110_SYSCLK_QSPI_AHB			87
--#define JH7110_SYSCLK_QSPI_APB			88
--#define JH7110_SYSCLK_QSPI_REF_SRC		89
--#define JH7110_SYSCLK_QSPI_REF			90
--#define JH7110_SYSCLK_SDIO0_AHB		91
--#define JH7110_SYSCLK_SDIO1_AHB		92
--#define JH7110_SYSCLK_SDIO0_SDCARD		93
--#define JH7110_SYSCLK_SDIO1_SDCARD		94
--#define JH7110_SYSCLK_USB_125M			95
--#define JH7110_SYSCLK_NOC_BUS_STG_AXI		96
--#define JH7110_SYSCLK_GMAC1_AHB		97
--#define JH7110_SYSCLK_GMAC1_AXI		98
--#define JH7110_SYSCLK_GMAC_SRC			99
--#define JH7110_SYSCLK_GMAC1_GTXCLK		100
--#define JH7110_SYSCLK_GMAC1_RMII_RTX		101
--#define JH7110_SYSCLK_GMAC1_PTP		102
--#define JH7110_SYSCLK_GMAC1_RX			103
--#define JH7110_SYSCLK_GMAC1_RX_INV		104
--#define JH7110_SYSCLK_GMAC1_TX			105
--#define JH7110_SYSCLK_GMAC1_TX_INV		106
--#define JH7110_SYSCLK_GMAC1_GTXC		107
--#define JH7110_SYSCLK_GMAC0_GTXCLK		108
--#define JH7110_SYSCLK_GMAC0_PTP		109
--#define JH7110_SYSCLK_GMAC_PHY			110
--#define JH7110_SYSCLK_GMAC0_GTXC		111
--#define JH7110_SYSCLK_IOMUX_APB		112
--#define JH7110_SYSCLK_MAILBOX			113
--#define JH7110_SYSCLK_INT_CTRL_APB		114
--#define JH7110_SYSCLK_CAN0_APB			115
--#define JH7110_SYSCLK_CAN0_TIMER		116
--#define JH7110_SYSCLK_CAN0_CAN			117
--#define JH7110_SYSCLK_CAN1_APB			118
--#define JH7110_SYSCLK_CAN1_TIMER		119
--#define JH7110_SYSCLK_CAN1_CAN			120
--#define JH7110_SYSCLK_PWM_APB			121
--#define JH7110_SYSCLK_WDT_APB			122
--#define JH7110_SYSCLK_WDT_CORE			123
--#define JH7110_SYSCLK_TIMER_APB		124
--#define JH7110_SYSCLK_TIMER0			125
--#define JH7110_SYSCLK_TIMER1			126
--#define JH7110_SYSCLK_TIMER2			127
--#define JH7110_SYSCLK_TIMER3			128
--#define JH7110_SYSCLK_TEMP_APB			129
--#define JH7110_SYSCLK_TEMP_CORE		130
--#define JH7110_SYSCLK_SPI0_APB			131
--#define JH7110_SYSCLK_SPI1_APB			132
--#define JH7110_SYSCLK_SPI2_APB			133
--#define JH7110_SYSCLK_SPI3_APB			134
--#define JH7110_SYSCLK_SPI4_APB			135
--#define JH7110_SYSCLK_SPI5_APB			136
--#define JH7110_SYSCLK_SPI6_APB			137
--#define JH7110_SYSCLK_I2C0_APB			138
--#define JH7110_SYSCLK_I2C1_APB			139
--#define JH7110_SYSCLK_I2C2_APB			140
--#define JH7110_SYSCLK_I2C3_APB			141
--#define JH7110_SYSCLK_I2C4_APB			142
--#define JH7110_SYSCLK_I2C5_APB			143
--#define JH7110_SYSCLK_I2C6_APB			144
--#define JH7110_SYSCLK_UART0_APB		145
--#define JH7110_SYSCLK_UART0_CORE		146
--#define JH7110_SYSCLK_UART1_APB		147
--#define JH7110_SYSCLK_UART1_CORE		148
--#define JH7110_SYSCLK_UART2_APB		149
--#define JH7110_SYSCLK_UART2_CORE		150
--#define JH7110_SYSCLK_UART3_APB		151
--#define JH7110_SYSCLK_UART3_CORE		152
--#define JH7110_SYSCLK_UART4_APB		153
--#define JH7110_SYSCLK_UART4_CORE		154
--#define JH7110_SYSCLK_UART5_APB		155
--#define JH7110_SYSCLK_UART5_CORE		156
--#define JH7110_SYSCLK_PWMDAC_APB		157
--#define JH7110_SYSCLK_PWMDAC_CORE		158
--#define JH7110_SYSCLK_SPDIF_APB		159
--#define JH7110_SYSCLK_SPDIF_CORE		160
--#define JH7110_SYSCLK_I2STX0_APB		161
--#define JH7110_SYSCLK_I2STX0_BCLK_MST		162
--#define JH7110_SYSCLK_I2STX0_BCLK_MST_INV	163
--#define JH7110_SYSCLK_I2STX0_LRCK_MST		164
--#define JH7110_SYSCLK_I2STX0_BCLK		165
--#define JH7110_SYSCLK_I2STX0_BCLK_INV		166
--#define JH7110_SYSCLK_I2STX0_LRCK		167
--#define JH7110_SYSCLK_I2STX1_APB		168
--#define JH7110_SYSCLK_I2STX1_BCLK_MST		169
--#define JH7110_SYSCLK_I2STX1_BCLK_MST_INV	170
--#define JH7110_SYSCLK_I2STX1_LRCK_MST		171
--#define JH7110_SYSCLK_I2STX1_BCLK		172
--#define JH7110_SYSCLK_I2STX1_BCLK_INV		173
--#define JH7110_SYSCLK_I2STX1_LRCK		174
--#define JH7110_SYSCLK_I2SRX_APB		175
--#define JH7110_SYSCLK_I2SRX_BCLK_MST		176
--#define JH7110_SYSCLK_I2SRX_BCLK_MST_INV	177
--#define JH7110_SYSCLK_I2SRX_LRCK_MST		178
--#define JH7110_SYSCLK_I2SRX_BCLK		179
--#define JH7110_SYSCLK_I2SRX_BCLK_INV		180
--#define JH7110_SYSCLK_I2SRX_LRCK		181
--#define JH7110_SYSCLK_PDM_DMIC			182
--#define JH7110_SYSCLK_PDM_APB			183
--#define JH7110_SYSCLK_TDM_AHB			184
--#define JH7110_SYSCLK_TDM_APB			185
--#define JH7110_SYSCLK_TDM_INTERNAL		186
--#define JH7110_SYSCLK_TDM_CLK_TDM		187
--#define JH7110_SYSCLK_TDM_CLK_TDM_N		188
--#define JH7110_SYSCLK_JTAG_CERTIFICATION_TRNG	189
+-#define JH7110_SYSRST_NOC_BUS_VENC_AXI		32
+-#define JH7110_SYSRST_AXI_CFG1_DEC_AHB		33
+-#define JH7110_SYSRST_AXI_CFG1_DEC_MAIN	34
+-#define JH7110_SYSRST_AXI_CFG0_DEC_MAIN	35
+-#define JH7110_SYSRST_AXI_CFG0_DEC_MAIN_DIV	36
+-#define JH7110_SYSRST_AXI_CFG0_DEC_HIFI4	37
+-#define JH7110_SYSRST_DDR_AXI			38
+-#define JH7110_SYSRST_DDR_OSC			39
+-#define JH7110_SYSRST_DDR_APB			40
+-#define JH7110_SYSRST_DOM_ISP_TOP_N		41
+-#define JH7110_SYSRST_DOM_ISP_TOP_AXI		42
+-#define JH7110_SYSRST_DOM_VOUT_TOP_SRC		43
+-#define JH7110_SYSRST_CODAJ12_AXI		44
+-#define JH7110_SYSRST_CODAJ12_CORE		45
+-#define JH7110_SYSRST_CODAJ12_APB		46
+-#define JH7110_SYSRST_WAVE511_AXI		47
+-#define JH7110_SYSRST_WAVE511_BPU		48
+-#define JH7110_SYSRST_WAVE511_VCE		49
+-#define JH7110_SYSRST_WAVE511_APB		50
+-#define JH7110_SYSRST_VDEC_JPG_ARB_JPG		51
+-#define JH7110_SYSRST_VDEC_JPG_ARB_MAIN	52
+-#define JH7110_SYSRST_AXIMEM0_AXI		53
+-#define JH7110_SYSRST_WAVE420L_AXI		54
+-#define JH7110_SYSRST_WAVE420L_BPU		55
+-#define JH7110_SYSRST_WAVE420L_VCE		56
+-#define JH7110_SYSRST_WAVE420L_APB		57
+-#define JH7110_SYSRST_AXIMEM1_AXI		58
+-#define JH7110_SYSRST_AXIMEM2_AXI		59
+-#define JH7110_SYSRST_INTMEM			60
+-#define JH7110_SYSRST_QSPI_AHB			61
+-#define JH7110_SYSRST_QSPI_APB			62
+-#define JH7110_SYSRST_QSPI_REF			63
 -
--#define JH7110_SYSCLK_END			190
+-#define JH7110_SYSRST_SDIO0_AHB		64
+-#define JH7110_SYSRST_SDIO1_AHB		65
+-#define JH7110_SYSRST_GMAC1_AXI		66
+-#define JH7110_SYSRST_GMAC1_AHB		67
+-#define JH7110_SYSRST_MAILBOX			68
+-#define JH7110_SYSRST_SPI0_APB			69
+-#define JH7110_SYSRST_SPI1_APB			70
+-#define JH7110_SYSRST_SPI2_APB			71
+-#define JH7110_SYSRST_SPI3_APB			72
+-#define JH7110_SYSRST_SPI4_APB			73
+-#define JH7110_SYSRST_SPI5_APB			74
+-#define JH7110_SYSRST_SPI6_APB			75
+-#define JH7110_SYSRST_I2C0_APB			76
+-#define JH7110_SYSRST_I2C1_APB			77
+-#define JH7110_SYSRST_I2C2_APB			78
+-#define JH7110_SYSRST_I2C3_APB			79
+-#define JH7110_SYSRST_I2C4_APB			80
+-#define JH7110_SYSRST_I2C5_APB			81
+-#define JH7110_SYSRST_I2C6_APB			82
+-#define JH7110_SYSRST_UART0_APB		83
+-#define JH7110_SYSRST_UART0_CORE		84
+-#define JH7110_SYSRST_UART1_APB		85
+-#define JH7110_SYSRST_UART1_CORE		86
+-#define JH7110_SYSRST_UART2_APB		87
+-#define JH7110_SYSRST_UART2_CORE		88
+-#define JH7110_SYSRST_UART3_APB		89
+-#define JH7110_SYSRST_UART3_CORE		90
+-#define JH7110_SYSRST_UART4_APB		91
+-#define JH7110_SYSRST_UART4_CORE		92
+-#define JH7110_SYSRST_UART5_APB		93
+-#define JH7110_SYSRST_UART5_CORE		94
+-#define JH7110_SYSRST_SPDIF_APB		95
 -
--#define JH7110_AONCLK_OSC_DIV4			0
--#define JH7110_AONCLK_APB_FUNC			1
--#define JH7110_AONCLK_GMAC0_AHB			2
--#define JH7110_AONCLK_GMAC0_AXI			3
--#define JH7110_AONCLK_GMAC0_RMII_RTX		4
--#define JH7110_AONCLK_GMAC0_TX			5
--#define JH7110_AONCLK_GMAC0_TX_INV		6
--#define JH7110_AONCLK_GMAC0_RX			7
--#define JH7110_AONCLK_GMAC0_RX_INV		8
--#define JH7110_AONCLK_OTPC_APB			9
--#define JH7110_AONCLK_RTC_APB			10
--#define JH7110_AONCLK_RTC_INTERNAL		11
--#define JH7110_AONCLK_RTC_32K			12
--#define JH7110_AONCLK_RTC_CAL			13
+-#define JH7110_SYSRST_PWMDAC_APB		96
+-#define JH7110_SYSRST_PDM_DMIC			97
+-#define JH7110_SYSRST_PDM_APB			98
+-#define JH7110_SYSRST_I2SRX_APB		99
+-#define JH7110_SYSRST_I2SRX_BCLK		100
+-#define JH7110_SYSRST_I2STX0_APB		101
+-#define JH7110_SYSRST_I2STX0_BCLK		102
+-#define JH7110_SYSRST_I2STX1_APB		103
+-#define JH7110_SYSRST_I2STX1_BCLK		104
+-#define JH7110_SYSRST_TDM_AHB			105
+-#define JH7110_SYSRST_TDM_CORE			106
+-#define JH7110_SYSRST_TDM_APB			107
+-#define JH7110_SYSRST_PWM_APB			108
+-#define JH7110_SYSRST_WDT_APB			109
+-#define JH7110_SYSRST_WDT_CORE			110
+-#define JH7110_SYSRST_CAN0_APB			111
+-#define JH7110_SYSRST_CAN0_CORE		112
+-#define JH7110_SYSRST_CAN0_TIMER		113
+-#define JH7110_SYSRST_CAN1_APB			114
+-#define JH7110_SYSRST_CAN1_CORE		115
+-#define JH7110_SYSRST_CAN1_TIMER		116
+-#define JH7110_SYSRST_TIMER_APB		117
+-#define JH7110_SYSRST_TIMER0			118
+-#define JH7110_SYSRST_TIMER1			119
+-#define JH7110_SYSRST_TIMER2			120
+-#define JH7110_SYSRST_TIMER3			121
+-#define JH7110_SYSRST_INT_CTRL_APB		122
+-#define JH7110_SYSRST_TEMP_APB			123
+-#define JH7110_SYSRST_TEMP_CORE		124
+-#define JH7110_SYSRST_JTAG_CERTIFICATION	125
 -
--#define JH7110_AONCLK_END			14
+-#define JH7110_SYSRST_END			126
 -
--#define JH7110_STGCLK_HIFI4_CORE		0
--#define JH7110_STGCLK_USB_APB			1
--#define JH7110_STGCLK_USB_UTMI_APB		2
--#define JH7110_STGCLK_USB_AXI			3
--#define JH7110_STGCLK_USB_LPM			4
--#define JH7110_STGCLK_USB_STB			5
--#define JH7110_STGCLK_USB_APP_125		6
--#define JH7110_STGCLK_USB_REFCLK		7
--#define JH7110_STGCLK_PCIE0_AXI			8
--#define JH7110_STGCLK_PCIE0_APB			9
--#define JH7110_STGCLK_PCIE0_TL			10
--#define JH7110_STGCLK_PCIE1_AXI			11
--#define JH7110_STGCLK_PCIE1_APB			12
--#define JH7110_STGCLK_PCIE1_TL			13
--#define JH7110_STGCLK_PCIE01_MAIN		14
--#define JH7110_STGCLK_SEC_HCLK			15
--#define JH7110_STGCLK_SEC_MISCAHB		16
--#define JH7110_STGCLK_MTRX_GRP0_MAIN		17
--#define JH7110_STGCLK_MTRX_GRP0_BUS		18
--#define JH7110_STGCLK_MTRX_GRP0_STG		19
--#define JH7110_STGCLK_MTRX_GRP1_MAIN		20
--#define JH7110_STGCLK_MTRX_GRP1_BUS		21
--#define JH7110_STGCLK_MTRX_GRP1_STG		22
--#define JH7110_STGCLK_MTRX_GRP1_HIFI		23
--#define JH7110_STGCLK_E2_RTC			24
--#define JH7110_STGCLK_E2_CORE			25
--#define JH7110_STGCLK_E2_DBG			26
--#define JH7110_STGCLK_DMA1P_AXI			27
--#define JH7110_STGCLK_DMA1P_AHB			28
+-/* AONCRG resets */
+-#define JH7110_AONRST_GMAC0_AXI		0
+-#define JH7110_AONRST_GMAC0_AHB		1
+-#define JH7110_AONRST_IOMUX			2
+-#define JH7110_AONRST_PMU_APB			3
+-#define JH7110_AONRST_PMU_WKUP			4
+-#define JH7110_AONRST_RTC_APB			5
+-#define JH7110_AONRST_RTC_CAL			6
+-#define JH7110_AONRST_RTC_32K			7
 -
--#define JH7110_STGCLK_END			29
+-#define JH7110_AONRST_END			8
 -
--#endif /* __DT_BINDINGS_CLOCK_STARFIVE_JH7110_H__ */
-diff --git a/include/dt-bindings/clock/versaclock.h b/include/dt-bindings/clock/versaclock.h
+-/* STGCRG resets */
+-#define JH7110_STGRST_SYSCON_PRESETN		0
+-#define JH7110_STGRST_HIFI4_CORE		1
+-#define JH7110_STGRST_HIFI4_AXI		2
+-#define JH7110_STGRST_SEC_TOP_HRESETN		3
+-#define JH7110_STGRST_E24_CORE			4
+-#define JH7110_STGRST_DMA1P_AXI		5
+-#define JH7110_STGRST_DMA1P_AHB		6
+-#define JH7110_STGRST_USB_AXI			7
+-#define JH7110_STGRST_USB_APB			8
+-#define JH7110_STGRST_USB_UTMI_APB		9
+-#define JH7110_STGRST_USB_PWRUP		10
+-#define JH7110_STGRST_PCIE0_MST0		11
+-#define JH7110_STGRST_PCIE0_SLV0		12
+-#define JH7110_STGRST_PCIE0_SLV		13
+-#define JH7110_STGRST_PCIE0_BRG		14
+-#define JH7110_STGRST_PCIE0_CORE		15
+-#define JH7110_STGRST_PCIE0_APB		16
+-#define JH7110_STGRST_PCIE1_MST0		17
+-#define JH7110_STGRST_PCIE1_SLV0		18
+-#define JH7110_STGRST_PCIE1_SLV		19
+-#define JH7110_STGRST_PCIE1_BRG		20
+-#define JH7110_STGRST_PCIE1_CORE		21
+-#define JH7110_STGRST_PCIE1_APB		22
+-
+-#define JH7110_STGRST_END			23
+-
+-#endif /* __DT_BINDINGS_RESET_STARFIVE_JH7110_H__ */
+diff --git a/include/dt-bindings/sound/apq8016-lpass.h b/include/dt-bindings/sound/apq8016-lpass.h
 deleted file mode 100644
-index c6a6a0946564..000000000000
---- a/include/dt-bindings/clock/versaclock.h
+index dc605c4bc224..000000000000
+--- a/include/dt-bindings/sound/apq8016-lpass.h
 +++ /dev/null
-@@ -1,13 +0,0 @@
+@@ -1,9 +0,0 @@
 -/* SPDX-License-Identifier: GPL-2.0 */
+-#ifndef __DT_APQ8016_LPASS_H
+-#define __DT_APQ8016_LPASS_H
 -
--/* This file defines field values used by the versaclock 6 family
-- * for defining output type
-- */
+-#include <dt-bindings/sound/qcom,lpass.h>
 -
--#define VC5_LVPECL	0
--#define VC5_CMOS	1
--#define VC5_HCSL33	2
--#define VC5_LVDS	3
--#define VC5_CMOS2	4
--#define VC5_CMOSD	5
--#define VC5_HCSL25	6
-diff --git a/include/dt-bindings/clock/vf610-clock.h b/include/dt-bindings/clock/vf610-clock.h
+-/* NOTE: Use qcom,lpass.h to define any AIF ID's for LPASS */
+-
+-#endif /* __DT_APQ8016_LPASS_H */
+diff --git a/include/dt-bindings/sound/tlv320aic31xx.h b/include/dt-bindings/sound/tlv320aic31xx.h
 deleted file mode 100644
-index 373644e46747..000000000000
---- a/include/dt-bindings/clock/vf610-clock.h
+index 4a80238ab250..000000000000
+--- a/include/dt-bindings/sound/tlv320aic31xx.h
 +++ /dev/null
-@@ -1,202 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0-or-later */
--/*
-- * Copyright 2013 Freescale Semiconductor, Inc.
-- */
+@@ -1,14 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-#ifndef __DT_TLV320AIC31XX_H
+-#define __DT_TLV320AIC31XX_H
 -
--#ifndef __DT_BINDINGS_CLOCK_VF610_H
--#define __DT_BINDINGS_CLOCK_VF610_H
+-#define MICBIAS_2_0V		1
+-#define MICBIAS_2_5V		2
+-#define MICBIAS_AVDDV		3
 -
--#define VF610_CLK_DUMMY			0
--#define VF610_CLK_SIRC_128K		1
--#define VF610_CLK_SIRC_32K		2
--#define VF610_CLK_FIRC			3
--#define VF610_CLK_SXOSC			4
--#define VF610_CLK_FXOSC			5
--#define VF610_CLK_FXOSC_HALF		6
--#define VF610_CLK_SLOW_CLK_SEL		7
--#define VF610_CLK_FASK_CLK_SEL		8
--#define VF610_CLK_AUDIO_EXT		9
--#define VF610_CLK_ENET_EXT		10
--#define VF610_CLK_PLL1_SYS		11
--#define VF610_CLK_PLL1_PFD1		12
--#define VF610_CLK_PLL1_PFD2		13
--#define VF610_CLK_PLL1_PFD3		14
--#define VF610_CLK_PLL1_PFD4		15
--#define VF610_CLK_PLL2_BUS		16
--#define VF610_CLK_PLL2_PFD1		17
--#define VF610_CLK_PLL2_PFD2		18
--#define VF610_CLK_PLL2_PFD3		19
--#define VF610_CLK_PLL2_PFD4		20
--#define VF610_CLK_PLL3_USB_OTG		21
--#define VF610_CLK_PLL3_PFD1		22
--#define VF610_CLK_PLL3_PFD2		23
--#define VF610_CLK_PLL3_PFD3		24
--#define VF610_CLK_PLL3_PFD4		25
--#define VF610_CLK_PLL4_AUDIO		26
--#define VF610_CLK_PLL5_ENET		27
--#define VF610_CLK_PLL6_VIDEO		28
--#define VF610_CLK_PLL3_MAIN_DIV		29
--#define VF610_CLK_PLL4_MAIN_DIV		30
--#define VF610_CLK_PLL6_MAIN_DIV		31
--#define VF610_CLK_PLL1_PFD_SEL		32
--#define VF610_CLK_PLL2_PFD_SEL		33
--#define VF610_CLK_SYS_SEL		34
--#define VF610_CLK_DDR_SEL		35
--#define VF610_CLK_SYS_BUS		36
--#define VF610_CLK_PLATFORM_BUS		37
--#define VF610_CLK_IPG_BUS		38
--#define VF610_CLK_UART0			39
--#define VF610_CLK_UART1			40
--#define VF610_CLK_UART2			41
--#define VF610_CLK_UART3			42
--#define VF610_CLK_UART4			43
--#define VF610_CLK_UART5			44
--#define VF610_CLK_PIT			45
--#define VF610_CLK_I2C0			46
--#define VF610_CLK_I2C1			47
--#define VF610_CLK_I2C2			48
--#define VF610_CLK_I2C3			49
--#define VF610_CLK_FTM0_EXT_SEL		50
--#define VF610_CLK_FTM0_FIX_SEL		51
--#define VF610_CLK_FTM0_EXT_FIX_EN	52
--#define VF610_CLK_FTM1_EXT_SEL		53
--#define VF610_CLK_FTM1_FIX_SEL		54
--#define VF610_CLK_FTM1_EXT_FIX_EN	55
--#define VF610_CLK_FTM2_EXT_SEL		56
--#define VF610_CLK_FTM2_FIX_SEL		57
--#define VF610_CLK_FTM2_EXT_FIX_EN	58
--#define VF610_CLK_FTM3_EXT_SEL		59
--#define VF610_CLK_FTM3_FIX_SEL		60
--#define VF610_CLK_FTM3_EXT_FIX_EN	61
--#define VF610_CLK_FTM0			62
--#define VF610_CLK_FTM1			63
--#define VF610_CLK_FTM2			64
--#define VF610_CLK_FTM3			65
--#define VF610_CLK_ENET_50M		66
--#define VF610_CLK_ENET_25M		67
--#define VF610_CLK_ENET_SEL		68
--#define VF610_CLK_ENET			69
--#define VF610_CLK_ENET_TS_SEL		70
--#define VF610_CLK_ENET_TS		71
--#define VF610_CLK_DSPI0			72
--#define VF610_CLK_DSPI1			73
--#define VF610_CLK_DSPI2			74
--#define VF610_CLK_DSPI3			75
--#define VF610_CLK_WDT			76
--#define VF610_CLK_ESDHC0_SEL		77
--#define VF610_CLK_ESDHC0_EN		78
--#define VF610_CLK_ESDHC0_DIV		79
--#define VF610_CLK_ESDHC0		80
--#define VF610_CLK_ESDHC1_SEL		81
--#define VF610_CLK_ESDHC1_EN		82
--#define VF610_CLK_ESDHC1_DIV		83
--#define VF610_CLK_ESDHC1		84
--#define VF610_CLK_DCU0_SEL		85
--#define VF610_CLK_DCU0_EN		86
--#define VF610_CLK_DCU0_DIV		87
--#define VF610_CLK_DCU0			88
--#define VF610_CLK_DCU1_SEL		89
--#define VF610_CLK_DCU1_EN		90
--#define VF610_CLK_DCU1_DIV		91
--#define VF610_CLK_DCU1			92
--#define VF610_CLK_ESAI_SEL		93
--#define VF610_CLK_ESAI_EN		94
--#define VF610_CLK_ESAI_DIV		95
--#define VF610_CLK_ESAI			96
--#define VF610_CLK_SAI0_SEL		97
--#define VF610_CLK_SAI0_EN		98
--#define VF610_CLK_SAI0_DIV		99
--#define VF610_CLK_SAI0			100
--#define VF610_CLK_SAI1_SEL		101
--#define VF610_CLK_SAI1_EN		102
--#define VF610_CLK_SAI1_DIV		103
--#define VF610_CLK_SAI1			104
--#define VF610_CLK_SAI2_SEL		105
--#define VF610_CLK_SAI2_EN		106
--#define VF610_CLK_SAI2_DIV		107
--#define VF610_CLK_SAI2			108
--#define VF610_CLK_SAI3_SEL		109
--#define VF610_CLK_SAI3_EN		110
--#define VF610_CLK_SAI3_DIV		111
--#define VF610_CLK_SAI3			112
--#define VF610_CLK_USBC0			113
--#define VF610_CLK_USBC1			114
--#define VF610_CLK_QSPI0_SEL		115
--#define VF610_CLK_QSPI0_EN		116
--#define VF610_CLK_QSPI0_X4_DIV		117
--#define VF610_CLK_QSPI0_X2_DIV		118
--#define VF610_CLK_QSPI0_X1_DIV		119
--#define VF610_CLK_QSPI1_SEL		120
--#define VF610_CLK_QSPI1_EN		121
--#define VF610_CLK_QSPI1_X4_DIV		122
--#define VF610_CLK_QSPI1_X2_DIV		123
--#define VF610_CLK_QSPI1_X1_DIV		124
--#define VF610_CLK_QSPI0			125
--#define VF610_CLK_QSPI1			126
--#define VF610_CLK_NFC_SEL		127
--#define VF610_CLK_NFC_EN		128
--#define VF610_CLK_NFC_PRE_DIV		129
--#define VF610_CLK_NFC_FRAC_DIV		130
--#define VF610_CLK_NFC_INV		131
--#define VF610_CLK_NFC			132
--#define VF610_CLK_VADC_SEL		133
--#define VF610_CLK_VADC_EN		134
--#define VF610_CLK_VADC_DIV		135
--#define VF610_CLK_VADC_DIV_HALF		136
--#define VF610_CLK_VADC			137
--#define VF610_CLK_ADC0			138
--#define VF610_CLK_ADC1			139
--#define VF610_CLK_DAC0			140
--#define VF610_CLK_DAC1			141
--#define VF610_CLK_FLEXCAN0		142
--#define VF610_CLK_FLEXCAN1		143
--#define VF610_CLK_ASRC			144
--#define VF610_CLK_GPU_SEL		145
--#define VF610_CLK_GPU_EN		146
--#define VF610_CLK_GPU2D			147
--#define VF610_CLK_ENET0			148
--#define VF610_CLK_ENET1			149
--#define VF610_CLK_DMAMUX0		150
--#define VF610_CLK_DMAMUX1		151
--#define VF610_CLK_DMAMUX2		152
--#define VF610_CLK_DMAMUX3		153
--#define VF610_CLK_FLEXCAN0_EN		154
--#define VF610_CLK_FLEXCAN1_EN		155
--#define VF610_CLK_PLL7_USB_HOST		156
--#define VF610_CLK_USBPHY0		157
--#define VF610_CLK_USBPHY1		158
--#define VF610_CLK_LVDS1_IN		159
--#define VF610_CLK_ANACLK1		160
--#define VF610_CLK_PLL1_BYPASS_SRC	161
--#define VF610_CLK_PLL2_BYPASS_SRC	162
--#define VF610_CLK_PLL3_BYPASS_SRC	163
--#define VF610_CLK_PLL4_BYPASS_SRC	164
--#define VF610_CLK_PLL5_BYPASS_SRC	165
--#define VF610_CLK_PLL6_BYPASS_SRC	166
--#define VF610_CLK_PLL7_BYPASS_SRC	167
--#define VF610_CLK_PLL1			168
--#define VF610_CLK_PLL2			169
--#define VF610_CLK_PLL3			170
--#define VF610_CLK_PLL4			171
--#define VF610_CLK_PLL5			172
--#define VF610_CLK_PLL6			173
--#define VF610_CLK_PLL7			174
--#define VF610_PLL1_BYPASS		175
--#define VF610_PLL2_BYPASS		176
--#define VF610_PLL3_BYPASS		177
--#define VF610_PLL4_BYPASS		178
--#define VF610_PLL5_BYPASS		179
--#define VF610_PLL6_BYPASS		180
--#define VF610_PLL7_BYPASS		181
--#define VF610_CLK_SNVS			182
--#define VF610_CLK_DAP			183
--#define VF610_CLK_OCOTP			184
--#define VF610_CLK_DDRMC			185
--#define VF610_CLK_WKPU			186
--#define VF610_CLK_TCON0			187
--#define VF610_CLK_TCON1			188
--#define VF610_CLK_CAAM			189
--#define VF610_CLK_CRC			190
--#define VF610_CLK_END			191
+-#define PLL_CLKIN_MCLK		0x00
+-#define PLL_CLKIN_BCLK		0x01
+-#define PLL_CLKIN_GPIO1		0x02
+-#define PLL_CLKIN_DIN		0x03
 -
--#endif /* __DT_BINDINGS_CLOCK_VF610_H */
+-#endif /* __DT_TLV320AIC31XX_H */
 
 -- 
 2.44.0
