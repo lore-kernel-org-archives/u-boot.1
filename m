@@ -4,126 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA167C48BF6
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 16:30:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0922C5478C
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 16:30:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5652A87FDD;
+	by phobos.denx.de (Postfix) with ESMTP id C479387FEC;
 	Mon,  4 Mar 2024 17:30:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=epam.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=epam.com header.i=@epam.com header.b="oGsjjHDp";
+	dkim=pass (2048-bit key; unprotected) header.d=epam.com header.i=@epam.com header.b="GGxW3pYa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B73C787FDC; Mon,  4 Mar 2024 16:51:42 +0100 (CET)
-Received: from mx0b-0039f301.pphosted.com (mx0b-0039f301.pphosted.com
- [148.163.137.242])
+ id C436387F9F; Mon,  4 Mar 2024 16:56:12 +0100 (CET)
+Received: from mx0a-0039f301.pphosted.com (mx0a-0039f301.pphosted.com
+ [148.163.133.242])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 28F8C875FC
- for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 16:51:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AA8DF87F9F
+ for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 16:56:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=epam.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=9793f3b8af=volodymyr_babchuk@epam.com
-Received: from pps.filterd (m0174680.ppops.net [127.0.0.1])
- by mx0b-0039f301.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 424FIDgt004244; Mon, 4 Mar 2024 15:51:27 GMT
-Received: from eur04-db3-obe.outbound.protection.outlook.com
- (mail-db3eur04lp2050.outbound.protection.outlook.com [104.47.12.50])
- by mx0b-0039f301.pphosted.com (PPS) with ESMTPS id 3wnefxgtyj-1
+Received: from pps.filterd (m0174679.ppops.net [127.0.0.1])
+ by mx0a-0039f301.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
+ 424FID1X032312; Mon, 4 Mar 2024 15:56:00 GMT
+Received: from eur03-am7-obe.outbound.protection.outlook.com
+ (mail-am7eur03lp2232.outbound.protection.outlook.com [104.47.51.232])
+ by mx0a-0039f301.pphosted.com (PPS) with ESMTPS id 3wngtjg4h2-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 04 Mar 2024 15:51:26 +0000 (GMT)
+ Mon, 04 Mar 2024 15:56:00 +0000 (GMT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=VhDj6XKa26sHOXWIaW/zmBqOaePkvPOHVQEjkFfAoJEKgkNVZ+6kvtnFitB4U5f/1CFYGPxaVDba+K0F+hI8VFMdCsKx6FKfaVT87Z6Ai1XAKLsClEei5yvSSriMcjljnr3UD6EuSlCvTK3Q4ANLIYlYoOyXJ260E2g1GVMbO3aWxQrEoEYANYHd2zWMWhJM0lioiL3psmo2M9k+XMeNQi30qD5jcI2hbpar5RvwgNGmXVPT20dcetE/QW0qLLyEYeNV0V6B0gy86e0VOpmeTnUUlQLlOlmun1HrrLKTdHKsPEzKTMnlJZ0nIOocd3MG+bwqaigne0x/ysgJS1Qb5A==
+ b=XYA+drwROTph7a5govkxIoI0O6XzHPJQ9VrvfieRxkz4zkydkyOwMNzYSQyPj8MNTlMPAFE+uqIPxJbDWYeHU0JWFwEOaZ/BZ+lxacJIAXrUzpoMlpOxz+p3FFAnALVHOrGvCFFigyoLUGkk3AMIPJpvk4TzXVkUl0vO+jiJF5Z1JQjSsZQtqgmK/ZWShrUZzmiCouRu9B+XpolXXNwJ+1TIRjR2lV4UwSyHi40zddTRFz7kBFVl49QhJkmi70eWPfd8IAUM+bPJGTKJhxyOxhrh9HJmiFlpIA0kckNggWh95vdTZwD5dWNqw9HiakkbJPIY7zTKWCoBuVywquqzOg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=XqH/6HCagOEIPMT6FyYgmp8xkevhCwQPHuht579LsxI=;
- b=lOU3EJqAi8tYvqCxFtpCVpu8ESPTRq5ob2Q2OT+HDStvaeq5yhIkrn2Nb9LZqhwNoyRUbOqzyekDTZ9Ej35nNFVQARyPVsJFeQXqXIg2y2gQXe/NghpH7MppZ2v5Fo1cIT9KZ8etxdGMBPp31jxjHxedox82Y4AeQN60Nfh6F3UwRTQ3ZoGhCfVKPWooG98nioPaU72x9xWxDIrRc29oiF5hBkXooC/ZFtaaglVfMOKpy0gNM4fmZ1C3h1SFLILF2uSzkLajpj4yIHEbTMR7U+Oq2qjmz15ir/5gBEYIJnTQg1HKbjy9a6BUcrIJN3QbxaSWdf+vLdqyTeCbrq92FA==
+ bh=VS3SZLvwnEOCUE/xslieKg5X9S14zFiijXhLs7rMg90=;
+ b=HjJDLisy1eJ1BqCJQ2hmRojaovspngJEW0yLKhHhdRk297ilG/ANO+LQSn6j5ihQGjxH1DHMsWgnWXYItmdO40Y1zhPSoPPxjXrMdaK1EZDVF3Qmnji6ltbwsrVnCnHIX5OA7Uujky1UIu/aWPahAmjLGDzKGN7JQ7cCXYF0Y7FkXycsN1eKB/4Dd6yzFZuNz76ZyfP8JtYAhRyEgvxVXijwB6gPxBr5qrHFty5eGOtD4jODLFO0YlrQp8bUqvIK2xst//9wO1S4P1xmSvrox3cog9aOaARbghnVeawzhqTmrCToW+Tz9RQXuGNqCrYiaAvu9tfUDa/PLWtc/k5tmw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector2; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=XqH/6HCagOEIPMT6FyYgmp8xkevhCwQPHuht579LsxI=;
- b=oGsjjHDp6xoROWX47dJR5Ic6PC8HVTlvq7ss8Wy6GnsZo+oV5LiiSmSwcplxjq6w1sMXsBNL0qaj0B8S6IF3WfPxpBhdQZ/pc/Gu3wQTqUa0Y0knQ9rcSJDJ9bnJh3FwPT8xWKe7RLWQfSdHTIb4YDjQfL8Uiu/SYbSX9s+uV6fhM8OUodbTHMX9Fd9Zaku84VLXqXnXM70N+3WUgyb27fx2YvTKlrc/6VA6NVl+O9cEasX73rM+6HpnN1qITmGM4z3fCDn7bm/PM8jVUiSYxZ16o5umyFEarwZ6XbJG+5hnfs/88nunlB5gopbb4RI2OdNkFvr4ark2k+VRcXljaA==
+ bh=VS3SZLvwnEOCUE/xslieKg5X9S14zFiijXhLs7rMg90=;
+ b=GGxW3pYa94p5BAjAO6319Se7GZhCjPdn0ClktshtqKxc79gOdamNAjdYhY3ZfxRpizU136LCvzZtb3LX2/JHcA41a1X/6BsVIXykKkTH49PRZFVUdo+LlHKjzR/RtI04PNIQcNq9Wcr29k1D/tJogCbPn/vBTHcSBa3O5ZVAqqMfXqZO1lmG6L5yzHSVutqjRrv3VtYfqg+P1UGtoQFTcYRkcZZW5uVI2pvtVFyQTlShVywszISlofV4eI98jliCJX/QY9xe1hkLrihBfEF/fUi1ee/uFGGg9on9VKO2017Yq6llzmlxM4+9YasyNvDLwGz959wJvqnLIA5tS2/cGQ==
 Received: from GV1PR03MB10456.eurprd03.prod.outlook.com
- (2603:10a6:150:16a::21) by PAWPR03MB9690.eurprd03.prod.outlook.com
- (2603:10a6:102:2e5::11) with Microsoft SMTP Server (version=TLS1_2,
+ (2603:10a6:150:16a::21) by GV2PR03MB9524.eurprd03.prod.outlook.com
+ (2603:10a6:150:da::9) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7339.38; Mon, 4 Mar
- 2024 15:51:23 +0000
+ 2024 15:55:56 +0000
 Received: from GV1PR03MB10456.eurprd03.prod.outlook.com
  ([fe80::bfa8:3549:ac92:d0d8]) by GV1PR03MB10456.eurprd03.prod.outlook.com
  ([fe80::bfa8:3549:ac92:d0d8%4]) with mapi id 15.20.7339.035; Mon, 4 Mar 2024
- 15:51:22 +0000
+ 15:55:56 +0000
 From: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 To: Stephan Gerhold <stephan@gerhold.net>
-CC: Caleb Connolly <caleb.connolly@linaro.org>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>, Elmar Psilog <epsi@gmx.de>, Joe Hershberger
- <joe.hershberger@ni.com>, Jonas Karlman <jonas@kwiboo.se>, Kever Yang
- <kever.yang@rock-chips.com>, Konrad Dybcio <konrad.dybcio@linaro.org>, Ley
- Foon Tan <leyfoon.tan@starfivetech.com>,
- Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>,
- Michal Simek <michal.simek@amd.com>, Neil
+CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Caleb Connolly
+ <caleb.connolly@linaro.org>, Michal Simek <michal.simek@amd.com>, Neil
  Armstrong <neil.armstrong@linaro.org>,
- Ramon Fried <rfried.dev@gmail.com>, Sean Anderson <seanga2@gmail.com>,
  Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>,
- Yanhong Wang <yanhong.wang@starfivetech.com>
-Subject: Re: [PATCH 0/8] Add support for Qualcomm SA8155-ADP board
-Thread-Topic: [PATCH 0/8] Add support for Qualcomm SA8155-ADP board
-Thread-Index: AQHaaxqISgHy6uye4kSlwIGnnVXBNbEjE/qAgAAemoCABGilgIAAIZOA
-Date: Mon, 4 Mar 2024 15:51:22 +0000
-Message-ID: <87r0gq3shy.fsf@epam.com>
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH 8/8] board: add support for Qualcomm SA8155P-ADP board
+Thread-Topic: [PATCH 8/8] board: add support for Qualcomm SA8155P-ADP board
+Thread-Index: AQHaaxqK+jMULOxtT0+c/deQ37vtVLEnnGqAgAAlBYA=
+Date: Mon, 4 Mar 2024 15:55:56 +0000
+Message-ID: <87h6hm3sab.fsf@epam.com>
 References: <20240229142043.1263690-1-volodymyr_babchuk@epam.com>
- <dc97490e-4029-41e2-bbbd-b1351f5cf9eb@linaro.org> <87bk7x6c88.fsf@epam.com>
- <ZeXN7EZHU89qS5PF@gerhold.net>
-In-Reply-To: <ZeXN7EZHU89qS5PF@gerhold.net>
+ <20240229142043.1263690-9-volodymyr_babchuk@epam.com>
+ <ZeXO8wOAi7az0kgN@gerhold.net>
+In-Reply-To: <ZeXO8wOAi7az0kgN@gerhold.net>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 user-agent: mu4e 1.10.7; emacs 29.1
 x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: GV1PR03MB10456:EE_|PAWPR03MB9690:EE_
-x-ms-office365-filtering-correlation-id: 581c8bff-3d91-4ccf-8ba0-08dc3c62f10e
+x-ms-traffictypediagnostic: GV1PR03MB10456:EE_|GV2PR03MB9524:EE_
+x-ms-office365-filtering-correlation-id: b1e49574-d10e-4a8b-fbdc-08dc3c639457
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: NFBwTKu7hJ++K3tkPBsxV580yZBqBwY/ncZpsoKbpJ91R/3/D3aH6NM/ec9Jm7P7vCIy4fGmdlOqr1wBqKe8yA3TT2vfXwM7UL4dtoEILzBRsE6OtAY8tLOoY7kYeXSxi4m1ibpp9Yjxj3CUvtg5AIKAH82KO9J86FMkK75YFgOB0TSQnHJrdLkdtxl4tzrMWfh60Lrf/K0lO05nICR2NjNvkgfmB9+0+TxB1NzzWRJ2kowY4xHhQNS36/DfNg1p6I+jLZ++tbzEaz4eP+R2MqXi2ZbSFqr5c9fnOtfuv1P0n7aS0azmqr81c10dfLv6doScSrTLARxEl7xUsPXOh9781YOKzSy3Qj0fswMnBp7i6BxiQcUIe0UCJKOIaROzS5iUB/orIxbONmEzaLW96qp7RvCa2gsS7Uf75/Pt5GWatBP0S2609bs6rmyV4u0CgAt/gpAjXfCJ/T9mQRXBOIrFOjveW5tANQRtimg+vVkCLPLDcPCOmNhwju6Uu2wxKY0aUHfR8GejTIwj5q2ix6CG7GJo51USemHnm1c27hiGVHvhoB3gdyYzpzXfLDtRBOZUZDuhLggT3Z9uEgiVtZiX2EF4uU3htmsaQWl+I0Ur7Ww7tn14mDB7hs+0W/WatXzRDd8J/VVRIBKa2G4crdKzJA0zhEnWRn/eLKECKd4QgWOThZmJ9CuLXqEa9f1KsnuMkQiET3bj2OdwI/YkgrSy1hKzZPQiDJQV8EJP68Q=
+x-microsoft-antispam-message-info: er8HuP3vqNug1D9n6l3xsXcU4ed5TOWa+93ipTRxmX/Nd3tuy56Xxa6O7N/ksunPFVVec0QzIAnxSbO1vRWLBpUkPC9M474CCghZA2APX94v0cmHdOxQRbGZrRCdeUXW8sWw4HU4M535vBKrccgemgGn0M4VlLnMnvPJXuwnEWaAxVjVSPEHUEoD1yZRqb/gCVGDfrwljFV7h7sM6wLeIRRWZuLJYaQpAayy19mqneXdxi81Icn8J1szas6bkLXGEgM7GzZz/bt4JtO9kfKJBC/BUfsNySJzZee75CI82T9hgAJX0f4zCUDeGtYPWiASa8PXa4zidQbaEinEl7Zr2YwSdrHlygUoBdphBR0IhaYON2gQaFy9DXs/1IaFaicgsVnggAojT7GImcb279Cd96j/eF7+7gml4vQ1w516eSkg93Hgw6Be26ax3KjbfINiYq/KI0iEL5/R+leFDFrTm9+97aXZndxUjWc5wadTrPovai5TkLqz7985U6rQZFcIRirS9xWBlRxSZugmEihrxA0lRM0SNlh07IbMyYQ7199PJjSRSPa54nWXmB1Zt7dImIHgXY9HBINDbjkb87Pnl0Udp6T8AY411YgtdGIv3iymvGxgiaJ/oJQa7uD/og9mxoD9pB3HILdjWQRItXRDCoToBw60bJJFNlbyfT6tZnw=
 x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:GV1PR03MB10456.eurprd03.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230031)(376005)(38070700009); DIR:OUT; SFP:1102; 
 x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?MMETnsPIAXys1Vd3h3LwYGarKL7bSPMuRlXQUtXMLStgIQOeGatUP+1Naw?=
- =?iso-8859-1?Q?e04yWjY/r05LM24qKcNQmYhr4Ny0Eexs/+55HHUz2kVeukZDdY/HfXdi/+?=
- =?iso-8859-1?Q?7LnIK1Y6PmnA4mH5xuHIHogjr8PjTjACJIhDUqmG3LQO/5NR7WAaxd7GNw?=
- =?iso-8859-1?Q?jMqqGQfm4F0MBjc5KCDT8tLFhynyMkViosy2s68A/Pils18cKEiw87btML?=
- =?iso-8859-1?Q?KXVroWNPmMXXwiKwvSP3CWiQvqFbfY551VVV4YaGcxw/jSSqaY/ON8BHX7?=
- =?iso-8859-1?Q?nIFvXbCA9w61oSKKJZjjtGwi74WABDHlnbqfjmSk4jOLpzmIIM057NKXc1?=
- =?iso-8859-1?Q?LsNhBMpw9e6SsIuWbR/Qx0n4cIFHF+OEeSMOxbj9rJlYk12dq2WcmiojV6?=
- =?iso-8859-1?Q?KGEsk2CKiuBA4naOcwITVqeo3+L4rLrRQbZ1HPdJoirm2cWVYZSVN5f8Rb?=
- =?iso-8859-1?Q?rhRXXcCjob9Rn/mdCihKL5hNfGfYyn6qdMHmxu+fECKDQZ+IEtnhCtxkK4?=
- =?iso-8859-1?Q?k6wA7dN3aEEqMoqHYulpPfdtnceYHxIFs5QErtgXQRHoD7eRxq2D+iSwYR?=
- =?iso-8859-1?Q?6L08p06GzAZXHW4BkIE9GZpWJpXaIN6YPa184ytuv61vp/sCBv2bkpMQWB?=
- =?iso-8859-1?Q?HMVWv9vpGWLGTh/bC3pDkwwdi+lXz/ctHvgF6HdtctYCLooAPPOEC385fn?=
- =?iso-8859-1?Q?0wQySEi41wgHhY4Vx/5A4BlWTPPLhFOeSxEn2oJD3yPx0y8dPLp2V/atrT?=
- =?iso-8859-1?Q?X76bWYe8ee9/mRZRWQcH1S4x2C4JYPvSvNuu2fN9nDfhr+uMqLXeFOsQzK?=
- =?iso-8859-1?Q?3bgYySyR8/MSWeYBzsfLGg/tqCxr6+ewxBMqHY7DGkmuEXVl8T758sqwJL?=
- =?iso-8859-1?Q?Ah5OH8SCe8c4XXgVKJQz49vzgop3RbIZ9elswJzl8gEP/d9uALmw4I2pzd?=
- =?iso-8859-1?Q?+3x+vd3RPq59iIPOHI07eKtrraf5I9PyfmvmGjYzJs/TrbmkW/xCTavNrX?=
- =?iso-8859-1?Q?jDUG0B/dDfoEMSorlz99+igCQ1vj5xz1WhT4+zVccbj0wMds+maVtsW7yE?=
- =?iso-8859-1?Q?Q8xJhd1l3E94L0ZrTQdw6jKslTb3jOLTWQcA4mWz56iKMq0VPr208gpXPp?=
- =?iso-8859-1?Q?LBZc7xI+JhcUCFw3Nie/n0GcdIV0vRB1yv8vkK6nJzN8DZZ3z3dp0r7tBQ?=
- =?iso-8859-1?Q?y8e/2CwED6Yh63i0dEzc5wPnsN0brHPcK3nvHjXx+2JTM8ITcDc2dBu0xf?=
- =?iso-8859-1?Q?snmgGp0ECWQt8mHrIsCu0EPPzUvOCMQEfwAXvi80UwMdz1+ilKbyStzSrT?=
- =?iso-8859-1?Q?5UyhLW6vXT/SfBYosEOh+VahvYMF5sxue/OaWJUgsDRMLCt5H/RxwbbS3N?=
- =?iso-8859-1?Q?imUHw2k/aD/odTjxLco7iwy+94FUgY5ZbSsWB3IC6SiFETg+HBm7/fvUui?=
- =?iso-8859-1?Q?jfP5TfNYJiQ788Ww+OhPClXTBjMQmMgPdOY+DXC8RsI8+FMJOhlh3Iq0id?=
- =?iso-8859-1?Q?WO8HJYXiYcPknjFnECBcvzKAijsebdQKEDU43SGeHIy9RrvhUx/IvpmKJ4?=
- =?iso-8859-1?Q?NOJKVtsINebefx3BkqeaUMLEUiKd74kfBTWka5ssI2lv69MoDBKwyM+U9H?=
- =?iso-8859-1?Q?NVAOehRjhLG00+bVLDQ9jQusMj+ZXfvWqSqhtzjFSmLvsRZVtC5sS46w?=
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?uw/2DKCaD6zAarlQ/Tj/yiSwlNQ0xJuYLitsuO1cLVKM0Ar9byHOsJbQEF?=
+ =?iso-8859-1?Q?uZeJrlLgcCQeD7SHXMJEZlfU+Z5HhK7BI93fykt1Lv5xTKgLax9HjZyT3B?=
+ =?iso-8859-1?Q?/dWJL7S23McGNzKnpaRh1L1nQtMXLcVdugbGTyNWzsmbuEpYJfs4WVUEHO?=
+ =?iso-8859-1?Q?x0R6K9pgTsn5eiPI4OPRhlwUhyBuMq8JgulNguwKUiwlr1b44fPxABDRw1?=
+ =?iso-8859-1?Q?ajLOt3ndUcyhB8tca9XynXjUA5w465rVIfah7l4FYzk28Oa22q+JiDcjY2?=
+ =?iso-8859-1?Q?tl8wJyWvUsR38wCJ8M0pEtjO6jH7P72pN149h3XUVBUMszJG6eFnwkk3pe?=
+ =?iso-8859-1?Q?sYO2N4BrGrAGUcULQMpVYFfatrMZpHS7pvZ/t4l11pgHBzKo9tt05WguUs?=
+ =?iso-8859-1?Q?hnm7e+jrHc9AwZJijyW+AVuMxc1rEFcF3IRzrlFDhqIyxbQ5wkOGCQExdn?=
+ =?iso-8859-1?Q?3oeaK8WkQQGDq9zsFsaFSaBlO87WGuVILtiYWFLecmqTdVyk2IgPTfl/Y2?=
+ =?iso-8859-1?Q?/bknqjWeUV2i4DY2a6f+leNPgyi0rhzogDblUWjJn1DLy/VyokNRizaZXi?=
+ =?iso-8859-1?Q?c51CnTIJWWTPxw3qw+rGgfY+5XMzyu7Dm31B8kMPRQawDV9pn4oUcaPupf?=
+ =?iso-8859-1?Q?2hcoi5REvT37DUC4Etr1cANCTSMjQbirtUhXZFSiADtKvN/s9QRmlyDpPI?=
+ =?iso-8859-1?Q?E1jA1mBMSG30UT/jVuNBT7Eijh/QZTOYP1ECZf6QZ5r9A6+e9LqWtDPhSV?=
+ =?iso-8859-1?Q?wG7PG+NaseeUuv5Q+J4fRPBlG6+WDiGeNt6K6PinXkmChe219v4PRVylZZ?=
+ =?iso-8859-1?Q?r4mfogBwCm5bgKbBHAYlYy5RD8pvnYnppI8FGHTubDlYjmqfvhzqr3vPuL?=
+ =?iso-8859-1?Q?4bHpl0pR4Kg/QmSsXwdodSDXYq15/cAmXQKb1/zpaNRPoCgHMeUXmGsF+8?=
+ =?iso-8859-1?Q?qsGCaoSIxEH/ht0nXguWm6G0MMJUrheE63sctaD5RncECEkOZm9by6e0WO?=
+ =?iso-8859-1?Q?dQBTxLpajBAlu0Tle7TuG9SPff0XMm4lpr3/wLeJH1s4Wr+OaKcNYmKTMv?=
+ =?iso-8859-1?Q?eJkPpGTqUn+C/NWigWXILICd/AI7/8klyXcdsNAAsJ+5gZxuGszA2imkC9?=
+ =?iso-8859-1?Q?NUGRnWQIYE225RDPAktuwrtkfLIU49V1Y4232V6r3MJEZfTsn0o1cEBDFn?=
+ =?iso-8859-1?Q?R4qoYzBjFZpJqBBiv7A4FPBM04rcq1PixsaSipD3ctzKQ4HeCPAT1fQc+H?=
+ =?iso-8859-1?Q?hCoky9BJjUBAQSR5B24KjAX7sP4xAC42jfyOLSBGonx2buJJHhwrp4J0lV?=
+ =?iso-8859-1?Q?3V7w5iyJ8XORVAyNurq+evpk1oZ/9hdWIsAbXhMRIxz9mr6nbwshb4ASFj?=
+ =?iso-8859-1?Q?xifjJHuKaevFEaScNqAjb5LcutptWJK6AVNJC5muT4mWlBUS/REGDSUc+c?=
+ =?iso-8859-1?Q?z3Ys6p+oRRPzkhK7HKStdUa/aBKigUgYHgII0McSIREWbPCL/vcF1NVwZv?=
+ =?iso-8859-1?Q?egozTVN0e59acEPLuNWE6usHyoU0f4V611qPI3tqjaM3ffIUND3parqrAP?=
+ =?iso-8859-1?Q?Jei5RVuCFDLzQU8bMfdSK9aYmqtp+8qCs6EJXTcXpnqPsnfagmswrnP7b8?=
+ =?iso-8859-1?Q?sTOp/XWJCTNMlTi8OmiX6PBIPB3f4BEG0QzQq5RvaOC0BQPhNIMSSG2g?=
  =?iso-8859-1?Q?=3D=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -131,24 +124,24 @@ MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: GV1PR03MB10456.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 581c8bff-3d91-4ccf-8ba0-08dc3c62f10e
-X-MS-Exchange-CrossTenant-originalarrivaltime: 04 Mar 2024 15:51:22.8247 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b1e49574-d10e-4a8b-fbdc-08dc3c639457
+X-MS-Exchange-CrossTenant-originalarrivaltime: 04 Mar 2024 15:55:56.7402 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: tLZVRCyfrywXxC1AI5MUw2CsCusAGwFYNUuI7utpaiyLwexzSaC9ZMzO4y+28ofp5bfNm/uLoHTqEzcH7CvU/+qYpce0VwILaIL036+ughk=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR03MB9690
-X-Proofpoint-ORIG-GUID: c7eNr5eV2NNHbSl0r-qQ52DxkRj3XyRs
-X-Proofpoint-GUID: c7eNr5eV2NNHbSl0r-qQ52DxkRj3XyRs
+X-MS-Exchange-CrossTenant-userprincipalname: KBC/ST6wVTaREC356XX3Lt0uCRpe0DC16j8jyM6eax/2oaJVxnzMRMk8vvshv/QVV7/txgfYKLMurxuO+wAlo2JTcJwOy0cp6SvIWJBaeVo=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR03MB9524
+X-Proofpoint-GUID: 1FD_3S7uANJCTq-2DyuG6c6YHix99sHa
+X-Proofpoint-ORIG-GUID: 1FD_3S7uANJCTq-2DyuG6c6YHix99sHa
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
  definitions=2024-03-04_11,2024-03-04_01,2023-05-22_02
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 spamscore=0
- mlxscore=0 phishscore=0 lowpriorityscore=0 suspectscore=0 mlxlogscore=662
- adultscore=0 malwarescore=0 priorityscore=1501 bulkscore=0 clxscore=1011
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2402120000
- definitions=main-2403040121
+ lowpriorityscore=0
+ adultscore=0 impostorscore=0 clxscore=1015 priorityscore=1501
+ malwarescore=0 suspectscore=0 mlxscore=0 spamscore=0 phishscore=0
+ mlxlogscore=999 bulkscore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.19.0-2402120000 definitions=main-2403040122
 X-Mailman-Approved-At: Mon, 04 Mar 2024 17:30:21 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -171,48 +164,40 @@ Hi Stephan,
 
 Stephan Gerhold <stephan@gerhold.net> writes:
 
-> On Fri, Mar 01, 2024 at 06:25:39PM +0000, Volodymyr Babchuk wrote:
->> Caleb Connolly <caleb.connolly@linaro.org> writes:
->> > On 29/02/2024 14:21, Volodymyr Babchuk wrote:
->> >> This patch series adds support for Qualcomm SA8155-ADP development
->> >> board. Main motivation for this series is to allow running
->> >> virtualization software on this board and U-Boot is a good way to
->> >> break Qualcomm's boot chain at EL2 with more convenient ways for
->> >> uploading and running the code. With this patches applied it is
->> >> possible to upload and run Xen on this board. KVM probably should wor=
-k
->> >> too.
->> >
->> > This is really cool! I've experimented with this on SDM845 and SM8250
->> > but never really did anything with it... I'd love to take a look at yo=
-ur
->> > Xen branch?
->>=20
->> Honestly, there is nothing to look at right now. I just implemented
->> early printk serial driver for the qcom, made hacks to the device tree
->> and trying to boot Dom0. I already expecting issues with the GPU,
->> because it has own SMMU without virtualization support and Xen already
->> complains about it. So I had to remove it from the DTS for a time being.
->>=20
+[...]
+>> +This approach ensures that U-Boot is booted in EL2 and it is possible
+>> +to run virtualization software (like Xen or KVM) on the board. You
+>> +must understand that this approach breaks Qualcomm's boot chain. You
+>> +will not be able to call all subsequent loaders, so you will not be
+>> +able to use fastboot for example. Use this approach only if you want
+>> +to experiment with virtualization on SA8155P-ADP.
+>> +
+>> +We need to create ELF file from the u-boot binary. We can't use
+>> +existing U-Boot ELF, because it does not include appended DTB
+>> +file. Easiest way to do this is to use ``create_elf.py`` from the
+>> +following repository: `qtestsign(lorc)
+>> +<https://urldefense.com/v3/__https://github.com/lorc/qtestsign/tree/cre=
+ate_elf__;!!GF_29dbcQIUBPA!3iokDDZXQGZNS3GK2oGM-SU5Trj8ZSmx5FY-uvFKY0LDzDLh=
+8LSVkBNS5r9QX-LGFKObs1tNmLdELls6iGQPZ3Aq$
+>> [github[.]com]>`_: ::
+>> +
+>> +	$ python ../qtestsign/create_elf.py u-boot.bin 0x85710000 u-boot.mbn
+>> +
 >
-> Did you enable all the clocks/power domains/etc for the GPU SMMU? If I
-> remember correctly it is off by default and all registers read as
-> zeroes. The SMMU driver could easily get confused about the capabilities
-> of the SMMU (e.g. the stage 2/virtualization support) if all the ID
-> registers read as zeroes.
+> Have you tried using CONFIG_REMAKE_ELF in U-Boot? That should
+> effectively do the same (build a new ELF based on u-boot.bin with the
+> appended device tree). The Qualcomm DragonBoard 410c port is using that
+> option to solve the same problem.
 
-Ah, this is a great idea, thanks. I tried a quick test by enabling only
-clocks that are provided by GCC, but looks like I need to enable GPUCC
-clocks as well. So I need to write a driver for GPUCC or at least
-figure which registers to write with a debugger. I'll try this later.
+I didn't knew that there is a such option. Looks like this is exactly
+what I need, thank you. I'll include this in the V2.
 
-By the way, do you have any suggestion about my second issue? When Linux
-in the Dom0 tries to access UFS, CPU gets a secure interrupt and hangs in
-TZ. I had the same exactly behavior when I tried to access EMAC without ena=
-bling
-clocks and power domains in U-Boot. But Linux should enable all
-prerequisites for UFS... I suspect that there is an additional
-initialization needs to be done, but I didn't figured it yet.
+> But I'm glad to see that the ELF abstractions in qtestsign worked well
+> for your purpose. :-)
+
+Well, I was surprised that pyelf can parse ELF files but can't modify
+them. So your tool come in handy. I was going to make a PR that adds
+this create_elf.py script, but looks like we don't need it.
 
 --=20
 WBR, Volodymyr=
