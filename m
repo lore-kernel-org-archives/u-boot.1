@@ -4,68 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47AFDC5478C
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 20:27:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C74BC48BF6
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 20:37:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 51A4D87FCC;
-	Mon,  4 Mar 2024 21:27:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id B289687FC7;
+	Mon,  4 Mar 2024 21:37:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="gBJ9Wjkm";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="U2mCquMG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B3D7187FCC; Mon,  4 Mar 2024 21:27:21 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 2D7CC86F67; Mon,  4 Mar 2024 21:25:02 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F4F687FC9
- for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 21:27:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D595787FC7
+ for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 21:24:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 424KRHgN070822;
- Mon, 4 Mar 2024 14:27:17 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1709584037;
- bh=3K4QQnnYhZmfvdwyR+OGpkVLlYRFVbhaxQLGu0bxKR0=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=gBJ9WjkmNoiY22PXRM9CO3hvYM+naq/G/ELV2ckoCsExBV0B/7pQINzv8yfitpL3q
- d9Msrpzp3YXI3XNYAJdiNRC1m9cD4dKBUtFTLvEWjcRefZ+zEEvvq6XpywEjXYR+UZ
- 9cPjuD06a/5y0ts9SwLfqEaeN/nAarEBme8dS0E8=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 424KRHdH021466
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 4 Mar 2024 14:27:17 -0600
-Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 4
- Mar 2024 14:27:17 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 4 Mar 2024 14:27:17 -0600
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 424KRHv6106280;
- Mon, 4 Mar 2024 14:27:17 -0600
-Date: Mon, 4 Mar 2024 14:27:17 -0600
-From: Bryan Brattlof <bb@ti.com>
-To: Vignesh Raghavendra <vigneshr@ti.com>
-CC: Wadim Egorov <w.egorov@phytec.de>, <u-boot@lists.denx.de>, <nm@ti.com>,
- <upstream@lists.phytec.de>
-Subject: Re: [PATCH 1/2] arm: mach-k3: am625: copy bootindex to OCRAM for
- main domain SPL
-Message-ID: <20240304202717.7ruiozbuzy4bv5iz@bryanbrattlof.com>
-X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
-References: <20240226133006.3279993-1-w.egorov@phytec.de>
- <20240226133006.3279993-2-w.egorov@phytec.de>
- <eeda9c00-d7c6-444b-ba77-f70b2f19eb2a@ti.com>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=8d7b=KL=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1709583847;
+ bh=yue8JLPupABBdqygA0EMatoBvWzc9y+LdbG73Zrk0is=;
+ b=U2mCquMGgMICAoDELBbO/2meILkSsw0LVYUYW7+l+JJejU6XFU6P+bvFYMjTaonfbcFL4+5nq
+ 6Te2eumEEr5payxBx9wHyPj0ZEyrthPopo+z/6OtPZN7XCcaZGx0BbuuQ77L2GNjKH7Qn6rEmOZ
+ IjhnZnRWFiHYEsUe4PhAZtfnnWGwkI2WVhWiIj4tEl6mL41t+YY4Hmwicf3XjhpRzvHVUmRQZ2b
+ GEJX5rjJeCvxJYgq/d+O4zBXjG81erSvaxhUUOG09hS6F8s6Qh7OciY9tRu0Y6Qq5mFcpyWYdzc
+ gJQUp/5ncYNooztBzMIbf/UOwpnjP6wx8nTonX2epcpg==
+Message-ID: <e6285379-d4c9-45b7-8913-bcf27c52bbda@kwiboo.se>
+Date: Mon, 4 Mar 2024 21:23:59 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-In-Reply-To: <eeda9c00-d7c6-444b-ba77-f70b2f19eb2a@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFC 10/26] rockchip: drop remaining dt-binding headers
+Content-Language: en-US
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io,
+ uboot-stm32@st-md-mailman.stormreply.com, uboot-snps-arc@synopsys.com, Tom
+ Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Patrice Chotard
+ <patrice.chotard@foss.st.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Jagan Teki <jagan@amarulasolutions.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Kever Yang <kever.yang@rock-chips.com>, Lukasz
+ Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Sam Protsenko
+ <semen.protsenko@linaro.org>, Matthias Brugger <mbrugger@suse.com>, Peter
+ Robinson <pbrobinson@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Thierry Reding <treding@nvidia.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Michal Simek
+ <michal.simek@amd.com>, Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Weijie Gao <weijie.gao@mediatek.com>, GSS_MTK_Uboot_upstream
+ <GSS_MTK_Uboot_upstream@mediatek.com>, Ryder Lee <ryder.lee@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, Eugen Hristev
+ <eugen.hristev@collabora.com>, Rick Chen <rick@andestech.com>, Leo
+ <ycliang@andestech.com>, Ryan Chen <ryan_chen@aspeedtech.com>, "Chia-Wei
+ Wang" <chiawei_wang@aspeedtech.com>, Aspeed BMC SW team
+ <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>, Kunihiko Hayashi
+ <hayashi.kunihiko@socionext.com>, Dai Okamura <okamura.dai@socionext.com>,
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>
+References: <20240304-b4-upstream-dt-headers-v1-0-b7ff41925f92@linaro.org>
+ <20240304-b4-upstream-dt-headers-v1-10-b7ff41925f92@linaro.org>
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20240304-b4-upstream-dt-headers-v1-10-b7ff41925f92@linaro.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 65e62de5a5d3328d0fcb4c53
+X-Mailman-Approved-At: Mon, 04 Mar 2024 21:37:51 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,137 +95,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hey Vignesh!
+Hi Caleb,
 
-On March  4, 2024 thus sayeth Vignesh Raghavendra:
-> Hi Wadim,
+On 2024-03-04 17:51, Caleb Connolly wrote:
+> Drop in favour of dts/upstream.
 > 
-> On 26/02/24 19:00, Wadim Egorov wrote:
-> > Texas Instruments has begun enabling security settings on the SoCs it
-> > produces to instruct ROM and TIFS to begin protecting the Security
-> > Management Subsystem (SMS) from other binaries we load into the chip by
-> > default.
-> > 
-> > One way ROM and TIFS do this is by enabling firewalls to protect the
-> > OCSRAM and HSM RAM regions they're using during bootup.
-> > 
-> > The HSM RAM the wakeup SPL is in is firewalled by TIFS to protect
-> > itself from the main domain applications. This means the 'bootindex'
-> > value in HSM RAM, left by ROM to indicate if we're using the primary
-> > or secondary boot-method, must be moved to OCSRAM (that TIFS has open
-> > for us) before we make the jump to the main domain so the main domain's
-> > bootloaders can keep access to this information.
-> > 
-> > Based on commit
-> >   b672e8581070 ("arm: mach-k3: copy bootindex to OCRAM for main domain SPL")
-> > 
+> Small driver adjustment to fix compatibility.
 > 
-> FYI, this is mostly a problem in non SPL flow (TI prosperity SBL for
-> example) where HSM RAM would be used by HSM firmware. This should be a
-> issue in R5 SPL flow.  Do you see any issues today? If so, whats the
-> TIFS firmware being used?
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> ---
+>  drivers/pinctrl/rockchip/pinctrl-rk3568.c         |  15 +
+>  include/dt-bindings/pinctrl/rockchip.h            |  60 --
+>  include/dt-bindings/power/px30-power.h            |  27 -
+>  include/dt-bindings/power/rk3066-power.h          |  22 -
+>  include/dt-bindings/power/rk3188-power.h          |  24 -
+>  include/dt-bindings/power/rk3228-power.h          |  21 -
+>  include/dt-bindings/power/rk3288-power.h          |  32 -
+>  include/dt-bindings/power/rk3328-power.h          |  19 -
+>  include/dt-bindings/power/rk3399-power.h          |  53 --
+>  include/dt-bindings/power/rk3568-power.h          |  32 -
+>  include/dt-bindings/power/rk3588-power.h          |  69 --
+>  include/dt-bindings/power/rockchip,rv1126-power.h |  35 -
+>  include/dt-bindings/reset/rockchip,rk3588-cru.h   | 754 ----------------------
+>  include/dt-bindings/soc/rockchip,boot-mode.h      |  16 -
+>  include/dt-bindings/soc/rockchip,vop2.h           |  18 -
+>  15 files changed, 15 insertions(+), 1182 deletions(-)
 > 
-> > Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
-> > ---
-> >  arch/arm/mach-k3/Kconfig                      |  3 ++-
-> >  arch/arm/mach-k3/am625_init.c                 | 15 +++++++++++++--
-> >  arch/arm/mach-k3/include/mach/am62_hardware.h | 15 +++++++++++++++
-> >  3 files changed, 30 insertions(+), 3 deletions(-)
-> > 
-> > diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
-> > index 03898424c9..f5d06593f7 100644
-> > --- a/arch/arm/mach-k3/Kconfig
-> > +++ b/arch/arm/mach-k3/Kconfig
-> > @@ -75,7 +75,8 @@ config SYS_K3_BOOT_PARAM_TABLE_INDEX
-> >  	default 0x41cffbfc if SOC_K3_J721E
-> >  	default 0x41cfdbfc if SOC_K3_J721S2
-> >  	default 0x701bebfc if SOC_K3_AM642
-> > -	default 0x43c3f290 if SOC_K3_AM625
-> > +	default 0x43c3f290 if SOC_K3_AM625 && CPU_V7R
-> > +	default 0x7000f290 if SOC_K3_AM625 && ARM64
-> >  	default 0x43c3f290 if SOC_K3_AM62A7 && CPU_V7R
-> >  	default 0x7000f290 if SOC_K3_AM62A7 && ARM64
-> >  	help
-> > diff --git a/arch/arm/mach-k3/am625_init.c b/arch/arm/mach-k3/am625_init.c
-> > index 6c96e88114..67cf63b103 100644
-> > --- a/arch/arm/mach-k3/am625_init.c
-> > +++ b/arch/arm/mach-k3/am625_init.c
-> > @@ -35,8 +35,10 @@ static struct rom_extended_boot_data bootdata __section(".data");
-> >  static void store_boot_info_from_rom(void)
-> >  {
-> >  	bootindex = *(u32 *)(CONFIG_SYS_K3_BOOT_PARAM_TABLE_INDEX);
-> > -	memcpy(&bootdata, (uintptr_t *)ROM_EXTENDED_BOOT_DATA_INFO,
-> > -	       sizeof(struct rom_extended_boot_data));
-> > +	if (IS_ENABLED(CONFIG_CPU_V7R)) {
-> > +		memcpy(&bootdata, (uintptr_t *)ROM_EXTENDED_BOOT_DATA_INFO,
-> > +		       sizeof(struct rom_extended_boot_data));
-> > +	}
-> >  }
-> >  
-> >  static void ctrl_mmr_unlock(void)
-> > @@ -175,6 +177,15 @@ void board_init_f(ulong dummy)
-> >  		k3_sysfw_loader(true, NULL, NULL);
-> >  	}
-> >  
-> > +#if defined(CONFIG_CPU_V7R)
-> > +	/*
-> > +	 * Relocate boot information to OCRAM (after TIFS has opend this
-> > +	 * region for us) so the next bootloader stages can keep access to
-> > +	 * primary vs backup bootmodes.
-> > +	 */
-> > +	writel(bootindex, K3_BOOT_PARAM_TABLE_INDEX_OCRAM);
-> > +#endif
-> > +
-> >  	/*
-> >  	 * Force probe of clk_k3 driver here to ensure basic default clock
-> >  	 * configuration is always done.
-> > diff --git a/arch/arm/mach-k3/include/mach/am62_hardware.h b/arch/arm/mach-k3/include/mach/am62_hardware.h
-> > index 54380f36e1..9f504f4642 100644
-> > --- a/arch/arm/mach-k3/include/mach/am62_hardware.h
-> > +++ b/arch/arm/mach-k3/include/mach/am62_hardware.h
-> > @@ -76,8 +76,23 @@
-> >  #define CTRLMMR_MCU_RST_CTRL			(MCU_CTRL_MMR0_BASE + 0x18170)
-> >  
-> >  #define ROM_EXTENDED_BOOT_DATA_INFO		0x43c3f1e0
-> > +#define K3_BOOT_PARAM_TABLE_INDEX_OCRAM         0x7000F290
-> >  
-> > +/*
-> > + * During the boot process ROM will kill anything that writes to OCSRAM.
-> 
-> R5 ROM is long gone when R5 SPL starts, how would it kill anything?
+> diff --git a/drivers/pinctrl/rockchip/pinctrl-rk3568.c b/drivers/pinctrl/rockchip/pinctrl-rk3568.c
+> index 1d4391982605..35a69c2a1a28 100644
+> --- a/drivers/pinctrl/rockchip/pinctrl-rk3568.c
+> +++ b/drivers/pinctrl/rockchip/pinctrl-rk3568.c
+> @@ -11,8 +11,23 @@
+>  #include <dt-bindings/pinctrl/rockchip.h>
+>  
+>  #include "pinctrl-rockchip.h"
+>  
+> +#define RK_GPIO0	0
+> +#define RK_GPIO1	1
+> +#define RK_GPIO2	2
+> +#define RK_GPIO3	3
+> +#define RK_GPIO4	4
+> +#define RK_GPIO6	6
+> +
+> +#define RK_FUNC_GPIO	0
+> +#define RK_FUNC_1	1
+> +#define RK_FUNC_2	2
+> +#define RK_FUNC_3	3
+> +#define RK_FUNC_4	4
+> +#define RK_FUNC_5	5
+> +#define RK_FUNC_6	6
 
-Looks like this was based on my patch long ago for the AM62Ax family. 
-From what little I remember about this was ROM is leaving behind a 
-firewall that we need TIFS's help to bring down for us. So I just
-blamed ROM ;)
+I would suggest to just drop the RK_GPIO and RK_FUNC_ prefix in the
+table below instead of having to define these here.
 
-IDK if this is an issue for the AM62x family though.
+Regards,
+Jonas
 
-> 
-> > + * This means the wakeup SPL cannot use this region during boot. To
-> > + * complicate things, TIFS will set a firewall between HSM RAM and the
-> > + * main domain.
-> > + *
-> > + * So, during the wakeup SPL, we will need to store the EEPROM data
-> > + * somewhere in HSM RAM, and the main domain's SPL will need to store it
-> > + * somewhere in OCSRAM
-> > + */
-> > +#ifdef CONFIG_CPU_V7R
-> >  #define TI_SRAM_SCRATCH_BOARD_EEPROM_START	0x43c30000
-> > +#else
-> > + #define TI_SRAM_SCRATCH_BOARD_EEPROM_START	0x70000001
-> 
-> Why not  0x70000000 ?
+> +
+>  static struct rockchip_mux_route_data rk3568_mux_route_data[] = {
+>  	MR_PMUGRF(RK_GPIO0, RK_PB7, RK_FUNC_1, 0x0110, RK_GENMASK_VAL(1, 0, 0)), /* PWM0 IO mux selection M0 */
+>  	MR_PMUGRF(RK_GPIO0, RK_PC7, RK_FUNC_2, 0x0110, RK_GENMASK_VAL(1, 0, 1)), /* PWM0 IO mux selection M1 */
+>  	MR_PMUGRF(RK_GPIO0, RK_PC0, RK_FUNC_1, 0x0110, RK_GENMASK_VAL(3, 2, 0)), /* PWM1 IO mux selection M0 */
 
-Ah an off by one by me :) 0x70000000 should be fine
-
-> 
-> > +#endif /* CONFIG_CPU_V7R */
-> >  
-> 
-> Can't we store directly in OCRAM in both stages? This RAM should be
-> accessible post TIFS is up (ie post k3_sysfw_loader() call)
-
-I'll have to double check but I think this should work.
-
-~Bryan
+[snip]
