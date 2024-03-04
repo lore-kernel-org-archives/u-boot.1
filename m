@@ -4,87 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADA31C48BF6
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 10:26:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7642C5478C
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 11:16:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 06CB587EA3;
-	Mon,  4 Mar 2024 11:26:48 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2CE3F87E92;
+	Mon,  4 Mar 2024 12:16:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TofQ+eLP";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Jc4Q+tTT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B73E987F41; Mon,  4 Mar 2024 11:26:47 +0100 (CET)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 6667C87F10; Mon,  4 Mar 2024 12:16:49 +0100 (CET)
+Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
+ [IPv6:2a00:1450:4864:20::22d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E43B987E2C
- for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 11:26:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D4EA87E4D
+ for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 12:16:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dan.carpenter@linaro.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-412e784060cso1694965e9.1
- for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 02:26:43 -0800 (PST)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lj1-x22d.google.com with SMTP id
+ 38308e7fff4ca-2d09cf00214so53942521fa.0
+ for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 03:16:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709548003; x=1710152803; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=G9wzfq7BBEKMdiZNvMLYL/6NRslxGTP7YmgHcziXlJE=;
- b=TofQ+eLPbOMp+GplUhfpmVdSUUOvB/X2caeN8moxEdOhZFcY55aQwJ3kVbvA5tphFO
- vtgkMvR/3A0x7sybNoKwXwuSsixBRM9xIIakusUuAukfy0ONDb64V7jqJTMadLZMmuCR
- tlK3kTZ/opwS9NSpCwvmQKjQHu1ELhKW1B+tHiKT5MgjXUFawya8pjM7+KNuY1gL1TU7
- 0smSccHZN1JjwDlVnPIUuDbnZXHcqcGawSXPyo9yX2q1F6PFwO+AnTQtUkAaxIsf/j/b
- BHC8muRTX01yYdr/V0RW9+aADd6Fo19P02rb6zNjPHYYkpL9yO9kDJfTdtHBJGIhZF5T
- dwWw==
+ d=linaro.org; s=google; t=1709551005; x=1710155805; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=jCGJKi3vfYkuo65wd51kNl6IuqX2ZLLig1NQjKjKvvg=;
+ b=Jc4Q+tTT+wc22Q3adVtLuE3wT4gGZ1wtfKCCj646x0OCp4DLD+cITjS6azekLwNANy
+ qbKr07hFj6P6/4ip49PL8LVT76NJDyE+6Kdnwk3oNl0oe9NS87tBHZGkB/HkTDuRGKXQ
+ +lC41n5BL0MVPRdl+rGNMvM3uOKY5gxLQXIRqmMgfWfGMJGd+hC2hTOH8OS22b/lHSBl
+ NIrwahkUOZ2bDAjECfNbD7M6Ph4SvcRzx51BI0flWjKpXMQgkhbqWpPHByB5qgCjKG+A
+ Lzrjd610ex/ZcetB4ztURIQtz0H+9xdK8EJcjCNhMVFu0HnqtefcXptx1g3IdQrO4R1i
+ 3k3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709548003; x=1710152803;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=G9wzfq7BBEKMdiZNvMLYL/6NRslxGTP7YmgHcziXlJE=;
- b=ofPQqzm0lcseKtNTcP5Mb4C4890sO/BixOCYFYpvItM0XHhoLmFkPp7nLuUyc0KSte
- RrXMWYfCwTHP7IWy0LcB+pQAu/fZb5kaxRvlNVe6fyNvj2W4fYH/bWMk9BvfSUATJVBM
- FB3EN4Z7FcdNC/UDJQ56uySugVUEXmkQ2CE/3pC9No5gGE457453Nd54EtEakkMZjqx+
- qkekml688t+8qNDuv1EbRm421RdoA1hXiPkiffoOHKmlOdCRctHLNsPKrCnMlH0hdYBv
- Sox5gNpIWAVy0Uyv1Q0q1xrmTZ9iKEVBy6+auHDvMGOTgPOlrbFysWsnXGGQRKhIMqBQ
- L7AQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWTDO323gHb32xGfHBf2bAOQmZ6oavAvT4Q4LrAEdf5eZn3IXCFJrqUVsoCRJb5Ez5v+T1H9+SimpzdV4ZV2NSKSMYmXA==
-X-Gm-Message-State: AOJu0YxXvFl03h7mO2Z1iUdcGyiZeWNTGdTggC1mUlgFxnJWslDgZNer
- vnyx8g/JPMgu1a3qH0fxsognkGg1ExhY1kZI8UKlmvjVfOHGeiKbYWvi6z5hMsA=
-X-Google-Smtp-Source: AGHT+IF5dONHFZx4eSNftqJMrBSCah0sgyp/g7bc1+s1JyyxlCGkjyABqMG3x6AcCTnEy8xORDDB6g==
-X-Received: by 2002:adf:ca8a:0:b0:33e:1505:9463 with SMTP id
- r10-20020adfca8a000000b0033e15059463mr8553028wrh.13.1709548003060; 
- Mon, 04 Mar 2024 02:26:43 -0800 (PST)
-Received: from localhost ([102.222.70.76]) by smtp.gmail.com with ESMTPSA id
- i6-20020adfb646000000b0033e033898c5sm11839340wre.20.2024.03.04.02.26.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Mar 2024 02:26:42 -0800 (PST)
-Date: Mon, 4 Mar 2024 13:26:39 +0300
-From: Dan Carpenter <dan.carpenter@linaro.org>
-To: Jacky Chou <jacky_chou@aspeedtech.com>
-Cc: "joe.hershberger@ni.com" <joe.hershberger@ni.com>,
- "rfried.dev@gmail.com" <rfried.dev@gmail.com>,
- "trini@konsulko.com" <trini@konsulko.com>,
- "michal.simek@amd.com" <michal.simek@amd.com>,
- "marek.vasut+renesas@mailbox.org" <marek.vasut+renesas@mailbox.org>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- BMC-SW <BMC-SW@aspeedtech.com>
-Subject: Re: RE: [PATCH] net: phy: ncsi: Correct the endian of the checksum
-Message-ID: <053184ba-3e05-45ac-bb7f-45f590b2fb7f@moroto.mountain>
-References: <20240205080228.140001-1-jacky_chou@aspeedtech.com>
- <da9231ac-1386-48fc-81b9-8e027cd5dff5@moroto.mountain>
- <SEYPR06MB513483FE06C897839C5E3E5E9D592@SEYPR06MB5134.apcprd06.prod.outlook.com>
- <901d6849-2e8d-4876-95b6-afdb9696d862@moroto.mountain>
- <SEYPR06MB5134211DDFB9F9FDB0125F609D232@SEYPR06MB5134.apcprd06.prod.outlook.com>
+ d=1e100.net; s=20230601; t=1709551005; x=1710155805;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=jCGJKi3vfYkuo65wd51kNl6IuqX2ZLLig1NQjKjKvvg=;
+ b=KhA2WaQ0ViVWe+hZWh31kpTTCJTN1zCwCJbnI2P1HRHF7zt627kRZqm3trFr7jB0Xz
+ WVmf7xBc7SpYI38iZyEXqgcHk7uzPXs7PNJGqcwJVfc1JIWPv+UrvfaH6EKoUfWW5Bza
+ P56lxJOPMrX5cAmiT7bZ864mxbrLOWoXPF+rfeE1EE7SvFh/m0G0LmgejhwwFDrqx6hY
+ UWDpzeoff5+1Ood2KXzGomBX/y+GSiLGCNxrfk+VF9BKMkgsAUNdZB+1bPed/3f4EB5r
+ KScFl2FWlqXLA/typ5xuCXMf1PjUZPE5xD/6GchadTYYISePWJMoezJA/d3qWJZujYHZ
+ ueJw==
+X-Gm-Message-State: AOJu0Yy+Om/Uq1VQ+QNx51ATHrVjAiNZPeTGamSM1BvPPeEBdnyDmD9s
+ KWEaJvHv6XIX3KOUQL8gmlQ4aWDorSlj6vK+6jvhgvAuGhSocDrND1OpGr8NhOBBUXAkSe58KkT
+ LQmAlIdlyQFwTIXxvcyyrQc/w3YbwBcTB4lxfcw==
+X-Google-Smtp-Source: AGHT+IEhC7PD/7dlXXfetnmlvbwGa4NzyrFNlQQKs+/TopYioCDo5wqqvDXFwK3Nhqj75hNVaJgYQw0l4F7yYxhASfA=
+X-Received: by 2002:ac2:4834:0:b0:513:1829:57f with SMTP id
+ 20-20020ac24834000000b005131829057fmr5959048lft.5.1709551004918; Mon, 04 Mar
+ 2024 03:16:44 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <SEYPR06MB5134211DDFB9F9FDB0125F609D232@SEYPR06MB5134.apcprd06.prod.outlook.com>
+References: <20240302220108.720637-1-igor.opaniuk@gmail.com>
+In-Reply-To: <20240302220108.720637-1-igor.opaniuk@gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 4 Mar 2024 13:16:08 +0200
+Message-ID: <CAC_iWjK+f-ZBKT=Mf6629HxV=NCgoZ_taRMFhGK04aA1Xw-BCA@mail.gmail.com>
+Subject: Re: [PATCH v2 0/5] TEE: minor cleanup
+To: Igor Opaniuk <igor.opaniuk@gmail.com>
+Cc: u-boot@lists.denx.de, AKASHI Takahiro <takahiro.akashi@linaro.org>, 
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Bin Meng <bmeng@tinylab.org>, 
+ Etienne Carriere <etienne.carriere@foss.st.com>, 
+ Francis Laniel <francis.laniel@amarulasolutions.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jens Wiklander <jens.wiklander@linaro.org>, 
+ Jorge Ramirez-Ortiz <jorge@foundries.io>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Roger Knecht <rknecht@pm.me>, Sean Edmond <seanedmond@microsoft.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,9 +97,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Anyway, looks good!  I already gave my reviewed by.  Thanks for your
-work on this.
+Hi Igor,
 
-regards,
-dan carpenter
+On Sun, 3 Mar 2024 at 00:01, Igor Opaniuk <igor.opaniuk@gmail.com> wrote:
+>
+>
+> - Address some spelling errors and typos
+> - Support CMD_OPTEE_RPMB for SANDBOX configurations and add python tests
+> - Remove common.h inclusion for drivers/tee
+>
+> Changes in v2:
+> - Fixed chimp_optee.c:37:9: error: implicit declaration of function 'memset'
+> - Applied R-b and T-b tags
 
+https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines/19808
+this seems to have a few failures
+
+Cheers
+/Ilias
+>
+> Igor Opaniuk (5):
+>   tee: optee: fix description in Kconfig
+>   tee: sandbox: fix spelling errors
+>   cmd: optee_rpmb: build cmd for sandbox
+>   test: py: add optee_rpmb tests
+>   tee: remove common.h inclusion
+>
+>  cmd/Kconfig                        |  4 +++-
+>  drivers/tee/broadcom/chimp_optee.c |  3 ++-
+>  drivers/tee/optee/Kconfig          |  2 +-
+>  drivers/tee/optee/core.c           |  1 -
+>  drivers/tee/optee/i2c.c            |  1 -
+>  drivers/tee/optee/rpmb.c           |  1 -
+>  drivers/tee/optee/supplicant.c     |  2 +-
+>  drivers/tee/sandbox.c              | 10 +++++-----
+>  drivers/tee/tee-uclass.c           |  1 -
+>  test/py/tests/test_optee_rpmb.py   | 20 ++++++++++++++++++++
+>  10 files changed, 32 insertions(+), 13 deletions(-)
+>  create mode 100644 test/py/tests/test_optee_rpmb.py
+>
+> --
+> 2.34.1
+>
