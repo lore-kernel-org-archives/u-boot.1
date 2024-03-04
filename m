@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA31FC5478C
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 15:22:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AE10C48BF6
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 15:22:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3CA2787F6E;
-	Mon,  4 Mar 2024 16:22:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4EBEB87FCA;
+	Mon,  4 Mar 2024 16:22:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="kYVWOy8Y";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="RPWZ0O4o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A275387FB8; Mon,  4 Mar 2024 16:22:01 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
+ id C5B0B87FBC; Mon,  4 Mar 2024 16:22:02 +0100 (CET)
+Received: from sin.source.kernel.org (sin.source.kernel.org
+ [IPv6:2604:1380:40e1:4800::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E201B87FB1
- for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 16:21:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A621987FA0
+ for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 16:21:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kabel@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 524AD6103E;
- Mon,  4 Mar 2024 15:21:54 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2936DC43394;
- Mon,  4 Mar 2024 15:21:53 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTP id 1D55ACE0A4B;
+ Mon,  4 Mar 2024 15:21:57 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8EB0FC43394;
+ Mon,  4 Mar 2024 15:21:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1709565713;
- bh=JZN3nPemvisURGNuQFWMiYsLfSLlwChqD0a3mSTDkVE=;
+ s=k20201202; t=1709565716;
+ bh=pWl3NgzdvtsK4yb/IG1KOSokOh2MM7vZYOcwXIDYOsc=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=kYVWOy8YAzsklB+NfGEvlbIgaLfF3nSHnMqCL6ij8mK5ouSSrmerpuOKutCxDGUH+
- Cc64UO7JqtWk2ayO6fc+rXGriZYgZBVMmF72z11Rduk4N+cGpuQQjiIbYJrHjCxCxJ
- bE3XcaBfIgIfcHij3m/x7Z/3PzZ31wrGiiDo33OPbfYeihhF30P3229ZOZC1vJl83x
- n6n7U30Yu8yH//pzhZE/wX382WBs7EWLjRHprFZPzDOGmWTsXBxo2cW3ho7r2sUCS3
- vHJ2C+kPQpRkxgevQTfkyFGQ68suwgumUHZnPlTNHKheJsJXFCwHrG7HaHpSRtui7X
- 2i6w6lplaXqvQ==
+ b=RPWZ0O4oWEclh0+p2i0MMG4Nk9LIBm39krAtgBUBGoBiw3mc7iHxP9es/RZron+tW
+ gBGSaTTV6+MnAXy7YLeO7eTgll6I9guw7n1hO7dE0dy/WZeV91JsX9zQWefLJ5FZu3
+ eHbagQ5O+HGYyMlWK3pfz2K/Bg4ZENdPQS4zN4h2qGj+AGssz4Mh6P8Ana6H/otK9z
+ DKfTEoHhrPPRV8f0EbrWGHVb6z1dp5CRE8sr/HznuCZPvf8HrlErHOzYgOvmCeTWxY
+ Nx79kKx2R/T8QtgR2oyGqFJR2cUfGbjQyCv2iwqu5rewfVvTNyWpkqDKHbjlNUx2PQ
+ hIWwpv2WOm47w==
 From: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
 To: Stefan Roese <sr@denx.de>
 Cc: u-boot@lists.denx.de,
 	=?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
-Subject: [PATCH u-boot-mvebu 1/4] arm: mvebu: turris_omnia: Refactor MCU
- status and features reading
-Date: Mon,  4 Mar 2024 16:21:45 +0100
-Message-ID: <20240304152148.3847-2-kabel@kernel.org>
+Subject: [PATCH u-boot-mvebu 3/4] arm: mvebu: turris_omnia: Print board ECDSA
+ public key if available
+Date: Mon,  4 Mar 2024 16:21:47 +0100
+Message-ID: <20240304152148.3847-4-kabel@kernel.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240304152148.3847-1-kabel@kernel.org>
 References: <20240304152148.3847-1-kabel@kernel.org>
@@ -70,147 +70,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Refactor MCU status word and MCU firmware features reading to make it
-simpler to use.
+If MCU supports the FEAT_CRYPTO feature, read board ECDSA public key
+from MCU and print it.
 
 Signed-off-by: Marek Behún <kabel@kernel.org>
 ---
- board/CZ.NIC/turris_omnia/turris_omnia.c | 81 ++++++++++++++++--------
- 1 file changed, 53 insertions(+), 28 deletions(-)
+ board/CZ.NIC/turris_omnia/turris_omnia.c | 29 +++++++++++++++++++++++-
+ 1 file changed, 28 insertions(+), 1 deletion(-)
 
 diff --git a/board/CZ.NIC/turris_omnia/turris_omnia.c b/board/CZ.NIC/turris_omnia/turris_omnia.c
-index adeb69a205b..b285e959d06 100644
+index 7a51ed3ace5..46f576a460e 100644
 --- a/board/CZ.NIC/turris_omnia/turris_omnia.c
 +++ b/board/CZ.NIC/turris_omnia/turris_omnia.c
-@@ -172,6 +172,48 @@ static int omnia_mcu_write(u8 cmd, const void *buf, int len)
- 	return dm_i2c_write(chip, cmd, buf, len);
+@@ -75,6 +75,9 @@ enum mcu_commands {
+ 	/* available if EXT_CMD bit set in features */
+ 	CMD_EXT_CONTROL		= 0x12,
+ 
++	/* available if CRYPTO bit set in features */
++	CMD_CRYPTO_GET_PUBLIC_KEY	= 0x29,
++
+ 	/* available if BOARD_INFO it set in features */
+ 	CMD_BOARD_INFO_GET	= 0x2c,
+ };
+@@ -94,6 +97,7 @@ enum status_word_bits {
+ enum features_e {
+ 	FEAT_PERIPH_MCU		= BIT(0),
+ 	FEAT_EXT_CMDS		= BIT(1),
++	FEAT_CRYPTO		= BIT(14),
+ 	FEAT_BOARD_INFO		= BIT(15),
+ };
+ 
+@@ -285,6 +289,24 @@ static int omnia_mcu_board_info(char *serial, u8 *mac, char *version)
+ 	return 0;
  }
  
-+static int omnia_mcu_get_sts_and_features(u16 *psts, u16 *pfeatures)
++static int omnia_mcu_get_board_public_key(char pub_key[static 67])
 +{
-+	u16 sts;
++	u8 reply[34];
 +	int ret;
 +
-+	ret = omnia_mcu_read(CMD_GET_STATUS_WORD, &sts, sizeof(sts));
++	ret = omnia_mcu_read(CMD_CRYPTO_GET_PUBLIC_KEY, reply, sizeof(reply));
 +	if (ret)
 +		return ret;
 +
-+	if (psts)
-+		*psts = sts;
++	if (reply[0] != 33)
++		return -EBADMSG;
 +
-+	if (!pfeatures)
-+		return 0;
-+
-+	if (sts & STS_FEATURES_SUPPORTED) {
-+		ret = omnia_mcu_read(CMD_GET_FEATURES, pfeatures,
-+				     sizeof(*pfeatures));
-+		if (ret)
-+			return ret;
-+	} else {
-+		*pfeatures = 0;
-+	}
++	bin2hex(pub_key, &reply[1], 33);
++	reply[66] = '\0';
 +
 +	return 0;
-+}
-+
-+static int omnia_mcu_get_sts(u16 *sts)
-+{
-+	return omnia_mcu_get_sts_and_features(sts, NULL);
-+}
-+
-+static bool omnia_mcu_has_feature(u16 feature)
-+{
-+	u16 features;
-+
-+	if (omnia_mcu_get_sts_and_features(NULL, &features))
-+		return false;
-+
-+	return feature & features;
 +}
 +
  static void enable_a385_watchdog(unsigned int timeout_minutes)
  {
  	struct sar_freq_modes sar_freq;
-@@ -249,7 +291,7 @@ static bool omnia_detect_sata(const char *msata_slot)
- 		}
- 	}
+@@ -1060,7 +1082,7 @@ int board_late_init(void)
  
--	ret = omnia_mcu_read(CMD_GET_STATUS_WORD, &stsword, sizeof(stsword));
-+	ret = omnia_mcu_get_sts(&stsword);
- 	if (ret) {
- 		printf("omnia_mcu_read failed: %i, defaulting to MiniPCIe card\n",
- 		       ret);
-@@ -405,20 +447,17 @@ static const char * const omnia_get_mcu_type(void)
- 		[STS_MCU_TYPE_MKL]   = "MKL (with peripheral resets)",
- 		[STS_MCU_TYPE_UNKN]  = "unknown (with peripheral resets)",
- 	};
--	u16 stsword, features;
-+	u16 sts;
- 	int ret;
+ int checkboard(void)
+ {
+-	char serial[17], version[4];
++	char serial[17], version[4], pub_key[67];
+ 	bool has_version;
+ 	int err;
  
--	ret = omnia_mcu_read(CMD_GET_STATUS_WORD, &stsword, sizeof(stsword));
-+	ret = omnia_mcu_get_sts(&sts);
- 	if (ret)
- 		return "unknown";
+@@ -1080,6 +1102,11 @@ int checkboard(void)
+ 	printf("  Board version: %s\n", has_version ? version : "unknown");
+ 	printf("  Serial Number: %s\n", !err ? serial : "unknown");
  
--	if (stsword & STS_FEATURES_SUPPORTED) {
--		ret = omnia_mcu_read(CMD_GET_FEATURES, &features, sizeof(features));
--		if (ret == 0 && (features & FEAT_PERIPH_MCU))
--			return mcu_types_with_perip_resets[stsword & STS_MCU_TYPE_MASK];
--	}
-+	if (omnia_mcu_has_feature(FEAT_PERIPH_MCU))
-+		return mcu_types_with_perip_resets[sts & STS_MCU_TYPE_MASK];
- 
--	return mcu_types[stsword & STS_MCU_TYPE_MASK];
-+	return mcu_types[sts & STS_MCU_TYPE_MASK];
++	if (omnia_mcu_has_feature(FEAT_CRYPTO)) {
++		err = omnia_mcu_get_board_public_key(pub_key);
++		printf("  ECDSA Public Key: %s\n", !err ? pub_key : "unknown");
++	}
++
+ 	return 0;
  }
  
- static const char * const omnia_get_mcu_version(void)
-@@ -695,9 +734,6 @@ int board_early_init_f(void)
- 
- void spl_board_init(void)
- {
--	u16 val;
--	int ret;
--
- 	/*
- 	 * If booting from UART, disable MCU watchdog in SPL, since uploading
- 	 * U-Boot proper can take too much time and trigger it. Instead enable
-@@ -714,12 +750,8 @@ void spl_board_init(void)
- 	 * resets then LAN eth switch is initialized automatically by bootstrap
- 	 * pins when A385 is released from the reset.
- 	 */
--	ret = omnia_mcu_read(CMD_GET_STATUS_WORD, &val, sizeof(val));
--	if (ret == 0 && (val & STS_FEATURES_SUPPORTED)) {
--		ret = omnia_mcu_read(CMD_GET_FEATURES, &val, sizeof(val));
--		if (ret == 0 && (val & FEAT_PERIPH_MCU))
--			initialize_switch();
--	}
-+	if (omnia_mcu_has_feature(FEAT_PERIPH_MCU))
-+		initialize_switch();
- }
- 
- #if IS_ENABLED(CONFIG_OF_BOARD_FIXUP) || IS_ENABLED(CONFIG_OF_BOARD_SETUP)
-@@ -919,16 +951,9 @@ static int fixup_mcu_gpio_in_eth_wan_node(void *blob)
- #if IS_ENABLED(CONFIG_OF_BOARD_FIXUP)
- int board_fix_fdt(void *blob)
- {
--	u16 val;
--	int ret;
--
--	ret = omnia_mcu_read(CMD_GET_STATUS_WORD, &val, sizeof(val));
--	if (ret == 0 && (val & STS_FEATURES_SUPPORTED)) {
--		ret = omnia_mcu_read(CMD_GET_FEATURES, &val, sizeof(val));
--		if (ret == 0 && (val & FEAT_PERIPH_MCU)) {
--			fixup_mcu_gpio_in_pcie_nodes(blob);
--			fixup_mcu_gpio_in_eth_wan_node(blob);
--		}
-+	if (omnia_mcu_has_feature(FEAT_PERIPH_MCU)) {
-+		fixup_mcu_gpio_in_pcie_nodes(blob);
-+		fixup_mcu_gpio_in_eth_wan_node(blob);
- 	}
- 
- 	fixup_msata_port_nodes(blob);
 -- 
 2.43.0
 
