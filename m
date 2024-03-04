@@ -4,85 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1849C48BF6
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 12:27:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4493CC54E41
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 12:31:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 18EF287F7F;
-	Mon,  4 Mar 2024 13:27:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id AA74087D8E;
+	Mon,  4 Mar 2024 13:31:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OAVA9fKI";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="N9MRZ51k";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E95587F85; Mon,  4 Mar 2024 13:27:08 +0100 (CET)
-Received: from mail-vs1-xe30.google.com (mail-vs1-xe30.google.com
- [IPv6:2607:f8b0:4864:20::e30])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9509987D8E; Mon,  4 Mar 2024 13:31:02 +0100 (CET)
+Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D459087CBA
- for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 13:27:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B59DD87D4E
+ for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 13:31:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vs1-xe30.google.com with SMTP id
- ada2fe7eead31-4725acb539cso1165492137.3
- for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 04:27:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709555224; x=1710160024; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=lqtb+sOeHz0eVl2w0Iev+xDqOXiEiNbePek3NATE098=;
- b=OAVA9fKIrTmEoLmK6heq67Ugo45tAuCwSihbcPK8mj1t51ek0hYGQvAsIfep/lEz/6
- iwHO+2+AGHLzyS3TNybeXWs5NjOvV7a2ZNieO4lx1HxgNpWbiNnSD4eRDfNer6VMDYnQ
- 9OJlDmmju7MpaIMU/VGPbTM+IKch5oJdeOE8vKUCGzhrp/zYIX9NxHfivJ1WwaaSPXKg
- 4zbis8i8RyX51cnr8KWlyuB7XCPuQ+lKz8Z36ZTXqW/fRbl7ZtKDn+OO/PWQk4E1p+Sa
- APBfBTJv+a5lQvQoGzYaigZKYI1BjhF4y734qNW8lp84DcBPMVaKrj2tHVA5NdoIGTPL
- nm4w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709555224; x=1710160024;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=lqtb+sOeHz0eVl2w0Iev+xDqOXiEiNbePek3NATE098=;
- b=LFlWsbTRkDEiSA8njCt8B2bHAzHBtp0wrP351qZ1xJvAjxXT+Cc/Vq6ZJMalR+C0rr
- Ayyn9vUSrAgAxP3X9DKHMtid8MRvtI0TMLe8BQ6QydomBHhukXETjwrzef5NnTbZRZX1
- Gj75QQ6B/GSEbVHbAFuwqJT/6Z+izWgXaEXqPYZP2d90Rc6+XR/XyLtAQvggyUCFl0WY
- iDWlxRNxU/+IEl42HTytDVFXi1c9chlQag4e8U1o/w+n5oChZym+KxTFz+agwCW+2t16
- a6adCMoHw6ca+j07XhBYSXcs+dRC358yaq0jPBl14IfK/Kj7/BioVhGtFR7K39knKnLJ
- y3sw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVmK5r3SftTuDnpDUqt4OoZXBFjwrdoIWjwVDfmA+zjO5xobak6Fzz2+2r7EooyRUcfGtfLryimV+hIzaERaIeXdtBKfQ==
-X-Gm-Message-State: AOJu0YxQ00Z1sxcwxvXqXlzVthskgKbQSLRSnr0VpRnGDN3kltgkBrut
- phBL59GmVuiY6x84zLMdbmMqNLG8/UahUDIqFA/af72Ap3TuHsr+bx0MEA8Cw9LfCOTcIFNIYro
- 16cCZajKd1hT5JCaYFznPiU7iwnGZaofjuHYljZI2q4iIaJdJT1M=
-X-Google-Smtp-Source: AGHT+IERE0bcQBi5R8ufa/1cjDmYbHhCKX76L5AcIMtUx2ERr0Z8TOFm+P4hQUGw8bNsQmVI4YQUB1iDLn/MTsPzDx8=
-X-Received: by 2002:a05:6102:35a:b0:471:f1a2:13c8 with SMTP id
- e26-20020a056102035a00b00471f1a213c8mr5067198vsa.11.1709555224650; Mon, 04
- Mar 2024 04:27:04 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=phytec.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=B.Hahn@phytec.de
+DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
+ q=dns/txt; i=@phytec.de; t=1709555460; x=1712147460;
+ h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=nScf7k/IxKy0PHH4esFT0647utumWpsivi6nwU61y58=;
+ b=N9MRZ51kDYI9BTWl5dCGjOM6rO5jmwZmD16ycUjc3t3R7Z2uaWsiWNaasNMz2OCe
+ xI9zaiFgLAd6EQi8NnOKZEFlQIN7YY39JdUlj1+QG/tzmTopx+HA/bNQMPPUVLUy
+ 2UuOjpeHYCs/HhR6PqYowMSL5vrK60jo24rvE80uW+Q=;
+X-AuditID: ac14000a-fadff7000000290d-35-65e5bf04cb05
+Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
+ (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (Client did not present a certificate)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id F4.36.10509.40FB5E56;
+ Mon,  4 Mar 2024 13:31:00 +0100 (CET)
+Received: from llp-hahn.hahn.test (172.25.0.11) by Berlix.phytec.de
+ (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Mon, 4 Mar 2024
+ 13:30:59 +0100
+From: Benjamin Hahn <B.Hahn@phytec.de>
+Subject: [PATCH 0/2] board: phytec_imx8mp: Use 2GHz RAM timings for PCL-070
+ from pcb_rev 1
+Date: Mon, 4 Mar 2024 13:30:46 +0100
+Message-ID: <20240304-pcl-070-patches-v1-0-6aa6c89e3b81@phytec.de>
 MIME-Version: 1.0
-References: <20240205-am62px-wip-rebasing-v3-0-04cbb42eaa6f@ti.com>
- <20240205-am62px-wip-rebasing-v3-11-04cbb42eaa6f@ti.com>
- <CAFA6WYPxXM5d=kpRTmEV7+8gYhgQr-rbX8hp=raOXmC79fSu+A@mail.gmail.com>
-In-Reply-To: <CAFA6WYPxXM5d=kpRTmEV7+8gYhgQr-rbX8hp=raOXmC79fSu+A@mail.gmail.com>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Mon, 4 Mar 2024 17:56:53 +0530
-Message-ID: <CAFA6WYP8qbi=QT52R7z+C6h-Zhkh7koAvx=M8dbw16pL1ZbBcQ@mail.gmail.com>
-Subject: Re: [PATCH v3 11/13] Makefile: remove hardcoded device tree source
- directory
-To: Tom Rini <trini@konsulko.com>
-Cc: Bryan Brattlof <bb@ti.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Lukasz Majewski <lukma@denx.de>, 
- Sean Anderson <seanga2@gmail.com>, Vignesh Raghavendra <vigneshr@ti.com>, 
- U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>,
- Nishanth Menon <nm@ti.com>, 
- Neha Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>,
- Igor Opaniuk <igor.opaniuk@foundries.io>, 
- Hari Nagalla <hnagalla@ti.com>, Ravi Gunasekaran <r-gunasekaran@ti.com>, 
- Vaishnav Achath <vaishnav.a@ti.com>, Jayesh Choudhary <j-choudhary@ti.com>, 
- Fabio Estevam <festevam@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAPa+5WUC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIxMDYwMT3YLkHF0DcwPdgsSS5IzUYt0UY8MkSwvL5DTTJGMloK6CotS0zAq
+ widGxtbUAbc1sZGEAAAA=
+To: Tom Rini <trini@konsulko.com>, Teresa Remmet <t.remmet@phytec.de>, Fabio
+ Estevam <festevam@gmail.com>
+CC: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>, Benjamin Hahn
+ <B.Hahn@phytec.de>
+X-Mailer: b4 0.12.4
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1709555459; l=754;
+ i=B.Hahn@phytec.de; s=20240126; h=from:subject:message-id;
+ bh=nScf7k/IxKy0PHH4esFT0647utumWpsivi6nwU61y58=;
+ b=L4lgf28ilO5GsbIP7ifVHbvYahZoP3YQVCA01y9MKpkIn12q1bKRqgFF+iwSjcc5Fg7/aIRUa
+ 4FZ0BgW17pMCYArQ7OakpaNTrJMOfStZ74IcBHRl8VS7N4P4qe7uay4
+X-Developer-Key: i=B.Hahn@phytec.de; a=ed25519;
+ pk=r04clMulHz6S6js6elPBA+U+zVdDAqJyEyoNd8I3pSw=
+X-Originating-IP: [172.25.0.11]
+X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
+ (172.25.0.12)
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrGLMWRmVeSWpSXmKPExsWyRpKBR5dl/9NUg65p3BYPr/pbTJ20md3i
+ 7d5Odovud+oOLB47Z91l93h1YBW7x9k7Oxg9+rtbWANYorhsUlJzMstSi/TtErgyNn55wVzw
+ hbVi+qkZ7A2MX1m6GDk5JARMJD59O83UxcjFISSwmEni19VjrBDOA0aJm2+fMYNUsQmoSex6
+ 85oVxBYWiJFYceYGUJyDg0VAReLlGTaQMK+Ak0TrjDOsELagxMmZT1hASpgFNCXW79IHCTML
+ yEtsfzuHGWS8hMAGRonOlU3sIAkRgWyJZ51b2CHqoyTeTQwCMSUEhCU27dSCKN/FJHFi5k92
+ iHiixM7XciCdQgKyEjfPb2GDeEVeYtq518wQdqjEkU2rmSYwCs9CctAshINmITloASPzKkah
+ 3Mzk7NSizGy9gozKktRkvZTUTYygsBdh4NrB2DfH4xAjEwfjIUYJDmYlEd6aX09ShXhTEiur
+ Uovy44tKc1KLDzFKc7AoifOu7ghOFRJITyxJzU5NLUgtgskycXBKNTDG21yZcObXvtkbt3k6
+ iVQ6Bq4xXsq16Ped6dvTPjm82tbIybvl7r3bEsesn8+14VnmdT1N9I+gWWqHt0N9VlDbRXEW
+ 4S+xLFWLCk+VtdoXXcuN0cwr2Jh7SFPKwiqr+k/NH7vlt673PKmSP3i9NnS6V07oN1u+/Gdl
+ xa8Zv4Y5BD9v9FDft1mJpTgj0VCLuag4EQAs+NQcaQIAAA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,36 +97,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 4 Mar 2024 at 12:10, Sumit Garg <sumit.garg@linaro.org> wrote:
->
-> + Fabio
->
-> Hi Tom,
->
-> On Tue, 27 Feb 2024 at 02:49, Bryan Brattlof <bb@ti.com> wrote:
-> >
-> > Some boards that choose to utilize the OF_UPSTREAM directory for their
-> > device tree files will need to specify that directory instead of the
-> > traditional arch/$(ARCH)/dts/* path.
-> >
-> > Include the correct path to the board's dtbs depending on if OF_UPSTREAM
-> > is selected or not.
-> >
-> > Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
-> > Signed-off-by: Bryan Brattlof <bb@ti.com>
-> > ---
-> >  Makefile             | 18 ++++++++++++++----
-> >  scripts/Makefile.spl | 17 +++++++++++++----
-> >  2 files changed, 27 insertions(+), 8 deletions(-)
-> >
->
-> Can you pick up this patch independently for -next since it's needed
-> for other platforms to switch to OF_UPSTREAM? However, if you are
-> already planning to pick this series overall then I am fine with that
-> too.
+PCL-070 supports 2GHz RAM-timings from pcb_rev 1 and newer. PCM-070
+supports 2GHz RAM-timings only from pcb_rev 3 and newer.
 
-Please consider it's v4 instead.
+Signed-off-by: Benjamin Hahn <B.Hahn@phytec.de>
+---
+Benjamin Hahn (2):
+      board: phytec: common: phytec_som_detection: Add phytec_get_som_type
+      board: phycore_imx8mp: Use 2GHz RAM timings for PCL-070 from pcb_rev 1
 
-[1] https://patchwork.ozlabs.org/project/uboot/patch/20240304121257.3551104-1-sumit.garg@linaro.org/
+ board/phytec/common/phytec_som_detection.c | 10 ++++++++++
+ board/phytec/common/phytec_som_detection.h |  8 ++++++++
+ board/phytec/phycore_imx8mp/spl.c          |  6 ++++--
+ 3 files changed, 22 insertions(+), 2 deletions(-)
+---
+base-commit: eac52e4be4e234d563d6911737ee7ccdc0ada1f1
+change-id: 20240304-pcl-070-patches-d31b989cf5b3
 
--Sumit
+Best regards,
+-- 
+Benjamin Hahn <B.Hahn@phytec.de>
+
