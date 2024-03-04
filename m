@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44B52C48BF6
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 11:32:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF4FAC48BF6
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 11:32:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CDDE187FCB;
-	Mon,  4 Mar 2024 12:30:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 47F7187FCE;
+	Mon,  4 Mar 2024 12:30:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C4E787FBF; Mon,  4 Mar 2024 12:30:46 +0100 (CET)
-Received: from smtp-bc0c.mail.infomaniak.ch (smtp-bc0c.mail.infomaniak.ch
- [45.157.188.12])
+ id 9D9FA87FC2; Mon,  4 Mar 2024 12:30:46 +0100 (CET)
+Received: from smtp-8fad.mail.infomaniak.ch (smtp-8fad.mail.infomaniak.ch
+ [83.166.143.173])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5FF3F87FA3
- for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 12:30:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5FE5787FA0
+ for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 12:30:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0000.mail.infomaniak.ch (unknown [10.7.10.107])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4TpGhw6GrHzMpnPV;
- Mon,  4 Mar 2024 12:30:40 +0100 (CET)
+Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
+ [10.7.10.107])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4TpGhv4d4gz5lh;
+ Mon,  4 Mar 2024 12:30:39 +0100 (CET)
 Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4TpGhw23c6zspK; Mon,  4 Mar 2024 12:30:40 +0100 (CET)
+ id 4TpGhv0CS5zqpG; Mon,  4 Mar 2024 12:30:39 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Mon, 04 Mar 2024 12:30:08 +0100
-Subject: [PATCH v3 14/16] adc: add missing depends on ADC for controller
- drivers
+Date: Mon, 04 Mar 2024 12:30:06 +0100
+Subject: [PATCH v3 12/16] power: pmic: rk8xx: fix duplicate prompt
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240304-rk3588-saradc-v3-14-7424e2ed5d3b@theobroma-systems.com>
+Message-Id: <20240304-rk3588-saradc-v3-12-7424e2ed5d3b@theobroma-systems.com>
 References: <20240304-rk3588-saradc-v3-0-7424e2ed5d3b@theobroma-systems.com>
 In-Reply-To: <20240304-rk3588-saradc-v3-0-7424e2ed5d3b@theobroma-systems.com>
 To: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>, 
@@ -67,55 +67,29 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 
-The ADC controller drivers are obviously all depending on ADC symbol
-being selected.
-
-While they don't seem to fail to build without, they won't be useful
-without that symbol selected, so let's make sure the options aren't
-shown in menuconfig when ADC isn't selected.
+SPL_PMIC_RK8XX and PMIC_RK8XX both share the same prompt making it
+difficult to know at first glance in menuconfig what's for what, let's
+fix this by adding "in SPL" at the end of the prompt for the SPL symbol.
 
 Cc: Quentin Schulz <foss+uboot@0leil.net>
 Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 ---
- drivers/adc/Kconfig | 4 ++++
- 1 file changed, 4 insertions(+)
+ drivers/power/pmic/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/adc/Kconfig b/drivers/adc/Kconfig
-index a01d73846b7..c9cdbe6942d 100644
---- a/drivers/adc/Kconfig
-+++ b/drivers/adc/Kconfig
-@@ -13,6 +13,7 @@ config ADC
+diff --git a/drivers/power/pmic/Kconfig b/drivers/power/pmic/Kconfig
+index 9b61b18e11f..562c1a3b122 100644
+--- a/drivers/power/pmic/Kconfig
++++ b/drivers/power/pmic/Kconfig
+@@ -250,7 +250,7 @@ config PMIC_RK8XX
+ 	This driver implements register read/write operations.
  
- config ADC_EXYNOS
- 	bool "Enable Exynos 54xx ADC driver"
-+	depends on ADC
- 	help
- 	  This enables basic driver for Exynos ADC compatible with Exynos54xx.
- 	  It provides:
-@@ -22,6 +23,7 @@ config ADC_EXYNOS
- 
- config ADC_SANDBOX
- 	bool "Enable Sandbox ADC test driver"
-+	depends on ADC
- 	help
- 	  This enables driver for Sandbox ADC device emulation.
- 	  It provides:
-@@ -31,6 +33,7 @@ config ADC_SANDBOX
- 
- config SARADC_MESON
- 	bool "Enable Amlogic Meson SARADC driver"
-+	depends on ADC
- 	imply REGMAP
- 	help
- 	  This enables driver for Amlogic Meson SARADC.
-@@ -41,6 +44,7 @@ config SARADC_MESON
- 
- config SARADC_ROCKCHIP
- 	bool "Enable Rockchip SARADC driver"
-+	depends on ADC
- 	help
- 	  This enables driver for Rockchip SARADC.
- 	  It provides:
+ config SPL_PMIC_RK8XX
+-	bool "Enable support for Rockchip PMIC RK8XX"
++	bool "Enable support for Rockchip PMIC RK8XX in SPL"
+ 	depends on SPL_DM_PMIC
+ 	---help---
+ 	The Rockchip RK808 PMIC provides four buck DC-DC convertors, 8 LDOs,
 
 -- 
 2.44.0
