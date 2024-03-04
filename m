@@ -4,39 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 877C6C48BF6
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 11:30:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CAC4C48BF6
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 11:31:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 69E6787FAD;
-	Mon,  4 Mar 2024 12:30:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EB46587FA5;
+	Mon,  4 Mar 2024 12:30:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F3C487F88; Mon,  4 Mar 2024 12:30:38 +0100 (CET)
-Received: from smtp-190d.mail.infomaniak.ch (smtp-190d.mail.infomaniak.ch
- [185.125.25.13])
+ id C0F2D87F9E; Mon,  4 Mar 2024 12:30:41 +0100 (CET)
+Received: from smtp-8fac.mail.infomaniak.ch (smtp-8fac.mail.infomaniak.ch
+ [83.166.143.172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CEA9587F65
- for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 12:30:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C8B187F80
+ for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 12:30:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
- [10.7.10.107])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4TpGhm3Qjgz4bf;
- Mon,  4 Mar 2024 12:30:32 +0100 (CET)
+Received: from smtp-4-0000.mail.infomaniak.ch (unknown [10.7.10.107])
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4TpGhn6PvGzN0W04;
+ Mon,  4 Mar 2024 12:30:33 +0100 (CET)
 Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4TpGhl6KhxzrCp; Mon,  4 Mar 2024 12:30:31 +0100 (CET)
+ id 4TpGhn1RnFzrn4; Mon,  4 Mar 2024 12:30:33 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Mon, 04 Mar 2024 12:29:55 +0100
-Subject: [PATCH v3 01/16] rockchip: spi: rk_spi: do not write bytes when in
- read-only mode
+Date: Mon, 04 Mar 2024 12:29:57 +0100
+Subject: [PATCH v3 03/16] regulator: rk8xx: fix SWITCH enable on RK809
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240304-rk3588-saradc-v3-1-7424e2ed5d3b@theobroma-systems.com>
+Message-Id: <20240304-rk3588-saradc-v3-3-7424e2ed5d3b@theobroma-systems.com>
 References: <20240304-rk3588-saradc-v3-0-7424e2ed5d3b@theobroma-systems.com>
 In-Reply-To: <20240304-rk3588-saradc-v3-0-7424e2ed5d3b@theobroma-systems.com>
 To: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>, 
@@ -47,6 +45,7 @@ To: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
  Heiko Stuebner <heiko.stuebner@cherry.de>
 Cc: u-boot@lists.denx.de, 
  Quentin Schulz <quentin.schulz@theobroma-systems.com>, 
+ William Wu <william.wu@rock-chips.com>, 
  Quentin Schulz <foss+uboot@0leil.net>
 X-Mailer: b4 0.13.0
 X-Infomaniak-Routing: alpha
@@ -66,74 +65,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+From: William Wu <william.wu@rock-chips.com>
 
-The read-only mode is currently supported but only for 16b-aligned
-buffers. For unaligned buffers, the last byte will be read in RW mode
-right now, which isn't what is desired. Instead, let's put the
-controller back into RO mode for that last byte and skip any write in
-the xfer loop.
+On RK809 in PMIC_POWER_ENX registers, in order to set or clear a bit N,
+the bit at offset N + 4 needs to be set otherwise nothing is done.
 
-This is required for 3-wire SPI mode where PICO/POCI lanes are shorted
-on HW level. This incidentally the recommended design for RK806 PMIC for
-RK3588 products.
+This fixes the inability to modify the SWITCH state on RK809.
 
 Cc: Quentin Schulz <foss+uboot@0leil.net>
+Signed-off-by: William Wu <william.wu@rock-chips.com>
+[reworded commit log]
 Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 ---
- drivers/spi/rk_spi.c | 20 +++++++++++++++++---
- 1 file changed, 17 insertions(+), 3 deletions(-)
+ drivers/power/regulator/rk8xx.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/spi/rk_spi.c b/drivers/spi/rk_spi.c
-index 7de943356ad..c8694fdff95 100644
---- a/drivers/spi/rk_spi.c
-+++ b/drivers/spi/rk_spi.c
-@@ -453,8 +453,17 @@ static int rockchip_spi_xfer(struct udevice *dev, unsigned int bitlen,
- 	 * case of read-only transfers by using the full 16bits of each
- 	 * FIFO element.
- 	 */
--	if (!out)
-+	if (!out) {
- 		ret = rockchip_spi_16bit_reader(dev, &in, &len);
-+		/*
-+		 * If "in" isn't 16b-aligned, we need to send the last byte
-+		 * ourselves. We however need to have the controller in RO mode
-+		 * which differs from the default.
-+		 */
-+		clrsetbits_le32(&regs->ctrlr0,
-+				TMOD_MASK << TMOD_SHIFT,
-+				TMOD_RO << TMOD_SHIFT);
-+	}
- 
- 	/* This is the original 8bit reader/writer code */
- 	while (len > 0) {
-@@ -465,12 +474,13 @@ static int rockchip_spi_xfer(struct udevice *dev, unsigned int bitlen,
- 		rkspi_enable_chip(regs, true);
- 
- 		toread = todo;
--		towrite = todo;
-+		/* Only write if we have something to write */
-+		towrite = out ? todo : 0;
- 		while (toread || towrite) {
- 			u32 status = readl(&regs->sr);
- 
- 			if (towrite && !(status & SR_TF_FULL)) {
--				writel(out ? *out++ : 0, regs->txdr);
-+				writel(*out++, regs->txdr);
- 				towrite--;
- 			}
- 			if (toread && !(status & SR_RF_EMPT)) {
-@@ -501,6 +511,10 @@ static int rockchip_spi_xfer(struct udevice *dev, unsigned int bitlen,
- 		spi_cs_deactivate(dev, slave_plat->cs);
- 
- 	rkspi_enable_chip(regs, false);
-+	if (!out)
-+		clrsetbits_le32(&regs->ctrlr0,
-+				TMOD_MASK << TMOD_SHIFT,
-+				TMOD_TR << TMOD_SHIFT);
- 
- 	return ret;
- }
+diff --git a/drivers/power/regulator/rk8xx.c b/drivers/power/regulator/rk8xx.c
+index 97d73ac95e0..e905df3a800 100644
+--- a/drivers/power/regulator/rk8xx.c
++++ b/drivers/power/regulator/rk8xx.c
+@@ -901,7 +901,7 @@ static int switch_set_enable(struct udevice *dev, bool enable)
+ 	case RK809_ID:
+ 		mask = (1 << (sw + 2)) | (1 << (sw + 6));
+ 		ret = pmic_clrsetbits(dev->parent, RK817_POWER_EN(3), mask,
+-				      enable ? mask : 0);
++				      enable ? mask : (1 << (sw + 6)));
+ 		break;
+ 	case RK818_ID:
+ 		mask = 1 << 6;
 
 -- 
 2.44.0
