@@ -4,78 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF76AC48BF6
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 15:27:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53414C5478C
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 15:27:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0336F87F10;
-	Mon,  4 Mar 2024 16:26:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9618E88012;
+	Mon,  4 Mar 2024 16:27:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LOiUWQta";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Nk9ksucL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF80986FCE; Mon,  4 Mar 2024 16:26:57 +0100 (CET)
-Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
- [IPv6:2607:f8b0:4864:20::235])
+ id EE90887FF5; Mon,  4 Mar 2024 16:27:03 +0100 (CET)
+Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
+ [IPv6:2607:f8b0:4864:20::736])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE55587FFE
- for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 16:26:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D19B087FF3
+ for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 16:27:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-3c19dd9ade5so2814805b6e.3
- for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 07:26:54 -0800 (PST)
+Received: by mail-qk1-x736.google.com with SMTP id
+ af79cd13be357-783045e88a6so360955485a.0
+ for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 07:27:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1709566013; x=1710170813; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1709566019; x=1710170819; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=RqYZ0KtkdW1b/5V8YFLgHdaqoqBj4DpWDiShcBJQf5I=;
- b=LOiUWQtazv27U3Rrg/EM3/dhzFwAaf3UUVDZghg301H8jTDWICPuDhsOS5qOguH045
- bl9wmaZPAVxf7EbU4kTTvcc60yjoGfrDQyHwNKPHPr092rsv83LidUrHvWo48Zhu4a6c
- 5GJ/u9V4yi0rFEQMXWM+BPIFri45nqIaeea+s=
+ bh=zhhXW2mCjT09zJbUNuqFm0Y7PMbwY3YRLe+V3/B20j8=;
+ b=Nk9ksucLNgcvU+CJswHw1Ld9HArPVo+ZBnsZPYCM0u8yCIfA52eOkgv98sn7ZpTRF6
+ 6HqZ23xXIy0I5oPdDz8lhk5zfbgCt13pBfkVWn9cGApYFz+uQpAhtBUH2mfZAGmd2xUY
+ IcybdYDe9CO0zSzkWqYTx/R8lJxjDx6Vr8oso=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709566013; x=1710170813;
+ d=1e100.net; s=20230601; t=1709566019; x=1710170819;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RqYZ0KtkdW1b/5V8YFLgHdaqoqBj4DpWDiShcBJQf5I=;
- b=JW8WF1I1y3a8o6ufEeQKCVJsS0uhUHXOX8sUnvZJu2yQOrKqTZkjFqiCdthG6GclTM
- 75py/GG6clF7psSwZaNQVrl411zu6Welpu4oWKSXM8l/2yv5TSltLcGS/Z9eJe0sx6wP
- 8QPi6OtXNpzZHr7Yzum43SCU4JGxsrMF9MCGUHjwxG2ozXQWbblIC7FtktgdTI6As0Ms
- k/q6V+ety65muiOjRD7GUUvH8wDAiUouTQtacpQ72G6vXjwMyEpxIuibcry6XnfMqttl
- wMNw2+OS4NRpCHNd+n5v3P8nTnrkyxbiHkqurKucupaOyLgVp6X6yvjZVDQ3iqndKeCY
- ZRtg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW9IEIVe/pQDMhNIoYsP3ns6mXVqeP7+6MSAios90XOz73JBoenlIsZUPJaE1aY0m2roiRaAy+pqKLmqCsfv64QxgLiIg==
-X-Gm-Message-State: AOJu0Yw0pUwAZZpG9kiR5hLbCMwV7MzZkj51JNoIaQwY0v/gxM/ybrXu
- 3eXHCP2+K6JQ8zk7WiqqXiR/a1FIjxplUJAxE6Y+VbCB+rXYD6nx/+q58gMs2L8=
-X-Google-Smtp-Source: AGHT+IGT3vQeBgITfOS5ZAoE9AMcPzld5mDrTtGNxQClmLdjCizika2+ZVdKduD14YPndumnW3v/eA==
-X-Received: by 2002:a05:6808:1412:b0:3c1:cb2a:b77 with SMTP id
- w18-20020a056808141200b003c1cb2a0b77mr10160915oiv.4.1709566013358; 
- Mon, 04 Mar 2024 07:26:53 -0800 (PST)
+ bh=zhhXW2mCjT09zJbUNuqFm0Y7PMbwY3YRLe+V3/B20j8=;
+ b=QAn3CvF9KAnbXj3rC4DsTAfAprNBp9tXlwAYkRO3Py25u8dTEDjwnxAgB6LasKvr66
+ PAquN4QzYbJtLegL0W2HGiFoPY7vi5suI0eYBJ6KEpHy5v8um1+ldGSyTpsVGrN+i4v2
+ bSrHnphUtv2rt9O8dKgRrTWSkyHbRAivFbEsw9LQTCEOqIUNvdS/VnUMkG1srXE2xhzv
+ vP68gpm6czsGnArHcwGno7hTb4BXxyzXo4K7/TEBZxyMCxGz+xG2hPofNVwCqgO18yIf
+ wxygXUBT+r+VjX166JVzCXBps1ANPabBYaomWCcsbxP+wCy30xGcKW/lCw9LUl7RhSaX
+ UJaw==
+X-Gm-Message-State: AOJu0Yy6pt3a/8BpgRPaQOk+eIseVQMiGIv6/XSxOl+0OctpDrKe3o3v
+ /WISj3dzxk4Thcr4N4iOUSqSDUC27PQu6Gf7jHd6orRQuZf5RF0rmpS+gzsDJJs=
+X-Google-Smtp-Source: AGHT+IEnzv3sddIry0XNEkXM2/BiDei1IxhpU8MBKUDFS5R+ZYk7MjqZr4LD56fy12Pq0nxPwglgtw==
+X-Received: by 2002:a05:620a:559c:b0:787:ccb9:78c9 with SMTP id
+ vq28-20020a05620a559c00b00787ccb978c9mr10335316qkn.62.1709566019683; 
+ Mon, 04 Mar 2024 07:26:59 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-007f-0000-0000-0000-1002.res6.spectrum.com.
  [2603:6081:7b00:7f::1002]) by smtp.gmail.com with ESMTPSA id
- e5-20020a05622a110500b0042ef7ad5b4dsm404941qty.53.2024.03.04.07.26.52
+ z17-20020a05620a101100b007876e91f392sm2546730qkj.79.2024.03.04.07.26.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Mar 2024 07:26:52 -0800 (PST)
-Date: Mon, 4 Mar 2024 10:26:50 -0500
+ Mon, 04 Mar 2024 07:26:59 -0800 (PST)
+Date: Mon, 4 Mar 2024 10:26:56 -0500
 From: Tom Rini <trini@konsulko.com>
-To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Cc: anastasiia_lukianenko@epam.com, oleksandr_andrushchenko@epam.com,
- u-boot@lists.denx.de, elven.wang@nxp.com, Peng Fan <peng.fan@nxp.com>
-Subject: Re: [PATCH] xen: xenguest_arm64: map all VIRTIO MMIO region
-Message-ID: <20240304152650.GL1523872@bill-the-cat>
-References: <20240126102938.12613-1-peng.fan@oss.nxp.com>
+To: Igor Opaniuk <igor.opaniuk@foundries.io>
+Cc: u-boot@lists.denx.de, ardb@kernel.org, jens.wiklander@linaro.org,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Andre Przywara <andre.przywara@arm.com>, Bin Meng <bmeng@tinylab.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Masahisa Kojima <masahisa.kojima@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
+Subject: Re: [PATCH v2] qemu-arm: round down memory to multiple of 2MB for LPAE
+Message-ID: <20240304152656.GM1523872@bill-the-cat>
+References: <20240201124054.2094572-1-igor.opaniuk@foundries.io>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="DCZvXhDs76yrl6Qo"
+ protocol="application/pgp-signature"; boundary="VZhuES+cJWxK+dPO"
 Content-Disposition: inline
-In-Reply-To: <20240126102938.12613-1-peng.fan@oss.nxp.com>
+In-Reply-To: <20240201124054.2094572-1-igor.opaniuk@foundries.io>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,42 +97,80 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---DCZvXhDs76yrl6Qo
+--VZhuES+cJWxK+dPO
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jan 26, 2024 at 06:29:38PM +0800, Peng Fan (OSS) wrote:
+On Thu, Feb 01, 2024 at 01:40:54PM +0100, Igor Opaniuk wrote:
 
-> From: Peng Fan <peng.fan@nxp.com>
+> QEMU's -m option can take fractional megabyte values,
+> and lowest granularity seems to be 0x2000.
+> For example, run qemu with amount of memory set to 100005k (0x61A9400):
 >=20
-> When run `virtio scan` on i.MX95, there is abort when accessing virtio
-> mmio region. The issue is the mmio region is not mapped. So let's map
-> all virtio mmio regions.
+> $ qemu-system-arm -machine virt -cpu cortex-a15 -m 100005k \
+> -bios denx/u-boot.bin -nographic
 >=20
-> Signed-off-by: Peng Fan <peng.fan@nxp.com>
+> =3D> fdt addr $fdt_addr
+> =3D> fdt print /memory@40000000
+> memory@40000000 {
+>         reg =3D <0x00000000 0x40000000 0x00000000 0x061aa000>;
+>         device_type =3D "memory";
+> };
+>=20
+> When LPAE is enabled, 1:1 mapping is created using 2 MB blocks.
+> In case amount of memory provided to QEMU is not multiple
+> of 2 MB, hang occurs during MMU initialization.
+>=20
+> How to reproduce:
+> qemu-system-arm -machine virt -m 1058 -nographic -bios u-boot.bin - boots
+> qemu-system-arm -machine virt -m 1057 -nographic -bios u-boot.bin - hangs
+>=20
+> DRAM:  1 GiB
+> initcall: 60011df8
+> initcall: 60011904
+> New Stack Pointer is: 80fffe90
+> initcall: 60011a20
+> initcall: 60011bcc
+> initcall: 60011bd4
+> initcall: 600119b4
+> Relocation Offset is: 22042000
+> Relocating to 82042000, new gd at 81001ed0, sp at 80fffe90
+> initcall: 60011b8c
+> initcall: 82053ea0
+> initcall: 82053ea8
+> initcall: 60012040 (relocated to 82054040)
+> dram_bank_mmu_setup: bank: 0
+> - hang here during mmu init -
+>=20
+> This patches rounds down to the nearest multiple of 2MB when
+> CONFIG_ARMV7_LPAE=3Dy.
+>=20
+> Fixes: 3fa914af82("arm: qemu: implement enable_caches()")
+> Signed-off-by: Igor Opaniuk <igor.opaniuk@foundries.io>
+> Reviewed-by: Oleksandr Suvorov <oleksandr.suvorov@foundries.io
 
 Applied to u-boot/next, thanks!
 
 --=20
 Tom
 
---DCZvXhDs76yrl6Qo
+--VZhuES+cJWxK+dPO
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXl6DoACgkQFHw5/5Y0
-tywCagv+Nel4oJL5HjY9dgGCZQ5/BxWYlrUFz9uZQyAAaBUckWsyAl0Af0l9wbed
-RVRzlvafURc7Qrit2I3K2S70JWQDgtHFceWHcqNOCiTercmiXN3Cuu+Y27sHgjQ3
-fYp6ss2aAwPkD4VbntyzVws7NUxowGVbDZeCrbBPuauC9EM/nzLzn3HyfQPZi8Tk
-YyEXBPL04QkUuh4wv4LOPeBm3h+Fio/gbfc0wp/LXckO5JEAMoJnAzOA0Q2palEj
-yEdHSmxX04FII7xckvSvoda5XL4Agz5CjeSAmYyekz9FfMzv4olakDUdywHZILrG
-mYv4Rb7CTHdJjW0SRFHE/H+N0BR8m8/HAX+RLs7swWkQ65FQ1SpLEr6T6D33dsUt
-b7x8uCqSW+9JdhusYIdyR2Ll3WhROED5H+V/3YAfzdDHgzkzYknSTRhZH6cqvNJJ
-ZdL2fYHUVLZmdZwQDtPP8GKgsOWyCMnvlbI+7drpDOOSHQK4JD3CNt0Ca4nouFP2
-gbUYB42L
-=Aa0E
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXl6EAACgkQFHw5/5Y0
+tyywwgv9EbsR/4s01EpfECJxphDzSyn7LEAxnwvnizUnO4keCshJ/H8qfpeIRBK6
+3SKYnOgTqVWMhr+7ZQ8gBwUzEPkQZsVO4IL/eM3V90Sv4bYJYBI7yy3W8spvDojr
+kj1wIngpMHP92MdHe+ccIVNOYKfU6yNn1Lj7uQGSikKsKKiPSOLMZqAZOxxNb9u6
+yZfwEV2wQT/KzZoRq9kVLm+xGVi6AtIFlNlHp7LM7X5dpEoakZsx7yOqqwh2CX/d
+xzsEG8BIudYnPyJ5ctaSpIrN8q2Te2YMf6Ci7vndM4t1ZpMiSEWOz+gT/VKwWIi5
+Xhdaev661uKgIy/YwkCW4j7JuTrPIKNK8erGhu+M4LqH13KV7jlYXbPs6RbbXLjd
+A8f8f4PdwH7pCzYZZKXX5E2/jqjF9uqXFNUUM/NBAWphFWO/mDEu5b/7VqfYKUBQ
+pgwxf/v4jUvxD3oYlXt3jDjngADyU4SiezbeCte1V7EHsoktpmRwLFDQ9zAdoRm8
+u2vmtrfy
+=PziC
 -----END PGP SIGNATURE-----
 
---DCZvXhDs76yrl6Qo--
+--VZhuES+cJWxK+dPO--
