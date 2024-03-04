@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6BF8C5478C
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 17:13:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D10B3C5478C
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 17:13:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D3588817B;
+	by phobos.denx.de (Postfix) with ESMTP id E27FF88084;
 	Mon,  4 Mar 2024 18:09:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="e07sSvIN";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fZCC5H4q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A57587FC6; Mon,  4 Mar 2024 17:52:05 +0100 (CET)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
+ id A3F6587E63; Mon,  4 Mar 2024 17:52:06 +0100 (CET)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8348187E63
- for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 17:52:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1D57487FDA
+ for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 17:52:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-412e66b801fso6042975e9.3
- for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 08:52:01 -0800 (PST)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-412e84f501dso4675715e9.0
+ for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 08:52:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709571121; x=1710175921; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1709571122; x=1710175922; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=ffIVDJz1y7OM3JJ24KwM/uzflOAKoEDYymvtlDYXFbg=;
- b=e07sSvINZXbVz3ZiKCLgTlEmxyv0SpdiUVqAnlDFOMvcfGkrW/wCA78TEif4u6wTFw
- liklhzvCtpHOn1mYtXdT0VP/CySXsrE06BkmLbxl83fDcLLWt+LVPeq9VcTZ/1ELv07s
- r004UkERNrcQWvoJsrRmmvjHPdat17I2d9DFsIhrFnrzNZOUiZD4/jfh4NA/2LZbjN7Y
- /1T255yYNZr1VmX9+XV+KIHG5iHxaLeZMXTyVuvhRKHWTguPQniJxmq36Tcr2SE4umf9
- fGhZlm3NxO24pBdWDKiQVSw8NLYE8yRHhxmtZN0FTnx+3Ku55eeu7DuoJWKKpIU7Dguz
- 4Ang==
+ :reply-to; bh=98nJ4jJHfPtXoKJjdcnS5JjMPpQXAIhCY1xNPc4Kt4I=;
+ b=fZCC5H4qRKlJSMYmtIb4PhfLZUUlipa1KOAZ8uTaPlTtJuWyvU0xaeAo/NEz9FZvXk
+ MCuHXaF9k2o5fVQwML2ElZujQU2xRbbQX8dVC14NXJBWRj3RwrZaWZwk1vZ7hLC/e6pO
+ k3kbqRxpqQhZCtebwoBlB2ysNLyPZo7f1rE9iq7aIY1z9w3L5GR0V25RBvZC8gIJW/nb
+ RzAB7RvJFZxeH7QZ15YjoEwTihCPi3SSaCLc37zG84U3s/2oxBA1OVWiovuWbtSm5aTP
+ SSg9GH4FQIhmJLcEiNpD/s+JsPXkRpa1EwTJ7bigSEL9Z1M7u4L3xCvbCw2KHjiypBDO
+ FcPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709571121; x=1710175921;
+ d=1e100.net; s=20230601; t=1709571122; x=1710175922;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ffIVDJz1y7OM3JJ24KwM/uzflOAKoEDYymvtlDYXFbg=;
- b=g2IV+rAJs6UHLtrs5Wu6QLzYBDFt/5oE/RJ3IWU8LUvwqHmM+Zsrk1gdc1Rk7GQtaJ
- snUjibPuXVD/PX8qKCg8TFDwFydU4fszzh0OYIi2ZGpjFQ8Ru24Wcik0N7RZWB9MqyzW
- JUP6mhX9CIFAmw/uVK9z5Gne/f0vfSNb+JSU/aHSwI3CUYr9r3YqOZBQ4MM83OprdeEZ
- TIpNSZAmH7svo2sRPH3V0bi2s8IjBmhOKbSE2N3gVbkvhFPcBqXX7ltXGShQIBS6adKz
- 4YTsTXfroOwhit5Gp8stQf0IwBUeLm3KeugYtGwGwxdCtdRnsDAdVJQsw9ycCjyFpehO
- s1Iw==
-X-Gm-Message-State: AOJu0YzgCDM1SqwqhzEUPLISk8X9SHX0oqNTdzxGCQUWRfT2PEceJwI9
- 5eaU0k2fqwTHZ/0ajhJDCsqmUOD5zrrdJptko/+YYX9vcgNgRDebvImhEpiqHAk=
-X-Google-Smtp-Source: AGHT+IG8km1VoKJfK6LIaFVD9WX/dZDukT84YSowXR7wZAp5buqvdd8X1TOYCzPdPgHzvGg+GTATcA==
-X-Received: by 2002:a05:600c:3c86:b0:412:8d98:78a with SMTP id
- bg6-20020a05600c3c8600b004128d98078amr8107504wmb.13.1709571120734; 
- Mon, 04 Mar 2024 08:52:00 -0800 (PST)
+ bh=98nJ4jJHfPtXoKJjdcnS5JjMPpQXAIhCY1xNPc4Kt4I=;
+ b=HQ/U5LinFDXszMhAtaexTOdSw/vGPD5pkOds3h95sXFKQE+tJG6Dwqtb6gSGHbKWMD
+ dME5SRrVd/T2GYQgffutVS4uSahqvKORx6KPL5dhtRVfto2pbPpp5blyqnMTH+62ZM7w
+ oGVCB5GjBJQegRCcIuTGl7fFLBJUYs42nq0XI3RByi3FrjgaRc1LpsZHGedWqUvMcWu1
+ /oyCxpEjGhW39nCdgUgxxizU9blUWqsmROsn9DB+LYIuyIbTXi3F85lneZiNFj4wdllc
+ LvcQHXA1bqSPrYuW12qUw5fBQF+uTmdkJGJHg2fgPrqZTa3JZMBN42NQsour21zdWVA1
+ gajA==
+X-Gm-Message-State: AOJu0Yxf0CrnouyivA/3FkQShvRX4JXPHjhpsv6EyufRgkLSQaGOrZ/t
+ Itzx6+J99aAg5ScKS7K/jOdDhn7kOeE6BUcTjPDri30o0ekB4pY2kg8ArkxU79SwwdTLtc8n8QQ
+ l
+X-Google-Smtp-Source: AGHT+IGba97ydHmdgXtfRD6iOWyCl7i/uOOdYAkaCR0qh0cl34KXKrl5GYAISFRGpsFlF8EiON5xoA==
+X-Received: by 2002:a05:600c:450f:b0:412:283e:5797 with SMTP id
+ t15-20020a05600c450f00b00412283e5797mr7618169wmo.29.1709571122490; 
+ Mon, 04 Mar 2024 08:52:02 -0800 (PST)
 Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- c21-20020a05600c0a5500b00412cb0961fasm10598517wmq.6.2024.03.04.08.51.59
+ c21-20020a05600c0a5500b00412cb0961fasm10598517wmq.6.2024.03.04.08.52.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Mar 2024 08:52:00 -0800 (PST)
+ Mon, 04 Mar 2024 08:52:01 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Mon, 04 Mar 2024 16:51:32 +0000
-Subject: [PATCH RFC 24/26] dt-bindings: drop remaining device headers
+Date: Mon, 04 Mar 2024 16:51:33 +0000
+Subject: [PATCH RFC 25/26] dt-bindings: drop generic headers
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20240304-b4-upstream-dt-headers-v1-24-b7ff41925f92@linaro.org>
+Content-Transfer-Encoding: 7bit
+Message-Id: <20240304-b4-upstream-dt-headers-v1-25-b7ff41925f92@linaro.org>
 References: <20240304-b4-upstream-dt-headers-v1-0-b7ff41925f92@linaro.org>
 In-Reply-To: <20240304-b4-upstream-dt-headers-v1-0-b7ff41925f92@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -102,13 +103,13 @@ Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io,
  uboot-stm32@st-md-mailman.stormreply.com, uboot-snps-arc@synopsys.com, 
  Caleb Connolly <caleb.connolly@linaro.org>
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=57159;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=41479;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=+SaR/YUeWm39ABYr58Q5GGX1LKEkWFRSigvbnu2j7NE=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtSnfzh6JWTqZ+Ve7imNtGk/d6r9crXEvjrtlQG5xdtq/
- Tt9LuR1lLIwCHIwyIopsoifWGbZtPayvcb2BRdg5rAygQxh4OIUgInEtjMy9K3fJ9ftpGity3Zo
- xe2duenMH9b9fbU+Tj8kwGKJmfqOZIb/BWtF/v4vjkzn75hk+uLqJZGGgo1H139I3e/3UPfH8rv
- SqQA=
+ bh=KBQJtpmlkxDXaOjHuVKWzBoZ1x7sevTm84jLxg25XfA=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtSnfzge98vuiMzvDs5Y71Zy8Nfy4Pb4M1cDixf3GPO/j
+ tm6+9PcjlIWBkEOBlkxRRbxE8ssm9ZettfYvuACzBxWJpAhDFycAjCRdC+G/xUeJyLmJWxWWFo9
+ zVb7zGnNzrQZ8VX8wU1WTQXPD3tMdWP4K9y+bNUUp7gpKgc8ZX+sevuLqWeuNGOncmDBtL3369R
+ vNgMA
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-Mailman-Approved-At: Mon, 04 Mar 2024 18:09:04 +0100
@@ -128,1766 +129,1297 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Drop in favour of dts/upstream.
-
-Remaining device headers for small vendors
+Drop all the subsystem headers that are compatible with the headers in
+dts/upstream.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- include/dt-bindings/arm/coresight-cti-dt.h         |  37 -----
- include/dt-bindings/arm/ux500_pm_domains.h         |  15 --
- include/dt-bindings/bus/moxtet.h                   |  16 --
- include/dt-bindings/display/tda998x.h              |   8 -
- include/dt-bindings/gpio/aspeed-gpio.h             |  51 ------
- include/dt-bindings/gpio/uniphier-gpio.h           |  18 --
- .../dt-bindings/interrupt-controller/apple-aic.h   |  15 --
- include/dt-bindings/interrupt-controller/arm-gic.h |  23 ---
- include/dt-bindings/interrupt-controller/irq-st.h  |  30 ----
- .../dt-bindings/interrupt-controller/irqc-rzg2l.h  |  25 ---
- .../dt-bindings/interrupt-controller/mips-gic.h    |   9 -
- include/dt-bindings/leds/leds-netxbig.h            |  18 --
- include/dt-bindings/leds/leds-ns2.h                |   9 -
- include/dt-bindings/leds/leds-pca9532.h            |  18 --
- include/dt-bindings/media/tda1997x.h               |  74 ---------
- include/dt-bindings/media/video-interfaces.h       |  16 --
- include/dt-bindings/mfd/atmel-flexcom.h            |  15 --
- include/dt-bindings/mfd/dbx500-prcmu.h             |  84 ----------
- include/dt-bindings/net/mscc-phy-vsc8531.h         |  31 ----
- include/dt-bindings/net/qca-ar803x.h               |  13 --
- include/dt-bindings/phy/phy-am654-serdes.h         |  13 --
- include/dt-bindings/phy/phy-cadence.h              |  24 ---
- include/dt-bindings/pinctrl/apple.h                |  13 --
- include/dt-bindings/pinctrl/dra.h                  |  79 ---------
- include/dt-bindings/power/owl-s700-powergate.h     |  19 ---
- include/dt-bindings/power/raspberrypi-power.h      |  41 -----
- .../dt-bindings/regulator/dlg,da9063-regulator.h   |  16 --
- include/dt-bindings/regulator/maxim,max77802.h     |  18 --
- include/dt-bindings/reset/actions,s700-reset.h     |  34 ----
- include/dt-bindings/reset/actions,s900-reset.h     |  65 --------
- include/dt-bindings/reset/altr,rst-mgr-a10.h       | 110 -------------
- include/dt-bindings/reset/altr,rst-mgr-s10.h       |  96 -----------
- include/dt-bindings/reset/altr,rst-mgr.h           |  82 ---------
- include/dt-bindings/reset/nuvoton,npcm7xx-reset.h  |  91 ----------
- .../dt-bindings/reset/raspberrypi,firmware-reset.h |  13 --
- include/dt-bindings/reset/sama7g5-reset.h          |  10 --
- include/dt-bindings/reset/snps,hsdk-reset.h        |  17 --
- include/dt-bindings/reset/starfive,jh7110-crg.h    | 183 ---------------------
- include/dt-bindings/sound/apq8016-lpass.h          |   9 -
- include/dt-bindings/sound/tlv320aic31xx.h          |  14 --
- 40 files changed, 1472 deletions(-)
+ include/dt-bindings/ata/ahci.h                 |  20 -
+ include/dt-bindings/gpio/gpio.h                |  42 --
+ include/dt-bindings/input/gpio-keys.h          |  13 -
+ include/dt-bindings/input/input.h              |  17 -
+ include/dt-bindings/input/linux-event-codes.h  | 806 -------------------------
+ include/dt-bindings/interrupt-controller/irq.h |  19 -
+ include/dt-bindings/leds/common.h              | 106 ----
+ include/dt-bindings/mux/mux.h                  |  17 -
+ include/dt-bindings/phy/phy.h                  |  26 -
+ include/dt-bindings/pwm/pwm.h                  |  14 -
+ include/dt-bindings/spmi/spmi.h                |  10 -
+ include/dt-bindings/thermal/thermal.h          |  15 -
+ include/dt-bindings/usb/pd.h                   |  88 ---
+ 13 files changed, 1193 deletions(-)
 
-diff --git a/include/dt-bindings/arm/coresight-cti-dt.h b/include/dt-bindings/arm/coresight-cti-dt.h
+diff --git a/include/dt-bindings/ata/ahci.h b/include/dt-bindings/ata/ahci.h
 deleted file mode 100644
-index 61e7bdf8ea6e..000000000000
---- a/include/dt-bindings/arm/coresight-cti-dt.h
+index b3f3b7cf9af8..000000000000
+--- a/include/dt-bindings/ata/ahci.h
 +++ /dev/null
-@@ -1,37 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0 */
--/*
-- * This header provides constants for the defined trigger signal
-- * types on CoreSight CTI.
-- */
--
--#ifndef _DT_BINDINGS_ARM_CORESIGHT_CTI_DT_H
--#define _DT_BINDINGS_ARM_CORESIGHT_CTI_DT_H
--
--#define GEN_IO		0
--#define GEN_INTREQ	1
--#define GEN_INTACK	2
--#define GEN_HALTREQ	3
--#define GEN_RESTARTREQ	4
--#define PE_EDBGREQ	5
--#define PE_DBGRESTART	6
--#define PE_CTIIRQ	7
--#define PE_PMUIRQ	8
--#define PE_DBGTRIGGER	9
--#define ETM_EXTOUT	10
--#define ETM_EXTIN	11
--#define SNK_FULL	12
--#define SNK_ACQCOMP	13
--#define SNK_FLUSHCOMP	14
--#define SNK_FLUSHIN	15
--#define SNK_TRIGIN	16
--#define STM_ASYNCOUT	17
--#define STM_TOUT_SPTE	18
--#define STM_TOUT_SW	19
--#define STM_TOUT_HETE	20
--#define STM_HWEVENT	21
--#define ELA_TSTART	22
--#define ELA_TSTOP	23
--#define ELA_DBGREQ	24
--#define CTI_TRIG_MAX	25
--
--#endif /*_DT_BINDINGS_ARM_CORESIGHT_CTI_DT_H */
-diff --git a/include/dt-bindings/arm/ux500_pm_domains.h b/include/dt-bindings/arm/ux500_pm_domains.h
-deleted file mode 100644
-index 9bd764f0c9e6..000000000000
---- a/include/dt-bindings/arm/ux500_pm_domains.h
-+++ /dev/null
-@@ -1,15 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0-only */
--/*
-- * Copyright (C) 2014 Linaro Ltd.
-- *
-- * Author: Ulf Hansson <ulf.hansson@linaro.org>
-- */
--#ifndef _DT_BINDINGS_ARM_UX500_PM_DOMAINS_H
--#define _DT_BINDINGS_ARM_UX500_PM_DOMAINS_H
--
--#define DOMAIN_VAPE		0
--
--/* Number of PM domains. */
--#define NR_DOMAINS		(DOMAIN_VAPE + 1)
--
--#endif
-diff --git a/include/dt-bindings/bus/moxtet.h b/include/dt-bindings/bus/moxtet.h
-deleted file mode 100644
-index 10528de7b3ef..000000000000
---- a/include/dt-bindings/bus/moxtet.h
-+++ /dev/null
-@@ -1,16 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0 */
--/*
-- * Constant for device tree bindings for Turris Mox module configuration bus
-- *
-- * Copyright (C) 2019 Marek Behún <kabel@kernel.org>
-- */
--
--#ifndef _DT_BINDINGS_BUS_MOXTET_H
--#define _DT_BINDINGS_BUS_MOXTET_H
--
--#define MOXTET_IRQ_PCI		0
--#define MOXTET_IRQ_USB3		4
--#define MOXTET_IRQ_PERIDOT(n)	(8 + (n))
--#define MOXTET_IRQ_TOPAZ	12
--
--#endif /* _DT_BINDINGS_BUS_MOXTET_H */
-diff --git a/include/dt-bindings/display/tda998x.h b/include/dt-bindings/display/tda998x.h
-deleted file mode 100644
-index 746831ff396c..000000000000
---- a/include/dt-bindings/display/tda998x.h
-+++ /dev/null
-@@ -1,8 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0 */
--#ifndef _DT_BINDINGS_TDA998X_H
--#define _DT_BINDINGS_TDA998X_H
--
--#define TDA998x_SPDIF	1
--#define TDA998x_I2S	2
--
--#endif /*_DT_BINDINGS_TDA998X_H */
-diff --git a/include/dt-bindings/gpio/aspeed-gpio.h b/include/dt-bindings/gpio/aspeed-gpio.h
-deleted file mode 100644
-index a49f5d5b5af0..000000000000
---- a/include/dt-bindings/gpio/aspeed-gpio.h
-+++ /dev/null
-@@ -1,51 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0+ */
--/*
-- * Copyright 2022 IBM Corp.
-- *
-- * This header provides constants for binding aspeed,*-gpio.
-- *
-- * The first cell in Aspeed's GPIO specifier is the GPIO ID. The macros below
-- * provide names for this.
-- *
-- * The second cell contains standard flag values specified in gpio.h.
-- */
--
--#ifndef _DT_BINDINGS_GPIO_ASPEED_GPIO_H
--#define _DT_BINDINGS_GPIO_ASPEED_GPIO_H
--
--#include <dt-bindings/gpio/gpio.h>
--
--#define ASPEED_GPIO_PORT_A 0
--#define ASPEED_GPIO_PORT_B 1
--#define ASPEED_GPIO_PORT_C 2
--#define ASPEED_GPIO_PORT_D 3
--#define ASPEED_GPIO_PORT_E 4
--#define ASPEED_GPIO_PORT_F 5
--#define ASPEED_GPIO_PORT_G 6
--#define ASPEED_GPIO_PORT_H 7
--#define ASPEED_GPIO_PORT_I 8
--#define ASPEED_GPIO_PORT_J 9
--#define ASPEED_GPIO_PORT_K 10
--#define ASPEED_GPIO_PORT_L 11
--#define ASPEED_GPIO_PORT_M 12
--#define ASPEED_GPIO_PORT_N 13
--#define ASPEED_GPIO_PORT_O 14
--#define ASPEED_GPIO_PORT_P 15
--#define ASPEED_GPIO_PORT_Q 16
--#define ASPEED_GPIO_PORT_R 17
--#define ASPEED_GPIO_PORT_S 18
--#define ASPEED_GPIO_PORT_T 19
--#define ASPEED_GPIO_PORT_U 20
--#define ASPEED_GPIO_PORT_V 21
--#define ASPEED_GPIO_PORT_W 22
--#define ASPEED_GPIO_PORT_X 23
--#define ASPEED_GPIO_PORT_Y 24
--#define ASPEED_GPIO_PORT_Z 25
--#define ASPEED_GPIO_PORT_AA 26
--#define ASPEED_GPIO_PORT_AB 27
--#define ASPEED_GPIO_PORT_AC 28
--
--#define ASPEED_GPIO(port, offset) \
--	((ASPEED_GPIO_PORT_##port * 8) + (offset))
--
--#endif
-diff --git a/include/dt-bindings/gpio/uniphier-gpio.h b/include/dt-bindings/gpio/uniphier-gpio.h
-deleted file mode 100644
-index 9f0ad174f61c..000000000000
---- a/include/dt-bindings/gpio/uniphier-gpio.h
-+++ /dev/null
-@@ -1,18 +0,0 @@
--/*
-- * Copyright (C) 2017 Socionext Inc.
-- *   Author: Masahiro Yamada <yamada.masahiro@socionext.com>
-- */
--
--#ifndef _DT_BINDINGS_GPIO_UNIPHIER_H
--#define _DT_BINDINGS_GPIO_UNIPHIER_H
--
--#define UNIPHIER_GPIO_LINES_PER_BANK	8
--
--#define UNIPHIER_GPIO_IRQ_OFFSET	((UNIPHIER_GPIO_LINES_PER_BANK) * 15)
--
--#define UNIPHIER_GPIO_PORT(bank, line)	\
--			((UNIPHIER_GPIO_LINES_PER_BANK) * (bank) + (line))
--
--#define UNIPHIER_GPIO_IRQ(n)		((UNIPHIER_GPIO_IRQ_OFFSET) + (n))
--
--#endif /* _DT_BINDINGS_GPIO_UNIPHIER_H */
-diff --git a/include/dt-bindings/interrupt-controller/apple-aic.h b/include/dt-bindings/interrupt-controller/apple-aic.h
-deleted file mode 100644
-index 9ac56a7e6d3f..000000000000
---- a/include/dt-bindings/interrupt-controller/apple-aic.h
-+++ /dev/null
-@@ -1,15 +0,0 @@
+@@ -1,20 +0,0 @@
 -/* SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause */
--#ifndef _DT_BINDINGS_INTERRUPT_CONTROLLER_APPLE_AIC_H
--#define _DT_BINDINGS_INTERRUPT_CONTROLLER_APPLE_AIC_H
+-/*
+- * This header provides constants for most AHCI bindings.
+- */
 -
--#include <dt-bindings/interrupt-controller/irq.h>
+-#ifndef _DT_BINDINGS_ATA_AHCI_H
+-#define _DT_BINDINGS_ATA_AHCI_H
 -
--#define AIC_IRQ	0
--#define AIC_FIQ	1
+-/* Host Bus Adapter generic platform capabilities */
+-#define HBA_SSS		(1 << 27)
+-#define HBA_SMPS	(1 << 28)
 -
--#define AIC_TMR_HV_PHYS		0
--#define AIC_TMR_HV_VIRT		1
--#define AIC_TMR_GUEST_PHYS	2
--#define AIC_TMR_GUEST_VIRT	3
+-/* Host Bus Adapter port-specific platform capabilities */
+-#define HBA_PORT_HPCP	(1 << 18)
+-#define HBA_PORT_MPSP	(1 << 19)
+-#define HBA_PORT_CPD	(1 << 20)
+-#define HBA_PORT_ESP	(1 << 21)
+-#define HBA_PORT_FBSCP	(1 << 22)
 -
 -#endif
-diff --git a/include/dt-bindings/interrupt-controller/arm-gic.h b/include/dt-bindings/interrupt-controller/arm-gic.h
+diff --git a/include/dt-bindings/gpio/gpio.h b/include/dt-bindings/gpio/gpio.h
 deleted file mode 100644
-index 35b6f69b7db6..000000000000
---- a/include/dt-bindings/interrupt-controller/arm-gic.h
+index c029467e828b..000000000000
+--- a/include/dt-bindings/gpio/gpio.h
 +++ /dev/null
-@@ -1,23 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0 OR MIT */
--/*
-- * This header provides constants for the ARM GIC.
-- */
--
--#ifndef _DT_BINDINGS_INTERRUPT_CONTROLLER_ARM_GIC_H
--#define _DT_BINDINGS_INTERRUPT_CONTROLLER_ARM_GIC_H
--
--#include <dt-bindings/interrupt-controller/irq.h>
--
--/* interrupt specifier cell 0 */
--
--#define GIC_SPI 0
--#define GIC_PPI 1
--
--/*
-- * Interrupt specifier cell 2.
-- * The flags in irq.h are valid, plus those below.
-- */
--#define GIC_CPU_MASK_RAW(x) ((x) << 8)
--#define GIC_CPU_MASK_SIMPLE(num) GIC_CPU_MASK_RAW((1 << (num)) - 1)
--
--#endif
-diff --git a/include/dt-bindings/interrupt-controller/irq-st.h b/include/dt-bindings/interrupt-controller/irq-st.h
-deleted file mode 100644
-index 6baa9ad2644c..000000000000
---- a/include/dt-bindings/interrupt-controller/irq-st.h
-+++ /dev/null
-@@ -1,30 +0,0 @@
--/*
-- *  include/linux/irqchip/irq-st.h
-- *
-- *  Copyright (C) 2014 STMicroelectronics All Rights Reserved
-- *
-- *  Author: Lee Jones <lee.jones@linaro.org>
-- *
-- * This program is free software; you can redistribute it and/or modify
-- * it under the terms of the GNU General Public License version 2 as
-- * published by the Free Software Foundation.
-- */
--
--#ifndef _DT_BINDINGS_INTERRUPT_CONTROLLER_ST_H
--#define _DT_BINDINGS_INTERRUPT_CONTROLLER_ST_H
--
--#define ST_IRQ_SYSCFG_EXT_0		0
--#define ST_IRQ_SYSCFG_EXT_1		1
--#define ST_IRQ_SYSCFG_EXT_2		2
--#define ST_IRQ_SYSCFG_CTI_0		3
--#define ST_IRQ_SYSCFG_CTI_1		4
--#define ST_IRQ_SYSCFG_PMU_0		5
--#define ST_IRQ_SYSCFG_PMU_1		6
--#define ST_IRQ_SYSCFG_pl310_L2		7
--#define ST_IRQ_SYSCFG_DISABLED		0xFFFFFFFF
--
--#define ST_IRQ_SYSCFG_EXT_1_INV		0x1
--#define ST_IRQ_SYSCFG_EXT_2_INV		0x2
--#define ST_IRQ_SYSCFG_EXT_3_INV		0x4
--
--#endif
-diff --git a/include/dt-bindings/interrupt-controller/irqc-rzg2l.h b/include/dt-bindings/interrupt-controller/irqc-rzg2l.h
-deleted file mode 100644
-index 34ce778885a1..000000000000
---- a/include/dt-bindings/interrupt-controller/irqc-rzg2l.h
-+++ /dev/null
-@@ -1,25 +0,0 @@
--/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
--/*
-- * This header provides constants for Renesas RZ/G2L family IRQC bindings.
-- *
-- * Copyright (C) 2022 Renesas Electronics Corp.
-- *
-- */
--
--#ifndef __DT_BINDINGS_IRQC_RZG2L_H
--#define __DT_BINDINGS_IRQC_RZG2L_H
--
--/* NMI maps to SPI0 */
--#define RZG2L_NMI	0
--
--/* IRQ0-7 map to SPI1-8 */
--#define RZG2L_IRQ0	1
--#define RZG2L_IRQ1	2
--#define RZG2L_IRQ2	3
--#define RZG2L_IRQ3	4
--#define RZG2L_IRQ4	5
--#define RZG2L_IRQ5	6
--#define RZG2L_IRQ6	7
--#define RZG2L_IRQ7	8
--
--#endif /* __DT_BINDINGS_IRQC_RZG2L_H */
-diff --git a/include/dt-bindings/interrupt-controller/mips-gic.h b/include/dt-bindings/interrupt-controller/mips-gic.h
-deleted file mode 100644
-index cf35a577e371..000000000000
---- a/include/dt-bindings/interrupt-controller/mips-gic.h
-+++ /dev/null
-@@ -1,9 +0,0 @@
--#ifndef _DT_BINDINGS_INTERRUPT_CONTROLLER_MIPS_GIC_H
--#define _DT_BINDINGS_INTERRUPT_CONTROLLER_MIPS_GIC_H
--
--#include <dt-bindings/interrupt-controller/irq.h>
--
--#define GIC_SHARED 0
--#define GIC_LOCAL 1
--
--#endif
-diff --git a/include/dt-bindings/leds/leds-netxbig.h b/include/dt-bindings/leds/leds-netxbig.h
-deleted file mode 100644
-index 92658b0310b2..000000000000
---- a/include/dt-bindings/leds/leds-netxbig.h
-+++ /dev/null
-@@ -1,18 +0,0 @@
--/*
-- * This header provides constants for netxbig LED bindings.
-- *
-- * This file is licensed under the terms of the GNU General Public
-- * License version 2.  This program is licensed "as is" without any
-- * warranty of any kind, whether express or implied.
-- */
--
--#ifndef _DT_BINDINGS_LEDS_NETXBIG_H
--#define _DT_BINDINGS_LEDS_NETXBIG_H
--
--#define NETXBIG_LED_OFF		0
--#define NETXBIG_LED_ON		1
--#define NETXBIG_LED_SATA	2
--#define NETXBIG_LED_TIMER1	3
--#define NETXBIG_LED_TIMER2	4
--
--#endif /* _DT_BINDINGS_LEDS_NETXBIG_H */
-diff --git a/include/dt-bindings/leds/leds-ns2.h b/include/dt-bindings/leds/leds-ns2.h
-deleted file mode 100644
-index fd615749e703..000000000000
---- a/include/dt-bindings/leds/leds-ns2.h
-+++ /dev/null
-@@ -1,9 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0 */
--#ifndef _DT_BINDINGS_LEDS_NS2_H
--#define _DT_BINDINGS_LEDS_NS2_H
--
--#define NS_V2_LED_OFF	0
--#define NS_V2_LED_ON	1
--#define NS_V2_LED_SATA	2
--
--#endif
-diff --git a/include/dt-bindings/leds/leds-pca9532.h b/include/dt-bindings/leds/leds-pca9532.h
-deleted file mode 100644
-index 4d917aab7e1e..000000000000
---- a/include/dt-bindings/leds/leds-pca9532.h
-+++ /dev/null
-@@ -1,18 +0,0 @@
--/*
-- * This header provides constants for pca9532 LED bindings.
-- *
-- * This file is licensed under the terms of the GNU General Public
-- * License version 2.  This program is licensed "as is" without any
-- * warranty of any kind, whether express or implied.
-- */
--
--#ifndef _DT_BINDINGS_LEDS_PCA9532_H
--#define _DT_BINDINGS_LEDS_PCA9532_H
--
--#define PCA9532_TYPE_NONE         0
--#define PCA9532_TYPE_LED          1
--#define PCA9532_TYPE_N2100_BEEP   2
--#define PCA9532_TYPE_GPIO         3
--#define PCA9532_LED_TIMER2        4
--
--#endif /* _DT_BINDINGS_LEDS_PCA9532_H */
-diff --git a/include/dt-bindings/media/tda1997x.h b/include/dt-bindings/media/tda1997x.h
-deleted file mode 100644
-index bd9fbd718ec9..000000000000
---- a/include/dt-bindings/media/tda1997x.h
-+++ /dev/null
-@@ -1,74 +0,0 @@
+@@ -1,42 +0,0 @@
 -/* SPDX-License-Identifier: GPL-2.0 */
 -/*
-- * Copyright (C) 2017 Gateworks Corporation
-- */
--#ifndef _DT_BINDINGS_MEDIA_TDA1997X_H
--#define _DT_BINDINGS_MEDIA_TDA1997X_H
--
--/* TDA19973 36bit Video Port control registers */
--#define TDA1997X_VP36_35_32	0
--#define TDA1997X_VP36_31_28	1
--#define TDA1997X_VP36_27_24	2
--#define TDA1997X_VP36_23_20	3
--#define TDA1997X_VP36_19_16	4
--#define TDA1997X_VP36_15_12	5
--#define TDA1997X_VP36_11_08	6
--#define TDA1997X_VP36_07_04	7
--#define TDA1997X_VP36_03_00	8
--
--/* TDA19971 24bit Video Port control registers */
--#define TDA1997X_VP24_V23_20	0
--#define TDA1997X_VP24_V19_16	1
--#define TDA1997X_VP24_V15_12	3
--#define TDA1997X_VP24_V11_08	4
--#define TDA1997X_VP24_V07_04	6
--#define TDA1997X_VP24_V03_00	7
--
--/* Pin groups */
--#define TDA1997X_VP_OUT_EN        0x80	/* enable output group */
--#define TDA1997X_VP_HIZ           0x40	/* hi-Z output group when not used */
--#define TDA1997X_VP_SWP           0x10	/* pin-swap output group */
--#define TDA1997X_R_CR_CBCR_3_0    (0 | TDA1997X_VP_OUT_EN | TDA1997X_VP_HIZ)
--#define TDA1997X_R_CR_CBCR_7_4    (1 | TDA1997X_VP_OUT_EN | TDA1997X_VP_HIZ)
--#define TDA1997X_R_CR_CBCR_11_8   (2 | TDA1997X_VP_OUT_EN | TDA1997X_VP_HIZ)
--#define TDA1997X_B_CB_3_0         (3 | TDA1997X_VP_OUT_EN | TDA1997X_VP_HIZ)
--#define TDA1997X_B_CB_7_4         (4 | TDA1997X_VP_OUT_EN | TDA1997X_VP_HIZ)
--#define TDA1997X_B_CB_11_8        (5 | TDA1997X_VP_OUT_EN | TDA1997X_VP_HIZ)
--#define TDA1997X_G_Y_3_0          (6 | TDA1997X_VP_OUT_EN | TDA1997X_VP_HIZ)
--#define TDA1997X_G_Y_7_4          (7 | TDA1997X_VP_OUT_EN | TDA1997X_VP_HIZ)
--#define TDA1997X_G_Y_11_8         (8 | TDA1997X_VP_OUT_EN | TDA1997X_VP_HIZ)
--/* pinswapped groups */
--#define TDA1997X_R_CR_CBCR_3_0_S  (TDA1997X_R_CR_CBCR_3_0 | TDA1997X_VP_SWAP)
--#define TDA1997X_R_CR_CBCR_7_4_S  (TDA1997X_R_CR_CBCR_7_4 | TDA1997X_VP_SWAP)
--#define TDA1997X_R_CR_CBCR_11_8_S (TDA1997X_R_CR_CBCR_11_8 | TDA1997X_VP_SWAP)
--#define TDA1997X_B_CB_3_0_S       (TDA1997X_B_CB_3_0 | TDA1997X_VP_SWAP)
--#define TDA1997X_B_CB_7_4_S       (TDA1997X_B_CB_7_4 | TDA1997X_VP_SWAP)
--#define TDA1997X_B_CB_11_8_S      (TDA1997X_B_CB_11_8 | TDA1997X_VP_SWAP)
--#define TDA1997X_G_Y_3_0_S        (TDA1997X_G_Y_3_0 | TDA1997X_VP_SWAP)
--#define TDA1997X_G_Y_7_4_S        (TDA1997X_G_Y_7_4 | TDA1997X_VP_SWAP)
--#define TDA1997X_G_Y_11_8_S       (TDA1997X_G_Y_11_8 | TDA1997X_VP_SWAP)
--
--/* Audio bus DAI format */
--#define TDA1997X_I2S16			1 /* I2S 16bit */
--#define TDA1997X_I2S32			2 /* I2S 32bit */
--#define TDA1997X_SPDIF			3 /* SPDIF */
--#define TDA1997X_OBA			4 /* One Bit Audio */
--#define TDA1997X_DST			5 /* Direct Stream Transfer */
--#define TDA1997X_I2S16_HBR		6 /* HBR straight in I2S 16bit mode */
--#define TDA1997X_I2S16_HBR_DEMUX	7 /* HBR demux in I2S 16bit mode */
--#define TDA1997X_I2S32_HBR_DEMUX	8 /* HBR demux in I2S 32bit mode */
--#define TDA1997X_SPDIF_HBR_DEMUX	9 /* HBR demux in SPDIF mode */
--
--/* Audio bus channel layout */
--#define TDA1997X_LAYOUT0	0	/* 2-channel */
--#define TDA1997X_LAYOUT1	1	/* 8-channel */
--
--/* Audio bus clock */
--#define TDA1997X_ACLK_16FS	0
--#define TDA1997X_ACLK_32FS	1
--#define TDA1997X_ACLK_64FS	2
--#define TDA1997X_ACLK_128FS	3
--#define TDA1997X_ACLK_256FS	4
--#define TDA1997X_ACLK_512FS	5
--
--#endif /* _DT_BINDINGS_MEDIA_TDA1997X_H */
-diff --git a/include/dt-bindings/media/video-interfaces.h b/include/dt-bindings/media/video-interfaces.h
-deleted file mode 100644
-index 68ac4e05e37f..000000000000
---- a/include/dt-bindings/media/video-interfaces.h
-+++ /dev/null
-@@ -1,16 +0,0 @@
--/* SPDX-License-Identifier: (GPL-2.0-only OR MIT) */
--/*
-- * Copyright (C) 2022 Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-- */
--
--#ifndef __DT_BINDINGS_MEDIA_VIDEO_INTERFACES_H__
--#define __DT_BINDINGS_MEDIA_VIDEO_INTERFACES_H__
--
--#define MEDIA_BUS_TYPE_CSI2_CPHY		1
--#define MEDIA_BUS_TYPE_CSI1			2
--#define MEDIA_BUS_TYPE_CCP2			3
--#define MEDIA_BUS_TYPE_CSI2_DPHY		4
--#define MEDIA_BUS_TYPE_PARALLEL			5
--#define MEDIA_BUS_TYPE_BT656			6
--
--#endif /* __DT_BINDINGS_MEDIA_VIDEO_INTERFACES_H__ */
-diff --git a/include/dt-bindings/mfd/atmel-flexcom.h b/include/dt-bindings/mfd/atmel-flexcom.h
-deleted file mode 100644
-index 4e2fc3236394..000000000000
---- a/include/dt-bindings/mfd/atmel-flexcom.h
-+++ /dev/null
-@@ -1,15 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0-only */
--/*
-- * This header provides macros for Atmel Flexcom DT bindings.
+- * This header provides constants for most GPIO bindings.
 - *
-- * Copyright (C) 2015 Cyrille Pitchen <cyrille.pitchen@atmel.com>
+- * Most GPIO bindings include a flags cell as part of the GPIO specifier.
+- * In most cases, the format of the flags cell uses the standard values
+- * defined in this header.
 - */
 -
--#ifndef __DT_BINDINGS_ATMEL_FLEXCOM_H__
--#define __DT_BINDINGS_ATMEL_FLEXCOM_H__
+-#ifndef _DT_BINDINGS_GPIO_GPIO_H
+-#define _DT_BINDINGS_GPIO_GPIO_H
 -
--#define ATMEL_FLEXCOM_MODE_USART	1
--#define ATMEL_FLEXCOM_MODE_SPI		2
--#define ATMEL_FLEXCOM_MODE_TWI		3
+-/* Bit 0 express polarity */
+-#define GPIO_ACTIVE_HIGH 0
+-#define GPIO_ACTIVE_LOW 1
 -
--#endif /* __DT_BINDINGS_ATMEL_FLEXCOM_H__ */
-diff --git a/include/dt-bindings/mfd/dbx500-prcmu.h b/include/dt-bindings/mfd/dbx500-prcmu.h
-deleted file mode 100644
-index 7266ae67b03a..000000000000
---- a/include/dt-bindings/mfd/dbx500-prcmu.h
-+++ /dev/null
-@@ -1,84 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0 */
--/*
-- * This header provides constants for the PRCMU bindings.
-- *
-- */
+-/* Bit 1 express single-endedness */
+-#define GPIO_PUSH_PULL 0
+-#define GPIO_SINGLE_ENDED 2
 -
--#ifndef _DT_BINDINGS_MFD_PRCMU_H
--#define _DT_BINDINGS_MFD_PRCMU_H
+-/* Bit 2 express Open drain or open source */
+-#define GPIO_LINE_OPEN_SOURCE 0
+-#define GPIO_LINE_OPEN_DRAIN 4
 -
 -/*
-- * Clock identifiers.
+- * Open Drain/Collector is the combination of single-ended open drain interface.
+- * Open Source/Emitter is the combination of single-ended open source interface.
 - */
--#define ARMCLK			0
--#define PRCMU_ACLK		1
--#define PRCMU_SVAMMCSPCLK	2
--#define PRCMU_SDMMCHCLK		2  /* DBx540 only. */
--#define PRCMU_SIACLK		3
--#define PRCMU_SIAMMDSPCLK	3  /* DBx540 only. */
--#define PRCMU_SGACLK		4
--#define PRCMU_UARTCLK		5
--#define PRCMU_MSP02CLK		6
--#define PRCMU_MSP1CLK		7
--#define PRCMU_I2CCLK		8
--#define PRCMU_SDMMCCLK		9
--#define PRCMU_SLIMCLK		10
--#define PRCMU_CAMCLK		10 /* DBx540 only. */
--#define PRCMU_PER1CLK		11
--#define PRCMU_PER2CLK		12
--#define PRCMU_PER3CLK		13
--#define PRCMU_PER5CLK		14
--#define PRCMU_PER6CLK		15
--#define PRCMU_PER7CLK		16
--#define PRCMU_LCDCLK		17
--#define PRCMU_BMLCLK		18
--#define PRCMU_HSITXCLK		19
--#define PRCMU_HSIRXCLK		20
--#define PRCMU_HDMICLK		21
--#define PRCMU_APEATCLK		22
--#define PRCMU_APETRACECLK	23
--#define PRCMU_MCDECLK		24
--#define PRCMU_IPI2CCLK		25
--#define PRCMU_DSIALTCLK		26
--#define PRCMU_DMACLK		27
--#define PRCMU_B2R2CLK		28
--#define PRCMU_TVCLK		29
--#define SPARE_UNIPROCLK		30
--#define PRCMU_SSPCLK		31
--#define PRCMU_RNGCLK		32
--#define PRCMU_UICCCLK		33
--#define PRCMU_G1CLK             34 /* DBx540 only. */
--#define PRCMU_HVACLK            35 /* DBx540 only. */
--#define PRCMU_SPARE1CLK		36
--#define PRCMU_SPARE2CLK		37
+-#define GPIO_OPEN_DRAIN (GPIO_SINGLE_ENDED | GPIO_LINE_OPEN_DRAIN)
+-#define GPIO_OPEN_SOURCE (GPIO_SINGLE_ENDED | GPIO_LINE_OPEN_SOURCE)
 -
--#define PRCMU_NUM_REG_CLOCKS	38
+-/* Bit 3 express GPIO suspend/resume and reset persistence */
+-#define GPIO_PERSISTENT 0
+-#define GPIO_TRANSITORY 8
 -
--#define PRCMU_RTCCLK		PRCMU_NUM_REG_CLOCKS
--#define PRCMU_SYSCLK		39
--#define PRCMU_CDCLK		40
--#define PRCMU_TIMCLK		41
--#define PRCMU_PLLSOC0		42
--#define PRCMU_PLLSOC1		43
--#define PRCMU_ARMSS		44
--#define PRCMU_PLLDDR		45
+-/* Bit 4 express pull up */
+-#define GPIO_PULL_UP 16
 -
--/* DSI Clocks */
--#define PRCMU_PLLDSI		46
--#define PRCMU_DSI0CLK		47
--#define PRCMU_DSI1CLK		48
--#define PRCMU_DSI0ESCCLK	49
--#define PRCMU_DSI1ESCCLK	50
--#define PRCMU_DSI2ESCCLK	51
--
--/* LCD DSI PLL - Ux540 only */
--#define PRCMU_PLLDSI_LCD        52
--#define PRCMU_DSI0CLK_LCD       53
--#define PRCMU_DSI1CLK_LCD       54
--#define PRCMU_DSI0ESCCLK_LCD    55
--#define PRCMU_DSI1ESCCLK_LCD    56
--#define PRCMU_DSI2ESCCLK_LCD    57
--
--#define PRCMU_NUM_CLKS		58
+-/* Bit 5 express pull down */
+-#define GPIO_PULL_DOWN 32
 -
 -#endif
-diff --git a/include/dt-bindings/net/mscc-phy-vsc8531.h b/include/dt-bindings/net/mscc-phy-vsc8531.h
+diff --git a/include/dt-bindings/input/gpio-keys.h b/include/dt-bindings/input/gpio-keys.h
 deleted file mode 100644
-index c340437414fb..000000000000
---- a/include/dt-bindings/net/mscc-phy-vsc8531.h
-+++ /dev/null
-@@ -1,31 +0,0 @@
--/* SPDX-License-Identifier: (GPL-2.0+ OR MIT) */
--/*
-- * Device Tree constants for Microsemi VSC8531 PHY
-- *
-- * Author: Nagaraju Lakkaraju
-- *
-- * Copyright (c) 2017 Microsemi Corporation
-- */
--
--#ifndef _DT_BINDINGS_MSCC_VSC8531_H
--#define _DT_BINDINGS_MSCC_VSC8531_H
--
--/* PHY LED Modes */
--#define VSC8531_LINK_ACTIVITY			0
--#define VSC8531_LINK_1000_ACTIVITY		1
--#define VSC8531_LINK_100_ACTIVITY		2
--#define VSC8531_LINK_10_ACTIVITY		3
--#define VSC8531_LINK_100_1000_ACTIVITY		4
--#define VSC8531_LINK_10_1000_ACTIVITY		5
--#define VSC8531_LINK_10_100_ACTIVITY		6
--#define VSC8584_LINK_100FX_1000X_ACTIVITY	7
--#define VSC8531_DUPLEX_COLLISION		8
--#define VSC8531_COLLISION			9
--#define VSC8531_ACTIVITY			10
--#define VSC8584_100FX_1000X_ACTIVITY		11
--#define VSC8531_AUTONEG_FAULT			12
--#define VSC8531_SERIAL_MODE			13
--#define VSC8531_FORCE_LED_OFF			14
--#define VSC8531_FORCE_LED_ON			15
--
--#endif
-diff --git a/include/dt-bindings/net/qca-ar803x.h b/include/dt-bindings/net/qca-ar803x.h
-deleted file mode 100644
-index 9c046c7242ed..000000000000
---- a/include/dt-bindings/net/qca-ar803x.h
-+++ /dev/null
-@@ -1,13 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0-only */
--/*
-- * Device Tree constants for the Qualcomm Atheros AR803x PHYs
-- */
--
--#ifndef _DT_BINDINGS_QCA_AR803X_H
--#define _DT_BINDINGS_QCA_AR803X_H
--
--#define AR803X_STRENGTH_FULL		0
--#define AR803X_STRENGTH_HALF		1
--#define AR803X_STRENGTH_QUARTER		2
--
--#endif
-diff --git a/include/dt-bindings/phy/phy-am654-serdes.h b/include/dt-bindings/phy/phy-am654-serdes.h
-deleted file mode 100644
-index e8d901729ed9..000000000000
---- a/include/dt-bindings/phy/phy-am654-serdes.h
+index 8962df79e753..000000000000
+--- a/include/dt-bindings/input/gpio-keys.h
 +++ /dev/null
 @@ -1,13 +0,0 @@
 -/* SPDX-License-Identifier: GPL-2.0 */
 -/*
-- * This header provides constants for AM654 SERDES.
+- * This header provides constants for gpio keys bindings.
 - */
 -
--#ifndef _DT_BINDINGS_AM654_SERDES
--#define _DT_BINDINGS_AM654_SERDES
+-#ifndef _DT_BINDINGS_GPIO_KEYS_H
+-#define _DT_BINDINGS_GPIO_KEYS_H
 -
--#define AM654_SERDES_CMU_REFCLK	0
--#define AM654_SERDES_LO_REFCLK	1
--#define AM654_SERDES_RO_REFCLK	2
+-#define EV_ACT_ANY		0x00	/* asserted or deasserted */
+-#define EV_ACT_ASSERTED		0x01	/* asserted */
+-#define EV_ACT_DEASSERTED	0x02	/* deasserted */
 -
--#endif /* _DT_BINDINGS_AM654_SERDES */
-diff --git a/include/dt-bindings/phy/phy-cadence.h b/include/dt-bindings/phy/phy-cadence.h
+-#endif /* _DT_BINDINGS_GPIO_KEYS_H */
+diff --git a/include/dt-bindings/input/input.h b/include/dt-bindings/input/input.h
 deleted file mode 100644
-index 0122c6067b17..000000000000
---- a/include/dt-bindings/phy/phy-cadence.h
-+++ /dev/null
-@@ -1,24 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0 */
--/*
-- * This header provides constants for Cadence SERDES.
-- */
--
--#ifndef _DT_BINDINGS_CADENCE_SERDES_H
--#define _DT_BINDINGS_CADENCE_SERDES_H
--
--/* Torrent */
--#define TORRENT_SERDES_NO_SSC		0
--#define TORRENT_SERDES_EXTERNAL_SSC	1
--#define TORRENT_SERDES_INTERNAL_SSC	2
--
--#define CDNS_TORRENT_REFCLK_DRIVER      0
--
--/* Sierra */
--#define CDNS_SIERRA_PLL_CMNLC		0
--#define CDNS_SIERRA_PLL_CMNLC1		1
--
--#define SIERRA_SERDES_NO_SSC		0
--#define SIERRA_SERDES_EXTERNAL_SSC	1
--#define SIERRA_SERDES_INTERNAL_SSC	2
--
--#endif /* _DT_BINDINGS_CADENCE_SERDES_H */
-diff --git a/include/dt-bindings/pinctrl/apple.h b/include/dt-bindings/pinctrl/apple.h
-deleted file mode 100644
-index ea0a6f466592..000000000000
---- a/include/dt-bindings/pinctrl/apple.h
-+++ /dev/null
-@@ -1,13 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0+ OR MIT */
--/*
-- * This header provides constants for Apple pinctrl bindings.
-- */
--
--#ifndef _DT_BINDINGS_PINCTRL_APPLE_H
--#define _DT_BINDINGS_PINCTRL_APPLE_H
--
--#define APPLE_PINMUX(pin, func) ((pin) | ((func) << 16))
--#define APPLE_PIN(pinmux) ((pinmux) & 0xffff)
--#define APPLE_FUNC(pinmux) ((pinmux) >> 16)
--
--#endif /* _DT_BINDINGS_PINCTRL_APPLE_H */
-diff --git a/include/dt-bindings/pinctrl/dra.h b/include/dt-bindings/pinctrl/dra.h
-deleted file mode 100644
-index 765c385f7b2c..000000000000
---- a/include/dt-bindings/pinctrl/dra.h
-+++ /dev/null
-@@ -1,79 +0,0 @@
--/*
-- * This header provides constants for DRA pinctrl bindings.
-- *
-- * Copyright (C) 2013 Texas Instruments Incorporated - https://www.ti.com/
-- * Author: Rajendra Nayak <rnayak@ti.com>
-- *
-- * This program is free software; you can redistribute it and/or modify
-- * it under the terms of the GNU General Public License version 2 as
-- * published by the Free Software Foundation.
-- */
--
--#ifndef _DT_BINDINGS_PINCTRL_DRA_H
--#define _DT_BINDINGS_PINCTRL_DRA_H
--
--/* DRA7 mux mode options for each pin. See TRM for options */
--#define MUX_MODE0	0x0
--#define MUX_MODE1	0x1
--#define MUX_MODE2	0x2
--#define MUX_MODE3	0x3
--#define MUX_MODE4	0x4
--#define MUX_MODE5	0x5
--#define MUX_MODE6	0x6
--#define MUX_MODE7	0x7
--#define MUX_MODE8	0x8
--#define MUX_MODE9	0x9
--#define MUX_MODE10	0xa
--#define MUX_MODE11	0xb
--#define MUX_MODE12	0xc
--#define MUX_MODE13	0xd
--#define MUX_MODE14	0xe
--#define MUX_MODE15	0xf
--
--/* Certain pins need virtual mode, but note: they may glitch */
--#define MUX_VIRTUAL_MODE0	(MODE_SELECT | (0x0 << 4))
--#define MUX_VIRTUAL_MODE1	(MODE_SELECT | (0x1 << 4))
--#define MUX_VIRTUAL_MODE2	(MODE_SELECT | (0x2 << 4))
--#define MUX_VIRTUAL_MODE3	(MODE_SELECT | (0x3 << 4))
--#define MUX_VIRTUAL_MODE4	(MODE_SELECT | (0x4 << 4))
--#define MUX_VIRTUAL_MODE5	(MODE_SELECT | (0x5 << 4))
--#define MUX_VIRTUAL_MODE6	(MODE_SELECT | (0x6 << 4))
--#define MUX_VIRTUAL_MODE7	(MODE_SELECT | (0x7 << 4))
--#define MUX_VIRTUAL_MODE8	(MODE_SELECT | (0x8 << 4))
--#define MUX_VIRTUAL_MODE9	(MODE_SELECT | (0x9 << 4))
--#define MUX_VIRTUAL_MODE10	(MODE_SELECT | (0xa << 4))
--#define MUX_VIRTUAL_MODE11	(MODE_SELECT | (0xb << 4))
--#define MUX_VIRTUAL_MODE12	(MODE_SELECT | (0xc << 4))
--#define MUX_VIRTUAL_MODE13	(MODE_SELECT | (0xd << 4))
--#define MUX_VIRTUAL_MODE14	(MODE_SELECT | (0xe << 4))
--#define MUX_VIRTUAL_MODE15	(MODE_SELECT | (0xf << 4))
--
--#define MODE_SELECT		(1 << 8)
--
--#define PULL_ENA		(0 << 16)
--#define PULL_DIS		(1 << 16)
--#define PULL_UP			(1 << 17)
--#define INPUT_EN		(1 << 18)
--#define SLEWCONTROL		(1 << 19)
--#define WAKEUP_EN		(1 << 24)
--#define WAKEUP_EVENT		(1 << 25)
--
--/* Active pin states */
--#define PIN_OUTPUT		(0 | PULL_DIS)
--#define PIN_OUTPUT_PULLUP	(PULL_UP)
--#define PIN_OUTPUT_PULLDOWN	(0)
--#define PIN_INPUT		(INPUT_EN | PULL_DIS)
--#define PIN_INPUT_SLEW		(INPUT_EN | SLEWCONTROL)
--#define PIN_INPUT_PULLUP	(PULL_ENA | INPUT_EN | PULL_UP)
--#define PIN_INPUT_PULLDOWN	(PULL_ENA | INPUT_EN)
--
--/*
-- * Macro to allow using the absolute physical address instead of the
-- * padconf registers instead of the offset from padconf base.
-- */
--#define DRA7XX_CORE_IOPAD(pa, val)	(((pa) & 0xffff) - 0x3400) (val)
--
--/* DRA7 IODELAY configuration parameters */
--#define A_DELAY_PS(val)			((val) & 0xffff)
--#define G_DELAY_PS(val)			((val) & 0xffff)
--#endif
-diff --git a/include/dt-bindings/power/owl-s700-powergate.h b/include/dt-bindings/power/owl-s700-powergate.h
-deleted file mode 100644
-index 4cf1aefbf09c..000000000000
---- a/include/dt-bindings/power/owl-s700-powergate.h
-+++ /dev/null
-@@ -1,19 +0,0 @@
--// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
--/*
-- * Actions Semi S700 SPS
-- *
-- * Copyright (c) 2017 Andreas Färber
-- */
--#ifndef DT_BINDINGS_POWER_OWL_S700_POWERGATE_H
--#define DT_BINDINGS_POWER_OWL_S700_POWERGATE_H
--
--#define S700_PD_VDE	0
--#define S700_PD_VCE_SI	1
--#define S700_PD_USB2_1	2
--#define S700_PD_HDE	3
--#define S700_PD_DMA	4
--#define S700_PD_DS	5
--#define S700_PD_USB3	6
--#define S700_PD_USB2_0	7
--
--#endif
-diff --git a/include/dt-bindings/power/raspberrypi-power.h b/include/dt-bindings/power/raspberrypi-power.h
-deleted file mode 100644
-index b3ff8e09a78f..000000000000
---- a/include/dt-bindings/power/raspberrypi-power.h
-+++ /dev/null
-@@ -1,41 +0,0 @@
--/*
-- *  Copyright © 2015 Broadcom
-- *
-- * This program is free software; you can redistribute it and/or modify
-- * it under the terms of the GNU General Public License version 2 as
-- * published by the Free Software Foundation.
-- */
--
--#ifndef _DT_BINDINGS_ARM_BCM2835_RPI_POWER_H
--#define _DT_BINDINGS_ARM_BCM2835_RPI_POWER_H
--
--/* These power domain indices are the firmware interface's indices
-- * minus one.
-- */
--#define RPI_POWER_DOMAIN_I2C0		0
--#define RPI_POWER_DOMAIN_I2C1		1
--#define RPI_POWER_DOMAIN_I2C2		2
--#define RPI_POWER_DOMAIN_VIDEO_SCALER	3
--#define RPI_POWER_DOMAIN_VPU1		4
--#define RPI_POWER_DOMAIN_HDMI		5
--#define RPI_POWER_DOMAIN_USB		6
--#define RPI_POWER_DOMAIN_VEC		7
--#define RPI_POWER_DOMAIN_JPEG		8
--#define RPI_POWER_DOMAIN_H264		9
--#define RPI_POWER_DOMAIN_V3D		10
--#define RPI_POWER_DOMAIN_ISP		11
--#define RPI_POWER_DOMAIN_UNICAM0	12
--#define RPI_POWER_DOMAIN_UNICAM1	13
--#define RPI_POWER_DOMAIN_CCP2RX		14
--#define RPI_POWER_DOMAIN_CSI2		15
--#define RPI_POWER_DOMAIN_CPI		16
--#define RPI_POWER_DOMAIN_DSI0		17
--#define RPI_POWER_DOMAIN_DSI1		18
--#define RPI_POWER_DOMAIN_TRANSPOSER	19
--#define RPI_POWER_DOMAIN_CCP2TX		20
--#define RPI_POWER_DOMAIN_CDP		21
--#define RPI_POWER_DOMAIN_ARM		22
--
--#define RPI_POWER_DOMAIN_COUNT		23
--
--#endif /* _DT_BINDINGS_ARM_BCM2835_RPI_POWER_H */
-diff --git a/include/dt-bindings/regulator/dlg,da9063-regulator.h b/include/dt-bindings/regulator/dlg,da9063-regulator.h
-deleted file mode 100644
-index 1de710dd0899..000000000000
---- a/include/dt-bindings/regulator/dlg,da9063-regulator.h
-+++ /dev/null
-@@ -1,16 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0 */
--
--#ifndef _DT_BINDINGS_REGULATOR_DLG_DA9063_H
--#define _DT_BINDINGS_REGULATOR_DLG_DA9063_H
--
--/*
-- * These buck mode constants may be used to specify values in device tree
-- * properties (e.g. regulator-initial-mode).
-- * A description of the following modes is in the manufacturers datasheet.
-- */
--
--#define DA9063_BUCK_MODE_SLEEP		1
--#define DA9063_BUCK_MODE_SYNC		2
--#define DA9063_BUCK_MODE_AUTO		3
--
--#endif
-diff --git a/include/dt-bindings/regulator/maxim,max77802.h b/include/dt-bindings/regulator/maxim,max77802.h
-deleted file mode 100644
-index cf28631d7109..000000000000
---- a/include/dt-bindings/regulator/maxim,max77802.h
-+++ /dev/null
-@@ -1,18 +0,0 @@
--/*
-- * Copyright (C) 2014 Google, Inc
-- *
-- * This program is free software; you can redistribute it and/or modify
-- * it under the terms of the GNU General Public License version 2 as
-- * published by the Free Software Foundation.
-- *
-- * Device Tree binding constants for the Maxim 77802 PMIC regulators
-- */
--
--#ifndef _DT_BINDINGS_REGULATOR_MAXIM_MAX77802_H
--#define _DT_BINDINGS_REGULATOR_MAXIM_MAX77802_H
--
--/* Regulator operating modes */
--#define MAX77802_OPMODE_LP	1
--#define MAX77802_OPMODE_NORMAL	3
--
--#endif /* _DT_BINDINGS_REGULATOR_MAXIM_MAX77802_H */
-diff --git a/include/dt-bindings/reset/actions,s700-reset.h b/include/dt-bindings/reset/actions,s700-reset.h
-deleted file mode 100644
-index 5e3b16b8ef53..000000000000
---- a/include/dt-bindings/reset/actions,s700-reset.h
-+++ /dev/null
-@@ -1,34 +0,0 @@
--// SPDX-License-Identifier: (GPL-2.0-or-later OR MIT)
--//
--// Device Tree binding constants for Actions Semi S700 Reset Management Unit
--//
--// Copyright (c) 2018 Linaro Ltd.
--
--#ifndef __DT_BINDINGS_ACTIONS_S700_RESET_H
--#define __DT_BINDINGS_ACTIONS_S700_RESET_H
--
--#define RESET_AUDIO				0
--#define RESET_CSI				1
--#define RESET_DE				2
--#define RESET_DSI				3
--#define RESET_GPIO				4
--#define RESET_I2C0				5
--#define RESET_I2C1				6
--#define RESET_I2C2				7
--#define RESET_I2C3				8
--#define RESET_KEY				9
--#define RESET_LCD0				10
--#define RESET_SI				11
--#define RESET_SPI0				12
--#define RESET_SPI1				13
--#define RESET_SPI2				14
--#define RESET_SPI3				15
--#define RESET_UART0				16
--#define RESET_UART1				17
--#define RESET_UART2				18
--#define RESET_UART3				19
--#define RESET_UART4				20
--#define RESET_UART5				21
--#define RESET_UART6				22
--
--#endif /* __DT_BINDINGS_ACTIONS_S700_RESET_H */
-diff --git a/include/dt-bindings/reset/actions,s900-reset.h b/include/dt-bindings/reset/actions,s900-reset.h
-deleted file mode 100644
-index 42c19d02e43b..000000000000
---- a/include/dt-bindings/reset/actions,s900-reset.h
-+++ /dev/null
-@@ -1,65 +0,0 @@
--// SPDX-License-Identifier: (GPL-2.0-or-later OR MIT)
--//
--// Device Tree binding constants for Actions Semi S900 Reset Management Unit
--//
--// Copyright (c) 2018 Linaro Ltd.
--
--#ifndef __DT_BINDINGS_ACTIONS_S900_RESET_H
--#define __DT_BINDINGS_ACTIONS_S900_RESET_H
--
--#define RESET_CHIPID				0
--#define RESET_CPU_SCNT				1
--#define RESET_SRAMI				2
--#define RESET_DDR_CTL_PHY			3
--#define RESET_DMAC				4
--#define RESET_GPIO				5
--#define RESET_BISP_AXI				6
--#define RESET_CSI0				7
--#define RESET_CSI1				8
--#define RESET_DE				9
--#define RESET_DSI				10
--#define RESET_GPU3D_PA				11
--#define RESET_GPU3D_PB				12
--#define RESET_HDE				13
--#define RESET_I2C0				14
--#define RESET_I2C1				15
--#define RESET_I2C2				16
--#define RESET_I2C3				17
--#define RESET_I2C4				18
--#define RESET_I2C5				19
--#define RESET_IMX				20
--#define RESET_NANDC0				21
--#define RESET_NANDC1				22
--#define RESET_SD0				23
--#define RESET_SD1				24
--#define RESET_SD2				25
--#define RESET_SD3				26
--#define RESET_SPI0				27
--#define RESET_SPI1				28
--#define RESET_SPI2				29
--#define RESET_SPI3				30
--#define RESET_UART0				31
--#define RESET_UART1				32
--#define RESET_UART2				33
--#define RESET_UART3				34
--#define RESET_UART4				35
--#define RESET_UART5				36
--#define RESET_UART6				37
--#define RESET_HDMI				38
--#define RESET_LVDS				39
--#define RESET_EDP				40
--#define RESET_USB2HUB				41
--#define RESET_USB2HSIC				42
--#define RESET_USB3				43
--#define RESET_PCM1				44
--#define RESET_AUDIO				45
--#define RESET_PCM0				46
--#define RESET_SE				47
--#define RESET_GIC				48
--#define RESET_DDR_CTL_PHY_AXI			49
--#define RESET_CMU_DDR				50
--#define RESET_DMM				51
--#define RESET_HDCP2TX				52
--#define RESET_ETHERNET				53
--
--#endif /* __DT_BINDINGS_ACTIONS_S900_RESET_H */
-diff --git a/include/dt-bindings/reset/altr,rst-mgr-a10.h b/include/dt-bindings/reset/altr,rst-mgr-a10.h
-deleted file mode 100644
-index acb0bbf4f9f5..000000000000
---- a/include/dt-bindings/reset/altr,rst-mgr-a10.h
-+++ /dev/null
-@@ -1,110 +0,0 @@
--/*
-- * Copyright (c) 2014, Steffen Trumtrar <s.trumtrar@pengutronix.de>
-- *
-- * This software is licensed under the terms of the GNU General Public
-- * License version 2, as published by the Free Software Foundation, and
-- * may be copied, distributed, and modified under those terms.
-- *
-- * This program is distributed in the hope that it will be useful,
-- * but WITHOUT ANY WARRANTY; without even the implied warranty of
-- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-- * GNU General Public License for more details.
-- */
--
--#ifndef _DT_BINDINGS_RESET_ALTR_RST_MGR_A10_H
--#define _DT_BINDINGS_RESET_ALTR_RST_MGR_A10_H
--
--/* MPUMODRST */
--#define CPU0_RESET		0
--#define CPU1_RESET		1
--#define WDS_RESET		2
--#define SCUPER_RESET		3
--
--/* PER0MODRST */
--#define EMAC0_RESET		32
--#define EMAC1_RESET		33
--#define EMAC2_RESET		34
--#define USB0_RESET		35
--#define USB1_RESET		36
--#define NAND_RESET		37
--#define QSPI_RESET		38
--#define SDMMC_RESET		39
--#define EMAC0_OCP_RESET		40
--#define EMAC1_OCP_RESET		41
--#define EMAC2_OCP_RESET		42
--#define USB0_OCP_RESET		43
--#define USB1_OCP_RESET		44
--#define NAND_OCP_RESET		45
--#define QSPI_OCP_RESET		46
--#define SDMMC_OCP_RESET		47
--#define DMA_RESET		48
--#define SPIM0_RESET		49
--#define SPIM1_RESET		50
--#define SPIS0_RESET		51
--#define SPIS1_RESET		52
--#define DMA_OCP_RESET		53
--#define EMAC_PTP_RESET		54
--/* 55 is empty*/
--#define DMAIF0_RESET		56
--#define DMAIF1_RESET		57
--#define DMAIF2_RESET		58
--#define DMAIF3_RESET		59
--#define DMAIF4_RESET		60
--#define DMAIF5_RESET		61
--#define DMAIF6_RESET		62
--#define DMAIF7_RESET		63
--
--/* PER1MODRST */
--#define L4WD0_RESET		64
--#define L4WD1_RESET		65
--#define L4SYSTIMER0_RESET	66
--#define L4SYSTIMER1_RESET	67
--#define SPTIMER0_RESET		68
--#define SPTIMER1_RESET		69
--/* 70-71 is reserved */
--#define I2C0_RESET		72
--#define I2C1_RESET		73
--#define I2C2_RESET		74
--#define I2C3_RESET		75
--#define I2C4_RESET		76
--/* 77-79 is reserved */
--#define UART0_RESET		80
--#define UART1_RESET		81
--/* 82-87 is reserved */
--#define GPIO0_RESET		88
--#define GPIO1_RESET		89
--#define GPIO2_RESET		90
--
--/* BRGMODRST */
--#define HPS2FPGA_RESET		96
--#define LWHPS2FPGA_RESET	97
--#define FPGA2HPS_RESET		98
--#define F2SSDRAM0_RESET		99
--#define F2SSDRAM1_RESET		100
--#define F2SSDRAM2_RESET		101
--#define DDRSCH_RESET		102
--
--/* SYSMODRST*/
--#define ROM_RESET		128
--#define OCRAM_RESET		129
--/* 130 is reserved */
--#define FPGAMGR_RESET		131
--#define S2F_RESET		132
--#define SYSDBG_RESET		133
--#define OCRAM_OCP_RESET		134
--
--/* COLDMODRST */
--#define CLKMGRCOLD_RESET	160
--/* 161-162 is reserved */
--#define S2FCOLD_RESET		163
--#define TIMESTAMPCOLD_RESET	164
--#define TAPCOLD_RESET		165
--#define HMCCOLD_RESET		166
--#define IOMGRCOLD_RESET		167
--
--/* NRSTMODRST */
--#define NRSTPINOE_RESET		192
--
--/* DBGMODRST */
--#define DBG_RESET		224
--#endif
-diff --git a/include/dt-bindings/reset/altr,rst-mgr-s10.h b/include/dt-bindings/reset/altr,rst-mgr-s10.h
-deleted file mode 100644
-index 1fdcf8ae1531..000000000000
---- a/include/dt-bindings/reset/altr,rst-mgr-s10.h
-+++ /dev/null
-@@ -1,96 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0 */
--/*
-- * Copyright (C) 2016-2018 Intel Corporation. All rights reserved
-- * Copyright (C) 2016 Altera Corporation. All rights reserved
-- * derived from Steffen Trumtrar's "altr,rst-mgr-a10.h"
-- */
--
--#ifndef _DT_BINDINGS_RESET_ALTR_RST_MGR_S10_H
--#define _DT_BINDINGS_RESET_ALTR_RST_MGR_S10_H
--
--/* MPUMODRST */
--#define CPU0_RESET		0
--#define CPU1_RESET		1
--#define CPU2_RESET		2
--#define CPU3_RESET		3
--
--/* PER0MODRST */
--#define EMAC0_RESET		32
--#define EMAC1_RESET		33
--#define EMAC2_RESET		34
--#define USB0_RESET		35
--#define USB1_RESET		36
--#define NAND_RESET		37
--/* 38 is empty */
--#define SDMMC_RESET		39
--#define EMAC0_OCP_RESET		40
--#define EMAC1_OCP_RESET		41
--#define EMAC2_OCP_RESET		42
--#define USB0_OCP_RESET		43
--#define USB1_OCP_RESET		44
--#define NAND_OCP_RESET		45
--/* 46 is empty */
--#define SDMMC_OCP_RESET		47
--#define DMA_RESET		48
--#define SPIM0_RESET		49
--#define SPIM1_RESET		50
--#define SPIS0_RESET		51
--#define SPIS1_RESET		52
--#define DMA_OCP_RESET		53
--#define EMAC_PTP_RESET		54
--/* 55 is empty*/
--#define DMAIF0_RESET		56
--#define DMAIF1_RESET		57
--#define DMAIF2_RESET		58
--#define DMAIF3_RESET		59
--#define DMAIF4_RESET		60
--#define DMAIF5_RESET		61
--#define DMAIF6_RESET		62
--#define DMAIF7_RESET		63
--
--/* PER1MODRST */
--#define WATCHDOG0_RESET		64
--#define WATCHDOG1_RESET		65
--#define WATCHDOG2_RESET		66
--#define WATCHDOG3_RESET		67
--#define L4SYSTIMER0_RESET	68
--#define L4SYSTIMER1_RESET	69
--#define SPTIMER0_RESET		70
--#define SPTIMER1_RESET		71
--#define I2C0_RESET		72
--#define I2C1_RESET		73
--#define I2C2_RESET		74
--#define I2C3_RESET		75
--#define I2C4_RESET		76
--/* 77-79 is empty */
--#define UART0_RESET		80
--#define UART1_RESET		81
--/* 82-87 is empty */
--#define GPIO0_RESET		88
--#define GPIO1_RESET		89
--
--/* BRGMODRST */
--#define SOC2FPGA_RESET		96
--#define LWHPS2FPGA_RESET	97
--#define FPGA2SOC_RESET		98
--#define F2SSDRAM0_RESET		99
--#define F2SSDRAM1_RESET		100
--#define F2SSDRAM2_RESET		101
--#define DDRSCH_RESET		102
--
--/* COLDMODRST */
--#define CPUPO0_RESET		160
--#define CPUPO1_RESET		161
--#define CPUPO2_RESET		162
--#define CPUPO3_RESET		163
--/* 164-167 is empty */
--#define L2_RESET		168
--
--/* DBGMODRST */
--#define DBG_RESET		224
--#define CSDAP_RESET		225
--
--/* TAPMODRST */
--#define TAP_RESET		256
--
--#endif
-diff --git a/include/dt-bindings/reset/altr,rst-mgr.h b/include/dt-bindings/reset/altr,rst-mgr.h
-deleted file mode 100644
-index 5b7ad7396524..000000000000
---- a/include/dt-bindings/reset/altr,rst-mgr.h
-+++ /dev/null
-@@ -1,82 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0 */
--/*
-- * Copyright (c) 2014, Steffen Trumtrar <s.trumtrar@pengutronix.de>
-- */
--
--#ifndef _DT_BINDINGS_RESET_ALTR_RST_MGR_H
--#define _DT_BINDINGS_RESET_ALTR_RST_MGR_H
--
--/* MPUMODRST */
--#define CPU0_RESET		0
--#define CPU1_RESET		1
--#define WDS_RESET		2
--#define SCUPER_RESET		3
--#define L2_RESET		4
--
--/* PERMODRST */
--#define EMAC0_RESET		32
--#define EMAC1_RESET		33
--#define USB0_RESET		34
--#define USB1_RESET		35
--#define NAND_RESET		36
--#define QSPI_RESET		37
--#define L4WD0_RESET		38
--#define L4WD1_RESET		39
--#define OSC1TIMER0_RESET	40
--#define OSC1TIMER1_RESET	41
--#define SPTIMER0_RESET		42
--#define SPTIMER1_RESET		43
--#define I2C0_RESET		44
--#define I2C1_RESET		45
--#define I2C2_RESET		46
--#define I2C3_RESET		47
--#define UART0_RESET		48
--#define UART1_RESET		49
--#define SPIM0_RESET		50
--#define SPIM1_RESET		51
--#define SPIS0_RESET		52
--#define SPIS1_RESET		53
--#define SDMMC_RESET		54
--#define CAN0_RESET		55
--#define CAN1_RESET		56
--#define GPIO0_RESET		57
--#define GPIO1_RESET		58
--#define GPIO2_RESET		59
--#define DMA_RESET		60
--#define SDR_RESET		61
--
--/* PER2MODRST */
--#define DMAIF0_RESET		64
--#define DMAIF1_RESET		65
--#define DMAIF2_RESET		66
--#define DMAIF3_RESET		67
--#define DMAIF4_RESET		68
--#define DMAIF5_RESET		69
--#define DMAIF6_RESET		70
--#define DMAIF7_RESET		71
--
--/* BRGMODRST */
--#define HPS2FPGA_RESET		96
--#define LWHPS2FPGA_RESET	97
--#define FPGA2HPS_RESET		98
--
--/* MISCMODRST*/
--#define ROM_RESET		128
--#define OCRAM_RESET		129
--#define SYSMGR_RESET		130
--#define SYSMGRCOLD_RESET	131
--#define FPGAMGR_RESET		132
--#define ACPIDMAP_RESET		133
--#define S2F_RESET		134
--#define S2FCOLD_RESET		135
--#define NRSTPIN_RESET		136
--#define TIMESTAMPCOLD_RESET	137
--#define CLKMGRCOLD_RESET	138
--#define SCANMGR_RESET		139
--#define FRZCTRLCOLD_RESET	140
--#define SYSDBG_RESET		141
--#define DBG_RESET		142
--#define TAPCOLD_RESET		143
--#define SDRCOLD_RESET		144
--
--#endif
-diff --git a/include/dt-bindings/reset/nuvoton,npcm7xx-reset.h b/include/dt-bindings/reset/nuvoton,npcm7xx-reset.h
-deleted file mode 100644
-index 757f5e34c814..000000000000
---- a/include/dt-bindings/reset/nuvoton,npcm7xx-reset.h
-+++ /dev/null
-@@ -1,91 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0 */
--// Copyright (c) 2020 Nuvoton Technology corporation.
--
--#ifndef _DT_BINDINGS_NPCM7XX_RESET_H
--#define _DT_BINDINGS_NPCM7XX_RESET_H
--
--#define NPCM7XX_RESET_IPSRST1		0x20
--#define NPCM7XX_RESET_IPSRST2		0x24
--#define NPCM7XX_RESET_IPSRST3		0x34
--
--/* Reset lines on IP1 reset module (NPCM7XX_RESET_IPSRST1) */
--#define NPCM7XX_RESET_FIU3		1
--#define NPCM7XX_RESET_UDC1		5
--#define NPCM7XX_RESET_EMC1		6
--#define NPCM7XX_RESET_UART_2_3		7
--#define NPCM7XX_RESET_UDC2		8
--#define NPCM7XX_RESET_PECI		9
--#define NPCM7XX_RESET_AES		10
--#define NPCM7XX_RESET_UART_0_1		11
--#define NPCM7XX_RESET_MC		12
--#define NPCM7XX_RESET_SMB2		13
--#define NPCM7XX_RESET_SMB3		14
--#define NPCM7XX_RESET_SMB4		15
--#define NPCM7XX_RESET_SMB5		16
--#define NPCM7XX_RESET_PWM_M0		18
--#define NPCM7XX_RESET_TIMER_0_4		19
--#define NPCM7XX_RESET_TIMER_5_9		20
--#define NPCM7XX_RESET_EMC2		21
--#define NPCM7XX_RESET_UDC4		22
--#define NPCM7XX_RESET_UDC5		23
--#define NPCM7XX_RESET_UDC6		24
--#define NPCM7XX_RESET_UDC3		25
--#define NPCM7XX_RESET_ADC		27
--#define NPCM7XX_RESET_SMB6		28
--#define NPCM7XX_RESET_SMB7		29
--#define NPCM7XX_RESET_SMB0		30
--#define NPCM7XX_RESET_SMB1		31
--
--/* Reset lines on IP2 reset module (NPCM7XX_RESET_IPSRST2) */
--#define NPCM7XX_RESET_MFT0		0
--#define NPCM7XX_RESET_MFT1		1
--#define NPCM7XX_RESET_MFT2		2
--#define NPCM7XX_RESET_MFT3		3
--#define NPCM7XX_RESET_MFT4		4
--#define NPCM7XX_RESET_MFT5		5
--#define NPCM7XX_RESET_MFT6		6
--#define NPCM7XX_RESET_MFT7		7
--#define NPCM7XX_RESET_MMC		8
--#define NPCM7XX_RESET_SDHC		9
--#define NPCM7XX_RESET_GFX_SYS		10
--#define NPCM7XX_RESET_AHB_PCIBRG	11
--#define NPCM7XX_RESET_VDMA		12
--#define NPCM7XX_RESET_ECE		13
--#define NPCM7XX_RESET_VCD		14
--#define NPCM7XX_RESET_OTP		16
--#define NPCM7XX_RESET_SIOX1		18
--#define NPCM7XX_RESET_SIOX2		19
--#define NPCM7XX_RESET_3DES		21
--#define NPCM7XX_RESET_PSPI1		22
--#define NPCM7XX_RESET_PSPI2		23
--#define NPCM7XX_RESET_GMAC2		25
--#define NPCM7XX_RESET_USB_HOST		26
--#define NPCM7XX_RESET_GMAC1		28
--#define NPCM7XX_RESET_CP		31
--
--/* Reset lines on IP3 reset module (NPCM7XX_RESET_IPSRST3) */
--#define NPCM7XX_RESET_PWM_M1		0
--#define NPCM7XX_RESET_SMB12		1
--#define NPCM7XX_RESET_SPIX		2
--#define NPCM7XX_RESET_SMB13		3
--#define NPCM7XX_RESET_UDC0		4
--#define NPCM7XX_RESET_UDC7		5
--#define NPCM7XX_RESET_UDC8		6
--#define NPCM7XX_RESET_UDC9		7
--#define NPCM7XX_RESET_PCI_MAILBOX	9
--#define NPCM7XX_RESET_SMB14		12
--#define NPCM7XX_RESET_SHA		13
--#define NPCM7XX_RESET_SEC_ECC		14
--#define NPCM7XX_RESET_PCIE_RC		15
--#define NPCM7XX_RESET_TIMER_10_14	16
--#define NPCM7XX_RESET_RNG		17
--#define NPCM7XX_RESET_SMB15		18
--#define NPCM7XX_RESET_SMB8		19
--#define NPCM7XX_RESET_SMB9		20
--#define NPCM7XX_RESET_SMB10		21
--#define NPCM7XX_RESET_SMB11		22
--#define NPCM7XX_RESET_ESPI		23
--#define NPCM7XX_RESET_USB_PHY_1		24
--#define NPCM7XX_RESET_USB_PHY_2		25
--
--#endif
-diff --git a/include/dt-bindings/reset/raspberrypi,firmware-reset.h b/include/dt-bindings/reset/raspberrypi,firmware-reset.h
-deleted file mode 100644
-index 1a4f4c792723..000000000000
---- a/include/dt-bindings/reset/raspberrypi,firmware-reset.h
-+++ /dev/null
-@@ -1,13 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0 */
--/*
-- * Copyright (c) 2020 Nicolas Saenz Julienne
-- * Author: Nicolas Saenz Julienne <nsaenzjulienne@suse.com>
-- */
--
--#ifndef _DT_BINDINGS_RASPBERRYPI_FIRMWARE_RESET_H
--#define _DT_BINDINGS_RASPBERRYPI_FIRMWARE_RESET_H
--
--#define RASPBERRYPI_FIRMWARE_RESET_ID_USB	0
--#define RASPBERRYPI_FIRMWARE_RESET_NUM_IDS	1
--
--#endif
-diff --git a/include/dt-bindings/reset/sama7g5-reset.h b/include/dt-bindings/reset/sama7g5-reset.h
-deleted file mode 100644
-index 2116f41d04e0..000000000000
---- a/include/dt-bindings/reset/sama7g5-reset.h
-+++ /dev/null
-@@ -1,10 +0,0 @@
--/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
--
--#ifndef __DT_BINDINGS_RESET_SAMA7G5_H
--#define __DT_BINDINGS_RESET_SAMA7G5_H
--
--#define SAMA7G5_RESET_USB_PHY1		4
--#define SAMA7G5_RESET_USB_PHY2		5
--#define SAMA7G5_RESET_USB_PHY3		6
--
--#endif /* __DT_BINDINGS_RESET_SAMA7G5_H */
-diff --git a/include/dt-bindings/reset/snps,hsdk-reset.h b/include/dt-bindings/reset/snps,hsdk-reset.h
-deleted file mode 100644
-index e1a643e4bc91..000000000000
---- a/include/dt-bindings/reset/snps,hsdk-reset.h
+index a21413324a3f..000000000000
+--- a/include/dt-bindings/input/input.h
 +++ /dev/null
 @@ -1,17 +0,0 @@
--/**
-- * This header provides index for the HSDK reset controller.
-- */
--#ifndef _DT_BINDINGS_RESET_CONTROLLER_SNPS_HSDK
--#define _DT_BINDINGS_RESET_CONTROLLER_SNPS_HSDK
--
--#define HSDK_APB_RESET	0
--#define HSDK_AXI_RESET	1
--#define HSDK_ETH_RESET	2
--#define HSDK_USB_RESET	3
--#define HSDK_SDIO_RESET	4
--#define HSDK_HDMI_RESET	5
--#define HSDK_GFX_RESET	6
--#define HSDK_DMAC_RESET	7
--#define HSDK_EBI_RESET	8
--
--#endif /*_DT_BINDINGS_RESET_CONTROLLER_SNPS_HSDK*/
-diff --git a/include/dt-bindings/reset/starfive,jh7110-crg.h b/include/dt-bindings/reset/starfive,jh7110-crg.h
-deleted file mode 100644
-index 1d596581da7b..000000000000
---- a/include/dt-bindings/reset/starfive,jh7110-crg.h
-+++ /dev/null
-@@ -1,183 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0+ */
 -/*
-- * Copyright (C) 2022 StarFive Technology Co., Ltd.
+- * This header provides constants for most input bindings.
 - *
-- * Author: Yanhong Wang <yanhong.wang@starfivetech.com>
+- * Most input bindings include key code, matrix key code format.
+- * In most cases, key code and matrix key code format uses
+- * the standard values/macro defined in this header.
 - */
 -
--#ifndef __DT_BINDINGS_RESET_STARFIVE_JH7110_H__
--#define __DT_BINDINGS_RESET_STARFIVE_JH7110_H__
+-#ifndef _DT_BINDINGS_INPUT_INPUT_H
+-#define _DT_BINDINGS_INPUT_INPUT_H
 -
--/* SYSCRG resets */
--#define JH7110_SYSRST_JTAG2APB			0
--#define JH7110_SYSRST_SYSCON			1
--#define JH7110_SYSRST_IOMUX_APB		2
--#define JH7110_SYSRST_BUS			3
--#define JH7110_SYSRST_DEBUG			4
--#define JH7110_SYSRST_CORE0			5
--#define JH7110_SYSRST_CORE1			6
--#define JH7110_SYSRST_CORE2			7
--#define JH7110_SYSRST_CORE3			8
--#define JH7110_SYSRST_CORE4			9
--#define JH7110_SYSRST_CORE0_ST			10
--#define JH7110_SYSRST_CORE1_ST			11
--#define JH7110_SYSRST_CORE2_ST			12
--#define JH7110_SYSRST_CORE3_ST			13
--#define JH7110_SYSRST_CORE4_ST			14
--#define JH7110_SYSRST_TRACE0			15
--#define JH7110_SYSRST_TRACE1			16
--#define JH7110_SYSRST_TRACE2			17
--#define JH7110_SYSRST_TRACE3			18
--#define JH7110_SYSRST_TRACE4			19
--#define JH7110_SYSRST_TRACE_COM		20
--#define JH7110_SYSRST_GPU_APB			21
--#define JH7110_SYSRST_GPU_DOMA			22
--#define JH7110_SYSRST_NOC_BUS_APB_BUS		23
--#define JH7110_SYSRST_NOC_BUS_AXICFG0_AXI	24
--#define JH7110_SYSRST_NOC_BUS_CPU_AXI		25
--#define JH7110_SYSRST_NOC_BUS_DISP_AXI		26
--#define JH7110_SYSRST_NOC_BUS_GPU_AXI		27
--#define JH7110_SYSRST_NOC_BUS_ISP_AXI		28
--#define JH7110_SYSRST_NOC_BUS_DDRC		29
--#define JH7110_SYSRST_NOC_BUS_STG_AXI		30
--#define JH7110_SYSRST_NOC_BUS_VDEC_AXI		31
+-#include "linux-event-codes.h"
 -
--#define JH7110_SYSRST_NOC_BUS_VENC_AXI		32
--#define JH7110_SYSRST_AXI_CFG1_DEC_AHB		33
--#define JH7110_SYSRST_AXI_CFG1_DEC_MAIN	34
--#define JH7110_SYSRST_AXI_CFG0_DEC_MAIN	35
--#define JH7110_SYSRST_AXI_CFG0_DEC_MAIN_DIV	36
--#define JH7110_SYSRST_AXI_CFG0_DEC_HIFI4	37
--#define JH7110_SYSRST_DDR_AXI			38
--#define JH7110_SYSRST_DDR_OSC			39
--#define JH7110_SYSRST_DDR_APB			40
--#define JH7110_SYSRST_DOM_ISP_TOP_N		41
--#define JH7110_SYSRST_DOM_ISP_TOP_AXI		42
--#define JH7110_SYSRST_DOM_VOUT_TOP_SRC		43
--#define JH7110_SYSRST_CODAJ12_AXI		44
--#define JH7110_SYSRST_CODAJ12_CORE		45
--#define JH7110_SYSRST_CODAJ12_APB		46
--#define JH7110_SYSRST_WAVE511_AXI		47
--#define JH7110_SYSRST_WAVE511_BPU		48
--#define JH7110_SYSRST_WAVE511_VCE		49
--#define JH7110_SYSRST_WAVE511_APB		50
--#define JH7110_SYSRST_VDEC_JPG_ARB_JPG		51
--#define JH7110_SYSRST_VDEC_JPG_ARB_MAIN	52
--#define JH7110_SYSRST_AXIMEM0_AXI		53
--#define JH7110_SYSRST_WAVE420L_AXI		54
--#define JH7110_SYSRST_WAVE420L_BPU		55
--#define JH7110_SYSRST_WAVE420L_VCE		56
--#define JH7110_SYSRST_WAVE420L_APB		57
--#define JH7110_SYSRST_AXIMEM1_AXI		58
--#define JH7110_SYSRST_AXIMEM2_AXI		59
--#define JH7110_SYSRST_INTMEM			60
--#define JH7110_SYSRST_QSPI_AHB			61
--#define JH7110_SYSRST_QSPI_APB			62
--#define JH7110_SYSRST_QSPI_REF			63
+-#define MATRIX_KEY(row, col, code)	\
+-	((((row) & 0xFF) << 24) | (((col) & 0xFF) << 16) | ((code) & 0xFFFF))
 -
--#define JH7110_SYSRST_SDIO0_AHB		64
--#define JH7110_SYSRST_SDIO1_AHB		65
--#define JH7110_SYSRST_GMAC1_AXI		66
--#define JH7110_SYSRST_GMAC1_AHB		67
--#define JH7110_SYSRST_MAILBOX			68
--#define JH7110_SYSRST_SPI0_APB			69
--#define JH7110_SYSRST_SPI1_APB			70
--#define JH7110_SYSRST_SPI2_APB			71
--#define JH7110_SYSRST_SPI3_APB			72
--#define JH7110_SYSRST_SPI4_APB			73
--#define JH7110_SYSRST_SPI5_APB			74
--#define JH7110_SYSRST_SPI6_APB			75
--#define JH7110_SYSRST_I2C0_APB			76
--#define JH7110_SYSRST_I2C1_APB			77
--#define JH7110_SYSRST_I2C2_APB			78
--#define JH7110_SYSRST_I2C3_APB			79
--#define JH7110_SYSRST_I2C4_APB			80
--#define JH7110_SYSRST_I2C5_APB			81
--#define JH7110_SYSRST_I2C6_APB			82
--#define JH7110_SYSRST_UART0_APB		83
--#define JH7110_SYSRST_UART0_CORE		84
--#define JH7110_SYSRST_UART1_APB		85
--#define JH7110_SYSRST_UART1_CORE		86
--#define JH7110_SYSRST_UART2_APB		87
--#define JH7110_SYSRST_UART2_CORE		88
--#define JH7110_SYSRST_UART3_APB		89
--#define JH7110_SYSRST_UART3_CORE		90
--#define JH7110_SYSRST_UART4_APB		91
--#define JH7110_SYSRST_UART4_CORE		92
--#define JH7110_SYSRST_UART5_APB		93
--#define JH7110_SYSRST_UART5_CORE		94
--#define JH7110_SYSRST_SPDIF_APB		95
--
--#define JH7110_SYSRST_PWMDAC_APB		96
--#define JH7110_SYSRST_PDM_DMIC			97
--#define JH7110_SYSRST_PDM_APB			98
--#define JH7110_SYSRST_I2SRX_APB		99
--#define JH7110_SYSRST_I2SRX_BCLK		100
--#define JH7110_SYSRST_I2STX0_APB		101
--#define JH7110_SYSRST_I2STX0_BCLK		102
--#define JH7110_SYSRST_I2STX1_APB		103
--#define JH7110_SYSRST_I2STX1_BCLK		104
--#define JH7110_SYSRST_TDM_AHB			105
--#define JH7110_SYSRST_TDM_CORE			106
--#define JH7110_SYSRST_TDM_APB			107
--#define JH7110_SYSRST_PWM_APB			108
--#define JH7110_SYSRST_WDT_APB			109
--#define JH7110_SYSRST_WDT_CORE			110
--#define JH7110_SYSRST_CAN0_APB			111
--#define JH7110_SYSRST_CAN0_CORE		112
--#define JH7110_SYSRST_CAN0_TIMER		113
--#define JH7110_SYSRST_CAN1_APB			114
--#define JH7110_SYSRST_CAN1_CORE		115
--#define JH7110_SYSRST_CAN1_TIMER		116
--#define JH7110_SYSRST_TIMER_APB		117
--#define JH7110_SYSRST_TIMER0			118
--#define JH7110_SYSRST_TIMER1			119
--#define JH7110_SYSRST_TIMER2			120
--#define JH7110_SYSRST_TIMER3			121
--#define JH7110_SYSRST_INT_CTRL_APB		122
--#define JH7110_SYSRST_TEMP_APB			123
--#define JH7110_SYSRST_TEMP_CORE		124
--#define JH7110_SYSRST_JTAG_CERTIFICATION	125
--
--#define JH7110_SYSRST_END			126
--
--/* AONCRG resets */
--#define JH7110_AONRST_GMAC0_AXI		0
--#define JH7110_AONRST_GMAC0_AHB		1
--#define JH7110_AONRST_IOMUX			2
--#define JH7110_AONRST_PMU_APB			3
--#define JH7110_AONRST_PMU_WKUP			4
--#define JH7110_AONRST_RTC_APB			5
--#define JH7110_AONRST_RTC_CAL			6
--#define JH7110_AONRST_RTC_32K			7
--
--#define JH7110_AONRST_END			8
--
--/* STGCRG resets */
--#define JH7110_STGRST_SYSCON_PRESETN		0
--#define JH7110_STGRST_HIFI4_CORE		1
--#define JH7110_STGRST_HIFI4_AXI		2
--#define JH7110_STGRST_SEC_TOP_HRESETN		3
--#define JH7110_STGRST_E24_CORE			4
--#define JH7110_STGRST_DMA1P_AXI		5
--#define JH7110_STGRST_DMA1P_AHB		6
--#define JH7110_STGRST_USB_AXI			7
--#define JH7110_STGRST_USB_APB			8
--#define JH7110_STGRST_USB_UTMI_APB		9
--#define JH7110_STGRST_USB_PWRUP		10
--#define JH7110_STGRST_PCIE0_MST0		11
--#define JH7110_STGRST_PCIE0_SLV0		12
--#define JH7110_STGRST_PCIE0_SLV		13
--#define JH7110_STGRST_PCIE0_BRG		14
--#define JH7110_STGRST_PCIE0_CORE		15
--#define JH7110_STGRST_PCIE0_APB		16
--#define JH7110_STGRST_PCIE1_MST0		17
--#define JH7110_STGRST_PCIE1_SLV0		18
--#define JH7110_STGRST_PCIE1_SLV		19
--#define JH7110_STGRST_PCIE1_BRG		20
--#define JH7110_STGRST_PCIE1_CORE		21
--#define JH7110_STGRST_PCIE1_APB		22
--
--#define JH7110_STGRST_END			23
--
--#endif /* __DT_BINDINGS_RESET_STARFIVE_JH7110_H__ */
-diff --git a/include/dt-bindings/sound/apq8016-lpass.h b/include/dt-bindings/sound/apq8016-lpass.h
+-#endif /* _DT_BINDINGS_INPUT_INPUT_H */
+diff --git a/include/dt-bindings/input/linux-event-codes.h b/include/dt-bindings/input/linux-event-codes.h
 deleted file mode 100644
-index dc605c4bc224..000000000000
---- a/include/dt-bindings/sound/apq8016-lpass.h
+index 331458c0e710..000000000000
+--- a/include/dt-bindings/input/linux-event-codes.h
 +++ /dev/null
-@@ -1,9 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0 */
--#ifndef __DT_APQ8016_LPASS_H
--#define __DT_APQ8016_LPASS_H
+@@ -1,806 +0,0 @@
+-/*
+- * Input event codes
+- *
+- *    *** IMPORTANT ***
+- * This file is not only included from C-code but also from devicetree source
+- * files. As such this file MUST only contain comments and defines.
+- *
+- * Copyright (c) 1999-2002 Vojtech Pavlik
+- * Copyright (c) 2015 Hans de Goede <hdegoede@redhat.com>
+- *
+- * This program is free software; you can redistribute it and/or modify it
+- * under the terms of the GNU General Public License version 2 as published by
+- * the Free Software Foundation.
+- */
+-#ifndef _UAPI_INPUT_EVENT_CODES_H
+-#define _UAPI_INPUT_EVENT_CODES_H
 -
--#include <dt-bindings/sound/qcom,lpass.h>
+-/*
+- * Device properties and quirks
+- */
 -
--/* NOTE: Use qcom,lpass.h to define any AIF ID's for LPASS */
+-#define INPUT_PROP_POINTER		0x00	/* needs a pointer */
+-#define INPUT_PROP_DIRECT		0x01	/* direct input devices */
+-#define INPUT_PROP_BUTTONPAD		0x02	/* has button(s) under pad */
+-#define INPUT_PROP_SEMI_MT		0x03	/* touch rectangle only */
+-#define INPUT_PROP_TOPBUTTONPAD		0x04	/* softbuttons at top of pad */
+-#define INPUT_PROP_POINTING_STICK	0x05	/* is a pointing stick */
+-#define INPUT_PROP_ACCELEROMETER	0x06	/* has accelerometer */
 -
--#endif /* __DT_APQ8016_LPASS_H */
-diff --git a/include/dt-bindings/sound/tlv320aic31xx.h b/include/dt-bindings/sound/tlv320aic31xx.h
+-#define INPUT_PROP_MAX			0x1f
+-#define INPUT_PROP_CNT			(INPUT_PROP_MAX + 1)
+-
+-/*
+- * Event types
+- */
+-
+-#define EV_SYN			0x00
+-#define EV_KEY			0x01
+-#define EV_REL			0x02
+-#define EV_ABS			0x03
+-#define EV_MSC			0x04
+-#define EV_SW			0x05
+-#define EV_LED			0x11
+-#define EV_SND			0x12
+-#define EV_REP			0x14
+-#define EV_FF			0x15
+-#define EV_PWR			0x16
+-#define EV_FF_STATUS		0x17
+-#define EV_MAX			0x1f
+-#define EV_CNT			(EV_MAX+1)
+-
+-/*
+- * Synchronization events.
+- */
+-
+-#define SYN_REPORT		0
+-#define SYN_CONFIG		1
+-#define SYN_MT_REPORT		2
+-#define SYN_DROPPED		3
+-#define SYN_MAX			0xf
+-#define SYN_CNT			(SYN_MAX+1)
+-
+-/*
+- * Keys and buttons
+- *
+- * Most of the keys/buttons are modeled after USB HUT 1.12
+- * (see http://www.usb.org/developers/hidpage).
+- * Abbreviations in the comments:
+- * AC - Application Control
+- * AL - Application Launch Button
+- * SC - System Control
+- */
+-
+-#define KEY_RESERVED		0
+-#define KEY_ESC			1
+-#define KEY_1			2
+-#define KEY_2			3
+-#define KEY_3			4
+-#define KEY_4			5
+-#define KEY_5			6
+-#define KEY_6			7
+-#define KEY_7			8
+-#define KEY_8			9
+-#define KEY_9			10
+-#define KEY_0			11
+-#define KEY_MINUS		12
+-#define KEY_EQUAL		13
+-#define KEY_BACKSPACE		14
+-#define KEY_TAB			15
+-#define KEY_Q			16
+-#define KEY_W			17
+-#define KEY_E			18
+-#define KEY_R			19
+-#define KEY_T			20
+-#define KEY_Y			21
+-#define KEY_U			22
+-#define KEY_I			23
+-#define KEY_O			24
+-#define KEY_P			25
+-#define KEY_LEFTBRACE		26
+-#define KEY_RIGHTBRACE		27
+-#define KEY_ENTER		28
+-#define KEY_LEFTCTRL		29
+-#define KEY_A			30
+-#define KEY_S			31
+-#define KEY_D			32
+-#define KEY_F			33
+-#define KEY_G			34
+-#define KEY_H			35
+-#define KEY_J			36
+-#define KEY_K			37
+-#define KEY_L			38
+-#define KEY_SEMICOLON		39
+-#define KEY_APOSTROPHE		40
+-#define KEY_GRAVE		41
+-#define KEY_LEFTSHIFT		42
+-#define KEY_BACKSLASH		43
+-#define KEY_Z			44
+-#define KEY_X			45
+-#define KEY_C			46
+-#define KEY_V			47
+-#define KEY_B			48
+-#define KEY_N			49
+-#define KEY_M			50
+-#define KEY_COMMA		51
+-#define KEY_DOT			52
+-#define KEY_SLASH		53
+-#define KEY_RIGHTSHIFT		54
+-#define KEY_KPASTERISK		55
+-#define KEY_LEFTALT		56
+-#define KEY_SPACE		57
+-#define KEY_CAPSLOCK		58
+-#define KEY_F1			59
+-#define KEY_F2			60
+-#define KEY_F3			61
+-#define KEY_F4			62
+-#define KEY_F5			63
+-#define KEY_F6			64
+-#define KEY_F7			65
+-#define KEY_F8			66
+-#define KEY_F9			67
+-#define KEY_F10			68
+-#define KEY_NUMLOCK		69
+-#define KEY_SCROLLLOCK		70
+-#define KEY_KP7			71
+-#define KEY_KP8			72
+-#define KEY_KP9			73
+-#define KEY_KPMINUS		74
+-#define KEY_KP4			75
+-#define KEY_KP5			76
+-#define KEY_KP6			77
+-#define KEY_KPPLUS		78
+-#define KEY_KP1			79
+-#define KEY_KP2			80
+-#define KEY_KP3			81
+-#define KEY_KP0			82
+-#define KEY_KPDOT		83
+-
+-#define KEY_ZENKAKUHANKAKU	85
+-#define KEY_102ND		86
+-#define KEY_F11			87
+-#define KEY_F12			88
+-#define KEY_RO			89
+-#define KEY_KATAKANA		90
+-#define KEY_HIRAGANA		91
+-#define KEY_HENKAN		92
+-#define KEY_KATAKANAHIRAGANA	93
+-#define KEY_MUHENKAN		94
+-#define KEY_KPJPCOMMA		95
+-#define KEY_KPENTER		96
+-#define KEY_RIGHTCTRL		97
+-#define KEY_KPSLASH		98
+-#define KEY_SYSRQ		99
+-#define KEY_RIGHTALT		100
+-#define KEY_LINEFEED		101
+-#define KEY_HOME		102
+-#define KEY_UP			103
+-#define KEY_PAGEUP		104
+-#define KEY_LEFT		105
+-#define KEY_RIGHT		106
+-#define KEY_END			107
+-#define KEY_DOWN		108
+-#define KEY_PAGEDOWN		109
+-#define KEY_INSERT		110
+-#define KEY_DELETE		111
+-#define KEY_MACRO		112
+-#define KEY_MUTE		113
+-#define KEY_VOLUMEDOWN		114
+-#define KEY_VOLUMEUP		115
+-#define KEY_POWER		116	/* SC System Power Down */
+-#define KEY_KPEQUAL		117
+-#define KEY_KPPLUSMINUS		118
+-#define KEY_PAUSE		119
+-#define KEY_SCALE		120	/* AL Compiz Scale (Expose) */
+-
+-#define KEY_KPCOMMA		121
+-#define KEY_HANGEUL		122
+-#define KEY_HANGUEL		KEY_HANGEUL
+-#define KEY_HANJA		123
+-#define KEY_YEN			124
+-#define KEY_LEFTMETA		125
+-#define KEY_RIGHTMETA		126
+-#define KEY_COMPOSE		127
+-
+-#define KEY_STOP		128	/* AC Stop */
+-#define KEY_AGAIN		129
+-#define KEY_PROPS		130	/* AC Properties */
+-#define KEY_UNDO		131	/* AC Undo */
+-#define KEY_FRONT		132
+-#define KEY_COPY		133	/* AC Copy */
+-#define KEY_OPEN		134	/* AC Open */
+-#define KEY_PASTE		135	/* AC Paste */
+-#define KEY_FIND		136	/* AC Search */
+-#define KEY_CUT			137	/* AC Cut */
+-#define KEY_HELP		138	/* AL Integrated Help Center */
+-#define KEY_MENU		139	/* Menu (show menu) */
+-#define KEY_CALC		140	/* AL Calculator */
+-#define KEY_SETUP		141
+-#define KEY_SLEEP		142	/* SC System Sleep */
+-#define KEY_WAKEUP		143	/* System Wake Up */
+-#define KEY_FILE		144	/* AL Local Machine Browser */
+-#define KEY_SENDFILE		145
+-#define KEY_DELETEFILE		146
+-#define KEY_XFER		147
+-#define KEY_PROG1		148
+-#define KEY_PROG2		149
+-#define KEY_WWW			150	/* AL Internet Browser */
+-#define KEY_MSDOS		151
+-#define KEY_COFFEE		152	/* AL Terminal Lock/Screensaver */
+-#define KEY_SCREENLOCK		KEY_COFFEE
+-#define KEY_ROTATE_DISPLAY	153	/* Display orientation for e.g. tablets */
+-#define KEY_DIRECTION		KEY_ROTATE_DISPLAY
+-#define KEY_CYCLEWINDOWS	154
+-#define KEY_MAIL		155
+-#define KEY_BOOKMARKS		156	/* AC Bookmarks */
+-#define KEY_COMPUTER		157
+-#define KEY_BACK		158	/* AC Back */
+-#define KEY_FORWARD		159	/* AC Forward */
+-#define KEY_CLOSECD		160
+-#define KEY_EJECTCD		161
+-#define KEY_EJECTCLOSECD	162
+-#define KEY_NEXTSONG		163
+-#define KEY_PLAYPAUSE		164
+-#define KEY_PREVIOUSSONG	165
+-#define KEY_STOPCD		166
+-#define KEY_RECORD		167
+-#define KEY_REWIND		168
+-#define KEY_PHONE		169	/* Media Select Telephone */
+-#define KEY_ISO			170
+-#define KEY_CONFIG		171	/* AL Consumer Control Configuration */
+-#define KEY_HOMEPAGE		172	/* AC Home */
+-#define KEY_REFRESH		173	/* AC Refresh */
+-#define KEY_EXIT		174	/* AC Exit */
+-#define KEY_MOVE		175
+-#define KEY_EDIT		176
+-#define KEY_SCROLLUP		177
+-#define KEY_SCROLLDOWN		178
+-#define KEY_KPLEFTPAREN		179
+-#define KEY_KPRIGHTPAREN	180
+-#define KEY_NEW			181	/* AC New */
+-#define KEY_REDO		182	/* AC Redo/Repeat */
+-
+-#define KEY_F13			183
+-#define KEY_F14			184
+-#define KEY_F15			185
+-#define KEY_F16			186
+-#define KEY_F17			187
+-#define KEY_F18			188
+-#define KEY_F19			189
+-#define KEY_F20			190
+-#define KEY_F21			191
+-#define KEY_F22			192
+-#define KEY_F23			193
+-#define KEY_F24			194
+-
+-#define KEY_PLAYCD		200
+-#define KEY_PAUSECD		201
+-#define KEY_PROG3		202
+-#define KEY_PROG4		203
+-#define KEY_DASHBOARD		204	/* AL Dashboard */
+-#define KEY_SUSPEND		205
+-#define KEY_CLOSE		206	/* AC Close */
+-#define KEY_PLAY		207
+-#define KEY_FASTFORWARD		208
+-#define KEY_BASSBOOST		209
+-#define KEY_PRINT		210	/* AC Print */
+-#define KEY_HP			211
+-#define KEY_CAMERA		212
+-#define KEY_SOUND		213
+-#define KEY_QUESTION		214
+-#define KEY_EMAIL		215
+-#define KEY_CHAT		216
+-#define KEY_SEARCH		217
+-#define KEY_CONNECT		218
+-#define KEY_FINANCE		219	/* AL Checkbook/Finance */
+-#define KEY_SPORT		220
+-#define KEY_SHOP		221
+-#define KEY_ALTERASE		222
+-#define KEY_CANCEL		223	/* AC Cancel */
+-#define KEY_BRIGHTNESSDOWN	224
+-#define KEY_BRIGHTNESSUP	225
+-#define KEY_MEDIA		226
+-
+-#define KEY_SWITCHVIDEOMODE	227	/* Cycle between available video
+-					   outputs (Monitor/LCD/TV-out/etc) */
+-#define KEY_KBDILLUMTOGGLE	228
+-#define KEY_KBDILLUMDOWN	229
+-#define KEY_KBDILLUMUP		230
+-
+-#define KEY_SEND		231	/* AC Send */
+-#define KEY_REPLY		232	/* AC Reply */
+-#define KEY_FORWARDMAIL		233	/* AC Forward Msg */
+-#define KEY_SAVE		234	/* AC Save */
+-#define KEY_DOCUMENTS		235
+-
+-#define KEY_BATTERY		236
+-
+-#define KEY_BLUETOOTH		237
+-#define KEY_WLAN		238
+-#define KEY_UWB			239
+-
+-#define KEY_UNKNOWN		240
+-
+-#define KEY_VIDEO_NEXT		241	/* drive next video source */
+-#define KEY_VIDEO_PREV		242	/* drive previous video source */
+-#define KEY_BRIGHTNESS_CYCLE	243	/* brightness up, after max is min */
+-#define KEY_BRIGHTNESS_AUTO	244	/* Set Auto Brightness: manual
+-					  brightness control is off,
+-					  rely on ambient */
+-#define KEY_BRIGHTNESS_ZERO	KEY_BRIGHTNESS_AUTO
+-#define KEY_DISPLAY_OFF		245	/* display device to off state */
+-
+-#define KEY_WWAN		246	/* Wireless WAN (LTE, UMTS, GSM, etc.) */
+-#define KEY_WIMAX		KEY_WWAN
+-#define KEY_RFKILL		247	/* Key that controls all radios */
+-
+-#define KEY_MICMUTE		248	/* Mute / unmute the microphone */
+-
+-/* Code 255 is reserved for special needs of AT keyboard driver */
+-
+-#define BTN_MISC		0x100
+-#define BTN_0			0x100
+-#define BTN_1			0x101
+-#define BTN_2			0x102
+-#define BTN_3			0x103
+-#define BTN_4			0x104
+-#define BTN_5			0x105
+-#define BTN_6			0x106
+-#define BTN_7			0x107
+-#define BTN_8			0x108
+-#define BTN_9			0x109
+-
+-#define BTN_MOUSE		0x110
+-#define BTN_LEFT		0x110
+-#define BTN_RIGHT		0x111
+-#define BTN_MIDDLE		0x112
+-#define BTN_SIDE		0x113
+-#define BTN_EXTRA		0x114
+-#define BTN_FORWARD		0x115
+-#define BTN_BACK		0x116
+-#define BTN_TASK		0x117
+-
+-#define BTN_JOYSTICK		0x120
+-#define BTN_TRIGGER		0x120
+-#define BTN_THUMB		0x121
+-#define BTN_THUMB2		0x122
+-#define BTN_TOP			0x123
+-#define BTN_TOP2		0x124
+-#define BTN_PINKIE		0x125
+-#define BTN_BASE		0x126
+-#define BTN_BASE2		0x127
+-#define BTN_BASE3		0x128
+-#define BTN_BASE4		0x129
+-#define BTN_BASE5		0x12a
+-#define BTN_BASE6		0x12b
+-#define BTN_DEAD		0x12f
+-
+-#define BTN_GAMEPAD		0x130
+-#define BTN_SOUTH		0x130
+-#define BTN_A			BTN_SOUTH
+-#define BTN_EAST		0x131
+-#define BTN_B			BTN_EAST
+-#define BTN_C			0x132
+-#define BTN_NORTH		0x133
+-#define BTN_X			BTN_NORTH
+-#define BTN_WEST		0x134
+-#define BTN_Y			BTN_WEST
+-#define BTN_Z			0x135
+-#define BTN_TL			0x136
+-#define BTN_TR			0x137
+-#define BTN_TL2			0x138
+-#define BTN_TR2			0x139
+-#define BTN_SELECT		0x13a
+-#define BTN_START		0x13b
+-#define BTN_MODE		0x13c
+-#define BTN_THUMBL		0x13d
+-#define BTN_THUMBR		0x13e
+-
+-#define BTN_DIGI		0x140
+-#define BTN_TOOL_PEN		0x140
+-#define BTN_TOOL_RUBBER		0x141
+-#define BTN_TOOL_BRUSH		0x142
+-#define BTN_TOOL_PENCIL		0x143
+-#define BTN_TOOL_AIRBRUSH	0x144
+-#define BTN_TOOL_FINGER		0x145
+-#define BTN_TOOL_MOUSE		0x146
+-#define BTN_TOOL_LENS		0x147
+-#define BTN_TOOL_QUINTTAP	0x148	/* Five fingers on trackpad */
+-#define BTN_TOUCH		0x14a
+-#define BTN_STYLUS		0x14b
+-#define BTN_STYLUS2		0x14c
+-#define BTN_TOOL_DOUBLETAP	0x14d
+-#define BTN_TOOL_TRIPLETAP	0x14e
+-#define BTN_TOOL_QUADTAP	0x14f	/* Four fingers on trackpad */
+-
+-#define BTN_WHEEL		0x150
+-#define BTN_GEAR_DOWN		0x150
+-#define BTN_GEAR_UP		0x151
+-
+-#define KEY_OK			0x160
+-#define KEY_SELECT		0x161
+-#define KEY_GOTO		0x162
+-#define KEY_CLEAR		0x163
+-#define KEY_POWER2		0x164
+-#define KEY_OPTION		0x165
+-#define KEY_INFO		0x166	/* AL OEM Features/Tips/Tutorial */
+-#define KEY_TIME		0x167
+-#define KEY_VENDOR		0x168
+-#define KEY_ARCHIVE		0x169
+-#define KEY_PROGRAM		0x16a	/* Media Select Program Guide */
+-#define KEY_CHANNEL		0x16b
+-#define KEY_FAVORITES		0x16c
+-#define KEY_EPG			0x16d
+-#define KEY_PVR			0x16e	/* Media Select Home */
+-#define KEY_MHP			0x16f
+-#define KEY_LANGUAGE		0x170
+-#define KEY_TITLE		0x171
+-#define KEY_SUBTITLE		0x172
+-#define KEY_ANGLE		0x173
+-#define KEY_ZOOM		0x174
+-#define KEY_MODE		0x175
+-#define KEY_KEYBOARD		0x176
+-#define KEY_SCREEN		0x177
+-#define KEY_PC			0x178	/* Media Select Computer */
+-#define KEY_TV			0x179	/* Media Select TV */
+-#define KEY_TV2			0x17a	/* Media Select Cable */
+-#define KEY_VCR			0x17b	/* Media Select VCR */
+-#define KEY_VCR2		0x17c	/* VCR Plus */
+-#define KEY_SAT			0x17d	/* Media Select Satellite */
+-#define KEY_SAT2		0x17e
+-#define KEY_CD			0x17f	/* Media Select CD */
+-#define KEY_TAPE		0x180	/* Media Select Tape */
+-#define KEY_RADIO		0x181
+-#define KEY_TUNER		0x182	/* Media Select Tuner */
+-#define KEY_PLAYER		0x183
+-#define KEY_TEXT		0x184
+-#define KEY_DVD			0x185	/* Media Select DVD */
+-#define KEY_AUX			0x186
+-#define KEY_MP3			0x187
+-#define KEY_AUDIO		0x188	/* AL Audio Browser */
+-#define KEY_VIDEO		0x189	/* AL Movie Browser */
+-#define KEY_DIRECTORY		0x18a
+-#define KEY_LIST		0x18b
+-#define KEY_MEMO		0x18c	/* Media Select Messages */
+-#define KEY_CALENDAR		0x18d
+-#define KEY_RED			0x18e
+-#define KEY_GREEN		0x18f
+-#define KEY_YELLOW		0x190
+-#define KEY_BLUE		0x191
+-#define KEY_CHANNELUP		0x192	/* Channel Increment */
+-#define KEY_CHANNELDOWN		0x193	/* Channel Decrement */
+-#define KEY_FIRST		0x194
+-#define KEY_LAST		0x195	/* Recall Last */
+-#define KEY_AB			0x196
+-#define KEY_NEXT		0x197
+-#define KEY_RESTART		0x198
+-#define KEY_SLOW		0x199
+-#define KEY_SHUFFLE		0x19a
+-#define KEY_BREAK		0x19b
+-#define KEY_PREVIOUS		0x19c
+-#define KEY_DIGITS		0x19d
+-#define KEY_TEEN		0x19e
+-#define KEY_TWEN		0x19f
+-#define KEY_VIDEOPHONE		0x1a0	/* Media Select Video Phone */
+-#define KEY_GAMES		0x1a1	/* Media Select Games */
+-#define KEY_ZOOMIN		0x1a2	/* AC Zoom In */
+-#define KEY_ZOOMOUT		0x1a3	/* AC Zoom Out */
+-#define KEY_ZOOMRESET		0x1a4	/* AC Zoom */
+-#define KEY_WORDPROCESSOR	0x1a5	/* AL Word Processor */
+-#define KEY_EDITOR		0x1a6	/* AL Text Editor */
+-#define KEY_SPREADSHEET		0x1a7	/* AL Spreadsheet */
+-#define KEY_GRAPHICSEDITOR	0x1a8	/* AL Graphics Editor */
+-#define KEY_PRESENTATION	0x1a9	/* AL Presentation App */
+-#define KEY_DATABASE		0x1aa	/* AL Database App */
+-#define KEY_NEWS		0x1ab	/* AL Newsreader */
+-#define KEY_VOICEMAIL		0x1ac	/* AL Voicemail */
+-#define KEY_ADDRESSBOOK		0x1ad	/* AL Contacts/Address Book */
+-#define KEY_MESSENGER		0x1ae	/* AL Instant Messaging */
+-#define KEY_DISPLAYTOGGLE	0x1af	/* Turn display (LCD) on and off */
+-#define KEY_BRIGHTNESS_TOGGLE	KEY_DISPLAYTOGGLE
+-#define KEY_SPELLCHECK		0x1b0   /* AL Spell Check */
+-#define KEY_LOGOFF		0x1b1   /* AL Logoff */
+-
+-#define KEY_DOLLAR		0x1b2
+-#define KEY_EURO		0x1b3
+-
+-#define KEY_FRAMEBACK		0x1b4	/* Consumer - transport controls */
+-#define KEY_FRAMEFORWARD	0x1b5
+-#define KEY_CONTEXT_MENU	0x1b6	/* GenDesc - system context menu */
+-#define KEY_MEDIA_REPEAT	0x1b7	/* Consumer - transport control */
+-#define KEY_10CHANNELSUP	0x1b8	/* 10 channels up (10+) */
+-#define KEY_10CHANNELSDOWN	0x1b9	/* 10 channels down (10-) */
+-#define KEY_IMAGES		0x1ba	/* AL Image Browser */
+-
+-#define KEY_DEL_EOL		0x1c0
+-#define KEY_DEL_EOS		0x1c1
+-#define KEY_INS_LINE		0x1c2
+-#define KEY_DEL_LINE		0x1c3
+-
+-#define KEY_FN			0x1d0
+-#define KEY_FN_ESC		0x1d1
+-#define KEY_FN_F1		0x1d2
+-#define KEY_FN_F2		0x1d3
+-#define KEY_FN_F3		0x1d4
+-#define KEY_FN_F4		0x1d5
+-#define KEY_FN_F5		0x1d6
+-#define KEY_FN_F6		0x1d7
+-#define KEY_FN_F7		0x1d8
+-#define KEY_FN_F8		0x1d9
+-#define KEY_FN_F9		0x1da
+-#define KEY_FN_F10		0x1db
+-#define KEY_FN_F11		0x1dc
+-#define KEY_FN_F12		0x1dd
+-#define KEY_FN_1		0x1de
+-#define KEY_FN_2		0x1df
+-#define KEY_FN_D		0x1e0
+-#define KEY_FN_E		0x1e1
+-#define KEY_FN_F		0x1e2
+-#define KEY_FN_S		0x1e3
+-#define KEY_FN_B		0x1e4
+-
+-#define KEY_BRL_DOT1		0x1f1
+-#define KEY_BRL_DOT2		0x1f2
+-#define KEY_BRL_DOT3		0x1f3
+-#define KEY_BRL_DOT4		0x1f4
+-#define KEY_BRL_DOT5		0x1f5
+-#define KEY_BRL_DOT6		0x1f6
+-#define KEY_BRL_DOT7		0x1f7
+-#define KEY_BRL_DOT8		0x1f8
+-#define KEY_BRL_DOT9		0x1f9
+-#define KEY_BRL_DOT10		0x1fa
+-
+-#define KEY_NUMERIC_0		0x200	/* used by phones, remote controls, */
+-#define KEY_NUMERIC_1		0x201	/* and other keypads */
+-#define KEY_NUMERIC_2		0x202
+-#define KEY_NUMERIC_3		0x203
+-#define KEY_NUMERIC_4		0x204
+-#define KEY_NUMERIC_5		0x205
+-#define KEY_NUMERIC_6		0x206
+-#define KEY_NUMERIC_7		0x207
+-#define KEY_NUMERIC_8		0x208
+-#define KEY_NUMERIC_9		0x209
+-#define KEY_NUMERIC_STAR	0x20a
+-#define KEY_NUMERIC_POUND	0x20b
+-#define KEY_NUMERIC_A		0x20c	/* Phone key A - HUT Telephony 0xb9 */
+-#define KEY_NUMERIC_B		0x20d
+-#define KEY_NUMERIC_C		0x20e
+-#define KEY_NUMERIC_D		0x20f
+-
+-#define KEY_CAMERA_FOCUS	0x210
+-#define KEY_WPS_BUTTON		0x211	/* WiFi Protected Setup key */
+-
+-#define KEY_TOUCHPAD_TOGGLE	0x212	/* Request switch touchpad on or off */
+-#define KEY_TOUCHPAD_ON		0x213
+-#define KEY_TOUCHPAD_OFF	0x214
+-
+-#define KEY_CAMERA_ZOOMIN	0x215
+-#define KEY_CAMERA_ZOOMOUT	0x216
+-#define KEY_CAMERA_UP		0x217
+-#define KEY_CAMERA_DOWN		0x218
+-#define KEY_CAMERA_LEFT		0x219
+-#define KEY_CAMERA_RIGHT	0x21a
+-
+-#define KEY_ATTENDANT_ON	0x21b
+-#define KEY_ATTENDANT_OFF	0x21c
+-#define KEY_ATTENDANT_TOGGLE	0x21d	/* Attendant call on or off */
+-#define KEY_LIGHTS_TOGGLE	0x21e	/* Reading light on or off */
+-
+-#define BTN_DPAD_UP		0x220
+-#define BTN_DPAD_DOWN		0x221
+-#define BTN_DPAD_LEFT		0x222
+-#define BTN_DPAD_RIGHT		0x223
+-
+-#define KEY_ALS_TOGGLE		0x230	/* Ambient light sensor */
+-
+-#define KEY_BUTTONCONFIG		0x240	/* AL Button Configuration */
+-#define KEY_TASKMANAGER		0x241	/* AL Task/Project Manager */
+-#define KEY_JOURNAL		0x242	/* AL Log/Journal/Timecard */
+-#define KEY_CONTROLPANEL		0x243	/* AL Control Panel */
+-#define KEY_APPSELECT		0x244	/* AL Select Task/Application */
+-#define KEY_SCREENSAVER		0x245	/* AL Screen Saver */
+-#define KEY_VOICECOMMAND		0x246	/* Listening Voice Command */
+-
+-#define KEY_BRIGHTNESS_MIN		0x250	/* Set Brightness to Minimum */
+-#define KEY_BRIGHTNESS_MAX		0x251	/* Set Brightness to Maximum */
+-
+-#define KEY_KBDINPUTASSIST_PREV		0x260
+-#define KEY_KBDINPUTASSIST_NEXT		0x261
+-#define KEY_KBDINPUTASSIST_PREVGROUP		0x262
+-#define KEY_KBDINPUTASSIST_NEXTGROUP		0x263
+-#define KEY_KBDINPUTASSIST_ACCEPT		0x264
+-#define KEY_KBDINPUTASSIST_CANCEL		0x265
+-
+-#define BTN_TRIGGER_HAPPY		0x2c0
+-#define BTN_TRIGGER_HAPPY1		0x2c0
+-#define BTN_TRIGGER_HAPPY2		0x2c1
+-#define BTN_TRIGGER_HAPPY3		0x2c2
+-#define BTN_TRIGGER_HAPPY4		0x2c3
+-#define BTN_TRIGGER_HAPPY5		0x2c4
+-#define BTN_TRIGGER_HAPPY6		0x2c5
+-#define BTN_TRIGGER_HAPPY7		0x2c6
+-#define BTN_TRIGGER_HAPPY8		0x2c7
+-#define BTN_TRIGGER_HAPPY9		0x2c8
+-#define BTN_TRIGGER_HAPPY10		0x2c9
+-#define BTN_TRIGGER_HAPPY11		0x2ca
+-#define BTN_TRIGGER_HAPPY12		0x2cb
+-#define BTN_TRIGGER_HAPPY13		0x2cc
+-#define BTN_TRIGGER_HAPPY14		0x2cd
+-#define BTN_TRIGGER_HAPPY15		0x2ce
+-#define BTN_TRIGGER_HAPPY16		0x2cf
+-#define BTN_TRIGGER_HAPPY17		0x2d0
+-#define BTN_TRIGGER_HAPPY18		0x2d1
+-#define BTN_TRIGGER_HAPPY19		0x2d2
+-#define BTN_TRIGGER_HAPPY20		0x2d3
+-#define BTN_TRIGGER_HAPPY21		0x2d4
+-#define BTN_TRIGGER_HAPPY22		0x2d5
+-#define BTN_TRIGGER_HAPPY23		0x2d6
+-#define BTN_TRIGGER_HAPPY24		0x2d7
+-#define BTN_TRIGGER_HAPPY25		0x2d8
+-#define BTN_TRIGGER_HAPPY26		0x2d9
+-#define BTN_TRIGGER_HAPPY27		0x2da
+-#define BTN_TRIGGER_HAPPY28		0x2db
+-#define BTN_TRIGGER_HAPPY29		0x2dc
+-#define BTN_TRIGGER_HAPPY30		0x2dd
+-#define BTN_TRIGGER_HAPPY31		0x2de
+-#define BTN_TRIGGER_HAPPY32		0x2df
+-#define BTN_TRIGGER_HAPPY33		0x2e0
+-#define BTN_TRIGGER_HAPPY34		0x2e1
+-#define BTN_TRIGGER_HAPPY35		0x2e2
+-#define BTN_TRIGGER_HAPPY36		0x2e3
+-#define BTN_TRIGGER_HAPPY37		0x2e4
+-#define BTN_TRIGGER_HAPPY38		0x2e5
+-#define BTN_TRIGGER_HAPPY39		0x2e6
+-#define BTN_TRIGGER_HAPPY40		0x2e7
+-
+-/* We avoid low common keys in module aliases so they don't get huge. */
+-#define KEY_MIN_INTERESTING	KEY_MUTE
+-#define KEY_MAX			0x2ff
+-#define KEY_CNT			(KEY_MAX+1)
+-
+-/*
+- * Relative axes
+- */
+-
+-#define REL_X			0x00
+-#define REL_Y			0x01
+-#define REL_Z			0x02
+-#define REL_RX			0x03
+-#define REL_RY			0x04
+-#define REL_RZ			0x05
+-#define REL_HWHEEL		0x06
+-#define REL_DIAL		0x07
+-#define REL_WHEEL		0x08
+-#define REL_MISC		0x09
+-#define REL_MAX			0x0f
+-#define REL_CNT			(REL_MAX+1)
+-
+-/*
+- * Absolute axes
+- */
+-
+-#define ABS_X			0x00
+-#define ABS_Y			0x01
+-#define ABS_Z			0x02
+-#define ABS_RX			0x03
+-#define ABS_RY			0x04
+-#define ABS_RZ			0x05
+-#define ABS_THROTTLE		0x06
+-#define ABS_RUDDER		0x07
+-#define ABS_WHEEL		0x08
+-#define ABS_GAS			0x09
+-#define ABS_BRAKE		0x0a
+-#define ABS_HAT0X		0x10
+-#define ABS_HAT0Y		0x11
+-#define ABS_HAT1X		0x12
+-#define ABS_HAT1Y		0x13
+-#define ABS_HAT2X		0x14
+-#define ABS_HAT2Y		0x15
+-#define ABS_HAT3X		0x16
+-#define ABS_HAT3Y		0x17
+-#define ABS_PRESSURE		0x18
+-#define ABS_DISTANCE		0x19
+-#define ABS_TILT_X		0x1a
+-#define ABS_TILT_Y		0x1b
+-#define ABS_TOOL_WIDTH		0x1c
+-
+-#define ABS_VOLUME		0x20
+-
+-#define ABS_MISC		0x28
+-
+-#define ABS_MT_SLOT		0x2f	/* MT slot being modified */
+-#define ABS_MT_TOUCH_MAJOR	0x30	/* Major axis of touching ellipse */
+-#define ABS_MT_TOUCH_MINOR	0x31	/* Minor axis (omit if circular) */
+-#define ABS_MT_WIDTH_MAJOR	0x32	/* Major axis of approaching ellipse */
+-#define ABS_MT_WIDTH_MINOR	0x33	/* Minor axis (omit if circular) */
+-#define ABS_MT_ORIENTATION	0x34	/* Ellipse orientation */
+-#define ABS_MT_POSITION_X	0x35	/* Center X touch position */
+-#define ABS_MT_POSITION_Y	0x36	/* Center Y touch position */
+-#define ABS_MT_TOOL_TYPE	0x37	/* Type of touching device */
+-#define ABS_MT_BLOB_ID		0x38	/* Group a set of packets as a blob */
+-#define ABS_MT_TRACKING_ID	0x39	/* Unique ID of initiated contact */
+-#define ABS_MT_PRESSURE		0x3a	/* Pressure on contact area */
+-#define ABS_MT_DISTANCE		0x3b	/* Contact hover distance */
+-#define ABS_MT_TOOL_X		0x3c	/* Center X tool position */
+-#define ABS_MT_TOOL_Y		0x3d	/* Center Y tool position */
+-
+-
+-#define ABS_MAX			0x3f
+-#define ABS_CNT			(ABS_MAX+1)
+-
+-/*
+- * Switch events
+- */
+-
+-#define SW_LID			0x00  /* set = lid shut */
+-#define SW_TABLET_MODE		0x01  /* set = tablet mode */
+-#define SW_HEADPHONE_INSERT	0x02  /* set = inserted */
+-#define SW_RFKILL_ALL		0x03  /* rfkill master switch, type "any"
+-					 set = radio enabled */
+-#define SW_RADIO		SW_RFKILL_ALL	/* deprecated */
+-#define SW_MICROPHONE_INSERT	0x04  /* set = inserted */
+-#define SW_DOCK			0x05  /* set = plugged into dock */
+-#define SW_LINEOUT_INSERT	0x06  /* set = inserted */
+-#define SW_JACK_PHYSICAL_INSERT 0x07  /* set = mechanical switch set */
+-#define SW_VIDEOOUT_INSERT	0x08  /* set = inserted */
+-#define SW_CAMERA_LENS_COVER	0x09  /* set = lens covered */
+-#define SW_KEYPAD_SLIDE		0x0a  /* set = keypad slide out */
+-#define SW_FRONT_PROXIMITY	0x0b  /* set = front proximity sensor active */
+-#define SW_ROTATE_LOCK		0x0c  /* set = rotate locked/disabled */
+-#define SW_LINEIN_INSERT	0x0d  /* set = inserted */
+-#define SW_MUTE_DEVICE		0x0e  /* set = device disabled */
+-#define SW_PEN_INSERTED		0x0f  /* set = pen inserted */
+-#define SW_MAX			0x10
+-#define SW_CNT			(SW_MAX+1)
+-
+-/*
+- * Misc events
+- */
+-
+-#define MSC_SERIAL		0x00
+-#define MSC_PULSELED		0x01
+-#define MSC_GESTURE		0x02
+-#define MSC_RAW			0x03
+-#define MSC_SCAN		0x04
+-#define MSC_TIMESTAMP		0x05
+-#define MSC_MAX			0x07
+-#define MSC_CNT			(MSC_MAX+1)
+-
+-/*
+- * LEDs
+- */
+-
+-#define LED_NUML		0x00
+-#define LED_CAPSL		0x01
+-#define LED_SCROLLL		0x02
+-#define LED_COMPOSE		0x03
+-#define LED_KANA		0x04
+-#define LED_SLEEP		0x05
+-#define LED_SUSPEND		0x06
+-#define LED_MUTE		0x07
+-#define LED_MISC		0x08
+-#define LED_MAIL		0x09
+-#define LED_CHARGING		0x0a
+-#define LED_MAX			0x0f
+-#define LED_CNT			(LED_MAX+1)
+-
+-/*
+- * Autorepeat values
+- */
+-
+-#define REP_DELAY		0x00
+-#define REP_PERIOD		0x01
+-#define REP_MAX			0x01
+-#define REP_CNT			(REP_MAX+1)
+-
+-/*
+- * Sounds
+- */
+-
+-#define SND_CLICK		0x00
+-#define SND_BELL		0x01
+-#define SND_TONE		0x02
+-#define SND_MAX			0x07
+-#define SND_CNT			(SND_MAX+1)
+-
+-#endif
+diff --git a/include/dt-bindings/interrupt-controller/irq.h b/include/dt-bindings/interrupt-controller/irq.h
 deleted file mode 100644
-index 4a80238ab250..000000000000
---- a/include/dt-bindings/sound/tlv320aic31xx.h
+index 33a1003c55aa..000000000000
+--- a/include/dt-bindings/interrupt-controller/irq.h
++++ /dev/null
+@@ -1,19 +0,0 @@
+-/*
+- * This header provides constants for most IRQ bindings.
+- *
+- * Most IRQ bindings include a flags cell as part of the IRQ specifier.
+- * In most cases, the format of the flags cell uses the standard values
+- * defined in this header.
+- */
+-
+-#ifndef _DT_BINDINGS_INTERRUPT_CONTROLLER_IRQ_H
+-#define _DT_BINDINGS_INTERRUPT_CONTROLLER_IRQ_H
+-
+-#define IRQ_TYPE_NONE		0
+-#define IRQ_TYPE_EDGE_RISING	1
+-#define IRQ_TYPE_EDGE_FALLING	2
+-#define IRQ_TYPE_EDGE_BOTH	(IRQ_TYPE_EDGE_FALLING | IRQ_TYPE_EDGE_RISING)
+-#define IRQ_TYPE_LEVEL_HIGH	4
+-#define IRQ_TYPE_LEVEL_LOW	8
+-
+-#endif
+diff --git a/include/dt-bindings/leds/common.h b/include/dt-bindings/leds/common.h
+deleted file mode 100644
+index 9a0d33d027ff..000000000000
+--- a/include/dt-bindings/leds/common.h
++++ /dev/null
+@@ -1,106 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * This header provides macros for the common LEDs device tree bindings.
+- *
+- * Copyright (C) 2015, Samsung Electronics Co., Ltd.
+- * Author: Jacek Anaszewski <j.anaszewski@samsung.com>
+- *
+- * Copyright (C) 2019 Jacek Anaszewski <jacek.anaszewski@gmail.com>
+- * Copyright (C) 2020 Pavel Machek <pavel@ucw.cz>
+- */
+-
+-#ifndef __DT_BINDINGS_LEDS_H
+-#define __DT_BINDINGS_LEDS_H
+-
+-/* External trigger type */
+-#define LEDS_TRIG_TYPE_EDGE	0
+-#define LEDS_TRIG_TYPE_LEVEL	1
+-
+-/* Boost modes */
+-#define LEDS_BOOST_OFF		0
+-#define LEDS_BOOST_ADAPTIVE	1
+-#define LEDS_BOOST_FIXED	2
+-
+-/* Standard LED colors */
+-#define LED_COLOR_ID_WHITE	0
+-#define LED_COLOR_ID_RED	1
+-#define LED_COLOR_ID_GREEN	2
+-#define LED_COLOR_ID_BLUE	3
+-#define LED_COLOR_ID_AMBER	4
+-#define LED_COLOR_ID_VIOLET	5
+-#define LED_COLOR_ID_YELLOW	6
+-#define LED_COLOR_ID_IR		7
+-#define LED_COLOR_ID_MULTI	8	/* For multicolor LEDs */
+-#define LED_COLOR_ID_RGB	9	/* For multicolor LEDs that can do arbitrary color,
+-					   so this would include RGBW and similar */
+-#define LED_COLOR_ID_PURPLE	10
+-#define LED_COLOR_ID_ORANGE	11
+-#define LED_COLOR_ID_PINK	12
+-#define LED_COLOR_ID_CYAN	13
+-#define LED_COLOR_ID_LIME	14
+-#define LED_COLOR_ID_MAX	15
+-
+-/* Standard LED functions */
+-/* Keyboard LEDs, usually it would be input4::capslock etc. */
+-/*   Obsolete equivalent: "shift-key-light" */
+-#define LED_FUNCTION_CAPSLOCK "capslock"
+-#define LED_FUNCTION_SCROLLLOCK "scrolllock"
+-#define LED_FUNCTION_NUMLOCK "numlock"
+-/*   Obsolete equivalents: "tpacpi::thinklight" (IBM/Lenovo Thinkpads),
+-     "lp5523:kb{1,2,3,4,5,6}" (Nokia N900) */
+-#define LED_FUNCTION_KBD_BACKLIGHT "kbd_backlight"
+-
+-/* System LEDs, usually found on system body.
+-   platform::mute (etc) is sometimes seen, :mute would be better */
+-#define LED_FUNCTION_POWER "power"
+-#define LED_FUNCTION_DISK "disk"
+-
+-/*   Obsolete: "platform:*:charging" (allwinner sun50i) */
+-#define LED_FUNCTION_CHARGING "charging"
+-/*   Used RGB notification LEDs common on phones.
+-     Obsolete equivalents: "status-led:{red,green,blue}" (Motorola Droid 4),
+-     "lp5523:{r,g,b}" (Nokia N900) */
+-#define LED_FUNCTION_STATUS "status"
+-
+-#define LED_FUNCTION_MICMUTE "micmute"
+-#define LED_FUNCTION_MUTE "mute"
+-
+-/* Used for player LEDs as found on game controllers from e.g. Nintendo, Sony. */
+-#define LED_FUNCTION_PLAYER1 "player-1"
+-#define LED_FUNCTION_PLAYER2 "player-2"
+-#define LED_FUNCTION_PLAYER3 "player-3"
+-#define LED_FUNCTION_PLAYER4 "player-4"
+-#define LED_FUNCTION_PLAYER5 "player-5"
+-
+-/* Miscelleaus functions. Use functions above if you can. */
+-#define LED_FUNCTION_ACTIVITY "activity"
+-#define LED_FUNCTION_ALARM "alarm"
+-#define LED_FUNCTION_BACKLIGHT "backlight"
+-#define LED_FUNCTION_BLUETOOTH "bluetooth"
+-#define LED_FUNCTION_BOOT "boot"
+-#define LED_FUNCTION_CPU "cpu"
+-#define LED_FUNCTION_DEBUG "debug"
+-#define LED_FUNCTION_DISK_ACTIVITY "disk-activity"
+-#define LED_FUNCTION_DISK_ERR "disk-err"
+-#define LED_FUNCTION_DISK_READ "disk-read"
+-#define LED_FUNCTION_DISK_WRITE "disk-write"
+-#define LED_FUNCTION_FAULT "fault"
+-#define LED_FUNCTION_FLASH "flash"
+-#define LED_FUNCTION_HEARTBEAT "heartbeat"
+-#define LED_FUNCTION_INDICATOR "indicator"
+-#define LED_FUNCTION_LAN "lan"
+-#define LED_FUNCTION_MAIL "mail"
+-#define LED_FUNCTION_MTD "mtd"
+-#define LED_FUNCTION_PANIC "panic"
+-#define LED_FUNCTION_PROGRAMMING "programming"
+-#define LED_FUNCTION_RX "rx"
+-#define LED_FUNCTION_SD "sd"
+-#define LED_FUNCTION_STANDBY "standby"
+-#define LED_FUNCTION_TORCH "torch"
+-#define LED_FUNCTION_TX "tx"
+-#define LED_FUNCTION_USB "usb"
+-#define LED_FUNCTION_WAN "wan"
+-#define LED_FUNCTION_WLAN "wlan"
+-#define LED_FUNCTION_WPS "wps"
+-
+-#endif /* __DT_BINDINGS_LEDS_H */
+diff --git a/include/dt-bindings/mux/mux.h b/include/dt-bindings/mux/mux.h
+deleted file mode 100644
+index 042719218dbf..000000000000
+--- a/include/dt-bindings/mux/mux.h
++++ /dev/null
+@@ -1,17 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * This header provides constants for most Multiplexer bindings.
+- *
+- * Most Multiplexer bindings specify an idle state. In most cases, the
+- * the multiplexer can be left as is when idle, and in some cases it can
+- * disconnect the input/output and leave the multiplexer in a high
+- * impedance state.
+- */
+-
+-#ifndef _DT_BINDINGS_MUX_MUX_H
+-#define _DT_BINDINGS_MUX_MUX_H
+-
+-#define MUX_IDLE_AS_IS      (-1)
+-#define MUX_IDLE_DISCONNECT (-2)
+-
+-#endif
+diff --git a/include/dt-bindings/phy/phy.h b/include/dt-bindings/phy/phy.h
+deleted file mode 100644
+index f48c9acf251e..000000000000
+--- a/include/dt-bindings/phy/phy.h
++++ /dev/null
+@@ -1,26 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0-only */
+-/*
+- *
+- * This header provides constants for the phy framework
+- *
+- * Copyright (C) 2014 STMicroelectronics
+- * Author: Gabriel Fernandez <gabriel.fernandez@st.com>
+- */
+-
+-#ifndef _DT_BINDINGS_PHY
+-#define _DT_BINDINGS_PHY
+-
+-#define PHY_NONE		0
+-#define PHY_TYPE_SATA		1
+-#define PHY_TYPE_PCIE		2
+-#define PHY_TYPE_USB2		3
+-#define PHY_TYPE_USB3		4
+-#define PHY_TYPE_UFS		5
+-#define PHY_TYPE_DP		6
+-#define PHY_TYPE_XPCS		7
+-#define PHY_TYPE_SGMII		8
+-#define PHY_TYPE_QSGMII		9
+-#define PHY_TYPE_DPHY		10
+-#define PHY_TYPE_CPHY		11
+-
+-#endif /* _DT_BINDINGS_PHY */
+diff --git a/include/dt-bindings/pwm/pwm.h b/include/dt-bindings/pwm/pwm.h
+deleted file mode 100644
+index 96f49e82253e..000000000000
+--- a/include/dt-bindings/pwm/pwm.h
 +++ /dev/null
 @@ -1,14 +0,0 @@
+-/*
+- * This header provides constants for most PWM bindings.
+- *
+- * Most PWM bindings can include a flags cell as part of the PWM specifier.
+- * In most cases, the format of the flags cell uses the standard values
+- * defined in this header.
+- */
+-
+-#ifndef _DT_BINDINGS_PWM_PWM_H
+-#define _DT_BINDINGS_PWM_PWM_H
+-
+-#define PWM_POLARITY_INVERTED			(1 << 0)
+-
+-#endif
+diff --git a/include/dt-bindings/spmi/spmi.h b/include/dt-bindings/spmi/spmi.h
+deleted file mode 100644
+index ad4a43481de4..000000000000
+--- a/include/dt-bindings/spmi/spmi.h
++++ /dev/null
+@@ -1,10 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0-only */
+-/* Copyright (c) 2013, The Linux Foundation. All rights reserved.
+- */
+-#ifndef __DT_BINDINGS_SPMI_H
+-#define __DT_BINDINGS_SPMI_H
+-
+-#define SPMI_USID	0
+-#define SPMI_GSID	1
+-
+-#endif
+diff --git a/include/dt-bindings/thermal/thermal.h b/include/dt-bindings/thermal/thermal.h
+deleted file mode 100644
+index 7871e5f52b1c..000000000000
+--- a/include/dt-bindings/thermal/thermal.h
++++ /dev/null
+@@ -1,15 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0-only */
+-/*
+- * This header provides constants for most thermal bindings.
+- *
+- * Copyright (C) 2013 Texas Instruments
+- *	Eduardo Valentin <eduardo.valentin@ti.com>
+- */
+-
+-#ifndef _DT_BINDINGS_THERMAL_THERMAL_H
+-#define _DT_BINDINGS_THERMAL_THERMAL_H
+-
+-/* On cooling devices upper and lower limits */
+-#define THERMAL_NO_LIMIT		(~0)
+-
+-#endif
+diff --git a/include/dt-bindings/usb/pd.h b/include/dt-bindings/usb/pd.h
+deleted file mode 100644
+index 985f2bbd4d24..000000000000
+--- a/include/dt-bindings/usb/pd.h
++++ /dev/null
+@@ -1,88 +0,0 @@
 -/* SPDX-License-Identifier: GPL-2.0 */
--#ifndef __DT_TLV320AIC31XX_H
--#define __DT_TLV320AIC31XX_H
+-#ifndef __DT_POWER_DELIVERY_H
+-#define __DT_POWER_DELIVERY_H
 -
--#define MICBIAS_2_0V		1
--#define MICBIAS_2_5V		2
--#define MICBIAS_AVDDV		3
+-/* Power delivery Power Data Object definitions */
+-#define PDO_TYPE_FIXED		0
+-#define PDO_TYPE_BATT		1
+-#define PDO_TYPE_VAR		2
+-#define PDO_TYPE_APDO		3
 -
--#define PLL_CLKIN_MCLK		0x00
--#define PLL_CLKIN_BCLK		0x01
--#define PLL_CLKIN_GPIO1		0x02
--#define PLL_CLKIN_DIN		0x03
+-#define PDO_TYPE_SHIFT		30
+-#define PDO_TYPE_MASK		0x3
 -
--#endif /* __DT_TLV320AIC31XX_H */
+-#define PDO_TYPE(t)	((t) << PDO_TYPE_SHIFT)
+-
+-#define PDO_VOLT_MASK		0x3ff
+-#define PDO_CURR_MASK		0x3ff
+-#define PDO_PWR_MASK		0x3ff
+-
+-#define PDO_FIXED_DUAL_ROLE	(1 << 29) /* Power role swap supported */
+-#define PDO_FIXED_SUSPEND	(1 << 28) /* USB Suspend supported (Source) */
+-#define PDO_FIXED_HIGHER_CAP	(1 << 28) /* Requires more than vSafe5V (Sink) */
+-#define PDO_FIXED_EXTPOWER	(1 << 27) /* Externally powered */
+-#define PDO_FIXED_USB_COMM	(1 << 26) /* USB communications capable */
+-#define PDO_FIXED_DATA_SWAP	(1 << 25) /* Data role swap supported */
+-#define PDO_FIXED_VOLT_SHIFT	10	/* 50mV units */
+-#define PDO_FIXED_CURR_SHIFT	0	/* 10mA units */
+-
+-#define PDO_FIXED_VOLT(mv)	((((mv) / 50) & PDO_VOLT_MASK) << PDO_FIXED_VOLT_SHIFT)
+-#define PDO_FIXED_CURR(ma)	((((ma) / 10) & PDO_CURR_MASK) << PDO_FIXED_CURR_SHIFT)
+-
+-#define PDO_FIXED(mv, ma, flags)			\
+-	(PDO_TYPE(PDO_TYPE_FIXED) | (flags) |		\
+-	 PDO_FIXED_VOLT(mv) | PDO_FIXED_CURR(ma))
+-
+-#define VSAFE5V 5000 /* mv units */
+-
+-#define PDO_BATT_MAX_VOLT_SHIFT	20	/* 50mV units */
+-#define PDO_BATT_MIN_VOLT_SHIFT	10	/* 50mV units */
+-#define PDO_BATT_MAX_PWR_SHIFT	0	/* 250mW units */
+-
+-#define PDO_BATT_MIN_VOLT(mv) ((((mv) / 50) & PDO_VOLT_MASK) << PDO_BATT_MIN_VOLT_SHIFT)
+-#define PDO_BATT_MAX_VOLT(mv) ((((mv) / 50) & PDO_VOLT_MASK) << PDO_BATT_MAX_VOLT_SHIFT)
+-#define PDO_BATT_MAX_POWER(mw) ((((mw) / 250) & PDO_PWR_MASK) << PDO_BATT_MAX_PWR_SHIFT)
+-
+-#define PDO_BATT(min_mv, max_mv, max_mw)			\
+-	(PDO_TYPE(PDO_TYPE_BATT) | PDO_BATT_MIN_VOLT(min_mv) |	\
+-	 PDO_BATT_MAX_VOLT(max_mv) | PDO_BATT_MAX_POWER(max_mw))
+-
+-#define PDO_VAR_MAX_VOLT_SHIFT	20	/* 50mV units */
+-#define PDO_VAR_MIN_VOLT_SHIFT	10	/* 50mV units */
+-#define PDO_VAR_MAX_CURR_SHIFT	0	/* 10mA units */
+-
+-#define PDO_VAR_MIN_VOLT(mv) ((((mv) / 50) & PDO_VOLT_MASK) << PDO_VAR_MIN_VOLT_SHIFT)
+-#define PDO_VAR_MAX_VOLT(mv) ((((mv) / 50) & PDO_VOLT_MASK) << PDO_VAR_MAX_VOLT_SHIFT)
+-#define PDO_VAR_MAX_CURR(ma) ((((ma) / 10) & PDO_CURR_MASK) << PDO_VAR_MAX_CURR_SHIFT)
+-
+-#define PDO_VAR(min_mv, max_mv, max_ma)				\
+-	(PDO_TYPE(PDO_TYPE_VAR) | PDO_VAR_MIN_VOLT(min_mv) |	\
+-	 PDO_VAR_MAX_VOLT(max_mv) | PDO_VAR_MAX_CURR(max_ma))
+-
+-#define APDO_TYPE_PPS		0
+-
+-#define PDO_APDO_TYPE_SHIFT	28	/* Only valid value currently is 0x0 - PPS */
+-#define PDO_APDO_TYPE_MASK	0x3
+-
+-#define PDO_APDO_TYPE(t)	((t) << PDO_APDO_TYPE_SHIFT)
+-
+-#define PDO_PPS_APDO_MAX_VOLT_SHIFT	17	/* 100mV units */
+-#define PDO_PPS_APDO_MIN_VOLT_SHIFT	8	/* 100mV units */
+-#define PDO_PPS_APDO_MAX_CURR_SHIFT	0	/* 50mA units */
+-
+-#define PDO_PPS_APDO_VOLT_MASK	0xff
+-#define PDO_PPS_APDO_CURR_MASK	0x7f
+-
+-#define PDO_PPS_APDO_MIN_VOLT(mv)	\
+-	((((mv) / 100) & PDO_PPS_APDO_VOLT_MASK) << PDO_PPS_APDO_MIN_VOLT_SHIFT)
+-#define PDO_PPS_APDO_MAX_VOLT(mv)	\
+-	((((mv) / 100) & PDO_PPS_APDO_VOLT_MASK) << PDO_PPS_APDO_MAX_VOLT_SHIFT)
+-#define PDO_PPS_APDO_MAX_CURR(ma)	\
+-	((((ma) / 50) & PDO_PPS_APDO_CURR_MASK) << PDO_PPS_APDO_MAX_CURR_SHIFT)
+-
+-#define PDO_PPS_APDO(min_mv, max_mv, max_ma)					\
+-	(PDO_TYPE(PDO_TYPE_APDO) | PDO_APDO_TYPE(APDO_TYPE_PPS) |		\
+-	 PDO_PPS_APDO_MIN_VOLT(min_mv) | PDO_PPS_APDO_MAX_VOLT(max_mv) |	\
+-	 PDO_PPS_APDO_MAX_CURR(max_ma))
+-
+- #endif /* __DT_POWER_DELIVERY_H */
 
 -- 
 2.44.0
