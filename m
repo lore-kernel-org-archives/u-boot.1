@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 381ACC54E49
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 07:04:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E882C48BF6
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 09:01:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ADE2887F72;
-	Mon,  4 Mar 2024 08:04:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BAB9587DE9;
+	Mon,  4 Mar 2024 10:01:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Vnr0Izbn";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hQu9scQr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B39C38752B; Mon,  4 Mar 2024 08:04:36 +0100 (CET)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id DEFD9879F6; Mon,  4 Mar 2024 10:01:20 +0100 (CET)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 02FEF87F86
- for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 08:04:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D709083414
+ for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 10:01:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dan.carpenter@linaro.org
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-33e2774bdc7so1783519f8f.0
- for <u-boot@lists.denx.de>; Sun, 03 Mar 2024 23:04:33 -0800 (PST)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-412e66b801fso1968785e9.3
+ for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 01:01:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709535873; x=1710140673; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:message-id:subject:cc
- :to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=AwgvDN2NhfxhFl7uUAk9VyhpvKRScbwGY9nc/7nulb0=;
- b=Vnr0IzbnMWjjRBlWGWYev6johf0BuXpXVCeqYZBbEboBejCP2Xgov0wADEglRV84oN
- 9UfdP/0xe5pWAruF5qhsq4gE3LVz+lSIx1ZWhFIShR6FwVdem67e3zZYLgH0yUFppDZy
- uxiL9E6rsMQ4+6zyCrCwpNaUBnEpsAXCtZ20oxtf/sAGAkz/9hoAADgYoEXbbB/JjvkV
- 9zklgDadKXul/wdCo2CStfqI1nSFciK5Beh4d/rOmsV1aKDFYflr7T+W4++LTL+iG0ex
- u4zGDL6aXYPJ28L2vKj1Lf0s+H+m1H7ok+opxgLkhskdTcFIsb2YL56U74/Yp+qu4b6P
- s0lw==
+ d=linaro.org; s=google; t=1709542877; x=1710147677; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ucPxrOriUcUlH5E7vxRKM1rV9RP2tSvTjk1JzoV6q+o=;
+ b=hQu9scQrBTi9/YmIfUiE46lu8vCtmmx3ZVhUKRHktMKNRdNeTBiDD/ekm4P+/tcCE0
+ jnqWLKAnfrTh59oVfgM9IUj2T7XiYlfPZPDfk9z12e4vixZgWlV9HLzdEhVd0weMan/9
+ Ty2gZqDOT60SyIXdbGxEE/yQrgEQmYWrRYgKyL8D+z80/FQ6mexuD8K1jXv1RnzdLL16
+ FB+xYge5/t5BFYcRK44Ofyp1Q3BMB9qSxSZJ6SAEk8kHqxnYYCFikP1a1aoMChhvVKf5
+ L431WxJiInuZBPJQL+Jcr1vK8+Y+5Dl4Vzk9M4ABiOrBezPzL9xqWgqxuxYPx3rrBbRA
+ sAcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709535873; x=1710140673;
- h=in-reply-to:content-disposition:mime-version:message-id:subject:cc
- :to:from:date:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1709542877; x=1710147677;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=AwgvDN2NhfxhFl7uUAk9VyhpvKRScbwGY9nc/7nulb0=;
- b=aqs8cr02UF+1t21QJCx0Yie4cEhp+5hYHXDlty8ldALk8sfFvrZ9qsMsmZTGoDaNP8
- qRwevC+EYv7qPUQ9fihJCVTEckpKdZSvEsUdLPGip96FxGLY/8Ggv4jhBnUySAI4845K
- bdpKTbpf9H4bc5xHxbv6fnjbmzz9WpJ7YXOeWCDGF4ENgaknRU3R0j8AI844ElyW0axM
- zGpXVf6D01WpD2hEb5hcb7s279duiSamswZ5u0W6dK2wCYQgB31+ppEP5I9WZca1J071
- wtYc1UXUelAZvTrOgiizTyImjGkKBvXOklbnKxcjBwr1hcRcJGrnhBLV3ZwhJCN+modp
- n67g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWs+dH8NtZW7/G3zPyFMPkevSKtqanGRZauw3tzyoownhmRogINcjF0BHOPcuKCd178xQU+3M8qZ3umKl1J0ylQKXctig==
-X-Gm-Message-State: AOJu0Yy7lvyver5mKPKgLruWTLt1TgNOOU4xJD/wQZhkToRprdaLwB6A
- FIJFtX3X4WS1tIzw5cWm+gfvyK22OF+luoyl8SEbuK9kpPDhmXlqseBUkD1pKYQ=
-X-Google-Smtp-Source: AGHT+IFA8XEBCfDJNHEEp3l1PCPuw8FcyjhLiEae/hW01uS1Od/WXUqIWJYlwAwQrKznRxr2cKeLow==
-X-Received: by 2002:adf:9d93:0:b0:33d:9232:5aed with SMTP id
- p19-20020adf9d93000000b0033d92325aedmr5752943wre.52.1709535873528; 
- Sun, 03 Mar 2024 23:04:33 -0800 (PST)
-Received: from localhost ([102.222.70.76]) by smtp.gmail.com with ESMTPSA id
- b11-20020a5d634b000000b0033d6fe3f6absm11233105wrw.62.2024.03.03.23.04.32
+ bh=ucPxrOriUcUlH5E7vxRKM1rV9RP2tSvTjk1JzoV6q+o=;
+ b=LJmkKEyKZqPyrsIVkAmQm4vlKnv91ZQQs6YIGoLdv9HcBYTUTTu477fdGYm/D2fgX/
+ 3WZZynOW7FBAVlcOK3sLIKhRrSOlaPvZmFe2nX+vQS1E/fy9BqYj+Rqz0AQpHClgikHj
+ Ry2oHHigRCrz2hWoQc2L6++09qoa87TNshj56DUEomAZ1MaAuWJhvX0b0gtbMbx3E5Wz
+ gLLgXxIcxFTln3wdVOgd2CXO2WJn2xy/z/pZ28r1jqIy9k4EM5P285HqpzAzO3LiP7Zk
+ DHsoFWt4xLXJQ1ZkasXL2IAD+I3/ZTbVqQ0yFfCVzcV3i4ucnz48FOYSa8lW7WgCfBWo
+ D2dQ==
+X-Gm-Message-State: AOJu0Yx/mDoUFAiKiaTBMHa3I9r6HSQ4BiOVxiSuZUsOPcMeVkZ009dJ
+ E9rrrkARJQEO9km1jaikRvDbxguyUCSd4Ndf2xLhv25HK+SNDB9TW+Nto4HQQr4AKMdPcj+xzcT
+ wRsA=
+X-Google-Smtp-Source: AGHT+IFN5Bl2KdXLsbGqWVi6dDxDnNrqO4prRCHQvosA/1Ey5wMbg5d1I2lgFJa4rh5UG5iwrkDx5A==
+X-Received: by 2002:a05:600c:3509:b0:412:ddd3:8372 with SMTP id
+ h9-20020a05600c350900b00412ddd38372mr2210655wmq.38.1709542877163; 
+ Mon, 04 Mar 2024 01:01:17 -0800 (PST)
+Received: from hades.. (ppp046103107123.access.hol.gr. [46.103.107.123])
+ by smtp.gmail.com with ESMTPSA id
+ t11-20020a05600c198b00b00412c8117a34sm10281167wmq.47.2024.03.04.01.01.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 03 Mar 2024 23:04:33 -0800 (PST)
-Date: Mon, 4 Mar 2024 10:04:29 +0300
-From: Dan Carpenter <dan.carpenter@linaro.org>
-To: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Andrew Davis <afd@ti.com>, Andre Przywara <andre.przywara@arm.com>,
- Bin Meng <bmeng@tinylab.org>, Linus Walleij <linus.walleij@linaro.org>,
- Fabio Estevam <festevam@denx.de>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Yang Xiwen <forbidden405@outlook.com>,
- =?iso-8859-1?B?Q3Pza+Fz?= Bence <csokas.bence@prolan.hu>,
- Peng Fan <peng.fan@nxp.com>, u-boot@lists.denx.de
-Subject: [PATCH v2 2/2] arm64: Enable CONFIG_64BIT for static analysis
-Message-ID: <6a7328b8-eb22-4ad6-a1d6-eaecd2f8a067@moroto.mountain>
+ Mon, 04 Mar 2024 01:01:16 -0800 (PST)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: u-boot@lists.denx.de,
+	trini@konsulko.com,
+	cfsworks@gmail.com
+Cc: caleb.connolly@linaro.org, sumit.garg@linaro.org,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Yegor Yefremov <yegorslists@googlemail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Shiji Yang <yangshiji66@outlook.com>, Bin Meng <bmeng@tinylab.org>
+Subject: [PATCH 0/6] Clean up arm linker scripts
+Date: Mon,  4 Mar 2024 11:01:05 +0200
+Message-Id: <20240304090113.1410575-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.37.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <1cb3255b-5ed7-443b-8a02-6e998126d417@moroto.mountain>
-X-Mailer: git-send-email haha only kidding
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,33 +98,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In the Makefile there is a line that says this:
+The arm linker scripts had a mix of symbols and C defined variables in an
+effort to emit relative references instead of absolute ones e.g [0]. A
+linker bug prevented us from doing so [1] -- fixed since 2016.
+This has led to confusion over the years, ending up with mixed section
+definitions. Some sections are defined with overlays and different
+definitions between v7 and v8 architectures.
+For example __efi_runtime_rel_start/end is defined as a linker symbol for
+armv8 and a C variable in armv7.
 
-    # the checker needs the correct machine size
-    CHECKFLAGS += $(if $(CONFIG_64BIT),-m64,-m32)
+Linker scripts nowadays can emit relative references, as long as the symbol
+definition is contained within the section definition. So let's switch most
+of the C defined variables and clean up the arm sections.c file.
+There's still a few symbols remaining -- __secure_start/end,
+__secure_stack_start/end and __end which can be cleaned up
+in a followup series.
 
-Set CONFIG_64BIT for ARM64 so that we pass -m64 to the static checkers
-instead of -m32.
+The resulting binary (tested in QEMU v7/v8) had no size differences apart from
+the emited sections and object types of those variables. I've also added prints
+throughout the U-Boot init sequence. The offsets and delta for 'end - start'
+section sizes is unchanged.
 
-Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
----
-v2: split the patch into two patches
+For example on QEMU v8:
+$~ ./scripts/bloat-o-meter u-boot u-boot.new
+add/remove: 0/0 grow/shrink: 0/0 up/down: 0/0 (0)
+Function                                     old     new   delta
+Total: Before=798861, After=798861, chg +0.00%
 
- arch/arm/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+$~ readelf -sW u-boot | grep bss_s
+    12: 00000000001029b8     0 SECTION LOCAL  DEFAULT   12 .bss_start
+  8088: 0000000000000018     0 NOTYPE  GLOBAL DEFAULT    1 _bss_start_ofs
+  8376: 00000000001029b8     0 OBJECT  GLOBAL DEFAULT   12 __bss_start
+$~ readelf -sW u-boot.new | grep bss_s
+  8085: 0000000000000018     0 NOTYPE  GLOBAL DEFAULT    1 _bss_start_ofs
+  8373: 00000000001029b8     0 NOTYPE  GLOBAL DEFAULT   12 __bss_start
 
-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index fde85dc0d537..76d6a8cc6886 100644
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -6,6 +6,7 @@ config SYS_ARCH
- 
- config ARM64
- 	bool
-+	select 64BIT
- 	select PHYS_64BIT
- 	select SYS_CACHE_SHIFT_6
- 	imply SPL_SEPARATE_BSS
--- 
-2.43.0
+For QEMU v7 the differences are a bit bigger but only affect the variables
+placed in the .bss section because that was defined as an OVERLAY in the
+existing linker script.
+For example:
+$~ nm u-boot | grep tftp_prev_block
+000ca0dc ? tftp_prev_block
+$~ nm u-boot.new | grep tftp_prev_block
+000e0a5c b tftp_prev_block -----> The symbol is now placed into .bss
+
+It's worth noting that since the efi regions are affected by the change, booting
+with EFI is preferable while testing. Booting the kernel only should be enough
+since the efi stub and the kernel proper do request boottime and runtime
+services respectively.
+Something along the lines of
+> virtio scan && load virtio 0 $kernel_addr_r Image && bootefi $kernel_addr_r
+will work for QEMU aarch64.
+
+Tested platforms:
+- QEMU aarch64
+- Xilinx kv260 kria starter kit & zynq
+- QEMU armv7
+- STM32MP157C-DK2
+
+[0] commit 3ebd1cbc49f0 ("arm: make __bss_start and __bss_end__ compiler-generated")
+[1] binutils commit 6b3b0ab89663 ("Make linker assigned symbol dynamic only for shared object")
+
+Ilias Apalodimas (6):
+  arm: baltos: remove custom linker script
+  arm: clean up v7 and v8 linker scripts for bss_start/end
+  arm: fix __efi_runtime_rel_start/end definitions
+  arm: clean up v7 and v8 linker scripts for __rel_dyn_start/end
+  arm: fix __efi_runtime_start/end definitions
+  arm: move image_copy_start/end to linker symbols
+
+ arch/arm/cpu/armv8/u-boot-spl.lds        |  14 +--
+ arch/arm/cpu/armv8/u-boot.lds            |  45 ++------
+ arch/arm/cpu/u-boot.lds                  |  74 +++----------
+ arch/arm/lib/sections.c                  |  10 --
+ arch/arm/mach-rockchip/u-boot-tpl-v8.lds |  22 +---
+ arch/arm/mach-zynq/u-boot.lds            |  72 +++----------
+ board/vscom/baltos/u-boot.lds            | 128 -----------------------
+ include/asm-generic/sections.h           |   3 +
+ lib/efi_loader/efi_runtime.c             |   1 +
+ 9 files changed, 50 insertions(+), 319 deletions(-)
+ delete mode 100644 board/vscom/baltos/u-boot.lds
+
+--
+
+Changes since RFC:
+- Rebase on top of -next and get rid of the dragonboard linker script changes.
+  Caleb removed that file completely
+- Rewrite some commit messages to include the binutils bug details (thanks Sam)
+
+2.37.2
 
