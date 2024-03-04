@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A2C8C5478C
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 11:31:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0994EC5478C
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 11:31:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6396487FB6;
+	by phobos.denx.de (Postfix) with ESMTP id E161687FB2;
 	Mon,  4 Mar 2024 12:30:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 96CCF87F9E; Mon,  4 Mar 2024 12:30:42 +0100 (CET)
-Received: from smtp-42ab.mail.infomaniak.ch (smtp-42ab.mail.infomaniak.ch
- [84.16.66.171])
+ id C1BCA87F9E; Mon,  4 Mar 2024 12:30:42 +0100 (CET)
+Received: from smtp-42a9.mail.infomaniak.ch (smtp-42a9.mail.infomaniak.ch
+ [IPv6:2001:1600:7:10::42a9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E59987F7E
- for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 12:30:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C9B187F85
+ for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 12:30:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
  [10.7.10.107])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4TpGhn1RDXz8Gf;
- Mon,  4 Mar 2024 12:30:33 +0100 (CET)
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4TpGhq34z9z8lf;
+ Mon,  4 Mar 2024 12:30:35 +0100 (CET)
 Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4TpGhm3LKkzrCr; Mon,  4 Mar 2024 12:30:32 +0100 (CET)
+ id 4TpGhp2zQ7zqZW; Mon,  4 Mar 2024 12:30:34 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Mon, 04 Mar 2024 12:29:56 +0100
-Subject: [PATCH v3 02/16] regulator: rk8xx: remove unused functions
+Date: Mon, 04 Mar 2024 12:29:59 +0100
+Subject: [PATCH v3 05/16] power: rk8xx: add support for RK806
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240304-rk3588-saradc-v3-2-7424e2ed5d3b@theobroma-systems.com>
+Message-Id: <20240304-rk3588-saradc-v3-5-7424e2ed5d3b@theobroma-systems.com>
 References: <20240304-rk3588-saradc-v3-0-7424e2ed5d3b@theobroma-systems.com>
 In-Reply-To: <20240304-rk3588-saradc-v3-0-7424e2ed5d3b@theobroma-systems.com>
 To: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>, 
@@ -67,75 +67,922 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 
-Those two functions had their last user removed in commit f9c68a566c4d
-("rockchip: phycore_rk3288: remove phycore_init() function") part of
-v2023.01 release, so let's do some cleanup here.
+This adds support for RK806, only the SPI variant has been tested.
+
+The communication "protocol" over SPI is the following:
+ - write three bytes:
+   - 1 byte: [0:3] length of the payload, [6] Enable CRC, [7] Write
+   - 1 byte: LSB register address
+   - 1 byte: MSB register address
+ - write/read length of payload
+
+The CRC is always disabled for now.
+
+The RK806 technically supports I2C as well, and this should be able to
+support it without any change, but it wasn't tested.
+
+The DT node name prefix for the buck converters has changed in the
+Device Tree and is now dcdc-reg. The logic for buck converters is
+however manageable within the current logic inside the rk8xx regulator
+driver. The same cannot be said for the NLDO and PLDO.
+
+Because pmic_bind_children() parses the DT nodes and extracts the LDO
+index from the DT node name, NLDO and PLDO will have overlapping
+indices. Therefore, we need a separate logic from the already-existing
+ldo callbacks. Let's reuse as much as possible though.
 
 Cc: Quentin Schulz <foss+uboot@0leil.net>
 Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 ---
- drivers/power/regulator/rk8xx.c | 31 -------------------------------
- include/power/rk8xx_pmic.h      |  2 --
- 2 files changed, 33 deletions(-)
+ drivers/power/pmic/rk8xx.c      |  91 +++++++
+ drivers/power/regulator/rk8xx.c | 514 +++++++++++++++++++++++++++++++++++++++-
+ include/power/rk8xx_pmic.h      |  19 ++
+ 3 files changed, 622 insertions(+), 2 deletions(-)
 
+diff --git a/drivers/power/pmic/rk8xx.c b/drivers/power/pmic/rk8xx.c
+index 4e3a17337ee..82b5e0cbe32 100644
+--- a/drivers/power/pmic/rk8xx.c
++++ b/drivers/power/pmic/rk8xx.c
+@@ -9,8 +9,10 @@
+ #include <dm/lists.h>
+ #include <errno.h>
+ #include <log.h>
++#include <linux/bitfield.h>
+ #include <power/rk8xx_pmic.h>
+ #include <power/pmic.h>
++#include <spi.h>
+ #include <sysreset.h>
+ 
+ static int rk8xx_sysreset_request(struct udevice *dev, enum sysreset_t type)
+@@ -32,6 +34,10 @@ static int rk8xx_sysreset_request(struct udevice *dev, enum sysreset_t type)
+ 		pmic_clrsetbits(dev->parent, RK817_REG_SYS_CFG3, 0,
+ 				BIT(0));
+ 		break;
++	case RK806_ID:
++		pmic_clrsetbits(dev->parent, RK806_REG_SYS_CFG3, 0,
++				BIT(0));
++		break;
+ 	default:
+ 		printf("Unknown PMIC RK%x: Cannot shutdown\n",
+ 		       priv->variant);
+@@ -83,6 +89,11 @@ void rk8xx_off_for_plugin(struct udevice *dev)
+ 	}
+ }
+ 
++static struct reg_data rk806_init_reg[] = {
++	/* RST_FUN */
++	{ RK806_REG_SYS_CFG3, GENMASK(7, 6), BIT(7)},
++};
++
+ static struct reg_data rk817_init_reg[] = {
+ /* enable the under-voltage protection,
+  * the under-voltage protection will shutdown the LDO3 and reset the PMIC
+@@ -92,7 +103,10 @@ static struct reg_data rk817_init_reg[] = {
+ 
+ static const struct pmic_child_info pmic_children_info[] = {
+ 	{ .prefix = "DCDC_REG", .driver = "rk8xx_buck"},
++	{ .prefix = "dcdc-reg", .driver = "rk8xx_buck"},
+ 	{ .prefix = "LDO_REG", .driver = "rk8xx_ldo"},
++	{ .prefix = "nldo-reg", .driver = "rk8xx_nldo"},
++	{ .prefix = "pldo-reg", .driver = "rk8xx_pldo"},
+ 	{ .prefix = "SWITCH_REG", .driver = "rk8xx_switch"},
+ 	{ },
+ };
+@@ -102,11 +116,51 @@ static int rk8xx_reg_count(struct udevice *dev)
+ 	return RK808_NUM_OF_REGS;
+ }
+ 
++#if CONFIG_IS_ENABLED(SPI) && CONFIG_IS_ENABLED(DM_SPI)
++struct rk806_cmd {
++	char	len: 4; /* Payload size in bytes - 1 */
++	char	reserved: 2;
++	char	crc_en: 1;
++	char	op: 1; /* READ=0; WRITE=1; */
++	char	reg_l;
++#define REG_L_MASK	GENMASK(7, 0)
++	char	reg_h;
++#define REG_H_MASK	GENMASK(15, 8)
++};
++#endif
++
+ static int rk8xx_write(struct udevice *dev, uint reg, const uint8_t *buff,
+ 			  int len)
+ {
+ 	int ret;
+ 
++#if CONFIG_IS_ENABLED(SPI) && CONFIG_IS_ENABLED(DM_SPI)
++	if (device_get_uclass_id(dev->parent) == UCLASS_SPI) {
++		struct spi_slave *spi = dev_get_parent_priv(dev);
++		struct rk806_cmd cmd = {
++			.op = 1,
++			.len = len - 1,
++			.reg_l = FIELD_GET(REG_L_MASK, reg),
++			.reg_h = FIELD_GET(REG_H_MASK, reg),
++		};
++
++		ret = dm_spi_claim_bus(dev);
++		if (ret) {
++			debug("Couldn't claim bus for device: %p!\n", dev);
++			return ret;
++		}
++
++		ret = spi_write_then_read(spi, (u8 *)&cmd, sizeof(cmd), buff, NULL, len);
++		if (ret)
++			debug("write error to device: %p register: %#x!\n",
++			      dev, reg);
++
++		dm_spi_release_bus(dev);
++
++		return ret;
++	}
++#endif
++
+ 	ret = dm_i2c_write(dev, reg, buff, len);
+ 	if (ret) {
+ 		debug("write error to device: %p register: %#x!\n", dev, reg);
+@@ -120,6 +174,33 @@ static int rk8xx_read(struct udevice *dev, uint reg, uint8_t *buff, int len)
+ {
+ 	int ret;
+ 
++#if CONFIG_IS_ENABLED(SPI) && CONFIG_IS_ENABLED(DM_SPI)
++	if (device_get_uclass_id(dev->parent) == UCLASS_SPI) {
++		struct spi_slave *spi = dev_get_parent_priv(dev);
++		struct rk806_cmd cmd = {
++			.op = 0,
++			.len = len - 1,
++			.reg_l = FIELD_GET(REG_L_MASK, reg),
++			.reg_h = FIELD_GET(REG_H_MASK, reg),
++		};
++
++		ret = dm_spi_claim_bus(dev);
++		if (ret) {
++			debug("Couldn't claim bus for device: %p!\n", dev);
++			return ret;
++		}
++
++		ret = spi_write_then_read(spi, (u8 *)&cmd, sizeof(cmd), NULL, buff, len);
++		if (ret)
++			debug("read error to device: %p register: %#x!\n",
++			      dev, reg);
++
++		dm_spi_release_bus(dev);
++
++		return ret;
++	}
++#endif
++
+ 	ret = dm_i2c_read(dev, reg, buff, len);
+ 	if (ret) {
+ 		debug("read error from device: %p register: %#x!\n", dev, reg);
+@@ -181,6 +262,9 @@ static int rk8xx_probe(struct udevice *dev)
+ 	    device_is_compatible(dev, "rockchip,rk809")) {
+ 		id_msb = RK817_ID_MSB;
+ 		id_lsb = RK817_ID_LSB;
++	} else if (device_is_compatible(dev, "rockchip,rk806")) {
++		id_msb = RK806_ID_MSB;
++		id_lsb = RK806_ID_LSB;
+ 	} else {
+ 		id_msb = ID_MSB;
+ 		id_lsb = ID_LSB;
+@@ -221,6 +305,12 @@ static int rk8xx_probe(struct udevice *dev)
+ 		value = (power_en2 & 0x0f) | ((power_en3 & 0x0f) << 4);
+ 		pmic_reg_write(dev, RK817_POWER_EN_SAVE1, value);
+ 		break;
++	case RK806_ID:
++		on_source = RK806_ON_SOURCE;
++		off_source = RK806_OFF_SOURCE;
++		init_data = rk806_init_reg;
++		init_data_num = ARRAY_SIZE(rk806_init_reg);
++		break;
+ 	default:
+ 		printf("Unknown PMIC: RK%x!!\n", priv->variant);
+ 		return -EINVAL;
+@@ -263,6 +353,7 @@ static struct dm_pmic_ops rk8xx_ops = {
+ 
+ static const struct udevice_id rk8xx_ids[] = {
+ 	{ .compatible = "rockchip,rk805" },
++	{ .compatible = "rockchip,rk806" },
+ 	{ .compatible = "rockchip,rk808" },
+ 	{ .compatible = "rockchip,rk809" },
+ 	{ .compatible = "rockchip,rk816" },
 diff --git a/drivers/power/regulator/rk8xx.c b/drivers/power/regulator/rk8xx.c
-index e80bd6c3723..97d73ac95e0 100644
+index 212bb752a76..1bd4605d43a 100644
 --- a/drivers/power/regulator/rk8xx.c
 +++ b/drivers/power/regulator/rk8xx.c
-@@ -210,14 +210,6 @@ static const struct rk8xx_reg_info rk818_ldo[] = {
+@@ -25,6 +25,19 @@
+ #define NA			0xff
+ 
+ /* Field Definitions */
++#define RK806_BUCK_CONFIG(n)	(0x10 + (n) - 1)
++#define RK806_BUCK_ON_VSEL(n)	(0x1a + (n) - 1)
++#define RK806_BUCK_SLP_VSEL(n)	(0x24 + (n) - 1)
++#define RK806_BUCK_VSEL_MASK	0xff
++
++#define RK806_NLDO_ON_VSEL(n)	(0x43 + (n) - 1)
++#define RK806_NLDO_SLP_VSEL(n)	(0x48 + (n) - 1)
++#define RK806_NLDO_VSEL_MASK	0xff
++
++#define RK806_PLDO_ON_VSEL(n)	(0x4e + (n) - 1)
++#define RK806_PLDO_SLP_VSEL(n)	(0x54 + (n) - 1)
++#define RK806_PLDO_VSEL_MASK	0xff
++
+ #define RK808_BUCK_VSEL_MASK	0x3f
+ #define RK808_BUCK4_VSEL_MASK	0xf
+ #define RK808_LDO_VSEL_MASK	0x1f
+@@ -91,6 +104,49 @@ struct rk8xx_reg_info {
+ 	u8 max_sel;
  };
- #endif
  
--static const u16 rk818_chrg_cur_input_array[] = {
--	450, 800, 850, 1000, 1250, 1500, 1750, 2000, 2250, 2500, 2750, 3000
--};
--
--static const uint rk818_chrg_shutdown_vsel_array[] = {
--	2780000, 2850000, 2920000, 2990000, 3060000, 3130000, 3190000, 3260000
--};
--
- static const struct rk8xx_reg_info *get_buck_reg(struct udevice *pmic,
- 						 int num, int uvolt)
- {
-@@ -1160,26 +1152,3 @@ int rk8xx_spl_configure_buck(struct udevice *pmic, int buck, int uvolt)
++static const struct rk8xx_reg_info rk806_buck[] = {
++	/* buck 1 */
++	{  500000,   6250, RK806_BUCK_ON_VSEL(1), RK806_BUCK_SLP_VSEL(1), RK806_BUCK_CONFIG(1), RK806_BUCK_VSEL_MASK, 0x00, 0x9f },
++	{ 1500000,  25000, RK806_BUCK_ON_VSEL(1), RK806_BUCK_SLP_VSEL(1), RK806_BUCK_CONFIG(1), RK806_BUCK_VSEL_MASK, 0xa0, 0xeb },
++	{ 3400000,	0, RK806_BUCK_ON_VSEL(1), RK806_BUCK_SLP_VSEL(1), RK806_BUCK_CONFIG(1), RK806_BUCK_VSEL_MASK, 0xec, 0xff },
++	/* buck 2 */
++	{  500000,   6250, RK806_BUCK_ON_VSEL(2), RK806_BUCK_SLP_VSEL(2), RK806_BUCK_CONFIG(2), RK806_BUCK_VSEL_MASK, 0x00, 0x9f },
++	{ 1500000,  25000, RK806_BUCK_ON_VSEL(2), RK806_BUCK_SLP_VSEL(2), RK806_BUCK_CONFIG(2), RK806_BUCK_VSEL_MASK, 0xa0, 0xeb },
++	{ 3400000,	0, RK806_BUCK_ON_VSEL(2), RK806_BUCK_SLP_VSEL(2), RK806_BUCK_CONFIG(2), RK806_BUCK_VSEL_MASK, 0xec, 0xff },
++	/* buck 3 */
++	{  500000,   6250, RK806_BUCK_ON_VSEL(3), RK806_BUCK_SLP_VSEL(3), RK806_BUCK_CONFIG(3), RK806_BUCK_VSEL_MASK, 0x00, 0x9f },
++	{ 1500000,  25000, RK806_BUCK_ON_VSEL(3), RK806_BUCK_SLP_VSEL(3), RK806_BUCK_CONFIG(3), RK806_BUCK_VSEL_MASK, 0xa0, 0xeb },
++	{ 3400000,	0, RK806_BUCK_ON_VSEL(3), RK806_BUCK_SLP_VSEL(3), RK806_BUCK_CONFIG(3), RK806_BUCK_VSEL_MASK, 0xec, 0xff },
++	/* buck 4 */
++	{  500000,   6250, RK806_BUCK_ON_VSEL(4), RK806_BUCK_SLP_VSEL(4), RK806_BUCK_CONFIG(4), RK806_BUCK_VSEL_MASK, 0x00, 0x9f },
++	{ 1500000,  25000, RK806_BUCK_ON_VSEL(4), RK806_BUCK_SLP_VSEL(4), RK806_BUCK_CONFIG(4), RK806_BUCK_VSEL_MASK, 0xa0, 0xeb },
++	{ 3400000,	0, RK806_BUCK_ON_VSEL(4), RK806_BUCK_SLP_VSEL(4), RK806_BUCK_CONFIG(4), RK806_BUCK_VSEL_MASK, 0xec, 0xff },
++	/* buck 5 */
++	{  500000,   6250, RK806_BUCK_ON_VSEL(5), RK806_BUCK_SLP_VSEL(5), RK806_BUCK_CONFIG(5), RK806_BUCK_VSEL_MASK, 0x00, 0x9f },
++	{ 1500000,  25000, RK806_BUCK_ON_VSEL(5), RK806_BUCK_SLP_VSEL(5), RK806_BUCK_CONFIG(5), RK806_BUCK_VSEL_MASK, 0xa0, 0xeb },
++	{ 3400000,	0, RK806_BUCK_ON_VSEL(5), RK806_BUCK_SLP_VSEL(5), RK806_BUCK_CONFIG(5), RK806_BUCK_VSEL_MASK, 0xec, 0xff },
++	/* buck 6 */
++	{  500000,   6250, RK806_BUCK_ON_VSEL(6), RK806_BUCK_SLP_VSEL(6), RK806_BUCK_CONFIG(6), RK806_BUCK_VSEL_MASK, 0x00, 0x9f },
++	{ 1500000,  25000, RK806_BUCK_ON_VSEL(6), RK806_BUCK_SLP_VSEL(6), RK806_BUCK_CONFIG(6), RK806_BUCK_VSEL_MASK, 0xa0, 0xeb },
++	{ 3400000,	0, RK806_BUCK_ON_VSEL(6), RK806_BUCK_SLP_VSEL(6), RK806_BUCK_CONFIG(6), RK806_BUCK_VSEL_MASK, 0xec, 0xff },
++	/* buck 7 */
++	{  500000,   6250, RK806_BUCK_ON_VSEL(7), RK806_BUCK_SLP_VSEL(7), RK806_BUCK_CONFIG(7), RK806_BUCK_VSEL_MASK, 0x00, 0x9f },
++	{ 1500000,  25000, RK806_BUCK_ON_VSEL(7), RK806_BUCK_SLP_VSEL(7), RK806_BUCK_CONFIG(7), RK806_BUCK_VSEL_MASK, 0xa0, 0xeb },
++	{ 3400000,	0, RK806_BUCK_ON_VSEL(7), RK806_BUCK_SLP_VSEL(7), RK806_BUCK_CONFIG(7), RK806_BUCK_VSEL_MASK, 0xec, 0xff },
++	/* buck 8 */
++	{  500000,   6250, RK806_BUCK_ON_VSEL(8), RK806_BUCK_SLP_VSEL(8), RK806_BUCK_CONFIG(8), RK806_BUCK_VSEL_MASK, 0x00, 0x9f },
++	{ 1500000,  25000, RK806_BUCK_ON_VSEL(8), RK806_BUCK_SLP_VSEL(8), RK806_BUCK_CONFIG(8), RK806_BUCK_VSEL_MASK, 0xa0, 0xeb },
++	{ 3400000,	0, RK806_BUCK_ON_VSEL(8), RK806_BUCK_SLP_VSEL(8), RK806_BUCK_CONFIG(8), RK806_BUCK_VSEL_MASK, 0xec, 0xff },
++	/* buck 9 */
++	{  500000,   6250, RK806_BUCK_ON_VSEL(9), RK806_BUCK_SLP_VSEL(9), RK806_BUCK_CONFIG(9), RK806_BUCK_VSEL_MASK, 0x00, 0x9f },
++	{ 1500000,  25000, RK806_BUCK_ON_VSEL(9), RK806_BUCK_SLP_VSEL(9), RK806_BUCK_CONFIG(9), RK806_BUCK_VSEL_MASK, 0xa0, 0xeb },
++	{ 3400000,	0, RK806_BUCK_ON_VSEL(9), RK806_BUCK_SLP_VSEL(9), RK806_BUCK_CONFIG(9), RK806_BUCK_VSEL_MASK, 0xec, 0xff },
++	/* buck 10 */
++	{  500000,   6250, RK806_BUCK_ON_VSEL(10), RK806_BUCK_SLP_VSEL(10), RK806_BUCK_CONFIG(10), RK806_BUCK_VSEL_MASK, 0x00, 0x9f },
++	{ 1500000,  25000, RK806_BUCK_ON_VSEL(10), RK806_BUCK_SLP_VSEL(10), RK806_BUCK_CONFIG(10), RK806_BUCK_VSEL_MASK, 0xa0, 0xeb },
++	{ 3400000,	0, RK806_BUCK_ON_VSEL(10), RK806_BUCK_SLP_VSEL(10), RK806_BUCK_CONFIG(10), RK806_BUCK_VSEL_MASK, 0xec, 0xff },
++};
++
+ static const struct rk8xx_reg_info rk808_buck[] = {
+ 	{  712500,  12500, REG_BUCK1_ON_VSEL, REG_BUCK1_SLP_VSEL, REG_BUCK1_CONFIG,  RK808_BUCK_VSEL_MASK, 0x00, 0x3f },
+ 	{  712500,  12500, REG_BUCK2_ON_VSEL, REG_BUCK2_SLP_VSEL, REG_BUCK2_CONFIG,  RK808_BUCK_VSEL_MASK, 0x00, 0x3f },
+@@ -148,6 +204,45 @@ static const struct rk8xx_reg_info rk818_buck[] = {
+ };
  
- 	return _buck_set_enable(pmic, buck, true);
+ #ifdef ENABLE_DRIVER
++static const struct rk8xx_reg_info rk806_nldo[] = {
++	/* nldo 1 */
++	{  500000, 12500, RK806_NLDO_ON_VSEL(1), RK806_NLDO_SLP_VSEL(1), NA, RK806_NLDO_VSEL_MASK, 0x00, 0xe7},
++	{ 3400000,     0, RK806_NLDO_ON_VSEL(1), RK806_NLDO_SLP_VSEL(1), NA, RK806_NLDO_VSEL_MASK, 0xe8, 0xff},
++	/* nldo 2 */
++	{  500000, 12500, RK806_NLDO_ON_VSEL(2), RK806_NLDO_SLP_VSEL(2), NA, RK806_NLDO_VSEL_MASK, 0x00, 0xe7},
++	{ 3400000,     0, RK806_NLDO_ON_VSEL(2), RK806_NLDO_SLP_VSEL(2), NA, RK806_NLDO_VSEL_MASK, 0xe8, 0xff},
++	/* nldo 3 */
++	{  500000, 12500, RK806_NLDO_ON_VSEL(3), RK806_NLDO_SLP_VSEL(3), NA, RK806_NLDO_VSEL_MASK, 0x00, 0xe7},
++	{ 3400000,     0, RK806_NLDO_ON_VSEL(3), RK806_NLDO_SLP_VSEL(3), NA, RK806_NLDO_VSEL_MASK, 0xe8, 0xff},
++	/* nldo 4 */
++	{  500000, 12500, RK806_NLDO_ON_VSEL(4), RK806_NLDO_SLP_VSEL(4), NA, RK806_NLDO_VSEL_MASK, 0x00, 0xe7},
++	{ 3400000,     0, RK806_NLDO_ON_VSEL(4), RK806_NLDO_SLP_VSEL(4), NA, RK806_NLDO_VSEL_MASK, 0xe8, 0xff},
++	/* nldo 5 */
++	{  500000, 12500, RK806_NLDO_ON_VSEL(5), RK806_NLDO_SLP_VSEL(5), NA, RK806_NLDO_VSEL_MASK, 0x00, 0xe7},
++	{ 3400000,     0, RK806_NLDO_ON_VSEL(5), RK806_NLDO_SLP_VSEL(5), NA, RK806_NLDO_VSEL_MASK, 0xe8, 0xff},
++};
++
++static const struct rk8xx_reg_info rk806_pldo[] = {
++	/* pldo 1 */
++	{  500000, 12500, RK806_PLDO_ON_VSEL(1), RK806_PLDO_SLP_VSEL(1), NA, RK806_PLDO_VSEL_MASK, 0x00, 0xe7},
++	{ 3400000,     0, RK806_PLDO_ON_VSEL(1), RK806_PLDO_SLP_VSEL(1), NA, RK806_PLDO_VSEL_MASK, 0xe8, 0xff},
++	/* pldo 2 */
++	{  500000, 12500, RK806_PLDO_ON_VSEL(2), RK806_PLDO_SLP_VSEL(2), NA, RK806_PLDO_VSEL_MASK, 0x00, 0xe7},
++	{ 3400000,     0, RK806_PLDO_ON_VSEL(2), RK806_PLDO_SLP_VSEL(2), NA, RK806_PLDO_VSEL_MASK, 0xe8, 0xff},
++	/* pldo 3 */
++	{  500000, 12500, RK806_PLDO_ON_VSEL(3), RK806_PLDO_SLP_VSEL(3), NA, RK806_PLDO_VSEL_MASK, 0x00, 0xe7},
++	{ 3400000,     0, RK806_PLDO_ON_VSEL(3), RK806_PLDO_SLP_VSEL(3), NA, RK806_PLDO_VSEL_MASK, 0xe8, 0xff},
++	/* pldo 4 */
++	{  500000, 12500, RK806_PLDO_ON_VSEL(4), RK806_PLDO_SLP_VSEL(4), NA, RK806_PLDO_VSEL_MASK, 0x00, 0xe7},
++	{ 3400000,     0, RK806_PLDO_ON_VSEL(4), RK806_PLDO_SLP_VSEL(4), NA, RK806_PLDO_VSEL_MASK, 0xe8, 0xff},
++	/* pldo 5 */
++	{  500000, 12500, RK806_PLDO_ON_VSEL(5), RK806_PLDO_SLP_VSEL(5), NA, RK806_PLDO_VSEL_MASK, 0x00, 0xe7},
++	{ 3400000,     0, RK806_PLDO_ON_VSEL(5), RK806_PLDO_SLP_VSEL(5), NA, RK806_PLDO_VSEL_MASK, 0xe8, 0xff},
++	/* pldo 6 */
++	{  500000, 12500, RK806_PLDO_ON_VSEL(6), RK806_PLDO_SLP_VSEL(6), NA, RK806_PLDO_VSEL_MASK, 0x00, 0xe7},
++	{ 3400000,     0, RK806_PLDO_ON_VSEL(6), RK806_PLDO_SLP_VSEL(6), NA, RK806_PLDO_VSEL_MASK, 0xe8, 0xff},
++};
++
+ static const struct rk8xx_reg_info rk808_ldo[] = {
+ 	{ 1800000, 100000, REG_LDO1_ON_VSEL, REG_LDO1_SLP_VSEL, NA, RK808_LDO_VSEL_MASK, },
+ 	{ 1800000, 100000, REG_LDO2_ON_VSEL, REG_LDO2_SLP_VSEL, NA, RK808_LDO_VSEL_MASK, },
+@@ -230,7 +325,12 @@ static const struct rk8xx_reg_info *get_buck_reg(struct udevice *pmic,
+ 		default:
+ 			return &rk816_buck[num + 4];
+ 		}
+-
++	case RK806_ID:
++		if (uvolt < 1500000)
++			return &rk806_buck[num * 3 + 0];
++		else if (uvolt < 3400000)
++			return &rk806_buck[num * 3 + 1];
++		return &rk806_buck[num * 3 + 2];
+ 	case RK809_ID:
+ 	case RK817_ID:
+ 		switch (num) {
+@@ -314,7 +414,11 @@ static int _buck_set_enable(struct udevice *pmic, int buck, bool enable)
+ 			value = ((0 << buck) | (1 << (buck + 4)));
+ 		ret = pmic_reg_write(pmic, en_reg, value);
+ 		break;
+-
++	case RK806_ID:
++		value = RK806_POWER_EN_CLRSETBITS(buck % 4, enable);
++		en_reg = RK806_POWER_EN((buck + 1) / 4);
++		ret = pmic_reg_write(pmic, en_reg, value);
++		break;
+ 	case RK808_ID:
+ 	case RK818_ID:
+ 		mask = 1 << buck;
+@@ -389,6 +493,10 @@ static int _buck_get_enable(struct udevice *pmic, int buck)
+ 			ret = pmic_reg_read(pmic, RK816_REG_DCDC_EN1);
+ 		}
+ 		break;
++	case RK806_ID:
++		mask = BIT(buck % 4);
++		ret = pmic_reg_read(pmic, RK806_POWER_EN((buck + 1) / 4));
++		break;
+ 	case RK808_ID:
+ 	case RK818_ID:
+ 		mask = 1 << buck;
+@@ -428,6 +536,20 @@ static int _buck_set_suspend_enable(struct udevice *pmic, int buck, bool enable)
+ 		ret = pmic_clrsetbits(pmic, RK816_REG_DCDC_SLP_EN, mask,
+ 				      enable ? mask : 0);
+ 		break;
++	case RK806_ID:
++		{
++			u8 reg;
++
++			if (buck + 1 >= 9) {
++				reg = RK806_POWER_SLP_EN1;
++				mask = BIT(buck + 1 - 3);
++			} else {
++				reg = RK806_POWER_SLP_EN0;
++				mask = BIT(buck + 1);
++			}
++			ret = pmic_clrsetbits(pmic, reg, mask, enable ? mask : 0);
++		}
++		break;
+ 	case RK808_ID:
+ 	case RK818_ID:
+ 		mask = 1 << buck;
+@@ -465,6 +587,21 @@ static int _buck_get_suspend_enable(struct udevice *pmic, int buck)
+ 			return val;
+ 		ret = val & mask ? 1 : 0;
+ 		break;
++	case RK806_ID:
++		{
++			u8 reg;
++
++			if (buck + 1 >= 9) {
++				reg = RK806_POWER_SLP_EN1;
++				mask = BIT(buck + 1 - 3);
++			} else {
++				reg = RK806_POWER_SLP_EN0;
++				mask = BIT(buck + 1);
++			}
++			val = pmic_reg_read(pmic, reg);
++		}
++		ret = (val & mask) ? 1 : 0;
++		break;
+ 	case RK808_ID:
+ 	case RK818_ID:
+ 		mask = 1 << buck;
+@@ -514,6 +651,34 @@ static const struct rk8xx_reg_info *get_ldo_reg(struct udevice *pmic,
+ 	}
  }
--
--int rk818_spl_configure_usb_input_current(struct udevice *pmic, int current_ma)
--{
--	uint i;
--
--	for (i = 0; i < ARRAY_SIZE(rk818_chrg_cur_input_array); i++)
--		if (current_ma <= rk818_chrg_cur_input_array[i])
--			break;
--
--	return pmic_clrsetbits(pmic, REG_USB_CTRL, RK818_USB_ILIM_SEL_MASK, i);
--}
--
--int rk818_spl_configure_usb_chrg_shutdown(struct udevice *pmic, int uvolt)
--{
--	uint i;
--
--	for (i = 0; i < ARRAY_SIZE(rk818_chrg_shutdown_vsel_array); i++)
--		if (uvolt <= rk818_chrg_shutdown_vsel_array[i])
--			break;
--
--	return pmic_clrsetbits(pmic, REG_USB_CTRL, RK818_USB_CHG_SD_VSEL_MASK,
--			       i);
--}
+ 
++static const struct rk8xx_reg_info *get_nldo_reg(struct udevice *pmic,
++						 int num, int uvolt)
++{
++	const struct rk8xx_priv *priv = dev_get_priv(pmic);
++
++	switch (priv->variant) {
++	case RK806_ID:
++	default:
++		if (uvolt < 3400000)
++			return &rk806_nldo[num * 2 + 0];
++		return &rk806_nldo[num * 2 + 1];
++	}
++}
++
++static const struct rk8xx_reg_info *get_pldo_reg(struct udevice *pmic,
++						 int num, int uvolt)
++{
++	const struct rk8xx_priv *priv = dev_get_priv(pmic);
++
++	switch (priv->variant) {
++	case RK806_ID:
++	default:
++		if (uvolt < 3400000)
++			return &rk806_pldo[num * 2 + 0];
++		return &rk806_pldo[num * 2 + 1];
++	}
++}
++
+ static int _ldo_get_enable(struct udevice *pmic, int ldo)
+ {
+ 	struct rk8xx_priv *priv = dev_get_priv(pmic);
+@@ -561,6 +726,63 @@ static int _ldo_get_enable(struct udevice *pmic, int ldo)
+ 	return ret & mask ? true : false;
+ }
+ 
++static int _nldo_get_enable(struct udevice *pmic, int nldo)
++{
++	struct rk8xx_priv *priv = dev_get_priv(pmic);
++	uint mask = 0;
++	int ret = 0;
++	u8 en_reg = 0;
++
++	switch (priv->variant) {
++	case RK806_ID:
++	default:
++		if (nldo + 1 >= 5) {
++			mask = BIT(2);
++			en_reg = RK806_POWER_EN(5);
++		} else {
++			mask = BIT(nldo);
++			en_reg = RK806_POWER_EN(3);
++		}
++		ret = pmic_reg_read(pmic, en_reg);
++		break;
++	}
++
++	if (ret < 0)
++		return ret;
++
++	return (ret & mask) ? 1 : 0;
++}
++
++static int _pldo_get_enable(struct udevice *pmic, int pldo)
++{
++	struct rk8xx_priv *priv = dev_get_priv(pmic);
++	uint mask = 0;
++	int ret = 0;
++	u8 en_reg = 0;
++
++	switch (priv->variant) {
++	case RK806_ID:
++	default:
++		if (pldo + 1 <= 3) {
++			mask = BIT(pldo + 1);
++			en_reg = RK806_POWER_EN(4);
++		} else if (pldo + 1 == 6) {
++			mask = BIT(0);
++			en_reg = RK806_POWER_EN(4);
++		} else {
++			mask = BIT((pldo + 1) % 4);
++			en_reg = RK806_POWER_EN(5);
++		}
++		ret = pmic_reg_read(pmic, en_reg);
++		break;
++	}
++
++	if (ret < 0)
++		return ret;
++
++	return (ret & mask) ? 1 : 0;
++}
++
+ static int _ldo_set_enable(struct udevice *pmic, int ldo, bool enable)
+ {
+ 	struct rk8xx_priv *priv = dev_get_priv(pmic);
+@@ -616,6 +838,62 @@ static int _ldo_set_enable(struct udevice *pmic, int ldo, bool enable)
+ 	return ret;
+ }
+ 
++static int _nldo_set_enable(struct udevice *pmic, int nldo, bool enable)
++{
++	struct rk8xx_priv *priv = dev_get_priv(pmic);
++	uint value, en_reg;
++	int ret = 0;
++
++	switch (priv->variant) {
++	case RK806_ID:
++	default:
++		if (nldo + 1 >= 5) {
++			value = RK806_POWER_EN_CLRSETBITS(2, enable);
++			en_reg = RK806_POWER_EN(5);
++		} else {
++			value = RK806_POWER_EN_CLRSETBITS(nldo, enable);
++			en_reg = RK806_POWER_EN(3);
++		}
++		ret = pmic_reg_write(pmic, en_reg, value);
++		break;
++	}
++
++	if (enable)
++		udelay(500);
++
++	return ret;
++}
++
++static int _pldo_set_enable(struct udevice *pmic, int pldo, bool enable)
++{
++	struct rk8xx_priv *priv = dev_get_priv(pmic);
++	uint value, en_reg;
++	int ret = 0;
++
++	switch (priv->variant) {
++	case RK806_ID:
++	default:
++		/* PLDO */
++		if (pldo + 1 <= 3) {
++			value = RK806_POWER_EN_CLRSETBITS(pldo + 1, enable);
++			en_reg = RK806_POWER_EN(4);
++		} else if (pldo + 1 == 6) {
++			value = RK806_POWER_EN_CLRSETBITS(0, enable);
++			en_reg = RK806_POWER_EN(4);
++		} else {
++			value = RK806_POWER_EN_CLRSETBITS((pldo + 1) % 4, enable);
++			en_reg = RK806_POWER_EN(5);
++		}
++		ret = pmic_reg_write(pmic, en_reg, value);
++		break;
++	}
++
++	if (enable)
++		udelay(500);
++
++	return ret;
++}
++
+ static int _ldo_set_suspend_enable(struct udevice *pmic, int ldo, bool enable)
+ {
+ 	struct rk8xx_priv *priv = dev_get_priv(pmic);
+@@ -652,6 +930,43 @@ static int _ldo_set_suspend_enable(struct udevice *pmic, int ldo, bool enable)
+ 	return ret;
+ }
+ 
++static int _nldo_set_suspend_enable(struct udevice *pmic, int nldo, bool enable)
++{
++	struct rk8xx_priv *priv = dev_get_priv(pmic);
++	uint mask;
++	int ret = 0;
++
++	switch (priv->variant) {
++	case RK806_ID:
++	default:
++		mask = BIT(nldo);
++		ret = pmic_clrsetbits(pmic, RK806_POWER_SLP_EN1, mask, enable ? mask : 0);
++		break;
++	}
++
++	return ret;
++}
++
++static int _pldo_set_suspend_enable(struct udevice *pmic, int pldo, bool enable)
++{
++	struct rk8xx_priv *priv = dev_get_priv(pmic);
++	uint mask;
++	int ret = 0;
++
++	switch (priv->variant) {
++	case RK806_ID:
++	default:
++		if (pldo + 1 >= 6)
++			mask = BIT(0);
++		else
++			mask = BIT(pldo + 1);
++		ret = pmic_clrsetbits(pmic, RK806_POWER_SLP_EN2, mask, enable ? mask : 0);
++		break;
++	}
++
++	return ret;
++}
++
+ static int _ldo_get_suspend_enable(struct udevice *pmic, int ldo)
+ {
+ 	struct rk8xx_priv *priv = dev_get_priv(pmic);
+@@ -696,6 +1011,45 @@ static int _ldo_get_suspend_enable(struct udevice *pmic, int ldo)
+ 	return ret;
+ }
+ 
++static int _nldo_get_suspend_enable(struct udevice *pmic, int nldo)
++{
++	struct rk8xx_priv *priv = dev_get_priv(pmic);
++	int val, ret = 0;
++	uint mask;
++
++	switch (priv->variant) {
++	case RK806_ID:
++	default:
++		mask = BIT(nldo);
++		val = pmic_reg_read(pmic, RK806_POWER_SLP_EN1);
++		ret = (val & mask) ? 1 : 0;
++		break;
++	}
++
++	return ret;
++}
++
++static int _pldo_get_suspend_enable(struct udevice *pmic, int pldo)
++{
++	struct rk8xx_priv *priv = dev_get_priv(pmic);
++	int val, ret = 0;
++	uint mask;
++
++	switch (priv->variant) {
++	case RK806_ID:
++	default:
++		if (pldo + 1 >= 6)
++			mask = BIT(0);
++		else
++			mask = BIT(pldo + 1);
++		val = pmic_reg_read(pmic, RK806_POWER_SLP_EN2);
++		ret = (val & mask) ? 1 : 0;
++		break;
++	}
++
++	return ret;
++}
++
+ static int buck_get_value(struct udevice *dev)
+ {
+ 	int buck = dev->driver_data - 1;
+@@ -803,6 +1157,22 @@ static int ldo_get_value(struct udevice *dev)
+ 	return _ldo_get_value(dev, info);
+ }
+ 
++static int nldo_get_value(struct udevice *dev)
++{
++	int nldo = dev->driver_data - 1;
++	const struct rk8xx_reg_info *info = get_nldo_reg(dev->parent, nldo, 0);
++
++	return _ldo_get_value(dev, info);
++}
++
++static int pldo_get_value(struct udevice *dev)
++{
++	int pldo = dev->driver_data - 1;
++	const struct rk8xx_reg_info *info = get_pldo_reg(dev->parent, pldo, 0);
++
++	return _ldo_get_value(dev, info);
++}
++
+ static int _ldo_set_value(struct udevice *dev, const struct rk8xx_reg_info *info, int uvolt)
+ {
+ 	int mask = info->vsel_mask;
+@@ -830,6 +1200,22 @@ static int ldo_set_value(struct udevice *dev, int uvolt)
+ 	return _ldo_set_value(dev, info, uvolt);
+ }
+ 
++static int nldo_set_value(struct udevice *dev, int uvolt)
++{
++	int nldo = dev->driver_data - 1;
++	const struct rk8xx_reg_info *info = get_nldo_reg(dev->parent, nldo, uvolt);
++
++	return _ldo_set_value(dev, info, uvolt);
++}
++
++static int pldo_set_value(struct udevice *dev, int uvolt)
++{
++	int pldo = dev->driver_data - 1;
++	const struct rk8xx_reg_info *info = get_pldo_reg(dev->parent, pldo, uvolt);
++
++	return _ldo_set_value(dev, info, uvolt);
++}
++
+ static int _ldo_set_suspend_value(struct udevice *dev, const struct rk8xx_reg_info *info, int uvolt)
+ {
+ 	int mask = info->vsel_mask;
+@@ -857,6 +1243,22 @@ static int ldo_set_suspend_value(struct udevice *dev, int uvolt)
+ 	return _ldo_set_suspend_value(dev->parent, info, uvolt);
+ }
+ 
++static int nldo_set_suspend_value(struct udevice *dev, int uvolt)
++{
++	int nldo = dev->driver_data - 1;
++	const struct rk8xx_reg_info *info = get_nldo_reg(dev->parent, nldo, uvolt);
++
++	return _ldo_set_suspend_value(dev->parent, info, uvolt);
++}
++
++static int pldo_set_suspend_value(struct udevice *dev, int uvolt)
++{
++	int pldo = dev->driver_data - 1;
++	const struct rk8xx_reg_info *info = get_pldo_reg(dev->parent, pldo, uvolt);
++
++	return _ldo_set_suspend_value(dev->parent, info, uvolt);
++}
++
+ static int _ldo_get_suspend_value(struct udevice *dev, const struct rk8xx_reg_info *info)
+ {
+ 	int mask = info->vsel_mask;
+@@ -882,6 +1284,22 @@ static int ldo_get_suspend_value(struct udevice *dev)
+ 	return _ldo_get_suspend_value(dev->parent, info);
+ }
+ 
++static int nldo_get_suspend_value(struct udevice *dev)
++{
++	int nldo = dev->driver_data - 1;
++	const struct rk8xx_reg_info *info = get_nldo_reg(dev->parent, nldo, 0);
++
++	return _ldo_get_suspend_value(dev->parent, info);
++}
++
++static int pldo_get_suspend_value(struct udevice *dev)
++{
++	int pldo = dev->driver_data - 1;
++	const struct rk8xx_reg_info *info = get_pldo_reg(dev->parent, pldo, 0);
++
++	return _ldo_get_suspend_value(dev->parent, info);
++}
++
+ static int ldo_set_enable(struct udevice *dev, bool enable)
+ {
+ 	int ldo = dev->driver_data - 1;
+@@ -889,6 +1307,20 @@ static int ldo_set_enable(struct udevice *dev, bool enable)
+ 	return _ldo_set_enable(dev->parent, ldo, enable);
+ }
+ 
++static int nldo_set_enable(struct udevice *dev, bool enable)
++{
++	int nldo = dev->driver_data - 1;
++
++	return _nldo_set_enable(dev->parent, nldo, enable);
++}
++
++static int pldo_set_enable(struct udevice *dev, bool enable)
++{
++	int pldo = dev->driver_data - 1;
++
++	return _pldo_set_enable(dev->parent, pldo, enable);
++}
++
+ static int ldo_set_suspend_enable(struct udevice *dev, bool enable)
+ {
+ 	int ldo = dev->driver_data - 1;
+@@ -896,6 +1328,20 @@ static int ldo_set_suspend_enable(struct udevice *dev, bool enable)
+ 	return _ldo_set_suspend_enable(dev->parent, ldo, enable);
+ }
+ 
++static int nldo_set_suspend_enable(struct udevice *dev, bool enable)
++{
++	int nldo = dev->driver_data - 1;
++
++	return _nldo_set_suspend_enable(dev->parent, nldo, enable);
++}
++
++static int pldo_set_suspend_enable(struct udevice *dev, bool enable)
++{
++	int pldo = dev->driver_data - 1;
++
++	return _pldo_set_suspend_enable(dev->parent, pldo, enable);
++}
++
+ static int ldo_get_suspend_enable(struct udevice *dev)
+ {
+ 	int ldo = dev->driver_data - 1;
+@@ -903,6 +1349,20 @@ static int ldo_get_suspend_enable(struct udevice *dev)
+ 	return _ldo_get_suspend_enable(dev->parent, ldo);
+ }
+ 
++static int nldo_get_suspend_enable(struct udevice *dev)
++{
++	int nldo = dev->driver_data - 1;
++
++	return _nldo_get_suspend_enable(dev->parent, nldo);
++}
++
++static int pldo_get_suspend_enable(struct udevice *dev)
++{
++	int pldo = dev->driver_data - 1;
++
++	return _pldo_get_suspend_enable(dev->parent, pldo);
++}
++
+ static int ldo_get_enable(struct udevice *dev)
+ {
+ 	int ldo = dev->driver_data - 1;
+@@ -910,6 +1370,20 @@ static int ldo_get_enable(struct udevice *dev)
+ 	return _ldo_get_enable(dev->parent, ldo);
+ }
+ 
++static int nldo_get_enable(struct udevice *dev)
++{
++	int nldo = dev->driver_data - 1;
++
++	return _nldo_get_enable(dev->parent, nldo);
++}
++
++static int pldo_get_enable(struct udevice *dev)
++{
++	int pldo = dev->driver_data - 1;
++
++	return _pldo_get_enable(dev->parent, pldo);
++}
++
+ static int switch_set_enable(struct udevice *dev, bool enable)
+ {
+ 	struct rk8xx_priv *priv = dev_get_priv(dev->parent);
+@@ -1133,6 +1607,28 @@ static const struct dm_regulator_ops rk8xx_ldo_ops = {
+ 	.get_suspend_enable = ldo_get_suspend_enable,
+ };
+ 
++static const struct dm_regulator_ops rk8xx_nldo_ops = {
++	.get_value  = nldo_get_value,
++	.set_value  = nldo_set_value,
++	.set_suspend_value = nldo_set_suspend_value,
++	.get_suspend_value = nldo_get_suspend_value,
++	.get_enable = nldo_get_enable,
++	.set_enable = nldo_set_enable,
++	.set_suspend_enable = nldo_set_suspend_enable,
++	.get_suspend_enable = nldo_get_suspend_enable,
++};
++
++static const struct dm_regulator_ops rk8xx_pldo_ops = {
++	.get_value  = pldo_get_value,
++	.set_value  = pldo_set_value,
++	.set_suspend_value = pldo_set_suspend_value,
++	.get_suspend_value = pldo_get_suspend_value,
++	.get_enable = pldo_get_enable,
++	.set_enable = pldo_set_enable,
++	.set_suspend_enable = pldo_set_suspend_enable,
++	.get_suspend_enable = pldo_get_suspend_enable,
++};
++
+ static const struct dm_regulator_ops rk8xx_switch_ops = {
+ 	.get_value  = switch_get_value,
+ 	.set_value  = switch_set_value,
+@@ -1158,6 +1654,20 @@ U_BOOT_DRIVER(rk8xx_ldo) = {
+ 	.probe = rk8xx_ldo_probe,
+ };
+ 
++U_BOOT_DRIVER(rk8xx_nldo) = {
++	.name = "rk8xx_nldo",
++	.id = UCLASS_REGULATOR,
++	.ops = &rk8xx_nldo_ops,
++	.probe = rk8xx_ldo_probe,
++};
++
++U_BOOT_DRIVER(rk8xx_pldo) = {
++	.name = "rk8xx_pldo",
++	.id = UCLASS_REGULATOR,
++	.ops = &rk8xx_pldo_ops,
++	.probe = rk8xx_ldo_probe,
++};
++
+ U_BOOT_DRIVER(rk8xx_switch) = {
+ 	.name = "rk8xx_switch",
+ 	.id = UCLASS_REGULATOR,
 diff --git a/include/power/rk8xx_pmic.h b/include/power/rk8xx_pmic.h
-index 3cbfc021956..0db82419d4f 100644
+index 0db82419d4f..31221aa46b6 100644
 --- a/include/power/rk8xx_pmic.h
 +++ b/include/power/rk8xx_pmic.h
-@@ -233,7 +233,5 @@ struct rk8xx_priv {
+@@ -182,8 +182,19 @@ enum {
+ 	RK816_REG_LDO_EN2,
  };
  
- int rk8xx_spl_configure_buck(struct udevice *pmic, int buck, int uvolt);
--int rk818_spl_configure_usb_input_current(struct udevice *pmic, int current_ma);
--int rk818_spl_configure_usb_chrg_shutdown(struct udevice *pmic, int uvolt);
++enum {
++	RK806_POWER_SLP_EN0 = 0x06,
++	RK806_POWER_SLP_EN1,
++	RK806_POWER_SLP_EN2,
++	RK806_REG_SYS_CFG3 = 0x72,
++	RK806_WDT_REG,
++	RK806_ON_SOURCE,
++	RK806_OFF_SOURCE
++};
++
+ enum {
+ 	RK805_ID = 0x8050,
++	RK806_ID = 0x8060,
+ 	RK808_ID = 0x0000,
+ 	RK809_ID = 0x8090,
+ 	RK816_ID = 0x8160,
+@@ -201,6 +212,14 @@ enum {
+ #define RK817_POWER_EN_SAVE0	0x99
+ #define RK817_POWER_EN_SAVE1	0xa4
  
- #endif
++#define RK806_POWER_EN(x)			(0x00 + (x))
++/* POWER_ENx register lower 4 bits are write-protected unless the associated top bit is set */
++#define RK806_POWER_EN_CLRSETBITS(bit, val)	(((val) << (bit)) | (1 << ((bit) + 4)))
++
++#define RK806_POWER_SLP_EN(x)			(0x06 + (x))
++
++#define RK806_ID_MSB	0x5a
++#define RK806_ID_LSB	0x5b
+ #define RK817_ID_MSB	0xed
+ #define RK817_ID_LSB	0xee
+ #define RK8XX_ID_MSK	0xfff0
 
 -- 
 2.44.0
