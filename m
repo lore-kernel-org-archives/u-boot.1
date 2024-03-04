@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2204EC5478C
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 15:31:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F494C5478C
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 15:31:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A6A918816A;
-	Mon,  4 Mar 2024 16:29:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1EE018816F;
+	Mon,  4 Mar 2024 16:29:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cgMQ9V0p";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qnwMXjGC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BEC62880AD; Mon,  4 Mar 2024 16:29:02 +0100 (CET)
-Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
- [IPv6:2001:4860:4864:20::2e])
+ id 047078802F; Mon,  4 Mar 2024 16:29:09 +0100 (CET)
+Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
+ [IPv6:2607:f8b0:4864:20::72f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4E228802B
- for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 16:29:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EFC8D88035
+ for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 16:29:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2e.google.com with SMTP id
- 586e51a60fabf-220ee7342ddso745070fac.3
- for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 07:29:00 -0800 (PST)
+Received: by mail-qk1-x72f.google.com with SMTP id
+ af79cd13be357-7882cc93e73so47426485a.0
+ for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 07:29:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1709566139; x=1710170939; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1709566146; x=1710170946; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=pZHwg/srnTM7aGtM3v0+qaQhhU96eKlVB+Kuu/m7wm8=;
- b=cgMQ9V0pI6qUUlXML+RnT7bRdYAC3vbXdbvioM88TMA9aKIFlZjZnt9mH7ltzWLEBj
- onwJ9KQCxMVn5bwsTQDBSVRsqjBbzxTFnIvUbFNxVmbkkU05AGrw7Uvfg8ft2oWODCkn
- N+NVMyqaNOuFemdVe4y0PHdLuYenyk3Npco20=
+ bh=NXjSsqvNkVe1fWUoSC/rwS8CLq+9O4noU2tJBwtnx68=;
+ b=qnwMXjGC0y3rcRA7J7plgzHq1l8NE8Uk7Nr2DLSGhHRbtvrzUqevx0N9BItR6ifkRw
+ 2gL7EmqJ/az8+YgV8aKYIxoFW7RAvTt9tbHummd9Ro7d2qzdWCVVmM+4ySEPZcQzjJg0
+ lCI4vOD+i50IC4QZ1dP1UwrtiT9CfgbbfN0tQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709566139; x=1710170939;
+ d=1e100.net; s=20230601; t=1709566146; x=1710170946;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pZHwg/srnTM7aGtM3v0+qaQhhU96eKlVB+Kuu/m7wm8=;
- b=YzFDzhON/ag4kHbq/Z1zLXJHeXDlDtISJUbhP1NvsGkFx7X98FSUq5SvBQh/O1k2p1
- x+0IS528b+iZYdfgjELIwrMQa4bj88QymbSwO8GvYw9UP/rVPVtSLX/GsLZ4K9LmNrfM
- XWt8S+CvOWeMSeUYRvAQCVb9wHhsJHcGLopFjhfkct142mgRZyV4fYttINe1lMd4oy4E
- mSCMJEgAdS1zTsDr1G/T3EE+c5zYvpbcLe1zbrByQvnY0ou+LhKZRVH/yqj9o41eaIOC
- VyKO1K4OtwQaaRrzkz7sxZlV3VAYekLP129WrBsEIcNS5Ti5hC8hdBiaqkZ/lDyaGNhc
- qh8A==
+ bh=NXjSsqvNkVe1fWUoSC/rwS8CLq+9O4noU2tJBwtnx68=;
+ b=BRvB6ppsGhrLMMXN+AXZbOIFnfju+96P/XN/BAnH+dB7UnU4nBruPusaCFywKCYDX5
+ FQYreq/2ImDxJebCcGs5VfR7gYMlr20HF21m8SzrIJwOor+lV+QWddrKeV+yfV1IksSW
+ Y7o1PyLtGOd3eGXJrdx9o1OP9e0/oKjVJy2qTl7XyJ4voSLhkhTxsrJsC+xuVlEH+rqH
+ o38QiPJLnqRB4GNqqAuDSvqqhqGqAnAXyimBvIJu704q5S92dzSlrZrWKFPe1cMDNO4Q
+ vT4K02B38s7sz1+50OflB8dwW1U2zgcIMVjC8nqfWFkYUkcz1dupYkIGaEGSyj8wqZWq
+ OZTg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWR5XoAnimxuqZ/96F2rTbetSjo6E/ot3UyFwbkZMiTVHra1jzKX8gAVVY0JkuZruHA1eozQPZT6yvlIXOvDrBq7b/xcA==
-X-Gm-Message-State: AOJu0YzKjTjM64MBZzKb55JsT5Zuhrwm85/8QszFxzWAu+sT80D6a0j1
- cyd/j+9WnRZ6gKoLaLr/FKMbpqQD96wp+Zx9SlBnlKONsKy8Ao5+REtiKPXFicOtc4/SFbe5t0m
- n
-X-Google-Smtp-Source: AGHT+IFJyB7YkJ9mXRwYW4bRYGsJZh6HR4zg8A9Kxqlq5WGXIY7pJ1HCXxRj5vg+Az1iitR6Fz8fkQ==
-X-Received: by 2002:a05:6871:3a07:b0:220:be4a:1df1 with SMTP id
- pu7-20020a0568713a0700b00220be4a1df1mr8135737oac.24.1709566139231; 
- Mon, 04 Mar 2024 07:28:59 -0800 (PST)
+ AJvYcCVtgA2lI7EC36osqNRrSIfYZiIKnJSbYS4eBpr7a0jmnvGaYEq1HOc/NUQanO29mV0fPR1LSQrqgW/sKcmipaxVvCRVpw==
+X-Gm-Message-State: AOJu0YxR64ulvo/mWofrrkva5TDrznq9oGbokkfX5IRiOfz5SKfCeiTP
+ PpcbX6gVraZS9LKZK98XPZHv2a2oFHuP8eNRWxLl2YLgTct6BUza9YArJdsyhiMIHNFuIcQAQ37
+ X
+X-Google-Smtp-Source: AGHT+IEsfyZkoMye+mIKstKBK+aU6FUAdtELiZlZ0dUSo1i5aP1X4smLft2/nbgWYNmJejqlui1U8A==
+X-Received: by 2002:a05:620a:5797:b0:788:27af:6b6e with SMTP id
+ wk23-20020a05620a579700b0078827af6b6emr4153837qkn.0.1709566145827; 
+ Mon, 04 Mar 2024 07:29:05 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-007f-0000-0000-0000-1002.res6.spectrum.com.
  [2603:6081:7b00:7f::1002]) by smtp.gmail.com with ESMTPSA id
- h24-20020ae9ec18000000b00787d6a14d0bsm4455975qkg.10.2024.03.04.07.28.58
+ v15-20020ae9e30f000000b007876a732823sm4465611qkf.25.2024.03.04.07.29.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Mar 2024 07:28:58 -0800 (PST)
-Date: Mon, 4 Mar 2024 10:28:56 -0500
+ Mon, 04 Mar 2024 07:29:05 -0800 (PST)
+Date: Mon, 4 Mar 2024 10:29:03 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH] dm: core: Fix address translation in
- devfdt_get_addr_index()
-Message-ID: <20240304152856.GI1523872@bill-the-cat>
-References: <20240217131943.2472659-1-jonas@kwiboo.se>
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH] remove Broadcom Northstar 2 Target entry
+Message-ID: <20240304152903.GJ1523872@bill-the-cat>
+References: <20240218111629.849167-1-pbrobinson@gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="z8G/dajzuzHc+qpA"
+ protocol="application/pgp-signature"; boundary="GlriI34xEblvaCLV"
 Content-Disposition: inline
-In-Reply-To: <20240217131943.2472659-1-jonas@kwiboo.se>
+In-Reply-To: <20240218111629.849167-1-pbrobinson@gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,58 +95,42 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---z8G/dajzuzHc+qpA
+--GlriI34xEblvaCLV
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Feb 17, 2024 at 01:19:41PM +0000, Jonas Karlman wrote:
+On Sun, Feb 18, 2024 at 11:16:20AM +0000, Peter Robinson wrote:
 
-> During address translation #address/size-cells props are expected to
-> apply to child nodes. However, devfdt_get_addr_index() incorrectly use
-> the parent offset of the udevice parent instead of getting the offset of
-> the node parent. This will work in most cases when there is only one
-> udevice tied to a node.
+> The Broadcom Northstar 2 support was removed when the
+> bcm958712k board was removed but the target entry was
+> missed so clean that up as well.
 >=20
-> On e.g. an Orange Pi R1 Plus TLS board the dwc3-generic (parent) and
-> dwc3-generic-host (child) udevice is tied to the same node.
->=20
-> In that case both the offset and parent values end up being the same.
-> As a result, the #address/size-cells props intended for child nodes
-> incorrectly gets applied to the node itself resulting in wrong addr
-> being returned, 0x0 instead of 0xff600000.
->=20
-> The following can be seen on console:
->=20
->   dwc3-generic-host usb@ff600000: this is not a DesignWare USB3 DRD Core
->   dwc3-generic-host usb@ff600000: failed to initialize core
->=20
-> Fix this by using the offset of the parent node and not the offset to
-> the node the parent udevice is tied to.
->=20
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> Fixes: d59bc09d829 ("arm: Remove bcm958712k board")
+> Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
+> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
 Applied to u-boot/next, thanks!
 
 --=20
 Tom
 
---z8G/dajzuzHc+qpA
+--GlriI34xEblvaCLV
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXl6LgACgkQFHw5/5Y0
-tyxvUwwApK7u/dh9P5Gs0EPu/2pp/Vf0tP6+T5ItXjQ9ACsSDLRDXZBUbsmJsoJZ
-cXAeDuN5RxczXOAA6QDdkT7AvzT8NeL/6+6qkM9vQ0/PLk4lqXnmVR+MLVDWyVTI
-HOo2fPb1YIpFT+wWuKSLkSNGQcXeV3SgQksiNewYUzVW3vVJjvMnWi51DP6lECRV
-qyxusjY+8SgdGsCNLWenzae/G7n6WRMKkRoVkrX0BEeYIeD/4NQ8g8kGtquItsQG
-/NBskbfg2cpAjwpq4RM5vX9baOv8s+mYZYHSmgQVeRAs1Fu2pTOvI5suEb7s689r
-6909dd+VvW5Fm/mF9YIZwOaDMR64xrkbk89dWWVkr+UkbAG5owF5LDSkonHNjv3A
-SOTVWVyCmArnbESbprBTDxlFYR+SMakJU/RKGcsfjehPSkuHF3QPYinJ+QnurYGR
-Cw5LlRDuqOnuKjt7wcxkh70bYDC9deTDDNdZhC8+6RfFPqKqgjsYpKeakY4zHhxw
-lwbPqCvH
-=yr8y
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXl6L8ACgkQFHw5/5Y0
+tyzEGgwAl88RzSCdZoXA2riGv/5rcbh82dhkPWm6YCk+9edeudXHeZFkdIIJK5nH
+Rvgy+yUgHqe+IG0QztklxfMDQPbpCZohI5AP4R89oiFAjnF2DK4OkahkSr+CQ6R9
+o6duoRIHhoWLsTW6C3FS/XZW/a6PT4SBcAoPC27BOJ9Kd1m98Emyc51LItFZdEp7
+W2SqupQNN9WEWpMVXjaRD1BPWyip28mgQPbmWgd3SXERN2vmIrHQ55D87FNjsvjd
+wWhlVWr8QCb8L+wOXHBm/vsjZ9KH9p7CjKNl47mzM2XPpghX0HsyDhFdB0YeBw7s
+CCtza+QembVEoWWc+YLKrhKBrEP1QLKTR7RVREPplNcrmtpo80aeH798YXGw+bFn
+Y5YQl1o/MMITbUI61XcUwKsDaZPJHr50bIQhxb+L58zK6cYb8TA1iE2zMvdGkxZS
+0cxICAUBAGvTRLHNlrVLJDfFDBmhJecB8wDfoq11CWL77M4I54Hwpx1WTKSXQP5Q
+oPpuhwRf
+=Bbuw
 -----END PGP SIGNATURE-----
 
---z8G/dajzuzHc+qpA--
+--GlriI34xEblvaCLV--
