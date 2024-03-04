@@ -4,81 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C74BC48BF6
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 20:37:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 216B0C5478C
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 20:39:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B289687FC7;
-	Mon,  4 Mar 2024 21:37:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 7F14D87FE0;
+	Mon,  4 Mar 2024 21:39:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=georgemail.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="U2mCquMG";
+	dkim=pass (2048-bit key; unprotected) header.d=georgemail.de header.i=@georgemail.de header.b="q8eFlvY+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D7CC86F67; Mon,  4 Mar 2024 21:25:02 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id 05D4A87FED; Mon,  4 Mar 2024 21:39:19 +0100 (CET)
+Received: from smtp6.goneo.de (smtp6.goneo.de [IPv6:2001:1640:5::8:31])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D595787FC7
- for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 21:24:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A18F287E63
+ for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 21:39:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=8d7b=KL=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1709583847;
- bh=yue8JLPupABBdqygA0EMatoBvWzc9y+LdbG73Zrk0is=;
- b=U2mCquMGgMICAoDELBbO/2meILkSsw0LVYUYW7+l+JJejU6XFU6P+bvFYMjTaonfbcFL4+5nq
- 6Te2eumEEr5payxBx9wHyPj0ZEyrthPopo+z/6OtPZN7XCcaZGx0BbuuQ77L2GNjKH7Qn6rEmOZ
- IjhnZnRWFiHYEsUe4PhAZtfnnWGwkI2WVhWiIj4tEl6mL41t+YY4Hmwicf3XjhpRzvHVUmRQZ2b
- GEJX5rjJeCvxJYgq/d+O4zBXjG81erSvaxhUUOG09hS6F8s6Qh7OciY9tRu0Y6Qq5mFcpyWYdzc
- gJQUp/5ncYNooztBzMIbf/UOwpnjP6wx8nTonX2epcpg==
-Message-ID: <e6285379-d4c9-45b7-8913-bcf27c52bbda@kwiboo.se>
-Date: Mon, 4 Mar 2024 21:23:59 +0100
+ dmarc=none (p=none dis=none) header.from=georgemail.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=leon@georgemail.de
+Received: from hub2.goneo.de (hub2.goneo.de [85.220.129.53])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits))
+ (No client certificate requested)
+ by smtp6.goneo.de (Postfix) with ESMTPS id 47A682402D9;
+ Mon,  4 Mar 2024 21:39:14 +0100 (CET)
+Received: from hub2.goneo.de (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits))
+ (No client certificate requested)
+ by hub2.goneo.de (Postfix) with ESMTPS id E61412402D6;
+ Mon,  4 Mar 2024 21:39:13 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=georgemail.de;
+ s=DKIM001; t=1709584754;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=jy1dYSB3HQrgr1ProPhm6ZJgEeoYRgmeN16CY+CjiAQ=;
+ b=q8eFlvY+G8+zQLIA4jFCZH0ZNAeo0vfwfC7TmkhfzlYHBYHIfBM12gn1NuuJL3XyL3i61/
+ 1m7CvyCRsThItR0Ibdip2fLCV8fAxDnROIhTT6wsKCiBQC2/M+qtz2RTqLqnh/SFeBY6WU
+ mN+6CbeTlYWbb5RF/WQ60khXH+CvKuzca3gaUb8SKJswvabP0Bl3IqjUmJj6JsUOh6m5Mc
+ wPqOhtewc5oA7bPQVAqqv2FGL7FbgUepuoik3n7jxCu8alaXbY+P1RfPG6HABQXvSBncW3
+ iH3OZNe41zaKYLfTxSUZndjETEhB4ZlKzQGfoo7BBrg87lnQ0sSjjC8q0dzjnw==
+Received: from couch-potassium.fritz.box (unknown
+ [IPv6:2a02:8071:5250:1240:f4e6:f6d2:6d95:e0c4])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by hub2.goneo.de (Postfix) with ESMTPSA id B46732400FE;
+ Mon,  4 Mar 2024 21:39:13 +0100 (CET)
+From: "Leon M. Busch-George" <leon@georgemail.de>
+To: u-boot@lists.denx.de,
+	Dragan Simic <dsimic@manjaro.org>
+Subject: [PATCH v2] Makefile: use shell to calculate map_size
+Date: Mon,  4 Mar 2024 21:38:56 +0100
+Message-ID: <20240304203909.63796-1-leon@georgemail.de>
+X-Mailer: git-send-email 2.44.0
+In-Reply-To: <20240302131728.148251-1-leon@georgemail.de>
+References: <20240302131728.148251-1-leon@georgemail.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC 10/26] rockchip: drop remaining dt-binding headers
-Content-Language: en-US
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io,
- uboot-stm32@st-md-mailman.stormreply.com, uboot-snps-arc@synopsys.com, Tom
- Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Patrice Chotard
- <patrice.chotard@foss.st.com>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, Kever Yang <kever.yang@rock-chips.com>, Lukasz
- Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Sam Protsenko
- <semen.protsenko@linaro.org>, Matthias Brugger <mbrugger@suse.com>, Peter
- Robinson <pbrobinson@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Thierry Reding <treding@nvidia.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Michal Simek
- <michal.simek@amd.com>, Paul Barker <paul.barker.ct@bp.renesas.com>,
- Weijie Gao <weijie.gao@mediatek.com>, GSS_MTK_Uboot_upstream
- <GSS_MTK_Uboot_upstream@mediatek.com>, Ryder Lee <ryder.lee@mediatek.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>, Eugen Hristev
- <eugen.hristev@collabora.com>, Rick Chen <rick@andestech.com>, Leo
- <ycliang@andestech.com>, Ryan Chen <ryan_chen@aspeedtech.com>, "Chia-Wei
- Wang" <chiawei_wang@aspeedtech.com>, Aspeed BMC SW team
- <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>, Kunihiko Hayashi
- <hayashi.kunihiko@socionext.com>, Dai Okamura <okamura.dai@socionext.com>,
- Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>
-References: <20240304-b4-upstream-dt-headers-v1-0-b7ff41925f92@linaro.org>
- <20240304-b4-upstream-dt-headers-v1-10-b7ff41925f92@linaro.org>
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20240304-b4-upstream-dt-headers-v1-10-b7ff41925f92@linaro.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 65e62de5a5d3328d0fcb4c53
-X-Mailman-Approved-At: Mon, 04 Mar 2024 21:37:51 +0100
+Content-Transfer-Encoding: 8bit
+X-Rspamd-UID: 2fe88c
+X-Rspamd-UID: cca88b
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,66 +85,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Caleb,
+From: "Leon M. Busch-George" <leon@georgemail.eu>
 
-On 2024-03-04 17:51, Caleb Connolly wrote:
-> Drop in favour of dts/upstream.
-> 
-> Small driver adjustment to fix compatibility.
-> 
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->  drivers/pinctrl/rockchip/pinctrl-rk3568.c         |  15 +
->  include/dt-bindings/pinctrl/rockchip.h            |  60 --
->  include/dt-bindings/power/px30-power.h            |  27 -
->  include/dt-bindings/power/rk3066-power.h          |  22 -
->  include/dt-bindings/power/rk3188-power.h          |  24 -
->  include/dt-bindings/power/rk3228-power.h          |  21 -
->  include/dt-bindings/power/rk3288-power.h          |  32 -
->  include/dt-bindings/power/rk3328-power.h          |  19 -
->  include/dt-bindings/power/rk3399-power.h          |  53 --
->  include/dt-bindings/power/rk3568-power.h          |  32 -
->  include/dt-bindings/power/rk3588-power.h          |  69 --
->  include/dt-bindings/power/rockchip,rv1126-power.h |  35 -
->  include/dt-bindings/reset/rockchip,rk3588-cru.h   | 754 ----------------------
->  include/dt-bindings/soc/rockchip,boot-mode.h      |  16 -
->  include/dt-bindings/soc/rockchip,vop2.h           |  18 -
->  15 files changed, 15 insertions(+), 1182 deletions(-)
-> 
-> diff --git a/drivers/pinctrl/rockchip/pinctrl-rk3568.c b/drivers/pinctrl/rockchip/pinctrl-rk3568.c
-> index 1d4391982605..35a69c2a1a28 100644
-> --- a/drivers/pinctrl/rockchip/pinctrl-rk3568.c
-> +++ b/drivers/pinctrl/rockchip/pinctrl-rk3568.c
-> @@ -11,8 +11,23 @@
->  #include <dt-bindings/pinctrl/rockchip.h>
->  
->  #include "pinctrl-rockchip.h"
->  
-> +#define RK_GPIO0	0
-> +#define RK_GPIO1	1
-> +#define RK_GPIO2	2
-> +#define RK_GPIO3	3
-> +#define RK_GPIO4	4
-> +#define RK_GPIO6	6
-> +
-> +#define RK_FUNC_GPIO	0
-> +#define RK_FUNC_1	1
-> +#define RK_FUNC_2	2
-> +#define RK_FUNC_3	3
-> +#define RK_FUNC_4	4
-> +#define RK_FUNC_5	5
-> +#define RK_FUNC_6	6
+The error message "bc: command not found" is easily missed since the
+build continues.
+bc is not a part of coreutils or base-devel. POSIX sh can also do the
+calculation.
 
-I would suggest to just drop the RK_GPIO and RK_FUNC_ prefix in the
-table below instead of having to define these here.
+Signed-off-by: Leon M. Busch-George <leon@georgemail.eu>
+---
+ Makefile | 13 +++++++++----
+ 1 file changed, 9 insertions(+), 4 deletions(-)
 
-Regards,
-Jonas
+diff --git a/Makefile b/Makefile
+index a2bc9d5903..e8e794368e 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1275,10 +1275,15 @@ OBJCOPYFLAGS_u-boot-nodtb.bin := -O binary \
+ binary_size_check: u-boot-nodtb.bin FORCE
+ 	@file_size=$(shell wc -c u-boot-nodtb.bin | awk '{print $$1}') ; \
+ 	map_size=$(shell cat u-boot.map | \
+-		awk '/_image_copy_start/ {start = $$1} /_image_binary_end/ {end = $$1} END {if (start != "" && end != "") print "ibase=16; " toupper(end) " - " toupper(start)}' \
+-		| sed 's/0X//g' \
+-		| bc); \
+-	if [ "" != "$$map_size" ]; then \
++		awk ' \
++			/_image_copy_start/ { start = $$1 } \
++			/_image_binary_end/ { end = $$1 } \
++			END { \
++				if (start != "" && end != "") \
++					print end " " start; \
++			}' \
++		| sh -c 'read end start; [ -n "$$end" ] && echo $$((end - start))'); \
++	if [ -n "$$map_size" ]; then \
+ 		if test $$map_size -ne $$file_size; then \
+ 			echo "u-boot.map shows a binary size of $$map_size" >&2 ; \
+ 			echo "  but u-boot-nodtb.bin shows $$file_size" >&2 ; \
+-- 
+2.44.0
 
-> +
->  static struct rockchip_mux_route_data rk3568_mux_route_data[] = {
->  	MR_PMUGRF(RK_GPIO0, RK_PB7, RK_FUNC_1, 0x0110, RK_GENMASK_VAL(1, 0, 0)), /* PWM0 IO mux selection M0 */
->  	MR_PMUGRF(RK_GPIO0, RK_PC7, RK_FUNC_2, 0x0110, RK_GENMASK_VAL(1, 0, 1)), /* PWM0 IO mux selection M1 */
->  	MR_PMUGRF(RK_GPIO0, RK_PC0, RK_FUNC_1, 0x0110, RK_GENMASK_VAL(3, 2, 0)), /* PWM1 IO mux selection M0 */
-
-[snip]
