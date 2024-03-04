@@ -4,80 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 392E6C48BF6
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 22:16:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71DF8C54E49
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 23:17:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 995A987FAE;
-	Mon,  4 Mar 2024 23:16:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9C19487F83;
+	Tue,  5 Mar 2024 00:17:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fVDmgVuh";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hx9nFG/R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ADB4887EE4; Mon,  4 Mar 2024 23:15:39 +0100 (CET)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id 3F50E876A4; Tue,  5 Mar 2024 00:02:34 +0100 (CET)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CCB7287FA4
- for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 23:15:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1247287F8F
+ for <u-boot@lists.denx.de>; Tue,  5 Mar 2024 00:02:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ivan.orlov0322@gmail.com
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-412db7067d6so982565e9.1
- for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 14:15:37 -0800 (PST)
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-5658082d2c4so6918505a12.1
+ for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 15:02:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1709590537; x=1710195337; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=op4cJ4nmnv5yRhCO3ZaBrz7z1A3lqiZ7P4pqwMOUvJ0=;
- b=fVDmgVuhWx7SuJnIF9dDQw/U6K2vthBABgS13HvCj9Z95lyMarAjK/aBN8UByjmxwz
- WqIfnRRpK28nF0gMYwhAfM14tC6S92jPisy6Or3RR+W4twppkw/rCmEZGJn8X4gynPe+
- 0Cmr0uyOdhQDCb1YvMbVJxlZvHmlFetvZL8mONV7NRI6KuPWJev+5IJcG3YUZ/tpk+dH
- 0wAo4b1akOJStsBxNAfCoX4y+NLr8KzbTuMiuVdg8apfedQQ418ZTyMXdthOU//BkNkP
- PFE0l9lmTdYuMTNN0Ve7YlTVatrcyHbt+8j2jtGbGL7wWKnEyCY63n/l0jgHQpU48gPq
- KJ2Q==
+ d=gmail.com; s=20230601; t=1709593351; x=1710198151; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=EfKVvCc8ZYEfB1COmorOeK1mNHbPkMIzSdBUHLdvQJI=;
+ b=hx9nFG/RY0yV9RDhzlg9l+2cqM18pKDLNMMkjrjirOC7cEsClRLrKAVehXw0873y+j
+ Rxib1V4dWe8/hwVuS3L3t8Xt+KTLZJZurqFGRZ3xJ68/9lkaumjpI1Ww1UxJgednU9op
+ ZrcVSeaF2Cy+moa/aa21/zHdoqJqXinZXgk4HWuDAnU9Xio1jSysVmhAZERU4uiVRux0
+ L2xca+ZO/8NeQjnDzgeUVZ+VtA214ykHcvD9lFEldrrJIKCVJ/87COVkiEn+UvN4+qHz
+ /FAtl4xh9mmil4ex0YavSOFoWdhA8W9fgSA6gUCH49iNX59xt5n4v0JAxSU/EVj3cFPF
+ O1sA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709590537; x=1710195337;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=op4cJ4nmnv5yRhCO3ZaBrz7z1A3lqiZ7P4pqwMOUvJ0=;
- b=VhNimebSNJzDDHLop+8QrCYSd0heaaDecOC3wwgzsph1H31wzm9jEAUErEcSetjdi7
- 7T3rWZaCV0BEoNM3vwg76dnnd9bMz0rqyRm55yAfsbafV2X2EyMMpml3+bxyVNsJlBOM
- fFtgN//qaQ9ncoGQ8PYyZSemOAOU7mRrzv9Jv1RwlLVeccRklyDsSuYOgOj3r5LLXO9z
- XQ+aw3C4ZDxJ/ucb4v5uFZSmVaLw3SNFbUj0J1ycQXuJVecxVeOUU3v1Vgolg3H1FU4c
- HpveRhGsw/gy+y/U8akmpUGorr6Mh00z6koVQq29xNB3Bz8lFWhmUMlIUqklZQx9vP+8
- XHOA==
+ d=1e100.net; s=20230601; t=1709593351; x=1710198151;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=EfKVvCc8ZYEfB1COmorOeK1mNHbPkMIzSdBUHLdvQJI=;
+ b=HmdcDFgPYMwIsYLQZWylhlnVkTeQvNV0TN+1cOR8JgJPqsEUEXtaSktTo5cqNcz91B
+ Lz7/HFW1VU14RNSFSNvhqwb+BK54R10fkj67cPe99Dp+cdEnK2+8gF7+uLlaPA1ftkTl
+ i2cN1WcJp/zGI+IB61Spe41NMylYdttgax2eCwrXj1M71BlyMY+oAancz3aCGQmPOfF9
+ o3hNbmmg6T15otkKcJOEBByQ1rzM3W9/nuhzvJzLMjqAnp9qE1UR7XidVX5zfwTUxAUm
+ Bp8PTm17yY1FspQwKcMvwrvaHLD0uaaJMiEofXES2ZrY8pihZ2u4Ku3nU0Vf15q7zqYz
+ rgeg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWt1F7PQbuPj8ms5jf94bcYuNGZ7U4E610Sy620bCsrRV+EJVkXcKcQu9Q0Nn9vIvEwJRRbQ60aK8sBUdykU3vewZs1Ew==
-X-Gm-Message-State: AOJu0YzRMU1xHQU+MQKYF//jXZY6qkJaZ1Mp/rWYd4vikJqHGENoLm30
- 5vs4r2yOD8UZOw4sDV67OCaflhW7gIpKOSlENEgFdl3qHeSHiydy
-X-Google-Smtp-Source: AGHT+IGlM8VeKhDPH+woRnPOb1OXIbE5igqLAzMEE28XhXY82Tm+bv3KQv1mlQ8q1TscZDiTg2QUkw==
-X-Received: by 2002:a05:600c:1d85:b0:412:e371:7c2e with SMTP id
- p5-20020a05600c1d8500b00412e3717c2emr2921453wms.1.1709590536975; 
- Mon, 04 Mar 2024 14:15:36 -0800 (PST)
-Received: from ivan-HLYL-WXX9.. ([2a01:4b00:d20e:7300:f7e0:efec:4145:922])
- by smtp.gmail.com with ESMTPSA id
- q13-20020a05600c46cd00b00412ebd587ebsm266481wmo.3.2024.03.04.14.15.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Mar 2024 14:15:36 -0800 (PST)
-From: Ivan Orlov <ivan.orlov0322@gmail.com>
-To: trini@konsulko.com,
-	xypron.glpk@gmx.de,
-	yanhong.wang@starfivetech.com
-Cc: Ivan Orlov <ivan.orlov0322@gmail.com>,
-	u-boot@lists.denx.de
-Subject: [PATCH] doc: board: starfive: Fix paths in the bash block
-Date: Mon,  4 Mar 2024 22:15:32 +0000
-Message-Id: <20240304221532.368453-1-ivan.orlov0322@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ AJvYcCWCjENg0qOi45ItoZq6jDHtAgQ3NMkapl3sy28ZGzskji/8f1MZIhLbd3k+FUkQWjhausr9FshjXlxzguhsQqQaqmmvcw==
+X-Gm-Message-State: AOJu0YwGRp9fLhf/zAsE9VBk4VEmQ45DkdHwnPgqs2Ni6sjlgp5fidaM
+ wa/ocfMLSxj81AC5P11Uuh/gQ95rtneBZNWAPeRYS8CAnUXmmJW4XL5aqyuRU6rZMHfzR8Qm2mw
+ 3oA8WszrHnso5yU7vVZbiJR7oJl8=
+X-Google-Smtp-Source: AGHT+IHrbX0TI1QzY4ITSD9vI9OrADmTTHJvB5pQMV71Lb/GX8KJKjae0afRbrPN2TprSlhSuU8msCqZoppsjaE4sys=
+X-Received: by 2002:a50:cdd0:0:b0:566:3f3e:3a23 with SMTP id
+ h16-20020a50cdd0000000b005663f3e3a23mr6881548edj.1.1709593351307; Mon, 04 Mar
+ 2024 15:02:31 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Mon, 04 Mar 2024 23:16:10 +0100
+References: <20240304-b4-upstream-dt-headers-v1-0-b7ff41925f92@linaro.org>
+ <20240304-b4-upstream-dt-headers-v1-26-b7ff41925f92@linaro.org>
+In-Reply-To: <20240304-b4-upstream-dt-headers-v1-26-b7ff41925f92@linaro.org>
+From: Tony Dinh <mibodhi@gmail.com>
+Date: Mon, 4 Mar 2024 15:02:12 -0800
+Message-ID: <CAJaLiFyXC2-wkwbyvK+bKWhwzV9=rWY445Lz5dFQSWdB0Zb5Bg@mail.gmail.com>
+Subject: Re: [PATCH RFC 26/26] dts: support building all dtb files for a
+ specific vendor
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, 
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>, Lukasz Majewski <lukma@denx.de>, 
+ Sean Anderson <seanga2@gmail.com>, Sam Protsenko <semen.protsenko@linaro.org>, 
+ Matthias Brugger <mbrugger@suse.com>, Peter Robinson <pbrobinson@gmail.com>, 
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, 
+ Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>, 
+ Michal Simek <michal.simek@amd.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Ryder Lee <ryder.lee@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Eugen Hristev <eugen.hristev@collabora.com>, 
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, 
+ Ryan Chen <ryan_chen@aspeedtech.com>,
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>, 
+ Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>, 
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
+ Dai Okamura <okamura.dai@socionext.com>, 
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>, u-boot@lists.denx.de, 
+ u-boot-amlogic@groups.io, uboot-stm32@st-md-mailman.stormreply.com, 
+ uboot-snps-arc@synopsys.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Tue, 05 Mar 2024 00:17:10 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,46 +118,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From the current documentation it is not entirely obvious where to take
-some of the u-boot build artifacts in order to flash them to the sd
-card. Extend the "Program the SD card" block by providing relative paths
-to the jh7110-starfive-visionfive-2.dtb and u-boot-spl.bin.normal.out
-files.
+Hi Caleb,
 
-Add "$(linux_image_dir)/" prefix to the Image.gz and initramfs.cpio.gz
-files in order to provide some information about where they could be
-taken from.
+On Mon, Mar 4, 2024 at 9:24=E2=80=AFAM Caleb Connolly <caleb.connolly@linar=
+o.org> wrote:
+>
+> This adjusts OF_UPSTREAM to behave more like the kernel by allowing for
+> all the devicetree files for a given vendor to be compiled. This is
+> useful for Qualcomm in particular as most boards are supported by a
+> single U-Boot build just provided with a different DT.
+>
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> ---
+>  dts/Kconfig          | 24 ++++++++++++++++++++++++
+>  scripts/Makefile.dts | 17 ++++++++++++++++-
+>  2 files changed, 40 insertions(+), 1 deletion(-)
+>
+> diff --git a/dts/Kconfig b/dts/Kconfig
+> index b9b6367154ef..67d9dc489856 100644
+> --- a/dts/Kconfig
+> +++ b/dts/Kconfig
+> @@ -100,8 +100,32 @@ config OF_UPSTREAM
+>           However, newer boards whose devicetree source files haven't lan=
+ded in
+>           the dts/upstream subtree, they can override this option to have=
+ the
+>           DT build from existing U-Boot tree location instead.
+>
+> +config OF_UPSTREAM_BUILD_VENDOR
+> +       bool "Build all devicetree files for a particular vendor"
+> +       depends on OF_UPSTREAM
+> +       help
+> +         Enable building all devicetree files for a particular vendor. T=
+his
+> +         is useful for generic U-Boot configurations where many boards c=
+an
+> +         be supported with a single binary.
+> +
+> +         This is only available for platforms using upstream devicetree.
+> +
+> +config OF_UPSTREAM_VENDOR
+> +       string "Vendor to build all upstream devicetree files for"
+> +       depends on OF_UPSTREAM_BUILD_VENDOR
+> +       default "qcom" if ARCH_SNAPDRAGON
+> +       default "rockchip" if ARCH_ROCKCHIP
+> +       default "amlogic" if ARCH_MESON
+> +       default "allwinner" if ARCH_SUNXI
+> +       default "mediatek" if ARCH_MEDIATEK
+> +       default "marvell" if ARCH_MVEBU
 
-Signed-off-by: Ivan Orlov <ivan.orlov0322@gmail.com>
----
- doc/board/starfive/visionfive2.rst | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+Perhaps here it should be:
+default "marvell" if ARCH_MVEBU || ARCH_KIRKWOOD
 
-diff --git a/doc/board/starfive/visionfive2.rst b/doc/board/starfive/visionfive2.rst
-index abda8ac21b..031d66fbfb 100644
---- a/doc/board/starfive/visionfive2.rst
-+++ b/doc/board/starfive/visionfive2.rst
-@@ -103,15 +103,15 @@ Program the SD card
- 
- .. code-block:: bash
- 
--	sudo dd if=u-boot-spl.bin.normal.out of=/dev/sdb1
-+	sudo dd if=spl/u-boot-spl.bin.normal.out of=/dev/sdb1
- 	sudo dd if=u-boot.itb of=/dev/sdb2
- 
- 	sudo mount /dev/sdb3 /mnt/
--	sudo cp u-boot-spl.bin.normal.out /mnt/
-+	sudo cp spl/u-boot-spl.bin.normal.out /mnt/
- 	sudo cp u-boot.itb /mnt/
--	sudo cp Image.gz /mnt/
--	sudo cp initramfs.cpio.gz /mnt/
--	sudo cp jh7110-starfive-visionfive-2.dtb /mnt/
-+	sudo cp $(linux_image_dir)/Image.gz /mnt/
-+	sudo cp $(linux_image_dir)/initramfs.cpio.gz /mnt/
-+	sudo cp arch/riscv/dts/jh7110-starfive-visionfive-2.dtb /mnt/
- 	sudo umount /mnt
- 
- Booting
--- 
-2.34.1
+All the best,
+Tony
 
+> +       default "xilinx" if ARCH_VERSAL || ARCH_ZYNQ
+> +       default "nvidia" if ARCH_TEGRA
+> +       help
+> +         Select the vendor to build all devicetree files for.
+> +
+>  choice
+>         prompt "Provider of DTB for DT control"
+>         depends on OF_CONTROL
+>
+> diff --git a/scripts/Makefile.dts b/scripts/Makefile.dts
+> index 5e2429c6170c..8005527f3df7 100644
+> --- a/scripts/Makefile.dts
+> +++ b/scripts/Makefile.dts
+> @@ -1,3 +1,18 @@
+>  # SPDX-License-Identifier: GPL-2.0+
+>
+> -dtb-y +=3D $(patsubst %,%.dtb,$(subst ",,$(CONFIG_DEFAULT_DEVICE_TREE) $=
+(CONFIG_OF_LIST) $(CONFIG_SPL_OF_LIST)))
+> +dtb-y +=3D $(patsubst %,%.dtb,\
+> +       $(subst ",,$(CONFIG_DEFAULT_DEVICE_TREE) $(CONFIG_OF_LIST) $(CONF=
+IG_SPL_OF_LIST)))
+> +
+> +ifeq ($(CONFIG_OF_UPSTREAM_BUILD_VENDOR),y)
+> +ifeq ($(CONFIG_ARM64),y)
+> +dt_dir :=3D $(srctree)/dts/upstream/src/arm64
+> +else
+> +dt_dir :=3D $(srctree)/dts/upstream/src/$(ARCH)
+> +endif
+> +
+> +dtb-vendor_dts :=3D $(patsubst %.dts,%.dtb, \
+> +       $(wildcard $(dt_dir)/$(subst ",,$(CONFIG_OF_UPSTREAM_VENDOR))/*.d=
+ts))
+> +
+> +dtb-y +=3D $(subst $(dt_dir)/,,$(dtb-vendor_dts))
+> +
+> +endif
+>
+> --
+> 2.44.0
+>
