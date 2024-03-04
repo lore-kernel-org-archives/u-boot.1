@@ -4,89 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F3DCC5478C
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 14:16:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60DE9C5478C
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 14:28:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B514987FAC;
-	Mon,  4 Mar 2024 15:16:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C72A087F09;
+	Mon,  4 Mar 2024 15:28:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mN6YRwxz";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ROioy1sm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E11D87FAE; Mon,  4 Mar 2024 15:16:32 +0100 (CET)
-Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
- [IPv6:2607:f8b0:4864:20::729])
+ id 2682487E4F; Mon,  4 Mar 2024 15:28:06 +0100 (CET)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D289987FB9
- for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 15:16:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A513987F09
+ for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 15:28:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x729.google.com with SMTP id
- af79cd13be357-7882b1e87c4so24288685a.1
- for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 06:16:29 -0800 (PST)
+ spf=pass smtp.mailfrom=dan.carpenter@linaro.org
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-563bb51c36eso6020472a12.2
+ for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 06:28:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1709561788; x=1710166588; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1709562483; x=1710167283; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=NeePnM1mF0q3uXlEDYy3Ay9tCOjZZsgLBPvEkFXFxnU=;
- b=mN6YRwxzmAL/zmQKkkCmX8QWbM2rsDiQlWak8cAUpuClIGo8wBBpEnLElQJYa5dPLq
- 7lVKTKoUom7HoizCej4HkPqg5uqJvoQ7N4zyQFXVlxEERku/5WKKH1etVKjrGI0zJExn
- DH6Zzy5BbntFKtHeTODWbcyD9kEvg4JAbH23c=
+ bh=h+/M5Q6WMO8rjXBD4m/N+1fPfC0YV1vCSKVFW4E2DNU=;
+ b=ROioy1smx0OTSwwWT4W6hhTHzfQgEg93iXbBFgSya79ooD5tbJRc2s56HKuz/HUiiP
+ 1LFOA6npovKr2YdmAXyIvs62zKogbdcspRNkLscrLvhnNklcvlQirqUAw8luy6GFZ2Wz
+ Qm5EHII1jzVRUYgLThaFVIfM7kTIyCNO80zgICeQaHfoGK3HkVw3EdEG8lHsF73flJiD
+ wOx4Y3D2ifD0mMuOh8MT7gUhtL27TT9rSro+ptt+UDIz1K/edL658x18wbYl5mSNpFUL
+ ijJVkxbhxpFqh0lCwkBuXFKt3hjGk/bEqK3cN3gZpZwB2e/EjTtzK8tWPEHzn4ZwHNxr
+ lkKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709561788; x=1710166588;
+ d=1e100.net; s=20230601; t=1709562483; x=1710167283;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NeePnM1mF0q3uXlEDYy3Ay9tCOjZZsgLBPvEkFXFxnU=;
- b=L3yrthb9hCWnnA3/pjqZ+Ik6GGIM9CF5w9CALZkIE/SVUO7UQa6k54myU2DUQmUSmS
- pCm+Y5FFqblLrfcnWQxkL5xpTC6PueAilbDdXZOx+o/duXOy2TkNueOB/JKEtWs3JWvx
- kM1BzDgEfwm0GiVqaJ57SBb87soc43Vl/J838SBaWd/5PDt+i4oRJ41WRf4XH2EcEKKr
- ihMuOXA06zgdBsDA2Qh4yELbl7YJ5ISNksvEEHj+Nh3U/+CS3toxZLm+h2WNJG617/eJ
- nk/DZc+I2KsULLt1JPicm8dwxUtoydPZqww/yhmzsQbcmPz93HQOcBWnypMDUgEqZ6B0
- KWJA==
+ bh=h+/M5Q6WMO8rjXBD4m/N+1fPfC0YV1vCSKVFW4E2DNU=;
+ b=oTJJE7pFB7ccYQxJ7Kk4vPOTs1mFwoTWOqyXThE8AuVPHRTiFHol8pShbQ4e7KHCg2
+ PUQG35ZZMZyvB+HjyfHfjFjuVHvg1NBmC6uA0PC2tztukeq1ZGPWOPdXd0QIzEWO+ZjB
+ JiQ8uvtzkNUaXFmg6veGSygknZxIl4Cs1PtmypPAQff/XSBnCrOY/p+IMEGAHmAx5aP7
+ GGdtTN7kzMULEyiva9vdzeCI1rD6A9vDOeIhNceiJ6RFQqcPonQUYmR2hX2DA+tzsOLC
+ 3FbsizMtkO1eE1a0/X1bgKgqpwwOqaBYvksc1odyuGlQauHfJmt3b+rYGMLMPE9KZXeH
+ WyvA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWGGHB4h3+SESW//VdO34NuGPSDVSJFZ8drbEC5RePXYT9IXsDdzPPbGkq0AktKnzlz5AQO0zG3oIddVtKLHrEEhxXwiQ==
-X-Gm-Message-State: AOJu0YzkBz2282AOGaCONGMvPz9f9ONuuW19r9ZrDEu48Py7FFttfCGm
- D/mKubffeI52xatHvipummhIj4mLRT/x8uHkBmtfst5B/1ivPuZjn53Lnitsn/o=
-X-Google-Smtp-Source: AGHT+IG07eWYLX22i9MbFCILnE0i3KhWe8b3/kRIAOsoPHoNQ6L4wCX7ZQ809eqlDWd3oL+fHrbedw==
-X-Received: by 2002:a05:620a:4047:b0:788:2420:1c1e with SMTP id
- i7-20020a05620a404700b0078824201c1emr5091351qko.3.1709561788562; 
- Mon, 04 Mar 2024 06:16:28 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-007f-0000-0000-0000-1002.res6.spectrum.com.
- [2603:6081:7b00:7f::1002]) by smtp.gmail.com with ESMTPSA id
- c19-20020ae9e213000000b00788228fbe05sm1650258qkc.17.2024.03.04.06.16.27
+ AJvYcCVTYZmsAi9EZNyFa4otuCC1vLsGOqFkY9Gh8VrBmpG6lSDyoB1Oj8dQAdhaqY6G8SxKiprea9AacxbN2N9FSl84baG4Bg==
+X-Gm-Message-State: AOJu0YxRcwrtmOnX7ZKsANaIrQ0peq4BAveeH4mWTRW1siA9m1+imP2J
+ H+eASTOM6HBgBMHXeweFGaEc4tYjb9Q7S8lEAxMnvaxa9SCpI8ll2NU3GT2pdSI=
+X-Google-Smtp-Source: AGHT+IEM8V77tKo4vx6Q0Bli0V2kcAKwdKepF4dyxn7WdZTa/RHXAGKJpHZ//NffbprkTiKiHT5rQw==
+X-Received: by 2002:aa7:c98d:0:b0:567:56a4:3940 with SMTP id
+ c13-20020aa7c98d000000b0056756a43940mr1504291edt.19.1709562483070; 
+ Mon, 04 Mar 2024 06:28:03 -0800 (PST)
+Received: from localhost ([102.222.70.76]) by smtp.gmail.com with ESMTPSA id
+ dy25-20020a05640231f900b005655dd9492dsm4701196edb.53.2024.03.04.06.28.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Mar 2024 06:16:28 -0800 (PST)
-Date: Mon, 4 Mar 2024 09:16:25 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Dan Carpenter <dan.carpenter@linaro.org>
-Cc: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
- Simon Glass <sjg@chromium.org>,
- Angelo Dureghello <angelo@kernel-space.org>, Bin Meng <bmeng.cn@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Alexander Gendin <agendin@matrox.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Michal Simek <michal.simek@amd.com>, Randolph <randolph@andestech.com>,
- Yu Chien Peter Lin <peterlin@andestech.com>,
- Samuel Holland <samuel@sholland.org>,
- Shengyu Qu <wiagn233@outlook.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 1/2] Kconfig: move CONFIG_32/64BIT to arch/Kconfig
-Message-ID: <20240304141625.GG1523872@bill-the-cat>
-References: <1cb3255b-5ed7-443b-8a02-6e998126d417@moroto.mountain>
- <b57b0fd3-dfb9-48c4-af0e-076222c85df7@moroto.mountain>
+ Mon, 04 Mar 2024 06:28:02 -0800 (PST)
+Date: Mon, 4 Mar 2024 17:27:58 +0300
+From: Dan Carpenter <dan.carpenter@linaro.org>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Andrew Davis <afd@ti.com>, Andre Przywara <andre.przywara@arm.com>,
+ Bin Meng <bmeng@tinylab.org>, Linus Walleij <linus.walleij@linaro.org>,
+ Fabio Estevam <festevam@denx.de>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Yang Xiwen <forbidden405@outlook.com>,
+ =?iso-8859-1?B?Q3Pza+Fz?= Bence <csokas.bence@prolan.hu>,
+ Peng Fan <peng.fan@nxp.com>, u-boot@lists.denx.de,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>
+Subject: Re: [PATCH v2 2/2] arm64: Enable CONFIG_64BIT for static analysis
+Message-ID: <f25d9a4c-9986-4b51-8731-75091c1b876e@moroto.mountain>
+References: <6a7328b8-eb22-4ad6-a1d6-eaecd2f8a067@moroto.mountain>
+ <6907b26a-9eb2-4ffd-8337-50ee96155c05@canonical.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="UX3aifqAQjTxZs5r"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <b57b0fd3-dfb9-48c4-af0e-076222c85df7@moroto.mountain>
-X-Clacks-Overhead: GNU Terry Pratchett
+In-Reply-To: <6907b26a-9eb2-4ffd-8337-50ee96155c05@canonical.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,40 +100,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Mon, Mar 04, 2024 at 02:44:12PM +0100, Heinrich Schuchardt wrote:
+> On 04.03.24 08:04, Dan Carpenter wrote:
+> > In the Makefile there is a line that says this:
+> > 
+> >      # the checker needs the correct machine size
+> >      CHECKFLAGS += $(if $(CONFIG_64BIT),-m64,-m32)
+> > 
+> > Set CONFIG_64BIT for ARM64 so that we pass -m64 to the static checkers
+> > instead of -m32.
+> > 
+> > Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
+> > ---
+> > v2: split the patch into two patches
+> > 
+> >   arch/arm/Kconfig | 1 +
+> >   1 file changed, 1 insertion(+)
+> > 
+> > diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+> > index fde85dc0d537..76d6a8cc6886 100644
+> > --- a/arch/arm/Kconfig
+> > +++ b/arch/arm/Kconfig
+> > @@ -6,6 +6,7 @@ config SYS_ARCH
+> >   config ARM64
+> >   	bool
+> > +	select 64BIT
+> 
+> How about other 64bit architectures (sandbox64, x86_64)?
+> 
 
---UX3aifqAQjTxZs5r
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+You're right.  That was laziness on my part.  Plus, I didn't know about
+sandbox64.  But I think once we fix the two you mentioned then
+everything will be updated.
 
-On Mon, Mar 04, 2024 at 10:04:15AM +0300, Dan Carpenter wrote:
+$ grep -l 64 arch/*/Kconfig
+arch/arm/Kconfig
+arch/mips/Kconfig
+arch/riscv/Kconfig
+arch/sandbox/Kconfig
+arch/x86/Kconfig
 
-> These configs are used in multiple places so put them in a shared
-> Kconfig file.
->=20
-> Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
+I'll send those patches tomorrow.
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
---=20
-Tom
-
---UX3aifqAQjTxZs5r
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXl17kACgkQFHw5/5Y0
-tyxK9Av+LMlN6WTJGzaTmTSWokCKrMvxEaRjrIeh82PwJ13PifPVgCi3t0ByCG4W
-5HYLxCw3hhHR1YOT7ksU4KiWT5KWsKmuvhajTZ9AhUsG6Hvde6poUaB3Xj0RfZl9
-j+isp+B73CFlk7abkSBjj3FoOoSemSd57MoOCfD1AD/eyV4IMeE/Vd8H+v/suD7p
-0fCtSyBmDkIo+BlyHXyudiTOJlybaNgn/CBT/K0Sg2V+YdE6YqweHPZjxqea6BWX
-jq0cRQZz5bHKe/Gn8JMq2T1c4t0bkuaqx9M1rvvczZQlwrO8kpMX0R6mX+8KxsEx
-+/Dyqgxrj2oUD7hsyL43ku43JPbUz/iZqyK6nXqpu4YayKi/CBsqrWD86G0688mn
-uo38S9ULz0z94uF/ccnuKXAbc3Tbx2K4+1J+ALOeKqWzSl2li8+bcLYELvU5YrDm
-auKr3QpH1R3ShlHG0e6IReLgWupS6lf7UW4MaXDeejXqPPQaXfx02ZTdkYE7/qdf
-9JA1n45V
-=tVB5
------END PGP SIGNATURE-----
-
---UX3aifqAQjTxZs5r--
+regards,
+dan carpenter
