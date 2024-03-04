@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20240C54E41
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 09:01:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEBADC48BF6
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 09:01:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1942487F6F;
-	Mon,  4 Mar 2024 10:01:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3B1C987F64;
+	Mon,  4 Mar 2024 10:01:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HBRPtcP/";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oS5Ezkkb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E32EC87F28; Mon,  4 Mar 2024 10:01:26 +0100 (CET)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id 8208187DAB; Mon,  4 Mar 2024 10:01:33 +0100 (CET)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C864686FCE
- for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 10:01:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F321787DAB
+ for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 10:01:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-412e72b0d96so1328405e9.0
- for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 01:01:21 -0800 (PST)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-412d501fb96so12006445e9.0
+ for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 01:01:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709542881; x=1710147681; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1709542885; x=1710147685; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=axqi5l4Ztq3WiIi5s/5Po9WAHf/Ep2gUDdwyUWhnccw=;
- b=HBRPtcP/RjSUwGW3LFJALF+sSXASy1gxf5HZKrtGOCWjCVNOUqN4QRLoTCtrM7Qe6u
- HrbuD/l8YxeexkFVSzseqvpNINS6SgyAqaVT9qW1uP+hK+IRJy1f0huhVaFxZXqy5czN
- 48tuYfaMVzBseqB1Zu5IatJzS0VIogCCvDbK6LMqZuVZI57dqxH4Gvgz5PABtMUUgO/x
- iInuWwBAJZSSvC/u9EhuO/4Pcx4C74Q3ujCB6fs9zB2tBlTofr4CQWfvBspj1rqcgo+3
- DTgs+oppyRF4lbU4vJzGhM2F/lBsOf7P88t59d+nhudNHnHd5OIXRBVinHUaaKFL8xD4
- kG1g==
+ bh=oZqVrolZtjKa0HX67bS1C989QteOSIVgzjajjrEykwY=;
+ b=oS5EzkkbwWtF0Rn0CUPXI1j+PYF1tV6m/6aVueQUCsT5mvN1J/8fAFAbpcT+teHjF0
+ kpo1o62maU544IF82i9I3gWEp3YnlC3piPLxnC7IxIxo1ZoEvA0FT0xEIwdHZT212RKn
+ AFRKdCfjOu2x1NsIBJDtX+8rIlSGytiqRo+JbDWfFZaEuCxRONb40ht2/B8aS1mmZ7Zk
+ t0Jl7Xy5iyJYffrakgPpn8mScisw9yqGHkO5ilHjKInRvYtLrnYunWDfsgkqSfdj9zYV
+ Qfx+d4O8Bz6czvd/rBcnKMVaO6f9cj1W40d7231QmUPs5aGwdjzQF3esPU78nulpEa9T
+ +m7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709542881; x=1710147681;
+ d=1e100.net; s=20230601; t=1709542885; x=1710147685;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=axqi5l4Ztq3WiIi5s/5Po9WAHf/Ep2gUDdwyUWhnccw=;
- b=GQnFnOWOswR6onGHT4shHDaqhR9AThWely4/KOmpO6w5NJ4UuNBxPSH0H74vZXuWqb
- IRaq4Pc3YhPCqVDDUQjjd7HlsoRkxp3vox/BPAv4pD1FOPw7xGwwD2A6jaAee2u7GOOP
- CLHxPsRurhJrsipkepaNcvxAUGs/6nouxYL2OMYAEV1r5IIa5AkpnY1+Di9Rfv0UmUs1
- PqJO0Me6eiVFN4o29q4lrIN3G9fTx6KUqgPBonE2V9x9Cpi1Zz4ZVaMhvlzmnS0EGC9M
- D3y6kiR+5ClxYABtStRw25NnU869+i3sZcEawg0IjdPDhun49J3boB1RG6yVpAPtEPFQ
- Nd6Q==
-X-Gm-Message-State: AOJu0YxI/+Nh5HdtmRHY6orKtEcY3AJ4gfEQljKgDkq78tLic8fea0DQ
- 8PHMt/bbWHeMqMixXKcS0kU0Ae3aAz5LnaBKAQ0yE1AmyqIq+nxEThijr6cMzv8jBSF6xOcVc+4
- jaWI=
-X-Google-Smtp-Source: AGHT+IH2vO5q1LRKSUptH+pdnT0W8bS3df9C5KDgoqDs6ICooi5gq1gCDn/j0hH/Xfc4RbOEwxtJwA==
-X-Received: by 2002:a05:600c:4451:b0:412:e65a:a20 with SMTP id
- v17-20020a05600c445100b00412e65a0a20mr654546wmn.13.1709542881221; 
- Mon, 04 Mar 2024 01:01:21 -0800 (PST)
+ bh=oZqVrolZtjKa0HX67bS1C989QteOSIVgzjajjrEykwY=;
+ b=ZiniL+rU/X6Rsl9njLLzxlCpFj1T+Hj4VzZZWGIfPRjzOkio3d++dCS5cVa9c5s5U8
+ VR3WGmUddqe+XFr4tPIhHpU9Sxch8R21SDKFGKNHkFxcCQKE4QzokZkcBWqqjcEa6UFG
+ h4h+hpwTW7PbqNI8Ia72jeGXTtMkEkPi6Wve5ZAE3/qfAwY1BFoMXETeo9kWX7KX+qGL
+ RjKZLtkxfn0HLKdSRpN0AxX7bLGBGMLsqBhNfZHNXNwSMp17iFpsUKs+bkhwWuKKdR7e
+ 1/lkeFMlgmF+vvKlPMATkvqCFZS0HicYbQSS26BGQKb5q1KZtTpMoJJUmnCRPEw2AU9H
+ UqgQ==
+X-Gm-Message-State: AOJu0YzC6a3dF4Z2LZDLO5y9zf1Hewah/ZjkzfR2ZWS0oJY70WERBrD6
+ nJS34jC/duJtgF3POoFCKvrDP+J0T1r1+OReooABIgNCP1soQomxuDQd5LJtnzSGUSYAibKpRlB
+ Vpc0=
+X-Google-Smtp-Source: AGHT+IHz35TxCnc85IekKQe+1wdv3dWq4FDddeulZ7+Yw2od4Z3wwBn2JB4S7KbNCJSgibstI5A93g==
+X-Received: by 2002:a05:600c:538b:b0:412:b8db:2fd9 with SMTP id
+ hg11-20020a05600c538b00b00412b8db2fd9mr6457876wmb.9.1709542885353; 
+ Mon, 04 Mar 2024 01:01:25 -0800 (PST)
 Received: from hades.. (ppp046103107123.access.hol.gr. [46.103.107.123])
  by smtp.gmail.com with ESMTPSA id
- t11-20020a05600c198b00b00412c8117a34sm10281167wmq.47.2024.03.04.01.01.19
+ t11-20020a05600c198b00b00412c8117a34sm10281167wmq.47.2024.03.04.01.01.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Mar 2024 01:01:20 -0800 (PST)
+ Mon, 04 Mar 2024 01:01:24 -0800 (PST)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: u-boot@lists.denx.de,
 	trini@konsulko.com,
@@ -77,9 +77,9 @@ Cc: caleb.connolly@linaro.org, sumit.garg@linaro.org,
  Yegor Yefremov <yegorslists@googlemail.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Shiji Yang <yangshiji66@outlook.com>, Bin Meng <bmeng@tinylab.org>
-Subject: [PATCH 1/6] arm: baltos: remove custom linker script
-Date: Mon,  4 Mar 2024 11:01:06 +0200
-Message-Id: <20240304090113.1410575-2-ilias.apalodimas@linaro.org>
+Subject: [PATCH 2/6] arm: clean up v7 and v8 linker scripts for bss_start/end
+Date: Mon,  4 Mar 2024 11:01:07 +0200
+Message-Id: <20240304090113.1410575-3-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.37.2
 In-Reply-To: <20240304090113.1410575-1-ilias.apalodimas@linaro.org>
 References: <20240304090113.1410575-1-ilias.apalodimas@linaro.org>
@@ -101,125 +101,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-commit 3d74a0977f514 ("ti: am335x: Remove unused linker script") removed
-the linker script for the TI variant. This linker script doesn't seem to
-do anything special and on top of that, has no definitions for the EFI
-runtime sections.
+commit 3ebd1cbc49f0 ("arm: make __bss_start and __bss_end__ compiler-generated")
+and
+commit f84a7b8f54db ("ARM: Fix __bss_start and __bss_end in linker scripts")
+were moving the bss_start/end on c generated variables that were
+injected in their own sections. The reason was that we needed relative
+relocations for position independent code and linker bugs back then
+prevented us from doing so.
 
-So let's get rid of it and use the generic linker script which defines
-those correctly
+However, the linker documentation pages states that symbols that are
+defined within a section definition will create a relocatable
+type with the value being a fixed offset from the base of a section.
+This have been fixed since 2016 [1]. So let's start cleaning this up
+starting with the bss_start and bss_end variables. Convert them into
+symbols within the .bss section definition.
+
+[0] https://ftp.gnu.org/old-gnu/Manuals/ld-2.9.1/html_mono/ld.html#SEC13
+[1] commit 6b3b0ab89663 ("Make linker assigned symbol dynamic only for shared object")
 
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Tested-by: Caleb Connolly <caleb.connolly@linaro.org> # Qualcomm sdm845
 ---
- board/vscom/baltos/u-boot.lds | 128 ----------------------------------
- 1 file changed, 128 deletions(-)
- delete mode 100644 board/vscom/baltos/u-boot.lds
+ arch/arm/cpu/armv8/u-boot-spl.lds        | 14 +++-----------
+ arch/arm/cpu/armv8/u-boot.lds            | 15 +++------------
+ arch/arm/cpu/u-boot.lds                  | 22 ++++------------------
+ arch/arm/lib/sections.c                  |  2 --
+ arch/arm/mach-rockchip/u-boot-tpl-v8.lds | 14 +++-----------
+ arch/arm/mach-zynq/u-boot.lds            | 21 +++------------------
+ 6 files changed, 16 insertions(+), 72 deletions(-)
 
-diff --git a/board/vscom/baltos/u-boot.lds b/board/vscom/baltos/u-boot.lds
-deleted file mode 100644
-index cb2ee6769753..000000000000
---- a/board/vscom/baltos/u-boot.lds
-+++ /dev/null
-@@ -1,128 +0,0 @@
--/*
-- * Copyright (c) 2004-2008 Texas Instruments
-- *
-- * (C) Copyright 2002
-- * Gary Jennejohn, DENX Software Engineering, <garyj@denx.de>
-- *
-- * See file CREDITS for list of people who contributed to this
-- * project.
-- *
-- * This program is free software; you can redistribute it and/or
-- * modify it under the terms of the GNU General Public License as
-- * published by the Free Software Foundation; either version 2 of
-- * the License, or (at your option) any later version.
-- *
-- * This program is distributed in the hope that it will be useful,
-- * but WITHOUT ANY WARRANTY; without even the implied warranty of
-- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-- * GNU General Public License for more details.
-- *
-- * You should have received a copy of the GNU General Public License
-- * along with this program; if not, write to the Free Software
-- * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
-- * MA 02111-1307 USA
-- */
+diff --git a/arch/arm/cpu/armv8/u-boot-spl.lds b/arch/arm/cpu/armv8/u-boot-spl.lds
+index 7cb9d731246d..16fddb46e9cb 100644
+--- a/arch/arm/cpu/armv8/u-boot-spl.lds
++++ b/arch/arm/cpu/armv8/u-boot-spl.lds
+@@ -63,18 +63,10 @@ SECTIONS
+ 
+ 	_image_binary_end = .;
+ 
+-	.bss_start (NOLOAD) : {
+-		. = ALIGN(8);
+-		KEEP(*(.__bss_start));
+-	} >.sdram
 -
--OUTPUT_FORMAT("elf32-littlearm", "elf32-littlearm", "elf32-littlearm")
--OUTPUT_ARCH(arm)
--ENTRY(_start)
--SECTIONS
--{
--	. = 0x00000000;
+-	.bss (NOLOAD) : {
++	.bss : {
++		__bss_start = .;
+ 		*(.bss*)
+-		 . = ALIGN(8);
+-	} >.sdram
 -
--	. = ALIGN(4);
--	.text :
--	{
--		*(.__image_copy_start)
--		*(.vectors)
--		CPUDIR/start.o (.text*)
--		board/vscom/baltos/built-in.o (.text*)
--		*(.text*)
+-	.bss_end (NOLOAD) : {
+-		KEEP(*(.__bss_end));
++		__bss_end = .;
+ 	} >.sdram
+ 
+ 	/DISCARD/ : { *(.rela*) }
+diff --git a/arch/arm/cpu/armv8/u-boot.lds b/arch/arm/cpu/armv8/u-boot.lds
+index fb6a30c922f7..c4ee10ebc3ff 100644
+--- a/arch/arm/cpu/armv8/u-boot.lds
++++ b/arch/arm/cpu/armv8/u-boot.lds
+@@ -149,19 +149,10 @@ SECTIONS
+ 
+ 	_end = .;
+ 
+-	. = ALIGN(8);
+-
+-	.bss_start : {
+-		KEEP(*(.__bss_start));
 -	}
 -
--	. = ALIGN(4);
--	.rodata : { *(SORT_BY_ALIGNMENT(SORT_BY_NAME(.rodata*))) }
--
--	. = ALIGN(4);
--	.data : {
--		*(.data*)
+-	.bss : {
++	.bss ALIGN(8): {
++		__bss_start = .;
+ 		*(.bss*)
+-		 . = ALIGN(8);
 -	}
 -
--	. = ALIGN(4);
--
--	. = .;
--
--	. = ALIGN(4);
--	__u_boot_list : {
--		KEEP(*(SORT(__u_boot_list*)));
--	}
--
--	. = ALIGN(4);
--
--	.image_copy_end :
--	{
--		*(.__image_copy_end)
--	}
--
--	.rel_dyn_start :
--	{
--		*(.__rel_dyn_start)
--	}
--
--	.rel.dyn : {
--		*(.rel*)
--	}
--
--	.rel_dyn_end :
--	{
--		*(.__rel_dyn_end)
--	}
--
--	.hash : { *(.hash*) }
--
--	.end :
--	{
--		*(.__end)
--	}
--
--	_image_binary_end = .;
--
--	/*
--	 * Deprecated: this MMU section is used by pxa at present but
--	 * should not be used by new boards/CPUs.
--	 */
--	. = ALIGN(4096);
--	.mmutable : {
--		*(.mmutable)
--	}
--
+-	.bss_end : {
+-		KEEP(*(.__bss_end));
++		__bss_end = .;
+ 	}
+ 
+ 	/DISCARD/ : { *(.dynsym) }
+diff --git a/arch/arm/cpu/u-boot.lds b/arch/arm/cpu/u-boot.lds
+index 7724c9332c3b..90d329b1ebe0 100644
+--- a/arch/arm/cpu/u-boot.lds
++++ b/arch/arm/cpu/u-boot.lds
+@@ -206,27 +206,13 @@ SECTIONS
+ 		*(.mmutable)
+ 	}
+ 
 -/*
 - * Compiler-generated __bss_start and __bss_end, see arch/arm/lib/bss.c
 - * __bss_base and __bss_limit are for linker only (overlay ordering)
@@ -231,25 +202,96 @@ index cb2ee6769753..000000000000
 -	}
 -
 -	.bss __bss_base (OVERLAY) : {
--		*(.bss*)
++	.bss ALIGN(4): {
++		__bss_start = .;
+ 		*(.bss*)
 -		 . = ALIGN(4);
 -		 __bss_limit = .;
 -	}
 -
 -	.bss_end __bss_limit (OVERLAY) : {
 -		KEEP(*(.__bss_end));
++		__bss_end = .;
+ 	}
+ 
+-	.dynsym _image_binary_end : { *(.dynsym) }
++	.dynsym  : { *(.dynsym) }
+ 	.dynbss : { *(.dynbss) }
+ 	.dynstr : { *(.dynstr*) }
+ 	.dynamic : { *(.dynamic*) }
+diff --git a/arch/arm/lib/sections.c b/arch/arm/lib/sections.c
+index 857879711c6a..8e8bd5797e16 100644
+--- a/arch/arm/lib/sections.c
++++ b/arch/arm/lib/sections.c
+@@ -19,8 +19,6 @@
+  * aliasing warnings.
+  */
+ 
+-char __bss_start[0] __section(".__bss_start");
+-char __bss_end[0] __section(".__bss_end");
+ char __image_copy_start[0] __section(".__image_copy_start");
+ char __image_copy_end[0] __section(".__image_copy_end");
+ char __rel_dyn_start[0] __section(".__rel_dyn_start");
+diff --git a/arch/arm/mach-rockchip/u-boot-tpl-v8.lds b/arch/arm/mach-rockchip/u-boot-tpl-v8.lds
+index 74618eba591b..b7887194026e 100644
+--- a/arch/arm/mach-rockchip/u-boot-tpl-v8.lds
++++ b/arch/arm/mach-rockchip/u-boot-tpl-v8.lds
+@@ -56,18 +56,10 @@ SECTIONS
+ 
+ 	_image_binary_end = .;
+ 
+-	.bss_start (NOLOAD) : {
+-		. = ALIGN(8);
+-		KEEP(*(.__bss_start));
 -	}
 -
--	.dynsym _image_binary_end : { *(.dynsym) }
--	.dynbss : { *(.dynbss) }
--	.dynstr : { *(.dynstr*) }
--	.dynamic : { *(.dynamic*) }
--	.gnu.hash : { *(.gnu.hash) }
--	.plt : { *(.plt*) }
--	.interp : { *(.interp*) }
--	.gnu : { *(.gnu*) }
--	.ARM.exidx : { *(.ARM.exidx*) }
--}
+-	.bss (NOLOAD) : {
++	.bss ALIGN(8) : {
++		__bss_start = .;
+ 		*(.bss*)
+-		 . = ALIGN(8);
+-	}
+-
+-	.bss_end (NOLOAD) : {
+-		KEEP(*(.__bss_end));
++		__bss_end = .;
+ 	}
+ 
+ 	/DISCARD/ : { *(.dynsym) }
+diff --git a/arch/arm/mach-zynq/u-boot.lds b/arch/arm/mach-zynq/u-boot.lds
+index 3b7c9d515f8b..8d3259821719 100644
+--- a/arch/arm/mach-zynq/u-boot.lds
++++ b/arch/arm/mach-zynq/u-boot.lds
+@@ -102,26 +102,11 @@ SECTIONS
+ 
+ 	_image_binary_end = .;
+ 
+-/*
+- * Compiler-generated __bss_start and __bss_end, see arch/arm/lib/bss.c
+- * __bss_base and __bss_limit are for linker only (overlay ordering)
+- */
+-
+-	.bss_start __rel_dyn_start (OVERLAY) : {
+-		KEEP(*(.__bss_start));
+-		__bss_base = .;
+-	}
+-
+-	.bss __bss_base (OVERLAY) : {
++	.bss ALIGN(4): {
++		__bss_start = .;
+ 		*(.bss*)
+-		 . = ALIGN(8);
+-		 __bss_limit = .;
+-	}
+-
+-	.bss_end __bss_limit (OVERLAY) : {
+-		KEEP(*(.__bss_end));
++		__bss_end = .;
+ 	}
+-
+ 	/*
+ 	 * Zynq needs to discard these sections because the user
+ 	 * is expected to pass this image on to tools for boot.bin
 -- 
 2.37.2
 
