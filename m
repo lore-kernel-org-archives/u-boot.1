@@ -4,102 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC7F5C5478C
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 13:35:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B09CFC5478C
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 13:36:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C84587D07;
-	Mon,  4 Mar 2024 14:35:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=gerhold.net
+	by phobos.denx.de (Postfix) with ESMTP id 3400187F6F;
+	Mon,  4 Mar 2024 14:36:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gerhold.net header.i=@gerhold.net header.b="qbq7cBr9";
-	dkim=permerror (0-bit key) header.d=gerhold.net header.i=@gerhold.net header.b="zfTxNT5P";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="A4w7pKxZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8BE4587F6F; Mon,  4 Mar 2024 14:35:20 +0100 (CET)
-Received: from mo4-p01-ob.smtp.rzone.de (mo4-p01-ob.smtp.rzone.de
- [81.169.146.165])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4166586F1E; Mon,  4 Mar 2024 14:36:53 +0100 (CET)
+Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
+ [IPv6:2607:f8b0:4864:20::633])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BAC7186F1E
- for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 14:35:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 29A6687F6F
+ for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 14:36:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=gerhold.net
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=stephan@gerhold.net
-ARC-Seal: i=1; a=rsa-sha256; t=1709559290; cv=none;
- d=strato.com; s=strato-dkim-0002;
- b=KhkAuCYzgCfvnkqazOS4Q3rH8/Zosg/yRYHIs71vWuBBd1Z7X6Y8hEs2yzCkIdHBS6
- QJ4rfAw2tgmoOUM41ytSLbQFtlP4KrTzOU6+sFl9sD+ZaOt0VfQvGGphYrNGq5VVTJGL
- ZSPMqPqfcIMDB3lKtcq3rUniHjqadKEZ1+hpzx3ZwTKyf4IDzG9iasTGFKMKIZC0TZA/
- qRLuCLYTXfdhkcUQCrKzEJ+glaQdbATIT9D9TpBukPhNZ6dUKDa8g1g0H8qXAX7icAHX
- 84pIb8GYSuMWPrHryF1KnUU61I+za06O+XwdEZ/d4MjrTNgiaE+7liNKFRfnPXmVpe2h
- 2y3g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1709559290;
- s=strato-dkim-0002; d=strato.com;
- h=In-Reply-To:References:Message-ID:Subject:Cc:To:From:Date:Cc:Date:
- From:Subject:Sender;
- bh=4DQVzBxz5TytJ7soZFbPEm9RQNEhKPVSfQifm8IOsYA=;
- b=rR3XP28nrL+jzlDjRB+UDNcJ+PcxCgGEmiY2Gv9C54znpBt9Og6g7Cq/f31qHSbHbL
- 9z3m1xzc1xeA3Y0kvT8gCv7hS/rO9npHxGKAKBmAMBKJECWgCJWqfrrhMPZxdMTfSp0f
- OntVGpwkUtzi8jU2GbkZyXtn/RcA+pTlguQhEo0RQ8Rx6hFbgFTUgHzYdLWSHm16ub9M
- KoPN1w+vMahTUPz04m5CkyNocyHtURmlomvfmNS8UeB4O474C4LTfTGIKV7/T1LI5d73
- xvKlxOb7UHH99sicO3+dqCCZ4ozzng73qagWUm93Mv7DY8pfuz1+eoHHdoFOvi/0N/PQ
- KRJA==
-ARC-Authentication-Results: i=1; strato.com;
-    arc=none;
-    dkim=none
-X-RZG-CLASS-ID: mo01
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1709559290;
- s=strato-dkim-0002; d=gerhold.net;
- h=In-Reply-To:References:Message-ID:Subject:Cc:To:From:Date:Cc:Date:
- From:Subject:Sender;
- bh=4DQVzBxz5TytJ7soZFbPEm9RQNEhKPVSfQifm8IOsYA=;
- b=qbq7cBr9YOOzJb7odPW89Er2gVfUKtLc7ylQsMt8Q2iJo/39Q7pDsUcF3iUWf0aU1j
- oQgcLqmkCBLrwrL7f1sRu4JqaUm4pLKSb45F1g7zlUhhg2+pd+c8ZLJRErB7J+rURXvz
- v5c4KG2Is1esxRVjCgqCvtgEL3vzuxeWRN0HPFQeMMxW3V0zTl/XcrmZx+Nd/ugPfSLW
- mBJMKwG93maJtYSj7YcBCJC0rWMtOx8gnQTbGQngAJlW5l8f8EyxP7qFvH8mCNP6NQxZ
- jeLXwbLyy5tcKl+fKZpvp1h+qEV4O94KngleluiwrZCp3yJ9QUjJ27FikHEsjbFrqQbN
- HlFQ==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1709559290;
- s=strato-dkim-0003; d=gerhold.net;
- h=In-Reply-To:References:Message-ID:Subject:Cc:To:From:Date:Cc:Date:
- From:Subject:Sender;
- bh=4DQVzBxz5TytJ7soZFbPEm9RQNEhKPVSfQifm8IOsYA=;
- b=zfTxNT5PIcLc7sJnOJ4D35hv6xOwTFexOXjxqJaCDIDLxAjWmrfc0mDciijgnyQHcA
- uE9PRWO0wlYX9JbQG5Cg==
-X-RZG-AUTH: ":P3gBZUipdd93FF5ZZvYFPugejmSTVR2nRPhVOQ/OcYgojyw4j34+u261EJF5OxJD4paA8Z2L1A=="
-Received: from gerhold.net by smtp.strato.de (RZmta 50.2.0 DYNA|AUTH)
- with ESMTPSA id ufb408024DYmEaH
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
- (Client did not present a certificate);
- Mon, 4 Mar 2024 14:34:48 +0100 (CET)
-Date: Mon, 4 Mar 2024 14:34:43 +0100
-From: Stephan Gerhold <stephan@gerhold.net>
-To: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Elmar Psilog <epsi@gmx.de>,
- Joe Hershberger <joe.hershberger@ni.com>, Jonas Karlman <jonas@kwiboo.se>,
- Kever Yang <kever.yang@rock-chips.com>,
- Konrad Dybcio <konrad.dybcio@linaro.org>,
- Ley Foon Tan <leyfoon.tan@starfivetech.com>,
- Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>,
- Michal Simek <michal.simek@amd.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Ramon Fried <rfried.dev@gmail.com>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Sumit Garg <sumit.garg@linaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Tom Rini <trini@konsulko.com>, Yanhong Wang <yanhong.wang@starfivetech.com>
-Subject: Re: [PATCH 0/8] Add support for Qualcomm SA8155-ADP board
-Message-ID: <ZeXN7EZHU89qS5PF@gerhold.net>
-References: <20240229142043.1263690-1-volodymyr_babchuk@epam.com>
- <dc97490e-4029-41e2-bbbd-b1351f5cf9eb@linaro.org>
- <87bk7x6c88.fsf@epam.com>
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-1dbff00beceso11896995ad.1
+ for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 05:36:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1709559409; x=1710164209; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=NPTIGFzMjv6t0WPGaVUZygnqRv1sD/oKkcLYBh+e8oM=;
+ b=A4w7pKxZ+gY+V6bus99DqYtxOf/MAlCoqnj3bN13JXNnjepnXdZITry/BwwZqzXY8h
+ J+FLswzDoXOq9hdmQMqJqFlxhIIKs0EnS6HRRxIN0oK7EkHbRssDdIdRXoiHtDzMRVXC
+ 8M9ODxXRHYvp9DckWNSThZGQdeKdHSclE3ppXgplAU2Em/lY7wcOLqkaqxAvgyVVomJH
+ uHRhPepdZ3eWqJL3aQkByy511/9lxiuyKMwGUpFkI7NhT55Y3HWoEtE3ouZPGcynlzK2
+ DYPpvWGCi5eUr4HoTzgvSA2QGdOvaiV3vumEs0CFzDvQK+bo/OapPn3ZkXK3bu9zauXK
+ Fe0A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1709559409; x=1710164209;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=NPTIGFzMjv6t0WPGaVUZygnqRv1sD/oKkcLYBh+e8oM=;
+ b=N594BjCoRK28BlN3EJNMRWuJOZ9rPG4RwCkia51w8sHnaaHq5pg6HVPdI5r4Exjd6T
+ uZAgCzFjNRWSjBk/OuM5nSBXNO8PDXK21k/8WwuQtxixMrY8829/M8F0kKaNV+srkpS3
+ 5We7wS5/oTYwTP0iCFuD0Zs95phNXmshREfiC14XUB3XN9J9J36yDEoE0gAZ/wWuHg/1
+ FwFtAhC9TBexGddG5sA9fShnZZVaJlNu/ym8CC/cuuKw8yKbi4Lbo6rxhuTc8DiA/Gso
+ l+Tj04DXepH6DURMvYRCO7gR+1ymnGviXcXWXTioYC6H9INYEo7Vil4zC+zi2pocqD1+
+ Zu7Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWN+779/onIDp35xGMIU0XR1VIkiFHL1eGYrY9//TKHeN0YqwjmE7MM/caasrjRCI4TT6Hu6efhGIhCOJIjGGkdcuVJpA==
+X-Gm-Message-State: AOJu0YwzTtnIDkXXAULKdBTG1UwL5YGTjSMKuQk71jMrAsNgdKv/ItuJ
+ V8wClBeEQ9saPg2sqGHil/EgOPPpBHVtoXdxH4E1h1rgLsglLvtoBMIy43yXXwh9dENdZdeDBd1
+ mM81AWcMtOB34e8uIqT6VyIoFvRI=
+X-Google-Smtp-Source: AGHT+IG2MrxSflrtTeDejqShioOG+Fcx2pEuHCtqK0yH5S7C/CUsY0JMaqny4UWiwwkpW8N0rLXW0SPY4+GWnKzUm+Q=
+X-Received: by 2002:a17:90a:d98b:b0:296:db75:c240 with SMTP id
+ d11-20020a17090ad98b00b00296db75c240mr7383857pjv.1.1709559409465; Mon, 04 Mar
+ 2024 05:36:49 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <87bk7x6c88.fsf@epam.com>
-Content-Transfer-Encoding: 7bit
+References: <20240227154002.30257-1-sebastien.szymanski@armadeus.com>
+ <20240227154234.GK3040305@bill-the-cat>
+ <CAOMZO5CBY4+CogKi767RVvT0F89Kpp6Hb9p1o7cw8jRE9PwUuA@mail.gmail.com>
+ <20240304133458.GE1523872@bill-the-cat>
+In-Reply-To: <20240304133458.GE1523872@bill-the-cat>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Mon, 4 Mar 2024 10:36:37 -0300
+Message-ID: <CAOMZO5DERLm6DtLGEdpWDnUs=H2Oo+9ug24yjbDOJR6BnGg6=Q@mail.gmail.com>
+Subject: Re: [PATCH 1/2] opos6uldev: make the LCD work again
+To: Tom Rini <trini@konsulko.com>
+Cc: =?UTF-8?Q?S=C3=A9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>, 
+ u-boot@lists.denx.de, Stefano Babic <sbabic@denx.de>, 
+ "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
+ Anatolij Gustschin <agust@denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,33 +95,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Mar 01, 2024 at 06:25:39PM +0000, Volodymyr Babchuk wrote:
-> Caleb Connolly <caleb.connolly@linaro.org> writes:
-> > On 29/02/2024 14:21, Volodymyr Babchuk wrote:
-> >> This patch series adds support for Qualcomm SA8155-ADP development
-> >> board. Main motivation for this series is to allow running
-> >> virtualization software on this board and U-Boot is a good way to
-> >> break Qualcomm's boot chain at EL2 with more convenient ways for
-> >> uploading and running the code. With this patches applied it is
-> >> possible to upload and run Xen on this board. KVM probably should work
-> >> too.
-> >
-> > This is really cool! I've experimented with this on SDM845 and SM8250
-> > but never really did anything with it... I'd love to take a look at your
-> > Xen branch?
-> 
-> Honestly, there is nothing to look at right now. I just implemented
-> early printk serial driver for the qcom, made hacks to the device tree
-> and trying to boot Dom0. I already expecting issues with the GPU,
-> because it has own SMMU without virtualization support and Xen already
-> complains about it. So I had to remove it from the DTS for a time being.
-> 
+On Mon, Mar 4, 2024 at 10:35=E2=80=AFAM Tom Rini <trini@konsulko.com> wrote=
+:
 
-Did you enable all the clocks/power domains/etc for the GPU SMMU? If I
-remember correctly it is off by default and all registers read as
-zeroes. The SMMU driver could easily get confused about the capabilities
-of the SMMU (e.g. the stage 2/virtualization support) if all the ID
-registers read as zeroes.
+> For v2024.04 yes, this is fine. For long term, we should parse the new
+> timing properties that the simple panel driver takes in our simple panel
+> driver instead.
 
-Thanks,
-Stephan
+Sounds good.
+
+S=C3=A9bastien, please follow Tom's suggestion when you have a chance.
+
+Thanks.
