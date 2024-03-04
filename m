@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 335B1C5478C
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 15:44:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75447C5478C
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 15:45:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 99B2F87FB9;
-	Mon,  4 Mar 2024 16:44:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id D079F87FB6;
+	Mon,  4 Mar 2024 16:45:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="VRhGeimz";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="ClaIvo8z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC32287FBE; Mon,  4 Mar 2024 16:44:18 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 221F087FBC; Mon,  4 Mar 2024 16:45:44 +0100 (CET)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6C8E875FA
- for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 16:44:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D665387E92
+ for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 16:45:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1709567052; x=1710171852; i=xypron.glpk@gmx.de;
- bh=i99GwJZ64gg0nFrFdHGjgvHNx0c090OInhTJtiqLJDQ=;
- h=X-UI-Sender-Class:Date:Subject:To:References:Cc:From:
- In-Reply-To;
- b=VRhGeimzAhcutJShcuiHBal0p9YYQBJ+qR1SJmIjcI/454b8lmErCmN851jbAg9B
- eG8NOfUnzgMkS4lz+3/g7nesJYIQznA0X35UJPAw+Qcd/v2eOnMCVVrGbbt8po9WP
- /f+Z9AoWslFSbklsvBbysi1O1v6URUL+5JjBpHg/5aK8IsT3R96JlUY/J4TrbG3wk
- rmVW2+kjYMLaEoAIVNFAhmof3qxS4H/mSQEjzomk3hS7B5i70yafwyFTUdS+lDyRx
- 0NeQpvszDjNKJgpcPKLlNop5oH0dYgY8fNEWiNOSY2AJhM1EgvyCErC6rFSRKjWyK
- mEyE9yr+acBVDiSF+w==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.101] ([109.42.176.242]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MkHMZ-1r0uv43abx-00kfnw; Mon, 04
- Mar 2024 16:44:11 +0100
-Message-ID: <2e36991a-2a3c-46d8-bcbf-1c2c7a3d3a63@gmx.de>
-Date: Mon, 4 Mar 2024 16:44:06 +0100
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-5656e5754ccso5969248a12.0
+ for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 07:45:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1709567141; x=1710171941;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=E4ZxDPpyltRUQ0TAUPbnAKRDzB35Unf+A0BQVJEL+Sc=;
+ b=ClaIvo8zD9va4g4k3LCDPZAomQiipeBjlGSAL9laDwFC29y9I25eLzzq0eEsFDCOwC
+ y4x4bJsBOz4irSyolcAi7WFueXXag0T+PWykne7NglpBHEBslCCI0dAznDQMtoCW8kH/
+ 3hpqY62jXGeBSFPlWiudcstwQOk2krPo2+snI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1709567141; x=1710171941;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=E4ZxDPpyltRUQ0TAUPbnAKRDzB35Unf+A0BQVJEL+Sc=;
+ b=g+OaC189tJ3iJoYP+8TdCLpplL4MPURCUK1Ys4skoCHH6kpexZlVdmWVkhhPd1FNmQ
+ 33s55uRCv5tp14s2+4y4YgDrMsSydt4g8dnPqjd2e7AW5AlQ6b2dcnv6G2sdYWKSKK5u
+ K/Nk1QunBFKpK++0WUFPUJsb9x9B4s9d3dYoUCx7hG0u1Lr60uUQA/omGMIHrs4+wr+V
+ SuQZLpUhMeF2WyTkb2bsBFouAo/zNC4KLuXnfZNo78GTmZWhzXKF1cgkTmsCfROXD+7M
+ FLIBPMM9woK4J6RWp4H3cFEkxw8d+VEm+Y29gjUdCbIu9KjVC05TMl8EZr8LTjp6XE2u
+ toSA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUyqeC7DIRuQmS87HSpo53HPJK+RSZeLBmjgwigxAnDGkm4AGypvG0YmGCVjyitXJsurOqf2HVCGvtrg/mDQEYZnrz+Hg==
+X-Gm-Message-State: AOJu0YwOUL504tIxo7rNAVGv6fdEAaLxA1bh09bb4wAEp2OEtxkGnY7l
+ VL6PcnCzJgwATFOXmVJxPNcGVw/mlv+3caFyRFKnssoZz3+0eXScb+tZNZ9MLLsWAzQi2aHG/xt
+ o+LFEDrSEgh8sqBR6s1vkKkK7tE0FMiYekZQqlQ==
+X-Google-Smtp-Source: AGHT+IECJryRmc676DwIdeOFMlb0YaTqTlXaXJxOuI9BzXipMhjaufa42NmufDo6CjTzu1JuLVv7qJX6nn0IDm9SDak=
+X-Received: by 2002:a17:906:c30c:b0:a45:31f5:9de5 with SMTP id
+ s12-20020a170906c30c00b00a4531f59de5mr2564672ejz.33.1709567141211; Mon, 04
+ Mar 2024 07:45:41 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] cmd: sf: Fix sf probe crash
-Content-Language: en-US
-To: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 References: <20240104114619.280513-1-o451686892@gmail.com>
  <CAHk0Hov+uwanmDK9wh9ke6c2JX7TRw9_qsF9Vq+Hrs6rqFqD6Q@mail.gmail.com>
-Cc: Weizhao Ouyang <o451686892@gmail.com>, Michal Simek
- <michal.simek@amd.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
+ <2e36991a-2a3c-46d8-bcbf-1c2c7a3d3a63@gmx.de>
+In-Reply-To: <2e36991a-2a3c-46d8-bcbf-1c2c7a3d3a63@gmx.de>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Mon, 4 Mar 2024 16:45:29 +0100
+Message-ID: <CAOf5uwnOca7uzTJe8MLZ0xgY9ifW6XvK6MqbSDj8DaHWfQ7XsQ@mail.gmail.com>
+Subject: Re: [PATCH] cmd: sf: Fix sf probe crash
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Weizhao Ouyang <o451686892@gmail.com>, Michal Simek <michal.simek@amd.com>, 
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>, 
  Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <CAHk0Hov+uwanmDK9wh9ke6c2JX7TRw9_qsF9Vq+Hrs6rqFqD6Q@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:HcATq0IJD1Prl5cWlN5DpbbKQUYgLWM082w1kYhqlSBU6mv8ErR
- Od8YmOMsoQdfFzh7AwB4FEz50/NUwcLeJDzGxDxoR9RuuQBNTogIaiT4EEY5nwv14acFJgZ
- Bq9+IZCqjfV91Y+86DFqVAUBZNF3wDfy4yHimsAASSVOhoVQbJoYyRwRSxhkzUMURA7hXM/
- vikmQpLgmWGohU1tQzTvA==
-UI-OutboundReport: notjunk:1;M01:P0:9JuNpxItve0=;SUDPk8yDvg5yKCtrH8CNsjo/7Un
- WpSg8Hh8wtL2Z98Yj/JahsF84f1LvFvGsOfzq3GxlNetyyxlUM1zJW880YAQr2MJvTRlavV/A
- 03+JR7UfZWuEW3GQ9yBmEgKn/925QY3UJMwNvtImh/TcuUAv9OrU2mDLxCXJP2Ml6JQEEivmI
- VcRHrDw5XDulwR/9h4mLWZe/ePPN7N4sf4xc3wZq4jJCRyKE9piIFUQTZTRmMWtIse9moEn4u
- 00JPwqoQMhh4vnt61dLFtilwFa4PXlh7FNO1vUg0SOQfFkKoNIuGylRffJE40xcFiU9sfmhhD
- ydAbq4OMH91LugQ9UB3SrcCkqeOBXlsTRfDedV+mbxppAit1FWKXvN/HLf2SjDyuElg6pDGgV
- u9rx9QEJ3eshGghjmxzc2x+y+b75RfkwnVrjehkSHXxq9eaEWqtC5elLHHqet+/QaK9LEi2Zn
- 2QJLXYDqHIF3FLKGJ/hgaQ9tVJHOl5Z/GdNCWrUgWe6q8aNvRISS5ykx5PLV08J4XhxPk65bG
- 83smb9tq5sK8KBdjBIalYftpdD1GHZzVooSDW3k2YVzGLn9wPkSDm+DycLUAUJukbvtBsE8dA
- c/WUT99T3hKGJy1L6MzE9wNcuYM2x4gABYP7D6dv/YkBoISlT10LmfMd4vPJPa7AfL0u/QfUS
- eC5OlPtmEQeC27hT0QskUWsGdRRQ2rpn3dmm9L7lS1lgY/V45wNu1Qcqxgzka9JdddJFI6dK/
- 3F/CNY9Qa3aTnFKvV7q0FMbix7rIvAII6Gopc4rhW6L+mSYP4zxg/bNA0e9elsKwRUj+twz1E
- AltHWIL5Ds6b8vmnX6LQWEqCjb9oP+zNo8pt2fPGKxqQE=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,51 +93,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 04.03.24 15:47, Weizhao Ouyang wrote:
-> Gentle ping. Not merged yet.
+Hi
+
+On Mon, Mar 4, 2024 at 4:44=E2=80=AFPM Heinrich Schuchardt <xypron.glpk@gmx=
+.de> wrote:
 >
-> BR,
-> Weizhao
+> On 04.03.24 15:47, Weizhao Ouyang wrote:
+> > Gentle ping. Not merged yet.
+> >
+> > BR,
+> > Weizhao
+>
+> Hello Dario,
+>
+> that patch is in your patchwork review queue. Could you, please, have a
+> look.
 
-Hello Dario,
+He is with me, I will ping about all the patches that we need to queue
 
-that patch is in your patchwork review queue. Could you, please, have a
-look.
-
-Best regards
-
-Heinrich
+Michael
 
 >
-> On Thu, Jan 4, 2024 at 7:46=E2=80=AFPM Weizhao Ouyang <o451686892@gmail.=
-com> wrote:
->>
->> Handle the return value of spi_flash_probe_bus_cs() to avoid sf probe
->> crashes.
->>
->> Signed-off-by: Weizhao Ouyang <o451686892@gmail.com>
->> ---
->>   cmd/sf.c | 5 +++--
->>   1 file changed, 3 insertions(+), 2 deletions(-)
->>
->> diff --git a/cmd/sf.c b/cmd/sf.c
->> index 730996c02b..e3866899f6 100644
->> --- a/cmd/sf.c
->> +++ b/cmd/sf.c
->> @@ -135,8 +135,9 @@ static int do_spi_flash_probe(int argc, char *const=
- argv[])
->>          }
->>          flash =3D NULL;
->>          if (use_dt) {
->> -               spi_flash_probe_bus_cs(bus, cs, &new);
->> -               flash =3D dev_get_uclass_priv(new);
->> +               ret =3D spi_flash_probe_bus_cs(bus, cs, &new);
->> +               if (!ret)
->> +                       flash =3D dev_get_uclass_priv(new);
->>          } else {
->>                  flash =3D spi_flash_probe(bus, cs, speed, mode);
->>          }
->> --
->> 2.39.2
->>
+> Best regards
+>
+> Heinrich
+>
+> >
+> > On Thu, Jan 4, 2024 at 7:46=E2=80=AFPM Weizhao Ouyang <o451686892@gmail=
+.com> wrote:
+> >>
+> >> Handle the return value of spi_flash_probe_bus_cs() to avoid sf probe
+> >> crashes.
+> >>
+> >> Signed-off-by: Weizhao Ouyang <o451686892@gmail.com>
+> >> ---
+> >>   cmd/sf.c | 5 +++--
+> >>   1 file changed, 3 insertions(+), 2 deletions(-)
+> >>
+> >> diff --git a/cmd/sf.c b/cmd/sf.c
+> >> index 730996c02b..e3866899f6 100644
+> >> --- a/cmd/sf.c
+> >> +++ b/cmd/sf.c
+> >> @@ -135,8 +135,9 @@ static int do_spi_flash_probe(int argc, char *cons=
+t argv[])
+> >>          }
+> >>          flash =3D NULL;
+> >>          if (use_dt) {
+> >> -               spi_flash_probe_bus_cs(bus, cs, &new);
+> >> -               flash =3D dev_get_uclass_priv(new);
+> >> +               ret =3D spi_flash_probe_bus_cs(bus, cs, &new);
+> >> +               if (!ret)
+> >> +                       flash =3D dev_get_uclass_priv(new);
+> >>          } else {
+> >>                  flash =3D spi_flash_probe(bus, cs, speed, mode);
+> >>          }
+> >> --
+> >> 2.39.2
+> >>
+>
 
+
+--=20
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
+
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
