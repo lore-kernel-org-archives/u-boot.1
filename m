@@ -4,56 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFB2AC54E49
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 23:29:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A66AFC48BF6
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 23:43:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4446E87F83;
-	Tue,  5 Mar 2024 00:28:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 0CCAA87D06;
+	Tue,  5 Mar 2024 00:43:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="bkwOcRIf";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="B7O3tOdY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4936487F8A; Tue,  5 Mar 2024 00:28:57 +0100 (CET)
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D0D64871C7; Tue,  5 Mar 2024 00:43:47 +0100 (CET)
+Received: from mail-ua1-x931.google.com (mail-ua1-x931.google.com
+ [IPv6:2607:f8b0:4864:20::931])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B20CC87DA8
- for <u-boot@lists.denx.de>; Tue,  5 Mar 2024 00:28:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A5C4787FB1
+ for <u-boot@lists.denx.de>; Tue,  5 Mar 2024 00:43:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=conor@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 76428CE0A4C;
- Mon,  4 Mar 2024 23:28:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7D57FC433C7;
- Mon,  4 Mar 2024 23:28:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1709594930;
- bh=j8f6NvdqS5Xdh7x1gQYdbseGfYjtFT62QhwiOh0CQfI=;
- h=From:To:Cc:Subject:Date:From;
- b=bkwOcRIf40cuf7qV9u6zssKSt1rW1pPucPuq/3uQNigT0R1jMFNwdAwCIfGunbKXU
- 1lNFt0K1kaPiI12H/IzKQEA7OHh0yxBtnoqTCrWmXr1Mf0wyx3PXMWSYlmW2xl7Nzk
- jLOIVljaByT7EnYwIB0KqmbxNfHSr3M21iba4D4Kl1sDWOQRIf7zL33WAHlf9ZwWoO
- XeM4wwRK1bqXOHACQNam2A8SjQcha/jooEh+veSfqAKu0hYSAR7uTYF2IyUjjfIgTg
- m0taVJ+F+syxvSmURm0HfH9MsBMoXjR+xkZENhd9ZTfPa9/Nn9LoH39pDYwBopzZli
- WZt1Oe2DIeCaA==
-From: Conor Dooley <conor@kernel.org>
-To: u-boot@lists.denx.de
-Cc: conor@kernel.org, Conor Dooley <conor.dooley@microchip.com>,
- Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Chanho Park <chanho61.park@samsung.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Bin Meng <bmeng.cn@gmail.com>,
- palmer@dabbelt.com
-Subject: [PATCH v1] riscv: cpu: improve multi-letter extension detection in
- supports_extension()
-Date: Mon,  4 Mar 2024 23:28:35 +0000
-Message-ID: <20240304232835.3076533-2-conor@kernel.org>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ua1-x931.google.com with SMTP id
+ a1e0cc1a2514c-7d698a8d93cso2778019241.3
+ for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 15:43:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1709595824; x=1710200624; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=aEJuP0oovS68y5qNLM7ViB4+9COy4tDaI8gCMc54DrQ=;
+ b=B7O3tOdYNxPi/kxtLsi7xMJXsaQdN/Vq1TgDjUHVD+RyINk7wOVynkV3GWa3zm6sRQ
+ PI4fqvjjp+BvAuMTS5oaS6GtrU097gFx0wz0FAnpvpiVI7kDen4KBUB5i95/09harbjh
+ 95cZzgQyH7ID+hNjHOqtg6hNwLjoZG5OxwGm4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1709595824; x=1710200624;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=aEJuP0oovS68y5qNLM7ViB4+9COy4tDaI8gCMc54DrQ=;
+ b=GUKxr+nbF97iRaLZ+oOwhw2QvtG4ke39+SQ0BNfHNnbiW+ABtz/ovwqToiHxkhanMf
+ OZ9QlRgLWSy5UQrBI9MOkdsx4bNaiQZ4Ssv9y+znT2oF/ADJQ++J9cLAo023uX/QIKRz
+ orpHA9sxzJezR7XTX2gAL98Iib/XY1LcxWCQgwdBQ/8fCpbaNOqkzKUi8UcXAqQJ19xJ
+ uzaVIre/na7qJ2tl1p3W3aAntoixP7Wab0t267V6PNVJG3mMI1AsUuaJQ3p+irAS/NYJ
+ gycQvXWTy8NkQ5SWZaBpJDa6PyTWI1aDCp2fkKrIl8PObC56bKtG6vsBCzJm1LTLaE2L
+ GJ+w==
+X-Gm-Message-State: AOJu0YzpgUIHqQknlBjuf71YJ9py40u5j250ak4E1G3AMq8eVIv3VfBS
+ 7nJznwC08qAbpPmqX9X7i3h3CFj6iheeaV9LCrBZZ2yENR+wMlqvKCYim4TGqoU=
+X-Google-Smtp-Source: AGHT+IHhBYTaATuNVhoZjEXImjcil7BolkGXhNrc4uKbytyXjJqaKCDUgvcWWqfIHKBPX/tXxX9bQg==
+X-Received: by 2002:a05:6122:128f:b0:4cb:56c5:5816 with SMTP id
+ i15-20020a056122128f00b004cb56c55816mr235062vkp.12.1709595824372; 
+ Mon, 04 Mar 2024 15:43:44 -0800 (PST)
+Received: from [127.0.1.1]
+ (2603-6081-7b00-007f-0000-0000-0000-1002.res6.spectrum.com.
+ [2603:6081:7b00:7f::1002]) by smtp.gmail.com with ESMTPSA id
+ fu32-20020a05622a5da000b0042ee44418e3sm2173101qtb.94.2024.03.04.15.43.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 04 Mar 2024 15:43:43 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: Robert Nelson <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20240220183952.3614252-1-nm@ti.com>
+References: <20240220183952.3614252-1-nm@ti.com>
+Subject: Re: [PATCH V2 0/5] board: beagle: Enable 32k and debounce
+ configuration and fixups
+Message-Id: <170959582360.2422760.4485410745026401090.b4-ty@konsulko.com>
+Date: Mon, 04 Mar 2024 18:43:43 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,81 +91,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Conor Dooley <conor.dooley@microchip.com>
+On Tue, 20 Feb 2024 12:39:47 -0600, Nishanth Menon wrote:
 
-The first multi-letter extension after the single-letter extensions does
-not have to be preceded by an underscore, which could cause the parser
-to mistakenly find a single-letter extension after the start of the
-multi-letter portion of the string.
-Three letters precede multi-letter extensions (s, x & z), none of which
-are valid single-letter extensions. The dt-binding also allows
-multi-letter extensions starting with h, but no such extension have been
-frozen or ratified, and the unprivileged spec no longer uses "h" as a
-prefix for multi-letter hypervisor extensions, having moved to "sh"
-instead. For that reason, modify the parser to stop at s, x & z to prevent
-this overrun, ignoring h.
+> Rev 2 of the series.
+> 
+> This is a follow up from [1] - Without the 32k crystal configuration,
+> wlan doesn't work. Debounce is needed for HDMI Hot plug detect(hpd)
+> gpio interrupt not storming.
+> 
+> At least the 32k configuration has been done for toradex and phytec
+> boards, follow similar model of programming.
+> 
+> [...]
 
-Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
----
-The parser in U-Boot only supports single-letter extensions & the
-single-letter h has to be at the end of the single-letter section, so it
-would not be difficult to terminate parsing once a h is seen (you'd need
-to support the hypervisor extension to support additional hypervisor
-extensions after all) if in the future a multi-letter extension starting
-with h did come about. I've got no problem adding a special case for h,
-but I'm tempted to just remove the multi-letter h extensions from the
-binding, given there's actually not going to be any extensions ratified
-using that naming scheme.
+Applied to u-boot/master, thanks!
 
-CC: Rick Chen <rick@andestech.com>
-CC: Leo <ycliang@andestech.com>
-CC: Tom Rini <trini@konsulko.com>
-CC: Simon Glass <sjg@chromium.org>
-CC: Chanho Park <chanho61.park@samsung.com>
-CC: Heinrich Schuchardt <xypron.glpk@gmx.de>
-CC: Bin Meng <bmeng.cn@gmail.com>
-CC: Conor Dooley <conor.dooley@microchip.com>
-CC: palmer@dabbelt.com
-CC: u-boot@lists.denx.de
----
- arch/riscv/cpu/cpu.c | 22 ++++++++++++++++------
- 1 file changed, 16 insertions(+), 6 deletions(-)
-
-diff --git a/arch/riscv/cpu/cpu.c b/arch/riscv/cpu/cpu.c
-index 8445c5823e..ecfefa1a02 100644
---- a/arch/riscv/cpu/cpu.c
-+++ b/arch/riscv/cpu/cpu.c
-@@ -49,14 +49,24 @@ static inline bool supports_extension(char ext)
- 	}
- 	if (!cpu_get_desc(dev, desc, sizeof(desc))) {
- 		/*
--		 * skip the first 4 characters (rv32|rv64) and
--		 * check until underscore
-+		 * skip the first 4 characters (rv32|rv64)
- 		 */
- 		for (i = 4; i < sizeof(desc); i++) {
--			if (desc[i] == '_' || desc[i] == '\0')
--				break;
--			if (desc[i] == ext)
--				return true;
-+			switch (desc[i]) {
-+			case 's':
-+			case 'x':
-+			case 'z':
-+			case '_':
-+			case '\0':
-+				/*
-+				 * Any of these characters mean the single
-+				 * letter extensions have all been consumed.
-+				 */
-+				return false;
-+			default:
-+				if (desc[i] == ext)
-+					return true;
-+			}
- 		}
- 	}
- 
 -- 
-2.43.0
+Tom
+
 
