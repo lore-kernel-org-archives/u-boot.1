@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AB93C48BF6
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 15:29:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 572C9C54E55
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 15:29:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE7DD88046;
-	Mon,  4 Mar 2024 16:27:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EF43888009;
+	Mon,  4 Mar 2024 16:27:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="skEJ4li3";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iJZ2H5Ro";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 08C638803B; Mon,  4 Mar 2024 16:27:50 +0100 (CET)
-Received: from mail-qt1-x82d.google.com (mail-qt1-x82d.google.com
- [IPv6:2607:f8b0:4864:20::82d])
+ id 9B02E86FCE; Mon,  4 Mar 2024 16:27:54 +0100 (CET)
+Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
+ [IPv6:2607:f8b0:4864:20::833])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0297188039
- for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 16:27:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 87B2888039
+ for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 16:27:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82d.google.com with SMTP id
- d75a77b69052e-429de32dad9so33916701cf.2
- for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 07:27:47 -0800 (PST)
+Received: by mail-qt1-x833.google.com with SMTP id
+ d75a77b69052e-429f53f0b0bso33676421cf.2
+ for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 07:27:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1709566066; x=1710170866; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1709566071; x=1710170871; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=kPuqGtwLJIH64JayHsRsBgZzEO3BJjRu0pt7985LWwg=;
- b=skEJ4li30pkEWZYkj7WmoBKDSOZAMFaJtp8dl3aknd/HcxcA792eJblgvnpaY0PoOa
- 9JDQfuf0FVs3CYahjs5Ur+dIp6lL/PNR9y2w4QSUM/4h/psV+9wFg719jAQz0igMWlyr
- OwfijhnsIwbt2GZN4YzoTJGGufU9PdiQCv3Bk=
+ bh=1VjkKqgGdIkwWXnwjL8on9B4pXcGZv/0z8EtzvC4Cb4=;
+ b=iJZ2H5RoxfPxMBw5CmlnFist1WYkoJUJF8sh1h64Yl/UFEo/640EOVL6iLwtCW2fUF
+ /E+BpFGB8XN71/BL0cwJEboisSM5M56OpU/9hpvykVW8LwnLYQDkJBjj4ma/Ix6Hs8Wo
+ T66lVE/68BAYXhP83wj+hU8hWUXu4isB3cCTc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709566066; x=1710170866;
+ d=1e100.net; s=20230601; t=1709566071; x=1710170871;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kPuqGtwLJIH64JayHsRsBgZzEO3BJjRu0pt7985LWwg=;
- b=cj+gmIW4tCjVdKjKNpQlvTrm0I116PP6JjgohALxUWb6h49zOt3s0brDe3kl/6fZmb
- 2iu+LvjXXFiJ1uu0ytT5MSHmspz1rdhWTb6yJtvkoSphw3bT52TeHP67jkPqkzC0v1h0
- EsnGkB++SozCJPJcjbnVl4NFWsGC5aYtbHzJ8lTUj6tjKBKa0pEJykWat2jv78oKvksG
- 24ltMvqULcFVMSV+fywg0aaYriVRor6VIrNHeXTIF9awowlyj0PnpFnRm2EX72LpnkmJ
- vpVErqklSbJb7zc02oHUW5gKPUpS4z4ZYyJb6qui3PQYTRMLYARKdeYs6ubk4CwjfbMM
- fkGA==
+ bh=1VjkKqgGdIkwWXnwjL8on9B4pXcGZv/0z8EtzvC4Cb4=;
+ b=DBKhBt2kxz/JkpfiOSH9j7xf7G69/qF152txPyUfPJ3aiM27+K/UFe9QeHuGJbC0D8
+ MFWoqzOxmuXsHxigCrqpAMT04bGkeUIsKNwRbQ64SZHohMr5Ebgk3Knp/2XsTiDmQGXD
+ SxXOXp7yV3Y6vI/XHgHUn+D2DcyWefpBhFF+MphTOT9JPnEg6EsvGN/4HRtmrjEsgYPN
+ i8Rb8BzJnneGDh7DvDB5HW6k62kPZiIbFAOMYu33W37Mr5GvppttIS/FFAfyeC5ia1lO
+ rY6b2Br7qSn5qOWpF01Nm6bO7YwA65ncGw8a6EEMXcX4WkAAjQANVAMHuGDBQyQ9PXq7
+ oBbw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX6acrjKYW1lt1zJ0Szz40/8nafzjBQgswsPyfhGATUk+54oC8Ux1yTXLmepC9/dIBK0QcaMgBgLJ6aiRc/chGEFh2QRQ==
-X-Gm-Message-State: AOJu0Ywvn7fEl2P44GLY8rkS9rwN+07vgc2/li13iT8bqpE8jQ1BzNC4
- F9G1QzKwYLjj+1wMiWsR0SP995YFf09EZ26uUEsdfwu1a4QF1mVbyenmKSl18Zc=
-X-Google-Smtp-Source: AGHT+IFKT72IcQyQENdUbmx/IFkLserw12lTu9TYOOcpR6uUgGvg89KE/oZkcct7r7tUuh1s8mfDpw==
-X-Received: by 2002:a05:622a:14b:b0:42e:e152:be3b with SMTP id
- v11-20020a05622a014b00b0042ee152be3bmr7132711qtw.37.1709566065657; 
- Mon, 04 Mar 2024 07:27:45 -0800 (PST)
+ AJvYcCWdWhqL5bT4opQpf7kHSeHFDtdGsrEd03Rq9L/5FFxdoixovWA+vYkqtKScboxgYb3OHq2jePS90C43Qy2edd0VgY255w==
+X-Gm-Message-State: AOJu0YxBQQUlMQKFgZs3RB12v/S85a6YPGhcyZmECphSgKFqCslzLVCu
+ 11qy82yuqYkgHxMw+INiBGf0soCfwCLfoF/ipwUUtYqE6lGmpwDGbRIKByII8rU=
+X-Google-Smtp-Source: AGHT+IH8ocC2aZNKYEKUDUV6qRbs3EZcYEadaVn4t/HsF9cgqaNXcu5g5WtrYxBsZSCpGaF8gEcvTA==
+X-Received: by 2002:ad4:58a9:0:b0:690:71e:d18a with SMTP id
+ ea9-20020ad458a9000000b00690071ed18amr9703992qvb.13.1709566071279; 
+ Mon, 04 Mar 2024 07:27:51 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-007f-0000-0000-0000-1002.res6.spectrum.com.
  [2603:6081:7b00:7f::1002]) by smtp.gmail.com with ESMTPSA id
- r21-20020ac84255000000b0042ef9768d15sm261433qtm.13.2024.03.04.07.27.45
+ oq5-20020a056214460500b0068fa52f5f7esm5205682qvb.7.2024.03.04.07.27.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Mar 2024 07:27:45 -0800 (PST)
-Date: Mon, 4 Mar 2024 10:27:43 -0500
+ Mon, 04 Mar 2024 07:27:50 -0800 (PST)
+Date: Mon, 4 Mar 2024 10:27:48 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Dan Carpenter <dan.carpenter@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH] bootstd: fix build error when CONFIG_MMC is disabled
-Message-ID: <20240304152743.GV1523872@bill-the-cat>
-References: <e910bbd4-e509-4e6f-a458-d2e00741aec6@moroto.mountain>
+To: Nam Cao <namcao@linutronix.de>
+Cc: sjg@chromium.org, bmeng.cn@gmail.com, mibodhi@gmail.com,
+ xypron.glpk@gmx.de, caleb.connolly@linaro.org,
+ mkorpershoek@baylibre.com, i@shantur.com, u-boot@lists.denx.de
+Subject: Re: [PATCH] bootstd: support scanning a single partition
+Message-ID: <20240304152748.GW1523872@bill-the-cat>
+References: <20240221124144.168711-1-namcao@linutronix.de>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="COrdl5ac4v4H2O4o"
+ protocol="application/pgp-signature"; boundary="RKLqFXUKLQzgooF9"
 Content-Disposition: inline
-In-Reply-To: <e910bbd4-e509-4e6f-a458-d2e00741aec6@moroto.mountain>
+In-Reply-To: <20240221124144.168711-1-namcao@linutronix.de>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,46 +95,45 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---COrdl5ac4v4H2O4o
+--RKLqFXUKLQzgooF9
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Feb 21, 2024 at 09:26:21AM +0300, Dan Carpenter wrote:
+On Wed, Feb 21, 2024 at 01:41:44PM +0100, Nam Cao wrote:
 
-> This code assumes that CONFIG_MMC and it causes a build error when
-> the config is disabled.
+> The "bootflow" command currently doesn't support scanning a single
+> partition. This is inconvenient in setups with multiple bootable
+> partitions within a single disk, but only one is desired.
 >=20
-> aarch64-linux-gnu-ld.bfd: test/boot/bootstd_common.o: in function `bootst=
-d_test_check_mmc_hunter':
-> test/boot/bootstd_common.c:83:(.text.bootstd_test_check_mmc_hunter+0x70):
->     undefined reference to `_u_boot_list_2_bootdev_hunter_2_mmc_bootdev_h=
-unter'
+> Support scanning a single disk partition. Specifically, support the
+> syntax:
+> 	bootflow scan mmc1:4
+> which scans only mmc device 1, partition 4.
 >=20
-> Fixes: 66e3dce78750 ("bootstd: Allow hunting for a bootdev by label")
-> Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
+> Signed-off-by: Nam Cao <namcao@linutronix.de>
 
 Applied to u-boot/next, thanks!
 
 --=20
 Tom
 
---COrdl5ac4v4H2O4o
+--RKLqFXUKLQzgooF9
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXl6G8ACgkQFHw5/5Y0
-tyxubwwAhcNcgeA5JWR71byM1Wb0iOiblopT+QGR0zDtuLpuXvJY5Sszf2oquwYu
-4zjetiR8PyF+Vsr04hrVEtxFYHfpzdp8q5rkhdk0d+ujeeYSQD+SXL7JUgcDUhPE
-sM9xTxARNxwOmo6Kty1xUl4YB8E3N3kgOiexsNbjpEP2r2yMs+/czzR2JK8Yr6CE
-XF8NJWdA5vcvJkUau788mM2VlFma/J36+mLkhc96kXEq/5iGe/J1ok7hdmKvCghG
-kTPt6F/iEA+A3mh5oFYqKPC3jXMyHCSxuzBHrPOIpz6f3d2+mDJRNuIOoltDbNVb
-CLKV7/k/eyCSj4qkgKVqTWcZ5Bo6H0OtfWrsWiKURj+QwpaT5utqzI0PJh1peL9c
-XdXXl60akZdDGeYVDggthhPqU6NgIM8JhG/qrC+NuoFwWVuCHYd00qmy4ZCRh89G
-EfT7/BwKbO1nHmTPy9+6rGfYznipYjst5buytvYq1aWIr45Ai6RYmmB5oF0W8kxt
-+JTR2vMU
-=h3q9
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXl6HQACgkQFHw5/5Y0
+tyxUFQwAh/qck6/ZTGn0eBlMl+faJhcohYDvJr5ndX+GlLeaIYopp0V71TGKL0vO
+Z8l79Er58nWlKbWXTUXzJHMqJ2gPS94O9dKv0MOCPLDElSKGNerxVhR2/qzuPhcu
+aqoFIPBEjzTxtwcXLVsUOKW3ARboj34246ADtC8kjClUZa8upzw3DRfdzifdAQRJ
+AXHXW0vRNG555aZCMlvcQvvfUizX4dC9+LmtGtmKCEW7R889uT19XpoFjkB9iVSF
+XR/j8QYa+F+ll6ygwMc8kPCnQZqKfI5qmY04NtPaMSaTx+zsE7gdwtcY/Tj4SuAL
+NphunW7kC0qthvx79SGNKDRCh4TYP3XbrJVzKw4se7Fk5kC4eSXHT00Lq39OV/F1
+SmQeyb0UFxqLI+5Y6LQW5I+B/kjtIjqzsj9212AbrFKj34mYAeaGp3rwktDlXXT3
+N4olr+3q+d5UAOy08FWIoLS3bZ5iFMRD4kBfOHh3BGIfbVMkZYfRkl8YCJh4Q0X5
+YgjRtScf
+=h7Wp
 -----END PGP SIGNATURE-----
 
---COrdl5ac4v4H2O4o--
+--RKLqFXUKLQzgooF9--
