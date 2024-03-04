@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A129C5478C
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 14:44:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AB03C48BF6
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 14:47:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 62DE987FA5;
-	Mon,  4 Mar 2024 15:44:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B1E6787FA4;
+	Mon,  4 Mar 2024 15:47:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oBpFIN3Z";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PiSoAU6f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DAE7787FA5; Mon,  4 Mar 2024 15:44:16 +0100 (CET)
-Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
- [IPv6:2607:f8b0:4864:20::f32])
+ id 3B54587FB8; Mon,  4 Mar 2024 15:47:46 +0100 (CET)
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [IPv6:2a00:1450:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C065387EBB
- for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 15:44:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5FAA987F92
+ for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 15:47:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf32.google.com with SMTP id
- 6a1803df08f44-68f9c01a148so22826776d6.3
- for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 06:44:14 -0800 (PST)
+ spf=pass smtp.mailfrom=o451686892@gmail.com
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-5132010e5d1so4704489e87.0
+ for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 06:47:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1709563453; x=1710168253; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1709563663; x=1710168463; darn=lists.denx.de;
+ h=content-transfer-encoding:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=V3JIzI0Z9qrflLSiweTb00+BlWCMvti+PrbWdExKeXA=;
- b=oBpFIN3ZKyRzj7NFR34kMid1qmWkn3o7apdIxBLu4lxZHTLkPpwLhZZSj9vxIehs1H
- aaeJB5Wbgc8B1GpnN4HNUt+IObsK/qOx8J96zzhg/17XwTyqAI66WqIS/qSSXtDpBYaF
- HRG5ioURQaqH02vsp4QoMGZO0m0/MW18kWCgY=
+ bh=NhSL9L6i0aOAZo8N8suydoKY/g4js+qYkf15ZwPPRKs=;
+ b=PiSoAU6fBkomlehLAN0DE2uX5sn3Bb46yWwOeYZtNgSNR8FuKDj6OCTW+rrtHePeOc
+ mTSBzgZ/ka4BvSMvA0g21Ff2dIvVz3zfb56e1sg3hPwNIWW8Rll4jGrzY/v112RRmdk6
+ MvKUf/RggONS8HoS3H/F5+31yx+zd9PP1k/A9Z4473CO3S2TfTyEHRAGmM9cmRhA5pDn
+ E5YeoKsIG5RWpqpKwvvqXHs88jdIsfy4hK8APlDktF5/ud2uvuHEmUv1vqdrYNaoMwvd
+ CE2HhioQ7CoKMxf2xJi2EB72fNAfrXP62xIK5D3eOBKHGrN91BXP0pQCtkavUjsdCv97
+ pRZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709563453; x=1710168253;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1709563663; x=1710168463;
+ h=content-transfer-encoding:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=V3JIzI0Z9qrflLSiweTb00+BlWCMvti+PrbWdExKeXA=;
- b=GEgr+FTY91X9h19Xl0TfbObGEiJNtnXX3uP9vrmxtAGyb2iEVubUrQnnKerK+MTMv3
- utUrXmHWrf61ev43JcU/mo+UE6777MICv9fH2dg2cgg0j2mbuLbUSZ9zeZaowqsOqBjj
- 0/EwVxXK+Y3D5HNFflB2FxlrKpuj1RkDIoe2H7zLbtbKsJvudDb1/jy7cAi58A8kcDOG
- 2DRsfshfV3qBhJbCrOHImdOH3vx4PImcKEtqKL3Hp8ltitS2vYdQs5HuZIfwrCBXNIwj
- pje8y4n4UK2p35R/P2zEOjlzNHwTtN7aF01fD0PO++kPag5E8aFoprietzjr64rOUh08
- VaJg==
-X-Gm-Message-State: AOJu0YwcXr6qMKq4raIaXDSlVJW6kOMCXL1QLWGM8JmYeJx1Evn59Xf5
- vSCtfFmZYEMl5eKB9GpDV9U1cST5KNhfwLjP8ZzMZhV+8xjuagzt0MyQKHpF6lU=
-X-Google-Smtp-Source: AGHT+IE9pF0dEkRXqxVW87G8CLVrNa7IAimnemqQPw7UNQfQaIyJupDIchKMqEjapS2b7+oDaIQh8A==
-X-Received: by 2002:a05:6214:10e9:b0:68f:d852:e9c5 with SMTP id
- q9-20020a05621410e900b0068fd852e9c5mr9120076qvt.17.1709563453385; 
- Mon, 04 Mar 2024 06:44:13 -0800 (PST)
-Received: from [127.0.1.1]
- (2603-6081-7b00-007f-0000-0000-0000-1002.res6.spectrum.com.
- [2603:6081:7b00:7f::1002]) by smtp.gmail.com with ESMTPSA id
- s2-20020a0ce302000000b0068f6c496656sm5102922qvl.139.2024.03.04.06.44.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Mar 2024 06:44:13 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@linaro.org>
-Cc: sjg@chromium.org, bb@ti.com, nm@ti.com, festevam@gmail.com, 
- n-francis@ti.com, a-nandan@ti.com
-In-Reply-To: <20240304121257.3551104-1-sumit.garg@linaro.org>
-References: <20240304121257.3551104-1-sumit.garg@linaro.org>
-Subject: Re: [PATCH v4] Makefile: remove hardcoded device tree source directory
-Message-Id: <170956345258.1989490.4554941764252889081.b4-ty@konsulko.com>
-Date: Mon, 04 Mar 2024 09:44:12 -0500
+ bh=NhSL9L6i0aOAZo8N8suydoKY/g4js+qYkf15ZwPPRKs=;
+ b=b+TiNOupIdeXx1SrOAooUBfQ4Sd+7EHF7Te9Fn23C+1I7UEycG5t98wEEh0Uo94/pY
+ hpmHv3z4a4YTdc7+6hskwMftgakO0GA+h78iAxZ+pJF/P6hvkUmFqy/mb1Fc0wHVXy/U
+ Eo9vl4OOBQUzH/gB5oOu+lx+HiekZ33+hj0BoxinJcgnC+TcRzVJmAup/dzsoR23d3fW
+ cbXf/YrW8Y3v5COZU/xSD6T++Xj6vzxzFp7T0KnUYa0aDWrdLB231ApdbmKSwPt7mvkA
+ 10IhRonoF0Chf1rTor3xmFKO7N0IgblgsJ1NG6+FffhR6xLvD6cpkeK/ZbXIJvIfWaxs
+ jaQw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUMJiNW7IgBNdgePINug4Qdi3hR7JQF3pe3tuZG8oJU+b/ClmGnW0hppVTYxZ7LtP9HT0WNPcwpW0J5AWfSa2WdX7V4Ww==
+X-Gm-Message-State: AOJu0YxHHFGW0LIm+Gvw2jqDq7KXNkulSZ53IdTmQ4pyYFCXhVlXXjdY
+ EmLIUD7TFeWd+xsvGCImw1qFL4Qb5sf8zIOZ3DeeS6n5kNQBKQ8DcEfMvJt+Eh+DzW+vusgL+Dz
+ MnEBab3zTBzngmX530aFc9u7N0x8=
+X-Google-Smtp-Source: AGHT+IHLJ+99NxFR6y/V5jONHdDeqtTze6FomJY8smeWPgON794hvVf+vDmTgP5qFrUDXqsq4GSkdfxNUG2UYKQBz08=
+X-Received: by 2002:a05:6512:251:b0:512:d877:df6f with SMTP id
+ b17-20020a056512025100b00512d877df6fmr5796768lfo.2.1709563663303; Mon, 04 Mar
+ 2024 06:47:43 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
+References: <20240104114619.280513-1-o451686892@gmail.com>
+In-Reply-To: <20240104114619.280513-1-o451686892@gmail.com>
+From: Weizhao Ouyang <o451686892@gmail.com>
+Date: Mon, 4 Mar 2024 22:47:32 +0800
+Message-ID: <CAHk0Hov+uwanmDK9wh9ke6c2JX7TRw9_qsF9Vq+Hrs6rqFqD6Q@mail.gmail.com>
+Subject: Re: [PATCH] cmd: sf: Fix sf probe crash
+To: Michal Simek <michal.simek@amd.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>, 
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Weizhao Ouyang <o451686892@gmail.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,20 +93,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 04 Mar 2024 17:42:57 +0530, Sumit Garg wrote:
+Gentle ping. Not merged yet.
 
-> Some boards that choose to utilize the OF_UPSTREAM directory for their
-> device tree files will need to specify that directory instead of the
-> traditional arch/$(ARCH)/dts/* path.
-> 
-> Include the correct path to the board's dtbs depending on if OF_UPSTREAM
-> is selected or not.
-> 
-> [...]
+BR,
+Weizhao
 
-Applied to u-boot/next, thanks!
-
--- 
-Tom
-
-
+On Thu, Jan 4, 2024 at 7:46=E2=80=AFPM Weizhao Ouyang <o451686892@gmail.com=
+> wrote:
+>
+> Handle the return value of spi_flash_probe_bus_cs() to avoid sf probe
+> crashes.
+>
+> Signed-off-by: Weizhao Ouyang <o451686892@gmail.com>
+> ---
+>  cmd/sf.c | 5 +++--
+>  1 file changed, 3 insertions(+), 2 deletions(-)
+>
+> diff --git a/cmd/sf.c b/cmd/sf.c
+> index 730996c02b..e3866899f6 100644
+> --- a/cmd/sf.c
+> +++ b/cmd/sf.c
+> @@ -135,8 +135,9 @@ static int do_spi_flash_probe(int argc, char *const a=
+rgv[])
+>         }
+>         flash =3D NULL;
+>         if (use_dt) {
+> -               spi_flash_probe_bus_cs(bus, cs, &new);
+> -               flash =3D dev_get_uclass_priv(new);
+> +               ret =3D spi_flash_probe_bus_cs(bus, cs, &new);
+> +               if (!ret)
+> +                       flash =3D dev_get_uclass_priv(new);
+>         } else {
+>                 flash =3D spi_flash_probe(bus, cs, speed, mode);
+>         }
+> --
+> 2.39.2
+>
