@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8ACAC48BF6
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 15:27:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B2B4C5478C
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 15:27:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D66A87FF4;
-	Mon,  4 Mar 2024 16:27:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EA07988008;
+	Mon,  4 Mar 2024 16:27:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VEATaunH";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kXvlXMit";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D038887FF3; Mon,  4 Mar 2024 16:27:09 +0100 (CET)
-Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
- [IPv6:2607:f8b0:4864:20::f2a])
+ id E83D587FFA; Mon,  4 Mar 2024 16:27:15 +0100 (CET)
+Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
+ [IPv6:2607:f8b0:4864:20::c36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 220D288008
- for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 16:27:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 207AF87FF3
+ for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 16:27:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2a.google.com with SMTP id
- 6a1803df08f44-68ffddd89d1so17239456d6.0
- for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 07:27:05 -0800 (PST)
+Received: by mail-oo1-xc36.google.com with SMTP id
+ 006d021491bc7-5a1206ba5cbso992693eaf.0
+ for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 07:27:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1709566024; x=1710170824; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1709566029; x=1710170829; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=WuWlajUj2Zr4vGsTX3MYVqpw2geMxOco0KBQnEMiu2U=;
- b=VEATaunHUFIdQhSP99k07AlaDoSOSgOB4nnEGYCtE0ookkUzEhWeMHRuT8SniIW07c
- 3tEY/gt4zzXdpCJtoz05zP7d8UZ3Lds9rJY51C/yyTakqFuzgIBEZOPEyc6meTR9/BGg
- bjzDy5RqET5/uUXQNS5DkmD+l7i1dOP5xDSC0=
+ bh=vSNc9QvIThmYTtRiIf+vUVwc4R/pnwH5Uvu/tN/ngpA=;
+ b=kXvlXMitFOM07PNvLCsj53XjOQlw+Q4IpFskHz9L5V2+tg6Pg8sgylffKKbigRDgsC
+ QPXZTrr1BWb+IYAo1sEp+H+6auy9p/Xl86LgxiAU2Lh8+JIg5cbkfRsZJoLYFQZHN9vJ
+ mt2BNbzddbgS0tML5KIeOebJQdfDD6zu+/CmM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709566024; x=1710170824;
+ d=1e100.net; s=20230601; t=1709566029; x=1710170829;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=WuWlajUj2Zr4vGsTX3MYVqpw2geMxOco0KBQnEMiu2U=;
- b=sipxH10eIwOn3C9wKWlEGqF1lFrR+Bc/tHUq6QaLroNIDzcNiQQNIXXBCGf3YjNjXh
- ebKZaayz7ydIk8AMbOl3aattTPoh+bXom3t3MhrJS5FHsCYbXjrdISDG5gsDgq3CrCMv
- dzkW3ah3eTJ4IngenxoAIOIfSDSCvudTkVVLg/M0Gw+c8ohuI4Rfu0uUQs8OKP+uvXDq
- Ob2X6MzBjozSW08S+236oDEZbXYG3JzgvcQh6eknR8+En9Tm7WYTDczMzWuPCvdti2SA
- gLILhu6t9gkVSt/v0Ijr+epH/EVYzkcWutag0HstHL27UnYYMD/sptkByO6GLCPkSHPP
- LsTA==
+ bh=vSNc9QvIThmYTtRiIf+vUVwc4R/pnwH5Uvu/tN/ngpA=;
+ b=Rd7O9NFYbemOVIBlmKasQH/qsE4Bd2p3TYahk87m9+G6LvV4p8/w0no6g3mjNgG8sE
+ eYLJ13etcO+DfUyv7n8rUQ7PAm/P9a+ZCU43yahcEFaf1rbmse1hGT+SO0HnxruTHkke
+ BAdR9M+/g0H4zlSCoScELQ5/8t8R/G/ZBUdHswMyZIiY6iPRcS+iztqyRD9gq8kg/1bP
+ 11sHu4gq+2RVtHT8oQ1tvEAWM6AMtp2Q85/Y7n081dSeoq5qGfOuQXbMVNaHP5NSgrQV
+ 4WxXIWU1AtSyhaZZZ52h7zZrwGI/emvkxiKIntnuXEpgPBh86RhcFmFRG2J4+2pcrBOe
+ 2Fzw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWxtBGaBgODJ+np51TJhLw+6ibXAj8ZxPS0rmIfQqDcYtqLqSaNmtaokzP125BzfJuPSa/i6gutNkLHfMSk0fTTxHdt4Q==
-X-Gm-Message-State: AOJu0YxsJPocQBgdiZsW4+u7QTDOIrLJbY3CZtYU8s5kVyiY3C7rHvdZ
- pTLDzb9dvZux54/pi15FQh+SOneAF92wXn36PqyE2lggDi2oArA7n9yRparE7n8=
-X-Google-Smtp-Source: AGHT+IH5wmvLfzsacPel1NbyckWAF7KS2miO8Kv29fe1K8fh1feLjO5I/xPS6pqJ9SkPaC3bKA98pQ==
-X-Received: by 2002:a0c:cc08:0:b0:690:5f74:81a7 with SMTP id
- r8-20020a0ccc08000000b006905f7481a7mr7270100qvk.45.1709566023986; 
- Mon, 04 Mar 2024 07:27:03 -0800 (PST)
+ AJvYcCUcaUhCjdkAiWBqcxQxc8A2fdMczy95shfcbn2f56ga9zW6xu9yT3S8O6pb+AH8u1PYJGdx44BpgPnBp7yMIHZCQMIMsQ==
+X-Gm-Message-State: AOJu0Yw+q5q1YMzjEOi+lHrulUBRryztN/Zy+2o7fT6yDQFutQ+oy0r+
+ xLMtYheqQFG0Up0mnMqARTpC8WHuF9u5UOHyddef+QSLxwIdcTa+V25nkduJ/MY=
+X-Google-Smtp-Source: AGHT+IG/7b2gt46CJ71W8uMUqzcrvFmMf8ds2HJ/hOkNxRS9ezIK523NfBmjCBjwy710jyn8NzcICQ==
+X-Received: by 2002:a05:6358:7e0d:b0:17a:e17f:7f07 with SMTP id
+ o13-20020a0563587e0d00b0017ae17f7f07mr11945777rwm.15.1709566028732; 
+ Mon, 04 Mar 2024 07:27:08 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-007f-0000-0000-0000-1002.res6.spectrum.com.
  [2603:6081:7b00:7f::1002]) by smtp.gmail.com with ESMTPSA id
- pc19-20020a056214489300b006904a34830esm4905662qvb.72.2024.03.04.07.27.03
+ nc8-20020a0562142dc800b006907904691dsm936552qvb.17.2024.03.04.07.27.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Mar 2024 07:27:03 -0800 (PST)
-Date: Mon, 4 Mar 2024 10:27:01 -0500
+ Mon, 04 Mar 2024 07:27:08 -0800 (PST)
+Date: Mon, 4 Mar 2024 10:27:06 -0500
 From: Tom Rini <trini@konsulko.com>
 To: Stefan Bosch <stefan_b@posteo.net>
 Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH v3 1/2] common: board_f: change calculation of
- gd->mon_len to fix s5p4418 reloc
-Message-ID: <20240304152701.GN1523872@bill-the-cat>
+Subject: Re: [PATCH v3 2/2] arm: s5p4418: fix relocation of vectors
+Message-ID: <20240304152706.GO1523872@bill-the-cat>
 References: <20240126125056.16439-1-stefan_b@posteo.net>
- <20240126125056.16439-2-stefan_b@posteo.net>
+ <20240126125056.16439-3-stefan_b@posteo.net>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Gg0e8vAqTC17qKNS"
+ protocol="application/pgp-signature"; boundary="zIRAyl6vq3Ri2Gb2"
 Content-Disposition: inline
-In-Reply-To: <20240126125056.16439-2-stefan_b@posteo.net>
+In-Reply-To: <20240126125056.16439-3-stefan_b@posteo.net>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,42 +94,43 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---Gg0e8vAqTC17qKNS
+--zIRAyl6vq3Ri2Gb2
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jan 26, 2024 at 12:50:55PM +0000, Stefan Bosch wrote:
+On Fri, Jan 26, 2024 at 12:50:56PM +0000, Stefan Bosch wrote:
 
-> ARCH_NEXELL: Change calculation of monitor length (gd->mon_len) to fix
-> relocation at boards with s5p4418-SoC (ARCH_NEXELL). At s5p4418, _start
-> is after the header (NSIH). Therefore the monitor length has to be
-> calculated using __image_copy_start instead of _start in order the
-> whole monitor code is relocated.
+> The header (NSIH) used for the s5p4418-SoC is not loaded into RAM by the
+> 2nd-bootloader, see boot0.h. Therefore, use an adapted version of
+> relocate_vectors which relocates the vectors after the header (at _start)
+> instead of the 'dummy'-vectors at the start of the header (at
+> __image_copy_start).
 >=20
 > Signed-off-by: Stefan Bosch <stefan_b@posteo.net>
+> Reviewed-by: Minkyu Kang <mk7.kang@samsung.com>
 
 Applied to u-boot/next, thanks!
 
 --=20
 Tom
 
---Gg0e8vAqTC17qKNS
+--zIRAyl6vq3Ri2Gb2
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXl6EUACgkQFHw5/5Y0
-tywmugv/ZByayerQkit82egOccGr8EjIwYZ1yTxJV/oU2msth2zKqMs+WaI1/CM2
-sE4sKfARxV5fL5HaLF7vspQvQnu2TUZv3VT4xf/QjxNYzGMzxRgfQofBns0c2QIV
-KDy+8T18Ry0TMWW3jzPdJBVjtACBWt/enBWu3StLi8GXNpg/q7+05Z6MGT+OZ5YU
-uNfLq9W3PJNZWcquuO84TkKyuvV/EaduVBKlyjJv6F+2BiA6cvpMZvCw6xhAemhi
-5ma5z4fVEEa95u0vXlpddISTdgdCFQqM56fMI7g0PIqW0mPM4Q3dLe+ASmxnbTPU
-YBQLo4JTx/XSBWNX4U/J1bt8VBxh2Y3MjnHF78sEk8ds94SwtJ3vZstcb6seqGaa
-xZ+jYKlQ0RuNgzBWvp73+X+uluhfFIoSJTCIzCI3azJ+RvLNW4fHXBSjs9p5nLIi
-zisDLaMQHzqvYRZth1fKPeeYblzvNROoaEpqAI1aHOhVgEaJL10J0HZeayg677XI
-aAGg55sZ
-=bk/B
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXl6EoACgkQFHw5/5Y0
+tyzhJQwAgq7AuDmrg3r/ast9uIscsYnTnoa60dZKxxhm+RWkMgVYNq0rg9aI8i6S
+3lzu4+wZTBO5Tl1ulYyF/9qTdHe+ZTdwpURs5W3Hpfu88OBWtgSBGhKsQu43vV2L
+WvSw6uua14b72ey0hyure9hoJdqqF2EphwcyEz28Cp35whBHc6kCoDIOp8jm1X8O
+iOlzL44NSdHp7LuZRVXBmXP0iz0QX2/hZAPcoR0oc/92ZNBuOG4GxlCh4NodT5I9
+Wv//mxMzdyDwVYgS7gD5mktIV08W1nrX/TMhn3tcl7WvdX0unbXyUf3qYwAOwtYL
+Q+MqGQTmsHJxv82FnxEjjqMJfxvOPXEuBae5ZKFyion7bvgFThRQpAQZahwG4zbM
+0LMeWvzt9+9gc3yMotGESSFFnEdA6bSPgfjiAzb4ORUMkrzWaUBmKYuwfYFh6sSS
+ZospdgFvgyedfzwMiqwUwEQ3H5ughgjrg545NPGPto7nE+0kR59pxERBZq2RkaIm
+xPq45Ujb
+=nou/
 -----END PGP SIGNATURE-----
 
---Gg0e8vAqTC17qKNS--
+--zIRAyl6vq3Ri2Gb2--
