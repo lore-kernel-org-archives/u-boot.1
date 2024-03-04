@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3D40C54E49
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 23:44:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7833BC48BF6
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 23:44:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D0AF87FDC;
-	Tue,  5 Mar 2024 00:44:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C16BB8800D;
+	Tue,  5 Mar 2024 00:44:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BdbOcuwp";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZKYAdId6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B8B3E871C7; Tue,  5 Mar 2024 00:44:32 +0100 (CET)
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
+ id 253D387FFA; Tue,  5 Mar 2024 00:44:37 +0100 (CET)
+Received: from mail-qt1-x82a.google.com (mail-qt1-x82a.google.com
+ [IPv6:2607:f8b0:4864:20::82a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 45F1F8800D
- for <u-boot@lists.denx.de>; Tue,  5 Mar 2024 00:44:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 21DB587FE0
+ for <u-boot@lists.denx.de>; Tue,  5 Mar 2024 00:44:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-6e4f1660493so417289a34.0
- for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 15:44:28 -0800 (PST)
+Received: by mail-qt1-x82a.google.com with SMTP id
+ d75a77b69052e-42ef1822b07so6966451cf.0
+ for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 15:44:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1709595867; x=1710200667; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1709595872; x=1710200672; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ajsIalUTIa94X2r3JY9gKdZ3rYaBdKEionQXlaFFTJc=;
- b=BdbOcuwpUrVAkKCX6mphWGjf7cu5fTGKTTvfH+Q9NzBEh825VIRwgjZQloslM2vk52
- E27FevLH0RospEVnLkgZgauPBG66OhfjPJmNLEfK1NZYtrBgz4fNcaJvrfCu9s7Fdf7+
- GR/e38vxWTgLurFmlqNd2AZaStxD+JolXWo1o=
+ bh=bMnmbUrpzkvIgz77k8kgqJXr3t799Jq6nqp6f+WwtBk=;
+ b=ZKYAdId6x+8I7nme1M6UZiiJITjpXqmmF9Cl55S51oetRJCbzESHNmd8uwR3pTWpJM
+ aSWgs8GGcXc+AWZfVw55gu3IDJ7yJ/jV3Uu6OjB02SVHR/4IHJDwmaxUK1KFO7zViXaQ
+ j9eDzX4dQhvzUwrQpSqQGvqMu09NRE237dRUM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709595867; x=1710200667;
+ d=1e100.net; s=20230601; t=1709595872; x=1710200672;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ajsIalUTIa94X2r3JY9gKdZ3rYaBdKEionQXlaFFTJc=;
- b=vpur5pO2EAb3H3R1+3nCuPGFRD+ja9ieVlLJtXC5jOEaF/A+xrfg+gfIA0fqewPtSX
- 2i/n9LAKafASM6zvepfV4fjelrrM5su8nU8E7wAqUOQbFUjRSyceEJAmYoyiB813vJ63
- rilv+CtVqDPMk3JpU5daC+oI9Ph9czm/3Kl1xqmBuswRJL33TGMEvfonxt2t1sNkhySt
- OdkIJwfnmmyYrwPSpeDizlfov5sWtb+7I2QxvuBdVZ64abHzYfsgP5y9C+gGXAKHxCHb
- fj/HYWwvpQI5J3EE4wG2V6gZtyZVGW4sYYOMb6zq0vfQHV2O4WrC6OyLyGC4wuFYhlIb
- jNKA==
-X-Gm-Message-State: AOJu0YzwyZzhX+Z1ylQ2iIoV5UnV2brMQ7HpAcCPxG30ivFcEWPjmgPP
- 2sSihtBiw2MAve1gHTHlTsl55vJjhH+/d5IVSA+6NX5uhVnGYL+HbBeVBy4/3lE=
-X-Google-Smtp-Source: AGHT+IEadZyshRhH7y6uiS+MWRMSkfFvLvlO/t24xNtH7OqCvE4ZDGCoZDsnn2uBTPi8TqbFb2phXQ==
-X-Received: by 2002:a05:6870:8997:b0:21f:a138:adf5 with SMTP id
- f23-20020a056870899700b0021fa138adf5mr225086oaq.39.1709595866848; 
- Mon, 04 Mar 2024 15:44:26 -0800 (PST)
+ bh=bMnmbUrpzkvIgz77k8kgqJXr3t799Jq6nqp6f+WwtBk=;
+ b=hqGuAtWRe43gCdxLH/7Lwlm9c1S74W8N1iPuJc+fPM0eOUAcH5onKiCw8kJG564inf
+ 2ec12lxbB0AIcPRPEG4sC6AppeRxyDg9WE9JCGAJ3IbQgBEsGIEk+xfsk0nCeoS9/PAc
+ JPds6QF1vj/B0u6ugJ4rFQ7Ub385vRFCjI4wfP5WAgM6dWw2nLrUe3lou3a4qqp9Vssj
+ 3/OTxSuEUOHqtyTXxySzafOmVlDjszuBknzHYOp4bbZu7UM2ArbQ015MwR03bu+gTuil
+ dU+R70BA4uHmyudNm8NP2ASLfAiy0rP8irDiyhhApp8QBbuwRSomwN4d16mfk+kPQ3pj
+ BBLg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWLeFAo/KrU1uLJhzwNWgpQ64fOtMR67jrWXqP/DtR/N5YzSyzfLWNPokE4VoywknsrnBvn8+lAu7hMon4WX52aC/Up7Q==
+X-Gm-Message-State: AOJu0Yx50uAXRkeep+OJnreyOuishvIamPi/W31dQ0OztV3ZLz5Cs+sn
+ 3Wf1fh4PoXRgOrLNTrG8pq0nIU4/vU9jTkHL0YzqX0cEbRkTy8Nv5FlAjIZ19nw=
+X-Google-Smtp-Source: AGHT+IF88f2CNMupW6Zuh6UxEbdQ51CpOjbg74gIoJ7s28ahgMuiysj0HWP3oiHTE7k9gAj/OY1yBQ==
+X-Received: by 2002:ac8:5c08:0:b0:42e:a842:b90b with SMTP id
+ i8-20020ac85c08000000b0042ea842b90bmr430254qti.44.1709595872297; 
+ Mon, 04 Mar 2024 15:44:32 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-007f-0000-0000-0000-1002.res6.spectrum.com.
  [2603:6081:7b00:7f::1002]) by smtp.gmail.com with ESMTPSA id
- cx25-20020a05620a51d900b00787ace473c0sm4874957qkb.16.2024.03.04.15.44.26
+ h13-20020ae9ec0d000000b0078775971344sm4866724qkg.38.2024.03.04.15.44.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Mar 2024 15:44:26 -0800 (PST)
-Date: Mon, 4 Mar 2024 18:44:24 -0500
+ Mon, 04 Mar 2024 15:44:31 -0800 (PST)
+Date: Mon, 4 Mar 2024 18:44:29 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Vishal Mahaveer <vishalm@ti.com>
-Cc: u-boot@lists.denx.de, Neha Malcom Francis <n-francis@ti.com>,
- Bryan Brattlof <bb@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>
-Subject: Re: [PATCH] board: ti: rm-cfg: Update rm-cfg to reflect new resource
- reservation
-Message-ID: <20240304234424.GU1523872@bill-the-cat>
-References: <20240220203944.27916-1-vishalm@ti.com>
+To: Udit Kumar <u-kumar1@ti.com>
+Cc: nm@ti.com, vigneshr@ti.com, danishanwar@ti.com, sjg@chromium.org,
+ matthias.schiffer@ew.tq-group.com, r-gunasekaran@ti.com,
+ u-boot@lists.denx.de, j-humphreys@ti.com, Jai Luthra <j-luthra@ti.com>
+Subject: Re: [PATCH v2] dma: ti: k3-udma: Fix ring_idx to pair k3 nav rings
+Message-ID: <20240304234429.GV1523872@bill-the-cat>
+References: <20240221142343.3652840-1-u-kumar1@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="DbWs+x917MTXzjWU"
+ protocol="application/pgp-signature"; boundary="hizeNYrZ8h4rSNyL"
 Content-Disposition: inline
-In-Reply-To: <20240220203944.27916-1-vishalm@ti.com>
+In-Reply-To: <20240221142343.3652840-1-u-kumar1@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,41 +95,42 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---DbWs+x917MTXzjWU
+--hizeNYrZ8h4rSNyL
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Feb 20, 2024 at 02:39:44PM -0600, Vishal Mahaveer wrote:
+On Wed, Feb 21, 2024 at 07:53:44PM +0530, Udit Kumar wrote:
 
-> With the latest TIFS firmware, an additional virtual interrupt and
-> event is reserved for TIFS usage on am62x and am62ax devices.
+> ring_idx was not correctly assigned in case of tflow_id is zero.
+> Which leads to wrong pairing of DMA for drivers like OSPI.
 >=20
-> Update the rm-cfg to reflect this new reservation.
->=20
-> Signed-off-by: Vishal Mahaveer <vishalm@ti.com>
+> Fixes: 4312a1dfca26 ("dma: ti: k3-udma: Use ring_idx to pair k3 nav rings=
+")
+> Reviewed-by: Jai Luthra <j-luthra@ti.com>
+> Signed-off-by: Udit Kumar <u-kumar1@ti.com>
 
 Applied to u-boot/next, thanks!
 
 --=20
 Tom
 
---DbWs+x917MTXzjWU
+--hizeNYrZ8h4rSNyL
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXmXNgACgkQFHw5/5Y0
-tyxHXgv5AaSobbZ4ICXmnEZ6YPPZw1esKCgSH8nqS8Xm79PGezCIhqE9HJBZbX7Z
-cK6jXZcgRgQYFcS8G0gBVpOWtbTkHk3m6CWlLNA/tMXZFWVqhkEw+FzXTGOIxW7Q
-TtmSIGC8rvd+pB2G8prjlUpVXE41XBMyWo2ma+XDk5+Ratu0teN6BYX2/5IuHq6Q
-3LZs6MHd+DmPpAvFD/HYKLca3I7Q/+rCcza1QZ5FDdF6a09+gZXRkYEfIFCZ0djM
-4RDqlVmQS0OoTwNO9dxy3ODhHXtefAAvgGZQp1ypshwspuTVGEKxGTLDL5cgQMyN
-C7XqU6Dp5+UuyWOgNc2VvCULcspvX+RmMxt1FrJ7mh5RioaGixJKcotgk30nN5pB
-HI0OrZVWpy4WC015rQXQlfABw8jjl72TIkewa52gNwbET1RrJEcRBZbRfxBCUjEg
-1UR+49VqzpgCnaa8BYkuM/NPkRI8S2EjlmPxHeksld21YZD0tCE9db4nC+jZyNwT
-GNKKD4XO
-=ZGzB
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXmXN0ACgkQFHw5/5Y0
+tyxsSQv/d0SKgKGW7QDekVYDkxGMMunZWxqvRZ5b/tpu4zMuHvxYvW5G9qnh2dXN
+T1WusBtpf2VVqBt13nh51JIqOGDRfIURE5voQx17Cqgc/f0qgSEc5MmfiNguk+zN
+1tXRaG9GZiZ1502NWE2o7Llk84fjR6yRjlARFjEWbqzqezh140APLgTjbm5ZiqLe
+XtEI+60S9eoPV+TIDoJFLMZbkMczIB3FmnQ7PgVxnEE0KZs7jPArkYooqxUrzjCs
+pLjD5Mq02WMLKAF+MkaL0VpoTJx+JIEWtmNh3uNpGlaMwXfZIO34+HLAKu2hCf6k
+7lZQoeXrrWOAT4xZQDRsWTMhjVfKaUO8XMFluOekcyAzgzI2qcSjj0PAXM7bAsDQ
+iHOaGI+WwHdz+mVE9DzIsmmSQ1aVwUhNm0SDRDjSaQz0OUkE+HvovKRu7utfJUw0
+NYvk2GStriFX+XdmAQx5p4QpgPBjb4/2vWE63Sj0vSk3Dk/cI+ips+0ljyQKbfL3
+O0+euPWm
+=ZJvN
 -----END PGP SIGNATURE-----
 
---DbWs+x917MTXzjWU--
+--hizeNYrZ8h4rSNyL--
