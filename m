@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3EC2C5478C
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 15:26:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE8D3C48BF6
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 15:27:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2FC2D87FE3;
-	Mon,  4 Mar 2024 16:26:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AF67D87FD2;
+	Mon,  4 Mar 2024 16:26:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="k7aa/Cmk";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VPFzkxox";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5CA6D87FD2; Mon,  4 Mar 2024 16:26:43 +0100 (CET)
-Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
- [IPv6:2607:f8b0:4864:20::72c])
+ id 75EED86FCE; Mon,  4 Mar 2024 16:26:48 +0100 (CET)
+Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
+ [IPv6:2607:f8b0:4864:20::82f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 036EC87FD1
- for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 16:26:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 65AC087FED
+ for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 16:26:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72c.google.com with SMTP id
- af79cd13be357-78822adc835so71144185a.3
- for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 07:26:40 -0800 (PST)
+Received: by mail-qt1-x82f.google.com with SMTP id
+ d75a77b69052e-42e323a2e39so39492721cf.1
+ for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 07:26:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1709566000; x=1710170800; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1709566004; x=1710170804; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=xhvpjvioIsD9nPkiCflMZ277Z3Inmq/Oz7R1S5adqXU=;
- b=k7aa/Cmk41BT/v2ZmCejUqq6B+mS5t4rQ6uhu8mrNj0GzOL85UBsUReIot82h7b8ew
- iza9mPeTkjHS7+VmKMH7uE8rajRYWLLnn0EUsKCYHlIJt5+TXAekRgE2IwVgdTg9pZ23
- KHUzRnA8sXcsrfY6HRWTclLethIJFqqW1gWdk=
+ bh=Dt50bPQgOuLDMKpqy2wChyU8TKyOWTuR+8EcNRAGl0M=;
+ b=VPFzkxoxJWpAQQeWACcCuvLMgNcx1Aw3s99B/zpjS1snbzYI4BN9+Cp1PAqu9e8xdn
+ YyQvQFlk8BG5h1IyqQjUCndWzkSh7IvIdJ2/IqXKhPg+iw756UUDz6iq6W6I06pOswq3
+ 1jER5zqlQuwUAn9lodfejCmt6xhM0n/Fdm+Nc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709566000; x=1710170800;
+ d=1e100.net; s=20230601; t=1709566004; x=1710170804;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xhvpjvioIsD9nPkiCflMZ277Z3Inmq/Oz7R1S5adqXU=;
- b=HWkUD3hFoX2/It+KluQMx4B7G+jfyx7rrNIZjWgHGYkid4JrGtXz5fPGOtKbYpgk+7
- S0Tl+5QZEF1UAXs38cJmEwP15fVCCi35B9Yubigwu59s3WEojdnT9eRXS4EXq05f3qRI
- YGnZZ0eOfdx9qA640omOFTRhlllXj0Mo9txWPn441PHRxsMZhRFWt/EvQQPswcAtl5pU
- dQFvl6faXJNI1jZ0UbIdBniAYUQoIbgxI85EDL6thWnKDWpcZqs/25FxvCw2GBe9NV7a
- +/X8AmcaWYpyt0U2jNyPhTDFhiY/H5LCB6YpmsUDbIMweQLtlcsUA8i20LycdZvosrhx
- QvAg==
-X-Gm-Message-State: AOJu0Yyt3/1V9YlTFjpJsufpjvxr7lexR+2F+M24C5+tk3+24FWoKhzj
- RMg4gLy/CKQG/Q8wW2NR67zIBwDWai+NkyU3vAgy9H3e6vWZ2WttgKjqBiDERsl2NiQjMfIL3IL
- K
-X-Google-Smtp-Source: AGHT+IG4lwXTeh4lmtJs4L0M790BJtcT6dWsQKyTQ6iGAHZjsw2BngEZMLvXbSXTn7ppRe0v0GhDqA==
-X-Received: by 2002:a0c:fdec:0:b0:68f:2b9b:2809 with SMTP id
- m12-20020a0cfdec000000b0068f2b9b2809mr8669243qvu.54.1709565999764; 
- Mon, 04 Mar 2024 07:26:39 -0800 (PST)
+ bh=Dt50bPQgOuLDMKpqy2wChyU8TKyOWTuR+8EcNRAGl0M=;
+ b=dy4mBOZxzNwLqxeky7vaXaZ/Qy1IRQfHJsiO8DCMwQFPP/Eej3KDd0DznEFWv4S+2a
+ +4AXKfqeVvzyQ9jmM0GyK9srVphnUAj82ZsVNMBfBHMdKbvT52iEwgyuGlH3Q4ii+v9e
+ XNK393zPMbqQ7hOceKGGWcsudfF226Y9/k4u/WeJoLyeRkxuCfk8n9FUWIrFvMBZMXYF
+ rJTrbojPazL3KZQT4QKk2cCLNflGglL9un9vRKEU/YP2pZ40/m6cbTfAE1XpEziS5AAf
+ r/MxsPK2L98JwVwOXkwlGqMpCRv0mDJKDzB/LvPd47Jb+j2yRX2eTazOczGD7PbBEM+g
+ 1TAw==
+X-Gm-Message-State: AOJu0YxLS+qxSaTSuAD3ONfGwE9uHhs/D/vZD2jC8otEUBwj/WKi+zWJ
+ qZm4vLYpShBSHAhiIWwTxnPvq7IZHTxxisBpcYQl8nEKyimmid+AHzXdzR5J7Ao=
+X-Google-Smtp-Source: AGHT+IH+zxI5SSPOAGSNMJcg+J1dViyLMf7Q5YHW8I5tMONklmbEC1YthlhsB26nvfrhTivH4p9bOg==
+X-Received: by 2002:a05:622a:170e:b0:42e:db75:3cf9 with SMTP id
+ h14-20020a05622a170e00b0042edb753cf9mr11680637qtk.27.1709566004150; 
+ Mon, 04 Mar 2024 07:26:44 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-007f-0000-0000-0000-1002.res6.spectrum.com.
  [2603:6081:7b00:7f::1002]) by smtp.gmail.com with ESMTPSA id
- lu19-20020a0562145a1300b0068fbc383a80sm5119971qvb.108.2024.03.04.07.26.38
+ h24-20020ac85058000000b0042ee02f7b92sm2080992qtm.89.2024.03.04.07.26.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Mar 2024 07:26:39 -0800 (PST)
-Date: Mon, 4 Mar 2024 10:26:37 -0500
+ Mon, 04 Mar 2024 07:26:43 -0800 (PST)
+Date: Mon, 4 Mar 2024 10:26:41 -0500
 From: Tom Rini <trini@konsulko.com>
 To: Weijie Gao <weijie.gao@mediatek.com>
 Cc: u-boot@lists.denx.de,
  GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
  Daniel Golle <daniel@makrotopia.org>, Frank Wunderlich <linux@fw-web.de>,
- Dong Huang <dong.huang@mediatek.com>
-Subject: Re: [PATCH 01/60] arm: dts: mt7988-sd-rfb: add SD pin driving settings
-Message-ID: <20240304152637.GI1523872@bill-the-cat>
-References: <20240122020754.143309-1-weijie.gao@mediatek.com>
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ Bo-Cun Chen <bc-bocun.chen@mediatek.com>
+Subject: Re: [PATCH 02/60] net: mediatek: add support for adjusting MDIO clock
+Message-ID: <20240304152641.GJ1523872@bill-the-cat>
+References: <20240122020811.143358-1-weijie.gao@mediatek.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="H/O1OvgK5+t0TOwi"
+ protocol="application/pgp-signature"; boundary="MJE7Dt8HaagTd7fJ"
 Content-Disposition: inline
-In-Reply-To: <20240122020754.143309-1-weijie.gao@mediatek.com>
+In-Reply-To: <20240122020811.143358-1-weijie.gao@mediatek.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,16 +96,30 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---H/O1OvgK5+t0TOwi
+--MJE7Dt8HaagTd7fJ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jan 22, 2024 at 10:07:54AM +0800, Weijie Gao wrote:
+On Mon, Jan 22, 2024 at 10:08:11AM +0800, Weijie Gao wrote:
 
-> Set SD pin driving to 4mA
+> User can assign a specific MDC speed to the eth node as follow:
 >=20
-> Signed-off-by: Dong Huang <dong.huang@mediatek.com>
+> &eth {
+> 	...
+> 	phy-mode =3D "usxgmii";
+> 	phy-handle =3D <&phy8>;
+>=20
+> 	mdio {
+> 		clock-frequency =3D <10500000>;
+> 	};
+>=20
+> 	phy8: eth-phy@8 {
+> 	      compatible =3D "ethernet-phy-id31c3.1c12";
+> 	...
+> };
+>=20
+> Signed-off-by: Bo-Cun Chen <bc-bocun.chen@mediatek.com>
 > Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
 
 Applied to u-boot/next, thanks!
@@ -112,22 +127,22 @@ Applied to u-boot/next, thanks!
 --=20
 Tom
 
---H/O1OvgK5+t0TOwi
+--MJE7Dt8HaagTd7fJ
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXl6C0ACgkQFHw5/5Y0
-tyy3bAv/XPr3d5UkVp2qmc5/7rv85vXrKzmeu9FmBRuNdbirfw+pM0GWDBYX4McD
-ibyIjQYH5GLtlKGNCFoC7ePN95yrY7Fa9jhYZ2gvRkJwfP3v9aU+R6iP51PwaetV
-imF9nVYTqkMI9L+hfMKQSP3FVElLRvQPmKROfTXbe6F2XGHSwejPPtGkcofFeD28
-eqCSJkpOGc/6KOjOvlhCjcXd9q+SWPPTNxRIIccA3FQc1ncGHnyGirsHlNwkJEd8
-SzL05gFai8KpXLZViLAOrl2sUhjsj5dOTQ0Y8euTWxebeq79OJeYVfrvmpT8THZS
-FsJUyF6C55Y7kbSKxtgF+olBfNJMQkSk4Nnc74Gt+BGk1uRa7QNC7YiDRBho+GTR
-vc8jXy9gsGdD1orv51T2BBkl9RK5DE2JdA1eiVVc976H0upE3DGxs6No/CC3GDuk
-KIk/fW5/okYAYbaXNGouT6j5niHUnxwhfTgkdPp4EwBwgJ6+3gIFVWAubV3rk6WO
-THEatepZ
-=HPbJ
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXl6DEACgkQFHw5/5Y0
+tywkrwv/RBDRKo1uPkEVDUHtersf5+MmG3J4Xw7Ae3LlZKP/RcV3fcMcjr4ND4nD
+yaqOYmngufOrw4TrZb06dnsDafYw+Q3xMMUAR73G59XExydDjqx5B9wTiffvgjy2
+r0s6Qo31dUdCMgO3+xIUlQX2xiDe86kuWxPMo8hZOC0c0gfjPwkNLsVIyloyKr/c
+ejTPv6MF80lsFATq023Kl8YbBE3lZFGCrA3Y/5O09tATEyWr5Upy6s+pCm59YAEN
+x2OxUHujTLvB4Yz5CatpuiG6YN0WT4mBmGcj2you1DNHgk4or3Uox9dzmMrbCdWG
+uHAc9tHg9i6GvVo8WIGvmtJef/1iVZXrkFgHSJHsX60+dtkbXRkDWrTrjWlFuD1w
+6PPhy1xB8Mvbbhi3Lt3fscr0ZaVakVhNzzeshQGG/Rftz6ZIUR6UERJqSFUKQ3fc
+A+mNq6lb4ryddBt7lU1fQkcGU324QCaj+OnlL/sW269K7XUWQfw2/0WXBeO4OPzn
+UhsRJbOC
+=iVL1
 -----END PGP SIGNATURE-----
 
---H/O1OvgK5+t0TOwi--
+--MJE7Dt8HaagTd7fJ--
