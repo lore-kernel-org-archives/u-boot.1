@@ -4,82 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E170C5478C
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 12:19:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1849C48BF6
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 12:27:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CDD5C87F91;
-	Mon,  4 Mar 2024 13:19:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 18EF287F7F;
+	Mon,  4 Mar 2024 13:27:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="a0bzt+CW";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OAVA9fKI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 17C7287F91; Mon,  4 Mar 2024 13:19:26 +0100 (CET)
-Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
- [IPv6:2607:f8b0:4864:20::52d])
+ id 5E95587F85; Mon,  4 Mar 2024 13:27:08 +0100 (CET)
+Received: from mail-vs1-xe30.google.com (mail-vs1-xe30.google.com
+ [IPv6:2607:f8b0:4864:20::e30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C61F8875FC
- for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 13:19:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D459087CBA
+ for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 13:27:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pg1-x52d.google.com with SMTP id
- 41be03b00d2f7-5a0dc313058so389960a12.0
- for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 04:19:22 -0800 (PST)
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-vs1-xe30.google.com with SMTP id
+ ada2fe7eead31-4725acb539cso1165492137.3
+ for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 04:27:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1709554761; x=1710159561; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9a8Qt9IE1KSDAYRBk0Llzwzbdwkvg7Cf6QYsQNdGGkE=;
- b=a0bzt+CWhkDRphrb786ObAem7u/AsjrdPFVccLXdO8VFpLjvq4xcAfuiOxGUHKuzYN
- lQhoc1WW1YoOuNc6h6NhyLOtjNoK7bUhuJsh1h6ekeiv0Epmtbzhx3oju3QXFwNYG2Kn
- YpzTHkJu1AmroYXNIZsjSiwS23w9mYx03XIQqJhtNOiOxQ4OreQ167UJ13Hvw4pHEvrP
- tg+1+jWTZVHVh1jeWLs67NZ/N10Ort1qFNY79XywNCHaTrDUtYjyiXPUjWeo+qHqPEcU
- BvIWJHJVcRLuUlltWgn1hiA01ibD1DK85zaX+jai/fxYnyYQyJxtqXDAGfHeNDzFemAF
- Dfww==
+ d=linaro.org; s=google; t=1709555224; x=1710160024; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=lqtb+sOeHz0eVl2w0Iev+xDqOXiEiNbePek3NATE098=;
+ b=OAVA9fKIrTmEoLmK6heq67Ugo45tAuCwSihbcPK8mj1t51ek0hYGQvAsIfep/lEz/6
+ iwHO+2+AGHLzyS3TNybeXWs5NjOvV7a2ZNieO4lx1HxgNpWbiNnSD4eRDfNer6VMDYnQ
+ 9OJlDmmju7MpaIMU/VGPbTM+IKch5oJdeOE8vKUCGzhrp/zYIX9NxHfivJ1WwaaSPXKg
+ 4zbis8i8RyX51cnr8KWlyuB7XCPuQ+lKz8Z36ZTXqW/fRbl7ZtKDn+OO/PWQk4E1p+Sa
+ APBfBTJv+a5lQvQoGzYaigZKYI1BjhF4y734qNW8lp84DcBPMVaKrj2tHVA5NdoIGTPL
+ nm4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709554761; x=1710159561;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=9a8Qt9IE1KSDAYRBk0Llzwzbdwkvg7Cf6QYsQNdGGkE=;
- b=vm4Tf5rOO5zXFgEvIu3h7xSaBinHHRMO932RRds93qk4n4ARZFxEbnqZ4wk4+HQfqZ
- jMQzLuiJbPaUceD+ZvCuVWuxJIBMjZjKZ9nEvOZ+uFNFY4MerHcwismLMoZ53G+ICM/h
- FWmSriz1dsJw66L7hWe606gr+57gzD+OetOylJvD/fweENHS8ZXDvCdWEl3o309Ay/5Y
- Uu1OJKqfiApQElf5z/+F53+c+6CHCYRZqxPUXBjdG5OD+w/MDXkwNq/ENPw6W/q23phN
- t6UWfw0E9X1mHNhi3mHFcwCHS/KnYFFywu2QKNCLaTakjpZQH1u7odWgy/5XA4DSnfeY
- 48aQ==
+ d=1e100.net; s=20230601; t=1709555224; x=1710160024;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=lqtb+sOeHz0eVl2w0Iev+xDqOXiEiNbePek3NATE098=;
+ b=LFlWsbTRkDEiSA8njCt8B2bHAzHBtp0wrP351qZ1xJvAjxXT+Cc/Vq6ZJMalR+C0rr
+ Ayyn9vUSrAgAxP3X9DKHMtid8MRvtI0TMLe8BQ6QydomBHhukXETjwrzef5NnTbZRZX1
+ Gj75QQ6B/GSEbVHbAFuwqJT/6Z+izWgXaEXqPYZP2d90Rc6+XR/XyLtAQvggyUCFl0WY
+ iDWlxRNxU/+IEl42HTytDVFXi1c9chlQag4e8U1o/w+n5oChZym+KxTFz+agwCW+2t16
+ a6adCMoHw6ca+j07XhBYSXcs+dRC358yaq0jPBl14IfK/Kj7/BioVhGtFR7K39knKnLJ
+ y3sw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXQInlghjnLDpcF8yl1jXIVC39ozcY8wXeEiLElCuW6puWvFbjUEmYBn9/xq83o3cWiAZT6Lqp3JMfwpmUulToYgvpqBw==
-X-Gm-Message-State: AOJu0YwLuSHtnEpTE2oux/WWow8mH0/ePdH+hNpPga3H9Fmg7UyKTg+l
- eEUPmk/76bP4FYYvaJ+04IsyPHebNQbCSsFT444OLzNqLlKVC12gGOStBmfGkt8wKMUuN6y0WpK
- /f63lLCCn8m7NkQhtVYte29U5lLo=
-X-Google-Smtp-Source: AGHT+IHK5u4cexBCm2ExiaqExA47U7B/EyhMVhJxelsto5GEmd0Ns0fnm8alaqaeewH8wTYSgu+UmG+Mg4bbpComlpc=
-X-Received: by 2002:a17:90a:b78d:b0:299:25ad:7c98 with SMTP id
- m13-20020a17090ab78d00b0029925ad7c98mr7183588pjr.2.1709554761062; Mon, 04 Mar
- 2024 04:19:21 -0800 (PST)
+ AJvYcCVmK5r3SftTuDnpDUqt4OoZXBFjwrdoIWjwVDfmA+zjO5xobak6Fzz2+2r7EooyRUcfGtfLryimV+hIzaERaIeXdtBKfQ==
+X-Gm-Message-State: AOJu0YxQ00Z1sxcwxvXqXlzVthskgKbQSLRSnr0VpRnGDN3kltgkBrut
+ phBL59GmVuiY6x84zLMdbmMqNLG8/UahUDIqFA/af72Ap3TuHsr+bx0MEA8Cw9LfCOTcIFNIYro
+ 16cCZajKd1hT5JCaYFznPiU7iwnGZaofjuHYljZI2q4iIaJdJT1M=
+X-Google-Smtp-Source: AGHT+IERE0bcQBi5R8ufa/1cjDmYbHhCKX76L5AcIMtUx2ERr0Z8TOFm+P4hQUGw8bNsQmVI4YQUB1iDLn/MTsPzDx8=
+X-Received: by 2002:a05:6102:35a:b0:471:f1a2:13c8 with SMTP id
+ e26-20020a056102035a00b00471f1a213c8mr5067198vsa.11.1709555224650; Mon, 04
+ Mar 2024 04:27:04 -0800 (PST)
 MIME-Version: 1.0
-References: <20240222093607.3085545-1-sumit.garg@linaro.org>
- <170929783825.70492.4756963077870833230.b4-ty@konsulko.com>
- <CAOMZO5CjeUhFfLBs3FRt4Hbk0ULXrRoOZaZqvSRzWbNySdsOhQ@mail.gmail.com>
- <CAFA6WYMf7Z-sW8pSHzYUJ_O9fqfunBEhyigJj3BW-DYuujxDbw@mail.gmail.com>
- <CAOMZO5AhTGskhEX9mv8oMJ1k4cbZzfZ2Vck5VcrVrYUvBA2r7w@mail.gmail.com>
- <CAFA6WYM12F_9yyNwXY5xj9+zh3Jwa_Jmz8MkaKsxm3Jn3NPNKA@mail.gmail.com>
-In-Reply-To: <CAFA6WYM12F_9yyNwXY5xj9+zh3Jwa_Jmz8MkaKsxm3Jn3NPNKA@mail.gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 4 Mar 2024 09:19:09 -0300
-Message-ID: <CAOMZO5DgEaTGmxJfJf=fGgwauE-M+XyHm+tA8rfOw+MwRK_mqA@mail.gmail.com>
-Subject: Re: [PATCH v6 00/11] An effort to bring DT bindings compliance within
- U-Boot
-To: Sumit Garg <sumit.garg@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, peng.fan@nxp.com, 
- marex@denx.de, Bryan Brattlof <bb@ti.com>
+References: <20240205-am62px-wip-rebasing-v3-0-04cbb42eaa6f@ti.com>
+ <20240205-am62px-wip-rebasing-v3-11-04cbb42eaa6f@ti.com>
+ <CAFA6WYPxXM5d=kpRTmEV7+8gYhgQr-rbX8hp=raOXmC79fSu+A@mail.gmail.com>
+In-Reply-To: <CAFA6WYPxXM5d=kpRTmEV7+8gYhgQr-rbX8hp=raOXmC79fSu+A@mail.gmail.com>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Mon, 4 Mar 2024 17:56:53 +0530
+Message-ID: <CAFA6WYP8qbi=QT52R7z+C6h-Zhkh7koAvx=M8dbw16pL1ZbBcQ@mail.gmail.com>
+Subject: Re: [PATCH v3 11/13] Makefile: remove hardcoded device tree source
+ directory
+To: Tom Rini <trini@konsulko.com>
+Cc: Bryan Brattlof <bb@ti.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Lukasz Majewski <lukma@denx.de>, 
+ Sean Anderson <seanga2@gmail.com>, Vignesh Raghavendra <vigneshr@ti.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>,
+ Nishanth Menon <nm@ti.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>,
+ Igor Opaniuk <igor.opaniuk@foundries.io>, 
+ Hari Nagalla <hnagalla@ti.com>, Ravi Gunasekaran <r-gunasekaran@ti.com>, 
+ Vaishnav Achath <vaishnav.a@ti.com>, Jayesh Choudhary <j-choudhary@ti.com>, 
+ Fabio Estevam <festevam@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,13 +99,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Mar 4, 2024 at 9:15=E2=80=AFAM Sumit Garg <sumit.garg@linaro.org> w=
-rote:
-
-> I suppose the earlier reference patch wasn't complete, can you rather
-> try its v4 [1] instead?
+On Mon, 4 Mar 2024 at 12:10, Sumit Garg <sumit.garg@linaro.org> wrote:
 >
-> [1] https://patchwork.ozlabs.org/project/uboot/patch/20240304121257.35511=
-04-1-sumit.garg@linaro.org/
+> + Fabio
+>
+> Hi Tom,
+>
+> On Tue, 27 Feb 2024 at 02:49, Bryan Brattlof <bb@ti.com> wrote:
+> >
+> > Some boards that choose to utilize the OF_UPSTREAM directory for their
+> > device tree files will need to specify that directory instead of the
+> > traditional arch/$(ARCH)/dts/* path.
+> >
+> > Include the correct path to the board's dtbs depending on if OF_UPSTREAM
+> > is selected or not.
+> >
+> > Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
+> > Signed-off-by: Bryan Brattlof <bb@ti.com>
+> > ---
+> >  Makefile             | 18 ++++++++++++++----
+> >  scripts/Makefile.spl | 17 +++++++++++++----
+> >  2 files changed, 27 insertions(+), 8 deletions(-)
+> >
+>
+> Can you pick up this patch independently for -next since it's needed
+> for other platforms to switch to OF_UPSTREAM? However, if you are
+> already planning to pick this series overall then I am fine with that
+> too.
 
-This one works, thanks!
+Please consider it's v4 instead.
+
+[1] https://patchwork.ozlabs.org/project/uboot/patch/20240304121257.3551104-1-sumit.garg@linaro.org/
+
+-Sumit
