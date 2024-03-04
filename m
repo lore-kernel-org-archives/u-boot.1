@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AA30C5478C
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 15:30:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FDD3C48BF6
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 15:30:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E6B948805D;
-	Mon,  4 Mar 2024 16:28:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 57DE38805B;
+	Mon,  4 Mar 2024 16:28:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hwVu+goK";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LY0o5TDI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D87B088035; Mon,  4 Mar 2024 16:28:34 +0100 (CET)
-Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
- [IPv6:2607:f8b0:4864:20::731])
+ id D124C88076; Mon,  4 Mar 2024 16:28:37 +0100 (CET)
+Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
+ [IPv6:2607:f8b0:4864:20::1131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C01088077
- for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 16:28:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C99AC88035
+ for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 16:28:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x731.google.com with SMTP id
- af79cd13be357-7882d75e766so14222985a.1
- for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 07:28:31 -0800 (PST)
+Received: by mail-yw1-x1131.google.com with SMTP id
+ 00721157ae682-609408d4b31so44827457b3.0
+ for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 07:28:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1709566110; x=1710170910; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1709566114; x=1710170914; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=w/ORnAWePVSrntSgOQQY2WVQt6MuMW6iWFfCCC+YX8A=;
- b=hwVu+goKm6AmaGFoRsmjwHMbmU1QVCjW0jU1/lClAfPHZPBmdJFX3/SV+bEDRNffRY
- iIc5PJv43QQOfQn1WE68MS+lfSWtYNLNU8zW5m332JmVofQ2JOOtOKnX7Pg6pDfxwOvP
- J8oEZ0OGInZOeYANMg1Mb1cGNeJF9dqV6NE4w=
+ bh=duA7W3D33o8WMISGJKUybjbZcFswLBitfBEOYKPA9dQ=;
+ b=LY0o5TDIMTp3YGwSkpxZaqmlGCoWUVbx6ysNKlfffdX3rt7dn6X9DUI4Py+nR9SEAW
+ B+V6Jvm/F+A2oTsB59rQnB1GyhewMZ4uggg9vMPBUy+ofmiDg25SC00vZSIpWlpOGDhG
+ nD+Nwh85pb7BxDeu/V9RNLsAz5gUV99rfJmm4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709566110; x=1710170910;
+ d=1e100.net; s=20230601; t=1709566114; x=1710170914;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=w/ORnAWePVSrntSgOQQY2WVQt6MuMW6iWFfCCC+YX8A=;
- b=WtuJr73hi+KAHgeMdHU8fU/5rvq/V8k/NAhpjhOX77+CnEg8olvwd+QIbafbeRtYmv
- se8zdw7QiqtDlpiMKHJGh2vDNSMUKfGy5poapVaER6BhTudkThmKg3Wa2MRzxoZkbOuz
- nxvg6ZoeaBdqrWzCJr4g9UIlWcMQP/euD0qZfeEc9+ZIoshEApz4USE0tz5gZBp22dzS
- nEfUoD/DV0IyI4uUNCD+145VXys7d1wSSi5ZRR9Zxt+hQMtXUEEJvjAfnV+3CiVeSAh/
- jMPabxcoDf4LTgImIDYtyJN52OlEiFehIg0c0zrESA6rE8tl0uo+XmQF/MvPB2PBkQ8t
- qZEA==
-X-Gm-Message-State: AOJu0YxQdOnjkA9bNB8Oeeyp41qTswd9aX5CJxBPHUVLWDWux3fSdIb7
- zqkwD0MbVin8RMaxGfUMaMS4gqRPgmFw+coeeluDNur/0xSuxySZ4jyorSEuMs5/DxOPNTmliLZ
- Y
-X-Google-Smtp-Source: AGHT+IEydobwFehg12TG4eHSRdHbmmbF4yUXpLbSC7pkPKWjYs0l7ksnYLLzyIgjIifbTgErF6I6Ww==
-X-Received: by 2002:a37:de19:0:b0:787:c6fc:db8e with SMTP id
- h25-20020a37de19000000b00787c6fcdb8emr8078852qkj.22.1709566109962; 
- Mon, 04 Mar 2024 07:28:29 -0800 (PST)
+ bh=duA7W3D33o8WMISGJKUybjbZcFswLBitfBEOYKPA9dQ=;
+ b=w0/zbtF90LxhArageebqjJXYhxGgtAf+STznOykNfaDjHq7sWK7ZRe4PFvY+40Qz5c
+ iEycyBk78SBfKnfw5+zL6bdOoTdIdwlhXwjqBzI84Nz3EohsoatnpfExc7B4GAfUZwhn
+ S+VKhJeRO2itn358RY3I0GMSfDt78Is3E8tB32QeGL41rHGi0d65YxPihYDUho0a3EPG
+ 3spuyShUbPBtA/aHYtSThKZAFN2RdxTREAZnDt9MiUVp1ZOZT5VyXE6l5wPTb8Q1eSSh
+ jaHif+lVShMyZUCgyQXjFoAY4LxVXSro47XYX2C49o6mr+Dh1bKuEWIUpOMDXIvG6qkd
+ MmxA==
+X-Gm-Message-State: AOJu0YzevmpUk/DyMWaxTRpCgRMpBd5yU5lotggYZtka1uV7V3r1YTB8
+ XIr0WygjVi2vvezI/be4UDzTVsREM7J9bI6xYnRpuvywccFBTeSi2k026WiI7qk=
+X-Google-Smtp-Source: AGHT+IGpEm83xawRxMZqH4cp0NuX3Uynx5OI6+Z6XfuyQRLJULBj/XcdQSKMV45qMDjfgM07WUQ4Dw==
+X-Received: by 2002:a81:7343:0:b0:607:f50f:3770 with SMTP id
+ o64-20020a817343000000b00607f50f3770mr9366505ywc.41.1709566114545; 
+ Mon, 04 Mar 2024 07:28:34 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-007f-0000-0000-0000-1002.res6.spectrum.com.
  [2603:6081:7b00:7f::1002]) by smtp.gmail.com with ESMTPSA id
- pj36-20020a05620a1da400b00787fd080d28sm4293720qkn.74.2024.03.04.07.28.29
+ r25-20020ac867d9000000b0042e43880355sm4488834qtp.14.2024.03.04.07.28.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Mar 2024 07:28:29 -0800 (PST)
-Date: Mon, 4 Mar 2024 10:28:27 -0500
+ Mon, 04 Mar 2024 07:28:34 -0800 (PST)
+Date: Mon, 4 Mar 2024 10:28:32 -0500
 From: Tom Rini <trini@konsulko.com>
-To: belouargamohamed@gmail.com
-Cc: u-boot@lists.denx.de, f.lahoudere@technologyandstrategy.com,
- eugen.hristev@microchip.com, dan.carpenter@linaro.org,
- BELOUARGA Mohamed <m.belouarga@technologyandstrategy.com>
-Subject: Re: [PATCH] net: macb: Add support for fixed link
-Message-ID: <20240304152827.GC1523872@bill-the-cat>
-References: <20240206190402.15966-1-m.belouarga@technologyandstrategy.com>
+To: Masahisa Kojima <masahisa.kojima@linaro.org>
+Cc: u-boot@lists.denx.de, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Jassi Brar <jaswinder.singh@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: Re: [PATCH] FWU: developerbox: read boot index from NOR flash
+Message-ID: <20240304152832.GD1523872@bill-the-cat>
+References: <20240208023345.1601269-1-masahisa.kojima@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="tZMgHAzV2oHv7KU6"
+ protocol="application/pgp-signature"; boundary="OOEwHxMO4vCtwBRQ"
 Content-Disposition: inline
-In-Reply-To: <20240206190402.15966-1-m.belouarga@technologyandstrategy.com>
+In-Reply-To: <20240208023345.1601269-1-masahisa.kojima@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,41 +93,42 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---tZMgHAzV2oHv7KU6
+--OOEwHxMO4vCtwBRQ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Feb 06, 2024 at 08:04:02PM +0100, belouargamohamed@gmail.com wrote:
+On Thu, Feb 08, 2024 at 11:33:44AM +0900, Masahisa Kojima wrote:
 
-> From: BELOUARGA Mohamed <m.belouarga@technologyandstrategy.com>
+> The FWU Multi Bank Update feature allows the platform to boot the
+> firmware images from one of the partitions(banks).
+> On the Developerbox, SCP-firmware running on the SCB(Cortex-M3)
+> passes the value of the boot index on the NOR flash.
+> Add a function to read the boot index value from the NOR flash.
 >=20
-> The actual driver does not work when there is no linked PHY. These
-> changes add support for fixed-link feature in the device tree.
->=20
-> Signed-off-by: BELOUARGA Mohamed <m.belouarga@technologyandstrategy.com>
+> Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
 
 Applied to u-boot/next, thanks!
 
 --=20
 Tom
 
---tZMgHAzV2oHv7KU6
+--OOEwHxMO4vCtwBRQ
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXl6JsACgkQFHw5/5Y0
-tywshAwArQAQTqXZwfuYCLdniL/9o1tGj1uausDfWY9W4yQOeMj66TIQtvEbkpDi
-B3USDUtkPPmMScv6AZfOyZjz80124GZw2VvV35YJJsx0vas56xhJZbOoqLxJyX9f
-3ExV8CIYA2X5LpZ/PGUGfTOsuoCGaGEtGDaiQHslsY2bnMWKnKXQ8rOB7DnFW0c0
-08pzQ2Kj4pgSgL9swggoqdktU3gm1PQKtjObDIfoWQOzQna1XMHg1xSK8Tm4rqp8
-Cih9SfwJ58nRhjUPgf3Jm6iSS3xEfP3pqQT7Q13pDYyXhNqX8yPXRd3eycYOcYQP
-indNLpK4lpM+omOVf9HEMI6JquxRwcSuIteiN0VcxJNCGE6OqSK1R074er0PvL+A
-aubxGl4adwTPu9zb/oVVw2K6Y85cNxYCYCOxEI7I82327Fuyq6vKz4n4bDhvjd0k
-j+AXzD48wsYmWUMiibbvfNFmvm57pm0PA45qtWRpfLUHsGZUbY8VpTcKgqGmusHJ
-Ejv83whf
-=KgtM
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXl6KAACgkQFHw5/5Y0
+tyy2CwwAsaSrgmEnWqj8B52xl2qXBFxg0AGlUgNpmzd+dco0nWVbHVoswpbIBU9f
+dZYFz9HaGunYQwHLB7r5x7zzqs8DXK5KwKHlqaF+VXCamPzKmHP/qcjayqhzQSTm
+M9MRNW5mDYHUjqDe3io3i9ToR/WcgOADvgZpnV7coZzWRNOTLBbW8b9lXrKQdjgw
+3DHtj1ga57kIxA9XreMcYtq0UOfne9gC0VCjIRwo4JVOieKa90r2azYWLI7rlvGq
+jaY/KF2nAxWD6n64awDAhJJ1i/c1J4c6kwt1DBtqzk1iqBDnodankXsKyjKq3eL8
+zmY4AwiD+HfYnKMX/XOfQrdaM3DitnDDPDR77+KxjhRZwlMFPwHEyjD2ar0GOOa/
+PXDeHSczdND1qDXa0r63lMJGMGDujQOZGU+kxPhTJE/gmlWNcqweq3uywOnL8vdN
+z61SfAaUPtRQ3Kc5c4MsK0CXb0cK1YihzT2nfZt9hqps1XvRnd+2kfEbsC7TI/uS
+Zq7AM0Mg
+=pF7f
 -----END PGP SIGNATURE-----
 
---tZMgHAzV2oHv7KU6--
+--OOEwHxMO4vCtwBRQ--
