@@ -4,79 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC499C48BF6
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 06:33:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D5E2C54E49
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 06:40:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 00E2187F51;
-	Mon,  4 Mar 2024 07:33:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C41D687CDB;
+	Mon,  4 Mar 2024 07:40:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="alhKavBY";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sMcdqNbN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E17187F6E; Mon,  4 Mar 2024 07:33:20 +0100 (CET)
-Received: from mail-vs1-xe2a.google.com (mail-vs1-xe2a.google.com
- [IPv6:2607:f8b0:4864:20::e2a])
+ id 80D8C87F51; Mon,  4 Mar 2024 07:40:35 +0100 (CET)
+Received: from mail-ua1-x92b.google.com (mail-ua1-x92b.google.com
+ [IPv6:2607:f8b0:4864:20::92b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B5BD5879F6
- for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 07:33:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4D5EC87CDB
+ for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 07:40:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vs1-xe2a.google.com with SMTP id
- ada2fe7eead31-47282752fc7so1036500137.2
- for <u-boot@lists.denx.de>; Sun, 03 Mar 2024 22:33:17 -0800 (PST)
+Received: by mail-ua1-x92b.google.com with SMTP id
+ a1e0cc1a2514c-7d5c40f874aso2354433241.1
+ for <u-boot@lists.denx.de>; Sun, 03 Mar 2024 22:40:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709533996; x=1710138796; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=MQGQpJ6SA5n/kZj4J7EqXgFoTMXKflJKLi8xaPUwCv0=;
- b=alhKavBYlFvaufBoYO2dy295tPO9dNjb8rY32/qBTIQf5QnmUkMUbHeiljqmpK95AP
- ewHjB3ulJ4Bcjoeb7dDE8TbQ5vAQToyq3dGhI8dGAziwZbspPhru7KOyongBUNMwKz+X
- anEIZWqUGaFZfw0gPEdl+NMGGKRhi/TTd32qPow4VshiC7ZuMzc12eXxqPyjk4elZ7c8
- Zs4vX4L0Z+vKvKWe6ZFqc3hNOAMcYveExhSdjToSCzDwVLT3eWZGkTcAmTX6lpN4WOzH
- 5WDL39D5oxqYaBB2Vszxhqk5TbJt3YqpKgq92OdfGdpEg89ZQiDHv2s+fkCywgJyo5v6
- jVSw==
+ d=linaro.org; s=google; t=1709534432; x=1710139232; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=YsfMBwNeRQOvjWBYv/iz6aYxeEEWgN0VFvWq2ojn4Rc=;
+ b=sMcdqNbNWkrrfjy94uoBxjKlbkZT9EfJG+mYLITt07jjzf5RW0/Zmxr/Z3ZGIQmc7F
+ 7b3ZgzwEs+7qLd4mg0x1eLzmgWFcPyV5wKv6Pt5prUziAKtWHGFHz+HbbgRnNNaXBYTU
+ Ocp19jotGlN4D4E2+CBR4rLTdZ3ge9MTn0+f/UTqvy92C276YDmRhZk6Uoy/6zcIbeas
+ BQnDGfMKx8yN/duKGXI7Stv1nJKx++BAVlAPkEQvuPjaXoW3+mC4t5KlTdY0GEJdrnIM
+ MmxRsT7ivc3FLb9G3Z3L34UZX0GNQegWLwBDoADRqhE6QYdY0ZPYmOz4ml5SxxY6M8aB
+ fsWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709533996; x=1710138796;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=MQGQpJ6SA5n/kZj4J7EqXgFoTMXKflJKLi8xaPUwCv0=;
- b=CJO3FfMQoKo0Szuv7eUBYUIRLTQDRl4GFFQrC8QQZsCzWrb8Zi3GXR49jA0wCm55T9
- mYwO2ZlIsA5MeYSMqq9g2OXfmdTx3zDXvZSBlPTeu5ALC1EvZNSmVVZsRizq5Xm+v9pz
- +JLxz4Erb5etKtA0dO1jM7tC8co5yhfKvt+MyamGqNLbykl7SIYouORHVZAx4oDhrHg0
- ltNE8EMThBywaUCVRx9jd3I8xVKz7gbGc84XKK4bAROkd7x3VWSoFC9+ttITnwiNyHyf
- AQv35JLNZyU584jnGeqHM/eXJ5QvzBEFoZv4QoU7cNY1WV3xm3EgC/6nw2xMy4FLx5Bj
- NHxA==
+ d=1e100.net; s=20230601; t=1709534432; x=1710139232;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=YsfMBwNeRQOvjWBYv/iz6aYxeEEWgN0VFvWq2ojn4Rc=;
+ b=jJ4AA9NtZ9fmnN7xJ0fLqvsNbem+p/k1bmLd3ylwzcsSRnSBOFsjh1eB7mYj6lrq30
+ yeTNpydCYeJgmNoI5+uHWdAfOO7cOrjwqBdJo84GZbMzxJgbmb2g6t4ns5bKTJ/6u37S
+ nn+JVPjbz0peEMybnNjxxjblFwxTrWvhmo10amIEOan8s9I4WG8mA07gCsTkR5Kmpr7p
+ hh4RCfbnpDqnqbgRJMjvhSofIn20DTEf2q1MXv2sJi1L4a/3OE0KD3tNbF0ZGCcJPtNv
+ MDoaNM7XzXJQHSqyyrLYFE8NZlrTo66R6/2/vd8x4n0vdfLlE87w0Ybeyd3LAfDB+Egh
+ FYPg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXYNXS6rEeo7xRLfRz8nCRaLrRe4zSPn726qc8e6aMwGCg2eo+2qTNedFqis+Hr3Dnzh3wfuwYjm72l0Xom7lYU2c7CTg==
-X-Gm-Message-State: AOJu0Yz/PpsZKbFFgz7rCBzqtoxVKjZfFO1Hm0ACrBurV6tZlHQx13zs
- eab3RJMQRSowhXksyyGmLpVplSW7++MbYvGFZxFfaJ/kfVEX461S97qMKDjWyKSQDdA9aZSgdJ+
- lx962XKMeXw9nxMl3fCQbl3M0I9CqYxFzWaBDSw==
-X-Google-Smtp-Source: AGHT+IF3eVy6F7nq9uBSYGA9mlTq8G9O6ifVMlwRb7FfW8hFMzZANKsP190g6SUawPYKWmklRUi+WD0g+jgR9CIjQWA=
-X-Received: by 2002:a67:ee52:0:b0:472:78bc:35b4 with SMTP id
- g18-20020a67ee52000000b0047278bc35b4mr4857907vsp.0.1709533996098; Sun, 03 Mar
- 2024 22:33:16 -0800 (PST)
+ AJvYcCVJU1tZ0grLFNYapSSfny+EKJZ0wDAtfZevLs34gm7VYlj5vuQI7IAhV8//GFATBPz6faWTb1STpwLNRc3j59aHNJ0rcA==
+X-Gm-Message-State: AOJu0Yy+UkkEdJTW29bifol3YTSxe/8EDSmTAxfSOv/GbQetwsh5xFCq
+ FfwqilPDNYERE8YX6srIp7rByMOaBeiW/aFPnZHeuwPb9hylNVVye/pofCB3NTGvEpwJ1xyIeDs
+ hQ1PsisYlfdrAwsrGSWoq53vU7Sj7RBg2RPukgw==
+X-Google-Smtp-Source: AGHT+IG/u7yZne9Xsbeg8YQo7RlKA4iUHpnFPl66YK0+qKuDluVoAujnAouUMDTiOWJ3i0s35fXUD8HMijOeAvuOUpY=
+X-Received: by 2002:a67:f111:0:b0:472:6b52:1a3c with SMTP id
+ n17-20020a67f111000000b004726b521a3cmr5209380vsk.15.1709534431960; Sun, 03
+ Mar 2024 22:40:31 -0800 (PST)
 MIME-Version: 1.0
-References: <20240222093607.3085545-1-sumit.garg@linaro.org>
- <170929783825.70492.4756963077870833230.b4-ty@konsulko.com>
- <CAOMZO5CjeUhFfLBs3FRt4Hbk0ULXrRoOZaZqvSRzWbNySdsOhQ@mail.gmail.com>
-In-Reply-To: <CAOMZO5CjeUhFfLBs3FRt4Hbk0ULXrRoOZaZqvSRzWbNySdsOhQ@mail.gmail.com>
+References: <20240205-am62px-wip-rebasing-v3-0-04cbb42eaa6f@ti.com>
+ <20240205-am62px-wip-rebasing-v3-11-04cbb42eaa6f@ti.com>
+In-Reply-To: <20240205-am62px-wip-rebasing-v3-11-04cbb42eaa6f@ti.com>
 From: Sumit Garg <sumit.garg@linaro.org>
-Date: Mon, 4 Mar 2024 12:03:04 +0530
-Message-ID: <CAFA6WYMf7Z-sW8pSHzYUJ_O9fqfunBEhyigJj3BW-DYuujxDbw@mail.gmail.com>
-Subject: Re: [PATCH v6 00/11] An effort to bring DT bindings compliance within
- U-Boot
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, peng.fan@nxp.com, 
- marex@denx.de, Bryan Brattlof <bb@ti.com>
+Date: Mon, 4 Mar 2024 12:10:21 +0530
+Message-ID: <CAFA6WYPxXM5d=kpRTmEV7+8gYhgQr-rbX8hp=raOXmC79fSu+A@mail.gmail.com>
+Subject: Re: [PATCH v3 11/13] Makefile: remove hardcoded device tree source
+ directory
+To: Tom Rini <trini@konsulko.com>
+Cc: Bryan Brattlof <bb@ti.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Lukasz Majewski <lukma@denx.de>, 
+ Sean Anderson <seanga2@gmail.com>, Vignesh Raghavendra <vigneshr@ti.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>,
+ Nishanth Menon <nm@ti.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>,
+ Igor Opaniuk <igor.opaniuk@foundries.io>, 
+ Hari Nagalla <hnagalla@ti.com>, Ravi Gunasekaran <r-gunasekaran@ti.com>, 
+ Vaishnav Achath <vaishnav.a@ti.com>, Jayesh Choudhary <j-choudhary@ti.com>, 
+ Fabio Estevam <festevam@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,81 +98,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Fabio,
++ Fabio
 
-On Fri, 1 Mar 2024 at 22:20, Fabio Estevam <festevam@gmail.com> wrote:
->
-> Hi Sumit,
->
-> On Fri, Mar 1, 2024 at 9:57=E2=80=AFAM Tom Rini <trini@konsulko.com> wrot=
-e:
-> >
-> > On Thu, 22 Feb 2024 15:05:56 +0530, Sumit Garg wrote:
-> >
-> > > Changes in v6:
-> > > --------------
-> > > - v6_dt: https://github.com/b49020/u-boot/tree/v6_dt
-> > > - Patch #3: Incorporate fix for sandbox CI failure.
-> > > - Patch #6: Incorporate shell script comments from Marek.
-> > > - Patch #8: Incorporate documentation review comments from Paul.
-> > >
-> > > [...]
-> >
-> > Applied to u-boot/next, thanks!
->
-> I am trying to use OF_UPSTREAM with imx8mp_evk_defconfig:
->
-> diff --git a/arch/arm/mach-imx/imx8m/Kconfig b/arch/arm/mach-imx/imx8m/Kc=
-onfig
-> index 328c3e388051..29d0c5ce6485 100644
-> --- a/arch/arm/mach-imx/imx8m/Kconfig
-> +++ b/arch/arm/mach-imx/imx8m/Kconfig
-> @@ -8,6 +8,7 @@ config IMX8M
->         select LTO
->         select ROM_UNIFIED_SECTIONS
->         select ARMV8_CRYPTO
-> +       imply OF_UPSTREAM
->
->  config IMX8MQ
->         bool
-> diff --git a/configs/imx8mp_evk_defconfig b/configs/imx8mp_evk_defconfig
-> index 2350d2f409b7..cdf840c683c0 100644
-> --- a/configs/imx8mp_evk_defconfig
-> +++ b/configs/imx8mp_evk_defconfig
-> @@ -8,7 +8,7 @@ CONFIG_SPL_LIBGENERIC_SUPPORT=3Dy
->  CONFIG_ENV_SIZE=3D0x1000
->  CONFIG_ENV_OFFSET=3D0x400000
->  CONFIG_DM_GPIO=3Dy
-> -CONFIG_DEFAULT_DEVICE_TREE=3D"imx8mp-evk"
-> +CONFIG_DEFAULT_DEVICE_TREE=3D"freescale/imx8mp-evk"
->  CONFIG_SPL_TEXT_BASE=3D0x920000
->  CONFIG_TARGET_IMX8MP_EVK=3Dy
->  CONFIG_SYS_MONITOR_LEN=3D524288
->
-> I ran "./dts/update-dts-subtree.sh pull v6.8-rc6-dts".
->
-> make mrproper
-> make imx8mp_evk_defconfig
-> make
->
-> The dtb is built: dts/upstream/src/arm64/freescale/imx8mp-evk.dtb
->
-> but mkimage still looks for the old path:
->
->  MKIMAGE u-boot.img
-> ./tools/mkimage: Can't open arch/arm/dts/freescale/imx8mp-evk.dtb: No
-> such file or directory
-> ./tools/mkimage: failed to build FIT
->
-> Any suggestions?
+Hi Tom,
 
-I think you also need Bryan's patch [1] to be incorporated as well.
-Give it a try and let me know if you still see any further issues.
+On Tue, 27 Feb 2024 at 02:49, Bryan Brattlof <bb@ti.com> wrote:
+>
+> Some boards that choose to utilize the OF_UPSTREAM directory for their
+> device tree files will need to specify that directory instead of the
+> traditional arch/$(ARCH)/dts/* path.
+>
+> Include the correct path to the board's dtbs depending on if OF_UPSTREAM
+> is selected or not.
+>
+> Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
+> Signed-off-by: Bryan Brattlof <bb@ti.com>
+> ---
+>  Makefile             | 18 ++++++++++++++----
+>  scripts/Makefile.spl | 17 +++++++++++++----
+>  2 files changed, 27 insertions(+), 8 deletions(-)
+>
 
-[1] https://patchwork.ozlabs.org/project/uboot/patch/20240205-am62px-wip-re=
-basing-v3-11-04cbb42eaa6f@ti.com/
+Can you pick up this patch independently for -next since it's needed
+for other platforms to switch to OF_UPSTREAM? However, if you are
+already planning to pick this series overall then I am fine with that
+too.
 
 -Sumit
 
+> diff --git a/Makefile b/Makefile
+> index 0f0c7f30d2717..51b57d26857f1 100644
+> --- a/Makefile
+> +++ b/Makefile
+> @@ -1184,6 +1184,16 @@ dt_binding_check: scripts_dtc
+>  quiet_cmd_copy = COPY    $@
+>        cmd_copy = cp $< $@
 >
-> Thanks
+> +ifeq ($(CONFIG_OF_UPSTREAM),y)
+> +ifeq ($(CONFIG_ARM64),y)
+> +dt_dir := dts/upstream/src/arm64
+> +else
+> +dt_dir := dts/upstream/src/$(ARCH)
+> +endif
+> +else
+> +dt_dir := arch/$(ARCH)/dts
+> +endif
+> +
+>  ifeq ($(CONFIG_MULTI_DTB_FIT),y)
+>
+>  ifeq ($(CONFIG_MULTI_DTB_FIT_LZO),y)
+> @@ -1209,7 +1219,7 @@ endif
+>
+>  MKIMAGEFLAGS_fit-dtb.blob = -f auto -A $(ARCH) -T firmware -C none -O u-boot \
+>         -a 0 -e 0 -E \
+> -       $(patsubst %,-b arch/$(ARCH)/dts/%.dtb,$(subst ",,$(CONFIG_OF_LIST))) -d /dev/null
+> +       $(patsubst %,-b $(dt_dir)/%.dtb,$(subst ",,$(CONFIG_OF_LIST))) -d /dev/null
+>
+>  MKIMAGEFLAGS_fit-dtb.blob += -B 0x8
+>
+> @@ -1407,9 +1417,9 @@ MKIMAGEFLAGS_u-boot.img = -f auto -A $(ARCH) -T firmware -C none -O u-boot \
+>         -a $(CONFIG_TEXT_BASE) -e $(CONFIG_SYS_UBOOT_START) \
+>         -p $(CONFIG_FIT_EXTERNAL_OFFSET) \
+>         -n "U-Boot $(UBOOTRELEASE) for $(BOARD) board" -E \
+> -       $(patsubst %,-b arch/$(ARCH)/dts/%.dtb,$(subst ",,$(DEVICE_TREE))) \
+> -       $(patsubst %,-b arch/$(ARCH)/dts/%.dtb,$(subst ",,$(CONFIG_OF_LIST))) \
+> -       $(patsubst %,-b arch/$(ARCH)/dts/%.dtbo,$(subst ",,$(CONFIG_OF_OVERLAY_LIST)))
+> +       $(patsubst %,-b $(dt_dir)/%.dtb,$(subst ",,$(DEVICE_TREE))) \
+> +       $(patsubst %,-b $(dt_dir)/%.dtb,$(subst ",,$(CONFIG_OF_LIST))) \
+> +       $(patsubst %,-b $(dt_dir)/%.dtbo,$(subst ",,$(CONFIG_OF_OVERLAY_LIST)))
+>  else
+>  MKIMAGEFLAGS_u-boot.img = -A $(ARCH) -T firmware -C none -O u-boot \
+>         -a $(CONFIG_TEXT_BASE) -e $(CONFIG_SYS_UBOOT_START) \
+> diff --git a/scripts/Makefile.spl b/scripts/Makefile.spl
+> index 407fc52376a50..d074ba2350065 100644
+> --- a/scripts/Makefile.spl
+> +++ b/scripts/Makefile.spl
+> @@ -559,9 +559,15 @@ FORCE:
+>  $(obj)/dts/dt-$(SPL_NAME).dtb: dts/dt.dtb
+>         $(Q)$(MAKE) $(build)=$(obj)/dts spl_dtbs
+>
+> -PHONY += dts_dir
+> -dts_dir:
+> -       $(shell [ -d $(obj)/dts ] || mkdir -p $(obj)/dts)
+> +ifeq ($(CONFIG_OF_UPSTREAM),y)
+> +ifeq ($(CONFIG_ARM64),y)
+> +dt_dir := dts/upstream/src/arm64
+> +else
+> +dt_dir := dts/upstream/src/$(ARCH)
+> +endif
+> +else
+> +dt_dir := arch/$(ARCH)/dts
+> +endif
+>
+>  # Declare the contents of the .PHONY variable as phony.  We keep that
+>  # information in a variable so we can use it in if_changed and friends.
+> @@ -569,8 +575,11 @@ dts_dir:
+>
+>  SPL_OF_LIST_TARGETS = $(patsubst %,dts/%.dtb,$(subst ",,$(CONFIG_SPL_OF_LIST)))
+>  SHRUNK_ARCH_DTB = $(addprefix $(obj)/,$(SPL_OF_LIST_TARGETS))
+> +$(dir $(SHRUNK_ARCH_DTB)):
+> +       $(shell [ -d $@ ] || mkdir -p $@)
+> +
+>  .SECONDEXPANSION:
+> -$(SHRUNK_ARCH_DTB): $$(patsubst $(obj)/dts/%, arch/$(ARCH)/dts/%, $$@) dts_dir
+> +$(SHRUNK_ARCH_DTB): $$(patsubst $(obj)/dts/%, $(dt_dir)/%, $$@) $(dir $(SHRUNK_ARCH_DTB))
+>         $(call if_changed,fdtgrep)
+>
+>  targets += $(SPL_OF_LIST_TARGETS)
+>
+> --
+> 2.43.2
+>
