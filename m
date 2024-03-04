@@ -4,82 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F2D1C5478C
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 11:49:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D4FDC48BF6
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 12:13:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1642187E6F;
-	Mon,  4 Mar 2024 12:49:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 3AB6B87EB0;
+	Mon,  4 Mar 2024 13:13:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="Lj4h1h2W";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rpoPLlrD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0574187ECC; Mon,  4 Mar 2024 12:49:09 +0100 (CET)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 807AE87F71; Mon,  4 Mar 2024 13:13:11 +0100 (CET)
+Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
+ [IPv6:2607:f8b0:4864:20::62a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E81D87E4F
- for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 12:49:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CEB8987873
+ for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 13:13:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=B.Hahn@phytec.de
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1709552946; x=1712144946;
- h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Ir+wDywwrTcS/vcW390tytbpYn6S4hyWLNtSR5OYkrQ=;
- b=Lj4h1h2WED3L0hbZjwLjfaF8kplSzqDFdgleEQZkRQJRaLPdyNetPLnx/8blEQSP
- 245e2sjZC0tS/iAkNX7u+4X9y+Io0Bbfm5OcJ/QIqi/mk1S7+ymRM47ZrTfv32U7
- YKESwEDJONFGRDcOsyvmGyI+pr3wUSPL0INA4LddzFo=;
-X-AuditID: ac14000a-fbefe7000000290d-78-65e5b532b354
-Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
- (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 81.06.10509.235B5E56;
- Mon,  4 Mar 2024 12:49:06 +0100 (CET)
-Received: from llp-hahn.hahn.test (172.25.0.11) by Berlix.phytec.de
- (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Mon, 4 Mar 2024
- 12:49:32 +0100
-From: Benjamin Hahn <B.Hahn@phytec.de>
-Date: Mon, 4 Mar 2024 12:48:54 +0100
-Subject: [PATCH] drivers: imx_tmu: Select polling-rate from cpu-thermal
- devicetree node
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-1dbd32cff0bso36145825ad.0
+ for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 04:13:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1709554387; x=1710159187; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=XN4l/w/zAVZBUcv/Ol5tjSMiOmwTzSRb1A30ND9fI5A=;
+ b=rpoPLlrDsqb8nevBNtYMSs0jWJbksucXLD+rWXaWz7F8jF/lGZlBkufI4IhiO0TVlO
+ fwyfzGKWgwUaJvaI0Msc72rPl0vM1QjJMZskpMS4tLB2qSbqQmCyythzzSceRp8vcLAS
+ 8RbMR3ZeTXWwly9Vm6y+77Qr3QwTqYnfpw85Zt5oEReYlMAKZlY4fwUWw8Gn1eb1NH/8
+ DPMUb5Ttah6kUsc4QQwAzRTlNSE4qcBz2HRzQhHGix3PlbLeDs/B/BVMAbX2Tle0FDxK
+ MxLFU9493i2MLNbRT45g/fRAIHWnrmQdu1KOasFWHxElLFyL86F/ZWm4Zo7sYLuHouF3
+ FOSw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1709554387; x=1710159187;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=XN4l/w/zAVZBUcv/Ol5tjSMiOmwTzSRb1A30ND9fI5A=;
+ b=lZCwDw/nSTecKpGxvTNWgjXLUWezqwQXcgCBAmBlabnyIxrYJJEHt+2BoPagmu6oha
+ dwbmhUETdgea6DmqqTGlAZaS0N2tXoIHdBCWZhZobe9JHd0immnVnLpEx9Za28ZjUWbU
+ dRxR04uesYJN+Uw9IB1zc63WLUIBBcfDq0EqZosRCprpoRIusv0Nzj9SnMbzslEucaZE
+ T0LoHokujfqO8C/W2wPS4vhO/lrxv7mB6/y557EJQyRYg6pTnNyRTaVJSw42rcTCSBPr
+ B97PHdRhTAw5QwJLzdt0q3LUkRFSAcPgJGTuUP3hpvwYySZLoTOE7kKGun/5PlRVKE4w
+ uyWA==
+X-Gm-Message-State: AOJu0YxwAA+O6aCw10zZPCymoWzp3pIOBmakRCzw7QvcstVKZZFABThO
+ 7NISNnV2Kqa7QEFp62H2aVxfNlqEsnytELLGgtuq1yv3JhLoPnJ64qpJiMuRn1aJV/+WLD6XXfW
+ q
+X-Google-Smtp-Source: AGHT+IHttVdvUTV8/eLjwq4i3sCsghyiGVLhexr5Ig7n+Vkl7uSAZYpu3t9MxczUBXPXyWZX26H1ZA==
+X-Received: by 2002:a17:902:d2d2:b0:1db:f6b0:92d with SMTP id
+ n18-20020a170902d2d200b001dbf6b0092dmr10918621plc.6.1709554386861; 
+ Mon, 04 Mar 2024 04:13:06 -0800 (PST)
+Received: from sumit-X1.. ([223.178.213.98]) by smtp.gmail.com with ESMTPSA id
+ b8-20020a170903228800b001db81640315sm8330490plh.91.2024.03.04.04.13.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 04 Mar 2024 04:13:06 -0800 (PST)
+From: Sumit Garg <sumit.garg@linaro.org>
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com, sjg@chromium.org, bb@ti.com, nm@ti.com,
+ festevam@gmail.com, n-francis@ti.com, a-nandan@ti.com,
+ Sumit Garg <sumit.garg@linaro.org>
+Subject: [PATCH v4] Makefile: remove hardcoded device tree source directory
+Date: Mon,  4 Mar 2024 17:42:57 +0530
+Message-Id: <20240304121257.3551104-1-sumit.garg@linaro.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20240304-fix-thermal-driver-issue-v1-1-f30daeaf1055@phytec.de>
-X-B4-Tracking: v=1; b=H4sIACW15WUC/x2MQQqDQAwAvyI5G0h3Uw9+pXhY3NgNqC2JiiD+v
- UuPAzNzgYupOPTNBSaHun7WCo+2gbGk9S2ouTIECkyRGCc9cStiS5oxmx5iqO67YGQifoYuJZ6
- g5l+T6v7Xr+G+f8jucGxqAAAA
-To: Tom Rini <trini@konsulko.com>, Fabio Estevam <festevam@gmail.com>
-CC: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>, Benjamin Hahn
- <B.Hahn@phytec.de>
-X-Mailer: b4 0.12.4
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1709552946; l=1575;
- i=B.Hahn@phytec.de; s=20240126; h=from:subject:message-id;
- bh=Ir+wDywwrTcS/vcW390tytbpYn6S4hyWLNtSR5OYkrQ=;
- b=ZA6osgmOOGR/DwBTVyfNdn/evYKlY8wNbi6z61XIWbRnSChsgsOhVtNwkITN+qwE+0wOKb47J
- JJB+K7GzvQrCgFTTqbwevoQK4sS6Zalc53E3qoT0diwMEmxIx4Q7qXC
-X-Developer-Key: i=B.Hahn@phytec.de; a=ed25519;
- pk=r04clMulHz6S6js6elPBA+U+zVdDAqJyEyoNd8I3pSw=
-X-Originating-IP: [172.25.0.11]
-X-ClientProxiedBy: Berlix.phytec.de (172.25.0.12) To Berlix.phytec.de
- (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrOLMWRmVeSWpSXmKPExsWyRpKBR9do69NUg96PGhYPr/pbTJ20md3i
- 7d5Odovud+oOLB47Z91l93h1YBW7x9k7Oxg9+rtbWANYorhsUlJzMstSi/TtErgyVp7uZi5Y
- yVPR1/aBrYFxNVcXIyeHhICJxO6pu5i6GLk4hAQWM0mcvtDDDOE8YJRYenMWE0gVm4CaxK43
- r1lBbBYBFYndZ7uYQWxhgUiJxVfPsIDYvAKCEidnPgGyOTiYBTQl1u/SBwkzC8hLbH87hxmi
- xFvi4pZrbCDzJQS2MEpc2LCNESQhIuAqcWPVclaI3iiJdxODQEwJAWGJTTu1IMp3M0lcO/GU
- CSKeKLHztRxIp5CArMTN81vYIH6Rl5h27jUzhB0qsfXLdqYJjMKzkBw3C+G4WUiOW8DIvIpR
- KDczOTu1KDNbryCjsiQ1WS8ldRMjKPBFGLh2MPbN8TjEyMTBeIhRgoNZSYS35teTVCHelMTK
- qtSi/Pii0pzU4kOM0hwsSuK8qzuCU4UE0hNLUrNTUwtSi2CyTBycUg2MS9+nqh9z4hU/4ful
- 1PjR7pLw4NK0pjAHjcLa+P0RLUvyX/ydurd0k+L9hzkyFrMmOiYolq1gXyJvfbe2Uant8abw
- bzvrn8n+/OrvlnLTsVE5sXd3iZ+p6OrTko9+6h441ZTTwTmHv/mVVVmKocR24XOZZ46WG9k8
- OHFxj6uh0L4rM1TrNyoosRRnJBpqMRcVJwIAxBXhy2oCAAA=
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,48 +90,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The polling rate is already specified in some devicetrees, like
-imx8mp.dtsi for example, but was not selected so far. For the
-trippoints, the cpu-thermal node is used. Also get the polling rate from
-this node. Use the default of 5000ms if the polling rate should not be
-specified in the devicetree.
+From: Bryan Brattlof <bb@ti.com>
 
-NOTE: The polling rate from the devicetree will be used after this
-patch. In imx8*.dtsi devicetrees the polling delay is set to 2000ms for
-example.
+Some boards that choose to utilize the OF_UPSTREAM directory for their
+device tree files will need to specify that directory instead of the
+traditional arch/$(ARCH)/dts/* path.
 
-Signed-off-by: Benjamin Hahn <B.Hahn@phytec.de>
+Include the correct path to the board's dtbs depending on if OF_UPSTREAM
+is selected or not.
+
+Signed-off-by: Bryan Brattlof <bb@ti.com>
+Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 ---
- drivers/thermal/imx_tmu.c | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/thermal/imx_tmu.c b/drivers/thermal/imx_tmu.c
-index 4721cfbc0218..c7fe0f07a607 100644
---- a/drivers/thermal/imx_tmu.c
-+++ b/drivers/thermal/imx_tmu.c
-@@ -570,12 +570,14 @@ static int imx_tmu_parse_fdt(struct udevice *dev)
- {
- 	struct imx_tmu_plat *pdata = dev_get_plat(dev), *p_parent_data;
- 	struct ofnode_phandle_args args;
--	ofnode trips_np;
-+	ofnode trips_np, cpu_thermal_np;
- 	int ret;
- 
- 	dev_dbg(dev, "%s\n", __func__);
- 
--	pdata->polling_delay = IMX_TMU_POLLING_DELAY_MS;
-+	cpu_thermal_np = ofnode_path("/thermal-zones/cpu-thermal");
-+	pdata->polling_delay = ofnode_read_u32_default(cpu_thermal_np, "polling-delay",
-+						       IMX_TMU_POLLING_DELAY_MS);
- 
- 	if (pdata->zone_node) {
- 		pdata->regs = (union tmu_regs *)dev_read_addr_ptr(dev);
+Changes in v4:
+- Split out as a seperate patch from [1] since it's a dependency for
+  other platforms to switch to OF_UPSTREAM.
+- Removed further hardcoded arch/$(ARCH)/dts/* path.
 
----
-base-commit: eac52e4be4e234d563d6911737ee7ccdc0ada1f1
-change-id: 20240304-fix-thermal-driver-issue-34004526aa4f
+[1] https://patchwork.ozlabs.org/project/uboot/list/?series=396742
 
-Best regards,
+ Makefile             | 22 ++++++++++++++++------
+ scripts/Makefile.spl | 17 +++++++++++++----
+ 2 files changed, 29 insertions(+), 10 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 2643d1839b63..ff742ea3a8b8 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1184,6 +1184,16 @@ dt_binding_check: scripts_dtc
+ quiet_cmd_copy = COPY    $@
+       cmd_copy = cp $< $@
+ 
++ifeq ($(CONFIG_OF_UPSTREAM),y)
++ifeq ($(CONFIG_ARM64),y)
++dt_dir := dts/upstream/src/arm64
++else
++dt_dir := dts/upstream/src/$(ARCH)
++endif
++else
++dt_dir := arch/$(ARCH)/dts
++endif
++
+ ifeq ($(CONFIG_MULTI_DTB_FIT),y)
+ 
+ ifeq ($(CONFIG_MULTI_DTB_FIT_LZO),y)
+@@ -1209,7 +1219,7 @@ endif
+ 
+ MKIMAGEFLAGS_fit-dtb.blob = -f auto -A $(ARCH) -T firmware -C none -O u-boot \
+ 	-a 0 -e 0 -E \
+-	$(patsubst %,-b arch/$(ARCH)/dts/%.dtb,$(subst ",,$(CONFIG_OF_LIST))) -d /dev/null
++	$(patsubst %,-b $(dt_dir)/%.dtb,$(subst ",,$(CONFIG_OF_LIST))) -d /dev/null
+ 
+ MKIMAGEFLAGS_fit-dtb.blob += -B 0x8
+ 
+@@ -1362,7 +1372,7 @@ cmd_binman = $(srctree)/tools/binman/binman $(if $(BINMAN_DEBUG),-D) \
+ 		build -u -d u-boot.dtb -O . -m \
+ 		--allow-missing $(if $(BINMAN_ALLOW_MISSING),--ignore-missing) \
+ 		-I . -I $(srctree) -I $(srctree)/board/$(BOARDDIR) \
+-		-I arch/$(ARCH)/dts -a of-list=$(CONFIG_OF_LIST) \
++		-I $(dt_dir) -a of-list=$(CONFIG_OF_LIST) \
+ 		$(foreach f,$(BINMAN_INDIRS),-I $(f)) \
+ 		-a atf-bl31-path=${BL31} \
+ 		-a tee-os-path=${TEE} \
+@@ -1398,7 +1408,7 @@ ifneq ($(CONFIG_USE_SPL_FIT_GENERATOR),)
+ U_BOOT_ITS := u-boot.its
+ $(U_BOOT_ITS): $(U_BOOT_ITS_DEPS) FORCE
+ 	$(srctree)/$(CONFIG_SPL_FIT_GENERATOR) \
+-	$(patsubst %,arch/$(ARCH)/dts/%.dtb,$(subst ",,$(CONFIG_OF_LIST))) > $@
++	$(patsubst %,$(dt_dir)/%.dtb,$(subst ",,$(CONFIG_OF_LIST))) > $@
+ endif
+ endif
+ 
+@@ -1407,9 +1417,9 @@ MKIMAGEFLAGS_u-boot.img = -f auto -A $(ARCH) -T firmware -C none -O u-boot \
+ 	-a $(CONFIG_TEXT_BASE) -e $(CONFIG_SYS_UBOOT_START) \
+ 	-p $(CONFIG_FIT_EXTERNAL_OFFSET) \
+ 	-n "U-Boot $(UBOOTRELEASE) for $(BOARD) board" -E \
+-	$(patsubst %,-b arch/$(ARCH)/dts/%.dtb,$(subst ",,$(DEVICE_TREE))) \
+-	$(patsubst %,-b arch/$(ARCH)/dts/%.dtb,$(subst ",,$(CONFIG_OF_LIST))) \
+-	$(patsubst %,-b arch/$(ARCH)/dts/%.dtbo,$(subst ",,$(CONFIG_OF_OVERLAY_LIST)))
++	$(patsubst %,-b $(dt_dir)/%.dtb,$(subst ",,$(DEVICE_TREE))) \
++	$(patsubst %,-b $(dt_dir)/%.dtb,$(subst ",,$(CONFIG_OF_LIST))) \
++	$(patsubst %,-b $(dt_dir)/%.dtbo,$(subst ",,$(CONFIG_OF_OVERLAY_LIST)))
+ else
+ MKIMAGEFLAGS_u-boot.img = -A $(ARCH) -T firmware -C none -O u-boot \
+ 	-a $(CONFIG_TEXT_BASE) -e $(CONFIG_SYS_UBOOT_START) \
+diff --git a/scripts/Makefile.spl b/scripts/Makefile.spl
+index 407fc52376a5..d074ba235006 100644
+--- a/scripts/Makefile.spl
++++ b/scripts/Makefile.spl
+@@ -559,9 +559,15 @@ FORCE:
+ $(obj)/dts/dt-$(SPL_NAME).dtb: dts/dt.dtb
+ 	$(Q)$(MAKE) $(build)=$(obj)/dts spl_dtbs
+ 
+-PHONY += dts_dir
+-dts_dir:
+-	$(shell [ -d $(obj)/dts ] || mkdir -p $(obj)/dts)
++ifeq ($(CONFIG_OF_UPSTREAM),y)
++ifeq ($(CONFIG_ARM64),y)
++dt_dir := dts/upstream/src/arm64
++else
++dt_dir := dts/upstream/src/$(ARCH)
++endif
++else
++dt_dir := arch/$(ARCH)/dts
++endif
+ 
+ # Declare the contents of the .PHONY variable as phony.  We keep that
+ # information in a variable so we can use it in if_changed and friends.
+@@ -569,8 +575,11 @@ dts_dir:
+ 
+ SPL_OF_LIST_TARGETS = $(patsubst %,dts/%.dtb,$(subst ",,$(CONFIG_SPL_OF_LIST)))
+ SHRUNK_ARCH_DTB = $(addprefix $(obj)/,$(SPL_OF_LIST_TARGETS))
++$(dir $(SHRUNK_ARCH_DTB)):
++	$(shell [ -d $@ ] || mkdir -p $@)
++
+ .SECONDEXPANSION:
+-$(SHRUNK_ARCH_DTB): $$(patsubst $(obj)/dts/%, arch/$(ARCH)/dts/%, $$@) dts_dir
++$(SHRUNK_ARCH_DTB): $$(patsubst $(obj)/dts/%, $(dt_dir)/%, $$@) $(dir $(SHRUNK_ARCH_DTB))
+ 	$(call if_changed,fdtgrep)
+ 
+ targets += $(SPL_OF_LIST_TARGETS)
 -- 
-Benjamin Hahn <B.Hahn@phytec.de>
+2.34.1
 
