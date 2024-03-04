@@ -4,79 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75447C5478C
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 15:45:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A242C5478C
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 15:51:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D079F87FB6;
-	Mon,  4 Mar 2024 16:45:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 7B33087FD4;
+	Mon,  4 Mar 2024 16:51:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="ClaIvo8z";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SjUCAw4I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 221F087FBC; Mon,  4 Mar 2024 16:45:44 +0100 (CET)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id DADBA875FC; Mon,  4 Mar 2024 16:51:03 +0100 (CET)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D665387E92
- for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 16:45:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 8D8B387FD6
+ for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 16:51:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-5656e5754ccso5969248a12.0
- for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 07:45:41 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-33dcc82ecc1so1111941f8f.1
+ for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 07:51:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1709567141; x=1710171941;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=E4ZxDPpyltRUQ0TAUPbnAKRDzB35Unf+A0BQVJEL+Sc=;
- b=ClaIvo8zD9va4g4k3LCDPZAomQiipeBjlGSAL9laDwFC29y9I25eLzzq0eEsFDCOwC
- y4x4bJsBOz4irSyolcAi7WFueXXag0T+PWykne7NglpBHEBslCCI0dAznDQMtoCW8kH/
- 3hpqY62jXGeBSFPlWiudcstwQOk2krPo2+snI=
+ d=gmail.com; s=20230601; t=1709567461; x=1710172261; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=vdxjrN5zEe+IM11bOtpQLaliUVSou4G/iAL/LZWU/Bc=;
+ b=SjUCAw4I1gPjbsLxPaW/K8NZUW98vV+6/AbrOngMjd5D4/I3tEbExrMFwErOi4szfR
+ GFqqO51aQ8yG3mxpeg0idECFA5rhYtc/brifPBXFNXpNUPb4jJNVVsY68JIBEr7/dvCj
+ a5GQfOU14rDNWZkYDO5CLHqm9C1crdSXkU0xPXvFSDpWEN6ds85uj4/kh2iMRlB+Ns4a
+ T1PMLK8Mf6OqvLYj46ptjz/pEe1YIQRbSEH/NZVE4Y+QTl6h7WZl8xOPmMDwoafrgpTz
+ E7n3KR8rRtK/B5ZV1oeTt4DwMhkCbv+JQ4TK0mda7quhMA3ElOyAtsODqaO/fwBvlYXU
+ elhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709567141; x=1710171941;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=E4ZxDPpyltRUQ0TAUPbnAKRDzB35Unf+A0BQVJEL+Sc=;
- b=g+OaC189tJ3iJoYP+8TdCLpplL4MPURCUK1Ys4skoCHH6kpexZlVdmWVkhhPd1FNmQ
- 33s55uRCv5tp14s2+4y4YgDrMsSydt4g8dnPqjd2e7AW5AlQ6b2dcnv6G2sdYWKSKK5u
- K/Nk1QunBFKpK++0WUFPUJsb9x9B4s9d3dYoUCx7hG0u1Lr60uUQA/omGMIHrs4+wr+V
- SuQZLpUhMeF2WyTkb2bsBFouAo/zNC4KLuXnfZNo78GTmZWhzXKF1cgkTmsCfROXD+7M
- FLIBPMM9woK4J6RWp4H3cFEkxw8d+VEm+Y29gjUdCbIu9KjVC05TMl8EZr8LTjp6XE2u
- toSA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUyqeC7DIRuQmS87HSpo53HPJK+RSZeLBmjgwigxAnDGkm4AGypvG0YmGCVjyitXJsurOqf2HVCGvtrg/mDQEYZnrz+Hg==
-X-Gm-Message-State: AOJu0YwOUL504tIxo7rNAVGv6fdEAaLxA1bh09bb4wAEp2OEtxkGnY7l
- VL6PcnCzJgwATFOXmVJxPNcGVw/mlv+3caFyRFKnssoZz3+0eXScb+tZNZ9MLLsWAzQi2aHG/xt
- o+LFEDrSEgh8sqBR6s1vkKkK7tE0FMiYekZQqlQ==
-X-Google-Smtp-Source: AGHT+IECJryRmc676DwIdeOFMlb0YaTqTlXaXJxOuI9BzXipMhjaufa42NmufDo6CjTzu1JuLVv7qJX6nn0IDm9SDak=
-X-Received: by 2002:a17:906:c30c:b0:a45:31f5:9de5 with SMTP id
- s12-20020a170906c30c00b00a4531f59de5mr2564672ejz.33.1709567141211; Mon, 04
- Mar 2024 07:45:41 -0800 (PST)
+ d=1e100.net; s=20230601; t=1709567461; x=1710172261;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=vdxjrN5zEe+IM11bOtpQLaliUVSou4G/iAL/LZWU/Bc=;
+ b=sKOeopqZleO+cm/mSXO0RSZei3aVo4IPwBC+llIX6td4NcqA8lgmWwjAI6kxcfOb4R
+ 8jhHGw8h9tgwtGzfjsm8r0Qt2PLxfNAMK+p+UFSA5RJtvbG79ObrctZHKLtY/OrAfQYU
+ QWgwWEZE3ALJOz6C7blmgcSKaOmp7f9tryK0AjHHIB/8X5tslvDxzDjjvBUsioiUUGQp
+ wn3s/5cJtfe+ogYOgYPPjVaPy+ZB4ikrhZlLt4JiXpr81QcueQOBH457gCnkh6U+PAiv
+ u57Nqfa6QAF0MUkD309ER738wVojwMigJ/HJd9ec2hlNzztFdvIBLYSFm3pKwuVfJwxs
+ 5JpQ==
+X-Gm-Message-State: AOJu0YzOGOzrprqujmGM4CgeAdFm6Au5OUZ+te0PRTlk0HLfvJX6PAoA
+ z4hOBpmPOKCIIdsTYt4yh9td7DTZvQgh+Q8csLgVXJfr+QSeo52MeJ2sHp5BpohUHonhniI1ais
+ LIzROjmZoytIW2L0HOFEq0f3LNyk=
+X-Google-Smtp-Source: AGHT+IGmSLgYeh/cN7hhKt8+ZNijBXBIzzydrqouv6hJKUiUwxExl50LoVfsv9Be5Al5JrhcqqZYz7ucqssp4WXxEgc=
+X-Received: by 2002:adf:e402:0:b0:33d:568f:8986 with SMTP id
+ g2-20020adfe402000000b0033d568f8986mr5442819wrm.2.1709567460396; Mon, 04 Mar
+ 2024 07:51:00 -0800 (PST)
 MIME-Version: 1.0
-References: <20240104114619.280513-1-o451686892@gmail.com>
- <CAHk0Hov+uwanmDK9wh9ke6c2JX7TRw9_qsF9Vq+Hrs6rqFqD6Q@mail.gmail.com>
- <2e36991a-2a3c-46d8-bcbf-1c2c7a3d3a63@gmx.de>
-In-Reply-To: <2e36991a-2a3c-46d8-bcbf-1c2c7a3d3a63@gmx.de>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Mon, 4 Mar 2024 16:45:29 +0100
-Message-ID: <CAOf5uwnOca7uzTJe8MLZ0xgY9ifW6XvK6MqbSDj8DaHWfQ7XsQ@mail.gmail.com>
-Subject: Re: [PATCH] cmd: sf: Fix sf probe crash
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Weizhao Ouyang <o451686892@gmail.com>, Michal Simek <michal.simek@amd.com>, 
- Jagan Teki <jagan@amarulasolutions.com>,
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>, 
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
+References: <20240302220108.720637-1-igor.opaniuk@gmail.com>
+ <CAC_iWjK+f-ZBKT=Mf6629HxV=NCgoZ_taRMFhGK04aA1Xw-BCA@mail.gmail.com>
+In-Reply-To: <CAC_iWjK+f-ZBKT=Mf6629HxV=NCgoZ_taRMFhGK04aA1Xw-BCA@mail.gmail.com>
+From: Igor Opaniuk <igor.opaniuk@gmail.com>
+Date: Mon, 4 Mar 2024 16:50:48 +0100
+Message-ID: <CAByghJaHFxtQaZ3ZLSbR=qkeLP3GLfOZpMVcKkrkCUqmuhF94w@mail.gmail.com>
+Subject: Re: [PATCH v2 0/5] TEE: minor cleanup
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, AKASHI Takahiro <takahiro.akashi@linaro.org>, 
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Bin Meng <bmeng@tinylab.org>, 
+ Etienne Carriere <etienne.carriere@foss.st.com>, 
+ Francis Laniel <francis.laniel@amarulasolutions.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jens Wiklander <jens.wiklander@linaro.org>, 
+ Jorge Ramirez-Ortiz <jorge@foundries.io>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Roger Knecht <rknecht@pm.me>, Sean Edmond <seanedmond@microsoft.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,75 +100,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
+Hi Ilias,
 
-On Mon, Mar 4, 2024 at 4:44=E2=80=AFPM Heinrich Schuchardt <xypron.glpk@gmx=
-.de> wrote:
+On Mon, Mar 4, 2024 at 12:16=E2=80=AFPM Ilias Apalodimas <
+ilias.apalodimas@linaro.org> wrote:
+
+> Hi Igor,
 >
-> On 04.03.24 15:47, Weizhao Ouyang wrote:
-> > Gentle ping. Not merged yet.
+> On Sun, 3 Mar 2024 at 00:01, Igor Opaniuk <igor.opaniuk@gmail.com> wrote:
 > >
-> > BR,
-> > Weizhao
->
-> Hello Dario,
->
-> that patch is in your patchwork review queue. Could you, please, have a
-> look.
-
-He is with me, I will ping about all the patches that we need to queue
-
-Michael
-
->
-> Best regards
->
-> Heinrich
->
 > >
-> > On Thu, Jan 4, 2024 at 7:46=E2=80=AFPM Weizhao Ouyang <o451686892@gmail=
-.com> wrote:
-> >>
-> >> Handle the return value of spi_flash_probe_bus_cs() to avoid sf probe
-> >> crashes.
-> >>
-> >> Signed-off-by: Weizhao Ouyang <o451686892@gmail.com>
-> >> ---
-> >>   cmd/sf.c | 5 +++--
-> >>   1 file changed, 3 insertions(+), 2 deletions(-)
-> >>
-> >> diff --git a/cmd/sf.c b/cmd/sf.c
-> >> index 730996c02b..e3866899f6 100644
-> >> --- a/cmd/sf.c
-> >> +++ b/cmd/sf.c
-> >> @@ -135,8 +135,9 @@ static int do_spi_flash_probe(int argc, char *cons=
-t argv[])
-> >>          }
-> >>          flash =3D NULL;
-> >>          if (use_dt) {
-> >> -               spi_flash_probe_bus_cs(bus, cs, &new);
-> >> -               flash =3D dev_get_uclass_priv(new);
-> >> +               ret =3D spi_flash_probe_bus_cs(bus, cs, &new);
-> >> +               if (!ret)
-> >> +                       flash =3D dev_get_uclass_priv(new);
-> >>          } else {
-> >>                  flash =3D spi_flash_probe(bus, cs, speed, mode);
-> >>          }
-> >> --
-> >> 2.39.2
-> >>
+> > - Address some spelling errors and typos
+> > - Support CMD_OPTEE_RPMB for SANDBOX configurations and add python test=
+s
+> > - Remove common.h inclusion for drivers/tee
+> >
+> > Changes in v2:
+> > - Fixed chimp_optee.c:37:9: error: implicit declaration of function
+> 'memset'
+> > - Applied R-b and T-b tags
+>
+> https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines/19808
+> this seems to have a few failures
+>
+> Cheers
+> /Ilias
+> >
+> > Igor Opaniuk (5):
+> >   tee: optee: fix description in Kconfig
+> >   tee: sandbox: fix spelling errors
+> >   cmd: optee_rpmb: build cmd for sandbox
+> >   test: py: add optee_rpmb tests
+> >   tee: remove common.h inclusion
+> >
+> >  cmd/Kconfig                        |  4 +++-
+> >  drivers/tee/broadcom/chimp_optee.c |  3 ++-
+> >  drivers/tee/optee/Kconfig          |  2 +-
+> >  drivers/tee/optee/core.c           |  1 -
+> >  drivers/tee/optee/i2c.c            |  1 -
+> >  drivers/tee/optee/rpmb.c           |  1 -
+> >  drivers/tee/optee/supplicant.c     |  2 +-
+> >  drivers/tee/sandbox.c              | 10 +++++-----
+> >  drivers/tee/tee-uclass.c           |  1 -
+> >  test/py/tests/test_optee_rpmb.py   | 20 ++++++++++++++++++++
+> >  10 files changed, 32 insertions(+), 13 deletions(-)
+> >  create mode 100644 test/py/tests/test_optee_rpmb.py
+> >
+> > --
+> > 2.34.1
+> >
 >
 
+It looks like it's a side effect, the test I added revealed a bug in
+"cmd/optee_rpmb.c" implementation, which I didn't touch (looks
+like it doesn't close the tee session automatically).
 
+I'll address it and add a fix to the patch series.
+
+Just a quick question, are Azure pipelines still used (so I can configure
+my own account and run all these before sending patches, as explained
+in [1])
+
+[1] https://docs.u-boot.org/en/latest/develop/ci_testing.html
 --=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
+Best regards - Atentamente - Meilleures salutations
 
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+Igor Opaniuk
+
+mailto: igor.opaniuk@gmail.com
+skype: igor.opanyuk
+http://ua.linkedin.com/in/iopaniuk
