@@ -4,86 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A242C5478C
-	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 15:51:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFA56C5478C
+	for <u-boot@archiver.kernel.org>; Mon,  4 Mar 2024 16:04:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7B33087FD4;
-	Mon,  4 Mar 2024 16:51:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E2D5087E92;
+	Mon,  4 Mar 2024 17:04:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SjUCAw4I";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="qV65w0Yp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DADBA875FC; Mon,  4 Mar 2024 16:51:03 +0100 (CET)
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6ED7487FD6; Mon,  4 Mar 2024 17:04:29 +0100 (CET)
+Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D8B387FD6
- for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 16:51:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CB24C87F9F
+ for <u-boot@lists.denx.de>; Mon,  4 Mar 2024 17:04:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-33dcc82ecc1so1111941f8f.1
- for <u-boot@lists.denx.de>; Mon, 04 Mar 2024 07:51:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1709567461; x=1710172261; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vdxjrN5zEe+IM11bOtpQLaliUVSou4G/iAL/LZWU/Bc=;
- b=SjUCAw4I1gPjbsLxPaW/K8NZUW98vV+6/AbrOngMjd5D4/I3tEbExrMFwErOi4szfR
- GFqqO51aQ8yG3mxpeg0idECFA5rhYtc/brifPBXFNXpNUPb4jJNVVsY68JIBEr7/dvCj
- a5GQfOU14rDNWZkYDO5CLHqm9C1crdSXkU0xPXvFSDpWEN6ds85uj4/kh2iMRlB+Ns4a
- T1PMLK8Mf6OqvLYj46ptjz/pEe1YIQRbSEH/NZVE4Y+QTl6h7WZl8xOPmMDwoafrgpTz
- E7n3KR8rRtK/B5ZV1oeTt4DwMhkCbv+JQ4TK0mda7quhMA3ElOyAtsODqaO/fwBvlYXU
- elhQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709567461; x=1710172261;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=vdxjrN5zEe+IM11bOtpQLaliUVSou4G/iAL/LZWU/Bc=;
- b=sKOeopqZleO+cm/mSXO0RSZei3aVo4IPwBC+llIX6td4NcqA8lgmWwjAI6kxcfOb4R
- 8jhHGw8h9tgwtGzfjsm8r0Qt2PLxfNAMK+p+UFSA5RJtvbG79ObrctZHKLtY/OrAfQYU
- QWgwWEZE3ALJOz6C7blmgcSKaOmp7f9tryK0AjHHIB/8X5tslvDxzDjjvBUsioiUUGQp
- wn3s/5cJtfe+ogYOgYPPjVaPy+ZB4ikrhZlLt4JiXpr81QcueQOBH457gCnkh6U+PAiv
- u57Nqfa6QAF0MUkD309ER738wVojwMigJ/HJd9ec2hlNzztFdvIBLYSFm3pKwuVfJwxs
- 5JpQ==
-X-Gm-Message-State: AOJu0YzOGOzrprqujmGM4CgeAdFm6Au5OUZ+te0PRTlk0HLfvJX6PAoA
- z4hOBpmPOKCIIdsTYt4yh9td7DTZvQgh+Q8csLgVXJfr+QSeo52MeJ2sHp5BpohUHonhniI1ais
- LIzROjmZoytIW2L0HOFEq0f3LNyk=
-X-Google-Smtp-Source: AGHT+IGmSLgYeh/cN7hhKt8+ZNijBXBIzzydrqouv6hJKUiUwxExl50LoVfsv9Be5Al5JrhcqqZYz7ucqssp4WXxEgc=
-X-Received: by 2002:adf:e402:0:b0:33d:568f:8986 with SMTP id
- g2-20020adfe402000000b0033d568f8986mr5442819wrm.2.1709567460396; Mon, 04 Mar
- 2024 07:51:00 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=phytec.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=B.Hahn@phytec.de
+DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
+ q=dns/txt; i=@phytec.de; t=1709568266; x=1712160266;
+ h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=7tEESjFYAC5ycSxDkMcKq6L20ivhlizyLMZyIjGjSbI=;
+ b=qV65w0YpCsyK+4IxE1sgheuH9/t7agxM07FeWUEpZSbyPnk0rZyROtL/SaeW2jU7
+ o58bXxk6G28qZt7AFqu47aRpJR0HRx5AtgKjcS0TPlPCF8dn8UIRfNBThEkStZWI
+ jiZgx9YMvnBj5j9nFk/f6x86hyNIYRCq2XN19eVdXoA=;
+X-AuditID: ac14000a-fadff7000000290d-c5-65e5f10a0aca
+Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
+ (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (Client did not present a certificate)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id B1.08.10509.A01F5E56;
+ Mon,  4 Mar 2024 17:04:26 +0100 (CET)
+Received: from llp-hahn.hahn.test (172.25.0.11) by Berlix.phytec.de
+ (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Mon, 4 Mar 2024
+ 17:04:26 +0100
+From: Benjamin Hahn <B.Hahn@phytec.de>
+Date: Mon, 4 Mar 2024 17:04:19 +0100
+Subject: [PATCH v2 1/2] board: phytec: common: phytec_som_detection: Add
+ phytec_get_som_type
 MIME-Version: 1.0
-References: <20240302220108.720637-1-igor.opaniuk@gmail.com>
- <CAC_iWjK+f-ZBKT=Mf6629HxV=NCgoZ_taRMFhGK04aA1Xw-BCA@mail.gmail.com>
-In-Reply-To: <CAC_iWjK+f-ZBKT=Mf6629HxV=NCgoZ_taRMFhGK04aA1Xw-BCA@mail.gmail.com>
-From: Igor Opaniuk <igor.opaniuk@gmail.com>
-Date: Mon, 4 Mar 2024 16:50:48 +0100
-Message-ID: <CAByghJaHFxtQaZ3ZLSbR=qkeLP3GLfOZpMVcKkrkCUqmuhF94w@mail.gmail.com>
-Subject: Re: [PATCH v2 0/5] TEE: minor cleanup
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, AKASHI Takahiro <takahiro.akashi@linaro.org>, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Bin Meng <bmeng@tinylab.org>, 
- Etienne Carriere <etienne.carriere@foss.st.com>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jens Wiklander <jens.wiklander@linaro.org>, 
- Jorge Ramirez-Ortiz <jorge@foundries.io>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Roger Knecht <rknecht@pm.me>, Sean Edmond <seanedmond@microsoft.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-ID: <20240304-pcl-070-patches-v2-1-c534960c4b8b@phytec.de>
+References: <20240304-pcl-070-patches-v2-0-c534960c4b8b@phytec.de>
+In-Reply-To: <20240304-pcl-070-patches-v2-0-c534960c4b8b@phytec.de>
+To: Tom Rini <trini@konsulko.com>, Teresa Remmet <t.remmet@phytec.de>, Fabio
+ Estevam <festevam@gmail.com>
+CC: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>, Benjamin Hahn
+ <B.Hahn@phytec.de>
+X-Mailer: b4 0.12.4
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1709568265; l=1801;
+ i=B.Hahn@phytec.de; s=20240126; h=from:subject:message-id;
+ bh=7tEESjFYAC5ycSxDkMcKq6L20ivhlizyLMZyIjGjSbI=;
+ b=YGoKyA7mHKAZeeviDEHr9jeyqnitittxkKG5OQzs1TgtXYTp0lEBm2Qdm7Trh9pUBdd2mvKj+
+ 9IgmvA0CfDVCveVitsyqNXkeos4KMT66ZV7YfL4x204/MLjkHcjUMFS
+X-Developer-Key: i=B.Hahn@phytec.de; a=ed25519;
+ pk=r04clMulHz6S6js6elPBA+U+zVdDAqJyEyoNd8I3pSw=
+X-Originating-IP: [172.25.0.11]
+X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
+ (172.25.0.12)
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrELMWRmVeSWpSXmKPExsWyRpKBR5fr49NUg/aNChYPr/pbTJ20md3i
+ 7d5Odovud+oOLB47Z91l93h1YBW7x9k7Oxg9+rtbWANYorhsUlJzMstSi/TtErgy2j4eYivo
+ 5qtYcbaHqYGxjaeLkZNDQsBE4vmEd0xdjFwcQgKLmST23mxihnAeMEp8//SRFaSKTUBNYteb
+ 12A2i4CKxJRpO9lBbGGBOIl/O7cygdi8AoISJ2c+Yeli5OBgFtCUWL9LHyTMLCAvsf3tHGaI
+ EieJ9zd3s4HYQkD2nW8dYDangLPEzUs/wGwRgWyJZ51b2CHGREm8mxgEYkoICEts2qkFcpmE
+ wG4miX8fp7BDxBMldr6Wg5goK3Hz/BY2iLfkJaade80MYYdKHNm0mmkCo8gsJHfOQrhzFpI7
+ FzAyr2IUys1Mzk4tyszWK8ioLElN1ktJ3cQIigcRBq4djH1zPA4xMnEwHmKU4GBWEuGt+fUk
+ VYg3JbGyKrUoP76oNCe1+BCjNAeLkjjv6o7gVCGB9MSS1OzU1ILUIpgsEwenVANjTefZcxkG
+ S4xMorQeJei5Km9tT+ntXpUW0pEmp2b185j32r6FR6XMbhvXH4rOexV8xCLnwdEnC4W6zU+/
+ XNxwnu/kIbVNE4S9uh/fi5W/cfbmpSd36tJX2DX85Pxn2z/rpf0dx6oSTemGgN9/j579umId
+ 94ItKTIJ+Z39f+dcby+qu31rn36iEktxRqKhFnNRcSIAidhZd3UCAAA=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,73 +96,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Add a function that gets the som_type from the EEPROM.
+Add an enum for the som_type.
 
-On Mon, Mar 4, 2024 at 12:16=E2=80=AFPM Ilias Apalodimas <
-ilias.apalodimas@linaro.org> wrote:
+Signed-off-by: Benjamin Hahn <B.Hahn@phytec.de>
+---
+ board/phytec/common/phytec_som_detection.c | 10 ++++++++++
+ board/phytec/common/phytec_som_detection.h |  8 ++++++++
+ 2 files changed, 18 insertions(+)
 
-> Hi Igor,
->
-> On Sun, 3 Mar 2024 at 00:01, Igor Opaniuk <igor.opaniuk@gmail.com> wrote:
-> >
-> >
-> > - Address some spelling errors and typos
-> > - Support CMD_OPTEE_RPMB for SANDBOX configurations and add python test=
-s
-> > - Remove common.h inclusion for drivers/tee
-> >
-> > Changes in v2:
-> > - Fixed chimp_optee.c:37:9: error: implicit declaration of function
-> 'memset'
-> > - Applied R-b and T-b tags
->
-> https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines/19808
-> this seems to have a few failures
->
-> Cheers
-> /Ilias
-> >
-> > Igor Opaniuk (5):
-> >   tee: optee: fix description in Kconfig
-> >   tee: sandbox: fix spelling errors
-> >   cmd: optee_rpmb: build cmd for sandbox
-> >   test: py: add optee_rpmb tests
-> >   tee: remove common.h inclusion
-> >
-> >  cmd/Kconfig                        |  4 +++-
-> >  drivers/tee/broadcom/chimp_optee.c |  3 ++-
-> >  drivers/tee/optee/Kconfig          |  2 +-
-> >  drivers/tee/optee/core.c           |  1 -
-> >  drivers/tee/optee/i2c.c            |  1 -
-> >  drivers/tee/optee/rpmb.c           |  1 -
-> >  drivers/tee/optee/supplicant.c     |  2 +-
-> >  drivers/tee/sandbox.c              | 10 +++++-----
-> >  drivers/tee/tee-uclass.c           |  1 -
-> >  test/py/tests/test_optee_rpmb.py   | 20 ++++++++++++++++++++
-> >  10 files changed, 32 insertions(+), 13 deletions(-)
-> >  create mode 100644 test/py/tests/test_optee_rpmb.py
-> >
-> > --
-> > 2.34.1
-> >
->
+diff --git a/board/phytec/common/phytec_som_detection.c b/board/phytec/common/phytec_som_detection.c
+index c73bf9721b2f..f9607b018dea 100644
+--- a/board/phytec/common/phytec_som_detection.c
++++ b/board/phytec/common/phytec_som_detection.c
+@@ -203,6 +203,16 @@ u8 __maybe_unused phytec_get_rev(struct phytec_eeprom_data *data)
+ 	return api2->pcb_rev;
+ }
+ 
++u8 __maybe_unused phytec_get_som_type(struct phytec_eeprom_data *data)
++{
++	if (!data)
++		data = &eeprom_data;
++	if (data->api_rev < PHYTEC_API_REV2)
++		return PHYTEC_EEPROM_INVAL;
++
++	return data->data.data_api2.som_type;
++}
++
+ #else
+ 
+ inline int phytec_eeprom_data_setup(struct phytec_eeprom_data *data,
+diff --git a/board/phytec/common/phytec_som_detection.h b/board/phytec/common/phytec_som_detection.h
+index 11009240875c..c0f0c57a6123 100644
+--- a/board/phytec/common/phytec_som_detection.h
++++ b/board/phytec/common/phytec_som_detection.h
+@@ -19,6 +19,13 @@ enum {
+ 	PHYTEC_API_REV2,
+ };
+ 
++enum phytec_som_type_str {
++	PCM = 0,
++	PCL,
++	KSM,
++	KSP,
++};
++
+ static const char * const phytec_som_type_str[] = {
+ 	"PCM",
+ 	"PCL",
+@@ -67,5 +74,6 @@ void __maybe_unused phytec_print_som_info(struct phytec_eeprom_data *data);
+ 
+ char * __maybe_unused phytec_get_opt(struct phytec_eeprom_data *data);
+ u8 __maybe_unused phytec_get_rev(struct phytec_eeprom_data *data);
++u8 __maybe_unused phytec_get_som_type(struct phytec_eeprom_data *data);
+ 
+ #endif /* _PHYTEC_SOM_DETECTION_H */
 
-It looks like it's a side effect, the test I added revealed a bug in
-"cmd/optee_rpmb.c" implementation, which I didn't touch (looks
-like it doesn't close the tee session automatically).
+-- 
+2.34.1
 
-I'll address it and add a fix to the patch series.
-
-Just a quick question, are Azure pipelines still used (so I can configure
-my own account and run all these before sending patches, as explained
-in [1])
-
-[1] https://docs.u-boot.org/en/latest/develop/ci_testing.html
---=20
-Best regards - Atentamente - Meilleures salutations
-
-Igor Opaniuk
-
-mailto: igor.opaniuk@gmail.com
-skype: igor.opanyuk
-http://ua.linkedin.com/in/iopaniuk
