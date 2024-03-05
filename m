@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 374B3C54798
-	for <u-boot@archiver.kernel.org>; Tue,  5 Mar 2024 14:51:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D59FC54798
+	for <u-boot@archiver.kernel.org>; Tue,  5 Mar 2024 14:55:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D13288054;
-	Tue,  5 Mar 2024 15:51:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1999F88071;
+	Tue,  5 Mar 2024 15:55:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eFPGrgDr";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hTVqtCyi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0388487FB8; Tue,  5 Mar 2024 15:51:34 +0100 (CET)
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
+ id E623C88055; Tue,  5 Mar 2024 15:55:44 +0100 (CET)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0934C88081
- for <u-boot@lists.denx.de>; Tue,  5 Mar 2024 15:51:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A2FA787FA0
+ for <u-boot@lists.denx.de>; Tue,  5 Mar 2024 15:55:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-5131a9b3d5bso6523227e87.0
- for <u-boot@lists.denx.de>; Tue, 05 Mar 2024 06:51:30 -0800 (PST)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-412a9e9c776so40525265e9.0
+ for <u-boot@lists.denx.de>; Tue, 05 Mar 2024 06:55:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709650289; x=1710255089; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1709650541; x=1710255341; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=aHA9+Bn1nM5VeSU+pgPDmopjqoi0KDzeY77Pohf9quE=;
- b=eFPGrgDriUVmms+6l5F3ixXMOVy9eng4rukmy457LMw3un17PDIk0OkaTNAedHaqAq
- RXKM8kBRXxZpYg3BwhayAGoA5IOZvUKmJCPFgiia2CMSzHSJW3oSAWEZIKt3YYvOv5Wc
- zpmWtpqWTVprL0VEeZwvqmaxhjHy5F6qc3Mt7pWI9OaX6u0igkmVnT6bFnA8nM+gqbzO
- 8FVUgyF/O2JKKQBUy0VEdrRx1jbX5MbG1EqTkea4NVZ5oInMmb60/nqIouwMkn+PosyH
- ZimNX8MWdeGlXQcOZM2tSRjEq9NecXyyclnm/CIxOJrKtOiKn/Na/XguXUOhkK/2qt4N
- gH+g==
+ bh=abu9HKTakdKiuvXuoDk3AvvkRfGNyASHXfujBHBqQzg=;
+ b=hTVqtCyifkQibX6268ERcZEBVjFaCAzAxNChTEdp7A08wRz0XuZD4G+sFgz570LLzw
+ 9pzdV34cCE1egysBdhMShJEpjNFl8MxBElQLX8kgzf2uaRw4iEivbqETIynVXtgdZCfm
+ q4T8NO6XZtfmeuItudRBDnlRjnGMxphtdkG0DgF8I48BNIxge/M7oZIGmv/iXPu7zGts
+ /HmSF+S/FRoZHZq9nrIHVni6WYwDb//2gkzqpzdEt8A2eNk4b394t+d4mLXItoVNskrM
+ 0Ai1JHRBpN83aonvx7a3qHuV5ZJf14An7lK2+B1gLmPdU+UBD2bj4a+bm24uXJO72xDY
+ Z1Eg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709650289; x=1710255089;
+ d=1e100.net; s=20230601; t=1709650541; x=1710255341;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=aHA9+Bn1nM5VeSU+pgPDmopjqoi0KDzeY77Pohf9quE=;
- b=HiJzbxZO2jOruqAYqeG56w26c7l+Kg5eG48hjzp2v+oIoNUcSZy904CTMXxRaXIE0Y
- A/HsY7FyebjIhYKCRmooP9oU8D3nhvU4oQqxOOJdwt/cE5oJGdUi0+kG32xu45Qcq6vI
- uvnd15XNONBDSvgGLlBITED+oqpKXh6U5Z4wQ8143yjb0z7ezXtP3ETGJERKZOWBlU9G
- xtGtVqZFvEMrsbSVcMVosCOuzkCvQXMexH0CSXLIGE6el2CN6tr2zXjRD6EshWUQ7SE1
- vSxSc+SfHT3FBA47rpCv4eu52LqHnJnTkKuG5Dj4hkwffQiLMQyF5f+C6VUlW5mqeiYU
- zfwQ==
-X-Gm-Message-State: AOJu0Yyxfn44fzfq3CAecAzK7/5IGUBFf7Ybzmwc4IucdoO6IpuZnc07
- ycxp/i/g5Bbi+Q6ETVkO8tE0KiQrrHA6rs6dnR3+KlA7RWShTR9Ur58LPkT2ZVQ=
-X-Google-Smtp-Source: AGHT+IGdzP/o4WM8qNRD248tnIO3G6KMMzDE/rMZnmTmF+hs+sfe++cAsbawVgSnygEeIBtIL8pERQ==
-X-Received: by 2002:ac2:4306:0:b0:513:1cae:4783 with SMTP id
- l6-20020ac24306000000b005131cae4783mr1383604lfh.60.1709650288774; 
- Tue, 05 Mar 2024 06:51:28 -0800 (PST)
+ bh=abu9HKTakdKiuvXuoDk3AvvkRfGNyASHXfujBHBqQzg=;
+ b=q0gHb30YaZpyRS0ODLVO40rfqIwfgP60ZBTHS47+4+zCuzGdgaZFFmRadHU/BfTykL
+ IMF5RJRFNDkNYEn/YiyYQkhN/9icadM03hncZGejc/pJyzG0XZa7oR6jAAW7kgPRKg5n
+ E4OewRtWg712fz5t106IhH3RfVKICafOoGBDvj4KSHzStM1EtXzgZAfd0viKmJIgJSFk
+ TiZrLvSV3k8KqNjkORse4906XmHdggFYSFTCtKwjk2s99wwuvgFKQSp7ee+AAvLg3CBa
+ osuSGYZWT68zQoHzbyYQI6v/zH37P9G6Rc97OxIqLJO7vFv3EaAb8q+veAzOAUKKZbZ1
+ OR2A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUsor9mfBCOoK4+pgH4Ck0rIlNYCzL/UZ5qy8NW/imIbkN7hPKaPP0yRUpOKyYh6WbVRRuauYumzJJC2At1747167HZTg==
+X-Gm-Message-State: AOJu0YwqkCfSAtoizZVHbe6+VAwbKDCF26wfPaLC23wZivjIpVoC2gJw
+ AAbaXQnlR4ihKRB5hLCH0/K9ODDrUVTwXUUAMFQmGYFqHWQ47Jn+HYlu4FNS0VI=
+X-Google-Smtp-Source: AGHT+IFnoRgZMKzHdlG3aHqJGQR7mVfws6oZBD7HfShZjUhIE4cfMDHvgBS6ClK3GyR7jPwZS1UvLQ==
+X-Received: by 2002:a05:6000:12d2:b0:33d:7e9:9543 with SMTP id
+ l18-20020a05600012d200b0033d07e99543mr2875197wrx.32.1709650541052; 
+ Tue, 05 Mar 2024 06:55:41 -0800 (PST)
 Received: from lion.caleb.rex.connolly.tech (host-92-17-96-232.as13285.net.
  [92.17.96.232]) by smtp.gmail.com with ESMTPSA id
- jn3-20020a05600c6b0300b004128e903b2csm20727426wmb.39.2024.03.05.06.51.27
+ i12-20020adff30c000000b0033e34b344f8sm7098548wro.77.2024.03.05.06.55.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Mar 2024 06:51:28 -0800 (PST)
+ Tue, 05 Mar 2024 06:55:40 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Alexander Gendin <agendin@matrox.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+To: Caleb Connolly <caleb.connolly@linaro.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mario Six <mario.six@gdsys.cc>, Sean Anderson <seanga2@gmail.com>,
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH v2] test: dm: add button_cmd test
-Date: Tue,  5 Mar 2024 14:51:03 +0000
-Message-ID: <20240305145111.1391645-1-caleb.connolly@linaro.org>
+Cc: Dan Carpenter <dan.carpenter@linaro.org>,
+	u-boot@lists.denx.de
+Subject: [PATCH v2] initcall: break loop immediately on failure
+Date: Tue,  5 Mar 2024 14:55:13 +0000
+Message-ID: <20240305145525.1397253-1-caleb.connolly@linaro.org>
 X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -94,204 +93,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a test for the button_cmd feature. This validates that commands can
-be mapped to two buttons, that the correct command runs based on which
-button is pressed, that only 1 command is run, and that no command runs
-if button_cmd_0_name is wrong or unset.
+The current ordering always results in func pointing to the next
+function in the init_sequence. e.g. if fdtdec_setup() fails, ret will
+be set to the error code, then func will be updated to point to
+initf_malloc(), only then is ret checked and the loop broken. The end
+result of this is that the "initcall failed at ..." error will point you
+to initf_malloc(), when the error actually occured in fdtdec_setup()!
 
-Additionally, fix a potential uninitialised variable use caught by these
-tests, the btn variable in get_button_cmd() is assumed to be null if
-button_get_by_label() fails, but it's actually used uninitialised in
-that case.
+This can be quite confusing and result in a lot of time wasted debugging
+code that has nothing to do with the failure (ask me how I know :P).
 
-CONFIG_BUTTON is now enabled automatically and was removed when running
-save_defconfig.
+Adjust the for loop to check ret immediately after the call and break
+early so that func will correctly reference the failed function.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-Fixes: e761035b6423 ("boot: add support for button commands")
 ---
 Changes in v2:
-- Explicitly assign btn as NULL in get_button_cmd(). This fixes a
-  bug where if the undefined variable is non-zero the
-  button_get_by_label() check would fail and result in invalid memory
-  being accessed.
-- Enable CONFIG_BUTTON_CMD for sandbox64 as well as sandbox.
-- Link to v1: https://lore.kernel.org/u-boot/20240214170357.4091708-1-caleb.connolly@linaro.org/
----
- common/button_cmd.c         |  2 +-
- configs/sandbox64_defconfig |  2 +-
- configs/sandbox_defconfig   |  2 +-
- test/dm/button.c            | 96 +++++++++++++++++++++++++++++++++++++
- 4 files changed, 99 insertions(+), 3 deletions(-)
+- Don't drop the initialisation of ret (thanks Dan!).
+- Link to v1: https://lore.kernel.org/u-boot/20240219183519.2183405-1-caleb.connolly@linaro.org/
 
-diff --git a/common/button_cmd.c b/common/button_cmd.c
-index b6a8434d6f29..8642c26735cc 100644
---- a/common/button_cmd.c
-+++ b/common/button_cmd.c
-@@ -32,9 +32,9 @@ struct button_cmd {
-  */
- static int get_button_cmd(int n, struct button_cmd *cmd)
- {
- 	const char *cmd_str;
--	struct udevice *btn;
-+	struct udevice *btn = NULL;
- 	char buf[24];
+Cc: Dan Carpenter <dan.carpenter@linaro.org>
+---
+ lib/initcall.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/lib/initcall.c b/lib/initcall.c
+index ce317af213ab..c8e2b0f6a386 100644
+--- a/lib/initcall.c
++++ b/lib/initcall.c
+@@ -54,9 +54,9 @@ int initcall_run_list(const init_fnc_t init_sequence[])
+ 	enum event_t type;
+ 	init_fnc_t func;
+ 	int ret = 0;
  
- 	snprintf(buf, sizeof(buf), "button_cmd_%d_name", n);
- 	cmd->btn_name = env_get(buf);
-diff --git a/configs/sandbox64_defconfig b/configs/sandbox64_defconfig
-index d101cca6a738..a62faf772482 100644
---- a/configs/sandbox64_defconfig
-+++ b/configs/sandbox64_defconfig
-@@ -10,8 +10,9 @@ CONFIG_PCI=y
- CONFIG_SANDBOX64=y
- CONFIG_DEBUG_UART=y
- CONFIG_SYS_MEMTEST_START=0x00100000
- CONFIG_SYS_MEMTEST_END=0x00101000
-+CONFIG_BUTTON_CMD=y
- CONFIG_FIT=y
- CONFIG_FIT_SIGNATURE=y
- CONFIG_FIT_VERBOSE=y
- CONFIG_LEGACY_IMAGE_FORMAT=y
-@@ -122,9 +123,8 @@ CONFIG_SYS_ATA_STRIDE=4
- CONFIG_SYS_ATA_DATA_OFFSET=0
- CONFIG_SYS_ATA_REG_OFFSET=1
- CONFIG_SYS_ATA_ALT_OFFSET=2
- CONFIG_SYS_ATA_IDE0_OFFSET=0
--CONFIG_BUTTON=y
- CONFIG_BUTTON_ADC=y
- CONFIG_BUTTON_GPIO=y
- CONFIG_CLK=y
- CONFIG_CLK_COMPOSITE_CCF=y
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index a8df5e635b26..93b52f2de5cf 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -9,8 +9,9 @@ CONFIG_SYS_LOAD_ADDR=0x0
- CONFIG_PCI=y
- CONFIG_DEBUG_UART=y
- CONFIG_SYS_MEMTEST_START=0x00100000
- CONFIG_SYS_MEMTEST_END=0x00101000
-+CONFIG_BUTTON_CMD=y
- CONFIG_FIT=y
- CONFIG_FIT_RSASSA_PSS=y
- CONFIG_FIT_CIPHER=y
- CONFIG_FIT_VERBOSE=y
-@@ -165,9 +166,8 @@ CONFIG_BOOTCOUNT_LIMIT=y
- CONFIG_DM_BOOTCOUNT=y
- CONFIG_DM_BOOTCOUNT_RTC=y
- CONFIG_DM_BOOTCOUNT_I2C_EEPROM=y
- CONFIG_DM_BOOTCOUNT_SYSCON=y
--CONFIG_BUTTON=y
- CONFIG_BUTTON_ADC=y
- CONFIG_BUTTON_GPIO=y
- CONFIG_CLK=y
- CONFIG_CLK_COMPOSITE_CCF=y
-diff --git a/test/dm/button.c b/test/dm/button.c
-index 3318668df25a..830d96fbef34 100644
---- a/test/dm/button.c
-+++ b/test/dm/button.c
-@@ -130,4 +130,100 @@ static int dm_test_button_keys_adc(struct unit_test_state *uts)
+-	for (ptr = init_sequence; func = *ptr, !ret && func; ptr++) {
++	for (ptr = init_sequence; func = *ptr, func; ptr++) {
+ 		type = initcall_is_event(func);
  
- 	return 0;
- }
- DM_TEST(dm_test_button_keys_adc, UT_TESTF_SCAN_PDATA | UT_TESTF_SCAN_FDT);
-+
-+/* Test of the button uclass using the button_gpio driver */
-+static int dm_test_button_cmd(struct unit_test_state *uts)
-+{
-+	struct udevice *btn1_dev, *btn2_dev, *gpio;
-+	const char *envstr;
-+
-+#define BTN1_GPIO 3
-+#define BTN2_GPIO 4
-+#define BTN1_PASS_VAR "test_button_cmds_0"
-+#define BTN2_PASS_VAR "test_button_cmds_1"
-+
-+	/*
-+	 * Buttons 1 and 2 are connected to gpio_a gpios 3 and 4 respectively.
-+	 * set the GPIOs to known values and then check that the appropriate
-+	 * commands are run when invoking process_button_cmds().
-+	 */
-+	ut_assertok(uclass_get_device(UCLASS_BUTTON, 1, &btn1_dev));
-+	ut_assertok(uclass_get_device(UCLASS_BUTTON, 2, &btn2_dev));
-+	ut_assertok(uclass_get_device(UCLASS_GPIO, 1, &gpio));
-+
-+	/*
-+	 * Map a command to button 1 and check that it process_button_cmds()
-+	 * runs it if called with button 1 pressed.
-+	 */
-+	ut_assertok(env_set("button_cmd_0_name", "button1"));
-+	ut_assertok(env_set("button_cmd_0", "env set " BTN1_PASS_VAR " PASS"));
-+	ut_assertok(sandbox_gpio_set_value(gpio, BTN1_GPIO, 1));
-+	/* Sanity check that the button is actually pressed */
-+	ut_asserteq(BUTTON_ON, button_get_state(btn1_dev));
-+	process_button_cmds();
-+	ut_assertnonnull((envstr = env_get(BTN1_PASS_VAR)));
-+	ut_asserteq_str(envstr, "PASS");
-+
-+	/* Clear result */
-+	ut_assertok(env_set(BTN1_PASS_VAR, NULL));
-+
-+	/*
-+	 * Map a command for button 2, press it, check that only the command
-+	 * for button 1 runs because it comes first and is also pressed.
-+	 */
-+	ut_assertok(env_set("button_cmd_1_name", "button2"));
-+	ut_assertok(env_set("button_cmd_1", "env set " BTN2_PASS_VAR " PASS"));
-+	ut_assertok(sandbox_gpio_set_value(gpio, BTN2_GPIO, 1));
-+	ut_asserteq(BUTTON_ON, button_get_state(btn2_dev));
-+	process_button_cmds();
-+	/* Check that button 1 triggered again */
-+	ut_assertnonnull((envstr = env_get(BTN1_PASS_VAR)));
-+	ut_asserteq_str(envstr, "PASS");
-+	/* And button 2 didn't */
-+	ut_assertnull(env_get(BTN2_PASS_VAR));
-+
-+	/* Clear result */
-+	ut_assertok(env_set(BTN1_PASS_VAR, NULL));
-+
-+	/*
-+	 * Release button 1 and check that the command for button 2 is run
-+	 */
-+	ut_assertok(sandbox_gpio_set_value(gpio, BTN1_GPIO, 0));
-+	process_button_cmds();
-+	ut_assertnull(env_get(BTN1_PASS_VAR));
-+	/* Check that the command for button 2 ran */
-+	ut_assertnonnull((envstr = env_get(BTN2_PASS_VAR)));
-+	ut_asserteq_str(envstr, "PASS");
-+
-+	/* Clear result */
-+	ut_assertok(env_set(BTN2_PASS_VAR, NULL));
-+
-+	/*
-+	 * Unset "button_cmd_0_name" and check that no commands run even
-+	 * with both buttons pressed.
-+	 */
-+	ut_assertok(env_set("button_cmd_0_name", NULL));
-+	/* Press button 1 (button 2 is already pressed )*/
-+	ut_assertok(sandbox_gpio_set_value(gpio, BTN1_GPIO, 1));
-+	ut_asserteq(BUTTON_ON, button_get_state(btn1_dev));
-+	process_button_cmds();
-+	ut_assertnull(env_get(BTN1_PASS_VAR));
-+	ut_assertnull(env_get(BTN2_PASS_VAR));
-+
-+	/*
-+	 * Check that no command is run if the button name is wrong.
-+	 */
-+	ut_assertok(env_set("button_cmd_0_name", "invalid_button"));
-+	process_button_cmds();
-+	ut_assertnull(env_get(BTN1_PASS_VAR));
-+	ut_assertnull(env_get(BTN2_PASS_VAR));
-+
-+#undef BTN1_PASS_VAR
-+#undef BTN2_PASS_VAR
-+#undef BTN1_GPIO
-+#undef BTN2_GPIO
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_button_cmd, UT_TESTF_SCAN_PDATA | UT_TESTF_SCAN_FDT);
+ 		if (type) {
+ 			if (!CONFIG_IS_ENABLED(EVENT))
+@@ -70,8 +70,10 @@ int initcall_run_list(const init_fnc_t init_sequence[])
+ 			debug("initcall: %p\n", (char *)func - reloc_ofs);
+ 		}
+ 
+ 		ret = type ? event_notify_null(type) : func();
++		if (ret)
++			break;
+ 	}
+ 
+ 	if (ret) {
+ 		if (CONFIG_IS_ENABLED(EVENT)) {
 -- 
 2.44.0
 
