@@ -4,61 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A43C7C54798
-	for <u-boot@archiver.kernel.org>; Tue,  5 Mar 2024 05:41:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEDA0C54798
+	for <u-boot@archiver.kernel.org>; Tue,  5 Mar 2024 05:45:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD00987BD6;
-	Tue,  5 Mar 2024 06:40:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
+	by phobos.denx.de (Postfix) with ESMTP id 2BEF787D33;
+	Tue,  5 Mar 2024 06:45:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=qq.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="Qorg2eFY";
+	dkim=pass (1024-bit key; unprotected) header.d=qq.com header.i=@qq.com header.b="QfYhU4Yz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EB59D87D1A; Tue,  5 Mar 2024 06:40:57 +0100 (CET)
-Received: from madrid.collaboradmins.com (madrid.collaboradmins.com
- [IPv6:2a00:1098:ed:100::25])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0ED4987DD5; Tue,  5 Mar 2024 06:45:20 +0100 (CET)
+Received: from out203-205-221-210.mail.qq.com (out203-205-221-210.mail.qq.com
+ [203.205.221.210])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B513879F6
- for <u-boot@lists.denx.de>; Tue,  5 Mar 2024 06:40:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=collabora.com
+ by phobos.denx.de (Postfix) with ESMTPS id 25D83879F6
+ for <u-boot@lists.denx.de>; Tue,  5 Mar 2024 06:45:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eugen.hristev@collabora.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1709617254;
- bh=UjOW1pPCxYBj8+NBre8vhAKkCZZXj679fMgFD14JEBE=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=Qorg2eFYVkEoJIzSezoHr7si4ofdmV+53N56o9MXJUCAVKAGBcrRJ6FRq3HDpTPmy
- DKNeNQsv3KsC2g1jKZqVra143Y55wp+O2zIL46w8hI2aOWmMujgpPl0apQJaeuR+sG
- 5GFLp8ExjGRWORzoh9X2EsB7LIlwikg1LTW8GysqG2sKnWpTMJiwgpfc75c+/tZlEF
- Xmq3xAy1acC877K98e5+bAVSXR2Fmn3s6N2NhE2jWf1Jx7tHb2J2ZfJKilLfNemK/J
- jI1Gv6coDY+TAksDN5qWMCBr5IlnkT4zfwIq52ikkjzVdf+0JaOntl3NuLkxwsahpz
- WLj9Wk+bpn9MA==
-Received: from [100.90.194.27] (cola.collaboradmins.com [195.201.22.229])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested) (Authenticated sender: ehristev)
- by madrid.collaboradmins.com (Postfix) with ESMTPSA id E5CEA3780627;
- Tue,  5 Mar 2024 05:40:52 +0000 (UTC)
-Message-ID: <cbe1b045-b8f1-4ea2-b831-2dbb52aade35@collabora.com>
-Date: Tue, 5 Mar 2024 07:40:50 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] configs: rockchip: rock5a: enable environment
-To: Trevor Woerner <twoerner@gmail.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Jonas Karlman <jonas@kwiboo.se>, Tom Rini <trini@konsulko.com>,
- Kever Yang <kever.yang@rock-chips.com>, Weizhao Ouyang
- <o451686892@gmail.com>, Jagan Teki <jagan@edgeble.ai>
-References: <20240305021051.22405-1-twoerner@gmail.com>
- <20240305021051.22405-3-twoerner@gmail.com>
-Content-Language: en-US
-From: Eugen Hristev <eugen.hristev@collabora.com>
-In-Reply-To: <20240305021051.22405-3-twoerner@gmail.com>
-Content-Type: text/plain; charset=UTF-8
+ dmarc=pass (p=quarantine dis=none) header.from=qq.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hanyuan-z@qq.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
+ t=1709617510; bh=Q6YEyGPuh3e4r9Nh61DUXhVlrxjigSE7cRDlT7QKeUM=;
+ h=From:Subject:Date:Cc:To;
+ b=QfYhU4YzwdhgPnvRtZ1NfKrjUehXdZehNf3YrN0DGo85p1UuAqY5p4/j6W7gOAw1C
+ LkwuP7vRReTBSEu5r8Isvvr2UCLuZkMNxMQ57jxhfDXZpFEeos9Lk5T+lWaGZ8sEFH
+ g2TnL+w7hcq7CaKHsFpGcJkUV0EFPSMntDW4vPmo=
+Received: from smtpclient.apple ([183.173.155.235])
+ by newxmesmtplogicsvrszc5-2.qq.com (NewEsmtp) with SMTP
+ id B47B8A1C; Tue, 05 Mar 2024 13:45:07 +0800
+X-QQ-mid: xmsmtpt1709617507teun5ehjr
+Message-ID: <tencent_BC8E058072E3862F034BBECDA7FFFD923F07@qq.com>
+X-QQ-XMAILINFO: OKKHiI6c9SH34aL6pfpCOaWndWfxKbvcKMwqxttkbUcJuEy1qJtkiiHP0BlTKv
+ kLuX5Cojg+tWERDxAMCPiLXqjNrPPf6WUfantg3cGoS/eg2wwZC/xpwnORhC0Yncg7iqgu5Wl8Vz
+ S3JDkmM/5MSak4HFfDQZuz6VgRnxKk/ASamtrF3ufCa9ZV1ApIch4xDQCBZBLsYd9efoe9hLfpfO
+ ZtXmGLtOpjKoKGHCaf7czsseqA3+Z+AzKcRz+BIx4fu+Dm5YOWFaAefT2DIEtYQ53yI7SzOeScgc
+ LdfEIZT2/9xkfdi6f4HBxj5hNfs6lFfXV6hdSr4tgWslQlTPdbT4qXAiesT/tYtxPh0PxrzlzNAs
+ LpTRGZv2VeLdNkVB81/7XKN3lIvrK+NJdgUQ8uo/60knoRcdGWn47qOgwE5dPuW5ZtDtLwDGNaSy
+ W5rb874duTQlTvPEK1uvrHOttosw+60tnEALzb26cJulkLyazOmRC2atX4KQpqZ6LZULlkZenuv3
+ +9a++SZYCX+jMp6+/AI3AALS+nCrFtEhSLv0dpeeys1Ta0PdovZ1usKBLOD/t1ksN5oJ947R3p+L
+ SXqYG9/Cbx0zwLxiQHw66hvZRhOJH2cdgsKz5eDHCSGFqeSZPZZb8CuhGyqNuvUn3/dF8+FIARki
+ qW/RjXLw27487r7fs5+z3Qhqup9IpXuQzBHwF4J3OjFx7qUhvLWfzCKPFzsGTN5Yuy7obUaHhjVk
+ 9tay0q49XEK2sHszxoMJwoldsxmmIc7QmQEAJLTIUxq3X/g+02YOYGK0yaYRgrOBZGMpn1plqK6l
+ UlJduQKP0+R7wvejHSLv/SQhye07wGFmuMklFNMIUf1BeQo2RyPyzHzgENi6eTO3U08SwuxU+Zcv
+ 3+N3HdRICtakMbwuYOMAmvbNKqkNlMurmG0ECUtyIXa+fai8qM62VaGblxTRHH/roqBY4qw0kHDu
+ rKNxsGY7g=
+X-QQ-XMRINFO: MSVp+SPm3vtS1Vd6Y4Mggwc=
+From: hanyuan <hanyuan-z@qq.com>
+Content-Type: text/plain;
+	charset=us-ascii
 Content-Transfer-Encoding: 7bit
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3774.300.61.1.2\))
+Subject: Re: [v2,1/2] cli: panic when failed to allocate memory for the
+ history buffer
+X-OQ-MSGID: <9389FB9F-FD0F-4C6E-8A3D-E272F08208EA@qq.com>
+Date: Tue, 5 Mar 2024 13:44:57 +0800
+Cc: u-boot@lists.denx.de
+To: Tom Rini <trini@konsulko.com>
+X-Mailer: Apple Mail (2.3774.300.61.1.2)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,46 +79,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/5/24 04:10, Trevor Woerner wrote:
-> Following the pattern of other Rockchip devices, enable the U-Boot
-> environment to be stored in MMC. This patch specifically assumes the
-> environment will be stored on the SDcard.
-> 
-> Signed-off-by: Trevor Woerner <twoerner@gmail.com>
-> ---
->  configs/rock5a-rk3588s_defconfig | 3 +++
->  1 file changed, 3 insertions(+)
-> 
-> diff --git a/configs/rock5a-rk3588s_defconfig b/configs/rock5a-rk3588s_defconfig
-> index a6471a519514..ac6411667d9a 100644
-> --- a/configs/rock5a-rk3588s_defconfig
-> +++ b/configs/rock5a-rk3588s_defconfig
-> @@ -8,6 +8,7 @@ CONFIG_SPL_LIBGENERIC_SUPPORT=y
->  CONFIG_NR_DRAM_BANKS=2
->  CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
->  CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc00000
-> +CONFIG_ENV_SIZE=0x8000
->  CONFIG_DEFAULT_DEVICE_TREE="rk3588s-rock-5a"
->  CONFIG_ROCKCHIP_RK3588=y
->  CONFIG_SPL_ROCKCHIP_COMMON_BOARD=y
-> @@ -48,6 +49,8 @@ CONFIG_CMD_REGULATOR=y
->  CONFIG_SPL_OF_CONTROL=y
->  CONFIG_OF_LIVE=y
->  CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-> +CONFIG_ENV_IS_IN_MMC=y
-> +CONFIG_SYS_MMC_ENV_DEV=1
->  CONFIG_SPL_DM_SEQ_ALIAS=y
->  CONFIG_SPL_REGMAP=y
->  CONFIG_SPL_SYSCON=y
+Hi Tom,
+
+Sorry for disturbing again and again. I have sent three v2 patches in
+total to the patchwork, they are:
+
+[v2,1/2] cli: panic when failed to allocate memory for the history buffer
+[v2,2/2] cli: allow users to determine history buffer allocation method
+[v2,1/1] cli: compile history code if and only if history config is selected	
+
+I made their change logs very complex and their relations are hard to
+understand. Please ignore all v2 patches and allow me to resend v3
+version series, thanks!
+
+Regards,
+Hanyuan
 
 
-Hi Trevor,
-
-What will happen if there is no Sd-Card, and we boot from eMMC or SPI flash ?
-
-The rockchip pattern is usually to have a standard config for all boards and it is
-not stored anywhere.
-
-Kever, Jonas, please correct me if I am wrong.
-
-Eugen
