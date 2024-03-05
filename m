@@ -4,74 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 888FAC54798
-	for <u-boot@archiver.kernel.org>; Tue,  5 Mar 2024 18:10:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83A69C54E41
+	for <u-boot@archiver.kernel.org>; Tue,  5 Mar 2024 18:15:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C81EF8809A;
-	Tue,  5 Mar 2024 19:10:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=georgemail.eu
+	by phobos.denx.de (Postfix) with ESMTP id CF1C58795D;
+	Tue,  5 Mar 2024 19:15:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=georgemail.eu header.i=@georgemail.eu header.b="NwXUT61M";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RRr2k4XH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 757EA87D07; Tue,  5 Mar 2024 17:40:47 +0100 (CET)
-Received: from smtp6.goneo.de (smtp6.goneo.de [IPv6:2001:1640:5::8:31])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 01779880B5; Tue,  5 Mar 2024 19:15:17 +0100 (CET)
+Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
+ [IPv6:2607:f8b0:4864:20::1034])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D0B68809D
- for <u-boot@lists.denx.de>; Tue,  5 Mar 2024 17:40:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B65FB880A5
+ for <u-boot@lists.denx.de>; Tue,  5 Mar 2024 19:15:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=georgemail.eu
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=leon@georgemail.eu
-Received: from hub2.goneo.de (hub2.goneo.de [IPv6:2001:1640:5::8:53])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits))
- (No client certificate requested)
- by smtp6.goneo.de (Postfix) with ESMTPS id 4A862240AB2;
- Tue,  5 Mar 2024 17:40:44 +0100 (CET)
-Received: from hub2.goneo.de (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits))
- (No client certificate requested)
- by hub2.goneo.de (Postfix) with ESMTPS id A88CA240891;
- Tue,  5 Mar 2024 17:40:42 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=georgemail.eu;
- s=DKIM001; t=1709656842;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=3qejo66E1CJbP91QD98CyzSF9skD+pGzPz/VYks72g0=;
- b=NwXUT61MPAxEoDxJnmZURh6I6uNidv5Jk5mZ4GONp8DZeeZBezcH5P5vLKk4BaUpO8JHhx
- G/s4f5N5ulukuiWRIkZUzRIDwysOV02TlZpl6zjTKKhlvb3h80Z0hwzhw+xaL2Zrx5jW6s
- dTFuLKv9iMysMmQmPDawIvug9Ral1fYZxDMCV7cTCIf4fMJhP40D/T6nLxTrOhyh6JP5hf
- lVkLGcZ9w44uxtHEWWeBT5G9LliEWHcDYGQ29Umkkg5g34XF05XBTZ0aYXkzdaufQHEhQN
- LBoXzkmIKP7HzWYhNOXiLR6+hbqaL5pGDyQP3mxIeXPaHHCc7hZ93NIrNxs3yw==
-Received: from couch-potassium (unknown
- [IPv6:2a02:8071:5250:1240:f4e6:f6d2:6d95:e0c4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (prime256v1) server-signature RSA-PSS (4096 bits)
- server-digest SHA256) (No client certificate requested)
- by hub2.goneo.de (Postfix) with ESMTPSA id 676122403D5;
- Tue,  5 Mar 2024 17:40:42 +0100 (CET)
-Date: Tue, 5 Mar 2024 17:40:41 +0100
-From: Leon Busch-George <leon@georgemail.eu>
-To: u-boot@lists.denx.de
-Cc: Dragan Simic <dsimic@manjaro.org>
-Subject: Re: [PATCH v2] Makefile: use shell to calculate map_size
-Message-ID: <20240305174041.55666d62@couch-potassium>
-In-Reply-To: <20240304203909.63796-1-leon@georgemail.de>
-References: <20240302131728.148251-1-leon@georgemail.de>
- <20240304203909.63796-1-leon@georgemail.de>
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x1034.google.com with SMTP id
+ 98e67ed59e1d1-29a7be74fd7so638433a91.1
+ for <u-boot@lists.denx.de>; Tue, 05 Mar 2024 10:15:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1709662511; x=1710267311; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=VCW1PpN9iniAKuvbhfk73sWujTUH5yfdSZ2JUHXN5pw=;
+ b=RRr2k4XHOyQyknRTFb3h5RS3b58OyqKwZ2lUj7zJrhCjLh60K54lr8L52t5IyL41O+
+ 4W5pdBtPPI3t6DAax09McAZPQ4YoTu1uFdOxzJAh9IS6v6WLPLEdxePJ0EHHhOZoFqgK
+ 6TQL79pKWiSGoyKBMXGaHY6IvDn9fI4QNp1MtJoj4CN6FHUbVYV+/CWB0xJEogFNodws
+ YgKXrigXQzZIp1wX9OvJrT7+Xu52GujVx1KfUYQfqyJgmbtLAChEseM4APn/2e3MOCQB
+ y2fyHS0wwWFAS9cExz99w90BzLxwCBRQEyoXT1u3TgMdsjXttW94V8aCztxrqeTJBpDe
+ e38Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1709662511; x=1710267311;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=VCW1PpN9iniAKuvbhfk73sWujTUH5yfdSZ2JUHXN5pw=;
+ b=Qj/hzTUiXzMtiSThhPSlcy34ndCd/EQc0mE96Gdz8z4Wi5w3RJ8hDz43BOK8oPmo8W
+ Y8MxImCajXIno54Kjn+EFy9Ca/suXoEcTevJLLKgffSn9TwYD/ejlqQTHP88AT72KjZW
+ 6KtAepuJwkLaFM1DMsaJ1SdR/F41ItiqAWtrrTaPlt62HHi8EI1jN/sBCzOECwzwW4Gi
+ tHYC1u318yXnGG4Cz5ZfTBeO48cmGN9iDdV3AgpLvrNHSPSyxcuuM9Sow8Ly+HX9PdA+
+ R0zrRnV37o+BZ+735/4UywN79+ZFFYhsBy753xmxNWnpQVm7WiNTmKiMUCYZFqVlUDK2
+ bdsg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVOGvORfTblcJD0Np4PiAEcrClUR9ypqwpfzpjt+diYJT+ZU6FKKNTK7ui4dIdo1HT0bQfmo6FmbfqrxLB1ZVfhUMyDAQ==
+X-Gm-Message-State: AOJu0Yy8v9xZGN/2TwGaaXjlsGnq5Waib49VBLyiVgZ2hf9eFFbt3xcc
+ iGC8uYUN9gGcgRX3DvASDrHt34D8XUW979XJ9EkKeAvE8bpw0cOAg6rcU85OQtKbBn6YOeCD03a
+ gsnsfFOCwp+yCiLaiKBsO054kZlk=
+X-Google-Smtp-Source: AGHT+IEI3TA1Zp6CetMW1KWpIKLNjNjrwDKfiaLzY+lAxhG6Ntw63n2nWRUIr3NU5volq7FTdDdwFNIFSpefp6nPY0E=
+X-Received: by 2002:a17:90b:2c85:b0:29b:3125:47f6 with SMTP id
+ sw5-20020a17090b2c8500b0029b312547f6mr1328546pjb.0.1709662511048; Tue, 05 Mar
+ 2024 10:15:11 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Rspamd-UID: c29373
-X-Rspamd-UID: fb2000
-X-Mailman-Approved-At: Tue, 05 Mar 2024 19:10:25 +0100
+References: <20240304-fix-thermal-driver-issue-v1-1-f30daeaf1055@phytec.de>
+In-Reply-To: <20240304-fix-thermal-driver-issue-v1-1-f30daeaf1055@phytec.de>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Tue, 5 Mar 2024 15:14:59 -0300
+Message-ID: <CAOMZO5B35UBd5ZLuxxNx5Ai_Ao8BFVwn7z2hbj+Ewxw-GsmnSw@mail.gmail.com>
+Subject: Re: [PATCH] drivers: imx_tmu: Select polling-rate from cpu-thermal
+ devicetree node
+To: Benjamin Hahn <B.Hahn@phytec.de>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ upstream@lists.phytec.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,51 +91,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A colleague made me aware that the '[ -n "$$end" ]' is not necessary since 'read' already returns an exit code.
+On Mon, Mar 4, 2024 at 8:49=E2=80=AFAM Benjamin Hahn <B.Hahn@phytec.de> wro=
+te:
+>
+> The polling rate is already specified in some devicetrees, like
+> imx8mp.dtsi for example, but was not selected so far. For the
+> trippoints, the cpu-thermal node is used. Also get the polling rate from
+> this node. Use the default of 5000ms if the polling rate should not be
+> specified in the devicetree.
+>
+> NOTE: The polling rate from the devicetree will be used after this
+> patch. In imx8*.dtsi devicetrees the polling delay is set to 2000ms for
+> example.
+>
+> Signed-off-by: Benjamin Hahn <B.Hahn@phytec.de>
 
-v3 inc
-
-On Mon,  4 Mar 2024 21:38:56 +0100
-"Leon M. Busch-George" <leon@georgemail.de> wrote:
-
-> From: "Leon M. Busch-George" <leon@georgemail.eu>
-> 
-> The error message "bc: command not found" is easily missed since the
-> build continues.
-> bc is not a part of coreutils or base-devel. POSIX sh can also do the
-> calculation.
-> 
-> Signed-off-by: Leon M. Busch-George <leon@georgemail.eu>
-> ---
->  Makefile | 13 +++++++++----
->  1 file changed, 9 insertions(+), 4 deletions(-)
-> 
-> diff --git a/Makefile b/Makefile
-> index a2bc9d5903..e8e794368e 100644
-> --- a/Makefile
-> +++ b/Makefile
-> @@ -1275,10 +1275,15 @@ OBJCOPYFLAGS_u-boot-nodtb.bin := -O binary \
->  binary_size_check: u-boot-nodtb.bin FORCE
->  	@file_size=$(shell wc -c u-boot-nodtb.bin | awk '{print
-> $$1}') ; \ map_size=$(shell cat u-boot.map | \
-> -		awk '/_image_copy_start/ {start = $$1}
-> /_image_binary_end/ {end = $$1} END {if (start != "" && end != "")
-> print "ibase=16; " toupper(end) " - " toupper(start)}' \
-> -		| sed 's/0X//g' \
-> -		| bc); \
-> -	if [ "" != "$$map_size" ]; then \
-> +		awk ' \
-> +			/_image_copy_start/ { start = $$1 } \
-> +			/_image_binary_end/ { end = $$1 } \
-> +			END { \
-> +				if (start != "" && end != "") \
-> +					print end " " start; \
-> +			}' \
-> +		| sh -c 'read end start; [ -n "$$end" ] && echo
-> $$((end - start))'); \
-> +	if [ -n "$$map_size" ]; then \
->  		if test $$map_size -ne $$file_size; then \
->  			echo "u-boot.map shows a binary size of
-> $$map_size" >&2 ; \ echo "  but u-boot-nodtb.bin shows $$file_size"
-> >&2 ; \
-
+Reviewed-by: Fabio Estevam <festevam@gmail.com>
