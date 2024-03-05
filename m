@@ -4,33 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAB74C54798
-	for <u-boot@archiver.kernel.org>; Tue,  5 Mar 2024 10:32:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BCACC54798
+	for <u-boot@archiver.kernel.org>; Tue,  5 Mar 2024 10:32:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46E2A88027;
-	Tue,  5 Mar 2024 11:32:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B3BF288039;
+	Tue,  5 Mar 2024 11:32:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1709634734;
-	bh=8/C8RzlqSLMtBOQOkyJqioZCljpN6TNkIfkpG+3D9oU=;
+	s=phobos-20191101; t=1709634760;
+	bh=CIyoSJ+hFAUTmeZkVU05ku6SbVAXShu7zBOmSOhpNAI=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ZPOdGw1R/dGtlMYFNKkbmJSgMDE8fiiaWSZpcEu8hjqGRNT6M+dh1I1PUtREQUxda
-	 2hHJzAxlwOUjd2F4HWwy0XxJuTIVvhyoeQgfJHfJY4BFZnK7vbZkRoFTTPZFzr/uOj
-	 ALLIH4gtBVJKohAC3CLCKh7AVxZSF4ftsRfn5HJu1LK4qqfZ3tNn5Bxxgjf33CWbm6
-	 vBV7PY4bUzQDVv5yn61qwasKt/eOvzEATM0wJ7YaS3wU3Jy5IWshzzaiKn7To6uwDK
-	 EUbxesj13Cqi+1/v7kZA9Pas1juLLgEDY3nWxKM/9QxGqyrpPi4kQgVLgxBewcRwku
-	 pBCkNg5pSlC4w==
+	b=zhswTrRYtT7dNisX2aXg2Bp66/EsSLwhC3qIpHVL5zL1njXw1q6KRQGPmijgH0xOE
+	 w8TYT6q93suXbhQgOumvcqbKhu5tVapagyLQeh+9MERW+EM6yqYY6yhFMky19aiLQM
+	 vUDo6S0fepp17FoHIEbMrkiG9ktD2PgaWDaIIPrdDboUlmCoikoER2W7mVOdQjm0FZ
+	 XQBI2Y0T0oNxp7Q9lbbFkt9drglEZ9vKnqvpTQ2dN6Xkzeym0v50OJXD0sOdmPeNjY
+	 /ageMEd7hsNr5P8i2CDAxe+0Biz6mSOgVMNtIeCYomVgPqU/oD4JEuiA2Zi4/WNylB
+	 Tk4yzp4q6WJOw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A70C88031; Tue,  5 Mar 2024 11:32:13 +0100 (CET)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
- [IPv6:2001:67c:2050:101:465::107])
+ id 1E31F8803B; Tue,  5 Mar 2024 11:32:40 +0100 (CET)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4684688023
- for <u-boot@lists.denx.de>; Tue,  5 Mar 2024 11:32:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 513E188023
+ for <u-boot@lists.denx.de>; Tue,  5 Mar 2024 11:32:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
@@ -38,21 +37,21 @@ Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4TpsLx0dYxz9sR5;
- Tue,  5 Mar 2024 11:32:09 +0100 (CET)
-Message-ID: <76ea692e-c71c-4243-bfa3-9ec34babc3b3@denx.de>
-Date: Tue, 5 Mar 2024 11:32:08 +0100
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4TpsMS1lj6z9sR5;
+ Tue,  5 Mar 2024 11:32:36 +0100 (CET)
+Message-ID: <782c5971-b30c-487d-b6ba-34df2e2dc154@denx.de>
+Date: Tue, 5 Mar 2024 11:32:35 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 1/3] arm: dts: armada-38x-solidrun-microsom: configure
- i2c0 bus
+Subject: Re: [PATCH v2 2/3] arm: mvebu: helios4_defconfig: enable setexpr
+ command
 Content-Language: en-US
 To: Josua Mayer <josua@solid-run.com>, Dennis Gilmore <dgilmore@redhat.com>,
  Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 References: <20240202-helios4-spi-v2-0-df085461d894@solid-run.com>
- <20240202-helios4-spi-v2-1-df085461d894@solid-run.com>
+ <20240202-helios4-spi-v2-2-df085461d894@solid-run.com>
 From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20240202-helios4-spi-v2-1-df085461d894@solid-run.com>
+In-Reply-To: <20240202-helios4-spi-v2-2-df085461d894@solid-run.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -72,16 +71,8 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 2/2/24 16:13, Josua Mayer wrote:
-> SolidRun Armada-388 SoM has an i2c bus supporting on-som eeprom, and
-> peripherals on a carrier.
-> armada-38x.dtsi disables this bus by default, it should be enabled by
-> som or carrier dts.
-> 
-> Linux has moved i2c0 from helios-4 board dts to som dtsi, including
-> status, pinctrl and clock speed.
-> Copy these settings from mainline.
-> 
-> This fixes accessing i2c bus from u-boot commandline.
+> Update the helios4 defconfig to enable the 'setexpr' command, which is a
+> default and useful for various complex boot-scripts.
 > 
 > Signed-off-by: Josua Mayer <josua@solid-run.com>
 
@@ -91,25 +82,21 @@ Thanks,
 Stefan
 
 > ---
->   arch/arm/dts/armada-38x-solidrun-microsom.dtsi | 5 +++++
->   1 file changed, 5 insertions(+)
+>   configs/helios4_defconfig | 1 -
+>   1 file changed, 1 deletion(-)
 > 
-> diff --git a/arch/arm/dts/armada-38x-solidrun-microsom.dtsi b/arch/arm/dts/armada-38x-solidrun-microsom.dtsi
-> index f6ae784bed..1540162e03 100644
-> --- a/arch/arm/dts/armada-38x-solidrun-microsom.dtsi
-> +++ b/arch/arm/dts/armada-38x-solidrun-microsom.dtsi
-> @@ -99,6 +99,11 @@
->   };
->   
->   &i2c0 {
-> +	clock-frequency = <400000>;
-> +	pinctrl-0 = <&i2c0_pins>;
-> +	pinctrl-names = "default";
-> +	status = "okay";
-> +
->   	eeprom@53 {
->   		compatible = "atmel,24c02";
->   		reg = <0x53>;
+> diff --git a/configs/helios4_defconfig b/configs/helios4_defconfig
+> index 04194004f0..73f0638344 100644
+> --- a/configs/helios4_defconfig
+> +++ b/configs/helios4_defconfig
+> @@ -44,7 +44,6 @@ CONFIG_CMD_MMC=y
+>   CONFIG_CMD_PCI=y
+>   CONFIG_CMD_SPI=y
+>   CONFIG_CMD_USB=y
+> -# CONFIG_CMD_SETEXPR is not set
+>   CONFIG_CMD_TFTPPUT=y
+>   CONFIG_CMD_CACHE=y
+>   CONFIG_CMD_TIME=y
 > 
 
 Viele Grüße,
