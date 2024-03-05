@@ -4,65 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E39CFC54798
-	for <u-boot@archiver.kernel.org>; Tue,  5 Mar 2024 16:55:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7661FC54E41
+	for <u-boot@archiver.kernel.org>; Tue,  5 Mar 2024 17:02:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 52481880A1;
-	Tue,  5 Mar 2024 17:55:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=walle.cc
+	by phobos.denx.de (Postfix) with ESMTP id A02A087C48;
+	Tue,  5 Mar 2024 18:02:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=walle.cc header.i=@walle.cc header.b="ffcd4OiH";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="RG6OKeyH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AEEC68809F; Tue,  5 Mar 2024 17:55:54 +0100 (CET)
-Received: from mail.3ffe.de (0001.3ffe.de [IPv6:2a01:4f8:c0c:9d57::1])
+ id 8758D880AF; Tue,  5 Mar 2024 18:02:11 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B58D8809A
- for <u-boot@lists.denx.de>; Tue,  5 Mar 2024 17:55:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=walle.cc
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=michael@walle.cc
-Received: from localhost (unknown [213.135.10.150])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (prime256v1) server-signature RSA-PSS (2048 bits)
- server-digest SHA256) (No client certificate requested)
- by mail.3ffe.de (Postfix) with ESMTPSA id B3B652AA;
- Tue,  5 Mar 2024 17:55:49 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=walle.cc;
- s=mail2022082101; t=1709657749;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:content-type:content-type:in-reply-to:in-reply-to:
- references:references; bh=jA2jP3Oo6Q1L6DcA2QeKqvfhPQHjIxHN2waFoHgcpjk=;
- b=ffcd4OiHxfxWMhd1SBHsCpXo1SNCs3tK7jTraKhEoVhGeRbHlnoCpySFVGRZm/GSdrLAxZ
- ECfIVYqXI2rqJe6+jQ6JEO8DNSDZdua36vqpzdJawDjCNN5wb+TtV/wuVciOEtrbIbICsv
- HiJgeOP92STQKSqwybQfHOK/4+RWTag5spxwwMtzHlGRxpqVZiWDNdccgRexO+GfurTBc9
- yQlygFl7IW2Q9jJTyXdqgwC/oK1qcBp2sLaCYT5UgDh+wNMdbC6a4mb9XfRsDWtGk0lr6f
- 374P23pYnbezgV1RXYvt6Hsfbt3M/UQxUhyezM55C01g/sVOBDN0X1y1jBQQsA==
-Content-Type: multipart/signed;
- boundary=db61018f7449a7468756283d270e8d2b7764ff63fe06538b995d99244671;
- micalg=pgp-sha256; protocol="application/pgp-signature"
-Date: Tue, 05 Mar 2024 17:55:44 +0100
-Message-Id: <CZLZ391C9O5F.38A18T9S51BNT@walle.cc>
-Subject: Re: [PATCH] mtd: spi-nor: Clear Winbond SR3 WPS bit on boot
-Cc: "Hai Pham" <hai.pham.ud@renesas.com>, "Heinrich Schuchardt"
- <xypron.glpk@gmx.de>, "Jagan Teki" <jagan@amarulasolutions.com>, "Johann
- Neuhauser" <jneuhauser@dh-electronics.com>, "Simon Glass"
- <sjg@chromium.org>, "Takahiro Kuwano" <Takahiro.Kuwano@infineon.com>,
- "Venkatesh Yadav Abbarapu" <venkatesh.abbarapu@amd.com>, "Vignesh R"
- <vigneshr@ti.com>, <linux-mtd@lists.infradead.org>
-From: "Michael Walle" <michael@walle.cc>
-To: "Marek Vasut" <marex@denx.de>, <u-boot@lists.denx.de>
-X-Mailer: aerc 0.16.0
-References: <20240304161607.82759-1-marex@denx.de>
- <CZLOVK212G8L.2ISEL1IIWU1YE@walle.cc>
- <7c0e2496-4338-497d-96cf-41d75e2fc52b@denx.de>
- <CZLTVKVR3AG1.BZIQQU2PYSU6@walle.cc>
- <a28b0543-67ee-4e33-91c1-86ae36eb44d5@denx.de>
- <CZLXRLFU5YKU.1S5D9EZ3GUTH4@walle.cc>
- <faa78709-6b7c-4394-8048-3c1f09b65a04@denx.de>
-In-Reply-To: <faa78709-6b7c-4394-8048-3c1f09b65a04@denx.de>
+ by phobos.denx.de (Postfix) with ESMTPS id BA1A986FC9
+ for <u-boot@lists.denx.de>; Tue,  5 Mar 2024 18:02:07 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=d1bf=KM=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1709658120;
+ bh=9xxe/Pr322sHMXpLQjsXwtwH3+G4l8hgPGUQkWrvgjY=;
+ b=RG6OKeyHNc4cnkJXkljbMT50EZY3a4cWIOlb8pwkBoWxw2D3Bfo0Fdw2os69A4Jk84B+q73rI
+ BEtl5+cHuCWcxVbaLlPqWGodZUgNRMACBwkgmtMrqdv8Mwk3Dftv6uYri97CKqjme55iiZpQoGX
+ RyX3BUyYcuYIKpwfy1IQuhhoDLRtyTjyx2ZBW2/KxVUBoxT8eZIn/BuZyRui12mLD9vtCDqnPbq
+ 0wMD96ZGnsod5RIAy6pcq2MELNut5d9gPwvy1i+6xxV08PPUHNhUeMbogihBk45lKUGAD5+dsRC
+ xA5NqGsnUJn3o6gULJUc6RTrjquaE32JK7PAjXFEzBqA==
+Message-ID: <a4483ad2-2358-4c70-aab7-82e7848a87cd@kwiboo.se>
+Date: Tue, 5 Mar 2024 18:01:53 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] configs: rockchip: rock5a: enable environment
+Content-Language: en-US
+To: Trevor Woerner <twoerner@gmail.com>
+Cc: Eugen Hristev <eugen.hristev@collabora.com>, "U-Boot Mailing List"
+ <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, Kever Yang
+ <kever.yang@rock-chips.com>, Weizhao Ouyang <o451686892@gmail.com>, Jagan
+ Teki <jagan@edgeble.ai>
+References: <20240305021051.22405-1-twoerner@gmail.com>
+ <20240305021051.22405-3-twoerner@gmail.com>
+ <cbe1b045-b8f1-4ea2-b831-2dbb52aade35@collabora.com>
+ <78c8c8d1-ecff-4d48-a6f7-da433254e4ab@kwiboo.se>
+ <20240305134558.GB2252@localhost>
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20240305134558.GB2252@localhost>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 65e750076269b0da33ca4a52
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,151 +78,230 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---db61018f7449a7468756283d270e8d2b7764ff63fe06538b995d99244671
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
+On 2024-03-05 14:45, Trevor Woerner wrote:
+> On Tue 2024-03-05 @ 10:17:10 AM, Jonas Karlman wrote:
+>> Hi,
+>>
+>> On 2024-03-05 06:40, Eugen Hristev wrote:
+>>> On 3/5/24 04:10, Trevor Woerner wrote:
+>>>> Following the pattern of other Rockchip devices, enable the U-Boot
+>>>> environment to be stored in MMC. This patch specifically assumes the
+>>>> environment will be stored on the SDcard.
+>>>>
+>>>> Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+>>>> ---
+>>>>  configs/rock5a-rk3588s_defconfig | 3 +++
+>>>>  1 file changed, 3 insertions(+)
+>>>>
+>>>> diff --git a/configs/rock5a-rk3588s_defconfig b/configs/rock5a-rk3588s_defconfig
+>>>> index a6471a519514..ac6411667d9a 100644
+>>>> --- a/configs/rock5a-rk3588s_defconfig
+>>>> +++ b/configs/rock5a-rk3588s_defconfig
+>>>> @@ -8,6 +8,7 @@ CONFIG_SPL_LIBGENERIC_SUPPORT=y
+>>>>  CONFIG_NR_DRAM_BANKS=2
+>>>>  CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+>>>>  CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc00000
+>>>> +CONFIG_ENV_SIZE=0x8000
+>>>>  CONFIG_DEFAULT_DEVICE_TREE="rk3588s-rock-5a"
+>>>>  CONFIG_ROCKCHIP_RK3588=y
+>>>>  CONFIG_SPL_ROCKCHIP_COMMON_BOARD=y
+>>>> @@ -48,6 +49,8 @@ CONFIG_CMD_REGULATOR=y
+>>>>  CONFIG_SPL_OF_CONTROL=y
+>>>>  CONFIG_OF_LIVE=y
+>>>>  CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+>>>> +CONFIG_ENV_IS_IN_MMC=y
+>>>> +CONFIG_SYS_MMC_ENV_DEV=1
+>>>>  CONFIG_SPL_DM_SEQ_ALIAS=y
+>>>>  CONFIG_SPL_REGMAP=y
+>>>>  CONFIG_SPL_SYSCON=y
+>>>
+>>>
+>>> Hi Trevor,
+>>>
+>>> What will happen if there is no Sd-Card, and we boot from eMMC or SPI flash ?
+>>
+>> Agree, we should not blindly enable env and expect that it can be stored
+>> on sd-card. If anything, it should preferably be saved/loaded from the
+>> device where TPL/SPL was booted from.
+>>
+>> Personally I always run my devices with ENV_IS_NOWHERE, with standard
+>> boot and extlinux or efi as the preferred way to boot, I do not see why
+>> normal end-users with a single OS really have a need for a saved env,
+>> please educate me :-)
+> 
+> I am the maintainer of the meta-rockchip Yocto layer[1]. Yocto uses a
+> nifty tool called 'wic' to layout images (dos/gpt partitioning, optionally
+> formatting partitions, optionally installing things into those partitions)[2].
+> The partitioning layout that we follow is the one that is recommended by
+> Rockchip itself[3] with 2 exceptions:
+> - we don't hide any of the partitions from the partition table
+> - we've combined /boot into the root partition (for reasons I'll explain
+>   later)
+> 
+> Under the Rockchip partitioning, the U-Boot environment is stored in partition
+> 5, at offset 0x0003.f800, and has a size of 0x0000.8000.
 
-On Tue Mar 5, 2024 at 5:28 PM CET, Marek Vasut wrote:
-> On 3/5/24 4:53 PM, Michael Walle wrote:
-> > On Tue Mar 5, 2024 at 4:37 PM CET, Marek Vasut wrote:
-> >> On 3/5/24 1:50 PM, Michael Walle wrote:
-> >>> On Tue Mar 5, 2024 at 1:31 PM CET, Marek Vasut wrote:
-> >>>> On 3/5/24 9:55 AM, Michael Walle wrote:
-> >>>>> On Mon Mar 4, 2024 at 5:16 PM CET, Marek Vasut wrote:
-> >>>>>> Some Winbond SPI NORs have special SR3 register which is
-> >>>>>> used among other things to control whether non-standard
-> >>>>>> "Individual Block/Sector Write Protection" (WPS bit)
-> >>>>>> locking scheme is activated. This non-standard locking
-> >>>>>> scheme is not supported by either U-Boot or Linux SPI
-> >>>>>> NOR stack so make sure it is disabled, otherwise the
-> >>>>>> SPI NOR may appear locked for no obvious reason.
-> >>>>>
-> >>>>> I don't think it is a good idea to just disable the WPS bit.
-> >>>>> Usually, that bit is non-volatile and the default is not set.
-> >>>>
-> >>>> Yes, that's right, the bit is non-volatile and should not be set unl=
-ess
-> >>>> the MTD stack can handle it correctly. Currently, neither U-Boot nor
-> >>>> Linux does handle the bit at all, instead both attempt to use the
-> >>>> standard SPI NOR locking scheme which is also implemented by this SP=
-I
-> >>>> NOR model and they both fail to unlock the SPI NOR that way.
-> >>>>
-> >>>> Note that the SR3 WPS bit only switches between two different lockin=
-g
-> >>>> schemes (unset =3D standard SPI NOR locking scheme, set =3D custom w=
-inbond
-> >>>> locking scheme), setting SR3 WPS does not immediately imply the SPI =
-NOR
-> >>>> is locked, rather the opposite. Out of manufacturing, the SPI NOR is
-> >>>> unlocked in either locking scheme. Depending on the SR3 WPS bit stat=
-e,
-> >>>> different commands are used to lock and unlock the SPI NOR.
-> >>>>
-> >>>> I recently ran across a device which had the SR3 WPS bit incorrectly=
- set
-> >>>> out of manufacturing of that device (i.e. before it was populated on=
- a
-> >>>> board at board manufacturer) and the device was locked using the cus=
-tom
-> >>>> locking scheme. I was not able to unlock or use that device because =
-both
-> >>>> U-Boot and Linux tried to use the standard scheme for that purpose.
-> >>>
-> >>> Still, I don't think it makes any sense, to disable that bit for all
-> >>> winbond flashes just because there was one vendor which set it the
-> >>> wrong way - or the board manufacturer didn't test it and programmed
-> >>> the flash correctly.
-> >>
-> >> OK
-> >>
-> >>>> Clearing this SR3 WPS bit fixes that problem, both in U-Boot and in
-> >>>> Linux, since Linux that is booted afterward then gets a device that =
-has
-> >>>> locking scheme configured in a way that Linux expects and can operat=
-e.
-> >>>>
-> >>>> Better yet, if some old LTS version of the Linux kernel is in use, i=
-t
-> >>>> will also work correctly, because this patch will configure the SPI =
-NOR
-> >>>> locking scheme to what Linux expects it to be, before the SPI NOR is
-> >>>> handed over to that old kernel.
-> >>>
-> >>> Agreed, but it should *not* be done automatically and nor
-> >>> unconditionally. Please don't just overwrite any locking bits just
-> >>> because there is one flash which have it set.
-> >>
-> >> The unlock code is not triggered unconditionally, it is protected by
-> >>
-> >> if (IS_ENABLED(CONFIG_SPI_FLASH_UNLOCK_ALL)...
-> >>
-> >> Kconfig option, so this can be turned on/off in board config already.
-> >=20
-> > Ahh, OK then :)
-> >=20
-> > But keep in mind that enabling this option is foobar and I've gone
-> > lengths to eliminate it in linux. And actually made that option in
-> > u-boot.
-> >=20
-> > See linux commit 31ad3eff093c ("mtd: spi-nor: keep lock bits if they
-> > are non-volatile").
->
-> So, how shall we proceed here?
+Not sure you should look too much at the Rockchip partitioning, not sure
+it is something to promote for mainline Linux and U-Boot usage. The
+partitions is not correct/relevant, especially for aarch64. For mainline
+the following offsets are typically only used:
 
-Regarding this patch, I think it's fine. It will unlock the whole
-flash as advertised.
+- 0x00008000: TPL+SPL - up to around 256+256 KiB
+- 0x003F8000: optional U-Boot env
+- 0x00800000: FIT with U-Boot proper + TF-A and/or OPTEE,
+              or U-Boot proper in legacy image format
+- 0x01000000+: free use
 
-But u-boot should really consider making that a "default n" option.
-And most likely adding =3Dy to every existing defconfig out there so
-that at least new boards will benefit from it.
+It is highly recommended to write the generated u-boot-rockchip.bin to
+sector 0x40 of mmc to get all the U-Boot related offsets correct as
+defined in board defconfig.
 
-> The way I see this, if Linux ever implements this scheme, Linux can set=
-=20
-> the SR3 WPS bit as needed, it does not matter which way bootloader sets=
-=20
-> the bit as the protection bits are not cleared when the bit is cleared,=
-=20
-> they seem to be stored elsewhere.
+To me the traditional Rockchip partitioning scheme does not really fill
+any purpose with mainline Linux and U-Boot, please enlighten me :-)
 
-On each reboot you'd wear out that cell with two erases/writes.
-That's another reason why that whole unlocking thing is foobar for
-non-volatile bits. For me, non-volatile bits are for provisioning,
-so during a normal boot they should not be touched at all. Just
-during board manufacturing or because the user actively want to
-protect something.
+One thing that vendor U-Boot does that possible could be adopted for
+mainline U-Boot is that it will locate FIT based on a GPT partition
+named "uboot" and fallback to traditional sector 0x4000.
+The offsets and size of traditional Rockchip partitioning scheme is no
+longer that important for vendor U-Boot/Linux.
 
-If you clear this bit during the unlock all command, all the locking
-bits are cleared anyway. Or do you mean, the individual bits are
-still retained?
+It is also possible to reclaim some of the wasted space by putting FIT
+at a different location, e.g:
 
-> But, if Linux starts to use SR3 WPS, then U-Boot should be updated to=20
-> match, i.e. both projects should agree on the locking scheme, so that=20
-> there won't be a situation where on the same device, one project uses=20
-> one scheme, the other project uses another scheme. I think this would=20
-> technically work, but it would be horrible from the user perspective.=20
-> And if that happens, both projects should then be updated in lockstep=20
-> and this UNLOCK_ALL should be disabled for such a setup then.
+- 0x00008000: TPL+SPL - up to around 256+256 KiB
+- 0x00088000: FIT with U-Boot proper + TF-A - up to 3520 KiB
+- 0x003F8000: optional U-Boot env
+- 0x00400000+: free use
 
-If you don't touch it, I don't think you have a problem here. u-boot
-and linux can support different schemes, as long as the user is
-aware of that. I.e. if they want to lock a region and the flash is
-configured in a mode which isn't supported in u-boot (or linux) it
-should be rejected. There might of course be a command to switch the
-scheme if someone want to do so.
+> 
+> I don't own every Rockchip board, but I have a bunch of them (thanks to some
+> generous donations!). I've created a spreadsheet that lists the ones supported
+> by meta-rockchip and their environment variable U-Boot configurations
+> (locations, offsets, sizes). Most of them follow the Rockchip recommended
+> partitioning layout with regards to storing the environment. This set of
+> patches closes that gap, at least for the ones supported by meta-rockchip.
+> 
+> One of the things that I want to do next with meta-rockchip is to provide
+> an easy way for users to enable some sort of A/B OTA update strategy.
+> Currently, enabling an A/B update mechanism for any board (Rockchip or not)
+> is a non-trivial exercise. Every A/B update mechanism that I've looked at
+> requires (among other things) the bootloader to be able to store/retrieve
+> its environment from U-Boot itself (obviously) and also from Linux userspace
+> since it is the bootloader that ultimately boots from either the A or the B
+> partition. I'm specifically focused on rauc, but all the A/B update mechanisms
+> I've looked at have this same requirement.
 
--michael
+The Boot Loader Specification [a] and Automatic Boot Assessment [b]
+describe one alternative way that would not involve U-Boot env,
+unfortunately U-Boot does not follow the Boot Loader Specification,
+a bootflow I would like to see being implemented :-)
 
---db61018f7449a7468756283d270e8d2b7764ff63fe06538b995d99244671
-Content-Type: application/pgp-signature; name="signature.asc"
+[a] https://uapi-group.org/specifications/specs/boot_loader_specification/
+[b] https://systemd.io/AUTOMATIC_BOOT_ASSESSMENT/
 
------BEGIN PGP SIGNATURE-----
+Also are you only focusing on A/B for the kernel/OS or or does that also
+include a strategy for how to A/B update the bootloader itself?
 
-iIcEABYIAC8WIQQCnWSOYTtih6UXaxvNyh2jtWxG+wUCZedOkBEcbWljaGFlbEB3
-YWxsZS5jYwAKCRDNyh2jtWxG+7FZAP97I1tNSYsTGIfACjE8WlUnEoBUzYNn4Jso
-wrRMoq2TfQEAif/z7V33uQMH21BDPEl5xZvUd1q/JPIOsy/8bC9KTwo=
-=DnUH
------END PGP SIGNATURE-----
+For bootloader A/B the Rockchip BROM typically will try to find the IDB
+from multiple locations, e.g. sector 0x40, 0x240, 0x440, 0x640 if I am
+not mistaken. This could potentially be used to create two pairs of
+TPL+SPL/env/FIT combo.
 
---db61018f7449a7468756283d270e8d2b7764ff63fe06538b995d99244671--
+> 
+> Users who don't care for A/B updates can simply use meta-rockchip as-is, those
+> who want an A/B strategy would simply enable a setting or two in their Yocto
+> config and meta-rockchip would take care of the details, regardless of which
+> Rockchip board they're using.
+> 
+> I've combined /boot into the root partition since it makes A/B updates easier.
+> Otherwise in order to work it would actually be an Aboot+Aroot/Bboot+Broot
+> mechanism, which is clumsy. Also since U-Boot is stored in partition by
+> itself, the only thing in the /boot partition is the U-Boot boot mechanism
+> (boot script, extlinux, etc), the Linux kernel, and the DTB (or fitImage). In
+> general it's better to keep the kernel and the root filesystem in sync, so
+> having a separate /boot partition is clumsy for no gain.
+> 
+> The other nice thing about wic is that it allows us to store random data
+> (or filesystems) in the image as we're creating it for the first time. In
+> other words, I have a mechanism that allows me to create the initial/default
+> U-Boot environment during the build, I can add or remove variables from it
+> dynamically as part of my build process, generate the proper binary blob of
+> that environment (i.e. with checksum), and lay it out into partition 5 of the
+> generated image so that on first boot the environment is already setup with
+> whatever U-Boot needs plus any custom tweaks the user adds.
+> 
+>>
+>>>
+>>> The rockchip pattern is usually to have a standard config for all boards and it is
+>>> not stored anywhere.
+>>
+>> Unfortunately lots of rockchip boards have blindly enabled ENV_IN_MMC
+>> and force it to use sd-card. However, before enabling same forced
+>> behavior on new boards I would recommend ensuring adding support for
+>> allowing env to follow same load order as FIT (spl-boot-order).
+> 
+> I was pretty certain the "forcing it to SDcard" was going to cause push back,
+> which is why I highlighted it in my commit message since I didn't want it to
+> sneak in accidentally. The feedback is exactly what I was hoping. I wasn't
+> aware there might be a way to dynamically store the environment based on the
+> wishes of the user, that would be great!
+> 
+> But ultimately I want to keep the environment on the boot device and make
+> sure they're not separated. I could have 2 SDcards on my desk: one could be a
+> regular non-A/B layout, and the other would have an A/B layout. Technically I
+> wouldn't really need an environment on the non-A/B card, but if it did have
+> one, it would need to be different from the environment of the SDcard that had
+> the A/B update layout.
+> 
+> On many Rockchip-based boards the eMMC board is every bit as optional as the
+> SDcard, so keeping the environment on the same medium as the boot is
+> necessary.
+
+I fully agree, keeping TPL+SPL/FIT/env on same media would be preferably,
+with some code it should be possible. For emmc we could even get more
+crazy and potentially store FIT+env in one of the two hw boot partitions.
+BROM does not support booting from the boot partitions but we can make
+SPL/U-Boot proper read from it.
+
+> 
+> For the user-case of a single OS I agree that an environment is not required
+> to be stored. But more and more we're seeing users want an OTA strategy
+> (especially in commercial/production environments), and if the one they want
+> is A/B-based, then storing the environment is something that needs to work.
+> Even in a non-production environment, having an A/B update mechanism could be
+> useful in a board-farm testing environment: take last night's build, update
+> the board's "other" partition, reboot, and see if it works. If it doesn't,
+> fall back to the working one and try again.
+> 
+> Currently meta-rockchip assumes SDcard usage. I know that's a limitation and
+> is on my TODO list to address someday so users could easily choose between
+> one or the other.
+> 
+> In order to get A/B working out of the box for meta-rockchip, I could carry
+> all these patches locally and still make everything work the way I would like.
+> But most Rockchip-based boards seem to already support storing an environment
+> in CONFIG_ENV_IS_IN_MMC, it's just the default device CONFIG_SYS_MMC_ENV_DEV
+> that we're disagreeing on.
+
+Most devices that has onboard SPI flash typically have ENV_IS_IN_SPI,
+and two of the four boards affected by your patches comes with onboard
+SPI flash. For those, 3A and 5B, it make more sense to enable env in SPI
+if it is needed until automatic location selection have been implemented.
+
+Regards,
+Jonas
+
+> 
+>> Regards,
+>> Jonas
+>>
+>>>
+>>> Kever, Jonas, please correct me if I am wrong.
+>>>
+>>> Eugen
+>>
+> 
+> [1] https://layers.openembedded.org/layerindex/branch/master/layer/meta-rockchip/
+> [2] https://git.yoctoproject.org/meta-rockchip/tree/wic/rockchip.wks
+> [3] https://opensource.rock-chips.com/wiki_Partitions
+
