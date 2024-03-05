@@ -4,75 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58230C54798
-	for <u-boot@archiver.kernel.org>; Tue,  5 Mar 2024 13:17:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FD89C54E41
+	for <u-boot@archiver.kernel.org>; Tue,  5 Mar 2024 13:25:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CB87188044;
-	Tue,  5 Mar 2024 14:17:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 08B6E8802E;
+	Tue,  5 Mar 2024 14:25:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PylQmbnH";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="KEOYaBwF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8EE5C87FA0; Tue,  5 Mar 2024 14:17:48 +0100 (CET)
-Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
- [IPv6:2607:f8b0:4864:20::112b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B426687FA5; Tue,  5 Mar 2024 14:25:08 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 868FD88044
- for <u-boot@lists.denx.de>; Tue,  5 Mar 2024 14:17:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 01DF988041
+ for <u-boot@lists.denx.de>; Tue,  5 Mar 2024 14:25:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112b.google.com with SMTP id
- 00721157ae682-609acac53d0so18956307b3.1
- for <u-boot@lists.denx.de>; Tue, 05 Mar 2024 05:17:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1709644665; x=1710249465; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=xSnwkos2S24QHacQFJM6OnA23AEQzsZPlWvK83QCUr4=;
- b=PylQmbnH3+9vXMkdULT+ngsNzM1HFHQapib3WHHlloLgDmFKYiPu7Y8h8e2WlrnnsM
- CsEG664yC5cKUqVQJGiAtT7La4guURzG4fTCaPOYtKoX/sOi0Jjd7D+kCzCkcb+rmg8+
- VmqkTHc5YSwSOl4d5eyq4mifmmOsZ1E+tKCZk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709644665; x=1710249465;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=xSnwkos2S24QHacQFJM6OnA23AEQzsZPlWvK83QCUr4=;
- b=SBD3ACe/7nNujlF51kEBufpfzS9vwxxDldQGUUM14rHu52BXDSq0r0wCK4gS+tOmPi
- EPQgZltVsqvbROFWhw6w4PIo2Ehkoud0Lhczl+lkGSotVnXDH6kRZR+tx10B1OEpOV9g
- ALhDPYEKKJ2Cxv4SyS6gCatjlEvyT/MFoI+D+9eEZ8acNrrPPZfzbsGKpAed1m1dsf9K
- 1BTxUCWHo6U2gh4mqH04K+60qf0BW1TXMVyoD7NGF08liov00UvghVWMEtkzZ+6Zg7kn
- vPp7rrZWe9pFVGR09PCmz9TRqabUR74oT4OUUmTsoJ2NeBT/pp2qPUamC396P3SeA7XR
- T5Pg==
-X-Gm-Message-State: AOJu0YxHRBPKWY3oy1xYq4ruB8qXH1Qae8gLFU8nh/0RhbH1U9FBNDX3
- u6tS2owpIanmxMSFsgBh7h8b66be42hucYRXDPuvkFEmL7ZZ0KvC+s2csSQidOI=
-X-Google-Smtp-Source: AGHT+IEMqbp9FL+SSXJ0abib9/8a8m0seC9XreIYmXy2w25vOVtneJkxvsocuHH3IE4nf/X69Z9rbQ==
-X-Received: by 2002:a81:a20e:0:b0:608:6ca9:abda with SMTP id
- w14-20020a81a20e000000b006086ca9abdamr12014800ywg.52.1709644665222; 
- Tue, 05 Mar 2024 05:17:45 -0800 (PST)
-Received: from [127.0.1.1]
- (2603-6081-7b00-007f-0000-0000-0000-1000.res6.spectrum.com.
- [2603:6081:7b00:7f::1000]) by smtp.gmail.com with ESMTPSA id
- u84-20020a814757000000b0060784b3bba8sm3169501ywa.35.2024.03.05.05.17.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Mar 2024 05:17:44 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, 
- =?utf-8?q?Micha=C5=82_Barna=C5=9B?= <barnas@google.com>
-In-Reply-To: <20240219163213.855667-1-barnas@google.com>
-References: <20240219163213.855667-1-barnas@google.com>
-Subject: Re: [PATCH 0/3] Fix driver for misc/atsha204a
-Message-Id: <170964466455.2716579.1226354579442657631.b4-ty@konsulko.com>
-Date: Tue, 05 Mar 2024 08:17:44 -0500
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 7B69961378;
+ Tue,  5 Mar 2024 13:25:03 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DE1BCC433F1;
+ Tue,  5 Mar 2024 13:24:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1709645103;
+ bh=yzNSK4p7p/Rk6c6jRv5Gwh6bpTKm6xeB/gt7TVfgiSE=;
+ h=From:Subject:Date:To:Cc:From;
+ b=KEOYaBwFpstqLBtfkwN07fm/qIlhpBm6HNo8shyorBVTG9x99EJC3iWzc4cDp6qww
+ /EfPL63H40Ky8JN4ZZKCkFOygR6kCs+Wp6KjMcmK4UWN24LiIqLpSBrmRYVxpI5z+s
+ mVyEpfVIeiYYAm2YlBJ36PLepAFCoQMe4atCIrvC0X9ecsh9oPjoBeCAGgUbYYfdjX
+ E8CAljF3Or5uILynB35w9t2kaHcmzZzfNitE6Y4bnhpss4mybcawWxJ1BIcBrCjjo2
+ cEFDkSkiWK7HcwPRdjjl6voBgkRJKJIhYn9msTKdC9Zftfv5gRoapong1N0t5dCW0z
+ KY31NiPovVp8w==
+From: Roger Quadros <rogerq@kernel.org>
+Subject: [PATCH 0/5] net: mdio-uclass: probe generic Ethernet PHY driver &
+ Fix Beagleplay Ethernet
+Date: Tue, 05 Mar 2024 15:24:52 +0200
+Message-Id: <20240305-for-2024-07-beagleplay-eth-v1-0-e1294a575cc1@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-Mailer: b4 0.13.0
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIACQd52UC/x3MQQ5AMBAAwK/Inm3Slqb4ijgUWzYRpBUh0r8rx
+ 7nMA4E8U4Ame8DTyYG3NUHmGQyzXSdCHpNBCVWKQmh0m8cPKAz2ZKeF9sXeSMeMrlJWS1mbujC
+ Qgt2T4+vP2y7GFzaW+HxsAAAA
+To: Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ Nishanth Menon <nm@ti.com>, Robert Nelson <robertcnelson@gmail.com>, 
+ Wadim Egorov <w.egorov@phytec.de>, 
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
+ Simon Glass <sjg@chromium.org>
+Cc: srk@ti.com, s-vadapalli@ti.com, vigneshr@ti.com, r-gunasekaran@ti.com, 
+ danishanwar@ti.com, u-boot@lists.denx.de, Roger Quadros <rogerq@kernel.org>
+X-Mailer: b4 0.12.4
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3379; i=rogerq@kernel.org;
+ h=from:subject:message-id; bh=yzNSK4p7p/Rk6c6jRv5Gwh6bpTKm6xeB/gt7TVfgiSE=;
+ b=owEBbQKS/ZANAwAIAdJaa9O+djCTAcsmYgBl5x0r2tUJ0dyDlKpaYr9+5HOEEDhvuwOXV3aHw
+ WwbGyd6P+uJAjMEAAEIAB0WIQRBIWXUTJ9SeA+rEFjSWmvTvnYwkwUCZecdKwAKCRDSWmvTvnYw
+ k+6/D/0QB4V5XGg2WL8Bsg6OsHVVVmX+cdGtpXhg7JfsgCHgmuj4B8wpHcX+cAyYrprz6xwEqt4
+ XtW4zZS37W2KlT3q3PTO7jl5XRtOCDFvnE5aJTCWLSYblkSQp1U+y1OP6j1OXxc6Yotna0rVBzd
+ 6/MbXZx3mR9MK4tZ2tEMir2TwEx76WJEqseP0/RJDryFj30VWYe/FkFiLjM1yXQr9TQVxBG3Lup
+ Ur7qWS4SVd7S8eeWMLjgHGpDKTB37jHjOhn8lOf5JqL+rnU6L3VczAMnZd2Je4/pQ/DZo7kb1IA
+ X0jD63IMQzxNLBcEof7KF8Z33mwZWEe/FmSrnrS3NE6VnmRQIuZ+6w9LvsnxruLogpWLVlY5a0J
+ t5G2DzZ6ex08ZViu5FhzTVjVetKMw0b6XLr1pxgANQMhCKb1T8V6i1x6qfZAIwGHcW1GM8MDwbz
+ pHFjHsoxs61hg1Jg+l2XebPaCFoSQwDa2OW+nlhZu4h4VJuZxvW3CqcA1PRTuu0DGKEP9K48AeD
+ zoSOmQl+rwUWp5Z6VFKYl8kKJbRb5nOdUnQBbNO2LW4Qfy270E7rIHpmsbtpPnl9bsSBXkB17Cw
+ qdMVBGvFjoqRSr6Ytmy73E82LBDjfsYPnIt1l8gcZmE/9mYvTRnrugOQ9WOdaqYVGpOk9c1FshO
+ +PwZnMlkHq1zARg==
+X-Developer-Key: i=rogerq@kernel.org; a=openpgp;
+ fpr=412165D44C9F52780FAB1058D25A6BD3BE763093
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,20 +92,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 19 Feb 2024 16:32:01 +0000, Michał Barnaś wrote:
+Currently, the GPIO Reset Device Tree properties of the
+PHY node are ignored when the PHY is probed via mdio-uclass driver [1].
 
-> Fix the driver to behave like the chip datasheet requires.
-> Improve wake up function to send low signal on SDA line for at least
-> 60us as chip requires to wake up. Fix sleep function to move the chip
-> into sleep mode, not into idle mode. Remove unnecessary for loop,
-> which would never run for more than one iteration.
-> 
-> 
-> [...]
+To resolve this, for each child of the MDIO bus node, bind and probe
+the generic Ethernet PHY driver if CONFIG_DM_ETH_PHY is enabled.
 
-Applied to u-boot/next, thanks!
+This should now show the generic_phy_driver in "dm tree"
+and also apply the GPIO reset before the MDIO bus driver scans the bus
+for the PHYs.
 
+ ethernet      0  [ + ]   am65_cpsw_nuss_port       |   |-- ethernet@8000000port@1
+ bootdev       3  [   ]   eth_bootdev               |   |   `-- port@1.bootdev
+ mdio          0  [ + ]   cpsw_mdio                 |   `-- mdio@f00
+ eth_phy_ge    0  [ + ]   eth_phy_generic_drv       |       |-- ethernet-phy@0
+ eth_phy_ge    1  [ + ]   eth_phy_generic_drv       |       `-- ethernet-phy@1
+
+To test this on Beagleplay, the following series is required
+
+[1] Switch am65-cpsw to DM MDIO
+ https://lore.kernel.org/all/20240228-for-2024-07-am65-cpsw-mdio-v2-0-f74f972eafeb@kernel.org/
+
+The last 3 patches are marked [not-for-merge]. They are to show how the
+whole solution can work to fix Ethernet on Beagleplay, which has been broken
+so far. Those DT patches will be sent once the device tree changes are merged
+into Linux tree.
+
+Signed-off-by: Roger Quadros <rogerq@kernel.org>
+---
+Roger Quadros (5):
+      net: mdio-uclass: Bind and probe generic Ethernet PHY driver
+      configs/am62x_beagleplay_a53_defconfig: enable DM_ETH_PHY
+      [not-for-merge] arm: dts: k3-am62*: sync with linux-next-20240229
+      [not-for-merge] k3-am625-beagleplay-u-boot: get CPSW Ethernet to work
+      [not-for-merge] arm: dts: k3-am625-beagleplay: Fix Ethernet PHY reset GPIO
+
+ arch/arm/dts/k3-am62-main.dtsi               | 126 ++++++++++++++---
+ arch/arm/dts/k3-am62-mcu.dtsi                |   4 +-
+ arch/arm/dts/k3-am62-phycore-som.dtsi        |   5 +-
+ arch/arm/dts/k3-am62-thermal.dtsi            |   5 +-
+ arch/arm/dts/k3-am62-verdin-dev.dtsi         |   4 +-
+ arch/arm/dts/k3-am62-verdin-wifi.dtsi        |   1 -
+ arch/arm/dts/k3-am62-verdin.dtsi             |  76 +++++++---
+ arch/arm/dts/k3-am62-wakeup.dtsi             |  38 +++--
+ arch/arm/dts/k3-am62.dtsi                    |   4 +-
+ arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi |  63 +++++++++
+ arch/arm/dts/k3-am625-beagleplay.dts         |  66 ++++-----
+ arch/arm/dts/k3-am625-phyboard-lyra-rdk.dts  | 104 +++++++++++++-
+ arch/arm/dts/k3-am625-sk.dts                 |   4 +-
+ arch/arm/dts/k3-am625.dtsi                   |   4 +-
+ arch/arm/dts/k3-am62a-main.dtsi              | 201 +++++++++++++++++++++++++--
+ arch/arm/dts/k3-am62a-mcu.dtsi               |   4 +-
+ arch/arm/dts/k3-am62a-thermal.dtsi           |   5 +-
+ arch/arm/dts/k3-am62a-wakeup.dtsi            |   4 +-
+ arch/arm/dts/k3-am62a.dtsi                   |   4 +-
+ arch/arm/dts/k3-am62a7-sk.dts                | 162 ++++++++++++++++++++-
+ arch/arm/dts/k3-am62a7.dtsi                  |   4 +-
+ arch/arm/dts/k3-am62x-sk-common.dtsi         |  24 +++-
+ configs/am62x_beagleplay_a53_defconfig       |   2 +-
+ net/mdio-uclass.c                            |  41 ++++++
+ 24 files changed, 825 insertions(+), 130 deletions(-)
+---
+base-commit: 84f5bb0be0ec9fbf98f8f3317b578dfc114cf44e
+change-id: 20240305-for-2024-07-beagleplay-eth-f82a51197937
+
+Best regards,
 -- 
-Tom
-
+Roger Quadros <rogerq@kernel.org>
 
