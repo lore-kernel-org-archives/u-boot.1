@@ -4,74 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92340C54798
-	for <u-boot@archiver.kernel.org>; Tue,  5 Mar 2024 07:56:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60D91C54798
+	for <u-boot@archiver.kernel.org>; Tue,  5 Mar 2024 08:11:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 19D2D87BA8;
-	Tue,  5 Mar 2024 08:56:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=microchip.com
+	by phobos.denx.de (Postfix) with ESMTP id 9F20487C4C;
+	Tue,  5 Mar 2024 09:11:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="lECoUa7x";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="SoSahZ5R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 41F1287C4C; Tue,  5 Mar 2024 08:56:15 +0100 (CET)
-Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
- [68.232.153.233])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E321D87C5B; Tue,  5 Mar 2024 09:11:32 +0100 (CET)
+Received: from smtp-relay-canonical-1.canonical.com
+ (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 07CCB875FA
- for <u-boot@lists.denx.de>; Tue,  5 Mar 2024 08:56:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=microchip.com
+ by phobos.denx.de (Postfix) with ESMTPS id AA0A987C48
+ for <u-boot@lists.denx.de>; Tue,  5 Mar 2024 09:11:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Conor.Dooley@microchip.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1709625372; x=1741161372;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=+3TFvIrni3CYBewTzOfmd5O+0R62bqLiygHIaKzgfKY=;
- b=lECoUa7xbnKYbvWi5x9ZHA1lcTQu/DKbcN4KLMBVVOkuN7a87hUsAwBP
- BI/1/isdvQ5LpNnKaX6XlINoQSN4Lt+5DFnkVrlBiAVW/tK62Pt+TLSy/
- LSdPGyoVrzSA2b4j7gZhpDAzmtCy3OovyiGbq/BZbkXa7pyAUy/EGUtqo
- EE7fgQiujIuzc3IGH803Psre0e4o4aFgyQJoXkUuWuOAxCakOU27Um86L
- PrtwDXc6+GlSOv8edErzoURsnBhabsmjlKWNAwQzA4e7KRCGTzNi9c/Lj
- qyoYsXvyw4u8b7q6jNCtCmk5JwK5zWDlJzJbnV7weE3PL1KG9meRMUqEp w==;
-X-CSE-ConnectionGUID: XBiH5z6dTQS4bdjPYAZ5zg==
-X-CSE-MsgGUID: BLxdbuaZSBO9IMQMudQxsg==
-X-IronPort-AV: E=Sophos;i="6.06,205,1705388400"; 
- d="asc'?scan'208";a="247970086"
-X-Amp-Result: UNKNOWN
-X-Amp-Original-Verdict: FILE UNKNOWN
-Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa5.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 05 Mar 2024 00:56:09 -0700
-Received: from chn-vm-ex02.mchp-main.com (10.10.85.144) by
- chn-vm-ex01.mchp-main.com (10.10.85.143) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35; Tue, 5 Mar 2024 00:55:36 -0700
-Received: from wendy (10.10.85.11) by chn-vm-ex02.mchp-main.com (10.10.85.144)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35 via Frontend
- Transport; Tue, 5 Mar 2024 00:55:34 -0700
-Date: Tue, 5 Mar 2024 07:54:50 +0000
-From: Conor Dooley <conor.dooley@microchip.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-CC: Conor Dooley <conor@kernel.org>, Rick Chen <rick@andestech.com>, Leo
- <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>, Simon Glass
- <sjg@chromium.org>, Chanho Park <chanho61.park@samsung.com>, Bin Meng
- <bmeng.cn@gmail.com>, <palmer@dabbelt.com>, <u-boot@lists.denx.de>
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from [192.168.123.107] (ip-109-42-176-242.web.vodafone.de
+ [109.42.176.242])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 47A853FB5F; 
+ Tue,  5 Mar 2024 08:11:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1709626289;
+ bh=GcPYEl1PRLjY2b2V49hHEZlUEcyiJQhbWL7/QUQFiVY=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=SoSahZ5R0VbMf33wfFXEwNJP64pdY+CIwAC+hYSiBvnXzARN1q0TC3fT7zyzdLNSN
+ 6r6i/aXEAczMk+jKdpKkoGiSu+U3BDtYB4kkEdyRFSCgZZEsyjf4bXe9BxOYHOnx0t
+ lQPad197smaobRmoTBGVGcq2PAI8bD2h858gcO8NQIPYcskPvv5iPhtL5uX6cVaHPC
+ z720CntjV0OoUPXztV0TPUxoQ2BTYZGznkjRfjcNrq8gvdMTlwjAdX8bi7PFM/V2yJ
+ pnL6sByooKbC1JCCNUigSpQkCG9qiL43w3y5+Lq+4rFOIYLnAWrslofhfW5Oci/WTn
+ q2kL0lxDAw/RA==
+Message-ID: <41a27290-5b44-4e8a-8718-8bbe945fd456@canonical.com>
+Date: Tue, 5 Mar 2024 09:10:59 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v1] riscv: cpu: improve multi-letter extension detection
  in supports_extension()
-Message-ID: <20240305-expulsion-pastrami-0a1ca34d96d7@wendy>
+Content-Language: en-US, de-DE
+To: Conor Dooley <conor.dooley@microchip.com>
+Cc: Conor Dooley <conor@kernel.org>, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Chanho Park <chanho61.park@samsung.com>,
+ Bin Meng <bmeng.cn@gmail.com>, palmer@dabbelt.com, u-boot@lists.denx.de
 References: <20240304232835.3076533-2-conor@kernel.org>
  <da2c1e6b-95c6-4326-a353-3ed32c524b40@gmx.de>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="fpB+RMTzhqard7rU"
-Content-Disposition: inline
-In-Reply-To: <da2c1e6b-95c6-4326-a353-3ed32c524b40@gmx.de>
+ <20240305-expulsion-pastrami-0a1ca34d96d7@wendy>
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240305-expulsion-pastrami-0a1ca34d96d7@wendy>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,29 +79,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---fpB+RMTzhqard7rU
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+On 3/5/24 08:54, Conor Dooley wrote:
+> On Tue, Mar 05, 2024 at 08:34:20AM +0100, Heinrich Schuchardt wrote:
+>> On 3/5/24 00:28, Conor Dooley wrote:
+>>> From: Conor Dooley <conor.dooley@microchip.com>
+>> According to
+>> https://github.com/riscv/riscv-isa-manual/blob/main/src/naming.adoc the
+>> ISA string is case insensitive. Why can we assume here that it is lower
+>> case?
+> 
+> The binding does not allow upper-case.
 
-On Tue, Mar 05, 2024 at 08:34:20AM +0100, Heinrich Schuchardt wrote:
-> On 3/5/24 00:28, Conor Dooley wrote:
-> > From: Conor Dooley <conor.dooley@microchip.com>
-> According to
-> https://github.com/riscv/riscv-isa-manual/blob/main/src/naming.adoc the
-> ISA string is case insensitive. Why can we assume here that it is lower
-> case?
+Ok. That is in Linux' 
+Documentation/devicetree/bindings/riscv/extensions.yaml.
 
-The binding does not allow upper-case.
-
---fpB+RMTzhqard7rU
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZebPygAKCRB4tDGHoIJi
-0mi1AP9CT50cqpx8LEyVThskcSPsjrfXW+Lmm/2QuNrOXYVSyQEA2Nj6k03vf5KX
-pYAu07oV37klxNedoI0xIMNEYiVqkQc=
-=BrTt
------END PGP SIGNATURE-----
-
---fpB+RMTzhqard7rU--
+Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
