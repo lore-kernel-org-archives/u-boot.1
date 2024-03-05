@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C1C3C54798
-	for <u-boot@archiver.kernel.org>; Tue,  5 Mar 2024 09:56:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF82BC54E41
+	for <u-boot@archiver.kernel.org>; Tue,  5 Mar 2024 10:02:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F52A87FEE;
-	Tue,  5 Mar 2024 10:56:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0AF7588019;
+	Tue,  5 Mar 2024 11:02:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="wta3XM82";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="W18f7xrT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 60A5388002; Tue,  5 Mar 2024 10:56:23 +0100 (CET)
+ id 012038801A; Tue,  5 Mar 2024 11:02:07 +0100 (CET)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA3FB879A0
- for <u-boot@lists.denx.de>; Tue,  5 Mar 2024 10:56:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 904F587FFE
+ for <u-boot@lists.denx.de>; Tue,  5 Mar 2024 11:02:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,28 +28,28 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
  Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1709632566;
- bh=MXq5koU1tbPyTmzhLetq8XmIcB13auNKLujKI6fPvEM=;
- b=wta3XM82EbifdBdjBQD9LIWu526Lv7rzzUZ6aAG89fF2YBdJJC76MR0S2PxuXpGhswWwWnvxG
- Mq/TePNK+baImtD19JH343V7N9/BFVMbhiI9EgrmUACE2jwWJPUk1RJ9+kTMN36lBXXXQSxdlfs
- XeBQEgw5iuDIwOkT9pTeYFMvNB2wUpkWEwbOQS2LellXHfNcQyYqA/+Fw3VQvopyYxafteVpZ3z
- 74GLmdB7WMP8fmWLa54VVPWv3U7pwYY0L8waC8Y6QfahTIlP1+Jfne4hQXCUxVz/SRcGK/EeUjk
- Ze2qemIjQrYU00dBqboDdvw9faJ6GOc4pcYBAMtm8nAw==
-Message-ID: <a0f743f7-8dcc-4aa4-9cfb-7077e385265a@kwiboo.se>
-Date: Tue, 5 Mar 2024 10:55:59 +0100
+ s=fe-e1b5cab7be; t=1709632904;
+ bh=d2jR7Av8AqSWUnP7RoA3OoiVQ95+0tJBeFdGgr8gOZY=;
+ b=W18f7xrT/ZwYhSgqg534C5aTgeBkONz86I1X5AUuKr4fN63xUJbF955GTZgonjTXOirmRVK9x
+ yHNz052BqKVG1nY2dWBqcY0a+r+cS9z82tE697u1CQzuv6sh2v0pjAaioYn7lMmwpFqX3SyExCI
+ ebXvN9OwQEteAvtecBQNLMvIq9fi/OeYSvcRJfuLpUhxw6wDu2J3gSQH3ClGQRH+rYuP8pJjGhX
+ xh0WVJZk4Qxb//n2Gq1I66LAnSoc6ElmAkUfpk+WTamtuAM2P8zl7Y0vA7Ch5dnkBYBAzTyoIbU
+ CxKqG62Lus4ALq+W+WK8qHaT2rC3b3ozt1wfM6Zmzi6w==
+Message-ID: <a4a592c8-9693-4789-ac68-07c1b23ef570@kwiboo.se>
+Date: Tue, 5 Mar 2024 10:29:45 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] configs: rockchip: rock-pi-s: enable environment
+Subject: Re: [PATCH] configs: rockchip: rock3a: enable environment
 Content-Language: en-US
 To: Trevor Woerner <twoerner@gmail.com>
 Cc: "U-Boot Mailing List" <u-boot@lists.denx.de>, Akash Gajjar
  <gajjar04akash@gmail.com>, Tom Rini <trini@konsulko.com>, Kever Yang
- <kever.yang@rock-chips.com>, FUKAUMI Naoki <naoki@radxa.com>, Massimo
- Pegorer <massimo.pegorer+oss@gmail.com>, Simon Glass <sjg@chromium.org>,
- Pegorer Massimo <Massimo.Pegorer@vimar.com>
+ <kever.yang@rock-chips.com>, FUKAUMI Naoki <naoki@radxa.com>, Simon Glass
+ <sjg@chromium.org>, Jagan Teki <jagan@edgeble.ai>
 References: <20240305021051.22405-1-twoerner@gmail.com>
+ <20240305021051.22405-2-twoerner@gmail.com>
 From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20240305021051.22405-1-twoerner@gmail.com>
+In-Reply-To: <20240305021051.22405-2-twoerner@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-Report-Abuse-To: abuse@forwardemail.net
@@ -58,7 +58,7 @@ X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
-X-ForwardEmail-ID: 65e6ec350c58f90fb4aa53bf
+X-ForwardEmail-ID: 65e6e60f0c58f90fb4aa518c
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,22 +78,16 @@ X-Virus-Status: Clean
 Hi Trevor,
 
 On 2024-03-05 03:10, Trevor Woerner wrote:
-> Following the pattern of other Rockchip devices, enable the U-Boot environment
-> to be stored in MMC. This patch specifically assumes the environment will be
-> stored on the SDcard.
+> Following the pattern of other Rockchip devices, enable the U-Boot
+> environment to be stored in MMC. This patch specifically assumes the
+> environment will be stored on the SDcard.
 
-This board support optional emmc (sd nand), forcing env to sd-card does
-not sound like a good idea, ideally the env is stored in the media where
-TPL/SPL is running from.
+This board has SPI flash, so storing env in SPI flash is probably a
+better default. However, preferably the env should be stored/loaded from
+the same device that TPL/SPL was loaded from.
 
-Please note that booting from emmc is not working in current state, I
-have an incoming series to improve support for this and other rk3308
-boards. Hoping to have it on list later this week, see [1] for current
-work-in-progress patches. It enables full support for usb otg/host, ums,
-rockusb, emmc/sd nand, ethernet, ethaddr from serial#, rnd and fit
-checksum validation on this board (tested on a v1.3 board).
-
-[1] https://github.com/Kwiboo/u-boot-rockchip/commits/rk3308-2024.04
+What is your use case for being able to store the env? Personally, I have
+never had a need for storing an env and use ENV_IS_NOWHERE on my boards.
 
 Regards,
 Jonas
@@ -101,21 +95,20 @@ Jonas
 > 
 > Signed-off-by: Trevor Woerner <twoerner@gmail.com>
 > ---
->  configs/rock-pi-s-rk3308_defconfig | 2 ++
+>  configs/rock-3a-rk3568_defconfig | 2 ++
 >  1 file changed, 2 insertions(+)
 > 
-> diff --git a/configs/rock-pi-s-rk3308_defconfig b/configs/rock-pi-s-rk3308_defconfig
-> index 9908a4b4f457..af2cddcc2553 100644
-> --- a/configs/rock-pi-s-rk3308_defconfig
-> +++ b/configs/rock-pi-s-rk3308_defconfig
-> @@ -54,7 +54,9 @@ CONFIG_EFI_PARTITION_ENTRIES_NUMBERS=64
+> diff --git a/configs/rock-3a-rk3568_defconfig b/configs/rock-3a-rk3568_defconfig
+> index 28d157dbd7a7..44158a4d34f1 100644
+> --- a/configs/rock-3a-rk3568_defconfig
+> +++ b/configs/rock-3a-rk3568_defconfig
+> @@ -58,6 +58,8 @@ CONFIG_CMD_REGULATOR=y
 >  CONFIG_SPL_OF_CONTROL=y
 >  CONFIG_OF_LIVE=y
->  CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+>  CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
 > +CONFIG_ENV_IS_IN_MMC=y
->  CONFIG_SYS_RELOC_GD_ENV_ADDR=y
 > +CONFIG_SYS_MMC_ENV_DEV=1
->  CONFIG_REGMAP=y
->  CONFIG_SYSCON=y
->  CONFIG_CLK=y
+>  CONFIG_SPL_DM_SEQ_ALIAS=y
+>  CONFIG_SPL_REGMAP=y
+>  CONFIG_SPL_SYSCON=y
 
