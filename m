@@ -4,72 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73B6FC54E41
-	for <u-boot@archiver.kernel.org>; Tue,  5 Mar 2024 17:36:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44BF7C54E41
+	for <u-boot@archiver.kernel.org>; Tue,  5 Mar 2024 17:38:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D8FD98809F;
-	Tue,  5 Mar 2024 18:36:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id AF33188099;
+	Tue,  5 Mar 2024 18:38:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="NXDElqWq";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bI6GR+B6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B13CB880A7; Tue,  5 Mar 2024 18:36:36 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 71205880AA; Tue,  5 Mar 2024 18:38:18 +0100 (CET)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4AC53879BB
- for <u-boot@lists.denx.de>; Tue,  5 Mar 2024 18:36:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7639287FA0
+ for <u-boot@lists.denx.de>; Tue,  5 Mar 2024 18:38:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vigneshr@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 425HaWWs072130;
- Tue, 5 Mar 2024 11:36:32 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1709660192;
- bh=HRx8F3N4UzC0rcp6E884RaRVLT0ogClKrx6gHLPsC6E=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=NXDElqWqikMswgKNZWa1nq+QQZE0e3LF6ZjPKiv+r1W4aH/eKQs2TJJ5+srGY10PX
- jMHZ0zM/bauPTgqLu/SGYUy+W4AsVT1TnZ+j1VLf7iiK/aS/KLqCcwVjFbDF9+6rpd
- HTOjCmJTFTMMLfZeIPI1HZbpRiCiRMZqnekDxGlc=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 425HaWFG013449
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 5 Mar 2024 11:36:32 -0600
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 5
- Mar 2024 11:36:32 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 5 Mar 2024 11:36:32 -0600
-Received: from [10.249.142.56] ([10.249.142.56])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 425HaT4S125900;
- Tue, 5 Mar 2024 11:36:30 -0600
-Message-ID: <c6e446a6-c767-4c61-87f5-8cc310c7178a@ti.com>
-Date: Tue, 5 Mar 2024 23:06:29 +0530
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-412e8c63f23so13234685e9.0
+ for <u-boot@lists.denx.de>; Tue, 05 Mar 2024 09:38:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1709660296; x=1710265096; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=nMzX1qCC7CA7Yhdicp3jQ6NrSIOTgeZwF4cVF66MSEg=;
+ b=bI6GR+B6BNbNrodlg7pbs9rjlM9UKunVZnO8YELibXFBNe2BRNt03a+i648EGJ9QlY
+ YTxfumysBV0MvMueNzvbNNBXWjojyVlH787DLvindZAEWUh1+/YfT8CERWDnnaTeJMuI
+ 05w+agnO8NXHjRrLXiP2sd2yYx0wlqqp4SvbHCsDACXSz2X91P4wFQHA6au4Vkarwz6L
+ 0m8cc0Nnm3qWh/kRz9hsSPHCJOvIUC543c/Heh+Ptes6hVnLMBLuSAaGIPtPPtkV62We
+ CZ88Wu5ZKq/rm7sRP1nyM6daoKZlPT2f9CxIh7JRjD3jQCJ/9pHU3XLi8Frw3CVupXNh
+ N7xw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1709660296; x=1710265096;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=nMzX1qCC7CA7Yhdicp3jQ6NrSIOTgeZwF4cVF66MSEg=;
+ b=e2Q+UX955uMpo9QzrmN4wg8DsfR6F3XBJ0oqfAsNPI6MMvUuOHhmXlxrcDiTCwhQ9T
+ crdVosCwU+AipDDEnH4gQ82l4NyXuW/H2BT1pM+GF1vQ0sFdtueBtsGBY44s5n1q51Md
+ aZHnwmRJ8cYT/7Lngxee+vhw/mi2LCdMCtuOISJSWIycv36V4xCAJplAIl8FPirg/NaX
+ V61I+Q53Lp2JmpmWCMH8pT8XhoSRFMwHiW+CfvlW72F5DF8siw1vs+mZUgXcxwhXhlJ+
+ 0fQvC4Rt6wK/kwTcQNUKIU5TWazC3EDdxx0fPHMOFKtMflwHD9pZk2y55OFSVJvj0bxr
+ 1KPQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXO3f+iAbcBgvbcoa6ba/WHm386qPsuZq9Ojr1j1Z4I9r1UqyLswMa+teEEjb6v1tpapPbqm/96m5X2jRxs/GUv315GUQ==
+X-Gm-Message-State: AOJu0YyujfNUpOJPtAJvbkLoGl61uw1L1zIG7Gut8l8KIGMX47JuzDWb
+ EfsarjWI4JeQ8vYdGUnY2k4RJhDasvC0f2mLqjI+8Z8Qx2GsuLDEw+MHnSiyV2M=
+X-Google-Smtp-Source: AGHT+IGnCeV6A+l1nyamWX4+nJbmZ/E03yaXB9kgH69fxRoHSPgKkFeYxq//SOE8lcR+I/9c9wKEIw==
+X-Received: by 2002:a05:600c:1d03:b0:412:c7b2:5636 with SMTP id
+ l3-20020a05600c1d0300b00412c7b25636mr9883489wms.23.1709660295933; 
+ Tue, 05 Mar 2024 09:38:15 -0800 (PST)
+Received: from lion.caleb.rex.connolly.tech (host-92-17-96-232.as13285.net.
+ [92.17.96.232]) by smtp.gmail.com with ESMTPSA id
+ x3-20020a5d6503000000b0033e206a0a7asm12234094wru.26.2024.03.05.09.38.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 05 Mar 2024 09:38:15 -0800 (PST)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+To: neil.armstrong@linaro.org,
+	Sumit Garg <sumit.garg@linaro.org>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de,
+ trini@konsulko.com
+Subject: Re: [PATCH] qcom_defconfig: Enable ethernet and I2C support
+Date: Tue,  5 Mar 2024 17:38:08 +0000
+Message-ID: <170966028233.1772862.7304177146581558737.b4-ty@linaro.org>
+X-Mailer: git-send-email 2.44.0
+In-Reply-To: <20240219084144.2881155-1-sumit.garg@linaro.org>
+References: <20240219084144.2881155-1-sumit.garg@linaro.org>
 MIME-Version: 1.0
-User-Agent: Betterbird (Windows)
-Subject: Re: [PATCH 1/2] arm: mach-k3: am625: copy bootindex to OCRAM for main
- domain SPL
-To: Bryan Brattlof <bb@ti.com>
-CC: Wadim Egorov <w.egorov@phytec.de>, <u-boot@lists.denx.de>, <nm@ti.com>,
- <upstream@lists.phytec.de>
-References: <20240226133006.3279993-1-w.egorov@phytec.de>
- <20240226133006.3279993-2-w.egorov@phytec.de>
- <eeda9c00-d7c6-444b-ba77-f70b2f19eb2a@ti.com>
- <20240304202717.7ruiozbuzy4bv5iz@bryanbrattlof.com>
- <2428cd68-f69f-4915-bd94-f7b6bb84152c@ti.com>
- <20240305173457.ir564jlw3euux54n@bryanbrattlof.com>
-Content-Language: en-US
-From: "Raghavendra, Vignesh" <vigneshr@ti.com>
-In-Reply-To: <20240305173457.ir564jlw3euux54n@bryanbrattlof.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,129 +97,23 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-
-On 3/5/2024 11:04 PM, Bryan Brattlof wrote:
-> On March  5, 2024 thus sayeth Vignesh Raghavendra:
->>
->> On 05/03/24 01:57, Bryan Brattlof wrote:
->>> Hey Vignesh!
->>>
->>> On March  4, 2024 thus sayeth Vignesh Raghavendra:
->>>> Hi Wadim,
->>>>
->>>> On 26/02/24 19:00, Wadim Egorov wrote:
->>>>> Texas Instruments has begun enabling security settings on the SoCs it
->>>>> produces to instruct ROM and TIFS to begin protecting the Security
->>>>> Management Subsystem (SMS) from other binaries we load into the chip by
->>>>> default.
->>>>>
->>>>> One way ROM and TIFS do this is by enabling firewalls to protect the
->>>>> OCSRAM and HSM RAM regions they're using during bootup.
->>>>>
->>>>> The HSM RAM the wakeup SPL is in is firewalled by TIFS to protect
->>>>> itself from the main domain applications. This means the 'bootindex'
->>>>> value in HSM RAM, left by ROM to indicate if we're using the primary
->>>>> or secondary boot-method, must be moved to OCSRAM (that TIFS has open
->>>>> for us) before we make the jump to the main domain so the main domain's
->>>>> bootloaders can keep access to this information.
->>>>>
->>>>> Based on commit
->>>>>   b672e8581070 ("arm: mach-k3: copy bootindex to OCRAM for main domain SPL")
->>>>>
->>>> FYI, this is mostly a problem in non SPL flow (TI prosperity SBL for
->>>> example) where HSM RAM would be used by HSM firmware. This should be a
->>>> issue in R5 SPL flow.  Do you see any issues today? If so, whats the
->>>> TIFS firmware being used?
->>>>
->>>>> Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
->>>>> ---
->>>>>  arch/arm/mach-k3/Kconfig                      |  3 ++-
->>>>>  arch/arm/mach-k3/am625_init.c                 | 15 +++++++++++++--
->>>>>  arch/arm/mach-k3/include/mach/am62_hardware.h | 15 +++++++++++++++
->>>>>  3 files changed, 30 insertions(+), 3 deletions(-)
->>>>>
->>>>> diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
->>>>> index 03898424c9..f5d06593f7 100644
->>>>> --- a/arch/arm/mach-k3/Kconfig
->>>>> +++ b/arch/arm/mach-k3/Kconfig
->>>>> @@ -75,7 +75,8 @@ config SYS_K3_BOOT_PARAM_TABLE_INDEX
->>>>>  	default 0x41cffbfc if SOC_K3_J721E
->>>>>  	default 0x41cfdbfc if SOC_K3_J721S2
->>>>>  	default 0x701bebfc if SOC_K3_AM642
->>>>> -	default 0x43c3f290 if SOC_K3_AM625
->>>>> +	default 0x43c3f290 if SOC_K3_AM625 && CPU_V7R
->>>>> +	default 0x7000f290 if SOC_K3_AM625 && ARM64
->>>>>  	default 0x43c3f290 if SOC_K3_AM62A7 && CPU_V7R
->>>>>  	default 0x7000f290 if SOC_K3_AM62A7 && ARM64
->>>>>  	help
->>>>> diff --git a/arch/arm/mach-k3/am625_init.c b/arch/arm/mach-k3/am625_init.c
->>>>> index 6c96e88114..67cf63b103 100644
->>>>> --- a/arch/arm/mach-k3/am625_init.c
->>>>> +++ b/arch/arm/mach-k3/am625_init.c
->>>>> @@ -35,8 +35,10 @@ static struct rom_extended_boot_data bootdata __section(".data");
->>>>>  static void store_boot_info_from_rom(void)
->>>>>  {
->>>>>  	bootindex = *(u32 *)(CONFIG_SYS_K3_BOOT_PARAM_TABLE_INDEX);
->>>>> -	memcpy(&bootdata, (uintptr_t *)ROM_EXTENDED_BOOT_DATA_INFO,
->>>>> -	       sizeof(struct rom_extended_boot_data));
->>>>> +	if (IS_ENABLED(CONFIG_CPU_V7R)) {
->>>>> +		memcpy(&bootdata, (uintptr_t *)ROM_EXTENDED_BOOT_DATA_INFO,
->>>>> +		       sizeof(struct rom_extended_boot_data));
->>>>> +	}
->>>>>  }
->>>>>  
->>>>>  static void ctrl_mmr_unlock(void)
->>>>> @@ -175,6 +177,15 @@ void board_init_f(ulong dummy)
->>>>>  		k3_sysfw_loader(true, NULL, NULL);
->>>>>  	}
->>>>>  
->>>>> +#if defined(CONFIG_CPU_V7R)
->>>>> +	/*
->>>>> +	 * Relocate boot information to OCRAM (after TIFS has opend this
->>>>> +	 * region for us) so the next bootloader stages can keep access to
->>>>> +	 * primary vs backup bootmodes.
->>>>> +	 */
->>>>> +	writel(bootindex, K3_BOOT_PARAM_TABLE_INDEX_OCRAM);
->>>>> +#endif
->>>>> +
->>>>>  	/*
->>>>>  	 * Force probe of clk_k3 driver here to ensure basic default clock
->>>>>  	 * configuration is always done.
->>>>> diff --git a/arch/arm/mach-k3/include/mach/am62_hardware.h b/arch/arm/mach-k3/include/mach/am62_hardware.h
->>>>> index 54380f36e1..9f504f4642 100644
->>>>> --- a/arch/arm/mach-k3/include/mach/am62_hardware.h
->>>>> +++ b/arch/arm/mach-k3/include/mach/am62_hardware.h
->>>>> @@ -76,8 +76,23 @@
->>>>>  #define CTRLMMR_MCU_RST_CTRL			(MCU_CTRL_MMR0_BASE + 0x18170)
->>>>>  
->>>>>  #define ROM_EXTENDED_BOOT_DATA_INFO		0x43c3f1e0
->>>>> +#define K3_BOOT_PARAM_TABLE_INDEX_OCRAM         0x7000F290
->>>>>  
->>>>> +/*
->>>>> + * During the boot process ROM will kill anything that writes to OCSRAM.
->>>> R5 ROM is long gone when R5 SPL starts, how would it kill anything?
->>> Looks like this was based on my patch long ago for the AM62Ax family. 
->>> From what little I remember about this was ROM is leaving behind a 
->>> firewall that we need TIFS's help to bring down for us. So I just
->>> blamed ROM 😉
->> Thats true. ROM does bare minimum and so wont open up firewall around
->> main SRAM. but TIFS does, so you should be able to access this region
->> post k3_sysfw_loader().
->>
->>> IDK if this is an issue for the AM62x family though.
->>>
->> It might be if one tries to "select" DT using EEPROM detect before SYSFW
->> is up. But that's not the case any more right?
-> Yep we still need to figure out a plan for multiple DDR configs or see 
-> if we can move the DDR init to later in the boot as that is the only 
-> thing left that still needs the board detection this early on.
+On Mon, 19 Feb 2024 14:11:44 +0530, Sumit Garg wrote:
+> QCS404 supports Synopsys Designware Ethernet QOS IP and we already have
+> the corresponding glue layer present upstream as:
+> drivers/net/dwc_eth_qos_qcom.c. So enable corresponding support.
 > 
-> There is a little race condition here as TIFS can respond to some 
-> messages before it's finished its init. IDK if we can send it anything 
-> to act like a fence and stall us until the firewalls are down though.
+> Along with that it is possible for Qualcomm platforms to retrieve MAC
+> address from I2C eeprom present on board. So enable corresponding
+> support as well.
+> 
+> [...]
 
-Firewall configurations should be done before TIFS posts boot
-notification message.
+Applied, thanks!
 
-Regards
-Vignesh
+[1/1] qcom_defconfig: Enable ethernet and I2C support
+      commit: b307c5d45dcd1e086a3b28affd1a1006f35334b4
+
+Best regards,
+-- 
+// Caleb (they/them)
+
