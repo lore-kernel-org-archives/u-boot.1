@@ -4,78 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4ABD3C54798
-	for <u-boot@archiver.kernel.org>; Tue,  5 Mar 2024 18:19:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38B31C54798
+	for <u-boot@archiver.kernel.org>; Tue,  5 Mar 2024 18:39:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 92ADD880D8;
-	Tue,  5 Mar 2024 19:19:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 51DA088084;
+	Tue,  5 Mar 2024 19:39:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PYsC15vw";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="B3WeZz61";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 393AA880D6; Tue,  5 Mar 2024 19:19:17 +0100 (CET)
-Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
- [IPv6:2607:f8b0:4864:20::52c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5CBF188084; Tue,  5 Mar 2024 19:38:59 +0100 (CET)
+Received: from sin.source.kernel.org (sin.source.kernel.org
+ [IPv6:2604:1380:40e1:4800::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1277B86F6E
- for <u-boot@lists.denx.de>; Tue,  5 Mar 2024 19:19:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D8A2688060
+ for <u-boot@lists.denx.de>; Tue,  5 Mar 2024 19:38:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pg1-x52c.google.com with SMTP id
- 41be03b00d2f7-5a0dc313058so653790a12.0
- for <u-boot@lists.denx.de>; Tue, 05 Mar 2024 10:19:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1709662752; x=1710267552; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=n+TMwIreO9Vz/6gwcQ6VWsiBS3SssxZ2i8BJF/kTTMg=;
- b=PYsC15vwL1BDtQDCikwk47kBLPpjKWaUjOvBTbslDrfi3S0sZya5zuR4cjSyGVKe4E
- frM81cDBSSVVnXEyI1f+dpllo7lPTbunpr8DRvUFrPVkKUINudK4inZKM+te58pZJl1l
- XQq6xzXCSooXpaWdJOTvVM6gZ15VdQA8ETKCqvMNTDsLfc/d99CQCxOvlJfCrhCNa1e0
- eZUhLr+ADOza5DK0eX/GsNnaKxEkoOrIUbrwqbII8Fc3w7me9jfughs7Wm7C3Y0IOujw
- itkVVLplvWzTpeVdUOSLAR0Br3k1lgVVoOdMFkTHSVBo8pmLD6Rutmoy0pjVyBMRTr/2
- YFdA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709662752; x=1710267552;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=n+TMwIreO9Vz/6gwcQ6VWsiBS3SssxZ2i8BJF/kTTMg=;
- b=XOPo8epRdo0o9sPGDCYhPjvZVJTxp/zWVzwKiH0/xlUNGtOqzX7hJEIHCWrZuAimNU
- XkAvfsWAv+AAC0Gp7vHfP04E8dqg4orzGQ/d7Arfd50uvaSYGWo8lBHt/nvydp6JJn5a
- qOp2/hjaiM/D9Zb/CwFMg9T0tZbDFFcgOHqcOx0xUfacC1cxWTuK7bAiMH+TPa+8bIOM
- LVU685heVTDNgWAEOYU+RJC9RVl7gFH0m3fzg2z/RyKPvKxp8rMZusBBm0CG54oW3Pc3
- wnuwknWX0DPBl2Oodqnbxd70RNQlKVA4EjbojsrRBVcy5jstmDyNG+tlXgDXm/nh9Ucg
- QsSg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV84PiI5QnF3M5l+Y7DuwfRaoCSkSHIgEU7RUfTWLDLoQnlpbe3Cj792L0dnKVuK9bgYYNk8Gy4pKwZLEEUG+jSwd5+nA==
-X-Gm-Message-State: AOJu0YzbLeyBlLbxFQgoFgoNyMozj+VlX83jRb2OpQC/6USATcr5ccLz
- iEKNDZMYtthjfiaH2qfk32XL1tlt6ym20Em7q4GIvS6Rjc+18xL/FJz1tSjz3bhUYg/CuOEHSuX
- yqyRPmbuvxz1Zt8XRozzuuNpR+6U=
-X-Google-Smtp-Source: AGHT+IHz+Czjri14CsPq8ksaAaB2bCMEQl720v7oKxIZ9mnQJRYEZCf/Gg9/A91SHtpIUiEhdlILqLJCM0J23FyDmW4=
-X-Received: by 2002:a17:90a:d504:b0:299:25ad:7c98 with SMTP id
- t4-20020a17090ad50400b0029925ad7c98mr1235801pju.2.1709662752382; Tue, 05 Mar
- 2024 10:19:12 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=conor@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id A3EBDCE1D8B;
+ Tue,  5 Mar 2024 18:38:54 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D1F0BC433F1;
+ Tue,  5 Mar 2024 18:38:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1709663933;
+ bh=yNiW/2cIe8JPfL1OsQURF8o5Jz2Vk8q0iSDhCZ8Qb6k=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=B3WeZz61YX/pJMVKMlIS8G7AFzmG60MTFl/oCW59r+1YTgkzEO+BYFBXKAz2kQL7+
+ PIk8KLXS2yzaePAndEWb0S0UYB9l+B1Y/7WM8CditjB8l2THV5iMK39NsHkRKbxDH5
+ gQAvgIYxJr2uzp10i5KoNQvKLdd48CG9lfCXL4/vsGQAyDwq9zti8OSXN9k4wbB5G6
+ dbfmfkOCBu1Dz6P8qO+DhSF2J5y/SBF80+egt7oSVdV8EuSeEmsVzmafMyBO4Q/tle
+ d3OZxM0UyNuYhnurkNVyHbnqNxeB9ipNI7ARGsmumnSX2odCjkksv74qNdSvpo1qEa
+ xC+2Qn5+Z9EXA==
+Date: Tue, 5 Mar 2024 18:38:49 +0000
+From: Conor Dooley <conor@kernel.org>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Conor Dooley <conor.dooley@microchip.com>,
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Chanho Park <chanho61.park@samsung.com>,
+ Bin Meng <bmeng.cn@gmail.com>, palmer@dabbelt.com, u-boot@lists.denx.de
+Subject: Re: [PATCH v1] riscv: cpu: improve multi-letter extension detection
+ in supports_extension()
+Message-ID: <20240305-squire-musty-bbd192df3780@spud>
+References: <20240304232835.3076533-2-conor@kernel.org>
+ <da2c1e6b-95c6-4326-a353-3ed32c524b40@gmx.de>
+ <20240305-expulsion-pastrami-0a1ca34d96d7@wendy>
+ <41a27290-5b44-4e8a-8718-8bbe945fd456@canonical.com>
 MIME-Version: 1.0
-References: <20240304-pcl-070-patches-v2-0-c534960c4b8b@phytec.de>
- <20240304-pcl-070-patches-v2-2-c534960c4b8b@phytec.de>
-In-Reply-To: <20240304-pcl-070-patches-v2-2-c534960c4b8b@phytec.de>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 5 Mar 2024 15:19:01 -0300
-Message-ID: <CAOMZO5D5iLjHfqevj6YmBQyiDxkF3M-UX-e0Eev7pV6X6DDL+A@mail.gmail.com>
-Subject: Re: [PATCH v2 2/2] board: phycore_imx8mp: Use 2GHz RAM timings for
- PCL-070 from pcb_rev 1
-To: Benjamin Hahn <B.Hahn@phytec.de>
-Cc: Tom Rini <trini@konsulko.com>, Teresa Remmet <t.remmet@phytec.de>,
- u-boot@lists.denx.de, upstream@lists.phytec.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="xBcaIWmWNf3TV4gk"
+Content-Disposition: inline
+In-Reply-To: <41a27290-5b44-4e8a-8718-8bbe945fd456@canonical.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,14 +76,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Mar 4, 2024 at 1:04=E2=80=AFPM Benjamin Hahn <B.Hahn@phytec.de> wro=
-te:
 
-> -       ret =3D phytec_get_rev(NULL);
-> -       if (ret >=3D 3 && ret !=3D PHYTEC_EEPROM_INVAL) {
-> +       u8 rev =3D phytec_get_rev(NULL);
-> +       u8 somtyp =3D phytec_get_som_type(NULL);
+--xBcaIWmWNf3TV4gk
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Nitpick: Better to spell out 'somtype' or 'som_type' to make it clearer.
+On Tue, Mar 05, 2024 at 09:10:59AM +0100, Heinrich Schuchardt wrote:
+> On 3/5/24 08:54, Conor Dooley wrote:
+> > On Tue, Mar 05, 2024 at 08:34:20AM +0100, Heinrich Schuchardt wrote:
+> > > On 3/5/24 00:28, Conor Dooley wrote:
+> > > > From: Conor Dooley <conor.dooley@microchip.com>
+> > > According to
+> > > https://github.com/riscv/riscv-isa-manual/blob/main/src/naming.adoc t=
+he
+> > > ISA string is case insensitive. Why can we assume here that it is low=
+er
+> > > case?
+> >=20
+> > The binding does not allow upper-case.
+>=20
+> Ok. That is in Linux'
+> Documentation/devicetree/bindings/riscv/extensions.yaml.
 
-"typ" usually means 'typical'.
+Right. I should've linked to that, sorry.
+
+--xBcaIWmWNf3TV4gk
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZedmuQAKCRB4tDGHoIJi
+0jE0AQCq0Nmgl/KQg7eaWJkXZrAlBHKzqFAMvP8rmPD8jaTfJAD/dMcv1DSYSnPV
+Y7XYK3EW04zKmJWS8kJnmh6mycLNYAk=
+=ppiU
+-----END PGP SIGNATURE-----
+
+--xBcaIWmWNf3TV4gk--
