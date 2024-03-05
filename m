@@ -4,61 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC6D6C54798
-	for <u-boot@archiver.kernel.org>; Tue,  5 Mar 2024 12:50:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8821BC54798
+	for <u-boot@archiver.kernel.org>; Tue,  5 Mar 2024 13:03:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4B4C487D1E;
-	Tue,  5 Mar 2024 13:50:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=walle.cc
+	by phobos.denx.de (Postfix) with ESMTP id CD5DF88050;
+	Tue,  5 Mar 2024 14:03:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=walle.cc header.i=@walle.cc header.b="sSTnYFCC";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IpM2ibtB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AFBD48803A; Tue,  5 Mar 2024 13:50:51 +0100 (CET)
-Received: from mail.3ffe.de (0001.3ffe.de [IPv6:2a01:4f8:c0c:9d57::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C2DC388044; Tue,  5 Mar 2024 13:51:45 +0100 (CET)
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [IPv6:2a00:1450:4864:20::42e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BBCEB87D1E
- for <u-boot@lists.denx.de>; Tue,  5 Mar 2024 13:50:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=walle.cc
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=michael@walle.cc
-Received: from localhost (unknown [213.135.10.150])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (prime256v1) server-signature RSA-PSS (2048 bits)
- server-digest SHA256) (No client certificate requested)
- by mail.3ffe.de (Postfix) with ESMTPSA id 408964C9;
- Tue,  5 Mar 2024 13:50:48 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=walle.cc;
- s=mail2022082101; t=1709643048;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:content-type:content-type:in-reply-to:in-reply-to:
- references:references; bh=K7Zi9j4RUFIpw8pclYN0KUfDu7fehM7riOPQ2v/X+oY=;
- b=sSTnYFCCLYdsfQooZbT+TR5kcnI6kbqFWYC1BI8EVji4xpxew8unnNC1WI4as7b0G3rv1Z
- 6+nxDMqq6b08MK5wqLB3zNLuxoO2qmFRs5zoiQJaU6L76WchTYOSJmavsua63o9JcMSE8p
- TaHdvREtPRMRPZ+6JSLu78R/R8IQ4ok3ZNrTFQSUlzbblmL2pBOp8+xmGsUd6F4TkhwZJB
- DFkSp35usQkp2dXlMM8Ad+A32gkJczMOE5yubbWMmt3aDLKsiFxSiBUIZVV1khfN7SFpaA
- iKskew3l+8boLHOVr6oWsxfOefQja+mKHfVxQMNA9jzM7PYmOtJBoKXt160RQg==
-Content-Type: multipart/signed;
- boundary=73fabe8cb51ff1a0b96c93fc6d9929403e76050b7cb11c5f4ab41b4cb237;
- micalg=pgp-sha256; protocol="application/pgp-signature"
-Date: Tue, 05 Mar 2024 13:50:37 +0100
-Message-Id: <CZLTVKVR3AG1.BZIQQU2PYSU6@walle.cc>
-Cc: "Hai Pham" <hai.pham.ud@renesas.com>, "Heinrich Schuchardt"
- <xypron.glpk@gmx.de>, "Jagan Teki" <jagan@amarulasolutions.com>, "Johann
- Neuhauser" <jneuhauser@dh-electronics.com>, "Simon Glass"
- <sjg@chromium.org>, "Takahiro Kuwano" <Takahiro.Kuwano@infineon.com>,
- "Venkatesh Yadav Abbarapu" <venkatesh.abbarapu@amd.com>, "Vignesh R"
- <vigneshr@ti.com>, <linux-mtd@lists.infradead.org>
-From: "Michael Walle" <michael@walle.cc>
-To: "Marek Vasut" <marex@denx.de>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH] mtd: spi-nor: Clear Winbond SR3 WPS bit on boot
-X-Mailer: aerc 0.16.0
-References: <20240304161607.82759-1-marex@denx.de>
- <CZLOVK212G8L.2ISEL1IIWU1YE@walle.cc>
- <7c0e2496-4338-497d-96cf-41d75e2fc52b@denx.de>
-In-Reply-To: <7c0e2496-4338-497d-96cf-41d75e2fc52b@denx.de>
+ by phobos.denx.de (Postfix) with ESMTPS id DA3518803A
+ for <u-boot@lists.denx.de>; Tue,  5 Mar 2024 13:51:41 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-33d90dfe73cso3006983f8f.0
+ for <u-boot@lists.denx.de>; Tue, 05 Mar 2024 04:51:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1709643101; x=1710247901; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=x91VJBZqjXRLt3HCTujHvFpj+vG9EQ3dOOSIkLwi6Rw=;
+ b=IpM2ibtB0Yo9xgn31H1RMjA4h5MZPpkEW7pXl3bvqkz1ACDTsPDyBJrIEO8SSBmn3s
+ l2D5Ty1Xmp/JLXLxJXEW9PdiW11Evbk54ULq9L2QYdACgmkecl05aCLc0i2IeR8xnRDV
+ hUttReHEBGZOIL192bgbtew/jqT38bz5tlRjCsFK69iRKgc0GDQuczxXc8ADpLAqoOCN
+ Pyj+Txu35rYK9Vd7doXU6K++Eusi8Rw0LeBgRu2IZC59XdEDwMlQ0aSkP1fKqyTuT0PR
+ KP9SMcSzXXStD88WGhgnVEQ3hgxYqrcEywFVyDR7NIOc5AofSQRtDZ2zDg+SHjnAKRDT
+ aiTA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1709643101; x=1710247901;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=x91VJBZqjXRLt3HCTujHvFpj+vG9EQ3dOOSIkLwi6Rw=;
+ b=OK3FBt3QHBTq8H817dQWesNCWJSCC1xArkNfev402dEhhBerxyIfqr2IMDeulJk72e
+ nVXNoNQKGk/mCufRwnyq/J7i5tlX1DIf+oqYP1XBSYNC/CH0VK+FDMNbiu+vhvPUEyZI
+ RWUWbkqPyn5SKlTDDlZM9sj9RasLGyy/nFcIBBjDgjx9T0AnPyS3fY+Peb4O4LK4V9xg
+ qYiLDvsUkDQz2OAh9EVDBZM5xcZX3Q+z8kQQs6IB5OuCpz6kjHNiZ0z20LWqxL8R3wPn
+ RljxG6bYGij9+65C2Zx/U/C89rml7BEawzLBVODnT5wJdeWtdvbFRe/MmuTwaKfTWeW9
+ qhsA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXYhRDEnJ1e/Ph51UEYzDm72iE1jf4qQqzWPJQVjVuVSW33izVk3YB6MZO1XcllQMLo8FZW2dRoKeMOBfYCyM/BbFs6Xg==
+X-Gm-Message-State: AOJu0Ywv5MYPKdultk6RrPXqj8yFhQRiREQxG1YM6708+GNsKn24HQjV
+ DUcinXWhcLD+JVQUwyPR7Bt1XVy+ys0vlodiKNPPmAePKlyYr0cUcnm8k8UDrIw=
+X-Google-Smtp-Source: AGHT+IHnT6DPSQterrn8gdAzpmDRRKm3ffEfvNCc0pY3+OmjAlf4/PwRTEQcSOEXen96G54bD8IYvA==
+X-Received: by 2002:a05:6000:22e:b0:33d:8ebf:4f6 with SMTP id
+ l14-20020a056000022e00b0033d8ebf04f6mr1957148wrz.20.1709643101208; 
+ Tue, 05 Mar 2024 04:51:41 -0800 (PST)
+Received: from [192.168.1.78] (host-92-17-96-232.as13285.net. [92.17.96.232])
+ by smtp.gmail.com with ESMTPSA id
+ ck4-20020a5d5e84000000b0033e2b9f647asm9147469wrb.31.2024.03.05.04.51.40
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 05 Mar 2024 04:51:40 -0800 (PST)
+Message-ID: <3e17d3e4-e2e1-45ff-9d62-44bf5a8991df@linaro.org>
+Date: Tue, 5 Mar 2024 12:51:39 +0000
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFC 26/26] dts: support building all dtb files for a
+ specific vendor
+Content-Language: en-US
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, Sam Protsenko
+ <semen.protsenko@linaro.org>, Matthias Brugger <mbrugger@suse.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Thierry Reding <treding@nvidia.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Ryder Lee <ryder.lee@mediatek.com>, Chunfeng Yun
+ <chunfeng.yun@mediatek.com>, Eugen Hristev <eugen.hristev@collabora.com>,
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Ryan Chen <ryan_chen@aspeedtech.com>,
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
+ Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>,
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
+ Dai Okamura <okamura.dai@socionext.com>,
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>, u-boot@lists.denx.de,
+ u-boot-amlogic@groups.io, uboot-stm32@st-md-mailman.stormreply.com,
+ uboot-snps-arc@synopsys.com
+References: <20240304-b4-upstream-dt-headers-v1-0-b7ff41925f92@linaro.org>
+ <20240304-b4-upstream-dt-headers-v1-26-b7ff41925f92@linaro.org>
+ <CAFA6WYM6sTEdw+VphKidUqjQW61eW8ZVq+oO35CJVM=5wPoniA@mail.gmail.com>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <CAFA6WYM6sTEdw+VphKidUqjQW61eW8ZVq+oO35CJVM=5wPoniA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Tue, 05 Mar 2024 14:03:39 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,112 +124,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---73fabe8cb51ff1a0b96c93fc6d9929403e76050b7cb11c5f4ab41b4cb237
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
 
-Hi Marek,
 
-On Tue Mar 5, 2024 at 1:31 PM CET, Marek Vasut wrote:
-> On 3/5/24 9:55 AM, Michael Walle wrote:
-> > On Mon Mar 4, 2024 at 5:16 PM CET, Marek Vasut wrote:
-> >> Some Winbond SPI NORs have special SR3 register which is
-> >> used among other things to control whether non-standard
-> >> "Individual Block/Sector Write Protection" (WPS bit)
-> >> locking scheme is activated. This non-standard locking
-> >> scheme is not supported by either U-Boot or Linux SPI
-> >> NOR stack so make sure it is disabled, otherwise the
-> >> SPI NOR may appear locked for no obvious reason.
-> >=20
-> > I don't think it is a good idea to just disable the WPS bit.
-> > Usually, that bit is non-volatile and the default is not set.
->
-> Yes, that's right, the bit is non-volatile and should not be set unless=
-=20
-> the MTD stack can handle it correctly. Currently, neither U-Boot nor=20
-> Linux does handle the bit at all, instead both attempt to use the=20
-> standard SPI NOR locking scheme which is also implemented by this SPI=20
-> NOR model and they both fail to unlock the SPI NOR that way.
->
-> Note that the SR3 WPS bit only switches between two different locking=20
-> schemes (unset =3D standard SPI NOR locking scheme, set =3D custom winbon=
-d=20
-> locking scheme), setting SR3 WPS does not immediately imply the SPI NOR=
-=20
-> is locked, rather the opposite. Out of manufacturing, the SPI NOR is=20
-> unlocked in either locking scheme. Depending on the SR3 WPS bit state,=20
-> different commands are used to lock and unlock the SPI NOR.
->
-> I recently ran across a device which had the SR3 WPS bit incorrectly set=
-=20
-> out of manufacturing of that device (i.e. before it was populated on a=20
-> board at board manufacturer) and the device was locked using the custom=
-=20
-> locking scheme. I was not able to unlock or use that device because both=
-=20
-> U-Boot and Linux tried to use the standard scheme for that purpose.
+On 05/03/2024 12:35, Sumit Garg wrote:
+> Hi Caleb,
+> 
+> On Mon, 4 Mar 2024 at 22:22, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>>
+>> This adjusts OF_UPSTREAM to behave more like the kernel by allowing for
+>> all the devicetree files for a given vendor to be compiled. This is
+>> useful for Qualcomm in particular as most boards are supported by a
+>> single U-Boot build just provided with a different DT.
+>>
+>> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+>> ---
+>>  dts/Kconfig          | 24 ++++++++++++++++++++++++
+>>  scripts/Makefile.dts | 17 ++++++++++++++++-
+>>  2 files changed, 40 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/dts/Kconfig b/dts/Kconfig
+>> index b9b6367154ef..67d9dc489856 100644
+>> --- a/dts/Kconfig
+>> +++ b/dts/Kconfig
+>> @@ -100,8 +100,32 @@ config OF_UPSTREAM
+>>           However, newer boards whose devicetree source files haven't landed in
+>>           the dts/upstream subtree, they can override this option to have the
+>>           DT build from existing U-Boot tree location instead.
+>>
+>> +config OF_UPSTREAM_BUILD_VENDOR
+>> +       bool "Build all devicetree files for a particular vendor"
+>> +       depends on OF_UPSTREAM
+>> +       help
+>> +         Enable building all devicetree files for a particular vendor. This
+> 
+> Do we really want to build all the DTBs even if many of those aren't
+> supported by U-Boot at all? I would have rather added Makefile targets
+> for boards which really supports a single defconfig eg.
+> qcom_defconfig.
 
-Still, I don't think it makes any sense, to disable that bit for all
-winbond flashes just because there was one vendor which set it the
-wrong way - or the board manufacturer didn't test it and programmed
-the flash correctly.
+Yes, for the 4 Qualcomm SoCs currently supported there are 51 dts
+targets that ought to be able to run U-Boot to some extent
 
-> Clearing this SR3 WPS bit fixes that problem, both in U-Boot and in=20
-> Linux, since Linux that is booted afterward then gets a device that has=
-=20
-> locking scheme configured in a way that Linux expects and can operate.
->
-> Better yet, if some old LTS version of the Linux kernel is in use, it=20
-> will also work correctly, because this patch will configure the SPI NOR=
-=20
-> locking scheme to what Linux expects it to be, before the SPI NOR is=20
-> handed over to that old kernel.
+$ ls -l dts/upstream/src/arm6/qcom/{msm8916,sdm845,msm8996,qcs404}*.dts\
+	| wc -l
+51
 
-Agreed, but it should *not* be done automatically and nor
-unconditionally. Please don't just overwrite any locking bits just
-because there is one flash which have it set.
+What do you mean by a "makefile target"? Like copying
+arch/arm64/boot/dts/qcom/Makefile from Linux? I guess my concern here
+would be keeping it in sync, and introducing additional busywork when
+porting.
 
-This should be either be a board level option or maybe expose some
-command line interface to let the user change the settings.
+We do have a lot of Qualcomm DTS files, it takes maybe 10 seconds to
+compile them all on my machine, but that's only once. With incremental
+builds this becomes largely irrelevant.
+> 
+> -Sumit
+> 
+>> +         is useful for generic U-Boot configurations where many boards can
+>> +         be supported with a single binary.
+>> +
+>> +         This is only available for platforms using upstream devicetree.
+>> +
+>> +config OF_UPSTREAM_VENDOR
+>> +       string "Vendor to build all upstream devicetree files for"
+>> +       depends on OF_UPSTREAM_BUILD_VENDOR
+>> +       default "qcom" if ARCH_SNAPDRAGON
+>> +       default "rockchip" if ARCH_ROCKCHIP
+>> +       default "amlogic" if ARCH_MESON
+>> +       default "allwinner" if ARCH_SUNXI
+>> +       default "mediatek" if ARCH_MEDIATEK
+>> +       default "marvell" if ARCH_MVEBU
+>> +       default "xilinx" if ARCH_VERSAL || ARCH_ZYNQ
+>> +       default "nvidia" if ARCH_TEGRA
+>> +       help
+>> +         Select the vendor to build all devicetree files for.
+>> +
+>>  choice
+>>         prompt "Provider of DTB for DT control"
+>>         depends on OF_CONTROL
+>>
+>> diff --git a/scripts/Makefile.dts b/scripts/Makefile.dts
+>> index 5e2429c6170c..8005527f3df7 100644
+>> --- a/scripts/Makefile.dts
+>> +++ b/scripts/Makefile.dts
+>> @@ -1,3 +1,18 @@
+>>  # SPDX-License-Identifier: GPL-2.0+
+>>
+>> -dtb-y += $(patsubst %,%.dtb,$(subst ",,$(CONFIG_DEFAULT_DEVICE_TREE) $(CONFIG_OF_LIST) $(CONFIG_SPL_OF_LIST)))
+>> +dtb-y += $(patsubst %,%.dtb,\
+>> +       $(subst ",,$(CONFIG_DEFAULT_DEVICE_TREE) $(CONFIG_OF_LIST) $(CONFIG_SPL_OF_LIST)))
+>> +
+>> +ifeq ($(CONFIG_OF_UPSTREAM_BUILD_VENDOR),y)
+>> +ifeq ($(CONFIG_ARM64),y)
+>> +dt_dir := $(srctree)/dts/upstream/src/arm64
+>> +else
+>> +dt_dir := $(srctree)/dts/upstream/src/$(ARCH)
+>> +endif
+>> +
+>> +dtb-vendor_dts := $(patsubst %.dts,%.dtb, \
+>> +       $(wildcard $(dt_dir)/$(subst ",,$(CONFIG_OF_UPSTREAM_VENDOR))/*.dts))
+>> +
+>> +dtb-y += $(subst $(dt_dir)/,,$(dtb-vendor_dts))
+>> +
+>> +endif
+>>
+>> --
+>> 2.44.0
+>>
 
-> > Thus,
-> > there is likely someone, probably the manufacturer of the board,
-> > who intentionally set this bit. Now, with this patch it will get
-> > disabled *unconditionally*, forever.
->
-> In my case, it is exactly the opposite, the SR3 WPS shouldn't have been=
-=20
-> set and the device should not have been locked, but it was and that=20
-> confused both U-Boot and Linux.
->
-> I would argue that if the board manufacturer intention was to lock the=20
-> SPI NOR, they would have had multiple better options at their disposal,=
-=20
-> and those options should have been aligned with the software support:
-> - nWP pin of the SPI NOR could be tied low to enable WRITE PROTECT
-> - OTP bits could have been programmed to enable permanent WRITE PROTECT
-> - standard SPI NOR locking scheme could have been used too
->
-> If they did set SR3 WPS and hoped that U-Boot or Linux would fail to=20
-> unlock the SPI NOR using standard locking scheme commands, that is I=20
-> think broken design.
-
-There might be software/OS which could handle that correctly. Also,
-if linux will ever learn to use the new locking scheme
-unconditionally, u-boot will always mess it up then.
-
--michael
-
---73fabe8cb51ff1a0b96c93fc6d9929403e76050b7cb11c5f4ab41b4cb237
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iIcEABYIAC8WIQQCnWSOYTtih6UXaxvNyh2jtWxG+wUCZecVHREcbWljaGFlbEB3
-YWxsZS5jYwAKCRDNyh2jtWxG+1iYAP0Ru2+p2V5fPaF/1iWKebKQR3FrQhOkeTAN
-ry9Z+n7ztAD8DwUnAEsIqbv5+tOP3Em4/OEpu0AjZmapOnbsiQDYbA8=
-=4D+N
------END PGP SIGNATURE-----
-
---73fabe8cb51ff1a0b96c93fc6d9929403e76050b7cb11c5f4ab41b4cb237--
+-- 
+// Caleb (they/them)
