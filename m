@@ -4,40 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7E62C54E41
-	for <u-boot@archiver.kernel.org>; Tue,  5 Mar 2024 11:15:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21DFEC54E41
+	for <u-boot@archiver.kernel.org>; Tue,  5 Mar 2024 12:31:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8230E87FDE;
-	Tue,  5 Mar 2024 12:15:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 820988802D;
+	Tue,  5 Mar 2024 13:31:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 3EDB487FE3; Tue,  5 Mar 2024 12:15:53 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id D8BC187FDA
- for <u-boot@lists.denx.de>; Tue,  5 Mar 2024 12:15:50 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A60611FB;
- Tue,  5 Mar 2024 03:16:26 -0800 (PST)
-Received: from donnerap.arm.com (donnerap.manchester.arm.com [10.32.100.28])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C39303F762;
- Tue,  5 Mar 2024 03:15:48 -0800 (PST)
-From: Andre Przywara <andre.przywara@arm.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>,
- Maksim Kiselev <bigunclemax@gmail.com>, Philippe Coval <rzr@users.sf.net>,
- Ludwig Kormann <ludwig.kormann@ict42.de>,
- Andrey Skvortsov <andrej.skvortzov@gmail.com>, linux-sunxi@lists.linux.dev
-Subject: Pull request: u-boot-sunxi/master for v2024.04
-Date: Tue,  5 Mar 2024 11:15:41 +0000
-Message-Id: <20240305111541.2369415-1-andre.przywara@arm.com>
-X-Mailer: git-send-email 2.25.1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1709641884;
+	bh=b5FUKla9Ox9RUd3EY5pDmOikcTElfOzG53xJPCh6f0U=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=YkimintoozEKKtz0Iz3ISTWSQPL7uLG7Gk7eyVPb74lbtemE/SPWv6jI4le5JNAD+
+	 cfsPSaDj9qvtHTk/9YeNgeni7VfJRqFYPKQagJfii0GjwyOOhPwKgjHRDc8KLEdr+z
+	 uJiZm3LPNo4dw9oFNNUc33AGbZJuFaJ1ndSWy4ouZY5DYFPK4jaa8MNCyNirbloj8Q
+	 pq7fcOCYjaeCmB3AZNkY1csY4BRYCqtFBuHH6rbstudpm+W4C9a4gvf0aM9pLC2QMz
+	 cZSUHeS7qSPHde/ZshU9o9jE+mauJDGeJUjVH6WgjXsbc8bKCwPVA928Yv9zZHqDgN
+	 KkshnUUN17GYQ==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 13BAA87FE3;
+ Tue,  5 Mar 2024 13:31:21 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1709641883;
+ bh=b5FUKla9Ox9RUd3EY5pDmOikcTElfOzG53xJPCh6f0U=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=G0rs+RuLgXR6sbTxJb6gydQzzjLnARJ0Tuyrb9Use7wveiH1Iwi6c457BVqZND96t
+ efld1bzsiKXvAUCjI3CodKj0lb5amw3n9O1hNqJmTazI34IpvKw8McNSCFe4giRuks
+ CG/u5MAlt3CP01MMdJxfMUHwJncqFeDQRu5St6S4uWa1qbloB08Ut1HjExAcYxL69p
+ xdN1OWrEAsAHJhYngNDb/m7plXJWkyYnhjE4xQkoJIdO509KLfe7kfQm5CfzDCzKUE
+ MQuhtok8iTzItBhWmtKgOw2G0OMQM5yzRmSE3uLm0tEnPd/Cjas5wmSzxRjcwu/fNl
+ NDtItPqoTZdYA==
+Message-ID: <7c0e2496-4338-497d-96cf-41d75e2fc52b@denx.de>
+Date: Tue, 5 Mar 2024 13:31:21 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] mtd: spi-nor: Clear Winbond SR3 WPS bit on boot
+Content-Language: en-US
+To: Michael Walle <michael@walle.cc>, u-boot@lists.denx.de
+Cc: Hai Pham <hai.pham.ud@renesas.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Johann Neuhauser <jneuhauser@dh-electronics.com>,
+ Simon Glass <sjg@chromium.org>,
+ Takahiro Kuwano <Takahiro.Kuwano@infineon.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Vignesh R <vigneshr@ti.com>, linux-mtd@lists.infradead.org
+References: <20240304161607.82759-1-marex@denx.de>
+ <CZLOVK212G8L.2ISEL1IIWU1YE@walle.cc>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <CZLOVK212G8L.2ISEL1IIWU1YE@walle.cc>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -54,68 +76,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On 3/5/24 9:55 AM, Michael Walle wrote:
+> [+ linux-mtd ]
+> 
+> Hi Marek,
 
-please pull the sunxi/master branch, containing some fixes and smaller
-changes for 2024.04.
-One fix makes the reboot more robust on some older board, another one
-stabilises the initial clock setup on the A10/A20.
-Two patches make sure our DRAM init does not actually change the content
-of the DRAM array, which allows to use DRAM for Linux' pstore
-functionality.
-We get SPI support for U-Boot proper for one more SoC, that patch was
-lingering around for a while, and should not affect other SoCs, so I am
-merging this now.
-As an added bonus, we get the defconfig file for a new board, the DT was
-already synced from the kernel tree.
+Hi,
 
-The CI looked happy with changes, and I tested them on five different
-boards with different SoCs.
+> On Mon Mar 4, 2024 at 5:16 PM CET, Marek Vasut wrote:
+>> Some Winbond SPI NORs have special SR3 register which is
+>> used among other things to control whether non-standard
+>> "Individual Block/Sector Write Protection" (WPS bit)
+>> locking scheme is activated. This non-standard locking
+>> scheme is not supported by either U-Boot or Linux SPI
+>> NOR stack so make sure it is disabled, otherwise the
+>> SPI NOR may appear locked for no obvious reason.
+> 
+> I don't think it is a good idea to just disable the WPS bit.
+> Usually, that bit is non-volatile and the default is not set.
 
-Please pull!
+Yes, that's right, the bit is non-volatile and should not be set unless 
+the MTD stack can handle it correctly. Currently, neither U-Boot nor 
+Linux does handle the bit at all, instead both attempt to use the 
+standard SPI NOR locking scheme which is also implemented by this SPI 
+NOR model and they both fail to unlock the SPI NOR that way.
 
-Cheers,
-Andre
+Note that the SR3 WPS bit only switches between two different locking 
+schemes (unset = standard SPI NOR locking scheme, set = custom winbond 
+locking scheme), setting SR3 WPS does not immediately imply the SPI NOR 
+is locked, rather the opposite. Out of manufacturing, the SPI NOR is 
+unlocked in either locking scheme. Depending on the SR3 WPS bit state, 
+different commands are used to lock and unlock the SPI NOR.
 
-==================
-The following changes since commit eac52e4be4e234d563d6911737ee7ccdc0ada1f1:
+I recently ran across a device which had the SR3 WPS bit incorrectly set 
+out of manufacturing of that device (i.e. before it was populated on a 
+board at board manufacturer) and the device was locked using the custom 
+locking scheme. I was not able to unlock or use that device because both 
+U-Boot and Linux tried to use the standard scheme for that purpose.
 
-  Merge patch series "ARM: renesas: Rename R-Mobile to Renesas" (2024-03-02 14:30:25 -0500)
+Clearing this SR3 WPS bit fixes that problem, both in U-Boot and in 
+Linux, since Linux that is booted afterward then gets a device that has 
+locking scheme configured in a way that Linux expects and can operate.
 
-are available in the Git repository at:
+Better yet, if some old LTS version of the Linux kernel is in use, it 
+will also work correctly, because this patch will configure the SPI NOR 
+locking scheme to what Linux expects it to be, before the SPI NOR is 
+handed over to that old kernel.
 
-  https://source.denx.de/u-boot/custodians/u-boot-sunxi.git master
+> Thus,
+> there is likely someone, probably the manufacturer of the board,
+> who intentionally set this bit. Now, with this patch it will get
+> disabled *unconditionally*, forever.
 
-for you to fetch changes up to f1e6a718ebab0682d80601db404e8d842767becf:
+In my case, it is exactly the opposite, the SR3 WPS shouldn't have been 
+set and the device should not have been locked, but it was and that 
+confused both U-Boot and Linux.
 
-  sunxi: restore modified memory (2024-03-05 01:16:56 +0000)
+I would argue that if the board manufacturer intention was to lock the 
+SPI NOR, they would have had multiple better options at their disposal, 
+and those options should have been aligned with the software support:
+- nWP pin of the SPI NOR could be tied low to enable WRITE PROTECT
+- OTP bits could have been programmed to enable permanent WRITE PROTECT
+- standard SPI NOR locking scheme could have been used too
 
-----------------------------------------------------------------
-Andre Przywara (1):
-      sunxi: H616: Add OrangePi Zero 2W board support
-
-Andrey Skvortsov (2):
-      sunxi: reorganize mctl_mem_matches_* functions
-      sunxi: restore modified memory
-
-Ludwig Kormann (1):
-      sunxi: sun4i: add missing sdelay() to clock_init_safe()
-
-Maksim Kiselev (1):
-      spi: sunxi: Add support for R329/D1/R528/T113 SPI controller
-
-Philippe Coval (1):
-      arm: sunxi: Reduce inrush current on Olimex A20-OLinuXino_MICRO configs
-
- arch/arm/dts/Makefile                      |  1 +
- arch/arm/include/asm/arch-sunxi/dram.h     |  1 +
- arch/arm/mach-sunxi/clock_sun4i.c          |  2 ++
- arch/arm/mach-sunxi/dram_helpers.c         | 32 ++++++++++++++++++++++------
- arch/arm/mach-sunxi/dram_sunxi_dw.c        | 13 ------------
- board/sunxi/MAINTAINERS                    |  5 +++++
- configs/A20-OLinuXino_MICRO-eMMC_defconfig |  1 +
- configs/A20-OLinuXino_MICRO_defconfig      |  1 +
- configs/orangepi_zero2w_defconfig          | 30 ++++++++++++++++++++++++++
- drivers/spi/spi-sunxi.c                    | 34 +++++++++++++++++++++++++++++-
- 10 files changed, 100 insertions(+), 20 deletions(-)
- create mode 100644 configs/orangepi_zero2w_defconfig
+If they did set SR3 WPS and hoped that U-Boot or Linux would fail to 
+unlock the SPI NOR using standard locking scheme commands, that is I 
+think broken design.
