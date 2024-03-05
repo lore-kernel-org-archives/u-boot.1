@@ -4,68 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23268C54798
-	for <u-boot@archiver.kernel.org>; Tue,  5 Mar 2024 18:54:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1498C54E41
+	for <u-boot@archiver.kernel.org>; Tue,  5 Mar 2024 19:52:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7EE3B8810E;
-	Tue,  5 Mar 2024 19:54:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id C93C98809D;
+	Tue,  5 Mar 2024 20:52:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1709664857;
-	bh=m+EsjXjaR4MsTxIiSXikAzNQuGqDAzze5Gp5vgGP3Po=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=yx8sQomcJpjKQLnpGoES/9U9MTM1Fn4JsEJ/r9bEY3yf1qqqCCrFP4VGS6ePcP0p4
-	 kfs90eiASpTzaEvR20tuxrgHs4fycerFkTe+1pjdo1XpN8+xI0L0u5LPHS0ugev2Oh
-	 tUOIw9cadLAXk4SE7rFDvfvtn0XU+LE+4NZ/chvMNF1oZP1OsN5DWk6zCBrhi/RXNT
-	 pcxrn1+/+QADPN6jqGTf7HDxhX/XP2DazXnp6oZM/XqEiFuKK/GmjI4LGoU/wERVbG
-	 oCaYHqkbJVl/FMb4U5uWRaiTW1lBBYQ9OulA1t9r/7BzMGM/gpV7XIsVa4H5pdIXxU
-	 o8e/V/dSLCC1w==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="HTBvD1AR";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 1B871880DE; Tue,  5 Mar 2024 20:52:47 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id A8A0C87FA0;
- Tue,  5 Mar 2024 19:54:15 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1709664856;
- bh=m+EsjXjaR4MsTxIiSXikAzNQuGqDAzze5Gp5vgGP3Po=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=DZlYBzGFIDvBPuon6+SmJDadoWSGwe538ZMzvrTzlu7VDpIXYtrKLBRsNtNltF5HG
- azoxMVOpyUJO9RKMunjWbVo0/023GfBghMQZ5Qmdl+KlfM8z2z2k/UFMdv/sJFRyMj
- jHh5cVzPUgS18n0coTeSSqMyRDMgBas8nl5XVy7EkfY8tA2jZMgpi16wIU+wsotGwl
- QRf4EAm3b97nyIj1u9Zr6+cYB/bQHQsQRQGXudgXmX4cWYuO+bWlp5E0acmwlEuZwT
- 0J03n3uEbH01wCL5H78oFtD7NH0ks0y8Mkf0RHOm2R9laNW7y4VjP2KtOnjf2zSUAO
- yoFAUZxG97OqQ==
-Message-ID: <d522ac8e-8664-4798-9069-947691c6cd43@denx.de>
-Date: Tue, 5 Mar 2024 19:54:14 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id DFD2A87FE3
+ for <u-boot@lists.denx.de>; Tue,  5 Mar 2024 20:52:45 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1709668360; x=1710273160; i=xypron.glpk@gmx.de;
+ bh=0yyIbRxm5/UMaRyrdyStzd58q5/E9Yh32I+WzrdUWx4=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=HTBvD1ARZppU3H+Co1GeRbGx8YYrT79lT1qjymUDAPRJ3JFNz26+s7fAmJbFdbdy
+ 2/88AVSNoosRBBzTB6jtw4ecMeWapdex1ay7+cepPM5Nbw5i8TJ7W9epncZZGPYmt
+ vn5Nn0VegaZ+oQOPOyVPbfSyr4fyvFqbamV79ENmvNY0Om/EHrSv1FJen+UKEPDOi
+ ANAbNZM/m8N/RkPXP6osLKcaHfls1v+mQjmDjFDPG1EIFNo4+yghNMoEhFkBKj0iE
+ Xnolv54Uj8mK1LejTNHuEPz+yQglccAcjecxvfldwPfWDXUuAuwK7DBXMUqNBmYr9
+ pA3SnXJVB+/PxMZMMw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.107] ([109.42.176.242]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1M7JzQ-1rn4UO1VNM-007oGf; Tue, 05
+ Mar 2024 20:52:40 +0100
+Message-ID: <5d6b9fa0-bdac-47e6-8b2d-62ee3702227c@gmx.de>
+Date: Tue, 5 Mar 2024 20:52:00 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mtd: spi-nor: Clear Winbond SR3 WPS bit on boot
-To: Michael Walle <michael@walle.cc>, u-boot@lists.denx.de
-Cc: Hai Pham <hai.pham.ud@renesas.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Johann Neuhauser <jneuhauser@dh-electronics.com>,
- Simon Glass <sjg@chromium.org>,
- Takahiro Kuwano <Takahiro.Kuwano@infineon.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- Vignesh R <vigneshr@ti.com>, linux-mtd@lists.infradead.org
-References: <20240304161607.82759-1-marex@denx.de>
- <CZLOVK212G8L.2ISEL1IIWU1YE@walle.cc>
- <7c0e2496-4338-497d-96cf-41d75e2fc52b@denx.de>
- <CZLTVKVR3AG1.BZIQQU2PYSU6@walle.cc>
- <a28b0543-67ee-4e33-91c1-86ae36eb44d5@denx.de>
- <CZLXRLFU5YKU.1S5D9EZ3GUTH4@walle.cc>
- <faa78709-6b7c-4394-8048-3c1f09b65a04@denx.de>
- <CZLZ391C9O5F.38A18T9S51BNT@walle.cc>
+Subject: Re: [PATCH] doc: board: starfive: Fix paths in the bash block
+To: Ivan Orlov <ivan.orlov0322@gmail.com>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, yanhong.wang@starfivetech.com
+References: <20240304221532.368453-1-ivan.orlov0322@gmail.com>
 Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CZLZ391C9O5F.38A18T9S51BNT@walle.cc>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240304221532.368453-1-ivan.orlov0322@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:cngpRs+mzRRxbvDiSWJkXy6e69zgcuIdFsUxxQOliJ405oC+Gep
+ Az1gadlIdQtHGUPB7xFgFr658WmeAhOL40COaArLQPVdPezZS962HOaPCtelz+bMrPQw1Jf
+ I2B1CAm147kcHEX844YhamiWex+0YLSpZydzcQ2k2ApXl/7KEMg5JRVmTpBUwKDtRxN18fI
+ nVogXU5XuCTq4dA82+6Ew==
+UI-OutboundReport: notjunk:1;M01:P0:UWWS7UYdz2A=;PqRvwO/32/mKA3pfMiEt6Vk8syM
+ g0aD1mPQTmouMEJiGBBg/2XQM6OJSesTRP+sm5HGxFyVKtoKO3XHWvfYvMfRMvQLyrCX8XxWh
+ rJ+bsW8OHRP0bCtFWRwxnupj95iahKFEGgXcbo0TwohWqrjFWBNHF6eAn7NHwzDwP4nRXtA+q
+ WUmiRFanf0WRR1LyCFJ3SI0svDqe7XTt1BgCGENnJCUU/YA4wm3s0loZ+yid8B0ygHNvK0w0p
+ 0wKKHgelE/chdR489yPqw48OkcwKhqFRld1ZjZWFxA1eu52zEMYHarvvqBigqixNgdRJtsxxN
+ bAuTMmig8cCKs1cKt3C6sKoqYnnVCBOt9QYav5RasNdFxmM+EwjjZuWxehNRldNnfLb8XgZaY
+ BcSEhR9V3Age7YHV1xwM607FV5inh5y0yEVzv+kG4QuZO6voUmSuTL9lNUNDRZbt0jss8HeYU
+ cujY9HnvgzDypsu/saj4PEzc4LPVuPE4jh8r7onRwKcg7CLMsMieqm8NRUbhWc185lV4QVb1Q
+ 8RnnpfeOW1MSR0+e5ZvN5XWazWc5fNND38yksaDPm8dc6lEbUMGrl1UvKbfL1Zk54lIYt0qSA
+ iy5FnRpods84xRpJ8mR1oTWNZ2BVaNEKxjPOai/hW3GUpUbnnUrhhL7u4N5tm58G+xP2J9uZD
+ j6QQzrYH7nJ5aNOnnthwugJTnHe2VjwO3ZKyzmSPJEUn136F7/hpQq7oL68lAnJj9tphSVFCy
+ F5O0uNVpjIiMfB5DhLY8ac2xio3iEzg4JSQqsxEPvEr04m0Zdch6eg0J7qa8uCmwhEZ3f7Qth
+ d+Xh2sQ5X/C0tPoVpGlamwQYxuKf/JqH5WRkc50F36obI=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,97 +86,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/5/24 5:55 PM, Michael Walle wrote:
+On 3/4/24 23:15, Ivan Orlov wrote:
+>  From the current documentation it is not entirely obvious where to take
+> some of the u-boot build artifacts in order to flash them to the sd
+> card. Extend the "Program the SD card" block by providing relative paths
+> to the jh7110-starfive-visionfive-2.dtb and u-boot-spl.bin.normal.out
+> files.
+>
+> Add "$(linux_image_dir)/" prefix to the Image.gz and initramfs.cpio.gz
+> files in order to provide some information about where they could be
+> taken from.
+>
+> Signed-off-by: Ivan Orlov <ivan.orlov0322@gmail.com>
+> ---
+>   doc/board/starfive/visionfive2.rst | 10 +++++-----
+>   1 file changed, 5 insertions(+), 5 deletions(-)
+>
+> diff --git a/doc/board/starfive/visionfive2.rst b/doc/board/starfive/vis=
+ionfive2.rst
+> index abda8ac21b..031d66fbfb 100644
+> --- a/doc/board/starfive/visionfive2.rst
+> +++ b/doc/board/starfive/visionfive2.rst
+> @@ -103,15 +103,15 @@ Program the SD card
+>
 
-[...]
+>   .. code-block:: bash
+>
+> -	sudo dd if=3Du-boot-spl.bin.normal.out of=3D/dev/sdb1
+> +	sudo dd if=3Dspl/u-boot-spl.bin.normal.out of=3D/dev/sdb1
+>   	sudo dd if=3Du-boot.itb of=3D/dev/sdb2
+>
+>   	sudo mount /dev/sdb3 /mnt/
 
->>>>>> Clearing this SR3 WPS bit fixes that problem, both in U-Boot and in
->>>>>> Linux, since Linux that is booted afterward then gets a device that has
->>>>>> locking scheme configured in a way that Linux expects and can operate.
->>>>>>
->>>>>> Better yet, if some old LTS version of the Linux kernel is in use, it
->>>>>> will also work correctly, because this patch will configure the SPI NOR
->>>>>> locking scheme to what Linux expects it to be, before the SPI NOR is
->>>>>> handed over to that old kernel.
->>>>>
->>>>> Agreed, but it should *not* be done automatically and nor
->>>>> unconditionally. Please don't just overwrite any locking bits just
->>>>> because there is one flash which have it set.
->>>>
->>>> The unlock code is not triggered unconditionally, it is protected by
->>>>
->>>> if (IS_ENABLED(CONFIG_SPI_FLASH_UNLOCK_ALL)...
->>>>
->>>> Kconfig option, so this can be turned on/off in board config already.
->>>
->>> Ahh, OK then :)
->>>
->>> But keep in mind that enabling this option is foobar and I've gone
->>> lengths to eliminate it in linux. And actually made that option in
->>> u-boot.
->>>
->>> See linux commit 31ad3eff093c ("mtd: spi-nor: keep lock bits if they
->>> are non-volatile").
->>
->> So, how shall we proceed here?
-> 
-> Regarding this patch, I think it's fine. It will unlock the whole
-> flash as advertised.
+Following the instructions the partition in not formatted.
+You won't be able to mount it anywhere.
 
-This change won't unlock the flash, it will switch to the supported 
-locking scheme, one which can then be used to unlock the flash.
+Looking at the boot log the author FAT formatted the drive which is not
+recommendable.
 
-> But u-boot should really consider making that a "default n" option.
-> And most likely adding =y to every existing defconfig out there so
-> that at least new boards will benefit from it.
+> -	sudo cp u-boot-spl.bin.normal.out /mnt/
+> +	sudo cp spl/u-boot-spl.bin.normal.out /mnt/
+>   	sudo cp u-boot.itb /mnt/
+> -	sudo cp Image.gz /mnt/
+> -	sudo cp initramfs.cpio.gz /mnt/
+> -	sudo cp jh7110-starfive-visionfive-2.dtb /mnt/
+> +	sudo cp $(linux_image_dir)/Image.gz /mnt/
+> +	sudo cp $(linux_image_dir)/initramfs.cpio.gz /mnt/
 
-Yes, I agree with that.
+I have no clue why all users should copy the kernel to the root
+partition on the SD card.
 
->> The way I see this, if Linux ever implements this scheme, Linux can set
->> the SR3 WPS bit as needed, it does not matter which way bootloader sets
->> the bit as the protection bits are not cleared when the bit is cleared,
->> they seem to be stored elsewhere.
-> 
-> On each reboot you'd wear out that cell with two erases/writes.
-> That's another reason why that whole unlocking thing is foobar for
-> non-volatile bits. For me, non-volatile bits are for provisioning,
-> so during a normal boot they should not be touched at all. Just
-> during board manufacturing or because the user actively want to
-> protect something.
+If you have a Linux installation on the SD-card, you want the kernel in
+boot/. But this board boots fine without any SD-card from NVMe, USB, or
+eMMC.
 
-That is what happens here, the write to clear the bit is triggered only 
-if the bit is set , so OK .
+> +	sudo cp arch/riscv/dts/jh7110-starfive-visionfive-2.dtb /mnt/
 
-And if Linux wants to use the new locking scheme, then the bootloader 
-should ideally be updated to match, i.e. SPI_FLASH_UNLOCK_ALL=n etc, so 
-that is also OK .
+Copying the U-Boot device-tree makes no sense it is already available at
+$fdtcontroladdr. If you ever wanted to copy a device-tree, it should be
+the one provided with the kernel.
 
-In other words, there should be no writes into the non-volatile bits, 
-unless U-Boot and Linux disagree on the locking scheme, in which case 
-writes are unavoidable (if you want unlock to work in both projects).
+This whole section is rather misleading for inexperienced users who just
+want to boot a Linux distro on the board.
 
-> If you clear this bit during the unlock all command, all the locking
-> bits are cleared anyway. Or do you mean, the individual bits are
-> still retained?
+Best regards
 
-The lock bits themselves are retained, this SR3 WPS only selects which 
-of those bits take effect, whether the SR ones (standard locking scheme) 
-or the per-page ones (winbond custom locking scheme).
+Heinrich
 
->> But, if Linux starts to use SR3 WPS, then U-Boot should be updated to
->> match, i.e. both projects should agree on the locking scheme, so that
->> there won't be a situation where on the same device, one project uses
->> one scheme, the other project uses another scheme. I think this would
->> technically work, but it would be horrible from the user perspective.
->> And if that happens, both projects should then be updated in lockstep
->> and this UNLOCK_ALL should be disabled for such a setup then.
-> 
-> If you don't touch it, I don't think you have a problem here. u-boot
-> and linux can support different schemes, as long as the user is
-> aware of that. I.e. if they want to lock a region and the flash is
-> configured in a mode which isn't supported in u-boot (or linux) it
-> should be rejected. There might of course be a command to switch the
-> scheme if someone want to do so.
+>   	sudo umount /mnt
+>
+>   Booting
 
-That is why I wrote that it is technically possible, but probably not a 
-good idea because it is inconsistent and therefore error prone.
