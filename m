@@ -4,56 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADC48C54798
-	for <u-boot@archiver.kernel.org>; Tue,  5 Mar 2024 10:31:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAB74C54798
+	for <u-boot@archiver.kernel.org>; Tue,  5 Mar 2024 10:32:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A87088028;
-	Tue,  5 Mar 2024 11:31:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 46E2A88027;
+	Tue,  5 Mar 2024 11:32:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1709634712;
-	bh=GWjAHB3xnopmnzX7hQuAczidix28NsSThJx+DEGONo0=;
+	s=phobos-20191101; t=1709634734;
+	bh=8/C8RzlqSLMtBOQOkyJqioZCljpN6TNkIfkpG+3D9oU=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=w0l4/jjkQFQ/f2W5fUNmiGG/Zy/k/eCUl1lrawZcHuT5tLXAzCoNUobvWEGVk6JQ/
-	 siUrlK3XB3llqcOF6wSU4NgbRmumEx+yrMceRXxyJSIHzpmbN/3LdTG03286CWh4YO
-	 ngI/AHTYbW2REFlDMUEDl4STSyhK/3pd386XjfuNgjw2I//EIz/THvdCaPpYddbPoK
-	 Vb6K9Z44E+vOKNREko6PG2KYaUpekKCfBzMmi604yf8HfTz/mmTl9TSPbJ5nKvXR0b
-	 JFNg/958Xl66ITwkp0HiiDqabHw0SXJul3K/u4EWCmBrBZxQ6ZjLSHmC8K63T8xBpp
-	 YIEOQNVf+YoKw==
+	b=ZPOdGw1R/dGtlMYFNKkbmJSgMDE8fiiaWSZpcEu8hjqGRNT6M+dh1I1PUtREQUxda
+	 2hHJzAxlwOUjd2F4HWwy0XxJuTIVvhyoeQgfJHfJY4BFZnK7vbZkRoFTTPZFzr/uOj
+	 ALLIH4gtBVJKohAC3CLCKh7AVxZSF4ftsRfn5HJu1LK4qqfZ3tNn5Bxxgjf33CWbm6
+	 vBV7PY4bUzQDVv5yn61qwasKt/eOvzEATM0wJ7YaS3wU3Jy5IWshzzaiKn7To6uwDK
+	 EUbxesj13Cqi+1/v7kZA9Pas1juLLgEDY3nWxKM/9QxGqyrpPi4kQgVLgxBewcRwku
+	 pBCkNg5pSlC4w==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5B0A78802D; Tue,  5 Mar 2024 11:31:51 +0100 (CET)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
+ id 2A70C88031; Tue,  5 Mar 2024 11:32:13 +0100 (CET)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
+ [IPv6:2001:67c:2050:101:465::107])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5741188027
- for <u-boot@lists.denx.de>; Tue,  5 Mar 2024 11:31:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4684688023
+ for <u-boot@lists.denx.de>; Tue,  5 Mar 2024 11:32:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4TpsLQ5Q3Rz9sR5;
- Tue,  5 Mar 2024 11:31:42 +0100 (CET)
-Message-ID: <f90c262d-1588-4410-936f-b601f87cec24@denx.de>
-Date: Tue, 5 Mar 2024 11:31:42 +0100
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4TpsLx0dYxz9sR5;
+ Tue,  5 Mar 2024 11:32:09 +0100 (CET)
+Message-ID: <76ea692e-c71c-4243-bfa3-9ec34babc3b3@denx.de>
+Date: Tue, 5 Mar 2024 11:32:08 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH u-boot-marvell] arm: mvebu: turris_omnia: Enable
- networking via ethernet switch
+Subject: Re: [PATCH v2 1/3] arm: dts: armada-38x-solidrun-microsom: configure
+ i2c0 bus
 Content-Language: en-US
-To: =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>
-Cc: u-boot@lists.denx.de, =?UTF-8?Q?Marek_Moj=C3=ADk?= <marek.mojik@nic.cz>
-References: <20231219095555.31418-1-kabel@kernel.org>
+To: Josua Mayer <josua@solid-run.com>, Dennis Gilmore <dgilmore@redhat.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20240202-helios4-spi-v2-0-df085461d894@solid-run.com>
+ <20240202-helios4-spi-v2-1-df085461d894@solid-run.com>
 From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20231219095555.31418-1-kabel@kernel.org>
+In-Reply-To: <20240202-helios4-spi-v2-1-df085461d894@solid-run.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 4TpsLQ5Q3Rz9sR5
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,14 +71,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/19/23 10:55, Marek Behún wrote:
-> From: Marek Mojík <marek.mojik@nic.cz>
+On 2/2/24 16:13, Josua Mayer wrote:
+> SolidRun Armada-388 SoM has an i2c bus supporting on-som eeprom, and
+> peripherals on a carrier.
+> armada-38x.dtsi disables this bus by default, it should be enabled by
+> som or carrier dts.
 > 
-> The Turris Omnia contains the Marvell 88E6176 ethernet switch. Add
-> config options and device tree to enable the support.
+> Linux has moved i2c0 from helios-4 board dts to som dtsi, including
+> status, pinctrl and clock speed.
+> Copy these settings from mainline.
 > 
-> Signed-off-by: Marek Mojík <marek.mojik@nic.cz>
-> Signed-off-by: Marek Behún <kabel@kernel.org>
+> This fixes accessing i2c bus from u-boot commandline.
+> 
+> Signed-off-by: Josua Mayer <josua@solid-run.com>
 
 Applied to u-boot-marvell/master
 
@@ -85,90 +91,26 @@ Thanks,
 Stefan
 
 > ---
-> Stefan, this patch depends on
->    [v2] net: mv88e6xxx: fix missing SMI address initialization
->    https://patchwork.ozlabs.org/project/uboot/patch/62eoapvurxkedw74vpzb55q3nuqgb4cef3bl2laayx57cpjzus@vlpx57cjc4ph/
-> ---
->   .../dts/armada-385-turris-omnia-u-boot.dtsi   | 51 +++++++++++++++++++
->   configs/turris_omnia_defconfig                |  2 +
->   2 files changed, 53 insertions(+)
+>   arch/arm/dts/armada-38x-solidrun-microsom.dtsi | 5 +++++
+>   1 file changed, 5 insertions(+)
 > 
-> diff --git a/arch/arm/dts/armada-385-turris-omnia-u-boot.dtsi b/arch/arm/dts/armada-385-turris-omnia-u-boot.dtsi
-> index 509d6ca69c..c63a331d69 100644
-> --- a/arch/arm/dts/armada-385-turris-omnia-u-boot.dtsi
-> +++ b/arch/arm/dts/armada-385-turris-omnia-u-boot.dtsi
-> @@ -35,6 +35,57 @@
->   	};
+> diff --git a/arch/arm/dts/armada-38x-solidrun-microsom.dtsi b/arch/arm/dts/armada-38x-solidrun-microsom.dtsi
+> index f6ae784bed..1540162e03 100644
+> --- a/arch/arm/dts/armada-38x-solidrun-microsom.dtsi
+> +++ b/arch/arm/dts/armada-38x-solidrun-microsom.dtsi
+> @@ -99,6 +99,11 @@
 >   };
 >   
-> +&mdio {
-> +	switch@10 {
-> +		mdio {
-> +			#address-cells = <1>;
-> +			#size-cells = <0>;
+>   &i2c0 {
+> +	clock-frequency = <400000>;
+> +	pinctrl-0 = <&i2c0_pins>;
+> +	pinctrl-names = "default";
+> +	status = "okay";
 > +
-> +			sw_phy0: ethernet-phy@0 {
-> +				reg = <0x0>;
-> +			};
-> +
-> +			sw_phy1: ethernet-phy@1 {
-> +				reg = <0x1>;
-> +			};
-> +
-> +			sw_phy2: ethernet-phy@2 {
-> +				reg = <0x2>;
-> +			};
-> +
-> +			sw_phy3: ethernet-phy@3 {
-> +				reg = <0x3>;
-> +			};
-> +
-> +			sw_phy4: ethernet-phy@4 {
-> +				reg = <0x4>;
-> +			};
-> +		};
-> +		ports {
-> +			ports@0 {
-> +				phy-handle = <&sw_phy0>;
-> +				phy-mode = "internal";
-> +			};
-> +			ports@1 {
-> +				phy-handle = <&sw_phy1>;
-> +				phy-mode = "internal";
-> +			};
-> +			ports@2 {
-> +				phy-handle = <&sw_phy2>;
-> +				phy-mode = "internal";
-> +			};
-> +			ports@3 {
-> +				phy-handle = <&sw_phy3>;
-> +				phy-mode = "internal";
-> +			};
-> +			ports@4 {
-> +				phy-handle = <&sw_phy4>;
-> +				phy-mode = "internal";
-> +			};
-> +		};
-> +	};
-> +};
-> +
->   #ifdef CONFIG_ENV_IS_IN_SPI_FLASH
->   &spi0 {
->   	flash@0 {
-> diff --git a/configs/turris_omnia_defconfig b/configs/turris_omnia_defconfig
-> index 65d4a296e7..3aaee276ea 100644
-> --- a/configs/turris_omnia_defconfig
-> +++ b/configs/turris_omnia_defconfig
-> @@ -96,7 +96,9 @@ CONFIG_SPI_FLASH_WINBOND=y
->   CONFIG_SPI_FLASH_MTD=y
->   CONFIG_PHY_MARVELL=y
->   CONFIG_PHY_FIXED=y
-> +CONFIG_DM_DSA=y
->   CONFIG_PHY_GIGE=y
-> +CONFIG_MV88E6XXX=y
->   CONFIG_MVNETA=y
->   CONFIG_MII=y
->   CONFIG_MVMDIO=y
+>   	eeprom@53 {
+>   		compatible = "atmel,24c02";
+>   		reg = <0x53>;
+> 
 
 Viele Grüße,
 Stefan Roese
