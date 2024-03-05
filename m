@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A683C54798
-	for <u-boot@archiver.kernel.org>; Tue,  5 Mar 2024 13:26:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BA06C54E41
+	for <u-boot@archiver.kernel.org>; Tue,  5 Mar 2024 13:27:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 057E78805D;
-	Tue,  5 Mar 2024 14:25:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id B1FE588059;
+	Tue,  5 Mar 2024 14:27:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="nQdE/+Tj";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TPGW5R4A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EFEC987FA5; Tue,  5 Mar 2024 14:25:28 +0100 (CET)
-Received: from sin.source.kernel.org (sin.source.kernel.org
- [IPv6:2604:1380:40e1:4800::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 57A5288059; Tue,  5 Mar 2024 14:27:46 +0100 (CET)
+Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
+ [IPv6:2607:f8b0:4864:20::22b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2EB528806B
- for <u-boot@lists.denx.de>; Tue,  5 Mar 2024 14:25:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 410F387FA5
+ for <u-boot@lists.denx.de>; Tue,  5 Mar 2024 14:27:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rogerq@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id AE311CE1AA9;
- Tue,  5 Mar 2024 13:25:22 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BC203C43390;
- Tue,  5 Mar 2024 13:25:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1709645122;
- bh=Ht0e+X/bmW++Yud63Et2Akjy++EfvUbLhkblbeqApVo=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=nQdE/+TjjNor8QSwg+gsLCBw8tYEHHiAegqtEIP1DlQh86kGpJTrdHXcUsZ1XBUmv
- zS33zNL1+pq0TMsvEMpKYgNZkLAO6D3RZ/5oX++EXULg15X6D44u5fKndBaN36kDhx
- vvZeu+lk72DjQI8MLxvXmOTzOM5xG3f7lDVOuy+kjC+Or5cj/MMr6CUeGLdU7gnDbd
- E93dZNtQAFEKen1yc5/JgsaT/cX4Xnm95usDsbdQR2AwJwIkLBxxji7x8P5Uj6sS/9
- 6AoJDGL5fGGFdzIpkB0Z4kINbUVQtfK4zCAm/k0iCrlKvkq2vent24wvUVkntpQcG/
- MH9jDQAq/FI4A==
-From: Roger Quadros <rogerq@kernel.org>
-Date: Tue, 05 Mar 2024 15:24:57 +0200
-Subject: [PATCH not-for-merge 5/5] arm: dts: k3-am625-beagleplay: Fix
- Ethernet PHY reset GPIO
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22b.google.com with SMTP id
+ 5614622812f47-3c1f5e14bdbso580659b6e.1
+ for <u-boot@lists.denx.de>; Tue, 05 Mar 2024 05:27:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1709645261; x=1710250061; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ezy9AzvHF5+C84tn+m9V5PlWfXsA1VYgsmlzzrvDtps=;
+ b=TPGW5R4A4HZkgoFncNFELA1E3GTGFhyc7vqHlORxi87dPpSvRRxqqME2R8V3E2rktX
+ acS5ovrN1D7UJXA7qiHd/qLNe8Wfmzfr+WT5oTS/GpbeKiqrY/LnjD5+sAxQL5ImxgeR
+ X3HexwB0ld648YT13w8fox0xWT0blc0bHvc0E=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1709645261; x=1710250061;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ezy9AzvHF5+C84tn+m9V5PlWfXsA1VYgsmlzzrvDtps=;
+ b=l02Ox+1Ox4OcceiIUvw/1e4VDSzt8dDqZzCPXPNfFwPGj1dYyRzw8h782TKJbDzqK+
+ 9CcbspXauD3yrke3iPZx4s/lsfSZgbyLsIkM38V9T7bIzd20shqGwHTMd7EPh18OEM6u
+ IY/VhBLhms2aaWA8erV9EYLTHDWM+Ghtu2z7XoXwcK5ZnR/aHUazFrQu+HuEPQTl/E/G
+ CUULXoj4xTl2D5MLqrGI6zaOnYsg9+INea+BxykQiJjvvaHm4bzXYBH0NVQDDOpL5uUt
+ YQhJj07zhGc0Fop/kE3zmDpOITCmEqVoK1AJPst0zoLpC6cCThr8Ck2ynJAyqQbdPYIS
+ MENA==
+X-Gm-Message-State: AOJu0YwgXtqxpBv+EroF/l0QvDHqn920NvPf3mk9ciNnoXD+NgpHkuY5
+ yycp+iZ2BjUlZBEOkrEAKINSm4REHqQIOwJQK9rPV36dHYjTYa9pTCZmt8Mtfh4=
+X-Google-Smtp-Source: AGHT+IHEri1aaguEVt+T71g4hwi5Ngt3g/M4GIG6OwKB5J3Dy0eiV/fkcIacVQH0OLEnG0Luvl50Tw==
+X-Received: by 2002:a05:6808:7cf:b0:3c1:9ac3:bf2b with SMTP id
+ f15-20020a05680807cf00b003c19ac3bf2bmr1819819oij.5.1709645261103; 
+ Tue, 05 Mar 2024 05:27:41 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-007f-0000-0000-0000-1000.res6.spectrum.com.
+ [2603:6081:7b00:7f::1000]) by smtp.gmail.com with ESMTPSA id
+ x25-20020ac87319000000b0042f01e612bbsm494559qto.37.2024.03.05.05.27.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 05 Mar 2024 05:27:40 -0800 (PST)
+Date: Tue, 5 Mar 2024 08:27:38 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>,
+ Maksim Kiselev <bigunclemax@gmail.com>, Philippe Coval <rzr@users.sf.net>,
+ Ludwig Kormann <ludwig.kormann@ict42.de>,
+ Andrey Skvortsov <andrej.skvortzov@gmail.com>, linux-sunxi@lists.linux.dev
+Subject: Re: Pull request: u-boot-sunxi/master for v2024.04
+Message-ID: <20240305132738.GA1523872@bill-the-cat>
+References: <20240305111541.2369415-1-andre.przywara@arm.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240305-for-2024-07-beagleplay-eth-v1-5-e1294a575cc1@kernel.org>
-References: <20240305-for-2024-07-beagleplay-eth-v1-0-e1294a575cc1@kernel.org>
-In-Reply-To: <20240305-for-2024-07-beagleplay-eth-v1-0-e1294a575cc1@kernel.org>
-To: Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>, 
- Nishanth Menon <nm@ti.com>, Robert Nelson <robertcnelson@gmail.com>, 
- Wadim Egorov <w.egorov@phytec.de>, 
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
- Simon Glass <sjg@chromium.org>
-Cc: srk@ti.com, s-vadapalli@ti.com, vigneshr@ti.com, r-gunasekaran@ti.com, 
- danishanwar@ti.com, u-boot@lists.denx.de, Roger Quadros <rogerq@kernel.org>
-X-Mailer: b4 0.12.4
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2073; i=rogerq@kernel.org;
- h=from:subject:message-id; bh=Ht0e+X/bmW++Yud63Et2Akjy++EfvUbLhkblbeqApVo=;
- b=owEBbQKS/ZANAwAIAdJaa9O+djCTAcsmYgBl5x0rv71po08omtsqO3Ub9ZCrsWGNBrpMdodJ4
- lfb0kpJN4iJAjMEAAEIAB0WIQRBIWXUTJ9SeA+rEFjSWmvTvnYwkwUCZecdKwAKCRDSWmvTvnYw
- k0hxEACPH5i7DFlnbsfXxT2VSbYb8VjwXhnBNsbx4fdkrw39g7EjDCwtCcyvRoNocdQyZXWNVos
- 2SWjRsEdLVIb6TissdHe3HYmZMefBYWZCVPtjGxisq1KT83StuM3i5pedRx/15tpN7913bym5nq
- FJXMkcftchVwhZDb25Iy64NEdlfSRKNzhnVlJb4fistkNsH7NXUsaWnLSj/BySX59d57eDV1zGX
- cQ6k31myF8Sr2RG7WQ3FZiEXAhKTbAdv56QZRaLEzrI1T2K29XmcdmSNxr1kNFFkicBrySqDT8X
- rUzOBCDq7roE+tTKAumc00H1lyfODfUpUSn8VRuBaBrxW6p7cA98PPKC+nXT874FbT0LRaVeqUL
- 0Z7bsEM1jw4T/m2rdUc3KZFrmBa6jhPPJCHqAVuBXEMZoa7Q6GEFCYlrZyD4wudT0iSnBXygr/Z
- uZ/nLRYyaa46xfEokrHzSgwRUI0eukZwVszAbz3tu8xJ/2yy5/J2sgMDACndmu5VTopiwprrZXL
- zXy/GYU27JynQ6ACmyAMYPbXIbDmLvokZZkB9Ne7sZCAm+T4NkXik/PwmakrVFPbGNgA06AKA3A
- eZ7SgwKcMkX6kfAaAH4BxcsqLZJcu5Bzz70cYQTKbHbPLenWAjCg3+Wy87bozerxOuDxD4TzBXc
- x+B9agVVWbX+jJw==
-X-Developer-Key: i=rogerq@kernel.org; a=openpgp;
- fpr=412165D44C9F52780FAB1058D25A6BD3BE763093
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="9GJC/8RsugRDi4km"
+Content-Disposition: inline
+In-Reply-To: <20240305111541.2369415-1-andre.przywara@arm.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,57 +93,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move GPIO pinmux to MDIO node. Add GB Ethernet reset GPIO.
 
-Add PIN_INPUT to Fix SPE ethernet reset gpio so that
-reading the GPIO can give correct status.
+--9GJC/8RsugRDi4km
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Roger Quadros <rogerq@kernel.org>
----
- arch/arm/dts/k3-am625-beagleplay.dts | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+On Tue, Mar 05, 2024 at 11:15:41AM +0000, Andre Przywara wrote:
 
-diff --git a/arch/arm/dts/k3-am625-beagleplay.dts b/arch/arm/dts/k3-am625-beagleplay.dts
-index a34e0df2ab..8ab838f169 100644
---- a/arch/arm/dts/k3-am625-beagleplay.dts
-+++ b/arch/arm/dts/k3-am625-beagleplay.dts
-@@ -292,6 +292,8 @@
- 		pinctrl-single,pins = <
- 			AM62X_IOPAD(0x0160, PIN_OUTPUT, 0) /* (AD24) MDIO0_MDC */
- 			AM62X_IOPAD(0x015c, PIN_INPUT, 0) /* (AB22) MDIO0_MDIO */
-+			AM62X_IOPAD(0x003c, PIN_INPUT, 7) /* (M25) GPMC0_AD0.GPIO0_15 */
-+			AM62X_IOPAD(0x018c, PIN_INPUT, 7) /* (AC21) RGMII2_RD2.GPIO1_5 */
- 		>;
- 	};
- 
-@@ -383,7 +385,6 @@
- 			AM62X_IOPAD(0x016c, PIN_INPUT, 1) /* (Y18) RGMII2_TD0.RMII2_TXD0 */
- 			AM62X_IOPAD(0x0170, PIN_INPUT, 1) /* (AA18) RGMII2_TD1.RMII2_TXD1 */
- 			AM62X_IOPAD(0x0164, PIN_INPUT, 1) /* (AA19) RGMII2_TX_CTL.RMII2_TX_EN */
--			AM62X_IOPAD(0x018c, PIN_OUTPUT, 7) /* (AC21) RGMII2_RD2.GPIO1_5 */
- 			AM62X_IOPAD(0x0190, PIN_INPUT, 7) /* (AE22) RGMII2_RD3.GPIO1_6 */
- 			AM62X_IOPAD(0x01f0, PIN_OUTPUT, 5) /* (A18) EXT_REFCLK1.CLKOUT0 */
- 		>;
-@@ -597,6 +598,9 @@
- 
- 	cpsw3g_phy0: ethernet-phy@0 {
- 		reg = <0>;
-+		reset-gpios = <&main_gpio0 15 GPIO_ACTIVE_LOW>;
-+		reset-assert-us = <10000>;
-+		reset-deassert-us = <50000>;
- 	};
- 
- 	cpsw3g_phy1: ethernet-phy@1 {
-@@ -615,7 +619,7 @@
- 		"USR0", "USR1", "USR2", "USR3", "", "", "USR4",	/* 3-9 */
- 		"EEPROM_WP",					/* 10 */
- 		"CSI2_CAMERA_GPIO1", "CSI2_CAMERA_GPIO2",	/* 11-12 */
--		"CC1352P7_BOOT", "CC1352P7_RSTN", "", "", "",	/* 13-17 */
-+		"CC1352P7_BOOT", "CC1352P7_RSTN", "GBE_RSTN", "", "",	/* 13-17 */
- 		"USR_BUTTON", "", "", "", "", "", "", "", "",	/* 18-26 */
- 		"", "", "", "", "", "", "", "", "", "HDMI_INT",	/* 27-36 */
- 		"", "VDD_WLAN_EN", "", "", "WL_IRQ", "GBE_INTN",/* 37-42 */
+> Hi Tom,
+>=20
+> please pull the sunxi/master branch, containing some fixes and smaller
+> changes for 2024.04.
+> One fix makes the reboot more robust on some older board, another one
+> stabilises the initial clock setup on the A10/A20.
+> Two patches make sure our DRAM init does not actually change the content
+> of the DRAM array, which allows to use DRAM for Linux' pstore
+> functionality.
+> We get SPI support for U-Boot proper for one more SoC, that patch was
+> lingering around for a while, and should not affect other SoCs, so I am
+> merging this now.
+> As an added bonus, we get the defconfig file for a new board, the DT was
+> already synced from the kernel tree.
+>=20
+> The CI looked happy with changes, and I tested them on five different
+> boards with different SoCs.
+>=20
+> Please pull!
+>=20
+> Cheers,
+> Andre
+>=20
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> The following changes since commit eac52e4be4e234d563d6911737ee7ccdc0ada1=
+f1:
+>=20
+>   Merge patch series "ARM: renesas: Rename R-Mobile to Renesas" (2024-03-=
+02 14:30:25 -0500)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-sunxi.git master
+>=20
+> for you to fetch changes up to f1e6a718ebab0682d80601db404e8d842767becf:
+>=20
+>   sunxi: restore modified memory (2024-03-05 01:16:56 +0000)
+>=20
 
--- 
-2.34.1
+Applied to u-boot/master, thanks!
 
+--=20
+Tom
+
+--9GJC/8RsugRDi4km
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXnHccACgkQFHw5/5Y0
+tyxiPQv8DcGbBRYVi8GS5swJMrR4QNt/v528coyfijWn5NNLlzkC1Bj9Ls9RA9C6
+VDIjuiLZSIJXIouUROlOui63/qe1ZcsvjE0Ucgc3AZnzscJ5Nl7IS8edhK6cnT68
+4snPwIrdSVFZ3lL0G3dv94wbqGlQU7PDTZmX21A3XWMWgOwFPp3k5nEslI0H4NHl
+DrzpsfuUO7bZW9nFHJv9wlv/A0Yiue9gs7CbNUj3jbc2bDnxZZODin0x5dsqC5JA
+0oDYc85l9JpPJj2eAZdzJD2xTBGX2dtdfG7Aeh+lccdohf1no/Sdnsm7alBCE/v0
+IBDkumTI0pGTaDvwkoIp9+ACP4MXX+jXoJqKz+EqKZBoCdpSOTmdu7vYOfuAdahU
+3eveQ6GD90S+YCu8dwsswtkEu4lpiwd8gK+bf9IcDLu1DSfBnXy2oTiKDo0v744l
+noFyxKOwtuwJbzsfbITcXP2i6epJuQzY+CyslQB0fS1D86dyJ+ohwjL+qGc9J9P5
+Irp2VEMu
+=Pfjw
+-----END PGP SIGNATURE-----
+
+--9GJC/8RsugRDi4km--
