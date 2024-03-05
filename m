@@ -4,66 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7764C5478C
-	for <u-boot@archiver.kernel.org>; Tue,  5 Mar 2024 07:40:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92340C54798
+	for <u-boot@archiver.kernel.org>; Tue,  5 Mar 2024 07:56:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1BAAA87FE0;
-	Tue,  5 Mar 2024 08:40:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=qq.com
+	by phobos.denx.de (Postfix) with ESMTP id 19D2D87BA8;
+	Tue,  5 Mar 2024 08:56:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=qq.com header.i=@qq.com header.b="TVx8yA6z";
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="lECoUa7x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C8BE087FE7; Tue,  5 Mar 2024 08:40:04 +0100 (CET)
-Received: from out203-205-221-210.mail.qq.com (out203-205-221-210.mail.qq.com
- [203.205.221.210])
+ id 41F1287C4C; Tue,  5 Mar 2024 08:56:15 +0100 (CET)
+Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
+ [68.232.153.233])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B0CCC87BA8
- for <u-boot@lists.denx.de>; Tue,  5 Mar 2024 08:40:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 07CCB875FA
+ for <u-boot@lists.denx.de>; Tue,  5 Mar 2024 08:56:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=microchip.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=qq.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hanyuan-z@qq.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
- t=1709624396; bh=11hXqpPKi3UDPdJN86+GdPo8tIqYoNVqbp8sYfnIkvQ=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References;
- b=TVx8yA6zytr7E5Wt9hgkweezga2sUGycxC0SWJhhYPqnZr9O3bhS0gHv0DoaXg6B2
- B/PVsrA69GQFuiKNzndY6qkYm7YBPsLwQDGTXC7NfyQR2OLj7BUUmslCBFTB087JyL
- wlCV50METCYQsyj/fwSV41rLwLGYrkpX2MaxgPH8=
-Received: from localhost.localdomain ([183.172.219.254])
- by newxmesmtplogicsvrsza7-0.qq.com (NewEsmtp) with SMTP
- id 9BB85255; Tue, 05 Mar 2024 15:38:59 +0800
-X-QQ-mid: xmsmtpt1709624366t0fb8aigo
-Message-ID: <tencent_82A5BF202DB7378FFE714B6E38F401448C09@qq.com>
-X-QQ-XMAILINFO: OUMxvQDaATieRaNn7cxJUYLafRk/ZLe0nfgyJlAYfX/8AQjXz9NrWPlTrH71Sx
- QpabiIT2stCO+TM8cLEsX88swF308KoKGkTFbADa3oMC4QxYLoa37hh+3PGRUryoXwr4HjInhydu
- J+5SXDI+Ohjzs2QeTK3vRx88RghG8XlObFaOi5VkZL+zykcJRGoBCE8kQYayEjrbNttQZ8SNm78h
- bAIk+UJXubQW99CIavesjZHlWpY2sMgZrmyh4xU3fYaYVcPnC9ienA+hnRhDQNsdHoHS4OkMxsjp
- 9HOAup0GoT+20i4C6Y595H6A8SanmQXXe8t16G5m32u5c/Zb/iJNslN7fg79DoI+YNEg2TflLLf6
- OfcoWAvpILcRo7cR5lK7K09Qbvdgy+TBZlNqX1irIrEkgC8m8wdyRGFj8z6Pan9unQ/8GDqE02Vr
- V7+fdtXBSeCDc1htHE3jYFhZ6VhZ/wpFfkjWFuV379M9k/rlcBv2bKtOd95Bn//R7yxPiQhqem8g
- aascohRpuYSS9OFqDTNHEo4DKPq+qieu+MgNxQlX7Ut25WIAL31Zq4KnjUoA+HAGfl1sT99JABgQ
- Pw3dwcjwRCRumA4pLsLVEUK83n2zWE1aHPbNDgZOUIz90dYCb8VAbK59pj+NBVHuDBQJ5LmOUIIy
- gLZbjVoXln8KlJNqZM+Brt8R6PswbPCx0jnil06HbJptvmwlpp6WT3NNmdrgbywi3k7YnVFjjNhJ
- alZsokLPbS/dMMka5ehOlJDPj1Elk1wW9t5r/A1RRGbzEBUtolpdNjZdUy3ATbfAYaEF+W/JE3Rz
- z0m5FdpQ2w7GOIvABpushiZ1ebHUOUK0W+xPZgg0aCHw2QFbn/jTGvpFjV5QhiaAsWgrPTAfKJ3K
- QDwu5udt3Ssa4zWXEziDpaIeiIMIRJ1SLDNxrLE/KqxOLgEtIkSnAqUxLpE3suN1JPwCv+Qd4xi/
- 65qfMWPDuzj1TxWxJwh350EMTMrwEW+uj1jgFtM9g4odVa6TdBgg878tecPSJMp9JqAlspl70=
-X-QQ-XMRINFO: Mp0Kj//9VHAxr69bL5MkOOs=
-From: Hanyuan Zhao <hanyuan-z@qq.com>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Hanyuan Zhao <hanyuan-z@qq.com>
-Subject: [PATCH v3 3/3] cli: compile history code if and only if history
- config is selected
-Date: Tue,  5 Mar 2024 15:37:37 +0800
-X-OQ-MSGID: <20240305073734.14483-3-hanyuan-z@qq.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240305073734.14483-1-hanyuan-z@qq.com>
-References: <20240305073734.14483-1-hanyuan-z@qq.com>
+ spf=pass smtp.mailfrom=Conor.Dooley@microchip.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
+ t=1709625372; x=1741161372;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=+3TFvIrni3CYBewTzOfmd5O+0R62bqLiygHIaKzgfKY=;
+ b=lECoUa7xbnKYbvWi5x9ZHA1lcTQu/DKbcN4KLMBVVOkuN7a87hUsAwBP
+ BI/1/isdvQ5LpNnKaX6XlINoQSN4Lt+5DFnkVrlBiAVW/tK62Pt+TLSy/
+ LSdPGyoVrzSA2b4j7gZhpDAzmtCy3OovyiGbq/BZbkXa7pyAUy/EGUtqo
+ EE7fgQiujIuzc3IGH803Psre0e4o4aFgyQJoXkUuWuOAxCakOU27Um86L
+ PrtwDXc6+GlSOv8edErzoURsnBhabsmjlKWNAwQzA4e7KRCGTzNi9c/Lj
+ qyoYsXvyw4u8b7q6jNCtCmk5JwK5zWDlJzJbnV7weE3PL1KG9meRMUqEp w==;
+X-CSE-ConnectionGUID: XBiH5z6dTQS4bdjPYAZ5zg==
+X-CSE-MsgGUID: BLxdbuaZSBO9IMQMudQxsg==
+X-IronPort-AV: E=Sophos;i="6.06,205,1705388400"; 
+ d="asc'?scan'208";a="247970086"
+X-Amp-Result: UNKNOWN
+X-Amp-Original-Verdict: FILE UNKNOWN
+Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
+ by esa5.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 05 Mar 2024 00:56:09 -0700
+Received: from chn-vm-ex02.mchp-main.com (10.10.85.144) by
+ chn-vm-ex01.mchp-main.com (10.10.85.143) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.35; Tue, 5 Mar 2024 00:55:36 -0700
+Received: from wendy (10.10.85.11) by chn-vm-ex02.mchp-main.com (10.10.85.144)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35 via Frontend
+ Transport; Tue, 5 Mar 2024 00:55:34 -0700
+Date: Tue, 5 Mar 2024 07:54:50 +0000
+From: Conor Dooley <conor.dooley@microchip.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+CC: Conor Dooley <conor@kernel.org>, Rick Chen <rick@andestech.com>, Leo
+ <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>, Simon Glass
+ <sjg@chromium.org>, Chanho Park <chanho61.park@samsung.com>, Bin Meng
+ <bmeng.cn@gmail.com>, <palmer@dabbelt.com>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH v1] riscv: cpu: improve multi-letter extension detection
+ in supports_extension()
+Message-ID: <20240305-expulsion-pastrami-0a1ca34d96d7@wendy>
+References: <20240304232835.3076533-2-conor@kernel.org>
+ <da2c1e6b-95c6-4326-a353-3ed32c524b40@gmx.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="fpB+RMTzhqard7rU"
+Content-Disposition: inline
+In-Reply-To: <da2c1e6b-95c6-4326-a353-3ed32c524b40@gmx.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,143 +88,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This commit allows user to determine whether to have history recording
-in command-line. Previously to this commit, the CMD_HISTORY only sets
-the compiling of cmd/history.c, and the history code in cli_readline.c
-is always compiled and will take a lot of space to store history even if
-we say N to CMD_HISTORY.
+--fpB+RMTzhqard7rU
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
+On Tue, Mar 05, 2024 at 08:34:20AM +0100, Heinrich Schuchardt wrote:
+> On 3/5/24 00:28, Conor Dooley wrote:
+> > From: Conor Dooley <conor.dooley@microchip.com>
+> According to
+> https://github.com/riscv/riscv-isa-manual/blob/main/src/naming.adoc the
+> ISA string is case insensitive. Why can we assume here that it is lower
+> case?
 
-Signed-off-by: Hanyuan Zhao <hanyuan-z@qq.com>
----
-This is v3 of patch series cli: allow users to disable history
-if unused at all. Please ignore the v2 version.
----
-Changes v1 -> v3:
-  - Move the #ifdef CONFIG_CMD_HISTORY directives to this patch. These directives
-are still necessary when users are not using the history.
----
- common/cli_readline.c | 37 +++++++++++++++++++++++++------------
- 1 file changed, 25 insertions(+), 12 deletions(-)
+The binding does not allow upper-case.
 
-diff --git a/common/cli_readline.c b/common/cli_readline.c
-index cf4339d0e5..9f71b33a01 100644
---- a/common/cli_readline.c
-+++ b/common/cli_readline.c
-@@ -67,12 +67,14 @@ static char *delete_char (char *buffer, char *p, int *colp, int *np, int plen)
- #define CTL_BACKSPACE		('\b')
- #define DEL			((char)255)
- #define DEL7			((char)127)
--#define CREAD_HIST_CHAR		('!')
- 
- #define getcmd_putch(ch)	putc(ch)
- #define getcmd_getch()		getchar()
- #define getcmd_cbeep()		getcmd_putch('\a')
- 
-+#ifdef CONFIG_CMD_HISTORY
-+
-+#define CREAD_HIST_CHAR		('!')
- #ifdef CONFIG_SPL_BUILD
- #define HIST_MAX		3
- #define HIST_SIZE		32
-@@ -93,14 +95,6 @@ static char *hist_list[HIST_MAX];
- 
- #define add_idx_minus_one() ((hist_add_idx == 0) ? hist_max : hist_add_idx-1)
- 
--static void getcmd_putchars(int count, int ch)
--{
--	int i;
--
--	for (i = 0; i < count; i++)
--		getcmd_putch(ch);
--}
--
- static int hist_init(void)
- {
- 	int i;
-@@ -201,6 +195,15 @@ void cread_print_hist_list(void)
- 		i++;
- 	}
- }
-+#endif /* CONFIG_CMD_HISTORY */
-+
-+static void getcmd_putchars(int count, int ch)
-+{
-+	int i;
-+
-+	for (i = 0; i < count; i++)
-+		getcmd_putch(ch);
-+}
- 
- #define BEGINNING_OF_LINE() {			\
- 	while (cls->num) {			\
-@@ -374,6 +377,7 @@ int cread_line_process_ch(struct cli_line_state *cls, char ichar)
- 			cls->eol_num--;
- 		}
- 		break;
-+#ifdef CONFIG_CMD_HISTORY
- 	case CTL_CH('p'):
- 	case CTL_CH('n'):
- 		if (cls->history) {
-@@ -403,6 +407,7 @@ int cread_line_process_ch(struct cli_line_state *cls, char ichar)
- 			break;
- 		}
- 		break;
-+#endif
- 	case '\t':
- 		if (IS_ENABLED(CONFIG_AUTO_COMPLETE) && cls->cmd_complete) {
- 			int num2, col;
-@@ -499,19 +504,23 @@ static int cread_line(const char *const prompt, char *buf, unsigned int *len,
- 	}
- 	*len = cls->eol_num;
- 
-+#ifdef CONFIG_CMD_HISTORY
- 	if (buf[0] && buf[0] != CREAD_HIST_CHAR)
- 		cread_add_to_hist(buf);
- 	hist_cur = hist_add_idx;
-+#endif
- 
- 	return 0;
- }
- 
- #else /* !CONFIG_CMDLINE_EDITING */
- 
-+#ifdef CONFIG_CMD_HISTORY
- static inline int hist_init(void)
- {
- 	return 0;
- }
-+#endif
- 
- static int cread_line(const char *const prompt, char *buf, unsigned int *len,
- 		      int timeout)
-@@ -649,7 +658,9 @@ int cli_readline_into_buffer(const char *const prompt, char *buffer,
- 	char *p = buffer;
- 	uint len = CONFIG_SYS_CBSIZE;
- 	int rc;
--	static int initted;
-+#ifdef CONFIG_CMD_HISTORY
-+	static int hist_initted;
-+#endif
- 
- 	/*
- 	 * Say N to CMD_HISTORY_USE_CALLOC will skip runtime
-@@ -663,11 +674,13 @@ int cli_readline_into_buffer(const char *const prompt, char *buffer,
- 	 * or disable CMD_HISTORY.
- 	 */
- 	if (IS_ENABLED(CONFIG_CMDLINE_EDITING) && (gd->flags & GD_FLG_RELOC)) {
--		if (!initted) {
-+#ifdef CONFIG_CMD_HISTORY
-+		if (!hist_initted) {
- 			rc = hist_init();
- 			if (rc == 0)
--				initted = 1;
-+				hist_initted = 1;
- 		}
-+#endif
- 
- 		if (prompt)
- 			puts(prompt);
--- 
-2.34.1
+--fpB+RMTzhqard7rU
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZebPygAKCRB4tDGHoIJi
+0mi1AP9CT50cqpx8LEyVThskcSPsjrfXW+Lmm/2QuNrOXYVSyQEA2Nj6k03vf5KX
+pYAu07oV37klxNedoI0xIMNEYiVqkQc=
+=BrTt
+-----END PGP SIGNATURE-----
+
+--fpB+RMTzhqard7rU--
