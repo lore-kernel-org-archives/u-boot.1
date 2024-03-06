@@ -4,95 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06BB8C5475B
-	for <u-boot@archiver.kernel.org>; Wed,  6 Mar 2024 13:53:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 014EEC54E41
+	for <u-boot@archiver.kernel.org>; Wed,  6 Mar 2024 13:53:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 695BF87C92;
-	Wed,  6 Mar 2024 14:51:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id 120C788010;
+	Wed,  6 Mar 2024 14:52:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="RD0PNfII";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="nYiFtu8A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B4BB86784; Wed,  6 Mar 2024 14:49:40 +0100 (CET)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
+ id 5324687FFB; Wed,  6 Mar 2024 14:52:27 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1C9A87D9B
- for <u-boot@lists.denx.de>; Wed,  6 Mar 2024 14:49:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id B119687FDA
+ for <u-boot@lists.denx.de>; Wed,  6 Mar 2024 14:52:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=avromanov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 681CD12001C;
- Wed,  6 Mar 2024 16:49:36 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 681CD12001C
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1709732976;
- bh=AQsZS1IytEWdBxA+yxM57VdgxMeSQKruIG9qXD2QEwM=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=RD0PNfIImabLX83kelCGbC9JrNsJvzh6mA1b0H7RSrEkGuFFSeiFukhig0dSgXvjI
- Osfr/+rcnfcAedE40SCjCq0CXWzKueXRxUNBL1zM7ACZUN8aqhs63APISo3L7+0EOl
- /O6UVC4g3nG557eWCYmyhYFuGFPz22QgcpGfTw7eNutZ7hkMCAIAjjaJdS76C52vFX
- 1VC1X2V0Kcnpi0+tD+7xlwV34UeYLmCia3/0RFV7dqAnn+KWpsXMhBTPMSBdagRY/j
- Ucac8dyxgAEQTWm7zPkRQmhI/KhSQDvoj+hE8XMucb6ZGe5aWC3ucJasjjdVnK4OeC
- olfyV7/eiRS5A==
-Received: from smtp.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
- [172.16.192.107])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Wed,  6 Mar 2024 16:49:36 +0300 (MSK)
-Received: from user-A520M-DS3H.sberdevices.ru (100.64.160.123) by
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Wed, 6 Mar 2024 16:49:35 +0300
-From: Alexey Romanov <avromanov@salutedevices.com>
-To: <dario.binacchi@amarulasolutions.com>, <michael@amarulasolutions.com>,
- <frieder.schrempf@kontron.de>, <kmpark@infradead.org>, <hs@denx.de>,
- <joe.hershberger@ni.com>, <dunaev@tecon.ru>, <sjg@chromium.org>,
- <bmeng@tinylab.org>, <xypron.glpk@gmx.de>, <tobias@waldekranz.com>,
- <jpewhacker@gmail.com>, <marek.vasut+renesas@mailbox.org>,
- <kever.yang@rock-chips.com>, <jbx6244@gmail.com>,
- <abdellatif.elkhlifi@arm.com>, <mikhail.kshevetskiy@iopsys.eu>,
- <jagan@amarulasolutions.com>
-CC: <kernel@salutedevices.com>, <u-boot@lists.denx.de>, Alexey Romanov
- <avromanov@salutedevices.com>
-Subject: [PATCH v1 6/6] spinand: bind UBI block
-Date: Wed, 6 Mar 2024 16:49:06 +0300
-Message-ID: <20240306134906.1179285-7-avromanov@salutedevices.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240306134906.1179285-1-avromanov@salutedevices.com>
-References: <20240306134906.1179285-1-avromanov@salutedevices.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 426DqJYH080607;
+ Wed, 6 Mar 2024 07:52:19 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1709733139;
+ bh=HpNwKvRcY7t6hZOEtU1lYZLsI9VrpGPeEE6k/jKJy14=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=nYiFtu8AfZihFpRhu9NMotXYV63S+zKy8aTz1Cr7+tGtPsk+kWT7z4tsqNrF2tW9t
+ lSAUcWll5zzxte8eNSzaJmZRUhfom1VopWxBTrd6NN7CUUqA0NAxPKjtAnPVqKt0qh
+ w79DfBde/6xqROgxvfiQu7GMrSDnG04LtMAPlJts=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 426DqJSp011016
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 6 Mar 2024 07:52:19 -0600
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 6
+ Mar 2024 07:52:18 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 6 Mar 2024 07:52:18 -0600
+Received: from [10.249.42.149] ([10.249.42.149])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 426DqIFb033689;
+ Wed, 6 Mar 2024 07:52:18 -0600
+Message-ID: <fb6f9a10-feaa-41c7-9c57-95a914731bbc@ti.com>
+Date: Wed, 6 Mar 2024 07:52:18 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [100.64.160.123]
-X-ClientProxiedBy: p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) To
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 183875 [Feb 29 2024]
-X-KSMG-AntiSpam-Version: 6.1.0.3
-X-KSMG-AntiSpam-Envelope-From: avromanov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 7 0.3.7
- 6d6bf5bd8eea7373134f756a2fd73e9456bb7d1a,
- {Tracking_from_domain_doesnt_match_to}, FromAlignment: s,
- ApMailHostAddress: 100.64.160.123
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean
-X-KSMG-LinksScanning: Clean
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2024/02/29 19:21:00 #23899999
-X-KSMG-AntiVirus-Status: Clean, skipped
-X-Mailman-Approved-At: Wed, 06 Mar 2024 14:51:44 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 4/6] arm: mach-k3: am62: Fixup TF-A/OP-TEE reserved-memory
+ node in FDT
+Content-Language: en-US
+To: Manorit Chawdhry <m-chawdhry@ti.com>
+CC: Neha Malcom Francis <n-francis@ti.com>, Vignesh Raghavendra
+ <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>, Simon Glass
+ <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>
+References: <20240214163009.983034-1-afd@ti.com>
+ <20240214163009.983034-5-afd@ti.com>
+ <20240228062456.2edu55i7jmnny66l@uda0497581>
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <20240228062456.2edu55i7jmnny66l@uda0497581>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,42 +84,130 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-UBI block is virtual block device, which is an abstraction
-over MTD layer. Therefore it is logical to use it in combination
-with MTD drivers.
+On 2/28/24 12:24 AM, Manorit Chawdhry wrote:
+> Hi Andrew,
+> 
+> On 10:30-20240214, Andrew Davis wrote:
+>> The address we load TF-A and OP-TEE to is configurable by Kconfig
+>> CONFIG_K3_{ATF,OPTEE}_LOAD_ADDR, but the DT nodes reserving this memory
+>> are often statically defined. As these binaries are dynamically loadable,
+>> and in the case of OP-TEE may not even be loaded at all, hard-coding these
+>> addresses is not a hardware description, but rather a configuration.
+>>
+>> If the address that U-Boot loaded TF-A or OP-TEE does not match the
+>> address in hard-coded in DT, then fix that node address. This also handles
+>> the case when no reserved memory for these is provided by DT, which is
+>> more correct as explained above.
+>>
+>> Add this fixup function, and enable it for AM62.
+> 
+> Why are we doing it only for AM62? Assuming that this can help in other
+> devices as well as all the DTs ideally should have these reserved nodes
+> in DT?
 
-Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
----
- drivers/mtd/nand/spi/core.c | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+Only AM62(a) have TF-A in DRAM, the rest of K3 put it in SRAM which
+means it wont need to be moved currently. If we ever do move TF-A to
+DRAM for other devices then they could make use of this helper function
+just the same.
 
-diff --git a/drivers/mtd/nand/spi/core.c b/drivers/mtd/nand/spi/core.c
-index f2ec32e1d0..32705e1e2a 100644
---- a/drivers/mtd/nand/spi/core.c
-+++ b/drivers/mtd/nand/spi/core.c
-@@ -27,6 +27,7 @@
- #include <watchdog.h>
- #include <spi.h>
- #include <spi-mem.h>
-+#include <ubi_uboot.h>
- #include <dm/device_compat.h>
- #include <dm/devres.h>
- #include <dm/uclass.h>
-@@ -1182,7 +1183,13 @@ static void spinand_cleanup(struct spinand_device *spinand)
- static int spinand_bind(struct udevice *dev)
- {
- 	struct spinand_plat *plat = dev_get_plat(dev);
--	return mtd_bind(dev, &plat->mtd);
-+	int ret;
-+
-+	ret = mtd_bind(dev, &plat->mtd);
-+	if (ret)
-+		return ret;
-+
-+	return ubi_bind(dev);
- }
- #endif
- 
--- 
-2.34.1
+Andrew
 
+> 
+> Regards,
+> Manorit
+>>
+>> Signed-off-by: Andrew Davis <afd@ti.com>
+>> ---
+>>   arch/arm/mach-k3/am625_fdt.c  |  2 ++
+>>   arch/arm/mach-k3/common_fdt.c | 52 +++++++++++++++++++++++++++++++++++
+>>   arch/arm/mach-k3/common_fdt.h |  2 ++
+>>   3 files changed, 56 insertions(+)
+>>
+>> diff --git a/arch/arm/mach-k3/am625_fdt.c b/arch/arm/mach-k3/am625_fdt.c
+>> index 970dd3447de..b26186456f3 100644
+>> --- a/arch/arm/mach-k3/am625_fdt.c
+>> +++ b/arch/arm/mach-k3/am625_fdt.c
+>> @@ -43,6 +43,8 @@ int ft_system_setup(void *blob, struct bd_info *bd)
+>>   	fdt_fixup_cores_nodes_am625(blob, k3_get_core_nr());
+>>   	fdt_fixup_gpu_nodes_am625(blob, k3_has_gpu());
+>>   	fdt_fixup_pru_node_am625(blob, k3_has_pru());
+>> +	fdt_fixup_reserved(blob, "tfa", CONFIG_K3_ATF_LOAD_ADDR, 0x80000);
+>> +	fdt_fixup_reserved(blob, "optee", CONFIG_K3_OPTEE_LOAD_ADDR, 0x1800000);
+>>   
+>>   	return 0;
+>>   }
+>> diff --git a/arch/arm/mach-k3/common_fdt.c b/arch/arm/mach-k3/common_fdt.c
+>> index 645c4de42f7..3bdedd7b509 100644
+>> --- a/arch/arm/mach-k3/common_fdt.c
+>> +++ b/arch/arm/mach-k3/common_fdt.c
+>> @@ -112,3 +112,55 @@ int fdt_del_node_path(void *blob, const char *path)
+>>   
+>>   	return ret;
+>>   }
+>> +
+>> +int fdt_fixup_reserved(void *blob, const char *name,
+>> +		       unsigned int new_address, unsigned int new_size)
+>> +{
+>> +	int nodeoffset, subnode;
+>> +	int ret;
+>> +
+>> +	/* Find reserved-memory */
+>> +	nodeoffset = fdt_subnode_offset(blob, 0, "reserved-memory");
+>> +	if (nodeoffset < 0) {
+>> +		debug("Could not find reserved-memory node\n");
+>> +		return 0;
+>> +	}
+>> +
+>> +	/* Find existing matching subnode and remove it */
+>> +	fdt_for_each_subnode(subnode, blob, nodeoffset) {
+>> +		const char *node_name;
+>> +		fdt_addr_t addr;
+>> +		fdt_size_t size;
+>> +
+>> +		/* Name matching */
+>> +		node_name = fdt_get_name(blob, subnode, NULL);
+>> +		if (!name)
+>> +			return -EINVAL;
+>> +		if (!strncmp(node_name, name, strlen(name))) {
+>> +			/* Read out old size first */
+>> +			addr = fdtdec_get_addr_size(blob, subnode, "reg", &size);
+>> +			if (addr == FDT_ADDR_T_NONE)
+>> +				return -EINVAL;
+>> +			new_size = size;
+>> +
+>> +			/* Delete node */
+>> +			ret = fdt_del_node(blob, subnode);
+>> +			if (ret < 0)
+>> +				return ret;
+>> +
+>> +			/* Only one matching node */
+>> +			break;
+>> +		}
+>> +	}
+>> +
+>> +	struct fdt_memory carveout = {
+>> +		.start = new_address,
+>> +		.end = new_address + new_size - 1,
+>> +	};
+>> +	ret = fdtdec_add_reserved_memory(blob, name, &carveout, NULL, 0, NULL,
+>> +					 FDTDEC_RESERVED_MEMORY_NO_MAP);
+>> +	if (ret < 0)
+>> +		return ret;
+>> +
+>> +	return 0;
+>> +}
+>> diff --git a/arch/arm/mach-k3/common_fdt.h b/arch/arm/mach-k3/common_fdt.h
+>> index 4d23ae638ca..52c07957483 100644
+>> --- a/arch/arm/mach-k3/common_fdt.h
+>> +++ b/arch/arm/mach-k3/common_fdt.h
+>> @@ -8,5 +8,7 @@
+>>   
+>>   int fdt_fixup_msmc_ram_k3(void *blob);
+>>   int fdt_del_node_path(void *blob, const char *path);
+>> +int fdt_fixup_reserved(void *blob, const char *name,
+>> +		       unsigned int new_address, unsigned int new_size);
+>>   
+>>   #endif /* _COMMON_FDT_H */
+>> -- 
+>> 2.39.2
+>>
