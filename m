@@ -4,86 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6AB1C5475B
-	for <u-boot@archiver.kernel.org>; Wed,  6 Mar 2024 06:31:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F45CC5475B
+	for <u-boot@archiver.kernel.org>; Wed,  6 Mar 2024 07:33:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0CCA687D33;
-	Wed,  6 Mar 2024 07:31:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 50617879A0;
+	Wed,  6 Mar 2024 08:33:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="whIHpqtm";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MjIuBO+K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 586BC87D14; Wed,  6 Mar 2024 07:31:07 +0100 (CET)
-Received: from mail-vs1-xe32.google.com (mail-vs1-xe32.google.com
- [IPv6:2607:f8b0:4864:20::e32])
+ id 6AE5E8795D; Wed,  6 Mar 2024 08:33:02 +0100 (CET)
+Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
+ [IPv6:2607:f8b0:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CFFE687D33
- for <u-boot@lists.denx.de>; Wed,  6 Mar 2024 07:31:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D331D87D7E
+ for <u-boot@lists.denx.de>; Wed,  6 Mar 2024 08:32:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vs1-xe32.google.com with SMTP id
- ada2fe7eead31-472967264e7so1643128137.3
- for <u-boot@lists.denx.de>; Tue, 05 Mar 2024 22:31:02 -0800 (PST)
+ spf=pass smtp.mailfrom=cfsworks@gmail.com
+Received: by mail-il1-x12c.google.com with SMTP id
+ e9e14a558f8ab-3660132bf15so7437795ab.1
+ for <u-boot@lists.denx.de>; Tue, 05 Mar 2024 23:32:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709706661; x=1710311461; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=tHqB/JufYvjh1vhgHrATeKLomghGVXmuu3MQI26Al60=;
- b=whIHpqtmyjSRanAPkGwZTxOA64zuYtXV6YsG7hYxTTGqWBxgup91sMum50Wv0UYUhW
- dTCDP85NEJvMkWE5LvO5CP9OviieNC+7+CBSTdIP0I17p6KX/GuGKdIGypyK8o6n46kY
- sbOKJnm/Pj7qXPrp16ZQEqLgiZTDFZJBrz2S886qdovyxh7G0COP9KJyaDNm/RwWkHXZ
- Y06Lmbqsy/kQljyrOxPyOddmp31n4XBgiurv968DRiTpfdVzCua2/DX8CqoVTEDrlU2/
- xKM+fh4I3HWVeZe5virI6j6XILVLPhq3xVkSiDAm2Ckbq+tiMxJf0haDx8Ed3q/nKXS+
- 7pCw==
+ d=gmail.com; s=20230601; t=1709710378; x=1710315178; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=oVRnZxbB9ioSV0KmQDqzGQDT4A9IVVeh/Z28ApM/HXs=;
+ b=MjIuBO+KciuPQEroGzf87XdqSJdOipwv4E1D0Wils6TuP7rYENLPm3dF0S+XEbv4mp
+ 3iXqE8Xi3GWnVAj681lwG+iIrw1dDl7TAmHN21bvxHukPiM1eNzOhOD0LKculLyg7zZ6
+ UF/SOi+cyIlJ5XJVhWASOOPTdHRlPjZz/tUXAk2pm8iIxby4t1mKMErF3UvLYrrSRiGo
+ DDJ/YU3cHWIiNRlahmZMJzDqpdSPgc5Z9/gtjFGc+MM8ioqaeKsfovpubiexi0OJ+FQ/
+ fnxhPKu/1OdCMRRk/kB6KR2iFfH7EVgUp8BKEUSKgr50Hzzxpu6bj4xkviJ2dGm1prZB
+ Ct+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709706661; x=1710311461;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=tHqB/JufYvjh1vhgHrATeKLomghGVXmuu3MQI26Al60=;
- b=DqcGvS2NuQKA0Zewoyf+QD/iYqJ+qGuc3GGeworJWNqG10+ulrDDT2D/dwbL6K5OGU
- GAzAtSbx6qTlIVlOKRorB7qwMv5oZ89QtmZz64yhce+fekZCijFxuq/eE5zK2ptjVb5D
- b+24+Cafu2LzMS5cQ2R+Pbz/c11cHufsbd265ScD66OY7JR5FyPKzl7wKmvX9SUX2A6P
- b/i7OI8PLLyAocHqnk3byH/DxHYAeTN2MJicEp3Fv6MMxBL8742Y/rBk1uwlqlb6oaBT
- xGeoKRCPR20a/H4I5pmNPxHavjmeb6LZMhxGoSWMxkH8JpCngUiI5J6iRz0uQtc1ryOM
- RuLQ==
-X-Gm-Message-State: AOJu0Yw1unZMQ0TFqlOPnulfWCDHm3zL6ayD4KO0msZan4tsrHGJbGgj
- IlHSFBWcyviLCH/0NYzAlmFBxv+2MfekD8SNj721YtRdZLI6JuuAEIbhrP6ulEOIwllo4y0s4ES
- sRO3CHyCnjx1+3CWcFM2LsLfYDRkBbIJzVvEmeQ==
-X-Google-Smtp-Source: AGHT+IEVNoGLut2PWoSOAW9q5jFSKD1YF1wVoKrVu/QK/JIIxA8qbhuz9LiGsQSmrDUcojRgcoYD6Mnh62a0PSlTW60=
-X-Received: by 2002:a67:ec50:0:b0:472:e281:2acc with SMTP id
- z16-20020a67ec50000000b00472e2812accmr2860136vso.5.1709706661517; Tue, 05 Mar
- 2024 22:31:01 -0800 (PST)
+ d=1e100.net; s=20230601; t=1709710378; x=1710315178;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=oVRnZxbB9ioSV0KmQDqzGQDT4A9IVVeh/Z28ApM/HXs=;
+ b=wvYlEctaXOTj5IWAXHlX2uJJfw7/Ji0NBr1G/r2sHtgpBpPRs1y9mTu2CHpUGPsJBt
+ 5wiF2zXxLemz9Ms7XuAdpQrZ7SvnkLN/clte5sYS3ARDe/1Ysy1zZLHZ+KvD8GMnI8jc
+ MeRKOmcNB4GqEoXcvy1Zza46+Z+kQMoltwcRlaRrDZGyG15+ktDAxnlWwHonjZgYgicV
+ GO0bHUNlh+WbBm5aF9lEzdEh7gZ2c5ULM0ac7tztjJBNBorfpdkcWHXKD894Wk36VTlw
+ r4pjBEHNMwlJCvb/ZedI4SlOX1H+vK1d+RULCpEnKZxy7SpZp3B0As7asoQgVBAeDpf4
+ B2Nw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVwsSC1KgOMMqG3Y7LmE8TA0OlyNPHSWykB0xsb4tahypw2qgdkD+vObyuyWAFH5LA74W5WCcXcPtGrObRJDXpzJHqmSA==
+X-Gm-Message-State: AOJu0YzOvlf9KRrC/E+JSn9s0QLRZKjOuYrhxhJ6iHr/Nei7vLd824Wk
+ zE7wUz7ZdnqYZFw/GFwwuw0t6cDoI2b6um8heeH7eLL4deFV2yXj
+X-Google-Smtp-Source: AGHT+IEIynurI+9CgE+Q+lg861tAAK4QaRiL2+cBgBuwZEMX4LT4gj7OM/YHrvrhRDIT+xPCbI1MAQ==
+X-Received: by 2002:a05:6e02:1d18:b0:365:3d96:4b98 with SMTP id
+ i24-20020a056e021d1800b003653d964b98mr15811006ila.2.1709710378311; 
+ Tue, 05 Mar 2024 23:32:58 -0800 (PST)
+Received: from ?IPV6:2001:470:42c4:101:10f:8bb5:397e:4402?
+ ([2001:470:42c4:101:10f:8bb5:397e:4402])
+ by smtp.gmail.com with ESMTPSA id
+ c7-20020a92cf47000000b003642a638341sm3475015ilr.86.2024.03.05.23.32.57
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 05 Mar 2024 23:32:57 -0800 (PST)
+Message-ID: <6c502584-df1c-44e4-9fa4-70d73a4ae07e@gmail.com>
+Date: Wed, 6 Mar 2024 00:32:56 -0700
 MIME-Version: 1.0
-References: <20240226080433.3307154-1-sumit.garg@linaro.org>
- <20240226080433.3307154-6-sumit.garg@linaro.org>
- <CAHCN7x+wwoiLO_hpSkiHXFmAUwa0bhbYeQD_UHK10e2YOX+WKA@mail.gmail.com>
- <CAFA6WYNJ4BVHOFftSdwdMv2SMJ8ZQh3S7CRjJHfiAnosSbmgGQ@mail.gmail.com>
- <CAFA6WYPNsRsWnFLVcMXX_KxmN2YTbysu_ZPan1jyrVASrS==rQ@mail.gmail.com>
- <CAHCN7xLqKdydxRVfdVJ2RmS+=tdQT3fR52uVMhLEoZSoObcq3Q@mail.gmail.com>
- <CAHCN7x+fgQ0woDyaV1R2W28Sjs3Tahq=BuQQ7AE_df8BGpoBnw@mail.gmail.com>
-In-Reply-To: <CAHCN7x+fgQ0woDyaV1R2W28Sjs3Tahq=BuQQ7AE_df8BGpoBnw@mail.gmail.com>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Wed, 6 Mar 2024 12:00:50 +0530
-Message-ID: <CAFA6WYPhVY2jg55m6sZR_Aq3ErfAn1s5DfocZkvbT0_mj32a-w@mail.gmail.com>
-Subject: Re: [PATCH v2 5/8] phy: phy-imx8m-pcie: Add support for i.MX8M{M/P}
- PCIe PHY
-To: Adam Ford <aford173@gmail.com>
-Cc: u-boot@lists.denx.de, marcel.ziswiler@toradex.com, francesco@dolcini.it, 
- trini@konsulko.com, lukma@denx.de, seanga2@gmail.com,
- jh80.chung@samsung.com, 
- festevam@denx.de, andrejs.cainikovs@toradex.com, sjg@chromium.org, 
- peng.fan@nxp.com, marex@denx.de, ilias.apalodimas@linaro.org, 
- sahaj.sarup@linaro.org, fathi.boudra@linaro.org, remi.duraffort@linaro.org, 
- daniel.thompson@linaro.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/6] arm: clean up v7 and v8 linker scripts for
+ bss_start/end
+Content-Language: en-US
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
+ trini@konsulko.com
+Cc: caleb.connolly@linaro.org, sumit.garg@linaro.org,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, Michal Simek <michal.simek@amd.com>,
+ Yegor Yefremov <yegorslists@googlemail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Shiji Yang <yangshiji66@outlook.com>, Bin Meng <bmeng@tinylab.org>
+References: <20240304090113.1410575-1-ilias.apalodimas@linaro.org>
+ <20240304090113.1410575-3-ilias.apalodimas@linaro.org>
+From: Sam Edwards <cfsworks@gmail.com>
+In-Reply-To: <20240304090113.1410575-3-ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,112 +104,224 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 6 Mar 2024 at 06:17, Adam Ford <aford173@gmail.com> wrote:
->
-> On Tue, Mar 5, 2024 at 7:51=E2=80=AFAM Adam Ford <aford173@gmail.com> wro=
-te:
-> >
-> > On Tue, Mar 5, 2024 at 7:48=E2=80=AFAM Sumit Garg <sumit.garg@linaro.or=
-g> wrote:
-> > >
-> > > Hi Adam,
-> > >
-> > > On Wed, 28 Feb 2024 at 12:29, Sumit Garg <sumit.garg@linaro.org> wrot=
-e:
-> > > >
-> > > > Hi Adam,
-> > > >
-> > > > On Wed, 28 Feb 2024 at 04:42, Adam Ford <aford173@gmail.com> wrote:
-> > > > >
-> > > > > On Mon, Feb 26, 2024 at 2:05=E2=80=AFAM Sumit Garg <sumit.garg@li=
-naro.org> wrote:
-> > > > > >
-> > > > > > Add initial support for i.MX8M{M/P} PCIe PHY. On i.MX8M{M/P} So=
-Cs PCIe
-> > > > > > PHY initialization moved to this standalone PHY driver.
-> > > > > >
-> > > > > > Inspired from counterpart Linux kernel v6.8-rc3 driver:
-> > > > > > drivers/phy/freescale/phy-fsl-imx8m-pcie.c.
-> > > > >
-> > > > > I have a PCIe device that works just fine in Linux.  I have appli=
-ed
-> > > > > your series an enabled the same config options as you did along w=
-ith
-> > > > > some others to resolve some build issues.
-> > > > >
-> > > > > Any ideas how to address:
-> > > > >
-> > > > > nxp_imx8_pcie_phy pcie-phy@32f00000: PHY: Failed to power on
-> > > > > pcie-phy@32f00000: -110.
-> > > > >
-> > > > > My PHY node looks like this
-> > > > >
-> > > > > &pcie_phy {
-> > > > >     fsl,refclk-pad-mode =3D <IMX8_PCIE_REFCLK_PAD_INPUT>;
-> > > > >     clocks =3D <&pcie0_refclk>;
-> > > > >     clock-names =3D "ref";
-> > > > >     status =3D "okay";
-> > > > > };
-> > > > >
-> > > > > The pcie_refcllk is defined as a 100MHz fixed clock in U-Boot.  c=
-lk
-> > > > > dump shows it to be:
-> > > > >
-> > > > > 100000000            0        |-- clock-pcie
-> > > > >
-> > > >
-> > > > I suppose that's an EVK board, try enabling MPCIE_3V3 regulator
-> > > > required for EVK board via following patch:
-> > > >
-> > > > diff --git a/drivers/pci/pcie_dw_imx.c b/drivers/pci/pcie_dw_imx.c
-> > > > index 7856823c9188..32fd2cb05d4b 100644
-> > > > --- a/drivers/pci/pcie_dw_imx.c
-> > > > +++ b/drivers/pci/pcie_dw_imx.c
-> > > > @@ -17,6 +17,7 @@
-> > > >  #include <linux/iopoll.h>
-> > > >  #include <log.h>
-> > > >  #include <pci.h>
-> > > > +#include <power/regulator.h>
-> > > >  #include <regmap.h>
-> > > >  #include <reset.h>
-> > > >  #include <syscon.h>
-> > > > @@ -158,6 +159,8 @@ static int pcie_dw_imx_probe(struct udevice *de=
-v)
-> > > >         struct pci_controller *hose =3D dev_get_uclass_priv(ctlr);
-> > > >         int ret;
-> > > >
-> > > > +       regulator_autoset_by_name("MPCIE_3V3", NULL);
->
-> I think you should search the device tree for "vpcie-supply" and
-> enable the corresponding regulator, because is more flexible than
-> hard-coding regulator names. This is also more of a standard practice.
->
+On 3/4/24 02:01, Ilias Apalodimas wrote:
+> commit 3ebd1cbc49f0 ("arm: make __bss_start and __bss_end__ compiler-generated")
+> and
+> commit f84a7b8f54db ("ARM: Fix __bss_start and __bss_end in linker scripts")
+> were moving the bss_start/end on c generated variables that were
+> injected in their own sections. The reason was that we needed relative
+> relocations for position independent code and linker bugs back then
+> prevented us from doing so.
+> 
+> However, the linker documentation pages states that symbols that are
+> defined within a section definition will create a relocatable
+> type with the value being a fixed offset from the base of a section.
+> This have been fixed since 2016 [1]. So let's start cleaning this up
+> starting with the bss_start and bss_end variables. Convert them into
+> symbols within the .bss section definition.
+> 
+> [0] https://ftp.gnu.org/old-gnu/Manuals/ld-2.9.1/html_mono/ld.html#SEC13
+> [1] commit 6b3b0ab89663 ("Make linker assigned symbol dynamic only for shared object")
+> 
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Tested-by: Caleb Connolly <caleb.connolly@linaro.org> # Qualcomm sdm845
+> ---
+>   arch/arm/cpu/armv8/u-boot-spl.lds        | 14 +++-----------
+>   arch/arm/cpu/armv8/u-boot.lds            | 15 +++------------
+>   arch/arm/cpu/u-boot.lds                  | 22 ++++------------------
+>   arch/arm/lib/sections.c                  |  2 --
+>   arch/arm/mach-rockchip/u-boot-tpl-v8.lds | 14 +++-----------
+>   arch/arm/mach-zynq/u-boot.lds            | 21 +++------------------
+>   6 files changed, 16 insertions(+), 72 deletions(-)
+> 
+> diff --git a/arch/arm/cpu/armv8/u-boot-spl.lds b/arch/arm/cpu/armv8/u-boot-spl.lds
+> index 7cb9d731246d..16fddb46e9cb 100644
+> --- a/arch/arm/cpu/armv8/u-boot-spl.lds
+> +++ b/arch/arm/cpu/armv8/u-boot-spl.lds
+> @@ -63,18 +63,10 @@ SECTIONS
+>   
+>   	_image_binary_end = .;
+>   
+> -	.bss_start (NOLOAD) : {
+> -		. = ALIGN(8);
+> -		KEEP(*(.__bss_start));
+> -	} >.sdram
+> -
+> -	.bss (NOLOAD) : {
+> +	.bss : {
+> +		__bss_start = .;
+>   		*(.bss*)
+> -		 . = ALIGN(8);
+> -	} >.sdram
+> -
+> -	.bss_end (NOLOAD) : {
+> -		KEEP(*(.__bss_end));
+> +		__bss_end = .;
+>   	} >.sdram
+>   
+>   	/DISCARD/ : { *(.rela*) }
+> diff --git a/arch/arm/cpu/armv8/u-boot.lds b/arch/arm/cpu/armv8/u-boot.lds
+> index fb6a30c922f7..c4ee10ebc3ff 100644
+> --- a/arch/arm/cpu/armv8/u-boot.lds
+> +++ b/arch/arm/cpu/armv8/u-boot.lds
+> @@ -149,19 +149,10 @@ SECTIONS
+>   
+>   	_end = .;
+>   
+> -	. = ALIGN(8);
+> -
+> -	.bss_start : {
+> -		KEEP(*(.__bss_start));
+> -	}
+> -
+> -	.bss : {
+> +	.bss ALIGN(8): {
+> +		__bss_start = .;
+>   		*(.bss*)
+> -		 . = ALIGN(8);
+> -	}
+> -
+> -	.bss_end : {
+> -		KEEP(*(.__bss_end));
+> +		__bss_end = .;
+>   	}
+>   
+>   	/DISCARD/ : { *(.dynsym) }
+> diff --git a/arch/arm/cpu/u-boot.lds b/arch/arm/cpu/u-boot.lds
+> index 7724c9332c3b..90d329b1ebe0 100644
+> --- a/arch/arm/cpu/u-boot.lds
+> +++ b/arch/arm/cpu/u-boot.lds
+> @@ -206,27 +206,13 @@ SECTIONS
+>   		*(.mmutable)
+>   	}
+>   
+> -/*
+> - * Compiler-generated __bss_start and __bss_end, see arch/arm/lib/bss.c
+> - * __bss_base and __bss_limit are for linker only (overlay ordering)
+> - */
+> -
+> -	.bss_start __rel_dyn_start (OVERLAY) : {
+> -		KEEP(*(.__bss_start));
+> -		__bss_base = .;
+> -	}
+> -
+> -	.bss __bss_base (OVERLAY) : {
+> +	.bss ALIGN(4): {
 
-Yeah I agree, this was sort of a minimal diff to test with.
+Hi Ilias,
 
-> > > > +
-> > > >         ret =3D imx_pcie_assert_core_reset(priv);
-> > > >         if (ret) {
-> > > >                 dev_err(dev, "failed to assert core reset\n");
-> > > >
-> > >
-> > > Were you able to give a retry with the above diff?
-> >
-> > Not yet, but I'll try to do it tonight.
->
-> That didn't work for me.  I am using a Beacon Embedded kit which does
-> not use a regulator, so this had no impact, but I think having the
-> vpcie-supply regulator is a good idea.
+I have been reviewing this patchset by diffing output binaries and 
+linker maps between successive patches. Most of the patches in this 
+series result in no change to the output binary whatsoever (which also 
+means, no regressions!) but this one does have a change: .bss is being 
+moved after .mmutable. You should be able to see this yourself by 
+comparing `u-boot.map` after a successful build, before and after 
+applying this patch.
 
-Sure, I can add that.
+Since the current u-boot.lds puts .bss right after __image_copy_end 
+(which makes sense) and uses OVERLAY to overlap .rel.dyn (which... I 
+guess makes sense, if U-Boot zero-initializes .bss after applying 
+relocations), perhaps this patch should be moving the .bss section up 
+there in the .lds, putting (OVERLAY) back, and adding a comment to the 
+effect of "These sections occupy the same memory, but their lifetimes do 
+not overlap: U-Boot initializes .bss only after applying relocations and 
+therefore after it doesn't need .rel.dyn any more."
 
--Sumit
+We might also decide that the overlay memory-saving trick isn't actually 
+all that important anymore and that .bss should have a new home. Someone 
+far more seasoned than I should be the one to make that decision though.
 
->
-> I'll investigate a bit more and let you know if I make any progress.
->
-> adam
-> >
-> > adam
-> > >
-> > > -Sumit
+The rest of the patchset looks great! I'll add my tags to those in a bit.
+
+Cheers,
+Sam
+
+> +		__bss_start = .;
+>   		*(.bss*)
+> -		 . = ALIGN(4);
+> -		 __bss_limit = .;
+> -	}
+> -
+> -	.bss_end __bss_limit (OVERLAY) : {
+> -		KEEP(*(.__bss_end));
+> +		__bss_end = .;
+>   	}
+>   
+> -	.dynsym _image_binary_end : { *(.dynsym) }
+> +	.dynsym  : { *(.dynsym) }
+>   	.dynbss : { *(.dynbss) }
+>   	.dynstr : { *(.dynstr*) }
+>   	.dynamic : { *(.dynamic*) }
+> diff --git a/arch/arm/lib/sections.c b/arch/arm/lib/sections.c
+> index 857879711c6a..8e8bd5797e16 100644
+> --- a/arch/arm/lib/sections.c
+> +++ b/arch/arm/lib/sections.c
+> @@ -19,8 +19,6 @@
+>    * aliasing warnings.
+>    */
+>   
+> -char __bss_start[0] __section(".__bss_start");
+> -char __bss_end[0] __section(".__bss_end");
+>   char __image_copy_start[0] __section(".__image_copy_start");
+>   char __image_copy_end[0] __section(".__image_copy_end");
+>   char __rel_dyn_start[0] __section(".__rel_dyn_start");
+> diff --git a/arch/arm/mach-rockchip/u-boot-tpl-v8.lds b/arch/arm/mach-rockchip/u-boot-tpl-v8.lds
+> index 74618eba591b..b7887194026e 100644
+> --- a/arch/arm/mach-rockchip/u-boot-tpl-v8.lds
+> +++ b/arch/arm/mach-rockchip/u-boot-tpl-v8.lds
+> @@ -56,18 +56,10 @@ SECTIONS
+>   
+>   	_image_binary_end = .;
+>   
+> -	.bss_start (NOLOAD) : {
+> -		. = ALIGN(8);
+> -		KEEP(*(.__bss_start));
+> -	}
+> -
+> -	.bss (NOLOAD) : {
+> +	.bss ALIGN(8) : {
+> +		__bss_start = .;
+>   		*(.bss*)
+> -		 . = ALIGN(8);
+> -	}
+> -
+> -	.bss_end (NOLOAD) : {
+> -		KEEP(*(.__bss_end));
+> +		__bss_end = .;
+>   	}
+>   
+>   	/DISCARD/ : { *(.dynsym) }
+> diff --git a/arch/arm/mach-zynq/u-boot.lds b/arch/arm/mach-zynq/u-boot.lds
+> index 3b7c9d515f8b..8d3259821719 100644
+> --- a/arch/arm/mach-zynq/u-boot.lds
+> +++ b/arch/arm/mach-zynq/u-boot.lds
+> @@ -102,26 +102,11 @@ SECTIONS
+>   
+>   	_image_binary_end = .;
+>   
+> -/*
+> - * Compiler-generated __bss_start and __bss_end, see arch/arm/lib/bss.c
+> - * __bss_base and __bss_limit are for linker only (overlay ordering)
+> - */
+> -
+> -	.bss_start __rel_dyn_start (OVERLAY) : {
+> -		KEEP(*(.__bss_start));
+> -		__bss_base = .;
+> -	}
+> -
+> -	.bss __bss_base (OVERLAY) : {
+> +	.bss ALIGN(4): {
+> +		__bss_start = .;
+>   		*(.bss*)
+> -		 . = ALIGN(8);
+> -		 __bss_limit = .;
+> -	}
+> -
+> -	.bss_end __bss_limit (OVERLAY) : {
+> -		KEEP(*(.__bss_end));
+> +		__bss_end = .;
+>   	}
+> -
+>   	/*
+>   	 * Zynq needs to discard these sections because the user
+>   	 * is expected to pass this image on to tools for boot.bin
