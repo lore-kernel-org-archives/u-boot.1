@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B3ECC54E41
-	for <u-boot@archiver.kernel.org>; Wed,  6 Mar 2024 13:40:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DEA1C54E41
+	for <u-boot@archiver.kernel.org>; Wed,  6 Mar 2024 13:40:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E15AF87FA7;
-	Wed,  6 Mar 2024 14:40:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5B41E87FF0;
+	Wed,  6 Mar 2024 14:40:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ltts.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F00287E18; Wed,  6 Mar 2024 14:40:07 +0100 (CET)
+ id D852387653; Wed,  6 Mar 2024 14:40:17 +0100 (CET)
 Received: from esa1.ltts.com (unknown [118.185.121.105])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BC8BD87653
- for <u-boot@lists.denx.de>; Wed,  6 Mar 2024 14:40:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F391C879E0
+ for <u-boot@lists.denx.de>; Wed,  6 Mar 2024 14:40:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=ltts.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bhargav.r@ltts.com
-IronPort-SDR: AKUL/gplBVdnfDH/65MLB1e1jQ8SxDt0QdqgWAhWB4c67fVx6diLsOWs7OIhbKi/mWnYRHTwRG
- w5yCE5/wWW/Q==
+IronPort-SDR: VrIpdPxQG9ERUSiVnpYczM6/npWnI70TLm4r/GBVchMTyIliv10y3T7/Jg0TB1KChXCJ1p6s/4
+ BlcGyYecvZBQ==
 Received: from unknown (HELO localhost.localdomain) ([192.168.34.55])
- by esa1.ltts.com with ESMTP; 06 Mar 2024 19:10:01 +0530
+ by esa1.ltts.com with ESMTP; 06 Mar 2024 19:10:02 +0530
 From: Bhargav Raviprakash <bhargav.r@ltts.com>
 To: u-boot@lists.denx.de
 Cc: jh80.chung@samsung.com, sjg@chromium.org, bhargav.r@ltts.com,
  m.nirmaladevi@ltts.com, trini@konsulko.com, d-gole@ti.com,
  dan.carpenter@linaro.org
-Subject: [PATCH v2 1/5] power: tps65941: Add macros of TPS65224 PMIC
-Date: Wed,  6 Mar 2024 19:09:43 +0530
-Message-Id: <20240306133947.160354-2-bhargav.r@ltts.com>
+Subject: [PATCH v2 3/5] power: regulator: tps65941: Added macros for BUCK ID
+Date: Wed,  6 Mar 2024 19:09:45 +0530
+Message-Id: <20240306133947.160354-4-bhargav.r@ltts.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240306133947.160354-1-bhargav.r@ltts.com>
 References: <20240306133947.160354-1-bhargav.r@ltts.com>
@@ -55,65 +55,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Re-use the TPS65941 PMIC driver for TPS65224 PMIC.
-Add additional macros of TPS65224 to aid in the driver
-re-use.
+Adds macros for buck and ldo ids and switched to using switch
+case instead of if else in probe functions. Helps in adding
+support for TPS65224 PMIC.
 
 Signed-off-by: Bhargav Raviprakash <bhargav.r@ltts.com>
 ---
- include/power/tps65941.h | 30 ++++++++++++++++++++++++++++++
- 1 file changed, 30 insertions(+)
+ drivers/power/regulator/tps65941_regulator.c | 54 +++++++++++++++-----
+ 1 file changed, 42 insertions(+), 12 deletions(-)
 
-diff --git a/include/power/tps65941.h b/include/power/tps65941.h
-index a2bc6814ba..cec85333f0 100644
---- a/include/power/tps65941.h
-+++ b/include/power/tps65941.h
-@@ -3,11 +3,14 @@
- #define TPS659413		0x2
- #define TPS659414		0x3
- #define  LP876441		0x4
-+#define  TPS65224		0x5
+diff --git a/drivers/power/regulator/tps65941_regulator.c b/drivers/power/regulator/tps65941_regulator.c
+index b041126775..cf54e30df5 100644
+--- a/drivers/power/regulator/tps65941_regulator.c
++++ b/drivers/power/regulator/tps65941_regulator.c
+@@ -16,6 +16,25 @@
+ #include <power/regulator.h>
+ #include <power/tps65941.h>
  
- /* I2C device address for pmic tps65941 */
- #define TPS65941_I2C_ADDR	(0x12 >> 1)
- #define TPS65941_LDO_NUM		4
- #define TPS65941_BUCK_NUM		5
-+#define TPS65224_LDO_NUM		3
-+#define TPS65224_BUCK_NUM		4
++/* Single Phase Buck IDs */
++#define TPS65941_BUCK_ID_1        1
++#define TPS65941_BUCK_ID_2        2
++#define TPS65941_BUCK_ID_3        3
++#define TPS65941_BUCK_ID_4        4
++#define TPS65941_BUCK_ID_5        5
++
++/* Multi Phase Buck IDs */
++#define TPS65941_BUCK_ID_12      12
++#define TPS65941_BUCK_ID_34      34
++#define TPS65941_BUCK_ID_123    123
++#define TPS65941_BUCK_ID_1234  1234
++
++/* LDO IDs */
++#define TPS65941_LDO_ID_1         1
++#define TPS65941_LDO_ID_2         2
++#define TPS65941_LDO_ID_3         3
++#define TPS65941_LDO_ID_4         4
++
+ static const char tps65941_buck_ctrl[TPS65941_BUCK_NUM] = {0x4, 0x6, 0x8, 0xA,
+ 								0xC};
+ static const char tps65941_buck_vout[TPS65941_BUCK_NUM] = {0xE, 0x10, 0x12,
+@@ -270,10 +289,15 @@ static int tps65941_ldo_probe(struct udevice *dev)
+ 	uc_pdata->type = REGULATOR_TYPE_LDO;
  
- /* Drivers name */
- #define TPS65941_LDO_DRIVER		"tps65941_ldo"
-@@ -25,3 +28,30 @@
- #define TPS65941_LDO_MODE_MASK		0x1
- #define TPS65941_LDO_BYPASS_EN		0x80
- #define TP65941_BUCK_CONF_SLEW_MASK	0x7
-+
-+#define TPS65224_BUCK_VOLT_MAX		3300000
-+#define TPS65224_BUCK1_VOLT_MAX_HEX      0xFD
-+#define TPS65224_BUCK234_VOLT_MAX_HEX    0x45
-+
-+#define TPS65224_BUCK_CONF_SLEW_MASK     0x3
-+#define TPS65224_LDO_VOLT_MASK    (0x3F << 1)
-+
-+#define TPS65224_LDO1_VOLT_MIN_HEX       0x0C
-+#define TPS65224_LDO23_VOLT_MIN_HEX      0x00
-+#define TPS65224_LDO1_VOLT_MAX_HEX       0x36
-+#define TPS65224_LDO23_VOLT_MAX_HEX      0x38
-+
-+#define TPS65224_LDO1_VOLT_MAX        3300000
-+#define TPS65224_LDO23_VOLT_MAX       3400000
-+#define TPS65224_LDO1_VOLT_MIN        1200000
-+#define TPS65224_LDO23_VOLT_MIN        600000
-+
-+#define TPS65224_LDO_STEP               50000
-+
-+#define TPS65224_LDO_BYP_CONFIG             7
-+
-+#define TPS65224_LDO1_VOLT_BYP_MIN    2200000
-+#define TPS65224_LDO1_VOLT_BYP_MAX    3600000
-+
-+#define TPS65224_LDO23_VOLT_BYP_MIN   1500000
-+#define TPS65224_LDO23_VOLT_BYP_MAX   5500000
+ 	idx = dev->driver_data;
+-	if (idx == 1 || idx == 2 || idx == 3 || idx == 4) {
++	switch (idx) {
++	case TPS65941_LDO_ID_1:
++	case TPS65941_LDO_ID_2:
++	case TPS65941_LDO_ID_3:
++	case TPS65941_LDO_ID_4:
+ 		debug("Single phase regulator\n");
+-	} else {
+-		printf("Wrong ID for regulator\n");
++		break;
++	default:
++		pr_err("Wrong ID for regulator\n");
+ 		return -EINVAL;
+ 	}
+ 
+@@ -292,18 +316,24 @@ static int tps65941_buck_probe(struct udevice *dev)
+ 	uc_pdata->type = REGULATOR_TYPE_BUCK;
+ 
+ 	idx = dev->driver_data;
+-	if (idx == 1 || idx == 2 || idx == 3 || idx == 4 || idx == 5) {
++	switch (idx) {
++	case TPS65941_BUCK_ID_1:
++	case TPS65941_BUCK_ID_2:
++	case TPS65941_BUCK_ID_3:
++	case TPS65941_BUCK_ID_4:
++	case TPS65941_BUCK_ID_5:
+ 		debug("Single phase regulator\n");
+-	} else if (idx == 12) {
++		break;
++	case TPS65941_BUCK_ID_12:
++	case TPS65941_BUCK_ID_123:
++	case TPS65941_BUCK_ID_1234:
+ 		idx = 1;
+-	} else if (idx == 34) {
++		break;
++	case TPS65941_BUCK_ID_34:
+ 		idx = 3;
+-	} else if (idx == 123) {
+-		idx = 1;
+-	} else if (idx == 1234) {
+-		idx = 1;
+-	} else {
+-		printf("Wrong ID for regulator\n");
++		break;
++	default:
++		pr_err("Wrong ID for regulator\n");
+ 		return -EINVAL;
+ 	}
+ 
 -- 
 2.25.1
 
