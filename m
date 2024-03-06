@@ -4,71 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51B6FC54798
-	for <u-boot@archiver.kernel.org>; Wed,  6 Mar 2024 01:17:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF267C54E49
+	for <u-boot@archiver.kernel.org>; Wed,  6 Mar 2024 01:17:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0100C87FF7;
+	by phobos.denx.de (Postfix) with ESMTP id 765A288022;
 	Wed,  6 Mar 2024 02:16:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=epam.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=epam.com header.i=@epam.com header.b="ZZJ13lBQ";
+	dkim=pass (2048-bit key; unprotected) header.d=epam.com header.i=@epam.com header.b="jPAB9YZH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A484B87933; Wed,  6 Mar 2024 01:53:21 +0100 (CET)
-Received: from mx0a-0039f301.pphosted.com (mx0a-0039f301.pphosted.com
- [148.163.133.242])
+ id 812A887E03; Wed,  6 Mar 2024 01:53:29 +0100 (CET)
+Received: from mx0b-0039f301.pphosted.com (mx0b-0039f301.pphosted.com
+ [148.163.137.242])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD0CE87E63
- for <u-boot@lists.denx.de>; Wed,  6 Mar 2024 01:53:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 378AC87933
+ for <u-boot@lists.denx.de>; Wed,  6 Mar 2024 01:53:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=epam.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=9795de6c48=volodymyr_babchuk@epam.com
-Received: from pps.filterd (m0174679.ppops.net [127.0.0.1])
- by mx0a-0039f301.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 425GnAXD024399; Wed, 6 Mar 2024 00:53:11 GMT
+Received: from pps.filterd (m0174683.ppops.net [127.0.0.1])
+ by mx0b-0039f301.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
+ 425FtP8s019808; Wed, 6 Mar 2024 00:53:09 GMT
 Received: from eur05-vi1-obe.outbound.protection.outlook.com
- (mail-vi1eur05lp2169.outbound.protection.outlook.com [104.47.17.169])
- by mx0a-0039f301.pphosted.com (PPS) with ESMTPS id 3wp05yb9x0-6
+ (mail-vi1eur05lp2168.outbound.protection.outlook.com [104.47.17.168])
+ by mx0b-0039f301.pphosted.com (PPS) with ESMTPS id 3wp390jh44-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 06 Mar 2024 00:53:10 +0000 (GMT)
+ Wed, 06 Mar 2024 00:53:09 +0000 (GMT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ArmUSiJ3UCSBuMXYkAOQrn9nFMdBMQF+wdo6/S6OVMQ9x55/xrAaYiR77QekKMdshke+TbdrMHPymkqtiXRtq7pZN++X4nfgBlBmxL3dm2ZE7cXVV7qDiqymEL9reTqgI5GVIOKtlHuGiA63woVt7d+8d2nUU/bRoeIFOSeuKCWOq8btAmxENG7fYYYaaOT/AXwiGQo3IZbbdlzd8X1Wu1k8vC350M+EGs+xaK7II0fXEGBN+d1UrpV3myKhv/Z9iVvtFuh0NKBqCGOGTmsw/mg01zOAgr9ebqc3nyXg6xo5LvR8nnujTD3iGWtlH+MneP7RP/Yq99JoxQTGWSUKeg==
+ b=fpV27MT+aq/VdGLnL9CTIHGQM/pn+oXbwjtP0FaedkcaXSLP9lBJ2vSVrOG6TjdoKsKEMTCw0Urj/XKki/MxG1KcNTDa17mjquQXTIyrcfa43pZnuVC2Uel9JX3nggmILQ+xEW6ewvP8mXj7rlxbD3EijKcHtc5i1HzlTXMElimnlx3T8W2lVoPq81vL8gTKuKVwtPwi3UGp6aaYd1Ty0WLnrsma14r5WmkwmAYCMeHs2k99BN3cq4aWWJm2jKrORw+6VKL8o6fatEgj6uFonAOc9X3cMivwLAg8UNC19HsP9PSrPQ7zcrN6d2RtnJ6muFzGKwTOK1ZmwuoAM4s2kw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Q74QnOD5hXeNSh6W4iP7Jh/Z6V0iVP9KdezTH3WPJdE=;
- b=FPXKfh1pv15mmNBH9YrTEPomHz5hFXxnu6RXnbdU8rHPEZqC/ubX3gjLnyMGulB9RecAvR9IWYPIHCp25qUgaZ/+9xPoTrcTbnTuYGl8FvpFBMED0dh6yFnaQc/zql3QFa6DhYRUlMHPSs/N5T1gpc3zRjNM6g7aSfksipoRLrOs6I1WAYvbs0iHzHa2btRrLHnAnu9Nk7G8uHNyOuVZUHVFIasaiFB0TKo39sT0JkF1vzxrEhjlCVyJIA3lUsm3Ez8C7qQ3YIUE9XjUG2R99pupwaZB/VrghG0LNuMCYG+h/Wv8POTUAD0ILH0xwFbsnJgEtM0FsrVk4K2ugZVeNw==
+ bh=XuZbPIPsHC5GQXzB6DoxXBC5TjoFsAJ1qzwQTLan4bc=;
+ b=bUqTuDnXq9XPBj7OE2iEp+dsBA3H1gOqtUc8TdhpJ5GYwmexPtgGY1IR/Y7AjZestSrvQzuqCcgZeoAKpZgXUTHsNDnmn9H21ZCTJtohztUipPBHwhZ/aMOagRfJu4u3+nNzpSi1v6Q+vxR5ZBjUCmd+bljdzGFcruSG/BBO7ezxYjmnOpmMmTNOMSG7Ko/xavBrqP/aNoEtm6vyKeXIQjyEZsxeYfj7DZ/0fnEAPofxsu4ue9fmjZR9KDj0TSKFJoV7uBQwBxIODzSFzj0Srb3etKlH+RjSnAlNBOFJM/7S5DMfJxEIDTbpJ8uIjqwMDkhP/1ylwiAVZdAvFfZMlQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector2; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Q74QnOD5hXeNSh6W4iP7Jh/Z6V0iVP9KdezTH3WPJdE=;
- b=ZZJ13lBQFJKyJ1lshVCeZiFi7iHJtYVyhLTdie6GwdOGEYWS+LjiCYWOfNi60cOrvgH2cmDv43C5GWhr0iV3hqgh0YmYOnSVYE5hlIhKarlXIpHC3db4ShoYMBmakWtur3CmvvysOE5z8rsZAQkhG+8Mbzc3UjmTcm5AJhTSP98KOx62lfvTwnhKhuf2T0EkLyZpSIjDH5gpR8/m5JZl3ICsN7SnOpDqwCkXJpBYtEMfhpaywckxppf50zyayCV8x7H4ppBR4ue6VtSrV4bPNwKwJ8ZK40PAY2HYZ+lc9TYA4S7iiSvEsqc9609R/KHEAQRUfg0kfpOTmUOkdmBdsQ==
+ bh=XuZbPIPsHC5GQXzB6DoxXBC5TjoFsAJ1qzwQTLan4bc=;
+ b=jPAB9YZHV4kapWdj7ukmg6hFl/LzTtLQf+G7r1JyZmg4tWcRPYynF5LRlGPzvBopQK0jm2Ec7agBBtAEUCm2v/XoXd5MVwJ4YEax6KNaBnW5qaHxK7HLKBsZ4/baHZU1dcWnnVLMh5KmgSuoIggf1PyXYkLnGaIFGT/tz8MErZ9BkyLzE+DNrWgZqAyodo0LTr5uKzVfISpuriZJJDIO+DUzlzL7gcTSYF2rzqk3lua3MzEKZo2oZ4ke+y9JcOJ3ttBeVNJobz2WAae6DVkdCYvQsSR5NJWiI7Ngg3FxyuWDmAVFRNVCRdb6FnzHG8JQDkRAWqQrhEd3Wz3t7i69EA==
 Received: from GV1PR03MB10456.eurprd03.prod.outlook.com
  (2603:10a6:150:16a::21) by DU0PR03MB9801.eurprd03.prod.outlook.com
  (2603:10a6:10:44b::19) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7339.39; Wed, 6 Mar
- 2024 00:53:01 +0000
+ 2024 00:53:00 +0000
 Received: from GV1PR03MB10456.eurprd03.prod.outlook.com
  ([fe80::bfa8:3549:ac92:d0d8]) by GV1PR03MB10456.eurprd03.prod.outlook.com
  ([fe80::bfa8:3549:ac92:d0d8%4]) with mapi id 15.20.7339.035; Wed, 6 Mar 2024
- 00:53:01 +0000
+ 00:53:00 +0000
 From: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
 CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Caleb Connolly
- <caleb.connolly@linaro.org>, Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 6/8] pinctrl: qcom: pass pin number to get_function_mux
- callback
-Thread-Topic: [PATCH v2 6/8] pinctrl: qcom: pass pin number to
- get_function_mux callback
-Thread-Index: AQHab2Cjs8jH36l7Xk+Okoz8i9LP0Q==
-Date: Wed, 6 Mar 2024 00:53:00 +0000
-Message-ID: <20240306005230.2638972-7-volodymyr_babchuk@epam.com>
+ <caleb.connolly@linaro.org>, Elmar Psilog <epsi@gmx.de>, Joe Hershberger
+ <joe.hershberger@ni.com>, Jonas Karlman <jonas@kwiboo.se>, Kever Yang
+ <kever.yang@rock-chips.com>, Ley Foon Tan <leyfoon.tan@starfivetech.com>,
+ Marek Vasut <marex@denx.de>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Ramon Fried <rfried.dev@gmail.com>, Sean Anderson <seanga2@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>,
+ =?iso-8859-1?Q?S=E9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>,
+ Tom Rini <trini@konsulko.com>, Yanhong Wang <yanhong.wang@starfivetech.com>
+Subject: [PATCH v2 3/8] net: dw_eth_qos: add support for Qualcomm SM8150 SoC
+Thread-Topic: [PATCH v2 3/8] net: dw_eth_qos: add support for Qualcomm SM8150
+ SoC
+Thread-Index: AQHab2CiBFC5bRn6B0qB37v0NjUnUQ==
+Date: Wed, 6 Mar 2024 00:52:59 +0000
+Message-ID: <20240306005230.2638972-4-volodymyr_babchuk@epam.com>
 References: <20240306005230.2638972-1-volodymyr_babchuk@epam.com>
 In-Reply-To: <20240306005230.2638972-1-volodymyr_babchuk@epam.com>
 Accept-Language: en-US
@@ -78,43 +83,43 @@ X-MS-TNEF-Correlator:
 x-mailer: git-send-email 2.43.0
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: GV1PR03MB10456:EE_|DU0PR03MB9801:EE_
-x-ms-office365-filtering-correlation-id: c21164d0-0faa-4aa8-b9d9-08dc3d77c65b
+x-ms-office365-filtering-correlation-id: 7790ee83-44ff-416b-b622-08dc3d77c59f
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: C3cTypZkN6Wkqa0viiWCes3fxR5CDo/TGWLKufpj2H8fyGlJRXJ5Xh1pp//TAmdgacJVWOukyF8xqZo71/Z+tCOyPJusbTGNbPsDAd6oP+RuSBxSfujL7cSgMFNieLZ/H3dWFBIuUlAyLDs3Moxwjb5MEu3CS5QVNtwMAJQOL3FDKNSzwSYa4e5Gu9u0X6jtpBynsX2a73eFe8CMxXSxJ4OWoQehffsMwnCO8Q+TUk40yv9AZBwAz2GSSKcO1UvVGkhSlD8TpGNq9l1SP6UmBpWwDHrIxAuNZzjyDMvVU/01Dgit1tlrJn6xympS5rHtd7HjQTo5MrJz8STThLcsIlGZlJf56NzXQVcvgbJjO1qN0kEwcLVWCPGyPypDMHXMJdptA23j11nDSf0Qw3MrCxW85HWx0+gIze82Kg4oUrGfwHk/uBjggzZ05IRJDKxoAp7soNOz6oe3RM4ACkfGX7yWPrMybeI8s180AIL0YWFP1SSUccBuUOO0kFtwgaedsi1HXzGvo3C0mUZWjGyw0cipopXFILKkiJmVRswZh+hfixR/yvJYFaqRlYBgj6sRC0VyP89kkchDOoNsX5Oc9vb+vRgRy41bgtA7MV/o6NcFkT7tP5CtTy4VjuPRqd+JiBrU9/R4vXLWVoZhSDJlKeSREUnIZM15moLZG2V68vXKLnXpYiJIbIgA8C5HZ7fLYxGfwm73jkf67NRSLS0Kww==
+x-microsoft-antispam-message-info: /Hmktxsnj+J50xHFumzovfB7YBgCRFQA7BiK1c9iqyGqdC3w3W0zm/6xldasI92YQcGaOrC8iHCvnoK30yuQ/GQSKn9Tev/Fhy525kuB13wXdCuwB9/W93+O7G2YXKSS3It8iMZg+eHSgqien6Va5OL7mEOMnCmuNoRLmtMD8zC0opolFapUV6qDMdF04gyACEbgocQj8uCEhJ/JVxYCYDU49grtB/6O+JuIHD+7ncUgdfFNJJBfYV/bdKBsByXXOHhCssjUalzw+2X+p7n2fjH8Z4FZ6tOmbfuYZoDiAQv5RfyZHVer9LViiDaxb4LD4NkdIN20rUNe5VmOhLM1gCecGmR8jSbMpi9PqMi6InqbXPYslvuLt/2CKL1GLCBIfc/Vt0lSL+g663TmjF+kUK1LrPulQcuj8fqxtajxTFsHkJ2moccS9jlir7qAEBj6DpJ25FSnF+Z/P1TgLWdTZVwHnzyaJiJZPvKJGPIo9l3twqHSUX/gYhokLDMdAxn8j2cx7R1xRDgNTvybl0ltK2Yxc2Hv4CX/YLDFWlZvrI7aRcOLnGtgVeRAvk/1BoIWL7yqAY//X1yU82m8V3KDh1CmuPaxh43jPR7hlc8xWBP4I5rWA40ZGrbOvmYT27O8FIZ7a66qnLHII5QF1/Zx6bb3m6rfhGGEbvGpCKNxWCeyoo5rh1+ZcZqkuM34bItD/nhEPUehCInES39JrAnGch++8y1GIZTQqDZDoqqts8w=
 x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:GV1PR03MB10456.eurprd03.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230031)(376005)(38070700009); DIR:OUT; SFP:1102; 
 x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?/EqwlchL09N7UXzNiQ5CqBq+Bkd02OnhCvLRLjebBUKqfft4nLaWDih4EV?=
- =?iso-8859-1?Q?Dm5FQlcFVHRXbEeKVVNq/dEoIPbzGKIUVLL5XvonzZBTyX/wcEnJKIN4Nw?=
- =?iso-8859-1?Q?w/eTKWowt5xbGQmCwi9Z+caEqEkXJiJsOGLkZh8NX1WvjWyMPukkO3L9Wp?=
- =?iso-8859-1?Q?vK7EbrBd9dpqyz8BbgXW2zPGvVXIcdH22BCYcU5nGdIevWLSBrRkoL7vTD?=
- =?iso-8859-1?Q?fFl1fn15B0uq38uG0EG1QNUllHW4LqYtoPB3iG9X5LAPCbam8eqE6bTH04?=
- =?iso-8859-1?Q?kVpdlBbHzquhlRz7DrAUda8gszAhngbEh3duqCUMQ23avG89mh5xZ+O2g8?=
- =?iso-8859-1?Q?+8rZPET3nd9+TKqJDKS8RoxtD4EIkm/yooXNFf5S5/p7/NpdzCm/xW14Iu?=
- =?iso-8859-1?Q?49fNKPlMGhI8peUkAfAv4VjSC0XdHv9LhEJ5Ei8PtvLToSGVJw1um9VbsS?=
- =?iso-8859-1?Q?+/6SPAIBuWtwxBxpZO7xqls9FXN2MMUR4Hld77G1tJbFP4+Ksi6Yo6mxx4?=
- =?iso-8859-1?Q?pkOygHsuEQo9rsnWWeLqNsEWTk/zBIhYBjPAiJBhD8VtDkJGVVTJoGBPgS?=
- =?iso-8859-1?Q?6Yp9pDvh7QRUTY5/pDEmn+a3omSHQh+EOayaO8RMgYHGHTS/afGGSok7Pj?=
- =?iso-8859-1?Q?AS0+D4QGljPLmPi9TpLpjTM9xypEAwByZYzojLs2mrwAcmpRGCLW3z3aO9?=
- =?iso-8859-1?Q?bT8Y7aY9O1CqhaLyWtSEj7AODikoIZCDSN+W2g3QKzmzTyQ0z0ggUae6dB?=
- =?iso-8859-1?Q?AvVr2vCzmeldQl6f1EEJzySKEDapNoYyVNyNBoKXUe5L4XxhvNYupa21X6?=
- =?iso-8859-1?Q?xPwS/CEF0l7aqcLBXBPzMQHzRdlCa/TTYGWeo06ClWNHqFNdE1LBXZjvlm?=
- =?iso-8859-1?Q?9WmsJQENGHdtXDbr+n9MqtyOhwqaA0QACvh3uEV7zYUoN1RM7XW4gP9jCk?=
- =?iso-8859-1?Q?NWel+jHsarTrSamWU4KCbE08T9yyFK9nORMwHby08vFG/ZGZarLDR+GNAt?=
- =?iso-8859-1?Q?RtDlUcAX2v9Rbs43UbN7GZrw1jr3toIicb+iana7Gms44zSIVFePIbqT9s?=
- =?iso-8859-1?Q?trm2/y+oDZm4tmSxeqtuvKgQ0gf6ilegvTYfVN18KOOj1xGHp8vjjy7JuO?=
- =?iso-8859-1?Q?18dftEcEdUcbTNpJwehhmIm7t2D3RwqE8xFN6wk75Qoad/iw3ZPhVx031j?=
- =?iso-8859-1?Q?35l+whRIdveLdIPtxR+oCCqnARxciZ4yK6RWosFadJRuggKHpBb8NDf5Kw?=
- =?iso-8859-1?Q?E7JfbamhTJd/K8KVRSVIJzqGFPN9CNFQwzKEadu+GWsfl4mxA40mHaOjHj?=
- =?iso-8859-1?Q?4KUL7qJjv6lgJ6SMDRG6qN7mIybZhQC9i8YBN/c6u14QkhCclFcqhxIkSt?=
- =?iso-8859-1?Q?lznNAGKcb3exyefYfyKkTxi8zsm5zpk4cGvhkdybc0WN9E80IavIG3iHuw?=
- =?iso-8859-1?Q?pj74/DGPVVcN13yh75GD3BBsZDia1cukgX6Ot1cEBsuGaj/oMxXvexFUpd?=
- =?iso-8859-1?Q?5ogxHpcsivCHfRH+l3R6Ne+xZ9PSlQwKXAgmTRjNlLYn4B6MiAx8FPBtBx?=
- =?iso-8859-1?Q?kW6DnX46t4jknKcbmfTaBxUUiABQp0UD52FRB63RA5OrdO3rEHJAir//ly?=
- =?iso-8859-1?Q?enh/iioPu1Uii6ZrA/LI2qPzssVrQnGpejL17uCMJMIpmAfycZ69FGxg?=
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?WNFtFyCYjBb06s6B2fxhVGoeaemM8e13A4KGv+4gNFVvGaY9T7kQk0EVd/?=
+ =?iso-8859-1?Q?0nRLiDzeic9ykJfoD4IQkCifKZhwlXimRGwPvSDnVXp55dpd/va2OL9dD5?=
+ =?iso-8859-1?Q?xjXo9RwXLE/+Ls7agGi0vCeVNSPZhHmOtkMTLKATjCvPWfc0QZkGi3kMuh?=
+ =?iso-8859-1?Q?J//m2mZ2iDdKafH0TcWSIfnnZY9aJjegfUMU5evrkO5F3NhEggznA/gduD?=
+ =?iso-8859-1?Q?QStgR4hp8t/UnpFwlGefkW9ykCDckRJqXnH/+ABZzddCouCK6U/ZPpMr0t?=
+ =?iso-8859-1?Q?wC2gTF5wVJJvM4TmO9v7cZOrJslErh0CuR3vtkIZa4oSPwCMIdK8wgvrTP?=
+ =?iso-8859-1?Q?0auCQM9PgATKf43Avy8+YPRI5SjXUU4pfb680NHa8QC562Q/P1r+hThw4Y?=
+ =?iso-8859-1?Q?3fA87NY0zYWYZVfNKcAlvluIyrpAKT/oZ4Bgndkj9nL1vQsoOqAV+WlycI?=
+ =?iso-8859-1?Q?K0a6sNWw03E+MVuJUKw/EU3+b+e3VHakpdsjEoeyv3U4hqY/XwM0hMjxkG?=
+ =?iso-8859-1?Q?va2/LPeJkmgSgJ6RCnLt0dQH7i/lCgp8C1wzM3mpvxl1mGQ6Q9nv+6OoEH?=
+ =?iso-8859-1?Q?0yCxJkIw6AwcDZex0KJtlrKEjHyxnQiOSb54bchQiL+2Okb067RWW9PlSm?=
+ =?iso-8859-1?Q?sdeyvJYtt5lk+vFnFeKJF8Yo1SOKRY4MZggXEszBECcwthEYpO7Elb8ydK?=
+ =?iso-8859-1?Q?AJUUOChNmpNvPQlUiaFYUx3VzGdhSrF+hQb3zhkxghspJZ4mTSZwEHdlXE?=
+ =?iso-8859-1?Q?0UX57GrisgCnedBMwrNxRym0AYSmP2TK+5dcMFRr1A1CgerBIIivKR6Bx0?=
+ =?iso-8859-1?Q?IuaAVvbf1lnQ8etji9ufydgYlr21KH8nvUi2lmwWeTCUAkToHfJsE/s+ne?=
+ =?iso-8859-1?Q?6beEgkRbyN0qlUYo+fpHX6U1oU+7UQFlVL6i0aPEL6dyU5O04QDp+C13iB?=
+ =?iso-8859-1?Q?Qw/efRjJwBFa80RyENfrKYeTZi27QtI5GiJ+3bDze/cki70cJV4dXrFLae?=
+ =?iso-8859-1?Q?5jdpR1ZrNuFxIyP8UxResQVQVBmkE1KvpLEyuR/3Bu1qFD57p3zG9jSwfs?=
+ =?iso-8859-1?Q?sVaBbJg2l66gNcQsT+K5EwzSBhyf0PxG1PKxWsYC5Z9ZjlLDkPchb01Pz3?=
+ =?iso-8859-1?Q?7gpzvtvHxI7kFjk+jirLB2k/5t5iHq8x0GU/898C7rcFUvIgEUBUytI6kL?=
+ =?iso-8859-1?Q?A5PrsVMMmvjfhyJRZ9wNOH+p7lLLf9x98ZjLcTbJRTasomP6UzUapNcYNw?=
+ =?iso-8859-1?Q?IKJws4GkJsnf2C4YNSrx5M2txiZWfupciggtOwicG889OAK+BcgWEwbESL?=
+ =?iso-8859-1?Q?1EsXK3Cy+xaOgbgJZEjLL1BhWE3qHm3lF5sUbzDKmdxSbmxQSrrPDs+/zC?=
+ =?iso-8859-1?Q?lz3dqO8aFHtp8MkTPb2Anw0yuv75EQulNepjtV+XhWHXV6cTrGisfeGq3a?=
+ =?iso-8859-1?Q?8weYyQLGbRWJ6xFblp4l7JuuhcZPsP2D1v6offdhD4uoKfl8s7KIjL80ny?=
+ =?iso-8859-1?Q?ggbMfBSvlkYtWh97rVzUk2mJ3OJJ+MK8uzlZ2OvtL7X3pAGF3osu/Wnkdk?=
+ =?iso-8859-1?Q?RNw86leG4KhXWNk8uFn0kV6mnN6xpuO5ii5FeyTqObc+SUxa86THiqvOfs?=
+ =?iso-8859-1?Q?gtLutgToTzxRfDt2ES4jJM+mhnKIxI5eFRUAj6TqurxE2iK0AxpS7Sgg?=
  =?iso-8859-1?Q?=3D=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -122,24 +127,24 @@ MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: GV1PR03MB10456.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c21164d0-0faa-4aa8-b9d9-08dc3d77c65b
-X-MS-Exchange-CrossTenant-originalarrivaltime: 06 Mar 2024 00:53:00.7944 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7790ee83-44ff-416b-b622-08dc3d77c59f
+X-MS-Exchange-CrossTenant-originalarrivaltime: 06 Mar 2024 00:52:59.7255 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: v/qytO3xDmB2Erj+JVXl/NeL31xxrcBlDELLoUSw/kFnB1um2TR6gzzrmZvCzC21Xxn/wWM6Kuht6vTJtpcDt3JsDpXQINtV8eplGQODmoc=
+X-MS-Exchange-CrossTenant-userprincipalname: vFMt3RtWsQ2CpC6r0P8cF3tBnIhES9/E8hf3qZvL9zM49hLtDny6y+lB1L5pfHF87+zfb5ycjb0SFVtGWZg0cb158UZo4mcrlctOiz5bdZI=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR03MB9801
-X-Proofpoint-GUID: YJmW2oLl8vfth4TjYdS6BQcppesmiMYA
-X-Proofpoint-ORIG-GUID: YJmW2oLl8vfth4TjYdS6BQcppesmiMYA
+X-Proofpoint-ORIG-GUID: HaLLb7OTzCHhNcwMZVJZUV0HxBjRD3UJ
+X-Proofpoint-GUID: HaLLb7OTzCHhNcwMZVJZUV0HxBjRD3UJ
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
  definitions=2024-03-05_20,2024-03-05_01,2023-05-22_02
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 bulkscore=0
- mlxscore=0 impostorscore=0 lowpriorityscore=0 malwarescore=0 adultscore=0
- mlxlogscore=991 phishscore=0 spamscore=0 priorityscore=1501 suspectscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2402120000
- definitions=main-2403060005
+ spamscore=0 clxscore=1015
+ suspectscore=0 phishscore=0 mlxscore=0 priorityscore=1501 malwarescore=0
+ bulkscore=0 impostorscore=0 mlxlogscore=999 lowpriorityscore=0
+ adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2402120000 definitions=main-2403060005
 X-Mailman-Approved-At: Wed, 06 Mar 2024 02:16:00 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -157,152 +162,168 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch is the preparation for SM8150 support. This new SoC
-depending on the particular pin can have different numbers for the
-same function. For example "rgmii" function for GPIO4 has id=3D2 while
-for GPIO59 it has id=3D1. So, to support this type of SoCs,
-get_function_mux() callback needs to know for which pin the function
-is requested.
+Add support for Qualcomm SM8150 SoC to the EQOS driver. SM8150 has two
+main differences from already supported QCS404: it has another RGMII
+configuration registers set and it does require RGMII loopback to
+be disabled.
+
+To support different variants of QCOM SoC we had to add two new fields
+to the eqos_priv struct: eqos_qcom_rgmii_regs and
+qcom_enable_loopback.
 
 Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
-Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
 
 ---
 
 Changes in v2:
- - Added Caleb's R-b tag
+ - Clear loopback bit explicitly
 
- drivers/pinctrl/qcom/pinctrl-apq8016.c | 3 ++-
- drivers/pinctrl/qcom/pinctrl-apq8096.c | 3 ++-
- drivers/pinctrl/qcom/pinctrl-ipq4019.c | 3 ++-
- drivers/pinctrl/qcom/pinctrl-qcom.c    | 4 ++--
- drivers/pinctrl/qcom/pinctrl-qcom.h    | 3 ++-
- drivers/pinctrl/qcom/pinctrl-qcs404.c  | 3 ++-
- drivers/pinctrl/qcom/pinctrl-sdm845.c  | 3 ++-
- 7 files changed, 14 insertions(+), 8 deletions(-)
+ drivers/net/dwc_eth_qos.c      |  4 +++
+ drivers/net/dwc_eth_qos.h      |  2 ++
+ drivers/net/dwc_eth_qos_qcom.c | 46 +++++++++++++++++++++++++++-------
+ 3 files changed, 43 insertions(+), 9 deletions(-)
 
-diff --git a/drivers/pinctrl/qcom/pinctrl-apq8016.c b/drivers/pinctrl/qcom/=
-pinctrl-apq8016.c
-index db0e212468..a9a00f4b08 100644
---- a/drivers/pinctrl/qcom/pinctrl-apq8016.c
-+++ b/drivers/pinctrl/qcom/pinctrl-apq8016.c
-@@ -49,7 +49,8 @@ static const char *apq8016_get_pin_name(struct udevice *d=
-ev,
- 	}
- }
-=20
--static unsigned int apq8016_get_function_mux(unsigned int selector)
-+static unsigned int apq8016_get_function_mux(__maybe_unused unsigned int p=
-in,
-+					     unsigned int selector)
- {
- 	return msm_pinctrl_functions[selector].val;
- }
-diff --git a/drivers/pinctrl/qcom/pinctrl-apq8096.c b/drivers/pinctrl/qcom/=
-pinctrl-apq8096.c
-index 880df8fe3c..9697cb5beb 100644
---- a/drivers/pinctrl/qcom/pinctrl-apq8096.c
-+++ b/drivers/pinctrl/qcom/pinctrl-apq8096.c
-@@ -44,7 +44,8 @@ static const char *apq8096_get_pin_name(struct udevice *d=
-ev,
- 	}
- }
-=20
--static unsigned int apq8096_get_function_mux(unsigned int selector)
-+static unsigned int apq8096_get_function_mux(__maybe_unused unsigned int p=
-in,
-+					     unsigned int selector)
- {
- 	return msm_pinctrl_functions[selector].val;
- }
-diff --git a/drivers/pinctrl/qcom/pinctrl-ipq4019.c b/drivers/pinctrl/qcom/=
-pinctrl-ipq4019.c
-index 74c04ab87c..4479230313 100644
---- a/drivers/pinctrl/qcom/pinctrl-ipq4019.c
-+++ b/drivers/pinctrl/qcom/pinctrl-ipq4019.c
-@@ -40,7 +40,8 @@ static const char *ipq4019_get_pin_name(struct udevice *d=
-ev,
- 	return pin_name;
- }
-=20
--static unsigned int ipq4019_get_function_mux(unsigned int selector)
-+static unsigned int ipq4019_get_function_mux(__maybe_unused unsigned int p=
-in,
-+					     unsigned int selector)
- {
- 	return msm_pinctrl_functions[selector].val;
- }
-diff --git a/drivers/pinctrl/qcom/pinctrl-qcom.c b/drivers/pinctrl/qcom/pin=
-ctrl-qcom.c
-index ee0624df29..909e566acf 100644
---- a/drivers/pinctrl/qcom/pinctrl-qcom.c
-+++ b/drivers/pinctrl/qcom/pinctrl-qcom.c
-@@ -83,14 +83,14 @@ static int msm_pinmux_set(struct udevice *dev, unsigned=
- int pin_selector,
- 			  unsigned int func_selector)
- {
- 	struct msm_pinctrl_priv *priv =3D dev_get_priv(dev);
-+	u32 func =3D priv->data->get_function_mux(pin_selector, func_selector);
-=20
- 	/* Always NOP for special pins, assume they're in the correct state */
- 	if (qcom_is_special_pin(&priv->data->pin_data, pin_selector))
- 		return 0;
-=20
- 	clrsetbits_le32(priv->base + GPIO_CONFIG_REG(priv, pin_selector),
--			TLMM_FUNC_SEL_MASK | TLMM_GPIO_DISABLE,
--			priv->data->get_function_mux(func_selector) << 2);
-+			TLMM_FUNC_SEL_MASK | TLMM_GPIO_DISABLE, func << 2);
- 	return 0;
- }
-=20
-diff --git a/drivers/pinctrl/qcom/pinctrl-qcom.h b/drivers/pinctrl/qcom/pin=
-ctrl-qcom.h
-index 07f2eae9ba..49b7bfbc00 100644
---- a/drivers/pinctrl/qcom/pinctrl-qcom.h
-+++ b/drivers/pinctrl/qcom/pinctrl-qcom.h
-@@ -18,7 +18,8 @@ struct msm_pinctrl_data {
- 	int functions_count;
- 	const char *(*get_function_name)(struct udevice *dev,
- 					 unsigned int selector);
--	unsigned int (*get_function_mux)(unsigned int selector);
-+	unsigned int (*get_function_mux)(unsigned int pin,
-+					 unsigned int selector);
- 	const char *(*get_pin_name)(struct udevice *dev,
- 				    unsigned int selector);
+diff --git a/drivers/net/dwc_eth_qos.c b/drivers/net/dwc_eth_qos.c
+index 9b3bce1dc8..882b854697 100644
+--- a/drivers/net/dwc_eth_qos.c
++++ b/drivers/net/dwc_eth_qos.c
+@@ -1700,6 +1700,10 @@ static const struct udevice_id eqos_ids[] =3D {
+ 		.compatible =3D "qcom,qcs404-ethqos",
+ 		.data =3D (ulong)&eqos_qcom_config
+ 	},
++	{
++		.compatible =3D "qcom,sm8150-ethqos",
++		.data =3D (ulong)&eqos_qcom_config
++	},
+ #endif
+ #if IS_ENABLED(CONFIG_DWC_ETH_QOS_STARFIVE)
+ 	{
+diff --git a/drivers/net/dwc_eth_qos.h b/drivers/net/dwc_eth_qos.h
+index e3222e1e17..216e1afe53 100644
+--- a/drivers/net/dwc_eth_qos.h
++++ b/drivers/net/dwc_eth_qos.h
+@@ -255,6 +255,7 @@ struct eqos_priv {
+ 	struct eqos_dma_regs *dma_regs;
+ 	struct eqos_tegra186_regs *tegra186_regs;
+ 	void *eqos_qcom_rgmii_regs;
++	struct dwmac_rgmii_regs *eqos_qcom_por;
+ 	struct reset_ctl reset_ctl;
+ 	struct gpio_desc phy_reset_gpio;
+ 	struct clk clk_master_bus;
+@@ -277,6 +278,7 @@ struct eqos_priv {
+ 	bool started;
+ 	bool reg_access_ok;
+ 	bool clk_ck_enabled;
++	bool qcom_enable_loopback;
+ 	unsigned int tx_fifo_sz, rx_fifo_sz;
+ 	u32 reset_delays[3];
  };
-diff --git a/drivers/pinctrl/qcom/pinctrl-qcs404.c b/drivers/pinctrl/qcom/p=
-inctrl-qcs404.c
-index 3a2d468599..4b7c670c90 100644
---- a/drivers/pinctrl/qcom/pinctrl-qcs404.c
-+++ b/drivers/pinctrl/qcom/pinctrl-qcs404.c
-@@ -94,7 +94,8 @@ static const char *qcs404_get_pin_name(struct udevice *de=
-v,
+diff --git a/drivers/net/dwc_eth_qos_qcom.c b/drivers/net/dwc_eth_qos_qcom.=
+c
+index 8178138fc6..ee8420c71d 100644
+--- a/drivers/net/dwc_eth_qos_qcom.c
++++ b/drivers/net/dwc_eth_qos_qcom.c
+@@ -95,6 +95,15 @@ static struct dwmac_rgmii_regs emac_v2_3_0_por =3D {
+ 	.io_macro_config2 =3D 0x00002060
+ };
+=20
++static struct dwmac_rgmii_regs emac_v2_1_0_por =3D {
++	.io_macro_config =3D 0x40C01343,
++	.sdcc_hc_dll_config =3D 0x2004642C,
++	.sdcc_hc_ddr_config =3D 0x00000000,
++	.sdcc_hc_dll_config2 =3D 0x00200000,
++	.sdcc_usr_ctl =3D 0x00010800,
++	.io_macro_config2 =3D 0x00002060
++};
++
+ static void ethqos_set_func_clk_en(struct dwmac_rgmii_regs *regs)
+ {
+ 	setbits_le32(&regs->io_macro_config, RGMII_CONFIG_FUNC_CLK_EN);
+@@ -172,6 +181,10 @@ static int ethqos_rgmii_macro_init(struct udevice *dev=
+,
+ 				   struct dwmac_rgmii_regs *regs,
+ 				   unsigned long speed)
+ {
++	struct eqos_priv *eqos =3D dev_get_priv(dev);
++	uint32_t loopback =3D
++		eqos->qcom_enable_loopback ? RGMII_CONFIG_LOOPBACK_EN : 0;
++
+ 	/* Disable loopback mode */
+ 	clrbits_le32(&regs->io_macro_config2,
+ 		     RGMII_CONFIG2_TX_TO_RX_LOOPBACK_EN);
+@@ -202,7 +215,8 @@ static int ethqos_rgmii_macro_init(struct udevice *dev,
+ 				SDCC_DDR_CONFIG_PRG_RCLK_DLY, 57);
+ 		setbits_le32(&regs->sdcc_hc_ddr_config, SDCC_DDR_CONFIG_PRG_DLY_EN);
+=20
+-		setbits_le32(&regs->io_macro_config, RGMII_CONFIG_LOOPBACK_EN);
++		clrsetbits_le32(&regs->io_macro_config,
++				RGMII_CONFIG_LOOPBACK_EN, loopback);
+ 		break;
+=20
+ 	case SPEED_100:
+@@ -233,7 +247,8 @@ static int ethqos_rgmii_macro_init(struct udevice *dev,
+ 		setbits_le32(&regs->sdcc_hc_ddr_config,
+ 			     SDCC_DDR_CONFIG_EXT_PRG_RCLK_DLY_EN);
+=20
+-		setbits_le32(&regs->io_macro_config, RGMII_CONFIG_LOOPBACK_EN);
++		clrsetbits_le32(&regs->io_macro_config,
++				RGMII_CONFIG_LOOPBACK_EN, loopback);
+ 		break;
+=20
+ 	case SPEED_10:
+@@ -265,7 +280,8 @@ static int ethqos_rgmii_macro_init(struct udevice *dev,
+ 		setbits_le32(&regs->sdcc_hc_ddr_config,
+ 			     SDCC_DDR_CONFIG_EXT_PRG_RCLK_DLY_EN);
+=20
+-		setbits_le32(&regs->io_macro_config, RGMII_CONFIG_LOOPBACK_EN);
++		clrsetbits_le32(&regs->io_macro_config,
++				RGMII_CONFIG_LOOPBACK_EN, loopback);
+ 		break;
+=20
+ 	default:
+@@ -281,14 +297,15 @@ static int ethqos_configure(struct udevice *dev,
+ 			    unsigned long speed)
+ {
+ 	unsigned int retry =3D 1000;
++	struct eqos_priv *eqos =3D dev_get_priv(dev);
+=20
+ 	/* Reset to POR values and enable clk */
+-	writel(emac_v2_3_0_por.io_macro_config, &regs->io_macro_config);
+-	writel(emac_v2_3_0_por.sdcc_hc_dll_config, &regs->sdcc_hc_dll_config);
+-	writel(emac_v2_3_0_por.sdcc_hc_ddr_config, &regs->sdcc_hc_ddr_config);
+-	writel(emac_v2_3_0_por.sdcc_hc_dll_config2, &regs->sdcc_hc_dll_config2);
+-	writel(emac_v2_3_0_por.sdcc_usr_ctl, &regs->sdcc_usr_ctl);
+-	writel(emac_v2_3_0_por.io_macro_config2, &regs->io_macro_config2);
++	writel(eqos->eqos_qcom_por->io_macro_config, &regs->io_macro_config);
++	writel(eqos->eqos_qcom_por->sdcc_hc_dll_config, &regs->sdcc_hc_dll_config=
+);
++	writel(eqos->eqos_qcom_por->sdcc_hc_ddr_config, &regs->sdcc_hc_ddr_config=
+);
++	writel(eqos->eqos_qcom_por->sdcc_hc_dll_config2, &regs->sdcc_hc_dll_confi=
+g2);
++	writel(eqos->eqos_qcom_por->sdcc_usr_ctl, &regs->sdcc_usr_ctl);
++	writel(eqos->eqos_qcom_por->io_macro_config2, &regs->io_macro_config2);
+=20
+ 	ethqos_set_func_clk_en(regs);
+=20
+@@ -565,6 +582,17 @@ static int eqos_probe_resources_qcom(struct udevice *d=
+ev)
+ 		return -EINVAL;
  	}
- }
 =20
--static unsigned int qcs404_get_function_mux(unsigned int selector)
-+static unsigned int qcs404_get_function_mux(__maybe_unused unsigned int pi=
-n,
-+					    unsigned int selector)
- {
- 	return msm_pinctrl_functions[selector].val;
- }
-diff --git a/drivers/pinctrl/qcom/pinctrl-sdm845.c b/drivers/pinctrl/qcom/p=
-inctrl-sdm845.c
-index 76bd8c4ef4..459a4329ec 100644
---- a/drivers/pinctrl/qcom/pinctrl-sdm845.c
-+++ b/drivers/pinctrl/qcom/pinctrl-sdm845.c
-@@ -70,7 +70,8 @@ static const char *sdm845_get_pin_name(struct udevice *de=
-v,
- 	return pin_name;
- }
-=20
--static unsigned int sdm845_get_function_mux(unsigned int selector)
-+static unsigned int sdm845_get_function_mux(__maybe_unused unsigned int pi=
-n,
-+					    unsigned int selector)
- {
- 	return msm_pinctrl_functions[selector].val;
++	if (device_is_compatible(dev, "qcom,qcs404-ethqos")) {
++		eqos->eqos_qcom_por =3D &emac_v2_3_0_por;
++		eqos->qcom_enable_loopback =3D true;
++	} else if (device_is_compatible(dev, "qcom,sm8150-ethqos")) {
++		eqos->eqos_qcom_por =3D &emac_v2_1_0_por;
++		eqos->qcom_enable_loopback =3D false;
++	} else {
++		pr_err("Unknown QCOM ethernet device\n");
++		return -EINVAL;
++	}
++
+ 	debug("%s: OK\n", __func__);
+ 	return 0;
  }
 --=20
 2.43.0
