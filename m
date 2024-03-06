@@ -4,89 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCF30C5475B
-	for <u-boot@archiver.kernel.org>; Wed,  6 Mar 2024 15:22:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC847C54E41
+	for <u-boot@archiver.kernel.org>; Wed,  6 Mar 2024 15:38:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A4FB887C92;
-	Wed,  6 Mar 2024 16:22:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id EFBF88786C;
+	Wed,  6 Mar 2024 16:38:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="KDAg4lTS";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="vn1JmlTd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 864A687D9D; Wed,  6 Mar 2024 16:22:29 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D0F218786C; Wed,  6 Mar 2024 16:38:13 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E70A87DB1
- for <u-boot@lists.denx.de>; Wed,  6 Mar 2024 16:22:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 125E6876E4
+ for <u-boot@lists.denx.de>; Wed,  6 Mar 2024 16:38:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-ej1-f70.google.com (mail-ej1-f70.google.com
- [209.85.218.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id B25563F627
- for <u-boot@lists.denx.de>; Wed,  6 Mar 2024 15:22:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1709738541;
- bh=I0rbxKBVc1Wqfq0Iaj1Mxu1ojVjdekVxQiqXPTc4CwU=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=KDAg4lTSiFtmZK1zkZ63lUwKIbO1vyi/NrEqveA4ODSa9U4Th56UNdtZt9eDJpnIA
- AcQveegWF4OERWH6l82ORuJZcenp5U2xP2x5jsxV9jFTsCKMzYiVYFSnNOOAKpxoDT
- 6fDtJNNuSfXRvi4gytMSSfe8orEUC9zBAvgyRMgnsXNG0A5RDoaDm8T9dXvzB06rzu
- kf+mwCrFNB0gZCX8tEqIaFQ6VFefCahiLIxICFT+V1j3iFXSs4nAG6fuP438aLnsbH
- KVLAwPIBnZreN4zeOG+gAVlho2hxZOtgFyLVZFV5zDMLBbmlYDVttXjjSgaLYykfLt
- zSl+cYrM2NIqg==
-Received: by mail-ej1-f70.google.com with SMTP id
- a640c23a62f3a-a444b9dd222so434433466b.1
- for <u-boot@lists.denx.de>; Wed, 06 Mar 2024 07:22:21 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709738541; x=1710343341;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=I0rbxKBVc1Wqfq0Iaj1Mxu1ojVjdekVxQiqXPTc4CwU=;
- b=Mvo1R65KSeWaCtgOCfrx4DRj+jCAxED4c6zzEdXO4UX2JehGRHWz64wrRH9x5So80q
- YPuVwKu7RPYOUvkKfutpnQERYVwhBIY3hzJN8U1jh+L1VGi5j9DOt0lAVW4Ao3mTgedb
- gLpedZyEXckXTJu3BI9TgYYjAIGYKWDybhPl+9BUDJUP8ticwLIkyP6JY28wcVzlKCk9
- /mIfryTleesrpFpRYyXhnl4yZq2HULXTBeif528ulPLEDVQQpb2VyvbwDUEI++pckNxI
- fqlf8gFWb0AGAT+094amXsE5zAh/7pqx1sZzpY2JJBnhC7EPd9jzOCBvXfITUNAJTM2G
- eXvQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUKtl5NwEf0+no+oQcSNclexHKwLKNpL2Om4yk+/TKG7lNBtBsFBIxvrkONPx7jMuzA6B6G6vr5dOju7QVoE4vFPH7k0A==
-X-Gm-Message-State: AOJu0YyxUP3wGtO5O30Y+t8iCHvJSOQBzzZaVqUrnaGHXwatCbv1Rc8X
- EnX6SwMZYFMtykNeHpYEnAtYst7IQ790m1MMWAbvchVy7AptrxSa09vOkj/GTUHvWZ1g3RY7QFy
- aIljr/VSRyrWBebp4PXzXkQeRBfMITWGqQ24UxlgyMHnfG6vxvLBA4eWKLEO5dvy//r8=
-X-Received: by 2002:a17:906:1355:b0:a45:8850:1bab with SMTP id
- x21-20020a170906135500b00a4588501babmr4898456ejb.43.1709738541353; 
- Wed, 06 Mar 2024 07:22:21 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IH+5MfVutbhd1BhBJOK9u80s9ls9W1DFtuUfqxOa4wm2KLfzOFtFIRT8DSo2RyTxPaT2GqhzA==
-X-Received: by 2002:a17:906:1355:b0:a45:8850:1bab with SMTP id
- x21-20020a170906135500b00a4588501babmr4898439ejb.43.1709738540980; 
- Wed, 06 Mar 2024 07:22:20 -0800 (PST)
-Received: from workstation5.. ([2a00:20:9:393f:a428:922c:8eea:8ca7])
- by smtp.gmail.com with ESMTPSA id
- um15-20020a170906cf8f00b00a443e6f9403sm7256291ejb.54.2024.03.06.07.22.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 Mar 2024 07:22:20 -0800 (PST)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Rick Chen <rick@andestech.com>,
-	Leo <ycliang@andestech.com>
-Cc: Conor Dooley <conor.dooley@microchip.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] cmd: sbi: formatting PolarFire Hart Software Services
- version
-Date: Wed,  6 Mar 2024 16:21:49 +0100
-Message-ID: <20240306152149.180561-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 426Fc4lZ119704;
+ Wed, 6 Mar 2024 09:38:04 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1709739484;
+ bh=vBPWhZVnBEJd7ydno9m9V5VSShD1Ghco6AKaMl8Hcgw=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=vn1JmlTdeLBTt6k0E0H8/csCNrhvp3e+4OD/UpqH1dhLI82vlkjbtTbbOC13feYr7
+ KyjgCt1r4iEoNsjOMLDxcC3LZ/MVJbnA7iAJ2D5/0PqgsekLvYtMHyxgzLFXkq3kSk
+ plf93UvbwpgtSGHvZYRs3VcU67Drg+JWLsJKmnI8=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 426Fc491013164
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 6 Mar 2024 09:38:04 -0600
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 6
+ Mar 2024 09:38:04 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 6 Mar 2024 09:38:03 -0600
+Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 426Fc4eI064077;
+ Wed, 6 Mar 2024 09:38:04 -0600
+Date: Wed, 6 Mar 2024 09:38:04 -0600
+From: Bryan Brattlof <bb@ti.com>
+To: Andrew Davis <afd@ti.com>
+CC: Neha Malcom Francis <n-francis@ti.com>, Vignesh Raghavendra
+ <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>, Simon Glass
+ <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH 4/6] arm: mach-k3: am62: Fixup TF-A/OP-TEE
+ reserved-memory node in FDT
+Message-ID: <20240306153804.j5ogtfq3eyp4b3fz@bryanbrattlof.com>
+X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
+References: <20240214163009.983034-1-afd@ti.com>
+ <20240214163009.983034-5-afd@ti.com>
+ <20240306133517.djtzqotxzour34ib@bryanbrattlof.com>
+ <0a1910d6-c25b-4b77-abbe-d14443b061f3@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+In-Reply-To: <0a1910d6-c25b-4b77-abbe-d14443b061f3@ti.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,26 +84,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The 'PolarFire Hart Software Services' SBI implementation returns the
-version of the incorporated OpenSBI. Format the number accordingly.
+On March  6, 2024 thus sayeth Andrew Davis:
+> On 3/6/24 7:35 AM, Bryan Brattlof wrote:
+> > On February 14, 2024 thus sayeth Andrew Davis:
+> > > The address we load TF-A and OP-TEE to is configurable by Kconfig
+> > > CONFIG_K3_{ATF,OPTEE}_LOAD_ADDR, but the DT nodes reserving this memory
+> > > are often statically defined. As these binaries are dynamically loadable,
+> > > and in the case of OP-TEE may not even be loaded at all, hard-coding these
+> > > addresses is not a hardware description, but rather a configuration.
+> > > 
+> > > If the address that U-Boot loaded TF-A or OP-TEE does not match the
+> > > address in hard-coded in DT, then fix that node address. This also handles
+> > > the case when no reserved memory for these is provided by DT, which is
+> > > more correct as explained above.
+> > > 
+> > > Add this fixup function, and enable it for AM62.
+> > > 
+> > > Signed-off-by: Andrew Davis <afd@ti.com>
+> > 
+> > Acked-by: Bryan Brattlof <bb@ti.com>
+> > 
+> > Does this mean we need to no-map these regions in the MMU as well? Right
+> > now it's just statically defined. I was looking into trying to read the
+> > reserved-memory{} node to see if we could dynamically build the MMU
+> > config but that would have to happen after this step right?
+> > 
+> 
+> Good question. So TF-A/OP-TEE are loaded by R5 SPL, which means by
+> the time A53 SPL starts they are already in place and firewalled,
+> which means yes we should no-map them in MMU to prevent some
+> speculative fetch (A53 doesn't do that, but A72 on other K3 device
+> might) or similar from causing a firewall exception.
+> 
+> The fixup in this patch is done to the Linux DT file right before
+> it is handed off to Linux, which as you point out happens after
+> we setup the U-Boot MMU.
+> 
+> This is more a problem in theory, but not really one in practice.
+> I know, I don't like that answer either, but I can't think of a
+> better solution outside of doing this fixup in R5 SPL to the
+> U-Boot DTB also. (Which might work, but seems overkill)..
+> 
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- cmd/riscv/sbi.c | 1 +
- 1 file changed, 1 insertion(+)
+Ah that's a good point. Only the SoCs with A53s are using DRAM for TFA 
+so we should be good for now :)
 
-diff --git a/cmd/riscv/sbi.c b/cmd/riscv/sbi.c
-index dec7dd651d6..628ef3a591c 100644
---- a/cmd/riscv/sbi.c
-+++ b/cmd/riscv/sbi.c
-@@ -80,6 +80,7 @@ static int do_sbi(struct cmd_tbl *cmdtp, int flag, int argc,
- 					break;
- 				switch (impl_id) {
- 				case 1: /* OpenSBI */
-+				case 8: /* PolarFire Hart Software Services */
- 					printf("%ld.%ld",
- 					       vers >> 16, vers & 0xffff);
- 					break;
--- 
-2.43.0
+Thanks Andrew
 
+> Andrew
+> 
+> > ~Bryan
