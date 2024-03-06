@@ -4,70 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7A8FC54E41
-	for <u-boot@archiver.kernel.org>; Wed,  6 Mar 2024 13:50:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE793C5475B
+	for <u-boot@archiver.kernel.org>; Wed,  6 Mar 2024 13:51:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D048D86BFA;
-	Wed,  6 Mar 2024 14:49:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id DFEFA879BB;
+	Wed,  6 Mar 2024 14:51:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="OR3lI2Pn";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="sT1Mbtsy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 497B686BDB; Wed,  6 Mar 2024 14:49:56 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id A98C287666; Wed,  6 Mar 2024 14:49:25 +0100 (CET)
+Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 633AD87653
- for <u-boot@lists.denx.de>; Wed,  6 Mar 2024 14:49:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1784386784
+ for <u-boot@lists.denx.de>; Wed,  6 Mar 2024 14:49:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 426Dnjqi007164;
- Wed, 6 Mar 2024 07:49:45 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1709732985;
- bh=433j8dDf02mgOOTLdlf6Fz7eMgX3oJ4yylOcfkGOE2I=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=OR3lI2PnPgVTU2AbK9MxNYN0OcsGIjEYGa5jwgX4VHtuL+S0CGsmOxkTakN52A9q5
- J018LS8VETG3W5nvkPtPXlm1lYVWMBSRvF7zqebFhDFzicC41r3NrK5SojY2J7RxLM
- zto4rdPJj+FM2gaAgZhIFJWwhzxoGTDKazjULi1E=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 426Dnj1D009031
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 6 Mar 2024 07:49:45 -0600
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 6
- Mar 2024 07:49:45 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 6 Mar 2024 07:49:45 -0600
-Received: from [10.249.42.149] ([10.249.42.149])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 426Dni3a028558;
- Wed, 6 Mar 2024 07:49:45 -0600
-Message-ID: <1441c976-1533-4b4b-b09f-88e9a8fd3944@ti.com>
-Date: Wed, 6 Mar 2024 07:49:44 -0600
+ spf=pass smtp.mailfrom=avromanov@salutedevices.com
+Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 47603100020;
+ Wed,  6 Mar 2024 16:49:21 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 47603100020
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
+ s=mail; t=1709732961;
+ bh=d6sNGSAEXmQRC+q5GCONk7nnNXbog4qJkj5zDdRIQCY=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=sT1MbtsyE2VoB3NY2GibAVwI/25+eKu9phiVwARtidBQd1tcuEA7FiVCuI8fhzUul
+ XhaHx6mmyPQitqIBZmee/nhQ00CVAHzeIACEP/96/DmLmx1kb6p6ZOuhgzleMQN84m
+ DxiLuIn+YrylSxmXoehgWMnC2CQ6MbO5aDwk/MSgE0CY6jNYXL0NOsOaormNUxAogB
+ ai+zgCj46Qew40YUdFYz0MohLAZcpiJOsOU3LgOm+H7lYhN2VCpKuy01zVeEXku8S/
+ cV7DW6JeEpuixmBUCosxks5N28HAgvOpKpl83a/GX2QUKc0bDOoa2vjFjeNpE5Swsw
+ zsyXz7kN5BjfA==
+Received: from smtp.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
+ [172.16.192.107])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Wed,  6 Mar 2024 16:49:21 +0300 (MSK)
+Received: from user-A520M-DS3H.sberdevices.ru (100.64.160.123) by
+ p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.40; Wed, 6 Mar 2024 16:49:16 +0300
+From: Alexey Romanov <avromanov@salutedevices.com>
+To: <dario.binacchi@amarulasolutions.com>, <michael@amarulasolutions.com>,
+ <frieder.schrempf@kontron.de>, <kmpark@infradead.org>, <hs@denx.de>,
+ <joe.hershberger@ni.com>, <dunaev@tecon.ru>, <sjg@chromium.org>,
+ <bmeng@tinylab.org>, <xypron.glpk@gmx.de>, <tobias@waldekranz.com>,
+ <jpewhacker@gmail.com>, <marek.vasut+renesas@mailbox.org>,
+ <kever.yang@rock-chips.com>, <jbx6244@gmail.com>,
+ <abdellatif.elkhlifi@arm.com>, <mikhail.kshevetskiy@iopsys.eu>,
+ <jagan@amarulasolutions.com>
+CC: <kernel@salutedevices.com>, <u-boot@lists.denx.de>, Alexey Romanov
+ <avromanov@salutedevices.com>
+Subject: [PATCH v1 0/6] Introduce UBI block device
+Date: Wed, 6 Mar 2024 16:49:00 +0300
+Message-ID: <20240306134906.1179285-1-avromanov@salutedevices.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/6] arm: mach-k3: Add config option for setting OP-TEE
- address
-To: Manorit Chawdhry <m-chawdhry@ti.com>
-CC: Neha Malcom Francis <n-francis@ti.com>, Vignesh Raghavendra
- <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>, Simon Glass
- <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>
-References: <20240214163009.983034-1-afd@ti.com>
- <20240214163009.983034-3-afd@ti.com>
- <20240228062113.bozx3di2daub4z7f@uda0497581>
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20240228062113.bozx3di2daub4z7f@uda0497581>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [100.64.160.123]
+X-ClientProxiedBy: p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) To
+ p-i-exch-sc-m01.sberdevices.ru (172.16.192.107)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 183875 [Feb 29 2024]
+X-KSMG-AntiSpam-Version: 6.1.0.3
+X-KSMG-AntiSpam-Envelope-From: avromanov@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 7 0.3.7
+ 6d6bf5bd8eea7373134f756a2fd73e9456bb7d1a, {Tracking_uf_ne_domains},
+ {Tracking_from_domain_doesnt_match_to}, FromAlignment: s,
+ ApMailHostAddress: 100.64.160.123
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean, bases: 2024/02/29 16:52:00
+X-KSMG-LinksScanning: Clean, bases: 2024/02/29 16:52:00
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2024/02/29 19:21:00 #23899999
+X-KSMG-AntiVirus-Status: Clean, skipped
+X-Mailman-Approved-At: Wed, 06 Mar 2024 14:51:44 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,125 +107,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/28/24 12:21 AM, Manorit Chawdhry wrote:
-> Hi Andrew,
-> 
-> On 10:30-20240214, Andrew Davis wrote:
->> Much like we have for ATF, OP-TEE has a standard address that we load
->> it too and run it from. Add a Kconfig item for this to remove some
->> hard-coding and allow this address to be more easily changed.
->>
->> Signed-off-by: Andrew Davis <afd@ti.com>
->> ---
->>   arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi     | 4 ++--
->>   arch/arm/dts/k3-am65-iot2050-boot-image.dtsi     | 4 ++--
->>   arch/arm/dts/k3-binman.dtsi                      | 8 ++++----
->>   arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi | 4 ++--
->>   arch/arm/mach-k3/Kconfig                         | 7 +++++++
->>   5 files changed, 17 insertions(+), 10 deletions(-)
->>
->> diff --git a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
->> index a723caa5805..cca0f44b7d8 100644
->> --- a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
->> +++ b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
->> @@ -105,8 +105,8 @@
->>   					arch = "arm64";
->>   					compression = "none";
->>   					os = "tee";
->> -					load = <0x9e800000>;
->> -					entry = <0x9e800000>;
->> +					load = <CONFIG_K3_OPTEE_LOAD_ADDR>;
->> +					entry = <CONFIG_K3_OPTEE_LOAD_ADDR>;
->>   					tee-os {
->>   						filename = "tee-raw.bin";
->>   					};
->> diff --git a/arch/arm/dts/k3-am65-iot2050-boot-image.dtsi b/arch/arm/dts/k3-am65-iot2050-boot-image.dtsi
->> index 64318d09cf0..3a6db91e132 100644
->> --- a/arch/arm/dts/k3-am65-iot2050-boot-image.dtsi
->> +++ b/arch/arm/dts/k3-am65-iot2050-boot-image.dtsi
->> @@ -51,8 +51,8 @@
->>   					arch = "arm64";
->>   					compression = "none";
->>   					os = "tee";
->> -					load = <0x9e800000>;
->> -					entry = <0x9e800000>;
->> +					load = <CONFIG_K3_OPTEE_LOAD_ADDR>;
->> +					entry = <CONFIG_K3_OPTEE_LOAD_ADDR>;
->>   					tee-os {
->>   					};
->>   				};
->> diff --git a/arch/arm/dts/k3-binman.dtsi b/arch/arm/dts/k3-binman.dtsi
->> index 758c8bf6ea1..621653e9471 100644
->> --- a/arch/arm/dts/k3-binman.dtsi
->> +++ b/arch/arm/dts/k3-binman.dtsi
->> @@ -286,8 +286,8 @@
->>   					arch = "arm64";
->>   					compression = "none";
->>   					os = "tee";
->> -					load = <0x9e800000>;
->> -					entry = <0x9e800000>;
->> +					load = <CONFIG_K3_OPTEE_LOAD_ADDR>;
->> +					entry = <CONFIG_K3_OPTEE_LOAD_ADDR>;
->>   					ti-secure {
->>   						content = <&tee>;
->>   						keyfile = "custMpk.pem";
->> @@ -356,8 +356,8 @@
->>   					arch = "arm64";
->>   					compression = "none";
->>   					os = "tee";
->> -					load = <0x9e800000>;
->> -					entry = <0x9e800000>;
->> +					load = <CONFIG_K3_OPTEE_LOAD_ADDR>;
->> +					entry = <CONFIG_K3_OPTEE_LOAD_ADDR>;
->>   					tee-os {
->>   						filename = "tee-raw.bin";
->>   					};
->> diff --git a/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi b/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi
->> index 017a5a722e0..ca99fa0e690 100644
->> --- a/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi
->> +++ b/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi
->> @@ -250,8 +250,8 @@
->>   					arch = "arm64";
->>   					compression = "none";
->>   					os = "tee";
->> -					load = <0x9e800000>;
->> -					entry = <0x9e800000>;
->> +					load = <CONFIG_K3_OPTEE_LOAD_ADDR>;
->> +					entry = <CONFIG_K3_OPTEE_LOAD_ADDR>;
->>   					tee-os {
->>   						filename = "tee-raw.bin";
->>   					};
->> diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
->> index 0bd3f9fa12d..55bb874d9aa 100644
->> --- a/arch/arm/mach-k3/Kconfig
->> +++ b/arch/arm/mach-k3/Kconfig
->> @@ -129,6 +129,13 @@ config K3_ATF_LOAD_ADDR
->>   	  The load address for the ATF image. This value is used to build the
->>   	  FIT image header that places ATF in memory where it will run.
->>   
->> +config K3_OPTEE_LOAD_ADDR
->> +	hex "Load address of OPTEE image"
->> +	default 0x9e800000
->> +	help
->> +	  The load address for the OPTEE image. This value defaults to 0x9e800000
->> +	  if not provided in the board defconfig file.
->> +
-> 
-> Wondering if we should call out updating the firewall configurations as
-> well as a part of this so people don't end up with random failures..
-> 
+Hello!
 
-Might be even better to build the firewall config based on this
-new kconfig symbol. I can look into that at some later point.
+This series adds support for the UBI block device, which
+allows to read/write data block by block. For example,
+it can now be used for BCB or Android AB command:
 
-Andrew
+  $ bcb load ubi 0 part_name
 
-> Regards,
-> Manorit
-> 
->>   config K3_DM_FW
->>   	bool "Separate DM firmware image"
->>   	depends on CPU_V7R && (SOC_K3_J721E || SOC_K3_J721S2 || SOC_K3_AM625 || SOC_K3_AM62A7) && !CLK_TI_SCI && !TI_SCI_POWER_DOMAIN
->> -- 
->> 2.39.2
->>
+Tested only on SPI NAND, so bind is made only for
+SPI NAND drivers. Can be used with mtdblock device [1].
+
+- Links:
+
+  [1] https://lore.kernel.org/all/20240227100441.1811047-1-avromanov@salutedevices.com/
+
+Alexey Romanov (6):
+  ubi: allow to read from volume with offset
+  ubi: allow to write to volume with offset
+  drivers: introduce UBI block abstraction
+  disk: don't try search for partition type if already set
+  disk: support UBI partitions
+  spinand: bind UBI block
+
+ cmd/ubi.c                   |  77 +++++++++++++++++++--
+ disk/part.c                 |   7 ++
+ drivers/block/blk-uclass.c  |   1 +
+ drivers/mtd/nand/spi/core.c |   9 ++-
+ drivers/mtd/ubi/Makefile    |   2 +
+ drivers/mtd/ubi/block.c     | 130 ++++++++++++++++++++++++++++++++++++
+ drivers/mtd/ubi/part.c      |  99 +++++++++++++++++++++++++++
+ env/ubi.c                   |  16 ++---
+ include/part.h              |   2 +
+ include/ubi_uboot.h         |   8 ++-
+ 10 files changed, 334 insertions(+), 17 deletions(-)
+ create mode 100644 drivers/mtd/ubi/block.c
+ create mode 100644 drivers/mtd/ubi/part.c
+
+-- 
+2.34.1
+
