@@ -4,37 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A69BC54E41
-	for <u-boot@archiver.kernel.org>; Wed,  6 Mar 2024 13:40:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B3ECC54E41
+	for <u-boot@archiver.kernel.org>; Wed,  6 Mar 2024 13:40:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D4019879A0;
-	Wed,  6 Mar 2024 14:40:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E15AF87FA7;
+	Wed,  6 Mar 2024 14:40:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ltts.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E9CF987E18; Wed,  6 Mar 2024 14:40:05 +0100 (CET)
+ id 4F00287E18; Wed,  6 Mar 2024 14:40:07 +0100 (CET)
 Received: from esa1.ltts.com (unknown [118.185.121.105])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B719686BFA
- for <u-boot@lists.denx.de>; Wed,  6 Mar 2024 14:40:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BC8BD87653
+ for <u-boot@lists.denx.de>; Wed,  6 Mar 2024 14:40:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=ltts.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bhargav.r@ltts.com
-IronPort-SDR: /kw/PGdEkW6fTN9/PbnzLMhik9zjESkWxwoIH8APCQ87VH7tafngkhk4p186Q+dHbgGl5XmeSe
- SPsrPu/jyj1g==
+IronPort-SDR: AKUL/gplBVdnfDH/65MLB1e1jQ8SxDt0QdqgWAhWB4c67fVx6diLsOWs7OIhbKi/mWnYRHTwRG
+ w5yCE5/wWW/Q==
 Received: from unknown (HELO localhost.localdomain) ([192.168.34.55])
- by esa1.ltts.com with ESMTP; 06 Mar 2024 19:10:00 +0530
+ by esa1.ltts.com with ESMTP; 06 Mar 2024 19:10:01 +0530
 From: Bhargav Raviprakash <bhargav.r@ltts.com>
 To: u-boot@lists.denx.de
 Cc: jh80.chung@samsung.com, sjg@chromium.org, bhargav.r@ltts.com,
  m.nirmaladevi@ltts.com, trini@konsulko.com, d-gole@ti.com,
  dan.carpenter@linaro.org
-Subject: [PATCH v2 0/5] Add support for TI TPS65224 PMIC
-Date: Wed,  6 Mar 2024 19:09:42 +0530
-Message-Id: <20240306133947.160354-1-bhargav.r@ltts.com>
+Subject: [PATCH v2 1/5] power: tps65941: Add macros of TPS65224 PMIC
+Date: Wed,  6 Mar 2024 19:09:43 +0530
+Message-Id: <20240306133947.160354-2-bhargav.r@ltts.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20240306133947.160354-1-bhargav.r@ltts.com>
+References: <20240306133947.160354-1-bhargav.r@ltts.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -53,40 +55,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-TPS65224 is a Power Management IC which provides regulators and others
-features like GPIOs, RTC, watchdog, ADC, ESMs (Error Signal Monitor),
-and PFSM (Pre-configurable Finite State Machine). The SoC and the PMIC
-can communicate through the I2C.
+Re-use the TPS65941 PMIC driver for TPS65224 PMIC.
+Add additional macros of TPS65224 to aid in the driver
+re-use.
 
-Data Sheet for TPS65224: https://www.ti.com/product/TPS65224-Q1
+Signed-off-by: Bhargav Raviprakash <bhargav.r@ltts.com>
+---
+ include/power/tps65941.h | 30 ++++++++++++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
 
-Reusing the TPS65941 PMIC driver to add support for TPS65224 PMIC 
-in U-boot. This includes driver for PMIC and regulator.
-
-The driver was tested on Ti's custom AM62P EVM using U-boot's
-pmic list, regulator list, regulator status and regulator value commands.
-Since, support for Ti's AM62P is absent in u-boot next, the patches
-were applied on ti-u-boot ti-u-boot-2023.04-next and tested.
-
-Changelog v1 -> v2:
-- use __maybe_unused attrinute istead of commenting variable name in
-  function params.
-- refactoring tps65224_ldo_val2volt function
-
-Bhargav Raviprakash (5):
-  power: tps65941: Add macros of TPS65224 PMIC
-  power: pmic: tps65941: Add TI TPS65224 PMIC
-  power: regulator: tps65941: Added macros for BUCK ID
-  power: regulator: tps65941: use function callbacks for conversion ops
-  power: regulator: tps65941: Add TPS65224 PMIC regulator support
-
- drivers/power/pmic/tps65941.c                |   1 +
- drivers/power/regulator/tps65941_regulator.c | 381 +++++++++++++++++--
- include/power/tps65941.h                     |  30 ++
- 3 files changed, 381 insertions(+), 31 deletions(-)
-
-
-base-commit: 4b151562bb8e54160adedbc6a1c0c749c00a2f84
+diff --git a/include/power/tps65941.h b/include/power/tps65941.h
+index a2bc6814ba..cec85333f0 100644
+--- a/include/power/tps65941.h
++++ b/include/power/tps65941.h
+@@ -3,11 +3,14 @@
+ #define TPS659413		0x2
+ #define TPS659414		0x3
+ #define  LP876441		0x4
++#define  TPS65224		0x5
+ 
+ /* I2C device address for pmic tps65941 */
+ #define TPS65941_I2C_ADDR	(0x12 >> 1)
+ #define TPS65941_LDO_NUM		4
+ #define TPS65941_BUCK_NUM		5
++#define TPS65224_LDO_NUM		3
++#define TPS65224_BUCK_NUM		4
+ 
+ /* Drivers name */
+ #define TPS65941_LDO_DRIVER		"tps65941_ldo"
+@@ -25,3 +28,30 @@
+ #define TPS65941_LDO_MODE_MASK		0x1
+ #define TPS65941_LDO_BYPASS_EN		0x80
+ #define TP65941_BUCK_CONF_SLEW_MASK	0x7
++
++#define TPS65224_BUCK_VOLT_MAX		3300000
++#define TPS65224_BUCK1_VOLT_MAX_HEX      0xFD
++#define TPS65224_BUCK234_VOLT_MAX_HEX    0x45
++
++#define TPS65224_BUCK_CONF_SLEW_MASK     0x3
++#define TPS65224_LDO_VOLT_MASK    (0x3F << 1)
++
++#define TPS65224_LDO1_VOLT_MIN_HEX       0x0C
++#define TPS65224_LDO23_VOLT_MIN_HEX      0x00
++#define TPS65224_LDO1_VOLT_MAX_HEX       0x36
++#define TPS65224_LDO23_VOLT_MAX_HEX      0x38
++
++#define TPS65224_LDO1_VOLT_MAX        3300000
++#define TPS65224_LDO23_VOLT_MAX       3400000
++#define TPS65224_LDO1_VOLT_MIN        1200000
++#define TPS65224_LDO23_VOLT_MIN        600000
++
++#define TPS65224_LDO_STEP               50000
++
++#define TPS65224_LDO_BYP_CONFIG             7
++
++#define TPS65224_LDO1_VOLT_BYP_MIN    2200000
++#define TPS65224_LDO1_VOLT_BYP_MAX    3600000
++
++#define TPS65224_LDO23_VOLT_BYP_MIN   1500000
++#define TPS65224_LDO23_VOLT_BYP_MAX   5500000
 -- 
 2.25.1
 
