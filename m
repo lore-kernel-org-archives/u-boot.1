@@ -4,41 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97532C5475B
-	for <u-boot@archiver.kernel.org>; Wed,  6 Mar 2024 13:34:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94D10C5475B
+	for <u-boot@archiver.kernel.org>; Wed,  6 Mar 2024 13:35:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D90D086FB2;
-	Wed,  6 Mar 2024 14:34:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ltts.com
+	by phobos.denx.de (Postfix) with ESMTP id 26E3C86FB2;
+	Wed,  6 Mar 2024 14:35:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="WOu6H8kd";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C2EED87B07; Wed,  6 Mar 2024 14:34:46 +0100 (CET)
-Received: from esa1.ltts.com (unknown [118.185.121.105])
+ id B0CD687BFD; Wed,  6 Mar 2024 14:35:27 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A75D587C61
- for <u-boot@lists.denx.de>; Wed,  6 Mar 2024 14:34:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=ltts.com
+ by phobos.denx.de (Postfix) with ESMTPS id BBC0786308
+ for <u-boot@lists.denx.de>; Wed,  6 Mar 2024 14:35:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=bhargav.r@ltts.com
-IronPort-SDR: DwiZfOjeyW/vbsDMrPOf7V66cgqFbWXN1KQ9kcu6ViynLiRVDAKu3bbtxPmUlYQZfkFrQGoeKn
- EO9z7sd6CC/Q==
-Received: from unknown (HELO localhost.localdomain) ([192.168.34.55])
- by esa1.ltts.com with ESMTP; 06 Mar 2024 19:04:38 +0530
-From: Bhargav Raviprakash <bhargav.r@ltts.com>
-To: d-gole@ti.com
-Cc: bhargav.r@ltts.com, jh80.chung@samsung.com, kamlesh@ti.com,
- m.nirmaladevi@ltts.com, sjg@chromium.org, u-boot@lists.denx.de
-Subject: Re: [PATCH v1 4/5] power: regulator: tps65941: use function callbacks
- for conversion ops
-Date: Wed,  6 Mar 2024 19:04:29 +0530
-Message-Id: <20240306133429.159907-1-bhargav.r@ltts.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240223094156.qhzclrbnuiedbfg7@dhruva>
-References: <20240223094156.qhzclrbnuiedbfg7@dhruva>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 426DZHPs004666;
+ Wed, 6 Mar 2024 07:35:17 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1709732117;
+ bh=UrFRdrLHyjIavkMOK9w4OSPmgE/FFWnTfmmtpP3XwE8=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=WOu6H8kd/oO2E+ph6h7vqEn3jwDohkF4lI/wU+V+P89hFdMZb94drsWe912WT4gbN
+ KhjievRTrPeafyR7Hgw3fls+KguGodkttNbafhmUyQp/+Wdgpwi2LPwHVRuxGEgkIP
+ gqRz8BSb9ATjkkosjDrTB1tMYgEE/5F/gGizN0P0=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 426DZHV8127180
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 6 Mar 2024 07:35:17 -0600
+Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 6
+ Mar 2024 07:35:17 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 6 Mar 2024 07:35:17 -0600
+Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 426DZHhj010532;
+ Wed, 6 Mar 2024 07:35:17 -0600
+Date: Wed, 6 Mar 2024 07:35:17 -0600
+From: Bryan Brattlof <bb@ti.com>
+To: Andrew Davis <afd@ti.com>
+CC: Neha Malcom Francis <n-francis@ti.com>, Vignesh Raghavendra
+ <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>, Simon Glass
+ <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH 4/6] arm: mach-k3: am62: Fixup TF-A/OP-TEE
+ reserved-memory node in FDT
+Message-ID: <20240306133517.djtzqotxzour34ib@bryanbrattlof.com>
+X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
+References: <20240214163009.983034-1-afd@ti.com>
+ <20240214163009.983034-5-afd@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+In-Reply-To: <20240214163009.983034-5-afd@ti.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -55,61 +82,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 23 Feb 2024 15:11:56 +0530, Dhruva Gole wrote:
-> On Feb 23, 2024 at 14:42:11 +0530, Bhargav Raviprakash wrote:
-> > Use function callbacks for volt2val, val2volt and slewrate lookups.
-> > This makes it easier to add support for TPS65224 PMIC regulators.
-> > 
-> > Signed-off-by: Bhargav Raviprakash <bhargav.r@ltts.com>
-> > ---
-> >  drivers/power/regulator/tps65941_regulator.c | 61 +++++++++++++++-----
-> >  1 file changed, 48 insertions(+), 13 deletions(-)
+On February 14, 2024 thus sayeth Andrew Davis:
+> The address we load TF-A and OP-TEE to is configurable by Kconfig
+> CONFIG_K3_{ATF,OPTEE}_LOAD_ADDR, but the DT nodes reserving this memory
+> are often statically defined. As these binaries are dynamically loadable,
+> and in the case of OP-TEE may not even be loaded at all, hard-coding these
+> addresses is not a hardware description, but rather a configuration.
 > 
-> Add Tom Rini in To or CC please.
+> If the address that U-Boot loaded TF-A or OP-TEE does not match the
+> address in hard-coded in DT, then fix that node address. This also handles
+> the case when no reserved memory for these is provided by DT, which is
+> more correct as explained above.
 > 
+> Add this fixup function, and enable it for AM62.
+> 
+> Signed-off-by: Andrew Davis <afd@ti.com>
 
-Sure
+Acked-by: Bryan Brattlof <bb@ti.com>
 
-> > 
-> > diff --git a/drivers/power/regulator/tps65941_regulator.c b/drivers/power/regulator/tps65941_regulator.c
-> > index cf54e30df5..cdfbc3f4de 100644
-> > --- a/drivers/power/regulator/tps65941_regulator.c
-> > +++ b/drivers/power/regulator/tps65941_regulator.c
-> > @@ -35,6 +35,17 @@
-> >  #define TPS65941_LDO_ID_3         3
-> >  #define TPS65941_LDO_ID_4         4
-> >  
-> > +#define TPS65941_BUCK_CONV_OPS_IDX  0
-> > +#define TPS65941_LDO_CONV_OPS_IDX   0
-> > +
-> > +struct tps65941_reg_conv_ops {
-> > +	int volt_mask;
-> > +	int (*volt2val)(int idx, int uV);
-> > +	int (*val2volt)(int idx, int volt);
-> > +	int slew_mask;
-> > +	int (*lookup_slew)(int id);
-> > +};
-> > +
-> >  static const char tps65941_buck_ctrl[TPS65941_BUCK_NUM] = {0x4, 0x6, 0x8, 0xA,
-> >  								0xC};
-> >  static const char tps65941_buck_vout[TPS65941_BUCK_NUM] = {0xE, 0x10, 0x12,
-> > @@ -79,7 +90,7 @@ static int tps65941_buck_enable(struct udevice *dev, int op, bool *enable)
-> >  	return 0;
-> >  }
-> >  
-> > -static int tps65941_buck_volt2val(int uV)
-> > +static int tps65941_buck_volt2val(int /*idx*/, int uV)
-> 
-> IMHO /*idx*/ does NOT look good.
-> Check something like __maybe_unused attribute
-> 
-> [...]
-> 
-> -- 
-> Best regards,
-> Dhruva Gole <d-gole@ti.com>
+Does this mean we need to no-map these regions in the MMU as well? Right 
+now it's just statically defined. I was looking into trying to read the 
+reserved-memory{} node to see if we could dynamically build the MMU 
+config but that would have to happen after this step right?
 
-Thanks for the feedback. Will use '__maybe_unused' in next version.
-
-Regards,
-Bhargav
+~Bryan
