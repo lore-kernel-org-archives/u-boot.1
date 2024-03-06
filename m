@@ -4,73 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20C10C5475B
-	for <u-boot@archiver.kernel.org>; Wed,  6 Mar 2024 06:00:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54FA1C5475B
+	for <u-boot@archiver.kernel.org>; Wed,  6 Mar 2024 06:01:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 807CE87D25;
-	Wed,  6 Mar 2024 07:00:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4C08987D25;
+	Wed,  6 Mar 2024 07:01:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VjsSnI6F";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="l2LmxnYx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8782D87D33; Wed,  6 Mar 2024 07:00:37 +0100 (CET)
-Received: from mail-ua1-x930.google.com (mail-ua1-x930.google.com
- [IPv6:2607:f8b0:4864:20::930])
+ id 0E13187D25; Wed,  6 Mar 2024 07:01:11 +0100 (CET)
+Received: from mail-ua1-x92a.google.com (mail-ua1-x92a.google.com
+ [IPv6:2607:f8b0:4864:20::92a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 679D686F6E
- for <u-boot@lists.denx.de>; Wed,  6 Mar 2024 07:00:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E85DB86F6E
+ for <u-boot@lists.denx.de>; Wed,  6 Mar 2024 07:01:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ua1-x930.google.com with SMTP id
- a1e0cc1a2514c-7cedcea89a0so3958622241.1
- for <u-boot@lists.denx.de>; Tue, 05 Mar 2024 22:00:35 -0800 (PST)
+Received: by mail-ua1-x92a.google.com with SMTP id
+ a1e0cc1a2514c-7db36dbd474so1502447241.2
+ for <u-boot@lists.denx.de>; Tue, 05 Mar 2024 22:01:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709704834; x=1710309634; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1709704867; x=1710309667; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=THIRWzfgfc2KOZnMb7HAaMhUCMHxu616izXyZT+zDAQ=;
- b=VjsSnI6FptwAwWQE6/c1Duy+TIey4gI5+UV3BaQX6HsNwiXB35cTl8OZDMq7v7NYAQ
- Wfd5a46kCBRJavMhS32ZMT3ZN0X2LBJos434FJgCYRDHdBSTeDQvlxO/7Vs5a3LjSCbU
- 8oOVC5nsCnd67ku0ePlmPOxGcQvqruRF2zTpEx9kScIDz1Rwayb6GbXU/fYteux65/KK
- fSZ+GhU6PfDo2Q0x+DRRp0pkGkhjO+zwZzXMHvDXP6GUgtj1YEBBUNIw9r6XwuX/VR+L
- wH8+usbUaSvGxblbc6kepGqggM/y0NGvPCOrnl/xQCTtwuxOhdkqJKq5eBFUAgpiwycw
- YHsw==
+ bh=ZKJaJNUzrYnVi1scyqbcPyKIzawmks2lnisFcXIhZIQ=;
+ b=l2LmxnYxImeIWsFDu+6D81TDqaGBsFyU++bkjW0Is8UEcdRMKBguMeuqxMlhhTM7M0
+ Ttuqej/IfPFVTfKbMSe6nYr2X4E2huEvGzFOyCY2dlE421ZOypb7spenr9eJok+njiw2
+ 2zYPf7E2AfYC3DuGLZUNTGRZBYbSZVBEOCGOqoofEiChgDnyLxDZCX/qmW4T2TCaIfsU
+ HZWgWuZLusx9RrF2HGNqZfqxTq5gssajYXmeKDENgJ6dD65UrhbhRonBAHv5f94rV36U
+ ny0BYpMC3SmYkG2dMEqjRMRi6w8NJE2S2XdQtwZxQwtgkUTf0auCpvsQLq4SsVPDigZP
+ YAFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709704834; x=1710309634;
+ d=1e100.net; s=20230601; t=1709704867; x=1710309667;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=THIRWzfgfc2KOZnMb7HAaMhUCMHxu616izXyZT+zDAQ=;
- b=TGYLNpJWaeOVypIqRAyeuDQC9gs7fSnCIxaxx4SFHDJJ4nZwxPaiC+9q/J2PycC3Kz
- m3Ooh8N+vPjOK72GM7j1aY6WWGh2AHRotSNseDGB4Mg1kG0OWSI25r7PWC/m7jU1p3f6
- A2RIBq1dxirHkBfzT5mqO/5+sPI68mBaT6x0VUZPi/C1hLaxZCXudVRlFtnS93uwNpWK
- h4ssndhrXaljneLao162DO3RZAMwsY77vqowc8SSRZuS8DiaJ8CkoUBiYvmakEg1C0BW
- 2nf6EjsOnDjtH+GQwF0bEOp0Mb+pFJ8a3mVmdoTGt48ClvhwY+LDcMK5HIwofLLcBX1w
- EBaQ==
-X-Gm-Message-State: AOJu0Yy/JAbFnkrIB58hyUP3JGNni2uZbdPw6i7Y/Tz5Y7B1l40O3vcf
- /GfKA2Z8JorQDOhDPEfLW23+Xv0BlzZkqZ9gf5yKEDSafs28b8G6fr4++AJze4OtqyAuzIUIi8r
- gtAF6YaipVHBsvQ8fyY0h/zFbK+VsUA9SDp4mqw==
-X-Google-Smtp-Source: AGHT+IHdBcwq1nHRju5t3egHPoZqWQBl+XkHzWXYvOzbvbfmj1R4I5EKTm2YH530KJBcHsa0Ivj4sUNVHM+Nw4tJyrA=
-X-Received: by 2002:a05:6102:6c9:b0:471:d67f:ea2 with SMTP id
- m9-20020a05610206c900b00471d67f0ea2mr4727803vsg.19.1709704834072; Tue, 05 Mar
- 2024 22:00:34 -0800 (PST)
+ bh=ZKJaJNUzrYnVi1scyqbcPyKIzawmks2lnisFcXIhZIQ=;
+ b=oNCV19viAKZwwtMFNorkDNRGcdp3YkVmsa1FiLoBz3JoubLl9fwWmn0vNWS5lpZME7
+ V9Az+CKB5tvV8xto7156/m+vloPGwpnhFnl0AP1jYsb97fqHAdWIBXun9WQ40n90fIQg
+ HQbfWTHlAuSRFPIAsjyKmhhoL1aBe2ne5l+ii4JF5b3tzr+GJFJ6JaEYa4mtmnlZw/L2
+ OlgLbxRF78x8Tf8+mg0KgmEwbYQ9UtvjyD+SJ7r0vSnrvRwsE3O52TPq/FA7b6zEtMbQ
+ 3KNrazgjQI1Ori1vpXtvuFg1+lEHuV8iZrRwQ3+BkL2kiHvVJ8iX4H6gJjtB6VRiav/h
+ ncNA==
+X-Gm-Message-State: AOJu0YxHnwOpCM2yUAKiR8HHkfoixQo3NlGsQxTeZ7tUcnZiwqrufqrg
+ qcS7z2TCqNTch0GPdPKsOd1ccDseRZCB9HWl3je724GikGteCG/sZF7Fmp9eETBgqfu7/opuZ/z
+ rIwbS/AGoZYPpXOHzd8WmyotaR7MRDhVMhQGR3Q==
+X-Google-Smtp-Source: AGHT+IEp4/v8gwpRzq48o2TQ3QsMXRx4OMmQI3rI84y/cPrSTvRYv+WLfDxJ3CmGW9uW4XVRKTfRW+Z9gN2dKipxlsw=
+X-Received: by 2002:a67:b106:0:b0:472:e77a:dbb9 with SMTP id
+ w6-20020a67b106000000b00472e77adbb9mr2017108vsl.10.1709704867717; Tue, 05 Mar
+ 2024 22:01:07 -0800 (PST)
 MIME-Version: 1.0
 References: <20240306005230.2638972-1-volodymyr_babchuk@epam.com>
- <20240306005230.2638972-2-volodymyr_babchuk@epam.com>
-In-Reply-To: <20240306005230.2638972-2-volodymyr_babchuk@epam.com>
+ <20240306005230.2638972-3-volodymyr_babchuk@epam.com>
+In-Reply-To: <20240306005230.2638972-3-volodymyr_babchuk@epam.com>
 From: Sumit Garg <sumit.garg@linaro.org>
-Date: Wed, 6 Mar 2024 11:30:22 +0530
-Message-ID: <CAFA6WYNRQnm=isav4RLa0=wCK50iTYrxNSR6hUx=_5vPhjQe3g@mail.gmail.com>
-Subject: Re: [PATCH v2 1/8] qcom: board: validate fdt before trying to use it
+Date: Wed, 6 Mar 2024 11:30:56 +0530
+Message-ID: <CAFA6WYMBfE3+jJK8E6_PxBk_Aa1he2Q=hYBqRUqR6JHtAfmKDA@mail.gmail.com>
+Subject: Re: [PATCH v2 2/8] clk: qcom: clear div mask before assigning a new
+ divider
 To: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
  Caleb Connolly <caleb.connolly@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
+ Konrad Dybcio <konrad.dybcio@linaro.org>, Lukasz Majewski <lukma@denx.de>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Sean Anderson <seanga2@gmail.com>, 
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,61 +94,42 @@ X-Virus-Status: Clean
 On Wed, 6 Mar 2024 at 06:23, Volodymyr Babchuk
 <Volodymyr_Babchuk@epam.com> wrote:
 >
-> There are cases when previous bootloader stage leaves some seemingly
-> valid value in r0, which in fact does not point to valid FDT
-> blob. This behavior was encountered when trying to boot U-Boot as
-> "hyp" loader on SA8155P-ADP.
+> The current behaviour does a bitwise OR of the previous and new
+> divider values, this is wrong as some bits maybe be set already. We
+> need to clear all the divider bits before applying new ones.
 >
-> To be sure that we really got the pointer to a device tree we need to
-> validate it with fdt_valid() function.
+> This fixes potential issue with 1Gbit ethernet on SA8155P-ADP boards.
 >
-> Note: This approach is not 100% fool-proof, as get_prev_bl_fdt_addr()
-> theoretically can return a pointer to a region that is not physically
-> mapped and we will get data abort exception when "fdt_valid" will try
-> to access it. But at this early boot stage we don't know where RAM is
-> anyways so there is little we can do.
+> Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+> Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
 >
-
-I suppose this approach allows us to reuse the same U-Boot binary when
-booted in EL2 more or when loaded by ABL. So I am fine with this
-approach.
+> ---
+>
+> Changes in v2:
+>  - Reworded the commit message
+>  - Added Caleb's R-b tag
+>
+>  drivers/clk/qcom/clock-qcom.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>
 
 Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
 
 -Sumit
 
-> Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+> diff --git a/drivers/clk/qcom/clock-qcom.c b/drivers/clk/qcom/clock-qcom.c
+> index 7c683e5192..729d190c54 100644
+> --- a/drivers/clk/qcom/clock-qcom.c
+> +++ b/drivers/clk/qcom/clock-qcom.c
+> @@ -117,7 +117,8 @@ void clk_rcg_set_rate_mnd(phys_addr_t base, const struct bcr_regs *regs,
 >
-> ---
+>         /* setup src select and divider */
+>         cfg  = readl(base + regs->cfg_rcgr);
+> -       cfg &= ~(CFG_SRC_SEL_MASK | CFG_MODE_MASK | CFG_HW_CLK_CTRL_MASK);
+> +       cfg &= ~(CFG_SRC_SEL_MASK | CFG_MODE_MASK | CFG_HW_CLK_CTRL_MASK |
+> +                CFG_SRC_DIV_MASK);
+>         cfg |= source & CFG_SRC_SEL_MASK; /* Select clock source */
 >
-> Changes in v2:
->  - New patch in v2
->
->  arch/arm/mach-snapdragon/board.c | 5 ++++-
->  1 file changed, 4 insertions(+), 1 deletion(-)
->
-> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-> index f12f5791a1..10eec47ada 100644
-> --- a/arch/arm/mach-snapdragon/board.c
-> +++ b/arch/arm/mach-snapdragon/board.c
-> @@ -24,6 +24,7 @@
->  #include <linux/sizes.h>
->  #include <lmb.h>
->  #include <malloc.h>
-> +#include <fdt_support.h>
->  #include <usb.h>
->  #include <sort.h>
->
-> @@ -93,7 +94,9 @@ void *board_fdt_blob_setup(int *err)
->          * try and use the FDT built into U-Boot if there is one...
->          * This avoids having a hard dependency on the previous stage bootloader
->          */
-> -       if (IS_ENABLED(CONFIG_OF_SEPARATE) && (!fdt || fdt != ALIGN(fdt, SZ_4K))) {
-> +
-> +       if (IS_ENABLED(CONFIG_OF_SEPARATE) && (!fdt || fdt != ALIGN(fdt, SZ_4K) ||
-> +                                              !fdt_valid((void *)&fdt))) {
->                 debug("%s: Using built in FDT, bootloader gave us %#llx\n", __func__, fdt);
->                 return (void *)gd->fdt_blob;
->         }
+>         if (div)
 > --
 > 2.43.0
