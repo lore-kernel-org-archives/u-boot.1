@@ -4,55 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FE63C5475B
-	for <u-boot@archiver.kernel.org>; Wed,  6 Mar 2024 15:22:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCF30C5475B
+	for <u-boot@archiver.kernel.org>; Wed,  6 Mar 2024 15:22:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 57B77876E4;
-	Wed,  6 Mar 2024 16:22:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id A4FB887C92;
+	Wed,  6 Mar 2024 16:22:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Rr6uA1Yu";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="KDAg4lTS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 26730877FB; Wed,  6 Mar 2024 16:22:10 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
+ id 864A687D9D; Wed,  6 Mar 2024 16:22:29 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F30D5875FC
- for <u-boot@lists.denx.de>; Wed,  6 Mar 2024 16:22:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7E70A87DB1
+ for <u-boot@lists.denx.de>; Wed,  6 Mar 2024 16:22:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=conor@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id BD4CF6182E;
- Wed,  6 Mar 2024 15:22:06 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6CBA9C433F1;
- Wed,  6 Mar 2024 15:22:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1709738526;
- bh=AXjNrYceTkb2xMRi1UGACEXwcWmbjz+TAGf8VwbIr4U=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=Rr6uA1Yuu0JsHqcF4DQJCFDX3tPhV/41V4l8oQ0uR4OxsR/hE/upKMG0qbXR82Rkb
- rVSuBvj7IJcQf+JwYxFhy6dywLsnKUsNb+yo0nvsAVR7VJViclL38B9MHy+RmRj4Xa
- hHCY6xbqQs3U9SppQ1cGCWCy7Gaj1YuY/g7ABUbHd2jxQqpRv5/MZNpFiHak6KTqRs
- REQ+JKjPxuQaKMwS9a9Tem5AUAWkySCG0ddLcbVtggzPtLUG902UIzpCzq355+qTmD
- gXozevQNuYka9zPQYZ/7JQmj6irZn5PqO5tsGl4zJeMw1sbHJ/eMG3wBqqqRKGlPiI
- 22SW/80bFV4BA==
-Date: Wed, 6 Mar 2024 15:22:03 +0000
-From: Conor Dooley <conor@kernel.org>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH] cmd: sbi: Correctly display unknown implementation IDs
-Message-ID: <20240306-thank-swell-8956436a56a7@spud>
-References: <20240306144402.175957-1-heinrich.schuchardt@canonical.com>
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-ej1-f70.google.com (mail-ej1-f70.google.com
+ [209.85.218.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id B25563F627
+ for <u-boot@lists.denx.de>; Wed,  6 Mar 2024 15:22:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1709738541;
+ bh=I0rbxKBVc1Wqfq0Iaj1Mxu1ojVjdekVxQiqXPTc4CwU=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=KDAg4lTSiFtmZK1zkZ63lUwKIbO1vyi/NrEqveA4ODSa9U4Th56UNdtZt9eDJpnIA
+ AcQveegWF4OERWH6l82ORuJZcenp5U2xP2x5jsxV9jFTsCKMzYiVYFSnNOOAKpxoDT
+ 6fDtJNNuSfXRvi4gytMSSfe8orEUC9zBAvgyRMgnsXNG0A5RDoaDm8T9dXvzB06rzu
+ kf+mwCrFNB0gZCX8tEqIaFQ6VFefCahiLIxICFT+V1j3iFXSs4nAG6fuP438aLnsbH
+ KVLAwPIBnZreN4zeOG+gAVlho2hxZOtgFyLVZFV5zDMLBbmlYDVttXjjSgaLYykfLt
+ zSl+cYrM2NIqg==
+Received: by mail-ej1-f70.google.com with SMTP id
+ a640c23a62f3a-a444b9dd222so434433466b.1
+ for <u-boot@lists.denx.de>; Wed, 06 Mar 2024 07:22:21 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1709738541; x=1710343341;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=I0rbxKBVc1Wqfq0Iaj1Mxu1ojVjdekVxQiqXPTc4CwU=;
+ b=Mvo1R65KSeWaCtgOCfrx4DRj+jCAxED4c6zzEdXO4UX2JehGRHWz64wrRH9x5So80q
+ YPuVwKu7RPYOUvkKfutpnQERYVwhBIY3hzJN8U1jh+L1VGi5j9DOt0lAVW4Ao3mTgedb
+ gLpedZyEXckXTJu3BI9TgYYjAIGYKWDybhPl+9BUDJUP8ticwLIkyP6JY28wcVzlKCk9
+ /mIfryTleesrpFpRYyXhnl4yZq2HULXTBeif528ulPLEDVQQpb2VyvbwDUEI++pckNxI
+ fqlf8gFWb0AGAT+094amXsE5zAh/7pqx1sZzpY2JJBnhC7EPd9jzOCBvXfITUNAJTM2G
+ eXvQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUKtl5NwEf0+no+oQcSNclexHKwLKNpL2Om4yk+/TKG7lNBtBsFBIxvrkONPx7jMuzA6B6G6vr5dOju7QVoE4vFPH7k0A==
+X-Gm-Message-State: AOJu0YyxUP3wGtO5O30Y+t8iCHvJSOQBzzZaVqUrnaGHXwatCbv1Rc8X
+ EnX6SwMZYFMtykNeHpYEnAtYst7IQ790m1MMWAbvchVy7AptrxSa09vOkj/GTUHvWZ1g3RY7QFy
+ aIljr/VSRyrWBebp4PXzXkQeRBfMITWGqQ24UxlgyMHnfG6vxvLBA4eWKLEO5dvy//r8=
+X-Received: by 2002:a17:906:1355:b0:a45:8850:1bab with SMTP id
+ x21-20020a170906135500b00a4588501babmr4898456ejb.43.1709738541353; 
+ Wed, 06 Mar 2024 07:22:21 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IH+5MfVutbhd1BhBJOK9u80s9ls9W1DFtuUfqxOa4wm2KLfzOFtFIRT8DSo2RyTxPaT2GqhzA==
+X-Received: by 2002:a17:906:1355:b0:a45:8850:1bab with SMTP id
+ x21-20020a170906135500b00a4588501babmr4898439ejb.43.1709738540980; 
+ Wed, 06 Mar 2024 07:22:20 -0800 (PST)
+Received: from workstation5.. ([2a00:20:9:393f:a428:922c:8eea:8ca7])
+ by smtp.gmail.com with ESMTPSA id
+ um15-20020a170906cf8f00b00a443e6f9403sm7256291ejb.54.2024.03.06.07.22.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 06 Mar 2024 07:22:20 -0800 (PST)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Rick Chen <rick@andestech.com>,
+	Leo <ycliang@andestech.com>
+Cc: Conor Dooley <conor.dooley@microchip.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] cmd: sbi: formatting PolarFire Hart Software Services
+ version
+Date: Wed,  6 Mar 2024 16:21:49 +0100
+Message-ID: <20240306152149.180561-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="SJPpb0POgHzdzNKs"
-Content-Disposition: inline
-In-Reply-To: <20240306144402.175957-1-heinrich.schuchardt@canonical.com>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,63 +103,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The 'PolarFire Hart Software Services' SBI implementation returns the
+version of the incorporated OpenSBI. Format the number accordingly.
 
---SJPpb0POgHzdzNKs
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ cmd/riscv/sbi.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-On Wed, Mar 06, 2024 at 03:44:02PM +0100, Heinrich Schuchardt wrote:
-> For an unknown implementation ID an output like
->=20
->     SBI 1.0Unknown implementation ID 16777216
->     Extensions:
->       sbi_set_timer
->       ...
->=20
-> was shown. The number 16777216 is not the implementation ID.
->=20
-> * Show the correct number
-> * Use a hexadecimal output format
-> * Add a missing line feed
->=20
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+diff --git a/cmd/riscv/sbi.c b/cmd/riscv/sbi.c
+index dec7dd651d6..628ef3a591c 100644
+--- a/cmd/riscv/sbi.c
++++ b/cmd/riscv/sbi.c
+@@ -80,6 +80,7 @@ static int do_sbi(struct cmd_tbl *cmdtp, int flag, int argc,
+ 					break;
+ 				switch (impl_id) {
+ 				case 1: /* OpenSBI */
++				case 8: /* PolarFire Hart Software Services */
+ 					printf("%ld.%ld",
+ 					       vers >> 16, vers & 0xffff);
+ 					break;
+-- 
+2.43.0
 
-Reviewed-by: Conor Dooley <conor.dooley@microchip.com>
-
-Thanks,
-Conor.
-
->  cmd/riscv/sbi.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/cmd/riscv/sbi.c b/cmd/riscv/sbi.c
-> index 9daf0e247ad..87f7966f06b 100644
-> --- a/cmd/riscv/sbi.c
-> +++ b/cmd/riscv/sbi.c
-> @@ -99,7 +99,7 @@ static int do_sbi(struct cmd_tbl *cmdtp, int flag, int =
-argc,
->  			}
->  		}
->  		if (i =3D=3D ARRAY_SIZE(implementations))
-> -			printf("Unknown implementation ID %ld", ret);
-> +			printf("\nUnknown implementation ID 0x%x", impl_id);
->  	}
->  	printf("\nMachine:\n");
->  	ret =3D sbi_get_mvendorid(&mvendorid);
-> --=20
-> 2.43.0
->=20
-
---SJPpb0POgHzdzNKs
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZeiKGwAKCRB4tDGHoIJi
-0to8AP95KX3JmET3hrJgkSaxo54dQOoqUShWCHh5VNXRTnv1pwEA41CgbNAhYmJc
-Lgg0kI/PexSP7lhfZK0RtvFFne8kfwY=
-=YduW
------END PGP SIGNATURE-----
-
---SJPpb0POgHzdzNKs--
