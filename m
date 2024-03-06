@@ -4,67 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98735C5475B
-	for <u-boot@archiver.kernel.org>; Wed,  6 Mar 2024 20:56:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C0A5C5475B
+	for <u-boot@archiver.kernel.org>; Wed,  6 Mar 2024 22:19:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E42D58785E;
-	Wed,  6 Mar 2024 21:56:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id B4730878E2;
+	Wed,  6 Mar 2024 23:19:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="e/JWtp+P";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fXHo6RfN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB2AF877FB; Wed,  6 Mar 2024 21:56:33 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 843B8878E9; Wed,  6 Mar 2024 23:19:55 +0100 (CET)
+Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
+ [IPv6:2607:f8b0:4864:20::d2c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9982387C92
- for <u-boot@lists.denx.de>; Wed,  6 Mar 2024 21:56:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 59BF78758B
+ for <u-boot@lists.denx.de>; Wed,  6 Mar 2024 23:19:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 426KuSJU079622;
- Wed, 6 Mar 2024 14:56:28 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1709758588;
- bh=UqFbMascdVuvipkc3oSIMi/bk89+DC4vfqdiyO0WKMI=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=e/JWtp+PQuksndcGXkpQ1uFNFHqN7mUA61OgKKVh6dOpIjgxL4IgdJ3cAQJwqXn1v
- 1bRE6wt9NuTWiC/Bq0Z/Xhoun0BUNuhusw7sBbL22TggHEK0CE3tG3lwPKPj48C0Yr
- 84Uti4uwZV6nm//vYCjKbDHFCyhin9vNCfhCtUtY=
-Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 426KuSRG015559
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 6 Mar 2024 14:56:28 -0600
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 6
- Mar 2024 14:56:28 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 6 Mar 2024 14:56:28 -0600
-Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 426KuSkF060991;
- Wed, 6 Mar 2024 14:56:28 -0600
-Date: Wed, 6 Mar 2024 14:56:28 -0600
-From: Nishanth Menon <nm@ti.com>
-To: "Kumar, Udit" <u-kumar1@ti.com>
-CC: Aniket Limaye <a-limaye@ti.com>, <u-boot@lists.denx.de>,
- "trini@konsulko.com" <trini@konsulko.com>, <vaishnav.a@ti.com>,
- <a-nandan@ti.com>
-Subject: Re: [PATCH 2/4] arm: dts: k3-j7200: Fix support for OSPI flash
-Message-ID: <20240306205628.4ur422ntozd7bgr6@footbath>
-References: <20240306063749.1411176-1-a-limaye@ti.com>
- <20240306063749.1411176-3-a-limaye@ti.com>
- <6777d0be-7610-4d54-bd32-1b41ebe94035@ti.com>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=cfsworks@gmail.com
+Received: by mail-io1-xd2c.google.com with SMTP id
+ ca18e2360f4ac-7c83fb0fa01so10633039f.1
+ for <u-boot@lists.denx.de>; Wed, 06 Mar 2024 14:19:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1709763592; x=1710368392; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Y6o2jL6xOknIFvVgvxl/SLkibMWJc1z1QtFEt44sYfQ=;
+ b=fXHo6RfNZCq+0Izvc5GCQ77jip7cizTf5MmNZxb2sy2Tul8jOscm0fSXp1odw4Ecsj
+ o3iYrnhmtADP/PbM+rrqwddk64FUOhA8szWeOmR2wFYoHmhd50aQXCsjBJL0GJnpU3X5
+ VA9g8m9xswkDklnkUbnw/7rVBIDqLQIVIficVHYFcplnVkT7/KuZS8Z9EpsZIHGe6a7H
+ 4hW8wYvv0kSvbsE5PkCvBfDjrB7Y/5kfhVk4tSNbJjZ/llP0YLc7uUMDFohxL4PVMQQX
+ ttKVR9s+0gG53RL1raLEy5QYeLBpHr1ujLsgWuY00UkybRKle0JyxpgJpVhXBV/LB3ZA
+ /olQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1709763592; x=1710368392;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Y6o2jL6xOknIFvVgvxl/SLkibMWJc1z1QtFEt44sYfQ=;
+ b=YsJ99cHjQSLAbDi81nrTVqkusCJv7Q9Vp//NzwPxaS45VgofzXzL+dIRveL1C5S6ul
+ M+2Hm2sgr5CipAGsqpYfqVhKylXuyuQJw3k/bptz5DLPBwjIdnMKuocTFh7VNwN0c5Gf
+ RRIlRwokdykry43qwoUAwPYrLWyrsvKzmy7ItSwvQb0tOktHDH1SPqTrkOwZZ0e+gWyD
+ D38cfI071k16XCKn09yE2cX6nrUTOqXbiamb0gMdyTZ9wOlpOTGxFLrDinS7CxG3wAPg
+ M5k/VasqPNYeVXjLkLFxinDxfUz3AA5dy1YymKwHEvfTMl6ZynWH3pDBxFpfdoNTI4eb
+ KHnQ==
+X-Gm-Message-State: AOJu0YxjWb9lxMsYTb+wG6YZIiQXg1cc3Yjj1JGxn4RO46eZN3HK2v6J
+ NZtmHUsc665a8O20XrIIwbXMROIgVB7LFbIIHtm8uLTp2ug+D53W
+X-Google-Smtp-Source: AGHT+IGgLbdDvCalBIA+6Ir0gIureXsuhdXIP0V4yco0QjSI9curwRhA5z6IrGrpBkGsS6+9aFjXSQ==
+X-Received: by 2002:a6b:dc0e:0:b0:7c8:5742:f4a0 with SMTP id
+ s14-20020a6bdc0e000000b007c85742f4a0mr10324173ioc.12.1709763591809; 
+ Wed, 06 Mar 2024 14:19:51 -0800 (PST)
+Received: from ?IPV6:2001:470:42c4:101:10f:8bb5:397e:4402?
+ ([2001:470:42c4:101:10f:8bb5:397e:4402])
+ by smtp.gmail.com with ESMTPSA id
+ z22-20020a056638001600b004748175344bsm3661498jao.167.2024.03.06.14.19.51
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 06 Mar 2024 14:19:51 -0800 (PST)
+Message-ID: <73d538d5-f1c0-46d0-9fc1-ff705eed054a@gmail.com>
+Date: Wed, 6 Mar 2024 15:19:50 -0700
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <6777d0be-7610-4d54-bd32-1b41ebe94035@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 5/6] arm: fix __efi_runtime_start/end definitions
+Content-Language: en-US
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, caleb.connolly@linaro.org,
+ sumit.garg@linaro.org, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, Michal Simek <michal.simek@amd.com>,
+ Yegor Yefremov <yegorslists@googlemail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Shiji Yang <yangshiji66@outlook.com>, Bin Meng <bmeng@tinylab.org>
+References: <20240304090113.1410575-1-ilias.apalodimas@linaro.org>
+ <20240304090113.1410575-6-ilias.apalodimas@linaro.org>
+ <ccfe2f01-765b-4953-b0b5-9122b861d89b@gmail.com>
+ <CAC_iWjKaaa1vh3BQJGH7obp7MC34QOfSB97R=HEHaj1mSGMpWQ@mail.gmail.com>
+From: Sam Edwards <cfsworks@gmail.com>
+In-Reply-To: <CAC_iWjKaaa1vh3BQJGH7obp7MC34QOfSB97R=HEHaj1mSGMpWQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,76 +103,159 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 18:47-20240306, Kumar, Udit wrote:
-> 
-> On 3/6/2024 12:07 PM, Aniket Limaye wrote:
-> > - Add the missing bootph-all property in the flash subnode for ospi
-> > - Add the missing overrides for the ospi node in the r5 devicetree
-> 
-> Please see , if you can add more on this why we are adding this
-> 
-> also, if this patch fixes some previous commit
-> 
-> > 
-> > Signed-off-by: Aniket Limaye <a-limaye@ti.com>
-> > ---
-> >   arch/arm/dts/k3-j7200-common-proc-board-u-boot.dtsi | 4 ++++
-> >   arch/arm/dts/k3-j7200-r5-common-proc-board.dts      | 5 +++++
-> >   2 files changed, 9 insertions(+)
-> > 
-> > diff --git a/arch/arm/dts/k3-j7200-common-proc-board-u-boot.dtsi b/arch/arm/dts/k3-j7200-common-proc-board-u-boot.dtsi
-> > index 60ca6d21ab..c9fee0ea99 100644
-> > --- a/arch/arm/dts/k3-j7200-common-proc-board-u-boot.dtsi
-> > +++ b/arch/arm/dts/k3-j7200-common-proc-board-u-boot.dtsi
-> > @@ -195,6 +195,10 @@
-> >   &ospi0 {
-> >   	bootph-all;
-
-You should only use bootph-all property in leaf nodes - at least for
-	kernel world.
-
-> > +
-> > +	flash@0 {
-> > +		bootph-all;
-> > +	};
-> >   };
-> 
-> 
-> Ideally this should come from kernel DT sync or with OF_UPSTREAM, whatever
-> is applicable
-> 
-> As you are fixing broken OSPI boot.
-> 
-> Tom can suggest, if he is ok to pull in this fix for 2024.04 or we need to
-> wait to get this change into kernel first.
 
 
-Send this change for upstream kernel right away please.
+On 3/6/24 02:13, Ilias Apalodimas wrote:
+> Hi Sam,
 > 
+> Again thank you for the elaborate review. This really helps a lot.
 > 
-> >   &serdes_ln_ctrl {
-> > diff --git a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
-> > index 018faaa13b..195637a836 100644
-> > --- a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
-> > +++ b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
-> > @@ -83,3 +83,8 @@
-> >   &wkup_vtm0 {
-> >   	bootph-pre-ram;
-> >   };
-> > +
-> > +&ospi0 {
-> > +    reg = <0x0 0x47040000 0x0 0x100>,
-> > +          <0x0 0x50000000 0x0 0x8000000>;
-> > +};
+> On Wed, 6 Mar 2024 at 10:14, Sam Edwards <cfsworks@gmail.com> wrote:
+>>
+>>
+>>
+>> On 3/4/24 02:01, Ilias Apalodimas wrote:
+>>> __efi_runtime_start/end are defined as c variables for arm7 only in
+>>> order to force the compiler emit relative references. However, defining
+>>> those within a section definition will do the same thing. On top of that
+>>> the v8 linker scripts define it as a symbol.
+>>>
+>>> So let's remove the special sections from the linker scripts, the
+>>> variable definitions from sections.c and define them as a symbols within
+>>> the correct section.
+>>>
+>>> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+>> Tested-by: Sam Edwards <CFSworks@gmail.com> # Binary output identical
+>>
+>> Thanks for the cleanup,
+>> Sam
+>>
+>>> ---
+>>>    arch/arm/cpu/u-boot.lds        | 12 +++---------
+>>>    arch/arm/lib/sections.c        |  2 --
+>>>    arch/arm/mach-zynq/u-boot.lds  | 12 +++---------
+>>>    include/asm-generic/sections.h |  1 +
+>>>    4 files changed, 7 insertions(+), 20 deletions(-)
+>>>
+>>> diff --git a/arch/arm/cpu/u-boot.lds b/arch/arm/cpu/u-boot.lds
+>>> index 7c6e7891d360..df55bb716e35 100644
+>>> --- a/arch/arm/cpu/u-boot.lds
+>>> +++ b/arch/arm/cpu/u-boot.lds
+>>> @@ -43,18 +43,12 @@ SECTIONS
+>>>        }
+>>>
+>>>        /* This needs to come before *(.text*) */
+>>> -     .__efi_runtime_start : {
+>>> -             *(.__efi_runtime_start)
+>>> -     }
+>>> -
+>>> -     .efi_runtime : {
+>>> +     .efi_runtime ALIGN(4) : {
+>>
+>> Do we truly require the ALIGN(4)? If I understand correctly, by default,
+>> the linker calculates the alignment of an output section as the least
+>> common multiple of the input sections' alignment requirements -- meaning
+>> most (perhaps all) of our ALIGN()s today are redundant.
 > 
-> With change in commit message,
+> I don't think we do. But I preserved those for a few reasons.
 > 
-> Reviewed-by: Udit Kumar <u-kumar1@ti.com>
+>>   For the time
+>> being, I'm in favor of merging existing `. = ALIGN(x)` into each
+>> following section for clarity and to avoid the testing overhead of
+>> removing them in the same patch as other changes. However, in the near
+>> future (perhaps even as "near" as v2 of this series?), I'd also like to
+>> see a patch that eliminates unnecessary ALIGN()s altogether. Introducing
+>> additional ALIGN()s where we already know they aren't needed may be a
+>> step away from that goal.
 > 
+> So as you already mentioned the reason I preserved this is:
+> - Reduce the testing overhead by preserving the same layout for now
+> - In the future, I am playing around with the idea of mapping U-Boot
+> (not SPL but the relocated full U-Boot) in sections with proper memory
+> permissions (R), RW^X etc). In that case, we will need a 4k section
+> alignment and we can repurpose the ALIGN(4/8) to
+> ALIGN(CONSTANT(COMMONPAGESIZE)).
 > 
-> 
+> Thoughts?
 
--- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+Ah, right: I had forgotten for a moment that the ultimate goal was to 
+clean up the memory protection bit situation.
+
+Okay, as long as that future cleanup will also remove all unnecessary 
+uses of ALIGN() (i.e. any that don't result in an actual change in 
+memory layout) then that sounds great to me.
+
+Reviewed-by: Sam Edwards <CFSworks@gmail.com>
+
+Cheers,
+Sam
+
+> 
+> Thanks
+> /Ilias
+> 
+>>
+>>> +             __efi_runtime_start = .;
+>>>                *(.text.efi_runtime*)
+>>>                *(.rodata.efi_runtime*)
+>>>                *(.data.efi_runtime*)
+>>> -     }
+>>> -
+>>> -     .__efi_runtime_stop : {
+>>> -             *(.__efi_runtime_stop)
+>>> +             __efi_runtime_stop = .;
+>>>        }
+>>>
+>>>        .text_rest :
+>>> diff --git a/arch/arm/lib/sections.c b/arch/arm/lib/sections.c
+>>> index 1ee3dd3667ba..a4d4202e99f5 100644
+>>> --- a/arch/arm/lib/sections.c
+>>> +++ b/arch/arm/lib/sections.c
+>>> @@ -25,6 +25,4 @@ char __secure_start[0] __section(".__secure_start");
+>>>    char __secure_end[0] __section(".__secure_end");
+>>>    char __secure_stack_start[0] __section(".__secure_stack_start");
+>>>    char __secure_stack_end[0] __section(".__secure_stack_end");
+>>> -char __efi_runtime_start[0] __section(".__efi_runtime_start");
+>>> -char __efi_runtime_stop[0] __section(".__efi_runtime_stop");
+>>>    char _end[0] __section(".__end");
+>>> diff --git a/arch/arm/mach-zynq/u-boot.lds b/arch/arm/mach-zynq/u-boot.lds
+>>> index 71dea4a1f60a..fcd0f42a7106 100644
+>>> --- a/arch/arm/mach-zynq/u-boot.lds
+>>> +++ b/arch/arm/mach-zynq/u-boot.lds
+>>> @@ -22,18 +22,12 @@ SECTIONS
+>>>        }
+>>>
+>>>        /* This needs to come before *(.text*) */
+>>> -     .__efi_runtime_start : {
+>>> -             *(.__efi_runtime_start)
+>>> -     }
+>>> -
+>>> -     .efi_runtime : {
+>>> +     .efi_runtime ALIGN(4) : {
+>>
+>> Ditto above
+>>
+>>> +             __efi_runtime_start = .;
+>>>                *(.text.efi_runtime*)
+>>>                *(.rodata.efi_runtime*)
+>>>                *(.data.efi_runtime*)
+>>> -     }
+>>> -
+>>> -     .__efi_runtime_stop : {
+>>> -             *(.__efi_runtime_stop)
+>>> +             __efi_runtime_stop = .;
+>>>        }
+>>>
+>>>        .text_rest :
+>>> diff --git a/include/asm-generic/sections.h b/include/asm-generic/sections.h
+>>> index 60949200dd93..b6bca53db10d 100644
+>>> --- a/include/asm-generic/sections.h
+>>> +++ b/include/asm-generic/sections.h
+>>> @@ -35,6 +35,7 @@ extern char __priv_data_start[], __priv_data_end[];
+>>>    extern char __ctors_start[], __ctors_end[];
+>>>
+>>>    extern char __efi_runtime_rel_start[], __efi_runtime_rel_stop[];
+>>> +extern char __efi_runtime_start[], __efi_runtime_stop[];
+>>>
+>>>    /* function descriptor handling (if any).  Override
+>>>     * in asm/sections.h */
