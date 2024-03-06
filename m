@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40BE3C54E41
-	for <u-boot@archiver.kernel.org>; Wed,  6 Mar 2024 10:11:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19B3AC5475B
+	for <u-boot@archiver.kernel.org>; Wed,  6 Mar 2024 10:38:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 95FB387B63;
-	Wed,  6 Mar 2024 11:11:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AEA36879A0;
+	Wed,  6 Mar 2024 11:38:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="aJd/jO7a";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PyOH/LIv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31D4C87B63; Wed,  6 Mar 2024 11:11:53 +0100 (CET)
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [IPv6:2a00:1450:4864:20::12a])
+ id 6B896879A0; Wed,  6 Mar 2024 11:38:07 +0100 (CET)
+Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
+ [IPv6:2a00:1450:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 634D087B63
- for <u-boot@lists.denx.de>; Wed,  6 Mar 2024 11:11:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A030387B63
+ for <u-boot@lists.denx.de>; Wed,  6 Mar 2024 11:38:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-51341a5aafbso3925098e87.0
- for <u-boot@lists.denx.de>; Wed, 06 Mar 2024 02:11:49 -0800 (PST)
+Received: by mail-lf1-x12c.google.com with SMTP id
+ 2adb3069b0e04-5132010e5d1so2288279e87.0
+ for <u-boot@lists.denx.de>; Wed, 06 Mar 2024 02:38:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709719909; x=1710324709; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=NCVltNZ+NadbwIodbAoMI5KxOAi3zUB8haR0shCvK74=;
- b=aJd/jO7a0YAq8aikUH7AEv/mdFCxpPl2VVaqXQVsWLUVo0yIYdfkfR4Augaunyal8U
- atxSzEMFnG0PeF+Svb2NjI0a5WT/+7pwQSTy3lfy+jKR8bSYG97FQscbonfaBKo4upwn
- ZdjodkYAvfXlUvAuwJLgUSk1GuRYBpC3KHtYB6I4D5Lo2lV2lL46uzna40tStAPZk+qw
- S12LqRgen59QWHIqw1RJLg2Y0RwYUx128O22yubUmp96ihY17WDWCUAkHRB1G9N/cO/3
- TmKT23Kf121NO9rQ8ad0wymKtdB0t95PIw44x3Yo5DlZ7YqDWaB9lksRjOb4Vs/WvLgn
- D9Kg==
+ d=linaro.org; s=google; t=1709721483; x=1710326283; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=13X58aoBa2P17DZf3Ka+NiVybZO0U4RoFvKVmoMcX5s=;
+ b=PyOH/LIvVt9HVLa64rlkP9kuK2GZd/YqxKIzeSMp+ZLWipA69J6pxrip5Bdr9qM7Ql
+ UsGZ+FbN/oFdvVXzPcszmQJh4jHmdTfMvC0GD04cVGzy2I5CamSJYwieCRv0Fvx+Rn8E
+ KsQE5uqDJW8fLT073MaVhvIdv1ASVvG4IHkg2WUctVgScM88kXCj4dJtMMK0akkcotMP
+ HLFdQdhLn14QyspBnzCAzwwibYpnIWs1Fn/fS9AeoO517NRvWlCGZUU/d/+ulCVttTAF
+ scpL156CNPzX0i9aV6OSa0dQc9uw0qXmvmnUrMh0IO+6aXU2sYl5ndD+OMwv3Hu1RORO
+ RKsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709719909; x=1710324709;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=NCVltNZ+NadbwIodbAoMI5KxOAi3zUB8haR0shCvK74=;
- b=NZ8WSdwT0HsLpfKEgt2liBipPNS1Qs7w581hZZ0eyCaX0Od6kMQTI5CJzKnLRG3eON
- sVkk68OV5ZA3mZQ915ltCI4LPbUrCejcMtRMDTMHs+NH2HZoe0oWMPBxw2CObcLoNkn8
- DvTenuaDbC3NgEPm1R6blw5Rv7RsVtHxKSC6kM1oZd/1BODqCxkl86vD+a/Ukp/dLouA
- AjFhUolsebhDnPX9dXCpS0Mq4ftrAOJ9FaW5FSowVP+q1iykJtXu02BwtffZU8VuxGBu
- XXrtH/CN1lWFKFGWsyFBoUH2MulI1P5Zk1YMoM+6t5OX+75wsPZtld0fBLfCfFTv6nwg
- 4FPg==
-X-Gm-Message-State: AOJu0YzABnMS6pKe505hrHhXfJoCiw0jNycsPpLYb0BPcgmdM9d8YNDr
- ayPpMQ7upduhZu138OxkZzI0i+y+NUZJy15QmDYweLcYF3JmU1b/piwBIPHEhAeojmG1W3Khs7n
- SrdBaj7HmmsPzdEaRlqO0AHavInG48pbQKYkMaWnoKt6v9Dbb16/mvA==
-X-Google-Smtp-Source: AGHT+IHrswtCfkEJjUM79cj9mz9taF3OrvqgoE9OTyCDI4hsZN8lUtGB9VXbalVj0FcbpwFxLmf4cQCJ3oSvfdpctmQ=
-X-Received: by 2002:a19:9115:0:b0:513:2347:4988 with SMTP id
- t21-20020a199115000000b0051323474988mr2733961lfd.12.1709719908873; Wed, 06
- Mar 2024 02:11:48 -0800 (PST)
+ d=1e100.net; s=20230601; t=1709721483; x=1710326283;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=13X58aoBa2P17DZf3Ka+NiVybZO0U4RoFvKVmoMcX5s=;
+ b=D9QJi0nOtk8DhWr0cAIjIH9e+dg0CdDYEoydfODngHHsz5gykafZzDuxc/YYXPFMBN
+ mbTWzgVXIp5JkQRJlka2Ae7wREUKDQXJC0Hy6r/q6eto1ndnAmhPuILYY1iK/eu//KLb
+ Z5EFZWJ0iAZc2W5PTIUyyClodFTZJv2jV3kCZZNs4wRwHCRltVYBnEE5j6ay9g/aZj0W
+ bi4nqF5AafKmSq6YtnxelVYBqz/jKxYu1Huv4ElKni9EQMPqOxHyNarCAAlf7SOzoQlT
+ wNxRLv7QYZ5PcbVCz2IO3T3UlI+nTNbZanX1DKh9BfMVkIeoyBaPDv2mwJKvugsn3GwI
+ 0SEg==
+X-Gm-Message-State: AOJu0Yxj4a77xh8LgNP8L1ObaspFP9/11fKOSjknw+6D4oy0Jmb6ahQA
+ Hc4Kc9hDgLWUiM+ferk5Yb3FXmSJ+0JGXaGjSHjJcL+KgdqH2HdF+VIqobuJYJ/JPYAkmN1tZow
+ mT9rL2WeAg6iecrSukuo4jMxHkQxNtG46rKlm2g==
+X-Google-Smtp-Source: AGHT+IFlGyRm4iOyGBlgW7Ke4WESfYoupryzexVQ48fIJMKcLsnhwNH0Sl5UBuiY+s6r/9YwsnETVS7ALmxyT+U69Kc=
+X-Received: by 2002:ac2:5a5a:0:b0:513:5ea7:57a7 with SMTP id
+ r26-20020ac25a5a000000b005135ea757a7mr840264lfn.26.1709721482741; Wed, 06 Mar
+ 2024 02:38:02 -0800 (PST)
 MIME-Version: 1.0
 References: <20240304090113.1410575-1-ilias.apalodimas@linaro.org>
- <20240304090113.1410575-3-ilias.apalodimas@linaro.org>
- <6c502584-df1c-44e4-9fa4-70d73a4ae07e@gmail.com>
- <CAC_iWjJeD6=XOtAQ+ejTHutUT4vEMPkP3QqyHPQBtU18ZgaN8A@mail.gmail.com>
-In-Reply-To: <CAC_iWjJeD6=XOtAQ+ejTHutUT4vEMPkP3QqyHPQBtU18ZgaN8A@mail.gmail.com>
+ <20240304090113.1410575-7-ilias.apalodimas@linaro.org>
+ <6c4f6b76-0828-497f-a45c-e9bc307620bb@gmail.com>
+ <CAC_iWj+RGLq1hsYTA8gWxKiNFgWJMzjsfZ62SE-v8xYm0MZYEw@mail.gmail.com>
+In-Reply-To: <CAC_iWj+RGLq1hsYTA8gWxKiNFgWJMzjsfZ62SE-v8xYm0MZYEw@mail.gmail.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 6 Mar 2024 12:11:12 +0200
-Message-ID: <CAC_iWjJ5V79EpWuCT+7qn_AMU7JuyGfMKY_u_MCAH4rEqGAuLw@mail.gmail.com>
-Subject: Re: [PATCH 2/6] arm: clean up v7 and v8 linker scripts for
- bss_start/end
+Date: Wed, 6 Mar 2024 12:37:26 +0200
+Message-ID: <CAC_iWjJaKWjT0LQoqcwt2p765=H1hsXBsbb5AMNBSPO=nPtpUQ@mail.gmail.com>
+Subject: Re: [PATCH 6/6] arm: move image_copy_start/end to linker symbols
 To: Sam Edwards <cfsworks@gmail.com>
 Cc: u-boot@lists.denx.de, trini@konsulko.com, caleb.connolly@linaro.org, 
  sumit.garg@linaro.org, Simon Glass <sjg@chromium.org>, 
@@ -80,6 +80,7 @@ Cc: u-boot@lists.denx.de, trini@konsulko.com, caleb.connolly@linaro.org,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Shiji Yang <yangshiji66@outlook.com>,
  Bin Meng <bmeng@tinylab.org>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,254 +97,219 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 6 Mar 2024 at 11:08, Ilias Apalodimas
+On Wed, 6 Mar 2024 at 11:35, Ilias Apalodimas
 <ilias.apalodimas@linaro.org> wrote:
 >
 > Hi Sam,
 >
-> First of all, thanks for taking the time to review this.
 >
-> On Wed, 6 Mar 2024 at 09:32, Sam Edwards <cfsworks@gmail.com> wrote:
+> On Wed, 6 Mar 2024 at 10:22, Sam Edwards <cfsworks@gmail.com> wrote:
 > >
 > > On 3/4/24 02:01, Ilias Apalodimas wrote:
-> > > commit 3ebd1cbc49f0 ("arm: make __bss_start and __bss_end__ compiler-generated")
-> > > and
-> > > commit f84a7b8f54db ("ARM: Fix __bss_start and __bss_end in linker scripts")
-> > > were moving the bss_start/end on c generated variables that were
-> > > injected in their own sections. The reason was that we needed relative
-> > > relocations for position independent code and linker bugs back then
-> > > prevented us from doing so.
+> > > image_copy_start/end are defined as c variables in order to force the=
+ compiler
+> > > emit relative references. However, defining those within a section de=
+finition
+> > > will do the same thing.
 > > >
-> > > However, the linker documentation pages states that symbols that are
-> > > defined within a section definition will create a relocatable
-> > > type with the value being a fixed offset from the base of a section.
-> > > This have been fixed since 2016 [1]. So let's start cleaning this up
-> > > starting with the bss_start and bss_end variables. Convert them into
-> > > symbols within the .bss section definition.
-> > >
-> > > [0] https://ftp.gnu.org/old-gnu/Manuals/ld-2.9.1/html_mono/ld.html#SEC13
-> > > [1] commit 6b3b0ab89663 ("Make linker assigned symbol dynamic only for shared object")
+> > > So let's remove the special sections from the linker scripts, the
+> > > variable definitions from sections.c and define them as a symbols wit=
+hin
+> > > a section.
 > > >
 > > > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > > Tested-by: Caleb Connolly <caleb.connolly@linaro.org> # Qualcomm sdm845
-> > > ---
-> > >   arch/arm/cpu/armv8/u-boot-spl.lds        | 14 +++-----------
-> > >   arch/arm/cpu/armv8/u-boot.lds            | 15 +++------------
-> > >   arch/arm/cpu/u-boot.lds                  | 22 ++++------------------
-> > >   arch/arm/lib/sections.c                  |  2 --
-> > >   arch/arm/mach-rockchip/u-boot-tpl-v8.lds | 14 +++-----------
-> > >   arch/arm/mach-zynq/u-boot.lds            | 21 +++------------------
-> > >   6 files changed, 16 insertions(+), 72 deletions(-)
-> > >
-> > > diff --git a/arch/arm/cpu/armv8/u-boot-spl.lds b/arch/arm/cpu/armv8/u-boot-spl.lds
-> > > index 7cb9d731246d..16fddb46e9cb 100644
-> > > --- a/arch/arm/cpu/armv8/u-boot-spl.lds
-> > > +++ b/arch/arm/cpu/armv8/u-boot-spl.lds
-> > > @@ -63,18 +63,10 @@ SECTIONS
-> > >
-> > >       _image_binary_end = .;
-> > >
-> > > -     .bss_start (NOLOAD) : {
-> > > -             . = ALIGN(8);
-> > > -             KEEP(*(.__bss_start));
-> > > -     } >.sdram
-> > > -
-> > > -     .bss (NOLOAD) : {
-> > > +     .bss : {
-> > > +             __bss_start = .;
-> > >               *(.bss*)
-> > > -              . = ALIGN(8);
-> > > -     } >.sdram
-> > > -
-> > > -     .bss_end (NOLOAD) : {
-> > > -             KEEP(*(.__bss_end));
-> > > +             __bss_end = .;
-> > >       } >.sdram
-> > >
-> > >       /DISCARD/ : { *(.rela*) }
-> > > diff --git a/arch/arm/cpu/armv8/u-boot.lds b/arch/arm/cpu/armv8/u-boot.lds
-> > > index fb6a30c922f7..c4ee10ebc3ff 100644
-> > > --- a/arch/arm/cpu/armv8/u-boot.lds
-> > > +++ b/arch/arm/cpu/armv8/u-boot.lds
-> > > @@ -149,19 +149,10 @@ SECTIONS
-> > >
-> > >       _end = .;
-> > >
-> > > -     . = ALIGN(8);
-> > > -
-> > > -     .bss_start : {
-> > > -             KEEP(*(.__bss_start));
-> > > -     }
-> > > -
-> > > -     .bss : {
-> > > +     .bss ALIGN(8): {
-> > > +             __bss_start = .;
-> > >               *(.bss*)
-> > > -              . = ALIGN(8);
-> > > -     }
-> > > -
-> > > -     .bss_end : {
-> > > -             KEEP(*(.__bss_end));
-> > > +             __bss_end = .;
-> > >       }
-> > >
-> > >       /DISCARD/ : { *(.dynsym) }
-> > > diff --git a/arch/arm/cpu/u-boot.lds b/arch/arm/cpu/u-boot.lds
-> > > index 7724c9332c3b..90d329b1ebe0 100644
-> > > --- a/arch/arm/cpu/u-boot.lds
-> > > +++ b/arch/arm/cpu/u-boot.lds
-> > > @@ -206,27 +206,13 @@ SECTIONS
-> > >               *(.mmutable)
-> > >       }
-> > >
-> > > -/*
-> > > - * Compiler-generated __bss_start and __bss_end, see arch/arm/lib/bss.c
-> > > - * __bss_base and __bss_limit are for linker only (overlay ordering)
-> > > - */
-> > > -
-> > > -     .bss_start __rel_dyn_start (OVERLAY) : {
-> > > -             KEEP(*(.__bss_start));
-> > > -             __bss_base = .;
-> > > -     }
-> > > -
-> > > -     .bss __bss_base (OVERLAY) : {
-> > > +     .bss ALIGN(4): {
+> > Tested-by: Sam Edwards <CFSworks@gmail.com> # Binary output identical
 > >
-> > Hi Ilias,
-> >
-> > I have been reviewing this patchset by diffing output binaries and
-> > linker maps between successive patches. Most of the patches in this
-> > series result in no change to the output binary whatsoever (which also
-> > means, no regressions!) but this one does have a change: .bss is being
-> > moved after .mmutable. You should be able to see this yourself by
-> > comparing `u-boot.map` after a successful build, before and after
-> > applying this patch.
+> > Since the __image_copy_* symbols are marking boundaries in the whole
+> > image as opposed to a single section, I'd find it clearer if they were
+> > loose in the SECTIONS { ... } block, so as not to imply that they are
+> > coupled to any particular section. Thoughts?
 >
-> Yes it does
+> The reason I included it within a section is my understanding of the
+> ld (way older) manual [0].
+> Copy-pasting from that:
 >
-> >
-> > Since the current u-boot.lds puts .bss right after __image_copy_end
-> > (which makes sense) and uses OVERLAY to overlap .rel.dyn (which... I
-> > guess makes sense, if U-Boot zero-initializes .bss after applying
-> > relocations), perhaps this patch should be moving the .bss section up
-> > there in the .lds, putting (OVERLAY) back, and adding a comment to the
-> > effect of "These sections occupy the same memory, but their lifetimes do
-> > not overlap: U-Boot initializes .bss only after applying relocations and
-> > therefore after it doesn't need .rel.dyn any more."
+> " Assignment statements may appear:
+> - as commands in their own right in an ld script; or
+> - as independent statements within a SECTIONS command; or
+> - as part of the contents of a section definition in a SECTIONS command.
+> The first two cases are equivalent in effect--both define a symbol
+> with an absolute address. The last case defines a symbol whose address
+> is relative to a particular section."
+> So, since we need relocatable entries, I included it within a section.
 >
-> We could do that, I honestly don't have a strong opinion on that.
+> Looking at the latest ld [1] the wording has changed a bit it says
+> "Expressions appearing outside an output section definition treat all
+> numbers as absolute addresses" and it also has the following example
+> SECTIONS
+>   {
+>     . =3D 0x100;
+>     __executable_start =3D 0x100;
+>     .data :
+>     {
+>       . =3D 0x10;
+>       __data_start =3D 0x10;
+>       *(.data)
+>     }
+>     =E2=80=A6
+>   }
+> both . and __executable_start are set to the absolute address 0x100 in
+> the first two assignments, then both . and __data_start are set to
+> 0x10 relative to the .data section in the second two assignments.
+> So I assume the same behavior persists?
 
-replying to myself here, but there was a relevant discussion here as well
-https://lore.kernel.org/u-boot/ZcJF2uGIMj-jxT3M@hera/
+I just tested moving image_binary_end outside the section definition
+and it's still emitted properly. I'll try to figure this out and on v3
+I'll move both image_copy_start/end outside the sections.
+I also noticed that I forgot to change
+arch/arm/cpu/armv8/u-boot-spl.lds and get rid of the .image_copy_end.
+
+Thanks
+/Ilias
+
 
 >
-> >
-> > We might also decide that the overlay memory-saving trick isn't actually
-> > all that important anymore and that .bss should have a new home. Someone
-> > far more seasoned than I should be the one to make that decision though.
+> [0] https://ftp.gnu.org/old-gnu/Manuals/ld-2.9.1/html_mono/ld.html#SEC13
+> [1] https://sourceware.org/binutils/docs/ld/Expression-Section.html
 >
-> I am not sure tbh. I imagine that the overlay saving trick between
-> .rel_dyn and .bss would only matter in U-Boot SPL where memory is
-> limited. The v8 version of SPL doesn't have the overlay but the v7
-> does and I left it untouched on purpose. On top of that the overlay on
-> v7 for SPL is defined after the image_binary_end.
-> Perhaps Tom remembers a bit more of the lds history than I do. Tom thoughts?
->
-> Thanks!
+> Thanks
 > /Ilias
 >
+>
 > >
-> > The rest of the patchset looks great! I'll add my tags to those in a bit.
-> >
-> > Cheers,
+> > Thanks for the cleanup,
 > > Sam
 > >
-> > > +             __bss_start = .;
-> > >               *(.bss*)
-> > > -              . = ALIGN(4);
-> > > -              __bss_limit = .;
-> > > -     }
-> > > -
-> > > -     .bss_end __bss_limit (OVERLAY) : {
-> > > -             KEEP(*(.__bss_end));
-> > > +             __bss_end = .;
+> > > ---
+> > >   arch/arm/cpu/armv8/u-boot.lds            | 10 ++--------
+> > >   arch/arm/cpu/u-boot.lds                  | 10 ++--------
+> > >   arch/arm/lib/sections.c                  |  2 --
+> > >   arch/arm/mach-rockchip/u-boot-tpl-v8.lds |  8 ++------
+> > >   arch/arm/mach-zynq/u-boot.lds            |  9 ++-------
+> > >   5 files changed, 8 insertions(+), 31 deletions(-)
+> > >
+> > > diff --git a/arch/arm/cpu/armv8/u-boot.lds b/arch/arm/cpu/armv8/u-boo=
+t.lds
+> > > index e737de761a9d..340acf5c043b 100644
+> > > --- a/arch/arm/cpu/armv8/u-boot.lds
+> > > +++ b/arch/arm/cpu/armv8/u-boot.lds
+> > > @@ -23,7 +23,7 @@ SECTIONS
+> > >       . =3D ALIGN(8);
+> > >       .text :
+> > >       {
+> > > -             *(.__image_copy_start)
+> > > +             __image_copy_start =3D .;
+> > >               CPUDIR/start.o (.text*)
 > > >       }
 > > >
-> > > -     .dynsym _image_binary_end : { *(.dynsym) }
-> > > +     .dynsym  : { *(.dynsym) }
-> > >       .dynbss : { *(.dynbss) }
-> > >       .dynstr : { *(.dynstr*) }
-> > >       .dynamic : { *(.dynamic*) }
+> > > @@ -120,13 +120,7 @@ SECTIONS
+> > >               *(.rel*.efi_runtime)
+> > >               *(.rel*.efi_runtime.*)
+> > >                   __efi_runtime_rel_stop =3D .;
+> > > -     }
+> > > -
+> > > -     . =3D ALIGN(8);
+> > > -
+> > > -     .image_copy_end :
+> > > -     {
+> > > -             *(.__image_copy_end)
+> > > +             __image_copy_end =3D .;
+> > >       }
+> > >
+> > >       .rela.dyn ALIGN(8) : {
+> > > diff --git a/arch/arm/cpu/u-boot.lds b/arch/arm/cpu/u-boot.lds
+> > > index df55bb716e35..7c4f9c2d4dd3 100644
+> > > --- a/arch/arm/cpu/u-boot.lds
+> > > +++ b/arch/arm/cpu/u-boot.lds
+> > > @@ -37,7 +37,7 @@ SECTIONS
+> > >       . =3D ALIGN(4);
+> > >       .text :
+> > >       {
+> > > -             *(.__image_copy_start)
+> > > +             __image_copy_start =3D .;
+> > >               *(.vectors)
+> > >               CPUDIR/start.o (.text*)
+> > >       }
+> > > @@ -151,13 +151,7 @@ SECTIONS
+> > >               *(.rel*.efi_runtime)
+> > >               *(.rel*.efi_runtime.*)
+> > >               __efi_runtime_rel_stop =3D .;
+> > > -     }
+> > > -
+> > > -     . =3D ALIGN(4);
+> > > -
+> > > -     .image_copy_end :
+> > > -     {
+> > > -             *(.__image_copy_end)
+> > > +             __image_copy_end =3D .;
+> > >       }
+> > >
+> > >       .rel.dyn ALIGN(4) : {
 > > > diff --git a/arch/arm/lib/sections.c b/arch/arm/lib/sections.c
-> > > index 857879711c6a..8e8bd5797e16 100644
+> > > index a4d4202e99f5..db5463b2bbbc 100644
 > > > --- a/arch/arm/lib/sections.c
 > > > +++ b/arch/arm/lib/sections.c
 > > > @@ -19,8 +19,6 @@
 > > >    * aliasing warnings.
 > > >    */
 > > >
-> > > -char __bss_start[0] __section(".__bss_start");
-> > > -char __bss_end[0] __section(".__bss_end");
-> > >   char __image_copy_start[0] __section(".__image_copy_start");
-> > >   char __image_copy_end[0] __section(".__image_copy_end");
-> > >   char __rel_dyn_start[0] __section(".__rel_dyn_start");
-> > > diff --git a/arch/arm/mach-rockchip/u-boot-tpl-v8.lds b/arch/arm/mach-rockchip/u-boot-tpl-v8.lds
-> > > index 74618eba591b..b7887194026e 100644
+> > > -char __image_copy_start[0] __section(".__image_copy_start");
+> > > -char __image_copy_end[0] __section(".__image_copy_end");
+> > >   char __secure_start[0] __section(".__secure_start");
+> > >   char __secure_end[0] __section(".__secure_end");
+> > >   char __secure_stack_start[0] __section(".__secure_stack_start");
+> > > diff --git a/arch/arm/mach-rockchip/u-boot-tpl-v8.lds b/arch/arm/mach=
+-rockchip/u-boot-tpl-v8.lds
+> > > index b7887194026e..4b480ebb0c4d 100644
 > > > --- a/arch/arm/mach-rockchip/u-boot-tpl-v8.lds
 > > > +++ b/arch/arm/mach-rockchip/u-boot-tpl-v8.lds
-> > > @@ -56,18 +56,10 @@ SECTIONS
+> > > @@ -24,7 +24,7 @@ SECTIONS
 > > >
-> > >       _image_binary_end = .;
-> > >
-> > > -     .bss_start (NOLOAD) : {
-> > > -             . = ALIGN(8);
-> > > -             KEEP(*(.__bss_start));
+> > >       .text : {
+> > >               . =3D ALIGN(8);
+> > > -             *(.__image_copy_start)
+> > > +             __image_copy_start =3D .;
+> > >               CPUDIR/start.o (.text*)
+> > >               *(.text*)
+> > >       }
+> > > @@ -42,11 +42,7 @@ SECTIONS
+> > >       __u_boot_list : {
+> > >               . =3D ALIGN(8);
+> > >               KEEP(*(SORT(__u_boot_list*)));
 > > > -     }
 > > > -
-> > > -     .bss (NOLOAD) : {
-> > > +     .bss ALIGN(8) : {
-> > > +             __bss_start = .;
-> > >               *(.bss*)
-> > > -              . = ALIGN(8);
-> > > -     }
-> > > -
-> > > -     .bss_end (NOLOAD) : {
-> > > -             KEEP(*(.__bss_end));
-> > > +             __bss_end = .;
+> > > -     .image_copy_end : {
+> > > -             . =3D ALIGN(8);
+> > > -             *(.__image_copy_end)
+> > > +             __image_copy_end =3D .;
 > > >       }
 > > >
-> > >       /DISCARD/ : { *(.dynsym) }
-> > > diff --git a/arch/arm/mach-zynq/u-boot.lds b/arch/arm/mach-zynq/u-boot.lds
-> > > index 3b7c9d515f8b..8d3259821719 100644
+> > >       .end : {
+> > > diff --git a/arch/arm/mach-zynq/u-boot.lds b/arch/arm/mach-zynq/u-boo=
+t.lds
+> > > index fcd0f42a7106..553bcf182272 100644
 > > > --- a/arch/arm/mach-zynq/u-boot.lds
 > > > +++ b/arch/arm/mach-zynq/u-boot.lds
-> > > @@ -102,26 +102,11 @@ SECTIONS
-> > >
-> > >       _image_binary_end = .;
-> > >
-> > > -/*
-> > > - * Compiler-generated __bss_start and __bss_end, see arch/arm/lib/bss.c
-> > > - * __bss_base and __bss_limit are for linker only (overlay ordering)
-> > > - */
-> > > -
-> > > -     .bss_start __rel_dyn_start (OVERLAY) : {
-> > > -             KEEP(*(.__bss_start));
-> > > -             __bss_base = .;
-> > > -     }
-> > > -
-> > > -     .bss __bss_base (OVERLAY) : {
-> > > +     .bss ALIGN(4): {
-> > > +             __bss_start = .;
-> > >               *(.bss*)
-> > > -              . = ALIGN(8);
-> > > -              __bss_limit = .;
-> > > -     }
-> > > -
-> > > -     .bss_end __bss_limit (OVERLAY) : {
-> > > -             KEEP(*(.__bss_end));
-> > > +             __bss_end = .;
+> > > @@ -16,7 +16,7 @@ SECTIONS
+> > >       . =3D ALIGN(4);
+> > >       .text :
+> > >       {
+> > > -             *(.__image_copy_start)
+> > > +             __image_copy_start =3D .;
+> > >               *(.vectors)
+> > >               CPUDIR/start.o (.text*)
 > > >       }
+> > > @@ -57,12 +57,7 @@ SECTIONS
+> > >               *(.rel*.efi_runtime)
+> > >               *(.rel*.efi_runtime.*)
+> > >               __efi_runtime_rel_stop =3D .;
+> > > -     }
 > > > -
-> > >       /*
-> > >        * Zynq needs to discard these sections because the user
-> > >        * is expected to pass this image on to tools for boot.bin
+> > > -     . =3D ALIGN(8);
+> > > -     .image_copy_end :
+> > > -     {
+> > > -             *(.__image_copy_end)
+> > > +             __image_copy_end =3D .;
+> > >       }
+> > >
+> > >       .rel.dyn ALIGN(8) : {
