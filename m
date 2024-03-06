@@ -4,83 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19B3AC5475B
-	for <u-boot@archiver.kernel.org>; Wed,  6 Mar 2024 10:38:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0A99C5475B
+	for <u-boot@archiver.kernel.org>; Wed,  6 Mar 2024 11:25:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AEA36879A0;
-	Wed,  6 Mar 2024 11:38:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id BD50A87C92;
+	Wed,  6 Mar 2024 12:24:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PyOH/LIv";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="rypjdgtF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6B896879A0; Wed,  6 Mar 2024 11:38:07 +0100 (CET)
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [IPv6:2a00:1450:4864:20::12c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 554C387CBA; Wed,  6 Mar 2024 12:24:57 +0100 (CET)
+Received: from NAM04-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam04on20601.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2409::601])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A030387B63
- for <u-boot@lists.denx.de>; Wed,  6 Mar 2024 11:38:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ED2A887916
+ for <u-boot@lists.denx.de>; Wed,  6 Mar 2024 12:24:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-5132010e5d1so2288279e87.0
- for <u-boot@lists.denx.de>; Wed, 06 Mar 2024 02:38:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709721483; x=1710326283; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=13X58aoBa2P17DZf3Ka+NiVybZO0U4RoFvKVmoMcX5s=;
- b=PyOH/LIvVt9HVLa64rlkP9kuK2GZd/YqxKIzeSMp+ZLWipA69J6pxrip5Bdr9qM7Ql
- UsGZ+FbN/oFdvVXzPcszmQJh4jHmdTfMvC0GD04cVGzy2I5CamSJYwieCRv0Fvx+Rn8E
- KsQE5uqDJW8fLT073MaVhvIdv1ASVvG4IHkg2WUctVgScM88kXCj4dJtMMK0akkcotMP
- HLFdQdhLn14QyspBnzCAzwwibYpnIWs1Fn/fS9AeoO517NRvWlCGZUU/d/+ulCVttTAF
- scpL156CNPzX0i9aV6OSa0dQc9uw0qXmvmnUrMh0IO+6aXU2sYl5ndD+OMwv3Hu1RORO
- RKsg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709721483; x=1710326283;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=13X58aoBa2P17DZf3Ka+NiVybZO0U4RoFvKVmoMcX5s=;
- b=D9QJi0nOtk8DhWr0cAIjIH9e+dg0CdDYEoydfODngHHsz5gykafZzDuxc/YYXPFMBN
- mbTWzgVXIp5JkQRJlka2Ae7wREUKDQXJC0Hy6r/q6eto1ndnAmhPuILYY1iK/eu//KLb
- Z5EFZWJ0iAZc2W5PTIUyyClodFTZJv2jV3kCZZNs4wRwHCRltVYBnEE5j6ay9g/aZj0W
- bi4nqF5AafKmSq6YtnxelVYBqz/jKxYu1Huv4ElKni9EQMPqOxHyNarCAAlf7SOzoQlT
- wNxRLv7QYZ5PcbVCz2IO3T3UlI+nTNbZanX1DKh9BfMVkIeoyBaPDv2mwJKvugsn3GwI
- 0SEg==
-X-Gm-Message-State: AOJu0Yxj4a77xh8LgNP8L1ObaspFP9/11fKOSjknw+6D4oy0Jmb6ahQA
- Hc4Kc9hDgLWUiM+ferk5Yb3FXmSJ+0JGXaGjSHjJcL+KgdqH2HdF+VIqobuJYJ/JPYAkmN1tZow
- mT9rL2WeAg6iecrSukuo4jMxHkQxNtG46rKlm2g==
-X-Google-Smtp-Source: AGHT+IFlGyRm4iOyGBlgW7Ke4WESfYoupryzexVQ48fIJMKcLsnhwNH0Sl5UBuiY+s6r/9YwsnETVS7ALmxyT+U69Kc=
-X-Received: by 2002:ac2:5a5a:0:b0:513:5ea7:57a7 with SMTP id
- r26-20020ac25a5a000000b005135ea757a7mr840264lfn.26.1709721482741; Wed, 06 Mar
- 2024 02:38:02 -0800 (PST)
+ spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=nX3BhfM7hs6F4MaYLg15GEF+98bwGgA3AkrZAB0rr09abAErSt4HByIjtrzjpXjYgByMxGxqk+WrnHupn15Fpltwp3lrMMXsYZqvz5IOIRaQvsxC3ctZs6t4WpWBkervIwhsc1LdAk1JrqMf4imudcokdMG0gxHq9Ha5gxXBXiuVRtkLD5xZmSNdRLJqLdqH3jeI3X5i4jb6T+Sc9227hVKCwEqh7sdD/5JHn3zo3FCdHxq9bGIADC2O/CrpsfO6hVHjE5zRJgm/h4l95yo3xEwLZZO5yT0G1UTU1mEWcyN5qJAWgpcH9U4EHn6+Y5g2XQejHI4KvcR3UXsVQJeZzA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=dZlgjJcWyuVfRREb/5HVM/tRyL4xx5ST9XgOKQMh9H4=;
+ b=JvKxEmMJJMZiBGxkKGxBhODzARNFv2uOe9i2CHflDLgeB7Vk8eB4gIi4FIKbHuSAIrpVRTJ9S/RaPP+XpfAPevkgnWOSM/iP5rEF3NmOLVf9zy2+eyLEgZmJpIsn+6BFR0VoH37RTgFnggff4Usl+RkshQ+rYHWtTQM0jPyHNvwlAyf23bNmPUuKgrBo2RjRm2u5zPuNII7nTcKsd3L5eFQcPfVPJyM8Fz2YNAsBzbCfi3A+FYYfCeeG1m0hXf+/vBRFxOS7DfJEjCx5pflcHtpk4EykRBK9xFlhfT9fCK07dEUrkCppxUyae9c4hOgy2OO1bc1zd084szDwJj6R7A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=dZlgjJcWyuVfRREb/5HVM/tRyL4xx5ST9XgOKQMh9H4=;
+ b=rypjdgtFZPWsGBa5Jts+uvGb0pK3NjIJYysZJ3CeZS5z0CbrzZ1thuLnHHzpBhn4uA+91WUp8G1WfLdnbfIgjUrClf/tnxCkKP8LBiDVbqq1dHY2E+AnbWZU2g4PPIirflJeKWDt6SofB1WTRXq6ZKRy4YdX8BoTzHIAKKwOgow=
+Received: from SA9PR13CA0155.namprd13.prod.outlook.com (2603:10b6:806:28::10)
+ by MN2PR12MB4255.namprd12.prod.outlook.com (2603:10b6:208:198::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7362.24; Wed, 6 Mar
+ 2024 11:24:51 +0000
+Received: from SN1PEPF000252A3.namprd05.prod.outlook.com
+ (2603:10b6:806:28:cafe::e1) by SA9PR13CA0155.outlook.office365.com
+ (2603:10b6:806:28::10) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7362.24 via Frontend
+ Transport; Wed, 6 Mar 2024 11:24:50 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ SN1PEPF000252A3.mail.protection.outlook.com (10.167.242.10) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7362.11 via Frontend Transport; Wed, 6 Mar 2024 11:24:50 +0000
+Received: from SATLEXMB08.amd.com (10.181.40.132) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Wed, 6 Mar
+ 2024 05:24:50 -0600
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB08.amd.com
+ (10.181.40.132) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Wed, 6 Mar
+ 2024 03:24:49 -0800
+Received: from xhdlovek40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35 via Frontend
+ Transport; Wed, 6 Mar 2024 05:24:48 -0600
+From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <michal.simek@amd.com>, <trini@konsulko.com>, <git@amd.com>
+Subject: [PATCH] arm64: gic: Add power up sequence for GIC-600
+Date: Wed, 6 Mar 2024 16:54:41 +0530
+Message-ID: <20240306112441.1606878-1-venkatesh.abbarapu@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20240304090113.1410575-1-ilias.apalodimas@linaro.org>
- <20240304090113.1410575-7-ilias.apalodimas@linaro.org>
- <6c4f6b76-0828-497f-a45c-e9bc307620bb@gmail.com>
- <CAC_iWj+RGLq1hsYTA8gWxKiNFgWJMzjsfZ62SE-v8xYm0MZYEw@mail.gmail.com>
-In-Reply-To: <CAC_iWj+RGLq1hsYTA8gWxKiNFgWJMzjsfZ62SE-v8xYm0MZYEw@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 6 Mar 2024 12:37:26 +0200
-Message-ID: <CAC_iWjJaKWjT0LQoqcwt2p765=H1hsXBsbb5AMNBSPO=nPtpUQ@mail.gmail.com>
-Subject: Re: [PATCH 6/6] arm: move image_copy_start/end to linker symbols
-To: Sam Edwards <cfsworks@gmail.com>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, caleb.connolly@linaro.org, 
- sumit.garg@linaro.org, Simon Glass <sjg@chromium.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, 
- Michal Simek <michal.simek@amd.com>,
- Yegor Yefremov <yegorslists@googlemail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Shiji Yang <yangshiji66@outlook.com>,
- Bin Meng <bmeng@tinylab.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN1PEPF000252A3:EE_|MN2PR12MB4255:EE_
+X-MS-Office365-Filtering-Correlation-Id: a8db2f65-90b5-440b-924a-08dc3dd009f0
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: beHANG9YvhF62G0roHSLUOAuAUZNDqwhQbhoW6jGIvTr/DXO+lwp4V/wKMzsjfs88tK/RM2Hb3BELty613GN4n3kBUXvjg6g+zrLET8y5evWjYsCeFI2rjQvl90RsCSOh36J5+7XaXzhGyUz21GrN4hvW7N0NSjFG5EkZZL6i1Mp8lmFvvIXSWaXTRZhfjVDlwHQq1BlI5h4GG21pthtCUb4Lspp0VCldFvMeh6U05SrtEakfBj+1I/Q686C94peP6MuQq79ArLj6VL4raJiXE6JBqwb+OBPNPNOMopR8B/yI9hC322v1hYi9vZCYkgen82lCGEKlh7p3pwHiUC/GxaXSaYeT3HCZlQq7Hu2jA4SvleS0BLCrpgK3eKkWQdxq0e8PXptsmiuWOQXOxMi5OFuSVkCqlLFQai0/nap29rJXxTnUoXsn5dgeN6cvxupF7lPc2Wf0wHhwDCf6arnHf8FV4dKUi/OH43ROLesk669Eych06tRql5R/zzVcX9J8E0wwTAiMsURyGI4/ELsb0ak6YpW/H9c0xi0gTRiHlFqH3OgvPFaTX6EQg3JQ4P4rLSTCTqPcdkA7Y9gUNzI2qWL+VZ+T3tvDSmViBLMNMlMqnHVBnYqu43fqE1tftqLn377z9jz2EwupRQBpv0e4DQhggp2LCkiS/1z/ru3vRu/HGBVZzfEeRrBFeRrEUb3IJgzW/43M7NwE3NJBYKJSlXOvQhi5t4f2f12aKfAtvHjJ5ivyi0W/iZRsoo7vLBm
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(376005)(82310400014)(36860700004); DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Mar 2024 11:24:50.8395 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a8db2f65-90b5-440b-924a-08dc3dd009f0
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF000252A3.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4255
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,219 +121,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 6 Mar 2024 at 11:35, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> Hi Sam,
->
->
-> On Wed, 6 Mar 2024 at 10:22, Sam Edwards <cfsworks@gmail.com> wrote:
-> >
-> > On 3/4/24 02:01, Ilias Apalodimas wrote:
-> > > image_copy_start/end are defined as c variables in order to force the=
- compiler
-> > > emit relative references. However, defining those within a section de=
-finition
-> > > will do the same thing.
-> > >
-> > > So let's remove the special sections from the linker scripts, the
-> > > variable definitions from sections.c and define them as a symbols wit=
-hin
-> > > a section.
-> > >
-> > > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > Tested-by: Sam Edwards <CFSworks@gmail.com> # Binary output identical
-> >
-> > Since the __image_copy_* symbols are marking boundaries in the whole
-> > image as opposed to a single section, I'd find it clearer if they were
-> > loose in the SECTIONS { ... } block, so as not to imply that they are
-> > coupled to any particular section. Thoughts?
->
-> The reason I included it within a section is my understanding of the
-> ld (way older) manual [0].
-> Copy-pasting from that:
->
-> " Assignment statements may appear:
-> - as commands in their own right in an ld script; or
-> - as independent statements within a SECTIONS command; or
-> - as part of the contents of a section definition in a SECTIONS command.
-> The first two cases are equivalent in effect--both define a symbol
-> with an absolute address. The last case defines a symbol whose address
-> is relative to a particular section."
-> So, since we need relocatable entries, I included it within a section.
->
-> Looking at the latest ld [1] the wording has changed a bit it says
-> "Expressions appearing outside an output section definition treat all
-> numbers as absolute addresses" and it also has the following example
-> SECTIONS
->   {
->     . =3D 0x100;
->     __executable_start =3D 0x100;
->     .data :
->     {
->       . =3D 0x10;
->       __data_start =3D 0x10;
->       *(.data)
->     }
->     =E2=80=A6
->   }
-> both . and __executable_start are set to the absolute address 0x100 in
-> the first two assignments, then both . and __data_start are set to
-> 0x10 relative to the .data section in the second two assignments.
-> So I assume the same behavior persists?
+Arm's GIC-600 features a Power Register (GICR_PWRR),
+which needs to be programmed to enable redistributor
+operation. Power on the redistributor and  wait until
+the power on state is reflected by checking the bit
+GICR_PWRR.RDPD == 0. While running U-Boot in EL3
+without enabling this register, GICR_WAKER.ChildrenAsleep
+bit is not getting cleared and loops infinitely.
+This register(GICR_PWRR) must be programmed to mark the frame
+as powered on, before accessing other registers in the frame.
+Rest of initialization sequence remains the same.
 
-I just tested moving image_binary_end outside the section definition
-and it's still emitted properly. I'll try to figure this out and on v3
-I'll move both image_copy_start/end outside the sections.
-I also noticed that I forgot to change
-arch/arm/cpu/armv8/u-boot-spl.lds and get rid of the .image_copy_end.
+ARM GIC-600 IP complies with ARM GICv3 architecture.
+Enable this config if GIC-600 IP present.
 
-Thanks
-/Ilias
+Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+---
+ arch/arm/Kconfig                 |  9 +++++++++
+ arch/arm/include/asm/gic.h       |  1 +
+ arch/arm/lib/gic_64.S            | 10 +++++++++-
+ arch/arm/mach-versal-net/Kconfig |  3 +++
+ 4 files changed, 22 insertions(+), 1 deletion(-)
 
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index 01d6556c42..8374cb7acc 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -122,6 +122,15 @@ config GIC_V3_ITS
+ 	  ARM GICV3 has limitation, once the LPI table is enabled, LPI
+ 	  configuration table can not be re-programmed, unless GICV3 reset.
+ 
++config GICV3_SUPPORT_GIC600
++	bool "ARM GICV3 GIC600 SUPPORT"
++	help
++	  ARM GIC-600 IP complies with ARM GICv3 architecture, but among others,
++	  implements a power control register in the Redistributor frame.This
++	  register must be programmed to mark the frame as powered on, before
++	  accessing other registers in the frame. Rest of initialization sequence
++	  remains the same.
++
+ config STATIC_RELA
+ 	bool
+ 	default y if ARM64
+diff --git a/arch/arm/include/asm/gic.h b/arch/arm/include/asm/gic.h
+index bd3a80cdf7..fb64ba076d 100644
+--- a/arch/arm/include/asm/gic.h
++++ b/arch/arm/include/asm/gic.h
+@@ -57,6 +57,7 @@
+ #define GICR_TYPER		0x0008
+ #define GICR_STATUSR		0x0010
+ #define GICR_WAKER		0x0014
++#define GICR_PWRR              0x0024
+ #define GICR_SETLPIR		0x0040
+ #define GICR_CLRLPIR		0x0048
+ #define GICR_SEIR		0x0068
+diff --git a/arch/arm/lib/gic_64.S b/arch/arm/lib/gic_64.S
+index 86cd882fc7..7fa48648d9 100644
+--- a/arch/arm/lib/gic_64.S
++++ b/arch/arm/lib/gic_64.S
+@@ -92,8 +92,16 @@ ENTRY(gic_init_secure_percpu)
+ 	add	x9, x9, #(2 << 16)
+ 	b	1b
+ 
++2:
++#if defined(CONFIG_GICV3_SUPPORT_GIC600)
++        mov     w10, #0x0               /* Power on redistributor */
++        str     w10, [x9, GICR_PWRR]
++5:      ldr     w10, [x9, GICR_PWRR]    /* Wait until the power on state is reflected */
++        tbnz    w10, #1, 5b             /* If RDPD == 0 then powered on */
++#endif
++
+ 	/* x9: ReDistributor Base Address of Current CPU */
+-2:	mov	w10, #~0x2
++	mov	w10, #~0x2
+ 	ldr	w11, [x9, GICR_WAKER]
+ 	and	w11, w11, w10		/* Clear ProcessorSleep */
+ 	str	w11, [x9, GICR_WAKER]
+diff --git a/arch/arm/mach-versal-net/Kconfig b/arch/arm/mach-versal-net/Kconfig
+index edff5b039e..31d6443e9f 100644
+--- a/arch/arm/mach-versal-net/Kconfig
++++ b/arch/arm/mach-versal-net/Kconfig
+@@ -43,6 +43,9 @@ config SYS_MEM_RSVD_FOR_MMU
+ config GICV3
+ 	def_bool y
+ 
++config GICV3_SUPPORT_GIC600
++	def_bool y
++
+ config SYS_MALLOC_LEN
+ 	default 0x2000000
+ 
+-- 
+2.25.1
 
->
-> [0] https://ftp.gnu.org/old-gnu/Manuals/ld-2.9.1/html_mono/ld.html#SEC13
-> [1] https://sourceware.org/binutils/docs/ld/Expression-Section.html
->
-> Thanks
-> /Ilias
->
->
-> >
-> > Thanks for the cleanup,
-> > Sam
-> >
-> > > ---
-> > >   arch/arm/cpu/armv8/u-boot.lds            | 10 ++--------
-> > >   arch/arm/cpu/u-boot.lds                  | 10 ++--------
-> > >   arch/arm/lib/sections.c                  |  2 --
-> > >   arch/arm/mach-rockchip/u-boot-tpl-v8.lds |  8 ++------
-> > >   arch/arm/mach-zynq/u-boot.lds            |  9 ++-------
-> > >   5 files changed, 8 insertions(+), 31 deletions(-)
-> > >
-> > > diff --git a/arch/arm/cpu/armv8/u-boot.lds b/arch/arm/cpu/armv8/u-boo=
-t.lds
-> > > index e737de761a9d..340acf5c043b 100644
-> > > --- a/arch/arm/cpu/armv8/u-boot.lds
-> > > +++ b/arch/arm/cpu/armv8/u-boot.lds
-> > > @@ -23,7 +23,7 @@ SECTIONS
-> > >       . =3D ALIGN(8);
-> > >       .text :
-> > >       {
-> > > -             *(.__image_copy_start)
-> > > +             __image_copy_start =3D .;
-> > >               CPUDIR/start.o (.text*)
-> > >       }
-> > >
-> > > @@ -120,13 +120,7 @@ SECTIONS
-> > >               *(.rel*.efi_runtime)
-> > >               *(.rel*.efi_runtime.*)
-> > >                   __efi_runtime_rel_stop =3D .;
-> > > -     }
-> > > -
-> > > -     . =3D ALIGN(8);
-> > > -
-> > > -     .image_copy_end :
-> > > -     {
-> > > -             *(.__image_copy_end)
-> > > +             __image_copy_end =3D .;
-> > >       }
-> > >
-> > >       .rela.dyn ALIGN(8) : {
-> > > diff --git a/arch/arm/cpu/u-boot.lds b/arch/arm/cpu/u-boot.lds
-> > > index df55bb716e35..7c4f9c2d4dd3 100644
-> > > --- a/arch/arm/cpu/u-boot.lds
-> > > +++ b/arch/arm/cpu/u-boot.lds
-> > > @@ -37,7 +37,7 @@ SECTIONS
-> > >       . =3D ALIGN(4);
-> > >       .text :
-> > >       {
-> > > -             *(.__image_copy_start)
-> > > +             __image_copy_start =3D .;
-> > >               *(.vectors)
-> > >               CPUDIR/start.o (.text*)
-> > >       }
-> > > @@ -151,13 +151,7 @@ SECTIONS
-> > >               *(.rel*.efi_runtime)
-> > >               *(.rel*.efi_runtime.*)
-> > >               __efi_runtime_rel_stop =3D .;
-> > > -     }
-> > > -
-> > > -     . =3D ALIGN(4);
-> > > -
-> > > -     .image_copy_end :
-> > > -     {
-> > > -             *(.__image_copy_end)
-> > > +             __image_copy_end =3D .;
-> > >       }
-> > >
-> > >       .rel.dyn ALIGN(4) : {
-> > > diff --git a/arch/arm/lib/sections.c b/arch/arm/lib/sections.c
-> > > index a4d4202e99f5..db5463b2bbbc 100644
-> > > --- a/arch/arm/lib/sections.c
-> > > +++ b/arch/arm/lib/sections.c
-> > > @@ -19,8 +19,6 @@
-> > >    * aliasing warnings.
-> > >    */
-> > >
-> > > -char __image_copy_start[0] __section(".__image_copy_start");
-> > > -char __image_copy_end[0] __section(".__image_copy_end");
-> > >   char __secure_start[0] __section(".__secure_start");
-> > >   char __secure_end[0] __section(".__secure_end");
-> > >   char __secure_stack_start[0] __section(".__secure_stack_start");
-> > > diff --git a/arch/arm/mach-rockchip/u-boot-tpl-v8.lds b/arch/arm/mach=
--rockchip/u-boot-tpl-v8.lds
-> > > index b7887194026e..4b480ebb0c4d 100644
-> > > --- a/arch/arm/mach-rockchip/u-boot-tpl-v8.lds
-> > > +++ b/arch/arm/mach-rockchip/u-boot-tpl-v8.lds
-> > > @@ -24,7 +24,7 @@ SECTIONS
-> > >
-> > >       .text : {
-> > >               . =3D ALIGN(8);
-> > > -             *(.__image_copy_start)
-> > > +             __image_copy_start =3D .;
-> > >               CPUDIR/start.o (.text*)
-> > >               *(.text*)
-> > >       }
-> > > @@ -42,11 +42,7 @@ SECTIONS
-> > >       __u_boot_list : {
-> > >               . =3D ALIGN(8);
-> > >               KEEP(*(SORT(__u_boot_list*)));
-> > > -     }
-> > > -
-> > > -     .image_copy_end : {
-> > > -             . =3D ALIGN(8);
-> > > -             *(.__image_copy_end)
-> > > +             __image_copy_end =3D .;
-> > >       }
-> > >
-> > >       .end : {
-> > > diff --git a/arch/arm/mach-zynq/u-boot.lds b/arch/arm/mach-zynq/u-boo=
-t.lds
-> > > index fcd0f42a7106..553bcf182272 100644
-> > > --- a/arch/arm/mach-zynq/u-boot.lds
-> > > +++ b/arch/arm/mach-zynq/u-boot.lds
-> > > @@ -16,7 +16,7 @@ SECTIONS
-> > >       . =3D ALIGN(4);
-> > >       .text :
-> > >       {
-> > > -             *(.__image_copy_start)
-> > > +             __image_copy_start =3D .;
-> > >               *(.vectors)
-> > >               CPUDIR/start.o (.text*)
-> > >       }
-> > > @@ -57,12 +57,7 @@ SECTIONS
-> > >               *(.rel*.efi_runtime)
-> > >               *(.rel*.efi_runtime.*)
-> > >               __efi_runtime_rel_stop =3D .;
-> > > -     }
-> > > -
-> > > -     . =3D ALIGN(8);
-> > > -     .image_copy_end :
-> > > -     {
-> > > -             *(.__image_copy_end)
-> > > +             __image_copy_end =3D .;
-> > >       }
-> > >
-> > >       .rel.dyn ALIGN(8) : {
