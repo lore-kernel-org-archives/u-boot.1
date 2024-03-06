@@ -4,82 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F29CDC54E41
-	for <u-boot@archiver.kernel.org>; Wed,  6 Mar 2024 16:19:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E701C5475B
+	for <u-boot@archiver.kernel.org>; Wed,  6 Mar 2024 16:19:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5210E87CF8;
-	Wed,  6 Mar 2024 17:18:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id D44B9879E8;
+	Wed,  6 Mar 2024 17:19:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=walle.cc
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="HLFEwa9k";
+	dkim=pass (2048-bit key; secure) header.d=walle.cc header.i=@walle.cc header.b="ZAvUwkpE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 91E9887C92; Wed,  6 Mar 2024 17:18:44 +0100 (CET)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 8AFF987C92; Wed,  6 Mar 2024 17:19:24 +0100 (CET)
+Received: from mail.3ffe.de (0001.3ffe.de [159.69.201.130])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 241B887D31
- for <u-boot@lists.denx.de>; Wed,  6 Mar 2024 17:18:38 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=B.Hahn@phytec.de
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1709741917; x=1712333917;
- h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=WJ2u2dktssYUpyFpYAryRAb7XvyHl3Je3rIVqeppnqM=;
- b=HLFEwa9kguEhxOkucp6Jv4KXsFhZDEBlud5ZaoZbqd1IkjmP5aCmbys1VGiBXC4l
- dk2oEjBQmyvpmaffZAQMWSYsnuM/bsX70uJl1V3nrLK3bQB29x1tqlmxAWu9a9xI
- UMt+2fZmIJwVvEKoAm67lR9uzOJH+q5KvMXC9HWovDw=;
-X-AuditID: ac14000a-fbefe7000000290d-f5-65e8975d494f
-Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
- (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 5E.E3.10509.D5798E56;
- Wed,  6 Mar 2024 17:18:37 +0100 (CET)
-Received: from llp-hahn.phytec.de (172.25.0.11) by Berlix.phytec.de
- (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Wed, 6 Mar 2024
- 17:18:37 +0100
-From: Benjamin Hahn <B.Hahn@phytec.de>
-Date: Wed, 6 Mar 2024 17:18:32 +0100
-Subject: [PATCH v3 2/2] board: phycore_imx8mp: Use 2GHz RAM timings for
- PCL-070 from pcb_rev 1
+ by phobos.denx.de (Postfix) with ESMTPS id 9ACF5878E2
+ for <u-boot@lists.denx.de>; Wed,  6 Mar 2024 17:19:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=walle.cc
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=michael@walle.cc
+Received: from mwalle01.kontron.local. (unknown [213.135.10.150])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mail.3ffe.de (Postfix) with ESMTPSA id 0A4B3A6D;
+ Wed,  6 Mar 2024 17:19:21 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=walle.cc;
+ s=mail2022082101; t=1709741961;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=rSNY7pz+rbHLd1wg1bAZdw8UYNhUKyznjpAYhBwdgfY=;
+ b=ZAvUwkpEqyPGElC/X0k7MaysR3XNxRCsKCrYTIT9+5EOHQTZssfAgpuja+MFryTWN05llC
+ zlt4HzQvWbzs15k+JspYyn2b3WczaqrjfK6vXJSyyIzewZC9bkBkC0QSdSYoTMnLr/q2HD
+ f/iUA51acnG/BVSqsvJkkureu+wLHxMgACHBOkAANXwnWVsxKPcK7U2TL6gDKPuSWFaFbG
+ KZAOEhFurUBfdbwyajn2SsxFIhSAvauu1uQYktTwBkJdBsNEWWltLb8aN/1DTi/dvVAfsZ
+ 8ZE8hjDSgfDuaY6QxS2osv2pgPzz0moig5s2O1nIAWkqhj/YQXOMwM9VYgEsnQ==
+From: Michael Walle <michael@walle.cc>
+To: Priyanka Jain <priyanka.jain@nxp.com>,
+	Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de,
+	Michael Walle <michael@walle.cc>
+Subject: [PATCH] board: sl28: move to OF_UPSTREAM
+Date: Wed,  6 Mar 2024 17:19:11 +0100
+Message-Id: <20240306161911.1598529-1-michael@walle.cc>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20240306-pcl-070-patches-v3-2-cb39c3487bc3@phytec.de>
-References: <20240306-pcl-070-patches-v3-0-cb39c3487bc3@phytec.de>
-In-Reply-To: <20240306-pcl-070-patches-v3-0-cb39c3487bc3@phytec.de>
-To: Tom Rini <trini@konsulko.com>, Teresa Remmet <t.remmet@phytec.de>, Fabio
- Estevam <festevam@gmail.com>
-CC: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>, Benjamin Hahn
- <B.Hahn@phytec.de>
-X-Mailer: b4 0.12.4
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1709741916; l=1022;
- i=B.Hahn@phytec.de; s=20240126; h=from:subject:message-id;
- bh=WJ2u2dktssYUpyFpYAryRAb7XvyHl3Je3rIVqeppnqM=;
- b=SbuMqAF55u+9y4y+FLyhPAGyaFSXAE8CLxrQ2vhRM+hDJxa5a8ImU7RjdXgQ2tNs20Yuo2Ot8
- ba7dcXvw+iGA/cZ6EkyUKfPPsS0T+Tk/gI8Bt5uVXtAnpNVtOghJjlG
-X-Developer-Key: i=B.Hahn@phytec.de; a=ed25519;
- pk=r04clMulHz6S6js6elPBA+U+zVdDAqJyEyoNd8I3pSw=
-X-Originating-IP: [172.25.0.11]
-X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
- (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrILMWRmVeSWpSXmKPExsWyRpKBRzd2+otUg0u7xCweXvW3mDppM7vF
- 272d7Bbd79QdWDx2zrrL7vHqwCp2j7N3djB69He3sAawRHHZpKTmZJalFunbJXBl9K7eylLQ
- wFGxdM82lgbGy2xdjJwcEgImEpMunGECsYUEFjNJnN9j3cXIBWQ/YJS4N/UHWBGbgJrErjev
- WUFsFgEViU3Hl4I1CAskSOy+swqshldAUOLkzCcsXYwcHMwCmhLrd+mDhJkF5CW2v53DDFHi
- JPHi2hp2iF1OEu3bbzKC2JwCzhKHLq1kAbFFBLIlnnVuYYcYEyXxbmIQiCkhICyxaacWyGUS
- AruZJNoXLmWFiCdK7HwtBzFRVuLm+S1QX8lLTDv3mhnCDpU4smk10wRGkVlI7pyFcOcsJHcu
- YGRexSiUm5mcnVqUma1XkFFZkpqsl5K6iREUDSIMXDsY++Z4HGJk4mA8xCjBwawkwlvz60mq
- EG9KYmVValF+fFFpTmrxIUZpDhYlcd7VHcGpQgLpiSWp2ampBalFMFkmDk6pBsao2K9zNlXa
- /svSWbh4o/D9juIsm4u7RLPb1GbtOKiWspfZmU2hOev/udq/1+ZYRhw6XvX0mTp7gptiugjL
- 4taJ0upHK6ZGNhU/ZD/04rLIgT38Hxo5F+8t8xGedVcyxi120Yp1n2KrK/98P7Zn+/0Te+Xf
- hvGevbElpMZ9c6xN/9PO4xdkGjqUWIozEg21mIuKEwGnfsMjdAIAAA==
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,33 +68,605 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We need to differ between PCL-070 and PCM-070. PCL-070 supports 2GHz RAM
-timings from pcb rev 1 or newer. PCM-070 supports 2GHz RAM timings from
-pcb rev 3 or newer.
+Use the new device devicetree files in dts/upstream/ and delete the old
+ones. Still keep the -u-boot.dtsi with all u-boot specifics around.
 
-Signed-off-by: Benjamin Hahn <B.Hahn@phytec.de>
+There is one catch and that is fsl-ls1028a-kontron-sl28-var3.dts which
+is not available upstream (yet!). For now, the base dts is used for this
+variant as this only differ in the compatible and the (human readable)
+model name.
+
+Signed-off-by: Michael Walle <michael@walle.cc>
 ---
- board/phytec/phycore_imx8mp/spl.c | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+I'll send a patch to linux to add the var3.dts, then I'll add the
+correct var3 dts again.
+---
+ .../arm/dts/fsl-ls1028a-kontron-sl28-var1.dts |  59 ----
+ .../arm/dts/fsl-ls1028a-kontron-sl28-var2.dts |  65 ----
+ .../arm/dts/fsl-ls1028a-kontron-sl28-var3.dts |  15 -
+ .../arm/dts/fsl-ls1028a-kontron-sl28-var4.dts |  47 ---
+ arch/arm/dts/fsl-ls1028a-kontron-sl28.dts     | 308 ------------------
+ board/kontron/sl28/spl.c                      |  11 +-
+ configs/kontron_sl28_defconfig                |   5 +-
+ 7 files changed, 8 insertions(+), 502 deletions(-)
+ delete mode 100644 arch/arm/dts/fsl-ls1028a-kontron-sl28-var1.dts
+ delete mode 100644 arch/arm/dts/fsl-ls1028a-kontron-sl28-var2.dts
+ delete mode 100644 arch/arm/dts/fsl-ls1028a-kontron-sl28-var3.dts
+ delete mode 100644 arch/arm/dts/fsl-ls1028a-kontron-sl28-var4.dts
+ delete mode 100644 arch/arm/dts/fsl-ls1028a-kontron-sl28.dts
 
-diff --git a/board/phytec/phycore_imx8mp/spl.c b/board/phytec/phycore_imx8mp/spl.c
-index d38f6368fe36..df158024654e 100644
---- a/board/phytec/phycore_imx8mp/spl.c
-+++ b/board/phytec/phycore_imx8mp/spl.c
-@@ -46,8 +46,10 @@ void spl_dram_init(void)
- 	if (!ret)
- 		phytec_print_som_info(NULL);
+diff --git a/arch/arm/dts/fsl-ls1028a-kontron-sl28-var1.dts b/arch/arm/dts/fsl-ls1028a-kontron-sl28-var1.dts
+deleted file mode 100644
+index 7cd29ab970..0000000000
+--- a/arch/arm/dts/fsl-ls1028a-kontron-sl28-var1.dts
++++ /dev/null
+@@ -1,59 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * Device Tree file for the Kontron SMARC-sAL28 board.
+- *
+- * This is for the network variant 1 which has one ethernet port. It is
+- * different than the base variant, which also has one port, but here the
+- * port is connected via RGMII. This port is not TSN aware.
+- * None of the  four SerDes lanes are used by the module, instead they are
+- * all led out to the carrier for customer use.
+- *
+- * Copyright (C) 2021 Michael Walle <michael@walle.cc>
+- *
+- */
+-
+-/dts-v1/;
+-#include "fsl-ls1028a-kontron-sl28.dts"
+-#include <dt-bindings/net/qca-ar803x.h>
+-
+-/ {
+-	model = "Kontron SMARC-sAL28 (4 Lanes)";
+-	compatible = "kontron,sl28-var1", "kontron,sl28", "fsl,ls1028a";
+-};
+-
+-&enetc_mdio_pf3 {
+-	/* Delete unused phy node */
+-	/delete-node/ ethernet-phy@5;
+-
+-	phy0: ethernet-phy@4 {
+-		reg = <0x4>;
+-		eee-broken-1000t;
+-		eee-broken-100tx;
+-		qca,clk-out-frequency = <125000000>;
+-		qca,clk-out-strength = <AR803X_STRENGTH_FULL>;
+-		qca,keep-pll-enabled;
+-		vddio-supply = <&vddio>;
+-
+-		vddio: vddio-regulator {
+-			regulator-name = "VDDIO";
+-			regulator-min-microvolt = <1800000>;
+-			regulator-max-microvolt = <1800000>;
+-		};
+-
+-		vddh: vddh-regulator {
+-			regulator-name = "VDDH";
+-		};
+-	};
+-};
+-
+-&enetc_port0 {
+-	status = "disabled";
+-	/* Delete the phy-handle to the old phy0 label */
+-	/delete-property/ phy-handle;
+-};
+-
+-&enetc_port1 {
+-	phy-handle = <&phy0>;
+-	phy-mode = "rgmii-id";
+-	status = "okay";
+-};
+diff --git a/arch/arm/dts/fsl-ls1028a-kontron-sl28-var2.dts b/arch/arm/dts/fsl-ls1028a-kontron-sl28-var2.dts
+deleted file mode 100644
+index 330e34f933..0000000000
+--- a/arch/arm/dts/fsl-ls1028a-kontron-sl28-var2.dts
++++ /dev/null
+@@ -1,65 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * Device Tree file for the Kontron SMARC-sAL28 board.
+- *
+- * This is for the network variant 2 which has two ethernet ports. These
+- * ports are connected to the internal switch.
+- *
+- * Copyright (C) 2021 Michael Walle <michael@walle.cc>
+- *
+- */
+-
+-/dts-v1/;
+-#include "fsl-ls1028a-kontron-sl28.dts"
+-
+-/ {
+-	model = "Kontron SMARC-sAL28 (TSN-on-module)";
+-	compatible = "kontron,sl28-var2", "kontron,sl28", "fsl,ls1028a";
+-};
+-
+-&enetc_mdio_pf3 {
+-	phy1: ethernet-phy@4 {
+-		reg = <0x4>;
+-		eee-broken-1000t;
+-		eee-broken-100tx;
+-	};
+-};
+-
+-&enetc_port0 {
+-	status = "disabled";
+-	/*
+-	 * In the base device tree the PHY at address 5 was assigned for
+-	 * this port. On this module this PHY is connected to a switch
+-	 * port instead. Therefore, delete the phy-handle property here.
+-	 */
+-	/delete-property/ phy-handle;
+-};
+-
+-&enetc_port2 {
+-	status = "okay";
+-};
+-
+-&mscc_felix {
+-	status = "okay";
+-};
+-
+-&mscc_felix_port0 {
+-	label = "swp0";
+-	managed = "in-band-status";
+-	phy-handle = <&phy0>;
+-	phy-mode = "sgmii";
+-	status = "okay";
+-};
+-
+-&mscc_felix_port1 {
+-	label = "swp1";
+-	managed = "in-band-status";
+-	phy-handle = <&phy1>;
+-	phy-mode = "sgmii";
+-	status = "okay";
+-};
+-
+-&mscc_felix_port4 {
+-	ethernet = <&enetc_port2>;
+-	status = "okay";
+-};
+diff --git a/arch/arm/dts/fsl-ls1028a-kontron-sl28-var3.dts b/arch/arm/dts/fsl-ls1028a-kontron-sl28-var3.dts
+deleted file mode 100644
+index 0c8b2af41a..0000000000
+--- a/arch/arm/dts/fsl-ls1028a-kontron-sl28-var3.dts
++++ /dev/null
+@@ -1,15 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * Device Tree file for the Kontron SMARC-sAL28 board.
+- *
+- * Copyright (C) 2019 Michael Walle <michael@walle.cc>
+- *
+- */
+-
+-/dts-v1/;
+-#include "fsl-ls1028a-kontron-sl28.dts"
+-
+-/ {
+-	model = "Kontron SMARC-sAL28 (Single PHY)";
+-	compatible = "kontron,sl28-var3", "kontron,sl28", "fsl,ls1028a";
+-};
+diff --git a/arch/arm/dts/fsl-ls1028a-kontron-sl28-var4.dts b/arch/arm/dts/fsl-ls1028a-kontron-sl28-var4.dts
+deleted file mode 100644
+index 9b5e92fb75..0000000000
+--- a/arch/arm/dts/fsl-ls1028a-kontron-sl28-var4.dts
++++ /dev/null
+@@ -1,47 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * Device Tree file for the Kontron SMARC-sAL28 board.
+- *
+- * This is for the network variant 4 which has two ethernet ports. It
+- * extends the base and provides one more port connected via RGMII.
+- *
+- * Copyright (C) 2021 Michael Walle <michael@walle.cc>
+- *
+- */
+-
+-/dts-v1/;
+-#include "fsl-ls1028a-kontron-sl28.dts"
+-#include <dt-bindings/net/qca-ar803x.h>
+-
+-/ {
+-	model = "Kontron SMARC-sAL28 (Dual PHY)";
+-	compatible = "kontron,sl28-var4", "kontron,sl28", "fsl,ls1028a";
+-};
+-
+-&enetc_mdio_pf3 {
+-	phy1: ethernet-phy@4 {
+-		reg = <0x4>;
+-		eee-broken-1000t;
+-		eee-broken-100tx;
+-		qca,clk-out-frequency = <125000000>;
+-		qca,clk-out-strength = <AR803X_STRENGTH_FULL>;
+-		qca,keep-pll-enabled;
+-		vddio-supply = <&vddio>;
+-
+-		vddio: vddio-regulator {
+-			regulator-name = "VDDIO";
+-			regulator-min-microvolt = <1800000>;
+-			regulator-max-microvolt = <1800000>;
+-		};
+-
+-		vddh: vddh-regulator {
+-			regulator-name = "VDDH";
+-		};
+-	};
+-};
+-
+-&enetc_port1 {
+-	phy-handle = <&phy1>;
+-	phy-mode = "rgmii-id";
+-	status = "okay";
+-};
+diff --git a/arch/arm/dts/fsl-ls1028a-kontron-sl28.dts b/arch/arm/dts/fsl-ls1028a-kontron-sl28.dts
+deleted file mode 100644
+index ab713b4949..0000000000
+--- a/arch/arm/dts/fsl-ls1028a-kontron-sl28.dts
++++ /dev/null
+@@ -1,308 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * Device Tree file for the Kontron SMARC-sAL28 board.
+- *
+- * Copyright (C) 2021 Michael Walle <michael@walle.cc>
+- *
+- */
+-
+-/dts-v1/;
+-#include "fsl-ls1028a.dtsi"
+-#include <dt-bindings/interrupt-controller/irq.h>
+-#include <dt-bindings/gpio/gpio.h>
+-#include <dt-bindings/input/input.h>
+-
+-/ {
+-	model = "Kontron SMARC-sAL28";
+-	compatible = "kontron,sl28", "fsl,ls1028a";
+-
+-	aliases {
+-		crypto = &crypto;
+-		serial0 = &duart0;
+-		serial1 = &duart1;
+-		serial2 = &lpuart1;
+-		spi0 = &fspi;
+-		spi1 = &dspi2;
+-		mmc0 = &esdhc1;
+-		mmc1 = &esdhc;
+-		rtc0 = &rtc;
+-		rtc1 = &ftm_alarm0;
+-	};
+-
+-	buttons0 {
+-		compatible = "gpio-keys";
+-
+-		power-button {
+-			interrupts-extended = <&sl28cpld_intc
+-					       4 IRQ_TYPE_EDGE_BOTH>;
+-			linux,code = <KEY_POWER>;
+-			label = "Power";
+-		};
+-
+-		sleep-button {
+-			interrupts-extended = <&sl28cpld_intc
+-					       5 IRQ_TYPE_EDGE_BOTH>;
+-			linux,code = <KEY_SLEEP>;
+-			label = "Sleep";
+-		};
+-	};
+-
+-	buttons1 {
+-		compatible = "gpio-keys-polled";
+-		poll-interval = <200>;
+-
+-		lid-switch {
+-			linux,input-type = <EV_SW>;
+-			linux,code = <SW_LID>;
+-			gpios = <&sl28cpld_gpio3 4 GPIO_ACTIVE_LOW>;
+-			label = "Lid";
+-		};
+-	};
+-
+-	chosen {
+-		stdout-path = "serial0:115200n8";
+-	};
+-};
+-
+-&can0 {
+-	status = "okay";
+-};
+-
+-&dspi2 {
+-	status = "okay";
+-};
+-
+-&duart0 {
+-	status = "okay";
+-};
+-
+-&duart1 {
+-	status = "okay";
+-};
+-
+-&enetc_mdio_pf3 {
+-	phy0: ethernet-phy@5 {
+-		reg = <0x5>;
+-		eee-broken-1000t;
+-		eee-broken-100tx;
+-	};
+-};
+-
+-&enetc_port0 {
+-	phy-handle = <&phy0>;
+-	phy-mode = "sgmii";
+-	managed = "in-band-status";
+-	status = "okay";
+-};
+-
+-&esdhc {
+-	sd-uhs-sdr104;
+-	sd-uhs-sdr50;
+-	sd-uhs-sdr25;
+-	sd-uhs-sdr12;
+-	status = "okay";
+-};
+-
+-&esdhc1 {
+-	mmc-hs200-1_8v;
+-	mmc-hs400-1_8v;
+-	bus-width = <8>;
+-	status = "okay";
+-};
+-
+-&fspi {
+-	status = "okay";
+-
+-	flash@0 {
+-		compatible = "jedec,spi-nor";
+-		m25p,fast-read;
+-		spi-max-frequency = <133000000>;
+-		reg = <0>;
+-		/* The following setting enables 1-1-2 (CMD-ADDR-DATA) mode */
+-		spi-rx-bus-width = <2>; /* 2 SPI Rx lines */
+-		spi-tx-bus-width = <1>; /* 1 SPI Tx line */
+-
+-		partitions {
+-			compatible = "fixed-partitions";
+-			#address-cells = <1>;
+-			#size-cells = <1>;
+-
+-			partition@0 {
+-				reg = <0x000000 0x010000>;
+-				label = "rcw";
+-				read-only;
+-			};
+-
+-			partition@10000 {
+-				reg = <0x010000 0x1d0000>;
+-				label = "failsafe bootloader";
+-				read-only;
+-			};
+-
+-			partition@200000 {
+-				reg = <0x200000 0x010000>;
+-				label = "configuration store";
+-			};
+-
+-			partition@210000 {
+-				reg = <0x210000 0x1d0000>;
+-				label = "bootloader";
+-			};
+-
+-			partition@3e0000 {
+-				reg = <0x3e0000 0x020000>;
+-				label = "bootloader environment";
+-			};
+-		};
+-	};
+-};
+-
+-&gpio1 {
+-	gpio-line-names =
+-		"", "", "", "", "", "", "", "",
+-		"", "", "", "", "", "", "", "",
+-		"", "", "", "", "", "", "TDO", "TCK",
+-		"", "", "", "", "", "", "", "";
+-};
+-
+-&gpio2 {
+-	gpio-line-names =
+-		"", "", "", "", "", "", "TMS", "TDI",
+-		"", "", "", "", "", "", "", "",
+-		"", "", "", "", "", "", "", "",
+-		"", "", "", "", "", "", "", "";
+-};
+-
+-&i2c0 {
+-	status = "okay";
+-
+-	rtc: rtc@32 {
+-		compatible = "microcrystal,rv8803";
+-		reg = <0x32>;
+-	};
+-
+-	sl28cpld@4a {
+-		compatible = "kontron,sl28cpld";
+-		reg = <0x4a>;
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-
+-		watchdog@4 {
+-			compatible = "kontron,sl28cpld-wdt";
+-			reg = <0x4>;
+-			kontron,assert-wdt-timeout-pin;
+-		};
+-
+-		hwmon@b {
+-			compatible = "kontron,sl28cpld-fan";
+-			reg = <0xb>;
+-		};
+-
+-		sl28cpld_pwm0: pwm@c {
+-			compatible = "kontron,sl28cpld-pwm";
+-			reg = <0xc>;
+-			#pwm-cells = <2>;
+-		};
+-
+-		sl28cpld_pwm1: pwm@e {
+-			compatible = "kontron,sl28cpld-pwm";
+-			reg = <0xe>;
+-			#pwm-cells = <2>;
+-		};
+-
+-		sl28cpld_gpio0: gpio@10 {
+-			compatible = "kontron,sl28cpld-gpio";
+-			reg = <0x10>;
+-			interrupts-extended = <&gpio2 6
+-					       IRQ_TYPE_EDGE_FALLING>;
+-
+-			gpio-controller;
+-			#gpio-cells = <2>;
+-			gpio-line-names =
+-				"GPIO0_CAM0_PWR_N", "GPIO1_CAM1_PWR_N",
+-				"GPIO2_CAM0_RST_N", "GPIO3_CAM1_RST_N",
+-				"GPIO4_HDA_RST_N", "GPIO5_PWM_OUT",
+-				"GPIO6_TACHIN", "GPIO7";
+-
+-			interrupt-controller;
+-			#interrupt-cells = <2>;
+-		};
+-
+-		sl28cpld_gpio1: gpio@15 {
+-			compatible = "kontron,sl28cpld-gpio";
+-			reg = <0x15>;
+-			interrupts-extended = <&gpio2 6
+-					       IRQ_TYPE_EDGE_FALLING>;
+-
+-			gpio-controller;
+-			#gpio-cells = <2>;
+-			gpio-line-names =
+-				"GPIO8", "GPIO9", "GPIO10", "GPIO11",
+-				"", "", "", "";
+-
+-			interrupt-controller;
+-			#interrupt-cells = <2>;
+-		};
+-
+-		sl28cpld_gpio2: gpio@1a {
+-			compatible = "kontron,sl28cpld-gpo";
+-			reg = <0x1a>;
+-
+-			gpio-controller;
+-			#gpio-cells = <2>;
+-			gpio-line-names =
+-				"LCD0 voltage enable",
+-				"LCD0 backlight enable",
+-				"eMMC reset", "LVDS bridge reset",
+-				"LVDS bridge power-down",
+-				"SDIO power enable",
+-				"", "";
+-		};
+-
+-		sl28cpld_gpio3: gpio@1b {
+-			compatible = "kontron,sl28cpld-gpi";
+-			reg = <0x1b>;
+-
+-			gpio-controller;
+-			#gpio-cells = <2>;
+-			gpio-line-names =
+-				"Power button", "Force recovery", "Sleep",
+-				"Battery low", "Lid state", "Charging",
+-				"Charger present", "";
+-		};
+-
+-		sl28cpld_intc: interrupt-controller@1c {
+-			compatible = "kontron,sl28cpld-intc";
+-			reg = <0x1c>;
+-			interrupts-extended = <&gpio2 6
+-					       IRQ_TYPE_EDGE_FALLING>;
+-
+-			interrupt-controller;
+-			#interrupt-cells = <2>;
+-		};
+-	};
+-
+-	eeprom@50 {
+-		compatible = "atmel,24c32";
+-		reg = <0x50>;
+-		pagesize = <32>;
+-	};
+-};
+-
+-&i2c3 {
+-	status = "okay";
+-};
+-
+-&i2c4 {
+-	status = "okay";
+-
+-	eeprom@50 {
+-		compatible = "atmel,24c32";
+-		reg = <0x50>;
+-		pagesize = <32>;
+-	};
+-};
+-
+-&lpuart1 {
+-	status = "okay";
+-};
+diff --git a/board/kontron/sl28/spl.c b/board/kontron/sl28/spl.c
+index ffaf517a8b..80acde7495 100644
+--- a/board/kontron/sl28/spl.c
++++ b/board/kontron/sl28/spl.c
+@@ -47,15 +47,14 @@ int board_fit_config_name_match(const char *name)
  
--	ret = phytec_get_rev(NULL);
--	if (ret >= 3 && ret != PHYTEC_EEPROM_INVAL) {
-+	u8 rev = phytec_get_rev(NULL);
-+	u8 somtype = phytec_get_som_type(NULL);
-+
-+	if (rev != PHYTEC_EEPROM_INVAL && (rev >= 3 || (somtype == SOM_TYPE_PCL && rev >= 1))) {
- 		dram_timing.ddrc_cfg[3].val = 0x1323;
- 		dram_timing.ddrc_cfg[4].val = 0x1e84800;
- 		dram_timing.ddrc_cfg[5].val = 0x7a0118;
-
+ 	switch (variant) {
+ 	case 1:
+-		return strcmp(name, "fsl-ls1028a-kontron-sl28-var1");
++		return strcmp(name, "freescale/fsl-ls1028a-kontron-sl28-var1");
+ 	case 2:
+-		return strcmp(name, "fsl-ls1028a-kontron-sl28-var2");
+-	case 3:
+-		return strcmp(name, "fsl-ls1028a-kontron-sl28-var3");
++		return strcmp(name, "freescale/fsl-ls1028a-kontron-sl28-var2");
+ 	case 4:
+-		return strcmp(name, "fsl-ls1028a-kontron-sl28-var4");
++		return strcmp(name, "freescale/fsl-ls1028a-kontron-sl28-var4");
++	case 3:
+ 	default:
+-		return strcmp(name, "fsl-ls1028a-kontron-sl28");
++		return strcmp(name, "freescale/fsl-ls1028a-kontron-sl28");
+ 	}
+ }
+ 
+diff --git a/configs/kontron_sl28_defconfig b/configs/kontron_sl28_defconfig
+index 639c5c6ce1..adc1d501ba 100644
+--- a/configs/kontron_sl28_defconfig
++++ b/configs/kontron_sl28_defconfig
+@@ -11,7 +11,7 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x1800eff0
+ CONFIG_ENV_SIZE=0x2000
+ CONFIG_ENV_OFFSET=0x3e0000
+ CONFIG_ENV_SECT_SIZE=0x10000
+-CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1028a-kontron-sl28"
++CONFIG_DEFAULT_DEVICE_TREE="freescale/fsl-ls1028a-kontron-sl28"
+ CONFIG_SPL_TEXT_BASE=0x18010000
+ CONFIG_SYS_FSL_SDHC_CLK_DIV=1
+ CONFIG_OF_LIBFDT_OVERLAY=y
+@@ -73,7 +73,8 @@ CONFIG_CMD_EFIDEBUG=y
+ CONFIG_CMD_RNG=y
+ CONFIG_OF_CONTROL=y
+ CONFIG_SPL_OF_CONTROL=y
+-CONFIG_OF_LIST="fsl-ls1028a-kontron-sl28 fsl-ls1028a-kontron-sl28-var1 fsl-ls1028a-kontron-sl28-var2 fsl-ls1028a-kontron-sl28-var3 fsl-ls1028a-kontron-sl28-var4"
++CONFIG_OF_UPSTREAM=y
++CONFIG_OF_LIST="freescale/fsl-ls1028a-kontron-sl28 freescale/fsl-ls1028a-kontron-sl28-var1 freescale/fsl-ls1028a-kontron-sl28-var2 freescale/fsl-ls1028a-kontron-sl28-var4"
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_SPI_FLASH=y
+ CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
 -- 
-2.34.1
+2.39.2
 
