@@ -4,69 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33546C54798
-	for <u-boot@archiver.kernel.org>; Tue,  5 Mar 2024 21:41:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19AC6C54E49
+	for <u-boot@archiver.kernel.org>; Wed,  6 Mar 2024 00:47:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 655D587D06;
-	Tue,  5 Mar 2024 22:41:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=walle.cc
+	by phobos.denx.de (Postfix) with ESMTP id 35F8E87C4C;
+	Wed,  6 Mar 2024 01:47:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=walle.cc header.i=@walle.cc header.b="w06hAPqJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GYV5cSJz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C854087D0A; Tue,  5 Mar 2024 22:41:14 +0100 (CET)
-Received: from mail.3ffe.de (0001.3ffe.de [159.69.201.130])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 47D6187D06; Wed,  6 Mar 2024 01:47:23 +0100 (CET)
+Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
+ [IPv6:2607:f8b0:4864:20::530])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C982287D25
- for <u-boot@lists.denx.de>; Tue,  5 Mar 2024 22:41:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=walle.cc
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=michael@walle.cc
-Received: from localhost (unknown [IPv6:2a02:810b:4340:6430:4685:ff:fe12:5967])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mail.3ffe.de (Postfix) with ESMTPSA id E9ED561A;
- Tue,  5 Mar 2024 22:41:11 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=walle.cc;
- s=mail2022082101; t=1709674872;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=TJkLDh6rsmx3Gf4txI1BFmr9LOdJw01HgTTy7w8vrrc=;
- b=w06hAPqJByQc5x5/nu1tN0ongF0TW3nRvFy0wuYz+dAuNyigfImTs05Gz86E3B/tTZ513i
- Ku6XBxzyHzCejGi8DTyUQpnyji3T5Je9WfMpSrzVun9w5gLwO662WqGT7J8k73HgpReSL9
- mk40pMyrBpv+3Qpgm31i+MBRRjSbbohSgKVrW35/MFx6RcYzhlGhduNLFoq3oT3pzhXI98
- aw5FSmSXqQ3bd1ATrlRCwcl40YybT0/+K4fC96Vnovq9UYxaJEip1pQp/qnlXVdlVyMf8b
- w3rgEMiGNsluWl/pmnoBpymdWGbsCmoDrFvJKrTvc/0ozF3VEAnTgmnphPl7pQ==
-Mime-Version: 1.0
+ by phobos.denx.de (Postfix) with ESMTPS id 801C087C4C
+ for <u-boot@lists.denx.de>; Wed,  6 Mar 2024 01:47:20 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=aford173@gmail.com
+Received: by mail-pg1-x530.google.com with SMTP id
+ 41be03b00d2f7-5e152c757a5so4446641a12.2
+ for <u-boot@lists.denx.de>; Tue, 05 Mar 2024 16:47:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1709686039; x=1710290839; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=bd9XoNbv88daRuhDkXcYucuyapNfjWMEs08YyKWlkTE=;
+ b=GYV5cSJzZ8q3luxAoPbI8OlvOBUskCgzR8N8Qd17+i1TYOpdALvGv/CA6MawitfBxG
+ yX8i95myluge63IbbsZc9h7oEh/7Pchajn/BqWT7qyl3iyFt3I5pSgFh5s1xYVt+0knI
+ X1cFn0stmzmr+4xCri3h+oPpH2CDk2/RgnS2xzgdmzcKty1seDaqJpgj3PW+EoqPMxEL
+ DisFNZKgTpITxX73BY0bza6CKNL3wLD0R85ynmj4if4+Z3lSJfa6Q8ZBIAaPKt/h4dzZ
+ 6u+Vioxb6Au0NT7KAisrbd83AcBdFXiKGlsAXr2uTwO7QGWIektdz8CYc59jPdYnkiUv
+ XCCA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1709686039; x=1710290839;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=bd9XoNbv88daRuhDkXcYucuyapNfjWMEs08YyKWlkTE=;
+ b=ZF9gls9CYGCOegMEYd33yisymdIx9aEsM2aaZ/HayepZLZYXrZ9D7eU44hwDaQInLi
+ /yQsYVrcoiGhuDWe7kv2RaLoIdGOA0ZhSm8bZv/dn8GHNjttDI9Qri38g8UlNhXsqwqc
+ DZ7JnVsxLdN1IHgZBJ8J/fSSSybbP9nxoeIer6dlNVgeJt5Q/tu6GxJTg8imLVmnd8k5
+ Ku24ITYlNHdaJPCs/D7n8H/0+FSoRUPtXXwRMmw3LKA1vz9YnCDTnpJE85mu0mwlwwkN
+ /SJaoNRrfT9wspcnruudiwAalCmayt0/gEGFWNIg4ckgMHg3UvVMnWdmN0L5yWtT8mdW
+ admg==
+X-Gm-Message-State: AOJu0YwRPz+a2/qmuBEkWV0/RpJYOF5cOKFx6EuwziAerNSJMKXP+2cZ
+ 6UQsRzre7PpqmQiXz10TlIuj1ZG9IbEpRCWA4NPHDTTBzQ2IvM76KHs6QD64l9XbF4o8R6if0l9
+ LvTuwxnpHGagVWGo8WM5bqAWdOIY=
+X-Google-Smtp-Source: AGHT+IGEh/2UFOWnP9zYFpfP3RV1bPurRekDSMptSTAC/fTbEYzMESI6CsmdmtVXuCaj/TmgbHYIyT/cngxcMm09/98=
+X-Received: by 2002:a05:6a20:3d1e:b0:1a1:1571:84d8 with SMTP id
+ y30-20020a056a203d1e00b001a1157184d8mr3692479pzi.47.1709686038523; Tue, 05
+ Mar 2024 16:47:18 -0800 (PST)
+MIME-Version: 1.0
+References: <20240226080433.3307154-1-sumit.garg@linaro.org>
+ <20240226080433.3307154-6-sumit.garg@linaro.org>
+ <CAHCN7x+wwoiLO_hpSkiHXFmAUwa0bhbYeQD_UHK10e2YOX+WKA@mail.gmail.com>
+ <CAFA6WYNJ4BVHOFftSdwdMv2SMJ8ZQh3S7CRjJHfiAnosSbmgGQ@mail.gmail.com>
+ <CAFA6WYPNsRsWnFLVcMXX_KxmN2YTbysu_ZPan1jyrVASrS==rQ@mail.gmail.com>
+ <CAHCN7xLqKdydxRVfdVJ2RmS+=tdQT3fR52uVMhLEoZSoObcq3Q@mail.gmail.com>
+In-Reply-To: <CAHCN7xLqKdydxRVfdVJ2RmS+=tdQT3fR52uVMhLEoZSoObcq3Q@mail.gmail.com>
+From: Adam Ford <aford173@gmail.com>
+Date: Tue, 5 Mar 2024 18:47:07 -0600
+Message-ID: <CAHCN7x+fgQ0woDyaV1R2W28Sjs3Tahq=BuQQ7AE_df8BGpoBnw@mail.gmail.com>
+Subject: Re: [PATCH v2 5/8] phy: phy-imx8m-pcie: Add support for i.MX8M{M/P}
+ PCIe PHY
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: u-boot@lists.denx.de, marcel.ziswiler@toradex.com, francesco@dolcini.it, 
+ trini@konsulko.com, lukma@denx.de, seanga2@gmail.com,
+ jh80.chung@samsung.com, 
+ festevam@denx.de, andrejs.cainikovs@toradex.com, sjg@chromium.org, 
+ peng.fan@nxp.com, marex@denx.de, ilias.apalodimas@linaro.org, 
+ sahaj.sarup@linaro.org, fathi.boudra@linaro.org, remi.duraffort@linaro.org, 
+ daniel.thompson@linaro.org
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Tue, 05 Mar 2024 22:41:11 +0100
-Message-Id: <CZM55T7YDKCR.3AIA4OQT2VG0S@walle.cc>
-From: "Michael Walle" <michael@walle.cc>
-To: "Marek Vasut" <marex@denx.de>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH] mtd: spi-nor: Clear Winbond SR3 WPS bit on boot
-Cc: "Hai Pham" <hai.pham.ud@renesas.com>, "Heinrich Schuchardt"
- <xypron.glpk@gmx.de>, "Jagan Teki" <jagan@amarulasolutions.com>, "Johann
- Neuhauser" <jneuhauser@dh-electronics.com>, "Simon Glass"
- <sjg@chromium.org>, "Takahiro Kuwano" <Takahiro.Kuwano@infineon.com>,
- "Venkatesh Yadav Abbarapu" <venkatesh.abbarapu@amd.com>, "Vignesh R"
- <vigneshr@ti.com>, <linux-mtd@lists.infradead.org>
-X-Mailer: aerc 0.16.0
-References: <20240304161607.82759-1-marex@denx.de>
- <CZLOVK212G8L.2ISEL1IIWU1YE@walle.cc>
- <7c0e2496-4338-497d-96cf-41d75e2fc52b@denx.de>
- <CZLTVKVR3AG1.BZIQQU2PYSU6@walle.cc>
- <a28b0543-67ee-4e33-91c1-86ae36eb44d5@denx.de>
- <CZLXRLFU5YKU.1S5D9EZ3GUTH4@walle.cc>
- <faa78709-6b7c-4394-8048-3c1f09b65a04@denx.de>
- <CZLZ391C9O5F.38A18T9S51BNT@walle.cc>
- <d522ac8e-8664-4798-9069-947691c6cd43@denx.de>
-In-Reply-To: <d522ac8e-8664-4798-9069-947691c6cd43@denx.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,137 +99,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue Mar 5, 2024 at 7:54 PM CET, Marek Vasut wrote:
-> On 3/5/24 5:55 PM, Michael Walle wrote:
+On Tue, Mar 5, 2024 at 7:51=E2=80=AFAM Adam Ford <aford173@gmail.com> wrote=
+:
 >
-> [...]
+> On Tue, Mar 5, 2024 at 7:48=E2=80=AFAM Sumit Garg <sumit.garg@linaro.org>=
+ wrote:
+> >
+> > Hi Adam,
+> >
+> > On Wed, 28 Feb 2024 at 12:29, Sumit Garg <sumit.garg@linaro.org> wrote:
+> > >
+> > > Hi Adam,
+> > >
+> > > On Wed, 28 Feb 2024 at 04:42, Adam Ford <aford173@gmail.com> wrote:
+> > > >
+> > > > On Mon, Feb 26, 2024 at 2:05=E2=80=AFAM Sumit Garg <sumit.garg@lina=
+ro.org> wrote:
+> > > > >
+> > > > > Add initial support for i.MX8M{M/P} PCIe PHY. On i.MX8M{M/P} SoCs=
+ PCIe
+> > > > > PHY initialization moved to this standalone PHY driver.
+> > > > >
+> > > > > Inspired from counterpart Linux kernel v6.8-rc3 driver:
+> > > > > drivers/phy/freescale/phy-fsl-imx8m-pcie.c.
+> > > >
+> > > > I have a PCIe device that works just fine in Linux.  I have applied
+> > > > your series an enabled the same config options as you did along wit=
+h
+> > > > some others to resolve some build issues.
+> > > >
+> > > > Any ideas how to address:
+> > > >
+> > > > nxp_imx8_pcie_phy pcie-phy@32f00000: PHY: Failed to power on
+> > > > pcie-phy@32f00000: -110.
+> > > >
+> > > > My PHY node looks like this
+> > > >
+> > > > &pcie_phy {
+> > > >     fsl,refclk-pad-mode =3D <IMX8_PCIE_REFCLK_PAD_INPUT>;
+> > > >     clocks =3D <&pcie0_refclk>;
+> > > >     clock-names =3D "ref";
+> > > >     status =3D "okay";
+> > > > };
+> > > >
+> > > > The pcie_refcllk is defined as a 100MHz fixed clock in U-Boot.  clk
+> > > > dump shows it to be:
+> > > >
+> > > > 100000000            0        |-- clock-pcie
+> > > >
+> > >
+> > > I suppose that's an EVK board, try enabling MPCIE_3V3 regulator
+> > > required for EVK board via following patch:
+> > >
+> > > diff --git a/drivers/pci/pcie_dw_imx.c b/drivers/pci/pcie_dw_imx.c
+> > > index 7856823c9188..32fd2cb05d4b 100644
+> > > --- a/drivers/pci/pcie_dw_imx.c
+> > > +++ b/drivers/pci/pcie_dw_imx.c
+> > > @@ -17,6 +17,7 @@
+> > >  #include <linux/iopoll.h>
+> > >  #include <log.h>
+> > >  #include <pci.h>
+> > > +#include <power/regulator.h>
+> > >  #include <regmap.h>
+> > >  #include <reset.h>
+> > >  #include <syscon.h>
+> > > @@ -158,6 +159,8 @@ static int pcie_dw_imx_probe(struct udevice *dev)
+> > >         struct pci_controller *hose =3D dev_get_uclass_priv(ctlr);
+> > >         int ret;
+> > >
+> > > +       regulator_autoset_by_name("MPCIE_3V3", NULL);
+
+I think you should search the device tree for "vpcie-supply" and
+enable the corresponding regulator, because is more flexible than
+hard-coding regulator names. This is also more of a standard practice.
+
+> > > +
+> > >         ret =3D imx_pcie_assert_core_reset(priv);
+> > >         if (ret) {
+> > >                 dev_err(dev, "failed to assert core reset\n");
+> > >
+> >
+> > Were you able to give a retry with the above diff?
 >
-> >>>>>> Clearing this SR3 WPS bit fixes that problem, both in U-Boot and i=
-n
-> >>>>>> Linux, since Linux that is booted afterward then gets a device tha=
-t has
-> >>>>>> locking scheme configured in a way that Linux expects and can oper=
-ate.
-> >>>>>>
-> >>>>>> Better yet, if some old LTS version of the Linux kernel is in use,=
- it
-> >>>>>> will also work correctly, because this patch will configure the SP=
-I NOR
-> >>>>>> locking scheme to what Linux expects it to be, before the SPI NOR =
-is
-> >>>>>> handed over to that old kernel.
-> >>>>>
-> >>>>> Agreed, but it should *not* be done automatically and nor
-> >>>>> unconditionally. Please don't just overwrite any locking bits just
-> >>>>> because there is one flash which have it set.
-> >>>>
-> >>>> The unlock code is not triggered unconditionally, it is protected by
-> >>>>
-> >>>> if (IS_ENABLED(CONFIG_SPI_FLASH_UNLOCK_ALL)...
-> >>>>
-> >>>> Kconfig option, so this can be turned on/off in board config already=
-.
-> >>>
-> >>> Ahh, OK then :)
-> >>>
-> >>> But keep in mind that enabling this option is foobar and I've gone
-> >>> lengths to eliminate it in linux. And actually made that option in
-> >>> u-boot.
-> >>>
-> >>> See linux commit 31ad3eff093c ("mtd: spi-nor: keep lock bits if they
-> >>> are non-volatile").
-> >>
-> >> So, how shall we proceed here?
-> >=20
-> > Regarding this patch, I think it's fine. It will unlock the whole
-> > flash as advertised.
+> Not yet, but I'll try to do it tonight.
+
+That didn't work for me.  I am using a Beacon Embedded kit which does
+not use a regulator, so this had no impact, but I think having the
+vpcie-supply regulator is a good idea.
+
+I'll investigate a bit more and let you know if I make any progress.
+
+adam
 >
-> This change won't unlock the flash, it will switch to the supported=20
-> locking scheme, one which can then be used to unlock the flash.
-
-I can't follow you here. The code is added right below the
-write_sr(0), which will clear all the BP bits, thus unlocking
-everything if WPS=3D0. Therefore, no locking will be enabled anymore
-afterwards. What did I miss?
-
-> > But u-boot should really consider making that a "default n" option.
-> > And most likely adding =3Dy to every existing defconfig out there so
-> > that at least new boards will benefit from it.
->
-> Yes, I agree with that.
->
-> >> The way I see this, if Linux ever implements this scheme, Linux can se=
-t
-> >> the SR3 WPS bit as needed, it does not matter which way bootloader set=
-s
-> >> the bit as the protection bits are not cleared when the bit is cleared=
-,
-> >> they seem to be stored elsewhere.
-> >=20
-> > On each reboot you'd wear out that cell with two erases/writes.
-> > That's another reason why that whole unlocking thing is foobar for
-> > non-volatile bits. For me, non-volatile bits are for provisioning,
-> > so during a normal boot they should not be touched at all. Just
-> > during board manufacturing or because the user actively want to
-> > protect something.
->
-> That is what happens here, the write to clear the bit is triggered only=
-=20
-> if the bit is set , so OK .
->
-> And if Linux wants to use the new locking scheme, then the bootloader=20
-> should ideally be updated to match, i.e. SPI_FLASH_UNLOCK_ALL=3Dn etc, so=
-=20
-> that is also OK .
-
-I'd argue if one wants to use the locking at all, you have to set
-UNLOCK_ALL=3Dn. Otherwise, the bootloader might come alone and just
-clear your locking bits again. Clearing the WPS bit there is just
-one more thing which IMHO doesn't make much sense.
-
-> In other words, there should be no writes into the non-volatile bits,=20
-> unless U-Boot and Linux disagree on the locking scheme,
-
-Agreed.
-
-> in which case=20
-> writes are unavoidable (if you want unlock to work in both projects).
-
-But this should only happen if the user want to change the locking
-at all. u-boot should not just do "oh this bit is set, I'm clearing
-it" during SPI flash probe. Again, I'm not caring much if this is
-guarded by the UNLOCK_ALL=3Dy, because u-boot is already doing "oh the
-BP bits are set, lets clear em".
-
-> > If you clear this bit during the unlock all command, all the locking
-> > bits are cleared anyway. Or do you mean, the individual bits are
-> > still retained?
->
-> The lock bits themselves are retained, this SR3 WPS only selects which=20
-> of those bits take effect, whether the SR ones (standard locking scheme)=
-=20
-> or the per-page ones (winbond custom locking scheme).
-
-Ok. So switching back to WPS=3D1 might come with some suprises :)
-
--michael
-
-> >> But, if Linux starts to use SR3 WPS, then U-Boot should be updated to
-> >> match, i.e. both projects should agree on the locking scheme, so that
-> >> there won't be a situation where on the same device, one project uses
-> >> one scheme, the other project uses another scheme. I think this would
-> >> technically work, but it would be horrible from the user perspective.
-> >> And if that happens, both projects should then be updated in lockstep
-> >> and this UNLOCK_ALL should be disabled for such a setup then.
-> >=20
-> > If you don't touch it, I don't think you have a problem here. u-boot
-> > and linux can support different schemes, as long as the user is
-> > aware of that. I.e. if they want to lock a region and the flash is
-> > configured in a mode which isn't supported in u-boot (or linux) it
-> > should be rejected. There might of course be a command to switch the
-> > scheme if someone want to do so.
->
-> That is why I wrote that it is technically possible, but probably not a=
-=20
-> good idea because it is inconsistent and therefore error prone.
-
+> adam
+> >
+> > -Sumit
