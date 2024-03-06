@@ -4,146 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B2E2C5475B
-	for <u-boot@archiver.kernel.org>; Wed,  6 Mar 2024 17:04:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A052C5475B
+	for <u-boot@archiver.kernel.org>; Wed,  6 Mar 2024 17:26:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 816A48786C;
-	Wed,  6 Mar 2024 18:04:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=kontron.de
+	by phobos.denx.de (Postfix) with ESMTP id 816DE87DCF;
+	Wed,  6 Mar 2024 18:26:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mysnt.onmicrosoft.com header.i=@mysnt.onmicrosoft.com header.b="n+rCUvO9";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks-com.20230601.gappssmtp.com header.i=@gateworks-com.20230601.gappssmtp.com header.b="mEPmXoBg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B56AE87BA8; Wed,  6 Mar 2024 18:04:10 +0100 (CET)
-Received: from EUR04-HE1-obe.outbound.protection.outlook.com
- (mail-he1eur04on20701.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:260f::701])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id D131D87D9D; Wed,  6 Mar 2024 18:26:19 +0100 (CET)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 484C387150
- for <u-boot@lists.denx.de>; Wed,  6 Mar 2024 18:04:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E7EDF87C0A
+ for <u-boot@lists.denx.de>; Wed,  6 Mar 2024 18:26:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=kontron.de
+ dmarc=none (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=frieder.schrempf@kontron.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=aC7hMhkozE+d9Z1LVAgmtpjscbotH5enSkTlQJb+qRuKVIJUfe4z0OSWDMt/7hmsYyaAuqlXqaFiwW2CmHSUoVIJLu2xDYq2J7ad8ugemT7xJgx+3Q41evOyHuuTPg1vapYi9fNtAnnT0s6UG1mZs/RWcNNBO8UhRglFSroYcwbM62inVvCSpOl/qveRE9OXFUCyI+4wJ7Q9TKTCYvS1jCS1UmAFZBQzCS8/6pphLiESH+fHkJB28OFmIyxKnNgp1FMqOzMM8XHR8fk38gXdWvcinSWwILoYdT84C4HITdoZfZeWr/TQYSgTxldCUF6+50gBPdztftXpwbnIGVVLFA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=tVyGGI8ocIP9AFfKA52msEGjdTKP6w62tSLbAlfLF/M=;
- b=QRXQ4lFCN6lHNlvYueLGZMX7SPjG0EoCgDYSgJ+o/k6Ftu5QUjZAS2tmFnKMtom9R+cciE2Cq7gaxxELnIKx7TiP35PICDL24E3wPDAGT3KdQIbKIdpjwh0BjdXxy7PydqP7fKzyQIbq5b9dV5f+53qYl4shKRNa1TDa7GBs1lnAjamOTkvMP4NQQi7H9sUiZMl4pzGOu+JAFvxhOpXQW5u8kWWH9w8wKw0jcWlPlMLhaPpp1Rx/AbG2PlZxqcL1XA5gYrfBdR7fc/1Vsg9oZef4shMuQ1SOpEuZ22Vu6CZ8/WuHSnZaQRElhf9hWKw4w2xP47bTsMhhUQyr4lQAaw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=kontron.de; dmarc=pass action=none header.from=kontron.de;
- dkim=pass header.d=kontron.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mysnt.onmicrosoft.com; 
- s=selector2-mysnt-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=tVyGGI8ocIP9AFfKA52msEGjdTKP6w62tSLbAlfLF/M=;
- b=n+rCUvO9JCT9YYSR38rYe1u12BoarSwJzqQ5b2p5ImghUiRqiZSB1dMC+EoSsErUpaGZzyhJyjqHLJCH9D/uyDTBspLYcecR+AbidXoeIKUm65EAH6lfp7lmJPvV+WPw9EqNk0zAGZSBVsvCmOo/WcFqQgPF5cmMzNEs6A9k9e8=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=kontron.de;
-Received: from PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:263::10)
- by PR3PR10MB4031.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:a9::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7339.34; Wed, 6 Mar
- 2024 17:04:05 +0000
-Received: from PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::6cad:3fbb:8707:8ca5]) by PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::6cad:3fbb:8707:8ca5%6]) with mapi id 15.20.7362.019; Wed, 6 Mar 2024
- 17:04:05 +0000
-Message-ID: <1c24b5e3-880b-4abf-97ec-3908a0b2eab8@kontron.de>
-Date: Wed, 6 Mar 2024 18:04:01 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 0/4] Introduce mtdblock device
-Content-Language: en-US, de-DE
-To: Alexey Romanov <avromanov@salutedevices.com>
-Cc: "dario.binacchi@amarulasolutions.com"
- <dario.binacchi@amarulasolutions.com>,
- "michael@amarulasolutions.com" <michael@amarulasolutions.com>,
- "xypron.glpk@gmx.de" <xypron.glpk@gmx.de>,
- "ilias.apalodimas@linaro.org" <ilias.apalodimas@linaro.org>,
- "sjg@chromium.org" <sjg@chromium.org>, "bmeng@tinylab.org"
- <bmeng@tinylab.org>, "tobias@waldekranz.com" <tobias@waldekranz.com>,
- "jpewhacker@gmail.com" <jpewhacker@gmail.com>,
- "marek.vasut+renesas@mailbox.org" <marek.vasut+renesas@mailbox.org>,
- "kever.yang@rock-chips.com" <kever.yang@rock-chips.com>,
- "jbx6244@gmail.com" <jbx6244@gmail.com>,
- "abdellatif.elkhlifi@arm.com" <abdellatif.elkhlifi@arm.com>,
- "michal.simek@amd.com" <michal.simek@amd.com>,
- "mikhail.kshevetskiy@iopsys.eu" <mikhail.kshevetskiy@iopsys.eu>,
- "patrice.chotard@foss.st.com" <patrice.chotard@foss.st.com>,
- kernel <kernel@sberdevices.ru>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-References: <20240227100441.1811047-1-avromanov@salutedevices.com>
- <985f8309-7622-40fe-9352-36cdf7853556@kontron.de>
- <20220922220252.2r5ldxs626lqiwos@cab-wsm-0029881.sigma.sbrf.ru>
-From: Frieder Schrempf <frieder.schrempf@kontron.de>
-In-Reply-To: <20220922220252.2r5ldxs626lqiwos@cab-wsm-0029881.sigma.sbrf.ru>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR3P281CA0031.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:1c::9) To PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:102:263::10)
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-a293f2280c7so4757466b.1
+ for <u-boot@lists.denx.de>; Wed, 06 Mar 2024 09:26:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gateworks-com.20230601.gappssmtp.com; s=20230601; t=1709745974; x=1710350774;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=7NvLOW7eAwKoIkq8bHXpFRKX7nD4MlNHh41PcLCsWGk=;
+ b=mEPmXoBg4BnvD0IxjTRiIwUTHrhlsyB5W6cReiEOcJiNDBSG5v5BcY6Hs0qx2TvOmN
+ 9MNoFarJWllLkH7IcVDltw1owqpsaq4ZbZ/w4xMPdwOp9cABwq22tYSx2spBgAd3rZUw
+ wleBHWgIO4aWKLklqXOoaELY0kC/LZh6tHIX7KCljlHojlZwXqbQM9X6pIjoUzuV8fl0
+ DoY+UNNQaKKR+fx3ifs2XKKRx49sO+REqNKwYy5bJ3rz2c0+eSVUSxZepIBysuCTe4He
+ uM+E1ya//BZkqoRYRnF/PgGhBjWiu1wk+SRPKQA8iRVcJiR29glN64+NFm4wH8iuil89
+ CqKA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1709745974; x=1710350774;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=7NvLOW7eAwKoIkq8bHXpFRKX7nD4MlNHh41PcLCsWGk=;
+ b=UoaOCiCoeC7XqEwLr/SGjWQ370cn3izdHMdrhiN23MI2PWkk/xWafeE6RIuxwt0OrT
+ eaP58T8JwzwxJbBwYEC6Pjqle8SYfWyhy7iTqY/o0NKOJ+w+zqEvqkafhvf8OqviMK15
+ AaB5I9tgIArwriMg/66pIlZCluKdRKQ4zespnhwmQE2U27gaT8FPuzL/5Ae4QJoshpnI
+ v3zPV7XP0f1XFg2lY0Colv5M2PZvW8RBhWe5+nD78NNHwJYC7yoS8G4DSw/ApvytuRZz
+ LhHdz9w8bNAMP+FZfar1PnbmTQ7WlmzxYwh1E9I0vwBHAZr9Zfnk4RXZdNQUTsCbDqkp
+ W6dA==
+X-Gm-Message-State: AOJu0Yxb0WbHjtYdDcuBQj9NNnWAkegqy+CoRQtwNhSh64qPlwPhLE7O
+ LW1L/mXANSZdxbHrFrkJPHT67z+NH5LHgUe04fdbWlZJswkTve1mxLzze/ouX+4Pv/akia75inF
+ 5A+XTvh2F+E1j6G128OrbioPUrFl+k8MJ0s5Idw==
+X-Google-Smtp-Source: AGHT+IGL5IyjHBOO5IlFBWNac1M+6koXBN2F1DmA3yZkWrt3h1LIA9gFToiYY6zo//wqXxXUZrKoq7jvCwZcdhzMyEc=
+X-Received: by 2002:a17:906:4087:b0:a45:ad81:4ab3 with SMTP id
+ u7-20020a170906408700b00a45ad814ab3mr3751323ejj.54.1709745974608; Wed, 06 Mar
+ 2024 09:26:14 -0800 (PST)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA4PR10MB5681:EE_|PR3PR10MB4031:EE_
-X-MS-Office365-Filtering-Correlation-Id: 08c8193d-15fe-4f06-44dc-08dc3dff6e46
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: ZxY9hRbiOu90vzTiNMrlLqufJYIoxsfV2bFq2gCrlFBF7SJ9sg1HNX29oF7QAEI5G/AR5AmyNBIXBnxhKu+5BCVlJHy3VODCXRbSFiA2CJFG+s/G7aG2Wf5jM/pksi3TWAW4PJcmVEOJz+i9ARpWbOb6AE6/NX03eJHqJkQiCA9YtmAZeO79bat8reJ0KcWOGH3mPQ8BkxAFl6rp3XTnJSDm3LaBdet9tBS0IWkzqn8tT5dnCfyYgEMGfNXMvVofrx4X4DcK9oJIFjqll9hT0ubw6tZih0pgTmGNVzaKk2JtgxvC5b1wHBsf2ZbXMgfKLa8Tdad/vfilZ09PTIcLHls3IWr/wt1nNQAwMWXZbP3nn4G/io081f24psZHdEk5UBKSdHh6Q3M6dA4wATxST/hbkmJ8gqd5Pjr3q40RM9DrQcm0aOTEjSuMJPbtPsV+G9kdWjQe/B5jbte1xiGN2XnYlnN8ZmRH1FhwhXm9yPepymM+93+ACA6xiaLIT1NuUF1HM+JCMuII7Jk+Brg4XteqGQOLjJmpgPA6DjlGH8QZpJc3XVDGPcuJk/qT4qsaM0185sRokDOcHIRmOTpdVOIFLiIHKmPRGRbcaW1fgP/FSekrIKtu8g0B0ZcnBAah4YHolpZibhlKCP7moz5hMUNdeuHhlAU8zWPYTMpgurI=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230031)(376005); DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?RHo0SS91L3BZc3R4K2NTc05BaUJ6dmNyTjBJTWhKSFlPNUtCQmlFRHgrZ0NR?=
- =?utf-8?B?RFpNRVVFRTlrMGkyTEg3UDEwdDlmd1BCaDB6d1ZnNFliK05EVFdmNng4cXd1?=
- =?utf-8?B?cGhqOE5TOVRDTmZvZGRndWZwVGp6MFZaTXk3eS9FYks5QVdqeDZuc3R4RnR1?=
- =?utf-8?B?cE9qUHBpZXgzaWRiSk81bnkrbE5GYmUzZ1oyN3VTdTRDTXRCNkYweWovL05G?=
- =?utf-8?B?bjJ0V2lBZFJld1NxZzBtamJJNVBYWk1qbzdjZGhpdGNqZXJZSml3cGMwUlJu?=
- =?utf-8?B?TkFRc200SkE5bWVRNldjUHZ1L2JvQnh1Sy9VWGF4WlJDZlFoRDZFVWh5eHFD?=
- =?utf-8?B?a3puRDNaVDI1Q2dLL20rR0Y3S3dGUnQrdTFtT1FqdWVsMC90a3ZWWUVybnlR?=
- =?utf-8?B?Rm4vUEtjRGw2Mk0xUlFPenRicmhzR0p1dUNRWERCOVIrV1Zoc0lVcWYxeFpq?=
- =?utf-8?B?VGwramtWdEFJcGlxTzZ1cFhzSGtWM3NzTSt4WVVDQllhWWZQSzhkQTkwaUhR?=
- =?utf-8?B?cXNhY0dMYXUwQ21KTE1ZQUhIekVBZk1LSEN2Yy83WldzU0F6N01UdUp5RUs2?=
- =?utf-8?B?UmFaeUY0cEx2N2hFY2xMMWxqNTJJUTNQc0JJNXhUYnFvbDJacmFlMm5sSmpQ?=
- =?utf-8?B?MjFXRTViVjRRNEtOU0NSTms1M0N0TDJFc0hiaVJ6OEkwcTVOMkFHRWNNMUFa?=
- =?utf-8?B?ZU1NNlZ6ekw4YkZldnlOOXRFcFg0OTMvc09UYXdaTEdrQWI4TTc1R2M4V1hr?=
- =?utf-8?B?c0NodVozRVBUT1Ivbk11TXphQUNGMDlLcjl6V1NETHdQS2JpRTY1UVQzZStD?=
- =?utf-8?B?NmZqMzZValY2TUE1dEkyOGI0aHdWK3hYNFRWVmZQNXhJYjI3UDN0ZmxnKzJ2?=
- =?utf-8?B?TTN2NmxXdEU1WXovaUx4MkhOUTlyWkJubVVaOFlxWWxmL1VHRjZQMmhPWW1K?=
- =?utf-8?B?azJ3Y0c3UE0xaUxEMmVhTlkrSENqL0NCRHlxL1p1Vm1PMk5ld2hFZFhqbWhz?=
- =?utf-8?B?Q0QyWjJtK0lSRjJlQWZyZTFqaEJaS2E1T0FLZ2lPa050MXBFTTFUMTMvM1ZK?=
- =?utf-8?B?UFl2anRMY3hLTklOTFovSHNTVThsWlhpQlBtcjZodWo4bGsyYjVLeldScW9t?=
- =?utf-8?B?M0h1eXpvaWVnbXVtQjZBSHlES2NpR3dmbzIwVnNsR3pkbGltN0RLVTJjWkdx?=
- =?utf-8?B?ck5nM3NjMkl5dXN3ZzViOXFCbjRVVmE2VnlrYWpNbWFMWTZlMStMR2NZeHlq?=
- =?utf-8?B?d3lZY3FTRTl5Qk4yWUhLRGphc1kySGRjSTNEZ2xzMFg2azd3Y1JlRXVma0wy?=
- =?utf-8?B?dkN0M3BMbXFzK2g0VGRGWEg3ald5cWlDcjNRbUR1MXNCTVJ2c1ZMRzRvOVAr?=
- =?utf-8?B?bnYrVTZZa3gwWU15d0h2R1RST0E2b3lBRk1pT0wxbENVVkZ2LzFwdTZWNldN?=
- =?utf-8?B?UXRKdUMvR1IwVzBuU3Q3LzhvVUxtYzkxYmhBWWhKR2tlVXVqNUtHZnQxdm9m?=
- =?utf-8?B?ZVRoTit3eXUrUFJORG14N0lOa0Z6aWlHd2JIVVQrdWpTcFVQc056NlBQUnBH?=
- =?utf-8?B?bWMvWXVmRmpleTYvbDFORzlsb3R4eFlURU9GZ2NQOHlVVHdHbnl0K2RaZnFK?=
- =?utf-8?B?MW83WXphWHBoTzQya2MwR0JUSnl6eGpzdlplSVRReHpnRmtpZ3RNbWR3MTJO?=
- =?utf-8?B?UCs1aEx5VlMwcHJqTVRuTWRTWW1FNTJnMlIwMmk2RG05UDZ5UTBRRHF0VFBv?=
- =?utf-8?B?NjVCc0RhT0VZN2lYSldKTlo3YlQzdUVYbDJreTU3aHJwS3piZWUwT2RtMkhB?=
- =?utf-8?B?bFBDVDlIUE96VkU4SkJEMFphbjEwVUxYSFNoSVd4SWFLaFdHbVNKb0RaU09s?=
- =?utf-8?B?MXM0STVPMUpzYTV4Uk9raXg4eTJtWU5RbXNaZXo5ckdQbTVDQUlMOWdrVTlG?=
- =?utf-8?B?YldYWE9sU0hIQWxIcTFydk1XRTdReWUwaTRjTTBFVEJyaTdkSVgyNU5hV0pS?=
- =?utf-8?B?emNVaXZQaHBWUkVNVld5YnF4LzBlUXhQRTlvNnVYUEtqa05zY24vd080ZVRo?=
- =?utf-8?B?SXVFWnFMRzdZNXVTRUNHTUhtbVZDbmtvNnYvbVBRV3VaSGhYdWtTOVRnYzlR?=
- =?utf-8?B?VFQ1TGVkWTZrSXlEZ1RTV1lqMDRTajQ3WlpJL0RGN0gzSlFjOHlwYzlHcXNZ?=
- =?utf-8?B?RkE9PQ==?=
-X-OriginatorOrg: kontron.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 08c8193d-15fe-4f06-44dc-08dc3dff6e46
-X-MS-Exchange-CrossTenant-AuthSource: PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Mar 2024 17:04:05.7270 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8c9d3c97-3fd9-41c8-a2b1-646f3942daf1
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: DulbGu8KFJrfjaxsQ/A9hxdZn1Vy05syzW2StRGKVKdTgKPjPsdMuPX9ocTOMXP1PTpqnxMEqiG2xAcYzncby44An8Vihq5qoVebaOqH5/k=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3PR10MB4031
+References: <20240226080433.3307154-1-sumit.garg@linaro.org>
+ <20240226080433.3307154-6-sumit.garg@linaro.org>
+ <CAHCN7x+wwoiLO_hpSkiHXFmAUwa0bhbYeQD_UHK10e2YOX+WKA@mail.gmail.com>
+ <CAFA6WYNJ4BVHOFftSdwdMv2SMJ8ZQh3S7CRjJHfiAnosSbmgGQ@mail.gmail.com>
+ <CAFA6WYPNsRsWnFLVcMXX_KxmN2YTbysu_ZPan1jyrVASrS==rQ@mail.gmail.com>
+ <CAHCN7xLqKdydxRVfdVJ2RmS+=tdQT3fR52uVMhLEoZSoObcq3Q@mail.gmail.com>
+ <CAHCN7x+fgQ0woDyaV1R2W28Sjs3Tahq=BuQQ7AE_df8BGpoBnw@mail.gmail.com>
+In-Reply-To: <CAHCN7x+fgQ0woDyaV1R2W28Sjs3Tahq=BuQQ7AE_df8BGpoBnw@mail.gmail.com>
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Wed, 6 Mar 2024 09:26:02 -0800
+Message-ID: <CAJ+vNU0DrrU4sZZi06jGQVCsaBznc4sMJtraJAu0KdkHXubU+w@mail.gmail.com>
+Subject: Re: [PATCH v2 5/8] phy: phy-imx8m-pcie: Add support for i.MX8M{M/P}
+ PCIe PHY
+To: Adam Ford <aford173@gmail.com>, Sumit Garg <sumit.garg@linaro.org>
+Cc: u-boot@lists.denx.de, marcel.ziswiler@toradex.com, francesco@dolcini.it, 
+ trini@konsulko.com, lukma@denx.de, seanga2@gmail.com,
+ jh80.chung@samsung.com, 
+ festevam@denx.de, andrejs.cainikovs@toradex.com, sjg@chromium.org, 
+ peng.fan@nxp.com, marex@denx.de, ilias.apalodimas@linaro.org, 
+ sahaj.sarup@linaro.org, fathi.boudra@linaro.org, remi.duraffort@linaro.org, 
+ daniel.thompson@linaro.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -160,60 +101,200 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alexey,
+On Tue, Mar 5, 2024 at 4:47=E2=80=AFPM Adam Ford <aford173@gmail.com> wrote=
+:
+>
+> On Tue, Mar 5, 2024 at 7:51=E2=80=AFAM Adam Ford <aford173@gmail.com> wro=
+te:
+> >
+> > On Tue, Mar 5, 2024 at 7:48=E2=80=AFAM Sumit Garg <sumit.garg@linaro.or=
+g> wrote:
+> > >
+> > > Hi Adam,
+> > >
+> > > On Wed, 28 Feb 2024 at 12:29, Sumit Garg <sumit.garg@linaro.org> wrot=
+e:
+> > > >
+> > > > Hi Adam,
+> > > >
+> > > > On Wed, 28 Feb 2024 at 04:42, Adam Ford <aford173@gmail.com> wrote:
+> > > > >
+> > > > > On Mon, Feb 26, 2024 at 2:05=E2=80=AFAM Sumit Garg <sumit.garg@li=
+naro.org> wrote:
+> > > > > >
+> > > > > > Add initial support for i.MX8M{M/P} PCIe PHY. On i.MX8M{M/P} So=
+Cs PCIe
+> > > > > > PHY initialization moved to this standalone PHY driver.
+> > > > > >
+> > > > > > Inspired from counterpart Linux kernel v6.8-rc3 driver:
+> > > > > > drivers/phy/freescale/phy-fsl-imx8m-pcie.c.
+> > > > >
+> > > > > I have a PCIe device that works just fine in Linux.  I have appli=
+ed
+> > > > > your series an enabled the same config options as you did along w=
+ith
+> > > > > some others to resolve some build issues.
+> > > > >
+> > > > > Any ideas how to address:
+> > > > >
+> > > > > nxp_imx8_pcie_phy pcie-phy@32f00000: PHY: Failed to power on
+> > > > > pcie-phy@32f00000: -110.
+> > > > >
+> > > > > My PHY node looks like this
+> > > > >
+> > > > > &pcie_phy {
+> > > > >     fsl,refclk-pad-mode =3D <IMX8_PCIE_REFCLK_PAD_INPUT>;
+> > > > >     clocks =3D <&pcie0_refclk>;
+> > > > >     clock-names =3D "ref";
+> > > > >     status =3D "okay";
+> > > > > };
+> > > > >
+> > > > > The pcie_refcllk is defined as a 100MHz fixed clock in U-Boot.  c=
+lk
+> > > > > dump shows it to be:
+> > > > >
+> > > > > 100000000            0        |-- clock-pcie
+> > > > >
+> > > >
+> > > > I suppose that's an EVK board, try enabling MPCIE_3V3 regulator
+> > > > required for EVK board via following patch:
+> > > >
+> > > > diff --git a/drivers/pci/pcie_dw_imx.c b/drivers/pci/pcie_dw_imx.c
+> > > > index 7856823c9188..32fd2cb05d4b 100644
+> > > > --- a/drivers/pci/pcie_dw_imx.c
+> > > > +++ b/drivers/pci/pcie_dw_imx.c
+> > > > @@ -17,6 +17,7 @@
+> > > >  #include <linux/iopoll.h>
+> > > >  #include <log.h>
+> > > >  #include <pci.h>
+> > > > +#include <power/regulator.h>
+> > > >  #include <regmap.h>
+> > > >  #include <reset.h>
+> > > >  #include <syscon.h>
+> > > > @@ -158,6 +159,8 @@ static int pcie_dw_imx_probe(struct udevice *de=
+v)
+> > > >         struct pci_controller *hose =3D dev_get_uclass_priv(ctlr);
+> > > >         int ret;
+> > > >
+> > > > +       regulator_autoset_by_name("MPCIE_3V3", NULL);
+>
+> I think you should search the device tree for "vpcie-supply" and
+> enable the corresponding regulator, because is more flexible than
+> hard-coding regulator names. This is also more of a standard practice.
+>
+> > > > +
+> > > >         ret =3D imx_pcie_assert_core_reset(priv);
+> > > >         if (ret) {
+> > > >                 dev_err(dev, "failed to assert core reset\n");
+> > > >
+> > >
+> > > Were you able to give a retry with the above diff?
+> >
+> > Not yet, but I'll try to do it tonight.
+>
+> That didn't work for me.  I am using a Beacon Embedded kit which does
+> not use a regulator, so this had no impact, but I think having the
+> vpcie-supply regulator is a good idea.
+>
+> I'll investigate a bit more and let you know if I make any progress.
+>
 
-On 01.03.24 14:42, Alexey Romanov wrote:
-> Hi Frieder,
-> 
-> On Thu, Feb 29, 2024 at 09:51:04AM +0100, Frieder Schrempf wrote:
->> Hi Alexey,
->>
->> On 27.02.24 11:04, Alexey Romanov wrote:
->>> Hello!
->>>
->>> This series adds support for the mtdblock device, which
->>> allows to read/write data block by block. For example,
->>> it can now be used for BCB or Android AB command:
->>>
->>>   $ bcb load mtd 0 part_name
->>>
->>> Tested only on SPI NAND, so bind is made only for
->>> SPI NAND drivers.
->>
->> I don't know much about Android, but as far as I understand you are
->> trying to store dynamic, boot-related information on the MTD device.
->>
->> This might be acceptable if the underlying device is a NOR flash, but
->> for any type of NAND device it sounds like a rather bad idea.
->>
->> NAND devices need some kind of FTL (flash translation layer) in order to
->> work reliably. Using a block filesystem directly on the NAND MTD device
->> will cause problems as soon as any bad blocks or bit flips occur.
->>
->> People are therefore discouraged to use mtdblock on NAND and in the
->> kernel there is even a warning if you try to mount a NAND mtdblock
->> partition.
-> 
-> You are completely right. But, unfortunately, these are legacy ones that
-> need to be supported. On some boards this approach was chosen a long
-> time ago and mistakenly, so I think we need to support this for NAND.
-> 
->>
->> Maybe you should reconsider this and look into how to use UBIFS as a
->> FTL. On the other hand I'm not quite sure if the UBIFS layer in U-Boot
->> is really stable and maintained. So this might not be a good idea either.
-> 
-> Yeah, on our new boards we switched to using UBI, and we already have 
-> an implementation UBI block device for U-Boot. Will send this to
-> mailing list in the near future.
-> 
->>
->> Anyway, I'm against implementing mtdblock for SPI NAND (or any other NAND).
-> 
-> Maybe we'll just add warning like it's done in the Linux?
+Adam and Sumit,
 
-If we really need this, then yes, please add a warning that is printed
-to the console.
+In case it helps this series works for PCI bus scanning for the
+imx8mp-venice-* boards with the following patch:
+diff --git a/configs/imx8mp_venice_defconfig b/configs/imx8mp_venice_defcon=
+fig
+index 11b356b77856..ff7ea9811ed6 100644
+--- a/configs/imx8mp_venice_defconfig
++++ b/configs/imx8mp_venice_defconfig
+@@ -12,6 +12,7 @@ CONFIG_DEFAULT_DEVICE_TREE=3D"imx8mp-venice"
+ CONFIG_SPL_TEXT_BASE=3D0x920000
+ CONFIG_TARGET_IMX8MP_VENICE=3Dy
+ CONFIG_OF_LIBFDT_OVERLAY=3Dy
++CONFIG_DM_RESET=3Dy
+ CONFIG_SYS_MONITOR_LEN=3D524288
+ CONFIG_SPL_MMC=3Dy
+ CONFIG_SPL_SERIAL=3Dy
+@@ -21,6 +22,7 @@ CONFIG_SPL=3Dy
+ CONFIG_ENV_OFFSET_REDUND=3D0x3f8000
+ CONFIG_SPL_IMX_ROMAPI_LOADADDR=3D0x48000000
+ CONFIG_SYS_LOAD_ADDR=3D0x40480000
++CONFIG_PCI=3Dy
+ CONFIG_SYS_MEMTEST_START=3D0x40000000
+ CONFIG_SYS_MEMTEST_END=3D0x80000000
+ CONFIG_LTO=3Dy
+@@ -65,6 +67,7 @@ CONFIG_CMD_FUSE=3Dy
+ CONFIG_CMD_GPIO=3Dy
+ CONFIG_CMD_I2C=3Dy
+ CONFIG_CMD_MMC=3Dy
++CONFIG_CMD_PCI=3Dy
+ CONFIG_CMD_USB=3Dy
+ CONFIG_SYS_DISABLE_AUTOLOAD=3Dy
+ CONFIG_CMD_CACHE=3Dy
+@@ -86,6 +89,8 @@ CONFIG_NET_RANDOM_ETHADDR=3Dy
+ CONFIG_IP_DEFRAG=3Dy
+ CONFIG_TFTP_BLOCKSIZE=3D4096
+ CONFIG_SPL_DM=3Dy
++CONFIG_REGMAP=3Dy
++CONFIG_SYSCON=3Dy
+ CONFIG_CLK_COMPOSITE_CCF=3Dy
+ CONFIG_CLK_IMX8MP=3Dy
+ CONFIG_GPIO_HOG=3Dy
+@@ -114,7 +119,10 @@ CONFIG_FEC_MXC=3Dy
+ CONFIG_KSZ9477=3Dy
+ CONFIG_RGMII=3Dy
+ CONFIG_MII=3Dy
++CONFIG_NVME_PCI=3Dy
++CONFIG_PCIE_DW_IMX=3Dy
+ CONFIG_PHY_IMX8MQ_USB=3Dy
++CONFIG_PHY_IMX8M_PCIE=3Dy
+ CONFIG_PINCTRL=3Dy
+ CONFIG_SPL_PINCTRL=3Dy
+ CONFIG_PINCTRL_IMX8M=3Dy
 
-Thanks
-Frieder
+on an imx8mp-venice-gw71xx-2x (imx8mp with miniPCIe socket using a
+miniPCIe to NVMe adapter)
+u-boot=3D> pci enum
+PCIE-0: Link up (Gen1-x1, Bus0)
+u-boot=3D> pci
+BusDevFun  VendorId   DeviceId   Device Class       Sub-Class
+_____________________________________________________________
+00.00.00   0x16c3     0xabcd     Bridge device           0x04
+01.00.00   0x10ec     0x5765     Mass storage controller 0x08
+u-boot=3D> nvme scan
+u-boot=3D> nvme info
+Device 0: Vendor: 0x10ec Rev: 0426-D00 Prod: 60272-0005
+            Type: Hard Disk
+            Capacity: 57241.8 MB =3D 55.9 GB (117231408 x 512)
+
+I also verified this works imx8mp-venice-gw74xx (imx8mp with PCIe
+switch to multiple miniPCIe sockets using a miniPCIe to NVMe adapter)
+u-boot=3D> pci enum
+PCIE-0: Link up (Gen1-x1, Bus0)
+u-boot=3D> pci
+BusDevFun  VendorId   DeviceId   Device Class       Sub-Class
+_____________________________________________________________
+00.00.00   0x16c3     0xabcd     Bridge device           0x04
+01.00.00   0x12d8     0x2608     Bridge device           0x04
+02.01.00   0x12d8     0x2608     Bridge device           0x04
+02.02.00   0x12d8     0x2608     Bridge device           0x04
+02.03.00   0x12d8     0x2608     Bridge device           0x04
+02.04.00   0x12d8     0x2608     Bridge device           0x04
+05.00.00   0x10ec     0x5765     Mass storage controller 0x08
+u-boot=3D> nvme scan
+u-boot=3D> nvme info
+Device 0: Vendor: 0x10ec Rev: 0426-D00 Prod: 60272-0005
+            Type: Hard Disk
+            Capacity: 57241.8 MB =3D 55.9 GB (117231408 x 512)
+
+It looks like the imx8mp-beacon-kit has almost the same setup as the
+imx8mp-venice-gw74xx with the exception of you having a PCIe_nDIS gpio
+defined in pinctrl (used nowhere) and the gw74xx does not support
+CLKREQ so has 'fsl,clkreq-unsupported'.
+
+tested-by: Tim Harvey <tharvey@gateworks.com> : imx8mp-venice*
+
+Best regards,
+
+Tim
