@@ -4,70 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC847C54E41
-	for <u-boot@archiver.kernel.org>; Wed,  6 Mar 2024 15:38:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1381BC5475B
+	for <u-boot@archiver.kernel.org>; Wed,  6 Mar 2024 16:18:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EFBF88786C;
-	Wed,  6 Mar 2024 16:38:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 2D012878E2;
+	Wed,  6 Mar 2024 17:18:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="vn1JmlTd";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="CIM0M06F";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D0F218786C; Wed,  6 Mar 2024 16:38:13 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id 1D57D878E2; Wed,  6 Mar 2024 17:18:40 +0100 (CET)
+Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 125E6876E4
- for <u-boot@lists.denx.de>; Wed,  6 Mar 2024 16:38:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0EF9987CF8
+ for <u-boot@lists.denx.de>; Wed,  6 Mar 2024 17:18:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 426Fc4lZ119704;
- Wed, 6 Mar 2024 09:38:04 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1709739484;
- bh=vBPWhZVnBEJd7ydno9m9V5VSShD1Ghco6AKaMl8Hcgw=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=vn1JmlTdeLBTt6k0E0H8/csCNrhvp3e+4OD/UpqH1dhLI82vlkjbtTbbOC13feYr7
- KyjgCt1r4iEoNsjOMLDxcC3LZ/MVJbnA7iAJ2D5/0PqgsekLvYtMHyxgzLFXkq3kSk
- plf93UvbwpgtSGHvZYRs3VcU67Drg+JWLsJKmnI8=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 426Fc491013164
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 6 Mar 2024 09:38:04 -0600
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 6
- Mar 2024 09:38:04 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 6 Mar 2024 09:38:03 -0600
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 426Fc4eI064077;
- Wed, 6 Mar 2024 09:38:04 -0600
-Date: Wed, 6 Mar 2024 09:38:04 -0600
-From: Bryan Brattlof <bb@ti.com>
-To: Andrew Davis <afd@ti.com>
-CC: Neha Malcom Francis <n-francis@ti.com>, Vignesh Raghavendra
- <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>, Simon Glass
- <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH 4/6] arm: mach-k3: am62: Fixup TF-A/OP-TEE
- reserved-memory node in FDT
-Message-ID: <20240306153804.j5ogtfq3eyp4b3fz@bryanbrattlof.com>
-X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
-References: <20240214163009.983034-1-afd@ti.com>
- <20240214163009.983034-5-afd@ti.com>
- <20240306133517.djtzqotxzour34ib@bryanbrattlof.com>
- <0a1910d6-c25b-4b77-abbe-d14443b061f3@ti.com>
+ dmarc=none (p=none dis=none) header.from=phytec.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=B.Hahn@phytec.de
+DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
+ q=dns/txt; i=@phytec.de; t=1709741917; x=1712333917;
+ h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=JgLUxN6bpRysy5jJwfOprGqqanEvDHcAR4xJ6lN3eUs=;
+ b=CIM0M06F1ZNgMNtcVUDvSkliGGSDcnvn4OplqHNsh4BLmHM3dt/1WER7EBz4ncg9
+ +hC3Mj38Ts4L8JLBNzAZ3JCDKtWxAPUJr0gJwbiQbDioSt89X/M2zqKEHYzP6Qvd
+ JAUp7/iMqKxMh+wNfCTndCr+h3WRrQCrZ3UcflBDbvk=;
+X-AuditID: ac14000a-fadff7000000290d-f4-65e8975d7f06
+Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
+ (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (Client did not present a certificate)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 0E.E3.10509.D5798E56;
+ Wed,  6 Mar 2024 17:18:37 +0100 (CET)
+Received: from llp-hahn.phytec.de (172.25.0.11) by Berlix.phytec.de
+ (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Wed, 6 Mar 2024
+ 17:18:37 +0100
+From: Benjamin Hahn <B.Hahn@phytec.de>
+Date: Wed, 6 Mar 2024 17:18:31 +0100
+Subject: [PATCH v3 1/2] board: phytec: common: phytec_som_detection: Add
+ phytec_get_som_type
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-In-Reply-To: <0a1910d6-c25b-4b77-abbe-d14443b061f3@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 7bit
+Message-ID: <20240306-pcl-070-patches-v3-1-cb39c3487bc3@phytec.de>
+References: <20240306-pcl-070-patches-v3-0-cb39c3487bc3@phytec.de>
+In-Reply-To: <20240306-pcl-070-patches-v3-0-cb39c3487bc3@phytec.de>
+To: Tom Rini <trini@konsulko.com>, Teresa Remmet <t.remmet@phytec.de>, Fabio
+ Estevam <festevam@gmail.com>
+CC: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>, Benjamin Hahn
+ <B.Hahn@phytec.de>
+X-Mailer: b4 0.12.4
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1709741916; l=1837;
+ i=B.Hahn@phytec.de; s=20240126; h=from:subject:message-id;
+ bh=JgLUxN6bpRysy5jJwfOprGqqanEvDHcAR4xJ6lN3eUs=;
+ b=LsHWzIOKQ3PKUyo1feJaYUU3kN9PSJM5MohcqaGClZ26Uiykk8R/g9k8Ajua+izrTDEwEHVCx
+ Ou8SmREx6VIB6HVhNJ7/CPP5CNzxSQ9u39ww0qyKuVCaoYZaotbRGo2
+X-Developer-Key: i=B.Hahn@phytec.de; a=ed25519;
+ pk=r04clMulHz6S6js6elPBA+U+zVdDAqJyEyoNd8I3pSw=
+X-Originating-IP: [172.25.0.11]
+X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
+ (172.25.0.12)
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrELMWRmVeSWpSXmKPExsWyRpKBRzd2+otUg1+9fBYPr/pbTJ20md3i
+ 7d5Odovud+oOLB47Z91l93h1YBW7x9k7Oxg9+rtbWANYorhsUlJzMstSi/TtErgyFh7Yylqw
+ nq/i+PUtTA2Mq3i6GDk5JARMJPZO7WfrYuTiEBJYzCRx/e98RgjnAaPEvak/2ECq2ATUJHa9
+ ec0KYrMIqEhs3nKMBcQWFoiT+H2ngxHE5hUQlDg58wlQnIODWUBTYv0ufZAws4C8xPa3c5gh
+ Spwkniw4AGYLAdnt22+CtXIKOEscurQSbKSIQLbEs84t7BBjoiTeTQwCMSUEhCU27dQCuUxC
+ YDeTxNrOmywQ8USJna/lICbKStw8v4UN4i15iWnnXjND2KESRzatZprAKDILyZ2zEO6cheTO
+ BYzMqxiFcjOTs1OLMrP1CjIqS1KT9VJSNzGC4kGEgWsHY98cj0OMTByMhxglOJiVRHhrfj1J
+ FeJNSaysSi3Kjy8qzUktPsQozcGiJM67uiM4VUggPbEkNTs1tSC1CCbLxMEp1cAo7ZXUfTok
+ Vcp5QvWhWAuR1R98a5/JPpN7cKb6bWTiBt4LUy4sDVj8QfFhVqvHlyavA/OO7FzT93FxSIzt
+ LYOS8+ZeH3Pyli3V+/Fz3c1wVtb6pJM9wf6zLl1R9jw3WWBZ+vmk7xflpgRL/bxp0H/Afd8p
+ HR/dxwf6pCZ78E6WWbrqmWC4mlCOEktxRqKhFnNRcSIALYVaiHUCAAA=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,53 +96,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On March  6, 2024 thus sayeth Andrew Davis:
-> On 3/6/24 7:35 AM, Bryan Brattlof wrote:
-> > On February 14, 2024 thus sayeth Andrew Davis:
-> > > The address we load TF-A and OP-TEE to is configurable by Kconfig
-> > > CONFIG_K3_{ATF,OPTEE}_LOAD_ADDR, but the DT nodes reserving this memory
-> > > are often statically defined. As these binaries are dynamically loadable,
-> > > and in the case of OP-TEE may not even be loaded at all, hard-coding these
-> > > addresses is not a hardware description, but rather a configuration.
-> > > 
-> > > If the address that U-Boot loaded TF-A or OP-TEE does not match the
-> > > address in hard-coded in DT, then fix that node address. This also handles
-> > > the case when no reserved memory for these is provided by DT, which is
-> > > more correct as explained above.
-> > > 
-> > > Add this fixup function, and enable it for AM62.
-> > > 
-> > > Signed-off-by: Andrew Davis <afd@ti.com>
-> > 
-> > Acked-by: Bryan Brattlof <bb@ti.com>
-> > 
-> > Does this mean we need to no-map these regions in the MMU as well? Right
-> > now it's just statically defined. I was looking into trying to read the
-> > reserved-memory{} node to see if we could dynamically build the MMU
-> > config but that would have to happen after this step right?
-> > 
-> 
-> Good question. So TF-A/OP-TEE are loaded by R5 SPL, which means by
-> the time A53 SPL starts they are already in place and firewalled,
-> which means yes we should no-map them in MMU to prevent some
-> speculative fetch (A53 doesn't do that, but A72 on other K3 device
-> might) or similar from causing a firewall exception.
-> 
-> The fixup in this patch is done to the Linux DT file right before
-> it is handed off to Linux, which as you point out happens after
-> we setup the U-Boot MMU.
-> 
-> This is more a problem in theory, but not really one in practice.
-> I know, I don't like that answer either, but I can't think of a
-> better solution outside of doing this fixup in R5 SPL to the
-> U-Boot DTB also. (Which might work, but seems overkill)..
-> 
+Add a function that gets the som_type from the EEPROM.
+Add an enum for the som_type.
 
-Ah that's a good point. Only the SoCs with A53s are using DRAM for TFA 
-so we should be good for now :)
+Signed-off-by: Benjamin Hahn <B.Hahn@phytec.de>
+---
+ board/phytec/common/phytec_som_detection.c | 10 ++++++++++
+ board/phytec/common/phytec_som_detection.h |  8 ++++++++
+ 2 files changed, 18 insertions(+)
 
-Thanks Andrew
+diff --git a/board/phytec/common/phytec_som_detection.c b/board/phytec/common/phytec_som_detection.c
+index c73bf9721b2f..f9607b018dea 100644
+--- a/board/phytec/common/phytec_som_detection.c
++++ b/board/phytec/common/phytec_som_detection.c
+@@ -203,6 +203,16 @@ u8 __maybe_unused phytec_get_rev(struct phytec_eeprom_data *data)
+ 	return api2->pcb_rev;
+ }
+ 
++u8 __maybe_unused phytec_get_som_type(struct phytec_eeprom_data *data)
++{
++	if (!data)
++		data = &eeprom_data;
++	if (data->api_rev < PHYTEC_API_REV2)
++		return PHYTEC_EEPROM_INVAL;
++
++	return data->data.data_api2.som_type;
++}
++
+ #else
+ 
+ inline int phytec_eeprom_data_setup(struct phytec_eeprom_data *data,
+diff --git a/board/phytec/common/phytec_som_detection.h b/board/phytec/common/phytec_som_detection.h
+index 11009240875c..7edbfa3ca5c6 100644
+--- a/board/phytec/common/phytec_som_detection.h
++++ b/board/phytec/common/phytec_som_detection.h
+@@ -19,6 +19,13 @@ enum {
+ 	PHYTEC_API_REV2,
+ };
+ 
++enum phytec_som_type_str {
++	SOM_TYPE_PCM = 0,
++	SOM_TYPE_PCL,
++	SOM_TYPE_KSM,
++	SOM_TYPE_KSP,
++};
++
+ static const char * const phytec_som_type_str[] = {
+ 	"PCM",
+ 	"PCL",
+@@ -67,5 +74,6 @@ void __maybe_unused phytec_print_som_info(struct phytec_eeprom_data *data);
+ 
+ char * __maybe_unused phytec_get_opt(struct phytec_eeprom_data *data);
+ u8 __maybe_unused phytec_get_rev(struct phytec_eeprom_data *data);
++u8 __maybe_unused phytec_get_som_type(struct phytec_eeprom_data *data);
+ 
+ #endif /* _PHYTEC_SOM_DETECTION_H */
 
-> Andrew
-> 
-> > ~Bryan
+-- 
+2.34.1
+
