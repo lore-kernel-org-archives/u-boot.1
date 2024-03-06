@@ -4,84 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BCF6C5475B
-	for <u-boot@archiver.kernel.org>; Wed,  6 Mar 2024 11:29:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFEAFC5475B
+	for <u-boot@archiver.kernel.org>; Wed,  6 Mar 2024 11:50:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA45E87C92;
-	Wed,  6 Mar 2024 12:29:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 370BE87971;
+	Wed,  6 Mar 2024 12:50:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SSw78suC";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UUPnDeL8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 96C0687D25; Wed,  6 Mar 2024 12:29:09 +0100 (CET)
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [IPv6:2a00:1450:4864:20::136])
+ id 991DA87D14; Wed,  6 Mar 2024 12:50:41 +0100 (CET)
+Received: from mail-ua1-x92c.google.com (mail-ua1-x92c.google.com
+ [IPv6:2607:f8b0:4864:20::92c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 69224879CC
- for <u-boot@lists.denx.de>; Wed,  6 Mar 2024 12:29:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F5DE87971
+ for <u-boot@lists.denx.de>; Wed,  6 Mar 2024 12:50:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-51321e71673so805569e87.2
- for <u-boot@lists.denx.de>; Wed, 06 Mar 2024 03:29:06 -0800 (PST)
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-ua1-x92c.google.com with SMTP id
+ a1e0cc1a2514c-7dacc916452so412932241.0
+ for <u-boot@lists.denx.de>; Wed, 06 Mar 2024 03:50:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709724545; x=1710329345; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=ppr+8uVV9c7zvfHNmBNQ7rq8crnMGCjRSrbjbV6/IPM=;
- b=SSw78suCVJVt3MZWqiM5YnhG/D5wCCx8JwVrgU92sEO/SRdmCu4eFY/nlA7U/HPd+r
- p6jXNNdxoRczbN1RR2aYv1ACCKUKsnKmswImZZfV+5uElv1Q4G1+NWkTEBJmwzJLm8wI
- SC0G2bzmf1GnhQyVusrrLcVWe/ScVZDXl1klSwzfQCEjOEjIAKbnXELhxHpcg1YbOjQS
- s2U9rZ2d6mqfMMxMVzxoHrAkTbgnQIrnzyzawtpa2slSQ4JEwJhBprNmQUyoIzfLat5P
- Nd4HGHQuyWeDN+XcBUOKRbvihUrP3YdxD2SVPaI+Fr+pnGlOBGoZcgbGu+PnyczwGFmN
- I5QA==
+ d=linaro.org; s=google; t=1709725838; x=1710330638; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=avVw+SYz4Cz4D5/4rU9RdRUd9z44EKyH65+rtiTyBgU=;
+ b=UUPnDeL8FmMuuyeY2dyHv+js7i9VvBdxMHwIRiXGiuhEu3T6UepJ6ytcCDjh+LAbiU
+ F6JWBnJkLyiZ9iKNvaYNFwykBmZoEEiUUrdCXiMcwCXDxYyVPF7ToJMAGbza9+G6BUpY
+ G5rhVzcqNyBUP0bhjb9aosrH7HbKo93tHw9CWn6wsQ8b6/RLLPKBCKEVkTjQTsQnsABf
+ jANKNK2xGK/NdPnZKIf8xYHByKLCoAGPVZ91xae5K2FQvXJl0vIn2BLiVrgnyYCOTljr
+ 4luFzo3oavSocbhffr/xSr+72kW4NdREYV3iSKeUw5UsRRPdUNlJaQmer2mh6fu0uXEt
+ 7e5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709724545; x=1710329345;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ppr+8uVV9c7zvfHNmBNQ7rq8crnMGCjRSrbjbV6/IPM=;
- b=wrQ0WSjyrMZwimHBwTzQUakjVFbfJZJiQI8Wgb7k6jBradCQu7Xw+N1TCkAlUWvPro
- eZDhqYjnUcz41HiPA7lGKclfuhyaF9SjXNcqbw2y6cgxjNby6nxI1qN+UFjqSYrRXz+t
- 6WC20J2bRUmxft4KoESxk+ZFqbe7yov0aNXPKlQUUEp7Alb6oLkuhgpuf5K6CK0aAFFe
- DhxEar73fmaBq0rf+uDYiDIFuLs+RCBUv5THRPqvEo+7fYyRMOF5TFeVH4h99SwHFVO2
- GdsGK9XDPOugQYfXciDbV98yr55Ya/z7sKq/6yrtYAeHDFK4YQ0AtjFdg4axWU/Yq0yp
- /z4g==
+ d=1e100.net; s=20230601; t=1709725838; x=1710330638;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=avVw+SYz4Cz4D5/4rU9RdRUd9z44EKyH65+rtiTyBgU=;
+ b=A1i2Gkf1/WLxDaZj6O/4CEPx30acsnuO/HtgqLqTDdwXl9oQGPhwyCkAt9RXkTdkP3
+ FKs++rT84Inj4LUzhjxCaDZ+9Bn4PmDPYyx6qLF2keCnOg2zNH+cpKT8syQyj6IMUtKa
+ JHghn3W1W/elCBVPtgmEpyo1ZYKHaBhM3Xc8vlS7MJxRI2qdn1pcKWhnaPs3QlIfciM+
+ QcZi8iU6kZ0ZrP8W4Jyi7/AUIjq8BjRMi0/ytLcrH5rB6i3ekSoOTWsNL8Eg4ONVVCH+
+ +rIGEOn9mxp1dpc1O0kXdytguc9CaSMtcC8gAQ2yhfk859CR8j0uyXuSJEcy3r3yTcMk
+ oRJA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUnBjYTO+fRSlkmHkdO3h3U3SiojP8nn8mfjLaiT10iGAP4OCh8paACVMvS+QOr8wwe/0skuKQRpLjOo84vhtq4W1BqGw==
-X-Gm-Message-State: AOJu0YzwyfwB22+JNIpN4bqi8OZzIZ+S0gAGOD1ftJprsSo80VwKkqNS
- RgsyArcWL8bfwGEymKRyRIwxjRNXW4qdhgQUJNG/3eYvYdvn74vycXztL8PFmxQ=
-X-Google-Smtp-Source: AGHT+IEbQC3fuOBarQBuFAqGUH8UE9xVOzN0JSDV+6sR05N0ODXyyPY6b77rffvIt2sf5hRlHYu1wg==
-X-Received: by 2002:a05:6512:3106:b0:513:3106:ac63 with SMTP id
- n6-20020a056512310600b005133106ac63mr2790907lfb.17.1709724545183; 
- Wed, 06 Mar 2024 03:29:05 -0800 (PST)
-Received: from [192.168.1.78] (host-92-17-96-232.as13285.net. [92.17.96.232])
- by smtp.gmail.com with ESMTPSA id
- q29-20020ac2515d000000b005131c5285f8sm2561303lfd.107.2024.03.06.03.29.04
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 06 Mar 2024 03:29:04 -0800 (PST)
-Message-ID: <6221c929-8d67-4874-a6c7-10056dca9310@linaro.org>
-Date: Wed, 6 Mar 2024 11:29:03 +0000
+ AJvYcCW//m7w/F0ExjxlyAwyvKGNcOMjraWwhVcWV1jAJbCI7Jjw1Os3VpByrqd57/HghSHIruhEvZ07AH8plxYNqZX20ZucWw==
+X-Gm-Message-State: AOJu0YxzC0zQWmRZT6YLleK8EiZkpoU5W2mdIQshidBt46dmNSYvCMXW
+ mqQHIgccK14sTdZtFHYywn02URWqWVYyqBdXnnBQRZxFahXPRLpdz14++8hS6Oz3Njh5R3vWVFx
+ r84GMfzxnJfTeKZQ676AmPDrlwCzX0cgYzYclnw==
+X-Google-Smtp-Source: AGHT+IGVTQG1s5FJTEq6ZeRIUwHJwdS6lBBcWnP4fV7N7VjXPtel8Jt+UFNrPv0yYoEiXgUgt/Z+g7t8wWp9uMq2QsY=
+X-Received: by 2002:a67:ffda:0:b0:471:2478:71fd with SMTP id
+ w26-20020a67ffda000000b00471247871fdmr3797529vsq.33.1709725830271; Wed, 06
+ Mar 2024 03:50:30 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/8] qcom: board: validate fdt before trying to use it
-Content-Language: en-US
-To: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-References: <20240306005230.2638972-1-volodymyr_babchuk@epam.com>
- <20240306005230.2638972-2-volodymyr_babchuk@epam.com>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20240306005230.2638972-2-volodymyr_babchuk@epam.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20240304-b4-upstream-dt-headers-v1-0-b7ff41925f92@linaro.org>
+ <20240304-b4-upstream-dt-headers-v1-26-b7ff41925f92@linaro.org>
+ <CAFA6WYM6sTEdw+VphKidUqjQW61eW8ZVq+oO35CJVM=5wPoniA@mail.gmail.com>
+ <3e17d3e4-e2e1-45ff-9d62-44bf5a8991df@linaro.org>
+ <CAFA6WYNHkU2xp+6_+K0JoOpVrAP3ryS2zs+Q2L6Wb+TTVL+mWg@mail.gmail.com>
+ <f0cf0576-bf5d-48f4-98ff-adf553d71657@linaro.org>
+In-Reply-To: <f0cf0576-bf5d-48f4-98ff-adf553d71657@linaro.org>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Wed, 6 Mar 2024 17:20:19 +0530
+Message-ID: <CAFA6WYMaf_vvCHdi-QGmicq4R0ejOcMPU1D63WU+Znh4+maSTA@mail.gmail.com>
+Subject: Re: [PATCH RFC 26/26] dts: support building all dtb files for a
+ specific vendor
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, 
+ Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Svyatoslav Ryhel <clamor95@gmail.com>, 
+ Eugen Hristev <eugen.hristev@collabora.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,62 +101,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Tue, 5 Mar 2024 at 19:45, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>
+> [trimmed CC list a bit as this is getting offtopic for the original thread]
+>
+> On 05/03/2024 13:14, Sumit Garg wrote:
+> > On Tue, 5 Mar 2024 at 18:21, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+> >>
+> >>
+> >>
+> >> On 05/03/2024 12:35, Sumit Garg wrote:
+> >>> Hi Caleb,
+> >>>
+> >>> On Mon, 4 Mar 2024 at 22:22, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+> >>>>
+> >>>> This adjusts OF_UPSTREAM to behave more like the kernel by allowing for
+> >>>> all the devicetree files for a given vendor to be compiled. This is
+> >>>> useful for Qualcomm in particular as most boards are supported by a
+> >>>> single U-Boot build just provided with a different DT.
+> >>>>
+> >>>> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> >>>> ---
+> >>>>  dts/Kconfig          | 24 ++++++++++++++++++++++++
+> >>>>  scripts/Makefile.dts | 17 ++++++++++++++++-
+> >>>>  2 files changed, 40 insertions(+), 1 deletion(-)
+> >>>>
+> >>>> diff --git a/dts/Kconfig b/dts/Kconfig
+> >>>> index b9b6367154ef..67d9dc489856 100644
+> >>>> --- a/dts/Kconfig
+> >>>> +++ b/dts/Kconfig
+> >>>> @@ -100,8 +100,32 @@ config OF_UPSTREAM
+> >>>>           However, newer boards whose devicetree source files haven't landed in
+> >>>>           the dts/upstream subtree, they can override this option to have the
+> >>>>           DT build from existing U-Boot tree location instead.
+> >>>>
+> >>>> +config OF_UPSTREAM_BUILD_VENDOR
+> >>>> +       bool "Build all devicetree files for a particular vendor"
+> >>>> +       depends on OF_UPSTREAM
+> >>>> +       help
+> >>>> +         Enable building all devicetree files for a particular vendor. This
+> >>>
+> >>> Do we really want to build all the DTBs even if many of those aren't
+> >>> supported by U-Boot at all? I would have rather added Makefile targets
+> >>> for boards which really supports a single defconfig eg.
+> >>> qcom_defconfig.
+> >>
+> >> Yes, for the 4 Qualcomm SoCs currently supported there are 51 dts
+> >> targets that ought to be able to run U-Boot to some extent
+> >
+> > Have you tested U-Boot on all of them? IMO, it would be good to make
+> > people aware about supported boards via listing their DTs at least.
+>
+> Well the "ideal" goal is that every SoC in upstream is supported. All of
+> the changes I've introduced so far work towards that end, so this is
+> just another step in that direction. Obviously it's a lofty one, but I
+> see no reason to intentionally make things harder for ourselves by
+> gatekeeping what DTB files we build.
+>
+> I have additional features planned that help here, and plenty more
+> ideas... But I can confirm that most of the phones (which are pretty
+> much identical to the reference boards) do indeed "just work" provided
+> the SoC is supported.
+>
+> It makes sense to use board/qualcomm/<soc-codename>/MAINTAINERS for this
+> imo, there we can reference the specific dts files so device maintainers
+> can be CC'd if there are relevant changes when deviceree-rebasing is
+> updated.
+>
+> I would like to update the Qualcomm docs to describe the general
+> approach here and help guide new contributors. But (as is hopefully
+> obvious by this email) I'm still very much learning as I go. What do you
+> think?
 
+I am still not convinced that we should be building all the DTBs if
+all of them aren't supported. The docs are there to help people about
+what they have built rather than the opposite being what you have
+built isn't currently supported.
 
-On 06/03/2024 00:52, Volodymyr Babchuk wrote:
-> There are cases when previous bootloader stage leaves some seemingly
-> valid value in r0, which in fact does not point to valid FDT
-> blob. This behavior was encountered when trying to boot U-Boot as
-> "hyp" loader on SA8155P-ADP.
-> 
-> To be sure that we really got the pointer to a device tree we need to
-> validate it with fdt_valid() function.
+However, I will let others chime in too. Maybe I am missing something.
 
-Thanks for this!
-> 
-> Note: This approach is not 100% fool-proof, as get_prev_bl_fdt_addr()
-> theoretically can return a pointer to a region that is not physically
-> mapped and we will get data abort exception when "fdt_valid" will try
-> to access it. But at this early boot stage we don't know where RAM is
-> anyways so there is little we can do.
+-Sumit
 
-IME this hasn't been an issue in practise, but yes it is a risk.
-> 
-> Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
-> 
-> ---
-> 
-> Changes in v2:
->  - New patch in v2
-> 
->  arch/arm/mach-snapdragon/board.c | 5 ++++-
->  1 file changed, 4 insertions(+), 1 deletion(-)
-> 
-> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-> index f12f5791a1..10eec47ada 100644
-> --- a/arch/arm/mach-snapdragon/board.c
-> +++ b/arch/arm/mach-snapdragon/board.c
-> @@ -24,6 +24,7 @@
->  #include <linux/sizes.h>
->  #include <lmb.h>
->  #include <malloc.h>
-> +#include <fdt_support.h>
->  #include <usb.h>
->  #include <sort.h>
->  
-> @@ -93,7 +94,9 @@ void *board_fdt_blob_setup(int *err)
->  	 * try and use the FDT built into U-Boot if there is one...
->  	 * This avoids having a hard dependency on the previous stage bootloader
->  	 */
-> -	if (IS_ENABLED(CONFIG_OF_SEPARATE) && (!fdt || fdt != ALIGN(fdt, SZ_4K))) {
-> +
-> +	if (IS_ENABLED(CONFIG_OF_SEPARATE) && (!fdt || fdt != ALIGN(fdt, SZ_4K) ||
-> +					       !fdt_valid((void *)&fdt))) {
-Please use fdt_check_header() here, fdt_valid() prints a bunch of stuff
-using printf() which isn't really useful here.
->  		debug("%s: Using built in FDT, bootloader gave us %#llx\n", __func__, fdt);
->  		return (void *)gd->fdt_blob;
->  	}
-
--- 
-// Caleb (they/them)
+> >
+> >>
+> >> $ ls -l dts/upstream/src/arm6/qcom/{msm8916,sdm845,msm8996,qcs404}*.dts\
+> >>         | wc -l
+> >> 51
+> >>
+> >
+> > qcom_defconfig currently only supports sdm845 and qcs404.
+> >
+> >> What do you mean by a "makefile target"? Like copying
+> >> arch/arm64/boot/dts/qcom/Makefile from Linux? I guess my concern here
+> >> would be keeping it in sync, and introducing additional busywork when
+> >> porting.
+> >
+> > See following diff:
+> >
+> > diff --git a/dts/upstream/src/arm64/Makefile b/dts/upstream/src/arm64/Makefile
+> > index 9a8f6aa35846..ecc15021cb08 100644
+> > --- a/dts/upstream/src/arm64/Makefile
+> > +++ b/dts/upstream/src/arm64/Makefile
+> > @@ -2,6 +2,10 @@
+> >
+> >  include $(srctree)/scripts/Makefile.dts
+> >
+> > +dtb-$(CONFIG_ARCH_SNAPDRAGON) += qcom/sdm845-db845c.dtb \
+> > +       qcom/sdm845-samsung-starqltechn.dtb \
+> > +       qcom/qcs404-evb-4000.dtb
+> > +
+> >  targets += $(dtb-y)
+> >
+> >>
+> >> We do have a lot of Qualcomm DTS files, it takes maybe 10 seconds to
+> >> compile them all on my machine, but that's only once. With incremental
+> >> builds this becomes largely irrelevant.
+> >
+> > Maybe someone cares about build time too but that's not my primary
+> > concern. We shouldn't be giving the false impression that all the DTs
+> > present in the vendor directory are supported by U-Boot.
+> >
+> > -Sumit
+>
+> --
+> // Caleb (they/them)
