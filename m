@@ -4,83 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A7DFC54798
-	for <u-boot@archiver.kernel.org>; Thu,  7 Mar 2024 12:46:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4D6DC48BF6
+	for <u-boot@archiver.kernel.org>; Thu,  7 Mar 2024 12:55:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 75A6987E52;
-	Thu,  7 Mar 2024 13:46:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3958587DF8;
+	Thu,  7 Mar 2024 13:55:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YHkPQanZ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qGbOkIzi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9175887E52; Thu,  7 Mar 2024 13:46:18 +0100 (CET)
-Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
- [IPv6:2607:f8b0:4864:20::829])
+ id 1133587D91; Thu,  7 Mar 2024 13:55:34 +0100 (CET)
+Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
+ [IPv6:2607:f8b0:4864:20::c31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4996387DF6
- for <u-boot@lists.denx.de>; Thu,  7 Mar 2024 13:46:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 183B087DF8
+ for <u-boot@lists.denx.de>; Thu,  7 Mar 2024 13:55:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x829.google.com with SMTP id
- d75a77b69052e-42ee33b2d58so5326161cf.3
- for <u-boot@lists.denx.de>; Thu, 07 Mar 2024 04:46:16 -0800 (PST)
+Received: by mail-oo1-xc31.google.com with SMTP id
+ 006d021491bc7-5a136ac89b3so422605eaf.0
+ for <u-boot@lists.denx.de>; Thu, 07 Mar 2024 04:55:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1709815575; x=1710420375; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1709816128; x=1710420928; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=YdGbiUV3PCiDcdvlTycSmQOvcgVpjLTZxu6z8zXb4Gs=;
- b=YHkPQanZwQ4f0nAMFLMv8KwAwCkfoVY39I446bZsdhgajLK4Vxzsptpke7kjuj+pJB
- hWdFUHZCcPZJWQ/Ba+vCWVQYdf1I+bnsgwubY5MoJpFkEEknFzpAVPeXiTo7WQehE/Je
- 8p9XLusUqOrhWVc65imV/t1WxWeMzIfRQ3Ru4=
+ bh=NstjR8bIP9HAOLiwAJjYimzGJpFaxKUOpU6VyW7pWlQ=;
+ b=qGbOkIziIxvo9Y2cOeGT3iaghK1lKnSQWCuwik9Z/90K6M03HbX7A1z57QK3tqO2ZZ
+ 7odbjoiUNCXJHOc9R8gxVOeWl9rd3kb0pf/iFOUpufh4stShfKAvN6vWAcvEXBZ5dWUh
+ zqE51fHDQUUGo2lgjGwcdYhiXMLkXYA+uVCPk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709815575; x=1710420375;
+ d=1e100.net; s=20230601; t=1709816128; x=1710420928;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YdGbiUV3PCiDcdvlTycSmQOvcgVpjLTZxu6z8zXb4Gs=;
- b=inzMUI5PIgfPA36N/v1qypok6m+yycSP2vcNFroPC/qYzt1Hp9z3B4myYUgZyCEJYZ
- x4wnYiLIMdPV3vsUEz8vNWlwv3AaBh/gNArHauTK9SurtzyrQpZya9q0R9MaNVTxff0t
- g6FaMnu3A5Dwzci35dQkB7BtjnZy6zTQxLqpCwy73NnAbR7dPEQPxwLfXoRnW2CQaxPh
- O6m7w7wsmHfUPYHmLKn4qlbX4fyPkHwsuw8OgnGwHwVYypLPrVUsoTw8iHj+gjqbPx0a
- WBre9hOQ9lk+tx8D1EOcb3X7x8cYjHoZhdBhHjOoolivVbpJJ6ODptPNfq6kanDNbP03
- wVzQ==
+ bh=NstjR8bIP9HAOLiwAJjYimzGJpFaxKUOpU6VyW7pWlQ=;
+ b=rXcOk1PQtMuIJGjXpTaXo69yqyFEtpgl7OAFSmlSBPkI8YpXWJtwMp8OUM85aaNSbc
+ /701jPb1aYQOiTC0wG/914NqMMeXAcoqwn0ukgVH8NOFrhcgubzmHX2KiLNczOt/uJtK
+ vjOwOSJqDhQP+QubijjnBJ1z1liXYk0zRcy9eJa8OUFzywv0j+0U9yPgsHo5X4RTAZRG
+ tMSXKzi7vJOml9OuSfacnlrqEKMyJiiFccdcwZjJ5zY5KFNGld2rQXrCVXjdsdS4AUby
+ h01/s/qJ8Ycxox2wrGu9pb7EQVVqsyRS4vwZ1lTQNkxqFpXMsPMdXgM+bVecuaspCOAM
+ OgTA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWgOCBVbh6PGsl6Jc6qBamh3YiZta2VBQh8sovQN+R0sN8GCoScBRCBUEkBjVqkNwGRMpFyCa9bILWWMEJ0IjCw8gK1kg==
-X-Gm-Message-State: AOJu0Yza7Mk4b4g6JpLltDdhXk1o9J8earkVgMD1zS6kIN9/QyYACzkT
- MXBuuzBAvphTnY2031s5jOct2CL6e83s7yAG3ZKN5afXigg8KVK2DTnVJTte+mc=
-X-Google-Smtp-Source: AGHT+IFRCTNBf6FDKJWrPiNtV7pCQb3qGosk/BTX9DIMS6wutWZTi/vam3sm3jhIZYs5GtNawSqzVA==
-X-Received: by 2002:a05:622a:248:b0:42e:c3d8:3861 with SMTP id
- c8-20020a05622a024800b0042ec3d83861mr9178436qtx.23.1709815575066; 
- Thu, 07 Mar 2024 04:46:15 -0800 (PST)
+ AJvYcCWkqhjIzOGOBRYeS+5rQkC0S0C4IQdhj/xxaH5aW9uHQY5lUQ+fvGfq9yZhPAdVKxXAqSDuEtseEB0Jgy3P+7m8n4YzfQ==
+X-Gm-Message-State: AOJu0YxN2T7kUMCFQ7MRkrbJlVvDZ0U7QuxBQ5nLl7S9fLDh4Nij9ms9
+ zeXXjn7q0LmOn/bqzfVbIXcqbSMq4xrGKeazwJ9ZZZ5AkqKyvpniJGsFvifiohg=
+X-Google-Smtp-Source: AGHT+IHlQqssIEjN2qJTx/eW3IwlFpmc4VkhneAAZq8ZUoevRXseNUDyEH3SUm+uRkt3meSIQ6ES2A==
+X-Received: by 2002:a05:6358:93a5:b0:17c:11b4:9d1a with SMTP id
+ h37-20020a05635893a500b0017c11b49d1amr8099962rwb.30.1709816128552; 
+ Thu, 07 Mar 2024 04:55:28 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-007f-0000-0000-0000-1001.res6.spectrum.com.
  [2603:6081:7b00:7f::1001]) by smtp.gmail.com with ESMTPSA id
- d17-20020ac85351000000b0042f148f6caasm1349976qto.78.2024.03.07.04.46.13
+ do18-20020a056214097200b00690a7785ce0sm343888qvb.77.2024.03.07.04.55.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Mar 2024 04:46:14 -0800 (PST)
-Date: Thu, 7 Mar 2024 07:46:12 -0500
+ Thu, 07 Mar 2024 04:55:28 -0800 (PST)
+Date: Thu, 7 Mar 2024 07:55:25 -0500
 From: Tom Rini <trini@konsulko.com>
-To: MD Danish Anwar <danishanwar@ti.com>
-Cc: Francesco Dolcini <francesco.dolcini@toradex.com>,
- Max Krummenacher <max.krummenacher@toradex.com>,
- Dan Carpenter <dan.carpenter@linaro.org>, Simon Glass <sjg@chromium.org>,
- Ravi Gunasekaran <r-gunasekaran@ti.com>, Nishanth Menon <nm@ti.com>,
- u-boot@lists.denx.de, srk@ti.com, Vignesh Raghavendra <vigneshr@ti.com>,
- Roger Quadros <rogerq@kernel.org>
-Subject: Re: [PATCH v6] remoteproc: uclass: Add methods to load firmware to
- rproc and boot rproc
-Message-ID: <20240307124612.GA4110939@bill-the-cat>
-References: <20240228120645.958316-1-danishanwar@ti.com>
+To: Michal Simek <michal.simek@amd.com>
+Cc: Angelo Dureghello <angelo@kernel-space.org>,
+ Love Kumar <love.kumar@amd.com>, u-boot@lists.denx.de,
+ git@xilinx.com, Marek Vasut <marex@denx.de>
+Subject: Re: [PATCH v3] test/py: reset: Add a test for reset command
+Message-ID: <20240307125525.GF1523872@bill-the-cat>
+References: <4b7c5e82165b009cf8b28701ca3f1e182fbc3c09.1708414720.git.love.kumar@amd.com>
+ <20240302151813.GA1652651@bill-the-cat>
+ <bd0b13b0-0554-b280-a40a-17056a1e2c5e@kernel-space.org>
+ <c11e1809-b5d1-46cd-a5c8-a5276b83f26f@amd.com>
+ <c523aabd-93a4-f9db-2726-7f912a85aef0@kernel-space.org>
+ <20240307001053.GE1523872@bill-the-cat>
+ <c05a25ca-d4b7-1179-cf46-645bc4cdba89@kernel-space.org>
+ <c0bbe63d-adee-456f-bcf8-44579aa2593a@amd.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="aLwQ9E+QfQQN1nob"
+ protocol="application/pgp-signature"; boundary="Zf8DQoe3JdSlNSmH"
 Content-Disposition: inline
-In-Reply-To: <20240228120645.958316-1-danishanwar@ti.com>
+In-Reply-To: <c0bbe63d-adee-456f-bcf8-44579aa2593a@amd.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,52 +102,105 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---aLwQ9E+QfQQN1nob
+--Zf8DQoe3JdSlNSmH
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Feb 28, 2024 at 05:36:45PM +0530, MD Danish Anwar wrote:
-> Add APIs to set a firmware_name to a rproc and boot the rproc with the
+On Thu, Mar 07, 2024 at 09:26:42AM +0100, Michal Simek wrote:
+>=20
+>=20
+> On 3/7/24 08:56, Angelo Dureghello wrote:
+> > Hi Tom,
+> >=20
+> > On 07/03/24 1:10 AM, Tom Rini wrote:
+> > > On Thu, Mar 07, 2024 at 12:36:42AM +0100, Angelo Dureghello wrote:
+> > > > Hi,
+> > > >=20
+> > > > On 05/03/24 1:34 PM, Michal Simek wrote:
+> > > > >=20
+> > > > >=20
+> > > > > On 3/3/24 22:58, Angelo Dureghello wrote:
+> > > > > > Hi Tom,
+> > > > > > > On Tue, Feb 20, 2024 at 01:11:38PM +0530, Love Kumar wrote:
+> > > > > > > > Add a test for reset commands which performs resetting of
+> > > > > > > > CPU, It does COLD reset by default and WARM reset with -w
+> > > > > > > > option. Signed-off-by: Love Kumar <love.kumar@amd.com>
+> > > > > > > > Reviewed-by: Tom Rini <trini@konsulko.com> --- Changes in
+> > > > > > > > v2: - Set bootmode through boardenv if modeboot is not
+> > > > > > > > defined Changes in v3: - Fix the issue with bad pattern
+> > > > > > > > found on console --- test/py/tests/test_reset.py | 61
+> > > > > > > > +++++++++++++++++++++++++++++++++++++ 1 file changed, 61
+> > > > > > > > insertions(+) create mode 100644 test/py/tests/test_reset.py
+> > > > > > > I had hoped this was all sorted out now, but both this and the
+> > > > > > > saveenv test cause qemu_m68k to fail now. See:
+> > > > > > > https://source.denx.de/u-boot/u-boot/-/jobs/791635
+> > > > > > looking into this.
+> > > > >=20
+> > > > > Is reset implemented in qemu? It should be skipped if it is not.
+> > > > >=20
+> > > > yes, seems not implemented
+> > > >=20
+> > > > =3D> reset
+> > > > =3D> reset -w
+> > > > =3D>
+> > > > =3D>
+> > > >=20
+> > > > Not finding any trace in the qemu code related to
+> > > >=20
+> > > > out_8(&rcm->rcr, RCM_RCR_SOFTRST);
+> > >=20
+> > > Does reset work on the real HW, or can you not test? What I'm wonderi=
+ng
+> > > is if we have a missing feature on the board/arch code (and should
+> > > disable the reset command) or a problem with QEMU.
+> > >=20
+> > I don't have the exact hardware (m5208evb) but:
+> >=20
+> > 1) i checked by tracing that on qemu the reset function is properly cal=
+led
+> >=20
+> > =3D> reset
+> > resetting, RCR fc0a0000
+> >=20
+> > 2) reset register address is correct. I checked also that writing
+> > directly to it by mw.b does now produce the reset,
+> >=20
+> > =3D> reset
+> > resetting, RCR fc0a0000
+> >=20
+> > =3D> mw.b 0xfc0a0000 80
+> > =3D>
+> >=20
+> > So looks not implemented in qemu.
+>=20
+> ok. That means that we shouldn't run reset test inside CI loop for this p=
+latform.
 
-> same firmware.
->=20
-> Clients can call rproc_set_firmware() API to set firmware_name for a rproc
-> whereas rproc_boot() will load the firmware set by rproc_set_firmware() to
-> a buffer by calling request_firmware_into_buf(). rproc_boot() will then
-> load the firmware file to the remote processor and start the remote
-> processor.
->=20
-> Also include "fs-loader.h" and make remoteproc driver select FS_LOADER in
-> Kconfig so that we can call request_firmware_into_buf() from remoteproc
-> driver.
->=20
-> Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
-> Acked-by: Ravi Gunasekaran <r-gunasekaran@ti.com>
-> Reviewed-by: Roger Quadros <rogerq@kernel.org>
-
-This breaks building on am64x_evm_r5 am65x_evm_r5_usbdfu
-am65x_evm_r5_usbmsc in next currently, thanks.
+Agreed.  The TEST_PY_TEST_SPEC variable in both of the pipelines can be
+used to say "not reset" for this platform in the next rev. It would also
+be nice to file a bug report with QEMU too I think. Thanks for digging
+in to this everyone.
 
 --=20
 Tom
 
---aLwQ9E+QfQQN1nob
+--Zf8DQoe3JdSlNSmH
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXptxQACgkQFHw5/5Y0
-tyzaDwv9GKRAi2awltvTzMabcLFAJsMpSvTRlkb6aZ6vCY+vCrB5efN33uiyL6xo
-z6pXR7sc+ddIMt+Danzq0o0rUhXR7lmeS8OWas94eUPEYKriyoBZINVNud3FEC6t
-zmTjTd0hoQRudex2cf3N8lNFnAmfeT0vM0TBOMWn1DeUXe62ng62LZ3gRzMDu/VN
-XOC7P9T6aPdOOxFFVw9M+COqEqG87RbGi6JymSwtwTarOxtFtvaJNQqhXdbPTZFk
-Jd5CXNGShAw8U1qJWCvKORwWpMkg3D1hnnPWVUNtSXFobQ4lDrEsfa9+64MpFQ2J
-BwUFy60djqP7rb/+TQX94MeYe3FE3FF6MAos9BcFQKBVdtqsFpsGSaaNCp2ATZn3
-FZ+SO5LfdLiOmprJJ4BcvM4NIAaHL3EYAOruuyhyWQb9IMKy04jIrFRl1zS4sd9Z
-iws18khgWnWt1i5dbRtwdKuj8TdLUCQf77rqT5Six5nZPGjyQ20kVseX9jUT5gO5
-8/qualcJ
-=BIqx
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXpuT0ACgkQFHw5/5Y0
+tyyWFgv/QbqEpBnMuzcVmMNIVi3dd6Wr1o7mt+SpJXPIlQqMsOaYzZ9aybave8T2
+arZZNz98PAA2Y23xlmNC+0UZp7K+bB2BnwkE9LHGGFdX0Mia5beSvjRa4cfZ2K7n
+FsKgwIw4CfLMwsLARNIjU1NMlt7bGpKiC+3A6E6lpdcgzPlo+xltzMf4vaecdAQB
+eBzPQWY0tHOrvG6MJ6kkRVTd5my6SRvSHw4LKz1jEUi/cfgyj0H14ZFqs/aNm0d/
+qP7xqJyLEF+X6vKjyPimgKHll6uE9ju6HoSTUKFKUBppAIvoHjLm1bL44Mnls7W6
+SmXKoHJa7IgSDWjAZWcUYaMqXB3k59vWzhdsbFW+OuhNBVPI5g+0lwQi1zzhsoaR
+4T4aN+oUZNGEpyFs8LKuaAQ7evONoqGW2b5pOmOXAK/GP0xHU+cxIm94CD5c0NQg
+Ojquz1oqYztFhq7mpvO5vhE1dmSQ78bGA6poei5T3/Wv81Y0zFCfwAHBDB6iuY2z
+sQUGUON5
+=oQsU
 -----END PGP SIGNATURE-----
 
---aLwQ9E+QfQQN1nob--
+--Zf8DQoe3JdSlNSmH--
