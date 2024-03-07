@@ -4,118 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D7D3C48BF6
-	for <u-boot@archiver.kernel.org>; Thu,  7 Mar 2024 15:30:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCAD8C54798
+	for <u-boot@archiver.kernel.org>; Thu,  7 Mar 2024 16:13:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF56987DAF;
-	Thu,  7 Mar 2024 16:30:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=weidmueller.com
+	by phobos.denx.de (Postfix) with ESMTP id 316F387B77;
+	Thu,  7 Mar 2024 17:13:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=weidmueller.onmicrosoft.com header.i=@weidmueller.onmicrosoft.com header.b="Q9iz12Yb";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks-com.20230601.gappssmtp.com header.i=@gateworks-com.20230601.gappssmtp.com header.b="XrvzC9zS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0F96287D8F; Thu,  7 Mar 2024 16:30:15 +0100 (CET)
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (mail-am6eur05on20701.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2612::701])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 5544C87D16; Thu,  7 Mar 2024 17:13:33 +0100 (CET)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D78CD87DA0
- for <u-boot@lists.denx.de>; Thu,  7 Mar 2024 16:30:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
- header.from=weidmueller.com
+ by phobos.denx.de (Postfix) with ESMTPS id 6F0FA87DA0
+ for <u-boot@lists.denx.de>; Thu,  7 Mar 2024 17:13:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Lukas.Funke-oss@weidmueller.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=UX6RpzvXIMylbqMZWQNWl4i6kgnAyjnu/Mzy8PZXFVG6BmSMH+mtKbweFZ0Z30NnIQlkSgsX9ZxYNdHXpWLrXPNbOrsV5G8/c15tuW2gSMojrHdMHk0qI9gDVKykKuxZXYQ5ixbo4YwEL/EyZnITgBgYuo5SfJRtJzxUfyMi6DLRTR5akd2NDjrw0ON5cgzPhQ1aLis/WDXLnhIE0Ki8qmYG+tDBHl+CWOR9+bbrBQdgPzbE1mHxP95LoWV4RjOaaUIuBlguDvLzAOnVyMXsN7ZCZHxlTdbhrzl4MDz2JeAnDckrAfNQhgL8++QdL9oYPN7FYZ5FfVkUONNWrNHfmg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=feSmP4BfxGy1N7FU9Ohg4JUTXnmZkCgZg3/MGa1iDBk=;
- b=gOOUPPLglkeTcKGqWc6nDUnniMJea8q9WK7Ywf1FTLjpIL35nqxhYRUj9ZrnI1nrnKThqF5O/1TV3YN3EmKcLMU4VfQcQq0+pbp5iNd53/OF6vEzv8HCXg0Ef9uawu6nTgBrLJfiG9Aj0rnzu3vXZ0L/pdK+hs1ViVigGRQd7oQR8yxuvpsj6dEkjORtkiN3dU6If2JOISUP+3tGAw+7W9A+Ai/r1DWwj6U5BXqfe58tPEyJRTK25A44j/6YJHL7GutC4Q3lwBtGh3XTF6wMc/GzgD/Zhmo90J8ZR3JHePDQupZXxG23nDbxyAVOjHcsrdYA6aWbnzXiJ11cHNIvnA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=weidmueller.com; dmarc=pass action=none
- header.from=weidmueller.com; dkim=pass header.d=weidmueller.com; arc=none
+ dmarc=none (p=none dis=none) header.from=gateworks.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-a44ad785a44so147734866b.3
+ for <u-boot@lists.denx.de>; Thu, 07 Mar 2024 08:13:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=weidmueller.onmicrosoft.com; s=selector1-weidmueller-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=feSmP4BfxGy1N7FU9Ohg4JUTXnmZkCgZg3/MGa1iDBk=;
- b=Q9iz12Ybq95+2PJpjoI+IyRu4JYOL0LlRGwzhJ1KRWbsZQOPfHY3u9nHyKJmo5qaTQxLM2M/c+txD2RRAxSXzSBWW7PrCWOOl9qKywyq+CjV1QA4ojpuACDjZ79aE85K7wn4TTXW5E69UcEnXAas8LZTWHGNoiWkmuoZDjVf7+8=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=weidmueller.com;
-Received: from AS2PR08MB8431.eurprd08.prod.outlook.com (2603:10a6:20b:55a::18)
- by AS2PR08MB9497.eurprd08.prod.outlook.com (2603:10a6:20b:60f::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7362.26; Thu, 7 Mar
- 2024 15:30:04 +0000
-Received: from AS2PR08MB8431.eurprd08.prod.outlook.com
- ([fe80::d003:60c0:6918:8a5]) by AS2PR08MB8431.eurprd08.prod.outlook.com
- ([fe80::d003:60c0:6918:8a5%6]) with mapi id 15.20.7362.019; Thu, 7 Mar 2024
- 15:30:04 +0000
-From: lukas.funke-oss@weidmueller.com
-To: u-boot@lists.denx.de
-Cc: Michal Simek <michal.simek@amd.com>,
- Lukas Funke <lukas.funke@weidmueller.com>
-Subject: [PATCH v2] arm64: zynqmp: Add label to pmu fwnode
-Date: Thu,  7 Mar 2024 16:29:56 +0100
-Message-Id: <20240307152956.431104-1-lukas.funke-oss@weidmueller.com>
-X-Mailer: git-send-email 2.30.2
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: FR4P281CA0191.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:ca::11) To AS2PR08MB8431.eurprd08.prod.outlook.com
- (2603:10a6:20b:55a::18)
+ d=gateworks-com.20230601.gappssmtp.com; s=20230601; t=1709828009; x=1710432809;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=2Ux4B6Ne1U9xXW+f+FyCqueED2C/l+4KB10kSMYpP5k=;
+ b=XrvzC9zScsYQ6+W7Pw4ktY6TscjWiKSo5/03snrO1SqKfhfJYHPgDm85jwmyUt4ZX4
+ C3pHXG9VRvOz+1LlAt4ype27YG/tVLEU+1dYb+bvWIaqVenIQEJ0jAijTzutFzRluyEx
+ EwqGXgTKdbYGROrGHEZMuBIEURV4bVI4o4j/f0yTUQX2TrDWhYgoL29xlXy6TytQ9KcR
+ e99SH0ufWoM7Vu//M/QRHPVsYrpeHpb8C5tt363mB+/EpOOKKqqZYIsO0/WCi4Ih5wsy
+ nOFZ3nDhkVil7wcQQbGMZyh1J7ayj/3myEgbU4xJT23k8R5ujrnVJEupLkrNYQzhauWY
+ HHAQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1709828009; x=1710432809;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=2Ux4B6Ne1U9xXW+f+FyCqueED2C/l+4KB10kSMYpP5k=;
+ b=JOTOJmY0keeZV1QebQoVnGLRMY8pU73kBSr2uOrsPCx69/N6oJXE4/WYTY51P2MXNM
+ aGzpJL5Qgi0B4XRY88pGLDeDu/bn6P0ewWFZPrGwLaTTSTZOwy1gcZnjq5IDbUxyoAwZ
+ JEsVE/PSjhRKBsjZNwlTXEMyQCobAshtxq1c9yCjwlEIU2crym/38jTJBksHU4475+zD
+ EDpJxAB9xrtiYCOsGW1IgkkrqMdk8jtT0tn/wCHeh28lRQL4/SHCjdK7Vd4kltK5oyXC
+ I4sctwjPZRmyKT8KfCK+L0GvqN8yvu2suQUv+ApzYGrEinQ9DEuP6VDna0TJKaFEwfyb
+ S0TA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWaENrwjX4tTWA7ofUyW2CMW/rvxyZiBDx2RWq5S5CuaIsZUf4OKoZs2WxKmLnb0cAxwJxfPAKD+m7bO/Ck0H6oUFFwkg==
+X-Gm-Message-State: AOJu0YyGodgBQz3DoN3aKs26tHNfUv7388v9ou9k5hAn2WFQBVVM5zL9
+ UyF5XzXUjG0wBQUGpxM/uI2zgvon9ToL7FybXNBNL8BMZEw7gfmF/BD1pTrM+puwMumUhAcSXtx
+ QInepudA/OXmWRl8EiGZhs0tp22weyQVeC+5nxQ==
+X-Google-Smtp-Source: AGHT+IH06xjtGwmYhkvOSAAgZ4r9ZXMSJ6EgrEPOb3ccXpyR+NAwpo/y0m6iJnGQTHdZ8VUfURJ/GF/46qbSOvs4mN0=
+X-Received: by 2002:a17:906:ff53:b0:a43:f9ff:2571 with SMTP id
+ zo19-20020a170906ff5300b00a43f9ff2571mr12806567ejb.45.1709828008771; Thu, 07
+ Mar 2024 08:13:28 -0800 (PST)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS2PR08MB8431:EE_|AS2PR08MB9497:EE_
-X-MS-Office365-Filtering-Correlation-Id: d8cd86b2-9067-4247-90ac-08dc3ebb7610
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: dUUoR53kzFq1M5vomdEhj9ZoejbvmHeLsfRH8ecmy2maQdg9gmGc6PuW/yxUtFb/Q4WfJNlIW3yfTt8nkJ0FkEIy5k9qxO/6W3mofkVDHC5Dp376xRoDaux1Sko2zUQ1VvsjND48G7NBTX6WhFS6a+WBxIePiVZQt8MzCdl8LPYiA5bEFw0SUcaJb8WbJcXpFWOEAjUCyrQxohko+AJkIpCr+odRqKyVFp+G7Hd96rSI+SboRxVdCfQ7xXEqA+bJw5y74fyFjHHBZ/yP2enkCZj5qbFFyZRg1khOxJNcYn0K+YvNRoSq/Ml+bFpvERaxNQuFeh0KgCzwT0WTbVVx188O+segNby9H9PhT71fWlurDbTlJ97LzeOrM0eTYq158ZqXXe1NaHe8gu9dMvkDiuoVZBlQ7gIUe0FZu2e9d32fq83wyaR0o7weG76xEDr0RV7BLZDvpsz/F9o+K0rmAaZJNb3jaJ77QWt07USWbja0VyKGpS3QdyMDVzJof6kNsw3sjUdRjoc0M2pGRV4a5+n2F1OokH+F8m9vLu2jG/qOKjUWSysBVZyG+EvAtGRrHvmrsz2pwdE8aGMpSIMNSTFGc/bc6SQx4KvbqrjF9AECOetmGOTjKxbqNwjUNaK3EVzzJkoCPIj8nPWwW9ySeueQnv16DDrFy8jKe2Qbp1HVLzTAm4Bk8e4TF47ncNuKnJT2INIL/whaEsqweZBmyVkRkRX6nta/phtI6qyV5R0=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS2PR08MB8431.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(376005)(38350700005); DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?gNULr+8QzEEfcsB5hpcpbfXpiN22FUQvxcowsjBoYWxhpqun+u245cbP1YiY?=
- =?us-ascii?Q?NdsPHUSGZCkbgrMdHiFyTudwABBMBawnvDBeBDic5SfngIGz6nmd/kCZpx/L?=
- =?us-ascii?Q?HauA1V4D18Auph7o/3cUN50qKJImPYsGlpB+B2p1aPIvDtcbzheBlGhoIMfM?=
- =?us-ascii?Q?zCjItvp9Zj+ZK/KZJZGdBr536iSnp7OIia4etajW7HUPmPT3UinMpB2BsXSV?=
- =?us-ascii?Q?iouM3T/fIVLem/pCfMQ+SHRvEg9/sMiH8TSowKIRzhn+MR+AX5YD94oef1qb?=
- =?us-ascii?Q?XVabuhnNDqWEqU0NayMhN/e31CUKgZFN4qdmOuVFT/O3x/stqObStuXQ8aV4?=
- =?us-ascii?Q?cNPPvMLO8prj0tMYuRna6MXlP6VX7DunzO2eVjPOe/qESISGpdvgxKFvGabb?=
- =?us-ascii?Q?MfKDnBKsz+a6GVFHTJwZ6Q2sA4hmUsyID6vOAmyeAbu6RnDedbwaF5osxuTT?=
- =?us-ascii?Q?/EjG4EqfxWVSZvwuKfBsA+U8cVzyu5Rp5/8CnRi5mzzzqirz5ChHLasPoDm+?=
- =?us-ascii?Q?9B2VXzei3T83Mw2vyoQYwDLgPQEgEFH9NA38eJK3eyDlmO84cYCDvLdF+qud?=
- =?us-ascii?Q?Zws8ELlpxaGTFIH98aknsEIvxBEWcEQ7EG7XR3CVgepsM0AYMrCvcyyGVPzV?=
- =?us-ascii?Q?GrHTeRzf+Atx27LuIas9pMC2AmehbL64RXcOQNfz86J2uqe53nkHKGDqSjjI?=
- =?us-ascii?Q?bgdqSmfbSNhPdKjvOu2HjCZkzRw4do5mDHNTHM0Mlm6PMt5RnseAlyuIpnLw?=
- =?us-ascii?Q?f0nB2IDG8/EhUOi6olgWrpO7rEdoIIn8iw/+cfjT5kYjXdgvKFKU5Tr0Tutb?=
- =?us-ascii?Q?Mu77kFxW7i8iNZHLlrqZYOL0WOpEuofmjuxC5HJfORf68rCsdipUS0aD+MTZ?=
- =?us-ascii?Q?J1h7qgIkzEVo+HvCOq0b/5QGYJtor+mucrt+yK1aAZub7WNmFjzWSQjVtR47?=
- =?us-ascii?Q?ZnvZ6Wq+x7c0hcpYsHC5www8XmpRW+A0HLzwwLzQaL3MyDetPcyOuKOvuLiz?=
- =?us-ascii?Q?gmlgX5qbfJLVozxmuBqaZJ7fybVUTN9O+AbkjHxu0C9/nSvVGmLAi74PkEIf?=
- =?us-ascii?Q?fjCQxuBQN3+VIZcuaURddp9rEpADCxmdA/tXyllhXUpmpnKjy9hMIUQVFnYI?=
- =?us-ascii?Q?415rXK0WCkh0q4A/UMR/P1MpPDbURpIvz2HxJKng09aeTdkJAIfl+yn6uq2r?=
- =?us-ascii?Q?W93vceo3Ufe/Msh4IXceDA2/CAa30btK5bCxEZxzsBAaEpjZjzCkHDKqv0vG?=
- =?us-ascii?Q?jQi0C3TMxTUUZvz422FEqwtLJjd1KkEiyDSpuNLYUAmnm26nqi/qrRD9DK1u?=
- =?us-ascii?Q?UAxEzJqYVIs0yP1awnFWwXTaUYmz0i3KO+Z4usuGy7NLnj0G0OPWB6Ownnjh?=
- =?us-ascii?Q?Brng++SPACXh7+sr6rsKQo65kmYW/PFZ5yuecRz9WHMv/sWfIU7dhgYf7JfW?=
- =?us-ascii?Q?b2Acv8PDd8x149VVdTc+QhmdkyX7V06SptqiLtiLywUM4euH7kTif23dhUeR?=
- =?us-ascii?Q?tz5Nid2qXDdL/F9N++vUz7sCRCeGzMYakIy+AHLWfz5E0zx8uTDoS3HU2W4k?=
- =?us-ascii?Q?6JgL2t7S6MAzWxlxZ0ZBk3xaSOWEUPy2P1l3XjyO92eRxHtvPownx6JXFoWR?=
- =?us-ascii?Q?/w=3D=3D?=
-X-OriginatorOrg: weidmueller.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d8cd86b2-9067-4247-90ac-08dc3ebb7610
-X-MS-Exchange-CrossTenant-AuthSource: AS2PR08MB8431.eurprd08.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Mar 2024 15:30:04.1409 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: e4289438-1c5f-4c95-a51a-ee553b8b18ec
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: styX29fpQCzCB4ANjouGoy/thxxcnYdnXIwuuVYvWB4R24df1Nn7Muo/SmdVZ0CyVl0HWA2Mmxy2bdpQk9jr8A==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR08MB9497
+References: <20240226080433.3307154-1-sumit.garg@linaro.org>
+ <20240226080433.3307154-6-sumit.garg@linaro.org>
+ <CAHCN7x+wwoiLO_hpSkiHXFmAUwa0bhbYeQD_UHK10e2YOX+WKA@mail.gmail.com>
+ <CAFA6WYNJ4BVHOFftSdwdMv2SMJ8ZQh3S7CRjJHfiAnosSbmgGQ@mail.gmail.com>
+ <CAFA6WYPNsRsWnFLVcMXX_KxmN2YTbysu_ZPan1jyrVASrS==rQ@mail.gmail.com>
+ <CAHCN7xLqKdydxRVfdVJ2RmS+=tdQT3fR52uVMhLEoZSoObcq3Q@mail.gmail.com>
+ <CAHCN7x+fgQ0woDyaV1R2W28Sjs3Tahq=BuQQ7AE_df8BGpoBnw@mail.gmail.com>
+ <CAJ+vNU0DrrU4sZZi06jGQVCsaBznc4sMJtraJAu0KdkHXubU+w@mail.gmail.com>
+ <CAFA6WYN7D2UmQ7WCBxsGbmo_QC2KRNgJ_n-4CqD2RFJbYVittg@mail.gmail.com>
+In-Reply-To: <CAFA6WYN7D2UmQ7WCBxsGbmo_QC2KRNgJ_n-4CqD2RFJbYVittg@mail.gmail.com>
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Thu, 7 Mar 2024 08:13:17 -0800
+Message-ID: <CAJ+vNU1oP9tk3nwJ-2i6FhRfq7ge21LTbKGED4LLNY=Wk2U4hg@mail.gmail.com>
+Subject: Re: [PATCH v2 5/8] phy: phy-imx8m-pcie: Add support for i.MX8M{M/P}
+ PCIe PHY
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: Adam Ford <aford173@gmail.com>, u-boot@lists.denx.de,
+ marcel.ziswiler@toradex.com, 
+ francesco@dolcini.it, trini@konsulko.com, lukma@denx.de, seanga2@gmail.com, 
+ jh80.chung@samsung.com, festevam@denx.de, andrejs.cainikovs@toradex.com, 
+ sjg@chromium.org, peng.fan@nxp.com, marex@denx.de, 
+ ilias.apalodimas@linaro.org, sahaj.sarup@linaro.org, fathi.boudra@linaro.org, 
+ remi.duraffort@linaro.org, daniel.thompson@linaro.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -132,31 +105,239 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Lukas Funke <lukas.funke@weidmueller.com>
+On Wed, Mar 6, 2024 at 10:35=E2=80=AFPM Sumit Garg <sumit.garg@linaro.org> =
+wrote:
+>
+> On Wed, 6 Mar 2024 at 22:56, Tim Harvey <tharvey@gateworks.com> wrote:
+> >
+> > On Tue, Mar 5, 2024 at 4:47=E2=80=AFPM Adam Ford <aford173@gmail.com> w=
+rote:
+> > >
+> > > On Tue, Mar 5, 2024 at 7:51=E2=80=AFAM Adam Ford <aford173@gmail.com>=
+ wrote:
+> > > >
+> > > > On Tue, Mar 5, 2024 at 7:48=E2=80=AFAM Sumit Garg <sumit.garg@linar=
+o.org> wrote:
+> > > > >
+> > > > > Hi Adam,
+> > > > >
+> > > > > On Wed, 28 Feb 2024 at 12:29, Sumit Garg <sumit.garg@linaro.org> =
+wrote:
+> > > > > >
+> > > > > > Hi Adam,
+> > > > > >
+> > > > > > On Wed, 28 Feb 2024 at 04:42, Adam Ford <aford173@gmail.com> wr=
+ote:
+> > > > > > >
+> > > > > > > On Mon, Feb 26, 2024 at 2:05=E2=80=AFAM Sumit Garg <sumit.gar=
+g@linaro.org> wrote:
+> > > > > > > >
+> > > > > > > > Add initial support for i.MX8M{M/P} PCIe PHY. On i.MX8M{M/P=
+} SoCs PCIe
+> > > > > > > > PHY initialization moved to this standalone PHY driver.
+> > > > > > > >
+> > > > > > > > Inspired from counterpart Linux kernel v6.8-rc3 driver:
+> > > > > > > > drivers/phy/freescale/phy-fsl-imx8m-pcie.c.
+> > > > > > >
+> > > > > > > I have a PCIe device that works just fine in Linux.  I have a=
+pplied
+> > > > > > > your series an enabled the same config options as you did alo=
+ng with
+> > > > > > > some others to resolve some build issues.
+> > > > > > >
+> > > > > > > Any ideas how to address:
+> > > > > > >
+> > > > > > > nxp_imx8_pcie_phy pcie-phy@32f00000: PHY: Failed to power on
+> > > > > > > pcie-phy@32f00000: -110.
+> > > > > > >
+> > > > > > > My PHY node looks like this
+> > > > > > >
+> > > > > > > &pcie_phy {
+> > > > > > >     fsl,refclk-pad-mode =3D <IMX8_PCIE_REFCLK_PAD_INPUT>;
+> > > > > > >     clocks =3D <&pcie0_refclk>;
+> > > > > > >     clock-names =3D "ref";
+> > > > > > >     status =3D "okay";
+> > > > > > > };
+> > > > > > >
+> > > > > > > The pcie_refcllk is defined as a 100MHz fixed clock in U-Boot=
+.  clk
+> > > > > > > dump shows it to be:
+> > > > > > >
+> > > > > > > 100000000            0        |-- clock-pcie
+> > > > > > >
+> > > > > >
+> > > > > > I suppose that's an EVK board, try enabling MPCIE_3V3 regulator
+> > > > > > required for EVK board via following patch:
+> > > > > >
+> > > > > > diff --git a/drivers/pci/pcie_dw_imx.c b/drivers/pci/pcie_dw_im=
+x.c
+> > > > > > index 7856823c9188..32fd2cb05d4b 100644
+> > > > > > --- a/drivers/pci/pcie_dw_imx.c
+> > > > > > +++ b/drivers/pci/pcie_dw_imx.c
+> > > > > > @@ -17,6 +17,7 @@
+> > > > > >  #include <linux/iopoll.h>
+> > > > > >  #include <log.h>
+> > > > > >  #include <pci.h>
+> > > > > > +#include <power/regulator.h>
+> > > > > >  #include <regmap.h>
+> > > > > >  #include <reset.h>
+> > > > > >  #include <syscon.h>
+> > > > > > @@ -158,6 +159,8 @@ static int pcie_dw_imx_probe(struct udevice=
+ *dev)
+> > > > > >         struct pci_controller *hose =3D dev_get_uclass_priv(ctl=
+r);
+> > > > > >         int ret;
+> > > > > >
+> > > > > > +       regulator_autoset_by_name("MPCIE_3V3", NULL);
+> > >
+> > > I think you should search the device tree for "vpcie-supply" and
+> > > enable the corresponding regulator, because is more flexible than
+> > > hard-coding regulator names. This is also more of a standard practice=
+.
+> > >
+> > > > > > +
+> > > > > >         ret =3D imx_pcie_assert_core_reset(priv);
+> > > > > >         if (ret) {
+> > > > > >                 dev_err(dev, "failed to assert core reset\n");
+> > > > > >
+> > > > >
+> > > > > Were you able to give a retry with the above diff?
+> > > >
+> > > > Not yet, but I'll try to do it tonight.
+> > >
+> > > That didn't work for me.  I am using a Beacon Embedded kit which does
+> > > not use a regulator, so this had no impact, but I think having the
+> > > vpcie-supply regulator is a good idea.
+> > >
+> > > I'll investigate a bit more and let you know if I make any progress.
+> > >
+> >
+> > Adam and Sumit,
+> >
+> > In case it helps this series works for PCI bus scanning for the
+> > imx8mp-venice-* boards with the following patch:
+>
+> Thanks Tim for taking time to test this series. I hope you are fine
+> with me taking your below patch with you being the author.
 
-ZynqMP CG series devices only have two cpus. In this
-case the interrupt-affinity property has to adapted, because
-cpu3 and cpu4 are missing. By adding a label to the pmu fwnode the
-interrupt-affinity can be adapted in a device specific DT.
+Sumit,
 
-Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
----
- arch/arm/dts/zynqmp.dtsi | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Yes you can take that patch if you want to add it to your series - thanks!
 
-diff --git a/arch/arm/dts/zynqmp.dtsi b/arch/arm/dts/zynqmp.dtsi
-index b50b83b772..457f8e394f 100644
---- a/arch/arm/dts/zynqmp.dtsi
-+++ b/arch/arm/dts/zynqmp.dtsi
-@@ -168,7 +168,7 @@
- 		bootph-all;
- 	};
- 
--	pmu {
-+	pmu: pmu {
- 		compatible = "arm,armv8-pmuv3";
- 		interrupt-parent = <&gic>;
- 		interrupts = <GIC_SPI 143 IRQ_TYPE_LEVEL_HIGH>,
--- 
-2.30.2
+Tim
 
+>
+> > diff --git a/configs/imx8mp_venice_defconfig b/configs/imx8mp_venice_de=
+fconfig
+> > index 11b356b77856..ff7ea9811ed6 100644
+> > --- a/configs/imx8mp_venice_defconfig
+> > +++ b/configs/imx8mp_venice_defconfig
+> > @@ -12,6 +12,7 @@ CONFIG_DEFAULT_DEVICE_TREE=3D"imx8mp-venice"
+> >  CONFIG_SPL_TEXT_BASE=3D0x920000
+> >  CONFIG_TARGET_IMX8MP_VENICE=3Dy
+> >  CONFIG_OF_LIBFDT_OVERLAY=3Dy
+> > +CONFIG_DM_RESET=3Dy
+> >  CONFIG_SYS_MONITOR_LEN=3D524288
+> >  CONFIG_SPL_MMC=3Dy
+> >  CONFIG_SPL_SERIAL=3Dy
+> > @@ -21,6 +22,7 @@ CONFIG_SPL=3Dy
+> >  CONFIG_ENV_OFFSET_REDUND=3D0x3f8000
+> >  CONFIG_SPL_IMX_ROMAPI_LOADADDR=3D0x48000000
+> >  CONFIG_SYS_LOAD_ADDR=3D0x40480000
+> > +CONFIG_PCI=3Dy
+> >  CONFIG_SYS_MEMTEST_START=3D0x40000000
+> >  CONFIG_SYS_MEMTEST_END=3D0x80000000
+> >  CONFIG_LTO=3Dy
+> > @@ -65,6 +67,7 @@ CONFIG_CMD_FUSE=3Dy
+> >  CONFIG_CMD_GPIO=3Dy
+> >  CONFIG_CMD_I2C=3Dy
+> >  CONFIG_CMD_MMC=3Dy
+> > +CONFIG_CMD_PCI=3Dy
+> >  CONFIG_CMD_USB=3Dy
+> >  CONFIG_SYS_DISABLE_AUTOLOAD=3Dy
+> >  CONFIG_CMD_CACHE=3Dy
+> > @@ -86,6 +89,8 @@ CONFIG_NET_RANDOM_ETHADDR=3Dy
+> >  CONFIG_IP_DEFRAG=3Dy
+> >  CONFIG_TFTP_BLOCKSIZE=3D4096
+> >  CONFIG_SPL_DM=3Dy
+> > +CONFIG_REGMAP=3Dy
+> > +CONFIG_SYSCON=3Dy
+> >  CONFIG_CLK_COMPOSITE_CCF=3Dy
+> >  CONFIG_CLK_IMX8MP=3Dy
+> >  CONFIG_GPIO_HOG=3Dy
+> > @@ -114,7 +119,10 @@ CONFIG_FEC_MXC=3Dy
+> >  CONFIG_KSZ9477=3Dy
+> >  CONFIG_RGMII=3Dy
+> >  CONFIG_MII=3Dy
+> > +CONFIG_NVME_PCI=3Dy
+> > +CONFIG_PCIE_DW_IMX=3Dy
+> >  CONFIG_PHY_IMX8MQ_USB=3Dy
+> > +CONFIG_PHY_IMX8M_PCIE=3Dy
+> >  CONFIG_PINCTRL=3Dy
+> >  CONFIG_SPL_PINCTRL=3Dy
+> >  CONFIG_PINCTRL_IMX8M=3Dy
+> >
+> > on an imx8mp-venice-gw71xx-2x (imx8mp with miniPCIe socket using a
+> > miniPCIe to NVMe adapter)
+> > u-boot=3D> pci enum
+> > PCIE-0: Link up (Gen1-x1, Bus0)
+> > u-boot=3D> pci
+> > BusDevFun  VendorId   DeviceId   Device Class       Sub-Class
+> > _____________________________________________________________
+> > 00.00.00   0x16c3     0xabcd     Bridge device           0x04
+> > 01.00.00   0x10ec     0x5765     Mass storage controller 0x08
+> > u-boot=3D> nvme scan
+> > u-boot=3D> nvme info
+> > Device 0: Vendor: 0x10ec Rev: 0426-D00 Prod: 60272-0005
+> >             Type: Hard Disk
+> >             Capacity: 57241.8 MB =3D 55.9 GB (117231408 x 512)
+> >
+> > I also verified this works imx8mp-venice-gw74xx (imx8mp with PCIe
+> > switch to multiple miniPCIe sockets using a miniPCIe to NVMe adapter)
+> > u-boot=3D> pci enum
+> > PCIE-0: Link up (Gen1-x1, Bus0)
+> > u-boot=3D> pci
+> > BusDevFun  VendorId   DeviceId   Device Class       Sub-Class
+> > _____________________________________________________________
+> > 00.00.00   0x16c3     0xabcd     Bridge device           0x04
+> > 01.00.00   0x12d8     0x2608     Bridge device           0x04
+> > 02.01.00   0x12d8     0x2608     Bridge device           0x04
+> > 02.02.00   0x12d8     0x2608     Bridge device           0x04
+> > 02.03.00   0x12d8     0x2608     Bridge device           0x04
+> > 02.04.00   0x12d8     0x2608     Bridge device           0x04
+> > 05.00.00   0x10ec     0x5765     Mass storage controller 0x08
+> > u-boot=3D> nvme scan
+> > u-boot=3D> nvme info
+> > Device 0: Vendor: 0x10ec Rev: 0426-D00 Prod: 60272-0005
+> >             Type: Hard Disk
+> >             Capacity: 57241.8 MB =3D 55.9 GB (117231408 x 512)
+> >
+> > It looks like the imx8mp-beacon-kit has almost the same setup as the
+> > imx8mp-venice-gw74xx with the exception of you having a PCIe_nDIS gpio
+> > defined in pinctrl (used nowhere) and the gw74xx does not support
+> > CLKREQ so has 'fsl,clkreq-unsupported'.
+>
+> Ah, I see. So it turns out that it's Adam Linux kernel DTS patch [1]
+> which is missing for U-Boot DTS. This is one of the reasons why we
+> should switch to OF_UPSTREAM to start regular sync with Linux kernel
+> DTS.
+>
+> Adam,
+>
+> Can you make corresponding changes to U-Boot DTS for
+> imx8mp-beacon-kit? Or better just switch to OF_UPSTREAM instead?
+>
+> [1] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/co=
+mmit/arch/arm64?id=3D63c46b51c7995d8aeb4b44493633f4ce1dcf62bc
+>
+> >
+> > tested-by: Tim Harvey <tharvey@gateworks.com> : imx8mp-venice*
+> >
+>
+> Thanks again.
+>
+> -Sumit
+>
+> > Best regards,
+> >
+> > Tim
