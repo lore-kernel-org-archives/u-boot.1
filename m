@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B4A5C54E4A
-	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 00:04:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE4D5C54798
+	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 01:37:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C8C687D60;
-	Fri,  8 Mar 2024 01:04:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C503D87DB3;
+	Fri,  8 Mar 2024 02:37:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XDbr+tDk";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SEucXzTf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D38887D80; Fri,  8 Mar 2024 01:04:39 +0100 (CET)
-Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
- [IPv6:2001:4860:4864:20::2d])
+ id 9982A87061; Thu,  7 Mar 2024 23:36:27 +0100 (CET)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 078AE83339
- for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 01:04:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D3D7386F6E
+ for <u-boot@lists.denx.de>; Thu,  7 Mar 2024 23:36:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oa1-x2d.google.com with SMTP id
- 586e51a60fabf-22195b3a8fbso200689fac.3
- for <u-boot@lists.denx.de>; Thu, 07 Mar 2024 16:04:34 -0800 (PST)
+ spf=pass smtp.mailfrom=ivan.orlov0322@gmail.com
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-412b30be60dso2012045e9.0
+ for <u-boot@lists.denx.de>; Thu, 07 Mar 2024 14:36:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709856273; x=1710461073; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=8WpmdhQC3KMXqD/OnNVkffYCf1720asOXYrEz50/bNM=;
- b=XDbr+tDkcT5ql5JkPer+D52zjR9PctRfR5LyYSMgtbnRqk75f53GBhCqTXmoeND63S
- kk5ZopkScOzDiiNoM2v7Wck3xLRnb1hRcEsJF+5Brt7JxqO7d1nYKm/tkiTGwgGlvBgh
- FGZiPX2w3GnlXKEUSbkSbkjitE15umST6k0RI/f1Ggbt5tP5ggbSOk6KROdmR4Bo2E4T
- pTWFln5RVxbNjUyZswi+xXjCqx1NhkBTSygsaAT1E3769pReM9J+fmjPwbBIUBWVeqzd
- +1+7u5OYCevsO+jyzaLtB8E1ErsnR9cIufXyz66kTAn0oshladWuiuN5bKgQqc340gTS
- kmGg==
+ d=gmail.com; s=20230601; t=1709850984; x=1710455784; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=XIUDgwa5EN9JM6D/9cW8LV/Bhn8GFcL+J33FNXlOTfE=;
+ b=SEucXzTf4zSI4CKhve4Qkjli3iPsc0OCC4eCHSdWjFAmQ3eszWMtn1hHmyG8MBkAE4
+ PgJiKHwkJbv+q/HsqrX3v51TverVu08Qqu31VoanAIblnpi70bfD3Z8ckQKbEhqqx3xd
+ KtvP1YP9fSlUZxguH7oBWCnD4dNp0vmz40HksHxrPOgm+tksVce5W8rzvoyrXhG6mo07
+ bzeEPR7fbLKsqgm9em/aOmNpKGEQAMlzRjIcql1NaGpbxj1MSTx+iUOLtldctJiFh5kt
+ efwOpMkbUE1ONAV9Em8vmaxHzC8O964P5oLHty7JozzDVUlWeSjWp7597/TvbrI9FlNz
+ upwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709856273; x=1710461073;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=8WpmdhQC3KMXqD/OnNVkffYCf1720asOXYrEz50/bNM=;
- b=urGwa19KIuUl8bcVKKoPl7npbGiytXAx8bR4b0IxYYpa8PDph3s7Jd05bp+IdxHU3S
- IRylNVzMKyiIufBdAbU5wH8mvbwadW8XLhutq0FeZtAmDLY6FeuvA3AvFiV4twhknxnu
- WCAjrZPCyCMg5iKuGKB3afd82njfIYJK0IO+DH+UBkzKy3S/55K3ajz0NsnV45aaNUTG
- J422GEfRJqiuOwBUD5UP5Nr9S0k0hNvQqS7ZbIWBUdD9RGEa/CJ2d/FF9aHqMVUdNhCl
- Z4g2QTurUxEcbX+27L9ewHNr9agPQv/CkEtcWRle4FH3Lu/Io3yMYF+1UmW2sI8PmmPW
- 2ZSQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUAJgUs7poCP1KktDnV4JOENj8Bop3gjwBUwtOepfMqCS/8Yno7mxrefioxV1p0+VJ5gfsVQVV1NHJmDXF78xEWc3K6KA==
-X-Gm-Message-State: AOJu0YzRizyJxuKt13tGnKzrMmmDgvpVHDTvvQrGjqnbDXFcIem5cB1i
- 8qzECLsJAYn090bp65/whM3TGnrY17rIPrfS7i3oWqkA0kraVbvpwEMTO0RV/RU=
-X-Google-Smtp-Source: AGHT+IFnGtmhp+H9b8sEXHFEQzhGC/F6g0O9tkc82u62DFvLdlfScB7iK47X3KZpkuko8FgV8W6ULQ==
-X-Received: by 2002:a05:6870:724d:b0:221:1c2f:21e9 with SMTP id
- y13-20020a056870724d00b002211c2f21e9mr1473109oaf.58.1709856272891; 
- Thu, 07 Mar 2024 16:04:32 -0800 (PST)
-Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- wh13-20020a056871a68d00b002208ca7a9aesm4248713oab.57.2024.03.07.16.04.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Mar 2024 16:04:32 -0800 (PST)
-From: Sam Protsenko <semen.protsenko@linaro.org>
-To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Tom Rini <trini@konsulko.com>
-Cc: Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Michal Simek <michal.simek@amd.com>,
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
- Eugen Hristev <eugen.hristev@collabora.com>,
- Yang Xiwen <forbidden405@outlook.com>,
- Julien Masson <jmasson@baylibre.com>, u-boot@lists.denx.de
-Subject: [PATCH] clk: Propagate clk_set_rate() if CLK_SET_PARENT_RATE present
-Date: Thu,  7 Mar 2024 18:04:32 -0600
-Message-Id: <20240308000432.32369-1-semen.protsenko@linaro.org>
-X-Mailer: git-send-email 2.39.2
+ d=1e100.net; s=20230601; t=1709850984; x=1710455784;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=XIUDgwa5EN9JM6D/9cW8LV/Bhn8GFcL+J33FNXlOTfE=;
+ b=B2Sgax+CqBNMhCqXf4DIe1zT1ZSVlu2i5AZj88Geo5E4nURi/faT1i9f59XiB6Vh8L
+ kYCn9b+F/VYEPbIVOMEifTm6vw2S1hntkxixh64iOKjiEyrd9jWJw9NwV6QEActMKkt2
+ r7v42s6XNjflcCx4v3wxqmKl4es69F7V5l/12Ya6hiYVsxqngUuvcNE8RXrDktobksDI
+ 26vn2D1rpA74ehEtaaSougepJyIwm4U3CMuTaRpOg9dzi/T5cXkonyu8Pb/307u0x3QQ
+ 1jZG3m9J+aB3a+Ur+gpmwaCsC9KpDrrGXQg4YmnYkbcvTieB2jAnGDQio05MtxADkoMq
+ AkJQ==
+X-Gm-Message-State: AOJu0YyZCCIfPGtpEBBdyHa+bbySsMZ8N0448EKtKlagKsaY29BG1aTr
+ GNutuIKR0nX630QRWgTv99f2YnLabcp0aD1n5RSb+7H81eohBqxynYBlgIRq
+X-Google-Smtp-Source: AGHT+IGHX+64QPzWiWKIol16TJdkqkJE74oizWYCEDWJvYsXHavhcESGuhBhc9In8uNloKIEqsw7tA==
+X-Received: by 2002:a05:600c:4f48:b0:413:7c2:6639 with SMTP id
+ m8-20020a05600c4f4800b0041307c26639mr105285wmq.4.1709850983997; 
+ Thu, 07 Mar 2024 14:36:23 -0800 (PST)
+Received: from ?IPV6:2a01:4b00:d20e:7300:3c69:a13f:39c0:f2bc?
+ ([2a01:4b00:d20e:7300:3c69:a13f:39c0:f2bc])
+ by smtp.gmail.com with ESMTPSA id
+ co14-20020a0560000a0e00b0033e3ce48ba1sm12454664wrb.16.2024.03.07.14.36.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 07 Mar 2024 14:36:23 -0800 (PST)
+Message-ID: <05868d76-697d-4528-b4f4-52ce82c29766@gmail.com>
+Date: Thu, 7 Mar 2024 22:36:22 +0000
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] doc: board: starfive: Fix paths in the bash block
+Content-Language: en-US
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, yanhong.wang@starfivetech.com
+References: <20240304221532.368453-1-ivan.orlov0322@gmail.com>
+ <5d6b9fa0-bdac-47e6-8b2d-62ee3702227c@gmx.de>
+From: Ivan Orlov <ivan.orlov0322@gmail.com>
+In-Reply-To: <5d6b9fa0-bdac-47e6-8b2d-62ee3702227c@gmx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Fri, 08 Mar 2024 02:37:09 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,47 +96,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Sometimes clocks provided to a consumer might not have .set_rate
-operation (like gate or mux clocks), but have CLK_SET_PARENT_RATE flag
-set. In that case it's usually possible to find a parent up the tree
-which is capable of setting the rate (div, pll, etc). Implement a simple
-lookup procedure for such cases, to traverse the clock tree until
-.set_rate capable parent is found, and use that parent to actually
-change the rate. The search will stop once the first .set_rate capable
-clock is found, which is usually enough to handle most cases.
+On 3/5/24 19:52, Heinrich Schuchardt wrote:
+> On 3/4/24 23:15, Ivan Orlov wrote:
+>>  From the current documentation it is not entirely obvious where to take
+>> some of the u-boot build artifacts in order to flash them to the sd
+>> card. Extend the "Program the SD card" block by providing relative paths
+>> to the jh7110-starfive-visionfive-2.dtb and u-boot-spl.bin.normal.out
+>> files.
+>>
+>> Add "$(linux_image_dir)/" prefix to the Image.gz and initramfs.cpio.gz
+>> files in order to provide some information about where they could be
+>> taken from.
+>>
+>> Signed-off-by: Ivan Orlov <ivan.orlov0322@gmail.com>
+>> ---
+>>   doc/board/starfive/visionfive2.rst | 10 +++++-----
+>>   1 file changed, 5 insertions(+), 5 deletions(-)
+>>
+>> diff --git a/doc/board/starfive/visionfive2.rst 
+>> b/doc/board/starfive/visionfive2.rst
+>> index abda8ac21b..031d66fbfb 100644
+>> --- a/doc/board/starfive/visionfive2.rst
+>> +++ b/doc/board/starfive/visionfive2.rst
+>> @@ -103,15 +103,15 @@ Program the SD card
+>>
+> 
+>>   .. code-block:: bash
+>>
+>> -    sudo dd if=u-boot-spl.bin.normal.out of=/dev/sdb1
+>> +    sudo dd if=spl/u-boot-spl.bin.normal.out of=/dev/sdb1
+>>       sudo dd if=u-boot.itb of=/dev/sdb2
+>>
+>>       sudo mount /dev/sdb3 /mnt/
+> 
+> Following the instructions the partition in not formatted.
+> You won't be able to mount it anywhere.
+> 
+> Looking at the boot log the author FAT formatted the drive which is not
+> recommendable.
+> 
+>> -    sudo cp u-boot-spl.bin.normal.out /mnt/
+>> +    sudo cp spl/u-boot-spl.bin.normal.out /mnt/
+>>       sudo cp u-boot.itb /mnt/
+>> -    sudo cp Image.gz /mnt/
+>> -    sudo cp initramfs.cpio.gz /mnt/
+>> -    sudo cp jh7110-starfive-visionfive-2.dtb /mnt/
+>> +    sudo cp $(linux_image_dir)/Image.gz /mnt/
+>> +    sudo cp $(linux_image_dir)/initramfs.cpio.gz /mnt/
+> 
+> I have no clue why all users should copy the kernel to the root
+> partition on the SD card.
+> 
+> If you have a Linux installation on the SD-card, you want the kernel in
+> boot/. But this board boots fine without any SD-card from NVMe, USB, or
+> eMMC.
+> 
+>> +    sudo cp arch/riscv/dts/jh7110-starfive-visionfive-2.dtb /mnt/
+> 
+> Copying the U-Boot device-tree makes no sense it is already available at
+> $fdtcontroladdr. If you ever wanted to copy a device-tree, it should be
+> the one provided with the kernel.
+> 
+> This whole section is rather misleading for inexperienced users who just
+> want to boot a Linux distro on the board.
+> 
 
-Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
----
- drivers/clk/clk-uclass.c | 16 ++++++++++++++--
- 1 file changed, 14 insertions(+), 2 deletions(-)
+Hi Heinrich,
 
-diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
-index ed6e60bc4841..755f05f34669 100644
---- a/drivers/clk/clk-uclass.c
-+++ b/drivers/clk/clk-uclass.c
-@@ -571,8 +571,20 @@ ulong clk_set_rate(struct clk *clk, ulong rate)
- 		return 0;
- 	ops = clk_dev_ops(clk->dev);
- 
--	if (!ops->set_rate)
--		return -ENOSYS;
-+	/* Try to find parents which can set rate */
-+	while (!ops->set_rate) {
-+		struct clk *parent;
-+
-+		if (!(clk->flags & CLK_SET_RATE_PARENT))
-+			return -ENOSYS;
-+
-+		parent = clk_get_parent(clk);
-+		if (IS_ERR_OR_NULL(parent) || !clk_valid(parent))
-+			return -ENODEV;
-+
-+		clk = parent;
-+		ops = clk_dev_ops(clk->dev);
-+	}
- 
- 	/* get private clock struct used for cache */
- 	clk_get_priv(clk, &clkp);
+Thank you very much for the review. I agree that this documentation is 
+far from being perfect, so I will try to improve it and fix all the 
+flaws in the V2 of this patch :)
+
 -- 
-2.39.2
+Kind regards,
+Ivan Orlov
 
