@@ -4,70 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A0F2C48BF6
-	for <u-boot@archiver.kernel.org>; Thu,  7 Mar 2024 08:40:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3854C54E49
+	for <u-boot@archiver.kernel.org>; Thu,  7 Mar 2024 09:10:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1F3FE87DB9;
-	Thu,  7 Mar 2024 09:40:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=microchip.com
+	by phobos.denx.de (Postfix) with ESMTP id 2A62687E3F;
+	Thu,  7 Mar 2024 10:10:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="mZ1xAiaV";
+	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="UFD8AuXf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C5B2D87DB9; Thu,  7 Mar 2024 09:40:45 +0100 (CET)
-Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
- [68.232.154.123])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 5D89F87E6C; Thu,  7 Mar 2024 10:10:20 +0100 (CET)
+Received: from mail.thorsis.com (mail.thorsis.com [92.198.35.195])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8592487B89
- for <u-boot@lists.denx.de>; Thu,  7 Mar 2024 09:40:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5400687E06
+ for <u-boot@lists.denx.de>; Thu,  7 Mar 2024 10:10:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=microchip.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Conor.Dooley@microchip.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1709800842; x=1741336842;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=UQoWcPcSwm4klZVo1A/0S639pvQb8xeWe5OivG/Exgs=;
- b=mZ1xAiaVtRvA5O2bJUrN8rq1Q5YDaCwckWbYocReB0vodGUxvgUjoShd
- 6lTAGWcpPH0bLt/G3GY/Vj5mcNc26mRO9ECG5rP66dpV2lIFly51gBRWz
- QN8RE5AP5D6RN3esLZXC+iPo+tYsbqAbvu/RcadZcfY+X3cUW1HO4kTUy
- wPBUAjzfFQxxyne440a/f5WbVIYCs1jLAvnphu0unrnMf3zhbkropuWcM
- y6jIUfIFudlJSOuzFjfDFhqp4KDBD/NoopEyE81jgD/WW3G5rbd+bw02q
- jAbWfSle63jp+J3CB/LLBMOWBABCmzdepICXpCBhbY0MxvpYzsbud7zdK Q==;
-X-CSE-ConnectionGUID: BpxqfRJXTgODJnAdB7tOvg==
-X-CSE-MsgGUID: 5loahiuoSQyMyYxKnMM8Zw==
-X-IronPort-AV: E=Sophos;i="6.06,211,1705388400"; 
- d="asc'?scan'208";a="17871878"
-X-Amp-Result: UNKNOWN
-X-Amp-Original-Verdict: FILE UNKNOWN
-Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa2.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 07 Mar 2024 01:40:40 -0700
-Received: from chn-vm-ex01.mchp-main.com (10.10.85.143) by
- chn-vm-ex02.mchp-main.com (10.10.85.144) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35; Thu, 7 Mar 2024 01:40:19 -0700
-Received: from wendy (10.10.85.11) by chn-vm-ex01.mchp-main.com (10.10.85.143)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35 via Frontend
- Transport; Thu, 7 Mar 2024 01:40:18 -0700
-Date: Thu, 7 Mar 2024 08:39:34 +0000
-From: Conor Dooley <conor.dooley@microchip.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-CC: Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>, Leo Yu-Chi
- Liang <ycliang@andestech.com>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH 1/1] serial: move sbi_dbcn_available to .data section
-Message-ID: <20240307-strangle-magenta-a6bdc79cb6a7@wendy>
-References: <20240226163226.126288-1-heinrich.schuchardt@canonical.com>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="GU+QBTmGDYeI3F/J"
-Content-Disposition: inline
-In-Reply-To: <20240226163226.126288-1-heinrich.schuchardt@canonical.com>
+ header.from=thorsis.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
+From: Alexander Dahl <ada@thorsis.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=default;
+ t=1709802616;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=6KryHI/bkICf/7Qce3xa8QpjOYvLhUk2DEhKAgtt9Z8=;
+ b=UFD8AuXfv5/boeJxoO/AfmxnIky3CYo2nMDp7xbDECWRDM9AtaxYrvrcUHEVNeIqRmlaTI
+ LRPpppgh1tbxHZXS2QvV9hoFOJwRcnj86LHJi+8KcOgl6SqDrqj6Nd3AV7ho3qTLjiDw44
+ yIJE58yMD64G6DP8R9t4wtyA16TD6FWPeKi1o38rgOTmk8tmnPh5nGJbEraRhhgi+RkRUc
+ v+E2VJB29w0bnBuqiADEJClX4/zMaj48BFGaXX4NctTMPbIYcft24UQx1970EPXtlyD2Od
+ lgedRzKZiYis0lUhf7m8kT8LQJIHLKNZn8lJrXYVK4O/+BuadMsq41o8+rewaw==
+To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>
+Cc: Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>,
+ Eugen Hristev <eugen.hristev@collabora.com>, u-boot@lists.denx.de
+Subject: [PATCH 3/4] mtd: nand: raw: Fix (most) Kconfig indentation
+Date: Thu,  7 Mar 2024 10:10:13 +0100
+Message-Id: <20240307091014.39796-4-ada@thorsis.com>
+In-Reply-To: <20240307091014.39796-1-ada@thorsis.com>
+References: <20240307091014.39796-1-ada@thorsis.com>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,44 +62,211 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---GU+QBTmGDYeI3F/J
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+One tab in general.  One tab plus two spaces for help text.
 
-On Mon, Feb 26, 2024 at 05:32:26PM +0100, Heinrich Schuchardt wrote:
-> U-Boot SPL loads the device-tree directly behind main U-Boot overlapping
-> the .bss section. reserve_fdt() is called in board_init_f() to relocate t=
-he
-> device-tree to a safe location.
->=20
-> Debug UARTs are enabled before board_init_f(). With sbi_dbcn_available in
-> the .bss section the device-tree is corrupted when _debug_uart_init() is
-> called in the SBI serial driver. Move the variable to the .data section.
->=20
-> Link: https://bugs.launchpad.net/ubuntu/+source/u-boot/+bug/2054091
-> Fixes: dfe08374943c ("risc-v: implement DBCN based debug console")
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Signed-off-by: Alexander Dahl <ada@thorsis.com>
+---
+ drivers/mtd/nand/raw/Kconfig | 106 +++++++++++++++++------------------
+ 1 file changed, 53 insertions(+), 53 deletions(-)
 
-This also appears to fix the inconsistent boot issues that I've been
-seeing since I reported:
-https://lore.kernel.org/u-boot/20240122-finicky-ancient-797ba048f927@spud/
+diff --git a/drivers/mtd/nand/raw/Kconfig b/drivers/mtd/nand/raw/Kconfig
+index bb9994b8626..f6644899b0a 100644
+--- a/drivers/mtd/nand/raw/Kconfig
++++ b/drivers/mtd/nand/raw/Kconfig
+@@ -1,6 +1,6 @@
+-
+ menuconfig MTD_RAW_NAND
+ 	bool "Raw NAND Device Support"
++
+ if MTD_RAW_NAND
+ 
+ config SYS_NAND_SELF_INIT
+@@ -49,12 +49,12 @@ config SYS_NAND_NO_SUBPAGE_WRITE
+ 	depends on NAND_ARASAN || NAND_DAVINCI || NAND_KIRKWOOD
+ 
+ config DM_NAND_ATMEL
+-       bool "Support Atmel NAND controller with DM support"
+-       select SYS_NAND_SELF_INIT
+-       imply SYS_NAND_USE_FLASH_BBT
+-       help
+-         Enable this driver for NAND flash platforms using an Atmel NAND
+-         controller.
++	bool "Support Atmel NAND controller with DM support"
++	select SYS_NAND_SELF_INIT
++	imply SYS_NAND_USE_FLASH_BBT
++	help
++	  Enable this driver for NAND flash platforms using an Atmel NAND
++	  controller.
+ 
+ config NAND_ATMEL
+ 	bool "Support Atmel NAND controller"
+@@ -133,35 +133,35 @@ config NAND_BRCMNAND_6753
+ 	  Enable support for broadcom nand driver on bcm6753.
+ 
+ config NAND_BRCMNAND_68360
+-       bool "Support Broadcom NAND controller on bcm68360"
+-       depends on NAND_BRCMNAND && BCM6856
+-       help
+-         Enable support for broadcom nand driver on bcm68360.
++	bool "Support Broadcom NAND controller on bcm68360"
++	depends on NAND_BRCMNAND && BCM6856
++	help
++	  Enable support for broadcom nand driver on bcm68360.
+ 
+ config NAND_BRCMNAND_6838
+-       bool "Support Broadcom NAND controller on bcm6838"
+-       depends on NAND_BRCMNAND && ARCH_BMIPS && SOC_BMIPS_BCM6838
+-       help
+-         Enable support for broadcom nand driver on bcm6838.
++	bool "Support Broadcom NAND controller on bcm6838"
++	depends on NAND_BRCMNAND && ARCH_BMIPS && SOC_BMIPS_BCM6838
++	help
++	  Enable support for broadcom nand driver on bcm6838.
+ 
+ config NAND_BRCMNAND_6858
+-       bool "Support Broadcom NAND controller on bcm6858"
+-       depends on NAND_BRCMNAND && BCM6858
+-       help
+-         Enable support for broadcom nand driver on bcm6858.
++	bool "Support Broadcom NAND controller on bcm6858"
++	depends on NAND_BRCMNAND && BCM6858
++	help
++	  Enable support for broadcom nand driver on bcm6858.
+ 
+ config NAND_BRCMNAND_63158
+-       bool "Support Broadcom NAND controller on bcm63158"
+-       depends on NAND_BRCMNAND && BCM63158
+-       help
+-         Enable support for broadcom nand driver on bcm63158.
++	bool "Support Broadcom NAND controller on bcm63158"
++	depends on NAND_BRCMNAND && BCM63158
++	help
++	  Enable support for broadcom nand driver on bcm63158.
+ 
+ config NAND_BRCMNAND_IPROC
+-       bool "Support Broadcom NAND controller on the iproc family"
+-       depends on NAND_BRCMNAND
+-       help
+-         Enable support for broadcom nand driver on the Broadcom
+-         iproc family such as Northstar (BCM5301x, BCM4708...)
++	bool "Support Broadcom NAND controller on the iproc family"
++	depends on NAND_BRCMNAND
++	help
++	  Enable support for broadcom nand driver on the Broadcom
++	  iproc family such as Northstar (BCM5301x, BCM4708...)
+ 
+ config NAND_DAVINCI
+ 	bool "Support TI Davinci NAND controller"
+@@ -413,10 +413,10 @@ config NAND_VF610_NFC
+ if NAND_VF610_NFC
+ 
+ config NAND_VF610_NFC_DT
+-        bool "Support Vybrid's vf610 NAND controller as a DT device"
+-        depends on OF_CONTROL && DM_MTD
+-        help
+-          Enable the driver for Vybrid's vf610 NAND flash on platforms
++	bool "Support Vybrid's vf610 NAND controller as a DT device"
++	depends on OF_CONTROL && DM_MTD
++	help
++	  Enable the driver for Vybrid's vf610 NAND flash on platforms
+ 	  using device tree.
+ 
+ choice
+@@ -472,11 +472,11 @@ config NAND_SUNXI
+ 	select SPL_NAND_SUPPORT
+ 	select SPL_SYS_NAND_SELF_INIT
+ 	imply CMD_NAND
+-	---help---
+-	Enable support for NAND. This option enables the standard and
+-	SPL drivers.
+-	The SPL driver only supports reading from the NAND using DMA
+-	transfers.
++	help
++	  Enable support for NAND. This option enables the standard and
++	  SPL drivers.
++	  The SPL driver only supports reading from the NAND using DMA
++	  transfers.
+ 
+ if NAND_SUNXI
+ 
+@@ -577,16 +577,16 @@ config NAND_OCTEONTX
+ 	select SYS_NAND_SELF_INIT
+ 	imply CMD_NAND
+ 	help
+-	 This enables Nand flash controller hardware found on the OcteonTX
+-	 processors.
++	  This enables Nand flash controller hardware found on the OcteonTX
++	  processors.
+ 
+ config NAND_OCTEONTX_HW_ECC
+ 	bool "Support Hardware ECC for OcteonTX NAND controller"
+ 	depends on NAND_OCTEONTX
+ 	default y
+ 	help
+-	 This enables Hardware BCH engine found on the OcteonTX processors to
+-	 support ECC for NAND flash controller.
++	  This enables Hardware BCH engine found on the OcteonTX processors to
++	  support ECC for NAND flash controller.
+ 
+ config NAND_STM32_FMC2
+ 	bool "Support for NAND controller on STM32MP SoCs"
+@@ -751,37 +751,37 @@ config SYS_NAND_BAD_BLOCK_POS
+ config SYS_NAND_U_BOOT_LOCATIONS
+ 	bool "Define U-Boot binaries locations in NAND"
+ 	help
+-	Enable CONFIG_SYS_NAND_U_BOOT_OFFS though Kconfig.
+-	This option should not be enabled when compiling U-Boot for boards
+-	defining CONFIG_SYS_NAND_U_BOOT_OFFS in their include/configs/<board>.h
+-	file.
++	  Enable CONFIG_SYS_NAND_U_BOOT_OFFS though Kconfig.
++	  This option should not be enabled when compiling U-Boot for boards
++	  defining CONFIG_SYS_NAND_U_BOOT_OFFS in their include/configs/<board>.h
++	  file.
+ 
+ config SYS_NAND_U_BOOT_OFFS
+ 	hex "Location in NAND to read U-Boot from"
+ 	default 0x800000 if NAND_SUNXI
+ 	depends on SYS_NAND_U_BOOT_LOCATIONS
+ 	help
+-	Set the offset from the start of the nand where u-boot should be
+-	loaded from.
++	  Set the offset from the start of the nand where u-boot should be
++	  loaded from.
+ 
+ config SYS_NAND_U_BOOT_OFFS_REDUND
+ 	hex "Location in NAND to read U-Boot from"
+ 	default SYS_NAND_U_BOOT_OFFS
+ 	depends on SYS_NAND_U_BOOT_LOCATIONS
+ 	help
+-	Set the offset from the start of the nand where the redundant u-boot
+-	should be loaded from.
++	  Set the offset from the start of the nand where the redundant u-boot
++	  should be loaded from.
+ 
+ config SPL_NAND_AM33XX_BCH
+ 	bool "Enables SPL-NAND driver which supports ELM based"
+ 	depends on SPL_NAND_SUPPORT && NAND_OMAP_GPMC && !OMAP34XX
+ 	default y
+-        help
++	help
+ 	  Hardware ECC correction. This is useful for platforms which have ELM
+ 	  hardware engine and use NAND boot mode.
+ 	  Some legacy platforms like OMAP3xx do not have in-built ELM h/w engine,
+ 	  so those platforms should use CONFIG_SPL_NAND_SIMPLE for enabling
+-          SPL-NAND driver with software ECC correction support.
++	  SPL-NAND driver with software ECC correction support.
+ 
+ config SPL_NAND_DENALI
+ 	bool "Support Denali NAND controller for SPL"
+@@ -810,6 +810,6 @@ config SYS_NAND_HW_ECC_OOBFIRST
+ 	bool "In SPL, read the OOB first and then the data from NAND"
+ 	depends on SPL_NAND_SIMPLE
+ 
+-endif
++endif	# if SPL
+ 
+-endif   # if NAND
++endif	# if MTD_RAW_NAND
+-- 
+2.39.2
 
-Tested-by: Conor Dooley <conor.dooley@microchip.com>
-
-Thanks,
-Conor.
-
-
---GU+QBTmGDYeI3F/J
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZel9RgAKCRB4tDGHoIJi
-0h9CAP9xufWglpaKoIlfAJgu9OPrrGaMC7nK5hGA06VDxhKn0QEA5/2yICcD73my
-g9u4YHWHsL95aPBaoqMbKoiNkfCUCgo=
-=Qpde
------END PGP SIGNATURE-----
-
---GU+QBTmGDYeI3F/J--
