@@ -4,75 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D176C54798
-	for <u-boot@archiver.kernel.org>; Thu,  7 Mar 2024 22:55:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A5B5C54798
+	for <u-boot@archiver.kernel.org>; Thu,  7 Mar 2024 23:03:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C65A87DB3;
-	Thu,  7 Mar 2024 23:55:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E71A28785A;
+	Fri,  8 Mar 2024 00:03:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uhNHUEHN";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="J8iLc83Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 38C1887D91; Thu,  7 Mar 2024 23:55:08 +0100 (CET)
-Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
- [IPv6:2607:f8b0:4864:20::1132])
+ id B87ED87B82; Fri,  8 Mar 2024 00:03:30 +0100 (CET)
+Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
+ [IPv6:2607:f8b0:4864:20::232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3FDCF87B82
- for <u-boot@lists.denx.de>; Thu,  7 Mar 2024 23:55:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F300877AF
+ for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 00:03:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-609f4d8551eso9055137b3.1
- for <u-boot@lists.denx.de>; Thu, 07 Mar 2024 14:55:04 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
+Received: by mail-oi1-x232.google.com with SMTP id
+ 5614622812f47-3c1a2f7e302so120702b6e.0
+ for <u-boot@lists.denx.de>; Thu, 07 Mar 2024 15:03:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709852102; x=1710456902; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=kkl1uZn7JZishEH62SJ9aWpOHu75KX0hROz12UbIT4k=;
- b=uhNHUEHNmzBHE+D08GKIbg97IIn340bGnd8R70DpsAjepK5odWM+hoSO3FkIjaNT/P
- F2sTjIw5c97eQ9Rxy5BAbGF3Xfy3dS/PMwNYyk/3cHIj/kxauxIL5I1hXiRqwHisZrG/
- qJmebZRFWaqOrGWqSTxRSpzD8fpP5QtxVFWMfQS8cyfgOan9G5zdTdUIIgYjjQihdFqL
- Owt7YzBbm1MBHljEhVqzRd4zlrBuhHPHqBPHT6GWItHi8nZ7EhDBKpbzL/sLiugG7GPg
- vGJ/+cdkzMw+WHdS6TYkBjXYsU6iBHJiYmd56yPTxmHFcoVDWNBQhMeHrm6NOhQ1Hhfu
- YxcA==
+ d=gmail.com; s=20230601; t=1709852606; x=1710457406; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=1ZmRqjAczgW2hdpzd5u8UGrrTL6VimYDhMzPtH/yuuo=;
+ b=J8iLc83ZVEJWoaUHT0lkSTlLu+m88j5hGB4Y078y/BByjMcpBoYm6Zh6d9q3I/K6T0
+ AGdPRHpRA3iIUe0e8wG0lYk1wEGa07CA0+bsM6Nx2CYqvjNEzcyE7UgVekMtAK2YBfjH
+ kQV6Yk5mQakYutZtIDme4GWg9jTRGFZwYI+d6EDrFfsem2dqX79VWyQY945Bq+Pb+1WR
+ R6i61mGs9BfbWEJ3XE7AFE//2vN9Hwhu4I2NiYA68+zaLFqj/6qn1Ac/492ze5kqb3kS
+ udrNhrFKQLmHzQvKPb+x0V87wPAWlNjYMoeekipfX2oN7mvmt1DmqGLOaAif4WijWwD/
+ 6KJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709852102; x=1710456902;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=kkl1uZn7JZishEH62SJ9aWpOHu75KX0hROz12UbIT4k=;
- b=q8E2CJPfdcH1MZiteu0eF8kQtnDGkdD4l6Kluu60Nrh6y/iq2ONEgGEjgaC8qzYhvg
- +HCxjXrLneU1z6OpdOzjoVpIvrlME3j9XTG3Y4NzoxiiPgeebyNeO44yR0deMxZsOFbw
- fdEeQlMAhIERNNysqtqoOifE5QmbwKFxQpQ3sIf0vEDsxfwS5weWu5KtHuXJCy/UQbgs
- kzEePf//Pl2pqsHVvHbYNIZrLMcJsl92XTWsZeeeo/KhEEJ04hoq189Mccn/evP9jn9U
- R3NXzW74pPHA95N+XMsOgBbtO6gmltAW/npXqrmut417GGbZ58aVbJs7kS5eY27Imax5
- i5lg==
-X-Gm-Message-State: AOJu0Ywd6WcDbbpQz+zd+cZidQjr6ar4YCO+O5MjrtP/WCk7QliOg2EO
- nOQWcGBDwM0hr3Kp4MJeK8kuDZPVGUWmYdjNshbsQKFbWBL4wwWMRKrnjBr3gLvK5snXS9CHBK4
- /zyw1S/LmyrqbYw4pti5cFvrFDcNHgPGIHlNLSw==
-X-Google-Smtp-Source: AGHT+IENfvWFqdteN9Wy4CNRo89jLMZfHdgHOAvUdwwZNjFBmM5yD4j3eM0pP+XhnHsxYRYhFqIqnMRYZH0FtFtV/OA=
-X-Received: by 2002:a25:1ed5:0:b0:dcd:9a9b:8d7e with SMTP id
- e204-20020a251ed5000000b00dcd9a9b8d7emr2117903ybe.9.1709852102305; Thu, 07
- Mar 2024 14:55:02 -0800 (PST)
+ d=1e100.net; s=20230601; t=1709852606; x=1710457406;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=1ZmRqjAczgW2hdpzd5u8UGrrTL6VimYDhMzPtH/yuuo=;
+ b=vekltbPOdHohH9VpOfdRkSdo85e4zXL9BwpJ6kunEPnL1m++ro25FuuSlJRWBcwhNs
+ XhcNfXwmkA2Dp+HjHEgSLErkcVl4wDmhBjHQOo+fciWAA0pqCQn1LKthswxqz2imS1JL
+ Sc23CQ7n+WdHXZsDHsiMZXtuLA2kER8rdvgqC6/pPMQ2b8zR4pCEZuJ/KDpqbhRXSP6W
+ zgC7sgyoFh9BH33fiQTF9HtOUO58C4CTMMYiqgoiDkmvB/dGh9/R9c1piUbXbuaev3H8
+ UaC3zNBfL5zrGPALN4P00taIAFov8tKQYj8qBS0BEe6UKdak54L01GFMCEqrlYdL7uoa
+ 2jZQ==
+X-Gm-Message-State: AOJu0YyGEPRahQnjXBsjw5Le5+AKZJka2In9KNafnd53bNOLjQrBfSf5
+ d3AYLhCDrvyVZgpQY8d0k/9S5kh5rE4pr5UpgMAXfX1/cg9fht/Dlc33uPXUJZa+41w6WNCJ2Ib
+ tr2peAeExspyBmTx3tGWxN807AOM=
+X-Google-Smtp-Source: AGHT+IE3IvkkEnKORp/xRPhADlIi/Q6glYJJc4alm1Fq9cxxoaE0zOPE4AKA5SbfiCLe9XPYdy8eeiV7l4rPfFT4GgQ=
+X-Received: by 2002:a05:6808:2390:b0:3c2:fa1:332b with SMTP id
+ bp16-20020a056808239000b003c20fa1332bmr12115193oib.14.1709852605767; Thu, 07
+ Mar 2024 15:03:25 -0800 (PST)
 MIME-Version: 1.0
-References: <20240307161711.3177729-1-colin.mcallister@garmin.com>
- <20240307221030.3685767-1-colin.mcallister@garmin.com>
- <20240307221030.3685767-2-colin.mcallister@garmin.com>
-In-Reply-To: <20240307221030.3685767-2-colin.mcallister@garmin.com>
-From: Sam Protsenko <semen.protsenko@linaro.org>
-Date: Thu, 7 Mar 2024 16:54:51 -0600
-Message-ID: <CAPLW+4mBk-4_FsVF27FD+a=W3-wfKrDr4vjjeZ7Y8nT2mnuOwQ@mail.gmail.com>
-Subject: Re: [PATCH v2 1/2] android_ab: Add missing semicolon
-To: Colin McAllister <colin.mcallister@garmin.com>
-Cc: u-boot@lists.denx.de, JPEWhacker@gmail.com, sjg@chromium.org
+References: <20240303130122.29983-1-heinrich.schuchardt@canonical.com>
+ <20240303130122.29983-4-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240303130122.29983-4-heinrich.schuchardt@canonical.com>
+From: E Shattow <lucent@gmail.com>
+Date: Thu, 7 Mar 2024 15:03:14 -0800
+Message-ID: <CANV2PTMcS800x8OTuDbv8orqUD=-frNpa+0dHu4=L__D_Rmk_g@mail.gmail.com>
+Subject: Re: [RFC 3/5] board: starfive: support Milk-V Mars board
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,51 +87,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Mar 7, 2024 at 4:11=E2=80=AFPM Colin McAllister
-<colin.mcallister@garmin.com> wrote:
->
-> Found a missing semicolon in code protected by a #if that will never
-> evaluate to true due to a separate issue. Fixing this issue before
-> addressing the #if.
->
-> Signed-off-by: Colin McAllister <colin.mcallister@garmin.com>
-> Cc: Joshua Watt <JPEWhacker@gmail.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> ---
->  boot/android_ab.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/boot/android_ab.c b/boot/android_ab.c
-> index c9df6d2b4b..9a3d15ec60 100644
-> --- a/boot/android_ab.c
-> +++ b/boot/android_ab.c
-> @@ -221,7 +221,7 @@ int ab_select_slot(struct blk_desc *dev_desc, struct =
-disk_partition *part_info,
->  #if ANDROID_AB_BACKUP_OFFSET
->                 crc32_le =3D ab_control_compute_crc(backup_abc);
->                 if (backup_abc->crc32_le !=3D crc32_le) {
-> -                       log_err("ANDROID: Invalid backup CRC-32 ")
-> +                       log_err("ANDROID: Invalid backup CRC-32 ");
+On Sun, Mar 3, 2024 at 5:02=E2=80=AFAM Heinrich Schuchardt <
+heinrich.schuchardt@canonical.com> wrote:
+...
 
-Good catch! Wonder why there is also a trailing space in the end of
-the string. Anyways, I think this patch deserves "Fixes:" tag, would
-you mind adding it? Other than that:
+> * The EEPROM is atmel,24c02 according to the vendor U-Boot.
+>
+...
 
-Reviewed-by: Sam Protsenko <semen.protsenko@linaro.org>
-
->                         log_err("expected %.8x, found %.8x),",
->                                 crc32_le, backup_abc->crc32_le);
->  #endif
-> --
-> 2.43.2
->
->
-> ________________________________
->
-> CONFIDENTIALITY NOTICE: This email and any attachments are for the sole u=
-se of the intended recipient(s) and contain information that may be Garmin =
-confidential and/or Garmin legally privileged. If you have received this em=
-ail in error, please notify the sender by reply email and delete the messag=
-e. Any disclosure, copying, distribution or use of this communication (incl=
-uding attachments) by someone other than the intended recipient is prohibit=
-ed. Thank you.
+The same vendor (Milk-V) U-Boot change is present on their branch for Mars
+CM Lite (which despite the naming has more in common with Pine64 Star64
+than Mars); However on visual inspection the silkscreen markings are for
+24c04. See: [Photo flatbed scans of Mars CM Lite 4GB rev 1.01](
+https://github.com/geerlingguy/sbc-reviews/issues/22#issuecomment-187247860=
+5).
+Can this be determined at runtime, or I must trust that this is not a
+wrongly marked chip?
