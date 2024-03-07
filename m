@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BB8AC54E49
-	for <u-boot@archiver.kernel.org>; Thu,  7 Mar 2024 17:13:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6D89C54798
+	for <u-boot@archiver.kernel.org>; Thu,  7 Mar 2024 17:51:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B54AF87F07;
-	Thu,  7 Mar 2024 18:13:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id EA87C87D66;
+	Thu,  7 Mar 2024 18:51:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Qq1N2PVC";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="h4ffRjUj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0522787E89; Thu,  7 Mar 2024 18:13:16 +0100 (CET)
-Received: from mail-qt1-x832.google.com (mail-qt1-x832.google.com
- [IPv6:2607:f8b0:4864:20::832])
+ id 55B0B87D80; Thu,  7 Mar 2024 18:51:02 +0100 (CET)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 922C087DE5
- for <u-boot@lists.denx.de>; Thu,  7 Mar 2024 18:13:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9A339876A4
+ for <u-boot@lists.denx.de>; Thu,  7 Mar 2024 18:50:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x832.google.com with SMTP id
- d75a77b69052e-42e29149883so5547851cf.2
- for <u-boot@lists.denx.de>; Thu, 07 Mar 2024 09:13:13 -0800 (PST)
+ spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-33e73f04309so57071f8f.0
+ for <u-boot@lists.denx.de>; Thu, 07 Mar 2024 09:50:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1709831592; x=1710436392; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=AElWVaeiYIoIPNiGwU3ZPpuCdFGd/RAYLjTI+8yvK8Q=;
- b=Qq1N2PVCW/73P60QLONN1/TV3Jf5Steg9ngGQTssgTzRAzNlFdjXTZHcY1RIsDWJPo
- JYiouhz064DjHtv/rntSTvPTxZtDW95sq8ny5Mg8Fw3S2wHWvB3p5F4ojPn+Ofq4vLgD
- ydgjvGg/q0nd7WfG8aiLlbhGHC45QIenVmmD8=
+ d=gmail.com; s=20230601; t=1709833859; x=1710438659; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=2V9YfEcN6gV7PfiR2Zryuiq4Zodfvt1iIGpn0Se0VCc=;
+ b=h4ffRjUj0MPQJQRsq7oSdARHSr9WJcjgXyExHKSIwmmIs8a+B7ngZnKUBA1e2QLehM
+ JxByBjpRSwztdeTOqpEz3VL1i2aXyHENq7M/Zh2UbhRFQLhgJgAC6gtQV/rQ1NSS7Hgn
+ YbFvsIOOg9MKEoC09+Ukc6hAsgax/P+N7AL09nClckVAFNgKYJvc6EaQMbpO2LXSf8FD
+ bI8J3i3E89YZrZLUqBmT16WEXkYkuHPImb4owe/yD9bppZuomkaZe5cH4N2Iox/zAC8V
+ R0FRFomxPOZYAHZRuNUQe9x6CWGaQmTB+ImFMkqGKtGWxyyfU5Vg18ZIjEbfXheqE50/
+ kYpA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709831592; x=1710436392;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=AElWVaeiYIoIPNiGwU3ZPpuCdFGd/RAYLjTI+8yvK8Q=;
- b=TNOg0ohEpMs7bmdvUFvS79UBL7s5bc+fXTguZRbnaryuaQHCQoGYv2uXjF+tEAcoB3
- j083Zt+DutzNvb2rr/iEa3RomuXVsbT4TaNltg/E4Lae9xgPuWFK+n/Zugqm57FR9H5t
- 6WmXMxDHniRDee8iybelEqZLO/7QznQDn9v2DLvr57+28BJjU2WLoSwRB2JAz+jL7Mrz
- bZb+XWBnwkDHlZSkPCujormxR08Wta0BmaID8iPYoM/M+ma9Zeny8mkoZv4qPelNsP3s
- RXRoDeq8It0YLUwIvEbTLomKvil26K495B9isHQVvkpZIbsc0yvqMoF+a0IrIH1o/ASv
- GQlw==
-X-Gm-Message-State: AOJu0YwI20sJcU9CKdf4LolC23krMNVyVbUApSk9tuF4iQ/xF/g+SjFa
- D7th9N/yloVKryvKij2ALwf8m6YJs/D3HG4iyD5EVJqALDq+Z7nYXAJ2yjRlXmQ=
-X-Google-Smtp-Source: AGHT+IFHXKDsY3lnjcJHkuQM0hcnkiZnTgPzlYuwrK3ShUg95fxbvTl6r1PuUtown/qEAAzOY23k+Q==
-X-Received: by 2002:a05:622a:2cc:b0:42e:c4d6:8861 with SMTP id
- a12-20020a05622a02cc00b0042ec4d68861mr10187731qtx.54.1709831562491; 
- Thu, 07 Mar 2024 09:12:42 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-007f-0000-0000-0000-1001.res6.spectrum.com.
- [2603:6081:7b00:7f::1001]) by smtp.gmail.com with ESMTPSA id
- k19-20020ac85fd3000000b0042eeddf4e42sm4666355qta.70.2024.03.07.09.12.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Mar 2024 09:12:42 -0800 (PST)
-Date: Thu, 7 Mar 2024 12:12:40 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Wadim Egorov <w.egorov@phytec.de>
-Cc: u-boot@lists.denx.de, nm@ti.com, upstream@lists.phytec.de,
-	d-gole@ti.com
-Subject: Re: [PATCH v3 2/2] doc: board: phytec: Add phyCORE-AM64x
-Message-ID: <20240307171240.GP1523872@bill-the-cat>
-References: <20240228084217.935848-1-w.egorov@phytec.de>
- <20240228084217.935848-3-w.egorov@phytec.de>
+ d=1e100.net; s=20230601; t=1709833859; x=1710438659;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=2V9YfEcN6gV7PfiR2Zryuiq4Zodfvt1iIGpn0Se0VCc=;
+ b=Yk0D31JQo3vtffSoxoIpuxRv/ZFpO3gJCmuzHy3ljh/3N54XP9HaI0QeCAAHwGuyGS
+ JrERrF8VhSWzz4N1pwzbkr7PhXXsWIf0cjbQvM5p1CFMoTyeJ16OG02wHlizd4OZSnCZ
+ UvyQl6qty2lQNyhCFqS4cKSPxymqXxzDSx7A+UwCq6iaHQdJyW56T2iyr8aof272WnbG
+ 5puoLhZjSeivMKhCtl5KU52PBrPWOCHLg2H7/l2mHx8m/Sv497pcnHN4YjFzHl/XuS83
+ Abt7WajRsH0fXDD08Y7Y+D7JexqtRZyhms8JDmsLxlUpAhkjOBXiIO8m3iyoE05p23Zp
+ rLZg==
+X-Gm-Message-State: AOJu0YzjlkeHf3Y0q1IMNS2uRshlDBJxdKGE3Wv8pBxuq7/iRUxVn1+b
+ ktEKBqe2X6Bhw87EacAGWy+jATJpVTkJJC9+y7ZM2dfPdIxbLLXcX01CBwwEboGqRluXr4VNq01
+ tZ+vWa0uZiEJA1x0PVE5YAWfzi6A=
+X-Google-Smtp-Source: AGHT+IF18qT1UPTevOdzGw4yrqtMmYDrNHvdSJgwRRWKKp+hGYrSgvzcEPDmt7N+/KzysAPbFgzaV3hfXd4NlJM5Zgw=
+X-Received: by 2002:a05:6000:1050:b0:33d:9d49:754d with SMTP id
+ c16-20020a056000105000b0033d9d49754dmr1862223wrx.4.1709833858692; Thu, 07 Mar
+ 2024 09:50:58 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="s/lhfXZ0CybGwvss"
-Content-Disposition: inline
-In-Reply-To: <20240228084217.935848-3-w.egorov@phytec.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20240307161711.3177729-1-colin.mcallister@garmin.com>
+ <20240307161711.3177729-3-colin.mcallister@garmin.com>
+In-Reply-To: <20240307161711.3177729-3-colin.mcallister@garmin.com>
+From: Igor Opaniuk <igor.opaniuk@gmail.com>
+Date: Thu, 7 Mar 2024 18:50:47 +0100
+Message-ID: <CAByghJYFi0Af5YcqZ2iKyMpU6Jmdn1gScaK=GT0Zfw3-89Y+ag@mail.gmail.com>
+Subject: Re: [PATCH 2/2] android_ab: Fix ANDROID_AB_BACKUP_OFFSET
+To: Colin McAllister <colin.mcallister@garmin.com>
+Cc: u-boot@lists.denx.de, JPEWhacker@gmail.com, sjg@chromium.org, 
+ Sam Protsenko <semen.protsenko@linaro.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,40 +90,170 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hello Colin,
 
---s/lhfXZ0CybGwvss
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
++CC Mattijs, Sam
 
-On Wed, Feb 28, 2024 at 09:42:17AM +0100, Wadim Egorov wrote:
+On Thu, Mar 7, 2024 at 5:19=E2=80=AFPM Colin McAllister <colin.mcallister@g=
+armin.com>
+wrote:
 
-> Add documentation for PHYTEC phyCORE-AM64x SoM.
->=20
-> Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
-> Reviewed-by: Dhruva Gole <d-gole@ti.com>
+> Currently, setting CONFIG_AB_BACKUP_OFFSET in a target's defconfig will
+> not actually enable the #if protected code in android_ab.c. This is
+> because "CONFIG_" should have been prepended to the config macro, or the
+> macros defined in kconfig.h could have been used.
+>
+> Each use of AB_BACKUP_OFFSET is now wrapped within CONFIG_VAL().
+>
+> Signed-off-by: Colin McAllister <colin.mcallister@garmin.com>
+> Cc: Joshua Watt <JPEWhacker@gmail.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> ---
+>  boot/android_ab.c | 22 +++++++++++-----------
+>  1 file changed, 11 insertions(+), 11 deletions(-)
+>
+> diff --git a/boot/android_ab.c b/boot/android_ab.c
+> index 9a3d15ec60..a80040749d 100644
+> --- a/boot/android_ab.c
+> +++ b/boot/android_ab.c
+> @@ -191,7 +191,7 @@ int ab_select_slot(struct blk_desc *dev_desc, struct
+> disk_partition *part_info,
+>         int slot, i, ret;
+>         bool store_needed =3D false;
+>         char slot_suffix[4];
+> -#if ANDROID_AB_BACKUP_OFFSET
+> +#if CONFIG_VAL(ANDROID_AB_BACKUP_OFFSET)
+>         struct bootloader_control *backup_abc =3D NULL;
+>  #endif
+>
+> @@ -205,9 +205,9 @@ int ab_select_slot(struct blk_desc *dev_desc, struct
+> disk_partition *part_info,
+>                 return ret;
+>         }
+>
+> -#if ANDROID_AB_BACKUP_OFFSET
+> +#if CONFIG_VAL(ANDROID_AB_BACKUP_OFFSET)
+>         ret =3D ab_control_create_from_disk(dev_desc, part_info, &backup_=
+abc,
+> -                                         ANDROID_AB_BACKUP_OFFSET);
+> +
+>  CONFIG_VAL(ANDROID_AB_BACKUP_OFFSET));
+>         if (ret < 0) {
+>                 free(abc);
+>                 return ret;
+> @@ -218,7 +218,7 @@ int ab_select_slot(struct blk_desc *dev_desc, struct
+> disk_partition *part_info,
+>         if (abc->crc32_le !=3D crc32_le) {
+>                 log_err("ANDROID: Invalid CRC-32 (expected %.8x, found
+> %.8x),",
+>                         crc32_le, abc->crc32_le);
+> -#if ANDROID_AB_BACKUP_OFFSET
+> +#if CONFIG_VAL(ANDROID_AB_BACKUP_OFFSET)
+>                 crc32_le =3D ab_control_compute_crc(backup_abc);
+>                 if (backup_abc->crc32_le !=3D crc32_le) {
+>                         log_err("ANDROID: Invalid backup CRC-32 ");
+> @@ -230,13 +230,13 @@ int ab_select_slot(struct blk_desc *dev_desc, struc=
+t
+> disk_partition *part_info,
+>
+>                         ret =3D ab_control_default(abc);
+>                         if (ret < 0) {
+> -#if ANDROID_AB_BACKUP_OFFSET
+> +#if CONFIG_VAL(ANDROID_AB_BACKUP_OFFSET)
+>                                 free(backup_abc);
+>  #endif
+>                                 free(abc);
+>                                 return -ENODATA;
+>                         }
+> -#if ANDROID_AB_BACKUP_OFFSET
+> +#if CONFIG_VAL(ANDROID_AB_BACKUP_OFFSET)
+>                 } else {
+>                         /*
+>                          * Backup is valid. Copy it to the primary
+> @@ -249,7 +249,7 @@ int ab_select_slot(struct blk_desc *dev_desc, struct
+> disk_partition *part_info,
+>
+>         if (abc->magic !=3D BOOT_CTRL_MAGIC) {
+>                 log_err("ANDROID: Unknown A/B metadata: %.8x\n",
+> abc->magic);
+> -#if ANDROID_AB_BACKUP_OFFSET
+> +#if CONFIG_VAL(ANDROID_AB_BACKUP_OFFSET)
+>                 free(backup_abc);
+>  #endif
+>                 free(abc);
+> @@ -259,7 +259,7 @@ int ab_select_slot(struct blk_desc *dev_desc, struct
+> disk_partition *part_info,
+>         if (abc->version > BOOT_CTRL_VERSION) {
+>                 log_err("ANDROID: Unsupported A/B metadata version:
+> %.8x\n",
+>                         abc->version);
+> -#if ANDROID_AB_BACKUP_OFFSET
+> +#if CONFIG_VAL(ANDROID_AB_BACKUP_OFFSET)
+>                 free(backup_abc);
+>  #endif
+>                 free(abc);
+> @@ -338,7 +338,7 @@ int ab_select_slot(struct blk_desc *dev_desc, struct
+> disk_partition *part_info,
+>                 abc->crc32_le =3D ab_control_compute_crc(abc);
+>                 ret =3D ab_control_store(dev_desc, part_info, abc, 0);
+>                 if (ret < 0) {
+> -#if ANDROID_AB_BACKUP_OFFSET
+> +#if CONFIG_VAL(ANDROID_AB_BACKUP_OFFSET)
+>                         free(backup_abc);
+>  #endif
+>                         free(abc);
+> @@ -346,14 +346,14 @@ int ab_select_slot(struct blk_desc *dev_desc, struc=
+t
+> disk_partition *part_info,
+>                 }
+>         }
+>
+> -#if ANDROID_AB_BACKUP_OFFSET
+> +#if CONFIG_VAL(ANDROID_AB_BACKUP_OFFSET)
+>         /*
+>          * If the backup doesn't match the primary, write the primary
+>          * to the backup offset
+>          */
+>         if (memcmp(backup_abc, abc, sizeof(*abc)) !=3D 0) {
+>                 ret =3D ab_control_store(dev_desc, part_info, abc,
+> -                                      ANDROID_AB_BACKUP_OFFSET);
+> +
+> CONFIG_VAL(ANDROID_AB_BACKUP_OFFSET));
+>                 if (ret < 0) {
+>                         free(backup_abc);
+>                         free(abc);
+>
 
-Applied to u-boot/next, thanks!
+Thanks for the patch. The only suggestion: I see no reason in wrapping it i=
+n
+preprocessor conditionals (in this particular case), better to use C
+conditionals instead (with CONFIG_VAL macro) as explained in [1].
 
+-
+> 2.43.2
+>
+>
+> ________________________________
+>
+> CONFIDENTIALITY NOTICE: This email and any attachments are for the sole
+> use of the intended recipient(s) and contain information that may be Garm=
+in
+> confidential and/or Garmin legally privileged. If you have received this
+> email in error, please notify the sender by reply email and delete the
+> message. Any disclosure, copying, distribution or use of this communicati=
+on
+> (including attachments) by someone other than the intended recipient is
+> prohibited. Thank you.
+>
+
+[1]
+https://www.kernel.org/doc/html/latest/process/coding-style.html#conditiona=
+l-compilation
 --=20
-Tom
+Best regards - Atentamente - Meilleures salutations
 
---s/lhfXZ0CybGwvss
-Content-Type: application/pgp-signature; name="signature.asc"
+Igor Opaniuk
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXp9YgACgkQFHw5/5Y0
-tyz+Zwv/Y12EnbJ67VRTFfXgBdWqNP5WD++6vGB6W9Mb0CxpU0Fs0pfCmdI/qhIX
-KrT/vFRI7AxYQgttprBTUVhzxlMr5vxa7ofN+jZctvKxeXsOtNK3hfSjq066zbUM
-PWhT5SFOmIHYFsir1XCtG8Ks8wFvxwAHaafI0tzigytRePeLNUCM06S0Emb5jHPU
-AJaAF8c36HckLPAn50OYDcLVQgNM2U5tS5nTzfUP0dHYhj9tybLWO7FSI5stz9pI
-sI1E4R5dQO87ahrfm0Y2JpTJXKgpAKkCXjFVi3XPRSv2oH6jVJE65G2JGXDnX2bP
-SZg/8PRCXHrEOhHTfCoves17+TlJpxOO+StCMqzTFYhB7y9K8xS6O0P0UgTAFiUN
-lX4VesPv/w3ZNpLCwnj6nYJPhE7r6zr+dOYQ9fCLSFzEOmUkgnb656cde79D07gP
-UhaaiMI800uEvzceusTVzusFaHn4OAk8y2ypm+jleA5ljU3e2GGlCoROlaV1PhH2
-Xg4QU1wR
-=aYni
------END PGP SIGNATURE-----
-
---s/lhfXZ0CybGwvss--
+mailto: igor.opaniuk@gmail.com
+skype: igor.opanyuk
+http://ua.linkedin.com/in/iopaniuk
