@@ -4,73 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A5B5C54798
-	for <u-boot@archiver.kernel.org>; Thu,  7 Mar 2024 23:03:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC025C54E4A
+	for <u-boot@archiver.kernel.org>; Thu,  7 Mar 2024 23:08:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E71A28785A;
-	Fri,  8 Mar 2024 00:03:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 481AB8785A;
+	Fri,  8 Mar 2024 00:08:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="J8iLc83Z";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sfIMYINd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B87ED87B82; Fri,  8 Mar 2024 00:03:30 +0100 (CET)
-Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
- [IPv6:2607:f8b0:4864:20::232])
+ id CB28187B77; Fri,  8 Mar 2024 00:08:33 +0100 (CET)
+Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
+ [IPv6:2607:f8b0:4864:20::b2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3F300877AF
- for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 00:03:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 31075877AF
+ for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 00:08:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
-Received: by mail-oi1-x232.google.com with SMTP id
- 5614622812f47-3c1a2f7e302so120702b6e.0
- for <u-boot@lists.denx.de>; Thu, 07 Mar 2024 15:03:27 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-yb1-xb2d.google.com with SMTP id
+ 3f1490d57ef6-dcbd1d4904dso1494960276.3
+ for <u-boot@lists.denx.de>; Thu, 07 Mar 2024 15:08:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1709852606; x=1710457406; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=1ZmRqjAczgW2hdpzd5u8UGrrTL6VimYDhMzPtH/yuuo=;
- b=J8iLc83ZVEJWoaUHT0lkSTlLu+m88j5hGB4Y078y/BByjMcpBoYm6Zh6d9q3I/K6T0
- AGdPRHpRA3iIUe0e8wG0lYk1wEGa07CA0+bsM6Nx2CYqvjNEzcyE7UgVekMtAK2YBfjH
- kQV6Yk5mQakYutZtIDme4GWg9jTRGFZwYI+d6EDrFfsem2dqX79VWyQY945Bq+Pb+1WR
- R6i61mGs9BfbWEJ3XE7AFE//2vN9Hwhu4I2NiYA68+zaLFqj/6qn1Ac/492ze5kqb3kS
- udrNhrFKQLmHzQvKPb+x0V87wPAWlNjYMoeekipfX2oN7mvmt1DmqGLOaAif4WijWwD/
- 6KJQ==
+ d=linaro.org; s=google; t=1709852910; x=1710457710; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=mgheNGk2S2+CylqVXBBhMo4D8qecXdrw8OusuRwcSA0=;
+ b=sfIMYINdhpEx6PO5P531XYIebrwCetsw6DbYut5bpSz4vERm0GR06LCflx+KzRVUQZ
+ OTeEu8mNOl+WdQbUcRgojykNFnrXvNEfyM3MsB6c/BuqLgpML3KX2GilD3YFWPWCpk/D
+ wqBqiOeaZ5FAte/mY/NpKo26EvQ/eT7rMaV7gv+Ym9iFqVIDUCA+DUulHJZt0LShZeLr
+ 86II0gVaMNAEzaTj7TwVvmkPVBT1XclcpwiVY8Kxkowp1A8hwJW9fh66VypeAGF6P+TQ
+ KNQYtYLUVypMvVsavvr2PfyyXkdsNxvK5o16sE8HyNOKHfXDiaGvrtfYJokzLRmLfMor
+ xBTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709852606; x=1710457406;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=1ZmRqjAczgW2hdpzd5u8UGrrTL6VimYDhMzPtH/yuuo=;
- b=vekltbPOdHohH9VpOfdRkSdo85e4zXL9BwpJ6kunEPnL1m++ro25FuuSlJRWBcwhNs
- XhcNfXwmkA2Dp+HjHEgSLErkcVl4wDmhBjHQOo+fciWAA0pqCQn1LKthswxqz2imS1JL
- Sc23CQ7n+WdHXZsDHsiMZXtuLA2kER8rdvgqC6/pPMQ2b8zR4pCEZuJ/KDpqbhRXSP6W
- zgC7sgyoFh9BH33fiQTF9HtOUO58C4CTMMYiqgoiDkmvB/dGh9/R9c1piUbXbuaev3H8
- UaC3zNBfL5zrGPALN4P00taIAFov8tKQYj8qBS0BEe6UKdak54L01GFMCEqrlYdL7uoa
- 2jZQ==
-X-Gm-Message-State: AOJu0YyGEPRahQnjXBsjw5Le5+AKZJka2In9KNafnd53bNOLjQrBfSf5
- d3AYLhCDrvyVZgpQY8d0k/9S5kh5rE4pr5UpgMAXfX1/cg9fht/Dlc33uPXUJZa+41w6WNCJ2Ib
- tr2peAeExspyBmTx3tGWxN807AOM=
-X-Google-Smtp-Source: AGHT+IE3IvkkEnKORp/xRPhADlIi/Q6glYJJc4alm1Fq9cxxoaE0zOPE4AKA5SbfiCLe9XPYdy8eeiV7l4rPfFT4GgQ=
-X-Received: by 2002:a05:6808:2390:b0:3c2:fa1:332b with SMTP id
- bp16-20020a056808239000b003c20fa1332bmr12115193oib.14.1709852605767; Thu, 07
- Mar 2024 15:03:25 -0800 (PST)
+ d=1e100.net; s=20230601; t=1709852910; x=1710457710;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=mgheNGk2S2+CylqVXBBhMo4D8qecXdrw8OusuRwcSA0=;
+ b=UUg3sEb6QRotEVzvPCzwb2hklm5ePVzosb/0M2SAaUn6OxEEnX7XteKCxhgdklSFBe
+ GqPKvVkacH0CYP2lFhO+2m5Bw3gJlDkNo2XfcBmjljHZBy3X6x3Q6yujxXzuZx5JDVwa
+ 2422QzygExKqs+2cVnpWJ4HaqN4soWlcIUNwwf4qxgI/arUrNafjLPCM82pnRSvnA+ko
+ 2psbzOV8hHtNdHaEqpjtZMRPmc+zYxgi5wdXaXeTzVKdTk+dbgzZMsx8SF7ASxRWriRv
+ ZWAOZ9nf0pvOb2J9PP7y+ioT8Zp5JcXuy2IiZ0fl2LrsXC5BoKIsPfbQW8yZmfX2aHUN
+ WJZw==
+X-Gm-Message-State: AOJu0Yx26wJBARPW69wVKGgmnjE+vdytmE8WaFFfieB4k6n1XUglpnyh
+ oA0sn2RdoPCiPSKBSzKLRKJH/Sk25TumhapvYaEwNtUY2M3lTl3legc632C+229PK3D7noV1iNS
+ ITccZM3sg3hFKrDelkZ/vFCsyomIeU8tPXhO76w==
+X-Google-Smtp-Source: AGHT+IHnNm801zXkif2m/EfCdAxq8FuS6tx20zYIQKGPilZ1e4JE6mCIvmMMVnbqD3Kzgx8Y0ErDjZalFQWQAzjdr5I=
+X-Received: by 2002:a25:bb85:0:b0:dc6:de64:f74 with SMTP id
+ y5-20020a25bb85000000b00dc6de640f74mr16406139ybg.9.1709852909801; Thu, 07 Mar
+ 2024 15:08:29 -0800 (PST)
 MIME-Version: 1.0
-References: <20240303130122.29983-1-heinrich.schuchardt@canonical.com>
- <20240303130122.29983-4-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20240303130122.29983-4-heinrich.schuchardt@canonical.com>
-From: E Shattow <lucent@gmail.com>
-Date: Thu, 7 Mar 2024 15:03:14 -0800
-Message-ID: <CANV2PTMcS800x8OTuDbv8orqUD=-frNpa+0dHu4=L__D_Rmk_g@mail.gmail.com>
-Subject: Re: [RFC 3/5] board: starfive: support Milk-V Mars board
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: u-boot@lists.denx.de
+References: <20240307161711.3177729-1-colin.mcallister@garmin.com>
+ <20240307221030.3685767-1-colin.mcallister@garmin.com>
+ <20240307221030.3685767-3-colin.mcallister@garmin.com>
+In-Reply-To: <20240307221030.3685767-3-colin.mcallister@garmin.com>
+From: Sam Protsenko <semen.protsenko@linaro.org>
+Date: Thu, 7 Mar 2024 17:08:18 -0600
+Message-ID: <CAPLW+4ns-_QqUJYZbTiT_SgTYL4caj4fkMBwX69Od9A8_077uw@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] android_ab: Fix ANDROID_AB_BACKUP_OFFSET
+To: Colin McAllister <colin.mcallister@garmin.com>
+Cc: u-boot@lists.denx.de, JPEWhacker@gmail.com, sjg@chromium.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,19 +89,221 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Mar 3, 2024 at 5:02=E2=80=AFAM Heinrich Schuchardt <
-heinrich.schuchardt@canonical.com> wrote:
-...
-
-> * The EEPROM is atmel,24c02 according to the vendor U-Boot.
+On Thu, Mar 7, 2024 at 4:11=E2=80=AFPM Colin McAllister
+<colin.mcallister@garmin.com> wrote:
 >
-...
+> Currently, setting CONFIG_AB_BACKUP_OFFSET in a target's defconfig will
+> not actually enable the #if protected code in android_ab.c. This is
+> because "CONFIG_" should have been prepended to the config macro, or the
+> macros defined in kconfig.h could have been used.
+>
 
-The same vendor (Milk-V) U-Boot change is present on their branch for Mars
-CM Lite (which despite the naming has more in common with Pine64 Star64
-than Mars); However on visual inspection the silkscreen markings are for
-24c04. See: [Photo flatbed scans of Mars CM Lite 4GB rev 1.01](
-https://github.com/geerlingguy/sbc-reviews/issues/22#issuecomment-187247860=
-5).
-Can this be determined at runtime, or I must trust that this is not a
-wrongly marked chip?
+I think this change deserves "Fixes:" tag. Also, please keep a
+changelog under "---" stanza for each patch in the series starting
+with v2, otherwise it's hard for reviewers to track the changes
+between different versions.
+
+> The code included by ANDROID_AB_BACKUP_OFFSET has been refactored to no
+> longer be conditionally compiled by preprocessor conditionals and
+> instead use C conditionals. This better aligns with the Linux kernel
+> style guide.
+>
+> Signed-off-by: Colin McAllister <colin.mcallister@garmin.com>
+> Cc: Joshua Watt <JPEWhacker@gmail.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> ---
+>  boot/android_ab.c | 97 ++++++++++++++++++++++-------------------------
+>  1 file changed, 45 insertions(+), 52 deletions(-)
+>
+> diff --git a/boot/android_ab.c b/boot/android_ab.c
+> index 9a3d15ec60..f547aa64e4 100644
+> --- a/boot/android_ab.c
+> +++ b/boot/android_ab.c
+> @@ -187,13 +187,12 @@ int ab_select_slot(struct blk_desc *dev_desc, struc=
+t disk_partition *part_info,
+>                    bool dec_tries)
+>  {
+>         struct bootloader_control *abc =3D NULL;
+> +       struct bootloader_control *backup_abc =3D NULL;
+>         u32 crc32_le;
+>         int slot, i, ret;
+>         bool store_needed =3D false;
+> +       bool valid_backup =3D false;
+>         char slot_suffix[4];
+> -#if ANDROID_AB_BACKUP_OFFSET
+> -       struct bootloader_control *backup_abc =3D NULL;
+> -#endif
+>
+>         ret =3D ab_control_create_from_disk(dev_desc, part_info, &abc, 0)=
+;
+>         if (ret < 0) {
+> @@ -205,53 +204,49 @@ int ab_select_slot(struct blk_desc *dev_desc, struc=
+t disk_partition *part_info,
+>                 return ret;
+>         }
+>
+> -#if ANDROID_AB_BACKUP_OFFSET
+> -       ret =3D ab_control_create_from_disk(dev_desc, part_info, &backup_=
+abc,
+> -                                         ANDROID_AB_BACKUP_OFFSET);
+> -       if (ret < 0) {
+> -               free(abc);
+> -               return ret;
+> +       if (CONFIG_ANDROID_AB_BACKUP_OFFSET) {
+> +               ret =3D ab_control_create_from_disk(dev_desc, part_info, =
+&backup_abc,
+> +                                                 CONFIG_ANDROID_AB_BACKU=
+P_OFFSET);
+> +               if (ret < 0) {
+> +                       free(abc);
+> +                       return ret;
+> +               }
+>         }
+> -#endif
+>
+>         crc32_le =3D ab_control_compute_crc(abc);
+>         if (abc->crc32_le !=3D crc32_le) {
+>                 log_err("ANDROID: Invalid CRC-32 (expected %.8x, found %.=
+8x),",
+>                         crc32_le, abc->crc32_le);
+> -#if ANDROID_AB_BACKUP_OFFSET
+> -               crc32_le =3D ab_control_compute_crc(backup_abc);
+> -               if (backup_abc->crc32_le !=3D crc32_le) {
+> -                       log_err("ANDROID: Invalid backup CRC-32 ");
+> -                       log_err("expected %.8x, found %.8x),",
+> -                               crc32_le, backup_abc->crc32_le);
+> -#endif
+> -
+> -                       log_err("re-initializing A/B metadata.\n");
+> +               if (CONFIG_ANDROID_AB_BACKUP_OFFSET) {
+
+Did you test what happens if this config option is not defined at all?
+Maybe it'd be better to use CONFIG_IS_ENABLED() instead, here and in
+other cases like this?
+
+> +                       crc32_le =3D ab_control_compute_crc(backup_abc);
+> +                       if (backup_abc->crc32_le !=3D crc32_le) {
+> +                               log_err(" ANDROID: Invalid backup CRC-32 =
+");
+> +                               log_err("(expected %.8x, found %.8x),",
+> +                                       crc32_le, backup_abc->crc32_le);
+> +                       } else {
+> +                               valid_backup =3D true;
+> +                               log_info(" copying A/B metadata from back=
+up.\n");
+> +                               memcpy(abc, backup_abc, sizeof(*abc));
+> +                       }
+> +               }
+>
+> +               if (!valid_backup) {
+> +                       log_err(" re-initializing A/B metadata.\n");
+>                         ret =3D ab_control_default(abc);
+>                         if (ret < 0) {
+> -#if ANDROID_AB_BACKUP_OFFSET
+> -                               free(backup_abc);
+> -#endif
+> +                               if (CONFIG_ANDROID_AB_BACKUP_OFFSET)
+> +                                       free(backup_abc);
+>                                 free(abc);
+>                                 return -ENODATA;
+>                         }
+> -#if ANDROID_AB_BACKUP_OFFSET
+> -               } else {
+> -                       /*
+> -                        * Backup is valid. Copy it to the primary
+> -                        */
+> -                       memcpy(abc, backup_abc, sizeof(*abc));
+>                 }
+> -#endif
+>                 store_needed =3D true;
+>         }
+>
+>         if (abc->magic !=3D BOOT_CTRL_MAGIC) {
+>                 log_err("ANDROID: Unknown A/B metadata: %.8x\n", abc->mag=
+ic);
+> -#if ANDROID_AB_BACKUP_OFFSET
+> -               free(backup_abc);
+> -#endif
+> +               if (CONFIG_ANDROID_AB_BACKUP_OFFSET)
+> +                       free(backup_abc);
+>                 free(abc);
+>                 return -ENODATA;
+>         }
+> @@ -259,9 +254,8 @@ int ab_select_slot(struct blk_desc *dev_desc, struct =
+disk_partition *part_info,
+>         if (abc->version > BOOT_CTRL_VERSION) {
+>                 log_err("ANDROID: Unsupported A/B metadata version: %.8x\=
+n",
+>                         abc->version);
+> -#if ANDROID_AB_BACKUP_OFFSET
+> -               free(backup_abc);
+> -#endif
+> +               if (CONFIG_ANDROID_AB_BACKUP_OFFSET)
+> +                       free(backup_abc);
+>                 free(abc);
+>                 return -ENODATA;
+>         }
+> @@ -338,30 +332,29 @@ int ab_select_slot(struct blk_desc *dev_desc, struc=
+t disk_partition *part_info,
+>                 abc->crc32_le =3D ab_control_compute_crc(abc);
+>                 ret =3D ab_control_store(dev_desc, part_info, abc, 0);
+>                 if (ret < 0) {
+> -#if ANDROID_AB_BACKUP_OFFSET
+> -                       free(backup_abc);
+> -#endif
+> +                       if (CONFIG_ANDROID_AB_BACKUP_OFFSET)
+> +                               free(backup_abc);
+>                         free(abc);
+>                         return ret;
+>                 }
+>         }
+>
+> -#if ANDROID_AB_BACKUP_OFFSET
+> -       /*
+> -        * If the backup doesn't match the primary, write the primary
+> -        * to the backup offset
+> -        */
+> -       if (memcmp(backup_abc, abc, sizeof(*abc)) !=3D 0) {
+> -               ret =3D ab_control_store(dev_desc, part_info, abc,
+> -                                      ANDROID_AB_BACKUP_OFFSET);
+> -               if (ret < 0) {
+> -                       free(backup_abc);
+> -                       free(abc);
+> -                       return ret;
+> +       if (CONFIG_ANDROID_AB_BACKUP_OFFSET) {
+> +               /*
+> +               * If the backup doesn't match the primary, write the prim=
+ary
+> +               * to the backup offset
+> +               */
+> +               if (memcmp(backup_abc, abc, sizeof(*abc)) !=3D 0) {
+> +                       ret =3D ab_control_store(dev_desc, part_info, abc=
+,
+> +                                              CONFIG_ANDROID_AB_BACKUP_O=
+FFSET);
+> +                       if (ret < 0) {
+> +                               free(backup_abc);
+> +                               free(abc);
+> +                               return ret;
+> +                       }
+>                 }
+> +               free(backup_abc);
+>         }
+> -       free(backup_abc);
+> -#endif
+>
+>         free(abc);
+>
+> --
+> 2.43.2
+>
+>
+> ________________________________
+>
+> CONFIDENTIALITY NOTICE: This email and any attachments are for the sole u=
+se of the intended recipient(s) and contain information that may be Garmin =
+confidential and/or Garmin legally privileged. If you have received this em=
+ail in error, please notify the sender by reply email and delete the messag=
+e. Any disclosure, copying, distribution or use of this communication (incl=
+uding attachments) by someone other than the intended recipient is prohibit=
+ed. Thank you.
