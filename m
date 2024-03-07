@@ -4,75 +4,132 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6D89C54798
-	for <u-boot@archiver.kernel.org>; Thu,  7 Mar 2024 17:51:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAA80C54E4A
+	for <u-boot@archiver.kernel.org>; Thu,  7 Mar 2024 18:12:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA87C87D66;
-	Thu,  7 Mar 2024 18:51:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 8BC7E87A00;
+	Thu,  7 Mar 2024 19:12:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=cinemo.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="h4ffRjUj";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=cinemo0.onmicrosoft.com header.i=@cinemo0.onmicrosoft.com header.b="XfPR8MSN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 55B0B87D80; Thu,  7 Mar 2024 18:51:02 +0100 (CET)
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4008787D66; Thu,  7 Mar 2024 18:43:11 +0100 (CET)
+Received: from DEU01-BE0-obe.outbound.protection.outlook.com
+ (mail-be0deu01on20700.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2622::700])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A339876A4
- for <u-boot@lists.denx.de>; Thu,  7 Mar 2024 18:50:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A2F068752B
+ for <u-boot@lists.denx.de>; Thu,  7 Mar 2024 18:43:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=cinemo.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-33e73f04309so57071f8f.0
- for <u-boot@lists.denx.de>; Thu, 07 Mar 2024 09:50:59 -0800 (PST)
+ spf=pass smtp.mailfrom=vjaiswal@cinemo.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=WE42KV3HZVBoGcbTUiS/ighH2lYny/8yTnrhAxbT9moFypUEo5iqPo/bQfK6MDRkFIUGZ73sNeZ1p5reWsPj6fc6vJfOw7uQFGbb9gfVGxmvHiPmVvRz1yP+FvEQkUIuWpi9x8nURD/Qg4X3FekKJaZJ5JCa2F6ygQvPCfeCj+K/UiF7EiUPZaKjzX4cEJs3aYI6R/wIp+MuKbDIWt1KiSElxaWGJGYwLy97ENPYkTC6FFV3BEr1k7zZdUR3uqOCq8TbbQb87iDXijn0XHhEIScDXnssf62Ks/B8aF76d1dDsYj3cOx4oUngqU2zwkJxl7s/5F/Grp0et0JdYaRecw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=M07AEx3nH+Dtja7Ilta2su6TdQz7CPKxLE95V55nHck=;
+ b=PCyYA7FqLfO4fUUnGC7wenMfLmYl4OtoX2/0+4FJtT0TC7JMARmNHbAtRkOEkz2f5VWC6w6GbxidXfTsBr+3s2eN3N634A7XP95jQBAMUZTmnMdEsTpDoyNCa+1jBJr1P1isomBgj52n0KiBYG4h/f+4Fq7os1+fDnydT8EuYwlD/cRyIs7P8jLlLbewrAhxXY+7yxTQ916O+BazkWp4lw4egCQ6ue+jxn1oHIlFCv+AMpcNXEfEAFuJugmQGPdoGyaJCT9ktwpecCTso/drxC8+t4NeVkoPCQyO96DjBxAVUCrc9cwMStcns4pDxeWk2Q7DCtDU9s6J399LQ5hP1w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cinemo.com; dmarc=pass action=none header.from=cinemo.com;
+ dkim=pass header.d=cinemo.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1709833859; x=1710438659; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=2V9YfEcN6gV7PfiR2Zryuiq4Zodfvt1iIGpn0Se0VCc=;
- b=h4ffRjUj0MPQJQRsq7oSdARHSr9WJcjgXyExHKSIwmmIs8a+B7ngZnKUBA1e2QLehM
- JxByBjpRSwztdeTOqpEz3VL1i2aXyHENq7M/Zh2UbhRFQLhgJgAC6gtQV/rQ1NSS7Hgn
- YbFvsIOOg9MKEoC09+Ukc6hAsgax/P+N7AL09nClckVAFNgKYJvc6EaQMbpO2LXSf8FD
- bI8J3i3E89YZrZLUqBmT16WEXkYkuHPImb4owe/yD9bppZuomkaZe5cH4N2Iox/zAC8V
- R0FRFomxPOZYAHZRuNUQe9x6CWGaQmTB+ImFMkqGKtGWxyyfU5Vg18ZIjEbfXheqE50/
- kYpA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709833859; x=1710438659;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=2V9YfEcN6gV7PfiR2Zryuiq4Zodfvt1iIGpn0Se0VCc=;
- b=Yk0D31JQo3vtffSoxoIpuxRv/ZFpO3gJCmuzHy3ljh/3N54XP9HaI0QeCAAHwGuyGS
- JrERrF8VhSWzz4N1pwzbkr7PhXXsWIf0cjbQvM5p1CFMoTyeJ16OG02wHlizd4OZSnCZ
- UvyQl6qty2lQNyhCFqS4cKSPxymqXxzDSx7A+UwCq6iaHQdJyW56T2iyr8aof272WnbG
- 5puoLhZjSeivMKhCtl5KU52PBrPWOCHLg2H7/l2mHx8m/Sv497pcnHN4YjFzHl/XuS83
- Abt7WajRsH0fXDD08Y7Y+D7JexqtRZyhms8JDmsLxlUpAhkjOBXiIO8m3iyoE05p23Zp
- rLZg==
-X-Gm-Message-State: AOJu0YzjlkeHf3Y0q1IMNS2uRshlDBJxdKGE3Wv8pBxuq7/iRUxVn1+b
- ktEKBqe2X6Bhw87EacAGWy+jATJpVTkJJC9+y7ZM2dfPdIxbLLXcX01CBwwEboGqRluXr4VNq01
- tZ+vWa0uZiEJA1x0PVE5YAWfzi6A=
-X-Google-Smtp-Source: AGHT+IF18qT1UPTevOdzGw4yrqtMmYDrNHvdSJgwRRWKKp+hGYrSgvzcEPDmt7N+/KzysAPbFgzaV3hfXd4NlJM5Zgw=
-X-Received: by 2002:a05:6000:1050:b0:33d:9d49:754d with SMTP id
- c16-20020a056000105000b0033d9d49754dmr1862223wrx.4.1709833858692; Thu, 07 Mar
- 2024 09:50:58 -0800 (PST)
+ d=cinemo0.onmicrosoft.com; s=selector1-cinemo0-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=M07AEx3nH+Dtja7Ilta2su6TdQz7CPKxLE95V55nHck=;
+ b=XfPR8MSNC7fc0r5i04bIhGcETan9rVvARKGGI1dJj0A2DKUxfMbRqshMU70TDmUTQAIJzJeRuVwQNCBtLTzrmXIlWddyTs9ySNvrKXNbUuGASbfF6cneS4qLlzqDDOE3E9dTM7P+1KR+W7swD4x1d/ZyLtVN3wtDgctiGWjm6RE=
+Received: from FRYP281MB2969.DEUP281.PROD.OUTLOOK.COM (2603:10a6:d10:72::10)
+ by FR4P281MB3726.DEUP281.PROD.OUTLOOK.COM (2603:10a6:d10:d6::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7339.40; Thu, 7 Mar
+ 2024 17:43:06 +0000
+Received: from FRYP281MB2969.DEUP281.PROD.OUTLOOK.COM
+ ([fe80::ccb0:ff57:7c4e:e944]) by FRYP281MB2969.DEUP281.PROD.OUTLOOK.COM
+ ([fe80::ccb0:ff57:7c4e:e944%6]) with mapi id 15.20.7362.024; Thu, 7 Mar 2024
+ 17:43:06 +0000
+From: Vivek Jaiswal <vjaiswal@cinemo.com>
+To: Fabio Estevam <festevam@gmail.com>
+CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: U-boot fails for khadas-edge -v
+Thread-Topic: U-boot fails for khadas-edge -v
+Thread-Index: AQHacIAKth58IDIIyk62Zj6csqiUFbEsf/6AgAAMMQ4=
+Date: Thu, 7 Mar 2024 17:43:06 +0000
+Message-ID: <FRYP281MB2969D2ABC5FF3EB2421E95E8AB202@FRYP281MB2969.DEUP281.PROD.OUTLOOK.COM>
+References: <BEZP281MB29655E047444C987850ED632AB202@BEZP281MB2965.DEUP281.PROD.OUTLOOK.COM>
+ <CAOMZO5BhEmnVsmYdJgabZC1L6GrNc4WvMhRZNrFhemTvD3rpzQ@mail.gmail.com>
+In-Reply-To: <CAOMZO5BhEmnVsmYdJgabZC1L6GrNc4WvMhRZNrFhemTvD3rpzQ@mail.gmail.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cinemo.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: FRYP281MB2969:EE_|FR4P281MB3726:EE_
+x-ms-office365-filtering-correlation-id: f2d752d4-5159-4e41-4059-08dc3ece0bfd
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: C3rEkLcvKeEHBuPGE+2ljw5rNM4MVJMlcVblADCQ5kRy/QSGzmT6D5g+zr2FUlcG32xiIQAQKjqQR+I+MA1CV27z5i9QrPnovcbW2O/cNK/NAA95V3qn7CJTbzvx6NyzNO/PU1/tAcpmEY1P5XvEAtSHYXfqQfgH8KWMMNfU5BS8qq/4qnh0tLI/qb3uO0oZeNEVM8QRVRTTxgIyrw6yBOJUuwlVQ3ZIAejJQEtWFY0DGJhrFOD1hP7AgcdoC6RczISecPDnLzaMsMjbKPT4IsQXL1arNc4aRtgupgbm9ShhTh0DX3llOnTWJKZgk5rLs8FER7nDx52ja8478ldrISUrkGpZnuJVJKzNTPMI4aelL5lxXJeJ19M7jBPjWDbVlCMow5s4khcAustww3d8mSUu0XQJxOIulLuoW2xfs1F4xDh4zRJ/WjNitv6Y3eiZOxOKBjzI0v9jMyw7/6Vv3CVngFJgKHFXg5brToyHCABT/GAgyXvFxO1UaGuBadqez4YDXsippXZgTLBWdi+E0SQWANVKGRJN5ol3neY9DGaY4K5A9pxFJnOgvQAmpjKSQs/oV6IB4SajBIWM7FRVGYBeFPR+2wPpOAcY1eF6IRmgrz9cKFaTRP6G4XGf8vHipuoeLzxAQ5BpEgTdWrwlTtq9Xmo5CKT2IkyMR8CZqNuOScsCeo1myg+Zn4ZJe3f3
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:FRYP281MB2969.DEUP281.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230031)(376005)(38070700009); DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?ZWlhZitrc0dHMTJXL1hRWWpJekxJMTUwQ0dLV0MyRGxqREwydHNsZEZiNjhS?=
+ =?utf-8?B?bGw5T0J0Q2FyTC82R0lKdmI2TERVMHR5MmZGclBtdnRjdVhsZTlySG5MY2hw?=
+ =?utf-8?B?QUp4NEpndk5VN2d1dnN4cVhHbDRMYkdwS0EwZ2JxT3dMTjVDbjdQWlp5Q1lo?=
+ =?utf-8?B?cWRvOGtYeWNGNmVucWV3N1NFZDV5cDlIY2lmNFpxc29QczdyYi9MOXNBMTdK?=
+ =?utf-8?B?MDM2d3FTb1M1OG1KNjNkc2lBcDhDVWhWckl5blFXTEdBdVhFZ1l1Q3g4TTVj?=
+ =?utf-8?B?WWllTjdmNE45d2QyOUpOMFJmS1I0cGJjR3JpTDM3UVh1dG1nQmhnZlFMeFZu?=
+ =?utf-8?B?SmNjaWwyQ01zdzE3VzBOWStxc2g1azdTaUJ5Tk1GZjZpRGRER2lHSHN0cWNH?=
+ =?utf-8?B?cUxyY2VHNnVrRzVZN3Zmak9xbzlrYkY1Rkx1dUNpeVZyMVV5N0hsNVRYT2FO?=
+ =?utf-8?B?d0QwUFU4d3c2NGhmcU9ITXZ1VGFVTm9IRlg5Q0hEUzBRV0Y3a3RsYUVVRitC?=
+ =?utf-8?B?N1NwYTRKdXNkSGNMcnh3V3ZLY08wTWNuREZYSEY4VldFTlBxbVNNeURpNVFs?=
+ =?utf-8?B?d0g3RjROS0ZkczFmUlFXMjV3MVNDZWYrMEtRMDh4b0Y1VDhPY2hVbGFmd1My?=
+ =?utf-8?B?aE1haTlrTnE1TENldit3T0MvbFpUR0RwT2t2NDhIWWtQellHQWFmUUppRThV?=
+ =?utf-8?B?THdONmxoOUVxa2xtWFFGRENHT2N0REFPMHVDNGkrMlAxQk5hMGYwMGE2d21n?=
+ =?utf-8?B?VHNkSkRITldlY2hjVVUwRHBxUlVwcFpOS25JQ2JUU0trcHlVcmJuN1N3YWRW?=
+ =?utf-8?B?WkxPbmxnbG1ydlNUd2VGM0tXQTd2V2Nsc1BzOFRFTzU2MUhCOURGWnIzWnB2?=
+ =?utf-8?B?MmQ1akdabFpYdk85N3VyMGtFekgzTUpKNWxuT0tXcEs4TXFIT09Fb3ZSN2F5?=
+ =?utf-8?B?SU5RNmVVYmVZMk9QNC96Wm5jNnRybXBqLy9iNkczSEcrN0FUMG5NTlIwWGk0?=
+ =?utf-8?B?MjArdnVENlhYLzJQa211RkpqU0tXcE1zdVJUWDYvUW1zRlU5QU5STkxqaGFI?=
+ =?utf-8?B?ZnBBekhUV2UrblVOZDlzR3BraWlMNE85alpUQWI1TWxjdG1yK0Fzbjhzc0xj?=
+ =?utf-8?B?RGJkZGM2Z3ZKNllSNk5QdWMrTFZYamcyM21LRUdrekVnSHBiaEp3bmNMdk9T?=
+ =?utf-8?B?cUJ6S1cxcG83N3A5UndKTTBTUURCUTBKbDNya2JnMDNodkRXVmJYWTMrMDZJ?=
+ =?utf-8?B?TWlJdzYrZDVza3l6WG9RTjlPdmJnOWhTWHF6eVJJNXVqQUVsSk4xckpxaG4v?=
+ =?utf-8?B?U3hlczFCVVBlcDk2VXltbjFIWURYbGljNVArcUZnbU50RjVVeG9PNFZ5WGw5?=
+ =?utf-8?B?alZUbkFQNy9nVkJ1V0loMG42MktscHBrazhsY2RCaS9NVkJKdGNXdlhaRTQy?=
+ =?utf-8?B?R09IMktXRGRsWFJiNTRyU0ZVbzJSV2c0Y3h5TFJqL3JMS3MxUlBmMlFvNW1y?=
+ =?utf-8?B?cE1FNTcrcUdYTlEzSC9KdGJKOWtCdVc2aFVwSzl3YWpiYlhYblorZVh6MmNT?=
+ =?utf-8?B?cnRFVTZRbE1FU3MwaGRVMEhpTW5iWDRJNWt2OE1yMW9kN1U5WXpNTHFCQnlr?=
+ =?utf-8?B?aG9LanAxYTFURFhrMERjTThzMmpiNnRPTjJkMEx1Zkl4RjZGWlZRRHJlbDRJ?=
+ =?utf-8?B?V2JVUUZleVhsMjBRVUh6WXg3MWFoZVRhcjcyTkplb3Q4OStkL0xnVWV1VWx4?=
+ =?utf-8?B?dVova3A3bUxBd1I5ZWFZbkJwUm45aXE1RmV2TENOZ2hnSDUzNjg3NGlSVGhp?=
+ =?utf-8?B?VWY1UmxzTHZBUVc3R1Bma041ell2QU1PL3Y3Z1NFSExzcVJiY1I1ZWQwdWZx?=
+ =?utf-8?B?QlEyb3ZJWDFEb0RuV3RjRStyL2RWeUphZ2dDWTN3aG1BcWRRRS85STd2UVBE?=
+ =?utf-8?B?b0orNDV4NHZWQ3pLa3dGQU1HRUhKYVFTSE9BL3NZY2F1R3lkcjloTXZicG12?=
+ =?utf-8?B?UFlqeEVocTRsdEdvREpkdTMrREE1bHA2SGtzaUtzRVhRUjFYN2V5citQR2sv?=
+ =?utf-8?B?cGwzMUtaMkMzR0RTWnhzTWRkQ0YwZW53bjVvRUhmUnFnWEFJcXkrdTV3Wmxk?=
+ =?utf-8?Q?9UFg=3D?=
 MIME-Version: 1.0
-References: <20240307161711.3177729-1-colin.mcallister@garmin.com>
- <20240307161711.3177729-3-colin.mcallister@garmin.com>
-In-Reply-To: <20240307161711.3177729-3-colin.mcallister@garmin.com>
-From: Igor Opaniuk <igor.opaniuk@gmail.com>
-Date: Thu, 7 Mar 2024 18:50:47 +0100
-Message-ID: <CAByghJYFi0Af5YcqZ2iKyMpU6Jmdn1gScaK=GT0Zfw3-89Y+ag@mail.gmail.com>
-Subject: Re: [PATCH 2/2] android_ab: Fix ANDROID_AB_BACKUP_OFFSET
-To: Colin McAllister <colin.mcallister@garmin.com>
-Cc: u-boot@lists.denx.de, JPEWhacker@gmail.com, sjg@chromium.org, 
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-OriginatorOrg: cinemo.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: FRYP281MB2969.DEUP281.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: f2d752d4-5159-4e41-4059-08dc3ece0bfd
+X-MS-Exchange-CrossTenant-originalarrivaltime: 07 Mar 2024 17:43:06.4382 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 3f67d7a5-8d31-49e4-bdef-c6169c4e9474
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 681SDGacES4xTxKOd8x9bUsfepE2NGE0p4d+kOAbDnLYlaw/NhiPE+Nb5vNGyA5EXLwwseZphYMW0qDlXhh/Wg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: FR4P281MB3726
+X-Mailman-Approved-At: Thu, 07 Mar 2024 19:12:02 +0100
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,170 +147,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Colin,
-
-+CC Mattijs, Sam
-
-On Thu, Mar 7, 2024 at 5:19=E2=80=AFPM Colin McAllister <colin.mcallister@g=
-armin.com>
-wrote:
-
-> Currently, setting CONFIG_AB_BACKUP_OFFSET in a target's defconfig will
-> not actually enable the #if protected code in android_ab.c. This is
-> because "CONFIG_" should have been prepended to the config macro, or the
-> macros defined in kconfig.h could have been used.
->
-> Each use of AB_BACKUP_OFFSET is now wrapped within CONFIG_VAL().
->
-> Signed-off-by: Colin McAllister <colin.mcallister@garmin.com>
-> Cc: Joshua Watt <JPEWhacker@gmail.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> ---
->  boot/android_ab.c | 22 +++++++++++-----------
->  1 file changed, 11 insertions(+), 11 deletions(-)
->
-> diff --git a/boot/android_ab.c b/boot/android_ab.c
-> index 9a3d15ec60..a80040749d 100644
-> --- a/boot/android_ab.c
-> +++ b/boot/android_ab.c
-> @@ -191,7 +191,7 @@ int ab_select_slot(struct blk_desc *dev_desc, struct
-> disk_partition *part_info,
->         int slot, i, ret;
->         bool store_needed =3D false;
->         char slot_suffix[4];
-> -#if ANDROID_AB_BACKUP_OFFSET
-> +#if CONFIG_VAL(ANDROID_AB_BACKUP_OFFSET)
->         struct bootloader_control *backup_abc =3D NULL;
->  #endif
->
-> @@ -205,9 +205,9 @@ int ab_select_slot(struct blk_desc *dev_desc, struct
-> disk_partition *part_info,
->                 return ret;
->         }
->
-> -#if ANDROID_AB_BACKUP_OFFSET
-> +#if CONFIG_VAL(ANDROID_AB_BACKUP_OFFSET)
->         ret =3D ab_control_create_from_disk(dev_desc, part_info, &backup_=
-abc,
-> -                                         ANDROID_AB_BACKUP_OFFSET);
-> +
->  CONFIG_VAL(ANDROID_AB_BACKUP_OFFSET));
->         if (ret < 0) {
->                 free(abc);
->                 return ret;
-> @@ -218,7 +218,7 @@ int ab_select_slot(struct blk_desc *dev_desc, struct
-> disk_partition *part_info,
->         if (abc->crc32_le !=3D crc32_le) {
->                 log_err("ANDROID: Invalid CRC-32 (expected %.8x, found
-> %.8x),",
->                         crc32_le, abc->crc32_le);
-> -#if ANDROID_AB_BACKUP_OFFSET
-> +#if CONFIG_VAL(ANDROID_AB_BACKUP_OFFSET)
->                 crc32_le =3D ab_control_compute_crc(backup_abc);
->                 if (backup_abc->crc32_le !=3D crc32_le) {
->                         log_err("ANDROID: Invalid backup CRC-32 ");
-> @@ -230,13 +230,13 @@ int ab_select_slot(struct blk_desc *dev_desc, struc=
-t
-> disk_partition *part_info,
->
->                         ret =3D ab_control_default(abc);
->                         if (ret < 0) {
-> -#if ANDROID_AB_BACKUP_OFFSET
-> +#if CONFIG_VAL(ANDROID_AB_BACKUP_OFFSET)
->                                 free(backup_abc);
->  #endif
->                                 free(abc);
->                                 return -ENODATA;
->                         }
-> -#if ANDROID_AB_BACKUP_OFFSET
-> +#if CONFIG_VAL(ANDROID_AB_BACKUP_OFFSET)
->                 } else {
->                         /*
->                          * Backup is valid. Copy it to the primary
-> @@ -249,7 +249,7 @@ int ab_select_slot(struct blk_desc *dev_desc, struct
-> disk_partition *part_info,
->
->         if (abc->magic !=3D BOOT_CTRL_MAGIC) {
->                 log_err("ANDROID: Unknown A/B metadata: %.8x\n",
-> abc->magic);
-> -#if ANDROID_AB_BACKUP_OFFSET
-> +#if CONFIG_VAL(ANDROID_AB_BACKUP_OFFSET)
->                 free(backup_abc);
->  #endif
->                 free(abc);
-> @@ -259,7 +259,7 @@ int ab_select_slot(struct blk_desc *dev_desc, struct
-> disk_partition *part_info,
->         if (abc->version > BOOT_CTRL_VERSION) {
->                 log_err("ANDROID: Unsupported A/B metadata version:
-> %.8x\n",
->                         abc->version);
-> -#if ANDROID_AB_BACKUP_OFFSET
-> +#if CONFIG_VAL(ANDROID_AB_BACKUP_OFFSET)
->                 free(backup_abc);
->  #endif
->                 free(abc);
-> @@ -338,7 +338,7 @@ int ab_select_slot(struct blk_desc *dev_desc, struct
-> disk_partition *part_info,
->                 abc->crc32_le =3D ab_control_compute_crc(abc);
->                 ret =3D ab_control_store(dev_desc, part_info, abc, 0);
->                 if (ret < 0) {
-> -#if ANDROID_AB_BACKUP_OFFSET
-> +#if CONFIG_VAL(ANDROID_AB_BACKUP_OFFSET)
->                         free(backup_abc);
->  #endif
->                         free(abc);
-> @@ -346,14 +346,14 @@ int ab_select_slot(struct blk_desc *dev_desc, struc=
-t
-> disk_partition *part_info,
->                 }
->         }
->
-> -#if ANDROID_AB_BACKUP_OFFSET
-> +#if CONFIG_VAL(ANDROID_AB_BACKUP_OFFSET)
->         /*
->          * If the backup doesn't match the primary, write the primary
->          * to the backup offset
->          */
->         if (memcmp(backup_abc, abc, sizeof(*abc)) !=3D 0) {
->                 ret =3D ab_control_store(dev_desc, part_info, abc,
-> -                                      ANDROID_AB_BACKUP_OFFSET);
-> +
-> CONFIG_VAL(ANDROID_AB_BACKUP_OFFSET));
->                 if (ret < 0) {
->                         free(backup_abc);
->                         free(abc);
->
-
-Thanks for the patch. The only suggestion: I see no reason in wrapping it i=
-n
-preprocessor conditionals (in this particular case), better to use C
-conditionals instead (with CONFIG_VAL macro) as explained in [1].
-
--
-> 2.43.2
->
->
-> ________________________________
->
-> CONFIDENTIALITY NOTICE: This email and any attachments are for the sole
-> use of the intended recipient(s) and contain information that may be Garm=
-in
-> confidential and/or Garmin legally privileged. If you have received this
-> email in error, please notify the sender by reply email and delete the
-> message. Any disclosure, copying, distribution or use of this communicati=
-on
-> (including attachments) by someone other than the intended recipient is
-> prohibited. Thank you.
->
-
-[1]
-https://www.kernel.org/doc/html/latest/process/coding-style.html#conditiona=
-l-compilation
---=20
-Best regards - Atentamente - Meilleures salutations
-
-Igor Opaniuk
-
-mailto: igor.opaniuk@gmail.com
-skype: igor.opanyuk
-http://ua.linkedin.com/in/iopaniuk
+SGVsbG8gRmFiaW8sDQpUaGFua3MgZm9yIGxvb2tpbmcgaW50byB0aGUgbWF0dGVyLg0KDQpDYW4g
+eW91IHBsZWFzZSBzZW5kIG1lIHRoZSBsaW5rIG9mIHRoZSBraGFkYXMtZWRnZS12LXJrMzM5OV9k
+ZWZjb25maWcgaW4gbWFpbiBsaW5lLg0KSSBhbSBub3QgYmVlbiBhYmxlIHRvIGZpbmQgYW55ICBt
+YWlubGluZSBicmFuY2ggaW4gaHR0cHM6Ly9naXRodWIuY29tL2toYWRhcy91LWJvb3QNCg0KYXJl
+IHlvdSBzYXlpbmcgdG8gdXNlIHRoaXMgb25lPw0KaHR0cHM6Ly9naXRodWIuY29tL3UtYm9vdC91
+LWJvb3QvYmxvYi9tYXN0ZXIvY29uZmlncy9raGFkYXMtZWRnZS12LXJrMzM5OV9kZWZjb25maWcN
+Cg0KQmVzdCBSZWdhcmRzLA0KVml2ZWsgSmFpc3dhbA0KDQoNCg0KX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX18NCkZyb206IEZhYmlvIEVzdGV2YW0gPGZlc3RldmFtQGdtYWlsLmNvbT4N
+ClNlbnQ6IFRodXJzZGF5LCBNYXJjaCA3LCAyMDI0IDU6NTcgUE0NClRvOiBWaXZlayBKYWlzd2Fs
+IDx2amFpc3dhbEBjaW5lbW8uY29tPg0KQ2M6IHUtYm9vdEBsaXN0cy5kZW54LmRlIDx1LWJvb3RA
+bGlzdHMuZGVueC5kZT4NClN1YmplY3Q6IFJlOiBVLWJvb3QgZmFpbHMgZm9yIGtoYWRhcy1lZGdl
+IC12DQoNCltZb3UgZG9uJ3Qgb2Z0ZW4gZ2V0IGVtYWlsIGZyb20gZmVzdGV2YW1AZ21haWwuY29t
+LiBMZWFybiB3aHkgdGhpcyBpcyBpbXBvcnRhbnQgYXQgaHR0cHM6Ly9ha2EubXMvTGVhcm5BYm91
+dFNlbmRlcklkZW50aWZpY2F0aW9uIF0NCg0KSGkgVml2ZWssDQoNCk9uIFRodSwgTWFyIDcsIDIw
+MjQgYXQgMTE6NTbigK9BTSBWaXZlayBKYWlzd2FsIDx2amFpc3dhbEBjaW5lbW8uY29tPiB3cm90
+ZToNCj4NCj4gSGVsbG8gVS1ib290IFRlYW0sDQo+IEkgYW0gdXNpbmcgdGhlIHUtYm9vdCBmb3Ig
+S2hhZGFzIEVkZ2UtdiByazMzOTkgcm9ja2NoaXA6ICBodHRwczovL2dpdGh1Yi5jb20va2hhZGFz
+L3UtYm9vdC90cmVlL2toYWRhcy1lZGdlcy12MjAxNy4wOS1yZWxlYXNlLXYxLjAuMD90YWI9cmVh
+ZG1lLW92LWZpbGUNCj4gQW5kIEkgYW0gdXNpbmcgY29uZmlndXJhdGlvbiBmaWxlIDogaHR0cHM6
+Ly9naXRodWIuY29tL2toYWRhcy91LWJvb3QvYmxvYi9raGFkYXMtZWRnZXMtdjIwMTcuMDktcmVs
+ZWFzZS12MS4wLjAvY29uZmlncy9yazMzOTlfZGVmY29uZmlnDQoNClRoYXQncyBhbiBvbGQgb3V0
+LW9mLXRyZWUgcmVwb3NpdG9yeSwgbm90IHN1cHBvcnRlZCBieSB0aGUgVS1Cb290IGNvbW11bml0
+eS4NCg0KVHJ5IGtoYWRhcy1lZGdlLXYtcmszMzk5X2RlZmNvbmZpZyB3aGljaCBpcyBzdXBwb3J0
+ZWQgaW4gbWFpbmxpbmUgVS1Cb290Lg0K
