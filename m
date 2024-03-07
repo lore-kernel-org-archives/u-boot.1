@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36945C54798
-	for <u-boot@archiver.kernel.org>; Thu,  7 Mar 2024 21:19:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9194DC54798
+	for <u-boot@archiver.kernel.org>; Thu,  7 Mar 2024 21:29:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 62A6A87C83;
-	Thu,  7 Mar 2024 22:19:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E746487B77;
+	Thu,  7 Mar 2024 22:29:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="F7y3hazG";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JrHhgIYn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E25D687B77; Thu,  7 Mar 2024 22:19:30 +0100 (CET)
-Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
- [IPv6:2607:f8b0:4864:20::52d])
+ id 6944A87C83; Thu,  7 Mar 2024 22:29:05 +0100 (CET)
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8CA9487D99
- for <u-boot@lists.denx.de>; Thu,  7 Mar 2024 22:19:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 58670876A4
+ for <u-boot@lists.denx.de>; Thu,  7 Mar 2024 22:29:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pg1-x52d.google.com with SMTP id
- 41be03b00d2f7-5a0dc313058so270029a12.0
- for <u-boot@lists.denx.de>; Thu, 07 Mar 2024 13:19:26 -0800 (PST)
+ spf=pass smtp.mailfrom=maximmosk4@gmail.com
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-5132181d54bso1775266e87.3
+ for <u-boot@lists.denx.de>; Thu, 07 Mar 2024 13:29:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1709846365; x=1710451165; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=fard8IB/A9jM914wz6yPmDbtuAwKIjfeb6K7RnDIGe4=;
- b=F7y3hazGfgLvy4bfmagNu14+ex3pAWLAzISCc74DnTd9r9jS+Eqgq6RAQa/Gia2+a0
- vHRWhubfyFd7BxTBr2U0Cj3a0qHIXcbJvkcrNszFBCB9uWOPBpotMHHzHhqMan4rOlB/
- +g+1LaoCfuUCg4OPOoDm8q4GfyuhdU1KH3ebCQjYZsYN7MUHbOVWAyPfZ8DcMn8YhPIq
- GLdxPEma4XBO5DAkZWTLzCvWv15zE+yLhgj5rOo5HDqbZvSXvGcQhdgTlkNMztMqHgRi
- SlbWj/uhAAxEzgiq0RYyi5oeauiYKkQlngAnmSWVIjm2IIJKj5fKIv7a7XsyZAuNNx2O
- mr6g==
+ d=gmail.com; s=20230601; t=1709846937; x=1710451737; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=xLchIgs4Y9vYu6rCCGpDHXJOQFKvH6+CiNVo7ReDDKM=;
+ b=JrHhgIYnGpd7OXVuROz9+Wn+iCg9vnjDCKSaKGbU/+wt2nZ2hjW3656TPnfZtL7VWU
+ LDZkpOB2d6qGV4uFVRLDhp6acc1uNWeM4JPdxCzPnvOB/sfA+E9sOxoFCCgdxJ6JC/Cy
+ 2knkp2LEtnngMD4B/RSaWgGf+yEbLJPtiYQdrfogFP47yfaw3ocaR0PNtn3+cMa4ltFA
+ ICvFOWlSI3kcZtM8axgNi0+Ir6Ds74GxR9M4L/4u/tGQafqoV2f+OVKEA5EvdRefesr8
+ u5O8wjqoEUL6NPIlQzwH+VSN4QhjSbtshQBvXF0cQWpNQhr5uhzkZYgKc4+C7ju7ZjPq
+ uhMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709846365; x=1710451165;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=fard8IB/A9jM914wz6yPmDbtuAwKIjfeb6K7RnDIGe4=;
- b=gdtIPD6G6gVPMsZt++HkUyP0M93p0iV0PpqW6YI5BGBO309zAuJhJnT1h3QVMzZuex
- 5sYbk9Ty8cH4DI7NgqssZpo1Q+MWQRS2LJx2n/YaF2H6s6nCki61Jxsd5IRbMGQxZfz/
- H1NLD/aV57dnxVaGTuulttAIjZqD6clw5wd1GSf56owDtWlnDTh9jjAO55Z1W3er3nm+
- C/8/ab5xxKSmdcvqQZ0qUAZGu895t8He/mL6/YU8TD5jH32oKSCD4LbRImxzWJMtYnD6
- dJSE0FFm04rrUj3TMHINzQSidZjEnj2ihUsEB8sk+Mk+ctnzaKGuxwAbjD5A9U4N4InY
- TRkA==
-X-Gm-Message-State: AOJu0YyoQWbPbmDnVUCNRvoDQtJ7dh0l65cOjKWy/GOBcgy0cz7gZlO7
- Lb8Ft1+vRvxNQ3EdWYHbsRb/FspIt1cMspBd6DRoSGFsN2SGvPfFC6aGEsG4cdQRzF9Zq713l1Z
- +u4l4/Ex9T7/otCXG6GIg0SscIPOa1eOw
-X-Google-Smtp-Source: AGHT+IFkFhKPSBYf2Qa1EMZNQVKven4O2x/AYcbyrgbWRnJ2aEd0l8RLhxxrdTnuEGVjNskwcoS6jn6K+aDOV4CQt5g=
-X-Received: by 2002:a05:6a20:b22a:b0:1a1:8008:8cc with SMTP id
- eh42-20020a056a20b22a00b001a1800808ccmr136799pzb.3.1709846364855; Thu, 07 Mar
- 2024 13:19:24 -0800 (PST)
+ d=1e100.net; s=20230601; t=1709846937; x=1710451737;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=xLchIgs4Y9vYu6rCCGpDHXJOQFKvH6+CiNVo7ReDDKM=;
+ b=aXNDi9CPWMBvfj6rr8wwUd6bddB4VduF5YwIZrpBYbP5o9eTpmShrcIimQ7cMiA5QP
+ CaYo/AKnD3HweKEctOtmI8aSAdLuTn7HzX73oJfwyBB7Kt016doZGH3PSnQhcvDRzG7t
+ TsgV5C75qSlfjAPwY+3BXy++0dmiH8DGC4Dg5jRdwBzxWqZIXhbiRl2fHGhpOu7bGQwz
+ UA4RZmqFAtWAYZEijIB3FHJEk9oxhI61edHyoybV7huXKtMNSEq082xx7ADe/kACO4Ny
+ +FwJn6mXa7tsUlPMDkJhjPL23Ga16DNTe4ghKOgnqyOtBg/+Yp5Nk07vUwr2zbsFIlwy
+ D/yA==
+X-Gm-Message-State: AOJu0YwhK/IeACFzcGj6GcOoc0dl20fkLBhtZrvqO2s/Z60qMMy7UEns
+ +iYceuoBZ1H7iQGvVDjsZQoHA5IM4XrMvxDOCLUoYTsJyDrbxaSSfHBSN7M2f+rSyw==
+X-Google-Smtp-Source: AGHT+IH9TCcp++WC9SqvBom1iyHajdRktSdIxskbUy1V5eImPQUJShkOjAPmda7bF2AKYRDVjhH9Bg==
+X-Received: by 2002:ac2:4a65:0:b0:513:1e31:ddec with SMTP id
+ q5-20020ac24a65000000b005131e31ddecmr2406007lfp.40.1709846936847; 
+ Thu, 07 Mar 2024 13:28:56 -0800 (PST)
+Received: from localhost.localdomain (109-252-14-191.nat.spd-mgts.ru.
+ [109.252.14.191]) by smtp.gmail.com with ESMTPSA id
+ n24-20020a056512311800b005133e95cf4fsm2368407lfb.85.2024.03.07.13.28.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 07 Mar 2024 13:28:56 -0800 (PST)
+From: Maxim Moskalets <maximmosk4@gmail.com>
+X-Google-Original-From: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com, Maxim.Moskalets@kaspersky.com,
+ Maxim Moskalets <maximmosk4@gmail.com>
+Subject: [PATCH] cmd: add FDT setup for bootelf by flag
+Date: Fri,  8 Mar 2024 00:28:53 +0300
+Message-Id: <20240307212853.83611-1-Maxim.Moskalets@kaspersky.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-References: <BEZP281MB29655E047444C987850ED632AB202@BEZP281MB2965.DEUP281.PROD.OUTLOOK.COM>
- <CAOMZO5BhEmnVsmYdJgabZC1L6GrNc4WvMhRZNrFhemTvD3rpzQ@mail.gmail.com>
- <FRYP281MB2969D2ABC5FF3EB2421E95E8AB202@FRYP281MB2969.DEUP281.PROD.OUTLOOK.COM>
-In-Reply-To: <FRYP281MB2969D2ABC5FF3EB2421E95E8AB202@FRYP281MB2969.DEUP281.PROD.OUTLOOK.COM>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 7 Mar 2024 18:19:12 -0300
-Message-ID: <CAOMZO5BZETj3yTE1mOVXCmUH+JeyYPs2bSWZ9DGp1qtNqD=JHQ@mail.gmail.com>
-Subject: Re: U-boot fails for khadas-edge -v
-To: Vivek Jaiswal <vjaiswal@cinemo.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,11 +90,119 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Mar 7, 2024 at 2:43=E2=80=AFPM Vivek Jaiswal <vjaiswal@cinemo.com> =
-wrote:
+From: Maxim Moskalets <maximmosk4@gmail.com>
 
-> are you saying to use this one?
-> https://github.com/u-boot/u-boot/blob/master/configs/khadas-edge-v-rk3399=
-_defconfig
+Added the ability to use FDT for ELF applications, required to run some
+OS. To make FDT setup, you need to set the -d fdt_addr_r cmd option for
+bootelf command. Enable by selecting CMD_ELF_FDT_SETUP.
 
-Yes, this one.
+Signed-off-by: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>
+---
+
+ cmd/Kconfig | 11 +++++++++++
+ cmd/elf.c   | 39 ++++++++++++++++++++++++++++++++++++---
+ 2 files changed, 47 insertions(+), 3 deletions(-)
+
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index a86b570517..8821e66f76 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -479,6 +479,17 @@ config CMD_ELF
+ 	help
+ 	  Boot an ELF/vxWorks image from the memory.
+ 
++config CMD_ELF_FDT_SETUP
++	bool "Flattened Device Tree setup in bootelf cmd"
++	default n
++	depends on CMD_ELF
++	select LIB_LIBFDT
++	select LMB
++	help
++	  Do FDT setup in bootelf command optionally by param -d, which
++	  allows to bring additional system info (e.g. /memory node) to
++	  the Operating System or application.
++
+ config CMD_FDT
+ 	bool "Flattened Device Tree utility commands"
+ 	default y
+diff --git a/cmd/elf.c b/cmd/elf.c
+index b7b9f506a5..df4354d374 100644
+--- a/cmd/elf.c
++++ b/cmd/elf.c
+@@ -38,6 +38,10 @@ static unsigned long do_bootelf_exec(ulong (*entry)(int, char * const[]),
+ /* Interpreter command to boot an arbitrary ELF image from memory */
+ int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ {
++#if CONFIG_IS_ENABLED(CMD_ELF_FDT_SETUP)
++	struct bootm_headers img = {0};
++	unsigned long fdt_addr = 0; /* Address of the FDT */
++#endif
+ 	unsigned long addr; /* Address of the ELF image */
+ 	unsigned long rc; /* Return value from user code */
+ 	char *sload = NULL;
+@@ -46,13 +50,25 @@ int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	/* Consume 'bootelf' */
+ 	argc--; argv++;
+ 
+-	/* Check for flag. */
++	/* Check for [-p|-s] flag. */
+ 	if (argc >= 1 && (argv[0][0] == '-' && \
+ 				(argv[0][1] == 'p' || argv[0][1] == 's'))) {
+ 		sload = argv[0];
+ 		/* Consume flag. */
+ 		argc--; argv++;
+ 	}
++
++#if CONFIG_IS_ENABLED(CMD_ELF_FDT_SETUP)
++	/* Check for [-d fdt_addr_r] option. */
++	if ((argc >= 2) && (argv[0][0] == '-') && (argv[0][1] == 'd')) {
++		if (strict_strtoul(argv[1], 16, &fdt_addr) != 0)
++			return CMD_RET_USAGE;
++		/* Consume option. */
++		argc -= 2;
++		argv += 2;
++	}
++#endif
++
+ 	/* Check for address. */
+ 	if (argc >= 1 && strict_strtoul(argv[0], 16, &addr) != -EINVAL) {
+ 		/* Consume address */
+@@ -68,6 +84,16 @@ int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	else
+ 		addr = load_elf_image_shdr(addr);
+ 
++#if CONFIG_IS_ENABLED(CMD_ELF_FDT_SETUP)
++	if (fdt_addr) {
++		printf("## Setting up FDT at 0x%08lx ...\n", fdt_addr);
++		flush();
++
++		if (image_setup_libfdt(&img, (void *)fdt_addr, NULL))
++			return 1;
++	}
++#endif
++
+ 	if (!env_get_autostart())
+ 		return rcode;
+ 
+@@ -298,9 +324,16 @@ int do_bootvx(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ U_BOOT_CMD(
+ 	bootelf, CONFIG_SYS_MAXARGS, 0, do_bootelf,
+ 	"Boot from an ELF image in memory",
+-	"[-p|-s] [address]\n"
++	"[-p|-s] "
++#if CONFIG_IS_ENABLED(CMD_ELF_FDT_SETUP)
++	"[-d fdt_addr_r] "
++#endif
++	"[address]\n"
+ 	"\t- load ELF image at [address] via program headers (-p)\n"
+-	"\t  or via section headers (-s)"
++	"\t  or via section headers (-s)\n"
++#if CONFIG_IS_ENABLED(CMD_ELF_FDT_SETUP)
++	"\t- setup FDT image at [fdt_addr_r] (-d)"
++#endif
+ );
+ 
+ U_BOOT_CMD(
+-- 
+2.39.2
+
