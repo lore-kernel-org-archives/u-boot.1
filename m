@@ -4,112 +4,129 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8A9BC48BF6
-	for <u-boot@archiver.kernel.org>; Thu,  7 Mar 2024 14:56:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DF73C54798
+	for <u-boot@archiver.kernel.org>; Thu,  7 Mar 2024 14:56:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F19587E39;
+	by phobos.denx.de (Postfix) with ESMTP id B10B387F59;
 	Thu,  7 Mar 2024 15:56:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=cinemo.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="R83k96t1";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=cinemo0.onmicrosoft.com header.i=@cinemo0.onmicrosoft.com header.b="i2wIV7FA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D3A087EBD; Thu,  7 Mar 2024 11:24:46 +0100 (CET)
-Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
+ id 14FFC87E92; Thu,  7 Mar 2024 12:22:43 +0100 (CET)
+Received: from DEU01-FR2-obe.outbound.protection.outlook.com
+ (mail-fr2deu01on20701.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2623::701])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9087F87E11
- for <u-boot@lists.denx.de>; Thu,  7 Mar 2024 11:24:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id 78AF487DC1
+ for <u-boot@lists.denx.de>; Thu,  7 Mar 2024 12:22:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=avromanov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id B49C310000F;
- Thu,  7 Mar 2024 13:24:42 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru B49C310000F
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1709807082;
- bh=7Rhhy/u6pqPse8f4v4KsxPndizTXCjCodrFlNGVmszE=;
- h=From:To:Subject:Date:Message-ID:Content-Type:MIME-Version:From;
- b=R83k96t1ZVMAqCOszs9stsDSUjvN8NuqWuLkYdoSI5FRgtbLQdhQDtI2DPWHGfyoc
- X7f0+xy8spuGAxBtNfvwKAnr+7JA/bGHXNKI1PtDucmLhaInE4nS8aS/bi+16FTmbW
- urbyK5aN+C6gfFgl/gVfWtFtByLo9eAp/x7wyyYLq0s17t5osuvQsc9P+75Pmw6qVx
- YOFVyeAMul03vR38sqBfm1hCpO2geOrEY5Rvo4gFafM4D4F5GVw4FIEpEaFeDicsVw
- WbxAjqoU3F4URzj9ze086M5dJkSoU9DpbbXb336ljKG7DESE3PPZaPiflulLgPajZW
- bdCsKFY2y21jA==
-Received: from smtp.sberdevices.ru (p-i-exch-a-m1.sberdevices.ru
- [172.24.196.116])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Thu,  7 Mar 2024 13:24:42 +0300 (MSK)
-Received: from p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) by
- p-i-exch-a-m1.sberdevices.ru (172.24.196.116) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.4; Thu, 7 Mar 2024 13:24:42 +0300
-Received: from p-i-exch-a-m1.sberdevices.ru (172.24.196.116) by
- p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Thu, 7 Mar 2024 13:24:42 +0300
-Received: from p-i-exch-a-m1.sberdevices.ru ([fe80::49d0:5751:faed:eb08]) by
- p-i-exch-a-m1.sberdevices.ru ([fe80::49d0:5751:faed:eb08%10]) with mapi id
- 15.02.1544.004; Thu, 7 Mar 2024 13:24:42 +0300
-From: Alexey Romanov <avromanov@salutedevices.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-CC: kernel <kernel@sberdevices.ru>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>, "dario.binacchi@amarulasolutions.com"
- <dario.binacchi@amarulasolutions.com>, "michael@amarulasolutions.com"
- <michael@amarulasolutions.com>, "frieder.schrempf@kontron.de"
- <frieder.schrempf@kontron.de>, "ilias.apalodimas@linaro.org"
- <ilias.apalodimas@linaro.org>, "sjg@chromium.org" <sjg@chromium.org>,
- "bmeng@tinylab.org" <bmeng@tinylab.org>, "tobias@waldekranz.com"
- <tobias@waldekranz.com>, "jpewhacker@gmail.com" <jpewhacker@gmail.com>,
- "marek.vasut+renesas@mailbox.org" <marek.vasut+renesas@mailbox.org>,
- "kever.yang@rock-chips.com" <kever.yang@rock-chips.com>, "jbx6244@gmail.com"
- <jbx6244@gmail.com>, "abdellatif.elkhlifi@arm.com"
- <abdellatif.elkhlifi@arm.com>, "michal.simek@amd.com" <michal.simek@amd.com>, 
- "mikhail.kshevetskiy@iopsys.eu" <mikhail.kshevetskiy@iopsys.eu>,
- "patrice.chotard@foss.st.com" <patrice.chotard@foss.st.com>
-Subject: Re: [PATCH v1 1/4] drivers: introduce mtdblock abstraction
-Thread-Topic: [PATCH v1 1/4] drivers: introduce mtdblock abstraction
-Thread-Index: AQHaaWRq1gNB1mcZxEGOgA+vHYmZg7Ed/xWAgA3vJgA=
-Date: Thu, 7 Mar 2024 10:24:41 +0000
-Message-ID: <20240307102436.r6ansla3xz6d4j7u@cab-wsm-0029881>
-References: <20240227100441.1811047-1-avromanov@salutedevices.com>
- <20240227100441.1811047-2-avromanov@salutedevices.com>
- <083f018d-d22e-455f-98c9-9c21730e4a7d@gmx.de>
-In-Reply-To: <083f018d-d22e-455f-98c9-9c21730e4a7d@gmx.de>
-Accept-Language: ru-RU, en-US
+ dmarc=none (p=none dis=none) header.from=cinemo.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=vjaiswal@cinemo.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=VWxM/wPVU+3krEWcoMC3IVGarXiJHGyZ5h9u8uIDDUVMo181I5+teNWJP6AArlsAfRhoax75lDZlP+/wRWOvQ7ffpozR9ziJs960Rb1KE1NHR83wHpEIyLsRaWcdMVhro3lIKYHgutmMC4JLj069M24WcZFZmrkNIln/XFwRenYBmazm+KDJQ/6MPA2zbtLI9DMx+6R5kot5lVOS4VA1YsoHJ1ICwP65U9pSg5EepI846Mj3SSdNcucXZM9Tmx265SPM9UYuFucog/lX/uO/CHym9lzVVsXN/HrGL3X411Zzr6pvmJQ5Q0GiwFQ88HEzaX5HTpUYIQW7y2EyijK+ZQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=92jtv3VrKGvz6WFk2XbMJDaBTVRk/yFlMH5iqCJtiK8=;
+ b=JDSJUXBzz0hQylzO/od8CYS2iRlSWyqjNy8zHkJXU8Udlj/belGw6H0uJuHPfRaBe2HFz6ho+sUkf7JgKJQ49AsLT7PnO93LMX1nBY2k+lUzW9fi6roiz8KHLxD/uHNlji25hvYbuAv7feJAcmn3pNIkgKAx8jmSadkhIkTEZj+yPnDj9zP+B+WAnidndSBB5Qq0UudnGxqsd8eQoYc6PKDw4VsLVNIi7KVVuGDOPbiq7uxpjfrXYfZpLzv+wgC3o8dSgiX5i1fp6CN97UQrF6RAfqedm/Q3myh5zaFG3i3EUKbHZYq4yPcy3Bf7whqoB5WQH1imyyrjzMbUYYb1uQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cinemo.com; dmarc=pass action=none header.from=cinemo.com;
+ dkim=pass header.d=cinemo.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=cinemo0.onmicrosoft.com; s=selector1-cinemo0-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=92jtv3VrKGvz6WFk2XbMJDaBTVRk/yFlMH5iqCJtiK8=;
+ b=i2wIV7FAMdvIHpu/p09Pecv19AQ8efu4FjKnTErf9Ow5/AawwnWNLDvr9Lhr0Ku4iJ3oi27dUnGGNfioe/Jucg6/BbYDyRQw0i44vGOHALE4oSGPXHLuGxz1eYyRMRTyy2qhHWk5EKj2qDtwOVMoYj+EQNNwY7jdWOJvmGhqj8k=
+Received: from BEZP281MB2965.DEUP281.PROD.OUTLOOK.COM (2603:10a6:b10:2e::6) by
+ FR3P281MB1695.DEUP281.PROD.OUTLOOK.COM (2603:10a6:d10:6c::6) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7362.24; Thu, 7 Mar 2024 11:22:38 +0000
+Received: from BEZP281MB2965.DEUP281.PROD.OUTLOOK.COM
+ ([fe80::7ec3:6650:f2e5:86fa]) by BEZP281MB2965.DEUP281.PROD.OUTLOOK.COM
+ ([fe80::7ec3:6650:f2e5:86fa%4]) with mapi id 15.20.7362.024; Thu, 7 Mar 2024
+ 11:22:38 +0000
+From: Vivek Jaiswal <vjaiswal@cinemo.com>
+To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: U-boot fails for khadas-edge -v 
+Thread-Topic: U-boot fails for khadas-edge -v 
+Thread-Index: AQHacIAKth58IDIIyk62Zj6csqiUFQ==
+Date: Thu, 7 Mar 2024 11:22:38 +0000
+Message-ID: <BEZP281MB29655E047444C987850ED632AB202@BEZP281MB2965.DEUP281.PROD.OUTLOOK.COM>
+Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-originating-ip: [172.16.18.92]
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <EADAE6C35A050B4AA2AECC28B37AD94C@sberdevices.ru>
-Content-Transfer-Encoding: quoted-printable
+msip_labels: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cinemo.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: BEZP281MB2965:EE_|FR3P281MB1695:EE_
+x-ms-office365-filtering-correlation-id: 9193c08e-0762-4a13-28ff-08dc3e98e546
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 8QJcR2wUyokrr3689kks3QEswiyQ1xoxx4DqwWH4oLBqqMxyxJrytUDkJs4roXBp21uCgXdJfwRK/d9eFfl0o9/wErb9i7CsrnNJ95SK41GS2BUG/FnR5BKgZBNMcH0Kl4WHIK+/pt82j+DxEmoM7GEwvSobtUoLF5tCHP/Cz8snZlq38FxvSuytIITHG4PlhGvDf3NjMP5FtwDhkUQfPW7fcaTyIzTMFGTq9P5uxjjGCtS2WigZr3sGBn1FSEMvoMFjlyvyNmtPtMyaywe+cUYoQNxGws+EZZmsKWtJbUx0QZUVL1ppNnOonUfKZfAEFIFqczCHxfawpWXc/PTlb3RoCjIh8eknOP2D5kPs2WwSZG4Pa+UQr4EsYqXHwUXOU1SHACf6iHToNhr+Z8uWAx3a0NBQ0CW8tBeLLYFkElOydE3AmIeNitCBxXIevq63WFpmqaN30Bo8R1pfK0+FrYRVlj6odZf7Y89Y5JoUyFr8GalNjJV8PtUQrAFi6iyclfqhapa2yrHFT9jjEvXq8exJLxpbniedyJSOLDe68rMetPrvdxdfgKX0Riund6XRYnzGnSYREKCFyoA7X4J6u7h6xqF6qJAvLGYpbr7E+awx6CEu5WYpzFDxMlOGfYNQSsZkXMnawOjDrCPq65cEj/2+z1iimXNDngrF6/S3iSSv7Ol8utMZseYfqPijlsSi
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BEZP281MB2965.DEUP281.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230031)(376005)(38070700009); DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?NUVVZU1wRkhLaFlqRFFSakJjdC83RHRnaXlKZ0NnM2lTOHdOWDFtRS9WVCs3?=
+ =?utf-8?B?ZGVLQXhvSUMvZ0FBYkE2R3pKUnpncWRUTjJqS0htOTNmNHZEbERBekFFaVZH?=
+ =?utf-8?B?Q2UvNHM4TnZaYkw2TTA5U1gzWlN0NzRIOXdZaHhNeHFXdmZ5WmE0dUlXaEFH?=
+ =?utf-8?B?bWJCMlBENXQzMFhUalplWG1uOG55TGQ2cnpxd3FEU0RFNHlYUXlxbkpnRG0z?=
+ =?utf-8?B?TjRUMG40MHltbnVpUFF4Tk1lSkNHY2pGZWxuRWRxdWk0OGNrV2FkekdaYTNp?=
+ =?utf-8?B?dEdyTHVZTVZzZ2hUNks4YS9sZEY0ZnpiYjkvVG1YRHozNmplNGRya0llTmJR?=
+ =?utf-8?B?aDZFenhPa3Y5MTc5UHN0TEVDdmZWZU8rWWNjbzJZbWpGZ0ZhM1NjWkhGeU5T?=
+ =?utf-8?B?LzlRaUFIWTBPUEorOFliZFJlNVZtMTFkTVlFeEJRbU0yU2dFTW13WmwxdWZM?=
+ =?utf-8?B?S0JSU05PNjdLKzNLa1RSRS81M2hlUXFsLytscm1OcFc1SmtodXM5eXNJcm9B?=
+ =?utf-8?B?dTFNME1hdkEvSHQ3ejZMaHErUHdHWUtyK3dtSE5MTEtFQWFBanBvQlZKSGEr?=
+ =?utf-8?B?SnFKRWNtMTBkclN4NC9SQWMvUVpJdFdKbDdtRkpkVUhOcjJrbmFJTTNVNmtx?=
+ =?utf-8?B?N3ZPRWIrSFNFMk02dVpONTAzZ1FueFRwRWxBSGxJR0pWdXg4MzB1dm9PbmV2?=
+ =?utf-8?B?RHk2VHN3SFBPN2RyYytrb2Vka0cyc3ZwOTNLWTU1Y0g1WTRQSlQ0K3ZmT0dx?=
+ =?utf-8?B?MDVER0dMVFpRSHdhZFZtOXRHb3ZQdURycWs5U2owV3prMEVRNk41REk1N0s5?=
+ =?utf-8?B?VnRvb1lualUreVVIL3lTbjhrZGZISHJBV2JOYStYR3ZZZDQwMUVJSm4vM3Nl?=
+ =?utf-8?B?M3RxNHJVemVZbytJa1RSYkx5cm9JUmNsZ3FESWs3RHp3ejBvOUdFZExPQnR2?=
+ =?utf-8?B?NitJTkExOG1iNThwSjlFTG52UEZyekErdGJnVzlqYmg2L3RZczF4MHVOQzZm?=
+ =?utf-8?B?RzFQTlRPVjA4OUlCM1BKOUh6QmVpbldCQ09VSDhhMUJITENlV25VOGI0VlZG?=
+ =?utf-8?B?dVRDSktzckc5UHRNa3d4OVBpenc4bjRyZmdGQ3Rtcmk3Ykk4SUFPUE9KZlls?=
+ =?utf-8?B?VytPK1padFVsc2dBd21yVXBFbGZxb2hYektKWDhzS3EraWlFTTZaUWg4Qldq?=
+ =?utf-8?B?NEc2OWFrekNLTEN2RkVjcU5tbWloeUUvQ25VNU9WZm9Mem1qRDBuZGVFWjVH?=
+ =?utf-8?B?YzhQYTRVdjVIK2hXRW5wekF1KzhPb081OGVkeXErNlpmd1Ryb3Q3YVljZ3da?=
+ =?utf-8?B?N0hZRFFGYmx1ZThNUndmU0J5K0xSVllDNEFia2gzdTZlVU50NFZpNnl1NzdB?=
+ =?utf-8?B?U3RYQytsZnBsWEhXa0M0dUppS0pWRGVZTVRLbFB6akxMY1BKclRKSWVDNURS?=
+ =?utf-8?B?UjNnWVBTTTdmL2VjNVI3bkZnMVJoVXlIRjJsVVhEUVE3ZHRrb2lLdkNYeUhQ?=
+ =?utf-8?B?dUVDU1plb2lsSFZHTXBqNjJ5QWVza0hDMlljNWE2NHU3TDdzWDZaUUdvOTNu?=
+ =?utf-8?B?M3laVGxYTnpxcEVpY0R0TGRnWmJwejQwazlYeUdScURFa2JWVUQ2bnA2NURz?=
+ =?utf-8?B?a21tM2xvaEw0WjZTdDFhRVFxTzNMNXJndjNJUEhZMEYwdlpHMHVHZ2RVcEtD?=
+ =?utf-8?B?VUxhdC9WNGsxRFhEYjhXTWN4cjdEa3ZuRHRRNXhObTJvZmtCbUNUU2xFZmtm?=
+ =?utf-8?B?YTJmYTNudldzSndlcjJ2RnlwZ05ZNUNCYlhtVXBlZzdWQmF0NGcwRVFLdldn?=
+ =?utf-8?B?dTB3OWpUVmRXckpLamxSbktET0VqZGhkTyt4OGR1d08rUzMzbGFCYkhwbGNw?=
+ =?utf-8?B?M01qSklVNnhYSEJPYnJTNVpmT2FYcGxyU01LdHJ6QWptRHlpZmFKalJTZzhs?=
+ =?utf-8?B?Ym1RWk5WOHBXbW9pZTcxVCs4azBuUXVRWExpV1ZCaGY3UXJ4WE1NZlJWZEMx?=
+ =?utf-8?B?VEZFeW9SNGZCd1VMZWw5cWROWWZHN2c3aW9aMDZvay9kcDU3algvdkwrTlVy?=
+ =?utf-8?B?bDFmeE8rV2paalpwajZQTGN4YmNHclE4b1krK1BuaStmWnNmdUZXay9UU0tt?=
+ =?utf-8?Q?2/6g=3D?=
 MIME-Version: 1.0
-X-KSMG-Rule-ID: 1
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 183875 [Feb 29 2024]
-X-KSMG-AntiSpam-Version: 6.1.0.3
-X-KSMG-AntiSpam-Envelope-From: avromanov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 7 0.3.7
- 6d6bf5bd8eea7373134f756a2fd73e9456bb7d1a, {Track_E25351},
- {Tracking_from_domain_doesnt_match_to}, FromAlignment: s
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean
-X-KSMG-LinksScanning: Clean
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2024/02/29 19:21:00 #23899999
-X-KSMG-AntiVirus-Status: Clean, skipped
+X-OriginatorOrg: cinemo.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BEZP281MB2965.DEUP281.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9193c08e-0762-4a13-28ff-08dc3e98e546
+X-MS-Exchange-CrossTenant-originalarrivaltime: 07 Mar 2024 11:22:38.1892 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 3f67d7a5-8d31-49e4-bdef-c6169c4e9474
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: msgJqRvU7ZTHZIJxqZmdyI8dv03djA4K7KcJxhCyas/HL571MH+MgXkNET02oShf8dTmAIw99OU0G84oRANbPw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: FR3P281MB1695
 X-Mailman-Approved-At: Thu, 07 Mar 2024 15:55:57 +0100
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -126,340 +143,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
-
-On Tue, Feb 27, 2024 at 02:37:17PM +0100, Heinrich Schuchardt wrote:
-> On 27.02.24 11:04, Alexey Romanov wrote:
-> > MTD block - abstraction over MTD subsystem, allowing
-> > to read and write in blocks using BLK UCLASS.
-> >=20
-> > - Read algorithm:
-> >=20
-> >    1. Convert start block number to start address.
-> >    2. Read block_dev->blksz bytes using mtd_read() and
-> >       add to start address pointer block_dev->blksz bytes,
-> >       until the requested number of blocks have been read.
-> >=20
-> > - Write algorithm:
-> >=20
-> >    1. Convert start block number to start address.
-> >    2. Round this address down by mtd->erasesize.
-> >=20
-> >    Erase addr      Start addr
-> >       |                |
-> >       v                v
-> >       +----------------+----------------+----------------+
-> >       |     blksz      |      blksz     |      blksz     |
-> >       +----------------+----------------+----------------+
-> >=20
-> >    3. Calculate offset between this two addresses.
-> >    4. Read mtd->erasesize bytes using mtd_read() into
-> >       temporary buffer from erase address.
-> >=20
-> >    Erase addr      Start addr
-> >       |                |
-> >       v                v
-> >       +----------------+----------------+----------------+
-> >       |     blksz      |      blksz     |      blksz     |
-> >       +----------------+----------------+----------------+
-> >       ^            mtd->erasesize =3D blksz * 3
->=20
-> Can you really erase only the start of the erase block?
-
-Yeah.
-
->=20
-> Wouldn't you have also to round the end address up to the end of an
-> erase block and read and rewrite the data between the end address and
-> the end of the last erase block?
-
-I think I didn't express myself quite correctly. Of coure, we erase
-and write only by mtd->erasesize bytes and don't overwrite this field.
-
-> >       ^            mtd->erasesize =3D blksz * 3
-
-I just wrote that for example mtd->erasesize can be equal to blksz * 3,
-for the situtation I describe above. In reality it can be anything. I
-will describe this point in more detail in v2.
-
-
->=20
-> >       |
-> >       |
-> >       |
-> >=20
-> >    mtd_read()
-> >    from here
-> >=20
-> >    5. Copy data from user buffer to temporary buffer with offset,
-> >       calculated at step 3.
-> >    6. Erase and write mtd->erasesize bytes at erase address
-> >       pointer using mtd_erase/mtd_write().
-> >    7. Add to erase address pointer mtd->erasesize bytes.
-> >    8. goto 1 until the requested number of blocks have
-> >       been written.
->=20
-> Commit messages is not were developers typically look for documentation.
-> Please, add the information to /doc/develop/ or to the source code.
-
-Move it to docs in v2.
-
->=20
-> Best regards
->=20
-> Heinrich
->=20
-> >=20
-> > Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
-> > ---
-> >   drivers/block/blk-uclass.c |   1 +
-> >   drivers/mtd/Makefile       |   1 +
-> >   drivers/mtd/mtdblock.c     | 170 ++++++++++++++++++++++++++++++++++++=
-+
-> >   include/linux/mtd/mtd.h    |  12 +++
-> >   4 files changed, 184 insertions(+)
-> >   create mode 100644 drivers/mtd/mtdblock.c
-> >=20
-> > diff --git a/drivers/block/blk-uclass.c b/drivers/block/blk-uclass.c
-> > index 77066da352..ab0a9105c9 100644
-> > --- a/drivers/block/blk-uclass.c
-> > +++ b/drivers/block/blk-uclass.c
-> > @@ -37,6 +37,7 @@ static struct {
-> >   	{ UCLASS_PVBLOCK, "pvblock" },
-> >   	{ UCLASS_BLKMAP, "blkmap" },
-> >   	{ UCLASS_RKMTD, "rkmtd" },
-> > +	{ UCLASS_MTD, "mtd" },
-> >   };
-> >=20
-> >   static enum uclass_id uclass_name_to_iftype(const char *uclass_idname=
-)
-> > diff --git a/drivers/mtd/Makefile b/drivers/mtd/Makefile
-> > index c638980ea2..993b122ac4 100644
-> > --- a/drivers/mtd/Makefile
-> > +++ b/drivers/mtd/Makefile
-> > @@ -26,6 +26,7 @@ obj-y +=3D onenand/
-> >   obj-y +=3D spi/
-> >   obj-$(CONFIG_MTD_UBI) +=3D ubi/
-> >   obj-$(CONFIG_NVMXIP) +=3D nvmxip/
-> > +obj-$(CONFIG_BLK) +=3D mtdblock.o
-> >=20
-> >   #SPL/TPL build
-> >   else
-> > diff --git a/drivers/mtd/mtdblock.c b/drivers/mtd/mtdblock.c
-> > new file mode 100644
-> > index 0000000000..0563d0b795
-> > --- /dev/null
-> > +++ b/drivers/mtd/mtdblock.c
-> > @@ -0,0 +1,170 @@
-> > +// SPDX-License-Identifier: GPL-2.0+
-> > +/*
-> > + * (C) Copyright 2024 SaluteDevices, Inc.
-> > + *
-> > + * Author: Alexey Romanov <avromanov@salutedevices.com>
-> > + */
-> > +
-> > +#include <blk.h>
-> > +#include <dm/device.h>
-> > +#include <dm/device-internal.h>
-> > +#include <linux/mtd/mtd.h>
-> > +
-> > +int mtd_bind(struct udevice *dev, struct mtd_info **mtd)
-> > +{
-> > +	struct blk_desc *bdesc;
-> > +	struct udevice *bdev;
-> > +	int ret;
-> > +
-> > +	ret =3D blk_create_devicef(dev, "mtd_blk", "blk", UCLASS_MTD,
-> > +				 dev_seq(dev), 512, 0, &bdev);
-> > +	if (ret) {
-> > +		pr_err("Cannot create block device");
-> > +		return ret;
-> > +	}
-> > +
-> > +	bdesc =3D dev_get_uclass_plat(bdev);
-> > +	dev_set_priv(bdev, mtd);
-> > +	bdesc->bdev =3D bdev;
-> > +
-> > +	return 0;
-> > +}
-> > +
-> > +static ulong mtd_bread(struct udevice *dev, lbaint_t start, lbaint_t b=
-lkcnt,
-> > +		       void *dst)
-> > +{
-> > +	struct blk_desc *block_dev =3D dev_get_uclass_plat(dev);
-> > +	struct mtd_info *mtd =3D blk_desc_to_mtd(block_dev);
-> > +	unsigned int sect_size =3D block_dev->blksz;
-> > +	lbaint_t cur =3D start;
-> > +	ulong read_cnt =3D 0;
-> > +
-> > +	while (read_cnt < blkcnt) {
-> > +		int ret;
-> > +		loff_t sect_start =3D cur * sect_size;
-> > +		size_t retlen;
-> > +
-> > +		ret =3D mtd_read(mtd, sect_start, sect_size, &retlen, dst);
-> > +		if (ret)
-> > +			return ret;
-> > +
-> > +		if (retlen !=3D sect_size) {
-> > +			pr_err("mtdblock: failed to read block 0x%lx\n", cur);
-> > +			return -EIO;
-> > +		}
-> > +
-> > +		cur++;
-> > +		dst +=3D sect_size;
-> > +		read_cnt++;
-> > +	}
-> > +
-> > +	return read_cnt;
-> > +}
-> > +
-> > +static int mtd_erase_write(struct mtd_info *mtd, uint64_t start, const=
- void *src)
-> > +{
-> > +	int ret;
-> > +	size_t retlen;
-> > +	struct erase_info erase =3D { 0 };
-> > +
-> > +	erase.mtd =3D mtd;
-> > +	erase.addr =3D start;
-> > +	erase.len =3D mtd->erasesize;
-> > +
-> > +	ret =3D mtd_erase(mtd, &erase);
-> > +	if (ret)
-> > +		return ret;
-> > +
-> > +	ret =3D mtd_write(mtd, start, mtd->erasesize, &retlen, src);
-> > +	if (ret)
-> > +		return ret;
-> > +
-> > +	if (retlen !=3D mtd->erasesize) {
-> > +		pr_err("mtdblock: failed to read block at 0x%llx\n", start);
-> > +		return -EIO;
-> > +	}
-> > +
-> > +	return 0;
-> > +}
-> > +
-> > +static ulong mtd_bwrite(struct udevice *dev, lbaint_t start, lbaint_t =
-blkcnt,
-> > +			const void *src)
-> > +{
-> > +	struct blk_desc *block_dev =3D dev_get_uclass_plat(dev);
-> > +	struct mtd_info *mtd =3D blk_desc_to_mtd(block_dev);
-> > +	unsigned int sect_size =3D block_dev->blksz;
-> > +	lbaint_t cur =3D start, blocks_todo =3D blkcnt;
-> > +	ulong write_cnt =3D 0;
-> > +	u8 *buf;
-> > +	int ret =3D 0;
-> > +
-> > +	buf =3D malloc(mtd->erasesize);
-> > +	if (!buf)
-> > +		return -ENOMEM;
-> > +
-> > +	while (blocks_todo > 0) {
-> > +		loff_t sect_start =3D cur * sect_size;
-> > +		loff_t erase_start =3D ALIGN_DOWN(sect_start, mtd->erasesize);
-> > +		u32 offset =3D sect_start - erase_start;
-> > +		size_t cur_size =3D min_t(size_t,  mtd->erasesize - offset,
-> > +					blocks_todo * sect_size);
-> > +		size_t retlen;
-> > +		lbaint_t written;
-> > +
-> > +		ret =3D mtd_read(mtd, erase_start, mtd->erasesize, &retlen, buf);
-> > +		if (ret)
-> > +			goto out;
-> > +
-> > +		if (retlen !=3D mtd->erasesize) {
-> > +			pr_err("mtdblock: failed to read block 0x%lx\n", cur);
-> > +			ret =3D -EIO;
-> > +			goto out;
-> > +		}
-> > +
-> > +		memcpy(buf + offset, src, cur_size);
-> > +
-> > +		ret =3D mtd_erase_write(mtd, erase_start, buf);
-> > +		if (ret)
-> > +			goto out;
-> > +
-> > +		written =3D cur_size / sect_size;
-> > +
-> > +		blocks_todo -=3D written;
-> > +		cur +=3D written;
-> > +		src +=3D cur_size;
-> > +		write_cnt +=3D written;
-> > +	}
-> > +
-> > +out:
-> > +	free(buf);
-> > +
-> > +	if (ret)
-> > +		return ret;
-> > +
-> > +	return write_cnt;
-> > +}
-> > +
-> > +static int mtd_blk_probe(struct udevice *dev)
-> > +{
-> > +	int ret;
-> > +
-> > +	ret =3D device_probe(dev);
-> > +	if (ret) {
-> > +		pr_err("Probing %s failed (err=3D%d)\n", dev->name, ret);
-> > +		return ret;
-> > +	}
-> > +
-> > +	return 0;
-> > +}
-> > +
-> > +static const struct blk_ops mtd_blk_ops =3D {
-> > +	.read =3D mtd_bread,
-> > +	.write =3D mtd_bwrite,
-> > +};
-> > +
-> > +U_BOOT_DRIVER(mtd_blk) =3D {
-> > +	.name =3D "mtd_blk",
-> > +	.id =3D UCLASS_BLK,
-> > +	.ops =3D &mtd_blk_ops,
-> > +	.probe =3D mtd_blk_probe,
-> > +};
-> > diff --git a/include/linux/mtd/mtd.h b/include/linux/mtd/mtd.h
-> > index 09f5269887..9b997fadd1 100644
-> > --- a/include/linux/mtd/mtd.h
-> > +++ b/include/linux/mtd/mtd.h
-> > @@ -26,6 +26,9 @@
-> >   #include <dm/device.h>
-> >   #endif
-> >   #include <dm/ofnode.h>
-> > +#if IS_ENABLED(CONFIG_BLK)
-> > +#include <blk.h>
-> > +#endif
-> >=20
-> >   #define MAX_MTD_DEVICES 32
-> >   #endif
-> > @@ -412,6 +415,15 @@ int mtd_write(struct mtd_info *mtd, loff_t to, siz=
-e_t len, size_t *retlen,
-> >   int mtd_panic_write(struct mtd_info *mtd, loff_t to, size_t len, size=
-_t *retlen,
-> >   		    const u_char *buf);
-> >=20
-> > +#if IS_ENABLED(CONFIG_BLK)
-> > +static inline struct mtd_info *blk_desc_to_mtd(struct blk_desc *bdesc)
-> > +{
-> > +	return *((struct mtd_info **)dev_get_priv(bdesc->bdev));
-> > +}
-> > +
-> > +int mtd_bind(struct udevice *dev, struct mtd_info **mtd);
-> > +#endif
-> > +
-> >   int mtd_read_oob(struct mtd_info *mtd, loff_t from, struct mtd_oob_op=
-s *ops);
-> >   int mtd_write_oob(struct mtd_info *mtd, loff_t to, struct mtd_oob_ops=
- *ops);
-> >=20
->=20
-
---=20
-Thank you,
-Alexey=
+SGVsbG8gVS1ib290IFRlYW0sDQpJIGFtIHVzaW5nIHRoZSB1LWJvb3QgZm9yIEtoYWRhcyBFZGdl
+LXYgcmszMzk5IHJvY2tjaGlwOiAgaHR0cHM6Ly9naXRodWIuY29tL2toYWRhcy91LWJvb3QvdHJl
+ZS9raGFkYXMtZWRnZXMtdjIwMTcuMDktcmVsZWFzZS12MS4wLjA/dGFiPXJlYWRtZS1vdi1maWxl
+DQpBbmQgSSBhbSB1c2luZyBjb25maWd1cmF0aW9uIGZpbGUgOiBodHRwczovL2dpdGh1Yi5jb20v
+a2hhZGFzL3UtYm9vdC9ibG9iL2toYWRhcy1lZGdlcy12MjAxNy4wOS1yZWxlYXNlLXYxLjAuMC9j
+b25maWdzL3JrMzM5OV9kZWZjb25maWcNCkFmdGVyIGNyZWF0aW5nIHRoZSAud2ljIGltYWdlIHVz
+aW5nIHR1dG9yaWFsOiBodHRwczovL2dpdGh1Yi5jb20vSmVmZnlDTi9tZXRhLXJvY2tjaGlwL3Ry
+ZWUva2lya3N0b25lP3RhYj1yZWFkbWUtb3YtZmlsZSN2LXN1cHBvcnRpbmctbmV3LW1hY2hpbmUN
+CkkgZmxhc2hlZCB0aGUgaW1hZ2UgaW5zaWRlIHRoZSBraGFkYXMgZWRnZS12IHJrMzM5OSAgZGV2
+aWNlLg0KZGV2aWNlIDogaHR0cHM6Ly93d3cua2hhZGFzLmNvbS9wcm9kdWN0LXBhZ2UvZWRnZS12
+DQoNCkJ1dCB0aGUgYm9vdCBkaWQgbm90IGhhcHBlbmVkICwgcGxlYXNlIGNoZWNrIHRoZSBVUkFS
+VCBsb2cgYmVsb3cNCkNvbXBsZXRlIGxvZ3MgOiDigItbaHR0cHM6Ly9yZXMtZ2VvLmNkbi5vZmZp
+Y2UubmV0L2Fzc2V0cy9tYWlsL2ZpbGUtaWNvbi9wbmcvdHh0XzE2eDE2LnBuZ11VQVJUX0Vycm9y
+LmxvZy50eHQ8aHR0cHM6Ly9jaW5lbW8wLW15LnNoYXJlcG9pbnQuY29tLzp0Oi9nL3BlcnNvbmFs
+L3ZqYWlzd2FsX2NpbmVtb19jb20vRVJPa0wwZ1paV1JIa0d2Qmx2SjA2QmtCcjZ0X0NvZ1ZyeUM3
+bUFRNm55eF94Zz4NCg0KDQpDYWxsIHRyYWNlDQotLS0tLS0tLS0tLS0tLS0tLS0tDQp4MCA6IDAw
+MDAwMDAwMDgzMDAwMDAgeDEgOiAwMDAwMDAwMDAwMDAwMDAwDQp4MiA6IDAwMDAwMDAwMDAwMDAw
+MDAgeDMgOiAwMDAwMDAwMDAwMDAwMDAwDQp4NCA6IDAwMDAwMDAwMDAxNzJlMTAgeDUgOiAwMDAw
+MDAwMDAwMDAwMDAxDQp4NiA6IDAwMDAwMDAwMDAwMDAwMDggeDcgOiAwMDAwMDAwMDAwMDAwMDA4
+DQp4OCA6IDAwMDAwMDAwZjNjNDUyNzggeDkgOiAwMDAwMDEwMDAwMDAwMDAwDQp4MTA6IDAwMDAw
+MDAwZmZmZmZmZDAgeDExOiAwMDAwMDAwMDAwMDAwMDA2DQp4MTI6IDAwMDAwMDAwMDAwMTg2OWYg
+eDEzOiAwMDAwMDAwMGYzYzQ1MWJjDQp4MTQ6IDAwMDAwMDAwMDgzMDAwMDAgeDE1OiAwMDAwMDAw
+MDAwMDAwMDAyDQp4MTY6IDAwMDAwMDAwZjVjYjQwOTggeDE3OiAwMDAwMDAwMDAwZGYzNDA0DQp4
+MTg6IDAwMDAwMDAwZjNjNDljZjAgeDE5OiAwMDAwMDAwMDAwMDAwNDAwDQp4MjA6IDAwMDAwMDAw
+ZjVkNWZlZjAgeDIxOiAwMDAwMDAwMDAwMDAwMDAwDQp4MjI6IDAwMDAwMDAwMDAwMDAwMDQgeDIz
+OiAwMDAwMDAwMGYzYzQ1NDg4DQp4MjQ6IDAwMDAwMDAwZjNjNDU0ODggeDI1OiAwMDAwMDAwMDAw
+MDAwMDAwDQp4MjY6IDAwMDAwMDAwMDAwMDAwMDAgeDI3OiAwMDAwMDAwMDAwMDAwNDAwDQp4Mjg6
+IDAwMDAwMDAwMDAwMDAwMDAgeDI5OiAwMDAwMDAwMGYzYzQ1MmUwDQoNCg0KQ2FsbCB0cmFjZToN
+CiAgUEM6ICAgWzwgZmZmZmZmZmYwYTdhZTAwOCA+XQ0KICBMUjogICBbPCAwMDIwMjBiYyA+XQ0K
+DQpTdGFjazoNCiAgICAgICAgWzwgZmZmZmZmZmYwYTdhZTAwOCA+XQ0KICAgICAgICBbPCAwMDIx
+OGVhMCA+XQ0KICAgICAgICBbPCAwMDIxODk2MCA+XQ0KICAgICAgICBbPCAwMDIyODdkMCA+XQ0K
+ICAgICAgICBbPCAwMDIyOTRhNCA+XQ0KICAgICAgICBbPCAwMDIwODMyNCA+XQ0KICAgICAgICBb
+PCAwMDIyZGQ4NCA+XQ0KICAgICAgICBbPCAwMDIxNmMxMCA+XQ0KICAgICAgICBbPCAwMDIxNmRj
+NCA+XQ0KICAgICAgICBbPCAwMDIxNjUxNCA+XQ0KICAgICAgICBbPCAwMDIxNmFjOCA+XQ0KICAg
+ICAgICBbPCAwMDIxNmRjNCA+XQ0KICAgICAgICBbPCAwMDIxNjRkOCA+XQ0KICAgICAgICBbPCAw
+MDIyZDJhOCA+XQ0KICAgICAgICBbPCAwMDIxNzQ2NCA+XQ0KICAgICAgICBbPCAwMDIxNGYzYyA+
+XQ0KICAgICAgICBbPCAwMDIxN2FiOCA+XQ0KICAgICAgICBbPCAwMDI4ZWJkOCA+XQ0KICAgICAg
+ICBbPCAwMDIxN2QwOCA+XQ0KICAgICAgICBbPCAwMDIwMWIxMCA+XQ0KLS0tLS0tLS0tLS0tLS0t
+LS0tLQ0KDQp3aGVuIEkgdHJ5IHRvIHJ1biB0aGUgIi4vc2NyaXB0cy5zdGFja3RyYWNlLnNoIGR1
+bXAudHh0Ii4gRm9sbG93aW5nIHdhcyB0aGUgb3V0cHV0Lg0KSSBkb24ndCB1bmRlcnN0YW5kIHdo
+YXQgaXMgdGhlIGVycm9yIGFuZCB3aGF0IGRvZXMgIkM6ICAgWzwgZmZmZmZmZmYwYTdhZTAwOCA+
+XSIgbWVhbnMuDQoNCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0NCiQgLi91LWJvb3Qvc2NyaXB0cy9zdGFja3RyYWNlLnNoIC4uL3RlbXBEaXIv
+ZHVtcF9jbGVhbi50eHQNCg0KU1lNQk9MIEZpbGU6IC4vYnVpbGQvdG1wL3dvcmsvcm9ja2NoaXBf
+cmszMzk5X2toYWRhc19lZGdlX3YtcG9reS1saW51eC91LWJvb3Qtcm9ja2NoaXAvMV8yMDE3LjA5
+LXIwL2J1aWxkL3UtYm9vdC5zeW0NCg0KQ2FsbCB0cmFjZToNCiAgQzogICBbPCBmZmZmZmZmZjBh
+N2FlMDA4ID5dDQogIGRvX2Jvb3RtX2xpbnV4KzB4NWMvMHg3NA0KDQpTdGFjazoNCiAgYm9vdF9z
+ZWxlY3RlZF9vcysweDQ4LzB4ODBdDQogIGRvX2Jvb3RtX3N0YXRlcysweDhkMC8weDk1MA0KICBh
+bmRyb2lkX2Jvb3Rsb2FkZXJfYm9vdF9rZXJuZWwrMHgxNWMvMHgyNTANCiAgYW5kcm9pZF9ib290
+bG9hZGVyX2Jvb3RfZmxvdysweDJhMC8weDJhNA0KICBkb19ib290X2FuZHJvaWQrMHhkMC8weGY4
+DQogIGNtZF9wcm9jZXNzKzB4ZGMvMHgxMGMNCiAgcnVuX2xpc3RfcmVhbCsweDZlNC8weDcyOA0K
+ICBwYXJzZV9zdHJlYW1fb3V0ZXIrMHgxNzAvMHg2NmMNCiAgcGFyc2Vfc3RyaW5nX291dGVyKzB4
+Y2MvMHhlNA0KICBydW5fbGlzdF9yZWFsKzB4NTljLzB4NzI4DQogIHBhcnNlX3N0cmVhbV9vdXRl
+cisweDE3MC8weDY2Yw0KICBwYXJzZV9zdHJpbmdfb3V0ZXIrMHg5MC8weGU0DQogIHJ1bl9jb21t
+YW5kX2xpc3QrMHg1MC8weDkwDQogIGF1dG9ib290X2NvbW1hbmQrMHg0MC8weDExNA0KICBtYWlu
+X2xvb3ArMHg1OC8weDY4DQogIHJ1bl9tYWluX2xvb3ArMHhjLzB4MTANCiAgaW5pdGNhbGxfcnVu
+X2xpc3QrMHg1OC8weDk0DQogIGJvYXJkX2luaXRfcisweDIwLzB4MjQNCiAgcmVsb2NhdGlvbl9y
+ZXR1cm4rMHg0LzB4MA0KDQpQQyBTdXJyb3VuZGluZyBJbnN0cnVjdGlvbnM6DQotLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQpCZXN0IFJlZ2Fy
+ZHMNClZpdmVrIEphaXN3YWwNCg==
