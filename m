@@ -4,91 +4,141 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCAD8C54798
-	for <u-boot@archiver.kernel.org>; Thu,  7 Mar 2024 16:13:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 987EAC54798
+	for <u-boot@archiver.kernel.org>; Thu,  7 Mar 2024 16:18:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 316F387B77;
-	Thu,  7 Mar 2024 17:13:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 6AD4D87DDA;
+	Thu,  7 Mar 2024 17:18:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=garmin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks-com.20230601.gappssmtp.com header.i=@gateworks-com.20230601.gappssmtp.com header.b="XrvzC9zS";
+	dkim=pass (2048-bit key; unprotected) header.d=garmin.com header.i=@garmin.com header.b="XzHn8uym";
+	dkim=pass (2048-bit key; unprotected) header.d=garmin.com header.i=@garmin.com header.b="JZ32AkQJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5544C87D16; Thu,  7 Mar 2024 17:13:33 +0100 (CET)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id BDA3587D99; Thu,  7 Mar 2024 17:17:52 +0100 (CET)
+Received: from mx0b-000eb902.pphosted.com (mx0b-000eb902.pphosted.com
+ [205.220.177.212])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6F0FA87DA0
- for <u-boot@lists.denx.de>; Thu,  7 Mar 2024 17:13:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4DCE487B77
+ for <u-boot@lists.denx.de>; Thu,  7 Mar 2024 17:17:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=garmin.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=gateworks.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a44ad785a44so147734866b.3
- for <u-boot@lists.denx.de>; Thu, 07 Mar 2024 08:13:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks-com.20230601.gappssmtp.com; s=20230601; t=1709828009; x=1710432809;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=2Ux4B6Ne1U9xXW+f+FyCqueED2C/l+4KB10kSMYpP5k=;
- b=XrvzC9zScsYQ6+W7Pw4ktY6TscjWiKSo5/03snrO1SqKfhfJYHPgDm85jwmyUt4ZX4
- C3pHXG9VRvOz+1LlAt4ype27YG/tVLEU+1dYb+bvWIaqVenIQEJ0jAijTzutFzRluyEx
- EwqGXgTKdbYGROrGHEZMuBIEURV4bVI4o4j/f0yTUQX2TrDWhYgoL29xlXy6TytQ9KcR
- e99SH0ufWoM7Vu//M/QRHPVsYrpeHpb8C5tt363mB+/EpOOKKqqZYIsO0/WCi4Ih5wsy
- nOFZ3nDhkVil7wcQQbGMZyh1J7ayj/3myEgbU4xJT23k8R5ujrnVJEupLkrNYQzhauWY
- HHAQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709828009; x=1710432809;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=2Ux4B6Ne1U9xXW+f+FyCqueED2C/l+4KB10kSMYpP5k=;
- b=JOTOJmY0keeZV1QebQoVnGLRMY8pU73kBSr2uOrsPCx69/N6oJXE4/WYTY51P2MXNM
- aGzpJL5Qgi0B4XRY88pGLDeDu/bn6P0ewWFZPrGwLaTTSTZOwy1gcZnjq5IDbUxyoAwZ
- JEsVE/PSjhRKBsjZNwlTXEMyQCobAshtxq1c9yCjwlEIU2crym/38jTJBksHU4475+zD
- EDpJxAB9xrtiYCOsGW1IgkkrqMdk8jtT0tn/wCHeh28lRQL4/SHCjdK7Vd4kltK5oyXC
- I4sctwjPZRmyKT8KfCK+L0GvqN8yvu2suQUv+ApzYGrEinQ9DEuP6VDna0TJKaFEwfyb
- S0TA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWaENrwjX4tTWA7ofUyW2CMW/rvxyZiBDx2RWq5S5CuaIsZUf4OKoZs2WxKmLnb0cAxwJxfPAKD+m7bO/Ck0H6oUFFwkg==
-X-Gm-Message-State: AOJu0YyGodgBQz3DoN3aKs26tHNfUv7388v9ou9k5hAn2WFQBVVM5zL9
- UyF5XzXUjG0wBQUGpxM/uI2zgvon9ToL7FybXNBNL8BMZEw7gfmF/BD1pTrM+puwMumUhAcSXtx
- QInepudA/OXmWRl8EiGZhs0tp22weyQVeC+5nxQ==
-X-Google-Smtp-Source: AGHT+IH06xjtGwmYhkvOSAAgZ4r9ZXMSJ6EgrEPOb3ccXpyR+NAwpo/y0m6iJnGQTHdZ8VUfURJ/GF/46qbSOvs4mN0=
-X-Received: by 2002:a17:906:ff53:b0:a43:f9ff:2571 with SMTP id
- zo19-20020a170906ff5300b00a43f9ff2571mr12806567ejb.45.1709828008771; Thu, 07
- Mar 2024 08:13:28 -0800 (PST)
+ spf=pass smtp.mailfrom=Colin.McAllister@garmin.com
+Received: from pps.filterd (m0220297.ppops.net [127.0.0.1])
+ by mx0a-000eb902.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
+ 427G0hkL010086; Thu, 7 Mar 2024 10:17:48 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=garmin.com; h=
+ from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding:content-type; s=pps1; bh=NCgZAa65Uk0N
+ sUU7LtB5As6RDWHqhsydV+VFqwY9I+0=; b=XzHn8uym0RkmU7kHXB2B/dkGlAbM
+ LDTvO0raGn2OsdZm0FRw5ZgNm7ig6okjvy5JySRWrbOulOjgoto4hWE0ptu+PEkO
+ GnqzIEhtnf/j4QsIDu/amnVnvEtM5Atjjp+1d8xxDPPDEz7GOSY6KfQdyxiVVcNg
+ Iksn2k35wilNpt5VzvusUJAJCIDP8vcVIJE4Vmu3unAl7X0zEQCUsQMAdzhsyMcP
+ BzmQ0sn6JiW4F8P3MnpQbTRqLNdHWuB+dR+v8e55IdE8z+GffMwk/wCxChWbKlsO
+ CS+VVNrRc6EJ4exJ8d7DUI7lQFAqbEheP2r6lOfW3EKhrecWowYLFRevuw==
+Received: from nam11-bn8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11lp2169.outbound.protection.outlook.com [104.47.58.169])
+ by mx0a-000eb902.pphosted.com (PPS) with ESMTPS id 3wqcmesd7u-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 07 Mar 2024 10:17:46 -0600 (CST)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=c0VQRgLpeud0o5UT/6aqVAku8oHXgOA5xDLzkl3knuQMNnCFxEf10CAcMZJAzLrCB7o0GapT8bbBeMNjISYswWemXCBfSNsDDq33+U3aly6+a4CU58rInKThp8JNpjYa78UP8h7FHi/Z+IrwrYgHGWi6ANg6NAwFU/SfsE2Sp0uoQRKVxMpfenucAyjSgyeypNCuwnCYivdnkD+i6HCNSqrGdzNXJEj0lwJnzQfWXdVxNd+CG4RjJ1a/O7+1nX1ZzTud83hji2yHAzY/7hoOqelaCC4ngDk13spMkhBE/Hx82xsermpnFaAljMVTEzU0036zUt73njNTQ16nOvFYHw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=NCgZAa65Uk0NsUU7LtB5As6RDWHqhsydV+VFqwY9I+0=;
+ b=ZOCiRVkJjcDvm36eYzHwkySdTA6vxzt2ycjdlTjmg1ooWqwoELd/A4MszKoRQEjt2f+XdVStidfiqxGCEFXfat22UL1ZIZqm+XGUnso9Wy6US5NbJBJqaVX0EM52SYmnsmb9sN9tDPOdKCb16WlMOj3mN4NWk5Hx5E8qcWagYIcr/9rc+Gh0bvA1OOnKXo3B2OQHxupvljIBTLrubqsEd9Y+T0rudSJsbro48F2OQs8NmHrTQOs23B2HBirmeb6WN1MgYRS+YzVTCchvx/PjS2l+LVXXmQkvrDHZKk+fV15B7kxQ+GQSLsSevxZdYUjjsfYW9GAGtFADmfdOKluVFg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 204.77.163.244) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=garmin.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=garmin.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=garmin.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=NCgZAa65Uk0NsUU7LtB5As6RDWHqhsydV+VFqwY9I+0=;
+ b=JZ32AkQJMU0ibx25t0fr8Epn0m/U7GbOn/Y/zL0z+cDaZLC0KFnc+N42M8FgmZfF9VTgn4SCHeeZn60vGQqJof2KIknU+ipTePaEUI8xSL7u5Th4m6AwQdDl0bV/ngJXOvHW+j56TDC8zxsIAsdZiJYoo6GY/jQF2L6+D4elGcDmLrBzr3Uin73mOiXixhrRnUrbXPUa633p4QVahmUuAvGowGW8JeytDwGgLi5a8cL3mXO4dL+tZxKcyc9YrXwUQ3H3CE/+KgVz5nX8VtTcwTOCWwOH/dLPK4AWQ0RiHN12eMR4uqiqjpC625GrsFbN0Zsv0EbyzGISIHicwI7PJg==
+Received: from MN2PR12CA0013.namprd12.prod.outlook.com (2603:10b6:208:a8::26)
+ by BY1PR04MB8678.namprd04.prod.outlook.com (2603:10b6:a03:529::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7339.40; Thu, 7 Mar
+ 2024 16:17:44 +0000
+Received: from MN1PEPF0000ECD8.namprd02.prod.outlook.com
+ (2603:10b6:208:a8:cafe::51) by MN2PR12CA0013.outlook.office365.com
+ (2603:10b6:208:a8::26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7339.37 via Frontend
+ Transport; Thu, 7 Mar 2024 16:17:43 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 204.77.163.244)
+ smtp.mailfrom=garmin.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=garmin.com;
+Received-SPF: Pass (protection.outlook.com: domain of garmin.com designates
+ 204.77.163.244 as permitted sender) receiver=protection.outlook.com;
+ client-ip=204.77.163.244; helo=edgetransport.garmin.com; pr=C
+Received: from edgetransport.garmin.com (204.77.163.244) by
+ MN1PEPF0000ECD8.mail.protection.outlook.com (10.167.242.137) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7362.11 via Frontend Transport; Thu, 7 Mar 2024 16:17:43 +0000
+Received: from OLAWPA-EXMB11.ad.garmin.com (10.5.144.11) by
+ olawpa-edge3.garmin.com (10.60.4.226) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.32; Thu, 7 Mar 2024 10:17:37 -0600
+Received: from kc3wpa-exmb7.ad.garmin.com (10.65.32.87) by
+ OLAWPA-EXMB11.ad.garmin.com (10.5.144.11) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.35; Thu, 7 Mar 2024 10:17:42 -0600
+Received: from kc3wpa-exmb3.ad.garmin.com (10.65.32.83) by
+ kc3wpa-exmb7.ad.garmin.com (10.65.32.87) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1258.28; Thu, 7 Mar 2024 10:17:42 -0600
+Received: from ola-jnrkg73.ad.garmin.com (10.5.209.17) by mail.garmin.com
+ (10.65.32.83) with Microsoft SMTP Server id 15.2.1258.28 via Frontend
+ Transport; Thu, 7 Mar 2024 10:17:42 -0600
+From: Colin McAllister <colin.mcallister@garmin.com>
+To: <u-boot@lists.denx.de>
+CC: Colin McAllister <colin.mcallister@garmin.com>, <JPEWhacker@gmail.com>,
+ <sjg@chromium.org>
+Subject: [PATCH 0/2] Fix Android A/B backup 
+Date: Thu, 7 Mar 2024 10:17:09 -0600
+Message-ID: <20240307161711.3177729-1-colin.mcallister@garmin.com>
+X-Mailer: git-send-email 2.43.2
 MIME-Version: 1.0
-References: <20240226080433.3307154-1-sumit.garg@linaro.org>
- <20240226080433.3307154-6-sumit.garg@linaro.org>
- <CAHCN7x+wwoiLO_hpSkiHXFmAUwa0bhbYeQD_UHK10e2YOX+WKA@mail.gmail.com>
- <CAFA6WYNJ4BVHOFftSdwdMv2SMJ8ZQh3S7CRjJHfiAnosSbmgGQ@mail.gmail.com>
- <CAFA6WYPNsRsWnFLVcMXX_KxmN2YTbysu_ZPan1jyrVASrS==rQ@mail.gmail.com>
- <CAHCN7xLqKdydxRVfdVJ2RmS+=tdQT3fR52uVMhLEoZSoObcq3Q@mail.gmail.com>
- <CAHCN7x+fgQ0woDyaV1R2W28Sjs3Tahq=BuQQ7AE_df8BGpoBnw@mail.gmail.com>
- <CAJ+vNU0DrrU4sZZi06jGQVCsaBznc4sMJtraJAu0KdkHXubU+w@mail.gmail.com>
- <CAFA6WYN7D2UmQ7WCBxsGbmo_QC2KRNgJ_n-4CqD2RFJbYVittg@mail.gmail.com>
-In-Reply-To: <CAFA6WYN7D2UmQ7WCBxsGbmo_QC2KRNgJ_n-4CqD2RFJbYVittg@mail.gmail.com>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Thu, 7 Mar 2024 08:13:17 -0800
-Message-ID: <CAJ+vNU1oP9tk3nwJ-2i6FhRfq7ge21LTbKGED4LLNY=Wk2U4hg@mail.gmail.com>
-Subject: Re: [PATCH v2 5/8] phy: phy-imx8m-pcie: Add support for i.MX8M{M/P}
- PCIe PHY
-To: Sumit Garg <sumit.garg@linaro.org>
-Cc: Adam Ford <aford173@gmail.com>, u-boot@lists.denx.de,
- marcel.ziswiler@toradex.com, 
- francesco@dolcini.it, trini@konsulko.com, lukma@denx.de, seanga2@gmail.com, 
- jh80.chung@samsung.com, festevam@denx.de, andrejs.cainikovs@toradex.com, 
- sjg@chromium.org, peng.fan@nxp.com, marex@denx.de, 
- ilias.apalodimas@linaro.org, sahaj.sarup@linaro.org, fathi.boudra@linaro.org, 
- remi.duraffort@linaro.org, daniel.thompson@linaro.org
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MN1PEPF0000ECD8:EE_|BY1PR04MB8678:EE_
+X-MS-Office365-Filtering-Correlation-Id: 97341605-d78c-459c-42c8-08dc3ec21e54
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: SROdXGqvitk5jHCdlFcll88bVd/HGI6xWpsTVYulvE5H6NVrIUsaGxtuFFMPMUbc+vza/VB/8qjHBOjOgqrZrbp9jG5ngVuugSWViPr2CaLwsNx+bxOugPK0kxMteP9NN9WJMJR/6a9IeT93HZhBgX7f3SYStFqI+2a08QOohuHRLkdqscsm3PduSC9YZj2B/qZECbvPRc2pOqfrNbf8Jk8lPheVV/JfSYTl+afds6yDViWpb/1M/ENdTW8RWzLv8bkH9x2FTVAY7jctm/0FaDox7E7g8SDzLSjvk7DbGlZiTH31hcAm5Fsy70lTjeyB8clQNua4buT1tgrcQN6IV+ulS9uJ7vkzTnHUI/8AanytpUSFp2z8N28krBCZjavM1YQHDHlQDQIFOEKd6b8R/TZ3E0QzzGfL8JX53sjpSVOmLl15NB5IzKF8CgSnjKaxp2EU+fqYACqBoC6YMoMx7QyeP4lsFx8vAxjLZo+vqqUnjz/CXsEJJu3A5VPImWyqGbASZq9xN8swkRsDMWnSCa1q92RVGpPEVvtdxWA5q29hSYhC/a4u7G44lelNJKvETBGgW8zEwcXd7IiijVE+o50kr3RrDi51woa2juUOSTblcKe8hAGKfB08reDMNa3Zlc96xZnk28GEkiyDIiS0TYU6LKJ0GRiMoHagWzxKmE48KmVAQM+i141tJ7it2en8b6w2ILzZ/RuE3ydB7oXq6HPUktjIR2BSvmtadYZ3Cj1CUQvtZqB+zefWrNebX0JY
+X-Forefront-Antispam-Report: CIP:204.77.163.244; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:edgetransport.garmin.com; PTR:extedge.garmin.com;
+ CAT:NONE; SFS:(13230031)(36860700004)(82310400014)(376005); DIR:OUT; SFP:1102;
+X-OriginatorOrg: garmin.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Mar 2024 16:17:43.2090 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 97341605-d78c-459c-42c8-08dc3ec21e54
+X-MS-Exchange-CrossTenant-Id: 38d0d425-ba52-4c0a-a03e-2a65c8e82e2d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=38d0d425-ba52-4c0a-a03e-2a65c8e82e2d; Ip=[204.77.163.244];
+ Helo=[edgetransport.garmin.com]
+X-MS-Exchange-CrossTenant-AuthSource: MN1PEPF0000ECD8.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY1PR04MB8678
+X-Proofpoint-ORIG-GUID: c79RQDMP6TsxSJeB1dFCGwe63ItrG6Nt
+X-Proofpoint-GUID: c79RQDMP6TsxSJeB1dFCGwe63ItrG6Nt
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-03-07_08,2024-03-06_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 suspectscore=0
+ mlxscore=0 lowpriorityscore=0 adultscore=0 malwarescore=0 phishscore=0
+ bulkscore=0 impostorscore=0 mlxlogscore=999 classifier=spam adjust=0
+ reason=mlx scancount=1 engine=8.19.0-2402120000
+ definitions=main-2403070110
+X-Mailman-Approved-At: Thu, 07 Mar 2024 17:18:26 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,239 +155,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Mar 6, 2024 at 10:35=E2=80=AFPM Sumit Garg <sumit.garg@linaro.org> =
-wrote:
->
-> On Wed, 6 Mar 2024 at 22:56, Tim Harvey <tharvey@gateworks.com> wrote:
-> >
-> > On Tue, Mar 5, 2024 at 4:47=E2=80=AFPM Adam Ford <aford173@gmail.com> w=
-rote:
-> > >
-> > > On Tue, Mar 5, 2024 at 7:51=E2=80=AFAM Adam Ford <aford173@gmail.com>=
- wrote:
-> > > >
-> > > > On Tue, Mar 5, 2024 at 7:48=E2=80=AFAM Sumit Garg <sumit.garg@linar=
-o.org> wrote:
-> > > > >
-> > > > > Hi Adam,
-> > > > >
-> > > > > On Wed, 28 Feb 2024 at 12:29, Sumit Garg <sumit.garg@linaro.org> =
-wrote:
-> > > > > >
-> > > > > > Hi Adam,
-> > > > > >
-> > > > > > On Wed, 28 Feb 2024 at 04:42, Adam Ford <aford173@gmail.com> wr=
-ote:
-> > > > > > >
-> > > > > > > On Mon, Feb 26, 2024 at 2:05=E2=80=AFAM Sumit Garg <sumit.gar=
-g@linaro.org> wrote:
-> > > > > > > >
-> > > > > > > > Add initial support for i.MX8M{M/P} PCIe PHY. On i.MX8M{M/P=
-} SoCs PCIe
-> > > > > > > > PHY initialization moved to this standalone PHY driver.
-> > > > > > > >
-> > > > > > > > Inspired from counterpart Linux kernel v6.8-rc3 driver:
-> > > > > > > > drivers/phy/freescale/phy-fsl-imx8m-pcie.c.
-> > > > > > >
-> > > > > > > I have a PCIe device that works just fine in Linux.  I have a=
-pplied
-> > > > > > > your series an enabled the same config options as you did alo=
-ng with
-> > > > > > > some others to resolve some build issues.
-> > > > > > >
-> > > > > > > Any ideas how to address:
-> > > > > > >
-> > > > > > > nxp_imx8_pcie_phy pcie-phy@32f00000: PHY: Failed to power on
-> > > > > > > pcie-phy@32f00000: -110.
-> > > > > > >
-> > > > > > > My PHY node looks like this
-> > > > > > >
-> > > > > > > &pcie_phy {
-> > > > > > >     fsl,refclk-pad-mode =3D <IMX8_PCIE_REFCLK_PAD_INPUT>;
-> > > > > > >     clocks =3D <&pcie0_refclk>;
-> > > > > > >     clock-names =3D "ref";
-> > > > > > >     status =3D "okay";
-> > > > > > > };
-> > > > > > >
-> > > > > > > The pcie_refcllk is defined as a 100MHz fixed clock in U-Boot=
-.  clk
-> > > > > > > dump shows it to be:
-> > > > > > >
-> > > > > > > 100000000            0        |-- clock-pcie
-> > > > > > >
-> > > > > >
-> > > > > > I suppose that's an EVK board, try enabling MPCIE_3V3 regulator
-> > > > > > required for EVK board via following patch:
-> > > > > >
-> > > > > > diff --git a/drivers/pci/pcie_dw_imx.c b/drivers/pci/pcie_dw_im=
-x.c
-> > > > > > index 7856823c9188..32fd2cb05d4b 100644
-> > > > > > --- a/drivers/pci/pcie_dw_imx.c
-> > > > > > +++ b/drivers/pci/pcie_dw_imx.c
-> > > > > > @@ -17,6 +17,7 @@
-> > > > > >  #include <linux/iopoll.h>
-> > > > > >  #include <log.h>
-> > > > > >  #include <pci.h>
-> > > > > > +#include <power/regulator.h>
-> > > > > >  #include <regmap.h>
-> > > > > >  #include <reset.h>
-> > > > > >  #include <syscon.h>
-> > > > > > @@ -158,6 +159,8 @@ static int pcie_dw_imx_probe(struct udevice=
- *dev)
-> > > > > >         struct pci_controller *hose =3D dev_get_uclass_priv(ctl=
-r);
-> > > > > >         int ret;
-> > > > > >
-> > > > > > +       regulator_autoset_by_name("MPCIE_3V3", NULL);
-> > >
-> > > I think you should search the device tree for "vpcie-supply" and
-> > > enable the corresponding regulator, because is more flexible than
-> > > hard-coding regulator names. This is also more of a standard practice=
-.
-> > >
-> > > > > > +
-> > > > > >         ret =3D imx_pcie_assert_core_reset(priv);
-> > > > > >         if (ret) {
-> > > > > >                 dev_err(dev, "failed to assert core reset\n");
-> > > > > >
-> > > > >
-> > > > > Were you able to give a retry with the above diff?
-> > > >
-> > > > Not yet, but I'll try to do it tonight.
-> > >
-> > > That didn't work for me.  I am using a Beacon Embedded kit which does
-> > > not use a regulator, so this had no impact, but I think having the
-> > > vpcie-supply regulator is a good idea.
-> > >
-> > > I'll investigate a bit more and let you know if I make any progress.
-> > >
-> >
-> > Adam and Sumit,
-> >
-> > In case it helps this series works for PCI bus scanning for the
-> > imx8mp-venice-* boards with the following patch:
->
-> Thanks Tim for taking time to test this series. I hope you are fine
-> with me taking your below patch with you being the author.
+- Addresses compiler error due to missing semicolon
+- Fixes use of ANDROID_AB_BACKUP_OFFSET in preprocessor macros
 
-Sumit,
+Bug was found by noticing a semicolon was missing and not causing a
+compiler error when CONFIG_ANDROID_AB_BACKUP_OFFSET was set. I submitted
+a patch to fix the semicolon before fixing the #if's. Testing the latter
+patch without the former with ANDORID_AB_BACKUP_OFFSET set will cause a
+compiler error.
 
-Yes you can take that patch if you want to add it to your series - thanks!
+Colin McAllister (2):
+  android_ab: Add missing semicolon
+  android_ab: Fix ANDROID_AB_BACKUP_OFFSET
 
-Tim
+ boot/android_ab.c | 24 ++++++++++++------------
+ 1 file changed, 12 insertions(+), 12 deletions(-)
 
->
-> > diff --git a/configs/imx8mp_venice_defconfig b/configs/imx8mp_venice_de=
-fconfig
-> > index 11b356b77856..ff7ea9811ed6 100644
-> > --- a/configs/imx8mp_venice_defconfig
-> > +++ b/configs/imx8mp_venice_defconfig
-> > @@ -12,6 +12,7 @@ CONFIG_DEFAULT_DEVICE_TREE=3D"imx8mp-venice"
-> >  CONFIG_SPL_TEXT_BASE=3D0x920000
-> >  CONFIG_TARGET_IMX8MP_VENICE=3Dy
-> >  CONFIG_OF_LIBFDT_OVERLAY=3Dy
-> > +CONFIG_DM_RESET=3Dy
-> >  CONFIG_SYS_MONITOR_LEN=3D524288
-> >  CONFIG_SPL_MMC=3Dy
-> >  CONFIG_SPL_SERIAL=3Dy
-> > @@ -21,6 +22,7 @@ CONFIG_SPL=3Dy
-> >  CONFIG_ENV_OFFSET_REDUND=3D0x3f8000
-> >  CONFIG_SPL_IMX_ROMAPI_LOADADDR=3D0x48000000
-> >  CONFIG_SYS_LOAD_ADDR=3D0x40480000
-> > +CONFIG_PCI=3Dy
-> >  CONFIG_SYS_MEMTEST_START=3D0x40000000
-> >  CONFIG_SYS_MEMTEST_END=3D0x80000000
-> >  CONFIG_LTO=3Dy
-> > @@ -65,6 +67,7 @@ CONFIG_CMD_FUSE=3Dy
-> >  CONFIG_CMD_GPIO=3Dy
-> >  CONFIG_CMD_I2C=3Dy
-> >  CONFIG_CMD_MMC=3Dy
-> > +CONFIG_CMD_PCI=3Dy
-> >  CONFIG_CMD_USB=3Dy
-> >  CONFIG_SYS_DISABLE_AUTOLOAD=3Dy
-> >  CONFIG_CMD_CACHE=3Dy
-> > @@ -86,6 +89,8 @@ CONFIG_NET_RANDOM_ETHADDR=3Dy
-> >  CONFIG_IP_DEFRAG=3Dy
-> >  CONFIG_TFTP_BLOCKSIZE=3D4096
-> >  CONFIG_SPL_DM=3Dy
-> > +CONFIG_REGMAP=3Dy
-> > +CONFIG_SYSCON=3Dy
-> >  CONFIG_CLK_COMPOSITE_CCF=3Dy
-> >  CONFIG_CLK_IMX8MP=3Dy
-> >  CONFIG_GPIO_HOG=3Dy
-> > @@ -114,7 +119,10 @@ CONFIG_FEC_MXC=3Dy
-> >  CONFIG_KSZ9477=3Dy
-> >  CONFIG_RGMII=3Dy
-> >  CONFIG_MII=3Dy
-> > +CONFIG_NVME_PCI=3Dy
-> > +CONFIG_PCIE_DW_IMX=3Dy
-> >  CONFIG_PHY_IMX8MQ_USB=3Dy
-> > +CONFIG_PHY_IMX8M_PCIE=3Dy
-> >  CONFIG_PINCTRL=3Dy
-> >  CONFIG_SPL_PINCTRL=3Dy
-> >  CONFIG_PINCTRL_IMX8M=3Dy
-> >
-> > on an imx8mp-venice-gw71xx-2x (imx8mp with miniPCIe socket using a
-> > miniPCIe to NVMe adapter)
-> > u-boot=3D> pci enum
-> > PCIE-0: Link up (Gen1-x1, Bus0)
-> > u-boot=3D> pci
-> > BusDevFun  VendorId   DeviceId   Device Class       Sub-Class
-> > _____________________________________________________________
-> > 00.00.00   0x16c3     0xabcd     Bridge device           0x04
-> > 01.00.00   0x10ec     0x5765     Mass storage controller 0x08
-> > u-boot=3D> nvme scan
-> > u-boot=3D> nvme info
-> > Device 0: Vendor: 0x10ec Rev: 0426-D00 Prod: 60272-0005
-> >             Type: Hard Disk
-> >             Capacity: 57241.8 MB =3D 55.9 GB (117231408 x 512)
-> >
-> > I also verified this works imx8mp-venice-gw74xx (imx8mp with PCIe
-> > switch to multiple miniPCIe sockets using a miniPCIe to NVMe adapter)
-> > u-boot=3D> pci enum
-> > PCIE-0: Link up (Gen1-x1, Bus0)
-> > u-boot=3D> pci
-> > BusDevFun  VendorId   DeviceId   Device Class       Sub-Class
-> > _____________________________________________________________
-> > 00.00.00   0x16c3     0xabcd     Bridge device           0x04
-> > 01.00.00   0x12d8     0x2608     Bridge device           0x04
-> > 02.01.00   0x12d8     0x2608     Bridge device           0x04
-> > 02.02.00   0x12d8     0x2608     Bridge device           0x04
-> > 02.03.00   0x12d8     0x2608     Bridge device           0x04
-> > 02.04.00   0x12d8     0x2608     Bridge device           0x04
-> > 05.00.00   0x10ec     0x5765     Mass storage controller 0x08
-> > u-boot=3D> nvme scan
-> > u-boot=3D> nvme info
-> > Device 0: Vendor: 0x10ec Rev: 0426-D00 Prod: 60272-0005
-> >             Type: Hard Disk
-> >             Capacity: 57241.8 MB =3D 55.9 GB (117231408 x 512)
-> >
-> > It looks like the imx8mp-beacon-kit has almost the same setup as the
-> > imx8mp-venice-gw74xx with the exception of you having a PCIe_nDIS gpio
-> > defined in pinctrl (used nowhere) and the gw74xx does not support
-> > CLKREQ so has 'fsl,clkreq-unsupported'.
->
-> Ah, I see. So it turns out that it's Adam Linux kernel DTS patch [1]
-> which is missing for U-Boot DTS. This is one of the reasons why we
-> should switch to OF_UPSTREAM to start regular sync with Linux kernel
-> DTS.
->
-> Adam,
->
-> Can you make corresponding changes to U-Boot DTS for
-> imx8mp-beacon-kit? Or better just switch to OF_UPSTREAM instead?
->
-> [1] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/co=
-mmit/arch/arm64?id=3D63c46b51c7995d8aeb4b44493633f4ce1dcf62bc
->
-> >
-> > tested-by: Tim Harvey <tharvey@gateworks.com> : imx8mp-venice*
-> >
->
-> Thanks again.
->
-> -Sumit
->
-> > Best regards,
-> >
-> > Tim
+--
+2.43.2
+
+
+________________________________
+
+CONFIDENTIALITY NOTICE: This email and any attachments are for the sole use=
+ of the intended recipient(s) and contain information that may be Garmin co=
+nfidential and/or Garmin legally privileged. If you have received this emai=
+l in error, please notify the sender by reply email and delete the message.=
+ Any disclosure, copying, distribution or use of this communication (includ=
+ing attachments) by someone other than the intended recipient is prohibited=
+. Thank you.
