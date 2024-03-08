@@ -4,82 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13AC9C54E4A
-	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 06:41:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AECDEC5475B
+	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 06:53:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E00B8800F;
-	Fri,  8 Mar 2024 07:41:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=kernel-space.org
+	by phobos.denx.de (Postfix) with ESMTP id 0803588024;
+	Fri,  8 Mar 2024 07:53:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=starfivetech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=kernel-space.org header.i=@kernel-space.org header.b="hyV+fgY4";
-	dkim=pass (1024-bit key) header.d=kernel-space.org header.i=@kernel-space.org header.b="lIAzWpDk";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7834C8801E; Fri,  8 Mar 2024 07:41:07 +0100 (CET)
-Received: from mail.kernel-space.org (mail.kernel-space.org [195.201.34.187])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 60FB588031; Fri,  8 Mar 2024 07:53:53 +0100 (CET)
+Received: from CHN02-BJS-obe.outbound.protection.partner.outlook.cn
+ (mail-bjschn02on20726.outbound.protection.partner.outlook.cn
+ [IPv6:2406:e500:4440:2::726])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BD14D87ECA
- for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 07:41:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=kernel-space.org
+ by phobos.denx.de (Postfix) with ESMTPS id 5747688022
+ for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 07:53:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=angelo@kernel-space.org
-Received: from kernel-space.org (localhost [127.0.0.1])
- by kernel-space.org (OpenSMTPD) with ESMTP id bbf9f391;
- Fri, 8 Mar 2024 06:38:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=kernel-space.org; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; s=s1; bh=Ti
- 7NJhH/O3zeRlUIYZwyDlU9JiU=; b=hyV+fgY479iZNnclAkh2NjBSfRsrn05vrL
- QNnkNYkw29f70PrkWsAmcqggrGFAo643qkZkzaKuvvy3cQZn0PR3hMbKo6MC0eR8
- rq6O6QkVhaG44d2KewYGKzqGAvy/2Y0NsW43M6qUM6osr38Zf1RoLCaVqsTHXf7S
- hsO7Y1X1k=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=kernel-space.org; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; q=dns; s=s1; b=
- jKQHhiVoy8cf00iQyR4NvGo7wOWYOkFpOGaGEQz0qBxXPbollUr0YL4HxmYgmbP4
- otTDySW07MlEcaOSmS4wZgbQKCWYMPDc072h+ZPH/XM/sQXZnvy3qb9nHqvaxW0D
- Iwj2pgJjs8O43BboF8R/J7eWGFfoUepFf8PB5hU8Y58=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel-space.org;
- s=s1; t=1709879909;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=nVhbJ0vVuO0T0OZkI93C8xtDpRGMj6rZZ8YW6+F7ntI=;
- b=lIAzWpDkGs9xPebiA8HwiuxtITVgvyKnF4MPmbznm/6gWB/wfNg8Ur2O/CXNtn7kt770Ne
- X1yx/bQ+v6g6jKFS3IwL0TGw9w9wcFRqoZNyRRieHWSWJwAy5v0jjtoF0JrukRFAzxlZLA
- i++ZB3Vn8eBj84vRPGw7ai35Troyasw=
-Received: from [192.168.0.2] (host-79-51-238-97.retail.telecomitalia.it
- [79.51.238.97])
- by kernel-space.org (OpenSMTPD) with ESMTPSA id def796e1
- (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO); 
- Fri, 8 Mar 2024 06:38:29 +0000 (UTC)
-Message-ID: <2d8843b0-df78-06ac-dcb0-2e42fb8a792f@kernel-space.org>
-Date: Fri, 8 Mar 2024 07:40:24 +0100
+ spf=pass smtp.mailfrom=minda.chen@starfivetech.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=G1ooaIfBPaiKR3Fhn2WKiiv2xbVuTSoTt/qGd3LXFSMBu/bDtJ9MQQkY648R3E+vIQOLL6nSaKKHJwbpWdMwfncR2gC/RQko93o0LpssrffJi4SCBuVNDuYtm2s1UCNWQVLbS/L+lzK2Kj0NVphGgLu0iTRXFW4OCkUWEHHwFKTkvxieMIehPHLduSzOwEfkcWNdpDSO/Gbp1F1KQxM2M5x4JXrvIrKdeGdEehUHXuwjCcRRghVYrtAPDh3ebll0ABKcpT1mVNsuXKGYwYP/qa7X6IK9O99vAlUD5Ek8vICiGJS3EyICQb0cYm+P3lVLMS6HR1XuVXlqVWYSPEDWgw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=IHHUH9tms6B4gORyBduvEm4osRJGab7bOLn9RojrXhE=;
+ b=D9mqHsQj99q+LcxqPF57GXECZT+B9z/ym55qzRvkdB9ChusUuiMScqHcFj7HvxSmG8jori0UgSaSBjT/XberVurqCS5x/4CIzp9Ao4/72FUMGH63OkJmI4Qo+ZpG5Q6LhrWzjD6806h/udj5KTyV7/3BVjORfJAh4N9JiKbyELUBrItUXo74p0xP8dDMEXqCKjWRBcNSnsbECvvPTV9F/i1Y7hcNu7P1iFPvWQd5I2FM1RuHjXYUOuLH/fLSobzyaLd9QCDHVc9XmdvOdxmBqwhsIvEjlo7iSYVktotQGcEgNeO/rST5fwDzh76tlofwchYKuWrz6UFCtQq2czE3Gw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=starfivetech.com; dmarc=pass action=none
+ header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=starfivetech.com;
+Received: from SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c311:25::15) by SHXPR01MB0784.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c311:26::13) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7316.53; Fri, 8 Mar
+ 2024 06:53:43 +0000
+Received: from SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn
+ ([fe80::5a5a:fa59:15fd:63dc]) by
+ SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn ([fe80::5a5a:fa59:15fd:63dc%3])
+ with mapi id 15.20.7316.051; Fri, 8 Mar 2024 06:53:43 +0000
+From: Minda Chen <minda.chen@starfivetech.com>
+To: Leo Yu-chi Liang <ycliang@andestech.com>, Rick Chen <rick@andestech.com>,
+ u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>
+Subject: [PATCH v1 1/2] board: starfive: Update maintainer of VisionFive v2
+ board
+Date: Fri,  8 Mar 2024 14:53:35 +0800
+Message-Id: <20240308065336.40795-1-minda.chen@starfivetech.com>
+X-Mailer: git-send-email 2.17.1
+Content-Type: text/plain
+X-ClientProxiedBy: ZQ0PR01CA0035.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c550:2::21) To SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c311:25::15)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Betterbird/102.11.0
-Subject: Re: [PATCH v3] test/py: reset: Add a test for reset command
-To: Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>
-Cc: Love Kumar <love.kumar@amd.com>, u-boot@lists.denx.de, git@xilinx.com,
- Marek Vasut <marex@denx.de>
-References: <4b7c5e82165b009cf8b28701ca3f1e182fbc3c09.1708414720.git.love.kumar@amd.com>
- <20240302151813.GA1652651@bill-the-cat>
- <bd0b13b0-0554-b280-a40a-17056a1e2c5e@kernel-space.org>
- <c11e1809-b5d1-46cd-a5c8-a5276b83f26f@amd.com>
- <c523aabd-93a4-f9db-2726-7f912a85aef0@kernel-space.org>
- <20240307001053.GE1523872@bill-the-cat>
- <c05a25ca-d4b7-1179-cf46-645bc4cdba89@kernel-space.org>
- <c0bbe63d-adee-456f-bcf8-44579aa2593a@amd.com>
- <20240307125525.GF1523872@bill-the-cat>
-Content-Language: en-US, it
-From: Angelo Dureghello <angelo@kernel-space.org>
-In-Reply-To: <20240307125525.GF1523872@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SHXPR01MB0863:EE_|SHXPR01MB0784:EE_
+X-MS-Office365-Filtering-Correlation-Id: f284e828-2ea0-4fca-f21c-08dc3f3c7eb7
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: Bu340tSfvLrAJQ6IWpFaSU954jaF76+rgF20Mbi+X9XyFzU71F9bYL26k4AfzoEhwdwU+3HU/V/BjK16HCtQD+ktWqx2cZbFNr+M8FpysZwJKwMidE1GMrLa7uOJyfmDWQau0LrxrAmMpZI/ck0WeHe0OxlTdoZqEsmnlHITE2DzFESFwGp6IYWUOSVhXiM4PioKFPz4ImUPUho4gzCZ0DDR5MbqqzqWHoR8C6brjzQdywCrh3daRXwCV9MLHNtwo80X2BdF1wid+PWLpnJWC7pB6yeVYQ481qGoDs3UU45rmogAfWbGA8Io/P1Ul3kVgVtCcXS0xtxApmp08K004Z8LtKuumbHzBX6Qix4AzpcbuFP0x9Bx6Znsz6cGyF0zc7GVxkkl767/aAW+kZjhOWT9ax4fxW0SgmPEIefay9PQx4WQFUOgdq8x+VNZjn386iRvf9ZezfQ96rD7Wdi4cbs18KI8Eujd1ZlMaPfSCS0Pf0iOvu40v8dDDerdK5bq5owOFasNxY//6RCr1gVDbWc1o0WM+gmplvpfu91nNhejeGBG0RBjVcV8B+crPXjqPnPP1/2oY/jInLOZVPXAx2Bxw19k/cXyGApWTgGbmgLXpHQtx9CLGtEW2+bGnUWa
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn; PTR:;
+ CAT:NONE; SFS:(13230031)(52116005)(41320700004)(1800799015)(38350700005);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?5AOnDPLQhX2mv+443lDXACQjLNXiyXxfzzT1GarQyOSh87mFFycW187YlYD+?=
+ =?us-ascii?Q?rmIrQyxgb22oDe4tygB7HJNKnjWbsGlkXmdUB7xIKGcYTOzs3B5eIitU+dbE?=
+ =?us-ascii?Q?ntgBMKtVgO6O+2q6MXTMjWjbxqMkek/k8aabyb7u+MmNGGEZGDRJMx8tvfkE?=
+ =?us-ascii?Q?TJB9kPMnNLnCUZ8cZSb33unujlEmvRCqByxWkdQ1R6+em8cuYcod96SYZ8oS?=
+ =?us-ascii?Q?ZK1CRbK3L45UHppq4xzYi6Q84QPRO6aiHPLtXvUGwsyVckKBOGZG/JTAdXjG?=
+ =?us-ascii?Q?hR1kIoz0pYFXT6PGpNHPJz/lAgZQJR0h5w1pFV2/joR0EofKI4J9/hme21s+?=
+ =?us-ascii?Q?+szeSixDbSZ94C3Kk3wTZ39pWYYrejMMq0qcHlYKpYwF5qV6TbF2BTmcxJSc?=
+ =?us-ascii?Q?fIcilE3MRuN1v12zaYi5sgIauAi7uSibj6E/WMlvj+jWdiNuHcAHIvHixGji?=
+ =?us-ascii?Q?PCT1TdUTZyJtmFf63+52sl2ua6GEk693vjS7tdj+tjQKscrpVnU0I5lRqK5F?=
+ =?us-ascii?Q?1HFx4Xsd1lknBOzLTgynCgxZuMOWz61kMxDc3FBFn7thQpRYPrDKmD+bg9rJ?=
+ =?us-ascii?Q?2QwlpD6ICAFHRy4Sni1l++mFblT7ETu4AnPfKtknHbGlBBcy0B9kXl+Cv5zt?=
+ =?us-ascii?Q?pMJizcAFwBzMLOZTvjOTQZRpsTpMLe3wA1qknYge/anA4CfO014dPkFf7ibm?=
+ =?us-ascii?Q?GSBHYp93QVrgUlwov1H2a0Eh5LNYJadg0VQN5WJ74Rb/8d6b8Rid+xlEkOY/?=
+ =?us-ascii?Q?PcWuqTvATUDuvXtThZ3/vHbVmCEc9gMqnFeMhXN195aB39kkmUgxWddI91D8?=
+ =?us-ascii?Q?+YgvWkmTEdlJ9avVlP0KRX3LZNlgxZ9zNtSPtL3KchjiTBdmDLuPuSvqKarY?=
+ =?us-ascii?Q?1D5ob7NAklf9JRH5h2nuwmXbzlakRk7oeprc5r3Q/FUOwypPqC+XYjn5i7Xh?=
+ =?us-ascii?Q?iT73KM7vYSvXZ1sz6YlgbCqbkSG6r1ZiWq7KX9NeZnlMlpJ7ZL63zfXWGUoR?=
+ =?us-ascii?Q?PUCzw/qO6BQMPNmviNBI/fUbxPpIa4jW6rT+wn7fJEEJM60BlLB7QYcsNr9R?=
+ =?us-ascii?Q?zTOjJBUzoZjz/q00lR2HEOENRPm/SXLd1q1x0G/5GDWaS9KhXrcoZdYcaUUq?=
+ =?us-ascii?Q?4BBBEsPvso1yUEOKfh5nySWXR7folBljU+s5WbN9tLrjBha30m/Veb3Qs279?=
+ =?us-ascii?Q?+QTA/vx8NnCV42UlAvYOwUrw4iUgE7+X4JvIGed5/jsPKKh6HYXMyMBd7xnz?=
+ =?us-ascii?Q?FcNebaHOTy/Q6517WSH7Y/iDkNVIHHOBcU440pFbZPlUrBPanBnuBp0qj8rl?=
+ =?us-ascii?Q?WIMVam3ff095hOjiYU5J9ptXJ47kND9ZKqpgbYvKiwhc7yaN0FmmaEzgC3a/?=
+ =?us-ascii?Q?j4M+eJwMwICXO4Uh0yc6OhZmOi6dHlfi/Xux9vxCEgmF+4r0RjMe2x7tkAiW?=
+ =?us-ascii?Q?kG7XhmmMytQC0617CzQ6OeuRUt6+AlQLxvKCfDSDag1Wp4Frr4RFmPEM2hiE?=
+ =?us-ascii?Q?dLy6HEYUqpFfhK7N77UKSRIbsgXovgv9Z2cm36fldLf8sy11A/zdoYnIuIIN?=
+ =?us-ascii?Q?b9UvH7SSpRj5t793WBg/SKcK+btbPRbdrnneta4C3kqb0DWbfXj7bYmT+/SZ?=
+ =?us-ascii?Q?mw=3D=3D?=
+X-OriginatorOrg: starfivetech.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: f284e828-2ea0-4fca-f21c-08dc3f3c7eb7
+X-MS-Exchange-CrossTenant-AuthSource: SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Mar 2024 06:53:43.8092 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 8W2M0GKh4FS6u2Ujv947lM/kw4qRUbgM6TnJNe7OcYzVbYd8u69R2DHxoQVWZdvHY1enqUASOdx6aC4b6v6tgXQf7QGMk06vUff/iUhpZRs=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SHXPR01MB0784
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,86 +124,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Update the maintainer of Starfive VisionFive v2 board.
 
-On 07/03/24 1:55 PM, Tom Rini wrote:
-> On Thu, Mar 07, 2024 at 09:26:42AM +0100, Michal Simek wrote:
->>
->>
->> On 3/7/24 08:56, Angelo Dureghello wrote:
->>> Hi Tom,
->>>
->>> On 07/03/24 1:10 AM, Tom Rini wrote:
->>>> On Thu, Mar 07, 2024 at 12:36:42AM +0100, Angelo Dureghello wrote:
->>>>> Hi,
->>>>>
->>>>> On 05/03/24 1:34 PM, Michal Simek wrote:
->>>>>>
->>>>>>
->>>>>> On 3/3/24 22:58, Angelo Dureghello wrote:
->>>>>>> Hi Tom,
->>>>>>>> On Tue, Feb 20, 2024 at 01:11:38PM +0530, Love Kumar wrote:
->>>>>>>>> Add a test for reset commands which performs resetting of
->>>>>>>>> CPU, It does COLD reset by default and WARM reset with -w
->>>>>>>>> option. Signed-off-by: Love Kumar <love.kumar@amd.com>
->>>>>>>>> Reviewed-by: Tom Rini <trini@konsulko.com> --- Changes in
->>>>>>>>> v2: - Set bootmode through boardenv if modeboot is not
->>>>>>>>> defined Changes in v3: - Fix the issue with bad pattern
->>>>>>>>> found on console --- test/py/tests/test_reset.py | 61
->>>>>>>>> +++++++++++++++++++++++++++++++++++++ 1 file changed, 61
->>>>>>>>> insertions(+) create mode 100644 test/py/tests/test_reset.py
->>>>>>>> I had hoped this was all sorted out now, but both this and the
->>>>>>>> saveenv test cause qemu_m68k to fail now. See:
->>>>>>>> https://source.denx.de/u-boot/u-boot/-/jobs/791635
->>>>>>> looking into this.
->>>>>>
->>>>>> Is reset implemented in qemu? It should be skipped if it is not.
->>>>>>
->>>>> yes, seems not implemented
->>>>>
->>>>> => reset
->>>>> => reset -w
->>>>> =>
->>>>> =>
->>>>>
->>>>> Not finding any trace in the qemu code related to
->>>>>
->>>>> out_8(&rcm->rcr, RCM_RCR_SOFTRST);
->>>>
->>>> Does reset work on the real HW, or can you not test? What I'm wondering
->>>> is if we have a missing feature on the board/arch code (and should
->>>> disable the reset command) or a problem with QEMU.
->>>>
->>> I don't have the exact hardware (m5208evb) but:
->>>
->>> 1) i checked by tracing that on qemu the reset function is properly called
->>>
->>> => reset
->>> resetting, RCR fc0a0000
->>>
->>> 2) reset register address is correct. I checked also that writing
->>> directly to it by mw.b does now produce the reset,
->>>
->>> => reset
->>> resetting, RCR fc0a0000
->>>
->>> => mw.b 0xfc0a0000 80
->>> =>
->>>
->>> So looks not implemented in qemu.
->>
->> ok. That means that we shouldn't run reset test inside CI loop for this platform.
-> 
-> Agreed.  The TEST_PY_TEST_SPEC variable in both of the pipelines can be
-> used to say "not reset" for this platform in the next rev. It would also
-> be nice to file a bug report with QEMU too I think. Thanks for digging
-> in to this everyone.
-> 
+Signed-off-by: Minda Chen <minda.chen@starfivetech.com>
+---
+ board/starfive/visionfive2/MAINTAINERS | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-good.
-I also sent a patch to qemu, lets see
+diff --git a/board/starfive/visionfive2/MAINTAINERS b/board/starfive/visionfive2/MAINTAINERS
+index 600ff9575b..5056e9c713 100644
+--- a/board/starfive/visionfive2/MAINTAINERS
++++ b/board/starfive/visionfive2/MAINTAINERS
+@@ -1,5 +1,5 @@
+ STARFIVE JH7110 VISIONFIVE2 BOARD
+-M:	Yanhong Wang <yanhong.wang@starfivetech.com>
++M:	Minda Chen <minda.chen@starfivetech.com>
+ S:	Maintained
+ F:	arch/riscv/include/asm/arch-jh7110/
+ F:	board/starfive/visionfive2/
+-- 
+2.17.1
 
-https://lists.gnu.org/archive/html/qemu-devel/2024-03/msg01899.html
-
-Regards,
-angelo
