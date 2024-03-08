@@ -4,75 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC5E4C5475B
-	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 21:48:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B1E7C5475B
+	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 22:00:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0839287D39;
-	Fri,  8 Mar 2024 22:48:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id ADA6087D42;
+	Fri,  8 Mar 2024 23:00:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="V/6ZuoMp";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MPo/AQjK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8799187D3D; Fri,  8 Mar 2024 22:48:45 +0100 (CET)
-Received: from mail-ua1-x934.google.com (mail-ua1-x934.google.com
- [IPv6:2607:f8b0:4864:20::934])
+ id D0A0987D47; Fri,  8 Mar 2024 23:00:14 +0100 (CET)
+Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
+ [IPv6:2607:f8b0:4864:20::b35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 68BF487CF1
- for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 22:48:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6154487CDA
+ for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 23:00:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
-Received: by mail-ua1-x934.google.com with SMTP id
- a1e0cc1a2514c-7dad83f225cso861251241.2
- for <u-boot@lists.denx.de>; Fri, 08 Mar 2024 13:48:41 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-yb1-xb35.google.com with SMTP id
+ 3f1490d57ef6-dccb1421bdeso2511621276.1
+ for <u-boot@lists.denx.de>; Fri, 08 Mar 2024 14:00:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1709934520; x=1710539320; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=9DHTEC+qHRmJukpGYng39a0vlJ0P3OvfMjEkcrrxRGw=;
- b=V/6ZuoMpHa3VY3EJUqIXrku+TTrHOZbc1A0W0A15obxAeCBfguoOfd3C3NivSegOzh
- Y1+UUlW98cfR9e1BNs/9VmFdv1kOl1kCcLA7LHL1G+/Qjsa7QBgMgxgAumwGiYoAt/FD
- l/oyeDMVTAg4hh7SWDkOjBMdvunEoOpRS5e4pUQXd2BvgDJxSAoEFuOb1IszSaebYuU8
- 4KaV/i0GbDhNO2/TSOADtfzvGdekbadXvDQWKf9vob0fbSbkM38PeYXFfvzeNorIJNYG
- AK5ysdp4Z4oZOdwTMk/Ak8uALlR/fKE/HURP+zb67QsjyCSyM5hHQCnifWX37tSFCruz
- wWrw==
+ d=linaro.org; s=google; t=1709935210; x=1710540010; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ixN/z9qTz+hFjEUmUm2TiH1zB4/0FiX5+EEDu2etwM8=;
+ b=MPo/AQjKRRjY+MltkCz5OuU+p9puE/Jce9ajhBYMpemPEJXL+WzpjA0oBarhSX0rEV
+ zTdAZ2ItBzKVEQoXSfLqjdC+L+aLA97Sd8+zXtr72h2LECfMaMgPeuulKydp3yFnei8I
+ PTtWsFQEA5c89nKDAeXtfFI4A5iCFUeEY8Y49MxTYDedMZkbXOwmZkQ6f6e2VK9A8mXD
+ bKujghI9rSXrlv7/Of1CJqkYwJfQnJ5Vi0c5o1O+RposYmyXn9nfgt8nc0KRjG08DAPZ
+ qNj0U4rcQhtmJB9B7hbBpad9dO/BV0gc5B3j3fKGlB//Movy5phkfr8sn4+uIHSO7Y2E
+ kRSA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709934520; x=1710539320;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=9DHTEC+qHRmJukpGYng39a0vlJ0P3OvfMjEkcrrxRGw=;
- b=t6H1qx0q6kze7pVfojfgVl2JUR6VCJ/ECGNF0Jf1MDuaP/6SobvExeYwsUkjLcHCpn
- 3ocb5rKq1jDbT0SO5C7snLo+gV2uewL8VbB2LKF+6q980c2DLVwO+eyHwI85lxz+mCZn
- QWIfl0HgKZv8qgxfTA7QT2ADrGetqTLT6tPxjF4Ayt7MaLY2+wXZuZPCIlDTDmPPQeXD
- 9O3j9DPT6O40aZqY6kRLnPYpR20MrIbszm9iPbscvc98xjc61tAiAGiLsPyc6mjyAD5A
- FRD2hU8AVPc9tUaWWrWZKwT1O63uWedmF/lCdrjVI9eRanNQPP/HfY8vG5gN1PLSvz6c
- Mk7g==
-X-Gm-Message-State: AOJu0Yx2hYYM5+u2ivcPoBWrZsf1ngq6Y2UT3IzZ3TW8pMMv/NrbTpBZ
- dTi7cEG1te+h2Dok/CsfuxXhAg4bb1TDdN1rNE3RIVz1z7kCYSi8ZR22F1KYA3qs2ZE3Z5O87Cx
- tlpjbBzZ+zagCrzNcZAgCZfhfZ61OZRQIfUo=
-X-Google-Smtp-Source: AGHT+IE9i/IYjGs3OTlG9XtASUXM38eoGsz6BD8JDE/p4Q4IwF38aDy+N9e4DCLYG3mPVZK5CNWX9TCYAMqOboG3ylU=
-X-Received: by 2002:a05:6122:10c7:b0:4c9:79d6:7f17 with SMTP id
- l7-20020a05612210c700b004c979d67f17mr533717vko.9.1709934519955; Fri, 08 Mar
- 2024 13:48:39 -0800 (PST)
+ d=1e100.net; s=20230601; t=1709935210; x=1710540010;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ixN/z9qTz+hFjEUmUm2TiH1zB4/0FiX5+EEDu2etwM8=;
+ b=YsZXFMAp4khgGYeC28S7TNtDu6tkQlWk6tQwfgdPDEgWy0PhkqFij8HARZXihLscGs
+ HFMenSLT/9OG70ZL68LqZd1IHuE9sjzTeOvNwn5k9KCpyl0QaLcekxb/2U6AIxn1w3Nk
+ HnhQCu8FRY1CBogv/ineewiWFXUnza9sx8TmxIvpxDDHwlnIh+TiqsM5nnFg/ndOIWIr
+ YUmLebEZOytwLxGPNU7AA8/d+GsXh5UiXbYRbkdAn0vv2/m1Kq1lFLdGDqL9GE57DPBU
+ GW7PJC4h1rlwJ33Np3qC29K9qoUtn06xF/LRku6ndiDHJnE3dAKhBFfmsa9Feo9Ro9Kp
+ N1Rw==
+X-Gm-Message-State: AOJu0YySmunf2lO1bu5btbHBoZ/6lyuzCuqOvJ+bmC+4efE2tZ5XdJeU
+ dCTkiRO+6AXQBba10MHhv2EYd2jNLhZeSYsm/XUeIRNSKBrejzwj47TKwqrFnIy+2xUoULyAVLC
+ iZhoSrnhlyMG+EGeLgmmt+JvKafTxIL8AyfPuqw==
+X-Google-Smtp-Source: AGHT+IGNOpBmQ695DGyrakDEFGIDRIq3/rLXYoRmZDaF2i1hogg0iRumKW9KjiutMO7sVVFyewgI5H+SKd/tKL68Ln0=
+X-Received: by 2002:a25:684f:0:b0:dcc:e9d:4a22 with SMTP id
+ d76-20020a25684f000000b00dcc0e9d4a22mr243033ybc.12.1709935209960; Fri, 08 Mar
+ 2024 14:00:09 -0800 (PST)
 MIME-Version: 1.0
-References: <20240303130122.29983-1-heinrich.schuchardt@canonical.com>
- <20240303130122.29983-6-heinrich.schuchardt@canonical.com>
- <CANV2PTOCK--hOr_HbbjHcjYT40fVm5DD2GsfV3cZu2XFm7WX=Q@mail.gmail.com>
- <937b1f61-7412-4609-b9a5-549d7fd6a950@canonical.com>
-In-Reply-To: <937b1f61-7412-4609-b9a5-549d7fd6a950@canonical.com>
-From: E Shattow <lucent@gmail.com>
-Date: Fri, 8 Mar 2024 13:48:28 -0800
-Message-ID: <CANV2PTOUip_ebfFiP5UaXBCENRdR6f2kZpPKU1p9ODbjS5gmrg@mail.gmail.com>
-Subject: Re: [RFC 5/5] doc: describe Milk-V Mars board
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: u-boot@lists.denx.de
+References: <20240307161711.3177729-1-colin.mcallister@garmin.com>
+ <20240308165937.270499-1-colin.mcallister@garmin.com>
+ <CAPLW+4kZShBuiDO1aV3g9+nnsdySFv19x2nT6F7hOf4OR_dnHQ@mail.gmail.com>
+ <SA2PR04MB7723C4BAEF9488482005FEF5F4272@SA2PR04MB7723.namprd04.prod.outlook.com>
+In-Reply-To: <SA2PR04MB7723C4BAEF9488482005FEF5F4272@SA2PR04MB7723.namprd04.prod.outlook.com>
+From: Sam Protsenko <semen.protsenko@linaro.org>
+Date: Fri, 8 Mar 2024 15:59:58 -0600
+Message-ID: <CAPLW+4nQBssOtR_wqU25XW-6ZDEm7Yu_7q9ODjWhkWoE9FoV9g@mail.gmail.com>
+Subject: Re: [PATCH v3 0/2] Fix Android A/B backup
+To: "McAllister, Colin" <Colin.McAllister@garmin.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "JPEWhacker@gmail.com" <JPEWhacker@gmail.com>, 
+ "sjg@chromium.org" <sjg@chromium.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Igor Opaniuk <igor.opaniuk@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,132 +94,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Yes this reference to GPIO high/low states is clearer to understand. Have
-you tested the DIP switch functionality to confirm?; It is not shown in the
-MilkV documentation or outdated schematics and I don't have a Mars to test.
-I did find function descriptions from what is likely cut-and-paste of
-VisionFive2 board reference.
+On Fri, Mar 8, 2024 at 1:24=E2=80=AFPM McAllister, Colin
+<Colin.McAllister@garmin.com> wrote:
+>
+> > Ah, ok, I see you replied to my comment here.
+>
+> Yes, sorry. Outlook is terrible to send inline responses too. I figured
+> just adding responses in the patch contents would be better. Next time I'=
+ll submit
+> my patch with a different email :)
+>
+> > So when that config option is not defined at all, the build still
+> > works, right?
+>
+> Yes, the default value for CONFIG_ANDROID_AB_BACKUP_OFFSET is 0x0, which
+> would evaluate to a false bool value in the if conditions. I did do some
+> testing with the config value not defined for my board and confirmed
+> back-up data is not used.
+>
 
-Ref:
-https://github.com/milkv-mars/mars-files/blob/main/Mars_hardware_schematics=
-/Mars_V1.11_20230821.pdf
-Sheet 7 of 22 JH7110 GPIOs
-There is a schematic for SW2 (bootloader button?) that lists an inset table=
-:
-* - GPIO_1
-  - GPIO_0
-  - Boot
-* - 0
-  - 0
-  - Flash
-* - 0
-  - 1
-  - SD
-* - 1
-  - 0
-  - eMMC
-* - 1
-  - 1
-  - UART
+Looks good to me, thanks.
 
-That circuit on SW2 appears to pull high both RGPIO_1 and RGPIO_0 with
-transistors. Again, no DIP switch as this is an earlier revision.
+> In your other emails you include your reviewed-by tag. For clarity, Am I
+> supposed to append my patches and upload a new version? This is my
+> first time contributing to u-boot, so I'm still learning the workflow. I
+> didn't see anything glancing through the "Sending patches" page in the
+> U-Boot documentation.
+>
 
-Ref:
-https://doc-en.rvspace.org/VisionFive2/Developer_Guide/JH7110_Boot_UG.pdf
-page 9 table 1-4:
-RGPIO1=3D0x0 RGPIO0=3D0x0 Boot Source: Quad SPI NOR flash memory, Read SPL =
-from
-Sector 0.
-RGPIO1=3D0x1 RGPIO0=3D0x1 Boot Source: UART0, (description of UART Xmodem
-function).
+Welcome to the community! And thanks for your patches :) U-Boot
+workflow is quite similar to Linux kernel one. It's useful to collect
+all tags when sending out your next version. When the maintainer takes
+your patch, they usually also apply all R-b tags for the final patch
+version, so you only have to worry about that when sending out a new
+version. I know that U-Boot contributors are often using `patman' tool
+[1] for submitting patches (and corresponding updated versions), and
+I'm pretty sure it collects all pending tags automatically for you.
+FWIW, I'm not experienced with `patman', as I'm trying to use somehow
+unified submitting process for both U-Boot and Linux kernel, and I
+know that using `patman' is sometimes discouraged in Linux kernel
+community.
 
-Following in the same document on page 13 figure 2-1 Boot Flow:
-JH7110 supports the following boot devices.
-QSPI Flash (For SPL + OpenSBI + U-Boot) + NVMe/SD Card/eMMC (For Kernel + F=
-i
-le System and later)
-Note: System will detect in sequence whether it can boot from the following
-device sequence: NVMe > SD > eMMC. For example, if the boot program is foun=
-d
-on the SD, eMMC will be ignored.
+[1] https://docs.u-boot.org/en/latest/develop/patman.html
 
-Again in this document Figure 4-2 on page 17 is a visual listing of the DIP
-switch positions for QSPI, SDIO, eMMC, and UART boot modes, of the
-VisionFive2 board.
-
-The only consistent physical interface over VisionFive2, Mars, Star64, Mars
-CM all is RGPIO1=3DL RGPIO0=3DL SPI and RGPIO1=3DH RGPIO1=3DH UART; either =
-by DIP
-switch or pushbutton attached circuit. So, I question our assumptions about
-what the actual behavior is for RGPIO1=3DH RGPIO0=3DL pairing and RGPIO1=3D=
-L
-RGPIO0=3DH, and in what circumstance would there be followed a device
-sequence as suggested by the JH7110 reference. Why does the StarFive
-documentation list a JH7110 boot device sequence if there is also these H+L
-or L+H pairings to choose the device?
-
-On Thu, Mar 7, 2024 at 6:37=E2=80=AFPM Heinrich Schuchardt <
-heinrich.schuchardt@canonical.com> wrote:
-
-> On 3/8/24 00:20, E Shattow wrote:
-> >
-> > On Sun, Mar 3, 2024 at 5:02=E2=80=AFAM Heinrich Schuchardt
-> > <heinrich.schuchardt@canonical.com
-> > <mailto:heinrich.schuchardt@canonical.com>> wrote:
-> > ...
-> >
-> >     +The board provides the DIP switches MSEL[1:0] to select the boot
-> >     device out of
-> >     +SPI flash, eMMC, SD-card, UART. To select booting from SD-card set
-> >     the DIP
-> >     +switches MSEL[1:0] to 10.
-> >
-> >
-> > This does not match the [Milk-V Mars vendor
-> > documentation](https://milkv.io/docs/mars/getting-started/bootloader
-> > <https://milkv.io/docs/mars/getting-started/bootloader>). Maybe you
-> have
-> > a different board revision?
->
-> Thank you for reviewing.
->
-> My board revision is V1.21 according to the silk screen.
->
-> The Milk-V Mars has DIP switches for the boot selection as shown in
-> https://gist.github.com/xypron/e28f95b1ed6911aeb9699ba63ae1a885
->
-> If you look at the photo
->
-> https://milkv.io/assets/images/mars-icon-04-e8814f18158a0e9d4387f4fa33069=
-3f1.webp
-> in the https://milkv.io/mars page, it also shows DIP switches (in the
-> SPI-Flash position) on a rev 1.2 board.
->
-> Did you see a board without DIP switches being sold?
->
-> The silk screen markings on the board and the switch don't match.
-> The same confusion exists on the VisionFive2.
->
-> So maybe I should better write in a table:
->
-> SPI-Flash:
-> GPIO0=3DL
-> GPIO1=3DL
->
-> SD-Card:
-> GPIO0=3DH
-> GPIO1=3DL
->
-> eMMC:
-> GPIO0=3DL
-> GPIO1=3DH
->
-> UART:
-> GPIO0=3DH
-> GPIO1=3DH
->
-> Best regards
->
-> Heinrich
->
+[snip]
