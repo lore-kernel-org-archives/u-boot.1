@@ -4,71 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D5B5C54E4A
-	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 13:33:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE210C54E4A
+	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 13:34:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5DA4087EFD;
-	Fri,  8 Mar 2024 14:33:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 4621787EFD;
+	Fri,  8 Mar 2024 14:34:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="AkyWZPTY";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="azF2pfP+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 379EB88065; Fri,  8 Mar 2024 14:33:50 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id 433FB88077; Fri,  8 Mar 2024 14:34:40 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CBAF98744F
- for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 14:33:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5784D8744F
+ for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 14:34:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 428DXSAK087257;
- Fri, 8 Mar 2024 07:33:28 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1709904808;
- bh=zA69OIofG5k+iwjUgWljmfMuDsbIjqyRp4la1Pd/EzU=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=AkyWZPTYNXUObzaG/EQEz/msSUYXiU/M22CY0+4dRtdZj68j0Y5XioOUycUNF5AKA
- 2KF4QxF7d+oB4kqDIExjtdVLfH7qGI9joCHrdj5cLttpuUO8yszurfMBbgrFNf2lVR
- zIdZb0XswLz1z1VYUY/qyw1dK7c3aWq2wOJcYOjY=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 428DXSh6030959
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 8 Mar 2024 07:33:28 -0600
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 8
- Mar 2024 07:33:28 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 8 Mar 2024 07:33:28 -0600
-Received: from [10.249.42.149] ([10.249.42.149])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 428DXR3N060369;
- Fri, 8 Mar 2024 07:33:27 -0600
-Message-ID: <fd9815c9-d8f3-4a35-8253-3bb6174362d3@ti.com>
-Date: Fri, 8 Mar 2024 07:33:27 -0600
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=3797bb48b6=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
+ 428ANYgS013915; Fri, 8 Mar 2024 14:34:34 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding:content-type; s=selector1; bh=LT6imjd
+ 1pbZ2pm3hr05e7A5Aa2LnDIyI6r7KoKAFsRw=; b=azF2pfP+CAZXXLGtC1mGeOo
+ cuztc90U1f/kvX7fKvKq9AEXqS/gWuYWDrxJE0Fh2S6XwAn8I29+yu8wO/kNYSCG
+ yMlxKTmVCRT0peEoFSA8U1/zTBiS4i/YidiiJ50rhi9JlZDZTDd8SHO50ZMRjN2A
+ DXP8SGzsDMwHFpEnILl4tFzzQV5QFyr5dao/RCtZw+StvNZJnAiIvfCP2bBsP7qm
+ arUADjk+3mtHf/ZbOhQABZ3AQN/m0EIQ+VSLSclC6V0iIgWtCu6+R8iGz8dPL/Gj
+ GFcFc9PIZknAHxxDXgdWzT8+TLBGPMJEv2mxQ1aC4hHgADnzezvwnm4tSPpnFyw=
+ =
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3wmej5k4td-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 08 Mar 2024 14:34:34 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 2B19640046;
+ Fri,  8 Mar 2024 14:34:31 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id BD34D276F28;
+ Fri,  8 Mar 2024 14:34:06 +0100 (CET)
+Received: from localhost (10.252.7.115) by SHFDAG1NODE1.st.com (10.75.129.69)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 8 Mar
+ 2024 14:34:06 +0100
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+To: <u-boot@lists.denx.de>
+CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
+ <patrick.delaunay@foss.st.com>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>, Hugo Villeneuve
+ <hvilleneuve@dimonoff.com>, Simon Glass <sjg@chromium.org>, Tom Rini
+ <trini@konsulko.com>
+Subject: [PATCH] fdt_support: fix fdt_copy_fixed_partitions function()
+Date: Fri, 8 Mar 2024 14:34:04 +0100
+Message-ID: <20240308133404.2619848-1-patrice.chotard@foss.st.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] Makefile: Improve generated_defconfig file handling
-To: Sam Protsenko <semen.protsenko@linaro.org>, Tom Rini <trini@konsulko.com>
-CC: Simon Glass <sjg@chromium.org>, Joao Marcos Costa <jmcosta944@gmail.com>, 
- John Clark <inindev@gmail.com>, Michael Trimarchi
- <michael@amarulasolutions.com>, Rong Tao <rongtao@cestc.cn>,
- Christophe Leroy <christophe.leroy@csgroup.eu>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Jesse Taube <mr.bossman075@gmail.com>, Nishanth Menon <nm@ti.com>, "Jason
- Kacines" <j-kacines@ti.com>, <u-boot@lists.denx.de>
-References: <20240308033822.28727-1-semen.protsenko@linaro.org>
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20240308033822.28727-1-semen.protsenko@linaro.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.252.7.115]
+X-ClientProxiedBy: SAFCAS1NODE1.st.com (10.75.90.11) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-03-08_08,2024-03-06_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,62 +89,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/7/24 9:38 PM, Sam Protsenko wrote:
-> Commit 2027e99e61aa ("Makefile: Run defconfig files through the C
-> preprocessor") adds `generated_defconfig' file, but fails to clean that
-> up. It might be useful to have that file around after `make' is done,
-> but it's better to clean that up on `make clean'. Also we probably want
-> to hide it in `git status' list. This patch makes the described changes,
-> and also adds `-P' parameter to the CPP command that produces the
-> `generated_defconfig' to avoid generating linemarkers.
-> 
+Move variable declaration at the beginning of the function.
 
-All look like sensible improvements to me,
+Fixes: 163c5f60ebb4 ("fdt_support: add fdt_copy_fixed_partitions function")
 
-Acked-by: Andrew Davis <afd@ti.com>
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+---
 
-> Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
-> Fixes: 2027e99e61aa ("Makefile: Run defconfig files through the C preprocessor")
-> ---
->   .gitignore               | 1 +
->   Makefile                 | 1 +
->   scripts/kconfig/Makefile | 2 +-
->   3 files changed, 3 insertions(+), 1 deletion(-)
-> 
-> diff --git a/.gitignore b/.gitignore
-> index 330148119264..d9a64d742fd7 100644
-> --- a/.gitignore
-> +++ b/.gitignore
-> @@ -63,6 +63,7 @@ fit-dtb.blob*
->   /spl/
->   /tpl/
->   /defconfig
-> +/generated_defconfig
->   
->   #
->   # Generated include files
-> diff --git a/Makefile b/Makefile
-> index a2bc9d590329..6fd0e92c7d5a 100644
-> --- a/Makefile
-> +++ b/Makefile
-> @@ -2205,6 +2205,7 @@ clean: $(clean-dirs)
->   		-o -name modules.builtin -o -name '.tmp_*.o.*' \
->   		-o -name 'dsdt_generated.aml' -o -name 'dsdt_generated.asl.tmp' \
->   		-o -name 'dsdt_generated.c' \
-> +		-o -name 'generated_defconfig' \
->   		-o -name '*.efi' -o -name '*.gcno' -o -name '*.so' \) \
->   		-type f -print | xargs rm -f
->   
-> diff --git a/scripts/kconfig/Makefile b/scripts/kconfig/Makefile
-> index 5ce5845e8247..079add4d5dab 100644
-> --- a/scripts/kconfig/Makefile
-> +++ b/scripts/kconfig/Makefile
-> @@ -93,7 +93,7 @@ endif
->   endif
->   
->   %_defconfig: $(obj)/conf
-> -	$(Q)$(CPP) -nostdinc -I $(srctree) -undef -x assembler-with-cpp $(srctree)/arch/$(SRCARCH)/configs/$@ -o generated_defconfig
-> +	$(Q)$(CPP) -nostdinc -P -I $(srctree) -undef -x assembler-with-cpp $(srctree)/arch/$(SRCARCH)/configs/$@ -o generated_defconfig
->   	$(Q)$< $(silent) --defconfig=generated_defconfig $(Kconfig)
->   
->   # Added for U-Boot (backward compatibility)
+ boot/fdt_support.c | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+
+diff --git a/boot/fdt_support.c b/boot/fdt_support.c
+index 090d82ee80a..f948cf8cd42 100644
+--- a/boot/fdt_support.c
++++ b/boot/fdt_support.c
+@@ -1053,9 +1053,10 @@ void fdt_fixup_mtdparts(void *blob, const struct node_info *node_info,
+ int fdt_copy_fixed_partitions(void *blob)
+ {
+ 	ofnode node, subnode;
++	const u32 *reg;
+ 	int off, suboff, res;
+ 	char path[256];
+-	int address_cells, size_cells;
++	int address_cells, size_cells, len;
+ 	u8 i, j, child_count;
+ 
+ 	node = ofnode_by_compatible(ofnode_null(), "fixed-partitions");
+@@ -1101,9 +1102,6 @@ int fdt_copy_fixed_partitions(void *blob)
+ 			if (!ofnode_valid(subnode))
+ 				break;
+ 
+-			const u32 *reg;
+-			int len;
+-
+ 			suboff = fdt_find_or_add_subnode(blob, off, ofnode_get_name(subnode));
+ 			res = fdt_setprop_string(blob, suboff, "label",
+ 						 ofnode_read_string(subnode, "label"));
+-- 
+2.25.1
+
