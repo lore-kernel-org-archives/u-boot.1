@@ -4,64 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16691C54E4A
-	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 09:29:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74A2BC5475B
+	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 10:06:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D23887FE3;
-	Fri,  8 Mar 2024 10:29:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id ACD3086564;
+	Fri,  8 Mar 2024 11:06:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="TJXW46h2";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="ZDS2hTxG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A32D288072; Fri,  8 Mar 2024 10:29:32 +0100 (CET)
-Received: from mail-m12792.qiye.163.com (mail-m12792.qiye.163.com
- [115.236.127.92])
+ id 1A31488065; Fri,  8 Mar 2024 11:06:03 +0100 (CET)
+Received: from mail-m127206.xmail.ntesmail.com
+ (mail-m127206.xmail.ntesmail.com [115.236.127.206])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 934AE87FE3
- for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 10:29:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ED08186564
+ for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 11:05:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=TJXW46h26SwazDKwd39jCUpyNC9GLRcphUV+F3VyfTPrIt716HAKnm7p1abrUPPDObX7OFiF9KSUJrTxunxH+VnGctbVhgPaxh5wF96MuJWs0IEq6pHVMbNFcMXohtvAiEAFnU5V60oJTXa9pFSWkoHc8nANEUSnQfQOXRWTZNY=;
+ b=ZDS2hTxGZ7rcUCHxiev9phLkuUexviG+E2vP9CFel2QH7oxIOc8Fzw9FT3kkYb3gKIWNdM/zB3HNMtrXd1I4fBSKKiGBrEjIJMQWp6ai3qdGo3RsoCAp/nYwUc0jTNNZZcgd9o6ZExmfEakFPG3RcG1ddBF/rtECrAw4IfkKpwU=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=wP3FR0zYViFte+5EoVMRVAXqJiSDGaJgFgj8rD0ciWM=;
+ bh=rfXz2YhKCJ4kIp7b6zOcha9whijyEBI2XG5l9kY4ZBo=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.77] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 077FB9002AB;
- Fri,  8 Mar 2024 17:29:16 +0800 (CST)
-Message-ID: <80cbff4f-c911-42c3-b0df-e1f6bee5bed3@rock-chips.com>
-Date: Fri, 8 Mar 2024 17:29:16 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTPA id 6E15D9002E1;
+ Fri,  8 Mar 2024 18:05:41 +0800 (CST)
+Message-ID: <343de261-41af-47e1-8434-ae0841757280@rock-chips.com>
+Date: Fri, 8 Mar 2024 18:05:41 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/4] rockchip: Migrate to use DM_USB_GADGET on RK3328
+Subject: Re: [PATCH v3 11/20] rockchip: rk3588: fix non-working SD controller
+ if booting from other media
 Content-Language: en-US
-To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
+To: Quentin Schulz <foss+uboot@0leil.net>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- David Bauer <mail@david-bauer.net>, Tianling Shen <cnsztl@gmail.com>,
- Loic Devulder <ldevulder@suse.com>, Chen-Yu Tsai <wens@csie.org>,
- Banglang Huang <banglang.huang@foxmail.com>,
- "Matwey V. Kornilov" <matwey.kornilov@gmail.com>
-Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
-References: <20240226230822.2430391-1-jonas@kwiboo.se>
- <20240226230822.2430391-5-jonas@kwiboo.se>
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Klaus Goger <klaus.goger@theobroma-systems.com>,
+ Heiko Stuebner <heiko.stuebner@cherry.de>,
+ Otavio Salvador <otavio@ossystems.com.br>, Andy Yan
+ <andy.yan@rock-chips.com>,
+ Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Anatolij Gustschin <agust@denx.de>
+Cc: Dragan Simic <dsimic@manjaro.org>, u-boot@lists.denx.de,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>
+References: <20240221-jaguar-v3-0-1f256a82201b@theobroma-systems.com>
+ <20240221-jaguar-v3-11-1f256a82201b@theobroma-systems.com>
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240226230822.2430391-5-jonas@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+In-Reply-To: <20240221-jaguar-v3-11-1f256a82201b@theobroma-systems.com>
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGhpDGFZKGU1KGk8ZHRgeS0tVEwETFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGU1OHVZNSh9CS0pLQ0JLH0xVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSU5IVUpLS1VKQk
  tLWQY+
-X-HM-Tid: 0a8e1d653c3d03a9kunm077fb9002ab
+X-HM-Tid: 0a8e1d86931603a9kunm6e15d9002e1
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PBw6Sio6NzMLKD4iTh4JGAk*
- FxQwFDRVSlVKTEtCQ0JLSk5DSk9PVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKQkhLSzcG
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PBQ6OSo5KTMIMD49NR0dTi4s
+ IzgwCg5VSlVKTEtCQ0JJSE9IS0xNVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKTE9KSTcG
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,539 +89,156 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Quentin,
 
-On 2024/2/27 07:08, Jonas Karlman wrote:
-> USB gadget is not working fully as expected on RK3328, it uses a
-> board_usb_init() function to initialize the DWC2 OTG port.
+On 2024/2/21 18:37, Quentin Schulz wrote:
+> From: Quentin Schulz<quentin.schulz@theobroma-systems.com>
 >
-> The board_usb_init() function does not intgrate with the generic phy
-> framework and as a result the USB phy is not properly configured before
-> or after USB gadget use.
+> Rockchip SoCs have some jtag/sdmmc autoswitching that simply doesn't
+> work really well.[00] The Linux kernel disables it for all SoCs[01], so
+> U-Boot needs to do the same in order to fix issues related to SD card on
+> RK3588. This autoswitching is enabled (by default) via the force_jtag
+> bitfield in SYS_GRF_SOC_CON6 in the TRM part1.
 >
-> Having both USB_DWC2 and DWC2_OTG enabled for the same board is also
-> causing some issues.
->
-> Trying to use rockusb or ums command after usb stop result in a freeze
-> due to usb stop is putting the phy in a suspended state.
->
->    => usb start
->    => usb stop
->    => ums 0 mmc 0
->    --> freeze due to usb phy is suspended <--
->
-> Fix this by only using one of USB_DWC2 (host) or DWC2_OTG (peripheral)
-> depending on the most likely usage of the otg port.
->
-> The nanopi-r2 and orangepi-r1-plus variants share OTG and power using a
-> Type-C connector, mark these boards dr_mode as peripheral, the most
-> likely usage is for recovery and image download.
->
-> The rock64 and roc-cc currently use dr_mode as host, remove the DWC2_OTG
-> driver from these boards to ensure that the USB_DWC2 driver is used.
->
-> The rock-pi-e board does not enable the usb20_otg node so both USB_DWC2
-> and DWC2_OTG is removed from this board.
->
-> Enable RockUSB and UMS on all boards with a otg port in peripheral mode.
->
-> Also with the migration to DM_USB_GADGET completed the U-Boot specific
-> change to reorder usb nodes in the device tree can be reverted.
->
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+> The conditions to enter forced JTAG mode are the following:
+> - force_jtag is 1
+> - GPIO4_D2 is muxed for SDMMC function
+> - GPIO3_D3 is muxed for SDMMC function
+> - SDMMC_DET is inactive
+
+I have explain the reason and send fix for other boards  in kernel for 
+why the force jtag
+
+function not working correctly, see patch [1] and I copy the commit 
+message here:
+
+RK3588 has force_jtage feature which is enable JTAG function via sdmmc
+pins automatically when there is no SD card insert, this feature will
+need the GPIO0A4 works in sdmmc_det function like other mmc signal instead
+of GPIO function, or else the force_jtag can not auto be disabled when
+SD card insert.
+
+For the rk3588 boards available on mainline kernel, 10 boards enable SD 
+card function
+and 9 of then use GPIO0A4 as sdmmc_det, they should all able to use the 
+force_jtag after
+my patch apply.
+The jaguar-rk3588 still have the issue because there is no sdmmc_det used.
+The condition of force JTAG mode work correctly is :
+- force_jtag in grf is 1;
+- all the SDMMC signal including SDMMC_DET set as SDMMC function in GRF 
+IOC/IOMUX reg;
+
+So please update the commit message and it would be better to move this 
+setting in jaguar-rk3588 board
+so that other board can enable force_jtag with only modify kernel but 
+not both kernel and U-Boot.
 
 Thanks,
 - Kever
-> ---
->   arch/arm/dts/rk3328-nanopi-r2s-u-boot.dtsi    |  4 ++
->   .../rk3328-orangepi-r1-plus-lts-u-boot.dtsi   |  4 ++
->   .../dts/rk3328-orangepi-r1-plus-u-boot.dtsi   |  4 ++
->   arch/arm/dts/rk3328-roc-cc-u-boot.dtsi        |  4 ++
->   arch/arm/dts/rk3328-rock-pi-e-u-boot.dtsi     |  9 ++++
->   arch/arm/dts/rk3328-rock64-u-boot.dtsi        |  4 ++
->   arch/arm/dts/rk3328-u-boot.dtsi               |  4 --
->   arch/arm/dts/rk3328.dtsi                      | 41 ++++++++-----------
->   configs/evb-rk3328_defconfig                  |  5 ++-
->   configs/nanopi-r2c-plus-rk3328_defconfig      |  5 ++-
->   configs/nanopi-r2c-rk3328_defconfig           |  5 ++-
->   configs/nanopi-r2s-rk3328_defconfig           |  5 ++-
->   configs/orangepi-r1-plus-lts-rk3328_defconfig |  5 ++-
->   configs/orangepi-r1-plus-rk3328_defconfig     |  5 ++-
->   configs/roc-cc-rk3328_defconfig               |  7 ----
->   configs/rock-pi-e-rk3328_defconfig            |  7 ----
->   configs/rock64-rk3328_defconfig               |  6 ---
->   17 files changed, 69 insertions(+), 55 deletions(-)
+
+[1]https://lkml.org/lkml/2024/2/4/48
+
 >
-> diff --git a/arch/arm/dts/rk3328-nanopi-r2s-u-boot.dtsi b/arch/arm/dts/rk3328-nanopi-r2s-u-boot.dtsi
-> index cca4f06145cf..4fa170eeaf8d 100644
-> --- a/arch/arm/dts/rk3328-nanopi-r2s-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3328-nanopi-r2s-u-boot.dtsi
-> @@ -15,6 +15,10 @@
->   	bootph-all;
->   };
+> SDMMC_DET may be put in the inactive mode by HW design (e.g. because the
+> detection pin is unused (e.g. card-detect-less designs), or another GPIO
+> is used instead, and SDMMC_DET is pulled-low by default).
+>
+> For some reason, when booting from SD card, everything's fine. But when
+> we don't boot from SD card, U-Boot needs to set it up correctly to allow
+> accessing SD cards, at the very least for RK3588-Jaguar
+> (card-detect-less design with SDMMC_DET pulled-low in HW).
+>
+> Therefore, let's disable the JTAG mode for the SDMMC pins so that the SD
+> controller can be used either as a fallback mechanism to find U-Boot
+> proper when the boot medium used to load TPL/SPL cannot find U-Boot
+> proper, or to be used in U-Boot CLI.
+>
+> Note that soc_con[0] is reserved. But considering that it's way more
+> user-friendly to access soc_con1 from the TRM with soc_con[1] than
+> soc_con[0], and that soc_con0 would actually be located at 4 bytes
+> before soc_con1, let's just make soc_con0 part of the soc_con array.
+>
+> [00]https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=c9b75d51c940c25587a2ad72ec7ec60490abfb6c
+> [01]https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/soc/rockchip/grf.c
+>
+> Cc: Quentin Schulz<foss+uboot@0leil.net>
+> Signed-off-by: Quentin Schulz<quentin.schulz@theobroma-systems.com>
+> ---
+>   arch/arm/include/asm/arch-rockchip/grf_rk3588.h | 24 ++++++++++++++++++++++++
+>   arch/arm/mach-rockchip/rk3588/rk3588.c          |  7 +++++++
+>   2 files changed, 31 insertions(+)
+>
+> diff --git a/arch/arm/include/asm/arch-rockchip/grf_rk3588.h b/arch/arm/include/asm/arch-rockchip/grf_rk3588.h
+> index e0694068bb1..f0ecff97f0b 100644
+> --- a/arch/arm/include/asm/arch-rockchip/grf_rk3588.h
+> +++ b/arch/arm/include/asm/arch-rockchip/grf_rk3588.h
+> @@ -32,4 +32,28 @@ struct rk3588_pmu1grf {
 >   
-> +&usb20_otg {
-> +	dr_mode = "peripheral";
+>   check_member(rk3588_pmu1grf, sd_detect_cnt, 0x03b0);
+>   
+> +#define SYS_GRF_BASE	0xfd58c000
+> +
+> +struct rk3588_sysgrf {
+> +	unsigned int wdt_con0;
+> +	unsigned int reserved0[(0x0010 - 0x0000) / 4 - 1];
+> +	unsigned int uart_con[2];
+> +	unsigned int reserved1[(0x00c0 - 0x0014) / 4 - 1];
+> +	unsigned int gic_con0;
+> +	unsigned int reserved2[(0x0200 - 0x00c0) / 4 - 1];
+> +	unsigned int memcfg_con[32];
+> +	unsigned int reserved3[(0x0300 - 0x027c) / 4 - 1];
+> +	/* soc_con0 is reserved */
+> +	unsigned int soc_con[14];
+> +	unsigned int reserved4[(0x0380 - 0x0334) / 4 - 1];
+> +	unsigned int soc_status[4];
+> +	unsigned int reserved5[(0x0500 - 0x038c) / 4 - 1];
+> +	unsigned int otp_key08;
+> +	unsigned int otp_key0d;
+> +	unsigned int otp_key0e;
+> +	unsigned int reserved6[(0x0600 - 0x0508) / 4 - 1];
+> +	unsigned int chip_id;
 > +};
 > +
->   &vcc_io_sdio {
->   	bootph-pre-ram;
->   };
-> diff --git a/arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi b/arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi
-> index 0dbe5a01f986..0a9423cd9c7e 100644
-> --- a/arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi
-> @@ -33,6 +33,10 @@
->   	bootph-pre-ram;
->   };
+> +check_member(rk3588_sysgrf, chip_id, 0x0600);
+>   #endif /*__SOC_ROCKCHIP_RK3588_GRF_H__ */
+> diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
+> index 38e95a6e2b2..c5eeda9d751 100644
+> --- a/arch/arm/mach-rockchip/rk3588/rk3588.c
+> +++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
+> @@ -11,6 +11,7 @@
+>   #include <asm/arch-rockchip/bootrom.h>
+>   #include <asm/arch-rockchip/hardware.h>
+>   #include <asm/arch-rockchip/ioc_rk3588.h>
+> +#include <asm/arch-rockchip/grf_rk3588.h>
 >   
-> +&usb20_otg {
-> +	dr_mode = "peripheral";
-> +};
+>   #define FIREWALL_DDR_BASE		0xfe030000
+>   #define FW_DDR_MST5_REG			0x54
+> @@ -35,6 +36,8 @@
+>   #define BUS_IOC_GPIO2D_IOMUX_SEL_H	0x5c
+>   #define BUS_IOC_GPIO3A_IOMUX_SEL_L	0x60
+>   
+> +#define SYS_GRF_FORCE_JTAG		BIT(14)
 > +
->   &vcc_sd {
->   	bootph-pre-ram;
->   };
-> diff --git a/arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi b/arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi
-> index 1af75ada1a62..1096821fc5d3 100644
-> --- a/arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi
-> @@ -33,6 +33,10 @@
->   	bootph-pre-ram;
->   };
+>   /**
+>    * Boot-device identifiers used by the BROM on RK3588 when device is booted
+>    * from SPI flash. IOMUX used for SPI flash affect the value used by the BROM
+> @@ -134,6 +137,7 @@ void rockchip_stimer_init(void)
+>   int arch_cpu_init(void)
+>   {
+>   #ifdef CONFIG_SPL_BUILD
+> +	static struct rk3588_sysgrf * const sys_grf = (void *)SYS_GRF_BASE;
+>   	int secure_reg;
 >   
-> +&usb20_otg {
-> +	dr_mode = "peripheral";
-> +};
+>   	/* Set the SDMMC eMMC crypto_ns FSPI access secure area */
+> @@ -168,6 +172,9 @@ int arch_cpu_init(void)
+>   	secure_reg = readl(FIREWALL_SYSMEM_BASE + FW_SYSM_MST27_REG);
+>   	secure_reg &= 0xffff0000;
+>   	writel(secure_reg, FIREWALL_SYSMEM_BASE + FW_SYSM_MST27_REG);
 > +
->   &vcc_sd {
->   	bootph-pre-ram;
->   };
-> diff --git a/arch/arm/dts/rk3328-roc-cc-u-boot.dtsi b/arch/arm/dts/rk3328-roc-cc-u-boot.dtsi
-> index 47d74964fd0c..582d6ba49b4e 100644
-> --- a/arch/arm/dts/rk3328-roc-cc-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3328-roc-cc-u-boot.dtsi
-> @@ -29,6 +29,10 @@
->   	};
->   };
+> +	/* Disable JTAG exposed on SDMMC */
+> +	rk_clrreg(&sys_grf->soc_con[6], SYS_GRF_FORCE_JTAG);
+>   #endif
 >   
-> +&usb20_otg {
-> +	hnp-srp-disable;
-> +};
-> +
->   &vcc_sd {
->   	bootph-pre-ram;
->   };
-> diff --git a/arch/arm/dts/rk3328-rock-pi-e-u-boot.dtsi b/arch/arm/dts/rk3328-rock-pi-e-u-boot.dtsi
-> index 9ed0aef1ecc9..d314bfad6fc0 100644
-> --- a/arch/arm/dts/rk3328-rock-pi-e-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3328-rock-pi-e-u-boot.dtsi
-> @@ -29,6 +29,15 @@
->   	};
->   };
->   
-> +&u2phy_host {
-> +	phy-supply = <&vcc_host_5v>;
-> +};
-> +
-> +&vcc_host_5v {
-> +	/delete-property/ regulator-always-on;
-> +	/delete-property/ regulator-boot-on;
-> +};
-> +
->   &vcc_sd {
->   	bootph-pre-ram;
->   };
-> diff --git a/arch/arm/dts/rk3328-rock64-u-boot.dtsi b/arch/arm/dts/rk3328-rock64-u-boot.dtsi
-> index 85426495c3d8..551cff6f24f6 100644
-> --- a/arch/arm/dts/rk3328-rock64-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3328-rock64-u-boot.dtsi
-> @@ -55,6 +55,10 @@
->   	bootph-pre-ram;
->   };
->   
-> +&usb20_otg {
-> +	hnp-srp-disable;
-> +};
-> +
->   &vcc_sd {
->   	bootph-pre-ram;
->   };
-> diff --git a/arch/arm/dts/rk3328-u-boot.dtsi b/arch/arm/dts/rk3328-u-boot.dtsi
-> index 4d43fe2fb51a..e0c6aee58aba 100644
-> --- a/arch/arm/dts/rk3328-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3328-u-boot.dtsi
-> @@ -130,10 +130,6 @@
->   	bootph-all;
->   };
->   
-> -&usb20_otg {
-> -	hnp-srp-disable;
-> -};
-> -
->   #ifdef CONFIG_ROCKCHIP_SPI_IMAGE
->   &binman {
->   	simple-bin-spi {
-> diff --git a/arch/arm/dts/rk3328.dtsi b/arch/arm/dts/rk3328.dtsi
-> index fe81b97bbe78..fb5dcf6e9327 100644
-> --- a/arch/arm/dts/rk3328.dtsi
-> +++ b/arch/arm/dts/rk3328.dtsi
-> @@ -965,6 +965,22 @@
->   		};
->   	};
->   
-> +	usb20_otg: usb@ff580000 {
-> +		compatible = "rockchip,rk3328-usb", "rockchip,rk3066-usb",
-> +			     "snps,dwc2";
-> +		reg = <0x0 0xff580000 0x0 0x40000>;
-> +		interrupts = <GIC_SPI 23 IRQ_TYPE_LEVEL_HIGH>;
-> +		clocks = <&cru HCLK_OTG>;
-> +		clock-names = "otg";
-> +		dr_mode = "otg";
-> +		g-np-tx-fifo-size = <16>;
-> +		g-rx-fifo-size = <280>;
-> +		g-tx-fifo-size = <256 128 128 64 32 16>;
-> +		phys = <&u2phy_otg>;
-> +		phy-names = "usb2-phy";
-> +		status = "disabled";
-> +	};
-> +
->   	usb_host0_ehci: usb@ff5c0000 {
->   		compatible = "generic-ehci";
->   		reg = <0x0 0xff5c0000 0x0 0x10000>;
-> @@ -1004,31 +1020,6 @@
->   		status = "disabled";
->   	};
->   
-> -	/*
-> -	 * U-Boot Specific Change
-> -	 *
-> -	 * The OTG controller must come after the USB host pair for it
-> -	 * to work. This is likely due to lack of support for the USB
-> -	 * PHYs. This must be manually changed after each device tree
-> -	 * sync. There is no clean way to handle this in -u-boot.dtsi
-> -	 * files.
-> -	 */
-> -	usb20_otg: usb@ff580000 {
-> -		compatible = "rockchip,rk3328-usb", "rockchip,rk3066-usb",
-> -			     "snps,dwc2";
-> -		reg = <0x0 0xff580000 0x0 0x40000>;
-> -		interrupts = <GIC_SPI 23 IRQ_TYPE_LEVEL_HIGH>;
-> -		clocks = <&cru HCLK_OTG>;
-> -		clock-names = "otg";
-> -		dr_mode = "otg";
-> -		g-np-tx-fifo-size = <16>;
-> -		g-rx-fifo-size = <280>;
-> -		g-tx-fifo-size = <256 128 128 64 32 16>;
-> -		phys = <&u2phy_otg>;
-> -		phy-names = "usb2-phy";
-> -		status = "disabled";
-> -	};
-> -
->   	gic: interrupt-controller@ff811000 {
->   		compatible = "arm,gic-400";
->   		#interrupt-cells = <3>;
-> diff --git a/configs/evb-rk3328_defconfig b/configs/evb-rk3328_defconfig
-> index 4fa8a7d365a4..c9683711dec2 100644
-> --- a/configs/evb-rk3328_defconfig
-> +++ b/configs/evb-rk3328_defconfig
-> @@ -31,6 +31,8 @@ CONFIG_CMD_GPIO=y
->   CONFIG_CMD_GPT=y
->   CONFIG_CMD_MMC=y
->   CONFIG_CMD_USB=y
-> +CONFIG_CMD_ROCKUSB=y
-> +CONFIG_CMD_USB_MASS_STORAGE=y
->   # CONFIG_CMD_SETEXPR is not set
->   CONFIG_CMD_TIME=y
->   CONFIG_CMD_REGULATOR=y
-> @@ -83,17 +85,18 @@ CONFIG_SYSINFO=y
->   CONFIG_SYSRESET=y
->   # CONFIG_TPL_SYSRESET is not set
->   CONFIG_USB=y
-> +CONFIG_DM_USB_GADGET=y
->   CONFIG_USB_XHCI_HCD=y
->   CONFIG_USB_EHCI_HCD=y
->   CONFIG_USB_EHCI_GENERIC=y
->   CONFIG_USB_OHCI_HCD=y
->   CONFIG_USB_OHCI_GENERIC=y
-> -CONFIG_USB_DWC2=y
->   CONFIG_USB_DWC3=y
->   # CONFIG_USB_DWC3_GADGET is not set
->   CONFIG_USB_DWC3_GENERIC=y
->   CONFIG_USB_GADGET=y
->   CONFIG_USB_GADGET_DWC2_OTG=y
-> +CONFIG_USB_FUNCTION_ROCKUSB=y
->   CONFIG_SPL_TINY_MEMSET=y
->   CONFIG_TPL_TINY_MEMSET=y
->   CONFIG_ERRNO_STR=y
-> diff --git a/configs/nanopi-r2c-plus-rk3328_defconfig b/configs/nanopi-r2c-plus-rk3328_defconfig
-> index 5302fd91a0f5..ffcead53f398 100644
-> --- a/configs/nanopi-r2c-plus-rk3328_defconfig
-> +++ b/configs/nanopi-r2c-plus-rk3328_defconfig
-> @@ -33,6 +33,8 @@ CONFIG_CMD_GPIO=y
->   CONFIG_CMD_GPT=y
->   CONFIG_CMD_MMC=y
->   CONFIG_CMD_USB=y
-> +CONFIG_CMD_ROCKUSB=y
-> +CONFIG_CMD_USB_MASS_STORAGE=y
->   # CONFIG_CMD_SETEXPR is not set
->   CONFIG_CMD_TIME=y
->   CONFIG_CMD_REGULATOR=y
-> @@ -90,17 +92,18 @@ CONFIG_SYSINFO=y
->   CONFIG_SYSRESET=y
->   # CONFIG_TPL_SYSRESET is not set
->   CONFIG_USB=y
-> +CONFIG_DM_USB_GADGET=y
->   CONFIG_USB_XHCI_HCD=y
->   CONFIG_USB_EHCI_HCD=y
->   CONFIG_USB_EHCI_GENERIC=y
->   CONFIG_USB_OHCI_HCD=y
->   CONFIG_USB_OHCI_GENERIC=y
-> -CONFIG_USB_DWC2=y
->   CONFIG_USB_DWC3=y
->   # CONFIG_USB_DWC3_GADGET is not set
->   CONFIG_USB_DWC3_GENERIC=y
->   CONFIG_USB_GADGET=y
->   CONFIG_USB_GADGET_DWC2_OTG=y
-> +CONFIG_USB_FUNCTION_ROCKUSB=y
->   CONFIG_SPL_TINY_MEMSET=y
->   CONFIG_TPL_TINY_MEMSET=y
->   CONFIG_ERRNO_STR=y
-> diff --git a/configs/nanopi-r2c-rk3328_defconfig b/configs/nanopi-r2c-rk3328_defconfig
-> index 5a722c182631..966627033212 100644
-> --- a/configs/nanopi-r2c-rk3328_defconfig
-> +++ b/configs/nanopi-r2c-rk3328_defconfig
-> @@ -33,6 +33,8 @@ CONFIG_CMD_GPIO=y
->   CONFIG_CMD_GPT=y
->   CONFIG_CMD_MMC=y
->   CONFIG_CMD_USB=y
-> +CONFIG_CMD_ROCKUSB=y
-> +CONFIG_CMD_USB_MASS_STORAGE=y
->   # CONFIG_CMD_SETEXPR is not set
->   CONFIG_CMD_TIME=y
->   CONFIG_CMD_REGULATOR=y
-> @@ -90,17 +92,18 @@ CONFIG_SYSINFO=y
->   CONFIG_SYSRESET=y
->   # CONFIG_TPL_SYSRESET is not set
->   CONFIG_USB=y
-> +CONFIG_DM_USB_GADGET=y
->   CONFIG_USB_XHCI_HCD=y
->   CONFIG_USB_EHCI_HCD=y
->   CONFIG_USB_EHCI_GENERIC=y
->   CONFIG_USB_OHCI_HCD=y
->   CONFIG_USB_OHCI_GENERIC=y
-> -CONFIG_USB_DWC2=y
->   CONFIG_USB_DWC3=y
->   # CONFIG_USB_DWC3_GADGET is not set
->   CONFIG_USB_DWC3_GENERIC=y
->   CONFIG_USB_GADGET=y
->   CONFIG_USB_GADGET_DWC2_OTG=y
-> +CONFIG_USB_FUNCTION_ROCKUSB=y
->   CONFIG_SPL_TINY_MEMSET=y
->   CONFIG_TPL_TINY_MEMSET=y
->   CONFIG_ERRNO_STR=y
-> diff --git a/configs/nanopi-r2s-rk3328_defconfig b/configs/nanopi-r2s-rk3328_defconfig
-> index 985d02475ece..5dff7d9a14a7 100644
-> --- a/configs/nanopi-r2s-rk3328_defconfig
-> +++ b/configs/nanopi-r2s-rk3328_defconfig
-> @@ -33,6 +33,8 @@ CONFIG_CMD_GPIO=y
->   CONFIG_CMD_GPT=y
->   CONFIG_CMD_MMC=y
->   CONFIG_CMD_USB=y
-> +CONFIG_CMD_ROCKUSB=y
-> +CONFIG_CMD_USB_MASS_STORAGE=y
->   # CONFIG_CMD_SETEXPR is not set
->   CONFIG_CMD_TIME=y
->   CONFIG_CMD_REGULATOR=y
-> @@ -90,17 +92,18 @@ CONFIG_SYSINFO=y
->   CONFIG_SYSRESET=y
->   # CONFIG_TPL_SYSRESET is not set
->   CONFIG_USB=y
-> +CONFIG_DM_USB_GADGET=y
->   CONFIG_USB_XHCI_HCD=y
->   CONFIG_USB_EHCI_HCD=y
->   CONFIG_USB_EHCI_GENERIC=y
->   CONFIG_USB_OHCI_HCD=y
->   CONFIG_USB_OHCI_GENERIC=y
-> -CONFIG_USB_DWC2=y
->   CONFIG_USB_DWC3=y
->   # CONFIG_USB_DWC3_GADGET is not set
->   CONFIG_USB_DWC3_GENERIC=y
->   CONFIG_USB_GADGET=y
->   CONFIG_USB_GADGET_DWC2_OTG=y
-> +CONFIG_USB_FUNCTION_ROCKUSB=y
->   CONFIG_SPL_TINY_MEMSET=y
->   CONFIG_TPL_TINY_MEMSET=y
->   CONFIG_ERRNO_STR=y
-> diff --git a/configs/orangepi-r1-plus-lts-rk3328_defconfig b/configs/orangepi-r1-plus-lts-rk3328_defconfig
-> index e9f7a1306923..b7a4ff7efefe 100644
-> --- a/configs/orangepi-r1-plus-lts-rk3328_defconfig
-> +++ b/configs/orangepi-r1-plus-lts-rk3328_defconfig
-> @@ -38,6 +38,8 @@ CONFIG_CMD_GPIO=y
->   CONFIG_CMD_GPT=y
->   CONFIG_CMD_MMC=y
->   CONFIG_CMD_USB=y
-> +CONFIG_CMD_ROCKUSB=y
-> +CONFIG_CMD_USB_MASS_STORAGE=y
->   # CONFIG_CMD_SETEXPR is not set
->   CONFIG_CMD_TIME=y
->   CONFIG_CMD_REGULATOR=y
-> @@ -100,17 +102,18 @@ CONFIG_SYSINFO=y
->   CONFIG_SYSRESET=y
->   # CONFIG_TPL_SYSRESET is not set
->   CONFIG_USB=y
-> +CONFIG_DM_USB_GADGET=y
->   CONFIG_USB_XHCI_HCD=y
->   CONFIG_USB_EHCI_HCD=y
->   CONFIG_USB_EHCI_GENERIC=y
->   CONFIG_USB_OHCI_HCD=y
->   CONFIG_USB_OHCI_GENERIC=y
-> -CONFIG_USB_DWC2=y
->   CONFIG_USB_DWC3=y
->   # CONFIG_USB_DWC3_GADGET is not set
->   CONFIG_USB_DWC3_GENERIC=y
->   CONFIG_USB_GADGET=y
->   CONFIG_USB_GADGET_DWC2_OTG=y
-> +CONFIG_USB_FUNCTION_ROCKUSB=y
->   CONFIG_SPL_TINY_MEMSET=y
->   CONFIG_TPL_TINY_MEMSET=y
->   CONFIG_ERRNO_STR=y
-> diff --git a/configs/orangepi-r1-plus-rk3328_defconfig b/configs/orangepi-r1-plus-rk3328_defconfig
-> index 6019f33ae3f5..4b0dc1441a6f 100644
-> --- a/configs/orangepi-r1-plus-rk3328_defconfig
-> +++ b/configs/orangepi-r1-plus-rk3328_defconfig
-> @@ -38,6 +38,8 @@ CONFIG_CMD_GPIO=y
->   CONFIG_CMD_GPT=y
->   CONFIG_CMD_MMC=y
->   CONFIG_CMD_USB=y
-> +CONFIG_CMD_ROCKUSB=y
-> +CONFIG_CMD_USB_MASS_STORAGE=y
->   # CONFIG_CMD_SETEXPR is not set
->   CONFIG_CMD_TIME=y
->   CONFIG_CMD_REGULATOR=y
-> @@ -100,17 +102,18 @@ CONFIG_SYSINFO=y
->   CONFIG_SYSRESET=y
->   # CONFIG_TPL_SYSRESET is not set
->   CONFIG_USB=y
-> +CONFIG_DM_USB_GADGET=y
->   CONFIG_USB_XHCI_HCD=y
->   CONFIG_USB_EHCI_HCD=y
->   CONFIG_USB_EHCI_GENERIC=y
->   CONFIG_USB_OHCI_HCD=y
->   CONFIG_USB_OHCI_GENERIC=y
-> -CONFIG_USB_DWC2=y
->   CONFIG_USB_DWC3=y
->   # CONFIG_USB_DWC3_GADGET is not set
->   CONFIG_USB_DWC3_GENERIC=y
->   CONFIG_USB_GADGET=y
->   CONFIG_USB_GADGET_DWC2_OTG=y
-> +CONFIG_USB_FUNCTION_ROCKUSB=y
->   CONFIG_SPL_TINY_MEMSET=y
->   CONFIG_TPL_TINY_MEMSET=y
->   CONFIG_ERRNO_STR=y
-> diff --git a/configs/roc-cc-rk3328_defconfig b/configs/roc-cc-rk3328_defconfig
-> index 191dbff928bb..6526d2606e72 100644
-> --- a/configs/roc-cc-rk3328_defconfig
-> +++ b/configs/roc-cc-rk3328_defconfig
-> @@ -13,7 +13,6 @@ CONFIG_DEBUG_UART_BASE=0xFF130000
->   CONFIG_DEBUG_UART_CLOCK=24000000
->   CONFIG_SYS_LOAD_ADDR=0x800800
->   CONFIG_DEBUG_UART=y
-> -# CONFIG_ANDROID_BOOT_IMAGE is not set
->   CONFIG_FIT=y
->   CONFIG_FIT_VERBOSE=y
->   CONFIG_SPL_FIT_SIGNATURE=y
-> @@ -34,7 +33,6 @@ CONFIG_CMD_GPT=y
->   CONFIG_CMD_MMC=y
->   CONFIG_CMD_POWEROFF=y
->   CONFIG_CMD_USB=y
-> -CONFIG_CMD_USB_MASS_STORAGE=y
->   # CONFIG_CMD_SETEXPR is not set
->   CONFIG_CMD_TIME=y
->   CONFIG_CMD_REGULATOR=y
-> @@ -55,8 +53,6 @@ CONFIG_SPL_SYSCON=y
->   CONFIG_TPL_SYSCON=y
->   CONFIG_CLK=y
->   CONFIG_SPL_CLK=y
-> -CONFIG_FASTBOOT_BUF_ADDR=0x800800
-> -CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
->   CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
->   CONFIG_MMC_DW=y
-> @@ -97,10 +93,7 @@ CONFIG_USB_OHCI_HCD=y
->   CONFIG_USB_OHCI_GENERIC=y
->   CONFIG_USB_DWC2=y
->   CONFIG_USB_DWC3=y
-> -# CONFIG_USB_DWC3_GADGET is not set
->   CONFIG_USB_DWC3_GENERIC=y
-> -CONFIG_USB_GADGET=y
-> -CONFIG_USB_GADGET_DWC2_OTG=y
->   CONFIG_SPL_TINY_MEMSET=y
->   CONFIG_TPL_TINY_MEMSET=y
->   CONFIG_ERRNO_STR=y
-> diff --git a/configs/rock-pi-e-rk3328_defconfig b/configs/rock-pi-e-rk3328_defconfig
-> index e4f2123e0b17..23029255bca2 100644
-> --- a/configs/rock-pi-e-rk3328_defconfig
-> +++ b/configs/rock-pi-e-rk3328_defconfig
-> @@ -13,7 +13,6 @@ CONFIG_DEBUG_UART_BASE=0xFF130000
->   CONFIG_DEBUG_UART_CLOCK=24000000
->   CONFIG_SYS_LOAD_ADDR=0x800800
->   CONFIG_DEBUG_UART=y
-> -# CONFIG_ANDROID_BOOT_IMAGE is not set
->   CONFIG_FIT=y
->   CONFIG_FIT_VERBOSE=y
->   CONFIG_SPL_FIT_SIGNATURE=y
-> @@ -52,8 +51,6 @@ CONFIG_SPL_SYSCON=y
->   CONFIG_TPL_SYSCON=y
->   CONFIG_CLK=y
->   CONFIG_SPL_CLK=y
-> -CONFIG_FASTBOOT_BUF_ADDR=0x800800
-> -CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
->   CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
->   CONFIG_MMC_DW=y
-> @@ -92,12 +89,8 @@ CONFIG_USB_EHCI_HCD=y
->   CONFIG_USB_EHCI_GENERIC=y
->   CONFIG_USB_OHCI_HCD=y
->   CONFIG_USB_OHCI_GENERIC=y
-> -CONFIG_USB_DWC2=y
->   CONFIG_USB_DWC3=y
-> -# CONFIG_USB_DWC3_GADGET is not set
->   CONFIG_USB_DWC3_GENERIC=y
-> -CONFIG_USB_GADGET=y
-> -CONFIG_USB_GADGET_DWC2_OTG=y
->   CONFIG_SPL_TINY_MEMSET=y
->   CONFIG_TPL_TINY_MEMSET=y
->   CONFIG_ERRNO_STR=y
-> diff --git a/configs/rock64-rk3328_defconfig b/configs/rock64-rk3328_defconfig
-> index f38431891bf8..b0be1d1d7633 100644
-> --- a/configs/rock64-rk3328_defconfig
-> +++ b/configs/rock64-rk3328_defconfig
-> @@ -16,7 +16,6 @@ CONFIG_SPL_SPI_FLASH_SUPPORT=y
->   CONFIG_SPL_SPI=y
->   CONFIG_SYS_LOAD_ADDR=0x800800
->   CONFIG_DEBUG_UART=y
-> -# CONFIG_ANDROID_BOOT_IMAGE is not set
->   CONFIG_FIT=y
->   CONFIG_FIT_VERBOSE=y
->   CONFIG_SPL_FIT_SIGNATURE=y
-> @@ -59,8 +58,6 @@ CONFIG_SPL_SYSCON=y
->   CONFIG_TPL_SYSCON=y
->   CONFIG_CLK=y
->   CONFIG_SPL_CLK=y
-> -CONFIG_FASTBOOT_BUF_ADDR=0x800800
-> -CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
->   CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
->   CONFIG_MMC_DW=y
-> @@ -106,10 +103,7 @@ CONFIG_USB_OHCI_HCD=y
->   CONFIG_USB_OHCI_GENERIC=y
->   CONFIG_USB_DWC2=y
->   CONFIG_USB_DWC3=y
-> -# CONFIG_USB_DWC3_GADGET is not set
->   CONFIG_USB_DWC3_GENERIC=y
-> -CONFIG_USB_GADGET=y
-> -CONFIG_USB_GADGET_DWC2_OTG=y
->   CONFIG_SPL_TINY_MEMSET=y
->   CONFIG_TPL_TINY_MEMSET=y
->   CONFIG_ERRNO_STR=y
+>   	return 0;
+>
