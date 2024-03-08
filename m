@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C5A7C54E4A
-	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 17:48:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A1FFC54E4A
+	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 17:51:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7B6AE87EE7;
-	Fri,  8 Mar 2024 18:48:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2F10687EDD;
+	Fri,  8 Mar 2024 18:51:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="EPNIJZGc";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="buEU/Cz5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E494A87EEB; Fri,  8 Mar 2024 18:48:28 +0100 (CET)
-Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
- [IPv6:2607:f8b0:4864:20::b31])
+ id 8268F87D60; Fri,  8 Mar 2024 18:51:04 +0100 (CET)
+Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
+ [IPv6:2607:f8b0:4864:20::b2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ACC4587EDB
- for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 18:48:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 337A387EDD
+ for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 18:51:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-yb1-xb31.google.com with SMTP id
- 3f1490d57ef6-dcbef31a9dbso1760884276.1
- for <u-boot@lists.denx.de>; Fri, 08 Mar 2024 09:48:26 -0800 (PST)
+Received: by mail-yb1-xb2d.google.com with SMTP id
+ 3f1490d57ef6-dc238cb1b17so1230375276.0
+ for <u-boot@lists.denx.de>; Fri, 08 Mar 2024 09:51:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709920105; x=1710524905; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1709920261; x=1710525061; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=e+CS+JFb8bHgjvNd4eScdt6/isws8nRMo6Nx7kU0KmQ=;
- b=EPNIJZGcfemd841IqypZcSi2UTCLfOXWiXNmAIKAxscl3KQLaTfplSyUSNeGmZac7Q
- OHCXx6Ji3nrW1IBcEEP3MKIjFZCNJ33p5jrvxihIpc0YDaLctBGWt7bMNR/XtC3BL4y4
- 3gZxHquw3LLfxShjq4TauC3jl1gA3SWSjjzoauDWw2OYN277r4Xg88i3VWbUM84lOnZa
- mkklnBq6xUvH+xFn9LQJpIOepnQl9vQN1tX1SetXg01RGFWpo8lhC659YdIrLkVP6bKw
- 72N7Ozpbglx1JD3NG4qMncQIhcWlx+tEF0i67cGWNuoskapS6aVfR6+BwkpAe9TB6eoN
- snMg==
+ bh=0EdmKnK2Sqr6BovgTpgRe9cVYCzfGDIK5+klbiNTtgY=;
+ b=buEU/Cz50WWMTNRkAeCGxf5QzlGNxbDtfjDY0uHRrKSWqfyF0gzVifeebJUlCzidWU
+ FHhuhXyyZd+DSQJULvNZBpCs20InFqbUJMpo6it1tPB+BBY4hKxs3bzLNkE5tnTJ3PLG
+ JMmjU8rVjcfN7Bn4W/R6JybnG6cA45OkSXqidUi99sCXZIAST6EwJV5KBLcfgbBDMI4s
+ yvQl2EutBRJcFt+ifbkxyRzahUp8Hbj8KFXbLU4jt7/8UfK5qf+7TVwV3MPp9fggJBpd
+ Fyf+cIYqEV+vVyGl9Vnyl1dtPctsHHc5uNVwYZkt3nwGJcB5pciRkng1rKKiufFACjqc
+ jdxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709920105; x=1710524905;
+ d=1e100.net; s=20230601; t=1709920261; x=1710525061;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=e+CS+JFb8bHgjvNd4eScdt6/isws8nRMo6Nx7kU0KmQ=;
- b=wy0jKcoblkXGgTTyTg67uI/V931UOGUYFiUiVIcZkMtDnoP3JBnqWW/R2xmGq7jBK5
- oJr+uCTzZ2jIjhCAGzApLgLdh/tZaE+EOBQJkedbiCji1r4MmtcddS0FWQPQ/wWv5pb4
- xHjvv/5VaICUqbVmwOaxgsuvG0zfv2AYiyIrR6CNG83PTi/4GWWCBWu7BVvIuXgVfd4F
- qnQ30weRcaHOxFkQaLqYMCuIPDDi6yg1cN7bWGoWXLqVS1ttT6KQGqL+nc38W5pwklcD
- hJG9wvgL3/fLlyYQ8c4SUoaFBLJbhuHJaWJQjiVpQ4+sQLxpKtKC88uJFmhNwOjh3/hK
- 2nBA==
-X-Gm-Message-State: AOJu0YyHO5yJ2BIN6V0OECgAOnvM6UJOruuTSqxI+M0igVchGRy+i6eq
- Nz1ZDRSN3VPoH2mW+V21uI2ptT4+cOpVgG2aPnv+kreKyoRKO4mCXojjfP5KpW5KYcUxs0JyjsR
- aoA/WyjljQFmG0j+XIAvWWSmerURUXzyLeCmtDw==
-X-Google-Smtp-Source: AGHT+IF+RnlxKiqfw6SHVePmdw1YDIyqisER9nCMhEQh82GsRde8ESucefw2gMa8ZrRPC9TpQMJnh1wNV9KH5rco61g=
-X-Received: by 2002:a25:3355:0:b0:dc6:aed5:718a with SMTP id
- z82-20020a253355000000b00dc6aed5718amr19864901ybz.26.1709920105371; Fri, 08
- Mar 2024 09:48:25 -0800 (PST)
+ bh=0EdmKnK2Sqr6BovgTpgRe9cVYCzfGDIK5+klbiNTtgY=;
+ b=QvqSn2Zu0oUPDE+FS6NKM3jKiyZu86InqL+PGl4RrtBkk842I4l6/AL60ebrBmCLCh
+ U4utHc6No5TpXhm1BddMtn9AD2e2waoRUgRmwMfV1QGMAD/UUqfG23Nxm/BOV4/RsvDH
+ YFZPWoH49aQXqDPqLsehiUSXbRFqP32jYDk2sgbawxm4hCmWlnH1rIkUs7Aod0CDjBcF
+ ePKBzBaeRfwafTSbtfst0zQHaU0lfBAXrrl0Vm3BNRVJTX/ADRFMaP4hCU3a8XkcIa42
+ xsNljXzt4BskwrHOMZdqhbKMv/PGmKRDwSe1+Z1IVwh6T/adgGcqWaN2nSPgcvFztCY3
+ kz/g==
+X-Gm-Message-State: AOJu0Yyv/XtiIi14Cy2tQzq0AJvijTW/zNX3pjq0srgMPr5jdY3qk7HW
+ oVRv4oXqF/CjAXH1dUfaCZduJKqOaHhKqkFeRGC+trkngI1oS7asFe6anYNDogz0ah2RnaI/1Gl
+ dG88iXh4mjDCqcrIvvuIE6ImDPXvAnc6SpHqUiA==
+X-Google-Smtp-Source: AGHT+IGkSWV6FVxnVOUxnXwy9n6KwbtdzGu4inggRIHjZJgjm20nUp1iy1lCDSrtaWD+WchvNIZH93q4wPQhL8sS6ME=
+X-Received: by 2002:a05:6902:34c:b0:dcc:2f94:591a with SMTP id
+ e12-20020a056902034c00b00dcc2f94591amr18091304ybs.12.1709920260928; Fri, 08
+ Mar 2024 09:51:00 -0800 (PST)
 MIME-Version: 1.0
 References: <20240307161711.3177729-1-colin.mcallister@garmin.com>
  <20240308165937.270499-1-colin.mcallister@garmin.com>
- <20240308165937.270499-2-colin.mcallister@garmin.com>
-In-Reply-To: <20240308165937.270499-2-colin.mcallister@garmin.com>
+ <20240308165937.270499-3-colin.mcallister@garmin.com>
+In-Reply-To: <20240308165937.270499-3-colin.mcallister@garmin.com>
 From: Sam Protsenko <semen.protsenko@linaro.org>
-Date: Fri, 8 Mar 2024 11:48:14 -0600
-Message-ID: <CAPLW+4mLemkC2vP5o-0Z=31c+hHDgc9DYsGu6c+u=WzU4ToWrQ@mail.gmail.com>
-Subject: Re: [PATCH v3 1/2] android_ab: Add missing semicolon
+Date: Fri, 8 Mar 2024 11:50:50 -0600
+Message-ID: <CAPLW+4kG7yc2xG4VCLPapsP=cD4QcBQEV=bsPG3zYkwjRJeFzg@mail.gmail.com>
+Subject: Re: [PATCH v3 2/2] android_ab: Fix ANDROID_AB_BACKUP_OFFSET
 To: Colin McAllister <colin.mcallister@garmin.com>
 Cc: u-boot@lists.denx.de, JPEWhacker@gmail.com, sjg@chromium.org, 
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
@@ -94,51 +94,32 @@ X-Virus-Status: Clean
 On Fri, Mar 8, 2024 at 11:00=E2=80=AFAM Colin McAllister
 <colin.mcallister@garmin.com> wrote:
 >
-> Found a missing semicolon in code protected by a #if that will never
-> evaluate to true due to a separate issue. Fixing this issue before
-> addressing the #if.
+> Currently, setting CONFIG_AB_BACKUP_OFFSET in a target's defconfig will
+> not actually enable the #if protected code in android_ab.c. This is
+> because "CONFIG_" should have been prepended to the config macro, or the
+> macros defined in kconfig.h could have been used.
+>
+> The code included by ANDROID_AB_BACKUP_OFFSET has been refactored to no
+> longer be conditionally compiled by preprocessor conditionals and
+> instead use C conditionals. This better aligns with the Linux kernel
+> style guide.
 >
 > Fixes: 3430f24bc6 ("android_ab: Try backup booloader_message")
 > Signed-off-by: Colin McAllister <colin.mcallister@garmin.com>
 > Cc: Joshua Watt <JPEWhacker@gmail.com>
 > Cc: Simon Glass <sjg@chromium.org>
 > ---
+> v2:
+>   - Replaced #if conditionals with C if conditionals
+>   - Opted to use CONFIG_ANDROID_AB_BACKUP_OFFSET directly instead of
+>     macros in kconfig.h as CONFIG_ANDROID_AB_BACKUP_OFFSET is not a
+>         boolean or tristate value and doesn't have different values when
+>         building SPL or TPL.
+> v3:
+>   - Added "Fixes:" tag
 
-My R-b tag wasn't added in v3, adding it here so that whoever applies
-this patch can add it as well:
+Can you please also address my comment about CONFIG_IS_ENABLED() in
+the previous mail? It might be just an answer if you think there are
+no issues with that, not necessarily v4.
 
-Reviewed-by: Sam Protsenko <semen.protsenko@linaro.org>
-
-> v2: No changes
-> v3: Added "Fixes:" tag
->
->  boot/android_ab.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/boot/android_ab.c b/boot/android_ab.c
-> index c9df6d2b4b..9a3d15ec60 100644
-> --- a/boot/android_ab.c
-> +++ b/boot/android_ab.c
-> @@ -221,7 +221,7 @@ int ab_select_slot(struct blk_desc *dev_desc, struct =
-disk_partition *part_info,
->  #if ANDROID_AB_BACKUP_OFFSET
->                 crc32_le =3D ab_control_compute_crc(backup_abc);
->                 if (backup_abc->crc32_le !=3D crc32_le) {
-> -                       log_err("ANDROID: Invalid backup CRC-32 ")
-> +                       log_err("ANDROID: Invalid backup CRC-32 ");
->                         log_err("expected %.8x, found %.8x),",
->                                 crc32_le, backup_abc->crc32_le);
->  #endif
-> --
-> 2.43.2
->
->
-> ________________________________
->
-> CONFIDENTIALITY NOTICE: This email and any attachments are for the sole u=
-se of the intended recipient(s) and contain information that may be Garmin =
-confidential and/or Garmin legally privileged. If you have received this em=
-ail in error, please notify the sender by reply email and delete the messag=
-e. Any disclosure, copying, distribution or use of this communication (incl=
-uding attachments) by someone other than the intended recipient is prohibit=
-ed. Thank you.
+[snip]
