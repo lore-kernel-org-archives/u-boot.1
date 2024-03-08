@@ -4,80 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B1E7C5475B
-	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 22:00:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2162C5475B
+	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 22:37:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ADA6087D42;
-	Fri,  8 Mar 2024 23:00:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C7E1C87B77;
+	Fri,  8 Mar 2024 23:37:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MPo/AQjK";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gEm0paSS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D0A0987D47; Fri,  8 Mar 2024 23:00:14 +0100 (CET)
-Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
- [IPv6:2607:f8b0:4864:20::b35])
+ id E6A9387CE8; Fri,  8 Mar 2024 23:37:51 +0100 (CET)
+Received: from mail-ua1-x929.google.com (mail-ua1-x929.google.com
+ [IPv6:2607:f8b0:4864:20::929])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6154487CDA
- for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 23:00:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AAB8B87A00
+ for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 23:37:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-yb1-xb35.google.com with SMTP id
- 3f1490d57ef6-dccb1421bdeso2511621276.1
- for <u-boot@lists.denx.de>; Fri, 08 Mar 2024 14:00:11 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
+Received: by mail-ua1-x929.google.com with SMTP id
+ a1e0cc1a2514c-7db797c5c93so766198241.0
+ for <u-boot@lists.denx.de>; Fri, 08 Mar 2024 14:37:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709935210; x=1710540010; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ixN/z9qTz+hFjEUmUm2TiH1zB4/0FiX5+EEDu2etwM8=;
- b=MPo/AQjKRRjY+MltkCz5OuU+p9puE/Jce9ajhBYMpemPEJXL+WzpjA0oBarhSX0rEV
- zTdAZ2ItBzKVEQoXSfLqjdC+L+aLA97Sd8+zXtr72h2LECfMaMgPeuulKydp3yFnei8I
- PTtWsFQEA5c89nKDAeXtfFI4A5iCFUeEY8Y49MxTYDedMZkbXOwmZkQ6f6e2VK9A8mXD
- bKujghI9rSXrlv7/Of1CJqkYwJfQnJ5Vi0c5o1O+RposYmyXn9nfgt8nc0KRjG08DAPZ
- qNj0U4rcQhtmJB9B7hbBpad9dO/BV0gc5B3j3fKGlB//Movy5phkfr8sn4+uIHSO7Y2E
- kRSA==
+ d=gmail.com; s=20230601; t=1709937467; x=1710542267; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=/EKS0yWclUcagWjn/LoXGlU5EXE0ufPSCwvgqshunP0=;
+ b=gEm0paSSsZyO9f0DCQ7NGGQtUB0Wh50m95zvQjsnUsHjSDfDj35BCI8pUM5+Wl3g91
+ oljUGV5gwYEGfFAP/lQNkFCGYGjLqSfwyvJk45OS6DjcC+dowag22gkhH3TRCoDuVbfO
+ 7SA0SCxhpjZudyr35av7pyu3riJOMpN0pbka3z7cuyywTfoJNfQ6/TUn8dbKp6afU5Du
+ nc7ZipTaZKKw99h2I1dnogi6tXmEa/nrQphtPp8SPhAF1mlmPG9iWYD4J2TSjAE4hC5/
+ Ib5QwKYcGC47EwtSZzQJGNQ0UPQjwBkzXhzg+jwVP1c1W+qqFmIyLUbQkyd0LC0yQU70
+ Qzxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709935210; x=1710540010;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ixN/z9qTz+hFjEUmUm2TiH1zB4/0FiX5+EEDu2etwM8=;
- b=YsZXFMAp4khgGYeC28S7TNtDu6tkQlWk6tQwfgdPDEgWy0PhkqFij8HARZXihLscGs
- HFMenSLT/9OG70ZL68LqZd1IHuE9sjzTeOvNwn5k9KCpyl0QaLcekxb/2U6AIxn1w3Nk
- HnhQCu8FRY1CBogv/ineewiWFXUnza9sx8TmxIvpxDDHwlnIh+TiqsM5nnFg/ndOIWIr
- YUmLebEZOytwLxGPNU7AA8/d+GsXh5UiXbYRbkdAn0vv2/m1Kq1lFLdGDqL9GE57DPBU
- GW7PJC4h1rlwJ33Np3qC29K9qoUtn06xF/LRku6ndiDHJnE3dAKhBFfmsa9Feo9Ro9Kp
- N1Rw==
-X-Gm-Message-State: AOJu0YySmunf2lO1bu5btbHBoZ/6lyuzCuqOvJ+bmC+4efE2tZ5XdJeU
- dCTkiRO+6AXQBba10MHhv2EYd2jNLhZeSYsm/XUeIRNSKBrejzwj47TKwqrFnIy+2xUoULyAVLC
- iZhoSrnhlyMG+EGeLgmmt+JvKafTxIL8AyfPuqw==
-X-Google-Smtp-Source: AGHT+IGNOpBmQ695DGyrakDEFGIDRIq3/rLXYoRmZDaF2i1hogg0iRumKW9KjiutMO7sVVFyewgI5H+SKd/tKL68Ln0=
-X-Received: by 2002:a25:684f:0:b0:dcc:e9d:4a22 with SMTP id
- d76-20020a25684f000000b00dcc0e9d4a22mr243033ybc.12.1709935209960; Fri, 08 Mar
- 2024 14:00:09 -0800 (PST)
+ d=1e100.net; s=20230601; t=1709937467; x=1710542267;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=/EKS0yWclUcagWjn/LoXGlU5EXE0ufPSCwvgqshunP0=;
+ b=k0FJVn9To07k5qDiy27WwxMZBhIYYmEvqF5lfKJiW9XVtHhtYbVrsqupMl/iTjk2cj
+ GVYaC8WPCaKiNuBxFW5od//GTGUQpN8vHsj6kipZLUZI9JrgnjxigeZv6vxdJE3/WLlK
+ SF8Cx5NWN6jYOGIkpi1MMr8unPZVpoad8j5hqKsem1YSdPJ0kda/GTgULU0Vrs8LPPIo
+ Yoi98PWHwDFWceGDH6pYM0V64XCqoRvN0q9St7wNYP/JBi7krX2I1kprOzBcKPAxSP/X
+ V2r7LAi1Jgam/6LsSJU0Z+hXWVAB64I6JbaDYEBemw52ncbOvtdwh/EsrBUaWOkeY6ap
+ Uf5g==
+X-Gm-Message-State: AOJu0Ywk658CJ0Vps4pc1yEQEELYeDeEV1dTyUvYjUgVu9FSMybYoYjz
+ tRs9PDBAs+bWNYHU2Ovq5tz66FTG7eTm4HQml0oShL/COJaPtyC72nwllJvuq5dKN+f7Bn7VOS8
+ Yn/eXc85CibyliAcIH98IViyDAEw=
+X-Google-Smtp-Source: AGHT+IFSJAdKZ17aaTMr6exWwrTdNZQB8PBq5/sXXZoM3XAD6ObLcaQAY8uD6kgHk6XFicj97xmPZ/Xwyv0ZiuXQj8M=
+X-Received: by 2002:a67:f88e:0:b0:472:5c3e:caf4 with SMTP id
+ h14-20020a67f88e000000b004725c3ecaf4mr395769vso.27.1709937467692; Fri, 08 Mar
+ 2024 14:37:47 -0800 (PST)
 MIME-Version: 1.0
-References: <20240307161711.3177729-1-colin.mcallister@garmin.com>
- <20240308165937.270499-1-colin.mcallister@garmin.com>
- <CAPLW+4kZShBuiDO1aV3g9+nnsdySFv19x2nT6F7hOf4OR_dnHQ@mail.gmail.com>
- <SA2PR04MB7723C4BAEF9488482005FEF5F4272@SA2PR04MB7723.namprd04.prod.outlook.com>
-In-Reply-To: <SA2PR04MB7723C4BAEF9488482005FEF5F4272@SA2PR04MB7723.namprd04.prod.outlook.com>
-From: Sam Protsenko <semen.protsenko@linaro.org>
-Date: Fri, 8 Mar 2024 15:59:58 -0600
-Message-ID: <CAPLW+4nQBssOtR_wqU25XW-6ZDEm7Yu_7q9ODjWhkWoE9FoV9g@mail.gmail.com>
-Subject: Re: [PATCH v3 0/2] Fix Android A/B backup
-To: "McAllister, Colin" <Colin.McAllister@garmin.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "JPEWhacker@gmail.com" <JPEWhacker@gmail.com>, 
- "sjg@chromium.org" <sjg@chromium.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Igor Opaniuk <igor.opaniuk@gmail.com>
+References: <20240303130122.29983-1-heinrich.schuchardt@canonical.com>
+ <20240303130122.29983-3-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240303130122.29983-3-heinrich.schuchardt@canonical.com>
+From: E Shattow <lucent@gmail.com>
+Date: Fri, 8 Mar 2024 14:37:36 -0800
+Message-ID: <CANV2PTNbhB1D32pK9nVKi0MNA=G-ooP=qcJBcsaEGMNzaxo97g@mail.gmail.com>
+Subject: Re: [RFC 2/5] riscv: set fdtfile on Milk-V Mars
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,47 +87,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Mar 8, 2024 at 1:24=E2=80=AFPM McAllister, Colin
-<Colin.McAllister@garmin.com> wrote:
->
-> > Ah, ok, I see you replied to my comment here.
->
-> Yes, sorry. Outlook is terrible to send inline responses too. I figured
-> just adding responses in the patch contents would be better. Next time I'=
-ll submit
-> my patch with a different email :)
->
-> > So when that config option is not defined at all, the build still
-> > works, right?
->
-> Yes, the default value for CONFIG_ANDROID_AB_BACKUP_OFFSET is 0x0, which
-> would evaluate to a false bool value in the if conditions. I did do some
-> testing with the config value not defined for my board and confirmed
-> back-up data is not used.
->
+Sharing the info from Mars CM Lite 4GB:
+--------EEPROM INFO--------
+Vendor : MILK-V
+Product full SN: MARC-V10-2340-D004E016-000006DF
+data version: 0x2
+PCB revision: 0xc1
+BOM revision: A
+Ethernet MAC0 address: 6c:cf:39:00:83:11
+Ethernet MAC1 address: 6c:cf:39:00:83:12
+--------EEPROM INFO--------
 
-Looks good to me, thanks.
+I do not like this practice of force setting fdtfile environment variable.
+If I set fdtfile from u-boot prompt and saveenv, I expect that my action as
+the user will persist over a reboot but instead it gets ignored and
+overwritten by this strategy. Is this necessary to happen before the boot
+scripts?
 
-> In your other emails you include your reviewed-by tag. For clarity, Am I
-> supposed to append my patches and upload a new version? This is my
-> first time contributing to u-boot, so I'm still learning the workflow. I
-> didn't see anything glancing through the "Sending patches" page in the
-> U-Boot documentation.
+On Sun, Mar 3, 2024 at 5:02=E2=80=AFAM Heinrich Schuchardt <
+heinrich.schuchardt@canonical.com> wrote:
+
+> Set environment variable fdtfile to the correct value for the Milk-V Mars
+> board.
 >
-
-Welcome to the community! And thanks for your patches :) U-Boot
-workflow is quite similar to Linux kernel one. It's useful to collect
-all tags when sending out your next version. When the maintainer takes
-your patch, they usually also apply all R-b tags for the final patch
-version, so you only have to worry about that when sending out a new
-version. I know that U-Boot contributors are often using `patman' tool
-[1] for submitting patches (and corresponding updated versions), and
-I'm pretty sure it collects all pending tags automatically for you.
-FWIW, I'm not experienced with `patman', as I'm trying to use somehow
-unified submitting process for both U-Boot and Linux kernel, and I
-know that using `patman' is sometimes discouraged in Linux kernel
-community.
-
-[1] https://docs.u-boot.org/en/latest/develop/patman.html
-
-[snip]
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  .../visionfive2/starfive_visionfive2.c        | 43 +++++++++++++------
+>  1 file changed, 30 insertions(+), 13 deletions(-)
+>
+> diff --git a/board/starfive/visionfive2/starfive_visionfive2.c
+> b/board/starfive/visionfive2/starfive_visionfive2.c
+> index 78e118d5a05..9970e309690 100644
+> --- a/board/starfive/visionfive2/starfive_visionfive2.c
+> +++ b/board/starfive/visionfive2/starfive_visionfive2.c
+> @@ -9,6 +9,7 @@
+>  #include <dm.h>
+>  #include <fdt_support.h>
+>  #include <env.h>
+> +#include <log.h>
+>  #include <asm/arch/eeprom.h>
+>  #include <asm/io.h>
+>  #include <asm/sections.h>
+> @@ -17,6 +18,8 @@
+>  DECLARE_GLOBAL_DATA_PTR;
+>  #define JH7110_L2_PREFETCHER_BASE_ADDR         0x2030000
+>  #define JH7110_L2_PREFETCHER_HART_OFFSET       0x2000
+> +#define FDTFILE_MILK_V_MARS \
+> +       "starfive/jh7110-milkv-mars.dtb"
+>  #define FDTFILE_VISIONFIVE2_1_2A \
+>         "starfive/jh7110-starfive-visionfive-2-v1.2a.dtb"
+>  #define FDTFILE_VISIONFIVE2_1_3B \
+> @@ -48,20 +51,34 @@ static void set_fdtfile(void)
+>  {
+>         u8 version;
+>         const char *fdtfile;
+> +       const char *product_id;
+>
+> -       version =3D get_pcb_revision_from_eeprom();
+> -       switch (version) {
+> -       case 'a':
+> -       case 'A':
+> -               fdtfile =3D FDTFILE_VISIONFIVE2_1_2A;
+> -               break;
+> -
+> -       case 'b':
+> -       case 'B':
+> -       default:
+> -               fdtfile =3D FDTFILE_VISIONFIVE2_1_3B;
+> -               break;
+> -       };
+> +       product_id =3D get_product_id_from_eeprom();
+> +       if (!product_id) {
+> +               log_err("Can't read EEPROM\n");
+> +               return;
+> +       }
+> +       if (!strncmp(product_id, "MARS", 4)) {
+> +               fdtfile =3D FDTFILE_MILK_V_MARS;
+> +       } else if (!strncmp(product_id, "VF7110", 6)) {
+> +               version =3D get_pcb_revision_from_eeprom();
+> +
+> +               switch (version) {
+> +               case 'a':
+> +               case 'A':
+> +                       fdtfile =3D FDTFILE_VISIONFIVE2_1_2A;
+> +                       break;
+> +
+> +               case 'b':
+> +               case 'B':
+> +               default:
+> +                       fdtfile =3D FDTFILE_VISIONFIVE2_1_3B;
+> +                       break;
+> +               }
+> +       } else {
+> +               log_err("Unknown product\n");
+> +               return;
+> +       }
+>
+>         env_set("fdtfile", fdtfile);
+>  }
+> --
+> 2.43.0
+>
+>
