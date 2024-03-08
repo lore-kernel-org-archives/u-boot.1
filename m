@@ -4,94 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAF95C5475B
-	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 03:38:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 024F5C54E41
+	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 03:38:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1EC1D87E2A;
-	Fri,  8 Mar 2024 04:38:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 7E4AB87E1C;
+	Fri,  8 Mar 2024 04:38:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="rXtzwZeT";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MAX7Jn88";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ACC5987E0C; Fri,  8 Mar 2024 04:38:17 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 50F4587E1C; Fri,  8 Mar 2024 04:38:27 +0100 (CET)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C361F87150
- for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 04:38:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 04CFD87150
+ for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 04:38:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 2C5423F6B1
- for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 03:38:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1709869094;
- bh=X4H9c3mzDdWrsDDTA14L2ZMbcfDpfrPujRGF+0PTgq0=;
- h=Message-ID:Date:MIME-Version:Subject:From:To:Cc:References:
- In-Reply-To:Content-Type;
- b=rXtzwZeTwv/ZuzvNt28Fw+WjpPisHmDUYlkXIEEDULx1G0NVsGHa13ZbRgnl08Ekq
- syqDOW1GkuERLajHwdw+zY+i9QvlO3BPzm6a0jdXK2CxehrC82ECmKDqh+9IAWT/x6
- q6RP0jYBhoWvfEJhy6+2i2MyxikP0xNlpmMvO3RwIpcYkjWglb6qswHpvuPEP5wBm0
- kh4Iunoi8JSUvVn1AG2UCBvgtvuSpFx+sOHYP2dHx0MUhPf6HwuUucF7TwqGNWsuNq
- D3zFNE84XFWlZxFDf/5ijyEAF04nuGOH2lfWuXEGLbzNse1bl+S7iZ/odGt/HQ7Mpp
- O/kss8aUk5GJA==
-Received: by mail-wr1-f70.google.com with SMTP id
- ffacd0b85a97d-33e78c1b314so1313f8f.3
- for <u-boot@lists.denx.de>; Thu, 07 Mar 2024 19:38:14 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-6e4f7e1af80so179213a34.3
+ for <u-boot@lists.denx.de>; Thu, 07 Mar 2024 19:38:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1709869103; x=1710473903; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=1WLl5z9RipY9bRZgz65vMYVn9bonA88ZTuGSEY2xtpo=;
+ b=MAX7Jn88hJKUYqeUxhj03fVpoAdwnCXttywN3CXP7j8f3W7EGpneg2Kqummn7TXoA7
+ CGREMOU9rdrBzqJ44EBesvfU2ygqSN37fhLKFkUOITDJ9m5DXjjVKlSJmfjbmXE5tZUG
+ QbvF58W3jpEA4VbCui8oKh6+9GJ1bDR8OOH38B6vw6LJKol2W4DRNQ2EN7nr9YBhUq/W
+ 8Q4yVwgrlWV3rRNCAmz3XO9tbdV2kehtVB6ejo7Prt4FoR89ee58O6Myl0FxCBrRsJ2t
+ xpqMwrMf0G0/FXYpmeqwHcJTkAFyCLmGN1s/VbjP6puZOkMk2+Ub6oa5j/4ZJNNO91ni
+ VMXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709869094; x=1710473894;
- h=content-transfer-encoding:in-reply-to:references:cc:to:from
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=X4H9c3mzDdWrsDDTA14L2ZMbcfDpfrPujRGF+0PTgq0=;
- b=roUvCQABuzLUf5dnrMswnwahUZETLqNNZRYRZbiVIBN5kEC2p+aoOf8pfDpJEzTU4s
- Nh+meDOCN6i+ELhjyee98IwPPOZNC5HObS1vDxRCiXzWiJi7ffbqCeXj+OIOl5aeg+dO
- bIG3lG9WLrMpC6vRZi/6ckivPgY2nzXrO8AWPK1E7eFkUNsuFXhCcNvR1rN0sdCS2nK2
- llzTF5xeqf/Lp5/c2BBbDa+kW4OeyJtZwTAlPI/WLL2VPG5YGtikSPp5jgfXNbFfTgH8
- wGJbqFvrnxpgXUqRYGjgM5qsrb+jdBe4m41JdTTpj72MILizJWCZSxWiCfDFbGCAUl1w
- mJCA==
-X-Gm-Message-State: AOJu0Yw6qd9qjNct4ggpzbWb5DNgsTRVi/56ALcOHNKgn08uGKrblnoY
- KqgFWLlJYU4QUUiQvUQOdBbSJlwWYuvi3EuCV6UTEvQnNQOvh72wQZB0QhZX8+Qv2dAe/IHfoSB
- 17CaSJ37IwMftceC7xS5w2GkjXHKO8NDAsv8S2M/K+LYO0HL/Sp0IpTM91FPgL4U9ROg=
-X-Received: by 2002:a5d:49c3:0:b0:33e:6fd3:7366 with SMTP id
- t3-20020a5d49c3000000b0033e6fd37366mr1614003wrs.68.1709869093754; 
- Thu, 07 Mar 2024 19:38:13 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IF5nDfX4mQasmzj4IydEaTtL2qdD8aRCfJ5VDvPLFWBx04sjkvJfhm1NqvoWeuomrD/24PFVg==
-X-Received: by 2002:a5d:49c3:0:b0:33e:6fd3:7366 with SMTP id
- t3-20020a5d49c3000000b0033e6fd37366mr1613996wrs.68.1709869093401; 
- Thu, 07 Mar 2024 19:38:13 -0800 (PST)
-Received: from ?IPV6:2a00:20:9:393f:4294:78eb:608e:9569?
- ([2a00:20:9:393f:4294:78eb:608e:9569])
- by smtp.gmail.com with ESMTPSA id
- bw1-20020a0560001f8100b0033d6bc17d0esm22245272wrb.74.2024.03.07.19.38.12
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 07 Mar 2024 19:38:12 -0800 (PST)
-Message-ID: <b2191232-b59c-4a9e-bafa-4e1bbe382375@canonical.com>
-Date: Fri, 8 Mar 2024 04:38:11 +0100
+ d=1e100.net; s=20230601; t=1709869103; x=1710473903;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=1WLl5z9RipY9bRZgz65vMYVn9bonA88ZTuGSEY2xtpo=;
+ b=pPOA7gwBVtDgwiDLPi4Ydg85s9aip4nHfWvdXlBKNDTWd/BE7oww9iFryr3eMtiKnr
+ sulh5j40B2KzS9gj4e9ocCSq51vBlhN3vb3eMlssFVkfQDHHlW4htrxvUiuWZOyHkNfc
+ UAuTEK5vvpWW0ipRqhWvqCF2ieOt7eUBeou5H3pxi0yIB8UEUIW2lK82yvf1uL+huQCw
+ t2dYygLr/5DiKtTDb8RQ2wESO0ggS8j1avoBeNmYRqf1OsTAVSYwFzsAFG+Y3g6UL9Gq
+ 2Rqjmh1L6OZz1gUjSgDCUZ+EWs77N5wLLkP6I4/TMCjDCi1TaZQC/WaiutPw3awXwTB7
+ ctew==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUFFYuZaSNfGatIz7gwcvw6LzV5rU1wLnbeskHAq04LdI+w93N/OjCdkTAyfx0pjk98cQ9BHFIOtHdNsFA5ahgqtA5lKQ==
+X-Gm-Message-State: AOJu0YzH2kZfCx0ktD7Rs2v8n8ULEie9iuK+H9HcYEJyFj80UjXkBfhP
+ IUDA2F2OCyE02WZ5V/aEFO0/I0PCjJ1+t3g/xe7l2Oa/qRa7Ja8cZeQJb3tdSiY=
+X-Google-Smtp-Source: AGHT+IFSyK35imijpnSXDQqUIPpoMsAAylFiloDJVj5yUC/b8cnSTAeHF2t5fKNFpTpYFTRAa+Sumw==
+X-Received: by 2002:a9d:684b:0:b0:6e5:704:63fc with SMTP id
+ c11-20020a9d684b000000b006e5070463fcmr4926029oto.34.1709869103612; 
+ Thu, 07 Mar 2024 19:38:23 -0800 (PST)
+Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
+ h5-20020a4a6f05000000b005a0c309dd0asm3660954ooc.46.2024.03.07.19.38.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 07 Mar 2024 19:38:23 -0800 (PST)
+From: Sam Protsenko <semen.protsenko@linaro.org>
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, Joao Marcos Costa <jmcosta944@gmail.com>,
+ John Clark <inindev@gmail.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Rong Tao <rongtao@cestc.cn>,
+ Christophe Leroy <christophe.leroy@csgroup.eu>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Jesse Taube <mr.bossman075@gmail.com>, Nishanth Menon <nm@ti.com>,
+ Andrew Davis <afd@ti.com>, Jason Kacines <j-kacines@ti.com>,
+ u-boot@lists.denx.de
+Subject: [PATCH] Makefile: Improve generated_defconfig file handling
+Date: Thu,  7 Mar 2024 21:38:22 -0600
+Message-Id: <20240308033822.28727-1-semen.protsenko@linaro.org>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC 3/5] board: starfive: support Milk-V Mars board
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: E Shattow <lucent@gmail.com>
-Cc: u-boot@lists.denx.de
-References: <20240303130122.29983-1-heinrich.schuchardt@canonical.com>
- <20240303130122.29983-4-heinrich.schuchardt@canonical.com>
- <CANV2PTMcS800x8OTuDbv8orqUD=-frNpa+0dHu4=L__D_Rmk_g@mail.gmail.com>
- <CANV2PTMtPggmS0hxxuovDfUnSAGM7tDXSewQ-eRTmd_+xR_L-g@mail.gmail.com>
- <f76541f4-503f-432f-9cfe-a74b78523c3b@canonical.com>
-In-Reply-To: <f76541f4-503f-432f-9cfe-a74b78523c3b@canonical.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,59 +97,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/8/24 04:20, Heinrich Schuchardt wrote:
-> On 3/8/24 03:06, E Shattow wrote:
->> P.S. Found the longer description at 
->> https://github.com/milkv-mars/mars-buildroot-sdk/commit/d381610c92827de01b25843786012351b3f35519 <https://github.com/milkv-mars/mars-buildroot-sdk/commit/d381610c92827de01b25843786012351b3f35519> as follows: "if configured as 24c04, its address will occupy 0x51, conflicting with the RTC chip pcf85063 on the IO-Board. Refer to: Documentation/misc-devices/eeprom.rst". What does that even mean, it is for Raspberry Pi Compute IO carrier only?
-> 
-> According to
-> https://ww1.microchip.com/downloads/en/devicedoc/doc0180.pdf
-> the chips differ in how their address lines are used. Either they select 
-> a chip or a memory address.
-> 
-> The chip is at reg 0x50. So it could be that if you read the upper 
-> memory of atmel,24c04 it would use reg 0x51.
-> 
-> https://datasheets.raspberrypi.com/cm4io/cm4io-datasheet.pdf says the 
-> CM4IO board has an RTC at address 0x51.
-> 
-> Together with the commit message this really sounds like the smaller 
-> chip size is faked due to incompatibility.
+Commit 2027e99e61aa ("Makefile: Run defconfig files through the C
+preprocessor") adds `generated_defconfig' file, but fails to clean that
+up. It might be useful to have that file around after `make' is done,
+but it's better to clean that up on `make clean'. Also we probably want
+to hide it in `git status' list. This patch makes the described changes,
+and also adds `-P' parameter to the CPP command that produces the
+`generated_defconfig' to avoid generating linemarkers.
 
-Running i2cdetect on my Mars Milk-V board shows that a device is 
-responding to address 0x51:
+Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
+Fixes: 2027e99e61aa ("Makefile: Run defconfig files through the C preprocessor")
+---
+ .gitignore               | 1 +
+ Makefile                 | 1 +
+ scripts/kconfig/Makefile | 2 +-
+ 3 files changed, 3 insertions(+), 1 deletion(-)
 
-$ sudo i2cdetect 5
-I will probe file /dev/i2c-5.
-I will probe address range 0x08-0x77.
-Continue? [Y/n] y
-      0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
-00:
-10:
-20:
-30: -- -- -- -- -- -- UU --
-40:
-50: 50 51 -- -- -- -- -- -- -- -- -- -- -- -- -- --
-60:
-70:
-
-> 
-> As you mentioned to have access to a CM module I would like to know what 
-> its serial number looks like to understand what if it can be used to 
-> detect if we are running U-Boot on full board or a CM module.
-> 
-> For my Milk-V board I have:
-> 
-> MARS-V11-2340-D008E000-xxxxxxxx
-> 
-> Best regards
-> 
-> Heinrich
-> 
-> 
-> 
-> 
-> 
-> 
-> 
+diff --git a/.gitignore b/.gitignore
+index 330148119264..d9a64d742fd7 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -63,6 +63,7 @@ fit-dtb.blob*
+ /spl/
+ /tpl/
+ /defconfig
++/generated_defconfig
+ 
+ #
+ # Generated include files
+diff --git a/Makefile b/Makefile
+index a2bc9d590329..6fd0e92c7d5a 100644
+--- a/Makefile
++++ b/Makefile
+@@ -2205,6 +2205,7 @@ clean: $(clean-dirs)
+ 		-o -name modules.builtin -o -name '.tmp_*.o.*' \
+ 		-o -name 'dsdt_generated.aml' -o -name 'dsdt_generated.asl.tmp' \
+ 		-o -name 'dsdt_generated.c' \
++		-o -name 'generated_defconfig' \
+ 		-o -name '*.efi' -o -name '*.gcno' -o -name '*.so' \) \
+ 		-type f -print | xargs rm -f
+ 
+diff --git a/scripts/kconfig/Makefile b/scripts/kconfig/Makefile
+index 5ce5845e8247..079add4d5dab 100644
+--- a/scripts/kconfig/Makefile
++++ b/scripts/kconfig/Makefile
+@@ -93,7 +93,7 @@ endif
+ endif
+ 
+ %_defconfig: $(obj)/conf
+-	$(Q)$(CPP) -nostdinc -I $(srctree) -undef -x assembler-with-cpp $(srctree)/arch/$(SRCARCH)/configs/$@ -o generated_defconfig
++	$(Q)$(CPP) -nostdinc -P -I $(srctree) -undef -x assembler-with-cpp $(srctree)/arch/$(SRCARCH)/configs/$@ -o generated_defconfig
+ 	$(Q)$< $(silent) --defconfig=generated_defconfig $(Kconfig)
+ 
+ # Added for U-Boot (backward compatibility)
+-- 
+2.39.2
 
