@@ -4,90 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D0B4C5475B
-	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 03:32:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAF95C5475B
+	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 03:38:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A3F387DC4;
-	Fri,  8 Mar 2024 04:32:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 1EC1D87E2A;
+	Fri,  8 Mar 2024 04:38:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jOJjl1KH";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="rXtzwZeT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7089487DF1; Fri,  8 Mar 2024 03:44:41 +0100 (CET)
-Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
- [IPv6:2607:f8b0:4864:20::f2b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id ACC5987E0C; Fri,  8 Mar 2024 04:38:17 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A0EE87DCD
- for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 03:44:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C361F87150
+ for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 04:38:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2b.google.com with SMTP id
- 6a1803df08f44-68f41af71ebso14789456d6.1
- for <u-boot@lists.denx.de>; Thu, 07 Mar 2024 18:44:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1709865877; x=1710470677; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=JxG3C1fNlHZOl1qKhga4bIFtxN+IbPgWY3WbkNFh0bI=;
- b=jOJjl1KHvPN0Nsv8UkU1wsAodVEFOlotnKA8eK5dzjxB5QG8PLTfizJ4D92NsX3Bgo
- qiHJTqDRafnHpu4hYDGnp2hn9Tp2qHEQzDH6VEY7AiYp5yUMcKBMPK82sz4mrfvz8CdU
- nahWOKeLHsLpseTIvv/Gdnmu4mC1ZWtO9Lsj0=
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 2C5423F6B1
+ for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 03:38:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1709869094;
+ bh=X4H9c3mzDdWrsDDTA14L2ZMbcfDpfrPujRGF+0PTgq0=;
+ h=Message-ID:Date:MIME-Version:Subject:From:To:Cc:References:
+ In-Reply-To:Content-Type;
+ b=rXtzwZeTwv/ZuzvNt28Fw+WjpPisHmDUYlkXIEEDULx1G0NVsGHa13ZbRgnl08Ekq
+ syqDOW1GkuERLajHwdw+zY+i9QvlO3BPzm6a0jdXK2CxehrC82ECmKDqh+9IAWT/x6
+ q6RP0jYBhoWvfEJhy6+2i2MyxikP0xNlpmMvO3RwIpcYkjWglb6qswHpvuPEP5wBm0
+ kh4Iunoi8JSUvVn1AG2UCBvgtvuSpFx+sOHYP2dHx0MUhPf6HwuUucF7TwqGNWsuNq
+ D3zFNE84XFWlZxFDf/5ijyEAF04nuGOH2lfWuXEGLbzNse1bl+S7iZ/odGt/HQ7Mpp
+ O/kss8aUk5GJA==
+Received: by mail-wr1-f70.google.com with SMTP id
+ ffacd0b85a97d-33e78c1b314so1313f8f.3
+ for <u-boot@lists.denx.de>; Thu, 07 Mar 2024 19:38:14 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709865877; x=1710470677;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=JxG3C1fNlHZOl1qKhga4bIFtxN+IbPgWY3WbkNFh0bI=;
- b=H/0aYJml1zQHTqwVxQdTWyDD9vFAQtuXitfqMtTFfasDl4D9joaQTtqHKNcRDBC/7C
- gVBm+5unN2tJDlV4r7RbQcdp3fi2Np/cpXgS6MB52F/ghBq8lkyEiL+7fORST9R9D5Y7
- z1chmcAgIhosCqQM6qsKUY35cVHVSnXtvbPesfyVKNN2+AFMgcNQND6uiH1GGZPCcSwZ
- srajX+9YGwrE6uYYweXA+zDQn1tn3MMwarmND4yWTywO8UBUMWY1gD5pjj+5s8gcvicx
- op/uuw9N8tycqdUV8RvpBshcZMbmfqhOrOv9t3JVOpHNlMsHPjuKND6YGD4rMjHouoxL
- +SVw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX8aO3cMYCm/EXCGadKyv+g1FyPyOGWG3nxx3NVFRG/LI2C9lDqVjCThEMpnD5DYCMCzO+MN5xRWYjg2thTkBg30wtdpA==
-X-Gm-Message-State: AOJu0YxW7FER/5O10yovv66aOPKgvbwgBqWkq1dAec2+/adzp+NWHc4i
- yNiyswh085nk/vVlL/JLhMS7jbnIC+Y1+M+b/LiROF5XMRLyT1QKgnbMVqz2DRNbcB+9y+/8213
- UVGB1o9SJei1GTMmO4iz+dcvox5end1qNGDyn
-X-Google-Smtp-Source: AGHT+IHLOplxAthwVDMa5iIYXqMD2Wnv9EgNG65kksgNcwXIp1Hft/8lhsMRr2JKI0egPut76qGLphqo65qwRyxwU6g=
-X-Received: by 2002:a0c:ec47:0:b0:690:aaa8:a019 with SMTP id
- n7-20020a0cec47000000b00690aaa8a019mr2720578qvq.47.1709865876833; Thu, 07 Mar
- 2024 18:44:36 -0800 (PST)
+ d=1e100.net; s=20230601; t=1709869094; x=1710473894;
+ h=content-transfer-encoding:in-reply-to:references:cc:to:from
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=X4H9c3mzDdWrsDDTA14L2ZMbcfDpfrPujRGF+0PTgq0=;
+ b=roUvCQABuzLUf5dnrMswnwahUZETLqNNZRYRZbiVIBN5kEC2p+aoOf8pfDpJEzTU4s
+ Nh+meDOCN6i+ELhjyee98IwPPOZNC5HObS1vDxRCiXzWiJi7ffbqCeXj+OIOl5aeg+dO
+ bIG3lG9WLrMpC6vRZi/6ckivPgY2nzXrO8AWPK1E7eFkUNsuFXhCcNvR1rN0sdCS2nK2
+ llzTF5xeqf/Lp5/c2BBbDa+kW4OeyJtZwTAlPI/WLL2VPG5YGtikSPp5jgfXNbFfTgH8
+ wGJbqFvrnxpgXUqRYGjgM5qsrb+jdBe4m41JdTTpj72MILizJWCZSxWiCfDFbGCAUl1w
+ mJCA==
+X-Gm-Message-State: AOJu0Yw6qd9qjNct4ggpzbWb5DNgsTRVi/56ALcOHNKgn08uGKrblnoY
+ KqgFWLlJYU4QUUiQvUQOdBbSJlwWYuvi3EuCV6UTEvQnNQOvh72wQZB0QhZX8+Qv2dAe/IHfoSB
+ 17CaSJ37IwMftceC7xS5w2GkjXHKO8NDAsv8S2M/K+LYO0HL/Sp0IpTM91FPgL4U9ROg=
+X-Received: by 2002:a5d:49c3:0:b0:33e:6fd3:7366 with SMTP id
+ t3-20020a5d49c3000000b0033e6fd37366mr1614003wrs.68.1709869093754; 
+ Thu, 07 Mar 2024 19:38:13 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IF5nDfX4mQasmzj4IydEaTtL2qdD8aRCfJ5VDvPLFWBx04sjkvJfhm1NqvoWeuomrD/24PFVg==
+X-Received: by 2002:a5d:49c3:0:b0:33e:6fd3:7366 with SMTP id
+ t3-20020a5d49c3000000b0033e6fd37366mr1613996wrs.68.1709869093401; 
+ Thu, 07 Mar 2024 19:38:13 -0800 (PST)
+Received: from ?IPV6:2a00:20:9:393f:4294:78eb:608e:9569?
+ ([2a00:20:9:393f:4294:78eb:608e:9569])
+ by smtp.gmail.com with ESMTPSA id
+ bw1-20020a0560001f8100b0033d6bc17d0esm22245272wrb.74.2024.03.07.19.38.12
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 07 Mar 2024 19:38:12 -0800 (PST)
+Message-ID: <b2191232-b59c-4a9e-bafa-4e1bbe382375@canonical.com>
+Date: Fri, 8 Mar 2024 04:38:11 +0100
 MIME-Version: 1.0
-References: <20231116172859.393744-1-sjg@chromium.org>
- <20231208150042.GA1278773-robh@kernel.org>
- <CAPnjgZ2i4gvgiUeHPOfHuOdBooV4e=QQEq6iMo0JbDwOS6dCwA@mail.gmail.com>
- <CAL_Jsq+xMZ8yz4H9D59uCSyX4h5W+4ruGF++=wVA=msXz+Y01A@mail.gmail.com>
- <CAPnjgZ1uW8T6woXSqFUNm301=W3zBYOrADREkrz=DuwSW87qZg@mail.gmail.com>
- <20231214172702.GA617226-robh@kernel.org>
- <CAPnjgZ2oJSGPO91Y_aLbe+v250WFrND4n3T0mOvhERYidVu=eQ@mail.gmail.com>
- <CAFLszTizRRVbRO6_ygE2X-Lp5dENWSc4uMGL5GPJAFGAbRdCyQ@mail.gmail.com>
- <CAL_Jsq+j7_KZtQ2ENq9+vsw0LOZF=spu293_G=AxOmBM+m_f-g@mail.gmail.com>
- <CAFLszTimaFw9sf=JKvQXG4fS6V_2T=2n+pfvYLCiuG1o+7cHPA@mail.gmail.com>
- <20240205085056.44278f2c@xps-13>
- <CAFLszTi+8ygXOidnhxj7sdJwc6X5i+++QvnUyfe-kde5eSts_w@mail.gmail.com>
- <20240205131755.3462084f@xps-13>
-In-Reply-To: <20240205131755.3462084f@xps-13>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 8 Mar 2024 15:44:25 +1300
-Message-ID: <CAFLszTh3t6wPz8PFhFzazTAGaLVpObkjY9qv7MtSkQ21zZFzKA@mail.gmail.com>
-Subject: Re: [PATCH v6 1/3] dt-bindings: mtd: partitions: Add binman compatible
-To: Miquel Raynal <miquel.raynal@bootlin.com>
-Cc: Rob Herring <robh@kernel.org>, devicetree@vger.kernel.org, 
- linux-mtd@lists.infradead.org, Tom Rini <trini@konsulko.com>, 
- Michael Walle <mwalle@kernel.org>, U-Boot Mailing List <u-boot@lists.denx.de>, 
- Conor Dooley <conor+dt@kernel.org>, 
- Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
- Pratyush Yadav <ptyadav@amazon.de>, 
- =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>, 
- Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
- linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Fri, 08 Mar 2024 04:32:33 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC 3/5] board: starfive: support Milk-V Mars board
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: E Shattow <lucent@gmail.com>
+Cc: u-boot@lists.denx.de
+References: <20240303130122.29983-1-heinrich.schuchardt@canonical.com>
+ <20240303130122.29983-4-heinrich.schuchardt@canonical.com>
+ <CANV2PTMcS800x8OTuDbv8orqUD=-frNpa+0dHu4=L__D_Rmk_g@mail.gmail.com>
+ <CANV2PTMtPggmS0hxxuovDfUnSAGM7tDXSewQ-eRTmd_+xR_L-g@mail.gmail.com>
+ <f76541f4-503f-432f-9cfe-a74b78523c3b@canonical.com>
+In-Reply-To: <f76541f4-503f-432f-9cfe-a74b78523c3b@canonical.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,94 +108,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Miquel,
+On 3/8/24 04:20, Heinrich Schuchardt wrote:
+> On 3/8/24 03:06, E Shattow wrote:
+>> P.S. Found the longer description at 
+>> https://github.com/milkv-mars/mars-buildroot-sdk/commit/d381610c92827de01b25843786012351b3f35519 <https://github.com/milkv-mars/mars-buildroot-sdk/commit/d381610c92827de01b25843786012351b3f35519> as follows: "if configured as 24c04, its address will occupy 0x51, conflicting with the RTC chip pcf85063 on the IO-Board. Refer to: Documentation/misc-devices/eeprom.rst". What does that even mean, it is for Raspberry Pi Compute IO carrier only?
+> 
+> According to
+> https://ww1.microchip.com/downloads/en/devicedoc/doc0180.pdf
+> the chips differ in how their address lines are used. Either they select 
+> a chip or a memory address.
+> 
+> The chip is at reg 0x50. So it could be that if you read the upper 
+> memory of atmel,24c04 it would use reg 0x51.
+> 
+> https://datasheets.raspberrypi.com/cm4io/cm4io-datasheet.pdf says the 
+> CM4IO board has an RTC at address 0x51.
+> 
+> Together with the commit message this really sounds like the smaller 
+> chip size is faked due to incompatibility.
 
-On Tue, 6 Feb 2024 at 01:17, Miquel Raynal <miquel.raynal@bootlin.com> wrote:
->
-> Hi Simon,
->
-> > > > > > > > > > > > > +description: |
-> > > > > > > > > > > > > +  The binman node provides a layout for firmware, used when packaging firmware
-> > > > > > > > > > > > > +  from multiple projects. It is based on fixed-partitions, with some
-> > > > > > > > > > > > > +  extensions, but uses 'compatible' to indicate the contents of the node, to
-> > > > > > > > > > > > > +  avoid perturbing or confusing existing installations which use 'label' for a
-> > > > > > > > > > > > > +  particular purpose.
-> > > > > > > > > > > > > +
-> > > > > > > > > > > > > +  Binman supports properties used as inputs to the firmware-packaging process,
-> > > > > > > > > > > > > +  such as those which control alignment of partitions. This binding addresses
-> > > > > > > > > > > > > +  these 'input' properties. For example, it is common for the 'reg' property
-> > > > > > > > > > > > > +  (an 'output' property) to be set by Binman, based on the alignment requested
-> > > > > > > > > > > > > +  in the input.
-> > > > > > > > > > > > > +
-> > > > > > > > > > > > > +  Once processing is complete, input properties have mostly served their
-> > > > > > > > > > > > > +  purpose, at least until the firmware is repacked later, e.g. due to a
-> > > > > > > > > > > > > +  firmware update. The 'fixed-partitions' binding should provide enough
-> > > > > > > > > > > > > +  information to read the firmware at runtime, including decompression if
-> > > > > > > > > > > > > +  needed.
-> > > > > > > > > > > >
-> > > > > > > > > > > > How is this going to work exactly? binman reads these nodes and then
-> > > > > > > > > > > > writes out 'fixed-partitions' nodes. But then you've lost the binman
-> > > > > > > > > > > > specifc parts needed for repacking.
-> > > > > > > > > > >
-> > > > > > > > > > > No, they are the same node. I do want the extra information to stick
-> > > > > > > > > > > around. So long as it is compatible with fixed-partition as well, this
-> > > > > > > > > > > should work OK.
-> > > > > > > > > >
-> > > > > > > > > > How can it be both? The partitions node compatible can be either
-> > > > > > > > > > 'fixed-partitions' or 'binman'.
-> > > > > > > > >
-> > > > > > > > > Can we not allow it to be both? I have tried to adjust things in
-> > > > > > > > > response to feedback but perhaps the feedback was leading me down the
-> > > > > > > > > wrong path?
-> > > > > > > >
-> > > > > > > > Sure, but then the schema has to and that means extending
-> > > > > > > > fixed-partitions.
-> > > > > > >
-> > > > > > > Can we cross that bridge later? There might be resistance to it. I'm
-> > > > > > > not sure. For now, perhaps just a binman compatible works well enough
-> > > > > > > to make progress.
-> > > > > >
-> > > > > > Is there any way to make progress on this? I would like to have
-> > > > > > software which doesn't understand the binman compatible to at least be
-> > > > > > able to understand the fixed-partition compatible. Is that acceptable?
-> > > > >
-> > > > > There's only 2 ways that it can work. Either binman writes out
-> > > > > fixed-partition nodes dropping/replacing anything only defined for
-> > > > > binman or fixed-partition is extended to include what binman needs.
-> > > >
-> > > > OK, then I suppose the best way is to add a new binman compatible, as
-> > > > is done with this v6 series. People then need to choose it instead of
-> > > > fixed-partition.
-> > >
-> > > I'm sorry this is not at all what Rob suggested, or did I totally
-> > > misunderstand his answer?
-> > >
-> > > In both cases the solution is to generate a "fixed-partition" node. Now
-> > > up to you to decide whether binman should adapt the output to the
-> > > current schema, or if the current schema should be extended to
-> > > understand all binman's output.
-> > >
-> > > At least that is my understanding and also what I kind of agree with.
-> >
-> > I do want to binman schema to include all the features of Binman.
-> >
-> > So are you saying that there should not be a 'binman'  schema, but I
-> > should just add all the binman properties to the fixed-partition
-> > schema?
->
-> This is my current understanding, yes. But acknowledgment from Rob is
-> also welcome.
+Running i2cdetect on my Mars Milk-V board shows that a device is 
+responding to address 0x51:
 
-I am trying again to wade through all the confusion here.
+$ sudo i2cdetect 5
+I will probe file /dev/i2c-5.
+I will probe address range 0x08-0x77.
+Continue? [Y/n] y
+      0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:
+10:
+20:
+30: -- -- -- -- -- -- UU --
+40:
+50: 50 51 -- -- -- -- -- -- -- -- -- -- -- -- -- --
+60:
+70:
 
-There is not actually a 'fixed-partition' node. So are you saying I
-should add one? There is already a 'partitions' node. Won't they
-conflict?
+> 
+> As you mentioned to have access to a CM module I would like to know what 
+> its serial number looks like to understand what if it can be used to 
+> detect if we are running U-Boot on full board or a CM module.
+> 
+> For my Milk-V board I have:
+> 
+> MARS-V11-2340-D008E000-xxxxxxxx
+> 
+> Best regards
+> 
+> Heinrich
+> 
+> 
+> 
+> 
+> 
+> 
+> 
 
-Would it be possible for you to look at my patches and suggest
-something? I think at this point, after so many hours of trying
-different things and trying to understand what is needed, I could
-really use a little help.
-
-Thank you,
-Simon
