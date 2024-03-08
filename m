@@ -4,71 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A1FFC54E4A
-	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 17:51:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31ACBC5475B
+	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 17:54:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F10687EDD;
-	Fri,  8 Mar 2024 18:51:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9FE9C87EDD;
+	Fri,  8 Mar 2024 18:54:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="buEU/Cz5";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uj0KJPyA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8268F87D60; Fri,  8 Mar 2024 18:51:04 +0100 (CET)
-Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
- [IPv6:2607:f8b0:4864:20::b2d])
+ id D56F787EDD; Fri,  8 Mar 2024 18:54:53 +0100 (CET)
+Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
+ [IPv6:2607:f8b0:4864:20::c34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 337A387EDD
- for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 18:51:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F2A787F02
+ for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 18:54:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-yb1-xb2d.google.com with SMTP id
- 3f1490d57ef6-dc238cb1b17so1230375276.0
- for <u-boot@lists.denx.de>; Fri, 08 Mar 2024 09:51:02 -0800 (PST)
+Received: by mail-oo1-xc34.google.com with SMTP id
+ 006d021491bc7-5a17a739935so1332193eaf.1
+ for <u-boot@lists.denx.de>; Fri, 08 Mar 2024 09:54:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709920261; x=1710525061; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1709920489; x=1710525289; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0EdmKnK2Sqr6BovgTpgRe9cVYCzfGDIK5+klbiNTtgY=;
- b=buEU/Cz50WWMTNRkAeCGxf5QzlGNxbDtfjDY0uHRrKSWqfyF0gzVifeebJUlCzidWU
- FHhuhXyyZd+DSQJULvNZBpCs20InFqbUJMpo6it1tPB+BBY4hKxs3bzLNkE5tnTJ3PLG
- JMmjU8rVjcfN7Bn4W/R6JybnG6cA45OkSXqidUi99sCXZIAST6EwJV5KBLcfgbBDMI4s
- yvQl2EutBRJcFt+ifbkxyRzahUp8Hbj8KFXbLU4jt7/8UfK5qf+7TVwV3MPp9fggJBpd
- Fyf+cIYqEV+vVyGl9Vnyl1dtPctsHHc5uNVwYZkt3nwGJcB5pciRkng1rKKiufFACjqc
- jdxg==
+ bh=+d8wsx1cYPIH/Cr7/iH8KileGFMAZMjGCYhrtf2esdk=;
+ b=uj0KJPyAd7Dwd/aUwIxgovYY/I2SIv8MSXR9SX39PBCcc/A9iSmkpVdZkco4kUUkki
+ PrS8Orh64NGG+AF+2RdLhL/F6Q/gEXln7+3qk8yJSOIQ/kFea1T5UTFDKeLFknvVbyQZ
+ 1gdFOqGcunrhoXOJJyUSm0NYtVuacrbLzww2nNrR0HLZx9/+vJtAtJnmhhqdXsywTFmi
+ BiFZn4zLN71+4xvJWmu/sQNu1gILbpi04qnd4ZIhnZweIZ1n9jN3x3Nze4lrEtHGVKf8
+ H+XPVKOSlxK56lu7giF4AKtnO74FQZwW65A4loTBjYmbIuMiT7g7Wxte2ANwXAVfRyAn
+ BukQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709920261; x=1710525061;
+ d=1e100.net; s=20230601; t=1709920489; x=1710525289;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0EdmKnK2Sqr6BovgTpgRe9cVYCzfGDIK5+klbiNTtgY=;
- b=QvqSn2Zu0oUPDE+FS6NKM3jKiyZu86InqL+PGl4RrtBkk842I4l6/AL60ebrBmCLCh
- U4utHc6No5TpXhm1BddMtn9AD2e2waoRUgRmwMfV1QGMAD/UUqfG23Nxm/BOV4/RsvDH
- YFZPWoH49aQXqDPqLsehiUSXbRFqP32jYDk2sgbawxm4hCmWlnH1rIkUs7Aod0CDjBcF
- ePKBzBaeRfwafTSbtfst0zQHaU0lfBAXrrl0Vm3BNRVJTX/ADRFMaP4hCU3a8XkcIa42
- xsNljXzt4BskwrHOMZdqhbKMv/PGmKRDwSe1+Z1IVwh6T/adgGcqWaN2nSPgcvFztCY3
- kz/g==
-X-Gm-Message-State: AOJu0Yyv/XtiIi14Cy2tQzq0AJvijTW/zNX3pjq0srgMPr5jdY3qk7HW
- oVRv4oXqF/CjAXH1dUfaCZduJKqOaHhKqkFeRGC+trkngI1oS7asFe6anYNDogz0ah2RnaI/1Gl
- dG88iXh4mjDCqcrIvvuIE6ImDPXvAnc6SpHqUiA==
-X-Google-Smtp-Source: AGHT+IGkSWV6FVxnVOUxnXwy9n6KwbtdzGu4inggRIHjZJgjm20nUp1iy1lCDSrtaWD+WchvNIZH93q4wPQhL8sS6ME=
-X-Received: by 2002:a05:6902:34c:b0:dcc:2f94:591a with SMTP id
- e12-20020a056902034c00b00dcc2f94591amr18091304ybs.12.1709920260928; Fri, 08
- Mar 2024 09:51:00 -0800 (PST)
+ bh=+d8wsx1cYPIH/Cr7/iH8KileGFMAZMjGCYhrtf2esdk=;
+ b=ofhP67qtfl8bxDDo1X11L8g2YrapEptzkLc5X7RBIlyltmukzhZE+f/FPNr5S1V2rV
+ 3bAzBQx9eTFdxVBjBfdDRFh5XdcsUVhivPIFLUBbofoPZx7CeGc+SRZVlsHZwPwwY12J
+ vn/8aOgezgQNYG9I3SvZeGMlFxmtteYOaY/h+rgMfNo0Vkop25xkZfIu6+uUTSMl/sCB
+ nha+hfmdddeDqUjqKTCuk6Lstn4m9ClU4Foyr3CrjFWDW08XV7k6PK9eVzIzMQXAEHaY
+ dzwzAovlvNG6XD4DIUVREq2Fgmc6om8J9VLkICJ9O0QIrJSm7HiSAoXaLpk6VUF2Suxi
+ 9tQA==
+X-Gm-Message-State: AOJu0Yxpdc+ePgnMbdwVKMaKqWXo+MX2j9D9EJAup3SafRt0A9shwf61
+ cDEwqaMwtKCzhQw5pwTVkT9m6yDmHyv4Mbw33PT/i8Fh39OoNUpEGZTRDRYjZXD7SexnmNvxPBn
+ 2+j+ytoVRvPPyZ8mSGNRrTCe7bA2AfBczLEWKvqHLb0DxDQo9wkE=
+X-Google-Smtp-Source: AGHT+IEj7Ol69WBbIzs1I7wXaj4KJIXmwakJOOxqkackqTiH13+NsqvSm3GhsXlLh7X4NRyRCUjNjfBbjckU5ec5qYs=
+X-Received: by 2002:a25:f30f:0:b0:dcd:6dea:5d34 with SMTP id
+ c15-20020a25f30f000000b00dcd6dea5d34mr20179215ybs.36.1709920468195; Fri, 08
+ Mar 2024 09:54:28 -0800 (PST)
 MIME-Version: 1.0
 References: <20240307161711.3177729-1-colin.mcallister@garmin.com>
  <20240308165937.270499-1-colin.mcallister@garmin.com>
- <20240308165937.270499-3-colin.mcallister@garmin.com>
-In-Reply-To: <20240308165937.270499-3-colin.mcallister@garmin.com>
+In-Reply-To: <20240308165937.270499-1-colin.mcallister@garmin.com>
 From: Sam Protsenko <semen.protsenko@linaro.org>
-Date: Fri, 8 Mar 2024 11:50:50 -0600
-Message-ID: <CAPLW+4kG7yc2xG4VCLPapsP=cD4QcBQEV=bsPG3zYkwjRJeFzg@mail.gmail.com>
-Subject: Re: [PATCH v3 2/2] android_ab: Fix ANDROID_AB_BACKUP_OFFSET
+Date: Fri, 8 Mar 2024 11:54:17 -0600
+Message-ID: <CAPLW+4kZShBuiDO1aV3g9+nnsdySFv19x2nT6F7hOf4OR_dnHQ@mail.gmail.com>
+Subject: Re: [PATCH v3 0/2] Fix Android A/B backup
 To: Colin McAllister <colin.mcallister@garmin.com>
 Cc: u-boot@lists.denx.de, JPEWhacker@gmail.com, sjg@chromium.org, 
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
@@ -94,32 +93,81 @@ X-Virus-Status: Clean
 On Fri, Mar 8, 2024 at 11:00=E2=80=AFAM Colin McAllister
 <colin.mcallister@garmin.com> wrote:
 >
-> Currently, setting CONFIG_AB_BACKUP_OFFSET in a target's defconfig will
-> not actually enable the #if protected code in android_ab.c. This is
-> because "CONFIG_" should have been prepended to the config macro, or the
-> macros defined in kconfig.h could have been used.
+> - Addresses compiler error due to missing semicolon
+> - Removes use of preprocessor macros with ANDROID_AB_BACKUP_OFFSET
 >
-> The code included by ANDROID_AB_BACKUP_OFFSET has been refactored to no
-> longer be conditionally compiled by preprocessor conditionals and
-> instead use C conditionals. This better aligns with the Linux kernel
-> style guide.
+> Bug was found by noticing a semicolon was missing and not causing a
+> compiler error when CONFIG_ANDROID_AB_BACKUP_OFFSET was set. I submitted
+> a patch to fix the semicolon before fixing the #if's. Testing the latter
+> patch without the former with ANDORID_AB_BACKUP_OFFSET set will cause a
+> compiler error.
 >
-> Fixes: 3430f24bc6 ("android_ab: Try backup booloader_message")
-> Signed-off-by: Colin McAllister <colin.mcallister@garmin.com>
-> Cc: Joshua Watt <JPEWhacker@gmail.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> ---
-> v2:
->   - Replaced #if conditionals with C if conditionals
->   - Opted to use CONFIG_ANDROID_AB_BACKUP_OFFSET directly instead of
->     macros in kconfig.h as CONFIG_ANDROID_AB_BACKUP_OFFSET is not a
->         boolean or tristate value and doesn't have different values when
->         building SPL or TPL.
-> v3:
->   - Added "Fixes:" tag
+> What's changed in V2?
+> ---------------------
+>
+> The second verison of changes removes the #if preprocessor macros to use
+> C conditionals instead. There was some minor refactoring required to get
+> this to work, so I did more thourough testing to ensure the backup data
+> works as expected.
+>
+> I also realized that CONFIG_VAL is not needed because there's no reason
+> for the SPL or TPL to have different values for the backup address. I
+> opted to just use CONFIG_ANDROID_AB_BACKUP_OFFSET directly.
+>
+> What's changed in V3?
+> ---------------------
+>
+> Added "Fixes:" tag to patches. Performed additonal testing as described
+> in the second paragraph in the testing notes below.
+>
+> I opted to not use CONFIG_IS_ENABLED because that macro appears to only
+> be intended for y/n configurations. See note at top of linux/kconfig.h:
+>
+> "Note that these only work with boolean and tristate options."
 
-Can you please also address my comment about CONFIG_IS_ENABLED() in
-the previous mail? It might be just an answer if you think there are
-no issues with that, not necessarily v4.
+Ah, ok, I see you replied to my comment here. So when that config
+option is not defined at all, the build still works, right? One way to
+test that would be to use buildman tool for all boards. Although I
+have to say it might be very time consuming (I usually run it
+overnight), so I'm not asking you to do it in this case, it's just
+FYI.
 
-[snip]
+>
+> How was this patch series tested?
+> ---------------------------------
+>
+> I built for my target with CONFIG_ANDROID_AB_BACKUP_OFFSET set to
+> 0x1000. I first verified that the device can normally boot. I then ran
+> dd before rebooting to corrupt the primary data. I confirmed that the
+> backup was used to properly restore the primary. I then corrupted both
+> the primary and backup data and confirmed that the primary and backup
+> were both reinitialized to default values. Lastly, I corrupted the
+> backup data and not the primary data and confirmed that the backup was
+> restored the primary data.
+>
+> Addtionally, I disabled CONFIG_ANDROID_AB_BACKUP_OFFSET for my device
+> and confirmed that after I corrupt the primary data, no backup is used.
+> When the primary data is not corrupt, the device boots normally. This is
+> what I would expect, because CONFIG_ANDROID_AB_BACKUP_OFFSET's default
+> value is 0x0, which would evaluate to false for all C if conditions.
+>
+> Colin McAllister (2):
+>   android_ab: Add missing semicolon
+>   android_ab: Fix ANDROID_AB_BACKUP_OFFSET
+>
+>  boot/android_ab.c | 97 ++++++++++++++++++++++-------------------------
+>  1 file changed, 45 insertions(+), 52 deletions(-)
+>
+> --
+> 2.43.2
+>
+>
+> ________________________________
+>
+> CONFIDENTIALITY NOTICE: This email and any attachments are for the sole u=
+se of the intended recipient(s) and contain information that may be Garmin =
+confidential and/or Garmin legally privileged. If you have received this em=
+ail in error, please notify the sender by reply email and delete the messag=
+e. Any disclosure, copying, distribution or use of this communication (incl=
+uding attachments) by someone other than the intended recipient is prohibit=
+ed. Thank you.
