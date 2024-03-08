@@ -4,75 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C27D0C5475B
-	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 10:23:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53375C5475B
+	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 10:42:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 444538801E;
-	Fri,  8 Mar 2024 11:23:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id A6FCA87EED;
+	Fri,  8 Mar 2024 11:42:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="7NQXmeoj";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="tSsWfKTz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 29DD88800D; Fri,  8 Mar 2024 11:23:34 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 8E3308801E; Fri,  8 Mar 2024 11:42:53 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B3F048801E
- for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 11:23:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2A9F787DDD
+ for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 11:42:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=3797bb48b6=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 4288iql1022305; Fri, 8 Mar 2024 11:23:20 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=gn0GYiaINOi35h2Pd8CbX/2hxz+FSVbpx6rr2mvue9o=; b=7N
- QXmeojetjA+ZXfootDfDzCMjrhJYMYW28IhJt6avzJS/JRRCX8q91ifP+18b8Hnk
- SB309XrEgBFmPEreys35bweHvavnqMd6EO5GzbYchjlgpEnoXkqc4GQHHAhXyhP+
- mvmdNxKsYNPu+2cpo2g6Bwb93G2c278Fd5akkg+955WzvUW355kuy35KGZRtZfIa
- XmV5Z4voG/fVoL+yAE1GFvTfpMrcPwtTo98bQLIe+785A2cWI9mEW8E5DkuTwtgH
- K4mJ7s1NWrKKjAk+ILq+WSQvQQiFQTp6hceS27pvxoafEMhPjlUyrkI/upDLlCJ5
- S4+kajKmisjlhngj822Q==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3wn87txb6r-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 08 Mar 2024 11:23:20 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 1A39040045;
- Fri,  8 Mar 2024 11:23:17 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 111B725F7C8;
- Fri,  8 Mar 2024 11:23:02 +0100 (CET)
-Received: from [10.252.7.115] (10.252.7.115) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 8 Mar
- 2024 11:23:01 +0100
-Message-ID: <365fd907-655f-4860-9e2b-dfdb338353f3@foss.st.com>
-Date: Fri, 8 Mar 2024 11:23:01 +0100
+ smtp.mailfrom=SRS0=1763=KO=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1709894555;
+ bh=T8ue9Nc3xigtAOErwl4GKHHmlviOQpLdTJRXbICfdro=;
+ b=tSsWfKTzyhYm+yhy97HgEF2FaIwX24IQ6EEGxWdALNEg4Rr89GZ3R6qZlBKGi/uTyZv9t5a88
+ f7RDcmbJTh5zDuPo+ZwDU1Fe/pnvfDgyWlO2HopU9KZBkGXdXdO1mCZCWoR2vMV3cMtC/oV9UIP
+ os+vs6BUEjIEA8bv45gdEv09DJvuRyNroDE6GfejJQqb2jYJ+7vthM+83NHfVAFc5vk9WMbKUQT
+ QWN7l/nOlLamx8pESPDAISaxsphd6WMc7e+bngmq0NLcNGBWuZDKFlEbyVzYfL4wg6UtJopM5cK
+ mHHVT+uyQSVqa7LO1SZ6cnidjztTU6vat5cILxKF1ngQ==
+Message-ID: <79d3a0e0-ba71-441c-8466-7397c755d863@kwiboo.se>
+Date: Fri, 8 Mar 2024 11:42:25 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm: stm32: Enable OHCI HCD support on STM32MP15xx DHSOM
+Subject: Re: [PATCH 1/4] rockchip: Update the default USB Product ID value
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Lukasz Majewski <lukma@denx.de>, Mattijs Korpershoek
+ <mkorpershoek@baylibre.com>, Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de
+References: <20240226230822.2430391-1-jonas@kwiboo.se>
+ <20240226230822.2430391-2-jonas@kwiboo.se>
+ <f1f0abb8-7786-4c56-8e55-772a59bbab82@rock-chips.com>
 Content-Language: en-US
-To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
-CC: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- <u-boot@dh-electronics.com>, <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20240304182553.106321-1-marex@denx.de>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20240304182553.106321-1-marex@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.252.7.115]
-X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-03-08_07,2024-03-06_01,2023-05-22_02
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <f1f0abb8-7786-4c56-8e55-772a59bbab82@rock-chips.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 167.172.40.54
+X-ForwardEmail-ID: 65eaeb968d33672eeb73206a
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,53 +76,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Kever,
 
-
-On 3/4/24 19:25, Marek Vasut wrote:
-> The OHCI HCD is mandatory for USB 1.1 FS/LS device support, enable it.
-> This used to be enabled implicitly before, now that implicit dependency
-> disappeared and this got disabled. Enable it manually.
+On 2024-03-08 10:22, Kever Yang wrote:
+> Hi Jonas,
 > 
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> ---
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: u-boot@dh-electronics.com
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> ---
->  configs/stm32mp15_dhcom_basic_defconfig | 2 ++
->  configs/stm32mp15_dhcor_basic_defconfig | 2 ++
->  2 files changed, 4 insertions(+)
+>      Thanks for your patch.
 > 
-> diff --git a/configs/stm32mp15_dhcom_basic_defconfig b/configs/stm32mp15_dhcom_basic_defconfig
-> index 1d241529be7..0bfd3b76d6a 100644
-> --- a/configs/stm32mp15_dhcom_basic_defconfig
-> +++ b/configs/stm32mp15_dhcom_basic_defconfig
-> @@ -164,6 +164,8 @@ CONFIG_DM_USB_GADGET=y
->  CONFIG_SPL_DM_USB_GADGET=y
->  CONFIG_USB_EHCI_HCD=y
->  CONFIG_USB_EHCI_GENERIC=y
-> +CONFIG_USB_OHCI_HCD=y
-> +CONFIG_USB_OHCI_GENERIC=y
->  CONFIG_USB_DWC2=y
->  CONFIG_USB_HOST_ETHER=y
->  CONFIG_USB_ETHER_ASIX=y
-> diff --git a/configs/stm32mp15_dhcor_basic_defconfig b/configs/stm32mp15_dhcor_basic_defconfig
-> index 6e0c4a8cf9f..1c1fbc5c7db 100644
-> --- a/configs/stm32mp15_dhcor_basic_defconfig
-> +++ b/configs/stm32mp15_dhcor_basic_defconfig
-> @@ -164,6 +164,8 @@ CONFIG_DM_USB_GADGET=y
->  CONFIG_SPL_DM_USB_GADGET=y
->  CONFIG_USB_EHCI_HCD=y
->  CONFIG_USB_EHCI_GENERIC=y
-> +CONFIG_USB_OHCI_HCD=y
-> +CONFIG_USB_OHCI_GENERIC=y
->  CONFIG_USB_DWC2=y
->  CONFIG_USB_HOST_ETHER=y
->  CONFIG_USB_ETHER_ASIX=y
+> On 2024/2/27 07:08, Jonas Karlman wrote:
+>> RK3036 is using the USB product id normally used by RK3066B, and RK3328
+>> is using the product id normally used by RK3368.
+>>
+>> Fix this and update the default USB_GADGET_PRODUCT_NUM Kconfig option
+>> for remaining supported Rockchip SoCs to match the product id used in
+>> Mask ROM mode. Also remove a reference to the unknown ROCKCHIP_RK3229
+>> symbol.
+> 
+> RK3229 belongs to RK322X which is reuse with RK3228.
+> 
+> Note that this ID is used for rockusb gadget, if work as mass storage, 
+> it should use other
+> 
+> ID, or else it will confuse the driver in host side, eg. the Windows 
+> driver may not able to
+> 
+> recognize the device if using two different gadget type with the same ID.
 
+Patch 3 in this series will change to use 0x0010 product id when ums
+mode is enabled and fall back to use the USB_GADGET_PRODUCT_NUM for any
+other gadget mode.
 
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+The ROCKCHIP_RK3229 symbol is not defined or used anywhere U-Boot so the
+change in this patch to remove it from the condition should have no
+impact. If RK3229 need a special product id separate from 0x320b used by
+ROCKCHIP_RK322X, it can be defined in the defconfig for such board.
 
-Thanks
-Patrice
+I tested this on Windows with rockusb and ums on RK3308, RK3328, RK3399
+RK356x and RK3588 boards, switching between ums and rockusb should work
+as intended, rockusb driver was used in rockusb mode and in ums mode the
+device would show up as a disk.
+
+  => rockusb 0 mmc 1
+  => ums 0 mmc 1
+
+I think all product id below is correct, but I have not been able to
+runtime validate for other SoCs then the ones listed above.
+
+Regards,
+Jonas
+
+> 
+> 
+> Thanks,
+> - Kever
+>>
+>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>> ---
+>>   drivers/usb/gadget/Kconfig | 15 ++++++++++++---
+>>   1 file changed, 12 insertions(+), 3 deletions(-)
+>>
+>> diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
+>> index c72a8047635c..4621a6fd5e64 100644
+>> --- a/drivers/usb/gadget/Kconfig
+>> +++ b/drivers/usb/gadget/Kconfig
+>> @@ -70,12 +70,21 @@ config USB_GADGET_PRODUCT_NUM
+>>   	hex "Product ID of the USB device"
+>>   	default 0x701a if ARCH_TEGRA
+>>   	default 0x1010 if ARCH_SUNXI
+>> -	default 0x310a if ROCKCHIP_RK3036
+>> +	default 0x110a if ROCKCHIP_RV1108
+>> +	default 0x110b if ROCKCHIP_RV1126
+>>   	default 0x300a if ROCKCHIP_RK3066
+>> +	default 0x301a if ROCKCHIP_RK3036
+>> +	default 0x310b if ROCKCHIP_RK3188
+>>   	default 0x310c if ROCKCHIP_RK3128
+>> -	default 0x320a if ROCKCHIP_RK3229 || ROCKCHIP_RK3288
+>> -	default 0x330a if ROCKCHIP_RK3328
+>> +	default 0x320a if ROCKCHIP_RK3288
+>> +	default 0x320b if ROCKCHIP_RK322X
+>> +	default 0x320c if ROCKCHIP_RK3328
+>> +	default 0x330a if ROCKCHIP_RK3368
+>>   	default 0x330c if ROCKCHIP_RK3399
+>> +	default 0x330d if ROCKCHIP_PX30
+>> +	default 0x330e if ROCKCHIP_RK3308
+>> +	default 0x350a if ROCKCHIP_RK3568
+>> +	default 0x350b if ROCKCHIP_RK3588
+>>   	default 0x0
+>>   	help
+>>   	  Product ID of the USB device emulated, reported to the host device.
+
