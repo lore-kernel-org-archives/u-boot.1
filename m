@@ -4,156 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC86AC54E41
-	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 05:03:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13AC9C54E4A
+	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 06:41:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 03D9A87EB7;
-	Fri,  8 Mar 2024 06:03:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
+	by phobos.denx.de (Postfix) with ESMTP id 3E00B8800F;
+	Fri,  8 Mar 2024 07:41:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=kernel-space.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="BJ1kZFvy";
+	dkim=pass (1024-bit key; unprotected) header.d=kernel-space.org header.i=@kernel-space.org header.b="hyV+fgY4";
+	dkim=pass (1024-bit key) header.d=kernel-space.org header.i=@kernel-space.org header.b="lIAzWpDk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5282787E98; Fri,  8 Mar 2024 06:03:47 +0100 (CET)
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.9])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 7834C8801E; Fri,  8 Mar 2024 07:41:07 +0100 (CET)
+Received: from mail.kernel-space.org (mail.kernel-space.org [195.201.34.187])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CEFB287ECA
- for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 06:03:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BD14D87ECA
+ for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 07:41:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=kernel-space.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tien.fong.chee@intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1709874219; x=1741410219;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-transfer-encoding:mime-version;
- bh=dm5EmoJpyS+tHV6puN3BMdyfJU9EHOApD0Xu9Vi/g8I=;
- b=BJ1kZFvyREMFoihJ93bJ0Mg15eW7FdiFKEnYZFfxroscMjuly0zJssnn
- TMN3Ne/j8rauzulWoxcV0QvcfrHmtzCVG5tm/thpwR8eX7to6zsTXJ4cz
- jEggzdVPOKbxfbqrAN5nw0q9l1WM8B/Hac3RyGGRFEdYD597cbnV2NsPn
- DlkPxD6DRjTJvIdOFCvawq/7jEGe+eis/58m4TWDk1AWOIgwf347JU4V6
- 99DwMTqC7u2VpRHuSu3NuYnTgV7X0mVoLo22DQS4fMe9sVfShD/sqSwgh
- A9AT14Xsq/shy94nbGcTOXL5j3Mg7xcDXHSW7zLnyt6Th2zUqBur6TQ9y Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,11006"; a="27055043"
-X-IronPort-AV: E=Sophos;i="6.07,108,1708416000"; d="scan'208";a="27055043"
-Received: from orviesa002.jf.intel.com ([10.64.159.142])
- by orvoesa101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 07 Mar 2024 21:03:37 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.07,108,1708416000"; d="scan'208";a="41263787"
-Received: from fmsmsx602.amr.corp.intel.com ([10.18.126.82])
- by orviesa002.jf.intel.com with ESMTP/TLS/AES256-GCM-SHA384;
- 07 Mar 2024 21:03:36 -0800
-Received: from fmsmsx610.amr.corp.intel.com (10.18.126.90) by
- fmsmsx602.amr.corp.intel.com (10.18.126.82) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35; Thu, 7 Mar 2024 21:03:36 -0800
-Received: from fmsedg601.ED.cps.intel.com (10.1.192.135) by
- fmsmsx610.amr.corp.intel.com (10.18.126.90) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35 via Frontend Transport; Thu, 7 Mar 2024 21:03:33 -0800
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com (104.47.59.168)
- by edgegateway.intel.com (192.55.55.70) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.1.2507.35; Thu, 7 Mar 2024 21:03:32 -0800
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=XuJdgDx//+6tUPmVYOvfCqkDsW0QaswY+6EWmRQy0aF+/zp6/U1syNP75/63OqOhzS3M1nBUE5UtLPDhMvcD+iYclsIPo3Ae6hH80ds/oK1u6KvcYNpPREmA3kViC9/Y8Ts5+udK+vB0j5zIplmn7H01G7lsGWOdh18+xveZrq2JhRJa+HfznPjF9j0O8HUTGoPgKIJJfY4SQIIPi107lgeSyBa4+ihOz1nBMS1pV3/FE1ilUg6xjDdUEVThsQD8pOyMtQTT1WA1Uj78cjqPALd39/EHfYCZYaPsf2WP9RM2OV+BiXNNFXAauAf4fk1Z3CbJ2oW+7tGkFzUE+w48+Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Y6qvNvZJlfQHqqLzi14s5JjpBTFT3/AUAarAidw5PfU=;
- b=bgL01W5fOPBOA/UE9+BNJLTY6hJ4ZgGtIXrsgCyYexn3Nm5wveP8bcnBWzE4mqR0QMGmuBY5H+Dtj/zY/Ci7WCdxM9f9k3TnqThf2nXugFU0wsQbpOAHbF/mTgOX7Rk6BZTinpW+cHX0XaukUXRJa6FFdG3r7CrtY3/0f0ZxWhvvmBFPMsAk0CeXZgm+hPO84DYSiQvOG8u9E63I9Bb57gPe2RdQrY0mNj6gMxbIX70r9tLdhdJhigvoJ7JSt60pctX+Rzzqm0bOjGj5F+V2W2zEgE6ziRgpPX/OJSUFmFzUm+fmkzXbiaS3/jPvu918LUl4EfTerSjnpBm6mP6lsA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
-Received: from DM8PR11MB5592.namprd11.prod.outlook.com (2603:10b6:8:35::6) by
- MW4PR11MB6738.namprd11.prod.outlook.com (2603:10b6:303:20c::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7386.8; Fri, 8 Mar
- 2024 05:03:30 +0000
-Received: from DM8PR11MB5592.namprd11.prod.outlook.com
- ([fe80::d4e:e166:9da2:571]) by DM8PR11MB5592.namprd11.prod.outlook.com
- ([fe80::d4e:e166:9da2:571%4]) with mapi id 15.20.7386.006; Fri, 8 Mar 2024
- 05:03:29 +0000
-From: "Chee, Tien Fong" <tien.fong.chee@intel.com>
-To: "Lim, Jit Loon" <jit.loon.lim@intel.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-CC: Jagan Teki <jagan@amarulasolutions.com>, Marek <marex@denx.de>, Simon
- <simon.k.r.goldschmidt@gmail.com>, "Hea, Kok Kiang"
- <kok.kiang.hea@intel.com>, "Maniyam, Dinesh" <dinesh.maniyam@intel.com>, "Ng, 
- Boon Khai" <boon.khai.ng@intel.com>, "Yuslaimi, Alif Zakuan"
- <alif.zakuan.yuslaimi@intel.com>, "Chong, Teik Heng"
- <teik.heng.chong@intel.com>, "Zamri, Muhammad Hazim Izzat"
- <muhammad.hazim.izzat.zamri@intel.com>, "Tang, Sieu Mun"
- <sieu.mun.tang@intel.com>, Bin Meng <bmeng.cn@gmail.com>
-Subject: RE: [RESEND v2 1/1] arch: arm: Agilex5 enablement
-Thread-Topic: [RESEND v2 1/1] arch: arm: Agilex5 enablement
-Thread-Index: AQHab+VFUNV9+oc18EOnLp/yZCRVcrEtS1Gw
-Date: Fri, 8 Mar 2024 05:03:29 +0000
-Message-ID: <DM8PR11MB5592EEC20C8D3E46393F56C1D2272@DM8PR11MB5592.namprd11.prod.outlook.com>
-References: <20240306164205.26939-1-jit.loon.lim@intel.com>
- <20240306164205.26939-2-jit.loon.lim@intel.com>
-In-Reply-To: <20240306164205.26939-2-jit.loon.lim@intel.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=intel.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: DM8PR11MB5592:EE_|MW4PR11MB6738:EE_
-x-ms-office365-filtering-correlation-id: cc3811aa-a893-4ac8-6e99-08dc3f2d1893
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: um1AAh29owi4eevlGI5WiMX2EZOnJFuCjAVZPJL1V42d/KCjZnfn6/Cqrwsh0rd2KikDaXpg6UVZaT7PyDlUq4k/lbcU2zpWyuzyxzjTscSuqIYuuu60s1A2Ja5dQVrncinFdL34rWxQdj7dZ7e2x2C9Pj2ahFsm/2ZobE+I7/hNqxmvFcMEluSzD+mUJj9kVe6e6uJI8mcKL5fC7mVu4J09nslidwLQ4zsk+1zNr42p15vfaLcdk076RQMbIkkA3WU0VAilVM7PwbLwcYaLg0KZuyViVCRIijcpBGbV2eoXiCpUJ8XUHAuvt2LmjvkqLfGEoyXorQWyGvPen6I36Ia+xd3esrHZvq3PqtsbGf/ACMMdvPorsXEzall89URGNlt3phJ6DX2FcqkiBeLv9q+9oi7/3jWk6GbfJEs6kbBbUsNpmlHjHE0oezASzWiZjT2DlWShVFuUgvKgCvePcMA+CvYY0o8K9oaOPnva/MbA+izr7aa2c11Q9l8YyXMzlJvCBPBhcT2hriL7CMrc78IaPLUR1SMEZKvqgh5g5eWMwtHzlucD/pWsCauUWFA5HFTL7SQzA8HXh+M976v/fQV01MGNYFUSZharpQd4Qk3/grGUYH+8akJUW4keuGXGYOGZaRT2oEtKZ+EcE2n2nLkiNm+/qlFPQs1Ofx6YUOg=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DM8PR11MB5592.namprd11.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(1800799015)(376005)(38070700009); DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?J/tbh5ePquhfTbRiETi4ob6fFTYDFxKlu5Vkq3zYxH/WrrFoDBryuzdLyj1P?=
- =?us-ascii?Q?12lMsO6QV+Gprq4E0G1pyath3fmt63yTRX3L1RNGwk5wv4IshKzANoehpVyH?=
- =?us-ascii?Q?P1JW0qoeELUpTEiO5PCYbJL1apVQDr0weDa3+VnFIhjDeKVCX9xHJ0k/0XL5?=
- =?us-ascii?Q?58C+XYNGnWyKONIXUkYfga8gx2ahLCDZew1w3nFsO/BAFZjomfb4r/6VY0wl?=
- =?us-ascii?Q?iRQEbBsLa0t7OTeCWIiKPUPKKgz2x6Yld4X7su3X44W1CHq4yTzjse3/w0tL?=
- =?us-ascii?Q?b44fkLi/KE7aJXON+nEwCwRvRnkajJzrmqX628FgTkrthZs33zv4KKG+UxcC?=
- =?us-ascii?Q?0PSEep50ts15u/npY9E0I37sZfFXRaxz/w0xnC2lXd1N8Liuh6NNLlqzKJzM?=
- =?us-ascii?Q?RE37pMU/T3HIxYZRfroxoZky+CyYE5hXZlFO/CBf43VYV9yUH8mL3bAceEeZ?=
- =?us-ascii?Q?sPRnAX1y2v7g8KbVz2eOYCkwfy5pUmzxMbMcCBhL2fK8nYNuAKjFZgLnwMHj?=
- =?us-ascii?Q?+dLuBY2V+cL4+wApYV3S6e+NCVZYKWwiWPaiuTBCQN15721t0Aq6V/nW8hk6?=
- =?us-ascii?Q?vkcU+NEEYdAwBGQoy8jaSMQiaZyv7JKq0uzMiVfgC7Gs2Jxp4jk/fJPk2JVh?=
- =?us-ascii?Q?bSGADJQsquOgiw3MVHbE6ZdDyNUMjiJzSI+tufYKrAvzUnMDoXCankVQpeT3?=
- =?us-ascii?Q?hyitd1TJuBcrdlot4ELxzTrdFd1Oe0atlGQ296kL8Rln+6OSoI2N7QdibwYL?=
- =?us-ascii?Q?VA/KAvMPxQ/4yB87NXh7nmBvm/gsVOf0CbLqEnsICabGFdfGYp1dNy6DFLAv?=
- =?us-ascii?Q?tC5Cmm8ZvjLvQ38C1iCp4tTU5F/n7LbYnBM59VYrmSTKXcF7hZGqXTCTcQUV?=
- =?us-ascii?Q?kmFPVC1JJt4xWKOtmN+EGRL9YDOJU4WtM/yR7BOfGKybNt+yTehIBdY67myQ?=
- =?us-ascii?Q?bS+hs3R79btwuGmJMoOMK1vTf1f58XXXoTwmSKXyk5rllR9suXqv7Js0eZHM?=
- =?us-ascii?Q?gzLUIZdx+OtenTi181FTsqC+REixoby17I/L4IrLgDaTDpc3XXoVR/zhdXsI?=
- =?us-ascii?Q?dC6G4XAOy3zKFu+gHG90nHdHDdlbPUor+KaLix1R4tQb/UKcCJq7qj86is2d?=
- =?us-ascii?Q?l3HflcqKWABW2ZcN/S4ExCLgFcwXnocdSaHB6E0cng48BIK2lAEPs7OED0Qz?=
- =?us-ascii?Q?NTJoyYTvmDQi3T/UKo4QrUvddOZtdLh/WX+2PYY3bV8sC4JhJdlga7xMOnmE?=
- =?us-ascii?Q?nfspWzKMItL+7QStDRouuVhv07Etp6Taxt3+dn0PXePmgzRyOWeGeVYWil2d?=
- =?us-ascii?Q?V0PVNPZXmiuS5ZkQtB1N5fS1RMFaNN+szOawpT1m1LgjqScJts3b3oxScvQ9?=
- =?us-ascii?Q?9IAMcsyDGHX4E4bFkP8vgd6YUztcqzL6usyIvl0H8eCE2PUNcCYaW+B/1gFf?=
- =?us-ascii?Q?+hoR8d+jx3dslCqrqXBhyNvIO6W3V/SwFIjNEM+YFITEw0+yH3SnxaMGBkaT?=
- =?us-ascii?Q?Li2n9YX0m4oTFiZuwhBypuI+0qLZ/jerYe69m4RlaEw+gaAo68KJ43jLVZzx?=
- =?us-ascii?Q?nhqxc3IjpUtzyE/WF4J6/STaMTa+LTcSAvw2L3Hm?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ spf=pass smtp.mailfrom=angelo@kernel-space.org
+Received: from kernel-space.org (localhost [127.0.0.1])
+ by kernel-space.org (OpenSMTPD) with ESMTP id bbf9f391;
+ Fri, 8 Mar 2024 06:38:30 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=kernel-space.org; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; s=s1; bh=Ti
+ 7NJhH/O3zeRlUIYZwyDlU9JiU=; b=hyV+fgY479iZNnclAkh2NjBSfRsrn05vrL
+ QNnkNYkw29f70PrkWsAmcqggrGFAo643qkZkzaKuvvy3cQZn0PR3hMbKo6MC0eR8
+ rq6O6QkVhaG44d2KewYGKzqGAvy/2Y0NsW43M6qUM6osr38Zf1RoLCaVqsTHXf7S
+ hsO7Y1X1k=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=kernel-space.org; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; q=dns; s=s1; b=
+ jKQHhiVoy8cf00iQyR4NvGo7wOWYOkFpOGaGEQz0qBxXPbollUr0YL4HxmYgmbP4
+ otTDySW07MlEcaOSmS4wZgbQKCWYMPDc072h+ZPH/XM/sQXZnvy3qb9nHqvaxW0D
+ Iwj2pgJjs8O43BboF8R/J7eWGFfoUepFf8PB5hU8Y58=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel-space.org;
+ s=s1; t=1709879909;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=nVhbJ0vVuO0T0OZkI93C8xtDpRGMj6rZZ8YW6+F7ntI=;
+ b=lIAzWpDkGs9xPebiA8HwiuxtITVgvyKnF4MPmbznm/6gWB/wfNg8Ur2O/CXNtn7kt770Ne
+ X1yx/bQ+v6g6jKFS3IwL0TGw9w9wcFRqoZNyRRieHWSWJwAy5v0jjtoF0JrukRFAzxlZLA
+ i++ZB3Vn8eBj84vRPGw7ai35Troyasw=
+Received: from [192.168.0.2] (host-79-51-238-97.retail.telecomitalia.it
+ [79.51.238.97])
+ by kernel-space.org (OpenSMTPD) with ESMTPSA id def796e1
+ (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO); 
+ Fri, 8 Mar 2024 06:38:29 +0000 (UTC)
+Message-ID: <2d8843b0-df78-06ac-dcb0-2e42fb8a792f@kernel-space.org>
+Date: Fri, 8 Mar 2024 07:40:24 +0100
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DM8PR11MB5592.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: cc3811aa-a893-4ac8-6e99-08dc3f2d1893
-X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Mar 2024 05:03:29.7961 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: GJqnYIkUEcF9y2kbSEqnFSBrFz2phGZKdXTdfOgbsht0e47WvLOuBEFxp2quTMJ1/gS417g03/ctgqTVY758ebG+42N/J2rNQY6aXnRk12g=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR11MB6738
-X-OriginatorOrg: intel.com
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Betterbird/102.11.0
+Subject: Re: [PATCH v3] test/py: reset: Add a test for reset command
+To: Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>
+Cc: Love Kumar <love.kumar@amd.com>, u-boot@lists.denx.de, git@xilinx.com,
+ Marek Vasut <marex@denx.de>
+References: <4b7c5e82165b009cf8b28701ca3f1e182fbc3c09.1708414720.git.love.kumar@amd.com>
+ <20240302151813.GA1652651@bill-the-cat>
+ <bd0b13b0-0554-b280-a40a-17056a1e2c5e@kernel-space.org>
+ <c11e1809-b5d1-46cd-a5c8-a5276b83f26f@amd.com>
+ <c523aabd-93a4-f9db-2726-7f912a85aef0@kernel-space.org>
+ <20240307001053.GE1523872@bill-the-cat>
+ <c05a25ca-d4b7-1179-cf46-645bc4cdba89@kernel-space.org>
+ <c0bbe63d-adee-456f-bcf8-44579aa2593a@amd.com>
+ <20240307125525.GF1523872@bill-the-cat>
+Content-Language: en-US, it
+From: Angelo Dureghello <angelo@kernel-space.org>
+In-Reply-To: <20240307125525.GF1523872@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -170,94 +96,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jit loon,
+Hi,
 
-> -----Original Message-----
-> From: Lim, Jit Loon <jit.loon.lim@intel.com>
-> Sent: Thursday, March 7, 2024 12:42 AM
-> To: u-boot@lists.denx.de
-> Cc: Jagan Teki <jagan@amarulasolutions.com>; Marek <marex@denx.de>;
-> Simon <simon.k.r.goldschmidt@gmail.com>; Chee, Tien Fong
-> <tien.fong.chee@intel.com>; Hea, Kok Kiang <kok.kiang.hea@intel.com>;
-> Maniyam, Dinesh <dinesh.maniyam@intel.com>; Ng, Boon Khai
-> <boon.khai.ng@intel.com>; Yuslaimi, Alif Zakuan
-> <alif.zakuan.yuslaimi@intel.com>; Chong, Teik Heng
-> <teik.heng.chong@intel.com>; Zamri, Muhammad Hazim Izzat
-> <muhammad.hazim.izzat.zamri@intel.com>; Lim, Jit Loon
-> <jit.loon.lim@intel.com>; Tang, Sieu Mun <sieu.mun.tang@intel.com>; Bin
-> Meng <bmeng.cn@gmail.com>
-> Subject: [RESEND v2 1/1] arch: arm: Agilex5 enablement
->=20
-> This patch is to enable Agilex5 platform for Intel
-> product. Changes, modification and new files are
-> created for board, dts, configs and makefile to
-> create the base for Agilex5.
->=20
-> Signed-off-by: Jit Loon Lim <jit.loon.lim@intel.com>
->=20
-> ---
-> Changes v1 -> v2:
-> - fixed git auto merge issue
-> ---
+On 07/03/24 1:55 PM, Tom Rini wrote:
+> On Thu, Mar 07, 2024 at 09:26:42AM +0100, Michal Simek wrote:
+>>
+>>
+>> On 3/7/24 08:56, Angelo Dureghello wrote:
+>>> Hi Tom,
+>>>
+>>> On 07/03/24 1:10 AM, Tom Rini wrote:
+>>>> On Thu, Mar 07, 2024 at 12:36:42AM +0100, Angelo Dureghello wrote:
+>>>>> Hi,
+>>>>>
+>>>>> On 05/03/24 1:34 PM, Michal Simek wrote:
+>>>>>>
+>>>>>>
+>>>>>> On 3/3/24 22:58, Angelo Dureghello wrote:
+>>>>>>> Hi Tom,
+>>>>>>>> On Tue, Feb 20, 2024 at 01:11:38PM +0530, Love Kumar wrote:
+>>>>>>>>> Add a test for reset commands which performs resetting of
+>>>>>>>>> CPU, It does COLD reset by default and WARM reset with -w
+>>>>>>>>> option. Signed-off-by: Love Kumar <love.kumar@amd.com>
+>>>>>>>>> Reviewed-by: Tom Rini <trini@konsulko.com> --- Changes in
+>>>>>>>>> v2: - Set bootmode through boardenv if modeboot is not
+>>>>>>>>> defined Changes in v3: - Fix the issue with bad pattern
+>>>>>>>>> found on console --- test/py/tests/test_reset.py | 61
+>>>>>>>>> +++++++++++++++++++++++++++++++++++++ 1 file changed, 61
+>>>>>>>>> insertions(+) create mode 100644 test/py/tests/test_reset.py
+>>>>>>>> I had hoped this was all sorted out now, but both this and the
+>>>>>>>> saveenv test cause qemu_m68k to fail now. See:
+>>>>>>>> https://source.denx.de/u-boot/u-boot/-/jobs/791635
+>>>>>>> looking into this.
+>>>>>>
+>>>>>> Is reset implemented in qemu? It should be skipped if it is not.
+>>>>>>
+>>>>> yes, seems not implemented
+>>>>>
+>>>>> => reset
+>>>>> => reset -w
+>>>>> =>
+>>>>> =>
+>>>>>
+>>>>> Not finding any trace in the qemu code related to
+>>>>>
+>>>>> out_8(&rcm->rcr, RCM_RCR_SOFTRST);
+>>>>
+>>>> Does reset work on the real HW, or can you not test? What I'm wondering
+>>>> is if we have a missing feature on the board/arch code (and should
+>>>> disable the reset command) or a problem with QEMU.
+>>>>
+>>> I don't have the exact hardware (m5208evb) but:
+>>>
+>>> 1) i checked by tracing that on qemu the reset function is properly called
+>>>
+>>> => reset
+>>> resetting, RCR fc0a0000
+>>>
+>>> 2) reset register address is correct. I checked also that writing
+>>> directly to it by mw.b does now produce the reset,
+>>>
+>>> => reset
+>>> resetting, RCR fc0a0000
+>>>
+>>> => mw.b 0xfc0a0000 80
+>>> =>
+>>>
+>>> So looks not implemented in qemu.
+>>
+>> ok. That means that we shouldn't run reset test inside CI loop for this platform.
+> 
+> Agreed.  The TEST_PY_TEST_SPEC variable in both of the pipelines can be
+> used to say "not reset" for this platform in the next rev. It would also
+> be nice to file a bug report with QEMU too I think. Thanks for digging
+> in to this everyone.
+> 
 
-[...]
+good.
+I also sent a patch to qemu, lets see
 
-> --- a/arch/arm/mach-socfpga/mmu-arm64_s10.c
-> +++ b/arch/arm/mach-socfpga/mmu-arm64_s10.c
-> @@ -1,6 +1,6 @@
->  // SPDX-License-Identifier: GPL-2.0
->  /*
-> - * Copyright (C) 2016-2018 Intel Corporation <www.intel.com>
-> + * Copyright (C) 2016-2024 Intel Corporation <www.intel.com>
->   *
->   */
->=20
-> @@ -10,6 +10,62 @@
->=20
->  DECLARE_GLOBAL_DATA_PTR;
->=20
-> +#if IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX5)
-> +static struct mm_region socfpga_agilex5_mem_map[] =3D {
-> +	{
-> +		/* OCRAM 512KB */
-> +		.virt	=3D 0x00000000UL,
-> +		.phys	=3D 0x00000000UL,
-> +		.size	=3D 0x00080000UL,
-> +		.attrs	=3D PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-> +				PTE_BLOCK_NON_SHARE,
-> +	}, {
-> +		/* DEVICE */
-> +		.virt	=3D 0x10808000UL,
-> +		.phys	=3D 0x10808000UL,
-> +		.size	=3D 0x0F7F8000UL,
-> +		.attrs	=3D PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-> +				PTE_BLOCK_NON_SHARE |
-> +				PTE_BLOCK_PXN | PTE_BLOCK_UXN,
-> +	}, {
-> +		/* FPGA 1.5GB */
-> +		.virt	=3D 0x20000000UL,
-> +		.phys	=3D 0x20000000UL,
-> +		.size	=3D 0x60000000UL,
-> +		.attrs	=3D PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-> +				PTE_BLOCK_NON_SHARE |
-> +				PTE_BLOCK_PXN | PTE_BLOCK_UXN,
-> +	}, {
-> +		/* FPGA 15GB */
-> +		.virt	=3D 0x440000000UL,
-> +		.phys	=3D 0x440000000UL,
-> +		.size	=3D 0x3C0000000UL,
-> +		.attrs	=3D PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-> +				PTE_BLOCK_NON_SHARE |
-> +				PTE_BLOCK_PXN | PTE_BLOCK_UXN,
-> +	}, {
-> +		/* FPGA 240GB */
-> +		.virt	=3D 0x4400000000UL,
-> +		.phys	=3D 0x4400000000UL,
-> +		.size	=3D 0x3E80000000UL,
+https://lists.gnu.org/archive/html/qemu-devel/2024-03/msg01899.html
 
-This size is not 240GB, please correct it.
-
-[...]
-
-Best regards,
-Tien Fong
+Regards,
+angelo
