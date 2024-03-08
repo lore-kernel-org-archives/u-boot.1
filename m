@@ -4,76 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68019C5475B
-	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 07:42:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 259FEC54E4A
+	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 08:22:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C51E88010;
-	Fri,  8 Mar 2024 08:42:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 67B218801A;
+	Fri,  8 Mar 2024 09:22:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="gLlv8wGx";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="PQElCb4H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D6B188019; Fri,  8 Mar 2024 08:42:19 +0100 (CET)
-Received: from relay3-d.mail.gandi.net (relay3-d.mail.gandi.net
- [217.70.183.195])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id B5DA48801E; Fri,  8 Mar 2024 09:22:13 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B65D87AEC
- for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 08:42:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3C78A87666
+ for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 09:22:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id DBB4760005;
- Fri,  8 Mar 2024 07:42:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1709883735;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=RkispZ2cSgHHvQHUKtQPYvm4JRgYfxl+31ZzbV0ajJQ=;
- b=gLlv8wGxjiogeG9C46oG5EgFoqN4SH1b9sabNz5g3QO62yEOKg3XJIQW0hFi2a4mlTo9/J
- wDoyd7Ks0a9nOehGgDBetroeoVaVTpjSUCvwUdrENEVJ9GDuL1UA1UNTIwOIUkdVv7PDl0
- HLNnzR8Dn0hQvEKvIyQYWURylmHBn7971Bw1G7BDNxLq55CYjsQOW+BxO91WXoQ2oMPJVa
- BRg5CV53PmNRQlKzjl1MjxvhcrVmwlRk7/L9gakI8vPJfBh17Jt0/24YwSwpQHdYgAzNV6
- 1MSXvZT0koXMkeBdc5LURUgoUaMY53WPEDVkI+xX8/0aO6DbnEZN41o86mVc5A==
-Date: Fri, 8 Mar 2024 08:42:12 +0100
-From: Miquel Raynal <miquel.raynal@bootlin.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Rob Herring <robh@kernel.org>, devicetree@vger.kernel.org,
- linux-mtd@lists.infradead.org, Tom Rini <trini@konsulko.com>, Michael Walle
- <mwalle@kernel.org>, U-Boot Mailing List <u-boot@lists.denx.de>, Conor
- Dooley <conor+dt@kernel.org>, Krzysztof Kozlowski
- <krzysztof.kozlowski+dt@linaro.org>, Pratyush Yadav <ptyadav@amazon.de>,
- =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>, Richard Weinberger
- <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
- linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v6 1/3] dt-bindings: mtd: partitions: Add binman compatible
-Message-ID: <20240308084212.4aa58761@xps-13>
-In-Reply-To: <CAFLszTh3t6wPz8PFhFzazTAGaLVpObkjY9qv7MtSkQ21zZFzKA@mail.gmail.com>
-References: <20231116172859.393744-1-sjg@chromium.org>
- <20231208150042.GA1278773-robh@kernel.org>
- <CAPnjgZ2i4gvgiUeHPOfHuOdBooV4e=QQEq6iMo0JbDwOS6dCwA@mail.gmail.com>
- <CAL_Jsq+xMZ8yz4H9D59uCSyX4h5W+4ruGF++=wVA=msXz+Y01A@mail.gmail.com>
- <CAPnjgZ1uW8T6woXSqFUNm301=W3zBYOrADREkrz=DuwSW87qZg@mail.gmail.com>
- <20231214172702.GA617226-robh@kernel.org>
- <CAPnjgZ2oJSGPO91Y_aLbe+v250WFrND4n3T0mOvhERYidVu=eQ@mail.gmail.com>
- <CAFLszTizRRVbRO6_ygE2X-Lp5dENWSc4uMGL5GPJAFGAbRdCyQ@mail.gmail.com>
- <CAL_Jsq+j7_KZtQ2ENq9+vsw0LOZF=spu293_G=AxOmBM+m_f-g@mail.gmail.com>
- <CAFLszTimaFw9sf=JKvQXG4fS6V_2T=2n+pfvYLCiuG1o+7cHPA@mail.gmail.com>
- <20240205085056.44278f2c@xps-13>
- <CAFLszTi+8ygXOidnhxj7sdJwc6X5i+++QvnUyfe-kde5eSts_w@mail.gmail.com>
- <20240205131755.3462084f@xps-13>
- <CAFLszTh3t6wPz8PFhFzazTAGaLVpObkjY9qv7MtSkQ21zZFzKA@mail.gmail.com>
-Organization: Bootlin
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; x86_64-pc-linux-gnu)
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 01AA061CF1;
+ Fri,  8 Mar 2024 08:22:09 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9D46CC433C7;
+ Fri,  8 Mar 2024 08:22:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1709886128;
+ bh=4Q+btWmsty/+BRBQ+qjKcIjRFvGN/K411w2iZhyt9jg=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=PQElCb4Hlr7p/GEI61YYHLagLl0+iGy5qYNVFbNYt1GqlqQKoXCnodp9B+egG0ngr
+ OfKebP6Sku5Na4Uui71S2+r/S19ZJwhC+QXLrNh3Ve1JBvL2u/1uAc2mSGpwr6nQMQ
+ 3g4hkeMQoQJ3/PZsJjbyp9CJb9ErPVcZT36kRDvqMId+2iPHsrJ21hfkprzExUzmA2
+ AsgfXVsRBvsoQE7e2727YohJZAUFao3we3npn8YDPxmqRb7TTgPINikQFzNl4KRVpL
+ e3B3/3x5OzaNGNikCgjHz1wb2J4E72uZvDC14p0FYfVxwavX0PyMFLZh6eN1WhJh+5
+ EQppgOwZP/7oA==
+Message-ID: <615aa2aa-6d02-439b-a091-1bc8fc38495f@kernel.org>
+Date: Fri, 8 Mar 2024 10:22:02 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/5] net: mdio-uclass: probe generic Ethernet PHY driver &
+ Fix Beagleplay Ethernet
+Content-Language: en-US
+To: Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Nishanth Menon <nm@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
+ Wadim Egorov <w.egorov@phytec.de>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, Simon Glass <sjg@chromium.org>
+Cc: srk@ti.com, s-vadapalli@ti.com, vigneshr@ti.com, r-gunasekaran@ti.com,
+ danishanwar@ti.com, u-boot@lists.denx.de
+References: <20240305-for-2024-07-beagleplay-eth-v1-0-e1294a575cc1@kernel.org>
+From: Roger Quadros <rogerq@kernel.org>
+In-Reply-To: <20240305-for-2024-07-beagleplay-eth-v1-0-e1294a575cc1@kernel.org>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-GND-Sasl: miquel.raynal@bootlin.com
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,148 +75,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
 
-sjg@chromium.org wrote on Fri, 8 Mar 2024 15:44:25 +1300:
 
-> Hi Miquel,
->=20
-> On Tue, 6 Feb 2024 at 01:17, Miquel Raynal <miquel.raynal@bootlin.com> wr=
-ote:
-> >
-> > Hi Simon,
-> > =20
-> > > > > > > > > > > > > > +description: |
-> > > > > > > > > > > > > > +  The binman node provides a layout for firmwa=
-re, used when packaging firmware
-> > > > > > > > > > > > > > +  from multiple projects. It is based on fixed=
--partitions, with some
-> > > > > > > > > > > > > > +  extensions, but uses 'compatible' to indicat=
-e the contents of the node, to
-> > > > > > > > > > > > > > +  avoid perturbing or confusing existing insta=
-llations which use 'label' for a
-> > > > > > > > > > > > > > +  particular purpose.
-> > > > > > > > > > > > > > +
-> > > > > > > > > > > > > > +  Binman supports properties used as inputs to=
- the firmware-packaging process,
-> > > > > > > > > > > > > > +  such as those which control alignment of par=
-titions. This binding addresses
-> > > > > > > > > > > > > > +  these 'input' properties. For example, it is=
- common for the 'reg' property
-> > > > > > > > > > > > > > +  (an 'output' property) to be set by Binman, =
-based on the alignment requested
-> > > > > > > > > > > > > > +  in the input.
-> > > > > > > > > > > > > > +
-> > > > > > > > > > > > > > +  Once processing is complete, input propertie=
-s have mostly served their
-> > > > > > > > > > > > > > +  purpose, at least until the firmware is repa=
-cked later, e.g. due to a
-> > > > > > > > > > > > > > +  firmware update. The 'fixed-partitions' bind=
-ing should provide enough
-> > > > > > > > > > > > > > +  information to read the firmware at runtime,=
- including decompression if
-> > > > > > > > > > > > > > +  needed. =20
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > How is this going to work exactly? binman reads t=
-hese nodes and then
-> > > > > > > > > > > > > writes out 'fixed-partitions' nodes. But then you=
-'ve lost the binman
-> > > > > > > > > > > > > specifc parts needed for repacking. =20
-> > > > > > > > > > > >
-> > > > > > > > > > > > No, they are the same node. I do want the extra inf=
-ormation to stick
-> > > > > > > > > > > > around. So long as it is compatible with fixed-part=
-ition as well, this
-> > > > > > > > > > > > should work OK. =20
-> > > > > > > > > > >
-> > > > > > > > > > > How can it be both? The partitions node compatible ca=
-n be either
-> > > > > > > > > > > 'fixed-partitions' or 'binman'. =20
-> > > > > > > > > >
-> > > > > > > > > > Can we not allow it to be both? I have tried to adjust =
-things in
-> > > > > > > > > > response to feedback but perhaps the feedback was leadi=
-ng me down the
-> > > > > > > > > > wrong path? =20
-> > > > > > > > >
-> > > > > > > > > Sure, but then the schema has to and that means extending
-> > > > > > > > > fixed-partitions. =20
-> > > > > > > >
-> > > > > > > > Can we cross that bridge later? There might be resistance t=
-o it. I'm
-> > > > > > > > not sure. For now, perhaps just a binman compatible works w=
-ell enough
-> > > > > > > > to make progress. =20
-> > > > > > >
-> > > > > > > Is there any way to make progress on this? I would like to ha=
-ve
-> > > > > > > software which doesn't understand the binman compatible to at=
- least be
-> > > > > > > able to understand the fixed-partition compatible. Is that ac=
-ceptable? =20
-> > > > > >
-> > > > > > There's only 2 ways that it can work. Either binman writes out
-> > > > > > fixed-partition nodes dropping/replacing anything only defined =
-for
-> > > > > > binman or fixed-partition is extended to include what binman ne=
-eds. =20
-> > > > >
-> > > > > OK, then I suppose the best way is to add a new binman compatible=
-, as
-> > > > > is done with this v6 series. People then need to choose it instea=
-d of
-> > > > > fixed-partition. =20
-> > > >
-> > > > I'm sorry this is not at all what Rob suggested, or did I totally
-> > > > misunderstand his answer?
-> > > >
-> > > > In both cases the solution is to generate a "fixed-partition" node.=
- Now
-> > > > up to you to decide whether binman should adapt the output to the
-> > > > current schema, or if the current schema should be extended to
-> > > > understand all binman's output.
-> > > >
-> > > > At least that is my understanding and also what I kind of agree wit=
-h. =20
-> > >
-> > > I do want to binman schema to include all the features of Binman.
-> > >
-> > > So are you saying that there should not be a 'binman'  schema, but I
-> > > should just add all the binman properties to the fixed-partition
-> > > schema? =20
-> >
-> > This is my current understanding, yes. But acknowledgment from Rob is
-> > also welcome. =20
->=20
-> I am trying again to wade through all the confusion here.
->=20
-> There is not actually a 'fixed-partition' node. So are you saying I
-> should add one? There is already a 'partitions' node. Won't they
-> conflict?
+On 05/03/2024 15:24, Roger Quadros wrote:
+> Currently, the GPIO Reset Device Tree properties of the
+> PHY node are ignored when the PHY is probed via mdio-uclass driver [1].
+> 
+> To resolve this, for each child of the MDIO bus node, bind and probe
+> the generic Ethernet PHY driver if CONFIG_DM_ETH_PHY is enabled.
+> 
+> This should now show the generic_phy_driver in "dm tree"
+> and also apply the GPIO reset before the MDIO bus driver scans the bus
+> for the PHYs.
+> 
+>  ethernet      0  [ + ]   am65_cpsw_nuss_port       |   |-- ethernet@8000000port@1
+>  bootdev       3  [   ]   eth_bootdev               |   |   `-- port@1.bootdev
+>  mdio          0  [ + ]   cpsw_mdio                 |   `-- mdio@f00
+>  eth_phy_ge    0  [ + ]   eth_phy_generic_drv       |       |-- ethernet-phy@0
+>  eth_phy_ge    1  [ + ]   eth_phy_generic_drv       |       `-- ethernet-phy@1
+> 
+> To test this on Beagleplay, the following series is required
+> 
+> [1] Switch am65-cpsw to DM MDIO
+>  https://lore.kernel.org/all/20240228-for-2024-07-am65-cpsw-mdio-v2-0-f74f972eafeb@kernel.org/
+> 
+> The last 3 patches are marked [not-for-merge]. They are to show how the
+> whole solution can work to fix Ethernet on Beagleplay, which has been broken
+> so far. Those DT patches will be sent once the device tree changes are merged
+> into Linux tree.
+> 
+> Signed-off-by: Roger Quadros <rogerq@kernel.org>
 
-Sorry for the confusion, there is a 'partitions' node indeed. This
-node shall declare it's "programming model" (let's say), ie. how it
-should be parsed. What defines this programming model today is the
-'fixed-partitions' compatible. I think we (Rob and myself, but again,
-Rob, please confirm) agree on the fact that we don't want to duplicate
-the fixed-partitions compatible/logic and thus the binman compatible
-was rejected.
+Some CI tests failed. I will fix and send v2.
+https://github.com/u-boot/u-boot/pull/495
 
-Hence, in order to move forward, I would definitely appreciate an
-update of the fixed-partitions binding in order to support what binman
-can generate.
+> ---
+> Roger Quadros (5):
+>       net: mdio-uclass: Bind and probe generic Ethernet PHY driver
+>       configs/am62x_beagleplay_a53_defconfig: enable DM_ETH_PHY
+>       [not-for-merge] arm: dts: k3-am62*: sync with linux-next-20240229
+>       [not-for-merge] k3-am625-beagleplay-u-boot: get CPSW Ethernet to work
+>       [not-for-merge] arm: dts: k3-am625-beagleplay: Fix Ethernet PHY reset GPIO
+> 
+>  arch/arm/dts/k3-am62-main.dtsi               | 126 ++++++++++++++---
+>  arch/arm/dts/k3-am62-mcu.dtsi                |   4 +-
+>  arch/arm/dts/k3-am62-phycore-som.dtsi        |   5 +-
+>  arch/arm/dts/k3-am62-thermal.dtsi            |   5 +-
+>  arch/arm/dts/k3-am62-verdin-dev.dtsi         |   4 +-
+>  arch/arm/dts/k3-am62-verdin-wifi.dtsi        |   1 -
+>  arch/arm/dts/k3-am62-verdin.dtsi             |  76 +++++++---
+>  arch/arm/dts/k3-am62-wakeup.dtsi             |  38 +++--
+>  arch/arm/dts/k3-am62.dtsi                    |   4 +-
+>  arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi |  63 +++++++++
+>  arch/arm/dts/k3-am625-beagleplay.dts         |  66 ++++-----
+>  arch/arm/dts/k3-am625-phyboard-lyra-rdk.dts  | 104 +++++++++++++-
+>  arch/arm/dts/k3-am625-sk.dts                 |   4 +-
+>  arch/arm/dts/k3-am625.dtsi                   |   4 +-
+>  arch/arm/dts/k3-am62a-main.dtsi              | 201 +++++++++++++++++++++++++--
+>  arch/arm/dts/k3-am62a-mcu.dtsi               |   4 +-
+>  arch/arm/dts/k3-am62a-thermal.dtsi           |   5 +-
+>  arch/arm/dts/k3-am62a-wakeup.dtsi            |   4 +-
+>  arch/arm/dts/k3-am62a.dtsi                   |   4 +-
+>  arch/arm/dts/k3-am62a7-sk.dts                | 162 ++++++++++++++++++++-
+>  arch/arm/dts/k3-am62a7.dtsi                  |   4 +-
+>  arch/arm/dts/k3-am62x-sk-common.dtsi         |  24 +++-
+>  configs/am62x_beagleplay_a53_defconfig       |   2 +-
+>  net/mdio-uclass.c                            |  41 ++++++
+>  24 files changed, 825 insertions(+), 130 deletions(-)
+> ---
+> base-commit: 84f5bb0be0ec9fbf98f8f3317b578dfc114cf44e
+> change-id: 20240305-for-2024-07-beagleplay-eth-f82a51197937
+> 
+> Best regards,
 
-We are here talking about the output of binman, not its input. TBH I
-haven't understood the point in having binman's input parsed by the
-generic yaml binding. I would advise to focus on binman's output first
-because it feels more relevant, at a first glance.
-
-> Would it be possible for you to look at my patches and suggest
-> something? I think at this point, after so many hours of trying
-> different things and trying to understand what is needed, I could
-> really use a little help.
-
-I hope the above details will help.
-
-Thanks,
-Miqu=C3=A8l
+-- 
+cheers,
+-roger
