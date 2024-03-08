@@ -4,73 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17797C54798
-	for <u-boot@archiver.kernel.org>; Thu,  7 Mar 2024 23:20:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B4A5C54E4A
+	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 00:04:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D6FF87B82;
-	Fri,  8 Mar 2024 00:20:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 8C8C687D60;
+	Fri,  8 Mar 2024 01:04:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dTtx+0vo";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XDbr+tDk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EBA7B876F3; Fri,  8 Mar 2024 00:20:23 +0100 (CET)
-Received: from mail-ua1-x92e.google.com (mail-ua1-x92e.google.com
- [IPv6:2607:f8b0:4864:20::92e])
+ id 8D38887D80; Fri,  8 Mar 2024 01:04:39 +0100 (CET)
+Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
+ [IPv6:2001:4860:4864:20::2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0CAC87C83
- for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 00:20:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 078AE83339
+ for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 01:04:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
-Received: by mail-ua1-x92e.google.com with SMTP id
- a1e0cc1a2514c-7dba7c2a730so217573241.0
- for <u-boot@lists.denx.de>; Thu, 07 Mar 2024 15:20:19 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-oa1-x2d.google.com with SMTP id
+ 586e51a60fabf-22195b3a8fbso200689fac.3
+ for <u-boot@lists.denx.de>; Thu, 07 Mar 2024 16:04:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1709853618; x=1710458418; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=QtS76hEst/9Y8Ea6zP1+d8picOrHxEEMs9BgyJmClUs=;
- b=dTtx+0vos9o7WYQZI72ToXkBaCF+0Rot4LJ5M0BYANZD+ihlhqvaGnwQkb4jk59MUF
- 0cZSVX1JijLZFV58edDKYj/PU+2uoCnRYbv6C29ltrZdTJWp7+FK1Rl6pyUW+GT7e4jW
- jA/o65bT6Q4YpFt5Onjcf0xVjiV8LCuAUpYT7X4Ryf7/jAxxSsWLFW1xN0zEj1kLlTMf
- 4H/C/6MccUNqhzIuMUbI7UafJk80l3ElTfCrLoHXrIUAIOdwGjp/V+We2ofBaLcUB07B
- gBri2SW1pjrTp8jimhAMXOvEj80Ve73T8lRNCOyWjjgbQBmXsWlzqbXIFSqp4PRu/wgj
- fOjQ==
+ d=linaro.org; s=google; t=1709856273; x=1710461073; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=8WpmdhQC3KMXqD/OnNVkffYCf1720asOXYrEz50/bNM=;
+ b=XDbr+tDkcT5ql5JkPer+D52zjR9PctRfR5LyYSMgtbnRqk75f53GBhCqTXmoeND63S
+ kk5ZopkScOzDiiNoM2v7Wck3xLRnb1hRcEsJF+5Brt7JxqO7d1nYKm/tkiTGwgGlvBgh
+ FGZiPX2w3GnlXKEUSbkSbkjitE15umST6k0RI/f1Ggbt5tP5ggbSOk6KROdmR4Bo2E4T
+ pTWFln5RVxbNjUyZswi+xXjCqx1NhkBTSygsaAT1E3769pReM9J+fmjPwbBIUBWVeqzd
+ +1+7u5OYCevsO+jyzaLtB8E1ErsnR9cIufXyz66kTAn0oshladWuiuN5bKgQqc340gTS
+ kmGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709853618; x=1710458418;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1709856273; x=1710461073;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=QtS76hEst/9Y8Ea6zP1+d8picOrHxEEMs9BgyJmClUs=;
- b=HUEjyBIleCP4oXfW19M6CiHi7PRqsOhfLLhPiGQS9ngkLEfj3vv4Vd4WJeR2C3fMPz
- MMtrQpGlQB9urlTsSttTObe3OOoKEwLwXPkRNIptR8QmqBsA3cHrq+1rERsfGJyLPdhW
- 94Zvne/lM5GIj7JsXuCCFIb5OnPGTySFzDKTm5Otl2GMgjgz6E0t+PmckgTvY44NV2E/
- J//08Qqwxj6kdIvnL155sxS68PyDPJooraJ+aNBIP4XSNHTm6+l4Qdm9bswH0mxcQg58
- SI1NFDRvzd77wleZjRFDqzV8bz1fg/U4UGNrF6gu7NC85vZM3JYmZ7zg0YwJ4qbeTyyw
- Owzw==
-X-Gm-Message-State: AOJu0YwDCP7vSAfWVk/+1EmzbdlpNdFUx/wMkaI6Rv9EIbtVwKk9B+hR
- kxCK1GFTs4PmiUUzZH+KqZ5MlP62DCPYgt4ecvxCRojXVkUuXepLBBamYZCX2TK6G98ztU8ucGg
- Umuq8PF33IrsVrkWCEL+B5StXZqqw2hMR0GY=
-X-Google-Smtp-Source: AGHT+IF1V2mg+okVrdZoSfmrnfvy2UBew+mJqj9dDuJio8VviwGOwx9etbDFD72fReidT+U9uP2GxgxYTZeommSCnS0=
-X-Received: by 2002:a67:ee12:0:b0:472:e6df:27a0 with SMTP id
- f18-20020a67ee12000000b00472e6df27a0mr7478432vsp.33.1709853618256; Thu, 07
- Mar 2024 15:20:18 -0800 (PST)
+ bh=8WpmdhQC3KMXqD/OnNVkffYCf1720asOXYrEz50/bNM=;
+ b=urGwa19KIuUl8bcVKKoPl7npbGiytXAx8bR4b0IxYYpa8PDph3s7Jd05bp+IdxHU3S
+ IRylNVzMKyiIufBdAbU5wH8mvbwadW8XLhutq0FeZtAmDLY6FeuvA3AvFiV4twhknxnu
+ WCAjrZPCyCMg5iKuGKB3afd82njfIYJK0IO+DH+UBkzKy3S/55K3ajz0NsnV45aaNUTG
+ J422GEfRJqiuOwBUD5UP5Nr9S0k0hNvQqS7ZbIWBUdD9RGEa/CJ2d/FF9aHqMVUdNhCl
+ Z4g2QTurUxEcbX+27L9ewHNr9agPQv/CkEtcWRle4FH3Lu/Io3yMYF+1UmW2sI8PmmPW
+ 2ZSQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUAJgUs7poCP1KktDnV4JOENj8Bop3gjwBUwtOepfMqCS/8Yno7mxrefioxV1p0+VJ5gfsVQVV1NHJmDXF78xEWc3K6KA==
+X-Gm-Message-State: AOJu0YzRizyJxuKt13tGnKzrMmmDgvpVHDTvvQrGjqnbDXFcIem5cB1i
+ 8qzECLsJAYn090bp65/whM3TGnrY17rIPrfS7i3oWqkA0kraVbvpwEMTO0RV/RU=
+X-Google-Smtp-Source: AGHT+IFnGtmhp+H9b8sEXHFEQzhGC/F6g0O9tkc82u62DFvLdlfScB7iK47X3KZpkuko8FgV8W6ULQ==
+X-Received: by 2002:a05:6870:724d:b0:221:1c2f:21e9 with SMTP id
+ y13-20020a056870724d00b002211c2f21e9mr1473109oaf.58.1709856272891; 
+ Thu, 07 Mar 2024 16:04:32 -0800 (PST)
+Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
+ wh13-20020a056871a68d00b002208ca7a9aesm4248713oab.57.2024.03.07.16.04.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 07 Mar 2024 16:04:32 -0800 (PST)
+From: Sam Protsenko <semen.protsenko@linaro.org>
+To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
+ Eugen Hristev <eugen.hristev@collabora.com>,
+ Yang Xiwen <forbidden405@outlook.com>,
+ Julien Masson <jmasson@baylibre.com>, u-boot@lists.denx.de
+Subject: [PATCH] clk: Propagate clk_set_rate() if CLK_SET_PARENT_RATE present
+Date: Thu,  7 Mar 2024 18:04:32 -0600
+Message-Id: <20240308000432.32369-1-semen.protsenko@linaro.org>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-References: <20240303130122.29983-1-heinrich.schuchardt@canonical.com>
- <20240303130122.29983-6-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20240303130122.29983-6-heinrich.schuchardt@canonical.com>
-From: E Shattow <lucent@gmail.com>
-Date: Thu, 7 Mar 2024 15:20:05 -0800
-Message-ID: <CANV2PTOCK--hOr_HbbjHcjYT40fVm5DD2GsfV3cZu2XFm7WX=Q@mail.gmail.com>
-Subject: Re: [RFC 5/5] doc: describe Milk-V Mars board
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,17 +95,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Mar 3, 2024 at 5:02=E2=80=AFAM Heinrich Schuchardt <
-heinrich.schuchardt@canonical.com> wrote:
-...
+Sometimes clocks provided to a consumer might not have .set_rate
+operation (like gate or mux clocks), but have CLK_SET_PARENT_RATE flag
+set. In that case it's usually possible to find a parent up the tree
+which is capable of setting the rate (div, pll, etc). Implement a simple
+lookup procedure for such cases, to traverse the clock tree until
+.set_rate capable parent is found, and use that parent to actually
+change the rate. The search will stop once the first .set_rate capable
+clock is found, which is usually enough to handle most cases.
 
-> +The board provides the DIP switches MSEL[1:0] to select the boot device
-> out of
-> +SPI flash, eMMC, SD-card, UART. To select booting from SD-card set the D=
-IP
-> +switches MSEL[1:0] to 10.
->
+Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
+---
+ drivers/clk/clk-uclass.c | 16 ++++++++++++++--
+ 1 file changed, 14 insertions(+), 2 deletions(-)
 
-This does not match the [Milk-V Mars vendor documentation](
-https://milkv.io/docs/mars/getting-started/bootloader). Maybe you have a
-different board revision?
+diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
+index ed6e60bc4841..755f05f34669 100644
+--- a/drivers/clk/clk-uclass.c
++++ b/drivers/clk/clk-uclass.c
+@@ -571,8 +571,20 @@ ulong clk_set_rate(struct clk *clk, ulong rate)
+ 		return 0;
+ 	ops = clk_dev_ops(clk->dev);
+ 
+-	if (!ops->set_rate)
+-		return -ENOSYS;
++	/* Try to find parents which can set rate */
++	while (!ops->set_rate) {
++		struct clk *parent;
++
++		if (!(clk->flags & CLK_SET_RATE_PARENT))
++			return -ENOSYS;
++
++		parent = clk_get_parent(clk);
++		if (IS_ERR_OR_NULL(parent) || !clk_valid(parent))
++			return -ENODEV;
++
++		clk = parent;
++		ops = clk_dev_ops(clk->dev);
++	}
+ 
+ 	/* get private clock struct used for cache */
+ 	clk_get_priv(clk, &clkp);
+-- 
+2.39.2
+
