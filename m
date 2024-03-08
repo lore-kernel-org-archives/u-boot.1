@@ -4,112 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CF74C54E4A
-	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 06:54:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68019C5475B
+	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 07:42:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F0FDE88039;
-	Fri,  8 Mar 2024 07:53:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=starfivetech.com
+	by phobos.denx.de (Postfix) with ESMTP id 9C51E88010;
+	Fri,  8 Mar 2024 08:42:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="gLlv8wGx";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3087788039; Fri,  8 Mar 2024 07:53:54 +0100 (CET)
-Received: from CHN02-BJS-obe.outbound.protection.partner.outlook.cn
- (mail-bjschn02on20726.outbound.protection.partner.outlook.cn
- [IPv6:2406:e500:4440:2::726])
+ id 1D6B188019; Fri,  8 Mar 2024 08:42:19 +0100 (CET)
+Received: from relay3-d.mail.gandi.net (relay3-d.mail.gandi.net
+ [217.70.183.195])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 39BA388027
- for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 07:53:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=starfivetech.com
+ by phobos.denx.de (Postfix) with ESMTPS id 9B65D87AEC
+ for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 08:42:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=minda.chen@starfivetech.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=AjJiJnvIgjgGx/LWKgdXduPyblN4JTMJJ9Hjq+Zs1b6T4HO4j3+WMFk+eOoWLtO7iiOezqjZVZzNPW4GYXSwboMdIf9D2jNmbOXyeaXcekw7jz1VtX6Ia9ZrPXqWpPwS9pzCHo0D03oN184CJ5infSLfWjyg0XzobvKw2n8FCU3wZY/gU4w/f9aaQyPFZ6lBC9i3A6m48RmXqklQvHfecW3vCFG3HdRcoMqcxAxMTH/K5YH7aRqe6Ee8JYZ971CK1RpjzPegVE9nhL6E4lfPVQgZkeHp7zpDYAt+smCLYIT1cgn0urWaFMEkFBszOBI32xr1df0EC+RVlJATudBqLw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ENOxvQYyEo/tp3IYg9GVvFytmllCGDA35XLdl7nKjCc=;
- b=faGW5NLKlJGuPyK0E2+7MODje7Ils9JNCsU9nLDnGHOYuTsS9tJlbfjmnScDLNaHiAWkOKLGSzMmPrjlZgfAa1m60sLYy7lXC8DbwrFQUGAP3AF3MhZOrmfVNIQqzk5wmJTN9EXzzcdsOaU5/x5bZY9y2813q0O+/nBbrHzLQYdtiZEWClyVJiHApWv3ysXmzwu/M769QQcGcBLr1lZQDPyVTzMwgmq6H8AuXHPrfqovJk8j51FgAxIRXTm1DnHrh3MCa1ypR+494vGFgjOjUrhk6wY03Vi9+HwAsrRrHie7y2ACL3/GqPTAolpOpH285idBD9yJeXMCM52nkIGJ7Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=starfivetech.com; dmarc=pass action=none
- header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=starfivetech.com;
-Received: from SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c311:25::15) by SHXPR01MB0784.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c311:26::13) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7316.53; Fri, 8 Mar
- 2024 06:53:44 +0000
-Received: from SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn
- ([fe80::5a5a:fa59:15fd:63dc]) by
- SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn ([fe80::5a5a:fa59:15fd:63dc%3])
- with mapi id 15.20.7316.051; Fri, 8 Mar 2024 06:53:44 +0000
-From: Minda Chen <minda.chen@starfivetech.com>
-To: Leo Yu-chi Liang <ycliang@andestech.com>, Rick Chen <rick@andestech.com>,
- u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>
-Subject: [PATCH v1 2/2] board: starfive: maintainer: Add visionfive2 PCIe
- driver
-Date: Fri,  8 Mar 2024 14:53:36 +0800
-Message-Id: <20240308065336.40795-2-minda.chen@starfivetech.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20240308065336.40795-1-minda.chen@starfivetech.com>
-References: <20240308065336.40795-1-minda.chen@starfivetech.com>
-Content-Type: text/plain
-X-ClientProxiedBy: ZQ0PR01CA0035.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c550:2::21) To SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c311:25::15)
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
+Received: by mail.gandi.net (Postfix) with ESMTPSA id DBB4760005;
+ Fri,  8 Mar 2024 07:42:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+ t=1709883735;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=RkispZ2cSgHHvQHUKtQPYvm4JRgYfxl+31ZzbV0ajJQ=;
+ b=gLlv8wGxjiogeG9C46oG5EgFoqN4SH1b9sabNz5g3QO62yEOKg3XJIQW0hFi2a4mlTo9/J
+ wDoyd7Ks0a9nOehGgDBetroeoVaVTpjSUCvwUdrENEVJ9GDuL1UA1UNTIwOIUkdVv7PDl0
+ HLNnzR8Dn0hQvEKvIyQYWURylmHBn7971Bw1G7BDNxLq55CYjsQOW+BxO91WXoQ2oMPJVa
+ BRg5CV53PmNRQlKzjl1MjxvhcrVmwlRk7/L9gakI8vPJfBh17Jt0/24YwSwpQHdYgAzNV6
+ 1MSXvZT0koXMkeBdc5LURUgoUaMY53WPEDVkI+xX8/0aO6DbnEZN41o86mVc5A==
+Date: Fri, 8 Mar 2024 08:42:12 +0100
+From: Miquel Raynal <miquel.raynal@bootlin.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Rob Herring <robh@kernel.org>, devicetree@vger.kernel.org,
+ linux-mtd@lists.infradead.org, Tom Rini <trini@konsulko.com>, Michael Walle
+ <mwalle@kernel.org>, U-Boot Mailing List <u-boot@lists.denx.de>, Conor
+ Dooley <conor+dt@kernel.org>, Krzysztof Kozlowski
+ <krzysztof.kozlowski+dt@linaro.org>, Pratyush Yadav <ptyadav@amazon.de>,
+ =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>, Richard Weinberger
+ <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
+ linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v6 1/3] dt-bindings: mtd: partitions: Add binman compatible
+Message-ID: <20240308084212.4aa58761@xps-13>
+In-Reply-To: <CAFLszTh3t6wPz8PFhFzazTAGaLVpObkjY9qv7MtSkQ21zZFzKA@mail.gmail.com>
+References: <20231116172859.393744-1-sjg@chromium.org>
+ <20231208150042.GA1278773-robh@kernel.org>
+ <CAPnjgZ2i4gvgiUeHPOfHuOdBooV4e=QQEq6iMo0JbDwOS6dCwA@mail.gmail.com>
+ <CAL_Jsq+xMZ8yz4H9D59uCSyX4h5W+4ruGF++=wVA=msXz+Y01A@mail.gmail.com>
+ <CAPnjgZ1uW8T6woXSqFUNm301=W3zBYOrADREkrz=DuwSW87qZg@mail.gmail.com>
+ <20231214172702.GA617226-robh@kernel.org>
+ <CAPnjgZ2oJSGPO91Y_aLbe+v250WFrND4n3T0mOvhERYidVu=eQ@mail.gmail.com>
+ <CAFLszTizRRVbRO6_ygE2X-Lp5dENWSc4uMGL5GPJAFGAbRdCyQ@mail.gmail.com>
+ <CAL_Jsq+j7_KZtQ2ENq9+vsw0LOZF=spu293_G=AxOmBM+m_f-g@mail.gmail.com>
+ <CAFLszTimaFw9sf=JKvQXG4fS6V_2T=2n+pfvYLCiuG1o+7cHPA@mail.gmail.com>
+ <20240205085056.44278f2c@xps-13>
+ <CAFLszTi+8ygXOidnhxj7sdJwc6X5i+++QvnUyfe-kde5eSts_w@mail.gmail.com>
+ <20240205131755.3462084f@xps-13>
+ <CAFLszTh3t6wPz8PFhFzazTAGaLVpObkjY9qv7MtSkQ21zZFzKA@mail.gmail.com>
+Organization: Bootlin
+X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SHXPR01MB0863:EE_|SHXPR01MB0784:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5c2d60e6-37a0-45a3-fdf8-08dc3f3c7f27
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: zdbbd669Yk0lcZraRbEcXsAlGu2LHnKgbJft+YJ1sf2jq/bKMnTQ1OqVPEvQ3Z++9jUJmSLuPLYbb6kZHPgUQSm90oqZcy9jMCCl8dnBZ81o8OZJCWFnVe7i1CUNy1n5DZIJAnKpChbZ1/VFZOJ+Lbl9u0UNFF5+UfW5tOdVJKslLZswAp1QDznVNO3Wm6FWNYLsbLCEXtDaZvrtomc6w8FfEJ6PB0VrOh4rIaxeDBWqiSwNpT0pUqhMEwoiStxtTGtsWuPKQ7DIrO9yDp1u5UEUHqgsFl2rWbqbV9yQu8EoHQaT+6PZOX2K0BXLjfd6dVxBw7FHy9Mjq6i3IVaoBP6mAk4078ffXeDRURYK3XMxepv4BhqhuVd/Xc3HQqxG8hD6k0ats5qQQC8/uBRiUJ3w23n7i1bEa8gEFJLjKBV1VfPW5XhkSkdXxCbpmmOVAFCvsvVnvfvWMPyi+NBhvjfzk3d5q3V0cZAtga1WW9JlTEPMvexxlHiX00vZNurJYKGGNf1C83eU3WYm4uL8S18ITJLObPhmi1OE83zggENz2DQ64dKGqTdBbP4a4UlP7euR5FcNkrqPqc2mcsQ4D4L4JVUHCXEtgiaYI5V6DGEou0PSF+sNAKlyfhrRT/zZ
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn; PTR:;
- CAT:NONE; SFS:(13230031)(52116005)(41320700004)(1800799015)(38350700005);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?a4TT0PV+pCw/p4TXk6Ehsplu4cPGmqeHyHzLuTaVxxyzC8hPWLtkaQchZUBN?=
- =?us-ascii?Q?gccgtguI3h0vPgKPAjQyd6ox2Rk8a7LvtN5FUq/U4tPW0kiXBwITyxwYEwgK?=
- =?us-ascii?Q?0yI0Ow+ZMCN0NSizB3o8q1NlolK0i6CP6+FQtJw9CCsQQy56VU1c3hnUe7bp?=
- =?us-ascii?Q?ipNQHYdNXpcJVEpQa0owh5JXLc927c1vowxkh2ir+3uTOvAkAEfH1bSzaQLc?=
- =?us-ascii?Q?Mnh4SRG8wBEc76N60RlfPkp29UVSxdmoxhC1JxmEm+ypKu4du9rdnBtDJRpC?=
- =?us-ascii?Q?YaFlnFz0/W7X1gKJxhLrsmbg4Ww/RUd4jxSCNoN8rrQimrWweZ5oc1y3dRJT?=
- =?us-ascii?Q?62tQg+MkkyLiIEeLr+tndEDSuIPajuEVXrt5igmdCQWxPWnABMgfChtVtN1/?=
- =?us-ascii?Q?024cghhewIqWOHT9p5TpQQ/lJKHPfaKB1AxhnAusd2BGaLCuyNcNsF7MWLr7?=
- =?us-ascii?Q?SkxrrusePOp74qTppaLGdDK4hXcMvvc86g2cLJAbbK615Gy1ytYxAPmylwu5?=
- =?us-ascii?Q?qFqFWXQyrVjcAXDrn22ZWXbCDIXZeUR1EuwK+qcN/HNA02C4nu9lF5oiXN/a?=
- =?us-ascii?Q?NNsxl9SWmj1fX6yIcweqPh2BwavVgdXWmMXWSCZWnxxuelq9dHK2Ce3nNC/8?=
- =?us-ascii?Q?832Q+1pmQCkdbDXKn/PQ3K6ksX5dzUQWvm9VPnaYgVH2rOcnmbhPSgwsTzub?=
- =?us-ascii?Q?1tuvGww1W4umf7XODx4qv87ivXyHACtk/S3rrzYBHgkSwGAvXTnUimTSjd5W?=
- =?us-ascii?Q?YYWN60+eXtMN+X77x8p2P86FtCVF7qlj2OX7GZxb/pcvo8pAM3qh0qo9a2Jr?=
- =?us-ascii?Q?0S40xZiHthmxKKWQLf23h+H7B8r1C1XKaSvuvw+Vrq6GwuWXdYDKk//242en?=
- =?us-ascii?Q?UoZd1m44/Yd0RpTNK5sRP0Ukv/cT1mYl0yCQXXTs1aOxCBTXANKahMDW827x?=
- =?us-ascii?Q?NzoTNfpqbzexST6gPvJk6vdFSV+hali/aliJbg62VfWylFEXSZfjXGeOemR5?=
- =?us-ascii?Q?EuRCZfaC5221k7D1lXAvQM+rfYOSkOrU2L4dP5VR5th49uZqnHEur2qH4vfx?=
- =?us-ascii?Q?WBDuQiDu+x+1LfWaP2deXG/WMOv5AKK5MtFJ9VW/+3YYKxwyyE8OgjN29JQ2?=
- =?us-ascii?Q?KE7F9LaHz5kUXldw4T8CoxqXKHMsTKbrQxRaZADZQYLofTBO3T3B2TNLygtP?=
- =?us-ascii?Q?brBNu02jotfexDuwtS671SJ3RZ9se8aZXL4sZRtjelaSXm3LXZod4Mv//xXt?=
- =?us-ascii?Q?vhuhluakrFpOkvCJ7/QNSo/oePUM9vR8q0h4TdU0Iku4vNecTKxAGaPVJz6J?=
- =?us-ascii?Q?U4YUX1Jz0KjU+/L16raUNZ7mI6cbjRXCgAvuWAvDiWJmqobcTbGpEr2hiYen?=
- =?us-ascii?Q?/2t0HNLV61H6LQVfze7MQKJuPWc2KZHEXoPGvAquExokXYpWQjf/RaqboUmj?=
- =?us-ascii?Q?vExhgdgAB9VcFMYOUmuYC8yit7rIhspmBmMdcBP9+G4L3Vab9YjzFXb0JfJ8?=
- =?us-ascii?Q?77wPtJpPCtjI8V6rDLAEvk88spVawycLJbGSlURetOR1ztKZ0Xc49ZBxKgOx?=
- =?us-ascii?Q?F51RaNL2EooQWLxrrpuvrBby7TYg26uYBTba4xLas526U+Db/PYuNETRowxG?=
- =?us-ascii?Q?Gg=3D=3D?=
-X-OriginatorOrg: starfivetech.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5c2d60e6-37a0-45a3-fdf8-08dc3f3c7f27
-X-MS-Exchange-CrossTenant-AuthSource: SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Mar 2024 06:53:44.5343 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 4Yp6UpBdS76kDbEscGn9AaRPo6rOr0mWc55Ph+pARxBMuU6KZ4aUnCTsRyheTH1Y9m4CQmmUKUmKa7XsXnT6piM5o4TlSONSm1s3FTJvDjo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SHXPR01MB0784
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-GND-Sasl: miquel.raynal@bootlin.com
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -126,22 +90,148 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add PCIe driver file to visionfive2 board MAINTAINERS list.
+Hi Simon,
 
-Signed-off-by: Minda Chen <minda.chen@starfivetech.com>
----
- board/starfive/visionfive2/MAINTAINERS | 1 +
- 1 file changed, 1 insertion(+)
+sjg@chromium.org wrote on Fri, 8 Mar 2024 15:44:25 +1300:
 
-diff --git a/board/starfive/visionfive2/MAINTAINERS b/board/starfive/visionfive2/MAINTAINERS
-index 5056e9c713..d7f638f9b4 100644
---- a/board/starfive/visionfive2/MAINTAINERS
-+++ b/board/starfive/visionfive2/MAINTAINERS
-@@ -5,3 +5,4 @@ F:	arch/riscv/include/asm/arch-jh7110/
- F:	board/starfive/visionfive2/
- F:	include/configs/starfive-visionfive2.h
- F:	configs/starfive_visionfive2_defconfig
-+F:	drivers/pci/pcie_starfive_jh7110.c
--- 
-2.17.1
+> Hi Miquel,
+>=20
+> On Tue, 6 Feb 2024 at 01:17, Miquel Raynal <miquel.raynal@bootlin.com> wr=
+ote:
+> >
+> > Hi Simon,
+> > =20
+> > > > > > > > > > > > > > +description: |
+> > > > > > > > > > > > > > +  The binman node provides a layout for firmwa=
+re, used when packaging firmware
+> > > > > > > > > > > > > > +  from multiple projects. It is based on fixed=
+-partitions, with some
+> > > > > > > > > > > > > > +  extensions, but uses 'compatible' to indicat=
+e the contents of the node, to
+> > > > > > > > > > > > > > +  avoid perturbing or confusing existing insta=
+llations which use 'label' for a
+> > > > > > > > > > > > > > +  particular purpose.
+> > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > +  Binman supports properties used as inputs to=
+ the firmware-packaging process,
+> > > > > > > > > > > > > > +  such as those which control alignment of par=
+titions. This binding addresses
+> > > > > > > > > > > > > > +  these 'input' properties. For example, it is=
+ common for the 'reg' property
+> > > > > > > > > > > > > > +  (an 'output' property) to be set by Binman, =
+based on the alignment requested
+> > > > > > > > > > > > > > +  in the input.
+> > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > +  Once processing is complete, input propertie=
+s have mostly served their
+> > > > > > > > > > > > > > +  purpose, at least until the firmware is repa=
+cked later, e.g. due to a
+> > > > > > > > > > > > > > +  firmware update. The 'fixed-partitions' bind=
+ing should provide enough
+> > > > > > > > > > > > > > +  information to read the firmware at runtime,=
+ including decompression if
+> > > > > > > > > > > > > > +  needed. =20
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > How is this going to work exactly? binman reads t=
+hese nodes and then
+> > > > > > > > > > > > > writes out 'fixed-partitions' nodes. But then you=
+'ve lost the binman
+> > > > > > > > > > > > > specifc parts needed for repacking. =20
+> > > > > > > > > > > >
+> > > > > > > > > > > > No, they are the same node. I do want the extra inf=
+ormation to stick
+> > > > > > > > > > > > around. So long as it is compatible with fixed-part=
+ition as well, this
+> > > > > > > > > > > > should work OK. =20
+> > > > > > > > > > >
+> > > > > > > > > > > How can it be both? The partitions node compatible ca=
+n be either
+> > > > > > > > > > > 'fixed-partitions' or 'binman'. =20
+> > > > > > > > > >
+> > > > > > > > > > Can we not allow it to be both? I have tried to adjust =
+things in
+> > > > > > > > > > response to feedback but perhaps the feedback was leadi=
+ng me down the
+> > > > > > > > > > wrong path? =20
+> > > > > > > > >
+> > > > > > > > > Sure, but then the schema has to and that means extending
+> > > > > > > > > fixed-partitions. =20
+> > > > > > > >
+> > > > > > > > Can we cross that bridge later? There might be resistance t=
+o it. I'm
+> > > > > > > > not sure. For now, perhaps just a binman compatible works w=
+ell enough
+> > > > > > > > to make progress. =20
+> > > > > > >
+> > > > > > > Is there any way to make progress on this? I would like to ha=
+ve
+> > > > > > > software which doesn't understand the binman compatible to at=
+ least be
+> > > > > > > able to understand the fixed-partition compatible. Is that ac=
+ceptable? =20
+> > > > > >
+> > > > > > There's only 2 ways that it can work. Either binman writes out
+> > > > > > fixed-partition nodes dropping/replacing anything only defined =
+for
+> > > > > > binman or fixed-partition is extended to include what binman ne=
+eds. =20
+> > > > >
+> > > > > OK, then I suppose the best way is to add a new binman compatible=
+, as
+> > > > > is done with this v6 series. People then need to choose it instea=
+d of
+> > > > > fixed-partition. =20
+> > > >
+> > > > I'm sorry this is not at all what Rob suggested, or did I totally
+> > > > misunderstand his answer?
+> > > >
+> > > > In both cases the solution is to generate a "fixed-partition" node.=
+ Now
+> > > > up to you to decide whether binman should adapt the output to the
+> > > > current schema, or if the current schema should be extended to
+> > > > understand all binman's output.
+> > > >
+> > > > At least that is my understanding and also what I kind of agree wit=
+h. =20
+> > >
+> > > I do want to binman schema to include all the features of Binman.
+> > >
+> > > So are you saying that there should not be a 'binman'  schema, but I
+> > > should just add all the binman properties to the fixed-partition
+> > > schema? =20
+> >
+> > This is my current understanding, yes. But acknowledgment from Rob is
+> > also welcome. =20
+>=20
+> I am trying again to wade through all the confusion here.
+>=20
+> There is not actually a 'fixed-partition' node. So are you saying I
+> should add one? There is already a 'partitions' node. Won't they
+> conflict?
 
+Sorry for the confusion, there is a 'partitions' node indeed. This
+node shall declare it's "programming model" (let's say), ie. how it
+should be parsed. What defines this programming model today is the
+'fixed-partitions' compatible. I think we (Rob and myself, but again,
+Rob, please confirm) agree on the fact that we don't want to duplicate
+the fixed-partitions compatible/logic and thus the binman compatible
+was rejected.
+
+Hence, in order to move forward, I would definitely appreciate an
+update of the fixed-partitions binding in order to support what binman
+can generate.
+
+We are here talking about the output of binman, not its input. TBH I
+haven't understood the point in having binman's input parsed by the
+generic yaml binding. I would advise to focus on binman's output first
+because it feels more relevant, at a first glance.
+
+> Would it be possible for you to look at my patches and suggest
+> something? I think at this point, after so many hours of trying
+> different things and trying to understand what is needed, I could
+> really use a little help.
+
+I hope the above details will help.
+
+Thanks,
+Miqu=C3=A8l
