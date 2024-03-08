@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F414C54E4A
-	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 08:45:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7FEDC54E4A
+	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 09:00:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BC13987C9A;
-	Fri,  8 Mar 2024 09:45:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 4289C87E93;
+	Fri,  8 Mar 2024 10:00:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="QdK3KezC";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="blwInS6s";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D9E7A8801E; Fri,  8 Mar 2024 09:45:45 +0100 (CET)
-Received: from mail-m127222.xmail.ntesmail.com
- (mail-m127222.xmail.ntesmail.com [115.236.127.222])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CA27187E93; Fri,  8 Mar 2024 10:00:24 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 796BC80EED
- for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 09:45:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 869C588043
+ for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 10:00:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=QdK3KezCfL6pAiHCbo9CQs1URH1k5NGk10cNpsH9OSpBDd3mkxgtMcFK+mHX/KW0Z64B0lWNVylWohCQkMBoEJ+nz5AgCnoV15z99LwU80V0ERXzG4jo70cWKKtfDYf9mYffMpdPY6HtUO/jdn1vmk8IlvZWviL3wKyVZ/j16TY=;
- c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=jkGcERsSnoysFmyNZMnr6TiQEujxpFY3CwlnzMwWIOg=;
- h=date:mime-version:subject:message-id:from;
-Received: from [172.16.12.77] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id EBCE0900316;
- Fri,  8 Mar 2024 16:45:24 +0800 (CST)
-Message-ID: <68f189e5-9744-4eea-9075-01f0f3e245d5@rock-chips.com>
-Date: Fri, 8 Mar 2024 16:45:24 +0800
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4288xtGe018786;
+ Fri, 8 Mar 2024 02:59:55 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1709888395;
+ bh=APCO1zwamYQdOCgJjhc9ug5eCr31PaPFjsfYwTUU8XU=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=blwInS6ssDAt/ALBVebsvRzRI7YLINm/1aE2AS/KK/yLrVhIUfM3t5fJJm9xwqL3n
+ AoZ/Mq64RaEdDOM21DG82GWw67evMWo1XHGEZgy3igwh62RcCSTm7ni0+T7aNiF9+o
+ S/jv1+SuHkqZ/TVWlj7ZeTrPnAhEWc2cNahAI8Rk=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4288xtkB019942
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 8 Mar 2024 02:59:55 -0600
+Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 8
+ Mar 2024 02:59:55 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 8 Mar 2024 02:59:55 -0600
+Received: from localhost (dhruva.dhcp.ti.com [172.24.227.68])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4288xsKS121883;
+ Fri, 8 Mar 2024 02:59:55 -0600
+Date: Fri, 8 Mar 2024 14:29:54 +0530
+From: Dhruva Gole <d-gole@ti.com>
+To: Bhargav Raviprakash <bhargav.r@ltts.com>
+CC: <u-boot@lists.denx.de>, <jh80.chung@samsung.com>, <sjg@chromium.org>,
+ <m.nirmaladevi@ltts.com>, <trini@konsulko.com>, <dan.carpenter@linaro.org>
+Subject: Re: [PATCH v2 2/5] power: pmic: tps65941: Add TI TPS65224 PMIC
+Message-ID: <20240308085954.bcefjtpk3eqr5wj5@dhruva>
+References: <20240306133947.160354-1-bhargav.r@ltts.com>
+ <20240306133947.160354-3-bhargav.r@ltts.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] phy: rockchip-inno-usb2: Write to correct GRF
-Content-Language: en-US
-To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Eugen Hristev <eugen.hristev@collabora.com>,
- Frank Wang <frank.wang@rock-chips.com>,
- Xavier Drudis Ferran <xdrudis@tinet.cat>
-Cc: u-boot@lists.denx.de
-References: <20240225221024.1974853-1-jonas@kwiboo.se>
- <20240225221024.1974853-2-jonas@kwiboo.se>
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240225221024.1974853-2-jonas@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGRkdH1ZCHkIeSEoeTxkdTE5VEwETFh
- oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk5MSUpJVUpLS1VKQl
- kG
-X-HM-Tid: 0a8e1d3d125303a9kunmebce0900316
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Nhw6Shw6PzMKFj4wSSg0CCwu
- TzkaFCpVSlVKTEtCQ0NMTklOQkpCVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFNTUpKNwY+
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20240306133947.160354-3-bhargav.r@ltts.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,143 +79,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-On 2024/2/26 06:10, Jonas Karlman wrote:
-> On RK3399 the USB2PHY regs are located in the common GRF, remaining SoCs
-> that is supported by this driver have the USB2PHY regs in a different
-> GRF.
->
-> When support for RK356x, RK3588 and RK3328 was added this driver was
-> never updated to use correct GRF and have instead incorrectly written
-> to wrong GRF for these SoCs.
->
-> The default reset values for the USB2PHY have made USB mostly working
-> even when wrong GRF was used, however, following have been observed:
->
->    scanning bus usb@fd840000 for devices...
->    ERROR:  USB-error: DEVICENOTRESPONDING: Device did not respond to token (IN) or did
->    not provide a handshake (OUT) (5)
->    ERROR: USB-error: DEVICENOTRESPONDING: Device did not respond to token (IN) or did
->    not provide a handshake (OUT) (5)
->    unable to get device descriptor (error=-1)
->
-> Fix this by using a regmap from rockchip,usbgrf prop and fall back to
-> getting a regmap for parent udevice instead of always getting the
-> common GRF.
->
-> Also protect against accidental clear of bit 0 in a reg with offset 0,
-> only bind driver to enabled otg/host-ports and remove unused headers.
->
-> Fixes: 3da15f0b49a2 ("phy: rockchip-inno-usb2: Add USB2 PHY for rk3568")
-> Fixes: cdf9010f6e17 ("phy: rockchip-inno-usb2: add initial support for rk3588 PHY")
-> Fixes: 9aa93d84038b ("phy: rockchip-inno-usb2: Add USB2 PHY for RK3328")
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
-
-Thanks,
-- Kever
+On Mar 06, 2024 at 19:09:44 +0530, Bhargav Raviprakash wrote:
+> Adds compatible and data field values of TPS65224 driver in
+> TPS65941 PMIC driver.
+> 
+> Signed-off-by: Bhargav Raviprakash <bhargav.r@ltts.com>
 > ---
->   drivers/phy/rockchip/phy-rockchip-inno-usb2.c | 41 ++++++++++---------
->   1 file changed, 22 insertions(+), 19 deletions(-)
->
-> diff --git a/drivers/phy/rockchip/phy-rockchip-inno-usb2.c b/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
-> index 70e61eccb79a..7317128d135e 100644
-> --- a/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
-> +++ b/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
-> @@ -6,23 +6,16 @@
->    * Copyright (C) 2020 Amarula Solutions(India)
->    */
->   
-> -#include <common.h>
->   #include <clk-uclass.h>
->   #include <dm.h>
-> -#include <asm/global_data.h>
->   #include <dm/device_compat.h>
->   #include <dm/device-internal.h>
->   #include <dm/lists.h>
->   #include <generic-phy.h>
-> -#include <reset.h>
-> +#include <regmap.h>
->   #include <syscon.h>
-> -#include <asm/gpio.h>
-> -#include <asm/io.h>
-> -#include <linux/iopoll.h>
->   #include <asm/arch-rockchip/clock.h>
->   
-> -DECLARE_GLOBAL_DATA_PTR;
-> -
->   #define usleep_range(a, b) udelay((b))
->   #define BIT_WRITEABLE_SHIFT	16
->   
-> @@ -61,30 +54,39 @@ struct rockchip_usb2phy_cfg {
->   };
->   
->   struct rockchip_usb2phy {
-> -	void *reg_base;
-> +	struct regmap *reg_base;
->   	struct clk phyclk;
->   	const struct rockchip_usb2phy_cfg *phy_cfg;
->   };
->   
-> -static inline int property_enable(void *reg_base,
-> +static inline int property_enable(struct regmap *base,
->   				  const struct usb2phy_reg *reg, bool en)
->   {
->   	unsigned int val, mask, tmp;
->   
-> +	if (!reg->offset && !reg->enable && !reg->disable)
-> +		return 0;
-> +
->   	tmp = en ? reg->enable : reg->disable;
->   	mask = GENMASK(reg->bitend, reg->bitstart);
->   	val = (tmp << reg->bitstart) | (mask << BIT_WRITEABLE_SHIFT);
->   
-> -	return writel(val, reg_base + reg->offset);
-> +	return regmap_write(base, reg->offset, val);
->   }
->   
-> -static inline bool property_enabled(void *reg_base,
-> +static inline bool property_enabled(struct regmap *base,
->   				    const struct usb2phy_reg *reg)
->   {
-> +	int ret;
->   	unsigned int tmp, orig;
->   	unsigned int mask = GENMASK(reg->bitend, reg->bitstart);
->   
-> -	orig = readl(reg_base + reg->offset);
-> +	if (!reg->offset && !reg->enable && !reg->disable)
-> +		return false;
-> +
-> +	ret = regmap_read(base, reg->offset, &orig);
-> +	if (ret)
-> +		return false;
->   
->   	tmp = (orig & mask) >> reg->bitstart;
->   	return tmp != reg->disable;
-> @@ -248,7 +250,11 @@ static int rockchip_usb2phy_probe(struct udevice *dev)
->   	unsigned int reg;
->   	int index, ret;
->   
-> -	priv->reg_base = syscon_get_first_range(ROCKCHIP_SYSCON_GRF);
-> +	if (dev_read_bool(dev, "rockchip,usbgrf"))
-> +		priv->reg_base =
-> +			syscon_regmap_lookup_by_phandle(dev, "rockchip,usbgrf");
-> +	else
-> +		priv->reg_base = syscon_get_regmap(dev_get_parent(dev));
->   	if (IS_ERR(priv->reg_base))
->   		return PTR_ERR(priv->reg_base);
->   
-> @@ -305,11 +311,8 @@ static int rockchip_usb2phy_bind(struct udevice *dev)
->   	int ret = 0;
->   
->   	dev_for_each_subnode(node, dev) {
-> -		if (!ofnode_valid(node)) {
-> -			dev_info(dev, "subnode %s not found\n", dev->name);
-> -			ret = -ENXIO;
-> -			goto bind_fail;
-> -		}
-> +		if (!ofnode_is_enabled(node))
-> +			continue;
->   
->   		name = ofnode_get_name(node);
->   		dev_dbg(dev, "subnode %s\n", name);
+>  drivers/power/pmic/tps65941.c | 1 +
+>  1 file changed, 1 insertion(+)
+> 
+> diff --git a/drivers/power/pmic/tps65941.c b/drivers/power/pmic/tps65941.c
+> index 727b42747a..ef63eb733a 100644
+> --- a/drivers/power/pmic/tps65941.c
+> +++ b/drivers/power/pmic/tps65941.c
+> @@ -75,6 +75,7 @@ static const struct udevice_id tps65941_ids[] = {
+>  	{ .compatible = "ti,tps659412", .data = TPS659411 },
+>  	{ .compatible = "ti,tps659413", .data = TPS659413 },
+>  	{ .compatible = "ti,lp876441",  .data =  LP876441 },
+> +	{ .compatible = "ti,tps65224",  .data =  TPS65224 },
+
+Reviewed-by: Dhruva Gole <d-gole@ti.com>
+
+-- 
+Best regards,
+Dhruva Gole <d-gole@ti.com>
