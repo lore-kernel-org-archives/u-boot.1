@@ -4,56 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03A25C5475B
-	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 14:30:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E7AAC5475B
+	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 14:30:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 748B488019;
+	by phobos.denx.de (Postfix) with ESMTP id E057B88075;
 	Fri,  8 Mar 2024 15:30:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1709908214;
-	bh=9eOOH/Fk4XbFgkFQNo0HWUmox4M/hrWvk1gGaucOmao=;
+	bh=x1XBmFPdQxPcKFZhHI9/4LugzScPOkccyfBcqvQKj4U=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=qACAKwUrr/3mMH7jFvkN7G9l3D2HoWFWztuu0caGd8Vg5sfV+1i5IKB1d1HvK3UgW
-	 xuSsFNXaDX26ZmDUu8zd1yOkQNprx3nlEh3v2FFrXOjUpkCC5UDrVIYK6zmVK0tjai
-	 OY22eqa0mESq/bm2OxZ2pg+LgVwzziPjwXSX8coxmsSTgHn5j3HZRf5QUuQK4uA1Tw
-	 wGIkErpt6mSvnbU8cr+iPoJzy0YSJvGhAvr8kirWaMGvEN7KkWc14i0RBoBoX7exsl
-	 Sa5sBceNvTkVQy9VLx5yd9GQftrg8xvqWgczwmVs38PjBq7FSEwDDhWxzgKKj6zbCq
-	 0/7sddIm0uYTA==
+	b=GDYtFnkV3v1lKDvsc5zkF+P+4RvQUbiEkCB9REXjuGODWuTY0SGkD8YKjNskQFu3x
+	 9psuGRszOEJwPzsId5jwZedoC+/b9guYcG9/fpWoEB3akLr1Q6pumghgBB4Afa5gNt
+	 kaaJpSha//kF/0a6fU6CXx3Ir8JfW9H8v4blUEhVfyy6hIc92ijuOu/EJKi39MN7xX
+	 AA65M66NEaRcj0tLKtb/5twrxPiry2saxQrLPDVzbHiUQEQ1i201FuQJj1zPWBpNTM
+	 b1f7sY0YgRBnXS1NAXfJ+paCKmZ0OkIHKn39sjittPzYWSai48YDCUFGuC0/eFb2ff
+	 6UC6xB2K/7dpg==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id E53E987C94;
- Fri,  8 Mar 2024 15:30:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id 820DE87EED;
+ Fri,  8 Mar 2024 15:30:13 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
  s=phobos-20191101; t=1709908213;
- bh=9eOOH/Fk4XbFgkFQNo0HWUmox4M/hrWvk1gGaucOmao=;
+ bh=x1XBmFPdQxPcKFZhHI9/4LugzScPOkccyfBcqvQKj4U=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=w6mwj8wYKbaJC14UmTkO7tEBFDZbuCLI4wkLsqihm4JZp1lb1IsfF4gOEpahsIjRu
- 1CtzMJNR751tBY1cExYPbpGDY9V3JsqVRFQEVse65yXFwcj8et7nY2AfvYiVqewr5+
- rD3dSz4nntiBMCsF6Uu/X3nPeVAGPwUpMOEQSTAqbFmb12vQKG3H1sIqQ6LW/CxuOj
- K+Y/8J/2CSnq7QUuuf1ZnoZx/8XFlKWVMsEiJN5mdAE3ZKfVZPsGWgygzZkRP+ZU+P
- XqxrGfvUx1lzZ/8EJ6M6H2aF5/EOsqVE3emJgNKu1NGNeCD51HVAiD59jaakHx5dSF
- wE/K87aoc1slg==
-Message-ID: <22276045-8179-4544-8921-698166994bdc@denx.de>
-Date: Fri, 8 Mar 2024 15:02:17 +0100
+ b=MvzCa6Rw6vHW9J5tEn1MUv7fWdi7azxIJu/rni4OTd0h86B9OX7tfn988PrclVZv0
+ gYKjLFpWf0vY+imnDczZZYEhZ7kYRIL/HZOE1Lj3Wse7CDtMl6kY9NfwWZokf6bxHC
+ kzF4es7CQJg5KA1EQN2YOUf8oSkshRMRTbAvbXUxty6PmaFqq5qtLS8fxEIObI96CZ
+ 3sibgql/vUq2RCUFcY9NuP4UrVW69clEMIDmjGstYBAm6nwQecyYtEdZcwr6kuG6nG
+ Xwb9U9CZJP+N93Jy5g6xY76pytW78+Dp7+JtsUSX+aHg2ETjGYNx1uXX8UR2Sp6XAN
+ gdd+WgXzaW4BA==
+Message-ID: <91fcb5d9-d38b-40f8-bb66-d4f7e8b1a697@denx.de>
+Date: Fri, 8 Mar 2024 15:02:25 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] ARM: dts: stm32: Fix partition node name for
- stm32mp15xx-dhcor-u-boot
+Subject: Re: [PATCH 3/3] ARM: dts: stm32: Fix partition node name for
+ stm32mp15xx-dhcom-u-boot
+Content-Language: en-US
 To: Patrice Chotard <patrice.chotard@foss.st.com>, u-boot@lists.denx.de
 Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Tom Rini <trini@konsulko.com>
+ Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com
 References: <20240308135009.2621719-1-patrice.chotard@foss.st.com>
- <20240308135009.2621719-2-patrice.chotard@foss.st.com>
-Content-Language: en-US
+ <20240308135009.2621719-3-patrice.chotard@foss.st.com>
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240308135009.2621719-2-patrice.chotard@foss.st.com>
+In-Reply-To: <20240308135009.2621719-3-patrice.chotard@foss.st.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -75,8 +75,8 @@ X-Virus-Status: Clean
 On 3/8/24 2:50 PM, Patrice Chotard wrote:
 > Fix flash@0 partition node name with correct offset.
 > 
-> Fixes: 90f992e6a58c ("arm: dts: stm32: Add partitions in flash0 and nand node for
-> stm32mp15xx-dhcom/dhcor")
+> Fixes: 90f992e6a58c ("arm: dts: stm32: Add partitions in flash0 and nand
+> node for stm32mp15xx-dhcom/dhcor")
 > 
 > Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
