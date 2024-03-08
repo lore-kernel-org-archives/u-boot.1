@@ -4,62 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8D9FC5475B
-	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 09:23:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C950C54E4A
+	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 09:25:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CCC6687ECA;
-	Fri,  8 Mar 2024 10:23:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C44E988072;
+	Fri,  8 Mar 2024 10:25:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="McFl9U70";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="dFHMvUmI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EB42E87FCC; Fri,  8 Mar 2024 10:23:10 +0100 (CET)
-Received: from mail-m15599.qiye.163.com (mail-m15599.qiye.163.com
- [101.71.155.99])
+ id 06FCC88055; Fri,  8 Mar 2024 10:25:53 +0100 (CET)
+Received: from mail-m121142.qiye.163.com (mail-m121142.qiye.163.com
+ [115.236.121.142])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B4CB87E87
- for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 10:23:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B15DC87FE3
+ for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 10:25:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=McFl9U706R9Ov/k6LJghy8PVvHdoyHA3Ji6eeOF3uVZFrrC7ZbvvmfA3nNVVlxZl4yn7HpBimbtRE9YL7U/YxYQO718xDP6piv4mZEswh+FX/rQXqNhrwxrmM2pJn8i15O+Tx1g3XL9XPwdRC/kmMyac/D26tdNXBXchFQTXyT4=;
+ b=dFHMvUmIJI7CsuN3SjDtmEkgync8x54qmvsDAoLl5S4d9g+TOmyjoKLGt5yPzTfB9L8TKfCS4kk9LFU/FIW1kwJZTXXH7JnsGg7uDZlYCzgv4Aj7fh4Jt7i3QAxAmR/q4iOQJ9iOVdKODO54bwOnqugIpfPv3euI5dz2gE8tZkE=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=gEC1GgSI02jcgydYXKGBT+nQNzk0UXwZwgAquHXWXkA=;
+ bh=2TqRLFHfpJFefnQILnIiCwXFZoNbABXXiccSQNa1Sbo=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.77] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id E00A690032A;
- Fri,  8 Mar 2024 17:22:57 +0800 (CST)
-Message-ID: <f1f0abb8-7786-4c56-8e55-772a59bbab82@rock-chips.com>
-Date: Fri, 8 Mar 2024 17:22:57 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTPA id 87A0290032A;
+ Fri,  8 Mar 2024 17:25:32 +0800 (CST)
+Message-ID: <42c92843-9121-4724-a5f8-b3d1b25933bc@rock-chips.com>
+Date: Fri, 8 Mar 2024 17:25:32 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/4] rockchip: Update the default USB Product ID value
+Subject: Re: [PATCH 2/4] rockchip: board: Prepare for use of DM_USB_GADGET
+ with DWC2_OTG
 Content-Language: en-US
 To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
 References: <20240226230822.2430391-1-jonas@kwiboo.se>
- <20240226230822.2430391-2-jonas@kwiboo.se>
+ <20240226230822.2430391-3-jonas@kwiboo.se>
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240226230822.2430391-2-jonas@kwiboo.se>
+In-Reply-To: <20240226230822.2430391-3-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ0NISlYZQx1MSBhIGR0dSx5VEwETFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGUxITlZJHhhLQ0JLGUpNShhVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk5MSUpJVUpLS1VKQl
  kG
-X-HM-Tid: 0a8e1d5f728b03a9kunme00a690032a
+X-HM-Tid: 0a8e1d61ce2d03a9kunm87a0290032a
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Ngw6TSo6FzMOAj5PMEM*Dz4o
- TRowCy5VSlVKTEtCQ0NCTExDTU9NVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFITUhDNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PSI6KRw*NTMICj5RTjVOLzUw
+ H05PCzBVSlVKTEtCQ0NCQkhISkNOVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJQ0lNNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,64 +75,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
-
-     Thanks for your patch.
 
 On 2024/2/27 07:08, Jonas Karlman wrote:
-> RK3036 is using the USB product id normally used by RK3066B, and RK3328
-> is using the product id normally used by RK3368.
+> The board_usb_init() and board_usb_cleanup() functions is always
+> included when USB_GADGET and USB_GADGET_DWC2_OTG is enabled.
 >
-> Fix this and update the default USB_GADGET_PRODUCT_NUM Kconfig option
-> for remaining supported Rockchip SoCs to match the product id used in
-> Mask ROM mode. Also remove a reference to the unknown ROCKCHIP_RK3229
-> symbol.
-
-RK3229 belongs to RK322X which is reuse with RK3228.
-
-Note that this ID is used for rockusb gadget, if work as mass storage, 
-it should use other
-
-ID, or else it will confuse the driver in host side, eg. the Windows 
-driver may not able to
-
-recognize the device if using two different gadget type with the same ID.
-
+> Prepare for a change to use DM_USB_GADGET with DWC2_OTG by adding an
+> extra ifdef condition. The extra separate ifdef for USB_GADGET prepare
+> for next patch that adds a g_dnl_bind_fixup() function.
+>
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
->
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 > ---
->   drivers/usb/gadget/Kconfig | 15 ++++++++++++---
->   1 file changed, 12 insertions(+), 3 deletions(-)
+>   arch/arm/mach-rockchip/board.c | 4 +++-
+>   1 file changed, 3 insertions(+), 1 deletion(-)
 >
-> diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
-> index c72a8047635c..4621a6fd5e64 100644
-> --- a/drivers/usb/gadget/Kconfig
-> +++ b/drivers/usb/gadget/Kconfig
-> @@ -70,12 +70,21 @@ config USB_GADGET_PRODUCT_NUM
->   	hex "Product ID of the USB device"
->   	default 0x701a if ARCH_TEGRA
->   	default 0x1010 if ARCH_SUNXI
-> -	default 0x310a if ROCKCHIP_RK3036
-> +	default 0x110a if ROCKCHIP_RV1108
-> +	default 0x110b if ROCKCHIP_RV1126
->   	default 0x300a if ROCKCHIP_RK3066
-> +	default 0x301a if ROCKCHIP_RK3036
-> +	default 0x310b if ROCKCHIP_RK3188
->   	default 0x310c if ROCKCHIP_RK3128
-> -	default 0x320a if ROCKCHIP_RK3229 || ROCKCHIP_RK3288
-> -	default 0x330a if ROCKCHIP_RK3328
-> +	default 0x320a if ROCKCHIP_RK3288
-> +	default 0x320b if ROCKCHIP_RK322X
-> +	default 0x320c if ROCKCHIP_RK3328
-> +	default 0x330a if ROCKCHIP_RK3368
->   	default 0x330c if ROCKCHIP_RK3399
-> +	default 0x330d if ROCKCHIP_PX30
-> +	default 0x330e if ROCKCHIP_RK3308
-> +	default 0x350a if ROCKCHIP_RK3568
-> +	default 0x350b if ROCKCHIP_RK3588
->   	default 0x0
->   	help
->   	  Product ID of the USB device emulated, reported to the host device.
+> diff --git a/arch/arm/mach-rockchip/board.c b/arch/arm/mach-rockchip/board.c
+> index dea5805c4665..f84ff542aea9 100644
+> --- a/arch/arm/mach-rockchip/board.c
+> +++ b/arch/arm/mach-rockchip/board.c
+> @@ -220,7 +220,8 @@ void enable_caches(void)
+>   }
+>   #endif
+>   
+> -#if defined(CONFIG_USB_GADGET) && defined(CONFIG_USB_GADGET_DWC2_OTG)
+> +#if IS_ENABLED(CONFIG_USB_GADGET)
+> +#if IS_ENABLED(CONFIG_USB_GADGET_DWC2_OTG) && !IS_ENABLED(CONFIG_DM_USB_GADGET)
+>   #include <usb.h>
+>   #include <linux/usb/otg.h>
+>   #include <usb/dwc2_udc.h>
+> @@ -296,6 +297,7 @@ int board_usb_cleanup(int index, enum usb_init_type init)
+>   	return 0;
+>   }
+>   #endif /* CONFIG_USB_GADGET_DWC2_OTG */
+> +#endif /* CONFIG_USB_GADGET */
+>   
+>   #if IS_ENABLED(CONFIG_FASTBOOT)
+>   int fastboot_set_reboot_flag(enum fastboot_reboot_reason reason)
