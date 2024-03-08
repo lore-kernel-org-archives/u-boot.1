@@ -4,92 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6309C54798
-	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 02:37:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB709C54E49
+	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 02:50:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 28C9F87B7C;
-	Fri,  8 Mar 2024 03:37:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 546DD87DC4;
+	Fri,  8 Mar 2024 03:50:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="eYLA7keD";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="G1i96ipN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9DF5B87B77; Fri,  8 Mar 2024 03:37:48 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id BBCF58744F; Fri,  8 Mar 2024 03:50:23 +0100 (CET)
+Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
+ [IPv6:2607:f8b0:4864:20::731])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B7D9287DCD
- for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 03:37:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A55CB8744F
+ for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 03:50:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 36B824368A
- for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 02:37:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1709865463;
- bh=6AwF/PG4JzB3XWZNUBC4ZTq6FGhFvw/q3du12B6J1GY=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=eYLA7keD765wJgHVIQiLRl7mZHvEDjX6Vx3xKsQDOlK9rVjXE8mYtDzt9kZy/LHe+
- zlnfvTW55bESsiEsLBZPv+KZrZ3wOTjGh5PDmHgeDJjNg3cdq/SICXZXq+UfpkeDgS
- CP/h1MQFgedsINKQZIg72kwsJ9BkT5LfYhgyBR4M9faHoC83nBZIUrBlebU3VKC6tz
- QT7/75WWYj46hNDgCa8xrhNx3wbl+LFI5ScQmJwwanuvFGWL6ds8MfEcx8t1KFwxyj
- qs8bYX9WtEZVK4OKTiUz3+Nzl4VXaBL9/8wyF5nU/hXu6L6LqVobB3LTaWilIWx1uK
- 24eqikjzsljbw==
-Received: by mail-wr1-f69.google.com with SMTP id
- ffacd0b85a97d-33e0edcf4f4so581976f8f.2
- for <u-boot@lists.denx.de>; Thu, 07 Mar 2024 18:37:43 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=benwolsieffer@gmail.com
+Received: by mail-qk1-x731.google.com with SMTP id
+ af79cd13be357-781753f52afso107751985a.2
+ for <u-boot@lists.denx.de>; Thu, 07 Mar 2024 18:50:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1709866216; x=1710471016; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Lv9zz2sXk6eSHO+QJ6F4OxDcgzeCleqcKAkYlVDSh38=;
+ b=G1i96ipNnF1LfEFUS2R2qtXH0w7dhjGk8MKsY35UddqDzOxyZTjKrOnnoZfGCrRd3X
+ b+1+pBH8sCK738d+uxD8GXF5Ku1JYYYe10yZnrlKFRfd778D9vQUSYURYx3zmitQllr5
+ PY/NwcO9ZQ8eJF9h3rqNxtENa0p8lKt5bI7qlS0LGCuUQmxbbeswo4sTx8aTucYhp+Ap
+ WclDd5febCTk8zxWIfkNvn6/Nzn+rpEmJJm0sZCjyl5FQqJlQmLmodbW0/vmnEHRXXZy
+ wHi2Tywt9mYPIKyVjLWQJTR1xIuypiJPRTaSv2sFSotB0jS5ZdJqXZKNHSrm9TmSNUsF
+ /pWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709865462; x=1710470262;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=6AwF/PG4JzB3XWZNUBC4ZTq6FGhFvw/q3du12B6J1GY=;
- b=DnmRgrdsRCdD87V2K+Mq2+QPf4FYXv0Sqbf4HK0J735D22P6xw9gw+eDIeIel2FzRa
- D1qa01jOMIkTf8zF2wgHEozjMdImz66XjGkeX1GCGkxmFSRC4hjG1CVvm0cXVm/BQZLE
- kylW/iAIUZ8n5IDjFxiiryegKz4CHxIVrjYv2X+2hREacDtAy/6XGuxb+/U85COAYpEK
- +oF2Wf2v+81TJ6oXDExHEBmvhuj9QStsn2lfIgWx96yAnM9lJF55ExiHNRpcN6/GkWoc
- bIY3OZAYCy8BonT7v80AVafqcyQCLQbtwUBOatG2QU79dzrzN2XXQFbPVg9+u/h+Rba0
- RmLA==
-X-Gm-Message-State: AOJu0Yw095PYBfqsOY5CRydNa+ogYUkkfKg7Mu+37yEiTD3fnZZbWOVV
- 5M6EyS8Z/RvAku054ViVMXwPQN0Z1GvsaUv/TtOF3g5AlufLrGE8RYpCVy2V8ie/BXEF3S1qYFN
- WEMW9Y2QaIqtTe8si4loFEuVE2OERL4j90v5ErDm7Adlz7rwRoWMEHIDOxcZH4wDtwhw=
-X-Received: by 2002:a05:600c:470e:b0:412:bcc1:44cc with SMTP id
- v14-20020a05600c470e00b00412bcc144ccmr15189660wmo.3.1709865462573; 
- Thu, 07 Mar 2024 18:37:42 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IF27B63Bvz4D1B5OFJK2tHwi6tTxLAMrbVAFqX3cgiQ5pRoF6djzBdyPthv1VPqNCt+4r7whg==
-X-Received: by 2002:a05:600c:470e:b0:412:bcc1:44cc with SMTP id
- v14-20020a05600c470e00b00412bcc144ccmr15189649wmo.3.1709865462156; 
- Thu, 07 Mar 2024 18:37:42 -0800 (PST)
-Received: from ?IPV6:2a00:20:9:393f:4294:78eb:608e:9569?
- ([2a00:20:9:393f:4294:78eb:608e:9569])
+ d=1e100.net; s=20230601; t=1709866216; x=1710471016;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Lv9zz2sXk6eSHO+QJ6F4OxDcgzeCleqcKAkYlVDSh38=;
+ b=uP9/022WYmXsOBt5pd/6RsiRQZXmKSzS0As8Z2VE7NV9s0g3bpm637sbVCexfFLZhy
+ y5aqjjIYHG3jtcDUTd4pWGTaxEKbluZOhQhyQdJQ1e8KFb5Yvaha1NzFHR1pVOANE0FU
+ xjxugCtL/QY6J/fe2QXoMTr94XrQ/A0XyuoV//Rhb273CTgLXkbV4on8svzFKfjSbvNL
+ Dy9231y4iAbh0dZlOnEptBi3ywLlIc0o2DZABbYb27+iuxU7uvZdYuV92DRALdiiR2IF
+ ftm6N328ehuuXbDWlY4jJqR1dQFXU06gpmmMngJ5O8AoQRUgy5Ldkl+FDGFEpe3FHna6
+ d1FA==
+X-Gm-Message-State: AOJu0YxhG/prYKAtto+jdp9O5OA3oxXT69lY2Yzkr03I5Y9XntiPS6b8
+ 1ue0e8HC+tIym6hDjwHIZgVAC/lZfr4Afe6XdEKY3yZbL4zFG2oX
+X-Google-Smtp-Source: AGHT+IHXN9Ett9ojOGqH/WdcGgU7ra9iwV+AH1Q/1/nx7OEZXv0Xx9Lz7sSciGXHdTDnETFWwfBWqw==
+X-Received: by 2002:a05:620a:4047:b0:788:438b:46a8 with SMTP id
+ i7-20020a05620a404700b00788438b46a8mr7306004qko.68.1709866216285; 
+ Thu, 07 Mar 2024 18:50:16 -0800 (PST)
+Received: from Dell-Inspiron-15 ([2601:18c:8002:3d40:7920:e10c:26cf:ff86])
  by smtp.gmail.com with ESMTPSA id
- c6-20020a05600c0a4600b00412f2136793sm4544131wmq.44.2024.03.07.18.37.41
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 07 Mar 2024 18:37:41 -0800 (PST)
-Message-ID: <937b1f61-7412-4609-b9a5-549d7fd6a950@canonical.com>
-Date: Fri, 8 Mar 2024 03:37:39 +0100
+ c3-20020a05620a134300b007882bcc6c13sm4598433qkl.6.2024.03.07.18.50.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 07 Mar 2024 18:50:15 -0800 (PST)
+Date: Thu, 7 Mar 2024 21:50:13 -0500
+From: Ben Wolsieffer <benwolsieffer@gmail.com>
+To: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+Cc: u-boot@lists.denx.de, "Matwey V. Kornilov" <matwey.kornilov@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Klaus Goger <klaus.goger@theobroma-systems.com>,
+ Kever Yang <kever.yang@rock-chips.com>, Lin Huang <hl@rock-chips.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>
+Subject: Re: [PATCH] rockchip: load env from boot MMC device
+Message-ID: <Zep85SM2zjiJaOGF@Dell-Inspiron-15>
+References: <20240226011413.435713-2-benwolsieffer@gmail.com>
+ <22deb119-2e55-4612-bcaa-c4f2acecd13d@theobroma-systems.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC 5/5] doc: describe Milk-V Mars board
-To: E Shattow <lucent@gmail.com>
-Cc: u-boot@lists.denx.de
-References: <20240303130122.29983-1-heinrich.schuchardt@canonical.com>
- <20240303130122.29983-6-heinrich.schuchardt@canonical.com>
- <CANV2PTOCK--hOr_HbbjHcjYT40fVm5DD2GsfV3cZu2XFm7WX=Q@mail.gmail.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <CANV2PTOCK--hOr_HbbjHcjYT40fVm5DD2GsfV3cZu2XFm7WX=Q@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <22deb119-2e55-4612-bcaa-c4f2acecd13d@theobroma-systems.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,60 +96,167 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/8/24 00:20, E Shattow wrote:
+Hi Quentin,
+
+On Mon, Feb 26, 2024 at 12:26:59PM +0100, Quentin Schulz wrote:
+> Hi Ben,
 > 
-> On Sun, Mar 3, 2024 at 5:02 AM Heinrich Schuchardt 
-> <heinrich.schuchardt@canonical.com 
-> <mailto:heinrich.schuchardt@canonical.com>> wrote:
-> ...
+> On 2/26/24 02:14, Ben Wolsieffer wrote:
+> > [Some people who received this message don't often get email from benwolsieffer@gmail.com. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
+> > 
+> > Currently, if the environment is stored on an MMC device, the device
+> > number is hardcoded by CONFIG_SYS_MMC_ENV_DEV. This is problematic
+> > because many boards can choose between booting from an SD card or a
+> > removable eMMC. For example, the Rock64 defconfig sets
+> > CONFIG_SYS_MMC_ENV_DEV=1, which corresponds to the SD card. If an eMMC
+> > is used as the boot device and no SD card is installed, it is impossible
+> > to save the environment.
+> > 
+> > To avoid this problem, we can choose the environment MMC device based on
+> > the boot device. The theobroma-systems boards already contain code to do
+> > this, so this commit simply moves it to the common Rockchip board file,
+> > with some refactoring. I also removed another implementation of
+> > mmc_get_env_dev() from tinker_rk3288 that performed MMC boot device
+> > detection by reading a bootrom register.
+> > 
+> > This has been tested on a Rock64v2.
+> > 
+> > Signed-off-by: Ben Wolsieffer <benwolsieffer@gmail.com>
+> > ---
+> >   arch/arm/mach-rockchip/board.c               | 28 ++++++++++++++++++
+> >   board/rockchip/tinker_rk3288/tinker-rk3288.c | 12 --------
+> >   board/theobroma-systems/common/common.c      | 30 --------------------
+> >   3 files changed, 28 insertions(+), 42 deletions(-)
+> > 
+> > diff --git a/arch/arm/mach-rockchip/board.c b/arch/arm/mach-rockchip/board.c
+> > index 2620530e03..04db809e97 100644
+> > --- a/arch/arm/mach-rockchip/board.c
+> > +++ b/arch/arm/mach-rockchip/board.c
+> > @@ -6,6 +6,7 @@
+> >   #include <clk.h>
+> >   #include <cpu_func.h>
+> >   #include <dm.h>
+> > +#include <dm/uclass-internal.h>
+> >   #include <efi_loader.h>
+> >   #include <fastboot.h>
+> >   #include <init.h>
+> > @@ -349,3 +350,30 @@ __weak int board_rng_seed(struct abuf *buf)
+> >          return 0;
+> >   }
+> >   #endif
+> > +
+> > +int mmc_get_env_dev(void)
+> > +{
+> > +       int devnum;
+> > +       const char *boot_device;
+> > +       struct udevice *dev;
+> > +
+> > +       if (IS_ENABLED(CONFIG_SYS_MMC_ENV_DEV))
+> > +               devnum = CONFIG_SYS_MMC_ENV_DEV;
 > 
->     +The board provides the DIP switches MSEL[1:0] to select the boot
->     device out of
->     +SPI flash, eMMC, SD-card, UART. To select booting from SD-card set
->     the DIP
->     +switches MSEL[1:0] to 10.
+> This sadly will not compile if CONFIG_SYS_MMC_ENV_DEV is not defined, so you
+> need to use the #ifdef the same way we did in
+> board/theobroma-systems/common/common.c
 > 
+
+Sorry, I just blindly applied the checkpatch recommendation without
+thinking about it.
+
+> > +       else
+> > +               devnum = 0;
+> > +
+> > +       boot_device = ofnode_read_chosen_string("u-boot,spl-boot-device");
+> > +       if (!boot_device) {
+> > +               debug("%s: /chosen/u-boot,spl-boot-device not set\n", __func__);
+> > +               return devnum;
+> > +       }
 > 
-> This does not match the [Milk-V Mars vendor 
-> documentation](https://milkv.io/docs/mars/getting-started/bootloader 
-> <https://milkv.io/docs/mars/getting-started/bootloader>). Maybe you have 
-> a different board revision?
+> Note that this would mean that mmc_get_env_dev called in any context before
+> U-Boot proper is executed would result in this check failing. So this would
+> return devnum in SPL for example. We don't have environment support in SPL
+> for our Theobroma boards, so that was something I explicitly didn't have to
+> handle.
 
-Thank you for reviewing.
+Not sure what to do about this. I assume the environment is loaded
+before SPL makes a decision about the boot device, so it is impossible
+to guarantee that SPL loads the env from the same device as U-Boot
+proper with this patch.
 
-My board revision is V1.21 according to the silk screen.
+> 
+> > +
+> > +       debug("%s: booted from %s\n", __func__, boot_device);
+> > +
+> > +       if (uclass_find_device_by_ofnode(UCLASS_MMC, ofnode_path(boot_device), &dev))
+> 
+> I know I didn't add it in board/theobroma-systems/common/common.c but I
+> think it'd make sense to have a debug message here?
+> 
+> I think this may not work if mmc_get_env_dev is called before U-Boot proper
+> is relocated on e.g. RK3588 and RK356x (the former will be fixed after https://lore.kernel.org/u-boot/20240221-jaguar-v3-15-1f256a82201b@theobroma-systems.com/
+> is merged). So giving some hint at where this fails could be nice too.
+> 
+> Something like:
+> """
+> debug("%s: no U-Boot device found for %s\n", __func__, boot_device);
+> """
+> 
+> for example?
 
-The Milk-V Mars has DIP switches for the boot selection as shown in
-https://gist.github.com/xypron/e28f95b1ed6911aeb9699ba63ae1a885
+Ok, I'll add this in v2.
 
-If you look at the photo 
-https://milkv.io/assets/images/mars-icon-04-e8814f18158a0e9d4387f4fa330693f1.webp 
-in the https://milkv.io/mars page, it also shows DIP switches (in the 
-SPI-Flash position) on a rev 1.2 board.
+> 
+> > +               return devnum;
+> > +
+> > +       devnum = dev->seq_;
+> > +       debug("%s: get MMC env from mmc%d\n", __func__, devnum);
+> > +       return devnum;
+> > +}
+> > diff --git a/board/rockchip/tinker_rk3288/tinker-rk3288.c b/board/rockchip/tinker_rk3288/tinker-rk3288.c
+> > index f85209c649..eff3a00c30 100644
+> > --- a/board/rockchip/tinker_rk3288/tinker-rk3288.c
+> > +++ b/board/rockchip/tinker_rk3288/tinker-rk3288.c
+> > @@ -11,8 +11,6 @@
+> >   #include <init.h>
+> >   #include <net.h>
+> >   #include <netdev.h>
+> > -#include <asm/arch-rockchip/bootrom.h>
+> > -#include <asm/io.h>
+> > 
+> >   static int get_ethaddr_from_eeprom(u8 *addr)
+> >   {
+> > @@ -38,13 +36,3 @@ int rk3288_board_late_init(void)
+> > 
+> >          return 0;
+> >   }
+> > -
+> > -int mmc_get_env_dev(void)
+> > -{
+> > -       u32 bootdevice_brom_id = readl(BROM_BOOTSOURCE_ID_ADDR);
+> > -
+> > -       if (bootdevice_brom_id == BROM_BOOTSOURCE_EMMC)
+> > -               return 0;
+> > -
+> > -       return 1;
+> > -}
+> 
+> This could be an issue. Indeed, /chosen/u-boot,spl-boot-device doesn't
+> report the storage medium used to load TPL+SPL (as does BROM_BOOTSOURCE_ as
+> far as I know?), but rather U-Boot proper, which may be loaded from a
+> different storage medium than what was used for loading TPL+SPL. So this
+> would be a change in behavior (which could be fine, it depends on what
+> maintainers of the RK3288 TInker board would like to have). E.g. for
+> u-boot,spl-boot-order = "same-as-spl", <sd>, <emmc>; if TPL+SPL is loaded
+> from eMMC but U-Boot proper isn't found on the eMMC, it'll try to load it
+> from SD card next. In that scenario /chosen/u-boot,spl-boot-device would be
+> <sd> while the current implementation for mmc_get_env_dev would select eMMC
+> instead.
 
-Did you see a board without DIP switches being sold?
+If this behavior change is problematic, we could introduce a weak
+board_mmc_get_env_dev() function like some other vendors have to allow
+specific boards to implement custom behavior.
 
-The silk screen markings on the board and the switch don't match.
-The same confusion exists on the VisionFive2.
+> 
+> Cheers,
+> Quentin
 
-So maybe I should better write in a table:
-
-SPI-Flash:
-GPIO0=L
-GPIO1=L
-
-SD-Card:
-GPIO0=H
-GPIO1=L
-
-eMMC:
-GPIO0=L
-GPIO1=H
-
-UART:
-GPIO0=H
-GPIO1=H
-
-Best regards
-
-Heinrich
+Thanks, Ben
