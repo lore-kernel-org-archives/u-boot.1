@@ -4,80 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58B04C5475B
-	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 18:09:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38039C5475B
+	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 19:01:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 95EDC87B30;
-	Fri,  8 Mar 2024 19:09:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6E42687CFC;
+	Fri,  8 Mar 2024 20:01:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="As++e2hH";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 3008287D60; Fri,  8 Mar 2024 19:09:02 +0100 (CET)
-Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
- [IPv6:2001:4860:4864:20::36])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1709924472;
+	bh=GFYlECK+9iDqOulM0R1zngCmcHgR4Xxc2fqfqIFNpW8=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=YtfFcC6X0KlNmGwvF33fpujgbs5fyBtbxadlhm/gDrV68OLF+iqBsMw0zKa6msUdP
+	 OR9/8U82Yt9Zoukdnwvzod2CUbC5AFTwNhjdgnPK6BTe6VXMqEEK3ES4WcKCgB1T7Z
+	 rgaYyA1S6JVy1KuwnC9NXCr9chQWxDeyafe6F3nlGYlzS34oV7dj4izFj5Ui6LhbxW
+	 6GWxAa23VQxgo0P/OKTs5hxdjLsPnvQcwZcEHDMWXpUWNQtlwGes9aR4RZk0cT7eaJ
+	 8+LyBE9UFk36sh13Aqt3ghsLBUGFOYREhaZK4vpSNUNmm+eai6iVPxZO7NncfOUTjj
+	 cHkrldJ0gG0RQ==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A6E08723E
- for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 19:08:59 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oa1-x36.google.com with SMTP id
- 586e51a60fabf-2206232d806so562072fac.2
- for <u-boot@lists.denx.de>; Fri, 08 Mar 2024 10:08:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709921338; x=1710526138; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=E6/U7rgkAIzecWasapkeyiG76U5BZ9rpOTeRXS5KUKI=;
- b=As++e2hHS8c3MaUlyO6X9lzGZjxDwka55RvHsu9IZF2dYhoDpK34B4r2zY1LZca6pe
- wFzdl4KmLbUjwCdf6Bcu+O74RbvdArQah7B/wmn+uKVjAVEYj0EXAAh9X1dGbKjLeY0y
- 54xTpq6CwQN70PDu19e8GADKjl2iVElvpZHJQm3IlGILCxqmZDbLB9y/eTYs0gSAUygD
- PNpMnT+CIvSZcI+GSydxFRvUUcEvzoaZ8rgqV8mq8VSRO3zFDPal/QUKj+quXPI1KuFN
- t2hvDlnIJ41z1f5nAPyDP3/IO9/rLJIaDvmgVpUHptjhFUcDGPjOI3vGybDxf1fWsMxp
- 91RQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709921338; x=1710526138;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=E6/U7rgkAIzecWasapkeyiG76U5BZ9rpOTeRXS5KUKI=;
- b=uoEHHbpPWssDR7lEsS0Vx/F5waIpTXK4Dx/6IGv5pzlcN5qtvZjQgO9S1Zq/Tc0u7x
- 0fz1zcC3e33MtCts48cbAIYgqYgvuTSrQYek1+XIi09WZpUW8ISUvfUT8vYixCu2ozL1
- bmcevh1YqRpcI/CFLWMj3YPP5JRwFxd3sffbiC50bhRDA/0U+SEDJrhZ+ZyoulpW7q71
- /UTroWlHkc9sI/GcGlgH9LQ0zeZ5ZUkcLavwZXAfXeb/JcIH98K4DFSDutQ9HPJ10G++
- IAGRRQ2yCZQN1tHPjOOfQk96h27bAtlLJgh9WWWM5bRe1DqTgQxKeYv6IJu8x2Ngi1v6
- tzKw==
-X-Gm-Message-State: AOJu0YzGndzhqjrlNwK2044CCzHj673QCCS1wh82aFPeFEpp6/yD4o5a
- 5EH6bw/kt5T8X2Rrbhso/nst53WgmlksynlttL0MO53EYqTcM2cyDa8alGISyNwyY80Mq/XCcII
- DJqvxsWQyTWY0SHtcQEcVqjcy4VvUxff5sRaZRg==
-X-Google-Smtp-Source: AGHT+IHXMNBbcqAJfeQFPSishcu6+hISk8BzL53ERFIhFNCbf2S+W2xdv3WmX4ev0ebnqmFjJ/NJOHTHpr38hJmaJnM=
-X-Received: by 2002:a05:6870:a456:b0:21f:c7fa:78f5 with SMTP id
- n22-20020a056870a45600b0021fc7fa78f5mr2970120oal.7.1709921338249; Fri, 08 Mar
- 2024 10:08:58 -0800 (PST)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 6027287CED;
+ Fri,  8 Mar 2024 20:01:10 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1709924471;
+ bh=GFYlECK+9iDqOulM0R1zngCmcHgR4Xxc2fqfqIFNpW8=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=DUK+EAhWCgVlIRKSbfQR8E10QteWHqdT2wbSjx7n+Pdm3BkGRt8dEVouKm4mo5VyV
+ fEwBjTv9lb5GnqFvLn/tONhHisV5j4wFfDtkp7179M0y6yC/oe6rvuyHVYc7b4WNAR
+ fWb4Wic4wxNSkQoLEcuiX0cgjhnrtDTKSDwH98qiC9ZUBaUXCBjdlz0aVRKzuHIF4y
+ E21/BKQJSGADtNQ8ZE7L6FPySUflWQYcF6l3vAB54zcDFWj54xV68APEMwq5xhYujY
+ QOHGaBWvoZWNQCO1Utf7JKnP/8rRkQbVfiKP7YrUeEUK/FI/v9w7bJ/fwMHImZltKE
+ o+PVkHR4Mdh1Q==
+Message-ID: <c0cbfa06-9206-4ca6-ad51-ad7b0e54cf1c@denx.de>
+Date: Fri, 8 Mar 2024 19:46:01 +0100
 MIME-Version: 1.0
-References: <20240304174454.1484507-1-igor.opaniuk@gmail.com>
- <20240304174454.1484507-7-igor.opaniuk@gmail.com>
-In-Reply-To: <20240304174454.1484507-7-igor.opaniuk@gmail.com>
-From: Sam Protsenko <semen.protsenko@linaro.org>
-Date: Fri, 8 Mar 2024 12:08:47 -0600
-Message-ID: <CAPLW+4nTwh7e3UMPOZ4nTSqBrADxsHjQAshVhP+Za9WNauaVXg@mail.gmail.com>
-Subject: Re: [PATCH v3 6/6] tee: remove common.h inclusion
-To: Igor Opaniuk <igor.opaniuk@gmail.com>
-Cc: u-boot@lists.denx.de, Etienne Carriere <etienne.carriere@foss.st.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jens Wiklander <jens.wiklander@linaro.org>,
- Jorge Ramirez-Ortiz <jorge@foundries.io>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/2] arm: socfpga: arria10: add option to reprogram the
+ FPGA every reboot
+To: =?UTF-8?B?TWljaGHFgiBCYXJuYcWb?= <barnas@google.com>, u-boot@lists.denx.de
+Cc: Dinh Nguyen <dinguyen@kernel.org>, Simon Glass <sjg@chromium.org>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tien Fong Chee <tien.fong.chee@intel.com>, Tom Rini <trini@konsulko.com>
+References: <6a69588a-7c50-425a-af7f-96caff727113@kernel.org>
+ <20240308171251.106144-1-barnas@google.com>
+ <20240308171251.106144-2-barnas@google.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20240308171251.106144-2-barnas@google.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,130 +73,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Mar 4, 2024 at 11:46=E2=80=AFAM Igor Opaniuk <igor.opaniuk@gmail.co=
-m> wrote:
->
-> The usage of the common.h include file is deprecated [1], and has already
-> been removed from several files.
-> Get rid of all inclusions in the "drivers/tee" directory, and replace it
-> with required include files directly where needed.
->
-> [1] doc/develop/codingstyle.rst
->
-> Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
+On 3/8/24 6:12 PM, Michał Barnaś wrote:
+> Add Kconfig that enables FPGA reprogramming with warm boot on Arria 10.
+> This option allows to change the bitstream on the filesystem and apply
+> changes with warm reboot without the need for a power cycle.
+> 
+> Signed-off-by: Michał Barnaś <barnas@google.com>
 > ---
-
-Reviewed-by: Sam Protsenko <semen.protsenko@linaro.org>
-
->
+> 
 > Changes in v2:
-> - Fixed chimp_optee.c:37:9: error: implicit declaration of function 'mems=
-et'
->
->  drivers/tee/broadcom/chimp_optee.c | 3 ++-
->  drivers/tee/optee/core.c           | 1 -
->  drivers/tee/optee/i2c.c            | 1 -
->  drivers/tee/optee/rpmb.c           | 1 -
->  drivers/tee/optee/supplicant.c     | 2 +-
->  drivers/tee/sandbox.c              | 2 +-
->  drivers/tee/tee-uclass.c           | 1 -
->  7 files changed, 4 insertions(+), 7 deletions(-)
->
-> diff --git a/drivers/tee/broadcom/chimp_optee.c b/drivers/tee/broadcom/ch=
-imp_optee.c
-> index 37f9b094f76..bd146ef2899 100644
-> --- a/drivers/tee/broadcom/chimp_optee.c
-> +++ b/drivers/tee/broadcom/chimp_optee.c
-> @@ -3,9 +3,10 @@
->   * Copyright 2020 Broadcom.
->   */
->
-> -#include <common.h>
->  #include <tee.h>
->  #include <broadcom/chimp.h>
-> +#include <linux/errno.h>
-> +#include <string.h>
->
->  #ifdef CONFIG_CHIMP_OPTEE
->
-> diff --git a/drivers/tee/optee/core.c b/drivers/tee/optee/core.c
-> index 47f845cffe3..5fc0505c788 100644
-> --- a/drivers/tee/optee/core.c
-> +++ b/drivers/tee/optee/core.c
-> @@ -3,7 +3,6 @@
->   * Copyright (c) 2018-2020 Linaro Limited
->   */
->
-> -#include <common.h>
->  #include <cpu_func.h>
->  #include <dm.h>
->  #include <dm/device_compat.h>
-> diff --git a/drivers/tee/optee/i2c.c b/drivers/tee/optee/i2c.c
-> index ef4e10f9912..e3fb99897c5 100644
-> --- a/drivers/tee/optee/i2c.c
-> +++ b/drivers/tee/optee/i2c.c
-> @@ -3,7 +3,6 @@
->   * Copyright (c) 2020 Foundries.io Ltd
->   */
->
-> -#include <common.h>
->  #include <dm.h>
->  #include <i2c.h>
->  #include <tee.h>
-> diff --git a/drivers/tee/optee/rpmb.c b/drivers/tee/optee/rpmb.c
-> index 5bc13757ea8..bacced6af6c 100644
-> --- a/drivers/tee/optee/rpmb.c
-> +++ b/drivers/tee/optee/rpmb.c
-> @@ -3,7 +3,6 @@
->   * Copyright (c) 2018 Linaro Limited
->   */
->
-> -#include <common.h>
->  #include <dm.h>
->  #include <log.h>
->  #include <tee.h>
-> diff --git a/drivers/tee/optee/supplicant.c b/drivers/tee/optee/supplican=
-t.c
-> index f9dd874b594..8a426f53ba8 100644
-> --- a/drivers/tee/optee/supplicant.c
-> +++ b/drivers/tee/optee/supplicant.c
-> @@ -3,10 +3,10 @@
->   * Copyright (c) 2018, Linaro Limited
->   */
->
-> -#include <common.h>
->  #include <log.h>
->  #include <malloc.h>
->  #include <tee.h>
-> +#include <linux/errno.h>
->  #include <linux/types.h>
->
->  #include "optee_msg.h"
-> diff --git a/drivers/tee/sandbox.c b/drivers/tee/sandbox.c
-> index ec66401878c..8ad7c09efdd 100644
-> --- a/drivers/tee/sandbox.c
-> +++ b/drivers/tee/sandbox.c
-> @@ -2,7 +2,7 @@
->  /*
->   * Copyright (C) 2018 Linaro Limited
->   */
-> -#include <common.h>
+> - Rebase on current master branch
+> 
+>   arch/arm/mach-socfpga/Kconfig   | 8 ++++++++
+>   arch/arm/mach-socfpga/spl_a10.c | 8 ++++++++
+>   2 files changed, 16 insertions(+)
+> 
+> diff --git a/arch/arm/mach-socfpga/Kconfig b/arch/arm/mach-socfpga/Kconfig
+> index 114d243812..89303f1f16 100644
+> --- a/arch/arm/mach-socfpga/Kconfig
+> +++ b/arch/arm/mach-socfpga/Kconfig
+> @@ -80,6 +80,14 @@ config TARGET_SOCFPGA_ARRIA10
+>   	imply FPGA_SOCFPGA
+>   	imply SPL_USE_TINY_PRINTF
+>   
+> +config TARGET_SOCFPGA_ARRIA10_ALWAYS_REPROGRAM
+
+This is not TARGET (as in SoC), but a regular config option, so please 
+drop the TARGET_ prefix .
+
+> +	bool "Always reprogram Arria 10 FPGA"
+> +	depends on TARGET_SOCFPGA_ARRIA10
+> +	help
+> +	  Arria 10 FPGA is only programmed during the cold boot.
+> +	  This option forces the FPGA to be reprogrammed every reboot,
+> +	  allowing to change the bitstream and apply it with warm reboot.
 > +
->  #include <dm.h>
->  #include <sandboxtee.h>
->  #include <tee.h>
-> diff --git a/drivers/tee/tee-uclass.c b/drivers/tee/tee-uclass.c
-> index 52412a4098e..0194d732193 100644
-> --- a/drivers/tee/tee-uclass.c
-> +++ b/drivers/tee/tee-uclass.c
-> @@ -5,7 +5,6 @@
->
->  #define LOG_CATEGORY UCLASS_TEE
->
-> -#include <common.h>
->  #include <cpu_func.h>
->  #include <dm.h>
->  #include <log.h>
-> --
-> 2.34.1
->
+>   config TARGET_SOCFPGA_CYCLONE5
+>   	bool
+>   	select TARGET_SOCFPGA_GEN5
+> diff --git a/arch/arm/mach-socfpga/spl_a10.c b/arch/arm/mach-socfpga/spl_a10.c
+> index 9edbbf4a29..d5d3327a42 100644
+> --- a/arch/arm/mach-socfpga/spl_a10.c
+> +++ b/arch/arm/mach-socfpga/spl_a10.c
+> @@ -122,7 +122,11 @@ void spl_board_init(void)
+>   	arch_early_init_r();
+>   
+>   	/* If the full FPGA is already loaded, ie.from EPCQ, config fpga pins */
+> +#ifdef CONFIG_TARGET_SOCFPGA_ARRIA10_ALWAYS_REPROGRAM
+> +	if (is_regular_boot_valid()) {
+> +#else
+>   	if (is_fpgamgr_user_mode()) {
+> +#endif
+
+Use CONFIG_IS_ENABLED() or IS_ENABLED() macro please .
