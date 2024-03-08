@@ -4,82 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE4D5C54798
-	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 01:37:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FEC4C54798
+	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 02:06:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C503D87DB3;
-	Fri,  8 Mar 2024 02:37:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 1422C87B82;
+	Fri,  8 Mar 2024 03:06:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SEucXzTf";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZJXpRxEp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9982A87061; Thu,  7 Mar 2024 23:36:27 +0100 (CET)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id B8C81877FB; Fri,  8 Mar 2024 03:06:33 +0100 (CET)
+Received: from mail-ua1-x931.google.com (mail-ua1-x931.google.com
+ [IPv6:2607:f8b0:4864:20::931])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D3D7386F6E
- for <u-boot@lists.denx.de>; Thu,  7 Mar 2024 23:36:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3150D87DC1
+ for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 03:06:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ivan.orlov0322@gmail.com
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-412b30be60dso2012045e9.0
- for <u-boot@lists.denx.de>; Thu, 07 Mar 2024 14:36:24 -0800 (PST)
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
+Received: by mail-ua1-x931.google.com with SMTP id
+ a1e0cc1a2514c-7da728b0597so687578241.1
+ for <u-boot@lists.denx.de>; Thu, 07 Mar 2024 18:06:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1709850984; x=1710455784; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=XIUDgwa5EN9JM6D/9cW8LV/Bhn8GFcL+J33FNXlOTfE=;
- b=SEucXzTf4zSI4CKhve4Qkjli3iPsc0OCC4eCHSdWjFAmQ3eszWMtn1hHmyG8MBkAE4
- PgJiKHwkJbv+q/HsqrX3v51TverVu08Qqu31VoanAIblnpi70bfD3Z8ckQKbEhqqx3xd
- KtvP1YP9fSlUZxguH7oBWCnD4dNp0vmz40HksHxrPOgm+tksVce5W8rzvoyrXhG6mo07
- bzeEPR7fbLKsqgm9em/aOmNpKGEQAMlzRjIcql1NaGpbxj1MSTx+iUOLtldctJiFh5kt
- efwOpMkbUE1ONAV9Em8vmaxHzC8O964P5oLHty7JozzDVUlWeSjWp7597/TvbrI9FlNz
- upwg==
+ d=gmail.com; s=20230601; t=1709863588; x=1710468388; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=R4eoYdgCFfHZH38zha3ga3AS5I4SkO5vxYZvyb1TCHk=;
+ b=ZJXpRxEpRKvAIfwb87RKNTxfn5VJ0EH7ZiVnUX1gwKIiP+C58fz/cRc+jBtEyf9o/+
+ fTeYmwtNfCIKLAqTXgRu4rwukUFmEzNSDMCV35G8r74++dIDvT8rtG9CAQiICe+1Vgt+
+ /FLOguYsY+RQNxqM0qKUWyG6LxMeodWKf9kJysuC8qfV5gZe4afoa9RSrFVXXHW/7OdX
+ xrDc3JROSdQaYo7WrP718RJoR0mat7u2jvc5vvXlktEXkonzjwaNvLEt0Vsb5hOkFozI
+ x6faYAADFEo4u0eNSB+erc77ITo9SYoKdtEFlq/j7PdPanwkDyRuve5fqXAAP6kVHQYi
+ SGHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709850984; x=1710455784;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=XIUDgwa5EN9JM6D/9cW8LV/Bhn8GFcL+J33FNXlOTfE=;
- b=B2Sgax+CqBNMhCqXf4DIe1zT1ZSVlu2i5AZj88Geo5E4nURi/faT1i9f59XiB6Vh8L
- kYCn9b+F/VYEPbIVOMEifTm6vw2S1hntkxixh64iOKjiEyrd9jWJw9NwV6QEActMKkt2
- r7v42s6XNjflcCx4v3wxqmKl4es69F7V5l/12Ya6hiYVsxqngUuvcNE8RXrDktobksDI
- 26vn2D1rpA74ehEtaaSougepJyIwm4U3CMuTaRpOg9dzi/T5cXkonyu8Pb/307u0x3QQ
- 1jZG3m9J+aB3a+Ur+gpmwaCsC9KpDrrGXQg4YmnYkbcvTieB2jAnGDQio05MtxADkoMq
- AkJQ==
-X-Gm-Message-State: AOJu0YyZCCIfPGtpEBBdyHa+bbySsMZ8N0448EKtKlagKsaY29BG1aTr
- GNutuIKR0nX630QRWgTv99f2YnLabcp0aD1n5RSb+7H81eohBqxynYBlgIRq
-X-Google-Smtp-Source: AGHT+IGHX+64QPzWiWKIol16TJdkqkJE74oizWYCEDWJvYsXHavhcESGuhBhc9In8uNloKIEqsw7tA==
-X-Received: by 2002:a05:600c:4f48:b0:413:7c2:6639 with SMTP id
- m8-20020a05600c4f4800b0041307c26639mr105285wmq.4.1709850983997; 
- Thu, 07 Mar 2024 14:36:23 -0800 (PST)
-Received: from ?IPV6:2a01:4b00:d20e:7300:3c69:a13f:39c0:f2bc?
- ([2a01:4b00:d20e:7300:3c69:a13f:39c0:f2bc])
- by smtp.gmail.com with ESMTPSA id
- co14-20020a0560000a0e00b0033e3ce48ba1sm12454664wrb.16.2024.03.07.14.36.23
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 07 Mar 2024 14:36:23 -0800 (PST)
-Message-ID: <05868d76-697d-4528-b4f4-52ce82c29766@gmail.com>
-Date: Thu, 7 Mar 2024 22:36:22 +0000
+ d=1e100.net; s=20230601; t=1709863588; x=1710468388;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=R4eoYdgCFfHZH38zha3ga3AS5I4SkO5vxYZvyb1TCHk=;
+ b=kbtGBaA/FMZzHwaDznXv5IUbddQceoHVQQnXBcQAuLfjz4HUvSUAx2Di2mwWCROxW2
+ e2KOpzWhgn1sX6azN6iiuQ4nlGhC4b0uj2JDlyn3sjYEEP3W+Sc5RgRyRlkIsVg1s450
+ tFqqRKNrluM4aZ3Eud/Eb8c8m1Jp2WmiQbgRZLxPqjkt0mVMGyYRaCDL6LbyeY395pAu
+ JwTwX8YiVsJnkK8N3q7J9SLYcwlzbGpybqg2mqVaVfBADxPMH26pxWnpVdzEmaKIvKSD
+ Smm/DJmW8S3JfaXL0lz+WR08DN7Jpz34pb/EIR3ov4uMvWMgqCZl8LnO/U5I2e0xBice
+ LC4g==
+X-Gm-Message-State: AOJu0YxYG2vkpMx37p2c2CZxjoKzIBHJFB022HcyuYQGCTlZMNpmH8s+
+ OlzLAGXCVODXEe1YEeWrOI1WDF1/xlkyQNWoUP9r7jqU1aZeHdtKasOnG4bMPySPZhcgYw1uVyC
+ 9D1YkOAlB5BuiOIXFU0e3mS8Wiee8uOOrBRU=
+X-Google-Smtp-Source: AGHT+IHpT/wb/vzkxs79yGxateqdqdb0KwZYCYytPCIkLalEygvbTH5AySvw0MgoVhMDgpLCpZyOEXiPRaMtZ8hzOU8=
+X-Received: by 2002:ac5:c5d7:0:b0:4d3:1ef2:c97d with SMTP id
+ g23-20020ac5c5d7000000b004d31ef2c97dmr8093914vkl.2.1709863587790; Thu, 07 Mar
+ 2024 18:06:27 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] doc: board: starfive: Fix paths in the bash block
-Content-Language: en-US
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, yanhong.wang@starfivetech.com
-References: <20240304221532.368453-1-ivan.orlov0322@gmail.com>
- <5d6b9fa0-bdac-47e6-8b2d-62ee3702227c@gmx.de>
-From: Ivan Orlov <ivan.orlov0322@gmail.com>
-In-Reply-To: <5d6b9fa0-bdac-47e6-8b2d-62ee3702227c@gmx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Fri, 08 Mar 2024 02:37:09 +0100
+References: <20240303130122.29983-1-heinrich.schuchardt@canonical.com>
+ <20240303130122.29983-4-heinrich.schuchardt@canonical.com>
+ <CANV2PTMcS800x8OTuDbv8orqUD=-frNpa+0dHu4=L__D_Rmk_g@mail.gmail.com>
+In-Reply-To: <CANV2PTMcS800x8OTuDbv8orqUD=-frNpa+0dHu4=L__D_Rmk_g@mail.gmail.com>
+From: E Shattow <lucent@gmail.com>
+Date: Thu, 7 Mar 2024 18:06:16 -0800
+Message-ID: <CANV2PTMtPggmS0hxxuovDfUnSAGM7tDXSewQ-eRTmd_+xR_L-g@mail.gmail.com>
+Subject: Re: [RFC 3/5] board: starfive: support Milk-V Mars board
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,78 +88,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/5/24 19:52, Heinrich Schuchardt wrote:
-> On 3/4/24 23:15, Ivan Orlov wrote:
->>  From the current documentation it is not entirely obvious where to take
->> some of the u-boot build artifacts in order to flash them to the sd
->> card. Extend the "Program the SD card" block by providing relative paths
->> to the jh7110-starfive-visionfive-2.dtb and u-boot-spl.bin.normal.out
->> files.
->>
->> Add "$(linux_image_dir)/" prefix to the Image.gz and initramfs.cpio.gz
->> files in order to provide some information about where they could be
->> taken from.
->>
->> Signed-off-by: Ivan Orlov <ivan.orlov0322@gmail.com>
->> ---
->>   doc/board/starfive/visionfive2.rst | 10 +++++-----
->>   1 file changed, 5 insertions(+), 5 deletions(-)
->>
->> diff --git a/doc/board/starfive/visionfive2.rst 
->> b/doc/board/starfive/visionfive2.rst
->> index abda8ac21b..031d66fbfb 100644
->> --- a/doc/board/starfive/visionfive2.rst
->> +++ b/doc/board/starfive/visionfive2.rst
->> @@ -103,15 +103,15 @@ Program the SD card
->>
-> 
->>   .. code-block:: bash
->>
->> -    sudo dd if=u-boot-spl.bin.normal.out of=/dev/sdb1
->> +    sudo dd if=spl/u-boot-spl.bin.normal.out of=/dev/sdb1
->>       sudo dd if=u-boot.itb of=/dev/sdb2
->>
->>       sudo mount /dev/sdb3 /mnt/
-> 
-> Following the instructions the partition in not formatted.
-> You won't be able to mount it anywhere.
-> 
-> Looking at the boot log the author FAT formatted the drive which is not
-> recommendable.
-> 
->> -    sudo cp u-boot-spl.bin.normal.out /mnt/
->> +    sudo cp spl/u-boot-spl.bin.normal.out /mnt/
->>       sudo cp u-boot.itb /mnt/
->> -    sudo cp Image.gz /mnt/
->> -    sudo cp initramfs.cpio.gz /mnt/
->> -    sudo cp jh7110-starfive-visionfive-2.dtb /mnt/
->> +    sudo cp $(linux_image_dir)/Image.gz /mnt/
->> +    sudo cp $(linux_image_dir)/initramfs.cpio.gz /mnt/
-> 
-> I have no clue why all users should copy the kernel to the root
-> partition on the SD card.
-> 
-> If you have a Linux installation on the SD-card, you want the kernel in
-> boot/. But this board boots fine without any SD-card from NVMe, USB, or
-> eMMC.
-> 
->> +    sudo cp arch/riscv/dts/jh7110-starfive-visionfive-2.dtb /mnt/
-> 
-> Copying the U-Boot device-tree makes no sense it is already available at
-> $fdtcontroladdr. If you ever wanted to copy a device-tree, it should be
-> the one provided with the kernel.
-> 
-> This whole section is rather misleading for inexperienced users who just
-> want to boot a Linux distro on the board.
-> 
+P.S. Found the longer description at
+https://github.com/milkv-mars/mars-buildroot-sdk/commit/d381610c92827de01b2=
+5843786012351b3f35519
+as follows: "if configured as 24c04, its address will occupy 0x51,
+conflicting with the RTC chip pcf85063 on the IO-Board. Refer to:
+Documentation/misc-devices/eeprom.rst". What does that even mean, it is for
+Raspberry Pi Compute IO carrier only?
 
-Hi Heinrich,
+On Thu, Mar 7, 2024 at 3:03=E2=80=AFPM E Shattow <lucent@gmail.com> wrote:
 
-Thank you very much for the review. I agree that this documentation is 
-far from being perfect, so I will try to improve it and fix all the 
-flaws in the V2 of this patch :)
-
--- 
-Kind regards,
-Ivan Orlov
-
+>
+> On Sun, Mar 3, 2024 at 5:02=E2=80=AFAM Heinrich Schuchardt <
+> heinrich.schuchardt@canonical.com> wrote:
+> ...
+>
+>> * The EEPROM is atmel,24c02 according to the vendor U-Boot.
+>>
+> ...
+>
+> The same vendor (Milk-V) U-Boot change is present on their branch for Mar=
+s
+> CM Lite (which despite the naming has more in common with Pine64 Star64
+> than Mars); However on visual inspection the silkscreen markings are for
+> 24c04. See: [Photo flatbed scans of Mars CM Lite 4GB rev 1.01](
+> https://github.com/geerlingguy/sbc-reviews/issues/22#issuecomment-1872478=
+605).
+> Can this be determined at runtime, or I must trust that this is not a
+> wrongly marked chip?
+>
