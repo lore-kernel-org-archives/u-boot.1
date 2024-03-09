@@ -4,47 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54BA4C54798
-	for <u-boot@archiver.kernel.org>; Sat,  9 Mar 2024 09:40:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 238DAC54798
+	for <u-boot@archiver.kernel.org>; Sat,  9 Mar 2024 09:53:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 56D35879A2;
-	Sat,  9 Mar 2024 10:40:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id D67A587D37;
+	Sat,  9 Mar 2024 10:53:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="FtCa4Cos";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BD27087C9A; Sat,  9 Mar 2024 10:40:09 +0100 (CET)
-Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
- [60.248.80.70])
+ id 46F3187D46; Sat,  9 Mar 2024 10:53:10 +0100 (CET)
+Received: from sin.source.kernel.org (sin.source.kernel.org
+ [IPv6:2604:1380:40e1:4800::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 54473877AF
- for <u-boot@lists.denx.de>; Sat,  9 Mar 2024 10:40:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=andestech.com
+ by phobos.denx.de (Postfix) with ESMTPS id 220DC87CF1
+ for <u-boot@lists.denx.de>; Sat,  9 Mar 2024 10:53:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ycliang@andestech.com
-Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 4299dob5005169;
- Sat, 9 Mar 2024 17:39:50 +0800 (+08)
- (envelope-from ycliang@andestech.com)
-Received: from swlinux02 (10.0.15.183) by ATCPCS16.andestech.com (10.0.1.222)
- with Microsoft SMTP Server id 14.3.498.0;
- Sat, 9 Mar 2024 17:39:49 +0800
-Date: Sat, 9 Mar 2024 17:39:45 +0800
-From: Leo Liang <ycliang@andestech.com>
-To: "Leon M. Busch-George" <leon@georgemail.de>
-CC: Rick Chen <rick@andestech.com>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH] riscv: dts: jh7110: fix indentation
-Message-ID: <ZewuYSLSC0fwPJsq@swlinux02>
-References: <20240304205203.64664-1-leon@georgemail.de>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20240304205203.64664-1-leon@georgemail.de>
-User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
-X-Originating-IP: [10.0.15.183]
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 4299dob5005169
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=maz@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id 6156DCE068B;
+ Sat,  9 Mar 2024 09:53:02 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 987ECC433C7;
+ Sat,  9 Mar 2024 09:53:00 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1709977980;
+ bh=va0GlJvvNfRxdV44NZsclWLvFW8MyeU/oZz6x2TjBug=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=FtCa4CoszdnXbI4PZ3GPkjEiHNvECtMfmgRxngzykE7OjrgokJTJWwFc4BeTeQklH
+ dC3tVzLvyaceJhgH3rA0tEEyVF/VeKz7xnnME2CJAKag9gGIX4W+04tG3D6FHuvs5v
+ ugVaCEUWf8MhPlKSsNbjRYZCrUFv0hmhqJ1J/oITbEaKLXN49XuFhBwypLwbzq3Ynd
+ zcGde5BiFkGPYT4UJnuYyz0qh0P/cvmQuySkxkbAe4+NAO4AU0VPxpJ744yvmApKzn
+ 4edFZ2RV11K7XgVE/A3a/ng/YM0yvx/JTB76n8VeRDA/ybQWrvTxOSkv7He/fLR1iy
+ j0VMFR7C1Jt3g==
+Received: from sofa.misterjones.org ([185.219.108.64]
+ helo=wait-a-minute.misterjones.org)
+ by disco-boy.misterjones.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <maz@kernel.org>) id 1ritNy-00AxZD-6Z;
+ Sat, 09 Mar 2024 09:52:58 +0000
+Date: Sat, 09 Mar 2024 09:52:59 +0000
+Message-ID: <875xxvratg.wl-maz@kernel.org>
+From: Marc Zyngier <maz@kernel.org>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,	u-boot@lists.denx.de,
+ =?UTF-8?B?UGllcnJlLUNsw6ltZW50?= Tosi <ptosi@google.com>,	Tom Rini
+ <trini@konsulko.com>,	Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>
+Subject: Re: [PATCH 1/2] arm64: Reduce add_map() complexity
+In-Reply-To: <CAOMZO5B=EYPSNXkr=FM+iRvRYiv9fysB8DfhntuhQ_jhkKz38Q@mail.gmail.com>
+References: <20230214133814.4173549-1-paul.liu@linaro.org>
+ <20230214133814.4173549-2-paul.liu@linaro.org>
+ <CAOMZO5B=EYPSNXkr=FM+iRvRYiv9fysB8DfhntuhQ_jhkKz38Q@mail.gmail.com>
+User-Agent: Wanderlust/2.15.9 (Almost Unreal) SEMI-EPG/1.14.7 (Harue)
+ FLIM-LB/1.14.9 (=?UTF-8?B?R29qxY0=?=) APEL-LB/10.8 EasyPG/1.0.0 Emacs/28.2
+ (x86_64-pc-linux-gnu) MULE/6.0 (HANACHIRUSATO)
+MIME-Version: 1.0 (generated by SEMI-EPG 1.14.7 - "Harue")
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-SA-Exim-Connect-IP: 185.219.108.64
+X-SA-Exim-Rcpt-To: festevam@gmail.com, paul.liu@linaro.org,
+ u-boot@lists.denx.de, ptosi@google.com, trini@konsulko.com,
+ marcel.ziswiler@toradex.com, francesco.dolcini@toradex.com
+X-SA-Exim-Mail-From: maz@kernel.org
+X-SA-Exim-Scanned: No (on disco-boy.misterjones.org);
+ SAEximRunCond expanded to false
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -61,12 +88,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Mar 04, 2024 at 09:51:47PM +0100, Leon M. Busch-George wrote:
-> From: "Leon M. Busch-George" <leon@georgemail.eu>
-> 
-> Signed-off-by: Leon M. Busch-George <leon@georgemail.eu>
-> ---
->  arch/riscv/dts/jh7110-starfive-visionfive-2-u-boot.dtsi | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+On Fri, 08 Mar 2024 20:22:53 +0000,
+Fabio Estevam <festevam@gmail.com> wrote:
+>=20
+> Hi Paul and Tom,
+>=20
+> On Tue, Feb 14, 2023 at 10:38=E2=80=AFAM Ying-Chun Liu (PaulLiu)
+> <paul.liu@linaro.org> wrote:
+> >
+> > From: Marc Zyngier <maz@kernel.org>
+> >
+> > In the add_map() function, for each level it populates, it iterates from
+> > the root of the PT tree, making it ineficient if a mapping needs to occ=
+ur
+> > past level 1.
+> >
+> > Instead, replace it with a recursive (and much simpler) algorithm
+> > that keeps the complexity as low as possible. With this, mapping
+> > 512GB at level 2 goes from several seconds down to not measurable
+> > on an A55 machine.
+> >
+> > We keep the block mappings at level 1 for now though.
+> >
+> > Signed-off-by: Marc Zyngier <maz@kernel.org>
+> > Signed-off-by: Pierre-Cl=C3=A9ment Tosi <ptosi@google.com>
+> > [ Paul: pick from the Android tree. Fixup Pierre's commit. Rebase to the
+> >   upstream ]
+> > Signed-off-by: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
+> > Cc: Tom Rini <trini@konsulko.com>
+> > Link: https://android.googlesource.com/platform/external/u-boot/+/96ad7=
+29cf4cab53bdff8222bb3eb256f38b5c3a6
+> > Link: https://android.googlesource.com/platform/external/u-boot/+/6be93=
+30601d81545c7c941e3609f35bf68a09059
+>=20
+> I know this is an old thread, but this commit causes the following
+> boot regression on a colibri-imx8qxp board:
+>=20
+> U-Boot 2024.04-rc3-00070-gecc9298a893b (Mar 08 2024 - 17:15:31 -0300)
+>=20
+> CPU:   NXP i.MX8QXP RevC A35 at 1200 MHz at 51C
+>=20
+> DRAM:  2 GiB
+> "Error" handler, esr 0xbf000000
 
-Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
+SError. Not good.
+
+> elr: 0000000080020914 lr : 00000000800209c0 (reloc)
+> elr: 00000000ffec4914 lr : 00000000ffec49c0
+> x0 : 0060000070800401 x1 : 0000000070000000
+> x2 : 0000000010000000 x3 : 0000000000000002
+> x4 : 0000000040000000 x5 : 0060000000000401
+> x6 : 0000000000000c00 x7 : 00000000fff45140
+> x8 : 0060000000000000 x9 : 00000000fff45100
+> x10: 000000000a200023 x11: 0000000000000002
+> x12: 0000000000000002 x13: 00000000800a10e8
+> x14: 00000000ffffffff x15: 00000000ffec4cb8
+> x16: 0000000080056a88 x17: 0000000000000000
+> x18: 00000000fd6c1d70 x19: 000000000f600000
+> x20: 0000000000000000 x21: 0060000000000401
+> x22: 0000000070a00000 x23: 0000000000200000
+> x24: 0000000040000c28 x25: 00000000001fffff
+> x26: 0000000000000003 x27: 0000000070a00000
+> x28: 0000000000000002 x29: 00000000fd6bbfd0
+>=20
+> Code: 1100047a a90573fb aa0103fb 2a0303fc (b5000113)
+> Resetting CPU ...
+>=20
+> resetting ...
+>=20
+> Reverting this commit on top of master fixes the boot regression.
+>=20
+> Any ideas?
+
+It would be good to narrow down which access is generating this. It is
+an asynchronous error, so the code above won't help.
+
+Alternatively, and if you are sure that this is due to this change,
+dumping the page tables and comparing them before and after would
+help.
+
+Thanks,
+
+	M.
+
+--=20
+Without deviation from the norm, progress is not possible.
