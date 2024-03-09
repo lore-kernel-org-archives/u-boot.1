@@ -4,95 +4,124 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C9FFC54E41
-	for <u-boot@archiver.kernel.org>; Fri,  8 Mar 2024 22:57:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86B09C5475B
+	for <u-boot@archiver.kernel.org>; Sat,  9 Mar 2024 01:15:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B5A0E877EC;
-	Fri,  8 Mar 2024 23:57:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 90B9587CDA;
+	Sat,  9 Mar 2024 02:15:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="s7bVboAq";
+	dkim=pass (1024-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="ao4t3Gmt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9CD2B87AEC; Fri,  8 Mar 2024 23:57:18 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B007787CEC; Sat,  9 Mar 2024 02:15:32 +0100 (CET)
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com
+ (mail-db8eur05on20627.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7e1a::627])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 638FA8723E
- for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 23:57:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C213B87B77
+ for <u-boot@lists.denx.de>; Sat,  9 Mar 2024 02:15:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id B95654070C
- for <u-boot@lists.denx.de>; Fri,  8 Mar 2024 22:57:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1709938634;
- bh=EgObmRBDWA0Aq+Qi1NlVLnXezzbPnzjmPCmn3/MrqUs=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=s7bVboAq34FUV8pMuIzFBvpb9WGJkzkDbf30AKtXuxt84XaZX9X3cgwUsWEvNaXwx
- 47a6SQl7o5LBh91ArHc+KUb6fm3+P9tLaph9JIfG8+XkWC4Jf24VtwvpFLal8Qs7AY
- yj+5jyI9Jy8IzIUfa9KdO/JaSmoDbbe5TSCnsmubwV/JYwg+SCU+MqvnD5HEX0WrJ5
- a6tw/U3J72kUAz3YYoUCfJVH3AWRj/cg9yfduXaoB/rAVm5WKlNuzX6+9vQMduq69N
- MFP9UvUktaSvjtQv9uOiX987PnJiW+8oV/mHYBS957frZvfatD77aM0u/OZHCAJRPs
- Okr4z/ZLfanlw==
-Received: by mail-wr1-f72.google.com with SMTP id
- ffacd0b85a97d-33d30a3d6f8so1004936f8f.3
- for <u-boot@lists.denx.de>; Fri, 08 Mar 2024 14:57:14 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709938634; x=1710543434;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=EgObmRBDWA0Aq+Qi1NlVLnXezzbPnzjmPCmn3/MrqUs=;
- b=GBxxgYP8sLrEvuGxSZiyiv9ChDWwtm3u26eTJwio48tjj1OtpzTpC1Y+g3TzJOUjf7
- w8yOZ1VSHQh6kq9M5BQ56ZvKrgKEr7nt+hbOXzi0sz6oCVOWOg8Gu381naqg6oaF7iWJ
- 7QD1IFhVa30Ct/+wMVH8QjBvPQVXj7R9JdKzXIMIsgp/CgYGpOmDmav4Qd2xro40s9hu
- gbjbFY4owc/l0HL/LG/tkTe5OOmumsTu6HiJDzp25+BMiG6DlAabVr74RFU6aTYIYwdt
- mHjQU//svfnQZGoHIjBL695ikQEWZ3LtNI7zb1nHiIMg/9v8T/9Ilx3FNlo/2joyDxiV
- OfGA==
-X-Gm-Message-State: AOJu0YzBYYLAfn9+0HE6SIPO3n7mUW/N7PkH2J4DAAubhm2FOAnN+mry
- ulSGiOxBZV97/VMhXJvVdb1HIA6UxCtjybkc/CXEbC8/9v4pA4Tk1phVfnccmJTYgCeNmXKLb2p
- jT0Zg4w1extNEklrMw6l4JrGolG+mWUJzYXJ9Ae/azSAQAGWwOSTJU1J087KtPTyc9W8=
-X-Received: by 2002:a5d:51cd:0:b0:33e:1a98:7135 with SMTP id
- n13-20020a5d51cd000000b0033e1a987135mr300380wrv.38.1709938634303; 
- Fri, 08 Mar 2024 14:57:14 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEOMnLeipTxQpLrfMstd0OdKlUjmTXZvZWF8kKzzWNXjELbInblEbphO4Gz2dzVec7NsFKHDA==
-X-Received: by 2002:a5d:51cd:0:b0:33e:1a98:7135 with SMTP id
- n13-20020a5d51cd000000b0033e1a987135mr300374wrv.38.1709938633908; 
- Fri, 08 Mar 2024 14:57:13 -0800 (PST)
-Received: from ?IPV6:2a00:20:9:393f:9c69:8137:bdc0:ae98?
- ([2a00:20:9:393f:9c69:8137:bdc0:ae98])
- by smtp.gmail.com with ESMTPSA id
- x7-20020adfffc7000000b0033e75d41e7bsm479345wrs.25.2024.03.08.14.57.12
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 08 Mar 2024 14:57:13 -0800 (PST)
-Message-ID: <071b1819-ecfe-4ac3-8e86-e9f3dc920b3c@canonical.com>
-Date: Fri, 8 Mar 2024 23:57:12 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC 2/5] riscv: set fdtfile on Milk-V Mars
+ dmarc=pass (p=none dis=none) header.from=nxp.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=peng.fan@nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=IswsnRDjITcreamxmQynhRGr+6VQQhP9Yl6ifNnvWzjLGR8xgoMplc26yY9cIr8toDElV8dNA9syHAHOnXlrgb0NuQ/V2/w0F3TXePuClnb4I7QA325Cw9TCo0w5jhnkt0wvevlUkIuGIogDmoFcK7jlhqiG/Hxsm9D/AqYoEIcoSkww6hqwpc5afweuu4olEhjNo3VEHPUfjPXUJB+oPKkYvgcuQ4+i4ce2AMF1mPc2F+up0+ldwQW0i/3YEvTH0ImvxR37bH7EbPrIBDkPlG4ImzaLmldAcK9HA0HtQuTuVcnY5ApDVNqM46qGiqCcfd6oRJTSpUNUdJ5ZI+iBHA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=DDKGLZzhbWaVCgGa2Jc0ZKOTOJS8n+3cEUT1Eu+agmk=;
+ b=IDX2nBVAwDXa6B9NUvI9DNg4kUxqfgOX7j9dZjOWDjfj1RB2wb4FINmCX9Gu0RKBBF0dNUEGzjaMiXe7l9ZyiAE/CNVDbSmQhbAeqFpuYB/JQwmRUwx1BxwHLMiF+Kc42Zf2bRVn74tEZ6cgNXe7LCOgS/i/7ZFsZLXGpYbd4aRMcQCIpmORRq2G7/OWqU3ZPW0Mit+iJqxemdkxI8mrmcHNpWZz34m44dcd8fvAnv+ZV0sm6ES/M03rrvPpqDs6y9Swq90L5iBNfg48KKEUJjG+651DQg+6xP6L79Gvzo/gZ6hEP3nuowreakZ6/NqL1k4jPsWlrlxbxVWdFFlT4g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector2; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=DDKGLZzhbWaVCgGa2Jc0ZKOTOJS8n+3cEUT1Eu+agmk=;
+ b=ao4t3GmtuLjHZhHV5KMo826wvXIdg9bm7kcHPlvf3wTzry5sTNTfA166mEKqSREq1UWrm42kja1b5HlqWwBbjcFJqFo8Qg3DrzOfwm5TFYKTuG4OS9XRJ0t4wFN4xCy5sLoi11OYbvqfS2Pn4hlDZZfBHRJh/L7B56LDnDpRj2E=
+Received: from DU0PR04MB9417.eurprd04.prod.outlook.com (2603:10a6:10:358::11)
+ by AM8PR04MB7923.eurprd04.prod.outlook.com (2603:10a6:20b:24b::10)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7362.27; Sat, 9 Mar
+ 2024 01:15:26 +0000
+Received: from DU0PR04MB9417.eurprd04.prod.outlook.com
+ ([fe80::1232:ed97:118f:72fd]) by DU0PR04MB9417.eurprd04.prod.outlook.com
+ ([fe80::1232:ed97:118f:72fd%4]) with mapi id 15.20.7362.019; Sat, 9 Mar 2024
+ 01:15:26 +0000
+From: Peng Fan <peng.fan@nxp.com>
+To: Fabio Estevam <festevam@gmail.com>, "seanga2@gmail.com" <seanga2@gmail.com>
+CC: "trini@konsulko.com" <trini@konsulko.com>, Ye Li <ye.li@nxp.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Marcel Ziswiler
+ <marcel.ziswiler@toradex.com>, Francesco Dolcini
+ <francesco.dolcini@toradex.com>, "hiago.franco@toradex.com"
+ <hiago.franco@toradex.com>, "joao.goncalves@toradex.com"
+ <joao.goncalves@toradex.com>
+Subject: RE: [PATCH 1/2] clk: clk-imx8qxp: Add LPUART IPG entries
+Thread-Topic: [PATCH 1/2] clk: clk-imx8qxp: Add LPUART IPG entries
+Thread-Index: AQHacZUTRDk5hEdMdU+OeK8smul6FLEumz3A
+Date: Sat, 9 Mar 2024 01:15:26 +0000
+Message-ID: <DU0PR04MB94175939E19F7DDFDA77758388262@DU0PR04MB9417.eurprd04.prod.outlook.com>
+References: <20240308201316.1721909-1-festevam@gmail.com>
+In-Reply-To: <20240308201316.1721909-1-festevam@gmail.com>
+Accept-Language: en-US
 Content-Language: en-US
-To: E Shattow <lucent@gmail.com>
-Cc: u-boot@lists.denx.de, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, Lukasz Tekieli <tekieli.lukasz@gmail.com>,
- Aurelien Jarno <aurelien@aurel32.net>, Shiji Yang <yangshiji66@outlook.com>,
- Shengyu Qu <wiagn233@outlook.com>, Seung-Woo Kim <sw0312.kim@samsung.com>
-References: <20240303130122.29983-1-heinrich.schuchardt@canonical.com>
- <20240303130122.29983-3-heinrich.schuchardt@canonical.com>
- <CANV2PTNbhB1D32pK9nVKi0MNA=G-ooP=qcJBcsaEGMNzaxo97g@mail.gmail.com>
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <CANV2PTNbhB1D32pK9nVKi0MNA=G-ooP=qcJBcsaEGMNzaxo97g@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nxp.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DU0PR04MB9417:EE_|AM8PR04MB7923:EE_
+x-ms-office365-filtering-correlation-id: 035bdea6-e5ed-4c4b-6354-08dc3fd666e3
+x-ld-processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: YUMb+/20u2PBQDXpbEglOi5U2LJfy7W2Ct47JC8t26dbOkC0A+qwH6yO8YMfFNR3aCGGRWIyb4Y40bUWt14y0h6oe8ZEJj3N6A5rT5p/+Veo+8FdJrmnkB7OstWqIGlRZQO/UBBsObYE5k6+f1jR0fJ7KJWdypSnk3ODH/CEUpxaGjVDuqeoLbeKpfll99H7p1c5+AJHrD6p7bCmu1GdeFwGkvH4YhPOnbOcHE3bIMQIz4qcF4sJVOeWcW1u/vnxD6tC/Nz8grrT88d8l943Zras7VJ3SQLZ9qeqfXAiNRNFmpK9+7ILKHbOpwbLk9jnONdg/k2DuKZerIOTiMs0WeJU+UVUP9Ctxn1Pdd+nKPesSUIm8dgrqbVjfk5xkD1eynhg6H/QLv5lZ6tYs6Q2nn5MLp17JLGwE1XJbVIvqBEjGAxdMujo2kBUQ9qa+Y7DmGUFBTwsVbFkUs05ci5zI6gT7qZ/88At78CWkfOoAfoyOyijAAGRfd7Igux4F8X5GlLPLc9E/fYTF3zqeAG+m+qva2STag7XZ3mwPr9LboaMD1ywPzDCTkGCBumoWu4/tkFw5art+JxblPncsNQhPUYwbrgUMXy/pNHsTaiPdQul4K7jX4h7T9PilwEaV5Y7pEha7vC36Jaam5tfowCDigAnhzth7pqsA0eucpzeF6RqAaQnOqjlwuvrNFVi36Yu3eAWZ55zOUSqIGTMHGBMSw==
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DU0PR04MB9417.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(1800799015)(376005)(38070700009); DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?3xJnefPP3u56BafRW7wQxOrl8+iZItiZtdKSV8MIcMHLT2LkHF0RrBvxrjox?=
+ =?us-ascii?Q?dJjlGyThKsVplxFsVOYi6LCKwcTPjlJ5cB7TkUQnxzaFciHVpBnwLFyM3Y27?=
+ =?us-ascii?Q?c9QVhSvrtHB9iiXOE17vwKDgNIHaLjy1BKNW6pu6gG+EwLGfftoH3Ju4+tPH?=
+ =?us-ascii?Q?kE+TaWETNtHrQmbaxgaZVtTqZvEtD2AzMR71MTna6ok1ufp8pGAMYsuLW+wi?=
+ =?us-ascii?Q?R67dFQSTlbcm1wAHK05TuRzXWuWk8qUXwaXDPAlDcz59rm5rEa5PsrMsw2/f?=
+ =?us-ascii?Q?LVSD8IyePSRkP27YcU2Rb+K3C7+bLB4amRR1KGFhhuHqB8pElzGkq+pQbV/6?=
+ =?us-ascii?Q?J81pMqXRcKDLF24FRn9y1BR9FH3P7F3znbwSOEx/9+Z4xzJq4l2vueIkHR5T?=
+ =?us-ascii?Q?Sr8q8A6jB6fYdBWTPDnJBSwJaiNBZSlUcQLVeC9Kl2kLwuT252aqokgol06W?=
+ =?us-ascii?Q?fyXf1mLuE9d52rOVhOzn+1A1PbYov08Nv/E5VuVHZ1NPAUTnGokAfkktsXUh?=
+ =?us-ascii?Q?CYP/6yPDS/n3D/Sl2cANgQ+tHLe7LXD/shcK3dsG4fhhKnC9swuNgLmqCN6B?=
+ =?us-ascii?Q?ekVZNyjP5xmiwEhuLlJvkhSiYCUXEVpXgbQc1JifVfxss4YlwB9juIpGpM9P?=
+ =?us-ascii?Q?aX+ZRDJWg2t475Se3iSX5GxHh08Pfjq9AYOAMgHMco3Uqbs36kJCpQhJ5Pcz?=
+ =?us-ascii?Q?0QQF6tKPDs5S4aGlNo4SoiVmpigMa++2WqYVa3NrT9aOUr9wNdhugGdPkhC5?=
+ =?us-ascii?Q?EE6PSQ9/SM1qTgBhVjQm2dg3kGFldO1FH63GWk24LgHTQ1wdmwSy1Rq72pJP?=
+ =?us-ascii?Q?dj39L4iUUu8nbH7nYGgg0F75J4wuICIkMeZQHJOlyCHd7r4D+7MDsNidwwlS?=
+ =?us-ascii?Q?8AZe+5V2gQEzJh68vF1NGrCFeeiHe2edZOFQ0npfPqH8YWLfNLC/tW+PatBY?=
+ =?us-ascii?Q?riXPv6/cO1B7azhsioMo1o95WXUY65CmIjFdNzKrMOTQAT3RvTtyrZLHSzZ5?=
+ =?us-ascii?Q?7UM8LQJWHGUJ8Pe1VL3P45EWvAxyx5x5AbpsPm/6m+PA72zalfWrlgfZAwpz?=
+ =?us-ascii?Q?exLP2q9igVEDxPqngXJvLPViBhOlH5Fyj7kbBKzamxXTfLxCDfvIJ739Dbhg?=
+ =?us-ascii?Q?B2v4Ushou+EZ97jHmGHoWsWQn2uCFORgJZt5j74mchdvM5QqE9RCD46daTaV?=
+ =?us-ascii?Q?GZF/YlcDCIte/lA3bvzk2wUEdvU//OUn5AXCY+MGDA0Zek/p7ov2CdiFXEYs?=
+ =?us-ascii?Q?gQtoPAYcGjPEZrU+t4SJR2FrEjms5TMX7WWx5jZr/ot42m2x8CNyBWU2n3RE?=
+ =?us-ascii?Q?Qt0W1j+Tsg+QK9xUhnKWjpy6AefVXMtpIcxdoqZgvRpQZNPaqDl+LUdzhEmn?=
+ =?us-ascii?Q?YuJhSjaAkckeCYC8c5Jybeilr7+9nFmBlhLD30G01TX7qE/DyVq2lUE2N+Xr?=
+ =?us-ascii?Q?7lpPA3JeHOpu3BMn8nwXOXQ/+dOFbfYVswoAnEKjsQd7oYhMGXwaxGXx5xnh?=
+ =?us-ascii?Q?pOQQCcwtvc8UtUGZkqTqBTGVscghBv6AHD+HBe505jMn43A00gbvmymNrRZK?=
+ =?us-ascii?Q?EjXbXGHgyfalJhaC4BY=3D?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DU0PR04MB9417.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 035bdea6-e5ed-4c4b-6354-08dc3fd666e3
+X-MS-Exchange-CrossTenant-originalarrivaltime: 09 Mar 2024 01:15:26.1049 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 1zvsl9aAPkK4zlbxRGil5XTaXhKG3OCAoYG2hrOx32Oaw23eIZJa+8mSrYHCmpEpBRqUNzs/D2eS47SvSePvjA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR04MB7923
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,122 +138,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/8/24 23:37, E Shattow wrote:
-> Sharing the info from Mars CM Lite 4GB:
-> --------EEPROM INFO--------
-> Vendor : MILK-V
-> Product full SN: MARC-V10-2340-D004E016-000006DF
-> data version: 0x2
-> PCB revision: 0xc1
-> BOM revision: A
-> Ethernet MAC0 address: 6c:cf:39:00:83:11
-> Ethernet MAC1 address: 6c:cf:39:00:83:12
-> --------EEPROM INFO--------
-> 
-> I do not like this practice of force setting fdtfile environment 
-> variable. If I set fdtfile from u-boot prompt and saveenv, I expect that 
-> my action as the user will persist over a reboot but instead it gets 
-> ignored and overwritten by this strategy. Is this necessary to happen 
-> before the boot scripts?
+> Subject: [PATCH 1/2] clk: clk-imx8qxp: Add LPUART IPG entries
+>=20
+> Since commit cc7df0b9e8bc ("serial: lpuart: Enable IPG clock") the colibr=
+i-
+> imx8qxp board no longer boots.
+>=20
+> The reason is that the imx8qxp clock driver does not handle the LPUART IP=
+G
+> clocks inside get_rate(), set_rate() and enable() functions.
+>=20
+> Fix the boot regression by adding the LPUART IPG entries.
+>=20
+> Fixes: cc7df0b9e8bc ("serial: lpuart: Enable IPG clock")
+> Reported-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+> Signed-off-by: Fabio Estevam <festevam@gmail.com>
 
-We could check if $fdtfile is already set before the update.
-
-This would require that the default environment does not include it. Cf.
-
-include/configs/starfive-visionfive2.h:51:
-	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0" \
-
-Best regards
-
-Heinrich
-
-> 
-> On Sun, Mar 3, 2024 at 5:02 AM Heinrich Schuchardt 
-> <heinrich.schuchardt@canonical.com 
-> <mailto:heinrich.schuchardt@canonical.com>> wrote:
-> 
->     Set environment variable fdtfile to the correct value for the Milk-V
->     Mars
->     board.
-> 
->     Signed-off-by: Heinrich Schuchardt
->     <heinrich.schuchardt@canonical.com
->     <mailto:heinrich.schuchardt@canonical.com>>
->     ---
->       .../visionfive2/starfive_visionfive2.c        | 43 +++++++++++++------
->       1 file changed, 30 insertions(+), 13 deletions(-)
-> 
->     diff --git a/board/starfive/visionfive2/starfive_visionfive2.c
->     b/board/starfive/visionfive2/starfive_visionfive2.c
->     index 78e118d5a05..9970e309690 100644
->     --- a/board/starfive/visionfive2/starfive_visionfive2.c
->     +++ b/board/starfive/visionfive2/starfive_visionfive2.c
->     @@ -9,6 +9,7 @@
->       #include <dm.h>
->       #include <fdt_support.h>
->       #include <env.h>
->     +#include <log.h>
->       #include <asm/arch/eeprom.h>
->       #include <asm/io.h>
->       #include <asm/sections.h>
->     @@ -17,6 +18,8 @@
->       DECLARE_GLOBAL_DATA_PTR;
->       #define JH7110_L2_PREFETCHER_BASE_ADDR         0x2030000
->       #define JH7110_L2_PREFETCHER_HART_OFFSET       0x2000
->     +#define FDTFILE_MILK_V_MARS \
->     +       "starfive/jh7110-milkv-mars.dtb"
->       #define FDTFILE_VISIONFIVE2_1_2A \
->              "starfive/jh7110-starfive-visionfive-2-v1.2a.dtb"
->       #define FDTFILE_VISIONFIVE2_1_3B \
->     @@ -48,20 +51,34 @@ static void set_fdtfile(void)
->       {
->              u8 version;
->              const char *fdtfile;
->     +       const char *product_id;
-> 
->     -       version = get_pcb_revision_from_eeprom();
->     -       switch (version) {
->     -       case 'a':
->     -       case 'A':
->     -               fdtfile = FDTFILE_VISIONFIVE2_1_2A;
->     -               break;
->     -
->     -       case 'b':
->     -       case 'B':
->     -       default:
->     -               fdtfile = FDTFILE_VISIONFIVE2_1_3B;
->     -               break;
->     -       };
->     +       product_id = get_product_id_from_eeprom();
->     +       if (!product_id) {
->     +               log_err("Can't read EEPROM\n");
->     +               return;
->     +       }
->     +       if (!strncmp(product_id, "MARS", 4)) {
->     +               fdtfile = FDTFILE_MILK_V_MARS;
->     +       } else if (!strncmp(product_id, "VF7110", 6)) {
->     +               version = get_pcb_revision_from_eeprom();
->     +
->     +               switch (version) {
->     +               case 'a':
->     +               case 'A':
->     +                       fdtfile = FDTFILE_VISIONFIVE2_1_2A;
->     +                       break;
->     +
->     +               case 'b':
->     +               case 'B':
->     +               default:
->     +                       fdtfile = FDTFILE_VISIONFIVE2_1_3B;
->     +                       break;
->     +               }
->     +       } else {
->     +               log_err("Unknown product\n");
->     +               return;
->     +       }
-> 
->              env_set("fdtfile", fdtfile);
->       }
->     -- 
->     2.43.0
-> 
+Reviewed-by: Peng Fan <peng.fan@nxp.com>
+> ---
+>  drivers/clk/imx/clk-imx8qxp.c | 13 ++++++++++++-
+>  1 file changed, 12 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/drivers/clk/imx/clk-imx8qxp.c b/drivers/clk/imx/clk-imx8qxp.=
+c
+> index 8bf7e325481..d900d4cd528 100644
+> --- a/drivers/clk/imx/clk-imx8qxp.c
+> +++ b/drivers/clk/imx/clk-imx8qxp.c
+> @@ -88,20 +88,23 @@ ulong imx8_clk_get_rate(struct clk *clk)
+>  		resource =3D SC_R_SDHC_1;
+>  		pm_clk =3D SC_PM_CLK_PER;
+>  		break;
+> -	case IMX8QXP_UART0_IPG_CLK:
+>  	case IMX8QXP_UART0_CLK:
+> +	case IMX8QXP_UART0_IPG_CLK:
+>  		resource =3D SC_R_UART_0;
+>  		pm_clk =3D SC_PM_CLK_PER;
+>  		break;
+>  	case IMX8QXP_UART1_CLK:
+> +	case IMX8QXP_UART1_IPG_CLK:
+>  		resource =3D SC_R_UART_1;
+>  		pm_clk =3D SC_PM_CLK_PER;
+>  		break;
+>  	case IMX8QXP_UART2_CLK:
+> +	case IMX8QXP_UART2_IPG_CLK:
+>  		resource =3D SC_R_UART_2;
+>  		pm_clk =3D SC_PM_CLK_PER;
+>  		break;
+>  	case IMX8QXP_UART3_CLK:
+> +	case IMX8QXP_UART3_IPG_CLK:
+>  		resource =3D SC_R_UART_3;
+>  		pm_clk =3D SC_PM_CLK_PER;
+>  		break;
+> @@ -170,18 +173,22 @@ ulong imx8_clk_set_rate(struct clk *clk, unsigned
+> long rate)
+>  		pm_clk =3D SC_PM_CLK_PER;
+>  		break;
+>  	case IMX8QXP_UART0_CLK:
+> +	case IMX8QXP_UART0_IPG_CLK:
+>  		resource =3D SC_R_UART_0;
+>  		pm_clk =3D SC_PM_CLK_PER;
+>  		break;
+>  	case IMX8QXP_UART1_CLK:
+> +	case IMX8QXP_UART1_IPG_CLK:
+>  		resource =3D SC_R_UART_1;
+>  		pm_clk =3D SC_PM_CLK_PER;
+>  		break;
+>  	case IMX8QXP_UART2_CLK:
+> +	case IMX8QXP_UART2_IPG_CLK:
+>  		resource =3D SC_R_UART_2;
+>  		pm_clk =3D SC_PM_CLK_PER;
+>  		break;
+>  	case IMX8QXP_UART3_CLK:
+> +	case IMX8QXP_UART3_IPG_CLK:
+>  		resource =3D SC_R_UART_3;
+>  		pm_clk =3D SC_PM_CLK_PER;
+>  		break;
+> @@ -263,18 +270,22 @@ int __imx8_clk_enable(struct clk *clk, bool enable)
+>  		pm_clk =3D SC_PM_CLK_PER;
+>  		break;
+>  	case IMX8QXP_UART0_CLK:
+> +	case IMX8QXP_UART0_IPG_CLK:
+>  		resource =3D SC_R_UART_0;
+>  		pm_clk =3D SC_PM_CLK_PER;
+>  		break;
+>  	case IMX8QXP_UART1_CLK:
+> +	case IMX8QXP_UART1_IPG_CLK:
+>  		resource =3D SC_R_UART_1;
+>  		pm_clk =3D SC_PM_CLK_PER;
+>  		break;
+>  	case IMX8QXP_UART2_CLK:
+> +	case IMX8QXP_UART2_IPG_CLK:
+>  		resource =3D SC_R_UART_2;
+>  		pm_clk =3D SC_PM_CLK_PER;
+>  		break;
+>  	case IMX8QXP_UART3_CLK:
+> +	case IMX8QXP_UART3_IPG_CLK:
+>  		resource =3D SC_R_UART_3;
+>  		pm_clk =3D SC_PM_CLK_PER;
+>  		break;
+> --
+> 2.34.1
 
