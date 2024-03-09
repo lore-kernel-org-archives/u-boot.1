@@ -4,78 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1FA4C54791
-	for <u-boot@archiver.kernel.org>; Sat,  9 Mar 2024 22:00:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A529BC54791
+	for <u-boot@archiver.kernel.org>; Sat,  9 Mar 2024 22:00:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 233F387EE7;
-	Sat,  9 Mar 2024 22:59:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 21ECA87EF7;
+	Sat,  9 Mar 2024 22:59:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="i+xG8D/S";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SwVEaqQy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B624A87D5F; Sat,  9 Mar 2024 18:53:54 +0100 (CET)
-Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
- [IPv6:2607:f8b0:4864:20::229])
+ id 98E8487D5E; Sat,  9 Mar 2024 18:53:57 +0100 (CET)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A63987DA5
- for <u-boot@lists.denx.de>; Sat,  9 Mar 2024 18:53:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1965C87D46
+ for <u-boot@lists.denx.de>; Sat,  9 Mar 2024 18:53:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seashell11234455@gmail.com
-Received: by mail-oi1-x229.google.com with SMTP id
- 5614622812f47-3c1ea425a0fso1594577b6e.3
- for <u-boot@lists.denx.de>; Sat, 09 Mar 2024 09:53:52 -0800 (PST)
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-6e51bc7640fso387585a34.1
+ for <u-boot@lists.denx.de>; Sat, 09 Mar 2024 09:53:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1710006830; x=1710611630; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1710006833; x=1710611633; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Z32EY2y6QXPfQNHcFE741J3BfP7rF/3PQ4I4lgnnOQ0=;
- b=i+xG8D/SGyGUDwn9f58xU0ulrJ8+1oK6ZxCxMghdHOno+PBZi+YXqU0mRDAjILBeqW
- ptyZK/Jjg8ptx2sPUuz5/huk3SejISjscQ7ANhjavXgbCYT7RTuHrubGel+0xlYhzcIM
- LWyWgr2RZ1KLC+/Ge9EYSm7ne6xHKA8LteqlDLPyjJGFGFBdbqvtL1SMjAfRX7nt5g4C
- ZY+cflPcIA4EUdgJwgmbXQfwKpE2+PWdwOqyI4NHF119p8XcAtN9JOFmHJ2gPwQacP8O
- q87byWcYRVyElH+8fZjH0iek7e7pVUlVfUqxvU9W0gUXUHI+dYUIQxQoQ4iQIZdE1z64
- ss8A==
+ bh=SIodyOa/gwY/4GRCw4HyUfMPXNvU/4IZl69pc/smWIk=;
+ b=SwVEaqQyO72yRrJ4HWJdf9FiE1d7AQU9Sb/wlYgPPSk2gqvCWdCvZwqJIJJPMdevmS
+ XsiwgsNdPok0/QFK0CyvwZIj3ZBVWEma6K8+TMzWLQFfQKkj0nx0qdp/KyINGxYv4vgt
+ 2DYSx9jlfPmzUqjSe2b1A3gtH5kI7+rQG51uT1sEE5DXUogE08U+PwuhSji4o0LYOr34
+ MSk4SFAFzZXycNG5scQNaAKTcJoDAN65Vps8EywgqOrW9N8lt/S0w0j9iXFckP5G2kZP
+ YjgaU7yqQQflmcKRmQ8cmMXihEGZDXYocypaP8tVmgnD3ykh0sW4bf/CJbARJuQFEXNc
+ 4aIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710006830; x=1710611630;
+ d=1e100.net; s=20230601; t=1710006833; x=1710611633;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Z32EY2y6QXPfQNHcFE741J3BfP7rF/3PQ4I4lgnnOQ0=;
- b=YY7nJ4IDVvvx2Q/6sD9o9FEriobF0cf+cSaPGn738+I3Rkf9nMpS5CmyDgg0WxODyN
- zLkEDn395r+HhXSP2yj6WkxguKTkM8cpZZ3/af/4zBCJSOGwOS7JlAlpMybPv2qAbwj2
- uccopD1Ake/097MNmTHt351WX0LAopy0PIoRLGoAsYRHZMaV19LnEZHGvPF0oK+GYTIo
- WUrdSls5vcbrmODQAHfSTkuLXSNbPqc10079h66bf83f3DiyjEu8r65Ubf4dFnlUbQI7
- c3/1e+BPJCGjqckYq0AdpAoApIfzz5sMWbprkFuCn/nZD7cBJ9AJgfAgekEfTp+jerFs
- 2Exw==
-X-Gm-Message-State: AOJu0Yx9MbGlBzAAitIdprO7J1twWNDKRYC8wi3AxMsuOUUVpR2EvK3B
- cJsCFIIBsYp8T0PQnIHNa0PeA9YeLi8DHXzk/b8PZnEJf8Z+ZiWqaXJ6YX3ztLMdaQ==
-X-Google-Smtp-Source: AGHT+IE89i+8rNGgWi3WE+mQ6z/lsU03hhab10p1T6Wt2ABp6dtewPI/TI/rGEJXM22OvEIWR3eFPw==
-X-Received: by 2002:a05:6808:10c2:b0:3c2:214d:9b42 with SMTP id
- s2-20020a05680810c200b003c2214d9b42mr3341819ois.40.1710006829915; 
- Sat, 09 Mar 2024 09:53:49 -0800 (PST)
+ bh=SIodyOa/gwY/4GRCw4HyUfMPXNvU/4IZl69pc/smWIk=;
+ b=mQKIAcMeP3pgCHoBkggzMZveT/THnlpgeAUYsDFMr47TphefbQfxFmbVQ1NUqaCbWl
+ qkVrNCCMVbbijD1Mow1RSoQqsa7oMPPVV4MkWpMJzgQ92HspRiS3Rrm27bwaPYxcrKaH
+ iig/q4Na+fY+ul6FmD1eNYlo2urw5T61gDYFIOpFFb+XrGGieFvsBVgFrTOmIOvAjx+h
+ /HSr14tSt9SuJ86F1IoXkB2UiFSWkgIJ0ySsp0wcG6s4sXthC3H9yRxxkymLjA4d/oh1
+ nNnfkSX7sZAPWPcnwzPiw3/OVolRPxfRHsVGpU+6xueRBNdh9gnLt2xzYzpNKmyZHZIT
+ WkdQ==
+X-Gm-Message-State: AOJu0YyG3VhYD/3a7ygvCQALxFbtMDXL/TcxBxpW9BC4Qd5LaXSAXDU0
+ gK5voKEhm2/tKDHbNp5hpgVmNKETzw84IqMgOo35tybQEASvISi/SDogTPIlNKq0EQ==
+X-Google-Smtp-Source: AGHT+IGBULoc+n8P43Me8R6KZ6dYA2mmx0BlY/voHAOyLDRdcjc0ITz5bB88zUUjQB7uc8K05PWDSg==
+X-Received: by 2002:a05:6830:2006:b0:6e4:e4a9:45ec with SMTP id
+ e6-20020a056830200600b006e4e4a945ecmr2986576otp.29.1710006832667; 
+ Sat, 09 Mar 2024 09:53:52 -0800 (PST)
 Received: from localhost.localdomain ([117.135.91.249])
  by smtp.gmail.com with ESMTPSA id
- e2-20020a631e02000000b005d7994a08dcsm1530651pge.36.2024.03.09.09.53.46
+ e2-20020a631e02000000b005d7994a08dcsm1530651pge.36.2024.03.09.09.53.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 Mar 2024 09:53:49 -0800 (PST)
+ Sat, 09 Mar 2024 09:53:52 -0800 (PST)
 From: Kongyang Liu <seashell11234455@gmail.com>
 To: u-boot@lists.denx.de
-Cc: Jaehoon Chung <jh80.chung@samsung.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Paul Barker <paul.barker.ct@bp.renesas.com>, Peng Fan <peng.fan@nxp.com>,
- Peter Geis <pgwipeout@gmail.com>, Stefan Roese <sr@denx.de>,
+Cc: Leo <ycliang@andestech.com>, Rick Chen <rick@andestech.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 1/3] mmc: cv1800b: Add sdhci driver support for cv1800b SoC
-Date: Sun, 10 Mar 2024 01:51:55 +0800
-Message-ID: <20240309175330.79267-2-seashell11234455@gmail.com>
+Subject: [PATCH v2 2/3] riscv: dts: sophgo: Add clk node and sdhci node
+Date: Sun, 10 Mar 2024 01:51:56 +0800
+Message-ID: <20240309175330.79267-3-seashell11234455@gmail.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240309175330.79267-1-seashell11234455@gmail.com>
 References: <20240309175330.79267-1-seashell11234455@gmail.com>
@@ -98,179 +93,102 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add sdhci driver for cv1800b SoC.
+Add clk node and sdhci node for cv18xx SoCs according to patches from Linux
+kernel.
+
+clk: https://lore.kernel.org/all/IA1PR20MB4953F9AD6792013B54636F05BB4F2@IA1PR20MB4953.namprd20.prod.outlook.com/
+sdhci: https://lore.kernel.org/all/20240217144826.3944-1-jszhang@kernel.org/
 
 Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
 
 ---
 
 Changes in v2:
-- Refactored and simplified some of the code.
+- Sync device tree with ptaches from Linux kernel
 
- drivers/mmc/Kconfig         |  13 ++++
- drivers/mmc/Makefile        |   1 +
- drivers/mmc/cv1800b_sdhci.c | 116 ++++++++++++++++++++++++++++++++++++
- 3 files changed, 130 insertions(+)
- create mode 100644 drivers/mmc/cv1800b_sdhci.c
+ arch/riscv/dts/cv1800b-milkv-duo.dts |  8 ++++++++
+ arch/riscv/dts/cv1800b.dtsi          |  4 ++++
+ arch/riscv/dts/cv18xx.dtsi           | 22 ++++++++++++++++++++++
+ 3 files changed, 34 insertions(+)
 
-diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
-index cef05790dd..f7fe6d1042 100644
---- a/drivers/mmc/Kconfig
-+++ b/drivers/mmc/Kconfig
-@@ -568,6 +568,19 @@ config MMC_SDHCI_CADENCE
+diff --git a/arch/riscv/dts/cv1800b-milkv-duo.dts b/arch/riscv/dts/cv1800b-milkv-duo.dts
+index 3af9e34b3b..94e64ddce8 100644
+--- a/arch/riscv/dts/cv1800b-milkv-duo.dts
++++ b/arch/riscv/dts/cv1800b-milkv-duo.dts
+@@ -33,6 +33,14 @@
+ 	clock-frequency = <25000000>;
+ };
  
- 	  If unsure, say N.
++&sdhci0 {
++	status = "okay";
++	bus-width = <4>;
++	no-1-8-v;
++	no-mmc;
++	no-sdio;
++};
++
+ &uart0 {
+ 	status = "okay";
+ };
+diff --git a/arch/riscv/dts/cv1800b.dtsi b/arch/riscv/dts/cv1800b.dtsi
+index 165e9e320a..baf641829e 100644
+--- a/arch/riscv/dts/cv1800b.dtsi
++++ b/arch/riscv/dts/cv1800b.dtsi
+@@ -16,3 +16,7 @@
+ &clint {
+ 	compatible = "sophgo,cv1800b-clint", "thead,c900-clint";
+ };
++
++&clk {
++	compatible = "sophgo,cv1800-clk";
++};
+diff --git a/arch/riscv/dts/cv18xx.dtsi b/arch/riscv/dts/cv18xx.dtsi
+index 2d6f4a4b1e..ec99c4deeb 100644
+--- a/arch/riscv/dts/cv18xx.dtsi
++++ b/arch/riscv/dts/cv18xx.dtsi
+@@ -45,6 +45,13 @@
+ 		#clock-cells = <0>;
+ 	};
  
-+config MMC_SDHCI_CV1800B
-+	bool "SDHCI support for the CV1800B SD/SDIO/eMMC controller"
-+	depends on BLK && DM_MMC
-+	depends on MMC_SDHCI
-+	depends on OF_CONTROL
-+	help
-+	  This selects the CV1800B SD/SDIO/eMMC driver.
++	sdhci_clk: sdhci-clock {
++		compatible = "fixed-clock";
++		clock-frequency = <375000000>;
++		clock-output-names = "sdhci_clk";
++		#clock-cells = <0>;
++	};
 +
-+	  If you have a controller with this interface,
-+	  say Y here.
+ 	soc {
+ 		compatible = "simple-bus";
+ 		interrupt-parent = <&plic>;
+@@ -53,6 +60,12 @@
+ 		dma-noncoherent;
+ 		ranges;
+ 
++		clk: clock-controller@3002000 {
++			reg = <0x03002000 0x1000>;
++			clocks = <&osc>;
++			#clock-cells = <1>;
++		};
 +
-+	  If unsure, say N.
+ 		gpio0: gpio@3020000 {
+ 			compatible = "snps,dw-apb-gpio";
+ 			reg = <0x3020000 0x1000>;
+@@ -175,6 +188,15 @@
+ 			status = "disabled";
+ 		};
+ 
++		sdhci0: mmc@4310000 {
++			compatible = "sophgo,cv1800b-dwcmshc";
++			reg = <0x4310000 0x1000>;
++			interrupts = <36 IRQ_TYPE_LEVEL_HIGH>;
++			clocks = <&sdhci_clk>;
++			clock-names = "core";
++			status = "disabled";
++		};
 +
- config MMC_SDHCI_AM654
- 	bool "SDHCI Controller on TI's Am654 devices"
- 	depends on ARCH_K3
-diff --git a/drivers/mmc/Makefile b/drivers/mmc/Makefile
-index e9cf1fcc64..3374321e29 100644
---- a/drivers/mmc/Makefile
-+++ b/drivers/mmc/Makefile
-@@ -60,6 +60,7 @@ obj-$(CONFIG_MMC_SDHCI_ATMEL)		+= atmel_sdhci.o
- obj-$(CONFIG_MMC_SDHCI_BCM2835)		+= bcm2835_sdhci.o
- obj-$(CONFIG_MMC_SDHCI_BCMSTB)		+= bcmstb_sdhci.o
- obj-$(CONFIG_MMC_SDHCI_CADENCE)		+= sdhci-cadence.o
-+obj-$(CONFIG_MMC_SDHCI_CV1800B)		+= cv1800b_sdhci.o
- obj-$(CONFIG_MMC_SDHCI_AM654)		+= am654_sdhci.o
- obj-$(CONFIG_MMC_SDHCI_IPROC)		+= iproc_sdhci.o
- obj-$(CONFIG_MMC_SDHCI_KONA)		+= kona_sdhci.o
-diff --git a/drivers/mmc/cv1800b_sdhci.c b/drivers/mmc/cv1800b_sdhci.c
-new file mode 100644
-index 0000000000..2275c53777
---- /dev/null
-+++ b/drivers/mmc/cv1800b_sdhci.c
-@@ -0,0 +1,116 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (c) 2024, Kongyang Liu <seashell11234455@gmail.com>
-+ */
-+
-+#include <dm.h>
-+#include <mmc.h>
-+#include <sdhci.h>
-+#include <linux/delay.h>
-+
-+#define SDHCI_PHY_TX_RX_DLY  0x240
-+#define MMC_MAX_CLOCK        375000000
-+#define TUNE_MAX_PHCODE      128
-+
-+struct cv1800b_sdhci_plat {
-+	struct mmc_config cfg;
-+	struct mmc mmc;
-+};
-+
-+static void cv1800b_set_tap_delay(struct sdhci_host *host, u16 tap)
-+{
-+	sdhci_writel(host, tap << 16, SDHCI_PHY_TX_RX_DLY);
-+}
-+
-+static void cv1800b_sdhci_reset(struct sdhci_host *host, u8 mask)
-+{
-+	sdhci_writeb(host, mask, SDHCI_SOFTWARE_RESET);
-+	while (sdhci_readb(host, SDHCI_SOFTWARE_RESET) & mask)
-+		udelay(10);
-+}
-+
-+static int cv1800b_execute_tuning(struct mmc *mmc, u8 opcode)
-+{
-+	struct sdhci_host *host = dev_get_priv(mmc->dev);
-+
-+	u16 tap;
-+
-+	int current_size = 0;
-+	int max_size = 0;
-+	int max_window = 0;
-+
-+	for (tap = 0; tap < TUNE_MAX_PHCODE; tap++) {
-+		cv1800b_set_tap_delay(host, tap);
-+
-+		if (mmc_send_tuning(host->mmc, opcode, NULL)) {
-+			current_size = 0;
-+		} else {
-+			current_size++;
-+			if (current_size > max_size) {
-+				max_size = current_size;
-+				max_window = tap;
-+			}
-+		}
-+	}
-+
-+	cv1800b_sdhci_reset(host, SDHCI_RESET_CMD | SDHCI_RESET_DATA);
-+
-+	cv1800b_set_tap_delay(host, max_window - max_size / 2);
-+
-+	return 0;
-+}
-+
-+const struct sdhci_ops cv1800b_sdhci_sd_ops = {
-+	.platform_execute_tuning = cv1800b_execute_tuning,
-+};
-+
-+static int cv1800b_sdhci_bind(struct udevice *dev)
-+{
-+	struct cv1800b_sdhci_plat *plat = dev_get_plat(dev);
-+
-+	return sdhci_bind(dev, &plat->mmc, &plat->cfg);
-+}
-+
-+static int cv1800b_sdhci_probe(struct udevice *dev)
-+{
-+	struct mmc_uclass_priv *upriv = dev_get_uclass_priv(dev);
-+	struct cv1800b_sdhci_plat *plat = dev_get_plat(dev);
-+	struct sdhci_host *host = dev_get_priv(dev);
-+	int ret;
-+
-+	host->name = dev->name;
-+	host->ioaddr = devfdt_get_addr_ptr(dev);
-+
-+	upriv->mmc = &plat->mmc;
-+	host->mmc = &plat->mmc;
-+	host->mmc->priv = host;
-+	host->mmc->dev = dev;
-+	host->ops = &cv1800b_sdhci_sd_ops;
-+	host->max_clk = MMC_MAX_CLOCK;
-+
-+	ret = mmc_of_parse(dev, &plat->cfg);
-+	if (ret)
-+		return ret;
-+
-+	ret = sdhci_setup_cfg(&plat->cfg, host, 0, 200000);
-+	if (ret)
-+		return ret;
-+
-+	return sdhci_probe(dev);
-+}
-+
-+static const struct udevice_id cv1800b_sdhci_match[] = {
-+	{ .compatible = "sophgo,cv1800b-dwcmshc" },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(cv1800b_sdhci) = {
-+	.name = "sdhci-cv1800b",
-+	.id = UCLASS_MMC,
-+	.of_match = cv1800b_sdhci_match,
-+	.bind = cv1800b_sdhci_bind,
-+	.probe = cv1800b_sdhci_probe,
-+	.priv_auto = sizeof(struct sdhci_host),
-+	.plat_auto = sizeof(struct cv1800b_sdhci_plat),
-+	.ops = &sdhci_ops,
-+};
+ 		plic: interrupt-controller@70000000 {
+ 			reg = <0x70000000 0x4000000>;
+ 			interrupts-extended = <&cpu0_intc 11>, <&cpu0_intc 9>;
 -- 
 2.41.0
 
