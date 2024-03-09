@@ -4,76 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E77FC54E49
-	for <u-boot@archiver.kernel.org>; Sat,  9 Mar 2024 22:01:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BB9FC54E49
+	for <u-boot@archiver.kernel.org>; Sat,  9 Mar 2024 22:10:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A5D387F0A;
-	Sat,  9 Mar 2024 22:59:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BE51986FB2;
+	Sat,  9 Mar 2024 23:10:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gdG2x+9Y";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Wv6mg6pz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ED75487DC1; Sat,  9 Mar 2024 20:25:54 +0100 (CET)
-Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
- [IPv6:2a00:1450:4864:20::12b])
+ id A197B87073; Sat,  9 Mar 2024 23:10:46 +0100 (CET)
+Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
+ [IPv6:2607:f8b0:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE72687D2D
- for <u-boot@lists.denx.de>; Sat,  9 Mar 2024 20:25:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1881086F1E
+ for <u-boot@lists.denx.de>; Sat,  9 Mar 2024 23:10:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ressetkk@gmail.com
-Received: by mail-lf1-x12b.google.com with SMTP id
- 2adb3069b0e04-513173e8191so2706413e87.1
- for <u-boot@lists.denx.de>; Sat, 09 Mar 2024 11:25:52 -0800 (PST)
+ spf=pass smtp.mailfrom=hiagofranco@gmail.com
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-1dd5df90170so21117215ad.0
+ for <u-boot@lists.denx.de>; Sat, 09 Mar 2024 14:10:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1710012352; x=1710617152; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=biXOnBF6FNlNRNQoIuhSWEylXD8oVl7ZlERxrOkDsEI=;
- b=gdG2x+9Y+AalKG3/mujUj/0chEwvOhKfLt6QrEV8RKOMuiDhP+KAHI0KCbiC89/YMr
- XJwPMPYcI4k71P+Myqwht7nNmAinnwvzhYCeu2fcC1IGSHf68GDpZzuJsWdCZleg/p9f
- Edl7tX6m6PJSX0f6CUwJvl3w+suIhtq9i2AilsgrglrK6/XPUb9T7v2mTxkeNKcK9Ld6
- XSWS0uUaPNU5wReQb2eO6CkrJPtpOIF9c3grVFyhmnVjC13/CcT7lnTHt6DvGP3802Se
- A4HalFWdQUiBdUl4sSah0rdNvXg3idV//n5KpVSt1FN89Vlk0nuyWvavNsV0yl1zJQwD
- Sxww==
+ d=gmail.com; s=20230601; t=1710022241; x=1710627041; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ly4vkRZX3WOQZ1pVuJd4gunEg80z25Gkrfht0n5WhYk=;
+ b=Wv6mg6pzfaALqwYw8T1QJ/ogy10ZzgySP9+o83q55TNPM2Hl1mk3H6sZAsgBxuVwvf
+ JGYQur2ZeegRLjI9NXDuOVtlrOfZZxBq26XgsqwcQ9JKTwQpx9qgee2/kWQcU+5bG4jd
+ vx9YBPqZgCzJRMQeZcbMhSz5Y1pGB6tWriGQvHJN+yXUH9MscpqvMD7+kSJUYdtraGif
+ jU7IAiSQZwWO7Ha9Nb1cw8ozbknd8ixoIN/QUZFojAMB1wAFik5wzki4g9meHVAgXQKA
+ zXMLx6CZiICaby/mzRnBE3o3KFOxNc+WnY9Yiwq/6KHEV+glUJ3ktQt1aknDpVt+KFR2
+ rarw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710012352; x=1710617152;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=biXOnBF6FNlNRNQoIuhSWEylXD8oVl7ZlERxrOkDsEI=;
- b=Kl6pz92NlIUQrS1MQ2cQNH9w+4VflsuBvxM0fDmA0p3XMOVEdP7XScHHzdS3nDTaZk
- Zj58LRhrHurKKQOmuPn0L1jMHOqicFIhCog5SzXBQJXYVv3KNiVkxMOmBaAHO1zpTtja
- EBBuIgBoyCcETJZoOJCEebcwC55NOWGgtw9BHGdG75jNBsSxF22A5FqBqaW8w/XZSkT+
- SjvRlnkoT/tZ3KM6687AaojjrG0jF1kA63p+PjBK0HAUrazuC0tRUuK9tIFPBPz2Ddiq
- t52xgoB3s/OnI7oAeoys59cehrolhpxb9CfFOzef+deGVkyQeXi0vPsAwcH8kRy00zOj
- nDOA==
-X-Gm-Message-State: AOJu0Yye0sZk4YLUDBu3vpAG8MncCfcLppuTWGCaive0Gc1ZIeDC/Fj+
- Qb4GlmJcGz29XmKIHob+vSqge/gIdv00nIHkIOoz7rRfyU9Nef2rOIWHf63pe6Q=
-X-Google-Smtp-Source: AGHT+IHlBjjxKHOapVy1hQG/bwK4cmX225hO1Wjql+bGaB5l9vxNSj2dfNQrQ4DtSw52T7m3S7fTzw==
-X-Received: by 2002:ac2:5bd0:0:b0:513:7e83:b3f5 with SMTP id
- u16-20020ac25bd0000000b005137e83b3f5mr1441138lfn.67.1710012351763; 
- Sat, 09 Mar 2024 11:25:51 -0800 (PST)
-Received: from localhost.localdomain (89-76-44-138.dynamic.chello.pl.
- [89.76.44.138]) by smtp.gmail.com with ESMTPSA id
- dt14-20020a170906b78e00b00a45f2dc6795sm1179554ejb.137.2024.03.09.11.25.51
+ d=1e100.net; s=20230601; t=1710022241; x=1710627041;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ly4vkRZX3WOQZ1pVuJd4gunEg80z25Gkrfht0n5WhYk=;
+ b=Af2u9zbPU1jYynmtjrOM9xWZxBK5XyuvdyohMqmz8lQ5de9U5HIIONxkxtEt2Objy6
+ dXXujYtwJ5uF5M2DCrmYbcooUmJGBaKZf7UzlQI1wIVF95sycd0QsOiZPzahi6jz5PP9
+ bTxmLtwrK+/Leb+F36BOYvIQnJvwJtmvecVQlRPou+rQUccs97vlK71G2AOl/vjCKO8H
+ +60w+yFSSBwopiQxJf69uLdvGFDzmWtJVagQ3Hbq6d9M+hkSEfovH1gMSEV1SOejTXvZ
+ hdIUPwKPe21lPVwt/tacfUDUbwUaD0q1N7kHxa8kpXVevz6aaViZmxb4plgqKLPIVMVw
+ t5ow==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUfQeM9jjZcYdW9ECscajZxytTTj7DmqVrwUb5u8OTyvFP6ACiZthOXHXhyO0yxMkZmjHpVDaYggvWuitCVIcrO7cSjLg==
+X-Gm-Message-State: AOJu0Yx9SsbMOVEViFSnuDACleYvOg9dnJoolGdhrX36WSVLvpuPpBtZ
+ 8KYU380zJzxdNid76xs9txsw01u/w2yynDtsLx7vioWOCbj8JfUK
+X-Google-Smtp-Source: AGHT+IHEzBIQpEPJOqG9hQpl6d5Ge8kDx5q5Pp+/mNau6cINE9NKaYw1YrRNvwTI4TYWEY2Umu5qYw==
+X-Received: by 2002:a17:902:e9cc:b0:1dd:6285:b84a with SMTP id
+ 12-20020a170902e9cc00b001dd6285b84amr2963708plk.9.1710022241133; 
+ Sat, 09 Mar 2024 14:10:41 -0800 (PST)
+Received: from hdebian.. ([2804:14d:8084:b86e:a499:faa9:8aa5:875a])
+ by smtp.gmail.com with ESMTPSA id
+ t9-20020a170902d28900b001db5ee597e8sm1752433plc.261.2024.03.09.14.10.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 Mar 2024 11:25:51 -0800 (PST)
-From: Kamil Kasperski <ressetkk@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Kamil Kasperski <ressetkk@gmail.com>,
- Andre Przywara <andre.przywara@arm.com>
-Subject: [PATCH] sunxi: h616: add initial support for T95 AXP313 TV Box
-Date: Sat,  9 Mar 2024 19:24:26 +0000
-Message-Id: <20240309192425.40282-1-ressetkk@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ Sat, 09 Mar 2024 14:10:40 -0800 (PST)
+From: Hiago De Franco <hiagofranco@gmail.com>
+To: peng.fan@nxp.com
+Cc: festevam@gmail.com, francesco.dolcini@toradex.com,
+ hiago.franco@toradex.com, joao.goncalves@toradex.com,
+ marcel.ziswiler@toradex.com, seanga2@gmail.com, trini@konsulko.com,
+ u-boot@lists.denx.de, ye.li@nxp.com,
+ Hiago De Franco <hiagofranco@gmail.com>
+Subject: RE: [PATCH 1/2] clk: clk-imx8qxp: Add LPUART IPG entries
+Date: Sat,  9 Mar 2024 19:09:32 -0300
+Message-ID: <20240309220932.166254-1-hiagofranco@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <DU0PR04MB94175939E19F7DDFDA77758388262@DU0PR04MB9417.eurprd04.prod.outlook.com>
+References: <DU0PR04MB94175939E19F7DDFDA77758388262@DU0PR04MB9417.eurprd04.prod.outlook.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sat, 09 Mar 2024 22:59:37 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,224 +97,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-T95 is a most commonly known for being a box with a pre-installed malware.
-It uses Allwinner H616 and comes with eMMC and DDR3 memory.
-This device comes with two versions - one with AXP305 PMIC and another with AXP313 PMIC.
-The AXP313 version comes with Secure Boot enabled and locked bootloader, so the u-boot has to be built with TOC0.
-DRAM settings are taken from Allwinner's boot0 for this box.
+On 09.03.2024 01:15, Peng Fan wrote:
+> > Subject: [PATCH 1/2] clk: clk-imx8qxp: Add LPUART IPG entries
+> > 
+> > Since commit cc7df0b9e8bc ("serial: lpuart: Enable IPG clock") the colibri-
+> > imx8qxp board no longer boots.
+> > 
+> > The reason is that the imx8qxp clock driver does not handle the LPUART IPG
+> > clocks inside get_rate(), set_rate() and enable() functions.
+> > 
+> > Fix the boot regression by adding the LPUART IPG entries.
+> > 
+> > Fixes: cc7df0b9e8bc ("serial: lpuart: Enable IPG clock")
+> > Reported-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+> > Signed-off-by: Fabio Estevam <festevam@gmail.com>
+> 
+> Reviewed-by: Peng Fan <peng.fan@nxp.com>
 
-Cc: Andre Przywara <andre.przywara@arm.com>
+Tested-by: Hiago De Franco <hiago.franco@toradex.com> # Toradex Colibri iMX8X
 
-Signed-off-by: Kamil Kasperski <ressetkk@gmail.com>
----
- arch/arm/dts/Makefile                   |   3 +-
- arch/arm/dts/sun50i-h616-t95-axp313.dts | 148 ++++++++++++++++++++++++
- configs/t95_axp313_defconfig            |  27 +++++
- 3 files changed, 177 insertions(+), 1 deletion(-)
- create mode 100644 arch/arm/dts/sun50i-h616-t95-axp313.dts
- create mode 100644 configs/t95_axp313_defconfig
-
-diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index b102ffb5f6..144daf6c48 100644
---- a/arch/arm/dts/Makefile
-+++ b/arch/arm/dts/Makefile
-@@ -842,7 +842,8 @@ dtb-$(CONFIG_MACH_SUN50I_H616) += \
- 	sun50i-h618-orangepi-zero2w.dtb \
- 	sun50i-h618-orangepi-zero3.dtb \
- 	sun50i-h618-transpeed-8k618-t.dtb \
--	sun50i-h616-x96-mate.dtb
-+	sun50i-h616-x96-mate.dtb \
-+	sun50i-h616-t95-axp313.dtb
- dtb-$(CONFIG_MACH_SUN50I) += \
- 	sun50i-a64-amarula-relic.dtb \
- 	sun50i-a64-bananapi-m64.dtb \
-diff --git a/arch/arm/dts/sun50i-h616-t95-axp313.dts b/arch/arm/dts/sun50i-h616-t95-axp313.dts
-new file mode 100644
-index 0000000000..b006f363d5
---- /dev/null
-+++ b/arch/arm/dts/sun50i-h616-t95-axp313.dts
-@@ -0,0 +1,148 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+/*
-+ * Copyright (C) 2021 Arm Ltd.
-+ */
-+
-+/dts-v1/;
-+
-+#include "sun50i-h616.dtsi"
-+
-+#include <dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/interrupt-controller/arm-gic.h>
-+
-+/ {
-+	model = "T95 (AXP313)";
-+	compatible = "mbox,t95-axp313", "allwinner,sun50i-h616";
-+
-+	aliases {
-+		serial0 = &uart0;
-+	};
-+
-+	chosen {
-+		stdout-path = "serial0:115200n8";
-+	};
-+
-+	reg_vcc5v: vcc5v {
-+		/* board wide 5V supply directly from the DC input */
-+		compatible = "regulator-fixed";
-+		regulator-name = "vcc-5v";
-+		regulator-min-microvolt = <5000000>;
-+		regulator-max-microvolt = <5000000>;
-+		regulator-always-on;
-+	};
-+};
-+
-+&ehci0 {
-+	status = "okay";
-+};
-+
-+&ehci2 {
-+	status = "okay";
-+};
-+
-+&ir {
-+	status = "okay";
-+};
-+
-+&mmc0 {
-+	cd-gpios = <&pio 8 16 GPIO_ACTIVE_LOW>;	/* PI16 */
-+	vmmc-supply = <&reg_dldo1>;
-+	status = "okay";
-+};
-+
-+&mmc2 {
-+	vmmc-supply = <&reg_dldo1>;
-+	vqmmc-supply = <&reg_aldo1>;
-+	bus-width = <8>;
-+	non-removable;
-+	cap-mmc-hw-reset;
-+	mmc-ddr-1_8v;
-+	mmc-hs200-1_8v;
-+	status = "okay";
-+};
-+
-+&ohci0 {
-+	status = "okay";
-+};
-+
-+&ohci2 {
-+	status = "okay";
-+};
-+
-+&r_i2c {
-+	status = "okay";
-+
-+	axp313: pmic@36 {
-+		compatible = "x-powers,axp313a";
-+		reg = <0x36>;
-+		#interrupt-cells = <1>;
-+		interrupt-controller;
-+		interrupt-parent = <&pio>;
-+		interrupts = <2 9 IRQ_TYPE_LEVEL_LOW>;	/* PC9 */
-+
-+		vin1-supply = <&reg_vcc5v>;
-+		vin2-supply = <&reg_vcc5v>;
-+		vin3-supply = <&reg_vcc5v>;
-+
-+		regulators {
-+			/* Supplies VCC-PLL, so needs to be always on. */
-+			reg_aldo1: aldo1 {
-+				regulator-always-on;
-+				regulator-min-microvolt = <1800000>;
-+				regulator-max-microvolt = <1800000>;
-+				regulator-name = "vcc1v8";
-+			};
-+
-+			/* Supplies VCC-IO, so needs to be always on. */
-+			reg_dldo1: dldo1 {
-+				regulator-always-on;
-+				regulator-min-microvolt = <3300000>;
-+				regulator-max-microvolt = <3300000>;
-+				regulator-name = "vcc3v3";
-+			};
-+
-+			reg_dcdc1: dcdc1 {
-+				regulator-always-on;
-+				regulator-min-microvolt = <810000>;
-+				regulator-max-microvolt = <990000>;
-+				regulator-name = "vdd-gpu-sys";
-+			};
-+
-+			reg_dcdc2: dcdc2 {
-+				regulator-always-on;
-+				regulator-min-microvolt = <810000>;
-+				regulator-max-microvolt = <1100000>;
-+				regulator-name = "vdd-cpu";
-+			};
-+
-+			reg_dcdc3: dcdc3 {
-+				regulator-always-on;
-+				regulator-min-microvolt = <1360000>;
-+				regulator-max-microvolt = <1360000>;
-+				regulator-name = "vdd-dram";
-+			};
-+		};
-+	};
-+};
-+
-+&pio {
-+	vcc-pc-supply = <&reg_aldo1>;
-+	vcc-pg-supply = <&reg_dldo1>;
-+	vcc-ph-supply = <&reg_dldo1>;
-+	vcc-pi-supply = <&reg_dldo1>;
-+};
-+
-+&uart0 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&uart0_ph_pins>;
-+	status = "okay";
-+};
-+
-+&usbotg {
-+	dr_mode = "host";	/* USB A type receptable */
-+	status = "okay";
-+};
-+
-+&usbphy {
-+	status = "okay";
-+};
-diff --git a/configs/t95_axp313_defconfig b/configs/t95_axp313_defconfig
-new file mode 100644
-index 0000000000..6542b5bc88
---- /dev/null
-+++ b/configs/t95_axp313_defconfig
-@@ -0,0 +1,27 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_SUNXI=y
-+CONFIG_DEFAULT_DEVICE_TREE="sun50i-h616-t95-axp313"
-+CONFIG_SPL=y
-+CONFIG_MACH_SUN50I_H616=y
-+CONFIG_DRAM_CLK=648
-+CONFIG_DRAM_SUN50I_H616_ODT_EN=0x1
-+CONFIG_DRAM_SUN50I_H616_DX_ODT=0x03030303
-+CONFIG_DRAM_SUN50I_H616_DX_DRI=0x0e0e0e0e
-+CONFIG_DRAM_SUN50I_H616_CA_DRI=0x1c1c
-+CONFIG_DRAM_SUN50I_H616_TPR10=0x2f0006
-+CONFIG_DRAM_SUN50I_H616_TPR11=0xffffdddd
-+CONFIG_DRAM_SUN50I_H616_TPR12=0xfedf7657
-+CONFIG_SUNXI_DRAM_H616_DDR3_1333=y
-+CONFIG_R_I2C_ENABLE=y
-+CONFIG_SPL_I2C=y
-+CONFIG_SPL_SYS_I2C_LEGACY=y
-+CONFIG_SYS_I2C_MVTWSI=y
-+CONFIG_SYS_I2C_SLAVE=0x7f
-+CONFIG_SYS_I2C_SPEED=400000
-+CONFIG_SUPPORT_EMMC_BOOT=y
-+CONFIG_AXP313_POWER=y
-+CONFIG_AXP_DCDC3_VOLT=1360
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_OHCI_HCD=y
-+CONFIG_SUN8I_EMAC=y
-+CONFIG_SPL_IMAGE_TYPE_SUNXI_TOC0=y
--- 
-2.34.1
-
+> > ---
+> >  drivers/clk/imx/clk-imx8qxp.c | 13 ++++++++++++-
+> >  1 file changed, 12 insertions(+), 1 deletion(-)
+> > 
+> > diff --git a/drivers/clk/imx/clk-imx8qxp.c b/drivers/clk/imx/clk-imx8qxp.c
+> > index 8bf7e325481..d900d4cd528 100644
+> > --- a/drivers/clk/imx/clk-imx8qxp.c
+> > +++ b/drivers/clk/imx/clk-imx8qxp.c
+> > @@ -88,20 +88,23 @@ ulong imx8_clk_get_rate(struct clk *clk)
+> >  		resource = SC_R_SDHC_1;
+> >  		pm_clk = SC_PM_CLK_PER;
+> >  		break;
+> > -	case IMX8QXP_UART0_IPG_CLK:
+> >  	case IMX8QXP_UART0_CLK:
+> > +	case IMX8QXP_UART0_IPG_CLK:
+> >  		resource = SC_R_UART_0;
+> >  		pm_clk = SC_PM_CLK_PER;
+> >  		break;
+> >  	case IMX8QXP_UART1_CLK:
+> > +	case IMX8QXP_UART1_IPG_CLK:
+> >  		resource = SC_R_UART_1;
+> >  		pm_clk = SC_PM_CLK_PER;
+> >  		break;
+> >  	case IMX8QXP_UART2_CLK:
+> > +	case IMX8QXP_UART2_IPG_CLK:
+> >  		resource = SC_R_UART_2;
+> >  		pm_clk = SC_PM_CLK_PER;
+> >  		break;
+> >  	case IMX8QXP_UART3_CLK:
+> > +	case IMX8QXP_UART3_IPG_CLK:
+> >  		resource = SC_R_UART_3;
+> >  		pm_clk = SC_PM_CLK_PER;
+> >  		break;
+> > @@ -170,18 +173,22 @@ ulong imx8_clk_set_rate(struct clk *clk, unsigned
+> > long rate)
+> >  		pm_clk = SC_PM_CLK_PER;
+> >  		break;
+> >  	case IMX8QXP_UART0_CLK:
+> > +	case IMX8QXP_UART0_IPG_CLK:
+> >  		resource = SC_R_UART_0;
+> >  		pm_clk = SC_PM_CLK_PER;
+> >  		break;
+> >  	case IMX8QXP_UART1_CLK:
+> > +	case IMX8QXP_UART1_IPG_CLK:
+> >  		resource = SC_R_UART_1;
+> >  		pm_clk = SC_PM_CLK_PER;
+> >  		break;
+> >  	case IMX8QXP_UART2_CLK:
+> > +	case IMX8QXP_UART2_IPG_CLK:
+> >  		resource = SC_R_UART_2;
+> >  		pm_clk = SC_PM_CLK_PER;
+> >  		break;
+> >  	case IMX8QXP_UART3_CLK:
+> > +	case IMX8QXP_UART3_IPG_CLK:
+> >  		resource = SC_R_UART_3;
+> >  		pm_clk = SC_PM_CLK_PER;
+> >  		break;
+> > @@ -263,18 +270,22 @@ int __imx8_clk_enable(struct clk *clk, bool enable)
+> >  		pm_clk = SC_PM_CLK_PER;
+> >  		break;
+> >  	case IMX8QXP_UART0_CLK:
+> > +	case IMX8QXP_UART0_IPG_CLK:
+> >  		resource = SC_R_UART_0;
+> >  		pm_clk = SC_PM_CLK_PER;
+> >  		break;
+> >  	case IMX8QXP_UART1_CLK:
+> > +	case IMX8QXP_UART1_IPG_CLK:
+> >  		resource = SC_R_UART_1;
+> >  		pm_clk = SC_PM_CLK_PER;
+> >  		break;
+> >  	case IMX8QXP_UART2_CLK:
+> > +	case IMX8QXP_UART2_IPG_CLK:
+> >  		resource = SC_R_UART_2;
+> >  		pm_clk = SC_PM_CLK_PER;
+> >  		break;
+> >  	case IMX8QXP_UART3_CLK:
+> > +	case IMX8QXP_UART3_IPG_CLK:
+> >  		resource = SC_R_UART_3;
+> >  		pm_clk = SC_PM_CLK_PER;
+> >  		break;
+> > --
+> > 2.34.1
+> 
