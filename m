@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6A2BC54798
-	for <u-boot@archiver.kernel.org>; Sat,  9 Mar 2024 16:25:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E53AFC54E49
+	for <u-boot@archiver.kernel.org>; Sat,  9 Mar 2024 21:59:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E55D876A4;
-	Sat,  9 Mar 2024 17:25:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D761F87DB3;
+	Sat,  9 Mar 2024 22:59:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uzkzkaPc";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NE9Ic4Cy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1FB7287776; Sat,  9 Mar 2024 17:25:51 +0100 (CET)
-Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
- [IPv6:2607:f8b0:4864:20::234])
+ id 2C55187DE9; Sat,  9 Mar 2024 22:59:04 +0100 (CET)
+Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
+ [IPv6:2607:f8b0:4864:20::729])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 772098765B
- for <u-boot@lists.denx.de>; Sat,  9 Mar 2024 17:25:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 032E887C82
+ for <u-boot@lists.denx.de>; Sat,  9 Mar 2024 22:58:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-3c213690558so806267b6e.0
- for <u-boot@lists.denx.de>; Sat, 09 Mar 2024 08:25:48 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x729.google.com with SMTP id
+ af79cd13be357-788598094c4so75521985a.0
+ for <u-boot@lists.denx.de>; Sat, 09 Mar 2024 13:58:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710001547; x=1710606347; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1710021535; x=1710626335; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TTO2Kwn1iX/DEdv2Z1xzXluKHps093ZP+OY81WgkgBs=;
- b=uzkzkaPcgG+k5jsIXaOScevsX2pXNRpkSvydouapQOEOdIsuSA4YGPsnL5SYaJi012
- hiGwiHz7EBmQK33cfvvNfRl/rcXLGF45+I8spMJ846IMae2mmWjfVXLtOd0+3jQRHLm9
- fLbrs4jHDckECeL02yKyc/xM8fPFrWH3DDNLRWU+RB5waBJUAWHn+9Uf+Ru/C13sd5hV
- qUKifpYMX9RHsX52k5r6DAGK9xfeU+lt/NlrmrC4r5mAJGnuzZzp50EcB/OgZBR2mNEp
- T1GQuYvbvM9QHiJaaDxKHAiZbpNVphooMg3W6KmTVC68S67W/A6e3xXtMe/fQEXPblKF
- 2ZEw==
+ bh=l0Xtvoh+6iX/cWg9t8J7R62jg9GlZ+H97HPf1Qvw1lc=;
+ b=NE9Ic4CyRx50W79DgIQ4JrKjoGfMQfxyhZ7zSDNQgMEMyR1qGfwDLQ/mfC4XHPFif1
+ ScXA5akGqfEkSc2VVClyIGko5uaXfOchzub9VKIS4T2rdSDAfF1mbTczfj0x164iY1+W
+ RRTYyco+zC9DJn3ssmg0+o8DqTJnvqjWUu4d4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710001547; x=1710606347;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1710021535; x=1710626335;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=TTO2Kwn1iX/DEdv2Z1xzXluKHps093ZP+OY81WgkgBs=;
- b=T3VX+XvHpn8CgwLDfQ6Xz31adXA3lFoZ5jSC+ia0dZcwKxOQyLYU18T7/JHU0DMzW5
- OEm/MZqGLAXW+rAhzaYL7NY1BB4GAZ0VL+kkxr75H7jpw0g1LSz4PATo8GQFYjfCLLZY
- /RPU80lVzYuouSA75FUrT9YjpE1EF3Ws6os5CjZj/XKCFMCF3aN6E51S2EcCy1kViW20
- nB5xOnB9ti4djJ8FJ5jOU7x+iZTM2UsIe6Bf19ML9QCMEBdlBWA66XWsU4kvq5K3m/7t
- vU5fjyd57Utg8ZbJR1zRuAmbxTNlovPTLgsy2XPYajkynyL8hUPP5XaOrN+y2tYBU3Zr
- lKJA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUHXO15QXUQ1W6ugQVp7LQGF7UCLXvI6tUk/9n4oHqIF7I6Ww5NvgCDg+eRxviXQomS+djzt5CxtNcB9NQKA4dGvJ62eA==
-X-Gm-Message-State: AOJu0YyKk5Oi/qJFFMbdoI1f9kEjY5uqs5sKIOZLiMkJ54pype+PMrkY
- Od//BD8ZYgGATb8Z4eCoTgdK89KDaBIIjZ+gyXtiYrSuFD6KfdG6UvSpMccfKKjqX2JSSxhkKyL
- 5Y+8OL877NL8dRvy7U/982ASMODynjCvtp1tGew==
-X-Google-Smtp-Source: AGHT+IFU5cDj4luBI3Kxl4fUKIBn+a81S0pS3CwJdAgY7KwimnoJ0JuiwjmqxPaHL7IL/Z2Wx5D5C7qZy0cuJsLDksU=
-X-Received: by 2002:a05:6808:1a08:b0:3c2:13da:a302 with SMTP id
- bk8-20020a0568081a0800b003c213daa302mr2830903oib.49.1710001547032; Sat, 09
- Mar 2024 08:25:47 -0800 (PST)
+ bh=l0Xtvoh+6iX/cWg9t8J7R62jg9GlZ+H97HPf1Qvw1lc=;
+ b=FhB1zeE3Rb6X4ik0ESFnqzu6jyqPMc69EQEpXr1W/vW6w2D747EPuLnYgg0zAlemur
+ Koqi6I5/YMKeUODN/E2TvyYCxf/VQ24i8jmpgoF2GsvQH8027cha6gLaVin9ItOUYRvl
+ EB72RCxFLlsladILvHkSktBdPH0BDWCwQtP/9tvmoNMLKZyfqIpL/bZFuoIybYqXo/ds
+ X5Ae0+gXIxf/dhf0TZZJl4ikFyXNIHKNvWZK57qT9Jn9ec6TCTf6JveciipTopgYIp1B
+ RAnAG4Yv9nsYEYX3nZNEQCg3K1O4Jlb1042/OGec8gD5VNxbQKjb4yDx6aEINdGfFAAe
+ Ad0Q==
+X-Gm-Message-State: AOJu0YyPGhX/7fh9SjVehfD4LBCKeHuVjv1sisKw5+NXIIto3htWjeRz
+ xYE+vyt+HwwSzoclFm/+fblN0dKM0bJNV0mDWI5U4dPq4UGimNVe0XpJ/GnNSRo=
+X-Google-Smtp-Source: AGHT+IGXdENiGaY/fOQ4r/uWDd6COKhys1d5ldm1Ghc3priIYH04KJ4BWWUznUYRWndDK57zjM2Blw==
+X-Received: by 2002:a05:620a:171f:b0:787:21a8:1177 with SMTP id
+ az31-20020a05620a171f00b0078721a81177mr3764920qkb.59.1710021535426; 
+ Sat, 09 Mar 2024 13:58:55 -0800 (PST)
+Received: from [127.0.1.1]
+ (2603-6081-7b00-007f-0000-0000-0000-1004.res6.spectrum.com.
+ [2603:6081:7b00:7f::1004]) by smtp.gmail.com with ESMTPSA id
+ bj40-20020a05620a192800b007884db6b2absm1280167qkb.10.2024.03.09.13.58.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 09 Mar 2024 13:58:54 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Joe Hershberger <joe.hershberger@ni.com>, 
+ Paul Barker <paul.barker.ct@bp.renesas.com>, 
+ Ramon Fried <rfried.dev@gmail.com>
+In-Reply-To: <20240128011959.59995-1-marek.vasut+renesas@mailbox.org>
+References: <20240128011959.59995-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH v2] net: phy: Use PHY MDIO address from DT if available
+Message-Id: <171002153399.481080.11212676210616891858.b4-ty@konsulko.com>
+Date: Sat, 09 Mar 2024 16:58:53 -0500
 MIME-Version: 1.0
-References: <e654ed23-1fbb-4458-83d3-2348ec7ef1de@siemens.com>
-In-Reply-To: <e654ed23-1fbb-4458-83d3-2348ec7ef1de@siemens.com>
-From: Sam Protsenko <semen.protsenko@linaro.org>
-Date: Sat, 9 Mar 2024 10:25:36 -0600
-Message-ID: <CAPLW+4=vk0EAO7JsabtnYQf3tQ78DdeqPJq3KYa=toGNZeyRBw@mail.gmail.com>
-Subject: Re: [PATCH] clk: Fix error message in clk_get_bulk
-To: Jan Kiszka <jan.kiszka@siemens.com>
-Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,34 +92,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Mar 9, 2024 at 6:27=E2=80=AFAM Jan Kiszka <jan.kiszka@siemens.com> =
-wrote:
->
-> From: Jan Kiszka <jan.kiszka@siemens.com>
->
-> Fix a logical inversion of the printed text.
->
-> Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
-> ---
+On Sun, 28 Jan 2024 02:19:40 +0100, Marek Vasut wrote:
 
-Reviewed-by: Sam Protsenko <semen.protsenko@linaro.org>
+> In case the PHY is fully described in DT, use PHY MDIO address
+> from DT directly instead of always using auto-detection. This
+> also fixes the behavior of 'mdio list' in such DT setup, which
+> now prints the PHY connected to the MAC correctly.
+> 
+> 
 
->  drivers/clk/clk-uclass.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
-> index ed6e60bc484..78d8ea94c65 100644
-> --- a/drivers/clk/clk-uclass.c
-> +++ b/drivers/clk/clk-uclass.c
-> @@ -180,7 +180,7 @@ int clk_get_bulk(struct udevice *dev, struct clk_bulk=
- *bulk)
->  bulk_get_err:
->         err =3D clk_release_all(bulk->clks, bulk->count);
->         if (err)
-> -               debug("%s: could release all clocks for %p\n",
-> +               debug("%s: could not release all clocks for %p\n",
->                       __func__, dev);
->
->         return ret;
-> --
-> 2.35.3
+Applied to u-boot/master, thanks!
+
+-- 
+Tom
+
+
