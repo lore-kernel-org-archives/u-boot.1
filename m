@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0EC3C5475B
-	for <u-boot@archiver.kernel.org>; Sat,  9 Mar 2024 02:21:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C506C54E58
+	for <u-boot@archiver.kernel.org>; Sat,  9 Mar 2024 02:21:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4842887DA5;
+	by phobos.denx.de (Postfix) with ESMTP id B128B87F27;
 	Sat,  9 Mar 2024 03:19:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1709950753;
-	bh=KiYsEWjtvtYUf6wh1E04kPeRih9jZCM54kPjtcNJOIE=;
+	bh=L+rtOAzs7v+tLZWHhbGZMP9frTP+zz3bZWw7kgGm6CM=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Ygg+o0kQiR5BeIVpqai1BWPlYY7G3tP+f5KXggCR+ObXFg7monCCabU3fKXjj9QO9
-	 c+UJ7AWMKJfbl4a6FjvVxNoEL32bGjq1yoXMsigqfswQwhuUi6Xe2ZQx9V4YFxzPzg
-	 ocXsMKzD1ERHBpABqy1dllADWZh+vsYZ64ap2727+YzJ9ydF0PW7vXj41brSMttrKE
-	 WjWh8fRTvGMBMTp1Vc7/95lyFqa5x700ntMHkKDkU4C2mo68j5XY7wewajSq7oPTYd
-	 b/loalFKuBDiz0cq2KpE2z+jv+uQuxUiGA5aBSK8fvmOCkwTQPc36YIdLlCFixhXuU
-	 gB9JP/DEf/FLw==
+	b=N3PDAmHcgrMR5p25CMtkAxmAUWuSESzxsNre+bQ5g/5qDvHz8NpRgKRg7jwlTNLJH
+	 S5NdSbuSkVhhN3MGchX4EWpx9ZZLNLS+fsU/Q4HkZBsFUghh8R2r82DxSTqUAD4QsM
+	 h4YScFL2258wq2C+hgra+oqGG26FEAFcFsPYwX08PbvCOQaUBVZdqVfhu9hGSpeixo
+	 2QdwMFkfD3jGGj+76Dm7D2uC29/MSEI9mlMChyOzSskRmoCiH/S3SROn+RYeVtiXVy
+	 KDOrgOQNYbyQJzBxpfX6CiS1qYyAfI5hwKMyv/Wao2dN8Nqh6cq12VwRRQWQ/cZYlV
+	 rF5xGIoOR4MOg==
 Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id F378587DEF;
- Sat,  9 Mar 2024 03:19:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id 728BC87DFC;
+ Sat,  9 Mar 2024 03:19:01 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
  s=phobos-20191101; t=1709950741;
- bh=KiYsEWjtvtYUf6wh1E04kPeRih9jZCM54kPjtcNJOIE=;
+ bh=L+rtOAzs7v+tLZWHhbGZMP9frTP+zz3bZWw7kgGm6CM=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=N5LCI9X3zTKbjnkYR/rX8wgdnwVj6JSWvCaMzaUF4dzt5fyFdieH1tJnkW9pq2WQi
- 1X0fPUe5ebE8zca+OX6sP7DPWk6OUgUBDbuSU10Kc1uLhCtR3tH5TEVh4Z0WOBUKMv
- jsDW9PqLQlA8/mMG02bOIYrsmwuYhFvbm7lvs+NQvDdEUHgLx9NQjzNSi1aJUQvmdP
- 5KNDVYSNgB0iox1xep3U9D8A3LjljS9acGPnRJ0MFXLY+sVYoSezirppKHczWhRJW+
- k3owkyY6U135TI+yojTVJpKKyNlmnZfY9ushS3RVrlvlw0gmGlMYBAjxFGu4nZCzmf
- DYFRlI7ZNUKvw==
+ b=trMgGAPQt6Pz+vOvPYd6L+ieRJiDXTn+MlD41O+9OgU9SBxtOLSKGmWPtwh43IB/9
+ kHIHghBwuPDr522S+R0XDMi4Cj0SjB4yIAg37g9X4aCtkJfyTuEEiFdM3mFa02UVkx
+ uXS9EHCDcIevSpLB4hvH36cJjDsNi4jqUoDC9ITX036DeopCakWJBiiUDqkMebu0e1
+ bkuTvgBMhYm8p065qt9zynDDkKN5T5FlIHyGIS4Q2BEi61TCZ4IUZMfHzEzQbOA/wU
+ sBQW7ulV1TuNJF7ysYrva/z57X12KDmpFgZJ0qfX1Ap/4J3JRlCHp1ZrU9sxcatfaF
+ oue9cvl3HK3mg==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
 Cc: Christophe Roullier <christophe.roullier@st.com>,
@@ -47,10 +47,9 @@ Cc: Christophe Roullier <christophe.roullier@st.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Ramon Fried <rfried.dev@gmail.com>, u-boot@dh-electronics.com,
  uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH 10/11] net: dwc_eth_qos: Add DT parsing for STM32MP13xx
- platform
-Date: Sat,  9 Mar 2024 03:11:31 +0100
-Message-ID: <20240309021831.264018-11-marex@denx.de>
+Subject: [PATCH 11/11] net: dwc_eth_qos: Add support of STM32MP13xx platform
+Date: Sat,  9 Mar 2024 03:11:32 +0100
+Message-ID: <20240309021831.264018-12-marex@denx.de>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240309021831.264018-1-marex@denx.de>
 References: <20240309021831.264018-1-marex@denx.de>
@@ -74,11 +73,10 @@ X-Virus-Status: Clean
 
 From: Christophe Roullier <christophe.roullier@st.com>
 
-Manage 2 ethernet instances, select which instance to configure with mask
-If mask is not present in DT, it is stm32mp15 platform.
+Add compatible "st,stm32mp13-dwmac" to manage STM32MP13 boards.
 
 Signed-off-by: Christophe Roullier <christophe.roullier@st.com>
-Signed-off-by: Marek Vasut <marex@denx.de> # Rework the code
+Signed-off-by: Marek Vasut <marex@denx.de> # Rebase, reshuffle, squash code
 ---
 Cc: Christophe Roullier <christophe.roullier@st.com>
 Cc: Joe Hershberger <joe.hershberger@ni.com>
@@ -88,162 +86,59 @@ Cc: Ramon Fried <rfried.dev@gmail.com>
 Cc: u-boot@dh-electronics.com
 Cc: uboot-stm32@st-md-mailman.stormreply.com
 ---
- drivers/net/dwc_eth_qos_stm32.c | 82 ++++++++++++++++++++++++++-------
- 1 file changed, 66 insertions(+), 16 deletions(-)
+ drivers/net/dwc_eth_qos.c       |  4 ++++
+ drivers/net/dwc_eth_qos.h       |  1 +
+ drivers/net/dwc_eth_qos_stm32.c | 11 +++++++++++
+ 3 files changed, 16 insertions(+)
 
+diff --git a/drivers/net/dwc_eth_qos.c b/drivers/net/dwc_eth_qos.c
+index 203bfc0848c..e02317905e5 100644
+--- a/drivers/net/dwc_eth_qos.c
++++ b/drivers/net/dwc_eth_qos.c
+@@ -1505,6 +1505,10 @@ static const struct udevice_id eqos_ids[] = {
+ 	},
+ #endif
+ #if IS_ENABLED(CONFIG_DWC_ETH_QOS_STM32)
++	{
++		.compatible = "st,stm32mp13-dwmac",
++		.data = (ulong)&eqos_stm32mp13_config
++	},
+ 	{
+ 		.compatible = "st,stm32mp1-dwmac",
+ 		.data = (ulong)&eqos_stm32mp15_config
+diff --git a/drivers/net/dwc_eth_qos.h b/drivers/net/dwc_eth_qos.h
+index bafd0d339fb..8b3d0d464d3 100644
+--- a/drivers/net/dwc_eth_qos.h
++++ b/drivers/net/dwc_eth_qos.h
+@@ -290,5 +290,6 @@ int eqos_null_ops(struct udevice *dev);
+ extern struct eqos_config eqos_imx_config;
+ extern struct eqos_config eqos_rockchip_config;
+ extern struct eqos_config eqos_qcom_config;
++extern struct eqos_config eqos_stm32mp13_config;
+ extern struct eqos_config eqos_stm32mp15_config;
+ extern struct eqos_config eqos_jh7110_config;
 diff --git a/drivers/net/dwc_eth_qos_stm32.c b/drivers/net/dwc_eth_qos_stm32.c
-index 4db18130765..00bf6d45568 100644
+index 00bf6d45568..e167a7ba901 100644
 --- a/drivers/net/dwc_eth_qos_stm32.c
 +++ b/drivers/net/dwc_eth_qos_stm32.c
-@@ -23,6 +23,7 @@
- #include <net.h>
- #include <netdev.h>
- #include <phy.h>
-+#include <regmap.h>
- #include <reset.h>
- #include <syscon.h>
- #include <wait_bit.h>
-@@ -33,11 +34,16 @@
+@@ -314,6 +314,17 @@ static struct eqos_ops eqos_stm32_ops = {
+ 	.eqos_get_tick_clk_rate = eqos_get_tick_clk_rate_stm32
+ };
  
- /* SYSCFG registers */
- #define SYSCFG_PMCSETR		0x04
--#define SYSCFG_PMCCLRR		0x44
-+#define SYSCFG_PMCCLRR_MP13	0x08
-+#define SYSCFG_PMCCLRR_MP15	0x44
++struct eqos_config __maybe_unused eqos_stm32mp13_config = {
++	.reg_access_always_ok = false,
++	.mdio_wait = 10000,
++	.swr_wait = 50,
++	.config_mac = EQOS_MAC_RXQ_CTRL0_RXQ0EN_ENABLED_DCB,
++	.config_mac_mdio = EQOS_MAC_MDIO_ADDRESS_CR_250_300,
++	.axi_bus_width = EQOS_AXI_WIDTH_32,
++	.interface = dev_read_phy_mode,
++	.ops = &eqos_stm32_ops
++};
 +
-+#define SYSCFG_PMCSETR_ETH1_MASK	GENMASK(23, 16)
-+#define SYSCFG_PMCSETR_ETH2_MASK	GENMASK(31, 24)
- 
- #define SYSCFG_PMCSETR_ETH_CLK_SEL	BIT(16)
- #define SYSCFG_PMCSETR_ETH_REF_CLK_SEL	BIT(17)
- 
-+/* STM32MP15xx specific bit */
- #define SYSCFG_PMCSETR_ETH_SELMII	BIT(20)
- 
- #define SYSCFG_PMCSETR_ETH_SEL_MASK	GENMASK(23, 21)
-@@ -45,6 +51,11 @@
- #define SYSCFG_PMCSETR_ETH_SEL_RGMII	0x1
- #define SYSCFG_PMCSETR_ETH_SEL_RMII	0x4
- 
-+/* CLOCK feed to PHY */
-+#define ETH_CK_F_25M		25000000
-+#define ETH_CK_F_50M		50000000
-+#define ETH_CK_F_125M		125000000
-+
- static ulong eqos_get_tick_clk_rate_stm32(struct udevice *dev)
- {
- 	struct eqos_priv __maybe_unused *eqos = dev_get_priv(dev);
-@@ -130,34 +141,65 @@ static int eqos_probe_syscfg_stm32(struct udevice *dev,
- {
- 	/* Ethernet 50MHz RMII clock selection */
- 	const bool eth_ref_clk_sel = dev_read_bool(dev, "st,eth-ref-clk-sel");
-+	/* SoC is STM32MP13xx with two ethernet MACs */
-+	const bool is_mp13 = device_is_compatible(dev, "st,stm32mp13-dwmac");
- 	/* Gigabit Ethernet 125MHz clock selection. */
- 	const bool eth_clk_sel = dev_read_bool(dev, "st,eth-clk-sel");
--	u8 *syscfg;
-+	/* Ethernet PHY have no crystal */
-+	const bool ext_phyclk = dev_read_bool(dev, "st,ext-phyclk");
-+	struct eqos_priv *eqos = dev_get_priv(dev);
-+	struct regmap *regmap;
-+	u32 regmap_mask;
-+	ulong rate = 0;
- 	u32 value;
- 
--	syscfg = (u8 *)syscon_get_first_range(STM32MP_SYSCON_SYSCFG);
--	if (!syscfg)
--		return -ENODEV;
-+	regmap = syscon_regmap_lookup_by_phandle(dev, "st,syscon");
-+	if (IS_ERR(regmap))
-+		return PTR_ERR(regmap);
-+
-+	regmap_mask = dev_read_u32_index_default(dev, "st,syscon", 2,
-+						 SYSCFG_PMCSETR_ETH1_MASK);
-+
-+	if (clk_valid(&eqos->clk_ck))
-+		rate = clk_get_rate(&eqos->clk_ck);
- 
- 	switch (interface_type) {
- 	case PHY_INTERFACE_MODE_MII:
- 		dev_dbg(dev, "PHY_INTERFACE_MODE_MII\n");
- 		value = FIELD_PREP(SYSCFG_PMCSETR_ETH_SEL_MASK,
- 				   SYSCFG_PMCSETR_ETH_SEL_GMII_MII);
--		value |= SYSCFG_PMCSETR_ETH_REF_CLK_SEL;
-+		/*
-+		 * STM32MP15xx supports both MII and GMII, STM32MP13xx MII only.
-+		 * SYSCFG_PMCSETR ETH_SELMII is present only on STM32MP15xx and
-+		 * acts as a selector between 0:GMII and 1:MII. As STM32MP13xx
-+		 * supports only MII, ETH_SELMII is not present.
-+		 */
-+		if (!is_mp13)	/* Select MII mode on STM32MP15xx */
-+			value |= SYSCFG_PMCSETR_ETH_SELMII;
- 		break;
--	case PHY_INTERFACE_MODE_GMII:
-+	case PHY_INTERFACE_MODE_GMII:	/* STM32MP15xx only */
- 		dev_dbg(dev, "PHY_INTERFACE_MODE_GMII\n");
- 		value = FIELD_PREP(SYSCFG_PMCSETR_ETH_SEL_MASK,
- 				   SYSCFG_PMCSETR_ETH_SEL_GMII_MII);
--		if (eth_clk_sel)
-+		/*
-+		 * If eth_clk_sel is set, use internal ETH_CLKx clock from RCC,
-+		 * otherwise use external clock from IO pin (requires matching
-+		 * GPIO block AF setting of that pin).
-+		 */
-+		if (rate == ETH_CK_F_25M && (eth_clk_sel || ext_phyclk))
- 			value |= SYSCFG_PMCSETR_ETH_CLK_SEL;
- 		break;
- 	case PHY_INTERFACE_MODE_RMII:
- 		dev_dbg(dev, "PHY_INTERFACE_MODE_RMII\n");
- 		value = FIELD_PREP(SYSCFG_PMCSETR_ETH_SEL_MASK,
- 				   SYSCFG_PMCSETR_ETH_SEL_RMII);
--		if (eth_ref_clk_sel)
-+		/*
-+		 * If eth_ref_clk_sel is set, use internal clock from RCC,
-+		 * otherwise use external clock from ETHn_RX_CLK/ETHn_REF_CLK
-+		 * IO pin (requires matching GPIO block AF setting of that
-+		 * pin).
-+		 */
-+		if (rate == ETH_CK_F_50M && (eth_ref_clk_sel || ext_phyclk))
- 			value |= SYSCFG_PMCSETR_ETH_REF_CLK_SEL;
- 		break;
- 	case PHY_INTERFACE_MODE_RGMII:
-@@ -167,7 +209,13 @@ static int eqos_probe_syscfg_stm32(struct udevice *dev,
- 		dev_dbg(dev, "PHY_INTERFACE_MODE_RGMII\n");
- 		value = FIELD_PREP(SYSCFG_PMCSETR_ETH_SEL_MASK,
- 				   SYSCFG_PMCSETR_ETH_SEL_RGMII);
--		if (eth_clk_sel)
-+		/*
-+		 * If eth_clk_sel is set, use internal ETH_CLKx clock from RCC,
-+		 * otherwise use external clock from ETHx_CLK125 pin (requires
-+		 * matching GPIO block AF setting of that pin).
-+		 */
-+		if ((rate == ETH_CK_F_25M || rate == ETH_CK_F_125M) &&
-+		    (eth_clk_sel || ext_phyclk))
- 			value |= SYSCFG_PMCSETR_ETH_CLK_SEL;
- 		break;
- 	default:
-@@ -177,13 +225,15 @@ static int eqos_probe_syscfg_stm32(struct udevice *dev,
- 		return -EINVAL;
- 	}
- 
--	/* clear and set ETH configuration bits */
--	writel(SYSCFG_PMCSETR_ETH_SEL_MASK | SYSCFG_PMCSETR_ETH_SELMII |
--	       SYSCFG_PMCSETR_ETH_REF_CLK_SEL | SYSCFG_PMCSETR_ETH_CLK_SEL,
--	       syscfg + SYSCFG_PMCCLRR);
--	writel(value, syscfg + SYSCFG_PMCSETR);
-+	/* Shift value at correct ethernet MAC offset in SYSCFG_PMCSETR */
-+	value <<= ffs(regmap_mask) - ffs(SYSCFG_PMCSETR_ETH1_MASK);
- 
--	return 0;
-+	/* Update PMCCLRR (clear register) */
-+	regmap_write(regmap, is_mp13 ?
-+			     SYSCFG_PMCCLRR_MP13 : SYSCFG_PMCCLRR_MP15,
-+			     regmap_mask);
-+
-+	return regmap_update_bits(regmap, SYSCFG_PMCSETR, regmap_mask, value);
- }
- 
- static int eqos_probe_resources_stm32(struct udevice *dev)
+ struct eqos_config __maybe_unused eqos_stm32mp15_config = {
+ 	.reg_access_always_ok = false,
+ 	.mdio_wait = 10000,
 -- 
 2.43.0
 
