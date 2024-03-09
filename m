@@ -4,54 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AFD7C5475B
-	for <u-boot@archiver.kernel.org>; Sat,  9 Mar 2024 02:20:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C35C3C54E58
+	for <u-boot@archiver.kernel.org>; Sat,  9 Mar 2024 02:20:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF3F487F12;
-	Sat,  9 Mar 2024 03:19:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5B85187EDD;
+	Sat,  9 Mar 2024 03:19:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1709950750;
-	bh=whLBEAFKgj/dlX4hKcH1iZevhKb+HMs7TxnUuNLM2H4=;
+	s=phobos-20191101; t=1709950752;
+	bh=PAeI9NCzFDhe9XGHiw2jaLdV4s0b4fBGC43SKyY6pCM=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=K8hqEgTZqKlwoJ7kV44QQnDOM8E+Y8YkeVLaxkir/iAfEIMgbRHrYtq6HZCT1M6cD
-	 0R435whXlDXpJf7X81d/W9AvhBdGMbP5ggUHouDAaTiE/NtF/YOb2cY8uOhNtvSvad
-	 KtYVXwch0lWqZVXp7pnIHdM+ohj5UNUppqoCqbdJeWW9jmjqm5VWUsyOwWI4MML+RM
-	 xJfPyWAFLCKxqDoeL3VC9288uJ+DuWX69cdKAJW2Er1uysVFugFDsraru/mZcAJl6M
-	 iqmV8abJRrLIEKeD+HCVDT9QEaFGZv3YvOsTrvD9FXxYXckX4ofu+BbpINrzY7K4op
-	 CoqztZyU1rddw==
+	b=FZWj8l54H/yP3vpf3OZC5lP5bZ5eQP+gSjsEDMPuseRUUgzn3MjYDjw7gq8ETW67O
+	 AASIcJ4BzLxiOVMYB70t/Sev762IeXoJqb2R38496BiJ44Wo4gZxpa2gpD2Yvrp3WP
+	 x+8IqnmMaAvbRNsMbQZS5G8oFUwFK000FSnpqQklR5WB0qmUsAxF7A1SJ1PX0cSeWN
+	 B/i2Eid9jxoY9U9rPHltP/+sRrws/rRq105RASpQJ20ElqOZ4W8sv4ZJ34q6z6zc5V
+	 QzCsqDCmdhJ8/tIP3dG3NxMUPoSGZ6hXsOTDl6ieRgadi4yAi/dTjhPVG/PeR29wc1
+	 olAf49/qy7Ixw==
 Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id DFE5E87DB3;
- Sat,  9 Mar 2024 03:18:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id 6097C87DDD;
+ Sat,  9 Mar 2024 03:19:00 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
  s=phobos-20191101; t=1709950740;
- bh=whLBEAFKgj/dlX4hKcH1iZevhKb+HMs7TxnUuNLM2H4=;
+ bh=PAeI9NCzFDhe9XGHiw2jaLdV4s0b4fBGC43SKyY6pCM=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=lAdFDy1awNPP5/SEcxahXIdRtgcHIHIK6a0m2lj4qx1XfxTIydpD6+HTvigdQA/wk
- MI3uAIfKwzhfbudkBiQqdnyJxA8oJRUvzXywwp2f/Eg1EogUmoCZbd4LrxPpIttEKk
- LYdx03jRBuO7NYr90VzLRkdguNXjNednNLNCgI4qZcO48cLPXN+spJ3xgN40wJs6HS
- HT+tIL6f826Nr8NwHM+PaYjOBt/C01RUOMjN+DTRRw1lLtZgHrT3AJi8wz9zuIZQOf
- 0CGwtI7O6kmtEY0mwK7NDQpRo+NxgleK7775z0EpsdWIbe1XJh9DFTy/VknGrIwZKr
- gCw2FaWyPdmdA==
+ b=qKGi4pLVcOTGX50h6WUCqkRrJOfCx54y3AXmaavONaCAzbnKKh/TvOEezDANqiwbf
+ mjdoT7ReBq+rZiAmeHcnsE/HMbomXK6jqHIlXkHbhxg/yumPyLqwzvFHFL5hXJqPRR
+ tqR/9kFBE7SvInqShnF0K9vWH0yTRcXgifpdV//+6gbtbA8QTd61IADQzwlO0tunGN
+ 1n01tAMaZX8VTp4TeeOqWwTASGzkufX9EQCj0EHtFajSFNoeKTKarSJsQcczMD7TfD
+ G/86uTw1ooNA8ljmxUMQClERjZGk/GkCCR7lNc3dEdZ1HcxW9fMmJCd+gSFKV6BZ7j
+ Ew8IQgeXjdg5g==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>,
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Christophe Roullier <christophe.roullier@st.com>,
  Joe Hershberger <joe.hershberger@ni.com>,
  Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Ramon Fried <rfried.dev@gmail.com>, u-boot@dh-electronics.com,
  uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH 08/11] net: dwc_eth_qos: Constify st,
- eth-* values parsed out of DT
-Date: Sat,  9 Mar 2024 03:11:29 +0100
-Message-ID: <20240309021831.264018-9-marex@denx.de>
+Subject: [PATCH 09/11] net: dwc_eth_qos: Request clk-ck earlier in probe on
+ STM32
+Date: Sat,  9 Mar 2024 03:11:30 +0100
+Message-ID: <20240309021831.264018-10-marex@denx.de>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240309021831.264018-1-marex@denx.de>
 References: <20240309021831.264018-1-marex@denx.de>
@@ -73,11 +72,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use const bool for the values parsed out of DT. Drop the duplicate
-assignment of false into those bool variables, assign them directly
-with the content parsed out of DT. Abbreviate the variable name too.
+From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 
-Signed-off-by: Marek Vasut <marex@denx.de>
+Request the clk-ck earlier in probe in preparation for obtaining
+the clock rate from these clk-ck in eqos_probe_syscfg_stm32() in
+the follow up patch.
+
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 ---
 Cc: Christophe Roullier <christophe.roullier@st.com>
 Cc: Joe Hershberger <joe.hershberger@ni.com>
@@ -87,61 +88,37 @@ Cc: Ramon Fried <rfried.dev@gmail.com>
 Cc: u-boot@dh-electronics.com
 Cc: uboot-stm32@st-md-mailman.stormreply.com
 ---
- drivers/net/dwc_eth_qos_stm32.c | 18 +++++++-----------
- 1 file changed, 7 insertions(+), 11 deletions(-)
+ drivers/net/dwc_eth_qos_stm32.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
 diff --git a/drivers/net/dwc_eth_qos_stm32.c b/drivers/net/dwc_eth_qos_stm32.c
-index 72f65f80540..33477925ff1 100644
+index 33477925ff1..4db18130765 100644
 --- a/drivers/net/dwc_eth_qos_stm32.c
 +++ b/drivers/net/dwc_eth_qos_stm32.c
-@@ -128,17 +128,13 @@ static int eqos_stop_clks_stm32(struct udevice *dev)
- static int eqos_probe_syscfg_stm32(struct udevice *dev,
- 				   phy_interface_t interface_type)
- {
--	bool eth_ref_clk_sel_reg = false;
--	bool eth_clk_sel_reg = false;
-+	/* Ethernet 50MHz RMII clock selection */
-+	const bool eth_ref_clk_sel = dev_read_bool(dev, "st,eth-ref-clk-sel");
-+	/* Gigabit Ethernet 125MHz clock selection. */
-+	const bool eth_clk_sel = dev_read_bool(dev, "st,eth-clk-sel");
- 	u8 *syscfg;
- 	u32 value;
+@@ -201,6 +201,11 @@ static int eqos_probe_resources_stm32(struct udevice *dev)
+ 		return -EINVAL;
+ 	}
  
--	/* Gigabit Ethernet 125MHz clock selection. */
--	eth_clk_sel_reg = dev_read_bool(dev, "st,eth-clk-sel");
++	/* Get ETH_CLK clocks (optional) */
++	ret = clk_get_by_name(dev, "eth-ck", &eqos->clk_ck);
++	if (ret)
++		dev_dbg(dev, "No phy clock provided %d", ret);
++
+ 	ret = eqos_probe_syscfg_stm32(dev, interface);
+ 	if (ret)
+ 		return -EINVAL;
+@@ -223,11 +228,6 @@ static int eqos_probe_resources_stm32(struct udevice *dev)
+ 		goto err_probe;
+ 	}
+ 
+-	/*  Get ETH_CLK clocks (optional) */
+-	ret = clk_get_by_name(dev, "eth-ck", &eqos->clk_ck);
+-	if (ret)
+-		dev_warn(dev, "No phy clock provided %d\n", ret);
 -
--	/* Ethernet 50Mhz RMII clock selection */
--	eth_ref_clk_sel_reg = dev_read_bool(dev, "st,eth-ref-clk-sel");
--
- 	syscfg = (u8 *)syscon_get_first_range(STM32MP_SYSCON_SYSCFG);
- 	if (!syscfg)
- 		return -ENODEV;
-@@ -154,14 +150,14 @@ static int eqos_probe_syscfg_stm32(struct udevice *dev,
- 		dev_dbg(dev, "PHY_INTERFACE_MODE_GMII\n");
- 		value = FIELD_PREP(SYSCFG_PMCSETR_ETH_SEL_MASK,
- 				   SYSCFG_PMCSETR_ETH_SEL_GMII_MII);
--		if (eth_clk_sel_reg)
-+		if (eth_clk_sel)
- 			value |= SYSCFG_PMCSETR_ETH_CLK_SEL;
- 		break;
- 	case PHY_INTERFACE_MODE_RMII:
- 		dev_dbg(dev, "PHY_INTERFACE_MODE_RMII\n");
- 		value = FIELD_PREP(SYSCFG_PMCSETR_ETH_SEL_MASK,
- 				   SYSCFG_PMCSETR_ETH_SEL_RMII);
--		if (eth_ref_clk_sel_reg)
-+		if (eth_ref_clk_sel)
- 			value |= SYSCFG_PMCSETR_ETH_REF_CLK_SEL;
- 		break;
- 	case PHY_INTERFACE_MODE_RGMII:
-@@ -171,7 +167,7 @@ static int eqos_probe_syscfg_stm32(struct udevice *dev,
- 		dev_dbg(dev, "PHY_INTERFACE_MODE_RGMII\n");
- 		value = FIELD_PREP(SYSCFG_PMCSETR_ETH_SEL_MASK,
- 				   SYSCFG_PMCSETR_ETH_SEL_RGMII);
--		if (eth_clk_sel_reg)
-+		if (eth_clk_sel)
- 			value |= SYSCFG_PMCSETR_ETH_CLK_SEL;
- 		break;
- 	default:
+ 	dev_dbg(dev, "%s: OK\n", __func__);
+ 
+ 	return 0;
 -- 
 2.43.0
 
