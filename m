@@ -4,68 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9D78C54E49
-	for <u-boot@archiver.kernel.org>; Sun, 10 Mar 2024 21:54:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2DA8C54791
+	for <u-boot@archiver.kernel.org>; Sun, 10 Mar 2024 22:00:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0CFD687D73;
-	Sun, 10 Mar 2024 22:54:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=georgemail.de
+	by phobos.denx.de (Postfix) with ESMTP id BD25587E3F;
+	Sun, 10 Mar 2024 23:00:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=georgemail.de header.i=@georgemail.de header.b="UNoimWDM";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5CC6987DA8; Sun, 10 Mar 2024 22:54:21 +0100 (CET)
-Received: from smtp6.goneo.de (smtp6.goneo.de [IPv6:2001:1640:5::8:31])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 890718796B
- for <u-boot@lists.denx.de>; Sun, 10 Mar 2024 22:54:18 +0100 (CET)
+ id AB58A87E88; Sun, 10 Mar 2024 23:00:21 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 1491287E3F
+ for <u-boot@lists.denx.de>; Sun, 10 Mar 2024 23:00:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=georgemail.de
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=leon@georgemail.de
-Received: from hub1.goneo.de (hub1.goneo.de [IPv6:2001:1640:5::8:52])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits))
- (No client certificate requested)
- by smtp6.goneo.de (Postfix) with ESMTPS id 2DBFC240A5C;
- Sun, 10 Mar 2024 22:54:18 +0100 (CET)
-Received: from hub1.goneo.de (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits))
- (No client certificate requested)
- by hub1.goneo.de (Postfix) with ESMTPS id 900BF240635;
- Sun, 10 Mar 2024 22:54:16 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=georgemail.de;
- s=DKIM001; t=1710107656;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=8Pj0LqZubGYXir7IxMkfB2GH1JwexXPCBGq7YsCPWoA=;
- b=UNoimWDM0EKI5pIQZ01yCG02cA+qLkvNTGlOUt3YUEFULAHpnN0S99g3q7C/hNbiGQKHdE
- y7oeCxi8YFceyBoRuXmoJUxkQ6oiXZOzKdA0BvO6dYveGu3dY70UWXQH4kPRcIIUMBmPLW
- D+Xoax1Tta7eU8hFoFuW5a9Aw2llN9zdMjihd0OlvMGuHtYDXdxQLmbyQ5vDkOd7EY7SlN
- NBH9vsSx0YgnDqUXn4cqFxXxk9xmrdELM1909dwLgzlyHerFRr+Z9p9bOohiBNgqUlb2zv
- /GHYCDuJniY6OtPvJsW10XI/Id8eftzIKZl0qESM4FvfIZQOIkzsJpEeK6I7kw==
-Received: from couch-potassium.fritz.box (unknown
- [IPv6:2a02:8071:5250:1240:f4e6:f6d2:6d95:e0c4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by hub1.goneo.de (Postfix) with ESMTPSA id 41E0B24048E;
- Sun, 10 Mar 2024 22:54:16 +0100 (CET)
-From: "Leon M. Busch-George" <leon@georgemail.de>
-To: u-boot@lists.denx.de
-Cc: Dragan Simic <dsimic@manjaro.org>
-Subject: [PATCH v4] Makefile: use shell to calculate map_size
-Date: Sun, 10 Mar 2024 22:53:52 +0100
-Message-ID: <20240310215356.109478-1-leon@georgemail.de>
-X-Mailer: git-send-email 2.44.0
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B89C9DA7;
+ Sun, 10 Mar 2024 15:00:54 -0700 (PDT)
+Received: from minigeek.lan (unknown [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B35B63F73F;
+ Sun, 10 Mar 2024 15:00:17 -0700 (PDT)
+Date: Sun, 10 Mar 2024 22:00:04 +0000
+From: Andre Przywara <andre.przywara@arm.com>
+To: Kamil Kasperski <ressetkk@gmail.com>
+Cc: u-boot@lists.denx.de, linux-sunxi <linux-sunxi@lists.linux.dev>
+Subject: Re: [PATCH] sunxi: h616: add initial support for T95 AXP313 TV Box
+Message-ID: <20240310220004.0965e2ca@minigeek.lan>
+In-Reply-To: <20240309192425.40282-1-ressetkk@gmail.com>
+References: <20240309192425.40282-1-ressetkk@gmail.com>
+Organization: Arm Ltd.
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Rspamd-UID: 260499
-X-Rspamd-UID: d019d2
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,46 +55,255 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: "Leon M. Busch-George" <leon@georgemail.eu>
+On Sat,  9 Mar 2024 19:24:26 +0000
+Kamil Kasperski <ressetkk@gmail.com> wrote:
 
-The error message "bc: command not found" is easily missed since the
-build continues.
-bc is not a part of coreutils or base-devel. POSIX sh can also do the
-calculation.
+Hi Kamil,
 
-Signed-off-by: Leon M. Busch-George <leon@georgemail.eu>
-Reviewed-by: Dragan Simic <dsimic@manjaro.org>
----
- Makefile | 15 ++++++++++-----
- 1 file changed, 10 insertions(+), 5 deletions(-)
+many thanks for sending a patch, that looks mostly good from the
+technical point of view, only some smaller comments.
 
-diff --git a/Makefile b/Makefile
-index a2bc9d5903..fac3a05dd5 100644
---- a/Makefile
-+++ b/Makefile
-@@ -1273,12 +1273,17 @@ OBJCOPYFLAGS_u-boot-nodtb.bin := -O binary \
- 		$(if $(CONFIG_MPC85XX_HAVE_RESET_VECTOR),$(if $(CONFIG_OF_SEPARATE),-R .bootpg -R .resetvec))
- 
- binary_size_check: u-boot-nodtb.bin FORCE
--	@file_size=$(shell wc -c u-boot-nodtb.bin | awk '{print $$1}') ; \
-+	@file_size=$(shell wc -c u-boot-nodtb.bin | awk '{ print $$1 }') ; \
- 	map_size=$(shell cat u-boot.map | \
--		awk '/_image_copy_start/ {start = $$1} /_image_binary_end/ {end = $$1} END {if (start != "" && end != "") print "ibase=16; " toupper(end) " - " toupper(start)}' \
--		| sed 's/0X//g' \
--		| bc); \
--	if [ "" != "$$map_size" ]; then \
-+		awk ' \
-+			/_image_copy_start/ { start = $$1 } \
-+			/_image_binary_end/ { end = $$1 } \
-+			END { \
-+				if (start != "" && end != "") \
-+					print end " " start; \
-+			}' \
-+		| sh -c 'read end start && echo $$((end - start))'); \
-+	if [ -n "$$map_size" ]; then \
- 		if test $$map_size -ne $$file_size; then \
- 			echo "u-boot.map shows a binary size of $$map_size" >&2 ; \
- 			echo "  but u-boot-nodtb.bin shows $$file_size" >&2 ; \
--- 
-2.44.0
+But please note that the devicetree needs to go through the Linux
+mailing lists and repo first, and we automatically copy it from the
+Linux tree once it has been merged there. This is to ensure proper
+review and checks with the Linux tooling.
+
+So can you please send just the .dts file to the DT and sunxi
+maintainers the respective lists, as reported by get_maintainer.pl?
+Then we can take it from there.
+
+> T95 is a most commonly known for being a box with a pre-installed malware.
+> It uses Allwinner H616 and comes with eMMC and DDR3 memory.
+> This device comes with two versions - one with AXP305 PMIC and another with AXP313 PMIC.
+> The AXP313 version comes with Secure Boot enabled and locked bootloader, so the u-boot has to be built with TOC0.
+> DRAM settings are taken from Allwinner's boot0 for this box.
+
+Ah, thanks for figuring those out, that's very helpful.
+
+> 
+> Cc: Andre Przywara <andre.przywara@arm.com>
+> 
+> Signed-off-by: Kamil Kasperski <ressetkk@gmail.com>
+> ---
+>  arch/arm/dts/Makefile                   |   3 +-
+>  arch/arm/dts/sun50i-h616-t95-axp313.dts | 148 ++++++++++++++++++++++++
+>  configs/t95_axp313_defconfig            |  27 +++++
+>  3 files changed, 177 insertions(+), 1 deletion(-)
+>  create mode 100644 arch/arm/dts/sun50i-h616-t95-axp313.dts
+>  create mode 100644 configs/t95_axp313_defconfig
+> 
+> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+> index b102ffb5f6..144daf6c48 100644
+> --- a/arch/arm/dts/Makefile
+> +++ b/arch/arm/dts/Makefile
+> @@ -842,7 +842,8 @@ dtb-$(CONFIG_MACH_SUN50I_H616) += \
+>  	sun50i-h618-orangepi-zero2w.dtb \
+>  	sun50i-h618-orangepi-zero3.dtb \
+>  	sun50i-h618-transpeed-8k618-t.dtb \
+> -	sun50i-h616-x96-mate.dtb
+> +	sun50i-h616-x96-mate.dtb \
+> +	sun50i-h616-t95-axp313.dtb
+>  dtb-$(CONFIG_MACH_SUN50I) += \
+>  	sun50i-a64-amarula-relic.dtb \
+>  	sun50i-a64-bananapi-m64.dtb \
+> diff --git a/arch/arm/dts/sun50i-h616-t95-axp313.dts b/arch/arm/dts/sun50i-h616-t95-axp313.dts
+> new file mode 100644
+> index 0000000000..b006f363d5
+> --- /dev/null
+> +++ b/arch/arm/dts/sun50i-h616-t95-axp313.dts
+> @@ -0,0 +1,148 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +/*
+> + * Copyright (C) 2021 Arm Ltd.
+
+Please change this copyright you and this year.
+
+> + */
+> +
+> +/dts-v1/;
+> +
+> +#include "sun50i-h616.dtsi"
+> +
+> +#include <dt-bindings/gpio/gpio.h>
+> +#include <dt-bindings/interrupt-controller/arm-gic.h>
+> +
+> +/ {
+> +	model = "T95 (AXP313)";
+> +	compatible = "mbox,t95-axp313", "allwinner,sun50i-h616";
+
+What is "mbox"? Do you have any more information about this vendor?
+In any case a new vendor would need to be added to
+Documentation/devicetree/bindings/vendor-prefixes.yaml, in a separate
+patch. Also you need a patch to add this compatible combination to
+Documentation/devicetree/bindings/arm/sunxi.yaml.
+
+Cheers,
+Andre
+
+> +
+> +	aliases {
+> +		serial0 = &uart0;
+> +	};
+> +
+> +	chosen {
+> +		stdout-path = "serial0:115200n8";
+> +	};
+> +
+> +	reg_vcc5v: vcc5v {
+> +		/* board wide 5V supply directly from the DC input */
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc-5v";
+> +		regulator-min-microvolt = <5000000>;
+> +		regulator-max-microvolt = <5000000>;
+> +		regulator-always-on;
+> +	};
+> +};
+> +
+> +&ehci0 {
+> +	status = "okay";
+> +};
+> +
+> +&ehci2 {
+> +	status = "okay";
+> +};
+> +
+> +&ir {
+> +	status = "okay";
+> +};
+> +
+> +&mmc0 {
+> +	cd-gpios = <&pio 8 16 GPIO_ACTIVE_LOW>;	/* PI16 */
+> +	vmmc-supply = <&reg_dldo1>;
+> +	status = "okay";
+> +};
+> +
+> +&mmc2 {
+> +	vmmc-supply = <&reg_dldo1>;
+> +	vqmmc-supply = <&reg_aldo1>;
+> +	bus-width = <8>;
+> +	non-removable;
+> +	cap-mmc-hw-reset;
+> +	mmc-ddr-1_8v;
+> +	mmc-hs200-1_8v;
+> +	status = "okay";
+> +};
+> +
+> +&ohci0 {
+> +	status = "okay";
+> +};
+> +
+> +&ohci2 {
+> +	status = "okay";
+> +};
+> +
+> +&r_i2c {
+> +	status = "okay";
+> +
+> +	axp313: pmic@36 {
+> +		compatible = "x-powers,axp313a";
+> +		reg = <0x36>;
+> +		#interrupt-cells = <1>;
+> +		interrupt-controller;
+> +		interrupt-parent = <&pio>;
+> +		interrupts = <2 9 IRQ_TYPE_LEVEL_LOW>;	/* PC9 */
+> +
+> +		vin1-supply = <&reg_vcc5v>;
+> +		vin2-supply = <&reg_vcc5v>;
+> +		vin3-supply = <&reg_vcc5v>;
+> +
+> +		regulators {
+> +			/* Supplies VCC-PLL, so needs to be always on. */
+> +			reg_aldo1: aldo1 {
+> +				regulator-always-on;
+> +				regulator-min-microvolt = <1800000>;
+> +				regulator-max-microvolt = <1800000>;
+> +				regulator-name = "vcc1v8";
+> +			};
+> +
+> +			/* Supplies VCC-IO, so needs to be always on. */
+> +			reg_dldo1: dldo1 {
+> +				regulator-always-on;
+> +				regulator-min-microvolt = <3300000>;
+> +				regulator-max-microvolt = <3300000>;
+> +				regulator-name = "vcc3v3";
+> +			};
+> +
+> +			reg_dcdc1: dcdc1 {
+> +				regulator-always-on;
+> +				regulator-min-microvolt = <810000>;
+> +				regulator-max-microvolt = <990000>;
+> +				regulator-name = "vdd-gpu-sys";
+> +			};
+> +
+> +			reg_dcdc2: dcdc2 {
+> +				regulator-always-on;
+> +				regulator-min-microvolt = <810000>;
+> +				regulator-max-microvolt = <1100000>;
+> +				regulator-name = "vdd-cpu";
+> +			};
+> +
+> +			reg_dcdc3: dcdc3 {
+> +				regulator-always-on;
+> +				regulator-min-microvolt = <1360000>;
+> +				regulator-max-microvolt = <1360000>;
+> +				regulator-name = "vdd-dram";
+> +			};
+> +		};
+> +	};
+> +};
+> +
+> +&pio {
+> +	vcc-pc-supply = <&reg_aldo1>;
+> +	vcc-pg-supply = <&reg_dldo1>;
+> +	vcc-ph-supply = <&reg_dldo1>;
+> +	vcc-pi-supply = <&reg_dldo1>;
+> +};
+> +
+> +&uart0 {
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&uart0_ph_pins>;
+> +	status = "okay";
+> +};
+> +
+> +&usbotg {
+> +	dr_mode = "host";	/* USB A type receptable */
+> +	status = "okay";
+> +};
+> +
+> +&usbphy {
+> +	status = "okay";
+> +};
+> diff --git a/configs/t95_axp313_defconfig b/configs/t95_axp313_defconfig
+> new file mode 100644
+> index 0000000000..6542b5bc88
+> --- /dev/null
+> +++ b/configs/t95_axp313_defconfig
+> @@ -0,0 +1,27 @@
+> +CONFIG_ARM=y
+> +CONFIG_ARCH_SUNXI=y
+> +CONFIG_DEFAULT_DEVICE_TREE="sun50i-h616-t95-axp313"
+> +CONFIG_SPL=y
+> +CONFIG_MACH_SUN50I_H616=y
+> +CONFIG_DRAM_CLK=648
+> +CONFIG_DRAM_SUN50I_H616_ODT_EN=0x1
+> +CONFIG_DRAM_SUN50I_H616_DX_ODT=0x03030303
+> +CONFIG_DRAM_SUN50I_H616_DX_DRI=0x0e0e0e0e
+> +CONFIG_DRAM_SUN50I_H616_CA_DRI=0x1c1c
+> +CONFIG_DRAM_SUN50I_H616_TPR10=0x2f0006
+> +CONFIG_DRAM_SUN50I_H616_TPR11=0xffffdddd
+> +CONFIG_DRAM_SUN50I_H616_TPR12=0xfedf7657
+> +CONFIG_SUNXI_DRAM_H616_DDR3_1333=y
+> +CONFIG_R_I2C_ENABLE=y
+> +CONFIG_SPL_I2C=y
+> +CONFIG_SPL_SYS_I2C_LEGACY=y
+> +CONFIG_SYS_I2C_MVTWSI=y
+> +CONFIG_SYS_I2C_SLAVE=0x7f
+> +CONFIG_SYS_I2C_SPEED=400000
+> +CONFIG_SUPPORT_EMMC_BOOT=y
+> +CONFIG_AXP313_POWER=y
+> +CONFIG_AXP_DCDC3_VOLT=1360
+> +CONFIG_USB_EHCI_HCD=y
+> +CONFIG_USB_OHCI_HCD=y
+> +CONFIG_SUN8I_EMAC=y
+> +CONFIG_SPL_IMAGE_TYPE_SUNXI_TOC0=y
 
