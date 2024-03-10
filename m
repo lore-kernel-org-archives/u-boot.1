@@ -4,72 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AA51C54791
-	for <u-boot@archiver.kernel.org>; Sun, 10 Mar 2024 19:59:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9D78C54E49
+	for <u-boot@archiver.kernel.org>; Sun, 10 Mar 2024 21:54:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BBEBF87C82;
-	Sun, 10 Mar 2024 20:59:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0CFD687D73;
+	Sun, 10 Mar 2024 22:54:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=georgemail.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sDTwMDVv";
+	dkim=pass (2048-bit key; unprotected) header.d=georgemail.de header.i=@georgemail.de header.b="UNoimWDM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3055387D73; Sun, 10 Mar 2024 20:59:36 +0100 (CET)
-Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
- [IPv6:2607:f8b0:4864:20::830])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5CC6987DA8; Sun, 10 Mar 2024 22:54:21 +0100 (CET)
+Received: from smtp6.goneo.de (smtp6.goneo.de [IPv6:2001:1640:5::8:31])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8A18B878E2
- for <u-boot@lists.denx.de>; Sun, 10 Mar 2024 20:59:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 890718796B
+ for <u-boot@lists.denx.de>; Sun, 10 Mar 2024 22:54:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=georgemail.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x830.google.com with SMTP id
- d75a77b69052e-42f468b62f1so2106401cf.1
- for <u-boot@lists.denx.de>; Sun, 10 Mar 2024 12:59:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1710100770; x=1710705570; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=hCB0TtPHB+F7MpTUQeGJjWIvJNkjdtgfOcTFkT2Cb20=;
- b=sDTwMDVvexhA8HzS5lyTMkU9iwfnyDxQyYm2z3DcMpn5buAJ471MVLAAm/cDq56EW2
- JOXaDetxKIFyo33AZ5LVhAI+/SaG7B2+xATHfDN4WwZ9Gv0jZ2//kd0K5cZQsgrolBsR
- lyWZCkeSCLBys2mHs+xHZcIFT+IWAJK8mdvAc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710100770; x=1710705570;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=hCB0TtPHB+F7MpTUQeGJjWIvJNkjdtgfOcTFkT2Cb20=;
- b=GggvTbO8YsWDiC1ohK7exUYm3HLfChaZ0J+HzaUuzOnVTJ03rsoPIXqSeeqkwL79zp
- G4iIv31qs8Zzu4H13hR292r6rYZZu/G4UHZvKBAhpFggiJA8N59TD7wx0nAl7LztyPgv
- UbJjz8kNZos3FgQc8ESufNsaL5cdy7cbpcsRvI0I3TOKGUpadxLKeSMt0UbnMKHoU0gR
- rjM64GzufjeijwP6ZjvWlvPCXsMT61UcB+OueGZFDxK40qHVhQk3A0rhSbcTo6b2dDpo
- AzWraI3axJxLJffK3SrEurrgrIo51TkLC1PYj/K217MCVY8WHvrPTWs+2LYmB1Cb26LI
- xRnQ==
-X-Gm-Message-State: AOJu0YxVkRNtcgFdSuNJ4YUSlQtWhwhdMeUtCpeX/GTjmSFih/QiCRcd
- q9uLzm3kftLyDHkLHygUmbrlTsqmyIkFmLiPxzaM4zD/VcJyEK/+OjSrsVc2B1MoQMhuly/vuPO
- c
-X-Google-Smtp-Source: AGHT+IEii2t72dof0jxAX3sikvNRpjGckKsYkUEwLpbAFfE0eEPbDida6K3TYSt8OgMxxJIHDVceQA==
-X-Received: by 2002:a05:622a:10:b0:42e:f994:5970 with SMTP id
- x16-20020a05622a001000b0042ef9945970mr7149140qtw.38.1710100769867; 
- Sun, 10 Mar 2024 12:59:29 -0700 (PDT)
-Received: from bill-the-cat..
- (2603-6081-7b00-007f-0000-0000-0000-1005.res6.spectrum.com.
- [2603:6081:7b00:7f::1005]) by smtp.gmail.com with ESMTPSA id
- f15-20020ac8464f000000b0042e703a8d74sm2056801qto.56.2024.03.10.12.59.29
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 10 Mar 2024 12:59:29 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
+ spf=pass smtp.mailfrom=leon@georgemail.de
+Received: from hub1.goneo.de (hub1.goneo.de [IPv6:2001:1640:5::8:52])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits))
+ (No client certificate requested)
+ by smtp6.goneo.de (Postfix) with ESMTPS id 2DBFC240A5C;
+ Sun, 10 Mar 2024 22:54:18 +0100 (CET)
+Received: from hub1.goneo.de (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits))
+ (No client certificate requested)
+ by hub1.goneo.de (Postfix) with ESMTPS id 900BF240635;
+ Sun, 10 Mar 2024 22:54:16 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=georgemail.de;
+ s=DKIM001; t=1710107656;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=8Pj0LqZubGYXir7IxMkfB2GH1JwexXPCBGq7YsCPWoA=;
+ b=UNoimWDM0EKI5pIQZ01yCG02cA+qLkvNTGlOUt3YUEFULAHpnN0S99g3q7C/hNbiGQKHdE
+ y7oeCxi8YFceyBoRuXmoJUxkQ6oiXZOzKdA0BvO6dYveGu3dY70UWXQH4kPRcIIUMBmPLW
+ D+Xoax1Tta7eU8hFoFuW5a9Aw2llN9zdMjihd0OlvMGuHtYDXdxQLmbyQ5vDkOd7EY7SlN
+ NBH9vsSx0YgnDqUXn4cqFxXxk9xmrdELM1909dwLgzlyHerFRr+Z9p9bOohiBNgqUlb2zv
+ /GHYCDuJniY6OtPvJsW10XI/Id8eftzIKZl0qESM4FvfIZQOIkzsJpEeK6I7kw==
+Received: from couch-potassium.fritz.box (unknown
+ [IPv6:2a02:8071:5250:1240:f4e6:f6d2:6d95:e0c4])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by hub1.goneo.de (Postfix) with ESMTPSA id 41E0B24048E;
+ Sun, 10 Mar 2024 22:54:16 +0100 (CET)
+From: "Leon M. Busch-George" <leon@georgemail.de>
 To: u-boot@lists.denx.de
-Subject: [PATCH] CI: Update to using clang-17
-Date: Sun, 10 Mar 2024 15:59:28 -0400
-Message-Id: <20240310195928.730127-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.34.1
+Cc: Dragan Simic <dsimic@manjaro.org>
+Subject: [PATCH v4] Makefile: use shell to calculate map_size
+Date: Sun, 10 Mar 2024 22:53:52 +0100
+Message-ID: <20240310215356.109478-1-leon@georgemail.de>
+X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Rspamd-UID: 260499
+X-Rspamd-UID: d019d2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,84 +82,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently, llvm-17 is the stable release. Update our container and CI to
-fetch and use that.
+From: "Leon M. Busch-George" <leon@georgemail.eu>
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
+The error message "bc: command not found" is easily missed since the
+build continues.
+bc is not a part of coreutils or base-devel. POSIX sh can also do the
+calculation.
+
+Signed-off-by: Leon M. Busch-George <leon@georgemail.eu>
+Reviewed-by: Dragan Simic <dsimic@manjaro.org>
 ---
- .azure-pipelines.yml    | 6 +++---
- .gitlab-ci.yml          | 4 ++--
- tools/docker/Dockerfile | 4 ++--
- 3 files changed, 7 insertions(+), 7 deletions(-)
+ Makefile | 15 ++++++++++-----
+ 1 file changed, 10 insertions(+), 5 deletions(-)
 
-diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-index 1d73215afbae..798c137b2f6e 100644
---- a/.azure-pipelines.yml
-+++ b/.azure-pipelines.yml
-@@ -278,16 +278,16 @@ stages:
-           TEST_PY_TEST_SPEC: "version"
-         sandbox_clang:
-           TEST_PY_BD: "sandbox"
--          OVERRIDE: "-O clang-16"
-+          OVERRIDE: "-O clang-17"
-         sandbox_clang_asan:
-           TEST_PY_BD: "sandbox"
--          OVERRIDE: "-O clang-16 -a ASAN"
-+          OVERRIDE: "-O clang-17 -a ASAN"
-           TEST_PY_TEST_SPEC: "version"
-         sandbox64:
-           TEST_PY_BD: "sandbox64"
-         sandbox64_clang:
-           TEST_PY_BD: "sandbox64"
--          OVERRIDE: "-O clang-16"
-+          OVERRIDE: "-O clang-17"
-         sandbox_spl:
-           TEST_PY_BD: "sandbox_spl"
-           TEST_PY_TEST_SPEC: "test_ofplatdata or test_handoff or test_spl"
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index 8bfbadd6c89f..dc68187d79cf 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -256,7 +256,7 @@ sandbox test.py:
- sandbox with clang test.py:
-   variables:
-     TEST_PY_BD: "sandbox"
--    OVERRIDE: "-O clang-16"
-+    OVERRIDE: "-O clang-17"
-   <<: *buildman_and_testpy_dfn
+diff --git a/Makefile b/Makefile
+index a2bc9d5903..fac3a05dd5 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1273,12 +1273,17 @@ OBJCOPYFLAGS_u-boot-nodtb.bin := -O binary \
+ 		$(if $(CONFIG_MPC85XX_HAVE_RESET_VECTOR),$(if $(CONFIG_OF_SEPARATE),-R .bootpg -R .resetvec))
  
- sandbox64 test.py:
-@@ -267,7 +267,7 @@ sandbox64 test.py:
- sandbox64 with clang test.py:
-   variables:
-     TEST_PY_BD: "sandbox64"
--    OVERRIDE: "-O clang-16"
-+    OVERRIDE: "-O clang-17"
-   <<: *buildman_and_testpy_dfn
- 
- sandbox_spl test.py:
-diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-index 6122776bc64d..ab82d01a3417 100644
---- a/tools/docker/Dockerfile
-+++ b/tools/docker/Dockerfile
-@@ -12,7 +12,7 @@ ENV DEBIAN_FRONTEND=noninteractive
- # Add LLVM repository
- RUN apt-get update && apt-get install -y gnupg2 wget xz-utils && rm -rf /var/lib/apt/lists/*
- RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -
--RUN echo deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-16 main | tee /etc/apt/sources.list.d/llvm.list
-+RUN echo deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-17 main | tee /etc/apt/sources.list.d/llvm.list
- 
- # Manually install the kernel.org "Crosstool" based toolchains for gcc-13.2.0
- RUN wget -O - https://mirrors.edge.kernel.org/pub/tools/crosstool/files/bin/x86_64/13.2.0/x86_64-gcc-13.2.0-nolibc-aarch64-linux.tar.xz | tar -C /opt -xJ
-@@ -40,7 +40,7 @@ RUN apt-get update && apt-get install -y \
- 	bison \
- 	build-essential \
- 	cgpt \
--	clang-16 \
-+	clang-17 \
- 	coreutils \
- 	cpio \
- 	curl \
+ binary_size_check: u-boot-nodtb.bin FORCE
+-	@file_size=$(shell wc -c u-boot-nodtb.bin | awk '{print $$1}') ; \
++	@file_size=$(shell wc -c u-boot-nodtb.bin | awk '{ print $$1 }') ; \
+ 	map_size=$(shell cat u-boot.map | \
+-		awk '/_image_copy_start/ {start = $$1} /_image_binary_end/ {end = $$1} END {if (start != "" && end != "") print "ibase=16; " toupper(end) " - " toupper(start)}' \
+-		| sed 's/0X//g' \
+-		| bc); \
+-	if [ "" != "$$map_size" ]; then \
++		awk ' \
++			/_image_copy_start/ { start = $$1 } \
++			/_image_binary_end/ { end = $$1 } \
++			END { \
++				if (start != "" && end != "") \
++					print end " " start; \
++			}' \
++		| sh -c 'read end start && echo $$((end - start))'); \
++	if [ -n "$$map_size" ]; then \
+ 		if test $$map_size -ne $$file_size; then \
+ 			echo "u-boot.map shows a binary size of $$map_size" >&2 ; \
+ 			echo "  but u-boot-nodtb.bin shows $$file_size" >&2 ; \
 -- 
-2.34.1
+2.44.0
 
