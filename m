@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2F25C54791
-	for <u-boot@archiver.kernel.org>; Sun, 10 Mar 2024 12:10:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C190BC54E58
+	for <u-boot@archiver.kernel.org>; Sun, 10 Mar 2024 12:10:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD26887C82;
-	Sun, 10 Mar 2024 13:10:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 51F5E87E29;
+	Sun, 10 Mar 2024 13:10:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RiYOBZNq";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ChPRpuqL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C2EBA87CF2; Sun, 10 Mar 2024 06:58:40 +0100 (CET)
-Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
- [IPv6:2001:4860:4864:20::2c])
+ id 7C8C987E0A; Sun, 10 Mar 2024 06:58:46 +0100 (CET)
+Received: from mail-pf1-x42b.google.com (mail-pf1-x42b.google.com
+ [IPv6:2607:f8b0:4864:20::42b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5D43F87BF4
- for <u-boot@lists.denx.de>; Sun, 10 Mar 2024 06:58:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 394A587CF2
+ for <u-boot@lists.denx.de>; Sun, 10 Mar 2024 06:58:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seashell11234455@gmail.com
-Received: by mail-oa1-x2c.google.com with SMTP id
- 586e51a60fabf-21e45ece781so1746615fac.0
- for <u-boot@lists.denx.de>; Sat, 09 Mar 2024 21:58:38 -0800 (PST)
+Received: by mail-pf1-x42b.google.com with SMTP id
+ d2e1a72fcca58-6e5a50d91b4so2023985b3a.2
+ for <u-boot@lists.denx.de>; Sat, 09 Mar 2024 21:58:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1710050316; x=1710655116; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=UFHFwAdiZxnksWAMiLqor/GWsGs9FD4xciDNpQo4U4k=;
- b=RiYOBZNqd7a2MjYPukJi6JXt8SDwPRudI6ReVquOvsUREYajGeYqWU7n6lrd+iE1sW
- qiy4+g2qHcWi57xr9yUCL0fi+ECoEQMKaf+SjuY8sGQUrPiF7J7nyS5TWy05NDOq3xet
- 8Z896tmiqtDFOM3NJqcgRTtdw3GPWOBHAJ0CRipI2HrQo8UV26jA9P8HfoTfBHwOLvx5
- h2O9t/LgDsNZfaLpozqGGTiShSI/HfogEsOjgLaT1W3hQCPM1gfCIBne/rR0tgglY0Fh
- mu7Y4hrnw0eZ6aQ5Sod6cjSG9ymjkeQpQYmQI5iSeF7fHjRkuuh1dRlU2hv4qfS74b47
- KOww==
+ d=gmail.com; s=20230601; t=1710050321; x=1710655121; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=lrVbYAF3HAxcWzCjQkr2Zz9lOxcR5w9VAnBLZJPAAMQ=;
+ b=ChPRpuqL6WfUXkMwwtWDoI1IqUBqlYABaf9IH3A32dKWLVI6TXIKpOk1zDPtxNo4k5
+ tprxRlbJu7rEpWkLcQJK54666svP6eqYykSMRmO0xx9LoY5x0FUgRPtwGPhvV0Pfo3pB
+ 6B4XyS0zMOyeD4pH2PLrISUv1aprac82wsOLtg+8H9HTSaFjvrIYB7IzaMn+XiFSAg1t
+ kEyR6Vrg0r2yXu4R3A16BnTEq47vOVpDXt7EqPo+exzlrdpvBzLqwpSDVfwvo2fCCmA9
+ inY+5fTY0I1w1EmwXQcHwKftFNMDe0G9CMd3EB7Qec7BV02ojvKLpzRWmP8DeylqWNI3
+ 70cA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710050316; x=1710655116;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=UFHFwAdiZxnksWAMiLqor/GWsGs9FD4xciDNpQo4U4k=;
- b=My7wuSg2ZiZdWpjONDYty9DYIR1XpNYC1PsP4rV5K1/XMPQNKJLT0iCTiKPeD47Gwg
- iyvnvPmEKp3EKYQPYjpmm1weK6CbnsXUxLSUax+lWuXJFRoHCixyZRGLBf8pJDHTXylS
- iI3d/UXzkO4yze5m0gTnLLoi2fmcxWp9JXMFeTB5i8FmpF0HAPhY8wdvsyJlJq+QR41X
- taABdff4HLxlvxP2BD/0KKu9yOabpB8X+0BPMaTIhy8/3TSolgJZ57S6GSMDEwPYZ32P
- qPUg0KGU8DhiD5il4eTrM9/5A2vq2rtf65mQMV47ubT06h0eEobKSNrySvli+0cFmnL0
- dQsg==
-X-Gm-Message-State: AOJu0Ywo3BoV9HtASaUF0SOJLxllgUPZqruCKCoUErY+aZiQSYiO/7fj
- uRprcJj2Ka4HtBpDGGtlj3yAdPp6YdFqCScT268ykYH2u1XDqdEBss1DShYfpQrYJg==
-X-Google-Smtp-Source: AGHT+IGG1AYJmNI1RKHafeaR/f9y4GVvQEV7SP4CjCUb6sTvHsbm82u+5KVKu5EX7jeoLBnqMMvOHg==
-X-Received: by 2002:a05:6870:d693:b0:221:9ab1:7629 with SMTP id
- z19-20020a056870d69300b002219ab17629mr3802405oap.7.1710050315983; 
- Sat, 09 Mar 2024 21:58:35 -0800 (PST)
+ d=1e100.net; s=20230601; t=1710050321; x=1710655121;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=lrVbYAF3HAxcWzCjQkr2Zz9lOxcR5w9VAnBLZJPAAMQ=;
+ b=EuUw69Xz2Da7Ed4EcpvRk90JhYxpjIWTb7ZTNQLhiBxySClC2X+y+4jM9WijzR+w3w
+ r57o+lIhHd/1gApst7NUTYgt9pz0fZD3OzWNzaUcOL7TVF69E+N2EshzYsyEAUPlTzvQ
+ dyKkna1v6cNZJyh5zadELXppQJwoT0E8u59n/HsIEugtsIpB5wxyqYi/4WK9O+VD6oqQ
+ v2S7ojynaUYjtPBicmD1Rrew1Mua5pNHD596TmHYxG6HfO/517lge/gcuYvhqUPEi2L7
+ flr4glb0eRE9SIt6iPLWqIqcxqrLqlkkl79ZGigFv+RQkYWbIzOsDJqc9y4TcifNNAJ0
+ oriQ==
+X-Gm-Message-State: AOJu0YzxkZaI+ua8JX/qSzO58XzJWWzH+hZ7lpSaVEpZRnoSEsA+kUrM
+ fOBFdt1bNDNrJwHa8sf+wVcCeUvb7jQ7SaE7y2BOUjZR/SzyypELB/cVspRbLS3w9g==
+X-Google-Smtp-Source: AGHT+IGXGAa9UdIQfwwNmbga2LnX1J7k973QHVjRAx5NVgJVIVGbcPiW6b0FNqQs17+cj2cDN+1FCA==
+X-Received: by 2002:a05:6a00:114b:b0:6e5:ce7e:929f with SMTP id
+ b11-20020a056a00114b00b006e5ce7e929fmr4461060pfm.7.1710050321484; 
+ Sat, 09 Mar 2024 21:58:41 -0800 (PST)
 Received: from localhost.localdomain ([117.135.91.249])
  by smtp.gmail.com with ESMTPSA id
- i15-20020aa787cf000000b006e508b6a13dsm2037522pfo.58.2024.03.09.21.58.30
+ i15-20020aa787cf000000b006e508b6a13dsm2037522pfo.58.2024.03.09.21.58.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 Mar 2024 21:58:35 -0800 (PST)
+ Sat, 09 Mar 2024 21:58:41 -0800 (PST)
 From: Kongyang Liu <seashell11234455@gmail.com>
 To: u-boot@lists.denx.de
 Cc: Baruch Siach <baruch@tkos.co.il>, Joe Hershberger <joe.hershberger@ni.com>,
  Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Leo <ycliang@andestech.com>, Nils Le Roux <gilbsgilbert@gmail.com>,
- Ramon Fried <rfried.dev@gmail.com>, Rick Chen <rick@andestech.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Nils Le Roux <gilbsgilbert@gmail.com>, Ramon Fried <rfried.dev@gmail.com>,
  Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 0/3] board: sophgo: milkv_duo: Add ethernet support for Milk-V
- Duo board
-Date: Sun, 10 Mar 2024 13:56:43 +0800
-Message-ID: <20240310055816.11575-1-seashell11234455@gmail.com>
+Subject: [PATCH 1/3] board: milkv_duo: Add init code for Milk-V Duo ethernet
+Date: Sun, 10 Mar 2024 13:56:44 +0800
+Message-ID: <20240310055816.11575-2-seashell11234455@gmail.com>
 X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20240310055816.11575-1-seashell11234455@gmail.com>
+References: <20240310055816.11575-1-seashell11234455@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Sun, 10 Mar 2024 13:10:19 +0100
@@ -95,33 +97,163 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series add init code for cv1800b ethernet phy and enable ethernet
-support for Sophgo Milk-V Duo board.
+Initialize register in cv1800b ethernet phy to make it compatible with
+generic phy driver
 
-In cv1800b, due to the PHY register phy_id being initialized to 0, it is
-necessary to initialize the PHY before the ethernet driver initialization.
-Therefore, the initialization code is placed in the board_init function.
+Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
 
-Duo to modification of dts and defconfig, This series depends on the series:
-https://lore.kernel.org/all/20240309175330.79267-1-seashell11234455@gmail.com/
+---
 
-
-Kongyang Liu (3):
-  board: milkv_duo: Add init code for Milk-V Duo ethernet
-  riscv: dts: sophgo: Add ethernet node
-  configs: milkv_duo: Add ethernet configs
-
- arch/riscv/dts/cv18xx.dtsi        |  6 +++
  board/sophgo/milkv_duo/Makefile   |  3 +-
  board/sophgo/milkv_duo/board.c    |  4 ++
  board/sophgo/milkv_duo/ethernet.c | 79 +++++++++++++++++++++++++++++++
  board/sophgo/milkv_duo/ethernet.h | 11 +++++
- configs/milkv_duo_defconfig       |  4 ++
  drivers/net/designware.c          |  1 +
- 7 files changed, 107 insertions(+), 1 deletion(-)
+ 5 files changed, 97 insertions(+), 1 deletion(-)
  create mode 100644 board/sophgo/milkv_duo/ethernet.c
  create mode 100644 board/sophgo/milkv_duo/ethernet.h
 
+diff --git a/board/sophgo/milkv_duo/Makefile b/board/sophgo/milkv_duo/Makefile
+index a087013f5c..d0525eba85 100644
+--- a/board/sophgo/milkv_duo/Makefile
++++ b/board/sophgo/milkv_duo/Makefile
+@@ -2,4 +2,5 @@
+ #
+ # Copyright (c) 2024, Kongyang Liu <seashell11234455@gmail.com>
+ 
+-obj-y := board.o
++obj-y += board.o
++obj-$(CONFIG_NET) += ethernet.o
+diff --git a/board/sophgo/milkv_duo/board.c b/board/sophgo/milkv_duo/board.c
+index eaa47be173..311576fe1c 100644
+--- a/board/sophgo/milkv_duo/board.c
++++ b/board/sophgo/milkv_duo/board.c
+@@ -3,7 +3,11 @@
+  * Copyright (c) 2024, Kongyang Liu <seashell11234455@gmail.com>
+  */
+ 
++#include "ethernet.h"
++
+ int board_init(void)
+ {
++	if (IS_ENABLED(CONFIG_NET))
++		cv1800b_ephy_init();
+ 	return 0;
+ }
+diff --git a/board/sophgo/milkv_duo/ethernet.c b/board/sophgo/milkv_duo/ethernet.c
+new file mode 100644
+index 0000000000..e997ce1037
+--- /dev/null
++++ b/board/sophgo/milkv_duo/ethernet.c
+@@ -0,0 +1,79 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (c) 2024, Kongyang Liu <seashell11234455@gmail.com>
++ */
++
++#include <linux/io.h>
++#include <linux/bitops.h>
++#include <linux/mii.h>
++
++#define REG_EPHY_TOP_WRAP (u32 *)0x03009800
++#define REG_EPHY_BASE     (u32 *)0x03009000
++
++#define REG_EPHY_CTL         REG_EPHY_TOP_WRAP
++#define REG_EPHY_APB_RW_SEL  REG_EPHY_TOP_WRAP + 1
++
++/* Page 0 register */
++#define REG_PHY_ID1          REG_EPHY_BASE + MII_PHYSID1
++#define REG_PHY_ID2          REG_EPHY_BASE + MII_PHYSID2
++#define REG_PHY_PAGE_SEL     REG_EPHY_BASE + 0x1f
++
++/* Page 5 register */
++#define REG_PD_EN_CTL        REG_EPHY_BASE + 0x10
++
++/* REG_EPHY_CTL */
++#define REG_EPHY_SHUTDOWN    BIT(0)
++#define REG_EPHY_ANA_RST_N   BIT(1)
++#define REG_EPHY_DIG_RST_N   BIT(2)
++#define REG_EPHY_MAIN_RST_N  BIT(3)
++
++/* REG_PD_EN_CTL */
++#define REG_EN_ETH_TXRT          BIT(0)
++#define REG_EN_ETH_CLK100M       BIT(1)
++#define REG_EN_ETH_CLK125M       BIT(2)
++#define REG_EN_ETH_PLL_LCKDET    BIT(3)
++#define REG_EN_ETH_RXADC         BIT(4)
++#define REG_EN_ETH_RXPGA         BIT(5)
++#define REG_EN_ETH_RXRT          BIT(6)
++#define REG_EN_ETH_TXCROSSOVER   BIT(7)
++#define REG_PD_ETH_PLL           BIT(8)
++#define REG_PD_ETH_TXDAC         BIT(9)
++#define REG_PD_ETH_TXDACBST      BIT(10)
++#define REG_PD_ETH_TXECHO        BIT(11)
++#define REG_PD_ETH_TXDRV_NMOS    BIT(12)
++#define REG_PD_ETH_TXLDO         BIT(13)
++
++void cv1800b_ephy_init(void)
++{
++	u32 reg;
++	u32 phy_id = 1;
++
++	/* enable direct memory access for phy register */
++	writel(1, REG_EPHY_APB_RW_SEL);
++
++	reg = readl(REG_EPHY_CTL);
++	reg &= ~REG_EPHY_SHUTDOWN;
++	reg |= REG_EPHY_ANA_RST_N | REG_EPHY_DIG_RST_N | REG_EPHY_MAIN_RST_N;
++	writel(reg, REG_EPHY_CTL);
++
++	/* switch to page 5 */
++	writel(5 << 8, REG_PHY_PAGE_SEL);
++	reg = readl(REG_PD_EN_CTL);
++	reg &= ~(REG_PD_ETH_TXLDO | REG_PD_ETH_TXDRV_NMOS | REG_PD_ETH_TXDAC | REG_PD_ETH_PLL);
++	reg |= REG_EN_ETH_TXRT | REG_EN_ETH_CLK100M | REG_EN_ETH_CLK125M
++		| REG_EN_ETH_PLL_LCKDET | REG_EN_ETH_RXADC | REG_EN_ETH_RXPGA | REG_EN_ETH_RXRT;
++	writel(reg, REG_PD_EN_CTL);
++
++	/* switch to page 0 */
++	writel(0 << 8, REG_PHY_PAGE_SEL);
++	/*
++	 * As the phy_id in the cv1800b PHY register is initialized to 0, it
++	 * is necessary to manually initialize the phy_id to an arbitrary
++	 * value so that it could corresponds to the generic PHY driver.
++	 */
++	writel(phy_id >> 16, REG_PHY_ID1);
++	writel(phy_id & 0xffff, REG_PHY_ID2);
++
++	/* switch to MDIO control */
++	writel(0, REG_EPHY_APB_RW_SEL);
++}
+diff --git a/board/sophgo/milkv_duo/ethernet.h b/board/sophgo/milkv_duo/ethernet.h
+new file mode 100644
+index 0000000000..7b21f1b0f6
+--- /dev/null
++++ b/board/sophgo/milkv_duo/ethernet.h
+@@ -0,0 +1,11 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (c) 2024, Kongyang Liu <seashell11234455@gmail.com>
++ */
++
++#ifndef __CV1800B_ETHERNET_H
++#define __CV1800B_ETHERNET_H
++
++void cv1800b_ephy_init(void);
++
++#endif
+diff --git a/drivers/net/designware.c b/drivers/net/designware.c
+index c222197b11..e4e173f9fd 100644
+--- a/drivers/net/designware.c
++++ b/drivers/net/designware.c
+@@ -861,6 +861,7 @@ static const struct udevice_id designware_eth_ids[] = {
+ 	{ .compatible = "amlogic,meson6-dwmac" },
+ 	{ .compatible = "st,stm32-dwmac" },
+ 	{ .compatible = "snps,arc-dwmac-3.70a" },
++	{ .compatible = "sophgo,cv1800b-ethernet" },
+ 	{ }
+ };
+ 
 -- 
 2.41.0
 
