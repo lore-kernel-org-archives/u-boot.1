@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AF3BC54791
-	for <u-boot@archiver.kernel.org>; Sun, 10 Mar 2024 12:10:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FB95C54E58
+	for <u-boot@archiver.kernel.org>; Sun, 10 Mar 2024 12:11:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BDE6A87E64;
-	Sun, 10 Mar 2024 13:10:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C339C87E8E;
+	Sun, 10 Mar 2024 13:10:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="no0qTCAH";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OUwlAOt1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0901587E0A; Sun, 10 Mar 2024 06:58:49 +0100 (CET)
-Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
- [IPv6:2607:f8b0:4864:20::136])
+ id 3163C87E0A; Sun, 10 Mar 2024 06:58:52 +0100 (CET)
+Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
+ [IPv6:2001:4860:4864:20::33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EED9087BF4
- for <u-boot@lists.denx.de>; Sun, 10 Mar 2024 06:58:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F02487BF4
+ for <u-boot@lists.denx.de>; Sun, 10 Mar 2024 06:58:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seashell11234455@gmail.com
-Received: by mail-il1-x136.google.com with SMTP id
- e9e14a558f8ab-3663be565d5so2780155ab.0
- for <u-boot@lists.denx.de>; Sat, 09 Mar 2024 21:58:46 -0800 (PST)
+Received: by mail-oa1-x33.google.com with SMTP id
+ 586e51a60fabf-221a2d0c5dcso1242830fac.0
+ for <u-boot@lists.denx.de>; Sat, 09 Mar 2024 21:58:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1710050325; x=1710655125; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1710050328; x=1710655128; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=603qhtnK/kOF8p/1jgDsQCp6QyJ/n1dEAi1ARhs0dak=;
- b=no0qTCAHj2IhNLwpD57muCPO02Ctg+iJOmU6O77DprL1GcMR8LTJm7+738bgU5Uc7C
- UNpXVWh+yX5osBhRNcNAJU3Lup4hbi+eJurIUgr167UwnWf9vDrmKJpnLYbpdmOjC2W6
- RTOPNj7+2jymFqkLRuYOWHBj6MbnElcePL0NKgROgHHcgazVINUR9dC5jVENoroMzD6w
- G9dISzprBPbPZBZ2TLzIiQJ+A9C8TMM4dmyg61sVZSdCepP/YyGMhh4rNTLAAWb0cIwQ
- N+UiBwik7/S93cIeNh3arjp9V5aE7UoL7LDBo9is9jRwKHMj/PkHfzTN8Ucut/XhPgvo
- qWEg==
+ bh=YFvup1fBnqjrjgOnHPVv2fqpvRqIZktzTPiXX7zS3Mg=;
+ b=OUwlAOt1bF53qmEM0bd6On/kdUXNsDbX23jIza59QARxs6pVcFXbP73FlFH7VlsJzs
+ prLjPaVIhHZ31Bnp+8wpIBxxGkQxrZzeTJOiyp8DT8wnexQC+Cix4aJeE+9wnUsoT21k
+ S0NqPiIpIx0zPoaLlgYvcjQZjua7cN4jc/t4+38bKdyvUtWY2Bv3YLe0HKpHvh3XRZcl
+ r1iBOkcqSFKdGRYBPaoitSCRc+dIqzOH2kCWKm36lzBMC0ueRP4+sWvWEYtinGkEt3cA
+ ExjaSESXsXAtgHAl10coO+nXR+H4/67DfRTI54moeYSbdm6NpEqu1syxdAZGFWiMnAhx
+ UMOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710050325; x=1710655125;
+ d=1e100.net; s=20230601; t=1710050328; x=1710655128;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=603qhtnK/kOF8p/1jgDsQCp6QyJ/n1dEAi1ARhs0dak=;
- b=SbMeTbchgaf0OAVdAJPrvQ0xhDaCgVSLqgQXKQV8DWQiNjFoQrxPiEWyViDGmZJK1/
- dmS58VgWMl+HHmmuusKWPPy62vydDnJJs1AffMSogpuj/8yzi8J7Cgk19axEGF0MFS7R
- uRJy7qZotR1I9osNBO1gU94rac24Tdx8fSubtVXEBlbYEyLeSbRjQ/HEZPdbv7sd7Pjj
- 3vOdvtF9Lr7S7fw9GynB7jBD1T56S2srk7DNZY2ohAPN8UkoKsrjMDTKY+OwJxcALqON
- 5YqlmzyaEK2uKdElNgcp2/ufKNPZ8Z3iFzeROyo+4kbEkHu1d39gZcN4CVqGHUDO5YS4
- FEFg==
-X-Gm-Message-State: AOJu0YyoexcuZl3tqfbOEjg8gCQL31x6R0s6HwNX3pEE2cgqvNObhgDp
- rsL+0zj5/QnKJgpqJssVVC3yvurAhzAt5LJOHdOZNM4rQ2qcz3gGCuAocbO/j5kPWA==
-X-Google-Smtp-Source: AGHT+IH9hFECbLAC/tXhRoHJMEJwDlvXv8tWLAzpyCcuvM1hJYTikfyLs4lgyIrNvpyuRTi4t16WQw==
-X-Received: by 2002:a05:6e02:1a23:b0:365:224b:e601 with SMTP id
- g3-20020a056e021a2300b00365224be601mr3955922ile.2.1710050324743; 
- Sat, 09 Mar 2024 21:58:44 -0800 (PST)
+ bh=YFvup1fBnqjrjgOnHPVv2fqpvRqIZktzTPiXX7zS3Mg=;
+ b=TVg2vytg8GoiIEU75iIJwHykSyCwBzrNDzEoAjcDmmByqdYCH+Pi6dBk4LYG9aDKhi
+ mJcKWkydxy8Ae0DZGqtUnH9aI9WSXKv13tNlKdpov16/z9ymejQEb7GMTWVHnYWeWH9K
+ jZScoBoLOb8qn03NjwBB2pWJFkZHUTT5ZmEb8M4iVLJ7Bse1IroSHkHOP9ZyAYzO30AU
+ fMlVZFrV3DTnv82pnZncuzVUJ5YB2i8XO3kKtVEfdEAduFTzLemRLAPTpWOztkOZiT9+
+ i4IUHaVoIReMWGw3NooGix5IveupFQbkSRkBM4FbVDKSb9nFqZFebfVRq6hLg6w46LoZ
+ Q5jA==
+X-Gm-Message-State: AOJu0Yx/olrJSAn0ALyYzlUhF0MjcBA/ISBLLUdYnU+w5cVZVcWsaJ8D
+ LHjUHMmWLUzrPtyJeQaVBAtjOHRAIXS4AcizDMu5xZ75ZI6TG2i17kpnoJB19NdU7A==
+X-Google-Smtp-Source: AGHT+IEfUe+7Ozdu6UEsQC02NI9RoqaWleiixJW64NTixqsUrsNumBG7EUjhvgJkFz7jGnaUodlxzA==
+X-Received: by 2002:a05:6870:1707:b0:21f:dc81:1c1a with SMTP id
+ h7-20020a056870170700b0021fdc811c1amr3991615oae.16.1710050327661; 
+ Sat, 09 Mar 2024 21:58:47 -0800 (PST)
 Received: from localhost.localdomain ([117.135.91.249])
  by smtp.gmail.com with ESMTPSA id
- i15-20020aa787cf000000b006e508b6a13dsm2037522pfo.58.2024.03.09.21.58.42
+ i15-20020aa787cf000000b006e508b6a13dsm2037522pfo.58.2024.03.09.21.58.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 Mar 2024 21:58:44 -0800 (PST)
+ Sat, 09 Mar 2024 21:58:47 -0800 (PST)
 From: Kongyang Liu <seashell11234455@gmail.com>
 To: u-boot@lists.denx.de
-Cc: Leo <ycliang@andestech.com>, Rick Chen <rick@andestech.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 2/3] riscv: dts: sophgo: Add ethernet node
-Date: Sun, 10 Mar 2024 13:56:45 +0800
-Message-ID: <20240310055816.11575-3-seashell11234455@gmail.com>
+Cc: Leo Yu-Chi Liang <ycliang@andestech.com>,
+	Tom Rini <trini@konsulko.com>
+Subject: [PATCH 3/3] configs: milkv_duo: Add ethernet configs
+Date: Sun, 10 Mar 2024 13:56:46 +0800
+Message-ID: <20240310055816.11575-4-seashell11234455@gmail.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240310055816.11575-1-seashell11234455@gmail.com>
 References: <20240310055816.11575-1-seashell11234455@gmail.com>
@@ -93,31 +93,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add ethernet node for cv1800b SoC
+Add configs related to ethernet and ethernet boot command for Sophgo Milk-V
+Duo board
 
 Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
 ---
 
- arch/riscv/dts/cv18xx.dtsi | 6 ++++++
- 1 file changed, 6 insertions(+)
+ configs/milkv_duo_defconfig | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/arch/riscv/dts/cv18xx.dtsi b/arch/riscv/dts/cv18xx.dtsi
-index ec99c4deeb..013372a40c 100644
---- a/arch/riscv/dts/cv18xx.dtsi
-+++ b/arch/riscv/dts/cv18xx.dtsi
-@@ -197,6 +197,12 @@
- 			status = "disabled";
- 		};
- 
-+		ethernet0: ethernet@4070000 {
-+			compatible = "sophgo,cv1800b-ethernet";
-+			reg = <0x04070000 0x10000>;
-+			phy-mode = "rmii";
-+		};
-+
- 		plic: interrupt-controller@70000000 {
- 			reg = <0x70000000 0x4000000>;
- 			interrupts-extended = <&cpu0_intc 11>, <&cpu0_intc 9>;
+diff --git a/configs/milkv_duo_defconfig b/configs/milkv_duo_defconfig
+index e8413d7aa9..f66c4c5358 100644
+--- a/configs/milkv_duo_defconfig
++++ b/configs/milkv_duo_defconfig
+@@ -19,14 +19,18 @@ CONFIG_HUSH_PARSER=y
+ CONFIG_SYS_PROMPT="milkv_duo# "
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_PART=y
++CONFIG_CMD_DHCP=y
++CONFIG_CMD_PXE=y
+ CONFIG_CMD_FAT=y
+ CONFIG_CMD_FS_GENERIC=y
+ CONFIG_ENV_OVERWRITE=y
++CONFIG_NET_RANDOM_ETHADDR=y
+ CONFIG_MMC=y
+ CONFIG_MMC_IO_VOLTAGE=y
+ CONFIG_MMC_UHS_SUPPORT=y
+ CONFIG_MMC_SDHCI=y
+ CONFIG_MMC_SDHCI_ADMA=y
+ CONFIG_MMC_SDHCI_CV1800B=y
++CONFIG_ETH_DESIGNWARE=y
+ CONFIG_SYS_NS16550=y
+ CONFIG_SYS_NS16550_MEM32=y
 -- 
 2.41.0
 
