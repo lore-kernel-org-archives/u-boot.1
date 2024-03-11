@@ -4,64 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9AB8C5475B
-	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 03:21:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AABAC5475B
+	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 03:50:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA12F8744F;
-	Mon, 11 Mar 2024 04:21:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 1850A87CF2;
+	Mon, 11 Mar 2024 04:50:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Ps88wS+Q";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mDzetvcT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AAA3987E2F; Mon, 11 Mar 2024 04:20:59 +0100 (CET)
-Received: from mail-m17241.xmail.ntesmail.com (mail-m17241.xmail.ntesmail.com
- [45.195.17.241])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 614738644E; Mon, 11 Mar 2024 04:50:02 +0100 (CET)
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [IPv6:2a00:1450:4864:20::134])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 612C887150
- for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 04:20:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 19CA187CF2
+ for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 04:50:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=Ps88wS+Q4sR8EOlH8p0TtegVMYxr8hNOWl3LCz3vhxFhNA2B1wfapBA0sLYI18gd0JqtXWjd1czs5+3D1O3W8v6sByTQQ3wonNewiSbXG+OKktaC5QH0a8CUK97XHF33KXhdoPNfdsW/lSiFf9YeWKg9hWgLmYroVM6/z0oufsI=;
- c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=zDu+UKrQj3J455dhwRy71jwHsXwsyFmMxZdiG/JF5Ck=;
- h=date:mime-version:subject:message-id:from;
-Received: from [172.16.12.77] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 133E4900242;
- Mon, 11 Mar 2024 11:20:40 +0800 (CST)
-Message-ID: <6d8120b5-bc0c-4674-b33f-8c7a7cc354ba@rock-chips.com>
-Date: Mon, 11 Mar 2024 11:20:39 +0800
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-512e4f4e463so5284117e87.1
+ for <u-boot@lists.denx.de>; Sun, 10 Mar 2024 20:50:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1710128999; x=1710733799; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=7agCoEXeUtnrG4v5FyL7WdamyHOmPTgvDh0aBnHwCCQ=;
+ b=mDzetvcTjJ1qJ8d8JmKP7FdUq993zy6knLMu2Bs1Mb1naxgP19OoXSw+rNP2ZEuE6k
+ 67Ih6g5hD40kR+wJGVftK60dNfJqz33wFrtcsHUIuSockiOuO06R0AOyPylGGsziJGDu
+ /CZTm77NTsBqmh3wjmN5/isMXI6ESENu4J7kKnReJ1BggzPUEQoaVpgPRsy6f4gHGaxr
+ o7bFYUnViMJqCDO4mIUeSTBoSbFHhPohqh6kbirhgsTiKxbwe5oYoACPQMC14pov7xDE
+ vI8dsT2RT6a/yqNhKIZBsxjibkhlbU7Kje/IOSFFBiO75HFSr88q9voI57BO4iSWomMz
+ uRiw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710128999; x=1710733799;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=7agCoEXeUtnrG4v5FyL7WdamyHOmPTgvDh0aBnHwCCQ=;
+ b=j0HO+1FQ5nRJfzhneqLe1Mm7S36n7XfPvMvUqBBk0B9KaXLQyT5TO3cELSxGjVU4JO
+ cWr5EwnMOjepm2ScgVwuolJYtDDt+XmzgQyfSYnZqsHHa9tq661bqaWtUKCqVxn/hgw5
+ Spg4I5w6EjbCL56NARkWuxOE7kzrgGaGr8HYMSWoggbUv7q+NS4aEbOmd4bn/4HEtTHb
+ Gv8h1EYGwX1OM7XJ4nqSuaA9jnOiM/W9OGuMQON3V0GQUSnq44N6CLHoAYS0N2bSQrBC
+ GN/DDzPQKILgyr4AHDxRR87gjY056zVFkRD6RFaltTMSSk7/HX4IdkobdGKN4lRTtQVR
+ f1Hw==
+X-Gm-Message-State: AOJu0YwIPe1YLEQhpKEG2L4c9bpRXyxdXExrng2/oTFPyVV5h57Cprua
+ AHaiOKW0WFieujwQPCh2M76SlAo7qAMb2VjdKoDGovU8WGhGRhAWNzfYaSH1qqth/6X2kxZjXeR
+ bVJ4oT2dQsxZqO/FNq5R/N2i33j0=
+X-Google-Smtp-Source: AGHT+IEIG90VoWuAJq92X8+fENFeoygkJJM0Mxk1vcHFPgdi4WY8BAwWtUxsmx0lrRZh9MHQagpWYSjZ+Q+1h9o7Hf4=
+X-Received: by 2002:a05:6512:1052:b0:513:a088:17bc with SMTP id
+ c18-20020a056512105200b00513a08817bcmr3830622lfb.50.1710128999094; Sun, 10
+ Mar 2024 20:49:59 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/4] rockchip: Update the default USB Product ID value
-Content-Language: en-US
-To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de
-References: <20240226230822.2430391-1-jonas@kwiboo.se>
- <20240226230822.2430391-2-jonas@kwiboo.se>
- <f1f0abb8-7786-4c56-8e55-772a59bbab82@rock-chips.com>
- <79d3a0e0-ba71-441c-8466-7397c755d863@kwiboo.se>
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <79d3a0e0-ba71-441c-8466-7397c755d863@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQkIfQlZCHkNMH09CQxhLQkJVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk5MSUpJVUpLS1VKQl
- kG
-X-HM-Tid: 0a8e2b86d53103a9kunm133e4900242
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NRw6Lzo4ATMNGjI3Kx8PMwpP
- AR0aChpVSlVKTEpLSklMSU9KS0JDVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFOT0tNNwY+
+References: <20240222093607.3085545-1-sumit.garg@linaro.org>
+ <170929783825.70492.4756963077870833230.b4-ty@konsulko.com>
+ <CAOMZO5CjeUhFfLBs3FRt4Hbk0ULXrRoOZaZqvSRzWbNySdsOhQ@mail.gmail.com>
+ <CAFA6WYMf7Z-sW8pSHzYUJ_O9fqfunBEhyigJj3BW-DYuujxDbw@mail.gmail.com>
+ <CAOMZO5AhTGskhEX9mv8oMJ1k4cbZzfZ2Vck5VcrVrYUvBA2r7w@mail.gmail.com>
+ <CAFA6WYM12F_9yyNwXY5xj9+zh3Jwa_Jmz8MkaKsxm3Jn3NPNKA@mail.gmail.com>
+ <CAOMZO5DgEaTGmxJfJf=fGgwauE-M+XyHm+tA8rfOw+MwRK_mqA@mail.gmail.com>
+In-Reply-To: <CAOMZO5DgEaTGmxJfJf=fGgwauE-M+XyHm+tA8rfOw+MwRK_mqA@mail.gmail.com>
+From: Tony Dinh <mibodhi@gmail.com>
+Date: Sun, 10 Mar 2024 20:49:47 -0700
+Message-ID: <CAJaLiFxgNPoiGZMFt7SvTdVRUz1QNC7pibbeoaed7DaxEnFWNQ@mail.gmail.com>
+Subject: Re: [PATCH v6 00/11] An effort to bring DT bindings compliance within
+ U-Boot
+To: Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Bryan Brattlof <bb@ti.com>, Stefan Roese <sr@denx.de>,
+ Fabio Estevam <festevam@denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,104 +95,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
+Hi Sumit,
+Hi Tom,
 
-On 2024/3/8 18:42, Jonas Karlman wrote:
-> Hi Kever,
+On Mon, Mar 4, 2024 at 4:29=E2=80=AFAM Fabio Estevam <festevam@gmail.com> w=
+rote:
 >
-> On 2024-03-08 10:22, Kever Yang wrote:
->> Hi Jonas,
->>
->>       Thanks for your patch.
->>
->> On 2024/2/27 07:08, Jonas Karlman wrote:
->>> RK3036 is using the USB product id normally used by RK3066B, and RK3328
->>> is using the product id normally used by RK3368.
->>>
->>> Fix this and update the default USB_GADGET_PRODUCT_NUM Kconfig option
->>> for remaining supported Rockchip SoCs to match the product id used in
->>> Mask ROM mode. Also remove a reference to the unknown ROCKCHIP_RK3229
->>> symbol.
->> RK3229 belongs to RK322X which is reuse with RK3228.
->>
->> Note that this ID is used for rockusb gadget, if work as mass storage,
->> it should use other
->>
->> ID, or else it will confuse the driver in host side, eg. the Windows
->> driver may not able to
->>
->> recognize the device if using two different gadget type with the same ID.
-> Patch 3 in this series will change to use 0x0010 product id when ums
-> mode is enabled and fall back to use the USB_GADGET_PRODUCT_NUM for any
-> other gadget mode.
-Yes, I see that a few seconds after I send that mail.
+> On Mon, Mar 4, 2024 at 9:15=E2=80=AFAM Sumit Garg <sumit.garg@linaro.org>=
+ wrote:
 >
-> The ROCKCHIP_RK3229 symbol is not defined or used anywhere U-Boot so the
-> change in this patch to remove it from the condition should have no
-> impact. If RK3229 need a special product id separate from 0x320b used by
-> ROCKCHIP_RK322X, it can be defined in the defconfig for such board.
+> > I suppose the earlier reference patch wasn't complete, can you rather
+> > try its v4 [1] instead?
+> >
+> > [1] https://patchwork.ozlabs.org/project/uboot/patch/20240304121257.355=
+1104-1-sumit.garg@linaro.org/
+>
+> This one works, thanks!
 
-ROCKCHIP_RK3229 does not need any more, because it's included in Rk322X.
+I'm testing this for a Marvell Armada 385 board (Synology DS116). I'm
+on the next branch, but  perhaps something is still missing.
 
-So please update the commit message with " remove ROCKCHIP_RK3229 because
-it's included in ROCKCHIP_RK322X" instead of "unknown ROCKCHIP_RK3229".
+diff --git a/configs/ds116_defconfig b/configs/ds116_defconfig
+index 02ddc0e7918..1fbedcf91cf 100644
+--- a/configs/ds116_defconfig
++++ b/configs/ds116_defconfig
+@@ -16,7 +16,7 @@ CONFIG_SF_DEFAULT_SPEED=3D50000000
+ CONFIG_ENV_SIZE=3D0x10000
+ CONFIG_ENV_OFFSET=3D0x7E0000
+ CONFIG_ENV_SECT_SIZE=3D0x10000
+-CONFIG_DEFAULT_DEVICE_TREE=3D"armada-385-synology-ds116"
++CONFIG_DEFAULT_DEVICE_TREE=3D"marvell/armada-385-synology-ds116"
+ CONFIG_SPL_TEXT_BASE=3D0x40000030
+ CONFIG_SPL_SERIAL=3Dy
+ CONFIG_SPL_STACK=3D0x4002c000
+@@ -29,7 +29,6 @@ CONFIG_PCI=3Dy
+ CONFIG_DEBUG_UART=3Dy
+ CONFIG_AHCI=3Dy
+ CONFIG_BOOTSTD_FULL=3Dy
+-CONFIG_BOOTSTD_DEFAULTS=3Dy
+ CONFIG_BOOTDELAY=3D10
+ CONFIG_USE_PREBOOT=3Dy
+ CONFIG_SYS_CONSOLE_INFO_QUIET=3Dy
+@@ -57,6 +56,7 @@ CONFIG_CMD_CACHE=3Dy
+ CONFIG_CMD_TIME=3Dy
+ CONFIG_CMD_MTDPARTS=3Dy
+ CONFIG_MTDPARTS_DEFAULT=3D"mtdparts=3Dspi0.0:1m(u-boot),7040k(kernel),64k(=
+u-boot-env),-(data)"
++CONFIG_OF_UPSTREAM=3Dy
+ CONFIG_ENV_OVERWRITE=3Dy
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=3Dy
+ CONFIG_VERSION_VARIABLE=3Dy
 
->
-> I tested this on Windows with rockusb and ums on RK3308, RK3328, RK3399
-> RK356x and RK3588 boards, switching between ums and rockusb should work
-> as intended, rockusb driver was used in rockusb mode and in ums mode the
-> device would show up as a disk.
->
->    => rockusb 0 mmc 1
->    => ums 0 mmc 1
->
-> I think all product id below is correct,
+# make ds116_defconfig
 
-Yes, I have check these IDs, they are correct.
+# grep -i ds116 .config
+CONFIG_SYS_BOARD=3D"ds116"
+CONFIG_SYS_CONFIG_NAME=3D"ds116"
+CONFIG_TARGET_DS116=3Dy
+CONFIG_DEFAULT_DEVICE_TREE=3D"marvell/armada-385-synology-ds116"
+CONFIG_IDENT_STRING=3D"\nSynology DS116"
+CONFIG_SYS_PROMPT=3D"DS116> "
+CONFIG_OF_LIST=3D"marvell/armada-385-synology-ds116"
+CONFIG_SPL_OF_LIST=3D"marvell/armada-385-synology-ds116"
 
+Built it, and looks like vendor Marvell is missing during the Make
+file execution.
 
-Thanks,
-- Kever
-> but I have not been able to
-> runtime validate for other SoCs then the ones listed above.
->
-> Regards,
-> Jonas
->
->>
->> Thanks,
->> - Kever
->>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->>> ---
->>>    drivers/usb/gadget/Kconfig | 15 ++++++++++++---
->>>    1 file changed, 12 insertions(+), 3 deletions(-)
->>>
->>> diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
->>> index c72a8047635c..4621a6fd5e64 100644
->>> --- a/drivers/usb/gadget/Kconfig
->>> +++ b/drivers/usb/gadget/Kconfig
->>> @@ -70,12 +70,21 @@ config USB_GADGET_PRODUCT_NUM
->>>    	hex "Product ID of the USB device"
->>>    	default 0x701a if ARCH_TEGRA
->>>    	default 0x1010 if ARCH_SUNXI
->>> -	default 0x310a if ROCKCHIP_RK3036
->>> +	default 0x110a if ROCKCHIP_RV1108
->>> +	default 0x110b if ROCKCHIP_RV1126
->>>    	default 0x300a if ROCKCHIP_RK3066
->>> +	default 0x301a if ROCKCHIP_RK3036
->>> +	default 0x310b if ROCKCHIP_RK3188
->>>    	default 0x310c if ROCKCHIP_RK3128
->>> -	default 0x320a if ROCKCHIP_RK3229 || ROCKCHIP_RK3288
->>> -	default 0x330a if ROCKCHIP_RK3328
->>> +	default 0x320a if ROCKCHIP_RK3288
->>> +	default 0x320b if ROCKCHIP_RK322X
->>> +	default 0x320c if ROCKCHIP_RK3328
->>> +	default 0x330a if ROCKCHIP_RK3368
->>>    	default 0x330c if ROCKCHIP_RK3399
->>> +	default 0x330d if ROCKCHIP_PX30
->>> +	default 0x330e if ROCKCHIP_RK3308
->>> +	default 0x350a if ROCKCHIP_RK3568
->>> +	default 0x350b if ROCKCHIP_RK3588
->>>    	default 0x0
->>>    	help
->>>    	  Product ID of the USB device emulated, reported to the host device.
+make -f ./scripts/Makefile.build obj=3Ddts dtbs
+make -f ./scripts/Makefile.build obj=3Ddts/upstream/src/arm dtbs
+scripts/Makefile.build:57: dts/upstream/src/arm/Makefile: No such file
+or directory
+make[2]: *** No rule to make target 'dts/upstream/src/arm/Makefile'.  Stop.
+make[1]: *** [dts/Makefile:54: arch-dtbs] Error 2
+make: *** [Makefile:1166: dts/dt.dtb] Error 2
+make: *** Waiting for unfinished jobs....
+make: Leaving directory '/usr/src/u-boot'
+
+I also tried Bryan's patch like you've suggested to Fabio. But it
+seems Bryan's patch was already in the next branch. Did I miss
+something?
+
+All the best ,
+Tony
