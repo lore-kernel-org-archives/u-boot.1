@@ -4,65 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42F13C54E58
-	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 10:13:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CB62C5475B
+	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 10:44:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F69D87F69;
-	Mon, 11 Mar 2024 11:13:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 7EF8887D07;
+	Mon, 11 Mar 2024 11:44:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="UB7aTUtg";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="H5FqnFqd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9755687F6E; Mon, 11 Mar 2024 11:13:39 +0100 (CET)
-Received: from mail-m3288.qiye.163.com (mail-m3288.qiye.163.com
- [220.197.32.88])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8084487D07; Mon, 11 Mar 2024 11:44:19 +0100 (CET)
+Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
+ [IPv6:2607:f8b0:4864:20::1030])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 28B2387F69
- for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 11:13:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 15A5787CF2
+ for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 11:44:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=UB7aTUtgLBzhA49ntnjO8iUKlYRzWLyLXd7k2Ia4FCcfSJz0yPuR69JBj+/sqghCrSJL6up7AkckYItDzIMEPJMW6mD7NaqNuBDtVXXae/ptwBYVXP3t6B8Y+wgoep9T75NtlSe6eJCRnfhDpxfZ1c1e27P8kOY3iuOtzsbRIsQ=;
- c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=1F/7eSQySC9s0mRtOGZOCPWhM576V0B3D8eTdNr/gzQ=;
- h=date:mime-version:subject:message-id:from;
-Received: from [172.16.12.77] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id A0B8B900359;
- Mon, 11 Mar 2024 18:13:16 +0800 (CST)
-Message-ID: <d2257d2a-1aab-42c4-afa7-17df15869b2d@rock-chips.com>
-Date: Mon, 11 Mar 2024 18:13:16 +0800
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x1030.google.com with SMTP id
+ 98e67ed59e1d1-29c17ec16f6so70092a91.1
+ for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 03:44:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1710153853; x=1710758653; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/EY3lXuCPHkCDiHRYv2jdZO/3P0dD2i/9v/dJlf5u3s=;
+ b=H5FqnFqdR10Ol6PD3j87jv4SJY4aLcrjRR2MJa56yuQjYxQeulZlygiIwiAj+ZmCqz
+ Us332PVIg/hQeTf9+fb0ekzIBr3daJj2S9MuFP6dniTcw+4FGJpBbtpeOIQQwVsjBueD
+ c40DQggHv7dc714yaJkQ1v4D04ObVM35+n4EFF/duS2HFqYropMzj6J6tnnxScs27IxU
+ cqEDBJ3fEv03T/NLu1Zih3P4mB9/j9OqNmS4DfyjBCP4GeFELWzvQuGEWi9NyGit+W7j
+ 7G0qXnJzDjwaoHRFZLp3NMjo3nCyIQGb8TD0MkKQjU0IAe2usCRdCjcwnFf0TRRw5U5k
+ b45g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710153853; x=1710758653;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=/EY3lXuCPHkCDiHRYv2jdZO/3P0dD2i/9v/dJlf5u3s=;
+ b=B6Xnqp2stko3PF/mS/aAjKDeNF2BzbJY1yDvFn2vihtO2YzeUywpDTRnveNG6N1YnB
+ QO9+gg8TMH+nv0Q6NLUHznF3/H/UdHQXE3HCGZ2PGw6NrE3UCZscTU/z//Nq0tDwsAjL
+ iWz3nO9yT16AnjoONprP1EcKV74dxTMvT6PcaDJadqBs3iqvo11T+i4cYO1bG9wBdre7
+ VBVZn0yoiXxiI3+ROQKjuSF7EKEU5aiXtnFXodr5iB0q7CLqGBIgdR8QXeT5mUULaXIJ
+ hesFtHySnC6Iyd/dQfJ4mRepzbeEs13NCfTeXf3Fppo0/+ryfoCbtlYi9eAOJPKjdXmn
+ uf+Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUo3i7H6KnfbtOQVXjXl2IQ+/EXxdanhlcNj1HHfO+su1I+jhm+8fkSaVbgsetPUY2ErRXVkoRtPEth49TkXq4DAxhjnA==
+X-Gm-Message-State: AOJu0YyH6/Es+jYlQVNtXcgt2A9DlPkry7mKkjX+b8FvUquuhQvwfCQo
+ G4kiI8IrVgqTqnWJxOoGEFNyhM80amL5SIAfK08DWUfYPm3TO5FvFKwNNNB/S5sEwymAaMaOnRQ
+ +UhR9/xW1OX0K7Sj6vszS76eY1Vc=
+X-Google-Smtp-Source: AGHT+IFhF3FCQYYdF+0mKK+6ebL4dwg+gMw4WQaumQQFtO+rydZ9tP5K26tavYs66pwnokiXS2Tpp/W4JMC+7Ii1mhw=
+X-Received: by 2002:a17:90a:498c:b0:29b:bb08:6997 with SMTP id
+ d12-20020a17090a498c00b0029bbb086997mr4644473pjh.3.1710153853720; Mon, 11 Mar
+ 2024 03:44:13 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 10/16] rockchip: adc: rockchip-saradc: factor out stop
- callback
-Content-Language: en-US
-To: Quentin Schulz <foss+uboot@0leil.net>,
- Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Klaus Goger <klaus.goger@theobroma-systems.com>,
- Heiko Stuebner <heiko.stuebner@cherry.de>
-Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@theobroma-systems.com>
-References: <20240304-rk3588-saradc-v3-0-7424e2ed5d3b@theobroma-systems.com>
- <20240304-rk3588-saradc-v3-10-7424e2ed5d3b@theobroma-systems.com>
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240304-rk3588-saradc-v3-10-7424e2ed5d3b@theobroma-systems.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGUwYTFZIH05DTkxPQx9IT0hVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSU5IVUpLS1VKQk
- tLWQY+
-X-HM-Tid: 0a8e2d0097fd03a9kunma0b8b900359
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Nyo6Vhw5HzMIKDADFE00Mjw8
- DzoKCRdVSlVKTEpLSk5KQkJDSE1OVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFPQ09CNwY+
+References: <20240307152302.2338472-1-parth105105@gmail.com>
+In-Reply-To: <20240307152302.2338472-1-parth105105@gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Mon, 11 Mar 2024 07:44:02 -0300
+Message-ID: <CAOMZO5DrVC9+=_EGX7ADYFk57MfLbEv1YjcdKRCPSFZ1_yHmpw@mail.gmail.com>
+Subject: Re: [PATCH v1] configs: colibri-imx7: enable watchdog
+To: Parth Pancholi <parth105105@gmail.com>
+Cc: Stefano Babic <sbabic@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Parth Pancholi <parth.pancholi@toradex.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,89 +91,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Parth,
 
-On 2024/3/4 19:30, Quentin Schulz wrote:
-> From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+On Thu, Mar 7, 2024 at 12:23=E2=80=AFPM Parth Pancholi <parth105105@gmail.c=
+om> wrote:
 >
-> SARADC v2 doesn't have a stop mechanism once in single mode. In series
-> conversion, the logic is different anyway. Therefore, let's abstract
-> this function so that it can be provided from the udevice.data pointer.
+> From: Parth Pancholi <parth.pancholi@toradex.com>
 >
-> Cc: Quentin Schulz <foss+uboot@0leil.net>
-> Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+> Enable watchdog functionality for Toradex's Colibri iMX7 (NAND/EMMC)
+> modules.
 
-Thanks,
-- Kever
-> ---
->   drivers/adc/rockchip-saradc.c | 22 +++++++++++++++++++++-
->   1 file changed, 21 insertions(+), 1 deletion(-)
->
-> diff --git a/drivers/adc/rockchip-saradc.c b/drivers/adc/rockchip-saradc.c
-> index 607d10b5b70..b5df58fe3eb 100644
-> --- a/drivers/adc/rockchip-saradc.c
-> +++ b/drivers/adc/rockchip-saradc.c
-> @@ -39,6 +39,7 @@ struct rockchip_saradc_data {
->   	unsigned long			clk_rate;
->   	int (*channel_data)(struct udevice *dev, int channel, unsigned int *data);
->   	int (*start_channel)(struct udevice *dev, int channel);
-> +	int (*stop)(struct udevice *dev);
->   };
->   
->   struct rockchip_saradc_priv {
-> @@ -124,13 +125,29 @@ int rockchip_saradc_start_channel(struct udevice *dev, int channel)
->   	return 0;
->   }
->   
-> -int rockchip_saradc_stop(struct udevice *dev)
-> +int rockchip_saradc_stop_v1(struct udevice *dev)
->   {
->   	struct rockchip_saradc_priv *priv = dev_get_priv(dev);
->   
->   	/* Power down adc */
->   	writel(0, &priv->regs.v1->ctrl);
->   
-> +	return 0;
-> +}
-> +
-> +int rockchip_saradc_stop(struct udevice *dev)
-> +{
-> +	struct rockchip_saradc_priv *priv = dev_get_priv(dev);
-> +
-> +	if (priv->data->stop) {
-> +		int ret = priv->data->stop(dev);
-> +
-> +		if (ret) {
-> +			pr_err("Error stopping channel, %d!", ret);
-> +			return ret;
-> +		}
-> +	}
-> +
->   	priv->active_channel = -1;
->   
->   	return 0;
-> @@ -209,6 +226,7 @@ static const struct rockchip_saradc_data saradc_data = {
->   	.clk_rate = 1000000,
->   	.channel_data = rockchip_saradc_channel_data_v1,
->   	.start_channel = rockchip_saradc_start_channel_v1,
-> +	.stop = rockchip_saradc_stop_v1,
->   };
->   
->   static const struct rockchip_saradc_data rk3066_tsadc_data = {
-> @@ -217,6 +235,7 @@ static const struct rockchip_saradc_data rk3066_tsadc_data = {
->   	.clk_rate = 50000,
->   	.channel_data = rockchip_saradc_channel_data_v1,
->   	.start_channel = rockchip_saradc_start_channel_v1,
-> +	.stop = rockchip_saradc_stop_v1,
->   };
->   
->   static const struct rockchip_saradc_data rk3399_saradc_data = {
-> @@ -225,6 +244,7 @@ static const struct rockchip_saradc_data rk3399_saradc_data = {
->   	.clk_rate = 1000000,
->   	.channel_data = rockchip_saradc_channel_data_v1,
->   	.start_channel = rockchip_saradc_start_channel_v1,
-> +	.stop = rockchip_saradc_stop_v1,
->   };
->   
->   static const struct udevice_id rockchip_saradc_ids[] = {
->
+You described what the patch does, but the reason is missing.
+
+Is the reason for this patch to fix the 'reset' command regression
+like you did at:
+https://gitlab.com/u-boot/u-boot/-/commit/be23b1331fb35b7d5a095ef2c0b522c1f=
+241eee9
+?
+
+Please send a v2 with an improved commit log.
