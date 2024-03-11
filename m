@@ -4,89 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DADCDC5475B
-	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 15:09:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FFADC5475B
+	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 15:13:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5C42A87EDD;
-	Mon, 11 Mar 2024 16:09:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B757087E50;
+	Mon, 11 Mar 2024 16:13:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cu/Ugtw9";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xpTxaBbi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7676487E50; Mon, 11 Mar 2024 16:09:17 +0100 (CET)
-Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
- [IPv6:2607:f8b0:4864:20::72b])
+ id 4B80B87E13; Mon, 11 Mar 2024 16:13:21 +0100 (CET)
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0F7287DD5
- for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 16:09:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 591EC87E32
+ for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 16:13:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72b.google.com with SMTP id
- af79cd13be357-7884124b06aso201867185a.2
- for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 08:09:11 -0700 (PDT)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-33e76d653b5so3108035f8f.3
+ for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 08:13:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1710169750; x=1710774550; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=jCz6TMVxo9/3AAZ12r/tdV8FBqXAi5LgkIaU2v6N//M=;
- b=cu/Ugtw97I9hQ5EVFMGCMuKfySau2SdR/GKMibn4H/sw+S+fD1pKF1SwcNqjMs+oxm
- rPPfJbuANIj/xdujPZSnApR+mnHq5DtA/KmtlngP5gbLTFVOpscKkU4yEM5fZl6CIe6O
- e4Q71rXY/k52irs8wc+h9DVGW9GJn6Ubantik=
+ d=linaro.org; s=google; t=1710169997; x=1710774797; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=1zaxPnJnc8gaH0Bbx3wKKm2kwOyR+crciMJK41HMLvE=;
+ b=xpTxaBbiIJMgVN5XjRedt2dLK58mDwmFA+KJRp0mYzhMqu4RoTF07wM2W18UEAaCBN
+ /ugJcxUbnY3v0H4yV26gmSd40KQsGh/dr4RvTB+2dRAQ3sY+PFGRnHLlx4yzYv2mTeHc
+ jiOPGuuXKPMGifZiNI9WNJAvOtosXqL7CgfCgDrcPFT46b7T8VHlGqEKS/nTk+6Q3aHK
+ Io1kBlpZOsgFuL6faocctetqFfDmFA3bIwJdFITUvwfScyNVJV4MXXnHz1N8im1cX7x0
+ Lc6JArB0Db3vNEbr/z8tOYVxp4oPJ6TsBmah7Ggj58JdrWIfsOi8EXt8zKBAlnq3ydAX
+ aurA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710169750; x=1710774550;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=jCz6TMVxo9/3AAZ12r/tdV8FBqXAi5LgkIaU2v6N//M=;
- b=THGzgOL0+85A6A5tvTyN8q8oR4tdI1VCtIsuACAzKybcYmD+Vav6ZW3qG79tvd8Bhx
- /ucfIn+RvK1kRxT4QnvKDCw/rH3OcHz0IlXiZDLgInhb8eIAzAwVleLAEhO/p/qGkVyB
- d4LO+Jrd8UMsg9+NHzYxoEoB8cJ+zY1jgVfdRAf6ySXat9fBvePuO4Cni2uk1Fq11uq1
- m4+sZ7LOUnqYI0tR9dRYREbxqjhj1hyp/dVDj89zFzk+xmNAiiX56eEj2aPdUBpRFJvl
- 5/nH6Y0jxImN81YoYTNvNri55ceZVJchDdDidcZjRGK0Q1HKUTKtTyTWV2+SIQODE6A1
- ycRQ==
+ d=1e100.net; s=20230601; t=1710169997; x=1710774797;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=1zaxPnJnc8gaH0Bbx3wKKm2kwOyR+crciMJK41HMLvE=;
+ b=SQx49CxYRBW4KA86GJiFIxBkwNJQTbFH/ZqnRsbIUpEFY26u7/0K7vwxhGGfyMU70u
+ SU6/jgP2z4pjxq2JtOqC1Nq1fJ4TwtHChwksLUCobWCg3Z3wMmM8ymcct0zcqJ0uKbT3
+ QHzGZn+j+6FQpRKg8bvfRhT8n1kMqzv2Tm99ML0ByFqzDTrDwUlhXHxyewIy32dY/JOn
+ 1INfhN/mzHa8oIpqXAJfQRjN6UInlHheaXrPJuc1C02WaESSMdybnut0rhPUiHeHBIts
+ SPO4rdsMkP4BT7Hp8v6bggb8n2YlYRWp0jPnY8tuSUUXkwHSNPFdFkl3hJWrv6hTxm2v
+ YCcA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWm78o3ol2Yz0vYCFAkjd9L/XWqbzGgA0QGnfTSHrkVoZ8k5SdW81RLONLVvLFbD6e8ilaoy05njfoLmIB54bsonONj8Q==
-X-Gm-Message-State: AOJu0YxMlXwc3TDUpv3J/SKOy6XILn0Z8Uy7Qcb7sg9o+Zasni6ynICV
- v6zFyVdIgmLbx+V9VXgzRiii92HudxLl+rN8zRbkL/X2I/qOZf0s5OzQpp0ZytE=
-X-Google-Smtp-Source: AGHT+IHhIMCQaUozYk7OimtMXql42pFZklnzXAIRWCAwOWWet1Pa9GRUvxyW5vv7gbZ/KBm57Y3UZQ==
-X-Received: by 2002:a05:620a:178c:b0:788:1f78:9b3a with SMTP id
- ay12-20020a05620a178c00b007881f789b3amr10858105qkb.58.1710169750500; 
- Mon, 11 Mar 2024 08:09:10 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-007f-0000-0000-0000-1005.res6.spectrum.com.
- [2603:6081:7b00:7f::1005]) by smtp.gmail.com with ESMTPSA id
- g12-20020ae9e10c000000b00788663d8a1esm1711139qkm.112.2024.03.11.08.09.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Mar 2024 08:09:10 -0700 (PDT)
-Date: Mon, 11 Mar 2024 11:09:08 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Michal Simek <michal.simek@amd.com>
-Cc: Love Kumar <love.kumar@amd.com>,
- Angelo Dureghello <angelo@kernel-space.org>, u-boot@lists.denx.de,
- git@xilinx.com, Marek Vasut <marex@denx.de>
-Subject: Re: [PATCH v3] test/py: reset: Add a test for reset command
-Message-ID: <20240311150908.GX1523872@bill-the-cat>
-References: <c11e1809-b5d1-46cd-a5c8-a5276b83f26f@amd.com>
- <c523aabd-93a4-f9db-2726-7f912a85aef0@kernel-space.org>
- <20240307001053.GE1523872@bill-the-cat>
- <c05a25ca-d4b7-1179-cf46-645bc4cdba89@kernel-space.org>
- <c0bbe63d-adee-456f-bcf8-44579aa2593a@amd.com>
- <20240307125525.GF1523872@bill-the-cat>
- <553992bb-c159-d9b9-6e9d-b762ea55da79@kernel-space.org>
- <cf96e2a6-9e49-4058-8bfc-f31b3d028190@amd.com>
- <20240311143938.GV1523872@bill-the-cat>
- <9e3f916a-7e5b-4ec8-abe4-c2cead1df557@amd.com>
+ AJvYcCWGGETvuhQ9+iUC++peQjwemhiBCu5wnxFeZhgII9Va2KNUPq9mqcU6zdPbgazF7kMQtZ6RpVOz+vSV77JdIaGv+JUXaw==
+X-Gm-Message-State: AOJu0YycRre1ZQNyG8CLcOW5s2GR6RbkOPKTSQm6RZtBtax6UPzjijQ/
+ UYQGhM4uNJ9nKLAE0TxVpbwE35o7jaaDb9IK2puDmupXjMFDTbyBer85iUI7rA4=
+X-Google-Smtp-Source: AGHT+IG3hqX4iYAqMOsXnG88DSJAnK0O6xfCyGM1AgxUhdQ9pSsNYD7w9y8hZDi/Y87Ori8DPnuWaA==
+X-Received: by 2002:adf:fe8a:0:b0:33e:7fbd:5e6d with SMTP id
+ l10-20020adffe8a000000b0033e7fbd5e6dmr4419108wrr.11.1710169996763; 
+ Mon, 11 Mar 2024 08:13:16 -0700 (PDT)
+Received: from [192.168.1.78] (host-92-17-96-232.as13285.net. [92.17.96.232])
+ by smtp.gmail.com with ESMTPSA id
+ n2-20020a5d4002000000b0033de2f2a88dsm6609269wrp.103.2024.03.11.08.13.16
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 11 Mar 2024 08:13:16 -0700 (PDT)
+Message-ID: <0cda2608-856f-4650-92a6-4860a0d7c8b6@linaro.org>
+Date: Mon, 11 Mar 2024 15:13:15 +0000
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="irgVrjkAPBZiLuxD"
-Content-Disposition: inline
-In-Reply-To: <9e3f916a-7e5b-4ec8-abe4-c2cead1df557@amd.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 8/8] board: add support for Qualcomm SA8155P-ADP board
+Content-Language: en-US
+To: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Cc: Sumit Garg <sumit.garg@linaro.org>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
+References: <20240306005230.2638972-1-volodymyr_babchuk@epam.com>
+ <20240306005230.2638972-9-volodymyr_babchuk@epam.com>
+ <CAFA6WYNWxHU4W0xrTC=mQJbP49hFMm56fbz1isd0xNNQ_VdVSw@mail.gmail.com>
+ <87jzmf2mvi.fsf@epam.com> <e5e47988-c617-48a0-a10a-e37edb9a8267@linaro.org>
+ <87y1av12bg.fsf@epam.com>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <87y1av12bg.fsf@epam.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,72 +102,166 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---irgVrjkAPBZiLuxD
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Mon, Mar 11, 2024 at 03:52:57PM +0100, Michal Simek wrote:
->=20
->=20
-> On 3/11/24 15:39, Tom Rini wrote:
-> > On Mon, Mar 11, 2024 at 02:40:59PM +0530, Love Kumar wrote:
-> > > Hi,
-> > >=20
-> > > On 11/03/24 2:11 pm, Angelo Dureghello wrote:
-> > > > Hi,
-> > > >=20
-> > > > jfyi,
-> > > >=20
-> > > > reset support added in qemu
-> > > > merged as commit d3c79c3974.
-> > > >=20
-> > > > Regards,
-> > > > angelo
-> > > >=20
-> > > The other issue was with echo commands:
-> > > =3D> echo $modeboot
-> > > $modeboot
-> > >=20
-> > > =3D> echo $?
-> > > $?
-> > >=20
-> > > Does HUSH shell is enabled by default for this?
-> >=20
-> > It is not, so at least the saveenv test needs to depend on HUSH_PARSER
-> > too.
->=20
-> Based on logs on this platform echo $? doesn't return any value.
-> There is any config for it which is not enabled for this platform.
-> Do you know which Kconfig symbol it is?
->=20
-> Depending on HUSH is likely big hammer but I was not able to find that ex=
-act
-> Kconfig symbol just for $?
+On 06/03/2024 21:24, Volodymyr Babchuk wrote:
+> 
+> Hi Caleb,
+> 
+> Caleb Connolly <caleb.connolly@linaro.org> writes:
+> 
+> [...]
+>>>>> +};
+>>>>> +
+>>>>> +&tlmm {
+>>>>> +       /* U-Boot pinctrl driver does not understand multiple tiles */
+>>>>> +       reg = <0x0 0x03000000 0x0 0x1000000>;
+>>>>> +       /delete-property/ reg-names;
+>>>>
+>>>> This won't be needed if we can make the tiles offset in the pinctrl
+>>>> driver compatible:
+>>>>
+>>>> #define WEST   0x00000000
+>>>> #define EAST   0x00400000
+>>>> #define NORTH  0x00800000
+>>>> #define SOUTH  0x00C00000
+>>>
+>>> Hmm, I assume that in this case pinctrl driver should map all the four
+>>> tiles independently? Are there guarantees in U-Boot that four separate
+>>> memory regions will be mapped into virtual memory with the same relative
+>>> positions? Linux clearly don't make such guarantees.
+>>
+>> U-Boot doesn't use virtual addresses on arm platforms, it only goes as
+>> far as reading the address from DT, nothing else, so this is totally
+>> fine and is how the other SoCs do it.
+> 
+> For me it looks like we are depending on implementation details
+> knowledge. I.e MMU API does not provide such guarantees, but drivers
+> know how ARM MMU code is working internally and drivers depend on
+> exactly this behavior. But if you are saying that it is totally fine,
+> I'll rework the patch. No big deal. Actually, I already tried this and
+> it is working fine.
+> 
+>>>>> +
+>>>>> +       /* U-Boot ethernet driver wants to drive reset as GPIO */
+>>>>> +       /delete-node/ phy-reset-pins;
+>>>>
+>>>> I suppose this is not needed as phy-reset-pins also configures the pin
+>>>> as GPIO only.
+>>>>
+>>> Well, yes. This also puzzles me up, but for some reason it stops working
+>>> if I leave this node intact. Looks like I need to look at this deeper
+>>> before posting the next version.
+>>
+>> Possibly the pinconf defined in the phy-reset-pins node causes U-Boot to
+>> misbehave, can you check if this patch fixes it (there is a bug in the
+>> line "return msm_gpio_direction_input(dev, gpio);", it should become
+>> just "msm_gpio_direction_input(dev, gpio);").
+>>
+>> I had the exact same issue with the gpio-regulator driver and this was
+>> the solution I ended up going with.
+>>
+>> https://urldefense.com/v3/__https://lore.kernel.org/u-boot/20240131-b4-qcom-livetree-v1-7-4071c0787db0@linaro.org/__;!!GF_29dbcQIUBPA!xFhZe7DKgRbr63sirEJLuH-B0AnGs7jvx8tdJPKLTgFuZ3I3_zpVml7l23G-_vJO_JiUR-wUO4GMPJFcE-8p50H3pf7nbxit$
+>> [lore[.]kernel[.]org]
+> 
+> It is exactly this. With your patch I don't need to /delete-node/
+> anymore. I'll add a comment in the cover message that this series are
+> depended on your patch.
 
-Well, if we don't have the hush parser we have a much more limited
-parser enabled and I bet that's why (I think there's no variable
-expansion).
+Please can you split the power domain and clock patches into a separate
+series? As I'd like to depend on them for the next revision of my
+series, and we'd otherwise have a cyclical dependency.
+> 
+> (and sorry for the mangled link. It is our corporate mail server doing)
+> 
+> 
+>>>
+>>>>> +};
+>>>>> diff --git a/board/qualcomm/sa8155p-adp/MAINTAINERS b/board/qualcomm/sa8155p-adp/MAINTAINERS
+>>>>> new file mode 100644
+>>>>> index 0000000000..03fac84f51
+>>>>> --- /dev/null
+>>>>> +++ b/board/qualcomm/sa8155p-adp/MAINTAINERS
+>>>>> @@ -0,0 +1,5 @@
+>>>>> +Qualcomm SA8155P Automotive Development Platform
+>>>>> +M:     Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+>>>>> +S:     Maintained
+>>>>> +F:     board/qualcomm/sa8155p-adp/
+>>>>> +F:     configs/sa8155p-adp_defconfig
+>>>>> diff --git a/configs/sa8155p_adp_defconfig b/configs/sa8155p_adp_defconfig
+>>>>> new file mode 100644
+>>>>> index 0000000000..b6969767f8
+>>>>> --- /dev/null
+>>>>> +++ b/configs/sa8155p_adp_defconfig
+>>>>> @@ -0,0 +1,35 @@
+>>>>> +CONFIG_ARM=y
+>>>>> +CONFIG_SKIP_LOWLEVEL_INIT=y
+>>>>> +CONFIG_COUNTER_FREQUENCY=19000000
+>>>>> +CONFIG_POSITION_INDEPENDENT=y
+>>>>> +CONFIG_ENABLE_ARM_SOC_BOOT0_HOOK=y
+>>>>> +CONFIG_ARCH_SNAPDRAGON=y
+>>>>> +CONFIG_TEXT_BASE=0x85710000
+>>>>
+>>>> Being position independent shouldn't require a hardcoded U-Boot text
+>>>> base. Can you try if we can get rid of this?
+>>>>
+>>>
+>>> Well, it is required if we want to load U-Boot instead of hyp.mbn. We
+>>> need correct addresses in the ELF file so Qualcomm loader will not
+>>> reject it right away.
+>>>
+>>>>> +CONFIG_DEFAULT_DEVICE_TREE="qcom/sa8155p-adp"
+>>>>> +CONFIG_IDENT_STRING="\nQualcomm SA8155P-ADP"
+>>>>> +CONFIG_SYS_LOAD_ADDR=0x85710000
+>>>>
+>>>> Ditto.
+>>>>
+>>>>> +CONFIG_REMAKE_ELF=y
+>>>>> +CONFIG_BOOTDELAY=3
+>>>>> +CONFIG_SYS_CBSIZE=512
+>>>>> +# CONFIG_DISPLAY_CPUINFO is not set
+>>>>> +CONFIG_HUSH_PARSER=y
+>>>>> +CONFIG_OF_UPSTREAM=y
+>>>>> +CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+>>>>> +CONFIG_NET_RANDOM_ETHADDR=y
+>>>>> +CONFIG_CLK=y
+>>>>> +CONFIG_CLK_QCOM_SM8150=y
+>>>>> +CONFIG_MSM_GPIO=y
+>>>>> +CONFIG_PHY_MICREL=y
+>>>>> +CONFIG_PHY_MICREL_KSZ90X1=y
+>>>>> +CONFIG_DM_MDIO=y
+>>>>> +CONFIG_DM_ETH_PHY=y
+>>>>> +CONFIG_DWC_ETH_QOS=y
+>>>>> +CONFIG_DWC_ETH_QOS_QCOM=y
+>>>>> +CONFIG_PHY=y
+>>>>> +CONFIG_PINCTRL=y
+>>>>> +CONFIG_PINCONF=y
+>>>>> +CONFIG_PINCTRL_QCOM_SM8150=y
+>>>>> +CONFIG_POWER_DOMAIN=y
+>>>>> +CONFIG_MSM_GENI_SERIAL=y
+>>>>> +CONFIG_SPMI_MSM=y
+>>>>> +CONFIG_LMB_MAX_REGIONS=64
+>>>>
+>>>> Apart from above, I think this platform should be able to reuse
+>>>> qcom_defconfig as you can find most of the config options there. Can
+>>>> you try to reuse it?
+>>>
+>>> Honestly, the whole reason I am porting U-Boot to this platform is
+>>> because I want to run Xen on it. And to run Xen, I need to run U-Boot in
+>>> EL2. And to do this I need u-boot.elf with "correct" load address and
+>>> entry point.
+>>>
+>>> I am planning to publish and upstream Xen patches as well (once I finish
+>>> them). And it will be really nice if Xen users will be able use
+>>> mainline U-Boot to boot Xen.
+>>
+>> I would like to enable the SM8150 drivers in qcom_defconfig (for
+>> chainloading and supporting other platforms). But I'm totally fine with
+>> having a separate defconfig for this board with this configuration.
+> 
+> Yes, this is a good approach. I'll do this.
+> 
+> [...]
+> 
 
---=20
-Tom
-
---irgVrjkAPBZiLuxD
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXvHpQACgkQFHw5/5Y0
-tyw9FAwAm7P0c78Y4waJQfapLY1qWZyhBuTMEcCucWAEBkPCIYcTn9e4OiulnxiB
-9/gigIklaqPugAeqGCsbh/AZpQIfOUQrtNc/4Dc8xCU4VtHnYJI3XlrhnH6PshUW
-QaLqykgetX5yrJuiXkcYuFR714/547XSMHws286EZD51DNsObrtPofo+NIsYcrVr
-daJmsStmyrCWATCYJeDKhRUiY9VeGW/BKFAsEcyVrk4CyeGXCPsfE4+mKpNHjGrX
-uibbBzKbunyoZSITzr5RhCP9jhuKhVvVzlC7SsNmtOvTvDkwIUdAsuUwmBYFTKp4
-Hfs6VWQ6WeYHKcXz7wCsvdMY3Nl4eJt2DllEbeJB4W9cHnH3zzrpMVg3BTC8LOWn
-xyWcoM24alOm7qW5g4hzXzTkBzskc+3E1xX7aKUigqIEQrKTlZiI88tZQsIAQPH5
-5FQs+VQsoJO2akmwR4mSyW7j664ktfBF3C7zh6I5yE7RpI819JhUd3BJBaA7FBCM
-+RUP+oNr
-=L0K0
------END PGP SIGNATURE-----
-
---irgVrjkAPBZiLuxD--
+-- 
+// Caleb (they/them)
