@@ -4,65 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2ABC9C54E58
-	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 10:13:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CDA2C5475B
+	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 10:13:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6589387F5A;
-	Mon, 11 Mar 2024 11:13:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 0694687F71;
+	Mon, 11 Mar 2024 11:13:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="gBtfChLL";
+	dkim=pass (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="FCpb3qSp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B2E2486BDB; Mon, 11 Mar 2024 11:13:00 +0100 (CET)
-Received: from mail-m121157.qiye.163.com (mail-m121157.qiye.163.com
- [115.236.121.157])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 36B6E87F74
- for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 11:12:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ id 75B7A87F8A; Mon, 11 Mar 2024 11:13:10 +0100 (CET)
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.5])
+ by phobos.denx.de (Postfix) with ESMTP id A266F87F6E
+ for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 11:13:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=gBtfChLLgvf2DKnu1D9bZ57MocVB8clLKj26FKxRkRL0cAa370sNdp27/NtSJpGyA4uXHu2dsAsf124/9Hoy+CU93zyV7RTt+abtF0SgL1mXLuj1NodSIbTkxDenm4+0ckgeYADWT2GU7il8VFvnczsXYibY8beyxaoU8gXOTwk=;
- c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=9do8wKSO2OQrVGIEW8guRhVqn95P8JFIikqTnN1pf2s=;
- h=date:mime-version:subject:message-id:from;
-Received: from [172.16.12.77] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 340609003E8;
- Mon, 11 Mar 2024 18:12:47 +0800 (CST)
-Message-ID: <a0be8302-552b-4ec3-9131-3bbad14ae9b4@rock-chips.com>
-Date: Mon, 11 Mar 2024 18:12:47 +0800
+ dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=bruce_suen@163.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+ s=s110527; h=From:Subject:Date:Message-Id:MIME-Version; bh=kl6zv
+ GU0+0s4rnqkgQIL2TEqDIYXr7rZYCFn7pBpp3o=; b=FCpb3qSpQySyvlCsmx7I9
+ Hq7oJOjif1eGhJTWWitnvps8E8Rb/nX282jUjCckcBy8HslDg3+3mTACFU9y1OoL
+ PqOM0MsyLtIkdUwOT4T1EFn4KYgVHX7tlEfQ6yH7APxAGJ5JFovQxVAGJh7JEZY/
+ vvuSPeb/nnRFYHPj204ax0=
+Received: from localhost.localdomain (unknown [113.110.214.249])
+ by gzga-smtp-mta-g2-1 (Coremail) with SMTP id _____wDHb54g2e5lzoJbBQ--.46423S4;
+ Mon, 11 Mar 2024 18:12:50 +0800 (CST)
+From: Bruce Suen <bruce_suen@163.com>
+To: u-boot@lists.denx.de
+Cc: frieder.schrempf@kontron.de, michael@amarulasolutions.com,
+ dario.binacchi@amarulasolutions.com, jagan@amarulasolutions.com,
+ bruce.sun@xtxtech.com, Bruce Suen <bruce_suen@163.com>
+Subject: [PATCH V3] mtd: spinand: Add support for XTX SPINAND
+Date: Mon, 11 Mar 2024 06:12:46 -0400
+Message-Id: <20240311101246.13697-1-bruce_suen@163.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 08/16] rockchip: adc: rockchip-saradc: factor out
- channel_data callback
-Content-Language: en-US
-To: Quentin Schulz <foss+uboot@0leil.net>,
- Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Klaus Goger <klaus.goger@theobroma-systems.com>,
- Heiko Stuebner <heiko.stuebner@cherry.de>
-Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@theobroma-systems.com>
-References: <20240304-rk3588-saradc-v3-0-7424e2ed5d3b@theobroma-systems.com>
- <20240304-rk3588-saradc-v3-8-7424e2ed5d3b@theobroma-systems.com>
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240304-rk3588-saradc-v3-8-7424e2ed5d3b@theobroma-systems.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQkpPGFZNS0pMS09CSUtOHR5VEwETFh
- oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk5MSUpJVUpLS1VKQl
- kG
-X-HM-Tid: 0a8e2d00240703a9kunm340609003e8
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NE06Hjo6FzMTMDAaMkssNEsw
- M0hPFDZVSlVKTEpLSk5KQk1DSkhIVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFOSkxPNwY+
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: _____wDHb54g2e5lzoJbBQ--.46423S4
+X-Coremail-Antispam: 1Uf129KBjvJXoW3ZFy3Ww4fKryfuw17uryfJFb_yoWDuw45p3
+ s8tFyrGr48GF4xW3WIqa1DZr98Xw1xCrW7uw129a4YvFyfK34rZFy7Ary3Cr1DG3yxJay3
+ Cw4UKryDWa1ayF7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0piH5lUUUUUU=
+X-Originating-IP: [113.110.214.249]
+X-CM-SenderInfo: 5euxuvpbvxv0i6rwjhhfrp/1tbiMQOeKGVOB+gnjAAAsr
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,110 +66,330 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Add support for XTX XT26G0xA and XT26xxxD.The driver is ported from
+linux-6.7.1.This driver is tested on Banana BPI-R3 with XT26G01A and
+XT26G12D.
 
-On 2024/3/4 19:30, Quentin Schulz wrote:
-> From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
->
-> SARADC v1 and v2 have a different way of reading data, therefore let's
-> abstract this function so that it can be provided from the udevice.data
-> pointer.
->
-> Cc: Quentin Schulz <foss+uboot@0leil.net>
-> Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+Signed-off-by: Bruce Suen <bruce_suen@163.com>
+---
+V2->V3:
+- change commit message: add test setup information
+- remove patch warnings
+---
+ drivers/mtd/nand/spi/Makefile |   2 +-
+ drivers/mtd/nand/spi/core.c   |   1 +
+ drivers/mtd/nand/spi/xtx.c    | 266 ++++++++++++++++++++++++++++++++++
+ include/linux/mtd/spinand.h   |   1 +
+ 4 files changed, 269 insertions(+), 1 deletion(-)
+ create mode 100644 drivers/mtd/nand/spi/xtx.c
 
-Thanks,
-- Kever
-> ---
->   drivers/adc/rockchip-saradc.c | 37 +++++++++++++++++++++++++++++--------
->   1 file changed, 29 insertions(+), 8 deletions(-)
->
-> diff --git a/drivers/adc/rockchip-saradc.c b/drivers/adc/rockchip-saradc.c
-> index 4a842556a60..1cc57beecc2 100644
-> --- a/drivers/adc/rockchip-saradc.c
-> +++ b/drivers/adc/rockchip-saradc.c
-> @@ -37,6 +37,7 @@ struct rockchip_saradc_data {
->   	int				num_bits;
->   	int				num_channels;
->   	unsigned long			clk_rate;
-> +	int (*channel_data)(struct udevice *dev, int channel, unsigned int *data);
->   };
->   
->   struct rockchip_saradc_priv {
-> @@ -45,28 +46,45 @@ struct rockchip_saradc_priv {
->   	const struct rockchip_saradc_data	*data;
->   };
->   
-> +int rockchip_saradc_channel_data_v1(struct udevice *dev, int channel,
-> +				    unsigned int *data)
-> +{
-> +	struct rockchip_saradc_priv *priv = dev_get_priv(dev);
-> +
-> +	if ((readl(&priv->regs.v1->ctrl) & SARADC_CTRL_IRQ_STATUS) !=
-> +	    SARADC_CTRL_IRQ_STATUS)
-> +		return -EBUSY;
-> +
-> +	/* Read value */
-> +	*data = readl(&priv->regs.v1->data);
-> +
-> +	/* Power down adc */
-> +	writel(0, &priv->regs.v1->ctrl);
-> +
-> +	return 0;
-> +}
-> +
->   int rockchip_saradc_channel_data(struct udevice *dev, int channel,
->   				 unsigned int *data)
->   {
->   	struct rockchip_saradc_priv *priv = dev_get_priv(dev);
->   	struct adc_uclass_plat *uc_pdata = dev_get_uclass_plat(dev);
-> +	int ret;
->   
->   	if (channel != priv->active_channel) {
->   		pr_err("Requested channel is not active!");
->   		return -EINVAL;
->   	}
->   
-> -	if ((readl(&priv->regs.v1->ctrl) & SARADC_CTRL_IRQ_STATUS) !=
-> -	    SARADC_CTRL_IRQ_STATUS)
-> -		return -EBUSY;
-> +	ret = priv->data->channel_data(dev, channel, data);
-> +	if (ret) {
-> +		if (ret != -EBUSY)
-> +			pr_err("Error reading channel data, %d!", ret);
-> +		return ret;
-> +	}
->   
-> -	/* Read value */
-> -	*data = readl(&priv->regs.v1->data);
->   	*data &= uc_pdata->data_mask;
->   
-> -	/* Power down adc */
-> -	writel(0, &priv->regs.v1->ctrl);
-> -
->   	return 0;
->   }
->   
-> @@ -174,18 +192,21 @@ static const struct rockchip_saradc_data saradc_data = {
->   	.num_bits = 10,
->   	.num_channels = 3,
->   	.clk_rate = 1000000,
-> +	.channel_data = rockchip_saradc_channel_data_v1,
->   };
->   
->   static const struct rockchip_saradc_data rk3066_tsadc_data = {
->   	.num_bits = 12,
->   	.num_channels = 2,
->   	.clk_rate = 50000,
-> +	.channel_data = rockchip_saradc_channel_data_v1,
->   };
->   
->   static const struct rockchip_saradc_data rk3399_saradc_data = {
->   	.num_bits = 10,
->   	.num_channels = 6,
->   	.clk_rate = 1000000,
-> +	.channel_data = rockchip_saradc_channel_data_v1,
->   };
->   
->   static const struct udevice_id rockchip_saradc_ids[] = {
->
+diff --git a/drivers/mtd/nand/spi/Makefile b/drivers/mtd/nand/spi/Makefile
+index f172f4787f..65b836b34c 100644
+--- a/drivers/mtd/nand/spi/Makefile
++++ b/drivers/mtd/nand/spi/Makefile
+@@ -1,5 +1,5 @@
+ # SPDX-License-Identifier: GPL-2.0
+ 
+ spinand-objs := core.o esmt.o gigadevice.o macronix.o micron.o paragon.o
+-spinand-objs += toshiba.o winbond.o
++spinand-objs += toshiba.o winbond.o xtx.o
+ obj-$(CONFIG_MTD_SPI_NAND) += spinand.o
+diff --git a/drivers/mtd/nand/spi/core.c b/drivers/mtd/nand/spi/core.c
+index 8ca33459f9..62c28aa422 100644
+--- a/drivers/mtd/nand/spi/core.c
++++ b/drivers/mtd/nand/spi/core.c
+@@ -829,6 +829,7 @@ static const struct spinand_manufacturer *spinand_manufacturers[] = {
+ 	&toshiba_spinand_manufacturer,
+ 	&winbond_spinand_manufacturer,
+ 	&esmt_c8_spinand_manufacturer,
++	&xtx_spinand_manufacturer,
+ };
+ 
+ static int spinand_manufacturer_match(struct spinand_device *spinand,
+diff --git a/drivers/mtd/nand/spi/xtx.c b/drivers/mtd/nand/spi/xtx.c
+new file mode 100644
+index 0000000000..aee1849a71
+--- /dev/null
++++ b/drivers/mtd/nand/spi/xtx.c
+@@ -0,0 +1,266 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Author:
++ * Felix Matouschek <felix@matouschek.org>
++ */
++
++#include <linux/bitfield.h>
++#ifndef __UBOOT__
++#include <linux/device.h>
++#include <linux/kernel.h>
++#endif
++#include <linux/mtd/spinand.h>
++
++#define SPINAND_MFR_XTX	0x0B
++
++#define XT26G0XA_STATUS_ECC_MASK	GENMASK(5, 2)
++#define XT26G0XA_STATUS_ECC_NO_DETECTED	(0 << 2)
++#define XT26G0XA_STATUS_ECC_8_CORRECTED	(3 << 4)
++#define XT26G0XA_STATUS_ECC_UNCOR_ERROR	(2 << 4)
++
++#define XT26XXXD_STATUS_ECC3_ECC2_MASK	    GENMASK(7, 6)
++#define XT26XXXD_STATUS_ECC_NO_DETECTED     (0)
++#define XT26XXXD_STATUS_ECC_1_7_CORRECTED   (1)
++#define XT26XXXD_STATUS_ECC_8_CORRECTED     (3)
++#define XT26XXXD_STATUS_ECC_UNCOR_ERROR     (2)
++
++static SPINAND_OP_VARIANTS(read_cache_variants,
++		SPINAND_PAGE_READ_FROM_CACHE_QUADIO_OP(0, 1, NULL, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_X4_OP(0, 1, NULL, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_DUALIO_OP(0, 1, NULL, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_X2_OP(0, 1, NULL, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_OP(true, 0, 1, NULL, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_OP(false, 0, 1, NULL, 0));
++
++static SPINAND_OP_VARIANTS(write_cache_variants,
++		SPINAND_PROG_LOAD_X4(true, 0, NULL, 0),
++		SPINAND_PROG_LOAD(true, 0, NULL, 0));
++
++static SPINAND_OP_VARIANTS(update_cache_variants,
++		SPINAND_PROG_LOAD_X4(false, 0, NULL, 0),
++		SPINAND_PROG_LOAD(false, 0, NULL, 0));
++
++static int xt26g0xa_ooblayout_ecc(struct mtd_info *mtd, int section,
++				  struct mtd_oob_region *region)
++{
++	if (section)
++		return -ERANGE;
++
++	region->offset = 48;
++	region->length = 16;
++
++	return 0;
++}
++
++static int xt26g0xa_ooblayout_free(struct mtd_info *mtd, int section,
++				   struct mtd_oob_region *region)
++{
++	if (section)
++		return -ERANGE;
++
++	region->offset = 1;
++	region->length = 47;
++
++	return 0;
++}
++
++static const struct mtd_ooblayout_ops xt26g0xa_ooblayout = {
++	.ecc = xt26g0xa_ooblayout_ecc,
++	.rfree = xt26g0xa_ooblayout_free,
++};
++
++static int xt26g0xa_ecc_get_status(struct spinand_device *spinand,
++				   u8 status)
++{
++	status = status & XT26G0XA_STATUS_ECC_MASK;
++
++	switch (status) {
++	case XT26G0XA_STATUS_ECC_NO_DETECTED:
++		return 0;
++	case XT26G0XA_STATUS_ECC_8_CORRECTED:
++		return 8;
++	case XT26G0XA_STATUS_ECC_UNCOR_ERROR:
++		return -EBADMSG;
++	default:
++		break;
++	}
++
++	/* At this point values greater than (2 << 4) are invalid  */
++	if (status > XT26G0XA_STATUS_ECC_UNCOR_ERROR)
++		return -EINVAL;
++
++	/* (1 << 2) through (7 << 2) are 1-7 corrected errors */
++	return status >> 2;
++}
++
++static int xt26xxxd_ooblayout_ecc(struct mtd_info *mtd, int section,
++				  struct mtd_oob_region *region)
++{
++	if (section)
++		return -ERANGE;
++
++	region->offset = mtd->oobsize / 2;
++	region->length = mtd->oobsize / 2;
++
++	return 0;
++}
++
++static int xt26xxxd_ooblayout_free(struct mtd_info *mtd, int section,
++				   struct mtd_oob_region *region)
++{
++	if (section)
++		return -ERANGE;
++
++	region->offset = 2;
++	region->length = mtd->oobsize / 2 - 2;
++
++	return 0;
++}
++
++static const struct mtd_ooblayout_ops xt26xxxd_ooblayout = {
++	.ecc = xt26xxxd_ooblayout_ecc,
++	.rfree = xt26xxxd_ooblayout_free,
++};
++
++static int xt26xxxd_ecc_get_status(struct spinand_device *spinand,
++				   u8 status)
++{
++	switch (FIELD_GET(STATUS_ECC_MASK, status)) {
++	case XT26XXXD_STATUS_ECC_NO_DETECTED:
++		return 0;
++	case XT26XXXD_STATUS_ECC_UNCOR_ERROR:
++		return -EBADMSG;
++	case XT26XXXD_STATUS_ECC_1_7_CORRECTED:
++		return 4 + FIELD_GET(XT26XXXD_STATUS_ECC3_ECC2_MASK, status);
++	case XT26XXXD_STATUS_ECC_8_CORRECTED:
++		return 8;
++	default:
++		break;
++	}
++
++	return -EINVAL;
++}
++
++static const struct spinand_info xtx_spinand_table[] = {
++	SPINAND_INFO("XT26G01A",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0xE1),
++		     NAND_MEMORG(1, 2048, 64, 64, 1024, 20, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_HAS_QE_BIT,
++		     SPINAND_ECCINFO(&xt26g0xa_ooblayout,
++				     xt26g0xa_ecc_get_status)),
++	SPINAND_INFO("XT26G02A",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0xE2),
++		     NAND_MEMORG(1, 2048, 64, 64, 2048, 40, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_HAS_QE_BIT,
++		     SPINAND_ECCINFO(&xt26g0xa_ooblayout,
++				     xt26g0xa_ecc_get_status)),
++	SPINAND_INFO("XT26G04A",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0xE3),
++		     NAND_MEMORG(1, 2048, 64, 128, 2048, 40, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_HAS_QE_BIT,
++		     SPINAND_ECCINFO(&xt26g0xa_ooblayout,
++				     xt26g0xa_ecc_get_status)),
++	SPINAND_INFO("XT26G01D",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x31),
++		     NAND_MEMORG(1, 2048, 128, 64, 1024, 20, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     0,
++		     SPINAND_ECCINFO(&xt26xxxd_ooblayout,
++				     xt26xxxd_ecc_get_status)),
++	SPINAND_INFO("XT26G11D",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x34),
++		     NAND_MEMORG(1, 2048, 128, 64, 1024, 20, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     0,
++		     SPINAND_ECCINFO(&xt26xxxd_ooblayout,
++				     xt26xxxd_ecc_get_status)),
++	SPINAND_INFO("XT26Q01D",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x51),
++		     NAND_MEMORG(1, 2048, 128, 64, 1024, 20, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     0,
++		     SPINAND_ECCINFO(&xt26xxxd_ooblayout,
++				     xt26xxxd_ecc_get_status)),
++	SPINAND_INFO("XT26G02D",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x32),
++		     NAND_MEMORG(1, 2048, 128, 64, 2048, 40, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     0,
++		     SPINAND_ECCINFO(&xt26xxxd_ooblayout,
++				     xt26xxxd_ecc_get_status)),
++	SPINAND_INFO("XT26G12D",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x35),
++		     NAND_MEMORG(1, 2048, 128, 64, 2048, 40, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     0,
++		     SPINAND_ECCINFO(&xt26xxxd_ooblayout,
++				     xt26xxxd_ecc_get_status)),
++	SPINAND_INFO("XT26Q02D",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x52),
++		     NAND_MEMORG(1, 2048, 128, 64, 2048, 40, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     0,
++		     SPINAND_ECCINFO(&xt26xxxd_ooblayout,
++				     xt26xxxd_ecc_get_status)),
++	SPINAND_INFO("XT26G04D",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x33),
++		     NAND_MEMORG(1, 4096, 256, 64, 2048, 40, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     0,
++		     SPINAND_ECCINFO(&xt26xxxd_ooblayout,
++				     xt26xxxd_ecc_get_status)),
++	SPINAND_INFO("XT26Q04D",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x53),
++		     NAND_MEMORG(1, 4096, 256, 64, 2048, 40, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     0,
++		     SPINAND_ECCINFO(&xt26xxxd_ooblayout,
++				     xt26xxxd_ecc_get_status)),
++};
++
++static const struct spinand_manufacturer_ops xtx_spinand_manuf_ops = {
++};
++
++const struct spinand_manufacturer xtx_spinand_manufacturer = {
++	.id = SPINAND_MFR_XTX,
++	.name = "XTX",
++	.chips = xtx_spinand_table,
++	.nchips = ARRAY_SIZE(xtx_spinand_table),
++	.ops = &xtx_spinand_manuf_ops,
++};
+diff --git a/include/linux/mtd/spinand.h b/include/linux/mtd/spinand.h
+index 6f479fa5ad..13b5a52f8b 100644
+--- a/include/linux/mtd/spinand.h
++++ b/include/linux/mtd/spinand.h
+@@ -251,6 +251,7 @@ extern const struct spinand_manufacturer paragon_spinand_manufacturer;
+ extern const struct spinand_manufacturer toshiba_spinand_manufacturer;
+ extern const struct spinand_manufacturer winbond_spinand_manufacturer;
+ extern const struct spinand_manufacturer esmt_c8_spinand_manufacturer;
++extern const struct spinand_manufacturer xtx_spinand_manufacturer;
+ 
+ /**
+  * struct spinand_op_variants - SPI NAND operation variants
+-- 
+2.34.1
+
