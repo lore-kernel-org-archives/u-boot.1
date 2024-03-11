@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42347C54E58
-	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 11:11:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CAE0C5475B
+	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 11:11:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A572A87EFF;
-	Mon, 11 Mar 2024 12:11:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2F87E87F56;
+	Mon, 11 Mar 2024 12:11:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Tus1yyjJ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VYkW7mPQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6BA1487DD3; Mon, 11 Mar 2024 12:11:05 +0100 (CET)
-Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
- [IPv6:2607:f8b0:4864:20::632])
+ id B437987DD3; Mon, 11 Mar 2024 12:11:10 +0100 (CET)
+Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
+ [IPv6:2607:f8b0:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B334C87F3D
- for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 12:11:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CA65887F3D
+ for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 12:11:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-1dd81aee2b4so16015965ad.0
- for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 04:11:01 -0700 (PDT)
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-1dc29f1956cso16983505ad.0
+ for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 04:11:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710155460; x=1710760260; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1710155465; x=1710760265; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fwXGse+l23PHgPgrHvODcCdkPJjhR7UyLi5HUZ/u6KQ=;
- b=Tus1yyjJMXb4n2RYBHQK6zG12Gni//IvtsE117N0aTkJl94Xp+P+Ads5eXt/15h2WJ
- 8aIpJZA4DoT8WP3/QeKFcrupdo7n9JfPR2UW3oJ3Gfm5y48R3UUJHcehZ+XO3mnuNJ0t
- mkFIS8PY8bOHCpHu1f3lFnf4NvFQHmSwwR3EgTpTyr+2SDlwO52oEpJGNE//kmzgN2HX
- pBqgMic+BPKsGbnp+eRw2k4vk2vGJw263d2wVmA9Ud7TO5c0K729dJ+x0qszX3c3ApP4
- dYj8Kqx4MsP7UkohE2v8aI/9h9pWB0u/4Vtt7xlQomJV1PP1Ul3XhHPdarsfNqsU6U45
- TEMg==
+ bh=rQCzaxyfvxWVRk6l9sHN4/qxiFxDj4x1Wn4me1NrObM=;
+ b=VYkW7mPQlHTYGY0y13XPXIUCVrUPxJTHB+gTh2hFsm6e3eJB3Cgpi7EHFFmUvMHBQt
+ YGtB+6/R+l0isaDZ9UgroBDGUkSe54yyghBngwSVmU1R3Qgot3h3WaxOaDIpR5iTOTf3
+ /v3+icR1y0JH8+fSE+tdcbFltiIg531aS/h4A9EvhTUS+wT2zASYUXsJe/f+Q5lHCruY
+ YeP0sWjmimMEe1UnoSTXd6o+G7Ht3UZTPDwYoJDkc1/JQHNiAlPvGT0lDyF7kxsnZWSP
+ eYM96k1twKRJ0Ni69q1MQM9ZhtLKSHlkztM1xVFjDGHvz+wm6PAPYV2X8UAG2Zr+y5TD
+ dg0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710155460; x=1710760260;
+ d=1e100.net; s=20230601; t=1710155465; x=1710760265;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=fwXGse+l23PHgPgrHvODcCdkPJjhR7UyLi5HUZ/u6KQ=;
- b=X/X91xOijPxNvHCXQ1aj8DnjNQpt+SvNH/HVoGa56vyLQgq5TXHmDG7gP8uNFMOTCb
- d60/oh5SJXlbPDjgRVwi7PPCwfz9xa4G4jH1MN+rEDUymrRdcrwlqfOZocXTxybMxrbA
- SoTwOQ8ObW97o3ioInCNGwvGXukCumLitTCU/LeuJ6qmiXfsz9LT9FVDa2lr5E/iIteY
- d9AE1ElwjFvQXBMmvQ0dOnBBzogjvgBKpS4k4ubnzwi2gOy9prc9VHeZ2Yo9HuWXasIL
- lWHlaJCzfNhh3q99gpoy7GHOXKRp4xKbNJrjwceLcQoZghxbKRwiziT5KnYSrGswmqWh
- ZxOg==
-X-Gm-Message-State: AOJu0YzCQ8MvUaDbQ+3nLCkcVWNPe++bVlwjRu6kbeTUts/vH0r1GbTb
- Kf52BzL+9R4a0WkGsEE3yBWD4Kt8IKWBYuvDP6rwqukAsmkXYw5JPRvVJkK/1IIO1sz1lUkc+qS
- c
-X-Google-Smtp-Source: AGHT+IHKESa5noW1gBbM/tkAqbuvcPHPJgaadqrNaGYOWRdl/0gvYWe+TxAPSTVfnYciiOVTRxxmWw==
-X-Received: by 2002:a17:902:dac5:b0:1dd:9090:a36c with SMTP id
- q5-20020a170902dac500b001dd9090a36cmr5129102plx.45.1710155459950; 
- Mon, 11 Mar 2024 04:10:59 -0700 (PDT)
+ bh=rQCzaxyfvxWVRk6l9sHN4/qxiFxDj4x1Wn4me1NrObM=;
+ b=shI6mkXGU3KhLEj2eNg3CGvGuh1+pgcdOtyPy7MY5rZ3oqGrpgox5HSzcZ7Kf/YRuz
+ /bw0+Hz6/bZA973/XEmgr/J3qGwmoPDFpPRZJ4bumqMdFecEs3xqP07Ei2uVcB+gwIKk
+ eggV/P6+Zbf5+4Mq2WisspyAkP7Guesd/2mkhWQUFJrwQojtmDmriaULnUgNur65ZCwc
+ OSQ44WrNoZhZi1Vd+hi+uaXrfAiugU3XnXsVMZUGolAK7oZlA2bkQUPgFDPY0JFuh7LM
+ y21eJrMKulfUF7CYvN/EUja3At5RBjPvCQpgUsHzBT8JYbGaUXqvppXJt5lToBAyCVhf
+ kmtg==
+X-Gm-Message-State: AOJu0YwF8S8sOBJ82DQywyi2/sPp8KlZfZ7L1Nys7Ot6wKbZA5QDbrl/
+ TMl9tK66xegrJx/dQ6Hm6qQ2RGloj/ht+5n8fEcKfaqg8r1mYjlHLblG57zkOpQn3w4Xk2sLxGn
+ d
+X-Google-Smtp-Source: AGHT+IG3+CzAT8jGJGZNqLk4rJbs91Z6+cBO/SnHWjjcSfvNha/r+MSoOMAtyfY9z/3oAHfbJM+FMg==
+X-Received: by 2002:a17:903:230e:b0:1dd:7de6:1bb4 with SMTP id
+ d14-20020a170903230e00b001dd7de61bb4mr6292712plh.13.1710155464864; 
+ Mon, 11 Mar 2024 04:11:04 -0700 (PDT)
 Received: from sumit-X1.. ([223.178.211.249]) by smtp.gmail.com with ESMTPSA id
- o13-20020a170902d4cd00b001dd8ce888aasm2877895plg.74.2024.03.11.04.10.55
+ o13-20020a170902d4cd00b001dd8ce888aasm2877895plg.74.2024.03.11.04.11.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Mar 2024 04:10:59 -0700 (PDT)
+ Mon, 11 Mar 2024 04:11:04 -0700 (PDT)
 From: Sumit Garg <sumit.garg@linaro.org>
 To: u-boot@lists.denx.de
 Cc: caleb.connolly@linaro.org, neil.armstrong@linaro.org, trini@konsulko.com,
@@ -72,9 +72,9 @@ Cc: caleb.connolly@linaro.org, neil.armstrong@linaro.org, trini@konsulko.com,
  jimmy.lalande@se.com, benjamin.missey@non.se.com,
  daniel.thompson@linaro.org, stephan@gerhold.net,
  Sumit Garg <sumit.garg@linaro.org>
-Subject: [PATCH v2 2/5] apq8016: Add support for UART1 clocks and pinmux
-Date: Mon, 11 Mar 2024 16:40:23 +0530
-Message-Id: <20240311111027.44577-3-sumit.garg@linaro.org>
+Subject: [PATCH v2 3/5] serial_msm: Enable RS232 flow control
+Date: Mon, 11 Mar 2024 16:40:24 +0530
+Message-Id: <20240311111027.44577-4-sumit.garg@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240311111027.44577-1-sumit.garg@linaro.org>
 References: <20240311111027.44577-1-sumit.garg@linaro.org>
@@ -96,141 +96,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SE HMIBSC board uses UART1 as the main debug console, so add
-corresponding clocks and pinmux support. Along with that update
-instructions to enable clocks for debug UART support.
+SE HMIBSC board debug console requires RS232 flow control, so enable
+corresponding support if RS232 gpios are present.
 
 Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 ---
- drivers/clk/qcom/clock-apq8016.c       | 50 +++++++++++++++++++++-----
- drivers/pinctrl/qcom/pinctrl-apq8016.c |  1 +
- drivers/serial/serial_msm.c            |  6 ++--
- 3 files changed, 47 insertions(+), 10 deletions(-)
+ drivers/serial/serial_msm.c | 13 ++++++++-----
+ 1 file changed, 8 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/clk/qcom/clock-apq8016.c b/drivers/clk/qcom/clock-apq8016.c
-index e6647f7c41d..a620a10a520 100644
---- a/drivers/clk/qcom/clock-apq8016.c
-+++ b/drivers/clk/qcom/clock-apq8016.c
-@@ -43,6 +43,14 @@
- #define BLSP1_UART2_APPS_N		(0x3040)
- #define BLSP1_UART2_APPS_D		(0x3044)
- 
-+#define BLSP1_UART1_BCR			(0x2038)
-+#define BLSP1_UART1_APPS_CBCR		(0x203C)
-+#define BLSP1_UART1_APPS_CMD_RCGR	(0x2044)
-+#define BLSP1_UART1_APPS_CFG_RCGR	(0x2048)
-+#define BLSP1_UART1_APPS_M		(0x204C)
-+#define BLSP1_UART1_APPS_N		(0x2050)
-+#define BLSP1_UART1_APPS_D		(0x2054)
-+
- /* GPLL0 clock control registers */
- #define GPLL0_STATUS_ACTIVE BIT(17)
- 
-@@ -77,7 +85,7 @@ static struct vote_clk gcc_blsp1_ahb_clk = {
- };
- 
- /* SDHCI */
--static int clk_init_sdc(struct msm_clk_priv *priv, int slot, uint rate)
-+static int apq8016_clk_init_sdc(struct msm_clk_priv *priv, int slot, uint rate)
- {
- 	int div = 15; /* 100MHz default */
- 
-@@ -94,6 +102,33 @@ static int clk_init_sdc(struct msm_clk_priv *priv, int slot, uint rate)
- 	return rate;
- }
- 
-+static const struct bcr_regs uart1_regs = {
-+	.cfg_rcgr = BLSP1_UART1_APPS_CFG_RCGR,
-+	.cmd_rcgr = BLSP1_UART1_APPS_CMD_RCGR,
-+	.M = BLSP1_UART1_APPS_M,
-+	.N = BLSP1_UART1_APPS_N,
-+	.D = BLSP1_UART1_APPS_D,
-+};
-+
-+/* UART: 115200 */
-+static int apq8016_clk_init_uart1(phys_addr_t base)
-+{
-+	/* Enable AHB clock */
-+	clk_enable_vote_clk(base, &gcc_blsp1_ahb_clk);
-+
-+	/* 7372800 uart block clock @ GPLL0 */
-+	clk_rcg_set_rate_mnd(base, &uart1_regs, 1, 144, 15625,
-+			     CFG_CLK_SRC_GPLL0, 16);
-+
-+	/* Vote for gpll0 clock */
-+	clk_enable_gpll0(base, &gpll0_vote_clk);
-+
-+	/* Enable core clk */
-+	clk_enable_cbc(base + BLSP1_UART1_APPS_CBCR);
-+
-+	return 0;
-+}
-+
- static const struct bcr_regs uart2_regs = {
- 	.cfg_rcgr = BLSP1_UART2_APPS_CFG_RCGR,
- 	.cmd_rcgr = BLSP1_UART2_APPS_CMD_RCGR,
-@@ -103,7 +138,7 @@ static const struct bcr_regs uart2_regs = {
- };
- 
- /* UART: 115200 */
--int apq8016_clk_init_uart(phys_addr_t base)
-+int apq8016_clk_init_uart2(phys_addr_t base)
- {
- 	/* Enable AHB clock */
- 	clk_enable_vote_clk(base, &gcc_blsp1_ahb_clk);
-@@ -127,14 +162,13 @@ static ulong apq8016_clk_set_rate(struct clk *clk, ulong rate)
- 
- 	switch (clk->id) {
- 	case GCC_SDCC1_APPS_CLK: /* SDC1 */
--		return clk_init_sdc(priv, 0, rate);
--		break;
-+		return apq8016_clk_init_sdc(priv, 0, rate);
- 	case GCC_SDCC2_APPS_CLK: /* SDC2 */
--		return clk_init_sdc(priv, 1, rate);
--		break;
-+		return apq8016_clk_init_sdc(priv, 1, rate);
- 	case GCC_BLSP1_UART2_APPS_CLK: /* UART2 */
--		return apq8016_clk_init_uart(priv->base);
--		break;
-+		return apq8016_clk_init_uart2(priv->base);
-+	case GCC_BLSP1_UART1_APPS_CLK: /* UART1 */
-+		return apq8016_clk_init_uart1(priv->base);
- 	default:
- 		return 0;
- 	}
-diff --git a/drivers/pinctrl/qcom/pinctrl-apq8016.c b/drivers/pinctrl/qcom/pinctrl-apq8016.c
-index db0e2124684..cb0e2227079 100644
---- a/drivers/pinctrl/qcom/pinctrl-apq8016.c
-+++ b/drivers/pinctrl/qcom/pinctrl-apq8016.c
-@@ -29,6 +29,7 @@ static const char * const msm_pinctrl_pins[] = {
- };
- 
- static const struct pinctrl_function msm_pinctrl_functions[] = {
-+	{"blsp_uart1", 2},
- 	{"blsp_uart2", 2},
- };
- 
 diff --git a/drivers/serial/serial_msm.c b/drivers/serial/serial_msm.c
-index ac4280c6c4c..eaf024a55b0 100644
+index eaf024a55b0..7b2a3fdb2c1 100644
 --- a/drivers/serial/serial_msm.c
 +++ b/drivers/serial/serial_msm.c
-@@ -248,12 +248,14 @@ static struct msm_serial_data init_serial_data = {
- #include <debug_uart.h>
+@@ -53,10 +53,11 @@
+ #define UARTDM_TF               0x100 /* UART Transmit FIFO register */
+ #define UARTDM_RF               0x140 /* UART Receive FIFO register */
  
- /* Uncomment to turn on UART clocks when debugging U-Boot as aboot on MSM8916 */
--//int apq8016_clk_init_uart(phys_addr_t gcc_base);
-+//int apq8016_clk_init_uart1(phys_addr_t gcc_base);
-+//int apq8016_clk_init_uart2(phys_addr_t gcc_base);
+-#define UART_DM_CLK_RX_TX_BIT_RATE 0xCC
+-#define MSM_BOOT_UART_DM_8_N_1_MODE 0x34
+-#define MSM_BOOT_UART_DM_CMD_RESET_RX 0x10
+-#define MSM_BOOT_UART_DM_CMD_RESET_TX 0x20
++#define UART_DM_CLK_RX_TX_BIT_RATE	0xCC
++#define MSM_BOOT_UART_DM_8_N_1_MODE	0x34
++#define MSM_BOOT_UART_DM_CMD_RESET_RX	0x10
++#define MSM_BOOT_UART_DM_CMD_RESET_TX	0x20
++#define MSM_UART_MR1_RX_RDY_CTL		BIT(7)
  
- static inline void _debug_uart_init(void)
- {
- 	/* Uncomment to turn on UART clocks when debugging U-Boot as aboot on MSM8916 */
--	//apq8016_clk_init_uart(0x1800000);
-+	//apq8016_clk_init_uart1(0x1800000);
-+	//apq8016_clk_init_uart2(0x1800000);
- 	uart_dm_init(&init_serial_data);
- }
+ DECLARE_GLOBAL_DATA_PTR;
  
+@@ -182,7 +183,9 @@ static void uart_dm_init(struct msm_serial_data *priv)
+ 	mdelay(5);
+ 
+ 	writel(priv->clk_bit_rate, priv->base + UARTDM_CSR);
+-	writel(0x0, priv->base + UARTDM_MR1);
++
++	/* Enable RS232 flow control to support RS232 db9 connector */
++	writel(MSM_UART_MR1_RX_RDY_CTL, priv->base + UARTDM_MR1);
+ 	writel(MSM_BOOT_UART_DM_8_N_1_MODE, priv->base + UARTDM_MR2);
+ 	writel(MSM_BOOT_UART_DM_CMD_RESET_RX, priv->base + UARTDM_CR);
+ 	writel(MSM_BOOT_UART_DM_CMD_RESET_TX, priv->base + UARTDM_CR);
 -- 
 2.34.1
 
