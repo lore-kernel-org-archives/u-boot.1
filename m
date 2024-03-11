@@ -4,39 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97BA1C54E58
-	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 12:03:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3D95C54E60
+	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 12:03:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6378587FA1;
-	Mon, 11 Mar 2024 13:03:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EB54087FBF;
+	Mon, 11 Mar 2024 13:03:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 16A5687F46; Mon, 11 Mar 2024 13:03:00 +0100 (CET)
-Received: from smtp-42af.mail.infomaniak.ch (smtp-42af.mail.infomaniak.ch
- [84.16.66.175])
+ id 1D62D87F86; Mon, 11 Mar 2024 13:03:03 +0100 (CET)
+Received: from smtp-bc0e.mail.infomaniak.ch (smtp-bc0e.mail.infomaniak.ch
+ [45.157.188.14])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 49B6E87F12
- for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 13:02:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2C63687F1B
+ for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 13:02:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-3-0000.mail.infomaniak.ch (smtp-3-0000.mail.infomaniak.ch
- [10.4.36.107])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Ttb4q6chJzvvp;
- Mon, 11 Mar 2024 13:02:51 +0100 (CET)
+Received: from smtp-3-0000.mail.infomaniak.ch (unknown [10.4.36.107])
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Ttb4r5kWwzMq4BJ;
+ Mon, 11 Mar 2024 13:02:52 +0100 (CET)
 Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4Ttb4q0mxKz3h; Mon, 11 Mar 2024 13:02:51 +0100 (CET)
+ id 4Ttb4q6VrTz3k; Mon, 11 Mar 2024 13:02:51 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Mon, 11 Mar 2024 13:01:48 +0100
-Subject: [PATCH v4 05/20] rockchip: pine64: pinephone-pro: migrate to
+Date: Mon, 11 Mar 2024 13:01:49 +0100
+Subject: [PATCH v4 06/20] rockchip: pine64: rockpro64: migrate to
  rockchip_early_misc_init_r
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240311-jaguar-v4-5-d2ca1af68ed3@theobroma-systems.com>
+Message-Id: <20240311-jaguar-v4-6-d2ca1af68ed3@theobroma-systems.com>
 References: <20240311-jaguar-v4-0-d2ca1af68ed3@theobroma-systems.com>
 In-Reply-To: <20240311-jaguar-v4-0-d2ca1af68ed3@theobroma-systems.com>
 To: Simon Glass <sjg@chromium.org>, 
@@ -78,13 +77,9 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 
-Compared to the original misc_init_r from Rockchip mach code,
-setup_iodomain() is added and rockchip_setup_macaddr() is not called.
-
-It is assumed adding rockchip_setup_macaddr() back is fine.
-Let's use rockchip_early_misc_init_r instead of reimplementing the whole
-misc_init_r from Rockchip (the side effect being that
-rockchip_setup_macaddr() is back).
+Only setup_iodomain() differs from the original misc_init_r from
+Rockchip mach code, so let's use rockchip_early_misc_init_r instead of
+reimplementing the whole misc_init_r from Rockchip.
 
 Cc: Quentin Schulz <foss+uboot@0leil.net>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
@@ -92,22 +87,22 @@ Reviewed-by: Dragan Simic <dsimic@manjaro.org>
 Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 ---
- .../pine64/pinephone-pro-rk3399/pinephone-pro-rk3399.c  | 17 ++---------------
- 1 file changed, 2 insertions(+), 15 deletions(-)
+ board/pine64/rockpro64_rk3399/rockpro64-rk3399.c | 20 ++------------------
+ 1 file changed, 2 insertions(+), 18 deletions(-)
 
-diff --git a/board/pine64/pinephone-pro-rk3399/pinephone-pro-rk3399.c b/board/pine64/pinephone-pro-rk3399/pinephone-pro-rk3399.c
-index b6ccbb9c1c4..de75ee329d8 100644
---- a/board/pine64/pinephone-pro-rk3399/pinephone-pro-rk3399.c
-+++ b/board/pine64/pinephone-pro-rk3399/pinephone-pro-rk3399.c
-@@ -12,7 +12,6 @@
+diff --git a/board/pine64/rockpro64_rk3399/rockpro64-rk3399.c b/board/pine64/rockpro64_rk3399/rockpro64-rk3399.c
+index d79084614f1..d0a694ead1d 100644
+--- a/board/pine64/rockpro64_rk3399/rockpro64-rk3399.c
++++ b/board/pine64/rockpro64_rk3399/rockpro64-rk3399.c
+@@ -11,7 +11,6 @@
  #include <asm/arch-rockchip/clock.h>
  #include <asm/arch-rockchip/grf_rk3399.h>
  #include <asm/arch-rockchip/hardware.h>
 -#include <asm/arch-rockchip/misc.h>
- #include <power/regulator.h>
  
- #define GRF_IO_VSEL_BT565_GPIO2AB 1
-@@ -56,23 +55,11 @@ static void setup_iodomain(void)
+ #define GRF_IO_VSEL_BT565_SHIFT 0
+ #define PMUGRF_CON0_VSEL_SHIFT 8
+@@ -31,26 +30,11 @@ static void setup_iodomain(void)
  	rk_setreg(&pmugrf->soc_con0, 1 << PMUGRF_CON0_VSEL_SHIFT);
  }
  
@@ -128,10 +123,13 @@ index b6ccbb9c1c4..de75ee329d8 100644
 -	ret = rockchip_cpuid_set(cpuid, cpuid_length);
 -	if (ret)
 -		return ret;
-+	return 0;
- 
+-
+-	ret = rockchip_setup_macaddr();
+-
 -	return ret;
++	return 0;
  }
+ 
  #endif
 
 -- 
