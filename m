@@ -4,87 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 457CEC5475B
-	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 14:33:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9E31C5475B
+	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 14:37:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4DA9087D3C;
-	Mon, 11 Mar 2024 15:33:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id E2D1487D3C;
+	Mon, 11 Mar 2024 15:37:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=gerhold.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="mrzjdIvf";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gerhold.net header.i=@gerhold.net header.b="VG9S7eIY";
+	dkim=permerror (0-bit key) header.d=gerhold.net header.i=@gerhold.net header.b="hBAKmq71";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2E21B87DD3; Mon, 11 Mar 2024 15:33:01 +0100 (CET)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 1481187D3C; Mon, 11 Mar 2024 15:37:51 +0100 (CET)
+Received: from mo4-p01-ob.smtp.rzone.de (mo4-p01-ob.smtp.rzone.de
+ [85.215.255.53])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4EFD98272A
- for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 15:32:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 10E7787D0A
+ for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 15:37:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
+ dmarc=none (p=none dis=none) header.from=gerhold.net
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=L.Anderweit@phytec.de
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1710167578; x=1712759578;
- h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Y0349SvCY647Wz++03remdaDfxEqW4hQ5XujGmjy8hs=;
- b=mrzjdIvfoNd0/5+IAyY67udkPurnZWjMTOeFMgevWbNAilxDISTfPXyGmtJq6Kq9
- HtJwdIqA5FA5AT+WxF4ytNcTFVWcJ8Kgd1RKxLDqwEeINCwAMWNyEPQtYD+1z7aj
- HZGJIUrFCARITNQmTCz7WyTFDnUEYj1ffL0jzbettgU=;
-X-AuditID: ac14000a-fbefe7000000290d-59-65ef161a2515
-Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
- (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 9D.14.10509.A161FE56;
- Mon, 11 Mar 2024 15:32:58 +0100 (CET)
-Received: from Berlix.phytec.de (172.25.0.12) by Berlix.phytec.de
- (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Mon, 11 Mar
- 2024 15:32:58 +0100
-Received: from Berlix.phytec.de ([fe80::197e:d26b:2ca:c7b4]) by
- berlix.phytec.de ([fe80::197e:d26b:2ca:c7b4%4]) with mapi id 15.01.2507.006;
- Mon, 11 Mar 2024 15:32:58 +0100
-From: Leonard Anderweit <L.Anderweit@phytec.de>
-To: "festevam@gmail.com" <festevam@gmail.com>
-CC: "upstream@lists.phytec.de" <upstream@lists.phytec.de>,
- "trini@konsulko.com" <trini@konsulko.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>, Teresa Remmet <T.Remmet@phytec.de>
-Subject: Re: [PATCH 3/5] configs: phycore-imx8mp_defconfig: Use redundant
- environment
-Thread-Topic: [PATCH 3/5] configs: phycore-imx8mp_defconfig: Use redundant
- environment
-Thread-Index: AQHac71F0lO07+KFWUuxIucjFAs93LEyicgA
-Date: Mon, 11 Mar 2024 14:32:58 +0000
-Message-ID: <f35b563652de6337603d513e294d8cdeb7c73744.camel@phytec.de>
-References: <20240311130400.4023780-1-l.anderweit@phytec.de>
- <20240311130400.4023780-4-l.anderweit@phytec.de>
- <CAOMZO5Cm08dpaEdRSZkj8khP3T1HySP1fqKM12cOF4XSr7kJfQ@mail.gmail.com>
-In-Reply-To: <CAOMZO5Cm08dpaEdRSZkj8khP3T1HySP1fqKM12cOF4XSr7kJfQ@mail.gmail.com>
-Accept-Language: de-DE, en-US
-Content-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [172.25.0.11]
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <B883493F9CB9DB44BE4B4646F25B0375@phytec.de>
-Content-Transfer-Encoding: base64
+ spf=none smtp.mailfrom=stephan@gerhold.net
+ARC-Seal: i=1; a=rsa-sha256; t=1710167861; cv=none;
+ d=strato.com; s=strato-dkim-0002;
+ b=T99pv6N3qhhCiucY6sSbMAmwQEn1wL/3MJfe7EbGsfyL9hacJ89ZhdURmBlUWxvt1I
+ KYNQh5CU/fn0yoJ4kPxtiqYejuYrfey0ATcpI/b9+foWj8+t0JdPjmNDOWDllJu56QEt
+ dsaCZOhyInL92OtBCgJRnm12UBdObMKq/XGpMIRxmtQRF688D8XkOFOCXVrySMwm4L0t
+ /6mYqtIpMd1lI1P82CMwm9+qxNzT+Tv1ZLMzHcv3rWJN772YjRPAe7RgXKt1JtH1aFhC
+ 9AtWgfA4+1mEfWqx4zVn8qLAidTDv7Zo4cobgOn5PaXkCYC0FuOCUbxCGGx/mpYgaeEg
+ rHPw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1710167861;
+ s=strato-dkim-0002; d=strato.com;
+ h=In-Reply-To:References:Message-ID:Subject:Cc:To:From:Date:Cc:Date:
+ From:Subject:Sender;
+ bh=GTdB+RoSniuTKtGzfDiVZvhaxaSVJi+7uIJisULWIXo=;
+ b=etGshYR+dgZCHq3uec/WCokAeHZewKofxkNDj34BhZx1yLVQbLHE0nHTOrwBlpzT+O
+ zf84Huxb1IRXa9knqbSeKAlp3/PgCcmi7ZjOv/UgrgOO+/aIFOWTgDB/9KUF/MGSai1j
+ UeSnOKckTqt9K+YizY6JXt4pbnPRkEsRxM/W46ZNiu703blTW763s5gUGj2xHMhHOSVz
+ 7fLVQKaLnESvagxtyqHZxZAIirkB5/XcTuGxWkl6O5W3tNn+MZBGXE6wV/neZNz+xDLb
+ XYXevGl+D1pJbcnn+L7RQJXFfZ88Nf6vQ5+7Nbfu9I+EexvytwSdR8J4t/AMnqXt2hnO
+ Dmyw==
+ARC-Authentication-Results: i=1; strato.com;
+    arc=none;
+    dkim=none
+X-RZG-CLASS-ID: mo01
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1710167861;
+ s=strato-dkim-0002; d=gerhold.net;
+ h=In-Reply-To:References:Message-ID:Subject:Cc:To:From:Date:Cc:Date:
+ From:Subject:Sender;
+ bh=GTdB+RoSniuTKtGzfDiVZvhaxaSVJi+7uIJisULWIXo=;
+ b=VG9S7eIYPSTVsNM0CtWYJl7TRbY7ZkJsNsXm2JQmKeb/Z+Bv8LXIsO5jtDeZgS/izg
+ ue5XNBgms7WOURyy32EwW+G2r0CaS0XqdfnjJ2LqI6ZSMDAS7NeAKDiP8Kuxa7pPMmwP
+ RJshW98CNGtixK4vLTrnmJeFH/8JF1kobMIGhV/waRqst98IvJQXj4apDv2LbnY2BEyg
+ tbiCTE1Z5KdCQT0rgXA6CAHTA6MUGt8YFDWQn0lf7O/rsDFcBdElFuVCdxVzmbeDl0X3
+ Pf2lGRdDDoxWgs/itOuiKm10MBCit5j/hSyTUWjRETpzUhQCXbf7vHcTF/1/Wng+xL3y
+ OCpA==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1710167861;
+ s=strato-dkim-0003; d=gerhold.net;
+ h=In-Reply-To:References:Message-ID:Subject:Cc:To:From:Date:Cc:Date:
+ From:Subject:Sender;
+ bh=GTdB+RoSniuTKtGzfDiVZvhaxaSVJi+7uIJisULWIXo=;
+ b=hBAKmq71H8ne428q9MUFpJfBgozxagS1jyTeiBBeYHqi7mpTcmdzLt3/mTxzcXDzv2
+ /8HOuDt7y3LkUING/kCQ==
+X-RZG-AUTH: ":P3gBZUipdd93FF5ZZvYFPugejmSTVR2nRPhVOQ/OcYgojyw4j34+u261EJF5OxJD4peA8pqN1A=="
+Received: from gerhold.net by smtp.strato.de (RZmta 50.2.0 DYNA|AUTH)
+ with ESMTPSA id ufb40802BEbec6X
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
+ (Client did not present a certificate);
+ Mon, 11 Mar 2024 15:37:40 +0100 (CET)
+Date: Mon, 11 Mar 2024 15:37:39 +0100
+From: Stephan Gerhold <stephan@gerhold.net>
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: u-boot@lists.denx.de, caleb.connolly@linaro.org,
+ neil.armstrong@linaro.org, trini@konsulko.com, lukma@denx.de,
+ seanga2@gmail.com, sjg@chromium.org, laetitia.mariottini@se.com,
+ pascal.eberhard@se.com, abdou.saker@se.com, jimmy.lalande@se.com,
+ benjamin.missey@non.se.com, daniel.thompson@linaro.org
+Subject: Re: [PATCH v2 5/5] board: add support for Schneider HMIBSC board
+Message-ID: <Ze8XM9cvZt7fSYg5@gerhold.net>
+References: <20240311111027.44577-1-sumit.garg@linaro.org>
+ <20240311111027.44577-6-sumit.garg@linaro.org>
 MIME-Version: 1.0
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprPIsWRmVeSWpSXmKPExsWyRpKBR1dK7H2qQfMPXYuHV/0tpk7azG7x
- dm8nu0X3O3UHFo+ds+6ye7w6sIrd4+ydHYwe/d0trAEsUVw2Kak5mWWpRfp2CVwZ084tZS84
- x1Gx/PcUtgbGDRxdjBwcEgImEvs+OHcxcnEICSxmklh/dR8zhHOfUeLp3PVMEM4GRon2n3eA
- MpwcbAL6EitXPAWzRQR0JVac6GIEKWIW2M0oMWPncjaQhLBAuMTru30sEEUREpsPrYWyjSSu
- nmljAlnNIqAq8fxIAkiYV8BN4mx/FxvEsh2MEh0/7jGCJDgFAiUWvz0CNpNRQFZiw4bzYIuZ
- BcQlNj37zgpiSwgISCzZAxGXEBCVePn4H1RcXuLErWlgu5gFNCXW79KHMC0kHv6QhpiiKDGl
- +yE7xAmCEidnPmGZwCg+C8mCWQjNsxCaZyFpnoWkeQEj6ypGodzM5OzUosxsvYKMypLUZL2U
- 1E2MoEgUYeDawdg3x+MQIxMH4yFGCQ5mJRHe1zpvU4V4UxIrq1KL8uOLSnNSiw8xSnOwKInz
- ru4IThUSSE8sSc1OTS1ILYLJMnFwSjUwLgiLm7T2ee7v7cfa8vXrN53YGssX33S8d17rC93H
- E760uDPVcYQzCez6e/Bb0t8vGmd3z7QOMWjfIa8qvs3zAMup8E3TQtPnKET6djO9ucnVceW+
- +f1nbH61HcWXJ5u8217P4MEr5N6e9shB+WxqE+s2/l09TbNOqnvHhJZPv3TUY/HJtowNSizF
- GYmGWsxFxYkAHHMAnLICAAA=
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240311111027.44577-6-sumit.garg@linaro.org>
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,18 +107,279 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGkgRmFiaW8sDQoNCkFtIE1vbnRhZywgZGVtIDExLjAzLjIwMjQgdW0gMTE6MDUgLTAzMDAgc2No
-cmllYiBGYWJpbyBFc3RldmFtOg0KPiBIaSBMZW9uYXJkLA0KPiANCj4gT24gTW9uLCBNYXIgMTEs
-IDIwMjQgYXQgMTA6MDTigK9BTSBMZW9uYXJkIEFuZGVyd2VpdA0KPiA8bC5hbmRlcndlaXRAcGh5
-dGVjLmRlPiB3cm90ZToNCj4gPiANCj4gPiBBZGQgc3VwcG9ydCBmb3IgdGhlIHJlZHVuZGFudCBl
-bnZpcm9ubWVudC4NCj4gPiANCj4gPiBTaWduZWQtb2ZmLWJ5OiBMZW9uYXJkIEFuZGVyd2VpdCA8
-bC5hbmRlcndlaXRAcGh5dGVjLmRlPg0KPiANCj4gUGxlYXNlIHJlYmFzZSB0aGlzIHNlcmllcyBh
-Z2FpbnN0IFUtQm9vdCBuZXh0IGJyYW5jaCBhbmQgcmVzZW5kLg0KDQpUaGlzIHNlcmllcyBpcyBi
-YXNlZCBvbiB0aGUgbGF0ZXN0IG1hc3RlciBicmFuY2guDQo+IA0KPiBUaGVyZSBpcyBhbiBlcnJv
-ciB3aGlsZSBhcHBseWluZyB0aGlzIHBhdGNoIGFnYWluc3QgbmV4dC4NCg0KSSBhbHNvIGdvdCBh
-biBlcnJvciB3aGlsZSBhcHBseWluZyB0aGlzIHRvIG5leHQuIFRvIGFwcGx5IGNsZWFubHkgdGhp
-cw0Kc2VyaWVzIHJlcXVpcmVzIHRoZSBjb21taXQgMTlmNjU3NjAwNzgxIChjb25maWdzOiBSZXN5
-bmMgd2l0aA0Kc2F2ZWRlZmNvbmZpZykgd2hpY2ggaXMgb24gbWFzdGVyIGJ1dCBub3Qgb24gbmV4
-dC4NCg0KSWYgdGhpcyBtaXNzaW5nIGNvbW1pdCBpcyBpbnRlbmRlZCBJJ2xsIHJlc2VuZCB0aGlz
-IHNlcmllcyBiYXNlZCBvbg0KbmV4dC4NCg0KUmVnYXJkcywNCkxlb25hcmQNCj4gDQo+IFRoYW5r
-cw0KDQo=
+On Mon, Mar 11, 2024 at 04:40:26PM +0530, Sumit Garg wrote:
+> Support for Schneider Electric HMIBSC. Features:
+> - Qualcomm Snapdragon 410C SoC - APQ8016 (4xCortex A53, Adreno 306)
+> - 2GiB RAM
+> - 64GiB eMMC, SD slot
+> - WiFi and Bluetooth
+> - 2x Host, 1x Device USB port
+> - HDMI
+> - Discrete TPM2 chip over SPI
+> 
+> Features enabled in U-Boot:
+> - RAUC updates
+> - Environment protection
+> - USB based ethernet adaptors
+> 
+> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+
+I'm entirely sure which requirements or conventions we are following for
+adding device trees directly to U-Boot instead of Linux. My understanding
+is that the goal is to get U-Boot DTs as close as possible to the
+upstream Linux DTs, so I effectively looked at this as if it were
+submitted to linux-arm-msm. I think most of my comments should be
+trivial to fix anyway without much effort. :-)
+
+With the comments fixed it would be likely also easy to get it in
+upstream in Linux, so I wonder if it's worth first adding it here in
+U-Boot (I know you discussed this on v1 already a bit).
+
+> ---
+>  arch/arm/dts/apq8016-hmibsc.dts    | 496 +++++++++++++++++++++++++++++
+>  board/schneider/hmibsc/MAINTAINERS |   6 +
+>  configs/hmibsc_defconfig           |  87 +++++
+>  doc/board/index.rst                |   1 +
+>  doc/board/schneider/hmibsc.rst     |  45 +++
+>  doc/board/schneider/index.rst      |   9 +
+>  include/configs/hmibsc.h           |  57 ++++
+>  7 files changed, 701 insertions(+)
+>  create mode 100644 arch/arm/dts/apq8016-hmibsc.dts
+>  create mode 100644 board/schneider/hmibsc/MAINTAINERS
+>  create mode 100644 configs/hmibsc_defconfig
+>  create mode 100644 doc/board/schneider/hmibsc.rst
+>  create mode 100644 doc/board/schneider/index.rst
+>  create mode 100644 include/configs/hmibsc.h
+> 
+> diff --git a/arch/arm/dts/apq8016-hmibsc.dts b/arch/arm/dts/apq8016-hmibsc.dts
+> new file mode 100644
+> index 00000000000..490ab5fd2fa
+> --- /dev/null
+> +++ b/arch/arm/dts/apq8016-hmibsc.dts
+> @@ -0,0 +1,496 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +/*
+> + * Copyright (c) 2015, The Linux Foundation. All rights reserved.
+> + * Copyright (c) 2024, Linaro Ltd.
+> + */
+> +
+> +/dts-v1/;
+> +
+> +#include "msm8916-pm8916.dtsi"
+> +#include <dt-bindings/gpio/gpio.h>
+> +#include <dt-bindings/input/input.h>
+> +#include <dt-bindings/leds/common.h>
+> +#include <dt-bindings/pinctrl/qcom,pmic-gpio.h>
+> +#include <dt-bindings/pinctrl/qcom,pmic-mpp.h>
+> +#include <dt-bindings/sound/apq8016-lpass.h>
+> +
+> +/ {
+> +	model = "Schneider Electric HMIBSC Board";
+> +	compatible = "qcom,apq8016-hmibsc", "qcom,apq8016";
+
+A Schneider Electric specific compatible would be likely more accurate,
+since I assume this board wasn't designed by Qualcomm?
+
+I would personally also prefer to use the "apq8016-<vendor>-<board>.dts"
+naming convention that we typically use for smartphones/tablets
+upstream, although you can also keep it as-is since e.g. apq8039-t2.dts
+is also named without vendor.
+
+> +
+> +	aliases {
+> +		serial0 = &blsp_uart1;
+> +		serial1 = &blsp_uart2;
+> +		usid0 = &pm8916_0;
+> +		i2c1 = &blsp_i2c6;
+> +		i2c3 = &blsp_i2c4;
+> +		i2c4 = &blsp_i2c3;
+> +		spi0 = &blsp_spi5;
+
+You might want to add mmcX aliases here to ensure consistent naming of
+eMMC and SD card (this used to be in msm8916.dtsi but not anymore).
+
+> [...]
+> +&blsp_i2c6 {
+> +	status = "okay";
+> +	label = "I2C1";
+> +
+> +	rtc1: s35390a@30 {
+
+rtc@
+
+> +		compatible = "sii,s35390a";
+> +		reg = <0x30>;
+> +	};
+> +
+> +	eeprom1: 24c256@50 {
+
+eeprom@
+
+> +		compatible = "atmel,24c256";
+> +		reg = <0x50>;
+> +	};
+> +};
+> +
+> +&blsp_i2c3 {
+
+i2c3 should come before i2c6 (sorted alphabetically)
+
+> +	status = "okay";
+> +	label = "I2C4";
+> +
+> +	eeprom: 24c32@50 {
+
+eeprom@
+
+> +		compatible = "onsemi,24c32";
+> +		reg = <0x50>;
+> +	};
+> +};
+> +
+> [...]
+> +
+> +&pm8916_0 {
+> +	pon@800 {
+> +		pwrkey {
+> +			status = "okay";
+> +			interrupts = <0x0 0x8 1 IRQ_TYPE_EDGE_BOTH>;
+
+This line would really benefit from a comment that explains what exactly
+it does and why this is done. :)
+
+It looks like you are redefining the pwrkey with the resin interrupt.
+I guess your goal is to have KEY_POWER assigned to the resin pin?
+In that case, I think it would be cleaner to describe this using:
+
+&pm8916_resin {
+	status = "okay";
+	linux,code = <KEY_POWER>;
+};
+
+and leave the pwrkey node alone (or perhaps disable it if it causes
+trouble).
+
+Aside from the confusion, I think overriding only the interrupt of the
+pwrkey will also misbehave in unexpected ways since e.g. the Linux
+pm8941-pwrkey driver will still write the configured debounce time and
+pull up to the pwrkey registers, and not to the resin ones.
+
+> +		};
+> +	};
+> +};
+> +
+> [...]
+> +
+> +&tlmm {
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&gpio_rs232_high &gpio_rs232_low>;
+> +
+> +	sdc2_cd_default: sdc2-cd-default-state {
+> +		pins = "gpio38";
+> +		function = "gpio";
+> +		drive-strength = <2>;
+> +		bias-disable;
+> +	};
+> +
+> +	usb_id_default: usb-id-default-state {
+> +		pins = "gpio110";
+> +		function = "gpio";
+> +
+> +		drive-strength = <8>;
+> +		bias-pull-up;
+> +	};
+> +
+> +	adv7533_int_active: adv533-int-active-state {
+> +		pins = "gpio31";
+> +		function = "gpio";
+> +
+> +		drive-strength = <16>;
+> +		bias-disable;
+> +	};
+> +
+> +	adv7533_int_suspend: adv7533-int-suspend-state {
+> +		pins = "gpio31";
+> +		function = "gpio";
+> +
+> +		drive-strength = <2>;
+> +		bias-disable;
+> +	};
+> +
+> +	adv7533_switch_active: adv7533-switch-active-state {
+> +		pins = "gpio32";
+> +		function = "gpio";
+> +
+> +		drive-strength = <16>;
+> +		bias-disable;
+> +	};
+> +
+> +	adv7533_switch_suspend: adv7533-switch-suspend-state {
+> +		pins = "gpio32";
+> +		function = "gpio";
+> +
+> +		drive-strength = <2>;
+> +		bias-disable;
+> +	};
+> +
+> +	msm_key_volp_n_default: msm-key-volp-n-default-state {
+> +		pins = "gpio107";
+> +		function = "gpio";
+> +
+> +		drive-strength = <8>;
+> +		bias-pull-up;
+> +	};
+> +
+> +	gpio_rs232_high: gpio_rs232_high {
+
+Pretty sure DT schema checks would complain about this node name (need
+-state suffix, no underscores).
+
+> +		bootph-all;
+> +		pins = "gpio99";
+> +		function = "gpio";
+> +
+> +		drive-strength = <16>;
+> +		bias-disable;
+> +		output-high;
+> +	};
+> +
+> +	gpio_rs232_low: gpio_rs232_low {
+
+Same here.
+
+Also, since I'm looking at this a bit more closely now, are there maybe
+more clear label/node names you could use here, or a comment you could
+add what exactly these pins do? I guess this enables something about
+RS232 but it's not clear what exactly.
+
+> +		bootph-all;
+> +		pins = "gpio100";
+> +		function = "gpio";
+> +
+> +		drive-strength = <16>;
+> +		bias-disable;
+> +		output-low;
+> +	};
+> +};
+> +
+> [...]
+> diff --git a/configs/hmibsc_defconfig b/configs/hmibsc_defconfig
+> new file mode 100644
+> index 00000000000..02b9615114b
+> --- /dev/null
+> +++ b/configs/hmibsc_defconfig
+> @@ -0,0 +1,87 @@
+> +CONFIG_ARM=y
+> +CONFIG_SYS_BOARD="hmibsc"
+> +CONFIG_COUNTER_FREQUENCY=19000000
+
+I see you just copied this from the existing defconfigs but
+CONFIG_COUNTER_FREQUENCY should be unneeded, since TZ is the one
+responsible (and only one capable) of configuring this. And it also
+looks wrong to me, because the timer frequency on these Qualcomm boards
+is 19.2 MHz and not 19.0 MHz. :'D
+
+I guess I'll prepare a patch to fix it for the existing boards.
+
+Thanks,
+Stephan
