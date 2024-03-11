@@ -4,145 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 919E6C5475B
-	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 20:12:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15519C5475B
+	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 20:51:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 150D287EDF;
-	Mon, 11 Mar 2024 21:12:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=epam.com
+	by phobos.denx.de (Postfix) with ESMTP id 4623387EDF;
+	Mon, 11 Mar 2024 21:51:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=epam.com header.i=@epam.com header.b="rknvJ/3D";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Y2XO0zz9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF6E587EF7; Mon, 11 Mar 2024 21:12:02 +0100 (CET)
-Received: from mx0a-0039f301.pphosted.com (mx0a-0039f301.pphosted.com
- [148.163.133.242])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id AA11A87EF7; Mon, 11 Mar 2024 21:51:34 +0100 (CET)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 53CF787ECC
- for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 21:11:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=epam.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=9800dbbead=volodymyr_babchuk@epam.com
-Received: from pps.filterd (m0174679.ppops.net [127.0.0.1])
- by mx0a-0039f301.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 42BJU75N026066; Mon, 11 Mar 2024 20:11:53 GMT
-Received: from eur01-he1-obe.outbound.protection.outlook.com
- (mail-he1eur01lp2050.outbound.protection.outlook.com [104.47.0.50])
- by mx0a-0039f301.pphosted.com (PPS) with ESMTPS id 3wt2je14r1-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 11 Mar 2024 20:11:53 +0000 (GMT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=jSItB6xo8Gi0TgGpvr3FAh8jdTBx0XaAWRJd+DlmMMDq+DYqWnrzywkOVyd8mV8q548lkr0lkYt20HN8gV8gCZBaDrjcceRGZ0OipMFQF4e6yL7GJXSAFnRTncSLv4gmEBq4JfzlBw11ihbnTyvUZc/7x4ctDqSp0ojk4JTWJ/L/CXT0QG3noh4+Bu9BQVTQEbQxlf+6R+adh5IOQhfMGUIXc8d1qhFiye89+GGUmgxd0IsCtWSUmawuGSjyWRBRVPhC736dou38kFEePnKAYO6rIiLDmC8rfHgzwTC6bWR3C6nVM6XjWsUCeh334v2yLshcoxo19vtEjM50NKngJg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=n2nBxddpN3hO8qWzJJJJM2s5yINXFp3zhQEE6xXGkV4=;
- b=THssHPzdEEU7ste3djmaxsd5pwrb6/QF5LfMaY7LVv9E6XSLj4nUMLte429m+mPDOTM/9tHi1pDSjE7MWdsEKFaQps1ubgT6GcQvuTsp5GP7271TGDfORUtCVU+4FOp2NzCDHOUdHLw6lzC87n2/W+y26FpHepDvNCeSp4c/1CSVy1RKRIVNw4iAr0bv4jojRrPY2MBFsJ46oXTu5rs2PWuC0287j6kkT6V4eIKluVZPkq/Z2W3EDvCUZWBE/z0wAhsapbpjGR4+ImVyuA4gaA+b7MCWPkBIifJl9b4Q7CPh2/ZRny3bGSX1kZbABDTCOO3B+wdG7qNgUukavg23ZQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector2; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=n2nBxddpN3hO8qWzJJJJM2s5yINXFp3zhQEE6xXGkV4=;
- b=rknvJ/3DeB399j3hPVh+8162B4VcQMheYGyFP3AcsjuYV4lp1XlOYTcxQgPn1yKTbAC31mhoH+WLinwzgjsY1CvweKBP9+UKi4iyHse1Qt4rPi1WPFYhn5GYRnNRG1M90dvK7u6NDClm5jT/Jv79SY1RCCAx1f7igiQiRpCNP+aJDs+g/9KBXNLSIVq2ARWPEbHN3qilNS+dVyQHPbnCiJRB0sQ92m65PgwkbprcsnNocpiUzzYO0agaNj4O9SJeULeU/cGTEQG+SlPn1HgmmYjKm1oXsCryydEGOQ6UuXOtc6ggvm6s9SGWQiDWkw/87Rebajj1bGt5HdJhhmSD9A==
-Received: from GV1PR03MB10456.eurprd03.prod.outlook.com
- (2603:10a6:150:16a::21) by PA4PR03MB7487.eurprd03.prod.outlook.com
- (2603:10a6:102:104::18) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7362.35; Mon, 11 Mar
- 2024 20:11:49 +0000
-Received: from GV1PR03MB10456.eurprd03.prod.outlook.com
- ([fe80::bfa8:3549:ac92:d0d8]) by GV1PR03MB10456.eurprd03.prod.outlook.com
- ([fe80::bfa8:3549:ac92:d0d8%4]) with mapi id 15.20.7362.031; Mon, 11 Mar 2024
- 20:11:48 +0000
-From: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-To: Caleb Connolly <caleb.connolly@linaro.org>
-CC: Sumit Garg <sumit.garg@linaro.org>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>, Neil Armstrong <neil.armstrong@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH v2 8/8] board: add support for Qualcomm SA8155P-ADP board
-Thread-Topic: [PATCH v2 8/8] board: add support for Qualcomm SA8155P-ADP board
-Thread-Index: AQHab2CjKZvPgmo3NEWX73nxw+EzJLEqNlMAgADZo4CAABqOAIAADGmAgAd3mYCAADMxAIAACcIAgAASz4A=
-Date: Mon, 11 Mar 2024 20:11:48 +0000
-Message-ID: <874jdc1qbg.fsf@epam.com>
-References: <20240306005230.2638972-1-volodymyr_babchuk@epam.com>
- <20240306005230.2638972-9-volodymyr_babchuk@epam.com>
- <CAFA6WYNWxHU4W0xrTC=mQJbP49hFMm56fbz1isd0xNNQ_VdVSw@mail.gmail.com>
- <87jzmf2mvi.fsf@epam.com> <e5e47988-c617-48a0-a10a-e37edb9a8267@linaro.org>
- <87y1av12bg.fsf@epam.com> <0cda2608-856f-4650-92a6-4860a0d7c8b6@linaro.org>
- <87edcg1vcp.fsf@epam.com> <b8774081-dd8f-4154-9c39-0c0b5fd48adb@linaro.org>
-In-Reply-To: <b8774081-dd8f-4154-9c39-0c0b5fd48adb@linaro.org>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: mu4e 1.10.7; emacs 29.1
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: GV1PR03MB10456:EE_|PA4PR03MB7487:EE_
-x-ms-office365-filtering-correlation-id: 8f374502-baea-4ada-9288-08dc42077bc3
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: abroNg5sDpVkMvEjv3rcdcCISaIEHD8EWnvQ8cSHUJ4JOzH56HqG+TVNxTSbi556GU6g7HWyn1UFod1qthUHI2sDkTfzpwoS9GINV4geqa212nw+1Whg6gDpbhmHt/JXVTRm9l21Ouq2DTwJ339JV74VWes38g4r6ycJRZv2U0591jP4JvrmmJHMd84BJh8uk2aNdOlMgbBMvUQ1lXwpEnQFx36/LCIBCSPF0QDapsVatz0jyhowdB8m37bcp5ucZsb7swEfAymBhOSrMdiYSlZV7JQGcsFzzbYcFqQ/6SrB8NINGZqxAYD0neHrws+0FYr4L43fYHQdkjQeKbHZaqViCpoYIR3CBFZVk6ktfi7unstoshO4f/Qq5wQij5qEwMOh1BUV2bAnyCtIdyLlIpf/6I8dso9zkeGW1zLApCMmw/457Mw+RpGzFCe6JKeOeGOwkRHiNsIWN2Gt3s3kFrYFztTXasCtTXrWG1sdVhveONRPYiXw0/8D8ZdXkB8WtQtq75+yFZFRcjh/pO26BBUBK+EX3N+K1LwAiasoOFRRZ6/2u8dyLXqT4wdwPXkj7qj97uAzPDGew4gwZ9/Lx0UL+I/69r+FwcOi6JmzF52TB3m0u57AEQZypmjyemsjGP4zQ0nXH7fMU5aEIVXIUWPQZmS2ygXdNrPbj3q0hKg=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:GV1PR03MB10456.eurprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(376005)(1800799015)(38070700009); DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?P9JPgjhHajhDHwPPzH7/Gpk4dEPx5OCOaewOJLduLf3qII+XJa6ytPR16S?=
- =?iso-8859-1?Q?3jO8bzio1vhw/2YECo01N9i1PzzGeotF4qcisz6ivkKvdDhr1IAHkjGlYQ?=
- =?iso-8859-1?Q?gSxJkHVEZEnXq+3l9k96DKYkC7oMDLnphN+lumqL97yyeqlwFr9vRztaEs?=
- =?iso-8859-1?Q?pXYZsL8DvNUnCKAluaJBtJ/Mmr1oVaOUd7RsaxgUPfONX+W6fV75PC5+qf?=
- =?iso-8859-1?Q?UIUGkbxUHdTs6homBhzSc+3w+sysvONLL7XLE1IGxDeITzXkffULnjZ5A9?=
- =?iso-8859-1?Q?h6TS1vPAS3xl7KNEXHXTi28sA9j9vKFBq4DlbhGE/8DZRyyEi5bK1wxti/?=
- =?iso-8859-1?Q?+3ywDfd2jE18wHdHHoQhH2Nb9qSySFD2sU7/iYjY2blWjZ5092v+3OsQ6w?=
- =?iso-8859-1?Q?oj4MyF1pMM4Y7KgzDN2E+q/6pcoSG1q/7Th4+dxdh5nmM+y8K5P2RGLDHd?=
- =?iso-8859-1?Q?mPkXuqb2AnTHsoagAsmAL5XMIADUCmCimSHceDD8zoPJ1zt/xdNdKmp+HZ?=
- =?iso-8859-1?Q?7geGHGNGFyERf6yByywJygxaNnWcDdE98ZLMDv1ziat4N6rfcZB7NB7MFw?=
- =?iso-8859-1?Q?UOT8FhEJ2b+m+oK/OewSm/F9ldfvaS7vk/kTsHlaApSso5/RVXxhZRnnf8?=
- =?iso-8859-1?Q?h5xHxDIvLCtKtvY7MseurtcWOxTfCCAMovIlFDL1kMvEhE0Mlh24kjL55X?=
- =?iso-8859-1?Q?+rXyNXkp6cMGzEoBChsjK/J/QrF1igw8m1AdQa99kw0QY1G+Ff84IBRbMd?=
- =?iso-8859-1?Q?U94BGBaT8YEVoe8UyD+8RTC4smV1qqo0nKAVD5YHGNd49JpZ/Bg4vJuDHE?=
- =?iso-8859-1?Q?XIQGYgFZlIxO+k1gj7GOhLyaYCNOVEWBdJOBTb1kg30dN2v7Ef1mm57uny?=
- =?iso-8859-1?Q?ySDFAvkvuGNLOKhUE2h9hc6/o/wJVD3Pu0kiAsFulj/uJWCBRYGe1lOmim?=
- =?iso-8859-1?Q?Dt8c1mo7QkJaK3ReTuB40KVR5MPzZctbqvPhnHBxjO/3baEkHY+qelizws?=
- =?iso-8859-1?Q?23FPaWT0zcOpLSrJgACiBxZZ6t/dZry8rnKceBqApmyJHa8uBsyIZi1GMW?=
- =?iso-8859-1?Q?BLNT2CGnoUsOuIhOaDV5PM3LPoZ2EzwpJ75XbYzy/k7zY3d7uETDL3eT1N?=
- =?iso-8859-1?Q?qjEYlMLWKijeSprFmFnqadwghw695QEukfIv6oca4mhk15DxnU1bK2RnI7?=
- =?iso-8859-1?Q?2VHQSyc0ilFQ1gWA/2ks84HeBfNrjjNxSqUeSt4KUHTMqUQg9QsNhukxdm?=
- =?iso-8859-1?Q?3ANilrtkr6pJk604FIEr5C+rJD0/FgMAcSLUWu3Zvj1Id43m+ZKqRHNaun?=
- =?iso-8859-1?Q?rqpQcsEJ3zQmsgGy63UQ5YoztCsAJDM4oTpeb5kuqSHgSTUqjHxVGuju1Y?=
- =?iso-8859-1?Q?WCV0a1JdWn2X7b0KWH0RmacElwD6QqSR0OLCLQ0/6PpgGlRAlmh08CDIPA?=
- =?iso-8859-1?Q?5XX8d9ZXNkF4BnyCRc4X9pBwDhTA1sYan/eYxfVy49ZIezELobgjQWPtcD?=
- =?iso-8859-1?Q?aP256dS7EINoJeknznGbPwe4Kr5a4cmR0DW4jtCE1iSgQIinhGjWtKFyYa?=
- =?iso-8859-1?Q?8H7DaYrJ+1mDG7j3a2P/EEOZs/Y2L5tbzxuHpxfLq+1Rdsny1rl0gUluf8?=
- =?iso-8859-1?Q?2qC6uBNj3uLRinqj0k0OPRLMPd3sZxQOF1JCrNyUMFKq/Zv+srMljbzQ?=
- =?iso-8859-1?Q?=3D=3D?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+ by phobos.denx.de (Postfix) with ESMTPS id 738B987572
+ for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 21:51:32 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-56838e00367so3713898a12.0
+ for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 13:51:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1710190292; x=1710795092; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=25lauT04hvyJo7Y1B1w+m8TlM0bBSygScU+1VzZp7vg=;
+ b=Y2XO0zz9fEPwJJtUmUISOW9vNEDy2WJOU3jnQEZuoe5AseqNHHwbr5wnW11vRzQ9ti
+ 8qw7taJxMeVlZ2p8BT3XjeWRGR7VEwy0GHoObqRp1OzDpeoSbziGsJz81paVlCqaVfsp
+ tq5C2HEq1mGkPdJ29GhBYMTAxpoGviWWhvPx7P2/9TMTnQiFbVJWvhDxjkHTsDapn75c
+ tofWRicniD/VtViqhkjnkGK1vnkoeAzVtc1l0uLyXv7mfwBT7pCmWLHqWdf5JwFvEjVy
+ k6NMRUdDAsoBrEudCyDUnDifVeCaAE2/dXNCt8AmpF7TNP6D9kTnMyNnAKk1xAyVHcDG
+ Hr0w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710190292; x=1710795092;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=25lauT04hvyJo7Y1B1w+m8TlM0bBSygScU+1VzZp7vg=;
+ b=cLW+OCFGXfHecZCGOs1iXVb4rJ6HvrEEptuFbUcQ2I+XOc04CAe8Chpdp2kvnBfz1Y
+ EINggccGkNvKLTxKySfkDz3jaIPlkqP/AvYwfgu/LuBhvywV0nvLujZ7YUIyEIoakmo/
+ lReVF9vETmSlqZZ5tVMRBRIudA8J+CceoROiN048rHfaqiZSBChzanIQb9GSh95pffrK
+ TJWahyoXATHbbmzw1NYz05bpZS2wiVsFQkYBE3h0yWb5c62/opKqVPPheXsxpMbB8IXJ
+ 9dBtlKJynw5BGjfdOjGDuvexLNCl/p/CNNUmx+pR/W1JeqCMh0UulpNQ1fPdJbw6B7a+
+ YnBg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWOwWRlhkQgPG0WN687df4xHbPywopD9BTtWTRdOFD/MCFCEavZ/SjlFAjQdMbFm8Fd7YLxmfRw04qbpYYbmZgmCVXcGQ==
+X-Gm-Message-State: AOJu0Yz3ZeYrzVToyfg0pO8tUuxiFCXok4cODt7/PPYdOCle9RBwrBX4
+ GrZApZ8Kl0zcAzgVPnfAOkMscAsD61MFXLqBQO7kuZuHLuHKxQccgCHrgt6WDxARt47wvWU+6jh
+ 2KhdtJbIaYey/uuIH1yd1zU5/Gr6tX1R/
+X-Google-Smtp-Source: AGHT+IFyDfSc2eZoJMyk/vG9xwo4VfsMz8Mj6AwzIzpyERaj5BppKK1RBD1pGJp1PGFBTpimNOFaXPG0nupg6/w4zZo=
+X-Received: by 2002:a50:8d0b:0:b0:568:2505:93b4 with SMTP id
+ s11-20020a508d0b000000b00568250593b4mr1061581eds.6.1710190291648; Mon, 11 Mar
+ 2024 13:51:31 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: GV1PR03MB10456.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8f374502-baea-4ada-9288-08dc42077bc3
-X-MS-Exchange-CrossTenant-originalarrivaltime: 11 Mar 2024 20:11:48.8180 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: cwGw/jnjc6Yxh3GvwFk9HcFJmsgGgjaasQArvkXy520A86LYQx+815ipUvzUEfsKCzhZv2Jtk4yMvVQkKFM9c96ETSyYafqe1rarldDjn3c=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR03MB7487
-X-Proofpoint-ORIG-GUID: AGr0L_B2BRXMA7NrW3pCor6dBR2Tw9ls
-X-Proofpoint-GUID: AGr0L_B2BRXMA7NrW3pCor6dBR2Tw9ls
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-03-11_11,2024-03-11_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 mlxlogscore=999
- bulkscore=0 lowpriorityscore=0 adultscore=0 suspectscore=0 malwarescore=0
- phishscore=0 mlxscore=0 impostorscore=0 priorityscore=1501 spamscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2402120000
- definitions=main-2403110154
+References: <20240222093607.3085545-1-sumit.garg@linaro.org>
+ <170929783825.70492.4756963077870833230.b4-ty@konsulko.com>
+ <CAOMZO5CjeUhFfLBs3FRt4Hbk0ULXrRoOZaZqvSRzWbNySdsOhQ@mail.gmail.com>
+ <CAFA6WYMf7Z-sW8pSHzYUJ_O9fqfunBEhyigJj3BW-DYuujxDbw@mail.gmail.com>
+ <CAOMZO5AhTGskhEX9mv8oMJ1k4cbZzfZ2Vck5VcrVrYUvBA2r7w@mail.gmail.com>
+ <CAFA6WYM12F_9yyNwXY5xj9+zh3Jwa_Jmz8MkaKsxm3Jn3NPNKA@mail.gmail.com>
+ <CAOMZO5DgEaTGmxJfJf=fGgwauE-M+XyHm+tA8rfOw+MwRK_mqA@mail.gmail.com>
+ <CAJaLiFxgNPoiGZMFt7SvTdVRUz1QNC7pibbeoaed7DaxEnFWNQ@mail.gmail.com>
+ <CAFA6WYOJJ2=x01DcF_u4env=r1On1Ry0kkdi4MZcz8xT7o7V0Q@mail.gmail.com>
+In-Reply-To: <CAFA6WYOJJ2=x01DcF_u4env=r1On1Ry0kkdi4MZcz8xT7o7V0Q@mail.gmail.com>
+From: Tony Dinh <mibodhi@gmail.com>
+Date: Mon, 11 Mar 2024 13:51:18 -0700
+Message-ID: <CAJaLiFwh9urHjei7EVpdwguT=F5YK8cdp9r4oL6sfPZZzRi0VQ@mail.gmail.com>
+Subject: Re: [PATCH v6 00/11] An effort to bring DT bindings compliance within
+ U-Boot
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ Bryan Brattlof <bb@ti.com>, 
+ Stefan Roese <sr@denx.de>, Fabio Estevam <festevam@denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -159,130 +100,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Sumit,
 
-
-Caleb Connolly <caleb.connolly@linaro.org> writes:
-
-> On 11/03/2024 18:23, Volodymyr Babchuk wrote:
->> Hi Caleb,
->> Caleb Connolly <caleb.connolly@linaro.org> writes:
->>=20
->>> On 06/03/2024 21:24, Volodymyr Babchuk wrote:
->>>>
->>>> Hi Caleb,
->>>>
->>>> Caleb Connolly <caleb.connolly@linaro.org> writes:
->>>>
->>>> [...]
->>>>>>>> +};
->>>>>>>> +
->>>>>>>> +&tlmm {
->>>>>>>> +       /* U-Boot pinctrl driver does not understand multiple tile=
-s */
->>>>>>>> +       reg =3D <0x0 0x03000000 0x0 0x1000000>;
->>>>>>>> +       /delete-property/ reg-names;
->>>>>>>
->>>>>>> This won't be needed if we can make the tiles offset in the pinctrl
->>>>>>> driver compatible:
->>>>>>>
->>>>>>> #define WEST   0x00000000
->>>>>>> #define EAST   0x00400000
->>>>>>> #define NORTH  0x00800000
->>>>>>> #define SOUTH  0x00C00000
->>>>>>
->>>>>> Hmm, I assume that in this case pinctrl driver should map all the fo=
-ur
->>>>>> tiles independently? Are there guarantees in U-Boot that four separa=
-te
->>>>>> memory regions will be mapped into virtual memory with the same rela=
-tive
->>>>>> positions? Linux clearly don't make such guarantees.
->>>>>
->>>>> U-Boot doesn't use virtual addresses on arm platforms, it only goes a=
-s
->>>>> far as reading the address from DT, nothing else, so this is totally
->>>>> fine and is how the other SoCs do it.
->>>>
->>>> For me it looks like we are depending on implementation details
->>>> knowledge. I.e MMU API does not provide such guarantees, but drivers
->>>> know how ARM MMU code is working internally and drivers depend on
->>>> exactly this behavior. But if you are saying that it is totally fine,
->>>> I'll rework the patch. No big deal. Actually, I already tried this and
->>>> it is working fine.
->>>>
->>>>>>>> +
->>>>>>>> +       /* U-Boot ethernet driver wants to drive reset as GPIO */
->>>>>>>> +       /delete-node/ phy-reset-pins;
->>>>>>>
->>>>>>> I suppose this is not needed as phy-reset-pins also configures the =
-pin
->>>>>>> as GPIO only.
->>>>>>>
->>>>>> Well, yes. This also puzzles me up, but for some reason it stops wor=
-king
->>>>>> if I leave this node intact. Looks like I need to look at this deepe=
-r
->>>>>> before posting the next version.
->>>>>
->>>>> Possibly the pinconf defined in the phy-reset-pins node causes U-Boot=
- to
->>>>> misbehave, can you check if this patch fixes it (there is a bug in th=
-e
->>>>> line "return msm_gpio_direction_input(dev, gpio);", it should become
->>>>> just "msm_gpio_direction_input(dev, gpio);").
->>>>>
->>>>> I had the exact same issue with the gpio-regulator driver and this wa=
-s
->>>>> the solution I ended up going with.
->>>>>
->>>>> https://urldefense.com/v3/__https://lore.kernel.org/u-boot/20240131-b=
-4-qcom-livetree-v1-7-4071c0787db0@linaro.org/__;!!GF_29dbcQIUBPA!xFhZe7DKgR=
-br63sirEJLuH-B0AnGs7jvx8tdJPKLTgFuZ3I3_zpVml7l23G-_vJO_JiUR-wUO4GMPJFcE-8p5=
-0H3pf7nbxit$
->>>>> [lore[.]kernel[.]org]
->>>>
->>>> It is exactly this. With your patch I don't need to /delete-node/
->>>> anymore. I'll add a comment in the cover message that this series are
->>>> depended on your patch.
->>>
->>> Please can you split the power domain and clock patches into a separate
->>> series? As I'd like to depend on them for the next revision of my
->>> series, and we'd otherwise have a cyclical dependency.
->> Of course.
->> As I understood, you are interested in "clk: qcom: clear div mask
->> before
->> assigning a new divider" and "clk: qcom: add support for power domains
->> uclass", correct?
+On Sun, Mar 10, 2024 at 11:24=E2=80=AFPM Sumit Garg <sumit.garg@linaro.org>=
+ wrote:
 >
-> Yes.
+> Hi Tony,
+>
+> On Mon, 11 Mar 2024 at 09:20, Tony Dinh <mibodhi@gmail.com> wrote:
+> >
+> > Hi Sumit,
+> > Hi Tom,
+> >
+> > On Mon, Mar 4, 2024 at 4:29=E2=80=AFAM Fabio Estevam <festevam@gmail.co=
+m> wrote:
+> > >
+> > > On Mon, Mar 4, 2024 at 9:15=E2=80=AFAM Sumit Garg <sumit.garg@linaro.=
+org> wrote:
+> > >
+> > > > I suppose the earlier reference patch wasn't complete, can you rath=
+er
+> > > > try its v4 [1] instead?
+> > > >
+> > > > [1] https://patchwork.ozlabs.org/project/uboot/patch/20240304121257=
+.3551104-1-sumit.garg@linaro.org/
+> > >
+> > > This one works, thanks!
+> >
+> > I'm testing this for a Marvell Armada 385 board (Synology DS116). I'm
+> > on the next branch, but  perhaps something is still missing.
+> >
+> > diff --git a/configs/ds116_defconfig b/configs/ds116_defconfig
+> > index 02ddc0e7918..1fbedcf91cf 100644
+> > --- a/configs/ds116_defconfig
+> > +++ b/configs/ds116_defconfig
+> > @@ -16,7 +16,7 @@ CONFIG_SF_DEFAULT_SPEED=3D50000000
+> >  CONFIG_ENV_SIZE=3D0x10000
+> >  CONFIG_ENV_OFFSET=3D0x7E0000
+> >  CONFIG_ENV_SECT_SIZE=3D0x10000
+> > -CONFIG_DEFAULT_DEVICE_TREE=3D"armada-385-synology-ds116"
+> > +CONFIG_DEFAULT_DEVICE_TREE=3D"marvell/armada-385-synology-ds116"
+> >  CONFIG_SPL_TEXT_BASE=3D0x40000030
+> >  CONFIG_SPL_SERIAL=3Dy
+> >  CONFIG_SPL_STACK=3D0x4002c000
+> > @@ -29,7 +29,6 @@ CONFIG_PCI=3Dy
+> >  CONFIG_DEBUG_UART=3Dy
+> >  CONFIG_AHCI=3Dy
+> >  CONFIG_BOOTSTD_FULL=3Dy
+> > -CONFIG_BOOTSTD_DEFAULTS=3Dy
+> >  CONFIG_BOOTDELAY=3D10
+> >  CONFIG_USE_PREBOOT=3Dy
+> >  CONFIG_SYS_CONSOLE_INFO_QUIET=3Dy
+> > @@ -57,6 +56,7 @@ CONFIG_CMD_CACHE=3Dy
+> >  CONFIG_CMD_TIME=3Dy
+> >  CONFIG_CMD_MTDPARTS=3Dy
+> >  CONFIG_MTDPARTS_DEFAULT=3D"mtdparts=3Dspi0.0:1m(u-boot),7040k(kernel),=
+64k(u-boot-env),-(data)"
+> > +CONFIG_OF_UPSTREAM=3Dy
+> >  CONFIG_ENV_OVERWRITE=3Dy
+> >  CONFIG_SYS_RELOC_GD_ENV_ADDR=3Dy
+> >  CONFIG_VERSION_VARIABLE=3Dy
+> >
+> > # make ds116_defconfig
+> >
+> > # grep -i ds116 .config
+> > CONFIG_SYS_BOARD=3D"ds116"
+> > CONFIG_SYS_CONFIG_NAME=3D"ds116"
+> > CONFIG_TARGET_DS116=3Dy
+> > CONFIG_DEFAULT_DEVICE_TREE=3D"marvell/armada-385-synology-ds116"
+> > CONFIG_IDENT_STRING=3D"\nSynology DS116"
+> > CONFIG_SYS_PROMPT=3D"DS116> "
+> > CONFIG_OF_LIST=3D"marvell/armada-385-synology-ds116"
+> > CONFIG_SPL_OF_LIST=3D"marvell/armada-385-synology-ds116"
+> >
+> > Built it, and looks like vendor Marvell is missing during the Make
+> > file execution.
+> >
+> > make -f ./scripts/Makefile.build obj=3Ddts dtbs
+> > make -f ./scripts/Makefile.build obj=3Ddts/upstream/src/arm dtbs
+> > scripts/Makefile.build:57: dts/upstream/src/arm/Makefile: No such file
+> > or directory
+>
+> As you are building for the 32-bit Arm, you have to add a Makefile
+> here [1] similar to this one [2] for arm64.
+>
+> [1] https://source.denx.de/u-boot/u-boot/-/tree/next/dts/upstream/src/arm=
+?ref_type=3Dheads
+> [2] https://source.denx.de/u-boot/u-boot/-/blob/next/dts/upstream/src/arm=
+64/Makefile?ref_type=3Dheads
 
-Okay, I'll send it today.
+Thanks! It works great with that Make file.
 
-> I tried the power domain stuff out on SMD845 today and ran into
-> quite a few issues. Specifically as a lot of the devices reference the
-> rpmhpd power domain which we don't support (and don't *need* to
-> support) in U-Boot. I'm not sure what the best way forward will be for
-> this. Maybe a "nop" power domain driver?
+All the best,
+Tony
 
-Are you sure that they are not required?
-
-"nop" power domain always is the option. Especially if it prints some
-warning about an unknown device. I had quite a lot of issues with clock and
-pin drivers that silently ignore unknown devices...
-
-> Do you have the same issues on sm8150?
-
-Yes and no. No, because I was lucky so far and devices I tried to use in
-U-Boot does not require rpmhpd. Looking at DTS, I may only encounter
-issues with sdhc_2, which requires rpmhpd for some reason. Also UFS
-requires clock from rpmhcc.
-
-And "yes", because I have found root cause for my troubles with UFS in
-Linux kernel, when I am skipping hyp.mbn. This is not strictly related
-to U-Boot, but you may be interested in this: apparently Qualcomm's
-hypervisor enables access to RPM (maybe brings it out of reset?). cmd-db
-shared memory region can't be accessed if I skip the hypervisor and try
-to boot directly into Linux. So now I am looking for ways to enable it.
-
---=20
-WBR, Volodymyr=
+>
+> -Sumit
+>
+> > make[2]: *** No rule to make target 'dts/upstream/src/arm/Makefile'.  S=
+top.
+> > make[1]: *** [dts/Makefile:54: arch-dtbs] Error 2
+> > make: *** [Makefile:1166: dts/dt.dtb] Error 2
+> > make: *** Waiting for unfinished jobs....
+> > make: Leaving directory '/usr/src/u-boot'
+> >
+> > I also tried Bryan's patch like you've suggested to Fabio. But it
+> > seems Bryan's patch was already in the next branch. Did I miss
+> > something?
+> >
+> > All the best ,
+> > Tony
