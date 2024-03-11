@@ -4,38 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74CD4C5475B
-	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 12:05:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80A97C54E58
+	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 12:05:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA46387E1A;
-	Mon, 11 Mar 2024 13:03:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2F50B87F1C;
+	Mon, 11 Mar 2024 13:03:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ECCBD88023; Mon, 11 Mar 2024 13:03:21 +0100 (CET)
-Received: from smtp-42ac.mail.infomaniak.ch (smtp-42ac.mail.infomaniak.ch
- [84.16.66.172])
+ id D9C4687E64; Mon, 11 Mar 2024 13:03:23 +0100 (CET)
+Received: from smtp-1909.mail.infomaniak.ch (smtp-1909.mail.infomaniak.ch
+ [185.125.25.9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3FA5F87F70
- for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 13:03:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F080C87FAD
+ for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 13:03:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-3-0000.mail.infomaniak.ch (unknown [10.4.36.107])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Ttb4z6tqWzMq49k;
- Mon, 11 Mar 2024 13:02:59 +0100 (CET)
+Received: from smtp-3-0000.mail.infomaniak.ch (smtp-3-0000.mail.infomaniak.ch
+ [10.4.36.107])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Ttb515JT5ztSV;
+ Mon, 11 Mar 2024 13:03:01 +0100 (CET)
 Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4Ttb4y75Kyz3f; Mon, 11 Mar 2024 13:02:58 +0100 (CET)
+ id 4Ttb505b0jz3f; Mon, 11 Mar 2024 13:03:00 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Mon, 11 Mar 2024 13:01:57 +0100
-Subject: [PATCH v4 14/20] rockchip: include asm/io.h directly in
- asm/arch-rockchip/hardware.h
+Date: Mon, 11 Mar 2024 13:01:59 +0100
+Subject: [PATCH v4 16/20] board: rockchip: add Theobroma-Systems RK3588
+ Jaguar SBC
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240311-jaguar-v4-14-d2ca1af68ed3@theobroma-systems.com>
+Message-Id: <20240311-jaguar-v4-16-d2ca1af68ed3@theobroma-systems.com>
 References: <20240311-jaguar-v4-0-d2ca1af68ed3@theobroma-systems.com>
 In-Reply-To: <20240311-jaguar-v4-0-d2ca1af68ed3@theobroma-systems.com>
 To: Simon Glass <sjg@chromium.org>, 
@@ -77,839 +78,1379 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 
-The different macros use writel which is defined in asm/io.h, so let's
-include the header so users of hardware.h do not need to include
-asm/io.h as well.
+JAGUAR is a Single-Board Computer (SBC) based around the rk3588 SoC and
+is targeting Autonomous Mobile Robots (AMR).
 
-While at it, remove asm/io.h includes wherever
-asm/arch-rockchip/hardware.h is included already.
+It features:
+ * LPDDR4X (up to 16GB)
+ * 1Gbps Ethernet on RJ45 connector (KSZ9031 or KSZ9131)
+ * PCIe 3.0 4-lane on M.2 M-key connector
+ * PCIe 2.1 1-lane on M.2 E-key
+ * USB 2.0 on M.2 E-key
+ * 2x USB3 OTG type-c ports with DP Alt-Mode
+ * USB2 host port
+ * HDMI output
+ * 2x camera connectors, each exposing:
+   * 2-lane MIPI-CSI
+   * 1v2, 1v8, 2v8 power rails
+   * I2C bus
+   * GPIOs
+ * PPS input
+ * CAN
+ * RS485 UART
+ * FAN connector
+ * SD card slot
+ * eMMC (up to 256GB)
+ * RTC backup battery
+ * Companion microcontroller
+   * ISL1208 RTC emulation
+   * AMC6821 PWM emulation
+   * On/off buzzer control
+ * Secure Element
+ * 80-pin Mezzanine connector for daughterboards:
+   * GPIOs
+   * 1Gbps Ethernet
+   * PCIe 2.1 1-lane
+   * 2x 2-lane MIPI-CSI
+   * ADC channel
+   * I2C bus
+   * PWM
+   * UART
+   * SPI
+   * SDIO
+   * CAN
+   * I2S
+   * 1v8, 3v3, 5v0, dc-in (12-24V) power rails
+
+The Device Tree comes from next-20240110 Linux kernel.
 
 Cc: Quentin Schulz <foss+uboot@0leil.net>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 ---
- arch/arm/include/asm/arch-rockchip/hardware.h            | 2 ++
- arch/arm/mach-rockchip/cpu-info.c                        | 1 -
- arch/arm/mach-rockchip/px30/px30.c                       | 1 -
- arch/arm/mach-rockchip/rk3036/rk3036.c                   | 1 -
- arch/arm/mach-rockchip/rk3036/sdram_rk3036.c             | 1 -
- arch/arm/mach-rockchip/rk3066/rk3066.c                   | 1 -
- arch/arm/mach-rockchip/rk3188/rk3188.c                   | 1 -
- arch/arm/mach-rockchip/rk322x/rk322x.c                   | 1 -
- arch/arm/mach-rockchip/rk3288/rk3288.c                   | 1 -
- arch/arm/mach-rockchip/rk3308/rk3308.c                   | 1 -
- arch/arm/mach-rockchip/rk3328/rk3328.c                   | 1 -
- arch/arm/mach-rockchip/rk3368/rk3368.c                   | 1 -
- arch/arm/mach-rockchip/rk3399/rk3399.c                   | 1 -
- arch/arm/mach-rockchip/rk3568/rk3568.c                   | 1 -
- arch/arm/mach-rockchip/rk3588/rk3588.c                   | 1 -
- arch/arm/mach-rockchip/rv1126/rv1126.c                   | 1 -
- board/elgin/elgin_rv1108/elgin_rv1108.c                  | 1 -
- board/firefly/firefly-rk3308/roc_cc_rk3308.c             | 1 -
- board/google/gru/gru.c                                   | 1 -
- board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c   | 1 -
- board/pine64/pinephone-pro-rk3399/pinephone-pro-rk3399.c | 1 -
- board/pine64/rockpro64_rk3399/rockpro64-rk3399.c         | 1 -
- board/rockchip/evb_rv1108/evb_rv1108.c                   | 1 -
- board/theobroma-systems/puma_rk3399/puma-rk3399.c        | 1 -
- board/vamrs/rock960_rk3399/rock960-rk3399.c              | 1 -
- drivers/clk/rockchip/clk_pll.c                           | 1 -
- drivers/clk/rockchip/clk_px30.c                          | 1 -
- drivers/clk/rockchip/clk_rk3036.c                        | 1 -
- drivers/clk/rockchip/clk_rk3066.c                        | 1 -
- drivers/clk/rockchip/clk_rk3128.c                        | 1 -
- drivers/clk/rockchip/clk_rk3188.c                        | 1 -
- drivers/clk/rockchip/clk_rk322x.c                        | 1 -
- drivers/clk/rockchip/clk_rk3288.c                        | 1 -
- drivers/clk/rockchip/clk_rk3308.c                        | 1 -
- drivers/clk/rockchip/clk_rk3328.c                        | 1 -
- drivers/clk/rockchip/clk_rk3368.c                        | 1 -
- drivers/clk/rockchip/clk_rk3399.c                        | 1 -
- drivers/clk/rockchip/clk_rk3568.c                        | 1 -
- drivers/clk/rockchip/clk_rk3588.c                        | 1 -
- drivers/clk/rockchip/clk_rv1108.c                        | 1 -
- drivers/clk/rockchip/clk_rv1126.c                        | 1 -
- drivers/gpio/rk_gpio.c                                   | 1 -
- drivers/net/gmac_rockchip.c                              | 1 -
- drivers/ram/rockchip/dmc-rk3368.c                        | 1 -
- drivers/ram/rockchip/sdram_px30.c                        | 1 -
- drivers/ram/rockchip/sdram_rk3066.c                      | 1 -
- drivers/ram/rockchip/sdram_rk3188.c                      | 1 -
- drivers/ram/rockchip/sdram_rk322x.c                      | 1 -
- drivers/ram/rockchip/sdram_rk3288.c                      | 1 -
- drivers/ram/rockchip/sdram_rk3399.c                      | 1 -
- drivers/ram/rockchip/sdram_rv1126.c                      | 1 -
- drivers/rng/rockchip_rng.c                               | 1 -
- drivers/sysreset/sysreset_rockchip.c                     | 1 -
- drivers/video/rockchip/dw_mipi_dsi_rockchip.c            | 1 -
- drivers/video/rockchip/rk3288_hdmi.c                     | 1 -
- drivers/video/rockchip/rk3288_mipi.c                     | 1 -
- drivers/video/rockchip/rk3288_vop.c                      | 1 -
- drivers/video/rockchip/rk3399_hdmi.c                     | 1 -
- drivers/video/rockchip/rk3399_mipi.c                     | 1 -
- drivers/video/rockchip/rk3399_vop.c                      | 1 -
- drivers/video/rockchip/rk_edp.c                          | 1 -
- drivers/video/rockchip/rk_hdmi.c                         | 1 -
- drivers/video/rockchip/rk_lvds.c                         | 1 -
- 63 files changed, 2 insertions(+), 62 deletions(-)
+ arch/arm/dts/Makefile                              |   1 +
+ arch/arm/dts/rk3588-jaguar-u-boot.dtsi             |  33 +
+ arch/arm/dts/rk3588-jaguar.dts                     | 803 +++++++++++++++++++++
+ arch/arm/mach-rockchip/rk3588/Kconfig              |  28 +
+ board/theobroma-systems/jaguar_rk3588/Kconfig      |  16 +
+ board/theobroma-systems/jaguar_rk3588/MAINTAINERS  |  13 +
+ board/theobroma-systems/jaguar_rk3588/Makefile     |  10 +
+ .../jaguar_rk3588/jaguar_rk3588.c                  |  53 ++
+ configs/jaguar-rk3588_defconfig                    | 114 +++
+ doc/board/index.rst                                |   1 +
+ doc/board/rockchip/rockchip.rst                    |   1 +
+ doc/board/theobroma-systems/index.rst              |   9 +
+ doc/board/theobroma-systems/jaguar_rk3588.rst      | 100 +++
+ include/configs/jaguar_rk3588.h                    |  15 +
+ 14 files changed, 1197 insertions(+)
 
-diff --git a/arch/arm/include/asm/arch-rockchip/hardware.h b/arch/arm/include/asm/arch-rockchip/hardware.h
-index 62e8bed8f31..e4662a2d52d 100644
---- a/arch/arm/include/asm/arch-rockchip/hardware.h
-+++ b/arch/arm/include/asm/arch-rockchip/hardware.h
-@@ -6,6 +6,8 @@
- #ifndef _ASM_ARCH_HARDWARE_H
- #define _ASM_ARCH_HARDWARE_H
- 
-+#include <asm/io.h>
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index b102ffb5f68..f31f3904ffd 100644
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -194,6 +194,7 @@ dtb-$(CONFIG_ROCKCHIP_RK3588) += \
+ 	rk3588-edgeble-neu6a-io.dtb \
+ 	rk3588-edgeble-neu6b-io.dtb \
+ 	rk3588-evb1-v10.dtb \
++	rk3588-jaguar.dtb \
+ 	rk3588-nanopc-t6.dtb \
+ 	rk3588s-orangepi-5.dtb \
+ 	rk3588-orangepi-5-plus.dtb \
+diff --git a/arch/arm/dts/rk3588-jaguar-u-boot.dtsi b/arch/arm/dts/rk3588-jaguar-u-boot.dtsi
+new file mode 100644
+index 00000000000..dcda4f99d6e
+--- /dev/null
++++ b/arch/arm/dts/rk3588-jaguar-u-boot.dtsi
+@@ -0,0 +1,33 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2023 Theobroma Systems Design und Consulting GmbH
++ */
 +
- #define RK_CLRSETBITS(clr, set)		((((clr) | (set)) << 16) | (set))
- #define RK_SETBITS(set)			RK_CLRSETBITS(0, set)
- #define RK_CLRBITS(clr)			RK_CLRSETBITS(clr, 0)
-diff --git a/arch/arm/mach-rockchip/cpu-info.c b/arch/arm/mach-rockchip/cpu-info.c
-index dac24910e0c..a62ff53c6a0 100644
---- a/arch/arm/mach-rockchip/cpu-info.c
-+++ b/arch/arm/mach-rockchip/cpu-info.c
-@@ -7,7 +7,6 @@
- #include <common.h>
- #include <env.h>
- #include <init.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/cru.h>
- #include <asm/arch-rockchip/hardware.h>
-diff --git a/arch/arm/mach-rockchip/px30/px30.c b/arch/arm/mach-rockchip/px30/px30.c
-index fc7456e680c..b4f655fa4b3 100644
---- a/arch/arm/mach-rockchip/px30/px30.c
-+++ b/arch/arm/mach-rockchip/px30/px30.c
-@@ -9,7 +9,6 @@
- #include <init.h>
- #include <spl.h>
- #include <asm/armv8/mmu.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/bootrom.h>
- #include <asm/arch-rockchip/grf_px30.h>
- #include <asm/arch-rockchip/hardware.h>
-diff --git a/arch/arm/mach-rockchip/rk3036/rk3036.c b/arch/arm/mach-rockchip/rk3036/rk3036.c
-index 0a072cf03a8..e8130abdd77 100644
---- a/arch/arm/mach-rockchip/rk3036/rk3036.c
-+++ b/arch/arm/mach-rockchip/rk3036/rk3036.c
-@@ -6,7 +6,6 @@
- #include <common.h>
- #include <init.h>
- #include <asm/global_data.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/grf_rk3036.h>
- #include <asm/arch-rockchip/hardware.h>
- #include <asm/arch-rockchip/sdram_rk3036.h>
-diff --git a/arch/arm/mach-rockchip/rk3036/sdram_rk3036.c b/arch/arm/mach-rockchip/rk3036/sdram_rk3036.c
-index fcae65b2e5a..07cd29a33e6 100644
---- a/arch/arm/mach-rockchip/rk3036/sdram_rk3036.c
-+++ b/arch/arm/mach-rockchip/rk3036/sdram_rk3036.c
-@@ -4,7 +4,6 @@
-  */
- #include <common.h>
- #include <init.h>
--#include <asm/io.h>
- #include <asm/types.h>
- #include <asm/arch-rockchip/cru_rk3036.h>
- #include <asm/arch-rockchip/grf_rk3036.h>
-diff --git a/arch/arm/mach-rockchip/rk3066/rk3066.c b/arch/arm/mach-rockchip/rk3066/rk3066.c
-index 6661b788295..9a95ff85041 100644
---- a/arch/arm/mach-rockchip/rk3066/rk3066.c
-+++ b/arch/arm/mach-rockchip/rk3066/rk3066.c
-@@ -4,7 +4,6 @@
-  */
++#include "rk3588-u-boot.dtsi"
++
++/ {
++	chosen {
++		u-boot,spl-boot-order = "same-as-spl", &sdhci, &sdmmc;
++	};
++};
++
++&emmc_pwrseq {
++	bootph-pre-ram;
++	bootph-some-ram;
++};
++
++&emmc_reset {
++	bootph-pre-ram;
++	bootph-some-ram;
++};
++
++&gpio2 {
++	bootph-pre-ram;
++	bootph-some-ram;
++};
++
++&sdhci {
++	/* U-Boot currently cannot handle anything below HS200 for eMMC on RK3588 */
++	/delete-property/ mmc-ddr-1_8v;
++	/delete-property/ cap-mmc-highspeed;
++};
+diff --git a/arch/arm/dts/rk3588-jaguar.dts b/arch/arm/dts/rk3588-jaguar.dts
+new file mode 100644
+index 00000000000..4ce70fb75a3
+--- /dev/null
++++ b/arch/arm/dts/rk3588-jaguar.dts
+@@ -0,0 +1,803 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2023 Theobroma Systems Design und Consulting GmbH
++ */
++
++/dts-v1/;
++#include <dt-bindings/gpio/gpio.h>
++#include <dt-bindings/input/input.h>
++#include <dt-bindings/leds/common.h>
++#include <dt-bindings/pinctrl/rockchip.h>
++#include <dt-bindings/usb/pd.h>
++#include "rk3588.dtsi"
++
++/ {
++	model = "Theobroma Systems RK3588-SBC Jaguar";
++	compatible = "tsd,rk3588-jaguar", "rockchip,rk3588";
++
++	adc-keys {
++		compatible = "adc-keys";
++		io-channels = <&saradc 0>;
++		io-channel-names = "buttons";
++		keyup-threshold-microvolt = <1800000>;
++		poll-interval = <100>;
++
++		/* Can be controlled through SW2 but also GPIO1 on CP2102 on P20 */
++		button-bios-disable {
++			label = "BIOS_DISABLE";
++			linux,code = <KEY_VENDOR>;
++			press-threshold-microvolt = <0>;
++		};
++	};
++
++	aliases {
++		ethernet0 = &gmac0;
++		mmc0 = &sdhci;
++		mmc1 = &sdmmc;
++		rtc0 = &rtc_twi;
++	};
++
++	chosen {
++		stdout-path = "serial2:115200n8";
++	};
++
++	/* DCIN is 12-24V but standard is 12V */
++	dc_12v: dc-12v-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "dc_12v";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <12000000>;
++		regulator-max-microvolt = <12000000>;
++	};
++
++	emmc_pwrseq: emmc-pwrseq {
++		compatible = "mmc-pwrseq-emmc";
++		pinctrl-0 = <&emmc_reset>;
++		pinctrl-names = "default";
++		reset-gpios = <&gpio2 RK_PA3 GPIO_ACTIVE_HIGH>;
++	};
++
++	leds {
++		compatible = "gpio-leds";
++		pinctrl-names = "default";
++		pinctrl-0 = <&led1_pin>;
++		status = "okay";
++
++		/* LED1 on PCB */
++		led-1 {
++			gpios = <&gpio1 RK_PD4 GPIO_ACTIVE_HIGH>;
++			function = LED_FUNCTION_HEARTBEAT;
++			linux,default-trigger = "heartbeat";
++			color = <LED_COLOR_ID_AMBER>;
++		};
++	};
++
++	pps {
++		compatible = "pps-gpio";
++		gpios = <&gpio0 RK_PD5 GPIO_ACTIVE_HIGH>;
++	};
++
++	vcc_1v1_nldo_s3: vcc-1v1-nldo-s3-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc_1v1_nldo_s3";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <1100000>;
++		regulator-max-microvolt = <1100000>;
++		vin-supply = <&vcc5v0_sys>;
++	};
++
++	vcc_1v2_s3: vcc-1v2-s3-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc_1v2_s3";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <1200000>;
++		regulator-max-microvolt = <1200000>;
++		vin-supply = <&vcc5v0_sys>;
++	};
++
++	/* Exposed on P14 and P15 */
++	vcc_2v8_s3: vcc-2v8-s3-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc_2v8_s3";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <2800000>;
++		regulator-max-microvolt = <2800000>;
++		vin-supply = <&vcc_3v3_s3>;
++	};
++
++	vcc_5v0_usb_a: vcc-5v0-usb-a-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "usb_a_vcc";
++		regulator-min-microvolt = <5000000>;
++		regulator-max-microvolt = <5000000>;
++		vin-supply = <&vcc5v0_sys>;
++		gpio = <&gpio1 RK_PB4 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++	};
++
++	vcc_5v0_usb_c1: vcc-5v0-usb-c1-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "5v_usbc1";
++		regulator-min-microvolt = <5000000>;
++		regulator-max-microvolt = <5000000>;
++		vin-supply = <&vcc5v0_usb>;
++		gpio = <&gpio4 RK_PB5 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++	};
++
++	vcc_5v0_usb_c2: vcc-5v0-usb-c2-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "5v_usbc2";
++		regulator-min-microvolt = <5000000>;
++		regulator-max-microvolt = <5000000>;
++		vin-supply = <&vcc5v0_usb>;
++		gpio = <&gpio4 RK_PB6 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++	};
++
++	vcc3v3_mdot2: vcc3v3-mdot2-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc3v3_mdot2";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++		vin-supply = <&dc_12v>;
++	};
++
++	vcc5v0_sys: vcc5v0-sys-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc5v0_sys";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <5000000>;
++		regulator-max-microvolt = <5000000>;
++		vin-supply = <&dc_12v>;
++	};
++
++	vcc5v0_usb: vcc5v0-usb-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc5v0_usb";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <5000000>;
++		regulator-max-microvolt = <5000000>;
++		vin-supply = <&vcc5v0_sys>;
++	};
++};
++
++&combphy1_ps {
++	status = "okay";
++};
++
++&cpu_b0 {
++	cpu-supply = <&vdd_cpu_big0_s0>;
++};
++
++&cpu_b1 {
++	cpu-supply = <&vdd_cpu_big0_s0>;
++};
++
++&cpu_b2 {
++	cpu-supply = <&vdd_cpu_big1_s0>;
++};
++
++&cpu_b3 {
++	cpu-supply = <&vdd_cpu_big1_s0>;
++};
++
++&cpu_l0 {
++	cpu-supply = <&vdd_cpu_lit_s0>;
++};
++
++&cpu_l1 {
++	cpu-supply = <&vdd_cpu_lit_s0>;
++};
++
++&cpu_l2 {
++	cpu-supply = <&vdd_cpu_lit_s0>;
++};
++
++&cpu_l3 {
++	cpu-supply = <&vdd_cpu_lit_s0>;
++};
++
++&gmac0 {
++	clock_in_out = "output";
++	phy-handle = <&rgmii_phy>;
++	phy-mode = "rgmii";
++	phy-supply = <&vcc_1v2_s3>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&gmac0_miim
++		     &gmac0_rx_bus2
++		     &gmac0_tx_bus2
++		     &gmac0_rgmii_clk
++		     &gmac0_rgmii_bus
++		     &eth0_pins
++		     &eth_reset>;
++	tx_delay = <0x10>;
++	rx_delay = <0x10>;
++	snps,reset-gpio = <&gpio4 RK_PC3 GPIO_ACTIVE_LOW>;
++	snps,reset-active-low;
++	snps,reset-delays-us = <0 10000 100000>;
++
++	status = "okay";
++};
++
++&gpio1 {
++	mdot2e-w-disable1-n-hog {
++		gpios = <RK_PB1 GPIO_ACTIVE_LOW>;
++		output-low;
++		line-name = "m.2 E-key W_DISABLE1#";
++		gpio-hog;
++	};
++};
++
++&gpio4 {
++	mdot2e-w-disable2-n-hog {
++		gpios = <RK_PC1 GPIO_ACTIVE_LOW>;
++		output-low;
++		line-name = "m.2 E-key W_DISABLE2#";
++		gpio-hog;
++	};
++};
++
++&i2c0 {
++	pinctrl-0 = <&i2c0m2_xfer>;
++	status = "okay";
++
++	fan@18 {
++		compatible = "ti,amc6821";
++		reg = <0x18>;
++	};
++
++	vdd_npu_s0: regulator@42 {
++		compatible = "rockchip,rk8602";
++		reg = <0x42>;
++		fcs,suspend-voltage-selector = <1>;
++		regulator-name = "vdd_npu_s0";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <550000>;
++		regulator-max-microvolt = <950000>;
++		regulator-ramp-delay = <2300>;
++		vin-supply = <&vcc5v0_sys>;
++
++		regulator-state-mem {
++			regulator-off-in-suspend;
++		};
++	};
++
++	vdd_cpu_big1_s0: regulator@43 {
++		compatible = "rockchip,rk8603", "rockchip,rk8602";
++		reg = <0x43>;
++		fcs,suspend-voltage-selector = <1>;
++		regulator-name = "vdd_cpu_big1_s0";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <550000>;
++		regulator-max-microvolt = <1050000>;
++		regulator-ramp-delay = <2300>;
++		vin-supply = <&vcc5v0_sys>;
++
++		regulator-state-mem {
++			regulator-off-in-suspend;
++		};
++	};
++
++	rtc_twi: rtc@6f {
++		compatible = "isil,isl1208";
++		reg = <0x6f>;
++	};
++};
++
++&i2c1 {
++	pinctrl-0 = <&i2c1m4_xfer>;
++};
++
++&i2c6 {
++	pinctrl-0 = <&i2c6m4_xfer>;
++};
++
++&i2c7 {
++	status = "okay";
++
++	/* SE050 Secure Element at 0x48; GPIO1_A4 for enable pin */
++
++	/* Also on 0x55 */
++	eeprom@54 {
++		compatible = "st,24c04", "atmel,24c04";
++		reg = <0x54>;
++		pagesize = <16>;
++		vcc-supply = <&vcc_3v3_s3>;
++	};
++};
++
++&i2c8 {
++	pinctrl-0 = <&i2c8m2_xfer>;
++	status = "okay";
++
++	vdd_cpu_big0_s0: regulator@42 {
++		compatible = "rockchip,rk8602";
++		reg = <0x42>;
++		fcs,suspend-voltage-selector = <1>;
++		regulator-name = "vdd_cpu_big0_s0";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <550000>;
++		regulator-max-microvolt = <1050000>;
++		regulator-ramp-delay = <2300>;
++		vin-supply = <&vcc5v0_sys>;
++
++		regulator-state-mem {
++			regulator-off-in-suspend;
++		};
++	};
++};
++
++&mdio0 {
++	rgmii_phy: ethernet-phy@6 {
++		/* KSZ9031 or KSZ9131 */
++		compatible = "ethernet-phy-ieee802.3-c22";
++		reg = <0x6>;
++		clocks = <&cru REFCLKO25M_ETH0_OUT>;
++	};
++};
++
++&pcie2x1l0 {
++	reset-gpios = <&gpio4 RK_PB3 GPIO_ACTIVE_HIGH>; /* WIFI_PERST0# */
++	vpcie3v3-supply = <&vcc3v3_mdot2>;
++	status = "okay";
++};
++
++&pinctrl {
++	emmc {
++		emmc_reset: emmc-reset {
++			rockchip,pins = <2 RK_PA3 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++	};
++
++	ethernet {
++		eth_reset: eth-reset {
++			rockchip,pins = <4 RK_PC3 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++	};
++
++	leds {
++		led1_pin: led1-pin {
++			rockchip,pins = <1 RK_PD4 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++	};
++};
++
++&saradc {
++	vref-supply = <&vcc_1v8_s0>;
++	status = "okay";
++};
++
++&sdhci {
++	bus-width = <8>;
++	cap-mmc-highspeed;
++	mmc-ddr-1_8v;
++	mmc-hs200-1_8v;
++	mmc-hs400-1_8v;
++	mmc-hs400-enhanced-strobe;
++	mmc-pwrseq = <&emmc_pwrseq>;
++	no-sdio;
++	no-sd;
++	non-removable;
++	pinctrl-names = "default";
++	pinctrl-0 = <&emmc_bus8 &emmc_cmd &emmc_clk &emmc_data_strobe>;
++	supports-cqe;
++	vmmc-supply = <&vcc_3v3_s3>;
++	vqmmc-supply = <&vcc_1v8_s3>;
++	status = "okay";
++};
++
++&sdmmc {
++	broken-cd;
++	bus-width = <4>;
++	cap-sd-highspeed;
++	disable-wp;
++	max-frequency = <150000000>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&sdmmc_bus4 &sdmmc_cmd &sdmmc_clk>;
++	sd-uhs-sdr12;
++	sd-uhs-sdr25;
++	sd-uhs-sdr50;
++	sd-uhs-ddr50;
++	sd-uhs-sdr104;
++	vmmc-supply = <&vcc_3v3_s3>;
++	vqmmc-supply = <&vccio_sd_s0>;
++	status = "okay";
++};
++
++&spi2 {
++	assigned-clocks = <&cru CLK_SPI2>;
++	assigned-clock-rates = <200000000>;
++	num-cs = <1>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&spi2m2_cs0 &spi2m2_pins>;
++	status = "okay";
++
++	pmic@0 {
++		compatible = "rockchip,rk806";
++		reg = <0x0>;
++		interrupt-parent = <&gpio0>;
++		interrupts = <7 IRQ_TYPE_LEVEL_LOW>;
++		gpio-controller;
++		#gpio-cells = <2>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&pmic_pins>, <&rk806_dvs1_null>,
++			    <&rk806_dvs2_null>, <&rk806_dvs3_null>;
++		spi-max-frequency = <1000000>;
++		system-power-controller;
++		vcc1-supply = <&vcc5v0_sys>;
++		vcc2-supply = <&vcc5v0_sys>;
++		vcc3-supply = <&vcc5v0_sys>;
++		vcc4-supply = <&vcc5v0_sys>;
++		vcc5-supply = <&vcc5v0_sys>;
++		vcc6-supply = <&vcc5v0_sys>;
++		vcc7-supply = <&vcc5v0_sys>;
++		vcc8-supply = <&vcc5v0_sys>;
++		vcc9-supply = <&vcc5v0_sys>;
++		vcc10-supply = <&vcc5v0_sys>;
++		vcc11-supply = <&vcc_2v0_pldo_s3>;
++		vcc12-supply = <&vcc5v0_sys>;
++		vcc13-supply = <&vcc_1v1_nldo_s3>;
++		vcc14-supply = <&vcc_1v1_nldo_s3>;
++		vcca-supply = <&vcc5v0_sys>;
++
++		rk806_dvs1_null: dvs1-null-pins {
++			pins = "gpio_pwrctrl2";
++			function = "pin_fun0";
++		};
++
++		rk806_dvs2_null: dvs2-null-pins {
++			pins = "gpio_pwrctrl2";
++			function = "pin_fun0";
++		};
++
++		rk806_dvs3_null: dvs3-null-pins {
++			pins = "gpio_pwrctrl3";
++			function = "pin_fun0";
++		};
++
++		regulators {
++			vdd_gpu_s0: dcdc-reg1 {
++				regulator-boot-on;
++				regulator-min-microvolt = <550000>;
++				regulator-max-microvolt = <950000>;
++				regulator-ramp-delay = <12500>;
++				regulator-name = "vdd_gpu_s0";
++				regulator-enable-ramp-delay = <400>;
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vdd_cpu_lit_s0: dcdc-reg2 {
++				regulator-name = "vdd_cpu_lit_s0";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <550000>;
++				regulator-max-microvolt = <950000>;
++				regulator-ramp-delay = <12500>;
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vdd_log_s0: dcdc-reg3 {
++				regulator-name = "vdd_log_s0";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <675000>;
++				regulator-max-microvolt = <750000>;
++				regulator-ramp-delay = <12500>;
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++					regulator-suspend-microvolt = <750000>;
++				};
++			};
++
++			vdd_vdenc_s0: dcdc-reg4 {
++				regulator-name = "vdd_vdenc_s0";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <550000>;
++				regulator-max-microvolt = <950000>;
++				regulator-ramp-delay = <12500>;
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vdd_ddr_s0: dcdc-reg5 {
++				regulator-name = "vdd_ddr_s0";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <675000>;
++				regulator-max-microvolt = <900000>;
++				regulator-ramp-delay = <12500>;
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++					regulator-suspend-microvolt = <850000>;
++				};
++			};
++
++			vdd2_ddr_s3: dcdc-reg6 {
++				regulator-name = "vdd2_ddr_s3";
++				regulator-always-on;
++				regulator-boot-on;
++
++				regulator-state-mem {
++					regulator-on-in-suspend;
++				};
++			};
++
++			vcc_2v0_pldo_s3: dcdc-reg7 {
++				regulator-name = "vdd_2v0_pldo_s3";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <2000000>;
++				regulator-max-microvolt = <2000000>;
++				regulator-ramp-delay = <12500>;
++
++				regulator-state-mem {
++					regulator-on-in-suspend;
++					regulator-suspend-microvolt = <2000000>;
++				};
++			};
++
++			vcc_3v3_s3: dcdc-reg8 {
++				regulator-name = "vcc_3v3_s3";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <3300000>;
++				regulator-max-microvolt = <3300000>;
++
++				regulator-state-mem {
++					regulator-on-in-suspend;
++					regulator-suspend-microvolt = <3300000>;
++				};
++			};
++
++			vddq_ddr_s0: dcdc-reg9 {
++				regulator-name = "vddq_ddr_s0";
++				regulator-always-on;
++				regulator-boot-on;
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vcc_1v8_s3: dcdc-reg10 {
++				regulator-name = "vcc_1v8_s3";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <1800000>;
++
++				regulator-state-mem {
++					regulator-on-in-suspend;
++					regulator-suspend-microvolt = <1800000>;
++				};
++			};
++
++			vcca_1v8_s0: pldo-reg1 {
++				regulator-name = "vcca_1v8_s0";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <1800000>;
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vcc_1v8_s0: pldo-reg2 {
++				regulator-name = "vcc_1v8_s0";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <1800000>;
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++					regulator-suspend-microvolt = <1800000>;
++				};
++			};
++
++			vdda_1v2_s0: pldo-reg3 {
++				regulator-name = "vdda_1v2_s0";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <1200000>;
++				regulator-max-microvolt = <1200000>;
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vcca_3v3_s0: pldo-reg4 {
++				regulator-name = "vcca_3v3_s0";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <3300000>;
++				regulator-max-microvolt = <3300000>;
++				regulator-ramp-delay = <12500>;
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vccio_sd_s0: pldo-reg5 {
++				regulator-name = "vccio_sd_s0";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <3300000>;
++				regulator-ramp-delay = <12500>;
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			pldo6_s3: pldo-reg6 {
++				regulator-name = "pldo6_s3";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <1800000>;
++
++				regulator-state-mem {
++					regulator-on-in-suspend;
++					regulator-suspend-microvolt = <1800000>;
++				};
++			};
++
++			vdd_0v75_s3: nldo-reg1 {
++				regulator-name = "vdd_0v75_s3";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <750000>;
++				regulator-max-microvolt = <750000>;
++
++				regulator-state-mem {
++					regulator-on-in-suspend;
++					regulator-suspend-microvolt = <750000>;
++				};
++			};
++
++			vdda_ddr_pll_s0: nldo-reg2 {
++				regulator-name = "vdda_ddr_pll_s0";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <850000>;
++				regulator-max-microvolt = <850000>;
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++					regulator-suspend-microvolt = <850000>;
++				};
++			};
++
++			vdda_0v75_s0: nldo-reg3 {
++				regulator-name = "vdda_0v75_s0";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <750000>;
++				regulator-max-microvolt = <750000>;
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vdda_0v85_s0: nldo-reg4 {
++				regulator-name = "vdda_0v85_s0";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <850000>;
++				regulator-max-microvolt = <850000>;
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vdd_0v75_s0: nldo-reg5 {
++				regulator-name = "vdd_0v75_s0";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <750000>;
++				regulator-max-microvolt = <750000>;
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++		};
++	};
++};
++
++&tsadc {
++	status = "okay";
++};
++
++&u2phy2 {
++	status = "okay";
++};
++
++&u2phy2_host {
++	phy-supply = <&vcc_5v0_usb_a>;
++	status = "okay";
++};
++
++&u2phy3 {
++	status = "okay";
++};
++
++&u2phy3_host {
++	status = "okay";
++};
++
++/* Mule-ATtiny debug UART; typically baudrate 9600 */
++&uart0 {
++	pinctrl-0 = <&uart0m0_xfer>;
++	status = "okay";
++};
++
++/* Main debug interface on P20 micro-USB B port and P21 header */
++&uart2 {
++	pinctrl-0 = <&uart2m0_xfer>;
++	status = "okay";
++};
++
++/* RS485 on P19 */
++&uart3 {
++	pinctrl-0 = <&uart3m2_xfer &uart3_rtsn>;
++	linux,rs485-enabled-at-boot-time;
++	status = "okay";
++};
++
++/* Mule-ATtiny UPDI flashing UART */
++&uart7 {
++	pinctrl-0 = <&uart7m0_xfer>;
++	status = "okay";
++};
++
++/* host0 on P10 USB-A */
++&usb_host0_ehci {
++	status = "okay";
++};
++
++/* host0 on P10 USB-A */
++&usb_host0_ohci {
++	status = "okay";
++};
++
++/* host1 on M.2 E-key */
++&usb_host1_ehci {
++	status = "okay";
++};
++
++/* host1 on M.2 E-key */
++&usb_host1_ohci {
++	status = "okay";
++};
+diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockchip/rk3588/Kconfig
+index a2193fbd41f..c6b79b6cd75 100644
+--- a/arch/arm/mach-rockchip/rk3588/Kconfig
++++ b/arch/arm/mach-rockchip/rk3588/Kconfig
+@@ -6,6 +6,33 @@ config TARGET_EVB_RK3588
+ 	help
+ 	  RK3588 EVB is a evaluation board for Rockchp RK3588.
  
- #include <common.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/bootrom.h>
- #include <asm/arch-rockchip/grf_rk3066.h>
- #include <asm/arch-rockchip/hardware.h>
-diff --git a/arch/arm/mach-rockchip/rk3188/rk3188.c b/arch/arm/mach-rockchip/rk3188/rk3188.c
-index c807221f33f..ffdcaa49a1e 100644
---- a/arch/arm/mach-rockchip/rk3188/rk3188.c
-+++ b/arch/arm/mach-rockchip/rk3188/rk3188.c
-@@ -10,7 +10,6 @@
- #include <log.h>
- #include <syscon.h>
- #include <asm/global_data.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/bootrom.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/grf_rk3188.h>
-diff --git a/arch/arm/mach-rockchip/rk322x/rk322x.c b/arch/arm/mach-rockchip/rk322x/rk322x.c
-index a304795fec6..712c0524266 100644
---- a/arch/arm/mach-rockchip/rk322x/rk322x.c
-+++ b/arch/arm/mach-rockchip/rk322x/rk322x.c
-@@ -3,7 +3,6 @@
-  * (C) Copyright 2019 Rockchip Electronics Co., Ltd
-  */
- #include <init.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/bootrom.h>
- #include <asm/arch-rockchip/grf_rk322x.h>
- #include <asm/arch-rockchip/hardware.h>
-diff --git a/arch/arm/mach-rockchip/rk3288/rk3288.c b/arch/arm/mach-rockchip/rk3288/rk3288.c
-index d9f782e342b..c77c56c1dab 100644
---- a/arch/arm/mach-rockchip/rk3288/rk3288.c
-+++ b/arch/arm/mach-rockchip/rk3288/rk3288.c
-@@ -11,7 +11,6 @@
- #include <malloc.h>
- #include <asm/armv7.h>
- #include <asm/global_data.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/bootrom.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/cpu_rk3288.h>
-diff --git a/arch/arm/mach-rockchip/rk3308/rk3308.c b/arch/arm/mach-rockchip/rk3308/rk3308.c
-index 6f121bf1304..27a748327e3 100644
---- a/arch/arm/mach-rockchip/rk3308/rk3308.c
-+++ b/arch/arm/mach-rockchip/rk3308/rk3308.c
-@@ -5,7 +5,6 @@
- #include <common.h>
- #include <init.h>
- #include <malloc.h>
--#include <asm/io.h>
- #include <asm/arch/grf_rk3308.h>
- #include <asm/arch-rockchip/bootrom.h>
- #include <asm/arch-rockchip/hardware.h>
-diff --git a/arch/arm/mach-rockchip/rk3328/rk3328.c b/arch/arm/mach-rockchip/rk3328/rk3328.c
-index b591d38fe41..b8e657e9bf4 100644
---- a/arch/arm/mach-rockchip/rk3328/rk3328.c
-+++ b/arch/arm/mach-rockchip/rk3328/rk3328.c
-@@ -10,7 +10,6 @@
- #include <asm/arch-rockchip/grf_rk3328.h>
- #include <asm/arch-rockchip/uart.h>
- #include <asm/armv8/mmu.h>
--#include <asm/io.h>
++config TARGET_JAGUAR_RK3588
++	bool "Theobroma Systems SBC-RK3588-AMR (Jaguar)"
++	select BOARD_LATE_INIT
++	help
++	  The SBC-RK3588-AMR is a Single Board Computer designed by
++	  Theobroma Systems for autonomous mobile robots.
++
++	  It provides the following features:
++	    * up to 32GB LDDR4
++	    * up to 128GB on-module eMMC (with 8-bit 1.8V interface)
++	    * SD card
++	    * Gigabit Ethernet
++	    * 1x USB-A 2.0 host
++	    * PCIe M.2 2230 Key M (Gen 2 1-lane) for WiFi+BT
++	    * PCIe M.2 2280 Key M (Gen 3 4-lane) for NVMe
++	    * CAN
++	    * RS485 UART
++	    * 2x USB Type-C 3.1 host/device
++	    * HDMI output
++	    * 2x camera connectors (MIPI-CSI 2-lane + I2C/SPI for IMUs + GPIOs)
++	    * EEPROM
++	    * Secure Element
++	    * ATtiny companion controller implementing:
++	      - low-power RTC functionality (ISL1208 emulation)
++	      - fan controller (AMC6821 emulation)
++	    * 80-pin Mezzanine connector
++
+ config TARGET_NANOPCT6_RK3588
+ 	bool "FriendlyElec NanoPC-T6 RK3588 board"
+ 	select BOARD_LATE_INIT
+@@ -174,5 +201,6 @@ source board/turing/turing-rk1-rk3588/Kconfig
+ source board/rockchip/evb_rk3588/Kconfig
+ source board/radxa/rock5a-rk3588s/Kconfig
+ source board/radxa/rock5b-rk3588/Kconfig
++source board/theobroma-systems/jaguar_rk3588/Kconfig
  
- #define CRU_BASE		0xFF440000
- #define GRF_BASE		0xFF100000
-diff --git a/arch/arm/mach-rockchip/rk3368/rk3368.c b/arch/arm/mach-rockchip/rk3368/rk3368.c
-index d009b8758e5..651ba109020 100644
---- a/arch/arm/mach-rockchip/rk3368/rk3368.c
-+++ b/arch/arm/mach-rockchip/rk3368/rk3368.c
-@@ -8,7 +8,6 @@
- #include <init.h>
- #include <syscon.h>
- #include <asm/armv8/mmu.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/bootrom.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/cru_rk3368.h>
-diff --git a/arch/arm/mach-rockchip/rk3399/rk3399.c b/arch/arm/mach-rockchip/rk3399/rk3399.c
-index a1aa0e3e8b5..7fa1d7c7b7a 100644
---- a/arch/arm/mach-rockchip/rk3399/rk3399.c
-+++ b/arch/arm/mach-rockchip/rk3399/rk3399.c
-@@ -11,7 +11,6 @@
- #include <spl_gpio.h>
- #include <syscon.h>
- #include <asm/armv8/mmu.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/bootrom.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/cru.h>
-diff --git a/arch/arm/mach-rockchip/rk3568/rk3568.c b/arch/arm/mach-rockchip/rk3568/rk3568.c
-index 69ef19cc85a..b30ea04f737 100644
---- a/arch/arm/mach-rockchip/rk3568/rk3568.c
-+++ b/arch/arm/mach-rockchip/rk3568/rk3568.c
-@@ -6,7 +6,6 @@
- #include <common.h>
- #include <dm.h>
- #include <asm/armv8/mmu.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/bootrom.h>
- #include <asm/arch-rockchip/grf_rk3568.h>
- #include <asm/arch-rockchip/hardware.h>
-diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
-index 7a190e6aa18..eb65dafe3a2 100644
---- a/arch/arm/mach-rockchip/rk3588/rk3588.c
-+++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
-@@ -7,7 +7,6 @@
- #include <common.h>
- #include <spl.h>
- #include <asm/armv8/mmu.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/bootrom.h>
- #include <asm/arch-rockchip/grf_rk3588.h>
- #include <asm/arch-rockchip/hardware.h>
-diff --git a/arch/arm/mach-rockchip/rv1126/rv1126.c b/arch/arm/mach-rockchip/rv1126/rv1126.c
-index b9b898756f7..8589c46f10a 100644
---- a/arch/arm/mach-rockchip/rv1126/rv1126.c
-+++ b/arch/arm/mach-rockchip/rv1126/rv1126.c
-@@ -5,7 +5,6 @@
-  */
+ endif
+diff --git a/board/theobroma-systems/jaguar_rk3588/Kconfig b/board/theobroma-systems/jaguar_rk3588/Kconfig
+new file mode 100644
+index 00000000000..0ff417af4dd
+--- /dev/null
++++ b/board/theobroma-systems/jaguar_rk3588/Kconfig
+@@ -0,0 +1,16 @@
++if TARGET_JAGUAR_RK3588
++
++config SYS_BOARD
++	default "jaguar_rk3588"
++
++config SYS_VENDOR
++	default "theobroma-systems"
++
++config SYS_CONFIG_NAME
++	default "jaguar_rk3588"
++
++config BOARD_SPECIFIC_OPTIONS # dummy
++	def_bool y
++	select ENV_IS_NOWHERE
++
++endif
+diff --git a/board/theobroma-systems/jaguar_rk3588/MAINTAINERS b/board/theobroma-systems/jaguar_rk3588/MAINTAINERS
+new file mode 100644
+index 00000000000..28fae4b479f
+--- /dev/null
++++ b/board/theobroma-systems/jaguar_rk3588/MAINTAINERS
+@@ -0,0 +1,13 @@
++JAGUAR-RK3588 (SBC-RK3588-AMR Single Board Computer)
++M:	Klaus Goger <klaus.goger@theobroma-systems.com>
++M:	Quentin Schulz <quentin.schulz@theobroma-systems.com>
++M:	Heiko Stuebner <heiko.stuebner@cherry.de>
++S:	Maintained
++F:	board/theobroma-systems/jaguar_rk3588
++F:	board/theobroma-systems/common
++F:	doc/board/theobroma-systems/
++F:	include/configs/jaguar_rk3588.h
++F:	arch/arm/dts/rk3588-jaguar*
++F:	configs/jaguar-rk3588_defconfig
++W:	https://theobroma-systems.com/product/jaguar-sbc-rk3588/
++T:	git git://git.theobroma-systems.com/jaguar-u-boot.git
+diff --git a/board/theobroma-systems/jaguar_rk3588/Makefile b/board/theobroma-systems/jaguar_rk3588/Makefile
+new file mode 100644
+index 00000000000..532aab01532
+--- /dev/null
++++ b/board/theobroma-systems/jaguar_rk3588/Makefile
+@@ -0,0 +1,10 @@
++#
++# Copyright (c) 2023 Theobroma Systems Design und Consulting GmbH
++#
++# SPDX-License-Identifier:	GPL-2.0+
++#
++
++obj-y += jaguar_rk3588.o
++ifneq ($(CONFIG_SPL_BUILD),y)
++obj-y	+= ../common/common.o
++endif
+diff --git a/board/theobroma-systems/jaguar_rk3588/jaguar_rk3588.c b/board/theobroma-systems/jaguar_rk3588/jaguar_rk3588.c
+new file mode 100644
+index 00000000000..a6d44f10db3
+--- /dev/null
++++ b/board/theobroma-systems/jaguar_rk3588/jaguar_rk3588.c
+@@ -0,0 +1,53 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * (C) Copyright 2023 Theobroma Systems Design und Consulting GmbH
++ */
++
++#include <phy.h>
++#include <eth_phy.h>
++
++#include <asm/types.h>
++#include <asm/arch-rockchip/cru_rk3588.h>
++#include <asm/arch-rockchip/hardware.h>
++#include <asm/arch-rockchip/ioc_rk3588.h>
++#include <asm-generic/u-boot.h>
++#include <dm/device.h>
++#include <dm/uclass-id.h>
++#include <linux/bitfield.h>
++
++#include "../common/common.h"
++
++#define GPIO2C3_SEL_MASK		GENMASK(15, 12)
++#define GPIO2C3_ETH0_REFCLKO_25M	FIELD_PREP(GPIO2C3_SEL_MASK, 1)
++
++#define REFCLKO25M_ETH0_OUT_SEL_MASK	BIT(15)
++#define REFCLKO25M_ETH0_OUT_SEL_CPLL	FIELD_PREP(REFCLKO25M_ETH0_OUT_SEL_MASK, 1)
++#define REFCLKO25M_ETH0_OUT_DIV_MASK	GENMASK(14, 8)
++#define REFCLKO25M_ETH0_OUT_DIV(x)	FIELD_PREP(REFCLKO25M_ETH0_OUT_DIV_MASK, (x) - 1)
++
++#define REFCLKO25M_ETH0_OUT_EN		BIT(4)
++
++void setup_eth0refclko(void)
++{
++	/* Configure and enable ETH0_REFCLKO_25MHz */
++	static struct rk3588_bus_ioc * const bus_ioc = (void *)BUS_IOC_BASE;
++	static struct rk3588_cru * const cru = (void *)CRU_BASE;
++
++	/* 1. Pinmux */
++	rk_clrsetreg(&bus_ioc->gpio2c_iomux_sel_l, GPIO2C3_SEL_MASK, GPIO2C3_ETH0_REFCLKO_25M);
++	/* 2. Parent clock selection + divider => CPLL (1.5GHz) / 60 => 25MHz */
++	rk_clrsetreg(&cru->clksel_con[15],
++		     REFCLKO25M_ETH0_OUT_SEL_MASK | REFCLKO25M_ETH0_OUT_DIV_MASK,
++		     REFCLKO25M_ETH0_OUT_SEL_CPLL | REFCLKO25M_ETH0_OUT_DIV(60));
++	/* 3. Enable clock */
++	rk_clrreg(&cru->clkgate_con[5], REFCLKO25M_ETH0_OUT_EN);
++}
++
++int rockchip_early_misc_init_r(void)
++{
++	setup_boottargets();
++
++	setup_eth0refclko();
++
++	return 0;
++}
+diff --git a/configs/jaguar-rk3588_defconfig b/configs/jaguar-rk3588_defconfig
+new file mode 100644
+index 00000000000..f55bfb1c82b
+--- /dev/null
++++ b/configs/jaguar-rk3588_defconfig
+@@ -0,0 +1,114 @@
++CONFIG_ARM=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_COUNTER_FREQUENCY=24000000
++CONFIG_ARCH_ROCKCHIP=y
++CONFIG_TEXT_BASE=0x00a00000
++CONFIG_SPL_GPIO=y
++CONFIG_SPL_LIBCOMMON_SUPPORT=y
++CONFIG_SPL_LIBGENERIC_SUPPORT=y
++CONFIG_NR_DRAM_BANKS=2
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc00000
++CONFIG_SF_DEFAULT_SPEED=24000000
++CONFIG_SF_DEFAULT_MODE=0x2000
++CONFIG_ENV_SIZE=0x1f000
++CONFIG_DEFAULT_DEVICE_TREE="rk3588-jaguar"
++CONFIG_ROCKCHIP_RK3588=y
++CONFIG_SPL_ROCKCHIP_COMMON_BOARD=y
++CONFIG_SPL_SERIAL=y
++CONFIG_SPL_STACK_R_ADDR=0x600000
++CONFIG_TARGET_JAGUAR_RK3588=y
++CONFIG_SPL_STACK=0x400000
++CONFIG_DEBUG_UART_BASE=0xfeb50000
++CONFIG_DEBUG_UART_CLOCK=24000000
++CONFIG_SYS_LOAD_ADDR=0xc00800
++CONFIG_DEBUG_UART=y
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_SPL_FIT_SIGNATURE=y
++CONFIG_SPL_LOAD_FIT=y
++# CONFIG_BOOTMETH_VBE is not set
++CONFIG_LEGACY_IMAGE_FORMAT=y
++CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-jaguar.dtb"
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_CYCLIC=y
++CONFIG_SPL_MAX_SIZE=0x40000
++CONFIG_SPL_PAD_TO=0x7f8000
++CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
++CONFIG_SPL_BSS_START_ADDR=0x4000000
++CONFIG_SPL_BSS_MAX_SIZE=0x4000
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
++# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
++CONFIG_SPL_STACK_R=y
++CONFIG_SPL_ATF=y
++# CONFIG_BOOTM_NETBSD is not set
++# CONFIG_BOOTM_PLAN9 is not set
++# CONFIG_BOOTM_RTEMS is not set
++# CONFIG_BOOTM_VXWORKS is not set
++# CONFIG_CMD_ELF is not set
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_I2C=y
++# CONFIG_CMD_LOADB is not set
++# CONFIG_CMD_LOADS is not set
++CONFIG_CMD_MMC=y
++# CONFIG_CMD_SF is not set
++CONFIG_CMD_USB=y
++# CONFIG_CMD_SETEXPR is not set
++# CONFIG_CMD_MII is not set
++# CONFIG_CMD_BLOCK_CACHE is not set
++# CONFIG_CMD_EFICONFIG is not set
++CONFIG_CMD_REGULATOR=y
++CONFIG_CMD_EROFS=y
++CONFIG_CMD_SQUASHFS=y
++# CONFIG_SPL_DOS_PARTITION is not set
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_OF_LIVE=y
++# CONFIG_OF_TAG_MIGRATE is not set
++CONFIG_OF_SPL_REMOVE_PROPS="interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
++CONFIG_ENV_OVERWRITE=y
++CONFIG_ENV_IS_IN_MMC=y
++CONFIG_SYS_RELOC_GD_ENV_ADDR=y
++CONFIG_SPL_DM_SEQ_ALIAS=y
++CONFIG_SPL_REGMAP=y
++CONFIG_SPL_SYSCON=y
++# CONFIG_SARADC_ROCKCHIP is not set
++CONFIG_SPL_CLK=y
++CONFIG_CLK_GPIO=y
++CONFIG_ROCKCHIP_GPIO=y
++CONFIG_SYS_I2C_ROCKCHIP=y
++CONFIG_MISC=y
++CONFIG_SUPPORT_EMMC_RPMB=y
++CONFIG_MMC_IO_VOLTAGE=y
++CONFIG_SPL_MMC_IO_VOLTAGE=y
++CONFIG_MMC_UHS_SUPPORT=y
++CONFIG_SPL_MMC_UHS_SUPPORT=y
++CONFIG_MMC_HS400_ES_SUPPORT=y
++CONFIG_SPL_MMC_HS400_ES_SUPPORT=y
++CONFIG_MMC_HS400_SUPPORT=y
++CONFIG_SPL_MMC_HS400_SUPPORT=y
++CONFIG_MMC_DW=y
++CONFIG_MMC_DW_ROCKCHIP=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_SDMA=y
++CONFIG_MMC_SDHCI_ROCKCHIP=y
++# CONFIG_SPI_FLASH is not set
++CONFIG_SF_DEFAULT_BUS=5
++CONFIG_PHY_MICREL=y
++CONFIG_PHY_MICREL_KSZ90X1=y
++CONFIG_DWC_ETH_QOS=y
++CONFIG_DWC_ETH_QOS_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_INNO_USB2=y
++CONFIG_SPL_PINCTRL=y
++CONFIG_SPL_RAM=y
++CONFIG_SCSI=y
++CONFIG_DEBUG_UART_SHIFT=2
++CONFIG_SYS_NS16550_MEM32=y
++CONFIG_SYSRESET=y
++CONFIG_USB=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_EHCI_GENERIC=y
++CONFIG_USB_OHCI_HCD=y
++CONFIG_USB_OHCI_GENERIC=y
++CONFIG_ERRNO_STR=y
+diff --git a/doc/board/index.rst b/doc/board/index.rst
+index 62357c99388..f0a11f84ccc 100644
+--- a/doc/board/index.rst
++++ b/doc/board/index.rst
+@@ -53,6 +53,7 @@ Board-specific doc
+    ste/index
+    tbs/index
+    thead/index
++   theobroma-systems/index
+    ti/index
+    toradex/index
+    variscite/index
+diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+index e23ca4231cc..1d5451183be 100644
+--- a/doc/board/rockchip/rockchip.rst
++++ b/doc/board/rockchip/rockchip.rst
+@@ -120,6 +120,7 @@ List of mainline supported Rockchip boards:
+      - Turing Machines RK1 (turing-rk1-rk3588)
+      - Radxa ROCK 5A (rock5a-rk3588s)
+      - Radxa ROCK 5B (rock5b-rk3588)
++     - Theobroma Systems RK3588-SBC Jaguar (jaguar-rk3588)
+      - Xunlong Orange Pi 5 (orangepi-5-rk3588s)
+      - Xunlong Orange Pi 5 Plus (orangepi-5-plus-rk3588)
  
- #include <common.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/bootrom.h>
- #include <asm/arch-rockchip/hardware.h>
- #include <asm/arch-rockchip/grf_rv1126.h>
-diff --git a/board/elgin/elgin_rv1108/elgin_rv1108.c b/board/elgin/elgin_rv1108/elgin_rv1108.c
-index eb7a322d847..10398e7f712 100644
---- a/board/elgin/elgin_rv1108/elgin_rv1108.c
-+++ b/board/elgin/elgin_rv1108/elgin_rv1108.c
-@@ -8,7 +8,6 @@
- #include <init.h>
- #include <syscon.h>
- #include <asm/global_data.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/grf_rv1108.h>
- #include <asm/arch-rockchip/hardware.h>
-diff --git a/board/firefly/firefly-rk3308/roc_cc_rk3308.c b/board/firefly/firefly-rk3308/roc_cc_rk3308.c
-index bdf3cc03dc5..99a52a77116 100644
---- a/board/firefly/firefly-rk3308/roc_cc_rk3308.c
-+++ b/board/firefly/firefly-rk3308/roc_cc_rk3308.c
-@@ -5,7 +5,6 @@
- 
- #include <common.h>
- #include <adc.h>
--#include <asm/io.h>
- #include <asm/arch/grf_rk3308.h>
- #include <asm/arch-rockchip/hardware.h>
- #include <linux/bitops.h>
-diff --git a/board/google/gru/gru.c b/board/google/gru/gru.c
-index ecbf702b035..9cb3a525204 100644
---- a/board/google/gru/gru.c
-+++ b/board/google/gru/gru.c
-@@ -7,7 +7,6 @@
- #include <dm.h>
- #include <init.h>
- #include <syscon.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/grf_rk3399.h>
- #include <asm/arch-rockchip/hardware.h>
-diff --git a/board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c b/board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c
-index 2408a367305..5e758ea6cd9 100644
---- a/board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c
-+++ b/board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c
-@@ -7,7 +7,6 @@
- #include <common.h>
- #include <dm.h>
- #include <syscon.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/grf_rk3399.h>
- #include <asm/arch-rockchip/hardware.h>
-diff --git a/board/pine64/pinephone-pro-rk3399/pinephone-pro-rk3399.c b/board/pine64/pinephone-pro-rk3399/pinephone-pro-rk3399.c
-index de75ee329d8..c9b0d5a061d 100644
---- a/board/pine64/pinephone-pro-rk3399/pinephone-pro-rk3399.c
-+++ b/board/pine64/pinephone-pro-rk3399/pinephone-pro-rk3399.c
-@@ -8,7 +8,6 @@
- #include <dm.h>
- #include <init.h>
- #include <syscon.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/grf_rk3399.h>
- #include <asm/arch-rockchip/hardware.h>
-diff --git a/board/pine64/rockpro64_rk3399/rockpro64-rk3399.c b/board/pine64/rockpro64_rk3399/rockpro64-rk3399.c
-index d0a694ead1d..fd78ad60d14 100644
---- a/board/pine64/rockpro64_rk3399/rockpro64-rk3399.c
-+++ b/board/pine64/rockpro64_rk3399/rockpro64-rk3399.c
-@@ -7,7 +7,6 @@
- #include <dm.h>
- #include <init.h>
- #include <syscon.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/grf_rk3399.h>
- #include <asm/arch-rockchip/hardware.h>
-diff --git a/board/rockchip/evb_rv1108/evb_rv1108.c b/board/rockchip/evb_rv1108/evb_rv1108.c
-index e6ac598648d..0d7a486bed7 100644
---- a/board/rockchip/evb_rv1108/evb_rv1108.c
-+++ b/board/rockchip/evb_rv1108/evb_rv1108.c
-@@ -8,7 +8,6 @@
- #include <init.h>
- #include <syscon.h>
- #include <asm/global_data.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/grf_rv1108.h>
- #include <asm/arch-rockchip/hardware.h>
-diff --git a/board/theobroma-systems/puma_rk3399/puma-rk3399.c b/board/theobroma-systems/puma_rk3399/puma-rk3399.c
-index 98a818b135d..8b998ef4556 100644
---- a/board/theobroma-systems/puma_rk3399/puma-rk3399.c
-+++ b/board/theobroma-systems/puma_rk3399/puma-rk3399.c
-@@ -6,7 +6,6 @@
- #include <dm.h>
- #include <syscon.h>
- #include <dm/pinctrl.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/hardware.h>
- #include <asm/arch-rockchip/grf_rk3399.h>
-diff --git a/board/vamrs/rock960_rk3399/rock960-rk3399.c b/board/vamrs/rock960_rk3399/rock960-rk3399.c
-index a7fc38d42f8..876be8ed9e1 100644
---- a/board/vamrs/rock960_rk3399/rock960-rk3399.c
-+++ b/board/vamrs/rock960_rk3399/rock960-rk3399.c
-@@ -5,7 +5,6 @@
- 
- #include <common.h>
- #include <syscon.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/grf_rk3399.h>
- #include <asm/arch-rockchip/hardware.h>
-diff --git a/drivers/clk/rockchip/clk_pll.c b/drivers/clk/rockchip/clk_pll.c
-index 1bb31b3313b..66f8bb16695 100644
---- a/drivers/clk/rockchip/clk_pll.c
-+++ b/drivers/clk/rockchip/clk_pll.c
-@@ -8,7 +8,6 @@
- #include <dm.h>
- #include <errno.h>
- #include <log.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/hardware.h>
- #include <div64.h>
-diff --git a/drivers/clk/rockchip/clk_px30.c b/drivers/clk/rockchip/clk_px30.c
-index 93b76538509..2875c152b20 100644
---- a/drivers/clk/rockchip/clk_px30.c
-+++ b/drivers/clk/rockchip/clk_px30.c
-@@ -15,7 +15,6 @@
- #include <asm/arch-rockchip/cru_px30.h>
- #include <asm/arch-rockchip/hardware.h>
- #include <asm/global_data.h>
--#include <asm/io.h>
- #include <dm/device-internal.h>
- #include <dm/lists.h>
- #include <dt-bindings/clock/px30-cru.h>
-diff --git a/drivers/clk/rockchip/clk_rk3036.c b/drivers/clk/rockchip/clk_rk3036.c
-index 6bc6d41ad61..6238b14c29e 100644
---- a/drivers/clk/rockchip/clk_rk3036.c
-+++ b/drivers/clk/rockchip/clk_rk3036.c
-@@ -10,7 +10,6 @@
- #include <log.h>
- #include <malloc.h>
- #include <syscon.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/cru_rk3036.h>
- #include <asm/arch-rockchip/hardware.h>
-diff --git a/drivers/clk/rockchip/clk_rk3066.c b/drivers/clk/rockchip/clk_rk3066.c
-index 2c12f6e0441..f83335df6db 100644
---- a/drivers/clk/rockchip/clk_rk3066.c
-+++ b/drivers/clk/rockchip/clk_rk3066.c
-@@ -14,7 +14,6 @@
- #include <malloc.h>
- #include <mapmem.h>
- #include <syscon.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/cru_rk3066.h>
- #include <asm/arch-rockchip/grf_rk3066.h>
-diff --git a/drivers/clk/rockchip/clk_rk3128.c b/drivers/clk/rockchip/clk_rk3128.c
-index 13e176cdad1..182754e7052 100644
---- a/drivers/clk/rockchip/clk_rk3128.c
-+++ b/drivers/clk/rockchip/clk_rk3128.c
-@@ -10,7 +10,6 @@
- #include <log.h>
- #include <malloc.h>
- #include <syscon.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/cru_rk3128.h>
- #include <asm/arch-rockchip/hardware.h>
-diff --git a/drivers/clk/rockchip/clk_rk3188.c b/drivers/clk/rockchip/clk_rk3188.c
-index ebdd1b3f99a..f98b46a0f73 100644
---- a/drivers/clk/rockchip/clk_rk3188.c
-+++ b/drivers/clk/rockchip/clk_rk3188.c
-@@ -13,7 +13,6 @@
- #include <malloc.h>
- #include <mapmem.h>
- #include <syscon.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/cru_rk3188.h>
- #include <asm/arch-rockchip/grf_rk3188.h>
-diff --git a/drivers/clk/rockchip/clk_rk322x.c b/drivers/clk/rockchip/clk_rk322x.c
-index 28cdba75758..9371c4f63a4 100644
---- a/drivers/clk/rockchip/clk_rk322x.c
-+++ b/drivers/clk/rockchip/clk_rk322x.c
-@@ -10,7 +10,6 @@
- #include <log.h>
- #include <malloc.h>
- #include <syscon.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/cru_rk322x.h>
- #include <asm/arch-rockchip/hardware.h>
-diff --git a/drivers/clk/rockchip/clk_rk3288.c b/drivers/clk/rockchip/clk_rk3288.c
-index e24c32c0a2a..0b7eefad15f 100644
---- a/drivers/clk/rockchip/clk_rk3288.c
-+++ b/drivers/clk/rockchip/clk_rk3288.c
-@@ -15,7 +15,6 @@
- #include <mapmem.h>
- #include <syscon.h>
- #include <asm/global_data.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/cru.h>
- #include <asm/arch-rockchip/grf_rk3288.h>
-diff --git a/drivers/clk/rockchip/clk_rk3308.c b/drivers/clk/rockchip/clk_rk3308.c
-index d0a3f654466..7755b016111 100644
---- a/drivers/clk/rockchip/clk_rk3308.c
-+++ b/drivers/clk/rockchip/clk_rk3308.c
-@@ -12,7 +12,6 @@
- #include <malloc.h>
- #include <syscon.h>
- #include <asm/global_data.h>
--#include <asm/io.h>
- #include <asm/arch/cru_rk3308.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/hardware.h>
-diff --git a/drivers/clk/rockchip/clk_rk3328.c b/drivers/clk/rockchip/clk_rk3328.c
-index ef97381f0ed..cfec1d974ac 100644
---- a/drivers/clk/rockchip/clk_rk3328.c
-+++ b/drivers/clk/rockchip/clk_rk3328.c
-@@ -15,7 +15,6 @@
- #include <asm/arch-rockchip/cru_rk3328.h>
- #include <asm/arch-rockchip/hardware.h>
- #include <asm/arch-rockchip/grf_rk3328.h>
--#include <asm/io.h>
- #include <dm/device-internal.h>
- #include <dm/lists.h>
- #include <dt-bindings/clock/rk3328-cru.h>
-diff --git a/drivers/clk/rockchip/clk_rk3368.c b/drivers/clk/rockchip/clk_rk3368.c
-index 3406ff592e1..1c5dfaa3800 100644
---- a/drivers/clk/rockchip/clk_rk3368.c
-+++ b/drivers/clk/rockchip/clk_rk3368.c
-@@ -18,7 +18,6 @@
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/cru_rk3368.h>
- #include <asm/arch-rockchip/hardware.h>
--#include <asm/io.h>
- #include <dm/device-internal.h>
- #include <dm/lists.h>
- #include <dt-bindings/clock/rk3368-cru.h>
-diff --git a/drivers/clk/rockchip/clk_rk3399.c b/drivers/clk/rockchip/clk_rk3399.c
-index c37e8a53a26..80f65a237e8 100644
---- a/drivers/clk/rockchip/clk_rk3399.c
-+++ b/drivers/clk/rockchip/clk_rk3399.c
-@@ -14,7 +14,6 @@
- #include <mapmem.h>
- #include <syscon.h>
- #include <bitfield.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/cru.h>
- #include <asm/arch-rockchip/hardware.h>
-diff --git a/drivers/clk/rockchip/clk_rk3568.c b/drivers/clk/rockchip/clk_rk3568.c
-index 68f5bbbb9e5..57ef27dda89 100644
---- a/drivers/clk/rockchip/clk_rk3568.c
-+++ b/drivers/clk/rockchip/clk_rk3568.c
-@@ -13,7 +13,6 @@
- #include <asm/arch-rockchip/cru_rk3568.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/hardware.h>
--#include <asm/io.h>
- #include <dm/device-internal.h>
- #include <dm/lists.h>
- #include <dt-bindings/clock/rk3568-cru.h>
-diff --git a/drivers/clk/rockchip/clk_rk3588.c b/drivers/clk/rockchip/clk_rk3588.c
-index a995dd5591d..8f33843179b 100644
---- a/drivers/clk/rockchip/clk_rk3588.c
-+++ b/drivers/clk/rockchip/clk_rk3588.c
-@@ -14,7 +14,6 @@
- #include <asm/arch-rockchip/cru_rk3588.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/hardware.h>
--#include <asm/io.h>
- #include <dm/device-internal.h>
- #include <dm/lists.h>
- #include <dt-bindings/clock/rockchip,rk3588-cru.h>
-diff --git a/drivers/clk/rockchip/clk_rv1108.c b/drivers/clk/rockchip/clk_rv1108.c
-index b0c889ae156..fc442f7eebe 100644
---- a/drivers/clk/rockchip/clk_rv1108.c
-+++ b/drivers/clk/rockchip/clk_rv1108.c
-@@ -13,7 +13,6 @@
- #include <malloc.h>
- #include <syscon.h>
- #include <asm/global_data.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/cru_rv1108.h>
- #include <asm/arch-rockchip/hardware.h>
-diff --git a/drivers/clk/rockchip/clk_rv1126.c b/drivers/clk/rockchip/clk_rv1126.c
-index 580c0b1b0cf..cfdfcbdb0f4 100644
---- a/drivers/clk/rockchip/clk_rv1126.c
-+++ b/drivers/clk/rockchip/clk_rv1126.c
-@@ -16,7 +16,6 @@
- #include <asm/arch-rockchip/grf_rv1126.h>
- #include <asm/arch-rockchip/hardware.h>
- #include <dm/device-internal.h>
--#include <asm/io.h>
- #include <dm/lists.h>
- #include <dt-bindings/clock/rockchip,rv1126-cru.h>
- 
-diff --git a/drivers/gpio/rk_gpio.c b/drivers/gpio/rk_gpio.c
-index 4a6ae554bf7..c5e096bb1ad 100644
---- a/drivers/gpio/rk_gpio.c
-+++ b/drivers/gpio/rk_gpio.c
-@@ -11,7 +11,6 @@
- #include <syscon.h>
- #include <linux/errno.h>
- #include <asm/gpio.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/hardware.h>
- #include <asm/arch-rockchip/gpio.h>
-diff --git a/drivers/net/gmac_rockchip.c b/drivers/net/gmac_rockchip.c
-index 04008d2b198..c1bae3f68bd 100644
---- a/drivers/net/gmac_rockchip.c
-+++ b/drivers/net/gmac_rockchip.c
-@@ -13,7 +13,6 @@
- #include <phy.h>
- #include <syscon.h>
- #include <asm/global_data.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/periph.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/hardware.h>
-diff --git a/drivers/ram/rockchip/dmc-rk3368.c b/drivers/ram/rockchip/dmc-rk3368.c
-index 859fc47030f..5279bf0a154 100644
---- a/drivers/ram/rockchip/dmc-rk3368.c
-+++ b/drivers/ram/rockchip/dmc-rk3368.c
-@@ -13,7 +13,6 @@
- #include <ram.h>
- #include <regmap.h>
- #include <syscon.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/cru_rk3368.h>
- #include <asm/arch-rockchip/grf_rk3368.h>
-diff --git a/drivers/ram/rockchip/sdram_px30.c b/drivers/ram/rockchip/sdram_px30.c
-index 2728d93be32..21498e89570 100644
---- a/drivers/ram/rockchip/sdram_px30.c
-+++ b/drivers/ram/rockchip/sdram_px30.c
-@@ -10,7 +10,6 @@
- #include <log.h>
- #include <ram.h>
- #include <syscon.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/cru_px30.h>
- #include <asm/arch-rockchip/grf_px30.h>
-diff --git a/drivers/ram/rockchip/sdram_rk3066.c b/drivers/ram/rockchip/sdram_rk3066.c
-index 39c0be56a6e..562cf544c90 100644
---- a/drivers/ram/rockchip/sdram_rk3066.c
-+++ b/drivers/ram/rockchip/sdram_rk3066.c
-@@ -17,7 +17,6 @@
- #include <ram.h>
- #include <regmap.h>
- #include <syscon.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/cru_rk3066.h>
- #include <asm/arch-rockchip/ddr_rk3188.h>
-diff --git a/drivers/ram/rockchip/sdram_rk3188.c b/drivers/ram/rockchip/sdram_rk3188.c
-index d23d4231798..e1b28c6e593 100644
---- a/drivers/ram/rockchip/sdram_rk3188.c
-+++ b/drivers/ram/rockchip/sdram_rk3188.c
-@@ -17,7 +17,6 @@
- #include <ram.h>
- #include <regmap.h>
- #include <syscon.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/cru_rk3188.h>
- #include <asm/arch-rockchip/ddr_rk3188.h>
-diff --git a/drivers/ram/rockchip/sdram_rk322x.c b/drivers/ram/rockchip/sdram_rk322x.c
-index 892766a8b43..5fc23c11193 100644
---- a/drivers/ram/rockchip/sdram_rk322x.c
-+++ b/drivers/ram/rockchip/sdram_rk322x.c
-@@ -12,7 +12,6 @@
- #include <regmap.h>
- #include <syscon.h>
- #include <asm/global_data.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/cru_rk322x.h>
- #include <asm/arch-rockchip/grf_rk322x.h>
-diff --git a/drivers/ram/rockchip/sdram_rk3288.c b/drivers/ram/rockchip/sdram_rk3288.c
-index 3177051dd12..242d564a7d2 100644
---- a/drivers/ram/rockchip/sdram_rk3288.c
-+++ b/drivers/ram/rockchip/sdram_rk3288.c
-@@ -17,7 +17,6 @@
- #include <ram.h>
- #include <regmap.h>
- #include <syscon.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/cru.h>
- #include <asm/arch-rockchip/ddr_rk3288.h>
-diff --git a/drivers/ram/rockchip/sdram_rk3399.c b/drivers/ram/rockchip/sdram_rk3399.c
-index 2bf8d48d25a..02cc4a38cf0 100644
---- a/drivers/ram/rockchip/sdram_rk3399.c
-+++ b/drivers/ram/rockchip/sdram_rk3399.c
-@@ -14,7 +14,6 @@
- #include <ram.h>
- #include <regmap.h>
- #include <syscon.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/cru.h>
- #include <asm/arch-rockchip/grf_rk3399.h>
-diff --git a/drivers/ram/rockchip/sdram_rv1126.c b/drivers/ram/rockchip/sdram_rv1126.c
-index 0a78e18c732..849e15a9193 100644
---- a/drivers/ram/rockchip/sdram_rv1126.c
-+++ b/drivers/ram/rockchip/sdram_rv1126.c
-@@ -9,7 +9,6 @@
- #include <dm.h>
- #include <ram.h>
- #include <syscon.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/hardware.h>
- #include <asm/arch-rockchip/cru_rv1126.h>
-diff --git a/drivers/rng/rockchip_rng.c b/drivers/rng/rockchip_rng.c
-index 705b424cf3d..9dec7e45dde 100644
---- a/drivers/rng/rockchip_rng.c
-+++ b/drivers/rng/rockchip_rng.c
-@@ -3,7 +3,6 @@
-  * Copyright (c) 2020 Fuzhou Rockchip Electronics Co., Ltd
-  */
- #include <asm/arch-rockchip/hardware.h>
--#include <asm/io.h>
- #include <common.h>
- #include <dm.h>
- #include <linux/bitops.h>
-diff --git a/drivers/sysreset/sysreset_rockchip.c b/drivers/sysreset/sysreset_rockchip.c
-index 0fc6b683f2b..f353f9b4c79 100644
---- a/drivers/sysreset/sysreset_rockchip.c
-+++ b/drivers/sysreset/sysreset_rockchip.c
-@@ -7,7 +7,6 @@
- #include <dm.h>
- #include <errno.h>
- #include <sysreset.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/cru_rk3328.h>
- #include <asm/arch-rockchip/hardware.h>
-diff --git a/drivers/video/rockchip/dw_mipi_dsi_rockchip.c b/drivers/video/rockchip/dw_mipi_dsi_rockchip.c
-index 5e75b6ec68c..fb784636e87 100644
---- a/drivers/video/rockchip/dw_mipi_dsi_rockchip.c
-+++ b/drivers/video/rockchip/dw_mipi_dsi_rockchip.c
-@@ -27,7 +27,6 @@
- #include <common.h>
- #include <log.h>
- #include <video.h>
--#include <asm/io.h>
- #include <dm/device-internal.h>
- #include <linux/bitops.h>
- #include <linux/time.h>
-diff --git a/drivers/video/rockchip/rk3288_hdmi.c b/drivers/video/rockchip/rk3288_hdmi.c
-index 8bedee55ad4..efa87540340 100644
---- a/drivers/video/rockchip/rk3288_hdmi.c
-+++ b/drivers/video/rockchip/rk3288_hdmi.c
-@@ -14,7 +14,6 @@
- #include <regmap.h>
- #include <syscon.h>
- #include <asm/gpio.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/hardware.h>
- #include <asm/arch-rockchip/grf_rk3288.h>
-diff --git a/drivers/video/rockchip/rk3288_mipi.c b/drivers/video/rockchip/rk3288_mipi.c
-index c0dffa3cba2..9d42119c826 100644
---- a/drivers/video/rockchip/rk3288_mipi.c
-+++ b/drivers/video/rockchip/rk3288_mipi.c
-@@ -14,7 +14,6 @@
- #include "rk_mipi.h"
- #include <syscon.h>
- #include <asm/gpio.h>
--#include <asm/io.h>
- #include <dm/uclass-internal.h>
- #include <linux/err.h>
- #include <linux/kernel.h>
-diff --git a/drivers/video/rockchip/rk3288_vop.c b/drivers/video/rockchip/rk3288_vop.c
-index 44f32bb5fa2..a4683852ea0 100644
---- a/drivers/video/rockchip/rk3288_vop.c
-+++ b/drivers/video/rockchip/rk3288_vop.c
-@@ -12,7 +12,6 @@
- #include <syscon.h>
- #include <video.h>
- #include <asm/global_data.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/grf_rk3288.h>
- #include <asm/arch-rockchip/hardware.h>
-diff --git a/drivers/video/rockchip/rk3399_hdmi.c b/drivers/video/rockchip/rk3399_hdmi.c
-index 3041360c6ed..5f3f5d26886 100644
---- a/drivers/video/rockchip/rk3399_hdmi.c
-+++ b/drivers/video/rockchip/rk3399_hdmi.c
-@@ -12,7 +12,6 @@
- #include <regmap.h>
- #include <syscon.h>
- #include <asm/gpio.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/hardware.h>
- #include <asm/arch-rockchip/grf_rk3399.h>
-diff --git a/drivers/video/rockchip/rk3399_mipi.c b/drivers/video/rockchip/rk3399_mipi.c
-index 7fc79ba9045..b62d8086674 100644
---- a/drivers/video/rockchip/rk3399_mipi.c
-+++ b/drivers/video/rockchip/rk3399_mipi.c
-@@ -14,7 +14,6 @@
- #include "rk_mipi.h"
- #include <syscon.h>
- #include <asm/gpio.h>
--#include <asm/io.h>
- #include <dm/uclass-internal.h>
- #include <linux/err.h>
- #include <linux/kernel.h>
-diff --git a/drivers/video/rockchip/rk3399_vop.c b/drivers/video/rockchip/rk3399_vop.c
-index a34b491058f..cb589c7537e 100644
---- a/drivers/video/rockchip/rk3399_vop.c
-+++ b/drivers/video/rockchip/rk3399_vop.c
-@@ -13,7 +13,6 @@
- #include <video.h>
- #include <asm/arch-rockchip/hardware.h>
- #include <asm/global_data.h>
--#include <asm/io.h>
- #include "rk_vop.h"
- 
- DECLARE_GLOBAL_DATA_PTR;
-diff --git a/drivers/video/rockchip/rk_edp.c b/drivers/video/rockchip/rk_edp.c
-index dbd70ad583a..5f68a610e4a 100644
---- a/drivers/video/rockchip/rk_edp.c
-+++ b/drivers/video/rockchip/rk_edp.c
-@@ -17,7 +17,6 @@
- #include <reset.h>
- #include <syscon.h>
- #include <asm/gpio.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/hardware.h>
- #include <asm/arch-rockchip/edp_rk3288.h>
-diff --git a/drivers/video/rockchip/rk_hdmi.c b/drivers/video/rockchip/rk_hdmi.c
-index 8dcd4d59645..044a29ee47a 100644
---- a/drivers/video/rockchip/rk_hdmi.c
-+++ b/drivers/video/rockchip/rk_hdmi.c
-@@ -15,7 +15,6 @@
- #include <regmap.h>
- #include <syscon.h>
- #include <asm/gpio.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/hardware.h>
- #include "rk_hdmi.h"
-diff --git a/drivers/video/rockchip/rk_lvds.c b/drivers/video/rockchip/rk_lvds.c
-index 9cf3e3ca768..d0a015e31ee 100644
---- a/drivers/video/rockchip/rk_lvds.c
-+++ b/drivers/video/rockchip/rk_lvds.c
-@@ -13,7 +13,6 @@
- #include <syscon.h>
- #include <asm/global_data.h>
- #include <asm/gpio.h>
--#include <asm/io.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/grf_rk3288.h>
- #include <asm/arch-rockchip/hardware.h>
+diff --git a/doc/board/theobroma-systems/index.rst b/doc/board/theobroma-systems/index.rst
+new file mode 100644
+index 00000000000..945f7a2f976
+--- /dev/null
++++ b/doc/board/theobroma-systems/index.rst
+@@ -0,0 +1,9 @@
++.. SPDX-License-Identifier: GPL-2.0+
++
++Theobroma Systems
++=================
++
++.. toctree::
++   :maxdepth: 2
++
++   jaguar_rk3588
+diff --git a/doc/board/theobroma-systems/jaguar_rk3588.rst b/doc/board/theobroma-systems/jaguar_rk3588.rst
+new file mode 100644
+index 00000000000..db15f945d3b
+--- /dev/null
++++ b/doc/board/theobroma-systems/jaguar_rk3588.rst
+@@ -0,0 +1,100 @@
++.. SPDX-License-Identifier: GPL-2.0+
++
++SBC-RK3588-AMR Jaguar
++=====================
++
++The SBC-RK3588-AMR is a Single Board Computer designed by
++Theobroma Systems for autonomous mobile robots.
++
++It provides the following features:
++
++ * up to 32GB LDDR4
++ * up to 128GB on-module eMMC (with 8-bit 1.8V interface)
++ * SD card
++ * Gigabit Ethernet
++ * 1x USB-A 2.0 host
++ * PCIe M.2 2230 Key M (Gen 2 1-lane) for WiFi+BT
++ * PCIe M.2 2280 Key M (Gen 3 4-lane) for NVMe
++ * CAN
++ * RS485 UART
++ * 2x USB Type-C 3.1 host/device
++ * HDMI output
++ * 2x camera connectors (MIPI-CSI 2-lane I2C/SPI for IMUs GPIOs)
++ * EEPROM
++ * Secure Element
++ * ATtiny companion controller implementing:
++
++   - low-power RTC functionality (ISL1208 emulation)
++   - fan controller (AMC6821 emulation)
++
++ * 80-pin Mezzanine connector
++
++Here is the step-by-step to boot to U-Boot on SBC-RK3588-AMR Jaguar from Theobroma
++Systems.
++
++Get the TF-A and DDR init (TPL) binaries
++----------------------------------------
++
++.. prompt:: bash
++
++   git clone https://github.com/rockchip-linux/rkbin
++   cd rkbin
++   export RKBIN=$(pwd)
++   export BL31=$RKBIN/bin/rk35/rk3588_bl31_v1.38.elf
++   export ROCKCHIP_TPL=$RKBIN/bin/rk35/rk3588_ddr_lp4_2112MHz_lp5_2736MHz_v1.11.bin
++   sed -i 's/^uart baudrate=.*$/uart baudrate=115200/' tools/ddrbin_param.txt
++   ./tools/ddrbin_tool tools/ddrbin_param.txt "$ROCKCHIP_TPL"
++   ./tools/boot_merger RKBOOT/RK3588MINIALL.ini
++   export RKDB=$RKBIN/rk3588_spl_loader_v1.11.112.bin
++
++This will setup all required external dependencies for compiling U-Boot. This will
++be updated in the future once upstream Trusted-Firmware-A supports RK3588 or U-Boot
++gains support for open-source DRAM initialization in TPL.
++
++Build U-Boot
++------------
++
++.. prompt:: bash
++
++   cd ../u-boot
++   make CROSS_COMPILE=aarch64-linux-gnu- jaguar-rk3588_defconfig all
++
++This will build ``u-boot-rockchip.bin`` which can be written to an MMC device
++(eMMC or SD card).
++
++Flash the image
++---------------
++
++Copy ``u-boot-rockchip.bin`` to offset 32k for SD/eMMC.
++
++SD-Card
++~~~~~~~
++
++.. prompt:: bash
++
++   dd if=u-boot-rockchip.bin of=/dev/sdX seek=64
++
++.. note::
++
++   Replace ``/dev/sdX`` to match your SD card kernel device.
++
++eMMC
++~~~~
++
++``rkdeveloptool`` allows to flash the on-board eMMC via the USB OTG interface
++with help of the Rockchip loader binary.
++
++To enter the USB flashing mode, remove any SD card, insert a USB-C cable in the
++``DOWNLOAD`` USB Type-C connector (P11) and then power cycle or reset the board
++while pressing the ``BIOS`` (SW2) button. A new USB device should have appeared
++on your PC (check with ``lsusb -d 2207:350b``).
++
++To flash U-Boot on the eMMC with ``rkdeveloptool``:
++
++.. prompt:: bash
++
++   git clone https://github.com/rockchip-linux/rkdeveloptool
++   cd rkdeveloptool
++   autoreconf -i && CPPFLAGS=-Wno-format-truncation ./configure && make
++   ./rkdeveloptool db "$RKDB"
++   ./rkdeveloptool wl 64 ../u-boot-rockchip.bin
+diff --git a/include/configs/jaguar_rk3588.h b/include/configs/jaguar_rk3588.h
+new file mode 100644
+index 00000000000..843028c5385
+--- /dev/null
++++ b/include/configs/jaguar_rk3588.h
+@@ -0,0 +1,15 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (c) 2023 Theobroma Systems Design und Consulting GmbH
++ */
++
++#ifndef __JAGUAR_RK3588_H
++#define __JAGUAR_RK3588_H
++
++#define ROCKCHIP_DEVICE_SETTINGS \
++		"stdout=serial,vidconsole\0" \
++		"stderr=serial,vidconsole\0"
++
++#include <configs/rk3588_common.h>
++
++#endif /* __JAGUAR_RK3588_H */
 
 -- 
 2.44.0
