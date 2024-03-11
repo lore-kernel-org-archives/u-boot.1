@@ -4,55 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0ADA2C54E60
-	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 11:34:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44CCAC5475B
+	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 11:37:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 303B087D35;
-	Mon, 11 Mar 2024 12:34:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id 740E587E87;
+	Mon, 11 Mar 2024 12:37:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="w0coDxAq";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="L0KG+RGx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D92583414; Mon, 11 Mar 2024 12:34:54 +0100 (CET)
-Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8D61987E50; Mon, 11 Mar 2024 12:37:48 +0100 (CET)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 459FF87D35
- for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 12:34:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E5F787EFF
+ for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 12:37:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
- by mail11.truemail.it (Postfix) with ESMTPA id 3C80B1FA9C;
- Mon, 11 Mar 2024 12:34:50 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1710156890;
- bh=8E68U+5CpfQtB0/8yIMYvVcR0PWE61GtsGqLWMmD24o=; h=From:To:Subject;
- b=w0coDxAq8wq6lob7Q7WRAj+nCjkMgWJ+fk+4DkmXJ4p/mXJM+BDCkzfZ1O+uYtHu8
- uiZEXeAwnrgWfcRks9uRo7nAWHrFVLywFlqxkUn1qMn0aJnRMSe7h+mi8WFANfEdON
- rEJRE9SASw0SS0khyt8jh8nAAkKlB4J0UJzu35NLSOO4t4eUNBi9EKf805sr7EhrtI
- 0pTIBGS0CTGccLaG/AwqlkvH98L90nScb4a3AgW+cShtQuf9xif0a6gxnrLaCEkLZP
- BIDnLXyo5JlmPkIapsAJZuzLjSevhrhhNuwyEKqCdBdCdrAeJ0E0LwvhVWc93928xI
- qp5cS0LUckdhw==
-Date: Mon, 11 Mar 2024 12:34:40 +0100
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Parth Pancholi <parth105105@gmail.com>, Stefano Babic <sbabic@denx.de>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Parth Pancholi <parth.pancholi@toradex.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v1] configs: colibri-imx7: enable watchdog
-Message-ID: <20240311113440.GA13671@francesco-nb>
-References: <20240307152302.2338472-1-parth105105@gmail.com>
- <CAOMZO5DrVC9+=_EGX7ADYFk57MfLbEv1YjcdKRCPSFZ1_yHmpw@mail.gmail.com>
+ spf=pass smtp.mailfrom=dan.carpenter@linaro.org
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-33e8b957a89so882534f8f.0
+ for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 04:37:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1710157065; x=1710761865; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=tv8/+F3EblhAh/v/gYVkxMXrp4vmZD9DcJq4EpmpuZI=;
+ b=L0KG+RGx6d81G9CLSaABoLR8AZR2DKDENRNiV02Dnb+69rLBtDtml0sKMs7AErUcts
+ 0US6KkGSdk0Kr6a/2+WvzqHavrDS2WMkEmwzCE6OMRKcWT7de75QGAEP4yk5Fjz1i/OS
+ o4PjzygRMZqqg98yl1om0fCf9keyyUrdX6amNnVYUc1k+X/xVOMS/5nK7rchdI2WgdCV
+ xQXDN9rVQDrp3kA2IDGtyyQCh+0B9xp9rGyZ2lc5gu9cxTVt+xUaAzkM/ecje4+vYXcp
+ pldPicMbXgMrYpH8dh3dLaGKKMuh+nGvvYqYCUX0qWFnNTxT7xqwpMNnByIyw4EUt5eM
+ c/TQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710157065; x=1710761865;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=tv8/+F3EblhAh/v/gYVkxMXrp4vmZD9DcJq4EpmpuZI=;
+ b=GKItFKjS/MEYp9A8eeQ9nXWG4ApWO1WnwjLBqlggUuP7c9Rl4yRIoQfU3GN1Uc6ew+
+ 2JXbTBZ7uviPes5jppK56AvBZOCHQJqBb3gcC6U7AVCQz1vpGczFRxJUbGXY7/u01iQ2
+ 7aCHuTfhH8uIyfoeNZkl9PQz/mAfE0gCgP0o9H2hZeL1RWNY9XruM1qthhXw0cTENPZ3
+ ZVSD7GgpwbAAzZ7mm98yTtqVWBndbiRdX684atHBtyO1kwXeItS6E+SJBclvztrB6Cp4
+ 1QKesA/UT4tzGrf0yRTXnQcmOBgS7KiJGvDlwkrDCn+kxGbQN0+pZPKQ+fHmv68no02C
+ 2UwQ==
+X-Gm-Message-State: AOJu0YxBYxm7wSYnBrqvmO1OdlZjsJEYa+ylZFi16RukenxA4DQI33J/
+ h52Twr79IoVCT7oivvp5o1I1qFs/Lxr9tpVhMszcccpfstDgOziqyVwFPxy2GtDAJwGZ+MjS+LC
+ C
+X-Google-Smtp-Source: AGHT+IGQexHfx8cJ8Tp56tn6mLaAiC1WbCv/VoFoG6n98LKs1BsJ0GdFw6AZkcvBS+DoYLtqfj6Isg==
+X-Received: by 2002:adf:a4d5:0:b0:33e:726d:e963 with SMTP id
+ h21-20020adfa4d5000000b0033e726de963mr4663494wrb.17.1710157065370; 
+ Mon, 11 Mar 2024 04:37:45 -0700 (PDT)
+Received: from localhost ([102.222.70.76]) by smtp.gmail.com with ESMTPSA id
+ g5-20020a5d6985000000b0033d6c928a95sm6272427wru.63.2024.03.11.04.37.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 11 Mar 2024 04:37:45 -0700 (PDT)
+Date: Mon, 11 Mar 2024 14:37:41 +0300
+From: Dan Carpenter <dan.carpenter@linaro.org>
+To: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: u-boot@lists.denx.de, Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Hugo Villeneuve <hvilleneuve@dimonoff.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH] fdt_support: fix fdt_copy_fixed_partitions function()
+Message-ID: <5b95fea0-581a-44e5-b275-09393b7b02a1@moroto.mountain>
+References: <20240308133404.2619848-1-patrice.chotard@foss.st.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAOMZO5DrVC9+=_EGX7ADYFk57MfLbEv1YjcdKRCPSFZ1_yHmpw@mail.gmail.com>
+In-Reply-To: <20240308133404.2619848-1-patrice.chotard@foss.st.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,31 +93,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Fabio,
-
-On Mon, Mar 11, 2024 at 07:44:02AM -0300, Fabio Estevam wrote:
-> On Thu, Mar 7, 2024 at 12:23 PM Parth Pancholi <parth105105@gmail.com> wrote:
-> > From: Parth Pancholi <parth.pancholi@toradex.com>
-> >
-> > Enable watchdog functionality for Toradex's Colibri iMX7 (NAND/EMMC)
-> > modules.
+On Fri, Mar 08, 2024 at 02:34:04PM +0100, Patrice Chotard wrote:
+> Move variable declaration at the beginning of the function.
 > 
-> You described what the patch does, but the reason is missing.
+
+The problem, presumably, is that when declarations are in the middle of
+a block then it triggers a GCC warning.  "declarations after code" or
+whatever...  The commit message is not really clear.
+
+And when I built this file I don't get a warning.  Is there a specific
+config required to trigger the warning?
+
+Btw, the Linux kernel recently silenced this warning because it doesn't
+work well with the cleanup.h code...  It will be interesting to see if
+people abandon this style guideline.
+
+regards,
+dan carpenter
+
+> Fixes: 163c5f60ebb4 ("fdt_support: add fdt_copy_fixed_partitions function")
 > 
-> Is the reason for this patch to fix the 'reset' command regression
-> like you did at:
-> https://gitlab.com/u-boot/u-boot/-/commit/be23b1331fb35b7d5a095ef2c0b522c1f241eee9
-> ?
-> 
-> Please send a v2 with an improved commit log.
-
-No, on colibri-imx7 the reset is already working, it uses the PMIC so
-it's not affected by the issue that was affecting most of our other
-boards.
-
-The reason for enabling the watchdog here is just an improvement to
-improve reliability, given we have it enabled on other boards with no
-drawback it seems nice and consistent to enable it.
-
-Francesco
+> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> ---
 
