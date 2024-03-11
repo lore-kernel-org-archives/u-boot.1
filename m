@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D475C5475B
-	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 12:03:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D336C54E58
+	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 12:03:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5C6A787F47;
-	Mon, 11 Mar 2024 13:02:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EA00187F01;
+	Mon, 11 Mar 2024 13:02:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0546987E44; Mon, 11 Mar 2024 13:02:55 +0100 (CET)
-Received: from smtp-bc0d.mail.infomaniak.ch (smtp-bc0d.mail.infomaniak.ch
- [45.157.188.13])
+ id 0F1CE87ED6; Mon, 11 Mar 2024 13:02:58 +0100 (CET)
+Received: from smtp-1909.mail.infomaniak.ch (smtp-1909.mail.infomaniak.ch
+ [185.125.25.9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB34187E64
- for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 13:02:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6DE6587F04
+ for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 13:02:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-3-0000.mail.infomaniak.ch (smtp-3-0000.mail.infomaniak.ch
  [10.4.36.107])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Ttb4m2sM3zvvf;
- Mon, 11 Mar 2024 13:02:48 +0100 (CET)
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Ttb4q0whPzpPv;
+ Mon, 11 Mar 2024 13:02:51 +0100 (CET)
 Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4Ttb4l3FkWz3k; Mon, 11 Mar 2024 13:02:47 +0100 (CET)
+ id 4Ttb4p1vR1z3W; Mon, 11 Mar 2024 13:02:50 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Mon, 11 Mar 2024 13:01:44 +0100
-Subject: [PATCH v4 01/20] rockchip: avoid out-of-bounds when computing
- cpuid
+Date: Mon, 11 Mar 2024 13:01:47 +0100
+Subject: [PATCH v4 04/20] rockchip: pine64: pinebook-pro: migrate to
+ rockchip_early_misc_init_r
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240311-jaguar-v4-1-d2ca1af68ed3@theobroma-systems.com>
+Message-Id: <20240311-jaguar-v4-4-d2ca1af68ed3@theobroma-systems.com>
 References: <20240311-jaguar-v4-0-d2ca1af68ed3@theobroma-systems.com>
 In-Reply-To: <20240311-jaguar-v4-0-d2ca1af68ed3@theobroma-systems.com>
 To: Simon Glass <sjg@chromium.org>, 
@@ -78,50 +78,61 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 
-The expected length of the cpuid, as passed with cpuid_length,
-determines the size of cpuid_str string. Therefore, care should be taken
-to make sure nothing is accessing data out-of-bounds.
+Compared to the original misc_init_r from Rockchip mach code,
+setup_iodomain() is added and rockchip_setup_macaddr() is not called.
 
-Instead of using hardcoded values, derive them from cpuid_length.
+It is assumed adding rockchip_setup_macaddr() back is fine.
+Let's use rockchip_early_misc_init_r instead of reimplementing the whole
+misc_init_r from Rockchip (the side effect being that
+rockchip_setup_macaddr() is back).
 
 Cc: Quentin Schulz <foss+uboot@0leil.net>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Reviewed-by: Dragan Simic <dsimic@manjaro.org>
+Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 ---
- arch/arm/mach-rockchip/misc.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c | 18 ++----------------
+ 1 file changed, 2 insertions(+), 16 deletions(-)
 
-diff --git a/arch/arm/mach-rockchip/misc.c b/arch/arm/mach-rockchip/misc.c
-index 7d03f0c2b67..15397cff009 100644
---- a/arch/arm/mach-rockchip/misc.c
-+++ b/arch/arm/mach-rockchip/misc.c
-@@ -102,7 +102,7 @@ int rockchip_cpuid_set(const u8 *cpuid, const u32 cpuid_length)
- 	int i;
+diff --git a/board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c b/board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c
+index 4ad780767ea..2408a367305 100644
+--- a/board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c
++++ b/board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c
+@@ -11,7 +11,6 @@
+ #include <asm/arch-rockchip/clock.h>
+ #include <asm/arch-rockchip/grf_rk3399.h>
+ #include <asm/arch-rockchip/hardware.h>
+-#include <asm/arch-rockchip/misc.h>
+ #include <linux/printk.h>
+ #include <power/regulator.h>
  
- 	memset(cpuid_str, 0, sizeof(cpuid_str));
--	for (i = 0; i < 16; i++)
-+	for (i = 0; i < cpuid_length; i++)
- 		sprintf(&cpuid_str[i * 2], "%02x", cpuid[i]);
+@@ -54,23 +53,10 @@ static void setup_iodomain(void)
+ 	rk_setreg(&pmugrf->soc_con0, 1 << PMUGRF_CON0_VSEL_SHIFT);
+ }
  
- 	debug("cpuid: %s\n", cpuid_str);
-@@ -111,13 +111,13 @@ int rockchip_cpuid_set(const u8 *cpuid, const u32 cpuid_length)
- 	 * Mix the cpuid bytes using the same rules as in
- 	 *   ${linux}/drivers/soc/rockchip/rockchip-cpuinfo.c
- 	 */
--	for (i = 0; i < 8; i++) {
-+	for (i = 0; i < cpuid_length / 2; i++) {
- 		low[i] = cpuid[1 + (i << 1)];
- 		high[i] = cpuid[i << 1];
- 	}
+-int misc_init_r(void)
++int rockchip_early_misc_init_r(void)
+ {
+-	const u32 cpuid_offset = 0x7;
+-	const u32 cpuid_length = 0x10;
+-	u8 cpuid[cpuid_length];
+-	int ret;
+-
+ 	setup_iodomain();
  
--	serialno = crc32_no_comp(0, low, 8);
--	serialno |= (u64)crc32_no_comp(serialno, high, 8) << 32;
-+	serialno = crc32_no_comp(0, low, cpuid_length / 2);
-+	serialno |= (u64)crc32_no_comp(serialno, high, cpuid_length / 2) << 32;
- 	snprintf(serialno_str, sizeof(serialno_str), "%016llx", serialno);
- 
- 	oldid = env_get("cpuid#");
+-	ret = rockchip_cpuid_from_efuse(cpuid_offset, cpuid_length, cpuid);
+-	if (ret)
+-		return ret;
+-
+-	ret = rockchip_cpuid_set(cpuid, cpuid_length);
+-	if (ret)
+-		return ret;
+-
+-	return ret;
++	return 0;
+ }
+ #endif
 
 -- 
 2.44.0
