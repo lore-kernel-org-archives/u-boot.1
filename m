@@ -4,39 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D336C54E58
-	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 12:03:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00C66C54E67
+	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 12:03:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA00187F01;
-	Mon, 11 Mar 2024 13:02:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6C6B787F7D;
+	Mon, 11 Mar 2024 13:03:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0F1CE87ED6; Mon, 11 Mar 2024 13:02:58 +0100 (CET)
-Received: from smtp-1909.mail.infomaniak.ch (smtp-1909.mail.infomaniak.ch
- [185.125.25.9])
+ id 2A2C587ED6; Mon, 11 Mar 2024 13:02:58 +0100 (CET)
+Received: from smtp-bc0a.mail.infomaniak.ch (smtp-bc0a.mail.infomaniak.ch
+ [IPv6:2001:1600:4:17::bc0a])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6DE6587F04
- for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 13:02:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BBA0C87ECC
+ for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 13:02:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-3-0000.mail.infomaniak.ch (smtp-3-0000.mail.infomaniak.ch
- [10.4.36.107])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Ttb4q0whPzpPv;
- Mon, 11 Mar 2024 13:02:51 +0100 (CET)
+Received: from smtp-3-0000.mail.infomaniak.ch (unknown [10.4.36.107])
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Ttb4n2bTRzMpvSY;
+ Mon, 11 Mar 2024 13:02:49 +0100 (CET)
 Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4Ttb4p1vR1z3W; Mon, 11 Mar 2024 13:02:50 +0100 (CET)
+ id 4Ttb4m2mv0z3W; Mon, 11 Mar 2024 13:02:48 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Mon, 11 Mar 2024 13:01:47 +0100
-Subject: [PATCH v4 04/20] rockchip: pine64: pinebook-pro: migrate to
- rockchip_early_misc_init_r
+Date: Mon, 11 Mar 2024 13:01:45 +0100
+Subject: [PATCH v4 02/20] rockchip: add weak function symbol called at the
+ beginning of misc_init_r
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240311-jaguar-v4-4-d2ca1af68ed3@theobroma-systems.com>
+Message-Id: <20240311-jaguar-v4-2-d2ca1af68ed3@theobroma-systems.com>
 References: <20240311-jaguar-v4-0-d2ca1af68ed3@theobroma-systems.com>
 In-Reply-To: <20240311-jaguar-v4-0-d2ca1af68ed3@theobroma-systems.com>
 To: Simon Glass <sjg@chromium.org>, 
@@ -78,61 +77,46 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 
-Compared to the original misc_init_r from Rockchip mach code,
-setup_iodomain() is added and rockchip_setup_macaddr() is not called.
-
-It is assumed adding rockchip_setup_macaddr() back is fine.
-Let's use rockchip_early_misc_init_r instead of reimplementing the whole
-misc_init_r from Rockchip (the side effect being that
-rockchip_setup_macaddr() is back).
+Most Rockchip boards who override misc_init_r do it only to call another
+function and keep the rest unchanged. Therefore to allow for less
+duplication, let's just add a weak function symbol that is called inside
+misc_init_r.
 
 Cc: Quentin Schulz <foss+uboot@0leil.net>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Reviewed-by: Dragan Simic <dsimic@manjaro.org>
-Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 ---
- board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c | 18 ++----------------
- 1 file changed, 2 insertions(+), 16 deletions(-)
+ arch/arm/mach-rockchip/board.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c b/board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c
-index 4ad780767ea..2408a367305 100644
---- a/board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c
-+++ b/board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c
-@@ -11,7 +11,6 @@
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/grf_rk3399.h>
- #include <asm/arch-rockchip/hardware.h>
--#include <asm/arch-rockchip/misc.h>
- #include <linux/printk.h>
- #include <power/regulator.h>
- 
-@@ -54,23 +53,10 @@ static void setup_iodomain(void)
- 	rk_setreg(&pmugrf->soc_con0, 1 << PMUGRF_CON0_VSEL_SHIFT);
- }
- 
--int misc_init_r(void)
-+int rockchip_early_misc_init_r(void)
- {
--	const u32 cpuid_offset = 0x7;
--	const u32 cpuid_length = 0x10;
--	u8 cpuid[cpuid_length];
--	int ret;
--
- 	setup_iodomain();
- 
--	ret = rockchip_cpuid_from_efuse(cpuid_offset, cpuid_length, cpuid);
--	if (ret)
--		return ret;
--
--	ret = rockchip_cpuid_set(cpuid, cpuid_length);
--	if (ret)
--		return ret;
--
--	return ret;
-+	return 0;
- }
+diff --git a/arch/arm/mach-rockchip/board.c b/arch/arm/mach-rockchip/board.c
+index 2620530e03f..d5cb59c10fa 100644
+--- a/arch/arm/mach-rockchip/board.c
++++ b/arch/arm/mach-rockchip/board.c
+@@ -297,6 +297,11 @@ int fastboot_set_reboot_flag(enum fastboot_reboot_reason reason)
  #endif
+ 
+ #ifdef CONFIG_MISC_INIT_R
++__weak int rockchip_early_misc_init_r(void)
++{
++	return 0;
++}
++
+ __weak int misc_init_r(void)
+ {
+ 	const u32 cpuid_offset = CFG_CPUID_OFFSET;
+@@ -304,6 +309,10 @@ __weak int misc_init_r(void)
+ 	u8 cpuid[cpuid_length];
+ 	int ret;
+ 
++	ret = rockchip_early_misc_init_r();
++	if (ret)
++		return ret;
++
+ 	ret = rockchip_cpuid_from_efuse(cpuid_offset, cpuid_length, cpuid);
+ 	if (ret)
+ 		return ret;
 
 -- 
 2.44.0
