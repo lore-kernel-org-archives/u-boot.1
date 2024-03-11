@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3102CC5475B
-	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 12:05:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 649C8C54E58
+	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 12:05:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E79D887F63;
-	Mon, 11 Mar 2024 13:03:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6C53C87F5D;
+	Mon, 11 Mar 2024 13:03:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A556487F3F; Mon, 11 Mar 2024 13:03:16 +0100 (CET)
-Received: from smtp-8fad.mail.infomaniak.ch (smtp-8fad.mail.infomaniak.ch
- [83.166.143.173])
+ id 5B36F87F52; Mon, 11 Mar 2024 13:03:18 +0100 (CET)
+Received: from smtp-bc0d.mail.infomaniak.ch (smtp-bc0d.mail.infomaniak.ch
+ [IPv6:2001:1600:7:10::bc0d])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6A28287ED6
- for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 13:02:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4537B87F9F
+ for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 13:03:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-3-0000.mail.infomaniak.ch (smtp-3-0000.mail.infomaniak.ch
  [10.4.36.107])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Ttb4y0Zy8zpkw;
- Mon, 11 Mar 2024 13:02:58 +0100 (CET)
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Ttb505kgTzr9d;
+ Mon, 11 Mar 2024 13:03:00 +0100 (CET)
 Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4Ttb4x1KTGz3k; Mon, 11 Mar 2024 13:02:57 +0100 (CET)
+ id 4Ttb4z6gYTz3W; Mon, 11 Mar 2024 13:02:59 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Mon, 11 Mar 2024 13:01:55 +0100
-Subject: [PATCH v4 12/20] rockchip: rk3588: add constants for some register
- address spaces
+Date: Mon, 11 Mar 2024 13:01:58 +0100
+Subject: [PATCH v4 15/20] rockchip: rk3588: bind MMC controllers in U-Boot
+ proper pre-reloc
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240311-jaguar-v4-12-d2ca1af68ed3@theobroma-systems.com>
+Message-Id: <20240311-jaguar-v4-15-d2ca1af68ed3@theobroma-systems.com>
 References: <20240311-jaguar-v4-0-d2ca1af68ed3@theobroma-systems.com>
 In-Reply-To: <20240311-jaguar-v4-0-d2ca1af68ed3@theobroma-systems.com>
 To: Simon Glass <sjg@chromium.org>, 
@@ -78,81 +78,51 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 
-It's one thing to have the register mapped via a well-defined struct but
-it's another to be able to make use of it. For that to happen, one needs
-to cast the physical address memory of the beginning of the register
-address space with the struct. Since this cannot change, let's hardcode
-it in the include files so that users do not need to duplicate this line
-of code in their own implementation.
+Since commit 9e644284ab81 ("dm: core: Report bootph-pre-ram/sram node as
+pre-reloc after relocation"), bootph-pre-ram doesn't make U-Boot proper
+bind the device before relocation.
+
+While this is usually not much of an issue, it is when there's a lookup
+for devices by code running before the relocation. Such is the case of
+env_init() which calls env_driver_lookup() which calls
+env_get_location() which is a weak symbol and may call
+arch_env_get_location() also a weak symbol. Those are two functions that
+may traverse UCLASS to find some devices (e.g.
+board/theobroma-systems/common/common.c:arch_env_get_location()).
+
+This allows something in the env_init() call stack to be able to use
+uclasses for SD and eMMC controller on RK3588S/RK3588. This aligns the
+behavior with what seems to be all SoCs except RK356x family.
+
+Additionally, if any other env function (e.g. env_load) were to be used
+before relocation, this is also required as otherwise it wouldn't be
+able to find the MMC device(s).
 
 Cc: Quentin Schulz <foss+uboot@0leil.net>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 ---
- arch/arm/include/asm/arch-rockchip/cru_rk3588.h | 2 ++
- arch/arm/include/asm/arch-rockchip/ioc_rk3588.h | 6 ++++++
- arch/arm/mach-rockchip/rk3588/rk3588.c          | 4 ----
- 3 files changed, 8 insertions(+), 4 deletions(-)
+ arch/arm/dts/rk3588s-u-boot.dtsi | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/arch/arm/include/asm/arch-rockchip/cru_rk3588.h b/arch/arm/include/asm/arch-rockchip/cru_rk3588.h
-index 7f4a9085392..a4507e5fdd7 100644
---- a/arch/arm/include/asm/arch-rockchip/cru_rk3588.h
-+++ b/arch/arm/include/asm/arch-rockchip/cru_rk3588.h
-@@ -63,6 +63,8 @@ struct rk3588_pll {
- 	unsigned int reserved0[3];
+diff --git a/arch/arm/dts/rk3588s-u-boot.dtsi b/arch/arm/dts/rk3588s-u-boot.dtsi
+index bf3b1ea8a3c..ac67c777ade 100644
+--- a/arch/arm/dts/rk3588s-u-boot.dtsi
++++ b/arch/arm/dts/rk3588s-u-boot.dtsi
+@@ -188,11 +188,13 @@
+ 
+ &sdmmc {
+ 	bootph-pre-ram;
++	bootph-some-ram;
+ 	u-boot,spl-fifo-mode;
  };
  
-+#define CRU_BASE	0xfd7c0000
-+
- struct rk3588_cru {
- 	struct rk3588_pll pll[18];
- 	unsigned int reserved0[16];/* Address Offset: 0x0240 */
-diff --git a/arch/arm/include/asm/arch-rockchip/ioc_rk3588.h b/arch/arm/include/asm/arch-rockchip/ioc_rk3588.h
-index 5a656f850c7..7ad98466c39 100644
---- a/arch/arm/include/asm/arch-rockchip/ioc_rk3588.h
-+++ b/arch/arm/include/asm/arch-rockchip/ioc_rk3588.h
-@@ -5,6 +5,8 @@
- #ifndef _ASM_ARCH_IOC_RK3588_H
- #define _ASM_ARCH_IOC_RK3588_H
+ &sdhci {
+ 	bootph-pre-ram;
++	bootph-some-ram;
+ 	u-boot,spl-fifo-mode;
+ };
  
-+#define BUS_IOC_BASE	0xfd5f8000
-+
- struct rk3588_bus_ioc {
- 	unsigned int reserved0000[3];      /* Address Offset: 0x0000 */
- 	unsigned int gpio0b_iomux_sel_h;   /* Address Offset: 0x000C */
-@@ -48,6 +50,8 @@ struct rk3588_bus_ioc {
- 
- check_member(rk3588_bus_ioc, gpio4d_iomux_sel_h, 0x009C);
- 
-+#define PMU1_IOC_BASE	0xfd5f0000
-+
- struct rk3588_pmu1_ioc {
- 	unsigned int gpio0a_iomux_sel_l;   /* Address Offset: 0x0000 */
- 	unsigned int gpio0a_iomux_sel_h;   /* Address Offset: 0x0004 */
-@@ -70,6 +74,8 @@ struct rk3588_pmu1_ioc {
- 
- check_member(rk3588_pmu1_ioc, xin_con, 0x0040);
- 
-+#define PMU2_IOC_BASE	0xfd5f4000
-+
- struct rk3588_pmu2_ioc {
- 	unsigned int gpio0b_iomux_sel_h;  /* Address Offset: 0x0000 */
- 	unsigned int gpio0c_iomux_sel_l;  /* Address Offset: 0x0004 */
-diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
-index d18c4e4b411..7a190e6aa18 100644
---- a/arch/arm/mach-rockchip/rk3588/rk3588.c
-+++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
-@@ -26,10 +26,6 @@
- #define FW_SYSM_MST26_REG		0xa8
- #define FW_SYSM_MST27_REG		0xac
- 
--#define PMU1_IOC_BASE			0xfd5f0000
--#define PMU2_IOC_BASE			0xfd5f4000
--
--#define BUS_IOC_BASE			0xfd5f8000
- #define BUS_IOC_GPIO2A_IOMUX_SEL_L	0x40
- #define BUS_IOC_GPIO2B_IOMUX_SEL_L	0x48
- #define BUS_IOC_GPIO2D_IOMUX_SEL_L	0x58
 
 -- 
 2.44.0
