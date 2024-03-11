@@ -4,74 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DBEEC5475B
-	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 13:07:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6562C5475B
+	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 13:08:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 331C587F1B;
-	Mon, 11 Mar 2024 14:06:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 3CA5487D3C;
+	Mon, 11 Mar 2024 14:08:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="L9jh23k3";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mAkAW5T0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F6AF87D35; Mon, 11 Mar 2024 14:04:23 +0100 (CET)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id D3A1D87D50; Mon, 11 Mar 2024 14:08:17 +0100 (CET)
+Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com
+ [IPv6:2607:f8b0:4864:20::42e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9718587E32
- for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 14:04:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B25E787D35
+ for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 14:08:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=L.Anderweit@phytec.de
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1710162258; x=1712754258;
- h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=i7KynB8sYA84kaAnpXY2+yNAqnV9IJ0YSX4xjWmTn+4=;
- b=L9jh23k3S5NTb6u9nQv8unU8/9LJk9IBZpsg/U+r86ZZe40+Je9lw5lE61E70R9U
- aqxQ6YCOgVtkbrfOu0CKDXoyCPzjfSfAxfisUkfnTAq3qSgTBjNq2Dkkpgx4eUb+
- nDgwLo9W8wglxzmd58xuYc+Y0C3Iwy6WDDWMewTWENU=;
-X-AuditID: ac14000a-fbefe7000000290d-0d-65ef015258d8
-Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
- (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id A4.93.10509.2510FE56;
- Mon, 11 Mar 2024 14:04:18 +0100 (CET)
-Received: from augenblix2.phytec.de (172.25.0.11) by Berlix.phytec.de
- (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Mon, 11 Mar
- 2024 14:04:18 +0100
-From: Leonard Anderweit <l.anderweit@phytec.de>
-To: <trini@konsulko.com>, <t.remmet@phytec.de>, <festevam@gmail.com>
-CC: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>
-Subject: [PATCH 4/5] include: env: Add phytec RAUC boot logic
-Date: Mon, 11 Mar 2024 14:03:59 +0100
-Message-ID: <20240311130400.4023780-5-l.anderweit@phytec.de>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240311130400.4023780-1-l.anderweit@phytec.de>
-References: <20240311130400.4023780-1-l.anderweit@phytec.de>
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pf1-x42e.google.com with SMTP id
+ d2e1a72fcca58-6e5769aa0b3so497358b3a.1
+ for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 06:08:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1710162493; x=1710767293; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=w6ZdyZ1womQMM06Q6Xf/+g1VlkBrcWJJddBi+FL7ets=;
+ b=mAkAW5T0+ZgsyxO4MkCmFOC1IpnFHXpMPT/3Rmm3OCdrmCaHQnwbEEw+xA1ebCEnQ6
+ 4iNa5h3BX77625zMm68mU34gsuEa7j1g4OJcE1dRQ8gIC253kYaW3Fm/JzZZL8oO0EWM
+ Q2SgFTp9wtU2L7FytmeWRqFMPtaeIgoI1TP5AFWwqva3LF8uJfJZs0mJAgnJyzvZaW/N
+ OtdQ7wut0MI+MS6pP/GNvYFxrkHEUM8LDZAaBtpL1F/vrZ08cNYVTGfQsTzV+TuOv7+d
+ OGfUSUMPa80Jzd/XDMixxgX+vwkDI4GTi1ALRmCoBOTxgIZg8eemgJUozU35z2O1GART
+ B8Kw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710162493; x=1710767293;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=w6ZdyZ1womQMM06Q6Xf/+g1VlkBrcWJJddBi+FL7ets=;
+ b=B9LgnuwvkzsQdrR3WGXMW4iG7GYCyLHba+0qV8Rx0+nhBfLs23dFlyuuCEKqy3ZHCX
+ q81ZKVWXHs2YhQ2Bkt9KtGgmoB8QG4rKGh9dWEm/mSlMJrZv88U25yMH1MJQPeWpq8Jt
+ fm2t0uDrmMmOO0yEBiAEuhKzU9u8WJ4cXbtzF1FrQRG2pT5HJipZLMfNtiQY2Zz0BCiW
+ b108aHH5MoYl68CnDIUlcfU/7U/aEkSRKX0/dtK158lGYqgjypT7IQt+pgg/4VpbiKz/
+ gKr7eHOJ4Mn6VxiQTVBBITAKqwvgwuj9t9u1zbFMkxMK+F0L/ofvmrQjiA/fyUNk7qOv
+ sYqA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX5e7+FsUAW9E8c94htzj2KeckXnboG6yVdabG4JDl187Q6wlaoHI7URLw8loMZ3T6rDg2MQu3jG1AdkyAdEJEY+TPnRA==
+X-Gm-Message-State: AOJu0YzJqVWsQg0vh0vpe8I78nmEtF+ARo1vr3nRI3JCI8eoZimbZ74/
+ 843Z8DJt9/kQgvXDJOywCGAL+BbYD6p+Y6E7oulC0D8SQFYNB6N/Oy4rGT1CAnNrZfJeQVtQbIp
+ RzUuuHTfNS5FBpXvd1+gVxeQ9/XRlBz0y
+X-Google-Smtp-Source: AGHT+IHg9APpgafLkYZydxykaf9mvlyVJZQp7rV4UFqz/mvp13xmhyBf8BTAqjUq/pV2oVZGpD9gwLwnJgOBWkNR/24=
+X-Received: by 2002:a05:6a20:9587:b0:1a1:67a6:511e with SMTP id
+ iu7-20020a056a20958700b001a167a6511emr8979350pzb.2.1710162493397; Mon, 11 Mar
+ 2024 06:08:13 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [172.25.0.11]
-X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
- (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrLLMWRmVeSWpSXmKPExsWyRpKBRzeI8X2qwcpHkhYPr/pbTJ20md3i
- 7d5Odovud+oOLB47Z91l93h1YBW7x9k7Oxg9+rtbWANYorhsUlJzMstSi/TtErgybky9zVqw
- XbBiw/kDzA2MbXxdjJwcEgImEosmT2TpYuTiEBJYzCTROmk9I4TzmFHi4pE17CBVbAL6Eitf
- LmIBsUUEXCR+Ld0DZHNwMAuYSUz4nAwSFhawlbh18gUbiM0ioCqxc/l5JhCbV8BG4v/lFnaI
- ZfISMy99B7M5gepnPfjLDGILAdW82XSRDaJeUOLkzCdgq5iB6pu3zmaGsCUkDr54AVWvJHHn
- 1C82mJnTzr1mhrBDJY5sWs00gVFoFpJRs5CMmoVk1AJG5lWMQrmZydmpRZnZegUZlSWpyXop
- qZsYQUEuwsC1g7FvjschRiYOxkOMEhzMSiK8r3XepgrxpiRWVqUW5ccXleakFh9ilOZgURLn
- Xd0RnCokkJ5YkpqdmlqQWgSTZeLglGpgdH3E5jG1vPPkr+Nhe0ov3q3x65E+eujb4zAvtUOS
- gYv7Axao7br2eKfVVa3tLMEu87corqvI/3H+jo3JGu75j4QkHjiX+vK53hRtu3X2/WGO40Ys
- TJdfRxdVPbu0XuJ6pFbAEg3bzcF1jtP9rt9sk/jQaayWGOobvErggEjO1E+GL/4eM3RlVmIp
- zkg01GIuKk4EAMsxOG1gAgAA
-X-Mailman-Approved-At: Mon, 11 Mar 2024 14:06:01 +0100
+References: <20240306-pcl-070-patches-v3-0-cb39c3487bc3@phytec.de>
+In-Reply-To: <20240306-pcl-070-patches-v3-0-cb39c3487bc3@phytec.de>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Mon, 11 Mar 2024 10:08:01 -0300
+Message-ID: <CAOMZO5AFS=nC3g5_CQNHKPS8F-x93fwcWAHvyLnW=N_mN66mQw@mail.gmail.com>
+Subject: Re: [PATCH v3 0/2] board: phytec_imx8mp: Use 2GHz RAM timings for
+ PCL-070 from pcb_rev 1
+To: Benjamin Hahn <B.Hahn@phytec.de>
+Cc: Tom Rini <trini@konsulko.com>, Teresa Remmet <t.remmet@phytec.de>,
+ u-boot@lists.denx.de, upstream@lists.phytec.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,73 +91,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add logic for booting systems with the RAUC update mechanism. This can
-be reused by other phytec boards.
+On Wed, Mar 6, 2024 at 1:18=E2=80=AFPM Benjamin Hahn <B.Hahn@phytec.de> wro=
+te:
+>
+> PCL-070 supports 2GHz RAM-timings from pcb_rev 1 and newer. PCM-070
+> supports 2GHz RAM-timings only from pcb_rev 3 and newer.
+>
+> Signed-off-by: Benjamin Hahn <B.Hahn@phytec.de>
 
-Signed-off-by: Leonard Anderweit <l.anderweit@phytec.de>
----
- include/env/phytec/rauc.env | 52 +++++++++++++++++++++++++++++++++++++
- 1 file changed, 52 insertions(+)
- create mode 100644 include/env/phytec/rauc.env
-
-diff --git a/include/env/phytec/rauc.env b/include/env/phytec/rauc.env
-new file mode 100644
-index 000000000000..89e17ff70ec6
---- /dev/null
-+++ b/include/env/phytec/rauc.env
-@@ -0,0 +1,52 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+
-+/* Logic to select a boot partition based on environment variables and switch
-+ * to the other if the boot fails. */
-+
-+doraucboot=0
-+
-+raucbootpart0=1
-+raucrootpart0=5
-+raucbootpart1=2
-+raucrootpart1=6
-+
-+raucinit=
-+	echo Booting RAUC A/B system;
-+	test -n "${BOOT_ORDER}" || env set BOOT_ORDER "system0 system1";
-+	test -n "${BOOT_system0_LEFT}" || env set BOOT_system0_LEFT 3;
-+	test -n "${BOOT_system1_LEFT}" || env set BOOT_system1_LEFT 3;
-+	env set raucstatus;
-+	for BOOT_SLOT in "${BOOT_ORDER}"; do
-+		if test "x${raucstatus}" != "x"; then
-+			echo Skipping remaing slots!;
-+		elif test "x${BOOT_SLOT}" = "xsystem0"; then
-+			if test ${BOOT_system0_LEFT} -gt 0; then
-+				echo Found valid slot A, ${BOOT_system0_LEFT} attempts remaining;
-+				setexpr BOOT_system0_LEFT ${BOOT_system0_LEFT} - 1;
-+				env set mmcpart ${raucbootpart0};
-+				env set mmcroot ${raucrootpart0};
-+				env set raucargs rauc.slot=system0;
-+				env set raucstatus success;
-+			fi;
-+		elif test "x${BOOT_SLOT}" = "xsystem1"; then
-+			if test ${BOOT_system1_LEFT} -gt 0; then
-+				echo Found valid slot B, ${BOOT_system1_LEFT} attempts remaining;
-+				setexpr BOOT_system1_LEFT ${BOOT_system1_LEFT} - 1;
-+				env set mmcpart ${raucbootpart1};
-+				env set mmcroot ${raucrootpart1};
-+				env set raucargs rauc.slot=system1;
-+				env set raucstatus success;
-+			fi;
-+		fi;
-+	done;
-+	if test -n "${raucstatus}"; then
-+		env delete raucstatus;
-+		env save;
-+	else
-+		echo WARN: No valid slot found;
-+		env set BOOT_system0_LEFT 3;
-+		env set BOOT_system1_LEFT 3;
-+		env delete raucstatus;
-+		env save;
-+		reset;
-+	fi;
--- 
-2.25.1
-
+Applied all, thanks.
