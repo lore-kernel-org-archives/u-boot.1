@@ -4,87 +4,183 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FFADC5475B
-	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 15:13:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D57CC5475B
+	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 15:14:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B757087E50;
-	Mon, 11 Mar 2024 16:13:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2250887E13;
+	Mon, 11 Mar 2024 16:14:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xpTxaBbi";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Y8k3KBBr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B80B87E13; Mon, 11 Mar 2024 16:13:21 +0100 (CET)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 77E6A87DD5; Mon, 11 Mar 2024 16:14:21 +0100 (CET)
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on20600.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2412::600])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 591EC87E32
- for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 16:13:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BD31F87EDB
+ for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 16:14:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-33e76d653b5so3108035f8f.3
- for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 08:13:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710169997; x=1710774797; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=1zaxPnJnc8gaH0Bbx3wKKm2kwOyR+crciMJK41HMLvE=;
- b=xpTxaBbiIJMgVN5XjRedt2dLK58mDwmFA+KJRp0mYzhMqu4RoTF07wM2W18UEAaCBN
- /ugJcxUbnY3v0H4yV26gmSd40KQsGh/dr4RvTB+2dRAQ3sY+PFGRnHLlx4yzYv2mTeHc
- jiOPGuuXKPMGifZiNI9WNJAvOtosXqL7CgfCgDrcPFT46b7T8VHlGqEKS/nTk+6Q3aHK
- Io1kBlpZOsgFuL6faocctetqFfDmFA3bIwJdFITUvwfScyNVJV4MXXnHz1N8im1cX7x0
- Lc6JArB0Db3vNEbr/z8tOYVxp4oPJ6TsBmah7Ggj58JdrWIfsOi8EXt8zKBAlnq3ydAX
- aurA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710169997; x=1710774797;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=1zaxPnJnc8gaH0Bbx3wKKm2kwOyR+crciMJK41HMLvE=;
- b=SQx49CxYRBW4KA86GJiFIxBkwNJQTbFH/ZqnRsbIUpEFY26u7/0K7vwxhGGfyMU70u
- SU6/jgP2z4pjxq2JtOqC1Nq1fJ4TwtHChwksLUCobWCg3Z3wMmM8ymcct0zcqJ0uKbT3
- QHzGZn+j+6FQpRKg8bvfRhT8n1kMqzv2Tm99ML0ByFqzDTrDwUlhXHxyewIy32dY/JOn
- 1INfhN/mzHa8oIpqXAJfQRjN6UInlHheaXrPJuc1C02WaESSMdybnut0rhPUiHeHBIts
- SPO4rdsMkP4BT7Hp8v6bggb8n2YlYRWp0jPnY8tuSUUXkwHSNPFdFkl3hJWrv6hTxm2v
- YCcA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWGGETvuhQ9+iUC++peQjwemhiBCu5wnxFeZhgII9Va2KNUPq9mqcU6zdPbgazF7kMQtZ6RpVOz+vSV77JdIaGv+JUXaw==
-X-Gm-Message-State: AOJu0YycRre1ZQNyG8CLcOW5s2GR6RbkOPKTSQm6RZtBtax6UPzjijQ/
- UYQGhM4uNJ9nKLAE0TxVpbwE35o7jaaDb9IK2puDmupXjMFDTbyBer85iUI7rA4=
-X-Google-Smtp-Source: AGHT+IG3hqX4iYAqMOsXnG88DSJAnK0O6xfCyGM1AgxUhdQ9pSsNYD7w9y8hZDi/Y87Ori8DPnuWaA==
-X-Received: by 2002:adf:fe8a:0:b0:33e:7fbd:5e6d with SMTP id
- l10-20020adffe8a000000b0033e7fbd5e6dmr4419108wrr.11.1710169996763; 
- Mon, 11 Mar 2024 08:13:16 -0700 (PDT)
-Received: from [192.168.1.78] (host-92-17-96-232.as13285.net. [92.17.96.232])
- by smtp.gmail.com with ESMTPSA id
- n2-20020a5d4002000000b0033de2f2a88dsm6609269wrp.103.2024.03.11.08.13.16
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 11 Mar 2024 08:13:16 -0700 (PDT)
-Message-ID: <0cda2608-856f-4650-92a6-4860a0d7c8b6@linaro.org>
-Date: Mon, 11 Mar 2024 15:13:15 +0000
-MIME-Version: 1.0
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=aEA89DbtiKZGwEuI4p8Xh1Of25e8SOHTx8qfYzrO9+JlR9Br3ET9cNP/q8UrlNTTYKGX97AD9U+lVxlxxFNDqAjwGy0Vv8BnZ5Bpamb6350VMU1lpy+NIah+y57Vy/BC/Npcfb/c8jru/UkTo5eS2tZ5Z5mpOHNaoFGmSmsBny90QFZ0COBakIUbCOOiS3l6VcjmOHlKqzFPSYEoMt8ONZdch5s41t+7m8HEWiA0JMAzc2nSleeaKH3T1Yz+jpaUJfJy2V5qPUwDaNAs+UA3l5QmXsqcU+D03mcaHkAeLaY7y4Pr375tzAl6FlZ7oajELereEqcZzIKQlvE3jCWdzA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=7+iuW0RDBUTbt0qHeocRLBwsD9QIgt3TeJsDwHyhqEs=;
+ b=ngyMSQlIThjtjgFvKb11ukXn407uHvEDoNJ3WSBmTIw/SkHQo/3WH1+XZuoCABKkbM/6CSRVqVEl6zFFi3UnCdB4Vy5xq1bIQ9wz6WLTQDv+/vadz5UJJEKRaJNHD4l4eORWXfyYsy+G0aBjYSOR7f4NoTs53FARx5TcYdUT6euWgaL/L4xxoDGu9y65iaynoB0HcRfQhYJWF9Sm7nM7dZBhpdZTEoYfjy81/FBtQ6bmo742Ky210bObtB6iaCev8qmbl8XcNyNHApyFuqm2vLqOwH1WdG84kzBiIylHjX4dTbeOue1bAgXBRFNo0Mp24BOpjZfSi8EHfpdYK5gCeg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=7+iuW0RDBUTbt0qHeocRLBwsD9QIgt3TeJsDwHyhqEs=;
+ b=Y8k3KBBrWikpHCsdY8m41y+86N8FX4ZqIfFFInxoPwQgYfHkjCp021DpB1ZYTgWs8WgojFR2NgzS2Ov/0E4zWhBfCOFNeBuCEQFooS6JvpqqX6oAmxwGCSraXtmrrmQAcGZQCTM06iPQ6LaWuG311osRuq0AWB6XTmMOzIH4m1M=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
+ by DS0PR12MB6464.namprd12.prod.outlook.com (2603:10b6:8:c4::5) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7362.36; Mon, 11 Mar 2024 15:14:12 +0000
+Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
+ ([fe80::6622:ec76:9367:3907]) by SJ2PR12MB8109.namprd12.prod.outlook.com
+ ([fe80::6622:ec76:9367:3907%2]) with mapi id 15.20.7362.035; Mon, 11 Mar 2024
+ 15:14:09 +0000
+Message-ID: <3c44793c-a557-40e5-b367-15619e9d03f2@amd.com>
+Date: Mon, 11 Mar 2024 16:14:04 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 8/8] board: add support for Qualcomm SA8155P-ADP board
+Subject: Re: [PATCH v3] test/py: reset: Add a test for reset command
 Content-Language: en-US
-To: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Cc: Sumit Garg <sumit.garg@linaro.org>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
-References: <20240306005230.2638972-1-volodymyr_babchuk@epam.com>
- <20240306005230.2638972-9-volodymyr_babchuk@epam.com>
- <CAFA6WYNWxHU4W0xrTC=mQJbP49hFMm56fbz1isd0xNNQ_VdVSw@mail.gmail.com>
- <87jzmf2mvi.fsf@epam.com> <e5e47988-c617-48a0-a10a-e37edb9a8267@linaro.org>
- <87y1av12bg.fsf@epam.com>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <87y1av12bg.fsf@epam.com>
-Content-Type: text/plain; charset=UTF-8
+To: Tom Rini <trini@konsulko.com>
+Cc: Love Kumar <love.kumar@amd.com>,
+ Angelo Dureghello <angelo@kernel-space.org>, u-boot@lists.denx.de,
+ git@xilinx.com, Marek Vasut <marex@denx.de>
+References: <c11e1809-b5d1-46cd-a5c8-a5276b83f26f@amd.com>
+ <c523aabd-93a4-f9db-2726-7f912a85aef0@kernel-space.org>
+ <20240307001053.GE1523872@bill-the-cat>
+ <c05a25ca-d4b7-1179-cf46-645bc4cdba89@kernel-space.org>
+ <c0bbe63d-adee-456f-bcf8-44579aa2593a@amd.com>
+ <20240307125525.GF1523872@bill-the-cat>
+ <553992bb-c159-d9b9-6e9d-b762ea55da79@kernel-space.org>
+ <cf96e2a6-9e49-4058-8bfc-f31b3d028190@amd.com>
+ <20240311143938.GV1523872@bill-the-cat>
+ <9e3f916a-7e5b-4ec8-abe4-c2cead1df557@amd.com>
+ <20240311150908.GX1523872@bill-the-cat>
+From: Michal Simek <michal.simek@amd.com>
+Autocrypt: addr=michal.simek@amd.com; keydata=
+ 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
+ 3i3l5DA=
+In-Reply-To: <20240311150908.GX1523872@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: SJ0PR05CA0107.namprd05.prod.outlook.com
+ (2603:10b6:a03:334::22) To SJ2PR12MB8109.namprd12.prod.outlook.com
+ (2603:10b6:a03:4f5::8)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|DS0PR12MB6464:EE_
+X-MS-Office365-Filtering-Correlation-Id: 64f4d6b9-c2db-4147-e249-08dc41dde6cc
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: kUv6as5gJdwHvi1aa/F4zyDzQd2W/WJ68aBE6LNsyTJV65oM8OUGL/wwnfTs1ymukefI87bZ92sVdiUnxK+m0rLz3VUpY0ZQcp+S9uOmGDiIj2zOx0BRNIB2k8sCBr7HoCJVafw++DFXDlIewi3+JfVvpomm1gfC0M1g36DuMSDfuNPCBqrJBvobpCtRuAAa6uRg2iSQCi1S9i12GldKQNWeMnyX71P1yTTRh4vg76WqWGu+i2r3mR+wq1+UjO8gH/BKLibWdEHWLW6iZceyGL1BX9TXZqmyxYHYcaZStZvVOre0DoUEBieNbxsyYcKpJ1Ydkc2JD61RzNmJ6bZ6att1MvFdmQ1dxc7siz9AWoLiSybeMFpyqT4yKJOXrb11L8cvRxxsDrUALoWTpeEoHtF4BUjYQWFzS6pb50xFcjoiWJixNUXV/bUt6GAtmV8lGz830wWAqsgAVv+RWRzHVYpTU89VR433ZKfduXNNR0FY9/R0YKGK3pwSxDGsp+F5MDOEMESxfLXUxbwypg0zAzmFW6lURiZbXggaf2vqcj2WebcE1amfiu3wAo+bKnN3a4x0XQCG8h9SVKwsSIWJt2rVnYWt85RAMvNXQ4A6+vFI5hbAN0CuJVEQc81aK42sDSG4/OXQhINMv0mZlqX3n3sEjDoxJ/+aKkW1oIdgXkg=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(1800799015)(376005); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?R0hQQVhFbG4zV1IzU2FrVkVjQVFPejZwRWVTdVJMMXFrdDNTd2xmTHJpUTVX?=
+ =?utf-8?B?a0xIWkhJYUg0Sk1OWXcxeWFRMHo5QWZoZEozNHR1cVlqR2hXeCs2VHcrQjVD?=
+ =?utf-8?B?eVJhY1VuNDNrbWk4dndVT3drRm9ocEExZmh2ZFAxbUUydERyZXpYbG8xVkJ5?=
+ =?utf-8?B?WGtGVFdJNVI3M2JyUFgvQ0p4Ync4V3hCc2xZTVZKTzZwYVQ3ek5GWjQrVmdT?=
+ =?utf-8?B?WDdxajFwOEF4UldoeVdreE1WbEl6S2p4N1hZU3YySnNybHlPeExBS0puQjho?=
+ =?utf-8?B?Unl5SjlNV1FnWmIweTlMaVNDWHZiY2lHTXRWd0JTcDV6Rk5TMWM3WmIxV0NB?=
+ =?utf-8?B?QTdQTU5KS29GcEgwbUt6TFRCaGtvaFJzbnZnQ3RqREJHUkI1WDYzcjVnVTdy?=
+ =?utf-8?B?VnRoVzk2M1dsNXZESWtLR3FFd1dTdlR3bk52YTFUdkgyZ2w3YU9DaGRqZk5D?=
+ =?utf-8?B?VDFxNndlMndKcExUenlnTzZ2bWtBN01BOWxYT2F2ODNZVTNWUHZNWXZqTGth?=
+ =?utf-8?B?eURZRmdPTkJSVDJnUnczYmhMTlZrd1hubHhqblJqT1h3RXBJa0VWK0dWS0l2?=
+ =?utf-8?B?YXZrY1dqZWlTMTBaTjhGUVdVV211N3QxS0FGbDhYWHUwV2E5UWJ1ZG5BT2xK?=
+ =?utf-8?B?anVDWk10cXJUOWd5U3V6M1E5cExwQlJtanphSTUwR3ppYUxGRGs1SUJ0SVBH?=
+ =?utf-8?B?eWFSZ3BLQnNIQ1NDYjdDOXdXd3B1NTY2N29Ick5Qbk1GRmRQclFURWZjOXla?=
+ =?utf-8?B?aU1LNThJTW1QZDNJcmVqMU4xNVEzV3hmWnVBaTc4QnFQcVFCVEZFQ28xbWR1?=
+ =?utf-8?B?Q2V3djFwZGdIWVJObFFwbjg1OG1kRk9XcjVSTTJvUEpPVmtmT1VBYWN5eVZL?=
+ =?utf-8?B?TWl6VFJWZUErWXNBUzZyNTZoZmxMdWN4V3NUblpjaVIzWHBnbGJzeXBzbFdt?=
+ =?utf-8?B?dGd1TzBUMnVUaXY2UkdSbU1HaGttTGdyQi9kZlpRQVpRdDBBdTFvcGpFUzJB?=
+ =?utf-8?B?d1JFalZTN0Q3UUtsUDM0OGN1VkpkcU5TTDZFTkpnWGVZV0FEU2s1SERidmlC?=
+ =?utf-8?B?R292WC9zTWgwc1FpWDZxTnd0SEpuQ0pRazdOTC9Benp3b0IzOENjaWZiMFRH?=
+ =?utf-8?B?QkRzdmt3U1NtOHgrNWdLY3lzd3BlNyttK3JNK1VlVklhcE9NRzQ5aERhbDVs?=
+ =?utf-8?B?aDR1UncwM1NWZmJGeHpib2ZCd1lqNDBQMDlkNGtwUldXaVpKTmx4elhsMHlC?=
+ =?utf-8?B?Q0VwVHovUlhGRzFOb0RpUDc4LzJhOFJHNVBtRkdZK0IzK3ZRYXBCUTcrcUpo?=
+ =?utf-8?B?MXlJT21uTlpvK0tjL2lmQnQ0cXlsSGxLcENBUDB2SHFBTDFFeGFkYXhxZzU2?=
+ =?utf-8?B?VXdDaVpqcHljd3Z1OEZqVElEUURWcWF4emYxRXJmK003RytXZkRHZWZlOE5h?=
+ =?utf-8?B?WXo0KzNUWXY1ancrVXI0aXIwM295c3o0ZnJTNUlOQnhNU3hmTUFJN0ZheDVM?=
+ =?utf-8?B?OWNwWFZPNWo1Mk5yVEhHN2tPWVpyQUNtN0UyN29QQk9HMXhLeHNxY05TUEVs?=
+ =?utf-8?B?TWV4bDV2czRmRVNpTkFuSktsd2srWUFqeVllSThpVG5mZ3NLeThNVjdXOFJX?=
+ =?utf-8?B?ajRCQm1ISC9pZ29LMWtkOEc3TytyTFFDYmV3KytVdXU5R3g3MGJVZDM4ZlZO?=
+ =?utf-8?B?eERZVWNxV3Mwc052OHBvZURUY3lsRlF1cElrckZScmR0MDY0S1MzSlFYUWZo?=
+ =?utf-8?B?aE5qT0NyRUE4NXg4TWlHa2VoVkhLRHRLZ0dsSHRxNlZzVVp4WlY2SGZyNEo3?=
+ =?utf-8?B?U1ZlN1ZkRG5BaHBvRUtpdXl2aXFJWkpkREZNZHExRWtlNVExd2hlVHIwNk0r?=
+ =?utf-8?B?WnJ3dWV3K2pBVkFoZTMyVUJmeElpQWl5OVRCUG93Ynk2aDg4alNldmV0N2Jw?=
+ =?utf-8?B?MDFoSGhFZGJlbDZ0enJjME41ZTFsRFdqaXJGdXdyd055VERtQlZUYVJPWHBN?=
+ =?utf-8?B?V3lVc2ZDanlRZDhrTEhSaFZKL05qUTNYUnVGNDgyb1NsNjkxUkJiRWdCenpp?=
+ =?utf-8?B?eUtrbDVtTTF0ZnBuME9paW9EVnJCREtnSVhwYndBeVJuaDl3cm1ycjVadENE?=
+ =?utf-8?Q?G+QCHeDBmdHqNFbbFdLmDoBmj?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 64f4d6b9-c2db-4147-e249-08dc41dde6cc
+X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Mar 2024 15:14:09.6356 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: vXVGGgLDGALptUGhRkgSxvRHylURfG3PcVA7W/gU1Dngax/X846TepbB9Bbpt0p6
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB6464
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,165 +199,52 @@ X-Virus-Status: Clean
 
 
 
-On 06/03/2024 21:24, Volodymyr Babchuk wrote:
-> 
-> Hi Caleb,
-> 
-> Caleb Connolly <caleb.connolly@linaro.org> writes:
-> 
-> [...]
->>>>> +};
->>>>> +
->>>>> +&tlmm {
->>>>> +       /* U-Boot pinctrl driver does not understand multiple tiles */
->>>>> +       reg = <0x0 0x03000000 0x0 0x1000000>;
->>>>> +       /delete-property/ reg-names;
+On 3/11/24 16:09, Tom Rini wrote:
+> On Mon, Mar 11, 2024 at 03:52:57PM +0100, Michal Simek wrote:
+>>
+>>
+>> On 3/11/24 15:39, Tom Rini wrote:
+>>> On Mon, Mar 11, 2024 at 02:40:59PM +0530, Love Kumar wrote:
+>>>> Hi,
 >>>>
->>>> This won't be needed if we can make the tiles offset in the pinctrl
->>>> driver compatible:
+>>>> On 11/03/24 2:11 pm, Angelo Dureghello wrote:
+>>>>> Hi,
+>>>>>
+>>>>> jfyi,
+>>>>>
+>>>>> reset support added in qemu
+>>>>> merged as commit d3c79c3974.
+>>>>>
+>>>>> Regards,
+>>>>> angelo
+>>>>>
+>>>> The other issue was with echo commands:
+>>>> => echo $modeboot
+>>>> $modeboot
 >>>>
->>>> #define WEST   0x00000000
->>>> #define EAST   0x00400000
->>>> #define NORTH  0x00800000
->>>> #define SOUTH  0x00C00000
+>>>> => echo $?
+>>>> $?
+>>>>
+>>>> Does HUSH shell is enabled by default for this?
 >>>
->>> Hmm, I assume that in this case pinctrl driver should map all the four
->>> tiles independently? Are there guarantees in U-Boot that four separate
->>> memory regions will be mapped into virtual memory with the same relative
->>> positions? Linux clearly don't make such guarantees.
+>>> It is not, so at least the saveenv test needs to depend on HUSH_PARSER
+>>> too.
 >>
->> U-Boot doesn't use virtual addresses on arm platforms, it only goes as
->> far as reading the address from DT, nothing else, so this is totally
->> fine and is how the other SoCs do it.
+>> Based on logs on this platform echo $? doesn't return any value.
+>> There is any config for it which is not enabled for this platform.
+>> Do you know which Kconfig symbol it is?
+>>
+>> Depending on HUSH is likely big hammer but I was not able to find that exact
+>> Kconfig symbol just for $?
 > 
-> For me it looks like we are depending on implementation details
-> knowledge. I.e MMU API does not provide such guarantees, but drivers
-> know how ARM MMU code is working internally and drivers depend on
-> exactly this behavior. But if you are saying that it is totally fine,
-> I'll rework the patch. No big deal. Actually, I already tried this and
-> it is working fine.
-> 
->>>>> +
->>>>> +       /* U-Boot ethernet driver wants to drive reset as GPIO */
->>>>> +       /delete-node/ phy-reset-pins;
->>>>
->>>> I suppose this is not needed as phy-reset-pins also configures the pin
->>>> as GPIO only.
->>>>
->>> Well, yes. This also puzzles me up, but for some reason it stops working
->>> if I leave this node intact. Looks like I need to look at this deeper
->>> before posting the next version.
->>
->> Possibly the pinconf defined in the phy-reset-pins node causes U-Boot to
->> misbehave, can you check if this patch fixes it (there is a bug in the
->> line "return msm_gpio_direction_input(dev, gpio);", it should become
->> just "msm_gpio_direction_input(dev, gpio);").
->>
->> I had the exact same issue with the gpio-regulator driver and this was
->> the solution I ended up going with.
->>
->> https://urldefense.com/v3/__https://lore.kernel.org/u-boot/20240131-b4-qcom-livetree-v1-7-4071c0787db0@linaro.org/__;!!GF_29dbcQIUBPA!xFhZe7DKgRbr63sirEJLuH-B0AnGs7jvx8tdJPKLTgFuZ3I3_zpVml7l23G-_vJO_JiUR-wUO4GMPJFcE-8p50H3pf7nbxit$
->> [lore[.]kernel[.]org]
-> 
-> It is exactly this. With your patch I don't need to /delete-node/
-> anymore. I'll add a comment in the cover message that this series are
-> depended on your patch.
+> Well, if we don't have the hush parser we have a much more limited
+> parser enabled and I bet that's why (I think there's no variable
+> expansion).
 
-Please can you split the power domain and clock patches into a separate
-series? As I'd like to depend on them for the next revision of my
-series, and we'd otherwise have a cyclical dependency.
-> 
-> (and sorry for the mangled link. It is our corporate mail server doing)
-> 
-> 
->>>
->>>>> +};
->>>>> diff --git a/board/qualcomm/sa8155p-adp/MAINTAINERS b/board/qualcomm/sa8155p-adp/MAINTAINERS
->>>>> new file mode 100644
->>>>> index 0000000000..03fac84f51
->>>>> --- /dev/null
->>>>> +++ b/board/qualcomm/sa8155p-adp/MAINTAINERS
->>>>> @@ -0,0 +1,5 @@
->>>>> +Qualcomm SA8155P Automotive Development Platform
->>>>> +M:     Volodymyr Babchuk <volodymyr_babchuk@epam.com>
->>>>> +S:     Maintained
->>>>> +F:     board/qualcomm/sa8155p-adp/
->>>>> +F:     configs/sa8155p-adp_defconfig
->>>>> diff --git a/configs/sa8155p_adp_defconfig b/configs/sa8155p_adp_defconfig
->>>>> new file mode 100644
->>>>> index 0000000000..b6969767f8
->>>>> --- /dev/null
->>>>> +++ b/configs/sa8155p_adp_defconfig
->>>>> @@ -0,0 +1,35 @@
->>>>> +CONFIG_ARM=y
->>>>> +CONFIG_SKIP_LOWLEVEL_INIT=y
->>>>> +CONFIG_COUNTER_FREQUENCY=19000000
->>>>> +CONFIG_POSITION_INDEPENDENT=y
->>>>> +CONFIG_ENABLE_ARM_SOC_BOOT0_HOOK=y
->>>>> +CONFIG_ARCH_SNAPDRAGON=y
->>>>> +CONFIG_TEXT_BASE=0x85710000
->>>>
->>>> Being position independent shouldn't require a hardcoded U-Boot text
->>>> base. Can you try if we can get rid of this?
->>>>
->>>
->>> Well, it is required if we want to load U-Boot instead of hyp.mbn. We
->>> need correct addresses in the ELF file so Qualcomm loader will not
->>> reject it right away.
->>>
->>>>> +CONFIG_DEFAULT_DEVICE_TREE="qcom/sa8155p-adp"
->>>>> +CONFIG_IDENT_STRING="\nQualcomm SA8155P-ADP"
->>>>> +CONFIG_SYS_LOAD_ADDR=0x85710000
->>>>
->>>> Ditto.
->>>>
->>>>> +CONFIG_REMAKE_ELF=y
->>>>> +CONFIG_BOOTDELAY=3
->>>>> +CONFIG_SYS_CBSIZE=512
->>>>> +# CONFIG_DISPLAY_CPUINFO is not set
->>>>> +CONFIG_HUSH_PARSER=y
->>>>> +CONFIG_OF_UPSTREAM=y
->>>>> +CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->>>>> +CONFIG_NET_RANDOM_ETHADDR=y
->>>>> +CONFIG_CLK=y
->>>>> +CONFIG_CLK_QCOM_SM8150=y
->>>>> +CONFIG_MSM_GPIO=y
->>>>> +CONFIG_PHY_MICREL=y
->>>>> +CONFIG_PHY_MICREL_KSZ90X1=y
->>>>> +CONFIG_DM_MDIO=y
->>>>> +CONFIG_DM_ETH_PHY=y
->>>>> +CONFIG_DWC_ETH_QOS=y
->>>>> +CONFIG_DWC_ETH_QOS_QCOM=y
->>>>> +CONFIG_PHY=y
->>>>> +CONFIG_PINCTRL=y
->>>>> +CONFIG_PINCONF=y
->>>>> +CONFIG_PINCTRL_QCOM_SM8150=y
->>>>> +CONFIG_POWER_DOMAIN=y
->>>>> +CONFIG_MSM_GENI_SERIAL=y
->>>>> +CONFIG_SPMI_MSM=y
->>>>> +CONFIG_LMB_MAX_REGIONS=64
->>>>
->>>> Apart from above, I think this platform should be able to reuse
->>>> qcom_defconfig as you can find most of the config options there. Can
->>>> you try to reuse it?
->>>
->>> Honestly, the whole reason I am porting U-Boot to this platform is
->>> because I want to run Xen on it. And to run Xen, I need to run U-Boot in
->>> EL2. And to do this I need u-boot.elf with "correct" load address and
->>> entry point.
->>>
->>> I am planning to publish and upstream Xen patches as well (once I finish
->>> them). And it will be really nice if Xen users will be able use
->>> mainline U-Boot to boot Xen.
->>
->> I would like to enable the SM8150 drivers in qcom_defconfig (for
->> chainloading and supporting other platforms). But I'm totally fine with
->> having a separate defconfig for this board with this configuration.
-> 
-> Yes, this is a good approach. I'll do this.
-> 
-> [...]
-> 
+ok. Then this test should be limited to HUSH too based on how it is written.
+I think it should be okish limitation and if someone wants to test it on systems 
+without HUSH enabled it should just update it. If is fine for you?
 
--- 
-// Caleb (they/them)
+Thanks,
+Michal
+
