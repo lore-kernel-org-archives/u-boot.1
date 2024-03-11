@@ -4,78 +4,145 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66341C54E58
-	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 20:11:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 919E6C5475B
+	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 20:12:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7B0E187F0D;
-	Mon, 11 Mar 2024 21:11:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 150D287EDF;
+	Mon, 11 Mar 2024 21:12:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=epam.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XAshHve2";
+	dkim=pass (2048-bit key; unprotected) header.d=epam.com header.i=@epam.com header.b="rknvJ/3D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B54487EF7; Mon, 11 Mar 2024 21:11:06 +0100 (CET)
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [IPv6:2a00:1450:4864:20::131])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id DF6E587EF7; Mon, 11 Mar 2024 21:12:02 +0100 (CET)
+Received: from mx0a-0039f301.pphosted.com (mx0a-0039f301.pphosted.com
+ [148.163.133.242])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EEEED87EFF
- for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 21:10:58 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peron.clem@gmail.com
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-513b1c69cb8so963704e87.1
- for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 13:10:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1710187858; x=1710792658; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=2gPpCjtyk7TuUaCVq95Hrn0Bm3fEH4LCM7YF5UhFpXA=;
- b=XAshHve2sm1nQwrhcscPJPc8R0YpnkLphPI6B/JAEcSw7rbXdzNrBoUvJOkO51Ridi
- HJELDCMEmrvzpQtTF+VLXYqvm36YWnIOeGpgv5AWGmgy9b9J9BuJN7+oQCkXQR3o386q
- hpKE8lugqIHBlIeZxxxp8V+QQJRLchYpbnJ+G/YCzdydvUKb6it/9fynQv4d+8sXjFZz
- OMPK6jUc2jWD+HZIeZiJHzrlB52g6hlgOMr8CQVal71KxryzxG3mAst53PNBzidtx+zJ
- idf5bHpOp57vjf02t2T2c5Qak3g9IPHelxfN9quk3cjF3sS425by0w/y6C1UoqU4F+7I
- CXKw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710187858; x=1710792658;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=2gPpCjtyk7TuUaCVq95Hrn0Bm3fEH4LCM7YF5UhFpXA=;
- b=DdPT8CLQbLVkMvts0BsmVfKIQKrFgLpbn52wzAZejTxQeqzGQRWFNRqnlDTe4Q343p
- 10+akMhbDq8FgGWZtxEbZdfRytnO+UwJkXwp1mDa3nAjikCmImH72LynOFw528ZXjicT
- C6hlOrkn6KzJH/5/VzMtN7hUEHxokhm99osSPgXPcXoYNwqhDiVVMlTVZpCo82/+3xOM
- jXS1m6KJdWYcZGxm8zScDzO4RnK13FtIxTBuJJa7f/0PQObTyqYs/3eeydqcs9wgMEeS
- JEt9dbCXsc+1/k94NLur8YmW7xslePnvhctCKGu7dD19p685SLTxPKBxuJShTAyxNSWv
- +oJw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVJS5qY0MGuwdtwkqEOhhLDMJNNHm8ij+cg4jIEDQxkMCmYQ+4MVO9bBxPx4UAC/qRCdL2q2OIXh94o81HUu/JNbSaOKA==
-X-Gm-Message-State: AOJu0YzV/uiO0J4J932wEiufmWG00IXJf8krmepAAPpOXFqLwht133yS
- BdloCDmJo4NPHWbEApH8wNalS93eyzOkGqM1Z+UDFnfQLOHgcv5pymgXKGupLdfFms45a9WZQA0
- +xDOhgLPd8gQ4PcYDCV8oJgxPk4s=
-X-Google-Smtp-Source: AGHT+IGYr4cPhea4AlHJCJdizYXqB09tVX9Ia6iIIl/hlo1qfq1a+7Ks14ukQL9jofKyFsho2KR+cDIWwKdP2EdLkKQ=
-X-Received: by 2002:ac2:57c8:0:b0:513:9990:5997 with SMTP id
- k8-20020ac257c8000000b0051399905997mr3995971lfo.35.1710187857552; Mon, 11 Mar
- 2024 13:10:57 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240309192425.40282-1-ressetkk@gmail.com>
- <20240310220004.0965e2ca@minigeek.lan>
- <CACttifJXW-WJjRBzDYk-TssS6v3XZD=Bc736zcH4emXr46cSPA@mail.gmail.com>
-In-Reply-To: <CACttifJXW-WJjRBzDYk-TssS6v3XZD=Bc736zcH4emXr46cSPA@mail.gmail.com>
-From: =?UTF-8?B?Q2zDqW1lbnQgUMOpcm9u?= <peron.clem@gmail.com>
-Date: Mon, 11 Mar 2024 21:10:45 +0100
-Message-ID: <CAJiuCcegz07RnkCz_jfG3H_E0Vd08ZC2=Z1nCH09gD4=yfC6Ng@mail.gmail.com>
-Subject: Re: [PATCH] sunxi: h616: add initial support for T95 AXP313 TV Box
-To: Kamil Kasperski <ressetkk@gmail.com>
-Cc: Andre Przywara <andre.przywara@arm.com>, u-boot@lists.denx.de, 
- linux-sunxi <linux-sunxi@lists.linux.dev>
-Content-Type: text/plain; charset="UTF-8"
+ by phobos.denx.de (Postfix) with ESMTPS id 53CF787ECC
+ for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 21:11:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=epam.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=9800dbbead=volodymyr_babchuk@epam.com
+Received: from pps.filterd (m0174679.ppops.net [127.0.0.1])
+ by mx0a-0039f301.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
+ 42BJU75N026066; Mon, 11 Mar 2024 20:11:53 GMT
+Received: from eur01-he1-obe.outbound.protection.outlook.com
+ (mail-he1eur01lp2050.outbound.protection.outlook.com [104.47.0.50])
+ by mx0a-0039f301.pphosted.com (PPS) with ESMTPS id 3wt2je14r1-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 11 Mar 2024 20:11:53 +0000 (GMT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=jSItB6xo8Gi0TgGpvr3FAh8jdTBx0XaAWRJd+DlmMMDq+DYqWnrzywkOVyd8mV8q548lkr0lkYt20HN8gV8gCZBaDrjcceRGZ0OipMFQF4e6yL7GJXSAFnRTncSLv4gmEBq4JfzlBw11ihbnTyvUZc/7x4ctDqSp0ojk4JTWJ/L/CXT0QG3noh4+Bu9BQVTQEbQxlf+6R+adh5IOQhfMGUIXc8d1qhFiye89+GGUmgxd0IsCtWSUmawuGSjyWRBRVPhC736dou38kFEePnKAYO6rIiLDmC8rfHgzwTC6bWR3C6nVM6XjWsUCeh334v2yLshcoxo19vtEjM50NKngJg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=n2nBxddpN3hO8qWzJJJJM2s5yINXFp3zhQEE6xXGkV4=;
+ b=THssHPzdEEU7ste3djmaxsd5pwrb6/QF5LfMaY7LVv9E6XSLj4nUMLte429m+mPDOTM/9tHi1pDSjE7MWdsEKFaQps1ubgT6GcQvuTsp5GP7271TGDfORUtCVU+4FOp2NzCDHOUdHLw6lzC87n2/W+y26FpHepDvNCeSp4c/1CSVy1RKRIVNw4iAr0bv4jojRrPY2MBFsJ46oXTu5rs2PWuC0287j6kkT6V4eIKluVZPkq/Z2W3EDvCUZWBE/z0wAhsapbpjGR4+ImVyuA4gaA+b7MCWPkBIifJl9b4Q7CPh2/ZRny3bGSX1kZbABDTCOO3B+wdG7qNgUukavg23ZQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector2; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=n2nBxddpN3hO8qWzJJJJM2s5yINXFp3zhQEE6xXGkV4=;
+ b=rknvJ/3DeB399j3hPVh+8162B4VcQMheYGyFP3AcsjuYV4lp1XlOYTcxQgPn1yKTbAC31mhoH+WLinwzgjsY1CvweKBP9+UKi4iyHse1Qt4rPi1WPFYhn5GYRnNRG1M90dvK7u6NDClm5jT/Jv79SY1RCCAx1f7igiQiRpCNP+aJDs+g/9KBXNLSIVq2ARWPEbHN3qilNS+dVyQHPbnCiJRB0sQ92m65PgwkbprcsnNocpiUzzYO0agaNj4O9SJeULeU/cGTEQG+SlPn1HgmmYjKm1oXsCryydEGOQ6UuXOtc6ggvm6s9SGWQiDWkw/87Rebajj1bGt5HdJhhmSD9A==
+Received: from GV1PR03MB10456.eurprd03.prod.outlook.com
+ (2603:10a6:150:16a::21) by PA4PR03MB7487.eurprd03.prod.outlook.com
+ (2603:10a6:102:104::18) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7362.35; Mon, 11 Mar
+ 2024 20:11:49 +0000
+Received: from GV1PR03MB10456.eurprd03.prod.outlook.com
+ ([fe80::bfa8:3549:ac92:d0d8]) by GV1PR03MB10456.eurprd03.prod.outlook.com
+ ([fe80::bfa8:3549:ac92:d0d8%4]) with mapi id 15.20.7362.031; Mon, 11 Mar 2024
+ 20:11:48 +0000
+From: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+To: Caleb Connolly <caleb.connolly@linaro.org>
+CC: Sumit Garg <sumit.garg@linaro.org>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH v2 8/8] board: add support for Qualcomm SA8155P-ADP board
+Thread-Topic: [PATCH v2 8/8] board: add support for Qualcomm SA8155P-ADP board
+Thread-Index: AQHab2CjKZvPgmo3NEWX73nxw+EzJLEqNlMAgADZo4CAABqOAIAADGmAgAd3mYCAADMxAIAACcIAgAASz4A=
+Date: Mon, 11 Mar 2024 20:11:48 +0000
+Message-ID: <874jdc1qbg.fsf@epam.com>
+References: <20240306005230.2638972-1-volodymyr_babchuk@epam.com>
+ <20240306005230.2638972-9-volodymyr_babchuk@epam.com>
+ <CAFA6WYNWxHU4W0xrTC=mQJbP49hFMm56fbz1isd0xNNQ_VdVSw@mail.gmail.com>
+ <87jzmf2mvi.fsf@epam.com> <e5e47988-c617-48a0-a10a-e37edb9a8267@linaro.org>
+ <87y1av12bg.fsf@epam.com> <0cda2608-856f-4650-92a6-4860a0d7c8b6@linaro.org>
+ <87edcg1vcp.fsf@epam.com> <b8774081-dd8f-4154-9c39-0c0b5fd48adb@linaro.org>
+In-Reply-To: <b8774081-dd8f-4154-9c39-0c0b5fd48adb@linaro.org>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: mu4e 1.10.7; emacs 29.1
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: GV1PR03MB10456:EE_|PA4PR03MB7487:EE_
+x-ms-office365-filtering-correlation-id: 8f374502-baea-4ada-9288-08dc42077bc3
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: abroNg5sDpVkMvEjv3rcdcCISaIEHD8EWnvQ8cSHUJ4JOzH56HqG+TVNxTSbi556GU6g7HWyn1UFod1qthUHI2sDkTfzpwoS9GINV4geqa212nw+1Whg6gDpbhmHt/JXVTRm9l21Ouq2DTwJ339JV74VWes38g4r6ycJRZv2U0591jP4JvrmmJHMd84BJh8uk2aNdOlMgbBMvUQ1lXwpEnQFx36/LCIBCSPF0QDapsVatz0jyhowdB8m37bcp5ucZsb7swEfAymBhOSrMdiYSlZV7JQGcsFzzbYcFqQ/6SrB8NINGZqxAYD0neHrws+0FYr4L43fYHQdkjQeKbHZaqViCpoYIR3CBFZVk6ktfi7unstoshO4f/Qq5wQij5qEwMOh1BUV2bAnyCtIdyLlIpf/6I8dso9zkeGW1zLApCMmw/457Mw+RpGzFCe6JKeOeGOwkRHiNsIWN2Gt3s3kFrYFztTXasCtTXrWG1sdVhveONRPYiXw0/8D8ZdXkB8WtQtq75+yFZFRcjh/pO26BBUBK+EX3N+K1LwAiasoOFRRZ6/2u8dyLXqT4wdwPXkj7qj97uAzPDGew4gwZ9/Lx0UL+I/69r+FwcOi6JmzF52TB3m0u57AEQZypmjyemsjGP4zQ0nXH7fMU5aEIVXIUWPQZmS2ygXdNrPbj3q0hKg=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GV1PR03MB10456.eurprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(376005)(1800799015)(38070700009); DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?P9JPgjhHajhDHwPPzH7/Gpk4dEPx5OCOaewOJLduLf3qII+XJa6ytPR16S?=
+ =?iso-8859-1?Q?3jO8bzio1vhw/2YECo01N9i1PzzGeotF4qcisz6ivkKvdDhr1IAHkjGlYQ?=
+ =?iso-8859-1?Q?gSxJkHVEZEnXq+3l9k96DKYkC7oMDLnphN+lumqL97yyeqlwFr9vRztaEs?=
+ =?iso-8859-1?Q?pXYZsL8DvNUnCKAluaJBtJ/Mmr1oVaOUd7RsaxgUPfONX+W6fV75PC5+qf?=
+ =?iso-8859-1?Q?UIUGkbxUHdTs6homBhzSc+3w+sysvONLL7XLE1IGxDeITzXkffULnjZ5A9?=
+ =?iso-8859-1?Q?h6TS1vPAS3xl7KNEXHXTi28sA9j9vKFBq4DlbhGE/8DZRyyEi5bK1wxti/?=
+ =?iso-8859-1?Q?+3ywDfd2jE18wHdHHoQhH2Nb9qSySFD2sU7/iYjY2blWjZ5092v+3OsQ6w?=
+ =?iso-8859-1?Q?oj4MyF1pMM4Y7KgzDN2E+q/6pcoSG1q/7Th4+dxdh5nmM+y8K5P2RGLDHd?=
+ =?iso-8859-1?Q?mPkXuqb2AnTHsoagAsmAL5XMIADUCmCimSHceDD8zoPJ1zt/xdNdKmp+HZ?=
+ =?iso-8859-1?Q?7geGHGNGFyERf6yByywJygxaNnWcDdE98ZLMDv1ziat4N6rfcZB7NB7MFw?=
+ =?iso-8859-1?Q?UOT8FhEJ2b+m+oK/OewSm/F9ldfvaS7vk/kTsHlaApSso5/RVXxhZRnnf8?=
+ =?iso-8859-1?Q?h5xHxDIvLCtKtvY7MseurtcWOxTfCCAMovIlFDL1kMvEhE0Mlh24kjL55X?=
+ =?iso-8859-1?Q?+rXyNXkp6cMGzEoBChsjK/J/QrF1igw8m1AdQa99kw0QY1G+Ff84IBRbMd?=
+ =?iso-8859-1?Q?U94BGBaT8YEVoe8UyD+8RTC4smV1qqo0nKAVD5YHGNd49JpZ/Bg4vJuDHE?=
+ =?iso-8859-1?Q?XIQGYgFZlIxO+k1gj7GOhLyaYCNOVEWBdJOBTb1kg30dN2v7Ef1mm57uny?=
+ =?iso-8859-1?Q?ySDFAvkvuGNLOKhUE2h9hc6/o/wJVD3Pu0kiAsFulj/uJWCBRYGe1lOmim?=
+ =?iso-8859-1?Q?Dt8c1mo7QkJaK3ReTuB40KVR5MPzZctbqvPhnHBxjO/3baEkHY+qelizws?=
+ =?iso-8859-1?Q?23FPaWT0zcOpLSrJgACiBxZZ6t/dZry8rnKceBqApmyJHa8uBsyIZi1GMW?=
+ =?iso-8859-1?Q?BLNT2CGnoUsOuIhOaDV5PM3LPoZ2EzwpJ75XbYzy/k7zY3d7uETDL3eT1N?=
+ =?iso-8859-1?Q?qjEYlMLWKijeSprFmFnqadwghw695QEukfIv6oca4mhk15DxnU1bK2RnI7?=
+ =?iso-8859-1?Q?2VHQSyc0ilFQ1gWA/2ks84HeBfNrjjNxSqUeSt4KUHTMqUQg9QsNhukxdm?=
+ =?iso-8859-1?Q?3ANilrtkr6pJk604FIEr5C+rJD0/FgMAcSLUWu3Zvj1Id43m+ZKqRHNaun?=
+ =?iso-8859-1?Q?rqpQcsEJ3zQmsgGy63UQ5YoztCsAJDM4oTpeb5kuqSHgSTUqjHxVGuju1Y?=
+ =?iso-8859-1?Q?WCV0a1JdWn2X7b0KWH0RmacElwD6QqSR0OLCLQ0/6PpgGlRAlmh08CDIPA?=
+ =?iso-8859-1?Q?5XX8d9ZXNkF4BnyCRc4X9pBwDhTA1sYan/eYxfVy49ZIezELobgjQWPtcD?=
+ =?iso-8859-1?Q?aP256dS7EINoJeknznGbPwe4Kr5a4cmR0DW4jtCE1iSgQIinhGjWtKFyYa?=
+ =?iso-8859-1?Q?8H7DaYrJ+1mDG7j3a2P/EEOZs/Y2L5tbzxuHpxfLq+1Rdsny1rl0gUluf8?=
+ =?iso-8859-1?Q?2qC6uBNj3uLRinqj0k0OPRLMPd3sZxQOF1JCrNyUMFKq/Zv+srMljbzQ?=
+ =?iso-8859-1?Q?=3D=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: GV1PR03MB10456.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8f374502-baea-4ada-9288-08dc42077bc3
+X-MS-Exchange-CrossTenant-originalarrivaltime: 11 Mar 2024 20:11:48.8180 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: cwGw/jnjc6Yxh3GvwFk9HcFJmsgGgjaasQArvkXy520A86LYQx+815ipUvzUEfsKCzhZv2Jtk4yMvVQkKFM9c96ETSyYafqe1rarldDjn3c=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR03MB7487
+X-Proofpoint-ORIG-GUID: AGr0L_B2BRXMA7NrW3pCor6dBR2Tw9ls
+X-Proofpoint-GUID: AGr0L_B2BRXMA7NrW3pCor6dBR2Tw9ls
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-03-11_11,2024-03-11_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 mlxlogscore=999
+ bulkscore=0 lowpriorityscore=0 adultscore=0 suspectscore=0 malwarescore=0
+ phishscore=0 mlxscore=0 impostorscore=0 priorityscore=1501 spamscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2402120000
+ definitions=main-2403110154
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,309 +159,130 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-On Mon, 11 Mar 2024 at 11:38, Kamil Kasperski <ressetkk@gmail.com> wrote:
->
-> Hello Andre,
-> Thanks for your reply and thanks for pointing some stuff out.
->
-> > What is "mbox"? Do you have any more information about this vendor?
->
-> "MBOX" refers to the "Model" string from system properties.
-> The problem is that it's quite hard to pin the correct vendor, since
-> the OS is built based on Google Pixel 2.
-> You can see that the fingerprint contains strings only for this phone:
-> [ro.build.fingerprint]:
-> [google/walley/walleye:10/QP1A.191105.004/eng.cmj.20220408.125005:userdeb=
-ug/test-keys]
-> Setting the device model as Vendor string seemed to be the most safe bet.
-> If you have any other suggestions, please let me know.
 
-Maybe a suggestion could be "YAGALA"
+Caleb Connolly <caleb.connolly@linaro.org> writes:
 
-If you look on amazon, aliexpress you could find some vendors setting
-the brand to this name.
+> On 11/03/2024 18:23, Volodymyr Babchuk wrote:
+>> Hi Caleb,
+>> Caleb Connolly <caleb.connolly@linaro.org> writes:
+>>=20
+>>> On 06/03/2024 21:24, Volodymyr Babchuk wrote:
+>>>>
+>>>> Hi Caleb,
+>>>>
+>>>> Caleb Connolly <caleb.connolly@linaro.org> writes:
+>>>>
+>>>> [...]
+>>>>>>>> +};
+>>>>>>>> +
+>>>>>>>> +&tlmm {
+>>>>>>>> +       /* U-Boot pinctrl driver does not understand multiple tile=
+s */
+>>>>>>>> +       reg =3D <0x0 0x03000000 0x0 0x1000000>;
+>>>>>>>> +       /delete-property/ reg-names;
+>>>>>>>
+>>>>>>> This won't be needed if we can make the tiles offset in the pinctrl
+>>>>>>> driver compatible:
+>>>>>>>
+>>>>>>> #define WEST   0x00000000
+>>>>>>> #define EAST   0x00400000
+>>>>>>> #define NORTH  0x00800000
+>>>>>>> #define SOUTH  0x00C00000
+>>>>>>
+>>>>>> Hmm, I assume that in this case pinctrl driver should map all the fo=
+ur
+>>>>>> tiles independently? Are there guarantees in U-Boot that four separa=
+te
+>>>>>> memory regions will be mapped into virtual memory with the same rela=
+tive
+>>>>>> positions? Linux clearly don't make such guarantees.
+>>>>>
+>>>>> U-Boot doesn't use virtual addresses on arm platforms, it only goes a=
+s
+>>>>> far as reading the address from DT, nothing else, so this is totally
+>>>>> fine and is how the other SoCs do it.
+>>>>
+>>>> For me it looks like we are depending on implementation details
+>>>> knowledge. I.e MMU API does not provide such guarantees, but drivers
+>>>> know how ARM MMU code is working internally and drivers depend on
+>>>> exactly this behavior. But if you are saying that it is totally fine,
+>>>> I'll rework the patch. No big deal. Actually, I already tried this and
+>>>> it is working fine.
+>>>>
+>>>>>>>> +
+>>>>>>>> +       /* U-Boot ethernet driver wants to drive reset as GPIO */
+>>>>>>>> +       /delete-node/ phy-reset-pins;
+>>>>>>>
+>>>>>>> I suppose this is not needed as phy-reset-pins also configures the =
+pin
+>>>>>>> as GPIO only.
+>>>>>>>
+>>>>>> Well, yes. This also puzzles me up, but for some reason it stops wor=
+king
+>>>>>> if I leave this node intact. Looks like I need to look at this deepe=
+r
+>>>>>> before posting the next version.
+>>>>>
+>>>>> Possibly the pinconf defined in the phy-reset-pins node causes U-Boot=
+ to
+>>>>> misbehave, can you check if this patch fixes it (there is a bug in th=
+e
+>>>>> line "return msm_gpio_direction_input(dev, gpio);", it should become
+>>>>> just "msm_gpio_direction_input(dev, gpio);").
+>>>>>
+>>>>> I had the exact same issue with the gpio-regulator driver and this wa=
+s
+>>>>> the solution I ended up going with.
+>>>>>
+>>>>> https://urldefense.com/v3/__https://lore.kernel.org/u-boot/20240131-b=
+4-qcom-livetree-v1-7-4071c0787db0@linaro.org/__;!!GF_29dbcQIUBPA!xFhZe7DKgR=
+br63sirEJLuH-B0AnGs7jvx8tdJPKLTgFuZ3I3_zpVml7l23G-_vJO_JiUR-wUO4GMPJFcE-8p5=
+0H3pf7nbxit$
+>>>>> [lore[.]kernel[.]org]
+>>>>
+>>>> It is exactly this. With your patch I don't need to /delete-node/
+>>>> anymore. I'll add a comment in the cover message that this series are
+>>>> depended on your patch.
+>>>
+>>> Please can you split the power domain and clock patches into a separate
+>>> series? As I'd like to depend on them for the next revision of my
+>>> series, and we'd otherwise have a cyclical dependency.
+>> Of course.
+>> As I understood, you are interested in "clk: qcom: clear div mask
+>> before
+>> assigning a new divider" and "clk: qcom: add support for power domains
+>> uclass", correct?
+>
+> Yes.
 
-Regards,
+Okay, I'll send it today.
 
->
-> > But please note that the devicetree needs to go through the Linux
-> > mailing lists and repo first, and we automatically copy it from the
-> > Linux tree once it has been merged there.
->
-> Thanks for pointing that out. I'll contact Linux maintainers
-> and will send updated patch.
->
-> Best regards,
-> Kamil
->
->
-> niedz., 10 mar 2024 o 23:00 Andre Przywara <andre.przywara@arm.com> napis=
-a=C5=82(a):
-> >
-> > On Sat,  9 Mar 2024 19:24:26 +0000
-> > Kamil Kasperski <ressetkk@gmail.com> wrote:
-> >
-> > Hi Kamil,
-> >
-> > many thanks for sending a patch, that looks mostly good from the
-> > technical point of view, only some smaller comments.
-> >
-> > But please note that the devicetree needs to go through the Linux
-> > mailing lists and repo first, and we automatically copy it from the
-> > Linux tree once it has been merged there. This is to ensure proper
-> > review and checks with the Linux tooling.
-> >
-> > So can you please send just the .dts file to the DT and sunxi
-> > maintainers the respective lists, as reported by get_maintainer.pl?
-> > Then we can take it from there.
-> >
-> > > T95 is a most commonly known for being a box with a pre-installed mal=
-ware.
-> > > It uses Allwinner H616 and comes with eMMC and DDR3 memory.
-> > > This device comes with two versions - one with AXP305 PMIC and anothe=
-r with AXP313 PMIC.
-> > > The AXP313 version comes with Secure Boot enabled and locked bootload=
-er, so the u-boot has to be built with TOC0.
-> > > DRAM settings are taken from Allwinner's boot0 for this box.
-> >
-> > Ah, thanks for figuring those out, that's very helpful.
-> >
-> > >
-> > > Cc: Andre Przywara <andre.przywara@arm.com>
-> > >
-> > > Signed-off-by: Kamil Kasperski <ressetkk@gmail.com>
-> > > ---
-> > >  arch/arm/dts/Makefile                   |   3 +-
-> > >  arch/arm/dts/sun50i-h616-t95-axp313.dts | 148 ++++++++++++++++++++++=
-++
-> > >  configs/t95_axp313_defconfig            |  27 +++++
-> > >  3 files changed, 177 insertions(+), 1 deletion(-)
-> > >  create mode 100644 arch/arm/dts/sun50i-h616-t95-axp313.dts
-> > >  create mode 100644 configs/t95_axp313_defconfig
-> > >
-> > > diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-> > > index b102ffb5f6..144daf6c48 100644
-> > > --- a/arch/arm/dts/Makefile
-> > > +++ b/arch/arm/dts/Makefile
-> > > @@ -842,7 +842,8 @@ dtb-$(CONFIG_MACH_SUN50I_H616) +=3D \
-> > >       sun50i-h618-orangepi-zero2w.dtb \
-> > >       sun50i-h618-orangepi-zero3.dtb \
-> > >       sun50i-h618-transpeed-8k618-t.dtb \
-> > > -     sun50i-h616-x96-mate.dtb
-> > > +     sun50i-h616-x96-mate.dtb \
-> > > +     sun50i-h616-t95-axp313.dtb
-> > >  dtb-$(CONFIG_MACH_SUN50I) +=3D \
-> > >       sun50i-a64-amarula-relic.dtb \
-> > >       sun50i-a64-bananapi-m64.dtb \
-> > > diff --git a/arch/arm/dts/sun50i-h616-t95-axp313.dts b/arch/arm/dts/s=
-un50i-h616-t95-axp313.dts
-> > > new file mode 100644
-> > > index 0000000000..b006f363d5
-> > > --- /dev/null
-> > > +++ b/arch/arm/dts/sun50i-h616-t95-axp313.dts
-> > > @@ -0,0 +1,148 @@
-> > > +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> > > +/*
-> > > + * Copyright (C) 2021 Arm Ltd.
-> >
-> > Please change this copyright you and this year.
-> >
-> > > + */
-> > > +
-> > > +/dts-v1/;
-> > > +
-> > > +#include "sun50i-h616.dtsi"
-> > > +
-> > > +#include <dt-bindings/gpio/gpio.h>
-> > > +#include <dt-bindings/interrupt-controller/arm-gic.h>
-> > > +
-> > > +/ {
-> > > +     model =3D "T95 (AXP313)";
-> > > +     compatible =3D "mbox,t95-axp313", "allwinner,sun50i-h616";
-> >
-> > What is "mbox"? Do you have any more information about this vendor?
-> > In any case a new vendor would need to be added to
-> > Documentation/devicetree/bindings/vendor-prefixes.yaml, in a separate
-> > patch. Also you need a patch to add this compatible combination to
-> > Documentation/devicetree/bindings/arm/sunxi.yaml.
-> >
-> > Cheers,
-> > Andre
-> >
-> > > +
-> > > +     aliases {
-> > > +             serial0 =3D &uart0;
-> > > +     };
-> > > +
-> > > +     chosen {
-> > > +             stdout-path =3D "serial0:115200n8";
-> > > +     };
-> > > +
-> > > +     reg_vcc5v: vcc5v {
-> > > +             /* board wide 5V supply directly from the DC input */
-> > > +             compatible =3D "regulator-fixed";
-> > > +             regulator-name =3D "vcc-5v";
-> > > +             regulator-min-microvolt =3D <5000000>;
-> > > +             regulator-max-microvolt =3D <5000000>;
-> > > +             regulator-always-on;
-> > > +     };
-> > > +};
-> > > +
-> > > +&ehci0 {
-> > > +     status =3D "okay";
-> > > +};
-> > > +
-> > > +&ehci2 {
-> > > +     status =3D "okay";
-> > > +};
-> > > +
-> > > +&ir {
-> > > +     status =3D "okay";
-> > > +};
-> > > +
-> > > +&mmc0 {
-> > > +     cd-gpios =3D <&pio 8 16 GPIO_ACTIVE_LOW>; /* PI16 */
-> > > +     vmmc-supply =3D <&reg_dldo1>;
-> > > +     status =3D "okay";
-> > > +};
-> > > +
-> > > +&mmc2 {
-> > > +     vmmc-supply =3D <&reg_dldo1>;
-> > > +     vqmmc-supply =3D <&reg_aldo1>;
-> > > +     bus-width =3D <8>;
-> > > +     non-removable;
-> > > +     cap-mmc-hw-reset;
-> > > +     mmc-ddr-1_8v;
-> > > +     mmc-hs200-1_8v;
-> > > +     status =3D "okay";
-> > > +};
-> > > +
-> > > +&ohci0 {
-> > > +     status =3D "okay";
-> > > +};
-> > > +
-> > > +&ohci2 {
-> > > +     status =3D "okay";
-> > > +};
-> > > +
-> > > +&r_i2c {
-> > > +     status =3D "okay";
-> > > +
-> > > +     axp313: pmic@36 {
-> > > +             compatible =3D "x-powers,axp313a";
-> > > +             reg =3D <0x36>;
-> > > +             #interrupt-cells =3D <1>;
-> > > +             interrupt-controller;
-> > > +             interrupt-parent =3D <&pio>;
-> > > +             interrupts =3D <2 9 IRQ_TYPE_LEVEL_LOW>;  /* PC9 */
-> > > +
-> > > +             vin1-supply =3D <&reg_vcc5v>;
-> > > +             vin2-supply =3D <&reg_vcc5v>;
-> > > +             vin3-supply =3D <&reg_vcc5v>;
-> > > +
-> > > +             regulators {
-> > > +                     /* Supplies VCC-PLL, so needs to be always on. =
-*/
-> > > +                     reg_aldo1: aldo1 {
-> > > +                             regulator-always-on;
-> > > +                             regulator-min-microvolt =3D <1800000>;
-> > > +                             regulator-max-microvolt =3D <1800000>;
-> > > +                             regulator-name =3D "vcc1v8";
-> > > +                     };
-> > > +
-> > > +                     /* Supplies VCC-IO, so needs to be always on. *=
-/
-> > > +                     reg_dldo1: dldo1 {
-> > > +                             regulator-always-on;
-> > > +                             regulator-min-microvolt =3D <3300000>;
-> > > +                             regulator-max-microvolt =3D <3300000>;
-> > > +                             regulator-name =3D "vcc3v3";
-> > > +                     };
-> > > +
-> > > +                     reg_dcdc1: dcdc1 {
-> > > +                             regulator-always-on;
-> > > +                             regulator-min-microvolt =3D <810000>;
-> > > +                             regulator-max-microvolt =3D <990000>;
-> > > +                             regulator-name =3D "vdd-gpu-sys";
-> > > +                     };
-> > > +
-> > > +                     reg_dcdc2: dcdc2 {
-> > > +                             regulator-always-on;
-> > > +                             regulator-min-microvolt =3D <810000>;
-> > > +                             regulator-max-microvolt =3D <1100000>;
-> > > +                             regulator-name =3D "vdd-cpu";
-> > > +                     };
-> > > +
-> > > +                     reg_dcdc3: dcdc3 {
-> > > +                             regulator-always-on;
-> > > +                             regulator-min-microvolt =3D <1360000>;
-> > > +                             regulator-max-microvolt =3D <1360000>;
-> > > +                             regulator-name =3D "vdd-dram";
-> > > +                     };
-> > > +             };
-> > > +     };
-> > > +};
-> > > +
-> > > +&pio {
-> > > +     vcc-pc-supply =3D <&reg_aldo1>;
-> > > +     vcc-pg-supply =3D <&reg_dldo1>;
-> > > +     vcc-ph-supply =3D <&reg_dldo1>;
-> > > +     vcc-pi-supply =3D <&reg_dldo1>;
-> > > +};
-> > > +
-> > > +&uart0 {
-> > > +     pinctrl-names =3D "default";
-> > > +     pinctrl-0 =3D <&uart0_ph_pins>;
-> > > +     status =3D "okay";
-> > > +};
-> > > +
-> > > +&usbotg {
-> > > +     dr_mode =3D "host";       /* USB A type receptable */
-> > > +     status =3D "okay";
-> > > +};
-> > > +
-> > > +&usbphy {
-> > > +     status =3D "okay";
-> > > +};
-> > > diff --git a/configs/t95_axp313_defconfig b/configs/t95_axp313_defcon=
-fig
-> > > new file mode 100644
-> > > index 0000000000..6542b5bc88
-> > > --- /dev/null
-> > > +++ b/configs/t95_axp313_defconfig
-> > > @@ -0,0 +1,27 @@
-> > > +CONFIG_ARM=3Dy
-> > > +CONFIG_ARCH_SUNXI=3Dy
-> > > +CONFIG_DEFAULT_DEVICE_TREE=3D"sun50i-h616-t95-axp313"
-> > > +CONFIG_SPL=3Dy
-> > > +CONFIG_MACH_SUN50I_H616=3Dy
-> > > +CONFIG_DRAM_CLK=3D648
-> > > +CONFIG_DRAM_SUN50I_H616_ODT_EN=3D0x1
-> > > +CONFIG_DRAM_SUN50I_H616_DX_ODT=3D0x03030303
-> > > +CONFIG_DRAM_SUN50I_H616_DX_DRI=3D0x0e0e0e0e
-> > > +CONFIG_DRAM_SUN50I_H616_CA_DRI=3D0x1c1c
-> > > +CONFIG_DRAM_SUN50I_H616_TPR10=3D0x2f0006
-> > > +CONFIG_DRAM_SUN50I_H616_TPR11=3D0xffffdddd
-> > > +CONFIG_DRAM_SUN50I_H616_TPR12=3D0xfedf7657
-> > > +CONFIG_SUNXI_DRAM_H616_DDR3_1333=3Dy
-> > > +CONFIG_R_I2C_ENABLE=3Dy
-> > > +CONFIG_SPL_I2C=3Dy
-> > > +CONFIG_SPL_SYS_I2C_LEGACY=3Dy
-> > > +CONFIG_SYS_I2C_MVTWSI=3Dy
-> > > +CONFIG_SYS_I2C_SLAVE=3D0x7f
-> > > +CONFIG_SYS_I2C_SPEED=3D400000
-> > > +CONFIG_SUPPORT_EMMC_BOOT=3Dy
-> > > +CONFIG_AXP313_POWER=3Dy
-> > > +CONFIG_AXP_DCDC3_VOLT=3D1360
-> > > +CONFIG_USB_EHCI_HCD=3Dy
-> > > +CONFIG_USB_OHCI_HCD=3Dy
-> > > +CONFIG_SUN8I_EMAC=3Dy
-> > > +CONFIG_SPL_IMAGE_TYPE_SUNXI_TOC0=3Dy
-> >
->
->
-> --
-> Kamil Kasperski
->
+> I tried the power domain stuff out on SMD845 today and ran into
+> quite a few issues. Specifically as a lot of the devices reference the
+> rpmhpd power domain which we don't support (and don't *need* to
+> support) in U-Boot. I'm not sure what the best way forward will be for
+> this. Maybe a "nop" power domain driver?
+
+Are you sure that they are not required?
+
+"nop" power domain always is the option. Especially if it prints some
+warning about an unknown device. I had quite a lot of issues with clock and
+pin drivers that silently ignore unknown devices...
+
+> Do you have the same issues on sm8150?
+
+Yes and no. No, because I was lucky so far and devices I tried to use in
+U-Boot does not require rpmhpd. Looking at DTS, I may only encounter
+issues with sdhc_2, which requires rpmhpd for some reason. Also UFS
+requires clock from rpmhcc.
+
+And "yes", because I have found root cause for my troubles with UFS in
+Linux kernel, when I am skipping hyp.mbn. This is not strictly related
+to U-Boot, but you may be interested in this: apparently Qualcomm's
+hypervisor enables access to RPM (maybe brings it out of reset?). cmd-db
+shared memory region can't be accessed if I skip the hypervisor and try
+to boot directly into Linux. So now I am looking for ways to enable it.
+
+--=20
+WBR, Volodymyr=
