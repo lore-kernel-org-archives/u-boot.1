@@ -4,66 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D57CC5475B
-	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 15:14:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53B77C5475B
+	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 15:15:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2250887E13;
-	Mon, 11 Mar 2024 16:14:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id BFBDF87E13;
+	Mon, 11 Mar 2024 16:15:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Y8k3KBBr";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OuawAKXU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 77E6A87DD5; Mon, 11 Mar 2024 16:14:21 +0100 (CET)
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on20600.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2412::600])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 97B2987DD5; Mon, 11 Mar 2024 16:15:21 +0100 (CET)
+Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
+ [IPv6:2607:f8b0:4864:20::735])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BD31F87EDB
- for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 16:14:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E544887E13
+ for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 16:15:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=aEA89DbtiKZGwEuI4p8Xh1Of25e8SOHTx8qfYzrO9+JlR9Br3ET9cNP/q8UrlNTTYKGX97AD9U+lVxlxxFNDqAjwGy0Vv8BnZ5Bpamb6350VMU1lpy+NIah+y57Vy/BC/Npcfb/c8jru/UkTo5eS2tZ5Z5mpOHNaoFGmSmsBny90QFZ0COBakIUbCOOiS3l6VcjmOHlKqzFPSYEoMt8ONZdch5s41t+7m8HEWiA0JMAzc2nSleeaKH3T1Yz+jpaUJfJy2V5qPUwDaNAs+UA3l5QmXsqcU+D03mcaHkAeLaY7y4Pr375tzAl6FlZ7oajELereEqcZzIKQlvE3jCWdzA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=7+iuW0RDBUTbt0qHeocRLBwsD9QIgt3TeJsDwHyhqEs=;
- b=ngyMSQlIThjtjgFvKb11ukXn407uHvEDoNJ3WSBmTIw/SkHQo/3WH1+XZuoCABKkbM/6CSRVqVEl6zFFi3UnCdB4Vy5xq1bIQ9wz6WLTQDv+/vadz5UJJEKRaJNHD4l4eORWXfyYsy+G0aBjYSOR7f4NoTs53FARx5TcYdUT6euWgaL/L4xxoDGu9y65iaynoB0HcRfQhYJWF9Sm7nM7dZBhpdZTEoYfjy81/FBtQ6bmo742Ky210bObtB6iaCev8qmbl8XcNyNHApyFuqm2vLqOwH1WdG84kzBiIylHjX4dTbeOue1bAgXBRFNo0Mp24BOpjZfSi8EHfpdYK5gCeg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7+iuW0RDBUTbt0qHeocRLBwsD9QIgt3TeJsDwHyhqEs=;
- b=Y8k3KBBrWikpHCsdY8m41y+86N8FX4ZqIfFFInxoPwQgYfHkjCp021DpB1ZYTgWs8WgojFR2NgzS2Ov/0E4zWhBfCOFNeBuCEQFooS6JvpqqX6oAmxwGCSraXtmrrmQAcGZQCTM06iPQ6LaWuG311osRuq0AWB6XTmMOzIH4m1M=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
- by DS0PR12MB6464.namprd12.prod.outlook.com (2603:10b6:8:c4::5) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7362.36; Mon, 11 Mar 2024 15:14:12 +0000
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::6622:ec76:9367:3907]) by SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::6622:ec76:9367:3907%2]) with mapi id 15.20.7362.035; Mon, 11 Mar 2024
- 15:14:09 +0000
-Message-ID: <3c44793c-a557-40e5-b367-15619e9d03f2@amd.com>
-Date: Mon, 11 Mar 2024 16:14:04 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] test/py: reset: Add a test for reset command
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x735.google.com with SMTP id
+ af79cd13be357-788598094c4so114576685a.0
+ for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 08:15:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1710170117; x=1710774917; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=UzEzQf9Mqe9kYQK6FN1wgphRCx/Pb+GJYr6DbfGm3ng=;
+ b=OuawAKXU1aAJTRbMwZOdEQEEWdQwg5HKmc8T0FfTaJ7yOYkaeDP3/pYbutoWH3gztK
+ hsgVJUBH09qfppfOgUygyG55XPvbUned16ng6hZ8zLOHpq91Cgf9VHvPkT0WRCBa+CVa
+ OHPicFTtGqNou2TZCoODUMB8cxo3rSwNmVgUY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710170118; x=1710774918;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=UzEzQf9Mqe9kYQK6FN1wgphRCx/Pb+GJYr6DbfGm3ng=;
+ b=AWEO5dKaW4JgUm3EZHRW3LAGiuyVfdAiwwqFpEgEh75+iTfc5/KkFPee3HemcnYyOF
+ Su/9Vm0BpfAcJtCR1QDvO8mQ/ftOIcBWRgXPewYuPvt03qGK3CXtrO0lsxm5AjrNDUAX
+ Zwlt68dFVKRhP6iI8dKp45QYLrBKdl2V3AWye+wBOVefKa0Cz1YB8iWa5qTr8oqv/HJa
+ 11xVPV2PYAkmFnB6AtlEaV1koYI2vVLylfYF4b1sRkNV/pxuzbGw1tnC74rS+FZJu42O
+ ieYeqGCPWIMUPPTZhA/TKSWfwiJ2N0KsFm2+JgL1V18jvfuYgmlgUwYeiLUWwdKuQ1hC
+ L+7g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU5h0eTOhVAOuFMA0xRyAPDI1HxQuwqKEGvQHdUKok1gX/voqzJA7IiUT6YhetL73BITRhEillK5873Qn+OLcqDsThHgg==
+X-Gm-Message-State: AOJu0Yx29rsKwKPVv8xZN1xkg0h2mr9qj/Mqgb2Tyh3Ms1bHzRVfI8+F
+ Gs1dCajed64UerSGqr8MKDiFLSTK/+wksHNsjJ+HhTzpVGOPjDfEEk6S9g6cW/yhdP8evbbCbP/
+ b
+X-Google-Smtp-Source: AGHT+IFXwq2lZDDOOa4GOzCPHQDiMV1abiW+W+nwx8M/9B+PvBuisHzavvj5GL+z7ZYZC35MMvy1eQ==
+X-Received: by 2002:a05:620a:a82:b0:788:5b6d:eabe with SMTP id
+ v2-20020a05620a0a8200b007885b6deabemr827155qkg.42.1710170117708; 
+ Mon, 11 Mar 2024 08:15:17 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-007f-0000-0000-0000-1005.res6.spectrum.com.
+ [2603:6081:7b00:7f::1005]) by smtp.gmail.com with ESMTPSA id
+ y9-20020ae9f409000000b007885e3275e9sm2580323qkl.132.2024.03.11.08.15.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 11 Mar 2024 08:15:17 -0700 (PDT)
+Date: Mon, 11 Mar 2024 11:15:15 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Michal Simek <michal.simek@amd.com>
 Cc: Love Kumar <love.kumar@amd.com>,
  Angelo Dureghello <angelo@kernel-space.org>, u-boot@lists.denx.de,
  git@xilinx.com, Marek Vasut <marex@denx.de>
-References: <c11e1809-b5d1-46cd-a5c8-a5276b83f26f@amd.com>
- <c523aabd-93a4-f9db-2726-7f912a85aef0@kernel-space.org>
- <20240307001053.GE1523872@bill-the-cat>
+Subject: Re: [PATCH v3] test/py: reset: Add a test for reset command
+Message-ID: <20240311151515.GZ1523872@bill-the-cat>
+References: <20240307001053.GE1523872@bill-the-cat>
  <c05a25ca-d4b7-1179-cf46-645bc4cdba89@kernel-space.org>
  <c0bbe63d-adee-456f-bcf8-44579aa2593a@amd.com>
  <20240307125525.GF1523872@bill-the-cat>
@@ -72,115 +81,13 @@ References: <c11e1809-b5d1-46cd-a5c8-a5276b83f26f@amd.com>
  <20240311143938.GV1523872@bill-the-cat>
  <9e3f916a-7e5b-4ec8-abe4-c2cead1df557@amd.com>
  <20240311150908.GX1523872@bill-the-cat>
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
- howHe8Y9nSbG92obZMqsdt+d/hmRu3fgwRYiiU97YJjUkCN5paHXyBb+3IdrLNGt8I7C9RMy
- svSoH4WcApYNqvB3rcMtJIna+HUhx8xOk+XCfyKJDnrSuKgx0Svj446qgM5fe7RyFOlGX/wF
- Ae63Hs0RkFo3I/+hLLJP6kwPnOEo3lkvzm3FMMy0D9VxT9e6Y3afe1UTQuhkg8PbABxhowzj
- SEnl0ICoqpBqqROV/w1fOlPrm4WSNlZJunYV4gTEustZf8j9FWncn3QzRhnQOSuzTPFbsbH5
- WVxwDvgHLRTmBuMw1sqvCc7CofjsD1XM9bP3HOBwCxKaTyOxbPJh3D4AdD1u+cF/lj9Fj255
- Es9aATHPvoDQmOzyyRNTQzupN8UtZ+/tB4mhgxWzorpbdItaSXWgdDPDtssJIC+d5+hskys8
- B3jbv86lyM+4jh2URpnL1gqOPwnaf1zm/7sqoN3r64cml94q68jfY4lNTwjA/SnaS1DE9XXa
- XQlkhHgjSLyRjjsMsz+2A4otRLrBbumEUtSMlPfhTi8xUsj9ZfPIUz3fji8vmxZG/Da6jx/c
- a0UQdFFCL4Ay/EMSoGbQouzhC69OQLWNH3rMQbBvrRbiMJbEZwARAQABzSlNaWNoYWwgU2lt
- ZWsgKEFNRCkgPG1pY2hhbC5zaW1la0BhbWQuY29tPsLBlAQTAQgAPgIbAwULCQgHAgYVCgkI
- CwIEFgIDAQIeAQIXgBYhBGc1DJv1zO6bU2Q1ajd8fyH+PR+RBQJkK9VOBQkWf4AXAAoJEDd8
- fyH+PR+ROzEP/1IFM7J4Y58SKuvdWDddIvc7JXcal5DpUtMdpuV+ZiHSOgBQRqvwH4CVBK7p
- ktDCWQAoWCg0KhdGyBjfyVVpm+Gw4DkZovcvMGUlvY5p5w8XxTE5Xx+cj/iDnj83+gy+0Oyz
- VFU9pew9rnT5YjSRFNOmL2dsorxoT1DWuasDUyitGy9iBegj7vtyAsvEObbGiFcKYSjvurkm
- MaJ/AwuJehZouKVfWPY/i4UNsDVbQP6iwO8jgPy3pwjt4ztZrl3qs1gV1F4Zrak1k6qoDP5h
- 19Q5XBVtq4VSS4uLKjofVxrw0J+sHHeTNa3Qgk9nXJEvH2s2JpX82an7U6ccJSdNLYbogQAS
- BW60bxq6hWEY/afbT+tepEsXepa0y04NjFccFsbECQ4DA3cdA34sFGupUy5h5la/eEf3/8Kd
- BYcDd+aoxWliMVmL3DudM0Fuj9Hqt7JJAaA0Kt3pwJYwzecl/noK7kFhWiKcJULXEbi3Yf/Y
- pwCf691kBfrbbP9uDmgm4ZbWIT5WUptt3ziYOWx9SSvaZP5MExlXF4z+/KfZAeJBpZ95Gwm+
- FD8WKYjJChMtTfd1VjC4oyFLDUMTvYq77ABkPeKB/WmiAoqMbGx+xQWxW113wZikDy+6WoCS
- MPXfgMPWpkIUnvTIpF+m1Nyerqf71fiA1W8l0oFmtCF5oTMkzsFNBFFuvDEBEACXqiX5h4IA
- 03fJOwh+82aQWeHVAEDpjDzK5hSSJZDE55KP8br1FZrgrjvQ9Ma7thSu1mbr+ydeIqoO1/iM
- fZA+DDPpvo6kscjep11bNhVa0JpHhwnMfHNTSHDMq9OXL9ZZpku/+OXtapISzIH336p4ZUUB
- 5asad8Ux70g4gmI92eLWBzFFdlyR4g1Vis511Nn481lsDO9LZhKyWelbif7FKKv4p3FRPSbB
- vEgh71V3NDCPlJJoiHiYaS8IN3uasV/S1+cxVbwz2WcUEZCpeHcY2qsQAEqp4GM7PF2G6gtz
- IOBUMk7fjku1mzlx4zP7uj87LGJTOAxQUJ1HHlx3Li+xu2oF9Vv101/fsCmptAAUMo7KiJgP
- Lu8TsP1migoOoSbGUMR0jQpUcKF2L2jaNVS6updvNjbRmFojK2y6A/Bc6WAKhtdv8/e0/Zby
- iVA7/EN5phZ1GugMJxOLHJ1eqw7DQ5CHcSQ5bOx0Yjmhg4PT6pbW3mB1w+ClAnxhAbyMsfBn
- XxvvcjWIPnBVlB2Z0YH/gizMDdM0Sa/HIz+q7JR7XkGL4MYeAM15m6O7hkCJcoFV7LMzkNKk
- OiCZ3E0JYDsMXvmh3S4EVWAG+buA+9beElCmXDcXPI4PinMPqpwmLNcEhPVMQfvAYRqQp2fg
- 1vTEyK58Ms+0a9L1k5MvvbFg9QARAQABwsF8BBgBCAAmAhsMFiEEZzUMm/XM7ptTZDVqN3x/
- If49H5EFAmQr1YsFCRZ/gFoACgkQN3x/If49H5H6BQ//TqDpfCh7Fa5v227mDISwU1VgOPFK
- eo/+4fF/KNtAtU/VYmBrwT/N6clBxjJYY1i60ekFfAEsCb+vAr1W9geYYpuA+lgR3/BOkHlJ
- eHf4Ez3D71GnqROIXsObFSFfZWGEgBtHBZ694hKwFmIVCg+lqeMV9nPQKlvfx2n+/lDkspGi
- epDwFUdfJLHOYxFZMQsFtKJX4fBiY85/U4X2xSp02DxQZj/N2lc9OFrKmFJHXJi9vQCkJdIj
- S6nuJlvWj/MZKud5QhlfZQsixT9wCeOa6Vgcd4vCzZuptx8gY9FDgb27RQxh/b1ZHalO1h3z
- kXyouA6Kf54Tv6ab7M/fhNqznnmSvWvQ4EWeh8gddpzHKk8ixw9INBWkGXzqSPOztlJbFiQ3
- YPi6o9Pw/IxdQJ9UZ8eCjvIMpXb4q9cZpRLT/BkD4ttpNxma1CUVljkF4DuGydxbQNvJFBK8
- ywyA0qgv+Mu+4r/Z2iQzoOgE1SymrNSDyC7u0RzmSnyqaQnZ3uj7OzRkq0fMmMbbrIvQYDS/
- y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
- l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
- 3i3l5DA=
-In-Reply-To: <20240311150908.GX1523872@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: SJ0PR05CA0107.namprd05.prod.outlook.com
- (2603:10b6:a03:334::22) To SJ2PR12MB8109.namprd12.prod.outlook.com
- (2603:10b6:a03:4f5::8)
+ <3c44793c-a557-40e5-b367-15619e9d03f2@amd.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|DS0PR12MB6464:EE_
-X-MS-Office365-Filtering-Correlation-Id: 64f4d6b9-c2db-4147-e249-08dc41dde6cc
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: kUv6as5gJdwHvi1aa/F4zyDzQd2W/WJ68aBE6LNsyTJV65oM8OUGL/wwnfTs1ymukefI87bZ92sVdiUnxK+m0rLz3VUpY0ZQcp+S9uOmGDiIj2zOx0BRNIB2k8sCBr7HoCJVafw++DFXDlIewi3+JfVvpomm1gfC0M1g36DuMSDfuNPCBqrJBvobpCtRuAAa6uRg2iSQCi1S9i12GldKQNWeMnyX71P1yTTRh4vg76WqWGu+i2r3mR+wq1+UjO8gH/BKLibWdEHWLW6iZceyGL1BX9TXZqmyxYHYcaZStZvVOre0DoUEBieNbxsyYcKpJ1Ydkc2JD61RzNmJ6bZ6att1MvFdmQ1dxc7siz9AWoLiSybeMFpyqT4yKJOXrb11L8cvRxxsDrUALoWTpeEoHtF4BUjYQWFzS6pb50xFcjoiWJixNUXV/bUt6GAtmV8lGz830wWAqsgAVv+RWRzHVYpTU89VR433ZKfduXNNR0FY9/R0YKGK3pwSxDGsp+F5MDOEMESxfLXUxbwypg0zAzmFW6lURiZbXggaf2vqcj2WebcE1amfiu3wAo+bKnN3a4x0XQCG8h9SVKwsSIWJt2rVnYWt85RAMvNXQ4A6+vFI5hbAN0CuJVEQc81aK42sDSG4/OXQhINMv0mZlqX3n3sEjDoxJ/+aKkW1oIdgXkg=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(1800799015)(376005); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?R0hQQVhFbG4zV1IzU2FrVkVjQVFPejZwRWVTdVJMMXFrdDNTd2xmTHJpUTVX?=
- =?utf-8?B?a0xIWkhJYUg0Sk1OWXcxeWFRMHo5QWZoZEozNHR1cVlqR2hXeCs2VHcrQjVD?=
- =?utf-8?B?eVJhY1VuNDNrbWk4dndVT3drRm9ocEExZmh2ZFAxbUUydERyZXpYbG8xVkJ5?=
- =?utf-8?B?WGtGVFdJNVI3M2JyUFgvQ0p4Ync4V3hCc2xZTVZKTzZwYVQ3ek5GWjQrVmdT?=
- =?utf-8?B?WDdxajFwOEF4UldoeVdreE1WbEl6S2p4N1hZU3YySnNybHlPeExBS0puQjho?=
- =?utf-8?B?Unl5SjlNV1FnWmIweTlMaVNDWHZiY2lHTXRWd0JTcDV6Rk5TMWM3WmIxV0NB?=
- =?utf-8?B?QTdQTU5KS29GcEgwbUt6TFRCaGtvaFJzbnZnQ3RqREJHUkI1WDYzcjVnVTdy?=
- =?utf-8?B?VnRoVzk2M1dsNXZESWtLR3FFd1dTdlR3bk52YTFUdkgyZ2w3YU9DaGRqZk5D?=
- =?utf-8?B?VDFxNndlMndKcExUenlnTzZ2bWtBN01BOWxYT2F2ODNZVTNWUHZNWXZqTGth?=
- =?utf-8?B?eURZRmdPTkJSVDJnUnczYmhMTlZrd1hubHhqblJqT1h3RXBJa0VWK0dWS0l2?=
- =?utf-8?B?YXZrY1dqZWlTMTBaTjhGUVdVV211N3QxS0FGbDhYWHUwV2E5UWJ1ZG5BT2xK?=
- =?utf-8?B?anVDWk10cXJUOWd5U3V6M1E5cExwQlJtanphSTUwR3ppYUxGRGs1SUJ0SVBH?=
- =?utf-8?B?eWFSZ3BLQnNIQ1NDYjdDOXdXd3B1NTY2N29Ick5Qbk1GRmRQclFURWZjOXla?=
- =?utf-8?B?aU1LNThJTW1QZDNJcmVqMU4xNVEzV3hmWnVBaTc4QnFQcVFCVEZFQ28xbWR1?=
- =?utf-8?B?Q2V3djFwZGdIWVJObFFwbjg1OG1kRk9XcjVSTTJvUEpPVmtmT1VBYWN5eVZL?=
- =?utf-8?B?TWl6VFJWZUErWXNBUzZyNTZoZmxMdWN4V3NUblpjaVIzWHBnbGJzeXBzbFdt?=
- =?utf-8?B?dGd1TzBUMnVUaXY2UkdSbU1HaGttTGdyQi9kZlpRQVpRdDBBdTFvcGpFUzJB?=
- =?utf-8?B?d1JFalZTN0Q3UUtsUDM0OGN1VkpkcU5TTDZFTkpnWGVZV0FEU2s1SERidmlC?=
- =?utf-8?B?R292WC9zTWgwc1FpWDZxTnd0SEpuQ0pRazdOTC9Benp3b0IzOENjaWZiMFRH?=
- =?utf-8?B?QkRzdmt3U1NtOHgrNWdLY3lzd3BlNyttK3JNK1VlVklhcE9NRzQ5aERhbDVs?=
- =?utf-8?B?aDR1UncwM1NWZmJGeHpib2ZCd1lqNDBQMDlkNGtwUldXaVpKTmx4elhsMHlC?=
- =?utf-8?B?Q0VwVHovUlhGRzFOb0RpUDc4LzJhOFJHNVBtRkdZK0IzK3ZRYXBCUTcrcUpo?=
- =?utf-8?B?MXlJT21uTlpvK0tjL2lmQnQ0cXlsSGxLcENBUDB2SHFBTDFFeGFkYXhxZzU2?=
- =?utf-8?B?VXdDaVpqcHljd3Z1OEZqVElEUURWcWF4emYxRXJmK003RytXZkRHZWZlOE5h?=
- =?utf-8?B?WXo0KzNUWXY1ancrVXI0aXIwM295c3o0ZnJTNUlOQnhNU3hmTUFJN0ZheDVM?=
- =?utf-8?B?OWNwWFZPNWo1Mk5yVEhHN2tPWVpyQUNtN0UyN29QQk9HMXhLeHNxY05TUEVs?=
- =?utf-8?B?TWV4bDV2czRmRVNpTkFuSktsd2srWUFqeVllSThpVG5mZ3NLeThNVjdXOFJX?=
- =?utf-8?B?ajRCQm1ISC9pZ29LMWtkOEc3TytyTFFDYmV3KytVdXU5R3g3MGJVZDM4ZlZO?=
- =?utf-8?B?eERZVWNxV3Mwc052OHBvZURUY3lsRlF1cElrckZScmR0MDY0S1MzSlFYUWZo?=
- =?utf-8?B?aE5qT0NyRUE4NXg4TWlHa2VoVkhLRHRLZ0dsSHRxNlZzVVp4WlY2SGZyNEo3?=
- =?utf-8?B?U1ZlN1ZkRG5BaHBvRUtpdXl2aXFJWkpkREZNZHExRWtlNVExd2hlVHIwNk0r?=
- =?utf-8?B?WnJ3dWV3K2pBVkFoZTMyVUJmeElpQWl5OVRCUG93Ynk2aDg4alNldmV0N2Jw?=
- =?utf-8?B?MDFoSGhFZGJlbDZ0enJjME41ZTFsRFdqaXJGdXdyd055VERtQlZUYVJPWHBN?=
- =?utf-8?B?V3lVc2ZDanlRZDhrTEhSaFZKL05qUTNYUnVGNDgyb1NsNjkxUkJiRWdCenpp?=
- =?utf-8?B?eUtrbDVtTTF0ZnBuME9paW9EVnJCREtnSVhwYndBeVJuaDl3cm1ycjVadENE?=
- =?utf-8?Q?G+QCHeDBmdHqNFbbFdLmDoBmj?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 64f4d6b9-c2db-4147-e249-08dc41dde6cc
-X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Mar 2024 15:14:09.6356 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: vXVGGgLDGALptUGhRkgSxvRHylURfG3PcVA7W/gU1Dngax/X846TepbB9Bbpt0p6
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB6464
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="xdnZkpGHVhNzUEAM"
+Content-Disposition: inline
+In-Reply-To: <3c44793c-a557-40e5-b367-15619e9d03f2@amd.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -198,53 +105,86 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--xdnZkpGHVhNzUEAM
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 3/11/24 16:09, Tom Rini wrote:
-> On Mon, Mar 11, 2024 at 03:52:57PM +0100, Michal Simek wrote:
->>
->>
->> On 3/11/24 15:39, Tom Rini wrote:
->>> On Mon, Mar 11, 2024 at 02:40:59PM +0530, Love Kumar wrote:
->>>> Hi,
->>>>
->>>> On 11/03/24 2:11 pm, Angelo Dureghello wrote:
->>>>> Hi,
->>>>>
->>>>> jfyi,
->>>>>
->>>>> reset support added in qemu
->>>>> merged as commit d3c79c3974.
->>>>>
->>>>> Regards,
->>>>> angelo
->>>>>
->>>> The other issue was with echo commands:
->>>> => echo $modeboot
->>>> $modeboot
->>>>
->>>> => echo $?
->>>> $?
->>>>
->>>> Does HUSH shell is enabled by default for this?
->>>
->>> It is not, so at least the saveenv test needs to depend on HUSH_PARSER
->>> too.
->>
->> Based on logs on this platform echo $? doesn't return any value.
->> There is any config for it which is not enabled for this platform.
->> Do you know which Kconfig symbol it is?
->>
->> Depending on HUSH is likely big hammer but I was not able to find that exact
->> Kconfig symbol just for $?
-> 
-> Well, if we don't have the hush parser we have a much more limited
-> parser enabled and I bet that's why (I think there's no variable
-> expansion).
+On Mon, Mar 11, 2024 at 04:14:04PM +0100, Michal Simek wrote:
+>=20
+>=20
+> On 3/11/24 16:09, Tom Rini wrote:
+> > On Mon, Mar 11, 2024 at 03:52:57PM +0100, Michal Simek wrote:
+> > >=20
+> > >=20
+> > > On 3/11/24 15:39, Tom Rini wrote:
+> > > > On Mon, Mar 11, 2024 at 02:40:59PM +0530, Love Kumar wrote:
+> > > > > Hi,
+> > > > >=20
+> > > > > On 11/03/24 2:11 pm, Angelo Dureghello wrote:
+> > > > > > Hi,
+> > > > > >=20
+> > > > > > jfyi,
+> > > > > >=20
+> > > > > > reset support added in qemu
+> > > > > > merged as commit d3c79c3974.
+> > > > > >=20
+> > > > > > Regards,
+> > > > > > angelo
+> > > > > >=20
+> > > > > The other issue was with echo commands:
+> > > > > =3D> echo $modeboot
+> > > > > $modeboot
+> > > > >=20
+> > > > > =3D> echo $?
+> > > > > $?
+> > > > >=20
+> > > > > Does HUSH shell is enabled by default for this?
+> > > >=20
+> > > > It is not, so at least the saveenv test needs to depend on HUSH_PAR=
+SER
+> > > > too.
+> > >=20
+> > > Based on logs on this platform echo $? doesn't return any value.
+> > > There is any config for it which is not enabled for this platform.
+> > > Do you know which Kconfig symbol it is?
+> > >=20
+> > > Depending on HUSH is likely big hammer but I was not able to find tha=
+t exact
+> > > Kconfig symbol just for $?
+> >=20
+> > Well, if we don't have the hush parser we have a much more limited
+> > parser enabled and I bet that's why (I think there's no variable
+> > expansion).
+>=20
+> ok. Then this test should be limited to HUSH too based on how it is writt=
+en.
+> I think it should be okish limitation and if someone wants to test it on
+> systems without HUSH enabled it should just update it. If is fine for you?
 
-ok. Then this test should be limited to HUSH too based on how it is written.
-I think it should be okish limitation and if someone wants to test it on systems 
-without HUSH enabled it should just update it. If is fine for you?
+Yup, sounds good. And I'll take the next iteration of this test patch
+when I also grab the patch I posted to cherry-pick the missing reset
+functionality in our QEMU.
 
-Thanks,
-Michal
+--=20
+Tom
 
+--xdnZkpGHVhNzUEAM
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXvIAMACgkQFHw5/5Y0
+tyzI9wv/UIE0rCsts5tQIOadC4vefakY+vM2qgcPAhcXWwlXtKOPNupCADPpKlDZ
+ML5gp6o3fsQgIMWCKLQHjFKNmP1mI4SU7EqW9jLJfuj2dANvXqGnfyVTdZu7xa/S
+hsJTYptA6PTPvxDf1xnIpFRD34FPf4iT2zE34GTFOMTP+WRsK0X2844fnYZ/zwkP
+qPy+t23u0aa7UakupiNG1oowURVzUkxEOf8vIBvnE9mNJGEeuL8EKDCdwNxd6/AO
+XUBuMEbLeIJ1n47PnsYjGoUx44uLwL6xrw8mMt1A1ctmRJ69gkBzmPmTVQi+dpwQ
+Q1xf+EkDvEc2Hpuk9p1A46LSFz9b/rR4kyu03124Uzf1oWtLOyYC/dnTUl1/z0D1
+s/X2ZP4+W0WB85AOYegRiSZPwugmG1eCloRn0Hqs39V0od1tcWD8OLtbixrSFdXU
+zVul3NHf2PkA2YLxKTK07RnE2pJWtyUJFzijn38MR6p/U6dSJqXSaniK3IH3R2uS
+842Q9mGA
+=hDyM
+-----END PGP SIGNATURE-----
+
+--xdnZkpGHVhNzUEAM--
