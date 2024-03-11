@@ -4,78 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E09CC5475B
-	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 14:41:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC98CC5475B
+	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 14:50:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B80658786A;
-	Mon, 11 Mar 2024 15:41:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 4E54D87DD3;
+	Mon, 11 Mar 2024 15:50:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="QJ2BhAJm";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wWZfyvtu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4769987E3D; Mon, 11 Mar 2024 15:41:12 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id C0BEF87D3C; Mon, 11 Mar 2024 15:50:55 +0100 (CET)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A9DFC87EEB
- for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 15:41:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EAC0F87DD3
+ for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 15:50:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=38002904ae=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 42BEdp1A009497; Mon, 11 Mar 2024 15:40:58 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding:content-type; s=
- selector1; bh=6llXTwRp3Kwenc2Um6A7hLRm2gqVUvPJScNR1b7WPIQ=; b=QJ
- 2BhAJmT4rJgbKg1MFBAYHfX0WLybaNvG6ldXfZizhuiSqBQzepDc3GM3yePLASyp
- PI/koliVX8yH6YeFxeIYMlWfxf3hIGF4tgXTxrh8OWSn66LgTsfpUXtMw9ZxS1gD
- AkNN1uKTbrduI2AUpsO7SiyoXOilHcfkzyZBWc3ioAtyZaCet9wVBcPOTMxPDjJZ
- ovUzjX/NlHzvQvAhh/C3RqErDGJgTvK9AWHlHF5LG7SExodiQshrvlVzPPhnb4Y0
- W7LwWY6HUD8utTwSQR3Co0ex6KgGPn/Fd6e5HTUu2N07iNIo32Gg0I8W57DqSNEv
- YYb7pw4aFrlu1ENZj+og==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3wrfhfgh8m-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 11 Mar 2024 15:40:58 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id F21FD4002D;
- Mon, 11 Mar 2024 15:40:53 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 6D7C32828A3;
- Mon, 11 Mar 2024 15:40:25 +0100 (CET)
-Received: from localhost (10.201.20.71) by SHFDAG1NODE1.st.com (10.75.129.69)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 11 Mar
- 2024 15:40:25 +0100
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-To: <u-boot@lists.denx.de>
-CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
- <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>, Kumar Gala
- <galak@kernel.crashing.org>,
- Michal Simek <michal.simek@amd.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, Udit Kumar <u-kumar1@ti.com>
-Subject: [PATCH 2/2] lmb: Fix adjacent region merge in lmb_add_region_flags()
-Date: Mon, 11 Mar 2024 15:39:18 +0100
-Message-ID: <20240311143918.2927406-2-patrice.chotard@foss.st.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240311143918.2927406-1-patrice.chotard@foss.st.com>
-References: <20240311143918.2927406-1-patrice.chotard@foss.st.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-56845954ffeso2289844a12.2
+ for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 07:50:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1710168652; x=1710773452; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=xt3LrVkUkdPi357E5RTp7x0NtYxvUel5j89Nn13+Zsw=;
+ b=wWZfyvtu7vW8QnzZzyKTb4f3XcemH3QraxQIkvjvvOUr464Qqc1HrLR0Ma+R14C0qF
+ TvaRSYNCsV8+8r7YoHbM/NKP2cI3X9pS+vQdt2E+24x9shFMTJSS9diozWKbg5EkgQLf
+ fYudN4T04I0tjQTYXFScUVzKjjmmYytWfiZY4b+c+7q5jxW5MWFraoiKNK9ovGknh6nM
+ A1d2PRKBPnR0yqzH6b+RV8poWRjCJQzIIgf11/xScwASxsbsie4yF+bmhqHQWErJSNWQ
+ bkUk0zbSAibLtxxXBU90ydg0AHnY52pu/4+Dc4bMkSoQ6lQFxqe10m3g0M4BA2lL/f64
+ 7HsQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710168652; x=1710773452;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=xt3LrVkUkdPi357E5RTp7x0NtYxvUel5j89Nn13+Zsw=;
+ b=jUfCHBzdfPINctVo9Xi/8iWFds2u2Vcv513orgSPE4j61DCEyLWZcHAlR0KSBikro3
+ UZe7M6rstKGEShYr5AMOO+b7af5ETt/UELy+nNzlLBn4FbSRNTZbYgjuK0EUB84xsE65
+ OrQ5HjMuN/GCEq76iuwOLO2vMuwdTuj/thr0xLJMH6+MePCRXeCfkUE3UXGYaJT26BrP
+ ASS6xw01x0GDnSmKCGzCPBsxriOd/OwSAE/X2Dxfufaddx5Mml6UIj4aqqJGjjx+lFkz
+ thtaVz0Kc9OoHpicw6dbSijVKw4UqSR8IX52FxRLUHINErPHDhz+bbuMK2gwUhe8t1lX
+ bwaQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXi1QUwNW0vloVQjWRXd0swRRCdfhfxh9x4mqoTrFRdnQ8HNWIfbLG2ebTO8pwriN/DQmXKYWJJE9kxCZtM3LHpNRg9iw==
+X-Gm-Message-State: AOJu0YwsyD2QwrzddIZK5qKZZJghZQVrCgQ5P+awtqtqgxMXm1W6VoIh
+ Xqjfb/Lvk7qdWrZPfN4qteyG1jr0lNvho1xjTGtaCLYNjD/9qe+Se6S3MtdT6qs=
+X-Google-Smtp-Source: AGHT+IFbEPDYHWJ3E1piTT0pPrIs0WslqvZKGUv0JimMiV2gHrNIT0ov5hZK5eL9Ov9guOSUG/XQ2Q==
+X-Received: by 2002:a17:907:86a7:b0:a46:2226:295a with SMTP id
+ qa39-20020a17090786a700b00a462226295amr3319459ejc.69.1710168652321; 
+ Mon, 11 Mar 2024 07:50:52 -0700 (PDT)
+Received: from [192.168.1.78] (host-92-17-96-232.as13285.net. [92.17.96.232])
+ by smtp.gmail.com with ESMTPSA id
+ r9-20020a170906280900b00a45cd2f2939sm2931840ejc.25.2024.03.11.07.50.51
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 11 Mar 2024 07:50:51 -0700 (PDT)
+Message-ID: <66ebb408-ec94-4fb9-9479-a4fc6465ceab@linaro.org>
+Date: Mon, 11 Mar 2024 14:50:51 +0000
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.201.20.71]
-X-ClientProxiedBy: SAFCAS1NODE1.st.com (10.75.90.11) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-03-11_08,2024-03-06_01,2023-05-22_02
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/5] apq8016: Add support for UART1 clocks and pinmux
+Content-Language: en-US
+To: Stephan Gerhold <stephan@gerhold.net>
+Cc: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de,
+ neil.armstrong@linaro.org, trini@konsulko.com, lukma@denx.de,
+ seanga2@gmail.com, sjg@chromium.org, laetitia.mariottini@se.com,
+ pascal.eberhard@se.com, abdou.saker@se.com, jimmy.lalande@se.com,
+ benjamin.missey@non.se.com, daniel.thompson@linaro.org
+References: <20240311111027.44577-1-sumit.garg@linaro.org>
+ <20240311111027.44577-3-sumit.garg@linaro.org>
+ <0867ce89-b6db-482c-a0f6-e2d2535dad30@linaro.org>
+ <Ze8H8CyriUP2qjsD@gerhold.net>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <Ze8H8CyriUP2qjsD@gerhold.net>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,149 +102,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In case a new region is adjacent to a previous region with
-similar flag, this region is merged with its predecessor, but no
-check are done if this new added region is overlapping another region
-present in lmb (see reserved[3] which overlaps reserved[4]).
 
-This occurs when the LMB [0xdaafd000-0xddb18000] is added and overlaps
-the LMB [0xdbaf4380-0xddffffff].
 
-Call lmb_overlaps_region() before merging the new region with the
-adjacent region already present in lmb.
+On 11/03/2024 13:32, Stephan Gerhold wrote:
+> On Mon, Mar 11, 2024 at 12:27:11PM +0000, Caleb Connolly wrote:
+>> On 11/03/2024 11:10, Sumit Garg wrote:
+>>> SE HMIBSC board uses UART1 as the main debug console, so add
+>>> corresponding clocks and pinmux support. Along with that update
+>>> instructions to enable clocks for debug UART support.
+>>>
+>>> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+>>> ---
+>>>  drivers/clk/qcom/clock-apq8016.c       | 50 +++++++++++++++++++++-----
+>>>  drivers/pinctrl/qcom/pinctrl-apq8016.c |  1 +
+>>>  drivers/serial/serial_msm.c            |  6 ++--
+>>>  3 files changed, 47 insertions(+), 10 deletions(-)
+>>>
+>>> diff --git a/drivers/clk/qcom/clock-apq8016.c b/drivers/clk/qcom/clock-apq8016.c
+>>> index e6647f7c41d..a620a10a520 100644
+>>> --- a/drivers/clk/qcom/clock-apq8016.c
+>>> +++ b/drivers/clk/qcom/clock-apq8016.c
+>>> @@ -43,6 +43,14 @@
+>>>  #define BLSP1_UART2_APPS_N		(0x3040)
+>>>  #define BLSP1_UART2_APPS_D		(0x3044)
+>>>  
+>>> +#define BLSP1_UART1_BCR			(0x2038)
+>>> +#define BLSP1_UART1_APPS_CBCR		(0x203C)
+>>> +#define BLSP1_UART1_APPS_CMD_RCGR	(0x2044)
+>>> +#define BLSP1_UART1_APPS_CFG_RCGR	(0x2048)
+>>> +#define BLSP1_UART1_APPS_M		(0x204C)
+>>> +#define BLSP1_UART1_APPS_N		(0x2050)
+>>> +#define BLSP1_UART1_APPS_D		(0x2054)
+>>> +
+>>>  /* GPLL0 clock control registers */
+>>>  #define GPLL0_STATUS_ACTIVE BIT(17)
+>>>  
+>>> [...]
+>>> @@ -94,6 +102,33 @@ static int clk_init_sdc(struct msm_clk_priv *priv, int slot, uint rate)
+>>>  	return rate;
+>>>  }
+>>>  
+>>> +static const struct bcr_regs uart1_regs = {
+>>> +	.cfg_rcgr = BLSP1_UART1_APPS_CFG_RCGR,
+>>> +	.cmd_rcgr = BLSP1_UART1_APPS_CMD_RCGR,
+>>> +	.M = BLSP1_UART1_APPS_M,
+>>> +	.N = BLSP1_UART1_APPS_N,
+>>> +	.D = BLSP1_UART1_APPS_D,
+>>> +};
+>>> +
+>>> +/* UART: 115200 */
+>>> +static int apq8016_clk_init_uart1(phys_addr_t base)
+>>
+>> I know we're still dealing with some tech debt here, but I'm not a big
+>> fan of this approach. I notice that the RCG and CBCR registers are all
+>> offset by exactly 0xff0 between UART1 and UART2, what about adding a
+>> second "index" parameter to apq8016_clk_init_uart() and then offsetting
+>> the addresses by (0xff0 * index)?
+>>
+> 
+> This would work for MSM8916 where you have just two UARTs, but it might
+> be misleading since the UART blocks are actually separated in 4 KiB
+> (0x1000) blocks and not offset by 0xff0. UART2 is a special case that
+> has different offsets within the 4 KiB block, for some weird reason.
+> 
+> If you want to calculate the register offsets properly you would need
+> special handling for UART2, e.g. I have the following (admittedly rather
+> ugly) define in the TF-A port for MSM8916 and similar [1]:
+> 
+> #define GCC_BLSP1_UART_APPS_CBCR(n)	(GCC_BASE + \
+> 	(((n) == 2) ? (0x0302c) : (0x0203c + (((n) - 1) * 0x1000))))
+> 
+> where n is the UART number (here 1 or 2). As a different example,
+> MDM9607 has 5 UARTs (1 to 5) and there only UART2 is special-cased,
+> while all others follow the standard offset with 0x1000 offset.
 
-In case of adjacent region found, code is 90% similar in case
-adjacent region is located before/after the new region.
-Factorize adjacent region management in lmb_add_region_flags().
+fwiw I would also be fine with just treating it like a binary switch and
+only allowing UART1 or UART2 to be selected if that's simpler.
+> 
+> Thanks,
+> Stephan
+> 
+> [1]: https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git/tree/plat/qti/msm8916/msm8916_setup.c?h=v2.10#n40
 
-Issue reproduced on STM32MP157-DK2 with SCMI DT, bdinfo command's output
-shows:
-
-before this patch:
-...
-lmb_dump_all:
- memory.cnt = 0x1 / max = 0x2
- memory[0]      [0xc0000000-0xdfffffff], 0x20000000 bytes flags: 0
- reserved.cnt = 0x5 / max = 0x10
- reserved[0]    [0x10000000-0x10045fff], 0x00046000 bytes flags: 4
- reserved[1]    [0x30000000-0x3003ffff], 0x00040000 bytes flags: 4
- reserved[2]    [0x38000000-0x3800ffff], 0x00010000 bytes flags: 4
- reserved[3]    [0xdaadf000-0xdfffffff], 0x05521000 bytes flags: 0
- reserved[4]    [0xde000000-0xdfffffff], 0x02000000 bytes flags: 4
-...
-
-after this patch:
-
-...
-lmb_dump_all:
- memory.cnt = 0x1 / max = 0x2
- memory[0]      [0xc0000000-0xdfffffff], 0x20000000 bytes flags: 0
- reserved.cnt = 0x6 / max = 0x10
- reserved[0]    [0x10000000-0x10045fff], 0x00046000 bytes flags: 4
- reserved[1]    [0x30000000-0x3003ffff], 0x00040000 bytes flags: 4
- reserved[2]    [0x38000000-0x3800ffff], 0x00010000 bytes flags: 4
- reserved[3]    [0xdaadf000-0xdaaf7fff], 0x00019000 bytes flags: 0
- reserved[4]    [0xdbaf4380-0xddffffff], 0x0250bc80 bytes flags: 0
- reserved[5]    [0xde000000-0xdfffffff], 0x02000000 bytes flags: 4
-...
-
-Fixes: 4ed6552f7159 ("[new uImage] Introduce lmb from linux kernel for memory mgmt of boot images")
-
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
----
-
- lib/lmb.c | 55 ++++++++++++++++++++++++++++---------------------------
- 1 file changed, 28 insertions(+), 27 deletions(-)
-
-diff --git a/lib/lmb.c b/lib/lmb.c
-index b6afb731440..f583b10f776 100644
---- a/lib/lmb.c
-+++ b/lib/lmb.c
-@@ -130,6 +130,22 @@ static void lmb_fix_over_lap_regions(struct lmb_region *rgn, unsigned long r1,
- 	lmb_remove_region(rgn, r2);
- }
- 
-+static long lmb_overlaps_region(struct lmb_region *rgn, phys_addr_t base,
-+				phys_size_t size)
-+{
-+	unsigned long i;
-+
-+	for (i = 0; i < rgn->cnt; i++) {
-+		phys_addr_t rgnbase = rgn->region[i].base;
-+		phys_size_t rgnsize = rgn->region[i].size;
-+
-+		if (lmb_addrs_overlap(base, size, rgnbase, rgnsize))
-+			break;
-+	}
-+
-+	return (i < rgn->cnt) ? i : -1;
-+}
-+
- void lmb_init(struct lmb *lmb)
- {
- #if IS_ENABLED(CONFIG_LMB_USE_MAX_REGIONS)
-@@ -257,7 +273,7 @@ static long lmb_add_region_flags(struct lmb_region *rgn, phys_addr_t base,
- 				 phys_size_t size, enum lmb_flags flags)
- {
- 	unsigned long coalesced = 0;
--	long adjacent, i;
-+	long adjacent, i, overlap;
- 
- 	if (rgn->cnt == 0) {
- 		rgn->region[0].base = base;
-@@ -283,19 +299,19 @@ static long lmb_add_region_flags(struct lmb_region *rgn, phys_addr_t base,
- 		}
- 
- 		adjacent = lmb_addrs_adjacent(base, size, rgnbase, rgnsize);
--		if (adjacent > 0) {
--			if (flags != rgnflags)
--				continue;
--			rgn->region[i].base -= size;
--			rgn->region[i].size += size;
--			coalesced++;
--			break;
--		} else if (adjacent < 0) {
-+		if (adjacent != 0) {
- 			if (flags != rgnflags)
- 				continue;
--			rgn->region[i].size += size;
--			coalesced++;
--			break;
-+			overlap = lmb_overlaps_region(rgn, base, size);
-+			if (overlap < 0) {
-+				/* no overlap detected, extend region */
-+				if  (adjacent > 0)
-+					rgn->region[i].base -= size;
-+				rgn->region[i].size += size;
-+				coalesced++;
-+				break;
-+			}
-+			continue;
- 		} else if (lmb_addrs_overlap(base, size, rgnbase, rgnsize)) {
- 			/* regions overlap */
- 			return -1;
-@@ -420,21 +436,6 @@ long lmb_reserve(struct lmb *lmb, phys_addr_t base, phys_size_t size)
- 	return lmb_reserve_flags(lmb, base, size, LMB_NONE);
- }
- 
--static long lmb_overlaps_region(struct lmb_region *rgn, phys_addr_t base,
--				phys_size_t size)
--{
--	unsigned long i;
--
--	for (i = 0; i < rgn->cnt; i++) {
--		phys_addr_t rgnbase = rgn->region[i].base;
--		phys_size_t rgnsize = rgn->region[i].size;
--		if (lmb_addrs_overlap(base, size, rgnbase, rgnsize))
--			break;
--	}
--
--	return (i < rgn->cnt) ? i : -1;
--}
--
- phys_addr_t lmb_alloc(struct lmb *lmb, phys_size_t size, ulong align)
- {
- 	return lmb_alloc_base(lmb, size, align, LMB_ALLOC_ANYWHERE);
 -- 
-2.25.1
-
+// Caleb (they/them)
