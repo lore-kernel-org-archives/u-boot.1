@@ -4,73 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17010C5475B
-	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 17:12:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96CC8C5475B
+	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 17:23:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35CE587F0D;
-	Mon, 11 Mar 2024 18:12:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 4978D87ECC;
+	Mon, 11 Mar 2024 18:23:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lzoNgm9M";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="CaGFNIz2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EFF9187CBA; Mon, 11 Mar 2024 18:12:36 +0100 (CET)
-Received: from mail-qt1-x82a.google.com (mail-qt1-x82a.google.com
- [IPv6:2607:f8b0:4864:20::82a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 587A187E6F; Mon, 11 Mar 2024 18:23:05 +0100 (CET)
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam12on20600.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2417::600])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 47C1D87EF5
- for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 18:12:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BDB778786A
+ for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 18:23:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82a.google.com with SMTP id
- d75a77b69052e-42f2009e559so33530171cf.0
- for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 10:12:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1710177152; x=1710781952; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=XY8Ht0wwlo0HT1bC9kzWIhnsSmQfOJk2YLkyPrJ0gps=;
- b=lzoNgm9ML+6AudnP8tCPWoUXbbOSnFI3LBV8Zs7ZC/kzhurSMU5bX8d+O11et8qaOz
- DhMQPI8bR0K4yvAv9+pPSZLeLGvVeab4Srnx0TtsZXP7voOUe9jJjAH2I75yq6Q81V92
- 0GotL7L3IVZRMiT5IvugyrLXgWGmCiD9rnV8c=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710177152; x=1710781952;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=XY8Ht0wwlo0HT1bC9kzWIhnsSmQfOJk2YLkyPrJ0gps=;
- b=h5pfVwwRaeB/aConrjdGcAHr8zbUQOU5aUhEKZXblFxeVDP29ZFrDKXubu3PyB2SSq
- pk8q08vDZRWcESgmuIg9T4SQ4MYiOv+Bn7UclCiyLK2mT0Xlcr55t9RqxByvP0J35J1J
- FQkWdNNo0ksDA9BwwwWAnm80tIeEkEpak2qwqTX8ccoCn5T4YNNeVHHNiVsUJJi4Go4F
- Hy2F790h4cPHnovj4mfakp5Q8jUmgGzZ/dxFoBKeGUm6xsHEhMlL4EPAZ1prYQraPxhb
- FwaX+6aQeveeDdvU/tONuUHg52Xckk6WRIriUo8KsHM0s7Edkwc25COWb/W0yePnvkXN
- B15g==
-X-Gm-Message-State: AOJu0YyGJK9jRjY3br3bfLImIB6hRua1gub3r/swCz5O58pkonyUXEx/
- v80TS5/Csro+yftrrHXIItc434+HGFCMPsN0P5dDfBQ4NmL1TRUr7dcC/bViSNgH/mR7E80tcTl
- N
-X-Google-Smtp-Source: AGHT+IF51+imK1RUNrKW5LZ6iG9GwU85PL+XbIdXIpCcVB1b3KJNMqOl5mdvsU4GoMSHZY0RkUtkSw==
-X-Received: by 2002:ac8:5c02:0:b0:42e:fa89:14b7 with SMTP id
- i2-20020ac85c02000000b0042efa8914b7mr11909514qti.15.1710177151740; 
- Mon, 11 Mar 2024 10:12:31 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-007f-0000-0000-0000-1005.res6.spectrum.com.
- [2603:6081:7b00:7f::1005]) by smtp.gmail.com with ESMTPSA id
- k12-20020ac8478c000000b0042edf7b7df7sm2887296qtq.8.2024.03.11.10.12.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Mar 2024 10:12:31 -0700 (PDT)
-Date: Mon, 11 Mar 2024 13:12:29 -0400
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
-Subject: [ANN] U-Boot v2024.04-rc4 released
-Message-ID: <20240311171229.GA1523872@bill-the-cat>
+ spf=fail smtp.mailfrom=tejas.arvind.bhumkar@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=lVfONV9Cg3uau3ae2lc1RTIdqeyjc0ULIUcmWrHqjxuSTPJQGfBxKZk8TtdtUNhOTv2/oMSRtToQI+DwSX22KRFDyJn8JDY2BvTwvv02K/8mSari6i+AI61m2On35IyW4vkcotxh14uFzGpWHeEFcxig3PHizqhoNO3daEkdU3tbuXw19REaZ9Bw8fn4oC0CWDE+R8uGRO/P7qRXNV6q+garWetOPgp4Ru1wr+SQhB69a3hMvqqX+16Sze/oaK2TY4HWJTocerQyQ3GtevpicTs4Se3igqzQv0JwTd36s22PiIVfxk+oBYlE1fivLx5ueOazPOc1IJe4/7+9a+oa9g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Rta17QdrhryF6RuLOQftQ6DQYYpfK1KiwwX7fQvgAkI=;
+ b=nR7YSgLN1lzn3jbRMDDscEED6YS8DJCknSBbZsQ65xT01h+/J9FA6E8eHUkbZeigJbIwUAynjPfMV9p9im3FkfElqDJPMxrxJPuzaWYtWKj0MBXoU1YEdea2iz8OJU+3DtbKN3OjVxb4w5iQr8EdIh5nr7xMgEU+a+0JhzYj5P5otm09l9fTwOlkqQUpcZZ+kmobfl/tk/cjoDZ5AF61M1drBrJ+L+foo9z30mwm3+dR37II9cRZ2CcnewWCH59VCE9653pFMFUzPp/yOj2bIc6h3eQpu+125t4z/dPg+P9EPNK5SX7fKc/TmkprCxBBVFB/IUPMSv4c682kdY4v6w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Rta17QdrhryF6RuLOQftQ6DQYYpfK1KiwwX7fQvgAkI=;
+ b=CaGFNIz2wmK97upiIEf4Lj8knM+GVYLgctbx2GFCATxEPxH8KlnGouST3Q/3TAB1N7vQjJ5QjFunXIYZfAA79AdLNAVKtqObv2aWKW0o5A+HUk6dQHlrxkX4oyCaiywWx1y+Dnc94iOJ4wJPxoh9iuamIDZmr6FVaTLJnX5kPK0=
+Received: from CH0PR03CA0205.namprd03.prod.outlook.com (2603:10b6:610:e4::30)
+ by MW4PR12MB7191.namprd12.prod.outlook.com (2603:10b6:303:22d::8)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7362.35; Mon, 11 Mar
+ 2024 17:23:00 +0000
+Received: from CH2PEPF00000142.namprd02.prod.outlook.com
+ (2603:10b6:610:e4:cafe::e5) by CH0PR03CA0205.outlook.office365.com
+ (2603:10b6:610:e4::30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7362.36 via Frontend
+ Transport; Mon, 11 Mar 2024 17:22:59 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CH2PEPF00000142.mail.protection.outlook.com (10.167.244.75) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7386.12 via Frontend Transport; Mon, 11 Mar 2024 17:22:59 +0000
+Received: from SATLEXMB08.amd.com (10.181.40.132) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Mon, 11 Mar
+ 2024 12:22:58 -0500
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB08.amd.com
+ (10.181.40.132) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Mon, 11 Mar
+ 2024 10:22:58 -0700
+Received: from xhdcl190040.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35 via Frontend
+ Transport; Mon, 11 Mar 2024 12:22:56 -0500
+From: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <jagan@amarulasolutions.com>, <n-francis@ti.com>, <michal.simek@amd.com>, 
+ <venkatesh.abbarapu@amd.com>, <git@amd.com>
+Subject: [PATCH 00/19] Add support for DDR PHY mode
+Date: Mon, 11 Mar 2024 22:52:30 +0530
+Message-ID: <cover.1710098033.git.tejas.arvind.bhumkar@amd.com>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="xwnP3a8d8Nwfki+3"
-Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH2PEPF00000142:EE_|MW4PR12MB7191:EE_
+X-MS-Office365-Filtering-Correlation-Id: 223fb24a-7934-43b6-c306-08dc41efe61b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: hWkUHn0MhYJGXR8AzCezVuD3NvlCKFM8nuQXraWY2+ZoALO7UHktiKZ2XVOgibTuvUYPWkEW8U8xSPcYhjVOcLbn6s00dS8kGdkYuD4R1bk0asSgDGXwtq6PJeobkJk4q+Kip4tiIHXJ70t2RM3BjD5c8BbM4slUb0PLyZxs+Yg2PCfi/gt9Fcbero9WsHG54OICX+dageaWk7XMjK65/Lo2Bt5afp9NuLWDVRVHglrQ6Iuq6auyY/8Iu7hfkpWpGQAqMZ1OaGnoISiImr75Kkre5d6bL0LD70VibADCyaUjI6G0/5zcvX1/CoBx/mDaUSJNgfqJ3m8vJ7fUU8IyyhVJyXJLCOL2vK/hwVhFLTUj8y2BFckhSVDQEuS4xWobGuX2/ShhLMHLzoq1COLx68te3CzEUoIyF3+Ep3i+2tCJ5FVllhb0vNAutxSJRflqBGuVfwpFADipasmq77ahwSxNWk73VaHT8em638K9P/u3yRfj4XF6y3/a3YsPS5UvV7N7OZ7lU7Nr3I3Yv41CUBQ+knipAk8vTA+fq/ziK/WRBMWQdJ2KGKCVv4WPn+K9Vzg4NX/5k6jDweaiLvGRnw6qXZdrDDiOY/+d/jcM10P4aF0pgQkrA+IwUXD4iH9i0Ui4rpRSCXCRzfY8hXid6PZXB1+SPWy7uIMFBKGysUWkfmFPqSmjA6OR7FSdXhZZswsYaCbSvjAcS0LK0frkUw==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(1800799015)(82310400014)(36860700004)(376005); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Mar 2024 17:22:59.2711 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 223fb24a-7934-43b6-c306-08dc41efe61b
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CH2PEPF00000142.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB7191
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,46 +123,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Enable DDR PHY mode support for Micron,ISSI,GIGA and
+Macronix Flash.
 
---xwnP3a8d8Nwfki+3
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+We are dividing the below series into three sets. This 
+represents the initial set, wherein we have activated 
+DDR mode support for flashes.
+https://lore.kernel.org/all/cover.1701853668.git.tejas.arvind.bhumkar@amd.com/
 
-Hey all,
+The series is based on:
+https://lore.kernel.org/all/20240304031046.25998-1-venkatesh.abbarapu@amd.com/
 
-It's release day and so here's -rc4, and I'll be updating the next
-branch with this as well shortly.
+---
 
-In terms of a changelog,=20
-git log --merges v2024.04-rc3..v2024.04-rc4
-contains what I've pulled but as always, better PR messages and tags
-will provide better results here.
+Ashok Reddy Soma (7):
+  spi: cadence_qspi: Write aligned byte length to ahbbase
+  spi: cadence_qspi: Clean up registers in init
+  spi: cadence_qspi: Initialize read and write watermark registers
+  mtd: spi-nor: Enable mt35xu512aba_fixups for all mt35xx flashes
+  mtd: spi-nor: Check SNOR_F_IO_MODE_EN_VOLATILE only if SFDP is enabled
+  mtd: spi-nor: Add support for cross die read in dual flash
+    configuration
+  mtd: spi-nor: Enable DTR octal flash program
 
-At this point there's one more -rc before the release on April 2nd,
-2024. If there are regression fixes that you know of please speak up so
-we can ensure they're in the release. Otherwise changes should be
-targetting the next branch. Thanks all!
+T Karthik Reddy (5):
+  spi: cadence_qspi: Add support for DDR PHY mode
+  spi: cadence-qspi: reset the ospi controller
+  spi: cadence_ospi_versal: ospi ddr changes in cadence ospi versal
+    driver
+  spi: cadence_qspi: Add spi mem dtr support ops
+  spi: mtd: Use split reads if multi-die flag is set
 
---=20
-Tom
+Tejas Bhumkar (6):
+  arm64: versal: Enable defconfig for Micron octal flashes
+  mtd: spi-nor: Update erase operation function
+  arm64: versal: Enable soft reset support for xspi flashes
+  mtd: spi-nor: Enable DDR mode functionality with ISSI flash
+  mtd: spi-nor: Enable DDR mode functionality with Gigadevice flash
+  mtd: spi-nor: Enable DDR mode functionality with Macronix flash
 
---xwnP3a8d8Nwfki+3
-Content-Type: application/pgp-signature; name="signature.asc"
+Venkatesh Yadav Abbarapu (1):
+  mtd: spi-nor: Update block protection flags for flash parts
 
------BEGIN PGP SIGNATURE-----
+ configs/xilinx_versal_virt_defconfig |   3 +
+ drivers/mtd/spi/sf_internal.h        |   2 +
+ drivers/mtd/spi/spi-nor-core.c       | 185 ++++++++++---
+ drivers/mtd/spi/spi-nor-ids.c        |  36 +--
+ drivers/spi/cadence_ospi_versal.c    |  76 +++++-
+ drivers/spi/cadence_qspi.c           | 378 ++++++++++++++++++++++++++-
+ drivers/spi/cadence_qspi.h           |  57 ++++
+ drivers/spi/cadence_qspi_apb.c       |  73 +++++-
+ include/spi.h                        |   7 +-
+ 9 files changed, 740 insertions(+), 77 deletions(-)
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXvO30ACgkQFHw5/5Y0
-tyxqLwv+MeBhMBIFXZY/FNtrIsP71/O6bwfWYZXAipnQIeiFnYEnO0AyWhGAS1zb
-F9wf3idlHaIL+RZHPlgeXlzbgd3DvsCWDlTgPNQA99mBdWIW+hib5jdruKj8F62j
-6wqADgrogXPMa5sFLt4oSW/1sD4aQGSZArBVndcHRSlA+J28jiXeYUhraLDxdKul
-Nn3/9AMZ6CJq/+F82iGDrEuqkqqD08pBrbahhuWJm4JF6hkT+TouEFqfXfDXXKLb
-ILh1sUMYT2tBj+agw/N8srN7nuS1SiGlvSaQ/d89+WXHaaVn2GoIp5uRu77IHa8P
-zGN0Ri3jQ1aNXC2MJoS3RdkoftuPqOiJJqq23Ufhdg0bSJBg/mjqce4mZA3/r6YJ
-z3UPJgnAItIQtRVS7zWHLS6d/io3qPEtnaHp/jLhwjuHHLi/ytmAehl0obJ39u2o
-4mBCdy+SUs8LJw1dCaABcidikWrqIVXEuLtCdHuyAX1HTLoK3jn0KwLicc+DdOBC
-NG0poyMk
-=7QhZ
------END PGP SIGNATURE-----
+-- 
+2.27.0
 
---xwnP3a8d8Nwfki+3--
