@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34C18C54E58
-	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 09:22:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CA2EC54E58
+	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 09:22:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B60687EF2;
-	Mon, 11 Mar 2024 10:22:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0F4ED87F06;
+	Mon, 11 Mar 2024 10:22:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="LUrAKuHe";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Il4rBavS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BC80287EF2; Mon, 11 Mar 2024 10:22:26 +0100 (CET)
-Received: from mail-m12778.qiye.163.com (mail-m12778.qiye.163.com
- [115.236.127.78])
+ id 158B187F0F; Mon, 11 Mar 2024 10:22:39 +0100 (CET)
+Received: from mail-m127205.xmail.ntesmail.com
+ (mail-m127205.xmail.ntesmail.com [115.236.127.205])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DF16987E13
- for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 10:22:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 578FB87E13
+ for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 10:22:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=LUrAKuHebWAEaGYkrm1eziOPS25xGsnlILDx/0bdzBnbv5KGMjTiyZLDa8w+2QOld6aIVf+GxdRst5ZQ7RYezl7elEExNffgEvUGd3CnR5eb1YauICm5IKfc8i3vrAGKRE1iQ42wH0uw/kZi3NUFj6/Zg2r30WNmFIYXGlWsj4c=;
+ b=Il4rBavS+Rvvv+5giOlUoRbM6tL2ahGPS6jRcKUhPLVgfNNK6ZW75EE+5qCVTlhep3nm+Y0t3brj5aFZ2Mq/UM2XgWcHJHb36dieFEMjpXdQ62dF1UMEjZ7SMBHkd5Ou8MujOAia+2v/uIpM2EmbYZ9F6INWkxJwvX48xW4jsVU=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
  bh=maODJbJ4IfcheGVlwQ0J+ltm/SRi01hbb7QmajncWfI=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.77] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id B684F900369;
- Mon, 11 Mar 2024 17:22:08 +0800 (CST)
-Message-ID: <9430dde2-581d-4595-89ca-5510011f822e@rock-chips.com>
-Date: Mon, 11 Mar 2024 17:22:08 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTPA id BB912900419;
+ Mon, 11 Mar 2024 17:22:28 +0800 (CST)
+Message-ID: <6093465b-080d-43b0-8f73-2b0393c387e4@rock-chips.com>
+Date: Mon, 11 Mar 2024 17:22:28 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH 02/11] board: rockchip: rk3399: Add myself as reviewer to
@@ -53,13 +53,13 @@ In-Reply-To: <20240217183610.2621132-3-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGhkaHVZDSB9OS0NLHUgfQxpVEwETFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGUlNSlYdGkIdShhPHUMYHxpVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk5MSUpJVUpLS1VKQl
  kG
-X-HM-Tid: 0a8e2cd1c6ac03a9kunmb684f900369
+X-HM-Tid: 0a8e2cd2152003a9kunmbb912900419
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6OFE6SSo4DjMLODBRF1YjKygY
- A0NPCzpVSlVKTEpLSk9DQklCTUJPVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PS46LCo4HTMOFjAuLUtIKxwu
+ KTYwFDVVSlVKTEpLSk9DQk9CTExCVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
  EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFPSkhLNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
