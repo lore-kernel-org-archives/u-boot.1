@@ -4,112 +4,144 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53B8CC5475B
-	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 17:26:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD261C54E58
+	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 18:23:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CEB9487FB5;
-	Mon, 11 Mar 2024 18:23:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id C9C0387E3D;
+	Mon, 11 Mar 2024 19:23:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=epam.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="UU5HvktD";
+	dkim=pass (2048-bit key; unprotected) header.d=epam.com header.i=@epam.com header.b="pMbm1dx/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 11ABF87FBC; Mon, 11 Mar 2024 18:23:52 +0100 (CET)
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on20600.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2412::600])
+ id 9E03987E3D; Mon, 11 Mar 2024 19:23:12 +0100 (CET)
+Received: from mx0b-0039f301.pphosted.com (mx0b-0039f301.pphosted.com
+ [148.163.137.242])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE1DB87FB5
- for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 18:23:49 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=tejas.arvind.bhumkar@amd.com
+ by phobos.denx.de (Postfix) with ESMTPS id 015C487F12
+ for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 19:23:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=epam.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=9800dbbead=volodymyr_babchuk@epam.com
+Received: from pps.filterd (m0174680.ppops.net [127.0.0.1])
+ by mx0b-0039f301.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
+ 42BI11kC016722; Mon, 11 Mar 2024 18:23:07 GMT
+Received: from eur05-am6-obe.outbound.protection.outlook.com
+ (mail-am6eur05lp2104.outbound.protection.outlook.com [104.47.18.104])
+ by mx0b-0039f301.pphosted.com (PPS) with ESMTPS id 3wt25w94m5-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 11 Mar 2024 18:23:07 +0000 (GMT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=iwN9l1jA5F8oIDPjdo+4t8y7lwv5dIrzt6gMGMIMbdozWDjKPcoHNTcYDgpIL/q0/ebiTHiNdPr7D15tCdxhAae+ToTv2unqDCECrd5FYxpZ6HB9mcUbPSSx4Bl01jIifLLgqdp/b8QjBqcWXAGJ8VlSWbwUmylcGTN20VltVgSdj35XuDYf4Lo1KuvAITN8DVvR+c0GKbc7PrtL+5MpW1GJGaJMYWPE5c8HmwzXQcCpiNVUJIvPNcPJxs7zJgJoEov9fnv5BtuB9ENxVmVAJgaM4MTRr4n46Fzh9odSMR4w3xHNgS0LDTH1s/YbOYUa/fM1sFDSTsePmys0DpRKBA==
+ b=HiZvuNDwDfDx6WmTGFfG/WVUaO1amN4u0Ng+u9k2l7O0hMBaR4TkBq+/LnLxL8kXUVS84wMsTBh0VXzRAxO06qGHJB2DgewhJjfS7To7sVW6USEb6/sQiLptjB3IhfUY1paVpekK/VCejYG0EIQlw6iLLlpTqiQzsj+egF/Py+HMzYEwgDivzvuMiv5iX2M1H7We7RwxUcVgcKUPMLtXIGq1W2WYiVgMYhafxfHudSGxEQ40GVYgxYAaNJ35wLFktDDLGurEsZce6Yf7jpJM8CPBEQ8D+YzKzv54pJLZgAKqK8jn0/WK7Fcbhr2sElz7BNITcwjebW9UTcTce4x+Ig==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=DmBMeC2Ztqlhq0OpaoBx3r+wy/zMAH5eT4jCObxFDFw=;
- b=ScGPdErqbv49W8FNos2JH3YsB3xakvEPwqbfUSNWGjFV2WMDcfiXsJDekIV7wwrAABscGaNmdGt+CH7VNNq6ms1OrKQZLArvmwLJyp5FACftjj8bONAqLvOMOq6ufF3phKSqAWpbnxtTEQLRfT7PiOX5OslHfSwydRO/R9DtY5uFjxO+Rwehka/kEhdjDf8cVQZUY/ImBUhWZ1DmxC2KrGTaCqgN0ZDphMFNAGIbWhm6H/AkfMTZp+I3OTJUh0rpCIUQEIbZq3iRVxgHpCiO1ZalP9LiOPZnUhIWQGjXaUAKFss6TliFf2fj/cCB82v2YxbHjRewz0oR+zjiGCjZWg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ bh=LsndnVuV+bR4gA9RmgmwklC34oyBIQqxTQwsrTOlcm8=;
+ b=S7TbFVCpFvhQYQQr02rVShFGzCmk6YHfQZrVB0suPxaE90WCGJGOBFfg/QvdUfSWRbnKLTwCaozj1nxNlUYknGkXYJ9/bomsen0mPP7j82CPhlWhxk4gLlNG0zyxf7i9NA2dDJ8tylRgt/O0fXr4k9c99u+0+yfdyUAPBj4yAxFnrxtI6wOwOJ58Vy4YT4+U5LMJugfefE81Tc+AiNPV21GM3k7fhcQsppRmJHUN9AISjqif9gOUk/IG/RkMhbJtv3cCrHmJLkcJkrXsCSqkP5l8vSki/aytOPnzcV1c/4x6Qw+2H1PrGQNxgMAtGXa5JGicunDsInSOnw0VRqLVTg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector2; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=DmBMeC2Ztqlhq0OpaoBx3r+wy/zMAH5eT4jCObxFDFw=;
- b=UU5HvktD/vNL9QzuHnRh5xKKOMaXh68lXKtPPNoqPbWHxEbVTSBDhXSjvmBR1mAesZay92Mctyx4CFKswo3cp8tbVg8Qs2VmD2Kdem8hDVzNKd7YnshrUEk02uKbV7FgKdo9pLiITFa7hKKDjWEK6tOCK0bDpbv3xAabse5ivjI=
-Received: from DS7PR06CA0021.namprd06.prod.outlook.com (2603:10b6:8:2a::23) by
- MW4PR12MB6705.namprd12.prod.outlook.com (2603:10b6:303:1e3::18) with
- Microsoft SMTP Server (version=TLS1_2,
+ bh=LsndnVuV+bR4gA9RmgmwklC34oyBIQqxTQwsrTOlcm8=;
+ b=pMbm1dx/LlY1c0wq2tIZJOQcuELBiMsehsv8GylIj2Ahl8OLikZbbn2otAVNAQAnpeZ4vhzzUZ/QQOrf/aL/SKbxvc0gftPek7m3qByZh/QdIDqys4k7vkSlMXfNBnijqFFyf3l/Z39xH6vhC7hbPGg9Mr//zoE6wMZz7uP+WWstpJOnl+mAdiR+z8ohoDokjySjfJHG9phRvieo4A5G7Ne9y/psrssuvI4qyqMvk6Tr/9YeJQ2Z/+n43J+AswmMgpPxDtUC6zAxAOZ+96hE1ngSRkT08jdcG+u4YkxA+9dS5BAAkM5doen0QImbUijIH6wUR9+WVb2OS7aH4zRkKA==
+Received: from GV1PR03MB10456.eurprd03.prod.outlook.com
+ (2603:10a6:150:16a::21) by PAXPR03MB7715.eurprd03.prod.outlook.com
+ (2603:10a6:102:207::10) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7362.35; Mon, 11 Mar
- 2024 17:23:46 +0000
-Received: from DS2PEPF00003439.namprd02.prod.outlook.com
- (2603:10b6:8:2a:cafe::86) by DS7PR06CA0021.outlook.office365.com
- (2603:10b6:8:2a::23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7362.36 via Frontend
- Transport; Mon, 11 Mar 2024 17:23:46 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- DS2PEPF00003439.mail.protection.outlook.com (10.167.18.36) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7386.12 via Frontend Transport; Mon, 11 Mar 2024 17:23:46 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Mon, 11 Mar
- 2024 12:23:45 -0500
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB06.amd.com
- (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Mon, 11 Mar
- 2024 12:23:45 -0500
-Received: from xhdcl190040.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35 via Frontend
- Transport; Mon, 11 Mar 2024 12:23:43 -0500
-From: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <jagan@amarulasolutions.com>, <n-francis@ti.com>, <michal.simek@amd.com>, 
- <venkatesh.abbarapu@amd.com>, <git@amd.com>
-Subject: [PATCH 19/19] mtd: spi-nor: Enable DDR mode functionality with
- Macronix flash
-Date: Mon, 11 Mar 2024 22:52:49 +0530
-Message-ID: <b29870266e42a6f1d8ca12900297b8bbe11dc628.1710098034.git.tejas.arvind.bhumkar@amd.com>
-X-Mailer: git-send-email 2.27.0
-In-Reply-To: <cover.1710098033.git.tejas.arvind.bhumkar@amd.com>
-References: <cover.1710098033.git.tejas.arvind.bhumkar@amd.com>
+ 2024 18:23:04 +0000
+Received: from GV1PR03MB10456.eurprd03.prod.outlook.com
+ ([fe80::bfa8:3549:ac92:d0d8]) by GV1PR03MB10456.eurprd03.prod.outlook.com
+ ([fe80::bfa8:3549:ac92:d0d8%4]) with mapi id 15.20.7362.031; Mon, 11 Mar 2024
+ 18:23:04 +0000
+From: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+To: Caleb Connolly <caleb.connolly@linaro.org>
+CC: Sumit Garg <sumit.garg@linaro.org>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH v2 8/8] board: add support for Qualcomm SA8155P-ADP board
+Thread-Topic: [PATCH v2 8/8] board: add support for Qualcomm SA8155P-ADP board
+Thread-Index: AQHab2CjKZvPgmo3NEWX73nxw+EzJLEqNlMAgADZo4CAABqOAIAADGmAgAd3mYCAADMxAA==
+Date: Mon, 11 Mar 2024 18:23:04 +0000
+Message-ID: <87edcg1vcp.fsf@epam.com>
+References: <20240306005230.2638972-1-volodymyr_babchuk@epam.com>
+ <20240306005230.2638972-9-volodymyr_babchuk@epam.com>
+ <CAFA6WYNWxHU4W0xrTC=mQJbP49hFMm56fbz1isd0xNNQ_VdVSw@mail.gmail.com>
+ <87jzmf2mvi.fsf@epam.com> <e5e47988-c617-48a0-a10a-e37edb9a8267@linaro.org>
+ <87y1av12bg.fsf@epam.com> <0cda2608-856f-4650-92a6-4860a0d7c8b6@linaro.org>
+In-Reply-To: <0cda2608-856f-4650-92a6-4860a0d7c8b6@linaro.org>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: mu4e 1.10.7; emacs 29.1
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: GV1PR03MB10456:EE_|PAXPR03MB7715:EE_
+x-ms-office365-filtering-correlation-id: 13d53f59-67e4-4d87-d291-08dc41f84ab9
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: EvBB/wfkU62YBjvryFso9n7MDhTmIpg/DNrwMrYFCRSepKOdbRl01JrDvE2gel7/P9UOekaFGyYqLMD31mYfCOMmUOHTr5ijWOSyVzR8OVysoRQ6DhVWkSSjCMD4h+IGY0bjYnqhQOzvCr3Hn7OI7FtaRdDc73gmT1EApaY0CxP0gjp8A6qOQ2iqYHy8u4xoU2F39saXq3PhALRnfjip9hhM4C8hZ/mfuFIio9iTj/cVCJhEsFwwXl3g8O+1h0bCQvy9ryL5hYErEMD3GS1+Cv/w/ObFN2ejEFyqX4D6lbKRDh4CNpecvX0UM4fHE98TnA4BpTJFC3M82yAWLoQq8BoHK5dkvPQDeyaXlGLDwZy58lhv9K2TVtG/2qmCIk0d2AXFPgCILICpzhIqsMOa+moUWDP0z5A9b+mWwN3RxQ6z9Bh8Qf6BuuTVnaLtfut8IrM6TpA9toAN0ic3LwH9TiP7A53h8F0K8Rq+lW5dpWh3XWojtcyQwGoxWN9eh1GPBNaIzUYR39CXFwED0pc7yoQXxI5fDiuGNux+E3fyREXKJgaZ/rojwHz8Hx4xMGT05hxyjWGbWpTPNsqwbyKu4Eka+BTwHZRnDm2wu6U4gGFGDCYoOQ6WgFgKBr0q8z9hOOlh49wcgXPGidK+idPYTG0/wcAirHu/4j188km6n6I=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GV1PR03MB10456.eurprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(1800799015)(376005)(38070700009); DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?rgRKMymlFne+SeRJdX+aht4lltD6H1N6RK39taI4FKXm0lgcq8SktIBH2K?=
+ =?iso-8859-1?Q?qyck+ic2KEVMpFxPAC9VaK3LzDQJKkmqm8hq6GB4uP9USccSI+M5yWK/S4?=
+ =?iso-8859-1?Q?I1OAZOMJI+/YxrFEuDMAlEU7K8b+WKRAJvoOQKm6pvDD43rM8UJrIqeFYC?=
+ =?iso-8859-1?Q?a2gDK9fdITDDLpZYPLDUnIF6yjJipHjpO3ClixVzPmY+QR2M0/Uh8D9g3u?=
+ =?iso-8859-1?Q?LOv4pUKaeQ98ne2u/vPR1qVq6NkhYWjpEmcOXrqlkrOPFwdNVcIUApnxOB?=
+ =?iso-8859-1?Q?P+xyucc4e0fxR2bBstECSiIf3y/PPdAIKYOgYlsEQEJUwwSh+k04Zco9xA?=
+ =?iso-8859-1?Q?fkc6CUSAveNchIxHWISDqj662YhvZ8LnA4tkA4zKhXBj9/o+G65qHU2avU?=
+ =?iso-8859-1?Q?ogD/Oj41rmjjo+XpEOMWuPBqLOyG9CxxA16381i+r4AiwSZMV5rnSps/zK?=
+ =?iso-8859-1?Q?BoN4RtLOjMNsV4d2wR9cexFiPdntygS/QprlqktNOVd+nWZuGtmF7PXACp?=
+ =?iso-8859-1?Q?VvYSVc0jYaaZ9XIppfQYKOWItnYAInVeEdqky5DT8dcA3jj2cVX5HC0qWb?=
+ =?iso-8859-1?Q?+hFs1fnchbWgXO5nd35RlbGu5MlitJK3KsgICRzk/zU0dJqNngsWc4vBn6?=
+ =?iso-8859-1?Q?27AoiKQ581VEi+bk8k0sHfZtYyUzOspn9P2sqxxrSzEEW5Tkh5VCfdW0n6?=
+ =?iso-8859-1?Q?hvu+2piOV22MLb0mRxYtXX+TsjyE0eMqEjNyhmlBdJf0ygaUMJR3+7aF7m?=
+ =?iso-8859-1?Q?a6Xsy/O1QlDthdo5YrqmcubdVQjkKzuo7BBtNnAZaTYs8Z3iHgpFLQZoyE?=
+ =?iso-8859-1?Q?fRKYVGdN13yoPF8uMJwohNh3nwxHMGKmXIJMxy2UJXsq1sAdEwMIIaFztN?=
+ =?iso-8859-1?Q?DwcauJAXOMxBA9ZuWgXM80qtLPQ31YviVVX17KDzjaw73ryDyQicaAwWfT?=
+ =?iso-8859-1?Q?Gk9p6eUAenl+fhGKUKzgV9RnShBFdInTuwajzqsMgpw6n4nmzebUQlwcXm?=
+ =?iso-8859-1?Q?3A5ENRLhQZdwE7RE+gH9ZWdMyInhwB1Nwc9/lvslZJH+pCbCVn4zxFpDHY?=
+ =?iso-8859-1?Q?Q1fxM7FzkGO0n/Q0Ze0xs7Hp6kmUyv25OhwlqBOGb3InLGhv/HC7mM5LWE?=
+ =?iso-8859-1?Q?eZU1g6yKsVabB7g70T3M1Hw9chGRpg8/x7J/yHqSCuVqEZglhe1If3i5nw?=
+ =?iso-8859-1?Q?dqkbYgx5fsJg+y6UEarlmDdo/a1ZPtAAmS56FfGE796uVODnng8u6jzLNt?=
+ =?iso-8859-1?Q?WVtgU6Izy5OEA0qgTbbO0rDgYJ4RBF6wvv8DsRR73rc4GVzyRCoiB+sbDM?=
+ =?iso-8859-1?Q?TfKYcOSh+7uHEbb2G531vOLCNHMEOm9+m6hbCKaKlL2wXoFKy7xX8aiOql?=
+ =?iso-8859-1?Q?o4/73HjBsbCVX4bD1MliaK0z3f5LROTlaAeEDK0BJVqTn927maJhWddLYB?=
+ =?iso-8859-1?Q?U7/aK9LuT3UfqEldjY3gOSWfVWZEPivfYOaQpowPX/qAwRUcxXJwV/nmMI?=
+ =?iso-8859-1?Q?dgkbHJUQ9ifBCUlvPHcAL5iTROZ5EBH3aBk8YlyvHETEM70aihtvfuijdC?=
+ =?iso-8859-1?Q?oWPR9/mGVlh33h4AugOTSr5gcf/MAoaw8BSrul8hTxliD6AvbN0W+D91Au?=
+ =?iso-8859-1?Q?KcUoPn08UWA35cbPByVYjUVGo0EtN/wthC74HNr/Nh265He7RYaetlrg?=
+ =?iso-8859-1?Q?=3D=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS2PEPF00003439:EE_|MW4PR12MB6705:EE_
-X-MS-Office365-Filtering-Correlation-Id: cb84ba66-5773-43a4-0bdd-08dc41f00220
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: zD7dzkDGRE4PVvUIeWvHj5rADVhfTexe0pMmPCKaZZ9ofgnKMEDDY6lRk2lg8BuBVGU3/KfOW+89AuC+GPGSOr3HYJTY6vmUgCzYXWPARb+aacwhhOFFRd0KPZWpQLxSjmnctEF6LBipow5jflWcFeTgEl9Rjm6Cfl5KopJboLqsZKf6s1nLr+uiB29XV08Htz5+TKshkupqgQAu9Ozq68lgfGcAHs649+BkT5AMkOAMKKgcmKiWcDKHyICZan5DiAM987QDsKmE3OFXc47bQ+PsVZIv6KjRv6uLaeexS8MPHhOy0BHvi/egNJh0yszMI1dyv1riumDM8AN5o6Z3cYK4ilzzUT64jgzk4Jdf8lfcWVQt7AoNaJkA7Xw9eLReSoWQ0/ZPicYB5cA0JX4G/2KT6MTedaYxZf4LLhczHnJDQtvqjL4O3b4+HFujr6uzO5VEnBSZkentn6nMn0savJzeC2jk+UDVzYqxu+wvJci7YaoJUAj4rkTAB2USYJhHaNixe7KVENjCCA1wp4KuCX/8G2u5WzZqBAvw9wgsn3bMUK08egKpbR007YlkWmLZP9fCEBsI/2nVI5IUtXaf08XOdwxJxW0IN1B71eJGR//yM0qFMe6kXAOlHSmlyDDMYcsUXr2irXtTqReOm8mnqBjvhIHV8dui/0Jt9I8ogjpFsDRdqenRTPL8vtxRP9W7hzhOOArJzu9CtOMsLYieZn/zxh/24xryUudUoS1IZ2VoOh9m3LTz54N2JQkecSNR
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(36860700004)(1800799015)(376005)(82310400014); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Mar 2024 17:23:46.2441 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: cb84ba66-5773-43a4-0bdd-08dc41f00220
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS2PEPF00003439.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB6705
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: GV1PR03MB10456.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 13d53f59-67e4-4d87-d291-08dc41f84ab9
+X-MS-Exchange-CrossTenant-originalarrivaltime: 11 Mar 2024 18:23:04.0592 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 6uSINa4PMppT3YeR9dwQLHw0SQX1F7a24gvqH3QW7ydViuBjz0lDS2JXwRS0MMfWhqDMpss1B6uBsMVD2xGAT0bngeyBM7vmEmCuDKR81M8=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR03MB7715
+X-Proofpoint-GUID: XFlkC1mysXitiq1NbvuGr4UEnnmg1p20
+X-Proofpoint-ORIG-GUID: XFlkC1mysXitiq1NbvuGr4UEnnmg1p20
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-03-11_11,2024-03-11_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501
+ lowpriorityscore=0 adultscore=0 mlxlogscore=956 clxscore=1015
+ impostorscore=0 spamscore=0 malwarescore=0 mlxscore=0 suspectscore=0
+ bulkscore=0 phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2402120000 definitions=main-2403110140
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -126,131 +158,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Added SFDP fixups for Macronix octal flash, with the requirement
-of the Invert Dual-byte opcode in Octal DDR mode.
 
-Reference: linux-xlnx@08cf794
+Hi Caleb,
 
-Signed-off-by: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
----
- drivers/mtd/spi/spi-nor-core.c | 49 +++++++++++++++++++++++++++++-----
- drivers/mtd/spi/spi-nor-ids.c  |  2 ++
- 2 files changed, 45 insertions(+), 6 deletions(-)
+Caleb Connolly <caleb.connolly@linaro.org> writes:
 
-diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
-index 6b396ce681..9c2d70585a 100644
---- a/drivers/mtd/spi/spi-nor-core.c
-+++ b/drivers/mtd/spi/spi-nor-core.c
-@@ -4089,18 +4089,18 @@ static int spi_nor_macronix_octal_dtr_enable(struct spi_nor *nor)
- {
- 	struct spi_mem_op op;
- 	int ret;
--	u8 buf;
-+	u8 *buf = nor->cmd_buf;
- 
- 	ret = write_enable(nor);
- 	if (ret)
- 		return ret;
- 
--	buf = SPINOR_REG_MXIC_DC_20;
-+	*buf = SPINOR_REG_MXIC_DC_20;
- 	op = (struct spi_mem_op)
- 		SPI_MEM_OP(SPI_MEM_OP_CMD(SPINOR_OP_WR_CR2, 1),
- 			   SPI_MEM_OP_ADDR(4, SPINOR_REG_MXIC_CR2_DC, 1),
- 			   SPI_MEM_OP_NO_DUMMY,
--			   SPI_MEM_OP_DATA_OUT(1, &buf, 1));
-+			   SPI_MEM_OP_DATA_OUT(1, buf, 1));
- 
- 	ret = spi_mem_exec_op(nor->spi, &op);
- 	if (ret)
-@@ -4115,18 +4115,33 @@ static int spi_nor_macronix_octal_dtr_enable(struct spi_nor *nor)
- 	if (ret)
- 		return ret;
- 
--	buf = SPINOR_REG_MXIC_OPI_DTR_EN;
-+	nor->spi->flags |= SPI_XFER_SET_DDR;
-+	*buf = SPINOR_REG_MXIC_OPI_DTR_EN;
- 	op = (struct spi_mem_op)
- 		SPI_MEM_OP(SPI_MEM_OP_CMD(SPINOR_OP_WR_CR2, 1),
- 			   SPI_MEM_OP_ADDR(4, SPINOR_REG_MXIC_CR2_MODE, 1),
- 			   SPI_MEM_OP_NO_DUMMY,
--			   SPI_MEM_OP_DATA_OUT(1, &buf, 1));
-+			   SPI_MEM_OP_DATA_OUT(1, buf, 1));
- 
- 	ret = spi_mem_exec_op(nor->spi, &op);
- 	if (ret) {
- 		dev_err(nor->dev, "Failed to enable octal DTR mode\n");
- 		return ret;
- 	}
-+
-+	/* Read flash ID to make sure the switch was successful. */
-+	op = (struct spi_mem_op)
-+		SPI_MEM_OP(SPI_MEM_OP_CMD(SPINOR_OP_RDID, 1),
-+			   SPI_MEM_OP_ADDR(4, 0, 1),
-+			   SPI_MEM_OP_DUMMY(4, 1),
-+			   SPI_MEM_OP_DATA_IN(round_up(nor->info->id_len, 2), buf, 1));
-+
-+	spi_nor_setup_op(nor, &op, SNOR_PROTO_8_8_8_DTR);
-+
-+	ret = spi_mem_exec_op(nor->spi, &op);
-+	if (ret)
-+		return ret;
-+
- 	nor->reg_proto = SNOR_PROTO_8_8_8_DTR;
- 
- 	return 0;
-@@ -4134,6 +4149,20 @@ static int spi_nor_macronix_octal_dtr_enable(struct spi_nor *nor)
- 
- static void macronix_octal_default_init(struct spi_nor *nor)
- {
-+	u8 id_byte1, id_byte2;
-+	/*
-+	 * Macronix Read Id bytes are always output in STR mode. Since tuning
-+	 * is based on Read Id command, adjust the Read Id bytes that will
-+	 * match the Read Id output in DTR mode.
-+	 */
-+	id_byte1 = nor->spi->device_id[1];
-+	id_byte2 = nor->spi->device_id[2];
-+	nor->spi->device_id[1] = nor->spi->device_id[0];
-+	nor->spi->device_id[2] = id_byte1;
-+	nor->spi->device_id[3] = id_byte1;
-+	nor->spi->device_id[4] = id_byte2;
-+	nor->spi->device_id[5] = id_byte2;
-+
- 	nor->octal_dtr_enable = spi_nor_macronix_octal_dtr_enable;
- }
- 
-@@ -4144,8 +4173,16 @@ static void macronix_octal_post_sfdp_fixup(struct spi_nor *nor,
- 	 * Adding SNOR_HWCAPS_PP_8_8_8_DTR in hwcaps.mask when
- 	 * SPI_NOR_OCTAL_DTR_READ flag exists.
- 	 */
--	if (params->hwcaps.mask & SNOR_HWCAPS_READ_8_8_8_DTR)
-+	if (params->hwcaps.mask & SNOR_HWCAPS_READ_8_8_8_DTR) {
- 		params->hwcaps.mask |= SNOR_HWCAPS_PP_8_8_8_DTR;
-+		spi_nor_set_read_settings(&params->reads[SNOR_CMD_READ_8_8_8_DTR],
-+					  0, 20, SPINOR_OP_MXIC_DTR_RD,
-+					  SNOR_PROTO_8_8_8_DTR);
-+		nor->cmd_ext_type = SPI_NOR_EXT_INVERT;
-+		nor->flags |= SNOR_F_IO_MODE_EN_VOLATILE;
-+		params->rdsr_dummy = 8;
-+		params->rdsr_addr_nbytes = 0;
-+	}
- }
- 
- static struct spi_nor_fixups macronix_octal_fixups = {
-diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
-index 34fba49592..cd3fcda70c 100644
---- a/drivers/mtd/spi/spi-nor-ids.c
-+++ b/drivers/mtd/spi/spi-nor-ids.c
-@@ -275,6 +275,8 @@ const struct flash_info spi_nor_ids[] = {
- 	{ INFO("mx66l2g45g",  0xc2201c, 0, 64 * 1024, 4096, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
- 	{ INFO("mx25l1633e", 0xc22415, 0, 64 * 1024,   32, SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES | SECT_4K) },
- 	{ INFO("mx25r6435f", 0xc22817, 0, 64 * 1024,   128,  SECT_4K) },
-+	{ INFO("mx25um51345g",   0xc2813a, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_4B_OPCODES | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_OCTAL_DTR_PP) },
-+	{ INFO("mx66um2g45g",    0xc2803c, 0, 64 * 1024, 4096, SECT_4K | SPI_NOR_4B_OPCODES | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_OCTAL_DTR_PP) },
- 	{ INFO("mx66uw2g345gx0", 0xc2943c, 0, 64 * 1024, 4096, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
- 	{ INFO("mx66lm1g45g",    0xc2853b, 0, 64 * 1024, 2048, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
- 	{ INFO("mx25lm51245g",   0xc2853a, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
--- 
-2.27.0
+> On 06/03/2024 21:24, Volodymyr Babchuk wrote:
+>>=20
+>> Hi Caleb,
+>>=20
+>> Caleb Connolly <caleb.connolly@linaro.org> writes:
+>>=20
+>> [...]
+>>>>>> +};
+>>>>>> +
+>>>>>> +&tlmm {
+>>>>>> +       /* U-Boot pinctrl driver does not understand multiple tiles =
+*/
+>>>>>> +       reg =3D <0x0 0x03000000 0x0 0x1000000>;
+>>>>>> +       /delete-property/ reg-names;
+>>>>>
+>>>>> This won't be needed if we can make the tiles offset in the pinctrl
+>>>>> driver compatible:
+>>>>>
+>>>>> #define WEST   0x00000000
+>>>>> #define EAST   0x00400000
+>>>>> #define NORTH  0x00800000
+>>>>> #define SOUTH  0x00C00000
+>>>>
+>>>> Hmm, I assume that in this case pinctrl driver should map all the four
+>>>> tiles independently? Are there guarantees in U-Boot that four separate
+>>>> memory regions will be mapped into virtual memory with the same relati=
+ve
+>>>> positions? Linux clearly don't make such guarantees.
+>>>
+>>> U-Boot doesn't use virtual addresses on arm platforms, it only goes as
+>>> far as reading the address from DT, nothing else, so this is totally
+>>> fine and is how the other SoCs do it.
+>>=20
+>> For me it looks like we are depending on implementation details
+>> knowledge. I.e MMU API does not provide such guarantees, but drivers
+>> know how ARM MMU code is working internally and drivers depend on
+>> exactly this behavior. But if you are saying that it is totally fine,
+>> I'll rework the patch. No big deal. Actually, I already tried this and
+>> it is working fine.
+>>=20
+>>>>>> +
+>>>>>> +       /* U-Boot ethernet driver wants to drive reset as GPIO */
+>>>>>> +       /delete-node/ phy-reset-pins;
+>>>>>
+>>>>> I suppose this is not needed as phy-reset-pins also configures the pi=
+n
+>>>>> as GPIO only.
+>>>>>
+>>>> Well, yes. This also puzzles me up, but for some reason it stops worki=
+ng
+>>>> if I leave this node intact. Looks like I need to look at this deeper
+>>>> before posting the next version.
+>>>
+>>> Possibly the pinconf defined in the phy-reset-pins node causes U-Boot t=
+o
+>>> misbehave, can you check if this patch fixes it (there is a bug in the
+>>> line "return msm_gpio_direction_input(dev, gpio);", it should become
+>>> just "msm_gpio_direction_input(dev, gpio);").
+>>>
+>>> I had the exact same issue with the gpio-regulator driver and this was
+>>> the solution I ended up going with.
+>>>
+>>> https://urldefense.com/v3/__https://lore.kernel.org/u-boot/20240131-b4-=
+qcom-livetree-v1-7-4071c0787db0@linaro.org/__;!!GF_29dbcQIUBPA!xFhZe7DKgRbr=
+63sirEJLuH-B0AnGs7jvx8tdJPKLTgFuZ3I3_zpVml7l23G-_vJO_JiUR-wUO4GMPJFcE-8p50H=
+3pf7nbxit$
+>>> [lore[.]kernel[.]org]
+>>=20
+>> It is exactly this. With your patch I don't need to /delete-node/
+>> anymore. I'll add a comment in the cover message that this series are
+>> depended on your patch.
+>
+> Please can you split the power domain and clock patches into a separate
+> series? As I'd like to depend on them for the next revision of my
+> series, and we'd otherwise have a cyclical dependency.
 
+Of course.
+
+As I understood, you are interested in "clk: qcom: clear div mask before
+assigning a new divider" and "clk: qcom: add support for power domains
+uclass", correct?
+
+
+--=20
+WBR, Volodymyr=
