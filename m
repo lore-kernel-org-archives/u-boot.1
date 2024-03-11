@@ -4,94 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B51D7C5475B
-	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 13:32:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABBF7C5475B
+	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 14:02:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 120CE87D50;
-	Mon, 11 Mar 2024 14:32:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=gerhold.net
+	by phobos.denx.de (Postfix) with ESMTP id 0A68987CF2;
+	Mon, 11 Mar 2024 15:02:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gerhold.net header.i=@gerhold.net header.b="nIrFgsKp";
-	dkim=permerror (0-bit key) header.d=gerhold.net header.i=@gerhold.net header.b="EVQL/znx";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DJ1UMeB5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 20B1887C48; Mon, 11 Mar 2024 14:32:54 +0100 (CET)
-Received: from mo4-p01-ob.smtp.rzone.de (mo4-p01-ob.smtp.rzone.de
- [85.215.255.52])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D942E87D0A; Mon, 11 Mar 2024 15:02:51 +0100 (CET)
+Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
+ [IPv6:2607:f8b0:4864:20::82f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EBFD487E3D
- for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 14:32:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 88A1E879A0
+ for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 15:02:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=gerhold.net
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=stephan@gerhold.net
-ARC-Seal: i=1; a=rsa-sha256; t=1710163960; cv=none;
- d=strato.com; s=strato-dkim-0002;
- b=QK9HFZ3/ghnWzrpcA0DqmHkv3mBaU2xOVbF87FjMQn+EaajF1lpTpOP6L9wUeyXHk4
- fKzRQbTlN9pgVSPYV9XS010g9cAy0LvpW6nj50p99YBPy1i9nOsKzd9z38cbhy1Iqn1f
- jDCCSbVKsMgCvNp4Ij6cu5zFKMhMRLDZk3CaVDo388fdv6CoGBXHuB++ZXKLBkT0/DYA
- 6dHVmnu6WaTTWPMb1iVZ1iTM5IlRmOfZTdKDCtuytFOJHWFmcLH1mbXOYJ7fJZ1Qy5lv
- thygOxp7soKdyPhV52p4TjYk2RgUJPcpCaoMl+Dg63shdNjPmy2k3+MvwCxRzJ2CWar6
- PQAQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1710163960;
- s=strato-dkim-0002; d=strato.com;
- h=In-Reply-To:References:Message-ID:Subject:Cc:To:From:Date:Cc:Date:
- From:Subject:Sender;
- bh=kzO3N9EWTk2qiwTw/dUDnGK2SsFp91M9x6WOoDGec/k=;
- b=qjprTh9F/9xH/7p35njhemvncZH8fflERQHfAKPWMopbn99zr/TTYBswNMOmWRDw/q
- lp0rXAkfscRviy2eSN2aFygbFECEA5/u6mqBparyQFNP1a6nBlyTG2IKS+7yX9UskEI7
- pdw/JP1gTKfq5kwUrwLw4CfsXUco8b7DZkQhrNr0UzJRzg44WibWErGVkW+l7i/oW4uJ
- nc3U3eh315OHraMWs876Z92CE6sy3YMnqIAEWMdjM0V8Fwg49Giho3YMNz5XEtRwc7Kr
- I9IVvnq0QQPo2qZIrELszA12SQTiqwK0y6ryo1eAlfDl8c656izSN88FcB/qoNZykJK1
- px6Q==
-ARC-Authentication-Results: i=1; strato.com;
-    arc=none;
-    dkim=none
-X-RZG-CLASS-ID: mo01
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1710163960;
- s=strato-dkim-0002; d=gerhold.net;
- h=In-Reply-To:References:Message-ID:Subject:Cc:To:From:Date:Cc:Date:
- From:Subject:Sender;
- bh=kzO3N9EWTk2qiwTw/dUDnGK2SsFp91M9x6WOoDGec/k=;
- b=nIrFgsKp8XMXvGBAz6bDU5QyAF3z5A48EUyCwZH4x63M4RtyuSFBFBpf1hCEfhBgIw
- +xNqM2vq81GyrOF/85gcUR+rz/IDJxkC7nVQbp6srhxGOaCMBb9pJ1+NNv2V/lVdbKPf
- s8aEWL4A+cuNyrBYB/mpUFv2qDq3ZCpuDzj6ObSfJaOvmGuuFQSksCLlwThhVbNu2hIi
- mwU80BWn5o4Dj/AqaA/aqyEbZe5evkk9cHl7avyqG8089AkmvRzndNqEXKhhJp0WRY/5
- CSCnBea3jSJFRB4hRZYxrt/Vahlj6L7QmBmuLDqKNZ0Xp5sRst67DoAwP4MtGVbtHy43
- 5ZwA==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1710163960;
- s=strato-dkim-0003; d=gerhold.net;
- h=In-Reply-To:References:Message-ID:Subject:Cc:To:From:Date:Cc:Date:
- From:Subject:Sender;
- bh=kzO3N9EWTk2qiwTw/dUDnGK2SsFp91M9x6WOoDGec/k=;
- b=EVQL/znxW4of1Rs9Lv+f/VAC9QeMCzBcvEjtr9IAFokN2qz74gxsKD6E+BeD1xIGKx
- G/8Uidq/0+s5Vo4zPjDA==
-X-RZG-AUTH: ":P3gBZUipdd93FF5ZZvYFPugejmSTVR2nRPhVOQ/OcYgojyw4j34+u261EJF5OxJD4peA8pqN1A=="
-Received: from gerhold.net by smtp.strato.de (RZmta 50.2.0 DYNA|AUTH)
- with ESMTPSA id ufb40802BDWcbio
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
- (Client did not present a certificate);
- Mon, 11 Mar 2024 14:32:38 +0100 (CET)
-Date: Mon, 11 Mar 2024 14:32:32 +0100
-From: Stephan Gerhold <stephan@gerhold.net>
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de,
- neil.armstrong@linaro.org, trini@konsulko.com, lukma@denx.de,
- seanga2@gmail.com, sjg@chromium.org, laetitia.mariottini@se.com,
- pascal.eberhard@se.com, abdou.saker@se.com, jimmy.lalande@se.com,
- benjamin.missey@non.se.com, daniel.thompson@linaro.org
-Subject: Re: [PATCH v2 2/5] apq8016: Add support for UART1 clocks and pinmux
-Message-ID: <Ze8H8CyriUP2qjsD@gerhold.net>
-References: <20240311111027.44577-1-sumit.garg@linaro.org>
- <20240311111027.44577-3-sumit.garg@linaro.org>
- <0867ce89-b6db-482c-a0f6-e2d2535dad30@linaro.org>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x82f.google.com with SMTP id
+ d75a77b69052e-42f2a4f77a6so15452201cf.2
+ for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 07:02:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1710165765; x=1710770565; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=QZFrH3xFXm1u8ZSU7Oko71V1weffPzgTWtk7HQ5jlgU=;
+ b=DJ1UMeB59bsXJuDZ5CAeCBlHrhn4s76nehnP6gHf30Zhe9A34Xme1PRkYNs+0ETusl
+ T7AAZy5E3Ea4CHCjkyAwJ6148jCTuKU7IP15L58IKoEAO/oaO6G3JeTmphpsQLWuD/ay
+ 4O4GCkfJunKxIh1cQ40i6rsHbLZWeB+R2Kga8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710165765; x=1710770565;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=QZFrH3xFXm1u8ZSU7Oko71V1weffPzgTWtk7HQ5jlgU=;
+ b=pnXnqeFdJ/upvuu7oQ8ifzkPZspDPRQ4pCN0GIx1yCxl9Zs/cI9Ej4qDiZT2SS8Jit
+ 40pr9GxijbgbJCtOsm5j8SfzveRk64N+VyyPU+dUUjX7tnQqWTrlXUfMunu8wwIXsg/c
+ eWQ2ChVTB+pndmIKofofvnw0wmFUDdYZkec3dT9M+FBJgXfT7wElBgHe6JWANMMOwRfA
+ kjlaLdKfFJ9oXOQLgYBCZuU1pPqoJnK1ZPynQm1AAV6o+aV7rYuulpM0BLqbgYBF0Upr
+ QygP0wslzm3IBGfXQn1M3dOjr6dYuKwrftcpJjoaD9qrU2wmCUtD5tTaof8zw/gP6023
+ 1Dhw==
+X-Gm-Message-State: AOJu0YwMihtJQPLlLpKrLjW5K/Ro1eK2Cl39uySSkiLE2931nfYoDyZZ
+ JppY3SUlKdkTNGpP0wKmzSK73uMLTNcegPWPfNbypkRL3SrjacYeF/oGlcVVWthDiMkmBo7jJHv
+ X
+X-Google-Smtp-Source: AGHT+IFpWmVY8vULx4mw4cWGcTRWRj2DBLtfune6KId7SvKaFDxqgBIwyfdFZv8BEUtmyyyZWjHCwA==
+X-Received: by 2002:ac8:5850:0:b0:42e:f8ff:b820 with SMTP id
+ h16-20020ac85850000000b0042ef8ffb820mr9525709qth.67.1710165764820; 
+ Mon, 11 Mar 2024 07:02:44 -0700 (PDT)
+Received: from bill-the-cat..
+ (2603-6081-7b00-007f-0000-0000-0000-1005.res6.spectrum.com.
+ [2603:6081:7b00:7f::1005]) by smtp.gmail.com with ESMTPSA id
+ qp27-20020a05620a389b00b00788712ca95esm694514qkn.13.2024.03.11.07.02.44
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 11 Mar 2024 07:02:44 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Subject: [PATCH] CI: Cherry-pick reset support for m68k for QEMU
+Date: Mon, 11 Mar 2024 10:02:43 -0400
+Message-Id: <20240311140243.2008537-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <0867ce89-b6db-482c-a0f6-e2d2535dad30@linaro.org>
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,78 +86,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Mar 11, 2024 at 12:27:11PM +0000, Caleb Connolly wrote:
-> On 11/03/2024 11:10, Sumit Garg wrote:
-> > SE HMIBSC board uses UART1 as the main debug console, so add
-> > corresponding clocks and pinmux support. Along with that update
-> > instructions to enable clocks for debug UART support.
-> > 
-> > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-> > ---
-> >  drivers/clk/qcom/clock-apq8016.c       | 50 +++++++++++++++++++++-----
-> >  drivers/pinctrl/qcom/pinctrl-apq8016.c |  1 +
-> >  drivers/serial/serial_msm.c            |  6 ++--
-> >  3 files changed, 47 insertions(+), 10 deletions(-)
-> > 
-> > diff --git a/drivers/clk/qcom/clock-apq8016.c b/drivers/clk/qcom/clock-apq8016.c
-> > index e6647f7c41d..a620a10a520 100644
-> > --- a/drivers/clk/qcom/clock-apq8016.c
-> > +++ b/drivers/clk/qcom/clock-apq8016.c
-> > @@ -43,6 +43,14 @@
-> >  #define BLSP1_UART2_APPS_N		(0x3040)
-> >  #define BLSP1_UART2_APPS_D		(0x3044)
-> >  
-> > +#define BLSP1_UART1_BCR			(0x2038)
-> > +#define BLSP1_UART1_APPS_CBCR		(0x203C)
-> > +#define BLSP1_UART1_APPS_CMD_RCGR	(0x2044)
-> > +#define BLSP1_UART1_APPS_CFG_RCGR	(0x2048)
-> > +#define BLSP1_UART1_APPS_M		(0x204C)
-> > +#define BLSP1_UART1_APPS_N		(0x2050)
-> > +#define BLSP1_UART1_APPS_D		(0x2054)
-> > +
-> >  /* GPLL0 clock control registers */
-> >  #define GPLL0_STATUS_ACTIVE BIT(17)
-> >  
-> > [...]
-> > @@ -94,6 +102,33 @@ static int clk_init_sdc(struct msm_clk_priv *priv, int slot, uint rate)
-> >  	return rate;
-> >  }
-> >  
-> > +static const struct bcr_regs uart1_regs = {
-> > +	.cfg_rcgr = BLSP1_UART1_APPS_CFG_RCGR,
-> > +	.cmd_rcgr = BLSP1_UART1_APPS_CMD_RCGR,
-> > +	.M = BLSP1_UART1_APPS_M,
-> > +	.N = BLSP1_UART1_APPS_N,
-> > +	.D = BLSP1_UART1_APPS_D,
-> > +};
-> > +
-> > +/* UART: 115200 */
-> > +static int apq8016_clk_init_uart1(phys_addr_t base)
-> 
-> I know we're still dealing with some tech debt here, but I'm not a big
-> fan of this approach. I notice that the RCG and CBCR registers are all
-> offset by exactly 0xff0 between UART1 and UART2, what about adding a
-> second "index" parameter to apq8016_clk_init_uart() and then offsetting
-> the addresses by (0xff0 * index)?
-> 
+In order to support the reset pytest on QEMU on m68k platforms we need
+to grab this change from upstream.
 
-This would work for MSM8916 where you have just two UARTs, but it might
-be misleading since the UART blocks are actually separated in 4 KiB
-(0x1000) blocks and not offset by 0xff0. UART2 is a special case that
-has different offsets within the 4 KiB block, for some weird reason.
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+ tools/docker/Dockerfile | 1 +
+ 1 file changed, 1 insertion(+)
 
-If you want to calculate the register offsets properly you would need
-special handling for UART2, e.g. I have the following (admittedly rather
-ugly) define in the TF-A port for MSM8916 and similar [1]:
+diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
+index 274255456619..136bc01f0937 100644
+--- a/tools/docker/Dockerfile
++++ b/tools/docker/Dockerfile
+@@ -184,6 +184,7 @@ RUN git clone https://gitlab.com/qemu-project/qemu.git /tmp/qemu && \
+ 	git config user.email u-boot@denx.de && \
+ 	git format-patch 0c7ffc977195~..0c7ffc977195 && \
+ 	git am 0001-hw-net-cadence_gem-Fix-MDIO_OP_xxx-values.patch && \
++	git cherry-pick d3c79c3974 && \
+ 	./configure --prefix=/opt/qemu --target-list="aarch64-softmmu,arm-softmmu,i386-softmmu,m68k-softmmu,mips-softmmu,mips64-softmmu,mips64el-softmmu,mipsel-softmmu,ppc-softmmu,riscv32-softmmu,riscv64-softmmu,sh4-softmmu,x86_64-softmmu,xtensa-softmmu" && \
+ 	make -j$(nproc) all install && \
+ 	rm -rf /tmp/qemu
+-- 
+2.34.1
 
-#define GCC_BLSP1_UART_APPS_CBCR(n)	(GCC_BASE + \
-	(((n) == 2) ? (0x0302c) : (0x0203c + (((n) - 1) * 0x1000))))
-
-where n is the UART number (here 1 or 2). As a different example,
-MDM9607 has 5 UARTs (1 to 5) and there only UART2 is special-cased,
-while all others follow the standard offset with 0x1000 offset.
-
-Thanks,
-Stephan
-
-[1]: https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git/tree/plat/qti/msm8916/msm8916_setup.c?h=v2.10#n40
