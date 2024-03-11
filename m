@@ -4,77 +4,130 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CB62C5475B
-	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 10:44:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D21FC5475B
+	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 11:07:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7EF8887D07;
-	Mon, 11 Mar 2024 11:44:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id EF7F087E3D;
+	Mon, 11 Mar 2024 12:07:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=kontron.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="H5FqnFqd";
+	dkim=pass (1024-bit key; unprotected) header.d=mysnt.onmicrosoft.com header.i=@mysnt.onmicrosoft.com header.b="mWNbfoqv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8084487D07; Mon, 11 Mar 2024 11:44:19 +0100 (CET)
-Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
- [IPv6:2607:f8b0:4864:20::1030])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 43D9987E87; Mon, 11 Mar 2024 12:07:12 +0100 (CET)
+Received: from EUR01-DB5-obe.outbound.protection.outlook.com
+ (mail-db5eur01on070e.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe02::70e])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15A5787CF2
- for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 11:44:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B714387E1E
+ for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 12:07:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=kontron.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-29c17ec16f6so70092a91.1
- for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 03:44:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1710153853; x=1710758653; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/EY3lXuCPHkCDiHRYv2jdZO/3P0dD2i/9v/dJlf5u3s=;
- b=H5FqnFqdR10Ol6PD3j87jv4SJY4aLcrjRR2MJa56yuQjYxQeulZlygiIwiAj+ZmCqz
- Us332PVIg/hQeTf9+fb0ekzIBr3daJj2S9MuFP6dniTcw+4FGJpBbtpeOIQQwVsjBueD
- c40DQggHv7dc714yaJkQ1v4D04ObVM35+n4EFF/duS2HFqYropMzj6J6tnnxScs27IxU
- cqEDBJ3fEv03T/NLu1Zih3P4mB9/j9OqNmS4DfyjBCP4GeFELWzvQuGEWi9NyGit+W7j
- 7G0qXnJzDjwaoHRFZLp3NMjo3nCyIQGb8TD0MkKQjU0IAe2usCRdCjcwnFf0TRRw5U5k
- b45g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710153853; x=1710758653;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=/EY3lXuCPHkCDiHRYv2jdZO/3P0dD2i/9v/dJlf5u3s=;
- b=B6Xnqp2stko3PF/mS/aAjKDeNF2BzbJY1yDvFn2vihtO2YzeUywpDTRnveNG6N1YnB
- QO9+gg8TMH+nv0Q6NLUHznF3/H/UdHQXE3HCGZ2PGw6NrE3UCZscTU/z//Nq0tDwsAjL
- iWz3nO9yT16AnjoONprP1EcKV74dxTMvT6PcaDJadqBs3iqvo11T+i4cYO1bG9wBdre7
- VBVZn0yoiXxiI3+ROQKjuSF7EKEU5aiXtnFXodr5iB0q7CLqGBIgdR8QXeT5mUULaXIJ
- hesFtHySnC6Iyd/dQfJ4mRepzbeEs13NCfTeXf3Fppo0/+ryfoCbtlYi9eAOJPKjdXmn
- uf+Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUo3i7H6KnfbtOQVXjXl2IQ+/EXxdanhlcNj1HHfO+su1I+jhm+8fkSaVbgsetPUY2ErRXVkoRtPEth49TkXq4DAxhjnA==
-X-Gm-Message-State: AOJu0YyH6/Es+jYlQVNtXcgt2A9DlPkry7mKkjX+b8FvUquuhQvwfCQo
- G4kiI8IrVgqTqnWJxOoGEFNyhM80amL5SIAfK08DWUfYPm3TO5FvFKwNNNB/S5sEwymAaMaOnRQ
- +UhR9/xW1OX0K7Sj6vszS76eY1Vc=
-X-Google-Smtp-Source: AGHT+IFhF3FCQYYdF+0mKK+6ebL4dwg+gMw4WQaumQQFtO+rydZ9tP5K26tavYs66pwnokiXS2Tpp/W4JMC+7Ii1mhw=
-X-Received: by 2002:a17:90a:498c:b0:29b:bb08:6997 with SMTP id
- d12-20020a17090a498c00b0029bbb086997mr4644473pjh.3.1710153853720; Mon, 11 Mar
- 2024 03:44:13 -0700 (PDT)
+ spf=pass smtp.mailfrom=frieder.schrempf@kontron.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=SMXskwizdz9vmoD8p6JgaqeyinTYPUiJpL47gj9guUMzKXOj42kuyTsRb1KDvkAc2o5+OqYHllP2RI3lyBY+Fn72pDwZdgY6AZtKZjgbMGtYwoBr9mQF1X+ccbtWjzGCKqRCOBzy9YynYNLLhuMswX+JHGbDG6A7dVxw/EVwwsmjDpc6X27ZqX8l/yatOvWVzHxgokAGTX8yU+y6QIPk8x6q8TdlNR7Zw+5rKiQinuOEPVUHvH+oV2y9xpaR0QqPZfZPlhS00X/ebU1Pj5hwClSkbhSRGtw8lsNP53Y3OtQRlqA80urcoOc1a537Qu39YzAdlWc18I+al2RICRz8uA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=bwkUDr/TKxLNPj+vcmfPJPhJgv3R08/4C20o/PWlUZQ=;
+ b=SCpGD5YMQ2BAM+7e+3psdnOUVzRJkZxQ4ehpfSzquRdmsswVXpV7HEh/ZjazUFAooKZyq+xCoCHLeJiQrBpLjyBLO1LOhoy8JbwfLa5MtyZlX0LLR7nY2V0/hnDpkAYwqWGasE3OZN0bgunSpImu77rc4LheGrxHQnVfkzLxLuFg8VWiiWKm4lQ3nS1CF9vjUbRO6Ln0LFtaOMLW6K756OoPVteYiJV6NpEM5UniZh7QL1RyK7nAeuB75QuJoKfdCdK+CDD1NfYxb0pTEJ9lyVJs8ZdogCxaa9gHIvRkANAsHnq8l2faXD57+95KKBPIFwHlLz12vvlQK0c9LzCO6g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=kontron.de; dmarc=pass action=none header.from=kontron.de;
+ dkim=pass header.d=kontron.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mysnt.onmicrosoft.com; 
+ s=selector2-mysnt-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=bwkUDr/TKxLNPj+vcmfPJPhJgv3R08/4C20o/PWlUZQ=;
+ b=mWNbfoqv+YwIeTaGeRY0sbUb1jMjpY9T5hz2O56/GeYszrXoYarDRf6Rf8zTuY5yrpMhv7Gay3a+14hLMChzaLyS0M08sEo9BllydJDTJpqL27zQ33tJfPmbBcnD/mdKbYu3n0BYeBZacKQ5jHTpwCSCiyKPF0iPuo/HYB7iC90=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=kontron.de;
+Received: from PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:263::10)
+ by AS2PR10MB7779.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:647::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7362.35; Mon, 11 Mar
+ 2024 11:07:06 +0000
+Received: from PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::4ca1:4adc:e34d:58d2]) by PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::4ca1:4adc:e34d:58d2%5]) with mapi id 15.20.7362.035; Mon, 11 Mar 2024
+ 11:07:06 +0000
+Message-ID: <11d45dcd-9955-42c4-b527-0ec8e55658ed@kontron.de>
+Date: Mon, 11 Mar 2024 12:07:04 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH V3] mtd: spinand: Add support for XTX SPINAND
+Content-Language: en-US, de-DE
+To: Bruce Suen <bruce_suen@163.com>, u-boot@lists.denx.de
+Cc: michael@amarulasolutions.com, dario.binacchi@amarulasolutions.com,
+ jagan@amarulasolutions.com, bruce.sun@xtxtech.com
+References: <20240311101246.13697-1-bruce_suen@163.com>
+From: Frieder Schrempf <frieder.schrempf@kontron.de>
+In-Reply-To: <20240311101246.13697-1-bruce_suen@163.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: FR0P281CA0216.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:ac::20) To PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:102:263::10)
 MIME-Version: 1.0
-References: <20240307152302.2338472-1-parth105105@gmail.com>
-In-Reply-To: <20240307152302.2338472-1-parth105105@gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 11 Mar 2024 07:44:02 -0300
-Message-ID: <CAOMZO5DrVC9+=_EGX7ADYFk57MfLbEv1YjcdKRCPSFZ1_yHmpw@mail.gmail.com>
-Subject: Re: [PATCH v1] configs: colibri-imx7: enable watchdog
-To: Parth Pancholi <parth105105@gmail.com>
-Cc: Stefano Babic <sbabic@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Parth Pancholi <parth.pancholi@toradex.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PA4PR10MB5681:EE_|AS2PR10MB7779:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0e49bf04-ba2b-4a21-d66f-08dc41bb6365
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: RqBUou7XnxmyeI/bEjlpqWfW0qzlJdDcnTor0FbvkPrBVm4stFmkxvecKzSe43QltAfhfXjhxdZkFc032G/JTud5oTdQKJ1rhp1N3BW1WELqZoGzhwpBKDM2+9aHdGFL4Ie5v7RUOhHZQXWvyj0p5z6Nq2y8aD4mDVku1QKI4+FGk9IDyVW7yfoyp2cYCg/e2Aea4uYzzFFTFCxJ1UPmgzNIGQyEAbf4bAtDtPBpoWfgMM9VvI6SZf+8NwhIF3/uvq0eNU2l0CoJkEJRvlDlGLAMeIdi6tQdxlQCGlaH4RLat7eXepYYQRe777nxyeo5Zi8tueXvRTBAAPyK+VudTgICZn0vKd37TbIHF2o9xu2ji9wIg55YkN4Etxdh/V/jtnBZSo9TLZQdclEaQSwAeTTAjRSAdhgXan0E75lgCAiA2JuAifa0g/VShekm0EklWk5YAdQuf1rr4tzQ2Um2SQ99R5owJR3gUQ1MNHoY8fnSM7DT12Sv937tIHF2Im6Q20WmYiHjMOBezC4ZF2F2kZd/83O+BxIu4L/RuRW16TjhpA85N/yg/htad+UlB+crHc7kvEsRRn735FhrpXNv4jRFmSFtox+Ozf5+Gz4qhYGCMC6sDBEBqQZlHSbs3BX/WNkn9BJt4OJvhbsTIQCidw0HD5ZwGR5K9pty03IQBbI=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230031)(376005)(1800799015); DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?L2k1T1p4a05wVUJmRWhRcDZBSCtERVFoN014VVJZNURjTXh6c3RLWEFmYnlP?=
+ =?utf-8?B?c0tKZ0RYaUgxcXkyZ3h6QVFBdGlSa0tBNEpTKytGY1ZheTNWaFp3dVVPbEZW?=
+ =?utf-8?B?ejdEWjRubHZveGZPQjc1dkJiVGplcmRhRGMyalJNY3ArNVlIWWNwVjU0NUNB?=
+ =?utf-8?B?a01NZVhteHZCTVc0cE9lb0N5Z1UvUkE0SkRycTJEbU9Tek5pM1ZtNi9PZzAr?=
+ =?utf-8?B?RE9PaFd5Z05NYmJ4NEVlSEprZHRobFJpL2szVHRzcUVxRkk2Z3RtNlZJV0FR?=
+ =?utf-8?B?TkRUSGtJaE12am04emRsclVXSkdzTHZXNmpkRVNYQjdtZ3ZlQkZGL214NkdT?=
+ =?utf-8?B?enliVTZzMU1jelRjN1RVSm1uZVpaMkRQTE5lOW5nWktLQ0I5cGhYN2RyKzRp?=
+ =?utf-8?B?N2ZUcG1yYjdXeXJObFFRK1hxeTQ5RXVaaGFWL1dnU2ROWE5DVFJhSnNEOE5V?=
+ =?utf-8?B?UWdNRWN0YTF1cGZuRHZieml3UGJGZ2ltRTJTZUN1Ny92TytveTJ3V0V4WlpI?=
+ =?utf-8?B?bm5TTHp6WEkvaExhbmZ5QnFGVDlHNWx3ZGtkeHliNWE1SjZ5RWR6K05VV013?=
+ =?utf-8?B?VEowMDlOZ1Y4eUdrOG9PMUtKdzJhbXAyS2l5bW9XR2lma05DMWhvcEswUWdP?=
+ =?utf-8?B?M2pZajJLekZDTjF1Z1UwYWJDeTdNMkRYaUozZDYwRlpDZlBLMmxaWWRReEpU?=
+ =?utf-8?B?dWhDUTNjTktwREFVMU8xcUh2U3dCOUVhUGdmV2Z6eXF2NWo1YzdBSHVoUGF6?=
+ =?utf-8?B?Y0ZMakhFMzYyQXRzcWM2RDJ0VnRPQ2pOelk2R0dvODdsUlFzWmNPTW9rNVJF?=
+ =?utf-8?B?YzY3eG1FTDZveStQaW1WeVorcUk4Rlk3eWViSE5taTgyZnZRdUh5RkFBV0tZ?=
+ =?utf-8?B?d2tWeXhlRnoxbVR2clAxUzVOd0lZdHFHdFdEcFZGYmxDVmZjRldOTkNnK0p5?=
+ =?utf-8?B?TjZ1aXA4c2pDNFFUTlNOZjNTTEFyV1l4dVpEb3dVU01SWnRkcmhtN2tGZTBy?=
+ =?utf-8?B?VERwTHlRRm81RTVnUCtXSWc3eEtIMy9aQXA0WG96NC8vQUZ3SksvYmFiUHVn?=
+ =?utf-8?B?aWp6ckRJdCs3SE5taURoN3YvblQxaElPdktNczAxd3UyM25sZW45bjFHNmR4?=
+ =?utf-8?B?bStoaEthK0VkdXREbWRUcmZlalliRFIwa2Qyb3lKeis4TTlUQUFXdmJ2ak5v?=
+ =?utf-8?B?U2ZzcnlHSjU5VWNMK04zUkdRYVplbDkybDJxWGNxOW5EQWxWczdhU1dQRWVn?=
+ =?utf-8?B?M0tTeVNnQVE0K1N1QkkvaWM3SkM3QmQwUnF6SUlMbFBqbzFUeVJzRmt5Yk1p?=
+ =?utf-8?B?anVGYUpQT1hHdUUvc3VvWGtLc1dmc25lQ2tRZVV6anZkbkprZDJGZ21SV1Bi?=
+ =?utf-8?B?NGdsYU9xWVAxTDNER3J3Y0FVN2JUZVNXNFk0c2FacmU1ZDdJVDU0emlwMEZr?=
+ =?utf-8?B?MmlxVlg5T3c0bHI2UEYwbi9QZ3Uxb3FGcmtkLzhLWXlETGs4U0JxT0pFOWll?=
+ =?utf-8?B?TFhUNW0rWjRuY3RYSG1zWU9QTXcrL1R3NFF1dG56K3VCZ1NhVGE3M3U5aHlO?=
+ =?utf-8?B?K21TQXlIMitsdVlUQVg2UlIwQVNqUlphRUdCZFFWVjVobEhQTktqUk5YSWZs?=
+ =?utf-8?B?TGwxWkl4RUVxWjhZS1o2T0hXa3loTGxnWXpQc1RZNm42bHZ0Mzg5Y1hFZGVV?=
+ =?utf-8?B?R3RXRldlcmVoTmczcFRndENnREFYM2RlOUVhTlAvaUxqYnJWbzRFWUVEN1JQ?=
+ =?utf-8?B?NE43bGg2QzJlbVlERDBKZ01zSWpuLzh5NGVaRTVZcHdVaFlRaEExQjJpc2N5?=
+ =?utf-8?B?QWU2bE1BTXFOZWZyKzhXejlwUVN6aEhmZlhDemk1M0hVNVVjbm1wWWY4MTRh?=
+ =?utf-8?B?WkdBYjgyTHVCVklVYzJRTE5zS2VWekhaOUJSL1FHZWdiUnVIbzZMaG1GeGJk?=
+ =?utf-8?B?Q2w5MkV0QndzNHh5N2pVdXJvRllFMkJza1hGLzBnek9WcjR4azR3c2J5QXhK?=
+ =?utf-8?B?dUU4YWQ5aW5PZjk3ODdkdjBkZStBMXJXczJMVml6U3B6MmdpaHNFZExkbU9k?=
+ =?utf-8?B?L2M1WGhUQzRIdDAyd2ZFNW9FSk5EcFJCVi81ZTBuM1g5UzEzdUt4NWRPUWlK?=
+ =?utf-8?B?eCsvayt0K1VTUmxLOEJSeVhwbjg5NktLckdUZVBjY1FTTzI4RTM4bUxrV0g3?=
+ =?utf-8?B?Y0E9PQ==?=
+X-OriginatorOrg: kontron.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0e49bf04-ba2b-4a21-d66f-08dc41bb6365
+X-MS-Exchange-CrossTenant-AuthSource: PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Mar 2024 11:07:06.4097 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8c9d3c97-3fd9-41c8-a2b1-646f3942daf1
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: bq8yCxAL/3rGq589nVZviNejHAQVkftYTRkdhEPCldyd+pI7RHZfCCGkTJLtfxB4HUXrqQ4J8noXLYqIpC7ddiB+TDbwdefMQlOE8dHypx4=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR10MB7779
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,22 +144,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Parth,
+On 11.03.24 11:12, Bruce Suen wrote:
+> [Sie erhalten nicht häufig E-Mails von bruce_suen@163.com. Weitere Informationen, warum dies wichtig ist, finden Sie unter https://aka.ms/LearnAboutSenderIdentification ]
+> 
+> Add support for XTX XT26G0xA and XT26xxxD.The driver is ported from
+> linux-6.7.1.This driver is tested on Banana BPI-R3 with XT26G01A and
+> XT26G12D.
+> 
+> Signed-off-by: Bruce Suen <bruce_suen@163.com>
 
-On Thu, Mar 7, 2024 at 12:23=E2=80=AFPM Parth Pancholi <parth105105@gmail.c=
-om> wrote:
->
-> From: Parth Pancholi <parth.pancholi@toradex.com>
->
-> Enable watchdog functionality for Toradex's Colibri iMX7 (NAND/EMMC)
-> modules.
+The commit message still has some minor flaws like missing spaces after
+the periods, but anyway:
 
-You described what the patch does, but the reason is missing.
-
-Is the reason for this patch to fix the 'reset' command regression
-like you did at:
-https://gitlab.com/u-boot/u-boot/-/commit/be23b1331fb35b7d5a095ef2c0b522c1f=
-241eee9
-?
-
-Please send a v2 with an improved commit log.
+Reviewed-by: Frieder Schrempf <frieder.schrempf@kontron.de>
