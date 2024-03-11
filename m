@@ -4,89 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E122BC5475B
-	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 14:39:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C28B7C5475B
+	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 14:41:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E11C887E1E;
-	Mon, 11 Mar 2024 15:39:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3FE2687D3C;
+	Mon, 11 Mar 2024 15:41:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kzktq3tP";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="TV2xqT9P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BCA4687E50; Mon, 11 Mar 2024 15:39:44 +0100 (CET)
-Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
- [IPv6:2607:f8b0:4864:20::82f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A37CD87D50; Mon, 11 Mar 2024 15:41:03 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A589A87D0A
- for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 15:39:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 81FC78786A
+ for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 15:40:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82f.google.com with SMTP id
- d75a77b69052e-42a35c720b8so19906811cf.3
- for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 07:39:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1710167981; x=1710772781; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=mUC44CYzP6mQDiHwrritv5zFtYs/1BbH/QCe+zHHQ7o=;
- b=kzktq3tPV+4S9yL8PGWCJFWZDcXYGW4dAH2ej84krveMVscF0M/r0TO6fzxLEQSxFk
- UYL/kIho20ZcqAQJXzd9NkdTv9lmviTHpAMmZV2GylJ2kX+NZ4lNBDCN08TQTUnJ1VwR
- JCHobzg2lflD2Y2fqIwR5PQox0H3S/7U7sVGg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710167981; x=1710772781;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=mUC44CYzP6mQDiHwrritv5zFtYs/1BbH/QCe+zHHQ7o=;
- b=f/eFHd2TOUp2xE3FdT4ktvZYFCuSZyEMOFBRyp2vlnJk0O0EHOygWYzZEyEebAC/qD
- 86rlEd/aFzbQ3DRwKmrABZKK2skM0FqNK8Swc0rVSDsUqdNo4ETF8LN4PSr/lyfucb++
- OtsnkN3+Er8Qb/RWIkQkBWEDyi9GaHIEmxGInwByDgqx96E03980JEpFMbwPtXXo2/LE
- lNF0YIAPxYJGRPju+yVQd0jCE5oQaAsVDNEET1lsbeab9iNTnNbBnSOAASM2QxMKU+t/
- eSPQwtlx2nIDESHogshJdYOj9c7LZGKC9373yK3k45TDdgdWGsN9h9wT2r4dneZ6gJq4
- YOag==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUFAejCxzrULBAJ30RiBaAIpLH7u1tQMZs8sMqLGWX5odZ8sHIsbQp7/CqhwFbi5j4WjK4J454jPcRlI/IsxJPyoZEcww==
-X-Gm-Message-State: AOJu0YxnpPNTu/GrZkdjoAQ0g7GMBIB2rBqXViORXgPGCeSnCHzy/XCu
- 5MAA4LSbarlK6VlE+z3gAUhnsexCHciVx7RMh8/3hRClGdf9pLjCKB5lmFwRF7c=
-X-Google-Smtp-Source: AGHT+IHUoBF6lkgHTRvQr54En17iB6sj2R/UYTbu/kSl3Fe/khtbhAKhzyDIJmo4/kncVrFv/gJL9w==
-X-Received: by 2002:a05:622a:1115:b0:42e:f036:d9d1 with SMTP id
- e21-20020a05622a111500b0042ef036d9d1mr634015qty.12.1710167981440; 
- Mon, 11 Mar 2024 07:39:41 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-007f-0000-0000-0000-1005.res6.spectrum.com.
- [2603:6081:7b00:7f::1005]) by smtp.gmail.com with ESMTPSA id
- h24-20020ac85058000000b0042f370d120fsm2609423qtm.88.2024.03.11.07.39.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Mar 2024 07:39:41 -0700 (PDT)
-Date: Mon, 11 Mar 2024 10:39:38 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Love Kumar <love.kumar@amd.com>
-Cc: Angelo Dureghello <angelo@kernel-space.org>,
- Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de,
- git@xilinx.com, Marek Vasut <marex@denx.de>
-Subject: Re: [PATCH v3] test/py: reset: Add a test for reset command
-Message-ID: <20240311143938.GV1523872@bill-the-cat>
-References: <20240302151813.GA1652651@bill-the-cat>
- <bd0b13b0-0554-b280-a40a-17056a1e2c5e@kernel-space.org>
- <c11e1809-b5d1-46cd-a5c8-a5276b83f26f@amd.com>
- <c523aabd-93a4-f9db-2726-7f912a85aef0@kernel-space.org>
- <20240307001053.GE1523872@bill-the-cat>
- <c05a25ca-d4b7-1179-cf46-645bc4cdba89@kernel-space.org>
- <c0bbe63d-adee-456f-bcf8-44579aa2593a@amd.com>
- <20240307125525.GF1523872@bill-the-cat>
- <553992bb-c159-d9b9-6e9d-b762ea55da79@kernel-space.org>
- <cf96e2a6-9e49-4058-8bfc-f31b3d028190@amd.com>
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=38002904ae=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
+ 42BC9u3G004540; Mon, 11 Mar 2024 15:40:55 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding:content-type; s=selector1; bh=T2qkoh5
+ 33IrF0+j7Rnmn/Afy6MV40QJzT4Bx948qVdQ=; b=TV2xqT9PTUVGgJNsKZ5cAeQ
+ zdfpvK+kE7lcrER3ITU8/ZDuAhtcxexzGjIuvMIE/6lfE6TcNy5CoTcpwNezuYYV
+ Ee5AK9gviBnj35bHZ0CFMwayya7oIrtJKBt5/OqZd7IOTl0sof1uLOU1i+eb8Okr
+ G7TOiA0jaMe88isIUDH1Pe/xa1JbLnrHBdtE1OvIscIuYsAe2/qtvjSvuzl0sfeG
+ j84mVgFtF4HMyKoJOcwBc/8JJXpdUYA/0pgaKXEZvGulw0rBd4o6vNx5KsNumMcl
+ +qX2snziPTxbOSjYIA6cimckA/r1+/9hQODWuGbYfZimXE9p8XQbgtlCtgT8HXw=
+ =
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3ws274p7k0-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 11 Mar 2024 15:40:55 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 5555A40047;
+ Mon, 11 Mar 2024 15:40:49 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 9C0842801DA;
+ Mon, 11 Mar 2024 15:40:24 +0100 (CET)
+Received: from localhost (10.201.20.71) by SHFDAG1NODE1.st.com (10.75.129.69)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 11 Mar
+ 2024 15:40:24 +0100
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+To: <u-boot@lists.denx.de>
+CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
+ <patrick.delaunay@foss.st.com>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>, Michal Simek
+ <michal.simek@amd.com>, Simon Glass <sjg@chromium.org>, Tom Rini
+ <trini@konsulko.com>, Udit Kumar <u-kumar1@ti.com>
+Subject: [PATCH 1/2] lmb: Avoid to add identical region in
+ lmb_add_region_flags()
+Date: Mon, 11 Mar 2024 15:39:17 +0100
+Message-ID: <20240311143918.2927406-1-patrice.chotard@foss.st.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="qFQcEoU3mwGYJOAX"
-Content-Disposition: inline
-In-Reply-To: <cf96e2a6-9e49-4058-8bfc-f31b3d028190@amd.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.201.20.71]
+X-ClientProxiedBy: SAFCAS1NODE1.st.com (10.75.90.11) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-03-11_08,2024-03-06_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,57 +90,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+In case lmb_add_region_flags() is called with the same parameter than
+an already existing lmb and this lmb is adjacent to its previous lmb with
+different flag, this lmb is added again.
 
---qFQcEoU3mwGYJOAX
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Instead breaking the loop, continue, at the next iteration, we are able
+to detect that this region already exist.
 
-On Mon, Mar 11, 2024 at 02:40:59PM +0530, Love Kumar wrote:
-> Hi,
->=20
-> On 11/03/24 2:11 pm, Angelo Dureghello wrote:
-> > Hi,
-> >=20
-> > jfyi,
-> >=20
-> > reset support added in qemu
-> > merged as commit d3c79c3974.
-> >=20
-> > Regards,
-> > angelo
-> >=20
-> The other issue was with echo commands:
-> =3D> echo $modeboot
-> $modeboot
->=20
-> =3D> echo $?
-> $?
->=20
-> Does HUSH shell is enabled by default for this?
+Issue reproduced on STM32MP157-DK2 with SCMI DT, bdinfo command's output
+shows:
 
-It is not, so at least the saveenv test needs to depend on HUSH_PARSER
-too.
+Before this patch, the last LMB [0xde000000-0xdfffffff] is duplicated:
+...
+lmb_dump_all:nnn
+ memory.cnt = 0x1 / max = 0x2
+ memory[0]      [0xc0000000-0xdfffffff], 0x20000000 bytes flags: 0
+ reserved.cnt = 0x6 / max = 0x10
+ reserved[0]    [0x10000000-0x10045fff], 0x00046000 bytes flags: 4
+ reserved[1]    [0x30000000-0x3003ffff], 0x00040000 bytes flags: 4
+ reserved[2]    [0x38000000-0x3800ffff], 0x00010000 bytes flags: 4
+ reserved[3]    [0xdaadf000-0xdfffffff], 0x05521000 bytes flags: 0
+ reserved[4]    [0xde000000-0xdfffffff], 0x02000000 bytes flags: 4
+ reserved[5]    [0xde000000-0xdfffffff], 0x02000000 bytes flags: 4
+...
 
---=20
-Tom
+After this patch:
+...
+lmb_dump_all:
+ memory.cnt = 0x1 / max = 0x2
+ memory[0]      [0xc0000000-0xdfffffff], 0x20000000 bytes flags: 0
+ reserved.cnt = 0x5 / max = 0x10
+ reserved[0]    [0x10000000-0x10045fff], 0x00046000 bytes flags: 4
+ reserved[1]    [0x30000000-0x3003ffff], 0x00040000 bytes flags: 4
+ reserved[2]    [0x38000000-0x3800ffff], 0x00010000 bytes flags: 4
+ reserved[3]    [0xdaadf000-0xdfffffff], 0x05521000 bytes flags: 0
+ reserved[4]    [0xde000000-0xdfffffff], 0x02000000 bytes flags: 4
+...
 
---qFQcEoU3mwGYJOAX
-Content-Type: application/pgp-signature; name="signature.asc"
+Fixes: 59c0ea5df33f ("lmb: Add support of flags for no-map properties")
 
------BEGIN PGP SIGNATURE-----
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+---
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXvF6EACgkQFHw5/5Y0
-tyxdVwv9F/GFcafsa6PpAxX4d/jXvnxk+zweeA7ZnzlAsR2BRovj/AJNoA1IXGWA
-2pyvvZhd9i11l/aL3CqkzIapGq5SpOCRBabT0dxPcWFp4csGG43eVCldaorvnZSO
-cJU1cbIchm47uCQM0NqTXPRh8Db1JQ8WwKDBdLVKTvhaTtkxsvpdQvooUEzjoV31
-C8YUsbr2gRK8XHaDCpaHNHFZlKlrqx6pa4QAh5Io8nNsbwA5C9wBAPOeEVUTAPU5
-uz+Ybr7K8Xjqdd6N2dScfI/IF5KNLSfNTT93MiyO7Ik/pm3/XhWQQbit89IN8esz
-lfsbjcEgrD5kyvf4+z+3JHlmKMGNoYg6BsjM6GN92bISyVj/UfVro3gwhVOQnUsQ
-9FoEMYFbSQncMqQ0HBU5WfKcFad3qlT/n8L0Pb6MKJrEcRJoMNYDNETugij4T80r
-O8stBGt0rzWHyMqDvYHxkcYdy50rvwTb7KyC3TEdj8aXyNXLwt2PD06As0NhmYIW
-zgbBc2v8
-=DKUA
------END PGP SIGNATURE-----
+ lib/lmb.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
---qFQcEoU3mwGYJOAX--
+diff --git a/lib/lmb.c b/lib/lmb.c
+index 44f98205310..b6afb731440 100644
+--- a/lib/lmb.c
++++ b/lib/lmb.c
+@@ -285,14 +285,14 @@ static long lmb_add_region_flags(struct lmb_region *rgn, phys_addr_t base,
+ 		adjacent = lmb_addrs_adjacent(base, size, rgnbase, rgnsize);
+ 		if (adjacent > 0) {
+ 			if (flags != rgnflags)
+-				break;
++				continue;
+ 			rgn->region[i].base -= size;
+ 			rgn->region[i].size += size;
+ 			coalesced++;
+ 			break;
+ 		} else if (adjacent < 0) {
+ 			if (flags != rgnflags)
+-				break;
++				continue;
+ 			rgn->region[i].size += size;
+ 			coalesced++;
+ 			break;
+-- 
+2.25.1
+
