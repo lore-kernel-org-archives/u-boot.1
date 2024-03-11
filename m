@@ -4,82 +4,121 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC746C54E58
-	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 11:11:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 816D9C5475B
+	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 11:12:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F9D087E1E;
-	Mon, 11 Mar 2024 12:11:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 0967C87F70;
+	Mon, 11 Mar 2024 12:12:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=hotmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JXMqDPnv";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=hotmail.com header.i=@hotmail.com header.b="prEgCGNU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 11FA487DD3; Mon, 11 Mar 2024 12:11:21 +0100 (CET)
-Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
- [IPv6:2607:f8b0:4864:20::42c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2CA5487C48; Mon, 11 Mar 2024 06:40:26 +0100 (CET)
+Received: from APC01-TYZ-obe.outbound.protection.outlook.com
+ (mail-tyzapc01olkn20800.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:280c::800])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB4A087F69
- for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 12:11:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A971487513
+ for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 06:40:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=hotmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-pf1-x42c.google.com with SMTP id
- d2e1a72fcca58-6e5d7f1f25fso1743037b3a.0
- for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 04:11:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710155475; x=1710760275; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=OEWLc6mLFoiSUhzbGt+0UkUaS2XPrJ2LAOzkTRtTRow=;
- b=JXMqDPnv9kin94CzpcxZP5lXKOBCTRGnBH1ymRuBtzeQusrTTGzTi4TwDiYR1RhqR/
- J2/YkYw4oFOuj3w1VEmPCgzbkbxjO01bXlJsOeTP+wWcHB52TJ8FsM17PTxB3PtKU9Hx
- ti8Z71QnDNheSQZIPyFYRIB4AnViueIeCN+aUAuv9/JZSYT/dlArfolTuJPFzg52OFva
- cdQMxFLhj9W3llSkdLFxo+NxQNcex18Ya7wBT4xDWaw/D4auEC4A/ug4N/9M2tbHKmWs
- 3US09IVymlLGTY62ta6uNXn1KoxGk9NskYsScfShZVQlcJ7n+CH8PJhWJb4gfxIevwI+
- guBg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710155475; x=1710760275;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=OEWLc6mLFoiSUhzbGt+0UkUaS2XPrJ2LAOzkTRtTRow=;
- b=RSf3oGkz/0WmKEhGkQecaYiWe7mA+1JXnhHCVzaKotfzbYbThWZV4dtXlEjtfeWAU/
- iG/kYBRpAOsMquYm2dx/2IGi1YgHA+aWNHbdI7+FZBqFGQMbT+qo/EubsLuRhANSyRbn
- FT9hFhAjinqqdkCxYq0Iex9HGP0cbqEsuuzKuH/DYybUQp+JjXeTcwmrloURQqqq+Gcc
- f1Zk0jM6NSjn9OCYB0LjA70Ij7FG8J70QeZLhX2FWs5NbwItL1RlZKvztnZih7H4MQEh
- 8bxeYusUIdcxv9AGZxuNK1LuxDft2Rh4ppqyXsPPS9igDxIe914mxPgpWB9ms2XBEWec
- yWyg==
-X-Gm-Message-State: AOJu0Ywe8I0PraV85AnyNqmI9f3WO5S10+/WdIvmWUPYwKHNk1PXefKm
- so0P4bhBuMTgKWsm8ttZ82EMRzOccNyWzosjmjmX2tfVB5YCZAkOrOdM285KnPYX7lDdBghLqOY
- 8
-X-Google-Smtp-Source: AGHT+IFZod2UHEngjepNwlep1me1CQcvX3SqQby/Wad5jTi9kf5a08BqQrpHEc/d28KtMF1hdVqfKA==
-X-Received: by 2002:a05:6a21:328f:b0:1a1:6a45:98db with SMTP id
- yt15-20020a056a21328f00b001a16a4598dbmr4256465pzb.2.1710155474661; 
- Mon, 11 Mar 2024 04:11:14 -0700 (PDT)
-Received: from sumit-X1.. ([223.178.211.249]) by smtp.gmail.com with ESMTPSA id
- o13-20020a170902d4cd00b001dd8ce888aasm2877895plg.74.2024.03.11.04.11.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Mar 2024 04:11:14 -0700 (PDT)
-From: Sumit Garg <sumit.garg@linaro.org>
-To: u-boot@lists.denx.de
-Cc: caleb.connolly@linaro.org, neil.armstrong@linaro.org, trini@konsulko.com,
- lukma@denx.de, seanga2@gmail.com, sjg@chromium.org,
- laetitia.mariottini@se.com, pascal.eberhard@se.com, abdou.saker@se.com,
- jimmy.lalande@se.com, benjamin.missey@non.se.com,
- daniel.thompson@linaro.org, stephan@gerhold.net,
- Sumit Garg <sumit.garg@linaro.org>
-Subject: [PATCH v2 5/5] board: add support for Schneider HMIBSC board
-Date: Mon, 11 Mar 2024 16:40:26 +0530
-Message-Id: <20240311111027.44577-6-sumit.garg@linaro.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240311111027.44577-1-sumit.garg@linaro.org>
-References: <20240311111027.44577-1-sumit.garg@linaro.org>
+ spf=pass smtp.mailfrom=hkang70@hotmail.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=K8lcgqQnh4gy/CYLaO6UA25/6qjdZFEkBc7tIoLQI/iVrTcLPYUZRYb9Irmb3UJHyPDrRT4Z0YoscdJ1dC45HMyvWuKDr5p2UMk9qJ/UzfUHbKpKA7GhqGMaTVipDk3yp+z3b1rjS0ce7vzKggGINOAIKQbhr77Oq8RZxdJzET536ZmzWug/rxS2vBU0c4ByRuQQWO9z4S6DvmcYkyheY5gYe9eslSkfeelst4+g7y/YLrzysRdVYyjCpDi7dxu1AW6paWG/eqA7baC5xfj2wVmDbQme+v4DMYv4TMUBo3MdoiwaPht4KyuBLFFeXROpWZYIMv7Vfa+zvJmvTEpw0A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=rStpiM90Diy1yHO7ordJJr6D5m/657nam29ujrMjHA4=;
+ b=FhxZpwFPkt1X6rtaDC+T9AzSb5HAABP/VElFGMB/A0/jPl4QUCW7IyIh5YYDlFmsJqMRF/f08paERPslF6g7fYK6FPZmtfvyWNsqq6e7lFydin2RVJPm+ApMXSQMpZ4rJpnFOOEAnjjySNnErHVH87SZ4vi380MBsA/Q0Eyws04P8Zn6BjOwgrT2L2r/uLSUoO2ZJDzh16jDsBobAGkfLzYm3mKvp4JcPtWPcKVQJRKWHmf0f5Dvt71PHCcIAO6czqGh1sB7Fi0bjE/SfEUAkhW9pANgtZgYomZsrV1fJiL7Q6xkXZ6PLvvK2ZFrXQTdZO7zn/f89OwTXQMwm/6zlQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=rStpiM90Diy1yHO7ordJJr6D5m/657nam29ujrMjHA4=;
+ b=prEgCGNUJKqSE9l+A6w9V990jFLj0E8Cdy2xSgFtBD2g1gJ0dRpvT+s1XS2hqC60lVsv574i+d7fL8QU0HCEgbtkLPGkGucbjc99Q6nDcu1ZPc1PCGtT/m/5h0h60JTlGL8yNqDWgnRIxYTk/V+SAdBfAZn25Yb5BCS8j6oOG80R6N3ARs6ct+A/+YgKZnmKSP/3O6ilUCcNxcX17DN5LiSjkMhbKmu+Fyt2ONEAs1JhpXBEDTiRPovKPfHzzZAqPSlnmXB+XH2F3uIVnqep4BV4gm+Q87PC2I8M6e2kFX7Nx/+63cA7zuHdMaSYM20sqYsoDifomX61X1VFg/Cemg==
+Received: from SEYPR01MB5364.apcprd01.prod.exchangelabs.com
+ (2603:1096:101:d2::11) by SEYPR01MB5696.apcprd01.prod.exchangelabs.com
+ (2603:1096:101:14a::5) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7362.34; Mon, 11 Mar
+ 2024 05:40:19 +0000
+Received: from SEYPR01MB5364.apcprd01.prod.exchangelabs.com
+ ([fe80::ceec:ae93:4bc2:4637]) by SEYPR01MB5364.apcprd01.prod.exchangelabs.com
+ ([fe80::ceec:ae93:4bc2:4637%6]) with mapi id 15.20.7362.035; Mon, 11 Mar 2024
+ 05:40:19 +0000
+From: Kang Lion <hkang70@hotmail.com>
+To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, HOON KANG
+ <lionkang70@naver.com>, "lionkang@wavetc.com" <lionkang@wavetc.com>
+Subject: About U-Boot License
+Thread-Topic: About U-Boot License
+Thread-Index: AQHac3aPmIxv58JRBkWKy3nUScEAHA==
+Date: Mon, 11 Mar 2024 05:40:19 +0000
+Message-ID: <SEYPR01MB5364E20BEC422DCA667399F5A3242@SEYPR01MB5364.apcprd01.prod.exchangelabs.com>
+Accept-Language: ko-KR, en-US
+Content-Language: ko-KR
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-tmn: [UGAYqyhWyapJhJrOVfvZ+oDvkPQ60QOM]
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: SEYPR01MB5364:EE_|SEYPR01MB5696:EE_
+x-ms-office365-filtering-correlation-id: 1ec19e7d-51cb-4da9-c7bd-08dc418dbcf7
+x-ms-exchange-slblob-mailprops: q6Zzr5Fg03HT/KpNVnxolKAsmCSnipDbnW6G/2d96Vs2FwwTqEuZmM3h6IHWnpvrl1dltKSL+1BOe8GOEH1mixiEbu3aO871SN13CQcKFwM2fx96ynZ4vDpO0x9mO4RKpWfWToPzJemNxkeqVE4GUtAgsKumZrVKDgcD9YAAzMBNhQ4ngicotUwfzoDJT31eMoJEgxxcgsmj/Mjx5AYNjBXm3fDcmtKuDD0tIIrFRTH8A355ieowUF/21gbacuXdb8ForjVVk/zvvVsXuABuewIfflNgpxKBzHJqFj861wBsZRPeAEqisHg2flyztH0NdYApXyCqig8ycbvW2guteNkPgKVSQS5TYI5of6QWhHT5W0ZXk2CptUnLczjuU4nlUHKEwISR076o12tHAqF/x5w0xYF/DE+4mlFcWFnNEvskMr4ra0n4oAmQEKkwp+b4FR3Y4DOe2w0si7FZJofJcrqnggUIa+/o7E0lscNBpXijkh1YE/oY85jZT1k0xuXv/hj6EiHfwJndgg0O3MQ2Z1bwGZmr2x7LIrkCIXF3Ve6cVnfLXOWucewHE/O3O/pgwHmwhed13k3azV86cy1Xk+K3nPwaTbCckh6if8wOYvxtpQU6b0yQRYGY9JIgs/+Kbu8JB1e5IBDTq3X4wa+9g+psL418RtXO5qCnZr/N8Ts79i4dBgmOkrDP+PY7aU3x
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: Lol4tnUvDMld9UJxMNTacOSkNCyqHVTE5KJ4YaDmE5tZ84sFSNVfOqmg3FfEXmojH1C965rhVGldYdK36bu0t+xiJF3mn5wmhn3q/cgkTW8d2dWumF26xh/bGSijDpxBxnv6DBMvZgKqfQN7scf+bOois8QLjVId4AbEwQn8i6cVr/Vb6Qb0RQ0K42dVzNUbXKM987zGRH7xSoCMS65dC1RwJoofqQdfVzMAzN2LtHKN0R1Y4k4zDheExblBOh+ImvNxI+Z40x4NlKS4b27BlDfXorW6rd/DeROX9TwbPvNlQHXWgXIV7R+qnGjC3VFchSvtGaWgXaph7GDghTBmkIC5sHcoiUYHOjdUGxHELmzfoTup2NuDBVyJiSuImw8rN8bUd8ovSzer2X24cDZHhftSUq3+ZVqp7ypJVz4rB1yrW/t/8cXruMV4SOiO2+8IhqQKqE1ToyIvINm1C2H9dRwkJQ6U93ADOa8uKteRXc/QM1McZTim+PuUaehiCEh+rU220sRooQ4TDA8n4k8Eoq5DhWxJWBF8rOPlCcxMeXE4sm+wW3Q1hDws6mKL+KBG
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?ks_c_5601-1987?B?VUVUWEZkLzRQUHAvWG9GcnY2b29kNnZyMERucDg1cXBiLzhZYkUy?=
+ =?ks_c_5601-1987?B?SEw1cElaSWVKV0YxalQzcUk3MlVTWStOeHg4MHJDQkhVcC8rNTNv?=
+ =?ks_c_5601-1987?B?RFFDL1RZbU5ab1NIMHBjcDA5TEt6Z2tmYWJJQklsN21GL2o5bk9v?=
+ =?ks_c_5601-1987?B?RkY0RkM5QWwybVJBb0lWWVhHS3pyNnkyR0hYZlo2OUg5OUt6ZlpW?=
+ =?ks_c_5601-1987?B?WEI1WXFoMzkzRDBGckg5ZzFqTFVYaW1VYlE0NmNkUnRqb2oyWUFL?=
+ =?ks_c_5601-1987?B?c1RId0hhNTFVY0lsZHE2cFVUbS93dDRYRGVtcGdMdXpZd2hVajYz?=
+ =?ks_c_5601-1987?B?bkp1RVBjY0dHY1k2MFBkYVVJOGdsN3JvSm1vS1hTZzlrYkNRaytY?=
+ =?ks_c_5601-1987?B?aVFmamVuYm1mUVM2VHRyM1M3RHFIdmRlZnFkMFRLNEpCWmxJRnQ5?=
+ =?ks_c_5601-1987?B?anNVaUc4eUZrNDVSbUdjM1V2aGhBYkVBQk1ncDNRdEMwSHpVK0U2?=
+ =?ks_c_5601-1987?B?VStEUHpCUXBlYTNoeEFULzRkam5QMWdFOTNhRVpKWlJmQy9ZN0tP?=
+ =?ks_c_5601-1987?B?OHRYV0FEZnZ3TTkvbDZ4aU4vTWNlUTY0b00yRFVWWUVyOTk2OXJx?=
+ =?ks_c_5601-1987?B?dVd5RHBSeWt0MHZoNkYrTy95REFSVHY2ejlCVnBIdWhtVU5qNGhp?=
+ =?ks_c_5601-1987?B?d2QyUUkvbm4wUWhXbVc3RmxFSnBEZ3JLU1pManJOUS9ORWt6aEtr?=
+ =?ks_c_5601-1987?B?QmkzallLRFFCZ3B1ZHdjVWh0M1FvS0ZTNHEyNFE2c0NKYVd1MzJX?=
+ =?ks_c_5601-1987?B?RWIrcitMbU9IZGNvdGxRTWExc3VRTDVyem9FQ0Jpek1NQzZYN3la?=
+ =?ks_c_5601-1987?B?SFRYazJiU2t1bXFWbWJmc1VvTWtRc1lWYXBydGMwd25Xd3hxOHZ0?=
+ =?ks_c_5601-1987?B?aDNsMWhSV1hoY1NxMnJOZTZwcVNEaFl4elpsMzk3cFJsYnJ0TWFm?=
+ =?ks_c_5601-1987?B?RHZpMEJHVkhXZVJmSWR5NTRmblFXcjdUWWt0R1VqTWljTHQ0Ynhp?=
+ =?ks_c_5601-1987?B?TDhzV3A5bVlVZWFtZVVxNUNtVWw1Qlp3K05mQlBqSGNJKzk3d1Jw?=
+ =?ks_c_5601-1987?B?eHZwVnM5bUg5cVVZTFBCYm1Hd1cvWHFwRnZHcUY3MlhwNUwycW1i?=
+ =?ks_c_5601-1987?B?NXcyR2l5MkxYUHpVanpJRE9ibWhJZS9xNnZOYmxlak1YV3NONkcx?=
+ =?ks_c_5601-1987?B?d0lMYWtEL1QrRld5REFnTnppcDFWSS9UdGpseU5WZWhBNWtUcmhi?=
+ =?ks_c_5601-1987?B?TVRpaFlCdXNNNlFRTkphZW9SSTRyblNDRzBLb1NMekJGOVhuNWNk?=
+ =?ks_c_5601-1987?B?dXdvSi9pTms4Q2FFZ3gyU0RtV2ZNMi9qQVpjRDJVbmljWnl0bDlW?=
+ =?ks_c_5601-1987?B?VlRMRk1zWldta0F0SjZiYmZsYTJ0U3ZRMGRvWDRYOXJHRHRjNTZV?=
+ =?ks_c_5601-1987?B?UmIzM1NORUF3RVB2UUNiK3dWclh4REZqZUg3YU5jckZOTTdHMUkx?=
+ =?ks_c_5601-1987?B?S1V5V1B3WVNjNU41QzUxb1JLalVESW12cDBnMUdteGowSllPWEty?=
+ =?ks_c_5601-1987?B?YVVjdkMxR015L0pUbUZCSytRRWRkdFg4NzZTS3NuWW1ka3RpVnpp?=
+ =?ks_c_5601-1987?B?UDM4R0lUS1RJbUIwUzJ0NXlFbXE2Um4weVBKNURzcS9RMktVNVVO?=
+ =?ks_c_5601-1987?B?SXp1SXBlVVhFRUxqU0JCbXNac0JCZWFITnhBa0JISlZWVi9DWHp1?=
+ =?ks_c_5601-1987?B?c1pFeUZjRWIyaU50cDlLRHB6MFZNWlNRbmFKRkUyazBDWjNUU2VP?=
+ =?ks_c_5601-1987?B?ZlFWam53ekQyRjQrRDJKc1lpZUU1SFQvRHNYWkE9PQ==?=
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-OriginatorOrg: sct-15-20-4755-11-msonline-outlook-d8e84.templateTenant
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: SEYPR01MB5364.apcprd01.prod.exchangelabs.com
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1ec19e7d-51cb-4da9-c7bd-08dc418dbcf7
+X-MS-Exchange-CrossTenant-originalarrivaltime: 11 Mar 2024 05:40:19.5737 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-rms-persistedconsumerorg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEYPR01MB5696
+X-Mailman-Approved-At: Mon, 11 Mar 2024 12:12:24 +0100
+Content-Type: text/plain; charset="ks_c_5601-1987"
+Content-Transfer-Encoding: base64
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,785 +135,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Support for Schneider Electric HMIBSC. Features:
-- Qualcomm Snapdragon 410C SoC - APQ8016 (4xCortex A53, Adreno 306)
-- 2GiB RAM
-- 64GiB eMMC, SD slot
-- WiFi and Bluetooth
-- 2x Host, 1x Device USB port
-- HDMI
-- Discrete TPM2 chip over SPI
-
-Features enabled in U-Boot:
-- RAUC updates
-- Environment protection
-- USB based ethernet adaptors
-
-Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
----
- arch/arm/dts/apq8016-hmibsc.dts    | 496 +++++++++++++++++++++++++++++
- board/schneider/hmibsc/MAINTAINERS |   6 +
- configs/hmibsc_defconfig           |  87 +++++
- doc/board/index.rst                |   1 +
- doc/board/schneider/hmibsc.rst     |  45 +++
- doc/board/schneider/index.rst      |   9 +
- include/configs/hmibsc.h           |  57 ++++
- 7 files changed, 701 insertions(+)
- create mode 100644 arch/arm/dts/apq8016-hmibsc.dts
- create mode 100644 board/schneider/hmibsc/MAINTAINERS
- create mode 100644 configs/hmibsc_defconfig
- create mode 100644 doc/board/schneider/hmibsc.rst
- create mode 100644 doc/board/schneider/index.rst
- create mode 100644 include/configs/hmibsc.h
-
-diff --git a/arch/arm/dts/apq8016-hmibsc.dts b/arch/arm/dts/apq8016-hmibsc.dts
-new file mode 100644
-index 00000000000..490ab5fd2fa
---- /dev/null
-+++ b/arch/arm/dts/apq8016-hmibsc.dts
-@@ -0,0 +1,496 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Copyright (c) 2015, The Linux Foundation. All rights reserved.
-+ * Copyright (c) 2024, Linaro Ltd.
-+ */
-+
-+/dts-v1/;
-+
-+#include "msm8916-pm8916.dtsi"
-+#include <dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/input/input.h>
-+#include <dt-bindings/leds/common.h>
-+#include <dt-bindings/pinctrl/qcom,pmic-gpio.h>
-+#include <dt-bindings/pinctrl/qcom,pmic-mpp.h>
-+#include <dt-bindings/sound/apq8016-lpass.h>
-+
-+/ {
-+	model = "Schneider Electric HMIBSC Board";
-+	compatible = "qcom,apq8016-hmibsc", "qcom,apq8016";
-+
-+	aliases {
-+		serial0 = &blsp_uart1;
-+		serial1 = &blsp_uart2;
-+		usid0 = &pm8916_0;
-+		i2c1 = &blsp_i2c6;
-+		i2c3 = &blsp_i2c4;
-+		i2c4 = &blsp_i2c3;
-+		spi0 = &blsp_spi5;
-+	};
-+
-+	chosen {
-+		stdout-path = "serial0";
-+	};
-+
-+	memory@80000000 {
-+		reg = <0 0x80000000 0 0x40000000>;
-+	};
-+
-+	reserved-memory {
-+		ramoops@bff00000 {
-+			compatible = "ramoops";
-+			reg = <0x0 0xbff00000 0x0 0x100000>;
-+
-+			record-size = <0x20000>;
-+			console-size = <0x20000>;
-+			ftrace-size = <0x20000>;
-+		};
-+	};
-+
-+	usb2513 {
-+		compatible = "smsc,usb3503";
-+		reset-gpios = <&pm8916_gpios 1 GPIO_ACTIVE_LOW>;
-+		initial-mode = <1>;
-+	};
-+
-+	usb_id: usb-id {
-+		compatible = "linux,extcon-usb-gpio";
-+		id-gpios = <&tlmm 110 GPIO_ACTIVE_HIGH>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&usb_id_default>;
-+	};
-+
-+	hdmi-out {
-+		compatible = "hdmi-connector";
-+		type = "a";
-+
-+		port {
-+			hdmi_con: endpoint {
-+				remote-endpoint = <&adv7533_out>;
-+			};
-+		};
-+	};
-+
-+	gpio-keys {
-+		compatible = "gpio-keys";
-+		autorepeat;
-+
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&msm_key_volp_n_default>;
-+
-+		button {
-+			label = "Volume Up";
-+			linux,code = <KEY_VOLUMEUP>;
-+			gpios = <&tlmm 107 GPIO_ACTIVE_LOW>;
-+		};
-+	};
-+
-+	leds {
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&pm8916_mpps_leds>;
-+
-+		compatible = "gpio-leds";
-+
-+		led@5 {
-+			label = "apq8016-hmibsc:green:wlan";
-+			function = LED_FUNCTION_WLAN;
-+			color = <LED_COLOR_ID_YELLOW>;
-+			gpios = <&pm8916_mpps 2 GPIO_ACTIVE_HIGH>;
-+			linux,default-trigger = "phy0tx";
-+			default-state = "off";
-+		};
-+
-+		led@6 {
-+			label = "apq8016-hmibsc:yellow:bt";
-+			function = LED_FUNCTION_BLUETOOTH;
-+			color = <LED_COLOR_ID_BLUE>;
-+			gpios = <&pm8916_mpps 3 GPIO_ACTIVE_HIGH>;
-+			linux,default-trigger = "bluetooth-power";
-+			default-state = "off";
-+		};
-+	};
-+};
-+
-+&blsp_i2c4 {
-+	status = "okay";
-+	label = "I2C2";
-+
-+	adv_bridge: bridge@39 {
-+		status = "okay";
-+
-+		compatible = "adi,adv7533";
-+		reg = <0x39>;
-+
-+		interrupt-parent = <&tlmm>;
-+		interrupts = <31 IRQ_TYPE_EDGE_FALLING>;
-+
-+		adi,dsi-lanes = <4>;
-+		clocks = <&rpmcc RPM_SMD_BB_CLK2>;
-+		clock-names = "cec";
-+
-+		pd-gpios = <&tlmm 32 GPIO_ACTIVE_HIGH>;
-+
-+		avdd-supply = <&pm8916_l6>;
-+		a2vdd-supply = <&pm8916_l6>;
-+		dvdd-supply = <&pm8916_l6>;
-+		pvdd-supply = <&pm8916_l6>;
-+		v1p2-supply = <&pm8916_l6>;
-+		v3p3-supply = <&pm8916_l17>;
-+
-+		pinctrl-names = "default","sleep";
-+		pinctrl-0 = <&adv7533_int_active &adv7533_switch_active>;
-+		pinctrl-1 = <&adv7533_int_suspend &adv7533_switch_suspend>;
-+		#sound-dai-cells = <1>;
-+
-+		ports {
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+
-+			port@0 {
-+				reg = <0>;
-+				adv7533_in: endpoint {
-+					remote-endpoint = <&mdss_dsi0_out>;
-+				};
-+			};
-+
-+			port@1 {
-+				reg = <1>;
-+				adv7533_out: endpoint {
-+					remote-endpoint = <&hdmi_con>;
-+				};
-+			};
-+		};
-+	};
-+};
-+
-+&blsp_i2c6 {
-+	status = "okay";
-+	label = "I2C1";
-+
-+	rtc1: s35390a@30 {
-+		compatible = "sii,s35390a";
-+		reg = <0x30>;
-+	};
-+
-+	eeprom1: 24c256@50 {
-+		compatible = "atmel,24c256";
-+		reg = <0x50>;
-+	};
-+};
-+
-+&blsp_i2c3 {
-+	status = "okay";
-+	label = "I2C4";
-+
-+	eeprom: 24c32@50 {
-+		compatible = "onsemi,24c32";
-+		reg = <0x50>;
-+	};
-+};
-+
-+&blsp_spi5 {
-+	status = "okay";
-+	label = "SPI0";
-+	cs-gpios = <&tlmm 18 GPIO_ACTIVE_LOW>;
-+
-+	tpm@0 {
-+		compatible = "tcg,tpm_tis-spi";
-+		reg = <0>;
-+		spi-max-frequency = <500000>;
-+	};
-+};
-+
-+&blsp_uart1 {
-+	status = "okay";
-+	label = "UART0";
-+};
-+
-+&blsp_uart2 {
-+	status = "okay";
-+	label = "UART1";
-+};
-+
-+&lpass {
-+	status = "okay";
-+};
-+
-+&mdss {
-+	status = "okay";
-+};
-+
-+&mdss_dsi0_out {
-+	data-lanes = <0 1 2 3>;
-+	remote-endpoint = <&adv7533_in>;
-+};
-+
-+&pm8916_0 {
-+	pon@800 {
-+		pwrkey {
-+			status = "okay";
-+			interrupts = <0x0 0x8 1 IRQ_TYPE_EDGE_BOTH>;
-+		};
-+	};
-+};
-+
-+&pm8916_codec {
-+	status = "okay";
-+	qcom,mbhc-vthreshold-low = <75 150 237 450 500>;
-+	qcom,mbhc-vthreshold-high = <75 150 237 450 500>;
-+};
-+
-+&pm8916_rpm_regulators {
-+	pm8916_l17: l17 {
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+	};
-+};
-+
-+&sdhc_1 {
-+	status = "okay";
-+};
-+
-+&sdhc_2 {
-+	status = "okay";
-+
-+	pinctrl-names = "default", "sleep";
-+	pinctrl-0 = <&sdc2_default &sdc2_cd_default>;
-+	pinctrl-1 = <&sdc2_sleep &sdc2_cd_default>;
-+
-+	cd-gpios = <&tlmm 38 GPIO_ACTIVE_LOW>;
-+};
-+
-+&sound {
-+	status = "okay";
-+
-+	pinctrl-0 = <&cdc_pdm_default &sec_mi2s_default>;
-+	pinctrl-1 = <&cdc_pdm_sleep &sec_mi2s_sleep>;
-+	pinctrl-names = "default", "sleep";
-+	model = "DB410c";
-+	audio-routing =
-+		"AMIC2", "MIC BIAS Internal2",
-+		"AMIC3", "MIC BIAS External1";
-+
-+	quaternary-dai-link {
-+		link-name = "ADV7533";
-+		cpu {
-+			sound-dai = <&lpass MI2S_QUATERNARY>;
-+		};
-+		codec {
-+			sound-dai = <&adv_bridge 0>;
-+		};
-+	};
-+
-+	primary-dai-link {
-+		link-name = "WCD";
-+		cpu {
-+			sound-dai = <&lpass MI2S_PRIMARY>;
-+		};
-+		codec {
-+			sound-dai = <&lpass_codec 0>, <&pm8916_codec 0>;
-+		};
-+	};
-+
-+	tertiary-dai-link {
-+		link-name = "WCD-Capture";
-+		cpu {
-+			sound-dai = <&lpass MI2S_TERTIARY>;
-+		};
-+		codec {
-+			sound-dai = <&lpass_codec 1>, <&pm8916_codec 1>;
-+		};
-+	};
-+};
-+
-+&usb {
-+	status = "okay";
-+	extcon = <&usb_id>, <&usb_id>;
-+
-+	pinctrl-names = "default", "device";
-+	pinctrl-0 = <&usb_sw_sel_pm &usb_hub_reset_pm>;
-+	pinctrl-1 = <&usb_sw_sel_pm_device &usb_hub_reset_pm_device>;
-+};
-+
-+&usb_hs_phy {
-+	extcon = <&usb_id>;
-+};
-+
-+&wcnss {
-+	status = "okay";
-+	firmware-name = "qcom/apq8016/wcnss.mbn";
-+};
-+
-+&wcnss_ctrl {
-+	firmware-name = "qcom/apq8016/WCNSS_qcom_wlan_nv_sbc.bin";
-+};
-+
-+/* Enable CoreSight */
-+&cti0 { status = "okay"; };
-+&cti1 { status = "okay"; };
-+&cti12 { status = "okay"; };
-+&cti13 { status = "okay"; };
-+&cti14 { status = "okay"; };
-+&cti15 { status = "okay"; };
-+&debug0 { status = "okay"; };
-+&debug1 { status = "okay"; };
-+&debug2 { status = "okay"; };
-+&debug3 { status = "okay"; };
-+&etf { status = "okay"; };
-+&etm0 { status = "okay"; };
-+&etm1 { status = "okay"; };
-+&etm2 { status = "okay"; };
-+&etm3 { status = "okay"; };
-+&etr { status = "okay"; };
-+&funnel0 { status = "okay"; };
-+&funnel1 { status = "okay"; };
-+&replicator { status = "okay"; };
-+&stm { status = "okay"; };
-+&tpiu { status = "okay"; };
-+
-+/*
-+ * 2mA drive strength is not enough when connecting multiple
-+ * I2C devices with different pull up resistors.
-+ */
-+
-+&blsp_i2c4_default {
-+	drive-strength = <16>;
-+};
-+
-+&blsp_i2c6_default {
-+	drive-strength = <16>;
-+};
-+
-+&tlmm {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&gpio_rs232_high &gpio_rs232_low>;
-+
-+	sdc2_cd_default: sdc2-cd-default-state {
-+		pins = "gpio38";
-+		function = "gpio";
-+		drive-strength = <2>;
-+		bias-disable;
-+	};
-+
-+	usb_id_default: usb-id-default-state {
-+		pins = "gpio110";
-+		function = "gpio";
-+
-+		drive-strength = <8>;
-+		bias-pull-up;
-+	};
-+
-+	adv7533_int_active: adv533-int-active-state {
-+		pins = "gpio31";
-+		function = "gpio";
-+
-+		drive-strength = <16>;
-+		bias-disable;
-+	};
-+
-+	adv7533_int_suspend: adv7533-int-suspend-state {
-+		pins = "gpio31";
-+		function = "gpio";
-+
-+		drive-strength = <2>;
-+		bias-disable;
-+	};
-+
-+	adv7533_switch_active: adv7533-switch-active-state {
-+		pins = "gpio32";
-+		function = "gpio";
-+
-+		drive-strength = <16>;
-+		bias-disable;
-+	};
-+
-+	adv7533_switch_suspend: adv7533-switch-suspend-state {
-+		pins = "gpio32";
-+		function = "gpio";
-+
-+		drive-strength = <2>;
-+		bias-disable;
-+	};
-+
-+	msm_key_volp_n_default: msm-key-volp-n-default-state {
-+		pins = "gpio107";
-+		function = "gpio";
-+
-+		drive-strength = <8>;
-+		bias-pull-up;
-+	};
-+
-+	gpio_rs232_high: gpio_rs232_high {
-+		bootph-all;
-+		pins = "gpio99";
-+		function = "gpio";
-+
-+		drive-strength = <16>;
-+		bias-disable;
-+		output-high;
-+	};
-+
-+	gpio_rs232_low: gpio_rs232_low {
-+		bootph-all;
-+		pins = "gpio100";
-+		function = "gpio";
-+
-+		drive-strength = <16>;
-+		bias-disable;
-+		output-low;
-+	};
-+};
-+
-+&pm8916_gpios {
-+	gpio-line-names =
-+		"USB_HUB_RESET_N_PM",
-+		"USB_SW_SEL_PM";
-+
-+	usb_hub_reset_pm: usb-hub-reset-pm-state {
-+		pins = "gpio1";
-+		function = PMIC_GPIO_FUNC_NORMAL;
-+
-+		input-disable;
-+		output-high;
-+	};
-+
-+	usb_hub_reset_pm_device: usb-hub-reset-pm-device-state {
-+		pins = "gpio1";
-+		function = PMIC_GPIO_FUNC_NORMAL;
-+
-+		output-low;
-+	};
-+
-+	usb_sw_sel_pm: usb-sw-sel-pm-state {
-+		pins = "gpio2";
-+		function = PMIC_GPIO_FUNC_NORMAL;
-+
-+		power-source = <PM8916_GPIO_VPH>;
-+		input-disable;
-+		output-high;
-+	};
-+
-+	usb_sw_sel_pm_device: usb-sw-sel-pm-device-state {
-+		pins = "gpio2";
-+		function = PMIC_GPIO_FUNC_NORMAL;
-+
-+		power-source = <PM8916_GPIO_VPH>;
-+		input-disable;
-+		output-low;
-+	};
-+};
-+
-+&pm8916_mpps {
-+	gpio-line-names =
-+		"WLAN_LED_CTRL",
-+		"BT_LED_CTRL";
-+
-+	pm8916_mpps_leds: pm8916-mpps-state {
-+		pins = "mpp2", "mpp3";
-+		function = "digital";
-+
-+		output-low;
-+	};
-+};
-+
-+&blsp_uart1_default {
-+	bootph-all;
-+};
-diff --git a/board/schneider/hmibsc/MAINTAINERS b/board/schneider/hmibsc/MAINTAINERS
-new file mode 100644
-index 00000000000..0f31bbda966
---- /dev/null
-+++ b/board/schneider/hmibsc/MAINTAINERS
-@@ -0,0 +1,6 @@
-+HMIBSC BOARD
-+M:	Sumit Garg <sumit.garg@linaro.org>
-+S:	Maintained
-+F:	board/schneider/hmibsc/
-+F:	include/configs/hmibsc.h
-+F:	configs/hmibsc_defconfig
-diff --git a/configs/hmibsc_defconfig b/configs/hmibsc_defconfig
-new file mode 100644
-index 00000000000..02b9615114b
---- /dev/null
-+++ b/configs/hmibsc_defconfig
-@@ -0,0 +1,87 @@
-+CONFIG_ARM=y
-+CONFIG_SYS_BOARD="hmibsc"
-+CONFIG_COUNTER_FREQUENCY=19000000
-+CONFIG_ENABLE_ARM_SOC_BOOT0_HOOK=y
-+CONFIG_ARCH_SNAPDRAGON=y
-+CONFIG_TEXT_BASE=0x8f600000
-+CONFIG_SYS_MALLOC_LEN=0x802000
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x8007fff0
-+CONFIG_ENV_SIZE=0x2000
-+CONFIG_ENV_OFFSET=0x0
-+CONFIG_DEFAULT_DEVICE_TREE="apq8016-hmibsc"
-+# CONFIG_OF_UPSTREAM is not set
-+CONFIG_OF_LIBFDT_OVERLAY=y
-+CONFIG_IDENT_STRING="\nSchneider Electric-HMIBSC"
-+CONFIG_SYS_LOAD_ADDR=0x80080000
-+CONFIG_REMAKE_ELF=y
-+# CONFIG_ANDROID_BOOT_IMAGE is not set
-+CONFIG_FIT=y
-+CONFIG_HUSH_PARSER=y
-+CONFIG_SYS_CBSIZE=2048
-+# CONFIG_DISPLAY_CPUINFO is not set
-+# CONFIG_DISPLAY_BOARDINFO is not set
-+CONFIG_SYS_PROMPT="hmibsc => "
-+CONFIG_SYS_MAXARGS=64
-+CONFIG_CMD_DHCP=y
-+CONFIG_CMD_PING=y
-+CONFIG_CMD_FS_GENERIC=y
-+# CONFIG_CMD_IMI is not set
-+CONFIG_CMD_MD5SUM=y
-+CONFIG_CMD_MEMINFO=y
-+CONFIG_CMD_EXT2=y
-+CONFIG_CMD_EXT4=y
-+CONFIG_CMD_FAT=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_PART=y
-+CONFIG_CMD_USB=y
-+CONFIG_BOOTP_BOOTFILESIZE=y
-+CONFIG_CMD_CACHE=y
-+CONFIG_CMD_TIMER=y
-+CONFIG_CMD_ENV_FLAGS=y
-+CONFIG_CMD_ENV_EXISTS=y
-+CONFIG_CMD_NVEDIT_INFO=y
-+CONFIG_ENV_WRITEABLE_LIST=y
-+CONFIG_ENV_ACCESS_IGNORE_FORCE=y
-+CONFIG_ENV_IS_IN_MMC=y
-+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_SYS_MMC_ENV_PART=2
-+CONFIG_BUTTON_QCOM_PMIC=y
-+CONFIG_CLK=y
-+CONFIG_CLK_QCOM_APQ8016=y
-+CONFIG_USB_FUNCTION_FASTBOOT=y
-+CONFIG_FASTBOOT_BUF_ADDR=0x91000000
-+CONFIG_FASTBOOT_FLASH=y
-+CONFIG_FASTBOOT_FLASH_MMC_DEV=0
-+CONFIG_MSM_GPIO=y
-+CONFIG_QCOM_PMIC_GPIO=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_MSM=y
-+CONFIG_PHY=y
-+CONFIG_PINCTRL=y
-+CONFIG_PINCONF=y
-+CONFIG_PINCTRL_QCOM_APQ8016=y
-+CONFIG_DM_PMIC=y
-+CONFIG_PMIC_QCOM=y
-+CONFIG_MSM_SERIAL=y
-+CONFIG_SPMI_MSM=y
-+CONFIG_USB=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_EHCI_MSM=y
-+CONFIG_USB_ULPI_VIEWPORT=y
-+CONFIG_USB_ULPI=y
-+CONFIG_USB_HOST_ETHER=y
-+CONFIG_USB_ETHER_ASIX=y
-+CONFIG_USB_ETHER_ASIX88179=y
-+CONFIG_USB_ETHER_MCS7830=y
-+CONFIG_USB_ETHER_SMSC95XX=y
-+CONFIG_PHYLIB=y
-+CONFIG_USB_ETHER_LAN75XX=y
-+CONFIG_USB_GADGET=y
-+CONFIG_USB_GADGET_VENDOR_NUM=0x18d1
-+CONFIG_USB_GADGET_PRODUCT_NUM=0xd00d
-+CONFIG_CI_UDC=y
-diff --git a/doc/board/index.rst b/doc/board/index.rst
-index 62357c99388..bc6c27a8457 100644
---- a/doc/board/index.rst
-+++ b/doc/board/index.rst
-@@ -42,6 +42,7 @@ Board-specific doc
-    renesas/index
-    rockchip/index
-    samsung/index
-+   schneider/index
-    sielaff/index
-    siemens/index
-    sifive/index
-diff --git a/doc/board/schneider/hmibsc.rst b/doc/board/schneider/hmibsc.rst
-new file mode 100644
-index 00000000000..f09fb5af1b3
---- /dev/null
-+++ b/doc/board/schneider/hmibsc.rst
-@@ -0,0 +1,45 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+.. sectionauthor:: Sumit Garg <sumit.garg@linaro.org>
-+
-+HMIBSC
-+======
-+
-+The HMIBSC is an IIoT Edge Box Core board based on the Qualcomm APQ8016E SoC.
-+More information can be found on the `SE product page`_.
-+
-+U-Boot can be used as a replacement for Qualcomm's original Android bootloader
-+(a fork of Little Kernel/LK). Like LK, it is installed directly into the ``aboot``
-+partition. Note that the U-Boot port used to be loaded as an Android boot image
-+through LK. This is no longer the case, now U-Boot can replace LK entirely.
-+
-+.. _SE product page: https://www.se.com/us/en/product/HMIBSCEA53D1L0T/iiot-edge-box-core-harmony-ipc-emmc-dc-linux-tpm/
-+
-+Build steps
-+-----------
-+
-+First, setup ``CROSS_COMPILE`` for aarch64. Then, build U-Boot for ``hmibsc``::
-+
-+  $ export CROSS_COMPILE=<aarch64 toolchain prefix>
-+  $ make hmibsc_defconfig
-+  $ make
-+
-+This will build ``u-boot.elf`` in the configured output directory.
-+
-+Installation
-+------------
-+
-+Although the HMIBSC does not have secure boot set up by default, the firmware
-+still expects firmware ELF images to be "signed". The signature does not provide
-+any security in this case, but it provides the firmware with some required
-+metadata.
-+
-+To "sign" ``u-boot.elf`` you can use e.g. `qtestsign`_::
-+
-+  $ ./qtestsign.py aboot u-boot.elf
-+
-+Then install the resulting ``u-boot-test-signed.mbn`` to the ``aboot`` partition
-+on your device, e.g. with ``fastboot flash aboot u-boot-test-signed.mbn``.
-+
-+U-Boot should be running after a reboot (``fastboot reboot``).
-+
-+.. _qtestsign: https://github.com/msm8916-mainline/qtestsign
-diff --git a/doc/board/schneider/index.rst b/doc/board/schneider/index.rst
-new file mode 100644
-index 00000000000..55792ed3100
---- /dev/null
-+++ b/doc/board/schneider/index.rst
-@@ -0,0 +1,9 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+Schneider Electric
-+==================
-+
-+.. toctree::
-+   :maxdepth: 2
-+
-+   hmibsc
-diff --git a/include/configs/hmibsc.h b/include/configs/hmibsc.h
-new file mode 100644
-index 00000000000..66dfa549ce1
---- /dev/null
-+++ b/include/configs/hmibsc.h
-@@ -0,0 +1,57 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Board configuration file for HMIBSC
-+ *
-+ * (C) Copyright 2024 Sumit Garg <sumit.garg@linaro.org>
-+ */
-+
-+#ifndef __CONFIGS_HMIBSC_H
-+#define __CONFIGS_HMIBSC_H
-+
-+/* PHY needs a longer aneg time */
-+#define PHY_ANEG_TIMEOUT		8000
-+
-+#define HMIBSC_BOOTCOMMAND \
-+	"setenv devtype mmc; setenv devnum 0; " \
-+	"test -n \"${BOOT_ORDER}\" || setenv BOOT_ORDER \"A B\"; " \
-+	"test -n \"${BOOT_A_LEFT}\" || setenv BOOT_A_LEFT 3; " \
-+	"test -n \"${BOOT_B_LEFT}\" || setenv BOOT_B_LEFT 3; " \
-+	"setenv raucslot; " \
-+	"for BOOT_SLOT in \"${BOOT_ORDER}\"; do " \
-+	"  if test \"x${raucslot}\" != \"x\"; then " \
-+	"      echo \"skip remaining slots...\"; " \
-+	"  elif test \"x${BOOT_SLOT}\" = \"xA\"; then " \
-+	"    if test ${BOOT_A_LEFT} -gt 0; then " \
-+	"      setexpr BOOT_A_LEFT ${BOOT_A_LEFT} - 1; " \
-+	"      echo \"Found valid RAUC slot A\"; " \
-+	"      setenv raucslot \"rauc.slot=A\"; " \
-+	"      setenv raucpart A; setenv distro_bootpart 6;" \
-+	"    fi; " \
-+	"  elif test \"x${BOOT_SLOT}\" = \"xB\"; then " \
-+	"    if test ${BOOT_B_LEFT} -gt 0; then " \
-+	"      setexpr BOOT_B_LEFT ${BOOT_B_LEFT} - 1; " \
-+	"      echo \"Found valid RAUC slot B\"; " \
-+	"      setenv raucslot \"rauc.slot=B\"; " \
-+	"      setenv raucpart B; setenv distro_bootpart 7;" \
-+	"    fi; " \
-+	"  fi; " \
-+	"done; " \
-+	"if test -n \"${raucslot}\"; then " \
-+	"  setenv bootargs console=ttyMSM1 root=PARTLABEL=rootfs_${raucpart} rw rootwait ${raucslot}; " \
-+	"  saveenv; " \
-+	"else " \
-+	"  echo \"No valid RAUC slot found. Resetting tries to 3\"; " \
-+	"  setenv BOOT_A_LEFT 3; " \
-+	"  setenv BOOT_B_LEFT 3; " \
-+	"  saveenv; " \
-+	"  reset; " \
-+	"fi; " \
-+	"load ${devtype} ${devnum}:${distro_bootpart} ${loadaddr} /boot/fitImage && bootm"
-+
-+#define CFG_EXTRA_ENV_SETTINGS \
-+	"loadaddr=0x90000000\0" \
-+	"bootcmd="	HMIBSC_BOOTCOMMAND		"\0"
-+
-+#define CFG_ENV_FLAGS_LIST_STATIC "BOOT_A_LEFT:dw,BOOT_B_LEFT:dw,BOOT_ORDER:sw"
-+
-+#endif
--- 
-2.34.1
-
+RGVhciBEQVMNCg0KDQpUaGlzIGlzIGxpb24uIE5pY2UgdG8gbWVldCB5b3UuDQoNCg0KSSdtIHNl
+bmRpbmcgeW91IGFuIGUtbWFpbCBiZWNhdXNlIEkgaGF2ZSBhIHF1ZXN0aW9uIGFib3V0IHRoZSBV
+LUJvb3QgbGljZW5zZS4NCkkgd291bGQgbGlrZSB0byBrbm93IGFib3V0IHRoZSBvYmxpZ2F0aW9u
+IHRvIGRpc2Nsb3NlIHRoZSBVLUJvb3QgY29kZSBjdXJyZW50bHkgcHJvdmlkZWQgYnkgWGlsaW54
+KHp5bnFNUCkuDQoNCg0KMS4gV2hlbiB3ZSB1c2UgYSBjb21tZXJjaWFsIE9TIGNvZGUgY2FsbGVk
+IFJURU1TLCB3ZSB1c2UgVS1Cb290IGFzIHRoZSBib290bG9hZGVyLg0KQXQgdGhpcyB0aW1lLCBl
+dmVuIGlmIFJURU1TIE9TIGlzIGNvbW1lcmNpYWwsIGlmIHdlIG1lcmdlIGFuIGltYWdlIHN1Y2gg
+YXMgYW4gb3BlbiBzb3VyY2UgY2FsbGVkIFUtQm9vdCB0byBtYWtlIGEgZmluYWwgaW1hZ2UgYW5k
+IHVzZSBpdCwgc2hvdWxkIEkgcmVsZWFzZSBhbGwgdGhlIGNvZGVzPyBJIHdhbnQgdG8ga25vdyB0
+aGUgc2NvcGUgb2YgZGlzY2xvc3VyZS4NCg0KRG8gd2UgZXZlbiBoYXZlIHRvIGRpc2Nsb3NlIGNv
+bW1lcmNpYWwgUlRFTVMgT1MgKyBBcHBsaWNhdGlvbj8NCg0KDQoyLiBPciBkbyB5b3Ugc2VlIG9u
+bHkgVS1Cb290IGFzIGEgc2VwYXJhdGUgaW1hZ2UsIGFuZCBzaW5jZSB0aGUgT1MgaXMgY29tbWVy
+Y2lhbCwgdGhlcmUgaXMgbm8gbmVlZCB0byBpbnRlcnByZXQgaXQgc2VwYXJhdGVseSBhbmQgZGlz
+Y2xvc2UgaXQ/DQoNCkF0IHRoaXMgdGltZSwgc2hvdWxkIHRoZSBVLUJvb3QgYmUgZGlzY2xvc2Vk
+IGFjY29yZGluZyB0byB0aGUgbGljZW5zZSBvciBub3Q/IEkgd29uZGVyLg0KDQoNCmNmKSBXZSB3
+aWxsIGp1c3QgY2hhbmdlIHNtYWxsIHBhcnQgZm9yIG9ubHkgZGVmaW5pdGlvbiwgYnV0IEknbSBh
+ZnJhaWQgdGhhdCB3ZSBoYXZlIHRvIGRpc2Nsb3N1cmUgb3VyIGV2ZXJ5IGNvZGUgb2YgUlRFTVMg
+YW5kIEFwcGxpY2F0aW9uLg0KDQpUaGF0J3Mgd2h5IEknbSBxdWVzdGluZyBpdCBub3cuDQoNCkkg
+a25vdyB5b3UncmUgYnVzeSwgYnV0IHBsZWFzZSBhbnN3ZXIgbWUuDQoNCg0KVGhhbmsgeW91Lg0K
