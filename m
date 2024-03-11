@@ -4,121 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 816D9C5475B
-	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 11:12:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21723C5475B
+	for <u-boot@archiver.kernel.org>; Mon, 11 Mar 2024 11:12:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0967C87F70;
-	Mon, 11 Mar 2024 12:12:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=hotmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 9838687F7D;
+	Mon, 11 Mar 2024 12:12:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=hotmail.com header.i=@hotmail.com header.b="prEgCGNU";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QAnBKBZZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2CA5487C48; Mon, 11 Mar 2024 06:40:26 +0100 (CET)
-Received: from APC01-TYZ-obe.outbound.protection.outlook.com
- (mail-tyzapc01olkn20800.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:280c::800])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id BE160871C0; Mon, 11 Mar 2024 10:03:48 +0100 (CET)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A971487513
- for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 06:40:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 00FD087F03
+ for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 10:03:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=hotmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=hkang70@hotmail.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=K8lcgqQnh4gy/CYLaO6UA25/6qjdZFEkBc7tIoLQI/iVrTcLPYUZRYb9Irmb3UJHyPDrRT4Z0YoscdJ1dC45HMyvWuKDr5p2UMk9qJ/UzfUHbKpKA7GhqGMaTVipDk3yp+z3b1rjS0ce7vzKggGINOAIKQbhr77Oq8RZxdJzET536ZmzWug/rxS2vBU0c4ByRuQQWO9z4S6DvmcYkyheY5gYe9eslSkfeelst4+g7y/YLrzysRdVYyjCpDi7dxu1AW6paWG/eqA7baC5xfj2wVmDbQme+v4DMYv4TMUBo3MdoiwaPht4KyuBLFFeXROpWZYIMv7Vfa+zvJmvTEpw0A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=rStpiM90Diy1yHO7ordJJr6D5m/657nam29ujrMjHA4=;
- b=FhxZpwFPkt1X6rtaDC+T9AzSb5HAABP/VElFGMB/A0/jPl4QUCW7IyIh5YYDlFmsJqMRF/f08paERPslF6g7fYK6FPZmtfvyWNsqq6e7lFydin2RVJPm+ApMXSQMpZ4rJpnFOOEAnjjySNnErHVH87SZ4vi380MBsA/Q0Eyws04P8Zn6BjOwgrT2L2r/uLSUoO2ZJDzh16jDsBobAGkfLzYm3mKvp4JcPtWPcKVQJRKWHmf0f5Dvt71PHCcIAO6czqGh1sB7Fi0bjE/SfEUAkhW9pANgtZgYomZsrV1fJiL7Q6xkXZ6PLvvK2ZFrXQTdZO7zn/f89OwTXQMwm/6zlQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=rStpiM90Diy1yHO7ordJJr6D5m/657nam29ujrMjHA4=;
- b=prEgCGNUJKqSE9l+A6w9V990jFLj0E8Cdy2xSgFtBD2g1gJ0dRpvT+s1XS2hqC60lVsv574i+d7fL8QU0HCEgbtkLPGkGucbjc99Q6nDcu1ZPc1PCGtT/m/5h0h60JTlGL8yNqDWgnRIxYTk/V+SAdBfAZn25Yb5BCS8j6oOG80R6N3ARs6ct+A/+YgKZnmKSP/3O6ilUCcNxcX17DN5LiSjkMhbKmu+Fyt2ONEAs1JhpXBEDTiRPovKPfHzzZAqPSlnmXB+XH2F3uIVnqep4BV4gm+Q87PC2I8M6e2kFX7Nx/+63cA7zuHdMaSYM20sqYsoDifomX61X1VFg/Cemg==
-Received: from SEYPR01MB5364.apcprd01.prod.exchangelabs.com
- (2603:1096:101:d2::11) by SEYPR01MB5696.apcprd01.prod.exchangelabs.com
- (2603:1096:101:14a::5) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7362.34; Mon, 11 Mar
- 2024 05:40:19 +0000
-Received: from SEYPR01MB5364.apcprd01.prod.exchangelabs.com
- ([fe80::ceec:ae93:4bc2:4637]) by SEYPR01MB5364.apcprd01.prod.exchangelabs.com
- ([fe80::ceec:ae93:4bc2:4637%6]) with mapi id 15.20.7362.035; Mon, 11 Mar 2024
- 05:40:19 +0000
-From: Kang Lion <hkang70@hotmail.com>
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, HOON KANG
- <lionkang70@naver.com>, "lionkang@wavetc.com" <lionkang@wavetc.com>
-Subject: About U-Boot License
-Thread-Topic: About U-Boot License
-Thread-Index: AQHac3aPmIxv58JRBkWKy3nUScEAHA==
-Date: Mon, 11 Mar 2024 05:40:19 +0000
-Message-ID: <SEYPR01MB5364E20BEC422DCA667399F5A3242@SEYPR01MB5364.apcprd01.prod.exchangelabs.com>
-Accept-Language: ko-KR, en-US
-Content-Language: ko-KR
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-tmn: [UGAYqyhWyapJhJrOVfvZ+oDvkPQ60QOM]
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SEYPR01MB5364:EE_|SEYPR01MB5696:EE_
-x-ms-office365-filtering-correlation-id: 1ec19e7d-51cb-4da9-c7bd-08dc418dbcf7
-x-ms-exchange-slblob-mailprops: q6Zzr5Fg03HT/KpNVnxolKAsmCSnipDbnW6G/2d96Vs2FwwTqEuZmM3h6IHWnpvrl1dltKSL+1BOe8GOEH1mixiEbu3aO871SN13CQcKFwM2fx96ynZ4vDpO0x9mO4RKpWfWToPzJemNxkeqVE4GUtAgsKumZrVKDgcD9YAAzMBNhQ4ngicotUwfzoDJT31eMoJEgxxcgsmj/Mjx5AYNjBXm3fDcmtKuDD0tIIrFRTH8A355ieowUF/21gbacuXdb8ForjVVk/zvvVsXuABuewIfflNgpxKBzHJqFj861wBsZRPeAEqisHg2flyztH0NdYApXyCqig8ycbvW2guteNkPgKVSQS5TYI5of6QWhHT5W0ZXk2CptUnLczjuU4nlUHKEwISR076o12tHAqF/x5w0xYF/DE+4mlFcWFnNEvskMr4ra0n4oAmQEKkwp+b4FR3Y4DOe2w0si7FZJofJcrqnggUIa+/o7E0lscNBpXijkh1YE/oY85jZT1k0xuXv/hj6EiHfwJndgg0O3MQ2Z1bwGZmr2x7LIrkCIXF3Ve6cVnfLXOWucewHE/O3O/pgwHmwhed13k3azV86cy1Xk+K3nPwaTbCckh6if8wOYvxtpQU6b0yQRYGY9JIgs/+Kbu8JB1e5IBDTq3X4wa+9g+psL418RtXO5qCnZr/N8Ts79i4dBgmOkrDP+PY7aU3x
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: Lol4tnUvDMld9UJxMNTacOSkNCyqHVTE5KJ4YaDmE5tZ84sFSNVfOqmg3FfEXmojH1C965rhVGldYdK36bu0t+xiJF3mn5wmhn3q/cgkTW8d2dWumF26xh/bGSijDpxBxnv6DBMvZgKqfQN7scf+bOois8QLjVId4AbEwQn8i6cVr/Vb6Qb0RQ0K42dVzNUbXKM987zGRH7xSoCMS65dC1RwJoofqQdfVzMAzN2LtHKN0R1Y4k4zDheExblBOh+ImvNxI+Z40x4NlKS4b27BlDfXorW6rd/DeROX9TwbPvNlQHXWgXIV7R+qnGjC3VFchSvtGaWgXaph7GDghTBmkIC5sHcoiUYHOjdUGxHELmzfoTup2NuDBVyJiSuImw8rN8bUd8ovSzer2X24cDZHhftSUq3+ZVqp7ypJVz4rB1yrW/t/8cXruMV4SOiO2+8IhqQKqE1ToyIvINm1C2H9dRwkJQ6U93ADOa8uKteRXc/QM1McZTim+PuUaehiCEh+rU220sRooQ4TDA8n4k8Eoq5DhWxJWBF8rOPlCcxMeXE4sm+wW3Q1hDws6mKL+KBG
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?ks_c_5601-1987?B?VUVUWEZkLzRQUHAvWG9GcnY2b29kNnZyMERucDg1cXBiLzhZYkUy?=
- =?ks_c_5601-1987?B?SEw1cElaSWVKV0YxalQzcUk3MlVTWStOeHg4MHJDQkhVcC8rNTNv?=
- =?ks_c_5601-1987?B?RFFDL1RZbU5ab1NIMHBjcDA5TEt6Z2tmYWJJQklsN21GL2o5bk9v?=
- =?ks_c_5601-1987?B?RkY0RkM5QWwybVJBb0lWWVhHS3pyNnkyR0hYZlo2OUg5OUt6ZlpW?=
- =?ks_c_5601-1987?B?WEI1WXFoMzkzRDBGckg5ZzFqTFVYaW1VYlE0NmNkUnRqb2oyWUFL?=
- =?ks_c_5601-1987?B?c1RId0hhNTFVY0lsZHE2cFVUbS93dDRYRGVtcGdMdXpZd2hVajYz?=
- =?ks_c_5601-1987?B?bkp1RVBjY0dHY1k2MFBkYVVJOGdsN3JvSm1vS1hTZzlrYkNRaytY?=
- =?ks_c_5601-1987?B?aVFmamVuYm1mUVM2VHRyM1M3RHFIdmRlZnFkMFRLNEpCWmxJRnQ5?=
- =?ks_c_5601-1987?B?anNVaUc4eUZrNDVSbUdjM1V2aGhBYkVBQk1ncDNRdEMwSHpVK0U2?=
- =?ks_c_5601-1987?B?VStEUHpCUXBlYTNoeEFULzRkam5QMWdFOTNhRVpKWlJmQy9ZN0tP?=
- =?ks_c_5601-1987?B?OHRYV0FEZnZ3TTkvbDZ4aU4vTWNlUTY0b00yRFVWWUVyOTk2OXJx?=
- =?ks_c_5601-1987?B?dVd5RHBSeWt0MHZoNkYrTy95REFSVHY2ejlCVnBIdWhtVU5qNGhp?=
- =?ks_c_5601-1987?B?d2QyUUkvbm4wUWhXbVc3RmxFSnBEZ3JLU1pManJOUS9ORWt6aEtr?=
- =?ks_c_5601-1987?B?QmkzallLRFFCZ3B1ZHdjVWh0M1FvS0ZTNHEyNFE2c0NKYVd1MzJX?=
- =?ks_c_5601-1987?B?RWIrcitMbU9IZGNvdGxRTWExc3VRTDVyem9FQ0Jpek1NQzZYN3la?=
- =?ks_c_5601-1987?B?SFRYazJiU2t1bXFWbWJmc1VvTWtRc1lWYXBydGMwd25Xd3hxOHZ0?=
- =?ks_c_5601-1987?B?aDNsMWhSV1hoY1NxMnJOZTZwcVNEaFl4elpsMzk3cFJsYnJ0TWFm?=
- =?ks_c_5601-1987?B?RHZpMEJHVkhXZVJmSWR5NTRmblFXcjdUWWt0R1VqTWljTHQ0Ynhp?=
- =?ks_c_5601-1987?B?TDhzV3A5bVlVZWFtZVVxNUNtVWw1Qlp3K05mQlBqSGNJKzk3d1Jw?=
- =?ks_c_5601-1987?B?eHZwVnM5bUg5cVVZTFBCYm1Hd1cvWHFwRnZHcUY3MlhwNUwycW1i?=
- =?ks_c_5601-1987?B?NXcyR2l5MkxYUHpVanpJRE9ibWhJZS9xNnZOYmxlak1YV3NONkcx?=
- =?ks_c_5601-1987?B?d0lMYWtEL1QrRld5REFnTnppcDFWSS9UdGpseU5WZWhBNWtUcmhi?=
- =?ks_c_5601-1987?B?TVRpaFlCdXNNNlFRTkphZW9SSTRyblNDRzBLb1NMekJGOVhuNWNk?=
- =?ks_c_5601-1987?B?dXdvSi9pTms4Q2FFZ3gyU0RtV2ZNMi9qQVpjRDJVbmljWnl0bDlW?=
- =?ks_c_5601-1987?B?VlRMRk1zWldta0F0SjZiYmZsYTJ0U3ZRMGRvWDRYOXJHRHRjNTZV?=
- =?ks_c_5601-1987?B?UmIzM1NORUF3RVB2UUNiK3dWclh4REZqZUg3YU5jckZOTTdHMUkx?=
- =?ks_c_5601-1987?B?S1V5V1B3WVNjNU41QzUxb1JLalVESW12cDBnMUdteGowSllPWEty?=
- =?ks_c_5601-1987?B?YVVjdkMxR015L0pUbUZCSytRRWRkdFg4NzZTS3NuWW1ka3RpVnpp?=
- =?ks_c_5601-1987?B?UDM4R0lUS1RJbUIwUzJ0NXlFbXE2Um4weVBKNURzcS9RMktVNVVO?=
- =?ks_c_5601-1987?B?SXp1SXBlVVhFRUxqU0JCbXNac0JCZWFITnhBa0JISlZWVi9DWHp1?=
- =?ks_c_5601-1987?B?c1pFeUZjRWIyaU50cDlLRHB6MFZNWlNRbmFKRkUyazBDWjNUU2VP?=
- =?ks_c_5601-1987?B?ZlFWam53ekQyRjQrRDJKc1lpZUU1SFQvRHNYWkE9PQ==?=
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-41329a665d8so4848895e9.2
+ for <u-boot@lists.denx.de>; Mon, 11 Mar 2024 02:03:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1710147824; x=1710752624; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :references:cc:to:content-language:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=iLD3U1Mg6Q5EurtQ0xeMpGRIWV45FrY13A3s+WrKuzE=;
+ b=QAnBKBZZGbQoGx5DYRz0mXe/YYnT4SmUM8rT8p5M72rqioBrAOd6KHdp8PDpzvFj1R
+ eFqMbXSkfl1r5T2grAkmU6Su0mui7wog51WYGUU9jtGmHpNsbNCv/Wnqmi9u3hjx6XAR
+ hy0ZNEUTYzri7jiKX9XduR/KpHHYKmh4oz8BgW1gLTdWOPO5AzB3rqVjcynsp8EHZtie
+ u9TQh26xIW6xxcrHXc8TrDxPOkcas8eMw+zWF+i2MAR1Z7cFgFdcnQoiw/OqiAnPsq0E
+ ZfxZWBARDr2crlFQfAwXiK9GA40oY/PjqEM+5w5R0tXbStQ9yXQdb7cVeWOPZ7ufUPnY
+ Xxcg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710147824; x=1710752624;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :references:cc:to:content-language:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=iLD3U1Mg6Q5EurtQ0xeMpGRIWV45FrY13A3s+WrKuzE=;
+ b=jP8HZhZqE+ggwKxWa5/jksvUDSoqV+7Hpyk8501JoY7ihgpQkw+T63SAF/IKC/Ma63
+ p1P+FlmQudseFOJD1Ei0lNP4Im3aa3HmXuH9KTcH0R20/NI5db7z/gWRCImPwe2NZP/h
+ COtVrag5Ny0+4lvZemhH0WWdEr6nC2ntAr+yIFSJrxEDDRUilNjb7hcFj0584MS7ACdn
+ dw8Wq87+1n2aX1kzlp2GK33gK6u6Cv/OZGRgd/aFlDjiWgRh0xMGqTV578NWn5dWYmMN
+ obpbcdhDEZKjqLTOjmIcJnX+wy8dQ2xrmpTSH8eOh856PTmY1R+Bsv/ZjiuogIg0/p2b
+ 8GGA==
+X-Gm-Message-State: AOJu0Yw6Wy9g4Uy4lx4+t9t60qbDk2MItWDamo+WaRWuaQOJLiBcdiLI
+ uphWsVTxVvDM0LBW/2sByc21DXxWikUxSwu9TRDcJcGdVJupJUMCk79FLLggZfk=
+X-Google-Smtp-Source: AGHT+IFJb1UlflnRJ1vxhZx5SlBp8RLThAKmOnxRp9zlqajiP3YFRHqq90hj7AqLg3nLXeETPQmCLw==
+X-Received: by 2002:a5d:67cf:0:b0:33e:7380:df37 with SMTP id
+ n15-20020a5d67cf000000b0033e7380df37mr4241387wrw.58.1710147824290; 
+ Mon, 11 Mar 2024 02:03:44 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:982:cbb0:48be:feb9:192b:f402?
+ ([2a01:e0a:982:cbb0:48be:feb9:192b:f402])
+ by smtp.gmail.com with ESMTPSA id
+ t17-20020adfa2d1000000b0033cf80ad6f5sm5907774wra.60.2024.03.11.02.03.42
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 11 Mar 2024 02:03:43 -0700 (PDT)
+Message-ID: <b22c78b3-09a1-4c7b-98be-87fac3bcd3af@linaro.org>
+Date: Mon, 11 Mar 2024 10:03:40 +0100
 MIME-Version: 1.0
-X-OriginatorOrg: sct-15-20-4755-11-msonline-outlook-d8e84.templateTenant
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SEYPR01MB5364.apcprd01.prod.exchangelabs.com
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1ec19e7d-51cb-4da9-c7bd-08dc418dbcf7
-X-MS-Exchange-CrossTenant-originalarrivaltime: 11 Mar 2024 05:40:19.5737 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-rms-persistedconsumerorg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEYPR01MB5696
-X-Mailman-Approved-At: Mon, 11 Mar 2024 12:12:24 +0100
-Content-Type: text/plain; charset="ks_c_5601-1987"
-Content-Transfer-Encoding: base64
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH RFC 07/26] amlogic: drop dt-binding headers
+Content-Language: en-US, fr
+To: u-boot-amlogic@groups.io, caleb.connolly@linaro.org,
+ Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, Sam Protsenko
+ <semen.protsenko@linaro.org>, Matthias Brugger <mbrugger@suse.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Thierry Reding <treding@nvidia.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Ryder Lee <ryder.lee@mediatek.com>, Chunfeng Yun
+ <chunfeng.yun@mediatek.com>, Eugen Hristev <eugen.hristev@collabora.com>,
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Ryan Chen <ryan_chen@aspeedtech.com>,
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
+ Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>,
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
+ Dai Okamura <okamura.dai@socionext.com>,
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>
+Cc: u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com,
+ uboot-snps-arc@synopsys.com
+References: <20240304-b4-upstream-dt-headers-v1-0-b7ff41925f92@linaro.org>
+ <20240304-b4-upstream-dt-headers-v1-7-b7ff41925f92@linaro.org>
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro Developer Services
+In-Reply-To: <20240304-b4-upstream-dt-headers-v1-7-b7ff41925f92@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Mon, 11 Mar 2024 12:12:53 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -130,27 +142,53 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-RGVhciBEQVMNCg0KDQpUaGlzIGlzIGxpb24uIE5pY2UgdG8gbWVldCB5b3UuDQoNCg0KSSdtIHNl
-bmRpbmcgeW91IGFuIGUtbWFpbCBiZWNhdXNlIEkgaGF2ZSBhIHF1ZXN0aW9uIGFib3V0IHRoZSBV
-LUJvb3QgbGljZW5zZS4NCkkgd291bGQgbGlrZSB0byBrbm93IGFib3V0IHRoZSBvYmxpZ2F0aW9u
-IHRvIGRpc2Nsb3NlIHRoZSBVLUJvb3QgY29kZSBjdXJyZW50bHkgcHJvdmlkZWQgYnkgWGlsaW54
-KHp5bnFNUCkuDQoNCg0KMS4gV2hlbiB3ZSB1c2UgYSBjb21tZXJjaWFsIE9TIGNvZGUgY2FsbGVk
-IFJURU1TLCB3ZSB1c2UgVS1Cb290IGFzIHRoZSBib290bG9hZGVyLg0KQXQgdGhpcyB0aW1lLCBl
-dmVuIGlmIFJURU1TIE9TIGlzIGNvbW1lcmNpYWwsIGlmIHdlIG1lcmdlIGFuIGltYWdlIHN1Y2gg
-YXMgYW4gb3BlbiBzb3VyY2UgY2FsbGVkIFUtQm9vdCB0byBtYWtlIGEgZmluYWwgaW1hZ2UgYW5k
-IHVzZSBpdCwgc2hvdWxkIEkgcmVsZWFzZSBhbGwgdGhlIGNvZGVzPyBJIHdhbnQgdG8ga25vdyB0
-aGUgc2NvcGUgb2YgZGlzY2xvc3VyZS4NCg0KRG8gd2UgZXZlbiBoYXZlIHRvIGRpc2Nsb3NlIGNv
-bW1lcmNpYWwgUlRFTVMgT1MgKyBBcHBsaWNhdGlvbj8NCg0KDQoyLiBPciBkbyB5b3Ugc2VlIG9u
-bHkgVS1Cb290IGFzIGEgc2VwYXJhdGUgaW1hZ2UsIGFuZCBzaW5jZSB0aGUgT1MgaXMgY29tbWVy
-Y2lhbCwgdGhlcmUgaXMgbm8gbmVlZCB0byBpbnRlcnByZXQgaXQgc2VwYXJhdGVseSBhbmQgZGlz
-Y2xvc2UgaXQ/DQoNCkF0IHRoaXMgdGltZSwgc2hvdWxkIHRoZSBVLUJvb3QgYmUgZGlzY2xvc2Vk
-IGFjY29yZGluZyB0byB0aGUgbGljZW5zZSBvciBub3Q/IEkgd29uZGVyLg0KDQoNCmNmKSBXZSB3
-aWxsIGp1c3QgY2hhbmdlIHNtYWxsIHBhcnQgZm9yIG9ubHkgZGVmaW5pdGlvbiwgYnV0IEknbSBh
-ZnJhaWQgdGhhdCB3ZSBoYXZlIHRvIGRpc2Nsb3N1cmUgb3VyIGV2ZXJ5IGNvZGUgb2YgUlRFTVMg
-YW5kIEFwcGxpY2F0aW9uLg0KDQpUaGF0J3Mgd2h5IEknbSBxdWVzdGluZyBpdCBub3cuDQoNCkkg
-a25vdyB5b3UncmUgYnVzeSwgYnV0IHBsZWFzZSBhbnN3ZXIgbWUuDQoNCg0KVGhhbmsgeW91Lg0K
+On 11/03/2024 09:51, Caleb Connolly wrote:
+> Dropped in favour of dts/upstream
+> 
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> ---
+>   .../clock/amlogic,a1-peripherals-clkc.h            | 168 ---------------------
+>   include/dt-bindings/clock/amlogic,a1-pll-clkc.h    |  25 ---
+>   include/dt-bindings/clock/axg-aoclkc.h             |  31 ----
+>   include/dt-bindings/clock/axg-audio-clkc.h         |  94 ------------
+>   include/dt-bindings/clock/axg-clkc.h               | 100 ------------
+>   include/dt-bindings/clock/g12a-aoclkc.h            |  36 -----
+>   include/dt-bindings/clock/g12a-clkc.h              | 153 -------------------
+>   include/dt-bindings/clock/gxbb-aoclkc.h            |  74 ---------
+>   include/dt-bindings/clock/gxbb-clkc.h              | 151 ------------------
+>   include/dt-bindings/gpio/meson-a1-gpio.h           |  73 ---------
+>   include/dt-bindings/gpio/meson-axg-gpio.h          | 116 --------------
+>   include/dt-bindings/gpio/meson-g12a-gpio.h         | 114 --------------
+>   include/dt-bindings/gpio/meson-gxbb-gpio.h         | 148 ------------------
+>   include/dt-bindings/gpio/meson-gxl-gpio.h          | 125 ---------------
+>   include/dt-bindings/power/meson-a1-power.h         |  32 ----
+>   include/dt-bindings/power/meson-axg-power.h        |  14 --
+>   include/dt-bindings/power/meson-g12a-power.h       |  13 --
+>   include/dt-bindings/power/meson-gxbb-power.h       |  13 --
+>   include/dt-bindings/power/meson-sm1-power.h        |  18 ---
+>   include/dt-bindings/reset/amlogic,meson-a1-reset.h |  76 ----------
+>   .../reset/amlogic,meson-axg-audio-arb.h            |  19 ---
+>   .../dt-bindings/reset/amlogic,meson-axg-reset.h    | 123 ---------------
+>   .../reset/amlogic,meson-g12a-audio-reset.h         |  53 -------
+>   .../dt-bindings/reset/amlogic,meson-g12a-reset.h   | 137 -----------------
+>   .../dt-bindings/reset/amlogic,meson-gxbb-reset.h   | 161 --------------------
+>   include/dt-bindings/reset/axg-aoclkc.h             |  20 ---
+>   include/dt-bindings/reset/g12a-aoclkc.h            |  18 ---
+>   include/dt-bindings/reset/gxbb-aoclkc.h            |  66 --------
+>   include/dt-bindings/sound/meson-aiu.h              |  18 ---
+>   include/dt-bindings/sound/meson-g12a-toacodec.h    |  10 --
+>   include/dt-bindings/sound/meson-g12a-tohdmitx.h    |  13 --
+>   31 files changed, 2212 deletions(-)
+> 
+
+<snip>
+
+
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+
