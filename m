@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16B29C54E58
-	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 12:27:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48D23C54E60
+	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 12:30:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7407487F0E;
-	Tue, 12 Mar 2024 13:27:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 9FBA387F46;
+	Tue, 12 Mar 2024 13:30:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="JR7U7WoK";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="W3oX3gcj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7FEED87F17; Tue, 12 Mar 2024 13:27:24 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id D252B87F3F; Tue, 12 Mar 2024 13:30:19 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5D9A487F04
- for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 13:27:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9DE7B87F47
+ for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 13:30:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=380108150e=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 42CAD5QI019102; Tue, 12 Mar 2024 13:27:12 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=wIFJP/GE5kAvtV052Ngg3Os1EqJlOAIqzgQFErJlJrI=; b=JR
- 7U7WoKlgNAVSWLVJeqN9qJxZ0nKXhy3Up97l0E3EqrmMdiuCjO5I5WWxGf4gSjxJ
- jAoXljz6p7CIT/P7OakiTv5gaezrVAlWZnzmJYrBQlyT+R6ybqTZexit0wCechGt
- UHUnfFSlI0OAUgDUww3Vkg28Kt5mebN7g9DeTofFJRk8HgWe9onGdzPNmVaB3JHw
- 6dAG0PnoNr6vVZ4NC+ygG4uiXQDDyDXXbiO0S5R6RL5qDEllDwb6OBqRxTJDlAHM
- XJikuxa1sPNQUMCAgtyzwZm98NJvE4F0LgZoqkUeD40psG6/aPtOY9drjkXqZ2sJ
- RLWcwQVg0odnEnHBsdAw==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3wrds8n6c6-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 12 Mar 2024 13:27:11 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 484DC40044;
- Tue, 12 Mar 2024 13:27:08 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 99AD82656E0;
- Tue, 12 Mar 2024 13:26:42 +0100 (CET)
-Received: from [10.201.20.71] (10.201.20.71) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Tue, 12 Mar
- 2024 13:26:42 +0100
-Message-ID: <68ca30b2-9e93-46f0-81c1-9ada0addf0c6@foss.st.com>
-Date: Tue, 12 Mar 2024 13:26:41 +0100
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1710246605; x=1710851405; i=xypron.glpk@gmx.de;
+ bh=4UfY7XcEp0X/np7bcK34b2lJH2KKjKwZwCrpW2zXvoo=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=W3oX3gcj/WnXGiWCrA0o4v+zIuuO9QK/uxlrIDSl1sLrd/3pkPTdzPsMYLPyrrnw
+ EUfICyIsjkXwDr5GJzcrjH3hCpszCg+phawrW/4u3LBDjEj7IJm/8FkdoiSXxsnF2
+ wJi/SQ4kESObP0EH9EpAcewtsXIf0QcZQPhbFI7f13oGmqSH3VumsVROFp2wjovGI
+ iNnDbrb8ozA/EWJKQ3vBV8euFj8/RasjpEt5at0igiDLlz+T8apemlP4thHAPXQnl
+ qycE/HxUdGx9v6dBPjLnrJnwyX7AziXBJx1UtgXfh2gJBclxjUQ/xzd6LC4W7im7Q
+ OQloqOLo93n95am2Vw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.67] ([62.143.245.32]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MVvPD-1rKy0e0tdN-00RmOo; Tue, 12
+ Mar 2024 13:30:05 +0100
+Message-ID: <503983a7-89a2-4673-a2f5-1d6396ea63b4@gmx.de>
+Date: Tue, 12 Mar 2024 13:29:59 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 03/11] net: dwc_eth_qos: Fold board_interface_eth_init
- into STM32 glue code
+Subject: Re: [PATCH] arm64: zynqmp: Do not describe u-boot.itb if SPL is
+ disabled
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de, git@xilinx.com,
+ Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Masahisa Kojima <masahisa.kojima@linaro.org>,
+ Shiji Yang <yangshiji66@outlook.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+References: <561f9d0ee96ebb6cd674042f269f280ab68fbbac.1708705118.git.michal.simek@amd.com>
+ <Zec-oE2mzj7Pngo3@hera>
 Content-Language: en-US
-To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
-CC: Christophe Roullier <christophe.roullier@st.com>, Joe Hershberger
- <joe.hershberger@ni.com>, Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Ramon Fried <rfried.dev@gmail.com>, <u-boot@dh-electronics.com>,
- <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20240309021831.264018-1-marex@denx.de>
- <20240309021831.264018-4-marex@denx.de>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20240309021831.264018-4-marex@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.201.20.71]
-X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-03-12_08,2024-03-12_01,2023-05-22_02
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <Zec-oE2mzj7Pngo3@hera>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:s4KwLzVZQ7Ww+QCVLElOxjCm6HPl5u3duRWTocbACiT9zWLC8+d
+ 4iCGxiReLHtQdywAfQh+XXbWSAMCBWRuwEu92z059w+E4aenFFBDG/N8MYo7/mBnCoZGN5G
+ Ap3yNpXsjxiKzqjChBEowGb5hRfQmdQM/yoTW3NxuWVNAk9jVnJx1cXX8HIYSmlS9v75QrX
+ htrI5u2NnGA6L1D9V0ydw==
+UI-OutboundReport: notjunk:1;M01:P0:0RVAMOrnjCk=;mifsMa5JOALcI7YafruZKF8i7Us
+ cIZaRB+hGW0ja0qz0qDd68JSq7XaelrcskTaSVGGQGaTbkUfaXuLNxzVTG0Sn8mUICrfkR/ZY
+ liJLHleBiaxWlcTiiprvqG3QNwK4uqZV+8D8VY220SMv6H5IX1hZHmGZcUH8L/LKE/6maguux
+ kjV/o2/qjvjEhNZbFRPhrvNUqJQhWmYiWdKaDH7wWtkD0wHgOTZRV9sREcdjX+5WlwrSmC0TY
+ qhku89nAm50LXLzs0/iiZttc2R3zJQDvp02lIlfRihHR2qEcUqCKntcya8/HQHM+xg8QFAAKl
+ mJTfbvyaNfWZ4AgFEX3VD4mlcogtoYr2eG2mumu3Mpex/45qr/xAt78bULQGnEi7uQShjvOLB
+ VuY1GrvL9BYOItN2HKLHNt1BttKrCjg65XDBdlTMSO0iaZGhRHmzEZ7wcjEIaZreBBLQbQ28g
+ P8VWJ0hbh6f19U6sxLgQa6Kkv78HGOPckR/cKgHEQujdgyDpoBbWekLwx0PZ1nX38PNLF17aX
+ P9J2rPa9JKvpWhV+7QeYRLt8rOXk3Fzt8MuA+QwDh2rmOhej5+eiCL3ovbSZoKGCRQ4A+Is2+
+ C/Q3To8ZCQo+lvmnEMMBoLAhTo3BAOJU6Ja19UYPyUxLEFBnLB70ZK7e9xjm3cj5ugT93E0jk
+ Z0q2HNJJOVbOOTDxaznlLPSjLV6ZaLUQaJEKoB9PCGevC92UEAqA5DMp/SHe28E5Q1EWTe4x0
+ fD0I3uiuZQghD3/hlCE7IoQwT0oHM7uMCmFB4DDx+FP5gc/e9X1xbT9RkAl6/iRq6ue0ylUj7
+ eK/3ue61r9jhmo750JYAeIjkBghvZZXaUeIU3KVAyqU9E=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,374 +95,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 05.03.24 16:47, Ilias Apalodimas wrote:
+> On Fri, Feb 23, 2024 at 05:18:42PM +0100, Michal Simek wrote:
+>> There is no reason to describe u-boot.itb on system without SPL. Pretty
+>> much this is cover all systems which are using only boot.bin which cont=
+ains
+>> all images inside.
+>>
+>> Signed-off-by: Michal Simek <michal.simek@amd.com>
+>> ---
+>>
+>>   board/xilinx/common/board.c | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.c
+>> index 9641ed307b75..4f38b7d27684 100644
+>> --- a/board/xilinx/common/board.c
+>> +++ b/board/xilinx/common/board.c
+>> @@ -43,7 +43,7 @@ struct efi_fw_image fw_images[] =3D {
+>>   		.image_index =3D 1,
+>>   	},
+>>   #endif
+>> -#if defined(XILINX_UBOOT_IMAGE_GUID)
+>> +#if defined(XILINX_UBOOT_IMAGE_GUID) && defined(CONFIG_SPL_FS_LOAD_PAY=
+LOAD_NAME)
+>
+> What happens if this is defined with CONFIG_SPL_FS_LOAD_PAYLOAD_NAME=3D"=
+" ?
 
+CONFIG_SPL_FS_LOAD_PAYLOAD_NAME depends on SPL_FS_EXT4 || SPL_FS_FAT ||
+SPL_FS_SQUASHFS || SPL_SEMIHOSTING. So it is only defined if SPL could
+load a file.
 
-On 3/9/24 03:11, Marek Vasut wrote:
-> Move board_interface_eth_init() into eqos_probe_syscfg_stm32() in STM32
-> driver glue code. The eqos_probe_syscfg_stm32() parses STM32 specific DT
-> properties of this MAC and configures SYSCFG registers accordingly, there
-> is nothing board specific happening in this function, move it into generic
-> driver code instead. Drop the now unused duplicates from board files.
-> 
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> ---
-> Cc: Christophe Roullier <christophe.roullier@st.com>
-> Cc: Joe Hershberger <joe.hershberger@ni.com>
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Ramon Fried <rfried.dev@gmail.com>
-> Cc: u-boot@dh-electronics.com
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> ---
->  board/dhelectronics/dh_stm32mp1/board.c | 82 -----------------------
->  board/st/stm32mp1/stm32mp1.c            | 82 -----------------------
->  drivers/net/dwc_eth_qos_stm32.c         | 86 ++++++++++++++++++++++++-
->  3 files changed, 84 insertions(+), 166 deletions(-)
-> 
-> diff --git a/board/dhelectronics/dh_stm32mp1/board.c b/board/dhelectronics/dh_stm32mp1/board.c
-> index d1f662d9701..f179c857116 100644
-> --- a/board/dhelectronics/dh_stm32mp1/board.c
-> +++ b/board/dhelectronics/dh_stm32mp1/board.c
-> @@ -48,12 +48,10 @@
->  
->  /* SYSCFG registers */
->  #define SYSCFG_BOOTR		0x00
-> -#define SYSCFG_PMCSETR		0x04
->  #define SYSCFG_IOCTRLSETR	0x18
->  #define SYSCFG_ICNR		0x1C
->  #define SYSCFG_CMPCR		0x20
->  #define SYSCFG_CMPENSETR	0x24
-> -#define SYSCFG_PMCCLRR		0x44
->  
->  #define SYSCFG_BOOTR_BOOT_MASK		GENMASK(2, 0)
->  #define SYSCFG_BOOTR_BOOTPD_SHIFT	4
-> @@ -69,16 +67,6 @@
->  
->  #define SYSCFG_CMPENSETR_MPU_EN		BIT(0)
->  
-> -#define SYSCFG_PMCSETR_ETH_CLK_SEL	BIT(16)
-> -#define SYSCFG_PMCSETR_ETH_REF_CLK_SEL	BIT(17)
-> -
-> -#define SYSCFG_PMCSETR_ETH_SELMII	BIT(20)
-> -
-> -#define SYSCFG_PMCSETR_ETH_SEL_MASK	GENMASK(23, 21)
-> -#define SYSCFG_PMCSETR_ETH_SEL_GMII_MII	0
-> -#define SYSCFG_PMCSETR_ETH_SEL_RGMII	BIT(21)
-> -#define SYSCFG_PMCSETR_ETH_SEL_RMII	BIT(23)
-> -
->  #define KS_CCR		0x08
->  #define KS_CCR_EEPROM	BIT(9)
->  #define KS_BE0		BIT(12)
-> @@ -679,76 +667,6 @@ void board_quiesce_devices(void)
->  #endif
->  }
->  
-> -/* eth init function : weak called in eqos driver */
-> -int board_interface_eth_init(struct udevice *dev,
-> -			     phy_interface_t interface_type)
-> -{
-> -	u8 *syscfg;
-> -	u32 value;
-> -	bool eth_clk_sel_reg = false;
-> -	bool eth_ref_clk_sel_reg = false;
-> -
-> -	/* Gigabit Ethernet 125MHz clock selection. */
-> -	eth_clk_sel_reg = dev_read_bool(dev, "st,eth-clk-sel");
-> -
-> -	/* Ethernet 50Mhz RMII clock selection */
-> -	eth_ref_clk_sel_reg =
-> -		dev_read_bool(dev, "st,eth-ref-clk-sel");
-> -
-> -	syscfg = (u8 *)syscon_get_first_range(STM32MP_SYSCON_SYSCFG);
-> -
-> -	if (!syscfg)
-> -		return -ENODEV;
-> -
-> -	switch (interface_type) {
-> -	case PHY_INTERFACE_MODE_MII:
-> -		value = SYSCFG_PMCSETR_ETH_SEL_GMII_MII |
-> -			SYSCFG_PMCSETR_ETH_REF_CLK_SEL;
-> -		debug("%s: PHY_INTERFACE_MODE_MII\n", __func__);
-> -		break;
-> -	case PHY_INTERFACE_MODE_GMII:
-> -		if (eth_clk_sel_reg)
-> -			value = SYSCFG_PMCSETR_ETH_SEL_GMII_MII |
-> -				SYSCFG_PMCSETR_ETH_CLK_SEL;
-> -		else
-> -			value = SYSCFG_PMCSETR_ETH_SEL_GMII_MII;
-> -		debug("%s: PHY_INTERFACE_MODE_GMII\n", __func__);
-> -		break;
-> -	case PHY_INTERFACE_MODE_RMII:
-> -		if (eth_ref_clk_sel_reg)
-> -			value = SYSCFG_PMCSETR_ETH_SEL_RMII |
-> -				SYSCFG_PMCSETR_ETH_REF_CLK_SEL;
-> -		else
-> -			value = SYSCFG_PMCSETR_ETH_SEL_RMII;
-> -		debug("%s: PHY_INTERFACE_MODE_RMII\n", __func__);
-> -		break;
-> -	case PHY_INTERFACE_MODE_RGMII:
-> -	case PHY_INTERFACE_MODE_RGMII_ID:
-> -	case PHY_INTERFACE_MODE_RGMII_RXID:
-> -	case PHY_INTERFACE_MODE_RGMII_TXID:
-> -		if (eth_clk_sel_reg)
-> -			value = SYSCFG_PMCSETR_ETH_SEL_RGMII |
-> -				SYSCFG_PMCSETR_ETH_CLK_SEL;
-> -		else
-> -			value = SYSCFG_PMCSETR_ETH_SEL_RGMII;
-> -		debug("%s: PHY_INTERFACE_MODE_RGMII\n", __func__);
-> -		break;
-> -	default:
-> -		debug("%s: Do not manage %d interface\n",
-> -		      __func__, interface_type);
-> -		/* Do not manage others interfaces */
-> -		return -EINVAL;
-> -	}
-> -
-> -	/* clear and set ETH configuration bits */
-> -	writel(SYSCFG_PMCSETR_ETH_SEL_MASK | SYSCFG_PMCSETR_ETH_SELMII |
-> -	       SYSCFG_PMCSETR_ETH_REF_CLK_SEL | SYSCFG_PMCSETR_ETH_CLK_SEL,
-> -	       syscfg + SYSCFG_PMCCLRR);
-> -	writel(value, syscfg + SYSCFG_PMCSETR);
-> -
-> -	return 0;
-> -}
-> -
->  #if defined(CONFIG_OF_BOARD_SETUP)
->  int ft_board_setup(void *blob, struct bd_info *bd)
->  {
-> diff --git a/board/st/stm32mp1/stm32mp1.c b/board/st/stm32mp1/stm32mp1.c
-> index a17c314daeb..f284b0dfd28 100644
-> --- a/board/st/stm32mp1/stm32mp1.c
-> +++ b/board/st/stm32mp1/stm32mp1.c
-> @@ -52,12 +52,10 @@
->  
->  /* SYSCFG registers */
->  #define SYSCFG_BOOTR		0x00
-> -#define SYSCFG_PMCSETR		0x04
->  #define SYSCFG_IOCTRLSETR	0x18
->  #define SYSCFG_ICNR		0x1C
->  #define SYSCFG_CMPCR		0x20
->  #define SYSCFG_CMPENSETR	0x24
-> -#define SYSCFG_PMCCLRR		0x44
->  
->  #define SYSCFG_BOOTR_BOOT_MASK		GENMASK(2, 0)
->  #define SYSCFG_BOOTR_BOOTPD_SHIFT	4
-> @@ -73,16 +71,6 @@
->  
->  #define SYSCFG_CMPENSETR_MPU_EN		BIT(0)
->  
-> -#define SYSCFG_PMCSETR_ETH_CLK_SEL	BIT(16)
-> -#define SYSCFG_PMCSETR_ETH_REF_CLK_SEL	BIT(17)
-> -
-> -#define SYSCFG_PMCSETR_ETH_SELMII	BIT(20)
-> -
-> -#define SYSCFG_PMCSETR_ETH_SEL_MASK	GENMASK(23, 21)
-> -#define SYSCFG_PMCSETR_ETH_SEL_GMII_MII	0
-> -#define SYSCFG_PMCSETR_ETH_SEL_RGMII	BIT(21)
-> -#define SYSCFG_PMCSETR_ETH_SEL_RMII	BIT(23)
-> -
->  #define USB_LOW_THRESHOLD_UV		200000
->  #define USB_WARNING_LOW_THRESHOLD_UV	660000
->  #define USB_START_LOW_THRESHOLD_UV	1230000
-> @@ -742,76 +730,6 @@ void board_quiesce_devices(void)
->  	setup_led(LEDST_OFF);
->  }
->  
-> -/* eth init function : weak called in eqos driver */
-> -int board_interface_eth_init(struct udevice *dev,
-> -			     phy_interface_t interface_type)
-> -{
-> -	u8 *syscfg;
-> -	u32 value;
-> -	bool eth_clk_sel_reg = false;
-> -	bool eth_ref_clk_sel_reg = false;
-> -
-> -	/* Gigabit Ethernet 125MHz clock selection. */
-> -	eth_clk_sel_reg = dev_read_bool(dev, "st,eth-clk-sel");
-> -
-> -	/* Ethernet 50Mhz RMII clock selection */
-> -	eth_ref_clk_sel_reg =
-> -		dev_read_bool(dev, "st,eth-ref-clk-sel");
-> -
-> -	syscfg = (u8 *)syscon_get_first_range(STM32MP_SYSCON_SYSCFG);
-> -
-> -	if (!syscfg)
-> -		return -ENODEV;
-> -
-> -	switch (interface_type) {
-> -	case PHY_INTERFACE_MODE_MII:
-> -		value = SYSCFG_PMCSETR_ETH_SEL_GMII_MII |
-> -			SYSCFG_PMCSETR_ETH_REF_CLK_SEL;
-> -		log_debug("PHY_INTERFACE_MODE_MII\n");
-> -		break;
-> -	case PHY_INTERFACE_MODE_GMII:
-> -		if (eth_clk_sel_reg)
-> -			value = SYSCFG_PMCSETR_ETH_SEL_GMII_MII |
-> -				SYSCFG_PMCSETR_ETH_CLK_SEL;
-> -		else
-> -			value = SYSCFG_PMCSETR_ETH_SEL_GMII_MII;
-> -		log_debug("PHY_INTERFACE_MODE_GMII\n");
-> -		break;
-> -	case PHY_INTERFACE_MODE_RMII:
-> -		if (eth_ref_clk_sel_reg)
-> -			value = SYSCFG_PMCSETR_ETH_SEL_RMII |
-> -				SYSCFG_PMCSETR_ETH_REF_CLK_SEL;
-> -		else
-> -			value = SYSCFG_PMCSETR_ETH_SEL_RMII;
-> -		log_debug("PHY_INTERFACE_MODE_RMII\n");
-> -		break;
-> -	case PHY_INTERFACE_MODE_RGMII:
-> -	case PHY_INTERFACE_MODE_RGMII_ID:
-> -	case PHY_INTERFACE_MODE_RGMII_RXID:
-> -	case PHY_INTERFACE_MODE_RGMII_TXID:
-> -		if (eth_clk_sel_reg)
-> -			value = SYSCFG_PMCSETR_ETH_SEL_RGMII |
-> -				SYSCFG_PMCSETR_ETH_CLK_SEL;
-> -		else
-> -			value = SYSCFG_PMCSETR_ETH_SEL_RGMII;
-> -		log_debug("PHY_INTERFACE_MODE_RGMII\n");
-> -		break;
-> -	default:
-> -		log_debug("Do not manage %d interface\n",
-> -			  interface_type);
-> -		/* Do not manage others interfaces */
-> -		return -EINVAL;
-> -	}
-> -
-> -	/* clear and set ETH configuration bits */
-> -	writel(SYSCFG_PMCSETR_ETH_SEL_MASK | SYSCFG_PMCSETR_ETH_SELMII |
-> -	       SYSCFG_PMCSETR_ETH_REF_CLK_SEL | SYSCFG_PMCSETR_ETH_CLK_SEL,
-> -	       syscfg + SYSCFG_PMCCLRR);
-> -	writel(value, syscfg + SYSCFG_PMCSETR);
-> -
-> -	return 0;
-> -}
-> -
->  enum env_location env_get_location(enum env_operation op, int prio)
->  {
->  	u32 bootmode = get_bootmode();
-> diff --git a/drivers/net/dwc_eth_qos_stm32.c b/drivers/net/dwc_eth_qos_stm32.c
-> index fd29a604987..7520a136ed0 100644
-> --- a/drivers/net/dwc_eth_qos_stm32.c
-> +++ b/drivers/net/dwc_eth_qos_stm32.c
-> @@ -24,11 +24,26 @@
->  #include <netdev.h>
->  #include <phy.h>
->  #include <reset.h>
-> +#include <syscon.h>
->  #include <wait_bit.h>
->  #include <linux/delay.h>
->  
->  #include "dwc_eth_qos.h"
->  
-> +/* SYSCFG registers */
-> +#define SYSCFG_PMCSETR		0x04
-> +#define SYSCFG_PMCCLRR		0x44
-> +
-> +#define SYSCFG_PMCSETR_ETH_CLK_SEL	BIT(16)
-> +#define SYSCFG_PMCSETR_ETH_REF_CLK_SEL	BIT(17)
-> +
-> +#define SYSCFG_PMCSETR_ETH_SELMII	BIT(20)
-> +
-> +#define SYSCFG_PMCSETR_ETH_SEL_MASK	GENMASK(23, 21)
-> +#define SYSCFG_PMCSETR_ETH_SEL_GMII_MII	0
-> +#define SYSCFG_PMCSETR_ETH_SEL_RGMII	BIT(21)
-> +#define SYSCFG_PMCSETR_ETH_SEL_RMII	BIT(23)
-> +
->  static ulong eqos_get_tick_clk_rate_stm32(struct udevice *dev)
->  {
->  #ifdef CONFIG_CLK
-> @@ -108,11 +123,78 @@ static int eqos_stop_clks_stm32(struct udevice *dev)
->  	return 0;
->  }
->  
-> +static int eqos_probe_syscfg_stm32(struct udevice *dev,
-> +				   phy_interface_t interface_type)
-> +{
-> +	bool eth_ref_clk_sel_reg = false;
-> +	bool eth_clk_sel_reg = false;
-> +	u8 *syscfg;
-> +	u32 value;
-> +
-> +	/* Gigabit Ethernet 125MHz clock selection. */
-> +	eth_clk_sel_reg = dev_read_bool(dev, "st,eth-clk-sel");
-> +
-> +	/* Ethernet 50Mhz RMII clock selection */
-> +	eth_ref_clk_sel_reg = dev_read_bool(dev, "st,eth-ref-clk-sel");
-> +
-> +	syscfg = (u8 *)syscon_get_first_range(STM32MP_SYSCON_SYSCFG);
-> +	if (!syscfg)
-> +		return -ENODEV;
-> +
-> +	switch (interface_type) {
-> +	case PHY_INTERFACE_MODE_MII:
-> +		value = SYSCFG_PMCSETR_ETH_SEL_GMII_MII |
-> +			SYSCFG_PMCSETR_ETH_REF_CLK_SEL;
-> +		log_debug("PHY_INTERFACE_MODE_MII\n");
-> +		break;
-> +	case PHY_INTERFACE_MODE_GMII:
-> +		if (eth_clk_sel_reg)
-> +			value = SYSCFG_PMCSETR_ETH_SEL_GMII_MII |
-> +				SYSCFG_PMCSETR_ETH_CLK_SEL;
-> +		else
-> +			value = SYSCFG_PMCSETR_ETH_SEL_GMII_MII;
-> +		log_debug("PHY_INTERFACE_MODE_GMII\n");
-> +		break;
-> +	case PHY_INTERFACE_MODE_RMII:
-> +		if (eth_ref_clk_sel_reg)
-> +			value = SYSCFG_PMCSETR_ETH_SEL_RMII |
-> +				SYSCFG_PMCSETR_ETH_REF_CLK_SEL;
-> +		else
-> +			value = SYSCFG_PMCSETR_ETH_SEL_RMII;
-> +		log_debug("PHY_INTERFACE_MODE_RMII\n");
-> +		break;
-> +	case PHY_INTERFACE_MODE_RGMII:
-> +	case PHY_INTERFACE_MODE_RGMII_ID:
-> +	case PHY_INTERFACE_MODE_RGMII_RXID:
-> +	case PHY_INTERFACE_MODE_RGMII_TXID:
-> +		if (eth_clk_sel_reg)
-> +			value = SYSCFG_PMCSETR_ETH_SEL_RGMII |
-> +				SYSCFG_PMCSETR_ETH_CLK_SEL;
-> +		else
-> +			value = SYSCFG_PMCSETR_ETH_SEL_RGMII;
-> +		log_debug("PHY_INTERFACE_MODE_RGMII\n");
-> +		break;
-> +	default:
-> +		log_debug("Do not manage %d interface\n",
-> +			  interface_type);
-> +		/* Do not manage others interfaces */
-> +		return -EINVAL;
-> +	}
-> +
-> +	/* clear and set ETH configuration bits */
-> +	writel(SYSCFG_PMCSETR_ETH_SEL_MASK | SYSCFG_PMCSETR_ETH_SELMII |
-> +	       SYSCFG_PMCSETR_ETH_REF_CLK_SEL | SYSCFG_PMCSETR_ETH_CLK_SEL,
-> +	       syscfg + SYSCFG_PMCCLRR);
-> +	writel(value, syscfg + SYSCFG_PMCSETR);
-> +
-> +	return 0;
-> +}
-> +
->  static int eqos_probe_resources_stm32(struct udevice *dev)
->  {
->  	struct eqos_priv *eqos = dev_get_priv(dev);
-> -	int ret;
->  	phy_interface_t interface;
-> +	int ret;
->  
->  	debug("%s(dev=%p):\n", __func__, dev);
->  
-> @@ -123,7 +205,7 @@ static int eqos_probe_resources_stm32(struct udevice *dev)
->  		return -EINVAL;
->  	}
->  
-> -	ret = board_interface_eth_init(dev, interface);
-> +	ret = eqos_probe_syscfg_stm32(dev, interface);
->  	if (ret)
->  		return -EINVAL;
->  
+CONFIG_SPL_FS_LOAD_PAYLOAD_NAME defaults to a non-blank name. If a user
+provides an invalid name, SPL will not be able to load the file.
 
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+What is wrong here is to assume that *.itb has to be load as a file. We
+can configure U-Boot SPL to load the itb from a raw partition.
 
-Thanks
-Patrice
+The check might be too restrictive.
+
+Best regards
+
+Heinrich
+
+>
+> Cheers
+> /Ilias
+>>   	{
+>>   		.image_type_id =3D XILINX_UBOOT_IMAGE_GUID,
+>>   		.fw_name =3D u"XILINX-UBOOT",
+>> --
+>> 2.36.1
+>>
+
