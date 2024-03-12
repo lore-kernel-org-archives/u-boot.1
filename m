@@ -4,65 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68BBCC54E5D
-	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 15:07:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A3E0C54E58
+	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 15:09:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D815F87F43;
-	Tue, 12 Mar 2024 16:07:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0D24787F43;
+	Tue, 12 Mar 2024 16:09:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="pzJ0PHD8";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="0f3ga8qj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0117A87F7D; Tue, 12 Mar 2024 16:07:19 +0100 (CET)
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on20601.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2418::601])
+ id CE09D87F80; Tue, 12 Mar 2024 16:09:28 +0100 (CET)
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on20600.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2415::600])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 78DC0875B9
- for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 16:07:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B31D5875B9
+ for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 16:09:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=hlA4fdTEPEuoIib46aNy5GK7LQpQgT3RBjtXxgpm5cDptqA/9g2IKbC5a/R+srLNCcI8Wu2sdkHw77QWTklp+8KuytVLjKKsWknxGp/APd9bAcLtmRL2jg+4gClQyQfNfviwlyZzXgxNLqqwT9q9wHu0ewcJP/69Gt8bPAQ/wWJXJw7pIfieb4c/zMDz7q1Wd/fbv0T3wX2nJgDQ4TRSjJpcLQIfAPZucr0M6vRJgQMo8WU/w5bMBbJt096VuNkyGbFH9Vg9V9x80iJzYCSyGKACT2o0fJkG+QUYwWg4y23hVHPIJVNbuLx8yP/dpbS2avWqBYIeTgIaFOs2dI9Xbg==
+ b=Xhv9IxEWzZCI8plp84ayeUFJQWBJAH7NKNn2hqPgutM8A901Ytvxtb1Sj6BO2AK2SA1BPAPORfRJRBV7YUyPx/WBUQo0Fnqciy0EMJXDJCFegpar9b5fgcn6QL+2lPNUef8mwLEHU8FShbSlulJlOXv/eff7qmj08mq7Pd1qcDLBV4YnTiK2a3Iz9uRP4YGK0HbOexcb2r0LOeb5aaearLdzTp3ozVkZHetfRCOa/68bc5dHopN6lfpBmzgud12+6bztcWFMcIpf3M8ngOvENqb67k80i+lpelDNQaK9sJJ1r7tS11cq+8n/mi5gGnkqD95XwqSmz8zMmsT8acV/Zw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=yeVEjnuShMbQLPqYsVTxVQ0PE1jm0z69k7ExtBv1ixg=;
- b=PNoDQPlOZzJjQiDhcF/VzxWFhbrriNItfJXQKo5iiwlTFwXI5ONIcFmekImu2T8hrdNOZr8N5Xu/LADzuzbV7FzSl/jOW4fQ/KiFmQZxRwc7xr0n2242u6sUSMAukuRa49t3TZ/dNyq65YUXJO/Tbt6sh6L6LNoriEg2nH4XcUI3ca/UPod3YmsWtkNT8IPnTMFSPBs6NdqNUdnpIK3qGHXdzQYr1+BEkWr8bsNySakeEi/OSLguEAO3gYGO1KbPlChLHhx/pVBSsyHbc7S9S/qUJetEUWFJaruGhbqqJbm/wCY5uFYLJtAG/vLTB7MhYSsh3FwK7Qa1ioFUwzgmrg==
+ bh=j2yLrJJf094yhynmeUHBQ21D1jaz5WKL+VhlUsBkCgU=;
+ b=NEXFbTUnWAkQRCqWuukXSPlAhlrnagSxfjf2vAiec3jQMYxN9LJdU926NNeiekn+VaDgyP1jOKqISx2S3YUALU4etgDT0nzuC8dwZdNZ0a+VzmdCE6roMe1rlXeH56Vw89P49M4sWAc+upsNFKWPMi6rFOqhu39UXIk/+zYqvxHyaCFnz7/Bl8cdMfaesPLYIkwTgJ72MY8dS19f/DDzkJi+QT+PgXWKLIO9d0vCTGtt29nbwsjd0VN8XXM1rGasb9J8C1vo+pB6nip/no9ktN6iIjZrmyPvlPgcHB0S4HpqvWtoDfHjYupniZcps7gw5W/OTNBiR8B+pKh/MRffFA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=yeVEjnuShMbQLPqYsVTxVQ0PE1jm0z69k7ExtBv1ixg=;
- b=pzJ0PHD8AK0qt7Gme4uYfMzOm9VY5q5NjlpJ3h3mgmUu68CiTUr7trcYuh5h0Kp/aTMBJH7gP+ZWRvIU81hMzM0SV6RsojNo5xvlEizCBNQQdPwIOJvF6YvxxKz+l84SfY07pEfYUyajra4y1EnGtiQqsjifYrogEGpnlCuikQQ=
+ bh=j2yLrJJf094yhynmeUHBQ21D1jaz5WKL+VhlUsBkCgU=;
+ b=0f3ga8qjJDAe7XIQ+vgpHga1rsdyTSXp2IaakUIzMPVEyKsMsHr4iBj0K2p1wFL9/7z+/bRhAKIq+xkdt2Ai9i+mMPv1Ou0QO8GfL6HY4z3MkZfsq6Y4mXhU9tGAHfwX/MEu9gf7XwwZYTQEiE9NaMYkQPLOabDKwieikyCRdT4=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
- by DM6PR12MB4468.namprd12.prod.outlook.com (2603:10b6:5:2ac::24) with
+ by DM4PR12MB7526.namprd12.prod.outlook.com (2603:10b6:8:112::20) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7386.18; Tue, 12 Mar
- 2024 15:07:13 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7362.35; Tue, 12 Mar
+ 2024 15:09:23 +0000
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::6622:ec76:9367:3907]) by SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::6622:ec76:9367:3907%2]) with mapi id 15.20.7362.035; Tue, 12 Mar 2024
- 15:07:13 +0000
-Message-ID: <3b108860-454c-419b-83b8-f0d2c2349dd6@amd.com>
-Date: Tue, 12 Mar 2024 16:07:00 +0100
+ 15:09:23 +0000
+Message-ID: <cd038878-c3f1-436a-8381-aeb9a070bd8d@amd.com>
+Date: Tue, 12 Mar 2024 16:09:11 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4] mtd: nand: arasan: Print warning for unsupported ecc
- modes
+Subject: Re: [PATCH v2] mtd: nand: arasan: Fix the crash caused by use after
+ free
 Content-Language: en-US
 To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
 Cc: dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com,
- dan.carpenter@linaro.org, git@amd.com,
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>
-References: <20240306032703.17508-1-venkatesh.abbarapu@amd.com>
+ dan.carpenter@linaro.org, git@amd.com
+References: <20240306033404.18537-1-venkatesh.abbarapu@amd.com>
 From: Michal Simek <michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
@@ -108,71 +107,71 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
  l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
  3i3l5DA=
-In-Reply-To: <20240306032703.17508-1-venkatesh.abbarapu@amd.com>
+In-Reply-To: <20240306033404.18537-1-venkatesh.abbarapu@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR0902CA0034.eurprd09.prod.outlook.com
- (2603:10a6:802:1::23) To SJ2PR12MB8109.namprd12.prod.outlook.com
+X-ClientProxiedBy: VI1P195CA0060.EURP195.PROD.OUTLOOK.COM
+ (2603:10a6:802:5a::49) To SJ2PR12MB8109.namprd12.prod.outlook.com
  (2603:10b6:a03:4f5::8)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|DM6PR12MB4468:EE_
-X-MS-Office365-Filtering-Correlation-Id: 31cda4eb-f228-4d9d-f82e-08dc42a618f6
+X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|DM4PR12MB7526:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2cee957d-effd-4d64-b386-08dc42a66689
 X-LD-Processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: xWvO8/rDT4ijpxmioenGYAQt7v6F1499cbMjmgcqqCott9otjtDa6PsRlgPeXuTSG+SmBwKJDqiil5UGNFHMkkabECwLur9IpYG/1743nkyW3BydHR4DZSMcIOTkZw5IiaWfAS+tJ7dBxyTsL2FAbX2YXRbgjortLlmdrqRemcSDQXwTKYLMS+akQd5TIODeAxenu9bzG/Be20ivOhA0Cm9+0K8CWU5+dl5pMKX8Gr1QK3HbDCaoK95FPpKWKo3c6qPqUm/JSuw4hoFpdAEW/YCGivRoI73fB63oBfUWCSSDW1XuUlWXx2BjWu/tJ3vdZl4pCf+7wLyEmfDsMU0GQZ3XLqETxBAO2gCezJGe+ruKU80xzjMVSl8kIhu9deFna5myNCqOeCCJPBwFU/l/6hPOlTh48XkgBMVreThexMjNTvHLZ+BxRQXzcYYvnaE0ff6IuWfjpwElAXH2ah8wfGjVg2ObI238f7pbYUl6kNcxHeLBVCsJHxknaEUukVIwOCB8+UczBylh2k2VSdlqFGLxG/60kynT6QHtjp0spocCpluxV+kNWvE2H2ks2TS4qQgv6hfvXOeGnwD5FXUFTXT7OvQWbxBu7cfOl+0mrURJR2hS1rGuURSlmkXNpYDDcwBvbl3X8wo+KVcfr5P+TTdCWpCMhp66oNvKLHWzXgM=
+X-Microsoft-Antispam-Message-Info: rsti+216KKlaAZ8zhdnvKvVxpS5L5jhcw7mKntMolDLEdlET1KqXIEWKE/AeaUBnxQZnBJELmosb4/NWOLy2/tWxyDEaw2uRsXqKO1rNCVGH0+ku0Xy6WVCmL9ZUSnRz8HnbdCNFRfiGBeEPABiV8cpkJrc1wrwtZJyHYkrOfqL4/FdN9j5iOvb9fROYT25+SLc/+POJKa0ifEhFqv3jNpU1OajzsgEEYnWbr4nGdUJ14IyaXo2ZDlhC4os8PBcT0yvKLyIa7qzIw4tp/BKVJs3Pr9K6LSCbeSorWmrlGG9HMvSo57cBiORL3kgQ6b63l0BT0+yWQhVF5qBzTb08zji+bK/4JRfMit995lEpa1QqL1+uqQZuSIS3TvFhAfxaP6UAekERsV0dFGUrjg5nwSkV0HAVfNfnVlMfHVUOahfItLpopB7W/EssuM2yXy4XcgYr59UlLV6XxLzsMsjem8oL1Mv2UZKIgA8rdFr2eEC2dUNzPuKRalnpZJ+Mx7Y0m1EyRXLtGM/mnIVvRwuHYzZqh+9i1XqO7EeFKsbSZwfze9jjnp1ibwLD+uFORr7NvPbtmRHp+pS+rBE9+e6lC8sagLN/ktayFg7aer2mirTPf5o3PKNBuqy0A0y2PGDaSGPCP9GeRXPbZf+6n8htQcxy/HW1Fmq6bhxBwrW9NyA=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230031)(1800799015)(376005); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?a080ZlNUYjNLTU5DTDNsVGpKb0hYcFJvUG9OQ01sMzYwb0NORTY4UGY0QUNx?=
- =?utf-8?B?TlNwcW92VGtNM3RmOEZJLzhKQlNDYzlPTnlsNXVocjFtRFk5OVpZUUNQRkV0?=
- =?utf-8?B?b0ZJSU10WFA4K0RJK042N3Nsa2I5V1NzZzkyV0lPVGNMbm12RlNKT1VEMW5E?=
- =?utf-8?B?alhsdXNiN3d0YmNWSWR1ZzRRREhNK0Evb2dzUCtCVE1CZ0RpbHBvV1A1WDFr?=
- =?utf-8?B?ODJodVVHWEpjS2hFMzFJMlJqVE1vWUs1eVpsL2xKR2FxMy9yMjI3RktDdnBv?=
- =?utf-8?B?TFJmQmVhTGdXM3Q1eDd6QWNPcUxuaEd1MUFIYWwxNlpqNGRPUTBGSGlFVVkz?=
- =?utf-8?B?YkxBTjc1bDNqVHRBRGdBUWNVSFNENm83bkhTZDM3Nm5JMzh0TGYxQVJTNEVm?=
- =?utf-8?B?UXNoUitPSzlWSXNCRVRIVGN4eXlVVHI5eEJKblNmVFp6YlU1WXVVZ2YraURl?=
- =?utf-8?B?K0ZqL21xSnlDdUlRUy9FZWRrdGlLY0hmRlIwRXErYStqQ1B3YURiQWphVHhj?=
- =?utf-8?B?alVwTVlFVU9Nd255WUR3dDB0eFdJTEtjaURNYnE4S2FkMHBSSzNEYnRMSEI0?=
- =?utf-8?B?a0pkTlpxa25XOUFoSFI0YkdRNUNPamxiMUdvd1I4NENVUVJMNTFlRmNsMDAw?=
- =?utf-8?B?eG0yYURUaU1PMTd3NkRBQUR1WG1EZXBVL1RJV2dnWkNwZDdiQm04NXN0UldS?=
- =?utf-8?B?a3RsajlOVjZIUmdMRklCMXFJdTVGZUJoV0J1bjJEblNBc0xieVJMQ2IwUEpi?=
- =?utf-8?B?OU1nWFBEZkpNTDB3RHNteWw1YU1lc2pPaW14Z2JFa1ZHRTBsUjNxZlhlaWZH?=
- =?utf-8?B?Nm9mM1luM0pGTWNEQVdsQUUyRG0zWnZ2NmhvYjBLN3BLOGcvUWdpaFh4M3B0?=
- =?utf-8?B?ZDBFVGcyY20vVjJoWWNZRUp4VmNsMEpQSERhd3NCSlRNTGhNM21FZUwzZjF2?=
- =?utf-8?B?cFhKNUN6K2pvUVJ1VFBaQ0RlWEVpcFJRVDBKQU4yR1V0QmFYYjcwRFljRlVy?=
- =?utf-8?B?K0k4d3pRVFA0ajFtZTlBWEk5dUplOXA4Rkg5ODRaaXc5Qnh6cyt3Sjk4NnFi?=
- =?utf-8?B?Vy9ZZHZqaEwrNUVCR0JPckhMOVZ4a3V3bU1FaTB3ckFPM2tLTGhHQVFuOS9I?=
- =?utf-8?B?M3gzQmQvekdyU3BtMnhzekVXclRJREdDUlRpd01wY2RuOXF5N200MEtJNzht?=
- =?utf-8?B?aHc4SWdCZ0UzR0I0MWV1R1Npa3N3cGQ4Wmh0ckgySFErYnF2bGk5aWdzbkVN?=
- =?utf-8?B?SjFvdHpwRklndzJHL1lPWElzZzZjYUNCMzNQQlRjMW1PWXNkYXI1b3g1b3dz?=
- =?utf-8?B?eWVScnJwM1NlMGNhR0dzRG55ZnJiV1FPMkh0SytjUHVCKzJob1dIY0JCQjB3?=
- =?utf-8?B?UmlxbGUzWnVZN2ZSM1Q5VXMxV2haYjlEbkRoSzlWcTA2aHVsTmpFY0VsR2k4?=
- =?utf-8?B?RkptcnhUZGRySEsyTXFVK2dzVzdUTWZkbUVIcXh3SUZmWjBhamtsZlZ4YU5U?=
- =?utf-8?B?VFBmVjh0N2V2YjhpQW5qYVY5K3R2Z1lVbldKVEdxQnNLVTlDQ3BoZllocmVJ?=
- =?utf-8?B?WFhpamdWSlZIRWY5ckV6VGZnM0V5a0pod09vQi9MM3Uwck1hYWxVSFdsck9W?=
- =?utf-8?B?bTJFTVlCWEtUZXp0cmdYT1BOTzVrNlhaM09oSzlEaVI0UVlmWVBwTGI0Wlo3?=
- =?utf-8?B?aEZSMDc2K2tLdFFxdTZacmtmRVQrNzFPRi9sUXZRUTgvK1hWdE5BL1l3OG0z?=
- =?utf-8?B?UUozWG5LLy9CWXB2RFNRa3cxUlZybEVoMld1UkpDS2wrY0FTMEptKy92TFlW?=
- =?utf-8?B?bXY0QTJjbXU4U2RkRnh6QkFjb1d6Z2ovUVRMSnpoWFRzR2ExQUVZeG1yeGFE?=
- =?utf-8?B?TDJzSURXOVhkTGZ3cmlCM2lXUjBiamV1bkZ3Y3FTMUl6bGd5eUpUS0VPQW92?=
- =?utf-8?B?eldYTDdrOHYwdFNBRjJHaTdqT2RMQ0FidGo4cWl6N1hHcFl3eUtvdzRmdHQx?=
- =?utf-8?B?S2txTVRKc0pob1g3eVVzMWROOUtzVkhyblNTQW4zWVlTVGZoQTFjUEovSFFl?=
- =?utf-8?B?dkJaODEwdld4UWMvL2NGR0hvK0dDTlozTHhDNUtkT2JxQ2dHOU9UaXFkaXBS?=
- =?utf-8?Q?i6WVCl1nPrRt8WZZAWTh7Eu0Q?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SVl5VDcrdlNpdVJlaGhhMUNIT09UYjk3UEJ1ZjFudnhRMjNqYTk4UTVHb1l2?=
+ =?utf-8?B?aHJOMlVQNWwxOVVyUXloVWtTV0pUc1dtTGRXSUR1VkxnODRDLzdIQ1FXM2di?=
+ =?utf-8?B?SlFwcUpmLzNxWlBwRUNpdDB1MW5RSUQyN1JSRFRKNmR0RW83dEdhbGtWbjBv?=
+ =?utf-8?B?cTRSV1huNUNBZXlkM0kwT1dmeVJUVFIzZ3dkM25mTXVFOVN2dmVXaUpKS1RW?=
+ =?utf-8?B?KzhFbjBYc1BCVXlWSG5yQWI0cmduNnVZQXZpYW52NldnSW9OWGJSUk53OW1X?=
+ =?utf-8?B?RWlHUGhVY0VkSTZtMjFnT0Zwei8rd1lQNkxRZXhpS1ZJcGZuTmtBSVRUOFoz?=
+ =?utf-8?B?bi8rTjI2eUUrc2VWU2x1SlZFckx2TWFNMkdiaC9aaGxaN2V5OXpQNjJTWFFC?=
+ =?utf-8?B?ZTdNM3FxeVhpaTRyME5lclZLN3djS0tNWXd6azFwN00zZ1czeHIxTGVJM01I?=
+ =?utf-8?B?SHp4aFFYSHlJOXVSVS9GL0tPeU1DNW5zL25VRVJBUnJIRGZ4Vzhpc0Zxdmcx?=
+ =?utf-8?B?M2hXdk9qQnUvbmFZWnZqTk9aS0syVGRaTnJvUUtjN1kxUlJSeGFlZktlOHJE?=
+ =?utf-8?B?M3NNcytGQ0JUdktoRU1CbXZ2QVl6R2tIcnZscDMxNGtHMWk5aDMvK0FSVzhU?=
+ =?utf-8?B?RDZqd3NOZ0ZFU0lSUVdTeHVPNWxJRzJtUUV3SlFZQWtIenF4d29TUjQ0ZDU5?=
+ =?utf-8?B?L2wvb1Y1YnB0RFVocWpqZm5TLzB5emVrNnRpWXdSVVRWK1B5ZWV0RHVEaE5x?=
+ =?utf-8?B?NEVtMFhnNWVkYWxwLzlvMFZWYVRJT2gzeUhXdGczdWdaZDQ0MjlPdTQ4aHQ5?=
+ =?utf-8?B?VC9QZVREOGlORmdMRDhNaFpBSU5ubUR4Z1R0MEUxVWJGVVBkQWtjZytvUUFv?=
+ =?utf-8?B?Ri9KY1VIRWZtcjd1bEk0RVZiWFRNd2srRXpJOUZxZ0hGL3ZlVDQ5RHMxOWN0?=
+ =?utf-8?B?L2Jtd3NDbTQ4eFJjdk9mZlFxTEg2dHZmNGl2NWdnT1NsOVpiRFJXOEpwd094?=
+ =?utf-8?B?OHBuYS9obWNrcWdqREZtYkxlcHlZT1lFQXJyMWxEV0NRSTJ6R29mNHJmN0Jw?=
+ =?utf-8?B?N1QzY3BjS0cvcDBtaVE0UG00Z2w0dXBTemdnZnJKWUhGeE5kWG9qUXF2TWFJ?=
+ =?utf-8?B?RTlUS2hHa2dGa094ODNjUzRDQnBhTjZubk9RandIZWdQK2RCQjkvSzg5cFdZ?=
+ =?utf-8?B?NGo5VXlPTW03OEIxQ2JaS3dkemkvOVk1UVAwRFZHTlVOVEgxY0pENG1LeDRh?=
+ =?utf-8?B?SjJTck9BeWRpZmVyV280b29xUzNOZUd6VXJEbVJxTXNyMFg4YU8rc3I2WlQw?=
+ =?utf-8?B?UnBKNy9TSHJvaVBjbHhRSUQ5RFREWlFWRFA2TDEyZi9oM1hEOVZ2WXZvRHZY?=
+ =?utf-8?B?M2FvL3ZLbVpBTnp4OWlHL3JjejNqY0t5WE83cWYrdHJ0RUlGajlwZ21iUXJW?=
+ =?utf-8?B?cGRORGU3R0o4cnVlZjdLOEM0MnljSW5qWmpoNGhidzdrbFIzN1QwTndqRGFE?=
+ =?utf-8?B?MDJPU1l6VE05YlE5SFo4YmEzY1JFWjZURGQzT1Q0czBodS9JVFVXQlRKQldQ?=
+ =?utf-8?B?eDJ2VExBTlpzUGFkUUFsV25ycHB2Z1JtOW5ra3gyMzQ2YUZ3ZmZKSUcwa3pU?=
+ =?utf-8?B?ZG5pRVd2UjR0SmxSN1RhNklBUjEreTM3L2FFT3dJMGY5MnFhNWVQZWpJbEJ2?=
+ =?utf-8?B?dXJ3TkVMZ2lNNG1wZ0N6UG1NYzZuaGFLL3dqVzl3azAwZXZPR0lWNzBTUGJz?=
+ =?utf-8?B?S1dVWUFGS2lFTUt0dGc5YWNSaDZnM0t2MmRoOEZNdUxoZjFlQU12TFhSQmgx?=
+ =?utf-8?B?eDhiakJJd0QwMDh3MFdxNUt4bTNlTjkvOTYva0VONzRSelc4aXFwdTZ3SlBk?=
+ =?utf-8?B?MWEyN2Y4cXU3V0V2Z0puazlpakFCRFk0T29NQ0ZrN3FZS01Pbzg1ZUFvajdZ?=
+ =?utf-8?B?MVVpWEtGUFoyeWJuTzNJS1dRbUtoL0NkY2NwMDd2QnZxcmtqVEQwRHpHRnJt?=
+ =?utf-8?B?UUhYRTZIRG05cnhmT0RqbGQyWUdmQUd3V1drbjg0SXRZQkg3aXBwciszUmlW?=
+ =?utf-8?B?THVoUXk1akN2V2h2cUtKa1lTaXEzRW56cmx2SVBUcTgrSC9xRVlEdWJyaXBn?=
+ =?utf-8?Q?jEok7eiH/uvXv7nueE0Gi+U0d?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 31cda4eb-f228-4d9d-f82e-08dc42a618f6
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2cee957d-effd-4d64-b386-08dc42a66689
 X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Mar 2024 15:07:13.3238 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Mar 2024 15:09:23.4439 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Tdf08gVOlTAPzjtjIxlQACMutw0XncJcOGvU6rtVYzGCfnTUHoTDVsSzpZ90YMYk
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4468
+X-MS-Exchange-CrossTenant-UserPrincipalName: 6flZZuHjsmiHQl+MiX8AIIwKfSuDS6kfUQbt51BBqGrtNmoyc/YvsM0SMM+2K442
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB7526
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -191,53 +190,107 @@ X-Virus-Status: Clean
 
 
 
-On 3/6/24 04:27, Venkatesh Yadav Abbarapu wrote:
-> Currently only hw ecc is supported in U-Boot. If any other ecc mode is
-> given in DT, it simply through an error. So better print
-> what is being done.
+On 3/6/24 04:34, Venkatesh Yadav Abbarapu wrote:
+> The below exception observed on QEMU, as it doesn't support
+> NAND controller.
 > 
-> Revert this patch once soft ecc support is fixed in future.
+> "Synchronous Abort" handler, esr 0x96000005, far 0x17acfc878
+> elr: 000000000803ad40 lr : 000000000805f438 (reloc)
+> elr: 000000007fcb4d40 lr : 000000007fcd9438
+> x0 : 000000007bbfc880 x1 : 00000000ff100000
+> x2 : 000000007fcf059c x3 : 000000007bbfc870
+> x4 : 000000007fd9a388 x5 : 000000017acfc870
+> x6 : 0000000000000000 x7 : 000000007bbfd0e0
+> x8 : 0000000000003dd4 x9 : 000000007bbeec0c
+> x10: 0000000000000001 x11: 0000000000003f8c
+> x12: 000000007bbeecfc x13: 000000007bbeeeb0
+> x14: 000000007bbeeeb0 x15: 000000007bbee474
+> x16: 000000007fcef18c x17: 0000000000000000
+> x18: 000000007bbf9d70 x19: 000000007bbfc888
+> x20: 000000007bbfc870 x21: 000000007fd68ddb
+> x22: 00000000ffffffed x23: 000000007bbfc878
+> x24: 0000000000000000 x25: 0000000000000000
+> x26: 0000000000000000 x27: 0000000000000000
+> x28: 0000000000000000 x29: 000000007bbeed10
 > 
-> Signed-off-by: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
+> Code: 927ff8c1 924000c6 8b010065 f9400887 (f94004a2)
+> Resetting CPU ...
+> 
+> The crash is caused by the use after free.
+> Updating the correct return codes rather than hardcoding.
+> Fixes: 3dd0f8cccd6d ("mtd: nand: Remove hardcoded base address of nand")
+> 
 > Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 > ---
 > Changes in v2:
-> - Added the ecc mode check in the arasan driver itself.
-> Changes in v3:
-> - Skip the driver probe when sw-ecc mode is present in the device tree.
-> Changes in v4:
-> - Updated the commit description to through an error if other
-> than hw ecc mentioned in the DT.
-> - Added the NULL check.
+> - Updated the commit description.
 > ---
->   drivers/mtd/nand/raw/arasan_nfc.c | 7 +++++++
->   1 file changed, 7 insertions(+)
+>   drivers/mtd/nand/raw/arasan_nfc.c | 27 ++++++++++++++-------------
+>   1 file changed, 14 insertions(+), 13 deletions(-)
 > 
 > diff --git a/drivers/mtd/nand/raw/arasan_nfc.c b/drivers/mtd/nand/raw/arasan_nfc.c
-> index 14766401bf..0b1b91f771 100644
+> index 0b1b91f771..ffcd963b3d 100644
 > --- a/drivers/mtd/nand/raw/arasan_nfc.c
 > +++ b/drivers/mtd/nand/raw/arasan_nfc.c
-> @@ -1233,6 +1233,7 @@ static int arasan_probe(struct udevice *dev)
+> @@ -1232,7 +1232,7 @@ static int arasan_probe(struct udevice *dev)
+>   	struct nand_config *nand = &info->config;
 >   	struct mtd_info *mtd;
 >   	ofnode child;
->   	int err = -1;
-> +	const char *str;
+> -	int err = -1;
+> +	int ret;
+>   	const char *str;
 >   
 >   	info->reg = dev_read_addr_ptr(dev);
->   	mtd = nand_to_mtd(nand_chip);
-> @@ -1263,6 +1264,12 @@ static int arasan_probe(struct udevice *dev)
->   		goto fail;
+> @@ -1259,9 +1259,10 @@ static int arasan_probe(struct udevice *dev)
+>   	writel(0x0, &info->reg->pgm_reg);
+>   
+>   	/* first scan to find the device and get the page size */
+> -	if (nand_scan_ident(mtd, CONFIG_SYS_NAND_MAX_CHIPS, NULL)) {
+> +	ret = nand_scan_ident(mtd, CONFIG_SYS_NAND_MAX_CHIPS, NULL);
+> +	if (ret) {
+>   		printf("%s: nand_scan_ident failed\n", __func__);
+> -		goto fail;
+> +		return ret;
 >   	}
 >   
-> +	str = ofnode_read_string(nand_chip->flash_node, "nand-ecc-mode");
-> +	if (!str || strcmp(str, "hw") != 0) {
-> +		printf("%s ecc mode is not supported\n", str);
-> +		return -EINVAL;
-> +	}
-> +
->   	nand_chip->ecc.mode = NAND_ECC_HW;
->   	nand_chip->ecc.hwctl = NULL;
->   	nand_chip->ecc.read_page = arasan_nand_read_page_hwecc;
+>   	str = ofnode_read_string(nand_chip->flash_node, "nand-ecc-mode");
+> @@ -1289,26 +1290,26 @@ static int arasan_probe(struct udevice *dev)
+>   		nand_chip->ecc.bytes = 0;
+>   		nand_chip->ecc.layout = &ondie_nand_oob_64;
+>   	} else {
+> -		if (arasan_nand_ecc_init(mtd)) {
+> +		ret = arasan_nand_ecc_init(mtd);
+> +		if (ret) {
+>   			printf("%s: nand_ecc_init failed\n", __func__);
+> -			goto fail;
+> +			return ret;
+>   		}
+>   	}
+>   
+> -	if (nand_scan_tail(mtd)) {
+> +	ret = nand_scan_tail(mtd);
+> +	if (ret) {
+>   		printf("%s: nand_scan_tail failed\n", __func__);
+> -		goto fail;
+> +		return ret;
+>   	}
+>   
+> -	if (nand_register(0, mtd)) {
+> +	ret = nand_register(0, mtd);
+> +	if (ret) {
+>   		printf("Nand Register Fail\n");
+> -		goto fail;
+> +		return ret;
+>   	}
+>   
+> -	return 0;
+> -fail:
+> -	free(nand);
+> -	return err;
+> +	return ret;
+>   }
+>   
+>   static const struct udevice_id arasan_nand_dt_ids[] = {
 
 Applied.
 M
