@@ -4,45 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80D72C54E58
-	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 23:37:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8656EC54E58
+	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 23:37:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0F3F87E57;
-	Wed, 13 Mar 2024 00:37:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3737B87F65;
+	Wed, 13 Mar 2024 00:37:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="aE0ZgJKC";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="oM9GVYuS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 41BEC87E6A; Wed, 13 Mar 2024 00:37:05 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
+ id E1C6687F5E; Wed, 13 Mar 2024 00:37:12 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0B7D87C86
- for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 00:37:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F244687F16
+ for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 00:37:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=SRS0=03ce=KT=kwiboo.se=jonas@fe-bounces.kwiboo.se
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
- To: From; q=dns/txt; s=fe-e1b5cab7be; t=1710286607;
- bh=DcgaEJiovhyw4JoU1NKV0il+l2R+v++2sfBj3k+l9NQ=;
- b=aE0ZgJKCd06XWhOKTRmy+vMOcZae39C5AqlXKfszLLmjCNlvN1Ky7+TE7reMDGQ61qbRN5aOr
- S33g/MVUw6gIxNJ/9h7rQ6TqFH284/8isuhK618P8FYSPY/b9I95Xat+K0RZgcVdNVbr4GnRRrd
- vt52SQqwTZUdvqGf6gdEdYdPX7gAKXMHvGt6inWGz+o/o1CZkN/17NKet8sIjuv024lMfQtY8D4
- Aa8U/7vn0OPiTkQfspwa/mb6EBv35aZAOC3OjIx2g3a1h4YV9rwQs2rsOvSP3hTrOVMpWRE9xQv
- z5hiHmScBfTSNpKlMF/GJNdj44ZnTpcUY/dJd875ofUg==
+ h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
+ Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
+ t=1710286611; bh=gvO/oryGH8GCMQbhE1RRmKwBFwEtwOxoPqu0xHVKLAs=;
+ b=oM9GVYuSQkH6qT/ekyYgH2cyeNeNzqGD+ubJFhJxY+i6dgE8ieD+YNLoUFnPrQ4Wyobo+RlnU
+ p3s9EOOJrtwv/cchrV/qdLq86buyh6BkhjuQVRuZ8yc0kxQoblThrOYQICq9I1IlclfiBfYmlOQ
+ fNMIs0d/e6bhqcCeYoRpuHZvPNO+EgEkv5hc4zmoM2T7Y8C4YLeQxbPXbpijaqCBE9BmXuPl6Wk
+ DuXlHInMeZevpPcneXO26J2FpleiApt+SdIqAnK9BZTPZ5y5+rz56KMUPss/Wl66OWRcASAYFUT
+ da3fCRWdHK6krrX0AQwHDWpKQYi7kawkQ9Gekie5JWNQ==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>,
- u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v2 00/12] rockchip: rk3399: Migrate to use IO-domain driver
-Date: Tue, 12 Mar 2024 23:36:10 +0000
-Message-ID: <20240312233636.1428749-1-jonas@kwiboo.se>
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Levin Du <djw@t-chip.com.cn>, Suniel Mahesh <sunil@amarulasolutions.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Jagan Teki <jagan@amarulasolutions.com>, Manivannan Sadhasivam
+ <manivannan.sadhasivam@linaro.org>
+Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>, u-boot@lists.denx.de
+Subject: [PATCH v2 01/12] board: rockchip: rk3399: Add device tree files to
+ MAINTAINERS
+Date: Tue, 12 Mar 2024 23:36:11 +0000
+Message-ID: <20240312233636.1428749-2-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.43.2
+In-Reply-To: <20240312233636.1428749-1-jonas@kwiboo.se>
+References: <20240312233636.1428749-1-jonas@kwiboo.se>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Report-Abuse-To: abuse@forwardemail.net
@@ -50,8 +56,8 @@ X-Report-Abuse: abuse@forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 167.172.40.54
-X-ForwardEmail-ID: 65f0e70ce6c04c5b305935e8
+ 149.28.215.223
+X-ForwardEmail-ID: 65f0e711e6c04c5b305935fa
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,100 +74,213 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series remove old unused board_early_init_f() functions, adds
-support for RK3399 to the IO-domain driver and migrates all boards that
-used setup_iodomain() to now use the IO-domain driver instead.
+Update MAINTAINERS files for RK3399 boards to include related device
+tree files. Also correct a few filenames.
 
-Also add device tree files and myself as reviewer to MAINTAINERS.
-
-Changes in v2:
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+---
+v2:
 - Use glob pattern where appropriate
-- Split gpt_capsule_update_setup() change into own patch
-- Collect r-b tags
-
-This series depends on following series for a clean apply:
-- rockchip: rk3328: Update defconfigs, DTs and enable boot from SPI [1]
-- rockchip: Read cpuid and generate MAC address from efuse for RK3328
-  and RK3399 [2]
-- rockchip: Update stack and bss addresses on RK3308, RK3328, RK3399,
-  RK356x and RK3588 [3]
-- rockchip: add support for Theobroma JAGUAR SBC-RK3588-AMR [4]
-
-A copy of this series and its depends can also be found at [5]
-
-[1] https://patchwork.ozlabs.org/cover/1900345/
-[2] https://patchwork.ozlabs.org/cover/1897743/
-[3] https://patchwork.ozlabs.org/cover/1907155/
-[4] https://patchwork.ozlabs.org/cover/1910408/
-[5] https://github.com/Kwiboo/u-boot-rockchip/commits/rk3399-io-domain-v2
-
-Jonas Karlman (12):
-  board: rockchip: rk3399: Add device tree files to MAINTAINERS
-  board: rockchip: rk3399: Add myself as reviewer to MAINTAINERS
-  board: rockchip: rk3399: Remove unused board_early_init_f functions
-  board: rockchip: Add a common ROCK Pi 4 target
-  rockchip: io-domain: Add support for RK3399
-  rockchip: pine64: rockpro64: Migrate to use IO-domain driver
-  rockchip: pine64: pinebook-pro: Migrate to use IO-domain driver
-  rockchip: pine64: pinephone-pro: Migrate to use IO-domain driver
-  rockchip: vamrs: rock960: Migrate to use IO-domain driver
-  rockchip: theobroma-systems: puma: Migrate to use IO-domain driver
-  rockchip: google: gru: Migrate to use IO-domain driver
-  rockchip: board: Move gpt_capsule_update_setup() call
-
- arch/arm/mach-rockchip/board.c                | 10 +--
- arch/arm/mach-rockchip/rk3399/Kconfig         |  6 ++
+---
  board/firefly/roc-pc-rk3399/MAINTAINERS       |  1 +
- board/firefly/roc-pc-rk3399/roc-pc-rk3399.c   | 22 +-----
- board/google/gru/gru.c                        | 35 --------
- board/pine64/pinebook-pro-rk3399/MAINTAINERS  |  6 +-
- board/pine64/pinebook-pro-rk3399/Makefile     |  1 -
- .../pinebook-pro-rk3399/pinebook-pro-rk3399.c | 61 --------------
- board/pine64/pinephone-pro-rk3399/MAINTAINERS |  5 +-
- board/pine64/pinephone-pro-rk3399/Makefile    |  1 -
- .../pinephone-pro-rk3399.c                    | 64 ---------------
- board/pine64/rockpro64_rk3399/MAINTAINERS     |  3 +-
- board/pine64/rockpro64_rk3399/Makefile        |  7 --
- .../rockpro64_rk3399/rockpro64-rk3399.c       | 39 ---------
- board/radxa/rockpi4-rk3399/Kconfig            | 15 ++++
- board/radxa/rockpi4-rk3399/MAINTAINERS        | 22 ++++++
- .../rockpi4-rk3399}/Makefile                  |  2 +-
- .../rockpi4-rk3399/rockpi4-rk3399.c}          | 33 +-------
- board/rockchip/evb_rk3399/MAINTAINERS         | 48 ++++-------
- .../puma_rk3399/puma-rk3399.c                 | 21 -----
- board/vamrs/rock960_rk3399/MAINTAINERS        |  2 +
- board/vamrs/rock960_rk3399/Makefile           |  6 --
- board/vamrs/rock960_rk3399/rock960-rk3399.c   | 27 -------
- configs/chromebook_bob_defconfig              |  1 +
- configs/chromebook_kevin_defconfig            |  1 +
- configs/ficus-rk3399_defconfig                |  1 +
- configs/pinebook-pro-rk3399_defconfig         |  1 +
- configs/pinephone-pro-rk3399_defconfig        |  1 +
- configs/puma-rk3399_defconfig                 |  1 +
- configs/rock-4c-plus-rk3399_defconfig         |  2 +-
- configs/rock-4se-rk3399_defconfig             |  2 +-
- configs/rock-pi-4-rk3399_defconfig            |  2 +-
- configs/rock-pi-4c-rk3399_defconfig           |  2 +-
- configs/rock960-rk3399_defconfig              |  1 +
- configs/rockpro64-rk3399_defconfig            |  1 +
- drivers/misc/rockchip-io-domain.c             | 79 ++++++++++++++++++-
- include/configs/rk3399_common.h               | 16 ----
- include/configs/rockpi4-rk3399.h              | 32 ++++++++
- 38 files changed, 198 insertions(+), 382 deletions(-)
- delete mode 100644 board/pine64/pinebook-pro-rk3399/Makefile
- delete mode 100644 board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c
- delete mode 100644 board/pine64/pinephone-pro-rk3399/Makefile
- delete mode 100644 board/pine64/pinephone-pro-rk3399/pinephone-pro-rk3399.c
- delete mode 100644 board/pine64/rockpro64_rk3399/Makefile
- delete mode 100644 board/pine64/rockpro64_rk3399/rockpro64-rk3399.c
- create mode 100644 board/radxa/rockpi4-rk3399/Kconfig
- create mode 100644 board/radxa/rockpi4-rk3399/MAINTAINERS
- rename board/{rockchip/evb_rk3399 => radxa/rockpi4-rk3399}/Makefile (79%)
- rename board/{rockchip/evb_rk3399/evb-rk3399.c => radxa/rockpi4-rk3399/rockpi4-rk3399.c} (65%)
- delete mode 100644 board/vamrs/rock960_rk3399/Makefile
- delete mode 100644 board/vamrs/rock960_rk3399/rock960-rk3399.c
- create mode 100644 include/configs/rockpi4-rk3399.h
+ board/pine64/pinebook-pro-rk3399/MAINTAINERS  |  5 ++-
+ board/pine64/pinephone-pro-rk3399/MAINTAINERS |  5 ++-
+ board/pine64/rockpro64_rk3399/MAINTAINERS     |  2 +-
+ board/rockchip/evb_rk3399/MAINTAINERS         | 35 ++++++++++---------
+ board/vamrs/rock960_rk3399/MAINTAINERS        |  2 ++
+ 6 files changed, 27 insertions(+), 23 deletions(-)
 
+diff --git a/board/firefly/roc-pc-rk3399/MAINTAINERS b/board/firefly/roc-pc-rk3399/MAINTAINERS
+index 68a5b757d1df..2c0de4432fa8 100644
+--- a/board/firefly/roc-pc-rk3399/MAINTAINERS
++++ b/board/firefly/roc-pc-rk3399/MAINTAINERS
+@@ -6,3 +6,4 @@ F:	board/firefly/roc-pc-rk3399
+ F:	include/configs/roc-pc-rk3399.h
+ F:	configs/roc-pc-rk3399_defconfig
+ F:	configs/roc-pc-mezzanine-rk3399_defconfig
++F:	arch/arm/dts/rk3399-roc-pc*
+diff --git a/board/pine64/pinebook-pro-rk3399/MAINTAINERS b/board/pine64/pinebook-pro-rk3399/MAINTAINERS
+index 7300ca1b1b81..287ed4346050 100644
+--- a/board/pine64/pinebook-pro-rk3399/MAINTAINERS
++++ b/board/pine64/pinebook-pro-rk3399/MAINTAINERS
+@@ -2,7 +2,6 @@ PINEBOOK_PRO
+ M:	Peter Robinson <pbrobinson@gmail.com>
+ S:	Maintained
+ F:	board/pine64/pinebook-pro-rk3399/
+-F:	include/configs/rk3399-pinebook-pro.h
+-F:	arch/arm/dts/rk3399-pinebook-pro.dts
+-F:	arch/arm/dts/rk3399-pinebook-pro-u-boot.dtsi
++F:	include/configs/pinebook-pro-rk3399.h
++F:	arch/arm/dts/rk3399-pinebook-pro*
+ F:	configs/pinebook-pro-rk3399_defconfig
+diff --git a/board/pine64/pinephone-pro-rk3399/MAINTAINERS b/board/pine64/pinephone-pro-rk3399/MAINTAINERS
+index bc2dcdd8d423..959566a877ec 100644
+--- a/board/pine64/pinephone-pro-rk3399/MAINTAINERS
++++ b/board/pine64/pinephone-pro-rk3399/MAINTAINERS
+@@ -2,7 +2,6 @@ PINEPHONE_PRO
+ M:	Peter Robinson <pbrobinson@gmail.com>
+ S:	Maintained
+ F:	board/pine64/pinephone-pro-rk3399/
+-F:	include/configs/rk3399-pinephone-pro.h
+-F:	arch/arm/dts/rk3399-pinephone-pro.dts
+-F:	arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi
++F:	include/configs/pinephone-pro-rk3399.h
++F:	arch/arm/dts/rk3399-pinephone-pro*
+ F:	configs/pinephone-pro-rk3399_defconfig
+diff --git a/board/pine64/rockpro64_rk3399/MAINTAINERS b/board/pine64/rockpro64_rk3399/MAINTAINERS
+index 220ee21f230f..d9e11f4bab34 100644
+--- a/board/pine64/rockpro64_rk3399/MAINTAINERS
++++ b/board/pine64/rockpro64_rk3399/MAINTAINERS
+@@ -3,5 +3,5 @@ M:	Jagan Teki <jagan@amarulasolutions.com>
+ S:	Maintained
+ F:	board/pine64/rockpro64_rk3399
+ F:	include/configs/rockpro64_rk3399.h
+-F:	arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
++F:	arch/arm/dts/rk3399-rockpro64*
+ F:	configs/rockpro64-rk3399_defconfig
+diff --git a/board/rockchip/evb_rk3399/MAINTAINERS b/board/rockchip/evb_rk3399/MAINTAINERS
+index acdb840f2093..f45f81623a3a 100644
+--- a/board/rockchip/evb_rk3399/MAINTAINERS
++++ b/board/rockchip/evb_rk3399/MAINTAINERS
+@@ -4,48 +4,53 @@ S:      Maintained
+ F:      board/rockchip/evb_rk3399
+ F:      include/configs/evb_rk3399.h
+ F:      configs/evb-rk3399_defconfig
++F:      arch/arm/dts/rk3399-evb*
+ F:      configs/firefly-rk3399_defconfig
++F:      arch/arm/dts/rk3399-firefly*
+ 
+ EAIDK-610
+ M:      Andy Yan <andy.yan@rock-chips.com>
+ S:      Maintained
+ F:	configs/eaidk-610-rk3399_defconfig
+-F:	arch/arm/dts/rk3399-eaidk-610-u-boot.dtsi
++F:	arch/arm/dts/rk3399-eaidk-610*
+ 
+ KHADAS-EDGE
+ M:	Nick Xie <nick@khadas.com>
+ S:	Maintained
+ F:	configs/khadas-edge-rk3399_defconfig
++F:	arch/arm/dts/rk3399-khadas-edge.dts
++F:	arch/arm/dts/rk3399-khadas-edge.dtsi
+ F:	arch/arm/dts/rk3399-khadas-edge-u-boot.dtsi
+ 
+ KHADAS-EDGE-CAPTAIN
+ M:	Nick Xie <nick@khadas.com>
+ S:	Maintained
+ F:	configs/khadas-edge-captain-rk3399_defconfig
+-F:	arch/arm/dts/rk3399-khadas-edge-captain-u-boot.dtsi
++F:	arch/arm/dts/rk3399-khadas-edge-captain*
+ 
+ KHADAS-EDGE-V
+ M:	Nick Xie <nick@khadas.com>
+ S:	Maintained
+ F:	configs/khadas-edge-v-rk3399_defconfig
+-F:	arch/arm/dts/rk3399-khadas-edge-v-u-boot.dtsi
++F:	arch/arm/dts/rk3399-khadas-edge-v*
+ 
+ LEEZ-P710
+ M:	Andy Yan <andy.yan@rock-chips.com>
+ S:      Maintained
+-F:	arch/arm/dts/rk3399-leez-p710-u-boot.dtsi
++F:	arch/arm/dts/rk3399-leez-p710*
+ F:	configs/leez-rk3399_defconfig
+ 
+ NANOPC-T4
+ M:	Jagan Teki <jagan@amarulasolutions.com>
+ S:	Maintained
+ F:	configs/nanopc-t4-rk3399_defconfig
+-F:	arch/arm/dts/rk3399-nanopc-t4-u-boot.dtsi
++F:	arch/arm/dts/rk3399-nanopc-t4*
+ 
+ NANOPI-M4
+ M:	Jagan Teki <jagan@amarulasolutions.com>
+ S:	Maintained
+ F:	configs/nanopi-m4-rk3399_defconfig
++F:	arch/arm/dts/rk3399-nanopi-m4.dts
+ F:	arch/arm/dts/rk3399-nanopi-m4-u-boot.dtsi
+ 
+ NANOPI-M4-2GB
+@@ -53,55 +58,53 @@ M:	Jagan Teki <jagan@amarulasolutions.com>
+ M:	Deepak Das <deepakdas.linux@gmail.com>
+ S:	Maintained
+ F:	configs/nanopi-m4-2gb-rk3399_defconfig
+-F:	arch/arm/dts/rk3399-nanopi-m4-2gb-u-boot.dtsi
++F:	arch/arm/dts/rk3399-nanopi-m4-2gb*
+ 
+ NANOPI-M4B
+ M:	Alexandre Vicenzi <linux@alxd.me>
+ S:	Maintained
+ F:	configs/nanopi-m4b-rk3399_defconfig
+-F:	arch/arm/dts/rk3399-nanopi-m4b-u-boot.dtsi
++F:	arch/arm/dts/rk3399-nanopi-m4b*
+ 
+ NANOPI-NEO4
+ M:	Jagan Teki <jagan@amarulasolutions.com>
+ S:	Maintained
+ F:	configs/nanopi-neo4-rk3399_defconfig
+-F:	arch/arm/dts/rk3399-nanopi-neo4-u-boot.dtsi
++F:	arch/arm/dts/rk3399-nanopi-neo4*
+ 
+ NANOPI-R4S
+ M:	Xiaobo Tian <peterwillcn@gmail.com>
+ S:	Maintained
+ F:	configs/nanopi-r4s-rk3399_defconfig
+-F:	arch/arm/dts/rk3399-nanopi-r4s-u-boot.dtsi
++F:	arch/arm/dts/rk3399-nanopi-r4s*
+ 
+ ORANGEPI-RK3399
+ M:	Jagan Teki <jagan@amarulasolutions.com>
+ S:	Maintained
+ F:	configs/orangepi-rk3399_defconfig
+-F:	arch/arm/dts/rk3399-u-boot.dtsi
+-F:	arch/arm/dts/rk3399-orangepi-u-boot.dtsi
++F:	arch/arm/dts/rk3399-orangepi*
+ 
+ ROCK-4C+
+ M:	FUKAUMI Naoki <naoki@radxa.com>
+ S:	Maintained
+ F:	configs/rock-4c-plus-rk3399_defconfig
+-F:	arch/arm/dts/rk3399-rock-4c-plus.dts
++F:	arch/arm/dts/rk3399-rock-4c-plus*
+ 
+ ROCK-4SE
+ M:	Christopher Obbard <chris.obbard@collabora.com>
+ S:	Maintained
+ F:	configs/rock-4se-rk3399_defconfig
+-F:	arch/arm/dts/rk3399-rock-4se-u-boot.dtsi
++F:	arch/arm/dts/rk3399-rock-4se*
+ 
+ ROCK-PI-4
+ M:	Jagan Teki <jagan@amarulasolutions.com>
+ S:	Maintained
+ F:	configs/rock-pi-4-rk3399_defconfig
+-F:	arch/arm/dts/rk3399-rock-pi-4-u-boot.dtsi
+ F:	configs/rock-pi-4c-rk3399_defconfig
+-F:	arch/arm/dts/rk3399-rock-pi-4c-u-boot.dtsi
++F:	arch/arm/dts/rk3399-rock-pi-4*
+ 
+ ROCK-PI-N10
+ M:	Jagan Teki <jagan@amarulasolutions.com>
+ S:	Maintained
+ F:	configs/rock-pi-n10-rk3399pro_defconfig
+-F:	arch/arm/dts/rk3399pro-rock-pi-n10-u-boot.dtsi
++F:	arch/arm/dts/rk3399pro-rock-pi-n10*
+diff --git a/board/vamrs/rock960_rk3399/MAINTAINERS b/board/vamrs/rock960_rk3399/MAINTAINERS
+index 8821672a3abb..f2121b191450 100644
+--- a/board/vamrs/rock960_rk3399/MAINTAINERS
++++ b/board/vamrs/rock960_rk3399/MAINTAINERS
+@@ -4,8 +4,10 @@ S:      Maintained
+ F:      board/vamrs/rock960_rk3399/
+ F:      include/configs/rock960_rk3399.h
+ F:      configs/rock960-rk3399_defconfig
++F:      arch/arm/dts/rk3399-rock960*
+ 
+ FICUS EE
+ M:      Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>
+ S:      Maintained
+ F:	configs/ficus-rk3399_defconfig
++F:	arch/arm/dts/rk3399-ficus*
 -- 
 2.43.2
 
