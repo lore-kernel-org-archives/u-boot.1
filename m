@@ -4,174 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85160C54E58
-	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 15:13:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7444DC54E58
+	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 15:19:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C52B87FBC;
-	Tue, 12 Mar 2024 16:13:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id DC22687E71;
+	Tue, 12 Mar 2024 16:19:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="z/satq1K";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="K38Pm3Et";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6DCE087FBF; Tue, 12 Mar 2024 16:13:53 +0100 (CET)
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on20600.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2415::600])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 34723875B9; Tue, 12 Mar 2024 16:19:28 +0100 (CET)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3CA3C87F8F
- for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 16:13:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C2B3A87DFF
+ for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 16:19:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Px1Klg5z4RJBX/abfmZ/Ol88YmPwFmbBU/ewxxW6X/RvSICApTZ0tJ1Ul9P3JruiXcutk9258Ssi77IjoJioPSzfWwqj8EBD6y/so9neIMS5dQAQjy0f7uK2A/MjcPTqlStvdEiofUAC46diqOXZZFqJpWFL+Xv7OBnhZnWXjkXmI4+8LHyWgEudNcSI/l6lk5a5EXAlg0GzjFqFAt7HSLg/MtZevDcguBatwaFzicYC9AhsYpGbEDeRSgqcieQsyoufx2b/vpiYCreZnLfuNnKOeZXpKoMfX7Q1u3FU/X6y2YPRmLoBZlEq/S7X4FfW6Ozff95PHzpL2an59f2H8g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=uoJKUMnpUkJSgPY5gnEIAVOKc+2kQOYuRMUc9ni02Pw=;
- b=RUDR36CTGEmYNI70veyzWchL7MWnJ0LyT+5MsKMViS9/f15MTmCIHBCv7PTVsGXiwHYp9HRSEE2BGijnsz/w0BJznpO07i5qgofaI4N/Pmb8cf9PxdIXVRBW9peCxmc4DlUR7je18PANpY4CfvuZavz0nEp/ZHFL/ld4F0bExUhnbl980gDYzio1+WgqCUZUhm1W+u55OluysZuynKlVZ/5s8EQUNwpPXvZcuQlCWifo+PuqRl+uIeFaqEx1DIo3Y+7Tq+/wffkeu1YX6bWOU0we12DcVwOR1d9VX2w7XmWDm6ZqP5F3q19PG+HTkPM5WgafW9/APQnWqBbt3z4PYQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=uoJKUMnpUkJSgPY5gnEIAVOKc+2kQOYuRMUc9ni02Pw=;
- b=z/satq1KKkCJxv3F0lukz7VnUToeUDrsjcfHrctD0gSThGqGxcM/EBVVdxZPZ5QsBFk2msqEq+8C2fOl5YpkrsVlshAj7SzydPzhtnSXDGdR1sLznKuYqPAkQrNPDXUn64MVJ38ouvvgGlM24NXtUVyoKWyVG9NR5+kekbgKLEs=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
- by DM4PR12MB7526.namprd12.prod.outlook.com (2603:10b6:8:112::20) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7362.35; Tue, 12 Mar
- 2024 15:13:46 +0000
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::6622:ec76:9367:3907]) by SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::6622:ec76:9367:3907%2]) with mapi id 15.20.7362.035; Tue, 12 Mar 2024
- 15:13:46 +0000
-Message-ID: <b60c6758-716e-4a91-85b3-8cc9f5398ea7@amd.com>
-Date: Tue, 12 Mar 2024 16:13:41 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm64: zynqmp: Describe USB wakeup interrupt
-Content-Language: en-US
-From: Michal Simek <michal.simek@amd.com>
-To: u-boot@lists.denx.de, git@xilinx.com
-Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
- Piyush Mehta <piyush.mehta@amd.com>,
- Radhey Shyam Pandey <radhey.shyam.pandey@amd.com>,
- Tanmay Shah <tanmay.shah@amd.com>, Tom Rini <trini@konsulko.com>
-References: <d8109a218f70c257e4fc52b5032b7df68fc00786.1709887312.git.michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- 3i3l5DA=
-In-Reply-To: <d8109a218f70c257e4fc52b5032b7df68fc00786.1709887312.git.michal.simek@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1P195CA0046.EURP195.PROD.OUTLOOK.COM
- (2603:10a6:802:5a::35) To SJ2PR12MB8109.namprd12.prod.outlook.com
- (2603:10b6:a03:4f5::8)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-33e672e10cfso2844537f8f.0
+ for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 08:19:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1710256765; x=1710861565;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=XJqZctOJzV1Z5BNh36+qBxreSv0yxTqzBOn7ExKL7tc=;
+ b=K38Pm3EtuVRiz3cGaD+gOCumnnrB2ZCeFI4BS5BrGXbo5suMm6tRErFAeGWIVTjV//
+ 8CgI4bI38Y7ubd1T9ZGwxrxVSJtwg4Gojc0w5rYg5o1mpeM/NlcjZYojga/Jie5fMx5D
+ L1kMqgNlNtwgcvT2360tzpEQPiqsxvp+JfHALP/nHkhive+ohn5ma9Gz7N7wYvm8p0+D
+ bYlIbPvee7ieNqz5KZ+FqsmbfityOaB5G3XKG9j4SC4ohjPcirV7hHK58bjl/7cCNmQy
+ dAXHYqTCX3MIAS8z3NsEFgi2Dv45OQjmHTPu6VoPjEFS0RTjEVgdtjS9qWaMt52R40Mj
+ bYTg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710256765; x=1710861565;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=XJqZctOJzV1Z5BNh36+qBxreSv0yxTqzBOn7ExKL7tc=;
+ b=eNrqIpZV81oH5mLHCcG6SFmf8fEMZau/EsHbPM3+gDOPXcwmXxyVFl6WRkwyPadoBa
+ xvP2zQMVyoK9PYeK/NiYaLn26fm6xaeiT2tVeWhwdoDTzUgAT701RgMMXODH7wBo+Gte
+ M/EHMtCzZK5Ypu6Pqlb9sL8h76dQbm992ix3jkNszijyDRhR1/aqgvIb5ZFVQ5/O9ccQ
+ h9YYr8SY2Qc4Dbrs9HgHDjPgEHzUHv/80dA9IlwodIy1IOIRu8HHE/JpL8Wo+CMlvPnw
+ 2iKEc4C6qe4oM5u0sfYSSUr5d+uzYMxAHINLNqazczrY9j4teXo63vIT3POAUZVSFfXQ
+ jtWg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXugpaDxVSjQugUjhcUBs6DpdihXhUP809PwR4CpEtGA8uwzOFGdAxZE2orKWboo+AWlaYo7fjQMCWXFOja6SWocB1tYg==
+X-Gm-Message-State: AOJu0YxwyxbcAoSSjS2fQOVzDHlmeoLz62tJaJVgGNq7zHE2UTvCcUzq
+ aHXFOUJ+9MjokAlDDf8kZfnLvY8uq08qMGF253NiXPRhGcqiFYKRbRPq2RbPLyX9rhSBg8lgXYj
+ s
+X-Google-Smtp-Source: AGHT+IF/TIXbi4VJnx6piagAz/KoBAy8sheouUbAJwhKrSD+37h0pV0H9QBB1UVx4Gol0zB0sjYmMw==
+X-Received: by 2002:adf:f5d1:0:b0:33e:5fbf:ec4a with SMTP id
+ k17-20020adff5d1000000b0033e5fbfec4amr7792160wrp.64.1710256765001; 
+ Tue, 12 Mar 2024 08:19:25 -0700 (PDT)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ x3-20020adfffc3000000b0033e99b339a6sm4502527wrs.62.2024.03.12.08.19.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 12 Mar 2024 08:19:24 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Colin McAllister <colinmca242@gmail.com>, u-boot@lists.denx.de
+Cc: Colin McAllister <colin.mcallister@garmin.com>, JPEWhacker@gmail.com,
+ sjg@chromium.org, Sam Protsenko <semen.protsenko@linaro.org>, Igor Opaniuk
+ <igor.opaniuk@gmail.com>, Colin McAllister <colinmca242@gmail.com>
+Subject: Re: [PATCH v4 2/2] android_ab: Fix ANDROID_AB_BACKUP_OFFSET
+In-Reply-To: <20240312125729.82695-3-colinmca242@gmail.com>
+References: <20240312125729.82695-1-colinmca242@gmail.com>
+ <20240312125729.82695-3-colinmca242@gmail.com>
+Date: Tue, 12 Mar 2024 16:19:23 +0100
+Message-ID: <87jzm74gw4.fsf@baylibre.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|DM4PR12MB7526:EE_
-X-MS-Office365-Filtering-Correlation-Id: cac22b31-36e0-4fad-743e-08dc42a7034e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: F7QOWzc3qoWUbM6xg5Z2cK/jpDGQmC4TqkFXQGFXpi/HglgTFpGMR0RMZs/29E29U3H5L4Mh3pC90rMcsd7jbjwid2vtqlZsZOaN2THv6ineoP6un1fc+X2RdXbaDvjp5LKJZrXG0/BBmAxr16tUo8da4UJxUYpwI7ye0T+4Aq3WGPUvrGAoq9943XfvxYy8PLnGGf4Zs0ttTiZULOkPxzxCkhpxgVY3YI8KKt5RmJVFC+sy4y86tjHWqtBGp5DW29fyKVhdD97itgnEnnsaviCsqIpYw6h8zREsV4i5xn0ZzBoNq5iUjOVngQWYhgB2OKcPfPm7ErKIJGdt+3E9ms6a1XXtq/vVBi3JUJUc+keeQQ87ywjo8gGnBM+8yFMA7sxlQk5CXfcJo97eUL0TSOmMZh3oakYf2q4aCp2LfEqX42L45kJ1cxTJxV2iAREooZFFxyELt1qjD+M9UY44NZErMTl0bVhaTsMQNG0eELWukXd5+aTX0nLtVNahWYbecPwoTmc23m6op6lCg7FjFI3V3DqboLtiti86+ZKx5Q7WV3fgiQ6RAQ7Cn38QEnDjDXn258gilIcfFwIulbsVbW/kJGoB0ASELPjgpVuQh/ONSkJidukGY/dWL2LytLxx2lFftyZwgN3qOswW8tX9rQ==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(1800799015)(376005); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?RWpCcThrL2N4cmxSaVQxYUgxcUdhVEt1YzRUSDM4Y0x5anhlL0ZzY0NvWlBx?=
- =?utf-8?B?VXRNUzY4VG00RzJnSlgyU25NWk5yVXovMkRTR3VPaVd5OFhVblZ2b0swdW5u?=
- =?utf-8?B?cFJ3cWhXUEZ5MHY4bnFtc05sOEFQTFZMcXBVWG84L0pDU2NnM1RhRnRHOWk0?=
- =?utf-8?B?bXQvQmFMZmhIRFpUUGp4Uk5PN2x6N0c4QkNVdmdqM3NBNVpoRjFkQ1VXWnZI?=
- =?utf-8?B?QUlFZWs3WmcyM2cveDhBOFg4L3lDa3M2Zld2T3V5VGZocFFKK2NwVEkrTjRq?=
- =?utf-8?B?MG5LVkNjcTZiZVNKd0ZRUTRUS0pZZlQ2b053ZGhIK1AzK1VuZlpjblNydjVn?=
- =?utf-8?B?Rm9pdTBMMVhMVzJLWTJUWWQ5dUtEN3V1Z3I0OHhuWW9JSEYxdzNiakUvaDh6?=
- =?utf-8?B?Y2MrMjgrd0hVaGJFWEtlSzJ3eEFLcXNNRWNXTXQ4MmZ2QW9wMFNmNVRUUU02?=
- =?utf-8?B?Yk9kaERNK3ZxTUFLTjZvY1hVbWpPZWpxWGc1aHB5SlpXaGNHZ1dtUE1HZmww?=
- =?utf-8?B?enRyRGxUS280N2ZHa1VQWHcySEhMZXV1eDEzOExDeGxrWHY3SjFIUWhmemhT?=
- =?utf-8?B?Q1lNSFFxSjRxTURYRTN5cEVHdFFTUnAvRFd3eEV2Wjg2T1Zrdk5JMlY0eGFx?=
- =?utf-8?B?bkMrcnZqaXJjN1NTZG5mMzJNekZoMTNnL2U1MTEwUTNSeXRUTHBpelVHTXBU?=
- =?utf-8?B?emdqbjNYOWwvdGwrYk56KzBER1d5UHdvUWFFU3pndW5MYVNMZDhMdExTcW54?=
- =?utf-8?B?aGdtTExlUzZITWNqSW4wMGRHVmZxVGYxTC8zNzRaZ3FPcnc1Y3M0UzNSS014?=
- =?utf-8?B?S0EyM0c0bk9FNVk3SitwbnVEUlJNREgzRGdWNVA4eGx0bkNvLzBkcENqMEJO?=
- =?utf-8?B?NDJNUWxNWldPSmoyUmtWTmJabGJRUVlGeUY5VVlVNU9lejRFaFNoaGNNUjhC?=
- =?utf-8?B?S1c4RkhJd0lCZ002b0xmT3I3aVQ2ajJuSmYzamp0a1YwazFLaldGSFg1a0c5?=
- =?utf-8?B?SkRjVVBwS1NjTzkxdGxYdHNZZ3UzUlBJd2YvdVFrMjc2R2d1YkVEWHBvSEJU?=
- =?utf-8?B?ZDA3RUJKNmd3SFY5cFBiZ0JNVmdqajlBL1h1MFZYdHQ5S2MwUWxXR29ZdEVT?=
- =?utf-8?B?QUdkZTM5alhyZkZzMHlxUWNCZE1UcUNJQU1hajduay9DLzhZak9GZy9OSTVP?=
- =?utf-8?B?SmM0NDZ1bmx2ckxYcnNkZitkd1VGTjIzYVZmYnlScXQ4cmZZVFRMMXZrSUtx?=
- =?utf-8?B?bHl6NGRIVEJVVWYrNnIrZThDMEFiNWJPdkg0WXNEdFlZMzR3M0ZOVzlmMXhS?=
- =?utf-8?B?WG9JQXNSWHh5a2dweVpLSFVrU1hFSWJNSEswNFpSUlZCQTdocGFzL0djMiti?=
- =?utf-8?B?MGE1cTdRVHpVZks3OWEzRTJqSWJ2c2lwZDlqSkR0VmxuNE9IK3JaaTV1Z2sw?=
- =?utf-8?B?aXVEQVkxazIzQ3dlQ0ZROWhWUG5VbmxvRzFZb3U2ellZZ09keFZteDAwd3J0?=
- =?utf-8?B?YVRCaXpUTUV6c1ExQTJrZFJXVCtYN3pHMUZHb3FQUlF2Y2ZwamFmZ0V0ckM3?=
- =?utf-8?B?djN2K0pETTUyajBLelFZWnhVeTZBN1FHYndkNlRzK2VLZ1gvRTZxS1hzNmg2?=
- =?utf-8?B?cTB3Y2VPSjB2dGJNeHpCNTRnTkNaektBeTVtcHlnU0huZGp5UzI2bDFOL1Nt?=
- =?utf-8?B?a3lVN0JaS25HTk0zZGlzL04yK1UybGNsVnhjU3A2NnZxS3RFY3Aya0F4Qk5M?=
- =?utf-8?B?bkx5ZGE2WWIyRmptS3c1L0Z6dEdrTkY1UDNFbmZxdzFGUmI1T253aDFRblR5?=
- =?utf-8?B?dE41THJNS3I4TEthSmg4Nkt3VHlLZEJGaXk3NnNOSFJ1d1pJWUNXN1lTd2M1?=
- =?utf-8?B?YW9zdStqZXJOdmRGb3lsT1pIaSt6SlF0aG1JMDF1L1NpUTBqMU1VdmxmNTE3?=
- =?utf-8?B?OUl4OGZRVlo1eVNaZDVqWWFEZXF1MFp5OWtoTndSU3NRNTFTWmwxMVhNeWxV?=
- =?utf-8?B?TEQrZTJJZlpZaVhrL3pvZkNtaVVaV3E2bnpHdjhMQThVM0NlSzR3ZUtmTHB5?=
- =?utf-8?B?UDEyNUF4U05nN1lKcVU0b1BrWE9BUWtQWXE0SEcwSGRhT3pHbUI4elJKODM2?=
- =?utf-8?Q?rKmx7dJ27Kx0XEeSt89vpDOqf?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: cac22b31-36e0-4fad-743e-08dc42a7034e
-X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Mar 2024 15:13:46.4649 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: bICHDJVGLl4+ahqgL8HEF5voXWsa9vPdovMLJq3ZRCszdlvUQE90YpP9y/5ZTdtN
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB7526
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -188,49 +94,227 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Colin,
+
+Thank you for the patch.
+
+On mar., mars 12, 2024 at 07:57, Colin McAllister <colinmca242@gmail.com> wrote:
+
+Sam also gave his review here:
+https://lore.kernel.org/all/CAPLW+4kHmPtfACyND4Vc2p0ZrsyGY=+bRU=fdub4K1uX5p33Jw@mail.gmail.com/
+
+Please include his review tag in the next submission.
+
+I will add it at the appropriate place below:
 
 
-On 3/8/24 09:41, Michal Simek wrote:
-> Describe usb wakeup interrupt.
-> 
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> From: Colin McAllister <colin.mcallister@garmin.com>
+>
+> Currently, setting CONFIG_AB_BACKUP_OFFSET in a target's defconfig will
+> not actually enable the #if protected code in android_ab.c. This is
+> because "CONFIG_" should have been prepended to the config macro, or the
+> macros defined in kconfig.h could have been used.
+>
+> The code included by ANDROID_AB_BACKUP_OFFSET has been refactored to no
+> longer be conditionally compiled by preprocessor conditionals and
+> instead use C conditionals. This better aligns with the Linux kernel
+> style guide.
+>
+> Fixes: 3430f24bc6 ("android_ab: Try backup booloader_message")
+> Signed-off-by: Colin McAllister <colin.mcallister@garmin.com>
+> Cc: Joshua Watt <JPEWhacker@gmail.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Colin McAllister <colinmca242@gmail.com>
+Reviewed-by: Sam Protsenko <semen.protsenko@linaro.org>
+
 > ---
-> 
->   arch/arm/dts/zynqmp.dtsi | 10 ++++++----
->   1 file changed, 6 insertions(+), 4 deletions(-)
-> 
-> diff --git a/arch/arm/dts/zynqmp.dtsi b/arch/arm/dts/zynqmp.dtsi
-> index daae23c12b79..c19d86e5a0c4 100644
-> --- a/arch/arm/dts/zynqmp.dtsi
-> +++ b/arch/arm/dts/zynqmp.dtsi
-> @@ -1001,10 +1001,11 @@
->   				status = "disabled";
->   				reg = <0x0 0xfe200000 0x0 0x40000>;
->   				interrupt-parent = <&gic>;
-> -				interrupt-names = "host", "peripheral", "otg";
-> +				interrupt-names = "host", "peripheral", "otg", "wakeup";
->   				interrupts = <GIC_SPI 65 IRQ_TYPE_LEVEL_HIGH>,
->   					     <GIC_SPI 65 IRQ_TYPE_LEVEL_HIGH>,
-> -					     <GIC_SPI 69 IRQ_TYPE_LEVEL_HIGH>;
-> +					     <GIC_SPI 69 IRQ_TYPE_LEVEL_HIGH>,
-> +					     <GIC_SPI 75 IRQ_TYPE_LEVEL_HIGH>;
->   				/* iommus = <&smmu 0x860>; */
->   				snps,quirk-frame-length-adjustment = <0x20>;
->   				clock-names = "ref";
-> @@ -1032,10 +1033,11 @@
->   				status = "disabled";
->   				reg = <0x0 0xfe300000 0x0 0x40000>;
->   				interrupt-parent = <&gic>;
-> -				interrupt-names = "host", "peripheral", "otg";
-> +				interrupt-names = "host", "peripheral", "otg", "wakeup";
->   				interrupts = <GIC_SPI 70 IRQ_TYPE_LEVEL_HIGH>,
->   					     <GIC_SPI 70 IRQ_TYPE_LEVEL_HIGH>,
-> -					     <GIC_SPI 74 IRQ_TYPE_LEVEL_HIGH>;
-> +					     <GIC_SPI 74 IRQ_TYPE_LEVEL_HIGH>,
-> +					     <GIC_SPI 76 IRQ_TYPE_LEVEL_HIGH>;
->   				/* iommus = <&smmu 0x861>; */
->   				snps,quirk-frame-length-adjustment = <0x20>;
->   				clock-names = "ref";
+> v2:
+>   - Replaced #if conditionals with C if conditionals
+>   - Opted to use CONFIG_ANDROID_AB_BACKUP_OFFSET directly instead of
+>     macros in kconfig.h as CONFIG_ANDROID_AB_BACKUP_OFFSET is not a
+> 	boolean or tristate value and doesn't have different values when
+> 	building SPL or TPL.
+> v3:
+>   - Added "Fixes:" tag
+> v4:
+>   - No changes
+>
+>  boot/android_ab.c | 97 ++++++++++++++++++++++-------------------------
+>  1 file changed, 45 insertions(+), 52 deletions(-)
+>
+> diff --git a/boot/android_ab.c b/boot/android_ab.c
+> index 9a3d15ec60..f547aa64e4 100644
+> --- a/boot/android_ab.c
+> +++ b/boot/android_ab.c
+> @@ -187,13 +187,12 @@ int ab_select_slot(struct blk_desc *dev_desc, struct disk_partition *part_info,
+>  		   bool dec_tries)
+>  {
+>  	struct bootloader_control *abc = NULL;
+> +	struct bootloader_control *backup_abc = NULL;
+>  	u32 crc32_le;
+>  	int slot, i, ret;
+>  	bool store_needed = false;
+> +	bool valid_backup = false;
+>  	char slot_suffix[4];
+> -#if ANDROID_AB_BACKUP_OFFSET
+> -	struct bootloader_control *backup_abc = NULL;
+> -#endif
+>  
+>  	ret = ab_control_create_from_disk(dev_desc, part_info, &abc, 0);
+>  	if (ret < 0) {
+> @@ -205,53 +204,49 @@ int ab_select_slot(struct blk_desc *dev_desc, struct disk_partition *part_info,
+>  		return ret;
+>  	}
+>  
+> -#if ANDROID_AB_BACKUP_OFFSET
+> -	ret = ab_control_create_from_disk(dev_desc, part_info, &backup_abc,
+> -					  ANDROID_AB_BACKUP_OFFSET);
+> -	if (ret < 0) {
+> -		free(abc);
+> -		return ret;
+> +	if (CONFIG_ANDROID_AB_BACKUP_OFFSET) {
+> +		ret = ab_control_create_from_disk(dev_desc, part_info, &backup_abc,
+> +						  CONFIG_ANDROID_AB_BACKUP_OFFSET);
+> +		if (ret < 0) {
+> +			free(abc);
+> +			return ret;
+> +		}
+>  	}
+> -#endif
+>  
+>  	crc32_le = ab_control_compute_crc(abc);
+>  	if (abc->crc32_le != crc32_le) {
+>  		log_err("ANDROID: Invalid CRC-32 (expected %.8x, found %.8x),",
+>  			crc32_le, abc->crc32_le);
+> -#if ANDROID_AB_BACKUP_OFFSET
+> -		crc32_le = ab_control_compute_crc(backup_abc);
+> -		if (backup_abc->crc32_le != crc32_le) {
+> -			log_err("ANDROID: Invalid backup CRC-32 ");
+> -			log_err("expected %.8x, found %.8x),",
+> -				crc32_le, backup_abc->crc32_le);
+> -#endif
+> -
+> -			log_err("re-initializing A/B metadata.\n");
+> +		if (CONFIG_ANDROID_AB_BACKUP_OFFSET) {
+> +			crc32_le = ab_control_compute_crc(backup_abc);
+> +			if (backup_abc->crc32_le != crc32_le) {
+> +				log_err(" ANDROID: Invalid backup CRC-32 ");
+> +				log_err("(expected %.8x, found %.8x),",
+> +					crc32_le, backup_abc->crc32_le);
+> +			} else {
+> +				valid_backup = true;
+> +				log_info(" copying A/B metadata from backup.\n");
+> +				memcpy(abc, backup_abc, sizeof(*abc));
+> +			}
+> +		}
+>  
+> +		if (!valid_backup) {
+> +			log_err(" re-initializing A/B metadata.\n");
+>  			ret = ab_control_default(abc);
+>  			if (ret < 0) {
+> -#if ANDROID_AB_BACKUP_OFFSET
+> -				free(backup_abc);
+> -#endif
+> +				if (CONFIG_ANDROID_AB_BACKUP_OFFSET)
+> +					free(backup_abc);
+>  				free(abc);
+>  				return -ENODATA;
+>  			}
+> -#if ANDROID_AB_BACKUP_OFFSET
+> -		} else {
+> -			/*
+> -			 * Backup is valid. Copy it to the primary
+> -			 */
+> -			memcpy(abc, backup_abc, sizeof(*abc));
+>  		}
+> -#endif
+>  		store_needed = true;
+>  	}
+>  
+>  	if (abc->magic != BOOT_CTRL_MAGIC) {
+>  		log_err("ANDROID: Unknown A/B metadata: %.8x\n", abc->magic);
+> -#if ANDROID_AB_BACKUP_OFFSET
+> -		free(backup_abc);
+> -#endif
+> +		if (CONFIG_ANDROID_AB_BACKUP_OFFSET)
+> +			free(backup_abc);
+>  		free(abc);
+>  		return -ENODATA;
+>  	}
+> @@ -259,9 +254,8 @@ int ab_select_slot(struct blk_desc *dev_desc, struct disk_partition *part_info,
+>  	if (abc->version > BOOT_CTRL_VERSION) {
+>  		log_err("ANDROID: Unsupported A/B metadata version: %.8x\n",
+>  			abc->version);
+> -#if ANDROID_AB_BACKUP_OFFSET
+> -		free(backup_abc);
+> -#endif
+> +		if (CONFIG_ANDROID_AB_BACKUP_OFFSET)
+> +			free(backup_abc);
+>  		free(abc);
+>  		return -ENODATA;
+>  	}
+> @@ -338,30 +332,29 @@ int ab_select_slot(struct blk_desc *dev_desc, struct disk_partition *part_info,
+>  		abc->crc32_le = ab_control_compute_crc(abc);
+>  		ret = ab_control_store(dev_desc, part_info, abc, 0);
+>  		if (ret < 0) {
+> -#if ANDROID_AB_BACKUP_OFFSET
+> -			free(backup_abc);
+> -#endif
+> +			if (CONFIG_ANDROID_AB_BACKUP_OFFSET)
+> +				free(backup_abc);
+>  			free(abc);
+>  			return ret;
+>  		}
+>  	}
+>  
+> -#if ANDROID_AB_BACKUP_OFFSET
+> -	/*
+> -	 * If the backup doesn't match the primary, write the primary
+> -	 * to the backup offset
+> -	 */
+> -	if (memcmp(backup_abc, abc, sizeof(*abc)) != 0) {
+> -		ret = ab_control_store(dev_desc, part_info, abc,
+> -				       ANDROID_AB_BACKUP_OFFSET);
+> -		if (ret < 0) {
+> -			free(backup_abc);
+> -			free(abc);
+> -			return ret;
+> +	if (CONFIG_ANDROID_AB_BACKUP_OFFSET) {
+> +		/*
+> +		* If the backup doesn't match the primary, write the primary
+> +		* to the backup offset
+> +		*/
 
-Applied.
-M
+checkpatch.pl seems to complain about this comment block:
+
+WARNING: Block comments should align the * on each line
+#166: FILE: boot/android_ab.c:344:
++               /*
++               * If the backup doesn't match the primary, write the primary
+
+To reproduce, run:
+
+$ ./scripts/checkpatch.pl --strict --u-boot --git HEAD^..HEAD
+
+With the above addressed, please send a v5 including:
+
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+
+> +		if (memcmp(backup_abc, abc, sizeof(*abc)) != 0) {
+> +			ret = ab_control_store(dev_desc, part_info, abc,
+> +					       CONFIG_ANDROID_AB_BACKUP_OFFSET);
+> +			if (ret < 0) {
+> +				free(backup_abc);
+> +				free(abc);
+> +				return ret;
+> +			}
+>  		}
+> +		free(backup_abc);
+>  	}
+> -	free(backup_abc);
+> -#endif
+>  
+>  	free(abc);
+>  
+> -- 
+> 2.34.1
