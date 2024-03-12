@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53BA0C54E5D
-	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 23:38:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FACAC54E58
+	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 23:39:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A6BB487FC0;
-	Wed, 13 Mar 2024 00:37:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0C7F687FC1;
+	Wed, 13 Mar 2024 00:37:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="aZJvhwt2";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="timuwsEu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 36A2C87FC0; Wed, 13 Mar 2024 00:37:50 +0100 (CET)
+ id 1B85687FC1; Wed, 13 Mar 2024 00:37:51 +0100 (CET)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 809B487F78
+ by phobos.denx.de (Postfix) with ESMTPS id 808FD87F16
  for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 00:37:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
@@ -28,22 +28,22 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1710286655; bh=Y1FUU2xTuZdqJan1m51A8K9F8tFmlyhDjS6KpJdmZmE=;
- b=aZJvhwt2ib+Jig5J4JyvzWEZfXiQeRdkldJnDUt/lsF+Xojue6qUt6RqEQ3B9h3REkb4o4RPC
- Z5zIKYsUez37SJyCxSJVBTiBEBGBHrFq4uwMsUW92pBu3euG59aNWhr5rgvn51AC1emdTxXkz8i
- Ck/31Wq8GD+7cpMYSE+uvbGlf6cYIsKwntAYySa9BtvXen3Qg6mBlLkwsb+0l4PHwK4seiCINPX
- 7s/w9sveXXmytP7FHzXSNyW+4MccpFeWuMeFsfIAI4agayzpmUIDje8Yh+FwhBF/Il0Rs3R9T9K
- t/EqntjFD48aFGks9W4rdAmj7XEbrfj6wV8EFCDMgBag==
+ t=1710286652; bh=oJzQCpDdCkTWo6NN/cFXFKJeequRIOnfM9lORMg/bWA=;
+ b=timuwsEugVqbodyHmWnqeSME8Mr5t8TB/ytHAqHuBRzwTmwjDz3WJakKbiSqi0rrhYYD2svVK
+ toqNrYsXC+at2TVYfDG+3XGsawOQ6fcGKGs3oUXtYF9SfS8E8KKmma5qBYWZQJNzpl81l6pAPGN
+ NrAwqCiacIbdi4/5FTEtXYCAny3ye4RrSOVRr2Fv7Ie6CGOOIhWDCb6qkk8lBkZT/g73u6IGAjW
+ 9HycKcGUDR381QlkNGHlV9GVsCEfQPbOTwi6wn09fOfTeagbnWBR8P/pGSnpOOUWrd/eTUbwfah
+ 79qvzWCcFDszzhgMbFXmoYsWBwxz/oVbtCR5AuD4PXEg==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>
-Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>,
- u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v2 11/12] rockchip: google: gru: Migrate to use IO-domain
- driver
-Date: Tue, 12 Mar 2024 23:36:21 +0000
-Message-ID: <20240312233636.1428749-12-jonas@kwiboo.se>
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>, Klaus Goger
+ <klaus.goger@theobroma-systems.com>
+Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH v2 10/12] rockchip: theobroma-systems: puma: Migrate to use
+ IO-domain driver
+Date: Tue, 12 Mar 2024 23:36:20 +0000
+Message-ID: <20240312233636.1428749-11-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20240312233636.1428749-1-jonas@kwiboo.se>
 References: <20240312233636.1428749-1-jonas@kwiboo.se>
@@ -55,7 +55,7 @@ X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
-X-ForwardEmail-ID: 65f0e73ee6c04c5b305936b2
+X-ForwardEmail-ID: 65f0e73ae6c04c5b305936a0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,88 +81,58 @@ Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 v2:
 - Collect r-b tag
 ---
- board/google/gru/gru.c             | 35 ------------------------------
- configs/chromebook_bob_defconfig   |  1 +
- configs/chromebook_kevin_defconfig |  1 +
- 3 files changed, 2 insertions(+), 35 deletions(-)
+ .../puma_rk3399/puma-rk3399.c                 | 21 -------------------
+ configs/puma-rk3399_defconfig                 |  1 +
+ 2 files changed, 1 insertion(+), 21 deletions(-)
 
-diff --git a/board/google/gru/gru.c b/board/google/gru/gru.c
-index 9cb3a5252047..e08cb42c27ed 100644
---- a/board/google/gru/gru.c
-+++ b/board/google/gru/gru.c
-@@ -3,18 +3,9 @@
-  * Copyright 2018 Google
+diff --git a/board/theobroma-systems/puma_rk3399/puma-rk3399.c b/board/theobroma-systems/puma_rk3399/puma-rk3399.c
+index 8b998ef45565..eeb8a99231e4 100644
+--- a/board/theobroma-systems/puma_rk3399/puma-rk3399.c
++++ b/board/theobroma-systems/puma_rk3399/puma-rk3399.c
+@@ -3,31 +3,10 @@
+  * (C) Copyright 2017 Theobroma Systems Design und Consulting GmbH
   */
  
--#include <common.h>
- #include <dm.h>
- #include <init.h>
+-#include <dm.h>
 -#include <syscon.h>
- #include <asm/arch-rockchip/clock.h>
--#include <asm/arch-rockchip/grf_rk3399.h>
+-#include <dm/pinctrl.h>
+-#include <asm/arch-rockchip/clock.h>
 -#include <asm/arch-rockchip/hardware.h>
--
--#define GRF_IO_VSEL_BT656_SHIFT 0
--#define GRF_IO_VSEL_AUDIO_SHIFT 1
--#define PMUGRF_CON0_VSEL_SHIFT 8
--#define PMUGRF_CON0_VOL_SHIFT 9
+-#include <asm/arch-rockchip/grf_rk3399.h>
+ #include "../common/common.h"
  
- #ifdef CONFIG_SPL_BUILD
- /* provided to defeat compiler optimisation in board_init_f() */
-@@ -63,29 +54,3 @@ int board_early_init_r(void)
- 	return 0;
- }
- #endif
--
 -static void setup_iodomain(void)
 -{
+-	const u32 GRF_IO_VSEL_GPIO4CD_SHIFT = 3;
 -	struct rk3399_grf_regs *grf =
--	   syscon_get_first_range(ROCKCHIP_SYSCON_GRF);
--	struct rk3399_pmugrf_regs *pmugrf =
--	   syscon_get_first_range(ROCKCHIP_SYSCON_PMUGRF);
--
--	/* BT656 and audio is in 1.8v domain */
--	rk_setreg(&grf->io_vsel, (1 << GRF_IO_VSEL_BT656_SHIFT |
--				  1 << GRF_IO_VSEL_AUDIO_SHIFT));
+-	    syscon_get_first_range(ROCKCHIP_SYSCON_GRF);
 -
 -	/*
--	 * Set GPIO1 1.8v/3.0v source select to PMU1830_VOL
--	 * and explicitly configure that PMU1830_VOL to be 1.8V
+-	 * Set bit 3 in GRF_IO_VSEL so PCIE_RST# works (pin GPIO4_C6).
+-	 * Linux assumes that PCIE_RST# works out of the box as it probes
+-	 * PCIe before loading the iodomain driver.
 -	 */
--	rk_setreg(&pmugrf->soc_con0, (1 << PMUGRF_CON0_VSEL_SHIFT |
--				      1 << PMUGRF_CON0_VOL_SHIFT));
+-	rk_setreg(&grf->io_vsel, 1 << GRF_IO_VSEL_GPIO4CD_SHIFT);
 -}
 -
--int rockchip_early_misc_init_r(void)
--{
+ int rockchip_early_misc_init_r(void)
+ {
 -	setup_iodomain();
--
--	return 0;
--}
-diff --git a/configs/chromebook_bob_defconfig b/configs/chromebook_bob_defconfig
-index 989a8211f64d..d0321948697b 100644
---- a/configs/chromebook_bob_defconfig
-+++ b/configs/chromebook_bob_defconfig
-@@ -66,6 +66,7 @@ CONFIG_I2C_CROS_EC_TUNNEL=y
+ 	setup_boottargets();
+ 
+ 	return 0;
+diff --git a/configs/puma-rk3399_defconfig b/configs/puma-rk3399_defconfig
+index 7e76ec5076f9..c2759e1a9520 100644
+--- a/configs/puma-rk3399_defconfig
++++ b/configs/puma-rk3399_defconfig
+@@ -66,6 +66,7 @@ CONFIG_GPIO_HOG=y
+ CONFIG_SPL_GPIO_HOG=y
+ CONFIG_ROCKCHIP_GPIO=y
  CONFIG_SYS_I2C_ROCKCHIP=y
- CONFIG_I2C_MUX=y
- CONFIG_CROS_EC_KEYB=y
 +CONFIG_ROCKCHIP_IODOMAIN=y
- CONFIG_CROS_EC=y
- CONFIG_CROS_EC_SPI=y
- CONFIG_PWRSEQ=y
-diff --git a/configs/chromebook_kevin_defconfig b/configs/chromebook_kevin_defconfig
-index 07a96aa18989..120c11c04972 100644
---- a/configs/chromebook_kevin_defconfig
-+++ b/configs/chromebook_kevin_defconfig
-@@ -67,6 +67,7 @@ CONFIG_I2C_CROS_EC_TUNNEL=y
- CONFIG_SYS_I2C_ROCKCHIP=y
- CONFIG_I2C_MUX=y
- CONFIG_CROS_EC_KEYB=y
-+CONFIG_ROCKCHIP_IODOMAIN=y
- CONFIG_CROS_EC=y
- CONFIG_CROS_EC_SPI=y
- CONFIG_PWRSEQ=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_MMC_SDHCI=y
 -- 
 2.43.2
 
