@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 728B0C54E5D
-	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 20:21:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF5DAC54E5D
+	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 20:21:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9ACB187F30;
-	Tue, 12 Mar 2024 21:20:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 21B6587F6A;
+	Tue, 12 Mar 2024 21:20:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="yNbYm2nd";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Pey2APXS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F13F387F8A; Tue, 12 Mar 2024 21:20:43 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id 0CC2787F8C; Tue, 12 Mar 2024 21:20:45 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F381383348
+ by phobos.denx.de (Postfix) with ESMTPS id 1B8CC87F5E
  for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 21:20:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 42CKKT7i004645;
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 42CKKTQ3088781;
  Tue, 12 Mar 2024 15:20:29 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1710274829;
- bh=Te//NQFPgnnGGXx6i39er9EOBE6l8fpGa61K2KyDkWI=;
+ bh=8NAvSO/jcBzxfDeDZwRVhLu2RHNr6Emc2U/UgvdYBQ8=;
  h=From:Date:Subject:References:In-Reply-To:To:CC;
- b=yNbYm2ndMFlZhXX3YAYwWq09zRt5TWzJgZ1ICzFnCkCvjrk1taX/jN7xJK4zNjHNA
- 2NVs/ewXgtkRQL3GHbSPq2aZ0TXbppocMOLPLTE4AsVTGiBlA4zRGizuj0Mk0iB2Ur
- kso7L2zDCsihLcyzNxeic55IvI+7FPnjYuyitBwo=
-Received: from DLEE101.ent.ti.com (dlee101.ent.ti.com [157.170.170.31])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 42CKKTDH086638
+ b=Pey2APXSd8yo9C+PH0gyk/fnoRDnpWoyZnZKhk7DsUgqpsyL/NKpIKJ/wCyc2SKQS
+ HCJPEW6u3IS2O296e+KZxv2scYeqn1KnHSyiKAQBfzSg3lnJ6QXCi2+V1Bu0kx1jtP
+ /xV/yjwpOoVlgatW81gclr7NgMsrFwrCxiMugw/8=
+Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 42CKKTKD038150
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Tue, 12 Mar 2024 15:20:29 -0500
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 12
- Mar 2024 15:20:28 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ Mar 2024 15:20:29 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Tue, 12 Mar 2024 15:20:29 -0500
 Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 42CKKSFT097256;
- Tue, 12 Mar 2024 15:20:28 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 42CKKSSs097262;
+ Tue, 12 Mar 2024 15:20:29 -0500
 From: Bryan Brattlof <bb@ti.com>
-Date: Tue, 12 Mar 2024 15:20:24 -0500
-Subject: [PATCH v4 06/13] arch: mach-k3: introduce basic files to support
- the am62px SoC family
+Date: Tue, 12 Mar 2024 15:20:27 -0500
+Subject: [PATCH v4 09/13] dma: ti: k3-udma: Add DMA PSIL mappings for AM62P
+ and J722S
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <20240205-am62px-wip-rebasing-v4-6-fa772bfa623b@ti.com>
+Message-ID: <20240205-am62px-wip-rebasing-v4-9-fa772bfa623b@ti.com>
 References: <20240205-am62px-wip-rebasing-v4-0-fa772bfa623b@ti.com>
 In-Reply-To: <20240205-am62px-wip-rebasing-v4-0-fa772bfa623b@ti.com>
 To: Tom Rini <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>,
@@ -69,18 +69,18 @@ CC: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass
  <hnagalla@ti.com>, Ravi Gunasekaran <r-gunasekaran@ti.com>, Vaishnav Achath
  <vaishnav.a@ti.com>, Jayesh Choudhary <j-choudhary@ti.com>
 X-Mailer: b4 0.12.1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=17564; i=bb@ti.com;
- h=from:subject:message-id; bh=882TjxhUAiGgyOvbWjFG+OeZfNbJU/d7oj53rVKCJcc=;
- b=owNCWmg5MUFZJlNZtg/QMQAAYf///v/Jbvd9rd/0fzt0+ve/6bv3fr++3P+//Lv/3Dd8382wA
- Rmyh2oBoADagAA0AAyDRoAA0aNNA0GCADRoANGgGgGjQ0ZNHpGRoNGh6ENNppEDEwTQD0gyANA0
- 0aA0BpoA00HqADINA9Q0BkGgDQ9QANMTIZBo00A0ZBpoGIhoeoPUDTQMgDQBoDIGQ000aNBoGjT
- EDTJoAAaAaGIDEGQ0DQyAwg0yDEaYgAB5Bq3i/d384+2kD7y5xyJBi5rfRuq1qODesPCuka9BMu
- TTKhLAIKpVXR9ct25YBlZTGqCpag2G6hQQnPBEKBglPdZ9KnK7ZYcaAJhyafeK1kcrPxlifRIym
- OWcJ0IR2zxr22r9chR9OIyuEa1owyGMSM2u7teESy8pAUsLaMClNNCl76nY9TckAHpJSKMkhNBJ
- n+pETuuYfIBqr9qtXA3ZZOYOImBdWGjgi6Bf5m+pQ4s1J9KEr7DpgJYgRDjXaSumCQoqH6hOlM9
- C0EYIUwQGKjxPFmfMQI/AQa4Ni0tFh64BcCa3xQL9ULiFtGTuM6wKnYeww9luB2I76Ooej332aH
- TVPR7MSoP0h/ZPszhgcsBkpMsGBtJ8gLzo5eIlKjSebRCADRWSEecBK/f17NE38MFiwdyvam/eO
- dN0BmIKKUamRv+LuSKcKEhbB+gYgA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=10819; i=bb@ti.com;
+ h=from:subject:message-id; bh=dBQHMP7Z6ldCEGl0uUL/dPpqVeRGizSZ0gd3i3mG/sQ=;
+ b=owNCWmg5MUFZJlNZwPwdcwAAZf////9PPm89Dv/H/dPT13b6/l2/7/bev/s131zd+n3r+l0wA
+ RsZpD1AMgDTQAA0DQDQ0yGgD1DagNGgAyAAAAAAeo0DIDaRkYE9QB5Rk9TeqIAAAAMjRoNAyANA
+ NBoMTIBpo9Q0emo/VNAABo9QABo0PSaGgGnqaPU9QA9TagDtQ8kMmhoM1GmEAAyHqZNMEAAAAAB
+ oMANQyAAABoAAAAABk8p6gILuUnipNSC8lXqIIlzpMcttrOnsdk9y2wy50OpCgTJJsWAFFg33k8
+ QOL1qJAln73euvfaxu1ZhMpTgCIzx54Jj9bQSyCBGFCp9NnXGyMV1senQd1aJ5kh6Ew3z5oQo4W
+ MGtYo6k8L8nVC8NEqMEqjpS0Xxcl3YmHU1V1NNL8AEmiNKI1hZBfGgXH6U9a/D+Z68pqs3BIDJz
+ M5QwaC2GW2wEHTBoCeYQQ+5x2baGlZxgZG5w1y0v2T+JbiQx7LJTc1EoE/UCreF3bkgC5vG5TgC
+ GOpkACZFLVa9EBqdu+MXutNmCa2zYvMDv/SW5BxWiw6VwiDjLDJN87ARJg2dKIzCqw/U408AiIX
+ 6JCReftgH/txXEAeX0eDxNTMBIkj1EPLSgrdT744TcRI4JDjDDIhOidIALmbEDL2BADKiv8XckU
+ 4UJDA/B1zA=
 X-Developer-Key: i=bb@ti.com; a=openpgp;
  fpr=D3D177E40A38DF4D1853FEEF41B90D5D71D56CE0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
@@ -100,568 +100,392 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce the basic functions and definitions needed to properly
-initialize TI's am62p family of SoCs
+From: Vignesh Raghavendra <vigneshr@ti.com>
 
+Add PSIL data for the AM62P and the J722S SoC family. The PSIL mapping
+for the J722S is the same except for the extra instances of the CSI-RX.
+So let's reuse the same file for both the AM62P and J722S.
+
+Signed-off-by: Vignesh Raghavendra <vigneshr@ti.com>
+Signed-off-by: Ravi Gunasekaran <r-gunasekaran@ti.com>
+Signed-off-by: Vaishnav Achath <vaishnav.a@ti.com>
+Signed-off-by: Jayesh Choudhary <j-choudhary@ti.com>
+[bb@ti.com: rebased to U-Boot v2024.01]
 Signed-off-by: Bryan Brattlof <bb@ti.com>
 ---
- arch/arm/mach-k3/Kconfig                       |   7 +-
- arch/arm/mach-k3/Makefile                      |   1 +
- arch/arm/mach-k3/am62p5_init.c                 | 281 +++++++++++++++++++++++++
- arch/arm/mach-k3/am62px/Kconfig                |  32 +++
- arch/arm/mach-k3/include/mach/am62p_hardware.h |  83 ++++++++
- arch/arm/mach-k3/include/mach/am62p_spl.h      |  49 +++++
- arch/arm/mach-k3/include/mach/hardware.h       |   4 +
- arch/arm/mach-k3/include/mach/spl.h            |   4 +
- 8 files changed, 460 insertions(+), 1 deletion(-)
+ drivers/dma/ti/Makefile        |   2 +
+ drivers/dma/ti/k3-psil-am62p.c | 325 +++++++++++++++++++++++++++++++++++++++++
+ drivers/dma/ti/k3-psil-priv.h  |   1 +
+ drivers/dma/ti/k3-psil.c       |   4 +
+ 4 files changed, 332 insertions(+)
 
-diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
-index 6a937ff96d208..2bb970c2d4c9b 100644
---- a/arch/arm/mach-k3/Kconfig
-+++ b/arch/arm/mach-k3/Kconfig
-@@ -10,6 +10,9 @@ config SOC_K3_AM625
- config SOC_K3_AM62A7
- 	bool "TI's K3 based AM62A7 SoC Family Support"
- 
-+config SOC_K3_AM62P5
-+	bool "TI's K3 based AM62P5 SoC Family Support"
-+
- config SOC_K3_AM642
- 	bool "TI's K3 based AM642 SoC Family Support"
- 
-@@ -80,6 +83,7 @@ config SYS_K3_BOOT_PARAM_TABLE_INDEX
- 	default 0x43c3f290 if SOC_K3_AM625
- 	default 0x43c3f290 if SOC_K3_AM62A7 && CPU_V7R
- 	default 0x7000f290 if SOC_K3_AM62A7 && ARM64
-+	default 0x43c4f290 if SOC_K3_AM62P5
- 	help
- 	  Address at which ROM stores the value which determines if SPL
- 	  is booted up by primary boot media or secondary boot media.
-@@ -118,7 +122,7 @@ config K3_EARLY_CONS_IDX
- 
- config K3_ATF_LOAD_ADDR
- 	hex "Load address of ATF image"
--	default 0x80000000 if (SOC_K3_AM625 || SOC_K3_AM62A7)
-+	default 0x80000000 if (SOC_K3_AM625 || SOC_K3_AM62A7 || SOC_K3_AM62P5)
- 	default 0x70000000
- 	help
- 	  The load address for the ATF image. This value is used to build the
-@@ -156,6 +160,7 @@ source "arch/arm/mach-k3/am65x/Kconfig"
- source "arch/arm/mach-k3/am64x/Kconfig"
- source "arch/arm/mach-k3/am62x/Kconfig"
- source "arch/arm/mach-k3/am62ax/Kconfig"
-+source "arch/arm/mach-k3/am62px/Kconfig"
- source "arch/arm/mach-k3/j721e/Kconfig"
- source "arch/arm/mach-k3/j721s2/Kconfig"
- source "arch/arm/mach-k3/j784s4/Kconfig"
-diff --git a/arch/arm/mach-k3/Makefile b/arch/arm/mach-k3/Makefile
-index 310a4c211404b..6ee9864c72cad 100644
---- a/arch/arm/mach-k3/Makefile
-+++ b/arch/arm/mach-k3/Makefile
-@@ -22,5 +22,6 @@ obj-$(CONFIG_SOC_K3_AM642) += am642_init.o
- obj-$(CONFIG_SOC_K3_AM625) += am625_init.o
- obj-$(CONFIG_SOC_K3_AM62A7) += am62a7_init.o
- obj-$(CONFIG_SOC_K3_J784S4) += j784s4_init.o
-+obj-$(CONFIG_SOC_K3_AM62P5) += am62p5_init.o
- endif
- obj-y += common.o security.o
-diff --git a/arch/arm/mach-k3/am62p5_init.c b/arch/arm/mach-k3/am62p5_init.c
+diff --git a/drivers/dma/ti/Makefile b/drivers/dma/ti/Makefile
+index 9e0b13e8c0215..94ec13ba7ca44 100644
+--- a/drivers/dma/ti/Makefile
++++ b/drivers/dma/ti/Makefile
+@@ -10,3 +10,5 @@ k3-psil-data-$(CONFIG_SOC_K3_AM642) += k3-psil-am64.o
+ k3-psil-data-$(CONFIG_SOC_K3_AM625) += k3-psil-am62.o
+ k3-psil-data-$(CONFIG_SOC_K3_AM62A7) += k3-psil-am62a.o
+ k3-psil-data-$(CONFIG_SOC_K3_J784S4) += k3-psil-j784s4.o
++k3-psil-data-$(CONFIG_SOC_K3_AM62P5) += k3-psil-am62p.o
++k3-psil-data-$(CONFIG_SOC_K3_J722S) += k3-psil-am62p.o
+diff --git a/drivers/dma/ti/k3-psil-am62p.c b/drivers/dma/ti/k3-psil-am62p.c
 new file mode 100644
-index 0000000000000..aab99aa0c958f
+index 0000000000000..8739bf41b5b7c
 --- /dev/null
-+++ b/arch/arm/mach-k3/am62p5_init.c
-@@ -0,0 +1,281 @@
++++ b/drivers/dma/ti/k3-psil-am62p.c
+@@ -0,0 +1,325 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
-+ * AM62P5: SoC specific initialization
-+ *
-+ * Copyright (C) 2022 Texas Instruments Incorporated - https://www.ti.com/
++ *  Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com
 + */
 +
-+#include <spl.h>
-+#include <asm/io.h>
-+#include <asm/arch/hardware.h>
-+#include "sysfw-loader.h"
-+#include "common.h"
-+#include <dm.h>
-+#include <dm/uclass-internal.h>
-+#include <dm/pinctrl.h>
++#include <linux/kernel.h>
 +
-+struct fwl_data cbass_main_fwls[] = {
-+	{ "FSS_DAT_REG3", 7, 8 },
++#include "k3-psil-priv.h"
++
++#define PSIL_PDMA_XY_TR(x)					\
++	{							\
++		.thread_id = x,					\
++		.ep_config = {					\
++			.ep_type = PSIL_EP_PDMA_XY,		\
++			.mapped_channel_id = -1,		\
++			.default_flow_id = -1,			\
++		},						\
++	}
++
++#define PSIL_PDMA_XY_PKT(x)					\
++	{							\
++		.thread_id = x,					\
++		.ep_config = {					\
++			.ep_type = PSIL_EP_PDMA_XY,		\
++			.mapped_channel_id = -1,		\
++			.default_flow_id = -1,			\
++			.pkt_mode = 1,				\
++		},						\
++	}
++
++#define PSIL_ETHERNET(x, ch, flow_base, flow_cnt)		\
++	{							\
++		.thread_id = x,					\
++		.ep_config = {					\
++			.ep_type = PSIL_EP_NATIVE,		\
++			.pkt_mode = 1,				\
++			.needs_epib = 1,			\
++			.psd_size = 16,				\
++			.mapped_channel_id = ch,		\
++			.flow_start = flow_base,		\
++			.flow_num = flow_cnt,			\
++			.default_flow_id = flow_base,		\
++		},						\
++	}
++
++#define PSIL_SAUL(x, ch, flow_base, flow_cnt, default_flow, tx)	\
++	{							\
++		.thread_id = x,					\
++		.ep_config = {					\
++			.ep_type = PSIL_EP_NATIVE,		\
++			.pkt_mode = 1,				\
++			.needs_epib = 1,			\
++			.psd_size = 64,				\
++			.mapped_channel_id = ch,		\
++			.flow_start = flow_base,		\
++			.flow_num = flow_cnt,			\
++			.default_flow_id = default_flow,	\
++			.notdpkt = tx,				\
++		},						\
++	}
++
++#define PSIL_PDMA_MCASP(x)				\
++	{						\
++		.thread_id = x,				\
++		.ep_config = {				\
++			.ep_type = PSIL_EP_PDMA_XY,	\
++			.pdma_acc32 = 1,		\
++			.pdma_burst = 1,		\
++		},					\
++	}
++
++#define PSIL_CSI2RX(x)					\
++	{						\
++		.thread_id = x,				\
++		.ep_config = {				\
++			.ep_type = PSIL_EP_NATIVE,	\
++		},					\
++	}
++
++/* PSI-L source thread IDs, used for RX (DMA_DEV_TO_MEM) */
++static struct psil_ep am62p_src_ep_map[] = {
++	/* SAUL */
++	PSIL_SAUL(0x7504, 20, 35, 8, 35, 0),
++	PSIL_SAUL(0x7505, 21, 35, 8, 36, 0),
++	PSIL_SAUL(0x7506, 22, 43, 8, 43, 0),
++	PSIL_SAUL(0x7507, 23, 43, 8, 44, 0),
++	/* PDMA_MAIN0 - SPI0-3 */
++	PSIL_PDMA_XY_PKT(0x4302),
++	PSIL_PDMA_XY_PKT(0x4303),
++	PSIL_PDMA_XY_PKT(0x4304),
++	PSIL_PDMA_XY_PKT(0x4305),
++	PSIL_PDMA_XY_PKT(0x4306),
++	PSIL_PDMA_XY_PKT(0x4307),
++	PSIL_PDMA_XY_PKT(0x4308),
++	PSIL_PDMA_XY_PKT(0x4309),
++	PSIL_PDMA_XY_PKT(0x430a),
++	PSIL_PDMA_XY_PKT(0x430b),
++	PSIL_PDMA_XY_PKT(0x430c),
++	PSIL_PDMA_XY_PKT(0x430d),
++	/* PDMA_MAIN1 - UART0-6 */
++	PSIL_PDMA_XY_PKT(0x4400),
++	PSIL_PDMA_XY_PKT(0x4401),
++	PSIL_PDMA_XY_PKT(0x4402),
++	PSIL_PDMA_XY_PKT(0x4403),
++	PSIL_PDMA_XY_PKT(0x4404),
++	PSIL_PDMA_XY_PKT(0x4405),
++	PSIL_PDMA_XY_PKT(0x4406),
++	/* PDMA_MAIN2 - MCASP0-2 */
++	PSIL_PDMA_MCASP(0x4500),
++	PSIL_PDMA_MCASP(0x4501),
++	PSIL_PDMA_MCASP(0x4502),
++	/* CPSW3G */
++	PSIL_ETHERNET(0x4600, 19, 19, 16),
++	/* CSI2RX */
++	PSIL_CSI2RX(0x5000),
++	PSIL_CSI2RX(0x5001),
++	PSIL_CSI2RX(0x5002),
++	PSIL_CSI2RX(0x5003),
++	PSIL_CSI2RX(0x5004),
++	PSIL_CSI2RX(0x5005),
++	PSIL_CSI2RX(0x5006),
++	PSIL_CSI2RX(0x5007),
++	PSIL_CSI2RX(0x5008),
++	PSIL_CSI2RX(0x5009),
++	PSIL_CSI2RX(0x500a),
++	PSIL_CSI2RX(0x500b),
++	PSIL_CSI2RX(0x500c),
++	PSIL_CSI2RX(0x500d),
++	PSIL_CSI2RX(0x500e),
++	PSIL_CSI2RX(0x500f),
++	PSIL_CSI2RX(0x5010),
++	PSIL_CSI2RX(0x5011),
++	PSIL_CSI2RX(0x5012),
++	PSIL_CSI2RX(0x5013),
++	PSIL_CSI2RX(0x5014),
++	PSIL_CSI2RX(0x5015),
++	PSIL_CSI2RX(0x5016),
++	PSIL_CSI2RX(0x5017),
++	PSIL_CSI2RX(0x5018),
++	PSIL_CSI2RX(0x5019),
++	PSIL_CSI2RX(0x501a),
++	PSIL_CSI2RX(0x501b),
++	PSIL_CSI2RX(0x501c),
++	PSIL_CSI2RX(0x501d),
++	PSIL_CSI2RX(0x501e),
++	PSIL_CSI2RX(0x501f),
++	PSIL_CSI2RX(0x5000),
++	PSIL_CSI2RX(0x5001),
++	PSIL_CSI2RX(0x5002),
++	PSIL_CSI2RX(0x5003),
++	PSIL_CSI2RX(0x5004),
++	PSIL_CSI2RX(0x5005),
++	PSIL_CSI2RX(0x5006),
++	PSIL_CSI2RX(0x5007),
++	PSIL_CSI2RX(0x5008),
++	PSIL_CSI2RX(0x5009),
++	PSIL_CSI2RX(0x500a),
++	PSIL_CSI2RX(0x500b),
++	PSIL_CSI2RX(0x500c),
++	PSIL_CSI2RX(0x500d),
++	PSIL_CSI2RX(0x500e),
++	PSIL_CSI2RX(0x500f),
++	PSIL_CSI2RX(0x5010),
++	PSIL_CSI2RX(0x5011),
++	PSIL_CSI2RX(0x5012),
++	PSIL_CSI2RX(0x5013),
++	PSIL_CSI2RX(0x5014),
++	PSIL_CSI2RX(0x5015),
++	PSIL_CSI2RX(0x5016),
++	PSIL_CSI2RX(0x5017),
++	PSIL_CSI2RX(0x5018),
++	PSIL_CSI2RX(0x5019),
++	PSIL_CSI2RX(0x501a),
++	PSIL_CSI2RX(0x501b),
++	PSIL_CSI2RX(0x501c),
++	PSIL_CSI2RX(0x501d),
++	PSIL_CSI2RX(0x501e),
++	PSIL_CSI2RX(0x501f),
++	/* CSIRX 1-3 (only for J722S) */
++	PSIL_CSI2RX(0x5100),
++	PSIL_CSI2RX(0x5101),
++	PSIL_CSI2RX(0x5102),
++	PSIL_CSI2RX(0x5103),
++	PSIL_CSI2RX(0x5104),
++	PSIL_CSI2RX(0x5105),
++	PSIL_CSI2RX(0x5106),
++	PSIL_CSI2RX(0x5107),
++	PSIL_CSI2RX(0x5108),
++	PSIL_CSI2RX(0x5109),
++	PSIL_CSI2RX(0x510a),
++	PSIL_CSI2RX(0x510b),
++	PSIL_CSI2RX(0x510c),
++	PSIL_CSI2RX(0x510d),
++	PSIL_CSI2RX(0x510e),
++	PSIL_CSI2RX(0x510f),
++	PSIL_CSI2RX(0x5110),
++	PSIL_CSI2RX(0x5111),
++	PSIL_CSI2RX(0x5112),
++	PSIL_CSI2RX(0x5113),
++	PSIL_CSI2RX(0x5114),
++	PSIL_CSI2RX(0x5115),
++	PSIL_CSI2RX(0x5116),
++	PSIL_CSI2RX(0x5117),
++	PSIL_CSI2RX(0x5118),
++	PSIL_CSI2RX(0x5119),
++	PSIL_CSI2RX(0x511a),
++	PSIL_CSI2RX(0x511b),
++	PSIL_CSI2RX(0x511c),
++	PSIL_CSI2RX(0x511d),
++	PSIL_CSI2RX(0x511e),
++	PSIL_CSI2RX(0x511f),
++	PSIL_CSI2RX(0x5200),
++	PSIL_CSI2RX(0x5201),
++	PSIL_CSI2RX(0x5202),
++	PSIL_CSI2RX(0x5203),
++	PSIL_CSI2RX(0x5204),
++	PSIL_CSI2RX(0x5205),
++	PSIL_CSI2RX(0x5206),
++	PSIL_CSI2RX(0x5207),
++	PSIL_CSI2RX(0x5208),
++	PSIL_CSI2RX(0x5209),
++	PSIL_CSI2RX(0x520a),
++	PSIL_CSI2RX(0x520b),
++	PSIL_CSI2RX(0x520c),
++	PSIL_CSI2RX(0x520d),
++	PSIL_CSI2RX(0x520e),
++	PSIL_CSI2RX(0x520f),
++	PSIL_CSI2RX(0x5210),
++	PSIL_CSI2RX(0x5211),
++	PSIL_CSI2RX(0x5212),
++	PSIL_CSI2RX(0x5213),
++	PSIL_CSI2RX(0x5214),
++	PSIL_CSI2RX(0x5215),
++	PSIL_CSI2RX(0x5216),
++	PSIL_CSI2RX(0x5217),
++	PSIL_CSI2RX(0x5218),
++	PSIL_CSI2RX(0x5219),
++	PSIL_CSI2RX(0x521a),
++	PSIL_CSI2RX(0x521b),
++	PSIL_CSI2RX(0x521c),
++	PSIL_CSI2RX(0x521d),
++	PSIL_CSI2RX(0x521e),
++	PSIL_CSI2RX(0x521f),
++	PSIL_CSI2RX(0x5300),
++	PSIL_CSI2RX(0x5301),
++	PSIL_CSI2RX(0x5302),
++	PSIL_CSI2RX(0x5303),
++	PSIL_CSI2RX(0x5304),
++	PSIL_CSI2RX(0x5305),
++	PSIL_CSI2RX(0x5306),
++	PSIL_CSI2RX(0x5307),
++	PSIL_CSI2RX(0x5308),
++	PSIL_CSI2RX(0x5309),
++	PSIL_CSI2RX(0x530a),
++	PSIL_CSI2RX(0x530b),
++	PSIL_CSI2RX(0x530c),
++	PSIL_CSI2RX(0x530d),
++	PSIL_CSI2RX(0x530e),
++	PSIL_CSI2RX(0x530f),
++	PSIL_CSI2RX(0x5310),
++	PSIL_CSI2RX(0x5311),
++	PSIL_CSI2RX(0x5312),
++	PSIL_CSI2RX(0x5313),
++	PSIL_CSI2RX(0x5314),
++	PSIL_CSI2RX(0x5315),
++	PSIL_CSI2RX(0x5316),
++	PSIL_CSI2RX(0x5317),
++	PSIL_CSI2RX(0x5318),
++	PSIL_CSI2RX(0x5319),
++	PSIL_CSI2RX(0x531a),
++	PSIL_CSI2RX(0x531b),
++	PSIL_CSI2RX(0x531c),
++	PSIL_CSI2RX(0x531d),
++	PSIL_CSI2RX(0x531e),
++	PSIL_CSI2RX(0x531f),
 +};
 +
-+/*
-+ * This uninitialized global variable would normal end up in the .bss section,
-+ * but the .bss is cleared between writing and reading this variable, so move
-+ * it to the .data section.
-+ */
-+u32 bootindex __section(".data");
-+static struct rom_extended_boot_data bootdata __section(".data");
-+
-+static void store_boot_info_from_rom(void)
-+{
-+	bootindex = *(u32 *)(CONFIG_SYS_K3_BOOT_PARAM_TABLE_INDEX);
-+	memcpy(&bootdata, (uintptr_t *)ROM_EXTENDED_BOOT_DATA_INFO,
-+	       sizeof(struct rom_extended_boot_data));
-+}
-+
-+static void ctrl_mmr_unlock(void)
-+{
-+	/* Unlock all WKUP_CTRL_MMR0 module registers */
-+	mmr_unlock(WKUP_CTRL_MMR0_BASE, 0);
-+	mmr_unlock(WKUP_CTRL_MMR0_BASE, 1);
-+	mmr_unlock(WKUP_CTRL_MMR0_BASE, 2);
-+	mmr_unlock(WKUP_CTRL_MMR0_BASE, 3);
-+	mmr_unlock(WKUP_CTRL_MMR0_BASE, 4);
-+	mmr_unlock(WKUP_CTRL_MMR0_BASE, 5);
-+	mmr_unlock(WKUP_CTRL_MMR0_BASE, 6);
-+	mmr_unlock(WKUP_CTRL_MMR0_BASE, 7);
-+
-+	/* Unlock all CTRL_MMR0 module registers */
-+	mmr_unlock(CTRL_MMR0_BASE, 0);
-+	mmr_unlock(CTRL_MMR0_BASE, 1);
-+	mmr_unlock(CTRL_MMR0_BASE, 2);
-+	mmr_unlock(CTRL_MMR0_BASE, 4);
-+	mmr_unlock(CTRL_MMR0_BASE, 5);
-+	mmr_unlock(CTRL_MMR0_BASE, 6);
-+
-+	/* Unlock all MCU_CTRL_MMR0 module registers */
-+	mmr_unlock(MCU_CTRL_MMR0_BASE, 0);
-+	mmr_unlock(MCU_CTRL_MMR0_BASE, 1);
-+	mmr_unlock(MCU_CTRL_MMR0_BASE, 2);
-+	mmr_unlock(MCU_CTRL_MMR0_BASE, 3);
-+	mmr_unlock(MCU_CTRL_MMR0_BASE, 4);
-+	mmr_unlock(MCU_CTRL_MMR0_BASE, 6);
-+
-+	/* Unlock PADCFG_CTRL_MMR padconf registers */
-+	mmr_unlock(PADCFG_MMR0_BASE, 1);
-+	mmr_unlock(PADCFG_MMR1_BASE, 1);
-+}
-+
-+void board_init_f(ulong dummy)
-+{
-+	struct udevice *dev;
-+	int ret;
-+
-+	if (IS_ENABLED(CONFIG_CPU_V7R))
-+		setup_k3_mpu_regions();
-+
-+	/*
-+	 * Cannot delay this further as there is a chance that
-+	 * K3_BOOT_PARAM_TABLE_INDEX can be over written by SPL MALLOC section.
-+	 */
-+	store_boot_info_from_rom();
-+
-+	ctrl_mmr_unlock();
-+
-+	/* Init DM early */
-+	ret = spl_early_init();
-+	if (ret)
-+		panic("spl_early_init() failed: %d\n", ret);
-+
-+	/*
-+	 * Process pinctrl for the serial0 and serial3, aka WKUP_UART0 and
-+	 * MAIN_UART1 modules and continue regardless of the result of pinctrl.
-+	 * Do this without probing the device, but instead by searching the
-+	 * device that would request the given sequence number if probed. The
-+	 * UARTs will be used by the DM firmware and TIFS firmware images
-+	 * respectively and the firmware depend on SPL to initialize the pin
-+	 * settings.
-+	 */
-+	ret = uclass_find_device_by_seq(UCLASS_SERIAL, 0, &dev);
-+	if (!ret)
-+		pinctrl_select_state(dev, "default");
-+
-+	ret = uclass_find_device_by_seq(UCLASS_SERIAL, 3, &dev);
-+	if (!ret)
-+		pinctrl_select_state(dev, "default");
-+
-+	/*
-+	 * Allow establishing an early console as required for example when
-+	 * doing a UART-based boot. Note that this console may not "survive"
-+	 * through a SYSFW PM-init step and will need a re-init in some way
-+	 * due to changing module clock frequencies.
-+	 */
-+	if (IS_ENABLED(CONFIG_K3_EARLY_CONS)) {
-+		ret = early_console_init();
-+		if (ret)
-+			panic("early_console_init() failed: %d\n", ret);
-+	}
-+
-+	/*
-+	 * Configure and start up system controller firmware. Provide
-+	 * the U-Boot console init function to the SYSFW post-PM configuration
-+	 * callback hook, effectively switching on (or over) the console
-+	 * output.
-+	 */
-+	if (IS_ENABLED(CONFIG_K3_LOAD_SYSFW)) {
-+		ret = is_rom_loaded_sysfw(&bootdata);
-+		if (!ret)
-+			panic("ROM has not loaded TIFS firmware\n");
-+
-+		k3_sysfw_loader(true, NULL, NULL);
-+
-+		/* Disable ROM configured firewalls */
-+		remove_fwl_configs(cbass_main_fwls,
-+				   ARRAY_SIZE(cbass_main_fwls));
-+	}
-+
-+	/*
-+	 * Force probe of clk_k3 driver here to ensure basic default clock
-+	 * configuration is always done.
-+	 */
-+	if (IS_ENABLED(CONFIG_SPL_CLK_K3)) {
-+		ret = uclass_get_device_by_driver(UCLASS_CLK,
-+						  DM_DRIVER_GET(ti_clk),
-+						  &dev);
-+		if (ret)
-+			printf("Failed to initialize clk-k3!\n");
-+	}
-+
-+	preloader_console_init();
-+
-+	/* Output System Firmware version info */
-+	k3_sysfw_print_ver();
-+
-+	if (IS_ENABLED(CONFIG_K3_AM62A_DDRSS)) {
-+		ret = uclass_get_device(UCLASS_RAM, 0, &dev);
-+		if (ret)
-+			panic("DRAM init failed: %d\n", ret);
-+	}
-+
-+	spl_enable_cache();
-+	debug("am62px_init: %s done\n", __func__);
-+}
-+
-+u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
-+{
-+	u32 devstat = readl(CTRLMMR_MAIN_DEVSTAT);
-+	u32 bootmode = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_MASK) >>
-+				MAIN_DEVSTAT_PRIMARY_BOOTMODE_SHIFT;
-+	u32 bootmode_cfg = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_MASK) >>
-+			    MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_SHIFT;
-+
-+	switch (bootmode) {
-+	case BOOT_DEVICE_EMMC:
-+		return MMCSD_MODE_EMMCBOOT;
-+	case BOOT_DEVICE_MMC:
-+		if (bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_FS_RAW_MASK)
-+			return MMCSD_MODE_RAW;
-+	default:
-+		return MMCSD_MODE_FS;
-+	}
-+}
-+
-+static u32 __get_backup_bootmedia(u32 devstat)
-+{
-+	u32 bkup_bootmode = (devstat & MAIN_DEVSTAT_BACKUP_BOOTMODE_MASK) >>
-+				MAIN_DEVSTAT_BACKUP_BOOTMODE_SHIFT;
-+	u32 bkup_bootmode_cfg =
-+			(devstat & MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_MASK) >>
-+				MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_SHIFT;
-+
-+	switch (bkup_bootmode) {
-+	case BACKUP_BOOT_DEVICE_UART:
-+		return BOOT_DEVICE_UART;
-+
-+	case BACKUP_BOOT_DEVICE_USB:
-+		return BOOT_DEVICE_USB;
-+
-+	case BACKUP_BOOT_DEVICE_ETHERNET:
-+		return BOOT_DEVICE_ETHERNET;
-+
-+	case BACKUP_BOOT_DEVICE_MMC:
-+		if (bkup_bootmode_cfg)
-+			return BOOT_DEVICE_MMC2;
-+		return BOOT_DEVICE_MMC1;
-+
-+	case BACKUP_BOOT_DEVICE_SPI:
-+		return BOOT_DEVICE_SPI;
-+
-+	case BACKUP_BOOT_DEVICE_I2C:
-+		return BOOT_DEVICE_I2C;
-+
-+	case BACKUP_BOOT_DEVICE_DFU:
-+		if (bkup_bootmode_cfg & MAIN_DEVSTAT_BACKUP_USB_MODE_MASK)
-+			return BOOT_DEVICE_USB;
-+		return BOOT_DEVICE_DFU;
-+	};
-+
-+	return BOOT_DEVICE_RAM;
-+}
-+
-+static u32 __get_primary_bootmedia(u32 devstat)
-+{
-+	u32 bootmode = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_MASK) >>
-+				MAIN_DEVSTAT_PRIMARY_BOOTMODE_SHIFT;
-+	u32 bootmode_cfg = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_MASK) >>
-+				MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_SHIFT;
-+
-+	switch (bootmode) {
-+	case BOOT_DEVICE_OSPI:
-+		fallthrough;
-+	case BOOT_DEVICE_QSPI:
-+		fallthrough;
-+	case BOOT_DEVICE_XSPI:
-+		fallthrough;
-+	case BOOT_DEVICE_SPI:
-+		return BOOT_DEVICE_SPI;
-+
-+	case BOOT_DEVICE_ETHERNET_RGMII:
-+		fallthrough;
-+	case BOOT_DEVICE_ETHERNET_RMII:
-+		return BOOT_DEVICE_ETHERNET;
-+
-+	case BOOT_DEVICE_EMMC:
-+		return BOOT_DEVICE_MMC1;
-+
-+	case BOOT_DEVICE_SPI_NAND:
-+		return BOOT_DEVICE_SPINAND;
-+
-+	case BOOT_DEVICE_MMC:
-+		if ((bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_PORT_MASK) >>
-+				MAIN_DEVSTAT_PRIMARY_MMC_PORT_SHIFT)
-+			return BOOT_DEVICE_MMC2;
-+		return BOOT_DEVICE_MMC1;
-+
-+	case BOOT_DEVICE_DFU:
-+		if ((bootmode_cfg & MAIN_DEVSTAT_PRIMARY_USB_MODE_MASK) >>
-+		    MAIN_DEVSTAT_PRIMARY_USB_MODE_SHIFT)
-+			return BOOT_DEVICE_USB;
-+		return BOOT_DEVICE_DFU;
-+
-+	case BOOT_DEVICE_NOBOOT:
-+		return BOOT_DEVICE_RAM;
-+	}
-+
-+	return bootmode;
-+}
-+
-+u32 spl_boot_device(void)
-+{
-+	u32 devstat = readl(CTRLMMR_MAIN_DEVSTAT);
-+	u32 bootmedia;
-+
-+	if (bootindex == K3_PRIMARY_BOOTMODE)
-+		bootmedia = __get_primary_bootmedia(devstat);
-+	else
-+		bootmedia = __get_backup_bootmedia(devstat);
-+
-+	debug("am62px_init: %s: devstat = 0x%x bootmedia = 0x%x bootindex = %d\n",
-+	      __func__, devstat, bootmedia, bootindex);
-+	return bootmedia;
-+}
-diff --git a/arch/arm/mach-k3/am62px/Kconfig b/arch/arm/mach-k3/am62px/Kconfig
-new file mode 100644
-index 0000000000000..38a9e6811b119
---- /dev/null
-+++ b/arch/arm/mach-k3/am62px/Kconfig
-@@ -0,0 +1,32 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
-+#
-+
-+if SOC_K3_AM62P5
-+
-+choice
-+	prompt "TI K3 AM62Px based boards"
-+	optional
-+
-+config TARGET_AM62P5_A53_EVM
-+	bool "TI K3 based AM62P5 EVM running on A53"
-+	select ARM64
-+	select BINMAN
-+
-+config TARGET_AM62P5_R5_EVM
-+	bool "TI K3 based AM62P5 EVM running on R5"
-+	select CPU_V7R
-+	select SYS_THUMB_BUILD
-+	select K3_LOAD_SYSFW
-+	select RAM
-+	select SPL_RAM
-+	select K3_DDRSS
-+	select BINMAN
-+	imply SYS_K3_SPL_ATF
-+
-+endchoice
-+
-+source "board/ti/am62px/Kconfig"
-+
-+endif
-diff --git a/arch/arm/mach-k3/include/mach/am62p_hardware.h b/arch/arm/mach-k3/include/mach/am62p_hardware.h
-new file mode 100644
-index 0000000000000..923466c41f456
---- /dev/null
-+++ b/arch/arm/mach-k3/include/mach/am62p_hardware.h
-@@ -0,0 +1,83 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * K3: AM62Px SoC definitions, structures etc.
-+ *
-+ * Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
-+ */
-+
-+#ifndef __ASM_ARCH_AM62P_HARDWARE_H
-+#define __ASM_ARCH_AM62P_HARDWARE_H
-+
-+#include <config.h>
-+#ifndef __ASSEMBLY__
-+#include <linux/bitops.h>
-+#endif
-+
-+#define PADCFG_MMR0_BASE			0x04080000
-+#define PADCFG_MMR1_BASE			0x000f0000
-+#define CTRL_MMR0_BASE				0x00100000
-+#define MCU_CTRL_MMR0_BASE			0x04500000
-+#define WKUP_CTRL_MMR0_BASE			0x43000000
-+
-+#define CTRLMMR_MAIN_DEVSTAT			(WKUP_CTRL_MMR0_BASE + 0x30)
-+#define MAIN_DEVSTAT_PRIMARY_BOOTMODE_MASK	GENMASK(6, 3)
-+#define MAIN_DEVSTAT_PRIMARY_BOOTMODE_SHIFT	3
-+#define MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_MASK	GENMASK(9, 7)
-+#define MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_SHIFT	7
-+#define MAIN_DEVSTAT_BACKUP_BOOTMODE_MASK	GENMASK(12, 10)
-+#define MAIN_DEVSTAT_BACKUP_BOOTMODE_SHIFT	10
-+#define MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_MASK	BIT(13)
-+#define MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_SHIFT	13
-+
-+/* Primary Bootmode MMC Config macros */
-+#define MAIN_DEVSTAT_PRIMARY_MMC_PORT_MASK	0x4
-+#define MAIN_DEVSTAT_PRIMARY_MMC_PORT_SHIFT	2
-+#define MAIN_DEVSTAT_PRIMARY_MMC_FS_RAW_MASK	0x1
-+#define MAIN_DEVSTAT_PRIMARY_MMC_FS_RAW_SHIFT	0
-+
-+/* Primary Bootmode USB Config macros */
-+#define MAIN_DEVSTAT_PRIMARY_USB_MODE_SHIFT	1
-+#define MAIN_DEVSTAT_PRIMARY_USB_MODE_MASK	0x02
-+
-+/* Backup Bootmode USB Config macros */
-+#define MAIN_DEVSTAT_BACKUP_USB_MODE_MASK	0x01
-+
-+/*
-+ * The CTRL_MMR0 memory space is divided into several equally-spaced
-+ * partitions, so defining the partition size allows us to determine
-+ * register addresses common to those partitions.
-+ */
-+#define CTRL_MMR0_PARTITION_SIZE		0x4000
-+
-+/*
-+ * CTRL_MMR0, WKUP_CTRL_MMR0, and MCU_CTRL_MMR0 lock/kick-mechanism
-+ * shared register definitions. The same registers are also used for
-+ * PADCFG_MMR lock/kick-mechanism.
-+ */
-+#define CTRLMMR_LOCK_KICK0			0x1008
-+#define CTRLMMR_LOCK_KICK0_UNLOCK_VAL		0x68ef3490
-+#define CTRLMMR_LOCK_KICK1			0x100c
-+#define CTRLMMR_LOCK_KICK1_UNLOCK_VAL		0xd172bc5a
-+
-+#define MCU_CTRL_LFXOSC_CTRL			(MCU_CTRL_MMR0_BASE + 0x8038)
-+#define MCU_CTRL_LFXOSC_TRIM			(MCU_CTRL_MMR0_BASE + 0x803c)
-+#define MCU_CTRL_LFXOSC_32K_DISABLE_VAL		BIT(7)
-+
-+#define MCU_CTRL_DEVICE_CLKOUT_32K_CTRL		(MCU_CTRL_MMR0_BASE + 0x8058)
-+#define MCU_CTRL_DEVICE_CLKOUT_LFOSC_SELECT_VAL	(0x3)
-+
-+#define ROM_EXTENDED_BOOT_DATA_INFO		0x43c4f1e0
-+
-+#define K3_BOOT_PARAM_TABLE_INDEX_OCRAM         0x7000F290
-+
-+#define TI_SRAM_SCRATCH_BOARD_EEPROM_START	0x43c30000
-+
-+#if defined(CONFIG_SYS_K3_SPL_ATF) && !defined(__ASSEMBLY__)
-+
-+static const u32 put_device_ids[] = {};
-+
-+static const u32 put_core_ids[] = {};
-+
-+#endif
-+
-+#endif /* __ASM_ARCH_AM62P_HARDWARE_H */
-diff --git a/arch/arm/mach-k3/include/mach/am62p_spl.h b/arch/arm/mach-k3/include/mach/am62p_spl.h
-new file mode 100644
-index 0000000000000..db145a7bc83ba
---- /dev/null
-+++ b/arch/arm/mach-k3/include/mach/am62p_spl.h
-@@ -0,0 +1,49 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
-+ */
-+
-+#ifndef _ASM_ARCH_AM62P_SPL_H_
-+#define _ASM_ARCH_AM62P_SPL_H_
-+
-+/* Primary BootMode devices */
-+#define BOOT_DEVICE_SPI_NAND		0x00
-+#define BOOT_DEVICE_RAM			0xFF
-+#define BOOT_DEVICE_OSPI		0x01
-+#define BOOT_DEVICE_QSPI		0x02
-+#define BOOT_DEVICE_SPI			0x03
-+#define BOOT_DEVICE_CPGMAC		0x04
-+#define BOOT_DEVICE_ETHERNET_RGMII	0x04
-+#define BOOT_DEVICE_ETHERNET_RMII	0x05
-+#define BOOT_DEVICE_I2C			0x06
-+#define BOOT_DEVICE_UART		0x07
-+#define BOOT_DEVICE_MMC			0x08
-+#define BOOT_DEVICE_EMMC		0x09
-+
-+#define BOOT_DEVICE_USB			0x2A
-+#define BOOT_DEVICE_DFU			0x0A
-+#define BOOT_DEVICE_GPMC_NAND		0x0B
-+#define BOOT_DEVICE_GPMC_NOR		0x0C
-+#define BOOT_DEVICE_XSPI		0x0E
-+#define BOOT_DEVICE_NOBOOT		0x0F
-+
-+/* U-Boot used aliases */
-+#define BOOT_DEVICE_ETHERNET		0x04
-+#define BOOT_DEVICE_SPINAND		0x10
-+#define BOOT_DEVICE_MMC2		0x08
-+#define BOOT_DEVICE_MMC1		0x09
-+/* Invalid */
-+#define BOOT_DEVICE_MMC2_2		0x1F
-+
-+/* Backup BootMode devices */
-+#define BACKUP_BOOT_DEVICE_DFU		0x01
-+#define BACKUP_BOOT_DEVICE_UART		0x03
-+#define BACKUP_BOOT_DEVICE_ETHERNET	0x04
-+#define BACKUP_BOOT_DEVICE_MMC		0x05
-+#define BACKUP_BOOT_DEVICE_SPI		0x06
-+#define BACKUP_BOOT_DEVICE_I2C		0x07
-+#define BACKUP_BOOT_DEVICE_USB		0x09
-+
-+#define K3_PRIMARY_BOOTMODE		0x0
-+
-+#endif /* _ASM_ARCH_AM62P_SPL_H_ */
-diff --git a/arch/arm/mach-k3/include/mach/hardware.h b/arch/arm/mach-k3/include/mach/hardware.h
-index 224367d9f1adc..af982e70d171f 100644
---- a/arch/arm/mach-k3/include/mach/hardware.h
-+++ b/arch/arm/mach-k3/include/mach/hardware.h
-@@ -36,6 +36,10 @@
- #include "j784s4_hardware.h"
- #endif
++/* PSI-L destination thread IDs, used for TX (DMA_MEM_TO_DEV) */
++static struct psil_ep am62p_dst_ep_map[] = {
++	/* SAUL */
++	PSIL_SAUL(0xf500, 27, 83, 8, 83, 1),
++	PSIL_SAUL(0xf501, 28, 91, 8, 91, 1),
++	/* PDMA_MAIN0 - SPI0-3 */
++	PSIL_PDMA_XY_PKT(0xc302),
++	PSIL_PDMA_XY_PKT(0xc303),
++	PSIL_PDMA_XY_PKT(0xc304),
++	PSIL_PDMA_XY_PKT(0xc305),
++	PSIL_PDMA_XY_PKT(0xc306),
++	PSIL_PDMA_XY_PKT(0xc307),
++	PSIL_PDMA_XY_PKT(0xc308),
++	PSIL_PDMA_XY_PKT(0xc309),
++	PSIL_PDMA_XY_PKT(0xc30a),
++	PSIL_PDMA_XY_PKT(0xc30b),
++	PSIL_PDMA_XY_PKT(0xc30c),
++	PSIL_PDMA_XY_PKT(0xc30d),
++	/* PDMA_MAIN1 - UART0-6 */
++	PSIL_PDMA_XY_PKT(0xc400),
++	PSIL_PDMA_XY_PKT(0xc401),
++	PSIL_PDMA_XY_PKT(0xc402),
++	PSIL_PDMA_XY_PKT(0xc403),
++	PSIL_PDMA_XY_PKT(0xc404),
++	PSIL_PDMA_XY_PKT(0xc405),
++	PSIL_PDMA_XY_PKT(0xc406),
++	/* PDMA_MAIN2 - MCASP0-2 */
++	PSIL_PDMA_MCASP(0xc500),
++	PSIL_PDMA_MCASP(0xc501),
++	PSIL_PDMA_MCASP(0xc502),
++	/* CPSW3G */
++	PSIL_ETHERNET(0xc600, 19, 19, 8),
++	PSIL_ETHERNET(0xc601, 20, 27, 8),
++	PSIL_ETHERNET(0xc602, 21, 35, 8),
++	PSIL_ETHERNET(0xc603, 22, 43, 8),
++	PSIL_ETHERNET(0xc604, 23, 51, 8),
++	PSIL_ETHERNET(0xc605, 24, 59, 8),
++	PSIL_ETHERNET(0xc606, 25, 67, 8),
++	PSIL_ETHERNET(0xc607, 26, 75, 8),
++};
++
++struct psil_ep_map am62p_ep_map = {
++	.name = "am62p",
++	.src = am62p_src_ep_map,
++	.src_count = ARRAY_SIZE(am62p_src_ep_map),
++	.dst = am62p_dst_ep_map,
++	.dst_count = ARRAY_SIZE(am62p_dst_ep_map),
++};
+diff --git a/drivers/dma/ti/k3-psil-priv.h b/drivers/dma/ti/k3-psil-priv.h
+index 02ea1e9ed3160..b80916a7ff8fa 100644
+--- a/drivers/dma/ti/k3-psil-priv.h
++++ b/drivers/dma/ti/k3-psil-priv.h
+@@ -44,5 +44,6 @@ extern struct psil_ep_map am64_ep_map;
+ extern struct psil_ep_map am62_ep_map;
+ extern struct psil_ep_map am62a_ep_map;
+ extern struct psil_ep_map j784s4_ep_map;
++extern struct psil_ep_map am62p_ep_map;
  
-+#ifdef CONFIG_SOC_K3_AM62P5
-+#include "am62p_hardware.h"
-+#endif
-+
- /* Assuming these addresses and definitions stay common across K3 devices */
- #define CTRLMMR_WKUP_JTAG_ID	(WKUP_CTRL_MMR0_BASE + 0x14)
- #define JTAG_ID_VARIANT_SHIFT	28
-diff --git a/arch/arm/mach-k3/include/mach/spl.h b/arch/arm/mach-k3/include/mach/spl.h
-index 6f01ab58e27b4..8394277922532 100644
---- a/arch/arm/mach-k3/include/mach/spl.h
-+++ b/arch/arm/mach-k3/include/mach/spl.h
-@@ -34,4 +34,8 @@
- #include "j784s4_spl.h"
- #endif
+ #endif /* K3_PSIL_PRIV_H_ */
+diff --git a/drivers/dma/ti/k3-psil.c b/drivers/dma/ti/k3-psil.c
+index d21ef193e8084..369e679886fa4 100644
+--- a/drivers/dma/ti/k3-psil.c
++++ b/drivers/dma/ti/k3-psil.c
+@@ -30,6 +30,10 @@ struct psil_endpoint_config *psil_get_ep_config(u32 thread_id)
+ 			soc_ep_map = &am62a_ep_map;
+ 		else if (IS_ENABLED(CONFIG_SOC_K3_J784S4))
+ 			soc_ep_map = &j784s4_ep_map;
++		else if (IS_ENABLED(CONFIG_SOC_K3_AM62P5))
++			soc_ep_map = &am62p_ep_map;
++		else if (IS_ENABLED(CONFIG_SOC_K3_J722S))
++			soc_ep_map = &am62p_ep_map;
+ 	}
  
-+#ifdef CONFIG_SOC_K3_AM62P5
-+#include "am62p_spl.h"
-+#endif
-+
- #endif /* _ASM_ARCH_SPL_H_ */
+ 	if (thread_id & K3_PSIL_DST_THREAD_ID_OFFSET && soc_ep_map->dst) {
 
 -- 
 2.43.2
