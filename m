@@ -4,74 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CAADC54E58
-	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 18:54:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB0D5C54E5D
+	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 18:54:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 871A387DE3;
+	by phobos.denx.de (Postfix) with ESMTP id F12E887EA3;
 	Tue, 12 Mar 2024 19:54:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WP9WXrMI";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="v3Pfi8O5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 602DF87C86; Tue, 12 Mar 2024 16:51:54 +0100 (CET)
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
+ id 6B1E187F16; Tue, 12 Mar 2024 16:54:58 +0100 (CET)
+Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
+ [IPv6:2607:f8b0:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF53D87F16
- for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 16:51:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B414F87C86
+ for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 16:54:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=richard.henderson@linaro.org
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-1dc1ff3ba1aso174735ad.3
- for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 08:51:51 -0700 (PDT)
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-1dc49b00bdbso33670045ad.3
+ for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 08:54:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710258710; x=1710863510; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1710258894; x=1710863694; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=yNG88tuUhCLTwDobEsgLhUoIXnZmG0E3LryYft1Yfxs=;
- b=WP9WXrMItiX+B4TXGOEd9LQeTse/gNy9B51OAAAvfYNbFPjqKDZ9Yx6yNfB/AD2JI8
- 6tBGMo4JaM4FFHtJ5PQXxKIUvRfjAteVxMrnwL3S8Fo/0c2etvkEN3N7t8RT7bZAsaTA
- 66nwrMsZ04VF5c6eTAV0NGt6rSmAR8eMddznzoZPKgQV9jGyG6RdreZabbM0YjIyFJbJ
- BGGHx4a6mVn8sxSgi+H/IdVSHBXZZFtekXiTu6Dozkw4peQ2/X6UVBlwlovGZBZbncDO
- hd99dKpDTQAhXppDI08FbYOVlnNm1wZ+uzCZ3bYWPmScbSSgrvtNGNmxxt0DfYWjNq7F
- B9AQ==
+ bh=fbsb/uXeLZM7AoCFbFzRO0IQlKQHmex9FAoY/KSTs6U=;
+ b=v3Pfi8O5SNvAoqGKE+xzJ+FRMt3/l+vSIjPHzsM5P1j4q0cq8aaa7hxAXLrkblvrBw
+ Xm+Xi1hJbOxEJrCCYbQzt89NI+s5vrSS+pR03WXPixNUL4RCN7a+MdWTqvVhKUSLy0a9
+ H6lz8dY9MFq2x86XGBUNJomiIe4PFOhF3ctin8g2m95y8ngwEIR2h/4EUxGdEYcdAd2d
+ hMMRkzoedT9zZr0Gmi4/66nmQDNWLmItuMkP6bo/dHmTAP9Zlpl3Mip09VTOvVrd0AKX
+ cJ3Kn6Z1pwvte2rIb3a/ZvOnStc/bnzgpUs2pLSCnnqkfMKvvbBKU5az3VR2j71JEEyi
+ 0D2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710258710; x=1710863510;
+ d=1e100.net; s=20230601; t=1710258894; x=1710863694;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=yNG88tuUhCLTwDobEsgLhUoIXnZmG0E3LryYft1Yfxs=;
- b=AV8ZcyHd8Wq013gL5OQqHl9VHF0/bIVTUHtLOaxRZ008VRcBCuLzmg9No2Xqew3ndB
- 6G8EMMDcxG7lDozGJNg3ol0Csmd5vamORpBpbq2q6vmADISg4PGoJkg/2/Mny86WJ+RS
- 9bM0zh5bvDLWuehMbWIgvvOzovinxkJc3Ums2KmPt6Ef0RH1C4wvAjb6wHUvfAq9wmwS
- Q157MwMNTGbb+ojptjKjYDQ4/BZVpZ/Cj0nKmH1o0IRMxnYPP3Zhp9nxTuBUcztinWdL
- 1Dk62xM1E3JgReOd23jfl34lZj2Wo14VA4DMGVgyGRnzvSuVSmnrKu8X68yzql5g6L7v
- LksA==
+ bh=fbsb/uXeLZM7AoCFbFzRO0IQlKQHmex9FAoY/KSTs6U=;
+ b=QmJy31WNVRN2FT41GVoY8Brkk8VGUG8ZFVXZHs9Cudv9QmyiAtZX9OOXkNQUuAanNG
+ f9igXaCkpZiPvxQKWiDC1bkcxpRQzKdYltJ0FkjxgJRmSkIpchD62vI57UqeVD6z7guU
+ ZrCfHeene0y/WYUZkHOH61bvSnpfYuQA1lrhV27lZun0P1Hjl+ugmgtt5tSFpbTHmLMy
+ eST2zdzT3YBBretvCEH7xhFtRVqdKNaoAEDbW+ifpaG2VWWipNU5+5u0W8cd6tI1laBg
+ 4+kCAwXKBVDrU6pg1sszP9uG8kPVi7kVA7fG90R4NHoSwaImP8v5Ch3+M1OlYvg7Yzy9
+ D1VA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUARK+xgq+kwMd4FDjZfrhkrcwA8/PccMr715qKOwSCyI7NcK+cNgDXxp0zJhe9zRaeNAw5tA0qASj8YyEMxt/cSjaPZg==
-X-Gm-Message-State: AOJu0YwjmSrVkRNWlTlbBGqJ2sYm/nZA1O7Cap3CAibVNwTmlaMPwuIr
- hGB3Ul+MfQcrI6d8YMd6HRgg+ResYvpuQoMATnZJIjaU5fkHGnta3JzZXZpIKlM=
-X-Google-Smtp-Source: AGHT+IF34uhn0DKDDjYw6PYkaoijjn8feEy8ITThM90YbLeqMQ3m6NWR9BOnh6mVb9bTx87oh09vhQ==
-X-Received: by 2002:a17:902:f552:b0:1dd:8a51:7b17 with SMTP id
- h18-20020a170902f55200b001dd8a517b17mr747940plf.8.1710258710060; 
- Tue, 12 Mar 2024 08:51:50 -0700 (PDT)
+ AJvYcCUvEfN/DgBbCeIB/M6CctBTuQ1D+VyJfsmYstsaDxtLNQA5/6p4R44kbTtk7mqHe3xzUJ/C/k3J4pZ1VzGM/Pd577bAxg==
+X-Gm-Message-State: AOJu0Yw9Ds4gh+loJeuBoNqVr2MGA0bPYJWPlrG7yg8kXkQAbYRYkqsa
+ lTIm0BFfGGPayJOnxdazEdHEm2WxQgzrUs6Ra1lKZrkgJ0g/vm+eZvrjetA+IEE=
+X-Google-Smtp-Source: AGHT+IFfW68g+2sVzUChu/rlBGkiAUbseJer8SamgvWjLF4DDDuZl4tWWqHNkwT/JbOX6GSmMsslTw==
+X-Received: by 2002:a17:902:d2c5:b0:1dd:9984:29d3 with SMTP id
+ n5-20020a170902d2c500b001dd998429d3mr7780411plc.32.1710258893841; 
+ Tue, 12 Mar 2024 08:54:53 -0700 (PDT)
 Received: from [172.20.1.19] (173-197-098-125.biz.spectrum.com.
  [173.197.98.125]) by smtp.gmail.com with ESMTPSA id
- b5-20020a170902650500b001db499c5c12sm7029459plk.143.2024.03.12.08.51.47
+ u11-20020a170903124b00b001d8f81ecea1sm6909100plh.172.2024.03.12.08.54.50
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 12 Mar 2024 08:51:49 -0700 (PDT)
-Message-ID: <f3b6a70b-8476-4542-9429-67d5d34d27ce@linaro.org>
-Date: Tue, 12 Mar 2024 05:51:43 -1000
+ Tue, 12 Mar 2024 08:54:53 -0700 (PDT)
+Message-ID: <583e4ab1-e716-46ff-92a6-270ede29d6ba@linaro.org>
+Date: Tue, 12 Mar 2024 05:54:48 -1000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/7 v2] arm: clean up v7 and v8 linker scripts for
- bss_start/end
+Subject: Re: [PATCH 3/7 v2] arm: fix __efi_runtime_rel_start/end definitions
 Content-Language: en-US
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
  trini@konsulko.com, cfsworks@gmail.com
@@ -85,9 +84,9 @@ Cc: caleb.connolly@linaro.org, sumit.garg@linaro.org,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Shiji Yang <yangshiji66@outlook.com>, Bin Meng <bmeng@tinylab.org>
 References: <20240312140832.1968215-1-ilias.apalodimas@linaro.org>
- <20240312140832.1968215-3-ilias.apalodimas@linaro.org>
+ <20240312140832.1968215-4-ilias.apalodimas@linaro.org>
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240312140832.1968215-3-ilias.apalodimas@linaro.org>
+In-Reply-To: <20240312140832.1968215-4-ilias.apalodimas@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Tue, 12 Mar 2024 19:54:32 +0100
@@ -108,29 +107,30 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 3/12/24 04:08, Ilias Apalodimas wrote:
-> -	.bss_start (NOLOAD) : {
-> -		. = ALIGN(8);
+> __efi_runtime_rel_start/end are defined as c variables for arm7 only in
+> order to force the compiler emit relative references. However, defining
+> those within a section definition will do the same thing since [0].
+> On top of that the v8 linker scripts define it as a symbol.
+> 
+> So let's remove the special sections from the linker scripts, the
+> variable definitions from sections.c and define them as a symbols within
+> the correct section.
+> 
+> [0] binutils commit 6b3b0ab89663 ("Make linker assigned symbol dynamic only for shared object")
+> 
+> Suggested-by: Sam Edwards<CFSworks@gmail.com>
+> Signed-off-by: Ilias Apalodimas<ilias.apalodimas@linaro.org>
+> Reviewed-by: Sam Edwards<CFSworks@gmail.com>
+> Tested-by: Sam Edwards<CFSworks@gmail.com>  # Binary output identical
+> ---
+>   arch/arm/cpu/armv8/u-boot.lds  |  4 +---
+>   arch/arm/cpu/u-boot.lds        | 16 +++-------------
+>   arch/arm/lib/sections.c        |  2 --
+>   arch/arm/mach-zynq/u-boot.lds  | 16 +++-------------
+>   include/asm-generic/sections.h |  2 ++
+>   lib/efi_loader/efi_runtime.c   |  1 +
+>   6 files changed, 10 insertions(+), 31 deletions(-)
 
-This alignment got lost.
-
-> -		KEEP(*(.__bss_start));
-> -	} >.sdram
-> -
-> -	.bss (NOLOAD) : {
-> +	.bss : {
-
-If it is required, the best replacement would be here on the output section definition.
-
-> -	. = ALIGN(8);
-> -
-> -	.bss_start : {
-> -		KEEP(*(.__bss_start));
-> -	}
-> -
-> -	.bss : {
-> +	.bss ALIGN(8): {
-
-Like you did here.
-
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
 r~
