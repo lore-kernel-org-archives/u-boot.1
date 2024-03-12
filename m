@@ -4,63 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01C0FC54E66
-	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 10:14:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4188FC54E66
+	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 10:47:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 68E7E87E20;
-	Tue, 12 Mar 2024 11:14:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 0D0B787E49;
+	Tue, 12 Mar 2024 11:47:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="t4DBF5bV";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="XAcyW3vd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 83B6387F00; Tue, 12 Mar 2024 11:14:33 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6DA5187E71; Tue, 12 Mar 2024 11:47:45 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7422687D70
- for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 11:14:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7456187DE3
+ for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 11:47:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mripard@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id D782161173;
- Tue, 12 Mar 2024 10:14:27 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 16DC2C433F1;
- Tue, 12 Mar 2024 10:14:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1710238467;
- bh=deGSuTO/IIVTZiHgBMlj9IFCW5+u1+PeSwEs6uBEKjw=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=t4DBF5bVK9DNslv7fZbI1VFs7q3DpCXlZeH6CfUDKoTHuLnFXprefuaazosNx0gqO
- 9pZFWLX5bnG0eUXRnelqBYfWQ5iIn3acd6m17rpoyO8rBi0dwL+yioK2MwfgbkvCpJ
- j8i2yrfTIgJYGBF5PUjxp46etIvGco+SkKWbxBJE8Zpy0mhEI47nD36Bt2XHQaQUoq
- fxcM5H1RYuZI1RkgkN5mQGjbtMi/bSKHreiF5ASim0+gLRkfwhdiyuazi0/FfunT+m
- frOHe7kGa6yAbfDHpUBaR2d0ShTtpJF1JKnO8wxs68wChNLQ9yC8zxUEVrvfic6mi9
- dSLPcwVQlQCMg==
-Date: Tue, 12 Mar 2024 11:14:24 +0100
-From: Maxime Ripard <mripard@kernel.org>
-To: Yang Xiwen <forbidden405@outlook.com>
-Cc: Michael Turquette <mturquette@baylibre.com>, 
- Stephen Boyd <sboyd@kernel.org>, linux-clk@vger.kernel.org,
- linux-kernel@vger.kernel.org, 
- Sean Anderson <seanga2@gmail.com>, Lukasz Majewski <lukma@denx.de>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v3] clk: set initial best mux parent to current parent
- with CLK_MUX_ROUND_CLOSEST
-Message-ID: <20240312-helpful-judicious-monkey-ed27ba@houat>
-References: <20240307-mux-v3-1-0885fc1ab2c9@outlook.com>
- <20240307-hot-hummingbird-of-atheism-87503c@houat>
- <SEZPR06MB6959882F5DA673456A3AA85D96202@SEZPR06MB6959.apcprd06.prod.outlook.com>
- <20240311-speedy-bat-of-art-4facfc@houat>
- <SEZPR06MB69597C834C90FE1FBA1F1D83962B2@SEZPR06MB6959.apcprd06.prod.outlook.com>
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=380108150e=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
+ 42C8Ebvi008429; Tue, 12 Mar 2024 11:47:36 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; s=
+ selector1; bh=pNVnSVyIrEHEevMamB3nh4clvFqBJjsbVjna3O5/ryk=; b=XA
+ cyW3vdsDk2vjKbis4LQxMiSgH51WntAkqtgXtl4BBT/d//Wpn7ocSsOIpnuWZNMg
+ +vUIraqhIJaoQ7nzkhl63J9KDsB4gmPBHkGhpO3JWmmwirIIdJxHAPuJNU0ePhb3
+ WLrSyjaSGywG/bL5JK88X32LM3cErEFi/TZThFHPfUBMWmbrF1j16DJ4F8WHEY1+
+ I/rXfWMm7kApEVzZQ2RHjEIrje7ozV4UDh4NxnYUW4XmMypq+GyCsGxm9zL3UQt2
+ sYo2bTIZdgP1Qid4GowAZJ7MyV49O/gcZ/SAXGlwGQwnfgf8Zl2ATopVQc/cbdLA
+ RrFnQpYnPyop++YM1HIQ==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3wtd61t7eh-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 12 Mar 2024 11:47:36 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 265B840046;
+ Tue, 12 Mar 2024 11:47:32 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id BC8EE24E1D8;
+ Tue, 12 Mar 2024 11:47:07 +0100 (CET)
+Received: from [10.201.20.71] (10.201.20.71) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Tue, 12 Mar
+ 2024 11:47:07 +0100
+Message-ID: <97800223-2241-4367-b99b-5c7d1600ccc4@foss.st.com>
+Date: Tue, 12 Mar 2024 11:47:06 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="awqbzhe5i5cs4dsy"
-Content-Disposition: inline
-In-Reply-To: <SEZPR06MB69597C834C90FE1FBA1F1D83962B2@SEZPR06MB6959.apcprd06.prod.outlook.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] fdt_support: fix fdt_copy_fixed_partitions function()
+Content-Language: en-US
+To: Dan Carpenter <dan.carpenter@linaro.org>
+CC: <u-boot@lists.denx.de>, Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Hugo Villeneuve
+ <hvilleneuve@dimonoff.com>, Simon Glass <sjg@chromium.org>, Tom Rini
+ <trini@konsulko.com>
+References: <20240308133404.2619848-1-patrice.chotard@foss.st.com>
+ <5b95fea0-581a-44e5-b275-09393b7b02a1@moroto.mountain>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <5b95fea0-581a-44e5-b275-09393b7b02a1@moroto.mountain>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.201.20.71]
+X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-03-12_08,2024-03-12_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,137 +92,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 3/11/24 12:37, Dan Carpenter wrote:
+> On Fri, Mar 08, 2024 at 02:34:04PM +0100, Patrice Chotard wrote:
+>> Move variable declaration at the beginning of the function.
+>>
+> 
+> The problem, presumably, is that when declarations are in the middle of
+> a block then it triggers a GCC warning.  "declarations after code" or
+> whatever...  The commit message is not really clear.
 
---awqbzhe5i5cs4dsy
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi
 
-On Tue, Mar 12, 2024 at 04:52:29PM +0800, Yang Xiwen wrote:
-> On 3/11/2024 5:34 PM, Maxime Ripard wrote:
-> > On Thu, Mar 07, 2024 at 07:18:05PM +0800, Yang Xiwen wrote:
-> > > On 3/7/2024 4:48 PM, Maxime Ripard wrote:
-> > > > Hi,
-> > > >=20
-> > > > On Thu, Mar 07, 2024 at 10:03:50AM +0800, Yang Xiwen via B4 Relay w=
-rote:
-> > > > > From: Yang Xiwen <forbidden405@outlook.com>
-> > > > >=20
-> > > > > Originally, the initial clock rate is hardcoded to 0, this can le=
-ad to
-> > > > > some problem when setting a very small rate with CLK_MUX_ROUND_CL=
-OSEST.
-> > > > >=20
-> > > > > For example, if the lowest possible rate provided by the mux is 1=
-000Hz,
-> > > > > setting a rate below 500Hz will fail, because no clock can provid=
-e a
-> > > > > better rate than the non-existant 0Hz. But it should succeed with=
- 1000Hz
-> > > > > being set.
-> > > > >=20
-> > > > > Setting the initial best parent to current parent could solve thi=
-s bug.
-> > > > >=20
-> > > > > Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
-> > > > I don't think it would be the way to go. The biggest issue to me is=
- that
-> > > > it's inconsistent, and only changing the behaviour for a given flag
-> > > > doesn't solve that.
-> > >=20
-> > > I think the current behavior is odd but conforms to the document if
-> > > CLK_MUX_ROUND_CLOSEST is not specified.
-> > clk_mux_determine_rate_flags isn't documented, and the determine_rate
-> > clk_ops documentation doesn't mention it can return an error.
-> >=20
-> > > If i understand correctly, the default behavior of mux clocks is to
-> > > select the closest rate lower than requested rate, and
-> > > CLK_MUX_ROUND_CLOSEST removes the "lower than" limitation, which is
-> > > what this version tries to accomplish.
-> > The situation is not as clear-cut as you make it to be, unfortunately.
-> > The determine_rate clk_ops implementation states:
-> >=20
-> >    Given a target rate as input, returns the closest rate actually
-> >    supported by the clock, and optionally the parent clock that should =
-be
-> >    used to provide the clock rate.
-> >=20
-> > So CLK_MUX_ROUND_CLOSEST shouldn't exist, because that's what
-> > determine_rate expects so it should always be there.
-> >=20
-> > Now, the "actually supported by the clock" can be interpreted in
-> > multiple ways, and most importantly, doesn't state what the behaviour is
-> > if we can't find a rate actually supported by the clock.
-> >=20
-> > But now, this situation has been ambiguous for a while and thus drivers
-> > kind of relied on that ambiguity.
-> >=20
-> > So the way to fix it up is:
-> >=20
-> >    - Assess what drivers are relying on
-> >    - Document the current behaviour in clk_ops determine_rate
->=20
->=20
-> From my investigation, it's totally a mess, especially for platform clk
-> drivers (PLL). Some drivers always round down, the others round to neares=
-t,
-> with or without a specific flag to switch between them, depend on the
-> division functions they choose. Fixing all of them seems needs quite a lot
-> of time and would probably introduce some regressions.
+Yes it was my intention.
+During code review, i noticed this "in the middle" variable declaration and always
+thought that compiler will warn about this.
 
-I agree it's a mess, but that's a mess you wanted to clean up in the
-first place :)
+> 
+> And when I built this file I don't get a warning.  Is there a specific
+> config required to trigger the warning?
 
-> We'd probably only have to say both rounding to nearest and rounding down
-> are acceptable, though either one is preferred.
->=20
->=20
-> >    - Make clk_mux_determine_rate_flags consistent with that
->=20
->=20
-> I think we must keep existing flags and document the current behavior
-> correctly because of the massive existing users of clk_mux.
->
-> That's why i'm going to only fix CLK_MUX_ROUND_CLOSEST users. Hopefully it
-> won't cause too many regressions.
+I confirm, i checked also on my side and don't get any warning.
 
-Which, without a documentation, makes it more of a mess.
+> 
+> Btw, the Linux kernel recently silenced this warning because it doesn't
+> work well with the cleanup.h code...  It will be interesting to see if
+> people abandon this style guideline.
 
->=20
-> >    - Run that through kernelci to make sure we don't have any regression
->=20
->=20
-> We don't. I run 'tools/testing/kunit/kunit.py run --kunitconfig
-> drivers/clk/.kunitconfig' each time before i send patches.
+So this patch can be abandoned.
 
-That's kunit, not kernelci (https://linux.kernelci.org/job/)
+Thanks
+Patrice
 
->=20
-> Over all, it seems quite a lot of work here.
->
-> The situation here becomes even more complex when it comes to U-Boot clk
-> framework. They chose slightly different prototypes and stated
-> clk_set_rate() can fail with -ve. It's a great burden for clk driver auth=
-ors
-> and maintainers when they try to port their drivers to U-Boot. Let's Cc
-> U-Boot clk maintainers as well, and see how we can resolve the mess here.
-
-I mean, eventually, that's on them. If U-Boot chose to have a
-somewhat-similar-but-not-really clock framework, there's nothing Linux
-can solve here, even though I definitely can see the frustration for the
-developpers that have to work on both.
-
-Maxime
-
---awqbzhe5i5cs4dsy
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCZfArAAAKCRDj7w1vZxhR
-xZZwAP4+EGMEUglD/WVBtX1qrmRSTf6/9dYDeoxuCpfOgBw9cQEAjPJ3jhtBOsFR
-RqxMxv5vLSy6XzxVLNAFL7q0DczXOQs=
-=iWre
------END PGP SIGNATURE-----
-
---awqbzhe5i5cs4dsy--
+> 
+> regards,
+> dan carpenter
+> 
+>> Fixes: 163c5f60ebb4 ("fdt_support: add fdt_copy_fixed_partitions function")
+>>
+>> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+>> ---
+> 
