@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF74DC54E58
-	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 23:38:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53BA0C54E5D
+	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 23:38:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 44E1B87F86;
-	Wed, 13 Mar 2024 00:37:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A6BB487FC0;
+	Wed, 13 Mar 2024 00:37:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="o58a1EWC";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="aZJvhwt2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 558D687FC1; Wed, 13 Mar 2024 00:37:44 +0100 (CET)
+ id 36A2C87FC0; Wed, 13 Mar 2024 00:37:50 +0100 (CET)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 370FC87F78
- for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 00:37:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 809B487F78
+ for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 00:37:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,22 +28,22 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1710286647; bh=pCTiTeqReXsCMgUWr/RXscn/yQicu/tjGCIfTmPrqt0=;
- b=o58a1EWC+uXLH/SMR2XSNNRgx3eZ6tCpX3L+sq6pEezOleqfjnDFQo4KD4BaDlHV+Hjn8VQJ/
- o5SM2AQeYFvyOs3GdtdUs9/4zbFnGw0aAjOJLPI/gEACp+JRMQ6CZiY8KKUSCBLaWh5eqP6dwfd
- rW7+xUpyZdkrdb2be00PGdlvtrXDY82yB5oj5kxTDAIID5Y6q6XrHx9MJvs8ebEEgIXA4IomTn1
- ykeafFlZcaAEPX4iQQSFw+sdPpwky9RtvrxLoAp/WTSjRveJOJJQw02I1uWEfsxFWziDg8b0sfm
- AJS28SZn9riibwbYlCn/464acDniuBpscZXXGaPsJvGw==
+ t=1710286655; bh=Y1FUU2xTuZdqJan1m51A8K9F8tFmlyhDjS6KpJdmZmE=;
+ b=aZJvhwt2ib+Jig5J4JyvzWEZfXiQeRdkldJnDUt/lsF+Xojue6qUt6RqEQ3B9h3REkb4o4RPC
+ Z5zIKYsUez37SJyCxSJVBTiBEBGBHrFq4uwMsUW92pBu3euG59aNWhr5rgvn51AC1emdTxXkz8i
+ Ck/31Wq8GD+7cpMYSE+uvbGlf6cYIsKwntAYySa9BtvXen3Qg6mBlLkwsb+0l4PHwK4seiCINPX
+ 7s/w9sveXXmytP7FHzXSNyW+4MccpFeWuMeFsfIAI4agayzpmUIDje8Yh+FwhBF/Il0Rs3R9T9K
+ t/EqntjFD48aFGks9W4rdAmj7XEbrfj6wV8EFCDMgBag==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>
 Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>,
  u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v2 09/12] rockchip: vamrs: rock960: Migrate to use IO-domain
+Subject: [PATCH v2 11/12] rockchip: google: gru: Migrate to use IO-domain
  driver
-Date: Tue, 12 Mar 2024 23:36:19 +0000
-Message-ID: <20240312233636.1428749-10-jonas@kwiboo.se>
+Date: Tue, 12 Mar 2024 23:36:21 +0000
+Message-ID: <20240312233636.1428749-12-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20240312233636.1428749-1-jonas@kwiboo.se>
 References: <20240312233636.1428749-1-jonas@kwiboo.se>
@@ -55,7 +55,7 @@ X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
-X-ForwardEmail-ID: 65f0e735e6c04c5b3059368a
+X-ForwardEmail-ID: 65f0e73ee6c04c5b305936b2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,83 +81,88 @@ Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 v2:
 - Collect r-b tag
 ---
- board/vamrs/rock960_rk3399/Makefile         |  6 -----
- board/vamrs/rock960_rk3399/rock960-rk3399.c | 27 ---------------------
- configs/ficus-rk3399_defconfig              |  1 +
- configs/rock960-rk3399_defconfig            |  1 +
- 4 files changed, 2 insertions(+), 33 deletions(-)
- delete mode 100644 board/vamrs/rock960_rk3399/Makefile
- delete mode 100644 board/vamrs/rock960_rk3399/rock960-rk3399.c
+ board/google/gru/gru.c             | 35 ------------------------------
+ configs/chromebook_bob_defconfig   |  1 +
+ configs/chromebook_kevin_defconfig |  1 +
+ 3 files changed, 2 insertions(+), 35 deletions(-)
 
-diff --git a/board/vamrs/rock960_rk3399/Makefile b/board/vamrs/rock960_rk3399/Makefile
-deleted file mode 100644
-index 6c3e475b3a85..000000000000
---- a/board/vamrs/rock960_rk3399/Makefile
-+++ /dev/null
-@@ -1,6 +0,0 @@
--# SPDX-License-Identifier: GPL-2.0+
--#
--# Copyright (C) 2018 Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>
--#
--
--obj-y	+= rock960-rk3399.o
-diff --git a/board/vamrs/rock960_rk3399/rock960-rk3399.c b/board/vamrs/rock960_rk3399/rock960-rk3399.c
-deleted file mode 100644
-index 876be8ed9e10..000000000000
---- a/board/vamrs/rock960_rk3399/rock960-rk3399.c
-+++ /dev/null
-@@ -1,27 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+
--/*
-- * Copyright (C) 2018 Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>
-- */
--
+diff --git a/board/google/gru/gru.c b/board/google/gru/gru.c
+index 9cb3a5252047..e08cb42c27ed 100644
+--- a/board/google/gru/gru.c
++++ b/board/google/gru/gru.c
+@@ -3,18 +3,9 @@
+  * Copyright 2018 Google
+  */
+ 
 -#include <common.h>
+ #include <dm.h>
+ #include <init.h>
 -#include <syscon.h>
--#include <asm/arch-rockchip/clock.h>
+ #include <asm/arch-rockchip/clock.h>
 -#include <asm/arch-rockchip/grf_rk3399.h>
 -#include <asm/arch-rockchip/hardware.h>
--#include <linux/bitops.h>
 -
--#ifdef CONFIG_MISC_INIT_R
--int misc_init_r(void)
+-#define GRF_IO_VSEL_BT656_SHIFT 0
+-#define GRF_IO_VSEL_AUDIO_SHIFT 1
+-#define PMUGRF_CON0_VSEL_SHIFT 8
+-#define PMUGRF_CON0_VOL_SHIFT 9
+ 
+ #ifdef CONFIG_SPL_BUILD
+ /* provided to defeat compiler optimisation in board_init_f() */
+@@ -63,29 +54,3 @@ int board_early_init_r(void)
+ 	return 0;
+ }
+ #endif
+-
+-static void setup_iodomain(void)
 -{
 -	struct rk3399_grf_regs *grf =
--	    syscon_get_first_range(ROCKCHIP_SYSCON_GRF);
+-	   syscon_get_first_range(ROCKCHIP_SYSCON_GRF);
+-	struct rk3399_pmugrf_regs *pmugrf =
+-	   syscon_get_first_range(ROCKCHIP_SYSCON_PMUGRF);
 -
--	/**
--	 * Some SSD's to work on rock960 would require explicit
--	 * domain voltage change, so BT565 is in 1.8v domain
+-	/* BT656 and audio is in 1.8v domain */
+-	rk_setreg(&grf->io_vsel, (1 << GRF_IO_VSEL_BT656_SHIFT |
+-				  1 << GRF_IO_VSEL_AUDIO_SHIFT));
+-
+-	/*
+-	 * Set GPIO1 1.8v/3.0v source select to PMU1830_VOL
+-	 * and explicitly configure that PMU1830_VOL to be 1.8V
 -	 */
--	rk_setreg(&grf->io_vsel, BIT(0));
+-	rk_setreg(&pmugrf->soc_con0, (1 << PMUGRF_CON0_VSEL_SHIFT |
+-				      1 << PMUGRF_CON0_VOL_SHIFT));
+-}
+-
+-int rockchip_early_misc_init_r(void)
+-{
+-	setup_iodomain();
 -
 -	return 0;
 -}
--#endif
-diff --git a/configs/ficus-rk3399_defconfig b/configs/ficus-rk3399_defconfig
-index 90b07d847cc1..4859042d6b56 100644
---- a/configs/ficus-rk3399_defconfig
-+++ b/configs/ficus-rk3399_defconfig
-@@ -42,6 +42,7 @@ CONFIG_SYS_MMC_ENV_DEV=1
- CONFIG_NET_RANDOM_ETHADDR=y
- CONFIG_ROCKCHIP_GPIO=y
+diff --git a/configs/chromebook_bob_defconfig b/configs/chromebook_bob_defconfig
+index 989a8211f64d..d0321948697b 100644
+--- a/configs/chromebook_bob_defconfig
++++ b/configs/chromebook_bob_defconfig
+@@ -66,6 +66,7 @@ CONFIG_I2C_CROS_EC_TUNNEL=y
  CONFIG_SYS_I2C_ROCKCHIP=y
+ CONFIG_I2C_MUX=y
+ CONFIG_CROS_EC_KEYB=y
 +CONFIG_ROCKCHIP_IODOMAIN=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_MMC_SDHCI=y
-diff --git a/configs/rock960-rk3399_defconfig b/configs/rock960-rk3399_defconfig
-index 5c0b95f10bd1..13575c580054 100644
---- a/configs/rock960-rk3399_defconfig
-+++ b/configs/rock960-rk3399_defconfig
-@@ -39,6 +39,7 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_MMC_ENV_DEV=1
- CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_CROS_EC=y
+ CONFIG_CROS_EC_SPI=y
+ CONFIG_PWRSEQ=y
+diff --git a/configs/chromebook_kevin_defconfig b/configs/chromebook_kevin_defconfig
+index 07a96aa18989..120c11c04972 100644
+--- a/configs/chromebook_kevin_defconfig
++++ b/configs/chromebook_kevin_defconfig
+@@ -67,6 +67,7 @@ CONFIG_I2C_CROS_EC_TUNNEL=y
  CONFIG_SYS_I2C_ROCKCHIP=y
+ CONFIG_I2C_MUX=y
+ CONFIG_CROS_EC_KEYB=y
 +CONFIG_ROCKCHIP_IODOMAIN=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_MMC_SDHCI=y
+ CONFIG_CROS_EC=y
+ CONFIG_CROS_EC_SPI=y
+ CONFIG_PWRSEQ=y
 -- 
 2.43.2
 
