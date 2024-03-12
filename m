@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 223E4C54E58
-	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 14:30:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B268CC54E5D
+	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 14:31:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 84FF687DE3;
-	Tue, 12 Mar 2024 15:30:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 458F187F65;
+	Tue, 12 Mar 2024 15:30:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="SuK3F6/o";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="cEA+msR0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3198787F30; Tue, 12 Mar 2024 15:30:45 +0100 (CET)
+ id E6AD287F74; Tue, 12 Mar 2024 15:30:46 +0100 (CET)
 Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44DEB87F43
+ by phobos.denx.de (Postfix) with ESMTPS id 53F8E87F4F
  for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 15:30:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=phytec.de
@@ -31,15 +31,15 @@ DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
  Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
  Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
  List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=d85QUDSvhlIda+bFp15gTD+LOIYl0gNaJnKsaISzG0M=;
- b=SuK3F6/oGW1YgLMW0XZFfCdRLrxK2dPBG7rwvqOweq3rFTG84Bs5bQRKqzvwOn0Z
- wvwu2KIA7OpZdqHOHbbgnYut2LzJP8hekaHVVoZMeLdBcLd04kV8qEHC5ah4c40I
- 1ujIJY1Wm+iLbKSJMbPPedRtTxB+y+xjxH0fNbARCHo=;
-X-AuditID: ac14000a-fbefe7000000290d-99-65f067139b00
+ bh=XN0yif/PyY2MqrANE0wvY/5RZRA6RHLHSCq9a+SqqRQ=;
+ b=cEA+msR0oiSR4jznP8gTMFGjtnlMZ8PxO9/PSUBQlHakfMN9I86Kkb/vNZd2qJQd
+ ygToIdFbZhLnPgfxEwyMOQBY58ii8Lo2bX3sMVweWo28mnLM19tl1vNGlu5CzSqM
+ 7h5u/k7SoFHlcrWeNT9u5YSHNK5WkPrdNInT1qRwpCM=;
+X-AuditID: ac14000a-fadff7000000290d-9a-65f067133e96
 Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
  (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 0A.0A.10509.31760F56;
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 5A.0A.10509.31760F56;
  Tue, 12 Mar 2024 15:30:43 +0100 (CET)
 Received: from augenblix2.phytec.de (172.25.0.11) by Berlix.phytec.de
  (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
@@ -48,10 +48,9 @@ Received: from augenblix2.phytec.de (172.25.0.11) by Berlix.phytec.de
 From: Leonard Anderweit <l.anderweit@phytec.de>
 To: <trini@konsulko.com>, <t.remmet@phytec.de>, <festevam@gmail.com>
 CC: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>
-Subject: [PATCH v3 1/5] phycore_imx8mp: Move environment from include/config
- to board
-Date: Tue, 12 Mar 2024 15:30:29 +0100
-Message-ID: <20240312143033.3336-2-l.anderweit@phytec.de>
+Subject: [PATCH v3 2/5] phycore_imx8mp: Move default bootcmd to board env
+Date: Tue, 12 Mar 2024 15:30:30 +0100
+Message-ID: <20240312143033.3336-3-l.anderweit@phytec.de>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240312143033.3336-1-l.anderweit@phytec.de>
 References: <20240312143033.3336-1-l.anderweit@phytec.de>
@@ -61,17 +60,17 @@ Content-Type: text/plain
 X-Originating-IP: [172.25.0.11]
 X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
  (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrLLMWRmVeSWpSXmKPExsWyRpKBR1c4/UOqwfVprBYPr/pbTJ20md3i
- 7d5Odovud+oOLB47Z91l93h1YBW7x9k7Oxg9+rtbWANYorhsUlJzMstSi/TtErgyGmcuYi1Y
- JVfRsbibuYFxrWQXIyeHhICJxMWrz1m7GLk4hAQWM0m8XNYI5TxmlFjyq58RpIpNQF9i5ctF
- LCC2iICLxK+le4BsDg5mATOJCZ+TQcLCAqESPft3gpWzCKhKTGnZwwxi8wpYSix6OY8ZYpm8
- xMxL39lBbE4BK4lt73aB2UJANbN7HzFC1AtKnJz5BGwVM1B989bZzBC2hMTBFy+YIeqVJO6c
- +sUGM3PauddQ80MljmxazTSBUWgWklGzkIyahWTUAkbmVYxCuZnJ2alFmdl6BRmVJanJeimp
- mxhBQS7CwLWDsW+OxyFGJg7GQ4wSHMxKIryvdd6mCvGmJFZWpRblxxeV5qQWH2KU5mBREudd
- 3RGcKiSQnliSmp2aWpBaBJNl4uCUamCcs9HtDlfX4ZXRb1RM3gY3X+m44XB8zY53T04pxfDV
- KPf94Vg4bdnLi1WLHL5Z/646Xd5ovO50lcJ7k97zBiaV1/1XWKX63J+7ZorPCW2PG+0NlbsS
- bC9/Xlte8sii97LWjinXed7mBRzQtyw6xryF/9cnuVtvDO85Rk+IEfVoT9ixNefXu8mLlFiK
- MxINtZiLihMBeSQm+mACAAA=
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrLLMWRmVeSWpSXmKPExsWyRpKBR1c4/UOqwft1/BYPr/pbTJ20md3i
+ 7d5Odovud+oOLB47Z91l93h1YBW7x9k7Oxg9+rtbWANYorhsUlJzMstSi/TtErgy9jbeYSto
+ 46lYumQNcwPjXK4uRk4OCQETiWfn7rJ3MXJxCAksZpKYu+kFK4TzmFFiya9+RpAqNgF9iZUv
+ F7GA2CICLhK/lu4Bsjk4mAXMJCZ8TgYJCwt4Slxq7wArYRFQlfg+exsziM0rYCmx4eBmZohl
+ 8hIzL31nB7E5Bawktr3bBWYLAdXM7n3ECFEvKHFy5hOwOcxA9c1bZzND2BISB1+8YIaoV5K4
+ c+oXG8zMaedeQ80PlTiyaTXTBEahWUhGzUIyahaSUQsYmVcxCuVmJmenFmVm6xVkVJakJuul
+ pG5iBAW5CAPXDsa+OR6HGJk4GA8xSnAwK4nwvtZ5myrEm5JYWZValB9fVJqTWnyIUZqDRUmc
+ d3VHcKqQQHpiSWp2ampBahFMlomDU6qB0WdKvvyyn9EVpl+qY+drxv/Z+rxTITTahT/rxsE3
+ 02fvndGw2W/j8dMHFju1BrBOs37y48ieFKHMqFsPdZO0n77ws1GYoHu7L+1nz0fFa7GT707U
+ il8ybZ6Lu/K2aYFbYxpNHmv+1Nwu+mFjYVPp11NtU7s8b9/xEf8ne3EDzyemdbMexb7jvKzE
+ UpyRaKjFXFScCACPMA9jYAIAAA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,124 +87,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move the environment into the board directory and convert it from a C
-header to a text file. Sort the variables alphabetically.
-No functional changes.
+Move the default bootcmd from the defconfig to the board environment.
+No change in functionality.
 
 Signed-off-by: Leonard Anderweit <l.anderweit@phytec.de>
-Reviewed-by: Teresa Remmet <t.remmet@phytec.de>
 Tested-by: Teresa Remmet <t.remmet@phytec.de>
 ---
- .../phytec/phycore_imx8mp/phycore_imx8mp.env  | 45 +++++++++++++++++++
- include/configs/phycore_imx8mp.h              | 43 ------------------
- 2 files changed, 45 insertions(+), 43 deletions(-)
- create mode 100644 board/phytec/phycore_imx8mp/phycore_imx8mp.env
+ board/phytec/phycore_imx8mp/phycore_imx8mp.env | 12 ++++++++++++
+ configs/phycore-imx8mp_defconfig               |  2 --
+ 2 files changed, 12 insertions(+), 2 deletions(-)
 
 diff --git a/board/phytec/phycore_imx8mp/phycore_imx8mp.env b/board/phytec/phycore_imx8mp/phycore_imx8mp.env
-new file mode 100644
-index 000000000000..32513e70fec2
---- /dev/null
+index 32513e70fec2..dc9ad0fe9d15 100644
+--- a/board/phytec/phycore_imx8mp/phycore_imx8mp.env
 +++ b/board/phytec/phycore_imx8mp/phycore_imx8mp.env
-@@ -0,0 +1,45 @@
-+console=ttymxc0,115200
-+dofastboot=0
-+emmc_dev=2
-+fastboot_raw_partition_all=0 4194304
-+fastboot_raw_partition_bootloader=64 8128
-+fdt_addr=0x48000000
-+fdt_file=CONFIG_DEFAULT_FDT_FILE
-+image=Image
-+ip_dyn=yes
-+loadfdt=fatload mmc ${mmcdev}:${mmcpart} ${fdt_addr} ${fdt_file}
-+loadimage=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${image}
-+mmcargs=
-+	setenv bootargs console=${console}
-+	root=/dev/mmcblk${mmcdev}p${mmcroot} rootwait rw
-+mmcautodetect=yes
-+mmcboot=
-+	echo Booting from mmc ...;
-+	run mmcargs;
-+	if run loadfdt; then
-+		booti ${loadaddr} - ${fdt_addr};
-+	else
-+		echo WARN: Cannot load the DT;
+@@ -1,3 +1,15 @@
++bootcmd=
++	if test ${dofastboot} = 1; then
++		fastboot 0;
 +	fi;
-+mmcdev=CONFIG_SYS_MMC_ENV_DEV
-+mmcpart=1
-+mmcroot=2
-+netargs=
-+	setenv bootargs console=${console} root=/dev/nfs ip=dhcp
-+	nfsroot=${serverip}:${nfsroot},v3,tcp
-+netboot=
-+	echo Booting from net ...;
-+	run netargs;
-+	if test ${ip_dyn} = yes; then
-+		setenv get_cmd dhcp;
-+	else
-+		setenv get_cmd tftp;
++	mmc dev ${mmcdev};
++	if mmc rescan; then
++		if run loadimage; then
++			run mmcboot;
++		else
++			run netboot;
++		fi;
 +	fi;
-+	${get_cmd} ${loadaddr} ${image};
-+	if ${get_cmd} ${fdt_addr} ${fdt_file}; then
-+		booti ${loadaddr} - ${fdt_addr};
-+	else
-+		echo WARN: Cannot load the DT;
-+	fi;
-+nfsroot=/nfs
-+sd_dev=1
-diff --git a/include/configs/phycore_imx8mp.h b/include/configs/phycore_imx8mp.h
-index 11a17be7fe1d..206c4d50d276 100644
---- a/include/configs/phycore_imx8mp.h
-+++ b/include/configs/phycore_imx8mp.h
-@@ -13,49 +13,6 @@
- #define CFG_SYS_UBOOT_BASE \
- 		(QSPI0_AMBA_BASE + CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR * 512)
- 
--#define CFG_EXTRA_ENV_SETTINGS \
--	"image=Image\0" \
--	"console=ttymxc0,115200\0" \
--	"fdt_addr=0x48000000\0" \
--	"fdt_file=" CONFIG_DEFAULT_FDT_FILE "\0" \
--	"ip_dyn=yes\0" \
--	"dofastboot=0\0" \
--	"fastboot_raw_partition_bootloader=64 8128\0" \
--	"fastboot_raw_partition_all=0 4194304\0" \
--	"emmc_dev=2\0" \
--	"sd_dev=1\0" \
--	"mmcdev=" __stringify(CONFIG_SYS_MMC_ENV_DEV) "\0" \
--	"mmcpart=1\0" \
--	"mmcroot=2\0" \
--	"mmcautodetect=yes\0" \
--	"mmcargs=setenv bootargs console=${console} " \
--		"root=/dev/mmcblk${mmcdev}p${mmcroot} rootwait rw\0" \
--	"loadimage=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${image}\0" \
--	"loadfdt=fatload mmc ${mmcdev}:${mmcpart} ${fdt_addr} ${fdt_file}\0" \
--	"mmcboot=echo Booting from mmc ...; " \
--		"run mmcargs; " \
--		"if run loadfdt; then " \
--			"booti ${loadaddr} - ${fdt_addr}; " \
--		"else " \
--			"echo WARN: Cannot load the DT; " \
--		"fi;\0 " \
--	"nfsroot=/nfs\0" \
--	"netargs=setenv bootargs console=${console} root=/dev/nfs ip=dhcp " \
--		"nfsroot=${serverip}:${nfsroot},v3,tcp\0" \
--	"netboot=echo Booting from net ...; " \
--		"run netargs; " \
--		"if test ${ip_dyn} = yes; then " \
--			"setenv get_cmd dhcp; " \
--		"else " \
--			"setenv get_cmd tftp; " \
--		"fi; " \
--		"${get_cmd} ${loadaddr} ${image}; " \
--		"if ${get_cmd} ${fdt_addr} ${fdt_file}; then " \
--			"booti ${loadaddr} - ${fdt_addr}; " \
--		"else " \
--			"echo WARN: Cannot load the DT; " \
--		"fi;\0" \
--
- /* Link Definitions */
- 
- #define CFG_SYS_INIT_RAM_ADDR	0x40000000
+ console=ttymxc0,115200
+ dofastboot=0
+ emmc_dev=2
+diff --git a/configs/phycore-imx8mp_defconfig b/configs/phycore-imx8mp_defconfig
+index b3a7bbd79bb6..fd492eba3c10 100644
+--- a/configs/phycore-imx8mp_defconfig
++++ b/configs/phycore-imx8mp_defconfig
+@@ -25,8 +25,6 @@ CONFIG_FIT=y
+ CONFIG_FIT_EXTERNAL_OFFSET=0x3000
+ CONFIG_SPL_LOAD_FIT=y
+ CONFIG_OF_SYSTEM_SETUP=y
+-CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="if test ${dofastboot} = 1; then fastboot 0; fi; mmc dev ${mmcdev}; if mmc rescan; then if run loadimage; then run mmcboot; else run netboot; fi; fi;"
+ CONFIG_DEFAULT_FDT_FILE="oftree"
+ CONFIG_SYS_CBSIZE=2048
+ CONFIG_SYS_PBSIZE=2074
 -- 
 2.25.1
 
