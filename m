@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DA66C54E66
-	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 08:29:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6857AC54E66
+	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 08:32:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8AD3E87CAC;
-	Tue, 12 Mar 2024 09:29:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C072A87E01;
+	Tue, 12 Mar 2024 09:32:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="b9TI3w7d";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="s9MbG4/5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2420D87C86; Tue, 12 Mar 2024 09:29:23 +0100 (CET)
-Received: from mail-ua1-x933.google.com (mail-ua1-x933.google.com
- [IPv6:2607:f8b0:4864:20::933])
+ id 50BA687E01; Tue, 12 Mar 2024 09:32:03 +0100 (CET)
+Received: from mail-ua1-x92c.google.com (mail-ua1-x92c.google.com
+ [IPv6:2607:f8b0:4864:20::92c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 36DF687CAC
- for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 09:29:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A04EE87C86
+ for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 09:31:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ua1-x933.google.com with SMTP id
- a1e0cc1a2514c-7d5bfdd2366so2766884241.3
- for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 01:29:20 -0700 (PDT)
+Received: by mail-ua1-x92c.google.com with SMTP id
+ a1e0cc1a2514c-7db9cad9dbcso2102929241.1
+ for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 01:31:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710232159; x=1710836959; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1710232318; x=1710837118; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=BFl+6p0bFlGEiuisiTnG99EOf7dP0UQLi1pC9ZUQMGI=;
- b=b9TI3w7dLk5sxJ/S/DNuSANEL5PHofJ/mfmbUyQOkpDUBA/rfY9ZC9S+vlEb2sewsN
- Ig4+aF8LZIpE1oot3MVytoHbMW59q7ar6V3dX8H7iU8Pm7yIRmXCCyQ8pUOrn9WX4fwe
- 8bdjf0YcZbBq24ALEY6Drj6JvQZ0dNoH9487SUnzpzzhZ0oMiX0y2RZfxO9SGeZ/Ergo
- duxiqmNyXzOUHuoPHRGIgt27JL6Tan9IXB4WoLFLUaTi/8tQosNKsBvlCe4csJcVOKIU
- ACxUCoFziQRf+epBAvC7RPNzNvQK9jxAzyZauf4oNZq3bcTJqG/B49idhj+R482MFNbZ
- B79g==
+ bh=gtFvzm4sF1TZvUHfpUzZS7AKUfD3v7wEwLoDW4DHelQ=;
+ b=s9MbG4/59ZJ449Ftw67DvufT3PAB9bJQMvTPewU2LUuWub3dNLIGiAdYkgluk9QegZ
+ k67qsdT74SOtOnsIrdvhbs0YdnLo4MUM8n2n5r/5YQQhn4YHkUKpqP1cgsmYe4GEhb5I
+ FUZkr2gWd/TQ38Q7jShb1YAMANh4+N+pMqREOh4DNYv66o3bIla8X9VNiNENK9Wa/2M+
+ Ov1MNRjQH+Ak1f4IwWrtwfbUejV6CBlfNvhMbRAxHAOmwLEui/HUKyX2bjbq3PuuCr3y
+ YVP81P3x6EbD2O8ggIoXT9di98Le24/mq02sXA7zGGLe464mVHrSjB811GNv8gBA77Jm
+ 4reA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710232159; x=1710836959;
+ d=1e100.net; s=20230601; t=1710232318; x=1710837118;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=BFl+6p0bFlGEiuisiTnG99EOf7dP0UQLi1pC9ZUQMGI=;
- b=Nx7P04pmC4KITCja93s5rzoQ0mYwUYrqn5LAH1TJehImywhV/ERRDQEk2xDLZqkvjb
- 3LRXfr2r8DaplUJNCbU7i+4dO6EI6RMbN/A4mCkyjrwmgL6Y11ijvI2/sM9YBAU18wW+
- l/FhDp+XSxKNOqne5BYn248CIbSQwfaVcLHGQVdbgRPyfilfipCs5QLgxsAtywRkmAox
- BFyHjY9oP3mgGicylbe/mIknTISHmwOckj3w3j+SBLmNRn14hkEt040tg6wGq5fkX+KO
- Dpi2zvPZLyIVokfrGWJNeqnhzB1eEpkhd3eo8wiWumVMk8Bm7KTmDiPFcpYt1zNlNPH9
- dT2Q==
-X-Gm-Message-State: AOJu0Yy3k64ct3YsalCD/mjvSiJNcNyj52OXGuigt7rFGZybTG2taBgV
- zMeJX6BPFoFJi4PjT24HBVIG8r0R9Gs4W++quHD366KBVHNuTkDx7LOqm74RM7TdfrA7ss7GIw9
- eDTZ20jxX/nPYp9XWUmwhOlsThZMkLykefidMBw==
-X-Google-Smtp-Source: AGHT+IHfhHWPTytKQvhArdyRlFe+nk+FfxqbdGCCwYy0TNXqkuAav5ZSdZEX/hUnkAxf8YEozG0oBC8tMPlBb0HC680=
-X-Received: by 2002:a05:6102:238e:b0:473:c49:283d with SMTP id
- v14-20020a056102238e00b004730c49283dmr6948880vsr.2.1710232158821; Tue, 12 Mar
- 2024 01:29:18 -0700 (PDT)
+ bh=gtFvzm4sF1TZvUHfpUzZS7AKUfD3v7wEwLoDW4DHelQ=;
+ b=Baxkxxc6OBuEzQxxmFxBEbkUs1GBWlo4QV25DOiDo1nkgohsqQZXQNsMl4gL34bY1l
+ 85BXJeOYDlr2Pha8qOXGk6b5UuOxGSMblwL3uqkUNyVmMQ6Iw/X03GnCO57LcFzPyeik
+ bmaXo65PNScGuo9r9q8VxvlG2VNUtGYnm0R34pK75uMG9nnwukXdpiUXYB+aBef5ITIT
+ Wj5/1AZ53jKP94ex4+Hi75ksuU1JeLX0jcKwdtusCptDBvJwD7cRsHXclQS8SEqYGuwP
+ 9Wj5YVeeoRotfRkOmv337wy4a5pQuYqMPk1ilSd5B2jHmfRg2gN7mlSY3yuz09KrsmVd
+ cxhg==
+X-Gm-Message-State: AOJu0Yzy5mqXiwHqwajGvPF3/NZJ9XwcG1h1LPFaHeSRF2Fr3tqzs4Eb
+ G7gqVl0aeLEwSVJAoTqTeDq/LsF/rztzOERfrm9XT7ypbpDn5a4pXCpz1cwmdn9G1C4JUIcAuVi
+ cWPeYQuxIgd5InyFmEL1pjmDrS3eJmQfVSAbQkA==
+X-Google-Smtp-Source: AGHT+IFbipkEethA8PIsAmodp+9LVUXcmcQVHBygYvhjoSAlMybatc5Y522bFxiCo1VMqSZdTOcrtQww1TEtC0kNaN0=
+X-Received: by 2002:a05:6102:c5:b0:472:681a:b9c0 with SMTP id
+ u5-20020a05610200c500b00472681ab9c0mr4817105vsp.28.1710232318298; Tue, 12 Mar
+ 2024 01:31:58 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240311213334.3567389-1-volodymyr_babchuk@epam.com>
- <20240311213334.3567389-3-volodymyr_babchuk@epam.com>
-In-Reply-To: <20240311213334.3567389-3-volodymyr_babchuk@epam.com>
+ <20240311213334.3567389-4-volodymyr_babchuk@epam.com>
+In-Reply-To: <20240311213334.3567389-4-volodymyr_babchuk@epam.com>
 From: Sumit Garg <sumit.garg@linaro.org>
-Date: Tue, 12 Mar 2024 13:59:07 +0530
-Message-ID: <CAFA6WYNTH+GVzm3dqcfUjRd94fAtO6vDj2+8PyjuApmj0_qffg@mail.gmail.com>
-Subject: Re: [PATCH v3 2/4] clk: qcom: clear div mask before assigning a new
- divider
+Date: Tue, 12 Mar 2024 14:01:47 +0530
+Message-ID: <CAFA6WYO9YQn2ZK2vtfKPpvr8NhdYzgUB5sWxn7kXCk1tc7yQ2A@mail.gmail.com>
+Subject: Re: [PATCH v3 3/4] clk: qcom: add support for power domains uclass
 To: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
  Caleb Connolly <caleb.connolly@linaro.org>, 
@@ -94,47 +93,249 @@ X-Virus-Status: Clean
 On Tue, 12 Mar 2024 at 03:03, Volodymyr Babchuk
 <Volodymyr_Babchuk@epam.com> wrote:
 >
-> The current behaviour does a bitwise OR of the previous and new
-> divider values, this is wrong as some bits maybe be set already. We
-
-nit: s/maybe be/maybe/
-
-> need to clear all the divider bits before applying new ones.
->
-> This fixes potential issue with 1Gbit ethernet on SA8155P-ADP boards.
+> Now sub-drivers for particular SoCs can register them as power domain
+> drivers. This is needed for upcoming SM8150 support, because it needs
+> to power up the Ethernet module.
 >
 > Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
-> Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
+>
+> ---
+> Caleb suggested to use "imply POWER_DOMAIN", not "depends
+> POWER_DOMAIN" in the Kconfig, but this does not work:
+> $ make CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm
+> scripts/kconfig/conf  --syncconfig Kconfig
+> drivers/clk/Kconfig:3:error: recursive dependency detected!
+> drivers/clk/Kconfig:3:  symbol CLK is selected by IMX8M_POWER_DOMAIN
+> drivers/power/domain/Kconfig:35:        symbol IMX8M_POWER_DOMAIN depends on POWER_DOMAIN
+> drivers/power/domain/Kconfig:3: symbol POWER_DOMAIN is implied by CLK_QCOM
+> drivers/clk/qcom/Kconfig:3:     symbol CLK_QCOM depends on CLK
+> For a resolution refer to Documentation/kbuild/kconfig-language.txt
+> subsection "Kconfig recursive dependency limitations"
+>
+>
+> Changes in v3:
+>  - Added "depends POWER_DOMAIN" to Kconfig (see note)
+>  - Use readl_poll_timeout() instead of open coded wait loop
+>  - Print warning if power domain can't be enabled/disabled
 >
 
 Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
 
 -Sumit
 
-> ---
->
-> (no changes since v2)
->
 > Changes in v2:
->  - Reworded the commit message
->  - Added Caleb's R-b tag
+>  - Reworked qcom_cc_bind() function
+>  - Added timeout to qcom_power_set()
+>  - Minor fixes in register names and formatting
 >
->  drivers/clk/qcom/clock-qcom.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
+>  drivers/clk/qcom/Kconfig      |   2 +-
+>  drivers/clk/qcom/clock-qcom.c | 132 ++++++++++++++++++++++++++++++----
+>  drivers/clk/qcom/clock-qcom.h |   6 ++
+>  3 files changed, 126 insertions(+), 14 deletions(-)
 >
+> diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
+> index 0df0d1881a..8dae635ac2 100644
+> --- a/drivers/clk/qcom/Kconfig
+> +++ b/drivers/clk/qcom/Kconfig
+> @@ -2,7 +2,7 @@ if ARCH_SNAPDRAGON || ARCH_IPQ40XX
+>
+>  config CLK_QCOM
+>         bool
+> -       depends on CLK && DM_RESET
+> +       depends on CLK && DM_RESET && POWER_DOMAIN
+>         def_bool n
+>
+>  menu "Qualcomm clock drivers"
 > diff --git a/drivers/clk/qcom/clock-qcom.c b/drivers/clk/qcom/clock-qcom.c
-> index 7c683e5192..729d190c54 100644
+> index 729d190c54..7a5938a06a 100644
 > --- a/drivers/clk/qcom/clock-qcom.c
 > +++ b/drivers/clk/qcom/clock-qcom.c
-> @@ -117,7 +117,8 @@ void clk_rcg_set_rate_mnd(phys_addr_t base, const struct bcr_regs *regs,
+> @@ -22,7 +22,9 @@
+>  #include <linux/bug.h>
+>  #include <linux/delay.h>
+>  #include <linux/bitops.h>
+> +#include <linux/iopoll.h>
+>  #include <reset-uclass.h>
+> +#include <power-domain-uclass.h>
 >
->         /* setup src select and divider */
->         cfg  = readl(base + regs->cfg_rcgr);
-> -       cfg &= ~(CFG_SRC_SEL_MASK | CFG_MODE_MASK | CFG_HW_CLK_CTRL_MASK);
-> +       cfg &= ~(CFG_SRC_SEL_MASK | CFG_MODE_MASK | CFG_HW_CLK_CTRL_MASK |
-> +                CFG_SRC_DIV_MASK);
->         cfg |= source & CFG_SRC_SEL_MASK; /* Select clock source */
+>  #include "clock-qcom.h"
 >
->         if (div)
+> @@ -30,6 +32,13 @@
+>  #define CBCR_BRANCH_ENABLE_BIT  BIT(0)
+>  #define CBCR_BRANCH_OFF_BIT     BIT(31)
+>
+> +#define GDSC_SW_COLLAPSE_MASK          BIT(0)
+> +#define GDSC_POWER_DOWN_COMPLETE       BIT(15)
+> +#define GDSC_POWER_UP_COMPLETE         BIT(16)
+> +#define GDSC_PWR_ON_MASK               BIT(31)
+> +#define CFG_GDSCR_OFFSET               0x4
+> +#define GDSC_STATUS_POLL_TIMEOUT_US    1500
+> +
+>  /* Enable clock controlled by CBC soft macro */
+>  void clk_enable_cbc(phys_addr_t cbcr)
+>  {
+> @@ -223,7 +232,7 @@ U_BOOT_DRIVER(qcom_clk) = {
+>  int qcom_cc_bind(struct udevice *parent)
+>  {
+>         struct msm_clk_data *data = (struct msm_clk_data *)dev_get_driver_data(parent);
+> -       struct udevice *clkdev, *rstdev;
+> +       struct udevice *clkdev = NULL, *rstdev = NULL, *pwrdev;
+>         struct driver *drv;
+>         int ret;
+>
+> @@ -238,20 +247,41 @@ int qcom_cc_bind(struct udevice *parent)
+>         if (ret)
+>                 return ret;
+>
+> -       /* Bail out early if resets are not specified for this platform */
+> -       if (!data->resets)
+> -               return ret;
+> +       if (data->resets) {
+> +               /* Get a handle to the common reset handler */
+> +               drv = lists_driver_lookup_name("qcom_reset");
+> +               if (!drv) {
+> +                       ret = -ENOENT;
+> +                       goto unbind_clkdev;
+> +               }
+> +
+> +               /* Register the reset controller */
+> +               ret = device_bind_with_driver_data(parent, drv, "qcom_reset", (ulong)data,
+> +                                                  dev_ofnode(parent), &rstdev);
+> +               if (ret)
+> +                       goto unbind_clkdev;
+> +       }
+>
+> -       /* Get a handle to the common reset handler */
+> -       drv = lists_driver_lookup_name("qcom_reset");
+> -       if (!drv)
+> -               return -ENOENT;
+> +       if (data->power_domains) {
+> +               /* Get a handle to the common power domain handler */
+> +               drv = lists_driver_lookup_name("qcom_power");
+> +               if (!drv) {
+> +                       ret = -ENOENT;
+> +                       goto unbind_rstdev;
+> +               }
+> +               /* Register the power domain controller */
+> +               ret = device_bind_with_driver_data(parent, drv, "qcom_power", (ulong)data,
+> +                                                  dev_ofnode(parent), &pwrdev);
+> +               if (ret)
+> +                       goto unbind_rstdev;
+> +       }
+>
+> -       /* Register the reset controller */
+> -       ret = device_bind_with_driver_data(parent, drv, "qcom_reset", (ulong)data,
+> -                                          dev_ofnode(parent), &rstdev);
+> -       if (ret)
+> -               device_unbind(clkdev);
+> +       return 0;
+> +
+> +unbind_rstdev:
+> +       device_unbind(rstdev);
+> +unbind_clkdev:
+> +       device_unbind(clkdev);
+>
+>         return ret;
+>  }
+> @@ -306,3 +336,79 @@ U_BOOT_DRIVER(qcom_reset) = {
+>         .ops = &qcom_reset_ops,
+>         .probe = qcom_reset_probe,
+>  };
+> +
+> +static int qcom_power_set(struct power_domain *pwr, bool on)
+> +{
+> +       struct msm_clk_data *data = (struct msm_clk_data *)dev_get_driver_data(pwr->dev);
+> +       void __iomem *base = dev_get_priv(pwr->dev);
+> +       const struct qcom_power_map *map;
+> +       u32 value;
+> +       int ret;
+> +
+> +       if (pwr->id >= data->num_power_domains)
+> +               return -ENODEV;
+> +
+> +       map = &data->power_domains[pwr->id];
+> +
+> +       if (!map->reg)
+> +               return -ENODEV;
+> +
+> +       value = readl(base + map->reg);
+> +
+> +       if (on)
+> +               value &= ~GDSC_SW_COLLAPSE_MASK;
+> +       else
+> +               value |= GDSC_SW_COLLAPSE_MASK;
+> +
+> +       writel(value, base + map->reg);
+> +
+> +       if (on)
+> +               ret = readl_poll_timeout(base + map->reg + CFG_GDSCR_OFFSET,
+> +                                        value,
+> +                                        (value & GDSC_POWER_UP_COMPLETE) ||
+> +                                        (value & GDSC_PWR_ON_MASK),
+> +                                        GDSC_STATUS_POLL_TIMEOUT_US);
+> +
+> +       else
+> +               ret = readl_poll_timeout(base + map->reg + CFG_GDSCR_OFFSET,
+> +                                        value,
+> +                                        (value & GDSC_POWER_DOWN_COMPLETE) ||
+> +                                        !(value & GDSC_PWR_ON_MASK),
+> +                                        GDSC_STATUS_POLL_TIMEOUT_US);
+> +
+> +
+> +       if (ret == -ETIMEDOUT)
+> +               printf("WARNING: GDSC %lu is stuck during power on/off\n",
+> +                      pwr->id);
+> +       return ret;
+> +}
+> +
+> +static int qcom_power_on(struct power_domain *pwr)
+> +{
+> +       return qcom_power_set(pwr, true);
+> +}
+> +
+> +static int qcom_power_off(struct power_domain *pwr)
+> +{
+> +       return qcom_power_set(pwr, false);
+> +}
+> +
+> +static const struct power_domain_ops qcom_power_ops = {
+> +       .on = qcom_power_on,
+> +       .off = qcom_power_off,
+> +};
+> +
+> +static int qcom_power_probe(struct udevice *dev)
+> +{
+> +       /* Set our priv pointer to the base address */
+> +       dev_set_priv(dev, (void *)dev_read_addr(dev));
+> +
+> +       return 0;
+> +}
+> +
+> +U_BOOT_DRIVER(qcom_power) = {
+> +       .name = "qcom_power",
+> +       .id = UCLASS_POWER_DOMAIN,
+> +       .ops = &qcom_power_ops,
+> +       .probe = qcom_power_probe,
+> +};
+> diff --git a/drivers/clk/qcom/clock-qcom.h b/drivers/clk/qcom/clock-qcom.h
+> index 01088c1901..12a1eaec2b 100644
+> --- a/drivers/clk/qcom/clock-qcom.h
+> +++ b/drivers/clk/qcom/clock-qcom.h
+> @@ -59,9 +59,15 @@ struct qcom_reset_map {
+>         u8 bit;
+>  };
+>
+> +struct qcom_power_map {
+> +       unsigned int reg;
+> +};
+> +
+>  struct clk;
+>
+>  struct msm_clk_data {
+> +       const struct qcom_power_map     *power_domains;
+> +       unsigned long                   num_power_domains;
+>         const struct qcom_reset_map     *resets;
+>         unsigned long                   num_resets;
+>         const struct gate_clk           *clks;
 > --
 > 2.43.0
