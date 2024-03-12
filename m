@@ -4,92 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB1A5C54E5D
-	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 23:18:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80D72C54E58
+	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 23:37:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 13B7F87DB9;
-	Wed, 13 Mar 2024 00:18:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id B0F3F87E57;
+	Wed, 13 Mar 2024 00:37:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="itUHV2GW";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="aE0ZgJKC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A7AF87EA3; Tue, 12 Mar 2024 23:25:58 +0100 (CET)
-Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
- [IPv6:2607:f8b0:4864:20::f2c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 41BEC87E6A; Wed, 13 Mar 2024 00:37:05 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2713087150
- for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 23:25:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D0B7D87C86
+ for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 00:37:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2c.google.com with SMTP id
- 6a1803df08f44-690c1747c3cso2818986d6.0
- for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 15:25:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1710282354; x=1710887154; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=OzQZAVQefo3mI7JaOv3i9HOffYntNfvUVWBj/1pTaQU=;
- b=itUHV2GWjEwesy/giPgqlAn0TCYFXCq0m75NG/g4QgycpWxMnWn1In9U8JzsUZOItK
- tk3DAKXT7Fq5B7q68O7KY6V1YytogK4yLfLa5DyZfCy1zcdVstezStBOJRiwAYNXMdTH
- LunSM8i844BfdIdfqaX7kAQ8orNZJ7YRnp3/A=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710282354; x=1710887154;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=OzQZAVQefo3mI7JaOv3i9HOffYntNfvUVWBj/1pTaQU=;
- b=YnpRrQxbh6kSf5FcIsOzT7xpczAhvbVD5X0ZqYgoTZeVzv6kRjqcLG61CfJTvuQZFz
- 3byx2SWWy6l1mGdjWFs6iTBmafJUyYjaeJPlSwcesDP7VWClAWYjphuPIMX8ZaAZhVtq
- R7XCl3+1LNmHldtrPqFAgWkwhZAUzWtpzV9zcNSm4PpMK5lurcbgkGVhd3nyHMCCMbPp
- bFxdiGFYwV5OgxA6gDSsSnbTvYXzWaROjLraDKlK7DieCef95/XDtNCyT7ZgMfrC2YOr
- 1XX8c8XaFUqEhfDCt/3m3Xy3NyHH3HZBKujfGN/qKFP9s6e7XbmbkgC1fZrw25K8HkLd
- zt6g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU96Y811bIuFx1DxHWmP7CQVaSND1MGXx1VgV+ha8k1JCZVZ3CMdGqiVjRUfpH6qCjx0ZAPfbqvmLWyN93TI0wdrkQNdA==
-X-Gm-Message-State: AOJu0YzwRTtvazD1pncnaeIMJyyQv7vYb8JlqpARxG437fKZiuzjgeda
- CfBWnZtHm4fEkCTwF9zbyYgYEa2mSgyYDM2zCeeWFFgfc2nj/6dFfRmcmHu9Bll2YHN/GXYjykv
- QKaKJTL1Otwcy2RivrNZEqIt0ufIxW5xH2ZNx
-X-Google-Smtp-Source: AGHT+IGmyFqJ7I5OEdlVeWDP4fniRKop5+ziAYZpGgboPbvZWq7MrHq+rtsBULHzzfs4hoNrK7NjvGlYv1SDUXqSk04=
-X-Received: by 2002:ad4:5c48:0:b0:68f:dde4:fb12 with SMTP id
- a8-20020ad45c48000000b0068fdde4fb12mr1707180qva.9.1710282354445; Tue, 12 Mar
- 2024 15:25:54 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=03ce=KT=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1710286607;
+ bh=DcgaEJiovhyw4JoU1NKV0il+l2R+v++2sfBj3k+l9NQ=;
+ b=aE0ZgJKCd06XWhOKTRmy+vMOcZae39C5AqlXKfszLLmjCNlvN1Ky7+TE7reMDGQ61qbRN5aOr
+ S33g/MVUw6gIxNJ/9h7rQ6TqFH284/8isuhK618P8FYSPY/b9I95Xat+K0RZgcVdNVbr4GnRRrd
+ vt52SQqwTZUdvqGf6gdEdYdPX7gAKXMHvGt6inWGz+o/o1CZkN/17NKet8sIjuv024lMfQtY8D4
+ Aa8U/7vn0OPiTkQfspwa/mb6EBv35aZAOC3OjIx2g3a1h4YV9rwQs2rsOvSP3hTrOVMpWRE9xQv
+ z5hiHmScBfTSNpKlMF/GJNdj44ZnTpcUY/dJd875ofUg==
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH v2 00/12] rockchip: rk3399: Migrate to use IO-domain driver
+Date: Tue, 12 Mar 2024 23:36:10 +0000
+Message-ID: <20240312233636.1428749-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.43.2
 MIME-Version: 1.0
-References: <20231116172859.393744-1-sjg@chromium.org>
- <20231208150042.GA1278773-robh@kernel.org>
- <CAPnjgZ2i4gvgiUeHPOfHuOdBooV4e=QQEq6iMo0JbDwOS6dCwA@mail.gmail.com>
- <CAL_Jsq+xMZ8yz4H9D59uCSyX4h5W+4ruGF++=wVA=msXz+Y01A@mail.gmail.com>
- <CAPnjgZ1uW8T6woXSqFUNm301=W3zBYOrADREkrz=DuwSW87qZg@mail.gmail.com>
- <20231214172702.GA617226-robh@kernel.org>
- <CAPnjgZ2oJSGPO91Y_aLbe+v250WFrND4n3T0mOvhERYidVu=eQ@mail.gmail.com>
- <CAFLszTizRRVbRO6_ygE2X-Lp5dENWSc4uMGL5GPJAFGAbRdCyQ@mail.gmail.com>
- <CAL_Jsq+j7_KZtQ2ENq9+vsw0LOZF=spu293_G=AxOmBM+m_f-g@mail.gmail.com>
- <CAFLszTimaFw9sf=JKvQXG4fS6V_2T=2n+pfvYLCiuG1o+7cHPA@mail.gmail.com>
- <20240205085056.44278f2c@xps-13>
- <CAFLszTi+8ygXOidnhxj7sdJwc6X5i+++QvnUyfe-kde5eSts_w@mail.gmail.com>
- <20240205131755.3462084f@xps-13>
- <CAFLszTh3t6wPz8PFhFzazTAGaLVpObkjY9qv7MtSkQ21zZFzKA@mail.gmail.com>
- <20240308084212.4aa58761@xps-13>
-In-Reply-To: <20240308084212.4aa58761@xps-13>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 13 Mar 2024 11:25:42 +1300
-Message-ID: <CAFLszTi8w4gBoa-6uoKUN-Ng07ieA+DXy3gm2cdxfwgAybrgsQ@mail.gmail.com>
-Subject: Re: [PATCH v6 1/3] dt-bindings: mtd: partitions: Add binman compatible
-To: Miquel Raynal <miquel.raynal@bootlin.com>
-Cc: Rob Herring <robh@kernel.org>, devicetree@vger.kernel.org, 
- linux-mtd@lists.infradead.org, Tom Rini <trini@konsulko.com>, 
- Michael Walle <mwalle@kernel.org>, U-Boot Mailing List <u-boot@lists.denx.de>, 
- Conor Dooley <conor+dt@kernel.org>, 
- Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
- Pratyush Yadav <ptyadav@amazon.de>, 
- =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>, 
- Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
- linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Wed, 13 Mar 2024 00:18:09 +0100
+Content-Transfer-Encoding: 8bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 167.172.40.54
+X-ForwardEmail-ID: 65f0e70ce6c04c5b305935e8
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,136 +68,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Miquel,
+This series remove old unused board_early_init_f() functions, adds
+support for RK3399 to the IO-domain driver and migrates all boards that
+used setup_iodomain() to now use the IO-domain driver instead.
 
-On Fri, 8 Mar 2024 at 20:42, Miquel Raynal <miquel.raynal@bootlin.com> wrote:
->
-> Hi Simon,
->
-> sjg@chromium.org wrote on Fri, 8 Mar 2024 15:44:25 +1300:
->
-> > Hi Miquel,
-> >
-> > On Tue, 6 Feb 2024 at 01:17, Miquel Raynal <miquel.raynal@bootlin.com> wrote:
-> > >
-> > > Hi Simon,
-> > >
-> > > > > > > > > > > > > > > +description: |
-> > > > > > > > > > > > > > > +  The binman node provides a layout for firmware, used when packaging firmware
-> > > > > > > > > > > > > > > +  from multiple projects. It is based on fixed-partitions, with some
-> > > > > > > > > > > > > > > +  extensions, but uses 'compatible' to indicate the contents of the node, to
-> > > > > > > > > > > > > > > +  avoid perturbing or confusing existing installations which use 'label' for a
-> > > > > > > > > > > > > > > +  particular purpose.
-> > > > > > > > > > > > > > > +
-> > > > > > > > > > > > > > > +  Binman supports properties used as inputs to the firmware-packaging process,
-> > > > > > > > > > > > > > > +  such as those which control alignment of partitions. This binding addresses
-> > > > > > > > > > > > > > > +  these 'input' properties. For example, it is common for the 'reg' property
-> > > > > > > > > > > > > > > +  (an 'output' property) to be set by Binman, based on the alignment requested
-> > > > > > > > > > > > > > > +  in the input.
-> > > > > > > > > > > > > > > +
-> > > > > > > > > > > > > > > +  Once processing is complete, input properties have mostly served their
-> > > > > > > > > > > > > > > +  purpose, at least until the firmware is repacked later, e.g. due to a
-> > > > > > > > > > > > > > > +  firmware update. The 'fixed-partitions' binding should provide enough
-> > > > > > > > > > > > > > > +  information to read the firmware at runtime, including decompression if
-> > > > > > > > > > > > > > > +  needed.
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > How is this going to work exactly? binman reads these nodes and then
-> > > > > > > > > > > > > > writes out 'fixed-partitions' nodes. But then you've lost the binman
-> > > > > > > > > > > > > > specifc parts needed for repacking.
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > No, they are the same node. I do want the extra information to stick
-> > > > > > > > > > > > > around. So long as it is compatible with fixed-partition as well, this
-> > > > > > > > > > > > > should work OK.
-> > > > > > > > > > > >
-> > > > > > > > > > > > How can it be both? The partitions node compatible can be either
-> > > > > > > > > > > > 'fixed-partitions' or 'binman'.
-> > > > > > > > > > >
-> > > > > > > > > > > Can we not allow it to be both? I have tried to adjust things in
-> > > > > > > > > > > response to feedback but perhaps the feedback was leading me down the
-> > > > > > > > > > > wrong path?
-> > > > > > > > > >
-> > > > > > > > > > Sure, but then the schema has to and that means extending
-> > > > > > > > > > fixed-partitions.
-> > > > > > > > >
-> > > > > > > > > Can we cross that bridge later? There might be resistance to it. I'm
-> > > > > > > > > not sure. For now, perhaps just a binman compatible works well enough
-> > > > > > > > > to make progress.
-> > > > > > > >
-> > > > > > > > Is there any way to make progress on this? I would like to have
-> > > > > > > > software which doesn't understand the binman compatible to at least be
-> > > > > > > > able to understand the fixed-partition compatible. Is that acceptable?
-> > > > > > >
-> > > > > > > There's only 2 ways that it can work. Either binman writes out
-> > > > > > > fixed-partition nodes dropping/replacing anything only defined for
-> > > > > > > binman or fixed-partition is extended to include what binman needs.
-> > > > > >
-> > > > > > OK, then I suppose the best way is to add a new binman compatible, as
-> > > > > > is done with this v6 series. People then need to choose it instead of
-> > > > > > fixed-partition.
-> > > > >
-> > > > > I'm sorry this is not at all what Rob suggested, or did I totally
-> > > > > misunderstand his answer?
-> > > > >
-> > > > > In both cases the solution is to generate a "fixed-partition" node. Now
-> > > > > up to you to decide whether binman should adapt the output to the
-> > > > > current schema, or if the current schema should be extended to
-> > > > > understand all binman's output.
-> > > > >
-> > > > > At least that is my understanding and also what I kind of agree with.
-> > > >
-> > > > I do want to binman schema to include all the features of Binman.
-> > > >
-> > > > So are you saying that there should not be a 'binman'  schema, but I
-> > > > should just add all the binman properties to the fixed-partition
-> > > > schema?
-> > >
-> > > This is my current understanding, yes. But acknowledgment from Rob is
-> > > also welcome.
-> >
-> > I am trying again to wade through all the confusion here.
-> >
-> > There is not actually a 'fixed-partition' node. So are you saying I
-> > should add one? There is already a 'partitions' node. Won't they
-> > conflict?
->
-> Sorry for the confusion, there is a 'partitions' node indeed. This
-> node shall declare it's "programming model" (let's say), ie. how it
-> should be parsed. What defines this programming model today is the
-> 'fixed-partitions' compatible. I think we (Rob and myself, but again,
-> Rob, please confirm) agree on the fact that we don't want to duplicate
-> the fixed-partitions compatible/logic and thus the binman compatible
-> was rejected.
->
-> Hence, in order to move forward, I would definitely appreciate an
-> update of the fixed-partitions binding in order to support what binman
-> can generate.
+Also add device tree files and myself as reviewer to MAINTAINERS.
 
-OK, so I think my confusion is that I thought you were referring to a
-'partitions' compatible. But you are just referring to the name of the
-node being 'partitions', with the compatible string being
-'fixed-partitions'.
+Changes in v2:
+- Use glob pattern where appropriate
+- Split gpt_capsule_update_setup() change into own patch
+- Collect r-b tags
 
-I believe I can make this work by adding a new 'binman.yaml' with the
-compatibles that I want to introduce. I cannot change partition.yaml
-since it does not itself specify a compatible.
+This series depends on following series for a clean apply:
+- rockchip: rk3328: Update defconfigs, DTs and enable boot from SPI [1]
+- rockchip: Read cpuid and generate MAC address from efuse for RK3328
+  and RK3399 [2]
+- rockchip: Update stack and bss addresses on RK3308, RK3328, RK3399,
+  RK356x and RK3588 [3]
+- rockchip: add support for Theobroma JAGUAR SBC-RK3588-AMR [4]
 
->
-> We are here talking about the output of binman, not its input. TBH I
-> haven't understood the point in having binman's input parsed by the
-> generic yaml binding. I would advise to focus on binman's output first
-> because it feels more relevant, at a first glance.
+A copy of this series and its depends can also be found at [5]
 
-Yes that is fine.
+[1] https://patchwork.ozlabs.org/cover/1900345/
+[2] https://patchwork.ozlabs.org/cover/1897743/
+[3] https://patchwork.ozlabs.org/cover/1907155/
+[4] https://patchwork.ozlabs.org/cover/1910408/
+[5] https://github.com/Kwiboo/u-boot-rockchip/commits/rk3399-io-domain-v2
 
->
-> > Would it be possible for you to look at my patches and suggest
-> > something? I think at this point, after so many hours of trying
-> > different things and trying to understand what is needed, I could
-> > really use a little help.
->
-> I hope the above details will help.
+Jonas Karlman (12):
+  board: rockchip: rk3399: Add device tree files to MAINTAINERS
+  board: rockchip: rk3399: Add myself as reviewer to MAINTAINERS
+  board: rockchip: rk3399: Remove unused board_early_init_f functions
+  board: rockchip: Add a common ROCK Pi 4 target
+  rockchip: io-domain: Add support for RK3399
+  rockchip: pine64: rockpro64: Migrate to use IO-domain driver
+  rockchip: pine64: pinebook-pro: Migrate to use IO-domain driver
+  rockchip: pine64: pinephone-pro: Migrate to use IO-domain driver
+  rockchip: vamrs: rock960: Migrate to use IO-domain driver
+  rockchip: theobroma-systems: puma: Migrate to use IO-domain driver
+  rockchip: google: gru: Migrate to use IO-domain driver
+  rockchip: board: Move gpt_capsule_update_setup() call
 
-I think so, thank you. I will send another version.
+ arch/arm/mach-rockchip/board.c                | 10 +--
+ arch/arm/mach-rockchip/rk3399/Kconfig         |  6 ++
+ board/firefly/roc-pc-rk3399/MAINTAINERS       |  1 +
+ board/firefly/roc-pc-rk3399/roc-pc-rk3399.c   | 22 +-----
+ board/google/gru/gru.c                        | 35 --------
+ board/pine64/pinebook-pro-rk3399/MAINTAINERS  |  6 +-
+ board/pine64/pinebook-pro-rk3399/Makefile     |  1 -
+ .../pinebook-pro-rk3399/pinebook-pro-rk3399.c | 61 --------------
+ board/pine64/pinephone-pro-rk3399/MAINTAINERS |  5 +-
+ board/pine64/pinephone-pro-rk3399/Makefile    |  1 -
+ .../pinephone-pro-rk3399.c                    | 64 ---------------
+ board/pine64/rockpro64_rk3399/MAINTAINERS     |  3 +-
+ board/pine64/rockpro64_rk3399/Makefile        |  7 --
+ .../rockpro64_rk3399/rockpro64-rk3399.c       | 39 ---------
+ board/radxa/rockpi4-rk3399/Kconfig            | 15 ++++
+ board/radxa/rockpi4-rk3399/MAINTAINERS        | 22 ++++++
+ .../rockpi4-rk3399}/Makefile                  |  2 +-
+ .../rockpi4-rk3399/rockpi4-rk3399.c}          | 33 +-------
+ board/rockchip/evb_rk3399/MAINTAINERS         | 48 ++++-------
+ .../puma_rk3399/puma-rk3399.c                 | 21 -----
+ board/vamrs/rock960_rk3399/MAINTAINERS        |  2 +
+ board/vamrs/rock960_rk3399/Makefile           |  6 --
+ board/vamrs/rock960_rk3399/rock960-rk3399.c   | 27 -------
+ configs/chromebook_bob_defconfig              |  1 +
+ configs/chromebook_kevin_defconfig            |  1 +
+ configs/ficus-rk3399_defconfig                |  1 +
+ configs/pinebook-pro-rk3399_defconfig         |  1 +
+ configs/pinephone-pro-rk3399_defconfig        |  1 +
+ configs/puma-rk3399_defconfig                 |  1 +
+ configs/rock-4c-plus-rk3399_defconfig         |  2 +-
+ configs/rock-4se-rk3399_defconfig             |  2 +-
+ configs/rock-pi-4-rk3399_defconfig            |  2 +-
+ configs/rock-pi-4c-rk3399_defconfig           |  2 +-
+ configs/rock960-rk3399_defconfig              |  1 +
+ configs/rockpro64-rk3399_defconfig            |  1 +
+ drivers/misc/rockchip-io-domain.c             | 79 ++++++++++++++++++-
+ include/configs/rk3399_common.h               | 16 ----
+ include/configs/rockpi4-rk3399.h              | 32 ++++++++
+ 38 files changed, 198 insertions(+), 382 deletions(-)
+ delete mode 100644 board/pine64/pinebook-pro-rk3399/Makefile
+ delete mode 100644 board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c
+ delete mode 100644 board/pine64/pinephone-pro-rk3399/Makefile
+ delete mode 100644 board/pine64/pinephone-pro-rk3399/pinephone-pro-rk3399.c
+ delete mode 100644 board/pine64/rockpro64_rk3399/Makefile
+ delete mode 100644 board/pine64/rockpro64_rk3399/rockpro64-rk3399.c
+ create mode 100644 board/radxa/rockpi4-rk3399/Kconfig
+ create mode 100644 board/radxa/rockpi4-rk3399/MAINTAINERS
+ rename board/{rockchip/evb_rk3399 => radxa/rockpi4-rk3399}/Makefile (79%)
+ rename board/{rockchip/evb_rk3399/evb-rk3399.c => radxa/rockpi4-rk3399/rockpi4-rk3399.c} (65%)
+ delete mode 100644 board/vamrs/rock960_rk3399/Makefile
+ delete mode 100644 board/vamrs/rock960_rk3399/rock960-rk3399.c
+ create mode 100644 include/configs/rockpi4-rk3399.h
 
-Regards,
-Simon
+-- 
+2.43.2
+
