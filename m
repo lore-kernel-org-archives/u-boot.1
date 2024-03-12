@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B640C54E5D
-	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 14:31:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FE94C54E5D
+	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 14:31:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0739C87F83;
+	by phobos.denx.de (Postfix) with ESMTP id 8C99387FAA;
 	Tue, 12 Mar 2024 15:30:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="A3e0B9rI";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="RwU7DJNq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F228787F50; Tue, 12 Mar 2024 15:30:46 +0100 (CET)
+ id 0253987F4F; Tue, 12 Mar 2024 15:30:47 +0100 (CET)
 Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7EBE387F56
+ by phobos.denx.de (Postfix) with ESMTPS id D436687F69
  for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 15:30:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=phytec.de
@@ -31,15 +31,15 @@ DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
  Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
  Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
  List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=4g5DlWpQdBTNv2sjQ3JWo+FIHJtW2mmDIEmU75mbsw0=;
- b=A3e0B9rIXL8SuBUdH4ur3XZv1tBDEggoxbLQU2a/cTDGdbw630eEW/PUbeA0kzr6
- peGBCgcx4esI2YGZOhSaUn7ieQBcKEFiJwslluM6yGVwVfyPwctqh5weMhCWa0sa
- mHgDrp2DLYXau/kz0qzZI5LKfitkT39yKRr7fg+l9zY=;
-X-AuditID: ac14000a-fbefe7000000290d-9b-65f0671309e6
+ bh=kraAEMssq6l117h5tPKekQWkcJ5gWJr8l7woWWoLnWs=;
+ b=RwU7DJNqmi7s96MgMb3uuCajzV8uxmI9s4uKD/VjdBGrQ4bdFN8gMSf2EyVJ03YI
+ wHk3h8k3l5/sirQpQ28J070rbhwCLgWDmbYju3zUv6qaBvIjC1sIlbWB0LTUfn6h
+ YMVlL2nWEYxXXjUY7VDsWDY6eV3nxjFeyl7R7x1tF+U=;
+X-AuditID: ac14000a-fbefe7000000290d-9d-65f0671382aa
 Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
  (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id AA.0A.10509.31760F56;
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 4B.0A.10509.31760F56;
  Tue, 12 Mar 2024 15:30:43 +0100 (CET)
 Received: from augenblix2.phytec.de (172.25.0.11) by Berlix.phytec.de
  (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
@@ -48,10 +48,10 @@ Received: from augenblix2.phytec.de (172.25.0.11) by Berlix.phytec.de
 From: Leonard Anderweit <l.anderweit@phytec.de>
 To: <trini@konsulko.com>, <t.remmet@phytec.de>, <festevam@gmail.com>
 CC: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>
-Subject: [PATCH v3 3/5] configs: phycore-imx8mp_defconfig: Use redundant
+Subject: [PATCH v3 5/5] board: phytec: phycore_imx8mp: Add RAUC boot logic to
  environment
-Date: Tue, 12 Mar 2024 15:30:31 +0100
-Message-ID: <20240312143033.3336-4-l.anderweit@phytec.de>
+Date: Tue, 12 Mar 2024 15:30:33 +0100
+Message-ID: <20240312143033.3336-6-l.anderweit@phytec.de>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240312143033.3336-1-l.anderweit@phytec.de>
 References: <20240312143033.3336-1-l.anderweit@phytec.de>
@@ -61,17 +61,17 @@ Content-Type: text/plain
 X-Originating-IP: [172.25.0.11]
 X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
  (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrLLMWRmVeSWpSXmKPExsWyRpKBR1c4/UOqwY5PUhYPr/pbTJ20md3i
- 7d5Odovud+oOLB47Z91l93h1YBW7x9k7Oxg9+rtbWANYorhsUlJzMstSi/TtErgytrUdZSnY
- wF4xZWUnWwPjIbYuRk4OCQETiYOfG9i7GLk4hAQWM0ksmtXBBOE8ZpTo3tfEAlLFJqAvsfLl
- IjBbRMBF4tfSPUA2BwezgJnEhM/JIGFhgRCJpul9zCA2i4CqxKopm5hAbF4BS4mGG1MZIZbJ
- S8y89J0dxOYUsJLY9m4XmC0EVDO79xEjRL2gxMmZT8BWMQPVN2+dzQxhS0gcfPGCGaJeSeLO
- qV9sMDOnnXvNDGGHShzZtJppAqPQLCSjZiEZNQvJqAWMzKsYhXIzk7NTizKz9QoyKktSk/VS
- UjcxgoJchIFrB2PfHI9DjEwcjIcYJTiYlUR4X+u8TRXiTUmsrEotyo8vKs1JLT7EKM3BoiTO
- u7ojOFVIID2xJDU7NbUgtQgmy8TBKdXAuKxOMY/pzR3TlCCJnF1Fa9T3a7u38uhd51n2lXc/
- 14b9yX4nv7acvmldK5H2cum+BpmujKtbJHI7w9vOfCueNPN76NwZN1j/+XvWRc+d7Pqvpb98
- sZUbf9Sz6e+T3Z9WWK7yL7/UErd6pWfcMbalCkEO63M98yYx8Bh6ht74M2+O2M516a//KrEU
- ZyQaajEXFScCAJwGrxlgAgAA
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrDLMWRmVeSWpSXmKPExsWyRpKBR1c4/UOqwYwXehYPr/pbTJ20md3i
+ 7d5Odovud+oOLB47Z91l93h1YBW7x9k7Oxg9+rtbWANYorhsUlJzMstSi/TtErgyXrVMZSl4
+ xlnx99FylgbGGRxdjJwcEgImEpPWtDB1MXJxCAksZpJ4ufojO4TzmFGie18TC0gVm4C+xMqX
+ i8BsEQEXiV9L9wDZHBzMAmYSEz4ng5jCApESf58lgVSwCKhK/F23kxHE5hWwlFj5fiILxC55
+ iZmXvrOD2JwCVhLb3u0Cs4WAamb3PoKqF5Q4OfMJWD0zUH3z1tnMELaExMEXL5gh6pUk7pz6
+ xQYzc9q518wQdqjEkU2rmSYwCs1CMmoWklGzkIxawMi8ilEoNzM5O7UoM1uvIKOyJDVZLyV1
+ EyMoxEUYuHYw9s3xOMTIxMF4iFGCg1lJhPe1zttUId6UxMqq1KL8+KLSnNTiQ4zSHCxK4ryr
+ O4JThQTSE0tSs1NTC1KLYLJMHJxSDYz5eZv3fm42mpZ0OqKPe8qE31pOgrkTBDJCPxnlBLMc
+ jzj9rKBlBl/9mVylO1HWbxJZJ+rM2R1a/GLaz3TjcuUfu3Z/XtH/LXrN1Tk7YvL2pS6/whva
+ 5JWsMEF4GuvyjKKnJ9/sLqm/8Vyo82dHklbOgx27XywXc9+fIsvgajTPwuyoZFl65EklluKM
+ REMt5qLiRACUmPJ3XwIAAA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,34 +88,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for the redundant environment.
+Add RAUC boot logic to the environment. This is the first board to
+utilize this environment.
 
 Signed-off-by: Leonard Anderweit <l.anderweit@phytec.de>
 Tested-by: Teresa Remmet <t.remmet@phytec.de>
 ---
- configs/phycore-imx8mp_defconfig | 2 ++
- 1 file changed, 2 insertions(+)
+ board/phytec/phycore_imx8mp/phycore_imx8mp.env | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
-diff --git a/configs/phycore-imx8mp_defconfig b/configs/phycore-imx8mp_defconfig
-index fd492eba3c10..6c67f14b5559 100644
---- a/configs/phycore-imx8mp_defconfig
-+++ b/configs/phycore-imx8mp_defconfig
-@@ -19,6 +19,7 @@ CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
- CONFIG_SPL_STACK=0x960000
- CONFIG_SPL=y
-+CONFIG_ENV_OFFSET_REDUND=0x3e0000
- CONFIG_SPL_IMX_ROMAPI_LOADADDR=0x48000000
- CONFIG_SYS_LOAD_ADDR=0x40480000
- CONFIG_FIT=y
-@@ -77,6 +78,7 @@ CONFIG_OF_CONTROL=y
- CONFIG_SPL_OF_CONTROL=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_MMC=y
-+CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_MMC_ENV_DEV=2
- CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+diff --git a/board/phytec/phycore_imx8mp/phycore_imx8mp.env b/board/phytec/phycore_imx8mp/phycore_imx8mp.env
+index dc9ad0fe9d15..fae3e992654f 100644
+--- a/board/phytec/phycore_imx8mp/phycore_imx8mp.env
++++ b/board/phytec/phycore_imx8mp/phycore_imx8mp.env
+@@ -1,9 +1,14 @@
++#include <env/phytec/rauc.env>
++
+ bootcmd=
+ 	if test ${dofastboot} = 1; then
+ 		fastboot 0;
+ 	fi;
+ 	mmc dev ${mmcdev};
+ 	if mmc rescan; then
++		if test ${doraucboot} = 1; then
++			run raucinit;
++		fi;
+ 		if run loadimage; then
+ 			run mmcboot;
+ 		else
+@@ -23,7 +28,7 @@ loadfdt=fatload mmc ${mmcdev}:${mmcpart} ${fdt_addr} ${fdt_file}
+ loadimage=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${image}
+ mmcargs=
+ 	setenv bootargs console=${console}
+-	root=/dev/mmcblk${mmcdev}p${mmcroot} rootwait rw
++	root=/dev/mmcblk${mmcdev}p${mmcroot} ${raucargs} rootwait rw
+ mmcautodetect=yes
+ mmcboot=
+ 	echo Booting from mmc ...;
 -- 
 2.25.1
 
