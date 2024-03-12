@@ -4,91 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35E5AC54E5D
-	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 14:09:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10DF7C54E5D
+	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 14:14:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7991987F8C;
-	Tue, 12 Mar 2024 15:09:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 74EB887F5A;
+	Tue, 12 Mar 2024 15:14:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BvlxnZzR";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="dgEHKyEf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C19BE87F4B; Tue, 12 Mar 2024 15:09:14 +0100 (CET)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C869B87F65; Tue, 12 Mar 2024 15:14:11 +0100 (CET)
+Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB9DE87F75
- for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 15:09:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BEB7687F4E
+ for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 15:14:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-56877761303so742476a12.3
- for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 07:09:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710252552; x=1710857352; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=EJRs1vrJJ4CKMJShK+cbz2zWdTiiQf+L3+YxItkCyZY=;
- b=BvlxnZzReujRXFLr5ylhePJzTrJYB/Wp4wRgPIHXLB4NXq1kApFEdEQgGnTdnCjWkf
- GpHYvdE1SPyrnDibiKDiu7VKurcr6Jgl0iixa0/7hkkp9JgPCh56eYnwTzMVDoy6pO+V
- Y3PlmrVX2HcN1QFM6GiKOagrR1lBkg7UyigG1Cc8fzKRVQlNThDvAN7zqYanXVxSQMEF
- SKYfs/1P1jgk5naYd4vgjYLhCGpOa+t92RLHtg3gbC4fNhZzuOaJzCQeoQVy/d6PXmJy
- MTE95Bt5de6PmQPMg+2ujotMWX3P3Y55zMdfcQ+gEifJJ9UdFjrtZVAlAGgJQacaj0Tr
- BX3A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710252552; x=1710857352;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=EJRs1vrJJ4CKMJShK+cbz2zWdTiiQf+L3+YxItkCyZY=;
- b=IhiO+tYbdUOU01aOZxMiAnHT9jvGeb0mvDxc7wVKVO/WV8+tPcxTBOVTyWUw5/avko
- i3uacgcULtNq6cdPsxFxxjNnPoioQzIAfjjBbx81DEQXbYn6pr5Un4owcZpdDwlQ9sCU
- SvGTRGnBeH1Qb3zcFhpB8Pq65j03LCY/7Lo3UbslggpQ7pZWpYJy/3tDt8AxLDrodn24
- xlfOn17iAhFpZoGOuZypeqa+obGaYJwWXqlUrkIg3LzBcF9Dmhrcw2No0ht8jloddi+T
- 2V1GuCCD6qPzgUjrL8x+54/cZpc5QvwHNKtWzECzESNJfOIm0G0ZptR0LHul99JVBiO4
- WAmQ==
-X-Gm-Message-State: AOJu0YwoYaR4Ih8bMGbKGQqVEXVTj5G5dAROcPirdspQq9BFDlAdCQxx
- 8AI+LnPQgkWP35dD9YMNhl1L5QJlm0SirWR5ahxcUy/r2J2U0hBip9EkIVQzRYDTs+imJaVp+YA
- /p88=
-X-Google-Smtp-Source: AGHT+IEEG3xOpDF16Na675uxOjkfchkLhYvpwiDZ5ICR0qhrBJuDFbKDQnFHRCtE1Gi/41bYkXlS1w==
-X-Received: by 2002:a50:9ee9:0:b0:564:5150:76a2 with SMTP id
- a96-20020a509ee9000000b00564515076a2mr1478384edf.4.1710252552063; 
- Tue, 12 Mar 2024 07:09:12 -0700 (PDT)
-Received: from hades.. (ppp046103107123.access.hol.gr. [46.103.107.123])
- by smtp.gmail.com with ESMTPSA id
- d23-20020a056402001700b0056857701bf5sm2246086edu.81.2024.03.12.07.09.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Mar 2024 07:09:11 -0700 (PDT)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: u-boot@lists.denx.de,
-	trini@konsulko.com,
-	cfsworks@gmail.com
-Cc: caleb.connolly@linaro.org, sumit.garg@linaro.org,
- richard.henderson@linaro.org,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Ryan Chen <ryan_chen@aspeedtech.com>,
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
- Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>,
- Michal Simek <michal.simek@amd.com>,
- Yegor Yefremov <yegorslists@googlemail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Sam Edwards <CFSworks@gmail.com>,
- Shiji Yang <yangshiji66@outlook.com>, Bin Meng <bmeng@tinylab.org>
-Subject: [PATCH 7/7 v2] arm: remove redundant section alignments
-Date: Tue, 12 Mar 2024 16:08:29 +0200
-Message-Id: <20240312140832.1968215-8-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.37.2
-In-Reply-To: <20240312140832.1968215-1-ilias.apalodimas@linaro.org>
-References: <20240312140832.1968215-1-ilias.apalodimas@linaro.org>
+ spf=pass smtp.mailfrom=T.Remmet@phytec.de
+DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
+ q=dns/txt; i=@phytec.de; t=1710252848; x=1712844848;
+ h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=oygMsCwffwYx1JuzsWwGohPbTgoNOyzRUBudzdjq91U=;
+ b=dgEHKyEflj29y+pC/N0OyMwtJq0mz3a3I5NARBIIvcBrmCfln9D7FxTg/5GEosQ3
+ LY/To85woAcHquY04j44YcMCnkzZTOIk2wVO0EPNi/VcaSk7fOJazAd46h+MkrLa
+ PxOorQfjPB84c1yngMeelF9dLlVIKYPHpEESBtqIRMk=;
+X-AuditID: ac14000a-fadff7000000290d-ef-65f063305033
+Received: from florix.phytec.de (Unknown_Domain [172.25.0.13])
+ (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (Client did not present a certificate)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 8E.E9.10509.03360F56;
+ Tue, 12 Mar 2024 15:14:08 +0100 (CET)
+Received: from Berlix.phytec.de (172.25.0.12) by Florix.phytec.de
+ (172.25.0.13) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Tue, 12 Mar
+ 2024 15:14:08 +0100
+Received: from Berlix.phytec.de ([fe80::197e:d26b:2ca:c7b4]) by
+ berlix.phytec.de ([fe80::197e:d26b:2ca:c7b4%4]) with mapi id 15.01.2507.006;
+ Tue, 12 Mar 2024 15:14:07 +0100
+From: Teresa Remmet <T.Remmet@phytec.de>
+To: "festevam@gmail.com" <festevam@gmail.com>, Leonard Anderweit
+ <L.Anderweit@phytec.de>, "trini@konsulko.com" <trini@konsulko.com>
+CC: "upstream@lists.phytec.de" <upstream@lists.phytec.de>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: [PATCH v2 1/5] phycore_imx8mp: Move environment from
+ include/config to board
+Thread-Topic: [PATCH v2 1/5] phycore_imx8mp: Move environment from
+ include/config to board
+Thread-Index: AQHadFutm5QMWZmIc0+tBQs9lukZwbE0FZyA
+Date: Tue, 12 Mar 2024 14:14:07 +0000
+Message-ID: <3cadbed0d9dcce241175d1356c6dea53b270017b.camel@phytec.de>
+References: <20240312085957.902398-1-l.anderweit@phytec.de>
+ <20240312085957.902398-2-l.anderweit@phytec.de>
+In-Reply-To: <20240312085957.902398-2-l.anderweit@phytec.de>
+Accept-Language: de-DE, en-US
+Content-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [172.25.0.11]
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <D46F25C9F1BE47438D2073B255E8AAA3@phytec.de>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrAIsWRmVeSWpSXmKPExsWyRpKBV9cg+UOqwZqtMhYPr/pbTJ20md3i
+ 7d5Odovud+oOLB47Z91l93h1YBW7x9k7Oxg9+rtbWANYorhsUlJzMstSi/TtErgyer4dZSm4
+ ZFex9mYDUwNji20XIyeHhICJxP/GTpYuRi4OIYHFTBIvJxxlhnDuM0osbfkL5WxglHgy8w0j
+ SAubgIbEyxPdTCAJEYFWRom9j5+ygCSYBbIk/l+cxQZiCwtES0zaORuomwOoKEaifbYnSFhE
+ wEiibctjVhCbRUBV4sG9w0wgJbwCbhJTJvqChIUE8iRevz/NDGJzCthI9F+7xgRiMwrISmzY
+ cJ4ZYpO4xKZn31khPhCQWLIHIi4hICrx8vE/qLi8xIlb08DGMwtoSqzfpQ/RaiFxovc31BhF
+ iSndD9lBbF4BQYmTM5+wTGAUn4VkwyyE7llIumch6Z6FpHsBI+sqRqHczOTs1KLMbL2CjMqS
+ 1GS9lNRNjKBYFGHg2sHYN8fjECMTB+MhRgkOZiUR3tc6b1OFeFMSK6tSi/Lji0pzUosPMUpz
+ sCiJ867uCE4VEkhPLEnNTk0tSC2CyTJxcEo1MOqYs3+uajqXH7vEmndlnuKLKYv7okti7ZiD
+ RD6rfzmRrGKRti5PrsTkuy/vh5QFxosTQo9NXHekZ+PRedJ1SwRyk85pa93acJFxRn1TdYeu
+ 8KLbrwU9s2NPPoxik2iZv/BPgfbS5uinmT7P/VliU41fyHUnHp5asUxp7uroe4opJpJarjIT
+ lFiKMxINtZiLihMBtlI467MCAAA=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,125 +100,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Previous patches cleaning up linker symbols, also merged any explicit
-. = ALIGN(x); into section definitions -- e.g '.bss ALIGN(x) :' instead
-of '. - ALIGN(x); bss : {...}'
-
-However, if the output address is not specified then one will be chosen
-for the section. This address will be adjusted to fit the alignment
-requirement of the output section following the strictest alignment of
-any input section contained within the output section. So let's get rid
-of the redundant ALIGN directives.
-
-It's worth noting that the only platform the alignment is preserved on
-.rel.dyn is mach-zynq, which was explicitly  aligning that section on an 8b
-boundary instead of the automatically chosen 4b alignment.
-
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
- arch/arm/cpu/armv8/u-boot.lds            | 6 +++---
- arch/arm/cpu/u-boot.lds                  | 6 +++---
- arch/arm/mach-rockchip/u-boot-tpl-v8.lds | 2 +-
- arch/arm/mach-zynq/u-boot.lds            | 4 ++--
- 4 files changed, 9 insertions(+), 9 deletions(-)
-
-diff --git a/arch/arm/cpu/armv8/u-boot.lds b/arch/arm/cpu/armv8/u-boot.lds
-index 33f4624b561d..ccdd1966cfbc 100644
---- a/arch/arm/cpu/armv8/u-boot.lds
-+++ b/arch/arm/cpu/armv8/u-boot.lds
-@@ -115,7 +115,7 @@ SECTIONS
- 		KEEP(*(SORT(__u_boot_list*)));
- 	}
-
--	.efi_runtime_rel ALIGN(8) : {
-+	.efi_runtime_rel : {
-                 __efi_runtime_rel_start = .;
- 		*(.rel*.efi_runtime)
- 		*(.rel*.efi_runtime.*)
-@@ -124,7 +124,7 @@ SECTIONS
-
- 	__image_copy_end = .;
-
--	.rela.dyn ALIGN(8) : {
-+	.rela.dyn : {
- 		__rel_dyn_start = .;
- 		*(.rela*)
- 		__rel_dyn_end = .;
-@@ -132,7 +132,7 @@ SECTIONS
-
- 	_end = .;
-
--	.bss ALIGN(8): {
-+	.bss : {
- 		__bss_start = .;
- 		*(.bss*)
- 		__bss_end = .;
-diff --git a/arch/arm/cpu/u-boot.lds b/arch/arm/cpu/u-boot.lds
-index b6b19a4174fe..a9fcbbf22e96 100644
---- a/arch/arm/cpu/u-boot.lds
-+++ b/arch/arm/cpu/u-boot.lds
-@@ -43,7 +43,7 @@ SECTIONS
- 	}
-
- 	/* This needs to come before *(.text*) */
--	.efi_runtime ALIGN(4) : {
-+	.efi_runtime : {
- 		__efi_runtime_start = .;
- 		*(.text.efi_runtime*)
- 		*(.rodata.efi_runtime*)
-@@ -146,7 +146,7 @@ SECTIONS
- 		KEEP(*(SORT(__u_boot_list*)));
- 	}
-
--	.efi_runtime_rel ALIGN(4) : {
-+	.efi_runtime_rel : {
- 		__efi_runtime_rel_start = .;
- 		*(.rel*.efi_runtime)
- 		*(.rel*.efi_runtime.*)
-@@ -155,7 +155,7 @@ SECTIONS
-
- 	__image_copy_end = .;
-
--	.rel.dyn ALIGN(4) : {
-+	.rel.dyn : {
- 		__rel_dyn_start = .;
- 		*(.rel*)
- 		__rel_dyn_end = .;
-diff --git a/arch/arm/mach-rockchip/u-boot-tpl-v8.lds b/arch/arm/mach-rockchip/u-boot-tpl-v8.lds
-index 8ff35b5c17cf..e67416c09c1c 100644
---- a/arch/arm/mach-rockchip/u-boot-tpl-v8.lds
-+++ b/arch/arm/mach-rockchip/u-boot-tpl-v8.lds
-@@ -53,7 +53,7 @@ SECTIONS
-
- 	_image_binary_end = .;
-
--	.bss ALIGN(8) : {
-+	.bss : {
- 		__bss_start = .;
- 		*(.bss*)
- 		__bss_end = .;
-diff --git a/arch/arm/mach-zynq/u-boot.lds b/arch/arm/mach-zynq/u-boot.lds
-index f739d1cfce85..111410215072 100644
---- a/arch/arm/mach-zynq/u-boot.lds
-+++ b/arch/arm/mach-zynq/u-boot.lds
-@@ -22,7 +22,7 @@ SECTIONS
- 	}
-
- 	/* This needs to come before *(.text*) */
--	.efi_runtime ALIGN(4) : {
-+	.efi_runtime : {
- 		__efi_runtime_start = .;
- 		*(.text.efi_runtime*)
- 		*(.rodata.efi_runtime*)
-@@ -52,7 +52,7 @@ SECTIONS
- 		KEEP(*(SORT(__u_boot_list*)));
- 	}
-
--	.efi_runtime_rel ALIGN(4) : {
-+	.efi_runtime_rel : {
- 		__efi_runtime_rel_start = .;
- 		*(.rel*.efi_runtime)
- 		*(.rel*.efi_runtime.*)
---
-2.37.2
-
+SGVsbG8gTGVvbmFyZCwKCkFtIERpZW5zdGFnLCBkZW0gMTIuMDMuMjAyNCB1bSAwOTo1OSArMDEw
+MCBzY2hyaWViIExlb25hcmQgQW5kZXJ3ZWl0Ogo+IE1vdmUgdGhlIGVudmlyb25tZW50IGludG8g
+dGhlIGJvYXJkIGRpcmVjdG9yeSBhbmQgY29udmVydCBpdCBmcm9tIGEgQwo+IGhlYWRlciB0byBh
+IHRleHQgZmlsZS4gU29ydCB0aGUgdmFyaWFibGVzIGFscGhhYmV0aWNhbGx5Lgo+IE5vIGZ1bmN0
+aW9uYWwgY2hhbmdlcy4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBMZW9uYXJkIEFuZGVyd2VpdCA8bC5h
+bmRlcndlaXRAcGh5dGVjLmRlPgo+IC0tLQo+IMKgLi4uL3BoeXRlYy9waHljb3JlX2lteDhtcC9w
+aHljb3JlX2lteDhtcC5lbnbCoCB8IDQ1Cj4gKysrKysrKysrKysrKysrKysrKwo+IMKgaW5jbHVk
+ZS9jb25maWdzL3BoeWNvcmVfaW14OG1wLmjCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8IDQz
+IC0tLS0tLS0tLS0tLS0tLS0tCj4gLQo+IMKgMiBmaWxlcyBjaGFuZ2VkLCA0NSBpbnNlcnRpb25z
+KCspLCA0MyBkZWxldGlvbnMoLSkKPiDCoGNyZWF0ZSBtb2RlIDEwMDY0NCBib2FyZC9waHl0ZWMv
+cGh5Y29yZV9pbXg4bXAvcGh5Y29yZV9pbXg4bXAuZW52Cj4gCj4gZGlmZiAtLWdpdCBhL2JvYXJk
+L3BoeXRlYy9waHljb3JlX2lteDhtcC9waHljb3JlX2lteDhtcC5lbnYKPiBiL2JvYXJkL3BoeXRl
+Yy9waHljb3JlX2lteDhtcC9waHljb3JlX2lteDhtcC5lbnYKPiBuZXcgZmlsZSBtb2RlIDEwMDY0
+NAo+IGluZGV4IDAwMDAwMDAwMDAwMC4uNmQxNWI3ZjNkYzlmCj4gLS0tIC9kZXYvbnVsbAo+ICsr
+KyBiL2JvYXJkL3BoeXRlYy9waHljb3JlX2lteDhtcC9waHljb3JlX2lteDhtcC5lbnYKPiBAQCAt
+MCwwICsxLDQ1IEBACj4gK2NvbnNvbGU9dHR5bXhjMCwxMTUyMDAKPiArZG9mYXN0Ym9vdD0wCj4g
+K2VtbWNfZGV2PTIKPiArZmFzdGJvb3RfcmF3X3BhcnRpdGlvbl9hbGw9MCA0MTk0MzA0Cj4gK2Zh
+c3Rib290X3Jhd19wYXJ0aXRpb25fYm9vdGxvYWRlcj02NCA4MTI4Cj4gK2ZkdF9hZGRyPTB4NDgw
+MDAwMDAKPiArZmR0X2ZpbGU9Q09ORklHX0RFRkFVTFRfRkRUX0ZJTEUKPiAraW1hZ2U9SW1hZ2UK
+PiAraXBfZHluPXllcwo+ICtsb2FkaW1hZ2U9ZmF0bG9hZCBtbWMgJHttbWNkZXZ9OiR7bW1jcGFy
+dH0gJHtsb2FkYWRkcn0gJHtpbWFnZX0KPiArbG9hZGZkdD1mYXRsb2FkIG1tYyAke21tY2Rldn06
+JHttbWNwYXJ0fSAke2ZkdF9hZGRyfSAke2ZkdF9maWxlfQoKYSBzbWFsbCBuaXQgaGVyZSBhcyB5
+b3Ugc29ydCB0aGVtIGFscGhhYmV0aWNhbGx5LiAibG9hZGltYWdlIiBhbmQKImxvYWRmZHQiIG5l
+ZWRzIHRvIGJlIHN3YXBwZWQuIAoKYmVzaWRlcyBvZiB0aGlzOgoKUmV2aWV3ZWQtYnk6IFRlcmVz
+YSBSZW1tZXQgPHQucmVtbWV0QHBoeXRlYy5kZT4KVGVzdGVkLWJ5OiBUZXJlc2EgUmVtbWV0IDx0
+LnJlbW1ldEBwaHl0ZWMuZGU+CgoKVGhhbmtzIQpUZXJlc2EKCj4gK21tY2FyZ3M9Cj4gK8KgwqDC
+oMKgwqDCoMKgc2V0ZW52IGJvb3RhcmdzIGNvbnNvbGU9JHtjb25zb2xlfQo+ICvCoMKgwqDCoMKg
+wqDCoHJvb3Q9L2Rldi9tbWNibGske21tY2Rldn1wJHttbWNyb290fSByb290d2FpdCBydwo+ICtt
+bWNhdXRvZGV0ZWN0PXllcwo+ICttbWNib290PQo+ICvCoMKgwqDCoMKgwqDCoGVjaG8gQm9vdGlu
+ZyBmcm9tIG1tYyAuLi47Cj4gK8KgwqDCoMKgwqDCoMKgcnVuIG1tY2FyZ3M7Cj4gK8KgwqDCoMKg
+wqDCoMKgaWYgcnVuIGxvYWRmZHQ7IHRoZW4KPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgYm9vdGkgJHtsb2FkYWRkcn0gLSAke2ZkdF9hZGRyfTsKPiArwqDCoMKgwqDCoMKgwqBlbHNl
+Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGVjaG8gV0FSTjogQ2Fubm90IGxvYWQg
+dGhlIERUOwo+ICvCoMKgwqDCoMKgwqDCoGZpOwo+ICttbWNkZXY9Q09ORklHX1NZU19NTUNfRU5W
+X0RFVgo+ICttbWNwYXJ0PTEKPiArbW1jcm9vdD0yCj4gK25ldGFyZ3M9Cj4gK8KgwqDCoMKgwqDC
+oMKgc2V0ZW52IGJvb3RhcmdzIGNvbnNvbGU9JHtjb25zb2xlfSByb290PS9kZXYvbmZzIGlwPWRo
+Y3AKPiArwqDCoMKgwqDCoMKgwqBuZnNyb290PSR7c2VydmVyaXB9OiR7bmZzcm9vdH0sdjMsdGNw
+Cj4gK25ldGJvb3Q9Cj4gK8KgwqDCoMKgwqDCoMKgZWNobyBCb290aW5nIGZyb20gbmV0IC4uLjsK
+PiArwqDCoMKgwqDCoMKgwqBydW4gbmV0YXJnczsKPiArwqDCoMKgwqDCoMKgwqBpZiB0ZXN0ICR7
+aXBfZHlufSA9IHllczsgdGhlbgo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBzZXRl
+bnYgZ2V0X2NtZCBkaGNwOwo+ICvCoMKgwqDCoMKgwqDCoGVsc2UKPiArwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgc2V0ZW52IGdldF9jbWQgdGZ0cDsKPiArwqDCoMKgwqDCoMKgwqBmaTsK
+PiArwqDCoMKgwqDCoMKgwqAke2dldF9jbWR9ICR7bG9hZGFkZHJ9ICR7aW1hZ2V9Owo+ICvCoMKg
+wqDCoMKgwqDCoGlmICR7Z2V0X2NtZH0gJHtmZHRfYWRkcn0gJHtmZHRfZmlsZX07IHRoZW4KPiAr
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgYm9vdGkgJHtsb2FkYWRkcn0gLSAke2ZkdF9h
+ZGRyfTsKPiArwqDCoMKgwqDCoMKgwqBlbHNlCj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoGVjaG8gV0FSTjogQ2Fubm90IGxvYWQgdGhlIERUOwo+ICvCoMKgwqDCoMKgwqDCoGZpOwo+
+ICtuZnNyb290PS9uZnMKPiArc2RfZGV2PTEKPiBkaWZmIC0tZ2l0IGEvaW5jbHVkZS9jb25maWdz
+L3BoeWNvcmVfaW14OG1wLmgKPiBiL2luY2x1ZGUvY29uZmlncy9waHljb3JlX2lteDhtcC5oCj4g
+aW5kZXggMTFhMTdiZTdmZTFkLi4yMDZjNGQ1MGQyNzYgMTAwNjQ0Cj4gLS0tIGEvaW5jbHVkZS9j
+b25maWdzL3BoeWNvcmVfaW14OG1wLmgKPiArKysgYi9pbmNsdWRlL2NvbmZpZ3MvcGh5Y29yZV9p
+bXg4bXAuaAo+IEBAIC0xMyw0OSArMTMsNiBAQAo+IMKgI2RlZmluZSBDRkdfU1lTX1VCT09UX0JB
+U0UgXAo+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgKFFTUEkwX0FNQkFfQkFTRSAr
+Cj4gQ09ORklHX1NZU19NTUNTRF9SQVdfTU9ERV9VX0JPT1RfU0VDVE9SICogNTEyKQo+IMKgCj4g
+LSNkZWZpbmUgQ0ZHX0VYVFJBX0VOVl9TRVRUSU5HUyBcCj4gLcKgwqDCoMKgwqDCoMKgImltYWdl
+PUltYWdlXDAiIFwKPiAtwqDCoMKgwqDCoMKgwqAiY29uc29sZT10dHlteGMwLDExNTIwMFwwIiBc
+Cj4gLcKgwqDCoMKgwqDCoMKgImZkdF9hZGRyPTB4NDgwMDAwMDBcMCIgXAo+IC3CoMKgwqDCoMKg
+wqDCoCJmZHRfZmlsZT0iIENPTkZJR19ERUZBVUxUX0ZEVF9GSUxFICJcMCIgXAo+IC3CoMKgwqDC
+oMKgwqDCoCJpcF9keW49eWVzXDAiIFwKPiAtwqDCoMKgwqDCoMKgwqAiZG9mYXN0Ym9vdD0wXDAi
+IFwKPiAtwqDCoMKgwqDCoMKgwqAiZmFzdGJvb3RfcmF3X3BhcnRpdGlvbl9ib290bG9hZGVyPTY0
+IDgxMjhcMCIgXAo+IC3CoMKgwqDCoMKgwqDCoCJmYXN0Ym9vdF9yYXdfcGFydGl0aW9uX2FsbD0w
+IDQxOTQzMDRcMCIgXAo+IC3CoMKgwqDCoMKgwqDCoCJlbW1jX2Rldj0yXDAiIFwKPiAtwqDCoMKg
+wqDCoMKgwqAic2RfZGV2PTFcMCIgXAo+IC3CoMKgwqDCoMKgwqDCoCJtbWNkZXY9IiBfX3N0cmlu
+Z2lmeShDT05GSUdfU1lTX01NQ19FTlZfREVWKSAiXDAiIFwKPiAtwqDCoMKgwqDCoMKgwqAibW1j
+cGFydD0xXDAiIFwKPiAtwqDCoMKgwqDCoMKgwqAibW1jcm9vdD0yXDAiIFwKPiAtwqDCoMKgwqDC
+oMKgwqAibW1jYXV0b2RldGVjdD15ZXNcMCIgXAo+IC3CoMKgwqDCoMKgwqDCoCJtbWNhcmdzPXNl
+dGVudiBib290YXJncyBjb25zb2xlPSR7Y29uc29sZX0gIiBcCj4gLcKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoCJyb290PS9kZXYvbW1jYmxrJHttbWNkZXZ9cCR7bW1jcm9vdH0gcm9vdHdh
+aXQgcndcMCIKPiBcCj4gLcKgwqDCoMKgwqDCoMKgImxvYWRpbWFnZT1mYXRsb2FkIG1tYyAke21t
+Y2Rldn06JHttbWNwYXJ0fSAke2xvYWRhZGRyfQo+ICR7aW1hZ2V9XDAiIFwKPiAtwqDCoMKgwqDC
+oMKgwqAibG9hZGZkdD1mYXRsb2FkIG1tYyAke21tY2Rldn06JHttbWNwYXJ0fSAke2ZkdF9hZGRy
+fQo+ICR7ZmR0X2ZpbGV9XDAiIFwKPiAtwqDCoMKgwqDCoMKgwqAibW1jYm9vdD1lY2hvIEJvb3Rp
+bmcgZnJvbSBtbWMgLi4uOyAiIFwKPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgInJ1
+biBtbWNhcmdzOyAiIFwKPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgImlmIHJ1biBs
+b2FkZmR0OyB0aGVuICIgXAo+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgImJvb3RpICR7bG9hZGFkZHJ9IC0gJHtmZHRfYWRkcn07ICIgXAo+IC3CoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAiZWxzZSAiIFwKPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCJlY2hvIFdBUk46IENhbm5vdCBsb2FkIHRoZSBEVDsg
+IiBcCj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCJmaTtcMCAiIFwKPiAtwqDCoMKg
+wqDCoMKgwqAibmZzcm9vdD0vbmZzXDAiIFwKPiAtwqDCoMKgwqDCoMKgwqAibmV0YXJncz1zZXRl
+bnYgYm9vdGFyZ3MgY29uc29sZT0ke2NvbnNvbGV9IHJvb3Q9L2Rldi9uZnMKPiBpcD1kaGNwICIg
+XAo+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAibmZzcm9vdD0ke3NlcnZlcmlwfTok
+e25mc3Jvb3R9LHYzLHRjcFwwIiBcCj4gLcKgwqDCoMKgwqDCoMKgIm5ldGJvb3Q9ZWNobyBCb290
+aW5nIGZyb20gbmV0IC4uLjsgIiBcCj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCJy
+dW4gbmV0YXJnczsgIiBcCj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCJpZiB0ZXN0
+ICR7aXBfZHlufSA9IHllczsgdGhlbiAiIFwKPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoCJzZXRlbnYgZ2V0X2NtZCBkaGNwOyAiIFwKPiAtwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgImVsc2UgIiBcCj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAic2V0ZW52IGdldF9jbWQgdGZ0cDsgIiBcCj4gLcKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCJmaTsgIiBcCj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoCIke2dldF9jbWR9ICR7bG9hZGFkZHJ9ICR7aW1hZ2V9OyAiIFwKPiAtwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgImlmICR7Z2V0X2NtZH0gJHtmZHRfYWRkcn0gJHtmZHRf
+ZmlsZX07IHRoZW4gIiBcCj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqAiYm9vdGkgJHtsb2FkYWRkcn0gLSAke2ZkdF9hZGRyfTsgIiBcCj4gLcKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoCJlbHNlICIgXAo+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgImVjaG8gV0FSTjogQ2Fubm90IGxvYWQgdGhlIERUOyAi
+IFwKPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgImZpO1wwIiBcCj4gLQo+IMKgLyog
+TGluayBEZWZpbml0aW9ucyAqLwo+IMKgCj4gwqAjZGVmaW5lIENGR19TWVNfSU5JVF9SQU1fQURE
+UsKgwqAweDQwMDAwMDAwCgotLSAKUEhZVEVDIE1lc3N0ZWNobmlrIEdtYkggfCBCYXJjZWxvbmEt
+QWxsZWUgMSB8IDU1MTI5IE1haW56LCBHZXJtYW55CgpHZXNjaMOkZnRzZsO8aHJlcjogRGlwbC4t
+SW5nLiBNaWNoYWVsIE1pdGV6a2ksIERpcGwuLUluZy4gQm9kbyBIdWJlciwKRGlwbC4tSW5nLiAo
+RkgpIE1hcmt1cyBMaWNrZXMgfCBIYW5kZWxzcmVnaXN0ZXIgTWFpbnogSFJCIDQ2NTYgfApGaW5h
+bnphbXQgTWFpbnogfCBTdC5Oci4gMjY2NTAwNjA4LCBERSAxNDkwNTk4NTUK
