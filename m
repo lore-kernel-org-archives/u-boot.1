@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89C7AC54E5D
-	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 21:50:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FB90C54E5D
+	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 22:00:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D565A87CF2;
-	Tue, 12 Mar 2024 22:50:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3510887EA3;
+	Tue, 12 Mar 2024 23:00:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="S4/RH9/3";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="A6SmhMjt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9522B87D55; Tue, 12 Mar 2024 22:50:54 +0100 (CET)
+ id AA7F587F00; Tue, 12 Mar 2024 23:00:05 +0100 (CET)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC95A8780A
- for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 22:50:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4265787EA3
+ for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 23:00:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,40 +28,39 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
  Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1710280239;
- bh=w515YqcDjmec0ns4mdcEEmVKp2nH9nu3bGQxioU4JxE=;
- b=S4/RH9/37Oc+lepZSROCpxn9gxIGMUw0V4atrCQz3D9HvOJwHOEGtnqO4b/3EuXhmFtZQ+l5R
- kWQC73FHhzyWztyWaYnEsos79T4xEaVYdWPqc6ocJ8PbUa96xRbZLoQP60zBpyk9r9ttP8bumH6
- Dd9ERmoZHobiAXKQS9RyoQJmKl3YIZ6jdKLEgTCML4ceEhzBGIjy5TtfM5rqEYDSGc1vzhzdDll
- ykn5O06e5xBDyVK/sqTM+f0tRCsGb49C02Ve9JtVh4nndKdV35ElNvCnyi6Js4i68b46XxyBVd8
- VXX1v5tX8VHwsA0wgzILiX1QqXgwk0FhzxNmuRpTqPeg==
-Message-ID: <c9e2c558-3e40-421c-a77e-2e9f823df2d5@kwiboo.se>
-Date: Tue, 12 Mar 2024 22:50:33 +0100
+ s=fe-e1b5cab7be; t=1710280791;
+ bh=bkNPrMLv6Tz7rJ+6qjFhY4Ydr05Cdsw5rPnlqvUhXFg=;
+ b=A6SmhMjtvhUtHjSWLmkzwXedfdmk922CyLNmu1/fB8xL9sc0dxbBa3Qbcw9eIEPl/mYqOfvwm
+ x53X89SuhJV5R3wvZMzF5WCpOrUSwK4R6EBsJaH6Mr831hn1Qh8vEBlUdR+2T8Wxxh0kuGAv1Gi
+ Nu0+F30d/88tOP6Bit1aTFVFjchtjSgqmA21cBdhbw8MX1f+41ztXhZ/iB/ctpn7fbXymU8OWyd
+ GZJ2+KlhqwFvh8iwGOw5Z25dLm/dvrtppe/TLOXLuup18wkUsxyCwwmocrLs+5ci+M7thGBOx0+
+ xQyYXWEXwcXbUWb4Nf2p+0/1g8jrgxQBvkoIOMJD0p5w==
+Message-ID: <a3a2556d-d9d6-4e55-af3e-3c0006ffbde5@kwiboo.se>
+Date: Tue, 12 Mar 2024 22:59:45 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/4] rockchip: Update the default USB Product ID value
+Subject: Re: [PATCH 04/11] board: rockchip: Add a common ROCK Pi 4 target
+Content-Language: en-US
 To: Kever Yang <kever.yang@rock-chips.com>
 Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>, Lukasz Majewski
- <lukma@denx.de>, Mattijs Korpershoek <mkorpershoek@baylibre.com>, Marek
- Vasut <marex@denx.de>, u-boot@lists.denx.de
-References: <20240226230822.2430391-1-jonas@kwiboo.se>
- <20240226230822.2430391-2-jonas@kwiboo.se>
- <f1f0abb8-7786-4c56-8e55-772a59bbab82@rock-chips.com>
- <79d3a0e0-ba71-441c-8466-7397c755d863@kwiboo.se>
- <6d8120b5-bc0c-4674-b33f-8c7a7cc354ba@rock-chips.com>
-Content-Language: en-US
+ <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>, Jagan Teki
+ <jagan@amarulasolutions.com>, FUKAUMI Naoki <naoki@radxa.com>, Christopher
+ Obbard <chris.obbard@collabora.com>, Quentin Schulz
+ <quentin.schulz@theobroma-systems.com>, u-boot@lists.denx.de
+References: <20240217183610.2621132-1-jonas@kwiboo.se>
+ <20240217183610.2621132-5-jonas@kwiboo.se>
+ <82acb904-5d37-4170-ae3d-160da304b0bb@rock-chips.com>
 From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <6d8120b5-bc0c-4674-b33f-8c7a7cc354ba@rock-chips.com>
+In-Reply-To: <82acb904-5d37-4170-ae3d-160da304b0bb@rock-chips.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-Report-Abuse-To: abuse@forwardemail.net
 X-Report-Abuse: abuse@forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
-X-ForwardEmail-ID: 65f0ce2e08d9ce46e2c27f4c
+X-ForwardEmail-ID: 65f0d05608d9ce46e2c27fec
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,69 +79,57 @@ X-Virus-Status: Clean
 
 Hi Kever,
 
-On 2024-03-11 04:20, Kever Yang wrote:
+On 2024-03-11 10:29, Kever Yang wrote:
 > Hi Jonas,
 > 
-> On 2024/3/8 18:42, Jonas Karlman wrote:
->> Hi Kever,
+> On 2024/2/18 02:35, Jonas Karlman wrote:
+>> Move ROCK Pi 4 specific board code from the shared evb_rk3399 target
+>> into its own board target and update related defconfigs to use the new
+>> TARGET_ROCKPI4_RK3399 option.
 >>
->> On 2024-03-08 10:22, Kever Yang wrote:
->>> Hi Jonas,
->>>
->>>       Thanks for your patch.
->>>
->>> On 2024/2/27 07:08, Jonas Karlman wrote:
->>>> RK3036 is using the USB product id normally used by RK3066B, and RK3328
->>>> is using the product id normally used by RK3368.
->>>>
->>>> Fix this and update the default USB_GADGET_PRODUCT_NUM Kconfig option
->>>> for remaining supported Rockchip SoCs to match the product id used in
->>>> Mask ROM mode. Also remove a reference to the unknown ROCKCHIP_RK3229
->>>> symbol.
->>> RK3229 belongs to RK322X which is reuse with RK3228.
->>>
->>> Note that this ID is used for rockusb gadget, if work as mass storage,
->>> it should use other
->>>
->>> ID, or else it will confuse the driver in host side, eg. the Windows
->>> driver may not able to
->>>
->>> recognize the device if using two different gadget type with the same ID.
->> Patch 3 in this series will change to use 0x0010 product id when ums
->> mode is enabled and fall back to use the USB_GADGET_PRODUCT_NUM for any
->> other gadget mode.
-> Yes, I see that a few seconds after I send that mail.
->>
->> The ROCKCHIP_RK3229 symbol is not defined or used anywhere U-Boot so the
->> change in this patch to remove it from the condition should have no
->> impact. If RK3229 need a special product id separate from 0x320b used by
->> ROCKCHIP_RK322X, it can be defined in the defconfig for such board.
+>> Also move the call to gpt_capsule_update_setup() from the weak function
+>> rk_board_late_init() into the main board_late_init() function.
 > 
-> ROCKCHIP_RK3229 does not need any more, because it's included in Rk322X.
-> 
-> So please update the commit message with " remove ROCKCHIP_RK3229 because
-> it's included in ROCKCHIP_RK322X" instead of "unknown ROCKCHIP_RK3229".
+> Please split this part as a separate patch, this is an common code 
+> update instead of rockpi board patch.
 
-I have recently sent a v2 using the following message, let me know if
-you want me to send a v3 with your suggested message instead.
-
-"Also remove a reference to an undefined ROCKCHIP_RK3229 Kconfig symbol."
+Will split this into its own patch in v2.
 
 > 
->>
->> I tested this on Windows with rockusb and ums on RK3308, RK3328, RK3399
->> RK356x and RK3588 boards, switching between ums and rockusb should work
->> as intended, rockusb driver was used in rockusb mode and in ums mode the
->> device would show up as a disk.
->>
->>    => rockusb 0 mmc 1
->>    => ums 0 mmc 1
->>
->> I think all product id below is correct,
 > 
-> Yes, I have check these IDs, they are correct.
+>>
+>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>> ---
+>>   arch/arm/mach-rockchip/board.c                | 10 +++---
+>>   arch/arm/mach-rockchip/rk3399/Kconfig         |  6 ++++
+>>   board/radxa/rockpi4-rk3399/Kconfig            | 15 +++++++++
+>>   board/radxa/rockpi4-rk3399/MAINTAINERS        | 29 +++++++++++++++++
+>>   .../rockpi4-rk3399}/Makefile                  |  2 +-
+>>   .../rockpi4-rk3399/rockpi4-rk3399.c}          | 13 ++------
+>>   board/rockchip/evb_rk3399/MAINTAINERS         | 29 -----------------
+>>   configs/rock-4c-plus-rk3399_defconfig         |  2 +-
+>>   configs/rock-4se-rk3399_defconfig             |  2 +-
+>>   configs/rock-pi-4-rk3399_defconfig            |  2 +-
+>>   configs/rock-pi-4c-rk3399_defconfig           |  2 +-
+>>   include/configs/rk3399_common.h               | 16 ----------
+>>   include/configs/rockpi4-rk3399.h              | 32 +++++++++++++++++++
+>>   13 files changed, 95 insertions(+), 65 deletions(-)
+>>   create mode 100644 board/radxa/rockpi4-rk3399/Kconfig
+>>   create mode 100644 board/radxa/rockpi4-rk3399/MAINTAINERS
+>>   rename board/{rockchip/evb_rk3399 => radxa/rockpi4-rk3399}/Makefile (79%)
+>>   rename board/{rockchip/evb_rk3399/evb-rk3399.c => radxa/rockpi4-rk3399/rockpi4-rk3399.c} (79%)
+> 
+> Please add new rockpi4 board files instead of rename, so that evb-rk3399 
+> can still available.
 
-Great!
+This only looks like a rename because the only code that was left in
+evb-rk3399.c was the rock-pi-4 specific capsule update code moved to
+the new rockpi4-rk3399.c file.
+
+board/rockchip/evb_rk3399 still exists and contain the Kconfig, README
+and MAINTAINERS files after this patch, just no board specific code.
+
+So will keep this change as-is for v2.
 
 Regards,
 Jonas
@@ -151,47 +138,7 @@ Jonas
 > 
 > Thanks,
 > - Kever
->> but I have not been able to
->> runtime validate for other SoCs then the ones listed above.
+>>   create mode 100644 include/configs/rockpi4-rk3399.h
 >>
->> Regards,
->> Jonas
->>
->>>
->>> Thanks,
->>> - Kever
->>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->>>> ---
->>>>    drivers/usb/gadget/Kconfig | 15 ++++++++++++---
->>>>    1 file changed, 12 insertions(+), 3 deletions(-)
->>>>
->>>> diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
->>>> index c72a8047635c..4621a6fd5e64 100644
->>>> --- a/drivers/usb/gadget/Kconfig
->>>> +++ b/drivers/usb/gadget/Kconfig
->>>> @@ -70,12 +70,21 @@ config USB_GADGET_PRODUCT_NUM
->>>>    	hex "Product ID of the USB device"
->>>>    	default 0x701a if ARCH_TEGRA
->>>>    	default 0x1010 if ARCH_SUNXI
->>>> -	default 0x310a if ROCKCHIP_RK3036
->>>> +	default 0x110a if ROCKCHIP_RV1108
->>>> +	default 0x110b if ROCKCHIP_RV1126
->>>>    	default 0x300a if ROCKCHIP_RK3066
->>>> +	default 0x301a if ROCKCHIP_RK3036
->>>> +	default 0x310b if ROCKCHIP_RK3188
->>>>    	default 0x310c if ROCKCHIP_RK3128
->>>> -	default 0x320a if ROCKCHIP_RK3229 || ROCKCHIP_RK3288
->>>> -	default 0x330a if ROCKCHIP_RK3328
->>>> +	default 0x320a if ROCKCHIP_RK3288
->>>> +	default 0x320b if ROCKCHIP_RK322X
->>>> +	default 0x320c if ROCKCHIP_RK3328
->>>> +	default 0x330a if ROCKCHIP_RK3368
->>>>    	default 0x330c if ROCKCHIP_RK3399
->>>> +	default 0x330d if ROCKCHIP_PX30
->>>> +	default 0x330e if ROCKCHIP_RK3308
->>>> +	default 0x350a if ROCKCHIP_RK3568
->>>> +	default 0x350b if ROCKCHIP_RK3588
->>>>    	default 0x0
->>>>    	help
->>>>    	  Product ID of the USB device emulated, reported to the host device.
 
+[snip]
