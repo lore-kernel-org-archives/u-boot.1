@@ -4,84 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 171B6C54E58
-	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 18:02:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A72CC54E58
+	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 18:52:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 825A787F3F;
-	Tue, 12 Mar 2024 19:02:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 45FBA8780E;
+	Tue, 12 Mar 2024 19:52:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="A02j0kS+";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZRfEZ592";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 78E3B87F46; Tue, 12 Mar 2024 19:02:12 +0100 (CET)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id 332DA87B2A; Tue, 12 Mar 2024 19:52:21 +0100 (CET)
+Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
+ [IPv6:2607:f8b0:4864:20::72f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 899448792D
- for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 19:02:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BED4D871A5
+ for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 19:52:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-41336981b3aso1726895e9.1
- for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 11:02:10 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x72f.google.com with SMTP id
+ af79cd13be357-781753f52afso413511085a.2
+ for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 11:52:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710266530; x=1710871330; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=TqF6GAgdmi8Z0cAdrdHsG4K7Sb1eAmzZGJ9pPJsdVp0=;
- b=A02j0kS+K6MJZhaT/Jv96GJtanbY8oo+KqX+OkKRiE193zniDF11JgQqRi87YqNw9k
- RpilaVxA5IwnZFDZm87NJrhO0p/aL4jSZixmm2W+tla+hJgyRZiPJJ5KLxBWwq+1T5me
- nOz4tpJX6IsH4niSwoXZvYljTvuLenaEtTiHl1rOZRAlFTNMDpZqHgK7+KnpgA/4wG1z
- DhorFZuaFFj47s4v67jHTUNJC6tRxcEIgvsws9ZLfqg4V0CSB/XKJYB3qLsBxn8nBHcr
- WYvXTMqEelbWf6t9rN174VS1+amPnbgbJiUEnlHTHymRr+1j/7xiv2hEIcg5L5UwNxTU
- PZkg==
+ d=konsulko.com; s=google; t=1710269537; x=1710874337; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=PxenfmqMHY/f5F4bTNzZSWwGYh3TnJYuAGb9+eBGoBI=;
+ b=ZRfEZ592DnvWjgZ+P8CB5ptstON2jibFsFR480GDBwD7vhMmrYfMfQHAeXurbfJ4DN
+ aKpdirWj2Lgy+6QBJ2XhGgY6L0WxiJe5Spu3YXzRrH7GMjMWFANOG+R3xECVMVy8O044
+ Myzu4TTagH9DtY3XQs5+vCrnMSRolctPGULyI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710266530; x=1710871330;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=TqF6GAgdmi8Z0cAdrdHsG4K7Sb1eAmzZGJ9pPJsdVp0=;
- b=WXVlpkID52PPzi/EwRChZhIL9mKycWSn/xv2bBr5SJUIhlCRg44ZF9FQ8ueTjOiAqb
- C9f6yhHCjhpu/qZWdam1wey1c6BoggeCLEqBGyTlpdF1PAjNir0rzKvHCF5vh81Ndarw
- T4VX+wAewoQhPBPi165LPy+/THUm4sO3vHSOrLoRD4z0P3U5Wu0RE91OiINvYh6Nom3N
- rB8CDglUph6WQfbGGY7zZPiZsyvHm5bbQWfJeS8taKCi0H4T7UXsvQamiXXTLFajdywl
- sxsbCvbQlXFz1aDPUMZGzzWGFd/pRae091bzfMErWn8Sp0C9JULwKFS5G8JrMsOHJyLL
- ov5Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXmEKp4lcUQUssUvA+4SbgKGjojZ79JGODqoaBXgccztMj0kgwoPVjfl3X1NrcIT3qXZq9Ob1+h92zAW53hpxD8JexDCQ==
-X-Gm-Message-State: AOJu0YxV5XqWJMtoyE0A31ucWhmFvf8klexgNKTFu9r2dxFyZGl8eMGS
- AQsJUZPYcCRlGKJD2+8KcCtJtO1fbfYnifu/rKQWZ9fgfGQcK03lV+q8HCh3V20=
-X-Google-Smtp-Source: AGHT+IESv8bn2gx7W8yWm4EU9ECViCJ2sGjLOowJZV0Iu9znRmMf0MaAmiDbrKtSraOVBeSd3Mg2aw==
-X-Received: by 2002:a05:600c:35cc:b0:412:ed3f:1b4b with SMTP id
- r12-20020a05600c35cc00b00412ed3f1b4bmr3147833wmq.11.1710266530144; 
- Tue, 12 Mar 2024 11:02:10 -0700 (PDT)
-Received: from [192.168.1.78] (host-92-17-96-232.as13285.net. [92.17.96.232])
- by smtp.gmail.com with ESMTPSA id
- q14-20020a05600c46ce00b00412b4dca795sm13068004wmo.7.2024.03.12.11.02.09
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 12 Mar 2024 11:02:09 -0700 (PDT)
-Message-ID: <bdf6f0aa-6178-4f2a-ba46-891676bcc592@linaro.org>
-Date: Tue, 12 Mar 2024 18:02:09 +0000
+ d=1e100.net; s=20230601; t=1710269537; x=1710874337;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=PxenfmqMHY/f5F4bTNzZSWwGYh3TnJYuAGb9+eBGoBI=;
+ b=BtmzTTbTDYgzvtwMtbz/erzpUNlHXbTUrkoq55G/I7S2z+sE3yqR0g4wYtpKpga6Zj
+ 3BSyARWOx6aEWXaWcGZPNv2W6ayQTb/sgdz7DTs0spUkRj5TipdvZXOANd9yhqzv7WoQ
+ vrzyuiq70MzS8FQhshnlu288s4imzKFbkOT7WgLT+B0d6ANwWfbWYyZt5KmjjP2O/vaz
+ dEGxD7+aKSFgUqJLDuFskloSHwjMSJk7a4p0SE0pZ3WKys4EY9RivSO3RKDjEMXakQIs
+ 7yc2izPVOrn2no/5GZ5o5DaYeVyNNhxmChDbvICsoPQwYiina5+dFJMeqb26CAZrIaVm
+ Fqiw==
+X-Gm-Message-State: AOJu0YwPsFt8fwuimtpRK5lsLoeRv8PMl2u4675/8QdFf58SWQ0HAwW9
+ 3e+0SWQxTM+gFKmS9RdtkHREeasBxQ7CP73WCx8G5VfDnDKwBP997NgaSXb7j+zzdYz0Vie9g7p
+ d
+X-Google-Smtp-Source: AGHT+IG5yMUb2q3VUXNilvpxkFYE9nMqiBDzr3kGE1guw3ixt3YcoGPXzD4v5rzImsqF9s+uiojo0Q==
+X-Received: by 2002:a05:620a:38e:b0:788:f9c:8cb7 with SMTP id
+ q14-20020a05620a038e00b007880f9c8cb7mr11514450qkm.35.1710269537499; 
+ Tue, 12 Mar 2024 11:52:17 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-007f-0000-0000-0000-1003.res6.spectrum.com.
+ [2603:6081:7b00:7f::1003]) by smtp.gmail.com with ESMTPSA id
+ y9-20020ae9f409000000b007885e3275e9sm3733091qkl.132.2024.03.12.11.52.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 12 Mar 2024 11:52:17 -0700 (PDT)
+Date: Tue, 12 Mar 2024 14:52:15 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Leo Liang <ycliang@andestech.com>
+Cc: u-boot@lists.denx.de, rick@andestech.com
+Subject: Re: [GIT PULL] u-boot-riscv/master
+Message-ID: <20240312185215.GE1523872@bill-the-cat>
+References: <ZfAXpj_WS-QxCHuC@swlinux02>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/4] qcom: board: validate fdt before trying to use it
-Content-Language: en-US
-To: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: Sumit Garg <sumit.garg@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
-References: <20240311213334.3567389-1-volodymyr_babchuk@epam.com>
- <20240311213334.3567389-2-volodymyr_babchuk@epam.com>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20240311213334.3567389-2-volodymyr_babchuk@epam.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="pqMF8M1577yWGlIs"
+Content-Disposition: inline
+In-Reply-To: <ZfAXpj_WS-QxCHuC@swlinux02>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,61 +92,53 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--pqMF8M1577yWGlIs
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 11/03/2024 21:33, Volodymyr Babchuk wrote:
-> There are cases when previous bootloader stage leaves some seemingly
-> valid value in r0, which in fact does not point to valid FDT
-> blob. This behavior was encountered when trying to boot U-Boot as
-> "hyp" loader on SA8155P-ADP.
-> 
-> To be sure that we really got the pointer to a device tree we need to
-> validate it with fdt_check_header() function.
-> 
-> Note: This approach is not 100% fool-proof, as get_prev_bl_fdt_addr()
-> theoretically can return a pointer to a region that is not physically
-> mapped and we will get data abort exception when fdt_check_header()
-> will try to access it. But at this early boot stage we don't know
-> where RAM is anyways so there is little we can do.
-> 
-> Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
-> Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
-Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
-> 
-> ---
-> 
-> Changes in v3:
->  - Replaced fdt_valid() with fdt_check_header()
->  - Added Sumit's R-B tag
-> 
-> Changes in v2:
->  - New patch in v2
-> 
->  arch/arm/mach-snapdragon/board.c | 5 ++++-
->  1 file changed, 4 insertions(+), 1 deletion(-)
-> 
-> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-> index f12f5791a1..6f762fc948 100644
-> --- a/arch/arm/mach-snapdragon/board.c
-> +++ b/arch/arm/mach-snapdragon/board.c
-> @@ -24,6 +24,7 @@
->  #include <linux/sizes.h>
->  #include <lmb.h>
->  #include <malloc.h>
-> +#include <fdt_support.h>
->  #include <usb.h>
->  #include <sort.h>
->  
-> @@ -93,7 +94,9 @@ void *board_fdt_blob_setup(int *err)
->  	 * try and use the FDT built into U-Boot if there is one...
->  	 * This avoids having a hard dependency on the previous stage bootloader
->  	 */
-> -	if (IS_ENABLED(CONFIG_OF_SEPARATE) && (!fdt || fdt != ALIGN(fdt, SZ_4K))) {
-> +
-> +	if (IS_ENABLED(CONFIG_OF_SEPARATE) && (!fdt || fdt != ALIGN(fdt, SZ_4K) ||
-> +					       fdt_check_header((void *)fdt))) {
->  		debug("%s: Using built in FDT, bootloader gave us %#llx\n", __func__, fdt);
->  		return (void *)gd->fdt_blob;
->  	}
+On Tue, Mar 12, 2024 at 04:51:50PM +0800, Leo Liang wrote:
 
--- 
-// Caleb (they/them)
+> Hi Tom,
+>=20
+> The following changes since commit f3c979dd0053c082d2df170446923e7ce5edbc=
+2d:
+>=20
+>   Prepare v2024.04-rc4 (2024-03-11 13:11:46 -0400)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-riscv.git=20
+>=20
+> for you to fetch changes up to 544af8207c69829b1697f3aa5dd682a299a6dea4:
+>=20
+>   board: starfive: maintainer: Add visionfive2 PCIe driver (2024-03-12 14=
+:36:13 +0800)
+>=20
+> CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot=
+-riscv/-/pipelines/19910
+
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--pqMF8M1577yWGlIs
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXwpFoACgkQFHw5/5Y0
+tywhxAv/dVcbhO+KBFzNjM6NiukXIyI8YyB2v1Axz+fj9/MsFaHk9/k/PTSvDYyD
+VZqBaO0Pzi5ElrcINOE/C7X6X+w54HSsssP0ijxRHFxURp48Ps4qcRMbaXEXtvjG
+4Wzo9oFvNqZp+HF2gEQ1Pt0pEq9of27+fKUFLlwXQP/lRR1pOzYV6joEt7ZhZVx/
+NuTXlSgvlMHvhgdscG+eV0tot9xppKjVRbbmQHXuMVpN035GTcHxcWAS78wRHouw
+uav1x7UELgKCyFknANSMQHmS+G5NEzePCIMzY0rEHrHoEcc2oCdOmUAszXcBclXj
+nLWPhNbI3GjwQbNMYjt4ptIho800ufqi0dvVtqhEhRfC20XLWtbprHx5aM7Hf2O4
+ZgP78jj0YP7TVL0dlW40imLV5CJnjwTdK3oiTI0sqXje3jlB3MTdODw1XZU2fZjk
+cV6f9M+GMmUDE7qVmkzCcoVjz0BRK1bwJDMLAh/DKTkEc7405qmTbXUQYz+Oyvm/
+NeSxekyx
+=YqWK
+-----END PGP SIGNATURE-----
+
+--pqMF8M1577yWGlIs--
