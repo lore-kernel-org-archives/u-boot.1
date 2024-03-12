@@ -4,48 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A171CC54E58
-	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 10:03:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F2B0C54E58
+	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 10:04:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D22D87653;
-	Tue, 12 Mar 2024 11:03:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A278187F34;
+	Tue, 12 Mar 2024 11:04:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 284A587F00; Tue, 12 Mar 2024 11:03:06 +0100 (CET)
+ id BE96587F39; Tue, 12 Mar 2024 11:04:22 +0100 (CET)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BAFC8875B9
- for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 11:03:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6039D875B9
+ for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 11:04:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ycliang@andestech.com
 Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 42CA2ow2075847;
- Tue, 12 Mar 2024 18:02:50 +0800 (+08)
+ by Atcsqr.andestech.com with ESMTP id 42CA41xB076293;
+ Tue, 12 Mar 2024 18:04:01 +0800 (+08)
  (envelope-from ycliang@andestech.com)
 Received: from swlinux02 (10.0.15.183) by ATCPCS16.andestech.com (10.0.1.222)
  with Microsoft SMTP Server id 14.3.498.0;
- Tue, 12 Mar 2024 18:02:50 +0800
-Date: Tue, 12 Mar 2024 18:02:47 +0800
+ Tue, 12 Mar 2024 18:03:58 +0800
+Date: Tue, 12 Mar 2024 18:03:55 +0800
 From: Leo Liang <ycliang@andestech.com>
 To: Kongyang Liu <seashell11234455@gmail.com>
-CC: <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH v2 3/3] configs: milkv_duo: Add SD card configs
-Message-ID: <ZfAoR1WQN6J9dc4Y@swlinux02>
+CC: <u-boot@lists.denx.de>, Jaehoon Chung <jh80.chung@samsung.com>, Kever Yang
+ <kever.yang@rock-chips.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, Paul Barker
+ <paul.barker.ct@bp.renesas.com>, Peng Fan <peng.fan@nxp.com>, Peter Geis
+ <pgwipeout@gmail.com>, Stefan Roese <sr@denx.de>, Tom Rini
+ <trini@konsulko.com>
+Subject: Re: [PATCH v2 1/3] mmc: cv1800b: Add sdhci driver support for
+ cv1800b SoC
+Message-ID: <ZfAoi6JrVRYXdBnN@swlinux02>
 References: <20240309175330.79267-1-seashell11234455@gmail.com>
- <20240309175330.79267-4-seashell11234455@gmail.com>
+ <20240309175330.79267-2-seashell11234455@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20240309175330.79267-4-seashell11234455@gmail.com>
+In-Reply-To: <20240309175330.79267-2-seashell11234455@gmail.com>
 User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
 X-Originating-IP: [10.0.15.183]
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 42CA2ow2075847
+X-MAIL: Atcsqr.andestech.com 42CA41xB076293
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,15 +68,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Mar 10, 2024 at 01:51:57AM +0800, Kongyang Liu wrote:
-> Add configs related to sdhci and mmc for Sophgo Milk-V Duo board
+On Sun, Mar 10, 2024 at 01:51:55AM +0800, Kongyang Liu wrote:
+> Add sdhci driver for cv1800b SoC.
 > 
 > Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
 > ---
 > 
-> (no changes since v1)
+> Changes in v2:
+> - Refactored and simplified some of the code.
 > 
->  configs/milkv_duo_defconfig | 10 ++++++++++
->  1 file changed, 10 insertions(+)
+>  drivers/mmc/Kconfig         |  13 ++++
+>  drivers/mmc/Makefile        |   1 +
+>  drivers/mmc/cv1800b_sdhci.c | 116 ++++++++++++++++++++++++++++++++++++
+>  3 files changed, 130 insertions(+)
+>  create mode 100644 drivers/mmc/cv1800b_sdhci.c
 
 Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
