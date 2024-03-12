@@ -4,48 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08297C54E66
-	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 10:00:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAE01C54E58
+	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 10:01:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 57E7D87F10;
-	Tue, 12 Mar 2024 11:00:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id D755187D9D;
+	Tue, 12 Mar 2024 11:01:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 637AD87F17; Tue, 12 Mar 2024 11:00:56 +0100 (CET)
-Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
- [60.248.80.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A9A4875B9
- for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 11:00:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ycliang@andestech.com
-Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 42CA0cuv074800;
- Tue, 12 Mar 2024 18:00:38 +0800 (+08)
- (envelope-from ycliang@andestech.com)
-Received: from swlinux02 (10.0.15.183) by ATCPCS16.andestech.com (10.0.1.222)
- with Microsoft SMTP Server id 14.3.498.0;
- Tue, 12 Mar 2024 18:00:39 +0800
-Date: Tue, 12 Mar 2024 18:00:36 +0800
-From: Leo Liang <ycliang@andestech.com>
-To: Kongyang Liu <seashell11234455@gmail.com>
-CC: <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH 3/3] configs: milkv_duo: Add ethernet configs
-Message-ID: <ZfAnxPg0otzha50f@swlinux02>
-References: <20240310055816.11575-1-seashell11234455@gmail.com>
- <20240310055816.11575-4-seashell11234455@gmail.com>
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Xb0otTWd";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 6A02F87F2D; Tue, 12 Mar 2024 11:00:59 +0100 (CET)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 5618287F00
+ for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 11:00:56 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-5683247fd0fso5552145a12.3
+ for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 03:00:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1710237656; x=1710842456; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=FCTXHA/CpaMj4P9WFt5eNh1pAU2QAEOU2QDN2WZf3OU=;
+ b=Xb0otTWdo+fD+NNEF/4tL1DFIW3cspP+TqEzt1OJW0D2zAAU8l3VxYo6zNrP30qX7s
+ yYqkBmFyQn64/AQIY80H30vs7o2eL9i2Tfjx0IxYDNzTXUde1gQj9tQhbS/ZHkdc/qd3
+ Y9Lg7HnIhf35vpV5CRT8UyDN8PtVrppVpuEX/bNjg18DzG1gLjf0Ts1Yn2nU2WGWo3Rj
+ LrTqKM4VtFVNrpxFAHWMgeGTaCpm6x6b4HnGIeNu/+f3uUMUoyRBj34HgpqOp8zdwJ5I
+ AQE7a9zPLHjMoo3HdFJ0Y3dNrl0S+8ucBLBvVwNWwJOWzu2Vtm4UDUc4IXD3V4uzd28c
+ yJ4g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710237656; x=1710842456;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=FCTXHA/CpaMj4P9WFt5eNh1pAU2QAEOU2QDN2WZf3OU=;
+ b=Syib3AlwKvaV+tnYuGSBMAx+jb2NOBlGBk8DgKc25ka7PGnZLjQxtK7GP8rsTYwgd1
+ w7qrCFp7n4ussH5FapBbYIGpljQOcbHTjBQTm+SSG/m43CYMyjtk6A50ov6j1DkbACP8
+ AoyMcL85l6MP/ssOPnGg9VkMpRhGuzBCKz4qXjOBSvi3G2Swl/q4qRz6umwrnwIre1tT
+ x7wvdU9y8kDDxHSXdSnFCsKNfndT/1VRggkKdQ6g1REKisQuZjBVd4HpR2xm4RUqsK8u
+ mwKrKnyK1FthhlXnHSuQDtJkqWs2rzeLeywUWvEQkGtJIRMI7KAJsDo24v1xjaW0LZ3X
+ x0uQ==
+X-Gm-Message-State: AOJu0YztuAetjHihE1TOwSvRC5cHhrqSDFUP+xqZXCtlsqrX94h4R8J1
+ qG7rXOocBi+ugujvgIwXK4ATjqYhye9pxAVi3XUwGBYbAQaQI/SYaPB7wAqwxu4OIk4QALvBrYV
+ HmUMVCE6AuEdhLJiK1bjnzWVpjig47AYYLv8=
+X-Google-Smtp-Source: AGHT+IEVjjc7hTTSe4VT5Ya7Vj8HboX/uJ0NGwTbFGWlr/0em6J8aLsH+Ey8YiPTge9ZBoNRZEZE7qUcRuETDP8pccM=
+X-Received: by 2002:a50:d71c:0:b0:565:de91:5c7e with SMTP id
+ t28-20020a50d71c000000b00565de915c7emr5894957edi.27.1710237655459; Tue, 12
+ Mar 2024 03:00:55 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20240310055816.11575-4-seashell11234455@gmail.com>
-User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
-X-Originating-IP: [10.0.15.183]
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 42CA0cuv074800
+References: <20240312070338.86127-1-sumit.garg@linaro.org>
+ <CALeDE9MkbeTOBgArDH-+VxdO7D2iAAb1Mh+gCb6tnm2vg6LOFw@mail.gmail.com>
+ <CAFA6WYMmbL52TF-2_JCb-uhbM87Ytdq1nTnr50Z9Ojg9O49+iQ@mail.gmail.com>
+In-Reply-To: <CAFA6WYMmbL52TF-2_JCb-uhbM87Ytdq1nTnr50Z9Ojg9O49+iQ@mail.gmail.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Tue, 12 Mar 2024 10:00:44 +0000
+Message-ID: <CALeDE9OmQj0L0HkYUsNVBpDjP6dTyKWRdtT+hqRSojbD0mGJrw@mail.gmail.com>
+Subject: Re: [PATCH v3 00/11] imx8mp: Enable PCIe/NVMe support
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, tharvey@gateworks.com, 
+ marcel.ziswiler@toradex.com, francesco@dolcini.it, lukma@denx.de, 
+ seanga2@gmail.com, jh80.chung@samsung.com, sjg@chromium.org, festevam@denx.de, 
+ andrejs.cainikovs@toradex.com, peng.fan@nxp.com, aford173@gmail.com, 
+ marex@denx.de, ilias.apalodimas@linaro.org, sahaj.sarup@linaro.org, 
+ fathi.boudra@linaro.org, remi.duraffort@linaro.org, 
+ daniel.thompson@linaro.org
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,14 +93,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Mar 10, 2024 at 01:56:46PM +0800, Kongyang Liu wrote:
-> Add configs related to ethernet and ethernet boot command for Sophgo Milk-V
-> Duo board
-> 
-> Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
-> ---
-> 
->  configs/milkv_duo_defconfig | 4 ++++
->  1 file changed, 4 insertions(+)
+On Tue, 12 Mar 2024 at 09:55, Sumit Garg <sumit.garg@linaro.org> wrote:
+>
+> Hi Peter,
+>
+> On Tue, 12 Mar 2024 at 15:13, Peter Robinson <pbrobinson@gmail.com> wrote:
+> >
+> > Hi Sumit,
+> >
+> > > pcie_imx doesn't seem to share any useful code for iMX8MP SoC and it is
+> > > rather tied to quite old port of pcie_designware driver from Linux which
+> > > suffices only iMX6 specific needs.
+> > >
+> > > But currently we have the common DWC specific bits which alligns pretty
+> > > well with DW PCIe controller on iMX8MP SoC. So lets reuse those common
+> > > bits instead as a new driver for iMX8 SoCs. It should be fairly easy to
+> > > add support for other iMX8 variants to this driver.
+> >
+> > The upstream Linux driver is moving towards a single driver [1] for
+> > imx6 -> imx9, would it be possible to add support for all generations
+> > to this driver and then remove the old driver?
+>
+> Sorry but that's not in scope of this patch-set and neither do I
+> possess boards with all the imx* SoC variants.
+>
+> > That would allow this
+> > single modern driver and removing the old imx6 specific driver.
+>
+> Folks interested in this can build up on this patch-set and port other
+> imx* variants and then we could have a single modern driver.
 
-Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
+That's fine but I think you  should document that this can be future
+because the case is that these devices are clearly related.
+
+> -Sumit
+>
+> >
+> > Peter
+> >
+> > [1] https://www.spinics.net/lists/linux-pci/msg150359.html
+> >
+> > > iMX8MP SoC also comes up with standalone PCIe PHY support, so hence we
+> > > can reuse the generic PHY infrastructure to power on PCIe PHY.
+> > >
+> > > Testing with this patch-set included:
+> > >
+> > > Verdin iMX8MP # pci enum
+> > > PCIE-0: Link up (Gen1-x1, Bus0)
+> > > Verdin iMX8MP #
+> > > Verdin iMX8MP # nvme scan
+> > > Verdin iMX8MP #
+> > > Verdin iMX8MP # nvme info
+> > > Device 0: Vendor: 0x126f Rev: T0828A0  Prod: AA000000000000000720
+> > >             Type: Hard Disk
+> > >             Capacity: 122104.3 MB = 119.2 GB (250069680 x 512)
+> > > Verdin iMX8MP #
+> > > Verdin iMX8MP # load nvme 0 $loadaddr <file-name>
+> > >
+> > > Changes in v3:
+> > > - Rebased on top of U-Boot next.
+> > > - Incorporated misc. updates to commit messages.
+> > > - New patch#2 to refactor reset driver function names.
+> > > - Patch#3: Refactored further for better code reuse.
+> > > - New patch#4 to fix refcount issue with power domain bus.
+> > > - Patch#5: Refactored further for better code reuse.
+> > > - Patch#7 & #8: Added dependency on REGMAP and SYSCON. Also, added
+> > >   support for vpcie-supply regulator.
+> > > - Patch#7 & #8: Added error paths and .remove callback.
+> > > - New patch#10 to enable PCIe/NVMe for imx8mp_venice*.
+> > >
+> > > Changes in v2:
+> > > - Renamed PCIe IMX driver pcie_dw_imx8.c -> pcie_dw_imx.c.
+> > > - Added myself as maintainer for PCIe DWC IMX driver support.
+> > > - Incorporated various code and commit message improvement suggestions
+> > >   from Marek, thanks.
+> > > - Patch#3: Gate PCIe and USB clocks behind corresponding power domain
+> > >   IDs.
+> > > - Patch#4: Expose HSIO PLL clocks as a regular clock driver instead
+> > >   similar to what Linux kernel does.
+> > > - Patch#7: Picked up tags.
+> > >
+> > > Sumit Garg (10):
+> > >   clk: imx8mp: Add support for PCIe clocks
+> > >   reset: imx: Refactor driver to simplify function names
+> > >   reset: imx: Add support for i.MX8MP reset controller
+> > >   imx8mp: power-domain: Don't power off pd_bus
+> > >   imx8mp: power-domain: Add PCIe support
+> > >   imx8mp: power-domain: Expose high performance PLL clock
+> > >   phy: phy-imx8m-pcie: Add support for i.MX8M{M/P} PCIe PHY
+> > >   pci: Add DW PCIe controller support for iMX8MP SoC
+> > >   verdin-imx8mp_defconfig: Enable PCIe/NVMe support
+> > >   MAINTAINERS: Add entry for PCIe DWC IMX driver
+> > >
+> > > Tim Harvey (1):
+> > >   imx8mp_venice_defconfig: Enable PCIe/NVMe support
+> > >
+> > >  MAINTAINERS                           |   6 +
+> > >  configs/imx8mp_venice_defconfig       |   8 +
+> > >  configs/verdin-imx8mp_defconfig       |   6 +
+> > >  drivers/clk/imx/clk-imx8mp.c          |   6 +
+> > >  drivers/pci/Kconfig                   |  11 +
+> > >  drivers/pci/Makefile                  |   1 +
+> > >  drivers/pci/pcie_dw_imx.c             | 338 ++++++++++++++++++++++++++
+> > >  drivers/phy/Kconfig                   |  11 +
+> > >  drivers/phy/Makefile                  |   1 +
+> > >  drivers/phy/phy-imx8m-pcie.c          | 283 +++++++++++++++++++++
+> > >  drivers/power/domain/imx8mp-hsiomix.c | 191 ++++++++++++---
+> > >  drivers/reset/reset-imx7.c            | 125 +++++++++-
+> > >  12 files changed, 937 insertions(+), 50 deletions(-)
+> > >  create mode 100644 drivers/pci/pcie_dw_imx.c
+> > >  create mode 100644 drivers/phy/phy-imx8m-pcie.c
+> > >
+> > > --
+> > > 2.34.1
+> > >
