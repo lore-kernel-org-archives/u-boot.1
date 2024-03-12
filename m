@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBC14C54E5D
-	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 14:09:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1AB7C54E5D
+	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 14:09:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A71C87FAD;
-	Tue, 12 Mar 2024 15:09:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 549A887FA0;
+	Tue, 12 Mar 2024 15:09:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iBp5ThKK";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YQYoSpHg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B0EB387F78; Tue, 12 Mar 2024 15:09:07 +0100 (CET)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id C3EED87F8C; Tue, 12 Mar 2024 15:09:09 +0100 (CET)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A789387F69
- for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 15:09:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B4F9B87FA0
+ for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 15:09:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-568107a9ff2so6257127a12.3
- for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 07:09:02 -0700 (PDT)
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-5684c3313cdso3224407a12.3
+ for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 07:09:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710252542; x=1710857342; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1710252547; x=1710857347; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=EyTGDcjnbgrI/Feob4SwLA7ZO6R4QQDrl/SKUTNkZvw=;
- b=iBp5ThKKi69dIKMAVr1mcufMFdeNwsQK1BCYmqqBGl0qkyH2FE/zzM3JQ/j2RXNsAl
- EuQ0ANlgK583TIDgydwJhzjFdZ10NXe8LgZZsxLuDi+fx2+sAtyBmPH5eFjIrzW3Csr7
- Ffz8g523a9xksvql92CiYOiHziJAZqw91FSarafYW5N7zU0cP0TUAXrn8gM8/IzD0W7l
- dFCYOMdDVjim7C0Xvy+VGxUUmOZKOvmedsjTwhnRLoW7YllXIbbmAw7Uacm0kjEVF5L7
- wjOQ62SD6Dkl1Rc/LaLn64kVlNxEfKBjD8JAAlGUQgEG96YlMaJyajy7MwGuu80189AQ
- 4/qQ==
+ bh=ZaScewqBQfQe1ZYJSJupnjWvoj3IezG3YAWy8EhJX64=;
+ b=YQYoSpHgIXuFHcDWlNkpgafJZnAp/ofW3toU05xiAHfhwiRO78J3iYnW9/huRAJ/63
+ H9xhHNZ9fN9+SFLTrQGmo4Kp4e2fXoojRsWOeKLtiEO+bQMW32bKJ6CcDipzCXNZHx/i
+ SOQnfpWPShN5px8kTufo4hCB95HXUfEmIV2hDRghqopBZe98f2rQgmF+TQkqJ48uJL5f
+ srxJUf6RnTykjTE/B34T3oJQkTIXj6B2xm3MZzAeEUlDRTEjFbdsNVuYqSVxoXrflfBZ
+ xmMuZCMIOmOWncyqXhe1FdyX2HTGeOSOJe29fHTCYGwmncGT1bfd7n9otyphgX6ZAS7X
+ 1tdw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710252542; x=1710857342;
+ d=1e100.net; s=20230601; t=1710252547; x=1710857347;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=EyTGDcjnbgrI/Feob4SwLA7ZO6R4QQDrl/SKUTNkZvw=;
- b=WZVU1YP7IUSn5OgIN0vDcx44lDNSek3YtEb71TTIbeG7AaPSC9t/KtrmRtGbr0dHY+
- BEKnFP8DjRDvgpLvBTqV5Tbb3HoG7fZ+LqjBWLFInCq5XPzxvag7BDt2qr28LlHPTT33
- /bpKxkdqHE1sSGbpobJEDYB5AtjYN/oAup8dcY7pHZ/nFZmy/Woqnz5guQKGqFXnPbEN
- jPzZK/RePf0kIsRy7/xssefoExHMegiQpiFl6OpwcCWMFx5Emv5hGg92HYt9szFZ5WkE
- LbDfTBQJDdOc9IbU6Eog+43PDMnIpX29vNo2wBRaDHvNFwXEwvSQtI4aum0wml39nZz4
- VaJg==
-X-Gm-Message-State: AOJu0Ywl0HDx+wvn9PsakEkbceuVKIPP4ijz0gilzUIk29qyPiUOOTvr
- RzEnRA0Uq76oOnKTucPkJ0Mko0sYNEWOHa3vBPKYbYpFgbyDMOsa690kXdkcKGIFbIFL6oprQR+
- 8B00=
-X-Google-Smtp-Source: AGHT+IFeHq7dMtYZ/Fq3sykOppM9UyyKnwbF/FcEfdC5chseddugxzDYlCY1mtVLhFHNrig0ON2AXg==
-X-Received: by 2002:a50:d618:0:b0:568:2ad2:5d96 with SMTP id
- x24-20020a50d618000000b005682ad25d96mr355184edi.40.1710252541919; 
- Tue, 12 Mar 2024 07:09:01 -0700 (PDT)
+ bh=ZaScewqBQfQe1ZYJSJupnjWvoj3IezG3YAWy8EhJX64=;
+ b=DLQ+agHjy4WCyVUnjfiGrVOYlSkHlqHOT74TxAVdePJiFpQmERK4yB5K7ZDL5STR8E
+ 8yqPGEmSs/2z8Z0Lnmt1ULCAus8D+61N8pkDaeQmmRqgc8UMZgKjiehEONenzeTnRFBB
+ C9Xo89OHj1kmE4qpIe/CU6V5iENYwjuPWcjCsfNMFxT/KIcxOz4b1u20HFWzjOCOwBcn
+ WHs2wtL2ww8iG/libTlEyo47kq1/NJlLhnwxk+BlMYsH5XQizQZ8oEqgJ3JDjfs2FqCh
+ zEbudxbUIWZqjJ5vAmO7092ZausSHE7+kfCb9RLsvSaXt8mvP1XSpI8eJ+8blxayvvTB
+ fHDw==
+X-Gm-Message-State: AOJu0Yxs6eFHIrgiWP1asexKxK4q2qSyksx5NCIChiPokJOc0gsfgNiG
+ 9MeL+GIc+wS8n3ibcftAkF8JMa9hRDywTbRuArXu3fjo1KRU0N8IPPUtxVi+Vr2SELQRY42qYUk
+ seD8=
+X-Google-Smtp-Source: AGHT+IE1Rjogc2md/TeplFuUrfeTQiBSDTYPkTEmoi1u9/73u2LTKveWqXpZpEmslxfJmnh5dE9nrA==
+X-Received: by 2002:a50:8717:0:b0:567:9ddd:65c3 with SMTP id
+ i23-20020a508717000000b005679ddd65c3mr6884379edb.29.1710252546958; 
+ Tue, 12 Mar 2024 07:09:06 -0700 (PDT)
 Received: from hades.. (ppp046103107123.access.hol.gr. [46.103.107.123])
  by smtp.gmail.com with ESMTPSA id
- d23-20020a056402001700b0056857701bf5sm2246086edu.81.2024.03.12.07.08.59
+ d23-20020a056402001700b0056857701bf5sm2246086edu.81.2024.03.12.07.09.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Mar 2024 07:09:01 -0700 (PDT)
+ Tue, 12 Mar 2024 07:09:06 -0700 (PDT)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: u-boot@lists.denx.de,
 	trini@konsulko.com,
@@ -81,9 +81,9 @@ Cc: caleb.connolly@linaro.org, sumit.garg@linaro.org,
  Yegor Yefremov <yegorslists@googlemail.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Shiji Yang <yangshiji66@outlook.com>, Bin Meng <bmeng@tinylab.org>
-Subject: [PATCH 5/7 v2] arm: fix __efi_runtime_start/end definitions
-Date: Tue, 12 Mar 2024 16:08:27 +0200
-Message-Id: <20240312140832.1968215-6-ilias.apalodimas@linaro.org>
+Subject: [PATCH 6/7 v2] arm: move image_copy_start/end to linker symbols
+Date: Tue, 12 Mar 2024 16:08:28 +0200
+Message-Id: <20240312140832.1968215-7-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.37.2
 In-Reply-To: <20240312140832.1968215-1-ilias.apalodimas@linaro.org>
 References: <20240312140832.1968215-1-ilias.apalodimas@linaro.org>
@@ -105,103 +105,229 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-__efi_runtime_start/end are defined as c variables for arm7 only in
-order to force the compiler emit relative references. However, defining
-those within a section definition will do the same thing since [0].
-On top of that the v8 linker scripts define it as a symbol.
+image_copy_start/end are defined as c variables in order to force the compiler
+emit relative references. However, defining those within a section definition
+will do the same thing since [0].
 
 So let's remove the special sections from the linker scripts, the
 variable definitions from sections.c and define them as a symbols within
-the correct section.
+a section.
 
 [0] binutils commit 6b3b0ab89663 ("Make linker assigned symbol dynamic only for shared object")
 
 Suggested-by: Sam Edwards <CFSworks@gmail.com>
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Reviewed-by: Sam Edwards <CFSworks@gmail.com>
 Tested-by: Sam Edwards <CFSworks@gmail.com> # Binary output identical
 ---
- arch/arm/cpu/u-boot.lds        | 12 +++---------
- arch/arm/lib/sections.c        |  2 --
- arch/arm/mach-zynq/u-boot.lds  | 12 +++---------
- include/asm-generic/sections.h |  1 +
- 4 files changed, 7 insertions(+), 20 deletions(-)
+ arch/arm/cpu/armv8/u-boot-spl.lds           | 7 ++-----
+ arch/arm/cpu/armv8/u-boot.lds               | 9 ++-------
+ arch/arm/cpu/u-boot-spl.lds                 | 2 +-
+ arch/arm/cpu/u-boot.lds                     | 9 ++-------
+ arch/arm/lib/sections.c                     | 2 --
+ arch/arm/mach-aspeed/ast2600/u-boot-spl.lds | 2 +-
+ arch/arm/mach-rockchip/u-boot-tpl-v8.lds    | 7 ++-----
+ arch/arm/mach-zynq/u-boot-spl.lds           | 2 +-
+ arch/arm/mach-zynq/u-boot.lds               | 8 ++------
+ 9 files changed, 13 insertions(+), 35 deletions(-)
 
+diff --git a/arch/arm/cpu/armv8/u-boot-spl.lds b/arch/arm/cpu/armv8/u-boot-spl.lds
+index 16fddb46e9cb..6417cbd08e2c 100644
+--- a/arch/arm/cpu/armv8/u-boot-spl.lds
++++ b/arch/arm/cpu/armv8/u-boot-spl.lds
+@@ -21,9 +21,9 @@ OUTPUT_ARCH(aarch64)
+ ENTRY(_start)
+ SECTIONS
+ {
++	__image_copy_start = ADDR(.text);
+ 	.text : {
+ 		. = ALIGN(8);
+-		__image_copy_start = .;
+ 		CPUDIR/start.o (.text*)
+ 		*(.text*)
+ 	} >.sram
+@@ -51,10 +51,7 @@ SECTIONS
+ 		KEEP(*(SORT(__u_boot_list*)));
+ 	} >.sram
+
+-	.image_copy_end : {
+-		. = ALIGN(8);
+-		*(.__image_copy_end)
+-	} >.sram
++	__image_copy_end = .;
+
+ 	.end : {
+ 		. = ALIGN(8);
+diff --git a/arch/arm/cpu/armv8/u-boot.lds b/arch/arm/cpu/armv8/u-boot.lds
+index e737de761a9d..33f4624b561d 100644
+--- a/arch/arm/cpu/armv8/u-boot.lds
++++ b/arch/arm/cpu/armv8/u-boot.lds
+@@ -21,9 +21,9 @@ SECTIONS
+ 	. = 0x00000000;
+
+ 	. = ALIGN(8);
++	__image_copy_start = ADDR(.text);
+ 	.text :
+ 	{
+-		*(.__image_copy_start)
+ 		CPUDIR/start.o (.text*)
+ 	}
+
+@@ -122,12 +122,7 @@ SECTIONS
+                 __efi_runtime_rel_stop = .;
+ 	}
+
+-	. = ALIGN(8);
+-
+-	.image_copy_end :
+-	{
+-		*(.__image_copy_end)
+-	}
++	__image_copy_end = .;
+
+ 	.rela.dyn ALIGN(8) : {
+ 		__rel_dyn_start = .;
+diff --git a/arch/arm/cpu/u-boot-spl.lds b/arch/arm/cpu/u-boot-spl.lds
+index fb2189d50dea..9ed62395a9c5 100644
+--- a/arch/arm/cpu/u-boot-spl.lds
++++ b/arch/arm/cpu/u-boot-spl.lds
+@@ -14,9 +14,9 @@ SECTIONS
+ 	. = 0x00000000;
+
+ 	. = ALIGN(4);
++	__image_copy_start = ADDR(.text);
+ 	.text :
+ 	{
+-		__image_copy_start = .;
+ 		*(.vectors)
+ 		CPUDIR/start.o (.text*)
+ 		*(.text*)
 diff --git a/arch/arm/cpu/u-boot.lds b/arch/arm/cpu/u-boot.lds
-index b1065ec8063d..df979986a5ef 100644
+index df979986a5ef..b6b19a4174fe 100644
 --- a/arch/arm/cpu/u-boot.lds
 +++ b/arch/arm/cpu/u-boot.lds
-@@ -43,18 +43,12 @@ SECTIONS
+@@ -35,9 +35,9 @@ SECTIONS
+ 	. = 0x00000000;
+
+ 	. = ALIGN(4);
++	__image_copy_start = ADDR(.text);
+ 	.text :
+ 	{
+-		*(.__image_copy_start)
+ 		*(.vectors)
+ 		CPUDIR/start.o (.text*)
+ 	}
+@@ -153,12 +153,7 @@ SECTIONS
+ 		__efi_runtime_rel_stop = .;
  	}
 
- 	/* This needs to come before *(.text*) */
--	.__efi_runtime_start : {
--		*(.__efi_runtime_start)
--	}
+-	. = ALIGN(4);
 -
--	.efi_runtime : {
-+	.efi_runtime ALIGN(4) : {
-+		__efi_runtime_start = .;
- 		*(.text.efi_runtime*)
- 		*(.rodata.efi_runtime*)
- 		*(.data.efi_runtime*)
+-	.image_copy_end :
+-	{
+-		*(.__image_copy_end)
 -	}
--
--	.__efi_runtime_stop : {
--		*(.__efi_runtime_stop)
-+		__efi_runtime_stop = .;
- 	}
++	__image_copy_end = .;
 
- 	.text_rest :
+ 	.rel.dyn ALIGN(4) : {
+ 		__rel_dyn_start = .;
 diff --git a/arch/arm/lib/sections.c b/arch/arm/lib/sections.c
-index 1ee3dd3667ba..a4d4202e99f5 100644
+index a4d4202e99f5..db5463b2bbbc 100644
 --- a/arch/arm/lib/sections.c
 +++ b/arch/arm/lib/sections.c
-@@ -25,6 +25,4 @@ char __secure_start[0] __section(".__secure_start");
+@@ -19,8 +19,6 @@
+  * aliasing warnings.
+  */
+
+-char __image_copy_start[0] __section(".__image_copy_start");
+-char __image_copy_end[0] __section(".__image_copy_end");
+ char __secure_start[0] __section(".__secure_start");
  char __secure_end[0] __section(".__secure_end");
  char __secure_stack_start[0] __section(".__secure_stack_start");
- char __secure_stack_end[0] __section(".__secure_stack_end");
--char __efi_runtime_start[0] __section(".__efi_runtime_start");
--char __efi_runtime_stop[0] __section(".__efi_runtime_stop");
- char _end[0] __section(".__end");
+diff --git a/arch/arm/mach-aspeed/ast2600/u-boot-spl.lds b/arch/arm/mach-aspeed/ast2600/u-boot-spl.lds
+index 37f0ccd92201..ada6570d9712 100644
+--- a/arch/arm/mach-aspeed/ast2600/u-boot-spl.lds
++++ b/arch/arm/mach-aspeed/ast2600/u-boot-spl.lds
+@@ -22,9 +22,9 @@ SECTIONS
+ 	. = 0x00000000;
+
+ 	. = ALIGN(4);
++	__image_copy_start = ADDR(.text);
+ 	.text :
+ 	{
+-		__image_copy_start = .;
+ 		*(.vectors)
+ 		CPUDIR/start.o (.text*)
+ 		*(.text*)
+diff --git a/arch/arm/mach-rockchip/u-boot-tpl-v8.lds b/arch/arm/mach-rockchip/u-boot-tpl-v8.lds
+index b7887194026e..8ff35b5c17cf 100644
+--- a/arch/arm/mach-rockchip/u-boot-tpl-v8.lds
++++ b/arch/arm/mach-rockchip/u-boot-tpl-v8.lds
+@@ -22,9 +22,9 @@ SECTIONS
+ {
+ 	. = 0x00000000;
+
++	__image_copy_start = ADDR(.text);
+ 	.text : {
+ 		. = ALIGN(8);
+-		*(.__image_copy_start)
+ 		CPUDIR/start.o (.text*)
+ 		*(.text*)
+ 	}
+@@ -44,10 +44,7 @@ SECTIONS
+ 		KEEP(*(SORT(__u_boot_list*)));
+ 	}
+
+-	.image_copy_end : {
+-		. = ALIGN(8);
+-		*(.__image_copy_end)
+-	}
++	__image_copy_end = .;
+
+ 	.end : {
+ 		. = ALIGN(8);
+diff --git a/arch/arm/mach-zynq/u-boot-spl.lds b/arch/arm/mach-zynq/u-boot-spl.lds
+index 8c18d3f91f4b..d96a57702886 100644
+--- a/arch/arm/mach-zynq/u-boot-spl.lds
++++ b/arch/arm/mach-zynq/u-boot-spl.lds
+@@ -18,9 +18,9 @@ ENTRY(_start)
+ SECTIONS
+ {
+ 	. = ALIGN(4);
++	__image_copy_start = ADDR(.text);
+ 	.text :
+ 	{
+-		__image_copy_start = .;
+ 		*(.vectors)
+ 		CPUDIR/start.o (.text*)
+ 		*(.text*)
 diff --git a/arch/arm/mach-zynq/u-boot.lds b/arch/arm/mach-zynq/u-boot.lds
-index 16245fd4ac2f..fc0ba0ed9a84 100644
+index fc0ba0ed9a84..f739d1cfce85 100644
 --- a/arch/arm/mach-zynq/u-boot.lds
 +++ b/arch/arm/mach-zynq/u-boot.lds
-@@ -22,18 +22,12 @@ SECTIONS
+@@ -14,9 +14,9 @@ SECTIONS
+ 	. = 0x00000000;
+
+ 	. = ALIGN(4);
++	__image_copy_start = ADDR(.text);
+ 	.text :
+ 	{
+-		*(.__image_copy_start)
+ 		*(.vectors)
+ 		CPUDIR/start.o (.text*)
+ 	}
+@@ -59,11 +59,7 @@ SECTIONS
+ 		__efi_runtime_rel_stop = .;
  	}
 
- 	/* This needs to come before *(.text*) */
--	.__efi_runtime_start : {
--		*(.__efi_runtime_start)
+-	. = ALIGN(8);
+-	.image_copy_end :
+-	{
+-		*(.__image_copy_end)
 -	}
--
--	.efi_runtime : {
-+	.efi_runtime ALIGN(4) : {
-+		__efi_runtime_start = .;
- 		*(.text.efi_runtime*)
- 		*(.rodata.efi_runtime*)
- 		*(.data.efi_runtime*)
--	}
--
--	.__efi_runtime_stop : {
--		*(.__efi_runtime_stop)
-+		__efi_runtime_stop = .;
- 	}
++	__image_copy_end = .;
 
- 	.text_rest :
-diff --git a/include/asm-generic/sections.h b/include/asm-generic/sections.h
-index 60949200dd93..b6bca53db10d 100644
---- a/include/asm-generic/sections.h
-+++ b/include/asm-generic/sections.h
-@@ -35,6 +35,7 @@ extern char __priv_data_start[], __priv_data_end[];
- extern char __ctors_start[], __ctors_end[];
-
- extern char __efi_runtime_rel_start[], __efi_runtime_rel_stop[];
-+extern char __efi_runtime_start[], __efi_runtime_stop[];
-
- /* function descriptor handling (if any).  Override
-  * in asm/sections.h */
+ 	.rel.dyn ALIGN(8) : {
+ 		__rel_dyn_start = .;
 --
 2.37.2
 
