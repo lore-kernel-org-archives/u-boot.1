@@ -4,73 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F6F4C54E5D
-	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 14:31:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3895C54E5D
+	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 15:00:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4318087FB9;
-	Tue, 12 Mar 2024 15:30:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 5359B87ABC;
+	Tue, 12 Mar 2024 16:00:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="CYfmK8U9";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ew2CYRIf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C67587D9B; Tue, 12 Mar 2024 15:30:47 +0100 (CET)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 4A73B87F27; Tue, 12 Mar 2024 13:57:35 +0100 (CET)
+Received: from mail-io1-xd29.google.com (mail-io1-xd29.google.com
+ [IPv6:2607:f8b0:4864:20::d29])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A391E87F60
- for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 15:30:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2438987D6F
+ for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 13:57:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=L.Anderweit@phytec.de
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1710253843; x=1712845843;
- h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=VzDbe5DS04LWt/FV7B+1Zd/3fVoVBvJMDOwtSJWwVko=;
- b=CYfmK8U9PPpVOqITiy7ulrXuW++LHFN8eCvjZ0aIHHnWXXmZfSvEDbKxFagYAHJJ
- 5OXoFd+q8RBZnCvAYam+bgs/UW9uFSUWUgM4hq38z2exmjk06artGaEc/qTIQssc
- rqJXBdjd+K/gbtJ+1h4SwcmVwF+Z48wbNWyD/XFUQWg=;
-X-AuditID: ac14000a-fadff7000000290d-9c-65f06713fd63
-Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
- (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id FA.0A.10509.31760F56;
- Tue, 12 Mar 2024 15:30:43 +0100 (CET)
-Received: from augenblix2.phytec.de (172.25.0.11) by Berlix.phytec.de
- (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Tue, 12 Mar
- 2024 15:30:43 +0100
-From: Leonard Anderweit <l.anderweit@phytec.de>
-To: <trini@konsulko.com>, <t.remmet@phytec.de>, <festevam@gmail.com>
-CC: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>
-Subject: [PATCH v3 4/5] include: env: Add phytec RAUC boot logic
-Date: Tue, 12 Mar 2024 15:30:32 +0100
-Message-ID: <20240312143033.3336-5-l.anderweit@phytec.de>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240312143033.3336-1-l.anderweit@phytec.de>
-References: <20240312143033.3336-1-l.anderweit@phytec.de>
+ spf=pass smtp.mailfrom=colinmca242@gmail.com
+Received: by mail-io1-xd29.google.com with SMTP id
+ ca18e2360f4ac-7c8d5ae5dfcso4460039f.1
+ for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 05:57:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1710248251; x=1710853051; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=BsvugGWQtYlTHpFIYczXD0jIVZr4jSfdJPIw/uAtfvg=;
+ b=ew2CYRIfRIZTkPfSM0ze5pCEbvZU7pvEP+7kq2txDw8YxXiJZ5UaNkSK2vMGRzCHpF
+ 2Pw6Tz32Mmcpq1XHcEFMyAbFREo8G6rhz9wJuhdMHamX2Jk2Y0ZB5q+2NEsz48BcXiJV
+ 1quykpCIUj+rWoZsXftj5sa2Ooy3LeMMD5DRq6AX0YJUnA4LsWB2Y5dMpofyIRXt3py+
+ Mvfd3nhZYtrUcdn6ruMygJdtBaoe03WWFf5n6LvN7mPbsvXanxFBpwDM+VPybEf1Tr+5
+ 67tCiHYyLRVPL9/GwBWujVM6hAH6870fhpjcrvGTNguqNOfi0RFhoXTtMoQohWL3IL+X
+ vEWA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710248251; x=1710853051;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=BsvugGWQtYlTHpFIYczXD0jIVZr4jSfdJPIw/uAtfvg=;
+ b=IsGAnMgZ3hH/PMkSGtrrKvOr0KMtzOfhmug6mzDAI/wrXjXVVkIgcc0jkKPi9wva3A
+ +KjewWhx+E4ipTR/1aRoR8/Ap2n2V8VwAxm0uxlZ8kYXdspl5XwJegxJAuKhvkT6Juir
+ 5jfeiOIc6ZttSEdpXnAo4vH7X9tfRv/gRD2Gk6y6T49y3MhGxSWQzIqYeFH48itvMRMB
+ ysJFE2XMIqFSCJmBvB/x+VibVhThofZg5jLetSrAwuooz2GNef1yzApELdK+I0AJLWWJ
+ pLLcQBmXx6OnBI0NWXJk1fzV0PSuzDs0ErBmT/UF+nLZ34vCi3Wyt1b82f+9wG6zNO66
+ Bqbw==
+X-Gm-Message-State: AOJu0YxGpuk/LXnXKaNIumWEJFK6h6CNwoB0xtn1P3XiKxGgr/R7exJQ
+ +XJZi4gNXxSYq/7b+2idwe02kQQxuOaHOBubUFyrO7vTCWb/u3vj1yjhP1CSwGI=
+X-Google-Smtp-Source: AGHT+IHqpey5/EeGEV6GGsWRzqUs3A2VGDGQUC0oYiIfaswTEVHLZgb+lfuggAztmgUNOZAH/x3/Dw==
+X-Received: by 2002:a92:c567:0:b0:366:655e:9563 with SMTP id
+ b7-20020a92c567000000b00366655e9563mr1591202ilj.6.1710248250902; 
+ Tue, 12 Mar 2024 05:57:30 -0700 (PDT)
+Received: from rehoboam.localdomain ([136.37.200.217])
+ by smtp.gmail.com with ESMTPSA id
+ p5-20020a92d485000000b0036577b41481sm2278595ilg.73.2024.03.12.05.57.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 12 Mar 2024 05:57:30 -0700 (PDT)
+From: Colin McAllister <colinmca242@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Colin McAllister <colinmca242@gmail.com>, JPEWhacker@gmail.com,
+ sjg@chromium.org, Sam Protsenko <semen.protsenko@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>
+Subject: [PATCH v4 0/2] Fix Android A/B backup
+Date: Tue, 12 Mar 2024 07:57:27 -0500
+Message-Id: <20240312125729.82695-1-colinmca242@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [172.25.0.11]
-X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
- (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrNLMWRmVeSWpSXmKPExsWyRpKBR1c4/UOqwcIuFYuHV/0tpk7azG7x
- dm8nu0X3O3UHFo+ds+6ye7w6sIrd4+ydHYwe/d0trAEsUVw2Kak5mWWpRfp2CVwZj6e9YCt4
- Jlixvv04UwPjBr4uRk4OCQETie4TV5hAbCGBxUwSsx5LdzFyAdmPGSW69zWxgCTYBPQlVr5c
- BGaLCLhI/Fq6B8jm4GAWMJOY8DkZxBQWcJD4fCUZpIJFQFXiVXcbO4jNK2ApcWDqMXaIVfIS
- My99B7M5Bawktr3bxQ6x1lJidu8jRoh6QYmTM5+AbWIGqm/eOpsZwpaQOPjiBTNEvZLEnVO/
- 2GBmTjv3mhnCDpU4smk10wRGoVlIRs1CMmoWklELGJlXMQrlZiZnpxZlZusVZFSWpCbrpaRu
- YgQFuAgD1w7GvjkehxiZOBgPMUpwMCuJ8L7WeZsqxJuSWFmVWpQfX1Sak1p8iFGag0VJnHd1
- R3CqkEB6YklqdmpqQWoRTJaJg1OqgVE8sk0rdSbvvGMhXCETjZ7Ner2H96BoauUav2M/5y5Z
- ktP2qqeeY/FjjnkHDtbwLI+RdNyna6Yot3mnRIykwpa+xd122+cv3LiBS6ss5VO37jPzX8xX
- vzwrjLye9oV/94aX3VGPJNYElm28faBRSeXFNedfphazVmd+eroqJu6PTvifY09uaD9VYinO
- SDTUYi4qTgQAL+/Oc14CAAA=
+X-Mailman-Approved-At: Tue, 12 Mar 2024 16:00:41 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,74 +92,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add logic for booting systems with the RAUC update mechanism. This can
-be reused by other phytec boards.
+- Addresses compiler error due to missing semicolon
+- Removes use of preprocessor macros with ANDROID_AB_BACKUP_OFFSET
 
-Signed-off-by: Leonard Anderweit <l.anderweit@phytec.de>
-Tested-by: Teresa Remmet <t.remmet@phytec.de>
----
- include/env/phytec/rauc.env | 52 +++++++++++++++++++++++++++++++++++++
- 1 file changed, 52 insertions(+)
- create mode 100644 include/env/phytec/rauc.env
+Bug was found by noticing a semicolon was missing and not causing a
+compiler error when CONFIG_ANDROID_AB_BACKUP_OFFSET was set. I submitted
+a patch to fix the semicolon before fixing the #if's. Testing the latter
+patch without the former with ANDORID_AB_BACKUP_OFFSET set will cause a
+compiler error.
 
-diff --git a/include/env/phytec/rauc.env b/include/env/phytec/rauc.env
-new file mode 100644
-index 000000000000..89e17ff70ec6
---- /dev/null
-+++ b/include/env/phytec/rauc.env
-@@ -0,0 +1,52 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+
-+/* Logic to select a boot partition based on environment variables and switch
-+ * to the other if the boot fails. */
-+
-+doraucboot=0
-+
-+raucbootpart0=1
-+raucrootpart0=5
-+raucbootpart1=2
-+raucrootpart1=6
-+
-+raucinit=
-+	echo Booting RAUC A/B system;
-+	test -n "${BOOT_ORDER}" || env set BOOT_ORDER "system0 system1";
-+	test -n "${BOOT_system0_LEFT}" || env set BOOT_system0_LEFT 3;
-+	test -n "${BOOT_system1_LEFT}" || env set BOOT_system1_LEFT 3;
-+	env set raucstatus;
-+	for BOOT_SLOT in "${BOOT_ORDER}"; do
-+		if test "x${raucstatus}" != "x"; then
-+			echo Skipping remaing slots!;
-+		elif test "x${BOOT_SLOT}" = "xsystem0"; then
-+			if test ${BOOT_system0_LEFT} -gt 0; then
-+				echo Found valid slot A, ${BOOT_system0_LEFT} attempts remaining;
-+				setexpr BOOT_system0_LEFT ${BOOT_system0_LEFT} - 1;
-+				env set mmcpart ${raucbootpart0};
-+				env set mmcroot ${raucrootpart0};
-+				env set raucargs rauc.slot=system0;
-+				env set raucstatus success;
-+			fi;
-+		elif test "x${BOOT_SLOT}" = "xsystem1"; then
-+			if test ${BOOT_system1_LEFT} -gt 0; then
-+				echo Found valid slot B, ${BOOT_system1_LEFT} attempts remaining;
-+				setexpr BOOT_system1_LEFT ${BOOT_system1_LEFT} - 1;
-+				env set mmcpart ${raucbootpart1};
-+				env set mmcroot ${raucrootpart1};
-+				env set raucargs rauc.slot=system1;
-+				env set raucstatus success;
-+			fi;
-+		fi;
-+	done;
-+	if test -n "${raucstatus}"; then
-+		env delete raucstatus;
-+		env save;
-+	else
-+		echo WARN: No valid slot found;
-+		env set BOOT_system0_LEFT 3;
-+		env set BOOT_system1_LEFT 3;
-+		env delete raucstatus;
-+		env save;
-+		reset;
-+	fi;
+What's changed in V2?
+---------------------
+
+The second verison of changes removes the #if preprocessor macros to use
+C conditionals instead. There was some minor refactoring required to get
+this to work, so I did more thourough testing to ensure the backup data
+works as expected.
+
+I also realized that CONFIG_VAL is not needed because there's no reason
+for the SPL or TPL to have different values for the backup address. I
+opted to just use CONFIG_ANDROID_AB_BACKUP_OFFSET directly.
+
+What's changed in V3?
+---------------------
+
+Added "Fixes:" tag to patches. Performed additonal testing as described
+in the second paragraph in the testing notes below.
+
+I opted to not use CONFIG_IS_ENABLED because that macro appears to only
+be intended for y/n configurations. See note at top of linux/kconfig.h:
+
+"Note that these only work with boolean and tristate options."
+
+What's changed in V4?
+---------------------
+
+Nothing other than sending the patch in through a different email
+address in order to see if the Garmin SMTP server is borking the
+patches.
+
+How was this patch series tested?
+---------------------------------
+
+I built for my target with CONFIG_ANDROID_AB_BACKUP_OFFSET set to
+0x1000. I first verified that the device can normally boot. I then ran
+dd before rebooting to corrupt the primary data. I confirmed that the
+backup was used to properly restore the primary. I then corrupted both
+the primary and backup data and confirmed that the primary and backup
+were both reinitialized to default values. Lastly, I corrupted the
+backup data and not the primary data and confirmed that the backup was
+restored the primary data.
+
+Addtionally, I disabled CONFIG_ANDROID_AB_BACKUP_OFFSET for my device
+and confirmed that after I corrupt the primary data, no backup is used.
+When the primary data is not corrupt, the device boots normally. This is
+what I would expect, because CONFIG_ANDROID_AB_BACKUP_OFFSET's default
+value is 0x0, which would evaluate to false for all C if conditions.
+
+Colin McAllister (2):
+  android_ab: Add missing semicolon
+  android_ab: Fix ANDROID_AB_BACKUP_OFFSET
+
+ boot/android_ab.c | 97 ++++++++++++++++++++++-------------------------
+ 1 file changed, 45 insertions(+), 52 deletions(-)
+
 -- 
-2.25.1
+2.34.1
 
