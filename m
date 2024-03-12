@@ -4,64 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D573C54E5D
-	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 15:13:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85160C54E58
+	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 15:13:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E68C87FAC;
-	Tue, 12 Mar 2024 16:13:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0C52B87FBC;
+	Tue, 12 Mar 2024 16:13:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="xJ42GT4f";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="z/satq1K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D74D87FAE; Tue, 12 Mar 2024 16:13:19 +0100 (CET)
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on20601.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2009::601])
+ id 6DCE087FBF; Tue, 12 Mar 2024 16:13:53 +0100 (CET)
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on20600.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2415::600])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7843587F8F
- for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 16:13:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3CA3C87F8F
+ for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 16:13:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=FU6ze57At9K5B5APIuZK9LAfFQzTiD6FmNSt8zBDz2KLFVkykgVnHuMaRmOGuv+MeecmB6m5mQU8wHsf254B7oWu77wvCe+DVz+F769b3QFqPjoa9RbuVtg+BKynEjUU8odZ0GH6EQN/2DoKKZ1kMSnf28HyFiG9XrGPRMaLZnVMKtqidCKjEmPUy06gPZ+Xm0k2IeOIJPsnJCbZbyLis4GTWpJZ8O149HGaSJffP7zn4P4aJEz7IcarH6sQnvdmOH5veEfELzxtLzlBNqbx3y3uBNLmo6P7uYU0kLsYQum0w2ekdKnSiS5m4DoprblUbRs7baeD9RNQKf5WZ55tuw==
+ b=Px1Klg5z4RJBX/abfmZ/Ol88YmPwFmbBU/ewxxW6X/RvSICApTZ0tJ1Ul9P3JruiXcutk9258Ssi77IjoJioPSzfWwqj8EBD6y/so9neIMS5dQAQjy0f7uK2A/MjcPTqlStvdEiofUAC46diqOXZZFqJpWFL+Xv7OBnhZnWXjkXmI4+8LHyWgEudNcSI/l6lk5a5EXAlg0GzjFqFAt7HSLg/MtZevDcguBatwaFzicYC9AhsYpGbEDeRSgqcieQsyoufx2b/vpiYCreZnLfuNnKOeZXpKoMfX7Q1u3FU/X6y2YPRmLoBZlEq/S7X4FfW6Ozff95PHzpL2an59f2H8g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Q22iDXSPy9KdZo0gK61Se3FT1KpmJl8WyNZkSbYb2XQ=;
- b=lytzVXMkX6L6z4YYUaqq0CdZF9GKsAuKe1gF9J7QEBRAoCQuZT76RY5Ewqgvs+gX4wq/RyJZSCkVdFkjC/6aoth9WyDYBQERl77/aJyiFjU5JP7C8KfvgXBS0nkizlRqxzUIsQMZEG1XsJ509MLBkSlhyXQCXrl0vUuMJpswQSs03+BdPrlVgAQgZSPz1tQ5W9otxuZfLV7/H5nBAjwzg7E8XNzhi67ZCoKF7LIz6zJAgwFTRARz15T6ffcNrwwGRo7/vCrb0aEDuHGY+uVVbKkUex5aDs/30y+YyQt9Zebcis69VMm3mumguMbIo4/RVsV4NouNFZjE898b/66H6Q==
+ bh=uoJKUMnpUkJSgPY5gnEIAVOKc+2kQOYuRMUc9ni02Pw=;
+ b=RUDR36CTGEmYNI70veyzWchL7MWnJ0LyT+5MsKMViS9/f15MTmCIHBCv7PTVsGXiwHYp9HRSEE2BGijnsz/w0BJznpO07i5qgofaI4N/Pmb8cf9PxdIXVRBW9peCxmc4DlUR7je18PANpY4CfvuZavz0nEp/ZHFL/ld4F0bExUhnbl980gDYzio1+WgqCUZUhm1W+u55OluysZuynKlVZ/5s8EQUNwpPXvZcuQlCWifo+PuqRl+uIeFaqEx1DIo3Y+7Tq+/wffkeu1YX6bWOU0we12DcVwOR1d9VX2w7XmWDm6ZqP5F3q19PG+HTkPM5WgafW9/APQnWqBbt3z4PYQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Q22iDXSPy9KdZo0gK61Se3FT1KpmJl8WyNZkSbYb2XQ=;
- b=xJ42GT4ff9yJOhI/SwOtfC4w+CvEqCj2Lt8gKm5mOgjIbTc0/2ynNdZlQZgvut8dB0T4CZ2gTJbktUGDd47Y5GZ3nlSQNYXz84gA+5h4acbAI+rDzuLPcWzNgAU314hWF26nAaQXE5EiGlE640X/sSfF0rgeVJccxbKXF6YIoN8=
+ bh=uoJKUMnpUkJSgPY5gnEIAVOKc+2kQOYuRMUc9ni02Pw=;
+ b=z/satq1KKkCJxv3F0lukz7VnUToeUDrsjcfHrctD0gSThGqGxcM/EBVVdxZPZ5QsBFk2msqEq+8C2fOl5YpkrsVlshAj7SzydPzhtnSXDGdR1sLznKuYqPAkQrNPDXUn64MVJ38ouvvgGlM24NXtUVyoKWyVG9NR5+kekbgKLEs=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
- by SA3PR12MB7950.namprd12.prod.outlook.com (2603:10b6:806:31c::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7386.18; Tue, 12 Mar
- 2024 15:13:14 +0000
+ by DM4PR12MB7526.namprd12.prod.outlook.com (2603:10b6:8:112::20) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7362.35; Tue, 12 Mar
+ 2024 15:13:46 +0000
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::6622:ec76:9367:3907]) by SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::6622:ec76:9367:3907%2]) with mapi id 15.20.7362.035; Tue, 12 Mar 2024
- 15:13:14 +0000
-Message-ID: <71b9269c-af3e-4533-b824-46de3247f8a3@amd.com>
-Date: Tue, 12 Mar 2024 16:13:11 +0100
+ 15:13:46 +0000
+Message-ID: <b60c6758-716e-4a91-85b3-8cc9f5398ea7@amd.com>
+Date: Tue, 12 Mar 2024 16:13:41 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm64: zynqmp: Remove additional compatible string for
- sc-revB
+Subject: Re: [PATCH] arm64: zynqmp: Describe USB wakeup interrupt
 Content-Language: en-US
 From: Michal Simek <michal.simek@amd.com>
 To: u-boot@lists.denx.de, git@xilinx.com
-Cc: Tom Rini <trini@konsulko.com>
-References: <54e77ad480c5de8703cb5b22408dc3bf72f3f431.1709887280.git.michal.simek@amd.com>
+Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ Piyush Mehta <piyush.mehta@amd.com>,
+ Radhey Shyam Pandey <radhey.shyam.pandey@amd.com>,
+ Tanmay Shah <tanmay.shah@amd.com>, Tom Rini <trini@konsulko.com>
+References: <d8109a218f70c257e4fc52b5032b7df68fc00786.1709887312.git.michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
  howHe8Y9nSbG92obZMqsdt+d/hmRu3fgwRYiiU97YJjUkCN5paHXyBb+3IdrLNGt8I7C9RMy
@@ -106,7 +108,7 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
  l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
  3i3l5DA=
-In-Reply-To: <54e77ad480c5de8703cb5b22408dc3bf72f3f431.1709887280.git.michal.simek@amd.com>
+In-Reply-To: <d8109a218f70c257e4fc52b5032b7df68fc00786.1709887312.git.michal.simek@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-ClientProxiedBy: VI1P195CA0046.EURP195.PROD.OUTLOOK.COM
@@ -114,62 +116,62 @@ X-ClientProxiedBy: VI1P195CA0046.EURP195.PROD.OUTLOOK.COM
  (2603:10b6:a03:4f5::8)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|SA3PR12MB7950:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2a3d8ddc-98a0-437e-d9de-08dc42a6f032
+X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|DM4PR12MB7526:EE_
+X-MS-Office365-Filtering-Correlation-Id: cac22b31-36e0-4fad-743e-08dc42a7034e
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: Zpu8YozCMP63/qHJ+W2tOP0XWNLzb02gYC9k5hxrTb8DLkIwMweN5/xqQZPmrZuA/u5yTfRFiK+sGP4sdM3GMmAWMKc9FsBzQj3A5w/RbugtS9M04qsKUdtxsYg9pk5VczkruWluvfPChfMqgn6WU6kpZlfslyAQ1NgErr62EwbzBvNszpY+uaS/DGvaET7oUGP1s8KdvYUCaA6NAhJgNw4b+457AsXBoHj97KoCPQ5wRV7mAUi2UfNH1OIfU7VW9hx/+UZiNRwOqSG8eDK7OGgKniOvjc42eOXvdHMK9+T17jPy6710DXdbWN3odI2qwMpAfh7oqlkWfamU4zqfhn1PwJMTQNXm1DzxfvGjwRJd6hde4dBE7Lz7nDeWxMDKWLBSUkzn7OYRV2zsagzmbz9JAvmf+4hwBeM1S5G61eIeocuY01qo1omzraTDECHVngj4jRP34qvYW18biTCmQ5o+0R9+r/UA+5UVCtn/q2kSq5zRqjW19sS7v1fjXpScBVTCEJ9Ir8EN8+mmsh+TY/BWjTW4SkuBqZmaX3jvgB0DUaQmXd3cuXIYgMqlFl+sZe+EK8WLo6TYfUQP13RCA8TJkLvPLAg2iey3B1VNrGJfXwGHejXgi1xtoA6MzvGVU2DvYDdyMIV0NHC7+phnW3t2U34oS1RcfjNcRCut300=
+X-Microsoft-Antispam-Message-Info: F7QOWzc3qoWUbM6xg5Z2cK/jpDGQmC4TqkFXQGFXpi/HglgTFpGMR0RMZs/29E29U3H5L4Mh3pC90rMcsd7jbjwid2vtqlZsZOaN2THv6ineoP6un1fc+X2RdXbaDvjp5LKJZrXG0/BBmAxr16tUo8da4UJxUYpwI7ye0T+4Aq3WGPUvrGAoq9943XfvxYy8PLnGGf4Zs0ttTiZULOkPxzxCkhpxgVY3YI8KKt5RmJVFC+sy4y86tjHWqtBGp5DW29fyKVhdD97itgnEnnsaviCsqIpYw6h8zREsV4i5xn0ZzBoNq5iUjOVngQWYhgB2OKcPfPm7ErKIJGdt+3E9ms6a1XXtq/vVBi3JUJUc+keeQQ87ywjo8gGnBM+8yFMA7sxlQk5CXfcJo97eUL0TSOmMZh3oakYf2q4aCp2LfEqX42L45kJ1cxTJxV2iAREooZFFxyELt1qjD+M9UY44NZErMTl0bVhaTsMQNG0eELWukXd5+aTX0nLtVNahWYbecPwoTmc23m6op6lCg7FjFI3V3DqboLtiti86+ZKx5Q7WV3fgiQ6RAQ7Cn38QEnDjDXn258gilIcfFwIulbsVbW/kJGoB0ASELPjgpVuQh/ONSkJidukGY/dWL2LytLxx2lFftyZwgN3qOswW8tX9rQ==
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230031)(1800799015)(376005); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NWRNSFFZR0NnMVNRcWlzaDJqNGF5UEVTcFlhb3gxY00wNlZqeDFueHcwbzY0?=
- =?utf-8?B?bVVmeE4vTVVHTWJCdTl4N3c2QWNCNDFjWExuT3NibksyaW8rbGlvMkNGUEZZ?=
- =?utf-8?B?UW9OamhmN3pSbEs5L1U2NkxHYTBTZ1pPb1JnSU5ROWtkTkR5VlpVYlJTS1FQ?=
- =?utf-8?B?TXlUWUJJVk10SkI2a0doeTVYcFdWSXE4RDZ1RkZpMEN4cmRKY1h0TTY2aGMx?=
- =?utf-8?B?T2V1U1VKb1h2SE5YbXpJWnQ1ZEdOTTFLOTJrUFMxdjNhTFB0bTVrK3QyOXU5?=
- =?utf-8?B?M2ZPTUFrK1dRbzExdmI2YTVSNHpMUENudGJnaUNwNHJsdWM0cW52Tm1yUlNl?=
- =?utf-8?B?S2M3aEhZQkNvcDZjaUwrdDNFYUZXK2hwY0poR3pwcDJFcGlaZHFBa2RuL1Qw?=
- =?utf-8?B?d3IwV1VTMHo0TTNRS3pXRkM2Um9yM1dSbm1SUXgyVDdGNFViaXRQYVc2U0kw?=
- =?utf-8?B?aXNCeVFqQSs2alFWRGhUSndHT29mZmt6ZFQ0N0hzR05ZSGswWkN2L0tDYVd3?=
- =?utf-8?B?dnJtQklzNmN6R0w5bmppUU5EMVgrU1lONldZdGVWT2d6ditUOTVyTVd2RCtm?=
- =?utf-8?B?VHI1QytRdGM1M3crTDA1VDdmVVR2R3NuV1pZVnZyd3NpQzhJQmt6aThsWHM1?=
- =?utf-8?B?MEMva3ZObUF5Qk84UHhZSlFnUlh0ZlFYOGZIVFRrYmdFQVlUZjBrK2RJWk5T?=
- =?utf-8?B?VlhYdWJvMmFEZXhIVzFxOVlVeHJkZzcyRW5hODNNNDExWUFkSmk4cnJKa1JU?=
- =?utf-8?B?L1NTVHU1VCswdHFvM05HWEFnVXo1K0ZZLy9NSTc0SHh5VFNCeDVHTjAxcVdh?=
- =?utf-8?B?NkZxUG0yblIrY1VRZHFTRFM5Um5JZmVVS2VhTmUrTjNpMWVUTGY2Z01nVHpD?=
- =?utf-8?B?SnRyYk9yaERCK3E0NHc3YkxyT3p5Q1JxNC9Id3FTMi84UDN2K1JjL0J4Vk5m?=
- =?utf-8?B?elRDeWpzSUhacldWd2hEd05DM2kxMk1QQ2ZrMDlwSTNBR2o1L09IWlJnUDE1?=
- =?utf-8?B?SnYwV1pBdFk3bHJDYk9IZ0hpVWREdHhhZDRId1Q2aldOQitUNTluK3pYSmVI?=
- =?utf-8?B?OXhPdEd1bjVRUFhxdURlSldRQ2dEOWsxZnUzZGRRNDNMZjNMY3dUdVpwcG9Q?=
- =?utf-8?B?NGVrOXo2MmxxT2REUmd4ZVNtMUxHdmI2dm9TRmU5eHVSdTF1dzRIVTFTaUsw?=
- =?utf-8?B?MlljYUZUSHlrTGNVYmlaVVZOWFRlaTNhaEdGcWdoVkpIRTduWTFvcUpaMlpD?=
- =?utf-8?B?bXZPaUNpeTVUL212TXcrRHEyMjVsRVlYd3VhelZ5T1hneldFYzFJVGxNcExW?=
- =?utf-8?B?RG4vcEpEbVRaVXdST0JGQmduQ1NFVy9Hd2hYc1JTbEpGdDdteTJpamNDV2Fo?=
- =?utf-8?B?OVhZb0JnSVY0OStlWUY2VEZSK1JEc3lEOXMvOGZXUm9Hbm03UksvTEdZdzFI?=
- =?utf-8?B?OW8yVEdPQ3NVWGZGamU3RFMzeHVaYWZyRVFYWG9SV0ZseWJyQTVEYzgzcVY1?=
- =?utf-8?B?NjRSMHV6SWhaNXdOWVBkVCtyT0lQL1Q2TlRsZmFDVU5pRWxFNnpkNkhXMmp1?=
- =?utf-8?B?UFZMMUc4Qit6dVJxZ3BUSkxrYkpLY1hySXVHQzdQOXA2WEhIaUFUcFpVWXJy?=
- =?utf-8?B?aC9mTmN3Zlo0emRnaGNDU1Zsd0lnYk45Q3pYUmFQLzI5UUlzKzRWYStwOGQ2?=
- =?utf-8?B?TTlwd1dwR2svZTFJdVNDeTg1ZTRYTFE5eGZRL29SVktVZDFvNm55Uy9aMU5n?=
- =?utf-8?B?eTVpakdOQi9KMGV4MGt3QXp6d1ZyQWtMVUIrcGtVVTBPbWRkUjVZSEY5SVd6?=
- =?utf-8?B?ZExJZ1BQUFo3Zm9DMmtNbjloaFBUeUFTaGRLaTdEUFh2L1d0b3Q1aUpiUGtk?=
- =?utf-8?B?SVhmMU1FaTUzeTJkZ1pGOWxOK1V6S3l3WDdKMUo4dko5R29nWlNTSjI4b1JF?=
- =?utf-8?B?R0RMQUxWcnRrR3hFeWVvOHp0M28rOG1aT3cyK290MVJpbi8vblJXbC8xN2gw?=
- =?utf-8?B?WXNxMUtHcEpwV2toVjBzdEZGVnFIQnFYM2tOcXFXNzhoUm93U0pwV1ZZKzNV?=
- =?utf-8?B?TjBnRXl3enpNY1hjODhxeVBMOVlHR2NQOU9IYUNBeW5QUDFxTm1QemtwR3Fv?=
- =?utf-8?Q?5GvA7MpeGJING1Kqc33aD/CHx?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?RWpCcThrL2N4cmxSaVQxYUgxcUdhVEt1YzRUSDM4Y0x5anhlL0ZzY0NvWlBx?=
+ =?utf-8?B?VXRNUzY4VG00RzJnSlgyU25NWk5yVXovMkRTR3VPaVd5OFhVblZ2b0swdW5u?=
+ =?utf-8?B?cFJ3cWhXUEZ5MHY4bnFtc05sOEFQTFZMcXBVWG84L0pDU2NnM1RhRnRHOWk0?=
+ =?utf-8?B?bXQvQmFMZmhIRFpUUGp4Uk5PN2x6N0c4QkNVdmdqM3NBNVpoRjFkQ1VXWnZI?=
+ =?utf-8?B?QUlFZWs3WmcyM2cveDhBOFg4L3lDa3M2Zld2T3V5VGZocFFKK2NwVEkrTjRq?=
+ =?utf-8?B?MG5LVkNjcTZiZVNKd0ZRUTRUS0pZZlQ2b053ZGhIK1AzK1VuZlpjblNydjVn?=
+ =?utf-8?B?Rm9pdTBMMVhMVzJLWTJUWWQ5dUtEN3V1Z3I0OHhuWW9JSEYxdzNiakUvaDh6?=
+ =?utf-8?B?Y2MrMjgrd0hVaGJFWEtlSzJ3eEFLcXNNRWNXTXQ4MmZ2QW9wMFNmNVRUUU02?=
+ =?utf-8?B?Yk9kaERNK3ZxTUFLTjZvY1hVbWpPZWpxWGc1aHB5SlpXaGNHZ1dtUE1HZmww?=
+ =?utf-8?B?enRyRGxUS280N2ZHa1VQWHcySEhMZXV1eDEzOExDeGxrWHY3SjFIUWhmemhT?=
+ =?utf-8?B?Q1lNSFFxSjRxTURYRTN5cEVHdFFTUnAvRFd3eEV2Wjg2T1Zrdk5JMlY0eGFx?=
+ =?utf-8?B?bkMrcnZqaXJjN1NTZG5mMzJNekZoMTNnL2U1MTEwUTNSeXRUTHBpelVHTXBU?=
+ =?utf-8?B?emdqbjNYOWwvdGwrYk56KzBER1d5UHdvUWFFU3pndW5MYVNMZDhMdExTcW54?=
+ =?utf-8?B?aGdtTExlUzZITWNqSW4wMGRHVmZxVGYxTC8zNzRaZ3FPcnc1Y3M0UzNSS014?=
+ =?utf-8?B?S0EyM0c0bk9FNVk3SitwbnVEUlJNREgzRGdWNVA4eGx0bkNvLzBkcENqMEJO?=
+ =?utf-8?B?NDJNUWxNWldPSmoyUmtWTmJabGJRUVlGeUY5VVlVNU9lejRFaFNoaGNNUjhC?=
+ =?utf-8?B?S1c4RkhJd0lCZ002b0xmT3I3aVQ2ajJuSmYzamp0a1YwazFLaldGSFg1a0c5?=
+ =?utf-8?B?SkRjVVBwS1NjTzkxdGxYdHNZZ3UzUlBJd2YvdVFrMjc2R2d1YkVEWHBvSEJU?=
+ =?utf-8?B?ZDA3RUJKNmd3SFY5cFBiZ0JNVmdqajlBL1h1MFZYdHQ5S2MwUWxXR29ZdEVT?=
+ =?utf-8?B?QUdkZTM5alhyZkZzMHlxUWNCZE1UcUNJQU1hajduay9DLzhZak9GZy9OSTVP?=
+ =?utf-8?B?SmM0NDZ1bmx2ckxYcnNkZitkd1VGTjIzYVZmYnlScXQ4cmZZVFRMMXZrSUtx?=
+ =?utf-8?B?bHl6NGRIVEJVVWYrNnIrZThDMEFiNWJPdkg0WXNEdFlZMzR3M0ZOVzlmMXhS?=
+ =?utf-8?B?WG9JQXNSWHh5a2dweVpLSFVrU1hFSWJNSEswNFpSUlZCQTdocGFzL0djMiti?=
+ =?utf-8?B?MGE1cTdRVHpVZks3OWEzRTJqSWJ2c2lwZDlqSkR0VmxuNE9IK3JaaTV1Z2sw?=
+ =?utf-8?B?aXVEQVkxazIzQ3dlQ0ZROWhWUG5VbmxvRzFZb3U2ellZZ09keFZteDAwd3J0?=
+ =?utf-8?B?YVRCaXpUTUV6c1ExQTJrZFJXVCtYN3pHMUZHb3FQUlF2Y2ZwamFmZ0V0ckM3?=
+ =?utf-8?B?djN2K0pETTUyajBLelFZWnhVeTZBN1FHYndkNlRzK2VLZ1gvRTZxS1hzNmg2?=
+ =?utf-8?B?cTB3Y2VPSjB2dGJNeHpCNTRnTkNaektBeTVtcHlnU0huZGp5UzI2bDFOL1Nt?=
+ =?utf-8?B?a3lVN0JaS25HTk0zZGlzL04yK1UybGNsVnhjU3A2NnZxS3RFY3Aya0F4Qk5M?=
+ =?utf-8?B?bkx5ZGE2WWIyRmptS3c1L0Z6dEdrTkY1UDNFbmZxdzFGUmI1T253aDFRblR5?=
+ =?utf-8?B?dE41THJNS3I4TEthSmg4Nkt3VHlLZEJGaXk3NnNOSFJ1d1pJWUNXN1lTd2M1?=
+ =?utf-8?B?YW9zdStqZXJOdmRGb3lsT1pIaSt6SlF0aG1JMDF1L1NpUTBqMU1VdmxmNTE3?=
+ =?utf-8?B?OUl4OGZRVlo1eVNaZDVqWWFEZXF1MFp5OWtoTndSU3NRNTFTWmwxMVhNeWxV?=
+ =?utf-8?B?TEQrZTJJZlpZaVhrL3pvZkNtaVVaV3E2bnpHdjhMQThVM0NlSzR3ZUtmTHB5?=
+ =?utf-8?B?UDEyNUF4U05nN1lKcVU0b1BrWE9BUWtQWXE0SEcwSGRhT3pHbUI4elJKODM2?=
+ =?utf-8?Q?rKmx7dJ27Kx0XEeSt89vpDOqf?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2a3d8ddc-98a0-437e-d9de-08dc42a6f032
+X-MS-Exchange-CrossTenant-Network-Message-Id: cac22b31-36e0-4fad-743e-08dc42a7034e
 X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Mar 2024 15:13:14.4079 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Mar 2024 15:13:46.4649 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ZydsgWyziv/uL9gRnK8b9D4hSeAVQi/NVE1PIDRTuWZFmgwQVB79jlZJZN9vrIzK
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR12MB7950
+X-MS-Exchange-CrossTenant-UserPrincipalName: bICHDJVGLl4+ahqgL8HEF5voXWsa9vPdovMLJq3ZRCszdlvUQE90YpP9y/5ZTdtN
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB7526
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -189,28 +191,46 @@ X-Virus-Status: Clean
 
 
 On 3/8/24 09:41, Michal Simek wrote:
-> Based on dt schema there is no need to specify flash via additional
-> compatible string and generic are enough.
+> Describe usb wakeup interrupt.
 > 
 > Signed-off-by: Michal Simek <michal.simek@amd.com>
 > ---
 > 
->   arch/arm/dts/zynqmp-sc-revB.dts | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+>   arch/arm/dts/zynqmp.dtsi | 10 ++++++----
+>   1 file changed, 6 insertions(+), 4 deletions(-)
 > 
-> diff --git a/arch/arm/dts/zynqmp-sc-revB.dts b/arch/arm/dts/zynqmp-sc-revB.dts
-> index de2d7842ae28..c1d713b5d890 100644
-> --- a/arch/arm/dts/zynqmp-sc-revB.dts
-> +++ b/arch/arm/dts/zynqmp-sc-revB.dts
-> @@ -192,7 +192,7 @@
->   	status = "okay";
->   	/* QSPI should also have PINCTRL setup */
->   	flash@0 {
-> -		compatible = "mt25qu512a", "m25p80", "jedec,spi-nor"; /* mt25qu512abb8e12 512Mib */
-> +		compatible = "m25p80", "jedec,spi-nor"; /* mt25qu512abb8e12 512Mib */
->   		#address-cells = <1>;
->   		#size-cells = <1>;
->   		reg = <0>;
+> diff --git a/arch/arm/dts/zynqmp.dtsi b/arch/arm/dts/zynqmp.dtsi
+> index daae23c12b79..c19d86e5a0c4 100644
+> --- a/arch/arm/dts/zynqmp.dtsi
+> +++ b/arch/arm/dts/zynqmp.dtsi
+> @@ -1001,10 +1001,11 @@
+>   				status = "disabled";
+>   				reg = <0x0 0xfe200000 0x0 0x40000>;
+>   				interrupt-parent = <&gic>;
+> -				interrupt-names = "host", "peripheral", "otg";
+> +				interrupt-names = "host", "peripheral", "otg", "wakeup";
+>   				interrupts = <GIC_SPI 65 IRQ_TYPE_LEVEL_HIGH>,
+>   					     <GIC_SPI 65 IRQ_TYPE_LEVEL_HIGH>,
+> -					     <GIC_SPI 69 IRQ_TYPE_LEVEL_HIGH>;
+> +					     <GIC_SPI 69 IRQ_TYPE_LEVEL_HIGH>,
+> +					     <GIC_SPI 75 IRQ_TYPE_LEVEL_HIGH>;
+>   				/* iommus = <&smmu 0x860>; */
+>   				snps,quirk-frame-length-adjustment = <0x20>;
+>   				clock-names = "ref";
+> @@ -1032,10 +1033,11 @@
+>   				status = "disabled";
+>   				reg = <0x0 0xfe300000 0x0 0x40000>;
+>   				interrupt-parent = <&gic>;
+> -				interrupt-names = "host", "peripheral", "otg";
+> +				interrupt-names = "host", "peripheral", "otg", "wakeup";
+>   				interrupts = <GIC_SPI 70 IRQ_TYPE_LEVEL_HIGH>,
+>   					     <GIC_SPI 70 IRQ_TYPE_LEVEL_HIGH>,
+> -					     <GIC_SPI 74 IRQ_TYPE_LEVEL_HIGH>;
+> +					     <GIC_SPI 74 IRQ_TYPE_LEVEL_HIGH>,
+> +					     <GIC_SPI 76 IRQ_TYPE_LEVEL_HIGH>;
+>   				/* iommus = <&smmu 0x861>; */
+>   				snps,quirk-frame-length-adjustment = <0x20>;
+>   				clock-names = "ref";
 
 Applied.
 M
