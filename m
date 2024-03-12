@@ -4,57 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 135BAC54E58
-	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 21:16:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89C7AC54E5D
+	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 21:50:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 695F1879A0;
-	Tue, 12 Mar 2024 22:16:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id D565A87CF2;
+	Tue, 12 Mar 2024 22:50:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1710278204;
-	bh=BtmOfXCddIV994DP4RejMEjxtNen5Qq/ce5w6fWAOng=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=an2CUwHNKzBkR6e9VhFVZcFcNHwrq191Nxw8ZKPqHazzDTMFRRcYp0bg697OobyJE
-	 laY+N7OaM7dcDd8PHEgInmb7oXM/0ILrVbI2AW3OFLHsUrEldlOOpgNddp8bke1Wjr
-	 6PPY+JpYplAf8gd6nHx7A6NRQlAN5ewftN8nCtz6metKO54zoLCTjtU+IN9Al/5d+A
-	 xNm0K27B+lX6JnFMOqfkeDGheDHuS9Qr9JbhVZR0PXzQdCM2X7zT68ZeiLk30mhwgN
-	 6D/fEWOkzqtrY9FE/juHkFMzihp1isqG4kHNNiRLq2/mSPCotx4u27aJQWiJJ4Wiob
-	 slpPG4RE2UBlQ==
-Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="S4/RH9/3";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 9522B87D55; Tue, 12 Mar 2024 22:50:54 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 85D5B8785F;
- Tue, 12 Mar 2024 22:16:42 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1710278203;
- bh=BtmOfXCddIV994DP4RejMEjxtNen5Qq/ce5w6fWAOng=;
- h=From:To:Cc:Subject:Date:From;
- b=ywdF+X1d5/NRjKJXYTAfvZURtCoHZIi6skQtOUmt2VBYbNx3P1W4npZ1RDbGEFhKw
- lyVjQMNMVVW0y5c4fgF3WDaeAc/4I3rZPuybpzDpVXw7BNWShGqU3cQjoWc3tttPBK
- jLLBA6WNcPwY8O6xMQd5khyy0YpW+46i+IfsWYL01XpCWKcB6/a7ADXTlTh9ouA9Dg
- 7F1EzzBs+ALxN+vzDuiQX6yQEzvTD9o40FP0Y1JY29pX6QgglWUGtNPtDdI5jF3esp
- XzDT2nvU3GEh9djIvhP7VEhFKQhjnVTzEkaKwrRbDguUGlnSLz0od2eX+0D/xuTU1g
- 6W3ZeXwG+BOaQ==
-From: Marek Vasut <marex@denx.de>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Andreas Geisreiter <ageisreiter@dh-electronics.de>,
- Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- Fabio Estevam <festevam@gmail.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Stefano Babic <sbabic@denx.de>, u-boot@dh-electronics.com,
- uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH] ARM: imx: stm32: Test whether ethernet node is enabled before
- reading MAC EEPROM on DHSOM
-Date: Tue, 12 Mar 2024 22:15:58 +0100
-Message-ID: <20240312211628.32842-1-marex@denx.de>
-X-Mailer: git-send-email 2.43.0
+ by phobos.denx.de (Postfix) with ESMTPS id EC95A8780A
+ for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 22:50:51 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=03ce=KT=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1710280239;
+ bh=w515YqcDjmec0ns4mdcEEmVKp2nH9nu3bGQxioU4JxE=;
+ b=S4/RH9/37Oc+lepZSROCpxn9gxIGMUw0V4atrCQz3D9HvOJwHOEGtnqO4b/3EuXhmFtZQ+l5R
+ kWQC73FHhzyWztyWaYnEsos79T4xEaVYdWPqc6ocJ8PbUa96xRbZLoQP60zBpyk9r9ttP8bumH6
+ Dd9ERmoZHobiAXKQS9RyoQJmKl3YIZ6jdKLEgTCML4ceEhzBGIjy5TtfM5rqEYDSGc1vzhzdDll
+ ykn5O06e5xBDyVK/sqTM+f0tRCsGb49C02Ve9JtVh4nndKdV35ElNvCnyi6Js4i68b46XxyBVd8
+ VXX1v5tX8VHwsA0wgzILiX1QqXgwk0FhzxNmuRpTqPeg==
+Message-ID: <c9e2c558-3e40-421c-a77e-2e9f823df2d5@kwiboo.se>
+Date: Tue, 12 Mar 2024 22:50:33 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/4] rockchip: Update the default USB Product ID value
+To: Kever Yang <kever.yang@rock-chips.com>
+Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>, Lukasz Majewski
+ <lukma@denx.de>, Mattijs Korpershoek <mkorpershoek@baylibre.com>, Marek
+ Vasut <marex@denx.de>, u-boot@lists.denx.de
+References: <20240226230822.2430391-1-jonas@kwiboo.se>
+ <20240226230822.2430391-2-jonas@kwiboo.se>
+ <f1f0abb8-7786-4c56-8e55-772a59bbab82@rock-chips.com>
+ <79d3a0e0-ba71-441c-8466-7397c755d863@kwiboo.se>
+ <6d8120b5-bc0c-4674-b33f-8c7a7cc354ba@rock-chips.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <6d8120b5-bc0c-4674-b33f-8c7a7cc354ba@rock-chips.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 65f0ce2e08d9ce46e2c27f4c
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,149 +78,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Check whether the ethernet interface is enabled at all before reading
-MAC EEPROM. As a cost saving measure, it can happen that the MAC EEPROM
-is not populated on SoMs which do not use ethernet.
+Hi Kever,
 
-Signed-off-by: Marek Vasut <marex@denx.de>
----
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-Cc: Andreas Geisreiter <ageisreiter@dh-electronics.de>
-Cc: Christoph Niedermaier <cniedermaier@dh-electronics.com>
-Cc: Fabio Estevam <festevam@gmail.com>
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Stefano Babic <sbabic@denx.de>
-Cc: u-boot@dh-electronics.com
-Cc: u-boot@lists.denx.de
-Cc: uboot-stm32@st-md-mailman.stormreply.com
----
-NOTE: It is probably best if this goes in via either imx or stm32 tree,
-      I can break the patch up, but that would introduce dependency
-      between two PRs in different trees. Let me know what you prefer.
----
- board/dhelectronics/common/dh_common.c           | 16 ++++++++++++++++
- board/dhelectronics/common/dh_common.h           |  8 ++++++++
- board/dhelectronics/dh_imx6/dh_imx6.c            |  3 +++
- .../dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c  |  6 ++++++
- board/dhelectronics/dh_stm32mp1/board.c          |  6 ++++++
- 5 files changed, 39 insertions(+)
+On 2024-03-11 04:20, Kever Yang wrote:
+> Hi Jonas,
+> 
+> On 2024/3/8 18:42, Jonas Karlman wrote:
+>> Hi Kever,
+>>
+>> On 2024-03-08 10:22, Kever Yang wrote:
+>>> Hi Jonas,
+>>>
+>>>       Thanks for your patch.
+>>>
+>>> On 2024/2/27 07:08, Jonas Karlman wrote:
+>>>> RK3036 is using the USB product id normally used by RK3066B, and RK3328
+>>>> is using the product id normally used by RK3368.
+>>>>
+>>>> Fix this and update the default USB_GADGET_PRODUCT_NUM Kconfig option
+>>>> for remaining supported Rockchip SoCs to match the product id used in
+>>>> Mask ROM mode. Also remove a reference to the unknown ROCKCHIP_RK3229
+>>>> symbol.
+>>> RK3229 belongs to RK322X which is reuse with RK3228.
+>>>
+>>> Note that this ID is used for rockusb gadget, if work as mass storage,
+>>> it should use other
+>>>
+>>> ID, or else it will confuse the driver in host side, eg. the Windows
+>>> driver may not able to
+>>>
+>>> recognize the device if using two different gadget type with the same ID.
+>> Patch 3 in this series will change to use 0x0010 product id when ums
+>> mode is enabled and fall back to use the USB_GADGET_PRODUCT_NUM for any
+>> other gadget mode.
+> Yes, I see that a few seconds after I send that mail.
+>>
+>> The ROCKCHIP_RK3229 symbol is not defined or used anywhere U-Boot so the
+>> change in this patch to remove it from the condition should have no
+>> impact. If RK3229 need a special product id separate from 0x320b used by
+>> ROCKCHIP_RK322X, it can be defined in the defconfig for such board.
+> 
+> ROCKCHIP_RK3229 does not need any more, because it's included in Rk322X.
+> 
+> So please update the commit message with " remove ROCKCHIP_RK3229 because
+> it's included in ROCKCHIP_RK322X" instead of "unknown ROCKCHIP_RK3229".
 
-diff --git a/board/dhelectronics/common/dh_common.c b/board/dhelectronics/common/dh_common.c
-index 67e3d59b1f3..34094a020b0 100644
---- a/board/dhelectronics/common/dh_common.c
-+++ b/board/dhelectronics/common/dh_common.c
-@@ -18,6 +18,19 @@ bool dh_mac_is_in_env(const char *env)
- 	return eth_env_get_enetaddr(env, enetaddr);
- }
- 
-+int dh_get_mac_is_enabled(const char *alias)
-+{
-+	ofnode node = ofnode_path(alias);
-+
-+	if (!ofnode_valid(node))
-+		return -EINVAL;
-+
-+	if (!ofnode_is_enabled(node))
-+		return -ENODEV;
-+
-+	return 0;
-+}
-+
- int dh_get_mac_from_eeprom(unsigned char *enetaddr, const char *alias)
- {
- 	struct udevice *dev;
-@@ -57,6 +70,9 @@ __weak int dh_setup_mac_address(void)
- 	if (dh_mac_is_in_env("ethaddr"))
- 		return 0;
- 
-+	if (dh_get_mac_is_enabled("ethernet0"))
-+		return 0;
-+
- 	if (!dh_get_mac_from_eeprom(enetaddr, "eeprom0"))
- 		return eth_env_set_enetaddr("ethaddr", enetaddr);
- 
-diff --git a/board/dhelectronics/common/dh_common.h b/board/dhelectronics/common/dh_common.h
-index 2b24637d96d..a2de5b1553e 100644
---- a/board/dhelectronics/common/dh_common.h
-+++ b/board/dhelectronics/common/dh_common.h
-@@ -11,6 +11,14 @@
-  */
- bool dh_mac_is_in_env(const char *env);
- 
-+/*
-+ * dh_get_mac_is_enabled - Test if ethernet MAC is enabled in DT
-+ *
-+ * @alias: alias for ethernet MAC device tree node
-+ * Return: 0 if OK, other value on error
-+ */
-+int dh_get_mac_is_enabled(const char *alias);
-+
- /*
-  * dh_get_mac_from_eeprom - Get MAC address from eeprom and write it to enetaddr
-  *
-diff --git a/board/dhelectronics/dh_imx6/dh_imx6.c b/board/dhelectronics/dh_imx6/dh_imx6.c
-index 07fc9b1fe6d..0676587c38a 100644
---- a/board/dhelectronics/dh_imx6/dh_imx6.c
-+++ b/board/dhelectronics/dh_imx6/dh_imx6.c
-@@ -92,6 +92,9 @@ int dh_setup_mac_address(void)
- 	if (dh_mac_is_in_env("ethaddr"))
- 		return 0;
- 
-+	if (dh_get_mac_is_enabled("ethernet0"))
-+		return 0;
-+
- 	if (!dh_imx_get_mac_from_fuse(enetaddr))
- 		goto out;
- 
-diff --git a/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c b/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
-index 5f12d787d38..ff2c0e87215 100644
---- a/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
-+++ b/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
-@@ -47,6 +47,9 @@ static int dh_imx8_setup_ethaddr(void)
- 	if (dh_mac_is_in_env("ethaddr"))
- 		return 0;
- 
-+	if (dh_get_mac_is_enabled("ethernet0"))
-+		return 0;
-+
- 	if (!dh_imx_get_mac_from_fuse(enetaddr))
- 		goto out;
- 
-@@ -66,6 +69,9 @@ static int dh_imx8_setup_eth1addr(void)
- 	if (dh_mac_is_in_env("eth1addr"))
- 		return 0;
- 
-+	if (dh_get_mac_is_enabled("ethernet1"))
-+		return 0;
-+
- 	if (!dh_imx_get_mac_from_fuse(enetaddr))
- 		goto increment_out;
- 
-diff --git a/board/dhelectronics/dh_stm32mp1/board.c b/board/dhelectronics/dh_stm32mp1/board.c
-index 88eb7d1b8d4..b3309c9d330 100644
---- a/board/dhelectronics/dh_stm32mp1/board.c
-+++ b/board/dhelectronics/dh_stm32mp1/board.c
-@@ -129,6 +129,9 @@ static int dh_stm32_setup_ethaddr(void)
- 	if (dh_mac_is_in_env("ethaddr"))
- 		return 0;
- 
-+	if (dh_get_mac_is_enabled("ethernet0"))
-+		return 0;
-+
- 	if (!dh_get_mac_from_eeprom(enetaddr, "eeprom0"))
- 		return eth_env_set_enetaddr("ethaddr", enetaddr);
- 
-@@ -142,6 +145,9 @@ static int dh_stm32_setup_eth1addr(void)
- 	if (dh_mac_is_in_env("eth1addr"))
- 		return 0;
- 
-+	if (dh_get_mac_is_enabled("ethernet1"))
-+		return 0;
-+
- 	if (dh_stm32_mac_is_in_ks8851())
- 		return 0;
- 
--- 
-2.43.0
+I have recently sent a v2 using the following message, let me know if
+you want me to send a v3 with your suggested message instead.
+
+"Also remove a reference to an undefined ROCKCHIP_RK3229 Kconfig symbol."
+
+> 
+>>
+>> I tested this on Windows with rockusb and ums on RK3308, RK3328, RK3399
+>> RK356x and RK3588 boards, switching between ums and rockusb should work
+>> as intended, rockusb driver was used in rockusb mode and in ums mode the
+>> device would show up as a disk.
+>>
+>>    => rockusb 0 mmc 1
+>>    => ums 0 mmc 1
+>>
+>> I think all product id below is correct,
+> 
+> Yes, I have check these IDs, they are correct.
+
+Great!
+
+Regards,
+Jonas
+
+> 
+> 
+> Thanks,
+> - Kever
+>> but I have not been able to
+>> runtime validate for other SoCs then the ones listed above.
+>>
+>> Regards,
+>> Jonas
+>>
+>>>
+>>> Thanks,
+>>> - Kever
+>>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>>>> ---
+>>>>    drivers/usb/gadget/Kconfig | 15 ++++++++++++---
+>>>>    1 file changed, 12 insertions(+), 3 deletions(-)
+>>>>
+>>>> diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
+>>>> index c72a8047635c..4621a6fd5e64 100644
+>>>> --- a/drivers/usb/gadget/Kconfig
+>>>> +++ b/drivers/usb/gadget/Kconfig
+>>>> @@ -70,12 +70,21 @@ config USB_GADGET_PRODUCT_NUM
+>>>>    	hex "Product ID of the USB device"
+>>>>    	default 0x701a if ARCH_TEGRA
+>>>>    	default 0x1010 if ARCH_SUNXI
+>>>> -	default 0x310a if ROCKCHIP_RK3036
+>>>> +	default 0x110a if ROCKCHIP_RV1108
+>>>> +	default 0x110b if ROCKCHIP_RV1126
+>>>>    	default 0x300a if ROCKCHIP_RK3066
+>>>> +	default 0x301a if ROCKCHIP_RK3036
+>>>> +	default 0x310b if ROCKCHIP_RK3188
+>>>>    	default 0x310c if ROCKCHIP_RK3128
+>>>> -	default 0x320a if ROCKCHIP_RK3229 || ROCKCHIP_RK3288
+>>>> -	default 0x330a if ROCKCHIP_RK3328
+>>>> +	default 0x320a if ROCKCHIP_RK3288
+>>>> +	default 0x320b if ROCKCHIP_RK322X
+>>>> +	default 0x320c if ROCKCHIP_RK3328
+>>>> +	default 0x330a if ROCKCHIP_RK3368
+>>>>    	default 0x330c if ROCKCHIP_RK3399
+>>>> +	default 0x330d if ROCKCHIP_PX30
+>>>> +	default 0x330e if ROCKCHIP_RK3308
+>>>> +	default 0x350a if ROCKCHIP_RK3568
+>>>> +	default 0x350b if ROCKCHIP_RK3588
+>>>>    	default 0x0
+>>>>    	help
+>>>>    	  Product ID of the USB device emulated, reported to the host device.
 
