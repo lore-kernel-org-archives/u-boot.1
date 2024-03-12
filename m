@@ -4,59 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11416C54E5D
-	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 20:22:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E63C9C54E58
+	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 20:23:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4A77287FCA;
-	Tue, 12 Mar 2024 21:20:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 02A0887DB0;
+	Tue, 12 Mar 2024 21:21:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="unDwd28Q";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pD0nR9pE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B86787F47; Tue, 12 Mar 2024 21:20:50 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id C3DF087F78; Tue, 12 Mar 2024 21:20:49 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 704C287E6A
- for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 21:20:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 12A9287F7D
+ for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 21:20:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 42CKKTUc000702;
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 42CKKTaL088789;
  Tue, 12 Mar 2024 15:20:29 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1710274829;
- bh=EXHryaOwJC+f4m1qFqBxR0Ax+Vzgd5VqaPQg2ZVPEgE=;
+ bh=al1E0JHYCfFAaMuW7plG+DVVajbd5Usqn4bbSGqWM0o=;
  h=From:Date:Subject:References:In-Reply-To:To:CC;
- b=unDwd28QqrtxNe2/umgMDNKIQOM0mLzhoo4mATlY1AiiCfPaQVNz7A0miSVb/n2k2
- zrGc5fza8GxO82cyKSJpTY5GbxAOK0AvF/4T2yr90jNFlltwqJALjB5oF5CQdbdJVS
- nsT/RjDwNHMMlGYlCIdGfOzAVnOIVUfishor6PwA=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 42CKKTRF027347
+ b=pD0nR9pE7grXYBqx0Docx/3AaPyNNXhiIpRUnh3VxrKptFaKJS8mT3cBurHD99KB9
+ 4dVtxGUj2la6GDApi05OnFUTkL2xxYG7eTHvsEFrk0OsjaXxI94FRGKG9CrS2zHDn1
+ dTs/pra3KZZn4X8PMkCWyxy6+h9PrylCoAFJYPB8=
+Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 42CKKTnn019554
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Tue, 12 Mar 2024 15:20:29 -0500
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 12
- Mar 2024 15:20:28 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ Mar 2024 15:20:29 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 12 Mar 2024 15:20:28 -0500
+ Frontend Transport; Tue, 12 Mar 2024 15:20:29 -0500
 Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 42CKKSl0091676;
- Tue, 12 Mar 2024 15:20:28 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 42CKKTs3097265;
+ Tue, 12 Mar 2024 15:20:29 -0500
 From: Bryan Brattlof <bb@ti.com>
-Date: Tue, 12 Mar 2024 15:20:21 -0500
-Subject: [PATCH v4 03/13] arm: mach-k3: am62px: introduce clock and device
- files for wkup spl
+Date: Tue, 12 Mar 2024 15:20:28 -0500
+Subject: [PATCH v4 10/13] arm: dts: introduce am62p5 U-Boot dts files
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <20240205-am62px-wip-rebasing-v4-3-fa772bfa623b@ti.com>
+Message-ID: <20240205-am62px-wip-rebasing-v4-10-fa772bfa623b@ti.com>
 References: <20240205-am62px-wip-rebasing-v4-0-fa772bfa623b@ti.com>
 In-Reply-To: <20240205-am62px-wip-rebasing-v4-0-fa772bfa623b@ti.com>
 To: Tom Rini <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>,
@@ -69,21 +68,22 @@ CC: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass
  <hnagalla@ti.com>, Ravi Gunasekaran <r-gunasekaran@ti.com>, Vaishnav Achath
  <vaishnav.a@ti.com>, Jayesh Choudhary <j-choudhary@ti.com>
 X-Mailer: b4 0.12.1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=24638; i=bb@ti.com;
- h=from:subject:message-id; bh=9INhYxFFhX8Igj+iFJ9200S0//UMManX9hpiUDLJ418=;
- b=owNCWmg5MUFZJlNZ4eJIcQAAaf///vZ/lvk//f/tj/3+3/X/st/+9Rzy/X/3y/3++75w09ewA
- RsWDtQADQBoA0AABpo0Gg0ADQA0GhoGjEGQNNAaAAaAGQAADT1PSHk1NGj2qIAAYgAAAAAaAaAG
- gNGgAADQB6gNqAxNHqBo9T1D1A3qg9QDJkHpAGQBtQyNNCNNNBpoNAAMmhkDQ9JoNAGgDTJoGmg
- MgyAwQAAAAaaaAAeoAAA9QAQQ9pEnSCoJrIMmw0C1PGkRfAYw4nkTxRwbgKAQDiGmvR1X1Zl6H3
- 3cMMIM6iBFaSSox5ZpcY0iOLj+TxOTbB0rbJGBCbPnl7ZkU6lTVIQBxZk0dmfFmQE39KyxEJ/Gr
- M2ofDozWjJVItTscBFk8gRK+gUh7mhIKXeQhwk9ioGLFAOeBjhFPlj2VrGAm8uPe54tXE3iUQMh
- KkONvWsTGaA/gWHAqKB6AKDJW134mc1cH7FeYwlgiOJqk/0gB59+ghwWQvPlwi57D2uZ2Fht82z
- 7/rG+E4r+MZmZSJXEiVbuIuDsVwwhckANULiieavxS39iWbE67tAdFGDOiJYgu9nCa1YNUIfVSQ
- 4c8GL9BVi9kD9whzfyQuJsFygt4x/HUKAhzan9GWKh05GMD+sl55BokmXBAcqeGBIKhaC2FA/RP
- 2D/F3JFOFCQ4eJIcQ==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=120240; i=bb@ti.com;
+ h=from:subject:message-id; bh=CGmS+7sO1hrR7yIrMyOqiU+7ryI0Q+B3mYsM02VqSqY=;
+ b=owNCWmg5MUFZJlNZsNQ7NQAAZH////Zb93vt3T/1ey7a/zW30uaz/8+/rfo3avrt2tre/e+wA
+ RsYHeqNADTQAGgNBoAAZANGmmmgAAANAAB6gAGgAADQHpMjTQ9T1Nih7VP1RA0BoaADJ6TRoBoB
+ tTTagaDTagA0BiaNNHqNGg9R6QA0ABo0B5IaNNBo9QMRoNAch6jJpkaaAyZDIaaAZNMjBAaaBiN
+ AZAMRiMQYCYgAGjIxGRoDQ0AAAAAAwKyDRKYAQKIBxKLSoZkKK1KJbbE96xY5r6RIbA4WCh+IHr
+ heVcZiJwaN6Af7VnQD5wM/Bt3DSIwVCt/zjPma+SRmIjHrhnmyTsL9rwKcgIVyVZowbsCa3c0lV
+ S8NtdSWwsdyEKqKZMgRIIkvPehDDPlbPyUEWPVey50df9EOe1x0IVrVSsFDR1yRs03Eg/xyeyvl
+ 8HsvKCN5jJWjDG2YBqf/gdnv+9ULAOFdEonCKDihr5D6KuBxQaZgFYq4C5Xo6RhvfPeF65NrPRB
+ 3JHF69mc85u2/eIgfC1/q8uKyNJXa7MZOlrd1K7+QjmFfw0yy/L5crPj+ZSIJZOL9oURR7wXkdw
+ 3OY3gMIMIAeZXrW6EmFyCiTCBT+iSn2KRCxytFV7FUO+bjHTTka+MJymRqFMeEBv8n5SQ1Cyui0
+ acQv8XckU4UJCw1Ds1A
 X-Developer-Key: i=bb@ti.com; a=openpgp;
  fpr=D3D177E40A38DF4D1853FEEF41B90D5D71D56CE0
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+X-Mailman-Approved-At: Tue, 12 Mar 2024 21:21:40 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,518 +100,3151 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Include the clock and lpsc tree files needed for the wkup spl to
-initialize the proper PLLs and power domains to boot the SoC.
+Include the U-Boot device tree files needed to boot the board.
 
-Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
 Signed-off-by: Bryan Brattlof <bb@ti.com>
 ---
- arch/arm/mach-k3/r5/Makefile           |   1 +
- arch/arm/mach-k3/r5/am62px/Makefile    |   6 +
- arch/arm/mach-k3/r5/am62px/clk-data.c  | 325 +++++++++++++++++++++++++++++++++
- arch/arm/mach-k3/r5/am62px/dev-data.c  |  71 +++++++
- drivers/clk/ti/clk-k3.c                |   6 +
- drivers/power/domain/ti-power-domain.c |   8 +-
- include/k3-clk.h                       |   1 +
- include/k3-dev.h                       |   1 +
- 8 files changed, 418 insertions(+), 1 deletion(-)
+ arch/arm/dts/Makefile                      |    2 +
+ arch/arm/dts/k3-am62p-ddr-lp4-50-1600.dtsi | 2800 ++++++++++++++++++++++++++++
+ arch/arm/dts/k3-am62p-sk-binman.dtsi       |  173 ++
+ arch/arm/dts/k3-am62p5-r5-sk.dts           |  101 +
+ arch/arm/dts/k3-am62p5-sk-u-boot.dtsi      |   23 +
+ 5 files changed, 3099 insertions(+)
 
-diff --git a/arch/arm/mach-k3/r5/Makefile b/arch/arm/mach-k3/r5/Makefile
-index ef0bf39d4503b..1cfc8e3ade966 100644
---- a/arch/arm/mach-k3/r5/Makefile
-+++ b/arch/arm/mach-k3/r5/Makefile
-@@ -9,6 +9,7 @@ obj-$(CONFIG_SOC_K3_J721S2) += j721s2/
- obj-$(CONFIG_SOC_K3_AM625) += am62x/
- obj-$(CONFIG_SOC_K3_AM62A7) += am62ax/
- obj-$(CONFIG_SOC_K3_J784S4) += j784s4/
-+obj-$(CONFIG_SOC_K3_AM62P5) += am62px/
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index 784192125d352..a965a70f37cc6 100644
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -1437,6 +1437,8 @@ dtb-$(CONFIG_SOC_K3_AM625) += k3-am625-sk.dtb \
+ dtb-$(CONFIG_SOC_K3_AM62A7) += k3-am62a7-sk.dtb \
+ 			      k3-am62a7-r5-sk.dtb
  
- obj-y += common.o
- obj-y += lowlevel_init.o
-diff --git a/arch/arm/mach-k3/r5/am62px/Makefile b/arch/arm/mach-k3/r5/am62px/Makefile
-new file mode 100644
-index 0000000000000..50b0df20a3d1a
---- /dev/null
-+++ b/arch/arm/mach-k3/r5/am62px/Makefile
-@@ -0,0 +1,6 @@
-+# SPDX-License-Identifier:	GPL-2.0+
-+#
-+# Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
++dtb-$(CONFIG_SOC_K3_AM62P5) += k3-am62p5-r5-sk.dtb
 +
-+obj-y += clk-data.o
-+obj-y += dev-data.o
-diff --git a/arch/arm/mach-k3/r5/am62px/clk-data.c b/arch/arm/mach-k3/r5/am62px/clk-data.c
+ dtb-$(CONFIG_ARCH_MEDIATEK) += \
+ 	mt7622-rfb.dtb \
+ 	mt7623a-unielec-u7623-02-emmc.dtb \
+diff --git a/arch/arm/dts/k3-am62p-ddr-lp4-50-1600.dtsi b/arch/arm/dts/k3-am62p-ddr-lp4-50-1600.dtsi
 new file mode 100644
-index 0000000000000..4b9892fe05167
+index 0000000000000..f66435201530f
 --- /dev/null
-+++ b/arch/arm/mach-k3/r5/am62px/clk-data.c
-@@ -0,0 +1,325 @@
++++ b/arch/arm/dts/k3-am62p-ddr-lp4-50-1600.dtsi
+@@ -0,0 +1,2800 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * AM62PX specific clock platform data
-+ *
-+ * This file is auto generated. Please do not hand edit and report any issues
-+ * to Bryan Brattlof <bb@ti.com>.
-+ *
-+ * Copyright (C) 2020-2023 Texas Instruments Incorporated - https://www.ti.com/
++ * This file was generated with the
++ * AM62Px SysConfig DDR Subsystem Register Configuration Tool v0.10.02
++ * Thu Jan 25 2024 10:43:46 GMT-0600 (Central Standard Time)
++ * DDR Type: LPDDR4
++ * F0 = 50MHz    F1 = NA     F2 = 1600MHz
++ * Density (per channel): 16Gb
++ * Number of Ranks: 2
 + */
 +
-+#include <linux/clk-provider.h>
-+#include "k3-clk.h"
++#define DDRSS_PLL_FHS_CNT 5
++#define DDRSS_PLL_FREQUENCY_1 800000000
++#define DDRSS_PLL_FREQUENCY_2 800000000
++#define DDRSS_SDRAM_IDX 17
++#define DDRSS_REGION_IDX 17
 +
-+static const char * const gluelogic_hfosc0_clkout_parents[] = {
-+	NULL,
-+	NULL,
-+	"osc_24_mhz",
-+	"osc_25_mhz",
-+	"osc_26_mhz",
-+	NULL,
-+};
-+
-+static const char * const clk_32k_rc_sel_out0_parents[] = {
-+	"gluelogic_rcosc_clk_1p0v_97p65k",
-+	"gluelogic_hfosc0_clkout",
-+	"gluelogic_rcosc_clk_1p0v_97p65k",
-+	"gluelogic_lfosc0_clkout",
-+};
-+
-+static const char * const main_emmcsd1_io_clklb_sel_out0_parents[] = {
-+	"board_0_mmc1_clklb_out",
-+	"board_0_mmc1_clk_out",
-+};
-+
-+static const char * const main_ospi_loopback_clk_sel_out0_parents[] = {
-+	"board_0_ospi0_dqs_out",
-+	"board_0_ospi0_lbclko_out",
-+};
-+
-+static const char * const main_usb0_refclk_sel_out0_parents[] = {
-+	"gluelogic_hfosc0_clkout",
-+	"postdiv4_16ff_main_0_hsdivout8_clk",
-+};
-+
-+static const char * const main_usb1_refclk_sel_out0_parents[] = {
-+	"gluelogic_hfosc0_clkout",
-+	"postdiv4_16ff_main_0_hsdivout8_clk",
-+};
-+
-+static const char * const sam62_pll_ctrl_wrap_main_0_sysclkout_clk_parents[] = {
-+	"gluelogic_hfosc0_clkout",
-+	"hsdiv4_16fft_main_0_hsdivout0_clk",
-+};
-+
-+static const char * const sam62_pll_ctrl_wrap_mcu_0_sysclkout_clk_parents[] = {
-+	"gluelogic_hfosc0_clkout",
-+	"hsdiv4_16fft_mcu_0_hsdivout0_clk",
-+};
-+
-+static const char * const clkout0_ctrl_out0_parents[] = {
-+	"hsdiv4_16fft_main_2_hsdivout1_clk",
-+	"hsdiv4_16fft_main_2_hsdivout1_clk",
-+};
-+
-+static const char * const main_emmcsd0_refclk_sel_out0_parents[] = {
-+	"postdiv4_16ff_main_0_hsdivout5_clk",
-+	"hsdiv4_16fft_main_2_hsdivout2_clk",
-+};
-+
-+static const char * const main_emmcsd1_refclk_sel_out0_parents[] = {
-+	"postdiv4_16ff_main_0_hsdivout5_clk",
-+	"hsdiv4_16fft_main_2_hsdivout2_clk",
-+};
-+
-+static const char * const main_gtcclk_sel_out0_parents[] = {
-+	"postdiv4_16ff_main_2_hsdivout5_clk",
-+	"postdiv4_16ff_main_0_hsdivout6_clk",
-+	"board_0_cp_gemac_cpts0_rft_clk_out",
-+	NULL,
-+	"board_0_mcu_ext_refclk0_out",
-+	"board_0_ext_refclk1_out",
-+	"sam62_pll_ctrl_wrap_mcu_0_chip_div1_clk_clk",
-+	"sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk",
-+};
-+
-+static const char * const main_ospi_ref_clk_sel_out0_parents[] = {
-+	"hsdiv4_16fft_main_0_hsdivout1_clk",
-+	"postdiv1_16fft_main_1_hsdivout5_clk",
-+};
-+
-+static const char * const main_timerclkn_sel_out0_parents[] = {
-+	"gluelogic_hfosc0_clkout",
-+	"clk_32k_rc_sel_out0",
-+	"postdiv4_16ff_main_0_hsdivout7_clk",
-+	"gluelogic_rcosc_clkout",
-+	"board_0_mcu_ext_refclk0_out",
-+	"board_0_ext_refclk1_out",
-+	NULL,
-+	"board_0_cp_gemac_cpts0_rft_clk_out",
-+	"hsdiv4_16fft_main_1_hsdivout3_clk",
-+	"postdiv4_16ff_main_2_hsdivout6_clk",
-+	NULL,
-+	NULL,
-+	NULL,
-+	NULL,
-+	NULL,
-+	NULL,
-+};
-+
-+static const char * const wkup_clkout_sel_out0_parents[] = {
-+	NULL,
-+	"gluelogic_lfosc0_clkout",
-+	"hsdiv4_16fft_main_0_hsdivout2_clk",
-+	"hsdiv4_16fft_main_1_hsdivout2_clk",
-+	"postdiv4_16ff_main_2_hsdivout9_clk",
-+	"clk_32k_rc_sel_out0",
-+	"gluelogic_rcosc_clkout",
-+	"gluelogic_hfosc0_clkout",
-+};
-+
-+static const char * const wkup_clkout_sel_io_out0_parents[] = {
-+	"wkup_clkout_sel_out0",
-+	"gluelogic_hfosc0_clkout",
-+};
-+
-+static const char * const wkup_clksel_out0_parents[] = {
-+	"hsdiv3_16fft_main_15_hsdivout0_clk",
-+	"hsdiv4_16fft_mcu_0_hsdivout0_clk",
-+};
-+
-+static const char * const main_usart0_fclk_sel_out0_parents[] = {
-+	"usart_programmable_clock_divider_out0",
-+	"hsdiv4_16fft_main_1_hsdivout1_clk",
-+};
-+
-+static const struct clk_data clk_list[] = {
-+	CLK_FIXED_RATE("osc_26_mhz", 26000000, 0),
-+	CLK_FIXED_RATE("osc_25_mhz", 25000000, 0),
-+	CLK_FIXED_RATE("osc_24_mhz", 24000000, 0),
-+	CLK_MUX("gluelogic_hfosc0_clkout", gluelogic_hfosc0_clkout_parents, 6, 0x43000030, 0, 3, 0),
-+	CLK_FIXED_RATE("gluelogic_rcosc_clkout", 12500000, 0),
-+	CLK_FIXED_RATE("gluelogic_rcosc_clk_1p0v_97p65k", 97656, 0),
-+	CLK_FIXED_RATE("board_0_cp_gemac_cpts0_rft_clk_out", 0, 0),
-+	CLK_FIXED_RATE("board_0_ext_refclk1_out", 0, 0),
-+	CLK_FIXED_RATE("board_0_i2c0_scl_out", 0, 0),
-+	CLK_FIXED_RATE("board_0_mcu_ext_refclk0_out", 0, 0),
-+	CLK_FIXED_RATE("board_0_mmc1_clklb_out", 0, 0),
-+	CLK_FIXED_RATE("board_0_mmc1_clk_out", 0, 0),
-+	CLK_FIXED_RATE("board_0_ospi0_dqs_out", 0, 0),
-+	CLK_FIXED_RATE("board_0_ospi0_lbclko_out", 0, 0),
-+	CLK_FIXED_RATE("board_0_tck_out", 0, 0),
-+	CLK_FIXED_RATE("dmtimer_dmc1ms_main_0_timer_pwm", 0, 0),
-+	CLK_FIXED_RATE("emmcsd4ss_main_0_emmcsdss_io_clk_o", 0, 0),
-+	CLK_FIXED_RATE("fss_ul_main_0_ospi_0_ospi_oclk_clk", 0, 0),
-+	CLK_FIXED_RATE("mshsi2c_main_0_porscl", 0, 0),
-+	CLK_PLL("pllfracf2_ssmod_16fft_main_0_foutvcop_clk", "gluelogic_hfosc0_clkout", 0x680000, 0),
-+	CLK_DIV("pllfracf2_ssmod_16fft_main_0_foutpostdiv_clk_subdiv", "pllfracf2_ssmod_16fft_main_0_foutvcop_clk", 0x680038, 16, 3, 0, CLK_DIVIDER_ONE_BASED),
-+	CLK_DIV("pllfracf2_ssmod_16fft_main_0_foutpostdiv_clk", "pllfracf2_ssmod_16fft_main_0_foutpostdiv_clk_subdiv", 0x680038, 24, 3, 0, CLK_DIVIDER_ONE_BASED),
-+	CLK_PLL_DEFFREQ("pllfracf2_ssmod_16fft_main_1_foutvcop_clk", "gluelogic_hfosc0_clkout", 0x681000, 0, 1920000000),
-+	CLK_DIV("pllfracf2_ssmod_16fft_main_1_foutpostdiv_clk_subdiv", "pllfracf2_ssmod_16fft_main_1_foutvcop_clk", 0x681038, 16, 3, 0, CLK_DIVIDER_ONE_BASED),
-+	CLK_DIV("pllfracf2_ssmod_16fft_main_1_foutpostdiv_clk", "pllfracf2_ssmod_16fft_main_1_foutpostdiv_clk_subdiv", 0x681038, 24, 3, 0, CLK_DIVIDER_ONE_BASED),
-+	CLK_PLL("pllfracf2_ssmod_16fft_main_12_foutvcop_clk", "gluelogic_hfosc0_clkout", 0x68c000, 0),
-+	CLK_PLL("pllfracf2_ssmod_16fft_main_15_foutvcop_clk", "gluelogic_hfosc0_clkout", 0x68f000, 0),
-+	CLK_PLL("pllfracf2_ssmod_16fft_main_2_foutvcop_clk", "gluelogic_hfosc0_clkout", 0x682000, 0),
-+	CLK_DIV("pllfracf2_ssmod_16fft_main_2_foutpostdiv_clk_subdiv", "pllfracf2_ssmod_16fft_main_2_foutvcop_clk", 0x682038, 16, 3, 0, CLK_DIVIDER_ONE_BASED),
-+	CLK_DIV("pllfracf2_ssmod_16fft_main_2_foutpostdiv_clk", "pllfracf2_ssmod_16fft_main_2_foutpostdiv_clk_subdiv", 0x682038, 24, 3, 0, CLK_DIVIDER_ONE_BASED),
-+	CLK_PLL("pllfracf2_ssmod_16fft_main_8_foutvcop_clk", "gluelogic_hfosc0_clkout", 0x688000, 0),
-+	CLK_PLL("pllfracf2_ssmod_16fft_mcu_0_foutvcop_clk", "gluelogic_hfosc0_clkout", 0x4040000, 0),
-+	CLK_DIV("postdiv1_16fft_main_1_hsdivout5_clk", "pllfracf2_ssmod_16fft_main_1_foutpostdiv_clk", 0x681094, 0, 7, 0, 0),
-+	CLK_DIV("postdiv4_16ff_main_0_hsdivout5_clk", "pllfracf2_ssmod_16fft_main_0_foutpostdiv_clk", 0x680094, 0, 7, 0, 0),
-+	CLK_DIV("postdiv4_16ff_main_0_hsdivout6_clk", "pllfracf2_ssmod_16fft_main_0_foutpostdiv_clk", 0x680098, 0, 7, 0, 0),
-+	CLK_DIV("postdiv4_16ff_main_0_hsdivout7_clk", "pllfracf2_ssmod_16fft_main_0_foutpostdiv_clk", 0x68009c, 0, 7, 0, 0),
-+	CLK_DIV("postdiv4_16ff_main_0_hsdivout8_clk", "pllfracf2_ssmod_16fft_main_0_foutpostdiv_clk", 0x6800a0, 0, 7, 0, 0),
-+	CLK_DIV("postdiv4_16ff_main_2_hsdivout5_clk", "pllfracf2_ssmod_16fft_main_2_foutpostdiv_clk", 0x682094, 0, 7, 0, 0),
-+	CLK_DIV("postdiv4_16ff_main_2_hsdivout6_clk", "pllfracf2_ssmod_16fft_main_2_foutpostdiv_clk", 0x682098, 0, 7, 0, 0),
-+	CLK_DIV("postdiv4_16ff_main_2_hsdivout8_clk", "pllfracf2_ssmod_16fft_main_2_foutpostdiv_clk", 0x6820a0, 0, 7, 0, 0),
-+	CLK_DIV("postdiv4_16ff_main_2_hsdivout9_clk", "pllfracf2_ssmod_16fft_main_2_foutpostdiv_clk", 0x6820a4, 0, 7, 0, 0),
-+	CLK_MUX("clk_32k_rc_sel_out0", clk_32k_rc_sel_out0_parents, 4, 0x4508058, 0, 2, 0),
-+	CLK_MUX("main_emmcsd1_io_clklb_sel_out0", main_emmcsd1_io_clklb_sel_out0_parents, 2, 0x108168, 16, 1, 0),
-+	CLK_MUX("main_ospi_loopback_clk_sel_out0", main_ospi_loopback_clk_sel_out0_parents, 2, 0x108500, 4, 1, 0),
-+	CLK_MUX("main_usb0_refclk_sel_out0", main_usb0_refclk_sel_out0_parents, 2, 0x43008190, 0, 1, 0),
-+	CLK_MUX("main_usb1_refclk_sel_out0", main_usb1_refclk_sel_out0_parents, 2, 0x43008194, 0, 1, 0),
-+	CLK_DIV("hsdiv0_16fft_main_12_hsdivout0_clk", "pllfracf2_ssmod_16fft_main_12_foutvcop_clk", 0x68c080, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv0_16fft_main_8_hsdivout0_clk", "pllfracf2_ssmod_16fft_main_8_foutvcop_clk", 0x688080, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv3_16fft_main_15_hsdivout0_clk", "pllfracf2_ssmod_16fft_main_15_foutvcop_clk", 0x68f080, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv4_16fft_main_0_hsdivout0_clk", "pllfracf2_ssmod_16fft_main_0_foutvcop_clk", 0x680080, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv4_16fft_main_0_hsdivout1_clk", "pllfracf2_ssmod_16fft_main_0_foutvcop_clk", 0x680084, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv4_16fft_main_0_hsdivout2_clk", "pllfracf2_ssmod_16fft_main_0_foutvcop_clk", 0x680088, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv4_16fft_main_0_hsdivout3_clk", "pllfracf2_ssmod_16fft_main_0_foutvcop_clk", 0x68008c, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv4_16fft_main_0_hsdivout4_clk", "pllfracf2_ssmod_16fft_main_0_foutvcop_clk", 0x680090, 0, 7, 0, 0),
-+	CLK_DIV_DEFFREQ("hsdiv4_16fft_main_1_hsdivout0_clk", "pllfracf2_ssmod_16fft_main_1_foutvcop_clk", 0x681080, 0, 7, 0, 0, 192000000),
-+	CLK_DIV("hsdiv4_16fft_main_1_hsdivout1_clk", "pllfracf2_ssmod_16fft_main_1_foutvcop_clk", 0x681084, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv4_16fft_main_1_hsdivout2_clk", "pllfracf2_ssmod_16fft_main_1_foutvcop_clk", 0x681088, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv4_16fft_main_1_hsdivout3_clk", "pllfracf2_ssmod_16fft_main_1_foutvcop_clk", 0x68108c, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv4_16fft_main_2_hsdivout1_clk", "pllfracf2_ssmod_16fft_main_2_foutvcop_clk", 0x682084, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv4_16fft_main_2_hsdivout2_clk", "pllfracf2_ssmod_16fft_main_2_foutvcop_clk", 0x682088, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv4_16fft_mcu_0_hsdivout0_clk", "pllfracf2_ssmod_16fft_mcu_0_foutvcop_clk", 0x4040080, 0, 7, 0, 0),
-+	CLK_MUX_PLLCTRL("sam62_pll_ctrl_wrap_main_0_sysclkout_clk", sam62_pll_ctrl_wrap_main_0_sysclkout_clk_parents, 2, 0x410000, 0),
-+	CLK_DIV("sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk", "sam62_pll_ctrl_wrap_main_0_sysclkout_clk", 0x410118, 0, 5, 0, 0),
-+	CLK_MUX_PLLCTRL("sam62_pll_ctrl_wrap_mcu_0_sysclkout_clk", sam62_pll_ctrl_wrap_mcu_0_sysclkout_clk_parents, 2, 0x4020000, 0),
-+	CLK_DIV("sam62_pll_ctrl_wrap_mcu_0_chip_div1_clk_clk", "sam62_pll_ctrl_wrap_mcu_0_sysclkout_clk", 0x4020118, 0, 5, 0, 0),
-+	CLK_MUX("clkout0_ctrl_out0", clkout0_ctrl_out0_parents, 2, 0x108010, 0, 1, 0),
-+	CLK_MUX("main_emmcsd0_refclk_sel_out0", main_emmcsd0_refclk_sel_out0_parents, 2, 0x108160, 0, 1, 0),
-+	CLK_MUX("main_emmcsd1_refclk_sel_out0", main_emmcsd1_refclk_sel_out0_parents, 2, 0x108168, 0, 1, 0),
-+	CLK_MUX("main_gtcclk_sel_out0", main_gtcclk_sel_out0_parents, 8, 0x43008030, 0, 3, 0),
-+	CLK_MUX("main_ospi_ref_clk_sel_out0", main_ospi_ref_clk_sel_out0_parents, 2, 0x108500, 0, 1, 0),
-+	CLK_MUX("main_timerclkn_sel_out0", main_timerclkn_sel_out0_parents, 16, 0x1081b0, 0, 4, 0),
-+	CLK_DIV_DEFFREQ("usart_programmable_clock_divider_out0", "hsdiv4_16fft_main_1_hsdivout0_clk", 0x108240, 0, 2, 0, 0, 48000000),
-+	CLK_MUX("wkup_clkout_sel_out0", wkup_clkout_sel_out0_parents, 8, 0x43008020, 0, 3, 0),
-+	CLK_MUX("wkup_clkout_sel_io_out0", wkup_clkout_sel_io_out0_parents, 2, 0x43008020, 24, 1, 0),
-+	CLK_MUX("wkup_clksel_out0", wkup_clksel_out0_parents, 2, 0x43008010, 0, 1, 0),
-+	CLK_MUX("main_usart0_fclk_sel_out0", main_usart0_fclk_sel_out0_parents, 2, 0x108280, 0, 1, 0),
-+	CLK_DIV("sam62_pll_ctrl_wrap_main_0_chip_div24_clk_clk", "sam62_pll_ctrl_wrap_main_0_sysclkout_clk", 0x41011c, 0, 5, 0, 0),
-+	CLK_DIV("sam62_pll_ctrl_wrap_mcu_0_chip_div24_clk_clk", "sam62_pll_ctrl_wrap_mcu_0_sysclkout_clk", 0x402011c, 0, 5, 0, 0),
-+};
-+
-+static const struct dev_clk soc_dev_clk_data[] = {
-+	DEV_CLK(16, 0, "hsdiv4_16fft_main_0_hsdivout1_clk"),
-+	DEV_CLK(16, 1, "hsdiv4_16fft_main_0_hsdivout2_clk"),
-+	DEV_CLK(16, 2, "hsdiv4_16fft_main_0_hsdivout3_clk"),
-+	DEV_CLK(16, 3, "hsdiv4_16fft_main_0_hsdivout4_clk"),
-+	DEV_CLK(16, 4, "gluelogic_hfosc0_clkout"),
-+	DEV_CLK(16, 5, "board_0_ext_refclk1_out"),
-+	DEV_CLK(16, 6, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(16, 7, "postdiv4_16ff_main_2_hsdivout8_clk"),
-+	DEV_CLK(16, 8, "gluelogic_hfosc0_clkout"),
-+	DEV_CLK(16, 9, "board_0_ext_refclk1_out"),
-+	DEV_CLK(16, 10, "gluelogic_rcosc_clkout"),
-+	DEV_CLK(16, 11, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(16, 12, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(36, 0, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(36, 2, "main_timerclkn_sel_out0"),
-+	DEV_CLK(36, 3, "gluelogic_hfosc0_clkout"),
-+	DEV_CLK(36, 4, "clk_32k_rc_sel_out0"),
-+	DEV_CLK(36, 5, "postdiv4_16ff_main_0_hsdivout7_clk"),
-+	DEV_CLK(36, 6, "gluelogic_rcosc_clkout"),
-+	DEV_CLK(36, 7, "board_0_mcu_ext_refclk0_out"),
-+	DEV_CLK(36, 8, "board_0_ext_refclk1_out"),
-+	DEV_CLK(36, 10, "board_0_cp_gemac_cpts0_rft_clk_out"),
-+	DEV_CLK(36, 11, "hsdiv4_16fft_main_1_hsdivout3_clk"),
-+	DEV_CLK(36, 12, "postdiv4_16ff_main_2_hsdivout6_clk"),
-+	DEV_CLK(57, 1, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(57, 2, "main_emmcsd0_refclk_sel_out0"),
-+	DEV_CLK(57, 3, "postdiv4_16ff_main_0_hsdivout5_clk"),
-+	DEV_CLK(57, 4, "hsdiv4_16fft_main_2_hsdivout2_clk"),
-+	DEV_CLK(58, 0, "main_emmcsd1_io_clklb_sel_out0"),
-+	DEV_CLK(58, 1, "board_0_mmc1_clklb_out"),
-+	DEV_CLK(58, 2, "board_0_mmc1_clk_out"),
-+	DEV_CLK(58, 5, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(58, 6, "main_emmcsd1_refclk_sel_out0"),
-+	DEV_CLK(58, 7, "postdiv4_16ff_main_0_hsdivout5_clk"),
-+	DEV_CLK(58, 8, "hsdiv4_16fft_main_2_hsdivout2_clk"),
-+	DEV_CLK(61, 0, "main_gtcclk_sel_out0"),
-+	DEV_CLK(61, 1, "postdiv4_16ff_main_2_hsdivout5_clk"),
-+	DEV_CLK(61, 2, "postdiv4_16ff_main_0_hsdivout6_clk"),
-+	DEV_CLK(61, 3, "board_0_cp_gemac_cpts0_rft_clk_out"),
-+	DEV_CLK(61, 5, "board_0_mcu_ext_refclk0_out"),
-+	DEV_CLK(61, 6, "board_0_ext_refclk1_out"),
-+	DEV_CLK(61, 7, "sam62_pll_ctrl_wrap_mcu_0_chip_div1_clk_clk"),
-+	DEV_CLK(61, 8, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(61, 9, "wkup_clksel_out0"),
-+	DEV_CLK(61, 10, "hsdiv3_16fft_main_15_hsdivout0_clk"),
-+	DEV_CLK(61, 11, "hsdiv4_16fft_mcu_0_hsdivout0_clk"),
-+	DEV_CLK(75, 0, "board_0_ospi0_dqs_out"),
-+	DEV_CLK(75, 1, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(75, 2, "main_ospi_loopback_clk_sel_out0"),
-+	DEV_CLK(75, 3, "board_0_ospi0_dqs_out"),
-+	DEV_CLK(75, 4, "board_0_ospi0_lbclko_out"),
-+	DEV_CLK(75, 6, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(75, 7, "main_ospi_ref_clk_sel_out0"),
-+	DEV_CLK(75, 8, "hsdiv4_16fft_main_0_hsdivout1_clk"),
-+	DEV_CLK(75, 9, "postdiv1_16fft_main_1_hsdivout5_clk"),
-+	DEV_CLK(77, 0, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(102, 0, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(102, 1, "board_0_i2c0_scl_out"),
-+	DEV_CLK(102, 2, "hsdiv4_16fft_main_1_hsdivout0_clk"),
-+	DEV_CLK(135, 0, "hsdiv0_16fft_main_8_hsdivout0_clk"),
-+	DEV_CLK(146, 0, "main_usart0_fclk_sel_out0"),
-+	DEV_CLK(146, 1, "usart_programmable_clock_divider_out0"),
-+	DEV_CLK(146, 2, "hsdiv4_16fft_main_1_hsdivout1_clk"),
-+	DEV_CLK(146, 5, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(157, 36, "clkout0_ctrl_out0"),
-+	DEV_CLK(157, 37, "hsdiv4_16fft_main_2_hsdivout1_clk"),
-+	DEV_CLK(157, 38, "hsdiv4_16fft_main_2_hsdivout1_clk"),
-+	DEV_CLK(157, 40, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(157, 54, "mshsi2c_main_0_porscl"),
-+	DEV_CLK(157, 91, "sam62_pll_ctrl_wrap_mcu_0_sysclkout_clk"),
-+	DEV_CLK(157, 101, "emmcsd4ss_main_0_emmcsdss_io_clk_o"),
-+	DEV_CLK(157, 103, "emmcsd4ss_main_0_emmcsdss_io_clk_o"),
-+	DEV_CLK(157, 143, "fss_ul_main_0_ospi_0_ospi_oclk_clk"),
-+	DEV_CLK(157, 145, "fss_ul_main_0_ospi_0_ospi_oclk_clk"),
-+	DEV_CLK(157, 161, "sam62_pll_ctrl_wrap_main_0_sysclkout_clk"),
-+	DEV_CLK(157, 163, "dmtimer_dmc1ms_main_0_timer_pwm"),
-+	DEV_CLK(157, 174, "wkup_clkout_sel_io_out0"),
-+	DEV_CLK(157, 175, "wkup_clkout_sel_out0"),
-+	DEV_CLK(157, 176, "gluelogic_hfosc0_clkout"),
-+	DEV_CLK(161, 0, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(161, 1, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(161, 2, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(161, 3, "main_usb0_refclk_sel_out0"),
-+	DEV_CLK(161, 4, "gluelogic_hfosc0_clkout"),
-+	DEV_CLK(161, 5, "postdiv4_16ff_main_0_hsdivout8_clk"),
-+	DEV_CLK(161, 10, "board_0_tck_out"),
-+	DEV_CLK(162, 0, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(162, 1, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(162, 2, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(162, 3, "main_usb1_refclk_sel_out0"),
-+	DEV_CLK(162, 4, "gluelogic_hfosc0_clkout"),
-+	DEV_CLK(162, 5, "postdiv4_16ff_main_0_hsdivout8_clk"),
-+	DEV_CLK(162, 10, "board_0_tck_out"),
-+	DEV_CLK(166, 3, "hsdiv0_16fft_main_8_hsdivout0_clk"),
-+	DEV_CLK(166, 5, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(169, 0, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(169, 1, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(170, 1, "hsdiv0_16fft_main_12_hsdivout0_clk"),
-+	DEV_CLK(170, 2, "board_0_tck_out"),
-+	DEV_CLK(170, 3, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+};
-+
-+const struct ti_k3_clk_platdata am62px_clk_platdata = {
-+	.clk_list = clk_list,
-+	.clk_list_cnt = ARRAY_SIZE(clk_list),
-+	.soc_dev_clk_data = soc_dev_clk_data,
-+	.soc_dev_clk_data_cnt = ARRAY_SIZE(soc_dev_clk_data),
-+};
-diff --git a/arch/arm/mach-k3/r5/am62px/dev-data.c b/arch/arm/mach-k3/r5/am62px/dev-data.c
++#define DDRSS_CTL_0_DATA 0x00000B00
++#define DDRSS_CTL_1_DATA 0x00000000
++#define DDRSS_CTL_2_DATA 0x00000000
++#define DDRSS_CTL_3_DATA 0x00000000
++#define DDRSS_CTL_4_DATA 0x00000000
++#define DDRSS_CTL_5_DATA 0x00000000
++#define DDRSS_CTL_6_DATA 0x00000000
++#define DDRSS_CTL_7_DATA 0x00002710
++#define DDRSS_CTL_8_DATA 0x000186A0
++#define DDRSS_CTL_9_DATA 0x00000005
++#define DDRSS_CTL_10_DATA 0x00000064
++#define DDRSS_CTL_11_DATA 0x0004E200
++#define DDRSS_CTL_12_DATA 0x0030D400
++#define DDRSS_CTL_13_DATA 0x00000005
++#define DDRSS_CTL_14_DATA 0x00000C80
++#define DDRSS_CTL_15_DATA 0x0004E200
++#define DDRSS_CTL_16_DATA 0x0030D400
++#define DDRSS_CTL_17_DATA 0x00000005
++#define DDRSS_CTL_18_DATA 0x00000C80
++#define DDRSS_CTL_19_DATA 0x01010100
++#define DDRSS_CTL_20_DATA 0x01010100
++#define DDRSS_CTL_21_DATA 0x01000110
++#define DDRSS_CTL_22_DATA 0x02010002
++#define DDRSS_CTL_23_DATA 0x0000000A
++#define DDRSS_CTL_24_DATA 0x000186A0
++#define DDRSS_CTL_25_DATA 0x00000000
++#define DDRSS_CTL_26_DATA 0x00000000
++#define DDRSS_CTL_27_DATA 0x00000000
++#define DDRSS_CTL_28_DATA 0x00000000
++#define DDRSS_CTL_29_DATA 0x00020200
++#define DDRSS_CTL_30_DATA 0x00000000
++#define DDRSS_CTL_31_DATA 0x00000000
++#define DDRSS_CTL_32_DATA 0x00000000
++#define DDRSS_CTL_33_DATA 0x00000000
++#define DDRSS_CTL_34_DATA 0x08000010
++#define DDRSS_CTL_35_DATA 0x00004040
++#define DDRSS_CTL_36_DATA 0x00000000
++#define DDRSS_CTL_37_DATA 0x00000000
++#define DDRSS_CTL_38_DATA 0x00000000
++#define DDRSS_CTL_39_DATA 0x00000000
++#define DDRSS_CTL_40_DATA 0x0000040C
++#define DDRSS_CTL_41_DATA 0x00000000
++#define DDRSS_CTL_42_DATA 0x00000E38
++#define DDRSS_CTL_43_DATA 0x00000000
++#define DDRSS_CTL_44_DATA 0x00000E38
++#define DDRSS_CTL_45_DATA 0x00000000
++#define DDRSS_CTL_46_DATA 0x05000804
++#define DDRSS_CTL_47_DATA 0x00000700
++#define DDRSS_CTL_48_DATA 0x09090004
++#define DDRSS_CTL_49_DATA 0x00000303
++#define DDRSS_CTL_50_DATA 0x00620011
++#define DDRSS_CTL_51_DATA 0x09110045
++#define DDRSS_CTL_52_DATA 0x0000421D
++#define DDRSS_CTL_53_DATA 0x00620011
++#define DDRSS_CTL_54_DATA 0x09110045
++#define DDRSS_CTL_55_DATA 0x0900421D
++#define DDRSS_CTL_56_DATA 0x000A0A09
++#define DDRSS_CTL_57_DATA 0x040006DB
++#define DDRSS_CTL_58_DATA 0x090D2005
++#define DDRSS_CTL_59_DATA 0x00001710
++#define DDRSS_CTL_60_DATA 0x0C00DB60
++#define DDRSS_CTL_61_DATA 0x090D200D
++#define DDRSS_CTL_62_DATA 0x00001710
++#define DDRSS_CTL_63_DATA 0x0C00DB60
++#define DDRSS_CTL_64_DATA 0x0304200D
++#define DDRSS_CTL_65_DATA 0x04050002
++#define DDRSS_CTL_66_DATA 0x1F1E1F1E
++#define DDRSS_CTL_67_DATA 0x01010008
++#define DDRSS_CTL_68_DATA 0x043C3C07
++#define DDRSS_CTL_69_DATA 0x03222203
++#define DDRSS_CTL_70_DATA 0x00002222
++#define DDRSS_CTL_71_DATA 0x00000101
++#define DDRSS_CTL_72_DATA 0x00000000
++#define DDRSS_CTL_73_DATA 0x01000000
++#define DDRSS_CTL_74_DATA 0x00130803
++#define DDRSS_CTL_75_DATA 0x000000BB
++#define DDRSS_CTL_76_DATA 0x00000260
++#define DDRSS_CTL_77_DATA 0x00001858
++#define DDRSS_CTL_78_DATA 0x00000260
++#define DDRSS_CTL_79_DATA 0x00001858
++#define DDRSS_CTL_80_DATA 0x00000005
++#define DDRSS_CTL_81_DATA 0x0000000A
++#define DDRSS_CTL_82_DATA 0x00000010
++#define DDRSS_CTL_83_DATA 0x00000130
++#define DDRSS_CTL_84_DATA 0x00000304
++#define DDRSS_CTL_85_DATA 0x00000130
++#define DDRSS_CTL_86_DATA 0x00000304
++#define DDRSS_CTL_87_DATA 0x03004000
++#define DDRSS_CTL_88_DATA 0x00001201
++#define DDRSS_CTL_89_DATA 0x000C0005
++#define DDRSS_CTL_90_DATA 0x2108000C
++#define DDRSS_CTL_91_DATA 0x0A050521
++#define DDRSS_CTL_92_DATA 0x170C0803
++#define DDRSS_CTL_93_DATA 0x170C0803
++#define DDRSS_CTL_94_DATA 0x03010103
++#define DDRSS_CTL_95_DATA 0x00010301
++#define DDRSS_CTL_96_DATA 0x00140014
++#define DDRSS_CTL_97_DATA 0x026C026C
++#define DDRSS_CTL_98_DATA 0x026C026C
++#define DDRSS_CTL_99_DATA 0x00000000
++#define DDRSS_CTL_100_DATA 0x03030000
++#define DDRSS_CTL_101_DATA 0x05050501
++#define DDRSS_CTL_102_DATA 0x03031804
++#define DDRSS_CTL_103_DATA 0x0C080C08
++#define DDRSS_CTL_104_DATA 0x08030318
++#define DDRSS_CTL_105_DATA 0x030C080C
++#define DDRSS_CTL_106_DATA 0x00000303
++#define DDRSS_CTL_107_DATA 0x00000301
++#define DDRSS_CTL_108_DATA 0x00000001
++#define DDRSS_CTL_109_DATA 0x00000000
++#define DDRSS_CTL_110_DATA 0x40020100
++#define DDRSS_CTL_111_DATA 0x00038010
++#define DDRSS_CTL_112_DATA 0x00050004
++#define DDRSS_CTL_113_DATA 0x00000004
++#define DDRSS_CTL_114_DATA 0x00040003
++#define DDRSS_CTL_115_DATA 0x00040005
++#define DDRSS_CTL_116_DATA 0x00030000
++#define DDRSS_CTL_117_DATA 0x00050004
++#define DDRSS_CTL_118_DATA 0x00000004
++#define DDRSS_CTL_119_DATA 0x00002EC0
++#define DDRSS_CTL_120_DATA 0x00002EC0
++#define DDRSS_CTL_121_DATA 0x00002EC0
++#define DDRSS_CTL_122_DATA 0x00002EC0
++#define DDRSS_CTL_123_DATA 0x00002EC0
++#define DDRSS_CTL_124_DATA 0x00000000
++#define DDRSS_CTL_125_DATA 0x0000051D
++#define DDRSS_CTL_126_DATA 0x00061600
++#define DDRSS_CTL_127_DATA 0x00061600
++#define DDRSS_CTL_128_DATA 0x00061600
++#define DDRSS_CTL_129_DATA 0x00061600
++#define DDRSS_CTL_130_DATA 0x00061600
++#define DDRSS_CTL_131_DATA 0x00000000
++#define DDRSS_CTL_132_DATA 0x0000AA68
++#define DDRSS_CTL_133_DATA 0x00061600
++#define DDRSS_CTL_134_DATA 0x00061600
++#define DDRSS_CTL_135_DATA 0x00061600
++#define DDRSS_CTL_136_DATA 0x00061600
++#define DDRSS_CTL_137_DATA 0x00061600
++#define DDRSS_CTL_138_DATA 0x00000000
++#define DDRSS_CTL_139_DATA 0x0000AA68
++#define DDRSS_CTL_140_DATA 0x00000000
++#define DDRSS_CTL_141_DATA 0x00000000
++#define DDRSS_CTL_142_DATA 0x00000000
++#define DDRSS_CTL_143_DATA 0x00000000
++#define DDRSS_CTL_144_DATA 0x00000000
++#define DDRSS_CTL_145_DATA 0x00000000
++#define DDRSS_CTL_146_DATA 0x00000000
++#define DDRSS_CTL_147_DATA 0x00000000
++#define DDRSS_CTL_148_DATA 0x00000000
++#define DDRSS_CTL_149_DATA 0x00000000
++#define DDRSS_CTL_150_DATA 0x00000000
++#define DDRSS_CTL_151_DATA 0x00000000
++#define DDRSS_CTL_152_DATA 0x00000000
++#define DDRSS_CTL_153_DATA 0x00000000
++#define DDRSS_CTL_154_DATA 0x00000000
++#define DDRSS_CTL_155_DATA 0x00000000
++#define DDRSS_CTL_156_DATA 0x00000000
++#define DDRSS_CTL_157_DATA 0x00000000
++#define DDRSS_CTL_158_DATA 0x03050000
++#define DDRSS_CTL_159_DATA 0x03080308
++#define DDRSS_CTL_160_DATA 0x00000000
++#define DDRSS_CTL_161_DATA 0x08010000
++#define DDRSS_CTL_162_DATA 0x000E0808
++#define DDRSS_CTL_163_DATA 0x01000000
++#define DDRSS_CTL_164_DATA 0x0E080808
++#define DDRSS_CTL_165_DATA 0x00000000
++#define DDRSS_CTL_166_DATA 0x08080801
++#define DDRSS_CTL_167_DATA 0x0000080E
++#define DDRSS_CTL_168_DATA 0x00040003
++#define DDRSS_CTL_169_DATA 0x00000007
++#define DDRSS_CTL_170_DATA 0x00000000
++#define DDRSS_CTL_171_DATA 0x00000000
++#define DDRSS_CTL_172_DATA 0x00000000
++#define DDRSS_CTL_173_DATA 0x00000000
++#define DDRSS_CTL_174_DATA 0x00000000
++#define DDRSS_CTL_175_DATA 0x00000000
++#define DDRSS_CTL_176_DATA 0x01000000
++#define DDRSS_CTL_177_DATA 0x00000000
++#define DDRSS_CTL_178_DATA 0x00001700
++#define DDRSS_CTL_179_DATA 0x0000100E
++#define DDRSS_CTL_180_DATA 0x00000002
++#define DDRSS_CTL_181_DATA 0x00000000
++#define DDRSS_CTL_182_DATA 0x00000001
++#define DDRSS_CTL_183_DATA 0x00000002
++#define DDRSS_CTL_184_DATA 0x00000C00
++#define DDRSS_CTL_185_DATA 0x00008000
++#define DDRSS_CTL_186_DATA 0x00000C00
++#define DDRSS_CTL_187_DATA 0x00008000
++#define DDRSS_CTL_188_DATA 0x00000C00
++#define DDRSS_CTL_189_DATA 0x00008000
++#define DDRSS_CTL_190_DATA 0x00000000
++#define DDRSS_CTL_191_DATA 0x00000000
++#define DDRSS_CTL_192_DATA 0x00000000
++#define DDRSS_CTL_193_DATA 0x00000000
++#define DDRSS_CTL_194_DATA 0x00000000
++#define DDRSS_CTL_195_DATA 0x0005000A
++#define DDRSS_CTL_196_DATA 0x0404000D
++#define DDRSS_CTL_197_DATA 0x0000000D
++#define DDRSS_CTL_198_DATA 0x00A00140
++#define DDRSS_CTL_199_DATA 0x0C0C0190
++#define DDRSS_CTL_200_DATA 0x00000190
++#define DDRSS_CTL_201_DATA 0x00A00140
++#define DDRSS_CTL_202_DATA 0x0C0C0190
++#define DDRSS_CTL_203_DATA 0x00000190
++#define DDRSS_CTL_204_DATA 0x00000000
++#define DDRSS_CTL_205_DATA 0x00000000
++#define DDRSS_CTL_206_DATA 0x00000000
++#define DDRSS_CTL_207_DATA 0x00000000
++#define DDRSS_CTL_208_DATA 0x00000004
++#define DDRSS_CTL_209_DATA 0x00000000
++#define DDRSS_CTL_210_DATA 0x00000000
++#define DDRSS_CTL_211_DATA 0x00000054
++#define DDRSS_CTL_212_DATA 0x0000002D
++#define DDRSS_CTL_213_DATA 0x00000000
++#define DDRSS_CTL_214_DATA 0x00000054
++#define DDRSS_CTL_215_DATA 0x0000002D
++#define DDRSS_CTL_216_DATA 0x00000000
++#define DDRSS_CTL_217_DATA 0x00000004
++#define DDRSS_CTL_218_DATA 0x00000000
++#define DDRSS_CTL_219_DATA 0x00000000
++#define DDRSS_CTL_220_DATA 0x00000054
++#define DDRSS_CTL_221_DATA 0x0000002D
++#define DDRSS_CTL_222_DATA 0x00000000
++#define DDRSS_CTL_223_DATA 0x00000054
++#define DDRSS_CTL_224_DATA 0x0000002D
++#define DDRSS_CTL_225_DATA 0x00000000
++#define DDRSS_CTL_226_DATA 0x00000000
++#define DDRSS_CTL_227_DATA 0x00000029
++#define DDRSS_CTL_228_DATA 0x000000A9
++#define DDRSS_CTL_229_DATA 0x000000A9
++#define DDRSS_CTL_230_DATA 0x00000029
++#define DDRSS_CTL_231_DATA 0x000000A9
++#define DDRSS_CTL_232_DATA 0x000000A9
++#define DDRSS_CTL_233_DATA 0x00000000
++#define DDRSS_CTL_234_DATA 0x00000000
++#define DDRSS_CTL_235_DATA 0x00000000
++#define DDRSS_CTL_236_DATA 0x00000000
++#define DDRSS_CTL_237_DATA 0x00000000
++#define DDRSS_CTL_238_DATA 0x00000000
++#define DDRSS_CTL_239_DATA 0x00000000
++#define DDRSS_CTL_240_DATA 0x00000000
++#define DDRSS_CTL_241_DATA 0x00000000
++#define DDRSS_CTL_242_DATA 0x00000000
++#define DDRSS_CTL_243_DATA 0x00000000
++#define DDRSS_CTL_244_DATA 0x00000000
++#define DDRSS_CTL_245_DATA 0x00000000
++#define DDRSS_CTL_246_DATA 0x00000000
++#define DDRSS_CTL_247_DATA 0x00000000
++#define DDRSS_CTL_248_DATA 0x00000000
++#define DDRSS_CTL_249_DATA 0x00000000
++#define DDRSS_CTL_250_DATA 0x00000000
++#define DDRSS_CTL_251_DATA 0x00000000
++#define DDRSS_CTL_252_DATA 0x00000000
++#define DDRSS_CTL_253_DATA 0x00000000
++#define DDRSS_CTL_254_DATA 0x00000000
++#define DDRSS_CTL_255_DATA 0x00000000
++#define DDRSS_CTL_256_DATA 0x00000000
++#define DDRSS_CTL_257_DATA 0x35003535
++#define DDRSS_CTL_258_DATA 0x00002735
++#define DDRSS_CTL_259_DATA 0x00000027
++#define DDRSS_CTL_260_DATA 0x00000027
++#define DDRSS_CTL_261_DATA 0x00000027
++#define DDRSS_CTL_262_DATA 0x00000027
++#define DDRSS_CTL_263_DATA 0x00000027
++#define DDRSS_CTL_264_DATA 0x00000000
++#define DDRSS_CTL_265_DATA 0x00000000
++#define DDRSS_CTL_266_DATA 0x0000002B
++#define DDRSS_CTL_267_DATA 0x0000002B
++#define DDRSS_CTL_268_DATA 0x0000002B
++#define DDRSS_CTL_269_DATA 0x0000002B
++#define DDRSS_CTL_270_DATA 0x0000002B
++#define DDRSS_CTL_271_DATA 0x0000002B
++#define DDRSS_CTL_272_DATA 0x00000000
++#define DDRSS_CTL_273_DATA 0x00000000
++#define DDRSS_CTL_274_DATA 0x00000015
++#define DDRSS_CTL_275_DATA 0x00000015
++#define DDRSS_CTL_276_DATA 0x00000000
++#define DDRSS_CTL_277_DATA 0x00000015
++#define DDRSS_CTL_278_DATA 0x00000015
++#define DDRSS_CTL_279_DATA 0x00000020
++#define DDRSS_CTL_280_DATA 0x00010000
++#define DDRSS_CTL_281_DATA 0x00000100
++#define DDRSS_CTL_282_DATA 0x00000000
++#define DDRSS_CTL_283_DATA 0x00000000
++#define DDRSS_CTL_284_DATA 0x00000101
++#define DDRSS_CTL_285_DATA 0x00000000
++#define DDRSS_CTL_286_DATA 0x00000000
++#define DDRSS_CTL_287_DATA 0x00000000
++#define DDRSS_CTL_288_DATA 0x00000000
++#define DDRSS_CTL_289_DATA 0x00000000
++#define DDRSS_CTL_290_DATA 0x00000000
++#define DDRSS_CTL_291_DATA 0x00000000
++#define DDRSS_CTL_292_DATA 0x00000000
++#define DDRSS_CTL_293_DATA 0x00000000
++#define DDRSS_CTL_294_DATA 0x00000000
++#define DDRSS_CTL_295_DATA 0x00000000
++#define DDRSS_CTL_296_DATA 0x0C181511
++#define DDRSS_CTL_297_DATA 0x00000304
++#define DDRSS_CTL_298_DATA 0x00000000
++#define DDRSS_CTL_299_DATA 0x00000000
++#define DDRSS_CTL_300_DATA 0x00000000
++#define DDRSS_CTL_301_DATA 0x00000000
++#define DDRSS_CTL_302_DATA 0x00000000
++#define DDRSS_CTL_303_DATA 0x00000000
++#define DDRSS_CTL_304_DATA 0x00000000
++#define DDRSS_CTL_305_DATA 0x00000000
++#define DDRSS_CTL_306_DATA 0x00000000
++#define DDRSS_CTL_307_DATA 0x00000000
++#define DDRSS_CTL_308_DATA 0x00000000
++#define DDRSS_CTL_309_DATA 0x00000000
++#define DDRSS_CTL_310_DATA 0x00000000
++#define DDRSS_CTL_311_DATA 0x00020000
++#define DDRSS_CTL_312_DATA 0x00400100
++#define DDRSS_CTL_313_DATA 0x00080032
++#define DDRSS_CTL_314_DATA 0x01000200
++#define DDRSS_CTL_315_DATA 0x06400040
++#define DDRSS_CTL_316_DATA 0x00020030
++#define DDRSS_CTL_317_DATA 0x00400100
++#define DDRSS_CTL_318_DATA 0x00300640
++#define DDRSS_CTL_319_DATA 0x00030000
++#define DDRSS_CTL_320_DATA 0x00500050
++#define DDRSS_CTL_321_DATA 0x00000100
++#define DDRSS_CTL_322_DATA 0x01010000
++#define DDRSS_CTL_323_DATA 0x00000101
++#define DDRSS_CTL_324_DATA 0x1FFF0000
++#define DDRSS_CTL_325_DATA 0x000FFF00
++#define DDRSS_CTL_326_DATA 0x3FFF2000
++#define DDRSS_CTL_327_DATA 0x000FFF00
++#define DDRSS_CTL_328_DATA 0x0B000001
++#define DDRSS_CTL_329_DATA 0x0001FFFF
++#define DDRSS_CTL_330_DATA 0x01010101
++#define DDRSS_CTL_331_DATA 0x01010101
++#define DDRSS_CTL_332_DATA 0x00000118
++#define DDRSS_CTL_333_DATA 0x00000C03
++#define DDRSS_CTL_334_DATA 0x00040100
++#define DDRSS_CTL_335_DATA 0x00040100
++#define DDRSS_CTL_336_DATA 0x00000000
++#define DDRSS_CTL_337_DATA 0x00000000
++#define DDRSS_CTL_338_DATA 0x01030303
++#define DDRSS_CTL_339_DATA 0x00000001
++#define DDRSS_CTL_340_DATA 0x00000000
++#define DDRSS_CTL_341_DATA 0x00000000
++#define DDRSS_CTL_342_DATA 0x00000000
++#define DDRSS_CTL_343_DATA 0x00000000
++#define DDRSS_CTL_344_DATA 0x00000000
++#define DDRSS_CTL_345_DATA 0x00000000
++#define DDRSS_CTL_346_DATA 0x00000000
++#define DDRSS_CTL_347_DATA 0x00000000
++#define DDRSS_CTL_348_DATA 0x00000000
++#define DDRSS_CTL_349_DATA 0x00000000
++#define DDRSS_CTL_350_DATA 0x00000000
++#define DDRSS_CTL_351_DATA 0x00000000
++#define DDRSS_CTL_352_DATA 0x00000000
++#define DDRSS_CTL_353_DATA 0x00000000
++#define DDRSS_CTL_354_DATA 0x00000000
++#define DDRSS_CTL_355_DATA 0x00000000
++#define DDRSS_CTL_356_DATA 0x00000000
++#define DDRSS_CTL_357_DATA 0x00000000
++#define DDRSS_CTL_358_DATA 0x00000000
++#define DDRSS_CTL_359_DATA 0x00000000
++#define DDRSS_CTL_360_DATA 0x00000000
++#define DDRSS_CTL_361_DATA 0x00000000
++#define DDRSS_CTL_362_DATA 0x00000000
++#define DDRSS_CTL_363_DATA 0x00000000
++#define DDRSS_CTL_364_DATA 0x00000000
++#define DDRSS_CTL_365_DATA 0x00000000
++#define DDRSS_CTL_366_DATA 0x00000000
++#define DDRSS_CTL_367_DATA 0x00000000
++#define DDRSS_CTL_368_DATA 0x00000000
++#define DDRSS_CTL_369_DATA 0x00000000
++#define DDRSS_CTL_370_DATA 0x00000000
++#define DDRSS_CTL_371_DATA 0x00000000
++#define DDRSS_CTL_372_DATA 0x00000000
++#define DDRSS_CTL_373_DATA 0x00000000
++#define DDRSS_CTL_374_DATA 0x00000000
++#define DDRSS_CTL_375_DATA 0x00000000
++#define DDRSS_CTL_376_DATA 0x00000000
++#define DDRSS_CTL_377_DATA 0x00000000
++#define DDRSS_CTL_378_DATA 0x00000000
++#define DDRSS_CTL_379_DATA 0x00000000
++#define DDRSS_CTL_380_DATA 0x00000000
++#define DDRSS_CTL_381_DATA 0x00000000
++#define DDRSS_CTL_382_DATA 0x00000000
++#define DDRSS_CTL_383_DATA 0x01000101
++#define DDRSS_CTL_384_DATA 0x01010001
++#define DDRSS_CTL_385_DATA 0x00010101
++#define DDRSS_CTL_386_DATA 0x01080803
++#define DDRSS_CTL_387_DATA 0x05020201
++#define DDRSS_CTL_388_DATA 0x0C081818
++#define DDRSS_CTL_389_DATA 0x0008040C
++#define DDRSS_CTL_390_DATA 0x0B100406
++#define DDRSS_CTL_391_DATA 0x0B100406
++#define DDRSS_CTL_392_DATA 0x10100806
++#define DDRSS_CTL_393_DATA 0x01000000
++#define DDRSS_CTL_394_DATA 0x06030601
++#define DDRSS_CTL_395_DATA 0x04000103
++#define DDRSS_CTL_396_DATA 0x1B000004
++#define DDRSS_CTL_397_DATA 0x00000176
++#define DDRSS_CTL_398_DATA 0x00000200
++#define DDRSS_CTL_399_DATA 0x00000200
++#define DDRSS_CTL_400_DATA 0x00000200
++#define DDRSS_CTL_401_DATA 0x00000200
++#define DDRSS_CTL_402_DATA 0x00000693
++#define DDRSS_CTL_403_DATA 0x00000E9C
++#define DDRSS_CTL_404_DATA 0x03000202
++#define DDRSS_CTL_405_DATA 0x32200404
++#define DDRSS_CTL_406_DATA 0x000030B0
++#define DDRSS_CTL_407_DATA 0x00000200
++#define DDRSS_CTL_408_DATA 0x00000200
++#define DDRSS_CTL_409_DATA 0x00000200
++#define DDRSS_CTL_410_DATA 0x00000200
++#define DDRSS_CTL_411_DATA 0x0000DB18
++#define DDRSS_CTL_412_DATA 0x0001E6E0
++#define DDRSS_CTL_413_DATA 0x0F160402
++#define DDRSS_CTL_414_DATA 0x32200A07
++#define DDRSS_CTL_415_DATA 0x000030B0
++#define DDRSS_CTL_416_DATA 0x00000200
++#define DDRSS_CTL_417_DATA 0x00000200
++#define DDRSS_CTL_418_DATA 0x00000200
++#define DDRSS_CTL_419_DATA 0x00000200
++#define DDRSS_CTL_420_DATA 0x0000DB18
++#define DDRSS_CTL_421_DATA 0x0001E6E0
++#define DDRSS_CTL_422_DATA 0x0F160402
++#define DDRSS_CTL_423_DATA 0x00200A07
++#define DDRSS_CTL_424_DATA 0x00000000
++#define DDRSS_CTL_425_DATA 0x02000A00
++#define DDRSS_CTL_426_DATA 0x00050003
++#define DDRSS_CTL_427_DATA 0x00010101
++#define DDRSS_CTL_428_DATA 0x00010101
++#define DDRSS_CTL_429_DATA 0x00010001
++#define DDRSS_CTL_430_DATA 0x00000101
++#define DDRSS_CTL_431_DATA 0x02000201
++#define DDRSS_CTL_432_DATA 0x02010000
++#define DDRSS_CTL_433_DATA 0x06000200
++#define DDRSS_CTL_434_DATA 0x00001E1E
++#define DDRSS_PI_0_DATA 0x00000B00
++#define DDRSS_PI_1_DATA 0x00000000
++#define DDRSS_PI_2_DATA 0x00000000
++#define DDRSS_PI_3_DATA 0x01000000
++#define DDRSS_PI_4_DATA 0x00000001
++#define DDRSS_PI_5_DATA 0x00010064
++#define DDRSS_PI_6_DATA 0x00000000
++#define DDRSS_PI_7_DATA 0x00000000
++#define DDRSS_PI_8_DATA 0x00000000
++#define DDRSS_PI_9_DATA 0x00000000
++#define DDRSS_PI_10_DATA 0x00000000
++#define DDRSS_PI_11_DATA 0x00000002
++#define DDRSS_PI_12_DATA 0x00000005
++#define DDRSS_PI_13_DATA 0x000F0001
++#define DDRSS_PI_14_DATA 0x08000000
++#define DDRSS_PI_15_DATA 0x00010300
++#define DDRSS_PI_16_DATA 0x00000005
++#define DDRSS_PI_17_DATA 0x00000000
++#define DDRSS_PI_18_DATA 0x00000000
++#define DDRSS_PI_19_DATA 0x00000000
++#define DDRSS_PI_20_DATA 0x00000000
++#define DDRSS_PI_21_DATA 0x00000000
++#define DDRSS_PI_22_DATA 0x00000000
++#define DDRSS_PI_23_DATA 0x00000000
++#define DDRSS_PI_24_DATA 0x00000000
++#define DDRSS_PI_25_DATA 0x00000000
++#define DDRSS_PI_26_DATA 0x01010000
++#define DDRSS_PI_27_DATA 0x0A000100
++#define DDRSS_PI_28_DATA 0x00000028
++#define DDRSS_PI_29_DATA 0x0F000000
++#define DDRSS_PI_30_DATA 0x00320000
++#define DDRSS_PI_31_DATA 0x00000000
++#define DDRSS_PI_32_DATA 0x00000000
++#define DDRSS_PI_33_DATA 0x01010102
++#define DDRSS_PI_34_DATA 0x00000000
++#define DDRSS_PI_35_DATA 0x00000000
++#define DDRSS_PI_36_DATA 0x00000000
++#define DDRSS_PI_37_DATA 0x00000001
++#define DDRSS_PI_38_DATA 0x000000AA
++#define DDRSS_PI_39_DATA 0x00000055
++#define DDRSS_PI_40_DATA 0x000000B5
++#define DDRSS_PI_41_DATA 0x0000004A
++#define DDRSS_PI_42_DATA 0x00000056
++#define DDRSS_PI_43_DATA 0x000000A9
++#define DDRSS_PI_44_DATA 0x000000A9
++#define DDRSS_PI_45_DATA 0x000000B5
++#define DDRSS_PI_46_DATA 0x00000000
++#define DDRSS_PI_47_DATA 0x00000000
++#define DDRSS_PI_48_DATA 0x000F0F00
++#define DDRSS_PI_49_DATA 0x00000019
++#define DDRSS_PI_50_DATA 0x000007D0
++#define DDRSS_PI_51_DATA 0x00000300
++#define DDRSS_PI_52_DATA 0x00000000
++#define DDRSS_PI_53_DATA 0x00000000
++#define DDRSS_PI_54_DATA 0x01000000
++#define DDRSS_PI_55_DATA 0x00010101
++#define DDRSS_PI_56_DATA 0x01000000
++#define DDRSS_PI_57_DATA 0x03000000
++#define DDRSS_PI_58_DATA 0x00000000
++#define DDRSS_PI_59_DATA 0x0000170F
++#define DDRSS_PI_60_DATA 0x00000000
++#define DDRSS_PI_61_DATA 0x00000000
++#define DDRSS_PI_62_DATA 0x00000000
++#define DDRSS_PI_63_DATA 0x0A0A140A
++#define DDRSS_PI_64_DATA 0x10020101
++#define DDRSS_PI_65_DATA 0x01000210
++#define DDRSS_PI_66_DATA 0x05000404
++#define DDRSS_PI_67_DATA 0x00010001
++#define DDRSS_PI_68_DATA 0x0001000E
++#define DDRSS_PI_69_DATA 0x01010F00
++#define DDRSS_PI_70_DATA 0x00010000
++#define DDRSS_PI_71_DATA 0x00000034
++#define DDRSS_PI_72_DATA 0x00000000
++#define DDRSS_PI_73_DATA 0x00000000
++#define DDRSS_PI_74_DATA 0x0000FFFF
++#define DDRSS_PI_75_DATA 0x00000000
++#define DDRSS_PI_76_DATA 0x00000000
++#define DDRSS_PI_77_DATA 0x00000000
++#define DDRSS_PI_78_DATA 0x00000000
++#define DDRSS_PI_79_DATA 0x01000000
++#define DDRSS_PI_80_DATA 0x01010001
++#define DDRSS_PI_81_DATA 0x02000008
++#define DDRSS_PI_82_DATA 0x01000200
++#define DDRSS_PI_83_DATA 0x00000100
++#define DDRSS_PI_84_DATA 0x02000100
++#define DDRSS_PI_85_DATA 0x02000200
++#define DDRSS_PI_86_DATA 0x00000000
++#define DDRSS_PI_87_DATA 0x00000000
++#define DDRSS_PI_88_DATA 0x00000000
++#define DDRSS_PI_89_DATA 0x00000000
++#define DDRSS_PI_90_DATA 0x00000000
++#define DDRSS_PI_91_DATA 0x00000000
++#define DDRSS_PI_92_DATA 0x00000000
++#define DDRSS_PI_93_DATA 0x00000000
++#define DDRSS_PI_94_DATA 0x00000000
++#define DDRSS_PI_95_DATA 0x00000000
++#define DDRSS_PI_96_DATA 0x00000000
++#define DDRSS_PI_97_DATA 0x00000000
++#define DDRSS_PI_98_DATA 0x00000000
++#define DDRSS_PI_99_DATA 0x01000400
++#define DDRSS_PI_100_DATA 0x0E0D0F10
++#define DDRSS_PI_101_DATA 0x080A1413
++#define DDRSS_PI_102_DATA 0x01000009
++#define DDRSS_PI_103_DATA 0x00000302
++#define DDRSS_PI_104_DATA 0x00000008
++#define DDRSS_PI_105_DATA 0x08000000
++#define DDRSS_PI_106_DATA 0x00000100
++#define DDRSS_PI_107_DATA 0x00000000
++#define DDRSS_PI_108_DATA 0x0000AA00
++#define DDRSS_PI_109_DATA 0x00000000
++#define DDRSS_PI_110_DATA 0x00000000
++#define DDRSS_PI_111_DATA 0x00010000
++#define DDRSS_PI_112_DATA 0x00000000
++#define DDRSS_PI_113_DATA 0x00000000
++#define DDRSS_PI_114_DATA 0x00000000
++#define DDRSS_PI_115_DATA 0x00000000
++#define DDRSS_PI_116_DATA 0x00000000
++#define DDRSS_PI_117_DATA 0x00000000
++#define DDRSS_PI_118_DATA 0x00000000
++#define DDRSS_PI_119_DATA 0x00000000
++#define DDRSS_PI_120_DATA 0x00000000
++#define DDRSS_PI_121_DATA 0x00000000
++#define DDRSS_PI_122_DATA 0x00000000
++#define DDRSS_PI_123_DATA 0x00000000
++#define DDRSS_PI_124_DATA 0x00000000
++#define DDRSS_PI_125_DATA 0x00000000
++#define DDRSS_PI_126_DATA 0x00000000
++#define DDRSS_PI_127_DATA 0x00000000
++#define DDRSS_PI_128_DATA 0x00000000
++#define DDRSS_PI_129_DATA 0x00000000
++#define DDRSS_PI_130_DATA 0x00000000
++#define DDRSS_PI_131_DATA 0x00000000
++#define DDRSS_PI_132_DATA 0x00000000
++#define DDRSS_PI_133_DATA 0x00000000
++#define DDRSS_PI_134_DATA 0x00000000
++#define DDRSS_PI_135_DATA 0x00000000
++#define DDRSS_PI_136_DATA 0x00000008
++#define DDRSS_PI_137_DATA 0x00000000
++#define DDRSS_PI_138_DATA 0x00000000
++#define DDRSS_PI_139_DATA 0x00000000
++#define DDRSS_PI_140_DATA 0x00000000
++#define DDRSS_PI_141_DATA 0x00000000
++#define DDRSS_PI_142_DATA 0x00000000
++#define DDRSS_PI_143_DATA 0x00000000
++#define DDRSS_PI_144_DATA 0x00000000
++#define DDRSS_PI_145_DATA 0x00010000
++#define DDRSS_PI_146_DATA 0x00000000
++#define DDRSS_PI_147_DATA 0x00000000
++#define DDRSS_PI_148_DATA 0x0000000A
++#define DDRSS_PI_149_DATA 0x000186A0
++#define DDRSS_PI_150_DATA 0x00000100
++#define DDRSS_PI_151_DATA 0x00000000
++#define DDRSS_PI_152_DATA 0x00000000
++#define DDRSS_PI_153_DATA 0x00000000
++#define DDRSS_PI_154_DATA 0x00000000
++#define DDRSS_PI_155_DATA 0x00000000
++#define DDRSS_PI_156_DATA 0x01000000
++#define DDRSS_PI_157_DATA 0x00010003
++#define DDRSS_PI_158_DATA 0x02000101
++#define DDRSS_PI_159_DATA 0x01030001
++#define DDRSS_PI_160_DATA 0x00010400
++#define DDRSS_PI_161_DATA 0x06000105
++#define DDRSS_PI_162_DATA 0x01070001
++#define DDRSS_PI_163_DATA 0x00000000
++#define DDRSS_PI_164_DATA 0x00000000
++#define DDRSS_PI_165_DATA 0x00000000
++#define DDRSS_PI_166_DATA 0x00010001
++#define DDRSS_PI_167_DATA 0x00000000
++#define DDRSS_PI_168_DATA 0x00000000
++#define DDRSS_PI_169_DATA 0x00000000
++#define DDRSS_PI_170_DATA 0x00000000
++#define DDRSS_PI_171_DATA 0x00010000
++#define DDRSS_PI_172_DATA 0x00000004
++#define DDRSS_PI_173_DATA 0x00000000
++#define DDRSS_PI_174_DATA 0x00010000
++#define DDRSS_PI_175_DATA 0x00000000
++#define DDRSS_PI_176_DATA 0x00080000
++#define DDRSS_PI_177_DATA 0x00F000F0
++#define DDRSS_PI_178_DATA 0x00202001
++#define DDRSS_PI_179_DATA 0x00000034
++#define DDRSS_PI_180_DATA 0x00000057
++#define DDRSS_PI_181_DATA 0x00020057
++#define DDRSS_PI_182_DATA 0x02000200
++#define DDRSS_PI_183_DATA 0x00000004
++#define DDRSS_PI_184_DATA 0x00000E0C
++#define DDRSS_PI_185_DATA 0x000E3800
++#define DDRSS_PI_186_DATA 0x00380000
++#define DDRSS_PI_187_DATA 0x00000013
++#define DDRSS_PI_188_DATA 0x000000BB
++#define DDRSS_PI_189_DATA 0x00000260
++#define DDRSS_PI_190_DATA 0x00001858
++#define DDRSS_PI_191_DATA 0x00000260
++#define DDRSS_PI_192_DATA 0x04001858
++#define DDRSS_PI_193_DATA 0x01010404
++#define DDRSS_PI_194_DATA 0x00001501
++#define DDRSS_PI_195_DATA 0x00250025
++#define DDRSS_PI_196_DATA 0x01000100
++#define DDRSS_PI_197_DATA 0x00000100
++#define DDRSS_PI_198_DATA 0x00000000
++#define DDRSS_PI_199_DATA 0x05080803
++#define DDRSS_PI_200_DATA 0x01011818
++#define DDRSS_PI_201_DATA 0x01010101
++#define DDRSS_PI_202_DATA 0x000C0C0A
++#define DDRSS_PI_203_DATA 0x00000000
++#define DDRSS_PI_204_DATA 0x00000000
++#define DDRSS_PI_205_DATA 0x04000000
++#define DDRSS_PI_206_DATA 0x0A021010
++#define DDRSS_PI_207_DATA 0x0404020A
++#define DDRSS_PI_208_DATA 0x00090031
++#define DDRSS_PI_209_DATA 0x00190041
++#define DDRSS_PI_210_DATA 0x00190041
++#define DDRSS_PI_211_DATA 0x01010101
++#define DDRSS_PI_212_DATA 0x0003000D
++#define DDRSS_PI_213_DATA 0x00030190
++#define DDRSS_PI_214_DATA 0x01000190
++#define DDRSS_PI_215_DATA 0x000E000E
++#define DDRSS_PI_216_DATA 0x01910100
++#define DDRSS_PI_217_DATA 0x01000191
++#define DDRSS_PI_218_DATA 0x01910191
++#define DDRSS_PI_219_DATA 0x32103200
++#define DDRSS_PI_220_DATA 0x01013210
++#define DDRSS_PI_221_DATA 0x0A070601
++#define DDRSS_PI_222_DATA 0x180F090D
++#define DDRSS_PI_223_DATA 0x180F0911
++#define DDRSS_PI_224_DATA 0x000C0011
++#define DDRSS_PI_225_DATA 0x00001000
++#define DDRSS_PI_226_DATA 0x00000C00
++#define DDRSS_PI_227_DATA 0x00001000
++#define DDRSS_PI_228_DATA 0x00000C00
++#define DDRSS_PI_229_DATA 0x02001000
++#define DDRSS_PI_230_DATA 0x001E000D
++#define DDRSS_PI_231_DATA 0x001E0190
++#define DDRSS_PI_232_DATA 0x00000190
++#define DDRSS_PI_233_DATA 0x00001900
++#define DDRSS_PI_234_DATA 0x32000056
++#define DDRSS_PI_235_DATA 0x06000101
++#define DDRSS_PI_236_DATA 0x00230204
++#define DDRSS_PI_237_DATA 0x3212005A
++#define DDRSS_PI_238_DATA 0x13000101
++#define DDRSS_PI_239_DATA 0x00230A10
++#define DDRSS_PI_240_DATA 0x3212005A
++#define DDRSS_PI_241_DATA 0x13000101
++#define DDRSS_PI_242_DATA 0x00000A10
++#define DDRSS_PI_243_DATA 0x05030900
++#define DDRSS_PI_244_DATA 0x00040900
++#define DDRSS_PI_245_DATA 0x0000062B
++#define DDRSS_PI_246_DATA 0x20010004
++#define DDRSS_PI_247_DATA 0x0A0A0A03
++#define DDRSS_PI_248_DATA 0x220D0000
++#define DDRSS_PI_249_DATA 0x1F09001E
++#define DDRSS_PI_250_DATA 0x0000C570
++#define DDRSS_PI_251_DATA 0x20060045
++#define DDRSS_PI_252_DATA 0x17101718
++#define DDRSS_PI_253_DATA 0x220D0000
++#define DDRSS_PI_254_DATA 0x1F09001E
++#define DDRSS_PI_255_DATA 0x0000C570
++#define DDRSS_PI_256_DATA 0x20060045
++#define DDRSS_PI_257_DATA 0x17101718
++#define DDRSS_PI_258_DATA 0x00000000
++#define DDRSS_PI_259_DATA 0x00000176
++#define DDRSS_PI_260_DATA 0x00000E9C
++#define DDRSS_PI_261_DATA 0x000030B0
++#define DDRSS_PI_262_DATA 0x0001E6E0
++#define DDRSS_PI_263_DATA 0x000030B0
++#define DDRSS_PI_264_DATA 0x0001E6E0
++#define DDRSS_PI_265_DATA 0x026C0014
++#define DDRSS_PI_266_DATA 0x0303026C
++#define DDRSS_PI_267_DATA 0x00000003
++#define DDRSS_PI_268_DATA 0x00000000
++#define DDRSS_PI_269_DATA 0x08030503
++#define DDRSS_PI_270_DATA 0x00000803
++#define DDRSS_PI_271_DATA 0x00002710
++#define DDRSS_PI_272_DATA 0x000186A0
++#define DDRSS_PI_273_DATA 0x00000005
++#define DDRSS_PI_274_DATA 0x00000064
++#define DDRSS_PI_275_DATA 0x00000014
++#define DDRSS_PI_276_DATA 0x0004E200
++#define DDRSS_PI_277_DATA 0x000186A0
++#define DDRSS_PI_278_DATA 0x00000005
++#define DDRSS_PI_279_DATA 0x00000C80
++#define DDRSS_PI_280_DATA 0x0000026C
++#define DDRSS_PI_281_DATA 0x0004E200
++#define DDRSS_PI_282_DATA 0x000186A0
++#define DDRSS_PI_283_DATA 0x00000005
++#define DDRSS_PI_284_DATA 0x00000C80
++#define DDRSS_PI_285_DATA 0x0100026C
++#define DDRSS_PI_286_DATA 0x00320040
++#define DDRSS_PI_287_DATA 0x00010008
++#define DDRSS_PI_288_DATA 0x06400040
++#define DDRSS_PI_289_DATA 0x00010030
++#define DDRSS_PI_290_DATA 0x06400040
++#define DDRSS_PI_291_DATA 0x00000330
++#define DDRSS_PI_292_DATA 0x00280050
++#define DDRSS_PI_293_DATA 0x03040404
++#define DDRSS_PI_294_DATA 0x00000303
++#define DDRSS_PI_295_DATA 0x01010000
++#define DDRSS_PI_296_DATA 0x04040202
++#define DDRSS_PI_297_DATA 0x67670808
++#define DDRSS_PI_298_DATA 0x67676767
++#define DDRSS_PI_299_DATA 0x67676767
++#define DDRSS_PI_300_DATA 0x67676767
++#define DDRSS_PI_301_DATA 0x00006767
++#define DDRSS_PI_302_DATA 0x00000000
++#define DDRSS_PI_303_DATA 0x00000000
++#define DDRSS_PI_304_DATA 0x00000000
++#define DDRSS_PI_305_DATA 0x00000000
++#define DDRSS_PI_306_DATA 0x55000000
++#define DDRSS_PI_307_DATA 0x00000000
++#define DDRSS_PI_308_DATA 0x3C00005A
++#define DDRSS_PI_309_DATA 0x00005500
++#define DDRSS_PI_310_DATA 0x00005A00
++#define DDRSS_PI_311_DATA 0x0055003C
++#define DDRSS_PI_312_DATA 0x00000000
++#define DDRSS_PI_313_DATA 0x3C00005A
++#define DDRSS_PI_314_DATA 0x00005500
++#define DDRSS_PI_315_DATA 0x00005A00
++#define DDRSS_PI_316_DATA 0x1716153C
++#define DDRSS_PI_317_DATA 0x13121118
++#define DDRSS_PI_318_DATA 0x06050414
++#define DDRSS_PI_319_DATA 0x02010007
++#define DDRSS_PI_320_DATA 0x00000003
++#define DDRSS_PI_321_DATA 0x00000000
++#define DDRSS_PI_322_DATA 0x00000000
++#define DDRSS_PI_323_DATA 0x01000000
++#define DDRSS_PI_324_DATA 0x04020201
++#define DDRSS_PI_325_DATA 0x00080804
++#define DDRSS_PI_326_DATA 0x00000000
++#define DDRSS_PI_327_DATA 0x00000000
++#define DDRSS_PI_328_DATA 0x00000000
++#define DDRSS_PI_329_DATA 0x00000004
++#define DDRSS_PI_330_DATA 0x00000000
++#define DDRSS_PI_331_DATA 0x00000029
++#define DDRSS_PI_332_DATA 0x00000000
++#define DDRSS_PI_333_DATA 0x00000000
++#define DDRSS_PI_334_DATA 0x00000000
++#define DDRSS_PI_335_DATA 0x20002B27
++#define DDRSS_PI_336_DATA 0x00000000
++#define DDRSS_PI_337_DATA 0x00000054
++#define DDRSS_PI_338_DATA 0x0000002D
++#define DDRSS_PI_339_DATA 0x000000A9
++#define DDRSS_PI_340_DATA 0x00000000
++#define DDRSS_PI_341_DATA 0x00000000
++#define DDRSS_PI_342_DATA 0x35000000
++#define DDRSS_PI_343_DATA 0x20152B27
++#define DDRSS_PI_344_DATA 0x00000000
++#define DDRSS_PI_345_DATA 0x00000054
++#define DDRSS_PI_346_DATA 0x0000002D
++#define DDRSS_PI_347_DATA 0x000000A9
++#define DDRSS_PI_348_DATA 0x00000000
++#define DDRSS_PI_349_DATA 0x00000000
++#define DDRSS_PI_350_DATA 0x35000000
++#define DDRSS_PI_351_DATA 0x20152B27
++#define DDRSS_PI_352_DATA 0x00000000
++#define DDRSS_PI_353_DATA 0x00000004
++#define DDRSS_PI_354_DATA 0x00000000
++#define DDRSS_PI_355_DATA 0x00000029
++#define DDRSS_PI_356_DATA 0x00000000
++#define DDRSS_PI_357_DATA 0x00000000
++#define DDRSS_PI_358_DATA 0x00000000
++#define DDRSS_PI_359_DATA 0x20002B27
++#define DDRSS_PI_360_DATA 0x00000000
++#define DDRSS_PI_361_DATA 0x00000054
++#define DDRSS_PI_362_DATA 0x0000002D
++#define DDRSS_PI_363_DATA 0x000000A9
++#define DDRSS_PI_364_DATA 0x00000000
++#define DDRSS_PI_365_DATA 0x00000000
++#define DDRSS_PI_366_DATA 0x35000000
++#define DDRSS_PI_367_DATA 0x20152B27
++#define DDRSS_PI_368_DATA 0x00000000
++#define DDRSS_PI_369_DATA 0x00000054
++#define DDRSS_PI_370_DATA 0x0000002D
++#define DDRSS_PI_371_DATA 0x000000A9
++#define DDRSS_PI_372_DATA 0x00000000
++#define DDRSS_PI_373_DATA 0x00000000
++#define DDRSS_PI_374_DATA 0x35000000
++#define DDRSS_PI_375_DATA 0x20152B27
++#define DDRSS_PI_376_DATA 0x00000000
++#define DDRSS_PI_377_DATA 0x00000004
++#define DDRSS_PI_378_DATA 0x00000000
++#define DDRSS_PI_379_DATA 0x00000029
++#define DDRSS_PI_380_DATA 0x00000000
++#define DDRSS_PI_381_DATA 0x00000000
++#define DDRSS_PI_382_DATA 0x00000000
++#define DDRSS_PI_383_DATA 0x20002B27
++#define DDRSS_PI_384_DATA 0x00000000
++#define DDRSS_PI_385_DATA 0x00000054
++#define DDRSS_PI_386_DATA 0x0000002D
++#define DDRSS_PI_387_DATA 0x000000A9
++#define DDRSS_PI_388_DATA 0x00000000
++#define DDRSS_PI_389_DATA 0x00000000
++#define DDRSS_PI_390_DATA 0x35000000
++#define DDRSS_PI_391_DATA 0x20152B27
++#define DDRSS_PI_392_DATA 0x00000000
++#define DDRSS_PI_393_DATA 0x00000054
++#define DDRSS_PI_394_DATA 0x0000002D
++#define DDRSS_PI_395_DATA 0x000000A9
++#define DDRSS_PI_396_DATA 0x00000000
++#define DDRSS_PI_397_DATA 0x00000000
++#define DDRSS_PI_398_DATA 0x35000000
++#define DDRSS_PI_399_DATA 0x20152B27
++#define DDRSS_PI_400_DATA 0x00000000
++#define DDRSS_PI_401_DATA 0x00000004
++#define DDRSS_PI_402_DATA 0x00000000
++#define DDRSS_PI_403_DATA 0x00000029
++#define DDRSS_PI_404_DATA 0x00000000
++#define DDRSS_PI_405_DATA 0x00000000
++#define DDRSS_PI_406_DATA 0x00000000
++#define DDRSS_PI_407_DATA 0x20002B27
++#define DDRSS_PI_408_DATA 0x00000000
++#define DDRSS_PI_409_DATA 0x00000054
++#define DDRSS_PI_410_DATA 0x0000002D
++#define DDRSS_PI_411_DATA 0x000000A9
++#define DDRSS_PI_412_DATA 0x00000000
++#define DDRSS_PI_413_DATA 0x00000000
++#define DDRSS_PI_414_DATA 0x35000000
++#define DDRSS_PI_415_DATA 0x20152B27
++#define DDRSS_PI_416_DATA 0x00000000
++#define DDRSS_PI_417_DATA 0x00000054
++#define DDRSS_PI_418_DATA 0x0000002D
++#define DDRSS_PI_419_DATA 0x000000A9
++#define DDRSS_PI_420_DATA 0x00000000
++#define DDRSS_PI_421_DATA 0x00000000
++#define DDRSS_PI_422_DATA 0x35000000
++#define DDRSS_PI_423_DATA 0x20152B27
++#define DDRSS_PHY_0_DATA 0x04F00000
++#define DDRSS_PHY_1_DATA 0x00000000
++#define DDRSS_PHY_2_DATA 0x00030200
++#define DDRSS_PHY_3_DATA 0x00000000
++#define DDRSS_PHY_4_DATA 0x00000000
++#define DDRSS_PHY_5_DATA 0x01030000
++#define DDRSS_PHY_6_DATA 0x00010000
++#define DDRSS_PHY_7_DATA 0x01030004
++#define DDRSS_PHY_8_DATA 0x01000000
++#define DDRSS_PHY_9_DATA 0x00000000
++#define DDRSS_PHY_10_DATA 0x00000000
++#define DDRSS_PHY_11_DATA 0x00000000
++#define DDRSS_PHY_12_DATA 0x01010000
++#define DDRSS_PHY_13_DATA 0x00010000
++#define DDRSS_PHY_14_DATA 0x00C00001
++#define DDRSS_PHY_15_DATA 0x00CC0008
++#define DDRSS_PHY_16_DATA 0x00660601
++#define DDRSS_PHY_17_DATA 0x00000003
++#define DDRSS_PHY_18_DATA 0x00000000
++#define DDRSS_PHY_19_DATA 0x00000001
++#define DDRSS_PHY_20_DATA 0x0000AAAA
++#define DDRSS_PHY_21_DATA 0x00005555
++#define DDRSS_PHY_22_DATA 0x0000B5B5
++#define DDRSS_PHY_23_DATA 0x00004A4A
++#define DDRSS_PHY_24_DATA 0x00005656
++#define DDRSS_PHY_25_DATA 0x0000A9A9
++#define DDRSS_PHY_26_DATA 0x0000B7B7
++#define DDRSS_PHY_27_DATA 0x00004848
++#define DDRSS_PHY_28_DATA 0x00000000
++#define DDRSS_PHY_29_DATA 0x00000000
++#define DDRSS_PHY_30_DATA 0x08000000
++#define DDRSS_PHY_31_DATA 0x0F000008
++#define DDRSS_PHY_32_DATA 0x00000F0F
++#define DDRSS_PHY_33_DATA 0x00E4E400
++#define DDRSS_PHY_34_DATA 0x00071020
++#define DDRSS_PHY_35_DATA 0x000C0020
++#define DDRSS_PHY_36_DATA 0x00062000
++#define DDRSS_PHY_37_DATA 0x00000000
++#define DDRSS_PHY_38_DATA 0x55555555
++#define DDRSS_PHY_39_DATA 0xAAAAAAAA
++#define DDRSS_PHY_40_DATA 0x55555555
++#define DDRSS_PHY_41_DATA 0xAAAAAAAA
++#define DDRSS_PHY_42_DATA 0x00005555
++#define DDRSS_PHY_43_DATA 0x01000100
++#define DDRSS_PHY_44_DATA 0x00800180
++#define DDRSS_PHY_45_DATA 0x00000001
++#define DDRSS_PHY_46_DATA 0x00000000
++#define DDRSS_PHY_47_DATA 0x00000000
++#define DDRSS_PHY_48_DATA 0x00000000
++#define DDRSS_PHY_49_DATA 0x00000000
++#define DDRSS_PHY_50_DATA 0x00000000
++#define DDRSS_PHY_51_DATA 0x00000000
++#define DDRSS_PHY_52_DATA 0x00000000
++#define DDRSS_PHY_53_DATA 0x00000000
++#define DDRSS_PHY_54_DATA 0x00000000
++#define DDRSS_PHY_55_DATA 0x00000000
++#define DDRSS_PHY_56_DATA 0x00000000
++#define DDRSS_PHY_57_DATA 0x00000000
++#define DDRSS_PHY_58_DATA 0x00000000
++#define DDRSS_PHY_59_DATA 0x00000000
++#define DDRSS_PHY_60_DATA 0x00000000
++#define DDRSS_PHY_61_DATA 0x00000000
++#define DDRSS_PHY_62_DATA 0x00000000
++#define DDRSS_PHY_63_DATA 0x00000000
++#define DDRSS_PHY_64_DATA 0x00000000
++#define DDRSS_PHY_65_DATA 0x00000000
++#define DDRSS_PHY_66_DATA 0x00000000
++#define DDRSS_PHY_67_DATA 0x00000004
++#define DDRSS_PHY_68_DATA 0x00000000
++#define DDRSS_PHY_69_DATA 0x00000000
++#define DDRSS_PHY_70_DATA 0x00000000
++#define DDRSS_PHY_71_DATA 0x00000000
++#define DDRSS_PHY_72_DATA 0x00000000
++#define DDRSS_PHY_73_DATA 0x00000000
++#define DDRSS_PHY_74_DATA 0x081F07FF
++#define DDRSS_PHY_75_DATA 0x10200080
++#define DDRSS_PHY_76_DATA 0x00000008
++#define DDRSS_PHY_77_DATA 0x00000401
++#define DDRSS_PHY_78_DATA 0x00000000
++#define DDRSS_PHY_79_DATA 0x01CC0B01
++#define DDRSS_PHY_80_DATA 0x1003CC0B
++#define DDRSS_PHY_81_DATA 0x20000140
++#define DDRSS_PHY_82_DATA 0x07FF0200
++#define DDRSS_PHY_83_DATA 0x0000DD01
++#define DDRSS_PHY_84_DATA 0x00100303
++#define DDRSS_PHY_85_DATA 0x00000000
++#define DDRSS_PHY_86_DATA 0x00000000
++#define DDRSS_PHY_87_DATA 0x00031000
++#define DDRSS_PHY_88_DATA 0x00100010
++#define DDRSS_PHY_89_DATA 0x00100010
++#define DDRSS_PHY_90_DATA 0x00100010
++#define DDRSS_PHY_91_DATA 0x00100010
++#define DDRSS_PHY_92_DATA 0x02000010
++#define DDRSS_PHY_93_DATA 0x00000004
++#define DDRSS_PHY_94_DATA 0x51516042
++#define DDRSS_PHY_95_DATA 0x31C06000
++#define DDRSS_PHY_96_DATA 0x07AB0340
++#define DDRSS_PHY_97_DATA 0x00C0C001
++#define DDRSS_PHY_98_DATA 0x0B000000
++#define DDRSS_PHY_99_DATA 0x000B0A0A
++#define DDRSS_PHY_100_DATA 0x42100010
++#define DDRSS_PHY_101_DATA 0x010C073E
++#define DDRSS_PHY_102_DATA 0x000F0C2D
++#define DDRSS_PHY_103_DATA 0x01000140
++#define DDRSS_PHY_104_DATA 0x00F50120
++#define DDRSS_PHY_105_DATA 0x00000C00
++#define DDRSS_PHY_106_DATA 0x00000299
++#define DDRSS_PHY_107_DATA 0x00030200
++#define DDRSS_PHY_108_DATA 0x02800000
++#define DDRSS_PHY_109_DATA 0x80800000
++#define DDRSS_PHY_110_DATA 0x000B2010
++#define DDRSS_PHY_111_DATA 0x32570186
++#define DDRSS_PHY_112_DATA 0x00000004
++#define DDRSS_PHY_113_DATA 0x04190419
++#define DDRSS_PHY_114_DATA 0x04190419
++#define DDRSS_PHY_115_DATA 0x04190419
++#define DDRSS_PHY_116_DATA 0x04190419
++#define DDRSS_PHY_117_DATA 0x00000419
++#define DDRSS_PHY_118_DATA 0x0000A000
++#define DDRSS_PHY_119_DATA 0x00A000A0
++#define DDRSS_PHY_120_DATA 0x00A000A0
++#define DDRSS_PHY_121_DATA 0x00A000A0
++#define DDRSS_PHY_122_DATA 0x00A000A0
++#define DDRSS_PHY_123_DATA 0x00A000A0
++#define DDRSS_PHY_124_DATA 0x00A000A0
++#define DDRSS_PHY_125_DATA 0x00A000A0
++#define DDRSS_PHY_126_DATA 0x00A000A0
++#define DDRSS_PHY_127_DATA 0x01E600A0
++#define DDRSS_PHY_128_DATA 0x01000000
++#define DDRSS_PHY_129_DATA 0x00000000
++#define DDRSS_PHY_130_DATA 0x00000000
++#define DDRSS_PHY_131_DATA 0x00080200
++#define DDRSS_PHY_132_DATA 0x00000000
++#define DDRSS_PHY_133_DATA 0x20202020
++#define DDRSS_PHY_134_DATA 0x20202020
++#define DDRSS_PHY_135_DATA 0xF0F02020
++#define DDRSS_PHY_136_DATA 0x00000000
++#define DDRSS_PHY_137_DATA 0x00000000
++#define DDRSS_PHY_138_DATA 0x00000000
++#define DDRSS_PHY_139_DATA 0x00000000
++#define DDRSS_PHY_140_DATA 0x00000000
++#define DDRSS_PHY_141_DATA 0x00000000
++#define DDRSS_PHY_142_DATA 0x00000000
++#define DDRSS_PHY_143_DATA 0x00000000
++#define DDRSS_PHY_144_DATA 0x00000000
++#define DDRSS_PHY_145_DATA 0x00000000
++#define DDRSS_PHY_146_DATA 0x00000000
++#define DDRSS_PHY_147_DATA 0x00000000
++#define DDRSS_PHY_148_DATA 0x00000000
++#define DDRSS_PHY_149_DATA 0x00000000
++#define DDRSS_PHY_150_DATA 0x00000000
++#define DDRSS_PHY_151_DATA 0x00000000
++#define DDRSS_PHY_152_DATA 0x00000000
++#define DDRSS_PHY_153_DATA 0x00000000
++#define DDRSS_PHY_154_DATA 0x00000000
++#define DDRSS_PHY_155_DATA 0x00000000
++#define DDRSS_PHY_156_DATA 0x00000000
++#define DDRSS_PHY_157_DATA 0x00000000
++#define DDRSS_PHY_158_DATA 0x00000000
++#define DDRSS_PHY_159_DATA 0x00000000
++#define DDRSS_PHY_160_DATA 0x00000000
++#define DDRSS_PHY_161_DATA 0x00000000
++#define DDRSS_PHY_162_DATA 0x00000000
++#define DDRSS_PHY_163_DATA 0x00000000
++#define DDRSS_PHY_164_DATA 0x00000000
++#define DDRSS_PHY_165_DATA 0x00000000
++#define DDRSS_PHY_166_DATA 0x00000000
++#define DDRSS_PHY_167_DATA 0x00000000
++#define DDRSS_PHY_168_DATA 0x00000000
++#define DDRSS_PHY_169_DATA 0x00000000
++#define DDRSS_PHY_170_DATA 0x00000000
++#define DDRSS_PHY_171_DATA 0x00000000
++#define DDRSS_PHY_172_DATA 0x00000000
++#define DDRSS_PHY_173_DATA 0x00000000
++#define DDRSS_PHY_174_DATA 0x00000000
++#define DDRSS_PHY_175_DATA 0x00000000
++#define DDRSS_PHY_176_DATA 0x00000000
++#define DDRSS_PHY_177_DATA 0x00000000
++#define DDRSS_PHY_178_DATA 0x00000000
++#define DDRSS_PHY_179_DATA 0x00000000
++#define DDRSS_PHY_180_DATA 0x00000000
++#define DDRSS_PHY_181_DATA 0x00000000
++#define DDRSS_PHY_182_DATA 0x00000000
++#define DDRSS_PHY_183_DATA 0x00000000
++#define DDRSS_PHY_184_DATA 0x00000000
++#define DDRSS_PHY_185_DATA 0x00000000
++#define DDRSS_PHY_186_DATA 0x00000000
++#define DDRSS_PHY_187_DATA 0x00000000
++#define DDRSS_PHY_188_DATA 0x00000000
++#define DDRSS_PHY_189_DATA 0x00000000
++#define DDRSS_PHY_190_DATA 0x00000000
++#define DDRSS_PHY_191_DATA 0x00000000
++#define DDRSS_PHY_192_DATA 0x00000000
++#define DDRSS_PHY_193_DATA 0x00000000
++#define DDRSS_PHY_194_DATA 0x00000000
++#define DDRSS_PHY_195_DATA 0x00000000
++#define DDRSS_PHY_196_DATA 0x00000000
++#define DDRSS_PHY_197_DATA 0x00000000
++#define DDRSS_PHY_198_DATA 0x00000000
++#define DDRSS_PHY_199_DATA 0x00000000
++#define DDRSS_PHY_200_DATA 0x00000000
++#define DDRSS_PHY_201_DATA 0x00000000
++#define DDRSS_PHY_202_DATA 0x00000000
++#define DDRSS_PHY_203_DATA 0x00000000
++#define DDRSS_PHY_204_DATA 0x00000000
++#define DDRSS_PHY_205_DATA 0x00000000
++#define DDRSS_PHY_206_DATA 0x00000000
++#define DDRSS_PHY_207_DATA 0x00000000
++#define DDRSS_PHY_208_DATA 0x00000000
++#define DDRSS_PHY_209_DATA 0x00000000
++#define DDRSS_PHY_210_DATA 0x00000000
++#define DDRSS_PHY_211_DATA 0x00000000
++#define DDRSS_PHY_212_DATA 0x00000000
++#define DDRSS_PHY_213_DATA 0x00000000
++#define DDRSS_PHY_214_DATA 0x00000000
++#define DDRSS_PHY_215_DATA 0x00000000
++#define DDRSS_PHY_216_DATA 0x00000000
++#define DDRSS_PHY_217_DATA 0x00000000
++#define DDRSS_PHY_218_DATA 0x00000000
++#define DDRSS_PHY_219_DATA 0x00000000
++#define DDRSS_PHY_220_DATA 0x00000000
++#define DDRSS_PHY_221_DATA 0x00000000
++#define DDRSS_PHY_222_DATA 0x00000000
++#define DDRSS_PHY_223_DATA 0x00000000
++#define DDRSS_PHY_224_DATA 0x00000000
++#define DDRSS_PHY_225_DATA 0x00000000
++#define DDRSS_PHY_226_DATA 0x00000000
++#define DDRSS_PHY_227_DATA 0x00000000
++#define DDRSS_PHY_228_DATA 0x00000000
++#define DDRSS_PHY_229_DATA 0x00000000
++#define DDRSS_PHY_230_DATA 0x00000000
++#define DDRSS_PHY_231_DATA 0x00000000
++#define DDRSS_PHY_232_DATA 0x00000000
++#define DDRSS_PHY_233_DATA 0x00000000
++#define DDRSS_PHY_234_DATA 0x00000000
++#define DDRSS_PHY_235_DATA 0x00000000
++#define DDRSS_PHY_236_DATA 0x00000000
++#define DDRSS_PHY_237_DATA 0x00000000
++#define DDRSS_PHY_238_DATA 0x00000000
++#define DDRSS_PHY_239_DATA 0x00000000
++#define DDRSS_PHY_240_DATA 0x00000000
++#define DDRSS_PHY_241_DATA 0x00000000
++#define DDRSS_PHY_242_DATA 0x00000000
++#define DDRSS_PHY_243_DATA 0x00000000
++#define DDRSS_PHY_244_DATA 0x00000000
++#define DDRSS_PHY_245_DATA 0x00000000
++#define DDRSS_PHY_246_DATA 0x00000000
++#define DDRSS_PHY_247_DATA 0x00000000
++#define DDRSS_PHY_248_DATA 0x00000000
++#define DDRSS_PHY_249_DATA 0x00000000
++#define DDRSS_PHY_250_DATA 0x00000000
++#define DDRSS_PHY_251_DATA 0x00000000
++#define DDRSS_PHY_252_DATA 0x00000000
++#define DDRSS_PHY_253_DATA 0x00000000
++#define DDRSS_PHY_254_DATA 0x00000000
++#define DDRSS_PHY_255_DATA 0x00000000
++#define DDRSS_PHY_256_DATA 0x04F00000
++#define DDRSS_PHY_257_DATA 0x00000000
++#define DDRSS_PHY_258_DATA 0x00030200
++#define DDRSS_PHY_259_DATA 0x00000000
++#define DDRSS_PHY_260_DATA 0x00000000
++#define DDRSS_PHY_261_DATA 0x01030000
++#define DDRSS_PHY_262_DATA 0x00010000
++#define DDRSS_PHY_263_DATA 0x01030004
++#define DDRSS_PHY_264_DATA 0x01000000
++#define DDRSS_PHY_265_DATA 0x00000000
++#define DDRSS_PHY_266_DATA 0x00000000
++#define DDRSS_PHY_267_DATA 0x00000000
++#define DDRSS_PHY_268_DATA 0x01010000
++#define DDRSS_PHY_269_DATA 0x00010000
++#define DDRSS_PHY_270_DATA 0x00C00001
++#define DDRSS_PHY_271_DATA 0x00CC0008
++#define DDRSS_PHY_272_DATA 0x00660601
++#define DDRSS_PHY_273_DATA 0x00000003
++#define DDRSS_PHY_274_DATA 0x00000000
++#define DDRSS_PHY_275_DATA 0x00000001
++#define DDRSS_PHY_276_DATA 0x0000AAAA
++#define DDRSS_PHY_277_DATA 0x00005555
++#define DDRSS_PHY_278_DATA 0x0000B5B5
++#define DDRSS_PHY_279_DATA 0x00004A4A
++#define DDRSS_PHY_280_DATA 0x00005656
++#define DDRSS_PHY_281_DATA 0x0000A9A9
++#define DDRSS_PHY_282_DATA 0x0000B7B7
++#define DDRSS_PHY_283_DATA 0x00004848
++#define DDRSS_PHY_284_DATA 0x00000000
++#define DDRSS_PHY_285_DATA 0x00000000
++#define DDRSS_PHY_286_DATA 0x08000000
++#define DDRSS_PHY_287_DATA 0x0F000008
++#define DDRSS_PHY_288_DATA 0x00000F0F
++#define DDRSS_PHY_289_DATA 0x00E4E400
++#define DDRSS_PHY_290_DATA 0x00071020
++#define DDRSS_PHY_291_DATA 0x000C0020
++#define DDRSS_PHY_292_DATA 0x00062000
++#define DDRSS_PHY_293_DATA 0x00000000
++#define DDRSS_PHY_294_DATA 0x55555555
++#define DDRSS_PHY_295_DATA 0xAAAAAAAA
++#define DDRSS_PHY_296_DATA 0x55555555
++#define DDRSS_PHY_297_DATA 0xAAAAAAAA
++#define DDRSS_PHY_298_DATA 0x00005555
++#define DDRSS_PHY_299_DATA 0x01000100
++#define DDRSS_PHY_300_DATA 0x00800180
++#define DDRSS_PHY_301_DATA 0x00000000
++#define DDRSS_PHY_302_DATA 0x00000000
++#define DDRSS_PHY_303_DATA 0x00000000
++#define DDRSS_PHY_304_DATA 0x00000000
++#define DDRSS_PHY_305_DATA 0x00000000
++#define DDRSS_PHY_306_DATA 0x00000000
++#define DDRSS_PHY_307_DATA 0x00000000
++#define DDRSS_PHY_308_DATA 0x00000000
++#define DDRSS_PHY_309_DATA 0x00000000
++#define DDRSS_PHY_310_DATA 0x00000000
++#define DDRSS_PHY_311_DATA 0x00000000
++#define DDRSS_PHY_312_DATA 0x00000000
++#define DDRSS_PHY_313_DATA 0x00000000
++#define DDRSS_PHY_314_DATA 0x00000000
++#define DDRSS_PHY_315_DATA 0x00000000
++#define DDRSS_PHY_316_DATA 0x00000000
++#define DDRSS_PHY_317_DATA 0x00000000
++#define DDRSS_PHY_318_DATA 0x00000000
++#define DDRSS_PHY_319_DATA 0x00000000
++#define DDRSS_PHY_320_DATA 0x00000000
++#define DDRSS_PHY_321_DATA 0x00000000
++#define DDRSS_PHY_322_DATA 0x00000000
++#define DDRSS_PHY_323_DATA 0x00000004
++#define DDRSS_PHY_324_DATA 0x00000000
++#define DDRSS_PHY_325_DATA 0x00000000
++#define DDRSS_PHY_326_DATA 0x00000000
++#define DDRSS_PHY_327_DATA 0x00000000
++#define DDRSS_PHY_328_DATA 0x00000000
++#define DDRSS_PHY_329_DATA 0x00000000
++#define DDRSS_PHY_330_DATA 0x081F07FF
++#define DDRSS_PHY_331_DATA 0x10200080
++#define DDRSS_PHY_332_DATA 0x00000008
++#define DDRSS_PHY_333_DATA 0x00000401
++#define DDRSS_PHY_334_DATA 0x00000000
++#define DDRSS_PHY_335_DATA 0x01CC0B01
++#define DDRSS_PHY_336_DATA 0x1003CC0B
++#define DDRSS_PHY_337_DATA 0x20000140
++#define DDRSS_PHY_338_DATA 0x07FF0200
++#define DDRSS_PHY_339_DATA 0x0000DD01
++#define DDRSS_PHY_340_DATA 0x00100303
++#define DDRSS_PHY_341_DATA 0x00000000
++#define DDRSS_PHY_342_DATA 0x00000000
++#define DDRSS_PHY_343_DATA 0x00031000
++#define DDRSS_PHY_344_DATA 0x00100010
++#define DDRSS_PHY_345_DATA 0x00100010
++#define DDRSS_PHY_346_DATA 0x00100010
++#define DDRSS_PHY_347_DATA 0x00100010
++#define DDRSS_PHY_348_DATA 0x02000010
++#define DDRSS_PHY_349_DATA 0x00000004
++#define DDRSS_PHY_350_DATA 0x51516042
++#define DDRSS_PHY_351_DATA 0x31C06000
++#define DDRSS_PHY_352_DATA 0x07AB0340
++#define DDRSS_PHY_353_DATA 0x00C0C001
++#define DDRSS_PHY_354_DATA 0x0B000000
++#define DDRSS_PHY_355_DATA 0x000B0A0A
++#define DDRSS_PHY_356_DATA 0x42100010
++#define DDRSS_PHY_357_DATA 0x010C073E
++#define DDRSS_PHY_358_DATA 0x000F0C2D
++#define DDRSS_PHY_359_DATA 0x01000140
++#define DDRSS_PHY_360_DATA 0x00F50120
++#define DDRSS_PHY_361_DATA 0x00000C00
++#define DDRSS_PHY_362_DATA 0x00000299
++#define DDRSS_PHY_363_DATA 0x00030200
++#define DDRSS_PHY_364_DATA 0x02800000
++#define DDRSS_PHY_365_DATA 0x80800000
++#define DDRSS_PHY_366_DATA 0x000B2010
++#define DDRSS_PHY_367_DATA 0x17520684
++#define DDRSS_PHY_368_DATA 0x00000003
++#define DDRSS_PHY_369_DATA 0x04190419
++#define DDRSS_PHY_370_DATA 0x04190419
++#define DDRSS_PHY_371_DATA 0x04190419
++#define DDRSS_PHY_372_DATA 0x04190419
++#define DDRSS_PHY_373_DATA 0x00000419
++#define DDRSS_PHY_374_DATA 0x0000A000
++#define DDRSS_PHY_375_DATA 0x00A000A0
++#define DDRSS_PHY_376_DATA 0x00A000A0
++#define DDRSS_PHY_377_DATA 0x00A000A0
++#define DDRSS_PHY_378_DATA 0x00A000A0
++#define DDRSS_PHY_379_DATA 0x00A000A0
++#define DDRSS_PHY_380_DATA 0x00A000A0
++#define DDRSS_PHY_381_DATA 0x00A000A0
++#define DDRSS_PHY_382_DATA 0x00A000A0
++#define DDRSS_PHY_383_DATA 0x01E600A0
++#define DDRSS_PHY_384_DATA 0x01000000
++#define DDRSS_PHY_385_DATA 0x00000000
++#define DDRSS_PHY_386_DATA 0x00000000
++#define DDRSS_PHY_387_DATA 0x00080200
++#define DDRSS_PHY_388_DATA 0x00000000
++#define DDRSS_PHY_389_DATA 0x20202020
++#define DDRSS_PHY_390_DATA 0x20202020
++#define DDRSS_PHY_391_DATA 0xF0F02020
++#define DDRSS_PHY_392_DATA 0x00000000
++#define DDRSS_PHY_393_DATA 0x00000000
++#define DDRSS_PHY_394_DATA 0x00000000
++#define DDRSS_PHY_395_DATA 0x00000000
++#define DDRSS_PHY_396_DATA 0x00000000
++#define DDRSS_PHY_397_DATA 0x00000000
++#define DDRSS_PHY_398_DATA 0x00000000
++#define DDRSS_PHY_399_DATA 0x00000000
++#define DDRSS_PHY_400_DATA 0x00000000
++#define DDRSS_PHY_401_DATA 0x00000000
++#define DDRSS_PHY_402_DATA 0x00000000
++#define DDRSS_PHY_403_DATA 0x00000000
++#define DDRSS_PHY_404_DATA 0x00000000
++#define DDRSS_PHY_405_DATA 0x00000000
++#define DDRSS_PHY_406_DATA 0x00000000
++#define DDRSS_PHY_407_DATA 0x00000000
++#define DDRSS_PHY_408_DATA 0x00000000
++#define DDRSS_PHY_409_DATA 0x00000000
++#define DDRSS_PHY_410_DATA 0x00000000
++#define DDRSS_PHY_411_DATA 0x00000000
++#define DDRSS_PHY_412_DATA 0x00000000
++#define DDRSS_PHY_413_DATA 0x00000000
++#define DDRSS_PHY_414_DATA 0x00000000
++#define DDRSS_PHY_415_DATA 0x00000000
++#define DDRSS_PHY_416_DATA 0x00000000
++#define DDRSS_PHY_417_DATA 0x00000000
++#define DDRSS_PHY_418_DATA 0x00000000
++#define DDRSS_PHY_419_DATA 0x00000000
++#define DDRSS_PHY_420_DATA 0x00000000
++#define DDRSS_PHY_421_DATA 0x00000000
++#define DDRSS_PHY_422_DATA 0x00000000
++#define DDRSS_PHY_423_DATA 0x00000000
++#define DDRSS_PHY_424_DATA 0x00000000
++#define DDRSS_PHY_425_DATA 0x00000000
++#define DDRSS_PHY_426_DATA 0x00000000
++#define DDRSS_PHY_427_DATA 0x00000000
++#define DDRSS_PHY_428_DATA 0x00000000
++#define DDRSS_PHY_429_DATA 0x00000000
++#define DDRSS_PHY_430_DATA 0x00000000
++#define DDRSS_PHY_431_DATA 0x00000000
++#define DDRSS_PHY_432_DATA 0x00000000
++#define DDRSS_PHY_433_DATA 0x00000000
++#define DDRSS_PHY_434_DATA 0x00000000
++#define DDRSS_PHY_435_DATA 0x00000000
++#define DDRSS_PHY_436_DATA 0x00000000
++#define DDRSS_PHY_437_DATA 0x00000000
++#define DDRSS_PHY_438_DATA 0x00000000
++#define DDRSS_PHY_439_DATA 0x00000000
++#define DDRSS_PHY_440_DATA 0x00000000
++#define DDRSS_PHY_441_DATA 0x00000000
++#define DDRSS_PHY_442_DATA 0x00000000
++#define DDRSS_PHY_443_DATA 0x00000000
++#define DDRSS_PHY_444_DATA 0x00000000
++#define DDRSS_PHY_445_DATA 0x00000000
++#define DDRSS_PHY_446_DATA 0x00000000
++#define DDRSS_PHY_447_DATA 0x00000000
++#define DDRSS_PHY_448_DATA 0x00000000
++#define DDRSS_PHY_449_DATA 0x00000000
++#define DDRSS_PHY_450_DATA 0x00000000
++#define DDRSS_PHY_451_DATA 0x00000000
++#define DDRSS_PHY_452_DATA 0x00000000
++#define DDRSS_PHY_453_DATA 0x00000000
++#define DDRSS_PHY_454_DATA 0x00000000
++#define DDRSS_PHY_455_DATA 0x00000000
++#define DDRSS_PHY_456_DATA 0x00000000
++#define DDRSS_PHY_457_DATA 0x00000000
++#define DDRSS_PHY_458_DATA 0x00000000
++#define DDRSS_PHY_459_DATA 0x00000000
++#define DDRSS_PHY_460_DATA 0x00000000
++#define DDRSS_PHY_461_DATA 0x00000000
++#define DDRSS_PHY_462_DATA 0x00000000
++#define DDRSS_PHY_463_DATA 0x00000000
++#define DDRSS_PHY_464_DATA 0x00000000
++#define DDRSS_PHY_465_DATA 0x00000000
++#define DDRSS_PHY_466_DATA 0x00000000
++#define DDRSS_PHY_467_DATA 0x00000000
++#define DDRSS_PHY_468_DATA 0x00000000
++#define DDRSS_PHY_469_DATA 0x00000000
++#define DDRSS_PHY_470_DATA 0x00000000
++#define DDRSS_PHY_471_DATA 0x00000000
++#define DDRSS_PHY_472_DATA 0x00000000
++#define DDRSS_PHY_473_DATA 0x00000000
++#define DDRSS_PHY_474_DATA 0x00000000
++#define DDRSS_PHY_475_DATA 0x00000000
++#define DDRSS_PHY_476_DATA 0x00000000
++#define DDRSS_PHY_477_DATA 0x00000000
++#define DDRSS_PHY_478_DATA 0x00000000
++#define DDRSS_PHY_479_DATA 0x00000000
++#define DDRSS_PHY_480_DATA 0x00000000
++#define DDRSS_PHY_481_DATA 0x00000000
++#define DDRSS_PHY_482_DATA 0x00000000
++#define DDRSS_PHY_483_DATA 0x00000000
++#define DDRSS_PHY_484_DATA 0x00000000
++#define DDRSS_PHY_485_DATA 0x00000000
++#define DDRSS_PHY_486_DATA 0x00000000
++#define DDRSS_PHY_487_DATA 0x00000000
++#define DDRSS_PHY_488_DATA 0x00000000
++#define DDRSS_PHY_489_DATA 0x00000000
++#define DDRSS_PHY_490_DATA 0x00000000
++#define DDRSS_PHY_491_DATA 0x00000000
++#define DDRSS_PHY_492_DATA 0x00000000
++#define DDRSS_PHY_493_DATA 0x00000000
++#define DDRSS_PHY_494_DATA 0x00000000
++#define DDRSS_PHY_495_DATA 0x00000000
++#define DDRSS_PHY_496_DATA 0x00000000
++#define DDRSS_PHY_497_DATA 0x00000000
++#define DDRSS_PHY_498_DATA 0x00000000
++#define DDRSS_PHY_499_DATA 0x00000000
++#define DDRSS_PHY_500_DATA 0x00000000
++#define DDRSS_PHY_501_DATA 0x00000000
++#define DDRSS_PHY_502_DATA 0x00000000
++#define DDRSS_PHY_503_DATA 0x00000000
++#define DDRSS_PHY_504_DATA 0x00000000
++#define DDRSS_PHY_505_DATA 0x00000000
++#define DDRSS_PHY_506_DATA 0x00000000
++#define DDRSS_PHY_507_DATA 0x00000000
++#define DDRSS_PHY_508_DATA 0x00000000
++#define DDRSS_PHY_509_DATA 0x00000000
++#define DDRSS_PHY_510_DATA 0x00000000
++#define DDRSS_PHY_511_DATA 0x00000000
++#define DDRSS_PHY_512_DATA 0x04F00000
++#define DDRSS_PHY_513_DATA 0x00000000
++#define DDRSS_PHY_514_DATA 0x00030200
++#define DDRSS_PHY_515_DATA 0x00000000
++#define DDRSS_PHY_516_DATA 0x00000000
++#define DDRSS_PHY_517_DATA 0x01030000
++#define DDRSS_PHY_518_DATA 0x00010000
++#define DDRSS_PHY_519_DATA 0x01030004
++#define DDRSS_PHY_520_DATA 0x01000000
++#define DDRSS_PHY_521_DATA 0x00000000
++#define DDRSS_PHY_522_DATA 0x00000000
++#define DDRSS_PHY_523_DATA 0x00000000
++#define DDRSS_PHY_524_DATA 0x01010000
++#define DDRSS_PHY_525_DATA 0x00010000
++#define DDRSS_PHY_526_DATA 0x00C00001
++#define DDRSS_PHY_527_DATA 0x00CC0008
++#define DDRSS_PHY_528_DATA 0x00660601
++#define DDRSS_PHY_529_DATA 0x00000003
++#define DDRSS_PHY_530_DATA 0x00000000
++#define DDRSS_PHY_531_DATA 0x00000001
++#define DDRSS_PHY_532_DATA 0x0000AAAA
++#define DDRSS_PHY_533_DATA 0x00005555
++#define DDRSS_PHY_534_DATA 0x0000B5B5
++#define DDRSS_PHY_535_DATA 0x00004A4A
++#define DDRSS_PHY_536_DATA 0x00005656
++#define DDRSS_PHY_537_DATA 0x0000A9A9
++#define DDRSS_PHY_538_DATA 0x0000B7B7
++#define DDRSS_PHY_539_DATA 0x00004848
++#define DDRSS_PHY_540_DATA 0x00000000
++#define DDRSS_PHY_541_DATA 0x00000000
++#define DDRSS_PHY_542_DATA 0x08000000
++#define DDRSS_PHY_543_DATA 0x0F000008
++#define DDRSS_PHY_544_DATA 0x00000F0F
++#define DDRSS_PHY_545_DATA 0x00E4E400
++#define DDRSS_PHY_546_DATA 0x00071020
++#define DDRSS_PHY_547_DATA 0x000C0020
++#define DDRSS_PHY_548_DATA 0x00062000
++#define DDRSS_PHY_549_DATA 0x00000000
++#define DDRSS_PHY_550_DATA 0x55555555
++#define DDRSS_PHY_551_DATA 0xAAAAAAAA
++#define DDRSS_PHY_552_DATA 0x55555555
++#define DDRSS_PHY_553_DATA 0xAAAAAAAA
++#define DDRSS_PHY_554_DATA 0x00005555
++#define DDRSS_PHY_555_DATA 0x01000100
++#define DDRSS_PHY_556_DATA 0x00800180
++#define DDRSS_PHY_557_DATA 0x00000001
++#define DDRSS_PHY_558_DATA 0x00000000
++#define DDRSS_PHY_559_DATA 0x00000000
++#define DDRSS_PHY_560_DATA 0x00000000
++#define DDRSS_PHY_561_DATA 0x00000000
++#define DDRSS_PHY_562_DATA 0x00000000
++#define DDRSS_PHY_563_DATA 0x00000000
++#define DDRSS_PHY_564_DATA 0x00000000
++#define DDRSS_PHY_565_DATA 0x00000000
++#define DDRSS_PHY_566_DATA 0x00000000
++#define DDRSS_PHY_567_DATA 0x00000000
++#define DDRSS_PHY_568_DATA 0x00000000
++#define DDRSS_PHY_569_DATA 0x00000000
++#define DDRSS_PHY_570_DATA 0x00000000
++#define DDRSS_PHY_571_DATA 0x00000000
++#define DDRSS_PHY_572_DATA 0x00000000
++#define DDRSS_PHY_573_DATA 0x00000000
++#define DDRSS_PHY_574_DATA 0x00000000
++#define DDRSS_PHY_575_DATA 0x00000000
++#define DDRSS_PHY_576_DATA 0x00000000
++#define DDRSS_PHY_577_DATA 0x00000000
++#define DDRSS_PHY_578_DATA 0x00000000
++#define DDRSS_PHY_579_DATA 0x00000004
++#define DDRSS_PHY_580_DATA 0x00000000
++#define DDRSS_PHY_581_DATA 0x00000000
++#define DDRSS_PHY_582_DATA 0x00000000
++#define DDRSS_PHY_583_DATA 0x00000000
++#define DDRSS_PHY_584_DATA 0x00000000
++#define DDRSS_PHY_585_DATA 0x00000000
++#define DDRSS_PHY_586_DATA 0x081F07FF
++#define DDRSS_PHY_587_DATA 0x10200080
++#define DDRSS_PHY_588_DATA 0x00000008
++#define DDRSS_PHY_589_DATA 0x00000401
++#define DDRSS_PHY_590_DATA 0x00000000
++#define DDRSS_PHY_591_DATA 0x01CC0B01
++#define DDRSS_PHY_592_DATA 0x1003CC0B
++#define DDRSS_PHY_593_DATA 0x20000140
++#define DDRSS_PHY_594_DATA 0x07FF0200
++#define DDRSS_PHY_595_DATA 0x0000DD01
++#define DDRSS_PHY_596_DATA 0x00100303
++#define DDRSS_PHY_597_DATA 0x00000000
++#define DDRSS_PHY_598_DATA 0x00000000
++#define DDRSS_PHY_599_DATA 0x00031000
++#define DDRSS_PHY_600_DATA 0x00100010
++#define DDRSS_PHY_601_DATA 0x00100010
++#define DDRSS_PHY_602_DATA 0x00100010
++#define DDRSS_PHY_603_DATA 0x00100010
++#define DDRSS_PHY_604_DATA 0x02000010
++#define DDRSS_PHY_605_DATA 0x00000004
++#define DDRSS_PHY_606_DATA 0x51516042
++#define DDRSS_PHY_607_DATA 0x31C06000
++#define DDRSS_PHY_608_DATA 0x07AB0340
++#define DDRSS_PHY_609_DATA 0x00C0C001
++#define DDRSS_PHY_610_DATA 0x0B000000
++#define DDRSS_PHY_611_DATA 0x000B0A0A
++#define DDRSS_PHY_612_DATA 0x42100010
++#define DDRSS_PHY_613_DATA 0x010C073E
++#define DDRSS_PHY_614_DATA 0x000F0C2D
++#define DDRSS_PHY_615_DATA 0x01000140
++#define DDRSS_PHY_616_DATA 0x00F50120
++#define DDRSS_PHY_617_DATA 0x00000C00
++#define DDRSS_PHY_618_DATA 0x00000299
++#define DDRSS_PHY_619_DATA 0x00030200
++#define DDRSS_PHY_620_DATA 0x02800000
++#define DDRSS_PHY_621_DATA 0x80800000
++#define DDRSS_PHY_622_DATA 0x000B2010
++#define DDRSS_PHY_623_DATA 0x07684523
++#define DDRSS_PHY_624_DATA 0x00000001
++#define DDRSS_PHY_625_DATA 0x04190419
++#define DDRSS_PHY_626_DATA 0x04190419
++#define DDRSS_PHY_627_DATA 0x04190419
++#define DDRSS_PHY_628_DATA 0x04190419
++#define DDRSS_PHY_629_DATA 0x00000419
++#define DDRSS_PHY_630_DATA 0x0000A000
++#define DDRSS_PHY_631_DATA 0x00A000A0
++#define DDRSS_PHY_632_DATA 0x00A000A0
++#define DDRSS_PHY_633_DATA 0x00A000A0
++#define DDRSS_PHY_634_DATA 0x00A000A0
++#define DDRSS_PHY_635_DATA 0x00A000A0
++#define DDRSS_PHY_636_DATA 0x00A000A0
++#define DDRSS_PHY_637_DATA 0x00A000A0
++#define DDRSS_PHY_638_DATA 0x00A000A0
++#define DDRSS_PHY_639_DATA 0x01E600A0
++#define DDRSS_PHY_640_DATA 0x01000000
++#define DDRSS_PHY_641_DATA 0x00000000
++#define DDRSS_PHY_642_DATA 0x00000000
++#define DDRSS_PHY_643_DATA 0x00080200
++#define DDRSS_PHY_644_DATA 0x00000000
++#define DDRSS_PHY_645_DATA 0x20202020
++#define DDRSS_PHY_646_DATA 0x20202020
++#define DDRSS_PHY_647_DATA 0xF0F02020
++#define DDRSS_PHY_648_DATA 0x00000000
++#define DDRSS_PHY_649_DATA 0x00000000
++#define DDRSS_PHY_650_DATA 0x00000000
++#define DDRSS_PHY_651_DATA 0x00000000
++#define DDRSS_PHY_652_DATA 0x00000000
++#define DDRSS_PHY_653_DATA 0x00000000
++#define DDRSS_PHY_654_DATA 0x00000000
++#define DDRSS_PHY_655_DATA 0x00000000
++#define DDRSS_PHY_656_DATA 0x00000000
++#define DDRSS_PHY_657_DATA 0x00000000
++#define DDRSS_PHY_658_DATA 0x00000000
++#define DDRSS_PHY_659_DATA 0x00000000
++#define DDRSS_PHY_660_DATA 0x00000000
++#define DDRSS_PHY_661_DATA 0x00000000
++#define DDRSS_PHY_662_DATA 0x00000000
++#define DDRSS_PHY_663_DATA 0x00000000
++#define DDRSS_PHY_664_DATA 0x00000000
++#define DDRSS_PHY_665_DATA 0x00000000
++#define DDRSS_PHY_666_DATA 0x00000000
++#define DDRSS_PHY_667_DATA 0x00000000
++#define DDRSS_PHY_668_DATA 0x00000000
++#define DDRSS_PHY_669_DATA 0x00000000
++#define DDRSS_PHY_670_DATA 0x00000000
++#define DDRSS_PHY_671_DATA 0x00000000
++#define DDRSS_PHY_672_DATA 0x00000000
++#define DDRSS_PHY_673_DATA 0x00000000
++#define DDRSS_PHY_674_DATA 0x00000000
++#define DDRSS_PHY_675_DATA 0x00000000
++#define DDRSS_PHY_676_DATA 0x00000000
++#define DDRSS_PHY_677_DATA 0x00000000
++#define DDRSS_PHY_678_DATA 0x00000000
++#define DDRSS_PHY_679_DATA 0x00000000
++#define DDRSS_PHY_680_DATA 0x00000000
++#define DDRSS_PHY_681_DATA 0x00000000
++#define DDRSS_PHY_682_DATA 0x00000000
++#define DDRSS_PHY_683_DATA 0x00000000
++#define DDRSS_PHY_684_DATA 0x00000000
++#define DDRSS_PHY_685_DATA 0x00000000
++#define DDRSS_PHY_686_DATA 0x00000000
++#define DDRSS_PHY_687_DATA 0x00000000
++#define DDRSS_PHY_688_DATA 0x00000000
++#define DDRSS_PHY_689_DATA 0x00000000
++#define DDRSS_PHY_690_DATA 0x00000000
++#define DDRSS_PHY_691_DATA 0x00000000
++#define DDRSS_PHY_692_DATA 0x00000000
++#define DDRSS_PHY_693_DATA 0x00000000
++#define DDRSS_PHY_694_DATA 0x00000000
++#define DDRSS_PHY_695_DATA 0x00000000
++#define DDRSS_PHY_696_DATA 0x00000000
++#define DDRSS_PHY_697_DATA 0x00000000
++#define DDRSS_PHY_698_DATA 0x00000000
++#define DDRSS_PHY_699_DATA 0x00000000
++#define DDRSS_PHY_700_DATA 0x00000000
++#define DDRSS_PHY_701_DATA 0x00000000
++#define DDRSS_PHY_702_DATA 0x00000000
++#define DDRSS_PHY_703_DATA 0x00000000
++#define DDRSS_PHY_704_DATA 0x00000000
++#define DDRSS_PHY_705_DATA 0x00000000
++#define DDRSS_PHY_706_DATA 0x00000000
++#define DDRSS_PHY_707_DATA 0x00000000
++#define DDRSS_PHY_708_DATA 0x00000000
++#define DDRSS_PHY_709_DATA 0x00000000
++#define DDRSS_PHY_710_DATA 0x00000000
++#define DDRSS_PHY_711_DATA 0x00000000
++#define DDRSS_PHY_712_DATA 0x00000000
++#define DDRSS_PHY_713_DATA 0x00000000
++#define DDRSS_PHY_714_DATA 0x00000000
++#define DDRSS_PHY_715_DATA 0x00000000
++#define DDRSS_PHY_716_DATA 0x00000000
++#define DDRSS_PHY_717_DATA 0x00000000
++#define DDRSS_PHY_718_DATA 0x00000000
++#define DDRSS_PHY_719_DATA 0x00000000
++#define DDRSS_PHY_720_DATA 0x00000000
++#define DDRSS_PHY_721_DATA 0x00000000
++#define DDRSS_PHY_722_DATA 0x00000000
++#define DDRSS_PHY_723_DATA 0x00000000
++#define DDRSS_PHY_724_DATA 0x00000000
++#define DDRSS_PHY_725_DATA 0x00000000
++#define DDRSS_PHY_726_DATA 0x00000000
++#define DDRSS_PHY_727_DATA 0x00000000
++#define DDRSS_PHY_728_DATA 0x00000000
++#define DDRSS_PHY_729_DATA 0x00000000
++#define DDRSS_PHY_730_DATA 0x00000000
++#define DDRSS_PHY_731_DATA 0x00000000
++#define DDRSS_PHY_732_DATA 0x00000000
++#define DDRSS_PHY_733_DATA 0x00000000
++#define DDRSS_PHY_734_DATA 0x00000000
++#define DDRSS_PHY_735_DATA 0x00000000
++#define DDRSS_PHY_736_DATA 0x00000000
++#define DDRSS_PHY_737_DATA 0x00000000
++#define DDRSS_PHY_738_DATA 0x00000000
++#define DDRSS_PHY_739_DATA 0x00000000
++#define DDRSS_PHY_740_DATA 0x00000000
++#define DDRSS_PHY_741_DATA 0x00000000
++#define DDRSS_PHY_742_DATA 0x00000000
++#define DDRSS_PHY_743_DATA 0x00000000
++#define DDRSS_PHY_744_DATA 0x00000000
++#define DDRSS_PHY_745_DATA 0x00000000
++#define DDRSS_PHY_746_DATA 0x00000000
++#define DDRSS_PHY_747_DATA 0x00000000
++#define DDRSS_PHY_748_DATA 0x00000000
++#define DDRSS_PHY_749_DATA 0x00000000
++#define DDRSS_PHY_750_DATA 0x00000000
++#define DDRSS_PHY_751_DATA 0x00000000
++#define DDRSS_PHY_752_DATA 0x00000000
++#define DDRSS_PHY_753_DATA 0x00000000
++#define DDRSS_PHY_754_DATA 0x00000000
++#define DDRSS_PHY_755_DATA 0x00000000
++#define DDRSS_PHY_756_DATA 0x00000000
++#define DDRSS_PHY_757_DATA 0x00000000
++#define DDRSS_PHY_758_DATA 0x00000000
++#define DDRSS_PHY_759_DATA 0x00000000
++#define DDRSS_PHY_760_DATA 0x00000000
++#define DDRSS_PHY_761_DATA 0x00000000
++#define DDRSS_PHY_762_DATA 0x00000000
++#define DDRSS_PHY_763_DATA 0x00000000
++#define DDRSS_PHY_764_DATA 0x00000000
++#define DDRSS_PHY_765_DATA 0x00000000
++#define DDRSS_PHY_766_DATA 0x00000000
++#define DDRSS_PHY_767_DATA 0x00000000
++#define DDRSS_PHY_768_DATA 0x04F00000
++#define DDRSS_PHY_769_DATA 0x00000000
++#define DDRSS_PHY_770_DATA 0x00030200
++#define DDRSS_PHY_771_DATA 0x00000000
++#define DDRSS_PHY_772_DATA 0x00000000
++#define DDRSS_PHY_773_DATA 0x01030000
++#define DDRSS_PHY_774_DATA 0x00010000
++#define DDRSS_PHY_775_DATA 0x01030004
++#define DDRSS_PHY_776_DATA 0x01000000
++#define DDRSS_PHY_777_DATA 0x00000000
++#define DDRSS_PHY_778_DATA 0x00000000
++#define DDRSS_PHY_779_DATA 0x00000000
++#define DDRSS_PHY_780_DATA 0x01010000
++#define DDRSS_PHY_781_DATA 0x00010000
++#define DDRSS_PHY_782_DATA 0x00C00001
++#define DDRSS_PHY_783_DATA 0x00CC0008
++#define DDRSS_PHY_784_DATA 0x00660601
++#define DDRSS_PHY_785_DATA 0x00000003
++#define DDRSS_PHY_786_DATA 0x00000000
++#define DDRSS_PHY_787_DATA 0x00000001
++#define DDRSS_PHY_788_DATA 0x0000AAAA
++#define DDRSS_PHY_789_DATA 0x00005555
++#define DDRSS_PHY_790_DATA 0x0000B5B5
++#define DDRSS_PHY_791_DATA 0x00004A4A
++#define DDRSS_PHY_792_DATA 0x00005656
++#define DDRSS_PHY_793_DATA 0x0000A9A9
++#define DDRSS_PHY_794_DATA 0x0000B7B7
++#define DDRSS_PHY_795_DATA 0x00004848
++#define DDRSS_PHY_796_DATA 0x00000000
++#define DDRSS_PHY_797_DATA 0x00000000
++#define DDRSS_PHY_798_DATA 0x08000000
++#define DDRSS_PHY_799_DATA 0x0F000008
++#define DDRSS_PHY_800_DATA 0x00000F0F
++#define DDRSS_PHY_801_DATA 0x00E4E400
++#define DDRSS_PHY_802_DATA 0x00071020
++#define DDRSS_PHY_803_DATA 0x000C0020
++#define DDRSS_PHY_804_DATA 0x00062000
++#define DDRSS_PHY_805_DATA 0x00000000
++#define DDRSS_PHY_806_DATA 0x55555555
++#define DDRSS_PHY_807_DATA 0xAAAAAAAA
++#define DDRSS_PHY_808_DATA 0x55555555
++#define DDRSS_PHY_809_DATA 0xAAAAAAAA
++#define DDRSS_PHY_810_DATA 0x00005555
++#define DDRSS_PHY_811_DATA 0x01000100
++#define DDRSS_PHY_812_DATA 0x00800180
++#define DDRSS_PHY_813_DATA 0x00000000
++#define DDRSS_PHY_814_DATA 0x00000000
++#define DDRSS_PHY_815_DATA 0x00000000
++#define DDRSS_PHY_816_DATA 0x00000000
++#define DDRSS_PHY_817_DATA 0x00000000
++#define DDRSS_PHY_818_DATA 0x00000000
++#define DDRSS_PHY_819_DATA 0x00000000
++#define DDRSS_PHY_820_DATA 0x00000000
++#define DDRSS_PHY_821_DATA 0x00000000
++#define DDRSS_PHY_822_DATA 0x00000000
++#define DDRSS_PHY_823_DATA 0x00000000
++#define DDRSS_PHY_824_DATA 0x00000000
++#define DDRSS_PHY_825_DATA 0x00000000
++#define DDRSS_PHY_826_DATA 0x00000000
++#define DDRSS_PHY_827_DATA 0x00000000
++#define DDRSS_PHY_828_DATA 0x00000000
++#define DDRSS_PHY_829_DATA 0x00000000
++#define DDRSS_PHY_830_DATA 0x00000000
++#define DDRSS_PHY_831_DATA 0x00000000
++#define DDRSS_PHY_832_DATA 0x00000000
++#define DDRSS_PHY_833_DATA 0x00000000
++#define DDRSS_PHY_834_DATA 0x00000000
++#define DDRSS_PHY_835_DATA 0x00000004
++#define DDRSS_PHY_836_DATA 0x00000000
++#define DDRSS_PHY_837_DATA 0x00000000
++#define DDRSS_PHY_838_DATA 0x00000000
++#define DDRSS_PHY_839_DATA 0x00000000
++#define DDRSS_PHY_840_DATA 0x00000000
++#define DDRSS_PHY_841_DATA 0x00000000
++#define DDRSS_PHY_842_DATA 0x081F07FF
++#define DDRSS_PHY_843_DATA 0x10200080
++#define DDRSS_PHY_844_DATA 0x00000008
++#define DDRSS_PHY_845_DATA 0x00000401
++#define DDRSS_PHY_846_DATA 0x00000000
++#define DDRSS_PHY_847_DATA 0x01CC0B01
++#define DDRSS_PHY_848_DATA 0x1003CC0B
++#define DDRSS_PHY_849_DATA 0x20000140
++#define DDRSS_PHY_850_DATA 0x07FF0200
++#define DDRSS_PHY_851_DATA 0x0000DD01
++#define DDRSS_PHY_852_DATA 0x00100303
++#define DDRSS_PHY_853_DATA 0x00000000
++#define DDRSS_PHY_854_DATA 0x00000000
++#define DDRSS_PHY_855_DATA 0x00031000
++#define DDRSS_PHY_856_DATA 0x00100010
++#define DDRSS_PHY_857_DATA 0x00100010
++#define DDRSS_PHY_858_DATA 0x00100010
++#define DDRSS_PHY_859_DATA 0x00100010
++#define DDRSS_PHY_860_DATA 0x02000010
++#define DDRSS_PHY_861_DATA 0x00000004
++#define DDRSS_PHY_862_DATA 0x51516042
++#define DDRSS_PHY_863_DATA 0x31C06000
++#define DDRSS_PHY_864_DATA 0x07AB0340
++#define DDRSS_PHY_865_DATA 0x00C0C001
++#define DDRSS_PHY_866_DATA 0x0B000000
++#define DDRSS_PHY_867_DATA 0x000B0A0A
++#define DDRSS_PHY_868_DATA 0x42100010
++#define DDRSS_PHY_869_DATA 0x010C073E
++#define DDRSS_PHY_870_DATA 0x000F0C2D
++#define DDRSS_PHY_871_DATA 0x01000140
++#define DDRSS_PHY_872_DATA 0x00F50120
++#define DDRSS_PHY_873_DATA 0x00000C00
++#define DDRSS_PHY_874_DATA 0x00000299
++#define DDRSS_PHY_875_DATA 0x00030200
++#define DDRSS_PHY_876_DATA 0x02800000
++#define DDRSS_PHY_877_DATA 0x80800000
++#define DDRSS_PHY_878_DATA 0x000B2010
++#define DDRSS_PHY_879_DATA 0x76158234
++#define DDRSS_PHY_880_DATA 0x00000000
++#define DDRSS_PHY_881_DATA 0x04190419
++#define DDRSS_PHY_882_DATA 0x04190419
++#define DDRSS_PHY_883_DATA 0x04190419
++#define DDRSS_PHY_884_DATA 0x04190419
++#define DDRSS_PHY_885_DATA 0x00000419
++#define DDRSS_PHY_886_DATA 0x0000A000
++#define DDRSS_PHY_887_DATA 0x00A000A0
++#define DDRSS_PHY_888_DATA 0x00A000A0
++#define DDRSS_PHY_889_DATA 0x00A000A0
++#define DDRSS_PHY_890_DATA 0x00A000A0
++#define DDRSS_PHY_891_DATA 0x00A000A0
++#define DDRSS_PHY_892_DATA 0x00A000A0
++#define DDRSS_PHY_893_DATA 0x00A000A0
++#define DDRSS_PHY_894_DATA 0x00A000A0
++#define DDRSS_PHY_895_DATA 0x01E600A0
++#define DDRSS_PHY_896_DATA 0x01000000
++#define DDRSS_PHY_897_DATA 0x00000000
++#define DDRSS_PHY_898_DATA 0x00000000
++#define DDRSS_PHY_899_DATA 0x00080200
++#define DDRSS_PHY_900_DATA 0x00000000
++#define DDRSS_PHY_901_DATA 0x20202020
++#define DDRSS_PHY_902_DATA 0x20202020
++#define DDRSS_PHY_903_DATA 0xF0F02020
++#define DDRSS_PHY_904_DATA 0x00000000
++#define DDRSS_PHY_905_DATA 0x00000000
++#define DDRSS_PHY_906_DATA 0x00000000
++#define DDRSS_PHY_907_DATA 0x00000000
++#define DDRSS_PHY_908_DATA 0x00000000
++#define DDRSS_PHY_909_DATA 0x00000000
++#define DDRSS_PHY_910_DATA 0x00000000
++#define DDRSS_PHY_911_DATA 0x00000000
++#define DDRSS_PHY_912_DATA 0x00000000
++#define DDRSS_PHY_913_DATA 0x00000000
++#define DDRSS_PHY_914_DATA 0x00000000
++#define DDRSS_PHY_915_DATA 0x00000000
++#define DDRSS_PHY_916_DATA 0x00000000
++#define DDRSS_PHY_917_DATA 0x00000000
++#define DDRSS_PHY_918_DATA 0x00000000
++#define DDRSS_PHY_919_DATA 0x00000000
++#define DDRSS_PHY_920_DATA 0x00000000
++#define DDRSS_PHY_921_DATA 0x00000000
++#define DDRSS_PHY_922_DATA 0x00000000
++#define DDRSS_PHY_923_DATA 0x00000000
++#define DDRSS_PHY_924_DATA 0x00000000
++#define DDRSS_PHY_925_DATA 0x00000000
++#define DDRSS_PHY_926_DATA 0x00000000
++#define DDRSS_PHY_927_DATA 0x00000000
++#define DDRSS_PHY_928_DATA 0x00000000
++#define DDRSS_PHY_929_DATA 0x00000000
++#define DDRSS_PHY_930_DATA 0x00000000
++#define DDRSS_PHY_931_DATA 0x00000000
++#define DDRSS_PHY_932_DATA 0x00000000
++#define DDRSS_PHY_933_DATA 0x00000000
++#define DDRSS_PHY_934_DATA 0x00000000
++#define DDRSS_PHY_935_DATA 0x00000000
++#define DDRSS_PHY_936_DATA 0x00000000
++#define DDRSS_PHY_937_DATA 0x00000000
++#define DDRSS_PHY_938_DATA 0x00000000
++#define DDRSS_PHY_939_DATA 0x00000000
++#define DDRSS_PHY_940_DATA 0x00000000
++#define DDRSS_PHY_941_DATA 0x00000000
++#define DDRSS_PHY_942_DATA 0x00000000
++#define DDRSS_PHY_943_DATA 0x00000000
++#define DDRSS_PHY_944_DATA 0x00000000
++#define DDRSS_PHY_945_DATA 0x00000000
++#define DDRSS_PHY_946_DATA 0x00000000
++#define DDRSS_PHY_947_DATA 0x00000000
++#define DDRSS_PHY_948_DATA 0x00000000
++#define DDRSS_PHY_949_DATA 0x00000000
++#define DDRSS_PHY_950_DATA 0x00000000
++#define DDRSS_PHY_951_DATA 0x00000000
++#define DDRSS_PHY_952_DATA 0x00000000
++#define DDRSS_PHY_953_DATA 0x00000000
++#define DDRSS_PHY_954_DATA 0x00000000
++#define DDRSS_PHY_955_DATA 0x00000000
++#define DDRSS_PHY_956_DATA 0x00000000
++#define DDRSS_PHY_957_DATA 0x00000000
++#define DDRSS_PHY_958_DATA 0x00000000
++#define DDRSS_PHY_959_DATA 0x00000000
++#define DDRSS_PHY_960_DATA 0x00000000
++#define DDRSS_PHY_961_DATA 0x00000000
++#define DDRSS_PHY_962_DATA 0x00000000
++#define DDRSS_PHY_963_DATA 0x00000000
++#define DDRSS_PHY_964_DATA 0x00000000
++#define DDRSS_PHY_965_DATA 0x00000000
++#define DDRSS_PHY_966_DATA 0x00000000
++#define DDRSS_PHY_967_DATA 0x00000000
++#define DDRSS_PHY_968_DATA 0x00000000
++#define DDRSS_PHY_969_DATA 0x00000000
++#define DDRSS_PHY_970_DATA 0x00000000
++#define DDRSS_PHY_971_DATA 0x00000000
++#define DDRSS_PHY_972_DATA 0x00000000
++#define DDRSS_PHY_973_DATA 0x00000000
++#define DDRSS_PHY_974_DATA 0x00000000
++#define DDRSS_PHY_975_DATA 0x00000000
++#define DDRSS_PHY_976_DATA 0x00000000
++#define DDRSS_PHY_977_DATA 0x00000000
++#define DDRSS_PHY_978_DATA 0x00000000
++#define DDRSS_PHY_979_DATA 0x00000000
++#define DDRSS_PHY_980_DATA 0x00000000
++#define DDRSS_PHY_981_DATA 0x00000000
++#define DDRSS_PHY_982_DATA 0x00000000
++#define DDRSS_PHY_983_DATA 0x00000000
++#define DDRSS_PHY_984_DATA 0x00000000
++#define DDRSS_PHY_985_DATA 0x00000000
++#define DDRSS_PHY_986_DATA 0x00000000
++#define DDRSS_PHY_987_DATA 0x00000000
++#define DDRSS_PHY_988_DATA 0x00000000
++#define DDRSS_PHY_989_DATA 0x00000000
++#define DDRSS_PHY_990_DATA 0x00000000
++#define DDRSS_PHY_991_DATA 0x00000000
++#define DDRSS_PHY_992_DATA 0x00000000
++#define DDRSS_PHY_993_DATA 0x00000000
++#define DDRSS_PHY_994_DATA 0x00000000
++#define DDRSS_PHY_995_DATA 0x00000000
++#define DDRSS_PHY_996_DATA 0x00000000
++#define DDRSS_PHY_997_DATA 0x00000000
++#define DDRSS_PHY_998_DATA 0x00000000
++#define DDRSS_PHY_999_DATA 0x00000000
++#define DDRSS_PHY_1000_DATA 0x00000000
++#define DDRSS_PHY_1001_DATA 0x00000000
++#define DDRSS_PHY_1002_DATA 0x00000000
++#define DDRSS_PHY_1003_DATA 0x00000000
++#define DDRSS_PHY_1004_DATA 0x00000000
++#define DDRSS_PHY_1005_DATA 0x00000000
++#define DDRSS_PHY_1006_DATA 0x00000000
++#define DDRSS_PHY_1007_DATA 0x00000000
++#define DDRSS_PHY_1008_DATA 0x00000000
++#define DDRSS_PHY_1009_DATA 0x00000000
++#define DDRSS_PHY_1010_DATA 0x00000000
++#define DDRSS_PHY_1011_DATA 0x00000000
++#define DDRSS_PHY_1012_DATA 0x00000000
++#define DDRSS_PHY_1013_DATA 0x00000000
++#define DDRSS_PHY_1014_DATA 0x00000000
++#define DDRSS_PHY_1015_DATA 0x00000000
++#define DDRSS_PHY_1016_DATA 0x00000000
++#define DDRSS_PHY_1017_DATA 0x00000000
++#define DDRSS_PHY_1018_DATA 0x00000000
++#define DDRSS_PHY_1019_DATA 0x00000000
++#define DDRSS_PHY_1020_DATA 0x00000000
++#define DDRSS_PHY_1021_DATA 0x00000000
++#define DDRSS_PHY_1022_DATA 0x00000000
++#define DDRSS_PHY_1023_DATA 0x00000000
++#define DDRSS_PHY_1024_DATA 0x00000000
++#define DDRSS_PHY_1025_DATA 0x00000000
++#define DDRSS_PHY_1026_DATA 0x00000000
++#define DDRSS_PHY_1027_DATA 0x00000000
++#define DDRSS_PHY_1028_DATA 0x00000000
++#define DDRSS_PHY_1029_DATA 0x00000100
++#define DDRSS_PHY_1030_DATA 0x00000200
++#define DDRSS_PHY_1031_DATA 0x00000000
++#define DDRSS_PHY_1032_DATA 0x00000000
++#define DDRSS_PHY_1033_DATA 0x00000000
++#define DDRSS_PHY_1034_DATA 0x00000000
++#define DDRSS_PHY_1035_DATA 0x00400000
++#define DDRSS_PHY_1036_DATA 0x00000080
++#define DDRSS_PHY_1037_DATA 0x00DCBA98
++#define DDRSS_PHY_1038_DATA 0x03000000
++#define DDRSS_PHY_1039_DATA 0x00200000
++#define DDRSS_PHY_1040_DATA 0x00000000
++#define DDRSS_PHY_1041_DATA 0x00000000
++#define DDRSS_PHY_1042_DATA 0x00000000
++#define DDRSS_PHY_1043_DATA 0x00000000
++#define DDRSS_PHY_1044_DATA 0x00000000
++#define DDRSS_PHY_1045_DATA 0x0000002A
++#define DDRSS_PHY_1046_DATA 0x00000015
++#define DDRSS_PHY_1047_DATA 0x00000015
++#define DDRSS_PHY_1048_DATA 0x0000002A
++#define DDRSS_PHY_1049_DATA 0x00000033
++#define DDRSS_PHY_1050_DATA 0x0000000C
++#define DDRSS_PHY_1051_DATA 0x0000000C
++#define DDRSS_PHY_1052_DATA 0x00000033
++#define DDRSS_PHY_1053_DATA 0x0A418820
++#define DDRSS_PHY_1054_DATA 0x003F0000
++#define DDRSS_PHY_1055_DATA 0x000F013F
++#define DDRSS_PHY_1056_DATA 0x20202003
++#define DDRSS_PHY_1057_DATA 0x00202020
++#define DDRSS_PHY_1058_DATA 0x20008008
++#define DDRSS_PHY_1059_DATA 0x00000810
++#define DDRSS_PHY_1060_DATA 0x00000F00
++#define DDRSS_PHY_1061_DATA 0x000304CC
++#define DDRSS_PHY_1062_DATA 0x03000003
++#define DDRSS_PHY_1063_DATA 0x00030000
++#define DDRSS_PHY_1064_DATA 0x00000300
++#define DDRSS_PHY_1065_DATA 0x00000300
++#define DDRSS_PHY_1066_DATA 0x00000300
++#define DDRSS_PHY_1067_DATA 0x00000300
++#define DDRSS_PHY_1068_DATA 0x42080010
++#define DDRSS_PHY_1069_DATA 0x0000803E
++#define DDRSS_PHY_1070_DATA 0x00000001
++#define DDRSS_PHY_1071_DATA 0x01000002
++#define DDRSS_PHY_1072_DATA 0x00008000
++#define DDRSS_PHY_1073_DATA 0x00000000
++#define DDRSS_PHY_1074_DATA 0x00000000
++#define DDRSS_PHY_1075_DATA 0x00000000
++#define DDRSS_PHY_1076_DATA 0x00000000
++#define DDRSS_PHY_1077_DATA 0x00000000
++#define DDRSS_PHY_1078_DATA 0x00000000
++#define DDRSS_PHY_1079_DATA 0x00000000
++#define DDRSS_PHY_1080_DATA 0x00000000
++#define DDRSS_PHY_1081_DATA 0x00000000
++#define DDRSS_PHY_1082_DATA 0x00000000
++#define DDRSS_PHY_1083_DATA 0x00000000
++#define DDRSS_PHY_1084_DATA 0x00000000
++#define DDRSS_PHY_1085_DATA 0x00000000
++#define DDRSS_PHY_1086_DATA 0x00000000
++#define DDRSS_PHY_1087_DATA 0x00000000
++#define DDRSS_PHY_1088_DATA 0x00000000
++#define DDRSS_PHY_1089_DATA 0x00000000
++#define DDRSS_PHY_1090_DATA 0x00000000
++#define DDRSS_PHY_1091_DATA 0x00000000
++#define DDRSS_PHY_1092_DATA 0x00000000
++#define DDRSS_PHY_1093_DATA 0x00000000
++#define DDRSS_PHY_1094_DATA 0x00000000
++#define DDRSS_PHY_1095_DATA 0x00000000
++#define DDRSS_PHY_1096_DATA 0x00000000
++#define DDRSS_PHY_1097_DATA 0x00000000
++#define DDRSS_PHY_1098_DATA 0x00000000
++#define DDRSS_PHY_1099_DATA 0x00000000
++#define DDRSS_PHY_1100_DATA 0x00000000
++#define DDRSS_PHY_1101_DATA 0x00000000
++#define DDRSS_PHY_1102_DATA 0x00000000
++#define DDRSS_PHY_1103_DATA 0x00000000
++#define DDRSS_PHY_1104_DATA 0x00000000
++#define DDRSS_PHY_1105_DATA 0x00000000
++#define DDRSS_PHY_1106_DATA 0x00000000
++#define DDRSS_PHY_1107_DATA 0x00000000
++#define DDRSS_PHY_1108_DATA 0x00000000
++#define DDRSS_PHY_1109_DATA 0x00000000
++#define DDRSS_PHY_1110_DATA 0x00000000
++#define DDRSS_PHY_1111_DATA 0x00000000
++#define DDRSS_PHY_1112_DATA 0x00000000
++#define DDRSS_PHY_1113_DATA 0x00000000
++#define DDRSS_PHY_1114_DATA 0x00000000
++#define DDRSS_PHY_1115_DATA 0x00000000
++#define DDRSS_PHY_1116_DATA 0x00000000
++#define DDRSS_PHY_1117_DATA 0x00000000
++#define DDRSS_PHY_1118_DATA 0x00000000
++#define DDRSS_PHY_1119_DATA 0x00000000
++#define DDRSS_PHY_1120_DATA 0x00000000
++#define DDRSS_PHY_1121_DATA 0x00000000
++#define DDRSS_PHY_1122_DATA 0x00000000
++#define DDRSS_PHY_1123_DATA 0x00000000
++#define DDRSS_PHY_1124_DATA 0x00000000
++#define DDRSS_PHY_1125_DATA 0x00000000
++#define DDRSS_PHY_1126_DATA 0x00000000
++#define DDRSS_PHY_1127_DATA 0x00000000
++#define DDRSS_PHY_1128_DATA 0x00000000
++#define DDRSS_PHY_1129_DATA 0x00000000
++#define DDRSS_PHY_1130_DATA 0x00000000
++#define DDRSS_PHY_1131_DATA 0x00000000
++#define DDRSS_PHY_1132_DATA 0x00000000
++#define DDRSS_PHY_1133_DATA 0x00000000
++#define DDRSS_PHY_1134_DATA 0x00000000
++#define DDRSS_PHY_1135_DATA 0x00000000
++#define DDRSS_PHY_1136_DATA 0x00000000
++#define DDRSS_PHY_1137_DATA 0x00000000
++#define DDRSS_PHY_1138_DATA 0x00000000
++#define DDRSS_PHY_1139_DATA 0x00000000
++#define DDRSS_PHY_1140_DATA 0x00000000
++#define DDRSS_PHY_1141_DATA 0x00000000
++#define DDRSS_PHY_1142_DATA 0x00000000
++#define DDRSS_PHY_1143_DATA 0x00000000
++#define DDRSS_PHY_1144_DATA 0x00000000
++#define DDRSS_PHY_1145_DATA 0x00000000
++#define DDRSS_PHY_1146_DATA 0x00000000
++#define DDRSS_PHY_1147_DATA 0x00000000
++#define DDRSS_PHY_1148_DATA 0x00000000
++#define DDRSS_PHY_1149_DATA 0x00000000
++#define DDRSS_PHY_1150_DATA 0x00000000
++#define DDRSS_PHY_1151_DATA 0x00000000
++#define DDRSS_PHY_1152_DATA 0x00000000
++#define DDRSS_PHY_1153_DATA 0x00000000
++#define DDRSS_PHY_1154_DATA 0x00000000
++#define DDRSS_PHY_1155_DATA 0x00000000
++#define DDRSS_PHY_1156_DATA 0x00000000
++#define DDRSS_PHY_1157_DATA 0x00000000
++#define DDRSS_PHY_1158_DATA 0x00000000
++#define DDRSS_PHY_1159_DATA 0x00000000
++#define DDRSS_PHY_1160_DATA 0x00000000
++#define DDRSS_PHY_1161_DATA 0x00000000
++#define DDRSS_PHY_1162_DATA 0x00000000
++#define DDRSS_PHY_1163_DATA 0x00000000
++#define DDRSS_PHY_1164_DATA 0x00000000
++#define DDRSS_PHY_1165_DATA 0x00000000
++#define DDRSS_PHY_1166_DATA 0x00000000
++#define DDRSS_PHY_1167_DATA 0x00000000
++#define DDRSS_PHY_1168_DATA 0x00000000
++#define DDRSS_PHY_1169_DATA 0x00000000
++#define DDRSS_PHY_1170_DATA 0x00000000
++#define DDRSS_PHY_1171_DATA 0x00000000
++#define DDRSS_PHY_1172_DATA 0x00000000
++#define DDRSS_PHY_1173_DATA 0x00000000
++#define DDRSS_PHY_1174_DATA 0x00000000
++#define DDRSS_PHY_1175_DATA 0x00000000
++#define DDRSS_PHY_1176_DATA 0x00000000
++#define DDRSS_PHY_1177_DATA 0x00000000
++#define DDRSS_PHY_1178_DATA 0x00000000
++#define DDRSS_PHY_1179_DATA 0x00000000
++#define DDRSS_PHY_1180_DATA 0x00000000
++#define DDRSS_PHY_1181_DATA 0x00000000
++#define DDRSS_PHY_1182_DATA 0x00000000
++#define DDRSS_PHY_1183_DATA 0x00000000
++#define DDRSS_PHY_1184_DATA 0x00000000
++#define DDRSS_PHY_1185_DATA 0x00000000
++#define DDRSS_PHY_1186_DATA 0x00000000
++#define DDRSS_PHY_1187_DATA 0x00000000
++#define DDRSS_PHY_1188_DATA 0x00000000
++#define DDRSS_PHY_1189_DATA 0x00000000
++#define DDRSS_PHY_1190_DATA 0x00000000
++#define DDRSS_PHY_1191_DATA 0x00000000
++#define DDRSS_PHY_1192_DATA 0x00000000
++#define DDRSS_PHY_1193_DATA 0x00000000
++#define DDRSS_PHY_1194_DATA 0x00000000
++#define DDRSS_PHY_1195_DATA 0x00000000
++#define DDRSS_PHY_1196_DATA 0x00000000
++#define DDRSS_PHY_1197_DATA 0x00000000
++#define DDRSS_PHY_1198_DATA 0x00000000
++#define DDRSS_PHY_1199_DATA 0x00000000
++#define DDRSS_PHY_1200_DATA 0x00000000
++#define DDRSS_PHY_1201_DATA 0x00000000
++#define DDRSS_PHY_1202_DATA 0x00000000
++#define DDRSS_PHY_1203_DATA 0x00000000
++#define DDRSS_PHY_1204_DATA 0x00000000
++#define DDRSS_PHY_1205_DATA 0x00000000
++#define DDRSS_PHY_1206_DATA 0x00000000
++#define DDRSS_PHY_1207_DATA 0x00000000
++#define DDRSS_PHY_1208_DATA 0x00000000
++#define DDRSS_PHY_1209_DATA 0x00000000
++#define DDRSS_PHY_1210_DATA 0x00000000
++#define DDRSS_PHY_1211_DATA 0x00000000
++#define DDRSS_PHY_1212_DATA 0x00000000
++#define DDRSS_PHY_1213_DATA 0x00000000
++#define DDRSS_PHY_1214_DATA 0x00000000
++#define DDRSS_PHY_1215_DATA 0x00000000
++#define DDRSS_PHY_1216_DATA 0x00000000
++#define DDRSS_PHY_1217_DATA 0x00000000
++#define DDRSS_PHY_1218_DATA 0x00000000
++#define DDRSS_PHY_1219_DATA 0x00000000
++#define DDRSS_PHY_1220_DATA 0x00000000
++#define DDRSS_PHY_1221_DATA 0x00000000
++#define DDRSS_PHY_1222_DATA 0x00000000
++#define DDRSS_PHY_1223_DATA 0x00000000
++#define DDRSS_PHY_1224_DATA 0x00000000
++#define DDRSS_PHY_1225_DATA 0x00000000
++#define DDRSS_PHY_1226_DATA 0x00000000
++#define DDRSS_PHY_1227_DATA 0x00000000
++#define DDRSS_PHY_1228_DATA 0x00000000
++#define DDRSS_PHY_1229_DATA 0x00000000
++#define DDRSS_PHY_1230_DATA 0x00000000
++#define DDRSS_PHY_1231_DATA 0x00000000
++#define DDRSS_PHY_1232_DATA 0x00000000
++#define DDRSS_PHY_1233_DATA 0x00000000
++#define DDRSS_PHY_1234_DATA 0x00000000
++#define DDRSS_PHY_1235_DATA 0x00000000
++#define DDRSS_PHY_1236_DATA 0x00000000
++#define DDRSS_PHY_1237_DATA 0x00000000
++#define DDRSS_PHY_1238_DATA 0x00000000
++#define DDRSS_PHY_1239_DATA 0x00000000
++#define DDRSS_PHY_1240_DATA 0x00000000
++#define DDRSS_PHY_1241_DATA 0x00000000
++#define DDRSS_PHY_1242_DATA 0x00000000
++#define DDRSS_PHY_1243_DATA 0x00000000
++#define DDRSS_PHY_1244_DATA 0x00000000
++#define DDRSS_PHY_1245_DATA 0x00000000
++#define DDRSS_PHY_1246_DATA 0x00000000
++#define DDRSS_PHY_1247_DATA 0x00000000
++#define DDRSS_PHY_1248_DATA 0x00000000
++#define DDRSS_PHY_1249_DATA 0x00000000
++#define DDRSS_PHY_1250_DATA 0x00000000
++#define DDRSS_PHY_1251_DATA 0x00000000
++#define DDRSS_PHY_1252_DATA 0x00000000
++#define DDRSS_PHY_1253_DATA 0x00000000
++#define DDRSS_PHY_1254_DATA 0x00000000
++#define DDRSS_PHY_1255_DATA 0x00000000
++#define DDRSS_PHY_1256_DATA 0x00000000
++#define DDRSS_PHY_1257_DATA 0x00000000
++#define DDRSS_PHY_1258_DATA 0x00000000
++#define DDRSS_PHY_1259_DATA 0x00000000
++#define DDRSS_PHY_1260_DATA 0x00000000
++#define DDRSS_PHY_1261_DATA 0x00000000
++#define DDRSS_PHY_1262_DATA 0x00000000
++#define DDRSS_PHY_1263_DATA 0x00000000
++#define DDRSS_PHY_1264_DATA 0x00000000
++#define DDRSS_PHY_1265_DATA 0x00000000
++#define DDRSS_PHY_1266_DATA 0x00000000
++#define DDRSS_PHY_1267_DATA 0x00000000
++#define DDRSS_PHY_1268_DATA 0x00000000
++#define DDRSS_PHY_1269_DATA 0x00000000
++#define DDRSS_PHY_1270_DATA 0x00000000
++#define DDRSS_PHY_1271_DATA 0x00000000
++#define DDRSS_PHY_1272_DATA 0x00000000
++#define DDRSS_PHY_1273_DATA 0x00000000
++#define DDRSS_PHY_1274_DATA 0x00000000
++#define DDRSS_PHY_1275_DATA 0x00000000
++#define DDRSS_PHY_1276_DATA 0x00000000
++#define DDRSS_PHY_1277_DATA 0x00000000
++#define DDRSS_PHY_1278_DATA 0x00000000
++#define DDRSS_PHY_1279_DATA 0x00000000
++#define DDRSS_PHY_1280_DATA 0x00000000
++#define DDRSS_PHY_1281_DATA 0x00000000
++#define DDRSS_PHY_1282_DATA 0x00000000
++#define DDRSS_PHY_1283_DATA 0x00000000
++#define DDRSS_PHY_1284_DATA 0x00000000
++#define DDRSS_PHY_1285_DATA 0x00000100
++#define DDRSS_PHY_1286_DATA 0x00000200
++#define DDRSS_PHY_1287_DATA 0x00000000
++#define DDRSS_PHY_1288_DATA 0x00000000
++#define DDRSS_PHY_1289_DATA 0x00000000
++#define DDRSS_PHY_1290_DATA 0x00000000
++#define DDRSS_PHY_1291_DATA 0x00400000
++#define DDRSS_PHY_1292_DATA 0x00000080
++#define DDRSS_PHY_1293_DATA 0x00DCBA98
++#define DDRSS_PHY_1294_DATA 0x03000000
++#define DDRSS_PHY_1295_DATA 0x00200000
++#define DDRSS_PHY_1296_DATA 0x00000000
++#define DDRSS_PHY_1297_DATA 0x00000000
++#define DDRSS_PHY_1298_DATA 0x00000000
++#define DDRSS_PHY_1299_DATA 0x00000000
++#define DDRSS_PHY_1300_DATA 0x00000000
++#define DDRSS_PHY_1301_DATA 0x0000002A
++#define DDRSS_PHY_1302_DATA 0x00000015
++#define DDRSS_PHY_1303_DATA 0x00000015
++#define DDRSS_PHY_1304_DATA 0x0000002A
++#define DDRSS_PHY_1305_DATA 0x00000033
++#define DDRSS_PHY_1306_DATA 0x0000000C
++#define DDRSS_PHY_1307_DATA 0x0000000C
++#define DDRSS_PHY_1308_DATA 0x00000033
++#define DDRSS_PHY_1309_DATA 0x0A418820
++#define DDRSS_PHY_1310_DATA 0x00000000
++#define DDRSS_PHY_1311_DATA 0x000F0000
++#define DDRSS_PHY_1312_DATA 0x20202003
++#define DDRSS_PHY_1313_DATA 0x00202020
++#define DDRSS_PHY_1314_DATA 0x20008008
++#define DDRSS_PHY_1315_DATA 0x00000810
++#define DDRSS_PHY_1316_DATA 0x00000F00
++#define DDRSS_PHY_1317_DATA 0x000304CC
++#define DDRSS_PHY_1318_DATA 0x03000003
++#define DDRSS_PHY_1319_DATA 0x00030000
++#define DDRSS_PHY_1320_DATA 0x00000300
++#define DDRSS_PHY_1321_DATA 0x00000300
++#define DDRSS_PHY_1322_DATA 0x00000300
++#define DDRSS_PHY_1323_DATA 0x00000300
++#define DDRSS_PHY_1324_DATA 0x42080010
++#define DDRSS_PHY_1325_DATA 0x0000803E
++#define DDRSS_PHY_1326_DATA 0x00000001
++#define DDRSS_PHY_1327_DATA 0x01000002
++#define DDRSS_PHY_1328_DATA 0x00008000
++#define DDRSS_PHY_1329_DATA 0x00000000
++#define DDRSS_PHY_1330_DATA 0x00000000
++#define DDRSS_PHY_1331_DATA 0x00000000
++#define DDRSS_PHY_1332_DATA 0x00000000
++#define DDRSS_PHY_1333_DATA 0x00000000
++#define DDRSS_PHY_1334_DATA 0x00000000
++#define DDRSS_PHY_1335_DATA 0x00000000
++#define DDRSS_PHY_1336_DATA 0x00000000
++#define DDRSS_PHY_1337_DATA 0x00000000
++#define DDRSS_PHY_1338_DATA 0x00000000
++#define DDRSS_PHY_1339_DATA 0x00000000
++#define DDRSS_PHY_1340_DATA 0x00000000
++#define DDRSS_PHY_1341_DATA 0x00000000
++#define DDRSS_PHY_1342_DATA 0x00000000
++#define DDRSS_PHY_1343_DATA 0x00000000
++#define DDRSS_PHY_1344_DATA 0x00000000
++#define DDRSS_PHY_1345_DATA 0x00000000
++#define DDRSS_PHY_1346_DATA 0x00000000
++#define DDRSS_PHY_1347_DATA 0x00000000
++#define DDRSS_PHY_1348_DATA 0x00000000
++#define DDRSS_PHY_1349_DATA 0x00000000
++#define DDRSS_PHY_1350_DATA 0x00000000
++#define DDRSS_PHY_1351_DATA 0x00000000
++#define DDRSS_PHY_1352_DATA 0x00000000
++#define DDRSS_PHY_1353_DATA 0x00000000
++#define DDRSS_PHY_1354_DATA 0x00000000
++#define DDRSS_PHY_1355_DATA 0x00000000
++#define DDRSS_PHY_1356_DATA 0x00000000
++#define DDRSS_PHY_1357_DATA 0x00000000
++#define DDRSS_PHY_1358_DATA 0x00000000
++#define DDRSS_PHY_1359_DATA 0x00000000
++#define DDRSS_PHY_1360_DATA 0x00000000
++#define DDRSS_PHY_1361_DATA 0x00000000
++#define DDRSS_PHY_1362_DATA 0x00000000
++#define DDRSS_PHY_1363_DATA 0x00000000
++#define DDRSS_PHY_1364_DATA 0x00000000
++#define DDRSS_PHY_1365_DATA 0x00000000
++#define DDRSS_PHY_1366_DATA 0x00000000
++#define DDRSS_PHY_1367_DATA 0x00000000
++#define DDRSS_PHY_1368_DATA 0x00000000
++#define DDRSS_PHY_1369_DATA 0x00000000
++#define DDRSS_PHY_1370_DATA 0x00000000
++#define DDRSS_PHY_1371_DATA 0x00000000
++#define DDRSS_PHY_1372_DATA 0x00000000
++#define DDRSS_PHY_1373_DATA 0x00000000
++#define DDRSS_PHY_1374_DATA 0x00000000
++#define DDRSS_PHY_1375_DATA 0x00000000
++#define DDRSS_PHY_1376_DATA 0x00000000
++#define DDRSS_PHY_1377_DATA 0x00000000
++#define DDRSS_PHY_1378_DATA 0x00000000
++#define DDRSS_PHY_1379_DATA 0x00000000
++#define DDRSS_PHY_1380_DATA 0x00000000
++#define DDRSS_PHY_1381_DATA 0x00000000
++#define DDRSS_PHY_1382_DATA 0x00000000
++#define DDRSS_PHY_1383_DATA 0x00000000
++#define DDRSS_PHY_1384_DATA 0x00000000
++#define DDRSS_PHY_1385_DATA 0x00000000
++#define DDRSS_PHY_1386_DATA 0x00000000
++#define DDRSS_PHY_1387_DATA 0x00000000
++#define DDRSS_PHY_1388_DATA 0x00000000
++#define DDRSS_PHY_1389_DATA 0x00000000
++#define DDRSS_PHY_1390_DATA 0x00000000
++#define DDRSS_PHY_1391_DATA 0x00000000
++#define DDRSS_PHY_1392_DATA 0x00000000
++#define DDRSS_PHY_1393_DATA 0x00000000
++#define DDRSS_PHY_1394_DATA 0x00000000
++#define DDRSS_PHY_1395_DATA 0x00000000
++#define DDRSS_PHY_1396_DATA 0x00000000
++#define DDRSS_PHY_1397_DATA 0x00000000
++#define DDRSS_PHY_1398_DATA 0x00000000
++#define DDRSS_PHY_1399_DATA 0x00000000
++#define DDRSS_PHY_1400_DATA 0x00000000
++#define DDRSS_PHY_1401_DATA 0x00000000
++#define DDRSS_PHY_1402_DATA 0x00000000
++#define DDRSS_PHY_1403_DATA 0x00000000
++#define DDRSS_PHY_1404_DATA 0x00000000
++#define DDRSS_PHY_1405_DATA 0x00000000
++#define DDRSS_PHY_1406_DATA 0x00000000
++#define DDRSS_PHY_1407_DATA 0x00000000
++#define DDRSS_PHY_1408_DATA 0x00000000
++#define DDRSS_PHY_1409_DATA 0x00000000
++#define DDRSS_PHY_1410_DATA 0x00000000
++#define DDRSS_PHY_1411_DATA 0x00000000
++#define DDRSS_PHY_1412_DATA 0x00000000
++#define DDRSS_PHY_1413_DATA 0x00000000
++#define DDRSS_PHY_1414_DATA 0x00000000
++#define DDRSS_PHY_1415_DATA 0x00000000
++#define DDRSS_PHY_1416_DATA 0x00000000
++#define DDRSS_PHY_1417_DATA 0x00000000
++#define DDRSS_PHY_1418_DATA 0x00000000
++#define DDRSS_PHY_1419_DATA 0x00000000
++#define DDRSS_PHY_1420_DATA 0x00000000
++#define DDRSS_PHY_1421_DATA 0x00000000
++#define DDRSS_PHY_1422_DATA 0x00000000
++#define DDRSS_PHY_1423_DATA 0x00000000
++#define DDRSS_PHY_1424_DATA 0x00000000
++#define DDRSS_PHY_1425_DATA 0x00000000
++#define DDRSS_PHY_1426_DATA 0x00000000
++#define DDRSS_PHY_1427_DATA 0x00000000
++#define DDRSS_PHY_1428_DATA 0x00000000
++#define DDRSS_PHY_1429_DATA 0x00000000
++#define DDRSS_PHY_1430_DATA 0x00000000
++#define DDRSS_PHY_1431_DATA 0x00000000
++#define DDRSS_PHY_1432_DATA 0x00000000
++#define DDRSS_PHY_1433_DATA 0x00000000
++#define DDRSS_PHY_1434_DATA 0x00000000
++#define DDRSS_PHY_1435_DATA 0x00000000
++#define DDRSS_PHY_1436_DATA 0x00000000
++#define DDRSS_PHY_1437_DATA 0x00000000
++#define DDRSS_PHY_1438_DATA 0x00000000
++#define DDRSS_PHY_1439_DATA 0x00000000
++#define DDRSS_PHY_1440_DATA 0x00000000
++#define DDRSS_PHY_1441_DATA 0x00000000
++#define DDRSS_PHY_1442_DATA 0x00000000
++#define DDRSS_PHY_1443_DATA 0x00000000
++#define DDRSS_PHY_1444_DATA 0x00000000
++#define DDRSS_PHY_1445_DATA 0x00000000
++#define DDRSS_PHY_1446_DATA 0x00000000
++#define DDRSS_PHY_1447_DATA 0x00000000
++#define DDRSS_PHY_1448_DATA 0x00000000
++#define DDRSS_PHY_1449_DATA 0x00000000
++#define DDRSS_PHY_1450_DATA 0x00000000
++#define DDRSS_PHY_1451_DATA 0x00000000
++#define DDRSS_PHY_1452_DATA 0x00000000
++#define DDRSS_PHY_1453_DATA 0x00000000
++#define DDRSS_PHY_1454_DATA 0x00000000
++#define DDRSS_PHY_1455_DATA 0x00000000
++#define DDRSS_PHY_1456_DATA 0x00000000
++#define DDRSS_PHY_1457_DATA 0x00000000
++#define DDRSS_PHY_1458_DATA 0x00000000
++#define DDRSS_PHY_1459_DATA 0x00000000
++#define DDRSS_PHY_1460_DATA 0x00000000
++#define DDRSS_PHY_1461_DATA 0x00000000
++#define DDRSS_PHY_1462_DATA 0x00000000
++#define DDRSS_PHY_1463_DATA 0x00000000
++#define DDRSS_PHY_1464_DATA 0x00000000
++#define DDRSS_PHY_1465_DATA 0x00000000
++#define DDRSS_PHY_1466_DATA 0x00000000
++#define DDRSS_PHY_1467_DATA 0x00000000
++#define DDRSS_PHY_1468_DATA 0x00000000
++#define DDRSS_PHY_1469_DATA 0x00000000
++#define DDRSS_PHY_1470_DATA 0x00000000
++#define DDRSS_PHY_1471_DATA 0x00000000
++#define DDRSS_PHY_1472_DATA 0x00000000
++#define DDRSS_PHY_1473_DATA 0x00000000
++#define DDRSS_PHY_1474_DATA 0x00000000
++#define DDRSS_PHY_1475_DATA 0x00000000
++#define DDRSS_PHY_1476_DATA 0x00000000
++#define DDRSS_PHY_1477_DATA 0x00000000
++#define DDRSS_PHY_1478_DATA 0x00000000
++#define DDRSS_PHY_1479_DATA 0x00000000
++#define DDRSS_PHY_1480_DATA 0x00000000
++#define DDRSS_PHY_1481_DATA 0x00000000
++#define DDRSS_PHY_1482_DATA 0x00000000
++#define DDRSS_PHY_1483_DATA 0x00000000
++#define DDRSS_PHY_1484_DATA 0x00000000
++#define DDRSS_PHY_1485_DATA 0x00000000
++#define DDRSS_PHY_1486_DATA 0x00000000
++#define DDRSS_PHY_1487_DATA 0x00000000
++#define DDRSS_PHY_1488_DATA 0x00000000
++#define DDRSS_PHY_1489_DATA 0x00000000
++#define DDRSS_PHY_1490_DATA 0x00000000
++#define DDRSS_PHY_1491_DATA 0x00000000
++#define DDRSS_PHY_1492_DATA 0x00000000
++#define DDRSS_PHY_1493_DATA 0x00000000
++#define DDRSS_PHY_1494_DATA 0x00000000
++#define DDRSS_PHY_1495_DATA 0x00000000
++#define DDRSS_PHY_1496_DATA 0x00000000
++#define DDRSS_PHY_1497_DATA 0x00000000
++#define DDRSS_PHY_1498_DATA 0x00000000
++#define DDRSS_PHY_1499_DATA 0x00000000
++#define DDRSS_PHY_1500_DATA 0x00000000
++#define DDRSS_PHY_1501_DATA 0x00000000
++#define DDRSS_PHY_1502_DATA 0x00000000
++#define DDRSS_PHY_1503_DATA 0x00000000
++#define DDRSS_PHY_1504_DATA 0x00000000
++#define DDRSS_PHY_1505_DATA 0x00000000
++#define DDRSS_PHY_1506_DATA 0x00000000
++#define DDRSS_PHY_1507_DATA 0x00000000
++#define DDRSS_PHY_1508_DATA 0x00000000
++#define DDRSS_PHY_1509_DATA 0x00000000
++#define DDRSS_PHY_1510_DATA 0x00000000
++#define DDRSS_PHY_1511_DATA 0x00000000
++#define DDRSS_PHY_1512_DATA 0x00000000
++#define DDRSS_PHY_1513_DATA 0x00000000
++#define DDRSS_PHY_1514_DATA 0x00000000
++#define DDRSS_PHY_1515_DATA 0x00000000
++#define DDRSS_PHY_1516_DATA 0x00000000
++#define DDRSS_PHY_1517_DATA 0x00000000
++#define DDRSS_PHY_1518_DATA 0x00000000
++#define DDRSS_PHY_1519_DATA 0x00000000
++#define DDRSS_PHY_1520_DATA 0x00000000
++#define DDRSS_PHY_1521_DATA 0x00000000
++#define DDRSS_PHY_1522_DATA 0x00000000
++#define DDRSS_PHY_1523_DATA 0x00000000
++#define DDRSS_PHY_1524_DATA 0x00000000
++#define DDRSS_PHY_1525_DATA 0x00000000
++#define DDRSS_PHY_1526_DATA 0x00000000
++#define DDRSS_PHY_1527_DATA 0x00000000
++#define DDRSS_PHY_1528_DATA 0x00000000
++#define DDRSS_PHY_1529_DATA 0x00000000
++#define DDRSS_PHY_1530_DATA 0x00000000
++#define DDRSS_PHY_1531_DATA 0x00000000
++#define DDRSS_PHY_1532_DATA 0x00000000
++#define DDRSS_PHY_1533_DATA 0x00000000
++#define DDRSS_PHY_1534_DATA 0x00000000
++#define DDRSS_PHY_1535_DATA 0x00000000
++#define DDRSS_PHY_1536_DATA 0x00000000
++#define DDRSS_PHY_1537_DATA 0x00000000
++#define DDRSS_PHY_1538_DATA 0x00000000
++#define DDRSS_PHY_1539_DATA 0x00000000
++#define DDRSS_PHY_1540_DATA 0x00000000
++#define DDRSS_PHY_1541_DATA 0x00000100
++#define DDRSS_PHY_1542_DATA 0x00000200
++#define DDRSS_PHY_1543_DATA 0x00000000
++#define DDRSS_PHY_1544_DATA 0x00000000
++#define DDRSS_PHY_1545_DATA 0x00000000
++#define DDRSS_PHY_1546_DATA 0x00000000
++#define DDRSS_PHY_1547_DATA 0x00400000
++#define DDRSS_PHY_1548_DATA 0x00000080
++#define DDRSS_PHY_1549_DATA 0x00DCBA98
++#define DDRSS_PHY_1550_DATA 0x03000000
++#define DDRSS_PHY_1551_DATA 0x00200000
++#define DDRSS_PHY_1552_DATA 0x00000000
++#define DDRSS_PHY_1553_DATA 0x00000000
++#define DDRSS_PHY_1554_DATA 0x00000000
++#define DDRSS_PHY_1555_DATA 0x00000000
++#define DDRSS_PHY_1556_DATA 0x00000000
++#define DDRSS_PHY_1557_DATA 0x0000002A
++#define DDRSS_PHY_1558_DATA 0x00000015
++#define DDRSS_PHY_1559_DATA 0x00000015
++#define DDRSS_PHY_1560_DATA 0x0000002A
++#define DDRSS_PHY_1561_DATA 0x00000033
++#define DDRSS_PHY_1562_DATA 0x0000000C
++#define DDRSS_PHY_1563_DATA 0x0000000C
++#define DDRSS_PHY_1564_DATA 0x00000033
++#define DDRSS_PHY_1565_DATA 0x0A418820
++#define DDRSS_PHY_1566_DATA 0x10000000
++#define DDRSS_PHY_1567_DATA 0x000F0000
++#define DDRSS_PHY_1568_DATA 0x20202003
++#define DDRSS_PHY_1569_DATA 0x00202020
++#define DDRSS_PHY_1570_DATA 0x20008008
++#define DDRSS_PHY_1571_DATA 0x00000810
++#define DDRSS_PHY_1572_DATA 0x00000F00
++#define DDRSS_PHY_1573_DATA 0x000304CC
++#define DDRSS_PHY_1574_DATA 0x03000003
++#define DDRSS_PHY_1575_DATA 0x00030000
++#define DDRSS_PHY_1576_DATA 0x00000300
++#define DDRSS_PHY_1577_DATA 0x00000300
++#define DDRSS_PHY_1578_DATA 0x00000300
++#define DDRSS_PHY_1579_DATA 0x00000300
++#define DDRSS_PHY_1580_DATA 0x42080010
++#define DDRSS_PHY_1581_DATA 0x0000803E
++#define DDRSS_PHY_1582_DATA 0x00000001
++#define DDRSS_PHY_1583_DATA 0x01000002
++#define DDRSS_PHY_1584_DATA 0x00008000
++#define DDRSS_PHY_1585_DATA 0x00000000
++#define DDRSS_PHY_1586_DATA 0x00000000
++#define DDRSS_PHY_1587_DATA 0x00000000
++#define DDRSS_PHY_1588_DATA 0x00000000
++#define DDRSS_PHY_1589_DATA 0x00000000
++#define DDRSS_PHY_1590_DATA 0x00000000
++#define DDRSS_PHY_1591_DATA 0x00000000
++#define DDRSS_PHY_1592_DATA 0x00000000
++#define DDRSS_PHY_1593_DATA 0x00000000
++#define DDRSS_PHY_1594_DATA 0x00000000
++#define DDRSS_PHY_1595_DATA 0x00000000
++#define DDRSS_PHY_1596_DATA 0x00000000
++#define DDRSS_PHY_1597_DATA 0x00000000
++#define DDRSS_PHY_1598_DATA 0x00000000
++#define DDRSS_PHY_1599_DATA 0x00000000
++#define DDRSS_PHY_1600_DATA 0x00000000
++#define DDRSS_PHY_1601_DATA 0x00000000
++#define DDRSS_PHY_1602_DATA 0x00000000
++#define DDRSS_PHY_1603_DATA 0x00000000
++#define DDRSS_PHY_1604_DATA 0x00000000
++#define DDRSS_PHY_1605_DATA 0x00000000
++#define DDRSS_PHY_1606_DATA 0x00000000
++#define DDRSS_PHY_1607_DATA 0x00000000
++#define DDRSS_PHY_1608_DATA 0x00000000
++#define DDRSS_PHY_1609_DATA 0x00000000
++#define DDRSS_PHY_1610_DATA 0x00000000
++#define DDRSS_PHY_1611_DATA 0x00000000
++#define DDRSS_PHY_1612_DATA 0x00000000
++#define DDRSS_PHY_1613_DATA 0x00000000
++#define DDRSS_PHY_1614_DATA 0x00000000
++#define DDRSS_PHY_1615_DATA 0x00000000
++#define DDRSS_PHY_1616_DATA 0x00000000
++#define DDRSS_PHY_1617_DATA 0x00000000
++#define DDRSS_PHY_1618_DATA 0x00000000
++#define DDRSS_PHY_1619_DATA 0x00000000
++#define DDRSS_PHY_1620_DATA 0x00000000
++#define DDRSS_PHY_1621_DATA 0x00000000
++#define DDRSS_PHY_1622_DATA 0x00000000
++#define DDRSS_PHY_1623_DATA 0x00000000
++#define DDRSS_PHY_1624_DATA 0x00000000
++#define DDRSS_PHY_1625_DATA 0x00000000
++#define DDRSS_PHY_1626_DATA 0x00000000
++#define DDRSS_PHY_1627_DATA 0x00000000
++#define DDRSS_PHY_1628_DATA 0x00000000
++#define DDRSS_PHY_1629_DATA 0x00000000
++#define DDRSS_PHY_1630_DATA 0x00000000
++#define DDRSS_PHY_1631_DATA 0x00000000
++#define DDRSS_PHY_1632_DATA 0x00000000
++#define DDRSS_PHY_1633_DATA 0x00000000
++#define DDRSS_PHY_1634_DATA 0x00000000
++#define DDRSS_PHY_1635_DATA 0x00000000
++#define DDRSS_PHY_1636_DATA 0x00000000
++#define DDRSS_PHY_1637_DATA 0x00000000
++#define DDRSS_PHY_1638_DATA 0x00000000
++#define DDRSS_PHY_1639_DATA 0x00000000
++#define DDRSS_PHY_1640_DATA 0x00000000
++#define DDRSS_PHY_1641_DATA 0x00000000
++#define DDRSS_PHY_1642_DATA 0x00000000
++#define DDRSS_PHY_1643_DATA 0x00000000
++#define DDRSS_PHY_1644_DATA 0x00000000
++#define DDRSS_PHY_1645_DATA 0x00000000
++#define DDRSS_PHY_1646_DATA 0x00000000
++#define DDRSS_PHY_1647_DATA 0x00000000
++#define DDRSS_PHY_1648_DATA 0x00000000
++#define DDRSS_PHY_1649_DATA 0x00000000
++#define DDRSS_PHY_1650_DATA 0x00000000
++#define DDRSS_PHY_1651_DATA 0x00000000
++#define DDRSS_PHY_1652_DATA 0x00000000
++#define DDRSS_PHY_1653_DATA 0x00000000
++#define DDRSS_PHY_1654_DATA 0x00000000
++#define DDRSS_PHY_1655_DATA 0x00000000
++#define DDRSS_PHY_1656_DATA 0x00000000
++#define DDRSS_PHY_1657_DATA 0x00000000
++#define DDRSS_PHY_1658_DATA 0x00000000
++#define DDRSS_PHY_1659_DATA 0x00000000
++#define DDRSS_PHY_1660_DATA 0x00000000
++#define DDRSS_PHY_1661_DATA 0x00000000
++#define DDRSS_PHY_1662_DATA 0x00000000
++#define DDRSS_PHY_1663_DATA 0x00000000
++#define DDRSS_PHY_1664_DATA 0x00000000
++#define DDRSS_PHY_1665_DATA 0x00000000
++#define DDRSS_PHY_1666_DATA 0x00000000
++#define DDRSS_PHY_1667_DATA 0x00000000
++#define DDRSS_PHY_1668_DATA 0x00000000
++#define DDRSS_PHY_1669_DATA 0x00000000
++#define DDRSS_PHY_1670_DATA 0x00000000
++#define DDRSS_PHY_1671_DATA 0x00000000
++#define DDRSS_PHY_1672_DATA 0x00000000
++#define DDRSS_PHY_1673_DATA 0x00000000
++#define DDRSS_PHY_1674_DATA 0x00000000
++#define DDRSS_PHY_1675_DATA 0x00000000
++#define DDRSS_PHY_1676_DATA 0x00000000
++#define DDRSS_PHY_1677_DATA 0x00000000
++#define DDRSS_PHY_1678_DATA 0x00000000
++#define DDRSS_PHY_1679_DATA 0x00000000
++#define DDRSS_PHY_1680_DATA 0x00000000
++#define DDRSS_PHY_1681_DATA 0x00000000
++#define DDRSS_PHY_1682_DATA 0x00000000
++#define DDRSS_PHY_1683_DATA 0x00000000
++#define DDRSS_PHY_1684_DATA 0x00000000
++#define DDRSS_PHY_1685_DATA 0x00000000
++#define DDRSS_PHY_1686_DATA 0x00000000
++#define DDRSS_PHY_1687_DATA 0x00000000
++#define DDRSS_PHY_1688_DATA 0x00000000
++#define DDRSS_PHY_1689_DATA 0x00000000
++#define DDRSS_PHY_1690_DATA 0x00000000
++#define DDRSS_PHY_1691_DATA 0x00000000
++#define DDRSS_PHY_1692_DATA 0x00000000
++#define DDRSS_PHY_1693_DATA 0x00000000
++#define DDRSS_PHY_1694_DATA 0x00000000
++#define DDRSS_PHY_1695_DATA 0x00000000
++#define DDRSS_PHY_1696_DATA 0x00000000
++#define DDRSS_PHY_1697_DATA 0x00000000
++#define DDRSS_PHY_1698_DATA 0x00000000
++#define DDRSS_PHY_1699_DATA 0x00000000
++#define DDRSS_PHY_1700_DATA 0x00000000
++#define DDRSS_PHY_1701_DATA 0x00000000
++#define DDRSS_PHY_1702_DATA 0x00000000
++#define DDRSS_PHY_1703_DATA 0x00000000
++#define DDRSS_PHY_1704_DATA 0x00000000
++#define DDRSS_PHY_1705_DATA 0x00000000
++#define DDRSS_PHY_1706_DATA 0x00000000
++#define DDRSS_PHY_1707_DATA 0x00000000
++#define DDRSS_PHY_1708_DATA 0x00000000
++#define DDRSS_PHY_1709_DATA 0x00000000
++#define DDRSS_PHY_1710_DATA 0x00000000
++#define DDRSS_PHY_1711_DATA 0x00000000
++#define DDRSS_PHY_1712_DATA 0x00000000
++#define DDRSS_PHY_1713_DATA 0x00000000
++#define DDRSS_PHY_1714_DATA 0x00000000
++#define DDRSS_PHY_1715_DATA 0x00000000
++#define DDRSS_PHY_1716_DATA 0x00000000
++#define DDRSS_PHY_1717_DATA 0x00000000
++#define DDRSS_PHY_1718_DATA 0x00000000
++#define DDRSS_PHY_1719_DATA 0x00000000
++#define DDRSS_PHY_1720_DATA 0x00000000
++#define DDRSS_PHY_1721_DATA 0x00000000
++#define DDRSS_PHY_1722_DATA 0x00000000
++#define DDRSS_PHY_1723_DATA 0x00000000
++#define DDRSS_PHY_1724_DATA 0x00000000
++#define DDRSS_PHY_1725_DATA 0x00000000
++#define DDRSS_PHY_1726_DATA 0x00000000
++#define DDRSS_PHY_1727_DATA 0x00000000
++#define DDRSS_PHY_1728_DATA 0x00000000
++#define DDRSS_PHY_1729_DATA 0x00000000
++#define DDRSS_PHY_1730_DATA 0x00000000
++#define DDRSS_PHY_1731_DATA 0x00000000
++#define DDRSS_PHY_1732_DATA 0x00000000
++#define DDRSS_PHY_1733_DATA 0x00000000
++#define DDRSS_PHY_1734_DATA 0x00000000
++#define DDRSS_PHY_1735_DATA 0x00000000
++#define DDRSS_PHY_1736_DATA 0x00000000
++#define DDRSS_PHY_1737_DATA 0x00000000
++#define DDRSS_PHY_1738_DATA 0x00000000
++#define DDRSS_PHY_1739_DATA 0x00000000
++#define DDRSS_PHY_1740_DATA 0x00000000
++#define DDRSS_PHY_1741_DATA 0x00000000
++#define DDRSS_PHY_1742_DATA 0x00000000
++#define DDRSS_PHY_1743_DATA 0x00000000
++#define DDRSS_PHY_1744_DATA 0x00000000
++#define DDRSS_PHY_1745_DATA 0x00000000
++#define DDRSS_PHY_1746_DATA 0x00000000
++#define DDRSS_PHY_1747_DATA 0x00000000
++#define DDRSS_PHY_1748_DATA 0x00000000
++#define DDRSS_PHY_1749_DATA 0x00000000
++#define DDRSS_PHY_1750_DATA 0x00000000
++#define DDRSS_PHY_1751_DATA 0x00000000
++#define DDRSS_PHY_1752_DATA 0x00000000
++#define DDRSS_PHY_1753_DATA 0x00000000
++#define DDRSS_PHY_1754_DATA 0x00000000
++#define DDRSS_PHY_1755_DATA 0x00000000
++#define DDRSS_PHY_1756_DATA 0x00000000
++#define DDRSS_PHY_1757_DATA 0x00000000
++#define DDRSS_PHY_1758_DATA 0x00000000
++#define DDRSS_PHY_1759_DATA 0x00000000
++#define DDRSS_PHY_1760_DATA 0x00000000
++#define DDRSS_PHY_1761_DATA 0x00000000
++#define DDRSS_PHY_1762_DATA 0x00000000
++#define DDRSS_PHY_1763_DATA 0x00000000
++#define DDRSS_PHY_1764_DATA 0x00000000
++#define DDRSS_PHY_1765_DATA 0x00000000
++#define DDRSS_PHY_1766_DATA 0x00000000
++#define DDRSS_PHY_1767_DATA 0x00000000
++#define DDRSS_PHY_1768_DATA 0x00000000
++#define DDRSS_PHY_1769_DATA 0x00000000
++#define DDRSS_PHY_1770_DATA 0x00000000
++#define DDRSS_PHY_1771_DATA 0x00000000
++#define DDRSS_PHY_1772_DATA 0x00000000
++#define DDRSS_PHY_1773_DATA 0x00000000
++#define DDRSS_PHY_1774_DATA 0x00000000
++#define DDRSS_PHY_1775_DATA 0x00000000
++#define DDRSS_PHY_1776_DATA 0x00000000
++#define DDRSS_PHY_1777_DATA 0x00000000
++#define DDRSS_PHY_1778_DATA 0x00000000
++#define DDRSS_PHY_1779_DATA 0x00000000
++#define DDRSS_PHY_1780_DATA 0x00000000
++#define DDRSS_PHY_1781_DATA 0x00000000
++#define DDRSS_PHY_1782_DATA 0x00000000
++#define DDRSS_PHY_1783_DATA 0x00000000
++#define DDRSS_PHY_1784_DATA 0x00000000
++#define DDRSS_PHY_1785_DATA 0x00000000
++#define DDRSS_PHY_1786_DATA 0x00000000
++#define DDRSS_PHY_1787_DATA 0x00000000
++#define DDRSS_PHY_1788_DATA 0x00000000
++#define DDRSS_PHY_1789_DATA 0x00000000
++#define DDRSS_PHY_1790_DATA 0x00000000
++#define DDRSS_PHY_1791_DATA 0x00000000
++#define DDRSS_PHY_1792_DATA 0x00000000
++#define DDRSS_PHY_1793_DATA 0x00010100
++#define DDRSS_PHY_1794_DATA 0x00000000
++#define DDRSS_PHY_1795_DATA 0x00000000
++#define DDRSS_PHY_1796_DATA 0x00000000
++#define DDRSS_PHY_1797_DATA 0x00000000
++#define DDRSS_PHY_1798_DATA 0x00050000
++#define DDRSS_PHY_1799_DATA 0x04000000
++#define DDRSS_PHY_1800_DATA 0x00000055
++#define DDRSS_PHY_1801_DATA 0x00000000
++#define DDRSS_PHY_1802_DATA 0x00000000
++#define DDRSS_PHY_1803_DATA 0x00000000
++#define DDRSS_PHY_1804_DATA 0x00000000
++#define DDRSS_PHY_1805_DATA 0x00002001
++#define DDRSS_PHY_1806_DATA 0x00004003
++#define DDRSS_PHY_1807_DATA 0x50020028
++#define DDRSS_PHY_1808_DATA 0x01010000
++#define DDRSS_PHY_1809_DATA 0x80080001
++#define DDRSS_PHY_1810_DATA 0x10200000
++#define DDRSS_PHY_1811_DATA 0x00000008
++#define DDRSS_PHY_1812_DATA 0x00000000
++#define DDRSS_PHY_1813_DATA 0x06000000
++#define DDRSS_PHY_1814_DATA 0x010F0F0E
++#define DDRSS_PHY_1815_DATA 0x00040101
++#define DDRSS_PHY_1816_DATA 0x0000010F
++#define DDRSS_PHY_1817_DATA 0x00000000
++#define DDRSS_PHY_1818_DATA 0x00000064
++#define DDRSS_PHY_1819_DATA 0x00000000
++#define DDRSS_PHY_1820_DATA 0x00000000
++#define DDRSS_PHY_1821_DATA 0x0F0F0F01
++#define DDRSS_PHY_1822_DATA 0x0F0F0F02
++#define DDRSS_PHY_1823_DATA 0x0F0F0F0F
++#define DDRSS_PHY_1824_DATA 0x0F0F0804
++#define DDRSS_PHY_1825_DATA 0x00800120
++#define DDRSS_PHY_1826_DATA 0x00041B42
++#define DDRSS_PHY_1827_DATA 0x00004201
++#define DDRSS_PHY_1828_DATA 0x00000000
++#define DDRSS_PHY_1829_DATA 0x00000000
++#define DDRSS_PHY_1830_DATA 0x00000000
++#define DDRSS_PHY_1831_DATA 0x00000000
++#define DDRSS_PHY_1832_DATA 0x00000000
++#define DDRSS_PHY_1833_DATA 0x00000000
++#define DDRSS_PHY_1834_DATA 0x03010100
++#define DDRSS_PHY_1835_DATA 0x00540007
++#define DDRSS_PHY_1836_DATA 0x000040A2
++#define DDRSS_PHY_1837_DATA 0x00024410
++#define DDRSS_PHY_1838_DATA 0x00004410
++#define DDRSS_PHY_1839_DATA 0x00004410
++#define DDRSS_PHY_1840_DATA 0x00004410
++#define DDRSS_PHY_1841_DATA 0x00004410
++#define DDRSS_PHY_1842_DATA 0x00004410
++#define DDRSS_PHY_1843_DATA 0x00004410
++#define DDRSS_PHY_1844_DATA 0x00004410
++#define DDRSS_PHY_1845_DATA 0x00004410
++#define DDRSS_PHY_1846_DATA 0x00004410
++#define DDRSS_PHY_1847_DATA 0x00000000
++#define DDRSS_PHY_1848_DATA 0x00000076
++#define DDRSS_PHY_1849_DATA 0x00000400
++#define DDRSS_PHY_1850_DATA 0x00000008
++#define DDRSS_PHY_1851_DATA 0x00000000
++#define DDRSS_PHY_1852_DATA 0x00000000
++#define DDRSS_PHY_1853_DATA 0x00000000
++#define DDRSS_PHY_1854_DATA 0x00000000
++#define DDRSS_PHY_1855_DATA 0x00000000
++#define DDRSS_PHY_1856_DATA 0x03000000
++#define DDRSS_PHY_1857_DATA 0x00000000
++#define DDRSS_PHY_1858_DATA 0x00000000
++#define DDRSS_PHY_1859_DATA 0x00000000
++#define DDRSS_PHY_1860_DATA 0x04102006
++#define DDRSS_PHY_1861_DATA 0x00041020
++#define DDRSS_PHY_1862_DATA 0x01C98C98
++#define DDRSS_PHY_1863_DATA 0x3F400000
++#define DDRSS_PHY_1864_DATA 0x3F3F1F3F
++#define DDRSS_PHY_1865_DATA 0x0000001F
++#define DDRSS_PHY_1866_DATA 0x00000000
++#define DDRSS_PHY_1867_DATA 0x00000000
++#define DDRSS_PHY_1868_DATA 0x00000000
++#define DDRSS_PHY_1869_DATA 0x00000001
++#define DDRSS_PHY_1870_DATA 0x00000000
++#define DDRSS_PHY_1871_DATA 0x00000000
++#define DDRSS_PHY_1872_DATA 0x00000000
++#define DDRSS_PHY_1873_DATA 0x00000000
++#define DDRSS_PHY_1874_DATA 0x76543210
++#define DDRSS_PHY_1875_DATA 0x06010198
++#define DDRSS_PHY_1876_DATA 0x00000000
++#define DDRSS_PHY_1877_DATA 0x00000000
++#define DDRSS_PHY_1878_DATA 0x00000000
++#define DDRSS_PHY_1879_DATA 0x00040700
++#define DDRSS_PHY_1880_DATA 0x00000000
++#define DDRSS_PHY_1881_DATA 0x00000000
++#define DDRSS_PHY_1882_DATA 0x00000000
++#define DDRSS_PHY_1883_DATA 0x00000000
++#define DDRSS_PHY_1884_DATA 0x00000000
++#define DDRSS_PHY_1885_DATA 0x00000002
++#define DDRSS_PHY_1886_DATA 0x00000000
++#define DDRSS_PHY_1887_DATA 0x00000000
++#define DDRSS_PHY_1888_DATA 0x0001F7C3
++#define DDRSS_PHY_1889_DATA 0x03000003
++#define DDRSS_PHY_1890_DATA 0x00000000
++#define DDRSS_PHY_1891_DATA 0x00001142
++#define DDRSS_PHY_1892_DATA 0x01020000
++#define DDRSS_PHY_1893_DATA 0x00000080
++#define DDRSS_PHY_1894_DATA 0x03900390
++#define DDRSS_PHY_1895_DATA 0x03900390
++#define DDRSS_PHY_1896_DATA 0x03900390
++#define DDRSS_PHY_1897_DATA 0x03900390
++#define DDRSS_PHY_1898_DATA 0x03000300
++#define DDRSS_PHY_1899_DATA 0x03000300
++#define DDRSS_PHY_1900_DATA 0x00000300
++#define DDRSS_PHY_1901_DATA 0x00000300
++#define DDRSS_PHY_1902_DATA 0x00000300
++#define DDRSS_PHY_1903_DATA 0x00000300
++#define DDRSS_PHY_1904_DATA 0x00000004
++#define DDRSS_PHY_1905_DATA 0x3183BF77
++#define DDRSS_PHY_1906_DATA 0x00000000
++#define DDRSS_PHY_1907_DATA 0x0C000DFF
++#define DDRSS_PHY_1908_DATA 0x30000DFF
++#define DDRSS_PHY_1909_DATA 0x3F0DFF11
++#define DDRSS_PHY_1910_DATA 0x00EF0000
++#define DDRSS_PHY_1911_DATA 0x780DFFCC
++#define DDRSS_PHY_1912_DATA 0x00000C11
++#define DDRSS_PHY_1913_DATA 0x00018011
++#define DDRSS_PHY_1914_DATA 0x0089FF00
++#define DDRSS_PHY_1915_DATA 0x000C3F11
++#define DDRSS_PHY_1916_DATA 0x01990000
++#define DDRSS_PHY_1917_DATA 0x000C3F91
++#define DDRSS_PHY_1918_DATA 0x01990000
++#define DDRSS_PHY_1919_DATA 0x3F0DFF11
++#define DDRSS_PHY_1920_DATA 0x00EF0000
++#define DDRSS_PHY_1921_DATA 0x00018011
++#define DDRSS_PHY_1922_DATA 0x0089FF00
++#define DDRSS_PHY_1923_DATA 0x20040005
+diff --git a/arch/arm/dts/k3-am62p-sk-binman.dtsi b/arch/arm/dts/k3-am62p-sk-binman.dtsi
 new file mode 100644
-index 0000000000000..3cc211ea20259
+index 0000000000000..dea14945bf563
 --- /dev/null
-+++ b/arch/arm/mach-k3/r5/am62px/dev-data.c
-@@ -0,0 +1,71 @@
-+// SPDX-License-Identifier: GPL-2.0+
++++ b/arch/arm/dts/k3-am62p-sk-binman.dtsi
+@@ -0,0 +1,173 @@
++// SPDX-License-Identifier: GPL-2.0
 +/*
-+ * AM62PX specific device platform data
-+ *
-+ * This file is auto generated. Please do not hand edit and report any issues
-+ * to Bryan Brattlof <bb@ti.com>.
-+ *
-+ * Copyright (C) 2020-2023 Texas Instruments Incorporated - https://www.ti.com/
++ * Copyright (C) 2022 Texas Instruments Incorporated - https://www.ti.com/
 + */
 +
-+#include "k3-dev.h"
++#include "k3-binman.dtsi"
 +
-+static struct ti_psc soc_psc_list[] = {
-+	[0] = PSC(0, 0x00400000),
++#if IS_ENABLED(CONFIG_TARGET_AM62P5_R5_EVM)
++
++&binman {
++	tiboot3-am62px-hs-fs-evm.bin {
++		filename = "tiboot3-am62px-hs-fs-evm.bin";
++		symlink = "tiboot3.bin";
++
++		ti-secure-rom {
++			content = <&u_boot_spl_fs>, <&ti_fs_enc_fs>, <&combined_tifs_cfg_fs>,
++				  <&combined_dm_cfg_fs>, <&sysfw_inner_cert_fs>;
++			combined;
++			dm-data;
++			sysfw-inner-cert;
++			keyfile = "custMpk.pem";
++			sw-rev = <1>;
++			content-sbl = <&u_boot_spl_fs>;
++			content-sysfw = <&ti_fs_enc_fs>;
++			content-sysfw-data = <&combined_tifs_cfg_fs>;
++			content-sysfw-inner-cert = <&sysfw_inner_cert_fs>;
++			content-dm-data = <&combined_dm_cfg_fs>;
++			load = <0x43c00000>;
++			load-sysfw = <0x40000>;
++			load-sysfw-data = <0x67000>;
++			load-dm-data = <0x43c4a800>;
++		};
++
++		u_boot_spl_fs: u-boot-spl {
++			no-expanded;
++		};
++
++		ti_fs_enc_fs: ti-fs-enc.bin {
++			filename = "ti-sysfw/ti-fs-firmware-am62px-hs-fs-enc.bin";
++			type = "blob-ext";
++			optional;
++		};
++
++		combined_tifs_cfg_fs: combined-tifs-cfg.bin {
++			filename = "combined-tifs-cfg.bin";
++			type = "blob-ext";
++		};
++
++		sysfw_inner_cert_fs: sysfw-inner-cert {
++			filename = "ti-sysfw/ti-fs-firmware-am62px-hs-fs-cert.bin";
++			type = "blob-ext";
++			optional;
++		};
++
++		combined_dm_cfg_fs: combined-dm-cfg.bin {
++			filename = "combined-dm-cfg.bin";
++			type = "blob-ext";
++		};
++	};
 +};
 +
-+static struct ti_pd soc_pd_list[] = {
-+	[0] = PSC_PD(0, &soc_psc_list[0], NULL),
-+	[1] = PSC_PD(3, &soc_psc_list[0], &soc_pd_list[0]),
-+	[2] = PSC_PD(4, &soc_psc_list[0], &soc_pd_list[1]),
-+	[3] = PSC_PD(13, &soc_psc_list[0], &soc_pd_list[0]),
++#endif /* CONFIG_TARGET_AM62P5_R5_EVM */
++
++#if IS_ENABLED(CONFIG_TARGET_AM62P5_A53_EVM)
++
++#define SPL_AM62PX_SK_DTB "spl/dts/ti/k3-am62p5-sk.dtb"
++#define AM62PX_SK_DTB "u-boot.dtb"
++
++&binman {
++	ti-dm {
++		filename = "ti-dm.bin";
++
++		blob-ext {
++			filename = "ti-dm/am62pxx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
++		};
++	};
++
++	ti-spl {
++		insert-template = <&ti_spl_template>;
++
++		fit {
++			images {
++				dm {
++					ti-secure {
++						content = <&dm>;
++						keyfile = "custMpk.pem";
++					};
++
++					dm: ti-dm {
++						filename = "ti-dm.bin";
++					};
++				};
++
++				fdt-0 {
++					description = "k3-am62p5-sk";
++					type = "flat_dt";
++					arch = "arm";
++					compression = "none";
++
++					ti-secure {
++						content = <&spl_am62p5_sk_dtb>;
++						keyfile = "custMpk.pem";
++					};
++
++					spl_am62p5_sk_dtb: blob-ext {
++						filename = SPL_AM62PX_SK_DTB;
++					};
++
++				};
++
++			};
++
++			configurations {
++				default = "conf-0";
++
++				conf-0 {
++					description = "k3-am62px-sk";
++					firmware = "atf";
++					loadables = "tee", "dm", "spl";
++					fdt = "fdt-0";
++				};
++			};
++		};
++	};
 +};
 +
-+static struct ti_lpsc soc_lpsc_list[] = {
-+	[0] = PSC_LPSC(0, &soc_psc_list[0], &soc_pd_list[0], NULL),
-+	[1] = PSC_LPSC(12, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[5]),
-+	[2] = PSC_LPSC(13, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[6]),
-+	[3] = PSC_LPSC(20, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[8]),
-+	[4] = PSC_LPSC(21, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[8]),
-+	[5] = PSC_LPSC(23, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[8]),
-+	[6] = PSC_LPSC(24, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[8]),
-+	[7] = PSC_LPSC(28, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[8]),
-+	[8] = PSC_LPSC(34, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[8]),
-+	[9] = PSC_LPSC(53, &soc_psc_list[0], &soc_pd_list[1], &soc_lpsc_list[8]),
-+	[10] = PSC_LPSC(56, &soc_psc_list[0], &soc_pd_list[2], &soc_lpsc_list[9]),
-+	[11] = PSC_LPSC(72, &soc_psc_list[0], &soc_pd_list[3], &soc_lpsc_list[8]),
-+	[12] = PSC_LPSC(73, &soc_psc_list[0], &soc_pd_list[3], &soc_lpsc_list[11]),
-+	[13] = PSC_LPSC(74, &soc_psc_list[0], &soc_pd_list[3], &soc_lpsc_list[12]),
++&binman {
++	u-boot {
++		insert-template = <&u_boot_template>;
++
++		fit {
++			images {
++				uboot {
++					description = "U-Boot for AM62P5 Boards";
++				};
++
++				fdt-0 {
++					description = "k3-am62px-sk";
++					type = "flat_dt";
++					arch = "arm";
++					compression = "none";
++
++					ti-secure {
++						content = <&am62px_sk_dtb>;
++						keyfile = "custMpk.pem";
++					};
++
++					am62px_sk_dtb: blob-ext {
++						filename = AM62PX_SK_DTB;
++					};
++
++					hash {
++						algo = "crc32";
++					};
++				};
++			};
++
++			configurations {
++				default = "conf-0";
++
++				conf-0 {
++					description = "k3-am62px-sk";
++					firmware = "uboot";
++					loadables = "uboot";
++					fdt = "fdt-0";
++				};
++
++			};
++		};
++	};
 +};
 +
-+static struct ti_dev soc_dev_list[] = {
-+	PSC_DEV(16, &soc_lpsc_list[0]),
-+	PSC_DEV(77, &soc_lpsc_list[0]),
-+	PSC_DEV(61, &soc_lpsc_list[0]),
-+	PSC_DEV(178, &soc_lpsc_list[1]),
-+	PSC_DEV(179, &soc_lpsc_list[2]),
-+	PSC_DEV(57, &soc_lpsc_list[3]),
-+	PSC_DEV(58, &soc_lpsc_list[4]),
-+	PSC_DEV(161, &soc_lpsc_list[5]),
-+	PSC_DEV(162, &soc_lpsc_list[6]),
-+	PSC_DEV(75, &soc_lpsc_list[7]),
-+	PSC_DEV(36, &soc_lpsc_list[8]),
-+	PSC_DEV(102, &soc_lpsc_list[8]),
-+	PSC_DEV(146, &soc_lpsc_list[8]),
-+	PSC_DEV(166, &soc_lpsc_list[9]),
-+	PSC_DEV(135, &soc_lpsc_list[10]),
-+	PSC_DEV(170, &soc_lpsc_list[11]),
-+	PSC_DEV(177, &soc_lpsc_list[12]),
-+	PSC_DEV(55, &soc_lpsc_list[13]),
++#endif /* CONFIG_TARGET_AM62P5_A53_EVM */
+diff --git a/arch/arm/dts/k3-am62p5-r5-sk.dts b/arch/arm/dts/k3-am62p5-r5-sk.dts
+new file mode 100644
+index 0000000000000..658f2cf730a70
+--- /dev/null
++++ b/arch/arm/dts/k3-am62p5-r5-sk.dts
+@@ -0,0 +1,101 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * AM62P5 SK dts file for R5 SPL
++ * Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
++ */
++
++#include "k3-am62p5-sk.dts"
++#include "k3-am62p5-sk-u-boot.dtsi"
++
++#include "k3-am62p-ddr-lp4-50-1600.dtsi"
++#include "k3-am62a-ddr.dtsi"
++
++/ {
++	aliases {
++		remoteproc0 = &sysctrler;
++		remoteproc1 = &a53_0;
++		serial0 = &wkup_uart0;
++		serial2 = &main_uart0;
++		serial3 = &main_uart1;
++	};
++
++	a53_0: a53@0 {
++		compatible = "ti,am654-rproc";
++		reg = <0x00 0x00a90000 0x00 0x10>;
++		power-domains = <&k3_pds 61 TI_SCI_PD_EXCLUSIVE>,
++			<&k3_pds 135 TI_SCI_PD_EXCLUSIVE>,
++			<&k3_pds 166 TI_SCI_PD_EXCLUSIVE>;
++		resets = <&k3_reset 135 0>;
++		clocks = <&k3_clks 61 0>;
++		assigned-clocks = <&k3_clks 61 0>, <&k3_clks 135 0>;
++		assigned-clock-parents = <&k3_clks 61 2>;
++		assigned-clock-rates = <200000000>, <1200000000>;
++		ti,sci = <&dmsc>;
++		ti,sci-proc-id = <32>;
++		ti,sci-host-id = <10>;
++		bootph-all;
++	};
++
++	dm_tifs: dm-tifs {
++		compatible = "ti,j721e-dm-sci";
++		ti,host-id = <36>;
++		ti,secure-host;
++		mbox-names = "rx", "tx";
++		mboxes= <&secure_proxy_main 20>,
++			<&secure_proxy_main 21>;
++		bootph-all;
++	};
 +};
 +
-+const struct ti_k3_pd_platdata am62px_pd_platdata = {
-+	.psc = soc_psc_list,
-+	.pd = soc_pd_list,
-+	.lpsc = soc_lpsc_list,
-+	.devs = soc_dev_list,
-+	.num_psc = ARRAY_SIZE(soc_psc_list),
-+	.num_pd = ARRAY_SIZE(soc_pd_list),
-+	.num_lpsc = ARRAY_SIZE(soc_lpsc_list),
-+	.num_devs = ARRAY_SIZE(soc_dev_list),
++&dmsc {
++	mboxes= <&secure_proxy_main 0>,
++		<&secure_proxy_main 1>,
++		<&secure_proxy_main 0>;
++	mbox-names = "rx", "tx", "notify";
++	ti,host-id = <35>;
++	ti,secure-host;
 +};
-diff --git a/drivers/clk/ti/clk-k3.c b/drivers/clk/ti/clk-k3.c
-index 10f60497973b3..7aa162c2f7029 100644
---- a/drivers/clk/ti/clk-k3.c
-+++ b/drivers/clk/ti/clk-k3.c
-@@ -92,6 +92,12 @@ static const struct soc_attr ti_k3_soc_clk_data[] = {
- 		.family = "J784S4",
- 		.data = &j784s4_clk_platdata,
- 	},
-+#endif
-+#ifdef CONFIG_SOC_K3_AM62P5
-+	{
-+		.family = "AM62PX",
-+		.data = &am62px_clk_platdata,
-+	},
- #endif
- 	{ /* sentinel */ }
- };
-diff --git a/drivers/power/domain/ti-power-domain.c b/drivers/power/domain/ti-power-domain.c
-index 8fa9892c02c7a..8996c40ddc031 100644
---- a/drivers/power/domain/ti-power-domain.c
-+++ b/drivers/power/domain/ti-power-domain.c
-@@ -100,11 +100,17 @@ static const struct soc_attr ti_k3_soc_pd_data[] = {
- 		.data = &am62ax_pd_platdata,
- 	},
- #endif
--#ifdef CONFIG_SOC_K3_J784S4
-+#if IS_ENABLED(CONFIG_SOC_K3_J784S4)
- 	{
- 		.family = "J784S4",
- 		.data = &j784s4_pd_platdata,
- 	},
-+#endif
-+#if IS_ENABLED(CONFIG_SOC_K3_AM62P5)
-+	{
-+		.family = "AM62PX",
-+		.data = &am62px_pd_platdata,
-+	},
- #endif
- 	{ /* sentinel */ }
- };
-diff --git a/include/k3-clk.h b/include/k3-clk.h
-index e161f09c0f59e..7bc42ecbb0c07 100644
---- a/include/k3-clk.h
-+++ b/include/k3-clk.h
-@@ -177,6 +177,7 @@ extern const struct ti_k3_clk_platdata j721s2_clk_platdata;
- extern const struct ti_k3_clk_platdata am62x_clk_platdata;
- extern const struct ti_k3_clk_platdata am62ax_clk_platdata;
- extern const struct ti_k3_clk_platdata j784s4_clk_platdata;
-+extern const struct ti_k3_clk_platdata am62px_clk_platdata;
- 
- struct clk *clk_register_ti_pll(const char *name, const char *parent_name,
- 				void __iomem *reg);
-diff --git a/include/k3-dev.h b/include/k3-dev.h
-index a9d1ada804196..0c5ae9aa4263e 100644
---- a/include/k3-dev.h
-+++ b/include/k3-dev.h
-@@ -81,6 +81,7 @@ extern const struct ti_k3_pd_platdata j721s2_pd_platdata;
- extern const struct ti_k3_pd_platdata am62x_pd_platdata;
- extern const struct ti_k3_pd_platdata am62ax_pd_platdata;
- extern const struct ti_k3_pd_platdata j784s4_pd_platdata;
-+extern const struct ti_k3_pd_platdata am62px_pd_platdata;
- 
- u8 ti_pd_state(struct ti_pd *pd);
- u8 lpsc_get_state(struct ti_lpsc *lpsc);
++
++&cbass_main {
++	sa3_secproxy: secproxy@44880000 {
++		compatible = "ti,am654-secure-proxy";
++		#mbox-cells = <1>;
++		reg = <0x00 0x44880000 0x00 0x20000>,
++		      <0x00 0x44860000 0x00 0x20000>,
++		      <0x00 0x43600000 0x00 0x10000>;
++		reg-names = "rt", "scfg", "target_data";
++		bootph-all;
++	};
++
++	sysctrler: sysctrler {
++		compatible = "ti,am654-system-controller";
++		mboxes= <&secure_proxy_main 1>,
++			<&secure_proxy_main 0>,
++			<&sa3_secproxy 0>;
++		mbox-names = "tx", "rx", "boot_notify";
++		bootph-all;
++	};
++};
++
++/* WKUP UART0 is used for DM firmware logs */
++&wkup_uart0 {
++	status = "okay";
++};
++
++/* Main UART1 is used for TIFS firmware logs */
++&main_uart1 {
++	status = "okay";
++};
++
++&main_pktdma {
++	ti,sci = <&dm_tifs>;
++};
++
++&main_bcdma {
++	ti,sci = <&dm_tifs>;
++};
++
++&ospi0 {
++	reg = <0x00 0x0fc40000 0x00 0x100>,
++	      <0x00 0x60000000 0x00 0x08000000>;
++};
+diff --git a/arch/arm/dts/k3-am62p5-sk-u-boot.dtsi b/arch/arm/dts/k3-am62p5-sk-u-boot.dtsi
+new file mode 100644
+index 0000000000000..c166d6553906c
+--- /dev/null
++++ b/arch/arm/dts/k3-am62p5-sk-u-boot.dtsi
+@@ -0,0 +1,23 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Common AM62Px EVM dts file for SPLs
++ * Copyright (C) 2022 Texas Instruments Incorporated - https://www.ti.com/
++ */
++
++#include "k3-am62p-sk-binman.dtsi"
++
++/ {
++	chosen {
++		stdout-path = "serial2:115200n8";
++		tick-timer = &main_timer0;
++	};
++};
++
++&dmsc {
++	bootph-pre-ram;
++
++	k3_sysreset: sysreset-controller {
++		compatible = "ti,sci-sysreset";
++		bootph-pre-ram;
++	};
++};
 
 -- 
 2.43.2
