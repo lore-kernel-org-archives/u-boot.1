@@ -4,80 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E49CC54E66
-	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 09:46:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D76DC54E58
+	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 09:49:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D8DE87D9D;
-	Tue, 12 Mar 2024 10:46:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D2B4887E06;
+	Tue, 12 Mar 2024 10:48:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="IgM48JKz";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="Y5hCt41U";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 25F8387C86; Tue, 12 Mar 2024 10:46:44 +0100 (CET)
-Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
- [IPv6:2a00:1450:4864:20::12b])
+ id 5E6C487F17; Tue, 12 Mar 2024 10:48:58 +0100 (CET)
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B79BE87E14
- for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 10:46:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 646C287C86
+ for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 10:48:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-lf1-x12b.google.com with SMTP id
- 2adb3069b0e04-5139d80f8b6so3159787e87.1
- for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 02:46:41 -0700 (PDT)
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-33e17342ea7so2253353f8f.2
+ for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 02:48:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1710236801; x=1710841601;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1710236936; x=1710841736;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:message-id:date:references
  :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=Q8QzuAaEiF8xRXZf8RlLBi2/aDgrrwYpuzvfBvyKw0E=;
- b=IgM48JKzOqY2weaRLQHzhykqm8Uyrs2Y//d3Amk+dCjx9wxtQfeR0MBfe+PSkRErw6
- dxtil/xLLPuPpMQRlaqgtuw+4xxRX8JxQnEH+XyTPABBTWT4dZ/XIfdQ+T/YRYSlnWyt
- 9wxsgTfUsTL35zZK0aSbXqVmnJ76DAKIDSBOSyL3XNRPsmXifpLEQlhoKLVrRGRslcuS
- Hd8zRPZj5s2vHpVdW7ny3YzfbP45JkVvPQGrB9c2HhfGmWRMb7TmoFXuuPugnj/xqNE4
- 1ChY3+jmOBKz5v2MitDyHLMXBnFt72fBiU5AUduqVN9TEm2kHSc00VP4wpDirsrFZn47
- yd9A==
+ :reply-to; bh=XWsUZlZkuFmCeBLCH27rDOo0IFF+ZEeHIianbG6m9sQ=;
+ b=Y5hCt41U8Ac6IKiF2UtksAYTwynzumC9MnayGgH1XzjCCMtamk/Znqr4d55hRLIVdt
+ LBkNNCiETjguCskwQeaQq5DZ6Qj0/2xqjdGB2aPlreIR15IRwQD88j4tCxcLWiMiBoC4
+ MWg5Iy6DEPp2Eg2w2v5UGxN+/jvC1zwwLLItB94xt1pfjxRD0900S43ztYFBtI5P1yu9
+ aoO2AqTlnbgll1/FxB2qGi1f2AJYSq6pFGkZkARvqgrdxT3Qvsf5ws1wM6h062hdxdnd
+ 1amVw8t+OxKCNQZc8xLY+yK7ZE+Ba26vuf3bDmJRZMpAnvDhmVGKeIX0iJ7IPEUEruaa
+ ABLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710236801; x=1710841601;
+ d=1e100.net; s=20230601; t=1710236936; x=1710841736;
  h=content-transfer-encoding:mime-version:message-id:date:references
  :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Q8QzuAaEiF8xRXZf8RlLBi2/aDgrrwYpuzvfBvyKw0E=;
- b=OgHU3YUAliJMKRZwDWmk6sdJYPiry9ODMVErJY3GiXBcr2IlZbnXdHA0vL19VXyXIZ
- lFAi2qTxaHag4/UH3iHiYmR5QmEEuBiqtwmN3dDNQ6scZLEYIBZaSIAonrnR/o5OJ63a
- CWbwGDi2tdJTz0x7brBztyRGatBfOJq2aOKEkRe/uJRtMbvRyS3lrmkarNg72qiAFr5U
- GAQEcnFuwdql2F1HOuoOC9UF5tsF0yKExMlzH4hEcKoWWTKuFjTzJrCKe2JDzFgSlYHZ
- AEMi2YNQL7T4EwUu9CdWfqvC4TyMqq3N0zZasXZ2BDFWNCjlKjGZafJbjX5vzioYhZ8d
- 7fsg==
-X-Gm-Message-State: AOJu0YxaFBs+zQZLVN9qu4pbcAD0fmY/vFPDm/KOVbF6YW7uT2J6dhWi
- f8Nx8wMnkQPyMRZ/Wypr7HXyz4Fzt45ur9czf7GBWexyTMtmUyhwFN/aNO38VhU=
-X-Google-Smtp-Source: AGHT+IECMEgEz0JdiwKXiBFcfVS2OYruQIjuKLtqhZ46HVRUFFWnQlXVk+oYGeCPyjApAAxcO2kzzw==
-X-Received: by 2002:a05:6512:b9e:b0:513:b30c:53c7 with SMTP id
- b30-20020a0565120b9e00b00513b30c53c7mr2851652lfv.10.1710236800809; 
- Tue, 12 Mar 2024 02:46:40 -0700 (PDT)
+ bh=XWsUZlZkuFmCeBLCH27rDOo0IFF+ZEeHIianbG6m9sQ=;
+ b=rthPynMkgDtxdaMmQUirSsRZ34UhgwyW+zzy7oJdoJ+7Z7ZFFr8V++VtQ246QReSxu
+ fqCVwWiuE6xTqv3HCfemjR29NFxG2aLlIQcV1E1kFMfSLcM0X214D2DCvnp2Ccy6OOxv
+ N6vlX0Bs/sT9yXusGotmJdwN5jDDP+dUgEUalibbiEhwOmfkOwRw6zZj+XSW+rUUnc1e
+ VysnJ8bxjPwlFFzVsCkCVbtWnZcDAPA2v9Wuu+TZg6qdaXi/f5tJBY0OdBsER4aP8flG
+ /XMbAEI2eANvwVTnIfS+OAXZBbkWQGUJzZCPhEca3bnQLQCtYY9Xf35eIlr+Yu4zWJXN
+ wFCg==
+X-Gm-Message-State: AOJu0YxDggjzmcUjMRXcfkC1SjdxxT1rz3RgCnRjiwT6svjqSsWwXQVu
+ QLAlEZdWyf8nUwsaCcupa9jAyRUjlrA+mDh/nugjDstoG2RXp4j/vWxQbP8WCbw=
+X-Google-Smtp-Source: AGHT+IFh9QgGHjFA79k8G16mXH5jYnKDRTd/BpQlh/8+/rBJW74gBTzPMLJcn5eXLJiIcc9Sp0jDmA==
+X-Received: by 2002:adf:f18f:0:b0:33e:7f51:c2f7 with SMTP id
+ h15-20020adff18f000000b0033e7f51c2f7mr6998444wro.52.1710236935865; 
+ Tue, 12 Mar 2024 02:48:55 -0700 (PDT)
 Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- cm22-20020a5d5f56000000b0033e99b7cfa8sm3910821wrb.13.2024.03.12.02.46.40
+ f19-20020adfb613000000b0033dc931eb06sm8769571wre.0.2024.03.12.02.48.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Mar 2024 02:46:40 -0700 (PDT)
+ Tue, 12 Mar 2024 02:48:55 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Sam Protsenko <semen.protsenko@linaro.org>, "McAllister, Colin"
- <Colin.McAllister@garmin.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, "JPEWhacker@gmail.com"
- <JPEWhacker@gmail.com>, "sjg@chromium.org" <sjg@chromium.org>, Igor
- Opaniuk <igor.opaniuk@gmail.com>
-Subject: Re: [PATCH v3 0/2] Fix Android A/B backup
-In-Reply-To: <CAPLW+4nQBssOtR_wqU25XW-6ZDEm7Yu_7q9ODjWhkWoE9FoV9g@mail.gmail.com>
+To: Sam Protsenko <semen.protsenko@linaro.org>, Colin McAllister
+ <colin.mcallister@garmin.com>
+Cc: u-boot@lists.denx.de, JPEWhacker@gmail.com, sjg@chromium.org
+Subject: Re: [PATCH v2 1/2] android_ab: Add missing semicolon
+In-Reply-To: <CAPLW+4mBk-4_FsVF27FD+a=W3-wfKrDr4vjjeZ7Y8nT2mnuOwQ@mail.gmail.com>
 References: <20240307161711.3177729-1-colin.mcallister@garmin.com>
- <20240308165937.270499-1-colin.mcallister@garmin.com>
- <CAPLW+4kZShBuiDO1aV3g9+nnsdySFv19x2nT6F7hOf4OR_dnHQ@mail.gmail.com>
- <SA2PR04MB7723C4BAEF9488482005FEF5F4272@SA2PR04MB7723.namprd04.prod.outlook.com>
- <CAPLW+4nQBssOtR_wqU25XW-6ZDEm7Yu_7q9ODjWhkWoE9FoV9g@mail.gmail.com>
-Date: Tue, 12 Mar 2024 10:46:39 +0100
-Message-ID: <87v85r4wao.fsf@baylibre.com>
+ <20240307221030.3685767-1-colin.mcallister@garmin.com>
+ <20240307221030.3685767-2-colin.mcallister@garmin.com>
+ <CAPLW+4mBk-4_FsVF27FD+a=W3-wfKrDr4vjjeZ7Y8nT2mnuOwQ@mail.gmail.com>
+Date: Tue, 12 Mar 2024 10:48:54 +0100
+Message-ID: <87sf0v4w6x.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -97,112 +94,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Colin,
-
-On ven., mars 08, 2024 at 15:59, Sam Protsenko <semen.protsenko@linaro.org>=
+On jeu., mars 07, 2024 at 16:54, Sam Protsenko <semen.protsenko@linaro.org>=
  wrote:
 
-> On Fri, Mar 8, 2024 at 1:24=E2=80=AFPM McAllister, Colin
-> <Colin.McAllister@garmin.com> wrote:
+> On Thu, Mar 7, 2024 at 4:11=E2=80=AFPM Colin McAllister
+> <colin.mcallister@garmin.com> wrote:
 >>
->> > Ah, ok, I see you replied to my comment here.
+>> Found a missing semicolon in code protected by a #if that will never
+>> evaluate to true due to a separate issue. Fixing this issue before
+>> addressing the #if.
 >>
->> Yes, sorry. Outlook is terrible to send inline responses too. I figured
->> just adding responses in the patch contents would be better. Next time I=
-'ll submit
->> my patch with a different email :)
+>> Signed-off-by: Colin McAllister <colin.mcallister@garmin.com>
+>> Cc: Joshua Watt <JPEWhacker@gmail.com>
+>> Cc: Simon Glass <sjg@chromium.org>
+>> ---
+>>  boot/android_ab.c | 2 +-
+>>  1 file changed, 1 insertion(+), 1 deletion(-)
 >>
->> > So when that config option is not defined at all, the build still
->> > works, right?
->>
->> Yes, the default value for CONFIG_ANDROID_AB_BACKUP_OFFSET is 0x0, which
->> would evaluate to a false bool value in the if conditions. I did do some
->> testing with the config value not defined for my board and confirmed
->> back-up data is not used.
->>
+>> diff --git a/boot/android_ab.c b/boot/android_ab.c
+>> index c9df6d2b4b..9a3d15ec60 100644
+>> --- a/boot/android_ab.c
+>> +++ b/boot/android_ab.c
+>> @@ -221,7 +221,7 @@ int ab_select_slot(struct blk_desc *dev_desc, struct=
+ disk_partition *part_info,
+>>  #if ANDROID_AB_BACKUP_OFFSET
+>>                 crc32_le =3D ab_control_compute_crc(backup_abc);
+>>                 if (backup_abc->crc32_le !=3D crc32_le) {
+>> -                       log_err("ANDROID: Invalid backup CRC-32 ")
+>> +                       log_err("ANDROID: Invalid backup CRC-32 ");
 >
-> Looks good to me, thanks.
->
->> In your other emails you include your reviewed-by tag. For clarity, Am I
->> supposed to append my patches and upload a new version? This is my
->> first time contributing to u-boot, so I'm still learning the workflow. I
->> didn't see anything glancing through the "Sending patches" page in the
->> U-Boot documentation.
->>
->
-> Welcome to the community! And thanks for your patches :) U-Boot
-> workflow is quite similar to Linux kernel one. It's useful to collect
-> all tags when sending out your next version. When the maintainer takes
-> your patch, they usually also apply all R-b tags for the final patch
-> version, so you only have to worry about that when sending out a new
-> version. I know that U-Boot contributors are often using `patman' tool
-> [1] for submitting patches (and corresponding updated versions), and
-> I'm pretty sure it collects all pending tags automatically for you.
-> FWIW, I'm not experienced with `patman', as I'm trying to use somehow
-> unified submitting process for both U-Boot and Linux kernel, and I
-> know that using `patman' is sometimes discouraged in Linux kernel
-> community.
+> Good catch! Wonder why there is also a trailing space in the end of
+> the string. Anyways, I think this patch deserves "Fixes:" tag, would
+> you mind adding it? Other than that:
 
-Welcome to the U-Boot community! It takes quite some time to start
-contributing so thank you for the patches.
+The file seems to have weird trailing/leading whitespaces in some of the
+error messages.
 
-The changes look fine and the detailed approach on how you tested is
-very much appreciated.
+I think it's fine to keep this as is for now.
 
-I have a couple of suggestions on the whole series.
-
-1. The patches don't apply:
-
-$ b4 shazam -s -l 20240308165937.270499-1-colin.mcallister@garmin.com
-
-error: patch failed: boot/android_ab.c:187
-error: boot/android_ab.c: patch does not apply
-error: Did you hand edit your patch?
-It does not apply to blobs recorded in its index.
-Patch failed at 0002 android_ab: Fix ANDROID_AB_BACKUP_OFFSET
-hint: Use 'git am --show-current-patch=3Ddiff' to see the failed patch
-When you have resolved this problem, run "git am --continue".
-If you prefer to skip this patch, run "git am --skip" instead.
-To restore the original branch and stop patching, run "git am --abort".
-
-I suspect your email provider swapped tabs to spaces. It's also possible
-that the Garmin confidentiality footer caused this.
-
-2. Using the khadas-vim3_android_ab_defconfig, this does not build:
-
-boot/android_ab.c: In function 'ab_select_slot':
-boot/android_ab.c:350:48: error: 'ANDROID_AB_BACKUP_OFFSET' undeclared (fir=
-st use in this function); did you mean 'CONFIG_ANDROID_AB_BACKUP_OFFSET'?
-  350 |                                                ANDROID_AB_BACKUP_OF=
-FSET);
-      |                                                ^~~~~~~~~~~~~~~~~~~~=
-~~~~
-      |                                                CONFIG_ANDROID_AB_BA=
-CKUP_OFFSET
-
-Both are minor problems.
-I re-applied the diffs manually to be able to build/boot test this.
-
-Since this is your first contribution, I can either:
-- fix both myself and merge this.
-- let you spin a v4 to fix the above.
-
-Please let me know what you prefer.
-
-If you do intend to send a v4, please:
-- Do it in a new email thread
-- Make sure you cc me, Igor and Sam
-- Make sure the patches you send can be applied.
-  http://git-send-email.io/ is a friendly service you can use to test
-  your workflow.
-
-On workflow, tooling, I usually suggest the b4 tool:
-https://people.kernel.org/monsieuricon/sending-a-kernel-patch-with-b4-part-1
-
-Regards,
-Mattijs
+We can make another series to fix this after Colin's work gets merged.
 
 >
-> [1] https://docs.u-boot.org/en/latest/develop/patman.html
+> Reviewed-by: Sam Protsenko <semen.protsenko@linaro.org>
 >
-> [snip]
+>>                         log_err("expected %.8x, found %.8x),",
+>>                                 crc32_le, backup_abc->crc32_le);
+>>  #endif
+>> --
+>> 2.43.2
+>>
+>>
+>> ________________________________
+>>
+>> CONFIDENTIALITY NOTICE: This email and any attachments are for the sole =
+use of the intended recipient(s) and contain information that may be Garmin=
+ confidential and/or Garmin legally privileged. If you have received this e=
+mail in error, please notify the sender by reply email and delete the messa=
+ge. Any disclosure, copying, distribution or use of this communication (inc=
+luding attachments) by someone other than the intended recipient is prohibi=
+ted. Thank you.
