@@ -4,56 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C92FC54E58
-	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 13:20:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4129DC54E58
+	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 14:01:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 476F987F27;
-	Tue, 12 Mar 2024 14:20:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 83C2F87D8E;
+	Tue, 12 Mar 2024 15:01:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="cYMFOtk7";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="n5Z8I+XV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 347ED87F36; Tue, 12 Mar 2024 14:20:34 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A11D587D3C; Tue, 12 Mar 2024 15:01:15 +0100 (CET)
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.15])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D2CCD87E2E
- for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 14:20:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 651E987D8E
+ for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 15:01:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=conor@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 41DAB610D5;
- Tue, 12 Mar 2024 13:20:30 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B68A7C433C7;
- Tue, 12 Mar 2024 13:20:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1710249629;
- bh=kG1W7uEQ/qftHXQcAMELyKZpvVSpKP3w6+Gu+6ow4Mo=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=cYMFOtk7hpKcJjAZrVNY94237Yk85pacMFvCOPFqV5p16u73ujFwh9PH5JLb0cm83
- /3aFLNDbB+nFVNsn115eUbAbPnDCbNHUribQqP8KFCjRTftwFdzx79ylp2vusfTNQu
- rxOGpPFWvK5bAbxKk0Ne/an+KZZSBYDzxus3zQpme5e8zP93+yL3EBt3wl5riXY8Fj
- syPh0Hw/xqb5IBQigFHl7bgBc4/2bVunbimurpY26WvJYos/SK5aOJicDsRTn8bneH
- lsgMnjkNILSqW3DKOSvZSD+BvzNiqPlyfHhgrlEOdLUBxXOwoS81Ows/g2B7KJJgQ2
- m1eKibbmvuicw==
-Date: Tue, 12 Mar 2024 13:20:26 +0000
-From: Conor Dooley <conor@kernel.org>
-To: Leo Liang <ycliang@andestech.com>
-Cc: Kongyang Liu <seashell11234455@gmail.com>, u-boot@lists.denx.de,
- Rick Chen <rick@andestech.com>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH 2/3] riscv: dts: sophgo: Add ethernet node
-Message-ID: <20240312-unnatural-deviant-24bab57103ba@spud>
-References: <20240310055816.11575-1-seashell11234455@gmail.com>
- <20240310055816.11575-3-seashell11234455@gmail.com>
- <ZfAnkOLt4mdCZLOP@swlinux02>
+ dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: phobos.denx.de;
+ spf=none smtp.mailfrom=jitloonl@ecsmtp.png.intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1710252071; x=1741788071;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=e5W/yE54rYfrEUOYynlj3e/gGgQqjPvddJMzsiGbC7U=;
+ b=n5Z8I+XVHqHd2K7/sd7OQIwlBwqJfaIdOx25/DWY2+tqtIZQ0EGLvvai
+ W9MJtHU1i3oWbK33PBns3vY7fAHIOS+U/fwZ7lzU5oJfEX/USpgDOXkUw
+ fOScRNsNLAhvgFl4eWVIZIKf+paQnpKWbU2kBFuZz2r7P0yFIumJxnLDz
+ yJGUtbJVynJ0lmA1hnVqOSqw5a48x6sQZyL/8kPgbc7FG1+FMrm4/KhrK
+ Htd0jZlYNSjWpV09JYvSl7SVFRctylMxu9FX+RSbMoIlLa+Kik5TspVBr
+ Rgz2LTxql5Ht0JAHQtg0QRY3R6JQBw88HpsXjRkQX5r3mclZFT1Dd+rT7 g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,11010"; a="5131247"
+X-IronPort-AV: E=Sophos;i="6.07,119,1708416000"; 
+   d="scan'208";a="5131247"
+Received: from orviesa010.jf.intel.com ([10.64.159.150])
+ by fmvoesa109.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 12 Mar 2024 07:01:09 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.07,119,1708416000"; d="scan'208";a="11519960"
+Received: from pglmail07.png.intel.com ([10.126.73.9])
+ by orviesa010.jf.intel.com with ESMTP; 12 Mar 2024 07:01:05 -0700
+Received: from localhost (pgli0121.png.intel.com [10.221.240.84])
+ by pglmail07.png.intel.com (Postfix) with ESMTP id 6EEC016910;
+ Tue, 12 Mar 2024 22:01:04 +0800 (+08)
+Received: by localhost (Postfix, from userid 12048045)
+ id 6986725A4; Tue, 12 Mar 2024 22:01:04 +0800 (+08)
+From: Jit Loon Lim <jit.loon.lim@intel.com>
+To: u-boot@lists.denx.de
+Cc: Jagan Teki <jagan@amarulasolutions.com>, Marek <marex@denx.de>,
+ Simon <simon.k.r.goldschmidt@gmail.com>,
+ Tien Fong <tien.fong.chee@intel.com>, Kok Kiang <kok.kiang.hea@intel.com>,
+ Dinesh <dinesh.maniyam@intel.com>, Boon Khai <boon.khai.ng@intel.com>,
+ Alif <alif.zakuan.yuslaimi@intel.com>,
+ Teik Heng <teik.heng.chong@intel.com>,
+ Hazim <muhammad.hazim.izzat.zamri@intel.com>,
+ Jit Loon Lim <jit.loon.lim@intel.com>,
+ Sieu Mun Tang <sieu.mun.tang@intel.com>, Bin Meng <bmeng.cn@gmail.com>
+Subject: [PATCH v4 0/1] Agilex5 enablement
+Date: Tue, 12 Mar 2024 22:01:02 +0800
+Message-Id: <20240312140103.31226-1-jit.loon.lim@intel.com>
+X-Mailer: git-send-email 2.19.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="usU7dECXSGppG9Mm"
-Content-Disposition: inline
-In-Reply-To: <ZfAnkOLt4mdCZLOP@swlinux02>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,41 +85,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+V1: https://patchwork.ozlabs.org/project/uboot/patch/20240220143603.22091-1-jit.loon.lim@intel.com/
+V2: Fixed Git auto-merge causing misalignment of code and insert/delete
+V3: Added 240G FPGA DDR region
+V4: Update defined to is_enabled
 
---usU7dECXSGppG9Mm
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Jit Loon Lim (1):
+  arch: arm: Agilex5 enablement
 
-On Tue, Mar 12, 2024 at 05:59:44PM +0800, Leo Liang wrote:
-> On Sun, Mar 10, 2024 at 01:56:45PM +0800, Kongyang Liu wrote:
-> > Add ethernet node for cv1800b SoC
-> >=20
-> > Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
-> > ---
-> >=20
-> >  arch/riscv/dts/cv18xx.dtsi | 6 ++++++
-> >  1 file changed, 6 insertions(+)
->=20
-> Hi KongYang,
->=20
-> Will there be a patch adding this ethernet node for kernel as well ?
+ arch/arm/Kconfig                              |   4 +-
+ arch/arm/dts/Makefile                         |   1 +
+ arch/arm/dts/socfpga_agilex5-u-boot.dtsi      |  71 ++
+ arch/arm/dts/socfpga_agilex5.dtsi             | 575 ++++++++++++++
+ .../arm/dts/socfpga_agilex5_socdk-u-boot.dtsi | 133 ++++
+ arch/arm/dts/socfpga_agilex5_socdk.dts        | 163 ++++
+ arch/arm/dts/socfpga_soc64_fit-u-boot.dtsi    |  38 +-
+ arch/arm/mach-socfpga/Kconfig                 |  19 +-
+ arch/arm/mach-socfpga/Makefile                |  14 +-
+ arch/arm/mach-socfpga/board.c                 |  56 +-
+ arch/arm/mach-socfpga/clock_manager_agilex5.c |  89 +++
+ .../include/mach/base_addr_soc64.h            |  38 +-
+ .../mach-socfpga/include/mach/clock_manager.h |   4 +-
+ .../include/mach/clock_manager_agilex5.h      |  12 +
+ .../mach-socfpga/include/mach/handoff_soc64.h |  31 +-
+ .../mach-socfpga/include/mach/mailbox_s10.h   |   1 +
+ arch/arm/mach-socfpga/mmu-arm64_s10.c         |  59 +-
+ board/intel/agilex5-socdk/MAINTAINERS         |   8 +
+ configs/socfpga_agilex5_defconfig             | 116 +++
+ drivers/clk/altera/Makefile                   |   1 +
+ drivers/clk/altera/clk-agilex5.c              | 743 ++++++++++++++++++
+ drivers/clk/altera/clk-agilex5.h              | 284 +++++++
+ include/configs/socfpga_agilex5_socdk.h       |  12 +
+ include/configs/socfpga_soc64_common.h        | 143 +++-
+ include/dt-bindings/clock/agilex5-clock.h     |  71 ++
+ include/dt-bindings/reset/altr,rst-mgr-agx5.h |  80 ++
+ 26 files changed, 2730 insertions(+), 36 deletions(-)
+ create mode 100644 arch/arm/dts/socfpga_agilex5-u-boot.dtsi
+ create mode 100644 arch/arm/dts/socfpga_agilex5.dtsi
+ create mode 100644 arch/arm/dts/socfpga_agilex5_socdk-u-boot.dtsi
+ create mode 100644 arch/arm/dts/socfpga_agilex5_socdk.dts
+ create mode 100644 arch/arm/mach-socfpga/clock_manager_agilex5.c
+ create mode 100644 arch/arm/mach-socfpga/include/mach/clock_manager_agilex5.h
+ create mode 100644 board/intel/agilex5-socdk/MAINTAINERS
+ create mode 100644 configs/socfpga_agilex5_defconfig
+ create mode 100644 drivers/clk/altera/clk-agilex5.c
+ create mode 100644 drivers/clk/altera/clk-agilex5.h
+ create mode 100644 include/configs/socfpga_agilex5_socdk.h
+ create mode 100644 include/dt-bindings/clock/agilex5-clock.h
+ create mode 100644 include/dt-bindings/reset/altr,rst-mgr-agx5.h
 
-It's highly like that the compatible of "cv1800b-ethernet" will be
-requested to be changed to "cv1800b-dwmac" to match the designware IP
-used in other SoCs.
+-- 
+2.26.2
 
-The added node also looks suspiciously missing any clocks or interrupts.
-
---usU7dECXSGppG9Mm
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZfBWmgAKCRB4tDGHoIJi
-0ud0AP0bSXsW12m6BoNI6eoagwzeDyuUp9KYXsmCbYjxKqgbagD+MuL9Rudvgb9c
-Ir33jUYeFXdTE/dUbwSc/NZVaf9syQA=
-=raWS
------END PGP SIGNATURE-----
-
---usU7dECXSGppG9Mm--
