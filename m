@@ -4,108 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2593C54E60
-	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 11:34:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0C0EC54E60
+	for <u-boot@archiver.kernel.org>; Tue, 12 Mar 2024 11:36:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE27387F01;
-	Tue, 12 Mar 2024 12:34:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 5EE6987DFF;
+	Tue, 12 Mar 2024 12:36:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="IeDPVtU6";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="KtEFH6oH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7FCB487F01; Tue, 12 Mar 2024 12:34:37 +0100 (CET)
-Received: from NAM04-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam04on20600.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2409::600])
+ id B386587E2E; Tue, 12 Mar 2024 12:36:26 +0100 (CET)
+Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2450187E2E
- for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 12:34:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 58C8B8780E
+ for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 12:36:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=muPVNjMG62YOqB5W1dY+BlVuUsZeqK85aUPQN5hha1NGMkKcHSCgwDsmTT5SxooG5GcG4hcqvT17gdbb5ApMCtZ6VVx2KDqddQVKiSLT2J5xoVlBjthgSOJtb8pXI6Ifo1PcvRx2ImqgB2N1U0py/VQxayNyYn0asbemLQJcVicaO0kFPCJsjq86tVn7ue74QgZbHHlMUJEbqtfuCbLFSvjgMgqbbD7H4sbmwyfaQYEzzBAUxHMwiuhrFZu93uy+h4G0nGwvMXQRHAcgmAK6M91u2oJp4MYmKDG3CtnxJC1nvC7QGVj/3/PUNhRllJ1Qk4fv0IAJJJnqSTzpo8ueSg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=fZIfT/Rk7xsc5H5jGDOp1uH32e6sIshMhCbBcYkjCNY=;
- b=GTkLBRtM5xJMikmOQ5j75FAKhj8skI89VL+zyc8XkjyKsXH25nDnMbQrIchDu6Z26xlRiXm7dCedEvNas8Ywdc3GMVLFxSl1Egk2yRtUafA73ZZeNEV7JwTDFABoWnRGCqojEEXlDmy9ONIF3eeyllDClCvFNeCfF6p1yOSI17SesjukSrM6iyIWCbLj8C7YI0frjZxVWTVJawzAsjnQLNbVDZoR0doQYbF3ehEMj4H80RzQjwvITjT7mv0GpomDg4U8HTYAIZwqAkUoX03Bks26oEMN26QUJDfhpxyEqwcqgpV/DOSvkORSb+2CvW+O7yOcvQL0btSTd0ueJ0TBAg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fZIfT/Rk7xsc5H5jGDOp1uH32e6sIshMhCbBcYkjCNY=;
- b=IeDPVtU6/caDp+B6CvpRuMTUTqC5sLsImXBufL7YgnJNQ8+O/rIp3T4YCiQFjiyoEtYAyUnp3/Tor9pTI5C+FR7e8Xn/Bbr6hsABr7q0CVhqrnLCs7HElMLBpryYdfLxumICCiY9NaMIItV/EGOZH45V8FmcEu6M32QzKdT7dik=
-Received: from DS7PR03CA0064.namprd03.prod.outlook.com (2603:10b6:5:3bb::9) by
- PH0PR12MB7488.namprd12.prod.outlook.com (2603:10b6:510:1e9::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7362.36; Tue, 12 Mar
- 2024 11:34:31 +0000
-Received: from DS1PEPF0001709B.namprd05.prod.outlook.com
- (2603:10b6:5:3bb:cafe::78) by DS7PR03CA0064.outlook.office365.com
- (2603:10b6:5:3bb::9) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7386.18 via Frontend
- Transport; Tue, 12 Mar 2024 11:34:31 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DS1PEPF0001709B.mail.protection.outlook.com (10.167.18.105) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7386.12 via Frontend Transport; Tue, 12 Mar 2024 11:34:30 +0000
-Received: from SATLEXMB08.amd.com (10.181.40.132) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Tue, 12 Mar
- 2024 06:34:30 -0500
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB08.amd.com
- (10.181.40.132) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Tue, 12 Mar
- 2024 04:34:29 -0700
-Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35 via Frontend
- Transport; Tue, 12 Mar 2024 06:34:28 -0500
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <git@amd.com>
-Subject: [PATCH] xilinx: versal-net: Add support for saving env based on
- bootmode
-Date: Tue, 12 Mar 2024 17:04:21 +0530
-Message-ID: <20240312113421.7394-1-venkatesh.abbarapu@amd.com>
-X-Mailer: git-send-email 2.17.1
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=380108150e=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
+ 42C96B3A006852; Tue, 12 Mar 2024 12:36:19 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; s=
+ selector1; bh=Hj2d4wu6VcDJqNdPpKJFwxzCMaIUQcyVkHiHm1Z6HYw=; b=Kt
+ EFH6oH2AjgMCXVCFHZvEtzDKx7pFl8BNYsRWur4ZWHFJ1qzvDJQuBhxwhtOfhK2h
+ 6OKR4y/vXykPqH4QOtJsRlk8bPgoydvOaO7PX9Az0odDYrQYOwS8DO2li+hq0G40
+ Abm8mYev7RgUW/S5AoKAxbYuEXlQAIOnSZuaG7zGRGWYMRRmYarlNJwyRWRXrc3i
+ 5skN07dOqZaQRQPNvukYHCPfsVULHHIJDmco6J/Xbn5GyaKRAZZtSS5QSyM53afE
+ 4h2AbZIaDgbejq1tc9V8VpjpYh81QaT0lDF+pYfX7991GWbTqZ+5d4zFvB5N7rT7
+ 1t57LcZ26hYfNdoeandA==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3ws3knt3w7-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 12 Mar 2024 12:36:18 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 36C4640045;
+ Tue, 12 Mar 2024 12:36:14 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 8DA6A25F7D8;
+ Tue, 12 Mar 2024 12:35:48 +0100 (CET)
+Received: from [10.201.20.71] (10.201.20.71) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Tue, 12 Mar
+ 2024 12:35:48 +0100
+Message-ID: <244cd370-a772-454e-b676-b7b2ad5671c7@foss.st.com>
+Date: Tue, 12 Mar 2024 12:35:47 +0100
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS1PEPF0001709B:EE_|PH0PR12MB7488:EE_
-X-MS-Office365-Filtering-Correlation-Id: 92105568-3fd9-4b2d-a2ff-08dc42886238
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 983WZqCN+erdLkQ9vqnlq48eRIyKnLbFeyhR1em5GMcP6Oi8o2P0kpimtKO2BkHKV/DPNk6r7ebJXpzfkQt/KQ/xLjKsCfetvibzA8wHKxImdOYjv/JGU12FMuj0E+2fCV2YX3lSt5LA0jh3KTV/3X4+v+CfdctalNkpxgkeh4kXDIZVcpKrX+HslsRijzi12/Qpiw4TJkjlyyaLB6xd/y3DXj2xMd99l2US2366EqBOVZVa9szF3aNtfl8FNt9rLs125GY67zW7XQmWHgenfGxzt0LTrqXASNwQ+a6j31eM7YOyHttjlBPT4pPkh1GVwPmbdj9xY+6IrpUTD2c1cbwOEKA/Jk4oTqLPbdCOcD16QUj67Ylph4Lqy4+ddnWMt63+roxJWIbEWtQo9H4yxWmihSPVVqUt+qE4I+OWjSYS4JwYM9B/OQDoyJvirTtm/iayH6LYZW5uRW7ku5x6qRLmw2jYvX+mqrDTval+pG19e6Wn5hdC24ol3sydK/v/8CNpQuF9l0mqbPEQdd5CFj7U8mRpPED5+tEF71SAdNxRjGsosInjlzEjf5hKZrmlKPhYYoMBkldhntkt4eW9j2vd5UNbkpFY8ikAJ25s5kKHnnSG1MmTUR5ewTG17UGmaiq9mOgpM1uPnDqqF0vdMw9WQVSjnTmKgr5ZZzrnuPTDOjyw/we9Lnn1yDtAWzjTQiLPTZgSXH0ZUaNLWdAa5lIB9BhjUZl+Zj6YVLGERuuY4M+PnCMJVXthQ4z5+RfC
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(36860700004)(376005)(82310400014)(1800799015); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Mar 2024 11:34:30.9694 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 92105568-3fd9-4b2d-a2ff-08dc42886238
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF0001709B.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR12MB7488
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] lmb: Avoid to add identical region in
+ lmb_add_region_flags()
+Content-Language: en-US
+To: "Kumar, Udit" <u-kumar1@ti.com>, <u-boot@lists.denx.de>
+CC: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>, Michal Simek
+ <michal.simek@amd.com>, Simon Glass <sjg@chromium.org>, Tom Rini
+ <trini@konsulko.com>
+References: <20240311143918.2927406-1-patrice.chotard@foss.st.com>
+ <32e8bffc-dbe7-48d9-985f-d794aa6a4848@ti.com>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <32e8bffc-dbe7-48d9-985f-d794aa6a4848@ti.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.201.20.71]
+X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-03-12_08,2024-03-12_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,83 +93,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable saving variables to MMC(FAT) and SPI based on primary
-bootmode. If bootmode is JTAG, dont save env anywhere(NOWHERE).
 
-Enable ENV_FAT_DEVICE_AND_PART="0:auto" for versal-net platform as well.
 
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
----
- board/xilinx/versal-net/board.c          | 30 ++++++++++++++++++++++++
- configs/xilinx_versal_net_virt_defconfig |  3 +++
- env/Kconfig                              |  2 +-
- 3 files changed, 34 insertions(+), 1 deletion(-)
+On 3/11/24 16:36, Kumar, Udit wrote:
+> 
+> On 3/11/2024 8:09 PM, Patrice Chotard wrote:
+>> In case lmb_add_region_flags() is called with the same parameter than
+>> an already existing lmb and this lmb is adjacent to its previous lmb with
+>> different flag, this lmb is added again.
+> 
+> 
+> Same parameter means , addr and size and different flags correct ?
 
-diff --git a/board/xilinx/versal-net/board.c b/board/xilinx/versal-net/board.c
-index 990ca1650a..aecaeb6574 100644
---- a/board/xilinx/versal-net/board.c
-+++ b/board/xilinx/versal-net/board.c
-@@ -371,3 +371,33 @@ int dram_init(void)
- void reset_cpu(void)
- {
- }
-+
-+enum env_location env_get_location(enum env_operation op, int prio)
-+{
-+	u8 bootmode = versal_net_get_bootmode();
-+
-+	if (prio)
-+		return ENVL_UNKNOWN;
-+
-+	switch (bootmode) {
-+	case EMMC_MODE:
-+	case SD_MODE:
-+	case SD1_LSHFT_MODE:
-+	case SD_MODE1:
-+		if (IS_ENABLED(CONFIG_ENV_IS_IN_FAT))
-+			return ENVL_FAT;
-+		if (IS_ENABLED(CONFIG_ENV_IS_IN_EXT4))
-+			return ENVL_EXT4;
-+		return ENVL_NOWHERE;
-+	case OSPI_MODE:
-+	case QSPI_MODE_24BIT:
-+	case QSPI_MODE_32BIT:
-+		if (IS_ENABLED(CONFIG_ENV_IS_IN_SPI_FLASH))
-+			return ENVL_SPI_FLASH;
-+		return ENVL_NOWHERE;
-+	case JTAG_MODE:
-+	case SELECTMAP_MODE:
-+	default:
-+		return ENVL_NOWHERE;
-+	}
-+}
-diff --git a/configs/xilinx_versal_net_virt_defconfig b/configs/xilinx_versal_net_virt_defconfig
-index 29cebe2713..40c6a29a16 100644
---- a/configs/xilinx_versal_net_virt_defconfig
-+++ b/configs/xilinx_versal_net_virt_defconfig
-@@ -60,6 +60,9 @@ CONFIG_PARTITION_TYPE_GUID=y
- CONFIG_OF_BOARD=y
- CONFIG_DTB_RESELECT=y
- CONFIG_MULTI_DTB_FIT=y
-+CONFIG_ENV_IS_NOWHERE=y
-+CONFIG_ENV_IS_IN_FAT=y
-+CONFIG_ENV_IS_IN_SPI_FLASH=y
- CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NET_RANDOM_ETHADDR=y
-diff --git a/env/Kconfig b/env/Kconfig
-index 7885c8bf83..1f8e90af55 100644
---- a/env/Kconfig
-+++ b/env/Kconfig
-@@ -472,7 +472,7 @@ config ENV_FAT_DEVICE_AND_PART
- 	string "Device and partition for where to store the environemt in FAT"
- 	depends on ENV_IS_IN_FAT
- 	default "0:1" if TI_COMMON_CMD_OPTIONS
--	default "0:auto" if ARCH_ZYNQ || ARCH_ZYNQMP || ARCH_VERSAL
-+	default "0:auto" if ARCH_ZYNQ || ARCH_ZYNQMP || ARCH_VERSAL || ARCH_VERSAL_NET
- 	default ":auto" if ARCH_SUNXI
- 	default "0" if ARCH_AT91
- 	help
--- 
-2.17.1
+Hi Udit,
 
+Same parameters means same addr, same size and same flags.
+
+> 
+> 
+>> Instead breaking the loop, continue, at the next iteration, we are able
+>> to detect that this region already exist.
+> 
+> Once region already exist detected, then you can think of returning error , no ?
+
+Before detecting this region is already present, it's detected 
+that this region we want to add is adjacent to a region present in rgn[] array.
+
+That's why i replace the "break" by a "continue" to be able to detect this region is already
+present in rgn[] in the next iteration.
+
+Thanks
+Patrice
+
+> 
+> 
+>> Issue reproduced on STM32MP157-DK2 with SCMI DT, bdinfo command's output
+>> shows:
+>>
+>> Before this patch, the last LMB [0xde000000-0xdfffffff] is duplicated:
+>> ...
+>> lmb_dump_all:nnn
+>>   memory.cnt = 0x1 / max = 0x2
+>>   memory[0]      [0xc0000000-0xdfffffff], 0x20000000 bytes flags: 0
+>>   reserved.cnt = 0x6 / max = 0x10
+>>   reserved[0]    [0x10000000-0x10045fff], 0x00046000 bytes flags: 4
+>>   reserved[1]    [0x30000000-0x3003ffff], 0x00040000 bytes flags: 4
+>>   reserved[2]    [0x38000000-0x3800ffff], 0x00010000 bytes flags: 4
+>>   reserved[3]    [0xdaadf000-0xdfffffff], 0x05521000 bytes flags: 0
+>>   reserved[4]    [0xde000000-0xdfffffff], 0x02000000 bytes flags: 4
+>>   reserved[5]    [0xde000000-0xdfffffff], 0x02000000 bytes flags: 4
+>> ...
+>>
+>> After this patch:
+>> ...
+>> lmb_dump_all:
+>>   memory.cnt = 0x1 / max = 0x2
+>>   memory[0]      [0xc0000000-0xdfffffff], 0x20000000 bytes flags: 0
+>>   reserved.cnt = 0x5 / max = 0x10
+>>   reserved[0]    [0x10000000-0x10045fff], 0x00046000 bytes flags: 4
+>>   reserved[1]    [0x30000000-0x3003ffff], 0x00040000 bytes flags: 4
+>>   reserved[2]    [0x38000000-0x3800ffff], 0x00010000 bytes flags: 4
+>>   reserved[3]    [0xdaadf000-0xdfffffff], 0x05521000 bytes flags: 0
+>>   reserved[4]    [0xde000000-0xdfffffff], 0x02000000 bytes flags: 4
+>> ...
+>>
+>> Fixes: 59c0ea5df33f ("lmb: Add support of flags for no-map properties")
+>>
+>> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+>> ---
+>>
+>>   lib/lmb.c | 4 ++--
+>>   1 file changed, 2 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/lib/lmb.c b/lib/lmb.c
+>> index 44f98205310..b6afb731440 100644
+>> --- a/lib/lmb.c
+>> +++ b/lib/lmb.c
+>> @@ -285,14 +285,14 @@ static long lmb_add_region_flags(struct lmb_region *rgn, phys_addr_t base,
+>>           adjacent = lmb_addrs_adjacent(base, size, rgnbase, rgnsize);
+>>           if (adjacent > 0) {
+>>               if (flags != rgnflags)
+>> -                break;
+>> +                continue;
+>>               rgn->region[i].base -= size;
+>>               rgn->region[i].size += size;
+>>               coalesced++;
+>>               break;
+>>           } else if (adjacent < 0) {
+>>               if (flags != rgnflags)
+>> -                break;
+>> +                continue;
+>>               rgn->region[i].size += size;
+>>               coalesced++;
+>>               break;
