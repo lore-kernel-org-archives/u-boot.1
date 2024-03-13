@@ -4,39 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C3A3C54791
-	for <u-boot@archiver.kernel.org>; Wed, 13 Mar 2024 18:42:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 421B5C54791
+	for <u-boot@archiver.kernel.org>; Wed, 13 Mar 2024 20:22:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB4D387E63;
-	Wed, 13 Mar 2024 19:42:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=arvanta.net
+	by phobos.denx.de (Postfix) with ESMTP id 6C78A87150;
+	Wed, 13 Mar 2024 21:21:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 7616887E9B; Wed, 13 Mar 2024 19:42:08 +0100 (CET)
-Received: from fx.arvanta.net (93-87-244-166.static.isp.telekom.rs
- [93.87.244.166]) by phobos.denx.de (Postfix) with ESMTP id 063B687DE3
- for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 19:42:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=arvanta.net
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=mps@arvanta.net
-Received: from m1pro.arvanta.net (m1pro.arvanta.net [10.5.1.5])
- by fx.arvanta.net (Postfix) with ESMTP id CD3685060;
- Thu, 01 Jan 1970 00:09:05 +0000 (UTC)
-Date: Wed, 13 Mar 2024 19:42:06 +0100
-From: Milan =?utf-8?Q?P=2E_Stani=C4=87?= <mps@arvanta.net>
-To: Nam Cao <namcao@linutronix.de>
-Cc: ycliang@andestech.com, yanhong.wang@starfivetech.com,
- chanho61.park@samsung.com, wiagn233@outlook.com, sjg@chromium.org,
- inindev@gmail.com, rick@andestech.com, bmeng@tinylab.org,
- u-boot@lists.denx.de
-Subject: Re: [PATCH] starfive: visionfive2: switch to standard boot
-Message-ID: <20240313184206.GA20322@m1pro.arvanta.net>
-References: <20240221120014.149193-1-namcao@linutronix.de>
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="X0L4UwI+";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 16E1F87150; Wed, 13 Mar 2024 21:20:03 +0100 (CET)
+Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com
+ [IPv6:2607:f8b0:4864:20::42e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 410DF87ECD
+ for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 21:19:59 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=richard.henderson@linaro.org
+Received: by mail-pf1-x42e.google.com with SMTP id
+ d2e1a72fcca58-6e6aa5c5a6fso355115b3a.0
+ for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 13:19:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1710361197; x=1710965997; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=w9QLI5rG1T4V0cz8vrRfBQa48gWA7KE1SrRQieF/3w8=;
+ b=X0L4UwI+bKJdYvnXBoMfqZ6giWfLOVqXD4ldn8XcxHCZ3xuUl0+hiNnAkk9f5XIL6C
+ 0QiH7dd1WshFvcQCIbFZX658+U3ulSezPTgeMhcKUZTFIpIII74najuOvCuEx207TqKn
+ ygbcmXMIA+dEDrgvNIjsaCodfoma9wHhD3Yv9GU/Gx7J6BY87CFZ7necqs24ABKgCFye
+ rvfdNR2/EMxwX51XyKy4M8J9L13CpgoVr27ywU0UsoIO8HRRfLOOhZh3vY8OLBf4qATt
+ yozwPPflnI2eih6DdK5K0ZOZ0C6duXMKF1EbOkEKFN6tlSX0EBj7NyXxQLhvG5AZCm9U
+ HdOA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710361197; x=1710965997;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=w9QLI5rG1T4V0cz8vrRfBQa48gWA7KE1SrRQieF/3w8=;
+ b=C7I9NHJdGdWn/ICfsp7u1HRGSUTA3sH18VVP2MYW82nuj8hXOrA7JV4uB5pyYg6/KK
+ YGDuuK+cYwSNN8UDA7SS3Pc6FSxO0aZlXA3wnAVqi5jyroL60i4hRPP9fdNRDwFTc3zJ
+ CLrR46MDg+A/6ys0717NmYHrOWVBVN1wcM1WGcSjPcNQWGddGL3B4cxXYW3ljNk87RIC
+ t7vizG+kYIEZtbKc+fs0DKjJdvZLZHK16mG+6Kix1cJMhY4fG6IL4RIn6pFex1QgAPTK
+ o6Rsqo9uDu5D/hz/OGvpfVVeFCOhoX/AVNeTeaAGt62vJI+AvVybZIo9z58ZMqGn/WMe
+ eyfw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU9fRHw3IGgBGgJJE9Jcq6YbVwZbpnd7AMbYDGKfatl1vrN1mHp9bqVq+dsDPqfNT1ZXK2yT1S8B9EJ2yBaiHKQ3vsOxg==
+X-Gm-Message-State: AOJu0Yx8iXlDJCqvg3GOjpdhrMrTLVnqtjGoxJQgJHmE+gioQlm9xBYJ
+ FFkUJJTq6VZIhLN/XV17SemEplTVPm0INzXac+ivBeGMmHq0nYQ0BJfShwg+u/7VisiIskXpTD/
+ 4
+X-Google-Smtp-Source: AGHT+IGbHk7k46+0ZqO8zdLl53MoZRaHvPxtRpwvHkbqUaYj5XHPO3NuWD0pqVLSMzA6r8YEeWF3bw==
+X-Received: by 2002:a05:6a20:394c:b0:1a1:4d4d:ca8d with SMTP id
+ r12-20020a056a20394c00b001a14d4dca8dmr7778pzg.50.1710361197574; 
+ Wed, 13 Mar 2024 13:19:57 -0700 (PDT)
+Received: from [172.20.1.19] (173-197-098-125.biz.spectrum.com.
+ [173.197.98.125]) by smtp.gmail.com with ESMTPSA id
+ c11-20020a62e80b000000b006e6aee6807dsm18473pfi.22.2024.03.13.13.19.54
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 13 Mar 2024 13:19:57 -0700 (PDT)
+Message-ID: <e1fabe14-0c0e-45f3-9d5a-1452cb9b954e@linaro.org>
+Date: Wed, 13 Mar 2024 10:19:52 -1000
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20240221120014.149193-1-namcao@linutronix.de>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 2/7] arm: clean up v7 and v8 linker scripts for
+ bss_start/end
+Content-Language: en-US
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
+ trini@konsulko.com, cfsworks@gmail.com
+Cc: caleb.connolly@linaro.org, sumit.garg@linaro.org,
+ Ryan Chen <ryan_chen@aspeedtech.com>,
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
+ Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, Michal Simek <michal.simek@amd.com>,
+ Yegor Yefremov <yegorslists@googlemail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Shiji Yang <yangshiji66@outlook.com>, Bin Meng <bmeng@tinylab.org>
+References: <20240313162324.2117909-1-ilias.apalodimas@linaro.org>
+ <20240313162324.2117909-3-ilias.apalodimas@linaro.org>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20240313162324.2117909-3-ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Wed, 13 Mar 2024 21:21:57 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -53,64 +108,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 2024-02-21 at 13:00, Nam Cao wrote:
-> Distro boot scripts are deprecated. Use standard boot instead.
-I had to enable 'CONFIG_CMD_SYSBOOT=y' in
-configs/starfive_visionfive2_defconfig because it doesn't boot without
-it. With this option it boots fine with this patch.
-Tested on u-boot version 2024.04-rc4-dirty
+On 3/13/24 06:23, Ilias Apalodimas wrote:
+> +++ b/arch/arm/cpu/armv8/u-boot-spl.lds
+> @@ -63,18 +63,11 @@ SECTIONS
+>   
+>   	_image_binary_end = .;
+>   
+> -	.bss_start (NOLOAD) : {
+> -		. = ALIGN(8);
+> -		KEEP(*(.__bss_start));
+> -	} >.sdram
+> -
+> -	.bss (NOLOAD) : {
+> +	.bss : {
+> +		__bss_start = .;
+>   		*(.bss*)
+> -		 . = ALIGN(8);
+> -	} >.sdram
+> -
+> -	.bss_end (NOLOAD) : {
+> -		KEEP(*(.__bss_end));
+> +		. = ALIGN(8);
+> +		__bss_end = .;
 
-> Signed-off-by: Nam Cao <namcao@linutronix.de>
-> Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
-Tested-by: Milan P. Stanić <mps@arvanta.net>
+Still missing the alignment on .bss, previously in .bss_start.
 
-> ---
->  configs/starfive_visionfive2_defconfig |  2 +-
->  include/configs/starfive-visionfive2.h | 14 +-------------
->  2 files changed, 2 insertions(+), 14 deletions(-)
-> 
-> diff --git a/configs/starfive_visionfive2_defconfig b/configs/starfive_visionfive2_defconfig
-> index b11be7ac86..aec751f871 100644
-> --- a/configs/starfive_visionfive2_defconfig
-> +++ b/configs/starfive_visionfive2_defconfig
-> @@ -31,8 +31,8 @@ CONFIG_RISCV_SMODE=y
->  # CONFIG_OF_BOARD_FIXUP is not set
->  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
->  CONFIG_FIT=y
-> +CONFIG_BOOTSTD_DEFAULTS=y
->  CONFIG_SYS_BOOTM_LEN=0x4000000
-> -CONFIG_DISTRO_DEFAULTS=y
->  CONFIG_BOOTSTAGE=y
->  CONFIG_QSPI_BOOT=y
->  CONFIG_SD_BOOT=y
-> diff --git a/include/configs/starfive-visionfive2.h b/include/configs/starfive-visionfive2.h
-> index 29c74470c7..049b0a0630 100644
-> --- a/include/configs/starfive-visionfive2.h
-> +++ b/include/configs/starfive-visionfive2.h
-> @@ -15,17 +15,6 @@
->  
->  #define __io
->  
-> -/* Environment options */
-> -
-> -#define BOOT_TARGET_DEVICES(func) \
-> -	func(NVME, nvme, 0) \
-> -	func(USB, usb, 0) \
-> -	func(MMC, mmc, 0) \
-> -	func(MMC, mmc, 1) \
-> -	func(DHCP, dhcp, na)
-> -
-> -#include <config_distro_bootcmd.h>
-> -
->  #define TYPE_GUID_SPL		"2E54B353-1271-4842-806F-E436D6AF6985"
->  #define TYPE_GUID_UBOOT	"BC13C2FF-59E6-4262-A352-B275FD6F7172"
->  #define TYPE_GUID_SYSTEM	"EBD0A0A2-B9E5-4433-87C0-68B6B72699C7"
-> @@ -48,7 +37,6 @@
->  	"type_guid_gpt_loader2=" TYPE_GUID_UBOOT "\0" \
->  	"type_guid_gpt_system=" TYPE_GUID_SYSTEM "\0" \
->  	"partitions=" PARTS_DEFAULT "\0" \
-> -	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0" \
-> -	BOOTENV
-> +	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0"
->  
->  #endif /* _STARFIVE_VISIONFIVE2_H */
+With that fixed,
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+
+r~
