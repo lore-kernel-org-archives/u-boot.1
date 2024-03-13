@@ -4,61 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C99F1C54E58
-	for <u-boot@archiver.kernel.org>; Wed, 13 Mar 2024 10:14:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8BECC54791
+	for <u-boot@archiver.kernel.org>; Wed, 13 Mar 2024 10:28:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 420EA87DB0;
-	Wed, 13 Mar 2024 11:14:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id E39D587B2A;
+	Wed, 13 Mar 2024 11:28:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="FxTk80lP";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Bb/ZFpPG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 32C9B87E0C; Wed, 13 Mar 2024 11:14:01 +0100 (CET)
-Received: from mail-m118115.qiye.163.com (mail-m118115.qiye.163.com
- [115.236.118.115])
+ id 1D09987E39; Wed, 13 Mar 2024 11:28:27 +0100 (CET)
+Received: from mail-m3282.qiye.163.com (mail-m3282.qiye.163.com
+ [220.197.32.82])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 10F0387572
- for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 11:13:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3B047875FA
+ for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 11:28:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=FxTk80lPrNqX1LCmYxhjfP+JIjAs+/PKBXgg4pKptOeVKwfigKnu6ppLIprZICsw3DnjwiQCxEaFD/GhRb09ta28lNHao68+SirKVk1uQlCMinfUo8lOMenLs+CssOONhrnm2KLb2y7d2nn+lkrBGKc4ICZ1HkFrHNLLVCG5ed4=;
+ b=Bb/ZFpPGtjNbH3gpIt1FYFyq7zbMc1/R438YIr/MA46oG2BD9E6TepHQ0zXrhLzUXVdo9kxkSRlAOMW3OuEYRo5YtF0Q3iVpX5l/g+v3INWX9PSc7HqIvDvKXE7pZPDyg6Pj7tt6son1jZFtuQeE0r4Y8XGg6h4U+vJJ7TirnTs=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=5yDcna8nuXx8AagIRhcWVFqjxQYGI6z0dlThpnwuDyA=;
+ bh=OQnxJpep6weo9OhAv3HGmCy/JHonBXKXZS5+u/CIhjk=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.77] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 8AC4B90038C;
- Wed, 13 Mar 2024 18:13:40 +0800 (CST)
-Message-ID: <322299db-75e3-4c18-afe5-a729af3bedc1@rock-chips.com>
-Date: Wed, 13 Mar 2024 18:13:40 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTPA id 6BC169003A4;
+ Wed, 13 Mar 2024 18:27:59 +0800 (CST)
+Message-ID: <5d174a17-72f8-4ba2-b1de-ca72dc5291ba@rock-chips.com>
+Date: Wed, 13 Mar 2024 18:27:59 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 12/12] rockchip: board: Move gpt_capsule_update_setup()
- call
+Subject: Re: [PATCH v2 3/5] rockchip: rk3328: regenerate defconfigs
 Content-Language: en-US
-To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>, u-boot@lists.denx.de
-References: <20240312233636.1428749-1-jonas@kwiboo.se>
- <20240312233636.1428749-13-jonas@kwiboo.se>
+To: Chen-Yu Tsai <wens@kernel.org>, u-boot@lists.denx.de
+Cc: Chen-Yu Tsai <wens@csie.org>,
+ Christopher Obbard <chris.obbard@collabora.com>,
+ Dragan Simic <dsimic@manjaro.org>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Andy Yan <andy.yan@rock-chips.com>, Nick Xie <nick@khadas.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Deepak Das <deepakdas.linux@gmail.com>, Alexandre Vicenzi <linux@alxd.me>,
+ Tianling Shen <cnsztl@gmail.com>, David Bauer <mail@david-bauer.net>,
+ Xiaobo Tian <peterwillcn@gmail.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ Klaus Goger <klaus.goger@theobroma-systems.com>,
+ Loic Devulder <ldevulder@suse.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Levin Du <djw@t-chip.com.cn>, Suniel Mahesh <sunil@amarulasolutions.com>,
+ FUKAUMI Naoki <naoki@radxa.com>, Banglang Huang
+ <banglang.huang@foxmail.com>, "Matwey V. Kornilov"
+ <matwey.kornilov@gmail.com>,
+ Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>
+References: <20240212135111.1767734-1-wens@kernel.org>
+ <20240212135111.1767734-4-wens@kernel.org>
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240312233636.1428749-13-jonas@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+In-Reply-To: <20240212135111.1767734-4-wens@kernel.org>
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGUIYHVZIGR8dGUgYT0kZS0hVEwETFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ0tJGVZPH0NPTxhIS04aHk9VEwETFh
  oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk5MSUpJVUpLS1VKQl
  kG
-X-HM-Tid: 0a8e374dab8603a9kunm8ac4b90038c
+X-HM-Tid: 0a8e375acafb03a9kunm6bc169003a4
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PAw6GRw6ODMcSyk#EiI3Egwi
- A0kKFBhVSlVKTEpLSElPQ0lKSkJMVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFIS05MNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PFE6GBw*TjMUOCk8Akw0Hz8o
+ GE0wC0pVSlVKTEpLSElOTUNKSENDVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJS0NDTjcG
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,57 +91,225 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Chen-Yu,
 
-On 2024/3/13 07:36, Jonas Karlman wrote:
-> Move the call to gpt_capsule_update_setup() from the weak function
-> rk_board_late_init() into the main board_late_init() function.
+On 2024/2/12 21:51, Chen-Yu Tsai wrote:
+> From: Chen-Yu Tsai<wens@csie.org>
 >
-> Also change to use IS_ENABLED() instead for defined().
+> Regenerate RK3328 defconfigs after adding imply statements.
 >
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+> Signed-off-by: Chen-Yu Tsai<wens@csie.org>
+> Reviewed-by: Christopher Obbard<chris.obbard@collabora.com>
+> Reviewed-by: Dragan Simic<dsimic@manjaro.org>
+> ---
+>   configs/evb-rk3328_defconfig                  | 3 ---
+>   configs/nanopi-r2c-plus-rk3328_defconfig      | 3 ---
+>   configs/nanopi-r2c-rk3328_defconfig           | 3 ---
+>   configs/nanopi-r2s-rk3328_defconfig           | 3 ---
+>   configs/orangepi-r1-plus-lts-rk3328_defconfig | 3 ---
+>   configs/orangepi-r1-plus-rk3328_defconfig     | 3 ---
+>   configs/roc-cc-rk3328_defconfig               | 3 ---
+>   configs/rock-pi-e-rk3328_defconfig            | 3 ---
+>   configs/rock64-rk3328_defconfig               | 3 ---
+>   9 files changed, 27 deletions(-)
+>
+> diff --git a/configs/evb-rk3328_defconfig b/configs/evb-rk3328_defconfig
+> index 995bfd0558b1..c3bde3e5c457 100644
+> --- a/configs/evb-rk3328_defconfig
+> +++ b/configs/evb-rk3328_defconfig
+> @@ -30,7 +30,6 @@ CONFIG_LEGACY_IMAGE_FORMAT=y
+>   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-evb.dtb"
+>   # CONFIG_DISPLAY_CPUINFO is not set
+>   CONFIG_DISPLAY_BOARDINFO_LATE=y
+> -CONFIG_MISC_INIT_R=y
+>   CONFIG_SPL_MAX_SIZE=0x40000
+>   CONFIG_SPL_PAD_TO=0x7f8000
+>   CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+> @@ -70,8 +69,6 @@ CONFIG_FASTBOOT_BUF_ADDR=0x800800
+>   CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+>   CONFIG_ROCKCHIP_GPIO=y
+>   CONFIG_SYS_I2C_ROCKCHIP=y
+> -CONFIG_MISC=y
+> -CONFIG_ROCKCHIP_EFUSE=y
+
+There is no this config in the all these boards when I check the code on 
+next,
+
+which cause the conflict when apply this patch.
+
 
 Thanks,
+
 - Kever
-> ---
-> v2:
-> - New patch, split from "board: rockchip: Add a common ROCK Pi 4 target"
-> ---
->   arch/arm/mach-rockchip/board.c | 10 +++++-----
->   1 file changed, 5 insertions(+), 5 deletions(-)
->
-> diff --git a/arch/arm/mach-rockchip/board.c b/arch/arm/mach-rockchip/board.c
-> index 4f666aee706f..dea5805c4665 100644
-> --- a/arch/arm/mach-rockchip/board.c
-> +++ b/arch/arm/mach-rockchip/board.c
-> @@ -34,7 +34,7 @@
->   #include <asm/arch-rockchip/periph.h>
->   #include <power/regulator.h>
->   
-> -#if defined(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) && defined(CONFIG_EFI_PARTITION)
-> +#if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) && IS_ENABLED(CONFIG_EFI_PARTITION)
->   
->   #define DFU_ALT_BUF_LEN			SZ_1K
->   
-> @@ -185,10 +185,6 @@ static void gpt_capsule_update_setup(void)
->   
->   __weak int rk_board_late_init(void)
->   {
-> -#if defined(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) && defined(CONFIG_EFI_PARTITION)
-> -	gpt_capsule_update_setup();
-> -#endif
-> -
->   	return 0;
->   }
->   
-> @@ -196,6 +192,10 @@ int board_late_init(void)
->   {
->   	setup_boot_mode();
->   
-> +#if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) && IS_ENABLED(CONFIG_EFI_PARTITION)
-> +	gpt_capsule_update_setup();
-> +#endif
-> +
->   	return rk_board_late_init();
->   }
->   
+
+>   CONFIG_MMC_DW=y
+>   CONFIG_MMC_DW_ROCKCHIP=y
+>   CONFIG_PHY_MOTORCOMM=y
+> diff --git a/configs/nanopi-r2c-plus-rk3328_defconfig b/configs/nanopi-r2c-plus-rk3328_defconfig
+> index 1cb0ed855398..1b0fa27ced16 100644
+> --- a/configs/nanopi-r2c-plus-rk3328_defconfig
+> +++ b/configs/nanopi-r2c-plus-rk3328_defconfig
+> @@ -31,7 +31,6 @@ CONFIG_LEGACY_IMAGE_FORMAT=y
+>   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-nanopi-r2c-plus.dtb"
+>   # CONFIG_DISPLAY_CPUINFO is not set
+>   CONFIG_DISPLAY_BOARDINFO_LATE=y
+> -CONFIG_MISC_INIT_R=y
+>   CONFIG_SPL_MAX_SIZE=0x40000
+>   CONFIG_SPL_PAD_TO=0x7f8000
+>   CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+> @@ -72,8 +71,6 @@ CONFIG_FASTBOOT_BUF_ADDR=0x800800
+>   CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+>   CONFIG_ROCKCHIP_GPIO=y
+>   CONFIG_SYS_I2C_ROCKCHIP=y
+> -CONFIG_MISC=y
+> -CONFIG_ROCKCHIP_EFUSE=y
+>   CONFIG_MMC_DW=y
+>   CONFIG_MMC_DW_ROCKCHIP=y
+>   CONFIG_PHY_MOTORCOMM=y
+> diff --git a/configs/nanopi-r2c-rk3328_defconfig b/configs/nanopi-r2c-rk3328_defconfig
+> index 59801328deda..edf24623da2a 100644
+> --- a/configs/nanopi-r2c-rk3328_defconfig
+> +++ b/configs/nanopi-r2c-rk3328_defconfig
+> @@ -31,7 +31,6 @@ CONFIG_LEGACY_IMAGE_FORMAT=y
+>   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-nanopi-r2c.dtb"
+>   # CONFIG_DISPLAY_CPUINFO is not set
+>   CONFIG_DISPLAY_BOARDINFO_LATE=y
+> -CONFIG_MISC_INIT_R=y
+>   CONFIG_SPL_MAX_SIZE=0x40000
+>   CONFIG_SPL_PAD_TO=0x7f8000
+>   CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+> @@ -72,8 +71,6 @@ CONFIG_FASTBOOT_BUF_ADDR=0x800800
+>   CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+>   CONFIG_ROCKCHIP_GPIO=y
+>   CONFIG_SYS_I2C_ROCKCHIP=y
+> -CONFIG_MISC=y
+> -CONFIG_ROCKCHIP_EFUSE=y
+>   CONFIG_MMC_DW=y
+>   CONFIG_MMC_DW_ROCKCHIP=y
+>   CONFIG_PHY_MOTORCOMM=y
+> diff --git a/configs/nanopi-r2s-rk3328_defconfig b/configs/nanopi-r2s-rk3328_defconfig
+> index 61914b1650d2..32c99dfecb86 100644
+> --- a/configs/nanopi-r2s-rk3328_defconfig
+> +++ b/configs/nanopi-r2s-rk3328_defconfig
+> @@ -31,7 +31,6 @@ CONFIG_LEGACY_IMAGE_FORMAT=y
+>   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-nanopi-r2s.dtb"
+>   # CONFIG_DISPLAY_CPUINFO is not set
+>   CONFIG_DISPLAY_BOARDINFO_LATE=y
+> -CONFIG_MISC_INIT_R=y
+>   CONFIG_SPL_MAX_SIZE=0x40000
+>   CONFIG_SPL_PAD_TO=0x7f8000
+>   CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+> @@ -72,8 +71,6 @@ CONFIG_FASTBOOT_BUF_ADDR=0x800800
+>   CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+>   CONFIG_ROCKCHIP_GPIO=y
+>   CONFIG_SYS_I2C_ROCKCHIP=y
+> -CONFIG_MISC=y
+> -CONFIG_ROCKCHIP_EFUSE=y
+>   CONFIG_MMC_DW=y
+>   CONFIG_MMC_DW_ROCKCHIP=y
+>   CONFIG_PHY_MOTORCOMM=y
+> diff --git a/configs/orangepi-r1-plus-lts-rk3328_defconfig b/configs/orangepi-r1-plus-lts-rk3328_defconfig
+> index 968110c8cd6f..f554a284d930 100644
+> --- a/configs/orangepi-r1-plus-lts-rk3328_defconfig
+> +++ b/configs/orangepi-r1-plus-lts-rk3328_defconfig
+> @@ -34,7 +34,6 @@ CONFIG_LEGACY_IMAGE_FORMAT=y
+>   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-orangepi-r1-plus-lts.dtb"
+>   # CONFIG_DISPLAY_CPUINFO is not set
+>   CONFIG_DISPLAY_BOARDINFO_LATE=y
+> -CONFIG_MISC_INIT_R=y
+>   CONFIG_SPL_MAX_SIZE=0x40000
+>   CONFIG_SPL_PAD_TO=0x7f8000
+>   CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+> @@ -77,8 +76,6 @@ CONFIG_FASTBOOT_BUF_ADDR=0x800800
+>   CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+>   CONFIG_ROCKCHIP_GPIO=y
+>   CONFIG_SYS_I2C_ROCKCHIP=y
+> -CONFIG_MISC=y
+> -CONFIG_ROCKCHIP_EFUSE=y
+>   CONFIG_MMC_DW=y
+>   CONFIG_MMC_DW_ROCKCHIP=y
+>   CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+> diff --git a/configs/orangepi-r1-plus-rk3328_defconfig b/configs/orangepi-r1-plus-rk3328_defconfig
+> index 7038f09f202c..162032460fe0 100644
+> --- a/configs/orangepi-r1-plus-rk3328_defconfig
+> +++ b/configs/orangepi-r1-plus-rk3328_defconfig
+> @@ -34,7 +34,6 @@ CONFIG_LEGACY_IMAGE_FORMAT=y
+>   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-orangepi-r1-plus.dtb"
+>   # CONFIG_DISPLAY_CPUINFO is not set
+>   CONFIG_DISPLAY_BOARDINFO_LATE=y
+> -CONFIG_MISC_INIT_R=y
+>   CONFIG_SPL_MAX_SIZE=0x40000
+>   CONFIG_SPL_PAD_TO=0x7f8000
+>   CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+> @@ -77,8 +76,6 @@ CONFIG_FASTBOOT_BUF_ADDR=0x800800
+>   CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+>   CONFIG_ROCKCHIP_GPIO=y
+>   CONFIG_SYS_I2C_ROCKCHIP=y
+> -CONFIG_MISC=y
+> -CONFIG_ROCKCHIP_EFUSE=y
+>   CONFIG_MMC_DW=y
+>   CONFIG_MMC_DW_ROCKCHIP=y
+>   CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+> diff --git a/configs/roc-cc-rk3328_defconfig b/configs/roc-cc-rk3328_defconfig
+> index 7d81a715ef25..02be1102697b 100644
+> --- a/configs/roc-cc-rk3328_defconfig
+> +++ b/configs/roc-cc-rk3328_defconfig
+> @@ -31,7 +31,6 @@ CONFIG_LEGACY_IMAGE_FORMAT=y
+>   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-roc-cc.dtb"
+>   # CONFIG_DISPLAY_CPUINFO is not set
+>   CONFIG_DISPLAY_BOARDINFO_LATE=y
+> -CONFIG_MISC_INIT_R=y
+>   CONFIG_SPL_MAX_SIZE=0x40000
+>   CONFIG_SPL_PAD_TO=0x7f8000
+>   CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+> @@ -73,8 +72,6 @@ CONFIG_FASTBOOT_BUF_ADDR=0x800800
+>   CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+>   CONFIG_ROCKCHIP_GPIO=y
+>   CONFIG_SYS_I2C_ROCKCHIP=y
+> -CONFIG_MISC=y
+> -CONFIG_ROCKCHIP_EFUSE=y
+>   CONFIG_MMC_DW=y
+>   CONFIG_MMC_DW_ROCKCHIP=y
+>   CONFIG_PHY_REALTEK=y
+> diff --git a/configs/rock-pi-e-rk3328_defconfig b/configs/rock-pi-e-rk3328_defconfig
+> index ddd482dd0195..ac6d6c5df772 100644
+> --- a/configs/rock-pi-e-rk3328_defconfig
+> +++ b/configs/rock-pi-e-rk3328_defconfig
+> @@ -32,7 +32,6 @@ CONFIG_LEGACY_IMAGE_FORMAT=y
+>   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-rock-pi-e.dtb"
+>   # CONFIG_DISPLAY_CPUINFO is not set
+>   CONFIG_DISPLAY_BOARDINFO_LATE=y
+> -CONFIG_MISC_INIT_R=y
+>   CONFIG_SPL_MAX_SIZE=0x40000
+>   CONFIG_SPL_PAD_TO=0x7f8000
+>   CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+> @@ -73,8 +72,6 @@ CONFIG_FASTBOOT_BUF_ADDR=0x800800
+>   CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+>   CONFIG_ROCKCHIP_GPIO=y
+>   CONFIG_SYS_I2C_ROCKCHIP=y
+> -CONFIG_MISC=y
+> -CONFIG_ROCKCHIP_EFUSE=y
+>   CONFIG_MMC_DW=y
+>   CONFIG_MMC_DW_ROCKCHIP=y
+>   CONFIG_PHY_REALTEK=y
+> diff --git a/configs/rock64-rk3328_defconfig b/configs/rock64-rk3328_defconfig
+> index 01e447448513..718fb8f2025c 100644
+> --- a/configs/rock64-rk3328_defconfig
+> +++ b/configs/rock64-rk3328_defconfig
+> @@ -34,7 +34,6 @@ CONFIG_LEGACY_IMAGE_FORMAT=y
+>   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-rock64.dtb"
+>   # CONFIG_DISPLAY_CPUINFO is not set
+>   CONFIG_DISPLAY_BOARDINFO_LATE=y
+> -CONFIG_MISC_INIT_R=y
+>   CONFIG_SPL_MAX_SIZE=0x40000
+>   CONFIG_SPL_PAD_TO=0x7f8000
+>   CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+> @@ -77,8 +76,6 @@ CONFIG_FASTBOOT_BUF_ADDR=0x800800
+>   CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+>   CONFIG_ROCKCHIP_GPIO=y
+>   CONFIG_SYS_I2C_ROCKCHIP=y
+> -CONFIG_MISC=y
+> -CONFIG_ROCKCHIP_EFUSE=y
+>   CONFIG_MMC_DW=y
+>   CONFIG_MMC_DW_ROCKCHIP=y
+>   CONFIG_SPI_FLASH_SFDP_SUPPORT=y
