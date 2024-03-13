@@ -4,84 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05C51C54791
-	for <u-boot@archiver.kernel.org>; Wed, 13 Mar 2024 10:57:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 897BBC54791
+	for <u-boot@archiver.kernel.org>; Wed, 13 Mar 2024 11:29:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D0B687F25;
-	Wed, 13 Mar 2024 11:56:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A84C987E92;
+	Wed, 13 Mar 2024 12:29:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=gerhold.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jbxlWx1q";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gerhold.net header.i=@gerhold.net header.b="jP4KHsFY";
+	dkim=permerror (0-bit key) header.d=gerhold.net header.i=@gerhold.net header.b="YZdDM6oS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D470D875FA; Wed, 13 Mar 2024 11:27:41 +0100 (CET)
-Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
- [IPv6:2607:f8b0:4864:20::636])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id DBAA987E75; Wed, 13 Mar 2024 12:29:09 +0100 (CET)
+Received: from mo4-p01-ob.smtp.rzone.de (mo4-p01-ob.smtp.rzone.de
+ [81.169.146.164])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1506D87B82
- for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 11:27:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 091A487E47
+ for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 12:29:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=gerhold.net
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ppighouse@gmail.com
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-1d944e8f367so7346975ad.0
- for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 03:27:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1710325656; x=1710930456; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=SNKdIJK1p9MJ23nCnTh6b8pdxKFP2N/HtsbD5LhKpPU=;
- b=jbxlWx1qGtxofFix8+EEC9QaRbFVh72AwDHb/bI7XRrYjrVQ+EF8Qkuy8n3fHpm8gE
- 5B0kSau2Vk69/s7MB6ALCaZmo9s3ZOUR7kvmE4J4N2tmb0+a1gdN4dgtHOxdW1AuRk35
- dfg8h95EzgoSddYYHZOvxvHJ2HDfPu1i+TyIKWsRNpVtnwyTi1plbRRMKOxI+MZoe/O6
- iBPhz6QHP1wYcv0O9AJFAQRosMzdO02vvNcGpP5bNQok1SpkfIdTZEs/eIs6K9VC4n8L
- WwGKP40By8+n8TQt9w45tvLFExDE8xxfMN4TbpoKoDN+xU6zmXtwdtyApcMA0x8E2uCj
- +OBg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710325656; x=1710930456;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=SNKdIJK1p9MJ23nCnTh6b8pdxKFP2N/HtsbD5LhKpPU=;
- b=jz8BZZtgJpZUb6hKvGFEcuY/lWd7bsLAv4MXx7OieaTnvd33q0r7tY3z+Wkzlp5FPD
- eSglr/FJFBmWAKQZ8W0EF0S3FRK4E081WzKBozYkvk9WjkZYcrO2pzG3+r1S8W+ZcSVm
- B7Py57aqKtkv40QunKuYgQwkcu3EY0OuIv5oQ3ZFv/Au2dl+i05ZkWE7ff1to79PZDVc
- y0iugI0PoOrG/pJX1qLKnwmt2+SHn0EdfXR5kJPR5Diu8ZGrUuABbHXdNn8vDm227oDD
- Lt8hm6ODFx/VXWINNCnjXuhHeiOuP9XJUA8Cq+x0JYxYW1dQTk/Jgp8M7phmmfS4xowi
- IkOg==
-X-Gm-Message-State: AOJu0YzrEbdZwRJqz2ZOGilojX9wcCOYBhjJrLOtHIvlB4Ov1u5awMxq
- 1aNf5ffyT6r+KgA8uuzUCKWsekpwhbZsTKJiPx9mglD+jAThVcwya49KGnZSZ0k=
-X-Google-Smtp-Source: AGHT+IFfnqqu+8B9t9lRX6CFSz9OA77aaVCcKKhEWsLHcsgyFUIfNfB+AygVrDBczjXp0n1LxNUX7w==
-X-Received: by 2002:a17:902:a386:b0:1dd:b3ef:4528 with SMTP id
- x6-20020a170902a38600b001ddb3ef4528mr2361299pla.52.1710325656391; 
- Wed, 13 Mar 2024 03:27:36 -0700 (PDT)
-Received: from localhost.localdomain (125-229-150-10.hinet-ip.hinet.net.
- [125.229.150.10]) by smtp.gmail.com with ESMTPSA id
- jz3-20020a170903430300b001db63cfe07dsm8249282plb.283.2024.03.13.03.27.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Mar 2024 03:27:35 -0700 (PDT)
-From: Kelly Hung <ppighouse@gmail.com>
-X-Google-Original-From: Kelly Hung <Kelly_Hung@asus.com>
-To: u-boot@lists.denx.de
-Cc: trini@konsulko.com, kever.yang@rock-chips.com, michal.simek@amd.com,
- marex@denx.de, neil.armstrong@linaro.org, jonas@kwiboo.se,
- cnsztl@gmail.com, clamor95@gmail.com, hai.pham.ud@renesas.com,
- naoki@radxa.com, patrick.delaunay@foss.st.com, christianshewitt@gmail.com,
- openbmc@lists.ozlabs.org, kelly_hung@asus.com, Allenyy_Hsu@asus.com,
- Kelly Hung <Kelly_Hung@asus.com>
-Subject: [PATCH next v1 1/1] arm: dts: ast2600-x4tf: Add new dts for ASUS X4TF
-Date: Wed, 13 Mar 2024 18:27:25 +0800
-Message-Id: <20240313102725.2067651-2-Kelly_Hung@asus.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240313102725.2067651-1-Kelly_Hung@asus.com>
-References: <20240313102725.2067651-1-Kelly_Hung@asus.com>
+ spf=none smtp.mailfrom=stephan@gerhold.net
+ARC-Seal: i=1; a=rsa-sha256; t=1710329342; cv=none;
+ d=strato.com; s=strato-dkim-0002;
+ b=crPIkn9lc7VflqWPZlz5LgmH4JNqYDYtYJZWeP/0RJIY3bIHfOa0ZcMAgqVfic/3eR
+ hZD++9QBkxNDhifKEwbhCQnKQjQkYtb1FyC+OR816Ll2MISvgfnfB+k6twWUj10A3y6v
+ kC7EKvY9s272M2f0GUa2g7AWBtxQPEs0BNUTQtRW5GN6fk7+jaL2bjBN3jklqT7UNqz7
+ cIP6QtogjEJpPmlfhwC4bjjn+wOgT96mfZPdUZHurZ5VoEdiKqMlCMTnCnHKV8nJ43bn
+ tpkwIz6U1s02cVu0VuJEwZ6oaG8IuFcCgNgWNVcJg9L0+/2d7WlKA6VYHQm3xJveKYWw
+ r4Iw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1710329342;
+ s=strato-dkim-0002; d=strato.com;
+ h=In-Reply-To:References:Message-ID:Subject:Cc:To:From:Date:Cc:Date:
+ From:Subject:Sender;
+ bh=cjQKXGsIjBl7HcQXEDuASk+vxBqSqw3wFZwt/Nf9eoM=;
+ b=tiHiwsIGuWWgauqPpLR7zNf+keVK++58a+8akT+Kogk7q2aXI3G07Ag3Gsmz4IEjth
+ kgWirhnBXLsOFZbE8hoWtqs1KjLKIkfd4y52FXxsZhL1CPonq9iiCHmrj+6NgBu4tz8D
+ HMqIZ5G0QsLW3XZk8ZqxnhEj7L3PRTXmvA6gNYqwym8s3d/KlDuIxm0bvwQsZP6PmP0g
+ u/um0eeBE0KmxwOQ31xOWe3Ur2614Gr49D3h7AyCMez56PjDIIGVAdR7p1bMW/xZjlS8
+ RJGaUlhqxJfY8zaQTmGihDip4qI4IkEG+ubeZPUGxYb0ZH1mqb/EKhRRz/NPFcOcX8kR
+ S2Hg==
+ARC-Authentication-Results: i=1; strato.com;
+    arc=none;
+    dkim=none
+X-RZG-CLASS-ID: mo01
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1710329342;
+ s=strato-dkim-0002; d=gerhold.net;
+ h=In-Reply-To:References:Message-ID:Subject:Cc:To:From:Date:Cc:Date:
+ From:Subject:Sender;
+ bh=cjQKXGsIjBl7HcQXEDuASk+vxBqSqw3wFZwt/Nf9eoM=;
+ b=jP4KHsFYZxVfxuRlqKkUX9n8Ux5pr57G02RKnYtAVnL/wrziF+qTu8x3jR64lVIxzE
+ /uRrl+pJdUhqV12l9nF9zhRZzO7BpwVa0ad6+KHTSlfrt6rZXK8CbHhXxO+G6dWuSDnZ
+ Zu+ZRAzk8PE1IeSZsm7E84wJCuMwnr1ZRYLySSnXAUU2oVMBtePcoQ57IA5QJXfgeW8H
+ CEyA65JCBSTyNHWhGI9yi1WwgDvRl+5aZSc8ASj5Uy2AbVN5NcKaNVnIoQdD5EU/iZwK
+ Vyd/4QLSm8kGhoPSUACJeFev7JxfNNN+eiljii7xAaUMcbXR2co9WsVxnS16k5kBSjKA
+ 6Lug==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1710329342;
+ s=strato-dkim-0003; d=gerhold.net;
+ h=In-Reply-To:References:Message-ID:Subject:Cc:To:From:Date:Cc:Date:
+ From:Subject:Sender;
+ bh=cjQKXGsIjBl7HcQXEDuASk+vxBqSqw3wFZwt/Nf9eoM=;
+ b=YZdDM6oS8Vs6T8yJYUnNnJMRffCuRv/r4EKdUEVSp6EFRIAEyeqMO2+P+aroBLKrZg
+ jNMdNaJwNt6JR425JnAQ==
+X-RZG-AUTH: ":P3gBZUipdd93FF5ZZvYFPugejmSTVR2nRPhVOQ/OcYgojyw4j34+u261EJF5OxJD4peA8p+L1A=="
+Received: from gerhold.net by smtp.strato.de (RZmta 50.2.1 DYNA|AUTH)
+ with ESMTPSA id R97a4502DBT13JS
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
+ (Client did not present a certificate);
+ Wed, 13 Mar 2024 12:29:01 +0100 (CET)
+Date: Wed, 13 Mar 2024 12:28:54 +0100
+From: Stephan Gerhold <stephan@gerhold.net>
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: u-boot@lists.denx.de, caleb.connolly@linaro.org,
+ neil.armstrong@linaro.org, trini@konsulko.com, lukma@denx.de,
+ seanga2@gmail.com, sjg@chromium.org, laetitia.mariottini@se.com,
+ pascal.eberhard@se.com, abdou.saker@se.com, jimmy.lalande@se.com,
+ benjamin.missey@non.se.com, daniel.thompson@linaro.org
+Subject: Re: [PATCH v2 5/5] board: add support for Schneider HMIBSC board
+Message-ID: <ZfGN9j3Nb2CIoy_e@gerhold.net>
+References: <20240311111027.44577-1-sumit.garg@linaro.org>
+ <20240311111027.44577-6-sumit.garg@linaro.org>
+ <Ze8XM9cvZt7fSYg5@gerhold.net>
+ <CAFA6WYOP2Y2byfTWVKv5j6Yu61q64hG_JHBRDspabnybh5KMSA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Wed, 13 Mar 2024 11:56:10 +0100
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAFA6WYOP2Y2byfTWVKv5j6Yu61q64hG_JHBRDspabnybh5KMSA@mail.gmail.com>
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,199 +109,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is the new bmc dts for ASUS X4TF server.
+On Wed, Mar 13, 2024 at 12:08:58PM +0530, Sumit Garg wrote:
+> On Mon, 11 Mar 2024 at 20:07, Stephan Gerhold <stephan@gerhold.net> wrote:
+> > On Mon, Mar 11, 2024 at 04:40:26PM +0530, Sumit Garg wrote:
+> > > Support for Schneider Electric HMIBSC. Features:
+> > > - Qualcomm Snapdragon 410C SoC - APQ8016 (4xCortex A53, Adreno 306)
+> > > - 2GiB RAM
+> > > - 64GiB eMMC, SD slot
+> > > - WiFi and Bluetooth
+> > > - 2x Host, 1x Device USB port
+> > > - HDMI
+> > > - Discrete TPM2 chip over SPI
+> > >
+> > > Features enabled in U-Boot:
+> > > - RAUC updates
+> > > - Environment protection
+> > > - USB based ethernet adaptors
+> > >
+> > > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+> >
+> [...]
+> > > +     gpio_rs232_high: gpio_rs232_high {
+> >
+> > Pretty sure DT schema checks would complain about this node name (need
+> > -state suffix, no underscores).
+> 
+> We have the dtbs_check in U-Boot too. I will use that before posting
+> the next version.
+> 
+> >
+> > > +             bootph-all;
+> > > +             pins = "gpio99";
+> > > +             function = "gpio";
+> > > +
+> > > +             drive-strength = <16>;
+> > > +             bias-disable;
+> > > +             output-high;
+> > > +     };
+> > > +
+> > > +     gpio_rs232_low: gpio_rs232_low {
+> >
+> > Same here.
+> >
+> > Also, since I'm looking at this a bit more closely now, are there maybe
+> > more clear label/node names you could use here, or a comment you could
+> > add what exactly these pins do? I guess this enables something about
+> > RS232 but it's not clear what exactly.
+> 
+> Actually these GPIOs are a mux to select among different UART modes
+> (RS232/422/485). This configuration allows you to select RS232 mode.
+> How about following label/node names?
+> 
+> uart1_mux0_rs232_high: uart1-mux0-rs232-state
+> 
+> uart1_mux1_rs232_low: uart1-mux1-rs232-state
+> 
 
-Signed-off-by: Kelly Hung <Kelly_Hung@asus.com>
----
-V1: Add a new bmc dts for ASUS X4TF server.
----
- arch/arm/dts/Makefile         |   4 +-
- arch/arm/dts/ast2600-x4tf.dts | 161 ++++++++++++++++++++++++++++++++++
- 2 files changed, 164 insertions(+), 1 deletion(-)
- create mode 100644 arch/arm/dts/ast2600-x4tf.dts
+Hm, is it a 2 bit mux selector like
 
-diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index 784192125d..ebbc0b21fc 100644
---- a/arch/arm/dts/Makefile
-+++ b/arch/arm/dts/Makefile
-@@ -1359,7 +1359,9 @@ dtb-$(CONFIG_BCM6878) += \
- 	bcm96878.dtb
- 
- dtb-$(CONFIG_ASPEED_AST2500) += ast2500-evb.dtb
--dtb-$(CONFIG_ASPEED_AST2600) += ast2600-evb.dtb
-+dtb-$(CONFIG_ASPEED_AST2600) += \
-+	ast2600-evb.dtb \
-+	ast2600-x4tf.dtb
- 
- dtb-$(CONFIG_ARCH_STI) += stih410-b2260.dtb
- 
-diff --git a/arch/arm/dts/ast2600-x4tf.dts b/arch/arm/dts/ast2600-x4tf.dts
-new file mode 100644
-index 0000000000..4bf4b66a9c
---- /dev/null
-+++ b/arch/arm/dts/ast2600-x4tf.dts
-@@ -0,0 +1,161 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+// Copyright 2024 ASUS Corp.
-+/dts-v1/;
-+
-+#include "ast2600-u-boot.dtsi"
-+
-+/ {
-+	model = "AST2600 ASUS X4TF";
-+	compatible = "aspeed,ast2600-asus", "aspeed,ast2600";
-+
-+	memory {
-+		device_type = "memory";
-+		reg = <0x80000000 0x20000000>;
-+	};
-+
-+	chosen {
-+		stdout-path = &uart5;
-+	};
-+
-+	aliases {
-+		spi0 = &fmc;
-+		ethernet0 = &mac2;
-+		ethernet1 = &mac3;
-+	};
-+
-+	cpus {
-+		cpu@0 {
-+			clock-frequency = <800000000>;
-+		};
-+
-+		cpu@1 {
-+			clock-frequency = <800000000>;
-+		};
-+	};
-+};
-+
-+&uart5 {
-+	status = "okay";
-+};
-+
-+&sdrammc {
-+	clock-frequency = <400000000>;
-+};
-+
-+&wdt1 {
-+	status = "okay";
-+};
-+
-+&wdt2 {
-+	status = "okay";
-+};
-+
-+&wdt3 {
-+	status = "okay";
-+};
-+
-+&mac2 {
-+	status = "okay";
-+	phy-mode = "rmii";
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pinctrl_rmii3_default>;
-+};
-+
-+&mac3 {
-+	status = "okay";
-+	phy-mode = "rmii";
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pinctrl_rmii4_default>;
-+};
-+
-+&fmc {
-+	status = "okay";
-+
-+	flash@0 {
-+		compatible = "jedec,spi-nor", "macronix,mx66l2g45g";
-+		status = "okay";
-+		spi-max-frequency = <25000000>;
-+		spi-tx-bus-width = <2>;
-+		spi-rx-bus-width = <2>;
-+	};
-+
-+	flash@1 {
-+		compatible = "spi-flash", "sst,w25q256";
-+		status = "okay";
-+		spi-max-frequency = <25000000>;
-+		spi-tx-bus-width = <4>;
-+		spi-rx-bus-width = <4>;
-+	};
-+};
-+
-+&hace {
-+	status = "okay";
-+};
-+
-+&i2c0 {
-+	status = "okay";
-+};
-+
-+&i2c1 {
-+	status = "okay";
-+};
-+
-+&i2c2 {
-+	status = "okay";
-+};
-+
-+&i2c3 {
-+	status = "okay";
-+};
-+
-+&i2c4 {
-+	status = "okay";
-+};
-+
-+&i2c5 {
-+	status = "okay";
-+};
-+
-+&i2c6 {
-+	status = "okay";
-+};
-+
-+&i2c7 {
-+	status = "okay";
-+};
-+
-+&i2c8 {
-+	status = "okay";
-+};
-+
-+&i2c9 {
-+	status = "okay";
-+};
-+
-+&i2c10 {
-+	status = "okay";
-+};
-+
-+&i2c11 {
-+	status = "okay";
-+};
-+
-+&i2c12 {
-+	status = "disabled";
-+};
-+
-+&i2c13 {
-+	status = "disabled";
-+};
-+
-+&i2c14 {
-+	status = "okay";
-+};
-+
-+&i2c15 {
-+	status = "okay";
-+};
-+
-+&display_port {
-+	status = "okay";
-+};
--- 
-2.25.1
+	gpio99	gpio100	UART mode
+	0	0	?
+	0	1	?
+	1	0	RS232
+	1	1	?
 
+and the others are RS422 and RS485? If yes, a comment with the table of
+the function assignments would help a lot for clarity. With that,
+precise naming would not be that important anymore. :-)
+
+Thanks,
+Stephan
