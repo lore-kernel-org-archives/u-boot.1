@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EC35C54791
-	for <u-boot@archiver.kernel.org>; Wed, 13 Mar 2024 07:02:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D2BFC54E58
+	for <u-boot@archiver.kernel.org>; Wed, 13 Mar 2024 07:08:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D712F870D2;
-	Wed, 13 Mar 2024 08:02:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 77E658792D;
+	Wed, 13 Mar 2024 08:08:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IscRYTJg";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mvK2bQek";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C8A088792D; Wed, 13 Mar 2024 08:02:18 +0100 (CET)
-Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
- [IPv6:2a00:1450:4864:20::132])
+ id 5EFF887DC4; Wed, 13 Mar 2024 08:08:37 +0100 (CET)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D9799865D0
- for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 08:02:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4B6D2878E9
+ for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 08:08:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-51331634948so477396e87.0
- for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 00:02:14 -0700 (PDT)
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-513b1e1724bso634418e87.1
+ for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 00:08:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710313334; x=1710918134; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1710313714; x=1710918514; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=9dAplZErS52flJT1ViXv3Siq/VMAmY9Duws8AyxeSMk=;
- b=IscRYTJghr/xfqWvXoSLBssCcr+MXMBDh1HEcSuudoQ15CaVgf9EloJ0wz2IrA0+9p
- keLzKnOpZLmtOLIn3MQRJxnP7OH+8a4N2Ym6VJvyZFekRSTvuIvbLc0TG7sI+GKJ0LRn
- jrBjNBFylzYcVmZe4q7bLYZGaKmanZ7ZKg4vzPjoBZOooI9eyTEe06QutGvrfD0fodRg
- k6aLBlNcqHzImXqO2BfW3ojPSm1OCUN+//aEQ+GeRdPbfNm32sq2wuSdK4vRXMiABw94
- yzoCy8NpXk7Oh8osAvEE51mJqIxieP4QkPnh83H+plyed5NRNnN7OYE7MfiBcsvlRp66
- aktA==
+ bh=hnHxsdRP3QJhnNbpPjtHZ7MGYxSUSDPFY9VCsrlV4kk=;
+ b=mvK2bQekE4Yfffh3cE5QhptgiNHZSBC/7LvfKmiB234XBN52QSZA1D0ADHUsUz3Xzl
+ 7NIAnAqQv7x8OTkeMU3LZMDIpf7dNvMRUDcH4lwXmyyF7FnXSE0IKIcdVwNab+YQzVel
+ DY+aHQ2VsPK7QTkp70haIvUZo0fRqLVw3duGRpq/QriyAbakoxWM+uTIjZFXN3XeZGY7
+ 5oWNbU/aYn+oIn2ZUmOFXaYjE4Q1KrDZoFNAeFNQw4h2+PnkddLCNfJqUd6jUKIrmhSn
+ QPSubYF6UUf6GTmgdOJQzP0/0FAQBNLRX9YziU3BRyEWHtjQgu8mgFXd8gch1pLo6ZWo
+ uS1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710313334; x=1710918134;
+ d=1e100.net; s=20230601; t=1710313714; x=1710918514;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=9dAplZErS52flJT1ViXv3Siq/VMAmY9Duws8AyxeSMk=;
- b=lKkhsaxOj2ZaZs7pfWC85Rvtnq0OIs5wGmYX9UuSy+W7R776jFh27jfL+UZ+8EueEH
- 9JcbM9xuDjl3vR04qLMMmaBfbR20PK2+7Ushed9lLtYlvjBPN1xpe6EYJALVnb87Ck00
- rP7AS2pIvjAW3jzxTk1pBZI2SQHZlKn7nCglzJvbxJRe2Icdap8rVUKrgN2ZvhUsZ5jg
- Ee+ZNJUZei68WGEQmPT53Yk9JXnXW/OqYsWw02As52+Y54sf95hl3NQgrsf3zfsrAvaL
- 7tHezSYop6n6OgJ/wBaiHzPg8XU9i23irHdrDgzoVFfLItAk9USvXtpwZnAOPAW4Fo1e
- 6E6Q==
-X-Gm-Message-State: AOJu0YxZCarVZ884+Xytav1di6PO2aDVLzeO2MI/zOw3bcRqXdRZrFv9
- akTBkZvbknj+JnHBXba00OE/qErhwCMwiszFAWKwbuB4Wx5kTYlxKn+YKIM3zptqLNXrqSZRKV6
- jpuxAfOT3nhATkFwyZDofdLcDjiGarf21MnAXJA==
-X-Google-Smtp-Source: AGHT+IFfBBncHfc8Fg3zHaZ/PLEGhlGOej1yKICaE2S6MQMeXKMCN1PaF1bRuYuRMfgO774n1k3CLqZqUxrIIXV4VGo=
-X-Received: by 2002:a05:6512:2c99:b0:513:ade3:afd with SMTP id
- dw25-20020a0565122c9900b00513ade30afdmr674644lfb.8.1710313333959; Wed, 13 Mar
- 2024 00:02:13 -0700 (PDT)
+ bh=hnHxsdRP3QJhnNbpPjtHZ7MGYxSUSDPFY9VCsrlV4kk=;
+ b=tBioZfz3a6fFz/7G6zqTtJvVavvZoQvnbyjGD4hOCbWSAm7UWgPHXmUA9EVthrcaZV
+ e1LEVlgYikTxi7GFcpbxTkDxr/0OnpcPZHnXtCQZqrR85s8za6kdjaGglaN9DWyCGJv2
+ l3Rn0tRER1q+Die6ph5Rn53Xn5jIyeA+GewvA2l6/4fzoe6pCmAw3ABR1iOEP4VWla/G
+ aU91NvIJzB7knMnlAsA6VrlXyD4zEuHRyCC/Fthaq+I6hU1BdhMk7J4GoLT7uWqSgCbN
+ 3o4ULun3pn8g3Ydc2Xi7HL4FMKO/DYZEnwma55QpK0y0Yj8pWhKzYeUSJPPDmNH2vjlq
+ eyCA==
+X-Gm-Message-State: AOJu0YwXyeegmHyhGUO6SG0/Ty9Kwfdlk48m8Ey+at0X4YCJo24yJpsa
+ fSggxKjung6WJ2Qee9AvFXrkupTnAx3sp7KOS4Ga+8Ixbuk1fkTErtl1wnR1AIxRtI7R9ddVh4t
+ SfM9+i9irwi4LrCTYi9Gw3jsqLfJUUfgn/UubHQ==
+X-Google-Smtp-Source: AGHT+IHpitNU1KfaQlKIRBqQnEBJo6fWiqGQGlmnc+exy1jvfwYINiKTwe057AiOT7uo/HuBy0iAw+hxtgPjNLSV3KU=
+X-Received: by 2002:a19:6909:0:b0:513:a9fa:dd5e with SMTP id
+ e9-20020a196909000000b00513a9fadd5emr549820lfc.14.1710313714528; Wed, 13 Mar
+ 2024 00:08:34 -0700 (PDT)
 MIME-Version: 1.0
-References: <561f9d0ee96ebb6cd674042f269f280ab68fbbac.1708705118.git.michal.simek@amd.com>
- <Zec-oE2mzj7Pngo3@hera> <a3c1d482-2b2c-4c7d-96c9-2fe877d09ccc@amd.com>
- <CAC_iWjL4buJzzbJrhu7s8py+EOjqrDY+wq4egkzZSUwj=mmNjQ@mail.gmail.com>
- <60fcfb84-0c25-4b81-bed1-281c1a404ba6@amd.com>
- <CAC_iWj+ZmoTWP9jfwupX4cXrf_36YLW+MiTwj0Wyu2e=dLOwRQ@mail.gmail.com>
- <8bcf60a7-ba03-4dfe-926e-f1a77ba4c306@amd.com>
-In-Reply-To: <8bcf60a7-ba03-4dfe-926e-f1a77ba4c306@amd.com>
+References: <20240312140832.1968215-1-ilias.apalodimas@linaro.org>
+ <20240312140832.1968215-8-ilias.apalodimas@linaro.org>
+ <1b42d645-d4cc-4c42-900f-ba94bf857d87@linaro.org>
+In-Reply-To: <1b42d645-d4cc-4c42-900f-ba94bf857d87@linaro.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 13 Mar 2024 09:01:37 +0200
-Message-ID: <CAC_iWjKahx0uJ35J-LcY=hzPnOK2cEzevTRwi0mpAFAgYvnDkA@mail.gmail.com>
-Subject: Re: [PATCH] arm64: zynqmp: Do not describe u-boot.itb if SPL is
- disabled
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.denx.de, git@xilinx.com, 
- Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Masahisa Kojima <masahisa.kojima@linaro.org>, 
- Shiji Yang <yangshiji66@outlook.com>, Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Date: Wed, 13 Mar 2024 09:07:58 +0200
+Message-ID: <CAC_iWjJLZHuQ+znhZyxXmRnX_HcMeneM__L50yX4_mtE+tf_JQ@mail.gmail.com>
+Subject: Re: [PATCH 7/7 v2] arm: remove redundant section alignments
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, cfsworks@gmail.com, 
+ caleb.connolly@linaro.org, sumit.garg@linaro.org, 
+ Ryan Chen <ryan_chen@aspeedtech.com>,
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>, 
+ Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>,
+ Simon Glass <sjg@chromium.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Michal Simek <michal.simek@amd.com>,
+ Yegor Yefremov <yegorslists@googlemail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Shiji Yang <yangshiji66@outlook.com>,
+ Bin Meng <bmeng@tinylab.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,77 +98,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 13 Mar 2024 at 08:42, Michal Simek <michal.simek@amd.com> wrote:
->
->
->
-> On 3/12/24 20:12, Ilias Apalodimas wrote:
-> > On Tue, 12 Mar 2024 at 17:55, Michal Simek <michal.simek@amd.com> wrote:
-> >>
-> >>
-> >>
-> >> On 3/12/24 07:14, Ilias Apalodimas wrote:
-> >>> Hi Michal
-> >>>
-> >>> Apologies for the late reply
-> >>>
-> >>> On Wed, 6 Mar 2024 at 09:48, Michal Simek <michal.simek@amd.com> wrote:
-> >>>>
-> >>>>
-> >>>>
-> >>>> On 3/5/24 16:47, Ilias Apalodimas wrote:
-> >>>>> On Fri, Feb 23, 2024 at 05:18:42PM +0100, Michal Simek wrote:
-> >>>>>> There is no reason to describe u-boot.itb on system without SPL. Pretty
-> >>>>>> much this is cover all systems which are using only boot.bin which contains
-> >>>>>> all images inside.
-> >>>>>>
-> >>>>>> Signed-off-by: Michal Simek <michal.simek@amd.com>
-> >>>>>> ---
-> >>>>>>
-> >>>>>>     board/xilinx/common/board.c | 2 +-
-> >>>>>>     1 file changed, 1 insertion(+), 1 deletion(-)
-> >>>>>>
-> >>>>>> diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.c
-> >>>>>> index 9641ed307b75..4f38b7d27684 100644
-> >>>>>> --- a/board/xilinx/common/board.c
-> >>>>>> +++ b/board/xilinx/common/board.c
-> >>>>>> @@ -43,7 +43,7 @@ struct efi_fw_image fw_images[] = {
-> >>>>>>                .image_index = 1,
-> >>>>>>        },
-> >>>>>>     #endif
-> >>>>>> -#if defined(XILINX_UBOOT_IMAGE_GUID)
-> >>>>>> +#if defined(XILINX_UBOOT_IMAGE_GUID) && defined(CONFIG_SPL_FS_LOAD_PAYLOAD_NAME)
-> >>>>>
-> >>>>> What happens if this is defined with CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="" ?
-> >>>>
-> >>>> Your comment is valid but I am not aware about any CONFIG_IS, etc which checks
-> >>>> that string is not empty. If name is "" it will return yes and second image is
-> >>>> doing to be defined.
-> >>>>
-> >>>> But I found handling in the code like this.
-> >>>>
-> >>>>     36 #ifdef CONFIG_DEFAULT_FDT_FILE
-> >>>>     37                 if (strlen(CONFIG_DEFAULT_FDT_FILE)) {
-> >>>>
-> >>>> which can be used in my second patch not to describe second image in
-> >>>> set_dfu_alt_info() if string is empty.
-> >>>
-> >>> Yes, I think that's ok. The problem is that if we merge this as-is, we
-> >>> would have to disable CONFIG_SPL_FS_FAT to make this work, which is a
-> >>> bit misleading
-> >>
-> >> As Heinrich said not just this if you want to do it like this.
-> >> I think you will simply disable the whole SPL which will disable this symbol too.
-> >> But from my perspective SPL payload name is driving this option. Data can end up
-> >> on partition or in raw mode but for dfu you need to use the name.
-> >
-> > Yes, but isn't SPL selected by the Kconfig automatically? I can't seem
-> > to be able to disable it for the kria platforms
->
-> Not in upstream but via your/AMD build in meta-ts.
->
-> Thanks,
-> Michal
->
+Hi Richard,
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Pasting some of the discussions we had over IRC for completeness.
+
+On Tue, 12 Mar 2024 at 19:00, Richard Henderson
+<richard.henderson@linaro.org> wrote:
+>
+> On 3/12/24 04:08, Ilias Apalodimas wrote:
+> > index 33f4624b561d..ccdd1966cfbc 100644
+> > --- a/arch/arm/cpu/armv8/u-boot.lds
+> > +++ b/arch/arm/cpu/armv8/u-boot.lds
+> > @@ -132,7 +132,7 @@ SECTIONS
+> >
+> >       _end = .;
+> >
+> > -     .bss ALIGN(8): {
+> > +     .bss : {
+> >               __bss_start = .;
+> >               *(.bss*)
+> >               __bss_end = .;
+>
+> The code in arch/arm/lib/crt0_64.S assumes __bss_end - __bss_start is a multiple of 8.
+> But that could probably be replaced by a proper call to memset fairly easily.
+>
+> > diff --git a/arch/arm/cpu/u-boot.lds b/arch/arm/cpu/u-boot.lds
+> > index b6b19a4174fe..a9fcbbf22e96 100644
+> > --- a/arch/arm/cpu/u-boot.lds
+> > +++ b/arch/arm/cpu/u-boot.lds
+> > @@ -155,7 +155,7 @@ SECTIONS
+> >
+> >       __image_copy_end = .;
+> >
+> > -     .rel.dyn ALIGN(4) : {
+> > +     .rel.dyn : {
+> >               __rel_dyn_start = .;
+> >               *(.rel*)
+> >               __rel_dyn_end = .;
+>
+> Because of the overlay, this affects .bss too.
+>
+> The code in arch/arm/lib/crt0.S may or may not be configured to use memset.  When it
+> isn't, it requires __bss_end - __bss_start to be a multiple of 4.  Why does this not
+> always use memset?
+
+I think it's due to size restrictions in SPL. Since I can't test all
+affected platforms, I prefer leaving it as is at least for now.
+I'll explicitly align sections to 4/8 bytes in v3. Once we get this
+merged we can try and clean those up as you suggested on a followup
+patchset
+
+Thanks
+/Ilias
+>
+>
+> r~
