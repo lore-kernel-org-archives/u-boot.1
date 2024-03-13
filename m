@@ -4,75 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 421B5C54791
-	for <u-boot@archiver.kernel.org>; Wed, 13 Mar 2024 20:22:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1661C54791
+	for <u-boot@archiver.kernel.org>; Wed, 13 Mar 2024 20:22:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C78A87150;
-	Wed, 13 Mar 2024 21:21:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 30CD587F01;
+	Wed, 13 Mar 2024 21:22:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="X0L4UwI+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZBLeituF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 16E1F87150; Wed, 13 Mar 2024 21:20:03 +0100 (CET)
-Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com
- [IPv6:2607:f8b0:4864:20::42e])
+ id 0D32387EDC; Wed, 13 Mar 2024 21:22:02 +0100 (CET)
+Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
+ [IPv6:2607:f8b0:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 410DF87ECD
- for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 21:19:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F3B1987ED7
+ for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 21:21:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=richard.henderson@linaro.org
-Received: by mail-pf1-x42e.google.com with SMTP id
- d2e1a72fcca58-6e6aa5c5a6fso355115b3a.0
- for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 13:19:59 -0700 (PDT)
+Received: by mail-pf1-x42a.google.com with SMTP id
+ d2e1a72fcca58-6e4d48a5823so248774b3a.1
+ for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 13:21:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710361197; x=1710965997; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1710361317; x=1710966117; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=w9QLI5rG1T4V0cz8vrRfBQa48gWA7KE1SrRQieF/3w8=;
- b=X0L4UwI+bKJdYvnXBoMfqZ6giWfLOVqXD4ldn8XcxHCZ3xuUl0+hiNnAkk9f5XIL6C
- 0QiH7dd1WshFvcQCIbFZX658+U3ulSezPTgeMhcKUZTFIpIII74najuOvCuEx207TqKn
- ygbcmXMIA+dEDrgvNIjsaCodfoma9wHhD3Yv9GU/Gx7J6BY87CFZ7necqs24ABKgCFye
- rvfdNR2/EMxwX51XyKy4M8J9L13CpgoVr27ywU0UsoIO8HRRfLOOhZh3vY8OLBf4qATt
- yozwPPflnI2eih6DdK5K0ZOZ0C6duXMKF1EbOkEKFN6tlSX0EBj7NyXxQLhvG5AZCm9U
- HdOA==
+ bh=X3BrEQC/J6I4Vn9G/UO2nL+IOD2dRgMaanXb6y/sKC0=;
+ b=ZBLeituFDTlAYgBIg1dKPwH1G3XfIBiyilgTootwb5Pd1e8ElsBEtgju7XY/kU76mz
+ 0T1/l5H/eEZGmZp+DTdOvbtqHRnp73zHFEMr9QOZdO3PzUiyJqiKitaa21288zkZ4w/W
+ 0wslZn2zdtTFECt7PMMjL3PnwtAZn9JJfVoH0w+5z2aI/AS8dVxwVurcydfx5gTKYNDS
+ q8NZgw82JMtbOP+44dLZtxaPBQ+HlhIKrChzH9eXMYjXUfqvRfkBrcrKVCy4aW9ptfmN
+ ochpUvmnMTMyP1HnsUbQQmvFoh3Nr3ErjipTJh+qvdbxCyCzNVwPVvyJpi8hpL0SSdLq
+ uQew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710361197; x=1710965997;
+ d=1e100.net; s=20230601; t=1710361317; x=1710966117;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=w9QLI5rG1T4V0cz8vrRfBQa48gWA7KE1SrRQieF/3w8=;
- b=C7I9NHJdGdWn/ICfsp7u1HRGSUTA3sH18VVP2MYW82nuj8hXOrA7JV4uB5pyYg6/KK
- YGDuuK+cYwSNN8UDA7SS3Pc6FSxO0aZlXA3wnAVqi5jyroL60i4hRPP9fdNRDwFTc3zJ
- CLrR46MDg+A/6ys0717NmYHrOWVBVN1wcM1WGcSjPcNQWGddGL3B4cxXYW3ljNk87RIC
- t7vizG+kYIEZtbKc+fs0DKjJdvZLZHK16mG+6Kix1cJMhY4fG6IL4RIn6pFex1QgAPTK
- o6Rsqo9uDu5D/hz/OGvpfVVeFCOhoX/AVNeTeaAGt62vJI+AvVybZIo9z58ZMqGn/WMe
- eyfw==
+ bh=X3BrEQC/J6I4Vn9G/UO2nL+IOD2dRgMaanXb6y/sKC0=;
+ b=HjApEQ42+USrfiqADRflziANukB8Rrqr9PW8Z/3GlVhgJRDImww0q66FGl0dr12i2p
+ JAtKLyz9SKgPyndUgiUY8mv3QEgDFtp7XBdWgA5hj5jpPtoobuzrKMacrSP/DHr/y65L
+ sX6rsrkwVJxRe2biy0pAPXtnHljbOIvLMg1zwo2EeLGl8ct+QC3Za3wg8q7k4m1JFCuU
+ F8iEWbYEoF/jm3/jRNtwZrbuXuVe7QseCqJfpeb2Qx4Epx/j2we2DCq4jAWuBUhjfUTf
+ qq/IzpCR4dWm0u6Zq+e3xKygmOwAwqPFskhk8UerteQ++GKmdBhU4b53Ss9C7ejopZjh
+ 1txQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU9fRHw3IGgBGgJJE9Jcq6YbVwZbpnd7AMbYDGKfatl1vrN1mHp9bqVq+dsDPqfNT1ZXK2yT1S8B9EJ2yBaiHKQ3vsOxg==
-X-Gm-Message-State: AOJu0Yx8iXlDJCqvg3GOjpdhrMrTLVnqtjGoxJQgJHmE+gioQlm9xBYJ
- FFkUJJTq6VZIhLN/XV17SemEplTVPm0INzXac+ivBeGMmHq0nYQ0BJfShwg+u/7VisiIskXpTD/
- 4
-X-Google-Smtp-Source: AGHT+IGbHk7k46+0ZqO8zdLl53MoZRaHvPxtRpwvHkbqUaYj5XHPO3NuWD0pqVLSMzA6r8YEeWF3bw==
-X-Received: by 2002:a05:6a20:394c:b0:1a1:4d4d:ca8d with SMTP id
- r12-20020a056a20394c00b001a14d4dca8dmr7778pzg.50.1710361197574; 
- Wed, 13 Mar 2024 13:19:57 -0700 (PDT)
+ AJvYcCXNvZIVk0HnXIpO0lQxgqy+xSfz2U3SgTcBrczKyTo20xDrCHxkQTA9uKYSbx8XeUuV7ZAYdLTcGPaKThDxGtGvCwjJRQ==
+X-Gm-Message-State: AOJu0YwClMVd39l6nhi5he+v0Uy81W7rsjkWiYwWKukruthPV7J5WC7g
+ jiQpi3IgiD23o/Mqh07+ZsmC+S1HI6MDZs4wp6Okc8j6sGI8/7O/tHQHV0IEGI0=
+X-Google-Smtp-Source: AGHT+IHXJ6L77nDYw9sx26Ca2zQKb2wKCvK8iLEfTj3/0V9U7LOXc3YFddim+r3kcMPsdA6aPTg4LA==
+X-Received: by 2002:a05:6a20:daaa:b0:1a1:6ab9:9139 with SMTP id
+ iy42-20020a056a20daaa00b001a16ab99139mr24776pzb.11.1710361317358; 
+ Wed, 13 Mar 2024 13:21:57 -0700 (PDT)
 Received: from [172.20.1.19] (173-197-098-125.biz.spectrum.com.
  [173.197.98.125]) by smtp.gmail.com with ESMTPSA id
- c11-20020a62e80b000000b006e6aee6807dsm18473pfi.22.2024.03.13.13.19.54
+ le3-20020a056a004fc300b006e6c088d5afsm11064pfb.177.2024.03.13.13.21.54
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 13 Mar 2024 13:19:57 -0700 (PDT)
-Message-ID: <e1fabe14-0c0e-45f3-9d5a-1452cb9b954e@linaro.org>
-Date: Wed, 13 Mar 2024 10:19:52 -1000
+ Wed, 13 Mar 2024 13:21:56 -0700 (PDT)
+Message-ID: <c1b5b9a6-b59e-4ce7-b0a6-07c92b606828@linaro.org>
+Date: Wed, 13 Mar 2024 10:21:51 -1000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/7] arm: clean up v7 and v8 linker scripts for
- bss_start/end
+Subject: Re: [PATCH v3 7/7] arm: remove redundant section alignments
 Content-Language: en-US
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
  trini@konsulko.com, cfsworks@gmail.com
@@ -86,12 +84,12 @@ Cc: caleb.connolly@linaro.org, sumit.garg@linaro.org,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Shiji Yang <yangshiji66@outlook.com>, Bin Meng <bmeng@tinylab.org>
 References: <20240313162324.2117909-1-ilias.apalodimas@linaro.org>
- <20240313162324.2117909-3-ilias.apalodimas@linaro.org>
+ <20240313162324.2117909-8-ilias.apalodimas@linaro.org>
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240313162324.2117909-3-ilias.apalodimas@linaro.org>
+In-Reply-To: <20240313162324.2117909-8-ilias.apalodimas@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Wed, 13 Mar 2024 21:21:57 +0100
+X-Mailman-Approved-At: Wed, 13 Mar 2024 21:22:17 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,31 +107,34 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 3/13/24 06:23, Ilias Apalodimas wrote:
-> +++ b/arch/arm/cpu/armv8/u-boot-spl.lds
-> @@ -63,18 +63,11 @@ SECTIONS
->   
->   	_image_binary_end = .;
->   
-> -	.bss_start (NOLOAD) : {
-> -		. = ALIGN(8);
-> -		KEEP(*(.__bss_start));
-> -	} >.sdram
-> -
-> -	.bss (NOLOAD) : {
-> +	.bss : {
-> +		__bss_start = .;
->   		*(.bss*)
-> -		 . = ALIGN(8);
-> -	} >.sdram
-> -
-> -	.bss_end (NOLOAD) : {
-> -		KEEP(*(.__bss_end));
-> +		. = ALIGN(8);
-> +		__bss_end = .;
+> Previous patches cleaning up linker symbols, also merged any explicit
+> . = ALIGN(x); into section definitions -- e.g
+> .bss ALIGN(x) : instead of
+> 
+> . = ALIGN(x);
+> . bss : {...}
+> 
+> However, if the output address is not specified then one will be chosen
+> for the section. This address will be adjusted to fit the alignment
+> requirement of the output section following the strictest alignment of
+> any input section contained within the output section. So let's get rid
+> of the redundant ALIGN directives when they are not needed.
+> 
+> While at add comments for the alignment of __bss_start/end since our
+> C runtime setup assembly assumes that __bss_start - __bss_end will be
+> a multiple of 4/8 for armv7 and armv8 respectively.
+> 
+> It's worth noting that the alignment is preserved on .rel.dyn for
+> mach-zynq which was explicitly aligning that section on an 8b
+> boundary instead of 4b one.
+> 
+> Signed-off-by: Ilias Apalodimas<ilias.apalodimas@linaro.org>
+> ---
+>   arch/arm/cpu/armv8/u-boot.lds | 9 ++++++---
+>   arch/arm/cpu/u-boot.lds       | 8 ++++++--
+>   arch/arm/mach-zynq/u-boot.lds | 4 ++--
+>   3 files changed, 14 insertions(+), 7 deletions(-)
 
-Still missing the alignment on .bss, previously in .bss_start.
-
-With that fixed,
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
 r~
