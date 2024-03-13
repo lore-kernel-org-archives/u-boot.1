@@ -4,52 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10252C54E58
-	for <u-boot@archiver.kernel.org>; Wed, 13 Mar 2024 10:56:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A847C54E58
+	for <u-boot@archiver.kernel.org>; Wed, 13 Mar 2024 10:56:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4134487EBD;
+	by phobos.denx.de (Postfix) with ESMTP id AA62787ED8;
 	Wed, 13 Mar 2024 11:56:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=126.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=126.com header.i=@126.com header.b="gdhe57pu";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cw7FbmrY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24FF187DF1; Wed, 13 Mar 2024 06:48:39 +0100 (CET)
-Received: from m16.mail.126.com (m16.mail.126.com [220.197.31.8])
- by phobos.denx.de (Postfix) with ESMTP id 41DAB8792D
- for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 06:48:36 +0100 (CET)
+ id 4960E8644E; Wed, 13 Mar 2024 10:27:33 +0100 (CET)
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
+ [IPv6:2607:f8b0:4864:20::62f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id CC77587DF9
+ for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 10:27:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=126.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lhdjply@126.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=126.com;
- s=s110527; h=From:Subject:Date:Message-Id:MIME-Version; bh=RJVGg
- ztzQ6Atr9Iltqpn6Tqq9KgQV+ffa8pZbUaor30=; b=gdhe57puOG7trbWEmE9Gi
- ZHjp0qSx+jUBt/eT6yXJ5qDLIQljnt2O/Dgnzi91zuXXMyARz4bQ3odhEliSlmj5
- gP3uRzRuj9Z/TWIZBBlsUFsdhe41kXb6bnk7fm09Og2jKDA0rx+vIlBWjkf4lKD3
- +1j9lSbII7GDKpuMZHaAIA=
-Received: from localhost.localdomain (unknown [115.221.220.140])
- by gzga-smtp-mta-g0-3 (Coremail) with SMTP id _____wD3n4yOPfFlK1zdAA--.2313S2; 
- Wed, 13 Mar 2024 13:45:51 +0800 (CST)
-From: lhdjply@126.com
-To: jagan@amarulasolutions.com,
-	andre.przywara@arm.com,
-	trini@konsulko.com
-Cc: u-boot@lists.denx.de,
-	lhdjply <lhdjply@126.com>
-Subject: [PATCH-V2] arm:suniv:complete the serial port configuration of Suniv
-Date: Wed, 13 Mar 2024 13:45:46 +0800
-Message-Id: <20240313054546.284435-1-lhdjply@126.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ppighouse@gmail.com
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-1ddcfe064faso2523955ad.3
+ for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 02:27:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1710322048; x=1710926848; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=R6I+qAvjriIhZpqTRPosft+26w34QnmoHMX0+mS+KQ4=;
+ b=cw7FbmrY6JBb50BQBvVxyOmeFF7JdKuj4kRv2ugzLYn+kvJ6jjioVgBTohd1WwCQua
+ 2mhnPal5pPZ7c+9MJUdm6Q9OYsDA6bq+YHxeRfd6+Kqup5JOdeCLMNUDxJJvmZWIB7U/
+ +VhRAlRadoIBHX4pET8vbeCJHHNWewY7zZkfohRFvuFLREt49uoux5J65e8e7xOD/AEn
+ WbCdKlZUq6yXExhBDbDBRzlrIu5s+tr2oq/OiyKOvOnRHmAA6vnx/UgrwEfezEYzz/Fw
+ 8df2PffRlvKn6ytgsJ9LQ5dVClCghwr1tvcw31LGoKRynZOnJopjcjU74pnERWJzrZiC
+ ubxA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710322048; x=1710926848;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=R6I+qAvjriIhZpqTRPosft+26w34QnmoHMX0+mS+KQ4=;
+ b=nfvjABJa5MPD2oKa6k2IkkSIPYet8n5r/833UDIVax174Q8FKvkw0XlJZqyMDLVKe7
+ XKjnjMIJhtZ2PdPCodr6pMHD5TsKezyNylGTLsvpw7kHzxv+iOjKDxLyCj2OPxbTDECU
+ /21T96kKG8qQBGyiT8rfP95cvTNBuPGsCGpDMazz33kKNLTRRYT1cdh7A6+PqDpwu3LT
+ EU/cuYmQaCpsZggQa5oDGSGvQk7KEzdetMKSEtW9FPXcXIhzU9OCWUhXNLchTpyjhw2S
+ IgYypWsXHi6lX3O6/xRzW/1J3PPSzKwWgd4rKMhfTHapieu/60wpE8E6q/07Z7Y78F/q
+ WZBQ==
+X-Gm-Message-State: AOJu0YzUsLcauhhq5t4EagMCGCa4J5bdP/jOArpPhqTF9JkeOBzJk64t
+ Axe5x1AAyonTJbs1H5nXPzhTcZXc84R4H96CyOtZ3zAJYjnxDUmZuDdRWlq/9fM=
+X-Google-Smtp-Source: AGHT+IE932tcagm1tnHHC6YnAOWTFoNUhjkmzwsc/lTvEK7ohdvBlFZTQ7hxvw+ml3S89JPW5zHnKw==
+X-Received: by 2002:a17:902:b102:b0:1db:f910:98a9 with SMTP id
+ q2-20020a170902b10200b001dbf91098a9mr2354973plr.56.1710322048316; 
+ Wed, 13 Mar 2024 02:27:28 -0700 (PDT)
+Received: from localhost.localdomain (125-229-150-10.hinet-ip.hinet.net.
+ [125.229.150.10]) by smtp.gmail.com with ESMTPSA id
+ 12-20020a170902c10c00b001dc3916853csm8177461pli.73.2024.03.13.02.27.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 13 Mar 2024 02:27:27 -0700 (PDT)
+From: Kelly Hung <ppighouse@gmail.com>
+X-Google-Original-From: Kelly Hung <Kelly_Hung@asus.com>
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com, kever.yang@rock-chips.com, michal.simek@amd.com,
+ marex@denx.de, neil.armstrong@linaro.org, jonas@kwiboo.se,
+ cnsztl@gmail.com, clamor95@gmail.com, hai.pham.ud@renesas.com,
+ naoki@radxa.com, patrick.delaunay@foss.st.com, christianshewitt@gmail.com,
+ kelly_hung@asus.com, Allenyy_Hsu@asus.com, Kelly Hung <Kelly_Hung@asus.com>
+Subject: [PATCH v1 0/1] Add new bmc dts for ASUS X4TF server
+Date: Wed, 13 Mar 2024 17:27:20 +0800
+Message-Id: <20240313092721.2066531-1-Kelly_Hung@asus.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: _____wD3n4yOPfFlK1zdAA--.2313S2
-X-Coremail-Antispam: 1Uf129KBjvJXoW7KF43XFWkZF17Xr13GFW5GFg_yoW8Zr4fp3
- W2va4agr15WF1a9FZ7Ar4Ivr45Ja17JwnrKwnrJa1jv3WDGw48Jr1rKrn8Cw1FvrZ3Zw4f
- Wr1kua15X34kZ3JanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07Uwo7_UUUUU=
-X-Originating-IP: [115.221.220.140]
-X-CM-SenderInfo: hokgy1lo16ij2wof0z/1tbi2w+g2mVLZWFfUgAAsJ
 X-Mailman-Approved-At: Wed, 13 Mar 2024 11:56:10 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -67,62 +94,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: lhdjply <lhdjply@126.com>
+Add bmc dts to ASUS X4TF server, we also submitted dts to linux place.
+Please refer to here, https://lore.kernel.org/lkml/?q=x4tf.
 
-Due to the different serial ports used by each board, 
-the serial IO configuration needs to be improved.
+Kelly Hung (1):
+  arm: dts: ast2600-x4tf: Add new dts for ASUS X4TF
 
-Signed-off-by: lhdjply <lhdjply@126.com>
----
- arch/arm/mach-sunxi/board.c | 4 ++--
- include/sunxi_gpio.h        | 6 ++++++
- 2 files changed, 8 insertions(+), 2 deletions(-)
+ arch/arm/dts/Makefile         |   4 +-
+ arch/arm/dts/ast2600-x4tf.dts | 161 ++++++++++++++++++++++++++++++++++
+ 2 files changed, 164 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm/dts/ast2600-x4tf.dts
 
-diff --git a/arch/arm/mach-sunxi/board.c b/arch/arm/mach-sunxi/board.c
-index f4dbb2a740..b91c9629e4 100644
---- a/arch/arm/mach-sunxi/board.c
-+++ b/arch/arm/mach-sunxi/board.c
-@@ -151,8 +151,8 @@ static int gpio_init(void)
- 	sunxi_gpio_set_cfgpin(SUNXI_GPE(3), 6);
- 	sunxi_gpio_set_pull(SUNXI_GPE(3), SUNXI_GPIO_PULL_UP);
- #elif CONFIG_CONS_INDEX == 2 && defined(CONFIG_MACH_SUNIV)
--	sunxi_gpio_set_cfgpin(SUNXI_GPA(2), SUNIV_GPE_UART0);
--	sunxi_gpio_set_cfgpin(SUNXI_GPA(3), SUNIV_GPE_UART0);
-+	sunxi_gpio_set_cfgpin(SUNXI_GPA(2), SUNIV_GPA_UART1);
-+	sunxi_gpio_set_cfgpin(SUNXI_GPA(3), SUNIV_GPA_UART1);
- 	sunxi_gpio_set_pull(SUNXI_GPA(3), SUNXI_GPIO_PULL_UP);
- #elif CONFIG_CONS_INDEX == 2 && defined(CONFIG_MACH_SUN5I)
- 	sunxi_gpio_set_cfgpin(SUNXI_GPG(3), SUN5I_GPG_UART1);
-diff --git a/include/sunxi_gpio.h b/include/sunxi_gpio.h
-index db3742c039..51258e3dd9 100644
---- a/include/sunxi_gpio.h
-+++ b/include/sunxi_gpio.h
-@@ -108,6 +108,8 @@ enum sunxi_gpio_number {
- #define SUN8I_H3_GPA_UART0	2
- #define SUN8I_H3_GPA_UART2	2
- 
-+#define SUNIV_GPA_UART1		5
-+
- #define SUN4I_GPB_PWM		2
- #define SUN4I_GPB_TWI0		2
- #define SUN4I_GPB_TWI1		2
-@@ -130,12 +132,16 @@ enum sunxi_gpio_number {
- 
- #define SUNXI_GPD_LCD0		2
- #define SUNXI_GPD_LVDS0		3
-+#define SUNIV_GPD_UART1		3
-+#define SUNIV_GPD_UART2		3
- 
- #define SUNIV_GPE_UART0		5
-+#define SUNIV_GPE_UART2		3
- 
- #define SUNXI_GPF_SDC0		2
- #define SUNXI_GPF_UART0		4
- #define SUN8I_GPF_UART0		3
-+#define SUNIV_GPF_UART0		3
- 
- #define SUN4I_GPG_SDC1		4
- #define SUN5I_GPG_SDC1		2
 -- 
-2.34.1
+2.25.1
 
