@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28524C54791
-	for <u-boot@archiver.kernel.org>; Wed, 13 Mar 2024 17:12:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B421EC54E66
+	for <u-boot@archiver.kernel.org>; Wed, 13 Mar 2024 17:15:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7165D87EA8;
-	Wed, 13 Mar 2024 18:12:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DE2A287ED1;
+	Wed, 13 Mar 2024 18:15:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="B6EPKLBy";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sQoKiV4B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 38BAF8709C; Wed, 13 Mar 2024 18:12:45 +0100 (CET)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
+ id E223C87EAD; Wed, 13 Mar 2024 18:15:32 +0100 (CET)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 726EF87ED8
- for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 18:12:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7580887ED1
+ for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 18:15:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-33e94c12cfaso994524f8f.3
- for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 10:12:40 -0700 (PDT)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-413ef7f46ccso451085e9.1
+ for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 10:15:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710349960; x=1710954760; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1710350128; x=1710954928; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=d6n4o5BqZv/6P9AjvJ6taCXTvFGOj1Rh3BQ2i3HOeTg=;
- b=B6EPKLByJw4Yyd6AbY694V+KShOA6yjWBl5Ca2VAh1Avw/vJFPh3a8SPOPFasYvU6t
- nhlNMC7EOzSdVAdqDsiPK7ua5kgDI/ZnwYB+5vWQc6k5ItJnnQkj1voY5EYi5CEBM3PB
- yxhcDqbq0PQ8OIadzqLS5+WrDF+EXfK2eG4RCgpEy6Q5rhNJYKX73Yu3j2lCreBpz29b
- 662Q5Mx9jHOO/ioY3elX7Bmbo6tRaS5cZfcUyOochiClFklGBw3hvY80F3Ge5xQZXPAs
- vy5AYJArbS80xaffdDGxJfh80zvva19OTvegJnGrO9z5zTnTMqHzo4N0wU/H8EXnebbK
- vEaQ==
+ bh=cosdXYCUPPkY74nbmUyl+kAgEAZL+dVrhZ9tPExpEEo=;
+ b=sQoKiV4BJbmQHdQyLsxfnnrW4vW2117DpFQ2AkaHt3F+AliJl03HJ79Gexj2w1Ph65
+ 8rPU8e1DCHQLZt3pe/ltOsn1vv0Y6/CUhA4goSRXn3SDlTkvS8R4dxEYsMhLppw9ad+8
+ XtXp859QGVjtlY8GgcHhMVsE6+2wmT2DcEcohBMTD074iUkI6Ex0RgWTWxRhaX+apkwC
+ 1qXJbAe/qocW8hCVdbNT7BGqG5DkeMceVigwHLu6YUlruZFR29CnAR5DcvCKogCIgtsI
+ M0wVeG56mh9Sln4qka1UG3f020dfOrjG5y9Cc4T60H/4P6ufnMGFRXASRoRGppOhewGh
+ KGFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710349960; x=1710954760;
+ d=1e100.net; s=20230601; t=1710350128; x=1710954928;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=d6n4o5BqZv/6P9AjvJ6taCXTvFGOj1Rh3BQ2i3HOeTg=;
- b=KFUV03u04g5IlOjtm6i2C5mNZ/IstfC8YAc8m3u81FJ0EL7Wi4pkMCZWUVBabbhwAd
- UvYsmQ2wSbDBgAHn6jtJ/8Owyyj6GxYaA1dI7D3lXZjeHCARr+7sK9drpD6PmIx6vdcK
- CxvINbPQLYhV/hX7CR8/72k7qj0nYj4FirXNqEEc6OAtdGpPdLLjPoQDEOrw4Bmgr+7I
- K7Qe1qDSMHXSeKRHv51Rhf19Xs+EGVJsRK4lWhVP6ALc3qMD/7nWWgue6yCby+pDNy1a
- aVM/jNgVQajA8KDlbn90nL5vtJ4DcR6HBwXxD95+t9zSiqEkDttRrEnalE+iLg6ie2qK
- G77g==
+ bh=cosdXYCUPPkY74nbmUyl+kAgEAZL+dVrhZ9tPExpEEo=;
+ b=rVAtL9JKglBlfgBEZVOCT7K/V9nbaEN0hChgBKlc8Dc4iFn+LjwQuOJ4xIQdiEKqd+
+ yhBYzr6Ig7g7N5XBuuOoxIZ7FgExVTdZbm1/vDFTB+KV1OqBUKZfM8cstRzJa07CURue
+ QSwmKnSA6MhjGQjxRYUDYfzeLantrWYbTFEj4A2UOEtRZnzIWPl2LIH9ip+cz7MXBKS1
+ 1jHODTshF0cjaOOX9nlnOGqnwGzKnmi4vYSFkCgG1dtWNalfKM+wTEaiz3PZ4ASesNZj
+ cDPpC8fFS9DDe8OMVpz3xO4hr/Whef9Za40M+5igN5f2Kagy0sRlLtjf2ojKc83nA7+l
+ 8nsw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUFiBfxosX1iARCN19IZmL4EMDtU+vk6qzwMO2XMbHx0Xpzwrr8s+NuG7v4ndxwvbofxEPlBM26lhG1UipRL5g1JUKdDA==
-X-Gm-Message-State: AOJu0Yw66GOSLK3A9HJ7dHgaqbUVIX9rjpqpCmKfBnKxDdBa8bnOGpgy
- gMjFuF227iERdouhIEVvKWoarmn4YeYu3EoW+sjiL4ZEeRnqUcXnUV3Yem7S3XQ=
-X-Google-Smtp-Source: AGHT+IHPtw+TthLvw4Oe6NPfaXy7w07PcBECMqojSftgtFOfqPmnjgjXSGE8Er+j9osmMUDdMpyxDQ==
-X-Received: by 2002:a05:6000:102:b0:33e:c0c5:1795 with SMTP id
- o2-20020a056000010200b0033ec0c51795mr444217wrx.54.1710349959778; 
- Wed, 13 Mar 2024 10:12:39 -0700 (PDT)
+ AJvYcCUaZoI4PKJ24uwnog57de1r2ywI1NxUOYB8VfCZqu5FY1HX+nVIpvjIU7K25mYtVC81XwBO0dqIh7irTa+gvvJfS/94Jw==
+X-Gm-Message-State: AOJu0YwtF6nx3+/fYOU8MVoWCcmyPDKd/fSnzIty/Y6XY6n0sFjD1IIi
+ mrhRh3WDGffVEReBuWlwoxgBS+pJxZgUZPuSspXBV2krUCPNlpudB/nIP8/QfwI=
+X-Google-Smtp-Source: AGHT+IHzIuRIQcLjqcuvnI1BOQji2HVlF3tgWRUHBDTtN3UNy3yxZOtOIsooQqoJ91Zau8PFTTlLQw==
+X-Received: by 2002:a5d:59af:0:b0:33e:b758:a039 with SMTP id
+ p15-20020a5d59af000000b0033eb758a039mr1805766wrr.28.1710350127836; 
+ Wed, 13 Mar 2024 10:15:27 -0700 (PDT)
 Received: from [192.168.1.78] (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- df10-20020a5d5b8a000000b0033de10c9efcsm646920wrb.114.2024.03.13.10.12.39
+ c17-20020a056000105100b0033e34c53354sm12086813wrx.56.2024.03.13.10.15.27
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 13 Mar 2024 10:12:39 -0700 (PDT)
-Message-ID: <e0fb5308-bd89-47b1-927f-aa76e4a87bab@linaro.org>
-Date: Wed, 13 Mar 2024 17:12:38 +0000
+ Wed, 13 Mar 2024 10:15:27 -0700 (PDT)
+Message-ID: <f0b5bbb8-bda0-4329-8be6-95a4017a5204@linaro.org>
+Date: Wed, 13 Mar 2024 17:15:26 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v3 3/4] clk: qcom: add support for power domains uclass
@@ -100,44 +100,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Volodymyr,
+
 
 On 11/03/2024 21:33, Volodymyr Babchuk wrote:
 > Now sub-drivers for particular SoCs can register them as power domain
 > drivers. This is needed for upcoming SM8150 support, because it needs
 > to power up the Ethernet module.
 > 
-Thanks again for working on this.
-
-I've been trying to rework my SDM845 USB support patches based on this,
-and I've run into quite a few issues with CONFIG_POWER_DOMAIN.
-
-Basically, it boils down to the RPM(h)PD, with no driver a bunch of
-stuff breaks (including UART). I tried writing a no-op PD driver for it
-but this didn't seem to work super well, and wouldn't scale (every soc
-has it's own rpm(h)pd compatible).
-
-In the end, I think supporting CONFIG_POWER_DOMAIN is the right approach
-here. I have been able to get things working by leveraging OF_LIVE and
-modifying the livetree during boot, similarly to how I plan to do for
-USB. See [1].
-
-Even with this, all the drivers we probe pre-relocation (like UART) need
-the DM_FLAG_DEFAULT_PD_CTRL_OFF flag if they reference the RPM(h)PD, as
-the of_fixup stuff doesn't happen until after relocation. I have a patch
-which fixes that for sdm845 here [2].
-
-I'll test this on the other boards and then re-send my USB patches
-(including the two below) rebased on your series.
-
-I'm a little worried this might come back to bite us later, but I think
-by then it'll be worth trying to find a way to have U-Boot handle these
-"safe to ignore" devices directly.
-
-[1]:
-https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/8af7731445721adab2206839d6df2d0f4f5f32d9
-[2]:
-https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/33b094103fb7e856cff6c08345a16ef8231ffaea
 > Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
 > 
 > ---
@@ -179,6 +148,12 @@ https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/33b094103fb7
 >  	bool
 > -	depends on CLK && DM_RESET
 > +	depends on CLK && DM_RESET && POWER_DOMAIN
+
+This results in a similar dependency error to the one above unless
+CONFIG_POWER_DOMAIN is enabled in the defconfig. I think we'll just add
+"select POWER_DOMAIN" to ARCH_SNAPDRAGON, same as we have for DM_RESET.
+
+I'll do then when picking this series up, just a note to self.
 >  	def_bool n
 >  
 >  menu "Qualcomm clock drivers"
