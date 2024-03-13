@@ -4,64 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAED0C54791
-	for <u-boot@archiver.kernel.org>; Wed, 13 Mar 2024 15:57:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C61D7C54E66
+	for <u-boot@archiver.kernel.org>; Wed, 13 Mar 2024 16:23:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E27387E40;
-	Wed, 13 Mar 2024 16:57:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 17CEE87150;
+	Wed, 13 Mar 2024 17:23:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="qqfuhFF1";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eKg8dTLr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E2AC387E40; Wed, 13 Mar 2024 16:57:30 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C8B0287DE3; Wed, 13 Mar 2024 17:23:32 +0100 (CET)
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [IPv6:2a00:1450:4864:20::131])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D3CC587B82
- for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 16:57:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D54D8272A
+ for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 17:23:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=78b9=KU=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1710345434;
- bh=agBM/sMYwPzMQtCA7NsiyxvR1PyQvp/yrUYe/rs3PA8=;
- b=qqfuhFF1pzUX8im2qkEepN0eFyR945c6mA5fnf6ka64Vzo8SOYgN/SOzeUMgxlzdMLlCeDyyb
- OrP4QzFkBOaZBwI8eMNj0snW5cB2FH4VyBoyYS7VqOU4uBp3c5xvG4ZkuOmlBgoWk0ZsB3k6u9s
- gxDycDfZMAxHFifJwrY/wNxpiPajHu1Fl6s078eSgU+i95IBbPYvlkNO8PJHObRACOm6DzFIGj4
- Awxh0TCP3ZMWAiDH21WoX2nvTLYXSVxGTYROyrTEQOQ4vGrdZNzhuM5cT+P8PbCxXcpToth1xGD
- 7hhSzBlaEt7Q6pRcOOFlkqff2A1zEvAHvNGkj4WIWaag==
-Message-ID: <bb2a5cb1-5fe4-4b5c-a949-08a32b22197b@kwiboo.se>
-Date: Wed, 13 Mar 2024 16:57:07 +0100
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-513ccc70a6dso52271e87.1
+ for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 09:23:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1710347009; x=1710951809; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=EGvvRUOTdiYBiVm2CeEexIzK8Q4c7Dn6jfI4eI4byVA=;
+ b=eKg8dTLr97iv8NdKN6rt3+bhGR2q6KGArNjmjkhucH7ffsogyP2psCgURdr8N5J0zJ
+ uGfZbW5xvzRclRV381K4lFxMeqToMFuxmICbXPDX0fgRPWdEYk0ePd8r9t1R1+tzaVBY
+ T3qgepyP7WkodSSjBx3ZvG8/PWJRByijjvKaQdSlMx3DvrqNhzf5NdjAOfeQInpJIcX/
+ SXO0c3CW2/iGj+9Bk4DEdGMG+yF/8SwEk+jppb6YrH7iVqMsTg0AoAinX2mKuYvWoR3a
+ Q+clUtsmmUsZ7DoaHcUNvIrjYhAgj5qVjuEmDRgizN4EiPHZ/xb/hbRQhSpmNeUcp2XP
+ rc7w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710347009; x=1710951809;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=EGvvRUOTdiYBiVm2CeEexIzK8Q4c7Dn6jfI4eI4byVA=;
+ b=exK9qpd+vSkMVKcCSuwDXC6e2zRX3tYzt322hjkuL1pGIjy9akITeDLMYOiJvq/qev
+ JlE1yGX/LT+eEMNEvweEhN3TKpu3wHHkeCihBMtmfI6VJo8qeWG44rapfYNSqtKFUaIq
+ 3KTDlMJEbRd9U18TAn8GHIlb+vWmcFk85uuzb55UDD0RGWGMoHoclR3Oaes/T8b7wGm0
+ FxEv0x1qh4g8jzs92a+1g+UkemKVrfkEwvfz1OCKpGM5TNrjjXIT5peEFB8Hk4Srv9i4
+ uRrWVsN5MqF8c1AX48t+a812N0KNY5RvdRzhkQKDaFWFoSL/webKiL9ZlzrbAo3FsCR9
+ RIZQ==
+X-Gm-Message-State: AOJu0Yw/D2ChHDdu85CqD1H0TMu1Rhbsct71XA/P7T84Fm+XzRYnHBny
+ iJbTT7m0zIRR1cjWZOZbEdFXEPdHAbni8zjXZzl6kY9QsXqq3Z35oCUolV/rtijXxGu+YYpT6fr
+ d
+X-Google-Smtp-Source: AGHT+IHxiSbJwqVnzLCJwwwpW5iBqMjdplL3Mw61jzsBhNZ8HMdbQ4KmZzb56RWmJSsOYNi23F5QGw==
+X-Received: by 2002:a05:6512:1385:b0:513:a766:4672 with SMTP id
+ fc5-20020a056512138500b00513a7664672mr8907820lfb.4.1710347009504; 
+ Wed, 13 Mar 2024 09:23:29 -0700 (PDT)
+Received: from hades.. (ppp046103107123.access.hol.gr. [46.103.107.123])
+ by smtp.gmail.com with ESMTPSA id
+ bh21-20020a170906a0d500b00a44efa48c24sm4998860ejb.117.2024.03.13.09.23.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 13 Mar 2024 09:23:28 -0700 (PDT)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: u-boot@lists.denx.de,
+	trini@konsulko.com,
+	cfsworks@gmail.com
+Cc: caleb.connolly@linaro.org, sumit.garg@linaro.org,
+ richard.henderson@linaro.org,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Ryan Chen <ryan_chen@aspeedtech.com>,
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
+ Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Yegor Yefremov <yegorslists@googlemail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Sam Edwards <CFSworks@gmail.com>,
+ Shiji Yang <yangshiji66@outlook.com>, Bin Meng <bmeng@tinylab.org>
+Subject: [PATCH v3 0/7] Clean up arm linker scripts
+Date: Wed, 13 Mar 2024 18:23:14 +0200
+Message-Id: <20240313162324.2117909-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.37.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 4/4] rockchip: Migrate to use DM_USB_GADGET on RK3328
-Content-Language: en-US
-To: Kever Yang <kever.yang@rock-chips.com>
-Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>, David Bauer
- <mail@david-bauer.net>, Tianling Shen <cnsztl@gmail.com>, Loic Devulder
- <ldevulder@suse.com>, "Chen-Yu Tsai" <wens@csie.org>, Banglang Huang
- <banglang.huang@foxmail.com>, "Matwey V. Kornilov"
- <matwey.kornilov@gmail.com>, u-boot@lists.denx.de
-References: <20240310185106.665553-1-jonas@kwiboo.se>
- <20240310185106.665553-5-jonas@kwiboo.se>
- <0f47f359-ca17-4606-9ecb-631658e36410@rock-chips.com>
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <0f47f359-ca17-4606-9ecb-631658e36410@rock-chips.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 65f1ccd8a57683b0b1535493
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,579 +102,171 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kever,
+The arm linker scripts had a mix of symbols and C defined variables in an
+effort to emit relative references instead of absolute ones e.g [0]. A
+linker bug prevented us from doing so [1] -- fixed since 2016.
+This has led to confusion over the years, ending up with mixed section
+definitions. Some sections are defined with overlays and different
+definitions between v7 and v8 architectures.
+For example __efi_runtime_rel_start/end is defined as a linker symbol for
+armv8 and a C variable in armv7.
 
-On 2024-03-13 11:45, Kever Yang wrote:
-> Hi Jonas,
-> 
-> Again, not able to apply changes for rk3328 defconfig.
+Linker scripts nowadays can emit relative references, as long as the symbol
+definition is contained within the section definition. So let's switch most
+of the C defined variables and clean up the arm sections.c file.
+There's still a few symbols remaining -- __secure_start/end,
+__secure_stack_start/end and __end which can be cleaned up
+in a followup series.
 
-As mentioned in the cover letter, this series depends on the "rockchip:
-rk3328: Update defconfigs, DTs and enable boot from SPI" [1] series for
-a clean apply.
+For both QEMU v7/v8 bloat-o-meter shows now size difference
+$~ ./scripts/bloat-o-meter u-boot u-boot.new
+add/remove: 0/0 grow/shrink: 0/0 up/down: 0/0 (0)
+Function                                     old     new   delta
+Total: Before=798861, After=798861, chg +0.00%
 
-That series should also fix the following build error [2] seen in your
-for-next branch:
+The symbols seem largely unchanged apart from a difference in .bss
+as well as the emited sections and object types of the affected variables.
 
-  aarch64-linux-ld.bfd: drivers/misc/rockchip-efuse.o: in function `rockchip_efuse_of_to_plat':
-  drivers/misc/rockchip-efuse.c:273:(.text.rockchip_efuse_of_to_plat+0x1c): undefined reference to `dev_read_addr_ptr'
-  drivers/misc/rockchip-efuse.c:273:(.text.rockchip_efuse_of_to_plat+0x1c): relocation truncated to fit: R_AARCH64_CALL26 against undefined symbol `dev_read_addr_ptr'
+On the output below the first value is from -next and the second comes from
+-next + this patchset. The .bss_start/end sections have disappeared from
+the newer binaries.
 
-[1] https://patchwork.ozlabs.org/cover/1900345/
-[2] https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/jobs/797813
+# For example on QEMU v8:
+efi_runtime_start
+  7945: 0000000000000178     0 OBJECT  GLOBAL DEFAULT    2 __efi_runtime_start
+  7942: 0000000000000178     0 NOTYPE  GLOBAL DEFAULT    2 __efi_runtime_start
+efi_runtime_stop
+  9050: 0000000000000d38     0 OBJECT  GLOBAL DEFAULT    2 __efi_runtime_stop
+  9047: 0000000000000d38     0 NOTYPE  GLOBAL DEFAULT    2 __efi_runtime_stop
+__efi_runtime_rel_start
+  7172: 00000000000dc2f0     0 OBJECT  GLOBAL DEFAULT   10 __efi_runtime_rel_start
+  7169: 00000000000dc2f0     0 NOTYPE  GLOBAL DEFAULT   10 __efi_runtime_rel_start
+__efi_runtime_rel_stop
+  7954: 00000000000dc4a0     0 OBJECT  GLOBAL DEFAULT   10 __efi_runtime_rel_stop
+  7951: 00000000000dc4a0     0 NOTYPE  GLOBAL DEFAULT   10 __efi_runtime_rel_stop
+__rel_dyn_start
+  7030: 00000000000dc4a0     0 OBJECT  GLOBAL DEFAULT   11 __rel_dyn_start
+  7027: 00000000000dc4a0     0 NOTYPE  GLOBAL DEFAULT   11 __rel_dyn_start
+__rel_dyn_end
+  8959: 0000000000102b10     0 OBJECT  GLOBAL DEFAULT   12 __rel_dyn_end
+  8956: 0000000000102b10     0 NOTYPE  GLOBAL DEFAULT   11 __rel_dyn_end
+image_copy_start
+  9051: 0000000000000000     0 OBJECT  GLOBAL DEFAULT    1 __image_copy_start
+  9048: 0000000000000000     0 NOTYPE  GLOBAL DEFAULT    1 __image_copy_start
+image_copy_end
+  7467: 00000000000dc4a0     0 OBJECT  GLOBAL DEFAULT   11 __image_copy_end
+  7464: 00000000000dc4a0     0 NOTYPE  GLOBAL DEFAULT   11 __image_copy_end
+bss_start
+    12: 0000000000102b10     0 SECTION LOCAL  DEFAULT   12 .bss_start
+  8087: 0000000000000018     0 NOTYPE  GLOBAL DEFAULT    1 _bss_start_ofs
+  8375: 0000000000102b10     0 OBJECT  GLOBAL DEFAULT   12 __bss_start
+  8084: 0000000000000018     0 NOTYPE  GLOBAL DEFAULT    1 _bss_start_ofs
+  8372: 0000000000102b10     0 NOTYPE  GLOBAL DEFAULT   12 __bss_start
+bss_end
+    14: 000000000010bc30     0 SECTION LOCAL  DEFAULT   14 .bss_end
+  7683: 000000000010bc30     0 OBJECT  GLOBAL DEFAULT   14 __bss_end
+  8479: 0000000000000020     0 NOTYPE  GLOBAL DEFAULT    1 _bss_end_ofs
+  7680: 000000000010bbb0     0 NOTYPE  GLOBAL DEFAULT   12 __bss_end
+  8476: 0000000000000020     0 NOTYPE  GLOBAL DEFAULT    1 _bss_end_ofs
 
-Regards,
-Jonas
+# For QEMU v7:
+efi_runtime_start
+ 10703: 000003bc     0 OBJECT  GLOBAL DEFAULT    2 __efi_runtime_start
+ 10699: 000003c0     0 NOTYPE  GLOBAL DEFAULT    2 __efi_runtime_start
+efi_runtime_stop
+ 11796: 000012ec     0 OBJECT  GLOBAL DEFAULT    2 __efi_runtime_stop
+ 11792: 000012ec     0 NOTYPE  GLOBAL DEFAULT    2 __efi_runtime_stop
+__efi_runtime_rel_start
+  9937: 000c40dc     0 OBJECT  GLOBAL DEFAULT    8 __efi_runtime_rel_start
+  9935: 000c40dc     0 NOTYPE  GLOBAL DEFAULT    9 __efi_runtime_rel_start
+__efi_runtime_rel_stop
+ 10712: 000c41dc     0 OBJECT  GLOBAL DEFAULT   10 __efi_runtime_rel_stop
+ 10708: 000c41dc     0 NOTYPE  GLOBAL DEFAULT    9 __efi_runtime_rel_stop
+__rel_dyn_start
+  9791: 000c41dc     0 OBJECT  GLOBAL DEFAULT   10 __rel_dyn_start
+  9789: 000c41dc     0 NOTYPE  GLOBAL DEFAULT   10 __rel_dyn_start
+__rel_dyn_end
+ 11708: 000da5f4     0 OBJECT  GLOBAL DEFAULT   10 __rel_dyn_end
+ 11704: 000da5f4     0 NOTYPE  GLOBAL DEFAULT   10 __rel_dyn_end
+image_copy_start
+   448: 0000177c     0 NOTYPE  LOCAL  DEFAULT    3 _image_copy_start_ofs
+ 11797: 00000000     0 OBJECT  GLOBAL DEFAULT    1 __image_copy_start
+   445: 0000177c     0 NOTYPE  LOCAL  DEFAULT    3 _image_copy_start_ofs
+ 11793: 00000000     0 NOTYPE  GLOBAL DEFAULT    1 __image_copy_start
+image_copy_end
+   450: 00001780     0 NOTYPE  LOCAL  DEFAULT    3 _image_copy_end_ofs
+ 10225: 000c41dc     0 OBJECT  GLOBAL DEFAULT   10 __image_copy_end
+   447: 00001780     0 NOTYPE  LOCAL  DEFAULT    3 _image_copy_end_ofs
+ 10222: 000c41dc     0 NOTYPE  GLOBAL DEFAULT   10 __image_copy_end
+bss_start
+    11: 000c41dc     0 SECTION LOCAL  DEFAULT   11 .bss_start
+ 11124: 000c41dc     0 OBJECT  GLOBAL DEFAULT   11 __bss_start
+ 11120: 000c41dc     0 NOTYPE  GLOBAL DEFAULT   11 __bss_start
+bss_end
+    13: 000cbbf8     0 SECTION LOCAL  DEFAULT   13 .bss_end
+ 10442: 000cbbf8     0 OBJECT  GLOBAL DEFAULT   13 __bss_end
+ 10439: 000cbbf8     0 NOTYPE  GLOBAL DEFAULT   11 __bss_end
 
-> 
-> 
-> Thanks,
-> 
-> - Kever
-> 
-> On 2024/3/11 02:51, Jonas Karlman wrote:
->> USB gadget is not working fully as expected on RK3328, it uses a
->> board_usb_init() function to initialize the DWC2 OTG port.
->>
->> The board_usb_init() function does not intgrate with the generic phy
->> framework and as a result the USB phy is not properly configured before
->> or after USB gadget use.
->>
->> Having both USB_DWC2 and DWC2_OTG enabled for the same board is also
->> causing some issues.
->>
->> Trying to use rockusb or ums command after usb stop result in a freeze
->> due to usb stop is putting the phy in a suspended state.
->>
->>    => usb start
->>    => usb stop
->>    => ums 0 mmc 0
->>    --> freeze due to usb phy is suspended <--
->>
->> Fix this by only using one of USB_DWC2 (host) or DWC2_OTG (peripheral)
->> depending on the most likely usage of the otg port and by migrating to
->> use DM_USB_GADGET instead of a board_usb_init() function.
->>
->> The nanopi-r2 and orangepi-r1-plus variants share OTG and power using a
->> Type-C connector, mark these boards dr_mode as peripheral, the most
->> likely usage is for recovery and image download.
->>
->> The rock64 and roc-cc currently use dr_mode as host, remove the DWC2_OTG
->> driver from these boards to ensure that the USB_DWC2 driver is used.
->>
->> The rock-pi-e board does not enable the usb20_otg node so both USB_DWC2
->> and DWC2_OTG is removed from this board.
->>
->> Enable RockUSB and UMS on all boards with a otg port in peripheral mode.
->>
->> Also with the migration to DM_USB_GADGET completed the U-Boot specific
->> change to reorder usb nodes in the soc device tree can be reverted.
->>
->> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->> Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
->> ---
->> v2:
->> - Drop use of DWC3_GENERIC and revert to use XHCI_DWC3 for USB 3.0 host
->>    for devices using another port with otg/peripheral dr_mode to work
->>    around build errors when mixing DWC3_GENERIC and DWC2_OTG.
->> - Collect r-b tag
->> ---
->>   arch/arm/dts/rk3328-nanopi-r2s-u-boot.dtsi    |  4 ++
->>   .../rk3328-orangepi-r1-plus-lts-u-boot.dtsi   |  4 ++
->>   .../dts/rk3328-orangepi-r1-plus-u-boot.dtsi   |  4 ++
->>   arch/arm/dts/rk3328-roc-cc-u-boot.dtsi        |  4 ++
->>   arch/arm/dts/rk3328-rock-pi-e-u-boot.dtsi     |  9 ++++
->>   arch/arm/dts/rk3328-rock64-u-boot.dtsi        |  4 ++
->>   arch/arm/dts/rk3328-u-boot.dtsi               |  4 --
->>   arch/arm/dts/rk3328.dtsi                      | 41 ++++++++-----------
->>   configs/evb-rk3328_defconfig                  |  7 +++-
->>   configs/nanopi-r2c-plus-rk3328_defconfig      |  7 +++-
->>   configs/nanopi-r2c-rk3328_defconfig           |  7 +++-
->>   configs/nanopi-r2s-rk3328_defconfig           |  7 +++-
->>   configs/orangepi-r1-plus-lts-rk3328_defconfig |  7 +++-
->>   configs/orangepi-r1-plus-rk3328_defconfig     |  7 +++-
->>   configs/roc-cc-rk3328_defconfig               |  7 ----
->>   configs/rock-pi-e-rk3328_defconfig            |  7 ----
->>   configs/rock64-rk3328_defconfig               |  6 ---
->>   17 files changed, 75 insertions(+), 61 deletions(-)
->>
->> diff --git a/arch/arm/dts/rk3328-nanopi-r2s-u-boot.dtsi b/arch/arm/dts/rk3328-nanopi-r2s-u-boot.dtsi
->> index cca4f06145cf..4fa170eeaf8d 100644
->> --- a/arch/arm/dts/rk3328-nanopi-r2s-u-boot.dtsi
->> +++ b/arch/arm/dts/rk3328-nanopi-r2s-u-boot.dtsi
->> @@ -15,6 +15,10 @@
->>   	bootph-all;
->>   };
->>   
->> +&usb20_otg {
->> +	dr_mode = "peripheral";
->> +};
->> +
->>   &vcc_io_sdio {
->>   	bootph-pre-ram;
->>   };
->> diff --git a/arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi b/arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi
->> index 0dbe5a01f986..0a9423cd9c7e 100644
->> --- a/arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi
->> +++ b/arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi
->> @@ -33,6 +33,10 @@
->>   	bootph-pre-ram;
->>   };
->>   
->> +&usb20_otg {
->> +	dr_mode = "peripheral";
->> +};
->> +
->>   &vcc_sd {
->>   	bootph-pre-ram;
->>   };
->> diff --git a/arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi b/arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi
->> index 1af75ada1a62..1096821fc5d3 100644
->> --- a/arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi
->> +++ b/arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi
->> @@ -33,6 +33,10 @@
->>   	bootph-pre-ram;
->>   };
->>   
->> +&usb20_otg {
->> +	dr_mode = "peripheral";
->> +};
->> +
->>   &vcc_sd {
->>   	bootph-pre-ram;
->>   };
->> diff --git a/arch/arm/dts/rk3328-roc-cc-u-boot.dtsi b/arch/arm/dts/rk3328-roc-cc-u-boot.dtsi
->> index 47d74964fd0c..582d6ba49b4e 100644
->> --- a/arch/arm/dts/rk3328-roc-cc-u-boot.dtsi
->> +++ b/arch/arm/dts/rk3328-roc-cc-u-boot.dtsi
->> @@ -29,6 +29,10 @@
->>   	};
->>   };
->>   
->> +&usb20_otg {
->> +	hnp-srp-disable;
->> +};
->> +
->>   &vcc_sd {
->>   	bootph-pre-ram;
->>   };
->> diff --git a/arch/arm/dts/rk3328-rock-pi-e-u-boot.dtsi b/arch/arm/dts/rk3328-rock-pi-e-u-boot.dtsi
->> index 9ed0aef1ecc9..d314bfad6fc0 100644
->> --- a/arch/arm/dts/rk3328-rock-pi-e-u-boot.dtsi
->> +++ b/arch/arm/dts/rk3328-rock-pi-e-u-boot.dtsi
->> @@ -29,6 +29,15 @@
->>   	};
->>   };
->>   
->> +&u2phy_host {
->> +	phy-supply = <&vcc_host_5v>;
->> +};
->> +
->> +&vcc_host_5v {
->> +	/delete-property/ regulator-always-on;
->> +	/delete-property/ regulator-boot-on;
->> +};
->> +
->>   &vcc_sd {
->>   	bootph-pre-ram;
->>   };
->> diff --git a/arch/arm/dts/rk3328-rock64-u-boot.dtsi b/arch/arm/dts/rk3328-rock64-u-boot.dtsi
->> index 85426495c3d8..551cff6f24f6 100644
->> --- a/arch/arm/dts/rk3328-rock64-u-boot.dtsi
->> +++ b/arch/arm/dts/rk3328-rock64-u-boot.dtsi
->> @@ -55,6 +55,10 @@
->>   	bootph-pre-ram;
->>   };
->>   
->> +&usb20_otg {
->> +	hnp-srp-disable;
->> +};
->> +
->>   &vcc_sd {
->>   	bootph-pre-ram;
->>   };
->> diff --git a/arch/arm/dts/rk3328-u-boot.dtsi b/arch/arm/dts/rk3328-u-boot.dtsi
->> index 4d43fe2fb51a..e0c6aee58aba 100644
->> --- a/arch/arm/dts/rk3328-u-boot.dtsi
->> +++ b/arch/arm/dts/rk3328-u-boot.dtsi
->> @@ -130,10 +130,6 @@
->>   	bootph-all;
->>   };
->>   
->> -&usb20_otg {
->> -	hnp-srp-disable;
->> -};
->> -
->>   #ifdef CONFIG_ROCKCHIP_SPI_IMAGE
->>   &binman {
->>   	simple-bin-spi {
->> diff --git a/arch/arm/dts/rk3328.dtsi b/arch/arm/dts/rk3328.dtsi
->> index fe81b97bbe78..fb5dcf6e9327 100644
->> --- a/arch/arm/dts/rk3328.dtsi
->> +++ b/arch/arm/dts/rk3328.dtsi
->> @@ -965,6 +965,22 @@
->>   		};
->>   	};
->>   
->> +	usb20_otg: usb@ff580000 {
->> +		compatible = "rockchip,rk3328-usb", "rockchip,rk3066-usb",
->> +			     "snps,dwc2";
->> +		reg = <0x0 0xff580000 0x0 0x40000>;
->> +		interrupts = <GIC_SPI 23 IRQ_TYPE_LEVEL_HIGH>;
->> +		clocks = <&cru HCLK_OTG>;
->> +		clock-names = "otg";
->> +		dr_mode = "otg";
->> +		g-np-tx-fifo-size = <16>;
->> +		g-rx-fifo-size = <280>;
->> +		g-tx-fifo-size = <256 128 128 64 32 16>;
->> +		phys = <&u2phy_otg>;
->> +		phy-names = "usb2-phy";
->> +		status = "disabled";
->> +	};
->> +
->>   	usb_host0_ehci: usb@ff5c0000 {
->>   		compatible = "generic-ehci";
->>   		reg = <0x0 0xff5c0000 0x0 0x10000>;
->> @@ -1004,31 +1020,6 @@
->>   		status = "disabled";
->>   	};
->>   
->> -	/*
->> -	 * U-Boot Specific Change
->> -	 *
->> -	 * The OTG controller must come after the USB host pair for it
->> -	 * to work. This is likely due to lack of support for the USB
->> -	 * PHYs. This must be manually changed after each device tree
->> -	 * sync. There is no clean way to handle this in -u-boot.dtsi
->> -	 * files.
->> -	 */
->> -	usb20_otg: usb@ff580000 {
->> -		compatible = "rockchip,rk3328-usb", "rockchip,rk3066-usb",
->> -			     "snps,dwc2";
->> -		reg = <0x0 0xff580000 0x0 0x40000>;
->> -		interrupts = <GIC_SPI 23 IRQ_TYPE_LEVEL_HIGH>;
->> -		clocks = <&cru HCLK_OTG>;
->> -		clock-names = "otg";
->> -		dr_mode = "otg";
->> -		g-np-tx-fifo-size = <16>;
->> -		g-rx-fifo-size = <280>;
->> -		g-tx-fifo-size = <256 128 128 64 32 16>;
->> -		phys = <&u2phy_otg>;
->> -		phy-names = "usb2-phy";
->> -		status = "disabled";
->> -	};
->> -
->>   	gic: interrupt-controller@ff811000 {
->>   		compatible = "arm,gic-400";
->>   		#interrupt-cells = <3>;
->> diff --git a/configs/evb-rk3328_defconfig b/configs/evb-rk3328_defconfig
->> index 4fa8a7d365a4..75a0e0f286bd 100644
->> --- a/configs/evb-rk3328_defconfig
->> +++ b/configs/evb-rk3328_defconfig
->> @@ -31,6 +31,8 @@ CONFIG_CMD_GPIO=y
->>   CONFIG_CMD_GPT=y
->>   CONFIG_CMD_MMC=y
->>   CONFIG_CMD_USB=y
->> +CONFIG_CMD_ROCKUSB=y
->> +CONFIG_CMD_USB_MASS_STORAGE=y
->>   # CONFIG_CMD_SETEXPR is not set
->>   CONFIG_CMD_TIME=y
->>   CONFIG_CMD_REGULATOR=y
->> @@ -83,17 +85,18 @@ CONFIG_SYSINFO=y
->>   CONFIG_SYSRESET=y
->>   # CONFIG_TPL_SYSRESET is not set
->>   CONFIG_USB=y
->> +CONFIG_DM_USB_GADGET=y
->>   CONFIG_USB_XHCI_HCD=y
->> +CONFIG_USB_XHCI_DWC3=y
->>   CONFIG_USB_EHCI_HCD=y
->>   CONFIG_USB_EHCI_GENERIC=y
->>   CONFIG_USB_OHCI_HCD=y
->>   CONFIG_USB_OHCI_GENERIC=y
->> -CONFIG_USB_DWC2=y
->>   CONFIG_USB_DWC3=y
->>   # CONFIG_USB_DWC3_GADGET is not set
->> -CONFIG_USB_DWC3_GENERIC=y
->>   CONFIG_USB_GADGET=y
->>   CONFIG_USB_GADGET_DWC2_OTG=y
->> +CONFIG_USB_FUNCTION_ROCKUSB=y
->>   CONFIG_SPL_TINY_MEMSET=y
->>   CONFIG_TPL_TINY_MEMSET=y
->>   CONFIG_ERRNO_STR=y
->> diff --git a/configs/nanopi-r2c-plus-rk3328_defconfig b/configs/nanopi-r2c-plus-rk3328_defconfig
->> index 5302fd91a0f5..beef682a582e 100644
->> --- a/configs/nanopi-r2c-plus-rk3328_defconfig
->> +++ b/configs/nanopi-r2c-plus-rk3328_defconfig
->> @@ -33,6 +33,8 @@ CONFIG_CMD_GPIO=y
->>   CONFIG_CMD_GPT=y
->>   CONFIG_CMD_MMC=y
->>   CONFIG_CMD_USB=y
->> +CONFIG_CMD_ROCKUSB=y
->> +CONFIG_CMD_USB_MASS_STORAGE=y
->>   # CONFIG_CMD_SETEXPR is not set
->>   CONFIG_CMD_TIME=y
->>   CONFIG_CMD_REGULATOR=y
->> @@ -90,17 +92,18 @@ CONFIG_SYSINFO=y
->>   CONFIG_SYSRESET=y
->>   # CONFIG_TPL_SYSRESET is not set
->>   CONFIG_USB=y
->> +CONFIG_DM_USB_GADGET=y
->>   CONFIG_USB_XHCI_HCD=y
->> +CONFIG_USB_XHCI_DWC3=y
->>   CONFIG_USB_EHCI_HCD=y
->>   CONFIG_USB_EHCI_GENERIC=y
->>   CONFIG_USB_OHCI_HCD=y
->>   CONFIG_USB_OHCI_GENERIC=y
->> -CONFIG_USB_DWC2=y
->>   CONFIG_USB_DWC3=y
->>   # CONFIG_USB_DWC3_GADGET is not set
->> -CONFIG_USB_DWC3_GENERIC=y
->>   CONFIG_USB_GADGET=y
->>   CONFIG_USB_GADGET_DWC2_OTG=y
->> +CONFIG_USB_FUNCTION_ROCKUSB=y
->>   CONFIG_SPL_TINY_MEMSET=y
->>   CONFIG_TPL_TINY_MEMSET=y
->>   CONFIG_ERRNO_STR=y
->> diff --git a/configs/nanopi-r2c-rk3328_defconfig b/configs/nanopi-r2c-rk3328_defconfig
->> index 5a722c182631..8960c1afaba5 100644
->> --- a/configs/nanopi-r2c-rk3328_defconfig
->> +++ b/configs/nanopi-r2c-rk3328_defconfig
->> @@ -33,6 +33,8 @@ CONFIG_CMD_GPIO=y
->>   CONFIG_CMD_GPT=y
->>   CONFIG_CMD_MMC=y
->>   CONFIG_CMD_USB=y
->> +CONFIG_CMD_ROCKUSB=y
->> +CONFIG_CMD_USB_MASS_STORAGE=y
->>   # CONFIG_CMD_SETEXPR is not set
->>   CONFIG_CMD_TIME=y
->>   CONFIG_CMD_REGULATOR=y
->> @@ -90,17 +92,18 @@ CONFIG_SYSINFO=y
->>   CONFIG_SYSRESET=y
->>   # CONFIG_TPL_SYSRESET is not set
->>   CONFIG_USB=y
->> +CONFIG_DM_USB_GADGET=y
->>   CONFIG_USB_XHCI_HCD=y
->> +CONFIG_USB_XHCI_DWC3=y
->>   CONFIG_USB_EHCI_HCD=y
->>   CONFIG_USB_EHCI_GENERIC=y
->>   CONFIG_USB_OHCI_HCD=y
->>   CONFIG_USB_OHCI_GENERIC=y
->> -CONFIG_USB_DWC2=y
->>   CONFIG_USB_DWC3=y
->>   # CONFIG_USB_DWC3_GADGET is not set
->> -CONFIG_USB_DWC3_GENERIC=y
->>   CONFIG_USB_GADGET=y
->>   CONFIG_USB_GADGET_DWC2_OTG=y
->> +CONFIG_USB_FUNCTION_ROCKUSB=y
->>   CONFIG_SPL_TINY_MEMSET=y
->>   CONFIG_TPL_TINY_MEMSET=y
->>   CONFIG_ERRNO_STR=y
->> diff --git a/configs/nanopi-r2s-rk3328_defconfig b/configs/nanopi-r2s-rk3328_defconfig
->> index 985d02475ece..96e67e248d32 100644
->> --- a/configs/nanopi-r2s-rk3328_defconfig
->> +++ b/configs/nanopi-r2s-rk3328_defconfig
->> @@ -33,6 +33,8 @@ CONFIG_CMD_GPIO=y
->>   CONFIG_CMD_GPT=y
->>   CONFIG_CMD_MMC=y
->>   CONFIG_CMD_USB=y
->> +CONFIG_CMD_ROCKUSB=y
->> +CONFIG_CMD_USB_MASS_STORAGE=y
->>   # CONFIG_CMD_SETEXPR is not set
->>   CONFIG_CMD_TIME=y
->>   CONFIG_CMD_REGULATOR=y
->> @@ -90,17 +92,18 @@ CONFIG_SYSINFO=y
->>   CONFIG_SYSRESET=y
->>   # CONFIG_TPL_SYSRESET is not set
->>   CONFIG_USB=y
->> +CONFIG_DM_USB_GADGET=y
->>   CONFIG_USB_XHCI_HCD=y
->> +CONFIG_USB_XHCI_DWC3=y
->>   CONFIG_USB_EHCI_HCD=y
->>   CONFIG_USB_EHCI_GENERIC=y
->>   CONFIG_USB_OHCI_HCD=y
->>   CONFIG_USB_OHCI_GENERIC=y
->> -CONFIG_USB_DWC2=y
->>   CONFIG_USB_DWC3=y
->>   # CONFIG_USB_DWC3_GADGET is not set
->> -CONFIG_USB_DWC3_GENERIC=y
->>   CONFIG_USB_GADGET=y
->>   CONFIG_USB_GADGET_DWC2_OTG=y
->> +CONFIG_USB_FUNCTION_ROCKUSB=y
->>   CONFIG_SPL_TINY_MEMSET=y
->>   CONFIG_TPL_TINY_MEMSET=y
->>   CONFIG_ERRNO_STR=y
->> diff --git a/configs/orangepi-r1-plus-lts-rk3328_defconfig b/configs/orangepi-r1-plus-lts-rk3328_defconfig
->> index e9f7a1306923..5fbbd5fc6558 100644
->> --- a/configs/orangepi-r1-plus-lts-rk3328_defconfig
->> +++ b/configs/orangepi-r1-plus-lts-rk3328_defconfig
->> @@ -38,6 +38,8 @@ CONFIG_CMD_GPIO=y
->>   CONFIG_CMD_GPT=y
->>   CONFIG_CMD_MMC=y
->>   CONFIG_CMD_USB=y
->> +CONFIG_CMD_ROCKUSB=y
->> +CONFIG_CMD_USB_MASS_STORAGE=y
->>   # CONFIG_CMD_SETEXPR is not set
->>   CONFIG_CMD_TIME=y
->>   CONFIG_CMD_REGULATOR=y
->> @@ -100,17 +102,18 @@ CONFIG_SYSINFO=y
->>   CONFIG_SYSRESET=y
->>   # CONFIG_TPL_SYSRESET is not set
->>   CONFIG_USB=y
->> +CONFIG_DM_USB_GADGET=y
->>   CONFIG_USB_XHCI_HCD=y
->> +CONFIG_USB_XHCI_DWC3=y
->>   CONFIG_USB_EHCI_HCD=y
->>   CONFIG_USB_EHCI_GENERIC=y
->>   CONFIG_USB_OHCI_HCD=y
->>   CONFIG_USB_OHCI_GENERIC=y
->> -CONFIG_USB_DWC2=y
->>   CONFIG_USB_DWC3=y
->>   # CONFIG_USB_DWC3_GADGET is not set
->> -CONFIG_USB_DWC3_GENERIC=y
->>   CONFIG_USB_GADGET=y
->>   CONFIG_USB_GADGET_DWC2_OTG=y
->> +CONFIG_USB_FUNCTION_ROCKUSB=y
->>   CONFIG_SPL_TINY_MEMSET=y
->>   CONFIG_TPL_TINY_MEMSET=y
->>   CONFIG_ERRNO_STR=y
->> diff --git a/configs/orangepi-r1-plus-rk3328_defconfig b/configs/orangepi-r1-plus-rk3328_defconfig
->> index 6019f33ae3f5..c5afe5ea6e5c 100644
->> --- a/configs/orangepi-r1-plus-rk3328_defconfig
->> +++ b/configs/orangepi-r1-plus-rk3328_defconfig
->> @@ -38,6 +38,8 @@ CONFIG_CMD_GPIO=y
->>   CONFIG_CMD_GPT=y
->>   CONFIG_CMD_MMC=y
->>   CONFIG_CMD_USB=y
->> +CONFIG_CMD_ROCKUSB=y
->> +CONFIG_CMD_USB_MASS_STORAGE=y
->>   # CONFIG_CMD_SETEXPR is not set
->>   CONFIG_CMD_TIME=y
->>   CONFIG_CMD_REGULATOR=y
->> @@ -100,17 +102,18 @@ CONFIG_SYSINFO=y
->>   CONFIG_SYSRESET=y
->>   # CONFIG_TPL_SYSRESET is not set
->>   CONFIG_USB=y
->> +CONFIG_DM_USB_GADGET=y
->>   CONFIG_USB_XHCI_HCD=y
->> +CONFIG_USB_XHCI_DWC3=y
->>   CONFIG_USB_EHCI_HCD=y
->>   CONFIG_USB_EHCI_GENERIC=y
->>   CONFIG_USB_OHCI_HCD=y
->>   CONFIG_USB_OHCI_GENERIC=y
->> -CONFIG_USB_DWC2=y
->>   CONFIG_USB_DWC3=y
->>   # CONFIG_USB_DWC3_GADGET is not set
->> -CONFIG_USB_DWC3_GENERIC=y
->>   CONFIG_USB_GADGET=y
->>   CONFIG_USB_GADGET_DWC2_OTG=y
->> +CONFIG_USB_FUNCTION_ROCKUSB=y
->>   CONFIG_SPL_TINY_MEMSET=y
->>   CONFIG_TPL_TINY_MEMSET=y
->>   CONFIG_ERRNO_STR=y
->> diff --git a/configs/roc-cc-rk3328_defconfig b/configs/roc-cc-rk3328_defconfig
->> index 191dbff928bb..6526d2606e72 100644
->> --- a/configs/roc-cc-rk3328_defconfig
->> +++ b/configs/roc-cc-rk3328_defconfig
->> @@ -13,7 +13,6 @@ CONFIG_DEBUG_UART_BASE=0xFF130000
->>   CONFIG_DEBUG_UART_CLOCK=24000000
->>   CONFIG_SYS_LOAD_ADDR=0x800800
->>   CONFIG_DEBUG_UART=y
->> -# CONFIG_ANDROID_BOOT_IMAGE is not set
->>   CONFIG_FIT=y
->>   CONFIG_FIT_VERBOSE=y
->>   CONFIG_SPL_FIT_SIGNATURE=y
->> @@ -34,7 +33,6 @@ CONFIG_CMD_GPT=y
->>   CONFIG_CMD_MMC=y
->>   CONFIG_CMD_POWEROFF=y
->>   CONFIG_CMD_USB=y
->> -CONFIG_CMD_USB_MASS_STORAGE=y
->>   # CONFIG_CMD_SETEXPR is not set
->>   CONFIG_CMD_TIME=y
->>   CONFIG_CMD_REGULATOR=y
->> @@ -55,8 +53,6 @@ CONFIG_SPL_SYSCON=y
->>   CONFIG_TPL_SYSCON=y
->>   CONFIG_CLK=y
->>   CONFIG_SPL_CLK=y
->> -CONFIG_FASTBOOT_BUF_ADDR=0x800800
->> -CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
->>   CONFIG_ROCKCHIP_GPIO=y
->>   CONFIG_SYS_I2C_ROCKCHIP=y
->>   CONFIG_MMC_DW=y
->> @@ -97,10 +93,7 @@ CONFIG_USB_OHCI_HCD=y
->>   CONFIG_USB_OHCI_GENERIC=y
->>   CONFIG_USB_DWC2=y
->>   CONFIG_USB_DWC3=y
->> -# CONFIG_USB_DWC3_GADGET is not set
->>   CONFIG_USB_DWC3_GENERIC=y
->> -CONFIG_USB_GADGET=y
->> -CONFIG_USB_GADGET_DWC2_OTG=y
->>   CONFIG_SPL_TINY_MEMSET=y
->>   CONFIG_TPL_TINY_MEMSET=y
->>   CONFIG_ERRNO_STR=y
->> diff --git a/configs/rock-pi-e-rk3328_defconfig b/configs/rock-pi-e-rk3328_defconfig
->> index e4f2123e0b17..23029255bca2 100644
->> --- a/configs/rock-pi-e-rk3328_defconfig
->> +++ b/configs/rock-pi-e-rk3328_defconfig
->> @@ -13,7 +13,6 @@ CONFIG_DEBUG_UART_BASE=0xFF130000
->>   CONFIG_DEBUG_UART_CLOCK=24000000
->>   CONFIG_SYS_LOAD_ADDR=0x800800
->>   CONFIG_DEBUG_UART=y
->> -# CONFIG_ANDROID_BOOT_IMAGE is not set
->>   CONFIG_FIT=y
->>   CONFIG_FIT_VERBOSE=y
->>   CONFIG_SPL_FIT_SIGNATURE=y
->> @@ -52,8 +51,6 @@ CONFIG_SPL_SYSCON=y
->>   CONFIG_TPL_SYSCON=y
->>   CONFIG_CLK=y
->>   CONFIG_SPL_CLK=y
->> -CONFIG_FASTBOOT_BUF_ADDR=0x800800
->> -CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
->>   CONFIG_ROCKCHIP_GPIO=y
->>   CONFIG_SYS_I2C_ROCKCHIP=y
->>   CONFIG_MMC_DW=y
->> @@ -92,12 +89,8 @@ CONFIG_USB_EHCI_HCD=y
->>   CONFIG_USB_EHCI_GENERIC=y
->>   CONFIG_USB_OHCI_HCD=y
->>   CONFIG_USB_OHCI_GENERIC=y
->> -CONFIG_USB_DWC2=y
->>   CONFIG_USB_DWC3=y
->> -# CONFIG_USB_DWC3_GADGET is not set
->>   CONFIG_USB_DWC3_GENERIC=y
->> -CONFIG_USB_GADGET=y
->> -CONFIG_USB_GADGET_DWC2_OTG=y
->>   CONFIG_SPL_TINY_MEMSET=y
->>   CONFIG_TPL_TINY_MEMSET=y
->>   CONFIG_ERRNO_STR=y
->> diff --git a/configs/rock64-rk3328_defconfig b/configs/rock64-rk3328_defconfig
->> index f38431891bf8..b0be1d1d7633 100644
->> --- a/configs/rock64-rk3328_defconfig
->> +++ b/configs/rock64-rk3328_defconfig
->> @@ -16,7 +16,6 @@ CONFIG_SPL_SPI_FLASH_SUPPORT=y
->>   CONFIG_SPL_SPI=y
->>   CONFIG_SYS_LOAD_ADDR=0x800800
->>   CONFIG_DEBUG_UART=y
->> -# CONFIG_ANDROID_BOOT_IMAGE is not set
->>   CONFIG_FIT=y
->>   CONFIG_FIT_VERBOSE=y
->>   CONFIG_SPL_FIT_SIGNATURE=y
->> @@ -59,8 +58,6 @@ CONFIG_SPL_SYSCON=y
->>   CONFIG_TPL_SYSCON=y
->>   CONFIG_CLK=y
->>   CONFIG_SPL_CLK=y
->> -CONFIG_FASTBOOT_BUF_ADDR=0x800800
->> -CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
->>   CONFIG_ROCKCHIP_GPIO=y
->>   CONFIG_SYS_I2C_ROCKCHIP=y
->>   CONFIG_MMC_DW=y
->> @@ -106,10 +103,7 @@ CONFIG_USB_OHCI_HCD=y
->>   CONFIG_USB_OHCI_GENERIC=y
->>   CONFIG_USB_DWC2=y
->>   CONFIG_USB_DWC3=y
->> -# CONFIG_USB_DWC3_GADGET is not set
->>   CONFIG_USB_DWC3_GENERIC=y
->> -CONFIG_USB_GADGET=y
->> -CONFIG_USB_GADGET_DWC2_OTG=y
->>   CONFIG_SPL_TINY_MEMSET=y
->>   CONFIG_TPL_TINY_MEMSET=y
->>   CONFIG_ERRNO_STR=y
+It's worth noting that since the efi regions are affected by the change, booting
+with EFI is preferable while testing. Booting the kernel only should be enough
+since the efi stub and the kernel proper do request boottime and runtime
+services respectively.
+Something along the lines of
+> virtio scan && load virtio 0 $kernel_addr_r Image && bootefi $kernel_addr_r
+will work for QEMU aarch64.
+
+Tested platforms:
+- QEMU aarch64
+- Xilinx kv260 kria starter kit & zynq
+- QEMU armv7
+- STM32MP157C-DK2
+
+[0] commit 3ebd1cbc49f0 ("arm: make __bss_start and __bss_end__ compiler-generated")
+[1] binutils commit 6b3b0ab89663 ("Make linker assigned symbol dynamic only for shared object")
+
+Changes since v2:
+- Preserve the .bss alignment since it's needed by some C runtime setup code.
+  The sdram .bss region for armv8 SPL is defined by a Kconfig option, so instead
+  of aligning it explicitly assert if the Kconfig symbol is not 8b aligned
+- Align image_copy_end on patch #6. Richard I kept you r-b since that change was
+  minimal, but some code assume the dtb will be appended which requires alignment.
+  Please yell if you see something wrong
+- Added comments based on Richards review on why bss_start - bss_end needs
+  to be divided by 4/8 (for armv7/8 respectively)
+Changes since v1:
+- bring back overlays for armv7 rel.dyn and bss sections and add a comment
+  explaining why we overlay those
+- Remove redundant alignment from sections (new patch #7)
+- Added r-b tags from Sam
+Changes since RFC:
+- Rebase on top of -next and get rid of the dragonboard linker script changes.
+  Caleb removed that file completely
+- Rewrite some commit messages to include the binutils bug details (thanks Sam)
+
+Ilias Apalodimas (7):
+  arm: baltos: remove custom linker script
+  arm: clean up v7 and v8 linker scripts for bss_start/end
+  arm: fix __efi_runtime_rel_start/end definitions
+  arm: clean up v7 and v8 linker scripts for __rel_dyn_start/end
+  arm: fix __efi_runtime_start/end definitions
+  arm: move image_copy_start/end to linker symbols
+  arm: remove redundant section alignments
+
+ arch/arm/cpu/armv8/u-boot-spl.lds           |  29 ++---
+ arch/arm/cpu/armv8/u-boot.lds               |  43 ++-----
+ arch/arm/cpu/u-boot-spl.lds                 |   2 +-
+ arch/arm/cpu/u-boot.lds                     |  72 +++--------
+ arch/arm/lib/sections.c                     |  10 --
+ arch/arm/mach-aspeed/ast2600/u-boot-spl.lds |   2 +-
+ arch/arm/mach-rockchip/u-boot-tpl-v8.lds    |  23 ++--
+ arch/arm/mach-zynq/u-boot-spl.lds           |   2 +-
+ arch/arm/mach-zynq/u-boot.lds               |  67 +++-------
+ board/vscom/baltos/u-boot.lds               | 128 --------------------
+ include/asm-generic/sections.h              |   3 +
+ lib/efi_loader/efi_runtime.c                |   1 +
+ 12 files changed, 72 insertions(+), 310 deletions(-)
+ delete mode 100644 board/vscom/baltos/u-boot.lds
+
+--
+2.37.2
 
