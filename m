@@ -4,91 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C304C54791
-	for <u-boot@archiver.kernel.org>; Wed, 13 Mar 2024 16:24:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F121EC54E66
+	for <u-boot@archiver.kernel.org>; Wed, 13 Mar 2024 16:25:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C8F8187EA9;
-	Wed, 13 Mar 2024 17:24:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7EE3087E91;
+	Wed, 13 Mar 2024 17:25:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PLm9rkYV";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DSpyluLu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DC7618272A; Wed, 13 Mar 2024 17:24:08 +0100 (CET)
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [IPv6:2a00:1450:4864:20::130])
+ id 8CFBD87EB7; Wed, 13 Mar 2024 17:25:29 +0100 (CET)
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
+ [IPv6:2607:f8b0:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C996287EE3
- for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 17:24:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5DA0487DE3
+ for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 17:25:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-5131316693cso61783e87.0
- for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 09:24:06 -0700 (PDT)
+ spf=pass smtp.mailfrom=hiagofranco@gmail.com
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-1dcab44747bso46560875ad.1
+ for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 09:25:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710347044; x=1710951844; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PeH0jtFq/Xmys6wW7yvXInFyA0E/rY6c14SEeWX+QjE=;
- b=PLm9rkYVG+St9FmZenFOhYJGeaB0a1VvQWXB2pikZOT2X5RvEEkvzWZyzCJPjCIYcP
- 4mqhjZEc3xYnkI95ndDsSaX1xtXo+EzZaMFupWOcfoIzu+N1lir0ne+B/WrRnK+i0NE1
- ka3O58M2ZqsBJDRqaLyeucHQ4HqsGnlBU702Woi5XmDuW6++5GCEH9KvVr8cuJcTLmCm
- jtFaCkxHZIT+7qHnZagmSW+Jtac77VvpbTrG0jfh67/VZx9/aIG+gHO+vqr6Fk/X/1Bd
- unHc820+/oR3L0ZdbEQes0QK4X8Gwt0R7fj0sYwuwIXY1gr/EtsQx3uhasrRLjXXGXJg
- G4bQ==
+ d=gmail.com; s=20230601; t=1710347126; x=1710951926; darn=lists.denx.de;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=Mupo+7+j3MKfwlqt5TaHwmzacr+V/SzitYvkii+w1lw=;
+ b=DSpyluLuQABatj09b9foBmMcf199hVnqIonYulHK7O6mklZDuqQcdW3HUrOthxy64k
+ 90uvSJdK9w2qf/jaA1HtiJ2BnVqahupN0PlnylGK/PrDkjAqEPwNs/8baX96pZ4M8ZOP
+ ckT9ZNhxFTfvn7h4xrh15CfEtQkOFG8ZaKayGbwOTzMAec4q78xX/h9YbT/QxyNdysZ6
+ GxkXc8T6oDlXDhaANS8/a5LFIQU56xLdxdMyoVQsd0A3DpFTxzX0uYdL/B5GoOCKVubc
+ VAeZKvufwjTyo2UtVuwTuovFFXxIYFVovwwUqQecNK/6lcMKfC8+LvSwToGndrOrtC2t
+ 3lZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710347044; x=1710951844;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=PeH0jtFq/Xmys6wW7yvXInFyA0E/rY6c14SEeWX+QjE=;
- b=PtD2/TNY6pCHvyO49fgGOoZF4qdkgll6nv+VlXl9cIYTLBI7JTgSa1M23eBrpYVq7L
- FyfkPfdrXn6pwkWHV10uGuG42ywddbpcHnoPt6YIIZRFU4RX2tFdgriKRo+Km25dIhKH
- IiJTOyePRSSreAbV3iPWubouMyLuNGtNrcJH32oBNsG1HW72hVqX/3V7GPIZxWvxp8SD
- c0o52CvC0H7MSsaKSZ3yHe1MQRTm/REyTOYrbRv/MPIBP7HFrwveLfhypLRslNmvWx5T
- AXwuE/q+W6fl4/DynadIgzBIeDtRnbYh5LzsgrBjiYfDfC+FN2k+aH6+CknCyQEe9ZFk
- gipA==
-X-Gm-Message-State: AOJu0YzhvxermvluiNQ0OxQHg9c1LgxRVpxwAlQea4j5R5GHZX84UQYP
- gxkLohWASLzjuNVdXUGbAVUvTYwX+Y1U8Xyv8+8HK7l02kDAdCejqNgtEc7Bxzm9nDRJzJnBarq
- hm54=
-X-Google-Smtp-Source: AGHT+IHsNU2BByTFgynaLpKPMjyg7GJq6dtxZuHp3kp/sS/nwXmpzLaK7Sbbz59P9/NOkz0OU7Xklw==
-X-Received: by 2002:a19:740f:0:b0:513:cba0:1caa with SMTP id
- v15-20020a19740f000000b00513cba01caamr1016436lfe.36.1710347044722; 
- Wed, 13 Mar 2024 09:24:04 -0700 (PDT)
-Received: from hades.. (ppp046103107123.access.hol.gr. [46.103.107.123])
- by smtp.gmail.com with ESMTPSA id
- bh21-20020a170906a0d500b00a44efa48c24sm4998860ejb.117.2024.03.13.09.24.02
+ d=1e100.net; s=20230601; t=1710347126; x=1710951926;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Mupo+7+j3MKfwlqt5TaHwmzacr+V/SzitYvkii+w1lw=;
+ b=oh0E/hc5KlqWgS4c3Zy51uul9/rCqAc1u5xAyVZ7WKA6dNv6XtaLn2Iv+ZrYT0rfyw
+ hLQq1qHfmkfDMqIuDdHYZ+70z4C+1d54bnXa3y6vQfwq4FQHkkpThMNAMd2c9hlFo1ZT
+ 0xauFTskUvbS6eVpG5rCJGNPixFgEItNLNiYch/eSgL5VSyYoS99bZedrUkOf92Ywg+9
+ Y3KwzU9+pap0yuRLy0OskoDkIcSc1FkAgMXGqLeSTGcG9V43mt+mU6w9IJp7uggLmQue
+ A+H4tT1UNwS7cKYpiDbqjZtDsPCkJnNvyIUanO2bRNMHJoZ6YI/Cp6SlDcEU5e5tDXAy
+ ybWg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX4OjEijY6GJfb1hHMURRkRa3LU+5lUT+YBWUXNidX54fTC0X5LpUUE4i5G4dqQ4522ZzJ9t2hkIdWmAoMoynQbAN1mXg==
+X-Gm-Message-State: AOJu0YwY7j7Eq39dP99EyRS9SkQ5IkgQdv028CtWT9dpimN0j1ecrcaW
+ I1VLTFz5wkkbBcFT+r+RnO3cWS+RAOfrAwsqPA/+EZGJBEUiViMMdn15vY39HfU=
+X-Google-Smtp-Source: AGHT+IGwWT2D9KXzs+c0BBxWmhapVf4ePjA2DIiq7Gwpas1TzPLo+i5f0kDRHSDdGSwzxiVM8Ik1qQ==
+X-Received: by 2002:a17:902:da92:b0:1dd:cef5:2b10 with SMTP id
+ j18-20020a170902da9200b001ddcef52b10mr2456227plx.3.1710347125549; 
+ Wed, 13 Mar 2024 09:25:25 -0700 (PDT)
+Received: from frhdebian ([201.82.41.210]) by smtp.gmail.com with ESMTPSA id
+ a7-20020a170902ecc700b001dd0d090954sm7281535plh.269.2024.03.13.09.25.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Mar 2024 09:24:04 -0700 (PDT)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: u-boot@lists.denx.de,
-	trini@konsulko.com,
-	cfsworks@gmail.com
-Cc: caleb.connolly@linaro.org, sumit.garg@linaro.org,
- richard.henderson@linaro.org,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Ryan Chen <ryan_chen@aspeedtech.com>,
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
- Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>,
- Michal Simek <michal.simek@amd.com>,
- Yegor Yefremov <yegorslists@googlemail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Sam Edwards <CFSworks@gmail.com>,
- Shiji Yang <yangshiji66@outlook.com>, Bin Meng <bmeng@tinylab.org>
-Subject: [PATCH v3 7/7] arm: remove redundant section alignments
-Date: Wed, 13 Mar 2024 18:23:21 +0200
-Message-Id: <20240313162324.2117909-8-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.37.2
-In-Reply-To: <20240313162324.2117909-1-ilias.apalodimas@linaro.org>
-References: <20240313162324.2117909-1-ilias.apalodimas@linaro.org>
+ Wed, 13 Mar 2024 09:25:25 -0700 (PDT)
+Date: Wed, 13 Mar 2024 13:25:21 -0300
+From: Hiago De Franco <hiagofranco@gmail.com>
+To: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+Cc: Fabio Estevam <festevam@gmail.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Peng Fan <peng.fan@nxp.com>,
+ =?utf-8?Q?Jo=C3=A3o_Paulo_Silva_Gon=C3=A7alves?= <joao.goncalves@toradex.com>, 
+ Hiago De Franco <hiago.franco@toradex.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH] colibri-imx8x: Fix sc_misc_otp_fuse_read() error check
+Message-ID: <20240313162521.ogtxjtamvbe2gzzo@frhdebian>
+References: <20240313003641.2650648-1-festevam@gmail.com>
+ <22748b1c9a5c563be179342562ec3650760552f2.camel@toradex.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <22748b1c9a5c563be179342562ec3650760552f2.camel@toradex.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,123 +98,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Previous patches cleaning up linker symbols, also merged any explicit
-. = ALIGN(x); into section definitions -- e.g
-.bss ALIGN(x) : instead of
+On 13.03.2024 08:09, Marcel Ziswiler wrote:
+> Hi Fabio
+> 
+> Thanks!
+> 
+> On Tue, 2024-03-12 at 21:36 -0300, Fabio Estevam wrote:
+> > Commit aa6e698a7acd ("imx: toradex/colibri-imx8x: correct SCU API usage")
+> > made an incorrect logic change in the error code check of
+> > sc_misc_otp_fuse_read():
+> > 
+> > -       if (sc_err == SC_ERR_NONE) {
+> > +       if (sc_err) {
+> >                 /* DX has two A35 cores disabled */
+> >                 return (val & 0xf) != 0x0;
+> >         }
+> > 
+> > The other changes in this commit are correct.
+> > 
+> > sc_misc_otp_fuse_read() returns 0 on a successful fuse read.
+> > 
+> > This inversion causes board_mem_get_layout() to report incorrect RAM size.
+> > 
+> > Go back the original error check logic to fix the problem.
+> > 
+> > Fixes: aa6e698a7acd ("imx: toradex/colibri-imx8x: correct SCU API usage")
+> > Reported-by: Hiago De Franco <hiago.franco@toradex.com>
+> > Signed-off-by: Fabio Estevam <festevam@gmail.com>
+> 
+> Acked-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+> 
 
-. = ALIGN(x);
-. bss : {...}
+Tested-by: Hiago De Franco <hiago.franco@toradex.com> # Toradex Colibri iMX8X 1GB
 
-However, if the output address is not specified then one will be chosen
-for the section. This address will be adjusted to fit the alignment
-requirement of the output section following the strictest alignment of
-any input section contained within the output section. So let's get rid
-of the redundant ALIGN directives when they are not needed.
-
-While at add comments for the alignment of __bss_start/end since our
-C runtime setup assembly assumes that __bss_start - __bss_end will be
-a multiple of 4/8 for armv7 and armv8 respectively.
-
-It's worth noting that the alignment is preserved on .rel.dyn for
-mach-zynq which was explicitly aligning that section on an 8b
-boundary instead of 4b one.
-
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
- arch/arm/cpu/armv8/u-boot.lds | 9 ++++++---
- arch/arm/cpu/u-boot.lds       | 8 ++++++--
- arch/arm/mach-zynq/u-boot.lds | 4 ++--
- 3 files changed, 14 insertions(+), 7 deletions(-)
-
-diff --git a/arch/arm/cpu/armv8/u-boot.lds b/arch/arm/cpu/armv8/u-boot.lds
-index 147a6e8028d5..857f44412e07 100644
---- a/arch/arm/cpu/armv8/u-boot.lds
-+++ b/arch/arm/cpu/armv8/u-boot.lds
-@@ -115,7 +115,7 @@ SECTIONS
- 		KEEP(*(SORT(__u_boot_list*)));
- 	}
- 
--	.efi_runtime_rel ALIGN(8) : {
-+	.efi_runtime_rel : {
-                 __efi_runtime_rel_start = .;
- 		*(.rel*.efi_runtime)
- 		*(.rel*.efi_runtime.*)
-@@ -125,7 +125,7 @@ SECTIONS
- 	. = ALIGN(8);
- 	__image_copy_end = .;
- 
--	.rela.dyn ALIGN(8) : {
-+	.rela.dyn : {
- 		__rel_dyn_start = .;
- 		*(.rela*)
- 		__rel_dyn_end = .;
-@@ -133,7 +133,10 @@ SECTIONS
- 
- 	_end = .;
- 
--	.bss ALIGN(8): {
-+	/*
-+	 * arch/arm/lib/crt0_64.S assumes __bss_start - __bss_end % 8 == 0
-+	 */
-+	.bss ALIGN(8) : {
- 		__bss_start = .;
- 		*(.bss*)
- 		. = ALIGN(8);
-diff --git a/arch/arm/cpu/u-boot.lds b/arch/arm/cpu/u-boot.lds
-index 798858e3ed6e..707b19795f08 100644
---- a/arch/arm/cpu/u-boot.lds
-+++ b/arch/arm/cpu/u-boot.lds
-@@ -43,7 +43,7 @@ SECTIONS
- 	}
- 
- 	/* This needs to come before *(.text*) */
--	.efi_runtime ALIGN(4) : {
-+	.efi_runtime : {
- 		__efi_runtime_start = .;
- 		*(.text.efi_runtime*)
- 		*(.rodata.efi_runtime*)
-@@ -146,7 +146,7 @@ SECTIONS
- 		KEEP(*(SORT(__u_boot_list*)));
- 	}
- 
--	.efi_runtime_rel ALIGN(4) : {
-+	.efi_runtime_rel : {
- 		__efi_runtime_rel_start = .;
- 		*(.rel*.efi_runtime)
- 		*(.rel*.efi_runtime.*)
-@@ -156,6 +156,10 @@ SECTIONS
- 	. = ALIGN(4);
- 	__image_copy_end = .;
- 
-+	/*
-+	 * if CONFIG_USE_ARCH_MEMSET is not selected __bss_end - __bss_start
-+	 * needs to be a multiple of 4 and we overlay .bss with .rel.dyn
-+	 */
- 	.rel.dyn ALIGN(4) : {
- 		__rel_dyn_start = .;
- 		*(.rel*)
-diff --git a/arch/arm/mach-zynq/u-boot.lds b/arch/arm/mach-zynq/u-boot.lds
-index f6c99a8ce218..3e0c96c50556 100644
---- a/arch/arm/mach-zynq/u-boot.lds
-+++ b/arch/arm/mach-zynq/u-boot.lds
-@@ -22,7 +22,7 @@ SECTIONS
- 	}
- 
- 	/* This needs to come before *(.text*) */
--	.efi_runtime ALIGN(4) : {
-+	.efi_runtime : {
- 		__efi_runtime_start = .;
- 		*(.text.efi_runtime*)
- 		*(.rodata.efi_runtime*)
-@@ -52,7 +52,7 @@ SECTIONS
- 		KEEP(*(SORT(__u_boot_list*)));
- 	}
- 
--	.efi_runtime_rel ALIGN(4) : {
-+	.efi_runtime_rel : {
- 		__efi_runtime_rel_start = .;
- 		*(.rel*.efi_runtime)
- 		*(.rel*.efi_runtime.*)
--- 
-2.37.2
-
+> > diff --git a/board/toradex/colibri-imx8x/colibri-imx8x.c b/board/toradex/colibri-imx8x/colibri-imx8x.c
+> > index 2c673a4a6b06..6fc8076163c6 100644
+> > --- a/board/toradex/colibri-imx8x/colibri-imx8x.c
+> > +++ b/board/toradex/colibri-imx8x/colibri-imx8x.c
+> > @@ -46,7 +46,7 @@ static int is_imx8dx(void)
+> >  	u32 val = 0;
+> >  	int sc_err = sc_misc_otp_fuse_read(-1, 6, &val);
+> >  
+> > -	if (sc_err) {
+> > +	if (!sc_err) {
+> >  		/* DX has two A35 cores disabled */
+> >  		return (val & 0xf) != 0x0;
+> >  	}
+> 
+> Cheers
+> 
+> Marcel
