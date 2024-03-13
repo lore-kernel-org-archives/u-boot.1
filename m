@@ -4,85 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87E55C54E66
-	for <u-boot@archiver.kernel.org>; Wed, 13 Mar 2024 16:45:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 818BCC54791
+	for <u-boot@archiver.kernel.org>; Wed, 13 Mar 2024 16:45:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 91BE687E9A;
-	Wed, 13 Mar 2024 17:45:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=timesys.com
+	by phobos.denx.de (Postfix) with ESMTP id 1B7F087EBD;
+	Wed, 13 Mar 2024 17:45:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=rad.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=timesys-com.20230601.gappssmtp.com header.i=@timesys-com.20230601.gappssmtp.com header.b="oQzy/RZw";
+	dkim=pass (1024-bit key; unprotected) header.d=rad.com header.i=@rad.com header.b="HlDPdk9v";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F93A87D80; Wed, 13 Mar 2024 12:55:08 +0100 (CET)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id DBFD987EB4; Wed, 13 Mar 2024 17:35:35 +0100 (CET)
+Received: from EUR04-HE1-obe.outbound.protection.outlook.com
+ (mail-he1eur04on20701.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:260f::701])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1281587B2A
- for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 12:55:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D29A287EA8
+ for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 17:35:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=timesys.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=piotr.wojtaszczyk@timesys.com
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a44d084bfe1so625989866b.1
- for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 04:55:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=timesys-com.20230601.gappssmtp.com; s=20230601; t=1710330905; x=1710935705;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=N6bvbClQyVJyE+gXJQHfcslAy0BCt7fJd/AkOC4xAjs=;
- b=oQzy/RZwL0c19VC4DJ7wp+LmXqIpYT7Wm/6aFCs72eR8LewP8PxCKdJcsbBOYR4M0y
- muGOTkuVXPA1Wf50e2r454giNAW+Txjb0i8oHgODsz5CjRgEpTFhqELOLQvuCzkJR29H
- ueZsRJXKakKhjL4HG5v5SDUxngowD5wFAWj/Rf6d1pOhzCDmbI8V3ikFPZafZ1IXc9/i
- 2TKeJABYpH+HcKCaaPRKHzg2FHgkKwRtn3z2FZfJa8CL/ZD71jCKNfFbMuACGtyJR4TS
- wF9YB5e25nsonPcCFxuWuVV8aLkBqwzVOmkAe2zjBjhxJCDNC+G0YD0GjUEkOgSw9lPW
- LaoA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710330905; x=1710935705;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=N6bvbClQyVJyE+gXJQHfcslAy0BCt7fJd/AkOC4xAjs=;
- b=rMU7RcIT1jDeQxerWSoiBqAQ7E/Erge6tRJ4Gi2M8w5BUJMYr/hOUanThahfLOxy7s
- fVakSvsgPFIuK/PJ0eP+NSGAtUMIAv71U4qyzKi6hFWVSED7Kq8yiKQSpRhhA4osQAAO
- Vg7ui3T/ovAxksDER/Ba+sUHet5GRalx4KR4IRanIIQbE3SbQpGyu6P5Mb2a4f9GjCdf
- 9pzg1XLZBUpDzEWeetPAsfuxnT+buY1wlhdgOwQnDFVRrMTrtaloo4GSRQc7BwNM5Evy
- pZ9MHif1ZZmQjO0kNe2RImMv+xtK7ZPdfYHeOEDvhN7PCegF8gpUg0gGC5aVvgGNSndS
- 6Mjw==
-X-Gm-Message-State: AOJu0YzpKVSmthn5XVcUktgtcvpb2LZZANUmiMgnQBinZivQK63jkBAR
- 6OdCm04TN3DZ1Dqn55jFtBwY8lyS9h/hdEAFzwNGSjDMbM6SoKTxyNtn0mUTNRQx3qGSFVqSeh6
- rjbk=
-X-Google-Smtp-Source: AGHT+IHpMfMgrwKLPmHvlcucHWyfBNxIdmgz9vWuZJA7jWoWqP7dmSJQnRFNnu3qIC3QEKQ2Bfwp1w==
-X-Received: by 2002:a17:906:7ca:b0:a45:7946:8782 with SMTP id
- m10-20020a17090607ca00b00a4579468782mr1966860ejc.1.1710330905127; 
- Wed, 13 Mar 2024 04:55:05 -0700 (PDT)
-Received: from localhost.localdomain ([91.216.213.152])
- by smtp.gmail.com with ESMTPSA id
- o18-20020a17090608d200b00a461f6da4e3sm3402031eje.94.2024.03.13.04.55.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Mar 2024 04:55:04 -0700 (PDT)
-From: Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>
-To: u-boot@lists.denx.de
-Cc: Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Biju Das <biju.das.jz@bp.renesas.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Christophe Leroy <christophe.leroy@csgroup.eu>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] gpio: mcp230xx: Add support for models with SPI interface.
-Date: Wed, 13 Mar 2024 12:54:56 +0100
-Message-Id: <20240313115456.9251-1-piotr.wojtaszczyk@timesys.com>
-X-Mailer: git-send-email 2.25.1
+ dmarc=pass (p=reject dis=none) header.from=rad.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lev_o@rad.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=WolwbV79qlMv7G7u4orVlRtiBiJG+hkyok1dNxipOZdUoG9Yt8cKcjw6XNEURMSD6hEi4hdsB26bHux71pf6UwN857MzMkWL2gXirkj2BrrHJNzJ0igkRpVlXTS3DDruUMANTUMdlgFVMBlCZ5K2FsWBwpUJD7EQ6IcPG7sXbSEZECh0xrrOaftbxVpXkpcvkj0WSb/CKVgk00ye4hEjsvAOyFIUAYSawee3SGEY6iyUuTqCz5FndFRAY7xYvTMoHn8ETS7rZue/syalKregMoY4QSNRbXYurxoD2GPm3Uk718gafBsUq2S6eq8xYDqPtKxazhAaMXHSa4ILagaE1g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=HO9uNd1x7B+3VQ7RcSZJ63YPpI9TakvegFHj3zlfzqY=;
+ b=kz6XgR/Ezsf8oooqmPsfkbEfXIFEHOuphaei23YkkeZoAO/YW+zOV2T0Kuu90+yO4k5xYNu35e8r/NKBNAUqalEJxhFy2iZBdB14jGnwsAeg783zOyPqpNAD9BGjqy2QEPxioMqG2A2ezFNZv1o7/7aFNJiXuttpU0m3UXLsYG5iJm/e3JmnFYbFRuYgSKFKHQGSwaXoN0HBUgxHnd99eEqQhQzGDCGJ9e7Uk1Fk9k5VPYGQmTta0Fivlkh9suaeOd6lim3NTa+oqoNXu/1KpH8k8j/+31G1Za7/4Ka2NhPwZgFplZ8WUVR+GP+TlfpiMD+dZTt/bdXSl/MtS9xyeg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=rad.com; dmarc=pass action=none header.from=rad.com; dkim=pass
+ header.d=rad.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rad.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=HO9uNd1x7B+3VQ7RcSZJ63YPpI9TakvegFHj3zlfzqY=;
+ b=HlDPdk9vt2+QZP/XCvapwmjj59eUfBbrWYW3yzfMWRb1lysrX/JUFVbD75ZrRfyHwzdsZ/MlPHXwhJqIqqM/ZHl1CnjixODe1XRvk1d42IgvIhIbDroPwjYMkSEkcHlJUlUbLT65WKYoXnAHAWoFFKYY8DJ3nSKbQ+6y04SZS0A=
+Received: from VI1PR03MB4525.eurprd03.prod.outlook.com (2603:10a6:803:61::24)
+ by AM7PR03MB6231.eurprd03.prod.outlook.com (2603:10a6:20b:142::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7386.19; Wed, 13 Mar
+ 2024 16:35:31 +0000
+Received: from VI1PR03MB4525.eurprd03.prod.outlook.com
+ ([fe80::513d:ab6b:a738:c7a]) by VI1PR03MB4525.eurprd03.prod.outlook.com
+ ([fe80::513d:ab6b:a738:c7a%7]) with mapi id 15.20.7386.017; Wed, 13 Mar 2024
+ 16:35:31 +0000
+From: Lev Olshvang <lev_o@rad.com>
+To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+CC: Ariel Segal <ariel_s@rad.com>
+Subject: Help: Marvell Armada  3720 board  verified boot function as
+ non-verified 
+Thread-Topic: Help: Marvell Armada  3720 board  verified boot function as
+ non-verified 
+Thread-Index: Adp1ZDWf7HpqPU0sQ4qKLvYIkzOi8g==
+Date: Wed, 13 Mar 2024 16:35:30 +0000
+Message-ID: <VI1PR03MB45250FAF3DB469286B0B7C038D2A2@VI1PR03MB4525.eurprd03.prod.outlook.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: MSIP_Label_4d4ac586-bf97-4fe2-b352-319616e2445d_ActionId=12177d41-9453-4633-a60a-244875ef2e7c;
+ MSIP_Label_4d4ac586-bf97-4fe2-b352-319616e2445d_ContentBits=0;
+ MSIP_Label_4d4ac586-bf97-4fe2-b352-319616e2445d_Enabled=true;
+ MSIP_Label_4d4ac586-bf97-4fe2-b352-319616e2445d_Method=Standard;
+ MSIP_Label_4d4ac586-bf97-4fe2-b352-319616e2445d_Name=defa4170-0d19-0005-0004-bc88714345d2;
+ MSIP_Label_4d4ac586-bf97-4fe2-b352-319616e2445d_SetDate=2024-03-13T16:09:54Z;
+ MSIP_Label_4d4ac586-bf97-4fe2-b352-319616e2445d_SiteId=f9047108-cc2c-4e48-97a3-43fad1b3bf9d;
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=rad.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: VI1PR03MB4525:EE_|AM7PR03MB6231:EE_
+x-ms-office365-filtering-correlation-id: b45d2bcf-3391-47a8-130c-08dc437b992b
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: AIIPcAsv56a3mQeoF0Nj9Gwm4aHgdH1+l/eKOVGY5YXv3w9bVkJ6v56DvBhlP9yhCLwwcvsgSFJgr9T0IJXmRXxGklcsYdNa9DqJA7bT1H7+KbBoxMouAg10ZyDM6/95m7KrdXrqDjl0IiIPUeiyV9OlcLc6Lh70wCFR+KZnCeFTcwPMXmQOT37ySn1zwWHmXMJfrK+JdjMYUpvlbvtgTFvIWLtqi3PNVxydC1OZpVhcjJAVn7PCPR3oeTJA3loaxAJKTspR7Gjeh8tRERYG/A+WSOoLnAv2x4kI5vCKeGeMjoyxAvGjUTjj1Vjfra9Ipw9HxCh84Ut8BZHPP7hR6z8tw7tPo8mt2RuG5E2D3Fl8mFtpFzlSnPh/mMamxipaG7+EgXP1Ddn75ucUhfMFeWuKFQ6zG64SwitTJjLERYsoRP2BpYTndVcTfSeOuXQ5BJ3tdERiKy4eJvW9ulvNImMxvrzIorQQCH7GRinqMhYdkdZDTTdH3N2JSpfQQk6ZSNW6NiifXLBFoOeHb2hOwUOL8i4BzKTvfgo3VULnRTnaCbbMZqMVkn9R76fSjRaRbxG/RTNIyv/XoAqPJA3u54PbxM2FipXWCTLW/RT1lzZkYoMyurK9FNKRapdY+XVl+Uai4ny51i7RiuQLRPH5Jpda0xwq20SZUgjYcLzzDL0yy3adOiytyVjlnNzir1QolWgtPkW/Df60PP/YHALRAQ==
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:VI1PR03MB4525.eurprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(376005)(1800799015)(38070700009); DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?dzdJc010bnN5THNpbGdhNDZibHV6Yy9pd0pENW90MDVPNHhlM3ZCdjVWSE55?=
+ =?utf-8?B?WkllUm5XZ05odnY3WkdYd2xCRUlLS3ViRUMrcWhJc0ZuS08zZmpwWm4wSCtn?=
+ =?utf-8?B?YzNKb2JkTjQxL3FRNnFoYlViT3R2RG9Yd3ZvVnJXMmxEaE9xRWRjNzdkcFZa?=
+ =?utf-8?B?RGtKcGhuTzFpckNEN01McWNlTVBxTGNZaXMwdStRR1FvUFc3T0tuL0JsTzg3?=
+ =?utf-8?B?eFBkMmwzRWhDK1J1VVJHMmdMMjI4NlJnTFhXK1RENzhiVEZ4Z1JmS1psWjFh?=
+ =?utf-8?B?dzNsOTZoUjNFUUpyVmZ3eUQ3by9KQUxQekhaOWc2ejRxRDBaNkRHbXJqZlZV?=
+ =?utf-8?B?SmlZYUtvNGZlUHB6M1JhR0R2d01EK2pNNkI3V0RTbXcwYVJaamNEdTRFR2g3?=
+ =?utf-8?B?N0V4UmlEWWRSdU1BOGhNM0Ric2l0eVZ6Zk5zNGZSM2plSTRSWEI5NkNQK2tp?=
+ =?utf-8?B?bUpkRml3OHpneWUxL0ZWbjBDRW1jcU5zV2pQczJkMW14QU01RExMc3ZSbDVO?=
+ =?utf-8?B?N2dWcnByWjV1eWkzTzF3ME4rbUZPWkxtandNYWZkLzZYTEo3QThvSklEeXFL?=
+ =?utf-8?B?aXVFRmFIMzhaRk1Eb2c5UkI5M2JCZDZWd1RsWTA1cUJvYk9jQnFxMG5DU1FR?=
+ =?utf-8?B?bXh6cmRrZ05Ba2c0eXNrZmVSREg3ZHU3dzFDMHBUQ0NGcThENlhUdTQrT280?=
+ =?utf-8?B?UEhUS3RLWUJ2Z2IzTzVqaG1qTEp1d3Y0Nk16TG5ObGNjQ1JJSzBEV0lwNlpa?=
+ =?utf-8?B?L21vNjlUZXdLcEE1K1BQZVJ4eWFHL2s0Nm01V0J2MktQNnFnbDZhOUlKNzYw?=
+ =?utf-8?B?aVFSbGNMVjFUWGo3WEpNSyttOE04MWlrMHlzbHYyNG8yMjBZbGpRNVZ5Q3VO?=
+ =?utf-8?B?SG4yZXdqK1AxQkQ3TDRkKzlGYy9aK2NpTlZ2UlZobnNLdER1TVA0M0VBZ0xv?=
+ =?utf-8?B?U1psZ2twRmdQMWx2MFAybXBpVEVISkRmOVZkRUluVnFha0U4MEpyS2lPTzEv?=
+ =?utf-8?B?WjN2RDNxUmVpQnNrVTJJNGxGUGFaNzc5QmlrZWV5bVptUzRpN2ljaElDZVBn?=
+ =?utf-8?B?OXBNZEFvalZzQ0tKOVVrQ1YrNTdRdDFvTWFCSXYxM1cwVlJZTWZ4WlVURjFP?=
+ =?utf-8?B?UFdLK3pIaTgwWkRpTlo2bXV2d1EyT09JOEJrRWRZUEphYmhEWitPdDUzenNJ?=
+ =?utf-8?B?NklXK2l0MnRtOHE0NE96K2I0UDc1SHNZbjFmYzEzcDBNSFR2bkRTYjRQdUUv?=
+ =?utf-8?B?Vllsbmd3MEREZXB6NCt3S0hNamFtOFZ5dTNQUHZwQ2lQVzVuK1NCU2lYL1hw?=
+ =?utf-8?B?d3dRcE15T3JUNzdPR0oxSGQyeW8yZ2k1Q3o1aVpsNzEzTUtJcC8rb2JZays2?=
+ =?utf-8?B?UHNFUWtnTjNkc01YTmI1dlMvMGNKdkhyQWk3Tkp4RVd0YmlacUNHQS9HT3Vr?=
+ =?utf-8?B?OXltUDhBTnV2UUEyVlNBZFJtdTJ3RUs0cGc1blhIVkhlbWx1OTUrMnZLZUc3?=
+ =?utf-8?B?V3BKKzhNWEgwWEs1aEJUT1RYTThOSUptMDFTS3B3a3hYZENRcmUwMVhQM29K?=
+ =?utf-8?B?SERIVjRsdUM3WHBqb29IQStVSndRS1hzWXY1cnhJWUVqQ0kzWVJRNnEzclNu?=
+ =?utf-8?B?dC80THNraUcrUWpVbGpTUjdwN2FZRGpOblNuUnFmQktUQ2FteFZMd3EvYTU2?=
+ =?utf-8?B?SDZNcjRiU0JEK09FVjhBL2RNTDZmWVV3ZWwxamExTTE4UTQzOHZlcWpqMk1z?=
+ =?utf-8?B?UTBPbFNSMHhnRHIydkVQUXdDbmloYVFJZnFJRkxsbzN1MnhGSVBvZXBhU2Qy?=
+ =?utf-8?B?blVOL0NPRUllRWVYaHR6OHZSU3ZzRVJHTzhwZExVTGNSMHFrMWNzL2hnY041?=
+ =?utf-8?B?T0JJUUptRVVXdksxelJ0eFhJUGpyZk9OUUNNOS9mUDVsbVpPOWNVYlU4bmVL?=
+ =?utf-8?B?Q01SZUdNVFVyenRMQjMyVGczQ1Bpa0d2eVRDaEFScGc0NkNLeVdhUUFKMytM?=
+ =?utf-8?B?d3JEM3lOZ1UvaWZzbXRvK2lxS3NkN1BwUlBHN3pHdmhyZnZnVTVZQVFyajFV?=
+ =?utf-8?B?bUVtZ3c5R3dGZXdjZCtiUXkwR2pyRFQ4Z0xlUG5oQ3hFdU9zSVllcUxkWFZ2?=
+ =?utf-8?Q?7b1A=3D?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-OriginatorOrg: rad.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: VI1PR03MB4525.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b45d2bcf-3391-47a8-130c-08dc437b992b
+X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Mar 2024 16:35:30.9327 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: f9047108-cc2c-4e48-97a3-43fad1b3bf9d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: mtffgUJFAavqovlCI23CkGqxfdrQ1LmIlNO+o/ThnqSKWpqt+k/8f74D7mXg1V18
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR03MB6231
 X-Mailman-Approved-At: Wed, 13 Mar 2024 17:45:05 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,268 +149,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Signed-off-by: Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>
----
-
- drivers/gpio/Kconfig         |   3 +
- drivers/gpio/Makefile        |   2 +-
- drivers/gpio/mcp230xx_gpio.c | 144 ++++++++++++++++++++++++++++++++++-
- 3 files changed, 144 insertions(+), 5 deletions(-)
-
-diff --git a/drivers/gpio/Kconfig b/drivers/gpio/Kconfig
-index 2df3dc42d0..a7fb1eb3f4 100644
---- a/drivers/gpio/Kconfig
-+++ b/drivers/gpio/Kconfig
-@@ -256,6 +256,9 @@ config MCP230XX_GPIO
- 	   - MCP23008
- 	   - MCP23017
- 	   - MCP23018
-+	   - MCP23S08
-+	   - MCP23S17
-+	   - MCP23S18
- 
- config MSCC_SGPIO
- 	bool "Microsemi Serial GPIO driver"
-diff --git a/drivers/gpio/Makefile b/drivers/gpio/Makefile
-index da3da5da2b..90711702a6 100644
---- a/drivers/gpio/Makefile
-+++ b/drivers/gpio/Makefile
-@@ -23,7 +23,7 @@ obj-$(CONFIG_INTEL_ICH6_GPIO)	+= intel_ich6_gpio.o
- obj-$(CONFIG_INTEL_BROADWELL_GPIO)	+= intel_broadwell_gpio.o
- obj-$(CONFIG_IPROC_GPIO)	+= iproc_gpio.o
- obj-$(CONFIG_KIRKWOOD_GPIO)	+= kw_gpio.o
--obj-$(CONFIG_MCP230XX_GPIO)	+= mcp230xx_gpio.o
-+obj-$(CONFIG_$(SPL_TPL_)MCP230XX_GPIO)	+= mcp230xx_gpio.o
- obj-$(CONFIG_MXC_GPIO)	+= mxc_gpio.o
- obj-$(CONFIG_MXS_GPIO)	+= mxs_gpio.o
- obj-$(CONFIG_NPCM_GPIO)      	+= npcm_gpio.o
-diff --git a/drivers/gpio/mcp230xx_gpio.c b/drivers/gpio/mcp230xx_gpio.c
-index 9f02fd42b3..df99fde566 100644
---- a/drivers/gpio/mcp230xx_gpio.c
-+++ b/drivers/gpio/mcp230xx_gpio.c
-@@ -11,6 +11,7 @@
- #include <errno.h>
- #include <dm.h>
- #include <i2c.h>
-+#include <spi.h>
- #include <asm/gpio.h>
- #include <dm/device_compat.h>
- #include <dt-bindings/gpio/gpio.h>
-@@ -20,6 +21,13 @@ enum mcp230xx_type {
- 	MCP23008,
- 	MCP23017,
- 	MCP23018,
-+	MCP23S08,
-+	MCP23S17,
-+	MCP23S18,
-+};
-+
-+struct mcp230xx_info {
-+	uint dev_addr;
- };
- 
- #define MCP230XX_IODIR 0x00
-@@ -29,29 +37,136 @@ enum mcp230xx_type {
- 
- #define BANKSIZE 8
- 
-+#define MCP230XX_ADDR 0x20
-+
-+static int mcp230xx_read_spi(struct udevice *dev, uint reg_addr)
-+{
-+	struct mcp230xx_info *info = dev_get_plat(dev);
-+	uint dev_addr, value = 0;
-+	int ret;
-+
-+	/* set R/W bit for reading */
-+	dev_addr = (info->dev_addr << 1) | 1;
-+
-+	ret = dm_spi_claim_bus(dev);
-+	if (ret)
-+		return ret;
-+
-+	ret = dm_spi_xfer(dev, 0, NULL, NULL, SPI_XFER_BEGIN);
-+	if (ret < 0)
-+		goto fail;
-+	udelay(1);
-+
-+	ret = dm_spi_xfer(dev, 8, &dev_addr, NULL, 0);
-+	if (ret < 0)
-+		goto fail;
-+
-+	ret = dm_spi_xfer(dev, 8, &reg_addr, NULL, 0);
-+	if (ret < 0)
-+		goto fail;
-+
-+	ret = dm_spi_xfer(dev, 8, NULL, &value, 0);
-+
-+fail:
-+	dm_spi_xfer(dev, 0, NULL, NULL,  SPI_XFER_END);
-+	dm_spi_release_bus(dev);
-+	if (ret < 0)
-+		return ret;
-+	return value;
-+}
-+
- static int mcp230xx_read(struct udevice *dev, uint reg, uint offset)
- {
- 	struct gpio_dev_priv *uc_priv = dev_get_uclass_priv(dev);
- 	int bank = offset / BANKSIZE;
- 	int mask = 1 << (offset % BANKSIZE);
- 	int shift = (uc_priv->gpio_count / BANKSIZE) - 1;
--	int ret;
-+	int reg_addr = (reg << shift) | bank;
-+	int ret = 0;
-+
-+	switch (dev_get_driver_data(dev)) {
-+	case MCP23008:
-+	case MCP23017:
-+	case MCP23018:
-+		ret = dm_i2c_reg_read(dev, reg_addr);
-+		break;
-+	case MCP23S08:
-+	case MCP23S17:
-+	case MCP23S18:
-+		ret = mcp230xx_read_spi(dev, reg_addr);
-+		break;
-+	default:
-+		return -ENODEV;
-+	}
- 
--	ret = dm_i2c_reg_read(dev, (reg << shift) | bank);
- 	if (ret < 0)
- 		return ret;
- 
- 	return !!(ret & mask);
- }
- 
-+static int mcp230xx_clrset_spi(struct udevice *dev, uint reg_addr, uint clr, uint set)
-+{
-+	struct mcp230xx_info *info = dev_get_plat(dev);
-+	int dev_addr, value;
-+	int ret;
-+
-+	/* R/W bit = 0 for writing */
-+	dev_addr = (info->dev_addr << 1);
-+
-+	ret = mcp230xx_read_spi(dev, reg_addr);
-+	if (ret < 0)
-+		return ret;
-+
-+	value = ret;
-+	value &= ~clr;
-+	value |= set;
-+
-+	ret = dm_spi_claim_bus(dev);
-+	if (ret)
-+		return ret;
-+
-+	ret = dm_spi_xfer(dev, 0, NULL, NULL, SPI_XFER_BEGIN);
-+	if (ret < 0)
-+		goto fail;
-+	udelay(1);
-+
-+	ret = dm_spi_xfer(dev, 8, &dev_addr, NULL, 0);
-+	if (ret < 0)
-+		goto fail;
-+
-+	ret = dm_spi_xfer(dev, 8, &reg_addr, NULL, 0);
-+	if (ret < 0)
-+		goto fail;
-+
-+	ret = dm_spi_xfer(dev, 8, &value, NULL,  0);
-+
-+fail:
-+	dm_spi_xfer(dev, 0, NULL, NULL,  SPI_XFER_END);
-+	dm_spi_release_bus(dev);
-+	return ret;
-+}
-+
- static int mcp230xx_write(struct udevice *dev, uint reg, uint offset, bool val)
- {
- 	struct gpio_dev_priv *uc_priv = dev_get_uclass_priv(dev);
- 	int bank = offset / BANKSIZE;
- 	int mask = 1 << (offset % BANKSIZE);
- 	int shift = (uc_priv->gpio_count / BANKSIZE) - 1;
-+	int reg_addr = (reg << shift) | bank;
- 
--	return dm_i2c_reg_clrset(dev, (reg << shift) | bank, mask, val ? mask : 0);
-+	switch (dev_get_driver_data(dev)) {
-+	case MCP23008:
-+	case MCP23017:
-+	case MCP23018:
-+		return dm_i2c_reg_clrset(dev, reg_addr, mask, val ? mask : 0);
-+	case MCP23S08:
-+	case MCP23S17:
-+	case MCP23S18:
-+		return mcp230xx_clrset_spi(dev, reg_addr, mask, val ? mask : 0);
-+	default:
-+		return -ENODEV;
-+	}
- }
- 
- static int mcp230xx_get_value(struct udevice *dev, uint offset)
-@@ -181,22 +296,37 @@ static const struct dm_gpio_ops mcp230xx_ops = {
- static int mcp230xx_probe(struct udevice *dev)
- {
- 	struct gpio_dev_priv *uc_priv = dev_get_uclass_priv(dev);
--	char name[32], label[8], *str;
-+	struct mcp230xx_info *info = dev_get_plat(dev);
-+	char name[32], label[32], *str;
- 	int addr, gpio_count, size;
- 	const u8 *tmp;
- 
- 	switch (dev_get_driver_data(dev)) {
- 	case MCP23008:
-+	case MCP23S08:
- 		gpio_count = 8;
- 		break;
- 	case MCP23017:
- 	case MCP23018:
-+	case MCP23S17:
-+	case MCP23S18:
- 		gpio_count = 16;
- 		break;
- 	default:
- 		return -ENODEV;
- 	}
- 
-+	switch (dev_get_driver_data(dev)) {
-+	case MCP23S08:
-+	case MCP23S17:
-+	case MCP23S18:
-+		info->dev_addr = dev_read_u32_default(dev, "addr", MCP230XX_ADDR);
-+		break;
-+	default:
-+		info->dev_addr = 0;
-+		break;
-+	}
-+
- 	addr = dev_read_addr(dev);
- 	tmp = dev_read_prop(dev, "label", &size);
- 	if (tmp) {
-@@ -220,9 +350,14 @@ static int mcp230xx_probe(struct udevice *dev)
- }
- 
- static const struct udevice_id mcp230xx_ids[] = {
-+	/* i2c interface */
- 	{ .compatible = "microchip,mcp23008", .data = MCP23008, },
- 	{ .compatible = "microchip,mcp23017", .data = MCP23017, },
- 	{ .compatible = "microchip,mcp23018", .data = MCP23018, },
-+	/* spi interface */
-+	{ .compatible = "microchip,mcp23s08", .data = MCP23S08, },
-+	{ .compatible = "microchip,mcp23s17", .data = MCP23S17, },
-+	{ .compatible = "microchip,mcp23s18", .data = MCP23S18, },
- 	{ }
- };
- 
-@@ -231,5 +366,6 @@ U_BOOT_DRIVER(mcp230xx) = {
- 	.id		= UCLASS_GPIO,
- 	.ops		= &mcp230xx_ops,
- 	.probe		= mcp230xx_probe,
-+	.plat_auto	= sizeof(struct mcp230xx_info),
- 	.of_match	= mcp230xx_ids,
- };
--- 
-2.25.1
-
+SGkgTGlzdA0KT3VyIHByb2plY3QgYWxyZWFkeSBzZXZlcmFsIHllYXJzIGRldmVsb3AgZm9yIE1h
+cnZlbGwgQXJtYWRhICAzNzIwIGJvYXJkDQoNClJlY2VudGx5IHdlIGRlY2lkZWQgdG8gaW1wbGVt
+ZW50IHZlcmlmaWVkIGJvb3QuDQpJIG1vZGlmaWVkIHVib290IGNvbmZpZ3VyYXRpb24gdG8gc3Vw
+cG9ydCBGSVQgaW1hZ2UgZm9ybWF0IGFuZCB2ZXJpZnkgc2lnbmF0dXJlIGtlcm5lbCAuIEkgY29t
+cGlsZWQgdWJvb3QgYW5kIGFkZGVkIHB1YmxpYyBrZXkgdG8gdS1ib290LmJpbg0KSSBhbHNvIGNy
+ZWF0ZWQgc2lnbmVkIGtlcm5lbCBpbWFnZSBhbmQgZW5zdXJlZCB3aXRoIGZpdF9jaGVja19zaWdu
+ZWQgaXQgaW5kZWVkIHNpZ25lZC4NClRoZSBwcm9ibGVtIGlzIHRoYXQgTWFydmVsbCByZXF1aXJl
+ZCB0byB1c2UgQVRGIHRvb2xzIGFuZCBBMzcwMCB1dGlscyB0byBwcm9kdWNlIGZsYXNoIGltYWdl
+Lg0KSSBhcHBsaWVkIHNhbWUgY29tbWFuZCB0byBBVEYgdG8gbWFrZSBmbGFzaCBpbWFnZSBhcyB3
+ZSB1c2VkIGJlZm9yZSBmb3Igbm9uLXZlcmlmaWVkIGJlZm9yZS4NCkFURiBtYWRlIGZsYXNoIGlt
+YWdlIHdpdGggbm8gZ2xpdGNoLA0KQWZ0ZXIgdHJhbnNmZXJyaW5nIHJlc3VsdGluZyBmbGFzaCB0
+byBib2FyZCwgIHUtYm9vdCBjb250aW51ZXMgdG8gYm9vdCBub24tc2lnbmVkIGtlcm5lbCBhbmQg
+aW1pbmZvIGNvbW1hbmQgcmVwb3J0cyBlcnJvciDigJx1bmtub3duIGltYWdlIGZvcm1hdOKAnSBv
+biB0aGUgbG9hZGVkIHNpZ25lZCBrZXJuZWwsIGkuZS4gaXQgZG9lcyBub3QgcmVjb2duaXplIEZJ
+VCBwYXJ0aXRpb24uDQoNCkNhbiBhbnlvbmUgaGVscCBtZSBBU0FQPw0KUmVnYXJkcw0KTEVWDQo=
