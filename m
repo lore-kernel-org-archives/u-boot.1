@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1CC0C54E5D
-	for <u-boot@archiver.kernel.org>; Wed, 13 Mar 2024 00:53:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BA65C54E58
+	for <u-boot@archiver.kernel.org>; Wed, 13 Mar 2024 01:00:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E9B3687DE3;
-	Wed, 13 Mar 2024 01:53:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4E9208785F;
+	Wed, 13 Mar 2024 02:00:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GTa6JvjT";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WAzyPIxf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C74787F16; Wed, 13 Mar 2024 01:53:04 +0100 (CET)
-Received: from mail-pg1-x532.google.com (mail-pg1-x532.google.com
- [IPv6:2607:f8b0:4864:20::532])
+ id CEF0C87F3F; Wed, 13 Mar 2024 02:00:00 +0100 (CET)
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
+ [IPv6:2607:f8b0:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D24AC87C83
- for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 01:53:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C5BCC8785F
+ for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 01:59:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pg1-x532.google.com with SMTP id
- 41be03b00d2f7-58962bf3f89so1792275a12.0
- for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 17:53:01 -0700 (PDT)
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-1dd6dbcc622so15492745ad.1
+ for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 17:59:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1710291180; x=1710895980; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Tc/rkX+cHNlwLghCnE2uWp0QPX3H/EIMPGFUtOSUsp4=;
- b=GTa6JvjTew13Kg9JmiECQSBloZT2smA8DVdwkVGsdvPJlAci14vZeokREAF2gWiLLm
- eO/DmqIdC3vXWulpLLG3nnESoT6m3qb9IN7E24DOr9+HqB3/Fkri+YZ4gkoNi/n0i5A7
- 7oyfNPSm+81j3Wpx2RfI323ikFVrQ0yZDPOX4yLmtsZClMpX0DMt0QE/wdMy4YlFZ7fV
- 94MuPn2tzFwH/h6qKVErVfuCNLCkRfSfKP9/+29UFc5YoCqLD5gaXdgxKLgnOQF8PuAO
- CKX2ksNmPOA2xeZkrZB1F7oJEo8avPDiXFRy4dJAmNYmXJH2OJfyAYE9N3JBDh8AVGad
- EchA==
+ d=gmail.com; s=20230601; t=1710291596; x=1710896396; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=4gUkE5wU5+OFqfx98i5luTlq7X2MQhw+us4yFrDNO8A=;
+ b=WAzyPIxfG4PT+qEX9pCPK+QUYipfwrBlANqq36BzdRbm5IrBskDTprnMHxDrGOOm+Q
+ 77t6LZgyB9Z8nqJMuE/upfRvhrJRghRrtHpMg8ODVzL2KyNtzQNd6S2CGGHh1CeCMNaw
+ ffgtEdu2P49t8AoOiXHrMxuEwzStEHBO74BIJXcmraQj8AXeCdMlELUnnmCR+SVH3lu4
+ ygr2hI+gLBhjC+ySAfWIeMkWn8oySR8EukF3PpCqA+OLSnox4oqLsVtHdnTUrI4EUUsD
+ vb9LO+yFYPZQbAoaWDPjefHqka/RsQzmAN7nGK4hcNX8krNLDwkVKOnS9lrm5/8pgkfN
+ 0tPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710291180; x=1710895980;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Tc/rkX+cHNlwLghCnE2uWp0QPX3H/EIMPGFUtOSUsp4=;
- b=GWaWoI9x4V4DH968VKbVccxZFlgqGUVvnPtXt0J8a3vVwen09dgOgBRoa6YXvyIHSf
- f5xGBj6Oh9UTDLi23X/XIEYwsu31cnuliq/g5x/TRa6hFPg2e8/o3mrkfbSgRdL5cwdS
- 9t/e3mCWluMSnt1KtpBBw5MFwIPcR1bdkzZjtIWkRJUMs/orJgiIi418MQi2NEDiTCB4
- Bf/y95awhOS9KX8sL4g+W7VUe/pP8nVCeEjSP6o5EIr64l5Z071AEb57hqt9JCUFRzMY
- gm3v1AhZpeyKjVWCMM1SRGm/xedBzwWc9KveFv2ooNH9r510Dc4LZpS6VFi2jqtVHZX5
- Vn+w==
-X-Gm-Message-State: AOJu0YygjUX94EwKwpOBELLqf9leG/yyQzxUe0ukjNpAgs+jOkUCo4ak
- heVlnj6g+hfTN+NcJOyeyWLvE1koOFQg4IycgGHRmlm6RlO1GT4RLOZ5xxjMBBmQ66cXSYa+G5P
- JpsOrUAE6VwuqExptge9cce7W/Og=
-X-Google-Smtp-Source: AGHT+IGnEYbbNJojD66SzBzWtyqdyiwFXxhsuFKq6nCc9XZmb90Kqztj9x2v8NFvjiC8svLKxxMRInCF4jXOBH/kxek=
-X-Received: by 2002:a17:90a:a116:b0:29b:f75d:bf5d with SMTP id
- s22-20020a17090aa11600b0029bf75dbf5dmr244445pjp.4.1710291180127; Tue, 12 Mar
- 2024 17:53:00 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240312211628.32842-1-marex@denx.de>
-In-Reply-To: <20240312211628.32842-1-marex@denx.de>
+ d=1e100.net; s=20230601; t=1710291596; x=1710896396;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=4gUkE5wU5+OFqfx98i5luTlq7X2MQhw+us4yFrDNO8A=;
+ b=THsaObkKDb4+tghESAWl3GZdk1mt0BN/w/OTFaDZt8jHLdjTT5IO2Uada3MepKSo4v
+ dKlMh/+gSBUMX8cEaqizREPG4aPh2lahITDCYtp4i29X8VtkWJ87K9eEHPfP55kY8fgQ
+ jC2ueeRHdgnBBkLaPsZclPdLRLOZNPuYb9dbr+2WbsiLKhiTsD+BcEKgrHjlFaL9l6b9
+ 5qvom5c7lqaug76MuItGV3KlThwp+pTlwBw3GyfapQXKXDSvm2Y3dMAziwFD65Vs8cfE
+ 66gxJUkrirN1IQ3NvQE6Kdfj+2OWbn/HIjaVNx3cuaeUCovKqkUG/xWuyppofZ10c6+a
+ JzPQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVrjS2cXdaQt9QmK5INueK5TH6sOWO9P5NBKPsYe+VAuLfmdf+BK/uNUMvIt8L64OrNni2xtmT2+9soXDhM/TezYc3EFw==
+X-Gm-Message-State: AOJu0Yw/4B7fdc88CkFzEnV/E6exMNVX3lyztBpZJeN1mrNtrK4eOhVg
+ 8FzmEB/8nsHAG6O+PjULnVLBJIwCdYAY5q22zvbV3oxSmqRl5F2nZhFhBeal
+X-Google-Smtp-Source: AGHT+IHYQsevsl3Z3rJhnV+j+/7K87oCoRxA8Qg+iyI0zeBT/9BNAYVu5wUzj3giDZ0Zp4cjghUeow==
+X-Received: by 2002:a17:903:2289:b0:1dd:7d66:bfc0 with SMTP id
+ b9-20020a170903228900b001dd7d66bfc0mr11165941plh.4.1710291596002; 
+ Tue, 12 Mar 2024 17:59:56 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:6994:9b01:a251:4ea2])
+ by smtp.gmail.com with ESMTPSA id
+ z2-20020a170903018200b001dd7d00f7afsm7129284plg.18.2024.03.12.17.59.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 12 Mar 2024 17:59:55 -0700 (PDT)
 From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 12 Mar 2024 21:52:48 -0300
-Message-ID: <CAOMZO5BL0-1r63OiKLwgj1D2X1BHw4sN45g+QVeJ6vOSHrNFig@mail.gmail.com>
-Subject: Re: [PATCH] ARM: imx: stm32: Test whether ethernet node is enabled
- before reading MAC EEPROM on DHSOM
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
- Andreas Geisreiter <ageisreiter@dh-electronics.de>, 
- Christoph Niedermaier <cniedermaier@dh-electronics.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Stefano Babic <sbabic@denx.de>,
- u-boot@dh-electronics.com, uboot-stm32@st-md-mailman.stormreply.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: festevam@gmail.com
+Cc: marcel.ziswiler@toradex.com, hiago.franco@toradex.com,
+ francesco.dolcini@toradex.com, u-boot@lists.denx.de, peng.fan@nxp.com,
+ joao.goncalves@toradex.com
+Subject: [PATCH] apalis-imx8: Fix sc_misc_otp_fuse_read() error check
+Date: Tue, 12 Mar 2024 21:59:41 -0300
+Message-Id: <20240313005941.2654166-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,12 +92,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+Commit bfb3409d676f ("imx: toradex/apalis-imx8: correct SCU API usage")
+made an incorrect logic change in the error code check of
+sc_misc_otp_fuse_read():
 
-On Tue, Mar 12, 2024 at 6:16=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
+-       if (scierr == SC_ERR_NONE) {
++       if (scierr) {
+                /* QP has one A72 core disabled */
+                is_quadplus = ((val >> 4) & 0x3) != 0x0;
+        }
 
-> NOTE: It is probably best if this goes in via either imx or stm32 tree,
->       I can break the patch up, but that would introduce dependency
->       between two PRs in different trees. Let me know what you prefer.
+The other changes in this commit are correct.
 
-I can apply it to u-boot-imx next if Patrice and Patrick are OK.
+sc_misc_otp_fuse_read() returns 0 on a successful fuse read.
+
+This inversion causes board_mem_get_layout() to report incorrect RAM size.
+
+Go back the original error check logic to fix the problem.
+
+Fixes: bfb3409d676f ("imx: toradex/apalis-imx8: correct SCU API usage")
+Signed-off-by: Fabio Estevam <festevam@gmail.com>
+---
+ board/toradex/apalis-imx8/apalis-imx8.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/board/toradex/apalis-imx8/apalis-imx8.c b/board/toradex/apalis-imx8/apalis-imx8.c
+index 2483a63c6733..49719f2f5533 100644
+--- a/board/toradex/apalis-imx8/apalis-imx8.c
++++ b/board/toradex/apalis-imx8/apalis-imx8.c
+@@ -133,7 +133,7 @@ void board_mem_get_layout(u64 *phys_sdram_1_start,
+ 	struct tdx_user_fuses tdxramfuses;
+ 	int scierr = sc_misc_otp_fuse_read(-1, 6, &val);
+ 
+-	if (scierr) {
++	if (!scierr) {
+ 		/* QP has one A72 core disabled */
+ 		is_quadplus = ((val >> 4) & 0x3) != 0x0;
+ 	}
+-- 
+2.34.1
+
