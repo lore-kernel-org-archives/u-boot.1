@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 373EAC54791
-	for <u-boot@archiver.kernel.org>; Wed, 13 Mar 2024 06:45:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2720EC54E58
+	for <u-boot@archiver.kernel.org>; Wed, 13 Mar 2024 06:46:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B4A6087E7F;
-	Wed, 13 Mar 2024 07:45:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9B0A287DE3;
+	Wed, 13 Mar 2024 07:46:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RZhWv16j";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="q8HPP4YZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 70AA287653; Wed, 13 Mar 2024 07:45:24 +0100 (CET)
-Received: from mail-vs1-xe2b.google.com (mail-vs1-xe2b.google.com
- [IPv6:2607:f8b0:4864:20::e2b])
+ id 1447A87653; Wed, 13 Mar 2024 07:46:20 +0100 (CET)
+Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
+ [IPv6:2a00:1450:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B0B1687E91
- for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 07:45:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BFA6683334
+ for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 07:46:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vs1-xe2b.google.com with SMTP id
- ada2fe7eead31-472d1912f80so1614787137.3
- for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 23:45:19 -0700 (PDT)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-lj1-x234.google.com with SMTP id
+ 38308e7fff4ca-2d28387db09so70403611fa.0
+ for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 23:46:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710312318; x=1710917118; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=KPeSW+6V7uOiaYGQlJf/b3FqOJnm+oy1/p6cDsUoEMA=;
- b=RZhWv16ju8Z9NmVHolovtR3JkaFkd73FPr8wMwtThrzcBn81JppozYJjtvm3bMRXwG
- 5+5JAg3Oa8gXat/JDaL2LO6xTtnKl8mP4q2RZ6k20azPmKeBMfeIPL4Ky3sNKwVB3Efc
- mxO9T7ZprAHsZcenXOfCAqOljLTFkMOs4QLvTbtn0o/9UFCRQFnAUdsPK/wslwZL05gp
- hxCyj19ISHYZNOiUG5o7NVNfau6WRzHIFjLPvKE+tDx5ePxpyIJgRu/+l/K1uommiXvj
- ZMEq3uzgwe2Fsj7xLEaaESgGs7T4naI9osackRhugqI0Qi9BBcfRWMsEwzg4W8YwdHC2
- G03g==
+ d=amarulasolutions.com; s=google; t=1710312376; x=1710917176;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=1j9XpSroeNeXpMLmOXDUfo1No5f7/bROcqpX7JdVmIY=;
+ b=q8HPP4YZLUevszzIqEJeu3vKFAvh2ClNKu+aaf6YW5KC3t4nDNZWnoaeVjMnu3Ek26
+ zad/HX2JaZ/cY0TUW2YUH0F4P0MmxNazHs+ip1UwxxAbJckSLAU05HXE9dnkzIxNwLbk
+ sIDwsPB25wSIuvcmwgXMrFSvzC6HF/khJRw3Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710312318; x=1710917118;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=KPeSW+6V7uOiaYGQlJf/b3FqOJnm+oy1/p6cDsUoEMA=;
- b=FuXPZDoSqdAFcBMEfSYVSKiEFkjXiBdOZnywmgoL12LWHst3CU8zXGTwGnAj3vxDtT
- a/6EqP6SKm+M2cxGkqX2CDKnvFsdpuCanVD3BiFZkyPzltp4uiaL3LI3Z20ztDNB7tkv
- b74fMv57i8f8LXAVWg1+Gzi5LX+0xAXakY0X+tmXxIwjNFiDH8j9UQkyTdKkKeCrq9UW
- CXGe7BfWqqM0fhjNn84yTwzekvZW0ebx6luuU7ZBIkVQdLWBEtN/kKbqemdi099LQLDf
- E35SmCobYlZjnyqQBSyW17o8IOsngwXFSvsOFVG1+w9t0THXacH9EHbbnI5r+P4tC3pv
- rBkg==
-X-Gm-Message-State: AOJu0YwPiV1FOByEEwwbxDCAwxvwU1gbn04y1p4nalNKYP5DiUS59BOT
- IdNt7d6mzdadbgI0JKS5tsOpJAZA4YNNH736Y8me5jM+YovNfKg4nVTUnbWzuVhADXI1ZR7f83i
- RrICyB+0I7dZ9S2qu/GMZDfAPAtWySfPn3DBjGw==
-X-Google-Smtp-Source: AGHT+IFejaCxTTDJ5U3eKpJfBSHSUPMvgRGK4dFYlXkapSu5CHCQ4TGbvx+8BxEEvAQMabqGLE3YLvPb8wR4k+FT+j8=
-X-Received: by 2002:a67:ce8b:0:b0:474:cf76:ec14 with SMTP id
- c11-20020a67ce8b000000b00474cf76ec14mr853239vse.15.1710312318420; Tue, 12 Mar
- 2024 23:45:18 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1710312376; x=1710917176;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=1j9XpSroeNeXpMLmOXDUfo1No5f7/bROcqpX7JdVmIY=;
+ b=glq1PMUr7MYvxIvCJPE4aDs3FuYYr+kXVzQLBodOxIoZf4txhPGV16UgqqmXUcvHS7
+ WnDycEzEmn1U+ePFcluUc4NYYK29AptHbldDpraBF3iSWq2jyOpgafczWdcp1U1/rTAm
+ fOyS/lX5kasLs2nyV5jXi8cSlVn0BlBgvDv8nM3eX9WdXPbTnNfLAllXcIm/dq5IStYO
+ w4aiZRfjXGyrbO8mqBpGAFgYA1e+yNTJ7NRKgFL4V/HTSEgimDmzZuYfoeJ1jD08bIYN
+ LwMn56xOUMNTNIz4H2MBZBZmif1jJ+rPNYnlugbw/BXPzNGPrnxucC+y8yAkV27iMNMG
+ uT9Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU6k4raKIFxn/RFjd1uvH0qajAfu6zZN+AkEa5BG7XKjfgTrkJy3imExJyPONFV6JzsmnrQohhjHLuKOgCac3k4O0mYMw==
+X-Gm-Message-State: AOJu0Yw0LcYift9y6v7RAGujS0dAPzAge/Q99UbU2BLOLq+EJVIc0R+A
+ mUHPcB7E5zZeDFwEP/b3PI1FxUvCd3LGpZJBMBEkBm6l4X/+AMEoI6D528APzOHoBxP+lke8cqL
+ uqACgXJ2yBKyO1OsHF73G/HA2KFXlY8KLP2ZqUA==
+X-Google-Smtp-Source: AGHT+IExEaN6FGNQKDQy6ELiN5qT7manzHXJH0JaZKZZAFr0iiVBzDn/Jl9sp5a6qbMl7kCd170LRZiE3qOOBpht7+M=
+X-Received: by 2002:a2e:740a:0:b0:2d4:5f4f:8ff0 with SMTP id
+ p10-20020a2e740a000000b002d45f4f8ff0mr1995077ljc.1.1710312375926; Tue, 12 Mar
+ 2024 23:46:15 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240312070338.86127-1-sumit.garg@linaro.org>
- <CALeDE9MkbeTOBgArDH-+VxdO7D2iAAb1Mh+gCb6tnm2vg6LOFw@mail.gmail.com>
- <CAFA6WYMmbL52TF-2_JCb-uhbM87Ytdq1nTnr50Z9Ojg9O49+iQ@mail.gmail.com>
- <CALeDE9OmQj0L0HkYUsNVBpDjP6dTyKWRdtT+hqRSojbD0mGJrw@mail.gmail.com>
-In-Reply-To: <CALeDE9OmQj0L0HkYUsNVBpDjP6dTyKWRdtT+hqRSojbD0mGJrw@mail.gmail.com>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Wed, 13 Mar 2024 12:15:07 +0530
-Message-ID: <CAFA6WYN5iJ=g0EORtgMnge0FmgYHRWC-r2nfEeuZiqsu6AVfYg@mail.gmail.com>
-Subject: Re: [PATCH v3 00/11] imx8mp: Enable PCIe/NVMe support
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, tharvey@gateworks.com, 
- marcel.ziswiler@toradex.com, francesco@dolcini.it, lukma@denx.de, 
- seanga2@gmail.com, jh80.chung@samsung.com, sjg@chromium.org, festevam@denx.de, 
- andrejs.cainikovs@toradex.com, peng.fan@nxp.com, aford173@gmail.com, 
- marex@denx.de, ilias.apalodimas@linaro.org, sahaj.sarup@linaro.org, 
- fathi.boudra@linaro.org, remi.duraffort@linaro.org, 
- daniel.thompson@linaro.org
+References: <20231130112405.92196-1-avkrasnov@salutedevices.com>
+ <fa9fc4cc-892c-7c11-877b-330bf173f3bd@salutedevices.com>
+ <f79d88f4-0d2e-1d78-065a-5a1f2f2deacf@salutedevices.com>
+ <c150440e-191d-bce8-3b99-401186be507f@salutedevices.com>
+ <180478dc-23ec-952d-e1ae-6f16d98bd16c@salutedevices.com>
+ <969ce8dc-3726-cf66-3241-5eb06f9cb85f@salutedevices.com>
+In-Reply-To: <969ce8dc-3726-cf66-3241-5eb06f9cb85f@salutedevices.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Wed, 13 Mar 2024 07:46:04 +0100
+Message-ID: <CAOf5uw=2hicHHOP1caASJoqmOpZ9vvE3ZMnVQqXxQ0eqbm-CMg@mail.gmail.com>
+Subject: Re: [PATCH v1] mtd: rawnand: macronix: OTP access for MX30LFxG18AC
+To: Arseniy Krasnov <avkrasnov@salutedevices.com>
+Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>, u-boot@lists.denx.de,
+ kernel@sberdevices.ru, oxffffaa@gmail.com, 
+ Miquel Raynal <miquel.raynal@bootlin.com>, Jaime Liao <jaimeliao.tw@gmail.com>,
+ Jaime Liao <jaimeliao@mxic.com.tw>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,45 +95,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 12 Mar 2024 at 15:30, Peter Robinson <pbrobinson@gmail.com> wrote:
->
-> On Tue, 12 Mar 2024 at 09:55, Sumit Garg <sumit.garg@linaro.org> wrote:
-> >
-> > Hi Peter,
-> >
-> > On Tue, 12 Mar 2024 at 15:13, Peter Robinson <pbrobinson@gmail.com> wrote:
-> > >
-> > > Hi Sumit,
-> > >
-> > > > pcie_imx doesn't seem to share any useful code for iMX8MP SoC and it is
-> > > > rather tied to quite old port of pcie_designware driver from Linux which
-> > > > suffices only iMX6 specific needs.
-> > > >
-> > > > But currently we have the common DWC specific bits which alligns pretty
-> > > > well with DW PCIe controller on iMX8MP SoC. So lets reuse those common
-> > > > bits instead as a new driver for iMX8 SoCs. It should be fairly easy to
-> > > > add support for other iMX8 variants to this driver.
-> > >
-> > > The upstream Linux driver is moving towards a single driver [1] for
-> > > imx6 -> imx9, would it be possible to add support for all generations
-> > > to this driver and then remove the old driver?
-> >
-> > Sorry but that's not in scope of this patch-set and neither do I
-> > possess boards with all the imx* SoC variants.
-> >
-> > > That would allow this
-> > > single modern driver and removing the old imx6 specific driver.
-> >
-> > Folks interested in this can build up on this patch-set and port other
-> > imx* variants and then we could have a single modern driver.
->
-> That's fine but I think you  should document that this can be future
-> because the case is that these devices are clearly related.
->
+Hi  Dario
 
-Sure, I suppose it deserves a header comment for the legacy pcie_imx.c
-driver. If I don't see any other comments for this series then I can
-make that as a follow-up patch. Otherwise I will fold it into this
-series.
+Can apply this series and put in CI?
 
--Sumit
+Michael
+
+On Wed, Mar 13, 2024 at 7:43=E2=80=AFAM Arseniy Krasnov
+<avkrasnov@salutedevices.com> wrote:
+>
+> Sorry, please ping
+>
+> Thanks, Arseniy
+>
+> On 11.02.2024 02:16, Arseniy Krasnov wrote:
+> > Sorry, pls ping
+> >
+> > Thanks, Arseniy
+> >
+> > On 08.01.2024 21:33, Arseniy Krasnov wrote:
+> >> Sorry, pls ping
+> >>
+> >> Thanks, Arseniy
+
+
+
+--=20
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
+
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
