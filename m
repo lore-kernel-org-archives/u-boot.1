@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3289C54791
-	for <u-boot@archiver.kernel.org>; Wed, 13 Mar 2024 16:24:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5A89C54E66
+	for <u-boot@archiver.kernel.org>; Wed, 13 Mar 2024 16:24:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C92AF87EB4;
-	Wed, 13 Mar 2024 17:23:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E977387F19;
+	Wed, 13 Mar 2024 17:23:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cEoMUBk7";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Qm3ygV5f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B51787EB4; Wed, 13 Mar 2024 17:23:52 +0100 (CET)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id 9B99F87EA8; Wed, 13 Mar 2024 17:23:57 +0100 (CET)
+Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
+ [IPv6:2a00:1450:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 47D038272A
- for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 17:23:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 97CEA87F07
+ for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 17:23:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-5685d46b199so1803953a12.3
- for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 09:23:50 -0700 (PDT)
+Received: by mail-lf1-x12c.google.com with SMTP id
+ 2adb3069b0e04-513c8530daeso40616e87.2
+ for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 09:23:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710347030; x=1710951830; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1710347035; x=1710951835; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=H0FkfxvHNzcPjTU84NdyO0g39dk0XK67ZiNTuPD1TZo=;
- b=cEoMUBk7As5Ffv3YGHtlnNDiTbD0KiDUAyV0kCT6dFlBb25K4jQ1LJOuzr77F4oSGg
- WqrFt3tpTtBSpLB3vehlSrf6EcCDBX175GY3owIMhpbqSjwVe/5DEdFQGYqF44aEIXBb
- lADdIo0zmK9WegC+uo0TXUaLWBfXlZTFiR8CVEn1KDacWZ422HLUG23+UeGZAGTa4q21
- ipKEz6Vv/SY9RQuH0JsGaKE4Cyegor4xSD5Xc9b+1eEjM+p1Uj0q80GP30YrBRqJ5AFV
- OlneGKphWvU8zRPRcVXi7ZLnrNGsEmIR5teMOG8AVWUACE3Hd1fFNFsoGRaCOX/EUxME
- pSRw==
+ bh=bjKrvGkOI7iiwRM0lPDhhs6RRG3TK0w+7djk6/pkbKo=;
+ b=Qm3ygV5fkeUunLp8TNtPHmzBjlJfJw/4D5NV4bE0wUpwFBLqtS0GtbSLEISrO+lnfW
+ LUC/bXbhULhmsNxDEFpSgcknRXnhK8AJEI+itFNU4K2HkOZPfhQyvGzEmdYYKBv51N6E
+ O95XKhh0FujRKLyYT2GxJDYX8xkObM+A1Z6IIPR1GQDANQd+eRmC6m+eRDzqVya42Hmg
+ GEhRzlP6aIAWRtTxCkXIcaMuKnJNCDVok2kjFGNcwm7XMfiRwAbLPSwPwogiPORj2usp
+ u1N6PD4ON0PbjuN3f1l3860Pky2tWDftzTKjUEQvg9wgGkfoFQlZ6ihYmcZ6r+y37iH+
+ jUSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710347030; x=1710951830;
+ d=1e100.net; s=20230601; t=1710347035; x=1710951835;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=H0FkfxvHNzcPjTU84NdyO0g39dk0XK67ZiNTuPD1TZo=;
- b=KTqIy6gcDxYsBaqF0bVl243XLjRFJmFAxKlkBkRCfHOrv5moS1vGkw4+XVtrd2HevL
- 2Ov2a9SzgV4kfyOw5D5IKUPs8OCSwOz01HP+8E4GZCYrhiHqJFJBOLdfZWfJ3wNmmaWP
- BwJixV8wnfzds02OOpiCaEVjEY5oaiaHtV9CArQwKaeapHu7s+YnY2sDGrw3vozdcKVB
- g4U68sdR8/ofrC6h54qqPR9/zG99PPmTuvYbOoF9HTtRTaBhGUwmym5z9O5R//GlvZ85
- KviSgzAcvgbnDIgilmxHB/6mPa2wKBuBJzDbpw5rJ5H14kSv6Wxku0CQk2g4Vu7PHnJf
- 6xOQ==
-X-Gm-Message-State: AOJu0YxEKt3s38tNh9V507NGeyDBxiTYUtwIhp2wISaeb1lzd2aYYN30
- lnSKOPmO+jxSqa59knCiosTZ8qE0R9M3KOqXjogTR2o9Vnl6psPDg6j6lBI/RUkUTD+uK2nvQnC
- c
-X-Google-Smtp-Source: AGHT+IE9i8FY+v7UZ80DbR6Bgx1s6QYrVUCI+TEVHbtaurpN8coIK3NmkEwDPWng0JaQMRQp5Op9vA==
-X-Received: by 2002:a17:907:daa:b0:a46:35c9:f239 with SMTP id
- go42-20020a1709070daa00b00a4635c9f239mr6432758ejc.72.1710347029732; 
- Wed, 13 Mar 2024 09:23:49 -0700 (PDT)
+ bh=bjKrvGkOI7iiwRM0lPDhhs6RRG3TK0w+7djk6/pkbKo=;
+ b=kofjsN9OegjK+PcGXGxdtSGQjggTs6K0VvuYyg0oCd0o9ddCp9RQhkxa65En4u9M14
+ Uuo+9MI53HGzyt/MWuvosHcl/9xoJg4vWHoUTO8uOxlJM/C5FpW6JoQuczN6aO2tulP+
+ bytnXI1gJNuqI4IbzgS3Cp7tr+jpBU0FeCkFFwop0JYy4d4JaSfDoOeq8Uax8/IIQ0Fl
+ a98F0NYbW1WhP5O3LLcFhVIumV2wlpMjng9h9Id1oAoIDHqSQNm8lHq2EkDK/CtJeOCV
+ Eck9sU41rFPAznE/H3Ji414PtBKIohJUFwidN8KkXXLFgEwOYfQdS6T772ryiKgkTbVU
+ M8xg==
+X-Gm-Message-State: AOJu0Yzb7D5shxOFyDvuE9X5W2QkzbTEWTecU9rtADUgFSV7BWQt1Lf3
+ Sw/0VmdkFYH+wwUzM4YjwsnQJoKzhLPUadcQSk38Z7rzv+RG182jsHZh1U4b2tvZR+iXGg/WlKS
+ +9tM=
+X-Google-Smtp-Source: AGHT+IFUTRp8yhTERs6WAIt16yT0R2rfAIXxZrF5NJ2bN6+fF5tbeW8MF7DCHRjHv8p5qDSIbQJP3w==
+X-Received: by 2002:ac2:4d81:0:b0:513:80cd:e80b with SMTP id
+ g1-20020ac24d81000000b0051380cde80bmr8927830lfe.29.1710347034685; 
+ Wed, 13 Mar 2024 09:23:54 -0700 (PDT)
 Received: from hades.. (ppp046103107123.access.hol.gr. [46.103.107.123])
  by smtp.gmail.com with ESMTPSA id
- bh21-20020a170906a0d500b00a44efa48c24sm4998860ejb.117.2024.03.13.09.23.47
+ bh21-20020a170906a0d500b00a44efa48c24sm4998860ejb.117.2024.03.13.09.23.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Mar 2024 09:23:49 -0700 (PDT)
+ Wed, 13 Mar 2024 09:23:54 -0700 (PDT)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: u-boot@lists.denx.de,
 	trini@konsulko.com,
@@ -81,10 +81,9 @@ Cc: caleb.connolly@linaro.org, sumit.garg@linaro.org,
  Yegor Yefremov <yegorslists@googlemail.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Shiji Yang <yangshiji66@outlook.com>, Bin Meng <bmeng@tinylab.org>
-Subject: [PATCH v3 4/7] arm: clean up v7 and v8 linker scripts for
- __rel_dyn_start/end
-Date: Wed, 13 Mar 2024 18:23:18 +0200
-Message-Id: <20240313162324.2117909-5-ilias.apalodimas@linaro.org>
+Subject: [PATCH v3 5/7] arm: fix __efi_runtime_start/end definitions
+Date: Wed, 13 Mar 2024 18:23:19 +0200
+Message-Id: <20240313162324.2117909-6-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.37.2
 In-Reply-To: <20240313162324.2117909-1-ilias.apalodimas@linaro.org>
 References: <20240313162324.2117909-1-ilias.apalodimas@linaro.org>
@@ -106,18 +105,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-commit 47bd65ef057f ("arm: make __rel_dyn_{start, end} compiler-generated")
-were moving the __rel_dyn_start/end on c generated variables that were
-injected in their own sections. The reason was that we needed relative
-relocations for position independent code and linker bugs back then
-prevented us from doing so [0].
+__efi_runtime_start/end are defined as c variables for arm7 only in
+order to force the compiler emit relative references. However, defining
+those within a section definition will do the same thing since [0].
+On top of that the v8 linker scripts define it as a symbol.
 
-However, the linker documentation pages states that symbols that are
-defined within a section definition will create a relocatable
-type with the value being a fixed offset from the base of a section [1].
+So let's remove the special sections from the linker scripts, the
+variable definitions from sections.c and define them as a symbols within
+the correct section.
 
 [0] binutils commit 6b3b0ab89663 ("Make linker assigned symbol dynamic only for shared object")
-[1] https://sourceware.org/binutils/docs/ld/Expression-Section.html
 
 Suggested-by: Sam Edwards <CFSworks@gmail.com>
 Reviewed-by: Sam Edwards <CFSworks@gmail.com>
@@ -125,105 +122,87 @@ Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Tested-by: Sam Edwards <CFSworks@gmail.com> # Binary output identical
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- arch/arm/cpu/armv8/u-boot.lds | 16 +++-------------
- arch/arm/cpu/u-boot.lds       | 14 +++-----------
- arch/arm/lib/sections.c       |  2 --
- arch/arm/mach-zynq/u-boot.lds | 14 +++-----------
- 4 files changed, 9 insertions(+), 37 deletions(-)
+ arch/arm/cpu/u-boot.lds        | 12 +++---------
+ arch/arm/lib/sections.c        |  2 --
+ arch/arm/mach-zynq/u-boot.lds  | 12 +++---------
+ include/asm-generic/sections.h |  1 +
+ 4 files changed, 7 insertions(+), 20 deletions(-)
 
-diff --git a/arch/arm/cpu/armv8/u-boot.lds b/arch/arm/cpu/armv8/u-boot.lds
-index 8561e1b3142e..5ba54dcedf24 100644
---- a/arch/arm/cpu/armv8/u-boot.lds
-+++ b/arch/arm/cpu/armv8/u-boot.lds
-@@ -129,20 +129,10 @@ SECTIONS
- 		*(.__image_copy_end)
- 	}
- 
--	. = ALIGN(8);
--
--	.rel_dyn_start :
--	{
--		*(.__rel_dyn_start)
--	}
--
--	.rela.dyn : {
-+	.rela.dyn ALIGN(8) : {
-+		__rel_dyn_start = .;
- 		*(.rela*)
--	}
--
--	.rel_dyn_end :
--	{
--		*(.__rel_dyn_end)
-+		__rel_dyn_end = .;
- 	}
- 
- 	_end = .;
 diff --git a/arch/arm/cpu/u-boot.lds b/arch/arm/cpu/u-boot.lds
-index f19f2812ee91..0682d34207fa 100644
+index 0682d34207fa..6813d8aeb838 100644
 --- a/arch/arm/cpu/u-boot.lds
 +++ b/arch/arm/cpu/u-boot.lds
-@@ -166,18 +166,10 @@ SECTIONS
- 		*(.__image_copy_end)
+@@ -43,18 +43,12 @@ SECTIONS
  	}
  
--	.rel_dyn_start :
--	{
--		*(.__rel_dyn_start)
+ 	/* This needs to come before *(.text*) */
+-	.__efi_runtime_start : {
+-		*(.__efi_runtime_start)
 -	}
 -
--	.rel.dyn : {
-+	.rel.dyn ALIGN(4) : {
-+		__rel_dyn_start = .;
- 		*(.rel*)
+-	.efi_runtime : {
++	.efi_runtime ALIGN(4) : {
++		__efi_runtime_start = .;
+ 		*(.text.efi_runtime*)
+ 		*(.rodata.efi_runtime*)
+ 		*(.data.efi_runtime*)
 -	}
 -
--	.rel_dyn_end :
--	{
--		*(.__rel_dyn_end)
-+		__rel_dyn_end = .;
+-	.__efi_runtime_stop : {
+-		*(.__efi_runtime_stop)
++		__efi_runtime_stop = .;
  	}
  
- 	.end :
+ 	.text_rest :
 diff --git a/arch/arm/lib/sections.c b/arch/arm/lib/sections.c
-index ddfde52163fc..1ee3dd3667ba 100644
+index 1ee3dd3667ba..a4d4202e99f5 100644
 --- a/arch/arm/lib/sections.c
 +++ b/arch/arm/lib/sections.c
-@@ -21,8 +21,6 @@
- 
- char __image_copy_start[0] __section(".__image_copy_start");
- char __image_copy_end[0] __section(".__image_copy_end");
--char __rel_dyn_start[0] __section(".__rel_dyn_start");
--char __rel_dyn_end[0] __section(".__rel_dyn_end");
- char __secure_start[0] __section(".__secure_start");
+@@ -25,6 +25,4 @@ char __secure_start[0] __section(".__secure_start");
  char __secure_end[0] __section(".__secure_end");
  char __secure_stack_start[0] __section(".__secure_stack_start");
+ char __secure_stack_end[0] __section(".__secure_stack_end");
+-char __efi_runtime_start[0] __section(".__efi_runtime_start");
+-char __efi_runtime_stop[0] __section(".__efi_runtime_stop");
+ char _end[0] __section(".__end");
 diff --git a/arch/arm/mach-zynq/u-boot.lds b/arch/arm/mach-zynq/u-boot.lds
-index bb0e0ceb32ec..3b1f0d349356 100644
+index 3b1f0d349356..9eac7de0dcbd 100644
 --- a/arch/arm/mach-zynq/u-boot.lds
 +++ b/arch/arm/mach-zynq/u-boot.lds
-@@ -71,18 +71,10 @@ SECTIONS
- 		*(.__image_copy_end)
+@@ -22,18 +22,12 @@ SECTIONS
  	}
  
--	.rel_dyn_start :
--	{
--		*(.__rel_dyn_start)
+ 	/* This needs to come before *(.text*) */
+-	.__efi_runtime_start : {
+-		*(.__efi_runtime_start)
 -	}
 -
--	.rel.dyn : {
-+	.rel.dyn ALIGN(8) : {
-+		__rel_dyn_start = .;
- 		*(.rel*)
+-	.efi_runtime : {
++	.efi_runtime ALIGN(4) : {
++		__efi_runtime_start = .;
+ 		*(.text.efi_runtime*)
+ 		*(.rodata.efi_runtime*)
+ 		*(.data.efi_runtime*)
 -	}
 -
--	.rel_dyn_end :
--	{
--		*(.__rel_dyn_end)
-+		__rel_dyn_end = .;
+-	.__efi_runtime_stop : {
+-		*(.__efi_runtime_stop)
++		__efi_runtime_stop = .;
  	}
  
- 	.end :
+ 	.text_rest :
+diff --git a/include/asm-generic/sections.h b/include/asm-generic/sections.h
+index 60949200dd93..b6bca53db10d 100644
+--- a/include/asm-generic/sections.h
++++ b/include/asm-generic/sections.h
+@@ -35,6 +35,7 @@ extern char __priv_data_start[], __priv_data_end[];
+ extern char __ctors_start[], __ctors_end[];
+ 
+ extern char __efi_runtime_rel_start[], __efi_runtime_rel_stop[];
++extern char __efi_runtime_start[], __efi_runtime_stop[];
+ 
+ /* function descriptor handling (if any).  Override
+  * in asm/sections.h */
 -- 
 2.37.2
 
