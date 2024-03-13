@@ -4,72 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 985E1C54791
-	for <u-boot@archiver.kernel.org>; Wed, 13 Mar 2024 04:39:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 619E0C54791
+	for <u-boot@archiver.kernel.org>; Wed, 13 Mar 2024 05:38:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A180D87DDA;
-	Wed, 13 Mar 2024 05:39:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
+	by phobos.denx.de (Postfix) with ESMTP id 83B7887DAF;
+	Wed, 13 Mar 2024 06:38:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="u9rI0Pdu";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="N2zIIaGJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F07887DF1; Wed, 13 Mar 2024 05:39:07 +0100 (CET)
-Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 78AFC87DCC; Wed, 13 Mar 2024 06:38:35 +0100 (CET)
+Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
+ [IPv6:2a00:1450:4864:20::229])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 81CCC87DCA
- for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 05:38:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=mediatek.com
+ by phobos.denx.de (Postfix) with ESMTPS id 5BFBF8753A
+ for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 06:38:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: 0b5c0752e0eb11eeb8927bc1f75efef4-20240313
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
- s=dk; 
- h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From;
- bh=nhNv5vHyguX+QdtUL5C6UOnj7jA5gT6aZ4px2nOu/co=; 
- b=u9rI0PduT/xBiRDj++aNQv3k7ntoXQd2LTnUxU8aKGlE3KOddT6p+DSf9FPrO6oEHoPULbHt/OYDs18aQAbANJG2bnEIrIdcBC1wb+Uwb1MONzHhPXO3eF4jQAlrv1J4n5K9YnKMXmqfE6VqmqW9VkwpegzPuP9PmRFji39rCRA=;
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.1.37, REQID:6eaa13e5-e9e9-4478-a3af-3de9b894d340, IP:0,
- U
- RL:0,TC:0,Content:0,EDM:-25,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTIO
- N:release,TS:-25
-X-CID-META: VersionHash:6f543d0, CLOUDID:42795690-e2c0-40b0-a8fe-7c7e47299109,
- B
- ulkID:nil,BulkQuantity:0,Recheck:0,SF:102,TC:nil,Content:0,EDM:1,IP:nil,UR
- L:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES:1,S
- PR:NO,DKR:0,DKP:0,BRR:0,BRE:0
-X-CID-BVR: 0
-X-CID-BAS: 0,_,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR
-X-UUID: 0b5c0752e0eb11eeb8927bc1f75efef4-20240313
-Received: from mtkmbs14n1.mediatek.inc [(172.21.101.75)] by
- mailgw01.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
- (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 1351619714; Wed, 13 Mar 2024 11:37:40 +0800
-Received: from mtkmbs11n1.mediatek.inc (172.21.101.185) by
- mtkmbs11n1.mediatek.inc (172.21.101.185) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.26; Wed, 13 Mar 2024 11:37:39 +0800
-Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
- mtkmbs11n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.1118.26 via Frontend Transport; Wed, 13 Mar 2024 11:37:38 +0800
-From: Weijie Gao <weijie.gao@mediatek.com>
-To: <u-boot@lists.denx.de>
-CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Dario
- Binacchi <dario.binacchi@amarulasolutions.com>, Michael Trimarchi
- <michael@amarulasolutions.com>, Tom Rini <trini@konsulko.com>, Weijie Gao
- <weijie.gao@mediatek.com>
-Subject: [PATCH] mtd: nand: raw: mt7621-nand: allow writing ecc region in raw
- mode
-Date: Wed, 13 Mar 2024 11:37:32 +0800
-Message-ID: <20240313033732.77733-1-weijie.gao@mediatek.com>
-X-Mailer: git-send-email 2.17.0
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-lj1-x229.google.com with SMTP id
+ 38308e7fff4ca-2d27184197cso82334141fa.1
+ for <u-boot@lists.denx.de>; Tue, 12 Mar 2024 22:38:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1710308312; x=1710913112; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=MIZTcNmEJsemYoBfJkmrJU3tiyWsBCio9iPPjqfYUo4=;
+ b=N2zIIaGJWIE/vUY0tPun6+b4JChkb2Lm4lmtQZNsLuK8cW4z3PJ6L35heqEYj2Bfm8
+ gDNjQMoH1jjplm9gw780Ha06fNj/M2y8fPHzLlno5QtU17RR+DMJ979wlmduaJKbxNZ3
+ NI/SRD1Yf31jJ8LW7xp+/WI/hqIp6UH7QZkEThxBcRO1MDxBWi021wg8B8nHKHXr4wWH
+ cd5BX8HU2FiTmkFLLRA5lVhlPd52nspNMRN748nNkBJBdI74P35iP4CfTMFzLXoYMz76
+ Z6ockTG1WqTw4rULzQJr9I2eiaRbMEwG6t7OAPpgoFaBF8TLuL59VIAffqhQn03PQmsj
+ a4IQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710308312; x=1710913112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=MIZTcNmEJsemYoBfJkmrJU3tiyWsBCio9iPPjqfYUo4=;
+ b=bpBvUEDYgS/g+9FMhMKzhySbdxoj3q5XwpK+h3POFDteMYPELufxiM5Mh0UFGKIaE9
+ nrEM2eIDRuz7gKugeV3juvq6cJp4HAiOSnB1Wei60sS2sfLHWf4w/ymWQesaGIqjLTbZ
+ rjmwhQ2bZMCW0nVu0jHjtMcblloezrtT5+FHuAhESO8omd02Yq52fOisH3HNO98j0hhX
+ huvcksqKKYC5dN2M1UKmsUbWcWz6BIP82IQ+SkO4gs9iMJGem6QpbNFt6sgyDAg66Ct7
+ U1GRxPD+dXiA5bZtrpoot0aihZS1yCoq6+jlZM/YLBut6nIx+a0OfsvT8yf3w2+OPdpO
+ 06Hw==
+X-Gm-Message-State: AOJu0YyIGX0XvqKtrEURXp9hcu8dUqNmyVt4xXdEFZfud+crR/+3LHYl
+ Krrxvoyu5n9M2RvbZ6lL4ZET4Kr3R3nFWXZMu7kOUfEhPGFEI6QBydVoTjkZkfMpIzQB/0C9XEy
+ wipToTqtmb0u6US840hUDXlwE4STDwU8FOKJu/A==
+X-Google-Smtp-Source: AGHT+IGrIimStbFAtoKWG/6bGwv48etymlJ5iZ88sCyB/AMDZRNN6F20j424AArpv465HKAIgKjrhTcHbYnFUN2mbVo=
+X-Received: by 2002:a2e:9593:0:b0:2d4:5ad9:37b6 with SMTP id
+ w19-20020a2e9593000000b002d45ad937b6mr2007751ljh.3.1710308312480; Tue, 12 Mar
+ 2024 22:38:32 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-MTK: N
+References: <20231121070028.2614095-1-sughosh.ganu@linaro.org>
+ <20240312145811.GA407350@e126523.budapest.arm.com>
+In-Reply-To: <20240312145811.GA407350@e126523.budapest.arm.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Wed, 13 Mar 2024 11:08:21 +0530
+Message-ID: <CADg8p95Y+UFFnoriH1QBFi3vagQojiaA24BqA6y9diLZY_jYaQ@mail.gmail.com>
+Subject: Re: [PATCH 0/4] Generate capsules from config files
+To: Bence Balogh <bence.balogh@arm.com>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Masahisa Kojima <masahisa.kojima@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,33 +88,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Allow writing ecc parity region in raw mode. This makes sure the
-nand write.raw command can write the flash data as-is.
+hi Bence,
 
-Change-Id: Ibed3bdf13c9cf81e54041c5ac7a78192b97dcedc
-Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
-CR-Id: WCNCR00180092
----
- drivers/mtd/nand/raw/mt7621_nand.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+On Tue, 12 Mar 2024 at 20:28, Bence Balogh <bence.balogh@arm.com> wrote:
+>
+> Hello Sughosh,
+>
+> We are planning to use these changes in the Corstone-1000 platform.
+> Do you have a timeline when these are going to get merged?
 
-diff --git a/drivers/mtd/nand/raw/mt7621_nand.c b/drivers/mtd/nand/raw/mt7621_nand.c
-index f6eddb84a9..341ef0bf2d 100644
---- a/drivers/mtd/nand/raw/mt7621_nand.c
-+++ b/drivers/mtd/nand/raw/mt7621_nand.c
-@@ -1003,9 +1003,9 @@ static int mt7621_nfc_write_page_raw(struct mtd_info *mtd,
- 		mt7621_nfc_write_data(nfc, oob_fdm_ptr(nand, i),
- 				      NFI_FDM_SIZE);
- 
--		/* Write dummy ECC parity data */
--		mt7621_nfc_write_data_empty(nfc, nfc->spare_per_sector -
--					    NFI_FDM_SIZE);
-+		/* Write ECC parity data */
-+		mt7621_nfc_write_data(nfc, oob_ecc_ptr(nfc, i),
-+				      nfc->spare_per_sector - NFI_FDM_SIZE);
- 	}
- 
- 	mt7621_nfc_wait_write_completion(nfc, nand);
--- 
-2.34.1
+I will prioritize this task since you want to use these changes. I
+need to send some changes which Simon has asked for. Once those
+changes go through, these patches also should be merged. Will work on
+this task. Thanks for letting me know.
 
+-sughosh
+
+>
+> Thanks,
+> Bence
+>
+> On Tue, Nov 21, 2023 at 12:30:24PM +0530, Sughosh Ganu wrote:
+> >
+> > Add support for generating capsules through a config file. Multiple
+> > capsules can be generated through a single invocation of the
+> > mkeficapsule tool, where the capsule parameters are fetched from the
+> > config file.
+> >
+> > The format of the config file pretty similar to the one used by the
+> > capsule generation tool in EDKII.
+> >
+> > The functionality is enabled on the sandbox variant and the EFI
+> > capsule update test is now configured to generate the capsules through
+> > a config file. The sandbox_flattree variant generates capsules through
+> > binman, thus covering both the paths.
+> >
+> > Sughosh Ganu (4):
+> >   tools: mkeficapsule: Add support for parsing capsule params from
+> >     config file
+> >   doc: Document capsule generation through a config file
+> >   sandbox: capsule: Add a config file for generating capsules
+> >   test: capsule: Generate capsules through config file
+> >
+> >  configs/sandbox_defconfig                     |   2 +
+> >  doc/develop/uefi/uefi.rst                     |  70 ++++
+> >  .../test_efi_capsule/capsule_gen_binman.dts   |   2 +
+> >  test/py/tests/test_efi_capsule/conftest.py    |   7 +
+> >  .../test_efi_capsule/sandbox_capsule_cfg.txt  | 162 ++++++++
+> >  tools/Kconfig                                 |  15 +
+> >  tools/Makefile                                |   1 +
+> >  tools/eficapsule.h                            | 114 ++++++
+> >  tools/mkeficapsule.c                          |  87 +++--
+> >  tools/mkeficapsule_parse.c                    | 352 ++++++++++++++++++
+> >  10 files changed, 781 insertions(+), 31 deletions(-)
+> >  create mode 100644 test/py/tests/test_efi_capsule/sandbox_capsule_cfg.txt
+> >  create mode 100644 tools/mkeficapsule_parse.c
+> >
+> > --
+> > 2.34.1
+> >
+> >
