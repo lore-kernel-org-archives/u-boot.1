@@ -4,135 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 818BCC54791
-	for <u-boot@archiver.kernel.org>; Wed, 13 Mar 2024 16:45:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28524C54791
+	for <u-boot@archiver.kernel.org>; Wed, 13 Mar 2024 17:12:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B7F087EBD;
-	Wed, 13 Mar 2024 17:45:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=rad.com
+	by phobos.denx.de (Postfix) with ESMTP id 7165D87EA8;
+	Wed, 13 Mar 2024 18:12:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rad.com header.i=@rad.com header.b="HlDPdk9v";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="B6EPKLBy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DBFD987EB4; Wed, 13 Mar 2024 17:35:35 +0100 (CET)
-Received: from EUR04-HE1-obe.outbound.protection.outlook.com
- (mail-he1eur04on20701.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:260f::701])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 38BAF8709C; Wed, 13 Mar 2024 18:12:45 +0100 (CET)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D29A287EA8
- for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 17:35:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 726EF87ED8
+ for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 18:12:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=rad.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lev_o@rad.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=WolwbV79qlMv7G7u4orVlRtiBiJG+hkyok1dNxipOZdUoG9Yt8cKcjw6XNEURMSD6hEi4hdsB26bHux71pf6UwN857MzMkWL2gXirkj2BrrHJNzJ0igkRpVlXTS3DDruUMANTUMdlgFVMBlCZ5K2FsWBwpUJD7EQ6IcPG7sXbSEZECh0xrrOaftbxVpXkpcvkj0WSb/CKVgk00ye4hEjsvAOyFIUAYSawee3SGEY6iyUuTqCz5FndFRAY7xYvTMoHn8ETS7rZue/syalKregMoY4QSNRbXYurxoD2GPm3Uk718gafBsUq2S6eq8xYDqPtKxazhAaMXHSa4ILagaE1g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=HO9uNd1x7B+3VQ7RcSZJ63YPpI9TakvegFHj3zlfzqY=;
- b=kz6XgR/Ezsf8oooqmPsfkbEfXIFEHOuphaei23YkkeZoAO/YW+zOV2T0Kuu90+yO4k5xYNu35e8r/NKBNAUqalEJxhFy2iZBdB14jGnwsAeg783zOyPqpNAD9BGjqy2QEPxioMqG2A2ezFNZv1o7/7aFNJiXuttpU0m3UXLsYG5iJm/e3JmnFYbFRuYgSKFKHQGSwaXoN0HBUgxHnd99eEqQhQzGDCGJ9e7Uk1Fk9k5VPYGQmTta0Fivlkh9suaeOd6lim3NTa+oqoNXu/1KpH8k8j/+31G1Za7/4Ka2NhPwZgFplZ8WUVR+GP+TlfpiMD+dZTt/bdXSl/MtS9xyeg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=rad.com; dmarc=pass action=none header.from=rad.com; dkim=pass
- header.d=rad.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rad.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=HO9uNd1x7B+3VQ7RcSZJ63YPpI9TakvegFHj3zlfzqY=;
- b=HlDPdk9vt2+QZP/XCvapwmjj59eUfBbrWYW3yzfMWRb1lysrX/JUFVbD75ZrRfyHwzdsZ/MlPHXwhJqIqqM/ZHl1CnjixODe1XRvk1d42IgvIhIbDroPwjYMkSEkcHlJUlUbLT65WKYoXnAHAWoFFKYY8DJ3nSKbQ+6y04SZS0A=
-Received: from VI1PR03MB4525.eurprd03.prod.outlook.com (2603:10a6:803:61::24)
- by AM7PR03MB6231.eurprd03.prod.outlook.com (2603:10a6:20b:142::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7386.19; Wed, 13 Mar
- 2024 16:35:31 +0000
-Received: from VI1PR03MB4525.eurprd03.prod.outlook.com
- ([fe80::513d:ab6b:a738:c7a]) by VI1PR03MB4525.eurprd03.prod.outlook.com
- ([fe80::513d:ab6b:a738:c7a%7]) with mapi id 15.20.7386.017; Wed, 13 Mar 2024
- 16:35:31 +0000
-From: Lev Olshvang <lev_o@rad.com>
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: Ariel Segal <ariel_s@rad.com>
-Subject: Help: Marvell Armada  3720 board  verified boot function as
- non-verified 
-Thread-Topic: Help: Marvell Armada  3720 board  verified boot function as
- non-verified 
-Thread-Index: Adp1ZDWf7HpqPU0sQ4qKLvYIkzOi8g==
-Date: Wed, 13 Mar 2024 16:35:30 +0000
-Message-ID: <VI1PR03MB45250FAF3DB469286B0B7C038D2A2@VI1PR03MB4525.eurprd03.prod.outlook.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: MSIP_Label_4d4ac586-bf97-4fe2-b352-319616e2445d_ActionId=12177d41-9453-4633-a60a-244875ef2e7c;
- MSIP_Label_4d4ac586-bf97-4fe2-b352-319616e2445d_ContentBits=0;
- MSIP_Label_4d4ac586-bf97-4fe2-b352-319616e2445d_Enabled=true;
- MSIP_Label_4d4ac586-bf97-4fe2-b352-319616e2445d_Method=Standard;
- MSIP_Label_4d4ac586-bf97-4fe2-b352-319616e2445d_Name=defa4170-0d19-0005-0004-bc88714345d2;
- MSIP_Label_4d4ac586-bf97-4fe2-b352-319616e2445d_SetDate=2024-03-13T16:09:54Z;
- MSIP_Label_4d4ac586-bf97-4fe2-b352-319616e2445d_SiteId=f9047108-cc2c-4e48-97a3-43fad1b3bf9d;
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=rad.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: VI1PR03MB4525:EE_|AM7PR03MB6231:EE_
-x-ms-office365-filtering-correlation-id: b45d2bcf-3391-47a8-130c-08dc437b992b
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: AIIPcAsv56a3mQeoF0Nj9Gwm4aHgdH1+l/eKOVGY5YXv3w9bVkJ6v56DvBhlP9yhCLwwcvsgSFJgr9T0IJXmRXxGklcsYdNa9DqJA7bT1H7+KbBoxMouAg10ZyDM6/95m7KrdXrqDjl0IiIPUeiyV9OlcLc6Lh70wCFR+KZnCeFTcwPMXmQOT37ySn1zwWHmXMJfrK+JdjMYUpvlbvtgTFvIWLtqi3PNVxydC1OZpVhcjJAVn7PCPR3oeTJA3loaxAJKTspR7Gjeh8tRERYG/A+WSOoLnAv2x4kI5vCKeGeMjoyxAvGjUTjj1Vjfra9Ipw9HxCh84Ut8BZHPP7hR6z8tw7tPo8mt2RuG5E2D3Fl8mFtpFzlSnPh/mMamxipaG7+EgXP1Ddn75ucUhfMFeWuKFQ6zG64SwitTJjLERYsoRP2BpYTndVcTfSeOuXQ5BJ3tdERiKy4eJvW9ulvNImMxvrzIorQQCH7GRinqMhYdkdZDTTdH3N2JSpfQQk6ZSNW6NiifXLBFoOeHb2hOwUOL8i4BzKTvfgo3VULnRTnaCbbMZqMVkn9R76fSjRaRbxG/RTNIyv/XoAqPJA3u54PbxM2FipXWCTLW/RT1lzZkYoMyurK9FNKRapdY+XVl+Uai4ny51i7RiuQLRPH5Jpda0xwq20SZUgjYcLzzDL0yy3adOiytyVjlnNzir1QolWgtPkW/Df60PP/YHALRAQ==
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:VI1PR03MB4525.eurprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(376005)(1800799015)(38070700009); DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?dzdJc010bnN5THNpbGdhNDZibHV6Yy9pd0pENW90MDVPNHhlM3ZCdjVWSE55?=
- =?utf-8?B?WkllUm5XZ05odnY3WkdYd2xCRUlLS3ViRUMrcWhJc0ZuS08zZmpwWm4wSCtn?=
- =?utf-8?B?YzNKb2JkTjQxL3FRNnFoYlViT3R2RG9Yd3ZvVnJXMmxEaE9xRWRjNzdkcFZa?=
- =?utf-8?B?RGtKcGhuTzFpckNEN01McWNlTVBxTGNZaXMwdStRR1FvUFc3T0tuL0JsTzg3?=
- =?utf-8?B?eFBkMmwzRWhDK1J1VVJHMmdMMjI4NlJnTFhXK1RENzhiVEZ4Z1JmS1psWjFh?=
- =?utf-8?B?dzNsOTZoUjNFUUpyVmZ3eUQ3by9KQUxQekhaOWc2ejRxRDBaNkRHbXJqZlZV?=
- =?utf-8?B?SmlZYUtvNGZlUHB6M1JhR0R2d01EK2pNNkI3V0RTbXcwYVJaamNEdTRFR2g3?=
- =?utf-8?B?N0V4UmlEWWRSdU1BOGhNM0Ric2l0eVZ6Zk5zNGZSM2plSTRSWEI5NkNQK2tp?=
- =?utf-8?B?bUpkRml3OHpneWUxL0ZWbjBDRW1jcU5zV2pQczJkMW14QU01RExMc3ZSbDVO?=
- =?utf-8?B?N2dWcnByWjV1eWkzTzF3ME4rbUZPWkxtandNYWZkLzZYTEo3QThvSklEeXFL?=
- =?utf-8?B?aXVFRmFIMzhaRk1Eb2c5UkI5M2JCZDZWd1RsWTA1cUJvYk9jQnFxMG5DU1FR?=
- =?utf-8?B?bXh6cmRrZ05Ba2c0eXNrZmVSREg3ZHU3dzFDMHBUQ0NGcThENlhUdTQrT280?=
- =?utf-8?B?UEhUS3RLWUJ2Z2IzTzVqaG1qTEp1d3Y0Nk16TG5ObGNjQ1JJSzBEV0lwNlpa?=
- =?utf-8?B?L21vNjlUZXdLcEE1K1BQZVJ4eWFHL2s0Nm01V0J2MktQNnFnbDZhOUlKNzYw?=
- =?utf-8?B?aVFSbGNMVjFUWGo3WEpNSyttOE04MWlrMHlzbHYyNG8yMjBZbGpRNVZ5Q3VO?=
- =?utf-8?B?SG4yZXdqK1AxQkQ3TDRkKzlGYy9aK2NpTlZ2UlZobnNLdER1TVA0M0VBZ0xv?=
- =?utf-8?B?U1psZ2twRmdQMWx2MFAybXBpVEVISkRmOVZkRUluVnFha0U4MEpyS2lPTzEv?=
- =?utf-8?B?WjN2RDNxUmVpQnNrVTJJNGxGUGFaNzc5QmlrZWV5bVptUzRpN2ljaElDZVBn?=
- =?utf-8?B?OXBNZEFvalZzQ0tKOVVrQ1YrNTdRdDFvTWFCSXYxM1cwVlJZTWZ4WlVURjFP?=
- =?utf-8?B?UFdLK3pIaTgwWkRpTlo2bXV2d1EyT09JOEJrRWRZUEphYmhEWitPdDUzenNJ?=
- =?utf-8?B?NklXK2l0MnRtOHE0NE96K2I0UDc1SHNZbjFmYzEzcDBNSFR2bkRTYjRQdUUv?=
- =?utf-8?B?Vllsbmd3MEREZXB6NCt3S0hNamFtOFZ5dTNQUHZwQ2lQVzVuK1NCU2lYL1hw?=
- =?utf-8?B?d3dRcE15T3JUNzdPR0oxSGQyeW8yZ2k1Q3o1aVpsNzEzTUtJcC8rb2JZays2?=
- =?utf-8?B?UHNFUWtnTjNkc01YTmI1dlMvMGNKdkhyQWk3Tkp4RVd0YmlacUNHQS9HT3Vr?=
- =?utf-8?B?OXltUDhBTnV2UUEyVlNBZFJtdTJ3RUs0cGc1blhIVkhlbWx1OTUrMnZLZUc3?=
- =?utf-8?B?V3BKKzhNWEgwWEs1aEJUT1RYTThOSUptMDFTS3B3a3hYZENRcmUwMVhQM29K?=
- =?utf-8?B?SERIVjRsdUM3WHBqb29IQStVSndRS1hzWXY1cnhJWUVqQ0kzWVJRNnEzclNu?=
- =?utf-8?B?dC80THNraUcrUWpVbGpTUjdwN2FZRGpOblNuUnFmQktUQ2FteFZMd3EvYTU2?=
- =?utf-8?B?SDZNcjRiU0JEK09FVjhBL2RNTDZmWVV3ZWwxamExTTE4UTQzOHZlcWpqMk1z?=
- =?utf-8?B?UTBPbFNSMHhnRHIydkVQUXdDbmloYVFJZnFJRkxsbzN1MnhGSVBvZXBhU2Qy?=
- =?utf-8?B?blVOL0NPRUllRWVYaHR6OHZSU3ZzRVJHTzhwZExVTGNSMHFrMWNzL2hnY041?=
- =?utf-8?B?T0JJUUptRVVXdksxelJ0eFhJUGpyZk9OUUNNOS9mUDVsbVpPOWNVYlU4bmVL?=
- =?utf-8?B?Q01SZUdNVFVyenRMQjMyVGczQ1Bpa0d2eVRDaEFScGc0NkNLeVdhUUFKMytM?=
- =?utf-8?B?d3JEM3lOZ1UvaWZzbXRvK2lxS3NkN1BwUlBHN3pHdmhyZnZnVTVZQVFyajFV?=
- =?utf-8?B?bUVtZ3c5R3dGZXdjZCtiUXkwR2pyRFQ4Z0xlUG5oQ3hFdU9zSVllcUxkWFZ2?=
- =?utf-8?Q?7b1A=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-33e94c12cfaso994524f8f.3
+ for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 10:12:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1710349960; x=1710954760; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=d6n4o5BqZv/6P9AjvJ6taCXTvFGOj1Rh3BQ2i3HOeTg=;
+ b=B6EPKLByJw4Yyd6AbY694V+KShOA6yjWBl5Ca2VAh1Avw/vJFPh3a8SPOPFasYvU6t
+ nhlNMC7EOzSdVAdqDsiPK7ua5kgDI/ZnwYB+5vWQc6k5ItJnnQkj1voY5EYi5CEBM3PB
+ yxhcDqbq0PQ8OIadzqLS5+WrDF+EXfK2eG4RCgpEy6Q5rhNJYKX73Yu3j2lCreBpz29b
+ 662Q5Mx9jHOO/ioY3elX7Bmbo6tRaS5cZfcUyOochiClFklGBw3hvY80F3Ge5xQZXPAs
+ vy5AYJArbS80xaffdDGxJfh80zvva19OTvegJnGrO9z5zTnTMqHzo4N0wU/H8EXnebbK
+ vEaQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710349960; x=1710954760;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=d6n4o5BqZv/6P9AjvJ6taCXTvFGOj1Rh3BQ2i3HOeTg=;
+ b=KFUV03u04g5IlOjtm6i2C5mNZ/IstfC8YAc8m3u81FJ0EL7Wi4pkMCZWUVBabbhwAd
+ UvYsmQ2wSbDBgAHn6jtJ/8Owyyj6GxYaA1dI7D3lXZjeHCARr+7sK9drpD6PmIx6vdcK
+ CxvINbPQLYhV/hX7CR8/72k7qj0nYj4FirXNqEEc6OAtdGpPdLLjPoQDEOrw4Bmgr+7I
+ K7Qe1qDSMHXSeKRHv51Rhf19Xs+EGVJsRK4lWhVP6ALc3qMD/7nWWgue6yCby+pDNy1a
+ aVM/jNgVQajA8KDlbn90nL5vtJ4DcR6HBwXxD95+t9zSiqEkDttRrEnalE+iLg6ie2qK
+ G77g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUFiBfxosX1iARCN19IZmL4EMDtU+vk6qzwMO2XMbHx0Xpzwrr8s+NuG7v4ndxwvbofxEPlBM26lhG1UipRL5g1JUKdDA==
+X-Gm-Message-State: AOJu0Yw66GOSLK3A9HJ7dHgaqbUVIX9rjpqpCmKfBnKxDdBa8bnOGpgy
+ gMjFuF227iERdouhIEVvKWoarmn4YeYu3EoW+sjiL4ZEeRnqUcXnUV3Yem7S3XQ=
+X-Google-Smtp-Source: AGHT+IHPtw+TthLvw4Oe6NPfaXy7w07PcBECMqojSftgtFOfqPmnjgjXSGE8Er+j9osmMUDdMpyxDQ==
+X-Received: by 2002:a05:6000:102:b0:33e:c0c5:1795 with SMTP id
+ o2-20020a056000010200b0033ec0c51795mr444217wrx.54.1710349959778; 
+ Wed, 13 Mar 2024 10:12:39 -0700 (PDT)
+Received: from [192.168.1.78] (host-92-17-96-232.as13285.net. [92.17.96.232])
+ by smtp.gmail.com with ESMTPSA id
+ df10-20020a5d5b8a000000b0033de10c9efcsm646920wrb.114.2024.03.13.10.12.39
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 13 Mar 2024 10:12:39 -0700 (PDT)
+Message-ID: <e0fb5308-bd89-47b1-927f-aa76e4a87bab@linaro.org>
+Date: Wed, 13 Mar 2024 17:12:38 +0000
 MIME-Version: 1.0
-X-OriginatorOrg: rad.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: VI1PR03MB4525.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b45d2bcf-3391-47a8-130c-08dc437b992b
-X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Mar 2024 16:35:30.9327 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: f9047108-cc2c-4e48-97a3-43fad1b3bf9d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: mtffgUJFAavqovlCI23CkGqxfdrQ1LmIlNO+o/ThnqSKWpqt+k/8f74D7mXg1V18
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR03MB6231
-X-Mailman-Approved-At: Wed, 13 Mar 2024 17:45:05 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 3/4] clk: qcom: add support for power domains uclass
+Content-Language: en-US
+To: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Cc: Konrad Dybcio <konrad.dybcio@linaro.org>, Lukasz Majewski
+ <lukma@denx.de>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Sean Anderson <seanga2@gmail.com>, Sumit Garg <sumit.garg@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+References: <20240311213334.3567389-1-volodymyr_babchuk@epam.com>
+ <20240311213334.3567389-4-volodymyr_babchuk@epam.com>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20240311213334.3567389-4-volodymyr_babchuk@epam.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -149,18 +100,279 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGkgTGlzdA0KT3VyIHByb2plY3QgYWxyZWFkeSBzZXZlcmFsIHllYXJzIGRldmVsb3AgZm9yIE1h
-cnZlbGwgQXJtYWRhICAzNzIwIGJvYXJkDQoNClJlY2VudGx5IHdlIGRlY2lkZWQgdG8gaW1wbGVt
-ZW50IHZlcmlmaWVkIGJvb3QuDQpJIG1vZGlmaWVkIHVib290IGNvbmZpZ3VyYXRpb24gdG8gc3Vw
-cG9ydCBGSVQgaW1hZ2UgZm9ybWF0IGFuZCB2ZXJpZnkgc2lnbmF0dXJlIGtlcm5lbCAuIEkgY29t
-cGlsZWQgdWJvb3QgYW5kIGFkZGVkIHB1YmxpYyBrZXkgdG8gdS1ib290LmJpbg0KSSBhbHNvIGNy
-ZWF0ZWQgc2lnbmVkIGtlcm5lbCBpbWFnZSBhbmQgZW5zdXJlZCB3aXRoIGZpdF9jaGVja19zaWdu
-ZWQgaXQgaW5kZWVkIHNpZ25lZC4NClRoZSBwcm9ibGVtIGlzIHRoYXQgTWFydmVsbCByZXF1aXJl
-ZCB0byB1c2UgQVRGIHRvb2xzIGFuZCBBMzcwMCB1dGlscyB0byBwcm9kdWNlIGZsYXNoIGltYWdl
-Lg0KSSBhcHBsaWVkIHNhbWUgY29tbWFuZCB0byBBVEYgdG8gbWFrZSBmbGFzaCBpbWFnZSBhcyB3
-ZSB1c2VkIGJlZm9yZSBmb3Igbm9uLXZlcmlmaWVkIGJlZm9yZS4NCkFURiBtYWRlIGZsYXNoIGlt
-YWdlIHdpdGggbm8gZ2xpdGNoLA0KQWZ0ZXIgdHJhbnNmZXJyaW5nIHJlc3VsdGluZyBmbGFzaCB0
-byBib2FyZCwgIHUtYm9vdCBjb250aW51ZXMgdG8gYm9vdCBub24tc2lnbmVkIGtlcm5lbCBhbmQg
-aW1pbmZvIGNvbW1hbmQgcmVwb3J0cyBlcnJvciDigJx1bmtub3duIGltYWdlIGZvcm1hdOKAnSBv
-biB0aGUgbG9hZGVkIHNpZ25lZCBrZXJuZWwsIGkuZS4gaXQgZG9lcyBub3QgcmVjb2duaXplIEZJ
-VCBwYXJ0aXRpb24uDQoNCkNhbiBhbnlvbmUgaGVscCBtZSBBU0FQPw0KUmVnYXJkcw0KTEVWDQo=
+Hi Volodymyr,
+
+On 11/03/2024 21:33, Volodymyr Babchuk wrote:
+> Now sub-drivers for particular SoCs can register them as power domain
+> drivers. This is needed for upcoming SM8150 support, because it needs
+> to power up the Ethernet module.
+> 
+Thanks again for working on this.
+
+I've been trying to rework my SDM845 USB support patches based on this,
+and I've run into quite a few issues with CONFIG_POWER_DOMAIN.
+
+Basically, it boils down to the RPM(h)PD, with no driver a bunch of
+stuff breaks (including UART). I tried writing a no-op PD driver for it
+but this didn't seem to work super well, and wouldn't scale (every soc
+has it's own rpm(h)pd compatible).
+
+In the end, I think supporting CONFIG_POWER_DOMAIN is the right approach
+here. I have been able to get things working by leveraging OF_LIVE and
+modifying the livetree during boot, similarly to how I plan to do for
+USB. See [1].
+
+Even with this, all the drivers we probe pre-relocation (like UART) need
+the DM_FLAG_DEFAULT_PD_CTRL_OFF flag if they reference the RPM(h)PD, as
+the of_fixup stuff doesn't happen until after relocation. I have a patch
+which fixes that for sdm845 here [2].
+
+I'll test this on the other boards and then re-send my USB patches
+(including the two below) rebased on your series.
+
+I'm a little worried this might come back to bite us later, but I think
+by then it'll be worth trying to find a way to have U-Boot handle these
+"safe to ignore" devices directly.
+
+[1]:
+https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/8af7731445721adab2206839d6df2d0f4f5f32d9
+[2]:
+https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/33b094103fb7e856cff6c08345a16ef8231ffaea
+> Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+> 
+> ---
+> Caleb suggested to use "imply POWER_DOMAIN", not "depends
+> POWER_DOMAIN" in the Kconfig, but this does not work:
+> $ make CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm
+> scripts/kconfig/conf  --syncconfig Kconfig
+> drivers/clk/Kconfig:3:error: recursive dependency detected!
+> drivers/clk/Kconfig:3:  symbol CLK is selected by IMX8M_POWER_DOMAIN
+> drivers/power/domain/Kconfig:35:        symbol IMX8M_POWER_DOMAIN depends on POWER_DOMAIN
+> drivers/power/domain/Kconfig:3: symbol POWER_DOMAIN is implied by CLK_QCOM
+> drivers/clk/qcom/Kconfig:3:     symbol CLK_QCOM depends on CLK
+> For a resolution refer to Documentation/kbuild/kconfig-language.txt
+> subsection "Kconfig recursive dependency limitations"
+> 
+> 
+> Changes in v3:
+>  - Added "depends POWER_DOMAIN" to Kconfig (see note)
+>  - Use readl_poll_timeout() instead of open coded wait loop
+>  - Print warning if power domain can't be enabled/disabled
+> 
+> Changes in v2:
+>  - Reworked qcom_cc_bind() function
+>  - Added timeout to qcom_power_set()
+>  - Minor fixes in register names and formatting
+> 
+>  drivers/clk/qcom/Kconfig      |   2 +-
+>  drivers/clk/qcom/clock-qcom.c | 132 ++++++++++++++++++++++++++++++----
+>  drivers/clk/qcom/clock-qcom.h |   6 ++
+>  3 files changed, 126 insertions(+), 14 deletions(-)
+> 
+> diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
+> index 0df0d1881a..8dae635ac2 100644
+> --- a/drivers/clk/qcom/Kconfig
+> +++ b/drivers/clk/qcom/Kconfig
+> @@ -2,7 +2,7 @@ if ARCH_SNAPDRAGON || ARCH_IPQ40XX
+>  
+>  config CLK_QCOM
+>  	bool
+> -	depends on CLK && DM_RESET
+> +	depends on CLK && DM_RESET && POWER_DOMAIN
+>  	def_bool n
+>  
+>  menu "Qualcomm clock drivers"
+> diff --git a/drivers/clk/qcom/clock-qcom.c b/drivers/clk/qcom/clock-qcom.c
+> index 729d190c54..7a5938a06a 100644
+> --- a/drivers/clk/qcom/clock-qcom.c
+> +++ b/drivers/clk/qcom/clock-qcom.c
+> @@ -22,7 +22,9 @@
+>  #include <linux/bug.h>
+>  #include <linux/delay.h>
+>  #include <linux/bitops.h>
+> +#include <linux/iopoll.h>
+>  #include <reset-uclass.h>
+> +#include <power-domain-uclass.h>
+>  
+>  #include "clock-qcom.h"
+>  
+> @@ -30,6 +32,13 @@
+>  #define CBCR_BRANCH_ENABLE_BIT  BIT(0)
+>  #define CBCR_BRANCH_OFF_BIT     BIT(31)
+>  
+> +#define GDSC_SW_COLLAPSE_MASK		BIT(0)
+> +#define GDSC_POWER_DOWN_COMPLETE	BIT(15)
+> +#define GDSC_POWER_UP_COMPLETE		BIT(16)
+> +#define GDSC_PWR_ON_MASK		BIT(31)
+> +#define CFG_GDSCR_OFFSET		0x4
+> +#define GDSC_STATUS_POLL_TIMEOUT_US	1500
+> +
+>  /* Enable clock controlled by CBC soft macro */
+>  void clk_enable_cbc(phys_addr_t cbcr)
+>  {
+> @@ -223,7 +232,7 @@ U_BOOT_DRIVER(qcom_clk) = {
+>  int qcom_cc_bind(struct udevice *parent)
+>  {
+>  	struct msm_clk_data *data = (struct msm_clk_data *)dev_get_driver_data(parent);
+> -	struct udevice *clkdev, *rstdev;
+> +	struct udevice *clkdev = NULL, *rstdev = NULL, *pwrdev;
+>  	struct driver *drv;
+>  	int ret;
+>  
+> @@ -238,20 +247,41 @@ int qcom_cc_bind(struct udevice *parent)
+>  	if (ret)
+>  		return ret;
+>  
+> -	/* Bail out early if resets are not specified for this platform */
+> -	if (!data->resets)
+> -		return ret;
+> +	if (data->resets) {
+> +		/* Get a handle to the common reset handler */
+> +		drv = lists_driver_lookup_name("qcom_reset");
+> +		if (!drv) {
+> +			ret = -ENOENT;
+> +			goto unbind_clkdev;
+> +		}
+> +
+> +		/* Register the reset controller */
+> +		ret = device_bind_with_driver_data(parent, drv, "qcom_reset", (ulong)data,
+> +						   dev_ofnode(parent), &rstdev);
+> +		if (ret)
+> +			goto unbind_clkdev;
+> +	}
+>  
+> -	/* Get a handle to the common reset handler */
+> -	drv = lists_driver_lookup_name("qcom_reset");
+> -	if (!drv)
+> -		return -ENOENT;
+> +	if (data->power_domains) {
+> +		/* Get a handle to the common power domain handler */
+> +		drv = lists_driver_lookup_name("qcom_power");
+> +		if (!drv) {
+> +			ret = -ENOENT;
+> +			goto unbind_rstdev;
+> +		}
+> +		/* Register the power domain controller */
+> +		ret = device_bind_with_driver_data(parent, drv, "qcom_power", (ulong)data,
+> +						   dev_ofnode(parent), &pwrdev);
+> +		if (ret)
+> +			goto unbind_rstdev;
+> +	}
+>  
+> -	/* Register the reset controller */
+> -	ret = device_bind_with_driver_data(parent, drv, "qcom_reset", (ulong)data,
+> -					   dev_ofnode(parent), &rstdev);
+> -	if (ret)
+> -		device_unbind(clkdev);
+> +	return 0;
+> +
+> +unbind_rstdev:
+> +	device_unbind(rstdev);
+> +unbind_clkdev:
+> +	device_unbind(clkdev);
+>  
+>  	return ret;
+>  }
+> @@ -306,3 +336,79 @@ U_BOOT_DRIVER(qcom_reset) = {
+>  	.ops = &qcom_reset_ops,
+>  	.probe = qcom_reset_probe,
+>  };
+> +
+> +static int qcom_power_set(struct power_domain *pwr, bool on)
+> +{
+> +	struct msm_clk_data *data = (struct msm_clk_data *)dev_get_driver_data(pwr->dev);
+> +	void __iomem *base = dev_get_priv(pwr->dev);
+> +	const struct qcom_power_map *map;
+> +	u32 value;
+> +	int ret;
+> +
+> +	if (pwr->id >= data->num_power_domains)
+> +		return -ENODEV;
+> +
+> +	map = &data->power_domains[pwr->id];
+> +
+> +	if (!map->reg)
+> +		return -ENODEV;
+> +
+> +	value = readl(base + map->reg);
+> +
+> +	if (on)
+> +		value &= ~GDSC_SW_COLLAPSE_MASK;
+> +	else
+> +		value |= GDSC_SW_COLLAPSE_MASK;
+> +
+> +	writel(value, base + map->reg);
+> +
+> +	if (on)
+> +		ret = readl_poll_timeout(base + map->reg + CFG_GDSCR_OFFSET,
+> +					 value,
+> +					 (value & GDSC_POWER_UP_COMPLETE) ||
+> +					 (value & GDSC_PWR_ON_MASK),
+> +					 GDSC_STATUS_POLL_TIMEOUT_US);
+> +
+> +	else
+> +		ret = readl_poll_timeout(base + map->reg + CFG_GDSCR_OFFSET,
+> +					 value,
+> +					 (value & GDSC_POWER_DOWN_COMPLETE) ||
+> +					 !(value & GDSC_PWR_ON_MASK),
+> +					 GDSC_STATUS_POLL_TIMEOUT_US);
+> +
+> +
+> +	if (ret == -ETIMEDOUT)
+> +		printf("WARNING: GDSC %lu is stuck during power on/off\n",
+> +		       pwr->id);
+> +	return ret;
+> +}
+> +
+> +static int qcom_power_on(struct power_domain *pwr)
+> +{
+> +	return qcom_power_set(pwr, true);
+> +}
+> +
+> +static int qcom_power_off(struct power_domain *pwr)
+> +{
+> +	return qcom_power_set(pwr, false);
+> +}
+> +
+> +static const struct power_domain_ops qcom_power_ops = {
+> +	.on = qcom_power_on,
+> +	.off = qcom_power_off,
+> +};
+> +
+> +static int qcom_power_probe(struct udevice *dev)
+> +{
+> +	/* Set our priv pointer to the base address */
+> +	dev_set_priv(dev, (void *)dev_read_addr(dev));
+> +
+> +	return 0;
+> +}
+> +
+> +U_BOOT_DRIVER(qcom_power) = {
+> +	.name = "qcom_power",
+> +	.id = UCLASS_POWER_DOMAIN,
+> +	.ops = &qcom_power_ops,
+> +	.probe = qcom_power_probe,
+> +};
+> diff --git a/drivers/clk/qcom/clock-qcom.h b/drivers/clk/qcom/clock-qcom.h
+> index 01088c1901..12a1eaec2b 100644
+> --- a/drivers/clk/qcom/clock-qcom.h
+> +++ b/drivers/clk/qcom/clock-qcom.h
+> @@ -59,9 +59,15 @@ struct qcom_reset_map {
+>  	u8 bit;
+>  };
+>  
+> +struct qcom_power_map {
+> +	unsigned int reg;
+> +};
+> +
+>  struct clk;
+>  
+>  struct msm_clk_data {
+> +	const struct qcom_power_map	*power_domains;
+> +	unsigned long			num_power_domains;
+>  	const struct qcom_reset_map	*resets;
+>  	unsigned long			num_resets;
+>  	const struct gate_clk		*clks;
+
+-- 
+// Caleb (they/them)
