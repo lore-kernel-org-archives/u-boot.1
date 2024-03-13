@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93DD3C54E58
-	for <u-boot@archiver.kernel.org>; Wed, 13 Mar 2024 10:56:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10252C54E58
+	for <u-boot@archiver.kernel.org>; Wed, 13 Mar 2024 10:56:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CFA9387E75;
-	Wed, 13 Mar 2024 11:56:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4134487EBD;
+	Wed, 13 Mar 2024 11:56:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=126.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=126.com header.i=@126.com header.b="FR/uv5P8";
+	dkim=pass (1024-bit key; unprotected) header.d=126.com header.i=@126.com header.b="gdhe57pu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F59A87DCC; Wed, 13 Mar 2024 06:34:01 +0100 (CET)
-Received: from m16.mail.126.com (m16.mail.126.com [220.197.31.6])
- by phobos.denx.de (Postfix) with ESMTP id 049E38780E
- for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 06:33:57 +0100 (CET)
+ id 24FF187DF1; Wed, 13 Mar 2024 06:48:39 +0100 (CET)
+Received: from m16.mail.126.com (m16.mail.126.com [220.197.31.8])
+ by phobos.denx.de (Postfix) with ESMTP id 41DAB8792D
+ for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 06:48:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=126.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lhdjply@126.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=126.com;
- s=s110527; h=From:Subject:Date:Message-Id:MIME-Version; bh=iCqBE
- ZouHL0XohFhFF6XKCGp4lqpmToK/lZhEY7F8u8=; b=FR/uv5P8e8ebvI9FmlXhQ
- H26fQ19EOmQzkofm5qTawg5zQ1j/X/008zeRIZhje3NFs+xnTkMdvbcUEsq3wm6B
- lXYxKzpsDWp9K7PTIhLgk0wuoVkvLqGOXzFbpuS5BeeGoygIWNtmXaChspg/Y7MS
- yVjmRN4ibI9EFWjPBo9T8I=
+ s=s110527; h=From:Subject:Date:Message-Id:MIME-Version; bh=RJVGg
+ ztzQ6Atr9Iltqpn6Tqq9KgQV+ffa8pZbUaor30=; b=gdhe57puOG7trbWEmE9Gi
+ ZHjp0qSx+jUBt/eT6yXJ5qDLIQljnt2O/Dgnzi91zuXXMyARz4bQ3odhEliSlmj5
+ gP3uRzRuj9Z/TWIZBBlsUFsdhe41kXb6bnk7fm09Og2jKDA0rx+vIlBWjkf4lKD3
+ +1j9lSbII7GDKpuMZHaAIA=
 Received: from localhost.localdomain (unknown [115.221.220.140])
- by gzga-smtp-mta-g0-4 (Coremail) with SMTP id _____wD33yCzOvFlPGTgAA--.17848S2;
- Wed, 13 Mar 2024 13:33:40 +0800 (CST)
+ by gzga-smtp-mta-g0-3 (Coremail) with SMTP id _____wD3n4yOPfFlK1zdAA--.2313S2; 
+ Wed, 13 Mar 2024 13:45:51 +0800 (CST)
 From: lhdjply@126.com
 To: jagan@amarulasolutions.com,
 	andre.przywara@arm.com,
 	trini@konsulko.com
 Cc: u-boot@lists.denx.de,
 	lhdjply <lhdjply@126.com>
-Subject: [PATCH] arm:suniv:complete the serial port configuration of Suniv
-Date: Wed, 13 Mar 2024 13:33:23 +0800
-Message-Id: <20240313053323.282856-1-lhdjply@126.com>
+Subject: [PATCH-V2] arm:suniv:complete the serial port configuration of Suniv
+Date: Wed, 13 Mar 2024 13:45:46 +0800
+Message-Id: <20240313054546.284435-1-lhdjply@126.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: _____wD33yCzOvFlPGTgAA--.17848S2
-X-Coremail-Antispam: 1Uf129KBjvJXoWxJrWfKr1fWw1fAF45XFy5Arb_yoW8CrW7p3
- W7Za4agr15WF4a9FWxAw4Ivr45Ja1UJwnrKwnrJayjv3WDGw48Jr1rKrn8Cw1FvrZ3Zw4f
- WF1kWa15X34DZ3JanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07UzxRgUUUUU=
+X-CM-TRANSID: _____wD3n4yOPfFlK1zdAA--.2313S2
+X-Coremail-Antispam: 1Uf129KBjvJXoW7KF43XFWkZF17Xr13GFW5GFg_yoW8Zr4fp3
+ W2va4agr15WF1a9FZ7Ar4Ivr45Ja17JwnrKwnrJa1jv3WDGw48Jr1rKrn8Cw1FvrZ3Zw4f
+ Wr1kua15X34kZ3JanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07Uwo7_UUUUU=
 X-Originating-IP: [115.221.220.140]
-X-CM-SenderInfo: hokgy1lo16ij2wof0z/1tbiYBeg2mV20IGn7gAAsG
+X-CM-SenderInfo: hokgy1lo16ij2wof0z/1tbi2w+g2mVLZWFfUgAAsJ
 X-Mailman-Approved-At: Wed, 13 Mar 2024 11:56:10 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -69,7 +69,8 @@ X-Virus-Status: Clean
 
 From: lhdjply <lhdjply@126.com>
 
-111
+Due to the different serial ports used by each board, 
+the serial IO configuration needs to be improved.
 
 Signed-off-by: lhdjply <lhdjply@126.com>
 ---
