@@ -4,133 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2242C54E5D
-	for <u-boot@archiver.kernel.org>; Thu, 14 Mar 2024 06:46:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE205C5475B
+	for <u-boot@archiver.kernel.org>; Thu, 14 Mar 2024 06:47:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0BBCE87D98;
-	Thu, 14 Mar 2024 07:46:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id D5D5887EDC;
+	Thu, 14 Mar 2024 07:47:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="bqLsLYVq";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="K1qn56EP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A4FE87CFF; Thu, 14 Mar 2024 07:46:12 +0100 (CET)
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on20600.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2416::600])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id B896987F40; Thu, 14 Mar 2024 07:47:12 +0100 (CET)
+Received: from mail-m3291.qiye.163.com (mail-m3291.qiye.163.com
+ [220.197.32.91])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CED0087F40
- for <u-boot@lists.denx.de>; Thu, 14 Mar 2024 07:46:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BDF8087CFF
+ for <u-boot@lists.denx.de>; Thu, 14 Mar 2024 07:47:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=love.kumar@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=VNWlfRwDYLdeOqh4FMLh9EDpFjPQt8pZjs7vwzreOSVLE1akd0zeC5ygSAMNCUJyo1FSYNuovFbuNQ9y22eOJtIkd8BuFFfHMXuCk5C2p2+dmOaq1bHSIJnaCOFY739pTdrjK6QN2nzqj8ipHwubZXD5CyJ2683JXLAM3qAok6mK0loa9/wcqTelDighOXYm6K9FYigwMTsM7/7GboQif4uPYoGNFobCeXSePYstlFUuTj8KMVtiRNC2ObdQ3R47ykvuJYZPrztYfCe7I7ve3PJvL6gg/t+O/mu0ooY1FzNBYkOQgMl+mXIVO+jwRaQRM6oSlf33M2qWWUhYsjY8sQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=0nkCY7kWzexJUcuKvRzXE9S8TrkSYqf+aOvGv1/M/2g=;
- b=WghUSReH0eL1W1nVCVwwC2l9VLaXNqgrvqU+5K1vmnfVzXUDH5nMWhR8ErGRm+DhtjMdrhVAnJUcqWY19ZFFrk1VvkFl8giaxK4nz77XjK4v4A85Mt3oXDppMuwNmWx/e1B6fsjbZ2X9bl9KorxQgI1W87enEJGjt+jWehf45Trsk98Rcqncy3alvQCn8bm5hm8Rw6JiNJ2oG6nTTuyZgw7VozUZ78M0DYzTfXc4eoLPWR+ILbZzv/O2m5P4E9wsafALMNIh76QXYoXNM9RP3ijMSdiStGWKYj5fhQhCNz074JLjsRSQEufx75VY2xFpQ1UL8v6F+5fj7LuHfStydw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0nkCY7kWzexJUcuKvRzXE9S8TrkSYqf+aOvGv1/M/2g=;
- b=bqLsLYVqRh7wlLofmJCSRkx//82+bPJ5vKKix94pJN98q6cUBKyhGNiLiA1cU+34EeqqnJt1MmPfuqFOqM/1Yp7tkZayzTJdcWeMl+qNkgpO1atpXiNqd2emMMHp8rTlPbVHgRV6Z2XaKoAlR6vT0K8SWodQjz75yo4TkvhGr5Q=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from SA0PR12MB4461.namprd12.prod.outlook.com (2603:10b6:806:9c::22)
- by IA1PR12MB7541.namprd12.prod.outlook.com (2603:10b6:208:42f::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7386.18; Thu, 14 Mar
- 2024 06:46:03 +0000
-Received: from SA0PR12MB4461.namprd12.prod.outlook.com
- ([fe80::17ee:bb1c:2418:7e32]) by SA0PR12MB4461.namprd12.prod.outlook.com
- ([fe80::17ee:bb1c:2418:7e32%7]) with mapi id 15.20.7386.017; Thu, 14 Mar 2024
- 06:46:03 +0000
-Message-ID: <6dfdaf59-156e-40db-9130-4d62e6e5e8e3@amd.com>
-Date: Thu, 14 Mar 2024 12:15:52 +0530
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/5] mmc: zynq-sdhci: refactor tapdelay settings
-Content-Language: en-US
-To: Steffen Dirkwinkel <lists@steffen.cc>, u-boot@lists.denx.de
-Cc: Steffen Dirkwinkel <s.dirkwinkel@beckhoff.com>,
- Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Johan Jonker <jbx6244@gmail.com>,
- Michal Simek <michal.simek@amd.com>, Peng Fan <peng.fan@nxp.com>,
- Tom Rini <trini@konsulko.com>, venkatesh.abbarapu@amd.com
-References: <20240223140613.1240570-1-lists@steffen.cc>
- <20240223140613.1240570-2-lists@steffen.cc>
-From: Love Kumar <love.kumar@amd.com>
-In-Reply-To: <20240223140613.1240570-2-lists@steffen.cc>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: PN2PR01CA0183.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:c01:e8::9) To SA0PR12MB4461.namprd12.prod.outlook.com
- (2603:10b6:806:9c::22)
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=K1qn56EPf+l3ql8jBwQRk6bXbtD9z1gYxDAcvLSpnTUQ412jqKGW7H+NSJ2BmZmvP4JNaL3TJM9AkpiGUxRAkU7+opVN2F6Wb55CiiupY+uvynz0tnvuJEy6VFYfPl7zU/nnwf4/03EG8b3EQJUVbXpt1I/lT7nu0iQ2m0fnX1w=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
+ bh=D3vlX0oEru3Cd26MqiVlNWb9KMXDa7hZmqQYCjBRgKs=;
+ h=date:mime-version:subject:message-id:from;
+Received: from [172.16.12.77] (unknown [58.22.7.114])
+ by smtp.qiye.163.com (Hmail) with ESMTPA id EB4389002DB;
+ Thu, 14 Mar 2024 14:46:26 +0800 (CST)
+Message-ID: <f2beb621-eb2e-46b2-8341-3219964bc0f6@rock-chips.com>
+Date: Thu, 14 Mar 2024 14:46:26 +0800
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA0PR12MB4461:EE_|IA1PR12MB7541:EE_
-X-MS-Office365-Filtering-Correlation-Id: 66473be3-092c-4aae-c90c-08dc43f26ac5
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: H6YM+E3WMdYhIQPYrKZEu/Vl5QtO3+8of8+r3MoDeRa2YUhWbtqsb9957srsD4Jq0prfkqR4glEJzQUBKgmGYN32NZ5cFDBip+nGjsDxvM2p8PApbYzSiBktcyBid96R4IqsCIWJgRU2ODIhdL3ti6ikZKBdudKYjDeCeyPC3HqDOW179EJ350u6J5E3pKhsQUG8g4FSdqdUiAF0o4/10QSw5LsOjJlmRRIHPf0huSIAaCowTNW6wnHSZrU9FI37bMew/XNXlmBW7oE863IKpeNQaX40K2Z+9GUviZt7PWcr8ShmKBIC9qkBtgsT82XV6nPZ0U7CfbijLZGgW1PVpoLRIsiKppccYvTPMy4qLL7TAFEt/JfctTqjZcEVf8Coc2/GLc5pdAW52OhfevWKppuW/Wv51RJ743Old8pkP9843ajfKxs8VAcIVQ2S+hLCUwFTs6mPsM3sTBhyVB8oWunQ2Y9duMgcuv/OtI6msIDLxD+rssfSktGGnVg7/E7lFq17vrjUjtI4YDr/SxONBXPZtGxPoiIh+lJlleQXHILpM60ctC6s2rIKSB7P5KJ0rf2luAsoGM6QxYrEq8VZtf3rBOV8/ptcoKlrx7zmPu4BGQzCtBh6I6SkZjGRixxjXBsWmwzhG+aG6OFyUqil75ASO8prfwalTcAeAQclVv8=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SA0PR12MB4461.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(1800799015)(376005); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SktXUUFUd3RMemNTSys5VXloL3dpRDFSOEQzMGkxNm81TmtZenhQS0Z0dFBX?=
- =?utf-8?B?VkVidDhOZlhxMHVkTGtKczhOVndjbUUwYUJoWjlyNWI4SmhTTUdzZzdObVl0?=
- =?utf-8?B?VThWR3FZVXEvMjNSVE1aYkJ0ejIzZ0VsdFRidHlobnBJM2o3N2U3ODRGMExq?=
- =?utf-8?B?WUlJa2JtdzV5cTdNUHdtREMvN2VlRG0xcXpsNGJ5MWRCOUJjRzY2djYxZnFG?=
- =?utf-8?B?anp2TUJ3MUxwZ1JidzByYjYwY0ZKUjZZN3V0QlB2ZzZLcjBoR1JVK3I1bXRT?=
- =?utf-8?B?OUFLRjNHTWVQSGxteHFQeS9pSWRQVmxMR2JqRW9VSFoyMXJCMTJkb3ZFaGxt?=
- =?utf-8?B?K29oR3g4dWNTdWJRNmxzQlZkSzAwbFhYazE5aDRsQ2hXK0xIaGRUM2tpUFlB?=
- =?utf-8?B?REJvY0hld2pHM21SbUJvQXJhaGRQbEpoaEpGQSt6K2ZZd2c0dnM5c1NwbWUv?=
- =?utf-8?B?MlZGYUZQdFR4eUtoeUhZMEZmZWFaWWpIOGtZU1Z6eUpaSVp1WWZ5bWNueEpW?=
- =?utf-8?B?YjQrTEg5bytya2hvci9pbFU3RnV3RkZwWGdGMmhEK2tSay9JZnY5TDg4alcz?=
- =?utf-8?B?K1pMdWtMSE1WeGxiYTlQVWZCS0tudm9MKzU0NjBpTXVsTFBoTHN6ck1CcE9k?=
- =?utf-8?B?bjY1VDJ4Ky9rQndrU2hnQnp4VVJwckdYNk5EMUxBT3JVck1xelBzL3FkSEFn?=
- =?utf-8?B?NXBrN0xXNnlQbTR4QlBhOTR1V2RtK0J1NjI0UXNGdE5WNUJsajBEdnZZZGl2?=
- =?utf-8?B?ZUFCL3YzVEx0ZENYU3JvMGpudnQ5b3dIWTZLdUxkb1A5NXJCTkJjUUhvaW9V?=
- =?utf-8?B?bVUrZVUxRzlGazZEQmdFRkhITGRrK0UvZ0ZaOEo0VnZ5YTNwT1Z6cXhLa0Z5?=
- =?utf-8?B?MU4zZVpoT0pHUmdnQ0RYQjljbVh4MTl2blhoVWhIbmdsZ0dKVVd1OGhvMDVZ?=
- =?utf-8?B?T3NxSkxOTWtUdGpZYW1WN3pVTlBrQmtVTWt6ZFRSUElOcUtUd0V4aGZJWVcr?=
- =?utf-8?B?WnA1dllaR1NmbUNkMGxIbjRseEJLM1NjSFBhdnhGUEo5YXRmcjY3OVhYUVcy?=
- =?utf-8?B?aW9yQTMxVUUyb0lSMnNGdW5DRVlwRTNvY1ZtNVNJek1XOHozSUR1OG50VGNo?=
- =?utf-8?B?UUwvU0d2Ni9CKzhuUGdGY1ZZdEtUSUJTdDdiWE83ZEFBV251N0dDQy9iWGFS?=
- =?utf-8?B?c2tzcW1HalhFeFh5TWJLQ296aFZMRXZLdjRYZVNhUitsUFFMN2hOS01keDIw?=
- =?utf-8?B?aXlrWk1kZThCUUw1QkJ2OGJkRndleFdUeVhwait6TTFxb0V4Z21WVXNjTU5r?=
- =?utf-8?B?eUxsVTlOVUFPbi80Y0hOUkdYUnVxS2w0QjlSdFNWZ0xXRlcxcDBtNG4xRE9N?=
- =?utf-8?B?RTU5eC9uTFRBSG9kTkdJRHF0SFRKL1Y1K2hnclJMMEY4dmp2ajVJQ0FEZ3hm?=
- =?utf-8?B?QUd0b09hRU5xdFV4Zk5yVFgxR1U5WVBJVWFjSkVFcTNBUTNqcVUwTGdLR2FZ?=
- =?utf-8?B?MnN5enhjUDFIZ3h4TnM4UFRTMjhSWm4zRTdpMHpOMlVTd0NQaDNwVTZRQlZI?=
- =?utf-8?B?UmN5a0hwRnlsRUM1NnJYLzdoM296c0hkTUlTSEZJUHR2bkUxQk91Z25WYzIz?=
- =?utf-8?B?ZzkzNHpNQXRuTTJiN1VDVmVrZk1ETDJhbVI0SWZnTUVPS2JnNnZVV3JQTldG?=
- =?utf-8?B?SVZJcUZTMjdUcVlGbUpNejRwdEJFOEVSQ3g1SlEzb3VHSFpOTU4wNDhXR2J3?=
- =?utf-8?B?U1Y2YTdaQVF3a29ObDVrcVVrdER6VmszWnBaVjV3WVNUb1ZlQ1p0SjVaUmJW?=
- =?utf-8?B?OVVqZzNHeHJiOXJTdy9xTmovdTBxWmdYdm9kalBWSW42bExRcUExRU1KbkVU?=
- =?utf-8?B?dWFGeVBURDZmYUdjREtZaEhhRFZNQTl4cks3M3lnZ0dCR3RVNUNaY3dqcU1E?=
- =?utf-8?B?bElFUE15VHZRajBKeWI2WXNSY3NUOTlxbk8vS2VRY3oxNUdXc0tkYmlCQ3VF?=
- =?utf-8?B?d2UwTVpua3pqbCsrSHFGbTA2VE1MSGkwVzREaDlWZFIySElTMWZRWmtPNjU0?=
- =?utf-8?B?c0o0RnpCaGhYWjhWN1J0WU9nTmVnVnZpK21TZG54dzZlL1MyQStqNDNENDh4?=
- =?utf-8?Q?sBPA=3D?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 66473be3-092c-4aae-c90c-08dc43f26ac5
-X-MS-Exchange-CrossTenant-AuthSource: SA0PR12MB4461.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Mar 2024 06:46:03.6449 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: cJ4dAf4hyFOZmJ37s8fLPmt/GexWmD4yHp/lZ7kweO2vMbtR+YypvDVyoNS3d7Ze
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB7541
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 3/5] rockchip: rk3328: regenerate defconfigs
+Content-Language: en-US
+To: Jonas Karlman <jonas@kwiboo.se>, wens@kernel.org
+Cc: u-boot@lists.denx.de, Christopher Obbard <chris.obbard@collabora.com>,
+ Dragan Simic <dsimic@manjaro.org>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Andy Yan <andy.yan@rock-chips.com>, Nick Xie <nick@khadas.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Deepak Das <deepakdas.linux@gmail.com>, Alexandre Vicenzi <linux@alxd.me>,
+ Tianling Shen <cnsztl@gmail.com>, David Bauer <mail@david-bauer.net>,
+ Xiaobo Tian <peterwillcn@gmail.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ Klaus Goger <klaus.goger@theobroma-systems.com>,
+ Loic Devulder <ldevulder@suse.com>, Levin Du <djw@t-chip.com.cn>,
+ Suniel Mahesh <sunil@amarulasolutions.com>, FUKAUMI Naoki <naoki@radxa.com>,
+ Banglang Huang <banglang.huang@foxmail.com>,
+ "Matwey V. Kornilov" <matwey.kornilov@gmail.com>,
+ Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>
+References: <20240212135111.1767734-1-wens@kernel.org>
+ <20240212135111.1767734-4-wens@kernel.org>
+ <5d174a17-72f8-4ba2-b1de-ca72dc5291ba@rock-chips.com>
+ <CAGb2v64Qt6=AC3DcTYGzQFJR-VeE+x+fkYsDDmTB32539sbXng@mail.gmail.com>
+ <ff2e3b61-e7bf-47db-9c48-9fba0c84ac83@kwiboo.se>
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <ff2e3b61-e7bf-47db-9c48-9fba0c84ac83@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGUgZQlZKT0xPSEhJGUIZQkNVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk5MSUpJVUpLS1VKQl
+ kG
+X-HM-Tid: 0a8e3bb6556803a9kunmeb4389002db
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Mxg6LRw5GDMWMC8sFEs0CjMd
+ OBUwCylVSlVKTEpLSEJDTENCTkJJVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKSEpJSzcG
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -147,154 +91,254 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-When we run in el3 for zynqmp board, we are seeing below issue with this 
-patch:
+On 2024/3/13 23:32, Jonas Karlman wrote:
+> Hi Kever and Chen-Yu,
+>
+> On 2024-03-13 15:43, Chen-Yu Tsai wrote:
+>> Hi,
+>>
+>> On Wed, Mar 13, 2024 at 6:29 PM Kever Yang <kever.yang@rock-chips.com> wrote:
+>>> Hi Chen-Yu,
+>>>
+>>> On 2024/2/12 21:51, Chen-Yu Tsai wrote:
+>>>
+>>> From: Chen-Yu Tsai <wens@csie.org>
+>>>
+>>> Regenerate RK3328 defconfigs after adding imply statements.
+>>>
+>>> Signed-off-by: Chen-Yu Tsai <wens@csie.org>
+>>> Reviewed-by: Christopher Obbard <chris.obbard@collabora.com>
+>>> Reviewed-by: Dragan Simic <dsimic@manjaro.org>
+>>> ---
+>>>   configs/evb-rk3328_defconfig                  | 3 ---
+>>>   configs/nanopi-r2c-plus-rk3328_defconfig      | 3 ---
+>>>   configs/nanopi-r2c-rk3328_defconfig           | 3 ---
+>>>   configs/nanopi-r2s-rk3328_defconfig           | 3 ---
+>>>   configs/orangepi-r1-plus-lts-rk3328_defconfig | 3 ---
+>>>   configs/orangepi-r1-plus-rk3328_defconfig     | 3 ---
+>>>   configs/roc-cc-rk3328_defconfig               | 3 ---
+>>>   configs/rock-pi-e-rk3328_defconfig            | 3 ---
+>>>   configs/rock64-rk3328_defconfig               | 3 ---
+>>>   9 files changed, 27 deletions(-)
+>>>
+>>> diff --git a/configs/evb-rk3328_defconfig b/configs/evb-rk3328_defconfig
+>>> index 995bfd0558b1..c3bde3e5c457 100644
+>>> --- a/configs/evb-rk3328_defconfig
+>>> +++ b/configs/evb-rk3328_defconfig
+>>> @@ -30,7 +30,6 @@ CONFIG_LEGACY_IMAGE_FORMAT=y
+>>>   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-evb.dtb"
+>>>   # CONFIG_DISPLAY_CPUINFO is not set
+>>>   CONFIG_DISPLAY_BOARDINFO_LATE=y
+>>> -CONFIG_MISC_INIT_R=y
+>>>   CONFIG_SPL_MAX_SIZE=0x40000
+>>>   CONFIG_SPL_PAD_TO=0x7f8000
+>>>   CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+>>> @@ -70,8 +69,6 @@ CONFIG_FASTBOOT_BUF_ADDR=0x800800
+>>>   CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+>>>   CONFIG_ROCKCHIP_GPIO=y
+>>>   CONFIG_SYS_I2C_ROCKCHIP=y
+>>> -CONFIG_MISC=y
+>>> -CONFIG_ROCKCHIP_EFUSE=y
+>>>
+>>> There is no this config in the all these boards when I check the code on next,
+>>>
+>>> which cause the conflict when apply this patch.
+>> I can respin, but should I still base my patches on Jonas's series?
+>> I don't see them in next.
+> The series "rockchip: rk3328: Update defconfigs, DTs and enable boot
+> from SPI" [1] that this and some of the other patches depends on is
+> missing in your for-next branch. Should we rebase on your for-next
+> or will you pick that series? :-)
+
+Sorry, forgot to pick this series, all patches apply correctly after 
+this patch set.
 
 
-Model: ZynqMP MINI EMMC0
-Board: Xilinx ZynqMP
-DRAM:  512 MiB
-EL Level:      EL3
-Secure Boot:   not authenticated, not encrypted
-Multiboot:     0
-Core:  10 devices, 9 uclasses, devicetree: embed
-MMC:   sdhci@ff160000: 0
-Loading Environment from <NULL>... OK
-In:    dcc
-Out:   dcc
-Err:   dcc
-ZynqMP> mmc list
-sdhci@ff160000: 0
-ZynqMP> mmc dev 0 0
-arasan_sdhci sdhci@ff160000: Error setting Input Tap Delay
-sdhci_set_clock: Error while setting tap delay
-sdhci_send_command: Timeout for status update: 00000000 00000001
-ZynqMP>
+Thanks,
 
-Regards,
-Love Kumar
+- Kever
 
-On 23/02/24 7:36 pm, Steffen Dirkwinkel wrote:
-> From: Steffen Dirkwinkel <s.dirkwinkel@beckhoff.com>
-> 
-> Previously we were setting in tapdelay for SD1 every time even if SD0 was
-> requested.
-> The SD tapdelay settings are shifted by 16 bits between SD0 and SD1.
-> We can use that to make our tapdelay setup simpler. This is also how it
-> currently works in arm-trusted-firmware.
-> 
-> Signed-off-by: Steffen Dirkwinkel <s.dirkwinkel@beckhoff.com>
-> ---
-> 
->   drivers/mmc/zynq_sdhci.c | 65 +++++++++++++++++-----------------------
->   1 file changed, 28 insertions(+), 37 deletions(-)
-> 
-> diff --git a/drivers/mmc/zynq_sdhci.c b/drivers/mmc/zynq_sdhci.c
-> index 935540d1719..d4845245b2a 100644
-> --- a/drivers/mmc/zynq_sdhci.c
-> +++ b/drivers/mmc/zynq_sdhci.c
-> @@ -42,14 +42,11 @@
->   #define SD_OTAP_DLY			0xFF180318
->   #define SD0_DLL_RST			BIT(2)
->   #define SD1_DLL_RST			BIT(18)
-> +#define SD1_TAP_OFFSET			16
->   #define SD0_ITAPCHGWIN			BIT(9)
-> -#define SD1_ITAPCHGWIN			BIT(25)
->   #define SD0_ITAPDLYENA			BIT(8)
-> -#define SD1_ITAPDLYENA			BIT(24)
->   #define SD0_ITAPDLYSEL_MASK		GENMASK(7, 0)
-> -#define SD1_ITAPDLYSEL_MASK		GENMASK(23, 16)
->   #define SD0_OTAPDLYSEL_MASK		GENMASK(5, 0)
-> -#define SD1_OTAPDLYSEL_MASK		GENMASK(21, 16)
->   
->   #define MIN_PHY_CLK_HZ			50000000
->   
-> @@ -275,44 +272,32 @@ static int arasan_sdhci_config_dll(struct sdhci_host *host, unsigned int clock,
->   static inline int arasan_zynqmp_set_in_tapdelay(u32 node_id, u32 itap_delay)
->   {
->   	int ret;
-> +	u32 shift;
->   
-> -	if (IS_ENABLED(CONFIG_SPL_BUILD) || current_el() == 3) {
-> -		if (node_id == NODE_SD_0) {
-> -			ret = zynqmp_mmio_write(SD_ITAP_DLY, SD0_ITAPCHGWIN,
-> -						SD0_ITAPCHGWIN);
-> -			if (ret)
-> -				return ret;
-> -
-> -			ret = zynqmp_mmio_write(SD_ITAP_DLY, SD0_ITAPDLYENA,
-> -						SD0_ITAPDLYENA);
-> -			if (ret)
-> -				return ret;
-> -
-> -			ret = zynqmp_mmio_write(SD_ITAP_DLY, SD0_ITAPDLYSEL_MASK,
-> -						itap_delay);
-> -			if (ret)
-> -				return ret;
-> +	if (node_id == NODE_SD_0)
-> +		shift = 0;
-> +	else if (node_id == NODE_SD_1)
-> +		shift = SD1_TAP_OFFSET;
-> +	else
-> +		return -EINVAL;
->   
-> -			ret = zynqmp_mmio_write(SD_ITAP_DLY, SD0_ITAPCHGWIN, 0);
-> -			if (ret)
-> -				return ret;
-> -		}
-> -		ret = zynqmp_mmio_write(SD_ITAP_DLY, SD1_ITAPCHGWIN,
-> -					SD1_ITAPCHGWIN);
-> +	if (IS_ENABLED(CONFIG_SPL_BUILD) || current_el() == 3) {
-> +		ret = zynqmp_mmio_write(SD_ITAP_DLY, SD0_ITAPCHGWIN << shift,
-> +					SD0_ITAPCHGWIN << shift);
->   		if (ret)
->   			return ret;
->   
-> -		ret = zynqmp_mmio_write(SD_ITAP_DLY, SD1_ITAPDLYENA,
-> -					SD1_ITAPDLYENA);
-> +		ret = zynqmp_mmio_write(SD_ITAP_DLY, SD0_ITAPDLYENA << shift,
-> +					SD0_ITAPDLYENA << shift);
->   		if (ret)
->   			return ret;
->   
-> -		ret = zynqmp_mmio_write(SD_ITAP_DLY, SD1_ITAPDLYSEL_MASK,
-> -					(itap_delay << 16));
-> +		ret = zynqmp_mmio_write(SD_ITAP_DLY, SD0_ITAPDLYSEL_MASK << shift,
-> +					itap_delay << shift);
->   		if (ret)
->   			return ret;
->   
-> -		ret = zynqmp_mmio_write(SD_ITAP_DLY, SD1_ITAPCHGWIN, 0);
-> +		ret = zynqmp_mmio_write(SD_ITAP_DLY, SD0_ITAPCHGWIN << shift, 0);
->   		if (ret)
->   			return ret;
->   	} else {
-> @@ -326,14 +311,20 @@ static inline int arasan_zynqmp_set_in_tapdelay(u32 node_id, u32 itap_delay)
->   
->   static inline int arasan_zynqmp_set_out_tapdelay(u32 node_id, u32 otap_delay)
->   {
-> +	u32 shift;
-> +
-> +	if (node_id == NODE_SD_0)
-> +		shift = 0;
-> +	else if (node_id == NODE_SD_1)
-> +		shift = SD1_TAP_OFFSET;
-> +	else
-> +		return -EINVAL;
-> +
->   	if (IS_ENABLED(CONFIG_SPL_BUILD) || current_el() == 3) {
-> -		if (node_id == NODE_SD_0)
-> -			return zynqmp_mmio_write(SD_OTAP_DLY,
-> -						 SD0_OTAPDLYSEL_MASK,
-> -						 otap_delay);
-> +		return zynqmp_mmio_write(SD_OTAP_DLY,
-> +						SD0_OTAPDLYSEL_MASK << shift,
-> +						otap_delay << shift);
->   
-> -		return zynqmp_mmio_write(SD_OTAP_DLY, SD1_OTAPDLYSEL_MASK,
-> -					 (otap_delay << 16));
->   	} else {
->   		return xilinx_pm_request(PM_IOCTL, node_id,
->   					 IOCTL_SET_SD_TAPDELAY,
+>
+> [1] https://patchwork.ozlabs.org/cover/1900345/
+>
+> Regards,
+> Jonas
+>
+>> ChenYu
+>>
+>>> Thanks,
+>>>
+>>> - Kever
+>>>
+>>>   CONFIG_MMC_DW=y
+>>>   CONFIG_MMC_DW_ROCKCHIP=y
+>>>   CONFIG_PHY_MOTORCOMM=y
+>>> diff --git a/configs/nanopi-r2c-plus-rk3328_defconfig b/configs/nanopi-r2c-plus-rk3328_defconfig
+>>> index 1cb0ed855398..1b0fa27ced16 100644
+>>> --- a/configs/nanopi-r2c-plus-rk3328_defconfig
+>>> +++ b/configs/nanopi-r2c-plus-rk3328_defconfig
+>>> @@ -31,7 +31,6 @@ CONFIG_LEGACY_IMAGE_FORMAT=y
+>>>   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-nanopi-r2c-plus.dtb"
+>>>   # CONFIG_DISPLAY_CPUINFO is not set
+>>>   CONFIG_DISPLAY_BOARDINFO_LATE=y
+>>> -CONFIG_MISC_INIT_R=y
+>>>   CONFIG_SPL_MAX_SIZE=0x40000
+>>>   CONFIG_SPL_PAD_TO=0x7f8000
+>>>   CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+>>> @@ -72,8 +71,6 @@ CONFIG_FASTBOOT_BUF_ADDR=0x800800
+>>>   CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+>>>   CONFIG_ROCKCHIP_GPIO=y
+>>>   CONFIG_SYS_I2C_ROCKCHIP=y
+>>> -CONFIG_MISC=y
+>>> -CONFIG_ROCKCHIP_EFUSE=y
+>>>   CONFIG_MMC_DW=y
+>>>   CONFIG_MMC_DW_ROCKCHIP=y
+>>>   CONFIG_PHY_MOTORCOMM=y
+>>> diff --git a/configs/nanopi-r2c-rk3328_defconfig b/configs/nanopi-r2c-rk3328_defconfig
+>>> index 59801328deda..edf24623da2a 100644
+>>> --- a/configs/nanopi-r2c-rk3328_defconfig
+>>> +++ b/configs/nanopi-r2c-rk3328_defconfig
+>>> @@ -31,7 +31,6 @@ CONFIG_LEGACY_IMAGE_FORMAT=y
+>>>   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-nanopi-r2c.dtb"
+>>>   # CONFIG_DISPLAY_CPUINFO is not set
+>>>   CONFIG_DISPLAY_BOARDINFO_LATE=y
+>>> -CONFIG_MISC_INIT_R=y
+>>>   CONFIG_SPL_MAX_SIZE=0x40000
+>>>   CONFIG_SPL_PAD_TO=0x7f8000
+>>>   CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+>>> @@ -72,8 +71,6 @@ CONFIG_FASTBOOT_BUF_ADDR=0x800800
+>>>   CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+>>>   CONFIG_ROCKCHIP_GPIO=y
+>>>   CONFIG_SYS_I2C_ROCKCHIP=y
+>>> -CONFIG_MISC=y
+>>> -CONFIG_ROCKCHIP_EFUSE=y
+>>>   CONFIG_MMC_DW=y
+>>>   CONFIG_MMC_DW_ROCKCHIP=y
+>>>   CONFIG_PHY_MOTORCOMM=y
+>>> diff --git a/configs/nanopi-r2s-rk3328_defconfig b/configs/nanopi-r2s-rk3328_defconfig
+>>> index 61914b1650d2..32c99dfecb86 100644
+>>> --- a/configs/nanopi-r2s-rk3328_defconfig
+>>> +++ b/configs/nanopi-r2s-rk3328_defconfig
+>>> @@ -31,7 +31,6 @@ CONFIG_LEGACY_IMAGE_FORMAT=y
+>>>   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-nanopi-r2s.dtb"
+>>>   # CONFIG_DISPLAY_CPUINFO is not set
+>>>   CONFIG_DISPLAY_BOARDINFO_LATE=y
+>>> -CONFIG_MISC_INIT_R=y
+>>>   CONFIG_SPL_MAX_SIZE=0x40000
+>>>   CONFIG_SPL_PAD_TO=0x7f8000
+>>>   CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+>>> @@ -72,8 +71,6 @@ CONFIG_FASTBOOT_BUF_ADDR=0x800800
+>>>   CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+>>>   CONFIG_ROCKCHIP_GPIO=y
+>>>   CONFIG_SYS_I2C_ROCKCHIP=y
+>>> -CONFIG_MISC=y
+>>> -CONFIG_ROCKCHIP_EFUSE=y
+>>>   CONFIG_MMC_DW=y
+>>>   CONFIG_MMC_DW_ROCKCHIP=y
+>>>   CONFIG_PHY_MOTORCOMM=y
+>>> diff --git a/configs/orangepi-r1-plus-lts-rk3328_defconfig b/configs/orangepi-r1-plus-lts-rk3328_defconfig
+>>> index 968110c8cd6f..f554a284d930 100644
+>>> --- a/configs/orangepi-r1-plus-lts-rk3328_defconfig
+>>> +++ b/configs/orangepi-r1-plus-lts-rk3328_defconfig
+>>> @@ -34,7 +34,6 @@ CONFIG_LEGACY_IMAGE_FORMAT=y
+>>>   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-orangepi-r1-plus-lts.dtb"
+>>>   # CONFIG_DISPLAY_CPUINFO is not set
+>>>   CONFIG_DISPLAY_BOARDINFO_LATE=y
+>>> -CONFIG_MISC_INIT_R=y
+>>>   CONFIG_SPL_MAX_SIZE=0x40000
+>>>   CONFIG_SPL_PAD_TO=0x7f8000
+>>>   CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+>>> @@ -77,8 +76,6 @@ CONFIG_FASTBOOT_BUF_ADDR=0x800800
+>>>   CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+>>>   CONFIG_ROCKCHIP_GPIO=y
+>>>   CONFIG_SYS_I2C_ROCKCHIP=y
+>>> -CONFIG_MISC=y
+>>> -CONFIG_ROCKCHIP_EFUSE=y
+>>>   CONFIG_MMC_DW=y
+>>>   CONFIG_MMC_DW_ROCKCHIP=y
+>>>   CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+>>> diff --git a/configs/orangepi-r1-plus-rk3328_defconfig b/configs/orangepi-r1-plus-rk3328_defconfig
+>>> index 7038f09f202c..162032460fe0 100644
+>>> --- a/configs/orangepi-r1-plus-rk3328_defconfig
+>>> +++ b/configs/orangepi-r1-plus-rk3328_defconfig
+>>> @@ -34,7 +34,6 @@ CONFIG_LEGACY_IMAGE_FORMAT=y
+>>>   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-orangepi-r1-plus.dtb"
+>>>   # CONFIG_DISPLAY_CPUINFO is not set
+>>>   CONFIG_DISPLAY_BOARDINFO_LATE=y
+>>> -CONFIG_MISC_INIT_R=y
+>>>   CONFIG_SPL_MAX_SIZE=0x40000
+>>>   CONFIG_SPL_PAD_TO=0x7f8000
+>>>   CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+>>> @@ -77,8 +76,6 @@ CONFIG_FASTBOOT_BUF_ADDR=0x800800
+>>>   CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+>>>   CONFIG_ROCKCHIP_GPIO=y
+>>>   CONFIG_SYS_I2C_ROCKCHIP=y
+>>> -CONFIG_MISC=y
+>>> -CONFIG_ROCKCHIP_EFUSE=y
+>>>   CONFIG_MMC_DW=y
+>>>   CONFIG_MMC_DW_ROCKCHIP=y
+>>>   CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+>>> diff --git a/configs/roc-cc-rk3328_defconfig b/configs/roc-cc-rk3328_defconfig
+>>> index 7d81a715ef25..02be1102697b 100644
+>>> --- a/configs/roc-cc-rk3328_defconfig
+>>> +++ b/configs/roc-cc-rk3328_defconfig
+>>> @@ -31,7 +31,6 @@ CONFIG_LEGACY_IMAGE_FORMAT=y
+>>>   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-roc-cc.dtb"
+>>>   # CONFIG_DISPLAY_CPUINFO is not set
+>>>   CONFIG_DISPLAY_BOARDINFO_LATE=y
+>>> -CONFIG_MISC_INIT_R=y
+>>>   CONFIG_SPL_MAX_SIZE=0x40000
+>>>   CONFIG_SPL_PAD_TO=0x7f8000
+>>>   CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+>>> @@ -73,8 +72,6 @@ CONFIG_FASTBOOT_BUF_ADDR=0x800800
+>>>   CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+>>>   CONFIG_ROCKCHIP_GPIO=y
+>>>   CONFIG_SYS_I2C_ROCKCHIP=y
+>>> -CONFIG_MISC=y
+>>> -CONFIG_ROCKCHIP_EFUSE=y
+>>>   CONFIG_MMC_DW=y
+>>>   CONFIG_MMC_DW_ROCKCHIP=y
+>>>   CONFIG_PHY_REALTEK=y
+>>> diff --git a/configs/rock-pi-e-rk3328_defconfig b/configs/rock-pi-e-rk3328_defconfig
+>>> index ddd482dd0195..ac6d6c5df772 100644
+>>> --- a/configs/rock-pi-e-rk3328_defconfig
+>>> +++ b/configs/rock-pi-e-rk3328_defconfig
+>>> @@ -32,7 +32,6 @@ CONFIG_LEGACY_IMAGE_FORMAT=y
+>>>   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-rock-pi-e.dtb"
+>>>   # CONFIG_DISPLAY_CPUINFO is not set
+>>>   CONFIG_DISPLAY_BOARDINFO_LATE=y
+>>> -CONFIG_MISC_INIT_R=y
+>>>   CONFIG_SPL_MAX_SIZE=0x40000
+>>>   CONFIG_SPL_PAD_TO=0x7f8000
+>>>   CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+>>> @@ -73,8 +72,6 @@ CONFIG_FASTBOOT_BUF_ADDR=0x800800
+>>>   CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+>>>   CONFIG_ROCKCHIP_GPIO=y
+>>>   CONFIG_SYS_I2C_ROCKCHIP=y
+>>> -CONFIG_MISC=y
+>>> -CONFIG_ROCKCHIP_EFUSE=y
+>>>   CONFIG_MMC_DW=y
+>>>   CONFIG_MMC_DW_ROCKCHIP=y
+>>>   CONFIG_PHY_REALTEK=y
+>>> diff --git a/configs/rock64-rk3328_defconfig b/configs/rock64-rk3328_defconfig
+>>> index 01e447448513..718fb8f2025c 100644
+>>> --- a/configs/rock64-rk3328_defconfig
+>>> +++ b/configs/rock64-rk3328_defconfig
+>>> @@ -34,7 +34,6 @@ CONFIG_LEGACY_IMAGE_FORMAT=y
+>>>   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-rock64.dtb"
+>>>   # CONFIG_DISPLAY_CPUINFO is not set
+>>>   CONFIG_DISPLAY_BOARDINFO_LATE=y
+>>> -CONFIG_MISC_INIT_R=y
+>>>   CONFIG_SPL_MAX_SIZE=0x40000
+>>>   CONFIG_SPL_PAD_TO=0x7f8000
+>>>   CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+>>> @@ -77,8 +76,6 @@ CONFIG_FASTBOOT_BUF_ADDR=0x800800
+>>>   CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+>>>   CONFIG_ROCKCHIP_GPIO=y
+>>>   CONFIG_SYS_I2C_ROCKCHIP=y
+>>> -CONFIG_MISC=y
+>>> -CONFIG_ROCKCHIP_EFUSE=y
+>>>   CONFIG_MMC_DW=y
+>>>   CONFIG_MMC_DW_ROCKCHIP=y
+>>>   CONFIG_SPI_FLASH_SFDP_SUPPORT=y
