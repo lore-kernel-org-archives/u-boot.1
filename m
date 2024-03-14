@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F01C1C5475B
-	for <u-boot@archiver.kernel.org>; Thu, 14 Mar 2024 04:16:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B696C54E5D
+	for <u-boot@archiver.kernel.org>; Thu, 14 Mar 2024 04:16:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B65B87F19;
-	Thu, 14 Mar 2024 05:15:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7FEFC87F46;
+	Thu, 14 Mar 2024 05:15:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1710389754;
-	bh=8c7U9C/VNEC3Z08uKhvYipiO0h3EqtK+AuBptVMiiTs=;
+	s=phobos-20191101; t=1710389755;
+	bh=SdLZiYzUHJoWmurtbbreJhqHRNkYsUp7iMwt9+g1YVg=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=SgEvecZhigLFvMyzF9JftHnm23npEXNNULryOwcYnvV3L9Rzj3K6iQfQmStOY24n3
-	 IMPI+GwmX6UtZBQu3Fx9MovXZ/yZLydqH9X8zNB8BSZ9Ba0Yu+h/qKSAvlbIf4m5El
-	 hE9wqNbtokCakpWF6eI5HGNDvF2pBkGGFyDlEJv+tR/CTDN/GSkwFIGtvlJ7efww+A
-	 OZXhGI85c0UtUT5txrU9keUsAspobtIhdPGaDxdjo9q+rUv3N+nQNzIU6sRDjukxQ+
-	 wim3xjkZ6lGlEVvfca21Oy9zxwTT4OIR6BAflbzKieY5hMRM+pH92IKlzNJoixtw4C
-	 PPC9oVE+gXr6g==
+	b=Haz1RmtAYTMEddcNATDQmgnJcKkYGtNZptifcGBaZE41Sj/Fz2kxKxgjOFwRVD4AD
+	 m97p5f87kxhWBn0qp+ujiS7UjJCuC9IV/ymXlqrQGGZl4ksIhegpw8xH8aj/K9FAVN
+	 fyeJUbZOxKsVBYxb9KcWo67LXS2Z64+4OAOwegue0Y8QaFv3cTBe/yXgiHgIRdrjAZ
+	 l3QpoFGTSa5FFZATgSZrW2yEzwMD+ckIulhsYrKB2DpVewBLtbNvhO61XaP2N34SXp
+	 4UX2DG4NIVnOWZCwxkctYBrs3qGG1xhOyjMT/M2di0i3moWIx0WMQipzMsp2eduK5b
+	 oLx3vGS3wbrBA==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 3F9AD87EF6;
- Thu, 14 Mar 2024 05:15:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id EF50887F3F;
+ Thu, 14 Mar 2024 05:15:51 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1710389751;
- bh=8c7U9C/VNEC3Z08uKhvYipiO0h3EqtK+AuBptVMiiTs=;
+ s=phobos-20191101; t=1710389753;
+ bh=SdLZiYzUHJoWmurtbbreJhqHRNkYsUp7iMwt9+g1YVg=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=SHu9hTtXeGOdIdzRg65sMmxzEkoOkq4uvuTOyv2NAOIBeE5XM3F0JhneihVfryPfO
- d/RMu/lYOl9u902nqW3/C0NUywNiboFyvvulezWzJECJ57clPWKv1VuC+z4meuukIw
- 4nWDUuOtQH3ha2Yke2gpsj00FSwU+gMcCeknTmbZPIT4LJtMdVj1sempGfgoa4gzx3
- 3qN9Pbi4aQh+8tz22BE9xy3EM/8FLcrbdDj5gq9hR0LTipgY9FrEmSgJ6vFQA7UUu0
- zr0qxTz+8tuI7lpoGURXu2vj8J6GsNUM8G33O6rpNyC19KEmuW6dzfNL9eJ4qiWtJG
- JcXq+QvMpgzuA==
-Message-ID: <dbd4f385-d93f-48db-a7e9-88b86f3d7445@denx.de>
-Date: Thu, 14 Mar 2024 04:59:02 +0100
+ b=SbjplByDlwUsgmyrkd13e1B7mKRrLqbHhYAG5TgxUDDgG4rSNmOSTbxDrD6Jq3+GN
+ 3BA7Y/yqGU3K8mlI/Lh+SNrezY16ns9Y9VP0TdcAq6Ux/8nVlLAAT2n7sFrKUO3+ja
+ YcoM0zWUBaxKNGejJuj2vxtRUB7HS4vp7cTuy8KNaWAWUAY5knQ6gS37+77r2/8eEc
+ 0Icd/eUsSOtYa2B3V/62qpU9NLRqGN/Z9YPmGn6uDSbf/d4ceBTQJiDF/81ntIV87w
+ cxden8XhqIMjPNc5t5a4W8bklRXJrXIqM46LiZoWa9aSj6VCn2XiEoLqyhMiUuNn2J
+ 5+cEkBgMbZJ+g==
+Message-ID: <cd1d4c59-a30c-472c-a793-9a5516108abd@denx.de>
+Date: Thu, 14 Mar 2024 05:03:40 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 04/11] imx8mp: power-domain: Don't power off pd_bus
+Subject: Re: [PATCH v3 05/11] imx8mp: power-domain: Add PCIe support
 Content-Language: en-US
 To: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de
 Cc: trini@konsulko.com, tharvey@gateworks.com, marcel.ziswiler@toradex.com,
@@ -54,9 +54,9 @@ Cc: trini@konsulko.com, tharvey@gateworks.com, marcel.ziswiler@toradex.com,
  fathi.boudra@linaro.org, remi.duraffort@linaro.org,
  daniel.thompson@linaro.org
 References: <20240312070338.86127-1-sumit.garg@linaro.org>
- <20240312070338.86127-5-sumit.garg@linaro.org>
+ <20240312070338.86127-6-sumit.garg@linaro.org>
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240312070338.86127-5-sumit.garg@linaro.org>
+In-Reply-To: <20240312070338.86127-6-sumit.garg@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -76,40 +76,11 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 3/12/24 8:03 AM, Sumit Garg wrote:
-> power_domain_on/off() isn't refcounted and power domain bus shouldn't be
-> turned off for a single peripheral domain as it would negatively affect
-> other peripheral domains. So lets just skip turning off bus power
-> domain.
-
-What exactly is the issue and how did you trigger it ?
-
-Details please.
-
-> Fixes: 898e7610c62a ("imx: power-domain: Add i.MX8MP HSIOMIX driver")
-> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-> ---
->   drivers/power/domain/imx8mp-hsiomix.c | 6 +-----
->   1 file changed, 1 insertion(+), 5 deletions(-)
+> Add support for GPCv2 power domains and clock handling for PCIe and
+> PCIe PHY.
 > 
-> diff --git a/drivers/power/domain/imx8mp-hsiomix.c b/drivers/power/domain/imx8mp-hsiomix.c
-> index e2d772c5ec7..448746432a2 100644
-> --- a/drivers/power/domain/imx8mp-hsiomix.c
-> +++ b/drivers/power/domain/imx8mp-hsiomix.c
-> @@ -50,7 +50,7 @@ static int imx8mp_hsiomix_on(struct power_domain *power_domain)
->   
->   	ret = power_domain_on(domain);
->   	if (ret)
-> -		goto err_pd;
-> +		return ret;
->   
->   	ret = clk_enable(&priv->clk_usb);
->   	if (ret)
-> @@ -63,8 +63,6 @@ static int imx8mp_hsiomix_on(struct power_domain *power_domain)
->   
->   err_clk:
->   	power_domain_off(domain);
-> -err_pd:
-> -	power_domain_off(&priv->pd_bus);
->   	return ret;
+> Tested-by: Tim Harvey <tharvey@gateworks.com> #imx8mp-venice*
+> Tested-by: Adam Ford <aford173@gmail.com> #imx8mp-beacon-kit
+> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 
-Why not add counter into imx8mp_hsiomix_priv structure in this driver ?
+Reviewed-by: Marek Vasut <marex@denx.de>
