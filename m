@@ -4,81 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DD95C54E66
-	for <u-boot@archiver.kernel.org>; Thu, 14 Mar 2024 00:38:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95FA5C54E58
+	for <u-boot@archiver.kernel.org>; Thu, 14 Mar 2024 00:39:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C74287E40;
-	Thu, 14 Mar 2024 01:38:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A5ADE87F2F;
+	Thu, 14 Mar 2024 01:38:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="A0vOz2nx";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SFYjNu7O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B72A587F05; Thu, 14 Mar 2024 01:38:50 +0100 (CET)
-Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
- [IPv6:2607:f8b0:4864:20::833])
+ id 8796F87F2F; Thu, 14 Mar 2024 01:38:56 +0100 (CET)
+Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
+ [IPv6:2607:f8b0:4864:20::229])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A19B187E3A
- for <u-boot@lists.denx.de>; Thu, 14 Mar 2024 01:38:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 52C3487F25
+ for <u-boot@lists.denx.de>; Thu, 14 Mar 2024 01:38:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x833.google.com with SMTP id
- d75a77b69052e-42a029c8e76so2612061cf.2
- for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 17:38:48 -0700 (PDT)
+Received: by mail-oi1-x229.google.com with SMTP id
+ 5614622812f47-3bbc649c275so302999b6e.0
+ for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 17:38:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1710376727; x=1710981527; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1710376733; x=1710981533; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=T5s92V2io+pf8yq95oI/Gl2dcnN1lYHZ5Ymj3sO6HH0=;
- b=A0vOz2nxNUf/CSXT0kd6fRI4b0BTDL+mvQk8kjdoNve6HPnpLYUIWHXP/gIZUkvTBa
- LvIsL3jtB8HjDOxmg7pJi6XbTSZtyv5+UDbaXZbyhkmr0hnlEx+ioG4YuVzzT04Y6K/e
- X5SgB4/YJzBIwtkrXQwFgG/eek5zGuU1coE1E=
+ bh=f7a6LDWxAdBS9lLiW4BPxn4582g0nw5GAcTLDZyvLxU=;
+ b=SFYjNu7OUxrkyPBgqDZfLZ6TkivhHMS4ijNWnSwtv2VjZRnQUzX9jE5jI2mno1ohX2
+ kMExjs8WUwb9O8DfEpT9GJSu4ccT1OU6ZR+2Imc6ifCzUe3hOTD6nFixjejC3Mj0Ayk9
+ mAl3lHHMe3jKw+3BmIsCBJHgddhJyrL++Juaw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710376727; x=1710981527;
+ d=1e100.net; s=20230601; t=1710376733; x=1710981533;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=T5s92V2io+pf8yq95oI/Gl2dcnN1lYHZ5Ymj3sO6HH0=;
- b=tHRE7HXDQP0vhH8Qydk4M5XXJykCbVOOWmhk3HcqnYSoaQQNZKrBKhOIPY/vFGgNba
- i+lbdeAUUc81mtU+TptF0ANW6mN+yQzXw4sz8rSF9TGPeF2sQHvTGWe5LpwxpqxI1IJQ
- 92EECSplsIgdFWOGIAeMPQTg0X/swA+DuYW6hcHRRwJ3X6vcp96UuRld8xsaw1PXdLow
- gMkTgBU9oxDKmvXNLRYRgfq2zT7pCrlPByPzWrJh0KiFNu5NI7OpWXToI934dK9dnqLD
- lZMZ7yl6gGoKlkZcF/qCU6DoboEJw7YYFQYm8EKdBvJmIHcTf/hIRCYR9IJeUA9xyztX
- jGlQ==
-X-Gm-Message-State: AOJu0YzAzAxRDCbaicuemkfseL0r8USX6z7F2oEmVp6rETLrqWX/jW/K
- yr6QgmLz491vrH2y/YJNeALi1TLbPOBRaYGD9KF/ijYRsJMNNXhnraa6hKyB888=
-X-Google-Smtp-Source: AGHT+IH72dnymKMYBmQjgndixJRF+R4hjntu+eXgZlP6IOCmMcGzW0+WIStv1UDxqO6bklPd6+OA6w==
-X-Received: by 2002:a05:622a:110c:b0:42f:3075:3e09 with SMTP id
- e12-20020a05622a110c00b0042f30753e09mr323810qty.4.1710376727398; 
- Wed, 13 Mar 2024 17:38:47 -0700 (PDT)
+ bh=f7a6LDWxAdBS9lLiW4BPxn4582g0nw5GAcTLDZyvLxU=;
+ b=svho3D84lpd6FETSLQWE9Y+lYgF1uJGxZTiPBQBBdrxPiQSoLSH+/GVYlFn8vwKBYj
+ qzC7Fhy0ghtj/E3p5AdxR9pMSG8O8o0Dloo+9HQCK20dOE4LCKhoucGh1mTd22hcimit
+ HZB1eK4IWXzwyRYTuO/ZejfZs+t1LqpKzrwB8ixmGk57YuWh9IyyCV46MxxgGHcB9NAk
+ Ln2Ml4nL5+KAkkSprSZ6dvcbz8TCmM5pqbFlXptC4kkoTDBrECYXRQRRmN9mJ/Xnkhkg
+ Khr2GnXs4YOm7xN8teF0eacxcTjHgXmL/LWsE7WPJbKgaHbexRkg2N1K4No5rn+xCbj2
+ CxuQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVxSvpKY/LfKh0BGeSwlwAKJ220qMmsm3JbJPg8sDBrm2TZftzsB8e87I0KFOj+vIwm5jLO8fuW3YZI5JYXBTweooVQeA==
+X-Gm-Message-State: AOJu0YwkqJ+rOpLLiz3lGzpmH0Gi68EhwIRH52rlLuOwXAkmfL/sj1ji
+ 5vx7Ol95u8RgRmzG9c872ffXqzEL9AF+TFIUxwcrm2YltlClel3ltyi16r+10Yo=
+X-Google-Smtp-Source: AGHT+IExAXGWpYPjOTb+nu22kUgN1LQbSBD9zXG78rRlvp5fTv12ibU1Qnet/zsUZ6M/0LpQKu9iuA==
+X-Received: by 2002:a05:6808:15a2:b0:3c1:d4dd:6aa4 with SMTP id
+ t34-20020a05680815a200b003c1d4dd6aa4mr410908oiw.44.1710376732728; 
+ Wed, 13 Mar 2024 17:38:52 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-007f-0000-0000-0000-1005.res6.spectrum.com.
  [2603:6081:7b00:7f::1005]) by smtp.gmail.com with ESMTPSA id
- gx9-20020a05622a27c900b0042ef4b5f4fbsm139227qtb.38.2024.03.13.17.38.46
+ s7-20020ae9f707000000b007885d2f3a74sm172553qkg.7.2024.03.13.17.38.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Mar 2024 17:38:46 -0700 (PDT)
-Date: Wed, 13 Mar 2024 20:38:44 -0400
+ Wed, 13 Mar 2024 17:38:52 -0700 (PDT)
+Date: Wed, 13 Mar 2024 20:38:49 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de, Geert Uytterhoeven <geert@linux-m68k.org>,
- Hans Verkuil <hverkuil-cisco@xs4all.nl>,
+To: Dan Carpenter <dan.carpenter@linaro.org>
+Cc: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Simon Glass <sjg@chromium.org>,
+ Angelo Dureghello <angelo@kernel-space.org>, Bin Meng <bmeng.cn@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Alexander Gendin <agendin@matrox.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>,
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
- Niklas =?iso-8859-1?Q?S=F6derlund?= <niklas.soderlund@ragnatech.se>,
- Simon Glass <sjg@chromium.org>, Wolfram Sang <wsa@kernel.org>
-Subject: Re: [PATCH] fdt: Fix bootm_low handling
-Message-ID: <20240314003844.GB3442575@bill-the-cat>
-References: <20240302225527.179601-1-marek.vasut+renesas@mailbox.org>
+ Michal Simek <michal.simek@amd.com>, Randolph <randolph@andestech.com>,
+ Yu Chien Peter Lin <peterlin@andestech.com>,
+ Samuel Holland <samuel@sholland.org>,
+ Shengyu Qu <wiagn233@outlook.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2 1/2] Kconfig: move CONFIG_32/64BIT to arch/Kconfig
+Message-ID: <20240314003849.GC3442575@bill-the-cat>
+References: <1cb3255b-5ed7-443b-8a02-6e998126d417@moroto.mountain>
+ <b57b0fd3-dfb9-48c4-af0e-076222c85df7@moroto.mountain>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="KROCBm3hSGYSJ1BM"
+ protocol="application/pgp-signature"; boundary="j0PvY1MH1SJaPqGf"
 Content-Disposition: inline
-In-Reply-To: <20240302225527.179601-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <b57b0fd3-dfb9-48c4-af0e-076222c85df7@moroto.mountain>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,59 +104,40 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---KROCBm3hSGYSJ1BM
+--j0PvY1MH1SJaPqGf
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Mar 02, 2024 at 11:54:02PM +0100, Marek Vasut wrote:
+On Mon, Mar 04, 2024 at 10:04:15AM +0300, Dan Carpenter wrote:
 
-> According to README CFG_SYS_BOOTMAPSZ section, in case both "bootm_low" a=
-nd
-> "bootm_size" variables are defined, "bootm_mapsize" variable is not defin=
-ed
-> and CFG_SYS_BOOTMAPSZ macro is not defined, all data for the Linux kernel
-> must be between "bootm_low" and "bootm_low" + "bootm_size".
+> These configs are used in multiple places so put them in a shared
+> Kconfig file.
 >=20
-> Currently, for systems with DRAM between 0x4000_0000..0x7fff_ffff and with
-> e.g. bootm_low=3D0x60000000 and bootm_size=3D0x10000000, the code will at=
-tempt
-> to reserve memory from 0x4000_0000..0x4fff_ffff, which is incorrect. This
-> is because "bootm_low" is not taken into consideration correctly.
->=20
-> The last parameter of lmb_alloc_base() is the maximum physical address of
-> the to be reserved LMB area. Currently this is the start of DRAM bank that
-> is considered for LMB area reservation + min(DRAM bank size, bootm_size).
-> In case bootm_low is set to non-zero, this maximum physical address has to
-> be shifted upward, to min(DRAM bank start + size, bootm_low + bootm_size),
-> otherwise the reserved memory may be below bootm_low address.
->=20
-> In case of multiple DRAM banks, the current change reserves top part of
-> the first bank, and reserves the rest of memory in the follow up banks.
->=20
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
+> Reviewed-by: Tom Rini <trini@konsulko.com>
 
 Applied to u-boot/next, thanks!
 
 --=20
 Tom
 
---KROCBm3hSGYSJ1BM
+--j0PvY1MH1SJaPqGf
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXyRxQACgkQFHw5/5Y0
-tyy+EAwAqCuMnIdc+UTfxqDwWHY9ojVM06JrVV26otDtn/93nNquJAR01l2elZEF
-x7QG9+8VzXVW6rNyqF6lGE5FOXIYwwCWaNLrwS89AZnbDA568KIpvYrZRq0ba5H7
-J1Jkulnbb6NybvCtjD8QXmZS7dQYzEkfsDTOIydi1SkAN8cR4SoATe6CIE8akWb8
-np9ItFphuHcpBQMJPVyzhg9/r0FAG1nsgc3jBu+Ro4IV93vMQjTaNrr8Y0zLwIVI
-oq2XJrpJ6Rinhfz6E/tzxrHLgt2U18pW5oUf6kbKy5UUuU4Krm6LjN3imG8CSlOk
-Ta4iNePsZgaloIbF//l36NreKQnEsmzNBxsFA9LzzwJqcQMnyTwDVj8fn43oc8X4
-KkkHJ0Go+nSChDmPvaSFSDFChlYPFYQqasN4ErH/Dde1IC0WYzLVmyoOeCti2ePu
-Zq5xS0XOtKmY+KKJv2p8yTSLYAzHNb/8PEokimeQK4pGe90uZNF1kD+6An8txcwS
-EL0MW8H4
-=frHw
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXyRxkACgkQFHw5/5Y0
+tyyXQAv/WSq/Ookgk8LubvBFqhfu693uc58GzmBE+60Nx31rlNBAyBOJTvVEvCpj
+L0X4Hc2HTPd4lxCLuRaTnYsc2aRz5bMGMm4GU7qREqv7+jS1vjbxh0GEQxJPD4Vd
+rK+a7HMMHIdpc4oSUNM9WLByFCsIk63L5Elf3ZhHVF77ysrz7LCOqJsWU9xtQ71u
+MqLrCLb4Bh0PQmzGpJUbxSZuHFx7BmtEYbptUW7Vlp2UjKyeX3ZvL84552IAx+aA
+vJOnn0XBwypmAF50eNWnxFFeKzk/eoxefaD1EEn1o5us0WdM99rPj1x/3y6uvKoF
+CKOTQfku+bTzCk/bCmLaCIktGLK/pKtfSftoR1+pbusXuMpQk48d2PHPL5X3tt5n
+qTKLlGHJ4wEgGL0fpWGEQ39G1hdbwviMkizhPuXBODrHJC+JfyzmX0y2Nd7ZKjJG
+nYAqB+R1eafLL91zxx48+BDGToY08VwxT3Op1ZjrgZssFt0A1TXUhFafrWgX4dsE
+QAAyUqj9
+=vghx
 -----END PGP SIGNATURE-----
 
---KROCBm3hSGYSJ1BM--
+--j0PvY1MH1SJaPqGf--
