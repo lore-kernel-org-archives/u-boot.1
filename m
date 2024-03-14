@@ -4,46 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E018AC5475B
-	for <u-boot@archiver.kernel.org>; Thu, 14 Mar 2024 04:15:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23C63C5475B
+	for <u-boot@archiver.kernel.org>; Thu, 14 Mar 2024 04:16:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F3B4B87EA8;
-	Thu, 14 Mar 2024 05:15:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 62BE887F01;
+	Thu, 14 Mar 2024 05:15:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1710389748;
-	bh=fRb4QhzkZfmPV0VEE+bN2rSGtEemjXW4quOTEoG4G0E=;
+	s=phobos-20191101; t=1710389750;
+	bh=K5b9XSR6vGnkGjo+rOg7mSIEdgZAkQJWV6PsDM821Z4=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=xBHj8Ramx9NJk5+6h+plR9OrwG3ypyzeftGtBGN035I7c7KSmVKk+NHrz9kTxoFLN
-	 a0JkHXQ/OkGtv1q72xxkmF6Wn5sXBFYlNf/Icn6aHeM5YU1LCrsZzh8JqyOlHO5XQv
-	 FCYB1j9eZnET22jBbqeUdSf1weEPtlyiChOVMjKXMDc/87eQ+D6nG/qZtYhzO2wSqU
-	 ZPbto4wyHA0XCPXThTvcPUXv0TStWl5i/sUqkjoukcohuBlbq5Tjz60YQlAn3FdtCv
-	 LDTWJlF+mUgy0HvTHL6pDWuuScjlSlpZNVGGWsM49lWMmiZojsLWtnk33qbK2+QW9J
-	 IHdacV5EGTa3A==
+	b=nh4CTRdAYSb/qRaxr4kwEPaWORLiv2HizrVG5EKZzjibbC0mffxMQoih0GgIO7aWL
+	 ufWeOTyL903fOX57SV5gnULZgVlhASgZdI7l4LdJuyspXUcxXtQLfvOMkai1VX99Vl
+	 bTqd3042cd9iZVzLtUv2aIc9P45xeIQSVyCRgdCp9MS2OpOrwRjGEflfAChEb6XSIB
+	 VetxUJajAwaYVMf8PU24iQ5fJGJNOjw2iOzTxSJ0B9JzNhXTLi3EVbAOlaPV50ZVaP
+	 um974cPiE6+rw/yArGRk/Wxot+zqXdGaFSwRmmMdGxANEKoRKaZWwXhBJMQEKjk7aZ
+	 IyagOsZUtNl+w==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id E05A987E75;
- Thu, 14 Mar 2024 05:15:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id E512887E0C;
+ Thu, 14 Mar 2024 05:15:46 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1710389746;
- bh=fRb4QhzkZfmPV0VEE+bN2rSGtEemjXW4quOTEoG4G0E=;
+ s=phobos-20191101; t=1710389748;
+ bh=K5b9XSR6vGnkGjo+rOg7mSIEdgZAkQJWV6PsDM821Z4=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=KCdxKJH1n+r024WOZSZv6XU+6wu6lwaNY65m2ULFXAamtb80rf+q7cku1U+6e77KJ
- pSNJEhJdnMkTQOTK+ciaGunAzEYpntN/GZoawdQGv5IjFd2pH+ggcuz+kotEtUiEYn
- X+3MeYxDrl/uzX+y0dWZVq63w7mY4nN80vugZey3tlNE+/myYCDyBCCbQBvSnM7iXh
- UqTfK+ep+qlcqOj5NA1hG0jNlVOwY6rDmgrlXyzDb/2Adj8HStugaXWIPiWk0zdEIE
- Q6rROSbf0le6qoflA3o06cHKcV2pzH/qtS0SMhpGTc56iQeqek7pChXV70zSHDhsJf
- I4oJsyOVv3tZg==
-Message-ID: <e2bd6285-f26a-41ba-8f8e-94668245e0d3@denx.de>
-Date: Thu, 14 Mar 2024 04:51:17 +0100
+ b=stfXQoGndncOgF/PcnNDyzXtev8N9RS3Uddn+GSvQ1oyPJP25jweClgIKIjxVPRgf
+ bmINFivWR4Ts1/GkcFniiHmAcQWgUe2Fe6vLsML3Xr2bOdRH9B4JDsRq19tUtE+8Xu
+ H7YDWSHrkUwXYPJZxn6wtbMnmjUdRJ/ftKxxcTDmGkPFMqMKIzNsQniiejUFBS3u1y
+ GbeAyIx4MCeD/clKN1bZ8JeER5ypHc10ANRV4Q+nm+EGguHeY8Pj8/iGQVSZspSTUw
+ Iu9n/0YHNLxUaT/CtTQ8KfRixZVJPU7XOVSIYMUKj860GyPL78Uoq+YegwzozKh0ip
+ SY75gESM866tQ==
+Message-ID: <d477d827-5910-4c5b-9b35-116e85fb8e53@denx.de>
+Date: Thu, 14 Mar 2024 04:52:52 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 01/11] clk: imx8mp: Add support for PCIe clocks
+Subject: Re: [PATCH v3 02/11] reset: imx: Refactor driver to simplify function
+ names
 Content-Language: en-US
 To: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de
 Cc: trini@konsulko.com, tharvey@gateworks.com, marcel.ziswiler@toradex.com,
@@ -54,9 +55,9 @@ Cc: trini@konsulko.com, tharvey@gateworks.com, marcel.ziswiler@toradex.com,
  fathi.boudra@linaro.org, remi.duraffort@linaro.org,
  daniel.thompson@linaro.org
 References: <20240312070338.86127-1-sumit.garg@linaro.org>
- <20240312070338.86127-2-sumit.garg@linaro.org>
+ <20240312070338.86127-3-sumit.garg@linaro.org>
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240312070338.86127-2-sumit.garg@linaro.org>
+In-Reply-To: <20240312070338.86127-3-sumit.garg@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -76,11 +77,18 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 3/12/24 8:03 AM, Sumit Garg wrote:
-> Add support for PCIe clocks required to enable PCIe support on
-> iMX8MP SoC.
+> imx7_reset_{deassert/assert}_imx* are a bit more confusing when compared
+> with imx*_reset_{deassert/assert}. So refactor driver to use function
+> names easier to understand. This shouldn't affect the functionality
+> though.
 > 
-> Tested-by: Tim Harvey <tharvey@gateworks.com> #imx8mp-venice*
-> Tested-by: Adam Ford <aford173@gmail.com> #imx8mp-beacon-kit
+> Suggested-by: Marek Vasut <marex@denx.de>
 > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+> ---
+>   drivers/reset/reset-imx7.c | 24 ++++++++++++------------
 
+You could even rename the driver itself now, but that would be separate 
+patch.
+
+>   1 file changed, 12 insertions(+), 12 deletions(-)
 Reviewed-by: Marek Vasut <marex@denx.de>
