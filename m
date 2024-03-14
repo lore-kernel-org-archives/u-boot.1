@@ -4,62 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85230C5475B
-	for <u-boot@archiver.kernel.org>; Thu, 14 Mar 2024 11:58:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FB0BC54E67
+	for <u-boot@archiver.kernel.org>; Thu, 14 Mar 2024 11:58:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 88B5B87F69;
-	Thu, 14 Mar 2024 12:58:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F2E5987F4E;
+	Thu, 14 Mar 2024 12:58:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="dXTzgCLn";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="uVDIrNTY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 363FF875FA; Thu, 14 Mar 2024 12:58:08 +0100 (CET)
+ id DF27C87F71; Thu, 14 Mar 2024 12:58:09 +0100 (CET)
 Received: from madrid.collaboradmins.com (madrid.collaboradmins.com
- [46.235.227.194])
+ [IPv6:2a00:1098:ed:100::25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5CC8687CFF
- for <u-boot@lists.denx.de>; Thu, 14 Mar 2024 12:58:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E15F87F04
+ for <u-boot@lists.denx.de>; Thu, 14 Mar 2024 12:58:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=collabora.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=chris.obbard@collabora.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
  s=mail; t=1710417486;
- bh=LFuC7tXNzbTiil4EkW0juNWPbNj1rg3N3b0o+3LPQ+I=;
+ bh=97GHybiinm1shrsqVFQgLu/DugRd/ZKaTGWg9Zt8jjk=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=dXTzgCLn60XmtID2b9YunmWtaE2rAmYxtqXz3WGjDeluIEVbgrZHkQ8OnyA+zUAMf
- qGnMuoFxIh02WbDrp0Ae8K/a/wTp+vjd8KEtsb4TGMA/PB9Q19o/viKXvwCWVSudOH
- vpZTF1gfVOGKwLjE0ZpX2B/B32TNXKYHGQSnwGc4ULAjADd+grz6GLhLj05PbkWvna
- fDo6tJGI24vYc/FaY6cllTb0GhI3lII5Wb9Zrkh52mOykyWfJ61uaV6/zZRHb4FVpu
- qdM6YI96wdLsECgfi38hYp9x996ZdkcYBK7cMB3JSItCc+H6IWYUP4dQDvv7h0b7VM
- dqvEVVNWLvJNQ==
+ b=uVDIrNTYnYGfXJQZec4uh78JmHljcuJSab2pSCl8Oa9XnP/IsVp5G1Xy/s2+7eYUN
+ PAU6alfAUnKhFkvq3NVkevKBYzhtVPOrJydkZar/UOvhnZXvgXbPDpItzQTN8a/WHR
+ zPqqK1YblDEliz1LzIQ1sm7FYMsgL2jyicgcmf7Izt0s5XU0tRmi4v6nFGNM3acyBn
+ cjP5TOnmmoqU+oEcbygm6+QZ6dd0fXIs3i+SDX+hsrqAcFswSbfnxpTozle+4+f1kI
+ +QuMLXgZ9xHF4Qr/IBzplmKk+dDH+nnqMtveCeOtnfHEecqWBDab3kz3EjWF3VLdgM
+ aEdIaiwtlwj/g==
 Received: from obbardc-t14.home (cola.collaboradmins.com [195.201.22.229])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested) (Authenticated sender: obbardc)
- by madrid.collaboradmins.com (Postfix) with ESMTPSA id 5B85537820EF;
- Thu, 14 Mar 2024 11:58:05 +0000 (UTC)
+ by madrid.collaboradmins.com (Postfix) with ESMTPSA id 4BD9937820F7;
+ Thu, 14 Mar 2024 11:58:06 +0000 (UTC)
 From: Christopher Obbard <chris.obbard@collabora.com>
 To: u-boot@lists.denx.de
 Cc: kernel@collabora.com, Christopher Obbard <chris.obbard@collabora.com>,
- Dragan Simic <dsimic@manjaro.org>,
- Quentin Schulz <quentin.schulz@theobroma-systems.com>,
- Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Dragan Simic <dsimic@manjaro.org>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>,
  Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 1/2] =?UTF-8?q?rockchip:=20spl-boot-order:=20fix=20typo?=
- =?UTF-8?q?=20in=20comment=20succes=E2=86=92success?=
-Date: Thu, 14 Mar 2024 11:57:54 +0000
-Message-ID: <20240314115801.241575-2-chris.obbard@collabora.com>
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 2/2] rockchip: spl-boot-order: show DT path for missing
+ device
+Date: Thu, 14 Mar 2024 11:57:55 +0000
+Message-ID: <20240314115801.241575-3-chris.obbard@collabora.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240314115801.241575-1-chris.obbard@collabora.com>
 References: <20240314115801.241575-1-chris.obbard@collabora.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -77,33 +76,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix a simple spelling mistake in a comment.
+When debugging the SPL boot order, the node ID of a device which hasn't
+been found is printed but it can be quite hard to relate that to the
+specific devicetree node. To aid debugging, print the node path instead of
+the cryptic node ID.
+
+Original debug message:
+
+    board_boot_order: could not map node @73c to a boot-device
+
+With this patch applied this becomes e.g:
+
+   board_boot_order: could not map node /spi@ff1d0000/flash@0 to a boot-device
 
 Reviewed-by: Dragan Simic <dsimic@manjaro.org>
-Reviewed-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 Signed-off-by: Christopher Obbard <chris.obbard@collabora.com>
 ---
 
 Changes in v2:
 - Improve patch subject (suggested by Dragan S).
-- Collect Reviewed-by tags from Dragan S and Quentin S.
+- Print node path instead of node ID (suggested by Quentin S).
+- Collect Reviewed-by tag from Dragan S.
 
- arch/arm/mach-rockchip/spl-boot-order.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/arm/mach-rockchip/spl-boot-order.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/arch/arm/mach-rockchip/spl-boot-order.c b/arch/arm/mach-rockchip/spl-boot-order.c
-index 79c856d2a0a..8f479ac0ec0 100644
+index 8f479ac0ec0..3543267aa57 100644
 --- a/arch/arm/mach-rockchip/spl-boot-order.c
 +++ b/arch/arm/mach-rockchip/spl-boot-order.c
-@@ -29,7 +29,7 @@
-  *   -ENOSYS, if the device matching the node can not be mapped onto a
-  *            SPL boot device (e.g. the third MMC device)
-  *   -1, for unspecified failures
-- *   a positive integer (from the BOOT_DEVICE_... family) on succes.
-+ *   a positive integer (from the BOOT_DEVICE_... family) on success.
-  */
+@@ -148,8 +148,8 @@ void board_boot_order(u32 *spl_boot_list)
+ 		/* Try to map this back onto SPL boot devices */
+ 		boot_device = spl_node_to_boot_device(node);
+ 		if (boot_device < 0) {
+-			debug("%s: could not map node @%x to a boot-device\n",
+-			      __func__, node);
++			debug("%s: could not map node %s to a boot-device\n",
++			      __func__, conf);
+ 			continue;
+ 		}
  
- static int spl_node_to_boot_device(int node)
 -- 
 2.43.0
 
