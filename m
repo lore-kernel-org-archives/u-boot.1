@@ -4,65 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A03EC54E67
-	for <u-boot@archiver.kernel.org>; Thu, 14 Mar 2024 12:04:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CC85C54E67
+	for <u-boot@archiver.kernel.org>; Thu, 14 Mar 2024 12:32:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F398787CFF;
-	Thu, 14 Mar 2024 13:04:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linutronix.de
+	by phobos.denx.de (Postfix) with ESMTP id 8876C87EDE;
+	Thu, 14 Mar 2024 13:32:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=vrull.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=linutronix.de header.i=@linutronix.de header.b="wPh3P0+E";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="GG67n4lC";
+	dkim=pass (2048-bit key; unprotected) header.d=vrull.eu header.i=@vrull.eu header.b="Rfajpho+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0565487F04; Thu, 14 Mar 2024 13:04:40 +0100 (CET)
-Received: from galois.linutronix.de (Galois.linutronix.de
- [IPv6:2a0a:51c0:0:12e:550::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 05D2D87EDE; Thu, 14 Mar 2024 13:32:57 +0100 (CET)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F19F2875FA
- for <u-boot@lists.denx.de>; Thu, 14 Mar 2024 13:04:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 05C1487E15
+ for <u-boot@lists.denx.de>; Thu, 14 Mar 2024 13:32:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linutronix.de
+ dmarc=none (p=none dis=none) header.from=vrull.eu
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=namcao@linutronix.de
-Date: Thu, 14 Mar 2024 13:04:36 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1710417877;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=nnJItsnzpKTp7lVw0NXtUrYpYJyhp2RGGh2w45ghFa0=;
- b=wPh3P0+E8o1uNH/0c6Avh7PWm5jYPRUd7aJfMEvVpb1DejfQVaV8rRtOrmFsFb98mmJgZr
- ugdOoAYq6ZD+Ys7ICDotzpxBgI8sFaeFjEicFRL4hhja6OwdqSmR5MpKM8Gf+8vduLw0w4
- vJ1EgrTWyMokztgV/xZbAdGUPN0alvznQOfLJ82QJp0LpM4C9EHL8HqxzWmWgbbj5GnFvA
- X2UdaoPcXS/bFOGgHc1lD3CcPg+fsWTHg15Pc+84HmWsFN6bwvJ8UF/jCPe09qjSMVjtDL
- AhJlFPhWCEFRu65x65LgbN1r7e6gE02sk1cxYKwb04CX8YST7GOfbnc54ieyWg==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1710417877;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=nnJItsnzpKTp7lVw0NXtUrYpYJyhp2RGGh2w45ghFa0=;
- b=GG67n4lChR0rfg3L4at5KFugEFMjWFwVVbFyQ9y9gj5Fvoryjf1mlpTM0+8aYX8l3ahSP7
- GDt8M+OXyVkc3LCw==
-From: Nam Cao <namcao@linutronix.de>
-To: "Milan P. =?UTF-8?B?U3RhbmnEhw==?=" <mps@arvanta.net>
-Cc: ycliang@andestech.com, yanhong.wang@starfivetech.com,
- chanho61.park@samsung.com, wiagn233@outlook.com, sjg@chromium.org,
- inindev@gmail.com, rick@andestech.com, bmeng@tinylab.org,
- u-boot@lists.denx.de, minda.chen@starfivetech.com
-Subject: Re: [PATCH] starfive: visionfive2: switch to standard boot
-Message-ID: <20240314130436.76a2892a@namcao>
-In-Reply-To: <20240313184206.GA20322@m1pro.arvanta.net>
-References: <20240221120014.149193-1-namcao@linutronix.de>
- <20240313184206.GA20322@m1pro.arvanta.net>
+ spf=pass smtp.mailfrom=philipp.tomsich@vrull.eu
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-56845954ffeso1166897a12.2
+ for <u-boot@lists.denx.de>; Thu, 14 Mar 2024 05:32:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=vrull.eu; s=google; t=1710419574; x=1711024374; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=E++f+sqdxV+PxvTQmu1uwuf24JFa+I2G6t8JWYIF28o=;
+ b=Rfajpho+pHniZ+khAN2wP/x8U1NCQwYUQW98KRKiTgv3hnYZRb7PUeyYC/kOzfzQOG
+ x6N0VMYoZ6gmGPimcdqW1wZjeY9xPvGA3FlWd4XyWTzAsVLWQ6qyDSCcg4fTPI2mYqhd
+ 7mdmN0pPkF9SuDFX50/PYMW8xTqdorxDKgdrzRCPbLi+rDtu2XOyA9ZIWe/tc9iRcC4H
+ x602aDKQl4DqVzNsFG0tgOfDJrRwNQ7XHOxXpaX6P4Mk7y6vJKjVMNj71wJasFBQzh1f
+ yUssS+e44sLaGutsVE1JuXYlQZ8Mv/4G8VLeAM/VacQFfjoZ+UHLiTeVdpB78TJ/y5Y/
+ +Fqw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710419574; x=1711024374;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=E++f+sqdxV+PxvTQmu1uwuf24JFa+I2G6t8JWYIF28o=;
+ b=a4Rtt/DXwhIyPTXsmyAVFsnlrX1aFTe2ONVC1lH2BrPsUUIoSH9Hul9jsd0Cm3c+0b
+ SN9p6dkf72TPRM7o61qTmLb3RyK9g/XHBKlGdPHk1guNjBbfS+16X1tMyo5xIC8tv2lk
+ eQ8wzv+M1ex5gMOqorze9Di7uuXkokmkrHfIQ56AYzdUWt++/sH5wSxLB/eCu0em0Kl2
+ G3Gq0Zh5ChG35C3cv7O34ip5XBSi5NGC4htGVDDBkOG7a/bHx3C7EadYgORPCXivAjHm
+ qRSslWdCwzu7Kj3fdDdaR2JWyKRCZVd5A9ALnnLcwxJKBXXEaplLwUbNbrWNHe/bHchN
+ NdvQ==
+X-Gm-Message-State: AOJu0YyTx0+gIZyGeeBJxfoaZd8LZqaRhuaX5Uuc4V98avvwADTJWk6Z
+ HtcLE6oMVEDluUH8KHFD6cXEF3UUlb7bfknrNubNjByyN82J/yeSVN1q1Gi6/WYOqRrh73f+AQ4
+ FbcaTehWnbgrXHTpE3poR85AfneTjmd14s+Q2bUrJtbmWBvhPWLW7tQ==
+X-Google-Smtp-Source: AGHT+IGBUCfPQR+Z9x1c+7GXZGXEjbDP/U+0EcYUTRYo1Px2QlhLwIQkVszdMTI/D86NeIqxuxT2ofFqNua87J0Rfj4=
+X-Received: by 2002:a05:6402:4149:b0:566:ab45:e6c5 with SMTP id
+ x9-20020a056402414900b00566ab45e6c5mr1330972eda.28.1710419574333; Thu, 14 Mar
+ 2024 05:32:54 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+References: <20240314115801.241575-1-chris.obbard@collabora.com>
+ <20240314115801.241575-3-chris.obbard@collabora.com>
+In-Reply-To: <20240314115801.241575-3-chris.obbard@collabora.com>
+From: Philipp Tomsich <philipp.tomsich@vrull.eu>
+Date: Thu, 14 Mar 2024 13:32:42 +0100
+Message-ID: <CAAeLtUAd2TbBsPcWG+3X374rCgd3SEp4AhkimKRJc1DLBgHaGw@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] rockchip: spl-boot-order: show DT path for missing
+ device
+To: Christopher Obbard <chris.obbard@collabora.com>
+Cc: u-boot@lists.denx.de, kernel@collabora.com, 
+ Dragan Simic <dsimic@manjaro.org>, Jonas Karlman <jonas@kwiboo.se>, 
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Philipp Tomsich <philipp.tomsich@theobroma-systems.com>, 
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,87 +92,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 13/Mar/2024 Milan P. Stani=C4=87 wrote:
-> On Wed, 2024-02-21 at 13:00, Nam Cao wrote:
-> > Distro boot scripts are deprecated. Use standard boot instead. =20
-> I had to enable 'CONFIG_CMD_SYSBOOT=3Dy' in
-> configs/starfive_visionfive2_defconfig because it doesn't boot without
-> it. With this option it boots fine with this patch.
+On Thu, 14 Mar 2024 at 12:58, Christopher Obbard
+<chris.obbard@collabora.com> wrote:
+>
+> When debugging the SPL boot order, the node ID of a device which hasn't
+> been found is printed but it can be quite hard to relate that to the
+> specific devicetree node. To aid debugging, print the node path instead of
+> the cryptic node ID.
+>
+> Original debug message:
+>
+>     board_boot_order: could not map node @73c to a boot-device
+>
+> With this patch applied this becomes e.g:
+>
+>    board_boot_order: could not map node /spi@ff1d0000/flash@0 to a boot-device
+>
+> Reviewed-by: Dragan Simic <dsimic@manjaro.org>
+> Signed-off-by: Christopher Obbard <chris.obbard@collabora.com>
 
-You should not have to do that for it to work, otherwise this patch
-introduced a bug.
-
-CONFIG_CMD_SYSBOOT adds the "sysboot" command, which is only used by
-distroboot. So I suspect that you were actually still using distro boot,
-because you didn't "update" your environment variable (that can be checked
-with "printenv bootcmd"). For this patch to work, the environment variables
-also need to be updated with:
-    env default
-    env save -a
-
-This makes me realize that the patch breaks boards if the users forget to
-update the environment variables. I am not sure if this is considered a
-bug. What do maintainers think?
-
-Best regards,
-Nam
-
-> Tested on u-boot version 2024.04-rc4-dirty
->=20
-> > Signed-off-by: Nam Cao <namcao@linutronix.de>
-> > Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com> =20
-> Tested-by: Milan P. Stani=C4=87 <mps@arvanta.net>
->=20
-> > ---
-> >  configs/starfive_visionfive2_defconfig |  2 +-
-> >  include/configs/starfive-visionfive2.h | 14 +-------------
-> >  2 files changed, 2 insertions(+), 14 deletions(-)
-> >=20
-> > diff --git a/configs/starfive_visionfive2_defconfig b/configs/starfive_=
-visionfive2_defconfig
-> > index b11be7ac86..aec751f871 100644
-> > --- a/configs/starfive_visionfive2_defconfig
-> > +++ b/configs/starfive_visionfive2_defconfig
-> > @@ -31,8 +31,8 @@ CONFIG_RISCV_SMODE=3Dy
-> >  # CONFIG_OF_BOARD_FIXUP is not set
-> >  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-> >  CONFIG_FIT=3Dy
-> > +CONFIG_BOOTSTD_DEFAULTS=3Dy
-> >  CONFIG_SYS_BOOTM_LEN=3D0x4000000
-> > -CONFIG_DISTRO_DEFAULTS=3Dy
-> >  CONFIG_BOOTSTAGE=3Dy
-> >  CONFIG_QSPI_BOOT=3Dy
-> >  CONFIG_SD_BOOT=3Dy
-> > diff --git a/include/configs/starfive-visionfive2.h b/include/configs/s=
-tarfive-visionfive2.h
-> > index 29c74470c7..049b0a0630 100644
-> > --- a/include/configs/starfive-visionfive2.h
-> > +++ b/include/configs/starfive-visionfive2.h
-> > @@ -15,17 +15,6 @@
-> > =20
-> >  #define __io
-> > =20
-> > -/* Environment options */
-> > -
-> > -#define BOOT_TARGET_DEVICES(func) \
-> > -	func(NVME, nvme, 0) \
-> > -	func(USB, usb, 0) \
-> > -	func(MMC, mmc, 0) \
-> > -	func(MMC, mmc, 1) \
-> > -	func(DHCP, dhcp, na)
-> > -
-> > -#include <config_distro_bootcmd.h>
-> > -
-> >  #define TYPE_GUID_SPL		"2E54B353-1271-4842-806F-E436D6AF6985"
-> >  #define TYPE_GUID_UBOOT	"BC13C2FF-59E6-4262-A352-B275FD6F7172"
-> >  #define TYPE_GUID_SYSTEM	"EBD0A0A2-B9E5-4433-87C0-68B6B72699C7"
-> > @@ -48,7 +37,6 @@
-> >  	"type_guid_gpt_loader2=3D" TYPE_GUID_UBOOT "\0" \
-> >  	"type_guid_gpt_system=3D" TYPE_GUID_SYSTEM "\0" \
-> >  	"partitions=3D" PARTS_DEFAULT "\0" \
-> > -	"fdtfile=3D" CONFIG_DEFAULT_FDT_FILE "\0" \
-> > -	BOOTENV
-> > +	"fdtfile=3D" CONFIG_DEFAULT_FDT_FILE "\0"
-> > =20
-> >  #endif /* _STARFIVE_VISIONFIVE2_H */ =20
-
+Reviewed-by: Philipp Tomsich <philipp.tomsich@vrull.eu>
