@@ -4,81 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45687C54E67
-	for <u-boot@archiver.kernel.org>; Thu, 14 Mar 2024 11:03:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF7DCC54E67
+	for <u-boot@archiver.kernel.org>; Thu, 14 Mar 2024 11:29:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6503D87DEA;
-	Thu, 14 Mar 2024 12:03:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
+	by phobos.denx.de (Postfix) with ESMTP id 464C887F01;
+	Thu, 14 Mar 2024 12:29:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="WW5T5TVn";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="O1+pGweY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B44AA87CFF; Thu, 14 Mar 2024 07:41:10 +0100 (CET)
-Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9FAC887F04; Thu, 14 Mar 2024 12:29:18 +0100 (CET)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B3B587F40
- for <u-boot@lists.denx.de>; Thu, 14 Mar 2024 07:41:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=mediatek.com
+ by phobos.denx.de (Postfix) with ESMTPS id 89D4887C61
+ for <u-boot@lists.denx.de>; Thu, 14 Mar 2024 12:29:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jixiong.hu@mediatek.com
-X-UUID: d1841572e1cd11ee935d6952f98a51a9-20240314
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
- s=dk; 
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:CC:To:From;
- bh=A3LjOzOmIiKjrvWsj0QP2qVXykW+yr8tVyZinCWfs2I=; 
- b=WW5T5TVnilajpOE6+2eskYPXPpBjQOPnnFR4YiJP2UTHVyngPD5mYsmGyes/8swpstY9VScnlTa2VgqPabq6BR+ivse17/S9zvcunT03sFysN9iV4DgN2e3hwrFGd+CnSYiDK1GyhbH1PPRV0pVEHrjtYqKRyMW2shi2rrRxEjo=;
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.1.37, REQID:22f9b897-c5b2-4048-849e-8661993a25b8, IP:0,
- U
- RL:0,TC:0,Content:-5,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION
- :release,TS:-5
-X-CID-META: VersionHash:6f543d0, CLOUDID:23f67c81-4f93-4875-95e7-8c66ea833d57,
- B
- ulkID:nil,BulkQuantity:0,Recheck:0,SF:102,TC:nil,Content:0,EDM:-3,IP:nil,U
- RL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES:1,
- SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0
-X-CID-BVR: 0,NGT
-X-CID-BAS: 0,NGT,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR
-X-UUID: d1841572e1cd11ee935d6952f98a51a9-20240314
-Received: from mtkmbs11n1.mediatek.inc [(172.21.101.185)] by
- mailgw02.mediatek.com (envelope-from <jixiong.hu@mediatek.com>)
- (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 649379454; Thu, 14 Mar 2024 14:40:59 +0800
-Received: from mtkmbs11n2.mediatek.inc (172.21.101.187) by
- mtkmbs10n2.mediatek.inc (172.21.101.183) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.26; Thu, 14 Mar 2024 14:40:56 +0800
-Received: from mszsdhlt06.gcn.mediatek.inc (10.16.6.206) by
- mtkmbs11n2.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.1118.26 via Frontend Transport; Thu, 14 Mar 2024 14:40:56 +0800
-From: Jixiong Hu <Jixiong.Hu@mediatek.com>
-To: <u-boot@lists.denx.de>
-CC: <jjhiblot@ti.com>, Jixiong Hu <Jixiong.Hu@mediatek.com>
-Subject: [PATCH] fs: ext4: Fixed file permissions
-Date: Thu, 14 Mar 2024 14:41:29 +0800
-Message-ID: <20240314064130.25113-1-Jixiong.Hu@mediatek.com>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=dan.carpenter@linaro.org
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-413f1c0d30eso3052205e9.1
+ for <u-boot@lists.denx.de>; Thu, 14 Mar 2024 04:29:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1710415755; x=1711020555; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=2EVJ33OIH5iazxLexO6FAnps9GLb865IdG9xGIVMCJo=;
+ b=O1+pGweY+NnwkoV8lSCZlpewUrzULQDMyf5zvutOXIkVTp1z0dLTzCWC0Qoum0F/wx
+ 9dW3wUFrIee6NluNSY/SugRKwV/SVeE+XxR3gEznhE9065E3+gzQmV+ZX+5pCdC3VPta
+ K//wXus/saf6EINSSqfCIRz4Q4m6TSwQZVdoL9Tvh7bwoxGeA643GqfrJsKLl6Yuupgp
+ p9K1BxIscsOEsVmbiK5jpfzmkMvMHtgyl6SQP325WxzB7gel9PUMBTKnKqMSfiK4Fu1V
+ YCqJ50fZ/MY5zWRCn050v4uD5TGl+7AJLeCBb8OFun0OfO3DU3H5KRaB0yFZGmILOqcX
+ lS1A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710415755; x=1711020555;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=2EVJ33OIH5iazxLexO6FAnps9GLb865IdG9xGIVMCJo=;
+ b=XG+ZvndLV7eWz6UPDSPwZK7vTBSiot77GKyzAAvhB02ZyFdi1FPQ5U9fN0PYkHfCnL
+ 5UI8KNf6giWro7ycK+EUYkJcG6F5V0dUOjelc/0anGe4tZt0E7IUWNAxKubXTAKv4M6w
+ Ie24+SH1Q1tXAsBDvXlJxqqs5gyH2SMsAj0CPsUHRKT6tuLg3vye9kOIlI07eL1RY6BU
+ WuNJnn/BByxk05INCiWl4GKu9BEAJDpjiMjCK0oZr30OCQvMLBnu92zFHC2L8GC739gn
+ TcWYGtfrLSjlccHeOGpbQMSQwHOD7glILpM5cgZ+8GFcsJPRdVkokOdPU2P1238KevRl
+ DWKA==
+X-Gm-Message-State: AOJu0Ywyw0TgX5ubnKwkbA7/P51GVuKXk0qdv51xjaL8AJqji1dj0Jdw
+ zkMuwULHVoc/mQsXoHJP/sQpjgmIwDtgbzBlH6uvCBfPr3NLH1S+n3uaXTfvoKY=
+X-Google-Smtp-Source: AGHT+IFf4+1Dncq10wtjEKk5EAiI7AI+tq3eAoezxxM0nYnLf74x+3hGKgaloW/G/3h9hGDa2cP7AA==
+X-Received: by 2002:a05:600c:19c7:b0:413:1212:3eed with SMTP id
+ u7-20020a05600c19c700b0041312123eedmr1272228wmq.3.1710415754798; 
+ Thu, 14 Mar 2024 04:29:14 -0700 (PDT)
+Received: from localhost ([102.222.70.76]) by smtp.gmail.com with ESMTPSA id
+ a8-20020a05600c348800b00413f52889desm1086290wmq.3.2024.03.14.04.29.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 14 Mar 2024 04:29:14 -0700 (PDT)
+Date: Thu, 14 Mar 2024 14:29:09 +0300
+From: Dan Carpenter <dan.carpenter@linaro.org>
+To: Jixiong Hu <Jixiong.Hu@mediatek.com>
+Cc: u-boot@lists.denx.de, jjhiblot@ti.com
+Subject: Re: [PATCH] fs: ext4: Fixed file permissions
+Message-ID: <6c3bd10b-1f35-450e-9371-7aec216c1097@moroto.mountain>
+References: <20240314064130.25113-1-Jixiong.Hu@mediatek.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-TM-AS-Product-Ver: SMEX-14.0.0.3152-9.1.1006-23728.005
-X-TM-AS-Result: No-10--8.366300-8.000000
-X-TMASE-MatchedRID: zs/B+fsn51OiwkztVCsqb7iMC5wdwKqdWjWsWQUWzVo0QmmUihPzrGPS
- xOujrIyY8Xs+MIRNTQVBAiJopeTv0DlcyhHfhEXKSHCU59h5KrEaJDwYgQY/f83zT82XTqF+G0u
- iJ5nq4vRu/AyldOGVntbXmuHFRooXCrAs37thYWWeAiCmPx4NwGmRqNBHmBvepuP9zg477pEqtq
- 5d3cxkNZd/mwLf2BVU3jszJwahGh4EXTWUBADSqbwjUUJ/29hvVrOIwqwEu7BfCOKFKuVYGg==
-X-TM-AS-User-Approved-Sender: No
-X-TM-AS-User-Blocked-Sender: No
-X-TMASE-Result: 10--8.366300-8.000000
-X-TMASE-Version: SMEX-14.0.0.3152-9.1.1006-23728.005
-X-TM-SNTS-SMTP: F5BE237854C77FA22AA794D3ACC9FEC5F2155F941F46AFCC6F87DEEBE268C9902000:8
-X-MTK: N
-X-Mailman-Approved-At: Thu, 14 Mar 2024 12:03:30 +0100
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240314064130.25113-1-Jixiong.Hu@mediatek.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,58 +89,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Modified the ext4fs_write function to create a new file that
-inherits the inode->mode of existing file. To fix an issue
-where file permissions are changed after modifying the contents
-of an existing file.
----
- fs/ext4/ext4_write.c | 20 ++++++++++++++++++--
- 1 file changed, 18 insertions(+), 2 deletions(-)
+On Thu, Mar 14, 2024 at 02:41:29PM +0800, Jixiong Hu wrote:
+> Modified the ext4fs_write function to create a new file that
+> inherits the inode->mode of existing file. To fix an issue
+> where file permissions are changed after modifying the contents
+> of an existing file.
 
-diff --git a/fs/ext4/ext4_write.c b/fs/ext4/ext4_write.c
-index ea4c5d4157..6da4a26b71 100644
---- a/fs/ext4/ext4_write.c
-+++ b/fs/ext4/ext4_write.c
-@@ -847,6 +847,7 @@ int ext4fs_write(const char *fname, const char *buffer,
- {
- 	int ret = 0;
- 	struct ext2_inode *file_inode = NULL;
-+	struct ext2_inode *existing_file_inode = NULL;
- 	unsigned char *inode_buffer = NULL;
- 	int parent_inodeno;
- 	int inodeno;
-@@ -900,6 +901,16 @@ int ext4fs_write(const char *fname, const char *buffer,
- 	/* check if the filename is already present in root */
- 	existing_file_inodeno = ext4fs_filename_unlink(filename);
- 	if (existing_file_inodeno != -1) {
-+		existing_file_inode = (struct ext2_inode *)zalloc(fs->inodesz);
-+		if (!existing_file_inode)
-+			goto fail;
-+		ret = ext4fs_iget(existing_file_inodeno, existing_file_inode);
-+		if (ret)
-+		{
-+			free(existing_file_inode);
-+			goto fail;
-+		}
-+
- 		ret = ext4fs_delete_file(existing_file_inodeno);
- 		fs->first_pass_bbmap = 0;
- 		fs->curr_blkno = 0;
-@@ -948,8 +959,13 @@ int ext4fs_write(const char *fname, const char *buffer,
- 			sizebytes = 0;
- 		}
- 	} else {
--		file_inode->mode = cpu_to_le16(S_IFREG | S_IRWXU | S_IRGRP |
--					       S_IROTH | S_IXGRP | S_IXOTH);
-+		if(existing_file_inode) {
-+			file_inode->mode = existing_file_inode->mode;
-+			free(existing_file_inode);
-+		} else {
-+			file_inode->mode = cpu_to_le16(S_IFREG | S_IRWXU | S_IRGRP |
-+						       S_IROTH | S_IXGRP | S_IXOTH);
-+		}
- 	}
- 	/* ToDo: Update correct time */
- 	file_inode->mtime = cpu_to_le32(timestamp);
-2.18.0
+I'm not an expert, but honestly the current behavior sound more correct
+than the proposed behavior.  What's the issue specifically so we can
+understand it better?  Also bug fixes need a Fixes tag.
+
+The patch has a number of style issues and the existing_file_inode
+allocation is not always freed so those memory leaks would need to be
+fixed.  For the style issues run ./scripts/checkpatch.pl on your patch.
+
+regards,
+dan carpenter
 
