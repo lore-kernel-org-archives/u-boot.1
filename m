@@ -4,84 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38372C54E67
-	for <u-boot@archiver.kernel.org>; Thu, 14 Mar 2024 14:11:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46F76C54E67
+	for <u-boot@archiver.kernel.org>; Thu, 14 Mar 2024 14:33:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 870D087CEA;
-	Thu, 14 Mar 2024 15:11:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 7CB0B87F04;
+	Thu, 14 Mar 2024 15:33:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LHsdnFLt";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Ou5RUeIt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3AE9087C9A; Thu, 14 Mar 2024 15:11:27 +0100 (CET)
-Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
- [IPv6:2607:f8b0:4864:20::72e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CA81587F04; Thu, 14 Mar 2024 15:33:37 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D245C87CEA
- for <u-boot@lists.denx.de>; Thu, 14 Mar 2024 15:11:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E43A787D4B
+ for <u-boot@lists.denx.de>; Thu, 14 Mar 2024 15:33:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72e.google.com with SMTP id
- af79cd13be357-789d5fb6ba2so29739585a.2
- for <u-boot@lists.denx.de>; Thu, 14 Mar 2024 07:11:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1710425483; x=1711030283; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PKhItOGFMcITInHnN6szVBVsc1uZT4QrVyUlEuiC338=;
- b=LHsdnFLtaoltY22QcW4TQ8nazrtI4bZZrBy0jab0D20owDIHrAT0N0tR1bAGOe+hEO
- 98d0i4ufvMo3HChK2agGCp9WzIDOf17EOITguNFrtS5yKjDs0NGhXrZKMV2fOM6aXOTl
- voCifLFISFnct6loq3QnDG7olxbtIV6is6u+E=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710425483; x=1711030283;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=PKhItOGFMcITInHnN6szVBVsc1uZT4QrVyUlEuiC338=;
- b=ZPTyIxpZFSxchkUllZ1vdIZJmOkXHkppz88UNNSXzeFvN+I075qYvhexw7933i7L6k
- DHaLQPGtRU1QgJuU42XW5sTuIjc/EpJFt8vmMkku2im/p8tb/vVGpDBgVHIUr3BBpQTW
- vVma7utwDum0sAspAqcNNY+IFp8ptyF5u8k9wqyx1vzIBv3QTHGmDpEYsjfQqCZn3M6z
- mXOXtRD83/MPsi6hGIt0I39XZNkWvrE5mkPVEOFr7fz0vGXWxCSrNDAizmr77YwhegBr
- EPtICtWj+050EIgZp2O8B+wCKY3wuJhNWEDYZcjWPD1HRn5DpqtZIWxCTmdRNKESM83W
- 9VoA==
-X-Gm-Message-State: AOJu0YxOVFW8CkfQ77KBwsOhIr4z9SYkfN0KW68ZgNUqcuRsnFentFMq
- +ikF7hoioeWL7yGL4rM8wuQb5gUwcvUuEcG60klkYodwsWGqLOJTLZ+Ibzuq/z4=
-X-Google-Smtp-Source: AGHT+IE4MzZlleh5CwO1zhABEXF6gMUh87OcK2irKbbQw6JR+eEEgibrwJbBPX2w7rc2Ez7MdNqW1w==
-X-Received: by 2002:a05:620a:3bd6:b0:787:ecea:6518 with SMTP id
- yf22-20020a05620a3bd600b00787ecea6518mr1731012qkn.46.1710425483495; 
- Thu, 14 Mar 2024 07:11:23 -0700 (PDT)
-Received: from [127.0.1.1]
- (2603-6081-7b00-007f-0000-0000-0000-1005.res6.spectrum.com.
- [2603:6081:7b00:7f::1005]) by smtp.gmail.com with ESMTPSA id
- bp41-20020a05620a45a900b00788577fcee4sm861907qkb.91.2024.03.14.07.11.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Mar 2024 07:11:23 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Jaehoon Chung <jh80.chung@samsung.com>, Lukasz Majewski <lukma@denx.de>, 
- Sean Anderson <seanga2@gmail.com>, Vignesh Raghavendra <vigneshr@ti.com>, 
- Bryan Brattlof <bb@ti.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
- Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>, 
- Nishanth Menon <nm@ti.com>, Neha Malcom Francis <n-francis@ti.com>, 
- Andrew Davis <afd@ti.com>, Igor Opaniuk <igor.opaniuk@foundries.io>, 
- Hari Nagalla <hnagalla@ti.com>, Ravi Gunasekaran <r-gunasekaran@ti.com>, 
- Vaishnav Achath <vaishnav.a@ti.com>, Jayesh Choudhary <j-choudhary@ti.com>
-In-Reply-To: <20240205-am62px-wip-rebasing-v4-0-fa772bfa623b@ti.com>
-References: <20240205-am62px-wip-rebasing-v4-0-fa772bfa623b@ti.com>
-Subject: Re: [PATCH v4 00/13] Introduce basic support for TI's AM62Px SoC
- family
-Message-Id: <171042548238.173271.944410998399426746.b4-ty@konsulko.com>
-Date: Thu, 14 Mar 2024 10:11:22 -0400
+ spf=pass smtp.mailfrom=danishanwar@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 42EEXRJX061163;
+ Thu, 14 Mar 2024 09:33:27 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1710426807;
+ bh=fJXwvAbrZGP1MQiqsCOvjMHZTZWIhwUdax8QXy31z9k=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=Ou5RUeItYwK8ofWOkBzTg1ryB84LsZtrKdjqR6uYWAPGm2U8UFWqA+BUASeeQFa3N
+ l6jTYciyQFUe60smnBD86/XBqhf9WhExdWDaneWoHd5cpI6wJd1RbmLx1RP62GWbMx
+ I2o0Md3ViZ2s+ez7h4fXBDScXTyTGDkhYTLOtoVI=
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 42EEXQNg073080
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 14 Mar 2024 09:33:27 -0500
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 14
+ Mar 2024 09:33:26 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 14 Mar 2024 09:33:26 -0500
+Received: from fllv0122.itg.ti.com (fllv0122.itg.ti.com [10.247.120.72])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 42EEXQwi118078;
+ Thu, 14 Mar 2024 09:33:26 -0500
+Received: from localhost (danish-tpc.dhcp.ti.com [10.24.69.25])
+ by fllv0122.itg.ti.com (8.14.7/8.14.7) with ESMTP id 42EEXP5j014016;
+ Thu, 14 Mar 2024 09:33:26 -0500
+From: MD Danish Anwar <danishanwar@ti.com>
+To: Nishanth Menon <nm@ti.com>, MD Danish Anwar <danishanwar@ti.com>, Igor
+ Opaniuk <igor.opaniuk@foundries.io>, Andrew Davis <afd@ti.com>, Tom Rini
+ <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, <srk@ti.com>, Vignesh Raghavendra
+ <vigneshr@ti.com>, <r-gunasekaran@ti.com>,
+ Roger Quadros <rogerq@kernel.org>
+Subject: [PATCH] arm: mach-k3: Fix config check for FS_LOADER
+Date: Thu, 14 Mar 2024 20:03:11 +0530
+Message-ID: <20240314143311.259568-2-danishanwar@ti.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240314143311.259568-1-danishanwar@ti.com>
+References: <20240314143311.259568-1-danishanwar@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,22 +86,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 12 Mar 2024 15:20:18 -0500, Bryan Brattlof wrote:
+load_firmware() API calls fs-loader APIs and checks for CONFIG_FS_LOADER
+before calling those APIs. The if check only checks for CONFIG_FS_LOADER
+but not for CONFIG_SPL_FS_LOADER.
 
-> The AM62Px is an extension of the existing Sitara AM62x low-cost family
-> of application processors built for Automotive and Linux Application
-> development. Scalable Arm Cortex-A53 performance and embedded features,
-> such as: multi high-definition display support, 3D-graphics
-> acceleration, 4K video acceleration, and extensive peripherals make the
-> AM62Px well-suited for a broad range of automation and industrial
-> application, including automotive digital instrumentation, automotive
-> displays, industrial HMI, and more.
-> 
-> [...]
+When CONFIG_FS_LOADER is enabled, load_firmware() API calls fs-loader APIs
+but this is done at SPL stage and at this time FS_LOADER is not built yet
+as a result we see below build error.
 
-Applied to u-boot/master, thanks!
+  AR      spl/boot/built-in.o
+  LD      spl/u-boot-spl
+arm-none-linux-gnueabihf-ld.bfd: arch/arm/mach-k3/common.o: in function
+`load_firmware':
+/home/danish/workspace/u-boot/arch/arm/mach-k3/common.c:184: undefined
+reference to `get_fs_loader'
+arm-none-linux-gnueabihf-ld.bfd:
+/home/danish/workspace/u-boot/arch/arm/mach-k3/common.c:185: undefined
+reference to `request_firmware_into_buf'
+make[2]: *** [/home/danish/workspace/u-boot/scripts/Makefile.spl:527:
+spl/u-boot-spl] Error 1
+make[1]: *** [/home/danish/workspace/u-boot/Makefile:2055:
+spl/u-boot-spl] Error 2
+make[1]: Leaving directory '/home/danish/uboot_images/am64x/r5'
+make: *** [Makefile:177: sub-make] Error 2
 
+Fix this by modifying the if check to CONFIG_IS_ENABLED(FS_LOADER) instead
+of IS_ENABLED(CONFIG_FS_LOADER) as the former will check for the
+appropriate config option (CONFIG_SPL_FS_LOADER / CONFIG_FS_LOADER) based
+on the build stage.
+
+Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
+---
+ arch/arm/mach-k3/r5/common.c      | 2 +-
+ arch/arm/mach-omap2/boot-common.c | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm/mach-k3/r5/common.c b/arch/arm/mach-k3/r5/common.c
+index 7309573a3f..c02f8d3309 100644
+--- a/arch/arm/mach-k3/r5/common.c
++++ b/arch/arm/mach-k3/r5/common.c
+@@ -70,7 +70,7 @@ int load_firmware(char *name_fw, char *name_loadaddr, u32 *loadaddr)
+ 	char *name = NULL;
+ 	int size = 0;
+ 
+-	if (!IS_ENABLED(CONFIG_FS_LOADER))
++	if (!CONFIG_IS_ENABLED(FS_LOADER))
+ 		return 0;
+ 
+ 	*loadaddr = 0;
+diff --git a/arch/arm/mach-omap2/boot-common.c b/arch/arm/mach-omap2/boot-common.c
+index 57917da25c..aa0ab13d5f 100644
+--- a/arch/arm/mach-omap2/boot-common.c
++++ b/arch/arm/mach-omap2/boot-common.c
+@@ -190,7 +190,7 @@ int load_firmware(char *name_fw, u32 *loadaddr)
+ 	struct udevice *fsdev;
+ 	int size = 0;
+ 
+-	if (!IS_ENABLED(CONFIG_FS_LOADER))
++	if (!CONFIG_IS_ENABLED(FS_LOADER))
+ 		return 0;
+ 
+ 	if (!*loadaddr)
 -- 
-Tom
-
+2.34.1
 
