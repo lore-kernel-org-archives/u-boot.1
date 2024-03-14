@@ -4,47 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A06DDC54E5D
-	for <u-boot@archiver.kernel.org>; Thu, 14 Mar 2024 04:16:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F01C1C5475B
+	for <u-boot@archiver.kernel.org>; Thu, 14 Mar 2024 04:16:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C81E487F25;
-	Thu, 14 Mar 2024 05:15:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3B65B87F19;
+	Thu, 14 Mar 2024 05:15:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1710389750;
-	bh=CCTq2lYxuVaBTVAZ1kDXcMLK5VgHawjlkcADNiFuUhI=;
+	s=phobos-20191101; t=1710389754;
+	bh=8c7U9C/VNEC3Z08uKhvYipiO0h3EqtK+AuBptVMiiTs=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=tUTK0nl65wRZkZxPYgIm2bhWKw8z82v5UO4x1yI2ak1XlVR0995LS8gBzne7J6pJH
-	 U4CEkCTKR949syUsvziEN/PU3Pin69Jw3kJzlANwR+wt/zMZc2/AkLwb6wA1tqr5am
-	 dovRCkJzvIu6q2dUgHWnSdH+rbdQqRSqjmXG/9UI2uDb2rBbrMu80o/g/e7AthPeTt
-	 rp/VuAPxM40tTD/xWRng64YkOsK9ymcuNcRCfL8oTl4Vi2yBKtrXpizsq8BgYoFfGx
-	 w41dpqkMzQ5k79mjfJSmqpzK273QIEiXx0aD8ZJIqSE8oG34tK8phKtzlUZpd+dhPm
-	 DWGT6h7NlHMrg==
+	b=SgEvecZhigLFvMyzF9JftHnm23npEXNNULryOwcYnvV3L9Rzj3K6iQfQmStOY24n3
+	 IMPI+GwmX6UtZBQu3Fx9MovXZ/yZLydqH9X8zNB8BSZ9Ba0Yu+h/qKSAvlbIf4m5El
+	 hE9wqNbtokCakpWF6eI5HGNDvF2pBkGGFyDlEJv+tR/CTDN/GSkwFIGtvlJ7efww+A
+	 OZXhGI85c0UtUT5txrU9keUsAspobtIhdPGaDxdjo9q+rUv3N+nQNzIU6sRDjukxQ+
+	 wim3xjkZ6lGlEVvfca21Oy9zxwTT4OIR6BAflbzKieY5hMRM+pH92IKlzNJoixtw4C
+	 PPC9oVE+gXr6g==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 90CD287EE3;
- Thu, 14 Mar 2024 05:15:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id 3F9AD87EF6;
+ Thu, 14 Mar 2024 05:15:50 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1710389750;
- bh=CCTq2lYxuVaBTVAZ1kDXcMLK5VgHawjlkcADNiFuUhI=;
+ s=phobos-20191101; t=1710389751;
+ bh=8c7U9C/VNEC3Z08uKhvYipiO0h3EqtK+AuBptVMiiTs=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=fIt7TK1VLenDE1g4PS33ao/y9fQZDmSnMvo9xlG/SKTqXXnLNeAJjg8auHg3Ph9vH
- LQPwTiAMR6BoBdj7oOoJ/TOHnw6HmwV0t/Z9ygyuVgxCEOTjB+RPguE0HMmqRGI3zL
- ak/p6VHyMcbhtTg0I5T42EfRwO3siCsgXdNVXY8wsBzOY84fuQkz5vBn1nKXMmibnW
- 4pwMYm/VsET+6QfU3jH90RVXnF6KFpuS89syj/NL6/v6mC68n/Shp5HQXgsHkI4uSi
- uSogxqmyJ4j0gGceySUR7V73vZvV4pzJTN+4OxgJ1Zw8+JPkES+KogUvuWztYyeX0+
- RKeKZBRMR0Tzg==
-Message-ID: <c86c5713-97c7-4ce6-bb75-15dcb3fcdcee@denx.de>
-Date: Thu, 14 Mar 2024 04:55:37 +0100
+ b=SHu9hTtXeGOdIdzRg65sMmxzEkoOkq4uvuTOyv2NAOIBeE5XM3F0JhneihVfryPfO
+ d/RMu/lYOl9u902nqW3/C0NUywNiboFyvvulezWzJECJ57clPWKv1VuC+z4meuukIw
+ 4nWDUuOtQH3ha2Yke2gpsj00FSwU+gMcCeknTmbZPIT4LJtMdVj1sempGfgoa4gzx3
+ 3qN9Pbi4aQh+8tz22BE9xy3EM/8FLcrbdDj5gq9hR0LTipgY9FrEmSgJ6vFQA7UUu0
+ zr0qxTz+8tuI7lpoGURXu2vj8J6GsNUM8G33O6rpNyC19KEmuW6dzfNL9eJ4qiWtJG
+ JcXq+QvMpgzuA==
+Message-ID: <dbd4f385-d93f-48db-a7e9-88b86f3d7445@denx.de>
+Date: Thu, 14 Mar 2024 04:59:02 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 03/11] reset: imx: Add support for i.MX8MP reset
- controller
+Subject: Re: [PATCH v3 04/11] imx8mp: power-domain: Don't power off pd_bus
 Content-Language: en-US
 To: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de
 Cc: trini@konsulko.com, tharvey@gateworks.com, marcel.ziswiler@toradex.com,
@@ -55,9 +54,9 @@ Cc: trini@konsulko.com, tharvey@gateworks.com, marcel.ziswiler@toradex.com,
  fathi.boudra@linaro.org, remi.duraffort@linaro.org,
  daniel.thompson@linaro.org
 References: <20240312070338.86127-1-sumit.garg@linaro.org>
- <20240312070338.86127-4-sumit.garg@linaro.org>
+ <20240312070338.86127-5-sumit.garg@linaro.org>
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240312070338.86127-4-sumit.garg@linaro.org>
+In-Reply-To: <20240312070338.86127-5-sumit.garg@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -77,100 +76,40 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 3/12/24 8:03 AM, Sumit Garg wrote:
-> Add support for i.MX8MP reset controller, it has same reset IP inside
-> as the other iMX7 and iMX8 variants but with different module layout.
+> power_domain_on/off() isn't refcounted and power domain bus shouldn't be
+> turned off for a single peripheral domain as it would negatively affect
+> other peripheral domains. So lets just skip turning off bus power
+> domain.
 
-iMX8M , iMX8 is a different SoC .
+What exactly is the issue and how did you trigger it ?
 
-> Inspired from counterpart Linux kernel v6.8-rc3 driver:
-> drivers/reset/reset-imx7.c. Use last Linux kernel driver reference
-> commit bad8a8afe19f ("reset: Explicitly include correct DT includes").
-> 
-> Tested-by: Tim Harvey <tharvey@gateworks.com> #imx8mp-venice*
-> Tested-by: Adam Ford <aford173@gmail.com> #imx8mp-beacon-kit
+Details please.
+
+> Fixes: 898e7610c62a ("imx: power-domain: Add i.MX8MP HSIOMIX driver")
 > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 > ---
->   drivers/reset/reset-imx7.c | 101 +++++++++++++++++++++++++++++++++++++
->   1 file changed, 101 insertions(+)
+>   drivers/power/domain/imx8mp-hsiomix.c | 6 +-----
+>   1 file changed, 1 insertion(+), 5 deletions(-)
 > 
-> diff --git a/drivers/reset/reset-imx7.c b/drivers/reset/reset-imx7.c
-> index 4c7fa19d495..90d3d75255e 100644
-> --- a/drivers/reset/reset-imx7.c
-> +++ b/drivers/reset/reset-imx7.c
-> @@ -10,6 +10,7 @@
->   #include <dm.h>
->   #include <dt-bindings/reset/imx7-reset.h>
->   #include <dt-bindings/reset/imx8mq-reset.h>
-> +#include <dt-bindings/reset/imx8mp-reset.h>
-
-Keep the list sorted (P is before Q).
-
->   #include <reset-uclass.h>
->   #include <linux/bitops.h>
->   #include <linux/delay.h>
-> @@ -252,6 +253,102 @@ static int imx8mq_reset_assert(struct reset_ctl *rst)
->   	return 0;
->   }
+> diff --git a/drivers/power/domain/imx8mp-hsiomix.c b/drivers/power/domain/imx8mp-hsiomix.c
+> index e2d772c5ec7..448746432a2 100644
+> --- a/drivers/power/domain/imx8mp-hsiomix.c
+> +++ b/drivers/power/domain/imx8mp-hsiomix.c
+> @@ -50,7 +50,7 @@ static int imx8mp_hsiomix_on(struct power_domain *power_domain)
 >   
-> +enum imx8mp_src_registers {
-> +	SRC_SUPERMIX_RCR	= 0x0018,
-> +	SRC_AUDIOMIX_RCR	= 0x001c,
-> +	SRC_MLMIX_RCR		= 0x0028,
-> +	SRC_GPU2D_RCR		= 0x0038,
-> +	SRC_GPU3D_RCR		= 0x003c,
-> +	SRC_VPU_G1_RCR		= 0x0048,
-> +	SRC_VPU_G2_RCR		= 0x004c,
-> +	SRC_VPUVC8KE_RCR	= 0x0050,
-> +	SRC_NOC_RCR		= 0x0054,
-> +};
-> +
-> +static const struct imx7_src_signal imx8mp_src_signals[IMX8MP_RESET_NUM] = {
-> +	[IMX8MP_RESET_A53_CORE_POR_RESET0]	= { SRC_A53RCR0, BIT(0) },
-> +	[IMX8MP_RESET_A53_CORE_POR_RESET1]	= { SRC_A53RCR0, BIT(1) },
-> +	[IMX8MP_RESET_A53_CORE_POR_RESET2]	= { SRC_A53RCR0, BIT(2) },
-> +	[IMX8MP_RESET_A53_CORE_POR_RESET3]	= { SRC_A53RCR0, BIT(3) },
-> +	[IMX8MP_RESET_A53_CORE_RESET0]		= { SRC_A53RCR0, BIT(4) },
-> +	[IMX8MP_RESET_A53_CORE_RESET1]		= { SRC_A53RCR0, BIT(5) },
-> +	[IMX8MP_RESET_A53_CORE_RESET2]		= { SRC_A53RCR0, BIT(6) },
-> +	[IMX8MP_RESET_A53_CORE_RESET3]		= { SRC_A53RCR0, BIT(7) },
-> +	[IMX8MP_RESET_A53_DBG_RESET0]		= { SRC_A53RCR0, BIT(8) },
-> +	[IMX8MP_RESET_A53_DBG_RESET1]		= { SRC_A53RCR0, BIT(9) },
-> +	[IMX8MP_RESET_A53_DBG_RESET2]		= { SRC_A53RCR0, BIT(10) },
-> +	[IMX8MP_RESET_A53_DBG_RESET3]		= { SRC_A53RCR0, BIT(11) },
-> +	[IMX8MP_RESET_A53_ETM_RESET0]		= { SRC_A53RCR0, BIT(12) },
-> +	[IMX8MP_RESET_A53_ETM_RESET1]		= { SRC_A53RCR0, BIT(13) },
-> +	[IMX8MP_RESET_A53_ETM_RESET2]		= { SRC_A53RCR0, BIT(14) },
-> +	[IMX8MP_RESET_A53_ETM_RESET3]		= { SRC_A53RCR0, BIT(15) },
-> +	[IMX8MP_RESET_A53_SOC_DBG_RESET]	= { SRC_A53RCR0, BIT(20) },
-> +	[IMX8MP_RESET_A53_L2RESET]		= { SRC_A53RCR0, BIT(21) },
-> +	[IMX8MP_RESET_SW_NON_SCLR_M7C_RST]	= { SRC_M4RCR, BIT(0) },
-> +	[IMX8MP_RESET_OTG1_PHY_RESET]		= { SRC_USBOPHY1_RCR, BIT(0) },
-> +	[IMX8MP_RESET_OTG2_PHY_RESET]		= { SRC_USBOPHY2_RCR, BIT(0) },
-> +	[IMX8MP_RESET_SUPERMIX_RESET]		= { SRC_SUPERMIX_RCR, BIT(0) },
-> +	[IMX8MP_RESET_AUDIOMIX_RESET]		= { SRC_AUDIOMIX_RCR, BIT(0) },
-> +	[IMX8MP_RESET_MLMIX_RESET]		= { SRC_MLMIX_RCR, BIT(0) },
-> +	[IMX8MP_RESET_PCIEPHY]			= { SRC_PCIEPHY_RCR, BIT(2) },
-> +	[IMX8MP_RESET_PCIEPHY_PERST]		= { SRC_PCIEPHY_RCR, BIT(3) },
-> +	[IMX8MP_RESET_PCIE_CTRL_APPS_EN]	= { SRC_PCIEPHY_RCR, BIT(6) },
-> +	[IMX8MP_RESET_PCIE_CTRL_APPS_TURNOFF]	= { SRC_PCIEPHY_RCR, BIT(11) },
-> +	[IMX8MP_RESET_HDMI_PHY_APB_RESET]	= { SRC_HDMI_RCR, BIT(0) },
-> +	[IMX8MP_RESET_MEDIA_RESET]		= { SRC_DISP_RCR, BIT(0) },
-> +	[IMX8MP_RESET_GPU2D_RESET]		= { SRC_GPU2D_RCR, BIT(0) },
-> +	[IMX8MP_RESET_GPU3D_RESET]		= { SRC_GPU3D_RCR, BIT(0) },
-> +	[IMX8MP_RESET_GPU_RESET]		= { SRC_GPU_RCR, BIT(0) },
-> +	[IMX8MP_RESET_VPU_RESET]		= { SRC_VPU_RCR, BIT(0) },
-> +	[IMX8MP_RESET_VPU_G1_RESET]		= { SRC_VPU_G1_RCR, BIT(0) },
-> +	[IMX8MP_RESET_VPU_G2_RESET]		= { SRC_VPU_G2_RCR, BIT(0) },
-> +	[IMX8MP_RESET_VPUVC8KE_RESET]		= { SRC_VPUVC8KE_RCR, BIT(0) },
-> +	[IMX8MP_RESET_NOC_RESET]		= { SRC_NOC_RCR, BIT(0) },
-> +};
-> +
-> +static int imx8mp_reset_set(struct reset_ctl *rst, bool assert)
-> +{
-> +	struct imx7_reset_priv *priv = dev_get_priv(rst->dev);
+>   	ret = power_domain_on(domain);
+>   	if (ret)
+> -		goto err_pd;
+> +		return ret;
+>   
+>   	ret = clk_enable(&priv->clk_usb);
+>   	if (ret)
+> @@ -63,8 +63,6 @@ static int imx8mp_hsiomix_on(struct power_domain *power_domain)
+>   
+>   err_clk:
+>   	power_domain_off(domain);
+> -err_pd:
+> -	power_domain_off(&priv->pd_bus);
+>   	return ret;
 
-It wouldn't hurt to rename imx7_reset_priv to imx_reset_priv in 2/11 too.
-
-With the include sorting fixed:
-
-Reviewed-by: Marek Vasut <marex@denx.de>
+Why not add counter into imx8mp_hsiomix_priv structure in this driver ?
