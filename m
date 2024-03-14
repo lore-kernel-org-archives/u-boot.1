@@ -4,84 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16F64C54E66
-	for <u-boot@archiver.kernel.org>; Thu, 14 Mar 2024 00:39:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19A98C54E66
+	for <u-boot@archiver.kernel.org>; Thu, 14 Mar 2024 00:39:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 02E4487F2D;
-	Thu, 14 Mar 2024 01:39:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EE13187F28;
+	Thu, 14 Mar 2024 01:39:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dMhQmeDK";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Sc1Kyiv1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A712587F28; Thu, 14 Mar 2024 01:39:19 +0100 (CET)
-Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
- [IPv6:2607:f8b0:4864:20::f31])
+ id 2A10987F28; Thu, 14 Mar 2024 01:39:24 +0100 (CET)
+Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
+ [IPv6:2607:f8b0:4864:20::22f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B496687F5E
- for <u-boot@lists.denx.de>; Thu, 14 Mar 2024 01:39:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4418487F6E
+ for <u-boot@lists.denx.de>; Thu, 14 Mar 2024 01:39:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf31.google.com with SMTP id
- 6a1803df08f44-690cbf99143so2612196d6.3
- for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 17:39:16 -0700 (PDT)
+Received: by mail-oi1-x22f.google.com with SMTP id
+ 5614622812f47-3c1ea5b42e7so275904b6e.2
+ for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 17:39:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1710376755; x=1710981555; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1710376760; x=1710981560; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=2LgsAQw5gRlTTTD8vs1tBBkhp7kN1UiPZwztI40C3IE=;
- b=dMhQmeDKKw35lHhniVCe6RM0Hkkku+N7D0oeSZh8xDzy3ZxCPXC3iZvlWadcHtIbEv
- dWqpmMlPSBKEFEB+QOHzLJ8gfnnp5+B8mU8KdyEYNKuYe7jmgEg8qFREfhX4SDYJOF0i
- 3gepwCAgGvw6a+AQqedsYx67onG8kDpDsC9N4=
+ bh=xxchcH2kGmshZsVsb/Yca3csYYzv8bw48QZ+sAoMHyk=;
+ b=Sc1Kyiv1Qgyoa3Xyy4ovMVbztat+uVTaHEoVoPYoPKuZHqFyTv9A1pPf/kcebxJpjF
+ DuP2nLzztrmUukRSzoVabwJdPjvLSZ/vxQfg3sLYoc4VnlRsAei8ZWSaj86zjvvg0nk7
+ 5GTbLBQtJbB2ghzFhk+Vk/I7zLOBK0mPbMmZE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710376755; x=1710981555;
+ d=1e100.net; s=20230601; t=1710376760; x=1710981560;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2LgsAQw5gRlTTTD8vs1tBBkhp7kN1UiPZwztI40C3IE=;
- b=q6o6gpJXKq3cYQJlE+1GYSSh1fYDRgqcQhNls0KutQ9aBrf9DIISDmhn/jrqk2e/ki
- i4FIeiH5Dan/6i4z1kAjSrLUWT3oFrvaP4oOxiQBDGoA2ikJmSLqudrHf7N/21jfyoPA
- +YTg4uORqFU/uVPKj/rwrWqaM0FMw6KvzZELD4bTCRtW93ErBMFwNiscJVZ+PJ4jJmVl
- ME5cRrTmvdb5YA14+8h0vY+b0YfP4XU/jKy5laiacKTvEclqX974UgGfWedHGDuA2B/B
- u7UwteZo2APvOgm6c5Psvxr6oVgjgsrBvp9hurb+WqHhfWPQns6M2hAhJt5GSiVW97HU
- NgzQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUlye+VH+5E1JzbT/t8VinlPqR8ejW1EcKzrneufJWkTif6hfg3Ap36qBS6DmxjjFzCrfKMeKTkeMoTI2o40itwFC245g==
-X-Gm-Message-State: AOJu0YyZ6X5DAYpvZNfUVYzAZ+iQqbePFX2zwxc0TXKqcHGugytgkGpR
- qk0pfeyMgJMLZ9yU7Sbw6pD4oaMQxva7G9+WPfSltRqhzJdt+J3p3JB+7geq3fM=
-X-Google-Smtp-Source: AGHT+IFxVbrBHOtquLAkhuGOoumyg8tUrPM4dgTsuYeWdqBcm0lOAyv//hNmrKzDqCUeIT/9077Y5Q==
-X-Received: by 2002:a05:6214:972:b0:690:c73a:db09 with SMTP id
- do18-20020a056214097200b00690c73adb09mr317292qvb.24.1710376755303; 
- Wed, 13 Mar 2024 17:39:15 -0700 (PDT)
+ bh=xxchcH2kGmshZsVsb/Yca3csYYzv8bw48QZ+sAoMHyk=;
+ b=byr3//SGaQglmMYHuVVSc9SO/5JsqwGEsvfZIwq4vR/3khllH8C6FJM2tKF1d89QV0
+ fC11tikU8VQGEiKezYakt37Aoq40K/DOeRFsUT5szLhzQbPg4k6f/WOMw7SYHkSCabS0
+ 4ABk4fqydSThwI9Afdba5hIWAjSGDr71rjDDV/CmnJwmaf1d6hR4zwW5fXiaiyiDTdav
+ ThYmKf+GmhqMiGSEG4/hYblyRsFCA8Brmfg/Ceo7rJidGkKtCEle3KNNu3HV/WiNeu9v
+ VvglmDR18faN6vxJku2CFjDo8JF94+k2gqk2K53D9Gj9SHGt5f6X9y19HztXva5fFJ4n
+ iw8g==
+X-Gm-Message-State: AOJu0YwV1okg1kClv8l1r625UX32pyRKybZk0FsuANQdkqcnTHh1NxXh
+ Sk2gTqC4lbhGk0ljKd2FVeTMsEiqbTsGsGCH8tS6BnaPaJgjrsAiRaeA3OwCUOprE1bKVk8PYcF
+ c
+X-Google-Smtp-Source: AGHT+IEuNk/iM9Cjy6CTZG0hhIFD/C+9qBc6+r7ihb0BS83D2lG214FykF75eEalEV3Yai4Y9dvJKw==
+X-Received: by 2002:a05:6808:22a4:b0:3c2:4e74:731b with SMTP id
+ bo36-20020a05680822a400b003c24e74731bmr299463oib.39.1710376759948; 
+ Wed, 13 Mar 2024 17:39:19 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-007f-0000-0000-0000-1005.res6.spectrum.com.
  [2603:6081:7b00:7f::1005]) by smtp.gmail.com with ESMTPSA id
- dv10-20020ad44eea000000b0069111c5cdd4sm213211qvb.100.2024.03.13.17.39.14
+ o3-20020ae9f503000000b0078821519902sm173010qkg.20.2024.03.13.17.39.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Mar 2024 17:39:14 -0700 (PDT)
-Date: Wed, 13 Mar 2024 20:39:12 -0400
+ Wed, 13 Mar 2024 17:39:19 -0700 (PDT)
+Date: Wed, 13 Mar 2024 20:39:17 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Weizhao Ouyang <o451686892@gmail.com>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Etienne Carriere <etienne.carriere@foss.st.com>,
- Simon Glass <sjg@chromium.org>, Peng Fan <peng.fan@nxp.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jens Wiklander <jens.wiklander@linaro.org>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v4 3/3] cmd: rng: Add rng list command
-Message-ID: <20240314003912.GG3442575@bill-the-cat>
-References: <20240304144242.11666-1-o451686892@gmail.com>
- <20240304144242.11666-4-o451686892@gmail.com>
+To: Hanyuan Zhao <hanyuan-z@qq.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH v3 1/3] cli: panic when failed to allocate memory for the
+ history buffer
+Message-ID: <20240314003917.GH3442575@bill-the-cat>
+References: <tencent_2AE7952872F803E81AEF7D49589E6CCEFF0A@qq.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="JmMa90pMNiRm1110"
+ protocol="application/pgp-signature"; boundary="6+h1UriUZY/LIBZl"
 Content-Disposition: inline
-In-Reply-To: <20240304144242.11666-4-o451686892@gmail.com>
+In-Reply-To: <tencent_2AE7952872F803E81AEF7D49589E6CCEFF0A@qq.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,40 +93,43 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---JmMa90pMNiRm1110
+--6+h1UriUZY/LIBZl
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Mar 04, 2024 at 02:42:42PM +0000, Weizhao Ouyang wrote:
+On Tue, Mar 05, 2024 at 03:37:33PM +0800, Hanyuan Zhao wrote:
 
-> The 'rng list' command probes all RNG devices and list those devices
-> that are successfully probed. Also update the help info.
+> This commit simply modifies the history initialize function,
+> replacing the return value by panic with reasons. The calling
+> chains of hist_init don't have steps explicitly throwing or
+> dealing with the ENOMEM error, and once the init fails, the
+> whole system is died. Using panic here to provide error
+> information instead.
 >=20
-> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Signed-off-by: Weizhao Ouyang <o451686892@gmail.com>
+> Signed-off-by: Hanyuan Zhao <hanyuan-z@qq.com>
 
 Applied to u-boot/next, thanks!
 
 --=20
 Tom
 
---JmMa90pMNiRm1110
+--6+h1UriUZY/LIBZl
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXyRzAACgkQFHw5/5Y0
-tyznJQv/ZZYCmsfZgpWt8mS/aRdakeXcOFEdM0MrTL2LOLCbo5Bpfjxc59zndD39
-tc8ASSb++k44GsxQk5gQZ3E6dHWyrY7dYmT9nIZznqFttroFBzETdVXTWYoNuiHx
-eEx9C+Dcm/N+m69WLUyGKPRNaQkfLFRo37AhkGDOzrDS31iUIzcrK0L8xAwqN3lX
-itat0tmHSrEZXLmQPdmr66qQY84foUnlHUAHBHzO3UMCo+ZslIdxgjR6ZH6/nXW6
-DN7h6b+0v9DzjqMauTRnR0kbstOcg1ED7AyKad7E+1Vzms6dZVoaDQlz5gkbr5bP
-q3SNWw+Gk8oFPVxOhaM+XSSmD4Xd6kMMtS4eMQIC8E5Hqlr3zlpnP1Je3f+RvHic
-OjlV5BpQZSMHLfr5LyxUt2YGmBALygnvjb32GQnBwKFySvZR6aIlYfPF9z+O6xmc
-Gxprbc1NWebZ6clgji8Hivv9VsJ49ojZIC7oWQ3x+xKtlhRrUcWLTLc2Zq+yveqe
-0cSBeAKv
-=2CMy
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXyRzUACgkQFHw5/5Y0
+tyxx5gv/aG4/ZbXEoKjUstXbL9KnP5mCSajV/HJ0eD1kLdFXTeML7STK4mmSj+Es
+18N49GkM7IT5KFwkGhyeh/YezJvh73sFn62zQkajPaGT2zKejjf629BiK3vsINn5
+Q3gGLOH421M0eaBFAZcmdD51A1AYTLFQEArV94VOEDUJLSThKbxQwIAjlnGN39NB
+DSEjT/ur+Hf5gH1AeAeImlMr4oqwkrBhaQ3YanBcAr7ygE8BEqZ4a5pyXYwDGQ+T
+xy0aaCrJYcHOI8pp/MAK2RVCrGbLDyPx05sYFB1OwFSD8tUFpW2L5ewnZ3BC1vEr
+EBRXH8CrX3F7RfmB6F3A8J0zRgWaC5oYlBC5uouzomx4iA5Bop4viHGIGYJ4KuEg
+g1xLl9FxBz1bg8wy+uLZd+xKrBB+RCbMJZB7HT6T41iTENNqY75LI1W4B95TuxI/
+xaicDmfJpcVMYVxB8LiUWaWGn5cRt/D5dOe7oWBHsPYA4lj6cNG7Can2Xt3IxHFj
+BVolPGH+
+=7RfN
 -----END PGP SIGNATURE-----
 
---JmMa90pMNiRm1110--
+--6+h1UriUZY/LIBZl--
