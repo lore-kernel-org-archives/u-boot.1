@@ -4,82 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F72AC54E58
-	for <u-boot@archiver.kernel.org>; Thu, 14 Mar 2024 00:41:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E162C54E58
+	for <u-boot@archiver.kernel.org>; Thu, 14 Mar 2024 00:41:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0467687FC1;
-	Thu, 14 Mar 2024 01:40:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6F6BE87FED;
+	Thu, 14 Mar 2024 01:40:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dTgEOvky";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iiBT8Wsp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F1E787FC0; Thu, 14 Mar 2024 01:40:42 +0100 (CET)
-Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
- [IPv6:2607:f8b0:4864:20::f2e])
+ id D700887FDA; Thu, 14 Mar 2024 01:40:46 +0100 (CET)
+Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
+ [IPv6:2607:f8b0:4864:20::729])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EFB0087FC9
- for <u-boot@lists.denx.de>; Thu, 14 Mar 2024 01:40:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 683F787FCA
+ for <u-boot@lists.denx.de>; Thu, 14 Mar 2024 01:40:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2e.google.com with SMTP id
- 6a1803df08f44-690d75c73f4so2981706d6.2
- for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 17:40:36 -0700 (PDT)
+Received: by mail-qk1-x729.google.com with SMTP id
+ af79cd13be357-7887649cc6cso127497585a.1
+ for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 17:40:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1710376836; x=1710981636; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1710376843; x=1710981643; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=U3LlrVT6BYyN0JNd1FmAaTTU2lsvA53YOO/yK+dUi4w=;
- b=dTgEOvkyYQKIF4WBpAXkjMMBDSgMD6cxLT+aAEnqNak7tS4Oui6Aa4+FYLxEVukBFr
- TRiWUgeHIp2nHlK910M3quOwhsiEZhUtoR6Mv1Vmhj6X0JXQRWoIRIW4eQKYbIkSqoHQ
- 2rUYkrQF+wB6Ce60qayLWekaml9pGkwHU1L1Q=
+ bh=x2kQ6CqIygZ5AAnZe2HFqa87+R6MhPeqnwuoSb1iqes=;
+ b=iiBT8WspnBcXAI4P9QXcqInJx4yCqbQCiFUyj2fZnvsr4u408c9m84hZ1MPicNaM0q
+ OIgej+H/aYMtdH/YNgNN08rWW0gkcnbOFgjj3MecCHVl3ZUp8XIduLqUJeR5+R2yA6Ca
+ asrHePBjrNsaGe8YcSoSXAdLa90IMH+++Xftw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710376836; x=1710981636;
+ d=1e100.net; s=20230601; t=1710376843; x=1710981643;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=U3LlrVT6BYyN0JNd1FmAaTTU2lsvA53YOO/yK+dUi4w=;
- b=NSecfx4Nk6PDdCDoj+vNQI9ZBV3okwZnUlz3AEx/uFTQ8UefH6iYcfhNThIe9o+91d
- z0B7eqMOdIpeFlllDitDoFubQmhfG6zY91bVqvxNbDlGtgu6xzTLD7eJL9ghJRKelrr+
- UOlxpRv+rjPP6ECj8yNtxjCWsSPjGaFvTQJDpbdQkhkQyB+pkP1PLlzxNj+YwS3T7ke6
- 6A1py6og+LnTMWR4sUvdyUJuJJZRzPFZ4CZ12e/a+93ruUig6g+2LDjLlZWugqrYtnWe
- thoDCYNjqcpHgM3VMBmsBG2lA2+t872LpTN846PG5PMT+AFaSThU59BaIo1ZjsyBQ1Hl
- NlJw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUG4TGYyUI6y1ZmLzoB9WNMHMz0FYs5wqSHbZMXjCVYDmkVUNVbvBJkCp0vHgekVv1pHe4WEUvODQg72grUdQvYtYqGYw==
-X-Gm-Message-State: AOJu0YyKSEN+S1QOc73Zd0VmlgtyBwNk7dUZbaB5td1o2BfTe72OFriU
- q7Rj/CLO75ZHuXCFT7T7ggORo8LEDm3ZFHvdDi1Egk11SEvvMDTa6xdfQwV26qc=
-X-Google-Smtp-Source: AGHT+IFTXYbkLPDFrKx9KJRqKEU1CVinL8WYI8wxiZE7mjpT+07EmmRbSXSIXhogFRgbvDrsbpcTVA==
-X-Received: by 2002:a0c:e28e:0:b0:691:49d5:d8f7 with SMTP id
- r14-20020a0ce28e000000b0069149d5d8f7mr213612qvl.21.1710376835797; 
- Wed, 13 Mar 2024 17:40:35 -0700 (PDT)
+ bh=x2kQ6CqIygZ5AAnZe2HFqa87+R6MhPeqnwuoSb1iqes=;
+ b=UgKhAnK/HUg1pX+UJEX9kmaLrbf8KvW/u7ha/4qETJM/6H/fF5D2Ec9rJ6koUPiVq4
+ 33WcFHsmW+XuVGuKhWkFm7MMpiAuTPXBYpsuPVLo+UeM2NJn+1JpVjaGy1CFezfpLF/v
+ cobTp1PEI63CCPROjvz3vMyoo4f/L0XUFuLHeK3dvoaGQUx3EYa7jdnDbg9tRBuW4ucN
+ LyKDyLpPGJrwp9WEVH4Wg2HXrZulifDhGQ4ZAKkwUYxBEX48o2sfRaI+afwBdR65fG8k
+ zhTG2qncLPYTaQeoQU1hLR+POtbxIzKweJU/2P2DkfcmuxOgLRed8soQtCMWxC5gSIHX
+ kydQ==
+X-Gm-Message-State: AOJu0YwEm/udFwE3lhofZaNuD24MVksHKNmZxgKNztcpADAUH/0h7vPl
+ K5RVFSyE0lJi0IK2fxTjNxdbMAQkTtHnP3r6aKJQa7GHAyw1jFtNhl6jKWjZjmk=
+X-Google-Smtp-Source: AGHT+IHjibsUtlezO/uSTjKBBPLRVq7r2cQCTbG1b931NN9qwON/m6yzp5vI6buB63hz9oDHR51KpQ==
+X-Received: by 2002:a05:6214:e6a:b0:691:abc:ade5 with SMTP id
+ jz10-20020a0562140e6a00b006910abcade5mr2772297qvb.27.1710376843185; 
+ Wed, 13 Mar 2024 17:40:43 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-007f-0000-0000-0000-1005.res6.spectrum.com.
  [2603:6081:7b00:7f::1005]) by smtp.gmail.com with ESMTPSA id
- m11-20020a0562141bcb00b006907904691dsm231653qvc.17.2024.03.13.17.40.34
+ hr10-20020a05621423ca00b00690c5ec348bsm216339qvb.119.2024.03.13.17.40.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Mar 2024 17:40:35 -0700 (PDT)
-Date: Wed, 13 Mar 2024 20:40:33 -0400
+ Wed, 13 Mar 2024 17:40:42 -0700 (PDT)
+Date: Wed, 13 Mar 2024 20:40:41 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Alexander Gendin <agendin@matrox.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mario Six <mario.six@gdsys.cc>, Sean Anderson <seanga2@gmail.com>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2] test: dm: add button_cmd test
-Message-ID: <20240314004033.GQ3442575@bill-the-cat>
-References: <20240305145111.1391645-1-caleb.connolly@linaro.org>
+To: Hanyuan Zhao <hanyuan-z@qq.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH v3 3/3] cli: compile history code if and only if history
+ config is selected
+Message-ID: <20240314004041.GR3442575@bill-the-cat>
+References: <20240305073734.14483-1-hanyuan-z@qq.com>
+ <tencent_82A5BF202DB7378FFE714B6E38F401448C09@qq.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="3UBL/57NCt64UqRD"
+ protocol="application/pgp-signature"; boundary="19LPrd++9CPJmhFO"
 Content-Disposition: inline
-In-Reply-To: <20240305145111.1391645-1-caleb.connolly@linaro.org>
+In-Reply-To: <tencent_82A5BF202DB7378FFE714B6E38F401448C09@qq.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,51 +93,45 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---3UBL/57NCt64UqRD
+--19LPrd++9CPJmhFO
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Mar 05, 2024 at 02:51:03PM +0000, Caleb Connolly wrote:
+On Tue, Mar 05, 2024 at 03:37:37PM +0800, Hanyuan Zhao wrote:
 
-> Add a test for the button_cmd feature. This validates that commands can
-> be mapped to two buttons, that the correct command runs based on which
-> button is pressed, that only 1 command is run, and that no command runs
-> if button_cmd_0_name is wrong or unset.
+> This commit allows user to determine whether to have history recording
+> in command-line. Previously to this commit, the CMD_HISTORY only sets
+> the compiling of cmd/history.c, and the history code in cli_readline.c
+> is always compiled and will take a lot of space to store history even if
+> we say N to CMD_HISTORY.
 >=20
-> Additionally, fix a potential uninitialised variable use caught by these
-> tests, the btn variable in get_button_cmd() is assumed to be null if
-> button_get_by_label() fails, but it's actually used uninitialised in
-> that case.
 >=20
-> CONFIG_BUTTON is now enabled automatically and was removed when running
-> save_defconfig.
->=20
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> Fixes: e761035b6423 ("boot: add support for button commands")
+> Signed-off-by: Hanyuan Zhao <hanyuan-z@qq.com>
 
-This still leads to CI failures:
-https://source.denx.de/u-boot/u-boot/-/jobs/798332
+This part of your series breaks some riscv platforms:
+https://source.denx.de/u-boot/u-boot/-/jobs/798333
+https://source.denx.de/u-boot/u-boot/-/jobs/798334
 
 --=20
 Tom
 
---3UBL/57NCt64UqRD
+--19LPrd++9CPJmhFO
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXyR4EACgkQFHw5/5Y0
-tywI8gv+JBaL1/pCsxCxfFnDh+i9ljMKZRA7IhbSA4s1O2wHEwBYMaDNEzBbm2/0
-r2bSXp89A1zQYWsc54J5bFlf/NmMa+7ATSS6vlbjraT99pozCSw/aLoqgYECgbpJ
-NewAX9Vpm+OzmQszZ0i2vGDYaBD3DisdkS4/htXwVyodrggJ5g/tK0PtgI253H2v
-y9ZmSkeh9G6wpfbFDUt0f3e1UhSWjqz8X0Ih17EbFmh+8USuTWuTxeGIT0JKiD8t
-gSiDEJI13QBwu3UiTBVacEgVV+BYAQOnreckRtHK2qqqEqXve4RjuI+OtPVdtdL/
-JKUxsvG+bFlxm/Xujq8BvqqK4DckoJwHYLbWiRbKQda8VIO8u4GNIgSiJVV+Ahjf
-fEicDLO4A9K49mBxooFwCl8NPNQgB1q/B85NFXbss0fGoWbj9g/CYoL8b05CALw0
-t4eF6a3ckWmQf39dpMprm8MhlnPQHQ9ulVZvY4Z9BzUhTLwO438ojT8noz3g0Sz4
-emE3al4N
-=tmq3
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXyR4gACgkQFHw5/5Y0
+tyyzJAv+N3Xz2NmhkFWyyFjjgpnw8vhMuaO3MgxFgB4CJmDwHkY9r+o8E6vpvSme
+I4qdp3jBANkBiyaguY8g0Sui5XxAKZbD7gCjNH19mU/UWEt3wygiiclygTLwGWDH
+U7mJ/g5+2Mb5f6AcJrz4wUsE1eZXW0vGB1Pzv8pPlpXFMPJQYhCffHrVOnOlGutm
+ykc6eakJMb+gzQI4P+fOmn7IeCp1Z//V3pN+c3x0L++xXF9mkCOwHNbOUrc6sJSs
+IrC+to/jXib2oUXNOh2PtbKRLD/Bg4S3/k6JFeymZuXDlXXdyzIX9TFgq4u5YB1p
+eAuqJfsCMyfRjV68G8FuZBRVGkdA1rTTVhGA8ayYAzDl7IPGVgF3g5wkxanKAXJH
+wvSlWcIALOm2db9J8206K6XwK0adVnJzEkeAuEpk3vmyPnTT4VssZScTL49wSsU7
+oHfgTLQZOabK9zV6hR6kYO2RhD92yFgUv7+5BmsYqurAubhQ6de3yaOwyJSbpzlJ
+4jpVLdjb
+=la6i
 -----END PGP SIGNATURE-----
 
---3UBL/57NCt64UqRD--
+--19LPrd++9CPJmhFO--
