@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5F08C54E60
-	for <u-boot@archiver.kernel.org>; Thu, 14 Mar 2024 14:44:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B82AC54E67
+	for <u-boot@archiver.kernel.org>; Thu, 14 Mar 2024 14:44:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 922AD87FDE;
-	Thu, 14 Mar 2024 15:44:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1CA1787FDA;
+	Thu, 14 Mar 2024 15:44:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="l7Hebe1M";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="XudFK8PI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B61AC87FB7; Thu, 14 Mar 2024 15:44:09 +0100 (CET)
+ id BFC3B87FAD; Thu, 14 Mar 2024 15:44:11 +0100 (CET)
 Received: from madrid.collaboradmins.com (madrid.collaboradmins.com
- [46.235.227.194])
+ [IPv6:2a00:1098:ed:100::25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 356B987FC6
- for <u-boot@lists.denx.de>; Thu, 14 Mar 2024 15:44:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3105387F74
+ for <u-boot@lists.denx.de>; Thu, 14 Mar 2024 15:44:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=collabora.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=detlev.casanova@collabora.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1710427446;
- bh=PL7iC9og1qti68zR3G0mMzJL1RBqoSMeZqjKxTQBTTU=;
+ s=mail; t=1710427448;
+ bh=q/NrnUtf1yRXS+VnksdLBjk77JKF4zUyC+y9mpg1Tl4=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=l7Hebe1ML1qEUUeTbegP594emW0+h3raiVQbJHwwe62TYkXdOKzcy1Jn/cryGjBhm
- WjwllTJBfx8ZH6uszuTzQ/ZueJasU5Gtey9byCdFBN4hlOJUcCSvh6a4a466cBXDgG
- O0Fo8FuH2xHAcQH2E9M83povwRgdMz3DrCRI0u29o5IWW2RESLT5lyEh2LHZs5HRvs
- oEcZPA+anWm4H3KmbqVF+Gzzh6h6WjrV7LHxJmdFwGgYOZLWSsa+t3xfslQbaTZUi3
- FZoFT4NApRd8TLOAU3yjWM5OUO5YU4rOMfzhsz+DH42WqrrJEdu70EaOnCBxBi5SzG
- Ucul8WePVU6+Q==
+ b=XudFK8PIE9auD0B9dwSM632ZSgzHveVXk+euY95bwnSBXfllVlbUFFctfRzlILr/v
+ kRzUu8BIfeKgnAhiam22UGked91TQjr0RX5kq0b9uTt2Ag2npgaPvc6XZfWp3+pkcx
+ 37CmsPk35O08Wnd+31hDaSo2dg6ZQ8QoFaMQ6fFk+pKZwLPe/A9CNGMYgippdvfRFc
+ 0EDPDljcQNZDGCkE6K48H0jbUL/BO63+H9uiXeaAK02l/e+Kz32eT48kj0hWnHuw5z
+ Gh8Kr4g8fvlQ5GA92jbNH4MgD7RcRyiNmfIxIItiJjV2bcYOiu7hid1bzOOCIcz9Jo
+ N3gzZRTYNJZQw==
 Received: from arisu.hitronhub.home (cola.collaboradmins.com [195.201.22.229])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested) (Authenticated sender: detlev)
- by madrid.collaboradmins.com (Postfix) with ESMTPSA id E185637820F5;
- Thu, 14 Mar 2024 14:44:04 +0000 (UTC)
+ by madrid.collaboradmins.com (Postfix) with ESMTPSA id 1F5A837820F7;
+ Thu, 14 Mar 2024 14:44:06 +0000 (UTC)
 From: Detlev Casanova <detlev.casanova@collabora.com>
 To: u-boot@lists.denx.de
 Cc: Joe Hershberger <joe.hershberger@ni.com>,
@@ -52,9 +52,9 @@ Cc: Joe Hershberger <joe.hershberger@ni.com>,
  Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
  Fabio Estevam <festevam@denx.de>,
  Detlev Casanova <detlev.casanova@collabora.com>
-Subject: [PATCH 1/3] net: Add a CONFIG_NET_BOARD_ETHADDR
-Date: Thu, 14 Mar 2024 10:43:46 -0400
-Message-ID: <20240314144403.491850-2-detlev.casanova@collabora.com>
+Subject: [PATCH 2/3] rockchip: Add a board_gen_ethaddr() function
+Date: Thu, 14 Mar 2024 10:43:47 -0400
+Message-ID: <20240314144403.491850-3-detlev.casanova@collabora.com>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20240314144403.491850-1-detlev.casanova@collabora.com>
 References: <20240314144403.491850-1-detlev.casanova@collabora.com>
@@ -76,97 +76,143 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On some boards, a MAC address is set based on the CPU ID or other
-information. This is usually done in the misc_init_r() function.
-
-This becomes a problem for net devices that are probed after the call to
-misc_init_r(), for example, when the ethernet is on a PCI port, which
-needs to be enumerated.
-
-In this case, misc_init_r() will set the ethaddr variable, then, when
-the ethernet device is probed, if it has a ROM address, u-boot will warn
-about a MAC address mismatch and use the misc_init_r() address instead
-of the one in ROM.
-
-The operating system later will most likely use the ROM MAC address,
-which can be confusing.
-
-To avoid that, this commit introduces a CONFIG_NET_BOARD_ETHADDR that
-allows board files to implement a function to set an ethaddr in the
-environment, that will only be called when necessary. The logic is now:
-
-- If there is there an ethaddr env var, use it.
-- If not, if there is a DT MAC address, use it.
-- If not, if there is a ROM MAC address, use it.
-- If not, if CONFIG_NET_BOARD_ETHADDR, call board_gen_ethaddr() and use
-  it.
-- If not, if CONFIG_NET_RANDOM_ETHADDR, generate random MAC
-- If not, fail with No valid MAC address found
+Set the MAC address based on the CPU ID only if the ethernet device has
+no ROM or DT address set.
 
 Signed-off-by: Detlev Casanova <detlev.casanova@collabora.com>
 ---
- net/Kconfig      |  7 +++++++
- net/eth-uclass.c | 17 +++++++++++++++--
- 2 files changed, 22 insertions(+), 2 deletions(-)
+ arch/arm/Kconfig                          |  1 +
+ arch/arm/include/asm/arch-rockchip/misc.h |  1 +
+ arch/arm/mach-rockchip/board.c            | 30 ++++++++++++++++++-----
+ arch/arm/mach-rockchip/misc.c             | 22 ++++++++++++-----
+ 4 files changed, 42 insertions(+), 12 deletions(-)
 
-diff --git a/net/Kconfig b/net/Kconfig
-index 5dff6336293..6dd333ddb9e 100644
---- a/net/Kconfig
-+++ b/net/Kconfig
-@@ -54,6 +54,13 @@ config NET_RANDOM_ETHADDR
- 	  generated. It will be saved to the appropriate environment variable,
- 	  too.
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index 01d6556c42b..21b41675ef6 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -2003,6 +2003,7 @@ config ARCH_ROCKCHIP
+ 	select DM_SPI_FLASH
+ 	select DM_USB_GADGET if USB_DWC3_GADGET
+ 	select ENABLE_ARM_SOC_BOOT0_HOOK
++	select NET_BOARD_ETHADDR
+ 	select OF_CONTROL
+ 	select MTD
+ 	select SPI
+diff --git a/arch/arm/include/asm/arch-rockchip/misc.h b/arch/arm/include/asm/arch-rockchip/misc.h
+index 4155af8c3b0..6e972de6279 100644
+--- a/arch/arm/include/asm/arch-rockchip/misc.h
++++ b/arch/arm/include/asm/arch-rockchip/misc.h
+@@ -10,5 +10,6 @@ int rockchip_cpuid_from_efuse(const u32 cpuid_offset,
+ 			      const u32 cpuid_length,
+ 			      u8 *cpuid);
+ int rockchip_cpuid_set(const u8 *cpuid, const u32 cpuid_length);
++int rockchip_gen_macaddr(int dev_num, u8 *mac_addr);
+ int rockchip_setup_macaddr(void);
+ void rockchip_capsule_update_board_setup(void);
+diff --git a/arch/arm/mach-rockchip/board.c b/arch/arm/mach-rockchip/board.c
+index 2620530e03f..283d3b9ed3a 100644
+--- a/arch/arm/mach-rockchip/board.c
++++ b/arch/arm/mach-rockchip/board.c
+@@ -296,8 +296,8 @@ int fastboot_set_reboot_flag(enum fastboot_reboot_reason reason)
+ }
+ #endif
  
-+config NET_BOARD_ETHADDR
-+	bool "Board specific ethaddr if unset"
-+	help
-+	  Allow a board function to set a specific Ethernet address that can
-+	  be, e.g., based on the CPU ID. If set, this will be tried before
-+	  setting a random address (if set).
+-#ifdef CONFIG_MISC_INIT_R
+-__weak int misc_init_r(void)
++#if IS_ENABLED(CONFIG_MISC_INIT_R) || IS_ENABLED(CONFIG_NET_BOARD_ETHADDR)
++static int set_cpuid(void)
+ {
+ 	const u32 cpuid_offset = CFG_CPUID_OFFSET;
+ 	const u32 cpuid_length = 0x10;
+@@ -309,10 +309,6 @@ __weak int misc_init_r(void)
+ 		return ret;
+ 
+ 	ret = rockchip_cpuid_set(cpuid, cpuid_length);
+-	if (ret)
+-		return ret;
+-
+-	ret = rockchip_setup_macaddr();
+ 
+ 	return ret;
+ }
+@@ -349,3 +345,25 @@ __weak int board_rng_seed(struct abuf *buf)
+ 	return 0;
+ }
+ #endif
 +
- config NETCONSOLE
- 	bool "NetConsole support"
- 	help
-diff --git a/net/eth-uclass.c b/net/eth-uclass.c
-index 3d0ec91dfa4..f194df8512a 100644
---- a/net/eth-uclass.c
-+++ b/net/eth-uclass.c
-@@ -56,6 +56,12 @@ __weak int board_interface_eth_init(struct udevice *dev,
++#if IS_ENABLED(CONFIG_MISC_INIT_R)
++__weak int misc_init_r(void)
++{
++	return set_cpuid();
++}
++#endif
++
++int board_gen_ethaddr(int dev_num, u8 *mac_addr)
++{
++	if (!IS_ENABLED(CONFIG_NET_BOARD_ETHADDR))
++		return 0;
++
++	if (!env_get("cpuid#")) {
++		int err = set_cpuid();
++
++		if (err)
++			return err;
++	}
++
++	return rockchip_gen_macaddr(dev_num, mac_addr);
++}
+diff --git a/arch/arm/mach-rockchip/misc.c b/arch/arm/mach-rockchip/misc.c
+index 7d03f0c2b67..9c7b04ee5a8 100644
+--- a/arch/arm/mach-rockchip/misc.c
++++ b/arch/arm/mach-rockchip/misc.c
+@@ -21,14 +21,13 @@
+ 
+ #include <asm/arch-rockchip/misc.h>
+ 
+-int rockchip_setup_macaddr(void)
++int rockchip_gen_macaddr(int dev_num, u8 *mac_addr)
+ {
+ #if CONFIG_IS_ENABLED(HASH) && CONFIG_IS_ENABLED(SHA256)
+ 	int ret;
+ 	const char *cpuid = env_get("cpuid#");
+ 	u8 hash[SHA256_SUM_LEN];
+ 	int size = sizeof(hash);
+-	u8 mac_addr[6];
+ 
+ 	/* Only generate a MAC address, if none is set in the environment */
+ 	if (env_get("ethaddr"))
+@@ -51,15 +50,26 @@ int rockchip_setup_macaddr(void)
+ 	/* Make this a valid MAC address and set it */
+ 	mac_addr[0] &= 0xfe;  /* clear multicast bit */
+ 	mac_addr[0] |= 0x02;  /* set local assignment bit (IEEE802) */
+-	eth_env_set_enetaddr("ethaddr", mac_addr);
+ 
+-	/* Make a valid MAC address for ethernet1 */
+-	mac_addr[5] ^= 0x01;
+-	eth_env_set_enetaddr("eth1addr", mac_addr);
++	/* Make a valid MAC address for the given device number */
++	mac_addr[5] ^= dev_num;
+ #endif
  	return 0;
  }
  
-+/* board-specific MAC Address generation. */
-+__weak int board_gen_ethaddr(int dev_num, u8 *mac_addr)
++int rockchip_setup_macaddr(void)
 +{
++	u8 mac_addr[6];
++
++	if (rockchip_gen_macaddr(0, mac_addr) == 0)
++		eth_env_set_enetaddr("ethaddr", mac_addr);
++
++	if (rockchip_gen_macaddr(1, mac_addr) == 0)
++		eth_env_set_enetaddr("eth1addr", mac_addr);
++
 +	return 0;
 +}
 +
- static struct eth_uclass_priv *eth_get_uclass_priv(void)
- {
- 	struct uclass *uc;
-@@ -563,13 +569,20 @@ static int eth_post_probe(struct udevice *dev)
- 	if (!eth_dev_get_mac_address(dev, pdata->enetaddr) ||
- 	    !is_valid_ethaddr(pdata->enetaddr)) {
- 		/* Check if the device has a MAC address in ROM */
-+		int ret = -1;
- 		if (eth_get_ops(dev)->read_rom_hwaddr) {
--			int ret;
--
- 			ret = eth_get_ops(dev)->read_rom_hwaddr(dev);
- 			if (!ret)
- 				source = "ROM";
- 		}
-+		if (IS_ENABLED(CONFIG_NET_BOARD_ETHADDR) && ret) {
-+			board_gen_ethaddr(dev_seq(dev), pdata->enetaddr);
-+
-+			if (!is_zero_ethaddr(pdata->enetaddr) &&
-+			    is_valid_ethaddr(pdata->enetaddr)) {
-+				source = "board";
-+			}
-+		}
- 	}
- 
- 	eth_env_get_enetaddr_by_index("eth", dev_seq(dev), env_enetaddr);
+ int rockchip_cpuid_from_efuse(const u32 cpuid_offset,
+ 			      const u32 cpuid_length,
+ 			      u8 *cpuid)
 -- 
 2.43.2
 
