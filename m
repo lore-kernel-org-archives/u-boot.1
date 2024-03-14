@@ -4,42 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D63DC5475B
-	for <u-boot@archiver.kernel.org>; Thu, 14 Mar 2024 09:36:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88366C54E67
+	for <u-boot@archiver.kernel.org>; Thu, 14 Mar 2024 09:36:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 58C3F87ECD;
-	Thu, 14 Mar 2024 10:36:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CC16F87F0E;
+	Thu, 14 Mar 2024 10:36:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A45187F30; Thu, 14 Mar 2024 10:36:28 +0100 (CET)
-Received: from smtp-bc0c.mail.infomaniak.ch (smtp-bc0c.mail.infomaniak.ch
- [45.157.188.12])
+ id 790AE87F36; Thu, 14 Mar 2024 10:36:29 +0100 (CET)
+Received: from smtp-bc0d.mail.infomaniak.ch (smtp-bc0d.mail.infomaniak.ch
+ [45.157.188.13])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F1BCD86564
- for <u-boot@lists.denx.de>; Thu, 14 Mar 2024 10:36:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EEC5287EA8
+ for <u-boot@lists.denx.de>; Thu, 14 Mar 2024 10:36:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0001.mail.infomaniak.ch (unknown [10.7.10.108])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4TwMhT4RrqzMpvgy;
- Thu, 14 Mar 2024 10:36:25 +0100 (CET)
+Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
+ [10.7.10.108])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4TwMhV47pnz3kf;
+ Thu, 14 Mar 2024 10:36:26 +0100 (CET)
 Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4TwMhR71vqzxR1; Thu, 14 Mar 2024 10:36:23 +0100 (CET)
+ id 4TwMhT4stBzjx; Thu, 14 Mar 2024 10:36:25 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Subject: [PATCH v4 00/16] rockchip: add support for SARADCv2 and RK806 PMIC
- and regulators
-Date: Thu, 14 Mar 2024 10:36:13 +0100
-Message-Id: <20240314-rk3588-saradc-v4-0-31cb41ff7362@theobroma-systems.com>
+Date: Thu, 14 Mar 2024 10:36:14 +0100
+Subject: [PATCH v4 01/16] rockchip: spi: rk_spi: do not write bytes when in
+ read-only mode
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAA3F8mUC/33M0QrCIBTG8VcJrzP06NbWVe8RXRz11CQ2Q4c0Y
- u+eRVAM6vL/wfe7s0TRU2K71Z1Fyj75MJTQ6xWzHQ5n4t6VZiBAC5DA40VVTcMTRnSWoxHYGoe
- tEjUrn2ukk7+9vMOxdOfTGOL04rN8rm8J5ELKkgtuVYtVLaST1u7HjoKJoUeepjRSnzY29OypZ
- viW1FKCIklpha7NllqN/yT1kZTQS0kVaatBE5CrnDK/pHmeH99zg8pKAQAA
+Message-Id: <20240314-rk3588-saradc-v4-1-31cb41ff7362@theobroma-systems.com>
+References: <20240314-rk3588-saradc-v4-0-31cb41ff7362@theobroma-systems.com>
+In-Reply-To: <20240314-rk3588-saradc-v4-0-31cb41ff7362@theobroma-systems.com>
 To: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>, 
  Jaehoon Chung <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>, 
  Philipp Tomsich <philipp.tomsich@vrull.eu>, 
@@ -48,8 +47,7 @@ To: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
  Heiko Stuebner <heiko.stuebner@cherry.de>
 Cc: u-boot@lists.denx.de, 
  Quentin Schulz <quentin.schulz@theobroma-systems.com>, 
- Quentin Schulz <foss+uboot@0leil.net>, 
- William Wu <william.wu@rock-chips.com>
+ Quentin Schulz <foss+uboot@0leil.net>
 X-Mailer: b4 0.13.0
 X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
@@ -68,100 +66,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The RK3588 has a new IP for SARADC compared to older SoCs of the same
-vendor but most of the boilerplate is shared, so rockchip-saradc.c
-driver is adapted instead of creating a new one.
+From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 
-Because the SARADC requires a vref-supply which is commonly coming from
-a regulator of the RK806 PMIC, support for the RK806 PMIC and regulators
-are also added in this patch series. Finally, RK806 PMIC is the first
-one to actually support SPI as communication layer between the SoC and
-the PMIC (but supports I2C as well according to the datasheet). This
-adds support for RK806 over SPI though there should be no reason for
-RK806 over I2C to not work.
+The read-only mode is currently supported but only for 16b-aligned
+buffers. For unaligned buffers, the last byte will be read in RW mode
+right now, which isn't what is desired. Instead, let's put the
+controller back into RO mode for that last byte and skip any write in
+the xfer loop.
 
-Note that the DT now uses a different prefix for the buck and ldo node
-names and the RK806 is the first one to use nldo and pldo and while they
-both are LDOs, they have overlapping indices which makes it impossible
-to simply reuse the rk8xx_ldo driver and need to define new ones (though
-some callbacks can be reused, as is done in this patch series).
+This is required for 3-wire SPI mode where PICO/POCI lanes are shorted
+on HW level. This incidentally the recommended design for RK806 PMIC for
+RK3588 products.
 
-The SARADC was tested by toggling the BIOS button connected over channel
-0 on RK3588 Jaguar and using the adc or button commands to watch over
-the value.
-The PMIC was tested with the pmic command for reading the CHIP_VERS
-registers and writing to the WDT_REG (0x73).
-The regulators were tested by using a modified DT for RK3588 Jaguar and
-playing with the regulator command to enable/disable some buck/nldo/pldo
-and modify their output voltage.
-
-This has a light dependency on
-https://lore.kernel.org/u-boot/20240221-jaguar-v3-0-1f256a82201b@theobroma-systems.com/T/#t
-because of:
- - remove of asm/io.h include in favor of asm/arch-rockchip/hardware.h
-   (both should be included if applied before the dependency)
- - Jaguar defconfig modified in this patch series is added in the
-   aforementioned patch series,
-
+Cc: Quentin Schulz <foss+uboot@0leil.net>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 ---
-Changes in v4:
-- use uint8_t instead of char to fix clang's
-  -Wsingle-bit-bitfield-constant-conversion for the members of rk806_cmd
-  data structure, they all are storing unsigned numbers anyway,
-- Link to v3: https://lore.kernel.org/r/20240304-rk3588-saradc-v3-0-7424e2ed5d3b@theobroma-systems.com
+ drivers/spi/rk_spi.c | 20 +++++++++++++++++---
+ 1 file changed, 17 insertions(+), 3 deletions(-)
 
-Changes in v3:
-- added ifdef safeguards for the spi sections in the rk8xx PMIC driver,
-- removed SPL_PMIC_RK8XXX from Jaguar defconfig since it's doing nothing
-  at the moment (issue around missing Kconfig symbol dependency, will be
-  fixed in another patch series),
-- Link to v2: https://lore.kernel.org/r/20240223-rk3588-saradc-v2-0-11c046b7e94a@theobroma-systems.com
+diff --git a/drivers/spi/rk_spi.c b/drivers/spi/rk_spi.c
+index 7de943356ad..c8694fdff95 100644
+--- a/drivers/spi/rk_spi.c
++++ b/drivers/spi/rk_spi.c
+@@ -453,8 +453,17 @@ static int rockchip_spi_xfer(struct udevice *dev, unsigned int bitlen,
+ 	 * case of read-only transfers by using the full 16bits of each
+ 	 * FIFO element.
+ 	 */
+-	if (!out)
++	if (!out) {
+ 		ret = rockchip_spi_16bit_reader(dev, &in, &len);
++		/*
++		 * If "in" isn't 16b-aligned, we need to send the last byte
++		 * ourselves. We however need to have the controller in RO mode
++		 * which differs from the default.
++		 */
++		clrsetbits_le32(&regs->ctrlr0,
++				TMOD_MASK << TMOD_SHIFT,
++				TMOD_RO << TMOD_SHIFT);
++	}
+ 
+ 	/* This is the original 8bit reader/writer code */
+ 	while (len > 0) {
+@@ -465,12 +474,13 @@ static int rockchip_spi_xfer(struct udevice *dev, unsigned int bitlen,
+ 		rkspi_enable_chip(regs, true);
+ 
+ 		toread = todo;
+-		towrite = todo;
++		/* Only write if we have something to write */
++		towrite = out ? todo : 0;
+ 		while (toread || towrite) {
+ 			u32 status = readl(&regs->sr);
+ 
+ 			if (towrite && !(status & SR_TF_FULL)) {
+-				writel(out ? *out++ : 0, regs->txdr);
++				writel(*out++, regs->txdr);
+ 				towrite--;
+ 			}
+ 			if (toread && !(status & SR_RF_EMPT)) {
+@@ -501,6 +511,10 @@ static int rockchip_spi_xfer(struct udevice *dev, unsigned int bitlen,
+ 		spi_cs_deactivate(dev, slave_plat->cs);
+ 
+ 	rkspi_enable_chip(regs, false);
++	if (!out)
++		clrsetbits_le32(&regs->ctrlr0,
++				TMOD_MASK << TMOD_SHIFT,
++				TMOD_TR << TMOD_SHIFT);
+ 
+ 	return ret;
+ }
 
-Changes in v2:
-- fixed incorrect bitmasking when selecting channel
-- added optional controller reset to match downstream U-Boot and both
-  downstream and upstream Linux kernel logic,
-- Link to v1: https://lore.kernel.org/r/20240221-rk3588-saradc-v1-0-c39a5601d1cc@theobroma-systems.com
-
----
-Quentin Schulz (15):
-      rockchip: spi: rk_spi: do not write bytes when in read-only mode
-      regulator: rk8xx: remove unused functions
-      regulator: rk8xx: add indirection level for some ldo callbacks
-      power: rk8xx: add support for RK806
-      pmic: reword help text
-      rockchip: adc: rockchip-saradc: use union for preparing for v2
-      rockchip: adc: rockchip-saradc: factor out channel_data callback
-      rockchip: adc: rockchip-saradc: factor out start_channel callback
-      rockchip: adc: rockchip-saradc: factor out stop callback
-      rockchip: adc: rockchip-saradc: add support for RK3588
-      power: pmic: rk8xx: fix duplicate prompt
-      rockchip: jaguar-rk3588: enable SARADC and derivatives
-      adc: add missing depends on ADC for controller drivers
-      button: add missing ADC dependency for BUTTON_ADC
-      rockchip: boot_mode: fix rockchip_dnl_key_pressed requiring ADC support
-
-William Wu (1):
-      regulator: rk8xx: fix SWITCH enable on RK809
-
- arch/arm/mach-rockchip/boot_mode.c |   4 +
- cmd/pmic.c                         |   4 +-
- configs/jaguar-rk3588_defconfig    |  10 +-
- drivers/adc/Kconfig                |   4 +
- drivers/adc/rockchip-saradc.c      | 202 +++++++++++--
- drivers/button/Kconfig             |   1 +
- drivers/power/pmic/Kconfig         |   2 +-
- drivers/power/pmic/rk8xx.c         |  91 ++++++
- drivers/power/regulator/rk8xx.c    | 595 ++++++++++++++++++++++++++++++++++---
- drivers/spi/rk_spi.c               |  20 +-
- include/power/rk8xx_pmic.h         |  21 +-
- 11 files changed, 879 insertions(+), 75 deletions(-)
----
-base-commit: 40e06db4c0a9893d613adbe002e794115397a150
-change-id: 20240212-rk3588-saradc-ab0a9bda9306
-
-Best regards,
 -- 
-Quentin Schulz <quentin.schulz@theobroma-systems.com>
+2.44.0
 
