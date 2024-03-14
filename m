@@ -4,64 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40619C5475B
-	for <u-boot@archiver.kernel.org>; Thu, 14 Mar 2024 07:43:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D366C5475B
+	for <u-boot@archiver.kernel.org>; Thu, 14 Mar 2024 07:50:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8057787F74;
-	Thu, 14 Mar 2024 08:43:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 098C587F63;
+	Thu, 14 Mar 2024 08:50:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="ixTxyU+P";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CPhG7gWt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E42587F6F; Thu, 14 Mar 2024 08:43:06 +0100 (CET)
-Received: from mail-m1973182.qiye.163.com (mail-m1973182.qiye.163.com
- [220.197.31.82])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1613087F71; Thu, 14 Mar 2024 08:50:09 +0100 (CET)
+Received: from mail-ua1-x931.google.com (mail-ua1-x931.google.com
+ [IPv6:2607:f8b0:4864:20::931])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A520087F49
- for <u-boot@lists.denx.de>; Thu, 14 Mar 2024 08:43:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 8184187E9A
+ for <u-boot@lists.denx.de>; Thu, 14 Mar 2024 08:50:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=ixTxyU+PsLaZgrOZARVIU0AGRw8laXDfbtdJE+WGqo884NuJhOxCRmd5QGOLzcjOIiuH4zuU3AOEcSM0ca94Z0YoRUW5te1ZFPL/AH4WXuAvGfchwXZUTU+0nbX7H6NqCK3GBnhJTQ9/TVES8gMjXy4o28uMxcfwP7ZAVMFR/XY=;
- c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=Ltl8nn9VVFNZ+XLPHMUF2YHIj4p5zYdLtK6OBTKoRow=;
- h=date:mime-version:subject:message-id:from;
-Received: from [172.16.12.77] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id BB51D900335;
- Thu, 14 Mar 2024 15:42:55 +0800 (CST)
-Message-ID: <f2945c13-c669-45b9-9d46-420c1376ed14@rock-chips.com>
-Date: Thu, 14 Mar 2024 15:42:55 +0800
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-ua1-x931.google.com with SMTP id
+ a1e0cc1a2514c-7de12bcec8bso314985241.1
+ for <u-boot@lists.denx.de>; Thu, 14 Mar 2024 00:50:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1710402605; x=1711007405; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=JXcCSMfLec3d8ZzXS24q2nDvzc0hAuykfgyeRcMV8f4=;
+ b=CPhG7gWtag4wEcKL3lSkni0xpWZclS8RqJEt4Ie8SzMo1yb0N/0FebmQhJCZ8/Sv/k
+ OyFQyu7oxvXD36usbI0LJK0ekrGux7Y7b46DNlqTz5R4rR/JqLvf9+XMr3/u0FY0BDkX
+ CP31KL7gpDD+IryDGWQ7fWAcfHjYA9+ZAZR0MAEtOst0zs5uvnlGUnQw9AAJBK/CkIg+
+ WPqwmJUduu8o0OPyphB4JOw+4xhqebgbLacdT5JnzKJdDMxFl5guDwEbf85jrqzZdVC0
+ oMVg2odVyTTaihaBeLkYhdAXTXb9tpXgytQxLrR1B+fummrtxqizl4vVD2+PhYX4X7WT
+ DU8g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710402605; x=1711007405;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=JXcCSMfLec3d8ZzXS24q2nDvzc0hAuykfgyeRcMV8f4=;
+ b=j9D75H9eR3VZhzgTSVqHcF0Zt6Z+CFZ4kKBAaBKTNTcRp1quA0UXTlF10xRJDEkLG+
+ exlHD42/I40TopaxZJwir2rqha1IzZzW+wt6nzqKLNKBECkev2I3aXXhg2xMzn9iGjaJ
+ l4tOL0GiXIVfGNCr+n1W+43Enyn8Tte3dj4FjjwwHtrVMDmwcBMiJYH3Y7EsD1IGCDG5
+ fNIMK86B2T8+8312+nJe/cqdlNo2vDI8Uc6xLfZyFfDLLRC1u0i2OFDS/NfYHac/7AWy
+ 0Uy7EGkt6oNU20/kbp0zsiq6N5E7Sa65OuE9pyksO/Ik/jW6olNGB9jTSRzAuaOxJueW
+ 3jGg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXpgYuhyrKckrdQih9w9cKNbEoqxT1FF85rZCcdIL2+5YzhjReAV23sJKSUpawSrQSG7IIdvXP0/iuVzNDLlEePRAuadA==
+X-Gm-Message-State: AOJu0YygAJYw76e7FrvnnKYkwVuvjXsRO+V6jbz30nVIKMTPaOvURTnJ
+ qH1wQ0utSWa7g16NAduKB/Uuv4KSliHfRVZGLXDndSkhxZZvVtxvs+duRZzo/Lj4KcEbx4A45MP
+ Zy7jRb+qJO2PQCbOFOJ7pskcucyMS5HPJRbhVwQ==
+X-Google-Smtp-Source: AGHT+IFxwaV+NmrfXUQXNAed9RIxQbK+a3N3Rsy0eH+uVBJbFYODLFi06GRHMR/ui1rdHc/2qxxCkY1X8VxH7aJSMAM=
+X-Received: by 2002:a67:fdc1:0:b0:473:79b:bc68 with SMTP id
+ l1-20020a67fdc1000000b00473079bbc68mr1162460vsq.30.1710402605072; Thu, 14 Mar
+ 2024 00:50:05 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] rockchip: load env from boot MMC device
-Content-Language: en-US
-To: Ben Wolsieffer <benwolsieffer@gmail.com>, u-boot@lists.denx.de
-Cc: "Matwey V. Kornilov" <matwey.kornilov@gmail.com>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@theobroma-systems.com>,
- Klaus Goger <klaus.goger@theobroma-systems.com>,
- Lin Huang <hl@rock-chips.com>,
- Michael Trimarchi <michael@amarulasolutions.com>
-References: <20240308030051.370824-1-benwolsieffer@gmail.com>
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240308030051.370824-1-benwolsieffer@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQk8eSVYdGh9MHktLTR4dTR5VEwETFh
- oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk5MSUpJVUpLS1VKQl
- kG
-X-HM-Tid: 0a8e3bea050703a9kunmbb51d900335
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PlE6Mzo5LjMVSy8#GAEDTBI5
- FCFPFCFVSlVKTEpLT0tJSkxNTE5IVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFNT0lPNwY+
+References: <20240312190543.3544532-1-tharvey@gateworks.com>
+ <CAOMZO5A8m5gW+MgD8RWrtsd3kpsMaj+cV5CLHuvUkux7daD1jQ@mail.gmail.com>
+ <CAFA6WYNV60m4Nv7tm2jCqqYFn9_=WTKmctUrGppCnKA30dxiRw@mail.gmail.com>
+ <CAJ+vNU10auPr7wp2AGfX7Ei=Z1kf2dQax1Z21Nwex7-bh_cooQ@mail.gmail.com>
+In-Reply-To: <CAJ+vNU10auPr7wp2AGfX7Ei=Z1kf2dQax1Z21Nwex7-bh_cooQ@mail.gmail.com>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Thu, 14 Mar 2024 13:19:53 +0530
+Message-ID: <CAFA6WYNTXgQ5ze_12rL-B=S-5jiYQFfO8P8BSf1dHFj5_cBA5A@mail.gmail.com>
+Subject: Re: [PATCH] imx8m*_venice: move venice to OF_UPSTREAM
+To: Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>
+Cc: Fabio Estevam <festevam@gmail.com>, u-boot@lists.denx.de, 
+ Stefano Babic <sbabic@denx.de>, "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,151 +93,136 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
++ Tom
 
-On 2024/3/8 11:00, Ben Wolsieffer wrote:
-> Currently, if the environment is stored on an MMC device, the device
-> number is hardcoded by CONFIG_SYS_MMC_ENV_DEV. This is problematic
-> because many boards can choose between booting from an SD card or a
-> removable eMMC. For example, the Rock64 defconfig sets
-> CONFIG_SYS_MMC_ENV_DEV=1, which corresponds to the SD card. If an eMMC
-> is used as the boot device and no SD card is installed, it is impossible
-> to save the environment.
->
-> To avoid this problem, we can choose the environment MMC device based on
-> the boot device. The theobroma-systems boards already contain code to do
-> this, so this commit simply moves it to the common Rockchip board file,
-> with some refactoring. I also removed another implementation of
-> mmc_get_env_dev() from tinker_rk3288 that performed MMC boot device
-> detection by reading a bootrom register.
->
-> This has been tested on a Rock64v2.
->
-> Signed-off-by: Ben Wolsieffer <benwolsieffer@gmail.com>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+Hi Tim,
 
-Thanks,
-- Kever
-> ---
-> v2:
-> * Use #ifdef rather than if(CONFIG_IS_ENABLED(...))
-> * Add a debug message if boot device is not found
+On Wed, 13 Mar 2024 at 22:01, Tim Harvey <tharvey@gateworks.com> wrote:
 >
->   arch/arm/mach-rockchip/board.c               | 31 ++++++++++++++++++++
->   board/rockchip/tinker_rk3288/tinker-rk3288.c | 12 --------
->   board/theobroma-systems/common/common.c      | 30 -------------------
->   3 files changed, 31 insertions(+), 42 deletions(-)
+> On Wed, Mar 13, 2024 at 6:20=E2=80=AFAM Sumit Garg <sumit.garg@linaro.org=
+> wrote:
+> >
+> > On Wed, 13 Mar 2024 at 06:46, Fabio Estevam <festevam@gmail.com> wrote:
+> > >
+> > > Hi Tim,
+> > >
+> > > On Tue, Mar 12, 2024 at 4:05=E2=80=AFPM Tim Harvey <tharvey@gateworks=
+.com> wrote:
+> > > >
+> > > > Move to imx8m{m,n,p}-venice to OF_UPSTREAM:
+> > > >  - replace the non-upstream generic imx8m{m,n,p}-venice dt with one=
+ of the
+> > > >    dt's from the OF_LIST
+> > > >  - handle the fact that dtbs now have a 'freescale/' prefix
+> > > >  - imply OF_UPSTREAM
+> > > >  - remove rudundant files from arch/arm/dts leaving only the
+> > > >    *-u-boot.dtsi files
+> > > >
+> > > > Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+> > > ...
+> > > >  33 files changed, 13 insertions(+), 10658 deletions(-)
+> > >
+> > > This diff looks great :-)
+> >
+> > +1
+> >
+> > Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
+> >
 >
-> diff --git a/arch/arm/mach-rockchip/board.c b/arch/arm/mach-rockchip/board.c
-> index 2620530e03..8aa09f44b3 100644
-> --- a/arch/arm/mach-rockchip/board.c
-> +++ b/arch/arm/mach-rockchip/board.c
-> @@ -6,6 +6,7 @@
->   #include <clk.h>
->   #include <cpu_func.h>
->   #include <dm.h>
-> +#include <dm/uclass-internal.h>
->   #include <efi_loader.h>
->   #include <fastboot.h>
->   #include <init.h>
-> @@ -349,3 +350,33 @@ __weak int board_rng_seed(struct abuf *buf)
->   	return 0;
->   }
->   #endif
-> +
-> +int mmc_get_env_dev(void)
-> +{
-> +	int devnum;
-> +	const char *boot_device;
-> +	struct udevice *dev;
-> +
-> +#ifdef CONFIG_SYS_MMC_ENV_DEV
-> +	devnum = CONFIG_SYS_MMC_ENV_DEV;
-> +#else
-> +	devnum = 0;
-> +#endif
-> +
-> +	boot_device = ofnode_read_chosen_string("u-boot,spl-boot-device");
-> +	if (!boot_device) {
-> +		debug("%s: /chosen/u-boot,spl-boot-device not set\n", __func__);
-> +		return devnum;
-> +	}
-> +
-> +	debug("%s: booted from %s\n", __func__, boot_device);
-> +
-> +	if (uclass_find_device_by_ofnode(UCLASS_MMC, ofnode_path(boot_device), &dev)) {
-> +		debug("%s: no U-Boot device found for %s\n", __func__, boot_device);
-> +		return devnum;
-> +	}
-> +
-> +	devnum = dev->seq_;
-> +	debug("%s: get MMC env from mmc%d\n", __func__, devnum);
-> +	return devnum;
-> +}
-> diff --git a/board/rockchip/tinker_rk3288/tinker-rk3288.c b/board/rockchip/tinker_rk3288/tinker-rk3288.c
-> index f85209c649..eff3a00c30 100644
-> --- a/board/rockchip/tinker_rk3288/tinker-rk3288.c
-> +++ b/board/rockchip/tinker_rk3288/tinker-rk3288.c
-> @@ -11,8 +11,6 @@
->   #include <init.h>
->   #include <net.h>
->   #include <netdev.h>
-> -#include <asm/arch-rockchip/bootrom.h>
-> -#include <asm/io.h>
->   
->   static int get_ethaddr_from_eeprom(u8 *addr)
->   {
-> @@ -38,13 +36,3 @@ int rk3288_board_late_init(void)
->   
->   	return 0;
->   }
-> -
-> -int mmc_get_env_dev(void)
-> -{
-> -	u32 bootdevice_brom_id = readl(BROM_BOOTSOURCE_ID_ADDR);
-> -
-> -	if (bootdevice_brom_id == BROM_BOOTSOURCE_EMMC)
-> -		return 0;
-> -
-> -	return 1;
-> -}
-> diff --git a/board/theobroma-systems/common/common.c b/board/theobroma-systems/common/common.c
-> index 864bcdd46f..585da43884 100644
-> --- a/board/theobroma-systems/common/common.c
-> +++ b/board/theobroma-systems/common/common.c
-> @@ -89,36 +89,6 @@ int setup_boottargets(void)
->   	return 0;
->   }
->   
-> -int mmc_get_env_dev(void)
-> -{
-> -	const char *boot_device =
-> -		ofnode_read_chosen_string("u-boot,spl-boot-device");
-> -	struct udevice *devp;
-> -
-> -	if (!boot_device) {
-> -		debug("%s: /chosen/u-boot,spl-boot-device not set\n",
-> -		      __func__);
-> -#ifdef CONFIG_SYS_MMC_ENV_DEV
-> -		return CONFIG_SYS_MMC_ENV_DEV;
-> -#else
-> -		return 0;
-> -#endif
-> -	}
-> -
-> -	debug("%s: booted from %s\n", __func__, boot_device);
-> -
-> -	if (uclass_find_device_by_ofnode(UCLASS_MMC, ofnode_path(boot_device), &devp))
-> -#ifdef CONFIG_SYS_MMC_ENV_DEV
-> -		return CONFIG_SYS_MMC_ENV_DEV;
-> -#else
-> -		return 0;
-> -#endif
-> -
-> -	debug("%s: get MMC ENV from mmc%d\n", __func__, devp->seq_);
-> -
-> -	return devp->seq_;
-> -}
-> -
->   enum env_location arch_env_get_location(enum env_operation op, int prio)
->   {
->   	const char *boot_device =
+> Hi Sumit,
+>
+> Thanks for your work on this - I imagine over time this will
+> de-duplicate a lot of work!
+>
+> I have a couple of questions about OF_UPSTREAM I haven't found the
+> answer to yet:
+> 1. how do you determine what the last sync point was in dts/upstream?
+> (ie what kernel version is it currently sync'd with)
+
+You can get that information from merge commits that happen over
+dts/upstream sub-directory. It was somewhat raw information for the
+first time we added dts/upstream as (commit aaba2d45dc2a pointing to
+v6.7-dts [1]):
+
+commit 53633a893a06bd5a0c807287d9cc29337806eaf7
+Author: Tom Rini <trini@konsulko.com>
+Date:   Thu Feb 29 12:33:36 2024 -0500
+
+    Squashed 'dts/upstream/' content from commit aaba2d45dc2a
+
+    git-subtree-dir: dts/upstream
+    git-subtree-split: aaba2d45dc2a1b3bbb710f2a3808ee1c9f340abe
+
+[1] https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-r=
+ebasing.git/tag/?h=3Dv6.7-dts
+
+However, further syncs would be more clear from merge commit
+description, try following:
+
+$ ./dts/update-dts-subtree.sh pull v6.8-dts
+
+You will see merge commit saying:
+
+commit 57508745cd2b07e55b5c414c6d646de4865418d2 (HEAD -> dt_uprev)
+Merge: 3987e15e88a 14c9e8c0856
+Author: Sumit Garg <sumit.garg@linaro.org>
+Date:   Thu Mar 14 12:20:27 2024 +0530
+
+    Subtree merge tag 'v6.8-dts' of devicetree-rebasing repo [1] into
+dts/upstream
+
+    [1] https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetr=
+ee-rebasing.git/
+
+> 2. how often will dts/upstream get re-synced (not the
+> devicetree-rebasing.git but u-boot dts/upstream),
+
+You can see the re-syncing details here (section: "Resyncing with
+devicetree-rebasing",
+https://source.denx.de/u-boot/u-boot/-/blob/next/doc/develop/devicetree/con=
+trol.rst?ref_type=3Dheads).
+
+> who do you suspect
+> will do be doing it?
+
+Tom will be doing that. I suppose we are just in time for a resync
+since the Linux kernel v6.8 was released.
+
+Tom,
+
+Do you think we can make v6.8-dts sync for the U-Boot next?
+
+> 3. how would one go about adding a new feature via dt to uboot when
+> the same feature has not yet landed in dts upstream? perhaps the
+> answer is it must land upstream first or do you suspect it would be ok
+> to put something in a u-boot.dtsi that can later get removed as
+> redundant?
+
+From an upstream perspective, we should aim for minimal contents in
+*-u-boot.dtsi, ideally it would be better to get rid of them. For eg.
+all bootph_* properties should all be pushed upstream.
+
+However, from the new features perspective we can consider using
+*-u-boot.dtsi if the changes are minimal like enabling some DT nodes.
+But if the changes are significant then that board can just opt out of
+OF_USTREAM but still reusing all the DT includes. The reasoning behind
+this is to minimize any chances of breakage if DT features in
+*-u-boot.dtsi diverge from DT upstream.
+
+> I ask mainly for being able to add things quickly to a
+> downstream U-Boot repo that lags behind upstream U-Boot
+>
+
+Working downstream can always be fun, allowing additional options (can
+be useful for advance testing too):
+
+1. You can play around with $ ./dts/update-dts-subtree.sh pull <tag>
+2. You can manually sync the vendor directories
+(dts/upstream/src/<arch>/<vendor>/).
+3. You can manually sync/update the individual DTS files too.
+
+-Sumit
+
+> Best Regards,
+>
+> Tim
