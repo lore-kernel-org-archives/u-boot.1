@@ -4,67 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 698FEC54E5D
-	for <u-boot@archiver.kernel.org>; Thu, 14 Mar 2024 07:09:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C3F1C5475B
+	for <u-boot@archiver.kernel.org>; Thu, 14 Mar 2024 07:33:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D154887F73;
-	Thu, 14 Mar 2024 08:09:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id D33FC87F5E;
+	Thu, 14 Mar 2024 08:33:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="ttip4oEF";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="dreQJXq1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D1D1487F49; Thu, 14 Mar 2024 08:09:24 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id 18B4487F49; Thu, 14 Mar 2024 08:33:56 +0100 (CET)
+Received: from mail-m21466.qiye.163.com (mail-m21466.qiye.163.com
+ [117.135.214.66])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2EF2687F4E
- for <u-boot@lists.denx.de>; Thu, 14 Mar 2024 08:09:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9ADA387F5E
+ for <u-boot@lists.denx.de>; Thu, 14 Mar 2024 08:33:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=78b9=KU=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1710400145;
- bh=8cePO7s7cmAonhSGweS6A63+2vtH1l5seMQryWRMqFA=;
- b=ttip4oEFdK2YmGLRG3uMEV2hwKAcvMlJNAnA3eYT74zq9ZFaeNXyHKfQnhKfcd8xq+JMS9v/g
- P2G9UyHCZkQJRB3efeuSmX3V7MmST23ErfJHKEieFwNbHZozTqqEjfW6MinKd3zCSdN0+pKfpsx
- 6EIUo4h3vC45rXioYbOpcaqw0nPnA5AeYbmdp/wgAHaUEoYShfdlkp+FWYmIlLaAIejPSIszJ77
- L1TAameCuFfW9Aw5RUuEEX44KENm3N/Qmu2SScmXg0QljTpvhXKktMKXpL6PkHxoOcySVWlzpwE
- YdD91wyQplcBpQJv0iMXZSRpjU+gsSD2yQ54Ogw+TnCg==
-Message-ID: <f07d914c-1004-438b-b309-fca9e5e23afd@kwiboo.se>
-Date: Thu, 14 Mar 2024 08:08:57 +0100
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=dreQJXq1UfodAroCpdh2Qj/oth10ZP9PDlDxUej62c1TLoMwMR4+OUKcTap3mcLbDjfKTnQjsNZKWRdOPEXfRL+TQ7R1GgJc6J9W7mho4sVFO1pwPU9sssArn54XWTt/6RyPsfhHJ4KgHWqyeBPk+gq5eMSBY6dpdWA+x6KZUb4=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
+ bh=tN1jrFCRWWSfgYQ1zA3KsUpO88Gf4JnFyVzqe4nTWeQ=;
+ h=date:mime-version:subject:message-id:from;
+Received: from [172.16.12.77] (unknown [58.22.7.114])
+ by smtp.qiye.163.com (Hmail) with ESMTPA id 8005890031B;
+ Thu, 14 Mar 2024 15:33:03 +0800 (CST)
+Message-ID: <1853e819-67d1-4966-a4b8-8ba054fc5145@rock-chips.com>
+Date: Thu, 14 Mar 2024 15:33:03 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 3/6] rockchip: Use common bss and stack addresses on
- RK3328
+Subject: Re: [PATCH] rockchip: board: Add minimal generic RK3588S/RK3588 board
 Content-Language: en-US
-To: Kever Yang <kever.yang@rock-chips.com>
+To: Jonas Karlman <jonas@kwiboo.se>
 Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>, Tianling Shen
- <cnsztl@gmail.com>, David Bauer <mail@david-bauer.net>, Loic Devulder
- <ldevulder@suse.com>, "Chen-Yu Tsai" <wens@csie.org>, Banglang Huang
- <banglang.huang@foxmail.com>, "Matwey V. Kornilov"
- <matwey.kornilov@gmail.com>, Quentin Schulz
- <quentin.schulz@theobroma-systems.com>, Christopher Obbard
- <chris.obbard@collabora.com>, u-boot@lists.denx.de
-References: <20240302191629.322562-1-jonas@kwiboo.se>
- <20240302191629.322562-4-jonas@kwiboo.se>
- <92121a89-9ae3-4e82-9c64-cbda7358753a@rock-chips.com>
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <92121a89-9ae3-4e82-9c64-cbda7358753a@rock-chips.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 65f2a28fffda568fff1647a9
+ <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+References: <20240131220854.117650-1-jonas@kwiboo.se>
+ <6d21147e-d420-47f4-acf2-131b0df89279@rock-chips.com>
+ <58c4d615-d546-4544-a3d8-36879b66e129@kwiboo.se>
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <58c4d615-d546-4544-a3d8-36879b66e129@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGklITFZCS08fTR0dH00YH09VEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSU5IVUpLS1VKQk
+ tLWQY+
+X-HM-Tid: 0a8e3be0fa9f03a9kunm8005890031b
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6M0k6Nxw5HzMRMC8jGD1CKD4c
+ AxgKCy5VSlVKTEpLT0tKTkNPSkhPVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFISUtLNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,65 +76,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kever,
+Hi Jonas,
 
-On 2024-03-13 11:39, Kever Yang wrote:
-> Hi Jonas,
-> 
->      This patch does not able to apply on next, could you help to take a 
-> look.
-> 
-> And also add document of memory layout in rockchip.rst if possible.
+On 2024/3/14 15:04, Jonas Karlman wrote:
+> Hi Kever,
+>
+> On 2024-03-14 07:58, Kever Yang wrote:
+>> On 2024/2/1 06:08, Jonas Karlman wrote:
+>>> Add a minimal generic RK3588S/RK3588 board that only have eMMC and SDMMC
+>>> enabled. This defconfig can be used to boot from eMMC or SD-card on most
+>>> RK3588S/RK3588 boards that follow reference board design.
+>>>
+>>> Also fix the alphabetical order of RK3588 boards listed in Makefile and
+>>> documentation.
+>>>
+>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>> Since rk356x already have a generic board, rk3588 can also have one.
+>>
+>> Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+> Thanks, I will send a v2 with an updated defconfig to take advantage of
+> the new ROCKCHIP_COMMON_STACK_ADDR bss and stack addresses.
 
-I will send a follow-up patch that adds details about this memory layout
-and the new Kconfig option to the rockchip documentation.
+I have fix this and also other new boards defconfig, so you don't need 
+to do this.
 
-Regards,
-Jonas
 
-> 
-> 
-> Thanks,
-> 
-> - Kever
-> 
-> On 2024/3/3 03:16, Jonas Karlman wrote:
->> With the stack and text base used by U-Boot SPL and proper on RK3328
->> there is a high likelihood of overlapping when U-Boot proper + FDT nears
->> or exceeded 1 MiB in size.
->>
->> Currently the following memory layout is typically used on RK3328:
->> [    0, 256K) - SPL binary
->> [ 256K,   2M) - TF-A / reserved
->> [   2M,   +X) - U-Boot proper binary (TEXT_BASE)
->> [   -X,   3M) - U-Boot proper pre-reloc stack (CUSTOM_SYS_INIT_SP_ADDR)
->> [  -8K,   3M)   - pre-reloc malloc heap (SYS_MALLOC_F_LEN)
->> [   -X,   4M) - SPL pre-reloc stack (SPL_STACK)
->> [  -8K,   4M)   - pre-reloc malloc heap (SPL_SYS_MALLOC_F_LEN)
->> [   -X,   6M) - SPL reloc stack (SPL_STACK_R_ADDR)
->> [   5M,   6M)   - reloc malloc heap (SPL_STACK_R_MALLOC_SIMPLE_LEN)
->> [  32M,  +8K) - SPL bss (SPL_BSS_START_ADDR, SPL_BSS_MAX_SIZE)
->>
->> SPL can safely load U-Boot proper + FDT to [2M, 4M-8K) with this layout.
->> However, the stack at [-X, 3M) used during U-Boot proper pre-reloc is
->> restricting the safe size of U-Boot proper + FDT to be less than 1 MiB.
->>
->> Migrate to use common bss, stack and malloc heap size and addresses to
->> fix this restriction and allow for a larger U-Boot proper image size.
->>
->> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->> ---
->>   arch/arm/mach-rockchip/rk3328/Kconfig         | 11 ++++-------
->>   configs/evb-rk3328_defconfig                  | 17 -----------------
->>   configs/nanopi-r2c-plus-rk3328_defconfig      | 15 ---------------
->>   configs/nanopi-r2c-rk3328_defconfig           | 15 ---------------
->>   configs/nanopi-r2s-rk3328_defconfig           | 15 ---------------
->>   configs/orangepi-r1-plus-lts-rk3328_defconfig | 15 ---------------
->>   configs/orangepi-r1-plus-rk3328_defconfig     | 15 ---------------
->>   configs/roc-cc-rk3328_defconfig               | 15 ---------------
->>   configs/rock-pi-e-rk3328_defconfig            | 17 -----------------
->>   configs/rock64-rk3328_defconfig               | 15 ---------------
->>   10 files changed, 4 insertions(+), 146 deletions(-)
->>
+Thanks,
 
-[snip]
+- Kever
+
+>
+> Regards,
+> Jonas
+>
+>> Thanks,
+>> - Kever
+>>
+>>> ---
+>>> This patch depend on the series "rockchip: rk35xx: Sync device tree
+>>> with linux v6.8-rc1" [1].
+>>>
+>>> [1] https://patchwork.ozlabs.org/cover/1891669/
+>>> ---
+>>>    arch/arm/dts/Makefile                   |  5 +-
+>>>    arch/arm/dts/rk3588-generic-u-boot.dtsi |  3 ++
+>>>    arch/arm/dts/rk3588-generic.dts         | 44 ++++++++++++++++
+>>>    board/rockchip/evb_rk3588/MAINTAINERS   |  7 +++
+>>>    configs/generic-rk3588_defconfig        | 68 +++++++++++++++++++++++++
+>>>    doc/board/rockchip/rockchip.rst         |  3 +-
+>>>    6 files changed, 127 insertions(+), 3 deletions(-)
+>>>    create mode 100644 arch/arm/dts/rk3588-generic-u-boot.dtsi
+>>>    create mode 100644 arch/arm/dts/rk3588-generic.dts
+>>>    create mode 100644 configs/generic-rk3588_defconfig
+>>>
+> [snip]
