@@ -4,88 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95FA5C54E58
-	for <u-boot@archiver.kernel.org>; Thu, 14 Mar 2024 00:39:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB489C54E66
+	for <u-boot@archiver.kernel.org>; Thu, 14 Mar 2024 00:39:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A5ADE87F2F;
-	Thu, 14 Mar 2024 01:38:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3FC3287F36;
+	Thu, 14 Mar 2024 01:39:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SFYjNu7O";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jR0Nugue";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8796F87F2F; Thu, 14 Mar 2024 01:38:56 +0100 (CET)
-Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
- [IPv6:2607:f8b0:4864:20::229])
+ id 5853587F28; Thu, 14 Mar 2024 01:39:08 +0100 (CET)
+Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
+ [IPv6:2607:f8b0:4864:20::72d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 52C3487F25
- for <u-boot@lists.denx.de>; Thu, 14 Mar 2024 01:38:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BD46787F25
+ for <u-boot@lists.denx.de>; Thu, 14 Mar 2024 01:39:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x229.google.com with SMTP id
- 5614622812f47-3bbc649c275so302999b6e.0
- for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 17:38:54 -0700 (PDT)
+Received: by mail-qk1-x72d.google.com with SMTP id
+ af79cd13be357-788412a4b78so19790585a.1
+ for <u-boot@lists.denx.de>; Wed, 13 Mar 2024 17:39:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1710376733; x=1710981533; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1710376740; x=1710981540; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=f7a6LDWxAdBS9lLiW4BPxn4582g0nw5GAcTLDZyvLxU=;
- b=SFYjNu7OUxrkyPBgqDZfLZ6TkivhHMS4ijNWnSwtv2VjZRnQUzX9jE5jI2mno1ohX2
- kMExjs8WUwb9O8DfEpT9GJSu4ccT1OU6ZR+2Imc6ifCzUe3hOTD6nFixjejC3Mj0Ayk9
- mAl3lHHMe3jKw+3BmIsCBJHgddhJyrL++Juaw=
+ bh=0NOLkgvcvmKvxDglsxEX5z+DMSpNbszJEByFU/XohKg=;
+ b=jR0Nugue+fhbrlAySptX2CfdQAmo9+srKaDN/UOjKjLnPSximVIx2p3x69wPNIzIDw
+ ksCz6LYx25YedxqIizWzU+hODtftB8OKS3urB2Eb2Q9rpZ/a+P3BVUVsFc3XDd9HVrlE
+ +p8KKnH4iglhYjlIiQKsNa48B46YhPC/DzthU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710376733; x=1710981533;
+ d=1e100.net; s=20230601; t=1710376740; x=1710981540;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=f7a6LDWxAdBS9lLiW4BPxn4582g0nw5GAcTLDZyvLxU=;
- b=svho3D84lpd6FETSLQWE9Y+lYgF1uJGxZTiPBQBBdrxPiQSoLSH+/GVYlFn8vwKBYj
- qzC7Fhy0ghtj/E3p5AdxR9pMSG8O8o0Dloo+9HQCK20dOE4LCKhoucGh1mTd22hcimit
- HZB1eK4IWXzwyRYTuO/ZejfZs+t1LqpKzrwB8ixmGk57YuWh9IyyCV46MxxgGHcB9NAk
- Ln2Ml4nL5+KAkkSprSZ6dvcbz8TCmM5pqbFlXptC4kkoTDBrECYXRQRRmN9mJ/Xnkhkg
- Khr2GnXs4YOm7xN8teF0eacxcTjHgXmL/LWsE7WPJbKgaHbexRkg2N1K4No5rn+xCbj2
- CxuQ==
+ bh=0NOLkgvcvmKvxDglsxEX5z+DMSpNbszJEByFU/XohKg=;
+ b=ngOK8xTTJfO02TqbNy+9xjFTtHNqeFrlWg4RLO7hjckb4YQ09Ye1+pCfffjr+ttSTC
+ loDIdAspgigMgv+rTpATeCuRBN/VoqJaV/ds7wqSJqcBK3/PjruRyBj792u7MEjMM8pL
+ Aq3NF7fX8DiPAkBCBoZZx+lpkpGMBJnUP9LL0AVSKybFLu3HBZ5WuP+a1q1ItltbQOHA
+ KOC9A/yczx7vi9araIoY1TsoM5x0wiQiamQGAjB5SFykRIJ1AGicETi2/yZQr+8u1tYu
+ e1yEGuVFytxpesF3iA0ME1EiZZVS7hJMEQWH1mpypT1tmKzPGbURbkq3KpYj7HPje4Vd
+ HlNg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVxSvpKY/LfKh0BGeSwlwAKJ220qMmsm3JbJPg8sDBrm2TZftzsB8e87I0KFOj+vIwm5jLO8fuW3YZI5JYXBTweooVQeA==
-X-Gm-Message-State: AOJu0YwkqJ+rOpLLiz3lGzpmH0Gi68EhwIRH52rlLuOwXAkmfL/sj1ji
- 5vx7Ol95u8RgRmzG9c872ffXqzEL9AF+TFIUxwcrm2YltlClel3ltyi16r+10Yo=
-X-Google-Smtp-Source: AGHT+IExAXGWpYPjOTb+nu22kUgN1LQbSBD9zXG78rRlvp5fTv12ibU1Qnet/zsUZ6M/0LpQKu9iuA==
-X-Received: by 2002:a05:6808:15a2:b0:3c1:d4dd:6aa4 with SMTP id
- t34-20020a05680815a200b003c1d4dd6aa4mr410908oiw.44.1710376732728; 
- Wed, 13 Mar 2024 17:38:52 -0700 (PDT)
+ AJvYcCXx/Km069N63tLVJLuRRP25HHq2kFG0TjaanwVNTNSr/ulUDnFZx5l0ywd0rdTIBiVTD1XORTmMSY8ME69hULmwiFRwpQ==
+X-Gm-Message-State: AOJu0YyPHvOK2rcxUoQptSjEtwXKu/5ELpGYzzF/9l+dU5HBDLzqZi4/
+ TUWnUHZsiOXYs7ObgrTBr6VlhFM5kli1bIOQ+lSVbZqlgXYWyuP+AfDVUtqZym4=
+X-Google-Smtp-Source: AGHT+IE3Lk67mLkOV7B8kE5qAwmjtYymtBCtJgf8J+pKpnMW0U3kg4+Ph/X9/bP54Ck5iau4qBR3jQ==
+X-Received: by 2002:a05:620a:d48:b0:788:1556:58e6 with SMTP id
+ o8-20020a05620a0d4800b00788155658e6mr380900qkl.41.1710376740428; 
+ Wed, 13 Mar 2024 17:39:00 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-007f-0000-0000-0000-1005.res6.spectrum.com.
  [2603:6081:7b00:7f::1005]) by smtp.gmail.com with ESMTPSA id
- s7-20020ae9f707000000b007885d2f3a74sm172553qkg.7.2024.03.13.17.38.51
+ x27-20020a05620a14bb00b0078874fa5d01sm170350qkj.65.2024.03.13.17.38.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Mar 2024 17:38:52 -0700 (PDT)
-Date: Wed, 13 Mar 2024 20:38:49 -0400
+ Wed, 13 Mar 2024 17:38:59 -0700 (PDT)
+Date: Wed, 13 Mar 2024 20:38:57 -0400
 From: Tom Rini <trini@konsulko.com>
 To: Dan Carpenter <dan.carpenter@linaro.org>
-Cc: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
- Simon Glass <sjg@chromium.org>,
- Angelo Dureghello <angelo@kernel-space.org>, Bin Meng <bmeng.cn@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Alexander Gendin <agendin@matrox.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Michal Simek <michal.simek@amd.com>, Randolph <randolph@andestech.com>,
- Yu Chien Peter Lin <peterlin@andestech.com>,
- Samuel Holland <samuel@sholland.org>,
- Shengyu Qu <wiagn233@outlook.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 1/2] Kconfig: move CONFIG_32/64BIT to arch/Kconfig
-Message-ID: <20240314003849.GC3442575@bill-the-cat>
+Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Simon Glass <sjg@chromium.org>, Andrew Davis <afd@ti.com>,
+ Andre Przywara <andre.przywara@arm.com>, Bin Meng <bmeng@tinylab.org>,
+ Linus Walleij <linus.walleij@linaro.org>, Fabio Estevam <festevam@denx.de>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Yang Xiwen <forbidden405@outlook.com>,
+ =?iso-8859-1?B?Q3Pza+Fz?= Bence <csokas.bence@prolan.hu>,
+ Peng Fan <peng.fan@nxp.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2 2/2] arm64: Enable CONFIG_64BIT for static analysis
+Message-ID: <20240314003857.GD3442575@bill-the-cat>
 References: <1cb3255b-5ed7-443b-8a02-6e998126d417@moroto.mountain>
- <b57b0fd3-dfb9-48c4-af0e-076222c85df7@moroto.mountain>
+ <6a7328b8-eb22-4ad6-a1d6-eaecd2f8a067@moroto.mountain>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="j0PvY1MH1SJaPqGf"
+ protocol="application/pgp-signature"; boundary="TdK2V4RQanrRvXjI"
 Content-Disposition: inline
-In-Reply-To: <b57b0fd3-dfb9-48c4-af0e-076222c85df7@moroto.mountain>
+In-Reply-To: <6a7328b8-eb22-4ad6-a1d6-eaecd2f8a067@moroto.mountain>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,40 +101,44 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---j0PvY1MH1SJaPqGf
+--TdK2V4RQanrRvXjI
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Mar 04, 2024 at 10:04:15AM +0300, Dan Carpenter wrote:
+On Mon, Mar 04, 2024 at 10:04:29AM +0300, Dan Carpenter wrote:
 
-> These configs are used in multiple places so put them in a shared
-> Kconfig file.
+> In the Makefile there is a line that says this:
+>=20
+>     # the checker needs the correct machine size
+>     CHECKFLAGS +=3D $(if $(CONFIG_64BIT),-m64,-m32)
+>=20
+> Set CONFIG_64BIT for ARM64 so that we pass -m64 to the static checkers
+> instead of -m32.
 >=20
 > Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
-> Reviewed-by: Tom Rini <trini@konsulko.com>
 
 Applied to u-boot/next, thanks!
 
 --=20
 Tom
 
---j0PvY1MH1SJaPqGf
+--TdK2V4RQanrRvXjI
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXyRxkACgkQFHw5/5Y0
-tyyXQAv/WSq/Ookgk8LubvBFqhfu693uc58GzmBE+60Nx31rlNBAyBOJTvVEvCpj
-L0X4Hc2HTPd4lxCLuRaTnYsc2aRz5bMGMm4GU7qREqv7+jS1vjbxh0GEQxJPD4Vd
-rK+a7HMMHIdpc4oSUNM9WLByFCsIk63L5Elf3ZhHVF77ysrz7LCOqJsWU9xtQ71u
-MqLrCLb4Bh0PQmzGpJUbxSZuHFx7BmtEYbptUW7Vlp2UjKyeX3ZvL84552IAx+aA
-vJOnn0XBwypmAF50eNWnxFFeKzk/eoxefaD1EEn1o5us0WdM99rPj1x/3y6uvKoF
-CKOTQfku+bTzCk/bCmLaCIktGLK/pKtfSftoR1+pbusXuMpQk48d2PHPL5X3tt5n
-qTKLlGHJ4wEgGL0fpWGEQ39G1hdbwviMkizhPuXBODrHJC+JfyzmX0y2Nd7ZKjJG
-nYAqB+R1eafLL91zxx48+BDGToY08VwxT3Op1ZjrgZssFt0A1TXUhFafrWgX4dsE
-QAAyUqj9
-=vghx
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXyRyEACgkQFHw5/5Y0
+tyz3vwv/Qh5QHlIxYUqn9EQkE4CQu72sOkr0WGhGgIa9HQW8WjnN6Gw1i7sdsSos
+9uEevfJGX9ihXqLqQaFDwqlNhd4YkXk5baL7dLwdwYgCzYbdC5fb6VwImi8ZhLq8
+M5Khsx+b8tBJcm4CXv2p9SqVHa//bVXht8/BSS4Zlg0mzbKVe9vI1yWa/Ykwz7PN
+nkhKssepd+n6tOb1Sr7ag/6675WamOTip/L1kwN68MZp7BXdxDTfY5mMTPlpzCzL
+zSyNfzQkHIal/JvmAocfmxMHyKaNIcf3TOlkVm09Plql7ar01Qq2iPqS4GUNYTgl
+I/wnEgqZbTgXum3u9CypF7YJf9M4nvJlWAWxLRd7t2w3QZKrqvdv2lU80s6+RG01
+4DayNt3vh2SJh2fqfv8EjGymxajJyIf4L2kvHVarktJpzXHX1DkdGOt+PJPOAVj8
+7ohkS6xnyNNyjDhVUa/gxN8RdU2Kn1WhDz/xB641u6ZEFklgypDY8DZwtIvEG6an
+RCD8u44L
+=jM1W
 -----END PGP SIGNATURE-----
 
---j0PvY1MH1SJaPqGf--
+--TdK2V4RQanrRvXjI--
