@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9911EC54E67
-	for <u-boot@archiver.kernel.org>; Thu, 14 Mar 2024 09:38:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98EE8C54E67
+	for <u-boot@archiver.kernel.org>; Thu, 14 Mar 2024 09:39:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 76E4887FFA;
+	by phobos.denx.de (Postfix) with ESMTP id D803D88003;
 	Thu, 14 Mar 2024 10:36:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E406A87FEE; Thu, 14 Mar 2024 10:36:39 +0100 (CET)
-Received: from smtp-42aa.mail.infomaniak.ch (smtp-42aa.mail.infomaniak.ch
- [84.16.66.170])
+ id A725387FF2; Thu, 14 Mar 2024 10:36:40 +0100 (CET)
+Received: from smtp-42ab.mail.infomaniak.ch (smtp-42ab.mail.infomaniak.ch
+ [84.16.66.171])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E898F87FE0
- for <u-boot@lists.denx.de>; Thu, 14 Mar 2024 10:36:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C29A787FB1
+ for <u-boot@lists.denx.de>; Thu, 14 Mar 2024 10:36:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0001.mail.infomaniak.ch (unknown [10.7.10.108])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4TwMhj4BQbzMq4RY;
- Thu, 14 Mar 2024 10:36:37 +0100 (CET)
+Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
+ [10.7.10.108])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4TwMhk2xY0z23N;
+ Thu, 14 Mar 2024 10:36:38 +0100 (CET)
 Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4TwMhh6dH3zyh; Thu, 14 Mar 2024 10:36:36 +0100 (CET)
+ id 4TwMhj4hxlz17C; Thu, 14 Mar 2024 10:36:37 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Thu, 14 Mar 2024 10:36:27 +0100
-Subject: [PATCH v4 14/16] adc: add missing depends on ADC for controller
- drivers
+Date: Thu, 14 Mar 2024 10:36:28 +0100
+Subject: [PATCH v4 15/16] button: add missing ADC dependency for BUTTON_ADC
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240314-rk3588-saradc-v4-14-31cb41ff7362@theobroma-systems.com>
+Message-Id: <20240314-rk3588-saradc-v4-15-31cb41ff7362@theobroma-systems.com>
 References: <20240314-rk3588-saradc-v4-0-31cb41ff7362@theobroma-systems.com>
 In-Reply-To: <20240314-rk3588-saradc-v4-0-31cb41ff7362@theobroma-systems.com>
 To: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>, 
@@ -67,56 +67,32 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 
-The ADC controller drivers are obviously all depending on ADC symbol
-being selected.
+The BUTTON_ADC symbol guards the compilation of button-adc driver whose
+name very well makes it explicit that it requires ADC support to be
+enabled.
 
-While they don't seem to fail to build without, they won't be useful
-without that symbol selected, so let's make sure the options aren't
-shown in menuconfig when ADC isn't selected.
+Fix build issue of button-adc driver when ADC support isn't enabled by
+making sure it cannot be built without ADC support.
 
 Cc: Quentin Schulz <foss+uboot@0leil.net>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 ---
- drivers/adc/Kconfig | 4 ++++
- 1 file changed, 4 insertions(+)
+ drivers/button/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/adc/Kconfig b/drivers/adc/Kconfig
-index a01d73846b7..c9cdbe6942d 100644
---- a/drivers/adc/Kconfig
-+++ b/drivers/adc/Kconfig
-@@ -13,6 +13,7 @@ config ADC
- 
- config ADC_EXYNOS
- 	bool "Enable Exynos 54xx ADC driver"
+diff --git a/drivers/button/Kconfig b/drivers/button/Kconfig
+index 097b05f822e..3918b05ae03 100644
+--- a/drivers/button/Kconfig
++++ b/drivers/button/Kconfig
+@@ -12,6 +12,7 @@ config BUTTON
+ config BUTTON_ADC
+ 	bool "Button adc"
+ 	depends on BUTTON
 +	depends on ADC
  	help
- 	  This enables basic driver for Exynos ADC compatible with Exynos54xx.
- 	  It provides:
-@@ -22,6 +23,7 @@ config ADC_EXYNOS
- 
- config ADC_SANDBOX
- 	bool "Enable Sandbox ADC test driver"
-+	depends on ADC
- 	help
- 	  This enables driver for Sandbox ADC device emulation.
- 	  It provides:
-@@ -31,6 +33,7 @@ config ADC_SANDBOX
- 
- config SARADC_MESON
- 	bool "Enable Amlogic Meson SARADC driver"
-+	depends on ADC
- 	imply REGMAP
- 	help
- 	  This enables driver for Amlogic Meson SARADC.
-@@ -41,6 +44,7 @@ config SARADC_MESON
- 
- config SARADC_ROCKCHIP
- 	bool "Enable Rockchip SARADC driver"
-+	depends on ADC
- 	help
- 	  This enables driver for Rockchip SARADC.
- 	  It provides:
+ 	  Enable support for buttons which are connected to Analog to Digital
+ 	  Converter device. The ADC driver must use driver model. Buttons are
 
 -- 
 2.44.0
