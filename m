@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD96FC54E58
-	for <u-boot@archiver.kernel.org>; Fri, 15 Mar 2024 15:06:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A95F0C54E58
+	for <u-boot@archiver.kernel.org>; Fri, 15 Mar 2024 15:06:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9914688004;
-	Fri, 15 Mar 2024 16:06:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 45F0087FF1;
+	Fri, 15 Mar 2024 16:06:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="N14MTh64";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="we+cU4Lh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7C21688011; Fri, 15 Mar 2024 16:06:13 +0100 (CET)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
+ id 559FF88003; Fri, 15 Mar 2024 16:06:14 +0100 (CET)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0329A87FF2
+ by phobos.denx.de (Postfix) with ESMTPS id D164888004
  for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 16:06:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-33ddd1624beso1410453f8f.1
- for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 08:06:07 -0700 (PDT)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-414008713beso4908955e9.1
+ for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 08:06:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710515167; x=1711119967; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1710515168; x=1711119968; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=PL6Z/zkvsAR1KzxwMv1rJzM4fB2Czula3XSPqEJDCS8=;
- b=N14MTh642jeNU8WAEsvNxSgpwwpgXp3/X4zLt9QGP+Kfr2nYga+ckSlNhLQgjnoCgb
- 65UzaxKioVzUdTK6CygeIBQBwL1E25ZHJyIOj/+e2hMH1RWgStJgA618QhKLCo06lTRi
- v/Byg/kOya8AERp0zInkJ3E79ATwGqsZ55rBmVOvz9g5Qg4cu3xmoc3zbeFhmAYOgJkd
- iS4E6UFKlb7f6PTtlfW4oErPiG1r0/js6fLnrpFa3CIpNqy3whwPf+5lDNOemBBWIvhV
- Rf8ezo7cx3Ds/3CZQw6xqTRgi2aYDdBRyBU5xiyJgAqwG7fasE++9FX83fLU+QzPPOCE
- 2G7A==
+ :reply-to; bh=cnrSRMGhccGbRZbFvxipCAyufaiPSD/lfhCstPEB5Ls=;
+ b=we+cU4LhTuFGEClJ75KlzxgsRFDA0RzEzjQQysSWu1hCijBEKaJcVRVgr38MvjoHZC
+ 9L/tDoNXeO2jr5EL6/cK2KqJDYtuiduHcmFeTzg8NweEF+n3p2sgDzvoQoNL7IZAjyuc
+ zBmpgqaFRItbfc8hA+0L8YFwCxvAtvQ4virnTYPD+JlATd+wwtB+XvctU9fROgzPx3Kt
+ kzP3zfi16+Jn6cOSE6bDd9hGj/SO5zof08O4yy26otiozl3F3kouAOCnV6R32Cokxtzh
+ iSJt69fW2KPT/7BorG8TFNd0Ens4HVUKIAaSzO98QtujX3avrcVX47ljRGMQtqTEWmN9
+ 50cQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710515167; x=1711119967;
+ d=1e100.net; s=20230601; t=1710515168; x=1711119968;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=PL6Z/zkvsAR1KzxwMv1rJzM4fB2Czula3XSPqEJDCS8=;
- b=KUoocNg8VLOayXg4QmZPidIcpMlZbeqPg9VOyfhTvAq2ANjo2EgBI2Bjsmvi9mY4Zt
- /U79fnJJylPWG+rB4kjHrG44aEURtoj4XhAYbhKttVFVLOlFNWXeZyP6tsyvDGkKM3RV
- MJLuL6BbDJZvrYjCDeUL90Xm7Q1F3xT8FQvk50ik4Ju2+OmecFJOA+x7e3Q/zxboQcXO
- WastsQTksUEDaPPLgUUOZ0LprqLcNlidqW4Xj4HCWl31lZF4bnXyyKEnLC85XUUuEGbp
- wu6sb2QsXUPbqmB8Z2h9H0jaAi9NgsC5B7KGCyPrh/j4WZEES0BRgamJbnMEyEqTPLv4
- nOwQ==
-X-Gm-Message-State: AOJu0YwuXWxE831pWq0H6c0KiO4eOu8HCibU1oIvYjk13bePLeb15p7O
- cxbGw2vLP2uD5eckdwEESUEMCglK5OatONEGQPvYgNyn63JDpWgn/8uuItnksjI=
-X-Google-Smtp-Source: AGHT+IGT05Tp2EhhWUbnk4GZjf6nlKrP1X/1PS7qxTcZDhi6pf/XmTWkqxeun5PcA222iZ5+ciCfZQ==
-X-Received: by 2002:adf:cb92:0:b0:33d:61c7:9b2c with SMTP id
- q18-20020adfcb92000000b0033d61c79b2cmr7745786wrh.34.1710515167313; 
- Fri, 15 Mar 2024 08:06:07 -0700 (PDT)
+ bh=cnrSRMGhccGbRZbFvxipCAyufaiPSD/lfhCstPEB5Ls=;
+ b=UjQdLM9CeCuyJCfblQl0AVROCZ4TRprF1/PwdMkX/UX45LPV0KBZNdCczYCxR6hNzb
+ 1vQ6bLZiBBB80fE4bWtoWlK6003RKgD5GwupF+HbQKrclRQP1HQc3mSBcgX6+3qRhmb+
+ 0K28DvytY12/jJCwf3oCDRtKzQstRsB5rbGH5Um/Bymb1t6kvAe2FEhgRjWbmEEuagHw
+ Ep1MCSeKKUJcVilxjPsAmLw2h0K+Gk1DzqA+aBp1xbiJAweIfCrN0WRkHrRDMeLUKpx7
+ eiV4pkhfPdaOsey4SEixR5z+6AW0f4+DcbIlRbuHGFXVTJR4fr8bd8Zusg1oZQp1IJTj
+ FUKg==
+X-Gm-Message-State: AOJu0Yx7Bl2djTbudsPSn1HZ7O7xH0EKYRXv3WtYjp2nfidBf0/ZSVGc
+ 4qWNIAGDVoOcFGkWePBlukyJMxaBy1KNruV2LfEuYRyhvsu2N9t1fzuR3ZB1Snc=
+X-Google-Smtp-Source: AGHT+IEriPhAebo5bWmX0BLke29eA38Izu8SWbylPuxNVBhdyQQVufwQ3NJHbstIwCB9yNbj2h8ZPw==
+X-Received: by 2002:a05:600c:444b:b0:413:f276:1123 with SMTP id
+ v11-20020a05600c444b00b00413f2761123mr3523966wmn.35.1710515168357; 
+ Fri, 15 Mar 2024 08:06:08 -0700 (PDT)
 Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- jg28-20020a05600ca01c00b0041401fbe446sm1939502wmb.11.2024.03.15.08.06.06
+ jg28-20020a05600ca01c00b0041401fbe446sm1939502wmb.11.2024.03.15.08.06.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Mar 2024 08:06:06 -0700 (PDT)
+ Fri, 15 Mar 2024 08:06:07 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Fri, 15 Mar 2024 15:06:00 +0000
-Subject: [PATCH v2 1/5] usb: dwc3-generic: implement Qualcomm wrapper
+Date: Fri, 15 Mar 2024 15:06:01 +0000
+Subject: [PATCH v2 2/5] usb: dwc3: select DM_USB_GADGET
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240315-b4-qcom-usb-v2-1-5467ec27cb26@linaro.org>
+Message-Id: <20240315-b4-qcom-usb-v2-2-5467ec27cb26@linaro.org>
 References: <20240315-b4-qcom-usb-v2-0-5467ec27cb26@linaro.org>
 In-Reply-To: <20240315-b4-qcom-usb-v2-0-5467ec27cb26@linaro.org>
 To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>, 
@@ -80,13 +80,13 @@ To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
  Sumit Garg <sumit.garg@linaro.org>
 Cc: u-boot@lists.denx.de
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4214;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=777;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=wyOgocaLbH2BVsPAtMVCO6/ZFsvVRUnte7CZsWHnPsE=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtQvyXca71mev/ZyQc7791Kz32q/XuIvynlM3MFxwQXWc
- 2pHi8yrO0pZGAQ5GGTFFFnETyyzbFp72V5j+4ILMHNYmUCGMHBxCsBEPtgy/C9rM3mzUn2+0oqH
- tRm3VSa+E+AKO3OGZZfpRIFvjOxm3yMYGTYqe2iH6DU/iDvmWbKj997ynYuXJm7dZ3zVRZhf8Om
- vv9wA
+ bh=FFtOCdyc7kFWeNXYCi6LiWr/yQ+G2PLU3dzzfBLIqOM=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtQvyXd9p0ka/L+UoDzvwtnwB28ihE9lFZ0pTM68/FBp1
+ uMvB3MWd5SyMAhyMMiKKbKIn1hm2bT2sr3G9gUXYOawMoEMYeDiFICJHD3J8IcnsmlBYdh6lV9C
+ yVXcD6Y/ffLmRG75FZPfFx7LNnpWs3ky/BX/skymuYTzw/EXP8yYjjRs7NVedsjtxqXC21cS7mb
+ 88xMHAA==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -105,127 +105,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Qualcomm specific dwc3 wrapper isn't hugely complicated, implemented
-the missing initialisation for host and gadget mode.
+DWC3 platforms depend on DM_USB_GADGET for gadget drivers to work,
+otherwise compilation fails due to no implementation of
+dm_usb_gadget_handle_interrupts().
 
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- drivers/usb/dwc3/dwc3-generic.c | 81 ++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 80 insertions(+), 1 deletion(-)
+ drivers/usb/dwc3/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
-index a379a0002e77..5a355dd86c60 100644
---- a/drivers/usb/dwc3/dwc3-generic.c
-+++ b/drivers/usb/dwc3/dwc3-generic.c
-@@ -424,8 +424,79 @@ enum dwc3_omap_utmi_mode {
- struct dwc3_glue_ops ti_ops = {
- 	.glue_configure = dwc3_ti_glue_configure,
- };
+diff --git a/drivers/usb/dwc3/Kconfig b/drivers/usb/dwc3/Kconfig
+index c0c8c16fd9c2..8a70bc682322 100644
+--- a/drivers/usb/dwc3/Kconfig
++++ b/drivers/usb/dwc3/Kconfig
+@@ -10,8 +10,9 @@ if USB_DWC3
+ config USB_DWC3_GADGET
+ 	bool "USB Gadget support for DWC3"
+ 	default y
+ 	depends on USB_GADGET
++	select DM_USB_GADGET
+ 	select USB_GADGET_DUALSPEED
  
-+/* USB QSCRATCH Hardware registers */
-+#define QSCRATCH_HS_PHY_CTRL 0x10
-+#define UTMI_OTG_VBUS_VALID BIT(20)
-+#define SW_SESSVLD_SEL BIT(28)
-+
-+#define QSCRATCH_SS_PHY_CTRL 0x30
-+#define LANE0_PWR_PRESENT BIT(24)
-+
-+#define QSCRATCH_GENERAL_CFG 0x08
-+#define PIPE_UTMI_CLK_SEL BIT(0)
-+#define PIPE3_PHYSTATUS_SW BIT(3)
-+#define PIPE_UTMI_CLK_DIS BIT(8)
-+
-+#define PWR_EVNT_IRQ_STAT_REG 0x58
-+#define PWR_EVNT_LPM_IN_L2_MASK BIT(4)
-+#define PWR_EVNT_LPM_OUT_L2_MASK BIT(5)
-+
-+#define SDM845_QSCRATCH_BASE_OFFSET 0xf8800
-+#define SDM845_QSCRATCH_SIZE 0x400
-+#define SDM845_DWC3_CORE_SIZE 0xcd00
-+
-+static void dwc3_qcom_vbus_override_enable(void __iomem *qscratch_base, bool enable)
-+{
-+	if (enable) {
-+		setbits_le32(qscratch_base + QSCRATCH_SS_PHY_CTRL,
-+				  LANE0_PWR_PRESENT);
-+		setbits_le32(qscratch_base + QSCRATCH_HS_PHY_CTRL,
-+				  UTMI_OTG_VBUS_VALID | SW_SESSVLD_SEL);
-+	} else {
-+		clrbits_le32(qscratch_base + QSCRATCH_SS_PHY_CTRL,
-+				  LANE0_PWR_PRESENT);
-+		clrbits_le32(qscratch_base + QSCRATCH_HS_PHY_CTRL,
-+				  UTMI_OTG_VBUS_VALID | SW_SESSVLD_SEL);
-+	}
-+}
-+
-+/* For controllers running without superspeed PHYs */
-+static void dwc3_qcom_select_utmi_clk(void __iomem *qscratch_base)
-+{
-+	/* Configure dwc3 to use UTMI clock as PIPE clock not present */
-+	setbits_le32(qscratch_base + QSCRATCH_GENERAL_CFG,
-+			  PIPE_UTMI_CLK_DIS);
-+
-+	setbits_le32(qscratch_base + QSCRATCH_GENERAL_CFG,
-+			  PIPE_UTMI_CLK_SEL | PIPE3_PHYSTATUS_SW);
-+
-+	clrbits_le32(qscratch_base + QSCRATCH_GENERAL_CFG,
-+			  PIPE_UTMI_CLK_DIS);
-+}
-+
-+static void dwc3_qcom_glue_configure(struct udevice *dev, int index,
-+				     enum usb_dr_mode mode)
-+{
-+	struct dwc3_glue_data *glue = dev_get_plat(dev);
-+	void __iomem *qscratch_base = (void __iomem *)glue->regs;
-+	if (IS_ERR_OR_NULL(qscratch_base)) {
-+		log_err("%s: Invalid qscratch base address\n", dev->name);
-+		return;
-+	}
-+
-+	if (dev_read_bool(dev, "qcom,select-utmi-as-pipe-clk"))
-+		dwc3_qcom_select_utmi_clk(qscratch_base);
-+
-+	if (mode != USB_DR_MODE_HOST)
-+		dwc3_qcom_vbus_override_enable(qscratch_base, true);
-+}
-+
-+struct dwc3_glue_ops qcom_ops = {
-+	.glue_configure = dwc3_qcom_glue_configure,
-+};
-+
- static int dwc3_rk_glue_get_ctrl_dev(struct udevice *dev, ofnode *node)
- {
- 	*node = dev_ofnode(dev);
- 	if (!ofnode_valid(*node))
-@@ -511,8 +582,16 @@ static int dwc3_glue_reset_init(struct udevice *dev,
- 		return 0;
- 	else if (ret)
- 		return ret;
+ comment "Platform Glue Driver Support"
  
-+	if (device_is_compatible(dev, "qcom,dwc3")) {
-+		reset_assert_bulk(&glue->resets);
-+		/* We should wait at least 6 sleep clock cycles, that's
-+		 * (6 / 32764) * 1000000 ~= 200us. But some platforms
-+		 * have slower sleep clocks so we'll play it safe.
-+		 */
-+		udelay(500);
-+	}
- 	ret = reset_deassert_bulk(&glue->resets);
- 	if (ret) {
- 		reset_release_bulk(&glue->resets);
- 		return ret;
-@@ -628,9 +707,9 @@ static const struct udevice_id dwc3_glue_ids[] = {
- 	{ .compatible = "rockchip,rk3328-dwc3", .data = (ulong)&rk_ops },
- 	{ .compatible = "rockchip,rk3399-dwc3" },
- 	{ .compatible = "rockchip,rk3568-dwc3", .data = (ulong)&rk_ops },
- 	{ .compatible = "rockchip,rk3588-dwc3", .data = (ulong)&rk_ops },
--	{ .compatible = "qcom,dwc3" },
-+	{ .compatible = "qcom,dwc3", .data = (ulong)&qcom_ops },
- 	{ .compatible = "fsl,imx8mp-dwc3", .data = (ulong)&imx8mp_ops },
- 	{ .compatible = "fsl,imx8mq-dwc3" },
- 	{ .compatible = "intel,tangier-dwc3" },
- 	{ }
 
 -- 
 2.44.0
