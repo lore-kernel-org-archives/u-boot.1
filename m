@@ -4,136 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9EEEC54E5D
-	for <u-boot@archiver.kernel.org>; Fri, 15 Mar 2024 00:10:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0B9AC54E60
+	for <u-boot@archiver.kernel.org>; Fri, 15 Mar 2024 00:57:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C845C87D6B;
-	Fri, 15 Mar 2024 01:10:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=socionext.com
+	by phobos.denx.de (Postfix) with ESMTP id D2C4D87CF9;
+	Fri, 15 Mar 2024 01:57:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=SocionextGlobal.onmicrosoft.com header.i=@SocionextGlobal.onmicrosoft.com header.b="rWsyencG";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="H9Ux2AmU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D77D58753A; Fri, 15 Mar 2024 01:10:12 +0100 (CET)
-Received: from ps81.spcmail.jp (ps81.spcmail.jp [52.192.49.129])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id C0F8687C61; Fri, 15 Mar 2024 01:57:46 +0100 (CET)
+Received: from mail-m49207.qiye.163.com (mail-m49207.qiye.163.com
+ [45.254.49.207])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF5BF87F5A
- for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 01:10:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ED30687F5E
+ for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 01:57:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=socionext.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kojima.masahisa@socionext.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=EoWNDN8h8IZlUhTSjlYlKLK0Q5LVLMVwGrzxBed4Ws9FjtbKMN63EwuEM4GXrBfNLh/Ox2mECNiFB9lFy+p0A0U8+dIvsvlw2JNUo3d5qQQJwNdygRJAy2nElcN+VjgmyME2AEgzGjCbX5O/m9gntYBeVeQJbYEuqhYjUwsen7EZApKBJaigQeCJyKKDRxkFmPGNPBudug1ktdlNN1ANNfWpEsQ0766yoEyMkKaeIS8Jtdc8nkRCjhNkTlKgYuqjHjoj7hcWFkUxgs7WjE5Td89myOY0DIa8m5KxVYax47ReHusiUeoWyFOhbGk2BGon7hUg50OQiusuO9549wgnWQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=HP6aYD2bABInjQgpjwM+8M8+LmEEiLUevagMv6s1NNE=;
- b=bc0TK22aikpuStfqiDW82vVOxnNrKgQAfExbq234H9riU0cumU3co3kBNUOjahbR7TKEoXyu20WAp6Ab9iUE6B4hzTDv9Y24Tely3507ksMULZbmvBcO+e/4b6H7dlKkp2FhnmRtkAQczzDGNDPkNkemkFaBLLoSnFTIpNjSmZTHxsa9QstYzUvO1XZ5esv6S81Lvd77qaxNd2wdrKG0/muy+q0yQeJ0rdg3E9V9TefRv1bpepBupzry13rf/WNvtekwsMJd5EF6qNcFP2RJV6mPpr+DaANCiXqnJE4VdEb8BbCIU/oReOtukE5JV5Jxs25yrUXSOzXiL1EQ0ofSxQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=socionext.com; dmarc=pass action=none
- header.from=socionext.com; dkim=pass header.d=socionext.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=SocionextGlobal.onmicrosoft.com;
- s=selector1-SocionextGlobal-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=HP6aYD2bABInjQgpjwM+8M8+LmEEiLUevagMv6s1NNE=;
- b=rWsyencG2RujBUjzSONte/Tnob+CUk1sE//dDNkKBYBpub9fbhoMiHlYi1CD9PnvEbIUj/siOisrzXdzt6k7sNJMyB8yfl8CIjn5CLrzM2Cmw3NNkBA8Hcr9zHnc3UTRHfX6ThSaxAvI/i7CvMDDdXpbbEjRE5/cthvBc94WZ4o=
-Received: from TYCPR01MB8375.jpnprd01.prod.outlook.com (2603:1096:400:151::10)
- by OS3PR01MB10298.jpnprd01.prod.outlook.com (2603:1096:604:1e1::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7386.18; Fri, 15 Mar
- 2024 00:09:48 +0000
-Received: from TYCPR01MB8375.jpnprd01.prod.outlook.com
- ([fe80::d04a:eae5:6d52:39f]) by TYCPR01MB8375.jpnprd01.prod.outlook.com
- ([fe80::d04a:eae5:6d52:39f%6]) with mapi id 15.20.7386.017; Fri, 15 Mar 2024
- 00:09:48 +0000
-From: <kojima.masahisa@socionext.com>
-Subject: RE: [PATCH] efi_loader: accept append write with valid size and data
-Thread-Topic: [PATCH] efi_loader: accept append write with valid size and data
-Thread-Index: AQHabfqqjk1bdq9rEUWDwpCA9ohP5bE3UkWAgACqguA=
-Date: Fri, 15 Mar 2024 00:09:48 +0000
-Message-ID: <TYCPR01MB83750A2962738D3D4C8BFC5EE3282@TYCPR01MB8375.jpnprd01.prod.outlook.com>
-References: <20240304061100.2386856-1-kojima.masahisa@socionext.com>
- <CAC_iWjL1P0HLv+PJ6aH+=n-PBtaq=dqYujzVA+J+_yp1x20Nkg@mail.gmail.com>
-In-Reply-To: <CAC_iWjL1P0HLv+PJ6aH+=n-PBtaq=dqYujzVA+J+_yp1x20Nkg@mail.gmail.com>
-Accept-Language: ja-JP, en-US
-Content-Language: ja-JP
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ccmail7: Relayed
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=socionext.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: TYCPR01MB8375:EE_|OS3PR01MB10298:EE_
-x-ms-office365-filtering-correlation-id: 51f8cfd5-03dc-475b-a9d4-08dc44843a20
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: v0w6s7AeB77foDdyE1OW7XWyeJShq2I+QzRmKzWknWKHsAiXlxM2QNmKVrG87+b9T4bjKjAXKL4IMn2u2bw3g5UxMKT2BhKRlBGJCB+42J5VFBruo8C4Rzz1FFjdHzG/8lPy4Tx8HjibyWWpcogwIZWjRMAgYtwvPxcqnXConWJuElYCbYXRhWCRRFH0T0GpVMxzXQ25r4H31sHePdVaTRYAOH05geBFUNXxBOLmBr+IIVdo1WWU3r5lTfnIJgVPwQ8MWS6Br6ddktseTqpnXFxK6qgpJD/Eiy3I5Ss2Y3yYP1ajw7I+WHgu2iRGl9efK27xSkZxBulzGWGykTJrRfs3lp23+5+TAeeg8sYhyAaqPVIfhUVPEyjZU7FAqgmqtViVENieaCkf1c1nVqGD++sMQkfmy+be0pIQ20F7S4JO2TtT8He7cTyuTxYPplxoKf9BJ2WQKuYnItlKf/X9U8bTOLvG+vVt1AcmK/r6PDkxiMBv/EJv6bHEdooP9vHO6LolWD48gDScvV7PQrXO2DABmyOEQdgIsq5SU2pn5TkxQQK6iw+YHP/OrzaQVzE+KE2FIJGmkir/QTEF8CRCBue/irTnf1XGIAmJVn6uRgkYaKK95kDBay+WgGrLcp/e4ZdxQGnK/U4UCljGjxaQ+jzyDPeSZY0dlSBhGrmYgsQ/Ytj5cNYhF4uRGwcKWt2p
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:ja; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:TYCPR01MB8375.jpnprd01.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(1800799015)(366007)(376005)(1580799018)(38070700009); DIR:OUT;
- SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?UkQwQWh4L1dBYXFUSUhHM1J0dGtmYnVobVk1UFRaWHZsQUxxRm9takZMOTNz?=
- =?utf-8?B?MFhYNVl1alo1K1BMZThCQlhPWFc5V1ZJbzFhQ2tGenVrREV2ZXRYVFoxV2lW?=
- =?utf-8?B?YnVLaUplOEhSRFhUeitoTUs4UXd2dWtkQ1BtK1I1YUhqZjNaelF3Qmk3bEQr?=
- =?utf-8?B?eXF0WjFDUENIL1ZtMzZHZGo2dW5DY0VMaUo0d3A2YWVZVVFhdytROEU4THBF?=
- =?utf-8?B?cFFlY2VTeHU2dlRZM2F3RXBlaElSTWdtRVRQZDZSbFJjVWNiVElBRFA1OHVM?=
- =?utf-8?B?WnhaRUhxM1dLSjZLODNPNDBaRFRKelNPbUtobUlQcnhQR3A3T1ZmNm5xRUYx?=
- =?utf-8?B?TkhrWkpjdUxrYkJUSW1UVjhndUJLMEdleUhRRUpJeDdCZTY0NjRwNS9QZmY5?=
- =?utf-8?B?K0pEREVBdmwyMU1nNStKS25YRjNJY09PT2h0RnJsbVA2RVF3OVorNmVoc2l1?=
- =?utf-8?B?RGZFR1RMMTBrRmlta05SNXJzYWZYVlJHUFhaeU9ML1U3RjNDblZ0KzR3OFZn?=
- =?utf-8?B?c21WWlNpaXNSQ3dwamhSRU1YUDYrL3VUeWZzVk9udTNISENFWW1sd1NIK2JT?=
- =?utf-8?B?TlRDS2tSRFNRVkh1YTREaCsrZjkrSGg4OUxqVHFBSDExdjZrdVk1TnVFQk02?=
- =?utf-8?B?U0doZzZiZ0J4cFlEYXBteDUzTGFDQWpINFJ3STZCd29RQXQ3M3dFQnREOXcz?=
- =?utf-8?B?SWRPdlpZcGRUZXdIUUVlVmZjNG5DempCSG1iTVRQYnNpdFdhRkJWaHhMWGVq?=
- =?utf-8?B?dkpwS0tzMld0UGhNWmhyWkF6dUZ2SURpWVh4OWRiVGxvVmJyV3ZVbmFxK0Fz?=
- =?utf-8?B?SmtlNkxoL3NxQXU3OGorQVN6V1g2ZWJuazE5d2FvSXhWK05TVG1kNnNpUG5H?=
- =?utf-8?B?TGxZbm1ESDN5MW9EU3VCMkhlNmQ3bkNUQVgyT1RkeThWQVY5NHFEZ1AraXY1?=
- =?utf-8?B?dnVHRVlRVWd6NklsUDlMMHVWcTBwVkM5NkhKZ1hKaE8yZlIyem9SL3N1U25F?=
- =?utf-8?B?YnVuZWtJVUg0NUxTUGU2RmhXRnBqU05PT0M1OWwyZnlVdm1OUmRkVzFYVDNI?=
- =?utf-8?B?QVg1Ung3cjMyVk82bXFhRWd1RW9SWVlMNjVlOFBoMU5iQnpobFNRMUFqRFps?=
- =?utf-8?B?bTV1NC9pTkN3T2RMVEkxUjk4Y21TcnhneGVNTXVRRkJOQ3IwTTFnall6UVdX?=
- =?utf-8?B?SWhkMXlPRE9rQkxYeDdjZktzdEdVRHZIS2pQaURNUHJuNVJIenh1WDV5dW12?=
- =?utf-8?B?bzJ2U1ZnVmptY2dzU3pyTU8yWGdjTmE1MU0wZDRlb1p1WEozTlMzRjhWZXV5?=
- =?utf-8?B?RjBPeTIvOUN5UzlvNGIrMmpmL0NiU1hsemlXQTh4cVpINERYRXN6YWtGU2J3?=
- =?utf-8?B?RTRWMGhQY3duUzVuck9NaFZMWnFPWEJ6bjA1eUJLMDN0M2RsNjlVOG9KYlo2?=
- =?utf-8?B?L0RMRldNRERhYWllcWRlODlWVDFSL3kweTVQaFpML093d3V1KzU0bzdiNXp2?=
- =?utf-8?B?dlJzMmM0WjNvQ0V2R0RQVjVRdkM0Y1JQYSs3bUpFSUppWSt2TUJhOTVHOUlL?=
- =?utf-8?B?d3NLOHVVSC9tN0M1dHhDTmVoaWxnQ1c3OFliZlpFekVTempjcERWcXdHY0dI?=
- =?utf-8?B?TVBZMm1PU3NyNnV4WXdia1g2QWs1ZnhhTnh3SU1UOHgzZWxCdHl2V014cVpu?=
- =?utf-8?B?U0JsZ2IyMm9KUHNZU1F4Q3VNMzA5cGZQZmZVTzdRTExrRDFqc3BCbmt5LzhM?=
- =?utf-8?B?YnZsUlZQQkd4YWE5RkdWeDFnaEVmT3NKMHdtZTFqclV1L3lSeWdLR3NjQzdn?=
- =?utf-8?B?eXZWOEVFTFIwOVhiRTBqNmdweWhVSmt1cjhwRTlFaTVEcnFZYnljemR4a1ls?=
- =?utf-8?B?MjRYOTdHdTBRUnNOQkdrZHFtTjJYUnRIa0psTURTc1JLdmM2Mk9lS2tSeUNu?=
- =?utf-8?B?a2NLTnRlUkVTYjV3R1FONGlDcGRCdG0xVUlWc2pidFpCZ0FuSFdQakxCT2Nk?=
- =?utf-8?B?VStKYzhEeVhRSWgzeUJtU1B0Qnp5U3diNWJDdU90ekJoQzZlbUl2UThoQ1Bk?=
- =?utf-8?B?ZFlibGxtdW9tOW5LWjN5bmU0ZS9lajZRaVBoTDF4a0t1a2RtQkRZdk5iSlFF?=
- =?utf-8?B?UFZhbVBiSTJXSTZyc291UExwcUo5bGVoU1pXZmRlSjlBYVlyTENLblVtRnJl?=
- =?utf-8?B?MGc9PQ==?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=H9Ux2AmUNT9BzVr18yhXV1N9JW6po0zbZiOPX0444f3cfFMQ1LRAsXwIeWZtPNf4a7sLpvVG5GW016aE6jW5BknK8doxIhdA4oZA/oyybmwsAlG56qMn+dmUwm0vLlwGvTkmWuciw0GEyCfbH19LdAfx20WsPS+4OvCyG2JJ6Dk=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
+ bh=iau+NhxoauUo3IkLWvaQHTJVYSqUVcLTrP/QaW2uRnw=;
+ h=date:mime-version:subject:message-id:from;
+Received: from localhost.localdomain (unknown [103.29.142.67])
+ by smtp.qiye.163.com (Hmail) with ESMTPA id 49A6B90015E;
+ Fri, 15 Mar 2024 08:57:36 +0800 (CST)
+From: Kever Yang <kever.yang@rock-chips.com>
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: Pull request: u-boot-rockchip/for-next
+Date: Fri, 15 Mar 2024 08:57:34 +0800
+Message-Id: <20240315005734.1052500-1-kever.yang@rock-chips.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: cGc64yWAft9jne586/SqTFalig6BwuivZ3qOW3Duxcts5IjF8YKKwbeFhwyMSKIUTDyw6owsL2IFxOO3OpEvbPyIGEmN3SFZhgTKrUV6KMrwV7J4syKCzzsanGcoIu8b687Of6z5WXfZFUwIRytV6qxreKpeEjlsstxA5nRchS2PawbM+EkapsB0VS/ayKeP6JugKsXgI2+jCgHtajn6S8IfA+QRx7XplUJkz0CKWmanDIBW+YAY1bUF7VCp9X55VFHey5l3nqKzfa0CkJ7Dg8QFxE47Nb8/QPETWLO9UVw/dG2M5CHK2Ddwku7lEa1NPD7p6wN0lFg+EOlW4htIVsMJZKGH2ZvlTdhQ4OrsmZyEnE0LkKCHOAmbEdbYDpuHib6YPozlS2uTUNP8PpQBNLjRcyavQCYSmODhWFm4bRpLQfh5cgCwnVYuf3xCJA4VuzWy2abEJpsQYFjLkvnvdfaGa0F4COpIiu0Kv0KGgHKu4kiu2MVWhgk34GWgiSYY/C89e1YgOT45xUR2JbjA1s/2BYfBSUFp0N6gOvnT0ugqrNk2bFOA2xP0iuXq2uVyzjT5wiujl7lwaeQUn5mp2+5JITdIb+joOASoMbSfSq3Z+2TLDZ7jAc8lkejzjn1/griwkxibBWllEcYWmYfNA/jIcWWaiuo12VxaGzG4pJpRUOmr/vQaDwnxSAgRjzjrkyEGw5kjc3tlxYZ7+werD9ol3/FsR7wH6gR/cLjsY7QQmgNFt1zSR1w1TxwRnPta
-X-OriginatorOrg: socionext.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: TYCPR01MB8375.jpnprd01.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 51f8cfd5-03dc-475b-a9d4-08dc44843a20
-X-MS-Exchange-CrossTenant-originalarrivaltime: 15 Mar 2024 00:09:48.1077 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 33c08a51-ea9e-46de-8669-aff1f467d3fe
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 2HKu6ChL1FLlUI5+Srop3ii4bL5QWBz0Z2kMZ7/sUC9afKTMC6oC5jnBNwGGICMJ65ARbHTXhE59OPOR6EZlgoniJ+oEbMfHS2PMKFPRJcY=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: OS3PR01MB10298
-X-CC-Mail-RelayStamp: CC/Mail Relayed
-X-CC-Mail-RelayStamp: CC/Mail EncServer Relayed
-To: <ilias.apalodimas@linaro.org>
-Cc: <u-boot@lists.denx.de>, <xypron.glpk@gmx.de>
+Content-Transfer-Encoding: 8bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDHkxCVklMSk1KSB1IQhpCSFUTARMWGhIXJBQOD1
+ lXWRgSC1lBWUpLSFVJQlVKT0lVTUxZV1kWGg8SFR0UWUFZT0tIVUpNT0lMTlVKS0tVSkJLS1kG
+X-HM-Tid: 0a8e3f9d49d503a9kunm49a6b90015e
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PhA6Fzo5HzMSTy1LCw4NCQkS
+ IyIaFB1VSlVKTEpLT01PSU5MS01OVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlKS0hVSUJVSk9JVU1MWVdZCAFZQUlNQ0hINwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -150,118 +67,455 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGkgSWxpYXMsDQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogSWxpYXMg
-QXBhbG9kaW1hcyA8aWxpYXMuYXBhbG9kaW1hc0BsaW5hcm8ub3JnPg0KPiBTZW50OiBUaHVyc2Rh
-eSwgTWFyY2ggMTQsIDIwMjQgMTA6NTQgUE0NCj4gVG86IEtvamltYSwgTWFzYWhpc2Ev5bCP5bO2
-IOmbheS5hSA8a29qaW1hLm1hc2FoaXNhQHNvY2lvbmV4dC5jb20+DQo+IENjOiB1LWJvb3RAbGlz
-dHMuZGVueC5kZTsgSGVpbnJpY2ggU2NodWNoYXJkdCA8eHlwcm9uLmdscGtAZ214LmRlPg0KPiBT
-dWJqZWN0OiBSZTogW1BBVENIXSBlZmlfbG9hZGVyOiBhY2NlcHQgYXBwZW5kIHdyaXRlIHdpdGgg
-dmFsaWQgc2l6ZSBhbmQgZGF0YQ0KPiANCj4gSGkgS29qaW1hLXNhbg0KPiANCj4gQXBvbG9naWVz
-IGZvciB0aGUgbGF0ZSByZXBseQ0KPiANCj4gT24gTW9uLCA0IE1hciAyMDI0IGF0IDA4OjEwLCBN
-YXNhaGlzYSBLb2ppbWENCj4gPGtvamltYS5tYXNhaGlzYUBzb2Npb25leHQuY29tPiB3cm90ZToN
-Cj4gPg0KPiA+IEN1cnJlbnQgInZhcmlhYmxlcyIgZWZpX3NlbGZ0ZXN0IHJlc3VsdCBpcyBpbmNv
-bnNpc3RlbnQNCj4gPiBiZXR3ZWVuIHRoZSBVLUJvb3QgZmlsZSBzdG9yYWdlIGFuZCB0aGUgdGVl
-LWJhc2VkIFN0YW5kYWxvbmVNTQ0KPiA+IFJQTUIgc2VjdXJlIHN0b3JhZ2UuDQo+ID4gVS1Cb290
-IGZpbGUgc3RvcmFnZSBpbXBsZW1lbnRhdGlvbiBkb2VzIG5vdCBhY2NlcHQgU2V0VmFyaWFsZQ0K
-PiA+IGNhbGwgdG8gbm9uLWV4aXN0ZW50IHZhcmlhYmxlIHdpdGggRUZJX1ZBUklBQkxFX0FQUEVO
-RF9XUklURQ0KPiA+IGF0dHJpYnV0ZSBhbmQgdmFsaWQgc2l6ZSBhbmQgZGF0YSwgaG93ZXZlciBp
-dCBpcyBhY2NlcHRlZA0KPiA+IGluIEVESyBJSSBTdGFuZGFsb25lTU0gaW1wbGVtZW50YXRpb24u
-DQo+IA0KPiBZZXMsDQo+IA0KPiA+DQo+ID4gU2luY2UgVUVGSSBzcGVjaWZpY2F0aW9uIGRvZXMg
-bm90IGNsZWFybHkgZGVzY3JpYmUgdGhlIGJlaGF2aW9yDQo+ID4gb2YgdGhlIGFwcGVuZCB3cml0
-ZSB0byBub24tZXhpc3RlbnQgdmFyaWFibGUsIGxldCdzIHVwZGF0ZQ0KPiA+IHRoZSBVLUJvb3Qg
-ZmlsZSBzdG9yYWdlIGltcGxlbWVudGF0aW9uIHRvIGdldCBhbGlnbmVkIHdpdGgNCj4gPiB0aGUg
-RURLIElJIHJlZmVyZW5jZSBpbXBsZW1lbnRhdGlvbi4NCj4gPg0KPiA+IFNpZ25lZC1vZmYtYnk6
-IE1hc2FoaXNhIEtvamltYSA8a29qaW1hLm1hc2FoaXNhQHNvY2lvbmV4dC5jb20+DQo+ID4gLS0t
-DQo+ID4gIGxpYi9lZmlfbG9hZGVyL2VmaV92YXJpYWJsZS5jICAgICAgICAgICAgIHwgMTMgKysr
-KystLS0tLQ0KPiA+ICBsaWIvZWZpX3NlbGZ0ZXN0L2VmaV9zZWxmdGVzdF92YXJpYWJsZXMuYyB8
-IDMwDQo+ICsrKysrKysrKysrKysrKysrKysrKy0tDQo+ID4gIDIgZmlsZXMgY2hhbmdlZCwgMzUg
-aW5zZXJ0aW9ucygrKSwgOCBkZWxldGlvbnMoLSkNCj4gPg0KPiA+IGRpZmYgLS1naXQgYS9saWIv
-ZWZpX2xvYWRlci9lZmlfdmFyaWFibGUuYyBiL2xpYi9lZmlfbG9hZGVyL2VmaV92YXJpYWJsZS5j
-DQo+ID4gaW5kZXggNDBmN2EwZmIxMC4uMTY5M2MzMzg3YiAxMDA2NDQNCj4gPiAtLS0gYS9saWIv
-ZWZpX2xvYWRlci9lZmlfdmFyaWFibGUuYw0KPiA+ICsrKyBiL2xpYi9lZmlfbG9hZGVyL2VmaV92
-YXJpYWJsZS5jDQo+ID4gQEAgLTI4MiwxMSArMjgyLDggQEAgZWZpX3N0YXR1c190IGVmaV9zZXRf
-dmFyaWFibGVfaW50KGNvbnN0IHUxNg0KPiAqdmFyaWFibGVfbmFtZSwNCj4gPiAgICAgICAgICAg
-ICAgICAgfQ0KPiA+ICAgICAgICAgICAgICAgICB0aW1lID0gdmFyLT50aW1lOw0KPiA+ICAgICAg
-ICAgfSBlbHNlIHsNCj4gPiAtICAgICAgICAgICAgICAgaWYgKGRlbGV0ZSB8fCBhcHBlbmQpDQo+
-ID4gLSAgICAgICAgICAgICAgICAgICAgICAgLyoNCj4gPiAtICAgICAgICAgICAgICAgICAgICAg
-ICAgKiBUcnlpbmcgdG8gZGVsZXRlIG9yIHRvIHVwZGF0ZSBhIG5vbi1leGlzdGVudA0KPiA+IC0g
-ICAgICAgICAgICAgICAgICAgICAgICAqIHZhcmlhYmxlLg0KPiA+IC0gICAgICAgICAgICAgICAg
-ICAgICAgICAqLw0KPiA+ICsgICAgICAgICAgICAgICBpZiAoZGVsZXRlKQ0KPiA+ICsgICAgICAg
-ICAgICAgICAgICAgICAgIC8qIFRyeWluZyB0byBkZWxldGUgYSBub24tZXhpc3RlbnQgdmFyaWFi
-bGUuICovDQo+ID4gICAgICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIEVGSV9OT1RfRk9VTkQ7
-DQo+IA0KPiBJIGFtIG5vdCBzdXJlIGFib3V0IHRoaXMgdGJoLiBUaGUgVUVGSSBzcGVjIHNheXMN
-Cj4gIldoZW4gdGhlIEVGSV9WQVJJQUJMRV9BUFBFTkRfV1JJVEUgYXR0cmlidXRlIGlzIHNldCwg
-dGhlbiBhDQo+IFNldFZhcmlhYmxlKCkgY2FsbCB3aXRoIGEgRGF0YVNpemUgb2YgemVybyB3aWxs
-IG5vdCBjYXVzZSBhbnkgY2hhbmdlDQo+IHRvIHRoZSB2YXJpYWJsZSB2YWx1ZSAodGhlIHRpbWVz
-dGFtcA0KPiBhc3NvY2lhdGVkIHdpdGggdGhlIHZhcmlhYmxlIG1heSBiZSB1cGRhdGVkIGhvd2V2
-ZXIsIGV2ZW4gaWYgbm8gbmV3DQo+IGRhdGEgdmFsdWUgaXMgcHJvdmlkZWQ7c2VlIHRoZSBkZXNj
-cmlwdGlvbg0KPiBvZiB0aGUgRUZJX1ZBUklBQkxFX0FVVEhFTlRJQ0FUSU9OXzIgZGVzY3JpcHRv
-ciBiZWxvdykuIEluIHRoaXMgY2FzZQ0KPiB0aGUgRGF0YVNpemUgd2lsbCBub3QgYmUgemVybw0K
-PiBzaW5jZSB0aGUgRUZJX1ZBUklBQkxFX0FVVEhFTlRJQ0FUSU9OXzIgZGVzY3JpcHRvciB3aWxs
-IGJlIHBvcHVsYXRlZCkiDQo+IA0KPiBJIHRoaW5rIHRoaXMgYXNzdW1lcyB0aGUgdmFyaWFibGUg
-ZXhpc3RzLiBJcyB0aGVyZSBhIGRpZmZlcmVudCBjaGFwdGVyDQo+IGluIHRoZSBzcGVjIHRoYXQg
-ZGVzY3JpYmVzIHRoZSBiZWhhdmlvcj8NCg0KTm8sIEkgY291bGQgbm90IGZpbmQgaXQuDQpJJ20g
-YWxzbyBub3Qgc3VyZSB3aGF0IHRoZSBVRUZJIHNwZWMgZXhwZWN0cy4NCg0KPiANCj4gPiAgICAg
-ICAgIH0NCj4gPg0KPiA+IEBAIC0zMjksNyArMzI2LDExIEBAIGVmaV9zdGF0dXNfdCBlZmlfc2V0
-X3ZhcmlhYmxlX2ludChjb25zdCB1MTYNCj4gKnZhcmlhYmxlX25hbWUsDQo+ID4gICAgICAgICAg
-ICAgICAgIC8qIEVGSV9OT1RfRk9VTkQgaGFzIGJlZW4gaGFuZGxlZCBiZWZvcmUgKi8NCj4gPiAg
-ICAgICAgICAgICAgICAgYXR0cmlidXRlcyA9IHZhci0+YXR0cjsNCj4gPiAgICAgICAgICAgICAg
-ICAgcmV0ID0gRUZJX1NVQ0NFU1M7DQo+ID4gLSAgICAgICB9IGVsc2UgaWYgKGFwcGVuZCkgew0K
-PiA+ICsgICAgICAgfSBlbHNlIGlmIChhcHBlbmQgJiYgdmFyKSB7DQo+ID4gKyAgICAgICAgICAg
-ICAgIC8qDQo+ID4gKyAgICAgICAgICAgICAgICAqIGRhdGEgaXMgYXBwZW5kZWQgaWYgRUZJX1ZB
-UklBQkxFX0FQUEVORF9XUklURSBpcw0KPiBzZXQgYW5kDQo+ID4gKyAgICAgICAgICAgICAgICAq
-IHZhcmlhYmxlIGV4aXN0cy4NCj4gPiArICAgICAgICAgICAgICAgICovDQo+ID4gICAgICAgICAg
-ICAgICAgIHUxNiAqb2xkX2RhdGEgPSB2YXItPm5hbWU7DQo+ID4NCj4gPiAgICAgICAgICAgICAg
-ICAgZm9yICg7ICpvbGRfZGF0YTsgKytvbGRfZGF0YSkNCj4gPiBkaWZmIC0tZ2l0IGEvbGliL2Vm
-aV9zZWxmdGVzdC9lZmlfc2VsZnRlc3RfdmFyaWFibGVzLmMNCj4gYi9saWIvZWZpX3NlbGZ0ZXN0
-L2VmaV9zZWxmdGVzdF92YXJpYWJsZXMuYw0KPiA+IGluZGV4IGM3YTNmZGJhYTYuLjBjMmM3NjU5
-OWUgMTAwNjQ0DQo+ID4gLS0tIGEvbGliL2VmaV9zZWxmdGVzdC9lZmlfc2VsZnRlc3RfdmFyaWFi
-bGVzLmMNCj4gPiArKysgYi9saWIvZWZpX3NlbGZ0ZXN0L2VmaV9zZWxmdGVzdF92YXJpYWJsZXMu
-Yw0KPiA+IEBAIC0xMzEsMTMgKzEzMSwzOSBAQCBzdGF0aWMgaW50IGV4ZWN1dGUodm9pZCkNCj4g
-PiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKHVuc2lnbmVkIGludClsZW4pOw0KPiA+ICAg
-ICAgICAgaWYgKG1lbWNtcChkYXRhLCB2LCBsZW4pKQ0KPiA+ICAgICAgICAgICAgICAgICBlZmlf
-c3RfdG9kbygiR2V0VmFyaWFibGUgcmV0dXJuZWQgd3JvbmcgdmFsdWVcbiIpOw0KPiA+IC0gICAg
-ICAgLyogQXBwZW5kIHZhcmlhYmxlIDIgKi8NCj4gPiArICAgICAgIC8qIEFwcGVuZCB2YXJpYWJs
-ZSAyLCB3cml0ZSB0byBub24tZXhpc3RlbnQgdmFyaWFibGUgKi8NCj4gPiAgICAgICAgIHJldCA9
-IHJ1bnRpbWUtPnNldF92YXJpYWJsZSh1ImVmaV9ub25lIiwgJmd1aWRfdmVuZG9yMSwNCj4gPg0K
-PiBFRklfVkFSSUFCTEVfQk9PVFNFUlZJQ0VfQUNDRVNTIHwNCj4gPiAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBFRklfVkFSSUFCTEVfQVBQRU5EX1dSSVRFLA0KPiA+ICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDE1LCB2KTsNCj4gPiArICAgICAgIGlmIChy
-ZXQgIT0gRUZJX1NVQ0NFU1MpIHsNCj4gPiArICAgICAgICAgICAgICAgZWZpX3N0X2Vycm9yKCJT
-ZXRWYXJpYWJsZShBUFBFTkRfV1JJVEUpIHdpdGggdmFsaWQgc2l6ZQ0KPiBhbmQgZGF0YSB0byBu
-b24tZXhpc3RlbnQgdmFyaWFibGUgbXVzdCBiZSBzdWNjY2Vzc2Z1bFxuIik7DQo+ID4gKyAgICAg
-ICAgICAgICAgIHJldHVybiBFRklfU1RfRkFJTFVSRTsNCj4gPiArICAgICAgIH0NCj4gPiArICAg
-ICAgIGxlbiA9IEVGSV9TVF9NQVhfREFUQV9TSVpFOw0KPiA+ICsgICAgICAgcmV0ID0gcnVudGlt
-ZS0+Z2V0X3ZhcmlhYmxlKHUiZWZpX25vbmUiLCAmZ3VpZF92ZW5kb3IxLA0KPiA+ICsgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICZhdHRyLCAmbGVuLCBkYXRhKTsNCj4gPiArICAg
-ICAgIGlmIChyZXQgIT0gRUZJX1NVQ0NFU1MpIHsNCj4gPiArICAgICAgICAgICAgICAgZWZpX3N0
-X2Vycm9yKCJHZXRWYXJpYWJsZSBmYWlsZWRcbiIpOw0KPiA+ICsgICAgICAgICAgICAgICByZXR1
-cm4gRUZJX1NUX0ZBSUxVUkU7DQo+ID4gKyAgICAgICB9DQo+ID4gKyAgICAgICBpZiAobGVuICE9
-IDE1KQ0KPiA+ICsgICAgICAgICAgICAgICBlZmlfc3RfdG9kbygiR2V0VmFyaWFibGUgcmV0dXJu
-ZWQgd3JvbmcgbGVuZ3RoICV1XG4iLA0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAo
-dW5zaWduZWQgaW50KWxlbik7DQo+ID4gKyAgICAgICBpZiAobWVtY21wKGRhdGEsIHYsIGxlbikp
-DQo+ID4gKyAgICAgICAgICAgICAgIGVmaV9zdF90b2RvKCJHZXRWYXJpYWJsZSByZXR1cm5lZCB3
-cm9uZyB2YWx1ZVxuIik7DQo+ID4gKyAgICAgICAvKiBEZWxldGUgdmFyaWFibGUgZWZpX25vbmUg
-Ki8NCj4gPiArICAgICAgIHJldCA9IHJ1bnRpbWUtPnNldF92YXJpYWJsZSh1ImVmaV9ub25lIiwg
-Jmd1aWRfdmVuZG9yMSwNCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAw
-LCAwLCBOVUxMKTsNCj4gPiArICAgICAgIGlmIChyZXQgIT0gRUZJX1NVQ0NFU1MpIHsNCj4gPiAr
-ICAgICAgICAgICAgICAgZWZpX3N0X2Vycm9yKCJTZXRWYXJpYWJsZSBmYWlsZWRcbiIpOw0KPiA+
-ICsgICAgICAgICAgICAgICByZXR1cm4gRUZJX1NUX0ZBSUxVUkU7DQo+ID4gKyAgICAgICB9DQo+
-ID4gKyAgICAgICBsZW4gPSBFRklfU1RfTUFYX0RBVEFfU0laRTsNCj4gPiArICAgICAgIHJldCA9
-IHJ1bnRpbWUtPmdldF92YXJpYWJsZSh1ImVmaV9ub25lIiwgJmd1aWRfdmVuZG9yMSwNCj4gPiAr
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAmYXR0ciwgJmxlbiwgZGF0YSk7DQo+
-ID4gICAgICAgICBpZiAocmV0ICE9IEVGSV9OT1RfRk9VTkQpIHsNCj4gPiAtICAgICAgICAgICAg
-ICAgZWZpX3N0X2Vycm9yKCJTZXRWYXJpYWJsZShBUFBFTkRfV1JJVEUpIHdpdGggc2l6ZSAwIHRv
-DQo+IG5vbi1leGlzdGVudCB2YXJpYWJsZSByZXR1cm5zIHdyb25nIGNvZGVcbiIpOw0KPiA+ICsg
-ICAgICAgICAgICAgICBlZmlfc3RfZXJyb3IoIlZhcmlhYmxlIHdhcyBub3QgZGVsZXRlZFxuIik7
-DQo+ID4gICAgICAgICAgICAgICAgIHJldHVybiBFRklfU1RfRkFJTFVSRTsNCj4gDQo+IFRoaXMg
-dXNlZCB0byBmYWlsIGFzIHdlbGwgWzBdLiBEb2VzIGl0IHdvcmsgbm93Pw0KDQpZZXMuIFdpdGgg
-dGhpcyBwYXRjaCBhcHBsaWVkLCBib3RoIFUtQm9vdCBmaWxlIHN0b3JhZ2UgYW5kIFN0TU0NCnBh
-c3MgdGhlIGVmaSBzZWxmdGVzdC4NCg0KVGhhbmtzLA0KTWFzYWhpc2EgS29qaW1hDQoNCj4gDQo+
-ID4gICAgICAgICB9DQo+ID4gICAgICAgICAvKiBFbnVtZXJhdGUgdmFyaWFibGVzICovDQo+ID4g
-LS0NCj4gPiAyLjM0LjENCj4gPg0KPiANCj4gWzBdDQo+IGh0dHBzOi8vbG9yZS5rZXJuZWwub3Jn
-L3UtYm9vdC9DQUNfaVdqTDJHMm12UWI2V05HTFR4cit4ajY0eHJZdU9LcjhHDQo+IDMtM3o4THY3
-eVg1WFNnQG1haWwuZ21haWwuY29tLw0KPiANCj4gUmVnYXJkcw0KPiAvSWxpYXMNCg==
+Hi Tom,
 
+This is for next;
+Please pull the updates for rockchip platform:
+- Add board: rk3588 Generic, Cool Pi CM5, Theobroma-Systems RK3588 Jaguar SBC,
+	     Toybrick TB-RK3588X;
+	     rk3588s Cool Pi 4B;
+	     rk3566 Pine64 PineTab2;
+- Add saradc v2 support;
+- Add PMIC RK806 support;
+- rk3588 disable force_jtag by default;
+- Migrate to use IO-domain driver for all boards;
+- Use common bss and stack addresses for rk33xx and rk35xx boards;
+- Other updates for driver, config and dts;
 
+CI:
+https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/pipelines/19951
 
+Thanks,
+- Kever
+
+The following changes since commit 20a0ce574d6642e0dfe651467159039fac48cc4f:
+
+  Merge tag 'v2024.04-rc4' into next (2024-03-11 15:27:20 -0400)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-rockchip.git tags/u-boot-rockchip-20240315
+
+for you to fetch changes up to 12bc1a5462a22f6dc5b91ecbf092cbaf94e66820:
+
+  rockchip: boot_mode: fix rockchip_dnl_key_pressed requiring ADC support (2024-03-14 18:20:04 +0800)
+
+----------------------------------------------------------------
+Andy Yan (2):
+      board: rockchip: Add support for rk3588s based Cool Pi 4B
+      board: rockchip: Add support for rk3588 based Cool Pi CM5 EVB
+
+Ben Wolsieffer (1):
+      rockchip: load env from boot MMC device
+
+Chen-Yu Tsai (5):
+      rockchip: rk3328: Read cpuid and generate MAC address from efuse
+      rockchip: rk3399: Read cpuid and generate MAC address from efuse
+      rockchip: rk3328: regenerate defconfigs
+      rockchip: rk3399: regenerate defconfigs
+      rockchip: nanopi-r4s: Drop ROCKCHIP_OTP
+
+Chris Morgan (4):
+      arm: dts: rockchip: rk3566: Remove unnecessary clks from rgxx3
+      board: rockchip: Add support for Powkiddy RGB10MAX3
+      configs: Remove unnecessary options from RGxx3 config
+      board: rockchip: Add early ADC button detect for RGxx3
+
+Elon Zhang (1):
+      board: rockchip: add Rockchip Toybrick TB-RK3588X board
+
+Jonas Karlman (42):
+      rockchip: rk3328: Update default u-boot, spl-boot-order prop
+      rockchip: rk3328-evb: Update defconfig
+      rockchip: rk3328-rock64: Update defconfig
+      rockchip: rk3328-roc-cc: Update defconfig
+      rockchip: rk3328-rock-pi-e: Update defconfig
+      rockchip: rk3328-nanopi-r2: Update defconfig
+      rockchip: rk3328-orangepi-r1-plus: Update defconfig
+      rockchip: rk3328: Fix loading FIT from SD-card when booting from eMMC
+      gpio: rockchip: Use gpio alias id as gpio bank id
+      rng: rockchip: Use same compatible as linux
+      rockchip: rk3328: Sync device tree from linux v6.8-rc1
+      Revert "rockchip: Allow booting from SPI"
+      rockchip: rk3328: Add support to build bootable SPI image
+      rockchip: rk3328-rock64: Enable boot from SPI NOR flash
+      rockchip: rk3328-orangepi-r1-plus: Enable boot from SPI NOR flash
+      rockchip: spl: Enable caches to speed up checksum validation
+      phy: rockchip-inno-usb2: Write to correct GRF
+      phy: rockchip-inno-usb2: Limit changes made to regs
+      rockchip: board: Add minimal generic RK3588S/RK3588 board
+      board: rockchip: Add Pine64 PineTab2
+      rockchip: Add common default bss and stack addresses
+      rockchip: Use common bss and stack addresses on RK3308
+      rockchip: Use common bss and stack addresses on RK3328
+      rockchip: Use common bss and stack addresses on RK3399
+      rockchip: Use common bss and stack addresses on RK356x
+      rockchip: Use common bss and stack addresses on RK3588
+      rockchip: Update the default USB Product ID value
+      rockchip: board: Prepare for use of DM_USB_GADGET with DWC2_OTG
+      rockchip: board: Use a common USB Product ID for UMS
+      rockchip: Migrate to use DM_USB_GADGET on RK3328
+      board: rockchip: rk3399: Add device tree files to MAINTAINERS
+      board: rockchip: rk3399: Add myself as reviewer to MAINTAINERS
+      board: rockchip: rk3399: Remove unused board_early_init_f functions
+      board: rockchip: Add a common ROCK Pi 4 target
+      rockchip: io-domain: Add support for RK3399
+      rockchip: pine64: rockpro64: Migrate to use IO-domain driver
+      rockchip: pine64: pinebook-pro: Migrate to use IO-domain driver
+      rockchip: pine64: pinephone-pro: Migrate to use IO-domain driver
+      rockchip: vamrs: rock960: Migrate to use IO-domain driver
+      rockchip: theobroma-systems: puma: Migrate to use IO-domain driver
+      rockchip: google: gru: Migrate to use IO-domain driver
+      rockchip: board: Move gpt_capsule_update_setup() call
+
+Quentin Schulz (35):
+      rockchip: avoid out-of-bounds when computing cpuid
+      rockchip: add weak function symbol called at the beginning of misc_init_r
+      rockchip: google: gru: migrate to rockchip_early_misc_init_r
+      rockchip: pine64: pinebook-pro: migrate to rockchip_early_misc_init_r
+      rockchip: pine64: pinephone-pro: migrate to rockchip_early_misc_init_r
+      rockchip: pine64: rockpro64: migrate to rockchip_early_misc_init_r
+      rockchip: theobroma-systems: puma: migrate to rockchip_early_misc_init_r
+      rockchip: theobroma-systems: ringneck: migrate to rockchip_early_misc_init_r
+      rockchip: merge misc.c into board.c
+      rockchip: transform rockchip_capsule_update_board_setup into a weak function symbol
+      rockchip: rk3588: disable force_jtag by default
+      rockchip: rk3588: add constants for some register address spaces
+      rockchip: migrate hardware.h inclusion into appropriate files
+      rockchip: include asm/io.h directly in asm/arch-rockchip/hardware.h
+      rockchip: rk3588: bind MMC controllers in U-Boot proper pre-reloc
+      board: rockchip: add Theobroma-Systems RK3588 Jaguar SBC
+      rockchip: puma-rk3399: MAINTAINERS: use glob for dtses
+      rockchip: rk3399-puma: migrate README to doc/board in rST format
+      rockchip: ringneck_px30: migrate README to doc/board in rST format
+      rockchip: ringneck_px30: update website link
+      rockchip: spi: rk_spi: do not write bytes when in read-only mode
+      regulator: rk8xx: remove unused functions
+      regulator: rk8xx: add indirection level for some ldo callbacks
+      power: rk8xx: add support for RK806
+      pmic: reword help text
+      rockchip: adc: rockchip-saradc: use union for preparing for v2
+      rockchip: adc: rockchip-saradc: factor out channel_data callback
+      rockchip: adc: rockchip-saradc: factor out start_channel callback
+      rockchip: adc: rockchip-saradc: factor out stop callback
+      rockchip: adc: rockchip-saradc: add support for RK3588
+      power: pmic: rk8xx: fix duplicate prompt
+      rockchip: jaguar-rk3588: enable SARADC and derivatives
+      adc: add missing depends on ADC for controller drivers
+      button: add missing ADC dependency for BUTTON_ADC
+      rockchip: boot_mode: fix rockchip_dnl_key_pressed requiring ADC support
+
+William Wu (1):
+      regulator: rk8xx: fix SWITCH enable on RK809
+
+ Kconfig                                            |   2 +-
+ arch/arm/dts/Makefile                              |  10 +-
+ arch/arm/dts/rk3328-evb-u-boot.dtsi                |   4 +
+ arch/arm/dts/rk3328-evb.dts                        |   1 +
+ arch/arm/dts/rk3328-nanopi-r2c-plus-u-boot.dtsi    |   6 -
+ arch/arm/dts/rk3328-nanopi-r2s-u-boot.dtsi         |  24 +-
+ arch/arm/dts/rk3328-nanopi-r2s.dts                 |   3 +-
+ .../dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi    |  34 +-
+ arch/arm/dts/rk3328-orangepi-r1-plus-lts.dts       |   4 +-
+ arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi   |  34 +-
+ arch/arm/dts/rk3328-orangepi-r1-plus.dts           |   1 +
+ arch/arm/dts/rk3328-roc-cc-u-boot.dtsi             |  22 +-
+ arch/arm/dts/rk3328-roc-cc.dts                     |   3 +-
+ arch/arm/dts/rk3328-rock-pi-e-u-boot.dtsi          |  18 +-
+ arch/arm/dts/rk3328-rock-pi-e.dts                  |  55 ++
+ arch/arm/dts/rk3328-rock64-u-boot.dtsi             |  32 +-
+ arch/arm/dts/rk3328-rock64.dts                     |   1 +
+ arch/arm/dts/rk3328-u-boot.dtsi                    | 106 ++-
+ arch/arm/dts/rk3328.dtsi                           | 105 ++-
+ arch/arm/dts/rk3399-u-boot.dtsi                    |   2 +-
+ arch/arm/dts/rk3566-anbernic-rgxx3-u-boot.dtsi     |  31 -
+ arch/arm/dts/rk3566-anbernic-rgxx3.dts             |  16 +-
+ arch/arm/dts/rk3566-pinetab2-u-boot.dtsi           |  44 +
+ arch/arm/dts/rk3566-pinetab2-v0.1-u-boot.dtsi      |   3 +
+ arch/arm/dts/rk3566-pinetab2-v0.1.dts              |  28 +
+ arch/arm/dts/rk3566-pinetab2-v2.0-u-boot.dtsi      |   3 +
+ arch/arm/dts/rk3566-pinetab2-v2.0.dts              |  48 ++
+ arch/arm/dts/rk3566-pinetab2.dtsi                  | 943 +++++++++++++++++++++
+ arch/arm/dts/rk3588-coolpi-cm5-evb-u-boot.dtsi     |  29 +
+ arch/arm/dts/rk3588-coolpi-cm5-evb.dts             | 216 +++++
+ arch/arm/dts/rk3588-coolpi-cm5.dtsi                | 649 ++++++++++++++
+ arch/arm/dts/rk3588-generic-u-boot.dtsi            |   3 +
+ arch/arm/dts/rk3588-generic.dts                    |  44 +
+ arch/arm/dts/rk3588-jaguar-u-boot.dtsi             |  33 +
+ arch/arm/dts/rk3588-jaguar.dts                     | 803 ++++++++++++++++++
+ arch/arm/dts/rk3588-toybrick-x0-u-boot.dtsi        |  12 +
+ arch/arm/dts/rk3588-toybrick-x0.dts                | 688 +++++++++++++++
+ arch/arm/dts/rk3588s-coolpi-4b-u-boot.dtsi         |  29 +
+ arch/arm/dts/rk3588s-coolpi-4b.dts                 | 812 ++++++++++++++++++
+ arch/arm/dts/rk3588s-u-boot.dtsi                   |   2 +
+ arch/arm/include/asm/arch-rockchip/cru_rk3588.h    |   2 +
+ arch/arm/include/asm/arch-rockchip/grf_rk3588.h    |  24 +
+ arch/arm/include/asm/arch-rockchip/hardware.h      |   2 +
+ arch/arm/include/asm/arch-rockchip/ioc_rk3588.h    |   6 +
+ arch/arm/include/asm/arch-rockchip/misc.h          |  14 -
+ arch/arm/mach-rockchip/Kconfig                     |  85 ++
+ arch/arm/mach-rockchip/Makefile                    |   1 -
+ arch/arm/mach-rockchip/board.c                     | 199 ++++-
+ arch/arm/mach-rockchip/boot_mode.c                 |   4 +
+ arch/arm/mach-rockchip/cpu-info.c                  |   1 -
+ arch/arm/mach-rockchip/misc.c                      | 135 ---
+ arch/arm/mach-rockchip/px30/px30.c                 |   1 -
+ arch/arm/mach-rockchip/rk3036/rk3036.c             |   1 -
+ arch/arm/mach-rockchip/rk3036/sdram_rk3036.c       |   1 -
+ arch/arm/mach-rockchip/rk3066/rk3066.c             |   2 +-
+ arch/arm/mach-rockchip/rk3188/rk3188.c             |   1 -
+ arch/arm/mach-rockchip/rk322x/rk322x.c             |   1 -
+ arch/arm/mach-rockchip/rk3288/rk3288.c             |   1 -
+ arch/arm/mach-rockchip/rk3308/Kconfig              |   7 +-
+ arch/arm/mach-rockchip/rk3308/rk3308.c             |   1 -
+ arch/arm/mach-rockchip/rk3328/Kconfig              |  11 +-
+ arch/arm/mach-rockchip/rk3328/rk3328.c             |   2 +-
+ arch/arm/mach-rockchip/rk3368/rk3368.c             |   1 -
+ arch/arm/mach-rockchip/rk3399/Kconfig              |  13 +-
+ arch/arm/mach-rockchip/rk3399/rk3399.c             |   1 -
+ arch/arm/mach-rockchip/rk3568/Kconfig              |   7 +-
+ arch/arm/mach-rockchip/rk3568/rk3568.c             |   1 -
+ arch/arm/mach-rockchip/rk3588/Kconfig              |  62 +-
+ arch/arm/mach-rockchip/rk3588/rk3588.c             |  16 +-
+ arch/arm/mach-rockchip/rv1126/rv1126.c             |   1 -
+ arch/arm/mach-rockchip/spl-boot-order.c            |   3 -
+ arch/arm/mach-rockchip/spl.c                       |  16 +-
+ board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c         |  72 ++
+ board/elgin/elgin_rv1108/elgin_rv1108.c            |   1 -
+ board/firefly/firefly-rk3308/roc_cc_rk3308.c       |   1 -
+ board/firefly/roc-pc-rk3399/MAINTAINERS            |   1 +
+ board/firefly/roc-pc-rk3399/roc-pc-rk3399.c        |  22 +-
+ board/google/gru/gru.c                             |  52 --
+ board/pine64/pinebook-pro-rk3399/MAINTAINERS       |   6 +-
+ board/pine64/pinebook-pro-rk3399/Makefile          |   1 -
+ .../pinebook-pro-rk3399/pinebook-pro-rk3399.c      |  76 --
+ board/pine64/pinephone-pro-rk3399/MAINTAINERS      |   5 +-
+ board/pine64/pinephone-pro-rk3399/Makefile         |   1 -
+ .../pinephone-pro-rk3399/pinephone-pro-rk3399.c    |  78 --
+ board/pine64/quartz64_rk3566/MAINTAINERS           |  11 +
+ board/pine64/rockpro64_rk3399/MAINTAINERS          |   3 +-
+ board/pine64/rockpro64_rk3399/Makefile             |   7 -
+ board/pine64/rockpro64_rk3399/rockpro64-rk3399.c   |  56 --
+ board/radxa/rockpi4-rk3399/Kconfig                 |  15 +
+ board/radxa/rockpi4-rk3399/MAINTAINERS             |  22 +
+ .../evb_rk3399 => radxa/rockpi4-rk3399}/Makefile   |   2 +-
+ .../rockpi4-rk3399/rockpi4-rk3399.c}               |  33 +-
+ board/rockchip/evb_rk3328/MAINTAINERS              |  11 +
+ board/rockchip/evb_rk3328/README                   |  70 --
+ board/rockchip/evb_rk3399/MAINTAINERS              |  48 +-
+ board/rockchip/evb_rk3588/MAINTAINERS              |  22 +
+ board/rockchip/evb_rv1108/evb_rv1108.c             |   1 -
+ board/rockchip/tinker_rk3288/tinker-rk3288.c       |  12 -
+ board/rockchip/toybrick_rk3588/Kconfig             |  12 +
+ board/rockchip/toybrick_rk3588/MAINTAINERS         |   8 +
+ board/rockchip/toybrick_rk3588/Makefile            |   6 +
+ board/rockchip/toybrick_rk3588/toybrick-rk3588.c   |  39 +
+ board/theobroma-systems/common/common.c            |  30 -
+ board/theobroma-systems/jaguar_rk3588/Kconfig      |  16 +
+ board/theobroma-systems/jaguar_rk3588/MAINTAINERS  |  13 +
+ board/theobroma-systems/jaguar_rk3588/Makefile     |  10 +
+ .../jaguar_rk3588/jaguar_rk3588.c                  |  53 ++
+ board/theobroma-systems/puma_rk3399/MAINTAINERS    |   3 +-
+ board/theobroma-systems/puma_rk3399/README         |  90 +-
+ board/theobroma-systems/puma_rk3399/puma-rk3399.c  |  42 +-
+ board/theobroma-systems/ringneck_px30/MAINTAINERS  |   3 +-
+ board/theobroma-systems/ringneck_px30/README       |  70 +-
+ .../ringneck_px30/ringneck-px30.c                  |  20 +-
+ board/vamrs/rock960_rk3399/MAINTAINERS             |   2 +
+ board/vamrs/rock960_rk3399/Makefile                |   6 -
+ board/vamrs/rock960_rk3399/rock960-rk3399.c        |  28 -
+ cmd/pmic.c                                         |   4 +-
+ configs/anbernic-rgxx3-rk3566_defconfig            |  28 +-
+ configs/bpi-r2-pro-rk3568_defconfig                |  13 -
+ configs/chromebook_bob_defconfig                   |   4 +-
+ configs/chromebook_kevin_defconfig                 |   4 +-
+ configs/coolpi-4b-rk3588s_defconfig                | 100 +++
+ configs/coolpi-cm5-evb-rk3588_defconfig            | 100 +++
+ configs/eaidk-610-rk3399_defconfig                 |  11 -
+ configs/evb-rk3308_defconfig                       |  13 -
+ configs/evb-rk3328_defconfig                       |  45 +-
+ configs/evb-rk3399_defconfig                       |  11 -
+ configs/evb-rk3568_defconfig                       |  13 -
+ configs/evb-rk3588_defconfig                       |  13 -
+ configs/ficus-rk3399_defconfig                     |   1 +
+ configs/firefly-rk3399_defconfig                   |  13 -
+ configs/generic-rk3568_defconfig                   |  13 -
+ configs/generic-rk3588_defconfig                   |  53 ++
+ configs/jaguar-rk3588_defconfig                    | 109 +++
+ configs/khadas-edge-captain-rk3399_defconfig       |  11 -
+ configs/khadas-edge-rk3399_defconfig               |  11 -
+ configs/khadas-edge-v-rk3399_defconfig             |  11 -
+ configs/leez-rk3399_defconfig                      |  11 -
+ configs/lubancat-2-rk3568_defconfig                |  13 -
+ configs/nanopc-t4-rk3399_defconfig                 |  11 -
+ configs/nanopc-t6-rk3588_defconfig                 |  13 -
+ configs/nanopi-m4-2gb-rk3399_defconfig             |  11 -
+ configs/nanopi-m4-rk3399_defconfig                 |  11 -
+ configs/nanopi-m4b-rk3399_defconfig                |  11 -
+ configs/nanopi-neo4-rk3399_defconfig               |  11 -
+ configs/nanopi-r2c-plus-rk3328_defconfig           |  43 +-
+ configs/nanopi-r2c-rk3328_defconfig                |  43 +-
+ configs/nanopi-r2s-rk3328_defconfig                |  43 +-
+ configs/nanopi-r4s-rk3399_defconfig                |  14 -
+ configs/nanopi-r5c-rk3568_defconfig                |  13 -
+ configs/nanopi-r5s-rk3568_defconfig                |  13 -
+ configs/neu6a-io-rk3588_defconfig                  |  13 -
+ configs/neu6b-io-rk3588_defconfig                  |  13 -
+ configs/odroid-m1-rk3568_defconfig                 |  13 -
+ configs/orangepi-5-plus-rk3588_defconfig           |  13 -
+ configs/orangepi-5-rk3588s_defconfig               |  13 -
+ configs/orangepi-r1-plus-lts-rk3328_defconfig      |  52 +-
+ configs/orangepi-r1-plus-rk3328_defconfig          |  52 +-
+ configs/orangepi-rk3399_defconfig                  |  11 -
+ configs/pinebook-pro-rk3399_defconfig              |  14 +-
+ configs/pinephone-pro-rk3399_defconfig             |  14 +-
+ configs/pinetab2-rk3566_defconfig                  | 105 +++
+ configs/puma-rk3399_defconfig                      |   4 +-
+ configs/quartz64-a-rk3566_defconfig                |  13 -
+ configs/quartz64-b-rk3566_defconfig                |  13 -
+ configs/quartzpro64-rk3588_defconfig               |  13 -
+ configs/radxa-cm3-io-rk3566_defconfig              |  13 -
+ configs/radxa-e25-rk3568_defconfig                 |  13 -
+ configs/roc-cc-rk3308_defconfig                    |  13 -
+ configs/roc-cc-rk3328_defconfig                    |  38 +-
+ configs/roc-pc-mezzanine-rk3399_defconfig          |  13 -
+ configs/roc-pc-rk3399_defconfig                    |  13 -
+ configs/rock-3a-rk3568_defconfig                   |  13 -
+ configs/rock-4c-plus-rk3399_defconfig              |  15 +-
+ configs/rock-4se-rk3399_defconfig                  |  15 +-
+ configs/rock-pi-4-rk3399_defconfig                 |  15 +-
+ configs/rock-pi-4c-rk3399_defconfig                |  15 +-
+ configs/rock-pi-e-rk3328_defconfig                 |  42 +-
+ configs/rock-pi-n10-rk3399pro_defconfig            |  12 -
+ configs/rock-pi-s-rk3308_defconfig                 |  13 -
+ configs/rock5a-rk3588s_defconfig                   |  13 -
+ configs/rock5b-rk3588_defconfig                    |  13 -
+ configs/rock64-rk3328_defconfig                    |  47 +-
+ configs/rock960-rk3399_defconfig                   |  13 +-
+ configs/rockpro64-rk3399_defconfig                 |  14 +-
+ configs/soquartz-blade-rk3566_defconfig            |  13 -
+ configs/soquartz-cm4-rk3566_defconfig              |  13 -
+ configs/soquartz-model-a-rk3566_defconfig          |  13 -
+ configs/toybrick-rk3588_defconfig                  |  68 ++
+ configs/turing-rk1-rk3588_defconfig                |  13 -
+ doc/board/anbernic/rgxx3.rst                       |   1 +
+ doc/board/index.rst                                |   1 +
+ doc/board/rockchip/rockchip.rst                    |  15 +-
+ doc/board/theobroma-systems/index.rst              |  11 +
+ doc/board/theobroma-systems/jaguar_rk3588.rst      | 100 +++
+ doc/board/theobroma-systems/puma_rk3399.rst        | 126 +++
+ doc/board/theobroma-systems/ringneck_px30.rst      |  95 +++
+ drivers/adc/Kconfig                                |   4 +
+ drivers/adc/rockchip-saradc.c                      | 202 ++++-
+ drivers/button/Kconfig                             |   1 +
+ drivers/clk/rockchip/clk_pll.c                     |   1 -
+ drivers/clk/rockchip/clk_px30.c                    |   1 -
+ drivers/clk/rockchip/clk_rk3036.c                  |   1 -
+ drivers/clk/rockchip/clk_rk3066.c                  |   1 -
+ drivers/clk/rockchip/clk_rk3128.c                  |   1 -
+ drivers/clk/rockchip/clk_rk3188.c                  |   1 -
+ drivers/clk/rockchip/clk_rk322x.c                  |   1 -
+ drivers/clk/rockchip/clk_rk3288.c                  |   1 -
+ drivers/clk/rockchip/clk_rk3308.c                  |   1 -
+ drivers/clk/rockchip/clk_rk3328.c                  |   1 -
+ drivers/clk/rockchip/clk_rk3368.c                  |   1 -
+ drivers/clk/rockchip/clk_rk3399.c                  |   1 -
+ drivers/clk/rockchip/clk_rk3568.c                  |   1 -
+ drivers/clk/rockchip/clk_rk3588.c                  |   1 -
+ drivers/clk/rockchip/clk_rv1108.c                  |   1 -
+ drivers/clk/rockchip/clk_rv1126.c                  |   1 -
+ drivers/gpio/rk_gpio.c                             |   8 +-
+ drivers/misc/rockchip-io-domain.c                  |  79 +-
+ drivers/net/gmac_rockchip.c                        |   1 -
+ drivers/phy/rockchip/phy-rockchip-inno-usb2.c      | 158 +---
+ drivers/power/pmic/Kconfig                         |   2 +-
+ drivers/power/pmic/rk8xx.c                         |  91 ++
+ drivers/power/regulator/rk8xx.c                    | 595 ++++++++++++-
+ drivers/ram/rockchip/dmc-rk3368.c                  |   2 +-
+ drivers/ram/rockchip/sdram_px30.c                  |   1 -
+ drivers/ram/rockchip/sdram_rk3066.c                |   1 -
+ drivers/ram/rockchip/sdram_rk3188.c                |   2 +-
+ drivers/ram/rockchip/sdram_rk322x.c                |   1 -
+ drivers/ram/rockchip/sdram_rk3288.c                |   2 +-
+ drivers/ram/rockchip/sdram_rk3399.c                |   1 -
+ drivers/ram/rockchip/sdram_rv1126.c                |   1 -
+ drivers/rng/rockchip_rng.c                         |  11 +-
+ drivers/spi/rk_spi.c                               |  20 +-
+ drivers/sysreset/sysreset_rockchip.c               |   1 -
+ drivers/usb/gadget/Kconfig                         |  15 +-
+ drivers/video/rockchip/dw_mipi_dsi_rockchip.c      |   1 -
+ drivers/video/rockchip/rk3288_hdmi.c               |   1 -
+ drivers/video/rockchip/rk3288_mipi.c               |   1 -
+ drivers/video/rockchip/rk3288_vop.c                |   1 -
+ drivers/video/rockchip/rk3399_hdmi.c               |   1 -
+ drivers/video/rockchip/rk3399_mipi.c               |   1 -
+ drivers/video/rockchip/rk3399_vop.c                |   1 -
+ drivers/video/rockchip/rk_edp.c                    |   1 -
+ drivers/video/rockchip/rk_hdmi.c                   |   1 -
+ drivers/video/rockchip/rk_lvds.c                   |   1 -
+ include/configs/jaguar_rk3588.h                    |  15 +
+ include/configs/rk3036_common.h                    |   1 -
+ include/configs/rk3066_common.h                    |   1 -
+ include/configs/rk3188_common.h                    |   1 -
+ include/configs/rk322x_common.h                    |   1 -
+ include/configs/rk3288_common.h                    |   1 -
+ include/configs/rk3368_common.h                    |   1 -
+ include/configs/rk3399_common.h                    |  16 -
+ include/configs/rockpi4-rk3399.h                   |  32 +
+ include/configs/rv1108_common.h                    |   1 -
+ include/configs/toybrick_rk3588.h                  |  15 +
+ include/power/rk8xx_pmic.h                         |  21 +-
+ 257 files changed, 7611 insertions(+), 2336 deletions(-)
+ create mode 100644 arch/arm/dts/rk3566-pinetab2-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3566-pinetab2-v0.1-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3566-pinetab2-v0.1.dts
+ create mode 100644 arch/arm/dts/rk3566-pinetab2-v2.0-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3566-pinetab2-v2.0.dts
+ create mode 100644 arch/arm/dts/rk3566-pinetab2.dtsi
+ create mode 100644 arch/arm/dts/rk3588-coolpi-cm5-evb-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3588-coolpi-cm5-evb.dts
+ create mode 100644 arch/arm/dts/rk3588-coolpi-cm5.dtsi
+ create mode 100644 arch/arm/dts/rk3588-generic-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3588-generic.dts
+ create mode 100644 arch/arm/dts/rk3588-jaguar-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3588-jaguar.dts
+ create mode 100644 arch/arm/dts/rk3588-toybrick-x0-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3588-toybrick-x0.dts
+ create mode 100644 arch/arm/dts/rk3588s-coolpi-4b-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3588s-coolpi-4b.dts
+ delete mode 100644 arch/arm/include/asm/arch-rockchip/misc.h
+ delete mode 100644 arch/arm/mach-rockchip/misc.c
+ delete mode 100644 board/pine64/pinebook-pro-rk3399/Makefile
+ delete mode 100644 board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c
+ delete mode 100644 board/pine64/pinephone-pro-rk3399/Makefile
+ delete mode 100644 board/pine64/pinephone-pro-rk3399/pinephone-pro-rk3399.c
+ delete mode 100644 board/pine64/rockpro64_rk3399/Makefile
+ delete mode 100644 board/pine64/rockpro64_rk3399/rockpro64-rk3399.c
+ create mode 100644 board/radxa/rockpi4-rk3399/Kconfig
+ create mode 100644 board/radxa/rockpi4-rk3399/MAINTAINERS
+ rename board/{rockchip/evb_rk3399 => radxa/rockpi4-rk3399}/Makefile (79%)
+ rename board/{rockchip/evb_rk3399/evb-rk3399.c => radxa/rockpi4-rk3399/rockpi4-rk3399.c} (65%)
+ delete mode 100644 board/rockchip/evb_rk3328/README
+ create mode 100644 board/rockchip/toybrick_rk3588/Kconfig
+ create mode 100644 board/rockchip/toybrick_rk3588/MAINTAINERS
+ create mode 100644 board/rockchip/toybrick_rk3588/Makefile
+ create mode 100644 board/rockchip/toybrick_rk3588/toybrick-rk3588.c
+ create mode 100644 board/theobroma-systems/jaguar_rk3588/Kconfig
+ create mode 100644 board/theobroma-systems/jaguar_rk3588/MAINTAINERS
+ create mode 100644 board/theobroma-systems/jaguar_rk3588/Makefile
+ create mode 100644 board/theobroma-systems/jaguar_rk3588/jaguar_rk3588.c
+ delete mode 100644 board/vamrs/rock960_rk3399/Makefile
+ delete mode 100644 board/vamrs/rock960_rk3399/rock960-rk3399.c
+ create mode 100644 configs/coolpi-4b-rk3588s_defconfig
+ create mode 100644 configs/coolpi-cm5-evb-rk3588_defconfig
+ create mode 100644 configs/generic-rk3588_defconfig
+ create mode 100644 configs/jaguar-rk3588_defconfig
+ create mode 100644 configs/pinetab2-rk3566_defconfig
+ create mode 100644 configs/toybrick-rk3588_defconfig
+ create mode 100644 doc/board/theobroma-systems/index.rst
+ create mode 100644 doc/board/theobroma-systems/jaguar_rk3588.rst
+ create mode 100644 doc/board/theobroma-systems/puma_rk3399.rst
+ create mode 100644 doc/board/theobroma-systems/ringneck_px30.rst
+ create mode 100644 include/configs/jaguar_rk3588.h
+ create mode 100644 include/configs/rockpi4-rk3399.h
+ create mode 100644 include/configs/toybrick_rk3588.h
