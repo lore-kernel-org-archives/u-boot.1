@@ -4,80 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 765C2C54E69
-	for <u-boot@archiver.kernel.org>; Fri, 15 Mar 2024 10:41:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C58EFC54E67
+	for <u-boot@archiver.kernel.org>; Fri, 15 Mar 2024 11:56:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C97D87F6F;
-	Fri, 15 Mar 2024 11:41:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E093D87D6C;
+	Fri, 15 Mar 2024 12:56:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="R+xqQNXZ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QjRrCT+l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E9DDC878E9; Fri, 15 Mar 2024 11:41:25 +0100 (CET)
-Received: from mail-ua1-x930.google.com (mail-ua1-x930.google.com
- [IPv6:2607:f8b0:4864:20::930])
+ id 6BC3187F3F; Fri, 15 Mar 2024 12:56:35 +0100 (CET)
+Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
+ [IPv6:2607:f8b0:4864:20::102a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B528087F74
- for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 11:41:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3C0FB8772A
+ for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 12:56:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ua1-x930.google.com with SMTP id
- a1e0cc1a2514c-7de0f269c45so832640241.0
- for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 03:41:21 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x102a.google.com with SMTP id
+ 98e67ed59e1d1-29c572d4b84so664322a91.1
+ for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 04:56:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710499280; x=1711104080; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=exuXAfQwdMmHhFBIu4QaBb4gjq55jZ5mRBUMUaiMLts=;
- b=R+xqQNXZkQmzfE0tlRT8kaLi5SvSLzKErYPOpWKE9fJKMADDJwOqDNXSAi7psOSOBV
- G9yl9gXJ6urfR2lko5XbUh9iE1lHnDzb1RwVAdU8fy+nLLS83zImKnfhEIVlWapdN/0w
- Ei7BoN4pQ9zqXsZxqgVL7UOvkcZIod8kY97ThQK6yhMnWK3F+Kdn4joekr6OSu9x5y6u
- VbjJv1AdSQ2MYKwlcwXwLaXV1Lb/dPX/FTFJDHtwVdxhOLD+Y3fvXrlQ6g/GM6seSnHw
- oWYPfdzm6EuWPlsl/ylXAP3ZRH9qBIp3+/tb0K/Olu/fETCKyEKhaqcl2NyLyVtmxJ2n
- Ep4Q==
+ d=gmail.com; s=20230601; t=1710503789; x=1711108589; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=AH7D3ewNyobtk24gahLBRboS/Tb85g3SJaRcTAQl2wA=;
+ b=QjRrCT+lk2ZAnAK1sQjR5XkgkUQ/+9GYhvBc+36TEOpYM/inTiiO9RAHizm4tWxgY5
+ msrxnDi9niVM0uq3pnQKNawv9iPDV2cnw4jNRt/Cnk9KGuB1CzWN1WxSQnJ+HJadszVX
+ 9dY25AVsggZessaG8VJAaQHVDlrM/H38mfTMa5XtGzKBLCVFuXQUB9PumtEgf5rOIgBM
+ Bjh5RpszEicOJDZqE5bkK6zNhiYSo7bDtLYuyC2k6x6LzxGNtu/Fp+tQ2dAIr0sDy4at
+ sN+87SWCDFjgd0c+wOmP2VFUKuFkRQWaNYzimsTgp8xkTQuUaSJ70mq12MUQf6z8mdlu
+ 3+Ag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710499280; x=1711104080;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=exuXAfQwdMmHhFBIu4QaBb4gjq55jZ5mRBUMUaiMLts=;
- b=Za/4qes5QNndQeXeS3PgCvs1WpUywG2khit0y3ecoC4nPsZSe170ncSpZ/sdXV6ie0
- pFQdgeSy49dD05ZOwzqMUNP0FGGSShvsd+BIkJNd6TPsrsmTRNuytKvp+EcCzH1G6RKT
- RtdqW7d0eGLTxDXk3XhT8HsH5bgtHOtGBSo0JZhoicYNd2fZNTYC61P4Dlkf4zKcCbEv
- xu2+HW3H7cYIaBy0MXjYSrEdb4mxzDNbxatGB3S+HkZ6H2jlt980eax78LUukpIOtvEq
- +dQO226CJkyja2sHg791FYe49jMJ03rgQST8s7HSXt6CenXZdDglDsF3HAxRaKv/J1P9
- duuw==
-X-Gm-Message-State: AOJu0YxRutwyDCIF2Ql+Sk0KRsVEHgnP6LirO+jbL6hlnRHYvc9LvV6h
- LGX/IUezzz4+ehMs0KaHY52WUZ6xuA20XC7Z4Xyqv0ih1Vu9MrjesT065ABkEtMGEpPANEkEkD4
- tZWWQBp/YmrJGkEPh/XjarKfgaFybenIquAGIKA==
-X-Google-Smtp-Source: AGHT+IE7YDEOIBpA3Zl6L1mtc+GX+X97Eg1cTGSro51seHKmG0pSKzqNoyTnrhuNO3PZoHY9smahs5gokl6Q+7J5g2I=
-X-Received: by 2002:a05:6102:2434:b0:476:552f:39e8 with SMTP id
- l20-20020a056102243400b00476552f39e8mr3756714vsi.10.1710499280439; Fri, 15
- Mar 2024 03:41:20 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1710503789; x=1711108589;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=AH7D3ewNyobtk24gahLBRboS/Tb85g3SJaRcTAQl2wA=;
+ b=u341w2COZfF/Kd23TAEOCI/aFFoI1FEo2mA+enK/42ObxxiFkJh68AcIO3HPEj6ykH
+ Mp4uHOrR6J8e8UCiqmtfJuZ+3nZlopSXMCwbEkFRRqXmomRpxJME2wBhtp8rChve3TDc
+ tPis+eLoHWrFfuTNlbCzK7+8MVkosFtkZmWTcGHzLdIdbAUyMud4veePtcHpopiKMCXf
+ sfQ8T2pV4PofRuON9tm32CoS48CrVeh222/CxeXBQLXpb+YOoQezHGVaLboyUkzeLpkZ
+ n75qGleupWWgIN5IdDSmtQALMZJop3gPkGsA9ZTSh4KKCsiMFzPn454bM82JJAObvc2O
+ 5JwQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXsjGuo6d1orNQ4DBE9n5eNSkwrsghL5KXyTFIH39S6GPEbzLJR/AM8yqFb4iVOODvlktLyttNro4ObPnh4UXHl4PqpBA==
+X-Gm-Message-State: AOJu0YxdHfQZcgOmTw2gZFjR1ZIiM+33y13RZtcVBuonXnRIcjoeq0EX
+ b/ltLIlvvXUzZ+8j1HN59+mah1YKPfl3qz3klG8bEIuoUTxWPe8+M8EPCAHDikLKYvVO7ti6yE6
+ XBvEmyCjsoP5m3uu/LAvLVSNUMsE=
+X-Google-Smtp-Source: AGHT+IG5WTLVUF7sV14qwny/ThOTXgVk2QW+D8bo1GX+ZenoTg8lYocN5OpOyLittgBd2HcaII0VvzsbYZYzc4G1ONA=
+X-Received: by 2002:a17:90a:8a97:b0:296:db75:c240 with SMTP id
+ x23-20020a17090a8a9700b00296db75c240mr4274439pjn.1.1710503789503; Fri, 15 Mar
+ 2024 04:56:29 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240312070338.86127-1-sumit.garg@linaro.org>
- <20240312070338.86127-5-sumit.garg@linaro.org>
- <dbd4f385-d93f-48db-a7e9-88b86f3d7445@denx.de>
- <CAFA6WYO8k=qyexUSRs_X-YMtKZTAzM5ZeSCNEO+sJ7z91z7ohg@mail.gmail.com>
- <f789292a-7c46-4b98-935f-86bfea39ab05@denx.de>
-In-Reply-To: <f789292a-7c46-4b98-935f-86bfea39ab05@denx.de>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Fri, 15 Mar 2024 16:11:09 +0530
-Message-ID: <CAFA6WYPHqdWiL=8foFDD9Rs+_L+E-=D+VMC=FZrnKeQdcooNMQ@mail.gmail.com>
-Subject: Re: [PATCH v3 04/11] imx8mp: power-domain: Don't power off pd_bus
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, tharvey@gateworks.com, 
- marcel.ziswiler@toradex.com, francesco@dolcini.it, lukma@denx.de, 
- seanga2@gmail.com, jh80.chung@samsung.com, sjg@chromium.org, festevam@denx.de, 
- andrejs.cainikovs@toradex.com, peng.fan@nxp.com, aford173@gmail.com, 
- ilias.apalodimas@linaro.org, sahaj.sarup@linaro.org, fathi.boudra@linaro.org, 
- remi.duraffort@linaro.org, daniel.thompson@linaro.org
+References: <20230214133814.4173549-1-paul.liu@linaro.org>
+ <20230214133814.4173549-2-paul.liu@linaro.org>
+ <CAOMZO5B=EYPSNXkr=FM+iRvRYiv9fysB8DfhntuhQ_jhkKz38Q@mail.gmail.com>
+ <875xxvratg.wl-maz@kernel.org>
+ <CAOMZO5DBzEcga0-QGBBP3twT6imLuCv0cD6EYLOTwGN47wTxsA@mail.gmail.com>
+ <87zfv7pojq.wl-maz@kernel.org>
+ <CAOMZO5AMi_5XqYUodPcfiFtbn9A7P1HVn__F-BLavLqnwMeNkg@mail.gmail.com>
+In-Reply-To: <CAOMZO5AMi_5XqYUodPcfiFtbn9A7P1HVn__F-BLavLqnwMeNkg@mail.gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 15 Mar 2024 08:56:17 -0300
+Message-ID: <CAOMZO5CqH1OuVQDNH7+CuzPbBt9M8F7OOhDgCZZ0ad7rBfT52w@mail.gmail.com>
+Subject: Re: [PATCH 1/2] arm64: Reduce add_map() complexity
+To: Marc Zyngier <maz@kernel.org>
+Cc: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>, u-boot@lists.denx.de, 
+ =?UTF-8?Q?Pierre=2DCl=C3=A9ment_Tosi?= <ptosi@google.com>, 
+ Tom Rini <trini@konsulko.com>, Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,78 +98,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 15 Mar 2024 at 14:53, Marek Vasut <marex@denx.de> wrote:
->
-> On 3/15/24 6:31 AM, Sumit Garg wrote:
-> > On Thu, 14 Mar 2024 at 09:45, Marek Vasut <marex@denx.de> wrote:
-> >>
-> >> On 3/12/24 8:03 AM, Sumit Garg wrote:
-> >>> power_domain_on/off() isn't refcounted and power domain bus shouldn't be
-> >>> turned off for a single peripheral domain as it would negatively affect
-> >>> other peripheral domains. So lets just skip turning off bus power
-> >>> domain.
-> >>
-> >> What exactly is the issue and how did you trigger it ?
-> >>
-> >> Details please.
-> >
-> > I suppose the issue can be triggered via the "=> usb start => usb
-> > stop" sequence where one of the USB controllers is configured in
-> > peripheral mode.
->
-> 'usb start ; usb stop' causes no problems on MX8MP , maybe the test case
-> is more extensive ?
->
-> Please, write down the necessary steps to reproduce this problem, and
-> what happens when that problem occurs.
+Hi Marc,
 
-After digging in more, it looks like dev_power_domain_off() is never
-(U-Boot life-cycle) invoked for USB controller devices derived from
-DT. So this USB power domain sequence is never reachable.
+On Sat, Mar 9, 2024 at 11:36=E2=80=AFAM Fabio Estevam <festevam@gmail.com> =
+wrote:
 
-BTW, dev_power_domain_on() is invoked when USB controller devices are
-added based on DT.
-
+> Does the log below help?
 >
-> >>> Fixes: 898e7610c62a ("imx: power-domain: Add i.MX8MP HSIOMIX driver")
-> >>> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-> >>> ---
-> >>>    drivers/power/domain/imx8mp-hsiomix.c | 6 +-----
-> >>>    1 file changed, 1 insertion(+), 5 deletions(-)
-> >>>
-> >>> diff --git a/drivers/power/domain/imx8mp-hsiomix.c b/drivers/power/domain/imx8mp-hsiomix.c
-> >>> index e2d772c5ec7..448746432a2 100644
-> >>> --- a/drivers/power/domain/imx8mp-hsiomix.c
-> >>> +++ b/drivers/power/domain/imx8mp-hsiomix.c
-> >>> @@ -50,7 +50,7 @@ static int imx8mp_hsiomix_on(struct power_domain *power_domain)
-> >>>
-> >>>        ret = power_domain_on(domain);
-> >>>        if (ret)
-> >>> -             goto err_pd;
-> >>> +             return ret;
-> >>>
-> >>>        ret = clk_enable(&priv->clk_usb);
-> >>>        if (ret)
-> >>> @@ -63,8 +63,6 @@ static int imx8mp_hsiomix_on(struct power_domain *power_domain)
-> >>>
-> >>>    err_clk:
-> >>>        power_domain_off(domain);
-> >>> -err_pd:
-> >>> -     power_domain_off(&priv->pd_bus);
-> >>>        return ret;
-> >>
-> >> Why not add counter into imx8mp_hsiomix_priv structure in this driver ?
-> >
-> > Sure I can do that but do you think the current approach can have any
-> > side effects?
+> https://pastebin.com/raw/1i1VBA0a
 >
-> Bus domain not getting cycled (which can leave it in some odd state),
-> and increased power consumption if the next stage doesn't turn the
-> domain off.
+> If not, please send me a debug patch and I will be glad to run it here.
 
-Given above, would you like me to drop power domain off path entirely
-here? I think if people are concerned about power consumption then it
-should be implemented properly in U-Boot to remove all the DT based
-devices before passing on control to the next stage.
+I'm sorry to bother you, but have you had a chance to look at the log
+I shared with you?
 
--Sumit
+That's the only issue preventing colibri-imx8x from booting mainline U-Boot=
+.
+
+We would like to get this fixed for U-Boot 2024.04.
+
+Thanks for your help
