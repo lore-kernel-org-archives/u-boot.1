@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06500C54E67
-	for <u-boot@archiver.kernel.org>; Fri, 15 Mar 2024 14:39:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4CE4C54E58
+	for <u-boot@archiver.kernel.org>; Fri, 15 Mar 2024 14:45:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1F69C87D5E;
-	Fri, 15 Mar 2024 15:39:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F1A8887FEC;
+	Fri, 15 Mar 2024 15:45:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EOvQvgyD";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kfz/fdRt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B87787F73; Fri, 15 Mar 2024 15:39:56 +0100 (CET)
-Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
- [IPv6:2607:f8b0:4864:20::630])
+ id 5CFB987FF5; Fri, 15 Mar 2024 15:45:10 +0100 (CET)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C2CE387D12
- for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 15:39:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9996B87FEC
+ for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 15:45:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=hiagofranco@gmail.com
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-1ddc7e45c47so14776545ad.1
- for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 07:39:52 -0700 (PDT)
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ivitro@gmail.com
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-41403b203e0so2757195e9.3
+ for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 07:45:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1710513591; x=1711118391; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1710513904; x=1711118704; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=wAq6s8ZlFzCeUN/Hkb2jSC+pauvxgpccd8WT9cdbNvg=;
- b=EOvQvgyDQchEICnwI8xNW8C9dUd+ueOf5FF4utduxdfn6yjHg5jUD3P2BOTe7mTqaj
- X1RrOty1lyFajOL6ikGu+UzNkszS2e2UkeS+4GNxGWkl2x88k4KjBSkXP2DUKtvuWlRk
- Ey87cnCLf6NCzafm3515D4+WdfXo8Uv7K7+55ZG76jD5I0idrlt6Gji8GdyofH2R8nuY
- 0xjbJDSFkwWKwJn0/W6+2hD0RgZjskRo8/W7N+tH52GWan1wAUkVeYrI1Ci1OICKn8OA
- CGKB1WzI/Y+GrLFZK+HavSbAcnEksIZg0I8Qva7o01OLTH1NFFMykqi+CJ2h+0/FhSGh
- fZeQ==
+ bh=o/oWiFqLhIeFMT4HX2dy0K5iAC3dXk3TCC+ZKIm9/Zo=;
+ b=kfz/fdRtFtLMqG5n+cGi9k+62tH6kKOSiLuFy7CSM3ZvaASsJTZoq1GOJq2+OmY5MR
+ y0sLZjjnG2r5QRvU38u+bh9imgGwk4eJEf2NX9vwI2KIUupql5gg5U3dAVdw/x0e+Y7N
+ A1DslCuFy1ccJfYcBxOSgl7kqzzxVTtpf6a5b0btoYxMJYA6uCgMUM3dpBDyad2lhZZQ
+ uwA3aAqpqjjipUQxfU3pKE2pC6PUgm+G07jVNhUsoE809cgIRlfzfxpFfrY4aO0/G2xL
+ c+Y757XldQu4bxrMeGs9b2zIAvubP6XnxL5h6D4l9QYDvwGLwLtIGdixIOuT0OFbpDzF
+ AX4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710513591; x=1711118391;
+ d=1e100.net; s=20230601; t=1710513904; x=1711118704;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=wAq6s8ZlFzCeUN/Hkb2jSC+pauvxgpccd8WT9cdbNvg=;
- b=WdsEzBgnPt/3se6g60AKN2jgMBx73Iy2/VKFot+5BF5OfNhsBh4GZonJh9GA3AvIMw
- YSGsugOeNrQExw+Rg0nt9/PsYN65riNmfOYH2hUc1aDlkViDhsU2yZrdpTky4lsNNwNS
- ox0+uSBKy8hy92jBUSYqekpwWPPC2k2OBTGW68N4Z8zN1hwVhW2tZepwuvyuojfT2bI3
- KKl/RVKVvVLTRR5IBmbXh6XrMk/SxpOqRV/OGtEIeUwcVX/SYIXFchFFfzN5sB0HFbHU
- 6JTwxjuDi1WwcBrz50l5IdNsLfAXgGEIKViclkOqhw45E8egioxss4AMceVR24GczBav
- Nhmg==
+ bh=o/oWiFqLhIeFMT4HX2dy0K5iAC3dXk3TCC+ZKIm9/Zo=;
+ b=KEZknAfX+JMfcQ7Ffg/7JRzfmJoqeEYjvHXypHnTvRYdQxlQ+o7e7WA2/HM8eq3y13
+ YzpDHvrLckHxk0QnCb+qcDUwOg5BgN1WXMh7nxkc65C8Yp3/o1M+7UyBpyo6YQYRHYv4
+ WXqMXGuGvcvet0GXdvYVaDJAttW2SbGKn7cIU1ohNQ569K+rwId7Lm2p/SYICZjF3XaJ
+ loShsNpM1o+hobqWTQd2P1egvghw6MxVr9aQeyE33vRPMFTxFxlZIIPV+wy7G7VSRBfI
+ F2UBiHj/YI4ug4ouPKYsoJCVYcnOzwy2yCxbC3oKAECW9ONaDN8rzbX6CeNgN6swTjFK
+ Yucg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUo/4czVz/zg0zT0LXC/T33+oQd+mesNc/1ehDiforJ7c/L+Hgj9Nk5aPDHhUdUAKE7W1bE4mz14rva+evmAt3ZBVYhQQ==
-X-Gm-Message-State: AOJu0YzlQGAGlt/+Y9Y+8mA84n7WVomwRwOgUxVCIRLkvei4G2vvNnmJ
- bG6RBrJZE28nBS8p9AIlOYwaepHkOVcTd+mLPYE6ulzi3IofnQ12
-X-Google-Smtp-Source: AGHT+IFctLUP46yTXP+pv551Nvyih9mQH03xlDQ0+l4gpFqFzPjbJexiT8f3HQglptEfUHr5F87+mg==
-X-Received: by 2002:a17:903:2449:b0:1dc:d773:ac with SMTP id
- l9-20020a170903244900b001dcd77300acmr6422622pls.7.1710513590955; 
- Fri, 15 Mar 2024 07:39:50 -0700 (PDT)
-Received: from frhdebian.. ([2804:1b3:6602:ff36:b599:add9:ba93:f462])
+ AJvYcCVLO6Y4DWUr40kY5FR7e4l8sP1qPagl9K1vNn5fxFBzWvxbKmqZP1bCzk5VKZUmvl/1sQqLNTBtZUc4OdOL+KY/Eg6g/A==
+X-Gm-Message-State: AOJu0Yzsuy1KRiMG6jXhbUhMW+GbHqudm4bK0Wem1GJ/7A5qShM38TCr
+ pbYtEIzcGVxWZZLbug+piKvKgkXOh2IxrOxcbtwocFxJ8CESx2bc
+X-Google-Smtp-Source: AGHT+IE3NLiyVsgp85d5WHr1JSHRKVTOdYKNs3Xj5jSvc5ZRr+NUQ7YPBQAlNFaG9iaZUWU64i5K/g==
+X-Received: by 2002:a05:600c:4e16:b0:413:fe47:f793 with SMTP id
+ b22-20020a05600c4e1600b00413fe47f793mr2715352wmq.7.1710513903536; 
+ Fri, 15 Mar 2024 07:45:03 -0700 (PDT)
+Received: from vitor-nb.. ([2001:8a0:e60f:3100:6891:cf6a:a43:74b6])
  by smtp.gmail.com with ESMTPSA id
- s14-20020a170902ea0e00b001dbac604e4dsm3894234plg.146.2024.03.15.07.39.49
+ je20-20020a05600c1f9400b00413e6af1bd5sm5877114wmb.47.2024.03.15.07.45.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Mar 2024 07:39:50 -0700 (PDT)
-From: Hiago De Franco <hiagofranco@gmail.com>
-To: Marcel Ziswiler <marcel.ziswiler@toradex.com>
-Cc: Tom Rini <trini@konsulko.com>, Fabio Estevam <festevam@gmail.com>,
- u-boot@lists.denx.de, Hiago De Franco <hiago.franco@toradex.com>
-Subject: [PATCH v1] doc: board: colibri-imx8x: Update and improve documentation
-Date: Fri, 15 Mar 2024 11:39:30 -0300
-Message-Id: <20240315143930.29155-1-hiagofranco@gmail.com>
-X-Mailer: git-send-email 2.39.2
+ Fri, 15 Mar 2024 07:45:03 -0700 (PDT)
+From: Vitor Soares <ivitro@gmail.com>
+To: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>
+Cc: Vitor Soares <vitor.soares@toradex.com>,
+	u-boot@lists.denx.de
+Subject: [PATCH v1] arm: imx: imx8m: soc: Fix NPU/VPU fdt disable fixup
+Date: Fri, 15 Mar 2024 14:44:25 +0000
+Message-Id: <20240315144426.38560-1-ivitro@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Fri, 15 Mar 2024 15:45:34 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,76 +92,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Hiago De Franco <hiago.franco@toradex.com>
+From: Vitor Soares <vitor.soares@toradex.com>
 
-Update and improve the building documentation of Colibri iMX8X.
-The following changes were made:
-- imx-atf repository changed to nxp-imx GitHub.
-- imx-atf branch updated to 'lf_v2.6'.
-- imx-seco updated to version 5.8.7.
-- nxp-imx mfgtools link updated to GitHub releases.
-- General writing improvements.
+On imx8m[m|p|q].dtsi, upstream Linux uses different names for NPU/VPU
+IP block nodes. It leads variants without such HW block having it
+enabled by default.
 
-Signed-off-by: Hiago De Franco <hiago.franco@toradex.com>
+This patch adds the upstream Linux node's paths to the disable list while
+keep the compatibility with downstream Linux.
+
+Signed-off-by: Vitor Soares <vitor.soares@toradex.com>
 ---
- doc/board/toradex/colibri-imx8x.rst | 23 ++++++++++++++++-------
- 1 file changed, 16 insertions(+), 7 deletions(-)
+ arch/arm/mach-imx/imx8m/soc.c | 18 ++++++++++++++----
+ 1 file changed, 14 insertions(+), 4 deletions(-)
 
-diff --git a/doc/board/toradex/colibri-imx8x.rst b/doc/board/toradex/colibri-imx8x.rst
-index 9e61d98c6b1f..378b259abd05 100644
---- a/doc/board/toradex/colibri-imx8x.rst
-+++ b/doc/board/toradex/colibri-imx8x.rst
-@@ -20,26 +20,35 @@ Quick Start
- Get and Build the ARM Trusted Firmware
- --------------------------------------
+diff --git a/arch/arm/mach-imx/imx8m/soc.c b/arch/arm/mach-imx/imx8m/soc.c
+index 39802d6a79..0c49fb9cd4 100644
+--- a/arch/arm/mach-imx/imx8m/soc.c
++++ b/arch/arm/mach-imx/imx8m/soc.c
+@@ -933,19 +933,28 @@ int disable_vpu_nodes(void *blob)
+ {
+ 	static const char * const nodes_path_8mq[] = {
+ 		"/vpu@38300000",
+-		"/soc@0/vpu@38300000"
++		"/soc@0/vpu@38300000",
++		"/soc@0/video-codec@38300000",
++		"/soc@0/video-codec@38310000",
++		"/soc@0/blk-ctrl@38320000",
+ 	};
  
-+Download the imx-atf repository:
-+
-+.. code-block:: bash
-+
-+    $ git clone -b lf_v2.6 https://github.com/nxp-imx/imx-atf.git
-+
-+Compile it with an aarch64 toolchain:
-+
- .. code-block:: bash
+ 	static const char * const nodes_path_8mm[] = {
+ 		"/vpu_g1@38300000",
+ 		"/vpu_g2@38310000",
+-		"/vpu_h1@38320000"
++		"/vpu_h1@38320000",
++		"/soc@0/video-codec@38300000",
++		"/soc@0/video-codec@38310000",
++		"/soc@0/blk-ctrl@38330000",
+ 	};
  
--    $ git clone -b toradex_imx_5.4.70_2.3.0 http://git.toradex.com/cgit/imx-atf.git/
-     $ make PLAT=imx8qx bl31 -C imx-atf
+ 	static const char * const nodes_path_8mp[] = {
+ 		"/vpu_g1@38300000",
+ 		"/vpu_g2@38310000",
+-		"/vpu_vc8000e@38320000"
++		"/vpu_vc8000e@38320000",
++		"/soc@0/video-codec@38300000",
++		"/soc@0/video-codec@38310000",
++		"/soc@0/blk-ctrl@38330000",
+ 	};
  
- Get scfw_tcm.bin and ahab-container.img
- ---------------------------------------
+ 	if (is_imx8mq())
+@@ -1100,7 +1109,8 @@ int disable_gpu_nodes(void *blob)
+ int disable_npu_nodes(void *blob)
+ {
+ 	static const char * const nodes_path_8mp[] = {
+-		"/vipsi@38500000"
++		"/vipsi@38500000",
++		"/soc@0/npu@38500000",
+ 	};
  
-+Download imx-seco firmware and extract it:
-+
- .. code-block:: bash
- 
--    $ wget https://github.com/toradex/i.MX-System-Controller-Firmware/raw/master/src/scfw_export_mx8qx_b0/build_mx8qx_b0/mx8qx-colibri-scfw-tcm.bin
--    $ wget https://www.nxp.com/lgfiles/NMG/MAD/YOCTO/imx-seco-3.8.1.bin
--    $ sh imx-seco-3.8.1.bin --auto-accept
-+    $ wget https://www.nxp.com/lgfiles/NMG/MAD/YOCTO/imx-seco-5.8.7.bin
-+    $ sh imx-seco-5.8.7.bin --auto-accept
- 
- Copy the following firmware to the U-Boot folder:
- 
- .. code-block:: bash
- 
--    $ cp imx-atf/build/imx8qx/release/bl31.bin .
--    $ cp imx-seco-3.8.1/firmware/seco/mx8qxc0-ahab-container.img mx8qx-ahab-container.img
-+    $ wget https://github.com/toradex/i.MX-System-Controller-Firmware/raw/master/src/scfw_export_mx8qx_b0/build_mx8qx_b0/mx8qx-colibri-scfw-tcm.bin
-+    $ cp ../imx-atf/build/imx8qx/release/bl31.bin .
-+    $ cp ../imx-seco-5.8.7/firmware/seco/mx8qxc0-ahab-container.img mx8qx-ahab-container.img
- 
- Build U-Boot
- ------------
-@@ -54,7 +63,7 @@ Load the U-Boot Binary Using UUU
- 
- Get the latest version of the universal update utility (uuu) aka ``mfgtools 3.0``:
- 
--https://community.nxp.com/external-link.jspa?url=https%3A%2F%2Fgithub.com%2FNXPmicro%2Fmfgtools%2Freleases
-+https://github.com/nxp-imx/mfgtools/releases
- 
- Put the module into USB recovery aka serial downloader mode, connect the USB
- device to your host and execute ``uuu``:
+ 	return disable_fdt_nodes(blob, nodes_path_8mp, ARRAY_SIZE(nodes_path_8mp));
 -- 
-2.39.2
+2.34.1
 
