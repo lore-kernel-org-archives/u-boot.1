@@ -4,62 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2076AC54E5D
-	for <u-boot@archiver.kernel.org>; Thu, 14 Mar 2024 18:39:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9EEEC54E5D
+	for <u-boot@archiver.kernel.org>; Fri, 15 Mar 2024 00:10:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C46787CF9;
-	Thu, 14 Mar 2024 19:38:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id C845C87D6B;
+	Fri, 15 Mar 2024 01:10:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=socionext.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="DdNBoxw9";
+	dkim=pass (1024-bit key; unprotected) header.d=SocionextGlobal.onmicrosoft.com header.i=@SocionextGlobal.onmicrosoft.com header.b="rWsyencG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 27A7587CEA; Thu, 14 Mar 2024 19:38:58 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D77D58753A; Fri, 15 Mar 2024 01:10:12 +0100 (CET)
+Received: from ps81.spcmail.jp (ps81.spcmail.jp [52.192.49.129])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0FDD587F19
- for <u-boot@lists.denx.de>; Thu, 14 Mar 2024 19:38:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CF5BF87F5A
+ for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 01:10:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=664e=KV=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1710441518;
- bh=H/lqCz6ZaSjI+73VNqH2/60swT3AXv+IA4O0p1ZoyX4=;
- b=DdNBoxw9C63qQiF80LLx4oKdVydyFD4FrST727VxxZ2my/E+YIL1szvPr0BT9PuwD06ucuI2P
- c8FPwOE/Nc3DAuiXu5Pfaf7SGhjBBWAZvM9HvkdGFdd92XvLsjF7DZ9AjFPHX1Bv5vfmr20YLBs
- ZT4ZNPTGQtqq74NOh4pj8R7fGUzJHCEePYaDHSfr7Z4iByD0dVe/8pWB1EtJDM9g2LmxqzNSpEU
- AJplWDG7GO9rXRM5/JhR6/hn1zOrvXmDDwC5dVfxlK5dAcWwmjsTGM7odPnkfvCuyu0eUj99iBm
- eo5VzUAN7Q9Q2n+uTBrefrsMg7ndbPexgUy70c8HR3fQ==
-Message-ID: <55dcdf42-b446-4718-a99a-1e454d14c5cf@kwiboo.se>
-Date: Thu, 14 Mar 2024 19:38:30 +0100
+ dmarc=none (p=none dis=none) header.from=socionext.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=kojima.masahisa@socionext.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=EoWNDN8h8IZlUhTSjlYlKLK0Q5LVLMVwGrzxBed4Ws9FjtbKMN63EwuEM4GXrBfNLh/Ox2mECNiFB9lFy+p0A0U8+dIvsvlw2JNUo3d5qQQJwNdygRJAy2nElcN+VjgmyME2AEgzGjCbX5O/m9gntYBeVeQJbYEuqhYjUwsen7EZApKBJaigQeCJyKKDRxkFmPGNPBudug1ktdlNN1ANNfWpEsQ0766yoEyMkKaeIS8Jtdc8nkRCjhNkTlKgYuqjHjoj7hcWFkUxgs7WjE5Td89myOY0DIa8m5KxVYax47ReHusiUeoWyFOhbGk2BGon7hUg50OQiusuO9549wgnWQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=HP6aYD2bABInjQgpjwM+8M8+LmEEiLUevagMv6s1NNE=;
+ b=bc0TK22aikpuStfqiDW82vVOxnNrKgQAfExbq234H9riU0cumU3co3kBNUOjahbR7TKEoXyu20WAp6Ab9iUE6B4hzTDv9Y24Tely3507ksMULZbmvBcO+e/4b6H7dlKkp2FhnmRtkAQczzDGNDPkNkemkFaBLLoSnFTIpNjSmZTHxsa9QstYzUvO1XZ5esv6S81Lvd77qaxNd2wdrKG0/muy+q0yQeJ0rdg3E9V9TefRv1bpepBupzry13rf/WNvtekwsMJd5EF6qNcFP2RJV6mPpr+DaANCiXqnJE4VdEb8BbCIU/oReOtukE5JV5Jxs25yrUXSOzXiL1EQ0ofSxQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=socionext.com; dmarc=pass action=none
+ header.from=socionext.com; dkim=pass header.d=socionext.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=SocionextGlobal.onmicrosoft.com;
+ s=selector1-SocionextGlobal-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=HP6aYD2bABInjQgpjwM+8M8+LmEEiLUevagMv6s1NNE=;
+ b=rWsyencG2RujBUjzSONte/Tnob+CUk1sE//dDNkKBYBpub9fbhoMiHlYi1CD9PnvEbIUj/siOisrzXdzt6k7sNJMyB8yfl8CIjn5CLrzM2Cmw3NNkBA8Hcr9zHnc3UTRHfX6ThSaxAvI/i7CvMDDdXpbbEjRE5/cthvBc94WZ4o=
+Received: from TYCPR01MB8375.jpnprd01.prod.outlook.com (2603:1096:400:151::10)
+ by OS3PR01MB10298.jpnprd01.prod.outlook.com (2603:1096:604:1e1::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7386.18; Fri, 15 Mar
+ 2024 00:09:48 +0000
+Received: from TYCPR01MB8375.jpnprd01.prod.outlook.com
+ ([fe80::d04a:eae5:6d52:39f]) by TYCPR01MB8375.jpnprd01.prod.outlook.com
+ ([fe80::d04a:eae5:6d52:39f%6]) with mapi id 15.20.7386.017; Fri, 15 Mar 2024
+ 00:09:48 +0000
+From: <kojima.masahisa@socionext.com>
+Subject: RE: [PATCH] efi_loader: accept append write with valid size and data
+Thread-Topic: [PATCH] efi_loader: accept append write with valid size and data
+Thread-Index: AQHabfqqjk1bdq9rEUWDwpCA9ohP5bE3UkWAgACqguA=
+Date: Fri, 15 Mar 2024 00:09:48 +0000
+Message-ID: <TYCPR01MB83750A2962738D3D4C8BFC5EE3282@TYCPR01MB8375.jpnprd01.prod.outlook.com>
+References: <20240304061100.2386856-1-kojima.masahisa@socionext.com>
+ <CAC_iWjL1P0HLv+PJ6aH+=n-PBtaq=dqYujzVA+J+_yp1x20Nkg@mail.gmail.com>
+In-Reply-To: <CAC_iWjL1P0HLv+PJ6aH+=n-PBtaq=dqYujzVA+J+_yp1x20Nkg@mail.gmail.com>
+Accept-Language: ja-JP, en-US
+Content-Language: ja-JP
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ccmail7: Relayed
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=socionext.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: TYCPR01MB8375:EE_|OS3PR01MB10298:EE_
+x-ms-office365-filtering-correlation-id: 51f8cfd5-03dc-475b-a9d4-08dc44843a20
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: v0w6s7AeB77foDdyE1OW7XWyeJShq2I+QzRmKzWknWKHsAiXlxM2QNmKVrG87+b9T4bjKjAXKL4IMn2u2bw3g5UxMKT2BhKRlBGJCB+42J5VFBruo8C4Rzz1FFjdHzG/8lPy4Tx8HjibyWWpcogwIZWjRMAgYtwvPxcqnXConWJuElYCbYXRhWCRRFH0T0GpVMxzXQ25r4H31sHePdVaTRYAOH05geBFUNXxBOLmBr+IIVdo1WWU3r5lTfnIJgVPwQ8MWS6Br6ddktseTqpnXFxK6qgpJD/Eiy3I5Ss2Y3yYP1ajw7I+WHgu2iRGl9efK27xSkZxBulzGWGykTJrRfs3lp23+5+TAeeg8sYhyAaqPVIfhUVPEyjZU7FAqgmqtViVENieaCkf1c1nVqGD++sMQkfmy+be0pIQ20F7S4JO2TtT8He7cTyuTxYPplxoKf9BJ2WQKuYnItlKf/X9U8bTOLvG+vVt1AcmK/r6PDkxiMBv/EJv6bHEdooP9vHO6LolWD48gDScvV7PQrXO2DABmyOEQdgIsq5SU2pn5TkxQQK6iw+YHP/OrzaQVzE+KE2FIJGmkir/QTEF8CRCBue/irTnf1XGIAmJVn6uRgkYaKK95kDBay+WgGrLcp/e4ZdxQGnK/U4UCljGjxaQ+jzyDPeSZY0dlSBhGrmYgsQ/Ytj5cNYhF4uRGwcKWt2p
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:ja; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:TYCPR01MB8375.jpnprd01.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(1800799015)(366007)(376005)(1580799018)(38070700009); DIR:OUT;
+ SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?UkQwQWh4L1dBYXFUSUhHM1J0dGtmYnVobVk1UFRaWHZsQUxxRm9takZMOTNz?=
+ =?utf-8?B?MFhYNVl1alo1K1BMZThCQlhPWFc5V1ZJbzFhQ2tGenVrREV2ZXRYVFoxV2lW?=
+ =?utf-8?B?YnVLaUplOEhSRFhUeitoTUs4UXd2dWtkQ1BtK1I1YUhqZjNaelF3Qmk3bEQr?=
+ =?utf-8?B?eXF0WjFDUENIL1ZtMzZHZGo2dW5DY0VMaUo0d3A2YWVZVVFhdytROEU4THBF?=
+ =?utf-8?B?cFFlY2VTeHU2dlRZM2F3RXBlaElSTWdtRVRQZDZSbFJjVWNiVElBRFA1OHVM?=
+ =?utf-8?B?WnhaRUhxM1dLSjZLODNPNDBaRFRKelNPbUtobUlQcnhQR3A3T1ZmNm5xRUYx?=
+ =?utf-8?B?TkhrWkpjdUxrYkJUSW1UVjhndUJLMEdleUhRRUpJeDdCZTY0NjRwNS9QZmY5?=
+ =?utf-8?B?K0pEREVBdmwyMU1nNStKS25YRjNJY09PT2h0RnJsbVA2RVF3OVorNmVoc2l1?=
+ =?utf-8?B?RGZFR1RMMTBrRmlta05SNXJzYWZYVlJHUFhaeU9ML1U3RjNDblZ0KzR3OFZn?=
+ =?utf-8?B?c21WWlNpaXNSQ3dwamhSRU1YUDYrL3VUeWZzVk9udTNISENFWW1sd1NIK2JT?=
+ =?utf-8?B?TlRDS2tSRFNRVkh1YTREaCsrZjkrSGg4OUxqVHFBSDExdjZrdVk1TnVFQk02?=
+ =?utf-8?B?U0doZzZiZ0J4cFlEYXBteDUzTGFDQWpINFJ3STZCd29RQXQ3M3dFQnREOXcz?=
+ =?utf-8?B?SWRPdlpZcGRUZXdIUUVlVmZjNG5DempCSG1iTVRQYnNpdFdhRkJWaHhMWGVq?=
+ =?utf-8?B?dkpwS0tzMld0UGhNWmhyWkF6dUZ2SURpWVh4OWRiVGxvVmJyV3ZVbmFxK0Fz?=
+ =?utf-8?B?SmtlNkxoL3NxQXU3OGorQVN6V1g2ZWJuazE5d2FvSXhWK05TVG1kNnNpUG5H?=
+ =?utf-8?B?TGxZbm1ESDN5MW9EU3VCMkhlNmQ3bkNUQVgyT1RkeThWQVY5NHFEZ1AraXY1?=
+ =?utf-8?B?dnVHRVlRVWd6NklsUDlMMHVWcTBwVkM5NkhKZ1hKaE8yZlIyem9SL3N1U25F?=
+ =?utf-8?B?YnVuZWtJVUg0NUxTUGU2RmhXRnBqU05PT0M1OWwyZnlVdm1OUmRkVzFYVDNI?=
+ =?utf-8?B?QVg1Ung3cjMyVk82bXFhRWd1RW9SWVlMNjVlOFBoMU5iQnpobFNRMUFqRFps?=
+ =?utf-8?B?bTV1NC9pTkN3T2RMVEkxUjk4Y21TcnhneGVNTXVRRkJOQ3IwTTFnall6UVdX?=
+ =?utf-8?B?SWhkMXlPRE9rQkxYeDdjZktzdEdVRHZIS2pQaURNUHJuNVJIenh1WDV5dW12?=
+ =?utf-8?B?bzJ2U1ZnVmptY2dzU3pyTU8yWGdjTmE1MU0wZDRlb1p1WEozTlMzRjhWZXV5?=
+ =?utf-8?B?RjBPeTIvOUN5UzlvNGIrMmpmL0NiU1hsemlXQTh4cVpINERYRXN6YWtGU2J3?=
+ =?utf-8?B?RTRWMGhQY3duUzVuck9NaFZMWnFPWEJ6bjA1eUJLMDN0M2RsNjlVOG9KYlo2?=
+ =?utf-8?B?L0RMRldNRERhYWllcWRlODlWVDFSL3kweTVQaFpML093d3V1KzU0bzdiNXp2?=
+ =?utf-8?B?dlJzMmM0WjNvQ0V2R0RQVjVRdkM0Y1JQYSs3bUpFSUppWSt2TUJhOTVHOUlL?=
+ =?utf-8?B?d3NLOHVVSC9tN0M1dHhDTmVoaWxnQ1c3OFliZlpFekVTempjcERWcXdHY0dI?=
+ =?utf-8?B?TVBZMm1PU3NyNnV4WXdia1g2QWs1ZnhhTnh3SU1UOHgzZWxCdHl2V014cVpu?=
+ =?utf-8?B?U0JsZ2IyMm9KUHNZU1F4Q3VNMzA5cGZQZmZVTzdRTExrRDFqc3BCbmt5LzhM?=
+ =?utf-8?B?YnZsUlZQQkd4YWE5RkdWeDFnaEVmT3NKMHdtZTFqclV1L3lSeWdLR3NjQzdn?=
+ =?utf-8?B?eXZWOEVFTFIwOVhiRTBqNmdweWhVSmt1cjhwRTlFaTVEcnFZYnljemR4a1ls?=
+ =?utf-8?B?MjRYOTdHdTBRUnNOQkdrZHFtTjJYUnRIa0psTURTc1JLdmM2Mk9lS2tSeUNu?=
+ =?utf-8?B?a2NLTnRlUkVTYjV3R1FONGlDcGRCdG0xVUlWc2pidFpCZ0FuSFdQakxCT2Nk?=
+ =?utf-8?B?VStKYzhEeVhRSWgzeUJtU1B0Qnp5U3diNWJDdU90ekJoQzZlbUl2UThoQ1Bk?=
+ =?utf-8?B?ZFlibGxtdW9tOW5LWjN5bmU0ZS9lajZRaVBoTDF4a0t1a2RtQkRZdk5iSlFF?=
+ =?utf-8?B?UFZhbVBiSTJXSTZyc291UExwcUo5bGVoU1pXZmRlSjlBYVlyTENLblVtRnJl?=
+ =?utf-8?B?MGc9PQ==?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] rockchip: Add a board_gen_ethaddr() function
-To: Detlev Casanova <detlev.casanova@collabora.com>
-Cc: Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
- <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, Kever Yang <kever.yang@rock-chips.com>, Marek
- Vasut <marek.vasut+renesas@mailbox.org>, Simon Glass <sjg@chromium.org>,
- Fabio Estevam <festevam@denx.de>, u-boot@lists.denx.de
-References: <20240314144403.491850-1-detlev.casanova@collabora.com>
- <20240314144403.491850-3-detlev.casanova@collabora.com>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20240314144403.491850-3-detlev.casanova@collabora.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 65f3442ceb942b031758603c
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: cGc64yWAft9jne586/SqTFalig6BwuivZ3qOW3Duxcts5IjF8YKKwbeFhwyMSKIUTDyw6owsL2IFxOO3OpEvbPyIGEmN3SFZhgTKrUV6KMrwV7J4syKCzzsanGcoIu8b687Of6z5WXfZFUwIRytV6qxreKpeEjlsstxA5nRchS2PawbM+EkapsB0VS/ayKeP6JugKsXgI2+jCgHtajn6S8IfA+QRx7XplUJkz0CKWmanDIBW+YAY1bUF7VCp9X55VFHey5l3nqKzfa0CkJ7Dg8QFxE47Nb8/QPETWLO9UVw/dG2M5CHK2Ddwku7lEa1NPD7p6wN0lFg+EOlW4htIVsMJZKGH2ZvlTdhQ4OrsmZyEnE0LkKCHOAmbEdbYDpuHib6YPozlS2uTUNP8PpQBNLjRcyavQCYSmODhWFm4bRpLQfh5cgCwnVYuf3xCJA4VuzWy2abEJpsQYFjLkvnvdfaGa0F4COpIiu0Kv0KGgHKu4kiu2MVWhgk34GWgiSYY/C89e1YgOT45xUR2JbjA1s/2BYfBSUFp0N6gOvnT0ugqrNk2bFOA2xP0iuXq2uVyzjT5wiujl7lwaeQUn5mp2+5JITdIb+joOASoMbSfSq3Z+2TLDZ7jAc8lkejzjn1/griwkxibBWllEcYWmYfNA/jIcWWaiuo12VxaGzG4pJpRUOmr/vQaDwnxSAgRjzjrkyEGw5kjc3tlxYZ7+werD9ol3/FsR7wH6gR/cLjsY7QQmgNFt1zSR1w1TxwRnPta
+X-OriginatorOrg: socionext.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: TYCPR01MB8375.jpnprd01.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 51f8cfd5-03dc-475b-a9d4-08dc44843a20
+X-MS-Exchange-CrossTenant-originalarrivaltime: 15 Mar 2024 00:09:48.1077 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 33c08a51-ea9e-46de-8669-aff1f467d3fe
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 2HKu6ChL1FLlUI5+Srop3ii4bL5QWBz0Z2kMZ7/sUC9afKTMC6oC5jnBNwGGICMJ65ARbHTXhE59OPOR6EZlgoniJ+oEbMfHS2PMKFPRJcY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: OS3PR01MB10298
+X-CC-Mail-RelayStamp: CC/Mail Relayed
+X-CC-Mail-RelayStamp: CC/Mail EncServer Relayed
+To: <ilias.apalodimas@linaro.org>
+Cc: <u-boot@lists.denx.de>, <xypron.glpk@gmx.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,170 +150,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Detlev,
+SGkgSWxpYXMsDQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogSWxpYXMg
+QXBhbG9kaW1hcyA8aWxpYXMuYXBhbG9kaW1hc0BsaW5hcm8ub3JnPg0KPiBTZW50OiBUaHVyc2Rh
+eSwgTWFyY2ggMTQsIDIwMjQgMTA6NTQgUE0NCj4gVG86IEtvamltYSwgTWFzYWhpc2Ev5bCP5bO2
+IOmbheS5hSA8a29qaW1hLm1hc2FoaXNhQHNvY2lvbmV4dC5jb20+DQo+IENjOiB1LWJvb3RAbGlz
+dHMuZGVueC5kZTsgSGVpbnJpY2ggU2NodWNoYXJkdCA8eHlwcm9uLmdscGtAZ214LmRlPg0KPiBT
+dWJqZWN0OiBSZTogW1BBVENIXSBlZmlfbG9hZGVyOiBhY2NlcHQgYXBwZW5kIHdyaXRlIHdpdGgg
+dmFsaWQgc2l6ZSBhbmQgZGF0YQ0KPiANCj4gSGkgS29qaW1hLXNhbg0KPiANCj4gQXBvbG9naWVz
+IGZvciB0aGUgbGF0ZSByZXBseQ0KPiANCj4gT24gTW9uLCA0IE1hciAyMDI0IGF0IDA4OjEwLCBN
+YXNhaGlzYSBLb2ppbWENCj4gPGtvamltYS5tYXNhaGlzYUBzb2Npb25leHQuY29tPiB3cm90ZToN
+Cj4gPg0KPiA+IEN1cnJlbnQgInZhcmlhYmxlcyIgZWZpX3NlbGZ0ZXN0IHJlc3VsdCBpcyBpbmNv
+bnNpc3RlbnQNCj4gPiBiZXR3ZWVuIHRoZSBVLUJvb3QgZmlsZSBzdG9yYWdlIGFuZCB0aGUgdGVl
+LWJhc2VkIFN0YW5kYWxvbmVNTQ0KPiA+IFJQTUIgc2VjdXJlIHN0b3JhZ2UuDQo+ID4gVS1Cb290
+IGZpbGUgc3RvcmFnZSBpbXBsZW1lbnRhdGlvbiBkb2VzIG5vdCBhY2NlcHQgU2V0VmFyaWFsZQ0K
+PiA+IGNhbGwgdG8gbm9uLWV4aXN0ZW50IHZhcmlhYmxlIHdpdGggRUZJX1ZBUklBQkxFX0FQUEVO
+RF9XUklURQ0KPiA+IGF0dHJpYnV0ZSBhbmQgdmFsaWQgc2l6ZSBhbmQgZGF0YSwgaG93ZXZlciBp
+dCBpcyBhY2NlcHRlZA0KPiA+IGluIEVESyBJSSBTdGFuZGFsb25lTU0gaW1wbGVtZW50YXRpb24u
+DQo+IA0KPiBZZXMsDQo+IA0KPiA+DQo+ID4gU2luY2UgVUVGSSBzcGVjaWZpY2F0aW9uIGRvZXMg
+bm90IGNsZWFybHkgZGVzY3JpYmUgdGhlIGJlaGF2aW9yDQo+ID4gb2YgdGhlIGFwcGVuZCB3cml0
+ZSB0byBub24tZXhpc3RlbnQgdmFyaWFibGUsIGxldCdzIHVwZGF0ZQ0KPiA+IHRoZSBVLUJvb3Qg
+ZmlsZSBzdG9yYWdlIGltcGxlbWVudGF0aW9uIHRvIGdldCBhbGlnbmVkIHdpdGgNCj4gPiB0aGUg
+RURLIElJIHJlZmVyZW5jZSBpbXBsZW1lbnRhdGlvbi4NCj4gPg0KPiA+IFNpZ25lZC1vZmYtYnk6
+IE1hc2FoaXNhIEtvamltYSA8a29qaW1hLm1hc2FoaXNhQHNvY2lvbmV4dC5jb20+DQo+ID4gLS0t
+DQo+ID4gIGxpYi9lZmlfbG9hZGVyL2VmaV92YXJpYWJsZS5jICAgICAgICAgICAgIHwgMTMgKysr
+KystLS0tLQ0KPiA+ICBsaWIvZWZpX3NlbGZ0ZXN0L2VmaV9zZWxmdGVzdF92YXJpYWJsZXMuYyB8
+IDMwDQo+ICsrKysrKysrKysrKysrKysrKysrKy0tDQo+ID4gIDIgZmlsZXMgY2hhbmdlZCwgMzUg
+aW5zZXJ0aW9ucygrKSwgOCBkZWxldGlvbnMoLSkNCj4gPg0KPiA+IGRpZmYgLS1naXQgYS9saWIv
+ZWZpX2xvYWRlci9lZmlfdmFyaWFibGUuYyBiL2xpYi9lZmlfbG9hZGVyL2VmaV92YXJpYWJsZS5j
+DQo+ID4gaW5kZXggNDBmN2EwZmIxMC4uMTY5M2MzMzg3YiAxMDA2NDQNCj4gPiAtLS0gYS9saWIv
+ZWZpX2xvYWRlci9lZmlfdmFyaWFibGUuYw0KPiA+ICsrKyBiL2xpYi9lZmlfbG9hZGVyL2VmaV92
+YXJpYWJsZS5jDQo+ID4gQEAgLTI4MiwxMSArMjgyLDggQEAgZWZpX3N0YXR1c190IGVmaV9zZXRf
+dmFyaWFibGVfaW50KGNvbnN0IHUxNg0KPiAqdmFyaWFibGVfbmFtZSwNCj4gPiAgICAgICAgICAg
+ICAgICAgfQ0KPiA+ICAgICAgICAgICAgICAgICB0aW1lID0gdmFyLT50aW1lOw0KPiA+ICAgICAg
+ICAgfSBlbHNlIHsNCj4gPiAtICAgICAgICAgICAgICAgaWYgKGRlbGV0ZSB8fCBhcHBlbmQpDQo+
+ID4gLSAgICAgICAgICAgICAgICAgICAgICAgLyoNCj4gPiAtICAgICAgICAgICAgICAgICAgICAg
+ICAgKiBUcnlpbmcgdG8gZGVsZXRlIG9yIHRvIHVwZGF0ZSBhIG5vbi1leGlzdGVudA0KPiA+IC0g
+ICAgICAgICAgICAgICAgICAgICAgICAqIHZhcmlhYmxlLg0KPiA+IC0gICAgICAgICAgICAgICAg
+ICAgICAgICAqLw0KPiA+ICsgICAgICAgICAgICAgICBpZiAoZGVsZXRlKQ0KPiA+ICsgICAgICAg
+ICAgICAgICAgICAgICAgIC8qIFRyeWluZyB0byBkZWxldGUgYSBub24tZXhpc3RlbnQgdmFyaWFi
+bGUuICovDQo+ID4gICAgICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIEVGSV9OT1RfRk9VTkQ7
+DQo+IA0KPiBJIGFtIG5vdCBzdXJlIGFib3V0IHRoaXMgdGJoLiBUaGUgVUVGSSBzcGVjIHNheXMN
+Cj4gIldoZW4gdGhlIEVGSV9WQVJJQUJMRV9BUFBFTkRfV1JJVEUgYXR0cmlidXRlIGlzIHNldCwg
+dGhlbiBhDQo+IFNldFZhcmlhYmxlKCkgY2FsbCB3aXRoIGEgRGF0YVNpemUgb2YgemVybyB3aWxs
+IG5vdCBjYXVzZSBhbnkgY2hhbmdlDQo+IHRvIHRoZSB2YXJpYWJsZSB2YWx1ZSAodGhlIHRpbWVz
+dGFtcA0KPiBhc3NvY2lhdGVkIHdpdGggdGhlIHZhcmlhYmxlIG1heSBiZSB1cGRhdGVkIGhvd2V2
+ZXIsIGV2ZW4gaWYgbm8gbmV3DQo+IGRhdGEgdmFsdWUgaXMgcHJvdmlkZWQ7c2VlIHRoZSBkZXNj
+cmlwdGlvbg0KPiBvZiB0aGUgRUZJX1ZBUklBQkxFX0FVVEhFTlRJQ0FUSU9OXzIgZGVzY3JpcHRv
+ciBiZWxvdykuIEluIHRoaXMgY2FzZQ0KPiB0aGUgRGF0YVNpemUgd2lsbCBub3QgYmUgemVybw0K
+PiBzaW5jZSB0aGUgRUZJX1ZBUklBQkxFX0FVVEhFTlRJQ0FUSU9OXzIgZGVzY3JpcHRvciB3aWxs
+IGJlIHBvcHVsYXRlZCkiDQo+IA0KPiBJIHRoaW5rIHRoaXMgYXNzdW1lcyB0aGUgdmFyaWFibGUg
+ZXhpc3RzLiBJcyB0aGVyZSBhIGRpZmZlcmVudCBjaGFwdGVyDQo+IGluIHRoZSBzcGVjIHRoYXQg
+ZGVzY3JpYmVzIHRoZSBiZWhhdmlvcj8NCg0KTm8sIEkgY291bGQgbm90IGZpbmQgaXQuDQpJJ20g
+YWxzbyBub3Qgc3VyZSB3aGF0IHRoZSBVRUZJIHNwZWMgZXhwZWN0cy4NCg0KPiANCj4gPiAgICAg
+ICAgIH0NCj4gPg0KPiA+IEBAIC0zMjksNyArMzI2LDExIEBAIGVmaV9zdGF0dXNfdCBlZmlfc2V0
+X3ZhcmlhYmxlX2ludChjb25zdCB1MTYNCj4gKnZhcmlhYmxlX25hbWUsDQo+ID4gICAgICAgICAg
+ICAgICAgIC8qIEVGSV9OT1RfRk9VTkQgaGFzIGJlZW4gaGFuZGxlZCBiZWZvcmUgKi8NCj4gPiAg
+ICAgICAgICAgICAgICAgYXR0cmlidXRlcyA9IHZhci0+YXR0cjsNCj4gPiAgICAgICAgICAgICAg
+ICAgcmV0ID0gRUZJX1NVQ0NFU1M7DQo+ID4gLSAgICAgICB9IGVsc2UgaWYgKGFwcGVuZCkgew0K
+PiA+ICsgICAgICAgfSBlbHNlIGlmIChhcHBlbmQgJiYgdmFyKSB7DQo+ID4gKyAgICAgICAgICAg
+ICAgIC8qDQo+ID4gKyAgICAgICAgICAgICAgICAqIGRhdGEgaXMgYXBwZW5kZWQgaWYgRUZJX1ZB
+UklBQkxFX0FQUEVORF9XUklURSBpcw0KPiBzZXQgYW5kDQo+ID4gKyAgICAgICAgICAgICAgICAq
+IHZhcmlhYmxlIGV4aXN0cy4NCj4gPiArICAgICAgICAgICAgICAgICovDQo+ID4gICAgICAgICAg
+ICAgICAgIHUxNiAqb2xkX2RhdGEgPSB2YXItPm5hbWU7DQo+ID4NCj4gPiAgICAgICAgICAgICAg
+ICAgZm9yICg7ICpvbGRfZGF0YTsgKytvbGRfZGF0YSkNCj4gPiBkaWZmIC0tZ2l0IGEvbGliL2Vm
+aV9zZWxmdGVzdC9lZmlfc2VsZnRlc3RfdmFyaWFibGVzLmMNCj4gYi9saWIvZWZpX3NlbGZ0ZXN0
+L2VmaV9zZWxmdGVzdF92YXJpYWJsZXMuYw0KPiA+IGluZGV4IGM3YTNmZGJhYTYuLjBjMmM3NjU5
+OWUgMTAwNjQ0DQo+ID4gLS0tIGEvbGliL2VmaV9zZWxmdGVzdC9lZmlfc2VsZnRlc3RfdmFyaWFi
+bGVzLmMNCj4gPiArKysgYi9saWIvZWZpX3NlbGZ0ZXN0L2VmaV9zZWxmdGVzdF92YXJpYWJsZXMu
+Yw0KPiA+IEBAIC0xMzEsMTMgKzEzMSwzOSBAQCBzdGF0aWMgaW50IGV4ZWN1dGUodm9pZCkNCj4g
+PiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKHVuc2lnbmVkIGludClsZW4pOw0KPiA+ICAg
+ICAgICAgaWYgKG1lbWNtcChkYXRhLCB2LCBsZW4pKQ0KPiA+ICAgICAgICAgICAgICAgICBlZmlf
+c3RfdG9kbygiR2V0VmFyaWFibGUgcmV0dXJuZWQgd3JvbmcgdmFsdWVcbiIpOw0KPiA+IC0gICAg
+ICAgLyogQXBwZW5kIHZhcmlhYmxlIDIgKi8NCj4gPiArICAgICAgIC8qIEFwcGVuZCB2YXJpYWJs
+ZSAyLCB3cml0ZSB0byBub24tZXhpc3RlbnQgdmFyaWFibGUgKi8NCj4gPiAgICAgICAgIHJldCA9
+IHJ1bnRpbWUtPnNldF92YXJpYWJsZSh1ImVmaV9ub25lIiwgJmd1aWRfdmVuZG9yMSwNCj4gPg0K
+PiBFRklfVkFSSUFCTEVfQk9PVFNFUlZJQ0VfQUNDRVNTIHwNCj4gPiAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICBFRklfVkFSSUFCTEVfQVBQRU5EX1dSSVRFLA0KPiA+ICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDE1LCB2KTsNCj4gPiArICAgICAgIGlmIChy
+ZXQgIT0gRUZJX1NVQ0NFU1MpIHsNCj4gPiArICAgICAgICAgICAgICAgZWZpX3N0X2Vycm9yKCJT
+ZXRWYXJpYWJsZShBUFBFTkRfV1JJVEUpIHdpdGggdmFsaWQgc2l6ZQ0KPiBhbmQgZGF0YSB0byBu
+b24tZXhpc3RlbnQgdmFyaWFibGUgbXVzdCBiZSBzdWNjY2Vzc2Z1bFxuIik7DQo+ID4gKyAgICAg
+ICAgICAgICAgIHJldHVybiBFRklfU1RfRkFJTFVSRTsNCj4gPiArICAgICAgIH0NCj4gPiArICAg
+ICAgIGxlbiA9IEVGSV9TVF9NQVhfREFUQV9TSVpFOw0KPiA+ICsgICAgICAgcmV0ID0gcnVudGlt
+ZS0+Z2V0X3ZhcmlhYmxlKHUiZWZpX25vbmUiLCAmZ3VpZF92ZW5kb3IxLA0KPiA+ICsgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICZhdHRyLCAmbGVuLCBkYXRhKTsNCj4gPiArICAg
+ICAgIGlmIChyZXQgIT0gRUZJX1NVQ0NFU1MpIHsNCj4gPiArICAgICAgICAgICAgICAgZWZpX3N0
+X2Vycm9yKCJHZXRWYXJpYWJsZSBmYWlsZWRcbiIpOw0KPiA+ICsgICAgICAgICAgICAgICByZXR1
+cm4gRUZJX1NUX0ZBSUxVUkU7DQo+ID4gKyAgICAgICB9DQo+ID4gKyAgICAgICBpZiAobGVuICE9
+IDE1KQ0KPiA+ICsgICAgICAgICAgICAgICBlZmlfc3RfdG9kbygiR2V0VmFyaWFibGUgcmV0dXJu
+ZWQgd3JvbmcgbGVuZ3RoICV1XG4iLA0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAo
+dW5zaWduZWQgaW50KWxlbik7DQo+ID4gKyAgICAgICBpZiAobWVtY21wKGRhdGEsIHYsIGxlbikp
+DQo+ID4gKyAgICAgICAgICAgICAgIGVmaV9zdF90b2RvKCJHZXRWYXJpYWJsZSByZXR1cm5lZCB3
+cm9uZyB2YWx1ZVxuIik7DQo+ID4gKyAgICAgICAvKiBEZWxldGUgdmFyaWFibGUgZWZpX25vbmUg
+Ki8NCj4gPiArICAgICAgIHJldCA9IHJ1bnRpbWUtPnNldF92YXJpYWJsZSh1ImVmaV9ub25lIiwg
+Jmd1aWRfdmVuZG9yMSwNCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAw
+LCAwLCBOVUxMKTsNCj4gPiArICAgICAgIGlmIChyZXQgIT0gRUZJX1NVQ0NFU1MpIHsNCj4gPiAr
+ICAgICAgICAgICAgICAgZWZpX3N0X2Vycm9yKCJTZXRWYXJpYWJsZSBmYWlsZWRcbiIpOw0KPiA+
+ICsgICAgICAgICAgICAgICByZXR1cm4gRUZJX1NUX0ZBSUxVUkU7DQo+ID4gKyAgICAgICB9DQo+
+ID4gKyAgICAgICBsZW4gPSBFRklfU1RfTUFYX0RBVEFfU0laRTsNCj4gPiArICAgICAgIHJldCA9
+IHJ1bnRpbWUtPmdldF92YXJpYWJsZSh1ImVmaV9ub25lIiwgJmd1aWRfdmVuZG9yMSwNCj4gPiAr
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAmYXR0ciwgJmxlbiwgZGF0YSk7DQo+
+ID4gICAgICAgICBpZiAocmV0ICE9IEVGSV9OT1RfRk9VTkQpIHsNCj4gPiAtICAgICAgICAgICAg
+ICAgZWZpX3N0X2Vycm9yKCJTZXRWYXJpYWJsZShBUFBFTkRfV1JJVEUpIHdpdGggc2l6ZSAwIHRv
+DQo+IG5vbi1leGlzdGVudCB2YXJpYWJsZSByZXR1cm5zIHdyb25nIGNvZGVcbiIpOw0KPiA+ICsg
+ICAgICAgICAgICAgICBlZmlfc3RfZXJyb3IoIlZhcmlhYmxlIHdhcyBub3QgZGVsZXRlZFxuIik7
+DQo+ID4gICAgICAgICAgICAgICAgIHJldHVybiBFRklfU1RfRkFJTFVSRTsNCj4gDQo+IFRoaXMg
+dXNlZCB0byBmYWlsIGFzIHdlbGwgWzBdLiBEb2VzIGl0IHdvcmsgbm93Pw0KDQpZZXMuIFdpdGgg
+dGhpcyBwYXRjaCBhcHBsaWVkLCBib3RoIFUtQm9vdCBmaWxlIHN0b3JhZ2UgYW5kIFN0TU0NCnBh
+c3MgdGhlIGVmaSBzZWxmdGVzdC4NCg0KVGhhbmtzLA0KTWFzYWhpc2EgS29qaW1hDQoNCj4gDQo+
+ID4gICAgICAgICB9DQo+ID4gICAgICAgICAvKiBFbnVtZXJhdGUgdmFyaWFibGVzICovDQo+ID4g
+LS0NCj4gPiAyLjM0LjENCj4gPg0KPiANCj4gWzBdDQo+IGh0dHBzOi8vbG9yZS5rZXJuZWwub3Jn
+L3UtYm9vdC9DQUNfaVdqTDJHMm12UWI2V05HTFR4cit4ajY0eHJZdU9LcjhHDQo+IDMtM3o4THY3
+eVg1WFNnQG1haWwuZ21haWwuY29tLw0KPiANCj4gUmVnYXJkcw0KPiAvSWxpYXMNCg==
 
-On 2024-03-14 15:43, Detlev Casanova wrote:
-> Set the MAC address based on the CPU ID only if the ethernet device has
-> no ROM or DT address set.
 
-This patch changes behavior and once again require CONFIG_NET to fixup
-the device tree with local-mac-address for the ethernet0/1 alias nodes.
-
-I.e. reverts one of the intentions with the commit 628fb0683b65
-("rockchip: misc: Set eth1addr mac address"), fixup of ethaddr in DT
-should not depend on enabled and working ethernet in U-Boot.
-
-Maybe just having a Kconfig to control if ENV ethaddr should overwrite
-ROM ethaddr could as easily solve your issue?
-
-Please also note that misc.c is merging into board.c in another pending
-series, see custodian u-boot-rockchip/for-next branch.
-
-> 
-> Signed-off-by: Detlev Casanova <detlev.casanova@collabora.com>
-> ---
->  arch/arm/Kconfig                          |  1 +
->  arch/arm/include/asm/arch-rockchip/misc.h |  1 +
->  arch/arm/mach-rockchip/board.c            | 30 ++++++++++++++++++-----
->  arch/arm/mach-rockchip/misc.c             | 22 ++++++++++++-----
->  4 files changed, 42 insertions(+), 12 deletions(-)
-> 
-> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-> index 01d6556c42b..21b41675ef6 100644
-> --- a/arch/arm/Kconfig
-> +++ b/arch/arm/Kconfig
-> @@ -2003,6 +2003,7 @@ config ARCH_ROCKCHIP
->  	select DM_SPI_FLASH
->  	select DM_USB_GADGET if USB_DWC3_GADGET
->  	select ENABLE_ARM_SOC_BOOT0_HOOK
-> +	select NET_BOARD_ETHADDR
-
-You are selecting here, so why the need for IS_ENABLED checks below?
-
->  	select OF_CONTROL
->  	select MTD
->  	select SPI
-> diff --git a/arch/arm/include/asm/arch-rockchip/misc.h b/arch/arm/include/asm/arch-rockchip/misc.h
-> index 4155af8c3b0..6e972de6279 100644
-> --- a/arch/arm/include/asm/arch-rockchip/misc.h
-> +++ b/arch/arm/include/asm/arch-rockchip/misc.h
-> @@ -10,5 +10,6 @@ int rockchip_cpuid_from_efuse(const u32 cpuid_offset,
->  			      const u32 cpuid_length,
->  			      u8 *cpuid);
->  int rockchip_cpuid_set(const u8 *cpuid, const u32 cpuid_length);
-> +int rockchip_gen_macaddr(int dev_num, u8 *mac_addr);
->  int rockchip_setup_macaddr(void);
->  void rockchip_capsule_update_board_setup(void);
-> diff --git a/arch/arm/mach-rockchip/board.c b/arch/arm/mach-rockchip/board.c
-> index 2620530e03f..283d3b9ed3a 100644
-> --- a/arch/arm/mach-rockchip/board.c
-> +++ b/arch/arm/mach-rockchip/board.c
-> @@ -296,8 +296,8 @@ int fastboot_set_reboot_flag(enum fastboot_reboot_reason reason)
->  }
->  #endif
->  
-> -#ifdef CONFIG_MISC_INIT_R
-> -__weak int misc_init_r(void)
-> +#if IS_ENABLED(CONFIG_MISC_INIT_R) || IS_ENABLED(CONFIG_NET_BOARD_ETHADDR)
-
-NET_BOARD_ETHADDR is selected so this #if will always be true.
-
-> +static int set_cpuid(void)
->  {
->  	const u32 cpuid_offset = CFG_CPUID_OFFSET;
->  	const u32 cpuid_length = 0x10;
-> @@ -309,10 +309,6 @@ __weak int misc_init_r(void)
->  		return ret;
->  
->  	ret = rockchip_cpuid_set(cpuid, cpuid_length);
-> -	if (ret)
-> -		return ret;
-> -
-> -	ret = rockchip_setup_macaddr();
->  
->  	return ret;
->  }
-> @@ -349,3 +345,25 @@ __weak int board_rng_seed(struct abuf *buf)
->  	return 0;
->  }
->  #endif
-> +
-> +#if IS_ENABLED(CONFIG_MISC_INIT_R)
-> +__weak int misc_init_r(void)
-> +{
-> +	return set_cpuid();
-> +}
-> +#endif
-> +
-> +int board_gen_ethaddr(int dev_num, u8 *mac_addr)
-> +{
-> +	if (!IS_ENABLED(CONFIG_NET_BOARD_ETHADDR))
-> +		return 0;
-
-NET_BOARD_ETHADDR is selected so this if return 0 is dead code?
-
-Regards,
-Jonas
-
-> +
-> +	if (!env_get("cpuid#")) {
-> +		int err = set_cpuid();
-> +
-> +		if (err)
-> +			return err;
-> +	}
-> +
-> +	return rockchip_gen_macaddr(dev_num, mac_addr);
-> +}
-> diff --git a/arch/arm/mach-rockchip/misc.c b/arch/arm/mach-rockchip/misc.c
-> index 7d03f0c2b67..9c7b04ee5a8 100644
-> --- a/arch/arm/mach-rockchip/misc.c
-> +++ b/arch/arm/mach-rockchip/misc.c
-> @@ -21,14 +21,13 @@
->  
->  #include <asm/arch-rockchip/misc.h>
->  
-> -int rockchip_setup_macaddr(void)
-> +int rockchip_gen_macaddr(int dev_num, u8 *mac_addr)
->  {
->  #if CONFIG_IS_ENABLED(HASH) && CONFIG_IS_ENABLED(SHA256)
->  	int ret;
->  	const char *cpuid = env_get("cpuid#");
->  	u8 hash[SHA256_SUM_LEN];
->  	int size = sizeof(hash);
-> -	u8 mac_addr[6];
->  
->  	/* Only generate a MAC address, if none is set in the environment */
->  	if (env_get("ethaddr"))
-> @@ -51,15 +50,26 @@ int rockchip_setup_macaddr(void)
->  	/* Make this a valid MAC address and set it */
->  	mac_addr[0] &= 0xfe;  /* clear multicast bit */
->  	mac_addr[0] |= 0x02;  /* set local assignment bit (IEEE802) */
-> -	eth_env_set_enetaddr("ethaddr", mac_addr);
->  
-> -	/* Make a valid MAC address for ethernet1 */
-> -	mac_addr[5] ^= 0x01;
-> -	eth_env_set_enetaddr("eth1addr", mac_addr);
-> +	/* Make a valid MAC address for the given device number */
-> +	mac_addr[5] ^= dev_num;
->  #endif
->  	return 0;
->  }
->  
-> +int rockchip_setup_macaddr(void)
-> +{
-> +	u8 mac_addr[6];
-> +
-> +	if (rockchip_gen_macaddr(0, mac_addr) == 0)
-> +		eth_env_set_enetaddr("ethaddr", mac_addr);
-> +
-> +	if (rockchip_gen_macaddr(1, mac_addr) == 0)
-> +		eth_env_set_enetaddr("eth1addr", mac_addr);
-> +
-> +	return 0;
-> +}
-> +
->  int rockchip_cpuid_from_efuse(const u32 cpuid_offset,
->  			      const u32 cpuid_length,
->  			      u8 *cpuid)
 
