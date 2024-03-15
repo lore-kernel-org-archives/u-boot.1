@@ -4,85 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 909E7C54E58
-	for <u-boot@archiver.kernel.org>; Fri, 15 Mar 2024 21:16:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF190C54E58
+	for <u-boot@archiver.kernel.org>; Fri, 15 Mar 2024 21:57:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 876728804F;
-	Fri, 15 Mar 2024 22:16:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B068E8804A;
+	Fri, 15 Mar 2024 22:57:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TpXQfgZh";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KHYCPbmx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B4AE88069; Fri, 15 Mar 2024 22:16:26 +0100 (CET)
-Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
- [IPv6:2607:f8b0:4864:20::631])
+ id A6E668803A; Fri, 15 Mar 2024 22:57:42 +0100 (CET)
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
+ [IPv6:2607:f8b0:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CDF1F8804B
- for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 22:16:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 67F5187F6F
+ for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 22:57:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=hiagofranco@gmail.com
-Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-1dc09556599so19518895ad.1
- for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 14:16:19 -0700 (PDT)
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-1dc75972f25so19150295ad.1
+ for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 14:57:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1710537378; x=1711142178; darn=lists.denx.de;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date:message-id:reply-to;
- bh=LHdTBkUV3AUE4fMtCi3+DrKebmCB207Vi6ubt8ny5uU=;
- b=TpXQfgZhqchNp5rwHAgiGtP8SQigL/ZNbapt1GKqc7j9XA2H4Zl/pi3Xmwtip09Z1r
- 4ILHoqWaJeXMCrR6vxfpAodJzDCmOMC1KlhjtMzxmXJDZJT0ObW37/l4oIEJaVUVXzF1
- YAPaHhOxK6nK7Tl/tYH3HQKFM/JLoPSuGf2TuOzr00W2CY5ILmZMQeh8nIyZwdLgZ0KY
- pzarEGoPER9zzpUkOv6UDcg/gDUor8holzpXtcJrnQ/CxoLILb9iAZWXulS1vySRFY+d
- aIhVVuUrPixJJ/vu5JZH3oygctGg0Wwe3BczNVo0l+cyV+w2kgFuct+RkjmANMk8kq8b
- 94Ew==
+ d=gmail.com; s=20230601; t=1710539857; x=1711144657; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=E+09vePX2RPdwDuOquD7LvUyRw6lnyD09ef8pQX/cRU=;
+ b=KHYCPbmxYeW3WyqkkHbmy63exWIiTn2EVjYAoMup6IwnFHfYfAIbPuu32hsnYbHicC
+ Dsk0aPoNKHbkqtzWdhF8CdR3K9WVin2bh7K7pjDHS2dGONQmroOFiRjLUkSEJYmtPgwe
+ jdW3QC/dA0QRqqZhd78JlzqIAhxdJmLocFvlsDQwovGE7qo22BJdDHMn8w4gsHtMUuiT
+ slDSKqDXIPLwsyr2Jb2e56ZKn3Nb0Qny75I7loJmHVKMQ9oXU5Xb7TizSoRjFjhmGtwl
+ biG13E8A5OFgQ3wokJCmoB0vQFwx0O2aYETkD1WydtBW/mnHVQTXYMYcMqJqsjgR707o
+ 772g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710537378; x=1711142178;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=LHdTBkUV3AUE4fMtCi3+DrKebmCB207Vi6ubt8ny5uU=;
- b=GRNC8+2xqAS8lKsPt9fG0maKIvyaTYFBe/SRIfB1Qwxdn7+YDsHN97Pj8p0Tj/Ubou
- gEp+icWjEWxZf2QYzBK2QmNOxmpdjkZ/44U8HXW2XxW0pQ/XgANZ0FD2oQwJw3VmkO/2
- neNrOxFG5FlYSH7LdufcxhfjtH9MdAaH3QJ+riMStdCL8KN88IGRlug+RF1Yn1kF72Bf
- K6zUSJc+ZmF/UjfncXrKs7vp56t3BWXStoQlD0JUPEBBgV0iGMIHe4MVMLZzwoRbUSHl
- p6jXv0gDuSARAeGVQQo7YRSKIc2YDkq44EnBlNq8MMj5vfkArvVDu+AxpvZkbO2jn1d3
- /ogA==
+ d=1e100.net; s=20230601; t=1710539857; x=1711144657;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=E+09vePX2RPdwDuOquD7LvUyRw6lnyD09ef8pQX/cRU=;
+ b=iClb7LET3oV1DwjYOYPNN3NB5DrpgfgxUPUr+m/5956YC+ILAsQQRsP9HuMc0uzWXj
+ SYRViw7ndbH0Jb4nsS2Po3Sr6WPvGg2YYNSSmvierw/aXcH9HWzZ4UM4/cV1/kuzjygd
+ 4GB1CQBDthfmco+IP3AsXAIXQ+vqgActGdPvC57WPJqUmiv7RB1yJuh/MPlHr+ylyE9Y
+ 4cvZObIBurxKLddDddHvpcjtyocItbuWyFo0PfzIRmgUS6rv4B1oonPY5a2M+tEQap0F
+ llgOQCiLFc9r7uuaVWBsvOjOxjXV9BWf/EKvABZcbmBCf1CqPmEnpCINX40HzDdN15Gt
+ Fw0g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVfw8HLvwSMBy9iEGbURtR4bt+gMOy/73uc/JazCmFPAC4LvhMp18v2Kq7im23wmVTqwX9ysoFWQK3XAkexBAKdxru2Vw==
-X-Gm-Message-State: AOJu0YxDOuy7S4nShvKVIxxTuIktumMVssa3fu8G9SgircHnJKQ9oZB0
- zFruhx1cxnvQ5G4l7pnsdtbSPI2KBwsZJLyauf7khG7KzziPmtHt
-X-Google-Smtp-Source: AGHT+IGBKRFNzgOOzreF88G6y1HM4cdv7/QrLECIU4Zc0cIRpmQePNkQdqM+KOk3zbJvWS34mbcryA==
-X-Received: by 2002:a17:903:25c2:b0:1dd:d88f:c79b with SMTP id
- jc2-20020a17090325c200b001ddd88fc79bmr3809135plb.49.1710537378021; 
- Fri, 15 Mar 2024 14:16:18 -0700 (PDT)
-Received: from frhdebian ([2804:1b3:6602:ff36:f144:8c19:ce75:7f2f])
+ AJvYcCVp2YHtEuTMNN2Pp7JU1t8AHkZU85XClc01b0rFg42admS0OeuP/ejNV20AdvtOmWSGJTtpLTE1EoLjQURhu+dUEP8tQA==
+X-Gm-Message-State: AOJu0YymX1wLxwNibfbwJzoY8k1Mt5H77nM/ejScBHcFBWsMtRex80tT
+ eYn088Dj+dTB1eoOMRfV+ItGm0VC1z2GHxxRFYg30vKlVKES9EVQ
+X-Google-Smtp-Source: AGHT+IEULpfGCkgd69D6vIigJYz7O9dR8cd0UOulVp1QzacJBlO+rdXRS5p7rDpcXCuAvW27EvXIJg==
+X-Received: by 2002:a17:903:22d0:b0:1dc:fca8:f9b with SMTP id
+ y16-20020a17090322d000b001dcfca80f9bmr7515517plg.3.1710539856798; 
+ Fri, 15 Mar 2024 14:57:36 -0700 (PDT)
+Received: from frhdebian.. ([2804:1b3:6602:ff36:f144:8c19:ce75:7f2f])
  by smtp.gmail.com with ESMTPSA id
- ku12-20020a170903288c00b001dc91b4081dsm4310633plb.271.2024.03.15.14.16.16
+ q13-20020a170902dacd00b001dcfc68e7desm4353315plx.75.2024.03.15.14.57.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Mar 2024 14:16:17 -0700 (PDT)
-Date: Fri, 15 Mar 2024 18:16:14 -0300
+ Fri, 15 Mar 2024 14:57:36 -0700 (PDT)
 From: Hiago De Franco <hiagofranco@gmail.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- Hiago De Franco <hiago.franco@toradex.com>,
- Francesco Dolcini <francesco@dolcini.it>
-Subject: Re: [PATCH v1] doc: board: colibri-imx8x: Update and improve
- documentation
-Message-ID: <20240315211614.qo6n43xl6k7uk4ry@frhdebian>
-References: <20240315143930.29155-1-hiagofranco@gmail.com>
- <CAOMZO5A9ewwMP8MEtJLCjp-g8jjyNmBtBz3qf=KnmQokLWWWJQ@mail.gmail.com>
+To: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+Cc: Tom Rini <trini@konsulko.com>, Fabio Estevam <festevam@gmail.com>,
+ u-boot@lists.denx.de, Francesco Dolcini <francesco@dolcini.it>,
+ Hiago De Franco <hiago.franco@toradex.com>
+Subject: [PATCH v2 0/2] Update and improve apalis/colibri imx8/imx8x docs
+Date: Fri, 15 Mar 2024 18:56:55 -0300
+Message-Id: <20240315215657.160967-1-hiagofranco@gmail.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAOMZO5A9ewwMP8MEtJLCjp-g8jjyNmBtBz3qf=KnmQokLWWWJQ@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,42 +92,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Fabio,
+From: Hiago De Franco <hiago.franco@toradex.com>
 
-On Fri, Mar 15, 2024 at 05:39:43PM -0300, Fabio Estevam wrote:
-> Hi Hiago,
-> 
-> On Fri, Mar 15, 2024 at 11:39 AM Hiago De Franco <hiagofranco@gmail.com> wrote:
-> >
-> > From: Hiago De Franco <hiago.franco@toradex.com>
-> >
-> > Update and improve the building documentation of Colibri iMX8X.
-> > The following changes were made:
-> > - imx-atf repository changed to nxp-imx GitHub.
-> > - imx-atf branch updated to 'lf_v2.6'.
-> > - imx-seco updated to version 5.8.7.
-> > - nxp-imx mfgtools link updated to GitHub releases.
-> > - General writing improvements.
-> 
-> Thanks for improving the documentation.
-> 
-> One minor suggestion.
-> 
-> I have recently followed this document and noticed that the
-> instruction to copy the
-> mx8qm-apalis-scfw-tcm.bin to the U-Boot source is missing. Please add it.
-> 
-> Also, since you are updating several components, shouldn't
-> mx8qm-apalis-scfw-tcm.bin be updated?
-> 
-> Currently, the version is from toradex-sumo-4.14.78-1.0.0_ga-bringup
-> which looks quite ancient.
+Update and improve apalis-imx8.rst and colibri-imx8x.rst files with
+newer software revisions and instructions to build U-Boot and necessary
+firmware for the imx8/imx8x boot container.
 
-Sure, I will prepare a v2 and also include changes for Apalis iMX8.
-Please note that I didn't do it now because I only changed Colibri iMX8X
-documentation, but since they are very similar, I will do a v2 with your
-suggestion.
+v1:
+  - https://lore.kernel.org/all/20240315143930.29155-1-hiagofranco@gmail.com/
 
-Thanks,
+v2:
+  - Add Reviewed-by: Francesco Dolcini 
+  - Add a patch for apalis-imx8.rst as well, improving the documentation
+    similarly to colibri-imx8x.rst.
 
-Hiago.
+Hiago De Franco (2):
+  doc: board: colibri-imx8x: Update and improve documentation
+  doc: board: apalis-imx8: Update and improve documentation
+
+ doc/board/toradex/apalis-imx8.rst   | 32 ++++++++++++++---------------
+ doc/board/toradex/colibri-imx8x.rst | 23 ++++++++++++++-------
+ 2 files changed, 32 insertions(+), 23 deletions(-)
+
+-- 
+2.39.2
+
