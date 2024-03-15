@@ -4,78 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4CE4C54E58
-	for <u-boot@archiver.kernel.org>; Fri, 15 Mar 2024 14:45:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1C91C54E67
+	for <u-boot@archiver.kernel.org>; Fri, 15 Mar 2024 15:06:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F1A8887FEC;
-	Fri, 15 Mar 2024 15:45:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 1E40F87FFB;
+	Fri, 15 Mar 2024 16:06:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kfz/fdRt";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gOxeLDR3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5CFB987FF5; Fri, 15 Mar 2024 15:45:10 +0100 (CET)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id 70E6488016; Fri, 15 Mar 2024 16:06:12 +0100 (CET)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9996B87FEC
- for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 15:45:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0426487FD2
+ for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 16:06:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ivitro@gmail.com
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-41403b203e0so2757195e9.3
- for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 07:45:04 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-513d3746950so2286677e87.1
+ for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 08:06:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1710513904; x=1711118704; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=o/oWiFqLhIeFMT4HX2dy0K5iAC3dXk3TCC+ZKIm9/Zo=;
- b=kfz/fdRtFtLMqG5n+cGi9k+62tH6kKOSiLuFy7CSM3ZvaASsJTZoq1GOJq2+OmY5MR
- y0sLZjjnG2r5QRvU38u+bh9imgGwk4eJEf2NX9vwI2KIUupql5gg5U3dAVdw/x0e+Y7N
- A1DslCuFy1ccJfYcBxOSgl7kqzzxVTtpf6a5b0btoYxMJYA6uCgMUM3dpBDyad2lhZZQ
- uwA3aAqpqjjipUQxfU3pKE2pC6PUgm+G07jVNhUsoE809cgIRlfzfxpFfrY4aO0/G2xL
- c+Y757XldQu4bxrMeGs9b2zIAvubP6XnxL5h6D4l9QYDvwGLwLtIGdixIOuT0OFbpDzF
- AX4A==
+ d=linaro.org; s=google; t=1710515166; x=1711119966; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=A7WqoD1LRNO9pokbdHC2hoq/L6o7EtSXZ/wRfMjSr/Y=;
+ b=gOxeLDR3m1qT60Jre50Kj72sqT88hti7Rg/SEppNxenUpR0y26IOYJBaj2yufXFEVq
+ Nm9BM/+ducdscbSgadHivSPcc0zguqI0tKSS1IvuURTWUKsEITLLMtbAxsSf7IgT/RLQ
+ e0TpXZmqXBSY/6J0H+YKi7eYwofj+CE4cG6mztwySYhskPeO8y4UQRr0JgX8iTq4JO6b
+ VOHerUhicldL1YQhpRLnkJVfWL8+Cf8Q3/YeLq4pRZ0K0tW4SG3KkvpImDMbRxaE42AB
+ TGDFJS+LE7YFoFGarxKKnqlEdZgjNl3q//yzByULCa4GBJrb6+zuxAwHM2l8FRfEcGh2
+ 1bKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710513904; x=1711118704;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1710515166; x=1711119966;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=o/oWiFqLhIeFMT4HX2dy0K5iAC3dXk3TCC+ZKIm9/Zo=;
- b=KEZknAfX+JMfcQ7Ffg/7JRzfmJoqeEYjvHXypHnTvRYdQxlQ+o7e7WA2/HM8eq3y13
- YzpDHvrLckHxk0QnCb+qcDUwOg5BgN1WXMh7nxkc65C8Yp3/o1M+7UyBpyo6YQYRHYv4
- WXqMXGuGvcvet0GXdvYVaDJAttW2SbGKn7cIU1ohNQ569K+rwId7Lm2p/SYICZjF3XaJ
- loShsNpM1o+hobqWTQd2P1egvghw6MxVr9aQeyE33vRPMFTxFxlZIIPV+wy7G7VSRBfI
- F2UBiHj/YI4ug4ouPKYsoJCVYcnOzwy2yCxbC3oKAECW9ONaDN8rzbX6CeNgN6swTjFK
- Yucg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVLO6Y4DWUr40kY5FR7e4l8sP1qPagl9K1vNn5fxFBzWvxbKmqZP1bCzk5VKZUmvl/1sQqLNTBtZUc4OdOL+KY/Eg6g/A==
-X-Gm-Message-State: AOJu0Yzsuy1KRiMG6jXhbUhMW+GbHqudm4bK0Wem1GJ/7A5qShM38TCr
- pbYtEIzcGVxWZZLbug+piKvKgkXOh2IxrOxcbtwocFxJ8CESx2bc
-X-Google-Smtp-Source: AGHT+IE3NLiyVsgp85d5WHr1JSHRKVTOdYKNs3Xj5jSvc5ZRr+NUQ7YPBQAlNFaG9iaZUWU64i5K/g==
-X-Received: by 2002:a05:600c:4e16:b0:413:fe47:f793 with SMTP id
- b22-20020a05600c4e1600b00413fe47f793mr2715352wmq.7.1710513903536; 
- Fri, 15 Mar 2024 07:45:03 -0700 (PDT)
-Received: from vitor-nb.. ([2001:8a0:e60f:3100:6891:cf6a:a43:74b6])
+ bh=A7WqoD1LRNO9pokbdHC2hoq/L6o7EtSXZ/wRfMjSr/Y=;
+ b=AswLz4iqWOf4Yf+vj7+PjdMtfFZYU0qZd7YZQb9aLKpfx7C6r/fOXus3xPUXVXuMEy
+ eOSjWG6n8TWtJvaQ+Wsr+fXMrHgsy9Q7TgEw3hZxkEYp9GLcEgMqegnN9j2OhwqJRF+t
+ YeeiuVT2IZH/e/IvlCLbImQTC6KYSkgktWiAN53QEnJRvSCRNYVHWn5CWEOM+QbrKgCb
+ 8V64yYTJF5Ou/eYUFQNojiMRNyc/fe66B2I/F5HxFI/ELV2ZuhXs4yWC41xmz5+CRGs5
+ l6/BxsSukf/va9SLCI5rgY5IcBjlCPw8w/TaBG79NYwivx4VgIwBDlo62leSFgIlEuhC
+ mrQQ==
+X-Gm-Message-State: AOJu0YxoAAT6UPfPIM6Ktx5AvFZquWzIOTrZRgVYyAb4pjsLdxxRyoCg
+ lVL1LzQoXB2k0jz9+wTbPygkiIu5rS1z7gOu24z4qiKiA5Its4LCQiZtRuFmgLI=
+X-Google-Smtp-Source: AGHT+IG6r5JiIZnwPcZKAXUbawuiwMCTx+GgywlczKNWs99GmE8pi7OrcjHUDilLTOcJursF3qliUQ==
+X-Received: by 2002:a19:2d1d:0:b0:513:9da7:3793 with SMTP id
+ k29-20020a192d1d000000b005139da73793mr2661662lfj.16.1710515166188; 
+ Fri, 15 Mar 2024 08:06:06 -0700 (PDT)
+Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- je20-20020a05600c1f9400b00413e6af1bd5sm5877114wmb.47.2024.03.15.07.45.02
+ jg28-20020a05600ca01c00b0041401fbe446sm1939502wmb.11.2024.03.15.08.06.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Mar 2024 07:45:03 -0700 (PDT)
-From: Vitor Soares <ivitro@gmail.com>
-To: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>
-Cc: Vitor Soares <vitor.soares@toradex.com>,
-	u-boot@lists.denx.de
-Subject: [PATCH v1] arm: imx: imx8m: soc: Fix NPU/VPU fdt disable fixup
-Date: Fri, 15 Mar 2024 14:44:25 +0000
-Message-Id: <20240315144426.38560-1-ivitro@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ Fri, 15 Mar 2024 08:06:05 -0700 (PDT)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+Subject: [PATCH v2 0/5] Qualcomm DWC3 USB support
+Date: Fri, 15 Mar 2024 15:05:59 +0000
+Message-Id: <20240315-b4-qcom-usb-v2-0-5467ec27cb26@linaro.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Fri, 15 Mar 2024 15:45:34 +0100
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIANdj9GUC/23MQQ6CMBCF4auQWTumnVZEV97DsGhxhEm0xVaJh
+ nB3K2uX/0veN0PmJJzhWM2QeJIsMZSgTQXd4ELPKJfSQIqs0kajt/jo4h1f2aM+WMP7mkh7A+U
+ xJr7Ke9XObelB8jOmz4pP+rf+dyaNCmtrGk+OqNnx6SbBpbiNqYd2WZYvxrQOqKcAAAA=
+To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>, 
+ Lukasz Majewski <lukma@denx.de>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>
+Cc: u-boot@lists.denx.de
+X-Mailer: b4 0.14-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1700;
+ i=caleb.connolly@linaro.org; h=from:subject:message-id;
+ bh=QcvxIX+4K1T904ZWkZo1pfliNgHnal9W29xzqyh8kG8=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtQvyXcyXYM33f43K+rLY7+1meZ8745vnFQm+Opnz4k9r
+ l+zP67/2FHKwiDIwSArpsgifmKZZdPay/Ya2xdcgJnDygQyhIGLUwAmErmP4X/xiaL+t7vCd7/2
+ +tlSPnuh6qr3RvWXLuQV7y2+lHQ22diQ4X/ZxPNSelPfLFhgd+Tn/YX2utOFJ0uLf108J4O39va
+ iyU0bAA==
+X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
+ fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,66 +106,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Vitor Soares <vitor.soares@toradex.com>
+This series enables support for Qualcomm platforms in the DWC3 driver,
+adds support for arbitrary sector sizes to the USB mass storage gadget,
+and fixes an issue with the CDC ACM driver where it wouldn't initialise
+the USB device.
 
-On imx8m[m|p|q].dtsi, upstream Linux uses different names for NPU/VPU
-IP block nodes. It leads variants without such HW block having it
-enabled by default.
+Additionally, it fixes a syntax bug in the Qualcomm SMMU driver, and
+makes USB_DWC3_GADGET select DM_USB_GADGET to fix compilation with
+gadget mode.
 
-This patch adds the upstream Linux node's paths to the disable list while
-keep the compatibility with downstream Linux.
+This is part of a larger series enabling DWC3 USB support on Qualcomm
+platforms, a feature branch with all patches can be found at [1].
 
-Signed-off-by: Vitor Soares <vitor.soares@toradex.com>
+[1]: https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/tree/b4/qcom-livetree
+
 ---
- arch/arm/mach-imx/imx8m/soc.c | 18 ++++++++++++++----
- 1 file changed, 14 insertions(+), 4 deletions(-)
+Changes in v2:
+- Drop custom set/clrbits implementation in qcom dwc3 glue.
+- Additional minor cleanup based on Marek's comments.
+- Link to v1: https://lore.kernel.org/r/20240131-b4-qcom-usb-v1-0-6438b2a2285e@linaro.org
 
-diff --git a/arch/arm/mach-imx/imx8m/soc.c b/arch/arm/mach-imx/imx8m/soc.c
-index 39802d6a79..0c49fb9cd4 100644
---- a/arch/arm/mach-imx/imx8m/soc.c
-+++ b/arch/arm/mach-imx/imx8m/soc.c
-@@ -933,19 +933,28 @@ int disable_vpu_nodes(void *blob)
- {
- 	static const char * const nodes_path_8mq[] = {
- 		"/vpu@38300000",
--		"/soc@0/vpu@38300000"
-+		"/soc@0/vpu@38300000",
-+		"/soc@0/video-codec@38300000",
-+		"/soc@0/video-codec@38310000",
-+		"/soc@0/blk-ctrl@38320000",
- 	};
- 
- 	static const char * const nodes_path_8mm[] = {
- 		"/vpu_g1@38300000",
- 		"/vpu_g2@38310000",
--		"/vpu_h1@38320000"
-+		"/vpu_h1@38320000",
-+		"/soc@0/video-codec@38300000",
-+		"/soc@0/video-codec@38310000",
-+		"/soc@0/blk-ctrl@38330000",
- 	};
- 
- 	static const char * const nodes_path_8mp[] = {
- 		"/vpu_g1@38300000",
- 		"/vpu_g2@38310000",
--		"/vpu_vc8000e@38320000"
-+		"/vpu_vc8000e@38320000",
-+		"/soc@0/video-codec@38300000",
-+		"/soc@0/video-codec@38310000",
-+		"/soc@0/blk-ctrl@38330000",
- 	};
- 
- 	if (is_imx8mq())
-@@ -1100,7 +1109,8 @@ int disable_gpu_nodes(void *blob)
- int disable_npu_nodes(void *blob)
- {
- 	static const char * const nodes_path_8mp[] = {
--		"/vipsi@38500000"
-+		"/vipsi@38500000",
-+		"/soc@0/npu@38500000",
- 	};
- 
- 	return disable_fdt_nodes(blob, nodes_path_8mp, ARRAY_SIZE(nodes_path_8mp));
--- 
-2.34.1
+---
+Caleb Connolly (5):
+      usb: dwc3-generic: implement Qualcomm wrapper
+      usb: dwc3: select DM_USB_GADGET
+      usb: gadget: CDC ACM: call usb_gadget_initialize
+      usb: gadget: UMS: support multiple sector sizes
+      iommu: qcom-smmu: fix debugging
+
+ cmd/usb_mass_storage.c              |   4 --
+ drivers/iommu/qcom-hyp-smmu.c       |   2 +-
+ drivers/usb/dwc3/Kconfig            |   1 +
+ drivers/usb/dwc3/dwc3-generic.c     |  81 ++++++++++++++++++++++++++++-
+ drivers/usb/gadget/f_acm.c          |   9 ++++
+ drivers/usb/gadget/f_mass_storage.c | 101 ++++++++++++++++++++----------------
+ drivers/usb/gadget/storage_common.c |  12 +++--
+ include/usb_mass_storage.h          |   1 -
+ 8 files changed, 156 insertions(+), 55 deletions(-)
+---
+base-commit: e03a71b2cefd86ba58df166d4ea820a215ebb655
+
+// Caleb (they/them)
 
