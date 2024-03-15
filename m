@@ -4,91 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C76DC54E58
-	for <u-boot@archiver.kernel.org>; Fri, 15 Mar 2024 06:45:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F955C54E66
+	for <u-boot@archiver.kernel.org>; Fri, 15 Mar 2024 07:04:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C475587FDE;
-	Fri, 15 Mar 2024 07:44:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 803C887D12;
+	Fri, 15 Mar 2024 08:04:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="EoDjQhXg";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OLlUBW9D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 310A887FE5; Fri, 15 Mar 2024 07:44:38 +0100 (CET)
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
+ id 8B03887F48; Fri, 15 Mar 2024 08:04:27 +0100 (CET)
+Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
+ [IPv6:2a00:1450:4864:20::229])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2A62987FDD
- for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 07:44:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C52B186F1E
+ for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 08:04:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-512bde3d197so1734404e87.0
- for <u-boot@lists.denx.de>; Thu, 14 Mar 2024 23:44:36 -0700 (PDT)
+Received: by mail-lj1-x229.google.com with SMTP id
+ 38308e7fff4ca-2d46c44dcc0so22578151fa.2
+ for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 00:04:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710485074; x=1711089874; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1710486264; x=1711091064; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MRm70MaX0hCLjwZUUTejH8I4YuwL8Hxl9oz63TDtGAk=;
- b=EoDjQhXgCYJ4rj2Apgz/24rIqBaQo67uAANMseJMj9hY6HgX93BIUtloz1yEZeY+MJ
- 7pgUG5XF1lPGb8Dtr/tTmbqxygsI25UIJjCdAZrf7URPyOj2NP6S2A4rbhkvzknhrI1z
- +BAt5iawVxsjs3gqaWDpuQSGkjfjwJCrTWd5qcB/4TAsNOX69DT6Nll2MjgmyGyanUhn
- 0YGgAAUQps/Vfn0o3cLyJBJ0wzTvdmb+dIQziaFu5RDg2v40Okw7XI1YY9Q9XLA8JDUd
- e3P3MSzJLGdVC2eIRrHf66/FQBQNNkDOZbC37J0FypMSMACJxmHivK70R0P+1oKAEXk2
- vEQA==
+ bh=oVqh98ThNc/CefY3SicFexM7I7oLfRq3K3wfOIQ46pc=;
+ b=OLlUBW9DHrftOFSELKh56OCEA4mJysI/b8IXWU7gGxCJCXrWQIZggGoY1dGkeabTub
+ g4Y47wBenLfzfPsSffUzHwB3ATYvAfGKMfonHSrYqvr8oJs6xeGC23E7/Dd8CFUFVSDu
+ Ws8TTlx5/uFyP1Bs+4byKhxgdFqi9mqLrvZRa/x7bI/OFUx0HtH9D2ZTe5xAOUKWxTd+
+ 7AkN6o/YnhUCbVaK2Z5JYbfqfS1huq4iwFHZPdpE/i209N51MuXP6RslVR7G3T540U1n
+ hLsQZtjWiD1FdcSovmD0rZsBQE1ad8cyaYrk2nyOUmi+8QfTR43RAXkwsD5S22t0M7fd
+ FVuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710485074; x=1711089874;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1710486264; x=1711091064;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=MRm70MaX0hCLjwZUUTejH8I4YuwL8Hxl9oz63TDtGAk=;
- b=fSDg6/AQ7EpY4lIhCLO1Xl+qOGanLq1HAKxL1I6hg9pA71bU6Ropn01XUvz8elpuIk
- lqR0Gu0au8JQ4TajTrJgvzEcjDXOXb/fRZZm14ZbzxSge2RsVhMIFsjTepNCWLoSGtYa
- u6mOzZHXvyDrSp3TecmYLEBmsxPSABYUpAfmnAghIPLQ3C4CIj5o3HakTKQ65+j/3y5F
- ZFn7Pixkpaz/l07TmBZ4+z0kx0Nb1XaUwxSiEEslrVt3YP8uUQEXeICCZTckKTfELZau
- Qbw0eUZfT/wGmOuTNDATnfVaoX+2/IgBtTiMpm0UpFsk6+jFTbhT79asz2zLzHoCrrl8
- Md8Q==
-X-Gm-Message-State: AOJu0YzCaXwtVBgIrqx693lsPe4qaMhQ6xUxS/kWG4yX11hSQ2WKCxrW
- Ikwlqz4XaPJWMtiuBRjp8BV1M15MPMfULveSwSun3sigMq9RXWBIrXzVaH0hS528Xc26r/bbDnD
- H
-X-Google-Smtp-Source: AGHT+IFxQcsH4KufJwSigRw7yJwSqB0wHxdGMtxe7SpKxbxmWE0hWSDO+UnHZfUU3b1OUSvcdnG6Vg==
-X-Received: by 2002:ac2:44b3:0:b0:513:7:fc3c with SMTP id
- c19-20020ac244b3000000b005130007fc3cmr2845360lfm.55.1710485074332; 
- Thu, 14 Mar 2024 23:44:34 -0700 (PDT)
-Received: from hades.. (ppp046103107123.access.hol.gr. [46.103.107.123])
- by smtp.gmail.com with ESMTPSA id
- v18-20020adfe4d2000000b0033ec9936909sm2398658wrm.39.2024.03.14.23.44.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Mar 2024 23:44:34 -0700 (PDT)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: u-boot@lists.denx.de,
-	trini@konsulko.com,
-	cfsworks@gmail.com
-Cc: caleb.connolly@linaro.org, sumit.garg@linaro.org,
- richard.henderson@linaro.org,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Ryan Chen <ryan_chen@aspeedtech.com>,
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
- Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>,
- Michal Simek <michal.simek@amd.com>,
- Yegor Yefremov <yegorslists@googlemail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Sam Edwards <CFSworks@gmail.com>,
- Shiji Yang <yangshiji66@outlook.com>, Bin Meng <bmeng@tinylab.org>
-Subject: [PATCH v4 7/7] arm: remove redundant section alignments
-Date: Fri, 15 Mar 2024 08:43:51 +0200
-Message-Id: <20240315064354.2215266-8-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.37.2
-In-Reply-To: <20240315064354.2215266-1-ilias.apalodimas@linaro.org>
-References: <20240315064354.2215266-1-ilias.apalodimas@linaro.org>
+ bh=oVqh98ThNc/CefY3SicFexM7I7oLfRq3K3wfOIQ46pc=;
+ b=hfbjJHPNnfHaLUG7QeVIXS7MeS8X7yOfK6goDGh++AGQ6snT3erOydI5k6jWAdjtvW
+ YSUYl+mDd/sPISnPbI7FRli9T+ueFEYlXljSegnKcWVynsNdnU3yeBbLYUP32xUSVqar
+ N1+GNiLZPMgORBZVmhQnyZbhx/p0+ynReiuG2P/8c850JmF8KF7DSc0tNuHXGRRjsV9z
+ /14CXs3n8RJRn75fu+amjFjNkcN+4HrICFn+wja1whtdYnz9TMXPgT0Zq5yLCsK8PTmg
+ 9EjZaUkl8ELyVpD3Swy5/TkLKlUGXAZI9PrPDOlXXOTm82mmZijdbiKnkDS9gDrRmeMx
+ +JSQ==
+X-Gm-Message-State: AOJu0YwnCrYmQHrckkCcu2mnHwYUDtDsjXutl53YXdaaFZdGRWB03kTh
+ yu/FIUGFBIVVDn7qXGBhZHB7jTOuCJWoLbfeCFDlTWxc66BV7YuNBgxFZG2KWTY0VU5ELSgM8Ny
+ F8X7KqYj1VgLfkQEQivuIzkYrJb7jXbH5Jrz73z9sOP6rqmoC
+X-Google-Smtp-Source: AGHT+IFRkdQl1ojCVR1cqp9rmI+k8FGftjfOHALguZN5ni8vGgzh9asMOWn0FOwWjC3eG7p+f5HaXXzB41neoz+J+ww=
+X-Received: by 2002:a2e:9f4c:0:b0:2d2:3810:552 with SMTP id
+ v12-20020a2e9f4c000000b002d238100552mr2359097ljk.53.1710486263883; Fri, 15
+ Mar 2024 00:04:23 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240304061100.2386856-1-kojima.masahisa@socionext.com>
+ <CAC_iWjL1P0HLv+PJ6aH+=n-PBtaq=dqYujzVA+J+_yp1x20Nkg@mail.gmail.com>
+ <TYCPR01MB83750A2962738D3D4C8BFC5EE3282@TYCPR01MB8375.jpnprd01.prod.outlook.com>
+In-Reply-To: <TYCPR01MB83750A2962738D3D4C8BFC5EE3282@TYCPR01MB8375.jpnprd01.prod.outlook.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 15 Mar 2024 09:03:47 +0200
+Message-ID: <CAC_iWj+jpjn17yAvBDi3Q+j-YrZyeo4sXzSYJay63HY4iZSeqg@mail.gmail.com>
+Subject: Re: [PATCH] efi_loader: accept append write with valid size and data
+To: kojima.masahisa@socionext.com, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,124 +89,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Previous patches cleaning up linker symbols, also merged any explicit
-. = ALIGN(x); into section definitions -- e.g
-.bss ALIGN(x) : instead of
+Hi Kojima-san
 
-. = ALIGN(x);
-. bss : {...}
+On Fri, 15 Mar 2024 at 02:10, <kojima.masahisa@socionext.com> wrote:
+>
+> Hi Ilias,
+>
+> > -----Original Message-----
+> > From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > Sent: Thursday, March 14, 2024 10:54 PM
+> > To: Kojima, Masahisa/=E5=B0=8F=E5=B3=B6 =E9=9B=85=E4=B9=85 <kojima.masa=
+hisa@socionext.com>
+> > Cc: u-boot@lists.denx.de; Heinrich Schuchardt <xypron.glpk@gmx.de>
+> > Subject: Re: [PATCH] efi_loader: accept append write with valid size an=
+d data
+> >
+> > Hi Kojima-san
+> >
+> > Apologies for the late reply
+> >
+> > On Mon, 4 Mar 2024 at 08:10, Masahisa Kojima
+> > <kojima.masahisa@socionext.com> wrote:
+> > >
+> > > Current "variables" efi_selftest result is inconsistent
+> > > between the U-Boot file storage and the tee-based StandaloneMM
+> > > RPMB secure storage.
+> > > U-Boot file storage implementation does not accept SetVariale
+> > > call to non-existent variable with EFI_VARIABLE_APPEND_WRITE
+> > > attribute and valid size and data, however it is accepted
+> > > in EDK II StandaloneMM implementation.
+> >
+> > Yes,
+> >
+> > >
+> > > Since UEFI specification does not clearly describe the behavior
+> > > of the append write to non-existent variable, let's update
+> > > the U-Boot file storage implementation to get aligned with
+> > > the EDK II reference implementation.
+> > >
+> > > Signed-off-by: Masahisa Kojima <kojima.masahisa@socionext.com>
+> > > ---
+> > >  lib/efi_loader/efi_variable.c             | 13 +++++-----
+> > >  lib/efi_selftest/efi_selftest_variables.c | 30
+> > +++++++++++++++++++++--
+> > >  2 files changed, 35 insertions(+), 8 deletions(-)
+> > >
+> > > diff --git a/lib/efi_loader/efi_variable.c b/lib/efi_loader/efi_varia=
+ble.c
+> > > index 40f7a0fb10..1693c3387b 100644
+> > > --- a/lib/efi_loader/efi_variable.c
+> > > +++ b/lib/efi_loader/efi_variable.c
+> > > @@ -282,11 +282,8 @@ efi_status_t efi_set_variable_int(const u16
+> > *variable_name,
+> > >                 }
+> > >                 time =3D var->time;
+> > >         } else {
+> > > -               if (delete || append)
+> > > -                       /*
+> > > -                        * Trying to delete or to update a non-existe=
+nt
+> > > -                        * variable.
+> > > -                        */
+> > > +               if (delete)
+> > > +                       /* Trying to delete a non-existent variable. =
+*/
+> > >                         return EFI_NOT_FOUND;
+> >
+> > I am not sure about this tbh. The UEFI spec says
+> > "When the EFI_VARIABLE_APPEND_WRITE attribute is set, then a
+> > SetVariable() call with a DataSize of zero will not cause any change
+> > to the variable value (the timestamp
+> > associated with the variable may be updated however, even if no new
+> > data value is provided;see the description
+> > of the EFI_VARIABLE_AUTHENTICATION_2 descriptor below). In this case
+> > the DataSize will not be zero
+> > since the EFI_VARIABLE_AUTHENTICATION_2 descriptor will be populated)"
+> >
+> > I think this assumes the variable exists. Is there a different chapter
+> > in the spec that describes the behavior?
+>
+> No, I could not find it.
+> I'm also not sure what the UEFI spec expects.
 
-However, if the output address is not specified then one will be chosen
-for the section. This address will be adjusted to fit the alignment
-requirement of the output section following the strictest alignment of
-any input section contained within the output section. So let's get rid
-of the redundant ALIGN directives when they are not needed.
+I don't have any objections to aligning this with EDK2. But can we add
+a comment about it as well?
+Heinrich any preference here?
 
-While at add comments for the alignment of __bss_start/end since our
-C runtime setup assembly assumes that __bss_start - __bss_end will be
-a multiple of 4/8 for armv7 and armv8 respectively.
+[...]
 
-It's worth noting that the alignment is preserved on .rel.dyn for
-mach-zynq which was explicitly aligning that section on an 8b
-boundary instead of 4b one.
+> > non-existent variable returns wrong code\n");
+> > > +               efi_st_error("Variable was not deleted\n");
+> > >                 return EFI_ST_FAILURE;
+> >
+> > This used to fail as well [0]. Does it work now?
+>
+> Yes. With this patch applied, both U-Boot file storage and StMM
+> pass the efi selftest.
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
- arch/arm/cpu/armv8/u-boot.lds | 9 ++++++---
- arch/arm/cpu/u-boot.lds       | 8 ++++++--
- arch/arm/mach-zynq/u-boot.lds | 4 ++--
- 3 files changed, 14 insertions(+), 7 deletions(-)
+Yes, that's obviously a hack. The reason we didn't bother fixing it
+back then is because stmm is not running in our CI, but I should have
+added a comment on that instead of having it on email history...
 
-diff --git a/arch/arm/cpu/armv8/u-boot.lds b/arch/arm/cpu/armv8/u-boot.lds
-index 147a6e8028d5..857f44412e07 100644
---- a/arch/arm/cpu/armv8/u-boot.lds
-+++ b/arch/arm/cpu/armv8/u-boot.lds
-@@ -115,7 +115,7 @@ SECTIONS
- 		KEEP(*(SORT(__u_boot_list*)));
- 	}
- 
--	.efi_runtime_rel ALIGN(8) : {
-+	.efi_runtime_rel : {
-                 __efi_runtime_rel_start = .;
- 		*(.rel*.efi_runtime)
- 		*(.rel*.efi_runtime.*)
-@@ -125,7 +125,7 @@ SECTIONS
- 	. = ALIGN(8);
- 	__image_copy_end = .;
- 
--	.rela.dyn ALIGN(8) : {
-+	.rela.dyn : {
- 		__rel_dyn_start = .;
- 		*(.rela*)
- 		__rel_dyn_end = .;
-@@ -133,7 +133,10 @@ SECTIONS
- 
- 	_end = .;
- 
--	.bss ALIGN(8): {
-+	/*
-+	 * arch/arm/lib/crt0_64.S assumes __bss_start - __bss_end % 8 == 0
-+	 */
-+	.bss ALIGN(8) : {
- 		__bss_start = .;
- 		*(.bss*)
- 		. = ALIGN(8);
-diff --git a/arch/arm/cpu/u-boot.lds b/arch/arm/cpu/u-boot.lds
-index 798858e3ed6e..707b19795f08 100644
---- a/arch/arm/cpu/u-boot.lds
-+++ b/arch/arm/cpu/u-boot.lds
-@@ -43,7 +43,7 @@ SECTIONS
- 	}
- 
- 	/* This needs to come before *(.text*) */
--	.efi_runtime ALIGN(4) : {
-+	.efi_runtime : {
- 		__efi_runtime_start = .;
- 		*(.text.efi_runtime*)
- 		*(.rodata.efi_runtime*)
-@@ -146,7 +146,7 @@ SECTIONS
- 		KEEP(*(SORT(__u_boot_list*)));
- 	}
- 
--	.efi_runtime_rel ALIGN(4) : {
-+	.efi_runtime_rel : {
- 		__efi_runtime_rel_start = .;
- 		*(.rel*.efi_runtime)
- 		*(.rel*.efi_runtime.*)
-@@ -156,6 +156,10 @@ SECTIONS
- 	. = ALIGN(4);
- 	__image_copy_end = .;
- 
-+	/*
-+	 * if CONFIG_USE_ARCH_MEMSET is not selected __bss_end - __bss_start
-+	 * needs to be a multiple of 4 and we overlay .bss with .rel.dyn
-+	 */
- 	.rel.dyn ALIGN(4) : {
- 		__rel_dyn_start = .;
- 		*(.rel*)
-diff --git a/arch/arm/mach-zynq/u-boot.lds b/arch/arm/mach-zynq/u-boot.lds
-index f6c99a8ce218..3e0c96c50556 100644
---- a/arch/arm/mach-zynq/u-boot.lds
-+++ b/arch/arm/mach-zynq/u-boot.lds
-@@ -22,7 +22,7 @@ SECTIONS
- 	}
- 
- 	/* This needs to come before *(.text*) */
--	.efi_runtime ALIGN(4) : {
-+	.efi_runtime : {
- 		__efi_runtime_start = .;
- 		*(.text.efi_runtime*)
- 		*(.rodata.efi_runtime*)
-@@ -52,7 +52,7 @@ SECTIONS
- 		KEEP(*(SORT(__u_boot_list*)));
- 	}
- 
--	.efi_runtime_rel ALIGN(4) : {
-+	.efi_runtime_rel : {
- 		__efi_runtime_rel_start = .;
- 		*(.rel*.efi_runtime)
- 		*(.rel*.efi_runtime.*)
--- 
-2.37.2
-
+Thanks
+/Ilias
+>
+> Thanks,
+> Masahisa Kojima
+>
+> >
+> > >         }
+> > >         /* Enumerate variables */
+> > > --
+> > > 2.34.1
+> > >
+> >
+> > [0]
+> > https://lore.kernel.org/u-boot/CAC_iWjL2G2mvQb6WNGLTxr+xj64xrYuOKr8G
+> > 3-3z8Lv7yX5XSg@mail.gmail.com/
+> >
+> > Regards
+> > /Ilias
