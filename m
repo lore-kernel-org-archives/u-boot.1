@@ -4,54 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61816C54E58
-	for <u-boot@archiver.kernel.org>; Fri, 15 Mar 2024 17:35:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1492AC54E67
+	for <u-boot@archiver.kernel.org>; Fri, 15 Mar 2024 18:07:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DAD9B8801D;
-	Fri, 15 Mar 2024 18:35:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 11F8687F65;
+	Fri, 15 Mar 2024 19:07:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="xXthcJ77";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="FmWlt0l+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9C65688023; Fri, 15 Mar 2024 18:35:31 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
+ id 7961B88018; Fri, 15 Mar 2024 19:07:15 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 53D5788018
- for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 18:35:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DF690878E9
+ for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 19:07:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=SRS0=4765=KW=kwiboo.se=jonas@fe-bounces.kwiboo.se
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
- To: From; q=dns/txt; s=fe-e1b5cab7be; t=1710524105;
- bh=yvoIXGg6BH9vQlnowd29mn7pw82dBgC49JJwrLRFB1g=;
- b=xXthcJ77VGyWIbUnU2I4ozJKPurbDJ6CT3oSSiLB586euaSQtZas2Ahod3iRlPUEcukggHuFM
- 8S42L+IEOXFUi7ioZg3WXHz9KOl+XDfgzF98s3shEwFuwzJVIIX4QBjils+cOF++gbwtMrmU5ko
- hwr7L1XoV7QysiQCDOGLF/kIpf40KRcNr5BiP1aNkDydS4NyKTN/sNEnaRgZ+zrqJlpBc533g9E
- Rj1sSlUXKi99/ABt4b4NtFt/bC8ATlG+X542gx08Jf2AEyNENVuEVi+WEbkRclILOUY30gAwxMT
- XK1rwKJowZdx/jYsCJsvWnk0qPWxrrPBOFGYS6onb4bw==
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: Christopher Obbard <chris.obbard@collabora.com>, Jonas Karlman
- <jonas@kwiboo.se>, u-boot@lists.denx.de
-Subject: [PATCH] rockchip: spl: Cache boot source id for later use
-Date: Fri, 15 Mar 2024 17:34:52 +0000
-Message-ID: <20240315173454.2672509-1-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.43.2
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: Cc:
+ References: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1710526017;
+ bh=SUFKGCW6xstkhBj+tyB8CVJt194y+YwyH3TjFCqc1OM=;
+ b=FmWlt0l+/VUjc5hGMTRK4azX7r0PYOESp2RrwBeYiB35ONJWuLhiNyWxUMRcLP5Vbhu4kRqi9
+ FwwiAYvvcGfGG4UKHznLvcWANRjo/tprB2hPCNEr3W0DytHjWvKYyVqnZ8LHnzgUWOuvN8s4emy
+ 8tdYZ48z4JmMHkmEjSQegvftvGi+7A8kQC79yjFrtzhkMb69+UwkSMS45qU2TdBYMCrcVZYFiIJ
+ FhO62gnDkgYGZQ2uJe0QtUKogmBYkC7p+esHGpNKS3I8xRmqkN3Tm1Hfr27/97ZawMnSS67VhwQ
+ Lr9ebvZEfQYXMALd6kgA7pgHsnpJ6PoDifNqTD3r2Q2Q==
+Message-ID: <59ba9347-ec51-4c81-b488-83c67035abd8@kwiboo.se>
+Date: Fri, 15 Mar 2024 19:06:53 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] cmd: sf: Fix sf probe crash
+To: Weizhao Ouyang <o451686892@gmail.com>, Dario Binacchi
+ <dario.binacchi@amarulasolutions.com>, Tom Rini <trini@konsulko.com>
+References: <20240104114619.280513-1-o451686892@gmail.com>
+Content-Language: en-US
+Cc: Michal Simek <michal.simek@amd.com>, Jagan Teki
+ <jagan@amarulasolutions.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>, Venkatesh Yadav Abbarapu
+ <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20240104114619.280513-1-o451686892@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-Report-Abuse-To: abuse@forwardemail.net
 X-Report-Abuse: abuse@forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 167.172.40.54
-X-ForwardEmail-ID: 65f486c91148fd6640fdcecb
+ 149.28.215.223
+X-ForwardEmail-ID: 65f48e416c5bf97101a6a54f
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,77 +75,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rockchip BROM write a boot source id at CFG_IRAM_BASE + 0x10, the id
-indicate from what storage media TPL/SPL was loaded from.
+Hi,
 
-SPL use this value to determine what device "same-as-spl" represent when
-determining from where FIT should be loaded. This works as long as the
-boot_devices array contain a matching id <-> node path entry.
+On 2024-01-04 12:46, Weizhao Ouyang wrote:
+> Handle the return value of spi_flash_probe_bus_cs() to avoid sf probe
+> crashes.
+> 
+> Signed-off-by: Weizhao Ouyang <o451686892@gmail.com>
 
-However, SPL typically load a small part of TF-A into SRAM and on RK3399
-this overwrites the CFG_IRAM_BASE + 0x10 addr used for boot source id.
+This fixes a null pointer dereference when running "sf probe" and there
+are no spi devices enabled in the device tree for my boards, so:
 
-Here boot source id is 3 before FIT images is loaded, and 0 after:
+Fixes: 3feea0ba196a ("spi: spi_flash_probe_bus_cs() rely on DT for spi speed and mode")
 
-  U-Boot SPL 2024.04-rc4 (Mar 15 2024 - 17:26:19 +0000)
-  board_spl_was_booted_from: brom_bootdevice_id 3 maps to '/spi@ff1d0000/flash@0'
-  Trying to boot from SPI
-  ## Checking hash(es) for config config-1 ... OK
-  ## Checking hash(es) for Image atf-1 ... sha256+ OK
-  ## Checking hash(es) for Image u-boot ... sha256+ OK
-  ## Checking hash(es) for Image fdt-1 ... sha256+ OK
-  ## Checking hash(es) for Image atf-2 ... sha256+ OK
-  ## Checking hash(es) for Image atf-3 ... sha256+ OK
-  board_spl_was_booted_from: failed to resolve brom_bootdevice_id 0
-  spl_decode_boot_device: could not find udevice for /mmc@fe330000
-  spl_decode_boot_device: could not find udevice for /mmc@fe320000
-  spl_perform_fixups: could not map boot_device to ofpath: -19
+Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
 
-Use a static bootdevice_brom_id to cache the boot source id after an
-initial read from SRAM to fix this, this allow spl_perform_fixups() to
-resolve correct boot source path for "same-as-spl" after SPL have loaded
-TF-A related FIT images into memory.
+Regards,
+Jonas
 
-With this the spl-boot-device prop can correctly be resolved to the
-SPI flash node in the control FDT:
-
-  => fdt addr ${fdtcontroladdr}
-  Working FDT set to f1ee6710
-  => fdt list /chosen
-  chosen {
-      u-boot,spl-boot-device = "/spi@ff1d0000/flash@0";
-      stdout-path = "serial2:1500000n8";
-      u-boot,spl-boot-order = "same-as-spl", "/mmc@fe330000", "/mmc@fe320000";
-  };
-
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
- arch/arm/mach-rockchip/spl.c | 10 +++++++++-
- 1 file changed, 9 insertions(+), 1 deletion(-)
-
-diff --git a/arch/arm/mach-rockchip/spl.c b/arch/arm/mach-rockchip/spl.c
-index 1586a093fc37..27e996b504e7 100644
---- a/arch/arm/mach-rockchip/spl.c
-+++ b/arch/arm/mach-rockchip/spl.c
-@@ -32,9 +32,17 @@ __weak const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
- 
- const char *board_spl_was_booted_from(void)
- {
--	u32  bootdevice_brom_id = readl(BROM_BOOTSOURCE_ID_ADDR);
-+	static u32 bootdevice_brom_id;
- 	const char *bootdevice_ofpath = NULL;
- 
-+	if (!bootdevice_brom_id)
-+		bootdevice_brom_id = readl(BROM_BOOTSOURCE_ID_ADDR);
-+	if (!bootdevice_brom_id) {
-+		debug("%s: unknown brom_bootdevice_id %x\n",
-+		      __func__, bootdevice_brom_id);
-+		return NULL;
-+	}
-+
- 	if (bootdevice_brom_id < ARRAY_SIZE(boot_devices))
- 		bootdevice_ofpath = boot_devices[bootdevice_brom_id];
- 
--- 
-2.43.2
+> ---
+>  cmd/sf.c | 5 +++--
+>  1 file changed, 3 insertions(+), 2 deletions(-)
+> 
+> diff --git a/cmd/sf.c b/cmd/sf.c
+> index 730996c02b..e3866899f6 100644
+> --- a/cmd/sf.c
+> +++ b/cmd/sf.c
+> @@ -135,8 +135,9 @@ static int do_spi_flash_probe(int argc, char *const argv[])
+>  	}
+>  	flash = NULL;
+>  	if (use_dt) {
+> -		spi_flash_probe_bus_cs(bus, cs, &new);
+> -		flash = dev_get_uclass_priv(new);
+> +		ret = spi_flash_probe_bus_cs(bus, cs, &new);
+> +		if (!ret)
+> +			flash = dev_get_uclass_priv(new);
+>  	} else {
+>  		flash = spi_flash_probe(bus, cs, speed, mode);
+>  	}
 
