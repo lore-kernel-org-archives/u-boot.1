@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A95F0C54E58
-	for <u-boot@archiver.kernel.org>; Fri, 15 Mar 2024 15:06:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90307C54E67
+	for <u-boot@archiver.kernel.org>; Fri, 15 Mar 2024 15:06:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 45F0087FF1;
+	by phobos.denx.de (Postfix) with ESMTP id B025E87FFF;
 	Fri, 15 Mar 2024 16:06:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="we+cU4Lh";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XHHQ8Y2X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 559FF88003; Fri, 15 Mar 2024 16:06:14 +0100 (CET)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 8FCE887FDD; Fri, 15 Mar 2024 16:06:15 +0100 (CET)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D164888004
- for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 16:06:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 069508800B
+ for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 16:06:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-414008713beso4908955e9.1
- for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 08:06:08 -0700 (PDT)
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-5131a9b3d5bso2634441e87.0
+ for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 08:06:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710515168; x=1711119968; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1710515169; x=1711119969; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=cnrSRMGhccGbRZbFvxipCAyufaiPSD/lfhCstPEB5Ls=;
- b=we+cU4LhTuFGEClJ75KlzxgsRFDA0RzEzjQQysSWu1hCijBEKaJcVRVgr38MvjoHZC
- 9L/tDoNXeO2jr5EL6/cK2KqJDYtuiduHcmFeTzg8NweEF+n3p2sgDzvoQoNL7IZAjyuc
- zBmpgqaFRItbfc8hA+0L8YFwCxvAtvQ4virnTYPD+JlATd+wwtB+XvctU9fROgzPx3Kt
- kzP3zfi16+Jn6cOSE6bDd9hGj/SO5zof08O4yy26otiozl3F3kouAOCnV6R32Cokxtzh
- iSJt69fW2KPT/7BorG8TFNd0Ens4HVUKIAaSzO98QtujX3avrcVX47ljRGMQtqTEWmN9
- 50cQ==
+ :reply-to; bh=e9PNn3A0M8j5XRDzvbl1vLHxbY2HeF4JRZJRcDlmjgE=;
+ b=XHHQ8Y2XpHeG7uMhfEfLxw1mq4xoKJIFydTi0oYZ2Lk6ENr8DD1WwDVjOFoNrnQibd
+ B7fdWzOZz7Pnop6BhawGz/+xKxEoT6+gRi60oiOihMjUucodbDzzjiNRgvesp8WtvRVw
+ o7h19FhYrKyen1w3hoOTafV2yZagWzPm8SXh1Cp1eAInQAsFqSzPHiDMZcS5dKgO5aq0
+ d1XsGOC1vHi4cSweSLGgn8X3aF46rvsPDY/IAIYmhW6KAPICmm+AYn9NT1X/g4op94g7
+ Sm9Akj3buiRSvlQ7ESiY4cidEM0C1+DIQ/qjHloA/FtR7OuLCq0w9Wo6iFbqxcu2WUvz
+ UIKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710515168; x=1711119968;
+ d=1e100.net; s=20230601; t=1710515169; x=1711119969;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cnrSRMGhccGbRZbFvxipCAyufaiPSD/lfhCstPEB5Ls=;
- b=UjQdLM9CeCuyJCfblQl0AVROCZ4TRprF1/PwdMkX/UX45LPV0KBZNdCczYCxR6hNzb
- 1vQ6bLZiBBB80fE4bWtoWlK6003RKgD5GwupF+HbQKrclRQP1HQc3mSBcgX6+3qRhmb+
- 0K28DvytY12/jJCwf3oCDRtKzQstRsB5rbGH5Um/Bymb1t6kvAe2FEhgRjWbmEEuagHw
- Ep1MCSeKKUJcVilxjPsAmLw2h0K+Gk1DzqA+aBp1xbiJAweIfCrN0WRkHrRDMeLUKpx7
- eiV4pkhfPdaOsey4SEixR5z+6AW0f4+DcbIlRbuHGFXVTJR4fr8bd8Zusg1oZQp1IJTj
- FUKg==
-X-Gm-Message-State: AOJu0Yx7Bl2djTbudsPSn1HZ7O7xH0EKYRXv3WtYjp2nfidBf0/ZSVGc
- 4qWNIAGDVoOcFGkWePBlukyJMxaBy1KNruV2LfEuYRyhvsu2N9t1fzuR3ZB1Snc=
-X-Google-Smtp-Source: AGHT+IEriPhAebo5bWmX0BLke29eA38Izu8SWbylPuxNVBhdyQQVufwQ3NJHbstIwCB9yNbj2h8ZPw==
-X-Received: by 2002:a05:600c:444b:b0:413:f276:1123 with SMTP id
- v11-20020a05600c444b00b00413f2761123mr3523966wmn.35.1710515168357; 
- Fri, 15 Mar 2024 08:06:08 -0700 (PDT)
+ bh=e9PNn3A0M8j5XRDzvbl1vLHxbY2HeF4JRZJRcDlmjgE=;
+ b=jnIPbV3tlQvZi/bvb2d2M5lK7alKLvSX/8nuXODkLDb1aMC1RICKleQjoYf+l/ofwG
+ wHS2NpcrBq0LpnLjxEjaXXzC9V5cuA8/cuYOY3SSmU3rbJibwilF0wIirMQ3vZLrKc62
+ RLCRXc8Wf1E6Z7whWu7fzKruhf2iNLY7L0EO22Mj+QkECYDmwsnQB1UOK1fG0x5QJJj5
+ /MUuHDueVopFsfPErY13Nf8e5zo1yJRZR0Iw+PzrFvehI4eqaw8Vr9ifjvcsHfW2ixPR
+ g4wIYrPEfy5jKRzc5pNtKwKBh/b91ICk6FXsav6jANhAdiNsy7/v1muW0+CvPmdNsSzO
+ Zu8g==
+X-Gm-Message-State: AOJu0YxADFl17vwm79kX6Hjw+5egAmVMmsHTEf6lx1MGdYf7et8kgksI
+ lxxN5QStNjhWy7WYjR7K22ZqcNs6g9vZTdY68dW0S60pf0TbcyG39USnVynRHIw=
+X-Google-Smtp-Source: AGHT+IGbJmQGgDwFXBg0ghjxNiXHSqmcc2f4MO7f+iugGXweGVwmFnPfF+2Av5FEVUzSxtSkLHdqJA==
+X-Received: by 2002:a19:5f04:0:b0:513:cd2e:ceae with SMTP id
+ t4-20020a195f04000000b00513cd2eceaemr3541890lfb.20.1710515169373; 
+ Fri, 15 Mar 2024 08:06:09 -0700 (PDT)
 Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- jg28-20020a05600ca01c00b0041401fbe446sm1939502wmb.11.2024.03.15.08.06.07
+ jg28-20020a05600ca01c00b0041401fbe446sm1939502wmb.11.2024.03.15.08.06.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Mar 2024 08:06:07 -0700 (PDT)
+ Fri, 15 Mar 2024 08:06:08 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Fri, 15 Mar 2024 15:06:01 +0000
-Subject: [PATCH v2 2/5] usb: dwc3: select DM_USB_GADGET
+Date: Fri, 15 Mar 2024 15:06:02 +0000
+Subject: [PATCH v2 3/5] usb: gadget: CDC ACM: call usb_gadget_initialize
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240315-b4-qcom-usb-v2-2-5467ec27cb26@linaro.org>
+Message-Id: <20240315-b4-qcom-usb-v2-3-5467ec27cb26@linaro.org>
 References: <20240315-b4-qcom-usb-v2-0-5467ec27cb26@linaro.org>
 In-Reply-To: <20240315-b4-qcom-usb-v2-0-5467ec27cb26@linaro.org>
 To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>, 
@@ -80,13 +80,13 @@ To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
  Sumit Garg <sumit.garg@linaro.org>
 Cc: u-boot@lists.denx.de
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=777;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1071;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=FFtOCdyc7kFWeNXYCi6LiWr/yQ+G2PLU3dzzfBLIqOM=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtQvyXd9p0ka/L+UoDzvwtnwB28ihE9lFZ0pTM68/FBp1
- uMvB3MWd5SyMAhyMMiKKbKIn1hm2bT2sr3G9gUXYOawMoEMYeDiFICJHD3J8IcnsmlBYdh6lV9C
- yVXcD6Y/ffLmRG75FZPfFx7LNnpWs3ky/BX/skymuYTzw/EXP8yYjjRs7NVedsjtxqXC21cS7mb
- 88xMHAA==
+ bh=iF44ey0WhRVVVgOg2Xo34JBjuNlV4OImTlpeBMxGr20=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtQvyXc1Fuc4y10SOP4idWL8zd8PuFdWNW8OF1S8GFk74
+ 51mpgxjRykLgyAHg6yYIov4iWWWTWsv22tsX3ABZg4rE8gQBi5OAZhI+29GhtbSpud+Jpc/58RK
+ fK28s+3ZA8cQtffP/livL7nU2eccupqRYUptx/nwmxJ/Z3sxyPgwNTu4Wt24PdV59u2+lyH1NjF
+ nLwIA
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -105,29 +105,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-DWC3 platforms depend on DM_USB_GADGET for gadget drivers to work,
-otherwise compilation fails due to no implementation of
-dm_usb_gadget_handle_interrupts().
+To actually use the gadget the peripheral driver must be probed and we
+must call g_dnl_clear_detach(). Otherwise acm_stdio_start() will always
+fail to find a UDC on DT platforms.
 
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- drivers/usb/dwc3/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/usb/gadget/f_acm.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/drivers/usb/dwc3/Kconfig b/drivers/usb/dwc3/Kconfig
-index c0c8c16fd9c2..8a70bc682322 100644
---- a/drivers/usb/dwc3/Kconfig
-+++ b/drivers/usb/dwc3/Kconfig
-@@ -10,8 +10,9 @@ if USB_DWC3
- config USB_DWC3_GADGET
- 	bool "USB Gadget support for DWC3"
- 	default y
- 	depends on USB_GADGET
-+	select DM_USB_GADGET
- 	select USB_GADGET_DUALSPEED
+diff --git a/drivers/usb/gadget/f_acm.c b/drivers/usb/gadget/f_acm.c
+index de42e0189e8d..ba216128ab27 100644
+--- a/drivers/usb/gadget/f_acm.c
++++ b/drivers/usb/gadget/f_acm.c
+@@ -622,14 +622,23 @@ static void acm_stdio_puts(struct stdio_dev *dev, const char *str)
+ }
  
- comment "Platform Glue Driver Support"
+ static int acm_stdio_start(struct stdio_dev *dev)
+ {
++	struct udevice *udc;
+ 	int ret;
+ 
+ 	if (dev->priv) { /* function already exist */
+ 		return 0;
+ 	}
+ 
++	ret = udc_device_get_by_index(0, &udc);
++	if (ret) {
++		pr_err("USB init failed: %d\n", ret);
++		return ret;
++	}
++
++	g_dnl_clear_detach();
++
+ 	ret = g_dnl_register("usb_serial_acm");
+ 	if (ret)
+ 		return ret;
  
 
 -- 
