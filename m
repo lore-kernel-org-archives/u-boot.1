@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACD84C54E67
-	for <u-boot@archiver.kernel.org>; Fri, 15 Mar 2024 15:12:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C20FC54E58
+	for <u-boot@archiver.kernel.org>; Fri, 15 Mar 2024 15:12:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D441F87FEF;
-	Fri, 15 Mar 2024 16:10:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D249588054;
+	Fri, 15 Mar 2024 16:10:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uFq5DrQg";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XOC8eiGL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8B788801F; Fri, 15 Mar 2024 16:10:48 +0100 (CET)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
+ id 0955D87FBF; Fri, 15 Mar 2024 16:10:51 +0100 (CET)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92ED688023
- for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 16:10:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CCAAE88064
+ for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 16:10:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-33e6aca1ca9so1676774f8f.2
- for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 08:10:40 -0700 (PDT)
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-33ecb04e018so875219f8f.1
+ for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 08:10:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710515440; x=1711120240; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1710515441; x=1711120241; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=HxlOsugX2/wIO/P7KsmKCSR/CeuUXJcHxpYPD4HuMPo=;
- b=uFq5DrQgzkugw9zhtf17coZj9ibue6w9AVFLCs71+pWiuQiI+q6PoZ4me0Xz515nhw
- W1kPfBh+/GAMTt7JNtZGl7TAJVN2PfT/4fEmnUsiCZCrmKwvvrUo8ais5xY7yAsHNcKZ
- KnSiL7qTkYAu6UpYHnlWfRy93uc8rpyZwARhTLLbNvgmX6xosVuO3LsBbZkDnQOzBkm0
- mqJBcBcqstWug70YT7oBLM5G6wpGhpU5Rx0K/9D2RHBPSFxXYZ0cLd/bhH/RvY0+9QEL
- s4cn87CkU0cNxBaXBSL9JY+V7XRi0zLM7X9/9zDsPD6LVd4leOqlNfzRzoWi+MtF4QRx
- Mf4A==
+ :reply-to; bh=LlTy2SH0jD+rDZMfgaioHxBqgSU8ahy9ZHuQdbxygR8=;
+ b=XOC8eiGLM4u/J1fApuujNS+0hVshfzrbZb3z2il7hkbBc4tufZmrgL7Cr5zmhki+sY
+ pIcF9UZhozoqcqd3LCm93TrS8WoTcGAvp1t72nk85jVPBti+MUSSoMCErjVUyP2IB4ZM
+ xYbXLaCE/Lc3xeIxGjWb+oWHYSfjapAhxPo2wnCdLOD5qgjyp9DKb5JV2sNMLerTB4vO
+ vLZVCXX1agUFecLSqZ7opRg7uvT2QLo9VWFdoM/Yc7wfbWM8GAyA0AHGIeJe+XcOUb0r
+ QwKzMITykeePdXo0BttNoSFgQx1sc66zJVBKKYUOahwSQHHOYD0mAzivaZYfarttFrhZ
+ z5Xg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710515440; x=1711120240;
+ d=1e100.net; s=20230601; t=1710515441; x=1711120241;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HxlOsugX2/wIO/P7KsmKCSR/CeuUXJcHxpYPD4HuMPo=;
- b=s/fwxFbsAznuTtIampZuc133juqMITZyumsNxPTVj5Fyar1TUzKEwQrY281K2CEAxf
- N3/aTKDvnWerVxuXp+9aje9NtHvH97q3y4RZ1RaEimALQixkyo8SpM7QQxpitMxRz7hx
- Xwa/QAB4hc3f/59Llj2kToLzfYcEA9cVP4xZqxIczo7MUp1HwuN8FymgURwjFTj3MrqU
- 7GjKnpuLaFz++PFvoZmR/HLl1/Lh1qtOu7pVQTTkfblyOMF8T7c0JQTLg2M9BlVsB5mb
- GcLh1WH1ckFAtRJsbXdTITovSPE1QUM3chwXcf4i8YBclTX6k3G9CDPToQTG2oi9NFpF
- c5KQ==
-X-Gm-Message-State: AOJu0Yxetg4OtAnYY6CjXWf83IUajuSQF2j/FjbhlhwSMpp4B7AT49FY
- /t0dBTidU0ceC+inRC/GjVpQAU9E/L31EkUu4+rYPRk5+toxhn8JFVoOE7z1pSdS7iCucgMxk6z
- z
-X-Google-Smtp-Source: AGHT+IHJ1E9Vq7gXDek2ZchdUiD7pkg67BDdVeAuiuYwxteftVHpsICEtRYO+AyonSYJymMRqG37kA==
-X-Received: by 2002:adf:fa0e:0:b0:33e:cbec:b2bd with SMTP id
- m14-20020adffa0e000000b0033ecbecb2bdmr2800266wrr.9.1710515439870; 
- Fri, 15 Mar 2024 08:10:39 -0700 (PDT)
+ bh=LlTy2SH0jD+rDZMfgaioHxBqgSU8ahy9ZHuQdbxygR8=;
+ b=hFF0S+jOvZGHSyVlRIoOCIyJHHwrdWSbCBDzJP0ux76VUKXfEH454AuU+yD94a/k4/
+ nxOOcY0ZkVPkMp+57K4K7JIbvbiWoEJ3Gv8iBGLRlHHsAXLQd6eD8+cxBu39jtO0Wne0
+ DNnvjA6YTcIj0imIwKt7LLP6cltnNoEFeqaslHoDaR455F3QrU6S5PS9T9ZYXS5sZ5pc
+ dkS47aGBXFu4EIhPRMhyzmlLuJY6ocCc65yBWogtLs3tHd41+ooJNbsPz3VZj8+mHx6C
+ zYyvyl5x/kU+3MxPQss4AQMagqzFv6IFG5tCVroUWY6aZrXVm2S/URLzzjPM6lQFKhdi
+ cZ1A==
+X-Gm-Message-State: AOJu0YyJ2wjx7dQvmOaKStcsMV/7ItYhzy20j0NNBBx4ffHVvdVUFx+p
+ acbGDuWGHeeaiQVJXBqnkxqWmlUztXUQxmptj3kMRtg+WN5tw7/IPb9qaUL8P6ltTalwVrHICD+
+ v
+X-Google-Smtp-Source: AGHT+IF3+TrYDQB/HGBdUgAY0a4SkjRnZOpIq4o58FfxZi9v6xkn4arFEqTYKjuksDlmVDxGv9BJwg==
+X-Received: by 2002:a5d:4577:0:b0:33e:9116:bef4 with SMTP id
+ a23-20020a5d4577000000b0033e9116bef4mr2507240wrc.14.1710515441730; 
+ Fri, 15 Mar 2024 08:10:41 -0700 (PDT)
 Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- n6-20020a5d4006000000b0033e699fc6b4sm3398141wrp.69.2024.03.15.08.10.39
+ n6-20020a5d4006000000b0033e699fc6b4sm3398141wrp.69.2024.03.15.08.10.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Mar 2024 08:10:39 -0700 (PDT)
+ Fri, 15 Mar 2024 08:10:41 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Fri, 15 Mar 2024 15:10:20 +0000
-Subject: [PATCH v2 11/14] mach-snapdragon: fixup power-domains
+Date: Fri, 15 Mar 2024 15:10:22 +0000
+Subject: [PATCH v2 13/14] qcom_defconfig: enable livetree
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240315-b4-qcom-livetree-v2-11-ab635774b2dc@linaro.org>
+Message-Id: <20240315-b4-qcom-livetree-v2-13-ab635774b2dc@linaro.org>
 References: <20240315-b4-qcom-livetree-v2-0-ab635774b2dc@linaro.org>
 In-Reply-To: <20240315-b4-qcom-livetree-v2-0-ab635774b2dc@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -80,13 +80,13 @@ To: Tom Rini <trini@konsulko.com>,
  Sean Anderson <seanga2@gmail.com>
 Cc: u-boot@lists.denx.de
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2538;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1117;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=eATLOOhI4TMycRloeb2rEN+Hpuc/Br8JMYSeGYyQmIY=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtQvKY835HU45L8PffhOkP3iOru60G+6ovFBU/etT8xIa
- F0rIOPbUcrCIMjBICumyCJ+Ypll09rL9hrbF1yAmcPKBDKEgYtTACYSKs7wP9rv7fWquhem22bd
- TJpW/+tMZp1C9enM2wu1ONJ+RlUETWf4Hzxnl0J6lMTmyws2T709ffrt6DU/CpXkZ8/RX2Kyc0V
- dxX8A
+ bh=K+hGLekjLNLv+gZXUcwWJjU4qq1J3VQmPrhkKGcSqhI=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtQvKU9E5ry9df6YZP58I6kfH2bvS/L16RCotNq6lLs6z
+ DKwZcrrjlIWBkEOBlkxRRbxE8ssm9ZettfYvuACzBxWJpAhDFycAjCRJ0yMDLMmcHlzrp3lc/Ds
+ oZ8z7d9Jzll26s6+Bkm+D+0m/1q/ffNj+J/Ys5754dZTn6wNeAP9vjZuaFVoC21b6H/z54mSmqf
+ Ox/MA
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -105,78 +105,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We don't support the RPM(h)PD power domains in U-Boot, and we don't need
-to - the necessary resources are on, and we aren't going to enter any
-low power modes.
+Qualcomm FDTs are on the larger size, and with the addition of DT
+modifications during board_init() it makes sense to enable OF_LIVE
+globally. The cost of building the tree should be offset by the
+increased efficiency at which we can walk it.
 
-We could try using a no-op device, but this requires adding a compatible
-for every platform, and just pollutes the driver model. So instead let's
-just remove every "power-domains" property that references the RPM(h)pd
-power controller. This takes <1ms as we're using OF_LIVE.
+Some rough measurements with CONFIG_BOOTSTAGE suggests that this might
+add 0.1-0.2ms to the boot-to-console time. However the reset-to-reset
+timer difference is in the range of 0.5ms so this could just be noise.
 
-Of note, this only applies to drivers which are loading post-relocation.
-Drivers loaded pre-reloc that reference the rpm(h)pd still need
-DM_FLAG_DEFAULT_PD_CTRL_OFF in their flags.
+Suffice to say, no significant slow down.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- arch/arm/mach-snapdragon/of_fixup.c | 32 ++++++++++++++++++++++++++++++++
- 1 file changed, 32 insertions(+)
+ configs/qcom_defconfig | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/arch/arm/mach-snapdragon/of_fixup.c b/arch/arm/mach-snapdragon/of_fixup.c
-index 6810c8617cc0..49f1fc1948f3 100644
---- a/arch/arm/mach-snapdragon/of_fixup.c
-+++ b/arch/arm/mach-snapdragon/of_fixup.c
-@@ -21,8 +21,9 @@
- #include <dm/of_access.h>
- #include <dm/of.h>
- #include <fdt_support.h>
- #include <linux/errno.h>
-+#include <stdlib.h>
- 
- /* U-Boot only supports USB high-speed mode on Qualcomm platforms with DWC3
-  * USB controllers. Rather than requiring source level DT changes, we fix up
-  * DT here. This improves compatibility with upstream DT and simplifies the
-@@ -108,8 +109,39 @@ static void fixup_usb_nodes(void)
- 			log_warning("Failed to fixup node %s: %d\n", glue_np->name, ret);
- 	}
- }
- 
-+/* Remove all references to the rpmhpd device */
-+static void fixup_power_domains(void)
-+{
-+	struct device_node *pd = NULL, *np = NULL;
-+	struct property *prop;
-+	const __be32 *val;
-+
-+	/* All Qualcomm platforms name the rpm(h)pd "power-controller" */
-+	for_each_of_allnodes(pd) {
-+		if (pd->name && !strcmp("power-controller", pd->name))
-+			break;
-+	}
-+
-+	/* Sanity check that this is indeed a power domain controller */
-+	if (!of_find_property(pd, "#power-domain-cells", NULL)) {
-+		log_err("Found power-controller but it doesn't have #power-domain-cells\n");
-+		return;
-+	}
-+
-+	/* Remove all references to the power domain controller */
-+	for_each_of_allnodes(np) {
-+		if (!(prop = of_find_property(np, "power-domains", NULL)))
-+			continue;
-+
-+		val = prop->value;
-+		if (val[0] == cpu_to_fdt32(pd->phandle))
-+			of_remove_property(np, prop);
-+	}
-+}
-+
- void qcom_of_fixup_nodes(void)
- {
- 	fixup_usb_nodes();
-+	fixup_power_domains();
- }
+diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+index cbc612b44bd9..eebd0d74bd51 100644
+--- a/configs/qcom_defconfig
++++ b/configs/qcom_defconfig
+@@ -25,8 +25,11 @@ CONFIG_CMD_UFS=y
+ CONFIG_CMD_USB=y
+ CONFIG_CMD_CAT=y
+ CONFIG_CMD_BMP=y
+ CONFIG_CMD_LOG=y
++CONFIG_OF_LIVE=y
++# CONFIG_NET is not set
++# CONFIG_OFNODE_MULTI_TREE is not set
+ CONFIG_BUTTON_QCOM_PMIC=y
+ CONFIG_CLK=y
+ CONFIG_CLK_QCOM_QCS404=y
+ CONFIG_CLK_QCOM_SDM845=y
 
 -- 
 2.44.0
