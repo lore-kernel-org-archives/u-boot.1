@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCB38C54E67
-	for <u-boot@archiver.kernel.org>; Fri, 15 Mar 2024 17:24:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0512AC54E58
+	for <u-boot@archiver.kernel.org>; Fri, 15 Mar 2024 17:26:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1DB8987CB7;
-	Fri, 15 Mar 2024 18:24:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4B84587FBF;
+	Fri, 15 Mar 2024 18:26:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oSDUNh+X";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pZqpqmNC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 62CA2870D2; Fri, 15 Mar 2024 18:24:45 +0100 (CET)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id B7B6687FBF; Fri, 15 Mar 2024 18:26:03 +0100 (CET)
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [IPv6:2a00:1450:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 806E587CB7
- for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 18:24:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 273B1870D2
+ for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 18:26:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-413eee86528so15859155e9.3
- for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 10:24:43 -0700 (PDT)
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-513c982a619so3204855e87.2
+ for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 10:26:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710523483; x=1711128283; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1710523560; x=1711128360; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :references:cc:to:content-language:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=4Tkk4CmByn1mZqe72G45G/3LfdTX7jRDBC4xFS13Y1c=;
- b=oSDUNh+XV4PmyGb/dtJTNKAHCosdiO/PqFNaoUdCt2Eck3Caz7iBA+Et+BmqD8LLvc
- T9c02+926BJWbi22DGFQGZCkkHmlzm1knjfR5QlR97Ojih8fj7L6wVVn1T/MzlYjOKvu
- cmfMFn7ZE2X7CMgq23hAFAP2ZWeqYuBFu5h8/2Ihsa/R+lUY5/ecYJTYrv9tUoXHieQu
- 5t0kKoBCBgkXYT4vMt/U+J/m1lL6VMqHO6DxPlTtqLL9dhsYqlHcH0DK6hwH2hB1lgG5
- Fx86KCkJ0pTtCtIbw1WIwueI8NGFfOGRxhztx07qy5AtlxJd5yA3WnBePqEc09OdqBE+
- HXtA==
+ :reply-to; bh=PS+3vkfNQAzrd5dTab+r4Cb0hj8JMCwO5MLmh8RPs0U=;
+ b=pZqpqmNCoT/Q7My/W4vXHlYwDBAtm3/VbP7CkH9YEWKwx3mcU2T/55jRs+k5CnFW7E
+ DR76pTY215D0ac0ad5e4wES2kQGDbWtnz2NyH0LttD/SDooDkapgZIvqguz6j92Y1AC4
+ ERD00ZNiluddxxJOAINYrJyBbVRki/igvKil6Kvy/lwshk2lT2QsB/eUon98iHkETxcA
+ AtLWSFUbixLSJ3siC3W3pH3x+RS5dXS4wHn6uk+cN1X4yxbjwP/paz5LGJGGRNvU9Rqk
+ ebaiIemQnA/U8oUW3jwPj05WTaGGrKBcbxwmOqUmmOEHxrX2Y6x5iowsFt/e/15N5fFW
+ b7bA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710523483; x=1711128283;
+ d=1e100.net; s=20230601; t=1710523560; x=1711128360;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :references:cc:to:content-language:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=4Tkk4CmByn1mZqe72G45G/3LfdTX7jRDBC4xFS13Y1c=;
- b=oJ3GHow9QCrsGfKOA8R//0E3BgmWhheISDd/A66z0vnDwVPSyqA6coi29DvEg76G02
- uaiXsmppgmqAoTyan78owhL0cLLvfkFJdho+NvBwM/Mh51Il9tp7gNTA5XEbxCDLK6yO
- XBb/00AlVMp7AzCfGaq2I6EfOmoMsxKu5Uc77n/lZI6rdBA/15l8qoS1Ef9N48CPxEUY
- y2/h752Slef1TvnettTua0wlicVpVxKbdDstWJ6bsIKK3KaDeOKYI3+fyI35ah6/08du
- z41YZqr4TasQVEn366dP6nmE6aFtatGAD1/ttWGe6vgtIGNCXv7GZSOJWDY8WipQA3pf
- rimw==
-X-Gm-Message-State: AOJu0YwoJ5LhIW0xUzSuG4OIAIx5B7zbT9sHjWIgkIKxXmL0hNhftH/b
- PteC02m63Xyrk+UaYbmyM8fzrsJyQvtLJNeSN6ZBzmev/jnEM6fBAtlbK1vksm0=
-X-Google-Smtp-Source: AGHT+IF25axzNd/APU+fQxWPfblFzwVfFGRPQ9tJ13ub+8h6G++pmYiNCtrY8VceJFpp1Sr5NVWhkw==
-X-Received: by 2002:a05:600c:1ca7:b0:413:1741:28b5 with SMTP id
- k39-20020a05600c1ca700b00413174128b5mr4440421wms.9.1710523482525; 
- Fri, 15 Mar 2024 10:24:42 -0700 (PDT)
+ bh=PS+3vkfNQAzrd5dTab+r4Cb0hj8JMCwO5MLmh8RPs0U=;
+ b=LVWtj2ig3hNM/bSVO1VDFn9xqRPURnshxLprKZEAtCqJfOopBwzvm3PYuK17Ly0u9I
+ 3xHw5tQPYvwja5QE8mmD8ZxVnscb0rqs/Z9fq92270j/m2rjcs5+V4VjgyMChHuutUaR
+ lfq+ERBmG4Ww0VhWSj59cKSmh04i7tyoW0dsQEoG6gB9rdErFSYql1qgKAnM22jEagd4
+ YiVrjU349zlswR+1t6XSW/1kgx8l16sRBsgZRxqKigZFPUALn7x+hWDliBFcL+GM/xNg
+ gby+Mmun5pk82IwhCBxv2pnwQlOyWOdyKBZIFW4BiSakMvddB+BOPUwM3pluuwtTq5U6
+ V0MQ==
+X-Gm-Message-State: AOJu0Yyc+uZtCbDSKSyvG9aBLAT82mjqSmOX05U4zuiYI/rHmzd0WuGz
+ XDMbfv9KMkHFhi7IayVcA60JBZkMfzjGOUOtbJ/XIwV6FzJv5OYUlNlgNVk3/TU=
+X-Google-Smtp-Source: AGHT+IFeiNnM4l3lQb/urZ0bxZdUI97QyJSt8Gj36u+QPDfCbnF3k3bvbkSZGbOGfAyzd2Bp1fxLkw==
+X-Received: by 2002:a19:5e5c:0:b0:513:dd59:bb3d with SMTP id
+ z28-20020a195e5c000000b00513dd59bb3dmr782340lfi.20.1710523560218; 
+ Fri, 15 Mar 2024 10:26:00 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:982:cbb0:a633:992a:92cc:9c3?
  ([2a01:e0a:982:cbb0:a633:992a:92cc:9c3])
  by smtp.gmail.com with ESMTPSA id
- q11-20020a05600c46cb00b0041312d21a35sm9684010wmo.7.2024.03.15.10.24.41
+ q11-20020a05600c46cb00b0041312d21a35sm9684010wmo.7.2024.03.15.10.25.59
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 15 Mar 2024 10:24:42 -0700 (PDT)
-Message-ID: <a85c6220-89df-4cc0-9984-dfa065166a27@linaro.org>
-Date: Fri, 15 Mar 2024 18:24:41 +0100
+ Fri, 15 Mar 2024 10:25:59 -0700 (PDT)
+Message-ID: <77b1ea4c-a66e-44ce-aea7-a5bf303d2a6b@linaro.org>
+Date: Fri, 15 Mar 2024 18:25:59 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v2 13/14] qcom_defconfig: enable livetree
+Subject: Re: [PATCH v2 14/14] qcom_defconfig: enable USB
 Content-Language: en-US, fr
 To: Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini
  <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>,
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
 Cc: u-boot@lists.denx.de
 References: <20240315-b4-qcom-livetree-v2-0-ab635774b2dc@linaro.org>
- <20240315-b4-qcom-livetree-v2-13-ab635774b2dc@linaro.org>
+ <20240315-b4-qcom-livetree-v2-14-ab635774b2dc@linaro.org>
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
  GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
@@ -104,7 +104,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro Developer Services
-In-Reply-To: <20240315-b4-qcom-livetree-v2-13-ab635774b2dc@linaro.org>
+In-Reply-To: <20240315-b4-qcom-livetree-v2-14-ab635774b2dc@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -125,38 +125,88 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 15/03/2024 16:10, Caleb Connolly wrote:
-> Qualcomm FDTs are on the larger size, and with the addition of DT
-> modifications during board_init() it makes sense to enable OF_LIVE
-> globally. The cost of building the tree should be offset by the
-> increased efficiency at which we can walk it.
-> 
-> Some rough measurements with CONFIG_BOOTSTAGE suggests that this might
-> add 0.1-0.2ms to the boot-to-console time. However the reset-to-reset
-> timer difference is in the range of 0.5ms so this could just be noise.
-> 
-> Suffice to say, no significant slow down.
+> Enable support for the DWC3 USB controller and required dependencies for
+> Qualcomm boards, specifically the DB845c:
+> * IOMMU / SMMU
+> * USB high-speed PHYs
+> * Mass storage and ACM gadgets
+
+I don't see configs for ACM ?
+
+Neil
+
 > 
 > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->   configs/qcom_defconfig | 3 +++
->   1 file changed, 3 insertions(+)
+>   configs/qcom_defconfig | 12 ++++++++++++
+>   1 file changed, 12 insertions(+)
 > 
 > diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-> index cbc612b44bd9..eebd0d74bd51 100644
+> index eebd0d74bd51..3979c19052db 100644
 > --- a/configs/qcom_defconfig
 > +++ b/configs/qcom_defconfig
-> @@ -25,8 +25,11 @@ CONFIG_CMD_UFS=y
+> @@ -12,8 +12,9 @@ CONFIG_BOOTSTD_FULL=y
+>   CONFIG_BOOTDELAY=1
+>   CONFIG_USE_PREBOOT=y
+>   CONFIG_SAVE_PREV_BL_INITRAMFS_START_ADDR=y
+>   CONFIG_SYS_CBSIZE=512
+> +# CONFIG_SYS_DEVICE_NULLDEV is not set
+>   CONFIG_LOG_MAX_LEVEL=9
+>   CONFIG_LOG_DEFAULT_LEVEL=4
+>   # CONFIG_DISPLAY_CPUINFO is not set
+>   CONFIG_DISPLAY_BOARDINFO_LATE=y
+> @@ -22,14 +23,17 @@ CONFIG_CMD_CLK=y
+>   CONFIG_CMD_GPIO=y
+>   CONFIG_CMD_MMC=y
+>   CONFIG_CMD_UFS=y
 >   CONFIG_CMD_USB=y
+> +CONFIG_CMD_USB_MASS_STORAGE=y
+> +CONFIG_CMD_UMS_ABORT_KEYED=y
 >   CONFIG_CMD_CAT=y
 >   CONFIG_CMD_BMP=y
 >   CONFIG_CMD_LOG=y
-> +CONFIG_OF_LIVE=y
-> +# CONFIG_NET is not set
-> +# CONFIG_OFNODE_MULTI_TREE is not set
+>   CONFIG_OF_LIVE=y
+>   # CONFIG_NET is not set
+>   # CONFIG_OFNODE_MULTI_TREE is not set
+> +CONFIG_DM_WARN=y
 >   CONFIG_BUTTON_QCOM_PMIC=y
 >   CONFIG_CLK=y
 >   CONFIG_CLK_QCOM_QCS404=y
 >   CONFIG_CLK_QCOM_SDM845=y
+> @@ -37,17 +41,24 @@ CONFIG_MSM_GPIO=y
+>   CONFIG_QCOM_PMIC_GPIO=y
+>   CONFIG_DM_KEYBOARD=y
+>   CONFIG_BUTTON_KEYBOARD=y
+>   CONFIG_MMC_HS200_SUPPORT=y
+> +CONFIG_IOMMU=y
+> +CONFIG_QCOM_HYP_SMMU=y
+> +CONFIG_MISC=y
+>   CONFIG_MMC_SDHCI=y
+>   CONFIG_MMC_SDHCI_ADMA=y
+>   CONFIG_MMC_SDHCI_MSM=y
+>   CONFIG_PHY=y
+> +CONFIG_PHY_QCOM_QUSB2=y
+> +CONFIG_PHY_QCOM_USB_HS_7NM=y
+>   CONFIG_PINCTRL=y
+>   CONFIG_PINCTRL_QCOM_QCS404=y
+>   CONFIG_PINCTRL_QCOM_SDM845=y
+>   CONFIG_DM_PMIC=y
+>   CONFIG_PMIC_QCOM=y
+> +CONFIG_DM_REGULATOR=y
+> +CONFIG_DM_REGULATOR_FIXED=y
+>   CONFIG_SCSI=y
+>   CONFIG_MSM_SERIAL=y
+>   CONFIG_MSM_GENI_SERIAL=y
+>   CONFIG_SPMI_MSM=y
+> @@ -56,8 +67,9 @@ CONFIG_SYSINFO_SMBIOS=y
+>   CONFIG_USB=y
+>   CONFIG_USB_XHCI_HCD=y
+>   CONFIG_USB_XHCI_DWC3=y
+>   CONFIG_USB_DWC3=y
+> +CONFIG_USB_DWC3_GENERIC=y
+>   CONFIG_UFS=y
+>   CONFIG_VIDEO=y
+>   # CONFIG_VIDEO_FONT_8X16 is not set
+>   CONFIG_VIDEO_FONT_16X32=y
 > 
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
