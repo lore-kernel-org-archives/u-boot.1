@@ -4,80 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8219C54E60
-	for <u-boot@archiver.kernel.org>; Fri, 15 Mar 2024 02:30:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5530BC54E5D
+	for <u-boot@archiver.kernel.org>; Fri, 15 Mar 2024 02:36:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD9B487F75;
-	Fri, 15 Mar 2024 03:30:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id C723F87F87;
+	Fri, 15 Mar 2024 03:36:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DDt7lRui";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KZZlbwXa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D88787F69; Fri, 15 Mar 2024 03:18:20 +0100 (CET)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
+ id 894D087F74; Fri, 15 Mar 2024 03:36:48 +0100 (CET)
+Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
+ [IPv6:2607:f8b0:4864:20::f34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1635687DAB
- for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 03:18:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 67C818753A
+ for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 03:36:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seashell11234455@gmail.com
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-33e70d71756so1627340f8f.1
- for <u-boot@lists.denx.de>; Thu, 14 Mar 2024 19:18:18 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf34.google.com with SMTP id
+ 6a1803df08f44-690c5d7851dso7438726d6.0
+ for <u-boot@lists.denx.de>; Thu, 14 Mar 2024 19:36:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1710469097; x=1711073897; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/mNC/nnItUvp7xWYQjVjkfgzjJ9spjUrsfWIq0EMs+k=;
- b=DDt7lRuiDEDww3uUeWca7ao5ZJafNJMEsrEmMCTd68V+hmKMSAZXGGuVVslbgZjwED
- DEsc1R43ClSrfWDMGRFqHx+sTk8LsrfomEOngl3Gr28icqM5MBGUvtFyxXRckggLVnvO
- m/1O93mbNX1e2uqBgcCgXzy76bfalC75oyrW+mWvdwzU7UnjVrG1hPNhbw66B0b1OhZp
- 0Rjl2ZloQ5pgama+DNm3Il6XUMO6qybQBfYk+6QsDhDtYie2k+owIsY+GG6dm5/xyKcU
- T4kRnGSz4BwSastpmfRq+MKOyISCVqDsTb3/muI4Id12s+3D8t4sveHUPYa5rHR4fyBs
- IyXQ==
+ d=konsulko.com; s=google; t=1710470205; x=1711075005; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=xQpCY2gEwvh4waWTKovHEZ99q7fYWbzHELoXJvasVn4=;
+ b=KZZlbwXaEv8q/bKNK6UYsQODHAghOU/dMZR8focJqHwyg1an2v5yi21ATcPjQjuwmX
+ GaYoyzFJa9Ox4ncmRbZiIYw88ji0VObptmrulnE8qiV8xX6UgSbOktV/fzjU7HdRDDQR
+ Bj1fdjguyjUZT9loUO0a51DkInxzbW7zYgHMc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710469097; x=1711073897;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=/mNC/nnItUvp7xWYQjVjkfgzjJ9spjUrsfWIq0EMs+k=;
- b=t8nZCR01ke3PJ0Ui7nV5X6JVr1p3SdJoKgnAVKbAx50kfhcYd5uavTRHvFsZH/nvP3
- t1hTrTPCuP9sEA269FSz2ZPdmedTmnfswctwenUjyJCYUsB60WE8qbtPzZLklokYqhZn
- DSCVrdgsPWDrE45+98LZ4+vcvOQxNin/5lM4Rjw17IP1emSuw1vn0ZDvO+T48odKTnyo
- 7NcN8A6N521WZPPaTbFUQhYZViFLWo5uvRdGC8m/h5uGnapaG4TCNJ1p2dWrAsXGTNeE
- b1ZTKunoOjkvjrZyIXAZyYKYjhhppUgDPmpuoM8UoDiHkmL5scZWSXNXtA1DIxK2ayNL
- NWxw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXSKHLJTeLcPskfavFbpHaSSLCu+4CVDpZJbvl0lFZIlp+bHk93PEnBaJucOhzMHgb1eCPIdI3Frke9yfl0ApTC6RKw+w==
-X-Gm-Message-State: AOJu0YxmGCjEP2EuxqFcCAsj8PQrtdq0mM6BDGhfrWHDTaLs8/XPlF0K
- 3h4q7sbEmCKl+ofL3DTOYueQE8q4kugUgyidgXD+GbGv9MRgdaHuKxW4SOsBrsUHaB6cRCB0B+m
- Gl8x36i+amYfjNbe7dNx1YIsk3rEfbuKWTMP5lEvQOsA=
-X-Google-Smtp-Source: AGHT+IHjNNF2RXCqN16/2Eori5E3EF5VFwvZLskMxP8yT0dGqS9NkNGifwWNFMhImMRzhWRF1/iENuQyr3pc3yFN16E=
-X-Received: by 2002:adf:dd87:0:b0:33e:710a:b699 with SMTP id
- x7-20020adfdd87000000b0033e710ab699mr3198575wrl.9.1710469097320; Thu, 14 Mar
- 2024 19:18:17 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1710470205; x=1711075005;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=xQpCY2gEwvh4waWTKovHEZ99q7fYWbzHELoXJvasVn4=;
+ b=USJTWw2Ai/Q2/N3+fsYrN9B8EVFe1YgkIx28XboP1aA0XwR7LHxemPlila7oG/HZVv
+ JGT6K4kkqT2usBWxweSITJh/n80PbMs0B+hW8Rxovf7ZJB8qmsSvhr6QOlAKmGmKs8KA
+ u8Be4wI2HSN4BypLT2yP8g16YppoK6Qs4Obm/cVqVM5FrYIHGrMt6mqRb1HxKE+2T6jV
+ 4SXVBJUB6bRiyJwjGkbOK3qo73X3Hy7TzcRZEQ0UxCKHUg0pfWV2uu9bmcgHMGrI8uoT
+ 382CFe04VvUUvJO5mgfcmDTji56Lidw99s1xNZZ2QmCPGPQFze1uBBw9HQ8CHTETYbFC
+ 82Eg==
+X-Gm-Message-State: AOJu0Yx6LLTb6C/3T0z4SmEAzUl4+jDwTj+7o+MaOwKELZzRDWMPDdQq
+ nM7ByS3J5hLRokjdijB49zYUH41fdY9if0+NuMWAhGL0NGgPfw558maKTko7H6XlQH6WAS3D5kk
+ G
+X-Google-Smtp-Source: AGHT+IHZJCm6B0uwnzLPFXaH4/kHq7b+IBbNmka1nWWvZo4VJgvEtQ39gAbfnu/FG/7uhRjRbctzSQ==
+X-Received: by 2002:a0c:e102:0:b0:690:cf9c:f568 with SMTP id
+ w2-20020a0ce102000000b00690cf9cf568mr3710945qvk.14.1710470204698; 
+ Thu, 14 Mar 2024 19:36:44 -0700 (PDT)
+Received: from bill-the-cat..
+ (2603-6081-7b00-007f-0000-0000-0000-1004.res6.spectrum.com.
+ [2603:6081:7b00:7f::1004]) by smtp.gmail.com with ESMTPSA id
+ gg8-20020a056214252800b00690befbe5a5sm1314014qvb.74.2024.03.14.19.36.43
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 14 Mar 2024 19:36:44 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Subject: [PATCH] CI: Move to latest container image
+Date: Thu, 14 Mar 2024 22:36:43 -0400
+Message-Id: <20240315023643.728195-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20240310055816.11575-1-seashell11234455@gmail.com>
- <20240310055816.11575-3-seashell11234455@gmail.com>
- <ZfAnkOLt4mdCZLOP@swlinux02>
- <20240312-unnatural-deviant-24bab57103ba@spud>
-In-Reply-To: <20240312-unnatural-deviant-24bab57103ba@spud>
-From: Kongyang Liu <seashell11234455@gmail.com>
-Date: Fri, 15 Mar 2024 10:18:07 +0800
-Message-ID: <CAOKwTdpqjq5W-emd4APL8Z-LYAERR=62Rbu_YmyCeSkyDska5w@mail.gmail.com>
-Subject: Re: [PATCH 2/3] riscv: dts: sophgo: Add ethernet node
-To: Conor Dooley <conor@kernel.org>
-Cc: Leo Liang <ycliang@andestech.com>, u-boot@lists.denx.de, 
- Rick Chen <rick@andestech.com>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Fri, 15 Mar 2024 03:30:04 +0100
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,36 +86,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Conor Dooley <conor@kernel.org> =E4=BA=8E2024=E5=B9=B43=E6=9C=8812=E6=97=A5=
-=E5=91=A8=E4=BA=8C 21:20=E5=86=99=E9=81=93=EF=BC=9A
->
-> On Tue, Mar 12, 2024 at 05:59:44PM +0800, Leo Liang wrote:
-> > On Sun, Mar 10, 2024 at 01:56:45PM +0800, Kongyang Liu wrote:
-> > > Add ethernet node for cv1800b SoC
-> > >
-> > > Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
-> > > ---
-> > >
-> > >  arch/riscv/dts/cv18xx.dtsi | 6 ++++++
-> > >  1 file changed, 6 insertions(+)
-> >
-> > Hi KongYang,
-> >
-> > Will there be a patch adding this ethernet node for kernel as well ?
->
-> It's highly like that the compatible of "cv1800b-ethernet" will be
-> requested to be changed to "cv1800b-dwmac" to match the designware IP
-> used in other SoCs.
->
+This moves us to our latest container image, which is now based on the
+current "Jammy" tag.
 
-I will change it in next version
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+ .azure-pipelines.yml    | 2 +-
+ .gitlab-ci.yml          | 2 +-
+ tools/docker/Dockerfile | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-> The added node also looks suspiciously missing any clocks or interrupts.
+diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
+index f8a3a9a1c8c5..27f69583c655 100644
+--- a/.azure-pipelines.yml
++++ b/.azure-pipelines.yml
+@@ -2,7 +2,7 @@ variables:
+   windows_vm: windows-2019
+   ubuntu_vm: ubuntu-22.04
+   macos_vm: macOS-12
+-  ci_runner_image: trini/u-boot-gitlab-ci-runner:jammy-20240125-12Feb2024
++  ci_runner_image: trini/u-boot-gitlab-ci-runner:jammy-20240227-14Mar2024
+   # Add '-u 0' options for Azure pipelines, otherwise we get "permission
+   # denied" error when it tries to "useradd -m -u 1001 vsts_azpcontainer",
+   # since our $(ci_runner_image) user is not root.
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index 6930b4158e14..165f765a8332 100644
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
+@@ -10,7 +10,7 @@ default:
+ 
+ # Grab our configured image.  The source for this is found
+ # in the u-boot tree at tools/docker/Dockerfile
+-image: ${MIRROR_DOCKER}/trini/u-boot-gitlab-ci-runner:jammy-20240125-12Feb2024
++image: ${MIRROR_DOCKER}/trini/u-boot-gitlab-ci-runner:jammy-20240227-14Mar2024
+ 
+ # We run some tests in different order, to catch some failures quicker.
+ stages:
+diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
+index 6d9931be7a81..cda87354566d 100644
+--- a/tools/docker/Dockerfile
++++ b/tools/docker/Dockerfile
+@@ -2,7 +2,7 @@
+ # This Dockerfile is used to build an image containing basic stuff to be used
+ # to build U-Boot and run our test suites.
+ 
+-FROM ubuntu:jammy-20240125
++FROM ubuntu:jammy-20240227
+ MAINTAINER Tom Rini <trini@konsulko.com>
+ LABEL Description=" This image is for building U-Boot inside a container"
+ 
+-- 
+2.34.1
 
-If we only consider u-boot, since u-boot does not utilize interrupts and
-clocks, this code can function properly. However, if compatibility with
-the kernel is a concern, I will discuss this issue with who is working on
-Milk-V Duo Ethernet support for the kernel.
-
-Best regards
-Kongyang Liu
