@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33DBCC54E67
-	for <u-boot@archiver.kernel.org>; Fri, 15 Mar 2024 17:02:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4F35C54E67
+	for <u-boot@archiver.kernel.org>; Fri, 15 Mar 2024 17:03:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 40F028801F;
-	Fri, 15 Mar 2024 18:02:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 50C548804C;
+	Fri, 15 Mar 2024 18:03:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kLalDsWd";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bQUJLqBT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DCBFC87CB7; Fri, 15 Mar 2024 18:02:11 +0100 (CET)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id 8C6588802B; Fri, 15 Mar 2024 18:03:29 +0100 (CET)
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60D1687FBF
- for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 18:02:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 92B5B88077
+ for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 18:03:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-33ec8f13c62so1400059f8f.0
- for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 10:02:06 -0700 (PDT)
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-33e99b62e01so1862515f8f.0
+ for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 10:03:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710522120; x=1711126920; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1710522198; x=1711126998; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :references:cc:to:content-language:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=c3d5qWjUsAW9TzOWNf5ZOW8pOoZgMH+/Qb4sItDRNJo=;
- b=kLalDsWd1ajtYUM8Mw4eWe6FH8Y6G2HIQ7Ug4X8zFvdi/If+x1qFfaIET5VjboANhr
- ucrBT1c4M2VFaCBRKSALbRr2SU2wo2iDHiBlfdAVFBI4m9UBYSx+KkyYrCCfmnoq7ITM
- VoRJXfxDLvwuT/bNg1TMJoSZvnaFVhKQ9HVoTHa1S5J98R3lg0tcUk3CWSmzgsIlyDIt
- K+MeSxe7QrqgtH5qYPo1rbE9GH9Yw3u3s3qRFoNJm3NwGp4rKbgDkBs3B0vI2Nr1bCnN
- 9Jt8T+f+v7LTrxBBNBg0EiFDId8GJh7VNFzCZkBBtZCXwD6kd59sKieUS2rb/l0bi0c8
- IGZw==
+ :reply-to; bh=OFfwMD8eXcNKmpuGTQAH0Om8KoWon75RFD6sj/KRgEg=;
+ b=bQUJLqBTYMlBo4gqdQ+VvzeDh0gLOTRkhMhxainZqe06l+caXMBKNyrWFs93HMeKx1
+ rPmB5+EfgMlnBnMWMxoN0L1Nr4du4gO9EZ7/kyirnstQkqhyovf0q6254dDG/d/mogFM
+ 3YZda26M6GK/ojpGBNlRK6rmoKcYckTWjUB3lCAe8iNccL8qLQGrqy6htumAeBWD3Byu
+ qU4cS1IVb8bbU47c2IgC025ZkHxNg9A1LN0eQE5EPbnWhqvtJYCaBQHEw4W1SeH8qg9f
+ l5H9ePO77sxdw6TQwFjhnRc3vaHTx0kyisNVnzmdqk87dEsu+IbgbEhVxJIAzum7jR+U
+ nQmQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710522120; x=1711126920;
+ d=1e100.net; s=20230601; t=1710522198; x=1711126998;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :references:cc:to:content-language:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=c3d5qWjUsAW9TzOWNf5ZOW8pOoZgMH+/Qb4sItDRNJo=;
- b=sQrBnBM8MasgkPP6/CdjP2O7XQmVhMVMF4QyJG0pthB457o0LV0NlwNo9udnQwx3yf
- 9JehtpCQxHop+mJlCU6vdfCl3kpZXBDZrEKqUJiUvn1t3t/uMPYFGVtMFarFkR83hHdH
- 1lqnU/kPcn8te5jYI7OP/ez3ZUw4AbVxAF6QXEnsjL2arUkviSitDUGkNt/GGJWUjGz9
- pgHa49469QrBU+gVlJIHyJU0TQZVAkGLFhCQC8QCfQpd7/tq73t0PBxORMVbUKskp6B9
- e7O1cm4ZGyhiVHI+avX9Qs+P+M7yPnolFYsTKOejJqf99QpNljW82bnX7fhq+Umm2FxP
- RlQA==
-X-Gm-Message-State: AOJu0YxjqGPir27Kw7GdIH7YuYkgUaCRl5DqOy9yTmr+XEY/ML6z+Ro8
- 01ivSzZX8db2NaVkj/ff7gqjnnQ1DV9JxUwF68JLS5f5hCwwywduldnDSkDla+g=
-X-Google-Smtp-Source: AGHT+IG/zYMLIqfawNALBF5t8aXBQTCUzM0Em0ooSkb5OdIM6RQONayzHPm73UaZI8YMj2lXuYdZzQ==
-X-Received: by 2002:a05:6000:bc7:b0:33e:c6a1:1a39 with SMTP id
- dm7-20020a0560000bc700b0033ec6a11a39mr2817847wrb.65.1710522120085; 
- Fri, 15 Mar 2024 10:02:00 -0700 (PDT)
+ bh=OFfwMD8eXcNKmpuGTQAH0Om8KoWon75RFD6sj/KRgEg=;
+ b=fDdVjCdhmBiJHcuc7t/i/pmn5jdSBrz9IJbMKsaeNDR87ffcyABzzMsYQwIiJrgCSR
+ ZcdQYWU6Z+ktC+mdIb2CeLdLezIpfh82dgFg2D2Jemut251suS49dXFfY9m55Xhbs4D/
+ DI1tpffeu3p7ir2+f69+a6OvrT0Ll6LBi1D4cedr6UNdhKJFW1icWDCLQ8AbHdS5QAiy
+ ko3GpWRPXzLJKIa2xBadrcbKMAX5hqkLx0XIS/b+d9SyakSrOwLv1O8o/ElbKjebAvbq
+ 8WpyHfgkvpPqvvfpZ5GonY9CzEAdYyJL3k3aXcGo77HnK+p18bKQjxdoBotpLG/IMmzL
+ RPug==
+X-Gm-Message-State: AOJu0YzuZJwgg5C/UTrXCHIA3YWYJaiGgimJOyDpcUezDSnNfeNJUPs7
+ xS/lkH/PlZd4WIbLvXjGbF7l6v0gy5qYnMHaLzrBs2ODoeWkkas52L9dN+MAiBQ=
+X-Google-Smtp-Source: AGHT+IHIYTtKbNbGURmyDfNWxPfbCJbF5s4q4DXcylUNWr2YDAFk4/Rhk8+zhLjs6U9O7rQlQVFJ2w==
+X-Received: by 2002:adf:f607:0:b0:33e:c4a6:8cc7 with SMTP id
+ t7-20020adff607000000b0033ec4a68cc7mr4052585wrp.37.1710522197931; 
+ Fri, 15 Mar 2024 10:03:17 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:982:cbb0:a633:992a:92cc:9c3?
  ([2a01:e0a:982:cbb0:a633:992a:92cc:9c3])
  by smtp.gmail.com with ESMTPSA id
- t7-20020a05600001c700b0033e239040d8sm3589283wrx.84.2024.03.15.10.01.59
+ t7-20020a05600001c700b0033e239040d8sm3589283wrx.84.2024.03.15.10.03.16
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 15 Mar 2024 10:01:59 -0700 (PDT)
-Message-ID: <85294877-07f9-47b8-aa0d-b6902bc5e063@linaro.org>
-Date: Fri, 15 Mar 2024 18:01:58 +0100
+ Fri, 15 Mar 2024 10:03:17 -0700 (PDT)
+Message-ID: <323dab12-a25c-4418-a7ea-300a94db308c@linaro.org>
+Date: Fri, 15 Mar 2024 18:03:16 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v2 0/5] Qualcomm DWC3 USB support
+Subject: Re: [PATCH v2 01/14] mailmap: update Bhupesh's email address
 Content-Language: en-US, fr
-To: Caleb Connolly <caleb.connolly@linaro.org>, Marek Vasut <marex@denx.de>,
- Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot@lists.denx.de
-References: <20240315-b4-qcom-usb-v2-0-5467ec27cb26@linaro.org>
+To: Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini
+ <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
+Cc: u-boot@lists.denx.de, Bhupesh Sharma <bhupesh.linux@gmail.com>
+References: <20240315-b4-qcom-livetree-v2-0-ab635774b2dc@linaro.org>
+ <20240315-b4-qcom-livetree-v2-1-ab635774b2dc@linaro.org>
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
  GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
@@ -104,7 +104,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro Developer Services
-In-Reply-To: <20240315-b4-qcom-usb-v2-0-5467ec27cb26@linaro.org>
+In-Reply-To: <20240315-b4-qcom-livetree-v2-1-ab635774b2dc@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -124,50 +124,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 15/03/2024 16:05, Caleb Connolly wrote:
-> This series enables support for Qualcomm platforms in the DWC3 driver,
-> adds support for arbitrary sector sizes to the USB mass storage gadget,
-> and fixes an issue with the CDC ACM driver where it wouldn't initialise
-> the USB device.
+On 15/03/2024 16:10, Caleb Connolly wrote:
+> Update Bhupesh's email to his new one.
 > 
-> Additionally, it fixes a syntax bug in the Qualcomm SMMU driver, and
-> makes USB_DWC3_GADGET select DM_USB_GADGET to fix compilation with
-> gadget mode.
-> 
-> This is part of a larger series enabling DWC3 USB support on Qualcomm
-> platforms, a feature branch with all patches can be found at [1].
-> 
-> [1]: https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/tree/b4/qcom-livetree
-> 
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
-> Changes in v2:
-> - Drop custom set/clrbits implementation in qcom dwc3 glue.
-> - Additional minor cleanup based on Marek's comments.
-> - Link to v1: https://lore.kernel.org/r/20240131-b4-qcom-usb-v1-0-6438b2a2285e@linaro.org
 > 
+> Cc: Bhupesh Sharma <bhupesh.linux@gmail.com>
 > ---
-> Caleb Connolly (5):
->        usb: dwc3-generic: implement Qualcomm wrapper
->        usb: dwc3: select DM_USB_GADGET
->        usb: gadget: CDC ACM: call usb_gadget_initialize
->        usb: gadget: UMS: support multiple sector sizes
->        iommu: qcom-smmu: fix debugging
+>   .mailmap | 1 +
+>   1 file changed, 1 insertion(+)
 > 
->   cmd/usb_mass_storage.c              |   4 --
->   drivers/iommu/qcom-hyp-smmu.c       |   2 +-
->   drivers/usb/dwc3/Kconfig            |   1 +
->   drivers/usb/dwc3/dwc3-generic.c     |  81 ++++++++++++++++++++++++++++-
->   drivers/usb/gadget/f_acm.c          |   9 ++++
->   drivers/usb/gadget/f_mass_storage.c | 101 ++++++++++++++++++++----------------
->   drivers/usb/gadget/storage_common.c |  12 +++--
->   include/usb_mass_storage.h          |   1 -
->   8 files changed, 156 insertions(+), 55 deletions(-)
-> ---
-> base-commit: e03a71b2cefd86ba58df166d4ea820a215ebb655
+> diff --git a/.mailmap b/.mailmap
+> index d1f08f3eca8a..f6e0847b2168 100644
+> --- a/.mailmap
+> +++ b/.mailmap
+> @@ -29,8 +29,9 @@ Ashok Reddy Soma <ashok.reddy.soma@amd.com> <ashok.reddy.soma@xilinx.com>
+>   Atish Patra <atishp@atishpatra.org> <atish.patra@wdc.com>
+>   Bharat Kumar Gogada <bharat.kumar.gogada@amd.com> <bharat.kumar.gogada@xilinx.com>
+>   Bharat Kumar Gogada <bharat.kumar.gogada@amd.com> <bharatku@xilinx.com>
+>   Bhargava Sreekantappa Gayathri <bhargava.sreekantappa-gayathri@amd.com> <bhargava.sreekantappa-gayathri@xilinx.com>
+> +Bhupesh Sharma <bhupesh.linux@gmail.com> <bhupesh.sharma@linaro.org>
+>   Bin Meng <bmeng.cn@gmail.com> <bin.meng@windriver.com>
+>   Boris Brezillon <bbrezillon@kernel.org> <boris.brezillon@bootlin.com>
+>   Boris Brezillon <bbrezillon@kernel.org> <boris.brezillon@free-electrons.com>
+>   Christian Kohn <chris.kohn@amd.com> <christian.kohn@xilinx.com>
 > 
-> // Caleb (they/them)
-> 
-
-LGTM
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
