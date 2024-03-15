@@ -4,63 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D929C54E67
-	for <u-boot@archiver.kernel.org>; Fri, 15 Mar 2024 12:02:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2334DC54E67
+	for <u-boot@archiver.kernel.org>; Fri, 15 Mar 2024 12:19:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4254587D84;
-	Fri, 15 Mar 2024 13:01:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
+	by phobos.denx.de (Postfix) with ESMTP id 7B7DA87FCD;
+	Fri, 15 Mar 2024 13:19:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="s8KZLtOV";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="e0RsaV4B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D4FB687FC8; Fri, 15 Mar 2024 13:01:37 +0100 (CET)
-Received: from madrid.collaboradmins.com (madrid.collaboradmins.com
- [IPv6:2a00:1098:ed:100::25])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C169887F3F; Fri, 15 Mar 2024 13:19:14 +0100 (CET)
+Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
+ [IPv6:2607:f8b0:4864:20::736])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B3A3F87FC0
- for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 13:01:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=collabora.com
+ by phobos.denx.de (Postfix) with ESMTPS id 792AC87F3F
+ for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 13:19:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=chris.obbard@collabora.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1710504093;
- bh=TxGFhiODdBnroqBBaR+JZPZ348xPBsLpNJmGRoQZZTs=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=s8KZLtOV3vOYRvddNjFX7LxU+MvWJ9OqbwfMvM1NowK3FNJy4bKLjlDGZdpV9T2Dc
- HcZpf1nKLeMtppaMW5xKLiWJrGi8prIq63pIb3oH7oGwiq6x9tCySYNDyGUZ8iXif6
- cMUr4QxDoNdfapZQWrlIN5Z9oOvMg7HQKfmZtS743PHfNjqO+CkhwC0u90fdZ/0mrz
- 1PH53gwkgh/15UTtdhWUgXdf5RhCMJxCDE+2WkrnL7JZqF8hSU1DOx2j97axd1OCiG
- LrhNdRzEcj0MPo3TjvIDJEDEf3waT3pO9pzNEZrb5F5BscWUW9jc/uLu6Jd7WGNqaD
- gZph7EgcnOqgQ==
-Received: from obbardc-t14.home (cola.collaboradmins.com [195.201.22.229])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested) (Authenticated sender: obbardc)
- by madrid.collaboradmins.com (Postfix) with ESMTPSA id B01073782111;
- Fri, 15 Mar 2024 12:01:32 +0000 (UTC)
-From: Christopher Obbard <chris.obbard@collabora.com>
-To: u-boot@lists.denx.de
-Cc: kernel@collabora.com, Christopher Obbard <chris.obbard@collabora.com>,
- Chen-Yu Tsai <wens@csie.org>, Dragan Simic <dsimic@manjaro.org>,
- FUKAUMI Naoki <naoki@radxa.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@theobroma-systems.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 2/2] rockchip: rock-pi-4-rk3399: enable booting from SPI
- flash
-Date: Fri, 15 Mar 2024 12:01:19 +0000
-Message-ID: <20240315120126.75424-3-chris.obbard@collabora.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240315120126.75424-1-chris.obbard@collabora.com>
-References: <20240315120126.75424-1-chris.obbard@collabora.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x736.google.com with SMTP id
+ af79cd13be357-781753f52afso113100985a.2
+ for <u-boot@lists.denx.de>; Fri, 15 Mar 2024 05:19:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1710505151; x=1711109951; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=byvDWsXZlxYx9nciRDGhKZEBZUvb9LJJmO0ntWcaMrY=;
+ b=e0RsaV4BUuvztLXi3CR2tgndOKzXBxiyT2TLKmige3DVcBjg/ldW0Q7sTn1IhnItx2
+ P8Wy4S7vsM0iSlzx1Th9mLrIx1h5HgYG1obIRg/w07JI1maxtb3jyjwOst8EiV1ARTlY
+ BWOwzdnxD5hAIJUaeP76HGoW0xc3se6ziXVEQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710505151; x=1711109951;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=byvDWsXZlxYx9nciRDGhKZEBZUvb9LJJmO0ntWcaMrY=;
+ b=uFKcEbNgtY5lDLgSbFUCsomUX8E7WEF78KIu0wtFnx98WrNtvqrDbvUIbGIAEaNOSG
+ Q/kQ+w2HeXmwe70dua1K8zzGSe05VnAqQOX4cTHMdJHZJuH81foFx2qtVRnKX4tT88QE
+ Or/e5LFanXh2gDyO0L8VmSs8oyLP3cOSdN/4L8zZuSn2olimP6+D6esJndE08GPS9s6A
+ znaZbqiEgNJh1mYopvlQCDkzBKjeUfMWZnXLb76vZV6+8uW1WTF+DZDeStUumbrgqBW/
+ 9kg1zc/C3ZQjMkMTXWBp5WmR6CpDE0ZIHeZqxqqDEh7qePmELCAzKsfPmun2yNcLLe4O
+ wnqg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUKqwJOKtwa4rfKWJwO/OYJaCQ2yehlqPwRzc1ohweWvN4bkdZ4xBj6jA3kk0bK5g255nHrhN60GGExCMJsjY6KiIwkoQ==
+X-Gm-Message-State: AOJu0YyYUYcNVET8bXofjjub76cH/OTj+fs7zuDsxpPD1FdFCS5ffije
+ ZCvJr3sw/q0wvuV2rGA0deaF1WLhS6OlK01wO9m19Qq+llrNXxvbwc1ju2IsMsFyyJYr/C3isF8
+ 2
+X-Google-Smtp-Source: AGHT+IEsStxnD/weZArOoNs5MtxzW/LhKtXob0VfFF197XFdxLu40UdFMCcd0WdYYgV/MUBlmj6H+g==
+X-Received: by 2002:a05:620a:145b:b0:789:e917:ac9e with SMTP id
+ i27-20020a05620a145b00b00789e917ac9emr334279qkl.47.1710505150912; 
+ Fri, 15 Mar 2024 05:19:10 -0700 (PDT)
+Received: from [127.0.1.1]
+ (2603-6081-7b00-007f-0000-0000-0000-1004.res6.spectrum.com.
+ [2603:6081:7b00:7f::1004]) by smtp.gmail.com with ESMTPSA id
+ vu24-20020a05620a561800b0078874565b40sm2009011qkn.30.2024.03.15.05.19.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 15 Mar 2024 05:19:10 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+In-Reply-To: <20240228074311.500761-1-heinrich.schuchardt@canonical.com>
+References: <20240228074311.500761-1-heinrich.schuchardt@canonical.com>
+Subject: Re: [PATCH 1/1] Dockerfile: build fiptool
+Message-Id: <171050515025.774434.655790127484196358.b4-ty@konsulko.com>
+Date: Fri, 15 Mar 2024 08:19:10 -0400
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,142 +93,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some variants of the ROCK Pi 4 series have an SPI flash chip populated
-which can be booted from. This patch enables support in U-Boot for
-building the image for the SPI flash, support for booting U-Boot from the
-SPI flash chip and support in U-Boot for accessing the SPI flash using
-`sf` commands.
+On Wed, 28 Feb 2024 08:43:11 +0100, Heinrich Schuchardt wrote:
 
-Not all variants (e.g. ROCK Pi 4B, ROCK 4 Model C Plus, ROCK 4SE) come
-populated with an SPI flash chip, but have the footprint on the board so
-a user could solder their own to the board. With this patchset applied,
-these board variants without an SPI flash chip still boot from MMC.
+> Fiptool is used in a binman test. The test is skipped without the binary.
+> 
+> 
 
-I have enabled support for both Winbond and XTX SPI flash devices since
-different hardware variants have different devices populated:
+Applied to u-boot/next, thanks!
 
- - `rockpi4_v13_sch_20181112.pdf` contains a Winbond part `W25Q64FWZPIG`
- - `rockpi4_v14_sch_20210114.pdf` contains an XTX part `XT25F32BWOIGT`
-
-The ROCK Pi 4 I have is marked as "ROCK PI 4 v1.48" and contains an SPI
-flash chip from XTX:
-
-    => sf probe
-    SF: Detected xt25f32 with page size 256 Bytes, erase size 4 KiB, total 4 MiB
-
-In the interest of supporting all board variants and not regressing
-existing users who boot from MMC, I have enabled support for booting from
-both SPI flash chip variants in the defconfig and left the environment
-storage location as MMC to not break existing users who have the
-environment stored on MMC.
-
-Signed-off-by: Christopher Obbard <chris.obbard@collabora.com>
-
----
-
-Changes in v2:
-- Rebase on top of rockchip/for-next.
-- Sync configuration changes with savedefconfig.
-- Remove GigaDevice SPI flash chip support (suggested by Kever Y).
-- Re-enable CONFIG_SPL_FIT_SIGNATURE=y (fixed in rockchip/for-next, solves
-  multiple problems mentioned in v1. Thanks Jonas!).
-- Remove spl-boot-order from rk3399-rock-pi-4a-u-boot.dtsi (suggested by
-  Jonas K).
-- Enable CONFIG_SPI_FLASH_SFDP_SUPPORT=y (suggested by Jonas K).
-
- arch/arm/dts/rk3399-rock-pi-4a-u-boot.dtsi |  7 +++++++
- configs/rock-pi-4-rk3399_defconfig         | 17 ++++++++++++++---
- 2 files changed, 21 insertions(+), 3 deletions(-)
-
-diff --git a/arch/arm/dts/rk3399-rock-pi-4a-u-boot.dtsi b/arch/arm/dts/rk3399-rock-pi-4a-u-boot.dtsi
-index 85ee5770add..38385621deb 100644
---- a/arch/arm/dts/rk3399-rock-pi-4a-u-boot.dtsi
-+++ b/arch/arm/dts/rk3399-rock-pi-4a-u-boot.dtsi
-@@ -4,3 +4,10 @@
-  */
- 
- #include "rk3399-rock-pi-4-u-boot.dtsi"
-+
-+&spi1 {
-+	flash@0 {
-+		bootph-pre-ram;
-+		bootph-some-ram;
-+	};
-+};
-diff --git a/configs/rock-pi-4-rk3399_defconfig b/configs/rock-pi-4-rk3399_defconfig
-index bca44beca12..315b8b853fc 100644
---- a/configs/rock-pi-4-rk3399_defconfig
-+++ b/configs/rock-pi-4-rk3399_defconfig
-@@ -3,25 +3,30 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
- CONFIG_NR_DRAM_BANKS=1
-+CONFIG_SF_DEFAULT_SPEED=10000000
- CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE="rk3399-rock-pi-4a"
- CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
-+CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_TARGET_ROCKPI4_RK3399=y
- CONFIG_DEBUG_UART_BASE=0xFF1A0000
- CONFIG_DEBUG_UART_CLOCK=24000000
-+CONFIG_SPL_SPI_FLASH_SUPPORT=y
-+CONFIG_SPL_SPI=y
- CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_PCI=y
- CONFIG_DEBUG_UART=y
- # CONFIG_ANDROID_BOOT_IMAGE is not set
- CONFIG_SPL_FIT_SIGNATURE=y
--CONFIG_LEGACY_IMAGE_FORMAT=y
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-rock-pi-4a.dtb"
- CONFIG_DISPLAY_BOARDINFO_LATE=y
--CONFIG_SPL_MAX_SIZE=0x2e000
-+CONFIG_SPL_MAX_SIZE=0x40000
- CONFIG_SPL_PAD_TO=0x7f8000
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_SPL_SPI_LOAD=y
-+CONFIG_SYS_SPI_U_BOOT_OFFS=0xE0000
- CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
- CONFIG_TPL=y
- CONFIG_CMD_BOOTZ=y
-@@ -40,14 +45,20 @@ CONFIG_SPL_OF_CONTROL=y
- CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_SPL_DM_SEQ_ALIAS=y
- CONFIG_DFU_MMC=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_ROCKCHIP_IODOMAIN=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_MMC_SDHCI=y
- CONFIG_MMC_SDHCI_SDMA=y
- CONFIG_MMC_SDHCI_ROCKCHIP=y
-+CONFIG_SF_DEFAULT_BUS=1
-+CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-+CONFIG_SPI_FLASH_WINBOND=y
-+CONFIG_SPI_FLASH_XTX=y
- CONFIG_ETH_DESIGNWARE=y
- CONFIG_GMAC_ROCKCHIP=y
- CONFIG_NVME_PCI=y
-@@ -61,6 +72,7 @@ CONFIG_RAM_ROCKCHIP_LPDDR4=y
- CONFIG_BAUDRATE=1500000
- CONFIG_DEBUG_UART_SHIFT=2
- CONFIG_SYS_NS16550_MEM32=y
-+CONFIG_ROCKCHIP_SPI=y
- CONFIG_SYSRESET=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
-@@ -81,7 +93,6 @@ CONFIG_VIDEO=y
- CONFIG_DISPLAY=y
- CONFIG_VIDEO_ROCKCHIP=y
- CONFIG_DISPLAY_ROCKCHIP_HDMI=y
--CONFIG_SPL_TINY_MEMSET=y
- CONFIG_ERRNO_STR=y
- CONFIG_EFI_CAPSULE_ON_DISK=y
- CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
 -- 
-2.43.0
+Tom
+
 
