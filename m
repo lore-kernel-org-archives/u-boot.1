@@ -4,53 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40C8EC54E5D
-	for <u-boot@archiver.kernel.org>; Sat, 16 Mar 2024 10:09:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A64EC54E60
+	for <u-boot@archiver.kernel.org>; Sat, 16 Mar 2024 13:54:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F27CC87D06;
-	Sat, 16 Mar 2024 11:09:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 7826A87D07;
+	Sat, 16 Mar 2024 14:54:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="L7UoZQAO";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="azObyzIc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9193287D06; Sat, 16 Mar 2024 11:09:44 +0100 (CET)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 456AE87EEF; Sat, 16 Mar 2024 14:54:38 +0100 (CET)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 34F0587C68
- for <u-boot@lists.denx.de>; Sat, 16 Mar 2024 11:09:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5E19287D07
+ for <u-boot@lists.denx.de>; Sat, 16 Mar 2024 14:54:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.fritz.box (ip-062-143-245-032.um16.pools.vodafone-ip.de
- [62.143.245.32])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id A985941E32; 
- Sat, 16 Mar 2024 10:09:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1710583781;
- bh=9efknwjTF7BdkSwQ6guWK9OYcog9yW8Cocy2dYAzIeg=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=L7UoZQAOWwspKqWpwUy1DCGH5CY/KLhtPmWQah9XVsjx+NxT2mzxpZ5Oh2/62tRgX
- ZC3nLOfJ+XXhzbac7LqANLbyAd6n1KyhEehvdqyMJs+9q5U80cvXMoioijkk350AFV
- orapzrirDGwpNvmjfOI+P95LDmhUWaWvLW6cLX5D9LE2SyJeBjQAuLM76GVPdsNUlU
- QNcTcTYEjS3T354xFqHydDjb117sNl9M22zjwbchxqQG0zIoL7mE2qCVcPgfPnBhf9
- japBHOr4Vw6GpuV0mVrgpXLBZqrmll8Dc2wh7Z9jJ3lsmTKiEyOylbXx/1oVgpiaTs
- atQb7lqiNR4IQ==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] doc: typo Synopis
-Date: Sat, 16 Mar 2024 11:09:36 +0100
-Message-ID: <20240316100936.59818-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=christianshewitt@gmail.com
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-412e784060cso23911215e9.1
+ for <u-boot@lists.denx.de>; Sat, 16 Mar 2024 06:54:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1710597275; x=1711202075; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=kt/YjxGxxxRTEXNRaujnbBUr5TtFYZAAACdznTR67QE=;
+ b=azObyzIcGScu24pJXWrdiUNQz1ExDIZx+XWynsTuepFgiTTLy+p2zRnyzLdZ4jDzdb
+ aAss42SoIDM/o+ccMiOmuohziz5w52hW3sRgwzbI2n8DTbL+gawDRbOxwB6D554WxKMH
+ Rwl8/k4oHIZhT57CqVdpUH//pFw/vAs8kJKHbJdnaUyKQpwJn8nlt6VjMnDSZtZlQZdq
+ +A1Y+4z0iB5x0DfCb+cjg/E3swiMdSjXQ3THXQOmipp9u3HLlwHFV/rXX0b+ia1JP47j
+ zp5NDWwC5hOZBFhmNKtBRibpQ+yxf2xmbvYS61YIEvnxZjcxUri6vsYH2z0Z8eSYsf0m
+ w3aQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710597275; x=1711202075;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=kt/YjxGxxxRTEXNRaujnbBUr5TtFYZAAACdznTR67QE=;
+ b=mqNJvlFYEV/kGHLk0PmQbK9Te9y4/u4LEHbWwCSrggkimnN3b175VpBSXGsfLZMG5o
+ 1uyjdPfdakftNFjAlmAD6VfZ+sKDNksh2UdvjuWwAmr6dEznyG41wlZO6w6LeDnP4qNd
+ HbVlYAqg63nIgGa9fRlCNmguHDBt0LrPXQOBO2HZxN/RrjxP3pJdwqpCE1Uz0mN+lLm1
+ uJLbGkDIq9+4OM+xKozLoa/IEzDmOXFMfbS+UUHCWHW+Y59OZQ24+OpiNN926UmyGGZe
+ 9fR5v81mibJNtgO4g/6hfp9PnxGheAAdrVN9X4U7V/3uCK+sgJBc5OZ6SGot6Tj7rHe5
+ 2yAA==
+X-Gm-Message-State: AOJu0Ywu3FfVTIVGUeuhy5z3xFUC5/fAc5riWPD0FrwSAz5/tp0c5eNC
+ XxbobPsQTQTeMxVnz7CNwUBZNGIYNOq19gb7F6Vvh6NDTUG7fLqTHckkwn7clsw=
+X-Google-Smtp-Source: AGHT+IGYxko7SOhWbl0XhbZC2hlDbIu9Uyg0oBzjsgz5cMhOL4IYHGlOEO0cArEepQ4PLNvpMrDW5w==
+X-Received: by 2002:a05:600c:3505:b0:414:630:26ba with SMTP id
+ h5-20020a05600c350500b00414063026bamr1928214wmq.15.1710597274911; 
+ Sat, 16 Mar 2024 06:54:34 -0700 (PDT)
+Received: from toolbox.. ([87.200.95.144]) by smtp.gmail.com with ESMTPSA id
+ r7-20020a05600c35c700b0041409fa57c4sm523963wmq.34.2024.03.16.06.54.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 16 Mar 2024 06:54:33 -0700 (PDT)
+From: Christian Hewitt <christianshewitt@gmail.com>
+To: u-boot@lists.denx.de, u-boot-amlogic@groups.io,
+ linux-amlogic@lists.infradead.org
+Cc: Christian Hewitt <christianshewitt@gmail.com>
+Subject: [PATCH 0/3] ARM: dts: fix Ethernet and random MAC's on WeTek Hub/Play2
+Date: Sat, 16 Mar 2024 13:54:27 +0000
+Message-Id: <20240316135430.826898-1-christianshewitt@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -69,348 +88,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-%s/Synopis/Synopsis/g
+In submitting the original patches for WeTek Hub/Play2 I appear to have
+squashed an experimental change to place the u-boot.dtsi file on the common
+board dtsi, but this was incorrect and results in broken Ethernet. Patch 1
+creates per-board u-boot.dtsi files to fix that. However, while the NIC is
+now probed correctly this results in random MAC addresses. Setting the p200
+family in board configs also does not work, so patch 2 revises (overwrites)
+the board init function using the same code as VIM3 which reads the factory
+MAC from efuse correctly, and patch 3 sets board family to ensure boards
+have a static MAC. The alternative would be to create a dedicated board
+definition for wetek boards. If that would be preferred, let me know and I
+can rework the changes to do that. And apologies for the mistake on the
+original submission.
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- doc/usage/cmd/acpi.rst      | 4 ++--
- doc/usage/cmd/bootdev.rst   | 4 ++--
- doc/usage/cmd/bootflow.rst  | 4 ++--
- doc/usage/cmd/bootmeth.rst  | 4 ++--
- doc/usage/cmd/cbsysinfo.rst | 4 ++--
- doc/usage/cmd/cedit.rst     | 4 ++--
- doc/usage/cmd/cli.rst       | 4 ++--
- doc/usage/cmd/dm.rst        | 4 ++--
- doc/usage/cmd/fdt.rst       | 4 ++--
- doc/usage/cmd/font.rst      | 4 ++--
- doc/usage/cmd/for.rst       | 4 ++--
- doc/usage/cmd/history.rst   | 4 ++--
- doc/usage/cmd/host.rst      | 4 ++--
- doc/usage/cmd/md.rst        | 4 ++--
- doc/usage/cmd/mtrr.rst      | 4 ++--
- doc/usage/cmd/panic.rst     | 4 ++--
- doc/usage/cmd/part.rst      | 4 ++--
- doc/usage/cmd/sf.rst        | 4 ++--
- doc/usage/cmd/sm.rst        | 4 ++--
- doc/usage/cmd/trace.rst     | 4 ++--
- doc/usage/cmd/ut.rst        | 4 ++--
- 21 files changed, 42 insertions(+), 42 deletions(-)
+Christian Hewitt (3):
+  ARM: dts: fix Ethernet on WeTek Hub/Play2
+  ARM: board: meson: update efuse MAC reading code
+  configs: amlogic: set board family to avoid random MAC on WeTek
+    Hub/Play2
 
-diff --git a/doc/usage/cmd/acpi.rst b/doc/usage/cmd/acpi.rst
-index a630f1ec5e3..9f30972fe53 100644
---- a/doc/usage/cmd/acpi.rst
-+++ b/doc/usage/cmd/acpi.rst
-@@ -6,8 +6,8 @@
- acpi command
- ============
- 
--Synopis
---------
-+Synopsis
-+--------
- 
- ::
- 
-diff --git a/doc/usage/cmd/bootdev.rst b/doc/usage/cmd/bootdev.rst
-index 658020e7c7f..f759abab354 100644
---- a/doc/usage/cmd/bootdev.rst
-+++ b/doc/usage/cmd/bootdev.rst
-@@ -6,8 +6,8 @@
- bootdev command
- ===============
- 
--Synopis
---------
-+Synopsis
-+--------
- 
- ::
- 
-diff --git a/doc/usage/cmd/bootflow.rst b/doc/usage/cmd/bootflow.rst
-index 16ba986dc8a..6519e4880a9 100644
---- a/doc/usage/cmd/bootflow.rst
-+++ b/doc/usage/cmd/bootflow.rst
-@@ -6,8 +6,8 @@
- bootflow command
- ================
- 
--Synopis
---------
-+Synopsis
-+--------
- 
- ::
- 
-diff --git a/doc/usage/cmd/bootmeth.rst b/doc/usage/cmd/bootmeth.rst
-index 95651fdc7c5..2903977ee54 100644
---- a/doc/usage/cmd/bootmeth.rst
-+++ b/doc/usage/cmd/bootmeth.rst
-@@ -6,8 +6,8 @@
- bootmeth command
- ================
- 
--Synopis
---------
-+Synopsis
-+--------
- 
- ::
- 
-diff --git a/doc/usage/cmd/cbsysinfo.rst b/doc/usage/cmd/cbsysinfo.rst
-index 8c03a85169d..80d8ba1b662 100644
---- a/doc/usage/cmd/cbsysinfo.rst
-+++ b/doc/usage/cmd/cbsysinfo.rst
-@@ -3,8 +3,8 @@
- cbsysinfo
- =========
- 
--Synopis
---------
-+Synopsis
-+--------
- 
- ::
- 
-diff --git a/doc/usage/cmd/cedit.rst b/doc/usage/cmd/cedit.rst
-index b39d708281d..5670805a00e 100644
---- a/doc/usage/cmd/cedit.rst
-+++ b/doc/usage/cmd/cedit.rst
-@@ -6,8 +6,8 @@
- cedit command
- =============
- 
--Synopis
---------
-+Synopsis
-+--------
- 
- ::
- 
-diff --git a/doc/usage/cmd/cli.rst b/doc/usage/cmd/cli.rst
-index 81487722f69..23e5ee7a902 100644
---- a/doc/usage/cmd/cli.rst
-+++ b/doc/usage/cmd/cli.rst
-@@ -6,8 +6,8 @@
- cli command
- ===========
- 
--Synopis
---------
-+Synopsis
-+--------
- 
- ::
- 
-diff --git a/doc/usage/cmd/dm.rst b/doc/usage/cmd/dm.rst
-index 9bef2eeaed8..7651507937a 100644
---- a/doc/usage/cmd/dm.rst
-+++ b/doc/usage/cmd/dm.rst
-@@ -6,8 +6,8 @@
- dm command
- ==========
- 
--Synopis
---------
-+Synopsis
-+--------
- 
- ::
- 
-diff --git a/doc/usage/cmd/fdt.rst b/doc/usage/cmd/fdt.rst
-index 3e8c32cdea3..71a9fc627e5 100644
---- a/doc/usage/cmd/fdt.rst
-+++ b/doc/usage/cmd/fdt.rst
-@@ -6,8 +6,8 @@
- fdt command
- ===========
- 
--Synopis
---------
-+Synopsis
-+--------
- 
- ::
- 
-diff --git a/doc/usage/cmd/font.rst b/doc/usage/cmd/font.rst
-index adcd5126d0a..a8782546333 100644
---- a/doc/usage/cmd/font.rst
-+++ b/doc/usage/cmd/font.rst
-@@ -6,8 +6,8 @@
- font command
- ============
- 
--Synopis
---------
-+Synopsis
-+--------
- 
- ::
- 
-diff --git a/doc/usage/cmd/for.rst b/doc/usage/cmd/for.rst
-index 4c98419b28f..729bd4db43c 100644
---- a/doc/usage/cmd/for.rst
-+++ b/doc/usage/cmd/for.rst
-@@ -4,8 +4,8 @@
- for command
- ===========
- 
--Synopis
---------
-+Synopsis
-+--------
- 
- ::
- 
-diff --git a/doc/usage/cmd/history.rst b/doc/usage/cmd/history.rst
-index 564a1596655..b52b5b220ae 100644
---- a/doc/usage/cmd/history.rst
-+++ b/doc/usage/cmd/history.rst
-@@ -6,8 +6,8 @@
- history command
- ===============
- 
--Synopis
---------
-+Synopsis
-+--------
- 
- ::
- 
-diff --git a/doc/usage/cmd/host.rst b/doc/usage/cmd/host.rst
-index 072497db903..a70a432b6f2 100644
---- a/doc/usage/cmd/host.rst
-+++ b/doc/usage/cmd/host.rst
-@@ -6,8 +6,8 @@
- host command
- ============
- 
--Synopis
---------
-+Synopsis
-+--------
- 
- ::
- 
-diff --git a/doc/usage/cmd/md.rst b/doc/usage/cmd/md.rst
-index 9ea148a8dca..9a9919f9ad0 100644
---- a/doc/usage/cmd/md.rst
-+++ b/doc/usage/cmd/md.rst
-@@ -6,8 +6,8 @@
- md command
- ==========
- 
--Synopis
---------
-+Synopsis
-+--------
- 
- ::
- 
-diff --git a/doc/usage/cmd/mtrr.rst b/doc/usage/cmd/mtrr.rst
-index c65618950bc..3c5c3ba3d43 100644
---- a/doc/usage/cmd/mtrr.rst
-+++ b/doc/usage/cmd/mtrr.rst
-@@ -6,8 +6,8 @@
- mtrr command
- ============
- 
--Synopis
---------
-+Synopsis
-+--------
- 
-     mtrr [list]
-     mtrr set <reg> <type> <start> <size>
-diff --git a/doc/usage/cmd/panic.rst b/doc/usage/cmd/panic.rst
-index ba5ea626108..39d32adbc99 100644
---- a/doc/usage/cmd/panic.rst
-+++ b/doc/usage/cmd/panic.rst
-@@ -6,8 +6,8 @@
- panic command
- =============
- 
--Synopis
---------
-+Synopsis
-+--------
- 
- ::
- 
-diff --git a/doc/usage/cmd/part.rst b/doc/usage/cmd/part.rst
-index 58be38781e3..e7faeccbb09 100644
---- a/doc/usage/cmd/part.rst
-+++ b/doc/usage/cmd/part.rst
-@@ -6,8 +6,8 @@
- part command
- ============
- 
--Synopis
---------
-+Synopsis
-+--------
- 
- ::
- 
-diff --git a/doc/usage/cmd/sf.rst b/doc/usage/cmd/sf.rst
-index 24d5dc692db..dfdca46e66c 100644
---- a/doc/usage/cmd/sf.rst
-+++ b/doc/usage/cmd/sf.rst
-@@ -6,8 +6,8 @@
- sf command
- ==========
- 
--Synopis
---------
-+Synopsis
-+--------
- 
- ::
- 
-diff --git a/doc/usage/cmd/sm.rst b/doc/usage/cmd/sm.rst
-index b767647d772..e828fddc519 100644
---- a/doc/usage/cmd/sm.rst
-+++ b/doc/usage/cmd/sm.rst
-@@ -6,8 +6,8 @@
- sm command
- ==========
- 
--Synopis
---------
-+Synopsis
-+--------
- 
- ::
- 
-diff --git a/doc/usage/cmd/trace.rst b/doc/usage/cmd/trace.rst
-index ad6db123942..e798b2bbc6b 100644
---- a/doc/usage/cmd/trace.rst
-+++ b/doc/usage/cmd/trace.rst
-@@ -6,8 +6,8 @@
- trace command
- =============
- 
--Synopis
---------
-+Synopsis
-+--------
- 
- ::
- 
-diff --git a/doc/usage/cmd/ut.rst b/doc/usage/cmd/ut.rst
-index ddc48ec42dd..45bc9ffbdc5 100644
---- a/doc/usage/cmd/ut.rst
-+++ b/doc/usage/cmd/ut.rst
-@@ -6,8 +6,8 @@
- ut command
- ==========
- 
--Synopis
---------
-+Synopsis
-+--------
- 
- ::
- 
+ arch/arm/dts/meson-gxbb-wetek-hub-u-boot.dtsi | 14 ++++++++
+ ...tsi => meson-gxbb-wetek-play2-u-boot.dtsi} |  0
+ board/amlogic/p200/p200.c                     | 35 +++++++++++--------
+ configs/wetek-hub_defconfig                   |  1 +
+ configs/wetek-play2_defconfig                 |  1 +
+ 5 files changed, 37 insertions(+), 14 deletions(-)
+ create mode 100644 arch/arm/dts/meson-gxbb-wetek-hub-u-boot.dtsi
+ rename arch/arm/dts/{meson-gxbb-wetek-u-boot.dtsi => meson-gxbb-wetek-play2-u-boot.dtsi} (100%)
+
 -- 
-2.43.0
+2.34.1
 
