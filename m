@@ -4,70 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDD4EC54E60
-	for <u-boot@archiver.kernel.org>; Sat, 16 Mar 2024 21:50:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03288C48BF6
+	for <u-boot@archiver.kernel.org>; Sat, 16 Mar 2024 21:50:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA19887DDD;
-	Sat, 16 Mar 2024 22:50:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6AE9D8801D;
+	Sat, 16 Mar 2024 22:50:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="KFuBzBTa";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="OaSnc9tw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ACC8788074; Sat, 16 Mar 2024 22:50:30 +0100 (CET)
+ id 9398D87D09; Sat, 16 Mar 2024 22:50:32 +0100 (CET)
 Received: from dfw.source.kernel.org (dfw.source.kernel.org
  [IPv6:2604:1380:4641:c500::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1432F87F6F
+ by phobos.denx.de (Postfix) with ESMTPS id 3A6E68800B
  for <u-boot@lists.denx.de>; Sat, 16 Mar 2024 22:50:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=devnull+j.jannau.net@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 948AC60304;
+ by dfw.source.kernel.org (Postfix) with ESMTP id C2AD66069F;
  Sat, 16 Mar 2024 21:50:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 3C0D4C433C7;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 6D123C43399;
  Sat, 16 Mar 2024 21:50:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1710625826;
- bh=0caR6IowKIC3WRFSSUBQFWOvCpJJuJBPn6aXt3qfr7w=;
- h=From:Subject:Date:To:Cc:Reply-To:From;
- b=KFuBzBTafky+jl4sCgrP7lDrbiQ8w1kaWno84TbKEcKZwK8WieLJOJQo9v7aBuQBz
- 4pUQG6sBPNV/vNail8wRt9P8R5eIHv8clT3szwqW81FHzq9GHoSY+lliBWHKCt8aTq
- h5yR+edgAcS/6F03PzdMCtzzqR2zHorsSLVrwrC1kU+FlyDn4ZXvGaB0cq17y5kQNZ
- Trg28jYCuqch73K0QIteb7cJN7zi1IjtpdiZ5InG+Q3ekzYQOZ3BH4yt+EYYubue69
- O70NNqXbWe0U01PSV03NDCxcKZNp5P8RkXipjL0lPZe/DcaTtlrmASF0/qz7TnFTfk
- djVzePAdXzE+Q==
+ bh=iV6It4X1DC/19Z7SUI4LQcOh1RsflLqegwHHHxOV7eI=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+ b=OaSnc9twSHPTOm6YHXKimAz1x+gYVDCQXlIxU8mAuQf3lI0+X1il7izOxWp7RPRxs
+ 3ZC1ZGfEnTL//szDFxlQd3Wjmb5hTBgvuuzvB9odH0ZKdu6WTme4wPn2FLxNv5qCUJ
+ qpGR+yPJkQbsxO7hzfruFaIe+7SfGgYHG7F/M37SgKoyU9hc+my/NsrsOCkKPUqRj5
+ qkMOH+c1GRAM4Yon+R2w/04/7vjkp6Tb+jWBqewrxMDT/eAj/xzn5xpXGCRloFD0DC
+ navChMNNap7+9t0ds4dtKx+M7djDLEbRUJ4lWl7o6+jw56VeSNUilCQIyrv14suivf
+ GHOMa8Wahph+w==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 28C30C48BF6;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 614D1C54E6E;
  Sat, 16 Mar 2024 21:50:26 +0000 (UTC)
 From: Janne Grunau via B4 Relay <devnull+j.jannau.net@kernel.org>
-Subject: [PATCH v3 0/7] video: Add UTF-8 support for UEFI applications
-Date: Sat, 16 Mar 2024 22:50:17 +0100
-Message-Id: <20240316-vidconsole-utf8-uefi-v3-0-4e8a3d349447@jannau.net>
+Date: Sat, 16 Mar 2024 22:50:21 +0100
+Subject: [PATCH v3 4/7] efi_selftest: Add international characters test
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIABkU9mUC/4XNywrCMBCF4VcpWTuSS6+ufA9xkSYTG5GkJG1QS
- t/dtBtxIS7/A/PNQiIGi5GcioUETDZa73KIQ0HUIN0NwerchFNeUsYaSFYr76J/IMyTaWFGY8F
- ILvpSqrrSNcmnY8jrc2cv19yDjZMPr/1LYtv6B0wMKFSiM43CpjR9d75L5+R8dDiRTUz8o3BGf
- yg8K22rqNB9TTXyL2Vd1zfL4fRn/wAAAA==
+Message-Id: <20240316-vidconsole-utf8-uefi-v3-4-4e8a3d349447@jannau.net>
+References: <20240316-vidconsole-utf8-uefi-v3-0-4e8a3d349447@jannau.net>
+In-Reply-To: <20240316-vidconsole-utf8-uefi-v3-0-4e8a3d349447@jannau.net>
 To: Anatolij Gustschin <agust@denx.de>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: Simon Glass <sjg@chromium.org>, Andre Przywara <andre.przywara@arm.com>, 
  u-boot@lists.denx.de, Janne Grunau <j@jannau.net>
 X-Mailer: b4 0.12.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3165; i=j@jannau.net;
- h=from:subject:message-id; bh=0caR6IowKIC3WRFSSUBQFWOvCpJJuJBPn6aXt3qfr7w=;
- b=owGbwMvMwCW2UNrmdq9+ahrjabUkhtRvIvLr8taVr1d+bPXCkvd3x1aldV5ujw0c5O00m5c62
- wYud+3oKGVhEONikBVTZEnSftnBsLpGMab2QRjMHFYmkCEMXJwCMBFpUUaG7lqWuZVTDh+pe1k9
- oVw45Wd9uFCbwAyGx85RF5mdfJo7GBmWnbxQxRZjslht85I9EndfdynyeRZOb2V6/+m70bMKi9k
- MAA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2141; i=j@jannau.net;
+ h=from:subject:message-id; bh=vvgCL+bpYJ3yFHjvmsah3TdozXuBIy3nC4D7AIESVaI=;
+ b=owGbwMvMwCW2UNrmdq9+ahrjabUkhtRvIgqxylPdZIsfLsxkqRQ7H3xO/sbyCR9SK9iyzEoD1
+ bJvlRzsKGVhEONikBVTZEnSftnBsLpGMab2QRjMHFYmkCEMXJwCMJHaWIa/Ao5aa7kOCBu9PDBx
+ w8ywLPfYpK7k2KW+Yt77+Ju05J8vZmS4wSk/T37ffSfL9qUhqlZSv8V3y52KnbBNi3uLNuOKyMP
+ 8AA==
 X-Developer-Key: i=j@jannau.net; a=openpgp;
  fpr=8B336A6BE4E5695E89B8532B81E806F586338419
 X-Endpoint-Received: by B4 Relay for j@jannau.net/default with auth_id=62
@@ -89,70 +87,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Andre submitted 2 years ago DM_VIDEO improvements for UEFI applications
-using UEFI's EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL but did not follow with
-suggested changes. This series takes care of the UTF-8 support which
-required to draw symbol and box drawing characters used by UEFI
-applications like grub2 and sd-boot correctly.
+From: Andre Przywara <andre.przywara@arm.com>
 
-Compared to Andre's version this version has the following changes:
-- use and extend existing conversion functions from lib/charset.c
-- convert to Unicode code points for truetype console support
-- conversion is conditional on CONFIG_CHARSET
-- use escape sequences in tests as proposed by Heinrich
+UEFI relies entirely on unicode output, which actual fonts displayed on
+the screen might not be ready for.
 
-Link: https://lore.kernel.org/u-boot/20220110005638.21599-1-andre.przywara@arm.com/
+Add a test displaying some international characters, to reveal missing
+glyphs, especially in our builtin fonts.
+This would be needed to be manually checked on the screen for
+correctness.
+
+Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+Suggested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Signed-off-by: Janne Grunau <j@jannau.net>
 ---
-Changes in v3:
-- added Reviewed-by tag
-- removed unnecessary u8 casts
-- limited utf-8 conversion buffer to 5 bytes as documented
-- added missing console_utf_to_cp437() documentation
-- adapted EFI text output self-tests according to review comments
-- dropped wait after EFI text output self tests
-- added StrToFat EFI self test to ensure Unicode code points which map
-  to code page 437 code points 1-31 are converted to '_'
-- Link to v2: https://lore.kernel.org/r/20240210-vidconsole-utf8-uefi-v2-0-88c03db60de2@jannau.net
+ lib/efi_selftest/efi_selftest_textoutput.c | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
 
-Changes in v2:
-- use "CONFIG_IS_ENABLED(CHARSET)" instead of EFI_LOADER
-- rewritten commit message for mapping CP437 cp 1-31
-- extended utf8_to_utf32_stream() documentation as suggested by
-  Heinrich
-- Link to RFC: https://lore.kernel.org/r/20240117-vidconsole-utf8-uefi-v1-0-539f7ce74fb9@jannau.net
+diff --git a/lib/efi_selftest/efi_selftest_textoutput.c b/lib/efi_selftest/efi_selftest_textoutput.c
+index cc44b38bc2..917903473d 100644
+--- a/lib/efi_selftest/efi_selftest_textoutput.c
++++ b/lib/efi_selftest/efi_selftest_textoutput.c
+@@ -31,6 +31,21 @@ static int execute(void)
+ 		0xD804, 0xDC22,
+ 		0};
+ 
++	const u16 text[] =
++u"This should render international characters as described\n"
++u"U+00D6 \u00D6 - Latin capital letter O with diaresis\n"
++u"U+00DF \u00DF - Latin small letter sharp s\n"
++u"U+00E5 \u00E5 - Latin small letter a with ring above\n"
++u"U+00E9 \u00E9 - Latin small letter e with acute\n"
++u"U+00F1 \u00F1 - Latin small letter n with tilde\n"
++u"U+00F6 \u00F6 - Latin small letter o with diaresis\n"
++u"The following characters will render as '?' with bitmap fonts\n"
++u"U+00F8 \u00F8 - Latin small letter o with stroke\n"
++u"U+03AC \u03AC - Greek small letter alpha with tonus\n"
++u"U+03BB \u03BB - Greek small letter lambda\n"
++u"U+03C2 \u03C2 - Greek small letter final sigma\n"
++u"U+1F19 \u1F19 - Greek capital letter epsilon with dasia\n";
++
+ 	/* SetAttribute */
+ 	efi_st_printf("\nColor palette\n");
+ 	for (foreground = 0; foreground < 0x10; ++foreground) {
+@@ -119,6 +134,12 @@ static int execute(void)
+ 		return EFI_ST_FAILURE;
+ 	}
+ 	efi_st_printf("\n");
++	ret = con_out->output_string(con_out, text);
++	if (ret != EFI_ST_SUCCESS) {
++		efi_st_error("OutputString failed for international chars\n");
++		return EFI_ST_FAILURE;
++	}
++	efi_st_printf("\n");
+ 
+ 	return EFI_ST_SUCCESS;
+ }
 
----
-Andre Przywara (2):
-      efi_selftest: Add international characters test
-      efi_selftest: Add box drawing character selftest
-
-Janne Grunau (5):
-      lib: charset: Fix and extend utf8_to_utf32_stream() documentation
-      video: console: Parse UTF-8 character sequences
-      lib/charset: Map Unicode code points to CP437 code points 1-31
-      efi_selftest: Add geometric shapes character selftest
-      efi_selftest: Update StrToFat() unit test after CP473 map extension
-
- drivers/video/console_normal.c                    |  6 ++-
- drivers/video/console_rotate.c                    | 16 ++++---
- drivers/video/console_truetype.c                  |  8 ++--
- drivers/video/vidconsole-uclass.c                 | 18 +++++---
- drivers/video/vidconsole_internal.h               | 19 ++++++++
- include/charset.h                                 | 16 +++++--
- include/cp1250.h                                  | 12 ++++-
- include/cp437.h                                   | 12 ++++-
- include/video_console.h                           | 10 +++--
- lib/charset.c                                     |  9 ++--
- lib/efi_loader/efi_unicode_collation.c            |  2 +-
- lib/efi_selftest/efi_selftest_textoutput.c        | 54 +++++++++++++++++++++++
- lib/efi_selftest/efi_selftest_unicode_collation.c | 12 +++++
- 13 files changed, 162 insertions(+), 32 deletions(-)
----
-base-commit: 866ca972d6c3cabeaf6dbac431e8e08bb30b3c8e
-change-id: 20240117-vidconsole-utf8-uefi-fa23b4ac65d6
-
-Best regards,
 -- 
-Janne Grunau <j@jannau.net>
+2.44.0
 
