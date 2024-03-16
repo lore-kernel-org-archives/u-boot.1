@@ -4,53 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDB69C54E60
-	for <u-boot@archiver.kernel.org>; Sat, 16 Mar 2024 21:51:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A251EC48BF6
+	for <u-boot@archiver.kernel.org>; Sat, 16 Mar 2024 21:51:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 95E9B8808B;
-	Sat, 16 Mar 2024 22:50:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 171D98801F;
+	Sat, 16 Mar 2024 22:50:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="dksBr6Y1";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ROA48Naq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3558E88018; Sat, 16 Mar 2024 22:50:34 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ id 7436188041; Sat, 16 Mar 2024 22:50:34 +0100 (CET)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 56D7C8802F
- for <u-boot@lists.denx.de>; Sat, 16 Mar 2024 22:50:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 110EA88054
+ for <u-boot@lists.denx.de>; Sat, 16 Mar 2024 22:50:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=devnull+j.jannau.net@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id F289E60A6C;
- Sat, 16 Mar 2024 21:50:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 7D39BC433B2;
+ by sin.source.kernel.org (Postfix) with ESMTP id 1991ECE0976;
+ Sat, 16 Mar 2024 21:50:27 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 52058C433F1;
  Sat, 16 Mar 2024 21:50:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1710625826;
- bh=B/C0wjgBkZr7SXKxNej8ieg+Oux2+g9tTinular2ev0=;
+ bh=W71KpKxoAgOUJu1caUrUk/1rV0LuOiCAbXBWZ0+vXRM=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=dksBr6Y1qPL9rYXQ8q5fK7YOLl/Vquvr7mLrHIPbIjRyCiJCqzf6444AcAg/5kPFQ
- kMz1SDy5jm5l51Iy0tPXoU7C6yuBarjBGUNz4nipJ/gEl1+ZAZ9phhVwJ/ivehnNT6
- jsw+ANu8erAh5qG2CaXadx4ejR7U/AkhEG8b0YKzRddT5c48sCo1SJRB9oNFAfg/q/
- hpC7acMDgl3wBa3Cxia2OWcMSaDJHFSF5UVF2WH1KSmvEdnG/mL/8jV/DPtTwoLZvM
- CUCO9Ma1ilmzE7QO3bcvv7cK6R1JemOLuJzBpOuayGwCphcByWepWNXANvYNqVGtx1
- Ps/Ns1glHQo4Q==
+ b=ROA48Naq+Gk+1ffWeQgLh0241MbDbhAiib1ySn+udjRSNwRB7RSc+9mJbR5sjDDv1
+ 3L/plxxNdamNZIuNXWDLxOwsJJSuFr9DRJqUuyozvw7v7n9Fr5bCMT4xVmpvxKZ2xb
+ RYReejjXLlGSmO2eJbm4bvx86R8sG3dgSG4kjn9cYdGOU2kzuYggoIsS0Km9bGd894
+ ajtgBKvaVSKhAnqCzI6JAdZiI/7FcoyUBR+0vKGZnVxRpGBSCEjhRpvxDorritDJKK
+ KFYOY2IbzqNMUmd99XhcNw+tkcNnShayl5tFk67OxP5JXrjbZkORBZaopij76X87t5
+ JLBRS5oZWRwZg==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 76705C48BF6;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 39704C54E68;
  Sat, 16 Mar 2024 21:50:26 +0000 (UTC)
 From: Janne Grunau via B4 Relay <devnull+j.jannau.net@kernel.org>
-Date: Sat, 16 Mar 2024 22:50:23 +0100
-Subject: [PATCH v3 6/7] efi_selftest: Add geometric shapes character selftest
+Date: Sat, 16 Mar 2024 22:50:18 +0100
+Subject: [PATCH v3 1/7] lib: charset: Fix and extend utf8_to_utf32_stream()
+ documentation
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240316-vidconsole-utf8-uefi-v3-6-4e8a3d349447@jannau.net>
+Message-Id: <20240316-vidconsole-utf8-uefi-v3-1-4e8a3d349447@jannau.net>
 References: <20240316-vidconsole-utf8-uefi-v3-0-4e8a3d349447@jannau.net>
 In-Reply-To: <20240316-vidconsole-utf8-uefi-v3-0-4e8a3d349447@jannau.net>
 To: Anatolij Gustschin <agust@denx.de>, 
@@ -59,12 +60,12 @@ To: Anatolij Gustschin <agust@denx.de>,
 Cc: Simon Glass <sjg@chromium.org>, Andre Przywara <andre.przywara@arm.com>, 
  u-boot@lists.denx.de, Janne Grunau <j@jannau.net>
 X-Mailer: b4 0.12.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1625; i=j@jannau.net;
- h=from:subject:message-id; bh=hYWsFfe9/MO1IcHBjYtWqpX5zvOcIH05xUAd27c+G1g=;
- b=owGbwMvMwCW2UNrmdq9+ahrjabUkhtRvIgozRXfmnJYoFZe4uE1RaO2ko94cYnJqb6euvG83n
- c1eQVa4o5SFQYyLQVZMkSVJ+2UHw+oaxZjaB2Ewc1iZQIYwcHEKwEQuJTD8swuX9eRYWvkmob05
- q9j4Gk/qz/VxoVrzZL79Ond6RRvnLkaGbQ1f2izMu+NC2eZ0mT/uDlmlGRHx66WlQtqB+zo/bKd
- zAAA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1364; i=j@jannau.net;
+ h=from:subject:message-id; bh=GGDZzVt5+3XbxA+40cxNNbp+I7PDL3t7DkDHx2HZSBs=;
+ b=owGbwMvMwCW2UNrmdq9+ahrjabUkhtRvIvJ8p0v/Xjrw6KKw4o2PZyrzGs6Wf7ffJsJ2l8vt3
+ /X3mrk2HaUsDGJcDLJiiixJ2i87GFbXKMbUPgiDmcPKBDKEgYtTACZitpWR4eipI8ePX76x/vHv
+ +ODU42tiPCwU/5o8sQm9+n2nDXN8pibDP/tX88RyF8SITJt7OPKqnw3b71i7WLOZc8Q1V/71+lz
+ wlhMA
 X-Developer-Key: i=j@jannau.net; a=openpgp;
  fpr=8B336A6BE4E5695E89B8532B81E806F586338419
 X-Endpoint-Received: by B4 Relay for j@jannau.net/default with auth_id=62
@@ -88,47 +89,41 @@ X-Virus-Status: Clean
 
 From: Janne Grunau <j@jannau.net>
 
-Draw symbols from Unicode's "Geometric shapes" page which translate to
-code page 437 code points 1-31. These are used by UEFI applications to
-draw user interfaces using EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL.
-The output has to be checked manually on the screen for correctness.
-
+Suggested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Signed-off-by: Janne Grunau <j@jannau.net>
 ---
- lib/efi_selftest/efi_selftest_textoutput.c | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+ include/charset.h | 14 ++++++++++++--
+ 1 file changed, 12 insertions(+), 2 deletions(-)
 
-diff --git a/lib/efi_selftest/efi_selftest_textoutput.c b/lib/efi_selftest/efi_selftest_textoutput.c
-index b56fd2ab76..2208a9877a 100644
---- a/lib/efi_selftest/efi_selftest_textoutput.c
-+++ b/lib/efi_selftest/efi_selftest_textoutput.c
-@@ -60,6 +60,13 @@ u"\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534"
- u"\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500"
- u"\u2500\u2500\u2500\u2500\u2518\n";
+diff --git a/include/charset.h b/include/charset.h
+index 44034c71d3..f1050c903d 100644
+--- a/include/charset.h
++++ b/include/charset.h
+@@ -324,11 +324,21 @@ int utf_to_cp(s32 *c, const u16 *codepage);
+ int utf8_to_cp437_stream(u8 c, char *buffer);
  
-+	const u16 shapes[] =
-+u"Geometric shapes as described\n"
-+u"U+25B2 \u25B2 - Black up-pointing triangle\n"
-+u"U+25BA \u25BA - Black right-pointing pointer\n"
-+u"U+25BC \u25BC - Black down-pointing triangle\n"
-+u"U+25C4 \u25C4 - Black left-pointing pointer\n";
-+
- 	/* SetAttribute */
- 	efi_st_printf("\nColor palette\n");
- 	for (foreground = 0; foreground < 0x10; ++foreground) {
-@@ -160,6 +167,12 @@ u"\u2500\u2500\u2500\u2500\u2518\n";
- 		return EFI_ST_FAILURE;
- 	}
- 	efi_st_printf("\n");
-+	ret = con_out->output_string(con_out, shapes);
-+	if (ret != EFI_ST_SUCCESS) {
-+		efi_st_error("OutputString failed for geometric shapes\n");
-+		return EFI_ST_FAILURE;
-+	}
-+	efi_st_printf("\n");
+ /**
+- * utf8_to_utf32_stream() - convert UTF-8 stream to UTF-32
++ * utf8_to_utf32_stream() - convert UTF-8 byte stream to Unicode code points
++ *
++ * The function is called for each byte @c in a UTF-8 stream. The byte is
++ * appended to the temporary storage @buffer until the UTF-8 stream in
++ * @buffer describes a Unicode code point.
++ *
++ * When a new code point has been decoded it is returned and buffer[0] is
++ * set to '\0', otherwise the return value is 0.
++ *
++ * The buffer must be at least 5 characters long. Before the first function
++ * invocation buffer[0] must be set to '\0'."
+  *
+  * @c:		next UTF-8 character to convert
+  * @buffer:	buffer, at least 5 characters
+- * Return:	next codepage 437 character or 0
++ * Return:	Unicode code point or 0
+  */
+ int utf8_to_utf32_stream(u8 c, char *buffer);
  
- 	return EFI_ST_SUCCESS;
- }
 
 -- 
 2.44.0
