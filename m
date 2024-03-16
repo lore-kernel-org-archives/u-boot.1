@@ -4,72 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A64EC54E60
-	for <u-boot@archiver.kernel.org>; Sat, 16 Mar 2024 13:54:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 928E9C54E5D
+	for <u-boot@archiver.kernel.org>; Sat, 16 Mar 2024 13:54:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7826A87D07;
-	Sat, 16 Mar 2024 14:54:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D46DC87E87;
+	Sat, 16 Mar 2024 14:54:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="azObyzIc";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OHY0so6n";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 456AE87EEF; Sat, 16 Mar 2024 14:54:38 +0100 (CET)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
+ id CCB5687F88; Sat, 16 Mar 2024 14:54:42 +0100 (CET)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E19287D07
- for <u-boot@lists.denx.de>; Sat, 16 Mar 2024 14:54:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CB70787DDD
+ for <u-boot@lists.denx.de>; Sat, 16 Mar 2024 14:54:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=christianshewitt@gmail.com
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-412e784060cso23911215e9.1
- for <u-boot@lists.denx.de>; Sat, 16 Mar 2024 06:54:36 -0700 (PDT)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-41409dc5becso1059275e9.3
+ for <u-boot@lists.denx.de>; Sat, 16 Mar 2024 06:54:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1710597275; x=1711202075; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=kt/YjxGxxxRTEXNRaujnbBUr5TtFYZAAACdznTR67QE=;
- b=azObyzIcGScu24pJXWrdiUNQz1ExDIZx+XWynsTuepFgiTTLy+p2zRnyzLdZ4jDzdb
- aAss42SoIDM/o+ccMiOmuohziz5w52hW3sRgwzbI2n8DTbL+gawDRbOxwB6D554WxKMH
- Rwl8/k4oHIZhT57CqVdpUH//pFw/vAs8kJKHbJdnaUyKQpwJn8nlt6VjMnDSZtZlQZdq
- +A1Y+4z0iB5x0DfCb+cjg/E3swiMdSjXQ3THXQOmipp9u3HLlwHFV/rXX0b+ia1JP47j
- zp5NDWwC5hOZBFhmNKtBRibpQ+yxf2xmbvYS61YIEvnxZjcxUri6vsYH2z0Z8eSYsf0m
- w3aQ==
+ d=gmail.com; s=20230601; t=1710597276; x=1711202076; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ze781fdYMJC8X6yPwfz4FQS/isO5gR11eLckzIKPCfI=;
+ b=OHY0so6nqd9SiGYd41EVrlgdcz8EN/Q/FTOGVbIV02rJGsOrHqe3AFopPUmVb81yDT
+ ryO1z55OQm8S48xrck6Q6IuZseNmMwHmvZ2Hj65maevlqiDXg6FhUBVedxSXOxOlTrcJ
+ zm0ZCWi7EVY+Jh5dgl4WZuGeZTExbUYvxA5BVaMWuR85XMifjRxQY4U2xejhLL1a0tBa
+ gPooyExcxfkJHfs/vK4zcC5Qqg035Lws8YbwFsG2WnozqcwfndhqGyB/KPrZDrncaUa9
+ qs6ZshNKzI7DAaW2Dq6Xip9kU/tb1nC7YhlXBvnwVAPGJKn1ShyG0KvMelMPVwtXt0xi
+ c23w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710597275; x=1711202075;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=kt/YjxGxxxRTEXNRaujnbBUr5TtFYZAAACdznTR67QE=;
- b=mqNJvlFYEV/kGHLk0PmQbK9Te9y4/u4LEHbWwCSrggkimnN3b175VpBSXGsfLZMG5o
- 1uyjdPfdakftNFjAlmAD6VfZ+sKDNksh2UdvjuWwAmr6dEznyG41wlZO6w6LeDnP4qNd
- HbVlYAqg63nIgGa9fRlCNmguHDBt0LrPXQOBO2HZxN/RrjxP3pJdwqpCE1Uz0mN+lLm1
- uJLbGkDIq9+4OM+xKozLoa/IEzDmOXFMfbS+UUHCWHW+Y59OZQ24+OpiNN926UmyGGZe
- 9fR5v81mibJNtgO4g/6hfp9PnxGheAAdrVN9X4U7V/3uCK+sgJBc5OZ6SGot6Tj7rHe5
- 2yAA==
-X-Gm-Message-State: AOJu0Ywu3FfVTIVGUeuhy5z3xFUC5/fAc5riWPD0FrwSAz5/tp0c5eNC
- XxbobPsQTQTeMxVnz7CNwUBZNGIYNOq19gb7F6Vvh6NDTUG7fLqTHckkwn7clsw=
-X-Google-Smtp-Source: AGHT+IGYxko7SOhWbl0XhbZC2hlDbIu9Uyg0oBzjsgz5cMhOL4IYHGlOEO0cArEepQ4PLNvpMrDW5w==
-X-Received: by 2002:a05:600c:3505:b0:414:630:26ba with SMTP id
- h5-20020a05600c350500b00414063026bamr1928214wmq.15.1710597274911; 
- Sat, 16 Mar 2024 06:54:34 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1710597276; x=1711202076;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ze781fdYMJC8X6yPwfz4FQS/isO5gR11eLckzIKPCfI=;
+ b=DliDnrE9eqLqXsaFxAYsx+M7WQN+HX1Fz1EiZP3Ic0qs2xjKo0gXrRd5VDzvYJQvVK
+ 4KomUOVEIS+JhgJvw0nVRvUgMsXuGljPjBBHbMu50Ba5Do85JGL3TON6UeItqS3W2CNY
+ R3AZtYK/x09vgeX7I6fQIxqO3mvr/rIm+c9DtwBZYpx12LHebEtikwGx1J1U6zS6T0yI
+ 2xkykEcuYjy0/ETPTd3xW7YNtNPI/lPe1l2LbkzmKF664V7U+PwZSVgyYuLt6SjXPHSd
+ Tw+ET9GT3QFUo1Q1hPQbCZQs+xwMvADrNE0j3iUCyU+bujJnk62yC2ai1IIwS4BjnPem
+ EHmA==
+X-Gm-Message-State: AOJu0Yx3MtjMoXFcE+SV9SCene0/ISS8dIqd3w/V/g0qWuL4gNdDnm7m
+ SHjIrEcGMS2oySxQhv0FHbZv/MuFM4goGsvvi1AsO0MwlOfM20ujia5luwkLjb0=
+X-Google-Smtp-Source: AGHT+IEBXJ+LDSb8yez8jw+oMX7DHpcrqiZApeJ2kmzGEWKJQ5sNvM+K+W2hgSajgULIqDUK/wrA+A==
+X-Received: by 2002:a05:600c:1f8c:b0:413:f2c6:df3d with SMTP id
+ je12-20020a05600c1f8c00b00413f2c6df3dmr4290047wmb.13.1710597276625; 
+ Sat, 16 Mar 2024 06:54:36 -0700 (PDT)
 Received: from toolbox.. ([87.200.95.144]) by smtp.gmail.com with ESMTPSA id
- r7-20020a05600c35c700b0041409fa57c4sm523963wmq.34.2024.03.16.06.54.32
+ r7-20020a05600c35c700b0041409fa57c4sm523963wmq.34.2024.03.16.06.54.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 16 Mar 2024 06:54:33 -0700 (PDT)
+ Sat, 16 Mar 2024 06:54:36 -0700 (PDT)
 From: Christian Hewitt <christianshewitt@gmail.com>
 To: u-boot@lists.denx.de, u-boot-amlogic@groups.io,
  linux-amlogic@lists.infradead.org
 Cc: Christian Hewitt <christianshewitt@gmail.com>
-Subject: [PATCH 0/3] ARM: dts: fix Ethernet and random MAC's on WeTek Hub/Play2
-Date: Sat, 16 Mar 2024 13:54:27 +0000
-Message-Id: <20240316135430.826898-1-christianshewitt@gmail.com>
+Subject: [PATCH 1/3] ARM: dts: fix Ethernet on WeTek Hub/Play2
+Date: Sat, 16 Mar 2024 13:54:28 +0000
+Message-Id: <20240316135430.826898-2-christianshewitt@gmail.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240316135430.826898-1-christianshewitt@gmail.com>
+References: <20240316135430.826898-1-christianshewitt@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -88,34 +91,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In submitting the original patches for WeTek Hub/Play2 I appear to have
-squashed an experimental change to place the u-boot.dtsi file on the common
-board dtsi, but this was incorrect and results in broken Ethernet. Patch 1
-creates per-board u-boot.dtsi files to fix that. However, while the NIC is
-now probed correctly this results in random MAC addresses. Setting the p200
-family in board configs also does not work, so patch 2 revises (overwrites)
-the board init function using the same code as VIM3 which reads the factory
-MAC from efuse correctly, and patch 3 sets board family to ensure boards
-have a static MAC. The alternative would be to create a dedicated board
-definition for wetek boards. If that would be preferred, let me know and I
-can rework the changes to do that. And apologies for the mistake on the
-original submission.
+Placing the snps,reset content needed for Ethernet to probe in a common
+uboot.dtsi results in the content not being used and broken Ethernet. Fix
+this by creating two board specific dtsi files with the right content.
 
-Christian Hewitt (3):
-  ARM: dts: fix Ethernet on WeTek Hub/Play2
-  ARM: board: meson: update efuse MAC reading code
-  configs: amlogic: set board family to avoid random MAC on WeTek
-    Hub/Play2
+Fixes: 67d5128df950 ("ARM: dts: add support for WeTek Hub and WeTek Play2")
+Signed-off-by: Christian Hewitt <christianshewitt@gmail.com>
+---
+ ...u-boot.dtsi => meson-gxbb-wetek-hub-u-boot.dtsi} |  0
+ arch/arm/dts/meson-gxbb-wetek-play2-u-boot.dtsi     | 13 +++++++++++++
+ 2 files changed, 13 insertions(+)
+ rename arch/arm/dts/{meson-gxbb-wetek-u-boot.dtsi => meson-gxbb-wetek-hub-u-boot.dtsi} (100%)
+ create mode 100644 arch/arm/dts/meson-gxbb-wetek-play2-u-boot.dtsi
 
- arch/arm/dts/meson-gxbb-wetek-hub-u-boot.dtsi | 14 ++++++++
- ...tsi => meson-gxbb-wetek-play2-u-boot.dtsi} |  0
- board/amlogic/p200/p200.c                     | 35 +++++++++++--------
- configs/wetek-hub_defconfig                   |  1 +
- configs/wetek-play2_defconfig                 |  1 +
- 5 files changed, 37 insertions(+), 14 deletions(-)
- create mode 100644 arch/arm/dts/meson-gxbb-wetek-hub-u-boot.dtsi
- rename arch/arm/dts/{meson-gxbb-wetek-u-boot.dtsi => meson-gxbb-wetek-play2-u-boot.dtsi} (100%)
-
+diff --git a/arch/arm/dts/meson-gxbb-wetek-u-boot.dtsi b/arch/arm/dts/meson-gxbb-wetek-hub-u-boot.dtsi
+similarity index 100%
+rename from arch/arm/dts/meson-gxbb-wetek-u-boot.dtsi
+rename to arch/arm/dts/meson-gxbb-wetek-hub-u-boot.dtsi
+diff --git a/arch/arm/dts/meson-gxbb-wetek-play2-u-boot.dtsi b/arch/arm/dts/meson-gxbb-wetek-play2-u-boot.dtsi
+new file mode 100644
+index 00000000000..3743053eb9c
+--- /dev/null
++++ b/arch/arm/dts/meson-gxbb-wetek-play2-u-boot.dtsi
+@@ -0,0 +1,13 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2019 BayLibre, SAS.
++ * Author: Neil Armstrong <narmstrong@baylibre.com>
++ */
++
++#include "meson-gx-u-boot.dtsi"
++
++&ethmac {
++	snps,reset-gpio = <&gpio GPIOZ_14 0>;
++	snps,reset-delays-us = <0 10000 1000000>;
++	snps,reset-active-low;
++};
 -- 
 2.34.1
 
