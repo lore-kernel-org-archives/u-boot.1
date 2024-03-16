@@ -4,78 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4159CC54E60
-	for <u-boot@archiver.kernel.org>; Sat, 16 Mar 2024 13:55:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F0FCC48BF6
+	for <u-boot@archiver.kernel.org>; Sat, 16 Mar 2024 20:14:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ADC5D8804B;
-	Sat, 16 Mar 2024 14:54:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 4C1BC87F64;
+	Sat, 16 Mar 2024 21:14:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PvG9X0S3";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="q77Wl+QG";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="AD8ja6oH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B61038803A; Sat, 16 Mar 2024 14:54:44 +0100 (CET)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B05E487F88; Sat, 16 Mar 2024 21:14:35 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E520387FC6
- for <u-boot@lists.denx.de>; Sat, 16 Mar 2024 14:54:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 707B6878AA
+ for <u-boot@lists.denx.de>; Sat, 16 Mar 2024 21:14:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=christianshewitt@gmail.com
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-413f4cb646dso16502635e9.1
- for <u-boot@lists.denx.de>; Sat, 16 Mar 2024 06:54:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1710597279; x=1711202079; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=bWhWcKIn0pGCEzwEvQhFIBa9a12cgD1Rhhcfr7musaI=;
- b=PvG9X0S3SWbF7V4aPzVPnN9SnxtpsEC0wK6xXVTNZ2Ul+YE0f/hrXicfrfVxyH4aQh
- xq5Av4pDnJeJ/lAd54N/RLBvwqu4u6h419QOVNToMazUmkA3yzfhcY7/e23Z96K0nYsR
- eoSoyvLJQR3PEnMWNtsxEwmO5LDiGgfWBUro7MQY6eVKQoo+VuV5Fsrq+C+HbKl79wSK
- 4wqoZ1Q7TlrDe7Dof5CDxc08iHJ2X6gAO8Mjx9QrUHdyTsztITiae7PQhjr+bKFC1gSx
- ZEZ0ElwzfJHj+O42wR8opJ+VCj8Jfc4iq8hBisJa+OfOqa8ZuDu13TqxAdYgbEVdV5lP
- 0TvA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710597279; x=1711202079;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=bWhWcKIn0pGCEzwEvQhFIBa9a12cgD1Rhhcfr7musaI=;
- b=odVJvgKhoPnJ49KjUktsueGBVXex2fequn1uHoxylxmgpOtf4mcmHVHmP0ib0z9Ni4
- GFch6letCs5cgj0KkeedUt6oNWptXSPKbw6GeZBuK9Kt9By8cTcRj55+jySnRGIaQCNe
- tQNtd8zdX9w0noIFCLcBNP5kO4a+CelfWDXN4GnUsUVRoE8kKrCkgrNL236x3uwyChcQ
- 44+zXYnnLyUr5Y74vE0vhE7JdZdh2sxx40JRALCuu20Mled0ni9AFIrrJa9cLTQY/MCL
- Ab95LEpswsr6X+qI7e5ES23LbKr5J5Fyr6qbEenMe8cO907ltucWR3s/3ySOfgwN+D+2
- XVJA==
-X-Gm-Message-State: AOJu0YyOad1EiTvEUCqV+FCRDt1J2D6QgktpRNNZpHwMrN9FOZJ0xSiF
- EGcu8yjNcwYy/+T0xw5IVJHZBzn4xG0fj1AvXx3YF+EUokNxfcCO82oYuRXRhTc=
-X-Google-Smtp-Source: AGHT+IGzRMqMtu4v9w5YQ8+ov6mybC3kz1cjjQ/1+F4ZvcVqewhFcpXSu7Iz69nZ890Fbbr22AshFw==
-X-Received: by 2002:a05:600c:1d18:b0:413:f0d1:5ee2 with SMTP id
- l24-20020a05600c1d1800b00413f0d15ee2mr5842748wms.12.1710597279625; 
- Sat, 16 Mar 2024 06:54:39 -0700 (PDT)
-Received: from toolbox.. ([87.200.95.144]) by smtp.gmail.com with ESMTPSA id
- r7-20020a05600c35c700b0041409fa57c4sm523963wmq.34.2024.03.16.06.54.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 16 Mar 2024 06:54:39 -0700 (PDT)
-From: Christian Hewitt <christianshewitt@gmail.com>
-To: u-boot@lists.denx.de, u-boot-amlogic@groups.io,
- linux-amlogic@lists.infradead.org
-Cc: Christian Hewitt <christianshewitt@gmail.com>
-Subject: [PATCH 3/3] configs: amlogic: set board family to avoid random MAC on
- WeTek Hub/Play2
-Date: Sat, 16 Mar 2024 13:54:30 +0000
-Message-Id: <20240316135430.826898-4-christianshewitt@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240316135430.826898-1-christianshewitt@gmail.com>
-References: <20240316135430.826898-1-christianshewitt@gmail.com>
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4Txsls15T2z9sc8;
+ Sat, 16 Mar 2024 21:14:33 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1710620073;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=7+X0sAHS3eKEendquGM01lS/60qiCHxMybbKys9c5WM=;
+ b=q77Wl+QGUy4rFinMB2kRsUntqoRGPgSDusleLPGslbQ4P6UbtlzdwiXsUglm9fSWctOD/4
+ AFtNw7lwv/MWzsPQX+0OMbgja2/UoiGk/uZ1rQFc/muecIZMeeabUnjMMz2LoiJ8qvFhPy
+ 8bFEZ9EHdAxD4PH+a6diZxtYA21R0HWanBo71K5nBc/At0K0X7ZQ3SuE2YWlJru7TlT5IR
+ cUdfq4GOwMzCMYwD1TqW9pYQdkw4PXiGBkFd9NWI/A7RpQ1PeJBnYb0qAEiNnAaA9LxZdv
+ 2UK2eODwt+0+G+xhO1du6czcsXpQo+yYe1UY8fCotbDyYSrN/Bq7gly91XR41w==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1710620071;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=7+X0sAHS3eKEendquGM01lS/60qiCHxMybbKys9c5WM=;
+ b=AD8ja6oHRHEQ8HwBRTy2KdguS8lETUXBBPSPXiAYBpbZ+UnMqua6PRwM3L550XGtMsrBob
+ rG9+wBfrbIUQTDkbGzqDqaG2DXA48yWJa8mrytdv7dSSe5NjkdxFakZ3vQMBL6p2+i+HHi
+ kaGxDi5ld3/eXh9FVfDnynuKIuX/+8XBicUG7g0eKZ5NVzLHobWTJH/ratnPQoXC/RxcFB
+ 1nrI9L0FkVrO7uB8jaqYvGIca++8E6rZ9x1Ct6keCxyzJutTsBeLTjLgoT9TtMMU+1Pk5p
+ ehKmpAFHabRwINURE4eQr42zRDbV2wZXvyW4AEVxiDMW3YToKGi3i9WjVmkIbA==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH v4] mmc: Poll CD in case cyclic framework is enabled
+Date: Sat, 16 Mar 2024 21:13:57 +0100
+Message-ID: <20240316201416.211480-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: f1e68811c07960b5009
+X-MBO-RS-META: x9r5m9hkc35gurqdfx84ykprpoeryhaf
+X-Rspamd-Queue-Id: 4Txsls15T2z9sc8
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,37 +84,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add CONFIG_SYS_BOARD="p200" to the Hub/Play2 board configs to ensure the
-factory programmed MAC is correctly read from efuse.
+In case the cyclic framework is enabled, poll the card detect of already
+initialized cards and deinitialize them in case they are removed. Since
+the card initialization is a longer process and card initialization is
+done on first access to an uninitialized card anyway, avoid initializing
+newly detected uninitialized cards in the cyclic callback.
 
-Signed-off-by: Christian Hewitt <christianshewitt@gmail.com>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
- configs/wetek-hub_defconfig   | 1 +
- configs/wetek-play2_defconfig | 1 +
- 2 files changed, 2 insertions(+)
+Cc: Jaehoon Chung <jh80.chung@samsung.com>
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Simon Glass <sjg@chromium.org>
+---
+V2: Move the cyclic registration/unregistration into mmc init/deinit
+V3: Replace if (CONFIG_IS_ENABLED(CYCLIC)...) with #if as the former
+    does not work with structure members
+V4: Stuff the code with CONFIG_IS_ENABLED() variants to avoid #ifdefs
+---
+ drivers/mmc/mmc.c | 32 ++++++++++++++++++++++++++++++++
+ include/mmc.h     |  3 +++
+ 2 files changed, 35 insertions(+)
 
-diff --git a/configs/wetek-hub_defconfig b/configs/wetek-hub_defconfig
-index fd92b041e73..413bbfe9ab7 100644
---- a/configs/wetek-hub_defconfig
-+++ b/configs/wetek-hub_defconfig
-@@ -1,5 +1,6 @@
- CONFIG_ARM=y
- CONFIG_ARCH_MESON=y
-+CONFIG_SYS_BOARD="p200"
- CONFIG_TEXT_BASE=0x01000000
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-diff --git a/configs/wetek-play2_defconfig b/configs/wetek-play2_defconfig
-index b887419a6ba..dd98929444c 100644
---- a/configs/wetek-play2_defconfig
-+++ b/configs/wetek-play2_defconfig
-@@ -1,5 +1,6 @@
- CONFIG_ARM=y
- CONFIG_ARCH_MESON=y
-+CONFIG_SYS_BOARD="p200"
- CONFIG_TEXT_BASE=0x01000000
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
+index eb5010c1465..e90ffd5dcd1 100644
+--- a/drivers/mmc/mmc.c
++++ b/drivers/mmc/mmc.c
+@@ -2985,6 +2985,20 @@ static int mmc_complete_init(struct mmc *mmc)
+ 	return err;
+ }
+ 
++static void __maybe_unused mmc_cyclic_cd_poll(void *ctx)
++{
++	struct mmc *m = ctx;
++
++	if (!m->has_init)
++		return;
++
++	if (mmc_getcd(m))
++		return;
++
++	mmc_deinit(m);
++	m->has_init = 0;
++}
++
+ int mmc_init(struct mmc *mmc)
+ {
+ 	int err = 0;
+@@ -3007,6 +3021,19 @@ int mmc_init(struct mmc *mmc)
+ 	if (err)
+ 		pr_info("%s: %d, time %lu\n", __func__, err, get_timer(start));
+ 
++	if (CONFIG_IS_ENABLED(CYCLIC, (!mmc->cyclic), (NULL))) {
++		/* Register cyclic function for card detect polling */
++		CONFIG_IS_ENABLED(CYCLIC,
++			(mmc->cyclic = cyclic_register(mmc_cyclic_cd_poll,
++						       100 * 1000,
++						       mmc->cfg->name, mmc)));
++		if (CONFIG_IS_ENABLED(CYCLIC, (!mmc->cyclic), (NULL))) {
++			printf("Failed to register %s CD poll function\n",
++			       mmc->cfg->name);
++			err = -EINVAL;
++		}
++	}
++
+ 	return err;
+ }
+ 
+@@ -3014,6 +3041,11 @@ int mmc_deinit(struct mmc *mmc)
+ {
+ 	u32 caps_filtered;
+ 
++	if (CONFIG_IS_ENABLED(CYCLIC, (mmc->cyclic), (NULL))) {
++		cyclic_unregister(CONFIG_IS_ENABLED(CYCLIC, (mmc->cyclic), NULL));
++		CONFIG_IS_ENABLED(CYCLIC, (mmc->cyclic = NULL));
++	}
++
+ 	if (!CONFIG_IS_ENABLED(MMC_UHS_SUPPORT) &&
+ 	    !CONFIG_IS_ENABLED(MMC_HS200_SUPPORT) &&
+ 	    !CONFIG_IS_ENABLED(MMC_HS400_SUPPORT))
+diff --git a/include/mmc.h b/include/mmc.h
+index 1022db3ffa7..706566fa1ad 100644
+--- a/include/mmc.h
++++ b/include/mmc.h
+@@ -14,6 +14,7 @@
+ #include <linux/sizes.h>
+ #include <linux/compiler.h>
+ #include <linux/dma-direction.h>
++#include <cyclic.h>
+ #include <part.h>
+ 
+ struct bd_info;
+@@ -739,6 +740,8 @@ struct mmc {
+ 	u8 hs400_tuning;
+ 
+ 	enum bus_mode user_speed_mode; /* input speed mode from user */
++
++	CONFIG_IS_ENABLED(CYCLIC, (struct cyclic_info *cyclic));
+ };
+ 
+ #if CONFIG_IS_ENABLED(DM_MMC)
 -- 
-2.34.1
+2.43.0
 
