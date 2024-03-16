@@ -4,70 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F0FCC48BF6
-	for <u-boot@archiver.kernel.org>; Sat, 16 Mar 2024 20:14:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D075C54E60
+	for <u-boot@archiver.kernel.org>; Sat, 16 Mar 2024 21:50:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C1BC87F64;
-	Sat, 16 Mar 2024 21:14:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 4599E88074;
+	Sat, 16 Mar 2024 22:50:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="q77Wl+QG";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="AD8ja6oH";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="tvT1za1C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B05E487F88; Sat, 16 Mar 2024 21:14:35 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ id 5375888074; Sat, 16 Mar 2024 22:50:30 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 707B6878AA
- for <u-boot@lists.denx.de>; Sat, 16 Mar 2024 21:14:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2528D87FCC
+ for <u-boot@lists.denx.de>; Sat, 16 Mar 2024 22:50:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4Txsls15T2z9sc8;
- Sat, 16 Mar 2024 21:14:33 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1710620073;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=7+X0sAHS3eKEendquGM01lS/60qiCHxMybbKys9c5WM=;
- b=q77Wl+QGUy4rFinMB2kRsUntqoRGPgSDusleLPGslbQ4P6UbtlzdwiXsUglm9fSWctOD/4
- AFtNw7lwv/MWzsPQX+0OMbgja2/UoiGk/uZ1rQFc/muecIZMeeabUnjMMz2LoiJ8qvFhPy
- 8bFEZ9EHdAxD4PH+a6diZxtYA21R0HWanBo71K5nBc/At0K0X7ZQ3SuE2YWlJru7TlT5IR
- cUdfq4GOwMzCMYwD1TqW9pYQdkw4PXiGBkFd9NWI/A7RpQ1PeJBnYb0qAEiNnAaA9LxZdv
- 2UK2eODwt+0+G+xhO1du6czcsXpQo+yYe1UY8fCotbDyYSrN/Bq7gly91XR41w==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1710620071;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=7+X0sAHS3eKEendquGM01lS/60qiCHxMybbKys9c5WM=;
- b=AD8ja6oHRHEQ8HwBRTy2KdguS8lETUXBBPSPXiAYBpbZ+UnMqua6PRwM3L550XGtMsrBob
- rG9+wBfrbIUQTDkbGzqDqaG2DXA48yWJa8mrytdv7dSSe5NjkdxFakZ3vQMBL6p2+i+HHi
- kaGxDi5ld3/eXh9FVfDnynuKIuX/+8XBicUG7g0eKZ5NVzLHobWTJH/ratnPQoXC/RxcFB
- 1nrI9L0FkVrO7uB8jaqYvGIca++8E6rZ9x1Ct6keCxyzJutTsBeLTjLgoT9TtMMU+1Pk5p
- ehKmpAFHabRwINURE4eQr42zRDbV2wZXvyW4AEVxiDMW3YToKGi3i9WjVmkIbA==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH v4] mmc: Poll CD in case cyclic framework is enabled
-Date: Sat, 16 Mar 2024 21:13:57 +0100
-Message-ID: <20240316201416.211480-1-marek.vasut+renesas@mailbox.org>
+ spf=pass smtp.mailfrom=devnull+j.jannau.net@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id B81E2609FA;
+ Sat, 16 Mar 2024 21:50:26 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 6202AC43390;
+ Sat, 16 Mar 2024 21:50:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1710625826;
+ bh=okL4WOC8oIIWzFBWRXbUeEcO2+vqauy1kXSSmsthYcU=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+ b=tvT1za1CY9rrRtM98V+4+/EDg+mNkJOQBv/MpQM+yqjRGyWo+IntPXPy7NOipYBGt
+ PhYUSxYpxQcP3SpWiM1txMqh5C/gwfYQmZfCd8TqKY06/G6UnajOB3IP6tdPa4clpa
+ yo3S0H4pKUnAD/C/+23yYupSxpaH8sz8P1snwIcWN+xZ3WprNsNfb+IDO5S7npKSoD
+ zZydLgCUf2nKMWOGamvU0wyFT5u2CKjoAq4QmV9xwb01jGVW6qDXUYkux1rS/3yWQR
+ 2+gLXcAVMUPuEPoictlyjPoN1Qicojhcqr6+bZqPOsHaoK1uLS62nONLA4talTAgJy
+ 3tb/HkekJp5iA==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 56796C54E60;
+ Sat, 16 Mar 2024 21:50:26 +0000 (UTC)
+From: Janne Grunau via B4 Relay <devnull+j.jannau.net@kernel.org>
+Date: Sat, 16 Mar 2024 22:50:20 +0100
+Subject: [PATCH v3 3/7] lib/charset: Map Unicode code points to CP437 code
+ points 1-31
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: f1e68811c07960b5009
-X-MBO-RS-META: x9r5m9hkc35gurqdfx84ykprpoeryhaf
-X-Rspamd-Queue-Id: 4Txsls15T2z9sc8
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20240316-vidconsole-utf8-uefi-v3-3-4e8a3d349447@jannau.net>
+References: <20240316-vidconsole-utf8-uefi-v3-0-4e8a3d349447@jannau.net>
+In-Reply-To: <20240316-vidconsole-utf8-uefi-v3-0-4e8a3d349447@jannau.net>
+To: Anatolij Gustschin <agust@denx.de>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, Andre Przywara <andre.przywara@arm.com>, 
+ u-boot@lists.denx.de, Janne Grunau <j@jannau.net>
+X-Mailer: b4 0.12.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4021; i=j@jannau.net;
+ h=from:subject:message-id; bh=ABn1fOrT1x/a43I0epJTDvkk5WI5gl9Pemj634Mj+Yg=;
+ b=owGbwMvMwCW2UNrmdq9+ahrjabUkhtRvIgr1jTNNnj/v7DgwcWlPe+SksqN1T/9bHGnR2p70b
+ l0z7wf/jlIWBjEuBlkxRZYk7ZcdDKtrFGNqH4TBzGFlAhnCwMUpABN5zsvI0JiyOUXb6kuP6C3F
+ 5jX9DYcunGZ8ue/duf/C2qXemy35rzH89+s+vX/Ss5g/pyODXmovq1Q+/n7Dzs1sn1N293e2il3
+ fzwQA
+X-Developer-Key: i=j@jannau.net; a=openpgp;
+ fpr=8B336A6BE4E5695E89B8532B81E806F586338419
+X-Endpoint-Received: by B4 Relay for j@jannau.net/default with auth_id=62
+X-Original-From: Janne Grunau <j@jannau.net>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,110 +81,133 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: j@jannau.net
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In case the cyclic framework is enabled, poll the card detect of already
-initialized cards and deinitialize them in case they are removed. Since
-the card initialization is a longer process and card initialization is
-done on first access to an uninitialized card anyway, avoid initializing
-newly detected uninitialized cards in the cyclic callback.
+From: Janne Grunau <j@jannau.net>
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Jaehoon Chung <jh80.chung@samsung.com>
-Cc: Peng Fan <peng.fan@nxp.com>
-Cc: Simon Glass <sjg@chromium.org>
----
-V2: Move the cyclic registration/unregistration into mmc init/deinit
-V3: Replace if (CONFIG_IS_ENABLED(CYCLIC)...) with #if as the former
-    does not work with structure members
-V4: Stuff the code with CONFIG_IS_ENABLED() variants to avoid #ifdefs
----
- drivers/mmc/mmc.c | 32 ++++++++++++++++++++++++++++++++
- include/mmc.h     |  3 +++
- 2 files changed, 35 insertions(+)
+Code page 437 uses code points 1-31 for glyphs instead of control
+characters. Map the appropriate Unicode code points to this code points.
+Fixes rendering of grub2's menu as EFI application using the
+EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL on a console with bitmap fonts.
 
-diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
-index eb5010c1465..e90ffd5dcd1 100644
---- a/drivers/mmc/mmc.c
-+++ b/drivers/mmc/mmc.c
-@@ -2985,6 +2985,20 @@ static int mmc_complete_init(struct mmc *mmc)
- 	return err;
- }
+Signed-off-by: Janne Grunau <j@jannau.net>
+---
+ include/charset.h                      |  2 +-
+ include/cp1250.h                       | 12 ++++++++++--
+ include/cp437.h                        | 12 ++++++++++--
+ lib/charset.c                          |  9 ++++++---
+ lib/efi_loader/efi_unicode_collation.c |  2 +-
+ 5 files changed, 28 insertions(+), 9 deletions(-)
+
+diff --git a/include/charset.h b/include/charset.h
+index f1050c903d..348bad5883 100644
+--- a/include/charset.h
++++ b/include/charset.h
+@@ -16,7 +16,7 @@
+ /*
+  * codepage_437 - Unicode to codepage 437 translation table
+  */
+-extern const u16 codepage_437[128];
++extern const u16 codepage_437[160];
  
-+static void __maybe_unused mmc_cyclic_cd_poll(void *ctx)
-+{
-+	struct mmc *m = ctx;
-+
-+	if (!m->has_init)
-+		return;
-+
-+	if (mmc_getcd(m))
-+		return;
-+
-+	mmc_deinit(m);
-+	m->has_init = 0;
-+}
-+
- int mmc_init(struct mmc *mmc)
- {
- 	int err = 0;
-@@ -3007,6 +3021,19 @@ int mmc_init(struct mmc *mmc)
- 	if (err)
- 		pr_info("%s: %d, time %lu\n", __func__, err, get_timer(start));
+ /**
+  * console_read_unicode() - read Unicode code point from console
+diff --git a/include/cp1250.h b/include/cp1250.h
+index adacf8a958..b762c78d9f 100644
+--- a/include/cp1250.h
++++ b/include/cp1250.h
+@@ -1,10 +1,18 @@
+ /* SPDX-License-Identifier: GPL-2.0+ */
  
-+	if (CONFIG_IS_ENABLED(CYCLIC, (!mmc->cyclic), (NULL))) {
-+		/* Register cyclic function for card detect polling */
-+		CONFIG_IS_ENABLED(CYCLIC,
-+			(mmc->cyclic = cyclic_register(mmc_cyclic_cd_poll,
-+						       100 * 1000,
-+						       mmc->cfg->name, mmc)));
-+		if (CONFIG_IS_ENABLED(CYCLIC, (!mmc->cyclic), (NULL))) {
-+			printf("Failed to register %s CD poll function\n",
-+			       mmc->cfg->name);
-+			err = -EINVAL;
-+		}
-+	}
-+
- 	return err;
- }
+ /*
+- * Constant CP1250 contains the Unicode code points for characters 0x80 - 0xff
+- * of the code page 1250.
++ * Constant CP1250 contains the Unicode code points for characters 0x00 - 0x1f
++ * and 0x80 - 0xff of the code page 1250.
+  */
+ #define CP1250 { \
++	0x0000, 0x0000, 0x0000, 0x0000, \
++	0x0000, 0x0000, 0x0000, 0x0000, \
++	0x0000, 0x0000, 0x0000, 0x0000, \
++	0x0000, 0x0000, 0x0000, 0x0000, \
++	0x0000, 0x0000, 0x0000, 0x0000, \
++	0x0000, 0x0000, 0x0000, 0x0000, \
++	0x0000, 0x0000, 0x0000, 0x0000, \
++	0x0000, 0x0000, 0x0000, 0x0000, \
+ 	0x20ac, 0x0000, 0x201a, 0x0000, \
+ 	0x201e, 0x2026, 0x2020, 0x2021, \
+ 	0x0000, 0x2030, 0x0160, 0x2039, \
+diff --git a/include/cp437.h b/include/cp437.h
+index 0b2b97132e..5093130f5e 100644
+--- a/include/cp437.h
++++ b/include/cp437.h
+@@ -1,10 +1,18 @@
+ /* SPDX-License-Identifier: GPL-2.0+ */
  
-@@ -3014,6 +3041,11 @@ int mmc_deinit(struct mmc *mmc)
- {
- 	u32 caps_filtered;
+ /*
+- * Constant CP437 contains the Unicode code points for characters 0x80 - 0xff
+- * of the code page 437.
++ * Constant CP437 contains the Unicode code points for characters 0x00 - 0x1f
++ * and 0x80 - 0xff of the code page 437.
+  */
+ #define CP437 { \
++	0x0000, 0x263a, 0x263b, 0x2665, \
++	0x2666, 0x2663, 0x2660, 0x2022, \
++	0x25d8, 0x25cb, 0x25d9, 0x2642, \
++	0x2640, 0x266a, 0x266b, 0x263c, \
++	0x25ba, 0x25c4, 0x2195, 0x203c, \
++	0x00b6, 0x00a7, 0x25ac, 0x21a8, \
++	0x2191, 0x2193, 0x2192, 0x2190, \
++	0x221f, 0x2194, 0x25b2, 0x25bc, \
+ 	0x00c7, 0x00fc, 0x00e9, 0x00e2, \
+ 	0x00e4, 0x00e0, 0x00e5, 0x00e7, \
+ 	0x00ea, 0x00eb, 0x00e8, 0x00ef, \
+diff --git a/lib/charset.c b/lib/charset.c
+index 5e4c4f948a..1f8480150a 100644
+--- a/lib/charset.c
++++ b/lib/charset.c
+@@ -16,7 +16,7 @@
+ /**
+  * codepage_437 - Unicode to codepage 437 translation table
+  */
+-const u16 codepage_437[128] = CP437;
++const u16 codepage_437[160] = CP437;
  
-+	if (CONFIG_IS_ENABLED(CYCLIC, (mmc->cyclic), (NULL))) {
-+		cyclic_unregister(CONFIG_IS_ENABLED(CYCLIC, (mmc->cyclic), NULL));
-+		CONFIG_IS_ENABLED(CYCLIC, (mmc->cyclic = NULL));
-+	}
-+
- 	if (!CONFIG_IS_ENABLED(MMC_UHS_SUPPORT) &&
- 	    !CONFIG_IS_ENABLED(MMC_HS200_SUPPORT) &&
- 	    !CONFIG_IS_ENABLED(MMC_HS400_SUPPORT))
-diff --git a/include/mmc.h b/include/mmc.h
-index 1022db3ffa7..706566fa1ad 100644
---- a/include/mmc.h
-+++ b/include/mmc.h
-@@ -14,6 +14,7 @@
- #include <linux/sizes.h>
- #include <linux/compiler.h>
- #include <linux/dma-direction.h>
-+#include <cyclic.h>
- #include <part.h>
+ static struct capitalization_table capitalization_table[] =
+ #ifdef CONFIG_EFI_UNICODE_CAPITALIZATION
+@@ -517,9 +517,12 @@ int utf_to_cp(s32 *c, const u16 *codepage)
+ 		int j;
  
- struct bd_info;
-@@ -739,6 +740,8 @@ struct mmc {
- 	u8 hs400_tuning;
- 
- 	enum bus_mode user_speed_mode; /* input speed mode from user */
-+
-+	CONFIG_IS_ENABLED(CYCLIC, (struct cyclic_info *cyclic));
- };
- 
- #if CONFIG_IS_ENABLED(DM_MMC)
+ 		/* Look up codepage translation */
+-		for (j = 0; j < 0x80; ++j) {
++		for (j = 0; j < 0xA0; ++j) {
+ 			if (*c == codepage[j]) {
+-				*c = j + 0x80;
++				if (j < 0x20)
++					*c = j;
++				else
++					*c = j + 0x60;
+ 				return 0;
+ 			}
+ 		}
+diff --git a/lib/efi_loader/efi_unicode_collation.c b/lib/efi_loader/efi_unicode_collation.c
+index c4c7572063..4b2c52918a 100644
+--- a/lib/efi_loader/efi_unicode_collation.c
++++ b/lib/efi_loader/efi_unicode_collation.c
+@@ -257,7 +257,7 @@ static void EFIAPI efi_fat_to_str(struct efi_unicode_collation_protocol *this,
+ 	for (i = 0; i < fat_size; ++i) {
+ 		c = (unsigned char)fat[i];
+ 		if (c > 0x80)
+-			c = codepage[c - 0x80];
++			c = codepage[c - 0x60];
+ 		string[i] = c;
+ 		if (!c)
+ 			break;
+
 -- 
-2.43.0
+2.44.0
 
