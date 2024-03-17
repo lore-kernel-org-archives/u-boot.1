@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF0F8C54E67
-	for <u-boot@archiver.kernel.org>; Sun, 17 Mar 2024 11:18:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37E27C54E67
+	for <u-boot@archiver.kernel.org>; Sun, 17 Mar 2024 11:26:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD0DA878E9;
-	Sun, 17 Mar 2024 12:18:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9A925878AA;
+	Sun, 17 Mar 2024 12:26:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ideasonboard.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="TKzNupBs";
+	dkim=pass (1024-bit key; unprotected) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="TsrkpRyr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6BDBA8796B; Sun, 17 Mar 2024 12:18:24 +0100 (CET)
+ id 06C6B8796B; Sun, 17 Mar 2024 12:26:52 +0100 (CET)
 Received: from perceval.ideasonboard.com (perceval.ideasonboard.com
- [IPv6:2001:4b98:dc2:55:216:3eff:fef7:d647])
+ [213.167.242.64])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 85C61878AA
- for <u-boot@lists.denx.de>; Sun, 17 Mar 2024 12:18:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C77B08786A
+ for <u-boot@lists.denx.de>; Sun, 17 Mar 2024 12:26:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=ideasonboard.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=laurent.pinchart@ideasonboard.com
 Received: from pendragon.ideasonboard.com (81-175-209-231.bb.dnainternet.fi
  [81.175.209.231])
- by perceval.ideasonboard.com (Postfix) with ESMTPSA id 8C6B2D01;
- Sun, 17 Mar 2024 12:17:55 +0100 (CET)
+ by perceval.ideasonboard.com (Postfix) with ESMTPSA id 1CB8FD01;
+ Sun, 17 Mar 2024 12:26:22 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
- s=mail; t=1710674275;
- bh=ok+I+13nHV0I1sSSeKkpJkSMDq8529PAAm/YvCsJmOs=;
+ s=mail; t=1710674782;
+ bh=wKDFDB0rPdripBXbTOEFn6ZgtLHBVryEp5Ab2b0koDk=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=TKzNupBsblpIOvdK+/x/unXgBYM1nvqeCLsPcmGPtKKz8BaMti5mUmBualQvJCrYO
- 9E3p46ickVOBJL81xfkhTeSePJ/s/qFZlii4yenakuE5HS2YBD0SP+ZPl3sxKIoipn
- yOTwyY5st3b8cHQ8cpSCdu94d5gSSOZc1N7wyGCo=
-Date: Sun, 17 Mar 2024 13:18:18 +0200
+ b=TsrkpRyrsbssw0HatxKushLLEWuZxMr+ajrfVK46MU0LKK+qXU5yRHIJmKZVEUG+8
+ KdR27zDC9UvrVJrIKLlYE6pt3z6BTpj/Jr9FISyRt5jdGEo0rUbjFGHoKeoM2XvASl
+ 10kYiyCRF605QGClLnArx8hYBgtApVyEB6uVhejc=
+Date: Sun, 17 Mar 2024 13:26:45 +0200
 From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>
 Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>,
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH 1/3] boot: fdt: Change type of env_get_bootm_low() to
- phys_addr_t
-Message-ID: <20240317111818.GE9082@pendragon.ideasonboard.com>
+Subject: Re: [PATCH 2/3] boot: fdt: Drop lmb_alloc*() typecasts
+Message-ID: <20240317112645.GF9082@pendragon.ideasonboard.com>
 References: <20240317061730.654893-1-marek.vasut+renesas@mailbox.org>
+ <20240317061730.654893-2-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20240317061730.654893-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20240317061730.654893-2-marek.vasut+renesas@mailbox.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,13 +71,13 @@ Hi Marek,
 
 Thank you for the patch.
 
-On Sun, Mar 17, 2024 at 07:16:29AM +0100, Marek Vasut wrote:
-> Change type of ulong env_get_bootm_low() to phys_addr_t env_get_bootm_low().
-> The PPC/LS systems already treat env_get_bootm_low() result as phys_addr_t,
-> while the function itself still returns ulong. This is potentially dangerous
-> on 64bit systems, where ulong might not be large enough to hold the content
-> of "bootm_low" environment variable. Fix it by using phys_addr_t, similar to
-> what env_get_bootm_size() does, which returns phys_size_t .
+On Sun, Mar 17, 2024 at 07:16:30AM +0100, Marek Vasut wrote:
+> The lmb_alloc_base() returns phys_addr_t , map_sysmem() accepts
+> phys_addr_t as first parameter. Declare $addr as phys_addr_t and
+
+s/$addr/addr/ ?
+
+> get rid of the casts.
 > 
 > Reported-by: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
@@ -88,122 +88,45 @@ On Sun, Mar 17, 2024 at 07:16:29AM +0100, Marek Vasut wrote:
 > Cc: Simon Glass <sjg@chromium.org>
 > Cc: Tom Rini <trini@konsulko.com>
 > ---
->  boot/bootm.c       |  2 +-
->  boot/image-board.c | 11 ++++++-----
->  boot/image-fdt.c   |  9 +++++----
->  include/image.h    |  2 +-
->  4 files changed, 13 insertions(+), 11 deletions(-)
+>  boot/image-fdt.c | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
 > 
-> diff --git a/boot/bootm.c b/boot/bootm.c
-> index d071537d692..2e818264f5f 100644
-> --- a/boot/bootm.c
-> +++ b/boot/bootm.c
-> @@ -242,7 +242,7 @@ static int boot_get_kernel(const char *addr_fit, struct bootm_headers *images,
->  #ifdef CONFIG_LMB
->  static void boot_start_lmb(struct bootm_headers *images)
->  {
-> -	ulong		mem_start;
-> +	phys_addr_t	mem_start;
->  	phys_size_t	mem_size;
->  
->  	mem_start = env_get_bootm_low();
-> diff --git a/boot/image-board.c b/boot/image-board.c
-> index 75f6906cd56..447ced2678a 100644
-> --- a/boot/image-board.c
-> +++ b/boot/image-board.c
-> @@ -107,12 +107,13 @@ static int on_loadaddr(const char *name, const char *value, enum env_op op,
->  }
->  U_BOOT_ENV_CALLBACK(loadaddr, on_loadaddr);
->  
-> -ulong env_get_bootm_low(void)
-> +phys_addr_t env_get_bootm_low(void)
->  {
->  	char *s = env_get("bootm_low");
-> +	phys_size_t tmp;
->  
->  	if (s) {
-> -		ulong tmp = hextoul(s, NULL);
-> +		tmp = (phys_addr_t)simple_strtoull(s, NULL, 16);
->  		return tmp;
+> diff --git a/boot/image-fdt.c b/boot/image-fdt.c
+> index c2571b22244..c37442c9130 100644
+> --- a/boot/image-fdt.c
+> +++ b/boot/image-fdt.c
+> @@ -162,6 +162,7 @@ int boot_relocate_fdt(struct lmb *lmb, char **of_flat_tree, ulong *of_size)
+>  	void	*of_start = NULL;
+>  	phys_addr_t start, size, usable;
+>  	char	*fdt_high;
+> +	phys_addr_t addr;
+>  	phys_addr_t low;
+>  	phys_size_t mapsize;
+>  	ulong	of_len = 0;
+> @@ -186,7 +187,6 @@ int boot_relocate_fdt(struct lmb *lmb, char **of_flat_tree, ulong *of_size)
+>  	fdt_high = env_get("fdt_high");
+>  	if (fdt_high) {
+>  		ulong desired_addr = hextoul(fdt_high, NULL);
+> -		ulong addr;
 
-Can't you write
-
-		return (phys_addr_t)simple_strtoull(s, NULL, 16);
-
-and avoid the temporary variable ?
+I would keep addr declared here. With that,
 
 Reviewed-by: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
 
->  	}
 >  
-> @@ -538,7 +539,7 @@ int boot_ramdisk_high(struct lmb *lmb, ulong rd_data, ulong rd_len,
->  		      ulong *initrd_start, ulong *initrd_end)
->  {
->  	char	*s;
-> -	ulong	initrd_high;
-> +	phys_addr_t initrd_high;
->  	int	initrd_copy_to_ram = 1;
->  
->  	s = env_get("initrd_high");
-> @@ -553,8 +554,8 @@ int boot_ramdisk_high(struct lmb *lmb, ulong rd_data, ulong rd_len,
->  		initrd_high = env_get_bootm_mapsize() + env_get_bootm_low();
->  	}
->  
-> -	debug("## initrd_high = 0x%08lx, copy_to_ram = %d\n",
-> -	      initrd_high, initrd_copy_to_ram);
-> +	debug("## initrd_high = 0x%p, copy_to_ram = %d\n",
-> +	      (void *)(uintptr_t)initrd_high, initrd_copy_to_ram);
->  
->  	if (rd_data) {
->  		if (!initrd_copy_to_ram) {	/* zero-copy ramdisk support */
-> diff --git a/boot/image-fdt.c b/boot/image-fdt.c
-> index 5e4aa9de0d2..c2571b22244 100644
-> --- a/boot/image-fdt.c
-> +++ b/boot/image-fdt.c
-> @@ -160,9 +160,10 @@ int boot_relocate_fdt(struct lmb *lmb, char **of_flat_tree, ulong *of_size)
->  {
->  	void	*fdt_blob = *of_flat_tree;
->  	void	*of_start = NULL;
-> -	u64	start, size, usable;
-> +	phys_addr_t start, size, usable;
->  	char	*fdt_high;
-> -	ulong	mapsize, low;
-> +	phys_addr_t low;
-> +	phys_size_t mapsize;
->  	ulong	of_len = 0;
->  	int	bank;
->  	int	err;
-> @@ -217,7 +218,7 @@ int boot_relocate_fdt(struct lmb *lmb, char **of_flat_tree, ulong *of_size)
->  			if (start + size < low)
->  				continue;
->  
-> -			usable = min(start + size, (u64)(low + mapsize));
-> +			usable = min(start + size, low + mapsize);
->  
->  			/*
+>  		if (desired_addr == ~0UL) {
+>  			/* All ones means use fdt in place */
+> @@ -224,8 +224,8 @@ int boot_relocate_fdt(struct lmb *lmb, char **of_flat_tree, ulong *of_size)
 >  			 * At least part of this DRAM bank is usable, try
-> @@ -233,7 +234,7 @@ int boot_relocate_fdt(struct lmb *lmb, char **of_flat_tree, ulong *of_size)
->  			 * Reduce the mapping size in the next bank
->  			 * by the size of attempt in current bank.
+>  			 * using it for LMB allocation.
 >  			 */
-> -			mapsize -= usable - max(start, (u64)low);
-> +			mapsize -= usable - max(start, low);
->  			if (!mapsize)
+> -			of_start = map_sysmem((ulong)lmb_alloc_base(lmb,
+> -				    of_len, 0x1000, usable), of_len);
+> +			addr = lmb_alloc_base(lmb, of_len, 0x1000, usable);
+> +			of_start = map_sysmem(addr, of_len);
+>  			/* Allocation succeeded, use this block. */
+>  			if (of_start != NULL)
 >  				break;
->  		}
-> diff --git a/include/image.h b/include/image.h
-> index 21de70f0c9e..acffd17e0df 100644
-> --- a/include/image.h
-> +++ b/include/image.h
-> @@ -946,7 +946,7 @@ static inline void image_set_name(struct legacy_img_hdr *hdr, const char *name)
->  int image_check_hcrc(const struct legacy_img_hdr *hdr);
->  int image_check_dcrc(const struct legacy_img_hdr *hdr);
->  #ifndef USE_HOSTCC
-> -ulong env_get_bootm_low(void);
-> +phys_addr_t env_get_bootm_low(void);
->  phys_size_t env_get_bootm_size(void);
->  phys_size_t env_get_bootm_mapsize(void);
->  #endif
 
 -- 
 Regards,
