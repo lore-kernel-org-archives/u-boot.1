@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F683C54E68
-	for <u-boot@archiver.kernel.org>; Sun, 17 Mar 2024 23:51:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02650C54E60
+	for <u-boot@archiver.kernel.org>; Sun, 17 Mar 2024 23:52:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B8A6587E0A;
-	Mon, 18 Mar 2024 00:51:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F167287F64;
+	Mon, 18 Mar 2024 00:52:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HWYEySpd";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FmPCTEkq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F4A687EE3; Mon, 18 Mar 2024 00:51:28 +0100 (CET)
-Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
- [IPv6:2607:f8b0:4864:20::102d])
+ id 023B787F39; Mon, 18 Mar 2024 00:52:08 +0100 (CET)
+Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
+ [IPv6:2607:f8b0:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 188F987B35
- for <u-boot@lists.denx.de>; Mon, 18 Mar 2024 00:51:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DC17487B35
+ for <u-boot@lists.denx.de>; Mon, 18 Mar 2024 00:52:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x102d.google.com with SMTP id
- 98e67ed59e1d1-29f8403166aso457968a91.1
- for <u-boot@lists.denx.de>; Sun, 17 Mar 2024 16:51:25 -0700 (PDT)
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-1def81ee762so4146675ad.0
+ for <u-boot@lists.denx.de>; Sun, 17 Mar 2024 16:52:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1710719483; x=1711324283; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1710719524; x=1711324324; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=R7JVMPXTE5qNH26K+JgGhLUSmEBtOyutKBTrHSZfdF8=;
- b=HWYEySpd+kmYcQWKwLDlZFDhMrl61oEghhOe5AX5QxVeW8bkdDKo4rm9a+1ZIF5iRe
- M7xdHNipUvB28qUMsELWRtLEfiZj1SqcMbPChviMbeg+5O55766OhuRi2uMy2ow3Sz1/
- Y6JTeWvbmjPEdGUppQtYGlEmgJ4VS2OCOzZ0x+XCAsuGj4zXIwpuc7HaHJbi+fcqh4/s
- LeKbCghKxLPaXHaHzzsCjygs8VkQIUJINs3+zt2hjo9WmwWrdEC/afaKEtVYoFiJ8d5Z
- RZx+W0veVofM16wGDiITW0lqgqtVlC/0sCuINiXZ++8jWazjOrGNSV2qAE9ZUvC8kktm
- oL8g==
+ bh=sM2FORU3Tb+XQVGGY/2TPa+4hiPY/5H4iSfYCg7FOl4=;
+ b=FmPCTEkqN/NNeDrAOrt1gWcGaT3QYpxDZbRuc5SRw6Zz7Dp4Cmn6RXgltqUys12DaC
+ EY9nb/l39pc2tKonequDLjWYWzqXjjf01Grhwr6yiVimcCPDXbPr/mlkXBJtaKT7/qMf
+ fddqBAhI0VkZQSHVvImfpnXpQ+LY5H0u4v/n6XXJliljWMolzU/BpuPOizOl1bmwQ1/u
+ tPi/S/b6bZA5CCvOv5gbO1S2n7XdPG0ziR8kTiS9ef9az23AW6gXqxn59UPoR998Jdiw
+ IdSNnFKgpbGhbJ7tzOQqgXCAkTCLbTKP/nZJCbbZNFCPgkVLtlFmvIl8NLfcHCKVAp3x
+ 1bBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710719483; x=1711324283;
+ d=1e100.net; s=20230601; t=1710719524; x=1711324324;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=R7JVMPXTE5qNH26K+JgGhLUSmEBtOyutKBTrHSZfdF8=;
- b=FSkZ5pxV11AB6LAipc1trTa1IUs5WMtHfgYfm8WFBDYV4nUyQ84f33Z0uwRTU92fQc
- DnjlJhmYG0d6rWLtFH1nH/mviFAl81KdhUFeMBEwhhYog7gebLYzxHT5wN6sDi1VaHPH
- b0A3lPTfxf/hbxD8jLMdFE1TGUnIL4jAvuLSjP1vcWnP5bdYOk0n6t94bW0267pb5oDy
- YMMyKF+2owKf5c1rX+jywleB68xq2t4+vJwIdA29aYZcMhJv64t8CE4DkOjxpQeNZaHP
- DeqKcZW2kgP8I+imrUO0bEggbfbu2QEDMMO0M/2bSVV/vfcjfnd7EAZ+HdfSY7U1mxp8
- ce1g==
+ bh=sM2FORU3Tb+XQVGGY/2TPa+4hiPY/5H4iSfYCg7FOl4=;
+ b=rhCClXn0nBa2WSyRdmp7RndFLB3gDs3Yhhc9BR3nruvJ2LRJR9u3IMt3N114iS+1ME
+ //0VLNdGWW1lPmnTywnAU57wyrvrLhvGeKa4VzvTkyI4gzDQm07G/j02wuVnpEp3di3Z
+ ehtmgG3ZRi+wRNu1/5Em2Vs1epj5OVwVfQ761lzEx1WrPOcwqSizl9ons8P5+K7PUpfk
+ 1++tNY98MZMOiA3ytzBxdY9TM56Ua1KfiQBs4xNEbSVP9VoRq8IHlN1ovTVmV2d154PT
+ Hykpz/6F3qddWSuc1RclZd/S7R2ZCfN4x2JaDlJOFWSOiRDIYjYBYK79KtBJgtp0spZ2
+ J1Bg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXGPwPgTpMrzYVdVMv1dS+tI3ywUkdG8i7qgB2VSJHQwpV4A8DCV/6gDsz/R0xddlWc7FAq+ueMgGz3yfPecvjkePQycA==
-X-Gm-Message-State: AOJu0YxzSZ/XXda72nnJkQk6ksH+fgm0Tl4bztwAvo7biySKCVCGoGhh
- xMFkA9Xh0i7cObhJCxI66jXWDjhFh3LMz9AEj7AG2RAuoSdQ38sUHqWSs0N5HF4qnyEYWcml2qW
- 7A/XSiwLBr/v+cCwwI3eWzuf/Tpw=
-X-Google-Smtp-Source: AGHT+IHguOhdd5XDEFynn6o1bj4qSL106DWngWEJJBQIqpBJNl4AsPMoD8xQq69UuktjGWj1XC6ujHr52+S1DSc7Sdg=
-X-Received: by 2002:a17:90a:ad93:b0:29b:f75d:bf5d with SMTP id
- s19-20020a17090aad9300b0029bf75dbf5dmr9183696pjq.4.1710719483533; Sun, 17 Mar
- 2024 16:51:23 -0700 (PDT)
+ AJvYcCWPMHOBdQ7kURSwOJ4lounyk1ciQ+AqloGqjVYvkCcKEg8rHfTv/6bftT8AqnhG1rNtHqj6pXLFyPsP/xbVwdP9q4u0Rw==
+X-Gm-Message-State: AOJu0YxPBhFwEu3udQHKzWA6ib1vnw+64J84qPkIFVjHwjWnv7MOFxVn
+ 8U1XHKRWW8JZKB05mIGizDT6EPxALVr2nojdW+HgKxS4DM1guMZzLIHoO/5KIC+/oNWhrakRbv1
+ Dd+Nh2PVgFEnJo999Fl9/j9XrXC2a/WuhGf8=
+X-Google-Smtp-Source: AGHT+IGfsmJjhPC97gICMI7J+Lx0dfsCzIwWqlbCUn+adRggj9jzpnSoRMVt9QF7CVpz+47L2xxwf9z4RXRBDD6TLVE=
+X-Received: by 2002:a17:902:d501:b0:1dd:5a49:7a98 with SMTP id
+ b1-20020a170902d50100b001dd5a497a98mr13798362plg.3.1710719524227; Sun, 17 Mar
+ 2024 16:52:04 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240304-fix-thermal-driver-issue-v1-1-f30daeaf1055@phytec.de>
-In-Reply-To: <20240304-fix-thermal-driver-issue-v1-1-f30daeaf1055@phytec.de>
+References: <20240307152302.2338472-1-parth105105@gmail.com>
+In-Reply-To: <20240307152302.2338472-1-parth105105@gmail.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Sun, 17 Mar 2024 20:51:11 -0300
-Message-ID: <CAOMZO5AsNA-e7Egy_=6ZP9b39omRtUoypOtu030ji9VsXUHSuA@mail.gmail.com>
-Subject: Re: [PATCH] drivers: imx_tmu: Select polling-rate from cpu-thermal
- devicetree node
-To: Benjamin Hahn <B.Hahn@phytec.de>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- upstream@lists.phytec.de
+Date: Sun, 17 Mar 2024 20:51:52 -0300
+Message-ID: <CAOMZO5B9KsQGbsCWfbx8OHG2QMY8Lr6vdCnTBNz3UnRUST-3EA@mail.gmail.com>
+Subject: Re: [PATCH v1] configs: colibri-imx7: enable watchdog
+To: Parth Pancholi <parth105105@gmail.com>
+Cc: Stefano Babic <sbabic@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Parth Pancholi <parth.pancholi@toradex.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -91,19 +91,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Mar 4, 2024 at 8:49=E2=80=AFAM Benjamin Hahn <B.Hahn@phytec.de> wro=
-te:
+On Thu, Mar 7, 2024 at 12:23=E2=80=AFPM Parth Pancholi <parth105105@gmail.c=
+om> wrote:
 >
-> The polling rate is already specified in some devicetrees, like
-> imx8mp.dtsi for example, but was not selected so far. For the
-> trippoints, the cpu-thermal node is used. Also get the polling rate from
-> this node. Use the default of 5000ms if the polling rate should not be
-> specified in the devicetree.
+> From: Parth Pancholi <parth.pancholi@toradex.com>
 >
-> NOTE: The polling rate from the devicetree will be used after this
-> patch. In imx8*.dtsi devicetrees the polling delay is set to 2000ms for
-> example.
+> Enable watchdog functionality for Toradex's Colibri iMX7 (NAND/EMMC)
+> modules.
 >
-> Signed-off-by: Benjamin Hahn <B.Hahn@phytec.de>
+> Signed-off-by: Parth Pancholi <parth.pancholi@toradex.com>
 
 Applied for u-boot-imx/next, thanks.
