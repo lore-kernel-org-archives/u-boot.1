@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AB24C54E60
-	for <u-boot@archiver.kernel.org>; Sun, 17 Mar 2024 11:07:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55B59C54E60
+	for <u-boot@archiver.kernel.org>; Sun, 17 Mar 2024 11:07:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F204C87B71;
-	Sun, 17 Mar 2024 12:07:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6D82687DE2;
+	Sun, 17 Mar 2024 12:07:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="igwrQMWz";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="XEwxsICP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 23D8B87DE2; Sun, 17 Mar 2024 12:07:21 +0100 (CET)
+ id AB130878AA; Sun, 17 Mar 2024 12:07:21 +0100 (CET)
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B08CA87D35
+ by phobos.denx.de (Postfix) with ESMTPS id 8FF1A87B71
  for <u-boot@lists.denx.de>; Sun, 17 Mar 2024 12:07:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=devnull+j.jannau.net@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 37B3B60ACF;
+ by dfw.source.kernel.org (Postfix) with ESMTP id 3524B60A6D;
  Sun, 17 Mar 2024 11:07:13 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id B2035C43399;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id A1906C433F1;
  Sun, 17 Mar 2024 11:07:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1710673632;
- bh=Yd7zTXXfnTT1yUWDcP2zXgBHU/8UfM3boWZyYqijYRQ=;
+ bh=rYXV0k7EBckYZTsVZcUhRN+UEMaEXk+zOV9pKXRAWW8=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=igwrQMWzMK9vRNNeteVph3szaRPP5LR7ORAy/7pzwV7HiXDIWnTNeZoIwj/InbDY6
- kYIpsablyEm6xv+lmdjz1hd1m9I9myRs5zwTzD6+hxtj3A+HQ0tFquRutdDVU1p++G
- t5zXN3BsceDajr5HFJpxYWeb+MZvQgoSnvCOTqToqcZdPO9xiC70GMvgc2Wbv4+yyX
- yXQUe3F42riXbzfOMn7tjRaTMv4t1EpC6LkxW5JGYIpuzltLdZjx0HZ3otWrkmQ0ot
- FjL5ii5SB3KwLKVzG9QbIXWSInruoxt5hB3/tvuarBZeD3DcV51DuOTWIbW7mExrsx
- wjawbCfQXCWDQ==
+ b=XEwxsICPqaLmbTo2yGqIAOdJEFqRfmftd3UT76gvSWkGrlOzpfwgf0K50yIfVBZTO
+ WsZDlGC+uIh5M4YDsSSoOob6jRqqbQuVMuqqBtg0FFJfauBbvQ7n3XKYjqyQfUO3Xi
+ w0Z6ccCAucedio0y8osMawnrNtsw0c5rCx17rtdKb5F5Iu0YI3AaPQJJFZ8XTdRSDk
+ um5FrZCbdX4hfJ6X1bhIe4Q4W5yfUpnY9jLlDXF08VvlFblTRxEDkHeOXL61ohrAi+
+ j1xfPDtD57W8a+uD7xCEiME31pAh4eTLbfYSmWeEy14ew81Pn5z1rbz91aAOasz1M8
+ jeis4V/2CJJHA==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id A6463C54E72;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 93559C54E71;
  Sun, 17 Mar 2024 11:07:12 +0000 (UTC)
 From: Janne Grunau via B4 Relay <devnull+j.jannau.net@kernel.org>
-Date: Sun, 17 Mar 2024 12:07:06 +0100
-Subject: [PATCH v2 4/6] usb: Add environment based device blocklist
+Date: Sun, 17 Mar 2024 12:07:04 +0100
+Subject: [PATCH v2 2/6] usb: xhci: Set up endpoints for the first 2 interfaces
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240317-asahi-keyboards-v2-4-d3f4b8384f68@jannau.net>
+Message-Id: <20240317-asahi-keyboards-v2-2-d3f4b8384f68@jannau.net>
 References: <20240317-asahi-keyboards-v2-0-d3f4b8384f68@jannau.net>
 In-Reply-To: <20240317-asahi-keyboards-v2-0-d3f4b8384f68@jannau.net>
 To: Bin Meng <bmeng.cn@gmail.com>, Marek Vasut <marex@denx.de>, 
@@ -58,12 +58,12 @@ To: Bin Meng <bmeng.cn@gmail.com>, Marek Vasut <marex@denx.de>,
  Joe Hershberger <joe.hershberger@ni.com>
 Cc: u-boot@lists.denx.de, asahi@lists.linux.dev, Janne Grunau <j@jannau.net>
 X-Mailer: b4 0.12.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4777; i=j@jannau.net;
- h=from:subject:message-id; bh=1B9UO0P8CfWsKNUiNEUhYx6LFm2qj3jdyvJC22Nz0Yw=;
- b=owGbwMvMwCW2UNrmdq9+ahrjabUkhtRv5+7xRMQdv2S1Qunb9p7S/WaxFexcmhXr6l6GMdpuX
- n1zv5hERykLgxgXg6yYIkuS9ssOhtU1ijG1D8Jg5rAygQxh4OIUgIn0GzEyfFzqemHbzVP7nrGn
- yBtXr5+tPjfw5QqbnJpV+gFNTSxiFxj+RyiyzeMR4N1/qvLh4+49GvF2fN1t59qfRT2o+mt3/bM
- rOwA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3546; i=j@jannau.net;
+ h=from:subject:message-id; bh=jCJdN1l13rXok34wJeFoF4KbGic4w4dcopGqoogzJGU=;
+ b=owGbwMvMwCW2UNrmdq9+ahrjabUkhtRv5+79v5DUmrBp5ZHfVos4PrL4fHh4VFjn7UObx7bsx
+ U26Opt/dpSyMIhxMciKKbIkab/sYFhdoxhT+yAMZg4rE8gQBi5OAZhIwk+G/5ET01cvXDn1xtWK
+ 3VMW//D57F0vlSisG7w6uPV6zcqFRt8YGZbdb7rMFqNaKmRy0DR/pVffm5VCGRfru0JyZyWGuSh
+ +5gMA
 X-Developer-Key: i=j@jannau.net; a=openpgp;
  fpr=8B336A6BE4E5695E89B8532B81E806F586338419
 X-Endpoint-Received: by B4 Relay for j@jannau.net/default with auth_id=62
@@ -87,142 +87,99 @@ X-Virus-Status: Clean
 
 From: Janne Grunau <j@jannau.net>
 
-Add the environment variable "usb_blocklist" to prevent USB devices
-listed in it from being used. This allows to ignore devices which
-trigger bugs in u-boot's USB stack or are undesirable for other reasons.
-Devices emulating keyboards are one example. U-boot currently supports
-only one USB keyboard device. Most commonly, people run into this with
-Yubikeys, so let's ignore those in the default environment.
+The xhci driver currently only does the necessary initialization for
+endpoints found in the first interface descriptor. Apple USB keyboards
+(released 2021) use the second interface descriptor for the HID keyboard
+boot protocol. To allow USB drivers to use endpoints from other
+interface descriptors the xhci driver needs to ensure these endpoints
+are initialized as well.
+Use USB_MAX_ACTIVE_INTERFACES to control how many interface descriptors
+are considered during endpoint initialisation.
+For now define it to 2 as that is sufficient for supporting the Apple
+keyboards.
 
-Based on previous USB keyboard specific patches for the same purpose.
-
-Link: https://lore.kernel.org/u-boot/7ab604fb-0fec-4f5e-8708-7a3a7e2cb568@denx.de/
+Reviewed-by: Marek Vasut <marex@denx.de>
 Signed-off-by: Janne Grunau <j@jannau.net>
 ---
- common/usb.c              | 56 +++++++++++++++++++++++++++++++++++++++++++++++
- doc/usage/environment.rst | 12 ++++++++++
- include/env_default.h     | 11 ++++++++++
- 3 files changed, 79 insertions(+)
+ drivers/usb/host/xhci.c | 31 +++++++++++++++++++------------
+ include/usb.h           |  6 ++++++
+ 2 files changed, 25 insertions(+), 12 deletions(-)
 
-diff --git a/common/usb.c b/common/usb.c
-index 836506dcd9..73af5be066 100644
---- a/common/usb.c
-+++ b/common/usb.c
-@@ -1084,6 +1084,57 @@ static int usb_prepare_device(struct usb_device *dev, int addr, bool do_read,
- 	return 0;
- }
+diff --git a/drivers/usb/host/xhci.c b/drivers/usb/host/xhci.c
+index 534c4b973f..741e186ee0 100644
+--- a/drivers/usb/host/xhci.c
++++ b/drivers/usb/host/xhci.c
+@@ -606,24 +606,28 @@ static int xhci_set_configuration(struct usb_device *udev)
+ 	int slot_id = udev->slot_id;
+ 	struct xhci_virt_device *virt_dev = ctrl->devs[slot_id];
+ 	struct usb_interface *ifdesc;
++	unsigned int ifnum;
++	unsigned int max_ifnum = min((unsigned int)USB_MAX_ACTIVE_INTERFACES,
++				     (unsigned int)udev->config.no_of_if);
  
-+static int usb_blocklist_parse_error(const char *blocklist, size_t pos)
-+{
-+	printf("usb_blocklist parse error at char %zu in \"%s\"\n", pos,
-+	       blocklist);
-+	return 0;
-+}
-+
-+static int usb_device_is_blocked(u16 id_vendor, u16 id_product)
-+{
-+	ulong vid, pid;
-+	char *end;
-+	const char *block_str = env_get("usb_blocklist");
-+	const char *cur = block_str;
-+
-+	/* parse "usb_blocklist" strictly */
-+	while (cur && cur[0] != '\0') {
-+		vid = simple_strtoul(cur, &end, 0);
-+		if (cur == end || end[0] != ':')
-+			return usb_blocklist_parse_error(block_str,
-+							 cur - block_str);
-+
-+		cur = end + 1;
-+		pid = simple_strtoul(cur, &end, 0);
-+		if (cur == end && end[0] != '*')
-+			return usb_blocklist_parse_error(block_str,
-+							 cur - block_str);
-+
-+		if (end[0] == '*') {
-+			/* use out of range idProduct as wildcard indication */
-+			pid = U16_MAX + 1;
-+			end++;
+ 	out_ctx = virt_dev->out_ctx;
+ 	in_ctx = virt_dev->in_ctx;
+ 
+-	num_of_ep = udev->config.if_desc[0].no_of_ep;
+-	ifdesc = &udev->config.if_desc[0];
+-
+ 	ctrl_ctx = xhci_get_input_control_ctx(in_ctx);
+ 	/* Initialize the input context control */
+ 	ctrl_ctx->add_flags = cpu_to_le32(SLOT_FLAG);
+ 	ctrl_ctx->drop_flags = 0;
+ 
+-	/* EP_FLAG gives values 1 & 4 for EP1OUT and EP2IN */
+-	for (cur_ep = 0; cur_ep < num_of_ep; cur_ep++) {
+-		ep_flag = xhci_get_ep_index(&ifdesc->ep_desc[cur_ep]);
+-		ctrl_ctx->add_flags |= cpu_to_le32(1 << (ep_flag + 1));
+-		if (max_ep_flag < ep_flag)
+-			max_ep_flag = ep_flag;
++	for (ifnum = 0; ifnum < max_ifnum; ifnum++) {
++		ifdesc = &udev->config.if_desc[ifnum];
++		num_of_ep = ifdesc->no_of_ep;
++		/* EP_FLAG gives values 1 & 4 for EP1OUT and EP2IN */
++		for (cur_ep = 0; cur_ep < num_of_ep; cur_ep++) {
++			ep_flag = xhci_get_ep_index(&ifdesc->ep_desc[cur_ep]);
++			ctrl_ctx->add_flags |= cpu_to_le32(1 << (ep_flag + 1));
++			if (max_ep_flag < ep_flag)
++				max_ep_flag = ep_flag;
 +		}
-+		if (end[0] != ',' && end[0] != '\0')
-+			return usb_blocklist_parse_error(block_str,
-+							 cur - block_str);
-+
-+		if (id_vendor == vid && (pid > U16_MAX || id_product == pid)) {
-+			printf("Ignoring USB device 0x%x:0x%x\n",id_vendor,
-+			      id_product);
-+			debug("Ignoring USB device 0x%x:0x%x\n",id_vendor,
-+			      id_product);
-+			return 1;
-+		}
-+		if (end[0] == '\0')
-+			break;
-+		cur = end + 1;
+ 	}
+ 
+ 	xhci_inval_cache((uintptr_t)out_ctx->bytes, out_ctx->size);
+@@ -637,9 +641,12 @@ static int xhci_set_configuration(struct usb_device *udev)
+ 	xhci_endpoint_copy(ctrl, in_ctx, out_ctx, 0);
+ 
+ 	/* filling up ep contexts */
+-	err = xhci_init_ep_contexts_if(udev, ctrl, virt_dev, ifdesc);
+-	if (err < 0)
+-		return err;
++	for (ifnum = 0; ifnum < max_ifnum; ifnum++) {
++		ifdesc = &udev->config.if_desc[ifnum];
++		err = xhci_init_ep_contexts_if(udev, ctrl, virt_dev, ifdesc);
++		if (err < 0)
++			return err;
 +	}
-+
-+	return 0;
-+}
-+
- int usb_select_config(struct usb_device *dev)
- {
- 	unsigned char *tmpbuf = NULL;
-@@ -1099,6 +1150,11 @@ int usb_select_config(struct usb_device *dev)
- 	le16_to_cpus(&dev->descriptor.idProduct);
- 	le16_to_cpus(&dev->descriptor.bcdDevice);
  
-+	/* ignore devices from usb_blocklist */
-+	if (usb_device_is_blocked(dev->descriptor.idVendor,
-+				  dev->descriptor.idProduct))
-+		return -ENODEV;
-+
- 	/*
- 	 * Kingston DT Ultimate 32GB USB 3.0 seems to be extremely sensitive
- 	 * about this first Get Descriptor request. If there are any other
-diff --git a/doc/usage/environment.rst b/doc/usage/environment.rst
-index ebf75fa948..e42702adb2 100644
---- a/doc/usage/environment.rst
-+++ b/doc/usage/environment.rst
-@@ -366,6 +366,18 @@ tftpwindowsize
-     This means the count of blocks we can receive before
-     sending ack to server.
+ 	return xhci_configure_endpoints(udev, false);
+ }
+diff --git a/include/usb.h b/include/usb.h
+index 09e3f0cb30..3aafdc8bfd 100644
+--- a/include/usb.h
++++ b/include/usb.h
+@@ -49,6 +49,12 @@ extern bool usb_started; /* flag for the started/stopped USB status */
+  */
+ #define USB_TIMEOUT_MS(pipe) (usb_pipebulk(pipe) ? 5000 : 1000)
  
-+usb_blocklist
-+    Block USB devices from being bound to an USB device driver. This can be used
-+    to ignore devices which causes crashes in u-boot's USB stack or are
-+    undesirable for other reasons.
-+    The default environment blocks Yubico devices since they emulate USB
-+    keyboards. U-boot currently supports only a single USB keyboard device and
-+    it is undesirable that a Yubikey is used as keyboard.
-+    Devices are matched by idVendor and idProduct. The variable contains a comma
-+    separated list of idVendor:idProduct pairs as hexadecimal numbers joined
-+    by a colon. '*' functions as a wildcard for idProduct to block all devices
-+    with the specified idVendor.
++/*
++ * The xhcd hcd driver prepares only a limited number interfaces / endpoints.
++ * Define this limit so that drivers do not exceed it.
++ */
++#define USB_MAX_ACTIVE_INTERFACES	2
 +
- vlan
-     When set to a value < 4095 the traffic over
-     Ethernet is encapsulated/received over 802.1q
-diff --git a/include/env_default.h b/include/env_default.h
-index 2ca4a087d3..ba4c7516b4 100644
---- a/include/env_default.h
-+++ b/include/env_default.h
-@@ -99,6 +99,17 @@ const char default_environment[] = {
- #ifdef CONFIG_SYS_SOC
- 	"soc="		CONFIG_SYS_SOC			"\0"
- #endif
-+#ifdef CONFIG_USB_HOST
-+	"usb_blocklist="
-+#ifdef CONFIG_USB_KEYBOARD
-+	/* Ignore Yubico devices. Currently only a single USB keyboard device is
-+	 * supported and the emulated HID keyboard Yubikeys present is useless
-+	 * as keyboard.
-+	 */
-+	"0x1050:*,"
-+#endif
-+	"\0"
-+#endif
- #ifdef CONFIG_ENV_IMPORT_FDT
- 	"env_fdt_path="	CONFIG_ENV_FDT_PATH		"\0"
- #endif
+ /* device request (setup) */
+ struct devrequest {
+ 	__u8	requesttype;
 
 -- 
 2.44.0
