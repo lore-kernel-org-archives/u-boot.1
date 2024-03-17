@@ -4,54 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35B85C54E67
-	for <u-boot@archiver.kernel.org>; Sun, 17 Mar 2024 11:07:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95DA8C54E60
+	for <u-boot@archiver.kernel.org>; Sun, 17 Mar 2024 11:08:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF2EA87EDF;
-	Sun, 17 Mar 2024 12:07:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 442C587F24;
+	Sun, 17 Mar 2024 12:07:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="TWW94RTL";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="pNwj4jV3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 101E187DD5; Sun, 17 Mar 2024 12:07:22 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ id 21A3787DA7; Sun, 17 Mar 2024 12:07:23 +0100 (CET)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C828B87D7C
- for <u-boot@lists.denx.de>; Sun, 17 Mar 2024 12:07:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 81CA587EE3
+ for <u-boot@lists.denx.de>; Sun, 17 Mar 2024 12:07:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=devnull+j.jannau.net@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 913A460A29;
- Sun, 17 Mar 2024 11:07:13 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id C4190C433B1;
+ by sin.source.kernel.org (Postfix) with ESMTP id 569B7CE08CC;
+ Sun, 17 Mar 2024 11:07:14 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 9A690C43390;
  Sun, 17 Mar 2024 11:07:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1710673632;
- bh=VXYwGnRLqhoX4nTsg0/f/e8c2ou9866eyHRC+YjoqLE=;
+ bh=SCUkMnH7WuTjjwZkB3WYEE26T/zYHu0eQcEqscX25vU=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=TWW94RTLKKZa0nXPbWas2BD9PfJF4XI5+uz2xTuk1G8jhrxhlSzqVsCMCYLJXmLCy
- uQCGvoU6AfhYAQeT3VVR5Nv1FtjGpvPyrLN/1TxtNXVM4rXzcDJ4ISIgXWxE6g9sID
- ny4PGz41OMljtuwhCOnUylNcGqYYLZeSSANY9rJQtLo17XLwMKnpSJr2/R91JLeLoG
- fj4IAcGifxuphmd8HrYmCjrG2zZ+XBD1emHeMm7kL/hGPm3zJrQA7rO0nQT28alMQT
- BZBZ+LtyoiuXY/dH5dVK9bTcLTp6gPoN/NXrL1jPbTwKDLtqdYc6xIxgs3SlNTY2MP
- QPfTsAXhWxO/A==
+ b=pNwj4jV3BIcUc8kifnVBu7tLUlkkga5f/R5Oc2jtlQvgQ4leav49pKy33M1q9qrn6
+ wv6QlPWTUm+l104/rPDyB0ynozrX6R4LQiE7cisgCJVP2CY7KCm2xxCnQZjGscS8P7
+ UVGbYFwd42f/hwm7ivtk4NI2YzCsvHsObIIy5paRs90FCOePfD4c3EiyErDA+kSRA+
+ Y8MfWfGi1G091Rhpsj1J3ALYtidb9KPLfurmDSkJbhRqJyHTZ18dkvU6pEsCBQZAtO
+ rj/9fQeMfshHn4pb3Ewq0Y/QHI764UEUdKnYLLR2IhwnLlfA0Vxh+7bGHzG2eZbJe4
+ K31t9oPjMtREQ==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id BD290C54E71;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 83D28C54E60;
  Sun, 17 Mar 2024 11:07:12 +0000 (UTC)
 From: Janne Grunau via B4 Relay <devnull+j.jannau.net@kernel.org>
-Date: Sun, 17 Mar 2024 12:07:08 +0100
-Subject: [PATCH v2 6/6] usb: kbd: Add probe quirk for Apple and Keychron
- keyboards
+Date: Sun, 17 Mar 2024 12:07:03 +0100
+Subject: [PATCH v2 1/6] usb: xhci: refactor xhci_set_configuration
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240317-asahi-keyboards-v2-6-d3f4b8384f68@jannau.net>
+Message-Id: <20240317-asahi-keyboards-v2-1-d3f4b8384f68@jannau.net>
 References: <20240317-asahi-keyboards-v2-0-d3f4b8384f68@jannau.net>
 In-Reply-To: <20240317-asahi-keyboards-v2-0-d3f4b8384f68@jannau.net>
 To: Bin Meng <bmeng.cn@gmail.com>, Marek Vasut <marex@denx.de>, 
@@ -59,12 +58,12 @@ To: Bin Meng <bmeng.cn@gmail.com>, Marek Vasut <marex@denx.de>,
  Joe Hershberger <joe.hershberger@ni.com>
 Cc: u-boot@lists.denx.de, asahi@lists.linux.dev, Janne Grunau <j@jannau.net>
 X-Mailer: b4 0.12.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2616; i=j@jannau.net;
- h=from:subject:message-id; bh=3QwUEWP3L6KlsCns2lL89QxfbDuChlSL5HehKX5qToc=;
- b=owGbwMvMwCW2UNrmdq9+ahrjabUkhtRv5+5pt7Pe+dFwRc5z80x+jsZjHfsP/s/pqy9VSeV/2
- Dln2t+kjlIWBjEuBlkxRZYk7ZcdDKtrFGNqH4TBzGFlAhnCwMUpABPxl2b4w8nuM19sh4RHH7NB
- YCLnCmXpG34uCb3dBcEfDv0NPMG0l+F/af5CHv6SiNklKnyp13+fPb95odRLv3d23dcuLaptlqt
- nAgA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5804; i=j@jannau.net;
+ h=from:subject:message-id; bh=F9Pf5AUd2LJCmwK7bIq2YnVCdp7/M5l3DZP7Z6xCOD8=;
+ b=owGbwMvMwCW2UNrmdq9+ahrjabUkhtRv5+611LFfY9+Y0pRxW6a55uo/2+JPM+ZIHY12kOZiv
+ ir+8eq9jlIWBjEuBlkxRZYk7ZcdDKtrFGNqH4TBzGFlAhnCwMUpABPpSmH4n/P2iejmr+L5C9aJ
+ hfk6NX3+tO5uVI/PlokmPye/3WLEP4Hhv/P3id8f2raV7Uz+VtSl/bfUdKX4G405LdWnSx4tlLR
+ Q4wMA
 X-Developer-Key: i=j@jannau.net; a=openpgp;
  fpr=8B336A6BE4E5695E89B8532B81E806F586338419
 X-Endpoint-Received: by B4 Relay for j@jannau.net/default with auth_id=62
@@ -88,75 +87,176 @@ X-Virus-Status: Clean
 
 From: Janne Grunau <j@jannau.net>
 
-Those keyboards do not return the current device state. Polling will
-timeout unless there are key presses. This is not a problem during
-operation but the inital device state query during probing will fail.
-Skip this step in usb_kbd_probe_dev() to make these devices useable.
-Not all Apple keyboards behave like this. A keyboard with USB
-vendor/product ID 05ac:0221 is reported to work with the current code.
-Unfortunately some Keychron keyboards "re-use" Apple's vendor ID and
-show the same behavior (Keychron C2, 05ac:024f for example).
+In the next step endpoints for multiple interfaces are set up. Move most
+of the per endpoint initialization to separate function to avoid another
+identation level.
 
 Reviewed-by: Marek Vasut <marex@denx.de>
 Signed-off-by: Janne Grunau <j@jannau.net>
 ---
- common/usb_kbd.c | 22 ++++++++++++++++++++++
- 1 file changed, 22 insertions(+)
+ drivers/usb/host/xhci.c | 119 +++++++++++++++++++++++++++++-------------------
+ 1 file changed, 73 insertions(+), 46 deletions(-)
 
-diff --git a/common/usb_kbd.c b/common/usb_kbd.c
-index 8cc3345075..43c7668671 100644
---- a/common/usb_kbd.c
-+++ b/common/usb_kbd.c
-@@ -31,6 +31,10 @@
- #define USB_DEVICE_ID_APPLE_MAGIC_KEYBOARD_FINGERPRINT_2021	0x029a
- #define USB_DEVICE_ID_APPLE_MAGIC_KEYBOARD_NUMPAD_2021		0x029f
+diff --git a/drivers/usb/host/xhci.c b/drivers/usb/host/xhci.c
+index d13cbff9b3..534c4b973f 100644
+--- a/drivers/usb/host/xhci.c
++++ b/drivers/usb/host/xhci.c
+@@ -475,67 +475,34 @@ static int xhci_configure_endpoints(struct usb_device *udev, bool ctx_change)
+ }
  
-+#define USB_VENDOR_ID_KEYCHRON	0x3434
+ /**
+- * Configure the endpoint, programming the device contexts.
++ * Fill endpoint contexts for interface descriptor ifdesc.
+  *
+- * @param udev	pointer to the USB device structure
+- * Return: returns the status of the xhci_configure_endpoints
++ * @param udev		pointer to the USB device structure
++ * @param ctrl		pointer to the xhci pravte device structure
++ * @param virt_dev	pointer to the xhci virtual device structure
++ * @param ifdesc	pointer to the USB interface config descriptor
++ * Return: returns the status of xhci_init_ep_contexts_if
+  */
+-static int xhci_set_configuration(struct usb_device *udev)
++static int xhci_init_ep_contexts_if(struct usb_device *udev,
++				    struct xhci_ctrl *ctrl,
++				    struct xhci_virt_device *virt_dev,
++				    struct usb_interface *ifdesc
++	)
+ {
+-	struct xhci_container_ctx *in_ctx;
+-	struct xhci_container_ctx *out_ctx;
+-	struct xhci_input_control_ctx *ctrl_ctx;
+-	struct xhci_slot_ctx *slot_ctx;
+ 	struct xhci_ep_ctx *ep_ctx[MAX_EP_CTX_NUM];
+ 	int cur_ep;
+-	int max_ep_flag = 0;
+ 	int ep_index;
+ 	unsigned int dir;
+ 	unsigned int ep_type;
+-	struct xhci_ctrl *ctrl = xhci_get_ctrl(udev);
+-	int num_of_ep;
+-	int ep_flag = 0;
+ 	u64 trb_64 = 0;
+-	int slot_id = udev->slot_id;
+-	struct xhci_virt_device *virt_dev = ctrl->devs[slot_id];
+-	struct usb_interface *ifdesc;
+ 	u32 max_esit_payload;
+ 	unsigned int interval;
+ 	unsigned int mult;
+ 	unsigned int max_burst;
+ 	unsigned int avg_trb_len;
+ 	unsigned int err_count = 0;
++	int num_of_ep = ifdesc->no_of_ep;
+ 
+-	out_ctx = virt_dev->out_ctx;
+-	in_ctx = virt_dev->in_ctx;
+-
+-	num_of_ep = udev->config.if_desc[0].no_of_ep;
+-	ifdesc = &udev->config.if_desc[0];
+-
+-	ctrl_ctx = xhci_get_input_control_ctx(in_ctx);
+-	/* Initialize the input context control */
+-	ctrl_ctx->add_flags = cpu_to_le32(SLOT_FLAG);
+-	ctrl_ctx->drop_flags = 0;
+-
+-	/* EP_FLAG gives values 1 & 4 for EP1OUT and EP2IN */
+-	for (cur_ep = 0; cur_ep < num_of_ep; cur_ep++) {
+-		ep_flag = xhci_get_ep_index(&ifdesc->ep_desc[cur_ep]);
+-		ctrl_ctx->add_flags |= cpu_to_le32(1 << (ep_flag + 1));
+-		if (max_ep_flag < ep_flag)
+-			max_ep_flag = ep_flag;
+-	}
+-
+-	xhci_inval_cache((uintptr_t)out_ctx->bytes, out_ctx->size);
+-
+-	/* slot context */
+-	xhci_slot_copy(ctrl, in_ctx, out_ctx);
+-	slot_ctx = xhci_get_slot_ctx(ctrl, in_ctx);
+-	slot_ctx->dev_info &= ~(cpu_to_le32(LAST_CTX_MASK));
+-	slot_ctx->dev_info |= cpu_to_le32(LAST_CTX(max_ep_flag + 1) | 0);
+-
+-	xhci_endpoint_copy(ctrl, in_ctx, out_ctx, 0);
+-
+-	/* filling up ep contexts */
+ 	for (cur_ep = 0; cur_ep < num_of_ep; cur_ep++) {
+ 		struct usb_endpoint_descriptor *endpt_desc = NULL;
+ 		struct usb_ss_ep_comp_descriptor *ss_ep_comp_desc = NULL;
+@@ -561,7 +528,8 @@ static int xhci_set_configuration(struct usb_device *udev)
+ 		avg_trb_len = max_esit_payload;
+ 
+ 		ep_index = xhci_get_ep_index(endpt_desc);
+-		ep_ctx[ep_index] = xhci_get_ep_ctx(ctrl, in_ctx, ep_index);
++		ep_ctx[ep_index] = xhci_get_ep_ctx(ctrl, virt_dev->in_ctx,
++						   ep_index);
+ 
+ 		/* Allocate the ep rings */
+ 		virt_dev->eps[ep_index].ring = xhci_ring_alloc(ctrl, 1, true);
+@@ -614,6 +582,65 @@ static int xhci_set_configuration(struct usb_device *udev)
+ 		}
+ 	}
+ 
++	return 0;
++}
 +
-+#define USB_HID_QUIRK_POLL_NO_REPORT_IDLE	(1 << 0)
++/**
++ * Configure the endpoint, programming the device contexts.
++ *
++ * @param udev	pointer to the USB device structure
++ * Return: returns the status of the xhci_configure_endpoints
++ */
++static int xhci_set_configuration(struct usb_device *udev)
++{
++	struct xhci_container_ctx *out_ctx;
++	struct xhci_container_ctx *in_ctx;
++	struct xhci_input_control_ctx *ctrl_ctx;
++	struct xhci_slot_ctx *slot_ctx;
++	int err;
++	int cur_ep;
++	int max_ep_flag = 0;
++	struct xhci_ctrl *ctrl = xhci_get_ctrl(udev);
++	int num_of_ep;
++	int ep_flag = 0;
++	int slot_id = udev->slot_id;
++	struct xhci_virt_device *virt_dev = ctrl->devs[slot_id];
++	struct usb_interface *ifdesc;
 +
- /*
-  * If overwrite_console returns 1, the stdin, stderr and stdout
-  * are switched to the serial port, else the settings in the
-@@ -474,6 +478,7 @@ static int usb_kbd_probe_dev(struct usb_device *dev, unsigned int ifnum)
- 	struct usb_interface *iface;
- 	struct usb_endpoint_descriptor *ep;
- 	struct usb_kbd_pdata *data;
-+	unsigned int quirks = 0;
- 	int epNum;
- 
- 	if (dev->descriptor.bNumConfigurations != 1)
-@@ -506,6 +511,15 @@ static int usb_kbd_probe_dev(struct usb_device *dev, unsigned int ifnum)
- 
- 	debug("USB KBD: found interrupt EP: 0x%x\n", ep->bEndpointAddress);
- 
-+	switch (dev->descriptor.idVendor) {
-+	case USB_VENDOR_ID_APPLE:
-+	case USB_VENDOR_ID_KEYCHRON:
-+		quirks |= USB_HID_QUIRK_POLL_NO_REPORT_IDLE;
-+		break;
-+	default:
-+		break;
++	out_ctx = virt_dev->out_ctx;
++	in_ctx = virt_dev->in_ctx;
++
++	num_of_ep = udev->config.if_desc[0].no_of_ep;
++	ifdesc = &udev->config.if_desc[0];
++
++	ctrl_ctx = xhci_get_input_control_ctx(in_ctx);
++	/* Initialize the input context control */
++	ctrl_ctx->add_flags = cpu_to_le32(SLOT_FLAG);
++	ctrl_ctx->drop_flags = 0;
++
++	/* EP_FLAG gives values 1 & 4 for EP1OUT and EP2IN */
++	for (cur_ep = 0; cur_ep < num_of_ep; cur_ep++) {
++		ep_flag = xhci_get_ep_index(&ifdesc->ep_desc[cur_ep]);
++		ctrl_ctx->add_flags |= cpu_to_le32(1 << (ep_flag + 1));
++		if (max_ep_flag < ep_flag)
++			max_ep_flag = ep_flag;
 +	}
 +
- 	data = malloc(sizeof(struct usb_kbd_pdata));
- 	if (!data) {
- 		printf("USB KBD: Error allocating private data\n");
-@@ -546,6 +560,14 @@ static int usb_kbd_probe_dev(struct usb_device *dev, unsigned int ifnum)
- 	usb_set_idle(dev, iface->desc.bInterfaceNumber, 0, 0);
- #endif
++	xhci_inval_cache((uintptr_t)out_ctx->bytes, out_ctx->size);
++
++	/* slot context */
++	xhci_slot_copy(ctrl, in_ctx, out_ctx);
++	slot_ctx = xhci_get_slot_ctx(ctrl, in_ctx);
++	slot_ctx->dev_info &= ~(cpu_to_le32(LAST_CTX_MASK));
++	slot_ctx->dev_info |= cpu_to_le32(LAST_CTX(max_ep_flag + 1) | 0);
++
++	xhci_endpoint_copy(ctrl, in_ctx, out_ctx, 0);
++
++	/* filling up ep contexts */
++	err = xhci_init_ep_contexts_if(udev, ctrl, virt_dev, ifdesc);
++	if (err < 0)
++		return err;
++
+ 	return xhci_configure_endpoints(udev, false);
+ }
  
-+	/*
-+	 * Apple and Keychron keyboards do not report the device state. Reports
-+	 * are only returned during key presses.
-+	 */
-+	if (quirks & USB_HID_QUIRK_POLL_NO_REPORT_IDLE) {
-+		debug("USB KBD: quirk: skip testing device state\n");
-+		return 1;
-+	}
- 	debug("USB KBD: enable interrupt pipe...\n");
- #ifdef CONFIG_SYS_USB_EVENT_POLL_VIA_INT_QUEUE
- 	data->intq = create_int_queue(dev, data->intpipe, 1,
 
 -- 
 2.44.0
