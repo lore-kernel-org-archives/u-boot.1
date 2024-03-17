@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C69BBC54E67
-	for <u-boot@archiver.kernel.org>; Sun, 17 Mar 2024 09:37:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DCFCC54E60
+	for <u-boot@archiver.kernel.org>; Sun, 17 Mar 2024 09:38:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C82BF878AA;
-	Sun, 17 Mar 2024 10:37:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9DD3887C68;
+	Sun, 17 Mar 2024 10:38:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="keeyx/n7";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Jbg0lqEP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8FB8E87C68; Sun, 17 Mar 2024 10:37:52 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ id 7288387D06; Sun, 17 Mar 2024 10:38:39 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B8008775F
- for <u-boot@lists.denx.de>; Sun, 17 Mar 2024 10:37:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D6B40878AA
+ for <u-boot@lists.denx.de>; Sun, 17 Mar 2024 10:38:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1710668266; x=1711273066; i=xypron.glpk@gmx.de;
- bh=jvuj46hsTjpJUyuTwlqhKjG4y3paKqID13MyRcJv1EE=;
+ s=s31663417; t=1710668312; x=1711273112; i=xypron.glpk@gmx.de;
+ bh=quZ9ulg0gtRF5OngK46PhmlB9eI4jziVw5rrMddIuVo=;
  h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
  In-Reply-To;
- b=keeyx/n7wZFQM2QeId9IVgTKNK69k1jplZY65XK/aHU0kqEZzgV8L+NaBIdEbWe5
- i6ZtXzKIW1+FmjZUtO29rnBr3XSRko7+ddy9d5RraAFL+6AsIVzKYCJXI8dZIuAUc
- lnrQWrpWYtb0n0mIDcCThmF+ppl2DVP37UyxMjCRbmu4se0905K1SJxeqHFm/MKOE
- t7UEWAAOzIKBaZlN5eYX8f+a59SBTFqP1xmtrxjTXCNAwRAPvLgs+2/74jKUpvqJh
- w5DS5sf2CZFAvcSARv4QhEaEQFeUP4cz8FfkZIFNpSKcSEDTFpMj1O4vAMVKFsFqu
- UP012vunTs3gsvt6zA==
+ b=Jbg0lqEPn6YPsY1dZDyoKf9Ihr+XtGIKik6N9zsHGA3g4mPrhtRV20aNH27w8JI7
+ 1v4AaInuMlQTHeh5PUCtw2NB1g95IwIjkZtSIr1fRsot/z9h+/dBnMqmWNS9cTH8u
+ RmNYrjH53nj8oFibuR83huRD7zHmyEnihVWwV8eKLQggb6pOtMUG8exhnGyCNjFMm
+ Yh4VEoTEXvD+Ar+F8sH9HOm8c/ncZTEjk5ISIhFLe7tnXLQDVdbfewlBNyLwUIlbc
+ /GK1MGCPIjryQYzYiQXr+ZJvpiaDMM/fvyLMGSCmdgKbnVPzGdGRRhnPIQJm9Nh4O
+ hzVHDBe1NfWsOFbFKw==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [192.168.123.161] ([62.143.245.32]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1Md6Qr-1rCBA133Ip-00aH3g; Sun, 17
- Mar 2024 10:37:46 +0100
-Message-ID: <ec8b1e3b-5d8e-4a69-8e4a-4bbf81c4919f@gmx.de>
-Date: Sun, 17 Mar 2024 10:37:48 +0100
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MKKZ3-1rV4w43n6l-00LlVk; Sun, 17
+ Mar 2024 10:38:31 +0100
+Message-ID: <15282646-74e4-4829-b5d7-3fea24e01cad@gmx.de>
+Date: Sun, 17 Mar 2024 10:38:33 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 5/7] efi_selftest: Add box drawing character selftest
+Subject: Re: [PATCH v3 6/7] efi_selftest: Add geometric shapes character
+ selftest
 Content-Language: en-US
-To: j@jannau.net
+To: j@jannau.net, Anatolij Gustschin <agust@denx.de>
 Cc: Simon Glass <sjg@chromium.org>, Andre Przywara <andre.przywara@arm.com>,
- u-boot@lists.denx.de, Anatolij Gustschin <agust@denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
+ u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
 References: <20240316-vidconsole-utf8-uefi-v3-0-4e8a3d349447@jannau.net>
- <20240316-vidconsole-utf8-uefi-v3-5-4e8a3d349447@jannau.net>
+ <20240316-vidconsole-utf8-uefi-v3-6-4e8a3d349447@jannau.net>
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240316-vidconsole-utf8-uefi-v3-5-4e8a3d349447@jannau.net>
+In-Reply-To: <20240316-vidconsole-utf8-uefi-v3-6-4e8a3d349447@jannau.net>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:3Us+bF/9Moa6644iTaASW92NQ2w/y21ZWnbc+aA3DYInAaL6V16
- MeVezO/0J1Wz2zGClsgk/gBocJMfTD7BFTSymx3pCywsLdCiv5xuc0ZtbL78kbf9vFlPwnl
- SqjaWV3093wHo0n33wPAtGA0L8dD0Pug/RxJQSlk+zfzP96Ikro43nV6d1kZ10hq4ITFHwe
- fLuab1Gp6W5QBnr/utwkQ==
-UI-OutboundReport: notjunk:1;M01:P0:QyrSjA5uDLk=;OcXLsQUJ1Z8q2EufrAcBrQD/wxg
- 3YJt5pQSf1PHpKOdMpqASLC0ChnG0byfT3cjHszcnoPWooWJ4q19kM2jftzfnud4u9w7X/ujG
- YT8DNAbGb/X88OKmQwrh0GQCSNvdLW+2sDROBSpkbibCtbM+I2+YNQ+p+ODJb19bBIZfowEBe
- 3YgslLOBg5uA3M7SyuDoFdQ+9kJqQG6Q0O8QSieN0H6n1Ck5mbW48IEXOiU89Ik6EuDxShD8y
- y7wL11XesYGSSnIZ1y+ZDQThqm+5RnT77CXW3EeqesBmEjYyoWnx0P8F/cViHaLcdm7dfOOOE
- gqVVfHV3lCIsBJgNWfwrq9C0XzkJEdBxanId9YoV+BDNPb80jBfk7lqzyY3V69JIw/KEWTeX1
- cuMgQGE1peiMO9zhNxkKeni2fYpe2Di2YBFDa9Hg9gvz+JkSQgFhGlKwrDRvUy4X2B+Oo1ctY
- wUSEfbS7SWrFqMV4UvyQVLTKQ51heiIkRIA7X2YTz3Aw/rqbEUHFoGeakH0A7XQ9lnZezOyGT
- ghbit5oewGq4v2A8dm0rlqCWxEIF8Py5Nc6eT+guJoq6DMEtBsohYP7GjeOjs3nM5NIqilEmg
- 5m6nPFXdP4WVR9vA2XgrG7WvymzCUuQQyzCoa7Fk+xoIhKZNw3g0O9U0MfPm/vJNdf0fCnztE
- S0qwIeGUWXsKsP8kRJ+6bEGbEF8q3+10QFmfxKQKQFaF1v7t6rP6TJjFKndRVuRz0/HY3uftb
- OTC4zixzXSY5ep0+Ij61nFW2fQ4uK4M7xMpXYAmzHr90DKthaNktEsIOoKFq4FD7d00UhBL9c
- Lc34UL1oU1JHjLoHxUEg4OvSTTPTL33M03B8za4xZE/WQ=
+X-Provags-ID: V03:K1:aEBkxllK95NiUqd1Wm2qt4rpY/kely97RTTIz8E2bFSA8XdXSoi
+ BACIvSKm1BcWYKC5ioDQyT9MSLV6G71mkSKM7TaQKqmfhwgpv64PH+FJGu/Of6DNhzSqDNm
+ /XeF5xzVVgacBj6gQuCl6oYydN5boKj6ugEs0kauru0ZjqsHPyxFIm7KnIzqIex9/LPESl2
+ ySfWHXICm67AYPgGWRbrw==
+UI-OutboundReport: notjunk:1;M01:P0:OZmWooGg51c=;Ra7Zano+qWWy+mwFKG8hV2u8soo
+ 7NT4IvivmoYRn8Fxd0x2ZHkXQIwmWoF7mBOV4G8C7oxk/v7giiT1DCk6bgoTivZMmGidtUmWY
+ RFSFHqc59CswI0KOykYFIBVqPzL9ImflhcFZLdroJF9f8c1axYvsB1BtAE8Vj+HNS6eOcd8Rb
+ C3CtiFeY6LEcVOoZUiTKOtk7XkPxyuWEoRgt2PtcFFkPcmmD9/UxrbMfX+DxRdJqju5pJW6Ns
+ a8BK4H9hQcKDE/ZpyagJuFsbT02WsRO8Bbix0zR2JUEk+Y1saig6pQyvOglXAwraaWe5Df+cH
+ eogHkJuDfAJJZeazPjh10hKI4fHf+2RpAQ6Gor2TRVEr8eJuukNq+tzVx0ln4/Q/Q5d2s4nMZ
+ 3QqCtcPtTdaa+POegJAw0wC4o9HcujvnuY/PQp/3MAiDDeh9NlWriPnD870e64dX0CpqPql4X
+ 6ZOkw/MRhu+XM4Dc7DcDbF2G2v5qwMMWMPgNAHA5w7ZVuGCYR8pm8hPuyj+7iFCGtR5n+H5oz
+ 8g0o4i4HJ7oz5vqBwCwMp5+yYtaPRch0JG1T/V532ZI/ZESwtcuIkugHhxzjvMdh9i1h45faJ
+ 1E2iKWBNdwSDhzuLTQpc6KQ2DH4F1wOKvtEKijKXSCgoe91G3rszvg1xx3MHiyYKa21LM8GsF
+ wKCAfMciE3lMr/nKT/YSFxhYLoHwLPGDoU+SJ9a+9JFGcr1UPdF8FTCb+MOfN4CF5lg+QIEVh
+ nDV7lzSkx9xNWADb7nSHnmAHXWs5WOd6MQ+6gJZySlKM7ZXsjP7gcXJH7h/5WD52k/2ZVm/pw
+ vIeNDdq3l7eqecDduSo8vCJTiUHtSrKcdwKDDaqedO3sM=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,63 +90,53 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 3/16/24 22:50, Janne Grunau via B4 Relay wrote:
-> From: Andre Przywara <andre.przywara@arm.com>
+> From: Janne Grunau <j@jannau.net>
 >
-> UEFI applications rely on Unicode output capability, and might use that
-> for drawing pseudo-graphical interfaces using Unicode defined box
-> drawing characters.
+> Draw symbols from Unicode's "Geometric shapes" page which translate to
+> code page 437 code points 1-31. These are used by UEFI applications to
+> draw user interfaces using EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL.
+> The output has to be checked manually on the screen for correctness.
 >
-> Add a simple test to display the most basic box characters, which would
-> need to be checked manually on the screen for correctness.
->
-> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
-> Suggested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 > Signed-off-by: Janne Grunau <j@jannau.net>
 > ---
->   lib/efi_selftest/efi_selftest_textoutput.c | 20 ++++++++++++++++++++
->   1 file changed, 20 insertions(+)
+>   lib/efi_selftest/efi_selftest_textoutput.c | 13 +++++++++++++
+>   1 file changed, 13 insertions(+)
 >
 > diff --git a/lib/efi_selftest/efi_selftest_textoutput.c b/lib/efi_selfte=
 st/efi_selftest_textoutput.c
-> index 917903473d..b56fd2ab76 100644
+> index b56fd2ab76..2208a9877a 100644
 > --- a/lib/efi_selftest/efi_selftest_textoutput.c
 > +++ b/lib/efi_selftest/efi_selftest_textoutput.c
-> @@ -46,6 +46,20 @@ u"U+03BB \u03BB - Greek small letter lambda\n"
->   u"U+03C2 \u03C2 - Greek small letter final sigma\n"
->   u"U+1F19 \u1F19 - Greek capital letter epsilon with dasia\n";
+> @@ -60,6 +60,13 @@ u"\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2=
+500\u2500\u2534"
+>   u"\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500"
+>   u"\u2500\u2500\u2500\u2500\u2518\n";
 >
-> +	const u16 boxes[] =3D
-> +u"This should render as four boxes with text\n"
-> +u"\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500"
-> +u"\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500"
-> +u"\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502"
-> +u" left top    \u2502 right top     \u2502\n\u251c\u2500"
-> +u"\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500"
-> +u"\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500"
-> +u"\u2500\u2500\u2500\u2500\u2500\u2500\u2524\n\u2502 "
-> +u"left bottom \u2502 right bottom  \u2502\n\u2514\u2500\u2500\u2500"
-> +u"\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534"
-> +u"\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500"
-> +u"\u2500\u2500\u2500\u2500\u2518\n";
+> +	const u16 shapes[] =3D
+> +u"Geometric shapes as described\n"
+> +u"U+25B2 \u25B2 - Black up-pointing triangle\n"
+> +u"U+25BA \u25BA - Black right-pointing pointer\n"
+> +u"U+25BC \u25BC - Black down-pointing triangle\n"
+> +u"U+25C4 \u25C4 - Black left-pointing pointer\n";
 
 Please, indent the strings by two tabs.
 
-Otherwise:
+Otherwise
 
 Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+
 
 > +
 >   	/* SetAttribute */
 >   	efi_st_printf("\nColor palette\n");
 >   	for (foreground =3D 0; foreground < 0x10; ++foreground) {
-> @@ -140,6 +154,12 @@ u"U+1F19 \u1F19 - Greek capital letter epsilon with=
- dasia\n";
+> @@ -160,6 +167,12 @@ u"\u2500\u2500\u2500\u2500\u2518\n";
 >   		return EFI_ST_FAILURE;
 >   	}
 >   	efi_st_printf("\n");
-> +	ret =3D con_out->output_string(con_out, boxes);
+> +	ret =3D con_out->output_string(con_out, shapes);
 > +	if (ret !=3D EFI_ST_SUCCESS) {
-> +		efi_st_error("OutputString failed for box drawing chars\n");
+> +		efi_st_error("OutputString failed for geometric shapes\n");
 > +		return EFI_ST_FAILURE;
 > +	}
 > +	efi_st_printf("\n");
