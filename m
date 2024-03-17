@@ -4,55 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 523EFC54E68
-	for <u-boot@archiver.kernel.org>; Sun, 17 Mar 2024 20:50:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 494A3C54E60
+	for <u-boot@archiver.kernel.org>; Sun, 17 Mar 2024 21:39:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 89ABF87F3D;
-	Sun, 17 Mar 2024 21:49:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 767AB87D09;
+	Sun, 17 Mar 2024 22:39:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="qwZ5C1va";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NyMJzMmn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F59E87E01; Sun, 17 Mar 2024 21:49:53 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3B8A887E06; Sun, 17 Mar 2024 22:39:53 +0100 (CET)
+Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
+ [IPv6:2607:f8b0:4864:20::229])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BAA0887F39
- for <u-boot@lists.denx.de>; Sun, 17 Mar 2024 21:49:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6F758876E4
+ for <u-boot@lists.denx.de>; Sun, 17 Mar 2024 22:39:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=2d81=KY=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1710708584; bh=CsmNEcOc0ydjlv6oHjdbyVmz45fJ6TVUYwMx4QcU0bo=;
- b=qwZ5C1vaUa+rcUsLen1Dwiwn4Ep+FiOd43R2EH8StG7gTL1+5DEHH9Fmc9o2ox3dhvOnKG2Md
- CUSWpNiNxfuv8QTc56PkQlKNMh96Cp0c+Wxr2AtnDtVa+6SvYPJgJlLxIVmU20zFvziwVN4hwgX
- LuZDADzyuze2PeQGhymh6ov54I37V96+0U7xMxAC42a0+cwQZTtvj49DgZ/XbOuOdFgE9lEQXvy
- HNue1kcSCnIspmk3lxkIMMGz3rU0hayTUOLsC1mToJQfZwP0B2xUqnhKqWTYklq8KE1+8rfY5Xs
- 2huID2UrJ/ETwhrCdkMnFZighPmh+bF4I1V/+/tUmHWA==
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 3/3] rockchip: io-domain: Add support for RK3328
-Date: Sun, 17 Mar 2024 20:49:17 +0000
-Message-ID: <20240317204923.219908-4-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.43.2
-In-Reply-To: <20240317204923.219908-1-jonas@kwiboo.se>
-References: <20240317204923.219908-1-jonas@kwiboo.se>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
+Received: by mail-oi1-x229.google.com with SMTP id
+ 5614622812f47-3c19b7d9de7so2583304b6e.2
+ for <u-boot@lists.denx.de>; Sun, 17 Mar 2024 14:39:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1710711588; x=1711316388; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=mUEhA3z2gTprtYU9kfes8bGGwPzEeGifG0d29VKKfjE=;
+ b=NyMJzMmn6grU5gnD1wJ+D0vmZtEjxHFKuRD/LIpLXTtW8mST5Y27o3kD/BEpUYaLDh
+ rspBCbvBqXfr/mNRm6CG2FDjG/o9zeRLQj9fxOePqaWlsSyhJt1GSW5uKJcrgxDnRf1L
+ Arz3kVRGjqDPvz1xyvbu9SwjkGLhrca8KwVR1ZD38a/nuEny02LkHNYXKsfloSBAwbVD
+ ++otr36c4sIVEq7FfdeK+uejLhcC994HrEGU2rCnfgfiiLavgSRTgA7A26lDgUKXtUgt
+ CLVa/3MdbcOf1lnyeWNJxnrPnIeduDpsyHCXyZjAV/Ju6jdjtVdca0nA8FhKtJVjRhxm
+ PdmQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710711588; x=1711316388;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=mUEhA3z2gTprtYU9kfes8bGGwPzEeGifG0d29VKKfjE=;
+ b=Y+pe2tb09g+wiDzSSaNzG0W4jm3mi7pdyI4EV1QhYiGjINVb3E44wVCu16AfWMLLwv
+ YpmpidQVI1xazwRnHMrvbtceleMDRvvaAjkuqON3U7mwipNWtvm44dw6JpcqAdRA/8K1
+ IPOQ1n5EAzANQtPATP0ZuqpwxmnQIFFeo98/PJjvF5Vl9ccdskweZV56IgeUV+Yc1vEn
+ +j/pmKnBEp7Di004CT++uUoYqx2nFbdssO02X0iw/9140gELLZCm/ZNVgN+L1lGlY7ow
+ mIh3r/x08Z6MDJqHS0LV3iixPiYBkxk//NtauazQTY1j6z1xYx6zH/dFWwAHlYfDbNVV
+ LkIQ==
+X-Gm-Message-State: AOJu0YwgczwcmlVmvJPjaPMUZK8bGO7OQ75neuIBzsZbie6kS3ZA5DRE
+ iWoHnMXKCLO0DTkTbeF2cd8u3uxHsRH12marHs0LvJIeKX/rqPBbqUB8LvdvNgMQEjxK74L28pR
+ piYnlFxVZArpkah9OHOgUo1oDffc=
+X-Google-Smtp-Source: AGHT+IE7skuYMa/MQ2GXluK1XWfSS3JQAIzWRSUSBXSOTE2pcOVB4VqB5EJhj5a/VkuhLPFxkRLiyZZ8jqp3kmmIsdU=
+X-Received: by 2002:a05:6808:399b:b0:3c3:7f24:4537 with SMTP id
+ gq27-20020a056808399b00b003c37f244537mr8054368oib.42.1710711588093; Sun, 17
+ Mar 2024 14:39:48 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 65f7576731e1d1de6044097d
+References: <20240317-asahi-keyboards-v2-0-d3f4b8384f68@jannau.net>
+ <20240317-asahi-keyboards-v2-4-d3f4b8384f68@jannau.net>
+In-Reply-To: <20240317-asahi-keyboards-v2-4-d3f4b8384f68@jannau.net>
+From: E Shattow <lucent@gmail.com>
+Date: Sun, 17 Mar 2024 14:39:36 -0700
+Message-ID: <CANV2PTPfth7Z=BYah6xLT3BoparckKzG=dtJAEhea1PdtibMWg@mail.gmail.com>
+Subject: Re: [PATCH v2 4/6] usb: Add environment based device blocklist
+To: j@jannau.net
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,131 +87,171 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Port the RK3328 part of the Rockchip IO-domain driver from linux.
+Should be usb_denylist, since "block devices" is ambiguous meaning if
+it is a list of data chunks (blocks) or if it blocks (deny). There is
+no question what a denylist is.
 
-This differs from linux version in that pmu io iodomain bit is enabled
-in the write ops instead of in an init ops as in linux, this way we can
-avoid keeping a full state of all supply that have been configured.
-
-Enable by default on all RK3328 boards, skip rk3328-evb because this
-target is typically also used on miscellaneous boards and boxes not
-fully supported by U-Boot.
-
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
- arch/arm/mach-rockchip/rk3328/syscon_rk3328.c |  3 ++
- configs/evb-rk3328_defconfig                  |  1 +
- drivers/misc/Kconfig                          |  2 +-
- drivers/misc/rockchip-io-domain.c             | 38 +++++++++++++++++++
- 4 files changed, 43 insertions(+), 1 deletion(-)
-
-diff --git a/arch/arm/mach-rockchip/rk3328/syscon_rk3328.c b/arch/arm/mach-rockchip/rk3328/syscon_rk3328.c
-index daf74a0e2d37..d2f267e63534 100644
---- a/arch/arm/mach-rockchip/rk3328/syscon_rk3328.c
-+++ b/arch/arm/mach-rockchip/rk3328/syscon_rk3328.c
-@@ -17,4 +17,7 @@ U_BOOT_DRIVER(rockchip_rk3328_grf) = {
- 	.name = "rockchip_rk3328_grf",
- 	.id = UCLASS_SYSCON,
- 	.of_match = rk3328_syscon_ids,
-+#if CONFIG_IS_ENABLED(OF_REAL)
-+	.bind = dm_scan_fdt_dev,
-+#endif
- };
-diff --git a/configs/evb-rk3328_defconfig b/configs/evb-rk3328_defconfig
-index 75a0e0f286bd..53ad6777ec50 100644
---- a/configs/evb-rk3328_defconfig
-+++ b/configs/evb-rk3328_defconfig
-@@ -57,6 +57,7 @@ CONFIG_FASTBOOT_BUF_ADDR=0x800800
- CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
-+# CONFIG_ROCKCHIP_IODOMAIN is not set
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_PHY_MOTORCOMM=y
-diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
-index f11ce72525f5..860420d3e3e3 100644
---- a/drivers/misc/Kconfig
-+++ b/drivers/misc/Kconfig
-@@ -104,7 +104,7 @@ config ROCKCHIP_OTP
- config ROCKCHIP_IODOMAIN
- 	bool "Rockchip IO-domain driver support"
- 	depends on DM_REGULATOR && ARCH_ROCKCHIP
--	default y if ROCKCHIP_RK3568
-+	default y if ROCKCHIP_RK3328 || ROCKCHIP_RK3568
- 	help
- 	  Enable support for IO-domains in Rockchip SoCs. It is necessary
- 	  for the IO-domain setting of the SoC to match the voltage supplied
-diff --git a/drivers/misc/rockchip-io-domain.c b/drivers/misc/rockchip-io-domain.c
-index 0ffea32ef07f..04d4d07c4127 100644
---- a/drivers/misc/rockchip-io-domain.c
-+++ b/drivers/misc/rockchip-io-domain.c
-@@ -27,6 +27,10 @@
- #define MAX_VOLTAGE_1_8		1980000
- #define MAX_VOLTAGE_3_3		3600000
- 
-+#define RK3328_SOC_CON4			0x410
-+#define RK3328_SOC_CON4_VCCIO2		BIT(7)
-+#define RK3328_SOC_VCCIO2_SUPPLY_NUM	1
-+
- #define RK3399_PMUGRF_CON0		0x180
- #define RK3399_PMUGRF_CON0_VSEL		BIT(8)
- #define RK3399_PMUGRF_VSEL_SUPPLY_NUM	9
-@@ -95,6 +99,22 @@ static int rockchip_iodomain_write(struct regmap *grf, uint offset, int idx, int
- 	return regmap_write(grf, offset, val);
- }
- 
-+static int rk3328_iodomain_write(struct regmap *grf, uint offset, int idx, int uV)
-+{
-+	int ret = rockchip_iodomain_write(grf, offset, idx, uV);
-+
-+	if (!ret && idx == RK3328_SOC_VCCIO2_SUPPLY_NUM) {
-+		/*
-+		 * set vccio2 iodomain to also use this framework
-+		 * instead of a special gpio.
-+		 */
-+		u32 val = RK3328_SOC_CON4_VCCIO2 | (RK3328_SOC_CON4_VCCIO2 << 16);
-+		ret = regmap_write(grf, RK3328_SOC_CON4, val);
-+	}
-+
-+	return ret;
-+}
-+
- static int rk3399_pmu_iodomain_write(struct regmap *grf, uint offset, int idx, int uV)
- {
- 	int ret = rockchip_iodomain_write(grf, offset, idx, uV);
-@@ -111,6 +131,20 @@ static int rk3399_pmu_iodomain_write(struct regmap *grf, uint offset, int idx, i
- 	return ret;
- }
- 
-+static const struct rockchip_iodomain_soc_data soc_data_rk3328 = {
-+	.grf_offset = 0x410,
-+	.supply_names = {
-+		"vccio1-supply",
-+		"vccio2-supply",
-+		"vccio3-supply",
-+		"vccio4-supply",
-+		"vccio5-supply",
-+		"vccio6-supply",
-+		"pmuio-supply",
-+	},
-+	.write = rk3328_iodomain_write,
-+};
-+
- static const struct rockchip_iodomain_soc_data soc_data_rk3399 = {
- 	.grf_offset = 0xe640,
- 	.supply_names = {
-@@ -156,6 +190,10 @@ static const struct rockchip_iodomain_soc_data soc_data_rk3568_pmu = {
- };
- 
- static const struct udevice_id rockchip_iodomain_ids[] = {
-+	{
-+		.compatible = "rockchip,rk3328-io-voltage-domain",
-+		.data = (ulong)&soc_data_rk3328,
-+	},
- 	{
- 		.compatible = "rockchip,rk3399-io-voltage-domain",
- 		.data = (ulong)&soc_data_rk3399,
--- 
-2.43.2
-
+On Sun, Mar 17, 2024 at 4:07=E2=80=AFAM Janne Grunau via B4 Relay
+<devnull+j.jannau.net@kernel.org> wrote:
+>
+> From: Janne Grunau <j@jannau.net>
+>
+> Add the environment variable "usb_blocklist" to prevent USB devices
+> listed in it from being used. This allows to ignore devices which
+> trigger bugs in u-boot's USB stack or are undesirable for other reasons.
+> Devices emulating keyboards are one example. U-boot currently supports
+> only one USB keyboard device. Most commonly, people run into this with
+> Yubikeys, so let's ignore those in the default environment.
+>
+> Based on previous USB keyboard specific patches for the same purpose.
+>
+> Link: https://lore.kernel.org/u-boot/7ab604fb-0fec-4f5e-8708-7a3a7e2cb568=
+@denx.de/
+> Signed-off-by: Janne Grunau <j@jannau.net>
+> ---
+>  common/usb.c              | 56 +++++++++++++++++++++++++++++++++++++++++=
+++++++
+>  doc/usage/environment.rst | 12 ++++++++++
+>  include/env_default.h     | 11 ++++++++++
+>  3 files changed, 79 insertions(+)
+>
+> diff --git a/common/usb.c b/common/usb.c
+> index 836506dcd9..73af5be066 100644
+> --- a/common/usb.c
+> +++ b/common/usb.c
+> @@ -1084,6 +1084,57 @@ static int usb_prepare_device(struct usb_device *d=
+ev, int addr, bool do_read,
+>         return 0;
+>  }
+>
+> +static int usb_blocklist_parse_error(const char *blocklist, size_t pos)
+> +{
+> +       printf("usb_blocklist parse error at char %zu in \"%s\"\n", pos,
+> +              blocklist);
+> +       return 0;
+> +}
+> +
+> +static int usb_device_is_blocked(u16 id_vendor, u16 id_product)
+> +{
+> +       ulong vid, pid;
+> +       char *end;
+> +       const char *block_str =3D env_get("usb_blocklist");
+> +       const char *cur =3D block_str;
+> +
+> +       /* parse "usb_blocklist" strictly */
+> +       while (cur && cur[0] !=3D '\0') {
+> +               vid =3D simple_strtoul(cur, &end, 0);
+> +               if (cur =3D=3D end || end[0] !=3D ':')
+> +                       return usb_blocklist_parse_error(block_str,
+> +                                                        cur - block_str)=
+;
+> +
+> +               cur =3D end + 1;
+> +               pid =3D simple_strtoul(cur, &end, 0);
+> +               if (cur =3D=3D end && end[0] !=3D '*')
+> +                       return usb_blocklist_parse_error(block_str,
+> +                                                        cur - block_str)=
+;
+> +
+> +               if (end[0] =3D=3D '*') {
+> +                       /* use out of range idProduct as wildcard indicat=
+ion */
+> +                       pid =3D U16_MAX + 1;
+> +                       end++;
+> +               }
+> +               if (end[0] !=3D ',' && end[0] !=3D '\0')
+> +                       return usb_blocklist_parse_error(block_str,
+> +                                                        cur - block_str)=
+;
+> +
+> +               if (id_vendor =3D=3D vid && (pid > U16_MAX || id_product =
+=3D=3D pid)) {
+> +                       printf("Ignoring USB device 0x%x:0x%x\n",id_vendo=
+r,
+> +                             id_product);
+> +                       debug("Ignoring USB device 0x%x:0x%x\n",id_vendor=
+,
+> +                             id_product);
+> +                       return 1;
+> +               }
+> +               if (end[0] =3D=3D '\0')
+> +                       break;
+> +               cur =3D end + 1;
+> +       }
+> +
+> +       return 0;
+> +}
+> +
+>  int usb_select_config(struct usb_device *dev)
+>  {
+>         unsigned char *tmpbuf =3D NULL;
+> @@ -1099,6 +1150,11 @@ int usb_select_config(struct usb_device *dev)
+>         le16_to_cpus(&dev->descriptor.idProduct);
+>         le16_to_cpus(&dev->descriptor.bcdDevice);
+>
+> +       /* ignore devices from usb_blocklist */
+> +       if (usb_device_is_blocked(dev->descriptor.idVendor,
+> +                                 dev->descriptor.idProduct))
+> +               return -ENODEV;
+> +
+>         /*
+>          * Kingston DT Ultimate 32GB USB 3.0 seems to be extremely sensit=
+ive
+>          * about this first Get Descriptor request. If there are any othe=
+r
+> diff --git a/doc/usage/environment.rst b/doc/usage/environment.rst
+> index ebf75fa948..e42702adb2 100644
+> --- a/doc/usage/environment.rst
+> +++ b/doc/usage/environment.rst
+> @@ -366,6 +366,18 @@ tftpwindowsize
+>      This means the count of blocks we can receive before
+>      sending ack to server.
+>
+> +usb_blocklist
+> +    Block USB devices from being bound to an USB device driver. This can=
+ be used
+> +    to ignore devices which causes crashes in u-boot's USB stack or are
+> +    undesirable for other reasons.
+> +    The default environment blocks Yubico devices since they emulate USB
+> +    keyboards. U-boot currently supports only a single USB keyboard devi=
+ce and
+> +    it is undesirable that a Yubikey is used as keyboard.
+> +    Devices are matched by idVendor and idProduct. The variable contains=
+ a comma
+> +    separated list of idVendor:idProduct pairs as hexadecimal numbers jo=
+ined
+> +    by a colon. '*' functions as a wildcard for idProduct to block all d=
+evices
+> +    with the specified idVendor.
+> +
+>  vlan
+>      When set to a value < 4095 the traffic over
+>      Ethernet is encapsulated/received over 802.1q
+> diff --git a/include/env_default.h b/include/env_default.h
+> index 2ca4a087d3..ba4c7516b4 100644
+> --- a/include/env_default.h
+> +++ b/include/env_default.h
+> @@ -99,6 +99,17 @@ const char default_environment[] =3D {
+>  #ifdef CONFIG_SYS_SOC
+>         "soc=3D"          CONFIG_SYS_SOC                  "\0"
+>  #endif
+> +#ifdef CONFIG_USB_HOST
+> +       "usb_blocklist=3D"
+> +#ifdef CONFIG_USB_KEYBOARD
+> +       /* Ignore Yubico devices. Currently only a single USB keyboard de=
+vice is
+> +        * supported and the emulated HID keyboard Yubikeys present is us=
+eless
+> +        * as keyboard.
+> +        */
+> +       "0x1050:*,"
+> +#endif
+> +       "\0"
+> +#endif
+>  #ifdef CONFIG_ENV_IMPORT_FDT
+>         "env_fdt_path=3D" CONFIG_ENV_FDT_PATH             "\0"
+>  #endif
+>
+> --
+> 2.44.0
+>
