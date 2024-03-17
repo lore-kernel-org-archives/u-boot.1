@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CBC4C54E60
-	for <u-boot@archiver.kernel.org>; Sun, 17 Mar 2024 23:55:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBFE6C54E68
+	for <u-boot@archiver.kernel.org>; Sun, 17 Mar 2024 23:56:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 035FA87FCD;
-	Mon, 18 Mar 2024 00:55:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E843687FE9;
+	Mon, 18 Mar 2024 00:56:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Mx3bLRgR";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JdYTdF2k";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 78C0B87F3F; Mon, 18 Mar 2024 00:55:13 +0100 (CET)
-Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
- [IPv6:2607:f8b0:4864:20::102c])
+ id C99B387FEF; Mon, 18 Mar 2024 00:55:58 +0100 (CET)
+Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
+ [IPv6:2607:f8b0:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3252587FDD
- for <u-boot@lists.denx.de>; Mon, 18 Mar 2024 00:55:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 95CD387F3F
+ for <u-boot@lists.denx.de>; Mon, 18 Mar 2024 00:55:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-29c572d4b84so1377843a91.1
- for <u-boot@lists.denx.de>; Sun, 17 Mar 2024 16:55:11 -0700 (PDT)
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-1dd8ee2441dso7004715ad.1
+ for <u-boot@lists.denx.de>; Sun, 17 Mar 2024 16:55:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1710719710; x=1711324510; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1710719755; x=1711324555; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8JQ2y/95wNTkyvUJ8UT1Q3wnvemRjqeDx45BFRmqv88=;
- b=Mx3bLRgRXQxffT3GQebnYuhvaA2GrLyhWSDGQkui5vKl7XGLBcxNbdhggX6ycGZ/4o
- pm35Tf/5VdW8svcG6hbIyG116YAMK8OO+bzOoi8Ioo3P3j262pH/SAi9e2TyoJl7z9A+
- tBOmfSCT31RWozEdlsWyUvcjIrDcYDP2bqcPaw3Fo8bpjBCJAiPYQ+zgRe47Vgxc5/lb
- pCvMShb3OrOqIKZqecCGGb3i5fv9KnJ1wC+IEMHpDYC8HXRdJUx2D6cmw0Mby2bfvZJ0
- Weolpd4SkPNAAJGSvkCQvgFdwAylVaGmesVaKNscvqfOWfIwcYl+m5j1AEU8dx4REs7R
- Fg0A==
+ bh=ks4TLz0cGIYDzxL1GmDw2Sr03ZsqaNoKuv9RyWVCLOI=;
+ b=JdYTdF2kcikZ+ZTc3oJVjvPwPiYYjqixD/LTtcKdYoRcS691prNMuGtk5YjyHrd84s
+ MTf9qOlLmv4E0HwTA9LBjYrAE5f/kvpHS+jpookCXZBbe/BPc2pMeQkboo5Y6xQ6RHF2
+ KnwK7iU0sGTm3FBWLxu39GlmXXu9kVbGy13Ib0wTYPDCI83AgSgnT+48i9IdR0E5j2/S
+ XeGupjMrOT/Kaoa8qhmS60PxvlqqvbL3Z5fI5ppDsy+NX5438N6q0ZSCVFo657HG1sPJ
+ EOunEtcK6WiKzP+ZmAytWTIZp655lyNVfr0Cx/NkEP8GVXqM3mGE3oV93AWQQPAOM2C1
+ eIww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710719710; x=1711324510;
+ d=1e100.net; s=20230601; t=1710719755; x=1711324555;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8JQ2y/95wNTkyvUJ8UT1Q3wnvemRjqeDx45BFRmqv88=;
- b=nbi4tTAS9DEhiz3a/hYFBjiyhTTx+BRJERMpn3d8ucoobOxrJnyh8hEQITMnngoOIM
- kumScLJPJLOSWSTwfKRs3hS2zEpeCK2pVXYy+OrMRq1JXIQWCh+UrlPMFvmO2NbH39OV
- T+eqzGZtRVUP8SsCtwiIJ7GsQ+97ox0xDLzalJmhW7LQF3sYtM5RaZCsYgcR8fXPUc8p
- TjgdQGvU8h4Tcj5ngE9VDa3b8/Nd4ybLNl++P0ecorussuvevLTgrmyK+poD4AlSdcsk
- 66ASc4ople/pnHIiH3VUFyuBMGr6bLD/Xjha3MMe0Mup2ZVeFeE5SUjLQlHlb2s1NyJj
- sjGA==
+ bh=ks4TLz0cGIYDzxL1GmDw2Sr03ZsqaNoKuv9RyWVCLOI=;
+ b=OvEtJm8atfwelYwZsLwBk3ZPQlzliNfYMPvJiIiIyMzKgzWdCcWG6bstakittX6QOD
+ YhVM9JmDwgbf48AUOaLoQ9eY2ca9Jp9WKZF4ZtfBO+bQ+ancpuUcTteNZLey7KqEhH2r
+ t7IOxdP3LyIyhU3nkTPw53D2ig7FQLBbtHTnrtHEQMTx8O+yDCPRZf1PBs6AzA908Mw+
+ 2oKMrFMXuVSXsxvhjRQarWufHxMPiPhu1CIGEGKxmQuiS2cRAaPeWVrd8+G9IqeiAIoD
+ 3aZ71ARAWdGvMkcVC4whH9XXT0UU+A3mdMNsmyW8pUYaTliHIc8Iaw3b1oY46Q44ytzE
+ 7dKQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVFeK6ay01zGqw2Sa+ofoRwipj2Rtxj1I9BiRWKR0dOaVLBhAACPN5SYW4M9xu63BNCwEqsiiQimL9JCDVhkDw4keserA==
-X-Gm-Message-State: AOJu0YysI4TJRm/aAtCu11Vg5pudKZV56DWBJdzS05fJDilxf7D1hWyE
- LR1uacr9f7jNsbm7sS+UoordiqUiBqZZyrOvbbtIH3W4bTA3abCdsQwfksVWXCieuh7WHNLxPPZ
- TTMSZISEKYGOTZF7AElw2FDxn3l4=
-X-Google-Smtp-Source: AGHT+IGf1yzxQp5CTqAlgMBvnvXCBJjZ631m3U3c1DO7DGMWrti2Si0JTa6NVoQbyxwP3X/cjdpGWTIjX8w4GgGfZP8=
-X-Received: by 2002:a17:90a:a409:b0:29c:7697:d2dc with SMTP id
- y9-20020a17090aa40900b0029c7697d2dcmr9310687pjp.4.1710719709737; Sun, 17 Mar
- 2024 16:55:09 -0700 (PDT)
+ AJvYcCUm01ONXwnE8NIGn6SiSIoiyi6XsswS1gzbgtRk0LClLOqic6RuiKW3DfhI3Z/MRvnRPKAmn9AFAaVCyMYl4hL3ZoYSuw==
+X-Gm-Message-State: AOJu0Yw7LvUHkQL3mCdvV9nuFxJPVzvL4v8i8/W1VtwCT4746vfqqbT2
+ QMzng3nh5T2ZJ6DdDb32ipN1XS1ABPVthqHyG81QrmC1OplBTWQXHDnz5WD1W+pAik8bwbjqYxc
+ 3HuhkQGo80OKkvNWtbnRLv8tnCNY=
+X-Google-Smtp-Source: AGHT+IHQh1IjKo8HX4Jjl7AYJ8KSr5UVYxZjGs1+lWkhMqG7tDv1nmEhoQ26aKAO4dw6xizTyGQzJzGSrlnzqOzuP0I=
+X-Received: by 2002:a17:902:d501:b0:1dd:5a49:7a98 with SMTP id
+ b1-20020a170902d50100b001dd5a497a98mr13803658plg.3.1710719755048; Sun, 17 Mar
+ 2024 16:55:55 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240313003641.2650648-1-festevam@gmail.com>
-In-Reply-To: <20240313003641.2650648-1-festevam@gmail.com>
+References: <20240313005941.2654166-1-festevam@gmail.com>
+In-Reply-To: <20240313005941.2654166-1-festevam@gmail.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Sun, 17 Mar 2024 20:54:58 -0300
-Message-ID: <CAOMZO5BWZsJx4T9kGbtTkLasD4R=+vRB4T6fLMariK1bGG83qQ@mail.gmail.com>
-Subject: Re: [PATCH] colibri-imx8x: Fix sc_misc_otp_fuse_read() error check
+Date: Sun, 17 Mar 2024 20:55:43 -0300
+Message-ID: <CAOMZO5D5AGL3xk355TY-A5f66FMKL3=P4rZTeKXxcQ+=LmUHTw@mail.gmail.com>
+Subject: Re: [PATCH] apalis-imx8: Fix sc_misc_otp_fuse_read() error check
 To: festevam@gmail.com
 Cc: marcel.ziswiler@toradex.com, hiago.franco@toradex.com, 
  francesco.dolcini@toradex.com, u-boot@lists.denx.de, peng.fan@nxp.com, 
@@ -91,17 +91,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Mar 12, 2024 at 9:36=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
+On Tue, Mar 12, 2024 at 9:59=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
 wrote:
 >
-> Commit aa6e698a7acd ("imx: toradex/colibri-imx8x: correct SCU API usage")
+> Commit bfb3409d676f ("imx: toradex/apalis-imx8: correct SCU API usage")
 > made an incorrect logic change in the error code check of
 > sc_misc_otp_fuse_read():
 >
-> -       if (sc_err =3D=3D SC_ERR_NONE) {
-> +       if (sc_err) {
->                 /* DX has two A35 cores disabled */
->                 return (val & 0xf) !=3D 0x0;
+> -       if (scierr =3D=3D SC_ERR_NONE) {
+> +       if (scierr) {
+>                 /* QP has one A72 core disabled */
+>                 is_quadplus =3D ((val >> 4) & 0x3) !=3D 0x0;
 >         }
 >
 > The other changes in this commit are correct.
@@ -113,8 +113,7 @@ wrote:
 >
 > Go back the original error check logic to fix the problem.
 >
-> Fixes: aa6e698a7acd ("imx: toradex/colibri-imx8x: correct SCU API usage")
-> Reported-by: Hiago De Franco <hiago.franco@toradex.com>
+> Fixes: bfb3409d676f ("imx: toradex/apalis-imx8: correct SCU API usage")
 > Signed-off-by: Fabio Estevam <festevam@gmail.com>
 
 Applied for u-boot-imx/master, thanks.
