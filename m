@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66A63C54E60
-	for <u-boot@archiver.kernel.org>; Sun, 17 Mar 2024 09:30:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C69BBC54E67
+	for <u-boot@archiver.kernel.org>; Sun, 17 Mar 2024 09:37:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 923C0877AF;
-	Sun, 17 Mar 2024 10:30:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C82BF878AA;
+	Sun, 17 Mar 2024 10:37:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="JOZTEZ9e";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="keeyx/n7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6D9F7879E2; Sun, 17 Mar 2024 10:30:23 +0100 (CET)
+ id 8FB8E87C68; Sun, 17 Mar 2024 10:37:52 +0100 (CET)
 Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 78DAC8723E
- for <u-boot@lists.denx.de>; Sun, 17 Mar 2024 10:30:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9B8008775F
+ for <u-boot@lists.denx.de>; Sun, 17 Mar 2024 10:37:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1710667816; x=1711272616; i=xypron.glpk@gmx.de;
- bh=HHXzlZRihYyEJk8RS1yjosDuxifpDR7LkglQp82bpLI=;
+ s=s31663417; t=1710668266; x=1711273066; i=xypron.glpk@gmx.de;
+ bh=jvuj46hsTjpJUyuTwlqhKjG4y3paKqID13MyRcJv1EE=;
  h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
  In-Reply-To;
- b=JOZTEZ9e2g3IUxdWDJAD257NdFVBreBnzLG2Qzr9fifmjagVpzaXbtJB7RghD7Xl
- PpQNK5aLTKHBnOFzimM8IsY6w2ld4a1B7H0GqN/DEQnIQZLUGrjZ4hWdBHGgQYKfZ
- hG0h7vBAtKSiFTGKdf8fdCeU7h/v0WA2QC67Blo7cBsJB2STbLHuLs6PD21EZY3XA
- SrulxmcEvJeqopl4zbGAoexrt5pUVaN2+5xvAZESSiEUNd23t0AHd1DrGqjqlmxMl
- qwEObBR0AsgDkNu5vbWiwPk6g8BYRvEU+my8HBJYD/LwxxFR3dAyMuDi/OtVksI1i
- TufeZnL3dqC/QYRVKw==
+ b=keeyx/n7wZFQM2QeId9IVgTKNK69k1jplZY65XK/aHU0kqEZzgV8L+NaBIdEbWe5
+ i6ZtXzKIW1+FmjZUtO29rnBr3XSRko7+ddy9d5RraAFL+6AsIVzKYCJXI8dZIuAUc
+ lnrQWrpWYtb0n0mIDcCThmF+ppl2DVP37UyxMjCRbmu4se0905K1SJxeqHFm/MKOE
+ t7UEWAAOzIKBaZlN5eYX8f+a59SBTFqP1xmtrxjTXCNAwRAPvLgs+2/74jKUpvqJh
+ w5DS5sf2CZFAvcSARv4QhEaEQFeUP4cz8FfkZIFNpSKcSEDTFpMj1O4vAMVKFsFqu
+ UP012vunTs3gsvt6zA==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [192.168.123.161] ([62.143.245.32]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MgvvT-1r9PII3fKv-00hRdB; Sun, 17
- Mar 2024 10:30:15 +0100
-Message-ID: <6e04fc86-1b54-4788-b9c1-89dbcdc08dd8@gmx.de>
-Date: Sun, 17 Mar 2024 10:30:17 +0100
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1Md6Qr-1rCBA133Ip-00aH3g; Sun, 17
+ Mar 2024 10:37:46 +0100
+Message-ID: <ec8b1e3b-5d8e-4a69-8e4a-4bbf81c4919f@gmx.de>
+Date: Sun, 17 Mar 2024 10:37:48 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/7] lib: charset: Fix and extend
- utf8_to_utf32_stream() documentation
+Subject: Re: [PATCH v3 5/7] efi_selftest: Add box drawing character selftest
 Content-Language: en-US
 To: j@jannau.net
 Cc: Simon Glass <sjg@chromium.org>, Andre Przywara <andre.przywara@arm.com>,
  u-boot@lists.denx.de, Anatolij Gustschin <agust@denx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
 References: <20240316-vidconsole-utf8-uefi-v3-0-4e8a3d349447@jannau.net>
- <20240316-vidconsole-utf8-uefi-v3-1-4e8a3d349447@jannau.net>
+ <20240316-vidconsole-utf8-uefi-v3-5-4e8a3d349447@jannau.net>
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240316-vidconsole-utf8-uefi-v3-1-4e8a3d349447@jannau.net>
+In-Reply-To: <20240316-vidconsole-utf8-uefi-v3-5-4e8a3d349447@jannau.net>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:wGilZeqwLGPuxKB8sBcP0qK2p8pI0Tnc4vqkznom2+ugUMGl6tb
- epIWRJJYomh1Q2cfPS5WEDuKOQQbbWMrzM8371lqtN7KQfACrjORGaWMdvlk9aE/Z36/fIM
- K52oaqNR+okDVT5Fnxf2Db57h+S3Vus9mO4Ryem4LhxJgtU23dmYGorANonElbVrY4qXbGm
- ux6lzxhQHR+Z2EjSyY2FQ==
-UI-OutboundReport: notjunk:1;M01:P0:9a7oh7+BI38=;BULftyiE9KGXvgVYrDW9XZiI0o2
- fSVkHPq4k1x6hMttylbys9GA7Gp4/YG8GTNzJPeNwGzQC+jlabd/7exeoLhjKXRMgNA39AIEG
- uomm8rdcZrcGJXbS1bKJswJQS/juLxpVBDkNE3NFNYTbXbHnaywDuDR2ZgsCcAyNYHMzB2f8A
- Aej2Xyn/JMmbHaBO4dYUNQfrdjNCxN9AJbxQ6Xe8wj+yOIOboE/8ZZOISmFa2ImcuDIn2XoUx
- EJcpAzA7saoJ4SnzpZO+WnKBPAVbzPfEj5I3E4CU68v5vHfxHlsU/3EcW4NiAPQweIdqr2Ufh
- kEyLr8sSZN5MAtS2J3UBwgDZapQenlvSZOGrZ7rk3LNuypqEBpy6f+sLYgCsCi04M6l3FjJSu
- WHatjqmLM8GXIGX6X8UU5fz8ktopzrz+Ajo++z50+slVA7Hk39DCbhlEKfVki1lxd2bDoDj3y
- lJMkWmbaCP9BJA8vKE9EHrgRjmv7HVNwbeNxBR2YIyQOCMDlp8dJnARgbzAExppPQaBWY6TbE
- Ax8qvZUCtk4BTztE59ea23Tt0TKBvqleQFD2NIL5CoRMjbAFrVqevArgT31pm7rJUT8kFkwET
- D2E+xBkk8JkhxDNe/UkGyDJOwHz/iFJfnhy6BENGoZkSk9XoAfwF/7qhkE7D9yTvp87CfSYa/
- vreT+s2niBjJehA7XVK7QyMGBej6elPGtJZQ9S/p84514gxMoP9LfMqsT921BXCPckdJxEmfe
- QjHxu+yZgeFyU3QZOkzmz4QS3wziKa01DwiX/B6Ld/471KS3D+d8+0em4JmIlLPykBL+xlvFR
- 7I2qTeYOHwBw9a+xpfMD4eLWenJ3vbXsFfhqKpU45lBOM=
+X-Provags-ID: V03:K1:3Us+bF/9Moa6644iTaASW92NQ2w/y21ZWnbc+aA3DYInAaL6V16
+ MeVezO/0J1Wz2zGClsgk/gBocJMfTD7BFTSymx3pCywsLdCiv5xuc0ZtbL78kbf9vFlPwnl
+ SqjaWV3093wHo0n33wPAtGA0L8dD0Pug/RxJQSlk+zfzP96Ikro43nV6d1kZ10hq4ITFHwe
+ fLuab1Gp6W5QBnr/utwkQ==
+UI-OutboundReport: notjunk:1;M01:P0:QyrSjA5uDLk=;OcXLsQUJ1Z8q2EufrAcBrQD/wxg
+ 3YJt5pQSf1PHpKOdMpqASLC0ChnG0byfT3cjHszcnoPWooWJ4q19kM2jftzfnud4u9w7X/ujG
+ YT8DNAbGb/X88OKmQwrh0GQCSNvdLW+2sDROBSpkbibCtbM+I2+YNQ+p+ODJb19bBIZfowEBe
+ 3YgslLOBg5uA3M7SyuDoFdQ+9kJqQG6Q0O8QSieN0H6n1Ck5mbW48IEXOiU89Ik6EuDxShD8y
+ y7wL11XesYGSSnIZ1y+ZDQThqm+5RnT77CXW3EeqesBmEjYyoWnx0P8F/cViHaLcdm7dfOOOE
+ gqVVfHV3lCIsBJgNWfwrq9C0XzkJEdBxanId9YoV+BDNPb80jBfk7lqzyY3V69JIw/KEWTeX1
+ cuMgQGE1peiMO9zhNxkKeni2fYpe2Di2YBFDa9Hg9gvz+JkSQgFhGlKwrDRvUy4X2B+Oo1ctY
+ wUSEfbS7SWrFqMV4UvyQVLTKQ51heiIkRIA7X2YTz3Aw/rqbEUHFoGeakH0A7XQ9lnZezOyGT
+ ghbit5oewGq4v2A8dm0rlqCWxEIF8Py5Nc6eT+guJoq6DMEtBsohYP7GjeOjs3nM5NIqilEmg
+ 5m6nPFXdP4WVR9vA2XgrG7WvymzCUuQQyzCoa7Fk+xoIhKZNw3g0O9U0MfPm/vJNdf0fCnztE
+ S0qwIeGUWXsKsP8kRJ+6bEGbEF8q3+10QFmfxKQKQFaF1v7t6rP6TJjFKndRVuRz0/HY3uftb
+ OTC4zixzXSY5ep0+Ij61nFW2fQ4uK4M7xMpXYAmzHr90DKthaNktEsIOoKFq4FD7d00UhBL9c
+ Lc34UL1oU1JHjLoHxUEg4OvSTTPTL33M03B8za4xZE/WQ=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,53 +90,68 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 3/16/24 22:50, Janne Grunau via B4 Relay wrote:
-> From: Janne Grunau <j@jannau.net>
+> From: Andre Przywara <andre.przywara@arm.com>
 >
+> UEFI applications rely on Unicode output capability, and might use that
+> for drawing pseudo-graphical interfaces using Unicode defined box
+> drawing characters.
+>
+> Add a simple test to display the most basic box characters, which would
+> need to be checked manually on the screen for correctness.
+>
+> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
 > Suggested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 > Signed-off-by: Janne Grunau <j@jannau.net>
-
-This patch was already merged. No need to resend it.
-
-Best regards
-
-Heinrich
-
 > ---
->   include/charset.h | 14 ++++++++++++--
->   1 file changed, 12 insertions(+), 2 deletions(-)
+>   lib/efi_selftest/efi_selftest_textoutput.c | 20 ++++++++++++++++++++
+>   1 file changed, 20 insertions(+)
 >
-> diff --git a/include/charset.h b/include/charset.h
-> index 44034c71d3..f1050c903d 100644
-> --- a/include/charset.h
-> +++ b/include/charset.h
-> @@ -324,11 +324,21 @@ int utf_to_cp(s32 *c, const u16 *codepage);
->   int utf8_to_cp437_stream(u8 c, char *buffer);
+> diff --git a/lib/efi_selftest/efi_selftest_textoutput.c b/lib/efi_selfte=
+st/efi_selftest_textoutput.c
+> index 917903473d..b56fd2ab76 100644
+> --- a/lib/efi_selftest/efi_selftest_textoutput.c
+> +++ b/lib/efi_selftest/efi_selftest_textoutput.c
+> @@ -46,6 +46,20 @@ u"U+03BB \u03BB - Greek small letter lambda\n"
+>   u"U+03C2 \u03C2 - Greek small letter final sigma\n"
+>   u"U+1F19 \u1F19 - Greek capital letter epsilon with dasia\n";
 >
->   /**
-> - * utf8_to_utf32_stream() - convert UTF-8 stream to UTF-32
-> + * utf8_to_utf32_stream() - convert UTF-8 byte stream to Unicode code p=
-oints
-> + *
-> + * The function is called for each byte @c in a UTF-8 stream. The byte =
-is
-> + * appended to the temporary storage @buffer until the UTF-8 stream in
-> + * @buffer describes a Unicode code point.
-> + *
-> + * When a new code point has been decoded it is returned and buffer[0] =
-is
-> + * set to '\0', otherwise the return value is 0.
-> + *
-> + * The buffer must be at least 5 characters long. Before the first func=
-tion
-> + * invocation buffer[0] must be set to '\0'."
->    *
->    * @c:		next UTF-8 character to convert
->    * @buffer:	buffer, at least 5 characters
-> - * Return:	next codepage 437 character or 0
-> + * Return:	Unicode code point or 0
->    */
->   int utf8_to_utf32_stream(u8 c, char *buffer);
+> +	const u16 boxes[] =3D
+> +u"This should render as four boxes with text\n"
+> +u"\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500"
+> +u"\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500"
+> +u"\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502"
+> +u" left top    \u2502 right top     \u2502\n\u251c\u2500"
+> +u"\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500"
+> +u"\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500"
+> +u"\u2500\u2500\u2500\u2500\u2500\u2500\u2524\n\u2502 "
+> +u"left bottom \u2502 right bottom  \u2502\n\u2514\u2500\u2500\u2500"
+> +u"\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534"
+> +u"\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500"
+> +u"\u2500\u2500\u2500\u2500\u2518\n";
+
+Please, indent the strings by two tabs.
+
+Otherwise:
+
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+
+> +
+>   	/* SetAttribute */
+>   	efi_st_printf("\nColor palette\n");
+>   	for (foreground =3D 0; foreground < 0x10; ++foreground) {
+> @@ -140,6 +154,12 @@ u"U+1F19 \u1F19 - Greek capital letter epsilon with=
+ dasia\n";
+>   		return EFI_ST_FAILURE;
+>   	}
+>   	efi_st_printf("\n");
+> +	ret =3D con_out->output_string(con_out, boxes);
+> +	if (ret !=3D EFI_ST_SUCCESS) {
+> +		efi_st_error("OutputString failed for box drawing chars\n");
+> +		return EFI_ST_FAILURE;
+> +	}
+> +	efi_st_printf("\n");
 >
+>   	return EFI_ST_SUCCESS;
+>   }
 >
 
