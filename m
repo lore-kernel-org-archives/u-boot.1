@@ -4,67 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F538C54E67
-	for <u-boot@archiver.kernel.org>; Sun, 17 Mar 2024 11:08:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 708D5C54E67
+	for <u-boot@archiver.kernel.org>; Sun, 17 Mar 2024 11:08:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DFCA387DA7;
-	Sun, 17 Mar 2024 12:07:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 52D8787EE7;
+	Sun, 17 Mar 2024 12:07:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="GXKNyJ8f";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="dNotRPT1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 873C387F0A; Sun, 17 Mar 2024 12:07:24 +0100 (CET)
+ id 3EEB387F8F; Sun, 17 Mar 2024 12:07:25 +0100 (CET)
 Received: from sin.source.kernel.org (sin.source.kernel.org
  [IPv6:2604:1380:40e1:4800::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 86D9687EEC
+ by phobos.denx.de (Postfix) with ESMTPS id 85CAD87EE7
  for <u-boot@lists.denx.de>; Sun, 17 Mar 2024 12:07:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=devnull+j.jannau.net@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 58C4ACE08CD;
+ by sin.source.kernel.org (Postfix) with ESMTP id 551C8CE0104;
  Sun, 17 Mar 2024 11:07:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id BB915C433A6;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 89D38C433C7;
  Sun, 17 Mar 2024 11:07:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1710673632;
- bh=wwRfCYWuTyGtW+/aaflnGN3hV6HW4lPU11PQDH52iOA=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=GXKNyJ8fBcXxvUalRtUOM2U8oH6FnhOvNgyT/EJosTCxMEU/QiIyHSbx8CXsDkXR2
- 4gMw46JTT0RpwbdP0l5HGHQ3mzZeNvxTKvEXf6oiHNaslgJN1fcamOQKNwFab5ky5/
- DGlSnSSi3WfYX6mZBPo18ROyeqBFyLAKVb83zepuBdUh/VbLDPtwOEzJkLu7vgYtlH
- jIH3w8E9rkg/sfz5907iv5u1H5T0dqwxXij/mqNcqXvqbHWOf1+PfjVS/lt6NRblMH
- nnfNqpSlPYxol/lnwecdYc7GoU+mlIRv85O5ZbYYYXhPJEuG9lF0XCa3Avi4ikpgho
- idlFEYYLgVtMA==
+ bh=k5kohG2wMqRFewvlZ5qQJa93JJaqJ2wRW1DIyCer8Ck=;
+ h=From:Subject:Date:To:Cc:Reply-To:From;
+ b=dNotRPT1O174SrA9PAuJUsW+dp0HDDTzPcpfmyIloqe3mNIqPeIF+2BvjzPCDHkqT
+ sHmbztEM0T0MlLRREvGw/HvkE4PP+yO1vI+YjyNyGsLk5gU5TiYj3lM3QYLX+9D9do
+ 6kHj6njcSI8X3aZ5gShQZaMhY9bcRk1WrAC0LAz5RWCfJVdpTtagPL/qUHP8RKpewz
+ QCrPkepmv1LP2bcwkaylloG7gNQYeGd6cMnKhV/yyIFyXK0CtymWJuqvM9gOz1Ol7p
+ xo3eg3UC4YHPbqC9EqMl01Uj67Z4jS/67FtI2FCx5lW5DtnMzThEOimP6g5IMbeUCw
+ mzry40OyQ8HAw==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id B35ECC54E67;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 756DCC54E67;
  Sun, 17 Mar 2024 11:07:12 +0000 (UTC)
 From: Janne Grunau via B4 Relay <devnull+j.jannau.net@kernel.org>
-Date: Sun, 17 Mar 2024 12:07:07 +0100
-Subject: [PATCH v2 5/6] usb: kbd: support Apple Magic Keyboards (2021)
+Subject: [PATCH v2 0/6] USB keyboard improvements for asahi / desktop systems
+Date: Sun, 17 Mar 2024 12:07:02 +0100
+Message-Id: <20240317-asahi-keyboards-v2-0-d3f4b8384f68@jannau.net>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240317-asahi-keyboards-v2-5-d3f4b8384f68@jannau.net>
-References: <20240317-asahi-keyboards-v2-0-d3f4b8384f68@jannau.net>
-In-Reply-To: <20240317-asahi-keyboards-v2-0-d3f4b8384f68@jannau.net>
+X-B4-Tracking: v=1; b=H4sIANbO9mUC/2WNQQrCMBBFr1JmbSQZCq2uvId0MTFTMwqJJG2xl
+ NzdWNy5fA/++xtkTsIZzs0GiRfJEkMFPDRw8xTurMRVBtTYajS9okxe1JNXGym5rEZ0jkatES1
+ CXb0Sj/Lei9ehspc8xbTuB4v52l8LzV9rMUqr3rQWuWtNd9KXB4VA8zHwBEMp5QP3W8ZMrwAAA
+ A==
 To: Bin Meng <bmeng.cn@gmail.com>, Marek Vasut <marex@denx.de>, 
  Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
  Joe Hershberger <joe.hershberger@ni.com>
 Cc: u-boot@lists.denx.de, asahi@lists.linux.dev, Janne Grunau <j@jannau.net>
 X-Mailer: b4 0.12.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=7070; i=j@jannau.net;
- h=from:subject:message-id; bh=+770WtWxdlYSJhlIqPiLMJvMqaLHrgrOa/IH0nnjA/w=;
- b=owGbwMvMwCW2UNrmdq9+ahrjabUkhtRv5+717XHjnRUSdVJtkvGjzP9Zpx6dtTq07fZP77bGQ
- P4Q7QfHOkpZGMS4GGTFFFmStF92MKyuUYypfRAGM4eVCWQIAxenAExkKx8jwwbmX+eqF//es7HW
- 8+3E183LGd04En9e+r9UOY+zpf3pjU6G/86TTuw99mzbptBe6Y3L2HZJ3/lTy7Qr+7cHe2xvJ/e
- OXCYA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2755; i=j@jannau.net;
+ h=from:subject:message-id; bh=k5kohG2wMqRFewvlZ5qQJa93JJaqJ2wRW1DIyCer8Ck=;
+ b=owGbwMvMwCW2UNrmdq9+ahrjabUkhtRv5+4Z53sdq2dnO/a/z8rds05S2Hd/h8iHnUtue+zbI
+ LY/7qtvRykLgxgXg6yYIkuS9ssOhtU1ijG1D8Jg5rAygQxh4OIUgIksCmBkuLGO6dK8LSYL9HYn
+ PX155dhZrtbnD+80RuUkF/nZ1bRa1jP89/XbcTN/02oeo/0FjfPmLJ76cmb6h1q3p3mP3Xn5nl/
+ 4zAwA
 X-Developer-Key: i=j@jannau.net; a=openpgp;
  fpr=8B336A6BE4E5695E89B8532B81E806F586338419
 X-Endpoint-Received: by B4 Relay for j@jannau.net/default with auth_id=62
@@ -86,207 +88,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Janne Grunau <j@jannau.net>
+Apple USB Keyboards from 2021 need quirks to be useable. The boot HID
+keyboard protocol is unfortunately not described in the first interface
+descriptor but the second. This needs several changes. The USB keyboard
+driver has to look at all (2) interface descriptors during probing.
+Since I didn't want to rebuild the USB driver probe code the Apple
+keyboards are bound to the keyboard driver via USB vendor and product
+IDs.
+To make the keyboards useable on Apple silicon devices the xhci driver
+needs to initializes rings for the endpoints of the first two interface
+descriptors. If this is causes concerns regarding regressions or memory
+use the USB_MAX_ACTIVE_INTERFACES define could be turned into a CONFIG
+option.
+Even after this changes the keyboards still do not probe successfully
+since they apparently do not behave HID standard compliant. They only
+generate reports on key events. This leads the final check whether the
+keyboard is operational to fail unless the user presses keys during the
+probe. Skip this check for known keyboards.
+Keychron seems to emulate Apple keyboards (some models even "re-use"
+Apple's USB vendor ID) so apply this quirk as well.
 
-Apple USB keyboards (Magic Keyboard from 2021 (product id 0x029c)) carry
-the HID keyboard boot protocol on the second interface descriptor.
-Probe via vendor and product IDs since the class/subclass/protocol match
-uses the first interface descriptor.
-Probe the two first interface descriptors for the HID keyboard boot
-protocol.
-
-USB configuration descriptor for reference:
-
-| Bus 003 Device 002: ID 05ac:029c Apple, Inc. Magic Keyboard
-| Device Descriptor:
-|   bLength                18
-|   bDescriptorType         1
-|   bcdUSB               2.00
-|   bDeviceClass            0 [unknown]
-|   bDeviceSubClass         0 [unknown]
-|   bDeviceProtocol         0
-|   bMaxPacketSize0        64
-|   idVendor           0x05ac Apple, Inc.
-|   idProduct          0x029c Magic Keyboard
-|   bcdDevice            3.90
-|   iManufacturer           1 Apple Inc.
-|   iProduct                2 Magic Keyboard
-|   iSerial                 3 ...
-|   bNumConfigurations      1
-|   Configuration Descriptor:
-|     bLength                 9
-|     bDescriptorType         2
-|     wTotalLength       0x003b
-|     bNumInterfaces          2
-|     bConfigurationValue     1
-|     iConfiguration          4 Keyboard
-|     bmAttributes         0xa0
-|       (Bus Powered)
-|       Remote Wakeup
-|     MaxPower              500mA
-|     Interface Descriptor:
-|       bLength                 9
-|       bDescriptorType         4
-|       bInterfaceNumber        0
-|       bAlternateSetting       0
-|       bNumEndpoints           1
-|       bInterfaceClass         3 Human Interface Device
-|       bInterfaceSubClass      0 [unknown]
-|       bInterfaceProtocol      0
-|       iInterface              5 Device Management
-|         HID Device Descriptor:
-|           bLength                 9
-|           bDescriptorType        33
-|           bcdHID               1.10
-|           bCountryCode            0 Not supported
-|           bNumDescriptors         1
-|           bDescriptorType        34 Report
-|           wDescriptorLength      83
-|           Report Descriptors:
-|             ** UNAVAILABLE **
-|       Endpoint Descriptor:
-|         bLength                 7
-|         bDescriptorType         5
-|         bEndpointAddress     0x81  EP 1 IN
-|         bmAttributes            3
-|           Transfer Type            Interrupt
-|           Synch Type               None
-|           Usage Type               Data
-|         wMaxPacketSize     0x0010  1x 16 bytes
-|         bInterval               8
-|     Interface Descriptor:
-|       bLength                 9
-|       bDescriptorType         4
-|       bInterfaceNumber        1
-|       bAlternateSetting       0
-|       bNumEndpoints           1
-|       bInterfaceClass         3 Human Interface Device
-|       bInterfaceSubClass      1 Boot Interface Subclass
-|       bInterfaceProtocol      1 Keyboard
-|       iInterface              6 Keyboard / Boot
-|         HID Device Descriptor:
-|           bLength                 9
-|           bDescriptorType        33
-|           bcdHID               1.10
-|           bCountryCode           13 International (ISO)
-|           bNumDescriptors         1
-|           bDescriptorType        34 Report
-|           wDescriptorLength     207
-|           Report Descriptors:
-|             ** UNAVAILABLE **
-|       Endpoint Descriptor:
-|         bLength                 7
-|         bDescriptorType         5
-|         bEndpointAddress     0x82  EP 2 IN
-|         bmAttributes            3
-|           Transfer Type            Interrupt
-|           Synch Type               None
-|           Usage Type               Data
-|         wMaxPacketSize     0x0010  1x 16 bytes
-|         bInterval               8
+Some devices like Yubikeys emulate a keyboard. since u-boot only binds a
+single keyboard block this kind of devices from the USB keyboard driver.
 
 Signed-off-by: Janne Grunau <j@jannau.net>
 ---
- common/usb_kbd.c | 39 +++++++++++++++++++++++++++++++++++----
- 1 file changed, 35 insertions(+), 4 deletions(-)
+Changes in v2:
+- rewritten commit message for "[PATCH 2/6] usb: xhci: Set up endpoints for the first 2 interfaces"
+- Replaced the usb keyboard Yubikey block with an env based USB device blocklist
+- Use "-EINVAL" as return value in "[PATCH 3/6] usb: xhci: Abort transfers with unallocated rings"
+- added "Reviewed-by:" tags
+- Link to v1: https://lore.kernel.org/r/20240221-asahi-keyboards-v1-0-814b2e741790@jannau.net
 
-diff --git a/common/usb_kbd.c b/common/usb_kbd.c
-index 4cbc9acb73..8cc3345075 100644
---- a/common/usb_kbd.c
-+++ b/common/usb_kbd.c
-@@ -23,6 +23,14 @@
- 
- #include <usb.h>
- 
-+/*
-+ * USB vendor and product IDs used for quirks.
-+ */
-+#define USB_VENDOR_ID_APPLE	0x05ac
-+#define USB_DEVICE_ID_APPLE_MAGIC_KEYBOARD_2021			0x029c
-+#define USB_DEVICE_ID_APPLE_MAGIC_KEYBOARD_FINGERPRINT_2021	0x029a
-+#define USB_DEVICE_ID_APPLE_MAGIC_KEYBOARD_NUMPAD_2021		0x029f
-+
- /*
-  * If overwrite_console returns 1, the stdin, stderr and stdout
-  * are switched to the serial port, else the settings in the
-@@ -106,6 +114,8 @@ struct usb_kbd_pdata {
- 	unsigned long	last_report;
- 	struct int_queue *intq;
- 
-+	uint32_t	ifnum;
-+
- 	uint32_t	repeat_delay;
- 
- 	uint32_t	usb_in_pointer;
-@@ -150,8 +160,8 @@ static void usb_kbd_put_queue(struct usb_kbd_pdata *data, u8 c)
-  */
- static void usb_kbd_setled(struct usb_device *dev)
- {
--	struct usb_interface *iface = &dev->config.if_desc[0];
- 	struct usb_kbd_pdata *data = dev->privptr;
-+	struct usb_interface *iface = &dev->config.if_desc[data->ifnum];
- 	ALLOC_ALIGN_BUFFER(uint32_t, leds, 1, USB_DMA_MINALIGN);
- 
- 	*leds = data->flags & USB_KBD_LEDMASK;
-@@ -365,7 +375,7 @@ static inline void usb_kbd_poll_for_event(struct usb_device *dev)
- #if defined(CONFIG_SYS_USB_EVENT_POLL_VIA_CONTROL_EP)
- 	struct usb_interface *iface;
- 	struct usb_kbd_pdata *data = dev->privptr;
--	iface = &dev->config.if_desc[0];
-+	iface = &dev->config.if_desc[data->ifnum];
- 	usb_get_report(dev, iface->desc.bInterfaceNumber,
- 		       1, 0, data->new, USB_KBD_BOOT_REPORT_SIZE);
- 	if (memcmp(data->old, data->new, USB_KBD_BOOT_REPORT_SIZE)) {
-@@ -509,6 +519,8 @@ static int usb_kbd_probe_dev(struct usb_device *dev, unsigned int ifnum)
- 	data->new = memalign(USB_DMA_MINALIGN,
- 		roundup(USB_KBD_BOOT_REPORT_SIZE, USB_DMA_MINALIGN));
- 
-+	data->ifnum = ifnum;
-+
- 	/* Insert private data into USB device structure */
- 	dev->privptr = data;
- 
-@@ -561,11 +573,18 @@ static int probe_usb_keyboard(struct usb_device *dev)
- {
- 	char *stdinname;
- 	struct stdio_dev usb_kbd_dev;
-+	unsigned int ifnum;
-+	unsigned int max_ifnum = min((unsigned int)USB_MAX_ACTIVE_INTERFACES,
-+				     (unsigned int)dev->config.no_of_if);
- 	int error;
- 
- 	/* Try probing the keyboard */
--	if (usb_kbd_probe_dev(dev, 0) != 1)
--		return -ENOENT;
-+	for (ifnum = 0; ifnum < max_ifnum; ifnum++) {
-+		if (usb_kbd_probe_dev(dev, ifnum) == 1)
-+			break;
-+	}
-+	if (ifnum >= max_ifnum)
-+		 return -ENOENT;
- 
- 	/* Register the keyboard */
- 	debug("USB KBD: register.\n");
-@@ -731,6 +750,18 @@ static const struct usb_device_id kbd_id_table[] = {
- 		.bInterfaceSubClass = USB_SUB_HID_BOOT,
- 		.bInterfaceProtocol = USB_PROT_HID_KEYBOARD,
- 	},
-+	{
-+		USB_DEVICE(USB_VENDOR_ID_APPLE,
-+			   USB_DEVICE_ID_APPLE_MAGIC_KEYBOARD_2021),
-+	},
-+	{
-+		USB_DEVICE(USB_VENDOR_ID_APPLE,
-+			   USB_DEVICE_ID_APPLE_MAGIC_KEYBOARD_FINGERPRINT_2021),
-+	},
-+	{
-+		USB_DEVICE(USB_VENDOR_ID_APPLE,
-+			   USB_DEVICE_ID_APPLE_MAGIC_KEYBOARD_NUMPAD_2021),
-+	},
- 	{ }		/* Terminating entry */
- };
- 
+---
+Janne Grunau (6):
+      usb: xhci: refactor xhci_set_configuration
+      usb: xhci: Set up endpoints for the first 2 interfaces
+      usb: xhci: Abort transfers with unallocated rings
+      usb: Add environment based device blocklist
+      usb: kbd: support Apple Magic Keyboards (2021)
+      usb: kbd: Add probe quirk for Apple and Keychron keyboards
 
+ common/usb.c                 |  56 +++++++++++++++++++
+ common/usb_kbd.c             |  61 +++++++++++++++++++--
+ doc/usage/environment.rst    |  12 +++++
+ drivers/usb/host/xhci-ring.c |   5 ++
+ drivers/usb/host/xhci.c      | 126 +++++++++++++++++++++++++++----------------
+ include/env_default.h        |  11 ++++
+ include/usb.h                |   6 +++
+ 7 files changed, 227 insertions(+), 50 deletions(-)
+---
+base-commit: 37345abb97ef0dd9c50a03b2a72617612dcae585
+change-id: 20240218-asahi-keyboards-f2ddaf0022b2
+
+Best regards,
 -- 
-2.44.0
+Janne Grunau <j@jannau.net>
 
