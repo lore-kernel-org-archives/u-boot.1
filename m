@@ -4,73 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 072EBC54E68
-	for <u-boot@archiver.kernel.org>; Sun, 17 Mar 2024 23:54:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CBC4C54E60
+	for <u-boot@archiver.kernel.org>; Sun, 17 Mar 2024 23:55:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8645E87F6F;
-	Mon, 18 Mar 2024 00:54:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 035FA87FCD;
+	Mon, 18 Mar 2024 00:55:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MzcyfWBs";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Mx3bLRgR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0443387FC8; Mon, 18 Mar 2024 00:54:25 +0100 (CET)
-Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
- [IPv6:2607:f8b0:4864:20::1036])
+ id 78C0B87F3F; Mon, 18 Mar 2024 00:55:13 +0100 (CET)
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
+ [IPv6:2607:f8b0:4864:20::102c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F17487F3F
- for <u-boot@lists.denx.de>; Mon, 18 Mar 2024 00:54:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3252587FDD
+ for <u-boot@lists.denx.de>; Mon, 18 Mar 2024 00:55:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x1036.google.com with SMTP id
- 98e67ed59e1d1-29d51cdde7eso1262491a91.0
- for <u-boot@lists.denx.de>; Sun, 17 Mar 2024 16:54:21 -0700 (PDT)
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-29c572d4b84so1377843a91.1
+ for <u-boot@lists.denx.de>; Sun, 17 Mar 2024 16:55:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1710719660; x=1711324460; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1710719710; x=1711324510; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VlDjW5ZRGxArk3uzT1uKUKbgIGh9oMVDETbOEmSmVKU=;
- b=MzcyfWBsryfEug7nmr3aqCoxVVBP+hdxPIf2tw/etBNiEPMKRgzLqY82W465RY3EfZ
- fznPoyir6LZRHbC6EsXEyxLlaOxfxLX+2kaXPJNiWcAIWbKAwQuH5XL7t+oY7WurMepO
- 9yR/Rh1PE1z6YXCFWIIe5cxdKRgWagWzKyrHqCn3ihyirTLdPX9Df44sI2z6F/aruvKJ
- JZ8K7Ca2PIwYiGQvihdVrgWnHsdvUYvACDVLMifshy2/jV+r7DYtB4VCF04eYosA7QaR
- bc/VylnZb1gLIB4zgVcwq7yQjEA8T9shVU25S3+JU390DTftDzkYCh0zb46HEg/qrljm
- 9AVQ==
+ bh=8JQ2y/95wNTkyvUJ8UT1Q3wnvemRjqeDx45BFRmqv88=;
+ b=Mx3bLRgRXQxffT3GQebnYuhvaA2GrLyhWSDGQkui5vKl7XGLBcxNbdhggX6ycGZ/4o
+ pm35Tf/5VdW8svcG6hbIyG116YAMK8OO+bzOoi8Ioo3P3j262pH/SAi9e2TyoJl7z9A+
+ tBOmfSCT31RWozEdlsWyUvcjIrDcYDP2bqcPaw3Fo8bpjBCJAiPYQ+zgRe47Vgxc5/lb
+ pCvMShb3OrOqIKZqecCGGb3i5fv9KnJ1wC+IEMHpDYC8HXRdJUx2D6cmw0Mby2bfvZJ0
+ Weolpd4SkPNAAJGSvkCQvgFdwAylVaGmesVaKNscvqfOWfIwcYl+m5j1AEU8dx4REs7R
+ Fg0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710719660; x=1711324460;
+ d=1e100.net; s=20230601; t=1710719710; x=1711324510;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=VlDjW5ZRGxArk3uzT1uKUKbgIGh9oMVDETbOEmSmVKU=;
- b=HUcsi+Fz9wPR4qQHzzR8s8jXde8DHQodZzCZBMBFTyx1h5VJU2A6v11fRcOHenHJHT
- /szbcBUm87FZljDNdxV64NbLFKO2++Mn2PM51tZwq2RuSAda8FwmkekmbEp3SrI4J82I
- GqB0lMGWd1A/q+uTLXn7A525fZ7M4xoVoFZf1zyJZA/NKx8oDE9fkBfDLpHWqY7gY2Cy
- FcRYOEQZj91Sz19pZXxrPLH2a/CubW5BxKu7k2Ee7dZ408pcQfVTffinOlWX5hEXspzu
- SQBfHCkNlIxJF30jt6kEy4koC4Lj4XV99TI/48jzywBaCbClsWjA1uFX3xRa1/NWe0Mm
- sPxA==
-X-Gm-Message-State: AOJu0Yy5A5OlNYwpEZigovR4YX2FkeCBY1UvU4IjLwO+TfJBW/j6ciaj
- 7jEXJh0Pe7+WdEB14+lOVF9H0dvIbBG7AnkjY6NNs0CvDcIsgbOfzXVxoBvvONO9fdbyAAXDirl
- g4CbrCsJEgSp98CWV82P7INCIC0A=
-X-Google-Smtp-Source: AGHT+IFAb/nINnWZeFmEYnxeNsSdv6h56ZSjsXZ1EUVveai4tyT0UUbbc/v8f5Y6ZCJvJ/ruiXAocMTd4AOUJ6Hod7w=
-X-Received: by 2002:a17:90a:8a97:b0:296:db75:c240 with SMTP id
- x23-20020a17090a8a9700b00296db75c240mr9339296pjn.1.1710719660085; Sun, 17 Mar
- 2024 16:54:20 -0700 (PDT)
+ bh=8JQ2y/95wNTkyvUJ8UT1Q3wnvemRjqeDx45BFRmqv88=;
+ b=nbi4tTAS9DEhiz3a/hYFBjiyhTTx+BRJERMpn3d8ucoobOxrJnyh8hEQITMnngoOIM
+ kumScLJPJLOSWSTwfKRs3hS2zEpeCK2pVXYy+OrMRq1JXIQWCh+UrlPMFvmO2NbH39OV
+ T+eqzGZtRVUP8SsCtwiIJ7GsQ+97ox0xDLzalJmhW7LQF3sYtM5RaZCsYgcR8fXPUc8p
+ TjgdQGvU8h4Tcj5ngE9VDa3b8/Nd4ybLNl++P0ecorussuvevLTgrmyK+poD4AlSdcsk
+ 66ASc4ople/pnHIiH3VUFyuBMGr6bLD/Xjha3MMe0Mup2ZVeFeE5SUjLQlHlb2s1NyJj
+ sjGA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVFeK6ay01zGqw2Sa+ofoRwipj2Rtxj1I9BiRWKR0dOaVLBhAACPN5SYW4M9xu63BNCwEqsiiQimL9JCDVhkDw4keserA==
+X-Gm-Message-State: AOJu0YysI4TJRm/aAtCu11Vg5pudKZV56DWBJdzS05fJDilxf7D1hWyE
+ LR1uacr9f7jNsbm7sS+UoordiqUiBqZZyrOvbbtIH3W4bTA3abCdsQwfksVWXCieuh7WHNLxPPZ
+ TTMSZISEKYGOTZF7AElw2FDxn3l4=
+X-Google-Smtp-Source: AGHT+IGf1yzxQp5CTqAlgMBvnvXCBJjZ631m3U3c1DO7DGMWrti2Si0JTa6NVoQbyxwP3X/cjdpGWTIjX8w4GgGfZP8=
+X-Received: by 2002:a17:90a:a409:b0:29c:7697:d2dc with SMTP id
+ y9-20020a17090aa40900b0029c7697d2dcmr9310687pjp.4.1710719709737; Sun, 17 Mar
+ 2024 16:55:09 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240312190543.3544532-1-tharvey@gateworks.com>
- <CAOMZO5A8m5gW+MgD8RWrtsd3kpsMaj+cV5CLHuvUkux7daD1jQ@mail.gmail.com>
-In-Reply-To: <CAOMZO5A8m5gW+MgD8RWrtsd3kpsMaj+cV5CLHuvUkux7daD1jQ@mail.gmail.com>
+References: <20240313003641.2650648-1-festevam@gmail.com>
+In-Reply-To: <20240313003641.2650648-1-festevam@gmail.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Sun, 17 Mar 2024 20:54:08 -0300
-Message-ID: <CAOMZO5DqoLauuu7b8DQ_zctbfd+fmRuYTsUcw9YjLznxxpMbVg@mail.gmail.com>
-Subject: Re: [PATCH] imx8m*_venice: move venice to OF_UPSTREAM
-To: Tim Harvey <tharvey@gateworks.com>
-Cc: u-boot@lists.denx.de, Stefano Babic <sbabic@denx.de>, 
- "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>
+Date: Sun, 17 Mar 2024 20:54:58 -0300
+Message-ID: <CAOMZO5BWZsJx4T9kGbtTkLasD4R=+vRB4T6fLMariK1bGG83qQ@mail.gmail.com>
+Subject: Re: [PATCH] colibri-imx8x: Fix sc_misc_otp_fuse_read() error check
+To: festevam@gmail.com
+Cc: marcel.ziswiler@toradex.com, hiago.franco@toradex.com, 
+ francesco.dolcini@toradex.com, u-boot@lists.denx.de, peng.fan@nxp.com, 
+ joao.goncalves@toradex.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -89,29 +91,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Mar 12, 2024 at 10:16=E2=80=AFPM Fabio Estevam <festevam@gmail.com>=
- wrote:
+On Tue, Mar 12, 2024 at 9:36=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
+wrote:
 >
-> Hi Tim,
+> Commit aa6e698a7acd ("imx: toradex/colibri-imx8x: correct SCU API usage")
+> made an incorrect logic change in the error code check of
+> sc_misc_otp_fuse_read():
 >
-> On Tue, Mar 12, 2024 at 4:05=E2=80=AFPM Tim Harvey <tharvey@gateworks.com=
-> wrote:
-> >
-> > Move to imx8m{m,n,p}-venice to OF_UPSTREAM:
-> >  - replace the non-upstream generic imx8m{m,n,p}-venice dt with one of =
-the
-> >    dt's from the OF_LIST
-> >  - handle the fact that dtbs now have a 'freescale/' prefix
-> >  - imply OF_UPSTREAM
-> >  - remove rudundant files from arch/arm/dts leaving only the
-> >    *-u-boot.dtsi files
-> >
-> > Signed-off-by: Tim Harvey <tharvey@gateworks.com>
-> ...
-> >  33 files changed, 13 insertions(+), 10658 deletions(-)
+> -       if (sc_err =3D=3D SC_ERR_NONE) {
+> +       if (sc_err) {
+>                 /* DX has two A35 cores disabled */
+>                 return (val & 0xf) !=3D 0x0;
+>         }
 >
-> This diff looks great :-)
+> The other changes in this commit are correct.
 >
-> Reviewed-by: Fabio Estevam <festevam@gmail.com>
+> sc_misc_otp_fuse_read() returns 0 on a successful fuse read.
+>
+> This inversion causes board_mem_get_layout() to report incorrect RAM size=
+.
+>
+> Go back the original error check logic to fix the problem.
+>
+> Fixes: aa6e698a7acd ("imx: toradex/colibri-imx8x: correct SCU API usage")
+> Reported-by: Hiago De Franco <hiago.franco@toradex.com>
+> Signed-off-by: Fabio Estevam <festevam@gmail.com>
 
-Applied for u-boot-imx/next, thanks.
+Applied for u-boot-imx/master, thanks.
