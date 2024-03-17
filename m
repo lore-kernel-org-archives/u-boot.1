@@ -4,74 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5A8CC54E60
-	for <u-boot@archiver.kernel.org>; Sun, 17 Mar 2024 23:50:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F683C54E68
+	for <u-boot@archiver.kernel.org>; Sun, 17 Mar 2024 23:51:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0AFB487E0A;
-	Mon, 18 Mar 2024 00:50:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B8A6587E0A;
+	Mon, 18 Mar 2024 00:51:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hbSbnB2I";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HWYEySpd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C956287EE3; Mon, 18 Mar 2024 00:50:23 +0100 (CET)
-Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
- [IPv6:2607:f8b0:4864:20::102e])
+ id 9F4A687EE3; Mon, 18 Mar 2024 00:51:28 +0100 (CET)
+Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
+ [IPv6:2607:f8b0:4864:20::102d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD3C087B35
- for <u-boot@lists.denx.de>; Mon, 18 Mar 2024 00:50:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 188F987B35
+ for <u-boot@lists.denx.de>; Mon, 18 Mar 2024 00:51:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-29d51cdde7eso1261659a91.0
- for <u-boot@lists.denx.de>; Sun, 17 Mar 2024 16:50:20 -0700 (PDT)
+Received: by mail-pj1-x102d.google.com with SMTP id
+ 98e67ed59e1d1-29f8403166aso457968a91.1
+ for <u-boot@lists.denx.de>; Sun, 17 Mar 2024 16:51:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1710719419; x=1711324219; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=i09fpjpmHmihxJlOXwAbdJPMOUxiJPgXAdoIDi3RmKE=;
- b=hbSbnB2Ixux3bvm+oapbc/cbxMIQbR0XAmD1RroNtCCMws+55GdCB0xWXUxLvqoIQe
- n9UCC8XwsF1U7F6tWGD3gbuqM4+6armxDtoYwYOQfOu9Bt3L/GEc6eP/kbCXZn6k/zNJ
- 3/LtfGgmOrtKjqOHfGCQzvQi5I8FpNUNdSgCub9ozbYGoBCDzTQwhWAW26as7YZ/wABh
- h+XejJfc6QJkbXvAJ1+ce8/Elh8qttaNJlxxA9azX5SOT2vv+jET2eSjMP/NF/TYhQ8Z
- rzVEqTzxHDWnu90I0mEkKHO5Six3RDiuqlU1+agMdX4PaOjZ9+rHVziMLrF1sXDSGLMQ
- vung==
+ d=gmail.com; s=20230601; t=1710719483; x=1711324283; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=R7JVMPXTE5qNH26K+JgGhLUSmEBtOyutKBTrHSZfdF8=;
+ b=HWYEySpd+kmYcQWKwLDlZFDhMrl61oEghhOe5AX5QxVeW8bkdDKo4rm9a+1ZIF5iRe
+ M7xdHNipUvB28qUMsELWRtLEfiZj1SqcMbPChviMbeg+5O55766OhuRi2uMy2ow3Sz1/
+ Y6JTeWvbmjPEdGUppQtYGlEmgJ4VS2OCOzZ0x+XCAsuGj4zXIwpuc7HaHJbi+fcqh4/s
+ LeKbCghKxLPaXHaHzzsCjygs8VkQIUJINs3+zt2hjo9WmwWrdEC/afaKEtVYoFiJ8d5Z
+ RZx+W0veVofM16wGDiITW0lqgqtVlC/0sCuINiXZ++8jWazjOrGNSV2qAE9ZUvC8kktm
+ oL8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710719419; x=1711324219;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=i09fpjpmHmihxJlOXwAbdJPMOUxiJPgXAdoIDi3RmKE=;
- b=BbHzvjLrH/iLqMjKpqcc+P+Fsk9SKDGATeZWx01k2bNj+WogIoFWShj+NUk2Jo9tx5
- 2pQB/jzjWkaUcLb2TqNNlgNIAATqa7NvL3jBjQc8M9/qpnDtVeu67o1nT2xASQEBDW70
- yjkc+uiJQGTo5k8By4EbrvJTSgsyh9FC/+aGv7EvVZflX2eK4qpfkQZzfo8Vd+wSmdcg
- j+0llbmTf11lKhlqBDU4usk5ugdpO/sEs9pdcfMzqBk9X08R+0+y/XL37Dpn1P9UPwDl
- yAOcT7v8J3Ir8RewcIXfh+6Tb2W7xwBRt8hPYQRN96pc+fIzCM49yPzAX+nCzOsrYor2
- BfHw==
-X-Gm-Message-State: AOJu0Yza3+aPL8n2IBxLsGbZIGAmqEdtjEiDBDh9perf2OrRBPzCiExO
- aeJYsPVaqlhryNosDll1ba1t+HpT0dSQpVrRQ/FWlDz99+s3GUgBLEBBIWIc
-X-Google-Smtp-Source: AGHT+IG1IddJFHHKvHFgjcZosLWtXWcehdqOOUMaHEmC2Jgjz77R9gGJhtv6P6+kahVeADVpPKvMxw==
-X-Received: by 2002:a17:903:186:b0:1dd:6f1a:2106 with SMTP id
- z6-20020a170903018600b001dd6f1a2106mr13890622plg.0.1710719419109; 
- Sun, 17 Mar 2024 16:50:19 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:1857:6918:c59e:afde])
- by smtp.gmail.com with ESMTPSA id
- k4-20020a170902c40400b001defa98b03fsm4573127plk.101.2024.03.17.16.50.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 17 Mar 2024 16:50:18 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: trini@konsulko.com
-Cc: u-boot@lists.denx.de
-Subject: [GIT PULL] Please pull u-boot-imx-next-20240317
-Date: Sun, 17 Mar 2024 20:50:15 -0300
-Message-Id: <20240317235015.333272-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ d=1e100.net; s=20230601; t=1710719483; x=1711324283;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=R7JVMPXTE5qNH26K+JgGhLUSmEBtOyutKBTrHSZfdF8=;
+ b=FSkZ5pxV11AB6LAipc1trTa1IUs5WMtHfgYfm8WFBDYV4nUyQ84f33Z0uwRTU92fQc
+ DnjlJhmYG0d6rWLtFH1nH/mviFAl81KdhUFeMBEwhhYog7gebLYzxHT5wN6sDi1VaHPH
+ b0A3lPTfxf/hbxD8jLMdFE1TGUnIL4jAvuLSjP1vcWnP5bdYOk0n6t94bW0267pb5oDy
+ YMMyKF+2owKf5c1rX+jywleB68xq2t4+vJwIdA29aYZcMhJv64t8CE4DkOjxpQeNZaHP
+ DeqKcZW2kgP8I+imrUO0bEggbfbu2QEDMMO0M/2bSVV/vfcjfnd7EAZ+HdfSY7U1mxp8
+ ce1g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXGPwPgTpMrzYVdVMv1dS+tI3ywUkdG8i7qgB2VSJHQwpV4A8DCV/6gDsz/R0xddlWc7FAq+ueMgGz3yfPecvjkePQycA==
+X-Gm-Message-State: AOJu0YxzSZ/XXda72nnJkQk6ksH+fgm0Tl4bztwAvo7biySKCVCGoGhh
+ xMFkA9Xh0i7cObhJCxI66jXWDjhFh3LMz9AEj7AG2RAuoSdQ38sUHqWSs0N5HF4qnyEYWcml2qW
+ 7A/XSiwLBr/v+cCwwI3eWzuf/Tpw=
+X-Google-Smtp-Source: AGHT+IHguOhdd5XDEFynn6o1bj4qSL106DWngWEJJBQIqpBJNl4AsPMoD8xQq69UuktjGWj1XC6ujHr52+S1DSc7Sdg=
+X-Received: by 2002:a17:90a:ad93:b0:29b:f75d:bf5d with SMTP id
+ s19-20020a17090aad9300b0029bf75dbf5dmr9183696pjq.4.1710719483533; Sun, 17 Mar
+ 2024 16:51:23 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240304-fix-thermal-driver-issue-v1-1-f30daeaf1055@phytec.de>
+In-Reply-To: <20240304-fix-thermal-driver-issue-v1-1-f30daeaf1055@phytec.de>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Sun, 17 Mar 2024 20:51:11 -0300
+Message-ID: <CAOMZO5AsNA-e7Egy_=6ZP9b39omRtUoypOtu030ji9VsXUHSuA@mail.gmail.com>
+Subject: Re: [PATCH] drivers: imx_tmu: Select polling-rate from cpu-thermal
+ devicetree node
+To: Benjamin Hahn <B.Hahn@phytec.de>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ upstream@lists.phytec.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,116 +91,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Mon, Mar 4, 2024 at 8:49=E2=80=AFAM Benjamin Hahn <B.Hahn@phytec.de> wro=
+te:
+>
+> The polling rate is already specified in some devicetrees, like
+> imx8mp.dtsi for example, but was not selected so far. For the
+> trippoints, the cpu-thermal node is used. Also get the polling rate from
+> this node. Use the default of 5000ms if the polling rate should not be
+> specified in the devicetree.
+>
+> NOTE: The polling rate from the devicetree will be used after this
+> patch. In imx8*.dtsi devicetrees the polling delay is set to 2000ms for
+> example.
+>
+> Signed-off-by: Benjamin Hahn <B.Hahn@phytec.de>
 
-Please pull this material for next from u-boot-imx, thank
-
-The following changes since commit 099c94b7613bb10d97936447f5136f3a36694325:
-
-  Merge tag 'u-boot-rockchip-20240315' of https://source.denx.de/u-boot/custodians/u-boot-rockchip into next (2024-03-15 09:15:31 -0400)
-
-are available in the Git repository at:
-
-  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-next-20240317
-
-for you to fetch changes up to 86b79cf131b64eadae023a127921893d30503093:
-
-  imx8m*_venice: move venice to OF_UPSTREAM (2024-03-17 18:39:54 -0300)
-
-u-boot-imx-next-20240317
---------------------------
-
-CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/19975
-
-- Select polling-rate from cpu-thermal devicetree node on imx_tmu.
-- Re-organize the U-Boot environment and add RAUC logic for phycore_imx8mp.
-- Enable watchdog on colibri-imx7.
-- Move imx8mm-venice to use OF_UPSTREAM.
-----------------------------------------------------------------
-Benjamin Hahn (1):
-      drivers: imx_tmu: Select polling-rate from cpu-thermal devicetree node
-
-Leonard Anderweit (5):
-      phycore_imx8mp: Move environment from include/config to board
-      phycore_imx8mp: Move default bootcmd to board env
-      configs: phycore-imx8mp_defconfig: Use redundant environment
-      include: env: Add phytec RAUC boot logic
-      board: phytec: phycore_imx8mp: Add RAUC boot logic to environment
-
-Parth Pancholi (1):
-      configs: colibri-imx7: enable watchdog
-
-Tim Harvey (1):
-      imx8m*_venice: move venice to OF_UPSTREAM
-
- arch/arm/dts/Makefile                          |   17 -
- arch/arm/dts/imx7d-colibri-eval-v3-u-boot.dtsi |    4 +
- arch/arm/dts/imx8mm-venice-gw700x.dtsi         |  525 -----------
- arch/arm/dts/imx8mm-venice-gw71xx-0x.dts       |   19 -
- arch/arm/dts/imx8mm-venice-gw71xx.dtsi         |  239 -----
- arch/arm/dts/imx8mm-venice-gw72xx-0x.dts       |   19 -
- arch/arm/dts/imx8mm-venice-gw72xx.dtsi         |  400 ---------
- arch/arm/dts/imx8mm-venice-gw73xx-0x.dts       |   19 -
- arch/arm/dts/imx8mm-venice-gw73xx.dtsi         |  452 ----------
- arch/arm/dts/imx8mm-venice-gw7901.dts          | 1137 ------------------------
- arch/arm/dts/imx8mm-venice-gw7902.dts          | 1052 ----------------------
- arch/arm/dts/imx8mm-venice-gw7903.dts          |  869 ------------------
- arch/arm/dts/imx8mm-venice-gw7904.dts          |  928 -------------------
- arch/arm/dts/imx8mm-venice-gw7905-0x.dts       |   28 -
- arch/arm/dts/imx8mm-venice-gw7905.dtsi         |  303 -------
- arch/arm/dts/imx8mm-venice.dts                 |  169 ----
- arch/arm/dts/imx8mn-venice-gw7902.dts          |  980 --------------------
- arch/arm/dts/imx8mn-venice.dts                 |  169 ----
- arch/arm/dts/imx8mp-venice-gw702x.dtsi         |  587 ------------
- arch/arm/dts/imx8mp-venice-gw71xx-2x.dts       |   19 -
- arch/arm/dts/imx8mp-venice-gw71xx.dtsi         |  236 -----
- arch/arm/dts/imx8mp-venice-gw72xx-2x.dts       |   19 -
- arch/arm/dts/imx8mp-venice-gw72xx.dtsi         |  378 --------
- arch/arm/dts/imx8mp-venice-gw73xx-2x.dts       |   19 -
- arch/arm/dts/imx8mp-venice-gw73xx.dtsi         |  421 ---------
- arch/arm/dts/imx8mp-venice-gw74xx.dts          | 1125 -----------------------
- arch/arm/dts/imx8mp-venice-gw7905-2x.dts       |   28 -
- arch/arm/dts/imx8mp-venice-gw7905.dtsi         |  309 -------
- arch/arm/dts/imx8mp-venice.dts                 |  183 ----
- arch/arm/mach-imx/imx8m/Kconfig                |    3 +
- board/gateworks/venice/venice.c                |    7 +-
- board/phytec/phycore_imx8mp/phycore_imx8mp.env |   62 ++
- configs/colibri_imx7_defconfig                 |    2 +
- configs/colibri_imx7_emmc_defconfig            |    2 +
- configs/imx8mm_venice_defconfig                |    4 +-
- configs/imx8mn_venice_defconfig                |    4 +-
- configs/imx8mp_venice_defconfig                |    4 +-
- configs/phycore-imx8mp_defconfig               |    4 +-
- drivers/thermal/imx_tmu.c                      |    6 +-
- include/configs/phycore_imx8mp.h               |   43 -
- include/env/phytec/rauc.env                    |   52 ++
- 41 files changed, 141 insertions(+), 10705 deletions(-)
- delete mode 100644 arch/arm/dts/imx8mm-venice-gw700x.dtsi
- delete mode 100644 arch/arm/dts/imx8mm-venice-gw71xx-0x.dts
- delete mode 100644 arch/arm/dts/imx8mm-venice-gw71xx.dtsi
- delete mode 100644 arch/arm/dts/imx8mm-venice-gw72xx-0x.dts
- delete mode 100644 arch/arm/dts/imx8mm-venice-gw72xx.dtsi
- delete mode 100644 arch/arm/dts/imx8mm-venice-gw73xx-0x.dts
- delete mode 100644 arch/arm/dts/imx8mm-venice-gw73xx.dtsi
- delete mode 100644 arch/arm/dts/imx8mm-venice-gw7901.dts
- delete mode 100644 arch/arm/dts/imx8mm-venice-gw7902.dts
- delete mode 100644 arch/arm/dts/imx8mm-venice-gw7903.dts
- delete mode 100644 arch/arm/dts/imx8mm-venice-gw7904.dts
- delete mode 100644 arch/arm/dts/imx8mm-venice-gw7905-0x.dts
- delete mode 100644 arch/arm/dts/imx8mm-venice-gw7905.dtsi
- delete mode 100644 arch/arm/dts/imx8mm-venice.dts
- delete mode 100644 arch/arm/dts/imx8mn-venice-gw7902.dts
- delete mode 100644 arch/arm/dts/imx8mn-venice.dts
- delete mode 100644 arch/arm/dts/imx8mp-venice-gw702x.dtsi
- delete mode 100644 arch/arm/dts/imx8mp-venice-gw71xx-2x.dts
- delete mode 100644 arch/arm/dts/imx8mp-venice-gw71xx.dtsi
- delete mode 100644 arch/arm/dts/imx8mp-venice-gw72xx-2x.dts
- delete mode 100644 arch/arm/dts/imx8mp-venice-gw72xx.dtsi
- delete mode 100644 arch/arm/dts/imx8mp-venice-gw73xx-2x.dts
- delete mode 100644 arch/arm/dts/imx8mp-venice-gw73xx.dtsi
- delete mode 100644 arch/arm/dts/imx8mp-venice-gw74xx.dts
- delete mode 100644 arch/arm/dts/imx8mp-venice-gw7905-2x.dts
- delete mode 100644 arch/arm/dts/imx8mp-venice-gw7905.dtsi
- delete mode 100644 arch/arm/dts/imx8mp-venice.dts
- create mode 100644 board/phytec/phycore_imx8mp/phycore_imx8mp.env
- create mode 100644 include/env/phytec/rauc.env
+Applied for u-boot-imx/next, thanks.
