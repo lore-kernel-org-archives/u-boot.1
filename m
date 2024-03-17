@@ -4,76 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4D67C54E67
-	for <u-boot@archiver.kernel.org>; Sun, 17 Mar 2024 09:44:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 812C8C54E60
+	for <u-boot@archiver.kernel.org>; Sun, 17 Mar 2024 11:07:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 025C0879E2;
-	Sun, 17 Mar 2024 10:44:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 86B2D87F5E;
+	Sun, 17 Mar 2024 12:07:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="fGZ8lfyF";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ZcM9Lmqk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6FAF787D87; Sun, 17 Mar 2024 10:44:29 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ id AA0FB87F06; Sun, 17 Mar 2024 12:07:17 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8323F878AA
- for <u-boot@lists.denx.de>; Sun, 17 Mar 2024 10:44:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ADCFA87D06
+ for <u-boot@lists.denx.de>; Sun, 17 Mar 2024 12:07:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1710668662; x=1711273462; i=xypron.glpk@gmx.de;
- bh=j4Ao9gy4apNuYmlPtJyrLFTT3GD9Z1k4mucJ2GMDbeE=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
- In-Reply-To;
- b=fGZ8lfyFK1V2FLgP/g4QrW2N4WbgmJ5RMSQfuP0+aZm1B+T0t5zmcKNs2oG9eO5a
- l2VoNPtsjrucsG0HtC4bobqahb66avnaWIZh+aWCUx21obLdrkdghJeYx2XtWCMt6
- aeH/+ioLUVXnyXOHfaRtcOE+j4e88TnhSZNSY6/f0Fm1dmhYWx1JNbI1sy/4Hag+w
- yKuWuWEL0on/Beixy22xFy8iQ4m9Pb15xRXYPNJsC8MdGSNKdvpb8yVOc3Iy4JRr8
- oSQ4KdMSMzgytCgXh19mwUrarmnaJ700hDo+cPKD+l2mer8r+cIyzFc90f1tvJ+dV
- a3fqIoocAIH6ZA4iOQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.161] ([62.143.245.32]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1M1Hdw-1rnQh227nW-002lcY; Sun, 17
- Mar 2024 10:44:22 +0100
-Message-ID: <ed9b6975-250e-4eab-9315-06e6f32affce@gmx.de>
-Date: Sun, 17 Mar 2024 10:44:23 +0100
+ spf=pass smtp.mailfrom=devnull+j.jannau.net@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 3683060ACA;
+ Sun, 17 Mar 2024 11:07:13 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id A91CAC43394;
+ Sun, 17 Mar 2024 11:07:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1710673632;
+ bh=0MDL0O1Q+D9xw9b8OoY1YqL+uKOIl5JdJAVqSUDHArc=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+ b=ZcM9LmqktCFcroNeZscspo2Qa9VWaAHxWkmHHdxGYf0yxT1stFFfBStrso/GQSsqo
+ kzfOogCgcXym3Eq8n4/kW9eM9pppN/xpfN7b9TzbXlHJgXKK4NfCiNVlGK70woSZOQ
+ vN+LDCHs6Ng2syYqY081hsPsxY1OasYmnijyqRiyLEuj4S+W1plZTs8lnjrFvMuZYC
+ eVpo6JlhF7ENNdE7U5x6no9LpHArk7NGLSkGfDTfTl19FIql/fsBhTPzWhFzA//kyZ
+ jldGB/Evb7dbi5UTaBAqCQ/SYvNsWl9rn1+S104z9qukTXUKiJOwAJmD37P1n4v7aQ
+ fVF2g2cjYptrw==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 9CD7CC54E68;
+ Sun, 17 Mar 2024 11:07:12 +0000 (UTC)
+From: Janne Grunau via B4 Relay <devnull+j.jannau.net@kernel.org>
+Date: Sun, 17 Mar 2024 12:07:05 +0100
+Subject: [PATCH v2 3/6] usb: xhci: Abort transfers with unallocated rings
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 7/7] efi_selftest: Update StrToFat() unit test after
- CP473 map extension
-Content-Language: en-US
-To: j@jannau.net
-Cc: Simon Glass <sjg@chromium.org>, Andre Przywara <andre.przywara@arm.com>,
- u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Anatolij Gustschin <agust@denx.de>
-References: <20240316-vidconsole-utf8-uefi-v3-0-4e8a3d349447@jannau.net>
- <20240316-vidconsole-utf8-uefi-v3-7-4e8a3d349447@jannau.net>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240316-vidconsole-utf8-uefi-v3-7-4e8a3d349447@jannau.net>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:o8OPqisMIF7mroQJkS1zDDNnPe1nc1VTwIurNVV895MSQZpB9ru
- 4S7YqaxNIHHColTXSUt4DuCqVDsicQxyXJx0AmuTuBbPBERYWGDKZev8/vEejLIesKaqNbs
- tdtdYU7tKB193G0SfJjKsvs/v6qUhnxh9VoDKbHtnXffCzXdwDNuDXQetJAmTVLRc3HNtnr
- LYRugxmBodaRuzd7rYUWg==
-UI-OutboundReport: notjunk:1;M01:P0:NEREs/QXrl4=;31RH6RZp4UNIO39fUWTBZ8CFydW
- KSctREBQW4WGoIhCqihahnjnOf9+oeZ615yolD6Xx5MDrhmjgSBE3rcWGWupse3EMSja3gG/5
- CG+UpTec6dM5WTRVakW7lyQmcaBlIaPeKgUcIUz98XQ9aJs0Co4I+jo4eM6jtNYQfz42l8u97
- 9QwpHNiOWVfsdSLq07w5m/JmYCikv5U60XxmCI6F39xr97RAQoyNt2hyKBbsRhe79fMqb1Z0a
- eOmKbaxdLZMegJmG0PeMMuDwlP5PyUpnc9FZoliAyFics2+dboylRF1FiY/08G7lkYcVdycBn
- WM5r/thOIwSW26sHhPaWBz4tGrdLzuGVvNfF0K0X9xQMXOWQp2GAO2/VQv9CePkFGEk6g2bLy
- nodHHkxF48ivk+uF68ClcekFs7fZb/WeWVOs9LJTx9KYWcy3PLfcMykvYt2MYyEPdmiWbYcnt
- 8YhOrVxuj9lalbJQ8Wm/mEi4wcvG/R/uTnFEysyYy+q9o+ysdc48B1zD+g3zih78MWvKp9GtG
- wWT2IYwrOktAamME2vRixYBHXXvAN6ylJNxFrqTZTHlpwGU1E7MEWKnO+63KuS9t/uxxC3X9S
- w80Xyig46y4WkM9NdyFMiVEss1wsXxL+ApmU3RyWz7/tC53vVbHSdWLaykUQuo629nqrTQERZ
- kN2G/ghLb8pilmjFi0dLrVtfqK0S8d9TgZaR9v40b078RJCbQVrYqKuotvIf3452egFnHS5T9
- +Cn6oifOIwq1P2mFjfKnKj8oYz9Oqz26OIQ1jL+6A1K24W0Gceok+uIXegi9tsRpIISZtiPdW
- 4elHYpwP65Qw2GPWv78doG7Y5wO4ya37zjDIRb0gRXcv8=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20240317-asahi-keyboards-v2-3-d3f4b8384f68@jannau.net>
+References: <20240317-asahi-keyboards-v2-0-d3f4b8384f68@jannau.net>
+In-Reply-To: <20240317-asahi-keyboards-v2-0-d3f4b8384f68@jannau.net>
+To: Bin Meng <bmeng.cn@gmail.com>, Marek Vasut <marex@denx.de>, 
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Joe Hershberger <joe.hershberger@ni.com>
+Cc: u-boot@lists.denx.de, asahi@lists.linux.dev, Janne Grunau <j@jannau.net>
+X-Mailer: b4 0.12.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1063; i=j@jannau.net;
+ h=from:subject:message-id; bh=rfyJgmyypzdbBLsMLHEmhtOKmCsRDrgbc5J2IB8i/as=;
+ b=owGbwMvMwCW2UNrmdq9+ahrjabUkhtRv5+65X9PfcOnGN/lC2/I3py7cMTjnlWil/vhZD7Nrj
+ duju45aHSUsDGJcDLJiiixJ2i87GFbXKMbUPgiDmcPKBDKEgYtTACay15SRYUuL1qwX8460HC2O
+ +cvV3Vi+58zDlBZd1bev3j+UfvJ9mw3Dj9t8sVPfNO+S56i8soNhv1jVquyFJv+PlZ1445LyUHY
+ yGwA=
+X-Developer-Key: i=j@jannau.net; a=openpgp;
+ fpr=8B336A6BE4E5695E89B8532B81E806F586338419
+X-Endpoint-Received: by B4 Relay for j@jannau.net/default with auth_id=62
+X-Original-From: Janne Grunau <j@jannau.net>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,50 +80,46 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: j@jannau.net
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/16/24 22:50, Janne Grunau via B4 Relay wrote:
-> From: Janne Grunau <j@jannau.net>
->
-> Test that Unicode code points which map to CP437 code points 1-31 are
-> converted to '_'. This ensures no FAT file names do not contain chars
-> which are control characters in other code pages (CP 1250 for example).
->
-> Signed-off-by: Janne Grunau <j@jannau.net>
-> ---
->   lib/efi_selftest/efi_selftest_unicode_collation.c | 12 ++++++++++++
->   1 file changed, 12 insertions(+)
->
-> diff --git a/lib/efi_selftest/efi_selftest_unicode_collation.c b/lib/efi=
-_selftest/efi_selftest_unicode_collation.c
-> index 32c99caf35..ad7dfa9fb9 100644
-> --- a/lib/efi_selftest/efi_selftest_unicode_collation.c
-> +++ b/lib/efi_selftest/efi_selftest_unicode_collation.c
-> @@ -220,6 +220,18 @@ static int test_str_to_fat(void)
->   		return EFI_ST_FAILURE;
->   	}
->
-> +	/*
-> +	 * Test unicode code points which map to CP 437 0x01 - 0x1f are
-> +	 * converted to '_'.
-> +	 */
-> +	boottime->set_mem(fat, 16, 0);
-> +	ret =3D unicode_collation_protocol->str_to_fat(unicode_collation_proto=
-col,
-> +		u"\u263a\u2666\u2022\u25d8\u2642\u2194\u00b6\u203c", 8, fat);
-> +	if (!ret || efi_st_strcmp_16_8(u"________", fat)) {
-> +		efi_st_error("str_to_fat returned %u, \"%s\"\n", ret, fat);
-> +		return EFI_ST_FAILURE;
-> +	}
-> +
+From: Janne Grunau <j@jannau.net>
 
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Discovered while trying to use the second interface in the USB keyboard
+driver necessary on Apple USB keyboards.
 
->   	return EFI_ST_SUCCESS;
->   }
->
->
+Signed-off-by: Janne Grunau <j@jannau.net>
+---
+ drivers/usb/host/xhci-ring.c | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/drivers/usb/host/xhci-ring.c b/drivers/usb/host/xhci-ring.c
+index b60661fe05..910c5f3352 100644
+--- a/drivers/usb/host/xhci-ring.c
++++ b/drivers/usb/host/xhci-ring.c
+@@ -685,6 +685,9 @@ int xhci_bulk_tx(struct usb_device *udev, unsigned long pipe,
+ 		reset_ep(udev, ep_index);
+ 
+ 	ring = virt_dev->eps[ep_index].ring;
++	if (!ring)
++		return -EINVAL;
++
+ 	/*
+ 	 * How much data is (potentially) left before the 64KB boundary?
+ 	 * XHCI Spec puts restriction( TABLE 49 and 6.4.1 section of XHCI Spec)
+@@ -871,6 +874,8 @@ int xhci_ctrl_tx(struct usb_device *udev, unsigned long pipe,
+ 	ep_index = usb_pipe_ep_index(pipe);
+ 
+ 	ep_ring = virt_dev->eps[ep_index].ring;
++	if (!ep_ring)
++		return -EINVAL;
+ 
+ 	/*
+ 	 * Check to see if the max packet size for the default control
+
+-- 
+2.44.0
 
