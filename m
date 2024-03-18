@@ -4,36 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE701C54E58
-	for <u-boot@archiver.kernel.org>; Mon, 18 Mar 2024 09:31:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FC3EC54E58
+	for <u-boot@archiver.kernel.org>; Mon, 18 Mar 2024 09:31:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1319E87F1F;
+	by phobos.denx.de (Postfix) with ESMTP id 7588B87F3A;
 	Mon, 18 Mar 2024 10:30:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ltts.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D3D287DE5; Mon, 18 Mar 2024 10:30:22 +0100 (CET)
+ id 7E9B387DDF; Mon, 18 Mar 2024 10:30:22 +0100 (CET)
 Received: from esa2.ltts.com (unknown [14.140.155.42])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB5C387DE5
- for <u-boot@lists.denx.de>; Mon, 18 Mar 2024 10:30:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A3D0E87DF4
+ for <u-boot@lists.denx.de>; Mon, 18 Mar 2024 10:30:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=ltts.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bhargav.r@ltts.com
-IronPort-SDR: HBTshxg3GYcWrpbjm4x2uHCW4oHWRjLlAA3jcww5ziYDPYutZoM7FzuQAJ5MGgZdQaek8jLUMx
- +Ub4teCvY9vA==
+IronPort-SDR: bJYY8BKpDmOP1Fux3Zq1KNdN6FWtCDbKdnAzKV3XIxQ0DNGCB7fhQxuI+50BTsGWw3MJ0TfEPt
+ YaCp49tixjNg==
 Received: from unknown (HELO localhost.localdomain) ([192.168.34.55])
- by esa2.ltts.com with ESMTP; 18 Mar 2024 15:00:13 +0530
+ by esa2.ltts.com with ESMTP; 18 Mar 2024 15:00:14 +0530
 From: Bhargav Raviprakash <bhargav.r@ltts.com>
 To: u-boot@lists.denx.de
 Cc: d-gole@ti.com, dan.carpenter@linaro.org, jh80.chung@samsung.com,
  m.nirmaladevi@ltts.com, sjg@chromium.org, trini@konsulko.com,
  Bhargav Raviprakash <bhargav.r@ltts.com>
-Subject: [PATCH v3 2/5] power: pmic: tps65941: Add TI TPS65224 PMIC
-Date: Mon, 18 Mar 2024 14:59:56 +0530
-Message-Id: <20240318092959.373356-3-bhargav.r@ltts.com>
+Subject: [PATCH v3 4/5] power: regulator: tps65941: use function callbacks for
+ conversion ops
+Date: Mon, 18 Mar 2024 14:59:58 +0530
+Message-Id: <20240318092959.373356-5-bhargav.r@ltts.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240318092959.373356-1-bhargav.r@ltts.com>
 References: <20240318092959.373356-1-bhargav.r@ltts.com>
@@ -55,25 +56,163 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Adds compatible and data field values of TPS65224 driver in
-TPS65941 PMIC driver.
+Use function callbacks for volt2val, val2volt and slewrate lookups.
+This makes it easier to add support for TPS65224 PMIC regulators.
 
 Signed-off-by: Bhargav Raviprakash <bhargav.r@ltts.com>
 ---
- drivers/power/pmic/tps65941.c | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/power/regulator/tps65941_regulator.c | 61 +++++++++++++++-----
+ 1 file changed, 48 insertions(+), 13 deletions(-)
 
-diff --git a/drivers/power/pmic/tps65941.c b/drivers/power/pmic/tps65941.c
-index 727b42747a..ef63eb733a 100644
---- a/drivers/power/pmic/tps65941.c
-+++ b/drivers/power/pmic/tps65941.c
-@@ -75,6 +75,7 @@ static const struct udevice_id tps65941_ids[] = {
- 	{ .compatible = "ti,tps659412", .data = TPS659411 },
- 	{ .compatible = "ti,tps659413", .data = TPS659413 },
- 	{ .compatible = "ti,lp876441",  .data =  LP876441 },
-+	{ .compatible = "ti,tps65224",  .data =  TPS65224 },
- 	{ }
- };
+diff --git a/drivers/power/regulator/tps65941_regulator.c b/drivers/power/regulator/tps65941_regulator.c
+index cf54e30df5..d879c2301b 100644
+--- a/drivers/power/regulator/tps65941_regulator.c
++++ b/drivers/power/regulator/tps65941_regulator.c
+@@ -35,6 +35,17 @@
+ #define TPS65941_LDO_ID_3         3
+ #define TPS65941_LDO_ID_4         4
+ 
++#define TPS65941_BUCK_CONV_OPS_IDX  0
++#define TPS65941_LDO_CONV_OPS_IDX   0
++
++struct tps65941_reg_conv_ops {
++	int volt_mask;
++	int (*volt2val)(int idx, int uV);
++	int (*val2volt)(int idx, int volt);
++	int slew_mask;
++	int (*lookup_slew)(int id);
++};
++
+ static const char tps65941_buck_ctrl[TPS65941_BUCK_NUM] = {0x4, 0x6, 0x8, 0xA,
+ 								0xC};
+ static const char tps65941_buck_vout[TPS65941_BUCK_NUM] = {0xE, 0x10, 0x12,
+@@ -79,7 +90,7 @@ static int tps65941_buck_enable(struct udevice *dev, int op, bool *enable)
+ 	return 0;
+ }
+ 
+-static int tps65941_buck_volt2val(int uV)
++static int tps65941_buck_volt2val(__maybe_unused int idx, int uV)
+ {
+ 	if (uV > TPS65941_BUCK_VOLT_MAX)
+ 		return -EINVAL;
+@@ -95,7 +106,7 @@ static int tps65941_buck_volt2val(int uV)
+ 		return -EINVAL;
+ }
+ 
+-static int tps65941_buck_val2volt(int val)
++static int tps65941_buck_val2volt(__maybe_unused int idx, int val)
+ {
+ 	if (val > TPS65941_BUCK_VOLT_MAX_HEX)
+ 		return -EINVAL;
+@@ -135,12 +146,25 @@ int tps65941_lookup_slew(int id)
+ 	}
+ }
+ 
++static const struct tps65941_reg_conv_ops buck_conv_ops[] = {
++	[TPS65941_BUCK_CONV_OPS_IDX] = {
++		.volt_mask = TPS65941_BUCK_VOLT_MASK,
++		.volt2val = tps65941_buck_volt2val,
++		.val2volt = tps65941_buck_val2volt,
++		.slew_mask = TP65941_BUCK_CONF_SLEW_MASK,
++		.lookup_slew = tps65941_lookup_slew,
++	},
++};
++
+ static int tps65941_buck_val(struct udevice *dev, int op, int *uV)
+ {
+ 	unsigned int hex, adr;
+-	int ret, delta, uwait, slew;
++	int ret, delta, uwait, slew, idx;
+ 	struct dm_regulator_uclass_plat *uc_pdata;
++	const struct tps65941_reg_conv_ops *conv_ops;
+ 
++	idx = dev->driver_data;
++	conv_ops = &buck_conv_ops[TPS65941_BUCK_CONV_OPS_IDX];
+ 	uc_pdata = dev_get_uclass_plat(dev);
+ 
+ 	if (op == PMIC_OP_GET)
+@@ -152,8 +176,8 @@ static int tps65941_buck_val(struct udevice *dev, int op, int *uV)
+ 	if (ret < 0)
+ 		return ret;
+ 
+-	ret &= TPS65941_BUCK_VOLT_MASK;
+-	ret = tps65941_buck_val2volt(ret);
++	ret &= conv_ops->volt_mask;
++	ret = conv_ops->val2volt(idx, ret);
+ 	if (ret < 0)
+ 		return ret;
+ 
+@@ -175,14 +199,14 @@ static int tps65941_buck_val(struct udevice *dev, int op, int *uV)
+ 	if (slew < 0)
+ 		return ret;
+ 
+-	slew &= TP65941_BUCK_CONF_SLEW_MASK;
+-	slew = tps65941_lookup_slew(slew);
++	slew &= conv_ops->slew_mask;
++	slew = conv_ops->lookup_slew(slew);
+ 	if (slew <= 0)
+ 		return ret;
+ 
+ 	uwait = delta / slew;
+ 
+-	hex = tps65941_buck_volt2val(*uV);
++	hex = conv_ops->volt2val(idx, *uV);
+ 	if (hex < 0)
+ 		return hex;
+ 
+@@ -231,7 +255,7 @@ static int tps65941_ldo_enable(struct udevice *dev, int op, bool *enable)
+ 	return 0;
+ }
+ 
+-static int tps65941_ldo_val2volt(int val)
++static int tps65941_ldo_val2volt(__maybe_unused int idx, int val)
+ {
+ 	if (val > TPS65941_LDO_VOLT_MAX_HEX || val < TPS65941_LDO_VOLT_MIN_HEX)
+ 		return -EINVAL;
+@@ -241,12 +265,23 @@ static int tps65941_ldo_val2volt(int val)
+ 		return -EINVAL;
+ }
+ 
++static const struct tps65941_reg_conv_ops ldo_conv_ops[] = {
++	[TPS65941_LDO_CONV_OPS_IDX] = {
++		.volt_mask = TPS65941_LDO_VOLT_MASK,
++		.volt2val = tps65941_buck_volt2val,
++		.val2volt = tps65941_ldo_val2volt,
++	},
++};
++
+ static int tps65941_ldo_val(struct udevice *dev, int op, int *uV)
+ {
+ 	unsigned int hex, adr;
+-	int ret;
++	int ret, idx;
+ 	struct dm_regulator_uclass_plat *uc_pdata;
++	const struct tps65941_reg_conv_ops *conv_ops;
+ 
++	idx = dev->driver_data;
++	conv_ops = &ldo_conv_ops[TPS65941_LDO_CONV_OPS_IDX];
+ 	uc_pdata = dev_get_uclass_plat(dev);
+ 
+ 	if (op == PMIC_OP_GET)
+@@ -258,8 +293,8 @@ static int tps65941_ldo_val(struct udevice *dev, int op, int *uV)
+ 	if (ret < 0)
+ 		return ret;
+ 
+-	ret &= TPS65941_LDO_VOLT_MASK;
+-	ret = tps65941_ldo_val2volt(ret);
++	ret &= conv_ops->volt_mask;
++	ret = conv_ops->val2volt(idx, ret);
+ 	if (ret < 0)
+ 		return ret;
+ 
+@@ -268,7 +303,7 @@ static int tps65941_ldo_val(struct udevice *dev, int op, int *uV)
+ 		return 0;
+ 	}
+ 
+-	hex = tps65941_buck_volt2val(*uV);
++	hex = conv_ops->volt2val(idx, *uV);
+ 	if (hex < 0)
+ 		return hex;
  
 -- 
 2.25.1
