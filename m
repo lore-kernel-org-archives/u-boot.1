@@ -4,82 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02A99C54E5D
-	for <u-boot@archiver.kernel.org>; Mon, 18 Mar 2024 13:58:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE045C54E68
+	for <u-boot@archiver.kernel.org>; Mon, 18 Mar 2024 14:46:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5906987D82;
-	Mon, 18 Mar 2024 14:58:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id B5C9B87DEC;
+	Mon, 18 Mar 2024 15:46:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XkNFuokS";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 25F258752B; Mon, 18 Mar 2024 14:58:40 +0100 (CET)
-Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
- [IPv6:2607:f8b0:4864:20::729])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1710773214;
+	bh=CkAvUmYBbKm/DWaWi0rad5Nl3/1FHr8z3fOtLhMArEE=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=NmF/rusATGlAR4hCOdgsttuURX3pZ/yjWi8yC6tVc8T/Xnpa1yOVSL3jNC8XsLVh8
+	 NFOlS8Eww6oLpf2r0ysu0ZdmXmKLlDwU7qURtcfelunmNMexaWedFWGYHXgGIhzxRx
+	 /ARKbgC7/ahuozdNttMU1xgsq2T4gqJanBcfIEdDUZ5GvxqoXP+b5GensedO+7TA2w
+	 bAmm2ZUoaBfelBSWjnpLGPD19nFAhXgSMydiIExJu6ym01LrT55Mi4CtEhTac9DIgj
+	 BvNeXOSO7ACgyT7SK6i9D1WTVzMF2vYaad8wIBNRRSPrPMaXGWsWCYq2+ZzWJ2Kdel
+	 jLShAUuyB27Pg==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 13D6D87DBB
- for <u-boot@lists.denx.de>; Mon, 18 Mar 2024 14:58:38 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qk1-x729.google.com with SMTP id
- af79cd13be357-789f50b3e40so101270085a.1
- for <u-boot@lists.denx.de>; Mon, 18 Mar 2024 06:58:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1710770317; x=1711375117; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=LzeD1TWV2ywGltnXe+vJFHc8M5PW63asBLK+MVZiAc8=;
- b=XkNFuokSpekitValuMc4SWq7E8nBKK8TjZtynwyCNrOn/mYBNHjrJvImfFQnjcdHgL
- U1cWZuSMBMINWA32KGHyfwh82IuEvg+qcm2pjETw6EaCoLPAyvXE0LpN+cxpvF6c/hIO
- 3IB1n/W90X1Yqb3bDaJK332+d90YnV0ddVNiHmpMbuiO9P59zZ3RhLtx+xIZAzFbym5b
- nqHPrnGzB//mJyTBpONEh9mQdEsrX8tAXjVuZUYNuSKdHd4iCMJCihQMVOPPxisJVfuX
- bpdoHC+VeC1iISKQe1bxN9XJm20KY5+59ziU9r6AmsqRbCP0iIGXavsUtm/pf+/+60Oj
- AEGQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710770317; x=1711375117;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=LzeD1TWV2ywGltnXe+vJFHc8M5PW63asBLK+MVZiAc8=;
- b=i0iBZcXFa7Hw7dSkVUVOoD5Cz5FxbCctQGaQaPf7+RCIwAeIG0v3Y4/VXLBm6kMg43
- 1kknfgTJt9XbFLn/YqayuyYB/PgZh0saqMCLQS6s0acSKOhSr6OoMTlEew/dc5dQlRM4
- u2VMMbHt3RIi/sYUVVMO3/2Th54DO3y8TCBqEXd50Flr/dpmBSfrmjG9hiuBP3DB62PP
- Q8WICLOzhKfNfsLM+0iuACj402UAgYKeUE563LaS+T/PcAxIbXtqumCSE2iIWXUkxiag
- u61t2EV0/fre/9pgSz7w6e460AraCe4PPIHbAE51hYo8AvG/RiZM7VjBnQgF7inzHH/J
- W53g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUmNIXyh+7Ik0MFBrVplMVNXpTaWZ8UNmeIOOq15xxwRctuicprsIOFg0y4IN8ffexBjpOb3qtXB29RSUafAUdyvNihGg==
-X-Gm-Message-State: AOJu0Ywt4zjeAU1LZ3j0t+qtqsVV46udIURN6pw1XCbu2RKVE7KJvCTf
- PgiTwdzD54w4LtR8HvjSMjYRclENSVAQQGB/KC+fqhZ36E84G5J9
-X-Google-Smtp-Source: AGHT+IHqj/CjkyFDqnMr+0IYH/+e8ce3fcdW36qXSGSJupun6+47XgVNINvFtVG8FJyHlxKmx3KHfg==
-X-Received: by 2002:a05:620a:1672:b0:789:ea35:4465 with SMTP id
- d18-20020a05620a167200b00789ea354465mr10725420qko.31.1710770316873; 
- Mon, 18 Mar 2024 06:58:36 -0700 (PDT)
-Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- rv8-20020a05620a688800b00789d9cd432csm4219062qkn.75.2024.03.18.06.58.36
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 18 Mar 2024 06:58:36 -0700 (PDT)
-Message-ID: <fd3fff48-a789-c3f1-6b06-1e5efa13deea@gmail.com>
-Date: Mon, 18 Mar 2024 09:58:35 -0400
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 9E10787BF1;
+ Mon, 18 Mar 2024 15:46:52 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1710773213;
+ bh=CkAvUmYBbKm/DWaWi0rad5Nl3/1FHr8z3fOtLhMArEE=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=afv1sMTu2TPa6IgpOX3LlLIzWAbM/TIbypHh6AEEFG8Unho6eCUSJoK2danRLcbq5
+ eh7+shce2WlBrbaBwX1ixUGfTNrZsxYmnhZHyA3yFhUPiiH+PE17rON4Repk0/axMj
+ RoRiCi9BApqQiIkzSNTr4vs+ikn/A/844WSAucmsARCI0qNoF7KG9O9zZ/i9QtaD6x
+ /Gm0DP4YlFNamHTuC1hhkRVg6cGYp41rmtNKwKph9QI+TNf+vJaPnRbOtjxK0NCKiP
+ v+bRj1xs5luaQL+UUhhsFevBM4WTggVG6xSFDGIQDnmimADWnJl9SvfGA2efWO6QPg
+ Em/Wi7ioyNUyA==
+Message-ID: <3f609051-4925-464b-be57-b1a64e5bf861@denx.de>
+Date: Mon, 18 Mar 2024 15:17:33 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [PATCH v2] cmd: nand: Add support to print the manufacturer,
- model and size
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 4/6] usb: Add environment based device blocklist
 Content-Language: en-US
-To: Mihai Sain <mihai.sain@microchip.com>, trini@konsulko.com,
- sjg@chromium.org, u-boot@lists.denx.de, dario.binacchi@amarulasolutions.com,
- michael@amarulasolutions.com
-References: <20240318134219.20040-1-mihai.sain@microchip.com>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20240318134219.20040-1-mihai.sain@microchip.com>
+To: Janne Grunau <j@jannau.net>, Bin Meng <bmeng.cn@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Joe Hershberger <joe.hershberger@ni.com>
+Cc: u-boot@lists.denx.de, asahi@lists.linux.dev
+References: <20240317-asahi-keyboards-v2-0-d3f4b8384f68@jannau.net>
+ <20240317-asahi-keyboards-v2-4-d3f4b8384f68@jannau.net>
+ <22be2258-ff20-4e62-a169-4748cbba4904@denx.de>
+ <970e9686-4bcc-4cda-95b7-e5cb470682b0@app.fastmail.com>
+ <540cbc3f-a9bf-467d-8aa2-c56e53cd7123@denx.de>
+ <e73c0c71-070b-438c-a9e0-2e5ee586d99f@app.fastmail.com>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <e73c0c71-070b-438c-a9e0-2e5ee586d99f@app.fastmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -98,53 +75,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/18/24 09:42, Mihai Sain wrote:
-> Add support to nand info for printing the manufacturer,model and size.
-> The manufacturer and model are printed only for ONFI flashes.
-> 
-> U-Boot> nand info
-> 
-> Device 0: nand0, sector size 256 KiB
->    Manufacturer  MACRONIX
->    Model         MX30LF4G28AD
->    Device size        512 MiB
->    Page size         4096 b
->    OOB size           256 b
->    Erase size      262144 b
->    ecc strength         8 bits
->    ecc step size      512 b
->    subpagesize       4096 b
->    options       0x00004200
->    bbt options   0x00028000
-> 
-> Signed-off-by: Mihai Sain <mihai.sain@microchip.com>
-> 
-> Changes in v2:
-> --------------
-> * use #ifdef directive for ONFI flashes.
-> * use unsigned int for chipsize.
-> ---
->   cmd/nand.c | 5 +++++
->   1 file changed, 5 insertions(+)
-> 
-> diff --git a/cmd/nand.c b/cmd/nand.c
-> index fe834c4ac5..5773246d64 100644
-> --- a/cmd/nand.c
-> +++ b/cmd/nand.c
-> @@ -418,6 +418,11 @@ static void nand_print_and_set_info(int idx)
->   		printf("%dx ", chip->numchips);
->   	printf("%s, sector size %u KiB\n",
->   	       mtd->name, mtd->erasesize >> 10);
-> +#ifdef CONFIG_SYS_NAND_ONFI_DETECTION
-> +	printf("  Manufacturer  %s \n", chip->onfi_params.manufacturer);
-> +	printf("  Model         %s \n", chip->onfi_params.model);
-> +#endif
-> +	printf("  Device size   %8u MiB\n", (unsigned int)(chip->chipsize >> 20));
->   	printf("  Page size     %8d b\n", mtd->writesize);
->   	printf("  OOB size      %8d b\n", mtd->oobsize);
->   	printf("  Erase size    %8d b\n", mtd->erasesize);
+On 3/18/24 8:33 AM, Janne Grunau wrote:
 
-Can you refactor the logic out of the end of nand_detect as a separate
-function and use that instead? That will cover more cases (e.g. JEDEC).
+>>>>> +static int usb_blocklist_parse_error(const char *blocklist, size_t pos)
+>>>>> +{
+>>>>> +	printf("usb_blocklist parse error at char %zu in \"%s\"\n", pos,
+>>>>> +	       blocklist);
+>>>>> +	return 0;
+>>>>
+>>>> This could be static void without return 0 at the end.
+>>>
+>>> the return is there to break out of the while loop on parsing errors in a single statement. This probably won't be necessary after using strsep and sscanf in the parsing function but see below.
+>>
+>> Ahh, now I see it. But then, shouldn't this return -ENODEV here already ?
+> 
+> It returns 0 so that parsing errors in the blocklist do not result
+> in blocking every USB device. That looked to me like the
+> less bad error behavior to me.
 
---Sean
+In unix , 0 is considered success and non-zero failure .
+
+How about this:
+
+- Return -EINVAL here (parsing failed)
+- Instead of 'return 1' in usb_device_is_blocked() return -ENODEV
+- In usb_select_config(), check
+   if usb_device_is_blocked returned 0, no device blocked OK
+   if usb_device_is_blocked returned -ENODEV, device blocked,
+     return -ENODEV
+   if usb_device_is_blocked returned any other error, parsing error
+     return that error
+
+What do you think ?
+
+>>>>> +}
+>>>>> +
+>>>>> +static int usb_device_is_blocked(u16 id_vendor, u16 id_product)
+>>>>> +{
+>>>>> +	ulong vid, pid;
+>>>>> +	char *end;
+>>>>> +	const char *block_str = env_get("usb_blocklist");
+>>>>> +	const char *cur = block_str;
+>>>>> +
+>>>>> +	/* parse "usb_blocklist" strictly */
+>>>>> +	while (cur && cur[0] != '\0') {
+>>>>
+>>>> Have a look at strsep() , namely strsep(block_str, ","); This will split
+>>>> the string up for you at "," delimiters.
+>>>>
+>>>> Example is in drivers/dfu/dfu.c dfu_config_interfaces() .
+>>>
+>>> strsep() is probably a good idea even if it alone won't make the code that much simpler for strict parsing.
+>>>
+>>>> And then, on each token, you can try and run sscanf(token, "%04x:%04x",
+>>>> vid, pid);, that will parse the token format for you. See e.g.
+>>>> test/lib/sscanf.c for further examples.
+>>>>
+>>>> That should simplify the parsing a lot.
+>>>
+>>> It would but sscanf() is optional and is only selected by CONFIG_XEN so I assumed there would be concerns over binary size increase if USB_HOST would require sscanf.
+>>
+>> Good point, lets postpone sscanf() . Also, looking at it, sscanf would
+>> work for numbers, but not for the special characters. So ... do you want
+>> to try tweaking this further with strsep() or shall we go with this
+>> implementation ?
+> 
+> I started converting it to strsep. It makes the intent clearer but it doesn't
+> simplify the implementation much. strsep() has the disadvantage that
+> it can't work in place and needs to copy the string. If we go with strsep
+> I would look into parsing the list once at USB init time and use a list of
+> numeric vendor, product ID pairs at device probe time.
+> If have a slight preference for the current implementation (with ignore
+> or deny instead of blocklist) as long as the list remains short.
+
+OK, we can always improve this later, I would also like this 
+functionality in soon-ish.
