@@ -4,59 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67533C54E5D
-	for <u-boot@archiver.kernel.org>; Mon, 18 Mar 2024 22:53:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F68FC54E58
+	for <u-boot@archiver.kernel.org>; Mon, 18 Mar 2024 23:16:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD14488010;
-	Mon, 18 Mar 2024 23:53:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id A808387BC9;
+	Tue, 19 Mar 2024 00:16:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1710802381;
-	bh=LgbGbwP4oQJOQjnUp0xOwAT/MsYCf/09EBAuaUtgy/s=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=0TTADSInVxocVxJIp44jXPzoQdANA8BFypAsbk+O2ZyG1H6ARjTke8OtjHIX0N8cy
-	 Qlr7XNBh5ZbJUM3xfWULap+EzOp3HywEgaxNJgwfggpvQiqd6/yLP34axGHuk8u/dY
-	 6w0otn4Gl2UJyrDIElxD/7yszSUvoiVQev7PcbEm1ru0wZvRPfDT6CMrWS+1XKjPTh
-	 2my4f3k0GzmvT6mMvUCHMDZ80XAmIGw7iJTYyL6WQs2WmRHO2ngcRmBG+L/cPKpote
-	 NMTQ8FkNWe2f7ZicPazR6FI8SZlpcvLOFQzOUmmX8E70tbjKmkY6B6C4WxzM6cMZCC
-	 Ic1J9iYdZMQ1A==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Wirno5pJ";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id CFE5E87D09; Tue, 19 Mar 2024 00:16:48 +0100 (CET)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id E808487513;
- Mon, 18 Mar 2024 23:52:58 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1710802379;
- bh=LgbGbwP4oQJOQjnUp0xOwAT/MsYCf/09EBAuaUtgy/s=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=pmj1B8wQtrWzMEKTfmLED7kBOWkOd/MJ540ClGirypKQ/OyCUt5b/qo1vayhAlOZy
- T5cahJBL9mFP3gsH0W2aw2/sXbPC36wJ3/cZOVNBORq5DD/jTOnjsGglRZWCcGZQ7T
- rju55zCW/gKL2V8dIjpFXGW9e2aX9qwgY3o0gunsOOvG+jPvJk2Pq4xDBjflA5f8RH
- qvW5r/xy8ukz4xOH+sbR3MWzNfP1sMGc/fVyG6CtpbAJ+Aoc9Q7j71ZTTjkO6w8DDC
- RUBKeimmaRoVD76pI3twNWDuIW0F/Z0patfPEYXkOFApbRVKjCwfYJ8Xf3qDHiSkoL
- N98u9V4RKb0IQ==
-Message-ID: <a38661aa-06c6-43cf-a04a-2ef9757d8bf9@denx.de>
-Date: Mon, 18 Mar 2024 23:52:58 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/5] usb: dwc3-generic: implement Qualcomm wrapper
-Content-Language: en-US
-To: Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini
- <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>
+ by phobos.denx.de (Postfix) with ESMTPS id E0AF987861
+ for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 00:16:46 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-413f4cb646dso31892955e9.1
+ for <u-boot@lists.denx.de>; Mon, 18 Mar 2024 16:16:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1710803806; x=1711408606; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=c6ZM15uUUmha+RGseHVO/OgEFs12byEfeMOHHIk+r8s=;
+ b=Wirno5pJP2lkHL/f94E1riLiIRZ1jeQQprrQ6Q/f4P6fmAwtWvgFKC3P63ArGSUYWI
+ 8PkQV1G9tvau07sty8ALQR1NkZmnrfRSpbMj/TgqcJwkOHFjEvxu3dDYzdSv/S3zNAvP
+ eQBlp4Ah1g649oPmenpMF/u8/89/UxE0B88C2bizy3iWxk/sgwjog8L/eMuiBus+5Jcl
+ ZZI7zB9l//rdQQKOJz17mGWTRFKQ4muNbyW+cgLwwHl4/fgnBQTI9khIy2thQKiX67rj
+ 1yD00zi+ZueG5aAxLHn5jUzx/cnU16jdeWXkErrV+iAps2FfqOY9BLx7p8enY/bbO/1I
+ WiKw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710803806; x=1711408606;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=c6ZM15uUUmha+RGseHVO/OgEFs12byEfeMOHHIk+r8s=;
+ b=sUsxtvWshWe5HLAhpyHnGwc3ZXhA/PAKmlXSQvW7w16X1quxspabQ4MaxEGaHg34SB
+ CJEz40mzjekH177EQgQGhPdrq1AdHAAxh/cPb2VS8k1A5OzTIUpVJJWOZCSj7+4e9vVq
+ gBSs29a1nx49B4fQpZhfvTpj+dW6RGvCfHptMnP4pcQ2fBhPP+XuMeiYwnZNt39gp82o
+ Sl9tjaZXEqZfU9JuSk6Vs4Sx4L19nse17b0NTlER1CZ/9N0bWTL2FHMg7iJTEfa770Lq
+ wa+Li7q8hU5rREURl7YPGbjVXbt2e0WInBf6nckyHvbI8HEZzabXe2lZyWQYz3LLhviB
+ n35Q==
+X-Gm-Message-State: AOJu0YxIxAkLRYqDFb8loNfnGZuAtnkXrgCs9av9m39L/h1uQ6Ml4E0q
+ 9+EP3SWuIAYjyyIxYV+RS9Cdw9k0XrXXDIJ9p5TAfLeA5Lywyz/WAbc/9Heua2k=
+X-Google-Smtp-Source: AGHT+IHO/0NBfY6c8SRdas0RCVU/QQ4eg9/dueTkHpkTp9DIBRs0dMzWhNx+ay7XoAlWBg7fao/DiA==
+X-Received: by 2002:a05:600c:a02:b0:414:9fa:1da2 with SMTP id
+ z2-20020a05600c0a0200b0041409fa1da2mr5093761wmp.15.1710803806235; 
+ Mon, 18 Mar 2024 16:16:46 -0700 (PDT)
+Received: from lion.caleb.rex.connolly.tech (host-92-17-96-232.as13285.net.
+ [92.17.96.232]) by smtp.gmail.com with ESMTPSA id
+ v7-20020a05600c444700b0041420706396sm2646551wmn.12.2024.03.18.16.16.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 18 Mar 2024 16:16:45 -0700 (PDT)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+To: Caleb Connolly <caleb.connolly@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Sean Edmond <seanedmond@microsoft.com>,
+ Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
-References: <20240315-b4-qcom-usb-v2-0-5467ec27cb26@linaro.org>
- <20240315-b4-qcom-usb-v2-1-5467ec27cb26@linaro.org>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240315-b4-qcom-usb-v2-1-5467ec27cb26@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Subject: [PATCH] cmd: sysboot: null check filename
+Date: Mon, 18 Mar 2024 23:16:36 +0000
+Message-ID: <20240318231640.1343956-1-caleb.connolly@linaro.org>
+X-Mailer: git-send-email 2.44.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,51 +91,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/15/24 4:06 PM, Caleb Connolly wrote:
-> The Qualcomm specific dwc3 wrapper isn't hugely complicated, implemented
-> the missing initialisation for host and gadget mode.
-> 
-> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->   drivers/usb/dwc3/dwc3-generic.c | 81 ++++++++++++++++++++++++++++++++++++++++-
->   1 file changed, 80 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
-> index a379a0002e77..5a355dd86c60 100644
-> --- a/drivers/usb/dwc3/dwc3-generic.c
-> +++ b/drivers/usb/dwc3/dwc3-generic.c
-> @@ -424,8 +424,79 @@ enum dwc3_omap_utmi_mode {
->   struct dwc3_glue_ops ti_ops = {
->   	.glue_configure = dwc3_ti_glue_configure,
->   };
->   
-> +/* USB QSCRATCH Hardware registers */
-> +#define QSCRATCH_HS_PHY_CTRL 0x10
-> +#define UTMI_OTG_VBUS_VALID BIT(20)
-> +#define SW_SESSVLD_SEL BIT(28)
-> +
-> +#define QSCRATCH_SS_PHY_CTRL 0x30
-> +#define LANE0_PWR_PRESENT BIT(24)
-> +
-> +#define QSCRATCH_GENERAL_CFG 0x08
+Currently if ${bootfile} is unset and sysboot is invoked with no
+filename specified then U-Boot will crash will a null-pointer
+dereference. Add the missing check and a matching error print.
 
-Keep the list sorted, 0x08 goes above 0x10 ^ up there.
+Fixes: 993c912d304d ("cmd: sysboot: Create a sysboot command dedicated file")
+Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+---
+ cmd/sysboot.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-> +#define PIPE_UTMI_CLK_SEL BIT(0)
-> +#define PIPE3_PHYSTATUS_SW BIT(3)
-> +#define PIPE_UTMI_CLK_DIS BIT(8)
-> +
-> +#define PWR_EVNT_IRQ_STAT_REG 0x58
-> +#define PWR_EVNT_LPM_IN_L2_MASK BIT(4)
-> +#define PWR_EVNT_LPM_OUT_L2_MASK BIT(5)
-> +
-> +#define SDM845_QSCRATCH_BASE_OFFSET 0xf8800
-> +#define SDM845_QSCRATCH_SIZE 0x400
-> +#define SDM845_DWC3_CORE_SIZE 0xcd00
+diff --git a/cmd/sysboot.c b/cmd/sysboot.c
+index 63a7806debe4..d14c570d96ab 100644
+--- a/cmd/sysboot.c
++++ b/cmd/sysboot.c
+@@ -76,8 +76,12 @@ static int do_sysboot(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	}
+ 
+ 	if (argc < 6) {
+ 		filename = env_get("bootfile");
++		if (!filename) {
++			printf("Specify a filename or set the ${bootfile} environment variable\n");
++			return 1;
++		}
+ 	} else {
+ 		filename = argv[5];
+ 		env_set("bootfile", filename);
+ 	}
+-- 
+2.44.0
 
-The rest looks fine, with that fixed:
-
-Reviewed-by: Marek Vasut <marex@denx.de>
-
-Thanks !
