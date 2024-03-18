@@ -4,41 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F22A5C54E5D
-	for <u-boot@archiver.kernel.org>; Mon, 18 Mar 2024 20:34:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AC5BC54E71
+	for <u-boot@archiver.kernel.org>; Mon, 18 Mar 2024 22:37:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5526587EBA;
-	Mon, 18 Mar 2024 21:34:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=arvanta.net
+	by phobos.denx.de (Postfix) with ESMTP id A0D0B88027;
+	Mon, 18 Mar 2024 23:37:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id F0C6687DEC; Mon, 18 Mar 2024 21:34:31 +0100 (CET)
-Received: from fx.arvanta.net (93-87-244-166.static.isp.telekom.rs
- [93.87.244.166]) by phobos.denx.de (Postfix) with ESMTP id 991BF88005
- for <u-boot@lists.denx.de>; Mon, 18 Mar 2024 21:34:29 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=arvanta.net
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=mps@arvanta.net
-Received: from m1pro.arvanta.net (m1pro.arvanta.net [10.5.1.5])
- by fx.arvanta.net (Postfix) with ESMTP id 173F55D9C;
- Mon, 18 Mar 2024 20:34:29 +0000 (UTC)
-Date: Mon, 18 Mar 2024 21:34:31 +0100
-From: Milan =?utf-8?Q?P=2E_Stani=C4=87?= <mps@arvanta.net>
-To: Nam Cao <namcao@linutronix.de>
-Cc: ycliang@andestech.com, yanhong.wang@starfivetech.com,
- chanho61.park@samsung.com, wiagn233@outlook.com, sjg@chromium.org,
- inindev@gmail.com, rick@andestech.com, bmeng@tinylab.org,
- u-boot@lists.denx.de, minda.chen@starfivetech.com
-Subject: Re: [PATCH] starfive: visionfive2: switch to standard boot
-Message-ID: <20240318203431.GA21567@m1pro.arvanta.net>
-References: <20240221120014.149193-1-namcao@linutronix.de>
- <20240313184206.GA20322@m1pro.arvanta.net>
- <20240314130436.76a2892a@namcao>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1710801473;
+	bh=yoY4rECuHDwfhpSZZ7WqSjEoeYBzFL/4Q6MdKTJvJjI=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=tAc6nLPJaH9jxv6oYTi7z/MUeLmlZMo5aF3y3/3ZqdFC57w/zvGVlQDGFfhkKHgmR
+	 YGnY7rSUDPCUeSrdZNl4/LlKbNzHEyJvgREpYCBNTwZ1CMx7yLKC2oH11djh/97s8q
+	 syfkyVSy6I/atSZ2UsJdDQJOi+YGFQ3HWOUdIxgPlWSyzS0jPqOc3gCEB85QQDDkXx
+	 DV203slG5uODqFrcNqgRDFMzyti+d0GcdGCcwMc6WiXlBwo3/uagdfMTr3Fj6ssyDl
+	 5Jac1d3DwIp2esF8mwvh3WTTFjpnBk5BC6G4r9P9tvqugSybfBEaRIVx2zOODw4m0w
+	 M9Hkzvq0KC0DQ==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 0419F8801E;
+ Mon, 18 Mar 2024 23:37:51 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1710801473;
+ bh=yoY4rECuHDwfhpSZZ7WqSjEoeYBzFL/4Q6MdKTJvJjI=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=anOc80aR3+i237eOIkGCH3Tx9DlHDvm/iTdqTQQddCE/0nyKLNYWQGSgNV+MjhwGO
+ KaHWDOBYyJox+ohODX3sGgZo+5ufLVmYK/wLw2Saq+6LNVBZObvf0dVjnpsakN2LJ1
+ PGxpQd8ot4m0c0GY1kqZJd76T+8lFoR6ObQxlhrsTGD5kz7vd0r2vhaeCEQMZki2Xg
+ PGAftk8q3oR0t7vf7mn2CV8aATwoRCaP18m8NN1T4mHwKMCYmp7swR2g2yyNlS2OEm
+ dUPKeASrbBdju6EuUfBPIG8Z72cxcEGVwVuce2qP1GuhF1TDcmXhlJd1Q7+Mbftyp+
+ Xgzzlrtr9ey6Q==
+Message-ID: <c9f92bd5-96c8-46b6-a672-9473d7be7aac@denx.de>
+Date: Mon, 18 Mar 2024 22:48:04 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20240314130436.76a2892a@namcao>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/3] arm: dts: imx93-phyboard-segin: Add USB support.
+Content-Language: en-US
+To: Mathieu Othacehe <othacehe@gnu.org>, Tom Rini <trini@konsulko.com>,
+ Peng Fan <peng.fan@nxp.com>, Shiji Yang <yangshiji66@outlook.com>,
+ Ye Li <ye.li@nxp.com>, Alice Guo <alice.guo@nxp.com>,
+ Stefano Babic <sbabic@denx.de>,
+ =?UTF-8?Q?S=C3=A9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>,
+ Fabio Estevam <festevam@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Mathieu Othacehe <m.othacehe@gmail.com>, Yannic Moog <y.moog@phytec.de>,
+ Primoz Fiser <primoz.fiser@norik.com>,
+ Christoph Stoidner <c.stoidner@phytec.de>, Wadim Egorov <w.egorov@phytec.de>
+Cc: u-boot@lists.denx.de
+References: <20240318171637.12664-1-othacehe@gnu.org>
+ <20240318171637.12664-2-othacehe@gnu.org>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20240318171637.12664-2-othacehe@gnu.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -55,30 +77,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 2024-03-14 at 13:04, Nam Cao wrote:
-> On 13/Mar/2024 Milan P. Stanić wrote:
-> > On Wed, 2024-02-21 at 13:00, Nam Cao wrote:
-> > > Distro boot scripts are deprecated. Use standard boot instead.  
-> > I had to enable 'CONFIG_CMD_SYSBOOT=y' in
-> > configs/starfive_visionfive2_defconfig because it doesn't boot without
-> > it. With this option it boots fine with this patch.
-> 
-> You should not have to do that for it to work, otherwise this patch
-> introduced a bug.
-> 
-> CONFIG_CMD_SYSBOOT adds the "sysboot" command, which is only used by
-> distroboot. So I suspect that you were actually still using distro boot,
-> because you didn't "update" your environment variable (that can be checked
-> with "printenv bootcmd"). For this patch to work, the environment variables
-> also need to be updated with:
->     env default
->     env save -a
-> 
-> This makes me realize that the patch breaks boards if the users forget to
-> update the environment variables. I am not sure if this is considered a
-> bug. What do maintainers think?
+On 3/18/24 6:16 PM, Mathieu Othacehe wrote:
+> Enable both usbotg1 and usbotg2 ports.
 
-Rebuild it again and it worked out of the box.
+Drop fullstop from $subject end.
 
-Tested-by: Milan P. Stanić <mps@arvanta.net>
+> Signed-off-by: Mathieu Othacehe <othacehe@gnu.org>
+> ---
+>   arch/arm/dts/imx93-phyboard-segin.dts | 13 +++++++++++++
+>   1 file changed, 13 insertions(+)
+> 
+> diff --git a/arch/arm/dts/imx93-phyboard-segin.dts b/arch/arm/dts/imx93-phyboard-segin.dts
+> index 85fb188b057..acf307a3192 100644
+> --- a/arch/arm/dts/imx93-phyboard-segin.dts
+> +++ b/arch/arm/dts/imx93-phyboard-segin.dts
+> @@ -40,6 +40,19 @@
+>   	status = "okay";
+>   };
+>   
+> +/* USB  */
+> +&usbotg1 {
+> +	disable-over-current;
 
+Why is this needed ?
