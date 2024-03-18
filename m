@@ -4,57 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DEF9C54E5D
-	for <u-boot@archiver.kernel.org>; Mon, 18 Mar 2024 22:38:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67533C54E5D
+	for <u-boot@archiver.kernel.org>; Mon, 18 Mar 2024 22:53:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 00E6E88020;
-	Mon, 18 Mar 2024 23:38:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CD14488010;
+	Mon, 18 Mar 2024 23:53:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1710801482;
-	bh=vjFF/bnnk4O3I/SgIvTqhRhnNAmk9wJESsmLnf+b/aA=;
+	s=phobos-20191101; t=1710802381;
+	bh=LgbGbwP4oQJOQjnUp0xOwAT/MsYCf/09EBAuaUtgy/s=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Q3rFYW38F1tcTWV2nMAo8FWTXG5bkScvsZ/XXK1mXhqADv3Pt/kmy00ekOuEJWv3M
-	 QXJFE4Le7/xOOTKqT/aVPKotHOGWdy5vwPJ5GEsWx9ijq98MYknJcJsHh3INwSjrAg
-	 f04dTJOmb7Sef5do4SUEewXvMz92Lps3e6Qz6TAIfDc+9+5RwlB8RZzyKyeLQ2MUeB
-	 k9W7bnOfcEBuPP0mS7c0lqX9zvwPhY4z/fYSaR0UEzkfrFSzg/3c8wodTL4EdX775s
-	 oV8wqFznBG69mvZ+Jm5zGUza2VUrTzJ2hLxEr61oP7xXazn4ZiNqdu6eTbKha/VpL/
-	 H8SwZ7Mkg8tYQ==
+	b=0TTADSInVxocVxJIp44jXPzoQdANA8BFypAsbk+O2ZyG1H6ARjTke8OtjHIX0N8cy
+	 Qlr7XNBh5ZbJUM3xfWULap+EzOp3HywEgaxNJgwfggpvQiqd6/yLP34axGHuk8u/dY
+	 6w0otn4Gl2UJyrDIElxD/7yszSUvoiVQev7PcbEm1ru0wZvRPfDT6CMrWS+1XKjPTh
+	 2my4f3k0GzmvT6mMvUCHMDZ80XAmIGw7iJTYyL6WQs2WmRHO2ngcRmBG+L/cPKpote
+	 NMTQ8FkNWe2f7ZicPazR6FI8SZlpcvLOFQzOUmmX8E70tbjKmkY6B6C4WxzM6cMZCC
+	 Ic1J9iYdZMQ1A==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 0FFAD87861;
- Mon, 18 Mar 2024 23:37:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id E808487513;
+ Mon, 18 Mar 2024 23:52:58 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1710801477;
- bh=vjFF/bnnk4O3I/SgIvTqhRhnNAmk9wJESsmLnf+b/aA=;
+ s=phobos-20191101; t=1710802379;
+ bh=LgbGbwP4oQJOQjnUp0xOwAT/MsYCf/09EBAuaUtgy/s=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=YgOFx2VUA2CHF6Ki1LoIsv6X6UZat0ynt1sRO21dz83YW67JmKVWcO0/U8JbCo8Kd
- GANGXYS9I/nw/FMxFLQEU4DRxMClbEpzpyMf6Mm+uhLA/pTyAeQ1ESUhSGynD3Mw6y
- a1Pl9JYCfbP9egQMLDzMfNt/5E8TZTl8T9uk1sPkwY3I3Sh6MTGjFCQUeB5czfQq+k
- qjXvgHhblAMH7FmUsGnEu0yDECr8mJgYWf0NcxQa53LieyciC/vVSscmx4DOTm0Cna
- cmpQrZAcmszVzcBcIiJ8rf4Q2oVFvMD+bB8gzB14dsjzvxWeUPhgho1h8cg1WH/iPA
- g6WTGxjMd3Oiw==
-Message-ID: <436b910c-2aeb-4c18-90ac-cb3d8fe37dca@denx.de>
-Date: Mon, 18 Mar 2024 23:23:26 +0100
+ b=pmj1B8wQtrWzMEKTfmLED7kBOWkOd/MJ540ClGirypKQ/OyCUt5b/qo1vayhAlOZy
+ T5cahJBL9mFP3gsH0W2aw2/sXbPC36wJ3/cZOVNBORq5DD/jTOnjsGglRZWCcGZQ7T
+ rju55zCW/gKL2V8dIjpFXGW9e2aX9qwgY3o0gunsOOvG+jPvJk2Pq4xDBjflA5f8RH
+ qvW5r/xy8ukz4xOH+sbR3MWzNfP1sMGc/fVyG6CtpbAJ+Aoc9Q7j71ZTTjkO6w8DDC
+ RUBKeimmaRoVD76pI3twNWDuIW0F/Z0patfPEYXkOFApbRVKjCwfYJ8Xf3qDHiSkoL
+ N98u9V4RKb0IQ==
+Message-ID: <a38661aa-06c6-43cf-a04a-2ef9757d8bf9@denx.de>
+Date: Mon, 18 Mar 2024 23:52:58 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: imx7 issues with Secure and Non-Secure boot mode
+Subject: Re: [PATCH v2 1/5] usb: dwc3-generic: implement Qualcomm wrapper
 Content-Language: en-US
-To: Emanuele Ghidoli <ghidoliemanuele@gmail.com>,
- Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
- Breno Matheus Lima <brenomatheus@gmail.com>,
- Fabio Estevam <festevam@gmail.com>, u-boot@lists.denx.de,
- Peng Fan <peng.fan@nxp.com>
-Cc: Tobias Junghans <tobias.junghans@veyon.io>, igor.opaniuk@gmail.com,
- Francesco Dolcini <francesco.dolcini@toradex.com>
-References: <4b64a9de-a840-4065-a530-f81155b4b9f2@toradex.com>
+To: Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini
+ <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>
+Cc: u-boot@lists.denx.de
+References: <20240315-b4-qcom-usb-v2-0-5467ec27cb26@linaro.org>
+ <20240315-b4-qcom-usb-v2-1-5467ec27cb26@linaro.org>
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <4b64a9de-a840-4065-a530-f81155b4b9f2@toradex.com>
+In-Reply-To: <20240315-b4-qcom-usb-v2-1-5467ec27cb26@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -73,45 +73,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/7/24 10:26 AM, Emanuele Ghidoli wrote:
-> Hello,
+On 3/15/24 4:06 PM, Caleb Connolly wrote:
+> The Qualcomm specific dwc3 wrapper isn't hugely complicated, implemented
+> the missing initialisation for host and gadget mode.
 > 
-> I'm currently facing issues with our board, Colibri-imx7,
-> regarding its behavior in different boot modes:
+> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> ---
+>   drivers/usb/dwc3/dwc3-generic.c | 81 ++++++++++++++++++++++++++++++++++++++++-
+>   1 file changed, 80 insertions(+), 1 deletion(-)
 > 
-> - Secure Mode (bootm_boot_mode=sec in U-Boot):
->    When running Linux in secure mode, the idle time management does not function
->    properly. The following error message is displayed during boot:
->    "CPUidle arm: CPU 0 failed to init idle CPU ops".
-> 
-> - Non-Secure Mode (bootm_boot_mode=nonsec in U-Boot):
->    In non-secure mode, the caam_jr fails to initialize correctly,
->    preventing the utilization of the hardware random number generation.
->    The error message shown during boot is:
->    "caam_jr 30901000.jr: failed to flush job ring before reset".
-> 
-> I have conducted tests using both mainline and 6.1 stable versions,
-> with consistent results.
-> 
-> I have also reviewed the following threads for potential solutions:
-> 
->   - https://lore.kernel.org/u-boot/2536787.mZni4QDSI2@crypto/
->   - https://lore.kernel.org/u-boot/CAByghJZn8d91uFr5JXSR=jXcfU4engZP_=buOk7MNNjaVeigLA@mail.gmail.com/
->   - https://lore.kernel.org/all/20220608170223.1536594-1-festevam@denx.de/T/
-> 
-> The first thread leave me thinking the only solution is to use OPTEE,
-> but the last email is without any answer.
-> So, I am considering the utilization of OPTEE, as it seems it might address
-> the issues discussed in the threads.
-> Could this configuration potentially resolve my current issues?
-> 
-> Your advice would be greatly appreciated.
+> diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
+> index a379a0002e77..5a355dd86c60 100644
+> --- a/drivers/usb/dwc3/dwc3-generic.c
+> +++ b/drivers/usb/dwc3/dwc3-generic.c
+> @@ -424,8 +424,79 @@ enum dwc3_omap_utmi_mode {
+>   struct dwc3_glue_ops ti_ops = {
+>   	.glue_configure = dwc3_ti_glue_configure,
+>   };
+>   
+> +/* USB QSCRATCH Hardware registers */
+> +#define QSCRATCH_HS_PHY_CTRL 0x10
+> +#define UTMI_OTG_VBUS_VALID BIT(20)
+> +#define SW_SESSVLD_SEL BIT(28)
+> +
+> +#define QSCRATCH_SS_PHY_CTRL 0x30
+> +#define LANE0_PWR_PRESENT BIT(24)
+> +
+> +#define QSCRATCH_GENERAL_CFG 0x08
 
-Have a look at U-Boot
+Keep the list sorted, 0x08 goes above 0x10 ^ up there.
 
-1f908b1898bd ("ARM: imx8m: Deduplicate CAAM init with arch_misc_init() 
-call")
+> +#define PIPE_UTMI_CLK_SEL BIT(0)
+> +#define PIPE3_PHYSTATUS_SW BIT(3)
+> +#define PIPE_UTMI_CLK_DIS BIT(8)
+> +
+> +#define PWR_EVNT_IRQ_STAT_REG 0x58
+> +#define PWR_EVNT_LPM_IN_L2_MASK BIT(4)
+> +#define PWR_EVNT_LPM_OUT_L2_MASK BIT(5)
+> +
+> +#define SDM845_QSCRATCH_BASE_OFFSET 0xf8800
+> +#define SDM845_QSCRATCH_SIZE 0x400
+> +#define SDM845_DWC3_CORE_SIZE 0xcd00
 
-Do you call this CAAM initialization on your machine ?
+The rest looks fine, with that fixed:
 
-If not, try it, does it have any impact ?
+Reviewed-by: Marek Vasut <marex@denx.de>
+
+Thanks !
