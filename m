@@ -4,47 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 223E9C54E5D
-	for <u-boot@archiver.kernel.org>; Mon, 18 Mar 2024 18:08:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CF64C54E5D
+	for <u-boot@archiver.kernel.org>; Mon, 18 Mar 2024 18:15:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 671D687E89;
-	Mon, 18 Mar 2024 19:08:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5854C87FF0;
+	Mon, 18 Mar 2024 19:15:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0B8CC87E95; Mon, 18 Mar 2024 19:08:18 +0100 (CET)
-Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
- [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id 817BE8744F
- for <u-boot@lists.denx.de>; Mon, 18 Mar 2024 19:08:14 +0100 (CET)
+ id D2D3E87FF1; Mon, 18 Mar 2024 19:15:33 +0100 (CET)
+Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
+ [210.160.252.171])
+ by phobos.denx.de (Postfix) with ESMTP id 3C6E587F0A
+ for <u-boot@lists.denx.de>; Mon, 18 Mar 2024 19:15:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
 X-IronPort-AV: E=Sophos;i="6.07,134,1708354800"; 
- d="asc'?scan'208";a="202169240"
-Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie6.idc.renesas.com with ESMTP; 19 Mar 2024 03:08:11 +0900
+ d="asc'?scan'208";a="198218119"
+Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
+ by relmlie5.idc.renesas.com with ESMTP; 19 Mar 2024 03:15:29 +0900
 Received: from [10.226.92.78] (unknown [10.226.92.78])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id E869C4003ECA;
- Tue, 19 Mar 2024 03:08:09 +0900 (JST)
-Message-ID: <a3872c69-c447-4ed8-b9ed-9b4031ad70aa@bp.renesas.com>
-Date: Mon, 18 Mar 2024 18:08:08 +0000
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id 0885D4046C0E;
+ Tue, 19 Mar 2024 03:15:26 +0900 (JST)
+Message-ID: <6071517a-6c6d-41f3-895b-29abcfea78a3@bp.renesas.com>
+Date: Mon, 18 Mar 2024 18:15:25 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] doc: devicetree: Lets avoid short reference link names
+Subject: Re: [PATCH 2/2] ARM: dts: renesas: Switch to using upstream DT on
+ 64bit Renesas SoCs
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Adam Ford <aford173@gmail.com>, Biju Das <biju.das.jz@bp.renesas.com>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
+ Ralph Siemsen <ralph.siemsen@linaro.org>, Tom Rini <trini@konsulko.com>
+References: <20240318145958.8099-1-marek.vasut+renesas@mailbox.org>
+ <20240318145958.8099-2-marek.vasut+renesas@mailbox.org>
 Content-Language: en-GB
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de
-Cc: trini@konsulko.com, sjg@chromium.org, ilias.apalodimas@linaro.org,
- xypron.glpk@gmx.de
-References: <20240301132454.3492762-1-sumit.garg@linaro.org>
- <ce51eabf-e3a6-4822-a920-4846d5898f09@bp.renesas.com>
 Organization: Renesas Electronics Corporation
-In-Reply-To: <ce51eabf-e3a6-4822-a920-4846d5898f09@bp.renesas.com>
+In-Reply-To: <20240318145958.8099-2-marek.vasut+renesas@mailbox.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------QEP8Mp9Lp254ZfijPa0wUsei"
+ boundary="------------vSMvOWME5L4uI8S0XgzE9luz"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,140 +64,61 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------QEP8Mp9Lp254ZfijPa0wUsei
-Content-Type: multipart/mixed; boundary="------------S064uW105EAQo01aNuyjXfJJ";
+--------------vSMvOWME5L4uI8S0XgzE9luz
+Content-Type: multipart/mixed; boundary="------------0hv1Xt3JxaEWBX0F0nfx0Gaz";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de
-Cc: trini@konsulko.com, sjg@chromium.org, ilias.apalodimas@linaro.org,
- xypron.glpk@gmx.de
-Message-ID: <a3872c69-c447-4ed8-b9ed-9b4031ad70aa@bp.renesas.com>
-Subject: Re: [PATCH] doc: devicetree: Lets avoid short reference link names
-References: <20240301132454.3492762-1-sumit.garg@linaro.org>
- <ce51eabf-e3a6-4822-a920-4846d5898f09@bp.renesas.com>
-In-Reply-To: <ce51eabf-e3a6-4822-a920-4846d5898f09@bp.renesas.com>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Adam Ford <aford173@gmail.com>, Biju Das <biju.das.jz@bp.renesas.com>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
+ Ralph Siemsen <ralph.siemsen@linaro.org>, Tom Rini <trini@konsulko.com>
+Message-ID: <6071517a-6c6d-41f3-895b-29abcfea78a3@bp.renesas.com>
+Subject: Re: [PATCH 2/2] ARM: dts: renesas: Switch to using upstream DT on
+ 64bit Renesas SoCs
+References: <20240318145958.8099-1-marek.vasut+renesas@mailbox.org>
+ <20240318145958.8099-2-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20240318145958.8099-2-marek.vasut+renesas@mailbox.org>
 
---------------S064uW105EAQo01aNuyjXfJJ
-Content-Type: multipart/mixed; boundary="------------osSpvGRI8WL4II6cyr3o8rQX"
+--------------0hv1Xt3JxaEWBX0F0nfx0Gaz
+Content-Type: multipart/mixed; boundary="------------eQHSt40thCdrNFc1GBklfu7T"
 
---------------osSpvGRI8WL4II6cyr3o8rQX
+--------------eQHSt40thCdrNFc1GBklfu7T
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On 02/03/2024 07:39, Paul Barker wrote:
-> On 01/03/2024 13:24, Sumit Garg wrote:
->> Short reference link names like "dtspec", "dtrepo", "dttweaks" etc.
->> interrupt the flow of the document text. Lets avoid them and instead
->> expand in place for better readability.
->>
->> Suggested-by: Paul Barker <paul.barker.ct@bp.renesas.com>
->> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
->> ---
->>  doc/develop/devicetree/control.rst | 24 ++++++++++++------------
->>  1 file changed, 12 insertions(+), 12 deletions(-)
->>
->> diff --git a/doc/develop/devicetree/control.rst b/doc/develop/devicetr=
-ee/control.rst
->> index c94d84192b71..4cc1457d4ea8 100644
->> --- a/doc/develop/devicetree/control.rst
->> +++ b/doc/develop/devicetree/control.rst
->> @@ -36,10 +36,10 @@ What is a Flattened Devicetree?
->>  -------------------------------
->> =20
->>  An fdt can be specified in source format as a text file. To read abou=
-t
->> -the fdt syntax, take a look at the specification (dtspec_).
->> +the fdt syntax, take a look at `the devicetree specification`_.
->> =20
->> -There is also a mailing list (dtlist_) for the compiler and associate=
-d
->> -tools.
->> +There is also a `devicetree compiler mailing list`_ for the compiler =
-and
->> +associated tools.
->> =20
->>  In case you are wondering, OF stands for Open Firmware. This follows =
-the
->>  convention used in Linux.
->> @@ -89,7 +89,7 @@ Failing that, you could write one from scratch yours=
-elf!
->>  Resyncing with devicetree-rebasing
->>  ----------------------------------
->> =20
->> -The devicetee-rebasing repository (dtrepo_) maintains a fork cum mirr=
-or copy of
->> +The `devicetree-rebasing repository`_ maintains a fork cum mirror cop=
-y of
->>  devicetree files along with the bindings synced at every Linux kernel=
- major
->>  release or intermediate release candidates. The U-Boot maintainers re=
-gularly
->>  sync the `dts/upstream/` subtree from the devicetree-rebasing repo wh=
-enever
->> @@ -118,7 +118,7 @@ as `arch/<arch>/dts/<name>.dts`. To select that ad=
-d `# CONFIG_OF_UPSTREAM is not
->>  set` and set `DEFAULT_DEVICE_TREE=3D<name>` when prompted by Kconfig.=
-
->> =20
->>  This should include your CPU or SoC's devicetree file. On top of that=
- any U-Boot
->> -specific tweaks (see: dttweaks_) can be made for your board.
->> +specific tweaks (see: :ref:`dttweaks`) can be made for your board.
->> =20
->>  If `OF_EMBED` is selected by Kconfig, then it will be picked up and b=
-uilt into
->>  the U-Boot image (including u-boot.bin). This is suitable for debuggi=
-ng
->> @@ -243,7 +243,7 @@ Dependencies
->> =20
->>  The DT schema project must be installed in order to validate the DT s=
-chema
->>  binding documents and validate DTS files using the DT schema. For ins=
-tallation
->> -instructions, refer to the DT schema project page (dtschema_).
->> +instructions, refer to the `DT schema project page`_.
->> =20
->>  Several executables (dt-doc-validate, dt-mk-schema, dt-validate) will=
- be
->>  installed. Ensure they are in your PATH (~/.local/bin by default).
->> @@ -333,10 +333,10 @@ used it before Linux (e.g. snow). The two projec=
-ts developed in parallel
->>  and there are still some differences in the bindings for certain boar=
-ds.
->>  While there has been discussion of having a separate repository for d=
-evicetree
->>  files, in practice the Linux kernel Git repository has become the pla=
-ce where
->> -these are stored, with U-Boot taking copies via devicetree-rebasing r=
-epo
->> -(see: dtrepo_) and adding tweaks with u-boot.dtsi files.
->> +these are stored, with U-Boot taking copies via
->> +`devicetree-rebasing repository`_ and adding tweaks with u-boot.dtsi =
-files.
->> =20
->> -.. _dtspec: https://www.devicetree.org/specifications/
->> -.. _dtlist: https://www.spinics.net/lists/devicetree-compiler/
->> -.. _dtrepo: https://git.kernel.org/pub/scm/linux/kernel/git/devicetre=
-e/devicetree-rebasing.git
->> -.. _dtschema: https://github.com/devicetree-org/dt-schema/tree/main
->> +.. _the devicetree specification: https://www.devicetree.org/specific=
-ations/
->> +.. _devicetree compiler mailing list: https://www.spinics.net/lists/d=
-evicetree-compiler/
->> +.. _devicetree-rebasing repository: https://git.kernel.org/pub/scm/li=
-nux/kernel/git/devicetree/devicetree-rebasing.git
->> +.. _DT schema project page: https://github.com/devicetree-org/dt-sche=
-ma/tree/main
+On 18/03/2024 14:59, Marek Vasut wrote:
+> Enable OF_UPSTREAM to use upstream DT and add renesas/ prefix to the
+> DEFAULT_DEVICE_TREE and OF_LIST. And thereby directly build DTB from
+> dts/upstream/src/ including *-u-boot.dtsi files from arch/$(ARCH)/dts/
+> directory.
 >=20
-> Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+> The configuration update has been done using the following script:
+> ```
+> sed -i '/^CONFIG_DEFAULT_DEVICE_TREE/ s@=3D"@&renesas/@' `git grep -li =
+renesas configs`
+> sed -i '/^CONFIG_OF_LIST/ s@r8a@renesas/&@g' `git grep -li renesas conf=
+igs`
+> ```
 >=20
+> There are SoCs which are not included in this patch. The 32bit SoCs
+> require further infrastructure work. R8A779H0 is coming during the
+> next upstream DT synchronization cycle as it is not included in
+> current upstream DTs yet.
+>=20
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
-There are no comments from anyone else, but this hasn't hit the next
-branch yet so I'm sending a gentle ping.
+Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+    (for RZ/G2L only)
+
+Do we also plan to drop the corresponding .dts & .dtsi files from
+arch/arm/dts?
+
+Thanks,
 
 --=20
 Paul Barker
---------------osSpvGRI8WL4II6cyr3o8rQX
+
+--------------eQHSt40thCdrNFc1GBklfu7T
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -259,21 +182,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------osSpvGRI8WL4II6cyr3o8rQX--
+--------------eQHSt40thCdrNFc1GBklfu7T--
 
---------------S064uW105EAQo01aNuyjXfJJ--
+--------------0hv1Xt3JxaEWBX0F0nfx0Gaz--
 
---------------QEP8Mp9Lp254ZfijPa0wUsei
+--------------vSMvOWME5L4uI8S0XgzE9luz
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZfiDCAUDAAAAAAAKCRDbaV4Vf/JGve/J
-AQCk1lAwArbAPnF3MwIUxCFUsnJ8GesT2E5ByxcNYiw7VQD/cyc4n2ybu5eSG0I7++MzqHIWClfH
-Y8DhzGQPLxqa3ww=
-=6ohD
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZfiEvQUDAAAAAAAKCRDbaV4Vf/JGvWWJ
+AQDy9cAi/T4nG0MOuBVPtP4xTDTjxT+qArYE6as2Y3KNaAD/fkVbLewA5ve/BVCFQiL+/3gqbJla
+HSATZisZXjx4XwA=
+=6Aep
 -----END PGP SIGNATURE-----
 
---------------QEP8Mp9Lp254ZfijPa0wUsei--
+--------------vSMvOWME5L4uI8S0XgzE9luz--
