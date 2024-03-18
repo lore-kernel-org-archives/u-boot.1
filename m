@@ -4,49 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CF64C54E5D
-	for <u-boot@archiver.kernel.org>; Mon, 18 Mar 2024 18:15:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0436FC54E58
+	for <u-boot@archiver.kernel.org>; Mon, 18 Mar 2024 19:36:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5854C87FF0;
-	Mon, 18 Mar 2024 19:15:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
+	by phobos.denx.de (Postfix) with ESMTP id 33EC887BC9;
+	Mon, 18 Mar 2024 20:35:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id D2D3E87FF1; Mon, 18 Mar 2024 19:15:33 +0100 (CET)
-Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
- [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id 3C6E587F0A
- for <u-boot@lists.denx.de>; Mon, 18 Mar 2024 19:15:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-IronPort-AV: E=Sophos;i="6.07,134,1708354800"; 
- d="asc'?scan'208";a="198218119"
-Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie5.idc.renesas.com with ESMTP; 19 Mar 2024 03:15:29 +0900
-Received: from [10.226.92.78] (unknown [10.226.92.78])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id 0885D4046C0E;
- Tue, 19 Mar 2024 03:15:26 +0900 (JST)
-Message-ID: <6071517a-6c6d-41f3-895b-29abcfea78a3@bp.renesas.com>
-Date: Mon, 18 Mar 2024 18:15:25 +0000
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="dVVWAwVa";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 2F89187F0A; Mon, 18 Mar 2024 20:35:57 +0100 (CET)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 5DE28879E8
+ for <u-boot@lists.denx.de>; Mon, 18 Mar 2024 20:35:55 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ptosi@google.com
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-513a08f2263so4915636e87.3
+ for <u-boot@lists.denx.de>; Mon, 18 Mar 2024 12:35:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=google.com; s=20230601; t=1710790554; x=1711395354; darn=lists.denx.de;
+ h=content-transfer-encoding:content-disposition:mime-version
+ :message-id:subject:cc:to:from:date:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=n+4dPW9inF4sGTDbNSx6omyqt1ELiq/g4Amr8Sh4eMw=;
+ b=dVVWAwVaV7xOiQQKITIJTJBJZyQgWzgGs2cjzWRTue+byK0gTq34STgBtvyYum+nBL
+ PY8FG4VwqEHHg07t7LxMCl6PV7oti+lG7snwfGcHyFOQle5UX1BWaWcNcdpfuSNcphzi
+ lQFEj5bqdjhlpYu4bWAxfrQ1Y6LR2JDWQI2BABzEl6xfeE4dUZ05l0wXswDDEyabLvCs
+ DSpdbZFnEgcyIXjaVtvaeWiY/hytuMkUyU9u6rEed4e9u3Sqfw26iglAYpaVFhrcvzsH
+ IJsLmCUl5SGLp3+K21EmeMRt1WYCzfPC72tzzovn7wT8cTdwpUSZGwoT9+PXJp7uM96m
+ oAhg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710790554; x=1711395354;
+ h=content-transfer-encoding:content-disposition:mime-version
+ :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=n+4dPW9inF4sGTDbNSx6omyqt1ELiq/g4Amr8Sh4eMw=;
+ b=CxgmGpfP1RgdGD3xgKJ1JbxFfkAWHLPa+VvxZCC518SmNMsGA/YSe7G7zpJdqkcBeA
+ p6Hn7xZA3nuuVWlnuh/BAGrVcpouKcp6KWCiH9600z6qFvtZKHVSxdKOhGaoetAalp8j
+ 6z0m1SfeoPbe6Mrn4Hc9ghSITRRwFsYY84GGi08zNUeup00ha8KRvVkFX5MDzqloXC+x
+ gImy9TK2tK4dW9tGNuRnTUr8fOYoCvU3co46hMbaUwnds4SWFT6noizGwOPNIDYZQ9h8
+ VDusfmHX5txA4JTFbMlKXwu6pH8gnzKW2S5ClbqIzFm/TWbwi9dt2zKZ0nkfqHK0AeaH
+ jdcQ==
+X-Gm-Message-State: AOJu0YwGMLrBe7NFDKZ7PAL4BnQy4F6aGbkJf3hjqpJJ8/STKydTgwmh
+ BheCq+VsDQ4I4Mb9anw+g5HPtFqNwzLQW25go5B0tU641o9Ya+z5Kx1NnpshCb56jvPBgINQ9Qd
+ x/Q==
+X-Google-Smtp-Source: AGHT+IFoebjmnvZcNQasUWb0eQ1k9ziwq3IZthManuViR3oUOBwcldwPdCwO7cxGnwyOJIY3548W+Q==
+X-Received: by 2002:ac2:57c5:0:b0:513:bf20:d8b2 with SMTP id
+ k5-20020ac257c5000000b00513bf20d8b2mr278702lfo.65.1710790554158; 
+ Mon, 18 Mar 2024 12:35:54 -0700 (PDT)
+Received: from google.com (64.227.90.34.bc.googleusercontent.com.
+ [34.90.227.64]) by smtp.gmail.com with ESMTPSA id
+ xj4-20020a170906db0400b00a46aba003eesm2736097ejb.215.2024.03.18.12.35.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 18 Mar 2024 12:35:53 -0700 (PDT)
+Date: Mon, 18 Mar 2024 19:35:49 +0000
+From: =?utf-8?Q?Pierre-Cl=C3=A9ment?= Tosi <ptosi@google.com>
+To: u-boot@lists.denx.de
+Cc: Marc Zyngier <maz@kernel.org>, Fabio Estevam <festevam@gmail.com>, 
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH] arm64: Fix map_range() not splitting mapped blocks
+Message-ID: <43haokus4jdxguk4arig5tsqcgq2wbezwpbj7oti6pdkvrfual@wa7vz2iypcv5>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] ARM: dts: renesas: Switch to using upstream DT on
- 64bit Renesas SoCs
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Adam Ford <aford173@gmail.com>, Biju Das <biju.das.jz@bp.renesas.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Ralph Siemsen <ralph.siemsen@linaro.org>, Tom Rini <trini@konsulko.com>
-References: <20240318145958.8099-1-marek.vasut+renesas@mailbox.org>
- <20240318145958.8099-2-marek.vasut+renesas@mailbox.org>
-Content-Language: en-GB
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-Organization: Renesas Electronics Corporation
-In-Reply-To: <20240318145958.8099-2-marek.vasut+renesas@mailbox.org>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------vSMvOWME5L4uI8S0XgzE9luz"
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,140 +91,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------vSMvOWME5L4uI8S0XgzE9luz
-Content-Type: multipart/mixed; boundary="------------0hv1Xt3JxaEWBX0F0nfx0Gaz";
- protected-headers="v1"
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Adam Ford <aford173@gmail.com>, Biju Das <biju.das.jz@bp.renesas.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Ralph Siemsen <ralph.siemsen@linaro.org>, Tom Rini <trini@konsulko.com>
-Message-ID: <6071517a-6c6d-41f3-895b-29abcfea78a3@bp.renesas.com>
-Subject: Re: [PATCH 2/2] ARM: dts: renesas: Switch to using upstream DT on
- 64bit Renesas SoCs
-References: <20240318145958.8099-1-marek.vasut+renesas@mailbox.org>
- <20240318145958.8099-2-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20240318145958.8099-2-marek.vasut+renesas@mailbox.org>
+The implementation of map_range() creates the requested mapping by
+walking the page tables, iterating over multiple PTEs and/or descending
+into existing table mappings as needed. When doing so, it assumes any
+pre-existing valid PTE to be a table mapping. This assumption is wrong
+if the platform code attempts to successively map two overlapping ranges
+where the latter intersects a block mapping created for the former.
 
---------------0hv1Xt3JxaEWBX0F0nfx0Gaz
-Content-Type: multipart/mixed; boundary="------------eQHSt40thCdrNFc1GBklfu7T"
+As a result, map_range() treats the existing block mapping as a table
+mapping and descends into it i.e. starts interpreting the
+previously-mapped range as an array of PTEs, writing to them and
+potentially even descending further (extra fun with MMIO ranges!).
 
---------------eQHSt40thCdrNFc1GBklfu7T
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Instead, pass any valid non-table mapping to split_block(), which
+ensures that it actually was a block mapping (calls panic() otherwise)
+before splitting it.
 
-On 18/03/2024 14:59, Marek Vasut wrote:
-> Enable OF_UPSTREAM to use upstream DT and add renesas/ prefix to the
-> DEFAULT_DEVICE_TREE and OF_LIST. And thereby directly build DTB from
-> dts/upstream/src/ including *-u-boot.dtsi files from arch/$(ARCH)/dts/
-> directory.
->=20
-> The configuration update has been done using the following script:
-> ```
-> sed -i '/^CONFIG_DEFAULT_DEVICE_TREE/ s@=3D"@&renesas/@' `git grep -li =
-renesas configs`
-> sed -i '/^CONFIG_OF_LIST/ s@r8a@renesas/&@g' `git grep -li renesas conf=
-igs`
-> ```
->=20
-> There are SoCs which are not included in this patch. The 32bit SoCs
-> require further infrastructure work. R8A779H0 is coming during the
-> next upstream DT synchronization cycle as it is not included in
-> current upstream DTs yet.
->=20
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Fixes: 41e2787f5ec4 ("arm64: Reduce add_map() complexity")
+Signed-off-by: Pierre-Clément Tosi <ptosi@google.com>
+---
+ arch/arm/cpu/armv8/cache_v8.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
-    (for RZ/G2L only)
+diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
+index 697334086f..57d06f0575 100644
+--- a/arch/arm/cpu/armv8/cache_v8.c
++++ b/arch/arm/cpu/armv8/cache_v8.c
+@@ -326,6 +326,8 @@ static void map_range(u64 virt, u64 phys, u64 size, int level,
+ 		/* Going one level down */
+ 		if (pte_type(&table[i]) == PTE_TYPE_FAULT)
+ 			set_pte_table(&table[i], create_table());
++		else if (pte_type(&table[i]) != PTE_TYPE_TABLE)
++			split_block(&table[i], level);
+ 
+ 		next_table = (u64 *)(table[i] & GENMASK_ULL(47, PAGE_SHIFT));
+ 		next_size = min(map_size - (virt & (map_size - 1)), size);
+-- 
+2.44.0.291.gc1ea87d7ee-goog
 
-Do we also plan to drop the corresponding .dts & .dtsi files from
-arch/arm/dts?
 
-Thanks,
-
---=20
-Paul Barker
-
---------------eQHSt40thCdrNFc1GBklfu7T
-Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
-Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
-
------BEGIN PGP PUBLIC KEY BLOCK-----
-
-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3D
-=3DsIIN
------END PGP PUBLIC KEY BLOCK-----
-
---------------eQHSt40thCdrNFc1GBklfu7T--
-
---------------0hv1Xt3JxaEWBX0F0nfx0Gaz--
-
---------------vSMvOWME5L4uI8S0XgzE9luz
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZfiEvQUDAAAAAAAKCRDbaV4Vf/JGvWWJ
-AQDy9cAi/T4nG0MOuBVPtP4xTDTjxT+qArYE6as2Y3KNaAD/fkVbLewA5ve/BVCFQiL+/3gqbJla
-HSATZisZXjx4XwA=
-=6Aep
------END PGP SIGNATURE-----
-
---------------vSMvOWME5L4uI8S0XgzE9luz--
+-- 
+Pierre
