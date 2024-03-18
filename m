@@ -4,56 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 216F4C54E58
-	for <u-boot@archiver.kernel.org>; Mon, 18 Mar 2024 15:17:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3266BC54E5D
+	for <u-boot@archiver.kernel.org>; Mon, 18 Mar 2024 16:11:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F79387FE0;
-	Mon, 18 Mar 2024 16:17:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 4738F87D66;
+	Mon, 18 Mar 2024 17:11:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="tO/K7PEd";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="B7EJzie5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C778987FE0; Mon, 18 Mar 2024 16:17:36 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 20CA187E67; Mon, 18 Mar 2024 17:11:40 +0100 (CET)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E8C787F5E
- for <u-boot@lists.denx.de>; Mon, 18 Mar 2024 16:17:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8F14787D66
+ for <u-boot@lists.denx.de>; Mon, 18 Mar 2024 17:11:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=conor@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 4AA9260C54;
- Mon, 18 Mar 2024 15:17:32 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 59893C433C7;
- Mon, 18 Mar 2024 15:17:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1710775051;
- bh=VuSwf2Yr/QFYC9SOzpzTepzqb+e668/3bv/HswrbOT8=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=tO/K7PEdCpG6qd6KMi9G8komDrQrA8oujUmS+HR7Fm6GTcUs82wiCuPXZ0aieYVtd
- e/ciUGhhx+gnlZdmU99F4wYTcG2VLqCcKDDu4XL4QByR0ZjkmnVGrpXAghRhU6S1hl
- KBqltHGjB0hnvW5iiLPK6IGNuRBYesd6iYDOWB9MMCptxS3bsCK4RUtVa1vxNM24p0
- oAzZktFMy1tAW7WXahEv+fpxKSMOTfsJZgG+WKH0L5SANNpiViwNA2a61CYb2xdUPW
- z9OA53c7/3bhefA7JoHNLK5GRrCy2tFIfGPY5dVsOlJ1rG04jWmZ2qid3iqiwSWTYk
- DCwl1ZSrPMJyw==
-From: Conor Dooley <conor@kernel.org>
-To: u-boot@lists.denx.de
-Cc: conor@kernel.org, Conor Dooley <conor.dooley@microchip.com>,
- Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
- Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [PATCH v1 2/2] riscv: support extension probing using riscv,
- isa-extensions
-Date: Mon, 18 Mar 2024 15:16:03 +0000
-Message-ID: <20240318151604.865025-4-conor@kernel.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240318151604.865025-2-conor@kernel.org>
-References: <20240318151604.865025-2-conor@kernel.org>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ghidoliemanuele@gmail.com
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-a46bd90e696so74125866b.0
+ for <u-boot@lists.denx.de>; Mon, 18 Mar 2024 09:11:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1710778297; x=1711383097; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:content-language:references
+ :cc:to:subject:user-agent:mime-version:date:message-id:from:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=9Iq2buhSMcDNjIiADntnsvaScNb7INWKxZiNulIelFk=;
+ b=B7EJzie5nM40i0XyUpox4cSNFsv8Mph0cOkMJDU+FFp/zye812JpzLsQb9K2we3MeV
+ LUUY5LpU6N2IRvZkpl/PexRqp4YCnrA9q5qpBOZlnshmBl0D9wlIXGTyWBt/UBeFR5hI
+ VSiXT6gwk9hXDTn6MTJ0gUUPesXCeIWTIo+FLKMc5tWqJUyox01Uuhnn/6OTJlVpDheS
+ B8t11Kq8GxhYhCHr/a3A8v+j+Qn5bO7+WC4QTRQDFnvEeCJsxKUi2lqyjLoasi3Fx3UY
+ AduumJ9AQUQl4e+FXqMd5DMrsIyERnOn6t0bc833AwbuKHsPIWXYTnric7jyTJL2W2K6
+ gCUQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710778297; x=1711383097;
+ h=content-transfer-encoding:in-reply-to:content-language:references
+ :cc:to:subject:user-agent:mime-version:date:message-id:from
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=9Iq2buhSMcDNjIiADntnsvaScNb7INWKxZiNulIelFk=;
+ b=OpBViXS70wBX4vHgD5N0sh/+N4O+YU8oxSLhH8B4y9aZHcNM+3Swl6e+SrtYYXdjgc
+ MQB/BOwV005tL+dqvrJ8DnsZew8yub0vyvcsjzzDK2vmoZsBTRTU9JIcoLeabk8fROMB
+ kWXlv5TuxYc0RQwajh1TRvHfuoJ64scECffgaQZNGCU5dmkBQLIW4blg8T1fRj0RffsQ
+ zcbhaeFr9OvGBuXU8ihdma+7v2i03OxBD98tX17mxgDZzdzmB73qDBOCLRcA8Ncm2sS3
+ 9ytet/VgMxJSGufXdo4UM0w/nV8Ox4EWW667FXdDyLnUJFmdm6S2hutMRx7JivC600XG
+ gYfA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXyhF50AB3arUfYEmFbojVtBX0iNK9i1j1uic6Z5Ebn5bijPwHwJRsotiy9997QBBWtyL85lbegcQHqWra982cSzmn9bw==
+X-Gm-Message-State: AOJu0YzV+kPGq6abARLwjZ93QCUpQfjLQAySm6jTjo6zGT/uevLnnBJn
+ MkLohaRi+LK+nCzGQzXFZnQ7Ow4YnmdgWc2aoAtSIcF2rs4g2B+P
+X-Google-Smtp-Source: AGHT+IEiMEJXSwekLBEFn/7Ony+dLrrJ2jjdWiJlk8fsYImQhxXDkQ02F9HeQX144IGBTYUNIcDe9Q==
+X-Received: by 2002:a05:6402:c47:b0:565:7b88:1cff with SMTP id
+ cs7-20020a0564020c4700b005657b881cffmr7270154edb.11.1710778296674; 
+ Mon, 18 Mar 2024 09:11:36 -0700 (PDT)
+Received: from ?IPV6:2001:b07:aac:705d:d28b:f211:5934:fe23?
+ ([2001:b07:aac:705d:d28b:f211:5934:fe23])
+ by smtp.gmail.com with ESMTPSA id
+ n8-20020a056402434800b00567ed79ba53sm4669799edc.67.2024.03.18.09.11.16
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 18 Mar 2024 09:11:17 -0700 (PDT)
+From: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
+X-Google-Original-From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
+Message-ID: <fdcd46d9-ec93-48ce-9be7-86a3662867bb@toradex.com>
+Date: Mon, 18 Mar 2024 17:11:16 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: imx7 issues with Secure and Non-Secure boot mode
+To: Fabio Estevam <festevam@gmail.com>, u-boot@lists.denx.de,
+ Breno Matheus Lima <brenomatheus@gmail.com>,
+ Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Cc: Marek Vasut <marex@denx.de>, Tobias Junghans <tobias.junghans@veyon.io>,
+ igor.opaniuk@gmail.com, Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Peng Fan <peng.fan@nxp.com>
+References: <4b64a9de-a840-4065-a530-f81155b4b9f2@toradex.com>
+Content-Language: en-US
+In-Reply-To: <4b64a9de-a840-4065-a530-f81155b4b9f2@toradex.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,116 +101,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Conor Dooley <conor.dooley@microchip.com>
+On 07/03/2024 10:26, Emanuele Ghidoli wrote:
+> Hello,
+> 
+> I'm currently facing issues with our board, Colibri-imx7,
+> regarding its behavior in different boot modes:
+> 
+> - Secure Mode (bootm_boot_mode=sec in U-Boot):
+>   When running Linux in secure mode, the idle time management does not function
+>   properly. The following error message is displayed during boot: 
+>   "CPUidle arm: CPU 0 failed to init idle CPU ops".
+> 
+> - Non-Secure Mode (bootm_boot_mode=nonsec in U-Boot):
+>   In non-secure mode, the caam_jr fails to initialize correctly,
+>   preventing the utilization of the hardware random number generation. 
+>   The error message shown during boot is: 
+>   "caam_jr 30901000.jr: failed to flush job ring before reset".
+> 
+> I have conducted tests using both mainline and 6.1 stable versions,
+> with consistent results.
+> 
+> I have also reviewed the following threads for potential solutions:
+> 
+>  - https://lore.kernel.org/u-boot/2536787.mZni4QDSI2@crypto/
+>  - https://lore.kernel.org/u-boot/CAByghJZn8d91uFr5JXSR=jXcfU4engZP_=buOk7MNNjaVeigLA@mail.gmail.com/
+>  - https://lore.kernel.org/all/20220608170223.1536594-1-festevam@denx.de/T/
+> 
+> The first thread leave me thinking the only solution is to use OPTEE,
+> but the last email is without any answer.
+> So, I am considering the utilization of OPTEE, as it seems it might address 
+> the issues discussed in the threads.
+> Could this configuration potentially resolve my current issues?
+> 
+> Your advice would be greatly appreciated.
+> 
+> Kind regards,
+> 
+> Emanuele Ghidoli
+Hello,
+we are willing to use iMX7 without OP-TEE.
 
-A new property has been added, with an extensive rationale at [1], that
-can be used in place of "riscv,isa" to indicate what extensions are
-supported by a given platform that is a list of strings rather than a
-single string. There are some differences between the new property,
-"riscv,isa-extensions" and the incumbent "riscv,isa" - chief among them
-for the sake of parsing being the list of strings, as opposed to a
-string. Another advantage is strictly defined meanings for each string
-in a dt-binding, rather than deriving meaning from RVI standards. This
-will likely to some divergence over time, but U-Boot's current use of
-extension detection is very limited - there are just four callsites of
-supports_extension() in mainline U-Boot.
+I saw that this patch was reverted, cause it is supposed that OPTEE is always used on iMX7:
+22191ac35344 ("drivers/crypto/fsl: assign job-rings to non-TrustZone")
 
-These checks are limited to two checks for FPU support and two checks
-for "s" and "u". "s" and "u" are not supported by the new property, but
-they were also not permitted in "riscv,isa". These checks are only
-meaningful (or run) in M-Mode, in which case supports_extension() does
-not parse the devicetree anyway.
+What do you think if I propose a slightly different version where 
+I put the modifications conditionally under an U-Boot config?
 
-Add support for the new property in U-Boot, prioritising it, before
-falling back to the, now deprecated, "riscv,isa" property if it is not
-present.
-
-Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
----
-I moved the kernel devicetrees to use the new properties, I'd do the
-same here, but I'd rather just move things to use dt-rebasing instead,
-where possible.
----
- arch/riscv/cpu/cpu.c | 56 +++++++++++++++++++++++++++-----------------
- 1 file changed, 35 insertions(+), 21 deletions(-)
-
-diff --git a/arch/riscv/cpu/cpu.c b/arch/riscv/cpu/cpu.c
-index 99083e11df..affe70081b 100644
---- a/arch/riscv/cpu/cpu.c
-+++ b/arch/riscv/cpu/cpu.c
-@@ -38,9 +38,10 @@ static inline bool supports_extension(char ext)
- #if CONFIG_IS_ENABLED(RISCV_MMODE)
- 	return csr_read(CSR_MISA) & (1 << (ext - 'a'));
- #elif CONFIG_CPU
-+	char sext[2] = {ext};
- 	struct udevice *dev;
- 	const char *isa;
--	int i;
-+	int ret, i;
- 
- 	uclass_find_first_device(UCLASS_CPU, &dev);
- 	if (!dev) {
-@@ -48,27 +49,40 @@ static inline bool supports_extension(char ext)
- 		return false;
- 	}
- 
-+	ret = dev_read_stringlist_search(dev, "riscv,isa-extensions", sext);
-+	if (ret >= 0)
-+		return true;
-+
-+	/*
-+	 * Only if the property is not found (ENODATA) is the fallback to
-+	 * riscv,isa used, otherwise the extension is not present in this
-+	 * CPU.
-+	 */
-+	if (ret != -ENODATA)
-+		return false;
-+
- 	isa = dev_read_string(dev, "riscv,isa");
--	if (isa) {
--		/*
--		 * skip the first 4 characters (rv32|rv64)
--		 */
--		for (i = 4; i < sizeof(isa); i++) {
--			switch (isa[i]) {
--			case 's':
--			case 'x':
--			case 'z':
--			case '_':
--			case '\0':
--				/*
--				 * Any of these characters mean the single
--				 * letter extensions have all been consumed.
--				 */
--				return false;
--			default:
--				if (isa[i] == ext)
--					return true;
--			}
-+	if (!isa)
-+		return false;
-+
-+	/*
-+	 * Skip the first 4 characters (rv32|rv64).
-+	 */
-+	for (i = 4; i < sizeof(isa); i++) {
-+		switch (isa[i]) {
-+		case 's':
-+		case 'x':
-+		case 'z':
-+		case '_':
-+		case '\0':
-+			/*
-+			 * Any of these characters mean the single
-+			 * letter extensions have all been consumed.
-+			 */
-+			return false;
-+		default:
-+			if (isa[i] == ext)
-+				return true;
- 		}
- 	}
- 
--- 
-2.43.0
-
+Kind regards,
+Emanuele
