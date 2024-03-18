@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0436FC54E58
-	for <u-boot@archiver.kernel.org>; Mon, 18 Mar 2024 19:36:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3882C54E5D
+	for <u-boot@archiver.kernel.org>; Mon, 18 Mar 2024 19:47:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 33EC887BC9;
-	Mon, 18 Mar 2024 20:35:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id 352E588001;
+	Mon, 18 Mar 2024 20:47:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="dVVWAwVa";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eWDlae67";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F89187F0A; Mon, 18 Mar 2024 20:35:57 +0100 (CET)
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [IPv6:2a00:1450:4864:20::130])
+ id 0204788008; Mon, 18 Mar 2024 20:47:13 +0100 (CET)
+Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
+ [IPv6:2607:f8b0:4864:20::102e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5DE28879E8
- for <u-boot@lists.denx.de>; Mon, 18 Mar 2024 20:35:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C89CE87F41
+ for <u-boot@lists.denx.de>; Mon, 18 Mar 2024 20:47:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ptosi@google.com
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-513a08f2263so4915636e87.3
- for <u-boot@lists.denx.de>; Mon, 18 Mar 2024 12:35:55 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x102e.google.com with SMTP id
+ 98e67ed59e1d1-29f8ae4eae5so395456a91.0
+ for <u-boot@lists.denx.de>; Mon, 18 Mar 2024 12:47:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1710790554; x=1711395354; darn=lists.denx.de;
- h=content-transfer-encoding:content-disposition:mime-version
- :message-id:subject:cc:to:from:date:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1710791228; x=1711396028; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=n+4dPW9inF4sGTDbNSx6omyqt1ELiq/g4Amr8Sh4eMw=;
- b=dVVWAwVaV7xOiQQKITIJTJBJZyQgWzgGs2cjzWRTue+byK0gTq34STgBtvyYum+nBL
- PY8FG4VwqEHHg07t7LxMCl6PV7oti+lG7snwfGcHyFOQle5UX1BWaWcNcdpfuSNcphzi
- lQFEj5bqdjhlpYu4bWAxfrQ1Y6LR2JDWQI2BABzEl6xfeE4dUZ05l0wXswDDEyabLvCs
- DSpdbZFnEgcyIXjaVtvaeWiY/hytuMkUyU9u6rEed4e9u3Sqfw26iglAYpaVFhrcvzsH
- IJsLmCUl5SGLp3+K21EmeMRt1WYCzfPC72tzzovn7wT8cTdwpUSZGwoT9+PXJp7uM96m
- oAhg==
+ bh=uqr5Hy8cHPMGsKRziBoORXw8BousbvRVUnFMYlBD+i8=;
+ b=eWDlae67wxGBHQFnJIhitRDSCHMIPlksBds13FEtBb41q4XsTQLa/ecQBdW74R/TB4
+ bROoRFEy+ZgAFgQwCg/214QCsnvYUGOClIuCh91WoSY4PW+0V42AlnkXAzioxFoU6zi6
+ JG2e61Vc79E6n/wByi68LBrXiZTSGHrr81Hcum3k/nvMTaVv8XkM6KCFT5f8zPQZQnW2
+ 8IEgFFRT8VhwjRUSb7fm7Smd9KX2XiSxw5Iia/+yMrd342xQD26ys6i+y5QXN0k0a50r
+ 2IX6Rjv7rR1JnImvWHrOOJuejtB0hGT0gggRNOStvbVaaoLNH2NfBiIU9nrGYjI0k8X+
+ Qj2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710790554; x=1711395354;
- h=content-transfer-encoding:content-disposition:mime-version
- :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1710791228; x=1711396028;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=n+4dPW9inF4sGTDbNSx6omyqt1ELiq/g4Amr8Sh4eMw=;
- b=CxgmGpfP1RgdGD3xgKJ1JbxFfkAWHLPa+VvxZCC518SmNMsGA/YSe7G7zpJdqkcBeA
- p6Hn7xZA3nuuVWlnuh/BAGrVcpouKcp6KWCiH9600z6qFvtZKHVSxdKOhGaoetAalp8j
- 6z0m1SfeoPbe6Mrn4Hc9ghSITRRwFsYY84GGi08zNUeup00ha8KRvVkFX5MDzqloXC+x
- gImy9TK2tK4dW9tGNuRnTUr8fOYoCvU3co46hMbaUwnds4SWFT6noizGwOPNIDYZQ9h8
- VDusfmHX5txA4JTFbMlKXwu6pH8gnzKW2S5ClbqIzFm/TWbwi9dt2zKZ0nkfqHK0AeaH
- jdcQ==
-X-Gm-Message-State: AOJu0YwGMLrBe7NFDKZ7PAL4BnQy4F6aGbkJf3hjqpJJ8/STKydTgwmh
- BheCq+VsDQ4I4Mb9anw+g5HPtFqNwzLQW25go5B0tU641o9Ya+z5Kx1NnpshCb56jvPBgINQ9Qd
- x/Q==
-X-Google-Smtp-Source: AGHT+IFoebjmnvZcNQasUWb0eQ1k9ziwq3IZthManuViR3oUOBwcldwPdCwO7cxGnwyOJIY3548W+Q==
-X-Received: by 2002:ac2:57c5:0:b0:513:bf20:d8b2 with SMTP id
- k5-20020ac257c5000000b00513bf20d8b2mr278702lfo.65.1710790554158; 
- Mon, 18 Mar 2024 12:35:54 -0700 (PDT)
-Received: from google.com (64.227.90.34.bc.googleusercontent.com.
- [34.90.227.64]) by smtp.gmail.com with ESMTPSA id
- xj4-20020a170906db0400b00a46aba003eesm2736097ejb.215.2024.03.18.12.35.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Mar 2024 12:35:53 -0700 (PDT)
-Date: Mon, 18 Mar 2024 19:35:49 +0000
-From: =?utf-8?Q?Pierre-Cl=C3=A9ment?= Tosi <ptosi@google.com>
-To: u-boot@lists.denx.de
-Cc: Marc Zyngier <maz@kernel.org>, Fabio Estevam <festevam@gmail.com>, 
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH] arm64: Fix map_range() not splitting mapped blocks
-Message-ID: <43haokus4jdxguk4arig5tsqcgq2wbezwpbj7oti6pdkvrfual@wa7vz2iypcv5>
+ bh=uqr5Hy8cHPMGsKRziBoORXw8BousbvRVUnFMYlBD+i8=;
+ b=wF6Be3GSDo8OTWmRmW8fmo2ygxL3jtIQuBgSiD4uQ4NvR5Skrpv7r1ZbISFt/ATMYN
+ Qp5I2bTWdoy52uhdtMajU32bR83pQqOuBnvisbltOvqhFGXHy6we9nTwo76A2/wxKzsI
+ 6FXmsjbjGrDvA60IhAdEtPCLwWqVEooGCbHoN4kzt4q+N+2ebScYY4rhg/osAowQ1iQk
+ +2E5rTAsb8ssNHLRJ4im4TWaqNaOnWlQi3BWJ2W2hspMeManTlAtYfqjRJAd8iCUgZaY
+ JnXDh1cI12/x19ArrUQ5kHCyd8MSP9FmF3+/XCN/Xh/gembe1g1OY4VtnDUqiPAnDO6A
+ cGog==
+X-Gm-Message-State: AOJu0YwO6qkDxXOeJxHWhCF+imceMZ/EVlqNdpXwQZYpcNqc1L+MSerH
+ Z20cSfp//4Te4LHUHoqnq2OmgXWA7S9PWxvDk2MiThIzlZ55vu2LGMkaWgFuMqGbMjozoOK+gsY
+ 26me5uMdNPQ1vbaEVogOA+e62aG8=
+X-Google-Smtp-Source: AGHT+IH6Lu9ULLOS2jpkmOO65FxzZAEoiK3Vu7YjyTZ98vajrWtvoyKPYtpwFJ0ih15+od3q7hCD+WaNx1xCuFTNjAA=
+X-Received: by 2002:a17:90a:b889:b0:29b:780c:c671 with SMTP id
+ o9-20020a17090ab88900b0029b780cc671mr9952855pjr.0.1710791228189; Mon, 18 Mar
+ 2024 12:47:08 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+References: <43haokus4jdxguk4arig5tsqcgq2wbezwpbj7oti6pdkvrfual@wa7vz2iypcv5>
+In-Reply-To: <43haokus4jdxguk4arig5tsqcgq2wbezwpbj7oti6pdkvrfual@wa7vz2iypcv5>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Mon, 18 Mar 2024 16:46:55 -0300
+Message-ID: <CAOMZO5DXy8nuVPx-8uSpcVvyLFSb++S6ad64Gg0MWM3guxGZvw@mail.gmail.com>
+Subject: Re: [PATCH] arm64: Fix map_range() not splitting mapped blocks
+To: =?UTF-8?Q?Pierre=2DCl=C3=A9ment_Tosi?= <ptosi@google.com>
+Cc: u-boot@lists.denx.de, Marc Zyngier <maz@kernel.org>,
+ Tom Rini <trini@konsulko.com>, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>, 
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Hiago De Franco <hiago.franco@toradex.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,44 +91,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The implementation of map_range() creates the requested mapping by
-walking the page tables, iterating over multiple PTEs and/or descending
-into existing table mappings as needed. When doing so, it assumes any
-pre-existing valid PTE to be a table mapping. This assumption is wrong
-if the platform code attempts to successively map two overlapping ranges
-where the latter intersects a block mapping created for the former.
+Hi Pierre,
 
-As a result, map_range() treats the existing block mapping as a table
-mapping and descends into it i.e. starts interpreting the
-previously-mapped range as an array of PTEs, writing to them and
-potentially even descending further (extra fun with MMIO ranges!).
+On Mon, Mar 18, 2024 at 4:35=E2=80=AFPM Pierre-Cl=C3=A9ment Tosi <ptosi@goo=
+gle.com> wrote:
+>
+> The implementation of map_range() creates the requested mapping by
+> walking the page tables, iterating over multiple PTEs and/or descending
+> into existing table mappings as needed. When doing so, it assumes any
+> pre-existing valid PTE to be a table mapping. This assumption is wrong
+> if the platform code attempts to successively map two overlapping ranges
+> where the latter intersects a block mapping created for the former.
+>
+> As a result, map_range() treats the existing block mapping as a table
+> mapping and descends into it i.e. starts interpreting the
+> previously-mapped range as an array of PTEs, writing to them and
+> potentially even descending further (extra fun with MMIO ranges!).
+>
+> Instead, pass any valid non-table mapping to split_block(), which
+> ensures that it actually was a block mapping (calls panic() otherwise)
+> before splitting it.
+>
+> Fixes: 41e2787f5ec4 ("arm64: Reduce add_map() complexity")
+> Signed-off-by: Pierre-Cl=C3=A9ment Tosi <ptosi@google.com>
 
-Instead, pass any valid non-table mapping to split_block(), which
-ensures that it actually was a block mapping (calls panic() otherwise)
-before splitting it.
+This fixes the boot regression on colibri-imx8x.
 
-Fixes: 41e2787f5ec4 ("arm64: Reduce add_map() complexity")
-Signed-off-by: Pierre-Clément Tosi <ptosi@google.com>
----
- arch/arm/cpu/armv8/cache_v8.c | 2 ++
- 1 file changed, 2 insertions(+)
+Thanks a lot for your fix!
 
-diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
-index 697334086f..57d06f0575 100644
---- a/arch/arm/cpu/armv8/cache_v8.c
-+++ b/arch/arm/cpu/armv8/cache_v8.c
-@@ -326,6 +326,8 @@ static void map_range(u64 virt, u64 phys, u64 size, int level,
- 		/* Going one level down */
- 		if (pte_type(&table[i]) == PTE_TYPE_FAULT)
- 			set_pte_table(&table[i], create_table());
-+		else if (pte_type(&table[i]) != PTE_TYPE_TABLE)
-+			split_block(&table[i], level);
- 
- 		next_table = (u64 *)(table[i] & GENMASK_ULL(47, PAGE_SHIFT));
- 		next_size = min(map_size - (virt & (map_size - 1)), size);
--- 
-2.44.0.291.gc1ea87d7ee-goog
-
-
--- 
-Pierre
+Tested-by: Fabio Estevam <festevam@gmail.com>
