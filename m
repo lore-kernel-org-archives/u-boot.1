@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0EBAC54E60
-	for <u-boot@archiver.kernel.org>; Tue, 19 Mar 2024 12:15:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D165C54E60
+	for <u-boot@archiver.kernel.org>; Tue, 19 Mar 2024 12:15:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 37F3D8800F;
-	Tue, 19 Mar 2024 13:14:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A2ED38803E;
+	Tue, 19 Mar 2024 13:14:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zHf2M/Qa";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="c+RfnrSK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E91C287FFA; Tue, 19 Mar 2024 13:14:47 +0100 (CET)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
+ id 1E4A187F30; Tue, 19 Mar 2024 13:14:50 +0100 (CET)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 288BE87F6F
- for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 13:14:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8C01288018
+ for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 13:14:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-33ff53528ceso1791121f8f.0
- for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 05:14:44 -0700 (PDT)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-413f4cb646dso35822445e9.1
+ for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 05:14:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710850483; x=1711455283; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1710850485; x=1711455285; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=U6Ao/BrHGxpD1C9cPv4fRTuqD3AMDzioaQtxFwiQPrk=;
- b=zHf2M/QaINfBAmxJHqdrJXbgAuXxplFARvQZSiGk70sZSCHpokFtdghTo0dWaxaWuB
- qkNgpAYYGIXkIitVBSvXKLMDHqSJyE7d+lEjDJQ/GCDyRJ+ZQK+m3OOPEFUcHs0YlXfT
- sIXK5xLBbDrtPDpFeUJkMLtsTnbFuhvCgco5zUeqdQFyUdt9kyOFjdEE/sYhkzF24Pmg
- xqbyLt+IYLOPQw3ovwtupFG7iMJ1c6uZAzMqLcn5SRxC9mU3PlraXjgwn50hMZz5HvaG
- 5+dmQL5YxnDw8d+ukkiKgcLs+wfGt0mYd2KMN8Dxu/4PDZrAoZ6TwbqkeWPwGAN5Koze
- Ujyw==
+ :reply-to; bh=xuAod5oKulT4ri3qSNk0l+V6KszpmJJYg/GTS2WSqrc=;
+ b=c+RfnrSK9q6IsCKLXMskyEmD6cslV8xEnvjrqPPY2ufgQPtZJMsHvk849K2865mfyI
+ 0hA8EbqC+gNGHQFhH/bznT3N0yBO/94HC46baKx5LhRT8isRJM3E8zxukw/XH13ULeGV
+ OEVm87sbbrm6BwdlrI3GGUCEIL/qTyUMVGK0CHcdjzhKy1mwRHAiSDW2pora0DoawFA0
+ cAqzHLtTYYuRVPSaqxWATdaJfRoqaRNuKKDpzyj8KSaF8shPg+AinF8FgdwDK5bU/ygz
+ 597ur2IVrL0HBkm016XtgPklEm5Tzl2J2hqKkcE7JaROip1KtbQ+dTqC4xVUQYOPzl+3
+ gTMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710850483; x=1711455283;
+ d=1e100.net; s=20230601; t=1710850485; x=1711455285;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=U6Ao/BrHGxpD1C9cPv4fRTuqD3AMDzioaQtxFwiQPrk=;
- b=X/5SCE+YKJOirNwA3/f09fx9quZW+d6lYGU9TacXX5f8FwqAQT7VQF729Y8CULa+iv
- +k2VOMt6XbKvIJI1Br6UCPoDfs/GRzahk4UPSd7hbzCFyVnn5WSQMvfXcU75gvzjxs+c
- 4QqYVKAVzOgRjmCHrpf9nCpCLIZvRiNBV9vYhp+/40sF2Cmv0PyDkOTLrgFbucu0d2FV
- CVr1bwqfSjt3Vx9ecTidOsTNLkK9k6toPKhI+k/I1zvSJJdc0SMpjoxqXrL5EfZFGQPJ
- K5r9oDIxlPUDGmTju8LRp0Ch7KkxhaupRVGE4+ueudWTVCt9Tdp4tWs3nnJrsDvGHh7S
- +MTA==
-X-Gm-Message-State: AOJu0Yyt+GUNWA+RqjiEQ0WfFSiEOM2jdmXcofPpWJ8OvjoSDH3MLtTn
- 70UMCp6D62QocwAuhll1O6qVX5dcuxUiMjt4i/GQi1GVS6GZ+rT8RuAer1Ovh0E=
-X-Google-Smtp-Source: AGHT+IFCF4DBj0KL2wg6nnzPjmSH92GEm6khEZIT08AtG0bKaF5wGD1Pi+nvwVazyXFDsKLiqnYfPA==
-X-Received: by 2002:a5d:6582:0:b0:33e:7c9a:9368 with SMTP id
- q2-20020a5d6582000000b0033e7c9a9368mr9591324wru.63.1710850483658; 
- Tue, 19 Mar 2024 05:14:43 -0700 (PDT)
+ bh=xuAod5oKulT4ri3qSNk0l+V6KszpmJJYg/GTS2WSqrc=;
+ b=JpBnokPNx+d7W5MVREmgHzDhtIcojmRD4Jkx0cviIYp4ymY3Eavon9NCbOJkuSoKts
+ Bd/N2AgZOhGhzmrsfiwYVKC+QFv1uYfJMa42iaq5RH5+iTAPePNC8n+n3bzQaZukpu/V
+ p86BpjsiIa2qf8t7A2vvmfT56qhi6P1ffcYkq7fEACEevMS7rq2VBG8xWvjGlW7h4Fwb
+ 1yoaiSFyNRxNk7uBrtTTImAqLs9cpZ91ncsh2KAuhQf3vTDuJmG/93Og5FKh4MU+iAmZ
+ 8/T+M5XYGgvNmidSqXwrx3LaatVxC6nFA7MffetnEQd8jWwHqr3sQWGsdGuean33t4sY
+ exOg==
+X-Gm-Message-State: AOJu0Yz9EDtolZEbp5CmZGLu/18glKJHLohJ0Z81tz0mZW2V3Dxj2Nhf
+ XYrv1WB3Qg6IJr0+bKZzWaBaXuzwucLdfA0P1UGJ05PLIi5w4tGr6nKmPk8Ycd0=
+X-Google-Smtp-Source: AGHT+IHMR4BhDAhfDu/QX3tiVnsSbmE2R+wK3dwPZQ3S4HsjvWusbdfL3lVKUCLSPGsj7cVNpK04cw==
+X-Received: by 2002:a05:6000:225:b0:341:9055:49b1 with SMTP id
+ l5-20020a056000022500b00341905549b1mr75296wrz.46.1710850484930; 
+ Tue, 19 Mar 2024 05:14:44 -0700 (PDT)
 Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- u8-20020a5d4688000000b0033e3c4e600asm12345792wrq.7.2024.03.19.05.14.42
+ u8-20020a5d4688000000b0033e3c4e600asm12345792wrq.7.2024.03.19.05.14.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Mar 2024 05:14:42 -0700 (PDT)
+ Tue, 19 Mar 2024 05:14:44 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Tue, 19 Mar 2024 12:14:26 +0000
-Subject: [PATCH v3 3/5] usb: gadget: CDC ACM: call usb_gadget_initialize
+Date: Tue, 19 Mar 2024 12:14:27 +0000
+Subject: [PATCH v3 4/5] usb: gadget: UMS: support multiple sector sizes
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240319-b4-qcom-usb-v3-3-09ba1f86d259@linaro.org>
+Message-Id: <20240319-b4-qcom-usb-v3-4-09ba1f86d259@linaro.org>
 References: <20240319-b4-qcom-usb-v3-0-09ba1f86d259@linaro.org>
 In-Reply-To: <20240319-b4-qcom-usb-v3-0-09ba1f86d259@linaro.org>
 To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>, 
@@ -80,13 +80,13 @@ To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
  Sumit Garg <sumit.garg@linaro.org>
 Cc: u-boot@lists.denx.de
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1128;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=13012;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=zOzCrBy5uJTh6xPbLEJbYeWWpo5eW586HYEeAes6w7A=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtSfjevPVn+P4tgmbj/nndu20tmxdQmz7wivffJtrjarx
- /xtDSEyHaUsDIIcDLJiiiziJ5ZZNq29bK+xfcEFmDmsTCBDGLg4BWAi6Z8Y/kf8O3Dwxdr4bbUd
- kl4HBM72v0+dlak0Z8sjniVW6b1LeYIZ/orp/SnjtZh8Q9xlxa2zi1UYl25dXOnw8iD357ktJ2o
- /NqwDAA==
+ bh=ohYgFS9Eq6pC+NVNcS+t4STsablSVa63T0Q9OSlPpvo=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtSfjes3nkv5OimndNs141CVXXv3xPOdmLBMwES75uvq6
+ ATxZddCO0pZGAQ5GGTFFFnETyyzbFp72V5j+4ILMHNYmUCGMHBxCsBEfvAw/NPf8ZqhpdP4eH3q
+ wcbzLHkv361hilM6pp5Q1FLU9utqaw7DP7u5BjUHw3NbjNtz2Ay+bBA7u0T9kNMjcRED3XlrVaY
+ oSgMA
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -105,45 +105,388 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-To actually use the gadget the peripheral driver must be probed and we
-must call g_dnl_clear_detach(). Otherwise acm_stdio_start() will always
-fail to find a UDC on DT platforms.
+UFS storage often uses a 4096-byte sector size, add support for dynamic
+sector sizes based loosely on the Linux implementation.
 
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- drivers/usb/gadget/f_acm.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ cmd/usb_mass_storage.c              |   4 --
+ drivers/usb/gadget/f_mass_storage.c | 101 ++++++++++++++++++++----------------
+ drivers/usb/gadget/storage_common.c |  12 +++--
+ include/usb_mass_storage.h          |   1 -
+ 4 files changed, 65 insertions(+), 53 deletions(-)
 
-diff --git a/drivers/usb/gadget/f_acm.c b/drivers/usb/gadget/f_acm.c
-index de42e0189e8d..ba216128ab27 100644
---- a/drivers/usb/gadget/f_acm.c
-+++ b/drivers/usb/gadget/f_acm.c
-@@ -622,14 +622,23 @@ static void acm_stdio_puts(struct stdio_dev *dev, const char *str)
- }
+diff --git a/cmd/usb_mass_storage.c b/cmd/usb_mass_storage.c
+index a8ddeb494628..751701fe73af 100644
+--- a/cmd/usb_mass_storage.c
++++ b/cmd/usb_mass_storage.c
+@@ -87,12 +87,8 @@ static int ums_init(const char *devtype, const char *devnums_part_str)
+ 		 */
+ 		if (!strchr(devnum_part_str, ':'))
+ 			partnum = 0;
  
- static int acm_stdio_start(struct stdio_dev *dev)
- {
-+	struct udevice *udc;
- 	int ret;
+-		/* f_mass_storage.c assumes SECTOR_SIZE sectors */
+-		if (block_dev->blksz != SECTOR_SIZE)
+-			goto cleanup;
+-
+ 		ums_new = realloc(ums, (ums_count + 1) * sizeof(*ums));
+ 		if (!ums_new)
+ 			goto cleanup;
+ 		ums = ums_new;
+diff --git a/drivers/usb/gadget/f_mass_storage.c b/drivers/usb/gadget/f_mass_storage.c
+index c725aed3f626..d880928044f4 100644
+--- a/drivers/usb/gadget/f_mass_storage.c
++++ b/drivers/usb/gadget/f_mass_storage.c
+@@ -723,14 +723,15 @@ static int do_read(struct fsg_common *common)
+ 	if (lba >= curlun->num_sectors) {
+ 		curlun->sense_data = SS_LOGICAL_BLOCK_ADDRESS_OUT_OF_RANGE;
+ 		return -EINVAL;
+ 	}
+-	file_offset = ((loff_t) lba) << 9;
++	file_offset = ((loff_t)lba) << curlun->blkbits;
  
- 	if (dev->priv) { /* function already exist */
- 		return 0;
+ 	/* Carry out the file reads */
+ 	amount_left = common->data_size_from_cmnd;
+-	if (unlikely(amount_left == 0))
++	if (unlikely(amount_left == 0)) {
+ 		return -EIO;		/* No default reply */
++	}
+ 
+ 	for (;;) {
+ 
+ 		/* Figure out how much we need to read:
+@@ -767,15 +768,15 @@ static int do_read(struct fsg_common *common)
+ 		}
+ 
+ 		/* Perform the read */
+ 		rc = ums[common->lun].read_sector(&ums[common->lun],
+-				      file_offset / SECTOR_SIZE,
+-				      amount / SECTOR_SIZE,
++				      file_offset / curlun->blksize,
++				      amount / curlun->blksize,
+ 				      (char __user *)bh->buf);
+ 		if (!rc)
+ 			return -EIO;
+ 
+-		nread = rc * SECTOR_SIZE;
++		nread = rc * curlun->blksize;
+ 
+ 		VLDBG(curlun, "file read %u @ %llu -> %d\n", amount,
+ 				(unsigned long long) file_offset,
+ 				(int) nread);
+@@ -786,9 +787,9 @@ static int do_read(struct fsg_common *common)
+ 			nread = 0;
+ 		} else if (nread < amount) {
+ 			LDBG(curlun, "partial file read: %d/%u\n",
+ 					(int) nread, amount);
+-			nread -= (nread & 511);	/* Round down to a block */
++			nread -= (nread & (curlun->blksize - 1));	/* Round down to a block */
+ 		}
+ 		file_offset  += nread;
+ 		amount_left  -= nread;
+ 		common->residue -= nread;
+@@ -860,9 +861,9 @@ static int do_write(struct fsg_common *common)
  	}
  
-+	ret = udc_device_get_by_index(0, &udc);
-+	if (ret) {
-+		pr_err("USB init failed: %d\n", ret);
-+		return ret;
-+	}
-+
-+	g_dnl_clear_detach();
-+
- 	ret = g_dnl_register("usb_serial_acm");
- 	if (ret)
- 		return ret;
+ 	/* Carry out the file writes */
+ 	get_some_more = 1;
+-	file_offset = usb_offset = ((loff_t) lba) << 9;
++	file_offset = usb_offset = ((loff_t)lba) << curlun->blkbits;
+ 	amount_left_to_req = common->data_size_from_cmnd;
+ 	amount_left_to_write = common->data_size_from_cmnd;
  
+ 	while (amount_left_to_write > 0) {
+@@ -892,9 +893,9 @@ static int do_write(struct fsg_common *common)
+ 					SS_LOGICAL_BLOCK_ADDRESS_OUT_OF_RANGE;
+ 				curlun->info_valid = 1;
+ 				continue;
+ 			}
+-			amount -= (amount & 511);
++			amount -= (amount & (curlun->blksize - 1));
+ 			if (amount == 0) {
+ 
+ 				/* Why were we were asked to transfer a
+ 				 * partial block? */
+@@ -941,14 +942,14 @@ static int do_write(struct fsg_common *common)
+ 			amount = bh->outreq->actual;
+ 
+ 			/* Perform the write */
+ 			rc = ums[common->lun].write_sector(&ums[common->lun],
+-					       file_offset / SECTOR_SIZE,
+-					       amount / SECTOR_SIZE,
++					       file_offset / curlun->blksize,
++					       amount / curlun->blksize,
+ 					       (char __user *)bh->buf);
+ 			if (!rc)
+ 				return -EIO;
+-			nwritten = rc * SECTOR_SIZE;
++			nwritten = rc * curlun->blksize;
+ 
+ 			VLDBG(curlun, "file write %u @ %llu -> %d\n", amount,
+ 					(unsigned long long) file_offset,
+ 					(int) nwritten);
+@@ -959,9 +960,9 @@ static int do_write(struct fsg_common *common)
+ 				nwritten = 0;
+ 			} else if (nwritten < amount) {
+ 				LDBG(curlun, "partial file write: %d/%u\n",
+ 						(int) nwritten, amount);
+-				nwritten -= (nwritten & 511);
++				nwritten -= (nwritten & (curlun->blksize - 1));
+ 				/* Round down to a block */
+ 			}
+ 			file_offset += nwritten;
+ 			amount_left_to_write -= nwritten;
+@@ -1033,10 +1034,10 @@ static int do_verify(struct fsg_common *common)
+ 	if (unlikely(verification_length == 0))
+ 		return -EIO;		/* No default reply */
+ 
+ 	/* Prepare to carry out the file verify */
+-	amount_left = verification_length << 9;
+-	file_offset = ((loff_t) lba) << 9;
++	amount_left = verification_length << curlun->blkbits;
++	file_offset = ((loff_t) lba) << curlun->blkbits;
+ 
+ 	/* Write out all the dirty buffers before invalidating them */
+ 
+ 	/* Just try to read the requested blocks */
+@@ -1057,14 +1058,14 @@ static int do_verify(struct fsg_common *common)
+ 		}
+ 
+ 		/* Perform the read */
+ 		rc = ums[common->lun].read_sector(&ums[common->lun],
+-				      file_offset / SECTOR_SIZE,
+-				      amount / SECTOR_SIZE,
++				      file_offset / curlun->blksize,
++				      amount / curlun->blksize,
+ 				      (char __user *)bh->buf);
+ 		if (!rc)
+ 			return -EIO;
+-		nread = rc * SECTOR_SIZE;
++		nread = rc * curlun->blksize;
+ 
+ 		VLDBG(curlun, "file read %u @ %llu -> %d\n", amount,
+ 				(unsigned long long) file_offset,
+ 				(int) nread);
+@@ -1074,9 +1075,9 @@ static int do_verify(struct fsg_common *common)
+ 			nread = 0;
+ 		} else if (nread < amount) {
+ 			LDBG(curlun, "partial file verify: %d/%u\n",
+ 					(int) nread, amount);
+-			nread -= (nread & 511);	/* Round down to a sector */
++			nread -= (nread & (curlun->blksize - 1));	/* Round down to a sector */
+ 		}
+ 		if (nread == 0) {
+ 			curlun->sense_data = SS_UNRECOVERED_READ_ERROR;
+ 			curlun->info_valid = 1;
+@@ -1182,9 +1183,9 @@ static int do_read_capacity(struct fsg_common *common, struct fsg_buffhd *bh)
+ 	}
+ 
+ 	put_unaligned_be32(curlun->num_sectors - 1, &buf[0]);
+ 						/* Max logical block */
+-	put_unaligned_be32(512, &buf[4]);	/* Block length */
++	put_unaligned_be32(curlun->blksize, &buf[4]);	/* Block length */
+ 	return 8;
+ }
+ 
+ static int do_read_header(struct fsg_common *common, struct fsg_buffhd *bh)
+@@ -1369,9 +1370,9 @@ static int do_read_format_capacities(struct fsg_common *common,
+ 	buf += 4;
+ 
+ 	put_unaligned_be32(curlun->num_sectors, &buf[0]);
+ 						/* Number of blocks */
+-	put_unaligned_be32(512, &buf[4]);	/* Block length */
++	put_unaligned_be32(curlun->blksize, &buf[4]);	/* Block length */
+ 	buf[4] = 0x02;				/* Current capacity */
+ 	return 12;
+ }
+ 
+@@ -1780,8 +1781,18 @@ static int check_command(struct fsg_common *common, int cmnd_size,
+ 
+ 	return 0;
+ }
+ 
++/* wrapper of check_command for data size in blocks handling */
++static int check_command_size_in_blocks(struct fsg_common *common,
++		int cmnd_size, enum data_direction data_dir,
++		unsigned int mask, int needs_medium, const char *name)
++{
++	common->data_size_from_cmnd <<= common->luns[common->lun].blkbits;
++	return check_command(common, cmnd_size, data_dir,
++			mask, needs_medium, name);
++}
++
+ 
+ static int do_scsi_command(struct fsg_common *common)
+ {
+ 	struct fsg_buffhd	*bh;
+@@ -1864,32 +1875,32 @@ static int do_scsi_command(struct fsg_common *common)
+ 		break;
+ 
+ 	case SC_READ_6:
+ 		i = common->cmnd[4];
+-		common->data_size_from_cmnd = (i == 0 ? 256 : i) << 9;
+-		reply = check_command(common, 6, DATA_DIR_TO_HOST,
+-				      (7<<1) | (1<<4), 1,
+-				      "READ(6)");
++		common->data_size_from_cmnd = (i == 0 ? 256 : i);
++		reply = check_command_size_in_blocks(common, 6, DATA_DIR_TO_HOST,
++						     (7<<1) | (1<<4), 1,
++						     "READ(6)");
+ 		if (reply == 0)
+ 			reply = do_read(common);
+ 		break;
+ 
+ 	case SC_READ_10:
+ 		common->data_size_from_cmnd =
+-				get_unaligned_be16(&common->cmnd[7]) << 9;
+-		reply = check_command(common, 10, DATA_DIR_TO_HOST,
+-				      (1<<1) | (0xf<<2) | (3<<7), 1,
+-				      "READ(10)");
++				get_unaligned_be16(&common->cmnd[7]);
++		reply = check_command_size_in_blocks(common, 10, DATA_DIR_TO_HOST,
++						     (1<<1) | (0xf<<2) | (3<<7), 1,
++						     "READ(10)");
+ 		if (reply == 0)
+ 			reply = do_read(common);
+ 		break;
+ 
+ 	case SC_READ_12:
+ 		common->data_size_from_cmnd =
+-				get_unaligned_be32(&common->cmnd[6]) << 9;
+-		reply = check_command(common, 12, DATA_DIR_TO_HOST,
+-				      (1<<1) | (0xf<<2) | (0xf<<6), 1,
+-				      "READ(12)");
++				get_unaligned_be32(&common->cmnd[6]);
++		reply = check_command_size_in_blocks(common, 12, DATA_DIR_TO_HOST,
++						     (1<<1) | (0xf<<2) | (0xf<<6), 1,
++						     "READ(12)");
+ 		if (reply == 0)
+ 			reply = do_read(common);
+ 		break;
+ 
+@@ -1982,32 +1993,32 @@ static int do_scsi_command(struct fsg_common *common)
+ 		break;
+ 
+ 	case SC_WRITE_6:
+ 		i = common->cmnd[4];
+-		common->data_size_from_cmnd = (i == 0 ? 256 : i) << 9;
+-		reply = check_command(common, 6, DATA_DIR_FROM_HOST,
+-				      (7<<1) | (1<<4), 1,
+-				      "WRITE(6)");
++		common->data_size_from_cmnd = (i == 0 ? 256 : i);
++		reply = check_command_size_in_blocks(common, 6, DATA_DIR_FROM_HOST,
++						     (7<<1) | (1<<4), 1,
++						     "WRITE(6)");
+ 		if (reply == 0)
+ 			reply = do_write(common);
+ 		break;
+ 
+ 	case SC_WRITE_10:
+ 		common->data_size_from_cmnd =
+-				get_unaligned_be16(&common->cmnd[7]) << 9;
+-		reply = check_command(common, 10, DATA_DIR_FROM_HOST,
+-				      (1<<1) | (0xf<<2) | (3<<7), 1,
+-				      "WRITE(10)");
++				get_unaligned_be16(&common->cmnd[7]);
++		reply = check_command_size_in_blocks(common, 10, DATA_DIR_FROM_HOST,
++						     (1<<1) | (0xf<<2) | (3<<7), 1,
++						     "WRITE(10)");
+ 		if (reply == 0)
+ 			reply = do_write(common);
+ 		break;
+ 
+ 	case SC_WRITE_12:
+ 		common->data_size_from_cmnd =
+-				get_unaligned_be32(&common->cmnd[6]) << 9;
+-		reply = check_command(common, 12, DATA_DIR_FROM_HOST,
+-				      (1<<1) | (0xf<<2) | (0xf<<6), 1,
+-				      "WRITE(12)");
++				get_unaligned_be32(&common->cmnd[6]);
++		reply = check_command_size_in_blocks(common, 12, DATA_DIR_FROM_HOST,
++						     (1<<1) | (0xf<<2) | (0xf<<6), 1,
++						     "WRITE(12)");
+ 		if (reply == 0)
+ 			reply = do_write(common);
+ 		break;
+ 
+@@ -2496,9 +2507,9 @@ static struct fsg_common *fsg_common_init(struct fsg_common *common,
+ 
+ 	for (i = 0; i < nluns; i++) {
+ 		common->luns[i].removable = 1;
+ 
+-		rc = fsg_lun_open(&common->luns[i], ums[i].num_sectors, "");
++		rc = fsg_lun_open(&common->luns[i], ums[i].num_sectors, ums->block_dev.blksz, "");
+ 		if (rc)
+ 			goto error_luns;
+ 	}
+ 	common->lun = 0;
+diff --git a/drivers/usb/gadget/storage_common.c b/drivers/usb/gadget/storage_common.c
+index 5674e8fe4940..97dc6b6f729c 100644
+--- a/drivers/usb/gadget/storage_common.c
++++ b/drivers/usb/gadget/storage_common.c
+@@ -268,8 +268,9 @@ struct interrupt_data {
+ struct device_attribute { int i; };
+ #define ETOOSMALL	525
+ 
+ #include <log.h>
++#include <linux/log2.h>
+ #include <usb_mass_storage.h>
+ #include <dm/device_compat.h>
+ 
+ /*-------------------------------------------------------------------------*/
+@@ -289,8 +290,10 @@ struct fsg_lun {
+ 
+ 	u32		sense_data;
+ 	u32		sense_data_info;
+ 	u32		unit_attention_data;
++	unsigned int	blkbits;
++	unsigned int	blksize; /* logical block size of bound block device */
+ 
+ 	struct device	dev;
+ };
+ 
+@@ -565,19 +568,22 @@ static struct usb_gadget_strings	fsg_stringtab = {
+  * the caller must own fsg->filesem for writing.
+  */
+ 
+ static int fsg_lun_open(struct fsg_lun *curlun, unsigned int num_sectors,
+-			const char *filename)
++			unsigned int sector_size, const char *filename)
+ {
+ 	int				ro;
+ 
+ 	/* R/W if we can, R/O if we must */
+ 	ro = curlun->initially_ro;
+ 
+ 	curlun->ro = ro;
+-	curlun->file_length = num_sectors << 9;
++	curlun->file_length = num_sectors * sector_size;
+ 	curlun->num_sectors = num_sectors;
+-	debug("open backing file: %s\n", filename);
++	curlun->blksize = sector_size;
++	curlun->blkbits = order_base_2(sector_size >> 9) + 9;
++	debug("blksize: %u\n", sector_size);
++	debug("open backing file: '%s'\n", filename);
+ 
+ 	return 0;
+ }
+ 
+diff --git a/include/usb_mass_storage.h b/include/usb_mass_storage.h
+index 83ab93b530d7..6d83d93cad7f 100644
+--- a/include/usb_mass_storage.h
++++ b/include/usb_mass_storage.h
+@@ -6,9 +6,8 @@
+ 
+ #ifndef __USB_MASS_STORAGE_H__
+ #define __USB_MASS_STORAGE_H__
+ 
+-#define SECTOR_SIZE		0x200
+ #include <part.h>
+ #include <linux/usb/composite.h>
+ 
+ /* Wait at maximum 60 seconds for cable connection */
 
 -- 
 2.44.0
