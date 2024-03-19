@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FE2FC54E60
-	for <u-boot@archiver.kernel.org>; Tue, 19 Mar 2024 12:24:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EF55C54E60
+	for <u-boot@archiver.kernel.org>; Tue, 19 Mar 2024 12:24:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CEFE487F8C;
-	Tue, 19 Mar 2024 13:22:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4B9A888065;
+	Tue, 19 Mar 2024 13:22:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="C9XiCCpj";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uy4AZYtS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DDD6988019; Tue, 19 Mar 2024 13:22:51 +0100 (CET)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 029B687F46; Tue, 19 Mar 2024 13:22:52 +0100 (CET)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CCB8A87F46
- for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 13:22:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 150BD8807F
+ for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 13:22:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-41467d907f1so1855605e9.3
- for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 05:22:45 -0700 (PDT)
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-33e1d327595so3506896f8f.2
+ for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 05:22:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710850965; x=1711455765; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1710850964; x=1711455764; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=Eoaok36SvQE01AdxOcNaL/aWUYl1mN5YThpI9r4aJaY=;
- b=C9XiCCpj4buwH3gJg61aApwMe1eIQUTdrCAmXTgKOBL+b1duh/I8ZSsjeSJQEU22md
- A5FyhYquAli3tCfMyKlJYBdQjZ3+sz7YQWua9wCQ8i/fA/jSlJCEOtX3dufShfnbTDHC
- nlB4gwYOcTBrhbUhn+W2gyJBqa2WQkM6Vv8DjDeDb1fJeN0k3ImkucTF0t1gGzPN/rfJ
- kRuSg7z78B47alhg+jpS+71MXan2/rbINn2CpJwtEeXUueGugTE92AMvhBS2EZuvE3/+
- wXSSkCR+kiEE5RidKlOs1pYiwtGoMc+p8smh6X7mVNCtMoSlCTUQ945dExtfVP3eOzdz
- m9bw==
+ :reply-to; bh=3JOoPnE7/Qw4KSbwZg45xCKwsyTMmqgOFvlWbdDPRFE=;
+ b=uy4AZYtSSv8dkzIhyqNATrukWxWu1p+4V8VUC11gqJm0GGloP93OKHd+ejLyrQSzbQ
+ zkcOq0RUgFxf8vaprH1LnV8WQsyDRFuIyr7P5y/+hII3m6PgdSKsSr6nr72VXyeMeyIo
+ /YNOMyFq2dzW1tRmZa9+qM7GHw7/1X5/6q0soqMmMFp+QYDHsHvfJZk5ePmyJlU524MI
+ RfwVz2lxp/AcCD++D/SSJpSQApMnwFRRv+otI8Cxy3ccxvujGV0cvbFFNzEZQw/MnZBe
+ 3h5UfOjGeT5NWfRrnuSuMk8/j7f/32UD+OEsJVrX4iADi7KFaqbfr/tVvsZmju3XAjl0
+ KGjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710850965; x=1711455765;
+ d=1e100.net; s=20230601; t=1710850964; x=1711455764;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Eoaok36SvQE01AdxOcNaL/aWUYl1mN5YThpI9r4aJaY=;
- b=wcouC2GEfKUEt6UtQIQDgxHpCYSv3hkwJnEF0nFO6vR61zYCwTv91+TxG+UbnUoLrs
- IzvtJQTYkYPV+93kfqFc3c+aG0gYW1dMzVa2CUjHdf5H/HYHMzRZmmBZsV2u3Py+Q2Ne
- WgtEHkz+rAbk9e/bXilAGWEyqCheBGDAQqlrlzsdJPyBNamNZF0poqt9rYg4w6j52shG
- VDXijgWpjfQay1AzHgXH5RVYs0kYfD4RhYG1zBcvad/jUFojBIP71TbEtyBlMgt3illQ
- ZbpPsg2noyPTElfTWv7iX/Bc3ePOCF76ewIOxR1xwrqcsf0r5WDg6UDyIyAOKURmeVQ1
- ZQRQ==
-X-Gm-Message-State: AOJu0Yw1Lw2cQe/KOUUOWo4EfTDMqjcNcYQBqoOkH87Ok1JYiriJM5z2
- K1RFBxD4uuX6qrEswQN68XfZjRCyK4OkxNHsa1CNU5l7DifGdPE4+X79K/j3+WeF8BkYQID33QZ
- b
-X-Google-Smtp-Source: AGHT+IHYvS2086FfyEFcNrJxZsn4CeOxj9slRORYWuwfePvMJXTNiWizffkS83swYCfdJbQrt/xtGg==
-X-Received: by 2002:a5d:43cf:0:b0:33e:c593:bb08 with SMTP id
- v15-20020a5d43cf000000b0033ec593bb08mr9517040wrr.13.1710850965154; 
- Tue, 19 Mar 2024 05:22:45 -0700 (PDT)
+ bh=3JOoPnE7/Qw4KSbwZg45xCKwsyTMmqgOFvlWbdDPRFE=;
+ b=uKAXtbABSVJga/Ww97DApP+UTUDa7OaROf3X/4gwizqODJTPgV1L5Fd/Bo5pQDolVI
+ 2F1JhlypkP+zONCn1FgXYjg+ceSdKSIoBx+JmxWxHfrMBujK+oiD/M237YvswqcJP2YN
+ nPlDP9oWCJ5Wbc9ILpy7rKvSbLV/xKGIp/KneSLfew/DS9Qe+iv04u78m9X3JZCzGt0I
+ 4ysn4ixDIJmaKK4Jtm2sAkTsikdHZHaTEn8VrA7puSOWA17Plb5rDJgpqfiMJUjpi7yW
+ ctX4akeJRMerj7B7RdLLinOz2YXpv2UOWZavJ41Kc09n5l2rbbMasNx6mJ16kHJ3e89t
+ vf1w==
+X-Gm-Message-State: AOJu0Yyc+tJOkRptcrO/AcQFDs4i8zYK4x5zFHevmZq6gSN69BqySXOU
+ WO+1NLdg34HomlBoEAiXvNC31lkNkEKnPdT5756hfEKBahxqFcBO1e3GNKMgcSt8h1RiVdC3ESE
+ 1
+X-Google-Smtp-Source: AGHT+IEepXB3Y2ogjRCQHisf4PoTZDHUojYeHNyAWVQKMEBMXVvq/RviwvCRLy31Wz/KE6mXSK1Avg==
+X-Received: by 2002:adf:ec90:0:b0:33e:777c:3899 with SMTP id
+ z16-20020adfec90000000b0033e777c3899mr7520391wrn.38.1710850964034; 
+ Tue, 19 Mar 2024 05:22:44 -0700 (PDT)
 Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- du18-20020a0560000d5200b0033b7ce8b496sm12170498wrb.108.2024.03.19.05.22.44
+ du18-20020a0560000d5200b0033b7ce8b496sm12170498wrb.108.2024.03.19.05.22.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Mar 2024 05:22:44 -0700 (PDT)
+ Tue, 19 Mar 2024 05:22:43 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Tue, 19 Mar 2024 12:22:08 +0000
-Subject: [PATCH v3 09/14] serial: msm-geni: support livetree
+Date: Tue, 19 Mar 2024 12:22:07 +0000
+Subject: [PATCH v3 08/14] gpio: msm_gpio: add .set_flags op
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240319-b4-qcom-livetree-v3-9-e1b38d9b4fa4@linaro.org>
+Message-Id: <20240319-b4-qcom-livetree-v3-8-e1b38d9b4fa4@linaro.org>
 References: <20240319-b4-qcom-livetree-v3-0-e1b38d9b4fa4@linaro.org>
 In-Reply-To: <20240319-b4-qcom-livetree-v3-0-e1b38d9b4fa4@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -80,13 +80,13 @@ To: Tom Rini <trini@konsulko.com>,
  Sean Anderson <seanga2@gmail.com>
 Cc: u-boot@lists.denx.de
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1213;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2529;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=7XmFWhELu/gIzF9JO1Gaw5wYi1Mt7sIUuWsbtDfZ96Q=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtSfzV2dT7cw/Tnq8PyHZHyHY4v3rpRbfruVgxIeuuxac
- t/lxBWVjlIWBkEOBlkxRRbxE8ssm9ZettfYvuACzBxWJpAhDFycAjARnwsM/6uqb0ydd7h87SpF
- xo3W+vUOqxTM+3U+WV/x3fr+iwtb/T2G/4VZTCWfOj9f9v8qHZIUPtNKsirwTb/UTNfQvz9W/lu
- 9WRUA
+ bh=BqhIvZ0D1m2EoNdcJwYk4o3G6xvhwsOurBZjgFCw3S0=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtSfzV1V19/vDwz+EpPY5XxJJd5SeteMQxcOCPklCET97
+ bMU/6jTUcrCIMjBICumyCJ+Ypll09rL9hrbF1yAmcPKBDKEgYtTACbyTpThn8L6pbMKN3WoPQro
+ EJ286F5c1SvhVFmVh+tsFBZdE/jXw8Hwv/b6mymle6zZ58sWW8yf+mb/xtDF8z9/3yW59k/1Sjv
+ mSzcB
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -105,42 +105,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When using OF_LIVE, the debug UART driver won't be probed if it's a
-subnode of the geni-se-qup controller. Add a NOP driver for the
-controller to correctly discover its child nodes.
+The .direction_input and .direction_output ops are deprecated, and don't
+seem to behave properly for us. Implement our own .set_flags op to
+handle this correctly.
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- drivers/serial/serial_msm_geni.c | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+ drivers/gpio/msm_gpio.c | 27 +++++++++++++++++++++------
+ 1 file changed, 21 insertions(+), 6 deletions(-)
 
-diff --git a/drivers/serial/serial_msm_geni.c b/drivers/serial/serial_msm_geni.c
-index 4aa0bc8c72bc..5260474fb9a4 100644
---- a/drivers/serial/serial_msm_geni.c
-+++ b/drivers/serial/serial_msm_geni.c
-@@ -605,8 +605,21 @@ U_BOOT_DRIVER(serial_msm_geni) = {
- 	.ops = &msm_serial_ops,
- 	.flags = DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
+diff --git a/drivers/gpio/msm_gpio.c b/drivers/gpio/msm_gpio.c
+index 5e57b0cbde75..f5d9ab54e817 100644
+--- a/drivers/gpio/msm_gpio.c
++++ b/drivers/gpio/msm_gpio.c
+@@ -34,21 +34,21 @@ struct msm_gpio_bank {
+ 
+ #define GPIO_IN_OUT_REG(dev, x) \
+ 	(GPIO_CONFIG_REG(dev, x) + 0x4)
+ 
+-static int msm_gpio_direction_input(struct udevice *dev, unsigned int gpio)
++static void msm_gpio_direction_input(struct udevice *dev, unsigned int gpio)
+ {
+ 	struct msm_gpio_bank *priv = dev_get_priv(dev);
+ 
+ 	/* Always NOP for special pins, assume they're in the correct state */
+ 	if (qcom_is_special_pin(priv->pin_data, gpio))
+-		return 0;
++		return;
+ 
+ 	/* Disable OE bit */
+ 	clrsetbits_le32(priv->base + GPIO_CONFIG_REG(dev, gpio),
+ 			GPIO_OE_MASK, GPIO_OE_DISABLE);
+ 
+-	return 0;
++	return;
+ }
+ 
+ static int msm_gpio_set_value(struct udevice *dev, unsigned int gpio, int value)
+ {
+@@ -83,8 +83,25 @@ static int msm_gpio_direction_output(struct udevice *dev, unsigned int gpio,
+ 
+ 	return 0;
+ }
+ 
++static int msm_gpio_set_flags(struct udevice *dev, unsigned int gpio, ulong flags)
++{
++	if (flags & GPIOD_IS_OUT_ACTIVE) {
++		return msm_gpio_direction_output(dev, gpio, 1);
++	} else if (flags & GPIOD_IS_OUT) {
++		return msm_gpio_direction_output(dev, gpio, 0);
++	} else if (flags & GPIOD_IS_IN) {
++		msm_gpio_direction_input(dev, gpio);
++		if (flags & GPIOD_PULL_UP)
++			return msm_gpio_set_value(dev, gpio, 1);
++		else if (flags & GPIOD_PULL_DOWN)
++			return msm_gpio_set_value(dev, gpio, 0);
++	}
++
++	return 0;
++}
++
+ static int msm_gpio_get_value(struct udevice *dev, unsigned int gpio)
+ {
+ 	struct msm_gpio_bank *priv = dev_get_priv(dev);
+ 
+@@ -109,12 +126,10 @@ static int msm_gpio_get_function(struct udevice *dev, unsigned int gpio)
+ 	return GPIOF_INPUT;
+ }
+ 
+ static const struct dm_gpio_ops gpio_msm_ops = {
+-	.direction_input	= msm_gpio_direction_input,
+-	.direction_output	= msm_gpio_direction_output,
++	.set_flags		= msm_gpio_set_flags,
+ 	.get_value		= msm_gpio_get_value,
+-	.set_value		= msm_gpio_set_value,
+ 	.get_function		= msm_gpio_get_function,
  };
  
-+static const struct udevice_id geniqup_ids[] = {
-+	{ .compatible = "qcom,geni-se-qup" },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(geni_se_qup) = {
-+	.name = "geni-se-qup",
-+	.id = UCLASS_NOP,
-+	.of_match = geniqup_ids,
-+	.bind = dm_scan_fdt_dev,
-+	.flags = DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
-+};
-+
- #ifdef CONFIG_DEBUG_UART_MSM_GENI
- 
- static struct msm_serial_data init_serial_data = {
- 	.base = CONFIG_VAL(DEBUG_UART_BASE)
+ static int msm_gpio_probe(struct udevice *dev)
 
 -- 
 2.44.0
