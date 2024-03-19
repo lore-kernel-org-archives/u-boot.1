@@ -4,77 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9751C54E5D
-	for <u-boot@archiver.kernel.org>; Tue, 19 Mar 2024 11:39:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B24DC54E60
+	for <u-boot@archiver.kernel.org>; Tue, 19 Mar 2024 11:43:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1609E87D37;
-	Tue, 19 Mar 2024 12:39:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id 8D57D87E74;
+	Tue, 19 Mar 2024 12:43:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="W9ls0vCp";
+	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="VSmPsvNs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6ACB487E47; Tue, 19 Mar 2024 12:39:12 +0100 (CET)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E59B287E96; Tue, 19 Mar 2024 12:43:10 +0100 (CET)
+Received: from mail.thorsis.com (mail.thorsis.com [92.198.35.195])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6208487B2A
- for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 12:39:10 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ptosi@google.com
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a466a1f9ea0so365101266b.1
- for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 04:39:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1710848350; x=1711453150; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=HZeJZdZYyKvD2JO7tdY+/ghfWY/cavGBbuL8uXFmleU=;
- b=W9ls0vCptyeTGp3UQpNLBAue7Vj+Z8Zh0s9phaM8DFEjt+9iwIUBY1FgoZN/RGLSzh
- EHC1HMBXqdE+9BCdA0I3jQC+U5SKodZPkQmbZLWa+EkjTsz97YP8YrAIsKkAipf2TF/P
- 39xuE6FeALVFE3TRaYiFDI9gLF6VTlEG0Fxi4TbxAgciSfLh7csClAlhaK3b8sovdCwT
- sQY7Lx0tEvq4EM6S/mFRA8dT5cXpNCMV+kNrIrMI3AePjswZFS+bsukKouW7NqewbJuq
- DS7z5LcISbHWDBw0pnQB0AvQjaP1IJ/F+QWX7CntYTvncWRQ/BlHk9Nz5fEFwLWrtxvZ
- ewIA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710848350; x=1711453150;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=HZeJZdZYyKvD2JO7tdY+/ghfWY/cavGBbuL8uXFmleU=;
- b=bgYLqZ/MDuGm0mZKKUZ+dn+RrYmAQtYx6C4erN7kXVhwhy9faF3mTAdyIcqNo1skIy
- 2wI6kjdsqCX1Zz7cbihlclI9e41U6UAVPv+Oyp4a39qYX4tb30fCBB201bQaISY7zDhH
- pvrX+8UiaRRyDoxT8wF7hH5QTonIiYGBOM89jqATzTjOLg7ASOkeoASdT2rg+2sbLTE4
- XLKA+O22vOAD4G81aUGXKfoYZyFZ0gVIZURFZbS2quRxCm18b4W2Mv3FVOBA5YFH9xZH
- 1DwHImca8AFd9xrgQPfJ5gk8VfyCmxnhBemUbdE/eyY9hQxRCTq0pUCEKhSZ4Ze3tbCL
- mgJA==
-X-Gm-Message-State: AOJu0YwuwpL4TBCu7orSNQuXDo2lhStokWkZzbMvOHwRIKD0TjdHbILe
- gBSzzWAzyk6SaaZ09XWUmwLO4yjkHRJt4+z5q6hoS3X6pY1nTcFDJ4X4m1xbpw==
-X-Google-Smtp-Source: AGHT+IFr/SAu6ZtM7+iW/haGv2qLYOCPvgKsL4aww/HWVzZDdABG2J2Mt/3wzL/XrHdMR0beSn0RQQ==
-X-Received: by 2002:a05:6402:c47:b0:565:7b88:1cff with SMTP id
- cs7-20020a0564020c4700b005657b881cffmr9745599edb.11.1710848349686; 
- Tue, 19 Mar 2024 04:39:09 -0700 (PDT)
-Received: from google.com (64.227.90.34.bc.googleusercontent.com.
- [34.90.227.64]) by smtp.gmail.com with ESMTPSA id
- er27-20020a056402449b00b00568d2518105sm2656268edb.12.2024.03.19.04.39.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Mar 2024 04:39:09 -0700 (PDT)
-Date: Tue, 19 Mar 2024 11:39:05 +0000
-From: =?utf-8?Q?Pierre-Cl=C3=A9ment?= Tosi <ptosi@google.com>
-To: Marc Zyngier <maz@kernel.org>
-Cc: u-boot@lists.denx.de, Fabio Estevam <festevam@gmail.com>, 
- Tom Rini <trini@konsulko.com>, Stefano Babic <sbabic@denx.de>
-Subject: Re: [PATCH] arm64: Fix map_range() not splitting mapped blocks
-Message-ID: <qnca6it6fh6pznsvm33rwa3pf6ushtkpvyui6fds43fcdjxcz5@66tiqctl7arc>
-References: <43haokus4jdxguk4arig5tsqcgq2wbezwpbj7oti6pdkvrfual@wa7vz2iypcv5>
- <86o7bazheg.wl-maz@kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+ by phobos.denx.de (Postfix) with ESMTPS id A4D2D87DEA
+ for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 12:43:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=thorsis.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
+Date: Tue, 19 Mar 2024 12:43:06 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=default;
+ t=1710848587;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=CXrpbH+CO9+HsVmk19fG6t1hi7upkgfOUHZIBSb5So8=;
+ b=VSmPsvNsks0YnzXYJYGg0uxCgTbjF5f/WX65QdTE6+rhKMrK9pNp9xKaeEweCi2/MTBBMY
+ VrhptxvTLBHg9fvYHTChsIPA8jjKTwSyraLOUVNO+Jo32R2XK87IsddH68YT+s98aQbe5Q
+ JGsB6RE8dLRCW/uvwENqoPIj16Iw2Dmy/9QndJu/MRFE/Sid3F5eh6wzq4M8KQXXaEFCT3
+ b8NaT+Z/9p4pvMEvxf/zby79JpFT4YD0sFp3Y8beVvAg+VTrw5kpd0TzeDTqhbcIR4Hdbb
+ wGHgl2lMx6ZOWH3Dp83/IO2JUIC61T2bP0/O+IOZdTfxkAzgxj+pa43YIuDTPg==
+From: Alexander Dahl <ada@thorsis.com>
+To: Mihai.Sain@microchip.com
+Cc: ada@thorsis.com, eugen.hristev@collabora.com,
+ Balamanikandan.Gunasundar@microchip.com,
+ michael@amarulasolutions.com, u-boot@lists.denx.de,
+ dario.binacchi@amarulasolutions.com
+Subject: Re: [PATCH 4/4] mtd: nand: raw: atmel: Introduce optional debug
+ commands
+Message-ID: <20240319-transpose-enjoyably-6f0a11f36382@thorsis.com>
+Mail-Followup-To: Mihai.Sain@microchip.com, eugen.hristev@collabora.com,
+ Balamanikandan.Gunasundar@microchip.com,
+ michael@amarulasolutions.com, u-boot@lists.denx.de,
+ dario.binacchi@amarulasolutions.com
+References: <20240307091014.39796-1-ada@thorsis.com>
+ <20240307091014.39796-5-ada@thorsis.com>
+ <82a5ea3c-ab95-4460-9685-2676fe18d6b5@collabora.com>
+ <PH8PR11MB6804301C3B361D21EADCEE71822D2@PH8PR11MB6804.namprd11.prod.outlook.com>
+ <00241bf0-2543-4836-b43f-1b6452caf2e6@collabora.com>
+ <PH8PR11MB68048E53C58FAAE710FE51F3822D2@PH8PR11MB6804.namprd11.prod.outlook.com>
+ <20240318-renewal-properly-6edd58ed9c79@thorsis.com>
+ <PH8PR11MB68040409774B3441A8657DA1822D2@PH8PR11MB6804.namprd11.prod.outlook.com>
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <86o7bazheg.wl-maz@kernel.org>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <PH8PR11MB68040409774B3441A8657DA1822D2@PH8PR11MB6804.namprd11.prod.outlook.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,34 +78,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marc,
+Hello everyone,
 
-On Tue, Mar 19, 2024 at 09:43:03AM +0000, Marc Zyngier wrote:
-> This seems pretty reasonable, thanks for looking into this. However, I
-> can't help but notice that this is done without any BBM, and no TLBI
-> either.
+Am Mon, Mar 18, 2024 at 11:15:18AM +0000 schrieb Mihai.Sain@microchip.com:
+> ------------------------------------------------------------
+> > The command is very useful.
+> > I would like to have also the ONFI timing mode printed for nand-flash 
+> > 😊
 > 
-> Are we guaranteed that the updated page tables are not live at the
-> point of update?
+> As far as I can see the actually set mode is not stored anywhere.  One could print it after it was successfully set, but that would be in nand base, not in the atmel driver.
+> 
+> 	OK. Understood.
+> 	Thanks.
+> 
+> > Also I recommend to print the master clock in MHz, and to print the master clock name/label from ccf driver:
+> > https://github.com/u-boot/u-boot/blob/master/drivers/clk/at91/sama7g5.
+> > c#L410
+> 
+> Should be possible.  I could do this and send a v2?
+> 
+> 	Yes Please 😊
+> 	Also please note that older SAM9/SAMA5 series have no ccf drivers ☹
+> 	Only SAM9X6+ and SAMA7 series have ccf 😊
 
-This means gd->arch.tlb_addr pointing to the live PTs during setup_pgtables().
+Okay I thought this would be easy, but it seems not.  This is what I
+came up with:
 
-In arch/arm/cpu/armv8, setup_all_pgtables() runs with SCTLR_ELx.M unset.
+-                printf("mck clock rate: %lu\n", clk_get_rate(nc->mck));
++                printf("%s rate: %lu MHz\n",
++                       nc->mck->dev->name ? nc->mck->dev->name : "mck clock",
++                       clk_get_rate(nc->mck) / 1000000);
 
-In arch/arm/cpu/armv8/fsl-layerscape, setup_pgtables() is called twice:
+And this is the output on sam9x60 with CONFIG_CLK_CCF enabled:
 
- - early_mmu_setup() calls it with SCTLR_ELx.M unset;
- - final_mmu_setup() overwrites gd->arch.tlb_addr before calling it iff
-   CFG_SYS_MEM_RESERVE_SECURE is defined i.e. if CONFIG_SYS_SOC="fsl-layerscape"
-   so that <asm/arch-fsl-layerscape/config.h> gets auto-included through
-   <include/config.h>.
+    pmc@fffffc00 rate: 200 MHz
 
-So can CONFIG_FSL_LAYERSCAPE be set while CONFIG_SYS_SOC != "fsl-layerscape"?
+The corresponding line from `clk dump` is:
 
-I suppose Fabio and Stefano can answer this and/or help with ensuring that
-setup_pgtables() is never called on live PTs.
+     200000000            5        |       |           |   `-- mck_div
 
-Thanks,
+That name, I don't get it where to get that one.
 
--- 
-Pierre
+Greets
+Alex
+
+> 	Thanks.
+> 
+> 
+> Greets
+> Alex
+> 
+> >
+> > Tested-by: Mihai Sain <mihai.sain@microchip.com>
+> >
+> > Best regards,
+> > Mihai Sain
