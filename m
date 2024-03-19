@@ -4,68 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52EF1C54E5D
-	for <u-boot@archiver.kernel.org>; Tue, 19 Mar 2024 12:47:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFD2AC54E5D
+	for <u-boot@archiver.kernel.org>; Tue, 19 Mar 2024 13:02:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7165A87E13;
-	Tue, 19 Mar 2024 13:47:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 11C2A87F16;
+	Tue, 19 Mar 2024 14:02:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="k10MFf6b";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="b73wbx6x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 81DDB87E7F; Tue, 19 Mar 2024 13:47:08 +0100 (CET)
-Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com
- [IPv6:2607:f8b0:4864:20::42d])
+ id 8147F88018; Tue, 19 Mar 2024 14:02:12 +0100 (CET)
+Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
+ [IPv6:2607:f8b0:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 073E886D38
- for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 13:47:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2ED3C87EF4
+ for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 14:02:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=hrsourabh1107@gmail.com
-Received: by mail-pf1-x42d.google.com with SMTP id
- d2e1a72fcca58-6e704078860so2624076b3a.0
- for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 05:47:02 -0700 (PDT)
+ spf=pass smtp.mailfrom=aford173@gmail.com
+Received: by mail-pf1-x42a.google.com with SMTP id
+ d2e1a72fcca58-6e7224cb3f2so1545412b3a.1
+ for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 06:02:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1710852421; x=1711457221; darn=lists.denx.de;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=fveYhxUtSZasJeRB4CIuypgOaVCPrIUJ0bBkKiQ2IwI=;
- b=k10MFf6boHtMKQJSQu32PvMWQUrvT8bPZxaUJjPEahaL037FmCknGmpXQkohTYRX3J
- 2Pm5B4mSkf5PlEElSfYpxAveE/M9VaKt6i74T362YtfQCwcA5amXD95SqDlaVETOWh1Q
- 6/6dpU4o1FvZI1+K4bYrglA41HI1tKM+iH2GDjfP0u1Z8Zlw1HZXUazf6MvdJqU94cvk
- r2I2+zFFsJ5Ka5fIMDIeDVNDPk+4zn8ph+B3zwrKDbMdHdsWByeT4tvhSIrOgF2FdHdc
- HwGbdGAIY6wZ9KsfPL382JwohOKk3aTkOpeIZJHc7WLZ4lLOE7qO0KMEe6Zpe3tiNlBm
- dHcw==
+ d=gmail.com; s=20230601; t=1710853328; x=1711458128; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YNqPLKH57Ai3tx+OQUG+RQ2iZn9A+aQooM7WPyvSyS8=;
+ b=b73wbx6xAU/45V3HYWXhU4YuT/MjuINiODB9wgqqAnMPHUjYWQHQIRKMSLnzfQmWsR
+ IcUDS+rIX+fIBfsMhQrSr2yOV8uH/sG8TWVnrzSJKFdDKzmzoQmONVsP+nMQhcuDpPKg
+ aqvD8tlCe8k1qe3RiwStlC7doHY3c2t7Ytg9bCd3tBOm13VLao9wIJo1ivAqrv9iIuCw
+ 6/qyguzHTgs8HmD8E43wg3j88BxRUkGRp8ztvZgHH805k3o5HKYuctat7zwqnhGF/cqx
+ EJemm0qm8PYGoNOBLSREZTZJrElzHlf7Z2h+xn3emV9Gw9GAyB/oTL6eFFzY64C0Fp4P
+ dxXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710852421; x=1711457221;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=fveYhxUtSZasJeRB4CIuypgOaVCPrIUJ0bBkKiQ2IwI=;
- b=Qbg5FT1MEEsvX67nU2jTeigezzPv/1IhKTqRCbxHU9ohVsXIr2T3ZbO+7ZYTh1s70E
- WpNdG1RvNWHtchzuD1L3x+6sUGdT2anjcVe32BXArzHrd+VtAU6ssGvLu8qb+/f1WTa+
- DHnpXyY19El3KflLAF9Nic/u6yeUnAT71JAV6L5a7l/M6tclmYM6O/to8BuKtpo3B7LN
- kjeB5JVhDTgVjZGE/cUy8MfPE6Eek/ZYBN8cWhYfy9Pizlb93AZwEan9lTaofEZ7eHDU
- 3PBbXHpIOsR0WNnnpAiReTfSPJNzvNvm+zVsO0s4WsqvzlHFYncdqBkwEKfaRbpwmWEr
- trYA==
-X-Gm-Message-State: AOJu0YzeAzoo6nfn5WKxrbfIWZLCeCSLTznOGhaSRaijl63B5x1g3xiP
- yXh6LXoxcdHrNBjZFRWTafYu2gVmVYKIdtMwER95yr8EONwnxHpqOKifdPElMDgePXxnFFQNDq9
- 3fviA192sYfjSF8hdvUDg9dxklOTiQ6y1
-X-Google-Smtp-Source: AGHT+IEODyCWv1skJxeE6ZuP5IO0D+68MpaoHpVxLxel/Tc25wl+I025IT3rGc0bkI77UFEaAeYCHDUZ9hxa/9AZdmw=
-X-Received: by 2002:a05:6a20:72ab:b0:1a3:683a:2cbd with SMTP id
- o43-20020a056a2072ab00b001a3683a2cbdmr4798316pzk.17.1710852421224; Tue, 19
- Mar 2024 05:47:01 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1710853328; x=1711458128;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=YNqPLKH57Ai3tx+OQUG+RQ2iZn9A+aQooM7WPyvSyS8=;
+ b=R2hoiYxBjqmsefnww+f+71Grtv8kKeu7lS8DvkruDX+sAFUyuip2OAAVL3A4FwVZs2
+ 2mZdl04yVszvykU8HOV1AVeFkBe6JoGJT6hmWXxWsUSF7AdZx5cYgBIqN/JDqW6FKmQg
+ Voe/B6RGO0TaSI4cEkMkS448zUfAky8044jyE2JKG64KsgEF2I0oZe2fHN/QzxKUKQm4
+ 8cYT62dXZQ6vrEvX5iCdv//YqlNZyklyjTkAWphQqF6pHIGnpI/uUv53McwPFNcxM7ma
+ Hrl7RFlKkM2hrfG/6pe6kGE1eTpjdWSNNV1SuFqLt8uaxm5iyUZtUxjYEtWK0XTYuUz9
+ aIbw==
+X-Gm-Message-State: AOJu0Yz2C55oA3cWx1BrI/9+lb7+8EwDvvMI7DZG7SCx0LMtTxxOBVsV
+ 7DWsG8nd9bbeZPOW/+KZ7rYyJYNp7VgnhXTD8j7pGCMq94HdnbKiIUwWKJ0MFWNcpvLcmg9Tkw1
+ J8qPy4a51COgWWzW4/mnTNzNiOFM=
+X-Google-Smtp-Source: AGHT+IHjmSmag420LyhGTmQ/yFjPc6SkKDiTXFpsaGRgVFhuuANhPky5PJOKNyzHKo8pI+Xhmp6o52Y3UcPP9wtzl6c=
+X-Received: by 2002:a17:902:e5d0:b0:1e0:10c1:628c with SMTP id
+ u16-20020a170902e5d000b001e010c1628cmr3526787plf.12.1710853327013; Tue, 19
+ Mar 2024 06:02:07 -0700 (PDT)
 MIME-Version: 1.0
-From: Sourabh Hegde Ramu <hrsourabh1107@gmail.com>
-Date: Tue, 19 Mar 2024 13:46:50 +0100
-Message-ID: <CAHseuWC04cj0EMDLcVzOihVhcZdROXZWjK23DTAe7K9J7H=SRA@mail.gmail.com>
-Subject: How to handle multiple boot scripts within boot partition?
-To: u-boot@lists.denx.de
+References: <20240318150318.8292-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20240318150318.8292-1-marek.vasut+renesas@mailbox.org>
+From: Adam Ford <aford173@gmail.com>
+Date: Tue, 19 Mar 2024 08:01:55 -0500
+Message-ID: <CAHCN7xJi0K-fXjR2SVU7MX7hbZs618ciCjBCjSBqtNoNkTNSoQ@mail.gmail.com>
+Subject: Re: [PATCH] Makefile: Add missing OF_UPSTREAM Makefile for 32bit ARM
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de, Biju Das <biju.das.jz@bp.renesas.com>, 
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>, 
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Ralph Siemsen <ralph.siemsen@linaro.org>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,22 +90,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
+On Mon, Mar 18, 2024 at 10:03=E2=80=AFAM Marek Vasut
+<marek.vasut+renesas@mailbox.org> wrote:
+>
+> Copy dts/upstream/src/arm64/Makefile into dts/upstream/src/arm/Makefile
+> and create a commit. This makes 32bit ARM buildable with OF_UPSTREAM .
+>
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
-I have a question regarding the loading of boot.scr file by u-boot. I am
-working on Raspberry pi-u-boot setup and would like to store multiple boot
-scripts in the boot partition. For example, what happens when I have
-multiple files like boot-rpi4.scr, boot-rpi3.scr in the boot partition? How
-can I specify within u-boot to load a specific boot script? Can I set the
-load address for different boot scripts?
+Tested-by: Adam Ford <aford173@gmail.com> #am3517-evm
 
-I am working on Raspbian OS and I am trying to use the conditional filters
-within config.txt config.txt conditional filters
-<https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/config_txt/conditional.adoc>
-to
-load different boot scripts & kernel files based on different hardware
-models.
-
-Please let me know if this could be possible in u-boot.
-
-Thanks in advance.
+> ---
+> Cc: Adam Ford <aford173@gmail.com>
+> Cc: Biju Das <biju.das.jz@bp.renesas.com>
+> Cc: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+> Cc: Ralph Siemsen <ralph.siemsen@linaro.org>
+> Cc: Tom Rini <trini@konsulko.com>
+> ---
+>  dts/upstream/src/arm/Makefile | 14 ++++++++++++++
+>  1 file changed, 14 insertions(+)
+>  create mode 100644 dts/upstream/src/arm/Makefile
+>
+> diff --git a/dts/upstream/src/arm/Makefile b/dts/upstream/src/arm/Makefil=
+e
+> new file mode 100644
+> index 00000000000..9a8f6aa3584
+> --- /dev/null
+> +++ b/dts/upstream/src/arm/Makefile
+> @@ -0,0 +1,14 @@
+> +# SPDX-License-Identifier: GPL-2.0+
+> +
+> +include $(srctree)/scripts/Makefile.dts
+> +
+> +targets +=3D $(dtb-y)
+> +
+> +# Add any required device tree compiler flags here
+> +DTC_FLAGS +=3D -a 0x8
+> +
+> +PHONY +=3D dtbs
+> +dtbs: $(addprefix $(obj)/, $(dtb-y))
+> +       @:
+> +
+> +clean-files :=3D */*.dtb */*.dtbo
+> --
+> 2.43.0
+>
