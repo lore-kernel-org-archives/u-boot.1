@@ -4,77 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 711B3C54E58
-	for <u-boot@archiver.kernel.org>; Tue, 19 Mar 2024 00:15:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6418C54E58
+	for <u-boot@archiver.kernel.org>; Tue, 19 Mar 2024 00:24:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8AC9D8803A;
-	Tue, 19 Mar 2024 01:15:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E09F487F8B;
+	Tue, 19 Mar 2024 01:24:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="B9paHJrH";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="olGMyp9r";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="gV1zpj5k";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B91028718A; Tue, 19 Mar 2024 01:15:09 +0100 (CET)
-Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
- [IPv6:2607:f8b0:4864:20::435])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id BCDC888044; Tue, 19 Mar 2024 01:24:15 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 445FC88010
- for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 01:15:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 722AC8718A
+ for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 01:24:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-6e6ca65edc9so1641933b3a.0
- for <u-boot@lists.denx.de>; Mon, 18 Mar 2024 17:15:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1710807306; x=1711412106; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=aEglWZczOxAVk65M74blTG/LkHusdIwQaecWgFVBEb8=;
- b=B9paHJrHY/CxpjIdPUAy642CitTrsZ+uxWWBKeh5qjkcXCstQJ0ewWdOsexis8RJhL
- /t/uFmQLxn9Bb8MXpAbneLC8BayJ2vgNKxoQdHahgb4orfkkCx6NiTEHrw+re2t/12EG
- xSCJsw4Q3oTEtJQm5fjH/RkoG61UAJhKMsT0RMDvZt2bonVPSQ+u433A8s7J/TOEYD4D
- LhJYzUGNJs+08Qaerj9ojyaHWD+48I4GH1k2qqGSnimLIOg6gF/lWI/flP2oRyHzxRkr
- JspeIje8ezAEtusf4A+pWDVIjucg8Up4/caWmV7eJ9o6vCZSdNF+fW64m6IXZ8Y0Ma1M
- UlXg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710807306; x=1711412106;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=aEglWZczOxAVk65M74blTG/LkHusdIwQaecWgFVBEb8=;
- b=Td7AInHra4AM5d8jVj6euT5YhPkYHDrcpu2Qk0e1JQrrHUKgUi3lHiIJkkZDxh3rCJ
- ZPUHm5s7sIXlfF50cHDyl25gJoB8u3ghPvUQaCuCwMwYfQww8QS5od+I3jq9eZgYwpcq
- ivoDBRm4n+sl4+ESEBsN/cAoYCDA6Mz5hJQkS6u3VQuFd+dgkBDgvhHkrOe6QBkrCvkg
- n9YJe5rlF3RyvNIZSQ+vcHzcPwTxENxsn2hrKircLenYNOnQnNGN/50EDZIs6pzzRN3s
- vGmCzq4iz2R0zDGHB9Av05pBPoXKPTYNrIkCy3g8KlLEyHvfUmEi+w69gO3+qpSYE4Jk
- g2pA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVqLKKkfVgi//PyGPjwxIP9KkSM2Vd7P/B28PBSWqkK2PXWS0qRgin7mC0ioH9HBhTjW5CWP8jQo8SxSD7J3SnewDn3yw==
-X-Gm-Message-State: AOJu0Ywl6AE02PSrEW052/SrufUi+iDURdsZzYGhCIKRmlSy8RnFtitz
- voRLtej70CIYENqFFY8h61u9vVp5AV4zhMvkhhRLrJBjE8WQz11JeyqLe81w9w/G9hT25WGP5fd
- F9MmMpwtLgS1TJHMBdOXGAZjW1io=
-X-Google-Smtp-Source: AGHT+IF8bWRr/86RIQLaG6LSmRnGQwcX1Wgg1oit22wV4h6qDRhVnhiOBJL6fopWmclEH80QSjxLmlDMtAhc7JgsqtE=
-X-Received: by 2002:a05:6a21:78a7:b0:1a1:4de6:dd5c with SMTP id
- bf39-20020a056a2178a700b001a14de6dd5cmr973469pzc.2.1710807305754; Mon, 18 Mar
- 2024 17:15:05 -0700 (PDT)
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4TzCC12FCsz9sZS;
+ Tue, 19 Mar 2024 01:24:13 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1710807853;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=JLkunIuO05uXIpaj1EyIARhbJbKCELKiZdV/4VJKJjY=;
+ b=olGMyp9rQE4drvSFEEIMU2cSUAynSNyUk0fns1sqq4NDb2+S5THqETeLdlmjeMZVvwKVTB
+ Hyz5S2p19GkNPHviYLs0exBox7xckQ+PGJapnvhUvwr6PA7gdWm8RWc0qHMXasdL2jIVK3
+ Asxr/d9N0qBbriJVzYHP/IKYIy5r1D1tMkpqoOKTxxdQeYyWJRUW/5vSMxXo996fjOs6lD
+ qCo+eZnt52xEM8nJw/KDBXbbGv6En8vUiGmlKL5BzINQRG3KKQpcAOh1R4yEg+6jdPsMcB
+ Aab2kBbksSa6sWhpWjWGgHtmrZNL3q0i5ivJz7t4iGjABKOzScXD2F+YUse9hw==
+Message-ID: <a060d545-6e58-4bb2-a5ed-bfad96c6c789@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1710807851;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=JLkunIuO05uXIpaj1EyIARhbJbKCELKiZdV/4VJKJjY=;
+ b=gV1zpj5kNYP3UBt6VoU7VP24NcDt9iQ6uJ0TI8TPj0Bymhz3lwqZ9EHay9df4iHONiGuKk
+ eq0CulcPjJYaFbAPMzwl1/Z88b73XlY2JA49QB/uL6n4jd+T1Qxqwrk3IweDjfMq6HCbRQ
+ SnbkYdysAJ8GDTq0v/r6og3YQuhyS4qwm2miUw+ZRj3fTMN3IqIgn467Xi4Dc8rNXntRmA
+ GslLHCYY+TJAXBR6iARweY4/OAMALh9kbFbXsHzK09k9WmGxdXLmHZ0YkvNXJtpNGu2PWt
+ 0LpYLc57GOKEqQ65B4TWOUvKxWWp3l12lndXXFNnkKxHX+KNro6dD4/8JKWOcA==
+Date: Tue, 19 Mar 2024 01:24:09 +0100
 MIME-Version: 1.0
-References: <20240308201316.1721909-1-festevam@gmail.com>
-In-Reply-To: <20240308201316.1721909-1-festevam@gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 18 Mar 2024 21:14:53 -0300
-Message-ID: <CAOMZO5Aa_EaTtL9r7k0P7CaJQ0fixGLJSR3WvxHAD2=5RJdncQ@mail.gmail.com>
-Subject: Re: [PATCH 1/2] clk: clk-imx8qxp: Add LPUART IPG entries
-To: seanga2@gmail.com, trini@konsulko.com
-Cc: peng.fan@nxp.com, ye.li@nxp.com, u-boot@lists.denx.de, 
- marcel.ziswiler@toradex.com, francesco.dolcini@toradex.com, 
- hiago.franco@toradex.com, joao.goncalves@toradex.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH 2/2] ARM: dts: renesas: Switch to using upstream DT on
+ 64bit Renesas SoCs
+Content-Language: en-US
+To: Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Adam Ford <aford173@gmail.com>, Biju Das <biju.das.jz@bp.renesas.com>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
+ Ralph Siemsen <ralph.siemsen@linaro.org>, Tom Rini <trini@konsulko.com>
+References: <20240318145958.8099-1-marek.vasut+renesas@mailbox.org>
+ <20240318145958.8099-2-marek.vasut+renesas@mailbox.org>
+ <6071517a-6c6d-41f3-895b-29abcfea78a3@bp.renesas.com>
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <6071517a-6c6d-41f3-895b-29abcfea78a3@bp.renesas.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: 2be70cd1e108f004425
+X-MBO-RS-META: wormc6tfm8sb3serqom5ugs8mfcc4c71
+X-Rspamd-Queue-Id: 4TzCC12FCsz9sZS
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,25 +95,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom and Sean,
+On 3/18/24 7:15 PM, Paul Barker wrote:
+> On 18/03/2024 14:59, Marek Vasut wrote:
+>> Enable OF_UPSTREAM to use upstream DT and add renesas/ prefix to the
+>> DEFAULT_DEVICE_TREE and OF_LIST. And thereby directly build DTB from
+>> dts/upstream/src/ including *-u-boot.dtsi files from arch/$(ARCH)/dts/
+>> directory.
+>>
+>> The configuration update has been done using the following script:
+>> ```
+>> sed -i '/^CONFIG_DEFAULT_DEVICE_TREE/ s@="@&renesas/@' `git grep -li renesas configs`
+>> sed -i '/^CONFIG_OF_LIST/ s@r8a@renesas/&@g' `git grep -li renesas configs`
+>> ```
+>>
+>> There are SoCs which are not included in this patch. The 32bit SoCs
+>> require further infrastructure work. R8A779H0 is coming during the
+>> next upstream DT synchronization cycle as it is not included in
+>> current upstream DTs yet.
+>>
+>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> 
+> Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+>      (for RZ/G2L only)
+> 
+> Do we also plan to drop the corresponding .dts & .dtsi files from
+> arch/arm/dts?
 
-On Fri, Mar 8, 2024 at 5:13=E2=80=AFPM Fabio Estevam <festevam@gmail.com> w=
-rote:
->
-> Since commit cc7df0b9e8bc ("serial: lpuart: Enable IPG clock")
-> the colibri-imx8qxp board no longer boots.
->
-> The reason is that the imx8qxp clock driver does not handle the
-> LPUART IPG clocks inside get_rate(), set_rate() and enable() functions.
->
-> Fix the boot regression by adding the LPUART IPG entries.
->
-> Fixes: cc7df0b9e8bc ("serial: lpuart: Enable IPG clock")
-> Reported-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
-> Signed-off-by: Fabio Estevam <festevam@gmail.com>
+Yes, once I'm done switching everything, I will drop them in bulk.
 
-Please consider applying this series to 2024.04.
+-- 
+Best regards,
+Marek Vasut
 
-It fixes a boot regression on imx8qxp and imx8qm.
-
-Thanks!
