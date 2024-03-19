@@ -4,110 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBD8DC54E5D
-	for <u-boot@archiver.kernel.org>; Tue, 19 Mar 2024 12:12:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10B83C54E5D
+	for <u-boot@archiver.kernel.org>; Tue, 19 Mar 2024 12:12:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 62D8687F2F;
-	Tue, 19 Mar 2024 13:12:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id 4CAE687DE3;
+	Tue, 19 Mar 2024 13:12:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="hU6WBrhR";
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="E3bDSmy4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E2D738083F; Tue, 19 Mar 2024 09:44:29 +0100 (CET)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 3557387861; Tue, 19 Mar 2024 10:20:07 +0100 (CET)
+Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A328B87D40
- for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 09:44:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id 4ABE18751B
+ for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 10:19:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=avromanov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id EDF6812000B;
- Tue, 19 Mar 2024 11:44:26 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru EDF6812000B
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1710837866;
- bh=qveArEVbyeAbgMiy9zLi00DM9qXO76dGimPzVLOhYu0=;
- h=From:To:Subject:Date:Message-ID:Content-Type:MIME-Version:From;
- b=hU6WBrhROzFXIT6nEmfYpt/r/YtTMqrZIQ3soWsEdJoXkSgPJgJCzeDE+9fvEvqlV
- dW6pQYvYWNsdRecIvtYv/fzGrq46twciJv6ZCpK6NE2fhE1DauLcQ3i1GoMmTLICOD
- J/pH4fnStCBHbVq9kXd2DvBTSq4IrEHdtgmNEIa+6dKrp+e9XU9PKRjFnklqLw/JaX
- RGcyzrAVlqRR0H7F6XykChbCDCPH1hYdtGLbYUI7czvXcoHetX3D1ZLiCVLLVtAeqE
- uzbdAMwKPdd5qlCG1R3SSkOFgm3bmT5nPObS7EGT87z8OCi+1rVAORo5c3gZf9EqIT
- j0RAvpVku5+YQ==
-Received: from smtp.sberdevices.ru (p-i-exch-sc-m02.sberdevices.ru
- [172.16.192.103])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Tue, 19 Mar 2024 11:44:26 +0300 (MSK)
-Received: from p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) by
- p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) with Microsoft SMTP Server
+ spf=pass smtp.mailfrom=jixiong.hu@mediatek.com
+X-UUID: d5c22608e5d111eeb8927bc1f75efef4-20240319
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
+ s=dk; 
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:CC:To:From;
+ bh=l+SaChThKwvKcOL6hEYPfcxE5k0G7CYDfBcPL0Xh6qo=; 
+ b=E3bDSmy4t8de70tYgNl2sbo0uFwWBCes2dhqhDQIHJtCdh+bdmWxAFGegugy+NfINgKHAeSru42p0cuNQwGErgu2PPS0It0JCwkFcg1ku7CznpqwVnvs8xBH76W6h2EX4BK6VM1hdl9LiFyQEX7a4yVAkIiGCWbZTSb34APHtl0=;
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.1.37, REQID:3c6d961b-bd97-4262-b15f-82229cbcc5ed, IP:0,
+ U
+ RL:0,TC:0,Content:-5,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION
+ :release,TS:-5
+X-CID-META: VersionHash:6f543d0, CLOUDID:94759390-e2c0-40b0-a8fe-7c7e47299109,
+ B
+ ulkID:nil,BulkQuantity:0,Recheck:0,SF:102,TC:nil,Content:0,EDM:-3,IP:nil,U
+ RL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES:1,
+ SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0
+X-CID-BVR: 0,NGT
+X-CID-BAS: 0,NGT,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR
+X-UUID: d5c22608e5d111eeb8927bc1f75efef4-20240319
+Received: from mtkmbs11n1.mediatek.inc [(172.21.101.185)] by
+ mailgw01.mediatek.com (envelope-from <jixiong.hu@mediatek.com>)
+ (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
+ with ESMTP id 1969830491; Tue, 19 Mar 2024 17:19:49 +0800
+Received: from mtkmbs13n2.mediatek.inc (172.21.101.108) by
+ mtkmbs10n2.mediatek.inc (172.21.101.183) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Tue, 19 Mar 2024 11:44:26 +0300
-Received: from p-i-exch-sc-m02.sberdevices.ru ([fe80::10c3:6e04:fd07:c511]) by
- p-i-exch-sc-m02.sberdevices.ru ([fe80::10c3:6e04:fd07:c511%9]) with
- mapi id 15.02.1118.040; Tue, 19 Mar 2024 11:44:26 +0300
-From: Alexey Romanov <avromanov@salutedevices.com>
-To: "dario.binacchi@amarulasolutions.com"
- <dario.binacchi@amarulasolutions.com>, "michael@amarulasolutions.com"
- <michael@amarulasolutions.com>, "frieder.schrempf@kontron.de"
- <frieder.schrempf@kontron.de>, "kmpark@infradead.org" <kmpark@infradead.org>, 
- "hs@denx.de" <hs@denx.de>, "joe.hershberger@ni.com" <joe.hershberger@ni.com>, 
- "dunaev@tecon.ru" <dunaev@tecon.ru>, "sjg@chromium.org" <sjg@chromium.org>,
- "bmeng@tinylab.org" <bmeng@tinylab.org>, "xypron.glpk@gmx.de"
- <xypron.glpk@gmx.de>, "tobias@waldekranz.com" <tobias@waldekranz.com>,
- "jpewhacker@gmail.com" <jpewhacker@gmail.com>,
- "marek.vasut+renesas@mailbox.org" <marek.vasut+renesas@mailbox.org>,
- "kever.yang@rock-chips.com" <kever.yang@rock-chips.com>, "jbx6244@gmail.com"
- <jbx6244@gmail.com>, "abdellatif.elkhlifi@arm.com"
- <abdellatif.elkhlifi@arm.com>, "mikhail.kshevetskiy@iopsys.eu"
- <mikhail.kshevetskiy@iopsys.eu>, "jagan@amarulasolutions.com"
- <jagan@amarulasolutions.com>
-CC: kernel <kernel@sberdevices.ru>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-Subject: Re: [PATCH v1 0/6] Introduce UBI block device
-Thread-Topic: [PATCH v1 0/6] Introduce UBI block device
-Thread-Index: AQHab80XWfhjCaCdmU6STPmk9GLMTLE+oV8A
-Date: Tue, 19 Mar 2024 08:44:25 +0000
-Message-ID: <20240319084408.s4h75ku234oavodw@cab-wsm-0029881.sigma.sbrf.ru>
-References: <20240306134906.1179285-1-avromanov@salutedevices.com>
-In-Reply-To: <20240306134906.1179285-1-avromanov@salutedevices.com>
-Accept-Language: ru-RU, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [172.16.18.93]
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <C5D845FBDDE9D546BE8B741A322E1ED5@sberdevices.ru>
-Content-Transfer-Encoding: quoted-printable
+ 15.2.1118.26; Tue, 19 Mar 2024 17:19:47 +0800
+Received: from mszsdhlt06.gcn.mediatek.inc (10.16.6.206) by
+ mtkmbs13n2.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
+ 15.2.1118.26 via Frontend Transport; Tue, 19 Mar 2024 17:19:47 +0800
+From: Jixiong Hu <Jixiong.Hu@mediatek.com>
+To: <u-boot@lists.denx.de>
+CC: <jjhiblot@ti.com>, Jixiong Hu <Jixiong.Hu@mediatek.com>
+Subject: [PATCH] fs: ext4: Change the Settings of file permissions
+Date: Tue, 19 Mar 2024 17:20:40 +0800
+Message-ID: <20240319092041.8089-1-Jixiong.Hu@mediatek.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 184251 [Mar 19 2024]
-X-KSMG-AntiSpam-Version: 6.1.0.4
-X-KSMG-AntiSpam-Envelope-From: avromanov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 10 0.3.10
- 53c821b925e16276b831986eabc71d60ab82ee60, {Tracking_uf_ne_domains},
- {Track_E25351}, {Tracking_from_domain_doesnt_match_to},
- smtp.sberdevices.ru:5.0.1,7.1.1; cab-wsm-0029881.sigma.sbrf.ru:5.0.1,7.1.1;
- lore.kernel.org:7.1.1; d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
- salutedevices.com:7.1.1; 127.0.0.199:7.1.2, FromAlignment: s
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean, bases: 2024/03/19 04:38:00
-X-KSMG-LinksScanning: Clean, bases: 2024/03/19 04:38:00
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2024/03/19 01:36:00 #24282057
-X-KSMG-AntiVirus-Status: Clean, skipped
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-TM-AS-Product-Ver: SMEX-14.0.0.3152-9.1.1006-23728.005
+X-TM-AS-Result: No-10--5.676500-8.000000
+X-TMASE-MatchedRID: WY68sLfT96/qouWR3W5zBuQoIU4rAATMYpovC7zX5q+8NrbzjPvzJ2sk
+ psLNM/2rHMJVy4EIUAs9ihzfHXEWBGJZXQNDzktSyeVujmXuYYUEa8g1x8eqF83zT82XTqF+G0u
+ iJ5nq4vQspKJBx9J3JNy0SYmVqqZBoNQxMWUln00dNyNDtbgUEX0tCKdnhB58I/9UW5M5dRMpg5
+ yOcdoVgo6HM5rqDwqtCATVll4NZmW6iIz/g8qdPvB/27pBZw++CsmyDY1VjeP9felmTMluJw==
+X-TM-AS-User-Approved-Sender: No
+X-TM-AS-User-Blocked-Sender: No
+X-TMASE-Result: 10--5.676500-8.000000
+X-TMASE-Version: SMEX-14.0.0.3152-9.1.1006-23728.005
+X-TM-SNTS-SMTP: 6CF68B013EDFD8005F8D04123DC279952295EBEFB2314BE148A302E0F1908EB82000:8
+X-MTK: N
 X-Mailman-Approved-At: Tue, 19 Mar 2024 13:12:10 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -125,51 +95,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello! Ping.
+When a file is created in the linux and corresponding file permission
+is set, if the file needs to be modified in uboot during the startup
+process, the modified file permission will be reset to 755. Therefore,
+when the ext4fs_write() function is called, if the file already exists,
+the file permission of the new file is equal to the file permission of
+the existing file.
+---
+ fs/ext4/ext4_write.c | 21 +++++++++++++++++++--
+ 1 file changed, 19 insertions(+), 2 deletions(-)
 
-On Wed, Mar 06, 2024 at 04:49:00PM +0300, Alexey Romanov wrote:
-> Hello!
->=20
-> This series adds support for the UBI block device, which
-> allows to read/write data block by block. For example,
-> it can now be used for BCB or Android AB command:
->=20
->   $ bcb load ubi 0 part_name
->=20
-> Tested only on SPI NAND, so bind is made only for
-> SPI NAND drivers. Can be used with mtdblock device [1].
->=20
-> - Links:
->=20
->   [1] https://lore.kernel.org/all/20240227100441.1811047-1-avromanov@salu=
-tedevices.com/
->=20
-> Alexey Romanov (6):
->   ubi: allow to read from volume with offset
->   ubi: allow to write to volume with offset
->   drivers: introduce UBI block abstraction
->   disk: don't try search for partition type if already set
->   disk: support UBI partitions
->   spinand: bind UBI block
->=20
->  cmd/ubi.c                   |  77 +++++++++++++++++++--
->  disk/part.c                 |   7 ++
->  drivers/block/blk-uclass.c  |   1 +
->  drivers/mtd/nand/spi/core.c |   9 ++-
->  drivers/mtd/ubi/Makefile    |   2 +
->  drivers/mtd/ubi/block.c     | 130 ++++++++++++++++++++++++++++++++++++
->  drivers/mtd/ubi/part.c      |  99 +++++++++++++++++++++++++++
->  env/ubi.c                   |  16 ++---
->  include/part.h              |   2 +
->  include/ubi_uboot.h         |   8 ++-
->  10 files changed, 334 insertions(+), 17 deletions(-)
->  create mode 100644 drivers/mtd/ubi/block.c
->  create mode 100644 drivers/mtd/ubi/part.c
->=20
-> --=20
-> 2.34.1
->=20
+diff --git a/fs/ext4/ext4_write.c b/fs/ext4/ext4_write.c
+index ea4c5d4157..c0b4803700 100644
+--- a/fs/ext4/ext4_write.c
++++ b/fs/ext4/ext4_write.c
+@@ -847,6 +847,7 @@ int ext4fs_write(const char *fname, const char *buffer,
+ {
+ 	int ret = 0;
+ 	struct ext2_inode *file_inode = NULL;
++	struct ext2_inode *existing_file_inode = NULL;
+ 	unsigned char *inode_buffer = NULL;
+ 	int parent_inodeno;
+ 	int inodeno;
+@@ -900,6 +901,16 @@ int ext4fs_write(const char *fname, const char *buffer,
+ 	/* check if the filename is already present in root */
+ 	existing_file_inodeno = ext4fs_filename_unlink(filename);
+ 	if (existing_file_inodeno != -1) {
++		existing_file_inode = (struct ext2_inode *)zalloc(fs->inodesz);
++		if (!existing_file_inode)
++			goto fail;
++		ret = ext4fs_iget(existing_file_inodeno, existing_file_inode);
++		if (ret)
++		{
++			free(existing_file_inode);
++			goto fail;
++		}
++
+ 		ret = ext4fs_delete_file(existing_file_inodeno);
+ 		fs->first_pass_bbmap = 0;
+ 		fs->curr_blkno = 0;
+@@ -948,9 +959,15 @@ int ext4fs_write(const char *fname, const char *buffer,
+ 			sizebytes = 0;
+ 		}
+ 	} else {
+-		file_inode->mode = cpu_to_le16(S_IFREG | S_IRWXU | S_IRGRP |
+-					       S_IROTH | S_IXGRP | S_IXOTH);
++		if(existing_file_inode) {
++			file_inode->mode = existing_file_inode->mode;
++		} else {
++			file_inode->mode = cpu_to_le16(S_IFREG | S_IRWXU | S_IRGRP |
++						       S_IROTH | S_IXGRP | S_IXOTH);
++		}
+ 	}
++	if(existing_file_inode)
++		free(existing_file_inode);
+ 	/* ToDo: Update correct time */
+ 	file_inode->mtime = cpu_to_le32(timestamp);
+ 	file_inode->atime = cpu_to_le32(timestamp);
+-- 
+2.18.0
 
---=20
-Thank you,
-Alexey=
