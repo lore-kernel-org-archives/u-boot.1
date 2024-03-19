@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F68FC54E58
-	for <u-boot@archiver.kernel.org>; Mon, 18 Mar 2024 23:16:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 711B3C54E58
+	for <u-boot@archiver.kernel.org>; Tue, 19 Mar 2024 00:15:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A808387BC9;
-	Tue, 19 Mar 2024 00:16:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 8AC9D8803A;
+	Tue, 19 Mar 2024 01:15:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Wirno5pJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="B9paHJrH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CFE5E87D09; Tue, 19 Mar 2024 00:16:48 +0100 (CET)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id B91028718A; Tue, 19 Mar 2024 01:15:09 +0100 (CET)
+Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
+ [IPv6:2607:f8b0:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E0AF987861
- for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 00:16:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 445FC88010
+ for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 01:15:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-413f4cb646dso31892955e9.1
- for <u-boot@lists.denx.de>; Mon, 18 Mar 2024 16:16:46 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pf1-x435.google.com with SMTP id
+ d2e1a72fcca58-6e6ca65edc9so1641933b3a.0
+ for <u-boot@lists.denx.de>; Mon, 18 Mar 2024 17:15:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710803806; x=1711408606; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=c6ZM15uUUmha+RGseHVO/OgEFs12byEfeMOHHIk+r8s=;
- b=Wirno5pJP2lkHL/f94E1riLiIRZ1jeQQprrQ6Q/f4P6fmAwtWvgFKC3P63ArGSUYWI
- 8PkQV1G9tvau07sty8ALQR1NkZmnrfRSpbMj/TgqcJwkOHFjEvxu3dDYzdSv/S3zNAvP
- eQBlp4Ah1g649oPmenpMF/u8/89/UxE0B88C2bizy3iWxk/sgwjog8L/eMuiBus+5Jcl
- ZZI7zB9l//rdQQKOJz17mGWTRFKQ4muNbyW+cgLwwHl4/fgnBQTI9khIy2thQKiX67rj
- 1yD00zi+ZueG5aAxLHn5jUzx/cnU16jdeWXkErrV+iAps2FfqOY9BLx7p8enY/bbO/1I
- WiKw==
+ d=gmail.com; s=20230601; t=1710807306; x=1711412106; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=aEglWZczOxAVk65M74blTG/LkHusdIwQaecWgFVBEb8=;
+ b=B9paHJrHY/CxpjIdPUAy642CitTrsZ+uxWWBKeh5qjkcXCstQJ0ewWdOsexis8RJhL
+ /t/uFmQLxn9Bb8MXpAbneLC8BayJ2vgNKxoQdHahgb4orfkkCx6NiTEHrw+re2t/12EG
+ xSCJsw4Q3oTEtJQm5fjH/RkoG61UAJhKMsT0RMDvZt2bonVPSQ+u433A8s7J/TOEYD4D
+ LhJYzUGNJs+08Qaerj9ojyaHWD+48I4GH1k2qqGSnimLIOg6gF/lWI/flP2oRyHzxRkr
+ JspeIje8ezAEtusf4A+pWDVIjucg8Up4/caWmV7eJ9o6vCZSdNF+fW64m6IXZ8Y0Ma1M
+ UlXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710803806; x=1711408606;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=c6ZM15uUUmha+RGseHVO/OgEFs12byEfeMOHHIk+r8s=;
- b=sUsxtvWshWe5HLAhpyHnGwc3ZXhA/PAKmlXSQvW7w16X1quxspabQ4MaxEGaHg34SB
- CJEz40mzjekH177EQgQGhPdrq1AdHAAxh/cPb2VS8k1A5OzTIUpVJJWOZCSj7+4e9vVq
- gBSs29a1nx49B4fQpZhfvTpj+dW6RGvCfHptMnP4pcQ2fBhPP+XuMeiYwnZNt39gp82o
- Sl9tjaZXEqZfU9JuSk6Vs4Sx4L19nse17b0NTlER1CZ/9N0bWTL2FHMg7iJTEfa770Lq
- wa+Li7q8hU5rREURl7YPGbjVXbt2e0WInBf6nckyHvbI8HEZzabXe2lZyWQYz3LLhviB
- n35Q==
-X-Gm-Message-State: AOJu0YxIxAkLRYqDFb8loNfnGZuAtnkXrgCs9av9m39L/h1uQ6Ml4E0q
- 9+EP3SWuIAYjyyIxYV+RS9Cdw9k0XrXXDIJ9p5TAfLeA5Lywyz/WAbc/9Heua2k=
-X-Google-Smtp-Source: AGHT+IHO/0NBfY6c8SRdas0RCVU/QQ4eg9/dueTkHpkTp9DIBRs0dMzWhNx+ay7XoAlWBg7fao/DiA==
-X-Received: by 2002:a05:600c:a02:b0:414:9fa:1da2 with SMTP id
- z2-20020a05600c0a0200b0041409fa1da2mr5093761wmp.15.1710803806235; 
- Mon, 18 Mar 2024 16:16:46 -0700 (PDT)
-Received: from lion.caleb.rex.connolly.tech (host-92-17-96-232.as13285.net.
- [92.17.96.232]) by smtp.gmail.com with ESMTPSA id
- v7-20020a05600c444700b0041420706396sm2646551wmn.12.2024.03.18.16.16.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Mar 2024 16:16:45 -0700 (PDT)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Caleb Connolly <caleb.connolly@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Ramon Fried <rfried.dev@gmail.com>, Sean Edmond <seanedmond@microsoft.com>,
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH] cmd: sysboot: null check filename
-Date: Mon, 18 Mar 2024 23:16:36 +0000
-Message-ID: <20240318231640.1343956-1-caleb.connolly@linaro.org>
-X-Mailer: git-send-email 2.44.0
+ d=1e100.net; s=20230601; t=1710807306; x=1711412106;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=aEglWZczOxAVk65M74blTG/LkHusdIwQaecWgFVBEb8=;
+ b=Td7AInHra4AM5d8jVj6euT5YhPkYHDrcpu2Qk0e1JQrrHUKgUi3lHiIJkkZDxh3rCJ
+ ZPUHm5s7sIXlfF50cHDyl25gJoB8u3ghPvUQaCuCwMwYfQww8QS5od+I3jq9eZgYwpcq
+ ivoDBRm4n+sl4+ESEBsN/cAoYCDA6Mz5hJQkS6u3VQuFd+dgkBDgvhHkrOe6QBkrCvkg
+ n9YJe5rlF3RyvNIZSQ+vcHzcPwTxENxsn2hrKircLenYNOnQnNGN/50EDZIs6pzzRN3s
+ vGmCzq4iz2R0zDGHB9Av05pBPoXKPTYNrIkCy3g8KlLEyHvfUmEi+w69gO3+qpSYE4Jk
+ g2pA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVqLKKkfVgi//PyGPjwxIP9KkSM2Vd7P/B28PBSWqkK2PXWS0qRgin7mC0ioH9HBhTjW5CWP8jQo8SxSD7J3SnewDn3yw==
+X-Gm-Message-State: AOJu0Ywl6AE02PSrEW052/SrufUi+iDURdsZzYGhCIKRmlSy8RnFtitz
+ voRLtej70CIYENqFFY8h61u9vVp5AV4zhMvkhhRLrJBjE8WQz11JeyqLe81w9w/G9hT25WGP5fd
+ F9MmMpwtLgS1TJHMBdOXGAZjW1io=
+X-Google-Smtp-Source: AGHT+IF8bWRr/86RIQLaG6LSmRnGQwcX1Wgg1oit22wV4h6qDRhVnhiOBJL6fopWmclEH80QSjxLmlDMtAhc7JgsqtE=
+X-Received: by 2002:a05:6a21:78a7:b0:1a1:4de6:dd5c with SMTP id
+ bf39-20020a056a2178a700b001a14de6dd5cmr973469pzc.2.1710807305754; Mon, 18 Mar
+ 2024 17:15:05 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240308201316.1721909-1-festevam@gmail.com>
+In-Reply-To: <20240308201316.1721909-1-festevam@gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Mon, 18 Mar 2024 21:14:53 -0300
+Message-ID: <CAOMZO5Aa_EaTtL9r7k0P7CaJQ0fixGLJSR3WvxHAD2=5RJdncQ@mail.gmail.com>
+Subject: Re: [PATCH 1/2] clk: clk-imx8qxp: Add LPUART IPG entries
+To: seanga2@gmail.com, trini@konsulko.com
+Cc: peng.fan@nxp.com, ye.li@nxp.com, u-boot@lists.denx.de, 
+ marcel.ziswiler@toradex.com, francesco.dolcini@toradex.com, 
+ hiago.franco@toradex.com, joao.goncalves@toradex.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,33 +91,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently if ${bootfile} is unset and sysboot is invoked with no
-filename specified then U-Boot will crash will a null-pointer
-dereference. Add the missing check and a matching error print.
+Hi Tom and Sean,
 
-Fixes: 993c912d304d ("cmd: sysboot: Create a sysboot command dedicated file")
-Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
----
- cmd/sysboot.c | 4 ++++
- 1 file changed, 4 insertions(+)
+On Fri, Mar 8, 2024 at 5:13=E2=80=AFPM Fabio Estevam <festevam@gmail.com> w=
+rote:
+>
+> Since commit cc7df0b9e8bc ("serial: lpuart: Enable IPG clock")
+> the colibri-imx8qxp board no longer boots.
+>
+> The reason is that the imx8qxp clock driver does not handle the
+> LPUART IPG clocks inside get_rate(), set_rate() and enable() functions.
+>
+> Fix the boot regression by adding the LPUART IPG entries.
+>
+> Fixes: cc7df0b9e8bc ("serial: lpuart: Enable IPG clock")
+> Reported-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+> Signed-off-by: Fabio Estevam <festevam@gmail.com>
 
-diff --git a/cmd/sysboot.c b/cmd/sysboot.c
-index 63a7806debe4..d14c570d96ab 100644
---- a/cmd/sysboot.c
-+++ b/cmd/sysboot.c
-@@ -76,8 +76,12 @@ static int do_sysboot(struct cmd_tbl *cmdtp, int flag, int argc,
- 	}
- 
- 	if (argc < 6) {
- 		filename = env_get("bootfile");
-+		if (!filename) {
-+			printf("Specify a filename or set the ${bootfile} environment variable\n");
-+			return 1;
-+		}
- 	} else {
- 		filename = argv[5];
- 		env_set("bootfile", filename);
- 	}
--- 
-2.44.0
+Please consider applying this series to 2024.04.
 
+It fixes a boot regression on imx8qxp and imx8qm.
+
+Thanks!
