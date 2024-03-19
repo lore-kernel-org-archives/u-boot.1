@@ -4,113 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5068EC54E5D
-	for <u-boot@archiver.kernel.org>; Tue, 19 Mar 2024 11:27:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9751C54E5D
+	for <u-boot@archiver.kernel.org>; Tue, 19 Mar 2024 11:39:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7968E87D57;
-	Tue, 19 Mar 2024 12:27:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 1609E87D37;
+	Tue, 19 Mar 2024 12:39:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="BMQzlevv";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="W9ls0vCp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8916A875E9; Tue, 19 Mar 2024 12:27:44 +0100 (CET)
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam11on20600.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2414::600])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 6ACB487E47; Tue, 19 Mar 2024 12:39:12 +0100 (CET)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 973C887D57
- for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 12:27:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6208487B2A
+ for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 12:39:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ZnSX/SJxpSF6BHapDtW2SZs7i+ggO0S7YWlQbKnzVookZaKfMngxB//FIEQA2p6rDpLrslpy1yxNygMoKJ6Hm3kKAYAMLwJpMgI5nDp/7giQ3zFbz/VZG5jda1wpt+ZY+99ZgIHqAmDmgrNh33iwE8WatHsL4+UbpBc8U5oVlS4rw58onoW0xcDXm0yyHgCwRwba4CBu6EvdRoUVM+9EQKEbOxP5wqqNeQyexXOg9K19sQhn7DEugkUuUB/a/D6JoRCegkXShs33E6oOa/SuGUpuaUPzKH3zxX5c+8RM8LKmusHf7c0w/krUza3uf09MDHQMDv5DNKA4psWWh+e7OQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=p1BhDAeuOJ4TuryQ3pXkVMUgGAbunTnQxELamApS9YQ=;
- b=NkBEK5yLb9si7LUFBCKOL4RfFNUqtrmogmIcCfDAraAe2Z8VeR74SG6mzAcuW6J6YKDwtG0mW0pOWSWRgt/XQJzg8syol+nNbjV2pM8R4QKZACuL0OOr+MWH+U8/P2xLLSz5iRRtN2W0Qtb5TpbOQukWfpa+ii3IemmIeatDzmen5XmUa+vYVXlPdu+qL3ah9w8a/qkUFWdMHuA54fpqMXzDBgzFAmV4a5D6odZ+VSjqOh4MkaMZQTfdApTLUkKMzV5kszRIbl4hqujHDyUSyfRx1ncTX5RQ+Jrv0iawG5Q5t05uWOLKYolqdW3gti/GDXpKeOQ3CillZTxT+Z/64Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=p1BhDAeuOJ4TuryQ3pXkVMUgGAbunTnQxELamApS9YQ=;
- b=BMQzlevv71qNHRZMcZ0Ku0/T5hSBqMwqkZaJuQAIZ8wjzBVXjx+JP7SlJiP8O80Vn8YRcGqt4kW3Quto6o+HieD7TkqtHz/PFAhL6b3R1Znc1GDG9tVNHdl1u3DtMpN9ZktslS9Q1AdbZ8gUep94Bdi+XqczDSyrKocltToPebU=
-Received: from DM6PR12CA0027.namprd12.prod.outlook.com (2603:10b6:5:1c0::40)
- by PH7PR12MB9223.namprd12.prod.outlook.com (2603:10b6:510:2f2::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7386.27; Tue, 19 Mar
- 2024 11:27:38 +0000
-Received: from CY4PEPF0000EE3D.namprd03.prod.outlook.com
- (2603:10b6:5:1c0:cafe::9) by DM6PR12CA0027.outlook.office365.com
- (2603:10b6:5:1c0::40) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7386.27 via Frontend
- Transport; Tue, 19 Mar 2024 11:27:38 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CY4PEPF0000EE3D.mail.protection.outlook.com (10.167.242.17) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7409.10 via Frontend Transport; Tue, 19 Mar 2024 11:27:37 +0000
-Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Tue, 19 Mar
- 2024 06:27:35 -0500
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Manikanta Guntupalli <manikanta.guntupalli@amd.com>, Harini Katakam
- <harini.katakam@amd.com>, Neal Frager <neal.frager@amd.com>, "Radhey Shyam
- Pandey" <radhey.shyam.pandey@amd.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] arm64: zynqmp: dts: Add required properties for rs485 support
- for KD240
-Date: Tue, 19 Mar 2024 12:27:33 +0100
-Message-ID: <56e4e135ad796afd1370c3dfa2643c143ba758ee.1710847646.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.36.1
+ dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ptosi@google.com
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-a466a1f9ea0so365101266b.1
+ for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 04:39:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=google.com; s=20230601; t=1710848350; x=1711453150; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=HZeJZdZYyKvD2JO7tdY+/ghfWY/cavGBbuL8uXFmleU=;
+ b=W9ls0vCptyeTGp3UQpNLBAue7Vj+Z8Zh0s9phaM8DFEjt+9iwIUBY1FgoZN/RGLSzh
+ EHC1HMBXqdE+9BCdA0I3jQC+U5SKodZPkQmbZLWa+EkjTsz97YP8YrAIsKkAipf2TF/P
+ 39xuE6FeALVFE3TRaYiFDI9gLF6VTlEG0Fxi4TbxAgciSfLh7csClAlhaK3b8sovdCwT
+ sQY7Lx0tEvq4EM6S/mFRA8dT5cXpNCMV+kNrIrMI3AePjswZFS+bsukKouW7NqewbJuq
+ DS7z5LcISbHWDBw0pnQB0AvQjaP1IJ/F+QWX7CntYTvncWRQ/BlHk9Nz5fEFwLWrtxvZ
+ ewIA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710848350; x=1711453150;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=HZeJZdZYyKvD2JO7tdY+/ghfWY/cavGBbuL8uXFmleU=;
+ b=bgYLqZ/MDuGm0mZKKUZ+dn+RrYmAQtYx6C4erN7kXVhwhy9faF3mTAdyIcqNo1skIy
+ 2wI6kjdsqCX1Zz7cbihlclI9e41U6UAVPv+Oyp4a39qYX4tb30fCBB201bQaISY7zDhH
+ pvrX+8UiaRRyDoxT8wF7hH5QTonIiYGBOM89jqATzTjOLg7ASOkeoASdT2rg+2sbLTE4
+ XLKA+O22vOAD4G81aUGXKfoYZyFZ0gVIZURFZbS2quRxCm18b4W2Mv3FVOBA5YFH9xZH
+ 1DwHImca8AFd9xrgQPfJ5gk8VfyCmxnhBemUbdE/eyY9hQxRCTq0pUCEKhSZ4Ze3tbCL
+ mgJA==
+X-Gm-Message-State: AOJu0YwuwpL4TBCu7orSNQuXDo2lhStokWkZzbMvOHwRIKD0TjdHbILe
+ gBSzzWAzyk6SaaZ09XWUmwLO4yjkHRJt4+z5q6hoS3X6pY1nTcFDJ4X4m1xbpw==
+X-Google-Smtp-Source: AGHT+IFr/SAu6ZtM7+iW/haGv2qLYOCPvgKsL4aww/HWVzZDdABG2J2Mt/3wzL/XrHdMR0beSn0RQQ==
+X-Received: by 2002:a05:6402:c47:b0:565:7b88:1cff with SMTP id
+ cs7-20020a0564020c4700b005657b881cffmr9745599edb.11.1710848349686; 
+ Tue, 19 Mar 2024 04:39:09 -0700 (PDT)
+Received: from google.com (64.227.90.34.bc.googleusercontent.com.
+ [34.90.227.64]) by smtp.gmail.com with ESMTPSA id
+ er27-20020a056402449b00b00568d2518105sm2656268edb.12.2024.03.19.04.39.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 19 Mar 2024 04:39:09 -0700 (PDT)
+Date: Tue, 19 Mar 2024 11:39:05 +0000
+From: =?utf-8?Q?Pierre-Cl=C3=A9ment?= Tosi <ptosi@google.com>
+To: Marc Zyngier <maz@kernel.org>
+Cc: u-boot@lists.denx.de, Fabio Estevam <festevam@gmail.com>, 
+ Tom Rini <trini@konsulko.com>, Stefano Babic <sbabic@denx.de>
+Subject: Re: [PATCH] arm64: Fix map_range() not splitting mapped blocks
+Message-ID: <qnca6it6fh6pznsvm33rwa3pf6ushtkpvyui6fds43fcdjxcz5@66tiqctl7arc>
+References: <43haokus4jdxguk4arig5tsqcgq2wbezwpbj7oti6pdkvrfual@wa7vz2iypcv5>
+ <86o7bazheg.wl-maz@kernel.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=809; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=WrBxqv+u8zAOW+pmhyxM80IyNjHJjJENkysbGM3208Y=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhtSfZQum+M/8rDnn2vKHt9StHpdZJpdeOjn1rvRVThvmi
- W3lfytkOmJZGASZGGTFFFmkba6c2Vs5Y4rwxcNyMHNYmUCGMHBxCsBEum8yzM/+8O/HToZPW6ya
- AlgPSMd+dnS5H88wP2Dzx1TpZVGKIftF5grbXFENOvrwIgA=
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE3D:EE_|PH7PR12MB9223:EE_
-X-MS-Office365-Filtering-Correlation-Id: c97f3575-a289-41f4-bca7-08dc480794d9
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: UVJ1NYH0gGmQQVJS3uK29+jMSItED2vfdTWZhal1qIU7lRJ1k4JH4iKKiLk4q6x/apwCxcz0oWxtCU36jJnithZdwpS+58NJ0fO3Ps6qph6SlYghWkGenqsIZ2V/ds+RqC+xuH99t+E46b3eN6urrIifbWIC5MS8ScmT982IHe39/3kH2Z7h6DJfmSjjYZOfp5AGpSOaG8s10cgFQ2MM6iwVj57OV2uS4GQZACUW5bJqPpMZOPrADtL5c2v4NwqyzSzM5LrZhgdZTVdDx6I77XnZHYnyzhHra5mKnK93FNtlsi3UwgSh1zSmLHd76Ac5nDExv0LkYjFoz/fAUVTEAxU9tghhp6JMMEUgU4NmmjkGGe7hAkms2ECYVhUI47thY6SQuho7AD1p565a6rXcx2X24KYefFW7RLdNg2A8Q4LehxRpvv3brkeY0BLcPa6Q8BpHA4GwPytE8vHPsxJA66G/34M4trG10XnsXQ6XN4HqznEBRuOLXZ1+pr1AC4JglNu1BhNsy8yV7omuatJ/xV3CmoY6ds67AOMZBnbDsnCkcsTXqYflcd+gsDB3bu0Np1Mnx/3igKXp/cpeuorLCakMFu0whX6xy5X3FrauS+IYNi8geU302vNhPZ/NgYM7w0mKUgjcOSsxRRTNmtxIeJU7tUhdpTVd31HXDlu3aurM6vhX6xwp4OhfD7LVcFc3Njpb4d1tGRuu8HJ25/3s1QzhXqI3RR7YNUjihePzoRDG4bBsQacoW7l8xEIielPP
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(36860700004)(376005)(82310400014)(1800799015); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Mar 2024 11:27:37.6692 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: c97f3575-a289-41f4-bca7-08dc480794d9
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000EE3D.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB9223
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <86o7bazheg.wl-maz@kernel.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -127,31 +91,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Manikanta Guntupalli <manikanta.guntupalli@amd.com>
+Hi Marc,
 
-Add "rts-gpios" and "linux,rs485-enabled-at-boot-time" properties
-to uartps node to support RS485 on KD240.
+On Tue, Mar 19, 2024 at 09:43:03AM +0000, Marc Zyngier wrote:
+> This seems pretty reasonable, thanks for looking into this. However, I
+> can't help but notice that this is done without any BBM, and no TLBI
+> either.
+> 
+> Are we guaranteed that the updated page tables are not live at the
+> point of update?
 
-Signed-off-by: Manikanta Guntupalli <manikanta.guntupalli@amd.com>
-Signed-off-by: Michal Simek <michal.simek@amd.com>
----
+This means gd->arch.tlb_addr pointing to the live PTs during setup_pgtables().
 
- arch/arm/dts/zynqmp-sck-kd-g-revA.dtso | 2 ++
- 1 file changed, 2 insertions(+)
+In arch/arm/cpu/armv8, setup_all_pgtables() runs with SCTLR_ELx.M unset.
 
-diff --git a/arch/arm/dts/zynqmp-sck-kd-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kd-g-revA.dtso
-index 5202b7c48198..1727a1cc15c1 100644
---- a/arch/arm/dts/zynqmp-sck-kd-g-revA.dtso
-+++ b/arch/arm/dts/zynqmp-sck-kd-g-revA.dtso
-@@ -356,6 +356,8 @@
- 
- &uart0 {
- 	status = "okay";
-+	rts-gpios = <&gpio 72 GPIO_ACTIVE_HIGH>;
-+	linux,rs485-enabled-at-boot-time;
- 	pinctrl-names = "default";
- 	pinctrl-0 = <&pinctrl_uart0_default>;
- 	assigned-clock-rates = <100000000>;
+In arch/arm/cpu/armv8/fsl-layerscape, setup_pgtables() is called twice:
+
+ - early_mmu_setup() calls it with SCTLR_ELx.M unset;
+ - final_mmu_setup() overwrites gd->arch.tlb_addr before calling it iff
+   CFG_SYS_MEM_RESERVE_SECURE is defined i.e. if CONFIG_SYS_SOC="fsl-layerscape"
+   so that <asm/arch-fsl-layerscape/config.h> gets auto-included through
+   <include/config.h>.
+
+So can CONFIG_FSL_LAYERSCAPE be set while CONFIG_SYS_SOC != "fsl-layerscape"?
+
+I suppose Fabio and Stefano can answer this and/or help with ensuring that
+setup_pgtables() is never called on live PTs.
+
+Thanks,
+
 -- 
-2.36.1
-
+Pierre
