@@ -4,76 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFD2AC54E5D
-	for <u-boot@archiver.kernel.org>; Tue, 19 Mar 2024 13:02:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B876C54E60
+	for <u-boot@archiver.kernel.org>; Tue, 19 Mar 2024 13:02:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 11C2A87F16;
-	Tue, 19 Mar 2024 14:02:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7A80087F8E;
+	Tue, 19 Mar 2024 14:02:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="b73wbx6x";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="c2jf9xEh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8147F88018; Tue, 19 Mar 2024 14:02:12 +0100 (CET)
-Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
- [IPv6:2607:f8b0:4864:20::42a])
+ id 8BABA8802B; Tue, 19 Mar 2024 14:02:14 +0100 (CET)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2ED3C87EF4
- for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 14:02:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1583987F78
+ for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 14:02:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aford173@gmail.com
-Received: by mail-pf1-x42a.google.com with SMTP id
- d2e1a72fcca58-6e7224cb3f2so1545412b3a.1
- for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 06:02:09 -0700 (PDT)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-33ff53528ceso1826465f8f.0
+ for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 06:02:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1710853328; x=1711458128; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=YNqPLKH57Ai3tx+OQUG+RQ2iZn9A+aQooM7WPyvSyS8=;
- b=b73wbx6xAU/45V3HYWXhU4YuT/MjuINiODB9wgqqAnMPHUjYWQHQIRKMSLnzfQmWsR
- IcUDS+rIX+fIBfsMhQrSr2yOV8uH/sG8TWVnrzSJKFdDKzmzoQmONVsP+nMQhcuDpPKg
- aqvD8tlCe8k1qe3RiwStlC7doHY3c2t7Ytg9bCd3tBOm13VLao9wIJo1ivAqrv9iIuCw
- 6/qyguzHTgs8HmD8E43wg3j88BxRUkGRp8ztvZgHH805k3o5HKYuctat7zwqnhGF/cqx
- EJemm0qm8PYGoNOBLSREZTZJrElzHlf7Z2h+xn3emV9Gw9GAyB/oTL6eFFzY64C0Fp4P
- dxXw==
+ d=linaro.org; s=google; t=1710853329; x=1711458129; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=LOMSVS57aPfXCUeqi5TNM/NrM5knXE9gf5cGiAzXrFU=;
+ b=c2jf9xEhk5Ut4kChbA85hyF1EHSjQ/OWohNcivCrEHpTNm5Izx8a0nWXxDwDoAeE8B
+ mlLSpLAFE7AS+S4PWgG0TkX3cixx0Dr2aHIX/oFfFobiW17rIJuThWxrJxIrhIXLKjbj
+ /7sOWJVnxicfiV+c/Nn5z+0tEOBLCWVEYORmNp3tGRzjAn7l+I/QrjdSnEdXjhERX0BB
+ qrCNmFPTOZ7siYJUuBjGQLFhSvr5qWUTy7cpSJ1JO4Asf9BgLad8RJvdwlOEEo0RbRyQ
+ enjt8+N0dTy+ocyE2fIUhO97TtvQa+UbxR15fDqAnL+c9u6wgbzNAYINRxStPjMl0XkC
+ mbxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710853328; x=1711458128;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=YNqPLKH57Ai3tx+OQUG+RQ2iZn9A+aQooM7WPyvSyS8=;
- b=R2hoiYxBjqmsefnww+f+71Grtv8kKeu7lS8DvkruDX+sAFUyuip2OAAVL3A4FwVZs2
- 2mZdl04yVszvykU8HOV1AVeFkBe6JoGJT6hmWXxWsUSF7AdZx5cYgBIqN/JDqW6FKmQg
- Voe/B6RGO0TaSI4cEkMkS448zUfAky8044jyE2JKG64KsgEF2I0oZe2fHN/QzxKUKQm4
- 8cYT62dXZQ6vrEvX5iCdv//YqlNZyklyjTkAWphQqF6pHIGnpI/uUv53McwPFNcxM7ma
- Hrl7RFlKkM2hrfG/6pe6kGE1eTpjdWSNNV1SuFqLt8uaxm5iyUZtUxjYEtWK0XTYuUz9
- aIbw==
-X-Gm-Message-State: AOJu0Yz2C55oA3cWx1BrI/9+lb7+8EwDvvMI7DZG7SCx0LMtTxxOBVsV
- 7DWsG8nd9bbeZPOW/+KZ7rYyJYNp7VgnhXTD8j7pGCMq94HdnbKiIUwWKJ0MFWNcpvLcmg9Tkw1
- J8qPy4a51COgWWzW4/mnTNzNiOFM=
-X-Google-Smtp-Source: AGHT+IHjmSmag420LyhGTmQ/yFjPc6SkKDiTXFpsaGRgVFhuuANhPky5PJOKNyzHKo8pI+Xhmp6o52Y3UcPP9wtzl6c=
-X-Received: by 2002:a17:902:e5d0:b0:1e0:10c1:628c with SMTP id
- u16-20020a170902e5d000b001e010c1628cmr3526787plf.12.1710853327013; Tue, 19
- Mar 2024 06:02:07 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1710853329; x=1711458129;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=LOMSVS57aPfXCUeqi5TNM/NrM5knXE9gf5cGiAzXrFU=;
+ b=pX7Whw8OzSaZ4wdo8UF4JCZXXU/wGwkDi+M05dfFicTnZbuRet4LWqsWwzyMLNScEQ
+ c1WyQCR+m+bt9ecGBgq0ynd3lKX/vY5IAt07Ma8jMSsvK/ys4aZK6wXqQjRNpWB72Alu
+ mltf5zgqMitsm0EJHHs30g5ET4fFtAVAJAk4RlnPyC/KewGPbzMz0Ku3DRgBcUWnN/u2
+ HSAat6/jbQAydD4Dp6MPBooVRcHs2TnqfdIlPABrEE97rH03Bo/nzrU/ZekKLi6kslPr
+ R+zNt1yjQ31vh3BAHibEHDu74Xg+clSfE1V1nvke7OO9/j7lp8vZyImDlQ/vYKXP6nKR
+ bSXQ==
+X-Gm-Message-State: AOJu0YwKzXcdZg+XEVnxhMiUP95idfBnkvMcrF/nr7jWtUukia0CSfje
+ oGrsi+q6+dloj9Q7wl1Buu425Zg1c6COx2L5batMBeF/oATTYrthKkSMe/988ok=
+X-Google-Smtp-Source: AGHT+IH3uEZs1hol1uiWPhvLuCTC/ZW+svUdiLeu/cV5ANroNbu4wbItmx2C+DxpR3M8r61au7RK6A==
+X-Received: by 2002:a5d:67cf:0:b0:33d:2775:1e63 with SMTP id
+ n15-20020a5d67cf000000b0033d27751e63mr12105575wrw.41.1710853329571; 
+ Tue, 19 Mar 2024 06:02:09 -0700 (PDT)
+Received: from [192.168.1.78] (host-92-17-96-232.as13285.net. [92.17.96.232])
+ by smtp.gmail.com with ESMTPSA id
+ bs18-20020a056000071200b0034181bea3b0sm2747271wrb.3.2024.03.19.06.02.08
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 19 Mar 2024 06:02:09 -0700 (PDT)
+Message-ID: <f4d35976-edbd-44d8-a86a-513bfefa6196@linaro.org>
+Date: Tue, 19 Mar 2024 13:02:08 +0000
 MIME-Version: 1.0
-References: <20240318150318.8292-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20240318150318.8292-1-marek.vasut+renesas@mailbox.org>
-From: Adam Ford <aford173@gmail.com>
-Date: Tue, 19 Mar 2024 08:01:55 -0500
-Message-ID: <CAHCN7xJi0K-fXjR2SVU7MX7hbZs618ciCjBCjSBqtNoNkTNSoQ@mail.gmail.com>
-Subject: Re: [PATCH] Makefile: Add missing OF_UPSTREAM Makefile for 32bit ARM
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de, Biju Das <biju.das.jz@bp.renesas.com>, 
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>, 
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Ralph Siemsen <ralph.siemsen@linaro.org>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/5] usb: dwc3-generic: implement Qualcomm wrapper
+Content-Language: en-US
+To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>
+Cc: u-boot@lists.denx.de
+References: <20240319-b4-qcom-usb-v3-0-09ba1f86d259@linaro.org>
+ <20240319-b4-qcom-usb-v3-1-09ba1f86d259@linaro.org>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20240319-b4-qcom-usb-v3-1-09ba1f86d259@linaro.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,49 +98,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Mar 18, 2024 at 10:03=E2=80=AFAM Marek Vasut
-<marek.vasut+renesas@mailbox.org> wrote:
->
-> Copy dts/upstream/src/arm64/Makefile into dts/upstream/src/arm/Makefile
-> and create a commit. This makes 32bit ARM buildable with OF_UPSTREAM .
->
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
-Tested-by: Adam Ford <aford173@gmail.com> #am3517-evm
+> +static void dwc3_qcom_glue_configure(struct udevice *dev, int index,
+> +				     enum usb_dr_mode mode)
+> +{
+> +	struct dwc3_glue_data *glue = dev_get_plat(dev);
+> +	void __iomem *qscratch_base = (void __iomem *)glue->regs;
+CI is not happy with this, it fails on 32-bit builds with
+"cast to pointer from integer of different size
+[-Werror=int-to-pointer-cast]"
 
-> ---
-> Cc: Adam Ford <aford173@gmail.com>
-> Cc: Biju Das <biju.das.jz@bp.renesas.com>
-> Cc: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-> Cc: Ralph Siemsen <ralph.siemsen@linaro.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> ---
->  dts/upstream/src/arm/Makefile | 14 ++++++++++++++
->  1 file changed, 14 insertions(+)
->  create mode 100644 dts/upstream/src/arm/Makefile
->
-> diff --git a/dts/upstream/src/arm/Makefile b/dts/upstream/src/arm/Makefil=
-e
-> new file mode 100644
-> index 00000000000..9a8f6aa3584
-> --- /dev/null
-> +++ b/dts/upstream/src/arm/Makefile
-> @@ -0,0 +1,14 @@
-> +# SPDX-License-Identifier: GPL-2.0+
+Instead this should probably call map_physmem(glue->regs, 0x400,
+MAP_NOCACHE);
+
+I'll leave it a day in case there's any more feedback and then send a
+new revision.
+> +	if (IS_ERR_OR_NULL(qscratch_base)) {
+> +		log_err("%s: Invalid qscratch base address\n", dev->name);
+> +		return;
+> +	}
 > +
-> +include $(srctree)/scripts/Makefile.dts
+> +	if (dev_read_bool(dev, "qcom,select-utmi-as-pipe-clk"))
+> +		dwc3_qcom_select_utmi_clk(qscratch_base);
 > +
-> +targets +=3D $(dtb-y)
-> +
-> +# Add any required device tree compiler flags here
-> +DTC_FLAGS +=3D -a 0x8
-> +
-> +PHONY +=3D dtbs
-> +dtbs: $(addprefix $(obj)/, $(dtb-y))
-> +       @:
-> +
-> +clean-files :=3D */*.dtb */*.dtbo
-> --
-> 2.43.0
->
+
+-- 
+// Caleb (they/them)
