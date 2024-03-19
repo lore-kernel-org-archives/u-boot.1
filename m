@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B6A5C54E71
-	for <u-boot@archiver.kernel.org>; Tue, 19 Mar 2024 19:05:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF03CC54E71
+	for <u-boot@archiver.kernel.org>; Tue, 19 Mar 2024 19:05:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C0CB8808F;
-	Tue, 19 Mar 2024 20:04:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B27A288047;
+	Tue, 19 Mar 2024 20:05:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SHit/FG3";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dpqK3+dz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7C26388089; Tue, 19 Mar 2024 20:04:56 +0100 (CET)
-Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
- [IPv6:2607:f8b0:4864:20::b29])
+ id 08F6488047; Tue, 19 Mar 2024 20:05:06 +0100 (CET)
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 66DCD88092
- for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 20:04:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0FA1E88089
+ for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 20:05:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb29.google.com with SMTP id
- 3f1490d57ef6-dcbef31a9dbso4165366276.1
- for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 12:04:54 -0700 (PDT)
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-609ff069a40so69889317b3.1
+ for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 12:05:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1710875093; x=1711479893; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1710875099; x=1711479899; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=hmV9MRbmEaAflyPqkMXQwREOSVyTGGs4XurvcvgLe+Q=;
- b=SHit/FG3EYLiNZGouU290T+hmnwvX3EbZRIoz0I3tOnuCvG4Ib0yIU8/BhuE9LBd9/
- kfgeRytu9CBpuJ2biCU61DxAjDlYYVndQgMS0hhIYnfnvpedDB0DN1CcWe9LUNa4v1Lg
- dK1108oGUPfU01J7ZaKYkTvLGsucnwbXKcZrA=
+ bh=bQbuuP5ckdgipUzc0OqTPKyotWTCYSqRxfNyWP6Ef6k=;
+ b=dpqK3+dz2K5INuX630+dzTfKkgchH3afxiIBgJNuBI9nrxXRAqfLaIO+FTrnF2NB6e
+ Jc0hKUzisviujr7Dd0kB8wtR2Kn8lLk2TD+3lDHquf4ft+ANocFZ3g33EGRFVZlR70fJ
+ 506GAoI7Aff5v9rzeMWuBwbkcTUq8Pod/c5C0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710875093; x=1711479893;
+ d=1e100.net; s=20230601; t=1710875099; x=1711479899;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hmV9MRbmEaAflyPqkMXQwREOSVyTGGs4XurvcvgLe+Q=;
- b=eUU1X2lN34fX/tjywBINqa2A+xQzWfv1bqKy7tv1ut5cJ051jFztbh/htKrSPx8uNt
- 6QhENrBDG+HET0piSZMXcsOcnKIGb26K5TXIS4nqGkwlgUDykqvvf/aaqWYb6mKO/9u7
- daSQtliqQVub8XErXJ/aXdn1+IZRgRqbIqmN2VrO73GGB7ZDKF3McK+yl15hP7n34Tyi
- h/33USblk8TH3AGTcCOVAXmlK3L9Ucg7D347pzgUFiplFFnNzf8l/48a3grX3xejvDyl
- z6Wa6S2fnzZ4SWLm0ws1ItLP/Gd5L7Fhe80YDy7b8YN/2LBJ0XPGBhKQfddQASsGVSAr
- 83Mg==
+ bh=bQbuuP5ckdgipUzc0OqTPKyotWTCYSqRxfNyWP6Ef6k=;
+ b=alr7o20nw0V/A95sInIXZbdRBN2+b4qe8Lt5XRepHm6TcZyh8bMO003wI/+e9XWDGQ
+ 3EhvdETMLPDOds/9gVudScG/bZk3mGleDAi3BDYEIU6XczcpMI8zV2pzyPNuXyzf0ByQ
+ PsfE3k0NZE+JDfcek+JapQTQGss/y7k0vqOq2NIfwE0qLvOILiBOX5F8HB0yf1Hd4MZC
+ AoHlIsIqDGVs/0nEegvhfqqikRYQPY07kdAHl35JdFUpn7rPzoy+TUkilE2J0kGAqW8q
+ bkBpb6UQRnfllU+r7bKAymGCQH7QKQhHyHa+mWXPPPw9yx2Mxetb1ZH/s/3eX6V3UUmH
+ WcIw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXVzJ06dvN7NQ+Nta6k/gj/2oNmQv2p9R38FCtgLBb59H+QBIlNcyZZlqeWTXbbfxJnROJE5yQDi/tjwTduVHB2M/P0YQ==
-X-Gm-Message-State: AOJu0YzTP5UvvUUvvgVauVEHs3WocAgY7yQDdj5tEd/+MJw1aK30A7eu
- qIf/lBRQ5T8q0rOakUQvhJDS6yEXIQ5QpJDzTeyfaIiBI5NveAy61cBsXWhhB1Q=
-X-Google-Smtp-Source: AGHT+IFyGdZ6iORtmNAOlKaOxDLF5gatIt7S3a3cXQlR5JSmpQUjTlrLGTl/7vHKv8qfXdYV8ZLZMg==
-X-Received: by 2002:a25:4f46:0:b0:dcf:afe3:11bf with SMTP id
- d67-20020a254f46000000b00dcfafe311bfmr2711105ybb.0.1710875092739; 
- Tue, 19 Mar 2024 12:04:52 -0700 (PDT)
+ AJvYcCXZHXpyLjxZi1B9VEfXgLjIQ3kMurpGzmXeAqjU20bLFRpjf4ppKDx8egUJKrwOLTsQVcNSmLdcVAgBzYDgJwGBtdNnaQ==
+X-Gm-Message-State: AOJu0Yw2ZR1x2tEkhYXoSprK/8t32XqIQsIV8ATc8CXCAxYXpQ66IDDk
+ W1EXCPfkLvGbBmZuIyqyga/++Sl87+JlJeKz030fqh/jmUEG93Rnc0tQEA6mlW8=
+X-Google-Smtp-Source: AGHT+IHaurEsoAzMii3Fk3nM30HYji0O2lNF328ZGK5BeoxebPkS3v/aVqmV6DYSCJvBl36tfsBQoQ==
+X-Received: by 2002:a0d:d302:0:b0:60a:48ea:2269 with SMTP id
+ v2-20020a0dd302000000b0060a48ea2269mr15758781ywd.9.1710875098680; 
+ Tue, 19 Mar 2024 12:04:58 -0700 (PDT)
 Received: from bill-the-cat (065-184-193-066.res.spectrum.com. [65.184.193.66])
  by smtp.gmail.com with ESMTPSA id
- l36-20020a25ad64000000b00dcbce4abc32sm2364597ybe.36.2024.03.19.12.04.51
+ q187-20020a8199c4000000b0060a0a571e47sm2486430ywg.104.2024.03.19.12.04.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Mar 2024 12:04:52 -0700 (PDT)
-Date: Tue, 19 Mar 2024 15:04:50 -0400
+ Tue, 19 Mar 2024 12:04:58 -0700 (PDT)
+Date: Tue, 19 Mar 2024 15:04:56 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>, seanga2@gmail.com
-Cc: peng.fan@nxp.com, ye.li@nxp.com, u-boot@lists.denx.de,
- marcel.ziswiler@toradex.com, francesco.dolcini@toradex.com,
- hiago.franco@toradex.com, joao.goncalves@toradex.com
-Subject: Re: [PATCH 1/2] clk: clk-imx8qxp: Add LPUART IPG entries
-Message-ID: <20240319190450.GI3442575@bill-the-cat>
-References: <20240308201316.1721909-1-festevam@gmail.com>
- <CAOMZO5Aa_EaTtL9r7k0P7CaJQ0fixGLJSR3WvxHAD2=5RJdncQ@mail.gmail.com>
+To: Francesco Dolcini <francesco@dolcini.it>
+Cc: Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Joao Paulo Goncalves <joao.goncalves@toradex.com>, u-boot@lists.denx.de,
+ Joao Paulo Goncalves <jpaulo.silvagoncalves@gmail.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>
+Subject: Re: [PATCH] arm: dts: k3-am625-verdin-r5: Change CPU frequency to
+ 800MHz
+Message-ID: <20240319190456.GJ3442575@bill-the-cat>
+References: <20240319140427.73721-1-jpaulo.silvagoncalves@gmail.com>
+ <20240319150531.GA17472@francesco-nb>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="SeKFQluJCpceJP9O"
+ protocol="application/pgp-signature"; boundary="WP8syG5U8KOriGaj"
 Content-Disposition: inline
-In-Reply-To: <CAOMZO5Aa_EaTtL9r7k0P7CaJQ0fixGLJSR3WvxHAD2=5RJdncQ@mail.gmail.com>
+In-Reply-To: <20240319150531.GA17472@francesco-nb>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,54 +97,51 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---SeKFQluJCpceJP9O
-Content-Type: text/plain; charset=utf-8
+--WP8syG5U8KOriGaj
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Mar 18, 2024 at 09:14:53PM -0300, Fabio Estevam wrote:
-> Hi Tom and Sean,
+On Tue, Mar 19, 2024 at 04:05:31PM +0100, Francesco Dolcini wrote:
+> Hello Tom,
 >=20
-> On Fri, Mar 8, 2024 at 5:13=E2=80=AFPM Fabio Estevam <festevam@gmail.com>=
- wrote:
-> >
-> > Since commit cc7df0b9e8bc ("serial: lpuart: Enable IPG clock")
-> > the colibri-imx8qxp board no longer boots.
-> >
-> > The reason is that the imx8qxp clock driver does not handle the
-> > LPUART IPG clocks inside get_rate(), set_rate() and enable() functions.
-> >
-> > Fix the boot regression by adding the LPUART IPG entries.
-> >
-> > Fixes: cc7df0b9e8bc ("serial: lpuart: Enable IPG clock")
-> > Reported-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
-> > Signed-off-by: Fabio Estevam <festevam@gmail.com>
+> On Tue, Mar 19, 2024 at 11:04:27AM -0300, Joao Paulo Goncalves wrote:
+> > From: Joao Paulo Goncalves <joao.goncalves@toradex.com>
+> >=20
+> > The lowest speed grade of Toradex AM62 SoMs is K speed, resulting in a
+> > max value of 800MHz for the CPU operating frequency. A solution with
+> > runtime selection of the CPU frequency is already planned to avoid these
+> > kinds of problems in the future.
+> >=20
+> > Fixes: 8fb8a6d49977 ("arm: dts: k3-am625-verdin-r5:Change CPU
+> > frequency to 1000MHz")
+> > Signed-off-by: Joao Paulo Goncalves <joao.goncalves@toradex.com>
 >=20
-> Please consider applying this series to 2024.04.
->=20
-> It fixes a boot regression on imx8qxp and imx8qm.
+> We have a patch ready to make the frequency adjusted at runtime that
+> should be on the mailing list in a day or so, as suggested by Vignesh,
+> targetting uboot-next, this one fix should go into master however.
 
-Fine with me, Sean?
+OK, noted, thanks.
 
 --=20
 Tom
 
---SeKFQluJCpceJP9O
+--WP8syG5U8KOriGaj
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmX54dIACgkQFHw5/5Y0
-tywRIAv/WtRdgDKnzgQSrzifgBkO0ZAJz1TVU0VoxjAmreasOK3ahTP7AGbQtMS/
-kX30Fqv9kLP/YhLAN86IIzchSfYhsOC+PlEbdt1jMZuNjp4jaZRqlFFZU8VQV/GY
-qWnlqbx+HzJxnz0729Q+3MNNMQ65HBzVW2Uz9WLHqBj8SQaTRjX7kaulLgqRBbq0
-9+3RSO7euJt+46R4aeOkQMQtNEu3zpZR8xwR27HakioroKl+llvgxrTjT/fHG/3o
-oXZXMQw4JDbSykDlPQzSxKEyrlHUtqoVfO5FkzI0IftlnoeQGRLlXcx531NWQoI/
-1SamgBwpirnHK7mp4NNro47QmYqJrLsWeQVKv5og9uRBFtx1zjg7rGk2O9oDFTkg
-WYszmgu3PY0D/pVQD+KTFjfuCdurG2Giko7QDgkQlH2GpiSdmSOxKy+7R+EVSkUF
-/vdTjcKnjJrNhB7cARSR14agEvUDB06OkBPLLoYS0Bxut+kOzBD3WKy+YXrTOaDT
-m2U9EsXo
-=SoTE
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmX54dcACgkQFHw5/5Y0
+tyzUnQwAicaKPsj5z2IUVW6aA0zyYN4ZfWBwa4ToWfHn33QGowcBRJL6OIgjfhx3
+ZjpReW0kNAW7FSy8SK1nWjlic4G91rQDDaWppnFvGNBRASFoqd1MDskb9jjD5ZS/
+y0peetmcBPRsyEBmh9U3cCUj5ik0z2wMdZVgKiCmdNbb9lSLhOLAgn4fUkqGdtUL
+sKdVtCG8nb0Sh0/eBQI4MObJ1G2D62WNHH1/9PZ4OtRwrvRIuW4qqIQ+IvjkAkum
+YpxhF7XEw2oFaZi59HM2RQlo3gft0juUVLBfxL9Uay2jf2fvoGTldrb1lT0w9ZNs
+7bIPVIkhOjKAG0tcw6kwvGDNT5FWQtOHUzUwQ1KsuVGTaWX3Cyf0TGYLQDHdhDvf
+Z0e63/s8j04gmxIjj2RhhTZ9WIy70lpU9XlbN9mBFwqI6Nq/AdyyHGpiFFMsZey9
+hvG7cnm/Q9pbJxvovIEUy78UATak2HIhd+9JNzO2TgKPykuxn4C36RZN7FjhwRI9
+AG+2kxBH
+=9WL1
 -----END PGP SIGNATURE-----
 
---SeKFQluJCpceJP9O--
+--WP8syG5U8KOriGaj--
