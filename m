@@ -4,58 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A1A2C6FD1F
-	for <u-boot@archiver.kernel.org>; Tue, 19 Mar 2024 16:09:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F098BCD11BF
+	for <u-boot@archiver.kernel.org>; Tue, 19 Mar 2024 16:10:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC2F787F3D;
-	Tue, 19 Mar 2024 17:08:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 67E0B87F0A;
+	Tue, 19 Mar 2024 17:10:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="gF3n9p4P";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iTTfrXaY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9633C87FC5; Tue, 19 Mar 2024 17:08:57 +0100 (CET)
-Received: from mail.manjaro.org (mail.manjaro.org [116.203.91.91])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 221E087D82; Tue, 19 Mar 2024 17:10:30 +0100 (CET)
+Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
+ [IPv6:2a00:1450:4864:20::22e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9008287D82
- for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 17:08:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
+ by phobos.denx.de (Postfix) with ESMTPS id 28B9087D82
+ for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 17:10:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=maximmosk4@gmail.com
+Received: by mail-lj1-x22e.google.com with SMTP id
+ 38308e7fff4ca-2d27184197cso76050781fa.1
+ for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 09:10:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1710864627; x=1711469427; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Zm3U654Nut1+La4zI7uDUPRY05PZKgPmJr21URirjQg=;
+ b=iTTfrXaYArZA427HE7fgdGRUbuwNZ1cGKsxNS9ipdvAEcdS+mllcIny0bg4AT1vum5
+ 4N6jnWGAwO7opjgfMnrxi9OowfiWOe13g2qG3xhw0Dax0gopdVejFp0uHK8fmnGoTr8g
+ smQde92UDKrUVomYlqSAbvXN6dKq6Nzi7w5GugTgq4BUqSspldKMkfgcbURpm2j6fgLv
+ WrT74C5lUXTojSHZvhQZ1VV3yWGvyM1A8eY+iWcIlIowHDaZsaV8Zs12ggb/KyenKRF7
+ Zvovi4NiXfHUNY1rDw0ZY66wsWzXMZgRy5l2c1ehw5BvW0lAmNz95nKyaL0C0HBa+NF9
+ DNBg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710864627; x=1711469427;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Zm3U654Nut1+La4zI7uDUPRY05PZKgPmJr21URirjQg=;
+ b=A8tktwZpLKAzuONwjW56cjqv/MfJY6a/LCf9isf2EcYofUM2/H2qJp0fO3zA6l1hez
+ AzUY3JFy0MLSr4kL2y0nF/x7vPkORqukNg7phl3ApRHqbsk5nUyEbt+j+UetcygxzVwP
+ 8loI5Zc4x/uPH65eltJdqPnYxwPbOwNBknGVTpa62682dXu1+TXxTOK5nqXqvHR6sP3x
+ iGQYGF3+p9yl8fj/1x5JrwkjSQjpiNOpLyZ1Pzgu/07r+7ziSxZST6wWgi0mWXtkeZO9
+ 3GodePmjPuajWkVP68urwLXvYXeKmjLzNYGwL6k7wufO536LT+0E2C5rtiHbb9CofQKR
+ 5qZw==
+X-Gm-Message-State: AOJu0Yy7GmOsgGV/YAP4+M8Q6eVMwNg25C3X0sSbOSQoKWmu8Vpxve0g
+ YkNj87usdxbeLn9jEdvJ8f2LyOFTthQuxMU+5WMQ37a1hPBGVa5T
+X-Google-Smtp-Source: AGHT+IGjR9QJMiWs71wsytO4gPU2HOEVg/Jp1BYe7JTSo8GioCrBtK2rsJuvMI76EyKnpwmppQbCmg==
+X-Received: by 2002:a2e:881a:0:b0:2d4:71b9:4e3 with SMTP id
+ x26-20020a2e881a000000b002d471b904e3mr1981493ljh.51.1710864627104; 
+ Tue, 19 Mar 2024 09:10:27 -0700 (PDT)
+Received: from moskalets-nb.kdtln.ru (109-252-14-191.nat.spd-mgts.ru.
+ [109.252.14.191]) by smtp.gmail.com with ESMTPSA id
+ e7-20020a2eb1c7000000b002d45cf96cccsm1893961lja.44.2024.03.19.09.10.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 19 Mar 2024 09:10:26 -0700 (PDT)
+From: Maxim Moskalets <maximmosk4@gmail.com>
+X-Google-Original-From: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>
+To: sjg@chromium.org, trini@konsulko.com, marek.vasut+renesas@mailbox.org,
+ ralph.siemsen@linaro.org, xypron.glpk@gmx.de, mkorpershoek@baylibre.com,
+ souajih@baylibre.com, takahiro.akashi@linaro.org, sean.anderson@seco.com
+Cc: u-boot@lists.denx.de, Maxim.Moskalets@kaspersky.com,
+ Maxim Moskalets <maximmosk4@gmail.com>
+Subject: [PATCH] cmd: bootm: add ELF file support
+Date: Tue, 19 Mar 2024 19:10:22 +0300
+Message-Id: <20240319161022.41451-1-Maxim.Moskalets@kaspersky.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1710864535;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=4PrXsC+oxQf0P5VA0IKBqoNE4e+m+CfjbEGUcuRc2i0=;
- b=gF3n9p4PvNtqqgJ4qBXlTGTUUrAFAxT0JILTJhwqo1yhe217NkJnEauMdL/ZWbxyKNZw2z
- AvQ1zrzijNi0R1KDhg6ePtQSlPoMBNsRb+u3zcnWnuYfYevdUTxAiVqWOMwBnPtmNwlTt/
- uW348HafNao/vY3EUnOKJ2OJHQiYowTNG6MAu0o/mWZNLJ9ZnC9SL+gaWGl51GWgH4thQQ
- l1SoiYVavKNKbmbKsrRpZ6w14vd4/0OHqJSAFZn8t9QYJuq5THLmTE+IXb4G9/MCsUyguk
- /msgklMEb4bHwXDKnZaHRuvi2MEmDg7MYmExPD/rdmWSr2WAyu52tPcBfGrbMQ==
-Date: Tue, 19 Mar 2024 17:08:54 +0100
-From: Dragan Simic <dsimic@manjaro.org>
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Christopher Obbard <chris.obbard@collabora.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH] rockchip: spl: Cache boot source id for later use
-In-Reply-To: <16c848fe-5230-43fd-9917-83b196d152ec@kwiboo.se>
-References: <20240315173454.2672509-1-jonas@kwiboo.se>
- <82cb3644a72bfb293364ddd7bcedc00d@manjaro.org>
- <16c848fe-5230-43fd-9917-83b196d152ec@kwiboo.se>
-Message-ID: <102f0a77ecb5c417ebe55b86bc7696ab@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,69 +92,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2024-03-19 16:59, Jonas Karlman wrote:
-> On 2024-03-19 10:44, Dragan Simic wrote:
->> On 2024-03-15 18:34, Jonas Karlman wrote:
->>> diff --git a/arch/arm/mach-rockchip/spl.c
->>> b/arch/arm/mach-rockchip/spl.c
->>> index 1586a093fc37..27e996b504e7 100644
->>> --- a/arch/arm/mach-rockchip/spl.c
->>> +++ b/arch/arm/mach-rockchip/spl.c
->>> @@ -32,9 +32,17 @@ __weak const char * const
->>> boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
->>> 
->>>  const char *board_spl_was_booted_from(void)
->>>  {
->>> -	u32  bootdevice_brom_id = readl(BROM_BOOTSOURCE_ID_ADDR);
->>> +	static u32 bootdevice_brom_id;
->>>  	const char *bootdevice_ofpath = NULL;
->>> 
->>> +	if (!bootdevice_brom_id)
->>> +		bootdevice_brom_id = readl(BROM_BOOTSOURCE_ID_ADDR);
->>> +	if (!bootdevice_brom_id) {
->>> +		debug("%s: unknown brom_bootdevice_id %x\n",
->>> +		      __func__, bootdevice_brom_id);
->>> +		return NULL;
->>> +	}
->>> +
->> 
->> Maybe it would be better to execute readl(BROM_BOOTSOURCE_ID_ADDR)
->> only once, i.e. to have something like this instead:
->> 
->>      +	static u32 bootdevice_brom_id = -1;
->> 
->>      +	if (bootdevice_brom_id == -1) {
->>      +		bootdevice_brom_id = readl(BROM_BOOTSOURCE_ID_ADDR);
->>      +		if (!bootdevice_brom_id)
->>      +			debug("%s: unknown brom_bootdevice_id %x\n",
->>      +			      __func__, bootdevice_brom_id);
->>      +	}
->>      +
->>      +	if (!bootdevice_brom_id)	/* fail on subsequent tries */
->>      +		return NULL;
->>      +
->> 
->> The logic behind such an approach would be to try only once and fail
->> on subsequent (re)tries.  That way, it would also serve as some kind 
->> of
->> a runtime canary test, because the first try should succeed, which may
->> prove useful in the field.
-> 
-> If we initialize the static variable to a value it will be stored in 
-> the
-> .data section and takes up binary size. With a static variable like in
-> this patch this is instead stored in .bss section and gets initialized
-> to 0 by runtime. 0 is also not a valid boot source id value and the
-> reset value for the reg.
+Some operating systems (e.g. seL4) and embedded applications are ELF
+images. It is convenient to use FIT-images to implement trusted boot.
+Added "elf" image type for booting using bootm command.
 
-Is it mandatory that this static variable ends up in the .bss section?
+Signed-off-by: Maxim Moskalets <maximmosk4@gmail.com>
+---
+ boot/bootm_os.c  | 21 +++++++++++++++++++++
+ boot/image-fit.c |  3 ++-
+ boot/image.c     |  3 +++
+ include/image.h  |  1 +
+ 4 files changed, 27 insertions(+), 1 deletion(-)
 
-> I do not see any point in making the code more complex than it has to 
-> be.
-> The reg will contain a known boot source id, 1 - 10, set by BROM or
-> something has gone wrong and the value is not usable any way.
+diff --git a/boot/bootm_os.c b/boot/bootm_os.c
+index ccde72d22c..71bfb34926 100644
+--- a/boot/bootm_os.c
++++ b/boot/bootm_os.c
+@@ -395,6 +395,24 @@ static int do_bootm_qnxelf(int flag, struct bootm_info *bmi)
+ }
+ #endif
+ 
++#if defined(CONFIG_CMD_ELF)
++static int do_bootm_elf(int flag, struct bootm_info *bmi)
++{
++	struct bootm_headers *images = bmi->images;
++	char *local_args[2] = {NULL};
++	char str[19] = ""; /* "0x" + 16 digits + "\0" */
++
++	sprintf(str, "0x%lx", images->ep); /* write entry-point into string */
++	str[18] = '\0';
++	local_args[0] = bmi->argv[0];
++	local_args[1] = str;	/* and provide it via the arguments */
++
++	do_bootelf(NULL, 0, 2, local_args);
++
++	return 1;
++}
++#endif
++
+ #ifdef CONFIG_INTEGRITY
+ static int do_bootm_integrity(int flag, struct bootm_info *bmi)
+ {
+@@ -536,6 +554,9 @@ static boot_os_fn *boot_os[] = {
+ #ifdef CONFIG_BOOTM_EFI
+ 	[IH_OS_EFI] = do_bootm_efi,
+ #endif
++#if defined(CONFIG_CMD_ELF)
++	[IH_OS_ELF] = do_bootm_elf,
++#endif
+ };
+ 
+ /* Allow for arch specific config before we boot */
+diff --git a/boot/image-fit.c b/boot/image-fit.c
+index 89e377563c..0419bef6d2 100644
+--- a/boot/image-fit.c
++++ b/boot/image-fit.c
+@@ -2180,7 +2180,8 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
+ 		fit_image_check_os(fit, noffset, IH_OS_TEE) ||
+ 		fit_image_check_os(fit, noffset, IH_OS_OPENRTOS) ||
+ 		fit_image_check_os(fit, noffset, IH_OS_EFI) ||
+-		fit_image_check_os(fit, noffset, IH_OS_VXWORKS);
++		fit_image_check_os(fit, noffset, IH_OS_VXWORKS) ||
++		fit_image_check_os(fit, noffset, IH_OS_ELF);
+ 
+ 	/*
+ 	 * If either of the checks fail, we should report an error, but
+diff --git a/boot/image.c b/boot/image.c
+index 073931cd7a..5b88d6808c 100644
+--- a/boot/image.c
++++ b/boot/image.c
+@@ -134,6 +134,9 @@ static const table_entry_t uimage_os[] = {
+ #endif
+ 	{	IH_OS_OPENSBI,	"opensbi",	"RISC-V OpenSBI",	},
+ 	{	IH_OS_EFI,	"efi",		"EFI Firmware" },
++#ifdef CONFIG_CMD_ELF
++	{	IH_OS_ELF,	"elf",		"ELF Image" },
++#endif
+ 
+ 	{	-1,		"",		"",			},
+ };
+diff --git a/include/image.h b/include/image.h
+index 21de70f0c9..9a40bca22c 100644
+--- a/include/image.h
++++ b/include/image.h
+@@ -100,6 +100,7 @@ enum {
+ 	IH_OS_TEE,			/* Trusted Execution Environment */
+ 	IH_OS_OPENSBI,			/* RISC-V OpenSBI */
+ 	IH_OS_EFI,			/* EFI Firmware (e.g. GRUB2) */
++	IH_OS_ELF,			/* ELF Image (e.g. seL4) */
+ 
+ 	IH_OS_COUNT,
+ };
+-- 
+2.39.2
 
-As I already described, making the code more complex would intentionally
-introduce a failure point, which would be triggered in case obtaining
-valid value from readl() fails the first time.  Something like that is
-usually known as a canary, which I'm sure you already know about.
