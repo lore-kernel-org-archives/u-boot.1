@@ -4,84 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C389C54E71
-	for <u-boot@archiver.kernel.org>; Tue, 19 Mar 2024 18:21:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBD09C6FD1F
+	for <u-boot@archiver.kernel.org>; Tue, 19 Mar 2024 18:22:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF45988080;
-	Tue, 19 Mar 2024 19:20:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9ADDD88059;
+	Tue, 19 Mar 2024 19:22:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="SColivSJ";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="RXWRIIVN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E084C87F77; Tue, 19 Mar 2024 19:20:12 +0100 (CET)
-Received: from mail-lj1-x249.google.com (mail-lj1-x249.google.com
- [IPv6:2a00:1450:4864:20::249])
+ id 7242B8806E; Tue, 19 Mar 2024 19:22:20 +0100 (CET)
+Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
+ [IPv6:2607:f8b0:4864:20::1031])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 04F7887FEE
- for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 19:20:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 44C4D87F77
+ for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 19:22:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=3Wdf5ZQYKBiYDCTPCUIQQING.EQOW-DQQVNKUVU.FGPZ.FG@flex--barnas.bounces.google.com
-Received: by mail-lj1-x249.google.com with SMTP id
- 38308e7fff4ca-2d496045d19so30176191fa.0
- for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 11:20:10 -0700 (PDT)
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=barnas@google.com
+Received: by mail-pj1-x1031.google.com with SMTP id
+ 98e67ed59e1d1-29fb11f4b34so122936a91.0
+ for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 11:22:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1710872410; x=1711477210; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:from:subject:message-id:references
- :mime-version:in-reply-to:date:from:to:cc:subject:date:message-id
- :reply-to; bh=ui6TEkit2d93/EKni3jZ2rBsl1MmK00uecahQlwswtk=;
- b=SColivSJz4CX9SfsjsGs3ejgMiern0gnnRxbEBNp14qfFMplGNhgE8O2/SLJBVPGni
- VkQ9h0JXWJc4OcZvgGwYXAsCc5veWIFBoWjD47tjaTZ0xG2rd5y0CwQqdXBQo0jJfXZJ
- qmtg6yOEFO+eY36jTNnEekLTJlufrBXfo7+BOzQbEKnNjkWp6lTEN9VQfxcNxnWmRFFB
- VOWRH/EUJXteJoWmotfhH83GPTWBx+M9W+gPr/4GcfL02Aj4KICrLBoPetGm73Gb68t3
- EShqlr/G7wPCQcRANycmuEf3bWFmnczk5ijKSJIgsEVaeHnbB+0BEjVLbb1BZYdY+H9V
- UltA==
+ d=google.com; s=20230601; t=1710872537; x=1711477337; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=pLK9nPlzml3dpmYlx1/pQVnORWzPW1Z3ArvrblRTfnc=;
+ b=RXWRIIVNmvdGdzo6BxuCv7dez+9ZXKFbAzRxbnXsgxLWVbw/ZVeUZfJkY41scgBt+9
+ rh+giGSFDvgtmG8vKkF0gaP+wGJzKWU8kk/JNYvXxWgNyfO2iEoJAC9ieYWUo2M/7dZa
+ V0eJDN729m8gl/xsGBGOyydWqNRwpWfEJFAl51ctLZtslLgQT/wAXdmihW5hZeesYsO/
+ 9fZISHtTIq5ifu4QmSXTZpDfjxPlRx4F5xUELXxDCI4wqgSdjfOf3NlIjq2UbvdQXR3L
+ NqDmRucy7wcocx+UREduWF8ill++rgSzjuxaSnr0WP5oWVL7SbM7KjX9n21JBzTsrRsk
+ IzEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710872410; x=1711477210;
- h=content-transfer-encoding:cc:to:from:subject:message-id:references
- :mime-version:in-reply-to:date:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=ui6TEkit2d93/EKni3jZ2rBsl1MmK00uecahQlwswtk=;
- b=RD6Fb5yFCeFDYAef4KEvTVOZ2TD6qDbjkp21YoNeGGqmmi5M6KOp2HdNAp5Qqzd5ou
- 6YNlA0cpHHk/oVNSRau+yWtivFWz31iMg3LxGVJzwlo6S6vdgmm6OaUSPVuVOXAgqQmM
- fyRN36hbRa8Jfr/jfgKSGfMJWx6ePEhXPJN1FavM0k/OpsPEH7JW/2vcIgkxAxI8AXZe
- YXCTDYCq0L4BuYCsrl6D5H94A7ieCGXcz7bllNfgi+pjRmNnoIHrnt3+KBz3aqgUUTd/
- VN7dq0MVpBfwyuPQmwpkUPCvJuYvJSBI8eortezZxm6RfBYMk84ghcdzqLT0NFc3owE3
- AtjA==
-X-Gm-Message-State: AOJu0YzQjLSw3OBAS329q5CQt+uQp3417Q8puaSU/fwFDCE1dGX/eDv5
- 9gxhacOzjGkc1TB01H2gV7Pm8sZQv0dWxedKajnzJAF7L4uOZCRzyMAvDHWXi1Pia9kX/serBU3
- xWdubNCvuLiVKyyxcdhQ9WwbHm64DsThqd/b4o6oMhR7uQp7/s9H5lTb6hTvICHMNdAotVVYhZM
- 2EyygIRdWQLjEypj//UG7LTytWxEvQfA==
-X-Google-Smtp-Source: AGHT+IHhsN3pa6l29in7dLpgR3LUJPHkIYoprq9mc5EFDYvvMKdTEQcqizU+vMC+xcU91kNeiBpYOpy/w4k=
-X-Received: from zombine.c.googlers.com
- ([fda3:e722:ac3:cc00:68:949d:c0a8:7f3e])
- (user=barnas job=sendgmr) by 2002:a2e:91d4:0:b0:2d4:584f:c64b with SMTP id
- u20-20020a2e91d4000000b002d4584fc64bmr22112ljg.7.1710872409911; Tue, 19 Mar
- 2024 11:20:09 -0700 (PDT)
-Date: Tue, 19 Mar 2024 18:18:14 +0000
-In-Reply-To: <20240319181949.3083508-1-barnas@google.com>
-Mime-Version: 1.0
-References: <c0cbfa06-9206-4ca6-ad51-ad7b0e54cf1c@denx.de>
- <20240319181949.3083508-1-barnas@google.com>
-X-Mailer: git-send-email 2.44.0.291.gc1ea87d7ee-goog
-Message-ID: <20240319181949.3083508-3-barnas@google.com>
-Subject: [PATCH v3 2/2] chameleonv3: set in defconfig for FPGA to reprogram
- every reboot
-From: "=?UTF-8?q?Micha=C5=82=20Barna=C5=9B?=" <barnas@google.com>
-To: u-boot@lists.denx.de
-Cc: "=?UTF-8?q?Micha=C5=82=20Barna=C5=9B?=" <barnas@google.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
- Martyn Welch <martyn.welch@collabora.com>, 
- "=?UTF-8?q?Pawe=C5=82=20Anikiel?=" <pan@semihalf.com>,
- Simon Glass <sjg@chromium.org>, 
- Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>
+ d=1e100.net; s=20230601; t=1710872537; x=1711477337;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=pLK9nPlzml3dpmYlx1/pQVnORWzPW1Z3ArvrblRTfnc=;
+ b=uOsizBgF0s4z+oeM9WDvVtn1PfVgXhw1FLl3VBYEti83pmDrdi0x/S2HpMI62ps7Kp
+ 4gZZenClAX5xEJ5ULN3Wlc8+BI8B2vz8A9rnk7hAsVYcRft/OeeV7ombJ5laNtz4mSAX
+ 44qRT9G/b+h5nj6Gax9XZPGqYfysR3Ihoy7g9isfNinwkiakQFYwpxMwfvITegQ16SXc
+ fH6AFwTWESDR6y8hxDtiPItx5qtGENq1quB1bmOBIJsKtvUdBSqao/2N5FDcCGiYYtJa
+ Rv9J9N8mu8EX4KiybvPHKNOGVPcSiYIPGKwHoCH4SPPG/ompVLdrVPbZa3O3bOxvyHpZ
+ 0Bqw==
+X-Gm-Message-State: AOJu0YztLg9jze7SsDUcnxPyn8TIv0foDjydELQE02HOUe08W5eTfbmY
+ KAtkpaz8AVd1gWD+ojB6exsfu7NRsZ/yXDoaeZWlQpGwkbujhWlPAfXAvFjTAFrS1Ut02Kc0Xh/
+ rqI0fP4FyWH0I/b2owNGYytZ5x3GtnTJJLyti
+X-Google-Smtp-Source: AGHT+IHYDcMH/wyKu6DhNthc6laoILf+6/GqsyPOojKHoJuBkh9VUdg1ht5uo9PqrLZl9hQ1hprLQvBOqmRmyWzcrcI=
+X-Received: by 2002:a17:90b:1988:b0:29f:e0c1:6e5b with SMTP id
+ mv8-20020a17090b198800b0029fe0c16e5bmr2742026pjb.23.1710872536433; Tue, 19
+ Mar 2024 11:22:16 -0700 (PDT)
+MIME-Version: 1.0
+References: <6a69588a-7c50-425a-af7f-96caff727113@kernel.org>
+ <20240308171251.106144-1-barnas@google.com>
+ <20240308171251.106144-2-barnas@google.com>
+ <c0cbfa06-9206-4ca6-ad51-ad7b0e54cf1c@denx.de>
+In-Reply-To: <c0cbfa06-9206-4ca6-ad51-ad7b0e54cf1c@denx.de>
+From: =?UTF-8?B?TWljaGHFgiBCYXJuYcWb?= <barnas@google.com>
+Date: Tue, 19 Mar 2024 19:22:05 +0100
+Message-ID: <CAO4U=ytZNcxhHt+J1OhzEGG=c0_r+sfPQzPbjyY=zxtX1icCSA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] arm: socfpga: arria10: add option to reprogram the
+ FPGA every reboot
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, Dinh Nguyen <dinguyen@kernel.org>, 
+ Simon Glass <sjg@chromium.org>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>, 
+ Tien Fong Chee <tien.fong.chee@intel.com>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Tue, 19 Mar 2024 19:20:50 +0100
+X-Mailman-Approved-At: Tue, 19 Mar 2024 19:22:38 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,32 +95,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Set CONFIG_TARGET_SOCFPGA_ARRIA10_ALWAYS_REPROGRAM as enabled in
-chameleon v3 board's defconfig.
+On Fri, Mar 8, 2024 at 8:01=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
+>
+> On 3/8/24 6:12 PM, Micha=C5=82 Barna=C5=9B wrote:
+> > Add Kconfig that enables FPGA reprogramming with warm boot on Arria 10.
+> > This option allows to change the bitstream on the filesystem and apply
+> > changes with warm reboot without the need for a power cycle.
+> >
+> > Signed-off-by: Micha=C5=82 Barna=C5=9B <barnas@google.com>
+> > ---
+> >
+> > Changes in v2:
+> > - Rebase on current master branch
+> >
+> >   arch/arm/mach-socfpga/Kconfig   | 8 ++++++++
+> >   arch/arm/mach-socfpga/spl_a10.c | 8 ++++++++
+> >   2 files changed, 16 insertions(+)
+> >
+> > diff --git a/arch/arm/mach-socfpga/Kconfig b/arch/arm/mach-socfpga/Kcon=
+fig
+> > index 114d243812..89303f1f16 100644
+> > --- a/arch/arm/mach-socfpga/Kconfig
+> > +++ b/arch/arm/mach-socfpga/Kconfig
+> > @@ -80,6 +80,14 @@ config TARGET_SOCFPGA_ARRIA10
+> >       imply FPGA_SOCFPGA
+> >       imply SPL_USE_TINY_PRINTF
+> >
+> > +config TARGET_SOCFPGA_ARRIA10_ALWAYS_REPROGRAM
+>
+> This is not TARGET (as in SoC), but a regular config option, so please
+> drop the TARGET_ prefix .
+>
+> > +     bool "Always reprogram Arria 10 FPGA"
+> > +     depends on TARGET_SOCFPGA_ARRIA10
+> > +     help
+> > +       Arria 10 FPGA is only programmed during the cold boot.
+> > +       This option forces the FPGA to be reprogrammed every reboot,
+> > +       allowing to change the bitstream and apply it with warm reboot.
+> > +
+> >   config TARGET_SOCFPGA_CYCLONE5
+> >       bool
+> >       select TARGET_SOCFPGA_GEN5
+> > diff --git a/arch/arm/mach-socfpga/spl_a10.c b/arch/arm/mach-socfpga/sp=
+l_a10.c
+> > index 9edbbf4a29..d5d3327a42 100644
+> > --- a/arch/arm/mach-socfpga/spl_a10.c
+> > +++ b/arch/arm/mach-socfpga/spl_a10.c
+> > @@ -122,7 +122,11 @@ void spl_board_init(void)
+> >       arch_early_init_r();
+> >
+> >       /* If the full FPGA is already loaded, ie.from EPCQ, config fpga =
+pins */
+> > +#ifdef CONFIG_TARGET_SOCFPGA_ARRIA10_ALWAYS_REPROGRAM
+> > +     if (is_regular_boot_valid()) {
+> > +#else
+> >       if (is_fpgamgr_user_mode()) {
+> > +#endif
+>
+> Use CONFIG_IS_ENABLED() or IS_ENABLED() macro please .
 
-Signed-off-by: Micha=C5=82 Barna=C5=9B <barnas@google.com>
----
-
-Changes in v3:
-- Update defconfig to use renamed Kconfig
-
- configs/socfpga_chameleonv3_defconfig | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/configs/socfpga_chameleonv3_defconfig b/configs/socfpga_chamel=
-eonv3_defconfig
-index 6ea61ca6ea..7506aa8d32 100644
---- a/configs/socfpga_chameleonv3_defconfig
-+++ b/configs/socfpga_chameleonv3_defconfig
-@@ -7,6 +7,7 @@ CONFIG_DEFAULT_DEVICE_TREE=3D"socfpga_arria10_chameleonv3_4=
-80_2"
- CONFIG_SPL_TEXT_BASE=3D0xFFE00000
- CONFIG_SPL_DRIVERS_MISC=3Dy
- CONFIG_TARGET_SOCFPGA_CHAMELEONV3=3Dy
-+CONFIG_SOCFPGA_ARRIA10_ALWAYS_REPROGRAM=3Dy
- CONFIG_SPL_FS_FAT=3Dy
- CONFIG_FIT=3Dy
- CONFIG_SPL_FIT=3Dy
---=20
-2.44.0.291.gc1ea87d7ee-goog
-
+I used the ifdefs because I thought that it would be more readable,
+but changed as you requested.
+Thank you for your response.
