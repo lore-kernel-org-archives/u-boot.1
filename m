@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5583C54E5D
-	for <u-boot@archiver.kernel.org>; Tue, 19 Mar 2024 12:24:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DED7C54E60
+	for <u-boot@archiver.kernel.org>; Tue, 19 Mar 2024 12:24:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4233C880AA;
-	Tue, 19 Mar 2024 13:22:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B6B1B88019;
+	Tue, 19 Mar 2024 13:22:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="j8QhS6AN";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jhiCCKjh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C52BF8807B; Tue, 19 Mar 2024 13:22:53 +0100 (CET)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
+ id 493F6880A7; Tue, 19 Mar 2024 13:22:55 +0100 (CET)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A013388094
- for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 13:22:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C1B358806F
+ for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 13:22:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-33ec7e1d542so2993439f8f.1
- for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 05:22:47 -0700 (PDT)
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-33ed6078884so2148652f8f.1
+ for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 05:22:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710850967; x=1711455767; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1710850968; x=1711455768; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=HxlOsugX2/wIO/P7KsmKCSR/CeuUXJcHxpYPD4HuMPo=;
- b=j8QhS6ANWD6jnh2MMmuBLEtXUXPgHQUKA8yQ2wlSapmfRUPzsxWVN4wi8dw1Wh3AOS
- FISr9fAx0Of3bXWt/fB0fVtIBxQvVPWH7+c74V+siB0qODyakg/W4vcyTFncNZ7RCt6k
- f4E1ufhOJEIcNMFTwg21YKqmtxaCkWYIfEcSZjqNlsqMxQGV8JuHx3y85jAr158kpK81
- /zskiDFMGSdbOS8lAAWvWPJhQkXzfCMqakLgdnhasRF1PhdxIWQIDejfBLS+20SLDDWe
- 0wJCozKdK4PU8YOb3Mv7odgb37ETcnKXDkJ7NtzePSQlePx24PMWPgdN9owCKFD/2wwo
- nl+A==
+ :reply-to; bh=p1DgpWWU6EAciyMI+tFL4AWkmHHqHFUrK84uXLk8RKs=;
+ b=jhiCCKjh3uqajxveV7F9iLK5gkvMPKv305pIoESEGNabj+/IbXzrzQyyTyJw8HzGcV
+ 58yEJJYnAmIJYHZUJkRrsxshyEZEXUO982Er4XskwOdsBODjLkkQVRFi+ldtSV5/rTsI
+ mWo2IxEJrw9G8zHfsHExIETpTcqQZi4kjjJOVBtoafn58mtrXokBD+VR4F2QG2FMlsDT
+ eWAagciO+yQvm6BLPeCgNq44GLZ9TCR8P8FTlMO/pX/p3/LXX9hqd0H+XbmjBBIGt+mV
+ xYJcVOe84fxJU/Xaq8R1wSs14jKcQzOCt4PrV7OoJc7z5CuiJfBzU3FG3sIqmjuuFaKh
+ t3vg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710850967; x=1711455767;
+ d=1e100.net; s=20230601; t=1710850968; x=1711455768;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HxlOsugX2/wIO/P7KsmKCSR/CeuUXJcHxpYPD4HuMPo=;
- b=Y4NuhjndV9oxzLmfXqSa9sxcCYXZItRZ66XJcE0HXMDDNW8EiMe+20hMzrGVd5yzMN
- BE+4vEQ4abMkAb4bgsvhp82dHIW9bJHj65yRmOLNVFcIJIohOxbXI44I1jzZ9dJU98Ws
- oa8cRdIKcC+XSvmA4s0zL/yIJT+WV1mbv4wF1SJPY8lcZMwga4NAQL2GBulzOjZY/9yV
- 00RsCOCbOKdfsBEaf3xXPKm/1e339YYywrYAyL0v1rebUR3D7I9CHKtukGc3EUSmHNWe
- u+U7y46xHUKYisug/pjcvMlQZwuaweBWTAc6kagSVsPLeqvrP7CQuJI477xp9LAfaz3t
- q9Eg==
-X-Gm-Message-State: AOJu0Yzh5OJJ5CsWnlaBe+hyqyksh3CiIcGhepKYQAu6ShyzQBjWEHze
- KtjXIt3qTyip5/xI9okHPt9vIl0Arohjrwp1iyIdNx0UxZbS7/NFUCQWSnuC6RnbgtiyG3xee1g
- P
-X-Google-Smtp-Source: AGHT+IELM1kvS79QmKAMyEAH+Sg4rZiE3WBvPxCTDBLYJ4sjxgXWZnxkR3HwNAdZeq97qN/ZFOWwvQ==
-X-Received: by 2002:adf:e44d:0:b0:33e:7869:fbcd with SMTP id
- t13-20020adfe44d000000b0033e7869fbcdmr1687485wrm.53.1710850967033; 
+ bh=p1DgpWWU6EAciyMI+tFL4AWkmHHqHFUrK84uXLk8RKs=;
+ b=kdllVt0BQTXgisz5mwst0H54I7L/W9uu0Hes1bAeTYdMeM0XCWVs1IJLya4G5hHZ9y
+ qz4AYMzHGZiIMh3xDooYQRi50lgdoM7kFkkKftwxoEaesvTtPtzrHu1kQskwOYAn01Ym
+ SRxmDjpn76LwnN6x6cdQqMmjgekjacikrlgUWyvDidOeSMJgCNYjGzmoBih7p6ftc7H4
+ 8pTsp/tE/4F7gKiqpAm5AvU+9S+KGT4cLUMIsMbepQJUWYBgsROpUpZuIvBBKeGY+W99
+ kn54VTvGMXsLJB7o/N8Qdett7nGpPJgey0pI+BjNZqPJCg1j4iczcz+BRWEfN9q1lNvi
+ MSOw==
+X-Gm-Message-State: AOJu0Yx/bYYRTL6AGCHlwlW5pr6x2uQJMHTspwl6UrQqzcilYvgiRzoX
+ j/TP62BjypCGF8GDQ70BtWLsctfOZAl0sitfIAlmznTCpHqgKtNLl/D0lcKs3YR8MO8YKqDqvOQ
+ B
+X-Google-Smtp-Source: AGHT+IHHx06/slZyA5Yhoklam9XKKt+JilKoypscSKHHb8Z6ZtYizR9XMWbtxKSgOfAuc3e+MJWzrQ==
+X-Received: by 2002:a5d:694c:0:b0:33d:7e9:9543 with SMTP id
+ r12-20020a5d694c000000b0033d07e99543mr2653197wrw.32.1710850967983; 
  Tue, 19 Mar 2024 05:22:47 -0700 (PDT)
 Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- du18-20020a0560000d5200b0033b7ce8b496sm12170498wrb.108.2024.03.19.05.22.46
+ du18-20020a0560000d5200b0033b7ce8b496sm12170498wrb.108.2024.03.19.05.22.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Mar 2024 05:22:46 -0700 (PDT)
+ Tue, 19 Mar 2024 05:22:47 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Tue, 19 Mar 2024 12:22:10 +0000
-Subject: [PATCH v3 11/14] mach-snapdragon: fixup power-domains
+Date: Tue, 19 Mar 2024 12:22:11 +0000
+Subject: [PATCH v3 12/14] dts: sdm845-db845c: add u-boot fixups
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240319-b4-qcom-livetree-v3-11-e1b38d9b4fa4@linaro.org>
+Message-Id: <20240319-b4-qcom-livetree-v3-12-e1b38d9b4fa4@linaro.org>
 References: <20240319-b4-qcom-livetree-v3-0-e1b38d9b4fa4@linaro.org>
 In-Reply-To: <20240319-b4-qcom-livetree-v3-0-e1b38d9b4fa4@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -80,13 +80,13 @@ To: Tom Rini <trini@konsulko.com>,
  Sean Anderson <seanga2@gmail.com>
 Cc: u-boot@lists.denx.de
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2538;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=843;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=eATLOOhI4TMycRloeb2rEN+Hpuc/Br8JMYSeGYyQmIY=;
- b=kA0DAAgReTBFn7kwMhcByyZiAGX5g4qium5WzrsyrrVZXfmrT11BQUoNjTNFPdBkvxplb9k5T
- 4h1BAARCAAdFiEEF8imOYKt0z8ot6DQeTBFn7kwMhcFAmX5g4oACgkQeTBFn7kwMhdkbAEAt5vo
- a/gG1e/2JX3o2VkxXh12EA3jSmPyElg81gV2gC0BAKJkFk1uUxUiKiCIa5N7XCtYWBOj0uVcEV0
- CVLQQF4/m
+ bh=YmBgscYN04ZbVZGGJFD08tSuDrrGuIbLaNGLiTo8A1w=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtSfzV1/mpc95eapMemNPVi5ofru17cLnC60HJF3bU8xy
+ PbLT/nVUcrCIMjBICumyCJ+Ypll09rL9hrbF1yAmcPKBDKEgYtTACbSsJKRoScrgV9/hZvcrkMx
+ Rjfd1v/97J9wxPSL2Zp/N30CfZcuOsrw39dgz9o/xRL7EgJuSSmpKmt/zblwrWfbJKt1RVOvdd9
+ a6AsA
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -105,78 +105,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We don't support the RPM(h)PD power domains in U-Boot, and we don't need
-to - the necessary resources are on, and we aren't going to enter any
-low power modes.
-
-We could try using a no-op device, but this requires adding a compatible
-for every platform, and just pollutes the driver model. So instead let's
-just remove every "power-domains" property that references the RPM(h)pd
-power controller. This takes <1ms as we're using OF_LIVE.
-
-Of note, this only applies to drivers which are loading post-relocation.
-Drivers loaded pre-reloc that reference the rpm(h)pd still need
-DM_FLAG_DEFAULT_PD_CTRL_OFF in their flags.
+The USB VBUS supply for the type-A port is enabled via a GPIO regulator.
+This is incorrectly modelled in Linux where only the PCIe dependency is
+expressed. Add a U-Boot specific dtsi snippet so that this supply will
+get enabled when initialising USB.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- arch/arm/mach-snapdragon/of_fixup.c | 32 ++++++++++++++++++++++++++++++++
- 1 file changed, 32 insertions(+)
+ arch/arm/dts/sdm845-db845c-u-boot.dtsi | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/arch/arm/mach-snapdragon/of_fixup.c b/arch/arm/mach-snapdragon/of_fixup.c
-index 6810c8617cc0..49f1fc1948f3 100644
---- a/arch/arm/mach-snapdragon/of_fixup.c
-+++ b/arch/arm/mach-snapdragon/of_fixup.c
-@@ -21,8 +21,9 @@
- #include <dm/of_access.h>
- #include <dm/of.h>
- #include <fdt_support.h>
- #include <linux/errno.h>
-+#include <stdlib.h>
- 
- /* U-Boot only supports USB high-speed mode on Qualcomm platforms with DWC3
-  * USB controllers. Rather than requiring source level DT changes, we fix up
-  * DT here. This improves compatibility with upstream DT and simplifies the
-@@ -108,8 +109,39 @@ static void fixup_usb_nodes(void)
- 			log_warning("Failed to fixup node %s: %d\n", glue_np->name, ret);
- 	}
- }
- 
-+/* Remove all references to the rpmhpd device */
-+static void fixup_power_domains(void)
-+{
-+	struct device_node *pd = NULL, *np = NULL;
-+	struct property *prop;
-+	const __be32 *val;
+diff --git a/arch/arm/dts/sdm845-db845c-u-boot.dtsi b/arch/arm/dts/sdm845-db845c-u-boot.dtsi
+new file mode 100644
+index 000000000000..3c83e21251c4
+--- /dev/null
++++ b/arch/arm/dts/sdm845-db845c-u-boot.dtsi
+@@ -0,0 +1,8 @@
++// SPDX-License-Identifier: GPL-2.0
 +
-+	/* All Qualcomm platforms name the rpm(h)pd "power-controller" */
-+	for_each_of_allnodes(pd) {
-+		if (pd->name && !strcmp("power-controller", pd->name))
-+			break;
-+	}
-+
-+	/* Sanity check that this is indeed a power domain controller */
-+	if (!of_find_property(pd, "#power-domain-cells", NULL)) {
-+		log_err("Found power-controller but it doesn't have #power-domain-cells\n");
-+		return;
-+	}
-+
-+	/* Remove all references to the power domain controller */
-+	for_each_of_allnodes(np) {
-+		if (!(prop = of_find_property(np, "power-domains", NULL)))
-+			continue;
-+
-+		val = prop->value;
-+		if (val[0] == cpu_to_fdt32(pd->phandle))
-+			of_remove_property(np, prop);
-+	}
-+}
-+
- void qcom_of_fixup_nodes(void)
- {
- 	fixup_usb_nodes();
-+	fixup_power_domains();
- }
++/* This GPIO must be turned on to enable the 5v VBUS
++ * supply on the USB port.
++ */
++&usb_2_dwc3 {
++	vbus-supply = <&pcie0_3p3v_dual>;
++};
 
 -- 
 2.44.0
