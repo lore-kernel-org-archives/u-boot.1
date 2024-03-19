@@ -4,80 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A463BC54E68
-	for <u-boot@archiver.kernel.org>; Tue, 19 Mar 2024 19:18:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EC12C54E71
+	for <u-boot@archiver.kernel.org>; Tue, 19 Mar 2024 21:17:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D08CA88091;
-	Tue, 19 Mar 2024 20:18:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 670A087E3E;
+	Tue, 19 Mar 2024 22:17:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=jannau.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MiRSu0KM";
+	dkim=pass (2048-bit key; unprotected) header.d=jannau.net header.i=@jannau.net header.b="ZmzdARsB";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="tyaR4ecx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6033688079; Tue, 19 Mar 2024 20:18:45 +0100 (CET)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C454087DC8; Tue, 19 Mar 2024 22:17:50 +0100 (CET)
+Received: from wfout7-smtp.messagingengine.com
+ (wfout7-smtp.messagingengine.com [64.147.123.150])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4438887B2A
- for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 20:18:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2A14287E3E
+ for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 22:17:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-56b93b45779so1546352a12.1
- for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 12:18:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1710875923; x=1711480723; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=FsPodPrS4atwkOoP8m3HKvElEXH4xc89sCFFzCdpfHo=;
- b=MiRSu0KMCrPfZSWbd57zXzlced9RjLzGBGbZJm9GRJDWNGUu/ooASMIj4IP8iGxaKl
- WFHNNTKnnaVroBxmbx7MbxMcG31lqnb+CvC7Gr68w48f7Z3923T45HXG+c6/fHOAWpIG
- JtjPlIKMlC0v0R9qXo6CFnoojCfBAKtuIjbPkzeDB3KO5lv0y0Qkf6zUl9hh3QSmT4QV
- t0PNUfHAi35EE8P9IeeAVPpyJ7evXI+L1+3gDcEYHDrbbcehSNr+Vll7d7PxEbozdwIk
- Cha7Ds7TMFRd90qqyj2SIltllLhuTwSRUTON/Vi7I6iAk7wy2ZGyX21dpNUKCOn9iQgL
- D+Aw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710875923; x=1711480723;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=FsPodPrS4atwkOoP8m3HKvElEXH4xc89sCFFzCdpfHo=;
- b=asc6/nt00HwzYa1TXPkRhAOk+QtIibQsNI+FJcZtt9rDZuGcjxghpRAva/xT4zby3o
- 7mbS1amBqhoZJ/j09+T46TPrNhOBgwXEmH4N0juRK/EG91Uy6ocqTk8FJvmn8SKToGzy
- AxD86FoGUF6i89bvdb3ZjD3kKoLAhgB+1zeTprcdOPybO1uPXr1s6YpPZ9EkHQhfaUP3
- BnSjMzqUja1MoEh+VfTDPE/7MO2LS1ZL32WwK30UMsAnurB6XwLLnYS0mYAFbceVORKf
- 8Fwlj04ObGF9V0zGnLIWDrTlHMNZab0zBYNsCH8MYMTq6v0WSh97771AQDswwwtI2k5I
- UHag==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUtbAE7AwdfW+tinpJrUzT4V39d6OcyU16j3xOH2k4TH8JY9eLPhptb2cSCVWFl8HkEpGMUkK1doL6hacYXhIirHCTijg==
-X-Gm-Message-State: AOJu0YyaaFr0ve05V569C5vUjDeot0CVSLRo/dXu/F22bSbMV0HnBp36
- nn+1d5ihnuvcZSSMo5zAmoLPdLkuXvsPbJ7/KwuPjPyK4xnNUsOoodMGvdptf9VR2tUhhwbZkBx
- zKcI+dYy1ON8bLvXubq4f3fN049w=
-X-Google-Smtp-Source: AGHT+IEkVrlmNcqHRdEGZ1Ecgh+6gRz/uFLiTK+/CgVCeaIbLEb3xAjOE2+hvPBo0JiJWUGa2Na4XsMqm9kjYsW58o8=
-X-Received: by 2002:a50:c04a:0:b0:567:45e2:c4db with SMTP id
- u10-20020a50c04a000000b0056745e2c4dbmr11363138edd.39.1710875922543; Tue, 19
- Mar 2024 12:18:42 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=jannau.net
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=janne@jannau.net
+Received: from compute7.internal (compute7.nyi.internal [10.202.2.48])
+ by mailfout.west.internal (Postfix) with ESMTP id EF8861C000E0;
+ Tue, 19 Mar 2024 17:17:44 -0400 (EDT)
+Received: from mailfrontend2 ([10.202.2.163])
+ by compute7.internal (MEProxy); Tue, 19 Mar 2024 17:17:45 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jannau.net; h=cc
+ :cc:content-type:content-type:date:date:from:from:in-reply-to
+ :in-reply-to:message-id:mime-version:references:reply-to:subject
+ :subject:to:to; s=fm3; t=1710883064; x=1710969464; bh=MDA9qibaHS
+ Bw6/cmxc9OFDDsFLNcwyDCu+rWAVaOol8=; b=ZmzdARsBANeKeSIvo//ZHg3400
+ VSadJ88Hwlichm4WAYT62GnbI55HVHcsXgGJLg+jY+QRAc+l/lvJafKJEN0Qvgkx
+ fnqEKHcmH17JeQ+HQaGhDfmi1huZN7UvQQC7nhQlapLy1+dGWis2aum5EEkrmH+A
+ X7tcSIYIVlpiFToaP7FpsQlAGp60lUpc6QGKn6W6QEMvDVtbxGJlQ0fN/Bb5wb8R
+ uXviC6OTjRziPRZ5FyEZo8XivLDO+eGCwb5n8Mk1FznECpXZ8yfR+Eo6oVEB6fwf
+ As29LHAchQlDJb/E5rYUts+pz7H7Qv0KmzxQXAmC0vU3tAZkOze+dYdFFH2g==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-type:content-type:date:date
+ :feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+ :message-id:mime-version:references:reply-to:subject:subject:to
+ :to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
+ fm2; t=1710883064; x=1710969464; bh=MDA9qibaHSBw6/cmxc9OFDDsFLNc
+ wyDCu+rWAVaOol8=; b=tyaR4ecxkDBgBaJ6235eY7h0V+QrlSBUOTQi0N0FQDCb
+ 2Jog8hhS/FgHrxzBzlmLLmQNJKUmLXAYOlLGASVrxcWerjbBCrHlblIbH01wf3wW
+ Jgt1pqN6OECq58Lg2PZuPJ/mr8CXR5YZ7YMt1770tEtgSwaxHTm1EtFoHTAmQ28J
+ thh9nL6TZGyiKTvpu0cOLD8KkfVUzP9Nvx7TWtU4mJmuzoAakmVBhQ0hVIwpWGaj
+ PaXLihRxHIhwKbxfuIe5SZhrKMaa8Evd5u+2axbsW7XfTIC3zIg1WXYZ5kLNydaS
+ w+vfgimRAHHlpCggdWTxwIs/qlHGi5B9bYBDQ4b/Gw==
+X-ME-Sender: <xms:-AD6ZWHsGGi1FqPKjiRC1YGJKTVvfJwFBWUAahGCTmbCOJYeZa1AZw>
+ <xme:-AD6ZXXnXQaX9QSbQrCIB4vosDJWzXXYYPYmlASvziOjZ9yJkyhl8QJzfnqugIF1m
+ jXH9t3GX7IKAKpGhsY>
+X-ME-Received: <xmr:-AD6ZQIDK-G9hEgMEH0URrJAxfmm0XB0sBfq8v55p17DUP28HM8ruqbiiJtwfE9yef4oduSDm36izIimkX1yv67DH4X-yRjUog>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrledtgdduvddvucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+ uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+ cujfgurhepfffhvfevuffkfhggtggujgesthdtredttddtjeenucfhrhhomheplfgrnhhn
+ vgcuifhruhhnrghuuceojhesjhgrnhhnrghurdhnvghtqeenucggtffrrghtthgvrhhnpe
+ fgvdffveelgedujeeffeehheekheelheefgfejffeftedugeethfeuudefheefteenucev
+ lhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehjrghnnhgvse
+ hjrghnnhgruhdrnhgvth
+X-ME-Proxy: <xmx:-AD6ZQGAv0rinBW0JcYIlk2m2unuxUDgKQMatidShLr6dTQcTLXoVA>
+ <xmx:-AD6ZcUquvsGBeUMeGqlpwENojmv4tH-dRFcEToO2f6sXGMx74F8hA>
+ <xmx:-AD6ZTPQMzVX2Ek7ggdV00X358kuVRt0C0Y3F_uos6yqFCyGJ_E09Q>
+ <xmx:-AD6ZT0Jv88ZTUgKdQi6bE1uF-vyaTOzYYO3X1kUTjgqHWXxHABGfA>
+ <xmx:-AD6ZQqwiNYrhu2eIYERFLK0vq0Rb7szjM_laxQODBS30yf_wZ0wnQsFtkk>
+Feedback-ID: i47b949f6:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
+ 19 Mar 2024 17:17:43 -0400 (EDT)
+Date: Tue, 19 Mar 2024 22:17:41 +0100
+From: Janne Grunau <j@jannau.net>
+To: Marek Vasut <marex@denx.de>
+Cc: Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, u-boot@lists.denx.de,
+ asahi@lists.linux.dev
+Subject: Re: [PATCH v2 4/6] usb: Add environment based device blocklist
+Message-ID: <ZfoA9VDRwaZYzd0i@robin>
+References: <20240317-asahi-keyboards-v2-0-d3f4b8384f68@jannau.net>
+ <20240317-asahi-keyboards-v2-4-d3f4b8384f68@jannau.net>
+ <22be2258-ff20-4e62-a169-4748cbba4904@denx.de>
+ <970e9686-4bcc-4cda-95b7-e5cb470682b0@app.fastmail.com>
+ <540cbc3f-a9bf-467d-8aa2-c56e53cd7123@denx.de>
+ <e73c0c71-070b-438c-a9e0-2e5ee586d99f@app.fastmail.com>
+ <3f609051-4925-464b-be57-b1a64e5bf861@denx.de>
 MIME-Version: 1.0
-References: <20240318150318.8292-1-marek.vasut+renesas@mailbox.org>
- <CAHCN7xJi0K-fXjR2SVU7MX7hbZs618ciCjBCjSBqtNoNkTNSoQ@mail.gmail.com>
-In-Reply-To: <CAHCN7xJi0K-fXjR2SVU7MX7hbZs618ciCjBCjSBqtNoNkTNSoQ@mail.gmail.com>
-From: Tony Dinh <mibodhi@gmail.com>
-Date: Tue, 19 Mar 2024 12:18:06 -0700
-Message-ID: <CAJaLiFwJAn0y=eXAGe6LrWayM44kT8w_38KM+_MT01EyV_rtpA@mail.gmail.com>
-Subject: Re: [PATCH] Makefile: Add missing OF_UPSTREAM Makefile for 32bit ARM
-To: Adam Ford <aford173@gmail.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de, 
- Biju Das <biju.das.jz@bp.renesas.com>, 
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>, 
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Ralph Siemsen <ralph.siemsen@linaro.org>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <3f609051-4925-464b-be57-b1a64e5bf861@denx.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,60 +109,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Thanks, Sumit!
+On Mon, Mar 18, 2024 at 03:17:33PM +0100, Marek Vasut wrote:
+> On 3/18/24 8:33 AM, Janne Grunau wrote:
+> 
+> >>>>> +static int usb_blocklist_parse_error(const char *blocklist, size_t pos)
+> >>>>> +{
+> >>>>> +	printf("usb_blocklist parse error at char %zu in \"%s\"\n", pos,
+> >>>>> +	       blocklist);
+> >>>>> +	return 0;
+> >>>>
+> >>>> This could be static void without return 0 at the end.
+> >>>
+> >>> the return is there to break out of the while loop on parsing errors in a single statement. This probably won't be necessary after using strsep and sscanf in the parsing function but see below.
+> >>
+> >> Ahh, now I see it. But then, shouldn't this return -ENODEV here already ?
+> > 
+> > It returns 0 so that parsing errors in the blocklist do not result
+> > in blocking every USB device. That looked to me like the
+> > less bad error behavior to me.
+> 
+> In unix , 0 is considered success and non-zero failure .
+> 
+> How about this:
+> 
+> - Return -EINVAL here (parsing failed)
 
-On Tue, Mar 19, 2024 at 6:02=E2=80=AFAM Adam Ford <aford173@gmail.com> wrot=
-e:
->
-> On Mon, Mar 18, 2024 at 10:03=E2=80=AFAM Marek Vasut
-> <marek.vasut+renesas@mailbox.org> wrote:
-> >
-> > Copy dts/upstream/src/arm64/Makefile into dts/upstream/src/arm/Makefile
-> > and create a commit. This makes 32bit ARM buildable with OF_UPSTREAM .
-> >
-> > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->
-> Tested-by: Adam Ford <aford173@gmail.com> #am3517-evm
+If we return 0 / negated errors we do not need this function and we can
+simply report the parsing error when usb_device_is_blocked() return
+-EINVAL.
 
-Tested-by: Tony Dinh <mibodhi@gmail.com>
+> - Instead of 'return 1' in usb_device_is_blocked() return -ENODEV
+> - In usb_select_config(), check
+>    if usb_device_is_blocked returned 0, no device blocked OK
+>    if usb_device_is_blocked returned -ENODEV, device blocked,
+>      return -ENODEV
+>    if usb_device_is_blocked returned any other error, parsing error
+>      return that error
 
-All the best,
-Tony
+I think the preferable option is to ignore parsing errors. If we
+would propagate the error the result would be that every USB device is
+ignored. 
+ 
+> What do you think ?
 
->
-> > ---
-> > Cc: Adam Ford <aford173@gmail.com>
-> > Cc: Biju Das <biju.das.jz@bp.renesas.com>
-> > Cc: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-> > Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-> > Cc: Ralph Siemsen <ralph.siemsen@linaro.org>
-> > Cc: Tom Rini <trini@konsulko.com>
-> > ---
-> >  dts/upstream/src/arm/Makefile | 14 ++++++++++++++
-> >  1 file changed, 14 insertions(+)
-> >  create mode 100644 dts/upstream/src/arm/Makefile
-> >
-> > diff --git a/dts/upstream/src/arm/Makefile b/dts/upstream/src/arm/Makef=
-ile
-> > new file mode 100644
-> > index 00000000000..9a8f6aa3584
-> > --- /dev/null
-> > +++ b/dts/upstream/src/arm/Makefile
-> > @@ -0,0 +1,14 @@
-> > +# SPDX-License-Identifier: GPL-2.0+
-> > +
-> > +include $(srctree)/scripts/Makefile.dts
-> > +
-> > +targets +=3D $(dtb-y)
-> > +
-> > +# Add any required device tree compiler flags here
-> > +DTC_FLAGS +=3D -a 0x8
-> > +
-> > +PHONY +=3D dtbs
-> > +dtbs: $(addprefix $(obj)/, $(dtb-y))
-> > +       @:
-> > +
-> > +clean-files :=3D */*.dtb */*.dtbo
-> > --
-> > 2.43.0
-> >
+Fine by me, -EINVAL makes the parsing error reporting less awkward. Only
+open question is what should happen on parsing errors.
+
+locally modified and ready to resend once we agree on the behavior on
+parsing errors
+
+Janne
