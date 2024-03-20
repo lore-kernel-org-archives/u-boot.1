@@ -4,73 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EF19C54E67
-	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 05:49:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6021C54E67
+	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 06:41:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F7B587F78;
-	Wed, 20 Mar 2024 06:49:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id E687087F5A;
+	Wed, 20 Mar 2024 07:41:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RYt+OEhb";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="0bnwykJX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A0B46880D2; Wed, 20 Mar 2024 06:49:19 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id 2F50887F13; Wed, 20 Mar 2024 07:41:33 +0100 (CET)
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on20601.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:200a::601])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60DA8871C7
- for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 06:49:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B7B2887F5A
+ for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 07:41:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=danishanwar@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 42K5n7xa050672;
- Wed, 20 Mar 2024 00:49:07 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1710913747;
- bh=c8+bhSy4ovI5gZxPTDK/3lgI5M96t+9f1NTvSKyCKyo=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=RYt+OEhbyKXAEByoqFvCrvDW/lihXWNuffDlUS31hVgb5j2anwyXZE6VNmrNFONhX
- ExixHDM7f5VV1uiibQnqLOwNavisj8Z8i3lUG8JJ7binrvijMXgyqhVbCqpYdtpiY/
- bt9z5ttRMEnLSV3yyiFnSCdA5bYYi7XgaviLFZKo=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 42K5n7KP029999
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 20 Mar 2024 00:49:07 -0500
-Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 20
- Mar 2024 00:49:07 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 20 Mar 2024 00:49:07 -0500
-Received: from [10.24.69.25] (danish-tpc.dhcp.ti.com [10.24.69.25])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 42K5n2m4017545;
- Wed, 20 Mar 2024 00:49:03 -0500
-Message-ID: <3b588cc0-225e-466d-9257-f0f4ef592cf3@ti.com>
-Date: Wed, 20 Mar 2024 11:19:01 +0530
+ spf=fail smtp.mailfrom=tejas.arvind.bhumkar@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=FKfEM2+b62Vsr15ITgo+HHRzeQgixDj7sP1t7tLa9MkVK/4zEyJBJLLI84fJn/svgf9/8pdjbF/OF8dZq3PZIwJ9kEbl+7XpErs5zTZBikfJz0vZ1D0uXx3UbSWVReXWoy3LuJec038jl7I1zLwlDvvu4amoJKM1s0vwr1OEYC3v+3QYiz/SO9UNHTJljHLuEFPpV8FQoiIGXIZsn7nMYC8gcN8hk4UNWpiAIj55744upl5SU8cbRbBFMUOk4Aj4l0QVBAKrzaWBiJIrGU/18seWFDG5RITjHYR+mX0U0E6ILzyogrpr2mEmQqHL9V0EHKroAlsfHNFMDBhC4boDXw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=52qm0ifgeAwDywLMlGJTTY7GGUprhSEL7GZaBe3fgSc=;
+ b=ZHdBdx0LRx+O75P+UHf1S4U98OB1zO5RddVRIsGhEo9uJEBO00hipbeeQaPed1Co81GYBXNeCmP/DWsPhI7NVWdL/nODWU2QfhMoNSRNlE+RyqEJY2thR9c+GsjnPRga498gs7/WEe4dKKerdTfSEvj3d0B2xnrlWqKynVXshye1lhtz5lp3081gIIywFTXPNeuU8rsJ2ObB9yyqjFzIV9z57Q9EcAuK4CRNEYc8Xvgdir0mcm3LwJ7gSSM3rT4Y1Yu2euE/fVwDOAfevApfZ2+rsv5dOo1nAU2mMRYSOs2ozmdL4y+qjy+nB9T6WKFaDIR5naVLbSGSGKK9teA8Gw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=52qm0ifgeAwDywLMlGJTTY7GGUprhSEL7GZaBe3fgSc=;
+ b=0bnwykJXs0wThpX2WQznkSIvkKjUrepuJDfBE1COAdZblmpzrejFbnqpD43qWexxisDkDfSQs8HclzIK0KzvISfvy0gWXxwh7eftFay476qgCCqi6SpfS0DtzZpWsVlVQLYmmLOqw2ydPVwpVCY533r39RHnpO+0EcQrcAcrxRI=
+Received: from DS7PR06CA0030.namprd06.prod.outlook.com (2603:10b6:8:54::22) by
+ DS0PR12MB7996.namprd12.prod.outlook.com (2603:10b6:8:14f::13) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7362.29; Wed, 20 Mar 2024 06:41:27 +0000
+Received: from DS1PEPF00017097.namprd05.prod.outlook.com
+ (2603:10b6:8:54:cafe::78) by DS7PR06CA0030.outlook.office365.com
+ (2603:10b6:8:54::22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7386.28 via Frontend
+ Transport; Wed, 20 Mar 2024 06:41:27 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ DS1PEPF00017097.mail.protection.outlook.com (10.167.18.101) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7409.10 via Frontend Transport; Wed, 20 Mar 2024 06:41:27 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Wed, 20 Mar
+ 2024 01:41:26 -0500
+Received: from xhdcl190040.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35 via Frontend
+ Transport; Wed, 20 Mar 2024 01:41:24 -0500
+From: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <jagan@amarulasolutions.com>, <vigneshr@ti.com>, <michal.simek@amd.com>,
+ <venkatesh.abbarapu@amd.com>, <git@amd.com>
+Subject: [PATCH] mtd: spi-nor: Disable chip erase for n25q512ax3 flash
+Date: Wed, 20 Mar 2024 12:11:12 +0530
+Message-ID: <20240320064112.1798827-1-tejas.arvind.bhumkar@amd.com>
+X-Mailer: git-send-email 2.37.6
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6] remoteproc: uclass: Add methods to load firmware to
- rproc and boot rproc
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-CC: Francesco Dolcini <francesco.dolcini@toradex.com>, Max Krummenacher
- <max.krummenacher@toradex.com>, Dan Carpenter <dan.carpenter@linaro.org>,
- Simon Glass <sjg@chromium.org>,
- Ravi Gunasekaran <r-gunasekaran@ti.com>, Nishanth Menon <nm@ti.com>,
- <u-boot@lists.denx.de>, <srk@ti.com>, Vignesh
- Raghavendra <vigneshr@ti.com>, Roger Quadros <rogerq@kernel.org>
-References: <20240228120645.958316-1-danishanwar@ti.com>
- <20240319224032.GA1686480@bill-the-cat>
-From: MD Danish Anwar <danishanwar@ti.com>
-In-Reply-To: <20240319224032.GA1686480@bill-the-cat>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+Received-SPF: None (SATLEXMB04.amd.com: tejas.arvind.bhumkar@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS1PEPF00017097:EE_|DS0PR12MB7996:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0d544c13-a50b-4b81-0159-08dc48a8c4f6
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: OcGhIiMkkpN1sk7V12n3gDbLnIrTCu0DKFUKhbZ2TYLuQw9aXfh8sVjP8oIGySzQKiHuzgJADF8BoOPDBOCP+J4G1nKvDrj7i/yyxgTTK3en+ynbHOSgIoKE6daL38P6VogPL1NmNROlUkS50QADt4FU590sjVmNf5DqWX6FeMLewSUjFKvNDxgQjLYHEPavPt44bev84pgzao+he1zaP32mlZoiSDkw36a+2fwjEjsjDJBQJZL6UBBPcsRjSe+X+xEvRt2CpKc64qLufivqZGs6+dWtmjEhQCs91XLBdmhS/waOhPBEV7nnmBuvunydFXEf8OlBKevzQ+9o/oeH5lJdRpFr34F9s/EPSbHJaFF58jcOyN3ZrSGV1XswpxEBstBqg8ksImvc0MYvuB2gT73Q6Ziazqh8p1cAVnD3ETrjsCQJ1nVeV0G8G6zmJBT59omxGAUNp9bvWoHDbL6i9PYSZWpFmpfYKq+HTkBmuzpabUhzqk9pR9wKAIVIGLm/AWoFNZcyGLBvcVHkCsYcN3RAsspHulXDKy+VGU0tVnQuTj2kVpMl6RB8U6xozoK7YZLu8k7uvSTy+/DgUW7U6aPJdapzGdardIXDg3CjQn24TOpnMCOZb9EqOGL3CvuX+0ht/fmZ1VuK+7IzogQFCYjbVjC5Pw6pxDzj77smSOtz2Dy7veyln+lZJMRUvw6ID3TparXIAtziAJkocajO3UTmHFy/b6WplCGrssNqLlLmnq6sGGEjWOUopMeg2Rr3
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(82310400014)(1800799015)(376005)(36860700004); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Mar 2024 06:41:27.5148 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0d544c13-a50b-4b81-0159-08dc48a8c4f6
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF00017097.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB7996
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,123 +121,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Chip erase not functioning for n25q512ax3 flash
+so enabled sector erase instead.
 
-On 20/03/24 4:10 am, Tom Rini wrote:
-> On Wed, Feb 28, 2024 at 05:36:45PM +0530, MD Danish Anwar wrote:
-> 
->> Add APIs to set a firmware_name to a rproc and boot the rproc with the
->> same firmware.
->>
->> Clients can call rproc_set_firmware() API to set firmware_name for a rproc
->> whereas rproc_boot() will load the firmware set by rproc_set_firmware() to
->> a buffer by calling request_firmware_into_buf(). rproc_boot() will then
->> load the firmware file to the remote processor and start the remote
->> processor.
->>
->> Also include "fs-loader.h" and make remoteproc driver select FS_LOADER in
->> Kconfig so that we can call request_firmware_into_buf() from remoteproc
->> driver.
->>
->> Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
->> Acked-by: Ravi Gunasekaran <r-gunasekaran@ti.com>
->> Reviewed-by: Roger Quadros <rogerq@kernel.org>
->> ---
->> Changes from v5 to v6:
->> *) Collected Acked-by tag from Ravi Gunasekaran <r-gunasekaran@ti.com>
->> *) Fixed few typos as pointed out by Roger Quadros <rogerq@kernel.org>
->> *) Added if condition to check if uc_pdata->fw_name exists and free it
->>    before the strndup as suggested by Roger Quadros <rogerq@kernel.org>
->>
->> Changes from v4 to v5:
->> *) Added Kconfig option REMOTEPROC_MAX_FW_SIZE to set max firmware size
->>    that can be loaded to a rproc.
->> *) Added freeing of address in rproc_boot() as pointed out by Ravi.
->> *) Allocating the address at a later point in rproc_boot()
->> *) Rebased on latest u-boot/master [commit 
->>    9e00b6993f724da9699ef12573307afea8c19284]
->>
->> Changes from v3 to v4:
->> *) No functional change. Splitted the patch out of the series as suggested
->>    by Nishant.
->> *) Droppped the RFC tag.
->>
->> v5: https://lore.kernel.org/all/20240217122602.3402774-1-danishanwar@ti.com/
->> v4: https://lore.kernel.org/all/20240130063322.2345057-1-danishanwar@ti.com/
->> v3: https://lore.kernel.org/all/20240124064930.1787929-4-danishanwar@ti.com/
->>
->>  drivers/remoteproc/Kconfig        |   8 +++
->>  drivers/remoteproc/rproc-uclass.c | 102 ++++++++++++++++++++++++++++++
->>  include/remoteproc.h              |  34 ++++++++++
->>  3 files changed, 144 insertions(+)
->>
->> diff --git a/drivers/remoteproc/Kconfig b/drivers/remoteproc/Kconfig
->> index 781de530af..9f9877931c 100644
->> --- a/drivers/remoteproc/Kconfig
->> +++ b/drivers/remoteproc/Kconfig
->> @@ -10,6 +10,7 @@ menu "Remote Processor drivers"
->>  # All users should depend on DM
->>  config REMOTEPROC
->>  	bool
->> +	select FS_LOADER
->>  	depends on DM
->>  
->>  # Please keep the configuration alphabetically sorted.
-> 
-> Can we not make the FS_LOADER portion optional? I didn't realize how
-> many non-TI platforms this impacted. And even then it's possible I
-> assume that custom designs will load the firmwares in other manners.
-> 
+Tested on: zc1751-dc1 board
 
-Yes we can. We can wrap the remoteproc APIs using FS_LOADER in #ifdef
-CONFIG_FS_LOADER. And instead of REMOTEPROC driver selecting FS_LOADER,
-the clinet driver (ICSSG in this case) who is calling those remoteproc
-APIs will select FS_LOADER and enable it.
+Signed-off-by: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
+---
+ drivers/mtd/spi/spi-nor-ids.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-This will make sure that other platforms (ti or non-ti) that doesn't
-support ICSSG but enables Remoteproc, will not enable FS_LOADER. This
-way we are not forcing other platforms using remoteproc to enable
-FS_LOADER. In this case the APIs will not get built.
-
-Now FS_LOADER will only be enabled when there is a client driver that
-uses rproc_boot() APIs. It's upto the client driver to enable FS_LOADER
-
-below is the diff,
-
-diff --git a/drivers/remoteproc/Kconfig b/drivers/remoteproc/Kconfig
-index 9f9877931c..a49802c132 100644
---- a/drivers/remoteproc/Kconfig
-+++ b/drivers/remoteproc/Kconfig
-@@ -10,7 +10,6 @@ menu "Remote Processor drivers"
- # All users should depend on DM
- config REMOTEPROC
-        bool
--       select FS_LOADER
-        depends on DM
-
- # Please keep the configuration alphabetically sorted.
-diff --git a/drivers/remoteproc/rproc-uclass.c
-b/drivers/remoteproc/rproc-uclass.c
-index f4f22a3851..a6a8be5009 100644
---- a/drivers/remoteproc/rproc-uclass.c
-+++ b/drivers/remoteproc/rproc-uclass.c
-@@ -994,6 +994,7 @@ int rproc_set_firmware(struct udevice *rproc_dev,
-const char *fw_name)
-        return 0;
- }
-
-+#ifdef CONFIG_FS_LOADER
- int rproc_boot(struct udevice *rproc_dev)
- {
-        struct dm_rproc_uclass_pdata *uc_pdata;
-@@ -1063,3 +1064,4 @@ free_buffer:
-        free(addr);
-        return ret;
- }
-+#endif
-
-Let me know if this looks ok. If it's ok I will post v7 with this change.
-
+diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
+index 4e83b8c94c..0ca7c36386 100644
+--- a/drivers/mtd/spi/spi-nor-ids.c
++++ b/drivers/mtd/spi/spi-nor-ids.c
+@@ -318,7 +318,7 @@ const struct flash_info spi_nor_ids[] = {
+ 		 USE_FSR) },
+ 	{ INFO("n25q512a",    0x20bb20, 0, 64 * 1024, 1024, SECT_4K | USE_FSR | SPI_NOR_QUAD_READ) },
+ 	{ INFO6("mt25ql512a",  0x20ba20, 0x104400, 64 * 1024, 1024, SECT_4K | USE_FSR | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
+-	{ INFO("n25q512ax3",  0x20ba20, 0, 64 * 1024, 1024, SECT_4K | USE_FSR | SPI_NOR_QUAD_READ) },
++	{ INFO("n25q512ax3",  0x20ba20, 0, 64 * 1024, 1024, SECT_4K | USE_FSR | SPI_NOR_QUAD_READ | NO_CHIP_ERASE) },
+ 	{ INFO("n25q00",      0x20ba21, 0, 64 * 1024, 2048, SECT_4K | USE_FSR | SPI_NOR_QUAD_READ | NO_CHIP_ERASE) },
+ 	{ INFO("n25q00a",     0x20bb21, 0, 64 * 1024, 2048, SECT_4K | USE_FSR | SPI_NOR_QUAD_READ | NO_CHIP_ERASE) },
+ 	{ INFO("mt25ql01g",   0x21ba20, 0, 64 * 1024, 2048, SECT_4K | USE_FSR | SPI_NOR_QUAD_READ | NO_CHIP_ERASE) },
 -- 
-Thanks and Regards,
-Danish
+2.37.6
+
