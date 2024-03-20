@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68104C54E58
-	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 09:02:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDB88C54E58
+	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 09:02:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A2593880F8;
-	Wed, 20 Mar 2024 10:02:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1A63E880F5;
+	Wed, 20 Mar 2024 10:02:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="hToPYcCv";
+	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="kFGdrJB3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 97850880E5; Wed, 20 Mar 2024 10:02:22 +0100 (CET)
+ id 1FB728810B; Wed, 20 Mar 2024 10:02:25 +0100 (CET)
 Received: from mail.thorsis.com (mail.thorsis.com [92.198.35.195])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8EA8D880E5
- for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 10:02:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 38A08880F3
+ for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 10:02:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=thorsis.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
@@ -28,22 +28,26 @@ From: Alexander Dahl <ada@thorsis.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=default;
  t=1710925336;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:content-transfer-encoding:content-transfer-encoding;
- bh=ShD8VackadON5KJ7YYNSSBno5rz+p2hSLg4Nqpiqo9U=;
- b=hToPYcCvouH2CAVOdFfqjTYraDFMgbBwnRj0dRY8bgSzBOGP+Sf8aQwM+FxwxXqD2xQRyl
- XZQYBstdg+iBvdEU505BCXWx6UJHhtnmpRFmq7WgY8vi8eqk8VtsjkR3dTNsaz290DEG0q
- bTQ2/7MUL88frDe2jwvgCAW8WkCD1sjsLl/zRMi+AXxVU2j3SiyWCKiFnu56YPnCkB1T+J
- gHG9+68u+MrQO8Chb2X7K72JeT68SBUp78uj2emuigT9txPn4aHNB85cS62G0GicF/ymN6
- sTWUl0xncBqG5vGuFm80BrVti7+WaYJcOp9RjPRFJwhRU604RCJYcfn0d22gjQ==
+ to:to:cc:cc:content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=efMsFIjDe4mFH75GGE536Tk0D9utILqQhNPvrW9+T1A=;
+ b=kFGdrJB3YR7hXA67lcX7znCgtnupBtxydlNKA4tR/vnaiwHEhJ3vlCQxJEqN3gw++h1h+/
+ 8ll9B6lY+VA/l/U0zccqvLL94l+oMFaeW4gym13XKxbGzAwGywvt5UAETyXb0HcyPgBsyv
+ 66CvWed1OPFkKrHGkz5HIdhW0i9gxBQpe/UfpeBQwB7i1cq6D8D5PJVSfbG3SDDMGYLGbR
+ tZkbHn34GeWVMBTzcSOmMR4X+7DUmUgXAxbB8GPOSX2ebUOlbBoYA87sloE9MzEfKIFTGE
+ dMQQ5i53HB6UDcCgSaDJZvBWLtlLNLjmVH9Akf6av2iJmkOvQn7+y7qrz17OOQ==
 To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  Michael Trimarchi <michael@amarulasolutions.com>
 Cc: Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>,
  Eugen Hristev <eugen.hristev@collabora.com>,
  Mihai Sain <mihai.sain@microchip.com>, Li Bin <bin.li@microchip.com>,
  u-boot@lists.denx.de
-Subject: [PATCH v2 0/6] mtd: nand: raw: Collected improvements
-Date: Wed, 20 Mar 2024 10:02:08 +0100
-Message-Id: <20240320090214.40465-1-ada@thorsis.com>
+Subject: [PATCH v2 1/6] mtd: nand: raw: Use macro nand_to_mtd() where
+ appropriate
+Date: Wed, 20 Mar 2024 10:02:09 +0100
+Message-Id: <20240320090214.40465-2-ada@thorsis.com>
+In-Reply-To: <20240320090214.40465-1-ada@thorsis.com>
+References: <20240320090214.40465-1-ada@thorsis.com>
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -61,58 +65,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello everyone,
+In every other place in this file the macro is used, make it consistent.
 
-while working on NAND flash support for a custom board based on the at91
-SAM9X60 SoC I stumbled over some issues in the raw nand subsystem.
+Fixes: 9d1806fadc24 ("mtd: nand: Get rid of mtd variable in function calls")
+Signed-off-by: Alexander Dahl <ada@thorsis.com>
+Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
+---
 
-Four of six patches are minor fixes.
+Notes:
+    v1:
+    - initial patch version
+    
+    v2:
+    - collected tags
 
-Patch 4 introduces a new subcommand for the new atmel nand controller
-driver.  Patch 6 introduces a new subcommand for the nand command to
-override ONFI timing mode.  Both are are for debugging purposes only and
-thus optional, and need to be enabled through menu.  Both helped me a
-lot when investigating issues.
+ drivers/mtd/nand/raw/nand_base.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-Series is based on upstream next branch, but should also apply to master
-cleanly.
-
-Greets
-Alex
-
-v1:
-
-Link: https://lore.kernel.org/u-boot/20240307091014.39796-1-ada@thorsis.com/T/#t
-
-v2:
-
-- rebased on recent next
-- collected tags
-- improved patch 4 after feedback from Mihai
-- added new patch 5 with another help text fix
-- added new patch 6 with a new debug command
-- reworded cover letter
-
-See per patch changes in patches for more detailed changes.
-
-Alexander Dahl (6):
-  mtd: nand: raw: Use macro nand_to_mtd() where appropriate
-  mtd: nand: raw: Port another option flag from Linux
-  mtd: nand: raw: Fix (most) Kconfig indentation
-  mtd: nand: raw: atmel: Introduce optional debug commands
-  mtd: nand: raw: atmel: Fix comment in timings preparation
-  cmd: nand: Add new optional sub-command 'onfi'
-
- cmd/Kconfig                                  |  10 +
- cmd/nand.c                                   |  61 ++++
- drivers/mtd/nand/raw/Kconfig                 | 115 +++----
- drivers/mtd/nand/raw/atmel/nand-controller.c | 299 ++++++++++++++++++-
- drivers/mtd/nand/raw/nand_base.c             |   8 +-
- include/linux/mtd/rawnand.h                  |   8 +
- 6 files changed, 441 insertions(+), 60 deletions(-)
-
-
-base-commit: f048104999db28d49362201eaebfc91adb14f47c
+diff --git a/drivers/mtd/nand/raw/nand_base.c b/drivers/mtd/nand/raw/nand_base.c
+index c40a0f23d7b..688d17ba3c2 100644
+--- a/drivers/mtd/nand/raw/nand_base.c
++++ b/drivers/mtd/nand/raw/nand_base.c
+@@ -4118,7 +4118,7 @@ static int nand_get_bits_per_cell(u8 cellinfo)
+  */
+ void nand_decode_ext_id(struct nand_chip *chip)
+ {
+-	struct mtd_info *mtd = &chip->mtd;
++	struct mtd_info *mtd = nand_to_mtd(chip);
+ 	int extid;
+ 	/* The 3rd id byte holds MLC / multichip data */
+ 	chip->bits_per_cell = nand_get_bits_per_cell(chip->id.data[2]);
+@@ -4185,7 +4185,7 @@ static int nand_manufacturer_init(struct nand_chip *chip)
+  */
+ static void nand_decode_id(struct nand_chip *chip, struct nand_flash_dev *type)
+ {
+-	struct mtd_info *mtd = &chip->mtd;
++	struct mtd_info *mtd = nand_to_mtd(chip);
+ 
+ 	mtd->erasesize = type->erasesize;
+ 	mtd->writesize = type->pagesize;
+@@ -4265,7 +4265,7 @@ static const struct nand_manufacturer *nand_get_manufacturer_desc(u8 id)
+ int nand_detect(struct nand_chip *chip, int *maf_id,
+ 		int *dev_id, struct nand_flash_dev *type)
+ {
+-	struct mtd_info *mtd = &chip->mtd;
++	struct mtd_info *mtd = nand_to_mtd(chip);
+ 	const struct nand_manufacturer *manufacturer_desc;
+ 	int busw, ret;
+ 	u8 *id_data = chip->id.data;
 -- 
 2.39.2
 
