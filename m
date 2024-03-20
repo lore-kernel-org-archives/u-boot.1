@@ -4,158 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3CCAC54E58
-	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 14:09:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB375C6FD1F
+	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 14:30:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 33F838804F;
-	Wed, 20 Mar 2024 15:09:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=microchip.com
+	by phobos.denx.de (Postfix) with ESMTP id 30BE088077;
+	Wed, 20 Mar 2024 15:30:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="MlB5zXOR";
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="Y3IA1wDG";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Zc0/mUVD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 29C0B8804B; Wed, 20 Mar 2024 15:09:18 +0100 (CET)
-Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
- [68.232.154.123])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 34B3C88076; Wed, 20 Mar 2024 15:30:56 +0100 (CET)
+Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
+ [IPv6:2607:f8b0:4864:20::b31])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A427C88048
- for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 15:09:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=microchip.com
+ by phobos.denx.de (Postfix) with ESMTPS id 074CA88076
+ for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 15:30:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Mihai.Sain@microchip.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1710943754; x=1742479754;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-transfer-encoding:mime-version;
- bh=G91lhaHoSE0hDcxlXbknIqIHpi0mfr+O1UoA8av/gLI=;
- b=MlB5zXORdzZaEnByJWpS8F/4VugPZ2aePT+09SF3ojEmhfOBnzkR/2oo
- gP6Vw3xdkloaOtQyEipDFbffmacXaQVuL2B1t8u4lIYzR3G5AMOF7wNvK
- 0qNRL8GsTJcZlnPgLww0NKiHTTp1Ye1nP63YGR28P2cZVAPLb6sD7mT6S
- PG4gEL25t80ym2OTDdtgXp6/G+8EVGEvypaGHu7oBeU/LadAyzoJ6HU8h
- Dmd349yzIKPZq72K/mI4jYUh+4P602nFhNuKyvVp2yNMTF3GU32hujQTJ
- 1+aYw6Rjvkr983uCNY0993Gd4xUXySTFI86XOscNlzHbI2q+3urGMDnNq w==;
-X-CSE-ConnectionGUID: ssW3y9AQSqi16F+JyKJcgQ==
-X-CSE-MsgGUID: Ab/vcNc8Ro2PCL23xAFYCg==
-X-IronPort-AV: E=Sophos;i="6.07,140,1708412400"; d="scan'208";a="18436243"
-X-Amp-Result: SKIPPED(no attachment in message)
-Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa2.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 20 Mar 2024 07:09:12 -0700
-Received: from chn-vm-ex03.mchp-main.com (10.10.85.151) by
- chn-vm-ex01.mchp-main.com (10.10.85.143) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35; Wed, 20 Mar 2024 07:08:50 -0700
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com (10.10.215.250)
- by email.microchip.com (10.10.87.152) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35 via Frontend Transport; Wed, 20 Mar 2024 07:08:50 -0700
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=IHDyI4KiW2JfoyFjsVdId6iqWr7cRv5Qu7P/ykffHJNclU5yYotMOGYWYOak28zbssgM3y5Kwwmh2v2MlBHdEhX6RCiOtz9vH3lpyVTzlrFQbuvwYMPHBaHrGsLu9Hj+WLzjVP66Ni9yGplBoNtBG0FFyMzktMZeiN/eMexG/mCDPnCaeJHn+0GeG1xjxhMZoEB+Yr2M33jyTIwDssyG+pgwMRicNZG876YPTp7mUm/e6V8avqcENaPC9QamD+4rulPj0uMQNNoaFPYwFTbRvbRv8Qu43yTk1SFL9rMtXfxk1ZPeS05jA2y/RpRGk01W73W6uLDBKxgwZ7hKfGdwKg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=G91lhaHoSE0hDcxlXbknIqIHpi0mfr+O1UoA8av/gLI=;
- b=hj6dZ4vffPR4/69lQJYwv4VeLOsSujAVPO6kuy8nMYGwrUB6He5dzENrw7rvNSneVV3uAQa9emthL2tyZ75E+wcdiuefEJOxvBPa3kDZ06nnee2bdho3Yr8+I9UO9ZyZtSlWARARfbGYloNalgzlcenrSVJs+BNRc5cUTnhg/ZZeo19C4PzvPwiCI2Z0VvTz49jIdltygLTH9nlA8iljtMFzb6n52vJkFe3J5abyyc91SAjoneS7lv8zCSSgyQvMQx1yKeVE/yOVE+llufKhFYZ+s095XW98HyA0zvn4RZR2PV180l+WT+Lza4yeOvjvoguZwlKHhplagL01rwQq+g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=microchip.com; dmarc=pass action=none
- header.from=microchip.com; dkim=pass header.d=microchip.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=microchip.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=G91lhaHoSE0hDcxlXbknIqIHpi0mfr+O1UoA8av/gLI=;
- b=Y3IA1wDGjZgP3UoYXe2cWGuApNW/mHgYlKMm94fAm1TSu4m1zR5yXiHTIy3rDsGdcRsHtnIS03WPqu5PONyuIE8ztI46Vnt4O9eitw32RduouormVEsFycBXAVLG3a9x2iEdU5j11J2Ax+b/ta+LJRNDnXSBdvBeMuPf/HJtcMyTtDobnFLWZPxYZq4/L5wyeUjWYJTOfjJyllTc3C0cJTZHqYvR+ffYfAMMtlBmxWH9cx5CdbKRFe2hPQVHBsmC6dTkuVqB44UOUYWGZb8LjMr7RR6bZGOfvbW6WkgnYsd2mDelVag3NtEwdKLJ3lEUTompwmoDIz+PKMzVVSZXvA==
-Received: from PH8PR11MB6804.namprd11.prod.outlook.com (2603:10b6:510:1bc::6)
- by SA1PR11MB7039.namprd11.prod.outlook.com (2603:10b6:806:2b5::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.11; Wed, 20 Mar
- 2024 14:08:48 +0000
-Received: from PH8PR11MB6804.namprd11.prod.outlook.com
- ([fe80::8724:4f0d:7186:266c]) by PH8PR11MB6804.namprd11.prod.outlook.com
- ([fe80::8724:4f0d:7186:266c%6]) with mapi id 15.20.7409.010; Wed, 20 Mar 2024
- 14:08:48 +0000
-From: <Mihai.Sain@microchip.com>
-To: <ada@thorsis.com>, <dario.binacchi@amarulasolutions.com>,
- <michael@amarulasolutions.com>
-CC: <Balamanikandan.Gunasundar@microchip.com>, <eugen.hristev@collabora.com>, 
- <Bin.Li@microchip.com>, <u-boot@lists.denx.de>
-Subject: RE: [PATCH v2 6/6] cmd: nand: Add new optional sub-command 'onfi'
-Thread-Topic: [PATCH v2 6/6] cmd: nand: Add new optional sub-command 'onfi'
-Thread-Index: AQHaeqVdowafu/slREqOi+gSHR5Ol7FAqWrA
-Date: Wed, 20 Mar 2024 14:08:48 +0000
-Message-ID: <PH8PR11MB680479987099973E85D6CC6C82332@PH8PR11MB6804.namprd11.prod.outlook.com>
-References: <20240320090214.40465-1-ada@thorsis.com>
- <20240320090214.40465-7-ada@thorsis.com>
-In-Reply-To: <20240320090214.40465-7-ada@thorsis.com>
-Accept-Language: en-GB, en-US, ro-RO
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=microchip.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PH8PR11MB6804:EE_|SA1PR11MB7039:EE_
-x-ms-office365-filtering-correlation-id: 4f783ba6-a3fe-4fff-5aa1-08dc48e7436b
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: hyatROaDpbaIs75nVAC+0X27OLXBezZywMzlgGDbjICVRoJGHEqmt/fKnBEBAMq966XBy5XuvCP8MFfDebgHCoy/bOAFBWBiPFGOaLIdOL3p6lWjaDd/vgYcl35EzjU4qoWwF84vDhS7UWOm+TNCtSa1GOEzdUYNrDiqG8fpBkd4rpcdlMZlR/3TjhPNIFVTJIP6IhOAR84ZbuVu470iQZBGQmlUqPqoeGJefalgdvOsDnCv7QTLHTOxrmfZWNBrPIimM2fsfGLpgi/K+25+lxppcMPyiXr2qvDgoCMpbi265DCe18Aju0RA8RMsqHIuNzZxom5xq5cxYiV7wkfBV/OSXbeXJXEYeoiRRAiJKWhP0L2uG76rulsk39Mzl7NofqRWhFMSpGebQxElRAHwgXFpoyJbIL9BccD9nhMN8IGg6xgR0PFtjFSmVwuG/y2GnmxZRWbKBCxxXzDPu8AqMkmfnm5GrF1W0Xk19aTmBr+NMIZWlpstYPnHmoNfZn8yDcD44thd0XdWSvdMVW5EaPGz1vdKRv/GzElKWD29AvUdHPBjQK2TzEOvlaZSsWI8utFwVQyrXEezutfQxhc5zCoB0Urto06hIgGt5tlsgQROyt8bCkJVAhzMaY6EkKFggUcsS3Iow6JQZ44Mk5ILLBjyLgOSpuG/a8iQhUbGIVvQZR7Rcki5ZvIJq6zdE+Ddz2e6Sp4xAZzD3zJvkHObk/CmxZrf14SFoAqLjuiPMiM=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PH8PR11MB6804.namprd11.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(376005)(366007)(1800799015)(38070700009); DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?dlRFMERxRVFFaS9PRGtSYjY4ZjNmZDBhKytnTEZKQ1ZXelVsVmMxT2tEdzhj?=
- =?utf-8?B?azVmUWZUVTVWckhpeG9pdnVCYmxtWkw3ditMWlNHVjN2R24wVk1CYWpHV24z?=
- =?utf-8?B?ZjNuRU8za3crUVNLM29MN3lzQ0lxbGZDdmx5UHV2NHQxNS9VUnpRWlhzY25v?=
- =?utf-8?B?bjRRQnVyTDZyYStYYWNSWjZvVEZTdlVXZ0VOWUs3c3JkMG9RakJuNjJxOU9R?=
- =?utf-8?B?bC82bkVqc1FYeklReGpyRWQwUTExaTJZTnV2NlBxZU9tMld0bVVRYWlkcGh0?=
- =?utf-8?B?dmtvMk5oUVBUMDlQd1FQekZTZ1hPbWlsRDBBeEh0R2dXaFRNVCtzWmxqUUR4?=
- =?utf-8?B?YTBHOGZUaEQwT0lnREhvaVhYdC9ZekFpR042NmJCZVRnUUIxZVFYOVdGQmVV?=
- =?utf-8?B?bytrbkxUVEJwemJVcEhBYVRoRVk0aWphaWdMVHN1elI3eGhVdVJ6TzJZRmFY?=
- =?utf-8?B?SnYraVlucFo4SzgwN1RaTUhTRk9KU2tvbjhGb1NpNmlWek8wVnNjT2Mya011?=
- =?utf-8?B?UmtMTlRENUZYSk1Rb1l6dDBHMjRSWk53eXNFYnVBeVRQTnh6QjVoMmpBRFRD?=
- =?utf-8?B?aGY4bHYvSDVNbWdvenJ3UHlwYVBpMGp4bEZuTHZKRW9XaXA5K0VZUjV2Wjg2?=
- =?utf-8?B?bGluRG0ydmF5Z0JqUklxdCt3ZDlEMHlGYnltVVZuUmt1WnNManRNMVpCLzlH?=
- =?utf-8?B?MkFJYWRibXhLTE91UVdQcG84bGdwUUpMVUthS2IvcHEzK2dHRmt1SHlkNklJ?=
- =?utf-8?B?SW1QOXB3TTk5N3o3dTd2R3BoWEVsVlc2TE5vdmlvd0QzZnQzcmVGK0V4WER1?=
- =?utf-8?B?ZDFlWmJCTlJzNnAzamsxSlhZSjFraElXVGFUTHZlUHVWSjhZU285RXI0aTVU?=
- =?utf-8?B?NUpxOXphZFNJNVlUYlMzY2VkK3hTblRTK0Y4OTNLam56eDJ2enBMbCtEbity?=
- =?utf-8?B?VEkzalo0YWtGendDaWdNSnB4bGRMKy9BVjVoVnhxbU92NFUxV3lvMC9YRTNS?=
- =?utf-8?B?Q3VEdzVDYTNMV0MreXJNVnpkZ3BwanFPaXFFZXBNa3ZraS8yMmdUeFE0U2g3?=
- =?utf-8?B?OUJKOE9hYVFmL3I5R0xqWmcvbHVOL2FHcVRMQXRoRmd4Ti9ST0tJSlV1MUZs?=
- =?utf-8?B?c3FlMWFJbCtBWnVmRVpuTk1KVmxKUEJxWjNOWGRZWHI0b1JDakluTExTcmFC?=
- =?utf-8?B?bklUanA2Sm1lWHN3V0F2dW5IR09EUGVLVGJQay82Nmd3dEtaV3FkY0JsR0FF?=
- =?utf-8?B?SUl3MUF6cjZoUjVWUjdhR2x4d0JaQmhUa1c1S0x5cXluV0pKaHNCeDF4enIz?=
- =?utf-8?B?Q1o3Zm4xRW55ck1GK0xVdVBIZnVQNjNHNDFialNFSTUwWlVJNExnTGw5dEtj?=
- =?utf-8?B?bDhjV0tMZk1zeFh6cXlPM0FjUzU0eG5qZ1N5NFFlRkk4eGU0bmpOUE81VkFl?=
- =?utf-8?B?d1VZYWFoenJNUlZOdDM4Y01nZ3IwNFhzNkZYcEdacndWU0p5ZnRDb3J3YmFp?=
- =?utf-8?B?Y05LL1ZkSjRTd24wMEJ2OGVwSzlSZU5UejRJS0pRcFlwM0dKVkZ5NFdndlBp?=
- =?utf-8?B?NUdjWnJmSjBOZHpGMitxK3VCdGFZVmdUSXNZMzhmSWxiTndnbEEyU2FSaTRE?=
- =?utf-8?B?L0ZmeTFEREhhd0gzQlR5bEJmcWlMNHdrTDA5OVlEbFZxTVk2MEtyS3lRUTJk?=
- =?utf-8?B?Q0hCMjJ5R0t4U0NhTGgxMGVTS2JDTWxkWi84R2JuRmlGOFp1UXlUOTdkMk1a?=
- =?utf-8?B?Vmg2bU10M29KWkdIQVA5bUVmVkZFeVVvb2RIbXBhM2RGOExFWnV2dGpVSFEw?=
- =?utf-8?B?NWxCRXBybmdUTWpUMHg5YzhLVlNNNmFXa0pYSm9HOFVra3FURjRQQ25QRGVK?=
- =?utf-8?B?UDJWYm44ZVk5QUU3ZEJ4bmZkYzNITkYxUmFHeW54NDZrYTFHTUxzS2E3TVNO?=
- =?utf-8?B?MU4ydzF6RGFVMEVDaE1qRTdWcm1aSDVObFpCZVc4YWtBeEE0K1NJOGlJV1BH?=
- =?utf-8?B?czQ2ZWVyekF0anBGZmx0Vmx0d09ZbUYrTU5qRmRWalBqMThFcFJPcE5kNmV0?=
- =?utf-8?B?c3NUdUhPb1pBaWl1Ny9HQ1NLSGlLWDMxTTUwMjlVL2VjcWpxVDZTWmJqSW1q?=
- =?utf-8?Q?yscoyHvUHMRlbFmQM9MNjUAA6?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb31.google.com with SMTP id
+ 3f1490d57ef6-dcc73148611so7281268276.3
+ for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 07:30:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1710945052; x=1711549852; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=EoUTEcNEmknxEvZ5onK/mvSypwIZzbPNzNpuIQtRJHc=;
+ b=Zc0/mUVDM71DHcXRN5sh5TGnAq2atVwo6Zus56Q+7IqVWBlXdrLt8EqIh6MPNLdTlU
+ 1D9kkM+dr2GvbqngIaGzI/Atb9VsiGmMHiwTy7m4xy0KdVzclahAA/kzBXw8PWa8heCF
+ 7aHsziUJ+IFa0dtTkBkAo3eQAK9s7nKK+3deA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710945052; x=1711549852;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=EoUTEcNEmknxEvZ5onK/mvSypwIZzbPNzNpuIQtRJHc=;
+ b=HSzIKFzgpnAth/qNGV6yOCK6PNGi1iB+qr0pDevRXIL24L5AVtwaQNMJHpmtoBHiSj
+ RZxvhjStgyIpY47MTHOKFqRo6RP+6CLuodsVaILHSksGXARhTWCaJZyOR558lj0FHEeY
+ riI0A2Txk/ZVeLypVOdqRMcJcrM0gYRk5z3DAggkB2bLVy4WUwXHZIAdjXRGxK2FU6IC
+ 6PMo67s9K6aNE/bj8u/7RPzSpyXu8KvEPdapuS1IAf3hvTGn8VUuq1BGOPAow7pFBjXs
+ 5UYxc2/0Mb2BdBOQD9UN4C1ec6FkXkKkogZIWCAbmJxWXtx/j5cwql2tNqgVET4o8hEh
+ zMOg==
+X-Gm-Message-State: AOJu0YyqKFDGpx1GeBwKf+AbtDyIZzdDH9leXT48gTYOtox0uan6H8R8
+ TquJnJGGPiBImujOIeTgTckTRzHDWh5KfC3MmCaumtLaNAJ5FzQJ6b3RS0VnFfs=
+X-Google-Smtp-Source: AGHT+IFj2Y6Wwp0Qb/8Yps6euju/JIBdd0hXn6r/8Rjh9dcmEULbgCfdCD6nMTldv5uIB+kQwzPHzw==
+X-Received: by 2002:a25:bc82:0:b0:dcd:5bdb:4aa4 with SMTP id
+ e2-20020a25bc82000000b00dcd5bdb4aa4mr15396331ybk.51.1710945052177; 
+ Wed, 20 Mar 2024 07:30:52 -0700 (PDT)
+Received: from bill-the-cat (065-184-193-066.res.spectrum.com. [65.184.193.66])
+ by smtp.gmail.com with ESMTPSA id
+ v89-20020a25abe2000000b00dc701e0bdbcsm2680395ybi.44.2024.03.20.07.30.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 20 Mar 2024 07:30:51 -0700 (PDT)
+Date: Wed, 20 Mar 2024 10:30:48 -0400
+From: Tom Rini <trini@konsulko.com>
+To: lukas.funke-oss@weidmueller.com
+Cc: u-boot@lists.denx.de, Lukas Funke <lukas.funke@weidmueller.com>,
+ Andre Przywara <andre.przywara@arm.com>, Bin Meng <bmeng@tinylab.org>,
+ Chanho Park <chanho61.park@samsung.com>, Devarsh Thakkar <devarsht@ti.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
+ Marek Vasut <marex@denx.de>, Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Nikhil M Jain <n-jain1@ti.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Samuel Holland <samuel@sholland.org>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH 1/2] spl: Introduce architecture specific init function
+Message-ID: <20240320143048.GU3442575@bill-the-cat>
+References: <20240320131928.1836386-1-lukas.funke-oss@weidmueller.com>
+ <20240320131928.1836386-2-lukas.funke-oss@weidmueller.com>
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PH8PR11MB6804.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4f783ba6-a3fe-4fff-5aa1-08dc48e7436b
-X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Mar 2024 14:08:48.5344 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 3f4057f3-b418-4d4e-ba84-d55b4e897d88
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: jaDVgdWUpD7Nxph4uWnx6Voo0EIcAeeaVVcrrNBEMmYcAjrzANBUGNqbBFDeCK8K8cJ47MXItLfWyxeFLs2wVG4ClP+60KzeHnQrOQvJQro=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR11MB7039
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="8hUoe5HsmipEH0ca"
+Content-Disposition: inline
+In-Reply-To: <20240320131928.1836386-2-lukas.funke-oss@weidmueller.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -172,40 +99,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGkgQWxleCwNCg0KLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0NCg0KT3ZlcnJpZGUgdGhlIE9ORkkgdGltaW5nIG1vZGUgYXQgcnVudGltZS4N
-Cg0KU2lnbmVkLW9mZi1ieTogQWxleGFuZGVyIERhaGwgPGFkYUB0aG9yc2lzLmNvbT4NCi0tLQ0K
-DQpJIHVzZWQgdGhlIHNhbWUgYm9hcmQgc2FtOXg3NS1jdXJpb3NpdHkgdG8gdGVzdCBtb2RlIDUg
-8J+Yig0KDQpJIGZvcmNlZCBpbiBuZmMgZHJpdmVyIHRoZSBtb2RlIDU6DQorICAgICAgIGlmIChj
-b25mLT50aW1pbmdzLnNkci50UkNfbWluIDwgMjAwMDApDQoNCkFuZCBJIHJhbiB0aGUgbmFuZCB0
-b3J0dXJlIG9uIDE2IE1pQjoNCg0KPT4gbmFuZCBvbmZpIDANCj0+IGhzbWMgZGVjb2RlDQoNCk1D
-SyByYXRlOiAyNzAgTUh6DQoNClNNQ19TRVRVUDI6ICAgICAweDAwMDAwMDA3DQpTTUNfUFVMU0Uy
-OiAgICAgMHgyMjExMjIxMQ0KU01DX0NZQ0xFMjogICAgIDB4MDAyMjAwMjINClNNQ19NT0RFMjog
-ICAgICAweDAwMWYwMDAzDQpOQ1NfUkQ6IHNldHVwOiAwICgwIG5zKSwgcHVsc2U6IDM0ICgxMDIg
-bnMpLCBob2xkOiAwICgwIG5zKSwgY3ljbGU6IDM0ICgxMDIgbnMpDQogICBOUkQ6IHNldHVwOiAw
-ICgwIG5zKSwgcHVsc2U6IDE3ICg1MSBucyksIGhvbGQ6IDE3ICg1MSBucyksIGN5Y2xlOiAzNCAo
-MTAyIG5zKQ0KTkNTX1dSOiBzZXR1cDogMCAoMCBucyksIHB1bHNlOiAzNCAoMTAyIG5zKSwgaG9s
-ZDogMCAoMCBucyksIGN5Y2xlOiAzNCAoMTAyIG5zKQ0KICAgTldFOiBzZXR1cDogNyAoMjEgbnMp
-LCBwdWxzZTogMTcgKDUxIG5zKSwgaG9sZDogMTAgKDMwIG5zKSwgY3ljbGU6IDM0ICgxMDIgbnMp
-DQpTdGFuZGFyZCByZWFkIGFwcGxpZWQNClRERiBvcHRpbWl6YXRpb24gZW5hYmxlZA0KVERGIGN5
-Y2xlczogMTUgKDQ1IG5zKQ0KRGF0YSBCdXMgV2lkdGg6IDgtYml0IGJ1cw0KTldBSVQgTW9kZTog
-MA0KV3JpdGUgb3BlcmF0aW9uIGNvbnRyb2xsZWQgYnkgTldFIHNpZ25hbA0KUmVhZCBvcGVyYXRp
-b24gY29udHJvbGxlZCBieSBOUkQgc2lnbmFsDQoNCj0+IHRpbWUgbmFuZCB0b3J0dXJlIDB4ODAw
-MDAwIDB4MTAwMDAwMA0KDQpOQU5EIHRvcnR1cmU6IGRldmljZSAwIG9mZnNldCAweDgwMDAwMCBz
-aXplIDB4MTAwMDAwMCAoYmxvY2sgc2l6ZSAweDQwMDAwKQ0KIFBhc3NlZDogNjQsIGZhaWxlZDog
-MA0KDQp0aW1lOiAzMC4xNTIgc2Vjb25kcw0KDQo9PiBuYW5kIG9uZmkgNQ0KPT4gaHNtYyBkZWNv
-ZGUNCg0KTUNLIHJhdGU6IDI3MCBNSHoNCg0KU01DX1NFVFVQMjogICAgIDB4MDAwMDAwMDENClNN
-Q19QVUxTRTI6ICAgICAweDBiMDYwODA0DQpTTUNfQ1lDTEUyOiAgICAgMHgwMDBiMDAwOA0KU01D
-X01PREUyOiAgICAgIDB4MDAxZjAwMDMNCk5DU19SRDogc2V0dXA6IDAgKDAgbnMpLCBwdWxzZTog
-MTEgKDMzIG5zKSwgaG9sZDogMCAoMCBucyksIGN5Y2xlOiAxMSAoMzMgbnMpDQogICBOUkQ6IHNl
-dHVwOiAwICgwIG5zKSwgcHVsc2U6IDYgKDE4IG5zKSwgaG9sZDogNSAoMTUgbnMpLCBjeWNsZTog
-MTEgKDMzIG5zKQ0KTkNTX1dSOiBzZXR1cDogMCAoMCBucyksIHB1bHNlOiA4ICgyNCBucyksIGhv
-bGQ6IDAgKDAgbnMpLCBjeWNsZTogOCAoMjQgbnMpDQogICBOV0U6IHNldHVwOiAxICgzIG5zKSwg
-cHVsc2U6IDQgKDEyIG5zKSwgaG9sZDogMyAoOSBucyksIGN5Y2xlOiA4ICgyNCBucykNClN0YW5k
-YXJkIHJlYWQgYXBwbGllZA0KVERGIG9wdGltaXphdGlvbiBlbmFibGVkDQpUREYgY3ljbGVzOiAx
-NSAoNDUgbnMpDQpEYXRhIEJ1cyBXaWR0aDogOC1iaXQgYnVzDQpOV0FJVCBNb2RlOiAwDQpXcml0
-ZSBvcGVyYXRpb24gY29udHJvbGxlZCBieSBOV0Ugc2lnbmFsDQpSZWFkIG9wZXJhdGlvbiBjb250
-cm9sbGVkIGJ5IE5SRCBzaWduYWwNCg0KPT4gdGltZSBuYW5kIHRvcnR1cmUgMHg4MDAwMDAgMHgx
-MDAwMDAwDQoNCk5BTkQgdG9ydHVyZTogZGV2aWNlIDAgb2Zmc2V0IDB4ODAwMDAwIHNpemUgMHgx
-MDAwMDAwIChibG9jayBzaXplIDB4NDAwMDApDQogUGFzc2VkOiA2NCwgZmFpbGVkOiAwDQoNCnRp
-bWU6IDE1Ljg5MSBzZWNvbmRzDQoNCkJlc3QgcmVnYXJkcywNCk1paGFpIFNhaW4NCg==
+
+--8hUoe5HsmipEH0ca
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Mar 20, 2024 at 02:19:26PM +0100, lukas.funke-oss@weidmueller.com w=
+rote:
+
+> From: Lukas Funke <lukas.funke@weidmueller.com>
+>=20
+> Some architectures use spl_board_init() in their architecture specific
+> implementation. Board developers should be able to add board specific
+> implementation via spl_board_init(). Hence, introduce a spl_arch_init()
+> method which is called right before spl_board_init() for architecture
+> specific implementation.
+>=20
+> Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
+
+I think this could allow for other SoCs to clean up their existing
+ad-hoc mechanisms for SoC/architecture init and then board init, so this
+looks like a good idea to me.
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
+
+--=20
+Tom
+
+--8hUoe5HsmipEH0ca
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmX68xIACgkQFHw5/5Y0
+tyxMSQv+O1FW7d/Ky8fsx468H6N5flg17N6j2KuVpvBAgFj1AlQp9xI55TOx8rVr
+nfpgKZlT/ujOAQPsSYQ0PdurZSs01xsOlUUQLrqULg8ivqSyA2FDqeY5IuqZBU60
+NMOVpMqf3hnbWvqsSN0FjPZZoGfMS/KvBQ1C/DL1y4A4mTxZwseCs22DWWwgpdFC
+lMAf5Igqnj72x+xKHtJ2sSALhVJPPbc3z9rkKtj4/CPMH0MngFnkrWtg5Qv3jC1Q
+ahI3iyjRNgY+RfWNdreUAxwZQLH9F+aN5O28oOvs9NMIHPDf6kacewptmw2HVnD9
+wN8xVWrnjhYI1/0z78v+2DazeMVBnxCjhEMHqSX+g1DJ+56NpnlDlbl9wOXCdVpb
+YOsOAk8gEJFOF9ytmjF55zO0+0haOfIaASXGFTMXuF7yD2QEImBaOaW6cIiXIYK4
+uOfUjg970suKbTATL7Z8htISWhuAZnq2s8nVs1I84bYJMAh92kU3MgNq9BkniTp4
+chyItKKu
+=CdG7
+-----END PGP SIGNATURE-----
+
+--8hUoe5HsmipEH0ca--
