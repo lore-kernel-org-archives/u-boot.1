@@ -4,49 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 461C2C54E58
-	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 15:59:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E2D4C6FD1F
+	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 15:59:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 48AF28806A;
-	Wed, 20 Mar 2024 16:59:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CC4FC8802B;
+	Wed, 20 Mar 2024 16:59:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="F3SVZlq9";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="UGpVTBA7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8AD7088077; Wed, 20 Mar 2024 16:59:33 +0100 (CET)
-Received: from mail.manjaro.org (mail.manjaro.org [116.203.91.91])
+ id 7C87E8802B; Wed, 20 Mar 2024 16:59:55 +0100 (CET)
+Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55BC887E3A
- for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 16:59:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 112CD83346
+ for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 16:59:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1710950370;
+ t=1710950392;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=kIhApbWCFmFTC0cZV2ycSqkR9wmecCfq98Yej1SxA5o=;
- b=F3SVZlq9aisKPoGdGS+HY+BYXu9AdFIq405aPtxZCN4usdd50qoi0Ru0jGUu0RnaBqRLXH
- PoW3ML2xPHxErHdPaBSvRfr/EJ5N0O3J9AiKfPbPfdhZGcRbtCD3BwUlkVB7FZn+IoMxq4
- S40X02SVvzz/jaVNlCSMoLVWyBdxWb42Y7GephsxGpKkVPpyDlOsYW9DU5kjQVJcaU6YTA
- OZ+CKT2Ez1ncxMaA/KRTcmz8imOs4g2sF1rL+6j4bBOHVimTMWUsmvHDapxTmJ+qHEESDA
- QHBLMx3Ll6boG7illFac9V0qZ04zry00/8N0xHylVH1H1oSh7hYwXVDNEAdimA==
-Date: Wed, 20 Mar 2024 16:59:29 +0100
+ bh=+nn+RuMbqiOlJlmm6zuOE2Iz3om2HDqrtzEhDWDkV9k=;
+ b=UGpVTBA7dLbTQ7kIp28M7XSr72a/JCp+vVPq6mAsuMgEqsQ8Ffs7x73A8eYz79690WwIS/
+ q2/RaNHnCESbsC7p6D0EIb0IN34Jzg5swfx9GHE0QrR6fJMZvue2xIt8J1fcxyfHlh21EW
+ uGZy6UjlOZAIkQ1U77qzizg91Ryig5INLXPKI6dO9Fa58mm/5cLcCmIPNJkkpJ9Odlg2J+
+ Gfzhg1Ibf9aZpRg1nXRU2oDuj8m/n3/AD+u7phIqhaGy09c0i46tHluVkoY8w5ZgQfvTQz
+ 95+LZbDZl48GaNtGesLCpJDCwhWykB8u7ufUcEyB+JV1eng1Ho04UGi16vcIMw==
+Date: Wed, 20 Mar 2024 16:59:52 +0100
 From: Dragan Simic <dsimic@manjaro.org>
 To: =?UTF-8?Q?Ahelenia_Ziemia=C5=84ska?= <nabijaczleweli@nabijaczleweli.xyz>
 Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH] tools: open FIT image for reading as O_RDONLY instead of
- O_RDWR
-In-Reply-To: <yehdhyy7f272rllmk3jiyome7muiqrbm7ezbu4xnqcymrcaobu@tarta.nabijaczleweli.xyz>
-References: <yehdhyy7f272rllmk3jiyome7muiqrbm7ezbu4xnqcymrcaobu@tarta.nabijaczleweli.xyz>
-Message-ID: <a5562c55fef9fd07e8a087ebcd389e60@manjaro.org>
+Subject: Re: [PATCH] tools: copyfile: use 64k instead of 512 buffer
+In-Reply-To: <4le6hwyli3wl2fisv5lr3rizbqzx3g2xzytw26zcrsvgchqy6i@tarta.nabijaczleweli.xyz>
+References: <4le6hwyli3wl2fisv5lr3rizbqzx3g2xzytw26zcrsvgchqy6i@tarta.nabijaczleweli.xyz>
+Message-ID: <f48faaa30f42ab63c616611b0b0067b6@manjaro.org>
 X-Sender: dsimic@manjaro.org
 Content-Type: text/plain; charset=UTF-8;
  format=flowed
@@ -74,47 +73,58 @@ Hello Ahelenia,
 Please see my comments below.
 
 On 2024-03-20 14:08, Ahelenia Ziemiańska wrote:
-> The only usage of the fd is for the single read() below;
-> this prevented
-> 	mkimage -f auto -A arm64 \
-> 		-T kernel -C lz4 -d Image-6.6.15.lz4 \
-> 		-b mt8173-elm-hana-6.6.15.dtb outf
-> when the inputs were unwriteable.
+> This is an incredible pessimisation:
 
-s/unwriteable/unwritable/
+s/pessimisation/optimization/
 
-Also, the patch subject could be moved to the patch description,
-and the following could be used instead, as the subject:
-
-     tools: open FIT image read-only
-
+> mkimage took >200ms (and 49489 writes (of which 49456 512)),
+> now it takes  110ms (and   419 writes (of which   386 64k)).
 > 
-> Link: https://bugs.debian.org/1063097
+> sendfile is much more appropriate for this and is done in one syscall,
+> but doesn't bring any significant speedups over 64k r/w
+> at the 13M size ranges, so there's no need to introduce
+> 	#if __linux__
+> 	while((size = sendfile(fd_dst, fd_src, NULL, 128 * 1024 * 1024)) > 0)
+> 		;
+> 	if(size != -1) {
+> 		ret = 0;
+> 		goto out;
+> 	}
+> 	#endif
+> 
 > Signed-off-by: Ahelenia Ziemiańska <nabijaczleweli@nabijaczleweli.xyz>
 
-Looking good to me.  Opening the file read-only is also good
-from the standpoint of using least privilege to perform the
-required operation.
-
-With the small nitpicks above,
+Looking good to me.  With the small nitpick above and
+a suggestion below,
 
 Reviewed-by: Dragan Simic <dsimic@manjaro.org>
 
 > ---
->  tools/fit_image.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  tools/fit_common.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 > 
-> diff --git a/tools/fit_image.c b/tools/fit_image.c
-> index beef1fa8..0fccfbb4 100644
-> --- a/tools/fit_image.c
-> +++ b/tools/fit_image.c
-> @@ -137,7 +137,7 @@ static int fdt_property_file(struct
-> image_tool_params *params,
->  	int ret;
->  	int fd;
+> diff --git a/tools/fit_common.c b/tools/fit_common.c
+> index 2d417d47..373fab6a 100644
+> --- a/tools/fit_common.c
+> +++ b/tools/fit_common.c
+> @@ -145,14 +145,14 @@ int copyfile(const char *src, const char *dst)
+>  		goto out;
+>  	}
 > 
-> -	fd = open(fname, O_RDWR | O_BINARY);
-> +	fd = open(fname, O_RDONLY | O_BINARY);
->  	if (fd < 0) {
->  		fprintf(stderr, "%s: Can't open %s: %s\n",
->  			params->cmdname, fname, strerror(errno));
+> -	buf = calloc(1, 512);
+> +	buf = calloc(1, 64 * 1024);
+>  	if (!buf) {
+>  		printf("Can't allocate buffer to copy file\n");
+>  		goto out;
+>  	}
+> 
+>  	while (1) {
+> -		size = read(fd_src, buf, 512);
+> +		size = read(fd_src, buf, 64 * 1024);
+
+Perhaps this would be a good opportunity to introduce a new
+#define for 64 * 1024 as the new buffer size.
+
+>  		if (size < 0) {
+>  			printf("Can't read file %s\n", src);
+>  			goto out;
