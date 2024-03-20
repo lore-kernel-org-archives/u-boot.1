@@ -4,52 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B83EC54E67
-	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 13:08:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FDDAC54E67
+	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 13:16:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A6DE788044;
-	Wed, 20 Mar 2024 14:08:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nabijaczleweli.xyz
+	by phobos.denx.de (Postfix) with ESMTP id E439987F87;
+	Wed, 20 Mar 2024 14:16:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=nabijaczleweli.xyz header.i=@nabijaczleweli.xyz header.b="lA6MtpuK";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Rcrre8P2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3835E87FE8; Wed, 20 Mar 2024 14:08:13 +0100 (CET)
-Received: from tarta.nabijaczleweli.xyz (tarta.nabijaczleweli.xyz
- [139.28.40.42])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 94D908803E; Wed, 20 Mar 2024 14:16:26 +0100 (CET)
+Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
+ [IPv6:2a00:1450:4864:20::22b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 58B1D87E93
- for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 14:08:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=nabijaczleweli.xyz
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=nabijaczleweli@nabijaczleweli.xyz
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=nabijaczleweli.xyz;
- s=202305; t=1710940091;
- bh=P5MuviTN8/HiUhm5Il0XjL92z8evebBfRwusAr+odaU=;
- h=Date:From:To:Subject:From;
- b=lA6MtpuKfeaBzRbekQ/GfOfUUY9LIvqxCF0cL5Dvl/yjSOOHBnyMaFmby7ksVBJd6
- DF1r3zdVSG5rErNABuxeNdxxyYjVq81SbzwBtMGrhdfBpOiAzm8r7EuoWas2Y1tByh
- gw7mI4WaQ+hyXualgTibMrH4Rh6j6MZ8O0gMxzpbJIaJ9mUhLw2vOhA7gBQ4TO18jn
- H/MsszFLotuyR8zdwBvD/XTZEtJtoghWu/rgmUk4m3fPQlBom8KWs6qDA3BSwrml1E
- lT5KJMCO5OXGV/uGo/BR/66Va4zTiNThtju88lrGd4XRtBjLVxJEpyHYAEz1+8bDyI
- m2wzoFJIokVWg==
-Received: from tarta.nabijaczleweli.xyz (unknown [192.168.1.250])
- by tarta.nabijaczleweli.xyz (Postfix) with ESMTPSA id 011171904;
- Wed, 20 Mar 2024 14:08:11 +0100 (CET)
-Date: Wed, 20 Mar 2024 14:08:10 +0100
-From: Ahelenia =?utf-8?Q?Ziemia=C5=84ska?= <nabijaczleweli@nabijaczleweli.xyz>
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Subject: [PATCH] tools: copyfile: use 64k instead of 512 buffer
-Message-ID: <4le6hwyli3wl2fisv5lr3rizbqzx3g2xzytw26zcrsvgchqy6i@tarta.nabijaczleweli.xyz>
+ by phobos.denx.de (Postfix) with ESMTPS id 2827387F87
+ for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 14:16:24 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-lj1-x22b.google.com with SMTP id
+ 38308e7fff4ca-2d21cdbc85bso98314351fa.2
+ for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 06:16:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1710940583; x=1711545383; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=WAn0xYCsfYUEqTdGr3bDBy0SbTUJYMiqscv/hOXGmbg=;
+ b=Rcrre8P2TE+a54aySbh5gB4vDZeS2TZIYikTw4A4BVzv3w3Gc2VQX+adGttQQLz0ww
+ j+NxpQPCKG0cjVzT11D/S/7Vx3BCj2cdasBacG/2eNq9cv/PXfK5GqAOwXFtNDk9Gk5q
+ YwsAHDR/lLPyGVwSLQL4DKfJsMkaU+RhaYnQtM8oYSdBEOvgVDR9O16/9NTcdf4O1dj1
+ DNsPP/GuchntApWO3Dv3A5hLUnlDIJv5Fp8a7JJ74SYn2sA9IDILA4koy4FMwm4ryPvv
+ 20dX+/pF5iuu7gWc4D2CFLyyJOegNw1u/X8eQoK1Dh1/mbfKS6PC5OVVcAPjRzopXp76
+ Ao8w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710940583; x=1711545383;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=WAn0xYCsfYUEqTdGr3bDBy0SbTUJYMiqscv/hOXGmbg=;
+ b=GVECtiWykF0vsuNM3j6Rg8WmkfziMQ6/+kO+qic/ueI47weBTIpkMbXEUgcvg2AKGl
+ Gfdyx+HkBzqEeBkekGTIys5odAeGLzot0s4h/grcvvLLvEui8UHJOKbX1+m9rJUbHoHi
+ izG60jm2ZWhgfZccSAkClRlSefK2SbEZxXWNu+JIDcw1Ya60sQG91+1hsHVYuzjaG7QF
+ oVAXUbq49ts3QQ4IkTP6cQd4K6d1/26YRSMcRbXBAtFdgFGjulpzctQkuXGluncjL/EH
+ QUaFxhc5hwFhGS6SI4ttwt45PY+vwYjsXpGabPI9SNKAHZHHuFu+4N9+a6dRVvo8UZoq
+ o12g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXUf2am+NZjAGkR4E5tqxbR+gV+eNP3b2NcQUMnzJKDaQvMVz4stMF6/lwrwqS5X6RhNExxFcAS0ta4NwwwaZvbMdH0fQ==
+X-Gm-Message-State: AOJu0YwoVgQKOBcAI/FVxUlW4KfVlrEs9os0KIgvNcqES2YUHNWuT2+8
+ +yRmROGumlIH+pHaoDhGUNj99s/phUT9rPesGfMAzzv2dCP4uZarYKqUUprWA/M=
+X-Google-Smtp-Source: AGHT+IGYU9DBKCssYPBJpI4RQXC7OoPisclPmqKMWRlA/wypq30t8F2Lyr2CqU8+ZhQsyAE7AR8myw==
+X-Received: by 2002:a05:651c:4ce:b0:2d2:a3bb:e319 with SMTP id
+ e14-20020a05651c04ce00b002d2a3bbe319mr1872785lji.1.1710940583230; 
+ Wed, 20 Mar 2024 06:16:23 -0700 (PDT)
+Received: from [192.168.1.78] (host-92-17-96-232.as13285.net. [92.17.96.232])
+ by smtp.gmail.com with ESMTPSA id
+ j28-20020a05600c1c1c00b004146895086esm2256351wms.8.2024.03.20.06.16.22
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 20 Mar 2024 06:16:22 -0700 (PDT)
+Message-ID: <0403479b-8691-44b6-817f-45ce9127989c@linaro.org>
+Date: Wed, 20 Mar 2024 13:16:22 +0000
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="idodt6oe2hcnztxy"
-Content-Disposition: inline
-User-Agent: NeoMutt/20231221-2-4202cf-dirty
-X-Mailman-Approved-At: Wed, 20 Mar 2024 14:08:27 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 14/14] qcom_defconfig: enable USB
+Content-Language: en-US
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de
+References: <20240319-b4-qcom-livetree-v3-0-e1b38d9b4fa4@linaro.org>
+ <20240319-b4-qcom-livetree-v3-14-e1b38d9b4fa4@linaro.org>
+ <CAFA6WYP2rdeESRFtWfiD-zVRwAY7jEstw-UvWQbWMTG+MbmLvQ@mail.gmail.com>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <CAFA6WYP2rdeESRFtWfiD-zVRwAY7jEstw-UvWQbWMTG+MbmLvQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,74 +100,143 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---idodt6oe2hcnztxy
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-This is an incredible pessimisation:
-mkimage took >200ms (and 49489 writes (of which 49456 512)),
-now it takes  110ms (and   419 writes (of which   386 64k)).
+On 20/03/2024 05:40, Sumit Garg wrote:
+> On Tue, 19 Mar 2024 at 17:52, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>>
+>> Enable support for the DWC3 USB controller and required dependencies for
+>> Qualcomm boards, specifically the DB845c:
+>> * IOMMU / SMMU
+>> * USB high-speed PHYs
+>> * Mass storage and ACM gadgets
+>>
+>> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+>> ---
+>>  configs/qcom_defconfig | 49 ++++++++++++++++++++++++++-----------------------
+>>  1 file changed, 26 insertions(+), 23 deletions(-)
+>>
+>> diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+>> index eebd0d74bd51..156c205284dd 100644
+>> --- a/configs/qcom_defconfig
+>> +++ b/configs/qcom_defconfig
+>> @@ -12,42 +12,63 @@ CONFIG_BOOTSTD_FULL=y
+>>  CONFIG_BOOTDELAY=1
+>>  CONFIG_USE_PREBOOT=y
+>>  CONFIG_SAVE_PREV_BL_INITRAMFS_START_ADDR=y
+>>  CONFIG_SYS_CBSIZE=512
+>> +# CONFIG_SYS_DEVICE_NULLDEV is not set
+>>  CONFIG_LOG_MAX_LEVEL=9
+>>  CONFIG_LOG_DEFAULT_LEVEL=4
+>>  # CONFIG_DISPLAY_CPUINFO is not set
+>>  CONFIG_DISPLAY_BOARDINFO_LATE=y
+>>  CONFIG_CMD_BOOTMENU=y
+>> +CONFIG_CMD_EEPROM=y
+>> +CONFIG_SYS_I2C_EEPROM_BUS=2
+>> +CONFIG_SYS_I2C_EEPROM_ADDR_LEN=2
+>> +CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=5
+>> +# CONFIG_CMD_BIND is not set
+>>  CONFIG_CMD_CLK=y
+>>  CONFIG_CMD_GPIO=y
+>> +CONFIG_CMD_I2C=y
+>>  CONFIG_CMD_MMC=y
+>>  CONFIG_CMD_UFS=y
+>>  CONFIG_CMD_USB=y
+>>  CONFIG_CMD_CAT=y
+>>  CONFIG_CMD_BMP=y
+>>  CONFIG_CMD_LOG=y
+>>  CONFIG_OF_LIVE=y
+>>  # CONFIG_NET is not set
+>> +CONFIG_DM_WARN=y
+>>  # CONFIG_OFNODE_MULTI_TREE is not set
+>>  CONFIG_BUTTON_QCOM_PMIC=y
+>>  CONFIG_CLK=y
+>>  CONFIG_CLK_QCOM_QCS404=y
+>>  CONFIG_CLK_QCOM_SDM845=y
+>>  CONFIG_MSM_GPIO=y
+>>  CONFIG_QCOM_PMIC_GPIO=y
+>> +CONFIG_DM_I2C=y
+>> +CONFIG_SYS_I2C_QUP=y
+>> +CONFIG_I2C_MUX=y
+>>  CONFIG_DM_KEYBOARD=y
+>>  CONFIG_BUTTON_KEYBOARD=y
+>> +CONFIG_IOMMU=y
+>> +CONFIG_QCOM_HYP_SMMU=y
+>> +CONFIG_MISC=y
+>> +CONFIG_NVMEM=y
+>> +CONFIG_I2C_EEPROM=y
+>>  CONFIG_MMC_HS200_SUPPORT=y
+>>  CONFIG_MMC_SDHCI=y
+>>  CONFIG_MMC_SDHCI_ADMA=y
+>>  CONFIG_MMC_SDHCI_MSM=y
+>> +CONFIG_DM_ETH_PHY=y
+>>  CONFIG_PHY=y
+>> +CONFIG_PHY_QCOM_QUSB2=y
+>> +CONFIG_PHY_QCOM_USB_HS_7NM=y
+>>  CONFIG_PINCTRL=y
+>>  CONFIG_PINCTRL_QCOM_QCS404=y
+>>  CONFIG_PINCTRL_QCOM_SDM845=y
+>>  CONFIG_DM_PMIC=y
+>>  CONFIG_PMIC_QCOM=y
+>> +CONFIG_DM_REGULATOR=y
+>> +CONFIG_DM_REGULATOR_FIXED=y
+>>  CONFIG_SCSI=y
+>>  CONFIG_MSM_SERIAL=y
+>>  CONFIG_MSM_GENI_SERIAL=y
+>>  CONFIG_SPMI_MSM=y
+>> @@ -56,8 +77,13 @@ CONFIG_SYSINFO_SMBIOS=y
+>>  CONFIG_USB=y
+>>  CONFIG_USB_XHCI_HCD=y
+>>  CONFIG_USB_XHCI_DWC3=y
+>>  CONFIG_USB_DWC3=y
+>> +CONFIG_USB_DWC3_GENERIC=y
+>> +CONFIG_USB_GADGET=y
+>> +CONFIG_USB_GADGET_DOWNLOAD=y
+>> +CONFIG_USB_FUNCTION_MASS_STORAGE=y
+>> +CONFIG_USB_FUNCTION_ACM=y
+>>  CONFIG_UFS=y
+>>  CONFIG_VIDEO=y
+>>  # CONFIG_VIDEO_FONT_8X16 is not set
+>>  CONFIG_VIDEO_FONT_16X32=y
+>> @@ -66,27 +92,4 @@ CONFIG_NO_FB_CLEAR=y
+>>  CONFIG_VIDEO_SIMPLE=y
+>>  CONFIG_HEXDUMP=y
+>>  # CONFIG_GENERATE_SMBIOS_TABLE is not set
+>>  CONFIG_LMB_MAX_REGIONS=64
+>> -CONFIG_CMD_DHCP=y
+>> -CONFIG_CMD_EEPROM=y
+>> -CONFIG_CMD_I2C=y
+>> -CONFIG_CMD_PING=y
+>> -CONFIG_DM_ETH=y
+>> -CONFIG_DM_ETH_PHY=y
+>> -CONFIG_DM_MDIO=y
+>> -CONFIG_DWC_ETH_QOS=y
+>> -CONFIG_DWC_ETH_QOS_QCOM=y
+> 
+> Any particular reason to drop these?
 
-sendfile is much more appropriate for this and is done in one syscall,
-but doesn't bring any significant speedups over 64k r/w
-at the 13M size ranges, so there's no need to introduce
-	#if __linux__
-	while((size =3D sendfile(fd_dst, fd_src, NULL, 128 * 1024 * 1024)) > 0)
-		;
-	if(size !=3D -1) {
-		ret =3D 0;
-		goto out;
-	}
-	#endif
+No, this is weird, I must have screwed something up while regenerating
+the defconfig. Thanks for catching this, I'll fix it for the next revision.
+> 
+> -Sumit
+> 
+>> -CONFIG_RGMII=y
+>> -CONFIG_PHY_MICREL=y
+>> -CONFIG_PHY_MICREL_KSZ90X1=y
+>> -CONFIG_MISC=y
+>> -CONFIG_NVMEM=y
+>> -CONFIG_DM_I2C=y
+>> -CONFIG_I2C_SUPPORT=y
+>> -CONFIG_I2C_MUX=y
+>> -CONFIG_I2C_EEPROM=y
+>> -CONFIG_SYS_I2C=y
+>> -CONFIG_SYS_I2C_QUP=y
+>> -CONFIG_SYS_I2C_EEPROM_BUS=2
+>> -CONFIG_SYS_I2C_EEPROM_ADDR_LEN=2
+>> -CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=5
+>>
+>> --
+>> 2.44.0
+>>
 
-Signed-off-by: Ahelenia Ziemia=C5=84ska <nabijaczleweli@nabijaczleweli.xyz>
----
- tools/fit_common.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/tools/fit_common.c b/tools/fit_common.c
-index 2d417d47..373fab6a 100644
---- a/tools/fit_common.c
-+++ b/tools/fit_common.c
-@@ -145,14 +145,14 @@ int copyfile(const char *src, const char *dst)
- 		goto out;
- 	}
-=20
--	buf =3D calloc(1, 512);
-+	buf =3D calloc(1, 64 * 1024);
- 	if (!buf) {
- 		printf("Can't allocate buffer to copy file\n");
- 		goto out;
- 	}
-=20
- 	while (1) {
--		size =3D read(fd_src, buf, 512);
-+		size =3D read(fd_src, buf, 64 * 1024);
- 		if (size < 0) {
- 			printf("Can't read file %s\n", src);
- 			goto out;
---=20
-2.39.2
-
---idodt6oe2hcnztxy
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCgAdFiEEfWlHToQCjFzAxEFjvP0LAY0mWPEFAmX637oACgkQvP0LAY0m
-WPEA2A/6A0v6cFBWMl1lgLGRM/2oKc7vBTefngnXwWdHzeCFjtOFJMSxH9nNzr1e
-8G/1V9ZahDWUES5+Zb88sznWISEdoYztzgdGhTaKX/0osN2bxy0lxWX6z72Yv/zE
-rQ7+VSKyEpJbTtSzf5o5Q0/Fi45CrZHISBZkdr8ObQfGmDc/VEp7Y/P8ijigyspB
-EWgvR/Ey1JAUuRE/5mVblU3Comxowge2tT3PtsFIZLbbDpMY4qb4NmdTRL8R1tkr
-7bf+uG6DCU0ybEUZDawp6SdrtG3S/CxI7xGEaJR6oMviwYp8VR4BvU87dIiGgi5G
-sICD8ZCM45cNRREkpkXTlVSTpvDRyp85c0doQJWRqWznrbWDV4LPSwdcZjjAHMNf
-SDcWaWJBnIlUmRne9jz1KvNsF6LF+q/Vbwp3GnpNfBHUfOFDpXsqbZP4q2S5m+q3
-Dq6vLKUi8HpyCUZ9HfXt4XgNslGrtpiJlhTMtLcOaLFnMSumv+5SvgHImDDaPovc
-0BvQUzaWIPIknG//N3Orxuvh9EF8JlBLM4Pk/U1jrBDQ5sVyBMuAO+fyoYfYmpmE
-ZaLjXo6MQzfrjQdG8Gwytr8S10nfR3r0Pd4qT5oEpUbKmgCfW6H3zNMnzjbY+LpW
-mo5uCc58HOQsUKLWpuIKSr8GPutmARj02l+eMlOU9j0CxuWtm9U=
-=mM1C
------END PGP SIGNATURE-----
-
---idodt6oe2hcnztxy--
+-- 
+// Caleb (they/them)
