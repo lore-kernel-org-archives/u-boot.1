@@ -4,79 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A056C54E58
-	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 12:42:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90B49C54E58
+	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 12:44:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7701C8803E;
-	Wed, 20 Mar 2024 13:42:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 19D758803E;
+	Wed, 20 Mar 2024 13:44:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VsqAi7ua";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Q/bZXhkY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 247618802B; Wed, 20 Mar 2024 13:42:12 +0100 (CET)
-Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
- [IPv6:2607:f8b0:4864:20::112e])
+ id 7C4CA8803E; Wed, 20 Mar 2024 13:44:18 +0100 (CET)
+Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
+ [IPv6:2607:f8b0:4864:20::b2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05BEA8809E
- for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 13:42:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5BFBE8802B
+ for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 13:44:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-60a104601dcso70166327b3.2
- for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 05:42:09 -0700 (PDT)
+Received: by mail-yb1-xb2f.google.com with SMTP id
+ 3f1490d57ef6-dc25e12cc63so831386276.0
+ for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 05:44:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1710938529; x=1711543329; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1710938655; x=1711543455; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=tMaPD1zz3MDy2pI+4/j9blrITJF5WpFqVKJXkNQOusE=;
- b=VsqAi7uai6K/2dUE8VVrDvAYc2yURpt7T6ce/fxdjwsi4aMbMb/VZqzSlq3QxzqvEa
- kAZ08+4pGyoTHGGvoO0Z9UY26VJHJjY0Sl6Evls54Oyuw3rENE55nvqHNocN+cpbycGO
- TOROSCoiRsMgeMIh8PvoYTMGV7uQst+rfhPQc=
+ bh=OS1huUGzAwvLrSU766QT8OnqM5JzVnh4NhORzINH4IE=;
+ b=Q/bZXhkYlBFxk/YCZKm24h7/1onZ/zpMsyV3x2L2hjhctFti9yyyZ0oIiQNuRgf8I6
+ VO/50jmyNbWR4jVuNTY6A/VyVm8xwLkeOla5bBihMLUkg79WcpD+fFZvS+v9Z4SEtgfp
+ Fy74wu4gqiNNG9RyS+y937E6ueruP07u0mhmE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710938529; x=1711543329;
+ d=1e100.net; s=20230601; t=1710938655; x=1711543455;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tMaPD1zz3MDy2pI+4/j9blrITJF5WpFqVKJXkNQOusE=;
- b=ndE4QFBmGUzSOaiDT1Uy0uFdNBLtd8dcM7IBR/VnwmHY/8M67Nsn5Y3VqVvyGS8UqL
- aq+1iqlOxlNDNZhgesupTTrvgWi1NpFynBPN7cfokfCTI3Frppjv/0scFbkpygY9hqxQ
- VCJlIAA/quB7d+spCMIvASdjyO8A0VroWsQBq5dHEQFhxoh98bdw+NMYYp129RRqbkF7
- aJpUI8A/7OlmWd7uvGHP0ZbFzmerjA6ChDHy5h1xv+zbG/pehVh7+WoEyoGrie7q/LyC
- Dk+5iiR0SIfLFULwBQGuDfz/VhVsD/5dGxa2242LhFEHgw1f5YiFVX9bBCxWdekThi8e
- +jNQ==
+ bh=OS1huUGzAwvLrSU766QT8OnqM5JzVnh4NhORzINH4IE=;
+ b=UFK9W3C8tVoadDRrtB40GXL6MF9Jn2Z5Qki9v8dwxg2PdxV4Q8CdMxPmEf6T6C79hm
+ pozpQws5TlHxwExbY2Pd/6LY/QQoHFvFu7xkfsQJXWdTwgQyQ3ZEqDQnllT/ZizUeVvt
+ RNKM3BR64kwlHt5RD1GQHruyKLhH/egazW5khUtVEHppCidjnERJwVdPAX+M/LdBpaxo
+ KrQlfJTIhORIK58CastE00Vt2gDZGvBmYDIU79V7BwpuikvWIWEPCYSWZCbJ+TlAK/PJ
+ uHUkcDpilM/rxE3eByC5KnC2s+CvcsP763wTWFi3Tfy+NcyrtiXG3+jj3Tavm6wBT9cL
+ AjmQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXwCwn3qWHIeuhmqU9iXPWsXE/PBvaryzCUbRHhpArXLIvy55RrquCkg4KQvXtZifNEqV/5kHi/YbDLaTAftR+9WLS0/Q==
-X-Gm-Message-State: AOJu0Yx5yfNHnX8QQZc1NvWb1g2DvGG5H/3in+SXIwOSRbXJw2LNIPMG
- o/Ke3UbYFc7XFi/0YfA8P5wYmtidZRyt5pKye5Y2zf8Xp1nJaDddZVvZhox74y8=
-X-Google-Smtp-Source: AGHT+IE0ov3Jya9wgIOqgooK6Fj/w/nH7gWo7NfFzio285NkitHskbPR2jIXMngozvFSQU0wPNb82A==
-X-Received: by 2002:a0d:d3c6:0:b0:60a:50ec:afbc with SMTP id
- v189-20020a0dd3c6000000b0060a50ecafbcmr18154071ywd.41.1710938528850; 
- Wed, 20 Mar 2024 05:42:08 -0700 (PDT)
+ AJvYcCWhuzwQWFwgmb4KLYwvd56dMyNrAvnZQ9RMIRIXXTuEycLhoHlcYM/DEeBsEavL7BjjLbTAs3RHc/G6MHn9FtsbW+/qeA==
+X-Gm-Message-State: AOJu0YyNScMLGnKxbyO8zbb1RkqK0jY3WhLDYO9vz4rAzrRwKv0DeU+f
+ FxZn6msmSDI8S8Swnhlx/OGhT7kHRs2XCuQ1l4WQ2BoJEGph+KJyCk7Ut6JEuHLppjeAlulzAPt
+ a
+X-Google-Smtp-Source: AGHT+IFlagVIG6IiLcGvhoakhy1suk41tdoQver/cA0c0vrW21CxVwFdTeIQ7rivsLaLLmNSSrhpyQ==
+X-Received: by 2002:a25:dbc2:0:b0:dcd:c909:334d with SMTP id
+ g185-20020a25dbc2000000b00dcdc909334dmr1332971ybf.12.1710938655199; 
+ Wed, 20 Mar 2024 05:44:15 -0700 (PDT)
 Received: from bill-the-cat (065-184-193-066.res.spectrum.com. [65.184.193.66])
  by smtp.gmail.com with ESMTPSA id
- z132-20020a814c8a000000b00610eaf46c6dsm562318ywa.117.2024.03.20.05.42.07
+ g21-20020a25b115000000b00dcf35be9f51sm1528890ybj.24.2024.03.20.05.44.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Mar 2024 05:42:07 -0700 (PDT)
-Date: Wed, 20 Mar 2024 08:42:05 -0400
+ Wed, 20 Mar 2024 05:44:14 -0700 (PDT)
+Date: Wed, 20 Mar 2024 08:44:12 -0400
 From: Tom Rini <trini@konsulko.com>
-To: MD Danish Anwar <danishanwar@ti.com>
-Cc: Nishanth Menon <nm@ti.com>, Igor Opaniuk <igor.opaniuk@foundries.io>,
- Andrew Davis <afd@ti.com>, u-boot@lists.denx.de, srk@ti.com,
- Vignesh Raghavendra <vigneshr@ti.com>, r-gunasekaran@ti.com,
- Roger Quadros <rogerq@kernel.org>
-Subject: Re: [PATCH] arm: mach-k3: Fix config check for FS_LOADER
-Message-ID: <20240320124205.GS3442575@bill-the-cat>
-References: <20240314143311.259568-1-danishanwar@ti.com>
+To: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Dan Carpenter <dan.carpenter@linaro.org>,
+ Vyacheslav Bocharov <adeep@lexina.in>,
+ Beniamino Galvani <b.galvani@gmail.com>, u-boot-amlogic@groups.io,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH] board: amlogic: fix buffler overflow in serial & usid read
+Message-ID: <20240320124412.GT3442575@bill-the-cat>
+References: <20240319-u-boot-fix-p200-serial-v1-1-9a4e06815de0@linaro.org>
+ <f6810e14-2058-4bc2-9001-ee2cdaa8f585@moroto.mountain>
+ <34826ce3-3d9e-4f1b-9f77-23df6ef7f17f@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="pbm8dVAiVqanj2FW"
+ protocol="application/pgp-signature"; boundary="F/bk+OG3smF55aZX"
 Content-Disposition: inline
-In-Reply-To: <20240314143311.259568-1-danishanwar@ti.com>
+In-Reply-To: <34826ce3-3d9e-4f1b-9f77-23df6ef7f17f@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,66 +98,47 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---pbm8dVAiVqanj2FW
+--F/bk+OG3smF55aZX
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Mar 14, 2024 at 08:03:10PM +0530, MD Danish Anwar wrote:
+On Wed, Mar 20, 2024 at 09:26:29AM +0100, Neil Armstrong wrote:
+> On 20/03/2024 06:28, Dan Carpenter wrote:
+> > On Tue, Mar 19, 2024 at 03:53:24PM +0100, Neil Armstrong wrote:
+> > > While meson_sm_read_efuse() doesn't overflow, the string is not
+> > > zero terminated and env_set() will buffer overflow and add random
+> > > characters to environment.
+> > >=20
+> >=20
+> > In the Linux kernel we would give this a CVE because it's information
+> > disclosure bug...
+>=20
+> Yes probably
 
-> load_firmware() API calls fs-loader APIs and checks for CONFIG_FS_LOADER
-> before calling those APIs. The if check only checks for CONFIG_FS_LOADER
-> but not for CONFIG_SPL_FS_LOADER.
->=20
-> When CONFIG_FS_LOADER is enabled, load_firmware() API calls fs-loader APIs
-> but this is done at SPL stage and at this time FS_LOADER is not built yet
-> as a result we see below build error.
->=20
->   AR      spl/boot/built-in.o
->   LD      spl/u-boot-spl
-> arm-none-linux-gnueabihf-ld.bfd: arch/arm/mach-k3/common.o: in function
-> `load_firmware':
-> /home/danish/workspace/u-boot/arch/arm/mach-k3/common.c:184: undefined
-> reference to `get_fs_loader'
-> arm-none-linux-gnueabihf-ld.bfd:
-> /home/danish/workspace/u-boot/arch/arm/mach-k3/common.c:185: undefined
-> reference to `request_firmware_into_buf'
-> make[2]: *** [/home/danish/workspace/u-boot/scripts/Makefile.spl:527:
-> spl/u-boot-spl] Error 1
-> make[1]: *** [/home/danish/workspace/u-boot/Makefile:2055:
-> spl/u-boot-spl] Error 2
-> make[1]: Leaving directory '/home/danish/uboot_images/am64x/r5'
-> make: *** [Makefile:177: sub-make] Error 2
->=20
-> Fix this by modifying the if check to CONFIG_IS_ENABLED(FS_LOADER) instead
-> of IS_ENABLED(CONFIG_FS_LOADER) as the former will check for the
-> appropriate config option (CONFIG_SPL_FS_LOADER / CONFIG_FS_LOADER) based
-> on the build stage.
->=20
-> Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
-> Acked-by: Ravi Gunasekaran <r-gunasekaran@ti.com>
-
-Applied to u-boot/next, thanks!
+Yes, but this isn't the Linux kernel and we aren't a CNA. I don't object
+to someone getting a CVE if so inclined, but we don't have the resources
+to follow in the kernel's footsteps here either.
 
 --=20
 Tom
 
---pbm8dVAiVqanj2FW
+--F/bk+OG3smF55aZX
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmX62Z0ACgkQFHw5/5Y0
-tywkUwv/bt0WMoRiWmIVUDN7WqIOglrhfvr5XnYk7YYv1WEpGR1s3AtWS+k5rQmA
-IyvafQGBhNswPRVNSM0+nUTmYRJNnX+M7uSIknATbXoFzK8rzOY+Xf0787fszGQu
-y6HjYhUC1A32fupnENaCFEgRip7pRnuqEz8C12J24W8LAml40RlukT6yGop3cipK
-adhcFW6Pfa8Hm/wJ4WGNVGKMw3VfjuTxixciHw24LYCwkUme0iNWkiqtMfZdonhc
-XtzxmxkCmyHZLHlxaKBQBpLvCExy+9xE9tD82O6ifnoQb8BvN+1M79YtIhQ9XnG3
-h33ozuCOuIh1Q/TiB6DAz4VexYR/MhzOYOaq9/hY2dAyCuC9nTAedeqO8M9PIiV7
-92Q223+uCPySH6LtMT6YAD7sr0zYLgYgxO/HhlmiA2vVL5imv2U5MgWxCtl296qE
-pkBQ94F1dWM1H06f61IlP+xy7TEvqzVzPxq6aqzlCEqdnb1tgygQQ0kz5xwxFmVE
-A36ypDwE
-=XttK
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmX62hwACgkQFHw5/5Y0
+tywk6Qv/bn6uXpmVLGwBxdILKZcZRjMR+b0W/BBGOyAdmb2S/Q4pzvjR1Q0MzVe/
+Hw3Ej4Y0PV3T96iikx/S+J84nf93uKuHxV5+8Kc8v7dleJ+x5PnmuBE/pAeIEC63
+SG8ePTo2klOWZHQieiKcHrFlZwaGp9ccjvjHRJusi8pZH4x/a4BPYojUcoYnpY+j
+qeJEDZ0ydncUsBah6I+PgOf56YfrnpEuiGBWZXF/XtMfxblmOeGb1P48kcInZerq
+QQmAuyTodVd8Qh9PasI8W+lPzR9hRSZjq96kS7iYh1U3R+tMdkcrtxF82vFBJzKr
+96EV3lxaq0A/HPc6nT2mGWoQ6/jOpP9p+6cGgqebimSpxbKmGw5w1TmhVoPA0b4X
+BkW8jyPm/M3tVaXcv+a6uj6XBEucle0lgdW0E/b0Dh5e+MGqMzD248YT6+mr6uLY
+ig/eke0NWcSunibmICgXrT/C5HS5nN3/xol33dFk0SeSZHBM/IzE8/eXkVSrEgKI
+MDIKmLO7
+=R/NW
 -----END PGP SIGNATURE-----
 
---pbm8dVAiVqanj2FW--
+--F/bk+OG3smF55aZX--
