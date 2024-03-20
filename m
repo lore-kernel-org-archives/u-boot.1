@@ -4,75 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF72CC54E67
-	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 21:15:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC5BBC54E58
+	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 21:17:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4834E87D91;
-	Wed, 20 Mar 2024 22:15:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4231987DF1;
+	Wed, 20 Mar 2024 22:17:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="g+/5LPBq";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="PvRbSZK/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E326C88049; Wed, 20 Mar 2024 22:15:27 +0100 (CET)
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
+ id E6AB288049; Wed, 20 Mar 2024 22:17:53 +0100 (CET)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 087AA87A0B
- for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 22:15:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C505D87DF1
+ for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 22:17:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-2d48d75ab70so4911441fa.0
- for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 14:15:24 -0700 (PDT)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-568c714a9c7so242687a12.2
+ for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 14:17:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710969324; x=1711574124; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=efkX70iBNAZGKdrPzUJdq24gh4dOyV+1aunmW+9uoTc=;
- b=g+/5LPBq+rzmZD1szJEmSf+TOkcv4Fs9F7kaUTChXzeeYYv3TWrw8+Z8723NetURpq
- LDfFzA59ocJ4F52xTznLXZkG+yZWnRYsOiOD2UKpYnEZ1MPpF/0YndTmsxFClNqDd8YI
- k+r+KFFkDbVjtrpANLwnm+NbDD6h9XkXlHg9xowJ+DOkqlodEiNELP0LLBSnjal5l611
- vw0kSzOQ0lG1tG1TMZsoiHLPsnrBGVrFHhERFO8eQ4dNUWIhS+w7pKhSyGmd/ldGPRhz
- mzt9Vw8o8WTQUKXVJH0yhNF1R1Z21qAFqcd+8KAAkWMaYdVjUXu4W2rOaO1Vn0hoQJF3
- cjSg==
+ d=amarulasolutions.com; s=google; t=1710969471; x=1711574271;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=GHDx3boyiOd2yHKufnLrVEL5pbkZ68LKjJlCi/ISpnE=;
+ b=PvRbSZK/HBQID7DBNj1VdOfMkXU2eTvruixfbXDd2WEjJ0j3KWv2HoGENDEJEImhk6
+ Onbv2EBnOH3wTUDar3lepuwpupK1akXutjzC1R5I//4qSWQzWCgWK80B/gERUPrnjAG1
+ tIHhAlO+7F6GRGXpzrfZva4kg2wuYbg3PS3s0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710969324; x=1711574124;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=efkX70iBNAZGKdrPzUJdq24gh4dOyV+1aunmW+9uoTc=;
- b=kMvDhLKaFFUVdjlMmQR+Hy159wn8M9Eb4TPhTNwpdH1ddOgC+sMKJ9/08k9zpddoyM
- Sz0YFAAVLpRS+QCf0+uOnRlbsDqZPQUzFxyA7GtNt4xf4YBJ580iACHjgprn9nSZpHaq
- MnqwtOUUgtpUD1PNXijsQyO7Sta2MVp7tUU07ijAubYU2pC59j7PTiJT1laos9iS3DbP
- gYGZRKY/LHg/Rp2oX+tClG10o42s3/NgQM87SO3C7ZR++Yjc2vm4y1ZbA2q8bIWI67E9
- Xdr7QyWh27iOquxNAvd4oO6R49RNzfjEqJq/tmZCwXUJTGJcJtLby+BbjjHSsGkJgixR
- zE4A==
+ d=1e100.net; s=20230601; t=1710969471; x=1711574271;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=GHDx3boyiOd2yHKufnLrVEL5pbkZ68LKjJlCi/ISpnE=;
+ b=VLPYODRHPJ6fYTxSP35L0kiEMeOg+brwtzS5Uu4G2GIJnLgpZYh0E6tEtWKP/tls/h
+ vPr7UEZuv2zcvk6t6KbfUQ1wcpX1ZY1gP7uoISBbnxrbF93YAnUoLkvuAy78VOUrpuMt
+ L15hyqqELSh+HUmhujm1QV6LoljbohUPJ9XExWqsHKMhLyiJsGT2YNS/Jf8O89Z/D7+Z
+ uHRShyUW1nFDUou4wf6A5xDtk1NDl3EMtf7l5EOnOuweh2bb8WBnCpRT0CC/RBxKAl7b
+ EL1c2BiuQWMu4ddaZbtnmP5lTxIDfa+H0GiJmb2HJuoD48cpEhmdeDEZ/ip2i5F7xuO5
+ 7YEQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXH5dOiqdlrcZMUgHzHkrnsTb8Aa+jhrYXnB+fcc8F7BWMqTmv3TpSSY9/X5WCtBVu8spzVGsm6zBAXgygu34EGMABNsg==
-X-Gm-Message-State: AOJu0Yw1y59O1ip6sfslsQ1jsMuWH8efAvwfoozzGp3i1bVdOms5ZPql
- zgPuo0ixk+EopywBJZM/JmoltBxz+Prmj2bRaNi2gffefRcVBL3HO3mrYPPSHvihgWKAXgP4PWA
- qKSBj3HbtUZEl1GcMp9CdTAOmZ3zD24VOwo3Ro4G0t8G4sHDCUkw=
-X-Google-Smtp-Source: AGHT+IE5gRkyy5OQrJp/BxwYLJzoBtQ3NvLlqmi3QhozIDlE/kl/JxGEaoLBbOQng4AuEatofkRIWpV1ZTgwHCCgWww=
-X-Received: by 2002:a05:651c:2cc:b0:2d4:a74a:56f1 with SMTP id
- f12-20020a05651c02cc00b002d4a74a56f1mr85411ljo.35.1710969324127; Wed, 20 Mar
- 2024 14:15:24 -0700 (PDT)
+ AJvYcCURO03HEBsEXJN3C0ka8n06fVos/wQoYwZvXEbyDFFpb9AGWQKCLux8js32M3Ms23n4Klawa7ECE0gDP49br9ZJERXFtA==
+X-Gm-Message-State: AOJu0Yz+6cSHCcRJfvA/QnMnHTnSCV7YwC8IYs0HyYJ/P74MFJfK7e6D
+ 8Xnvz050eJD5rAXliyiwe1SuPy20fBwT/S7/WAzHOoNZ7HnOKCLgCUs2t0CQkwITbdk1l3qTNW9
+ UJe8z6O5yaAlB/xoV1BfzopXcreuWaIDQYCKbqw==
+X-Google-Smtp-Source: AGHT+IHFpMb0zCGmfuw12kmzdKvymdjWKmFgNKmpzApSMrEKbPMFbKSlO+7AnzyltaNHT30lX1BVSk9pkl9WS/Tko8U=
+X-Received: by 2002:a50:cd9e:0:b0:567:fb9b:37d5 with SMTP id
+ p30-20020a50cd9e000000b00567fb9b37d5mr98894edi.32.1710969471154; Wed, 20 Mar
+ 2024 14:17:51 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240316093644.54869-1-heinrich.schuchardt@canonical.com>
- <20240316093644.54869-3-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20240316093644.54869-3-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 20 Mar 2024 23:14:47 +0200
-Message-ID: <CAC_iWjLvtKQmFM6uVQL4GLEHmZ2M9K00SE7oJAh+hVK9diT9wQ@mail.gmail.com>
-Subject: Re: [PATCH 2/3] cmd: bootefi: Don't show usage help if EFI binary
- fails.
+References: <20240320132525.46259-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240320132525.46259-1-heinrich.schuchardt@canonical.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Wed, 20 Mar 2024 22:17:39 +0100
+Message-ID: <CAOf5uwnD2mHzTUYh0-d1rZ=p6z8ZAdprcsfTsxG=QMq7G=SfJQ@mail.gmail.com>
+Subject: Re: [PATCH 1/1] fs: ext4: all file paths are absolute
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: AKASHI Takahiro <takahiro.akashi@linaro.org>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Sean Anderson <seanga2@gmail.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,60 +91,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 16 Mar 2024 at 11:37, Heinrich Schuchardt
+On Wed, Mar 20, 2024 at 2:25=E2=80=AFPM Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> If an EFI binary returns an error code EFI_INVALID_PARAMETER, we show the
-> usage help for the bootefi command:
+> U-Boot only knows absolute file paths. It is inconsistent to require that
+> saving to an ext4 file system should use a leading '/' wile reading does
+> not. Remove the superfluous check.
 >
->     Shell> exit 0x8000000000000002
->     ## Application failed, r = 2
->     bootefi - Boots an EFI payload from memory
->
->     Usage:
->     bootefi <image address>[:<image size>] [<fdt address>]
->       - boot EFI payload
->     bootefi bootmgr [fdt address]
->       - load and boot EFI payload based on BootOrder/BootXXXX variables.
->
->         If specified, the device tree located at <fdt address> gets
->         exposed as EFI configuration table.
->
-> This makes no sense.
->
-> Fixes: 296faf4f7ef1 ("cmd: bootefi: re-organize do_bootefi()")
+
+Just a typo, "wile reading"
+
+Michael
+
+> Reported-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  cmd/bootefi.c | 8 ++------
->  1 file changed, 2 insertions(+), 6 deletions(-)
+>  fs/ext4/ext4_common.c | 5 -----
+>  1 file changed, 5 deletions(-)
 >
-> diff --git a/cmd/bootefi.c b/cmd/bootefi.c
-> index 9cf9027bf40..b509440cde0 100644
-> --- a/cmd/bootefi.c
-> +++ b/cmd/bootefi.c
-> @@ -154,9 +154,7 @@ static int do_bootefi(struct cmd_tbl *cmdtp, int flag, int argc,
->             !strcmp(argv[1], "bootmgr")) {
->                 ret = efi_bootmgr_run(fdt);
+> diff --git a/fs/ext4/ext4_common.c b/fs/ext4/ext4_common.c
+> index ea9b92298ba..9eac6beef3b 100644
+> --- a/fs/ext4/ext4_common.c
+> +++ b/fs/ext4/ext4_common.c
+> @@ -765,11 +765,6 @@ int ext4fs_get_parent_inode_num(const char *dirname,=
+ char *dname, int flags)
+>         struct ext2_inode *first_inode =3D NULL;
+>         struct ext2_inode temp_inode;
 >
-> -               if (ret == EFI_INVALID_PARAMETER)
-> -                       return CMD_RET_USAGE;
-> -               else if (ret)
-> +               if (ret != EFI_SUCCESS)
->                         return CMD_RET_FAILURE;
->
->                 return CMD_RET_SUCCESS;
-> @@ -218,9 +216,7 @@ static int do_bootefi(struct cmd_tbl *cmdtp, int flag, int argc,
->
->         ret = efi_binary_run(image_buf, size, fdt);
->
-> -       if (ret == EFI_INVALID_PARAMETER)
-> -               return CMD_RET_USAGE;
-> -       else if (ret)
-> +       if (ret != EFI_SUCCESS)
->                 return CMD_RET_FAILURE;
->
->         return CMD_RET_SUCCESS;
+> -       if (*dirname !=3D '/') {
+> -               printf("Please supply Absolute path\n");
+> -               return -1;
+> -       }
+> -
+>         /* TODO: input validation make equivalent to linux */
+>         depth_dirname =3D zalloc(strlen(dirname) + 1);
+>         if (!depth_dirname)
 > --
 > 2.43.0
 >
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+
+
+--=20
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
+
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
