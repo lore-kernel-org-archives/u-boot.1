@@ -4,85 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB375C6FD1F
-	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 14:30:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F066C6FD1F
+	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 14:31:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 30BE088077;
-	Wed, 20 Mar 2024 15:30:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B56138809D;
+	Wed, 20 Mar 2024 15:31:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Zc0/mUVD";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="v63VpZdm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 34B3C88076; Wed, 20 Mar 2024 15:30:56 +0100 (CET)
-Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
- [IPv6:2607:f8b0:4864:20::b31])
+ id 1E7D4880AC; Wed, 20 Mar 2024 15:31:34 +0100 (CET)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 074CA88076
- for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 15:30:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 11F138808A
+ for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 15:31:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb31.google.com with SMTP id
- 3f1490d57ef6-dcc73148611so7281268276.3
- for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 07:30:53 -0700 (PDT)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-33ec8f13c62so5005140f8f.0
+ for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 07:31:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1710945052; x=1711549852; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=EoUTEcNEmknxEvZ5onK/mvSypwIZzbPNzNpuIQtRJHc=;
- b=Zc0/mUVDM71DHcXRN5sh5TGnAq2atVwo6Zus56Q+7IqVWBlXdrLt8EqIh6MPNLdTlU
- 1D9kkM+dr2GvbqngIaGzI/Atb9VsiGmMHiwTy7m4xy0KdVzclahAA/kzBXw8PWa8heCF
- 7aHsziUJ+IFa0dtTkBkAo3eQAK9s7nKK+3deA=
+ d=linaro.org; s=google; t=1710945086; x=1711549886; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=V660sAidEfB+8JaG2JnVeXQKzFud7du4SAPBobcaRak=;
+ b=v63VpZdmQ1i+mFFMtQ4AtmPi9lJCKdf10rlqGyKbmWiLvHOev/inm1OFV+zFzPZIJh
+ CbnMBr9pHFLvO/TA9w+/ZEFKfrPbCzm1Vi4ytm/seE9su6HpwW9pVokBA8yQxFu9nVVE
+ ILrWnG1qf5o5xEHqIN3nVxgY3NDJA34BBhQSQNH4IwtzsnBe3dpr4PmOJOxpVIEqRJSY
+ Zgb0+mx7rfRELgndnrdJ9jnCxLPwrtroYW/K+eE0NnoDMoQFUynAv7guJAIaxx0teAyT
+ W096oH2YHS7iZ5v4LAF2CEXNfU69n9zrnZMeCQ2Vj0vthq1rM37Eb/4JbDWNt+U7UFkk
+ ecNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710945052; x=1711549852;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=EoUTEcNEmknxEvZ5onK/mvSypwIZzbPNzNpuIQtRJHc=;
- b=HSzIKFzgpnAth/qNGV6yOCK6PNGi1iB+qr0pDevRXIL24L5AVtwaQNMJHpmtoBHiSj
- RZxvhjStgyIpY47MTHOKFqRo6RP+6CLuodsVaILHSksGXARhTWCaJZyOR558lj0FHEeY
- riI0A2Txk/ZVeLypVOdqRMcJcrM0gYRk5z3DAggkB2bLVy4WUwXHZIAdjXRGxK2FU6IC
- 6PMo67s9K6aNE/bj8u/7RPzSpyXu8KvEPdapuS1IAf3hvTGn8VUuq1BGOPAow7pFBjXs
- 5UYxc2/0Mb2BdBOQD9UN4C1ec6FkXkKkogZIWCAbmJxWXtx/j5cwql2tNqgVET4o8hEh
- zMOg==
-X-Gm-Message-State: AOJu0YyqKFDGpx1GeBwKf+AbtDyIZzdDH9leXT48gTYOtox0uan6H8R8
- TquJnJGGPiBImujOIeTgTckTRzHDWh5KfC3MmCaumtLaNAJ5FzQJ6b3RS0VnFfs=
-X-Google-Smtp-Source: AGHT+IFj2Y6Wwp0Qb/8Yps6euju/JIBdd0hXn6r/8Rjh9dcmEULbgCfdCD6nMTldv5uIB+kQwzPHzw==
-X-Received: by 2002:a25:bc82:0:b0:dcd:5bdb:4aa4 with SMTP id
- e2-20020a25bc82000000b00dcd5bdb4aa4mr15396331ybk.51.1710945052177; 
- Wed, 20 Mar 2024 07:30:52 -0700 (PDT)
-Received: from bill-the-cat (065-184-193-066.res.spectrum.com. [65.184.193.66])
+ d=1e100.net; s=20230601; t=1710945086; x=1711549886;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=V660sAidEfB+8JaG2JnVeXQKzFud7du4SAPBobcaRak=;
+ b=rFUujSsPW36PLjQT+rIyyMcITEj8Cvv3DeYZslIfFyXZS2ZSoo8cOhimd2YQbENi1o
+ kilJmNzjqTE9ZcwcRhd55i2fx2A+dsRod6sUXl/wGN/ObaZn4If+3fzbhXTvBvCJDJwr
+ Rz0eeh3peu1FfQFqP191MxK8ogneV4nxruBZC2kdKzx8PcJTLV8dMLurZpO6OX5tkvp7
+ a4H+bGod7BN8Ka8a7ACo6Tr05MjRCE6h47U2ubQcAevtnqe0ol4PNXFXQsvCdBdEbuEn
+ MzMtNwEsUdXIo+hOm/cPPTjaHpTeJQBus/9lKQwUzjNGIzVGeN7nbSv7rYWX0xFxq/4p
+ ucDA==
+X-Gm-Message-State: AOJu0YzKF+J6mQmDRONjffT746ZjvKBsqEWCNqExyk6U4b+zFbPRp38o
+ YCfgqECU56lCdROsJVnY8683de45KPQkAQL9WECA8M8BZQYU2E6WepdWAE2ymPA=
+X-Google-Smtp-Source: AGHT+IEqc1XrrY9OQlaiqaOoQf/qCGM8tOYEPsd+PAHGy1OIT29OqDu9ZRFiwXPqQoEAsb4/nt8xOA==
+X-Received: by 2002:adf:f985:0:b0:33d:5fa6:79bf with SMTP id
+ f5-20020adff985000000b0033d5fa679bfmr10522542wrr.71.1710945086485; 
+ Wed, 20 Mar 2024 07:31:26 -0700 (PDT)
+Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- v89-20020a25abe2000000b00dc701e0bdbcsm2680395ybi.44.2024.03.20.07.30.50
+ az1-20020adfe181000000b0033ed7181fd1sm12036571wrb.62.2024.03.20.07.31.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Mar 2024 07:30:51 -0700 (PDT)
-Date: Wed, 20 Mar 2024 10:30:48 -0400
-From: Tom Rini <trini@konsulko.com>
-To: lukas.funke-oss@weidmueller.com
-Cc: u-boot@lists.denx.de, Lukas Funke <lukas.funke@weidmueller.com>,
- Andre Przywara <andre.przywara@arm.com>, Bin Meng <bmeng@tinylab.org>,
- Chanho Park <chanho61.park@samsung.com>, Devarsh Thakkar <devarsht@ti.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
- Marek Vasut <marex@denx.de>, Mayuresh Chitale <mchitale@ventanamicro.com>,
- Nikhil M Jain <n-jain1@ti.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Samuel Holland <samuel@sholland.org>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH 1/2] spl: Introduce architecture specific init function
-Message-ID: <20240320143048.GU3442575@bill-the-cat>
-References: <20240320131928.1836386-1-lukas.funke-oss@weidmueller.com>
- <20240320131928.1836386-2-lukas.funke-oss@weidmueller.com>
+ Wed, 20 Mar 2024 07:31:25 -0700 (PDT)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+Subject: [PATCH v4 0/5] Qualcomm DWC3 USB support
+Date: Wed, 20 Mar 2024 14:30:46 +0000
+Message-Id: <20240320-b4-qcom-usb-v4-0-41be480172e1@linaro.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="8hUoe5HsmipEH0ca"
-Content-Disposition: inline
-In-Reply-To: <20240320131928.1836386-2-lukas.funke-oss@weidmueller.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIABbz+mUC/23MTQ7CIBhF0a0YxmLg46fFkfswDoDSlkSLghJN0
+ 71LO9FGh+8l544ouehdQvvNiKLLPvkwlMG3G2R7PXQO+6ZsBAQ4oYxiw/HNhgt+JIOp4sxVEoA
+ ahoq4Rtf651I7nsrufbqH+Frimc7v/06mmGDJWW1AA9TCHc5+0DHsQuzQHMrwwYyKNYaCBZeVs
+ 1BZA/IHs2+s1pgVTJTRtK1lA0Kt8DRNb2PEwIEhAQAA
+To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>, 
+ Lukasz Majewski <lukma@denx.de>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>
+Cc: u-boot@lists.denx.de
+X-Mailer: b4 0.14-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2044;
+ i=caleb.connolly@linaro.org; h=from:subject:message-id;
+ bh=5YXVuloWFUpZWUtzJSJHLcwFYHCA2hau6PP7tixFSu8=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtRfn23OXT+9Y+fzZ2wtk0yNt+zP/Jx/WtjhD//1tza7Y
+ 4SFNZ7O7ShlYRDkYJAVU2QRP7HMsmntZXuN7QsuwMxhZQIZwsDFKQATWZ3JyLDbi8dpv/ek63Xh
+ k/pvrZqpkOHJLr2EaUv8SvYVIV8WZHQw/OEqdrkaZnn705Vl81Z9LNa3Ea25lHXex2vDtLs/okw
+ vN6UDAA==
+X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
+ fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,50 +107,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This series enables support for Qualcomm platforms in the DWC3 driver,
+adds support for arbitrary sector sizes to the USB mass storage gadget,
+and fixes an issue with the CDC ACM driver where it wouldn't initialise
+the USB device.
 
---8hUoe5HsmipEH0ca
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Additionally, it fixes a syntax bug in the Qualcomm SMMU driver, and
+makes USB_DWC3_GADGET select DM_USB_GADGET to fix compilation with
+gadget mode.
 
-On Wed, Mar 20, 2024 at 02:19:26PM +0100, lukas.funke-oss@weidmueller.com w=
-rote:
+This is part of a larger series enabling DWC3 USB support on Qualcomm
+platforms, a feature branch with all patches can be found at [1].
 
-> From: Lukas Funke <lukas.funke@weidmueller.com>
->=20
-> Some architectures use spl_board_init() in their architecture specific
-> implementation. Board developers should be able to add board specific
-> implementation via spl_board_init(). Hence, introduce a spl_arch_init()
-> method which is called right before spl_board_init() for architecture
-> specific implementation.
->=20
-> Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
+[1]: https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/tree/b4/qcom-livetree
 
-I think this could allow for other SoCs to clean up their existing
-ad-hoc mechanisms for SoC/architecture init and then board init, so this
-looks like a good idea to me.
+---
+Changes in v4:
+- Use map_physmem() instead of casting fdt_addr_t directly to void*
+- Link to v3: https://lore.kernel.org/r/20240319-b4-qcom-usb-v3-0-09ba1f86d259@linaro.org
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Changes in v3:
+- Fix ordering of QSCRATCH registers in qcom dwc3 glue.
+- Link to v2: https://lore.kernel.org/r/20240315-b4-qcom-usb-v2-0-5467ec27cb26@linaro.org
 
---=20
-Tom
+Changes in v2:
+- Drop custom set/clrbits implementation in qcom dwc3 glue.
+- Additional minor cleanup based on Marek's comments.
+- Link to v1: https://lore.kernel.org/r/20240131-b4-qcom-usb-v1-0-6438b2a2285e@linaro.org
 
---8hUoe5HsmipEH0ca
-Content-Type: application/pgp-signature; name="signature.asc"
+---
+Caleb Connolly (5):
+      usb: dwc3-generic: implement Qualcomm wrapper
+      usb: dwc3: select DM_USB_GADGET
+      usb: gadget: CDC ACM: call usb_gadget_initialize
+      usb: gadget: UMS: support multiple sector sizes
+      iommu: qcom-smmu: fix debugging
 
------BEGIN PGP SIGNATURE-----
+ cmd/usb_mass_storage.c              |   4 --
+ drivers/iommu/qcom-hyp-smmu.c       |   2 +-
+ drivers/usb/dwc3/Kconfig            |   1 +
+ drivers/usb/dwc3/dwc3-generic.c     |  81 ++++++++++++++++++++++++++++-
+ drivers/usb/gadget/f_acm.c          |   9 ++++
+ drivers/usb/gadget/f_mass_storage.c | 101 ++++++++++++++++++++----------------
+ drivers/usb/gadget/storage_common.c |  12 +++--
+ include/usb_mass_storage.h          |   1 -
+ 8 files changed, 156 insertions(+), 55 deletions(-)
+---
+base-commit: a288571aff7b27eb9f593dbfd8269e1fbdbbfe18
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmX68xIACgkQFHw5/5Y0
-tyxMSQv+O1FW7d/Ky8fsx468H6N5flg17N6j2KuVpvBAgFj1AlQp9xI55TOx8rVr
-nfpgKZlT/ujOAQPsSYQ0PdurZSs01xsOlUUQLrqULg8ivqSyA2FDqeY5IuqZBU60
-NMOVpMqf3hnbWvqsSN0FjPZZoGfMS/KvBQ1C/DL1y4A4mTxZwseCs22DWWwgpdFC
-lMAf5Igqnj72x+xKHtJ2sSALhVJPPbc3z9rkKtj4/CPMH0MngFnkrWtg5Qv3jC1Q
-ahI3iyjRNgY+RfWNdreUAxwZQLH9F+aN5O28oOvs9NMIHPDf6kacewptmw2HVnD9
-wN8xVWrnjhYI1/0z78v+2DazeMVBnxCjhEMHqSX+g1DJ+56NpnlDlbl9wOXCdVpb
-YOsOAk8gEJFOF9ytmjF55zO0+0haOfIaASXGFTMXuF7yD2QEImBaOaW6cIiXIYK4
-uOfUjg970suKbTATL7Z8htISWhuAZnq2s8nVs1I84bYJMAh92kU3MgNq9BkniTp4
-chyItKKu
-=CdG7
------END PGP SIGNATURE-----
+// Caleb (they/them)
 
---8hUoe5HsmipEH0ca--
