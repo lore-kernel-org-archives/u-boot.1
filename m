@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B92D6C54E58
-	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 12:16:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69CEBC54E58
+	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 12:17:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1CE2987EFA;
-	Wed, 20 Mar 2024 13:16:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 80BEE87F8C;
+	Wed, 20 Mar 2024 13:16:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GkNE+uFn";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="go8xCgRo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1264487E93; Wed, 20 Mar 2024 13:16:52 +0100 (CET)
-Received: from mail-pg1-x529.google.com (mail-pg1-x529.google.com
- [IPv6:2607:f8b0:4864:20::529])
+ id DC24C87F8C; Wed, 20 Mar 2024 13:16:56 +0100 (CET)
+Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
+ [IPv6:2607:f8b0:4864:20::1033])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5CAFB86FCE
- for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 13:16:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B7EF686FCE
+ for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 13:16:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jpaulo.silvagoncalves@gmail.com
-Received: by mail-pg1-x529.google.com with SMTP id
- 41be03b00d2f7-5dca1efad59so4359664a12.2
- for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 05:16:47 -0700 (PDT)
+Received: by mail-pj1-x1033.google.com with SMTP id
+ 98e67ed59e1d1-29bfc3ca816so5831430a91.0
+ for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 05:16:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1710937006; x=1711541806; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=RPEzlgIewdUyV9z7PYvNF4VpPlqwOaf0pYSDI9FzfcM=;
- b=GkNE+uFnk3OfRvgE1fkpSf8ypiw8Mg/+AiL41uuKpl6jJEbrcuXColzsfyEbZJvbi2
- X1iw9pPDbPfjAYyObDp2VC+xkLJAjYwXcf4Z2aUHWxgMZYa1aaFuxQGQ2IuC0VWrXTZr
- 2PaWf0lc0koM0DAHG1574g1l/Tk1GVOcp9d4obMzPITefhuPYs/6zuc8cq0cjW3Y8Nyn
- FOxWOx9Xaniq5N3xIGrn6/FXJXFPGkls01vXzd0ycEap1rgVaz2hq0r7qDterfixk9sI
- r8wkTNrsCB1WHEBq27kBw+Hqvin1z7sGvY0mIkZRFMjpXN0lGANypkZz9Mz9SN88ItYr
- 1YVA==
+ d=gmail.com; s=20230601; t=1710937011; x=1711541811; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=HGqlhAwXlNAbyn9wEG7QpeBZH4E/n9ApsSiGwFf52dI=;
+ b=go8xCgRoVpF5c5vfjEryKXTYuk0GZMzuhL4Kv12Qt/Hwo3AJ7sr6Un7dwXhYsEdYl7
+ JszictDrjgLnvoMYIFObFllrH+9ewwTC2pP3NJBIOygE+VPufNG5dXR4ByXNgknds/ps
+ j6ZZ05rxZYgM5IlPME9yZGK8IoU8jXkkRCZum6LSPMVGiFyayafe11CJnSWqKRF3qXyK
+ 7ubwundzDJRRDlGCS5keafV/IDrAJlcn0APHfeNtb1iauhzrM/x8gSwXGEt1kCgUgucm
+ 2Mnwj0HbcCEDOw1CwG+Fs67J/dgNjZTEZNIQBpJ2aui+GcRmpnFvA9aryHNh3+kN9aDK
+ 6asA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710937006; x=1711541806;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=RPEzlgIewdUyV9z7PYvNF4VpPlqwOaf0pYSDI9FzfcM=;
- b=XZfePNj2XtB03XPRsWpJiaWCkgmtHLDBIiTezy5HNhfmhOYRlUKvbhbB0Dn/njdeEF
- 1lO6UMOT6GMPaXPod/CJRtHvLUz5ufd047J7hdtlnXPJa/EeHHm5zlMAWNTRyIo3mqmq
- kqaCiKh7qATQp+AYKrwqnCzL5ds4hV+cbpHDkaK1Qi8JCbZWUEhoAUJb757mduplw783
- sewv32mHFlhHAFfxuzRovKvNvAAirxUNQX4DbC4qyv/gbFLxDygSVf9zUcd97qAzWmJT
- 7Xn42f2TnehyuNdr1RDJ98YczOzLWvovy/99atXIKQEIp8B7xN2jbhPeY26+mRi5BPrH
- Wi7Q==
+ d=1e100.net; s=20230601; t=1710937011; x=1711541811;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=HGqlhAwXlNAbyn9wEG7QpeBZH4E/n9ApsSiGwFf52dI=;
+ b=Z4Ag0sg24OTa22TYZN7U+g1AmK3mBoK3sOVqwA/Lu0pfHrnLoBQkzi2iAyK2KxxYkj
+ iqZmr4yIsxGKazDH8CCbDloUwzKXAzLGiwnKjdjJmG4QWh8wIioIqbr6xRxpNah7tnSQ
+ NNMTx3i1LVx6Mwicw+1NDjHar18QbRDkw3mf4iuP853sG+IAmjdP55+6+Cmc5tyi5wom
+ Aul0+6lWiCd1t1rqLmAGM0k4ZTk5X3MmwHkQ1u7gKl8+9WQ8XDlb2WvU1ndlW52vASGA
+ aqb1LEUfBwxuoKj703I8P5XthMf7Suz2EpEtgvPnxZKeGm41doYaIOWHwuWXkwxOxO1f
+ u6Kw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWFvzlFPfhUCkPUNLtF18rX87rtuqt8wORg6jRu3/RcxRrCSYYa/yYyzLHgOXuQMnmLkl2N112VsolLRIdzWbvSbPhsKA==
-X-Gm-Message-State: AOJu0YwWywyJppEjW+6bbZCu8VIYc30+Ddmjb8LBuxfgBjUiLn/kRSJX
- Mp4cDnr5oF3ewyZ2IPfqHcpvbUwvywnNPpcGKUMhlZIrSvkeSCOM
-X-Google-Smtp-Source: AGHT+IGUPNOmRaH6bzZknTOS54SicEkHt8lP/vUsBiGt1sPjVJcukWgOE3gTqv2N/iqTVOUTIlPIig==
-X-Received: by 2002:a17:90b:14c:b0:29f:b55c:68d9 with SMTP id
- em12-20020a17090b014c00b0029fb55c68d9mr7904099pjb.21.1710937005737; 
- Wed, 20 Mar 2024 05:16:45 -0700 (PDT)
+ AJvYcCXNjmizty4V1fdXl8Z5QiNcraviLyUmGLMgKMZT1fe4Hd+uV8YM+PhrKgm3PtVq8ao4d3lwYfyLkirFLkOvKB3tldmTJw==
+X-Gm-Message-State: AOJu0YzPkUaQdHm4m78Hg14pj8exY03+58FoxYHtbfwdOjcPRK7C6xIy
+ wS1VniknEFPs5nLseb84qDFElmJGrNaEthmwJAObO7PrRljTslP6
+X-Google-Smtp-Source: AGHT+IE1jn5s0lzHOrdSszKwwavcpMAWfLK0lsMlooY12OvWNaxEeqZhC4BSBg7ly0IYwpIABjObZg==
+X-Received: by 2002:a17:90a:5283:b0:29b:68c:1779 with SMTP id
+ w3-20020a17090a528300b0029b068c1779mr1692455pjh.40.1710937010956; 
+ Wed, 20 Mar 2024 05:16:50 -0700 (PDT)
 Received: from joaog-nb.corp.toradex.com ([201.82.41.210])
  by smtp.gmail.com with ESMTPSA id
- sj10-20020a17090b2d8a00b0029af5587889sm1447870pjb.12.2024.03.20.05.16.43
+ sj10-20020a17090b2d8a00b0029af5587889sm1447870pjb.12.2024.03.20.05.16.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Mar 2024 05:16:45 -0700 (PDT)
+ Wed, 20 Mar 2024 05:16:50 -0700 (PDT)
 From: Joao Paulo Goncalves <jpaulo.silvagoncalves@gmail.com>
 To: Tom Rini <trini@konsulko.com>
-Cc: Joao Paulo Goncalves <joao.goncalves@toradex.com>,
- Vignesh Raghavendra <vigneshr@ti.com>, u-boot@lists.denx.de
-Subject: [PATCH 0/2] arm: mach-k3: am62: change a53 clock frequency by speed
+Cc: Joao Paulo Goncalves <joao.goncalves@toradex.com>, u-boot@lists.denx.de,
+ Vignesh Raghavendra <vigneshr@ti.com>
+Subject: [PATCH 1/2] arm: mach-k3: am62: Get a53 max cpu frequency by speed
  grade
-Date: Wed, 20 Mar 2024 09:16:30 -0300
-Message-Id: <20240320121632.105730-1-jpaulo.silvagoncalves@gmail.com>
+Date: Wed, 20 Mar 2024 09:16:31 -0300
+Message-Id: <20240320121632.105730-2-jpaulo.silvagoncalves@gmail.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240320121632.105730-1-jpaulo.silvagoncalves@gmail.com>
+References: <20240320121632.105730-1-jpaulo.silvagoncalves@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,22 +97,42 @@ X-Virus-Status: Clean
 
 From: Joao Paulo Goncalves <joao.goncalves@toradex.com>
 
-This series introduces a method to dynamically set the AM62 A53 CPU frequency
-based on its speed grade. It adds a new function to retrieve the A53 frequency
-value by reading the speed grade from the hardware. Subsequently, it adjusts the
-Cortex R5 device tree at runtime  with the frequency value before initializing
-the remote processor.
+AM62 SoC has multiple speed grades. Add function to return max A53 CPU
+frequency based on grade. Fastest grade's max frequency also depends on
+PMIC voltage, to simplify implementation use the smaller value.
 
-Regards,
-João Paulo Goncalves
+Suggested-by: Vignesh Raghavendra <vigneshr@ti.com>
+Signed-off-by: Joao Paulo Goncalves <joao.goncalves@toradex.com>
+---
+ arch/arm/mach-k3/include/mach/am62_hardware.h | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
 
-Joao Paulo Goncalves (2):
-  arm: mach-k3: am62: Get a53 max cpu frequency by speed grade
-  arm: mach-k3: am625: Fixup a53 cpu frequency by speed grade
-
- arch/arm/mach-k3/am625_init.c                 | 62 +++++++++++++++++++
- arch/arm/mach-k3/include/mach/am62_hardware.h | 15 +++++
- 2 files changed, 77 insertions(+)
-
---
+diff --git a/arch/arm/mach-k3/include/mach/am62_hardware.h b/arch/arm/mach-k3/include/mach/am62_hardware.h
+index 264f8a488b4..90682d8ee31 100644
+--- a/arch/arm/mach-k3/include/mach/am62_hardware.h
++++ b/arch/arm/mach-k3/include/mach/am62_hardware.h
+@@ -122,6 +122,21 @@ static inline int k3_get_max_temp(void)
+ 	}
+ }
+ 
++static inline int k3_get_a53_max_frequency(void)
++{
++	switch (k3_get_speed_grade()) {
++	case 'K':
++		return 800000000;
++	case 'S':
++		return 1000000000;
++	case 'T':
++		return 1250000000;
++	case 'G':
++	default:
++		return 300000000;
++	}
++}
++
+ static inline int k3_has_pru(void)
+ {
+ 	u32 full_devid = readl(CTRLMMR_WKUP_JTAG_DEVICE_ID);
+-- 
 2.34.1
+
