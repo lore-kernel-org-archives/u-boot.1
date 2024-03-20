@@ -4,54 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E2D4C6FD1F
-	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 15:59:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA6ECC54E58
+	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 16:32:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC4FC8802B;
-	Wed, 20 Mar 2024 16:59:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E56A988065;
+	Wed, 20 Mar 2024 17:32:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="UGpVTBA7";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="7Fii+H53";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7C87E8802B; Wed, 20 Mar 2024 16:59:55 +0100 (CET)
-Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1DA108809E; Wed, 20 Mar 2024 17:32:37 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 112CD83346
- for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 16:59:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
+ by phobos.denx.de (Postfix) with ESMTPS id D60FD879A0
+ for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 17:32:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=3809a22167=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
+ 42KDQoSK027012; Wed, 20 Mar 2024 17:32:31 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; s=
+ selector1; bh=bwtz1ROjTY6rYcA0j+0/WZs4Zcs2r4O/sESEVRrr+bw=; b=7F
+ ii+H53rZuso23jtDF5JdVtF63O0AgoMWQu4hKPNV+BEwdX1IpsaAuSQdUuNijN/x
+ FYXHOR4lz/D3fQb+mp0jY4g4UAQPVqJMTGd91HlwRwZk6+HCaUK5TV0j0YOBz1ia
+ iMHlHj3CroyA+zpouCHMfDSPM/m7vtGbSuuQhyEI24iRZOPSqM2tMXzOpxCLppZ8
+ ZZ3cZxEkJ/l52ysmo1Ev10/XkT7VU5TMjRf0uYSKWBSY2n5bx5dHvOZU9dENCOBt
+ ungaAnrkMpzxD/w/LTRmDQZh8b1+PNkQEsXjVCcvQ4BMB0XiIeSqGneRUYBKJHL5
+ mUgkFNONz/CeHtPRrKZg==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3ww36htde3-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 20 Mar 2024 17:32:31 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id CA62C4002D;
+ Wed, 20 Mar 2024 17:32:27 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 2599A26BB4A;
+ Wed, 20 Mar 2024 17:32:07 +0100 (CET)
+Received: from [10.201.20.71] (10.201.20.71) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Wed, 20 Mar
+ 2024 17:32:06 +0100
+Message-ID: <61f43273-21fe-47c8-9b75-1a6766edab83@foss.st.com>
+Date: Wed, 20 Mar 2024 17:32:05 +0100
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1710950392;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=+nn+RuMbqiOlJlmm6zuOE2Iz3om2HDqrtzEhDWDkV9k=;
- b=UGpVTBA7dLbTQ7kIp28M7XSr72a/JCp+vVPq6mAsuMgEqsQ8Ffs7x73A8eYz79690WwIS/
- q2/RaNHnCESbsC7p6D0EIb0IN34Jzg5swfx9GHE0QrR6fJMZvue2xIt8J1fcxyfHlh21EW
- uGZy6UjlOZAIkQ1U77qzizg91Ryig5INLXPKI6dO9Fa58mm/5cLcCmIPNJkkpJ9Odlg2J+
- Gfzhg1Ibf9aZpRg1nXRU2oDuj8m/n3/AD+u7phIqhaGy09c0i46tHluVkoY8w5ZgQfvTQz
- 95+LZbDZl48GaNtGesLCpJDCwhWykB8u7ufUcEyB+JV1eng1Ho04UGi16vcIMw==
-Date: Wed, 20 Mar 2024 16:59:52 +0100
-From: Dragan Simic <dsimic@manjaro.org>
-To: =?UTF-8?Q?Ahelenia_Ziemia=C5=84ska?= <nabijaczleweli@nabijaczleweli.xyz>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH] tools: copyfile: use 64k instead of 512 buffer
-In-Reply-To: <4le6hwyli3wl2fisv5lr3rizbqzx3g2xzytw26zcrsvgchqy6i@tarta.nabijaczleweli.xyz>
-References: <4le6hwyli3wl2fisv5lr3rizbqzx3g2xzytw26zcrsvgchqy6i@tarta.nabijaczleweli.xyz>
-Message-ID: <f48faaa30f42ab63c616611b0b0067b6@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
-Content-Transfer-Encoding: 8bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] efi_loader: Add absolute path to EFI_VAR_FILE_NAME
+Content-Language: en-US
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+CC: <u-boot@lists.denx.de>, Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
+References: <20240320113051.1.If084ef69b9da34900391d0f0acc13475b250ce9f@changeid>
+ <CAC_iWj+1j+WR0aCTLA9Z21j347FpT95t3iWZnJoPFhH5E9jScQ@mail.gmail.com>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <CAC_iWj+1j+WR0aCTLA9Z21j347FpT95t3iWZnJoPFhH5E9jScQ@mail.gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.201.20.71]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-03-20_10,2024-03-18_03,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,63 +91,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Ahelenia,
 
-Please see my comments below.
 
-On 2024-03-20 14:08, Ahelenia Ziemiańska wrote:
-> This is an incredible pessimisation:
-
-s/pessimisation/optimization/
-
-> mkimage took >200ms (and 49489 writes (of which 49456 512)),
-> now it takes  110ms (and   419 writes (of which   386 64k)).
+On 3/20/24 12:53, Ilias Apalodimas wrote:
+> Hi Patrice,
 > 
-> sendfile is much more appropriate for this and is done in one syscall,
-> but doesn't bring any significant speedups over 64k r/w
-> at the 13M size ranges, so there's no need to introduce
-> 	#if __linux__
-> 	while((size = sendfile(fd_dst, fd_src, NULL, 128 * 1024 * 1024)) > 0)
-> 		;
-> 	if(size != -1) {
-> 		ret = 0;
-> 		goto out;
-> 	}
-> 	#endif
+> On Wed, 20 Mar 2024 at 12:31, Patrice Chotard
+> <patrice.chotard@foss.st.com> wrote:
+>>
+>> If the ESP partition is formatted in ext4, we got the following error :
+>>
+>> STM32MP>  setenv -e -nv -bs -rt -v OsIndications =0x0000000000000004
+>> GUID: 8be4df61-93ca-11d2-aa0d-00e098032b8c (EFI_GLOBAL_VARIABLE_GUID)
+>> Attributes: 0x7
+>> Value:
+>>     00000000: 04 00 00 00 00 00 00 00                          ........
+>> File System is consistent
+>> Please supply Absolute path
 > 
-> Signed-off-by: Ahelenia Ziemiańska <nabijaczleweli@nabijaczleweli.xyz>
+> This error message comes from ext4_common.c and it's ext4 specific. Do
+> you have any idea why this exists?
+> What happens to other filesystems? IOW does this change the behavior
+> of the existing code if it tries to write a file in FAT?
 
-Looking good to me.  With the small nitpick above and
-a suggestion below,
+I made a try in FAT with this patch, and there is no issue.
 
-Reviewed-by: Dragan Simic <dsimic@manjaro.org>
+Thanks
+Patrice
 
-> ---
->  tools/fit_common.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
 > 
-> diff --git a/tools/fit_common.c b/tools/fit_common.c
-> index 2d417d47..373fab6a 100644
-> --- a/tools/fit_common.c
-> +++ b/tools/fit_common.c
-> @@ -145,14 +145,14 @@ int copyfile(const char *src, const char *dst)
->  		goto out;
->  	}
+> Thanks
+> /Ilias
 > 
-> -	buf = calloc(1, 512);
-> +	buf = calloc(1, 64 * 1024);
->  	if (!buf) {
->  		printf("Can't allocate buffer to copy file\n");
->  		goto out;
->  	}
-> 
->  	while (1) {
-> -		size = read(fd_src, buf, 512);
-> +		size = read(fd_src, buf, 64 * 1024);
-
-Perhaps this would be a good opportunity to introduce a new
-#define for 64 * 1024 as the new buffer size.
-
->  		if (size < 0) {
->  			printf("Can't read file %s\n", src);
->  			goto out;
+>> ** Error ext4fs_write() **
+>> ** Unable to write file ubootefi.var **
+>> Failed to persist EFI variables
+>>
+>> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+>> ---
+>>
+>>  include/efi_variable.h | 2 +-
+>>  1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/include/efi_variable.h b/include/efi_variable.h
+>> index 805e6c5f1e0..8d507460b20 100644
+>> --- a/include/efi_variable.h
+>> +++ b/include/efi_variable.h
+>> @@ -92,7 +92,7 @@ efi_status_t efi_query_variable_info_int(u32 attributes,
+>>                                          u64 *remaining_variable_storage_size,
+>>                                          u64 *maximum_variable_size);
+>>
+>> -#define EFI_VAR_FILE_NAME "ubootefi.var"
+>> +#define EFI_VAR_FILE_NAME "/ubootefi.var"
+>>
+>>  #define EFI_VAR_BUF_SIZE CONFIG_EFI_VAR_BUF_SIZE
+>>
+>> --
+>> 2.25.1
+>>
