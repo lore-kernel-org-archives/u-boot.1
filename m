@@ -4,84 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDC86C54E58
-	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 20:21:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 046DDC54E67
+	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 20:52:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3501588063;
-	Wed, 20 Mar 2024 21:21:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 34EE987D6B;
+	Wed, 20 Mar 2024 21:52:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="AgijC7I0";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="JVC5slkT";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="W9xnWXIH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A155880A6; Wed, 20 Mar 2024 21:21:39 +0100 (CET)
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [IPv6:2a00:1450:4864:20::129])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 23E2288076; Wed, 20 Mar 2024 21:52:42 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E161088010
- for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 21:21:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 767DC8723E
+ for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 21:52:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-512f892500cso358412e87.3
- for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 13:21:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710966096; x=1711570896; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=PW9iB6V8jVFEHUvp+OGuEpZob14Gus4npmv0ijcd8HU=;
- b=AgijC7I04yyJ8wuCy7ZKBFRzpMbWHz8w8JqxhSZDrBUm8VN36uZroEK65e18JGyeY8
- NwXjZYbIWU9YeAbvpZfezwEmcP46LBnVKezid+XYprt8NQt69csJYv963r58KxYHp+rm
- rJyxkGG2VOdgxUQze8EXoO8pNWiFea7OQ37C6UcjvRw6Zy8ycrXsZD/ESsIUeL5vFMT6
- ldaOT8ddzN6Nu6W3zyS7QJit1DlCC+ae4yeiXOz+eIneIdqqneVq0iwT0QrYSM5nv1Xj
- er/vt6XCmF+5iaYInn4VQUUqX1ZsKJqmy0ibLf2psN0yAIBf0m1wQbAIxUC9Hu7wvX7X
- xK0w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710966096; x=1711570896;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=PW9iB6V8jVFEHUvp+OGuEpZob14Gus4npmv0ijcd8HU=;
- b=QzfdmU0DmquF3nHJCzSnunLkvyUaizDgyyonhWmttpfG66e+x98bjw4ZldOrJF+3wW
- Bs4ntyPhPLZhEC/U4WsQYvWI7WHXQttKgbUpFd5Y/wxiGxIOYCCeI050CPuUO57fL6ea
- O9eEbPPHJE7GHwo6hm5iSLR/Offh+sVpkSulprlmzjIRwWk5EjocWUjNUL0YDavw3kpz
- ld9L+g4p4bBivgjtgQmy4/zZO/w88e7Lv0v2KMhQ7XOiRsTex5b0fSk9+rkITMQrdNIx
- 52QtDNjzamAhFLoK5iuAc6rPMWReOtXhmjU02xWkL5PPFllXZUI1Ck0Q9GGC699pIX46
- OMNw==
-X-Gm-Message-State: AOJu0YwqNwVUEwTxtSrs35tPV7MrGJ2VDsD5cInb8TDykTtlYbYR/yY6
- V9xhKrbmptVpItBKgXJRFPc7TLjU+B7Xq0ilZqZiXGXpFngbJjAqN5Glx74KPfQ=
-X-Google-Smtp-Source: AGHT+IGrArLT5npXLfDcgKyM4td3r8ODUGFpEaJjERTnEHqe0uVBgG1TJiLHBgAEzKZT67ZY+TAeFQ==
-X-Received: by 2002:a19:e05a:0:b0:513:572f:88f1 with SMTP id
- g26-20020a19e05a000000b00513572f88f1mr127211lfj.27.1710966096024; 
- Wed, 20 Mar 2024 13:21:36 -0700 (PDT)
-Received: from [192.168.1.78] (host-92-17-96-232.as13285.net. [92.17.96.232])
- by smtp.gmail.com with ESMTPSA id
- b11-20020a056512070b00b00513c79048ecsm2339482lfs.273.2024.03.20.13.21.35
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 20 Mar 2024 13:21:35 -0700 (PDT)
-Message-ID: <6874ae11-0192-4e05-a79b-782d7c002dcf@linaro.org>
-Date: Wed, 20 Mar 2024 20:21:34 +0000
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4V0LPy1PLGz9sq5;
+ Wed, 20 Mar 2024 21:52:38 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1710967958;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=+L6BRQXjnt2WaVDUHwsOJyS2QDTG+8uuWteja1rJbqo=;
+ b=JVC5slkTSVLBosGt3TG7GW3J4X80w7WyauFSCm7F2MPrNdj3kkKA5shEO/QU4eAX6fVgD8
+ ALQOEO+uj2DVSl0wip3ougZIjcGHsPTC+XHnesEqR4s1aUmiYI3XBm7Wq56qvDs5utfklo
+ zsLWNtlEUR4505axHjTZ0xHaMfjTDEB8KmMSTS+9/BA/PzgEI3xqJOMnP0NKUCUxQ/wJrh
+ nG8WvLGpuXMVSWpzIzuG9G+CzS7keQO5zkCde/YAUA/e8d9JWpI2oV+uFrCIpuOgYjzNnZ
+ UNdMOCZyDfo5l0PxFd924urU1f8057AUDtf5LtxV21JxOiQa7SdwZ1Ly8ZQt9g==
+Message-ID: <b13328fd-03ed-49e0-90b2-0f0697e8c415@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1710967956;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=+L6BRQXjnt2WaVDUHwsOJyS2QDTG+8uuWteja1rJbqo=;
+ b=W9xnWXIHMJmn27nJmOIeqYi1GVZG7kSCEZIYVJVxc2DvR1kcz5Tb/wghxmyP3Bn71/wYkf
+ RxnDgUyjRpoNQyioQ2TJfrgA7c8FhL8+CdGfCyn7pFaQaizjWP34GyJwvRqPUyz57A/wU/
+ hxcXTOZKf8wPFqxTbXGw4JtSC4a6Kp7YqHZ5ZMhwWj69jg0MRq0ca1UQS3i/eJPALkMWAJ
+ 8Ll2NqQv4gRs/J8xHsKCPZTL4YzWPKurdEdromoO9zeGFlsYM57xs+Bbr1MkfglMfuln02
+ SeF3JVmaVrsej+iRAmOpLvhvIYFH2vGcBA4LAnFvoqeg7K4vv4lvRrnXzuZ5Kg==
+Date: Wed, 20 Mar 2024 21:52:34 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 0/5] Qualcomm DWC3 USB support
+Subject: Re: [PATCH v2 2/4] boot: fdt: Clean up env_get_bootm_size()
 Content-Language: en-US
-To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot@lists.denx.de
-References: <20240320-b4-qcom-usb-v4-0-41be480172e1@linaro.org>
- <eae25ae3-1b3c-486f-bf08-1f8aa1461360@denx.de>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <eae25ae3-1b3c-486f-bf08-1f8aa1461360@denx.de>
-Content-Type: text/plain; charset=UTF-8
+To: Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+References: <20240318150200.8178-1-marek.vasut+renesas@mailbox.org>
+ <20240318150200.8178-2-marek.vasut+renesas@mailbox.org>
+ <20240318161813.GF13682@pendragon.ideasonboard.com>
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20240318161813.GF13682@pendragon.ideasonboard.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: 9d2cb7a537aaa767529
+X-MBO-RS-META: rymyqxc9xzzwi6a7hurnghi1pgqo51ow
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,34 +91,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 3/18/24 5:18 PM, Laurent Pinchart wrote:
 
-
-On 20/03/2024 20:01, Marek Vasut wrote:
-> On 3/20/24 3:30 PM, Caleb Connolly wrote:
->> This series enables support for Qualcomm platforms in the DWC3 driver,
->> adds support for arbitrary sector sizes to the USB mass storage gadget,
->> and fixes an issue with the CDC ACM driver where it wouldn't initialise
->> the USB device.
->>
->> Additionally, it fixes a syntax bug in the Qualcomm SMMU driver, and
->> makes USB_DWC3_GADGET select DM_USB_GADGET to fix compilation with
->> gadget mode.
->>
->> This is part of a larger series enabling DWC3 USB support on Qualcomm
->> platforms, a feature branch with all patches can be found at [1].
->>
->> [1]:
->> https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/tree/b4/qcom-livetree
+>> @@ -142,7 +140,7 @@ phys_size_t env_get_bootm_size(void)
+>>   
+>>   	s = env_get("bootm_low");
+>>   	if (s)
+>> -		tmp = (phys_size_t)simple_strtoull(s, NULL, 16);
+>> +		tmp = simple_strtoull(s, NULL, 16);
+>>   	else
+>>   		tmp = start;
+>>   
 > 
-> Since this is mostly gadget and RB'd now, I think this should go through
-> Mattijs / dfu tree.
-
-Yes please!
-
+> Maybe you could even drop the tmp variable completely by writing this
 > 
-> Thanks
+> 	if (s)
+> 		size -= simple_strtoull(s, NULL, 16) - start;
+> 
+> 	return size;
+> 
+> I've never liked variables named tmp :-)
 
-Thanks all for the reviews.
-
--- 
-// Caleb (they/them)
+No, let's not do this. With this FDT part, the code should be verbose 
+and as easy to understand at first glance as possible, no subtraction 
+assignments and other shenanigans please.
