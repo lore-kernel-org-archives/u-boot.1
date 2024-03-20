@@ -4,79 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4465C54E58
-	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 12:25:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3510DC54E67
+	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 12:33:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3232B87EFA;
-	Wed, 20 Mar 2024 13:25:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 4C7EC87FCC;
+	Wed, 20 Mar 2024 13:33:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="VlTBxlB2";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dK/qLmMi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A412687F64; Wed, 20 Mar 2024 13:25:42 +0100 (CET)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id F120E87FE8; Wed, 20 Mar 2024 13:33:37 +0100 (CET)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5662B87D83
- for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 13:25:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id F07BB87F87
+ for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 13:33:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-a468004667aso736224266b.2
- for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 05:25:40 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-4141156f245so22234885e9.2
+ for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 05:33:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1710937540; x=1711542340;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=yFwx3Wy4jBsRyZjtw88bTesVfcenCLvrrdoK2z/I6Bs=;
- b=VlTBxlB2GjbKrWxyEuiWLRWili9Nznr4ycSQmQoTOE19fMdLR9zzCvt5dj55O/hzLo
- SEdsgSAdnqWH6cusjBBv8qjVAxr940FZn4Nm2c0dF8gQklsHR71mIanjU0M4WUW+PxYR
- HSOI7/AJ0Gem2UnjuBj8k6PWPUU0BjmNQCgCM=
+ d=linaro.org; s=google; t=1710938015; x=1711542815; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=6k1Vfyrn9oZJHqhIDDP07nXMyMai+/n0vjuHQiOZeOA=;
+ b=dK/qLmMi/XmfazbEwe9MXShwemMKlPHL4ncas7E4lPqcAUOrBcLwV8EHHIrEhTxx1x
+ fNgo7qQS1jsDNL4Bi6od1PRL7QYWT+id7AnYnZEi+XwzYuTTgxeAfH0st61QpM+MYUeL
+ cSGIGS3tcnSV/BC5HcOhyMH276iCP7Wh/1gWNuEEvnaPza4tGNVi5tboE2+9yoG9ViLy
+ 4bEKHTxmCsWWg6G8Jov/WIoqfKfMsdc0rs1UVrZFq8t53vV2v5Vb2OxqjZtYrv2EnsyB
+ AXSNaOXPAtm1DDVWrB6/1GDyXOI4uI+c9JPnyc3Q6GhKCqLACUspelaDTziYeXTzANBN
+ hVkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710937540; x=1711542340;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=yFwx3Wy4jBsRyZjtw88bTesVfcenCLvrrdoK2z/I6Bs=;
- b=P2czmKPdLLDLlSbnrrW5KrYOJe13HHkERe0w+jv65NV2sTR7/e9ufNjB0RlwWIh9Bj
- UtXV7lOfuBX+EOZgXhEmrXcJ+6N43jv92KJMkLga4M2wy+rrh+f830vFSsswgAiUlwPK
- pIq7WC/QsM5UwbNeT1Q9HrE7EnBLfpDYbay+HjkkAEKCd4nJSlPqBHgSgkO+6x9XvdGM
- 4WkHvWSL7nkyc3Z24xQ8RhcazQbqib3p0H9Vx6dyLJQc7E9K2caPmBWvdqqWnzt7KxMY
- 59m7r9NsMIzNXNZ4xcSUeeNJb7Mzzk4x35nndlrsGu2KvsgGh5X7tn2C2h0LGLZwdOq+
- WEhg==
+ d=1e100.net; s=20230601; t=1710938015; x=1711542815;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=6k1Vfyrn9oZJHqhIDDP07nXMyMai+/n0vjuHQiOZeOA=;
+ b=OaNMoZ5pefBf6iL0XKEmveI0QhDG7zDMH7ivRHIpgV4TnvVm32qOM+veDMKE00CchV
+ peSnfCgaPpV98OQoKuCYXYpcZmrT/2Ou8Kir7QnOper8M2FeqioDRUIf57ykboFEFUt0
+ x1JEqvN+/yhx0EvhwLWOFlY2lKVyBub1CYIppNcwWwSKPWgUaS+SeWkpqfxegfN/EugD
+ 3SWvq56GWnhnMKm20MOdxiJPxzBO1bYINO121xjCK3CFcRQRylNEh6sYCaORPED2QnZE
+ KlYuySUDpM2eG1I8SafCj/+zrlqV2jRrDLqzljHXmEo60ICV1QI6RbAOmkpgLClg6Cpn
+ l3aA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUq4QR6ius7OZ/n8MvBKhmtD5CHPDAVajc4HGr7zjcjqoegLQl5TlOgozuN3zw1MxMVflVuhNVkpLPhBUL3POWdJetfcg==
-X-Gm-Message-State: AOJu0YyvHfJKdlbL/hGPQobOwSZoz9CkrgySVVRpGm5pSwUtUeAo65pP
- u8S2mGaKOAs6YBMkb8N1O5AVNM0Mm4mStEz/hk90sE2Pvo6BOLAzlW9qeuue0F9Jru0oJ6SN9pH
- 0H9ntbt3EA4K6A9NmhmTk8Y96YiA9DNXJiVx0mw==
-X-Google-Smtp-Source: AGHT+IFgZIMqNsJkqrGG3M1+LdRENx5O0oZto7BxLBFqVAwaWLkbXT+nteE71oWPN3EVdJCVV+kM/SZD0zkQgX3lfSE=
-X-Received: by 2002:a17:906:fc09:b0:a44:7209:4c93 with SMTP id
- ov9-20020a170906fc0900b00a4472094c93mr10843433ejb.32.1710937539771; Wed, 20
- Mar 2024 05:25:39 -0700 (PDT)
+ AJvYcCVNcLR1f6/Afxw8XMiuyMlT+8nmD+K0QiWNdN1lU3ieZB+69cbr63MEPpTblAk9w7OaMZuMUs6NUo1wKW74ULClGy4TZQ==
+X-Gm-Message-State: AOJu0YzCRpX+9ozvJYbEdWtqQ/UZudrObcT65YmCL1G1Yitwma7KgzG9
+ wkRRDABCUEY+Yt+9ElG+zPjleYQGnKdM7vsDGUrc8NyOpJQuBMh85kIYyLHZgCA=
+X-Google-Smtp-Source: AGHT+IFVqhbgyX+TfVJfF90uOEVcGV24+NIN5hZMfhJRm4Xzy6zdBa5XFQOaqV3FYZ1YZe76stm0jQ==
+X-Received: by 2002:a05:600c:331e:b0:414:a99:7aa2 with SMTP id
+ q30-20020a05600c331e00b004140a997aa2mr8012836wmp.4.1710938015342; 
+ Wed, 20 Mar 2024 05:33:35 -0700 (PDT)
+Received: from [192.168.1.78] (host-92-17-96-232.as13285.net. [92.17.96.232])
+ by smtp.gmail.com with ESMTPSA id
+ t18-20020a05600c199200b00414612a43a9sm2088356wmq.28.2024.03.20.05.33.34
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 20 Mar 2024 05:33:34 -0700 (PDT)
+Message-ID: <1bdbe86d-abe7-4e14-947f-245cf9661f08@linaro.org>
+Date: Wed, 20 Mar 2024 12:33:33 +0000
 MIME-Version: 1.0
-References: <20240320090214.40465-1-ada@thorsis.com>
- <20240320090214.40465-6-ada@thorsis.com>
-In-Reply-To: <20240320090214.40465-6-ada@thorsis.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Wed, 20 Mar 2024 13:25:28 +0100
-Message-ID: <CAOf5uwk6EF6xcQtYnjemy=LKNtO8efeitM8yBxud09zB1-pzQg@mail.gmail.com>
-Subject: Re: [PATCH v2 5/6] mtd: nand: raw: atmel: Fix comment in timings
- preparation
-To: Alexander Dahl <ada@thorsis.com>
-Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>, 
- Eugen Hristev <eugen.hristev@collabora.com>,
- Mihai Sain <mihai.sain@microchip.com>, 
- Li Bin <bin.li@microchip.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 12/14] dts: sdm845-db845c: add u-boot fixups
+Content-Language: en-US
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de
+References: <20240319-b4-qcom-livetree-v3-0-e1b38d9b4fa4@linaro.org>
+ <20240319-b4-qcom-livetree-v3-12-e1b38d9b4fa4@linaro.org>
+ <CAFA6WYN3MZ0Rh-XEEggc4OUk2wUQngT3EJDcHQb0-n7jxfMd9g@mail.gmail.com>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <CAFA6WYN3MZ0Rh-XEEggc4OUk2wUQngT3EJDcHQb0-n7jxfMd9g@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,62 +99,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Mar 20, 2024 at 10:02=E2=80=AFAM Alexander Dahl <ada@thorsis.com> w=
-rote:
->
-> Introduced with commit 6a8dfd57220d ("nand: atmel: Add DM based NAND
-> driver") when driver was initially ported from Linux.  The context
-> around this and especially the code itself suggests 'read' is meant
-> instead of write.
->
-> The fix is the same as accepted in Linux already with mainline Linux
-> kernel commit 1c60e027ffde ("mtd: nand: raw: atmel: Fix comment in
-> timings preparation").
->
-> Link: https://lore.kernel.org/linux-mtd/20240307172835.3453880-1-miquel.r=
-aynal@bootlin.com/T/#t
-> Signed-off-by: Alexander Dahl <ada@thorsis.com>
-> ---
->
-> Notes:
->     v2:
->     - initial patch version (not present in v1)
->
->  drivers/mtd/nand/raw/atmel/nand-controller.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/drivers/mtd/nand/raw/atmel/nand-controller.c b/drivers/mtd/n=
-and/raw/atmel/nand-controller.c
-> index 75da15c157b..bbafc88e44c 100644
-> --- a/drivers/mtd/nand/raw/atmel/nand-controller.c
-> +++ b/drivers/mtd/nand/raw/atmel/nand-controller.c
-> @@ -1271,7 +1271,7 @@ static int atmel_smc_nand_prepare_smcconf(struct at=
-mel_nand *nand,
->                 return ret;
->
->         /*
-> -        * The write cycle timing is directly matching tWC, but is also
-> +        * The read cycle timing is directly matching tRC, but is also
->          * dependent on the setup and hold timings we calculated earlier,
->          * which gives:
->          *
-> --
-
-Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
-
-> 2.39.2
->
 
 
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
+On 19/03/2024 13:55, Sumit Garg wrote:
+> On Tue, 19 Mar 2024 at 17:52, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>>
+>> The USB VBUS supply for the type-A port is enabled via a GPIO regulator.
+>> This is incorrectly modelled in Linux where only the PCIe dependency is
+>> expressed.
+> 
+> Can we send a fix for the Linux kernel DTS to correctly model it? We
+> can then later get rid of this modification once that is accepted.
 
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+I spoke to Bjorn about this and apparently the correct way to model this
+will be to have a usb-connector node with a vbus-supply property. There
+is some work underway in Linux to support this kind of thing already.
+
+In the mean time he suggested to just make the regulator always-on, so I
+sent a patch to do that [1]. I actually hit this issue when booting from
+USB as the PCIe drivers aren't available in the initramfs, so USB never
+turns on, and the always-on hack fixes that.
+
+In the mean time, we'll still need this vbus-supply reference as U-Boot
+doesn't automatically probe regulators.
+> 
+> -Sumit
+> 
+>> Add a U-Boot specific dtsi snippet so that this supply will
+>> get enabled when initialising USB.
+>>
+>> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+>> ---
+>>  arch/arm/dts/sdm845-db845c-u-boot.dtsi | 8 ++++++++
+>>  1 file changed, 8 insertions(+)
+>>
+>> diff --git a/arch/arm/dts/sdm845-db845c-u-boot.dtsi b/arch/arm/dts/sdm845-db845c-u-boot.dtsi
+>> new file mode 100644
+>> index 000000000000..3c83e21251c4
+>> --- /dev/null
+>> +++ b/arch/arm/dts/sdm845-db845c-u-boot.dtsi
+>> @@ -0,0 +1,8 @@
+>> +// SPDX-License-Identifier: GPL-2.0
+>> +
+>> +/* This GPIO must be turned on to enable the 5v VBUS
+>> + * supply on the USB port.
+>> + */
+>> +&usb_2_dwc3 {
+>> +       vbus-supply = <&pcie0_3p3v_dual>;
+>> +};
+>>
+>> --
+>> 2.44.0
+>>
+
+-- 
+// Caleb (they/them)
