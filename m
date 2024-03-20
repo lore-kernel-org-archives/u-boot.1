@@ -4,50 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27E3FC54E58
-	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 13:08:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B83EC54E67
+	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 13:08:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 36CA087FE8;
+	by phobos.denx.de (Postfix) with ESMTP id A6DE788044;
 	Wed, 20 Mar 2024 14:08:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nabijaczleweli.xyz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=nabijaczleweli.xyz header.i=@nabijaczleweli.xyz header.b="BGikW9Iu";
+	dkim=pass (2048-bit key; secure) header.d=nabijaczleweli.xyz header.i=@nabijaczleweli.xyz header.b="lA6MtpuK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9186787F87; Wed, 20 Mar 2024 14:08:07 +0100 (CET)
+ id 3835E87FE8; Wed, 20 Mar 2024 14:08:13 +0100 (CET)
 Received: from tarta.nabijaczleweli.xyz (tarta.nabijaczleweli.xyz
  [139.28.40.42])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4E62287E47
- for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 14:08:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 58B1D87E93
+ for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 14:08:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=nabijaczleweli.xyz
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=nabijaczleweli@nabijaczleweli.xyz
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=nabijaczleweli.xyz;
- s=202305; t=1710940084;
- bh=xjJ1Kv4gNVDXXyinB6hN4hVXHilucAljimc7sHy3Wlc=;
+ s=202305; t=1710940091;
+ bh=P5MuviTN8/HiUhm5Il0XjL92z8evebBfRwusAr+odaU=;
  h=Date:From:To:Subject:From;
- b=BGikW9Iu/AFZ5j0IaL8T3ujvZacmIr9FIZGoKnxGl20fSFA5r5emQX+8LrQ9hmXTf
- w8irKQFL2nvV8BY51kM4pOthD3TM7IdYcPqP1w+93YqnXCDKq9dmctxzbIO5V0gkIj
- XaBQsuOYZzjTTYf2+LuBJvCdKspzEfLl8A96AVvmWVYztY1HlWTTLgbkAO09TUekyZ
- Ip+eYAdehrkaM4bc6ybBh2CGxUErJ1d3o7sNdYKe/O4VlSC8/Hjf9cjTQj/qmAY5tU
- 2icS2/wxP57gfqImH2PK+cbFet5uimSRzPgzQVLHWLfrp+NiubxBT2FIrRPeALUHRw
- XRQEgDdIivJsQ==
+ b=lA6MtpuKfeaBzRbekQ/GfOfUUY9LIvqxCF0cL5Dvl/yjSOOHBnyMaFmby7ksVBJd6
+ DF1r3zdVSG5rErNABuxeNdxxyYjVq81SbzwBtMGrhdfBpOiAzm8r7EuoWas2Y1tByh
+ gw7mI4WaQ+hyXualgTibMrH4Rh6j6MZ8O0gMxzpbJIaJ9mUhLw2vOhA7gBQ4TO18jn
+ H/MsszFLotuyR8zdwBvD/XTZEtJtoghWu/rgmUk4m3fPQlBom8KWs6qDA3BSwrml1E
+ lT5KJMCO5OXGV/uGo/BR/66Va4zTiNThtju88lrGd4XRtBjLVxJEpyHYAEz1+8bDyI
+ m2wzoFJIokVWg==
 Received: from tarta.nabijaczleweli.xyz (unknown [192.168.1.250])
- by tarta.nabijaczleweli.xyz (Postfix) with ESMTPSA id B95C8FEA;
- Wed, 20 Mar 2024 14:08:04 +0100 (CET)
-Date: Wed, 20 Mar 2024 14:08:04 +0100
+ by tarta.nabijaczleweli.xyz (Postfix) with ESMTPSA id 011171904;
+ Wed, 20 Mar 2024 14:08:11 +0100 (CET)
+Date: Wed, 20 Mar 2024 14:08:10 +0100
 From: Ahelenia =?utf-8?Q?Ziemia=C5=84ska?= <nabijaczleweli@nabijaczleweli.xyz>
 To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Subject: [PATCH] tools: open FIT image for reading as O_RDONLY instead of
- O_RDWR
-Message-ID: <yehdhyy7f272rllmk3jiyome7muiqrbm7ezbu4xnqcymrcaobu@tarta.nabijaczleweli.xyz>
+Subject: [PATCH] tools: copyfile: use 64k instead of 512 buffer
+Message-ID: <4le6hwyli3wl2fisv5lr3rizbqzx3g2xzytw26zcrsvgchqy6i@tarta.nabijaczleweli.xyz>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="qrjo4tgaebo2ceob"
+ protocol="application/pgp-signature"; boundary="idodt6oe2hcnztxy"
 Content-Disposition: inline
 User-Agent: NeoMutt/20231221-2-4202cf-dirty
 X-Mailman-Approved-At: Wed, 20 Mar 2024 14:08:27 +0100
@@ -68,60 +67,74 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---qrjo4tgaebo2ceob
+--idodt6oe2hcnztxy
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-The only usage of the fd is for the single read() below;
-this prevented
-	mkimage -f auto -A arm64 \
-		-T kernel -C lz4 -d Image-6.6.15.lz4 \
-		-b mt8173-elm-hana-6.6.15.dtb outf
-when the inputs were unwriteable.
+This is an incredible pessimisation:
+mkimage took >200ms (and 49489 writes (of which 49456 512)),
+now it takes  110ms (and   419 writes (of which   386 64k)).
 
-Link: https://bugs.debian.org/1063097
+sendfile is much more appropriate for this and is done in one syscall,
+but doesn't bring any significant speedups over 64k r/w
+at the 13M size ranges, so there's no need to introduce
+	#if __linux__
+	while((size =3D sendfile(fd_dst, fd_src, NULL, 128 * 1024 * 1024)) > 0)
+		;
+	if(size !=3D -1) {
+		ret =3D 0;
+		goto out;
+	}
+	#endif
+
 Signed-off-by: Ahelenia Ziemia=C5=84ska <nabijaczleweli@nabijaczleweli.xyz>
 ---
- tools/fit_image.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ tools/fit_common.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/tools/fit_image.c b/tools/fit_image.c
-index beef1fa8..0fccfbb4 100644
---- a/tools/fit_image.c
-+++ b/tools/fit_image.c
-@@ -137,7 +137,7 @@ static int fdt_property_file(struct image_tool_params *=
-params,
- 	int ret;
- 	int fd;
+diff --git a/tools/fit_common.c b/tools/fit_common.c
+index 2d417d47..373fab6a 100644
+--- a/tools/fit_common.c
++++ b/tools/fit_common.c
+@@ -145,14 +145,14 @@ int copyfile(const char *src, const char *dst)
+ 		goto out;
+ 	}
 =20
--	fd =3D open(fname, O_RDWR | O_BINARY);
-+	fd =3D open(fname, O_RDONLY | O_BINARY);
- 	if (fd < 0) {
- 		fprintf(stderr, "%s: Can't open %s: %s\n",
- 			params->cmdname, fname, strerror(errno));
+-	buf =3D calloc(1, 512);
++	buf =3D calloc(1, 64 * 1024);
+ 	if (!buf) {
+ 		printf("Can't allocate buffer to copy file\n");
+ 		goto out;
+ 	}
+=20
+ 	while (1) {
+-		size =3D read(fd_src, buf, 512);
++		size =3D read(fd_src, buf, 64 * 1024);
+ 		if (size < 0) {
+ 			printf("Can't read file %s\n", src);
+ 			goto out;
 --=20
 2.39.2
 
-
---qrjo4tgaebo2ceob
+--idodt6oe2hcnztxy
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCgAdFiEEfWlHToQCjFzAxEFjvP0LAY0mWPEFAmX637IACgkQvP0LAY0m
-WPFx1w/9HLFY1W8sbqy7IXrm5a6iltGcNdn2ViEmI9o2DYjGou0iUQhpPSqT6Tkx
-1xpeEw9qoZpTdTGFG4VOSWDGsulf/z+183NSNF+lo4mWjlKlqDg15lfB2sHSU6hM
-rnO9k49yWC83FrgNyT2JNW0p47Ugg8zLlo0I5JvGmXoptYqay0z7ioUW8urnsBoO
-w2aNa399xYQ4Bma9pvUzsMDAMtx9PDEa0xtI1NWlAJQniPJz36QliBjKpWAkYxX4
-dMtz8psAWiXLZ3wZ6P0ol717G35nVhP7wPYYMfAvAjKglEWpBoCjrwtwVW7Vz47W
-OWwVy8SxZ+paxScanBTq8CuEDC/huNIdQJVj4wW38GOq7P8edzeqK6dfuUnw7ljY
-Tz6rOi4XEfdw44O9FlOT8C1IEEvrz3QiGyhyOGTDeky0fkMKhaqxap5pe+mNzlGM
-vZ6d6Gr6KfZy2m5b2h6tGYn/4gXkopn3Qm1DgKchUXdpwxtiV5+QVHhxWaSA87D/
-LYjzkAEtZUFC5HnFI8JBy8KaRlvdZsPaOuwaXfJCRvWQ7aceQBDZC/a/otyCnFMx
-T37dAwxO1bfgtq1ffaIhqumshT5jyhmaNFG3iMumKFVIIFyKZwnzOa5kdCqEGOyL
-e1uF3kaTiQ15oMCxGs2TMDtXY2VTvAtZXu04yiQ4OsabkYafgIQ=
-=VUCp
+iQIzBAABCgAdFiEEfWlHToQCjFzAxEFjvP0LAY0mWPEFAmX637oACgkQvP0LAY0m
+WPEA2A/6A0v6cFBWMl1lgLGRM/2oKc7vBTefngnXwWdHzeCFjtOFJMSxH9nNzr1e
+8G/1V9ZahDWUES5+Zb88sznWISEdoYztzgdGhTaKX/0osN2bxy0lxWX6z72Yv/zE
+rQ7+VSKyEpJbTtSzf5o5Q0/Fi45CrZHISBZkdr8ObQfGmDc/VEp7Y/P8ijigyspB
+EWgvR/Ey1JAUuRE/5mVblU3Comxowge2tT3PtsFIZLbbDpMY4qb4NmdTRL8R1tkr
+7bf+uG6DCU0ybEUZDawp6SdrtG3S/CxI7xGEaJR6oMviwYp8VR4BvU87dIiGgi5G
+sICD8ZCM45cNRREkpkXTlVSTpvDRyp85c0doQJWRqWznrbWDV4LPSwdcZjjAHMNf
+SDcWaWJBnIlUmRne9jz1KvNsF6LF+q/Vbwp3GnpNfBHUfOFDpXsqbZP4q2S5m+q3
+Dq6vLKUi8HpyCUZ9HfXt4XgNslGrtpiJlhTMtLcOaLFnMSumv+5SvgHImDDaPovc
+0BvQUzaWIPIknG//N3Orxuvh9EF8JlBLM4Pk/U1jrBDQ5sVyBMuAO+fyoYfYmpmE
+ZaLjXo6MQzfrjQdG8Gwytr8S10nfR3r0Pd4qT5oEpUbKmgCfW6H3zNMnzjbY+LpW
+mo5uCc58HOQsUKLWpuIKSr8GPutmARj02l+eMlOU9j0CxuWtm9U=
+=mM1C
 -----END PGP SIGNATURE-----
 
---qrjo4tgaebo2ceob--
+--idodt6oe2hcnztxy--
