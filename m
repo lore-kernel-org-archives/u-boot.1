@@ -4,90 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8096C6FD1F
-	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 14:59:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 058B9C54E58
+	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 15:22:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0174A88103;
-	Wed, 20 Mar 2024 15:57:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 30F5087ED0;
+	Wed, 20 Mar 2024 16:22:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="b+DvN5Ph";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="V1c/fIWK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B16B88122; Wed, 20 Mar 2024 15:57:27 +0100 (CET)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id AA83888063; Wed, 20 Mar 2024 16:22:51 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4591B88111
- for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 15:57:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 45E4387D6B
+ for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 16:22:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-4146a1b6faaso9931665e9.1
- for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 07:57:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710946645; x=1711551445; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=lO21LnQXMCtSkhTkeX8Wl6Wtl5Wfo0r1/e3rYdUQqpc=;
- b=b+DvN5PhhGfjjCE6Tm0C9plFVZXN7BvvF4mmYhrkAgQnzSHETCtUlr20kIqBDApYZL
- Yw3bErYZ1ZeMSmsVb/omwlaJV8GlP4yRQhQXySuB+M0vc3lwU+MerG4gFlQZyDUyZ908
- 0Z9buP5vss9++PHF9DU8ptUqTMBrNaAp+lOcJAlEo28waLV/TVlU3VHca5W3LC0I0sQq
- 65+FghDOmAhPkhfejTLDZx+qgN06C4cJTBohf50GL0VuisvNzySlxV2ERx4Kc2PLP/Up
- LeCc0R/MD9i2kbYh5oRbc8DHuXIkly7cWQSLqa/u45eVLzGhpCqUdChJ6K/FswZUQDsz
- uRgw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710946645; x=1711551445;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=lO21LnQXMCtSkhTkeX8Wl6Wtl5Wfo0r1/e3rYdUQqpc=;
- b=fPRV7+rg+0+5S8QMCuqqmFBYvD3wwfg85BTBqJvLufn7hjI2ozyqbxYMvJowTJdBcU
- nDgVAA1EZOipCE195uL4mZEY0VwOWRtbUrKjiA4AMDnxhUYZJLVpphfMLl2CW6kO1LpQ
- X+OVAdfRjMWruR5SeGlNtshIjQDJCtI3K4fbK+ufbs2p0Jg+bz8wZK6nRwYoKwJdpgss
- f6aLc2xuaWA/7ptq/tDVWV8+wPHOMvUjkqAOJvcHys380mdMKZx8Jovk2/U5fklV4Wfn
- v7C4d1IZXg4Cfb0Bdr6w/LtU99UIpRcGxqiQ4bkyvqDuKhkzn2pbJIYxUXBOWOR6Zuhi
- Zj2g==
-X-Gm-Message-State: AOJu0YxsfjCcdcYJlPmF7DvK3bE3Bqr1yVOs07pGSt8H0QoCO13g1kDo
- 14O6Q3ojzs/urQVR6tqfwgnikePWsP7zKp2Riex0uL8b3kR8Jp8RgELJ4MFugTs=
-X-Google-Smtp-Source: AGHT+IF6wJ13rpSev4vs2CibQJ/rGnYQojCCpmqprvlGT9F4FeRUrdNQE5jnb9rQICIpuUHMhAoRiA==
-X-Received: by 2002:a05:600c:364a:b0:413:3110:2d06 with SMTP id
- y10-20020a05600c364a00b0041331102d06mr11740624wmq.16.1710946644863; 
- Wed, 20 Mar 2024 07:57:24 -0700 (PDT)
-Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
- by smtp.gmail.com with ESMTPSA id
- bi16-20020a05600c3d9000b0041468f79fd5sm2461268wmb.16.2024.03.20.07.57.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Mar 2024 07:57:24 -0700 (PDT)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Wed, 20 Mar 2024 14:57:17 +0000
-Subject: [PATCH v4 14/14] qcom_defconfig: enable USB
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=devarsht@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 42KFMaH2107178;
+ Wed, 20 Mar 2024 10:22:36 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1710948156;
+ bh=c5aoG2v+tVbC48fV2phwvc3rlNsJh0AiUZZCDiLbV/g=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=V1c/fIWK+48xVhI0vlK+Zcn8KAnxSM0PZgSW459isqX9w4L7hZns4+gVz4m8vnhUs
+ 12RvgWIOO9uvDnjU/iYx6HPolmZ0bjPq0WabslegoeePgIok6tkVTo/dZWexHaPdc4
+ xpkbcuED6uGJ7rQ5cnkGTdNeU4rm+wtw9CeMSUDg=
+Received: from DFLE107.ent.ti.com (dfle107.ent.ti.com [10.64.6.28])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 42KFMara124205
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 20 Mar 2024 10:22:36 -0500
+Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 20
+ Mar 2024 10:22:35 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 20 Mar 2024 10:22:35 -0500
+Received: from [172.24.227.193] (devarsht.dhcp.ti.com [172.24.227.193])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 42KFMUbe115902;
+ Wed, 20 Mar 2024 10:22:31 -0500
+Message-ID: <3866627e-de73-dbc7-fd8c-bb2b0d11b5cc@ti.com>
+Date: Wed, 20 Mar 2024 20:52:30 +0530
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Subject: Re: [PATCH 1/2] spl: Introduce architecture specific init function
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>, <lukas.funke-oss@weidmueller.com>
+CC: <u-boot@lists.denx.de>, Lukas Funke <lukas.funke@weidmueller.com>, Andre
+ Przywara <andre.przywara@arm.com>, Bin Meng <bmeng@tinylab.org>,
+ Chanho Park <chanho61.park@samsung.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Manoj
+ Sai <abbaraju.manojsai@amarulasolutions.com>, Marek Vasut <marex@denx.de>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Nikhil M Jain <n-jain1@ti.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, Samuel Holland
+ <samuel@sholland.org>, Sean Anderson <seanga2@gmail.com>, Simon Glass
+ <sjg@chromium.org>
+References: <20240320131928.1836386-1-lukas.funke-oss@weidmueller.com>
+ <20240320131928.1836386-2-lukas.funke-oss@weidmueller.com>
+ <20240320143048.GU3442575@bill-the-cat>
+From: Devarsh Thakkar <devarsht@ti.com>
+In-Reply-To: <20240320143048.GU3442575@bill-the-cat>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240320-b4-qcom-livetree-v4-14-d867ab1f06c2@linaro.org>
-References: <20240320-b4-qcom-livetree-v4-0-d867ab1f06c2@linaro.org>
-In-Reply-To: <20240320-b4-qcom-livetree-v4-0-d867ab1f06c2@linaro.org>
-To: Tom Rini <trini@konsulko.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>, Lukasz Majewski <lukma@denx.de>, 
- Sean Anderson <seanga2@gmail.com>
-Cc: u-boot@lists.denx.de
-X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2988;
- i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=qMux8kYFMKD1yGjXCds2wskyfESIrZwEYpVx4JQGqc4=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtRfP52yX/BdmHP8YrVE/rSnQgXb95zd+uPDFfufz/a88
- xBaFFXU3VHKwiDIwSArpsgifmKZZdPay/Ya2xdcgJnDygQyhIGLUwAusoXhr3yEwgKb5WvE+VPv
- vW94fW7prdnXktr23TSsPPQgw+xovQ4jw/yzolby3OvLe6TfT+jb43j967TXDhe5Fs+z47G7kvr
- z0B4A
-X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
- fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,120 +91,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable support for the DWC3 USB controller and required dependencies for
-Qualcomm boards, specifically the DB845c:
-* IOMMU / SMMU
-* USB high-speed PHYs
-* Mass storage and ACM gadgets
+Hi Tom, Lukas,
 
-Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
----
- configs/qcom_defconfig | 52 ++++++++++++++++++++++++++++----------------------
- 1 file changed, 29 insertions(+), 23 deletions(-)
+Thanks for the patch Lukas.
 
-diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-index 8c4402e8f780..1abb57345ff1 100644
---- a/configs/qcom_defconfig
-+++ b/configs/qcom_defconfig
-@@ -17,10 +17,16 @@ CONFIG_LOG_MAX_LEVEL=9
- CONFIG_LOG_DEFAULT_LEVEL=4
- # CONFIG_DISPLAY_CPUINFO is not set
- CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_CMD_BOOTMENU=y
-+CONFIG_CMD_EEPROM=y
-+CONFIG_SYS_I2C_EEPROM_BUS=2
-+CONFIG_SYS_I2C_EEPROM_ADDR_LEN=2
-+CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=5
-+# CONFIG_CMD_BIND is not set
- CONFIG_CMD_CLK=y
- CONFIG_CMD_GPIO=y
-+CONFIG_CMD_I2C=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_UFS=y
- CONFIG_CMD_USB=y
- CONFIG_CMD_CAT=y
-@@ -32,20 +38,39 @@ CONFIG_CLK=y
- CONFIG_CLK_QCOM_QCS404=y
- CONFIG_CLK_QCOM_SDM845=y
- CONFIG_MSM_GPIO=y
- CONFIG_QCOM_PMIC_GPIO=y
-+CONFIG_DM_I2C=y
-+CONFIG_SYS_I2C_QUP=y
-+CONFIG_I2C_MUX=y
- CONFIG_DM_KEYBOARD=y
- CONFIG_BUTTON_KEYBOARD=y
-+CONFIG_IOMMU=y
-+CONFIG_QCOM_HYP_SMMU=y
-+CONFIG_MISC=y
-+CONFIG_NVMEM=y
-+CONFIG_I2C_EEPROM=y
- CONFIG_MMC_HS200_SUPPORT=y
- CONFIG_MMC_SDHCI=y
- CONFIG_MMC_SDHCI_ADMA=y
- CONFIG_MMC_SDHCI_MSM=y
-+CONFIG_PHY_MICREL=y
-+CONFIG_PHY_MICREL_KSZ90X1=y
-+CONFIG_DM_MDIO=y
-+CONFIG_DM_ETH_PHY=y
-+CONFIG_DWC_ETH_QOS=y
-+CONFIG_DWC_ETH_QOS_QCOM=y
-+CONFIG_RGMII=y
- CONFIG_PHY=y
-+CONFIG_PHY_QCOM_QUSB2=y
-+CONFIG_PHY_QCOM_USB_SNPS_FEMTO_V2=y
- CONFIG_PINCTRL=y
- CONFIG_PINCTRL_QCOM_QCS404=y
- CONFIG_PINCTRL_QCOM_SDM845=y
- CONFIG_DM_PMIC=y
- CONFIG_PMIC_QCOM=y
-+CONFIG_DM_REGULATOR=y
-+CONFIG_DM_REGULATOR_FIXED=y
- CONFIG_SCSI=y
- CONFIG_MSM_SERIAL=y
- CONFIG_MSM_GENI_SERIAL=y
- CONFIG_SPMI_MSM=y
-@@ -54,8 +79,12 @@ CONFIG_SYSINFO_SMBIOS=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
- CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
-+CONFIG_USB_GADGET=y
-+CONFIG_USB_GADGET_DOWNLOAD=y
-+CONFIG_USB_FUNCTION_MASS_STORAGE=y
- CONFIG_UFS=y
- CONFIG_VIDEO=y
- # CONFIG_VIDEO_FONT_8X16 is not set
- CONFIG_VIDEO_FONT_16X32=y
-@@ -64,27 +93,4 @@ CONFIG_NO_FB_CLEAR=y
- CONFIG_VIDEO_SIMPLE=y
- CONFIG_HEXDUMP=y
- # CONFIG_GENERATE_SMBIOS_TABLE is not set
- CONFIG_LMB_MAX_REGIONS=64
--CONFIG_CMD_DHCP=y
--CONFIG_CMD_EEPROM=y
--CONFIG_CMD_I2C=y
--CONFIG_CMD_PING=y
--CONFIG_DM_ETH=y
--CONFIG_DM_ETH_PHY=y
--CONFIG_DM_MDIO=y
--CONFIG_DWC_ETH_QOS=y
--CONFIG_DWC_ETH_QOS_QCOM=y
--CONFIG_RGMII=y
--CONFIG_PHY_MICREL=y
--CONFIG_PHY_MICREL_KSZ90X1=y
--CONFIG_MISC=y
--CONFIG_NVMEM=y
--CONFIG_DM_I2C=y
--CONFIG_I2C_SUPPORT=y
--CONFIG_I2C_MUX=y
--CONFIG_I2C_EEPROM=y
--CONFIG_SYS_I2C=y
--CONFIG_SYS_I2C_QUP=y
--CONFIG_SYS_I2C_EEPROM_BUS=2
--CONFIG_SYS_I2C_EEPROM_ADDR_LEN=2
--CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=5
+On 20/03/24 20:00, Tom Rini wrote:
+> On Wed, Mar 20, 2024 at 02:19:26PM +0100, lukas.funke-oss@weidmueller.com wrote:
+> 
+>> From: Lukas Funke <lukas.funke@weidmueller.com>
+>>
+>> Some architectures use spl_board_init() in their architecture specific
+>> implementation. Board developers should be able to add board specific
+>> implementation via spl_board_init(). Hence, introduce a spl_arch_init()
+>> method which is called right before spl_board_init() for architecture
+>> specific implementation.
+>>
+>> Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
+> 
+> I think this could allow for other SoCs to clean up their existing
 
--- 
-2.44.0
+Does it make more sense to make this SoC specific then instead of arch
+specific to allow broader range of code?
 
+For e.g., if we have something like spl_soc_init then it would help
+accommodate soc specific functionality too along with calling arch specific code ?
+
+Also I see some vendors already having implemented spl_soc_init in their arch
+specific files [1], so I think it would be good if it is moved it to framework
+level.
+
+[1] :
+https://source.denx.de/u-boot/u-boot/-/blob/master/arch/riscv/cpu/fu540/spl.c?ref_type=heads#L10
+https://source.denx.de/u-boot/u-boot/-/blob/master/arch/riscv/include/asm/arch-fu740/spl.h?ref_type=heads#L12
+
+Regards
+Devarsh
+
+> ad-hoc mechanisms for SoC/architecture init and then board init, so this
+> looks like a good idea to me.
+> 
+> Reviewed-by: Tom Rini <trini@konsulko.com>
+> 
