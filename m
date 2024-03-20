@@ -4,86 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94314C54E58
-	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 14:41:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D63AC54E58
+	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 14:51:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0ED128808A;
-	Wed, 20 Mar 2024 15:41:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id CE47E88076;
+	Wed, 20 Mar 2024 15:51:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ao2pb27w";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jLi9VVNv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 39E9988092; Wed, 20 Mar 2024 15:41:57 +0100 (CET)
-Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
- [IPv6:2607:f8b0:4864:20::729])
+ id D678488079; Wed, 20 Mar 2024 15:51:30 +0100 (CET)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2D57288085
- for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 15:41:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A06C588033
+ for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 15:51:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qk1-x729.google.com with SMTP id
- af79cd13be357-78a16114b69so93286385a.0
- for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 07:41:55 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-6e6ae6b56ecso25154a34.3
+ for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 07:51:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1710945714; x=1711550514; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=gFH2ca0Do464X0qVuZgko8vq1PfcCaVa1ktumiS8Kyc=;
- b=ao2pb27wK/ulQ33bKLy87DUf+o7GozgfTlIruhzwXLJJTdwIvsw19xGtZ+CbMnUshJ
- 8DEXk4iqUzMzrh79dh0NaL3GqS32WgFVLs6veKaHQWrpvOoINALjTcdv33vAKP6RP5/w
- C4eg7Wb1xMT1bY9OEBPv7WdgAkZS+Suygp7HB+B29QbRI1mAVhckCYbjv6/RjuTP2Og2
- IJw/WUhs8o1EspD2u44vcyKzq0bte5bfUEaa5Vjw9irgGzH40WId1iyUoK/sQZnPb+Xz
- CQodHEKE6qQzWheug/Yxuml3kt0PL88/Uz51gBGecKknGR/Hj10ub3kDNfIGQC0XO0Cf
- aCnw==
+ d=konsulko.com; s=google; t=1710946287; x=1711551087; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=muD9Oeg4Bkspxs+DBaslspq/DZyMwhj93lX0Ww3IYsg=;
+ b=jLi9VVNvA1N70IBteSCIgmOzi5tBLIfm5mP5HfsJ1Z7KIpdtI6b2FLH5qJNy7cTR6k
+ MmyHxkhRVUe9yZkdlIK3hP0BTV91/BOaLXwEBwYhmmoK73ufIUSB3pUg/5jD27skiXge
+ R2ArVASYPIv/UB+cu3QkD9bRWCRo+meYq56y4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710945714; x=1711550514;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=gFH2ca0Do464X0qVuZgko8vq1PfcCaVa1ktumiS8Kyc=;
- b=sY5veKMUbqPnf66YBPE8PlekH3KeHsHiYozxRxtlwEnl2Qo04Chy70FrXJPjLuEj4C
- 5Pwb0hId7OeSSmbIn6o3qbY5c/78bHNgXzd6PcUDb3AtQ7kiwT4UCiK7IYp/ai+CKNzA
- GGDcoXTxHxkuN2gk4xMQiXBe5s/FOIQ9h/cLZQ4pKnCcAzNfFx0eZCVAAeTsra9a17cJ
- qeK/lFYNt+EN9XyR+BApTQYwuaAyFygnbs6Bms+3yLWhuaqg5Gm2cSeCBh/qUL3Gx1+D
- 7QrqGpse2GcV1ofrFZUfrUEduBuf8LDUj4NW+axSzjKwURhhP7P1tvrqRWNzoeq/Wj+k
- F63A==
+ d=1e100.net; s=20230601; t=1710946287; x=1711551087;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=muD9Oeg4Bkspxs+DBaslspq/DZyMwhj93lX0Ww3IYsg=;
+ b=cFPSg5uaJF0tGXEKRt44dZIDb6XE+Kck/CwgI8Z0DU9BzG8/WbiHr/lj9E/xjvKtag
+ 9+lpz+CEwuQIHeZVn19HNIFYrg5Dk3MOYPPcmA1nn9FT7ddpPOL1YvDjLOPrSAGEATfi
+ g6KnB4Evf6YgDVEibRKMfd6x7RLv0ocL7/BVm3qh4bzRjHFVywpB8og253TRaoqmoGC/
+ jWCjAY8z2uGHjoXj3i6oIc/yTcdewmm4eB8PFCXaXStaslWPfOoYwj3AS3RrcOwVfYaw
+ LZwQJMO50y8R/vPrulwlBkqZbOYLpEFzUE6Mi4wlRmEYzHH/ogp3KgsduiWBAoTg97iR
+ vpuw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUJrec702vp+apuxwZ9dv1zocZ4n2pZAORNQpoGO8mAhOnLziHXLj1OTMqX7YX/s9cpnUnd0+zLOdL7ojJPWJ7lBhvmyw==
-X-Gm-Message-State: AOJu0YwjfLpRcdtExRYSOS8VWrjWz/tKGew+IzZgue2egJOdWcB+hko7
- iMFu1G/99UchsaULYMv+SEowY6RhYveOrMMhx8D/Su5+lNz+EmnyhPqV1B4O
-X-Google-Smtp-Source: AGHT+IHwZqSv7XhX9P75zBCgKMZeVPpimEX0Khnw8NfZurL1MqVhX/vBRwwoBcxor830ptI1yZRJwA==
-X-Received: by 2002:ae9:f40b:0:b0:789:c760:176e with SMTP id
- y11-20020ae9f40b000000b00789c760176emr4040316qkl.20.1710945714005; 
- Wed, 20 Mar 2024 07:41:54 -0700 (PDT)
-Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- n21-20020a05620a223500b00789ed8823f5sm4274289qkh.0.2024.03.20.07.41.52
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 20 Mar 2024 07:41:53 -0700 (PDT)
-Message-ID: <569b832f-8fcc-9515-40ae-5590b1456f02@gmail.com>
-Date: Wed, 20 Mar 2024 10:41:51 -0400
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
+ AJvYcCVfzzWL9g6Kellwl7L4/xaD/stasOjJ6MubEqvjTJ82xkkjkeWzc+mKoQ2GcSKudCvQWbqIWORWF7QoZiJab+iup17UXw==
+X-Gm-Message-State: AOJu0YwsTA9bD94bbRm6wgUcGenMbVbK1OQMMR3SV0DyYIgb0Dx43W1d
+ PXaP1DAHcd9P2116VoBDsDdFh+pUzVAqBefEsnTYOozek39oIAdc2Y+tR+Ls8wo=
+X-Google-Smtp-Source: AGHT+IFLQPxnZhP2/0FYqSTKc8UeLLnPATuZ1j/v+/z/TPFKHKTU8Vn0tD+KUbGQLqS4y+jR0DafQA==
+X-Received: by 2002:a05:6870:d611:b0:220:de23:85f7 with SMTP id
+ a17-20020a056870d61100b00220de2385f7mr2308296oaq.48.1710946286891; 
+ Wed, 20 Mar 2024 07:51:26 -0700 (PDT)
+Received: from bill-the-cat (065-184-193-066.res.spectrum.com. [65.184.193.66])
+ by smtp.gmail.com with ESMTPSA id
+ y12-20020a37e30c000000b00789e72b27fbsm5066022qki.120.2024.03.20.07.51.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 20 Mar 2024 07:51:26 -0700 (PDT)
+Date: Wed, 20 Mar 2024 10:51:23 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Sean Anderson <seanga2@gmail.com>
+Cc: Fabio Estevam <festevam@gmail.com>, peng.fan@nxp.com, ye.li@nxp.com,
+ u-boot@lists.denx.de, marcel.ziswiler@toradex.com,
+ francesco.dolcini@toradex.com, hiago.franco@toradex.com,
+ joao.goncalves@toradex.com
 Subject: Re: [PATCH 1/2] clk: clk-imx8qxp: Add LPUART IPG entries
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>, Fabio Estevam <festevam@gmail.com>
-Cc: peng.fan@nxp.com, ye.li@nxp.com, u-boot@lists.denx.de,
- marcel.ziswiler@toradex.com, francesco.dolcini@toradex.com,
- hiago.franco@toradex.com, joao.goncalves@toradex.com
+Message-ID: <20240320145123.GV3442575@bill-the-cat>
 References: <20240308201316.1721909-1-festevam@gmail.com>
  <CAOMZO5Aa_EaTtL9r7k0P7CaJQ0fixGLJSR3WvxHAD2=5RJdncQ@mail.gmail.com>
  <20240319190450.GI3442575@bill-the-cat>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20240319190450.GI3442575@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+ <569b832f-8fcc-9515-40ae-5590b1456f02@gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="UgsxS7Fw0PX7WX6d"
+Content-Disposition: inline
+In-Reply-To: <569b832f-8fcc-9515-40ae-5590b1456f02@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,22 +97,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-T24gMy8xOS8yNCAxNTowNCwgVG9tIFJpbmkgd3JvdGU6DQo+IE9uIE1vbiwgTWFyIDE4LCAy
-MDI0IGF0IDA5OjE0OjUzUE0gLTAzMDAsIEZhYmlvIEVzdGV2YW0gd3JvdGU6DQo+PiBIaSBU
-b20gYW5kIFNlYW4sDQo+Pg0KPj4gT24gRnJpLCBNYXIgOCwgMjAyNCBhdCA1OjEz4oCvUE0g
-RmFiaW8gRXN0ZXZhbSA8ZmVzdGV2YW1AZ21haWwuY29tPiB3cm90ZToNCj4+Pg0KPj4+IFNp
-bmNlIGNvbW1pdCBjYzdkZjBiOWU4YmMgKCJzZXJpYWw6IGxwdWFydDogRW5hYmxlIElQRyBj
-bG9jayIpDQo+Pj4gdGhlIGNvbGlicmktaW14OHF4cCBib2FyZCBubyBsb25nZXIgYm9vdHMu
-DQo+Pj4NCj4+PiBUaGUgcmVhc29uIGlzIHRoYXQgdGhlIGlteDhxeHAgY2xvY2sgZHJpdmVy
-IGRvZXMgbm90IGhhbmRsZSB0aGUNCj4+PiBMUFVBUlQgSVBHIGNsb2NrcyBpbnNpZGUgZ2V0
-X3JhdGUoKSwgc2V0X3JhdGUoKSBhbmQgZW5hYmxlKCkgZnVuY3Rpb25zLg0KPj4+DQo+Pj4g
-Rml4IHRoZSBib290IHJlZ3Jlc3Npb24gYnkgYWRkaW5nIHRoZSBMUFVBUlQgSVBHIGVudHJp
-ZXMuDQo+Pj4NCj4+PiBGaXhlczogY2M3ZGYwYjllOGJjICgic2VyaWFsOiBscHVhcnQ6IEVu
-YWJsZSBJUEcgY2xvY2siKQ0KPj4+IFJlcG9ydGVkLWJ5OiBNYXJjZWwgWmlzd2lsZXIgPG1h
-cmNlbC56aXN3aWxlckB0b3JhZGV4LmNvbT4NCj4+PiBTaWduZWQtb2ZmLWJ5OiBGYWJpbyBF
-c3RldmFtIDxmZXN0ZXZhbUBnbWFpbC5jb20+DQo+Pg0KPj4gUGxlYXNlIGNvbnNpZGVyIGFw
-cGx5aW5nIHRoaXMgc2VyaWVzIHRvIDIwMjQuMDQuDQo+Pg0KPj4gSXQgZml4ZXMgYSBib290
-IHJlZ3Jlc3Npb24gb24gaW14OHF4cCBhbmQgaW14OHFtLg0KPiANCj4gRmluZSB3aXRoIG1l
-LCBTZWFuPw0KPiANCg0KQWNrZWQtYnk6IFNlYW4gQW5kZXJzb24gPHNlYW5nYTJAZ21haWwu
-Y29tPg0KDQpDYW4geW91IHBpY2sgdGhpcyB1cCBkaXJlY3RseSwgVG9tPyBUaGFua3MuDQo=
 
+--UgsxS7Fw0PX7WX6d
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Mar 20, 2024 at 10:41:51AM -0400, Sean Anderson wrote:
+> On 3/19/24 15:04, Tom Rini wrote:
+> > On Mon, Mar 18, 2024 at 09:14:53PM -0300, Fabio Estevam wrote:
+> > > Hi Tom and Sean,
+> > >=20
+> > > On Fri, Mar 8, 2024 at 5:13=E2=80=AFPM Fabio Estevam <festevam@gmail.=
+com> wrote:
+> > > >=20
+> > > > Since commit cc7df0b9e8bc ("serial: lpuart: Enable IPG clock")
+> > > > the colibri-imx8qxp board no longer boots.
+> > > >=20
+> > > > The reason is that the imx8qxp clock driver does not handle the
+> > > > LPUART IPG clocks inside get_rate(), set_rate() and enable() functi=
+ons.
+> > > >=20
+> > > > Fix the boot regression by adding the LPUART IPG entries.
+> > > >=20
+> > > > Fixes: cc7df0b9e8bc ("serial: lpuart: Enable IPG clock")
+> > > > Reported-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+> > > > Signed-off-by: Fabio Estevam <festevam@gmail.com>
+> > >=20
+> > > Please consider applying this series to 2024.04.
+> > >=20
+> > > It fixes a boot regression on imx8qxp and imx8qm.
+> >=20
+> > Fine with me, Sean?
+> >=20
+>=20
+> Acked-by: Sean Anderson <seanga2@gmail.com>
+>=20
+> Can you pick this up directly, Tom? Thanks.
+
+In my dont-forget bundle now.
+
+--=20
+Tom
+
+--UgsxS7Fw0PX7WX6d
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmX69+cACgkQFHw5/5Y0
+tyxVJwv/cb+lyYkVTaFAtPeF52njGsfSuOcAaIOzoH2eUKkKGG1CFrj9PUhxc/CL
+GdH1wT8gHlk2vtAIg7m87jzbxvkjsM20BH6xyFmcHaY6D8HeojZTzyLdzFg6k3I9
+EA9t8c8zc2hQhswdYRdIe+7g5D9YFxFq5qKqrUDzX2i+WL3tyOcq5ixysWlDQn95
+aAX25ALVzyYKuejkyv7m5jjtz9NUHMFwZFbynbXYdAmSYWHDT+3FoMMYunfmJ6MN
+Ajec9IhJ5B0O9bSty/YzHXV12nc3DSrof37sN7Zo9sAxXmS/6N2pdzid+HNoLBHR
+EYKkAD2+324y4TBSX7ITtBKWQKL1OU71nYGXq8uG43DgjJYaVdLgCIAncMqMBOsf
+eKgCTP7RGJdcpxT2ZLS2izUYhevttwVeWehO+kHDx1YgA4y/ot5XGr6MaE/sjQo8
+pFDJUhyLfZw3ll/Hp/USoK7eB2QKkiMo9F+nBigOdDonxAnN/Fek2nnIWG5RmtRo
+bU4XeUBl
+=N7xM
+-----END PGP SIGNATURE-----
+
+--UgsxS7Fw0PX7WX6d--
