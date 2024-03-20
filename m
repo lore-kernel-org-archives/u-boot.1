@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E1A0C6FD1F
-	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 04:56:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59CABC54E58
+	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 05:22:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE32A87F87;
-	Wed, 20 Mar 2024 05:56:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C84F8880A6;
+	Wed, 20 Mar 2024 06:21:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kh7OI6EB";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kTDXUdCS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB7C48808F; Wed, 20 Mar 2024 05:56:00 +0100 (CET)
-Received: from mail-vs1-xe36.google.com (mail-vs1-xe36.google.com
- [IPv6:2607:f8b0:4864:20::e36])
+ id F2BE0869F7; Wed, 20 Mar 2024 06:21:54 +0100 (CET)
+Received: from mail-vs1-xe29.google.com (mail-vs1-xe29.google.com
+ [IPv6:2607:f8b0:4864:20::e29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 317D087E13
- for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 05:55:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4335A880A6
+ for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 06:21:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vs1-xe36.google.com with SMTP id
- ada2fe7eead31-4760fe9c282so2097514137.3
- for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 21:55:57 -0700 (PDT)
+Received: by mail-vs1-xe29.google.com with SMTP id
+ ada2fe7eead31-47679c2815aso1216761137.1
+ for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 22:21:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710910557; x=1711515357; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1710912111; x=1711516911; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=smk3up9AxLBklHIupCTbu8uJT2sUCHKng4ykA2aQUkg=;
- b=kh7OI6EBoHVNfKU3cBzzUgclmokVYKesUSZE4Mm6gOtFlqu8PDLydQ1BuDZa16Kw+v
- f70RMu7APSLjWefMcBaASe+U1FwLw71j06Bp8Epyiz/cjl4KaSf8qjLo5yPjYA+x8EKN
- n8antgSxdPVIjKU8pQQzhVHtwcIuDdCxznAKUoFOcxFZxKqoJ13uXljoEJL4ltf9++wT
- Ps/JZJDKnTGRXBpC7hN8HeGzeH+9sFddbtdegN22cN643JvkNYDRstjO6k5T2mE7CHI1
- gQucTUIGUIcUXrdAPo7a+lQAz1JCaNWQEuBv7Z8ZfBU/cxVM2pLDlfBlWT2irGA2bHbh
- LMvg==
+ bh=5Mx/aMoRW58CnsSBVr5pEmoiw/U+OvRBSvE3r9jAm+o=;
+ b=kTDXUdCSoVbnsY1oFuXVArQ/NGQLypzARMiwisXRUYO59yblCBqB9mx49AOQ0uX3+n
+ CkhBe5+NANxijXPcBBJ25FhNZY+6OdwxjZTT9RYiksh1NxnhSLsB8dqzt6tqSVZlIP8L
+ ZcU/Ek6pKLzYelsu/TWvYrsV1D91zvRC0hp3grXJgsPTDkXxkyP59S7KygV6/L1JRANL
+ JBC1gJqAO/8smkSzidP9WBBMzcGp7ftsXtmb3wwDT33LPwYAZvtriS876qsHNh/gE0CM
+ /s/i6uQIpue/0b4NJQh+fl5MH15lODZVQ/oBwxcSrwCeYtxtNqgvM+Pz05EXyp03ZwOb
+ M3dw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710910557; x=1711515357;
+ d=1e100.net; s=20230601; t=1710912111; x=1711516911;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=smk3up9AxLBklHIupCTbu8uJT2sUCHKng4ykA2aQUkg=;
- b=oCKyXn1G/DEv96MSjuqw52/H12U2xXtEOOe5wLTRRac+MiFJ3BA/7SEpF+tSyloLAo
- oH/yK6cw8wZGf1SODgXMZJCvg59K3ezahe+8c7USdkHNtdoysafDy7rUN7GON8IudGGG
- z07vwJZZSCZ9JHM8quN6eFVqeg3tjkIWX7LSDgoOb6F87q/UHfuKBSqGww46YNOai7I3
- l5dOi3kWPXGb2MuKLgmcFldWYhHGGLMKsyI3Xq+X65xh6XKrM5irp52KAYIoTncjGoTH
- WadiQJMYmDP/00c5fGxuefhbQVTnJE81vuSfn9aoAdGOW5kiWGU6L/TkKWhZLemvIR4/
- JRrQ==
+ bh=5Mx/aMoRW58CnsSBVr5pEmoiw/U+OvRBSvE3r9jAm+o=;
+ b=VGx1rK/+wjjGzXA+P/x0DecYL5i45tYa/X56qV0oBLSSJ3/+AwlamGjAswUikOLIhm
+ bSGHAqlE3/eaHzQKKUwrl79/569w+e/iXwOovdJEL0+jCqa8Ip8YX/D8mPLOS0jBUKEB
+ r/iKO5cZu8H/CJGi3o8xjiRoxOjJgEnwfe2kaEWxwO3LvsKEB+hf/GUPWVQxnBVRKwH7
+ yp9fa3Ak1WkYFVWnzUuozmEf27dlmv63iuxaY05W1bCe35RkBxaxjUBHdGhKUXvagVzQ
+ 1bwTWf8t8LNc+Z4cN0eWRNrIzeEukGVOyjHRMYMKbgvOWpEDaUe0rzrwcz3HdeG4KH5Z
+ SNcw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXewIJAf8lq8Eh8DpSK8uGOIbhLzDqnW02ZjdzbTYIldKsWF60BaS+diy5pMNPPOBjHnSFj8t+5AJ7avGjHw74dzPI1Mw==
-X-Gm-Message-State: AOJu0YymtEnUq91axmF9tjEEyOaSaKKSnSqPDLk0qUFB3vFRGTTfZY61
- 1U5eDIkNW2UZUcAFLJBryCArXuX1z7RMVqXf1aeq+i2zEjl26iOinVQMf7KOmN46jA8wKWIziDj
- /lTH8hN3dWuJDjUbD940Xo3OgruMCRMc2+SVCfQ==
-X-Google-Smtp-Source: AGHT+IFo+MHDbN1CJ9nJUkPFmJv2aAUj7RK4xE+cQ+3go6N0AP+fyV453FUGvKPSfgyFxZ20PRRrvCFDT56duZrQcoQ=
-X-Received: by 2002:a67:f5d9:0:b0:473:3431:4f78 with SMTP id
- t25-20020a67f5d9000000b0047334314f78mr14582697vso.10.1710910556719; Tue, 19
- Mar 2024 21:55:56 -0700 (PDT)
+ AJvYcCWOK3Z9w7Yo5zbVMd/OoDdsSAPs3h+hQddUHQ749sl1PhpfxBrUK82DzqzwkgPUtxu8D5q1R8XYgvJM7S9rWXZn0nxUGg==
+X-Gm-Message-State: AOJu0YxOoURdkGH+ZFjiVEMlUNwqbXhD4wuhdGI8e45Bf/zrRtVnoB2T
+ J3A8QtXP1X2/Gs4dopQSlgmqLwTWh2D6pY3lYXh2raA0eYHMGySX/Hu7gMCGolpmgeGjgU+aO8w
+ eADxveqjTFvAKwcVrBxbZ++J1NCzbQUEzt13efQ==
+X-Google-Smtp-Source: AGHT+IFnQz3c/fBY6onnx1lv9d6vxoRJCZe0iVoXX2tGIyGexWPwznzH4mfEjeJvIZJP6X4jB0fzd2v7sRZ+ky0VDnc=
+X-Received: by 2002:a05:6102:ce:b0:476:9ff0:90b0 with SMTP id
+ u14-20020a05610200ce00b004769ff090b0mr970468vsp.13.1710912111065; Tue, 19 Mar
+ 2024 22:21:51 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240319-u-boot-of-upstream-v1-0-f82bc9fe69c0@linaro.org>
-In-Reply-To: <20240319-u-boot-of-upstream-v1-0-f82bc9fe69c0@linaro.org>
+References: <20240319-b4-qcom-livetree-v3-0-e1b38d9b4fa4@linaro.org>
+ <20240319-b4-qcom-livetree-v3-2-e1b38d9b4fa4@linaro.org>
+In-Reply-To: <20240319-b4-qcom-livetree-v3-2-e1b38d9b4fa4@linaro.org>
 From: Sumit Garg <sumit.garg@linaro.org>
-Date: Wed, 20 Mar 2024 10:25:45 +0530
-Message-ID: <CAFA6WYNax2GF3i3o4OzLXe=LqOB5HRS18LbNm-t_FOgwzORftg@mail.gmail.com>
-Subject: Re: [PATCH 0/4] arm: meson: Switch to using upstream DT for GXL, GXM, 
- AXG, G12A, G12B & SM1 SoCs
-To: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Vyacheslav Bocharov <adeep@lexina.in>, 
- Christian Hewitt <christianshewitt@gmail.com>, u-boot-amlogic@groups.io,
- u-boot@lists.denx.de
+Date: Wed, 20 Mar 2024 10:51:39 +0530
+Message-ID: <CAFA6WYOF44dKAQouFN3Z8h86CuRJ9unp2m9dSA52cMvaF0UCjQ@mail.gmail.com>
+Subject: Re: [PATCH v3 02/14] phy: qcom: add Qualcomm QUSB2 USB PHY driver
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ u-boot@lists.denx.de, Bhupesh Sharma <bhupesh.linux@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,158 +90,541 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Neil,
-
-On Tue, 19 Mar 2024 at 20:13, Neil Armstrong <neil.armstrong@linaro.org> wrote:
+On Tue, 19 Mar 2024 at 17:52, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >
-> Enable OF_UPSTREAM to use upstream DT and add amlogic/ prefix to the
-> DEFAULT_DEVICE_TREE. And thereby directly build DTB from dts/upstream/src/
-> including *-u-boot.dtsi files from arch/$(ARCH)/dts/ directory and
-> drop redundant files from arch/arm/dts directory. Only *-u-boot.dtsi files
-> kept in arch/arm/dts directory for these boards.
+> From: Bhupesh Sharma <bhupesh.linux@gmail.com>
 >
-> Keep A1 DTs locally since the architecture is still young.
+> The Snapdragon 845 and several other Qualcomm SoCs feature this
+> USB high-speed phy. Add a driver for it based on the Linux driver, with
+> support for the SDM845, and the QCM2290 and SM6115 SoCs which will gain
+> support in U-Boot in future patches.
 >
-> CI built & tested at:
-> https://gitlab.com/amlogic-foss/amlogic-u-boot-autotest/-/pipelines/1219273552
->
-> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+> Signed-off-by: Bhupesh Sharma <bhupesh.sharma@linaro.org>
+> [code cleanup, switch to clk_bulk]
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
-> Neil Armstrong (4):
->       dts: meson: Switch GXL, GXM & AXG to using upstream DT
->       dts: meson: Drop redundant GXL, GXM & AXG devicetree files
->       dts: meson-g12a: Switch to using upstream DT
->       dts: meson: Drop redundant G12A, G12B & SM1 devicetree files
+>  drivers/phy/qcom/Kconfig          |   7 +
+>  drivers/phy/qcom/Makefile         |   1 +
+>  drivers/phy/qcom/phy-qcom-qusb2.c | 468 ++++++++++++++++++++++++++++++++++++++
+>  3 files changed, 476 insertions(+)
 >
->  arch/arm/dts/Makefile                              |   36 +-
->  arch/arm/dts/meson-axg-jethome-jethub-j100.dts     |  361 ---
->  arch/arm/dts/meson-axg-s400.dts                    |  602 -----
->  arch/arm/dts/meson-axg.dtsi                        | 1957 ---------------
->  arch/arm/dts/meson-g12-common.dtsi                 | 2493 --------------------
->  arch/arm/dts/meson-g12.dtsi                        |  385 ---
->  arch/arm/dts/meson-g12a-radxa-zero.dts             |  405 ----
->  arch/arm/dts/meson-g12a-sei510.dts                 |  566 -----
->  arch/arm/dts/meson-g12a-u200.dts                   |  308 ---
->  arch/arm/dts/meson-g12a.dtsi                       |  140 --
->  arch/arm/dts/meson-g12b-a311d-bananapi-m2s.dts     |   33 -
->  arch/arm/dts/meson-g12b-a311d-khadas-vim3.dts      |   41 -
->  arch/arm/dts/meson-g12b-a311d.dtsi                 |  149 --
->  arch/arm/dts/meson-g12b-bananapi-cm4-cm4io.dts     |  165 --
->  arch/arm/dts/meson-g12b-bananapi-cm4.dtsi          |  388 ---
->  arch/arm/dts/meson-g12b-bananapi.dtsi              |  521 ----
->  arch/arm/dts/meson-g12b-gsking-x.dts               |  133 --
->  arch/arm/dts/meson-g12b-gtking-pro.dts             |  142 --
->  arch/arm/dts/meson-g12b-gtking.dts                 |  163 --
->  arch/arm/dts/meson-g12b-khadas-vim3.dtsi           |  107 -
->  arch/arm/dts/meson-g12b-odroid-go-ultra.dts        |  722 ------
->  arch/arm/dts/meson-g12b-odroid-n2-plus.dts         |   31 -
->  arch/arm/dts/meson-g12b-odroid-n2.dts              |   15 -
->  arch/arm/dts/meson-g12b-odroid-n2.dtsi             |  303 ---
->  arch/arm/dts/meson-g12b-odroid-n2l.dts             |  125 -
->  arch/arm/dts/meson-g12b-odroid.dtsi                |  445 ----
->  arch/arm/dts/meson-g12b-radxa-zero2.dts            |  489 ----
->  arch/arm/dts/meson-g12b-s922x-bananapi-m2s.dts     |   14 -
->  arch/arm/dts/meson-g12b-s922x.dtsi                 |  139 --
->  arch/arm/dts/meson-g12b-w400.dtsi                  |  425 ----
->  arch/arm/dts/meson-g12b.dtsi                       |  146 --
->  arch/arm/dts/meson-gx-libretech-pc.dtsi            |  447 ----
->  arch/arm/dts/meson-gx-mali450.dtsi                 |   61 -
->  arch/arm/dts/meson-gx-p23x-q20x.dtsi               |  324 ---
->  arch/arm/dts/meson-gx.dtsi                         |  675 ------
->  arch/arm/dts/meson-gxl-mali.dtsi                   |   17 -
->  arch/arm/dts/meson-gxl-s805x-libretech-ac.dts      |  319 ---
->  arch/arm/dts/meson-gxl-s805x.dtsi                  |   23 -
->  arch/arm/dts/meson-gxl-s905d-libretech-pc.dts      |   16 -
->  arch/arm/dts/meson-gxl-s905d.dtsi                  |   12 -
->  .../arm/dts/meson-gxl-s905w-jethome-jethub-j80.dts |  247 --
->  arch/arm/dts/meson-gxl-s905x-khadas-vim.dts        |  237 --
->  arch/arm/dts/meson-gxl-s905x-libretech-cc-v2.dts   |  313 ---
->  arch/arm/dts/meson-gxl-s905x-libretech-cc.dts      |  356 ---
->  arch/arm/dts/meson-gxl-s905x-p212.dts              |  134 --
->  arch/arm/dts/meson-gxl-s905x-p212.dtsi             |  213 --
->  arch/arm/dts/meson-gxl-s905x.dtsi                  |   18 -
->  arch/arm/dts/meson-gxl.dtsi                        |  940 --------
->  arch/arm/dts/meson-gxm-gt1-ultimate.dts            |   91 -
->  arch/arm/dts/meson-gxm-khadas-vim2.dts             |  424 ----
->  arch/arm/dts/meson-gxm-s912-libretech-pc.dts       |   62 -
->  arch/arm/dts/meson-gxm-wetek-core2.dts             |   85 -
->  arch/arm/dts/meson-gxm.dtsi                        |  216 --
->  arch/arm/dts/meson-khadas-vim3.dtsi                |  534 -----
->  arch/arm/dts/meson-sm1-bananapi-m2-pro.dts         |   97 -
->  arch/arm/dts/meson-sm1-bananapi-m5.dts             |  221 --
->  arch/arm/dts/meson-sm1-bananapi.dtsi               |  435 ----
->  arch/arm/dts/meson-sm1-khadas-vim3l.dts            |  113 -
->  arch/arm/dts/meson-sm1-odroid-c4.dts               |   48 -
->  arch/arm/dts/meson-sm1-odroid-hc4.dts              |  140 --
->  arch/arm/dts/meson-sm1-odroid.dtsi                 |  449 ----
->  arch/arm/dts/meson-sm1-sei610.dts                  |  616 -----
->  arch/arm/dts/meson-sm1.dtsi                        |  550 -----
->  arch/arm/mach-meson/Kconfig                        |    4 +
->  configs/bananapi-cm4-cm4io_defconfig               |    2 +-
->  configs/bananapi-m2-pro_defconfig                  |    2 +-
->  configs/bananapi-m2s_defconfig                     |    2 +-
->  configs/bananapi-m5_defconfig                      |    2 +-
->  configs/beelink-gsking-x_defconfig                 |    2 +-
->  configs/beelink-gt1-ultimate_defconfig             |    2 +-
->  configs/beelink-gtking_defconfig                   |    2 +-
->  configs/beelink-gtkingpro_defconfig                |    2 +-
->  configs/jethub_j100_defconfig                      |    2 +-
->  configs/jethub_j80_defconfig                       |    2 +-
->  configs/khadas-vim2_defconfig                      |    2 +-
->  configs/khadas-vim3_android_ab_defconfig           |    2 +-
->  configs/khadas-vim3_android_defconfig              |    2 +-
->  configs/khadas-vim3_defconfig                      |    2 +-
->  configs/khadas-vim3l_android_ab_defconfig          |    2 +-
->  configs/khadas-vim3l_android_defconfig             |    2 +-
->  configs/khadas-vim3l_defconfig                     |    2 +-
->  configs/khadas-vim_defconfig                       |    2 +-
->  configs/libretech-ac_defconfig                     |    2 +-
->  configs/libretech-cc_defconfig                     |    2 +-
->  configs/libretech-cc_v2_defconfig                  |    2 +-
->  configs/libretech-s905d-pc_defconfig               |    2 +-
->  configs/libretech-s912-pc_defconfig                |    2 +-
->  configs/odroid-c4_defconfig                        |    2 +-
->  configs/odroid-go-ultra_defconfig                  |    2 +-
->  configs/odroid-hc4_defconfig                       |    2 +-
->  configs/odroid-n2_defconfig                        |    2 +-
->  configs/odroid-n2l_defconfig                       |    2 +-
->  configs/p212_defconfig                             |    2 +-
->  configs/radxa-zero2_defconfig                      |    2 +-
->  configs/radxa-zero_defconfig                       |    2 +-
->  configs/s400_defconfig                             |    2 +-
->  configs/sei510_defconfig                           |    2 +-
->  configs/sei610_defconfig                           |    2 +-
->  configs/u200_defconfig                             |    2 +-
->  configs/wetek-core2_defconfig                      |    2 +-
->  include/dt-bindings/gpio/meson-axg-gpio.h          |  116 -
->  include/dt-bindings/gpio/meson-g12a-gpio.h         |  114 -
->  include/dt-bindings/gpio/meson-gxbb-gpio.h         |  148 --
->  include/dt-bindings/gpio/meson-gxl-gpio.h          |  125 -
->  include/dt-bindings/power/meson-axg-power.h        |   14 -
->  include/dt-bindings/power/meson-g12a-power.h       |   13 -
->  include/dt-bindings/power/meson-gxbb-power.h       |   13 -
->  include/dt-bindings/power/meson-sm1-power.h        |   18 -
->  .../reset/amlogic,meson-axg-audio-arb.h            |   19 -
->  .../dt-bindings/reset/amlogic,meson-axg-reset.h    |  123 -
->  .../reset/amlogic,meson-g12a-audio-reset.h         |   53 -
->  .../dt-bindings/reset/amlogic,meson-g12a-reset.h   |  137 --
->  .../dt-bindings/reset/amlogic,meson-gxbb-reset.h   |  161 --
->  include/dt-bindings/sound/meson-aiu.h              |   18 -
->  include/dt-bindings/sound/meson-g12a-toacodec.h    |   10 -
->  include/dt-bindings/sound/meson-g12a-tohdmitx.h    |   13 -
->  116 files changed, 42 insertions(+), 21511 deletions(-)
+> diff --git a/drivers/phy/qcom/Kconfig b/drivers/phy/qcom/Kconfig
+> index f4ca174805a4..361dfb6e1126 100644
+> --- a/drivers/phy/qcom/Kconfig
+> +++ b/drivers/phy/qcom/Kconfig
+> @@ -11,8 +11,15 @@ config PHY_QCOM_IPQ4019_USB
+>         depends on PHY && ARCH_IPQ40XX
+>         help
+>           Support for the USB PHY-s on Qualcomm IPQ40xx SoC-s.
+>
+> +config PHY_QCOM_QUSB2
+> +       tristate "Qualcomm USB QUSB2 PHY driver"
+> +       depends on PHY && ARCH_SNAPDRAGON
+> +       help
+> +         Enable this to support the Super-Speed USB transceiver on various
+> +         Qualcomm chipsets.
+> +
+>  config PHY_QCOM_USB_HS_28NM
+>         tristate "Qualcomm 28nm High-Speed PHY"
+>         depends on PHY && ARCH_SNAPDRAGON
+>         help
+> diff --git a/drivers/phy/qcom/Makefile b/drivers/phy/qcom/Makefile
+> index 2113f178c0c7..f6af985666a4 100644
+> --- a/drivers/phy/qcom/Makefile
+> +++ b/drivers/phy/qcom/Makefile
+> @@ -1,4 +1,5 @@
+>  obj-$(CONFIG_PHY_QCOM_IPQ4019_USB) += phy-qcom-ipq4019-usb.o
+>  obj-$(CONFIG_MSM8916_USB_PHY) += msm8916-usbh-phy.o
+> +obj-$(CONFIG_PHY_QCOM_QUSB2) += phy-qcom-qusb2.o
+>  obj-$(CONFIG_PHY_QCOM_USB_HS_28NM) += phy-qcom-usb-hs-28nm.o
+>  obj-$(CONFIG_PHY_QCOM_USB_SS) += phy-qcom-usb-ss.o
+> diff --git a/drivers/phy/qcom/phy-qcom-qusb2.c b/drivers/phy/qcom/phy-qcom-qusb2.c
+> new file mode 100644
+> index 000000000000..5b654403a181
+> --- /dev/null
+> +++ b/drivers/phy/qcom/phy-qcom-qusb2.c
+> @@ -0,0 +1,468 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright (C) 2023 Bhupesh Sharma <bhupesh.sharma@linaro.org>
+> + *
+> + * Based on Linux driver
+> + */
+> +
+> +#include <dm.h>
+> +#include <generic-phy.h>
+> +#include <linux/bitops.h>
+> +#include <asm/io.h>
+> +#include <reset.h>
+> +#include <clk.h>
+> +#include <linux/delay.h>
+> +
+> +#include <dt-bindings/phy/phy-qcom-qusb2.h>
+> +
+> +#define QUSB2PHY_PLL 0x0
+> +#define QUSB2PHY_PLL_TEST 0x04
+> +#define CLK_REF_SEL BIT(7)
+> +
+> +#define QUSB2PHY_PLL_TUNE 0x08
+> +#define QUSB2PHY_PLL_USER_CTL1 0x0c
+> +#define QUSB2PHY_PLL_USER_CTL2 0x10
+> +#define QUSB2PHY_PLL_AUTOPGM_CTL1 0x1c
+> +#define QUSB2PHY_PLL_PWR_CTRL 0x18
+> +
+> +/* QUSB2PHY_PLL_STATUS register bits */
+> +#define PLL_LOCKED BIT(5)
+> +
+> +/* QUSB2PHY_PLL_COMMON_STATUS_ONE register bits */
+> +#define CORE_READY_STATUS BIT(0)
+> +
+> +/* QUSB2PHY_PORT_POWERDOWN register bits */
+> +#define CLAMP_N_EN BIT(5)
+> +#define FREEZIO_N BIT(1)
+> +#define POWER_DOWN BIT(0)
+> +
+> +/* QUSB2PHY_PWR_CTRL1 register bits */
+> +#define PWR_CTRL1_VREF_SUPPLY_TRIM BIT(5)
+> +#define PWR_CTRL1_CLAMP_N_EN BIT(1)
+> +
+> +#define QUSB2PHY_REFCLK_ENABLE BIT(0)
+> +
+> +#define PHY_CLK_SCHEME_SEL BIT(0)
+> +
+> +/* QUSB2PHY_INTR_CTRL register bits */
+> +#define DMSE_INTR_HIGH_SEL BIT(4)
+> +#define DPSE_INTR_HIGH_SEL BIT(3)
+> +#define CHG_DET_INTR_EN BIT(2)
+> +#define DMSE_INTR_EN BIT(1)
+> +#define DPSE_INTR_EN BIT(0)
+> +
+> +/* QUSB2PHY_PLL_CORE_INPUT_OVERRIDE register bits */
+> +#define CORE_PLL_EN_FROM_RESET BIT(4)
+> +#define CORE_RESET BIT(5)
+> +#define CORE_RESET_MUX BIT(6)
+> +
+> +/* QUSB2PHY_IMP_CTRL1 register bits */
+> +#define IMP_RES_OFFSET_MASK GENMASK(5, 0)
+> +#define IMP_RES_OFFSET_SHIFT 0x0
+> +
+> +/* QUSB2PHY_PLL_BIAS_CONTROL_2 register bits */
+> +#define BIAS_CTRL2_RES_OFFSET_MASK GENMASK(5, 0)
+> +#define BIAS_CTRL2_RES_OFFSET_SHIFT 0x0
+> +
+> +/* QUSB2PHY_CHG_CONTROL_2 register bits */
+> +#define CHG_CTRL2_OFFSET_MASK GENMASK(5, 4)
+> +#define CHG_CTRL2_OFFSET_SHIFT 0x4
+> +
+> +/* QUSB2PHY_PORT_TUNE1 register bits */
+> +#define HSTX_TRIM_MASK GENMASK(7, 4)
+> +#define HSTX_TRIM_SHIFT 0x4
+> +#define PREEMPH_WIDTH_HALF_BIT BIT(2)
+> +#define PREEMPHASIS_EN_MASK GENMASK(1, 0)
+> +#define PREEMPHASIS_EN_SHIFT 0x0
+> +
+> +/* QUSB2PHY_PORT_TUNE2 register bits */
+> +#define HSDISC_TRIM_MASK GENMASK(1, 0)
+> +#define HSDISC_TRIM_SHIFT 0x0
+> +
+> +#define QUSB2PHY_PLL_ANALOG_CONTROLS_TWO 0x04
+> +#define QUSB2PHY_PLL_CLOCK_INVERTERS 0x18c
+> +#define QUSB2PHY_PLL_CMODE 0x2c
+> +#define QUSB2PHY_PLL_LOCK_DELAY 0x184
+> +#define QUSB2PHY_PLL_DIGITAL_TIMERS_TWO 0xb4
+> +#define QUSB2PHY_PLL_BIAS_CONTROL_1 0x194
+> +#define QUSB2PHY_PLL_BIAS_CONTROL_2 0x198
+> +#define QUSB2PHY_PWR_CTRL2 0x214
+> +#define QUSB2PHY_IMP_CTRL1 0x220
+> +#define QUSB2PHY_IMP_CTRL2 0x224
+> +#define QUSB2PHY_CHG_CTRL2 0x23c
+> +
+> +struct qusb2_phy_init_tbl {
+> +       unsigned int offset;
+> +       unsigned int val;
+> +       /*
+> +        * register part of layout ?
+> +        * if yes, then offset gives index in the reg-layout
+> +        */
+> +       int in_layout;
+> +};
+> +
+> +struct qusb2_phy_cfg {
+> +       const struct qusb2_phy_init_tbl *tbl;
+> +       /* number of entries in the table */
+> +       unsigned int tbl_num;
+> +       /* offset to PHY_CLK_SCHEME register in TCSR map */
+> +       unsigned int clk_scheme_offset;
+> +
+> +       /* array of registers with different offsets */
+> +       const unsigned int *regs;
+> +       unsigned int mask_core_ready;
+> +       unsigned int disable_ctrl;
+> +       unsigned int autoresume_en;
+> +
+> +       /* true if PHY has PLL_TEST register to select clk_scheme */
+> +       bool has_pll_test;
+> +
+> +       /* true if TUNE1 register must be updated by fused value, else TUNE2 */
+> +       bool update_tune1_with_efuse;
+> +
+> +       /* true if PHY has PLL_CORE_INPUT_OVERRIDE register to reset PLL */
+> +       bool has_pll_override;
+> +};
+> +
+> +/* set of registers with offsets different per-PHY */
+> +enum qusb2phy_reg_layout {
+> +       QUSB2PHY_PLL_CORE_INPUT_OVERRIDE,
+> +       QUSB2PHY_PLL_STATUS,
+> +       QUSB2PHY_PORT_TUNE1,
+> +       QUSB2PHY_PORT_TUNE2,
+> +       QUSB2PHY_PORT_TUNE3,
+> +       QUSB2PHY_PORT_TUNE4,
+> +       QUSB2PHY_PORT_TUNE5,
+> +       QUSB2PHY_PORT_TEST1,
+> +       QUSB2PHY_PORT_TEST2,
+> +       QUSB2PHY_PORT_POWERDOWN,
+> +       QUSB2PHY_INTR_CTRL,
+> +};
+> +
+> +#define QUSB2_PHY_INIT_CFG(o, v)       \
+> +       {                              \
+> +               .offset = o, .val = v, \
+> +       }
+> +
+> +#define QUSB2_PHY_INIT_CFG_L(o, v)                     \
+> +       {                                              \
+> +               .offset = o, .val = v, .in_layout = 1, \
+> +       }
+> +
+> +static const struct qusb2_phy_init_tbl sm6115_init_tbl[] = {
+> +       QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE1, 0xf8),
+> +       QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE2, 0x53),
+> +       QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE3, 0x81),
+> +       QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE4, 0x17),
+> +
+> +       QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_TUNE, 0x30),
+> +       QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_USER_CTL1, 0x79),
+> +       QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_USER_CTL2, 0x21),
+> +
+> +       QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TEST2, 0x14),
+> +
+> +       QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_AUTOPGM_CTL1, 0x9f),
+> +       QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_PWR_CTRL, 0x00),
+> +};
+> +
+> +static const unsigned int sm6115_regs_layout[] = {
+> +       [QUSB2PHY_PLL_STATUS] = 0x38,     [QUSB2PHY_PORT_TUNE1] = 0x80,
+> +       [QUSB2PHY_PORT_TUNE2] = 0x84,     [QUSB2PHY_PORT_TUNE3] = 0x88,
+> +       [QUSB2PHY_PORT_TUNE4] = 0x8c,     [QUSB2PHY_PORT_TUNE5] = 0x90,
+> +       [QUSB2PHY_PORT_TEST1] = 0xb8,     [QUSB2PHY_PORT_TEST2] = 0x9c,
+> +       [QUSB2PHY_PORT_POWERDOWN] = 0xb4, [QUSB2PHY_INTR_CTRL] = 0xbc,
+> +};
+> +
+> +static const struct qusb2_phy_init_tbl qusb2_v2_init_tbl[] = {
+> +       QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_ANALOG_CONTROLS_TWO, 0x03),
+> +       QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_CLOCK_INVERTERS, 0x7c),
+> +       QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_CMODE, 0x80),
+> +       QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_LOCK_DELAY, 0x0a),
+> +       QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_DIGITAL_TIMERS_TWO, 0x19),
+> +       QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_BIAS_CONTROL_1, 0x40),
+> +       QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_BIAS_CONTROL_2, 0x20),
+> +       QUSB2_PHY_INIT_CFG(QUSB2PHY_PWR_CTRL2, 0x21),
+> +       QUSB2_PHY_INIT_CFG(QUSB2PHY_IMP_CTRL1, 0x0),
+> +       QUSB2_PHY_INIT_CFG(QUSB2PHY_IMP_CTRL2, 0x58),
+> +
+> +       QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE1, 0x30),
+> +       QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE2, 0x29),
+> +       QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE3, 0xca),
+> +       QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE4, 0x04),
+> +       QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE5, 0x03),
+> +
+> +       QUSB2_PHY_INIT_CFG(QUSB2PHY_CHG_CTRL2, 0x0),
+> +};
+> +
+> +static const unsigned int qusb2_v2_regs_layout[] = {
+> +       [QUSB2PHY_PLL_CORE_INPUT_OVERRIDE] = 0xa8,
+> +       [QUSB2PHY_PLL_STATUS] = 0x1a0,
+> +       [QUSB2PHY_PORT_TUNE1] = 0x240,
+> +       [QUSB2PHY_PORT_TUNE2] = 0x244,
+> +       [QUSB2PHY_PORT_TUNE3] = 0x248,
+> +       [QUSB2PHY_PORT_TUNE4] = 0x24c,
+> +       [QUSB2PHY_PORT_TUNE5] = 0x250,
+> +       [QUSB2PHY_PORT_TEST1] = 0x254,
+> +       [QUSB2PHY_PORT_TEST2] = 0x258,
+> +       [QUSB2PHY_PORT_POWERDOWN] = 0x210,
+> +       [QUSB2PHY_INTR_CTRL] = 0x230,
+> +};
+> +
+> +static const struct qusb2_phy_cfg sm6115_phy_cfg = {
+> +       .tbl = sm6115_init_tbl,
+> +       .tbl_num = ARRAY_SIZE(sm6115_init_tbl),
+> +       .regs = sm6115_regs_layout,
+> +
+> +       .has_pll_test = true,
+> +       .disable_ctrl = (CLAMP_N_EN | FREEZIO_N | POWER_DOWN),
+> +       .mask_core_ready = PLL_LOCKED,
+> +       .autoresume_en = BIT(3),
+> +};
+> +
+> +static const struct qusb2_phy_cfg qusb2_v2_phy_cfg = {
+> +       .tbl = qusb2_v2_init_tbl,
+> +       .tbl_num = ARRAY_SIZE(qusb2_v2_init_tbl),
+> +       .regs = qusb2_v2_regs_layout,
+> +
+> +       .disable_ctrl = (PWR_CTRL1_VREF_SUPPLY_TRIM | PWR_CTRL1_CLAMP_N_EN |
+> +                        POWER_DOWN),
+> +       .mask_core_ready = CORE_READY_STATUS,
+> +       .has_pll_override = true,
+> +       .autoresume_en = BIT(0),
+> +       .update_tune1_with_efuse = true,
+> +};
+> +
+> +/**
+> + * struct qusb2_phy - structure holding qusb2 phy attributes
+> + *
+> + * @phy: generic phy
+> + * @base: iomapped memory space for qubs2 phy
+> + *
+> + * @cfg_ahb_clk: AHB2PHY interface clock
+> + * @phy_rst: phy reset control
+> + *
+> + * @cfg: phy config data
+> + * @has_se_clk_scheme: indicate if PHY has single-ended ref clock scheme
+> + */
+> +struct qusb2_phy {
+> +       struct phy *phy;
+> +       void __iomem *base;
+> +
+> +       struct clk cfg_ahb_clk;
+> +       struct reset_ctl phy_rst;
+> +
+> +       const struct qusb2_phy_cfg *cfg;
+> +       bool has_se_clk_scheme;
+> +};
+> +
+> +static inline void qusb2_write_mask(void __iomem *base, u32 offset, u32 val,
+> +                                   u32 mask)
+> +{
+> +       u32 reg;
+> +
+> +       reg = readl(base + offset);
+> +       reg &= ~mask;
+> +       reg |= val & mask;
+> +       writel(reg, base + offset);
+> +
+> +       /* Ensure above write is completed */
+> +       readl(base + offset);
+> +}
 
-Glad to see these diff stats, FWIW:
+Function unused?
 
-Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
+> +
+> +static inline void qusb2_setbits(void __iomem *base, u32 offset, u32 val)
+> +{
+> +       u32 reg;
+> +
+> +       reg = readl(base + offset);
+> +       reg |= val;
+> +       writel(reg, base + offset);
+> +
+> +       /* Ensure above write is completed */
+> +       readl(base + offset);
+> +}
+> +
+> +static inline void qusb2_clrbits(void __iomem *base, u32 offset, u32 val)
+> +{
+> +       u32 reg;
+> +
+> +       reg = readl(base + offset);
+> +       reg &= ~val;
+> +       writel(reg, base + offset);
+> +
+> +       /* Ensure above write is completed */
+> +       readl(base + offset);
+> +}
+
+Any specific reason to not use setbits_le32() and clrbits_le32() her instead?
+
+> +
+> +static inline void qusb2_phy_configure(void __iomem *base,
+> +                                      const unsigned int *regs,
+> +                                      const struct qusb2_phy_init_tbl tbl[],
+> +                                      int num)
+> +{
+> +       int i;
+> +
+> +       for (i = 0; i < num; i++) {
+> +               if (tbl[i].in_layout)
+> +                       writel(tbl[i].val, base + regs[tbl[i].offset]);
+> +               else
+> +                       writel(tbl[i].val, base + tbl[i].offset);
+> +       }
+> +}
+> +
+> +static int qusb2phy_do_reset(struct qusb2_phy *qphy)
+> +{
+> +       int ret;
+> +
+> +       ret = reset_assert(&qphy->phy_rst);
+> +       if (ret)
+> +               return ret;
+> +
+> +       udelay(10);
+> +
+> +       ret = reset_deassert(&qphy->phy_rst);
+> +       if (ret)
+> +               return ret;
+> +
+> +       return 0;
+> +}
+> +
+> +static int qusb2phy_power_on(struct phy *phy)
+> +{
+> +       struct qusb2_phy *qphy = dev_get_priv(phy->dev);
+> +       const struct qusb2_phy_cfg *cfg = qphy->cfg;
+> +       int ret;
+> +       u32 val;
+> +
+> +       ret = qusb2phy_do_reset(qphy);
+> +       if (ret)
+> +               return ret;
+
+Do we really need to reset here? Wouldn't just
+reset_deassert(&qphy->phy_rst) be sufficient here instead?
 
 -Sumit
 
-> ---
-> base-commit: b145877c22b391a4872c875145a8f86f6ffebaba
-> change-id: 20240319-u-boot-of-upstream-46454fded5ea
+> +
+> +       /* Disable the PHY */
+> +       qusb2_setbits(qphy->base, cfg->regs[QUSB2PHY_PORT_POWERDOWN],
+> +                     qphy->cfg->disable_ctrl);
+> +
+> +       if (cfg->has_pll_test) {
+> +               /* save reset value to override reference clock scheme later */
+> +               val = readl(qphy->base + QUSB2PHY_PLL_TEST);
+> +       }
+> +
+> +       qusb2_phy_configure(qphy->base, cfg->regs, cfg->tbl, cfg->tbl_num);
+> +
+> +       /* Enable the PHY */
+> +       qusb2_clrbits(qphy->base, cfg->regs[QUSB2PHY_PORT_POWERDOWN],
+> +                     POWER_DOWN);
+> +
+> +       /* Required to get phy pll lock successfully */
+> +       udelay(150);
+> +
+> +       if (cfg->has_pll_test) {
+> +               val |= CLK_REF_SEL;
+> +
+> +               writel(val, qphy->base + QUSB2PHY_PLL_TEST);
+> +
+> +               /* ensure above write is through */
+> +               readl(qphy->base + QUSB2PHY_PLL_TEST);
+> +       }
+> +
+> +       /* Required to get phy pll lock successfully */
+> +       udelay(100);
+> +
+> +       val = readb(qphy->base + cfg->regs[QUSB2PHY_PLL_STATUS]);
+> +       if (!(val & cfg->mask_core_ready)) {
+> +               pr_err("QUSB2PHY pll lock failed: status reg = %x\n", val);
+> +               ret = -EBUSY;
+> +               return ret;
+> +       }
+> +
+> +       return 0;
+> +}
+> +
+> +static int qusb2phy_power_off(struct phy *phy)
+> +{
+> +       struct qusb2_phy *qphy = dev_get_priv(phy->dev);
+> +
+> +       /* Disable the PHY */
+> +       qusb2_setbits(qphy->base, qphy->cfg->regs[QUSB2PHY_PORT_POWERDOWN],
+> +                     qphy->cfg->disable_ctrl);
+> +
+> +       reset_assert(&qphy->phy_rst);
+> +
+> +       clk_disable(&qphy->cfg_ahb_clk);
+> +
+> +       return 0;
+> +}
+> +
+> +static int qusb2phy_clk_init(struct udevice *dev, struct qusb2_phy *qphy)
+> +{
+> +       int ret;
+> +
+> +       /* We ignore the ref clock as we currently lack a driver for rpmcc/rpmhcc where
+> +        * it usually comes from - we assume it's always on.
+> +        */
+> +       ret = clk_get_by_name(dev, "cfg_ahb", &qphy->cfg_ahb_clk);
+> +       if (ret == -ENOSYS || ret == -ENOENT)
+> +               return 0;
+> +       if (ret)
+> +               return ret;
+> +
+> +       ret = clk_enable(&qphy->cfg_ahb_clk);
+> +       if (ret) {
+> +               return ret;
+> +       }
+> +
+> +       return 0;
+> +}
+> +
+> +static int qusb2phy_probe(struct udevice *dev)
+> +{
+> +       struct qusb2_phy *qphy = dev_get_priv(dev);
+> +       int ret;
+> +
+> +       qphy->base = (void __iomem *)dev_read_addr(dev);
+> +       if (IS_ERR(qphy->base))
+> +               return PTR_ERR(qphy->base);
+> +
+> +       ret = qusb2phy_clk_init(dev, qphy);
+> +       if (ret) {
+> +               printf("%s: Couldn't get clocks: %d\n", __func__, ret);
+> +               return ret;
+> +       }
+> +
+> +       ret = reset_get_by_index(dev, 0, &qphy->phy_rst);
+> +       if (ret) {
+> +               printf("%s: Couldn't get resets: %d\n", __func__, ret);
+> +               return ret;
+> +       }
+> +
+> +       qphy->cfg = (const struct qusb2_phy_cfg *)dev_get_driver_data(dev);
+> +       if (!qphy->cfg) {
+> +               printf("%s: Couldn't get driver data\n", __func__);
+> +               return -EINVAL;
+> +       }
+> +
+> +       debug("%s success qusb phy cfg %p\n", __func__, qphy->cfg);
+> +       return 0;
+> +}
+> +
+> +static struct phy_ops qusb2phy_ops = {
+> +       .power_on = qusb2phy_power_on,
+> +       .power_off = qusb2phy_power_off,
+> +};
+> +
+> +static const struct udevice_id qusb2phy_ids[] = {
+> +       { .compatible = "qcom,qusb2-phy" },
+> +       { .compatible = "qcom,qcm2290-qusb2-phy",
+> +         .data = (ulong)&sm6115_phy_cfg },
+> +       { .compatible = "qcom,sm6115-qusb2-phy",
+> +         .data = (ulong)&sm6115_phy_cfg },
+> +       { .compatible = "qcom,qusb2-v2-phy", .data = (ulong)&qusb2_v2_phy_cfg },
+> +       {}
+> +};
+> +
+> +U_BOOT_DRIVER(qcom_qusb2_phy) = {
+> +       .name = "qcom-qusb2-phy",
+> +       .id = UCLASS_PHY,
+> +       .of_match = qusb2phy_ids,
+> +       .ops = &qusb2phy_ops,
+> +       .probe = qusb2phy_probe,
+> +       .priv_auto = sizeof(struct qusb2_phy),
+> +};
 >
-> Best regards,
 > --
-> Neil Armstrong <neil.armstrong@linaro.org>
+> 2.44.0
 >
