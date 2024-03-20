@@ -4,89 +4,135 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6180AC54E58
-	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 13:18:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BEB0C54E58
+	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 13:19:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CFE3A87E93;
-	Wed, 20 Mar 2024 14:18:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6983287F64;
+	Wed, 20 Mar 2024 14:19:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=weidmueller.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="De0Ih/py";
+	dkim=pass (1024-bit key; unprotected) header.d=weidmueller.onmicrosoft.com header.i=@weidmueller.onmicrosoft.com header.b="YgXD+0vj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88D2387F8F; Wed, 20 Mar 2024 14:18:40 +0100 (CET)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 76BA68800B; Wed, 20 Mar 2024 14:19:41 +0100 (CET)
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com
+ (mail-db8eur05on2072c.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7e1a::72c])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E43987E47
- for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 14:18:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A24FC87E47
+ for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 14:19:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
+ header.from=weidmueller.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-33ed7ba1a42so2644642f8f.2
- for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 06:18:38 -0700 (PDT)
+ spf=pass smtp.mailfrom=Lukas.Funke-oss@weidmueller.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=S2NDYbtuVG577HIPHtW9/ujJrCOh9swtRc1AvHpMBGaBjrgZoFh+AtHrMbjIeasCAoxgue8XgXU3xruGpgrM+2veRF9M/+/oppUSetEvkL+GsMznIqMs2u7xXoJfGFraLe5pl9BPrb9qmvh6ZPvPHc44eo1NvsuJACKF0NvcZ0Ouotyst0+HKdw6YA0/VnFdOwVA6pCQF5O8AmCQ7vj1NBb0CGQoqJRq7+jQYjJ3OAnMWYr/frxhobqYhL6HBCtFMXlgtdsRkRBAgzMv90nFL+JANHDSg8bFccdDD34eAXMN/bARuGj3iuB2YlW847bzy3q56tfA87gxL9kWy8nUBA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=DuIAWhsX/6T8cmd2KLeb5F9CcrMkqoPS2bz1dG7TKOE=;
+ b=J0swUB5FkiwKgfePadnmwshOz6jyumTm7oJ1ADxzwDKjhIMiwG7cHte+QQjvYl+/SYVNj43tVLjJNjCWgXvs6QO0aLgSlGVEWZJR7yhnhA7daKWpNANcJQbjGqMA89WqYtNG1H7WICk0uSeBZPr1bRN9UytzlEa39j5uW/nOwT0qU8uYMatbmU9XyAl26YEapjGTwqhDZby0cnXSbC+Yatd/tS9Jda55Pmr811Ua02FMdD+yb6iNeV6oMTfIpeY932smWKtHkRzk0MndzpfsrL2hy3+gFC/RgcjQ3w3tfKFeyXYCsWQ6gJpjkCtbqqk2Jogs/+SbwJD5UOstPGc8og==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=weidmueller.com; dmarc=pass action=none
+ header.from=weidmueller.com; dkim=pass header.d=weidmueller.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710940717; x=1711545517; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=+7TrFenuV7jJVGnPNR9JtTBKPzon1DuXaq8dhr8Joq4=;
- b=De0Ih/pyvA8OWNBH5tcTWWbB7NVRcomYz7LiFdjuEwzKTNFddfu2zY9EIHZE1kjEL3
- Wr+FgE5FbHCVFmy2i1985ERUuSX1yh0TVzfsvUl8pVCDn/7DxKCMA4pxykew7xIxRHlp
- FFocRbhBF8bZifmUAwAhHpZYLOdXxlAS7c0w0fZLR0M+9wODiXI5rbW6KIfGNrjhIafT
- GEkywkpvVZ5OO3QRLMaUK3FKRxGVqoh2NkYB9qotN6fMyahXRS/XsFlB9vkES6t/CYt2
- VVdvvxSGAhHlR5MScxrDc5ufpgwJ2V/s+DUC7E/RQ7t66WzGT48vXjNLFU9ZPNol/mEk
- dPlA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710940717; x=1711545517;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=+7TrFenuV7jJVGnPNR9JtTBKPzon1DuXaq8dhr8Joq4=;
- b=vFHCR4arPUdoXDDkd013mAzaG4979Kxxvjw+J7Sx6GGX0GS2H89zAEWWpHFeFWIFJ7
- Aeftjo7lJbdurpYcCJ3y3ZH9BOKCUlAez6PA5CJ7Inbd0pltiSrqJLLXvCQzOJ4Pq5VV
- tznuMNwtoWncDv1FwFScDrsKyn5hTg2dCLRCu+XYIKqNYoO9ih2ImgunaCMaVCpUB5Sh
- a8FkRS8ETgzaxA47zETX55zchwpdJJiZPxLABvBvC6aeXPpQHm14J5U1wzqxToZXAzPA
- I3eiD4RDVqHWyH3ZH1/XEXqWs1DtrIVNRr0TGDb0trFBL7MEphpsGdydliAzeGjVxss2
- daRw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVBQEj0r1Uy8geqUfTYhrgWwHqfHmFyfgtP9Coa6tv+yjjD7CedYAImwsXSSmEMNA4jo9AUvZw+9eSz6ydQf2kx80bwJA==
-X-Gm-Message-State: AOJu0YyNRgNJ0IOQ69pkgpixSovypBdbU8Q24TEapHZuVg7OJYYzkv0k
- i2MolbwBVCGalO8AKhxlWUtAOzzPMo5YQrVui0QZbqkTM8NAwGewjOnvdMf6aaU=
-X-Google-Smtp-Source: AGHT+IFGGDtFckSMkTJJmMhu3eWstOYnBp2xjQ2K4VxIhS+Q5XtMbQsrgfoswy6sqnsIob3DBC3Uyw==
-X-Received: by 2002:a05:6000:711:b0:341:6b6d:ec34 with SMTP id
- bs17-20020a056000071100b003416b6dec34mr5549858wrb.46.1710940717491; 
- Wed, 20 Mar 2024 06:18:37 -0700 (PDT)
-Received: from [192.168.1.78] (host-92-17-96-232.as13285.net. [92.17.96.232])
- by smtp.gmail.com with ESMTPSA id
- i9-20020a5d6309000000b0033e0dd83be1sm14487016wru.91.2024.03.20.06.18.36
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 20 Mar 2024 06:18:36 -0700 (PDT)
-Message-ID: <c18deb5b-d4a2-4270-927c-627a980016ba@linaro.org>
-Date: Wed, 20 Mar 2024 13:18:36 +0000
+ d=weidmueller.onmicrosoft.com; s=selector1-weidmueller-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=DuIAWhsX/6T8cmd2KLeb5F9CcrMkqoPS2bz1dG7TKOE=;
+ b=YgXD+0vj78PfCkWNotrcKG3T3H3Oz0LcL7ckxRt2nhPoFLejfzoi/mep7bctVuK1rtyOBEMF6neIWXToNfjCn6Eak62iffUMd8HlpDMEoB2liZ3B+f+g02SzRG+6PQFUjZPEpgTXDWQM38GUEtibmr4xxcVMbMA02BEwsqpjA18=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=weidmueller.com;
+Received: from AS2PR08MB8431.eurprd08.prod.outlook.com (2603:10a6:20b:55a::18)
+ by GVXPR08MB7797.eurprd08.prod.outlook.com (2603:10a6:150:5::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7386.26; Wed, 20 Mar
+ 2024 13:19:37 +0000
+Received: from AS2PR08MB8431.eurprd08.prod.outlook.com
+ ([fe80::d003:60c0:6918:8a5]) by AS2PR08MB8431.eurprd08.prod.outlook.com
+ ([fe80::d003:60c0:6918:8a5%6]) with mapi id 15.20.7386.031; Wed, 20 Mar 2024
+ 13:19:36 +0000
+From: lukas.funke-oss@weidmueller.com
+To: u-boot@lists.denx.de
+Cc: Lukas Funke <lukas.funke@weidmueller.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Andre Przywara <andre.przywara@arm.com>, Andrew Davis <afd@ti.com>,
+ Bin Meng <bmeng@tinylab.org>, Chanho Park <chanho61.park@samsung.com>,
+ =?UTF-8?q?Cs=C3=B3k=C3=A1s=20Bence?= <csokas.bence@prolan.hu>,
+ Devarsh Thakkar <devarsht@ti.com>, Fabio Estevam <festevam@denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Linus Walleij <linus.walleij@linaro.org>,
+ Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Michal Simek <michal.simek@amd.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Samuel Holland <samuel@sholland.org>, Sean Anderson <seanga2@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Yang Xiwen <forbidden405@outlook.com>
+Subject: [PATCH 0/2] Introduce spl_arch_init() for architecture specific
+ initialization
+Date: Wed, 20 Mar 2024 14:19:25 +0100
+Message-Id: <20240320131928.1836386-1-lukas.funke-oss@weidmueller.com>
+X-Mailer: git-send-email 2.30.2
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: FR2P281CA0101.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:9c::7) To AS2PR08MB8431.eurprd08.prod.outlook.com
+ (2603:10a6:20b:55a::18)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 8/8] board: add support for Qualcomm SA8155P-ADP board
-Content-Language: en-US
-To: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Cc: Sumit Garg <sumit.garg@linaro.org>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
-References: <20240306005230.2638972-1-volodymyr_babchuk@epam.com>
- <20240306005230.2638972-9-volodymyr_babchuk@epam.com>
- <CAFA6WYNWxHU4W0xrTC=mQJbP49hFMm56fbz1isd0xNNQ_VdVSw@mail.gmail.com>
- <87jzmf2mvi.fsf@epam.com> <e5e47988-c617-48a0-a10a-e37edb9a8267@linaro.org>
- <87y1av12bg.fsf@epam.com> <0cda2608-856f-4650-92a6-4860a0d7c8b6@linaro.org>
- <87edcg1vcp.fsf@epam.com> <b8774081-dd8f-4154-9c39-0c0b5fd48adb@linaro.org>
- <874jdc1qbg.fsf@epam.com> <87jzlxzzrb.fsf@epam.com>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <87jzlxzzrb.fsf@epam.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS2PR08MB8431:EE_|GVXPR08MB7797:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6a2b54f5-50cd-49cd-1a2f-08dc48e063fc
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: VR2ohd6uchXAPJ+suw99mxA4ci2O890xhOFn9fNkylbH+sCz+ndsrm9sJEt+CA2+KHBXS6s+QMUh45fQbFz9jwe1lIBL3uU4K5KZlF7KiCHuRKqwrFw7Sjf9b4oZoanbxjUs9NLTzvJ7hsher8pltcpzTa9YMNjc8ZjPKgZ4PDnGXA/LFl+bwes9/9IB2muRLFFeqKRnoozh23/4BjMiDyRIOWUjNvjwF8HtvId4rD3TozN0L42sGjbM7LVc1tK/rnYNUeUhGM3rWVIzUH5aXjYo3zbbvE9OVdfXLuPIzDdQqzoD13+mxip6ZiNY07ZR+BAArzCqntLHJ5+vaSQnVEfs6SfdQxbXSQecvroNLNS6nqGVH/LtZ6nbFoE8NcmCx7hpRDnzKqRmVNBaH4hp1RZJakHPLJKMgGcluMWVvi2Eq9cc4VOs7ak90444AOYwp8j/mja3pdQjLNgU57ELgr4WmqeUNWeIQkAEmwHQTPvNVxBw0icV5044W0W3QDdm68Zr8DQWLTxGorux5rEy6hcUSJD6bQz8opV0X4vnC+6CW2KMug9Pg1n6uNeAuuE16cYXJgYq6v+U91JPnvNi/gpDfiTWkr9x1F513XhNK3rOBtH/oUEVtNK/nxBL0G6wjwzd0Qp26yBWrQvhRSutHBR5u3mebbxdG1WDIqy8Fp1eB+jd70DC3Yg2Z56aOzVV5SBK4mDibRQTb1HqX+YzpVIrNdiJjBYkKleIlD0TIrw=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS2PR08MB8431.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(1800799015)(52116005)(7416005)(376005)(366007)(38350700005);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Vb2jVomfXuqQ2FF68KYmDnZPXYLfAwSRk+9of6sTYhLZBH53JnwMizADanyL?=
+ =?us-ascii?Q?Y98+d7DHUmxkX4AN10bQ6wW5j5yNqyzaMrypZm4qfd6QqqJ2n17ShtBV7iNz?=
+ =?us-ascii?Q?rDZR/dtfS96k30MHbYw25HQZrt21ZnxItEP7jgrjKfp3EYzjPS9JkS4c8+9/?=
+ =?us-ascii?Q?qeOqT3a5kxi/7pbimzzOIFZR+pvZu0oe6bXSNPELVneuRky+lNPzOLjL2ALK?=
+ =?us-ascii?Q?4YoScgbcK9vTZEcxBRjDoAoTMCW1YRsPCh4+eOrnQlnc21PxT9fNPGBxj0kg?=
+ =?us-ascii?Q?MuX8X/CwdgS4pmtQo1zOISYv4VX3WuVusNpsUc84dajqRNxo9N80hbf8B1D0?=
+ =?us-ascii?Q?MqaPyZgVgOzWNWL8WzIKDpJiuj6CQW84Ytgm6idRdvowCn0z4+Cj/JRiPaIY?=
+ =?us-ascii?Q?F0RbVI4631fOz9e9VRS4/kXmAfQQhAIPLkIgoEovj6Yq4nl4hSgqU7tzC8bH?=
+ =?us-ascii?Q?7yxqRtQnX2CWK55w5ThefKTNyWhQtZxNDO3zFvZju+J+BcZPFKIrlXUzgHmY?=
+ =?us-ascii?Q?sBEO5ROa1GlE31geK8zqDMW/sxtSJZuSff74k25ekmCnPvEWLD7DJINR1doE?=
+ =?us-ascii?Q?KAc8ICsg+G9klrsgjLaZ8xaW9ee/7fDhWKQdBjeJpPLsZTjQAGh0pLjq0gUV?=
+ =?us-ascii?Q?7xmZrIn2O6ZLa1gQaeSGOHqkpwlozQCPYfmXk1c3wSeEjDiTT0xOD+2jCLcT?=
+ =?us-ascii?Q?PFsBqu9O52S371VBDcwW09Q4p3Is8F9C/RTJ/p9wQ4Fzr163k/DwZCGSDwgx?=
+ =?us-ascii?Q?VRg5go0Wz+mi+g3xdwp6Ke/CongkfUiNfAgYwpuKzjdO5OKSngHdikIE+0QW?=
+ =?us-ascii?Q?HkdvkaBifPsds3scryCn76BOdNWn1yNe1A/VssZx9tQsY8W4a0vzaV5zxn0Z?=
+ =?us-ascii?Q?gAZal9oWTpMDBIXdXMXTSAnzG2Ykh+0IJKi4RIyoYkNK1gzHr0vSRH3n+N6/?=
+ =?us-ascii?Q?TBvHZwoSwGQ5edusEdp9mDjHZBok15Nl5CW0vTMtF9H7z5ioeZt2rV7B3pCU?=
+ =?us-ascii?Q?k4OO6vi/UGLpexAeM4CwQ4HQt3aQDCvgifpZ48xZ5fLKeMAwMd50q0bsCxMB?=
+ =?us-ascii?Q?8QjMwDz6P6qmOKfokmeGP6IHlXndyRyB6gj7IMQ4a2EEYzEBrgpPc10hozlb?=
+ =?us-ascii?Q?CDO4XTR2kTFCtbQovQFaIVWA7+r3V51aXEgC/pRLI0BoHwGWLPc5aTrK78gL?=
+ =?us-ascii?Q?lqcbTv7Z9jxoVthYVvH2OCHq5MiKOWkVlGV9qSW10WGtsgxp6eYZqNMLsf/n?=
+ =?us-ascii?Q?vaRPKizCOs38PGZ2B+5MmNUXoSajFQNm8UWZTy6eEcBgeXFQrOfm6pyYWzFM?=
+ =?us-ascii?Q?wdrmgjK96s31BteXp5Rvf7Oeo3RU5M6BabEx9OWxOVGYQZuUF5lbDU+d6oUG?=
+ =?us-ascii?Q?erMfDbclGoAZW2CMNnfqLU0fHx06/MKFufMGWpBffgpWTtF+IPmbjzejlEGZ?=
+ =?us-ascii?Q?6+By3orptqQZiOilvp14A8GOGwWQ/EWk/+6KUJEY9sNQdJnAUWGJdaad0f/1?=
+ =?us-ascii?Q?NTFVdA9MM0xtQOsGvf6n725hZWkKqaHjSMoEQEpqqohwkuFUhFRpzWa8hA+u?=
+ =?us-ascii?Q?y01JhGHzEKt9u+wMjLh4mWP7jTgokZ9ES7C+Ynx+adqLlBgMM64NR81bq9Qq?=
+ =?us-ascii?Q?dA=3D=3D?=
+X-OriginatorOrg: weidmueller.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6a2b54f5-50cd-49cd-1a2f-08dc48e063fc
+X-MS-Exchange-CrossTenant-AuthSource: AS2PR08MB8431.eurprd08.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Mar 2024 13:19:36.8460 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: e4289438-1c5f-4c95-a51a-ee553b8b18ec
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 9M5PyKtDCOWQ0DcnS4U+Rtt827VHXV4ohQsWcIc5Wj/I5Lb7qki/ig1RWZBs+DTb5meQ/Sl5+QqgAk48Jn/2PA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR08MB7797
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,151 +149,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Lukas Funke <lukas.funke@weidmueller.com>
 
 
-On 19/03/2024 21:18, Volodymyr Babchuk wrote:
-> 
-> Hi,
-> 
-> Volodymyr Babchuk <volodymyr_babchuk@epam.com> writes:
-> 
->> Caleb Connolly <caleb.connolly@linaro.org> writes:
->>
->>> On 11/03/2024 18:23, Volodymyr Babchuk wrote:
->>>> Hi Caleb,
->>>> Caleb Connolly <caleb.connolly@linaro.org> writes:
->>>>
->>>>> On 06/03/2024 21:24, Volodymyr Babchuk wrote:
->>>>>>
->>>>>> Hi Caleb,
->>>>>>
->>>>>> Caleb Connolly <caleb.connolly@linaro.org> writes:
->>>>>>
->>>>>> [...]
->>>>>>>>>> +};
->>>>>>>>>> +
->>>>>>>>>> +&tlmm {
->>>>>>>>>> +       /* U-Boot pinctrl driver does not understand multiple tiles */
->>>>>>>>>> +       reg = <0x0 0x03000000 0x0 0x1000000>;
->>>>>>>>>> +       /delete-property/ reg-names;
->>>>>>>>>
->>>>>>>>> This won't be needed if we can make the tiles offset in the pinctrl
->>>>>>>>> driver compatible:
->>>>>>>>>
->>>>>>>>> #define WEST   0x00000000
->>>>>>>>> #define EAST   0x00400000
->>>>>>>>> #define NORTH  0x00800000
->>>>>>>>> #define SOUTH  0x00C00000
->>>>>>>>
->>>>>>>> Hmm, I assume that in this case pinctrl driver should map all the four
->>>>>>>> tiles independently? Are there guarantees in U-Boot that four separate
->>>>>>>> memory regions will be mapped into virtual memory with the same relative
->>>>>>>> positions? Linux clearly don't make such guarantees.
->>>>>>>
->>>>>>> U-Boot doesn't use virtual addresses on arm platforms, it only goes as
->>>>>>> far as reading the address from DT, nothing else, so this is totally
->>>>>>> fine and is how the other SoCs do it.
->>>>>>
->>>>>> For me it looks like we are depending on implementation details
->>>>>> knowledge. I.e MMU API does not provide such guarantees, but drivers
->>>>>> know how ARM MMU code is working internally and drivers depend on
->>>>>> exactly this behavior. But if you are saying that it is totally fine,
->>>>>> I'll rework the patch. No big deal. Actually, I already tried this and
->>>>>> it is working fine.
->>>>>>
->>>>>>>>>> +
->>>>>>>>>> +       /* U-Boot ethernet driver wants to drive reset as GPIO */
->>>>>>>>>> +       /delete-node/ phy-reset-pins;
->>>>>>>>>
->>>>>>>>> I suppose this is not needed as phy-reset-pins also configures the pin
->>>>>>>>> as GPIO only.
->>>>>>>>>
->>>>>>>> Well, yes. This also puzzles me up, but for some reason it stops working
->>>>>>>> if I leave this node intact. Looks like I need to look at this deeper
->>>>>>>> before posting the next version.
->>>>>>>
->>>>>>> Possibly the pinconf defined in the phy-reset-pins node causes U-Boot to
->>>>>>> misbehave, can you check if this patch fixes it (there is a bug in the
->>>>>>> line "return msm_gpio_direction_input(dev, gpio);", it should become
->>>>>>> just "msm_gpio_direction_input(dev, gpio);").
->>>>>>>
->>>>>>> I had the exact same issue with the gpio-regulator driver and this was
->>>>>>> the solution I ended up going with.
->>>>>>>
->>>>>>> https://urldefense.com/v3/__https://lore.kernel.org/u-boot/20240131-b4-qcom-livetree-v1-7-4071c0787db0@linaro.org/__;!!GF_29dbcQIUBPA!xFhZe7DKgRbr63sirEJLuH-B0AnGs7jvx8tdJPKLTgFuZ3I3_zpVml7l23G-_vJO_JiUR-wUO4GMPJFcE-8p50H3pf7nbxit$
->>>>>>> [lore[.]kernel[.]org]
->>>>>>
->>>>>> It is exactly this. With your patch I don't need to /delete-node/
->>>>>> anymore. I'll add a comment in the cover message that this series are
->>>>>> depended on your patch.
->>>>>
->>>>> Please can you split the power domain and clock patches into a separate
->>>>> series? As I'd like to depend on them for the next revision of my
->>>>> series, and we'd otherwise have a cyclical dependency.
->>>> Of course.
->>>> As I understood, you are interested in "clk: qcom: clear div mask
->>>> before
->>>> assigning a new divider" and "clk: qcom: add support for power domains
->>>> uclass", correct?
->>>
->>> Yes.
->>
->> Okay, I'll send it today.
->>
->>> I tried the power domain stuff out on SMD845 today and ran into
->>> quite a few issues. Specifically as a lot of the devices reference the
->>> rpmhpd power domain which we don't support (and don't *need* to
->>> support) in U-Boot. I'm not sure what the best way forward will be for
->>> this. Maybe a "nop" power domain driver?
->>
->> Are you sure that they are not required?
->>
->> "nop" power domain always is the option. Especially if it prints some
->> warning about an unknown device. I had quite a lot of issues with clock and
->> pin drivers that silently ignore unknown devices...
->>
->>> Do you have the same issues on sm8150?
->>
->> Yes and no. No, because I was lucky so far and devices I tried to use in
->> U-Boot does not require rpmhpd. Looking at DTS, I may only encounter
->> issues with sdhc_2, which requires rpmhpd for some reason. Also UFS
->> requires clock from rpmhcc.
->>
->> And "yes", because I have found root cause for my troubles with UFS in
->> Linux kernel, when I am skipping hyp.mbn. This is not strictly related
->> to U-Boot, but you may be interested in this: apparently Qualcomm's
->> hypervisor enables access to RPM (maybe brings it out of reset?). cmd-db
->> shared memory region can't be accessed if I skip the hypervisor and try
->> to boot directly into Linux. So now I am looking for ways to enable it.
-> 
-> I want to share the solution, in case if someone got the same
-> problem. It all boiled down to correct memory attributes. Qualcomm's
-> hypervisor mapped cmd-db shared memory as non-cached in Stage 2
-> translation table, while Linux maps it as cacheable in Stage 1. Thus,
-> the final memory attribute was "non-cacheable".
-> 
-> Xen, on other hand, used default mapping which is normal cacheable
-> memory. And of course this lead to cacheable accesses to cmd-db. For
-> some reason this caused the hardware error, which manifested as a secure
-> interrupt (while I expected SError at most), which in turn led to
-> endless loop somewhere in TZ.
+Currently some architectures use spl_board_init() for their architecture
+specific initialization. This prohibits board developers from adding
+board init code using said function. This series introduces a new
+function in order to separate arch init code from board init code.
 
-ohh, nice find! I guess if Linux started sending bogus data to the rpmh
-this could definitely lead to some XPU violation or another excuse for a
-secure interrupt...
-> 
-> I am going to fix this by applying the correct mappings in the Linux
-> cmd-db driver. Plan B is to have workaround in Xen, but I really want to
-> avoid this.
 
-I agree this is definitely a Linux bug, it should make sense to fix it
-there.
-> 
-> Right now I have a working Xen that is able to boot Dom0 straight to
-> console, if anyone interested.
 
-Awesome! Yeah I'd love to take a look :D
-> 
+Lukas Funke (2):
+  spl: Introduce architecture specific init function
+  arm64: zynq(mp): Rename spl_board_init() to spl_arch_init()
+
+ arch/arm/Kconfig           | 4 ++--
+ arch/arm/mach-zynq/spl.c   | 4 ++--
+ arch/arm/mach-zynqmp/spl.c | 4 ++--
+ common/spl/Kconfig         | 7 +++++++
+ common/spl/spl.c           | 3 +++
+ include/spl.h              | 8 ++++++++
+ 6 files changed, 24 insertions(+), 6 deletions(-)
 
 -- 
-// Caleb (they/them)
+2.30.2
+
