@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDB88C54E58
-	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 09:02:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 296E9C54E58
+	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 09:03:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A63E880F5;
-	Wed, 20 Mar 2024 10:02:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 61A6E8810D;
+	Wed, 20 Mar 2024 10:02:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="kFGdrJB3";
+	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="hTjGrYsd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1FB728810B; Wed, 20 Mar 2024 10:02:25 +0100 (CET)
+ id 22DF7880F3; Wed, 20 Mar 2024 10:02:25 +0100 (CET)
 Received: from mail.thorsis.com (mail.thorsis.com [92.198.35.195])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 38A08880F3
+ by phobos.denx.de (Postfix) with ESMTPS id 3C2B6880F5
  for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 10:02:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=thorsis.com
@@ -30,22 +30,21 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=default;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=efMsFIjDe4mFH75GGE536Tk0D9utILqQhNPvrW9+T1A=;
- b=kFGdrJB3YR7hXA67lcX7znCgtnupBtxydlNKA4tR/vnaiwHEhJ3vlCQxJEqN3gw++h1h+/
- 8ll9B6lY+VA/l/U0zccqvLL94l+oMFaeW4gym13XKxbGzAwGywvt5UAETyXb0HcyPgBsyv
- 66CvWed1OPFkKrHGkz5HIdhW0i9gxBQpe/UfpeBQwB7i1cq6D8D5PJVSfbG3SDDMGYLGbR
- tZkbHn34GeWVMBTzcSOmMR4X+7DUmUgXAxbB8GPOSX2ebUOlbBoYA87sloE9MzEfKIFTGE
- dMQQ5i53HB6UDcCgSaDJZvBWLtlLNLjmVH9Akf6av2iJmkOvQn7+y7qrz17OOQ==
+ bh=V4gMbSc+6LwaLGTex8nPMCmhhYHBPxi/bScfNOgguj0=;
+ b=hTjGrYsdpBWdBPow4LPqHIvYayvicAOn2XTiSXPv3zXEM5BmiwgZafkohqgdoN5q8f/ARC
+ QUGWgZUZ4muvUkz2Oy/0t5HJAKOJYwPV8DV9tdBya0zTykuR1vihdNAhwseKApOWDDK1sL
+ 1DdTdS7hAUHeX49ywqFFC2IMQtEU44zqUEBSorcpmU3ahlNeMjM/ZhkqG2PI1/ruusk/3R
+ b/glqactctrxpYxF0IWXZZrMSSkOA8brqiGNBrLJGexNfC1deiDhCS6owPZMDtAH57ZK8n
+ i6SOfs/HfQV0Kr85a3ucwHWzu3d9hrPqi0JdbIHeEkWFZXF59ZLwJs4lx1xtcg==
 To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  Michael Trimarchi <michael@amarulasolutions.com>
 Cc: Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>,
  Eugen Hristev <eugen.hristev@collabora.com>,
  Mihai Sain <mihai.sain@microchip.com>, Li Bin <bin.li@microchip.com>,
  u-boot@lists.denx.de
-Subject: [PATCH v2 1/6] mtd: nand: raw: Use macro nand_to_mtd() where
- appropriate
-Date: Wed, 20 Mar 2024 10:02:09 +0100
-Message-Id: <20240320090214.40465-2-ada@thorsis.com>
+Subject: [PATCH v2 2/6] mtd: nand: raw: Port another option flag from Linux
+Date: Wed, 20 Mar 2024 10:02:10 +0100
+Message-Id: <20240320090214.40465-3-ada@thorsis.com>
 In-Reply-To: <20240320090214.40465-1-ada@thorsis.com>
 References: <20240320090214.40465-1-ada@thorsis.com>
 Content-Transfer-Encoding: 8bit
@@ -65,9 +64,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In every other place in this file the macro is used, make it consistent.
+Introduced in upstream Linux with commit 7a08dbaedd365 for release v5.0.
 
-Fixes: 9d1806fadc24 ("mtd: nand: Get rid of mtd variable in function calls")
+When the new atmel nand driver was backported to U-Boot with commit
+6a8dfd57220d ("nand: atmel: Add DM based NAND driver") that definition
+was added to the driver instead of the header file.  Move it over to the
+other definitions with the same help text it has in Linux.
+
+Code actually using this has not been ported over to raw nand base yet.
+
 Signed-off-by: Alexander Dahl <ada@thorsis.com>
 Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
 ---
@@ -79,40 +84,41 @@ Notes:
     v2:
     - collected tags
 
- drivers/mtd/nand/raw/nand_base.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ drivers/mtd/nand/raw/atmel/nand-controller.c | 2 --
+ include/linux/mtd/rawnand.h                  | 7 +++++++
+ 2 files changed, 7 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/mtd/nand/raw/nand_base.c b/drivers/mtd/nand/raw/nand_base.c
-index c40a0f23d7b..688d17ba3c2 100644
---- a/drivers/mtd/nand/raw/nand_base.c
-+++ b/drivers/mtd/nand/raw/nand_base.c
-@@ -4118,7 +4118,7 @@ static int nand_get_bits_per_cell(u8 cellinfo)
-  */
- void nand_decode_ext_id(struct nand_chip *chip)
- {
--	struct mtd_info *mtd = &chip->mtd;
-+	struct mtd_info *mtd = nand_to_mtd(chip);
- 	int extid;
- 	/* The 3rd id byte holds MLC / multichip data */
- 	chip->bits_per_cell = nand_get_bits_per_cell(chip->id.data[2]);
-@@ -4185,7 +4185,7 @@ static int nand_manufacturer_init(struct nand_chip *chip)
-  */
- static void nand_decode_id(struct nand_chip *chip, struct nand_flash_dev *type)
- {
--	struct mtd_info *mtd = &chip->mtd;
-+	struct mtd_info *mtd = nand_to_mtd(chip);
+diff --git a/drivers/mtd/nand/raw/atmel/nand-controller.c b/drivers/mtd/nand/raw/atmel/nand-controller.c
+index 0e0441472b8..e06523f3298 100644
+--- a/drivers/mtd/nand/raw/atmel/nand-controller.c
++++ b/drivers/mtd/nand/raw/atmel/nand-controller.c
+@@ -1429,8 +1429,6 @@ static int atmel_nand_setup_data_interface(struct mtd_info *mtd, int csline,
+ 	return nc->caps->ops->setup_data_interface(nand, csline, conf);
+ }
  
- 	mtd->erasesize = type->erasesize;
- 	mtd->writesize = type->pagesize;
-@@ -4265,7 +4265,7 @@ static const struct nand_manufacturer *nand_get_manufacturer_desc(u8 id)
- int nand_detect(struct nand_chip *chip, int *maf_id,
- 		int *dev_id, struct nand_flash_dev *type)
+-#define NAND_KEEP_TIMINGS       0x00800000
+-
+ static void atmel_nand_init(struct atmel_nand_controller *nc,
+ 			    struct atmel_nand *nand)
  {
--	struct mtd_info *mtd = &chip->mtd;
-+	struct mtd_info *mtd = nand_to_mtd(chip);
- 	const struct nand_manufacturer *manufacturer_desc;
- 	int busw, ret;
- 	u8 *id_data = chip->id.data;
+diff --git a/include/linux/mtd/rawnand.h b/include/linux/mtd/rawnand.h
+index fb002ae6411..4abaf4734cf 100644
+--- a/include/linux/mtd/rawnand.h
++++ b/include/linux/mtd/rawnand.h
+@@ -249,6 +249,13 @@ enum nand_ecc_algo {
+  */
+ #define NAND_USE_BOUNCE_BUFFER	0x00100000
+ 
++/*
++ * Do not try to tweak the timings at runtime. This is needed when the
++ * controller initializes the timings on itself or when it relies on
++ * configuration done by the bootloader.
++ */
++#define NAND_KEEP_TIMINGS	0x00800000
++
+ /* Options set by nand scan */
+ /* bbt has already been read */
+ #define NAND_BBT_SCANNED	0x40000000
 -- 
 2.39.2
 
