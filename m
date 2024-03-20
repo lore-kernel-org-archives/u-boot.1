@@ -4,70 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 152B4C54E71
-	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 01:17:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC8CCC54E71
+	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 01:19:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 21CD287F13;
-	Wed, 20 Mar 2024 02:17:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=timesys.com
+	by phobos.denx.de (Postfix) with ESMTP id 175D187F8E;
+	Wed, 20 Mar 2024 02:19:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=timesys-com.20230601.gappssmtp.com header.i=@timesys-com.20230601.gappssmtp.com header.b="ZhRRPzJz";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="E8W31uAN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E59F688076; Wed, 20 Mar 2024 02:11:32 +0100 (CET)
-Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
- [IPv6:2607:f8b0:4864:20::112a])
+ id 25BEC87ECD; Wed, 20 Mar 2024 02:19:00 +0100 (CET)
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [IPv6:2607:f8b0:4864:20::112b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D551287513
- for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 02:11:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7BFFC88076
+ for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 02:18:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=timesys.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=greg.malysa@timesys.com
-Received: by mail-yw1-x112a.google.com with SMTP id
- 00721157ae682-609f060cbafso74132497b3.0
- for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 18:11:29 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-6098b9ed2a3so58376407b3.0
+ for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 18:18:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=timesys-com.20230601.gappssmtp.com; s=20230601; t=1710897088; x=1711501888;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ULB7ni1VXOd7terdK83M6yRrhxsVzX193+m43d+AQOA=;
- b=ZhRRPzJzigva5KiB4DNKnvlHdYr/SmpKqIAgsv0pYytXZVk4Ocm6u4Qsxcxkaq7HdP
- QP8Fb9d9tHTuG3IZLeU3LTVDYWpPuDREecpCVW5GPlaCzFI12OgwqCZvuz29p9NT/dPl
- aoGZCWij3TQEFuYSZaZT36Ehl9y86E7dgqtH4ygAJUrVuK5DYgrfu07MYwI6mJu3SwtK
- s0mDOPdNjipun2olFmfAaTuLaO1hvYWmvWaUyI0Q8HNSudqy627fTWzHTceGPB+WLnLo
- nl8IqZT574bNcDCN1LHGtgiEzPPLbzRdEgbh1oHbT62qy6SbM6agoUHGl33d+O8Dz/dW
- n7kA==
+ d=konsulko.com; s=google; t=1710897536; x=1711502336; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=YmXduqnMeTsoff2nW4dQpv+JHIpGNnTrxcUBtnH1rmM=;
+ b=E8W31uAN5E/xg7L459gsb58VwkbWNKag2snEH4tFnRZn5fIZGieRv3ITIquPBowr7D
+ 7U0+Blpr5HMVxQiLP0PcNT7RPgh1XeFHQ/zPqKJDOSC073+zTeCGi+lH4ms0tD6o/qm/
+ Eo/c074EIbf0l47l7zn+aOWj/7vCCMOuOXZBI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710897088; x=1711501888;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ULB7ni1VXOd7terdK83M6yRrhxsVzX193+m43d+AQOA=;
- b=bQsH3yiJ3A8/Brh/3QlEx2OYWBcyGPHetRtaejVxHoMzwpRM1wCW8F3az19PnKVDC6
- 0lyQScPxaJGctsY4uCxorqa3rVmypvgNc8X3JmXeLB07t6GsUEs0ju9fqvry3TapnXp4
- eUbWyJg6csM5TPntSAMxWHc+6N5Yxv8aPw3bnB1C5S2IQiBCanaf6iBU5r8lgCMPum8G
- dhQ9tMNcJEwexbIIGq9tW49N1rcBJP+gtTfoxc7nm90IWvegAJO2vCmPsRfW9cYzPlrG
- WaKtfFzkAYLujNL10/6Lf+vKT8O1pQuG3eD0O+Q1dfYGmKPI4NwXqDqhd//7L6Ez+Cly
- 9COw==
-X-Gm-Message-State: AOJu0YwdOTqJ4FoLZJtA2OHFDY9TzLQIVlIuxDYh3cP+ub3raOTUvtGx
- 741gCuZJsuJYtm6mWJbfQA0HuuJUqIGKXpfSPMK5cCZ2ychS2HNXx7OeSiOMeqkoRnsORAA7rLg
- W9A==
-X-Google-Smtp-Source: AGHT+IHvitO7STPyvIaEyuQXeaKJRfJuoZorlT9Fo2Xna7lp6BTlJyh6j89QTXkRbaZ1IVMuDsbg8w==
-X-Received: by 2002:a0d:d58c:0:b0:609:f49f:5949 with SMTP id
- x134-20020a0dd58c000000b00609f49f5949mr4659421ywd.21.1710897088036; 
- Tue, 19 Mar 2024 18:11:28 -0700 (PDT)
-Received: from executor.attlocal.net ([2600:1700:5eb5:1ba0:dc1f:cff:fef9:435b])
+ d=1e100.net; s=20230601; t=1710897536; x=1711502336;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YmXduqnMeTsoff2nW4dQpv+JHIpGNnTrxcUBtnH1rmM=;
+ b=oYcGkVKpciVdsumaARmQDzp1MGuJ4bvSoSLJyZBm1m367Y4ZCUC1p1W2JDg3baKW19
+ 9k3A5dpFoV6+UcaPCD6oMJJl32eDAT6LPeNoIOhA0+2uOY2OXEqd7Qkc6AtMFMBGxBwQ
+ nGg6UtmX3Pe9EB/RzQV9b3VYuCOWalkQpX7KYiTHEbquTv0z5gxKXXgWYorYY3UtgeP5
+ vkc2Nik9mK6UJPPv0A7dXs/sEoquSGGgOcyfsoprSanvVgRl4HmcHWk4/vYK28mqRecu
+ XQ5gen2fWqjJxALnDCUKoTz+lBf8d2+9ZRqwmhmPiHFOXZ75umoUZUQ6Tbf2ixkTne/G
+ cCsg==
+X-Gm-Message-State: AOJu0Yw2obfqAfbVyy9vajnd7aiyuF3eA998omc0+l6LV9K19aGAPg/E
+ Grn/ewQNps9ljLe9EeDtXsclg3CS+j60sVIVHNC+B+G3TUWcPa48XjUvKQXXe8Q=
+X-Google-Smtp-Source: AGHT+IFu+R7REGytHY+fm3AU8QaUwHOzv/oegxOTZbjb3HeycgpIZTYQBA6dVKt1gzF3lSH1uCuTqw==
+X-Received: by 2002:a81:8687:0:b0:610:e262:2675 with SMTP id
+ w129-20020a818687000000b00610e2622675mr3842222ywf.25.1710897536215; 
+ Tue, 19 Mar 2024 18:18:56 -0700 (PDT)
+Received: from bill-the-cat (065-184-193-066.res.spectrum.com. [65.184.193.66])
  by smtp.gmail.com with ESMTPSA id
- h3-20020a81b643000000b00608d0a088e3sm2623874ywk.120.2024.03.19.18.11.27
+ r74-20020a819a4d000000b0060a07fdf93bsm2631588ywg.134.2024.03.19.18.18.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Mar 2024 18:11:27 -0700 (PDT)
-From: Greg Malysa <greg.malysa@timesys.com>
-To: u-boot@lists.denx.de
-Cc: Greg Malysa <greg.malysa@timesys.com>,
+ Tue, 19 Mar 2024 18:18:55 -0700 (PDT)
+Date: Tue, 19 Mar 2024 21:18:53 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Greg Malysa <greg.malysa@timesys.com>
+Cc: u-boot@lists.denx.de,
  Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
  Ian Roberts <ian.roberts@timesys.com>,
  Andre Przywara <andre.przywara@arm.com>,
@@ -76,15 +72,16 @@ Cc: Greg Malysa <greg.malysa@timesys.com>,
  Jesse Taube <mr.bossman075@gmail.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Michal Simek <michal.simek@amd.com>, Nishanth Menon <nm@ti.com>,
- Shengyu Qu <wiagn233@outlook.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH] build: Revive and update LDR format support
-Date: Tue, 19 Mar 2024 21:09:22 -0400
-Message-Id: <20240320010922.30856-1-greg.malysa@timesys.com>
-X-Mailer: git-send-email 2.38.2
+ Shengyu Qu <wiagn233@outlook.com>, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH] build: Revive and update LDR format support
+Message-ID: <20240320011853.GK3442575@bill-the-cat>
+References: <20240320010922.30856-1-greg.malysa@timesys.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Wed, 20 Mar 2024 02:17:12 +0100
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="4/PGaKcE342rR7i9"
+Content-Disposition: inline
+In-Reply-To: <20240320010922.30856-1-greg.malysa@timesys.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,83 +98,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-LDR format files are used primarily by Analog Devices processors but may
-be of interest to other vendors. Previously support existed for this
-format as part of the U-Boot build, but it has been unmaintained and
-unused for a long time. In preparation for adding support for modern ADI
-processors that use LDR, modernize the LDR support:
 
-- Introduce CONFIG_LDR_CPU as the CPU string recognized by the LDR tool
-  may not be the same as CONFIG_CPU
-- Add an SPL target that repackages u-boot-spl inside an LDR file
+--4/PGaKcE342rR7i9
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-An almost identical target for packaging u-boot into an LDR file already
-exists and did not need to be updated
+On Tue, Mar 19, 2024 at 09:09:22PM -0400, Greg Malysa wrote:
 
-Co-developed-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
-Signed-off-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
-Signed-off-by: Ian Roberts <ian.roberts@timesys.com>
-Signed-off-by: Greg Malysa <greg.malysa@timesys.com>
+> LDR format files are used primarily by Analog Devices processors but may
+> be of interest to other vendors. Previously support existed for this
+> format as part of the U-Boot build, but it has been unmaintained and
+> unused for a long time. In preparation for adding support for modern ADI
+> processors that use LDR, modernize the LDR support:
+>=20
+> - Introduce CONFIG_LDR_CPU as the CPU string recognized by the LDR tool
+>   may not be the same as CONFIG_CPU
+> - Add an SPL target that repackages u-boot-spl inside an LDR file
+>=20
+> An almost identical target for packaging u-boot into an LDR file already
+> exists and did not need to be updated
+>=20
+> Co-developed-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
+> Signed-off-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
+> Signed-off-by: Ian Roberts <ian.roberts@timesys.com>
+> Signed-off-by: Greg Malysa <greg.malysa@timesys.com>
+>=20
+> ---
+>=20
+>  Kconfig              | 9 ++++++++-
+>  Makefile             | 2 +-
+>  scripts/Makefile.spl | 5 +++++
+>  3 files changed, 14 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/Kconfig b/Kconfig
+> index 5710934000..3f3ce6054e 100644
+> --- a/Kconfig
+> +++ b/Kconfig
+> @@ -715,10 +715,17 @@ config SYS_CLK_FREQ
+>  	  A static value for the CPU frequency.  Note that if not required
+>  	  for a given SoC, this can be left at 0.
+> =20
+> -source "api/Kconfig"
+> +config LDR_CPU
+> +	string "CPU name to be passed to LDR utility."
+> +	help
+> +	  Set the CPU name for the -T parameter in the LDR utility.  This is
+> +	  generally used on processors from Analog Devices, but may be also
+> +	  be useful for other vendors.
+> =20
+>  endmenu		# General setup
 
----
+This looks like a new prompted option, without a default, for every
+platform. If so, as is it will cause everything in CI to fail to build.
+This should "depend on" some relevant LDR symbol, once that's been
+added, rather than as a ground-work patch. This rest seems fine, FWIW.
 
- Kconfig              | 9 ++++++++-
- Makefile             | 2 +-
- scripts/Makefile.spl | 5 +++++
- 3 files changed, 14 insertions(+), 2 deletions(-)
+--=20
+Tom
 
-diff --git a/Kconfig b/Kconfig
-index 5710934000..3f3ce6054e 100644
---- a/Kconfig
-+++ b/Kconfig
-@@ -715,10 +715,17 @@ config SYS_CLK_FREQ
- 	  A static value for the CPU frequency.  Note that if not required
- 	  for a given SoC, this can be left at 0.
- 
--source "api/Kconfig"
-+config LDR_CPU
-+	string "CPU name to be passed to LDR utility."
-+	help
-+	  Set the CPU name for the -T parameter in the LDR utility.  This is
-+	  generally used on processors from Analog Devices, but may be also
-+	  be useful for other vendors.
- 
- endmenu		# General setup
- 
-+source "api/Kconfig"
-+
- source "boot/Kconfig"
- 
- source "common/Kconfig"
-diff --git a/Makefile b/Makefile
-index a2bc9d5903..db3272a439 100644
---- a/Makefile
-+++ b/Makefile
-@@ -1328,7 +1328,7 @@ u-boot-nodtb.bin: u-boot FORCE
- 
- u-boot.ldr:	u-boot
- 		$(CREATE_LDR_ENV)
--		$(LDR) -T $(CONFIG_CPU) -c $@ $< $(LDR_FLAGS)
-+		$(LDR) -T $(CONFIG_LDR_CPU) -c $@ $< $(LDR_FLAGS)
- 		$(BOARD_SIZE_CHECK)
- 
- # binman
-diff --git a/scripts/Makefile.spl b/scripts/Makefile.spl
-index 407fc52376..58d6a452e5 100644
---- a/scripts/Makefile.spl
-+++ b/scripts/Makefile.spl
-@@ -381,6 +381,11 @@ $(obj)/$(BOARD)-spl.bin: $(obj)/u-boot-spl.bin
- 	$(objtree)/tools/mkexynosspl) $(VAR_SIZE_PARAM) $< $@
- endif
- 
-+$(obj)/u-boot-spl.ldr: $(obj)/u-boot-spl
-+	$(CREATE_LDR_ENV)
-+	$(LDR) -T $(CONFIG_LDR_CPU) -c $@ $< $(LDR_FLAGS)
-+	$(BOARD_SIZE_CHECK)
-+
- quiet_cmd_objcopy = OBJCOPY $@
- cmd_objcopy = $(OBJCOPY) $(OBJCOPYFLAGS) $(OBJCOPYFLAGS_$(@F)) $< $@
- 
--- 
-2.38.2
+--4/PGaKcE342rR7i9
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmX6OXkACgkQFHw5/5Y0
+tyxzLAv9FVmMvu+B1hEZXmKJmpiQtp8NcK4HLiCqaeX4BQEnTAW5D0Kx9guAQrgz
+suRk8c7dQqWODyAZR3S+JAJC5BshRWy7gbDdPbETFjB6pGSSWIX++9LI2sWUjpUn
+LocjVLoZgdIeFBjmq1VTWWmgZRed/+/gENyf96ZQorhp+mVCsesO200RnjXIOCdF
+bPtWWayb8/FjcOm6gVFqfMNQlrI8jz/zmHuwVduG7hUgLCVGYHGApL846PaXgN5t
+r3I5lABNPxchOvvCLrQNO+qHKhbPZPoVmudkZcqbwHpzj647gjmdaEYjNaYBsZFS
+oOYXYLayYp3/M//hqW1PkhbTdYNeWuN4LDAPozHvsD7ZuL5lWsV62DcDUSyVLHWI
+cEnZb5tCHyRSHk0ztYhgIgWPu38TyAZOMA9kGO3gz1PVpSUcrM5ut/XCN/5M8IDK
+kqbA0b++xsFG0KtfJk0u06DUcEDXTyk3wRkAQIIu2Hi3iNx7I93qOUoaom7ITgpv
+iZLUysUx
+=U78u
+-----END PGP SIGNATURE-----
+
+--4/PGaKcE342rR7i9--
