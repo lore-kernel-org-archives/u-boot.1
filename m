@@ -4,77 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 058B9C54E58
-	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 15:22:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42A5CC6FD1F
+	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 15:33:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 30F5087ED0;
-	Wed, 20 Mar 2024 16:22:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 67C6287E47;
+	Wed, 20 Mar 2024 16:33:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="V1c/fIWK";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JPIZcz4Y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA83888063; Wed, 20 Mar 2024 16:22:51 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E913988063; Wed, 20 Mar 2024 16:33:22 +0100 (CET)
+Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
+ [IPv6:2607:f8b0:4864:20::b32])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 45E4387D6B
- for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 16:22:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C5CA587E2C
+ for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 16:33:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=devarsht@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 42KFMaH2107178;
- Wed, 20 Mar 2024 10:22:36 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1710948156;
- bh=c5aoG2v+tVbC48fV2phwvc3rlNsJh0AiUZZCDiLbV/g=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=V1c/fIWK+48xVhI0vlK+Zcn8KAnxSM0PZgSW459isqX9w4L7hZns4+gVz4m8vnhUs
- 12RvgWIOO9uvDnjU/iYx6HPolmZ0bjPq0WabslegoeePgIok6tkVTo/dZWexHaPdc4
- xpkbcuED6uGJ7rQ5cnkGTdNeU4rm+wtw9CeMSUDg=
-Received: from DFLE107.ent.ti.com (dfle107.ent.ti.com [10.64.6.28])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 42KFMara124205
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 20 Mar 2024 10:22:36 -0500
-Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 20
- Mar 2024 10:22:35 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 20 Mar 2024 10:22:35 -0500
-Received: from [172.24.227.193] (devarsht.dhcp.ti.com [172.24.227.193])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 42KFMUbe115902;
- Wed, 20 Mar 2024 10:22:31 -0500
-Message-ID: <3866627e-de73-dbc7-fd8c-bb2b0d11b5cc@ti.com>
-Date: Wed, 20 Mar 2024 20:52:30 +0530
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Subject: Re: [PATCH 1/2] spl: Introduce architecture specific init function
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>, <lukas.funke-oss@weidmueller.com>
-CC: <u-boot@lists.denx.de>, Lukas Funke <lukas.funke@weidmueller.com>, Andre
- Przywara <andre.przywara@arm.com>, Bin Meng <bmeng@tinylab.org>,
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb32.google.com with SMTP id
+ 3f1490d57ef6-dc25e12cc63so1025659276.0
+ for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 08:33:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1710948799; x=1711553599; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=CuNTN76GhzyWPw1NOMANAzZqFxKhAS556Isa9yM2CEY=;
+ b=JPIZcz4YpbdavFxHzal3DXA0TRqZWdLHNzieZiXRvYh1bq/vpdIWxIvsqICRvmXqqq
+ l/Vqkq94llBOfwzryY4YNXAwzPVAtyyn0Myfe+ly8H9huRqzPz2FCiteHKo+TTG2XH8D
+ glFkQ3B8dDs++Z3N0Ko2GxPldEoeDjgXy6jPs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710948799; x=1711553599;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=CuNTN76GhzyWPw1NOMANAzZqFxKhAS556Isa9yM2CEY=;
+ b=hbNvhdQZ2eDDJFT0T9GET4Ddttlvo2RfuYdL/b08E0uHOYZp0kLhbCoiUVHZHPIGQM
+ doMSanlq7aa6CeI2BnK4w1hVZ/HRBDZfRrKBLLZQMuRUBZumkl1a3JqZk/bTd4luYYLn
+ Xi+AGd9frMgkLx5fPT/FDz8hLreCBQwrlYmSN6aKA/Lo9rRyZWXaOtWMJKBrBeGL4PuW
+ sm+N25jprpiTv370qzqTMDVvSaZq5mW1p8lpgu/oZQvkbmolOiKNzVCJL5+K3rleEEpk
+ +I9+vi7xU39oZh7A9Edwuk1hNUZLgmHA32GAkbw1CXCK2Vr7kQqadCpQoNxCaL0hspY3
+ yedg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXfdIUuZkP/0LbQJsI49CakyqBqm/KAg/GVjWUsS8DmWy6GjNgtlmYOYYI+bm8vt7nBWU1+UqICfkceb1N4Ui7J3roZ+g==
+X-Gm-Message-State: AOJu0YxPWxpgxmx8sVa7QOGPM1tjKoyljfeAFTudBBFRkDBUIDzfDzCa
+ 5ZA8JHN5sRKYsl42NWEU0v5oufW6aU2yNBkOqFyWf7FiK/ETj+e5UaH2SDrQ424=
+X-Google-Smtp-Source: AGHT+IGog2e1xFfWLM7Xm8KKd9il7s5SRMCEyju9oJS+5o/J3fqSDk8orR3NmpaQzGynzpDCnL3Bew==
+X-Received: by 2002:a25:7ec7:0:b0:dd0:d40d:1c98 with SMTP id
+ z190-20020a257ec7000000b00dd0d40d1c98mr164307ybc.17.1710948799603; 
+ Wed, 20 Mar 2024 08:33:19 -0700 (PDT)
+Received: from bill-the-cat (065-184-193-066.res.spectrum.com. [65.184.193.66])
+ by smtp.gmail.com with ESMTPSA id
+ u13-20020a252e0d000000b00dbf52d2844bsm2556915ybu.11.2024.03.20.08.33.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 20 Mar 2024 08:33:19 -0700 (PDT)
+Date: Wed, 20 Mar 2024 11:33:16 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Devarsh Thakkar <devarsht@ti.com>
+Cc: lukas.funke-oss@weidmueller.com, u-boot@lists.denx.de,
+ Lukas Funke <lukas.funke@weidmueller.com>,
+ Andre Przywara <andre.przywara@arm.com>, Bin Meng <bmeng@tinylab.org>,
  Chanho Park <chanho61.park@samsung.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Manoj
- Sai <abbaraju.manojsai@amarulasolutions.com>, Marek Vasut <marex@denx.de>,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
+ Marek Vasut <marex@denx.de>, Mayuresh Chitale <mchitale@ventanamicro.com>,
  Nikhil M Jain <n-jain1@ti.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, Samuel Holland
- <samuel@sholland.org>, Sean Anderson <seanga2@gmail.com>, Simon Glass
- <sjg@chromium.org>
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Samuel Holland <samuel@sholland.org>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH 1/2] spl: Introduce architecture specific init function
+Message-ID: <20240320153316.GW3442575@bill-the-cat>
 References: <20240320131928.1836386-1-lukas.funke-oss@weidmueller.com>
  <20240320131928.1836386-2-lukas.funke-oss@weidmueller.com>
  <20240320143048.GU3442575@bill-the-cat>
-From: Devarsh Thakkar <devarsht@ti.com>
-In-Reply-To: <20240320143048.GU3442575@bill-the-cat>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+ <3866627e-de73-dbc7-fd8c-bb2b0d11b5cc@ti.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="VQo2fpciTQT9tdOk"
+Content-Disposition: inline
+In-Reply-To: <3866627e-de73-dbc7-fd8c-bb2b0d11b5cc@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,44 +104,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom, Lukas,
 
-Thanks for the patch Lukas.
+--VQo2fpciTQT9tdOk
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 20/03/24 20:00, Tom Rini wrote:
-> On Wed, Mar 20, 2024 at 02:19:26PM +0100, lukas.funke-oss@weidmueller.com wrote:
-> 
->> From: Lukas Funke <lukas.funke@weidmueller.com>
->>
->> Some architectures use spl_board_init() in their architecture specific
->> implementation. Board developers should be able to add board specific
->> implementation via spl_board_init(). Hence, introduce a spl_arch_init()
->> method which is called right before spl_board_init() for architecture
->> specific implementation.
->>
->> Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
-> 
-> I think this could allow for other SoCs to clean up their existing
+On Wed, Mar 20, 2024 at 08:52:30PM +0530, Devarsh Thakkar wrote:
+> Hi Tom, Lukas,
+>=20
+> Thanks for the patch Lukas.
+>=20
+> On 20/03/24 20:00, Tom Rini wrote:
+> > On Wed, Mar 20, 2024 at 02:19:26PM +0100, lukas.funke-oss@weidmueller.c=
+om wrote:
+> >=20
+> >> From: Lukas Funke <lukas.funke@weidmueller.com>
+> >>
+> >> Some architectures use spl_board_init() in their architecture specific
+> >> implementation. Board developers should be able to add board specific
+> >> implementation via spl_board_init(). Hence, introduce a spl_arch_init()
+> >> method which is called right before spl_board_init() for architecture
+> >> specific implementation.
+> >>
+> >> Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
+> >=20
+> > I think this could allow for other SoCs to clean up their existing
+>=20
+> Does it make more sense to make this SoC specific then instead of arch
+> specific to allow broader range of code?
 
-Does it make more sense to make this SoC specific then instead of arch
-specific to allow broader range of code?
+"soc" and "arch" are somewhat interchangeable at times, so I think we
+can go one step at a time here and bring in this abstraction and see
+where everyone else is able to clean their code up to.
 
-For e.g., if we have something like spl_soc_init then it would help
-accommodate soc specific functionality too along with calling arch specific code ?
+--=20
+Tom
 
-Also I see some vendors already having implemented spl_soc_init in their arch
-specific files [1], so I think it would be good if it is moved it to framework
-level.
+--VQo2fpciTQT9tdOk
+Content-Type: application/pgp-signature; name="signature.asc"
 
-[1] :
-https://source.denx.de/u-boot/u-boot/-/blob/master/arch/riscv/cpu/fu540/spl.c?ref_type=heads#L10
-https://source.denx.de/u-boot/u-boot/-/blob/master/arch/riscv/include/asm/arch-fu740/spl.h?ref_type=heads#L12
+-----BEGIN PGP SIGNATURE-----
 
-Regards
-Devarsh
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmX7AbgACgkQFHw5/5Y0
+tyztpQwAip3Hf04Obetc9wZdFdwmr96Hb396hdODDsfU60GnfvWVgCUrzXJW26jo
+RjTcXT8rz/sE/yerq5scdsLpo9MGi7wfhL9jiqxtG+eJEgdFu8EGZc/zuOb4SF0D
+v/baofLBAT/4rjjEGV3Z+L+c5PzCU4BupsPppKuK0nCHGoOqTKCuhx9MOgQ+VyLI
+KRR1QsTKj81FGZpwuOdZhOj0sCSRDeAfXDhl/BtnAB34M21cGvTxytmFXvAeg+JN
+AD2HtW4L4JBAAV550t9Zh2TwS452k5fjemfk+sVZVoMMRooI3kdQJyvELp7Lc13S
+B9K0kuMwdxSbOm6ZqjWWyTqQC00YO8t6sT0cisy2ExsQBDLeV8s1wKuSF7pX2yGa
+ACRUh2JZIC3FughfK4ERmfz1rNPCktGdKReGu+GeW2pMm3j3GXUWvOaEH5AkUBNJ
+qD2d1x3NWTvK8TVWFaFjR1yxtAAK1SruL4b6n3EQ44wxE9gSgpyerkrg9f4F0rd4
+zvwu7gu3
+=Oejt
+-----END PGP SIGNATURE-----
 
-> ad-hoc mechanisms for SoC/architecture init and then board init, so this
-> looks like a good idea to me.
-> 
-> Reviewed-by: Tom Rini <trini@konsulko.com>
-> 
+--VQo2fpciTQT9tdOk--
