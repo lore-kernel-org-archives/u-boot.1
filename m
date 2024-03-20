@@ -4,83 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FDDAC54E67
-	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 13:16:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6180AC54E58
+	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 13:18:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E439987F87;
-	Wed, 20 Mar 2024 14:16:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CFE3A87E93;
+	Wed, 20 Mar 2024 14:18:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Rcrre8P2";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="De0Ih/py";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 94D908803E; Wed, 20 Mar 2024 14:16:26 +0100 (CET)
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
+ id 88D2387F8F; Wed, 20 Mar 2024 14:18:40 +0100 (CET)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2827387F87
- for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 14:16:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1E43987E47
+ for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 14:18:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-2d21cdbc85bso98314351fa.2
- for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 06:16:24 -0700 (PDT)
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-33ed7ba1a42so2644642f8f.2
+ for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 06:18:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710940583; x=1711545383; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1710940717; x=1711545517; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=WAn0xYCsfYUEqTdGr3bDBy0SbTUJYMiqscv/hOXGmbg=;
- b=Rcrre8P2TE+a54aySbh5gB4vDZeS2TZIYikTw4A4BVzv3w3Gc2VQX+adGttQQLz0ww
- j+NxpQPCKG0cjVzT11D/S/7Vx3BCj2cdasBacG/2eNq9cv/PXfK5GqAOwXFtNDk9Gk5q
- YwsAHDR/lLPyGVwSLQL4DKfJsMkaU+RhaYnQtM8oYSdBEOvgVDR9O16/9NTcdf4O1dj1
- DNsPP/GuchntApWO3Dv3A5hLUnlDIJv5Fp8a7JJ74SYn2sA9IDILA4koy4FMwm4ryPvv
- 20dX+/pF5iuu7gWc4D2CFLyyJOegNw1u/X8eQoK1Dh1/mbfKS6PC5OVVcAPjRzopXp76
- Ao8w==
+ bh=+7TrFenuV7jJVGnPNR9JtTBKPzon1DuXaq8dhr8Joq4=;
+ b=De0Ih/pyvA8OWNBH5tcTWWbB7NVRcomYz7LiFdjuEwzKTNFddfu2zY9EIHZE1kjEL3
+ Wr+FgE5FbHCVFmy2i1985ERUuSX1yh0TVzfsvUl8pVCDn/7DxKCMA4pxykew7xIxRHlp
+ FFocRbhBF8bZifmUAwAhHpZYLOdXxlAS7c0w0fZLR0M+9wODiXI5rbW6KIfGNrjhIafT
+ GEkywkpvVZ5OO3QRLMaUK3FKRxGVqoh2NkYB9qotN6fMyahXRS/XsFlB9vkES6t/CYt2
+ VVdvvxSGAhHlR5MScxrDc5ufpgwJ2V/s+DUC7E/RQ7t66WzGT48vXjNLFU9ZPNol/mEk
+ dPlA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710940583; x=1711545383;
+ d=1e100.net; s=20230601; t=1710940717; x=1711545517;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=WAn0xYCsfYUEqTdGr3bDBy0SbTUJYMiqscv/hOXGmbg=;
- b=GVECtiWykF0vsuNM3j6Rg8WmkfziMQ6/+kO+qic/ueI47weBTIpkMbXEUgcvg2AKGl
- Gfdyx+HkBzqEeBkekGTIys5odAeGLzot0s4h/grcvvLLvEui8UHJOKbX1+m9rJUbHoHi
- izG60jm2ZWhgfZccSAkClRlSefK2SbEZxXWNu+JIDcw1Ya60sQG91+1hsHVYuzjaG7QF
- oVAXUbq49ts3QQ4IkTP6cQd4K6d1/26YRSMcRbXBAtFdgFGjulpzctQkuXGluncjL/EH
- QUaFxhc5hwFhGS6SI4ttwt45PY+vwYjsXpGabPI9SNKAHZHHuFu+4N9+a6dRVvo8UZoq
- o12g==
+ bh=+7TrFenuV7jJVGnPNR9JtTBKPzon1DuXaq8dhr8Joq4=;
+ b=vFHCR4arPUdoXDDkd013mAzaG4979Kxxvjw+J7Sx6GGX0GS2H89zAEWWpHFeFWIFJ7
+ Aeftjo7lJbdurpYcCJ3y3ZH9BOKCUlAez6PA5CJ7Inbd0pltiSrqJLLXvCQzOJ4Pq5VV
+ tznuMNwtoWncDv1FwFScDrsKyn5hTg2dCLRCu+XYIKqNYoO9ih2ImgunaCMaVCpUB5Sh
+ a8FkRS8ETgzaxA47zETX55zchwpdJJiZPxLABvBvC6aeXPpQHm14J5U1wzqxToZXAzPA
+ I3eiD4RDVqHWyH3ZH1/XEXqWs1DtrIVNRr0TGDb0trFBL7MEphpsGdydliAzeGjVxss2
+ daRw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXUf2am+NZjAGkR4E5tqxbR+gV+eNP3b2NcQUMnzJKDaQvMVz4stMF6/lwrwqS5X6RhNExxFcAS0ta4NwwwaZvbMdH0fQ==
-X-Gm-Message-State: AOJu0YwoVgQKOBcAI/FVxUlW4KfVlrEs9os0KIgvNcqES2YUHNWuT2+8
- +yRmROGumlIH+pHaoDhGUNj99s/phUT9rPesGfMAzzv2dCP4uZarYKqUUprWA/M=
-X-Google-Smtp-Source: AGHT+IGYU9DBKCssYPBJpI4RQXC7OoPisclPmqKMWRlA/wypq30t8F2Lyr2CqU8+ZhQsyAE7AR8myw==
-X-Received: by 2002:a05:651c:4ce:b0:2d2:a3bb:e319 with SMTP id
- e14-20020a05651c04ce00b002d2a3bbe319mr1872785lji.1.1710940583230; 
- Wed, 20 Mar 2024 06:16:23 -0700 (PDT)
+ AJvYcCVBQEj0r1Uy8geqUfTYhrgWwHqfHmFyfgtP9Coa6tv+yjjD7CedYAImwsXSSmEMNA4jo9AUvZw+9eSz6ydQf2kx80bwJA==
+X-Gm-Message-State: AOJu0YyNRgNJ0IOQ69pkgpixSovypBdbU8Q24TEapHZuVg7OJYYzkv0k
+ i2MolbwBVCGalO8AKhxlWUtAOzzPMo5YQrVui0QZbqkTM8NAwGewjOnvdMf6aaU=
+X-Google-Smtp-Source: AGHT+IFGGDtFckSMkTJJmMhu3eWstOYnBp2xjQ2K4VxIhS+Q5XtMbQsrgfoswy6sqnsIob3DBC3Uyw==
+X-Received: by 2002:a05:6000:711:b0:341:6b6d:ec34 with SMTP id
+ bs17-20020a056000071100b003416b6dec34mr5549858wrb.46.1710940717491; 
+ Wed, 20 Mar 2024 06:18:37 -0700 (PDT)
 Received: from [192.168.1.78] (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- j28-20020a05600c1c1c00b004146895086esm2256351wms.8.2024.03.20.06.16.22
+ i9-20020a5d6309000000b0033e0dd83be1sm14487016wru.91.2024.03.20.06.18.36
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 20 Mar 2024 06:16:22 -0700 (PDT)
-Message-ID: <0403479b-8691-44b6-817f-45ce9127989c@linaro.org>
-Date: Wed, 20 Mar 2024 13:16:22 +0000
+ Wed, 20 Mar 2024 06:18:36 -0700 (PDT)
+Message-ID: <c18deb5b-d4a2-4270-927c-627a980016ba@linaro.org>
+Date: Wed, 20 Mar 2024 13:18:36 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 14/14] qcom_defconfig: enable USB
+Subject: Re: [PATCH v2 8/8] board: add support for Qualcomm SA8155P-ADP board
 Content-Language: en-US
-To: Sumit Garg <sumit.garg@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de
-References: <20240319-b4-qcom-livetree-v3-0-e1b38d9b4fa4@linaro.org>
- <20240319-b4-qcom-livetree-v3-14-e1b38d9b4fa4@linaro.org>
- <CAFA6WYP2rdeESRFtWfiD-zVRwAY7jEstw-UvWQbWMTG+MbmLvQ@mail.gmail.com>
+To: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Cc: Sumit Garg <sumit.garg@linaro.org>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
+References: <20240306005230.2638972-1-volodymyr_babchuk@epam.com>
+ <20240306005230.2638972-9-volodymyr_babchuk@epam.com>
+ <CAFA6WYNWxHU4W0xrTC=mQJbP49hFMm56fbz1isd0xNNQ_VdVSw@mail.gmail.com>
+ <87jzmf2mvi.fsf@epam.com> <e5e47988-c617-48a0-a10a-e37edb9a8267@linaro.org>
+ <87y1av12bg.fsf@epam.com> <0cda2608-856f-4650-92a6-4860a0d7c8b6@linaro.org>
+ <87edcg1vcp.fsf@epam.com> <b8774081-dd8f-4154-9c39-0c0b5fd48adb@linaro.org>
+ <874jdc1qbg.fsf@epam.com> <87jzlxzzrb.fsf@epam.com>
 From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <CAFA6WYP2rdeESRFtWfiD-zVRwAY7jEstw-UvWQbWMTG+MbmLvQ@mail.gmail.com>
+In-Reply-To: <87jzlxzzrb.fsf@epam.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -101,142 +105,149 @@ X-Virus-Status: Clean
 
 
 
-On 20/03/2024 05:40, Sumit Garg wrote:
-> On Tue, 19 Mar 2024 at 17:52, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->>
->> Enable support for the DWC3 USB controller and required dependencies for
->> Qualcomm boards, specifically the DB845c:
->> * IOMMU / SMMU
->> * USB high-speed PHYs
->> * Mass storage and ACM gadgets
->>
->> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
->> ---
->>  configs/qcom_defconfig | 49 ++++++++++++++++++++++++++-----------------------
->>  1 file changed, 26 insertions(+), 23 deletions(-)
->>
->> diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
->> index eebd0d74bd51..156c205284dd 100644
->> --- a/configs/qcom_defconfig
->> +++ b/configs/qcom_defconfig
->> @@ -12,42 +12,63 @@ CONFIG_BOOTSTD_FULL=y
->>  CONFIG_BOOTDELAY=1
->>  CONFIG_USE_PREBOOT=y
->>  CONFIG_SAVE_PREV_BL_INITRAMFS_START_ADDR=y
->>  CONFIG_SYS_CBSIZE=512
->> +# CONFIG_SYS_DEVICE_NULLDEV is not set
->>  CONFIG_LOG_MAX_LEVEL=9
->>  CONFIG_LOG_DEFAULT_LEVEL=4
->>  # CONFIG_DISPLAY_CPUINFO is not set
->>  CONFIG_DISPLAY_BOARDINFO_LATE=y
->>  CONFIG_CMD_BOOTMENU=y
->> +CONFIG_CMD_EEPROM=y
->> +CONFIG_SYS_I2C_EEPROM_BUS=2
->> +CONFIG_SYS_I2C_EEPROM_ADDR_LEN=2
->> +CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=5
->> +# CONFIG_CMD_BIND is not set
->>  CONFIG_CMD_CLK=y
->>  CONFIG_CMD_GPIO=y
->> +CONFIG_CMD_I2C=y
->>  CONFIG_CMD_MMC=y
->>  CONFIG_CMD_UFS=y
->>  CONFIG_CMD_USB=y
->>  CONFIG_CMD_CAT=y
->>  CONFIG_CMD_BMP=y
->>  CONFIG_CMD_LOG=y
->>  CONFIG_OF_LIVE=y
->>  # CONFIG_NET is not set
->> +CONFIG_DM_WARN=y
->>  # CONFIG_OFNODE_MULTI_TREE is not set
->>  CONFIG_BUTTON_QCOM_PMIC=y
->>  CONFIG_CLK=y
->>  CONFIG_CLK_QCOM_QCS404=y
->>  CONFIG_CLK_QCOM_SDM845=y
->>  CONFIG_MSM_GPIO=y
->>  CONFIG_QCOM_PMIC_GPIO=y
->> +CONFIG_DM_I2C=y
->> +CONFIG_SYS_I2C_QUP=y
->> +CONFIG_I2C_MUX=y
->>  CONFIG_DM_KEYBOARD=y
->>  CONFIG_BUTTON_KEYBOARD=y
->> +CONFIG_IOMMU=y
->> +CONFIG_QCOM_HYP_SMMU=y
->> +CONFIG_MISC=y
->> +CONFIG_NVMEM=y
->> +CONFIG_I2C_EEPROM=y
->>  CONFIG_MMC_HS200_SUPPORT=y
->>  CONFIG_MMC_SDHCI=y
->>  CONFIG_MMC_SDHCI_ADMA=y
->>  CONFIG_MMC_SDHCI_MSM=y
->> +CONFIG_DM_ETH_PHY=y
->>  CONFIG_PHY=y
->> +CONFIG_PHY_QCOM_QUSB2=y
->> +CONFIG_PHY_QCOM_USB_HS_7NM=y
->>  CONFIG_PINCTRL=y
->>  CONFIG_PINCTRL_QCOM_QCS404=y
->>  CONFIG_PINCTRL_QCOM_SDM845=y
->>  CONFIG_DM_PMIC=y
->>  CONFIG_PMIC_QCOM=y
->> +CONFIG_DM_REGULATOR=y
->> +CONFIG_DM_REGULATOR_FIXED=y
->>  CONFIG_SCSI=y
->>  CONFIG_MSM_SERIAL=y
->>  CONFIG_MSM_GENI_SERIAL=y
->>  CONFIG_SPMI_MSM=y
->> @@ -56,8 +77,13 @@ CONFIG_SYSINFO_SMBIOS=y
->>  CONFIG_USB=y
->>  CONFIG_USB_XHCI_HCD=y
->>  CONFIG_USB_XHCI_DWC3=y
->>  CONFIG_USB_DWC3=y
->> +CONFIG_USB_DWC3_GENERIC=y
->> +CONFIG_USB_GADGET=y
->> +CONFIG_USB_GADGET_DOWNLOAD=y
->> +CONFIG_USB_FUNCTION_MASS_STORAGE=y
->> +CONFIG_USB_FUNCTION_ACM=y
->>  CONFIG_UFS=y
->>  CONFIG_VIDEO=y
->>  # CONFIG_VIDEO_FONT_8X16 is not set
->>  CONFIG_VIDEO_FONT_16X32=y
->> @@ -66,27 +92,4 @@ CONFIG_NO_FB_CLEAR=y
->>  CONFIG_VIDEO_SIMPLE=y
->>  CONFIG_HEXDUMP=y
->>  # CONFIG_GENERATE_SMBIOS_TABLE is not set
->>  CONFIG_LMB_MAX_REGIONS=64
->> -CONFIG_CMD_DHCP=y
->> -CONFIG_CMD_EEPROM=y
->> -CONFIG_CMD_I2C=y
->> -CONFIG_CMD_PING=y
->> -CONFIG_DM_ETH=y
->> -CONFIG_DM_ETH_PHY=y
->> -CONFIG_DM_MDIO=y
->> -CONFIG_DWC_ETH_QOS=y
->> -CONFIG_DWC_ETH_QOS_QCOM=y
+On 19/03/2024 21:18, Volodymyr Babchuk wrote:
 > 
-> Any particular reason to drop these?
+> Hi,
+> 
+> Volodymyr Babchuk <volodymyr_babchuk@epam.com> writes:
+> 
+>> Caleb Connolly <caleb.connolly@linaro.org> writes:
+>>
+>>> On 11/03/2024 18:23, Volodymyr Babchuk wrote:
+>>>> Hi Caleb,
+>>>> Caleb Connolly <caleb.connolly@linaro.org> writes:
+>>>>
+>>>>> On 06/03/2024 21:24, Volodymyr Babchuk wrote:
+>>>>>>
+>>>>>> Hi Caleb,
+>>>>>>
+>>>>>> Caleb Connolly <caleb.connolly@linaro.org> writes:
+>>>>>>
+>>>>>> [...]
+>>>>>>>>>> +};
+>>>>>>>>>> +
+>>>>>>>>>> +&tlmm {
+>>>>>>>>>> +       /* U-Boot pinctrl driver does not understand multiple tiles */
+>>>>>>>>>> +       reg = <0x0 0x03000000 0x0 0x1000000>;
+>>>>>>>>>> +       /delete-property/ reg-names;
+>>>>>>>>>
+>>>>>>>>> This won't be needed if we can make the tiles offset in the pinctrl
+>>>>>>>>> driver compatible:
+>>>>>>>>>
+>>>>>>>>> #define WEST   0x00000000
+>>>>>>>>> #define EAST   0x00400000
+>>>>>>>>> #define NORTH  0x00800000
+>>>>>>>>> #define SOUTH  0x00C00000
+>>>>>>>>
+>>>>>>>> Hmm, I assume that in this case pinctrl driver should map all the four
+>>>>>>>> tiles independently? Are there guarantees in U-Boot that four separate
+>>>>>>>> memory regions will be mapped into virtual memory with the same relative
+>>>>>>>> positions? Linux clearly don't make such guarantees.
+>>>>>>>
+>>>>>>> U-Boot doesn't use virtual addresses on arm platforms, it only goes as
+>>>>>>> far as reading the address from DT, nothing else, so this is totally
+>>>>>>> fine and is how the other SoCs do it.
+>>>>>>
+>>>>>> For me it looks like we are depending on implementation details
+>>>>>> knowledge. I.e MMU API does not provide such guarantees, but drivers
+>>>>>> know how ARM MMU code is working internally and drivers depend on
+>>>>>> exactly this behavior. But if you are saying that it is totally fine,
+>>>>>> I'll rework the patch. No big deal. Actually, I already tried this and
+>>>>>> it is working fine.
+>>>>>>
+>>>>>>>>>> +
+>>>>>>>>>> +       /* U-Boot ethernet driver wants to drive reset as GPIO */
+>>>>>>>>>> +       /delete-node/ phy-reset-pins;
+>>>>>>>>>
+>>>>>>>>> I suppose this is not needed as phy-reset-pins also configures the pin
+>>>>>>>>> as GPIO only.
+>>>>>>>>>
+>>>>>>>> Well, yes. This also puzzles me up, but for some reason it stops working
+>>>>>>>> if I leave this node intact. Looks like I need to look at this deeper
+>>>>>>>> before posting the next version.
+>>>>>>>
+>>>>>>> Possibly the pinconf defined in the phy-reset-pins node causes U-Boot to
+>>>>>>> misbehave, can you check if this patch fixes it (there is a bug in the
+>>>>>>> line "return msm_gpio_direction_input(dev, gpio);", it should become
+>>>>>>> just "msm_gpio_direction_input(dev, gpio);").
+>>>>>>>
+>>>>>>> I had the exact same issue with the gpio-regulator driver and this was
+>>>>>>> the solution I ended up going with.
+>>>>>>>
+>>>>>>> https://urldefense.com/v3/__https://lore.kernel.org/u-boot/20240131-b4-qcom-livetree-v1-7-4071c0787db0@linaro.org/__;!!GF_29dbcQIUBPA!xFhZe7DKgRbr63sirEJLuH-B0AnGs7jvx8tdJPKLTgFuZ3I3_zpVml7l23G-_vJO_JiUR-wUO4GMPJFcE-8p50H3pf7nbxit$
+>>>>>>> [lore[.]kernel[.]org]
+>>>>>>
+>>>>>> It is exactly this. With your patch I don't need to /delete-node/
+>>>>>> anymore. I'll add a comment in the cover message that this series are
+>>>>>> depended on your patch.
+>>>>>
+>>>>> Please can you split the power domain and clock patches into a separate
+>>>>> series? As I'd like to depend on them for the next revision of my
+>>>>> series, and we'd otherwise have a cyclical dependency.
+>>>> Of course.
+>>>> As I understood, you are interested in "clk: qcom: clear div mask
+>>>> before
+>>>> assigning a new divider" and "clk: qcom: add support for power domains
+>>>> uclass", correct?
+>>>
+>>> Yes.
+>>
+>> Okay, I'll send it today.
+>>
+>>> I tried the power domain stuff out on SMD845 today and ran into
+>>> quite a few issues. Specifically as a lot of the devices reference the
+>>> rpmhpd power domain which we don't support (and don't *need* to
+>>> support) in U-Boot. I'm not sure what the best way forward will be for
+>>> this. Maybe a "nop" power domain driver?
+>>
+>> Are you sure that they are not required?
+>>
+>> "nop" power domain always is the option. Especially if it prints some
+>> warning about an unknown device. I had quite a lot of issues with clock and
+>> pin drivers that silently ignore unknown devices...
+>>
+>>> Do you have the same issues on sm8150?
+>>
+>> Yes and no. No, because I was lucky so far and devices I tried to use in
+>> U-Boot does not require rpmhpd. Looking at DTS, I may only encounter
+>> issues with sdhc_2, which requires rpmhpd for some reason. Also UFS
+>> requires clock from rpmhcc.
+>>
+>> And "yes", because I have found root cause for my troubles with UFS in
+>> Linux kernel, when I am skipping hyp.mbn. This is not strictly related
+>> to U-Boot, but you may be interested in this: apparently Qualcomm's
+>> hypervisor enables access to RPM (maybe brings it out of reset?). cmd-db
+>> shared memory region can't be accessed if I skip the hypervisor and try
+>> to boot directly into Linux. So now I am looking for ways to enable it.
+> 
+> I want to share the solution, in case if someone got the same
+> problem. It all boiled down to correct memory attributes. Qualcomm's
+> hypervisor mapped cmd-db shared memory as non-cached in Stage 2
+> translation table, while Linux maps it as cacheable in Stage 1. Thus,
+> the final memory attribute was "non-cacheable".
+> 
+> Xen, on other hand, used default mapping which is normal cacheable
+> memory. And of course this lead to cacheable accesses to cmd-db. For
+> some reason this caused the hardware error, which manifested as a secure
+> interrupt (while I expected SError at most), which in turn led to
+> endless loop somewhere in TZ.
 
-No, this is weird, I must have screwed something up while regenerating
-the defconfig. Thanks for catching this, I'll fix it for the next revision.
+ohh, nice find! I guess if Linux started sending bogus data to the rpmh
+this could definitely lead to some XPU violation or another excuse for a
+secure interrupt...
 > 
-> -Sumit
+> I am going to fix this by applying the correct mappings in the Linux
+> cmd-db driver. Plan B is to have workaround in Xen, but I really want to
+> avoid this.
+
+I agree this is definitely a Linux bug, it should make sense to fix it
+there.
 > 
->> -CONFIG_RGMII=y
->> -CONFIG_PHY_MICREL=y
->> -CONFIG_PHY_MICREL_KSZ90X1=y
->> -CONFIG_MISC=y
->> -CONFIG_NVMEM=y
->> -CONFIG_DM_I2C=y
->> -CONFIG_I2C_SUPPORT=y
->> -CONFIG_I2C_MUX=y
->> -CONFIG_I2C_EEPROM=y
->> -CONFIG_SYS_I2C=y
->> -CONFIG_SYS_I2C_QUP=y
->> -CONFIG_SYS_I2C_EEPROM_BUS=2
->> -CONFIG_SYS_I2C_EEPROM_ADDR_LEN=2
->> -CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=5
->>
->> --
->> 2.44.0
->>
+> Right now I have a working Xen that is able to boot Dom0 straight to
+> console, if anyone interested.
+
+Awesome! Yeah I'd love to take a look :D
+> 
 
 -- 
 // Caleb (they/them)
