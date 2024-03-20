@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29422CD11C2
-	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 20:54:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 144D4C54E58
+	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 20:55:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 626E9880D6;
-	Wed, 20 Mar 2024 21:54:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DBEE3880A6;
+	Wed, 20 Mar 2024 21:54:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="UQjx6Sd4";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="LIqTyfPC";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="OYaA0nu6";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="TuqXPt6i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 43881880B5; Wed, 20 Mar 2024 21:54:38 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ id CC5AC880BF; Wed, 20 Mar 2024 21:54:38 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4E77D8723E
- for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 21:54:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F72E8809B
+ for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 21:54:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4V0LSC0T98z9sf0;
- Wed, 20 Mar 2024 21:54:35 +0100 (CET)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4V0LSD0gLSz9shD;
+ Wed, 20 Mar 2024 21:54:36 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1710968075;
+ s=mail20150812; t=1710968076;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Q5/E5Xk4yu5xZJiFnJORgGoWr3cxP7t365w4nNvOH9c=;
- b=UQjx6Sd4xaTWQlH0C3Y+2rHCusBwXqDC5tJMz6ZI4/dMxJQptV95pHdJNc1j7OzAu0hgJe
- vSxemWS4JG1jPaDQ9WSYZru0rmrNxaS7YBDzzKRxoepo6z/e3sWLbhMIRK6qXcofbOfmf3
- /NaMOIvukPKYQE0SeDe+DB7y+xxDas0Yhe5/PFq4lNvJvwgoyXszXtykc8+w5ZECQo9mHT
- DDwZ6CtVf4DoYW+ZsDaHuRrY34PfhZpGGR00yAvtM8BLyDswPmgwZB815QI5dKVXbawQ77
- xQWXGLfO1UWiQ0Se1tvGFgg1YQ87hEhvFAi57GooF23y6dVU+NelGb1RhGQVgA==
+ bh=tnzy9GqeBu7pENlXZdGpLA5XS7msH3dwI04Ov8kTF9o=;
+ b=OYaA0nu6B5NQJY1GovELuzuVaMPrTEp4TFzuZj+jubc7TjNlO4N6Kadmt/WTqW++6pGqHR
+ xCTaQ0572kWn8C0sB9Ta4HyggMNVoAJK0RG4HcsA+LzEE/rdPP/Ls46kamFrBAjAGiDFWr
+ iyl+zrat7pVjOYOy5RvZsCVMuPT8WgctbP1dwY0fLr59rQUNtHikh0kTLfxl3GKi4YU71x
+ qMGbDxy3mkkhHY3b+8PCaFl9byG2Y9bJk6b9tAyGSFM2mwfgpIXPEaNJSMy7rNDB2hyIVi
+ 1rlImcGxIr/B+MuzuJXuYJvcxDfBWQ0tYlRBwZO/vURvnaj9tEwBJwKTNhMGeQ==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1710968073;
+ s=mail20150812; t=1710968074;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Q5/E5Xk4yu5xZJiFnJORgGoWr3cxP7t365w4nNvOH9c=;
- b=LIqTyfPCwnYWIDih2H/6fg9GP2NTE40BxFoMF6YzZYVa22G92V2pzkK13vvtZTT7KfJo1r
- KYdaA3ZliMrvEz2bHq29bNzENYftWANqcf2gOhdJVFvQWJaGjcR9b+MLBN/Fuz5HKrkkB+
- eyI8olfpPsIiOOWLIafjEqGsXzOTmO8vPMDASn1DbBkdHtsHj9/988JCeW7Zb3GesehLjV
- 7KnnOPL9bNufNbteg42EKeWFjz6vdxYBMhdbNuv5S9ZkgM7HzHCOYnNkvlAZ+KN/Jc+/uo
- 2xDlLBy8UH4+b29R1CkVH5TLVQ1V4FlxB8rMBKPbxlzEGCqk0v0sDmRhxQl4gg==
+ bh=tnzy9GqeBu7pENlXZdGpLA5XS7msH3dwI04Ov8kTF9o=;
+ b=TuqXPt6iR6RUYtP71vJWWzDhDDk8piQuC89siNKV2XYYnz2AECC5xNz6bZeJH8nb19SdZ6
+ 4Y4G65xk1UQ9RLyBWnJVHqaDFa0RMM0emZF4O0S02ctNVD1t6qQI+ef6T9lYS2VmBP1DZW
+ +JSWCRQz2pmXOkYoRbCv3f97cvwXtzHtfKquPm2NX79fqJQh/rGuvX16w7dTHqFOFiDdC0
+ ErpmS3LHuUMaE22SX0io/vAcWdKDpq5kJCXgCllejDqJk3S4wZ5/y+GMrQ2c7YLJ2Dn9Eq
+ o7askAtXl8dbhnmsljZpClhXEIWjNFbOka48+j5hheHcGObZWPSAvuehxmrlhA==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>,
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 3/5] boot: fdt: Clean up env_get_bootm_mapsize()
-Date: Wed, 20 Mar 2024 21:53:07 +0100
-Message-ID: <20240320205413.32555-3-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH v3 4/5] boot: fdt: Drop lmb_alloc*() typecasts
+Date: Wed, 20 Mar 2024 21:53:08 +0100
+Message-ID: <20240320205413.32555-4-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20240320205413.32555-1-marek.vasut+renesas@mailbox.org>
 References: <20240320205413.32555-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 8fa5a03a4a98e67800b
-X-MBO-RS-META: bpoqqeezd5etxomjgny9q6tyubyke1zh
-X-Rspamd-Queue-Id: 4V0LSC0T98z9sf0
+X-MBO-RS-META: wstbns4qwhaue4kfc6rfrsszzpppmnai
+X-MBO-RS-ID: cb8d4c77a5909b0e555
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,10 +89,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Reduce tmp variable use and remove unnecessary type cast in
-env_get_bootm_mapsize(). This aligns the env variable parsing
-with env_get_bootm_low(). No functional change.
+The lmb_alloc_base() returns phys_addr_t , map_sysmem() accepts
+phys_addr_t as first parameter. Declare 'addr' as phys_addr_t and
+get rid of the casts.
 
+Reviewed-by: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+Reported-by: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
@@ -102,31 +103,43 @@ Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
 Cc: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>
 ---
-V3: - New patch
+V2: - Replace $addr with 'addr' to somehow delimit the variable name
+V3: - Add RB from Laurent
 ---
- boot/image-board.c | 7 ++-----
- 1 file changed, 2 insertions(+), 5 deletions(-)
+ boot/image-fdt.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/boot/image-board.c b/boot/image-board.c
-index e3d63745299..b036ed764f8 100644
---- a/boot/image-board.c
-+++ b/boot/image-board.c
-@@ -149,13 +149,10 @@ phys_size_t env_get_bootm_size(void)
+diff --git a/boot/image-fdt.c b/boot/image-fdt.c
+index c2571b22244..c37442c9130 100644
+--- a/boot/image-fdt.c
++++ b/boot/image-fdt.c
+@@ -162,6 +162,7 @@ int boot_relocate_fdt(struct lmb *lmb, char **of_flat_tree, ulong *of_size)
+ 	void	*of_start = NULL;
+ 	phys_addr_t start, size, usable;
+ 	char	*fdt_high;
++	phys_addr_t addr;
+ 	phys_addr_t low;
+ 	phys_size_t mapsize;
+ 	ulong	of_len = 0;
+@@ -186,7 +187,6 @@ int boot_relocate_fdt(struct lmb *lmb, char **of_flat_tree, ulong *of_size)
+ 	fdt_high = env_get("fdt_high");
+ 	if (fdt_high) {
+ 		ulong desired_addr = hextoul(fdt_high, NULL);
+-		ulong addr;
  
- phys_size_t env_get_bootm_mapsize(void)
- {
--	phys_size_t tmp;
- 	char *s = env_get("bootm_mapsize");
- 
--	if (s) {
--		tmp = (phys_size_t)simple_strtoull(s, NULL, 16);
--		return tmp;
--	}
-+	if (s)
-+		return simple_strtoull(s, NULL, 16);
- 
- #if defined(CFG_SYS_BOOTMAPSZ)
- 	return CFG_SYS_BOOTMAPSZ;
+ 		if (desired_addr == ~0UL) {
+ 			/* All ones means use fdt in place */
+@@ -224,8 +224,8 @@ int boot_relocate_fdt(struct lmb *lmb, char **of_flat_tree, ulong *of_size)
+ 			 * At least part of this DRAM bank is usable, try
+ 			 * using it for LMB allocation.
+ 			 */
+-			of_start = map_sysmem((ulong)lmb_alloc_base(lmb,
+-				    of_len, 0x1000, usable), of_len);
++			addr = lmb_alloc_base(lmb, of_len, 0x1000, usable);
++			of_start = map_sysmem(addr, of_len);
+ 			/* Allocation succeeded, use this block. */
+ 			if (of_start != NULL)
+ 				break;
 -- 
 2.43.0
 
