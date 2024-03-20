@@ -4,82 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 163E0C54E67
-	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 20:55:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A37FFC54E58
+	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 21:00:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35DAD88010;
-	Wed, 20 Mar 2024 21:55:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id E157987CFC;
+	Wed, 20 Mar 2024 22:00:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ideasonboard.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="durQZY01";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="gKD/SBil";
+	dkim=pass (1024-bit key; unprotected) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="TuNnToC1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3928A880EA; Wed, 20 Mar 2024 21:55:47 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ id 07C2E8723E; Wed, 20 Mar 2024 22:00:21 +0100 (CET)
+Received: from perceval.ideasonboard.com (perceval.ideasonboard.com
+ [213.167.242.64])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D6BB8723E
- for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 21:55:45 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4V0LTX6YMyz9snx;
- Wed, 20 Mar 2024 21:55:44 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1710968144;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=+lC9tE/VJcDeSYdJYjGLUhqO5+1efOcbTaWJeG9Ubwg=;
- b=durQZY01RdWMPS49qBj5tQpH5EdwKrFgGMUTm0aQrC0STsyvabi7tTtDKKKFIF5Lo8brNo
- LQoiEipJHx4wEiWq0EAUlHhxfU1sbla3CaEg5zD3mi6I/kuZ8dWwj68igb7Jm+Q/15l5Ze
- Tey9x4uQ1JARoivHQ3Pg8HR2Ge+vbTN/rIvDtCV0FEf5BsaPWV9r1Amuw/w/wMmVVMu5RQ
- z8OMp7nC6o7OtdZqn6VzlCriMzJk7OAZgY6YT/dYpZ6CHWi01sh6bXu5M2oP+3uCM8toUN
- ZUjsXQ6nfprJm+0046ffXfwV1MzTTOVHwHl1QdK+c4//SPQWxCi8SK26jWDKxg==
-Message-ID: <3fd317b9-6bbb-4ef2-b806-9e364b4e06de@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1710968143;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=+lC9tE/VJcDeSYdJYjGLUhqO5+1efOcbTaWJeG9Ubwg=;
- b=gKD/SBil7pdKNMvpGtTpjUj8RP1L5E8q1MFX+4ZRJHETrce06TkUc1ahBAUQqrWNWJTyvq
- ADUlMiXriJB78Zdaw9olp+DWPTWJYl8tEqj7DUDUcsFd8wYhJ8r3Z52IWzwzpr40WfxhMc
- 6vDnunRM2CatEmnZ46Q78Pkl5wZ2/kiKa13XitG6KZhaP33FrbE73Rc5ndTBr+nD8n3QB0
- 6+6w7lgfrNmk9NrXr2sWxWVTuCC5lKoq+1Putuy4EGwQKwYLE1Msp+8zgCZm6Vm5MZCepP
- VKC8/ey615vA4DJa9uZwSFvPbGCm/gqjznY4FjVGFJKBC1tRe5tdG6BpGVklYw==
-Date: Wed, 20 Mar 2024 21:18:55 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id E8C958802B
+ for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 22:00:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=ideasonboard.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=laurent.pinchart@ideasonboard.com
+Received: from pendragon.ideasonboard.com (81-175-209-231.bb.dnainternet.fi
+ [81.175.209.231])
+ by perceval.ideasonboard.com (Postfix) with ESMTPSA id B5FFCBEB;
+ Wed, 20 Mar 2024 21:59:50 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
+ s=mail; t=1710968390;
+ bh=3E3yc1EY1Sha5j2fuXrktBnfqk7FgKWqHsI3B/dda8Q=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=TuNnToC1rpgm+frHnJmsTTdtB/AcZkc/FYnwarAoXaCcYIFoXsNw+0YKTaKNWXwyJ
+ tMEpH6Iu6HmaF5OUgIcEPu03hJCEHxhem9b48LppwPulkZyz5Te2bQg9sOTZXLdRYx
+ RszXN07+le7SmQTerM4Jp54h8359uc+p0ymbRrM0=
+Date: Wed, 20 Mar 2024 23:00:15 +0200
+From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH v2 2/4] boot: fdt: Clean up env_get_bootm_size()
+Message-ID: <20240320210015.GA2539@pendragon.ideasonboard.com>
+References: <20240318150200.8178-1-marek.vasut+renesas@mailbox.org>
+ <20240318150200.8178-2-marek.vasut+renesas@mailbox.org>
+ <20240318161813.GF13682@pendragon.ideasonboard.com>
+ <b13328fd-03ed-49e0-90b2-0f0697e8c415@mailbox.org>
 MIME-Version: 1.0
-Subject: Re: [PATCH 1/2] usb: udc: dwc3: Fold board
- dm_usb_gadget_handle_interrupts() into DWC3 gadget
-Content-Language: en-US
-To: Caleb Connolly <caleb.connolly@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Angus Ainslie <angus@akkea.ca>,
- Eugen Hristev <eugen.hristev@collabora.com>,
- Igor Prusov <ivprusov@salutedevices.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, Nishanth Menon <nm@ti.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Simon Glass
- <sjg@chromium.org>, Stefan Bosch <stefan_b@posteo.net>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>,
- kernel@puri.sm
-References: <20240317044357.547037-1-marek.vasut+renesas@mailbox.org>
- <b20f5e01-d45c-402c-90e2-9593558bbeaa@linaro.org>
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <b20f5e01-d45c-402c-90e2-9593558bbeaa@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 20c02a0d29cccf4afa7
-X-MBO-RS-META: wjh6tzjnnt8qn3oygedpxn1c99d9bhng
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <b13328fd-03ed-49e0-90b2-0f0697e8c415@mailbox.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,21 +70,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/18/24 1:47 PM, Caleb Connolly wrote:
+On Wed, Mar 20, 2024 at 09:52:34PM +0100, Marek Vasut wrote:
+> On 3/18/24 5:18 PM, Laurent Pinchart wrote:
 > 
+> >> @@ -142,7 +140,7 @@ phys_size_t env_get_bootm_size(void)
+> >>   
+> >>   	s = env_get("bootm_low");
+> >>   	if (s)
+> >> -		tmp = (phys_size_t)simple_strtoull(s, NULL, 16);
+> >> +		tmp = simple_strtoull(s, NULL, 16);
+> >>   	else
+> >>   		tmp = start;
+> >>   
+> > 
+> > Maybe you could even drop the tmp variable completely by writing this
+> > 
+> > 	if (s)
+> > 		size -= simple_strtoull(s, NULL, 16) - start;
+> > 
+> > 	return size;
+> > 
+> > I've never liked variables named tmp :-)
 > 
-> On 17/03/2024 04:42, Marek Vasut wrote:
->> The dm_usb_gadget_handle_interrupts() has no place in board code. Move
->> this into DWC3 driver. The OMAP implementation is special, add new weak
->> dwc3_uboot_interrupt_status() function to decide whether DWC3 interrupt
->> handling should be called, and override it in OMAP DWC3 code, to repair
->> the special OMAP interrupt handling code until OMAP gets switched over
->> to DM UDC proper.
->>
->> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> 
-> Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
+> No, let's not do this. With this FDT part, the code should be verbose 
+> and as easy to understand at first glance as possible, no subtraction 
+> assignments and other shenanigans please.
 
-Thank you. If you have a hardware with DWC3 , can you please also test 
-this series ? I am afraid this may break things, although it is likely 
-to break mostly select MX8M boards.
+How about this ?
+
+	s = env_get("bootm_low");
+	if (s) {
+		phys_addr_t low_addr = simple_strtoull(s, NULL, 16);
+                size -= low_addr - start;
+	}
+
+	return size;
+
+If you're going for readability, that's clearer than
+
+	return size - (tmp - start);
+
+and it also interestingly points out that tmp/low_addr should be a
+phys_addr_t, not a phys_size_t.
+
+-- 
+Regards,
+
+Laurent Pinchart
