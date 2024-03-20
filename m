@@ -4,86 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A0E7C54E58
-	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 12:34:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A878AC54E58
+	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 12:38:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8460C87FF1;
-	Wed, 20 Mar 2024 13:34:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1903887F39;
+	Wed, 20 Mar 2024 13:38:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fhHS8pAt";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eO5rpKDv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9435A88018; Wed, 20 Mar 2024 13:34:04 +0100 (CET)
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [IPv6:2a00:1450:4864:20::12e])
+ id 2E26887F4F; Wed, 20 Mar 2024 13:38:20 +0100 (CET)
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
+ [IPv6:2607:f8b0:4864:20::112a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1058687FED
- for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 13:34:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 33F0887D83
+ for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 13:38:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-5101cd91017so10111339e87.2
- for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 05:34:02 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-609fd5fbe50so70880317b3.0
+ for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 05:38:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1710938041; x=1711542841; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:references:cc:to:from
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=ju0K9HwdzdqbG2naLWmsZIvGuUEhhqWKdn9mY/URfoU=;
- b=fhHS8pAtknzxS478I9v7KJiuY1ZODVaZWAGiclZ7zecToZdjNymAfW2q+jSAcX0HbJ
- IIcytAy3TmNOsRgLPjUrTSagsKK5v5Lp26pQS7v6EOsEN1FQBdTVaxHYi4vky46rpG5f
- fE/xoV1TdIES6TGj6k9xIeJrFNk6gU6X8c01QnGu+OunUVyjdXWeTXIj15qEvJ1SmQlS
- iSIcxcYAl2odASRWKp5Iy6cykoWSgIuKsEWRNilu1CguPYxYkplxAdX6VoibFoNNxTmI
- avcy/tkkqx9nA5XzzMhmKN6xR6K79u53dW00ps2jQ+ef7bbqgiTfC8KSywClyKAq3lOI
- Ejpg==
+ d=konsulko.com; s=google; t=1710938296; x=1711543096; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=sxlcYfKPMPmjQP+gPe1S0G57XAtUsNEhoQfISnGZo98=;
+ b=eO5rpKDvI1FOOuGnEyfRiMr+G3XwontGWjzeFxcApa09n4JC7GksCJ2w4hLiOnxELo
+ BBaqi6jm/cyt69nfzPOuDcuoXSMUxJ/V/kVMnu868CdaBmxDr20H9o7HJzqGnCcUWAeM
+ xRuNA/1sVzZt2Y9/ez5aN0U1KaA48aNS5ZC00=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710938041; x=1711542841;
- h=content-transfer-encoding:in-reply-to:references:cc:to:from
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ju0K9HwdzdqbG2naLWmsZIvGuUEhhqWKdn9mY/URfoU=;
- b=NJ3j2cZNdWD1d6QcTjd3G81VTDiFMEtlLymEkHzH5tU1kOW6vQT6nValTxVcnh6OiP
- A4smLvgngxD52pr1ProORYzMCuAKhIJ3E5o+NIliHVAKuXUf9bK6NgGCVclfcqAWaPNs
- gOngiH4t/F0HmIx1ivwwih4hyECx/HgfsPf/SErX0xuyXu/tzVsjZdiroyNXH1mE0Sg7
- a+0rlQGo1pWBRZZ5trlNr1wBx8mbazhl9sjxtnuuIWt4j0tG6wf76MET9X8ZQvliRXBf
- sAioedyWlSwUczAYyI1CPZgpJZAT3PIq5njU7NKDr/YOOf/Dau0Gmcbhq9ssoShMgwDz
- v7kg==
+ d=1e100.net; s=20230601; t=1710938296; x=1711543096;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=sxlcYfKPMPmjQP+gPe1S0G57XAtUsNEhoQfISnGZo98=;
+ b=f3hMfUb2SXa4FU9C4My0Ai6k/FSLywMY2V/ThmPcBH6xroYnz39wVU7VpKkmNJeimb
+ MbYciD9ekStCw2XIVk3EpbObhzIlNNdgazor1nljlmYHIzoTQloLF2qP6PrG0x3ksS3+
+ Qe4+oZADjjeg3CoLwO1TFq3OJ4LK4ziIYyWXDbS5sAyvaHGb1JkEqSRXNt0nATQiG1zj
+ RFkGsscG2sbibkY1ZTxXhgo4ySrrqnV2Tt+U97LUQU4hdUR8RRTT2Ri/eqWMEHSaxPJ5
+ yvPwYGY/qAdtRPlr89borKbnTelV9byMeBuSVn34pqf0abcpUT46PdpUcAkjGpnYHV8P
+ u5yw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXo+/KYhanYM+NcLUkyHIaT1cL/PYpErgLsV96MmuS3n9Dx/QQftDATDSVtpxpFAAjP9uey8f2JSbF0EEgTqlbYmnBmpQ==
-X-Gm-Message-State: AOJu0YzkDhY8OhrbHWCNS6s3jQtg6ngddRtVrGJKgEaXN9ubwKZDvKXc
- 890OoqmTol5BUvei+nNqDUTxaBugMnT9WnECu/lkD2MVZrB1HO5a/ArMrYK4h5E=
-X-Google-Smtp-Source: AGHT+IHcGneeLKyiGMiL0fEuvOErc3178VgdsqGBhT8h20p5zNXIR0h1OQP1L1RnjZdABhJ3k1Utdg==
-X-Received: by 2002:a19:6403:0:b0:513:df00:8ab5 with SMTP id
- y3-20020a196403000000b00513df008ab5mr9084443lfb.27.1710938041283; 
- Wed, 20 Mar 2024 05:34:01 -0700 (PDT)
-Received: from [192.168.1.78] (host-92-17-96-232.as13285.net. [92.17.96.232])
+ AJvYcCX3rxizDqEIf9UTENriJ9lf1YkadMvhrl725Nyk9tT3oTNnDDGKYDYJ6hy4UUDm4CXyL6bBYPHzTzn9kUP7PGWCRBPqBQ==
+X-Gm-Message-State: AOJu0YzD1xzE0b3GVr5rO2Exl5vuctNxEUdhBYzoyu4rJ/4QoYtlLVzb
+ qU5Cl+Khn8/ksGr2rPJqrX83LYhXXADaymWFMEocLoOM8E5lFPXQ2HoTapQzCFA7GI858DN45kF
+ E
+X-Google-Smtp-Source: AGHT+IE+uabOi6CVZYQOcU8ijXce6hsexT9VaBiEEUp9FDB8J3UNKeB0NPOyq6yS74uebmNkZtKYVQ==
+X-Received: by 2002:a0d:e286:0:b0:609:33dd:c63f with SMTP id
+ l128-20020a0de286000000b0060933ddc63fmr17489610ywe.34.1710938295954; 
+ Wed, 20 Mar 2024 05:38:15 -0700 (PDT)
+Received: from bill-the-cat (065-184-193-066.res.spectrum.com. [65.184.193.66])
  by smtp.gmail.com with ESMTPSA id
- t18-20020a05600c199200b00414612a43a9sm2088356wmq.28.2024.03.20.05.34.00
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 20 Mar 2024 05:34:00 -0700 (PDT)
-Message-ID: <259ec55a-df31-4a7e-a937-b20a24344531@linaro.org>
-Date: Wed, 20 Mar 2024 12:34:00 +0000
+ bx16-20020a05690c081000b00610f1cf0527sm378680ywb.1.2024.03.20.05.38.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 20 Mar 2024 05:38:15 -0700 (PDT)
+Date: Wed, 20 Mar 2024 08:38:13 -0400
+From: Tom Rini <trini@konsulko.com>
+To: MD Danish Anwar <danishanwar@ti.com>
+Cc: Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Max Krummenacher <max.krummenacher@toradex.com>,
+ Dan Carpenter <dan.carpenter@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Ravi Gunasekaran <r-gunasekaran@ti.com>, Nishanth Menon <nm@ti.com>,
+ u-boot@lists.denx.de, srk@ti.com, Vignesh Raghavendra <vigneshr@ti.com>,
+ Roger Quadros <rogerq@kernel.org>
+Subject: Re: [PATCH v6] remoteproc: uclass: Add methods to load firmware to
+ rproc and boot rproc
+Message-ID: <20240320123813.GL3442575@bill-the-cat>
+References: <20240228120645.958316-1-danishanwar@ti.com>
+ <20240319224032.GA1686480@bill-the-cat>
+ <3b588cc0-225e-466d-9257-f0f4ef592cf3@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 12/14] dts: sdm845-db845c: add u-boot fixups
-Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Sumit Garg <sumit.garg@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de
-References: <20240319-b4-qcom-livetree-v3-0-e1b38d9b4fa4@linaro.org>
- <20240319-b4-qcom-livetree-v3-12-e1b38d9b4fa4@linaro.org>
- <CAFA6WYN3MZ0Rh-XEEggc4OUk2wUQngT3EJDcHQb0-n7jxfMd9g@mail.gmail.com>
- <1bdbe86d-abe7-4e14-947f-245cf9661f08@linaro.org>
-In-Reply-To: <1bdbe86d-abe7-4e14-947f-245cf9661f08@linaro.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="+6NEH1kT/CrzRSdZ"
+Content-Disposition: inline
+In-Reply-To: <3b588cc0-225e-466d-9257-f0f4ef592cf3@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,66 +101,157 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--+6NEH1kT/CrzRSdZ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 20/03/2024 12:33, Caleb Connolly wrote:
-> 
-> 
-> On 19/03/2024 13:55, Sumit Garg wrote:
->> On Tue, 19 Mar 2024 at 17:52, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->>>
->>> The USB VBUS supply for the type-A port is enabled via a GPIO regulator.
->>> This is incorrectly modelled in Linux where only the PCIe dependency is
->>> expressed.
->>
->> Can we send a fix for the Linux kernel DTS to correctly model it? We
->> can then later get rid of this modification once that is accepted.
-> 
-> I spoke to Bjorn about this and apparently the correct way to model this
-> will be to have a usb-connector node with a vbus-supply property. There
-> is some work underway in Linux to support this kind of thing already.
-> 
-> In the mean time he suggested to just make the regulator always-on, so I
-> sent a patch to do that [1]. I actually hit this issue when booting from
-> USB as the PCIe drivers aren't available in the initramfs, so USB never
-> turns on, and the always-on hack fixes that.
-> 
-> In the mean time, we'll still need this vbus-supply reference as U-Boot
-> doesn't automatically probe regulators.
+On Wed, Mar 20, 2024 at 11:19:01AM +0530, MD Danish Anwar wrote:
+> Hi Tom,
+>=20
+> On 20/03/24 4:10 am, Tom Rini wrote:
+> > On Wed, Feb 28, 2024 at 05:36:45PM +0530, MD Danish Anwar wrote:
+> >=20
+> >> Add APIs to set a firmware_name to a rproc and boot the rproc with the
+> >> same firmware.
+> >>
+> >> Clients can call rproc_set_firmware() API to set firmware_name for a r=
+proc
+> >> whereas rproc_boot() will load the firmware set by rproc_set_firmware(=
+) to
+> >> a buffer by calling request_firmware_into_buf(). rproc_boot() will then
+> >> load the firmware file to the remote processor and start the remote
+> >> processor.
+> >>
+> >> Also include "fs-loader.h" and make remoteproc driver select FS_LOADER=
+ in
+> >> Kconfig so that we can call request_firmware_into_buf() from remoteproc
+> >> driver.
+> >>
+> >> Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
+> >> Acked-by: Ravi Gunasekaran <r-gunasekaran@ti.com>
+> >> Reviewed-by: Roger Quadros <rogerq@kernel.org>
+> >> ---
+> >> Changes from v5 to v6:
+> >> *) Collected Acked-by tag from Ravi Gunasekaran <r-gunasekaran@ti.com>
+> >> *) Fixed few typos as pointed out by Roger Quadros <rogerq@kernel.org>
+> >> *) Added if condition to check if uc_pdata->fw_name exists and free it
+> >>    before the strndup as suggested by Roger Quadros <rogerq@kernel.org>
+> >>
+> >> Changes from v4 to v5:
+> >> *) Added Kconfig option REMOTEPROC_MAX_FW_SIZE to set max firmware size
+> >>    that can be loaded to a rproc.
+> >> *) Added freeing of address in rproc_boot() as pointed out by Ravi.
+> >> *) Allocating the address at a later point in rproc_boot()
+> >> *) Rebased on latest u-boot/master [commit=20
+> >>    9e00b6993f724da9699ef12573307afea8c19284]
+> >>
+> >> Changes from v3 to v4:
+> >> *) No functional change. Splitted the patch out of the series as sugge=
+sted
+> >>    by Nishant.
+> >> *) Droppped the RFC tag.
+> >>
+> >> v5: https://lore.kernel.org/all/20240217122602.3402774-1-danishanwar@t=
+i.com/
+> >> v4: https://lore.kernel.org/all/20240130063322.2345057-1-danishanwar@t=
+i.com/
+> >> v3: https://lore.kernel.org/all/20240124064930.1787929-4-danishanwar@t=
+i.com/
+> >>
+> >>  drivers/remoteproc/Kconfig        |   8 +++
+> >>  drivers/remoteproc/rproc-uclass.c | 102 ++++++++++++++++++++++++++++++
+> >>  include/remoteproc.h              |  34 ++++++++++
+> >>  3 files changed, 144 insertions(+)
+> >>
+> >> diff --git a/drivers/remoteproc/Kconfig b/drivers/remoteproc/Kconfig
+> >> index 781de530af..9f9877931c 100644
+> >> --- a/drivers/remoteproc/Kconfig
+> >> +++ b/drivers/remoteproc/Kconfig
+> >> @@ -10,6 +10,7 @@ menu "Remote Processor drivers"
+> >>  # All users should depend on DM
+> >>  config REMOTEPROC
+> >>  	bool
+> >> +	select FS_LOADER
+> >>  	depends on DM
+> >> =20
+> >>  # Please keep the configuration alphabetically sorted.
+> >=20
+> > Can we not make the FS_LOADER portion optional? I didn't realize how
+> > many non-TI platforms this impacted. And even then it's possible I
+> > assume that custom designs will load the firmwares in other manners.
+> >=20
+>=20
+> Yes we can. We can wrap the remoteproc APIs using FS_LOADER in #ifdef
+> CONFIG_FS_LOADER. And instead of REMOTEPROC driver selecting FS_LOADER,
+> the clinet driver (ICSSG in this case) who is calling those remoteproc
+> APIs will select FS_LOADER and enable it.
+>=20
+> This will make sure that other platforms (ti or non-ti) that doesn't
+> support ICSSG but enables Remoteproc, will not enable FS_LOADER. This
+> way we are not forcing other platforms using remoteproc to enable
+> FS_LOADER. In this case the APIs will not get built.
+>=20
+> Now FS_LOADER will only be enabled when there is a client driver that
+> uses rproc_boot() APIs. It's upto the client driver to enable FS_LOADER
+>=20
+> below is the diff,
+>=20
+> diff --git a/drivers/remoteproc/Kconfig b/drivers/remoteproc/Kconfig
+> index 9f9877931c..a49802c132 100644
+> --- a/drivers/remoteproc/Kconfig
+> +++ b/drivers/remoteproc/Kconfig
+> @@ -10,7 +10,6 @@ menu "Remote Processor drivers"
+>  # All users should depend on DM
+>  config REMOTEPROC
+>         bool
+> -       select FS_LOADER
+>         depends on DM
+>=20
+>  # Please keep the configuration alphabetically sorted.
+> diff --git a/drivers/remoteproc/rproc-uclass.c
+> b/drivers/remoteproc/rproc-uclass.c
+> index f4f22a3851..a6a8be5009 100644
+> --- a/drivers/remoteproc/rproc-uclass.c
+> +++ b/drivers/remoteproc/rproc-uclass.c
+> @@ -994,6 +994,7 @@ int rproc_set_firmware(struct udevice *rproc_dev,
+> const char *fw_name)
+>         return 0;
+>  }
+>=20
+> +#ifdef CONFIG_FS_LOADER
+>  int rproc_boot(struct udevice *rproc_dev)
+>  {
+>         struct dm_rproc_uclass_pdata *uc_pdata;
+> @@ -1063,3 +1064,4 @@ free_buffer:
+>         free(addr);
+>         return ret;
+>  }
+> +#endif
+>=20
+> Let me know if this looks ok. If it's ok I will post v7 with this change.
 
-oh, forgot the link!
+Yes please, thanks.
 
-[1]:
-https://lore.kernel.org/linux-arm-msm/20240320122515.3243711-1-caleb.connolly@linaro.org/
->>
->> -Sumit
->>
->>> Add a U-Boot specific dtsi snippet so that this supply will
->>> get enabled when initialising USB.
->>>
->>> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
->>> ---
->>>  arch/arm/dts/sdm845-db845c-u-boot.dtsi | 8 ++++++++
->>>  1 file changed, 8 insertions(+)
->>>
->>> diff --git a/arch/arm/dts/sdm845-db845c-u-boot.dtsi b/arch/arm/dts/sdm845-db845c-u-boot.dtsi
->>> new file mode 100644
->>> index 000000000000..3c83e21251c4
->>> --- /dev/null
->>> +++ b/arch/arm/dts/sdm845-db845c-u-boot.dtsi
->>> @@ -0,0 +1,8 @@
->>> +// SPDX-License-Identifier: GPL-2.0
->>> +
->>> +/* This GPIO must be turned on to enable the 5v VBUS
->>> + * supply on the USB port.
->>> + */
->>> +&usb_2_dwc3 {
->>> +       vbus-supply = <&pcie0_3p3v_dual>;
->>> +};
->>>
->>> --
->>> 2.44.0
->>>
-> 
+--=20
+Tom
 
--- 
-// Caleb (they/them)
+--+6NEH1kT/CrzRSdZ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmX62KsACgkQFHw5/5Y0
+tywZPAwAiINuizWTGsJD/DS6rjXGUgSQibra3PDDOmgu8Rm1n5R1sYFhlwx2HA/3
+TiSBlWJkyTkL5+L7ndMJfP19qdZB2o7Cx+eneTgLvd8IGizLzSiUDccURXPWJUnt
+PDLqcNtsEpwyNbWb+BIGsxiWBs+INj/ulUFKhPdzwHfCUVdPQzWbWlEj8SzC2Bst
+bx1TYkffPpsy/a36HHnq3l5aNDIdJaRfTNqL3M3COn61DNMYaWV/N+n5CEEVdfMY
+DIfVOy8uO4GC4h+qgZCYvLCETPMEIMs9UeyGibiK8J7loZO0auci3SsMG/1lckFH
+Qtqu+YvWSQj3jmxlBbDZjOj0vJx6S9AiS0hdxHQ1X2Lz9D4m1E6X5iAUJcw4e/3R
+x2LsruI9FtgKDARmf/SFkBbWjNrNJtSwLYo5HuV5fSClmOchEVpIgklZorIWwq6t
+d8FMZlUkoU3YL1RQZRpM6sheiDnlrfKegpufm/VcT8zxeAOjure3kpvRIJdTvo8T
+0W89bY58
+=broC
+-----END PGP SIGNATURE-----
+
+--+6NEH1kT/CrzRSdZ--
