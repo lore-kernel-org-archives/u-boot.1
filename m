@@ -4,83 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3ECF0C54E71
-	for <u-boot@archiver.kernel.org>; Tue, 19 Mar 2024 22:40:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 152B4C54E71
+	for <u-boot@archiver.kernel.org>; Wed, 20 Mar 2024 01:17:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4DAFA87E6D;
-	Tue, 19 Mar 2024 23:40:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 21CD287F13;
+	Wed, 20 Mar 2024 02:17:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=timesys.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AFAXlcuo";
+	dkim=pass (2048-bit key; unprotected) header.d=timesys-com.20230601.gappssmtp.com header.i=@timesys-com.20230601.gappssmtp.com header.b="ZhRRPzJz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD23287E6D; Tue, 19 Mar 2024 23:40:41 +0100 (CET)
-Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
- [IPv6:2607:f8b0:4864:20::b2b])
+ id E59F688076; Wed, 20 Mar 2024 02:11:32 +0100 (CET)
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
+ [IPv6:2607:f8b0:4864:20::112a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 33E3587CFF
- for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 23:40:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D551287513
+ for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 02:11:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=timesys.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2b.google.com with SMTP id
- 3f1490d57ef6-dbed179f0faso261846276.1
- for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 15:40:39 -0700 (PDT)
+ spf=pass smtp.mailfrom=greg.malysa@timesys.com
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-609f060cbafso74132497b3.0
+ for <u-boot@lists.denx.de>; Tue, 19 Mar 2024 18:11:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1710888038; x=1711492838; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=GXuPkBEKVgKpwrckzE7av0hqcZQqzmBbbDbG5FXtRYg=;
- b=AFAXlcuo3SPquioClLGOBeU9LzEyEoar/LXev2gG46thB64iHgF2SE6+1h5GRyQUPC
- wLErv5i9qhYYydj7a7F4arip/VkaTG4dYeINKbGPiFrxoFBhxHkAFr83ztUmI8xVDeSF
- 7hlI8kuvdQgj60LVCWTT5KysA0jhM+l/9zpuU=
+ d=timesys-com.20230601.gappssmtp.com; s=20230601; t=1710897088; x=1711501888;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ULB7ni1VXOd7terdK83M6yRrhxsVzX193+m43d+AQOA=;
+ b=ZhRRPzJzigva5KiB4DNKnvlHdYr/SmpKqIAgsv0pYytXZVk4Ocm6u4Qsxcxkaq7HdP
+ QP8Fb9d9tHTuG3IZLeU3LTVDYWpPuDREecpCVW5GPlaCzFI12OgwqCZvuz29p9NT/dPl
+ aoGZCWij3TQEFuYSZaZT36Ehl9y86E7dgqtH4ygAJUrVuK5DYgrfu07MYwI6mJu3SwtK
+ s0mDOPdNjipun2olFmfAaTuLaO1hvYWmvWaUyI0Q8HNSudqy627fTWzHTceGPB+WLnLo
+ nl8IqZT574bNcDCN1LHGtgiEzPPLbzRdEgbh1oHbT62qy6SbM6agoUHGl33d+O8Dz/dW
+ n7kA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1710888038; x=1711492838;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GXuPkBEKVgKpwrckzE7av0hqcZQqzmBbbDbG5FXtRYg=;
- b=YEhmx37ushyUFAabXSw746kYfWBOzFvii5oq5W616nuTHHtid371WCKFrlNxwFxJew
- 3Tgtd8L5/TTYsWOzMjcd6QE7k+HAfl/yRf7+zgUPb+BHXb7GUMOXONofhrzxl4o71Sko
- LpkikSmhv060G9uP0EGkgUl3tunoCneG6i3Ro9L0Ix0E9oKgo6agrjR9SBk2CCKoZc6h
- aBhBOVJ9cilb1BFzILu3H7zQQtuqCoU1t5T+8XD30HkHOX2q+Wgi0WdMyKtnmU+rdAA8
- GlU9uQCj3AkS1lVd52eYn3T0JLt6WHC/0VYtQpGpp8m2h5Gmtkpim9aIoD8YNty3EcCx
- gzMQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVv2M7fCXXFAEPrbYwOreE0v66m31DmLy1Adjo4zQ4NMQOJM9adkSWRuRY8/p4TvhGjdZ0b/kWL2kaeOqTIm8EkEPSknQ==
-X-Gm-Message-State: AOJu0YyDYEvQxNq5VYwG1Zi7zGLNzEvDSpLseCdE0V6UvqTS9PnEzstR
- jnSEeXImPd8k3DffZbyapbM9I7Umet/o850BO/lViToPDCETaFC0DFn4Jpuv5nY=
-X-Google-Smtp-Source: AGHT+IG8cScAFQEPebXTn6l6XHZ91i0APbjdH1BUw4QISN7QoDH3Q0m+bIyCE80IEhg7AfY8fHmCvQ==
-X-Received: by 2002:a5b:c06:0:b0:dc6:f0ac:6b53 with SMTP id
- f6-20020a5b0c06000000b00dc6f0ac6b53mr548696ybq.15.1710888037955; 
- Tue, 19 Mar 2024 15:40:37 -0700 (PDT)
-Received: from bill-the-cat (065-184-193-066.res.spectrum.com. [65.184.193.66])
+ d=1e100.net; s=20230601; t=1710897088; x=1711501888;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ULB7ni1VXOd7terdK83M6yRrhxsVzX193+m43d+AQOA=;
+ b=bQsH3yiJ3A8/Brh/3QlEx2OYWBcyGPHetRtaejVxHoMzwpRM1wCW8F3az19PnKVDC6
+ 0lyQScPxaJGctsY4uCxorqa3rVmypvgNc8X3JmXeLB07t6GsUEs0ju9fqvry3TapnXp4
+ eUbWyJg6csM5TPntSAMxWHc+6N5Yxv8aPw3bnB1C5S2IQiBCanaf6iBU5r8lgCMPum8G
+ dhQ9tMNcJEwexbIIGq9tW49N1rcBJP+gtTfoxc7nm90IWvegAJO2vCmPsRfW9cYzPlrG
+ WaKtfFzkAYLujNL10/6Lf+vKT8O1pQuG3eD0O+Q1dfYGmKPI4NwXqDqhd//7L6Ez+Cly
+ 9COw==
+X-Gm-Message-State: AOJu0YwdOTqJ4FoLZJtA2OHFDY9TzLQIVlIuxDYh3cP+ub3raOTUvtGx
+ 741gCuZJsuJYtm6mWJbfQA0HuuJUqIGKXpfSPMK5cCZ2ychS2HNXx7OeSiOMeqkoRnsORAA7rLg
+ W9A==
+X-Google-Smtp-Source: AGHT+IHvitO7STPyvIaEyuQXeaKJRfJuoZorlT9Fo2Xna7lp6BTlJyh6j89QTXkRbaZ1IVMuDsbg8w==
+X-Received: by 2002:a0d:d58c:0:b0:609:f49f:5949 with SMTP id
+ x134-20020a0dd58c000000b00609f49f5949mr4659421ywd.21.1710897088036; 
+ Tue, 19 Mar 2024 18:11:28 -0700 (PDT)
+Received: from executor.attlocal.net ([2600:1700:5eb5:1ba0:dc1f:cff:fef9:435b])
  by smtp.gmail.com with ESMTPSA id
- w131-20020a25df89000000b00dcbb7dd8b86sm856504ybg.52.2024.03.19.15.40.35
+ h3-20020a81b643000000b00608d0a088e3sm2623874ywk.120.2024.03.19.18.11.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Mar 2024 15:40:36 -0700 (PDT)
-Date: Tue, 19 Mar 2024 18:40:32 -0400
-From: Tom Rini <trini@konsulko.com>
-To: MD Danish Anwar <danishanwar@ti.com>
-Cc: Francesco Dolcini <francesco.dolcini@toradex.com>,
- Max Krummenacher <max.krummenacher@toradex.com>,
- Dan Carpenter <dan.carpenter@linaro.org>, Simon Glass <sjg@chromium.org>,
- Ravi Gunasekaran <r-gunasekaran@ti.com>, Nishanth Menon <nm@ti.com>,
- u-boot@lists.denx.de, srk@ti.com, Vignesh Raghavendra <vigneshr@ti.com>,
- Roger Quadros <rogerq@kernel.org>
-Subject: Re: [PATCH v6] remoteproc: uclass: Add methods to load firmware to
- rproc and boot rproc
-Message-ID: <20240319224032.GA1686480@bill-the-cat>
-References: <20240228120645.958316-1-danishanwar@ti.com>
+ Tue, 19 Mar 2024 18:11:27 -0700 (PDT)
+From: Greg Malysa <greg.malysa@timesys.com>
+To: u-boot@lists.denx.de
+Cc: Greg Malysa <greg.malysa@timesys.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Ian Roberts <ian.roberts@timesys.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Christophe Leroy <christophe.leroy@csgroup.eu>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jesse Taube <mr.bossman075@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Michal Simek <michal.simek@amd.com>, Nishanth Menon <nm@ti.com>,
+ Shengyu Qu <wiagn233@outlook.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH] build: Revive and update LDR format support
+Date: Tue, 19 Mar 2024 21:09:22 -0400
+Message-Id: <20240320010922.30856-1-greg.malysa@timesys.com>
+X-Mailer: git-send-email 2.38.2
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Fu63nSbmOTYbOSyi"
-Content-Disposition: inline
-In-Reply-To: <20240228120645.958316-1-danishanwar@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Wed, 20 Mar 2024 02:17:12 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,98 +101,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+LDR format files are used primarily by Analog Devices processors but may
+be of interest to other vendors. Previously support existed for this
+format as part of the U-Boot build, but it has been unmaintained and
+unused for a long time. In preparation for adding support for modern ADI
+processors that use LDR, modernize the LDR support:
 
---Fu63nSbmOTYbOSyi
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+- Introduce CONFIG_LDR_CPU as the CPU string recognized by the LDR tool
+  may not be the same as CONFIG_CPU
+- Add an SPL target that repackages u-boot-spl inside an LDR file
 
-On Wed, Feb 28, 2024 at 05:36:45PM +0530, MD Danish Anwar wrote:
+An almost identical target for packaging u-boot into an LDR file already
+exists and did not need to be updated
 
-> Add APIs to set a firmware_name to a rproc and boot the rproc with the
-> same firmware.
->=20
-> Clients can call rproc_set_firmware() API to set firmware_name for a rproc
-> whereas rproc_boot() will load the firmware set by rproc_set_firmware() to
-> a buffer by calling request_firmware_into_buf(). rproc_boot() will then
-> load the firmware file to the remote processor and start the remote
-> processor.
->=20
-> Also include "fs-loader.h" and make remoteproc driver select FS_LOADER in
-> Kconfig so that we can call request_firmware_into_buf() from remoteproc
-> driver.
->=20
-> Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
-> Acked-by: Ravi Gunasekaran <r-gunasekaran@ti.com>
-> Reviewed-by: Roger Quadros <rogerq@kernel.org>
-> ---
-> Changes from v5 to v6:
-> *) Collected Acked-by tag from Ravi Gunasekaran <r-gunasekaran@ti.com>
-> *) Fixed few typos as pointed out by Roger Quadros <rogerq@kernel.org>
-> *) Added if condition to check if uc_pdata->fw_name exists and free it
->    before the strndup as suggested by Roger Quadros <rogerq@kernel.org>
->=20
-> Changes from v4 to v5:
-> *) Added Kconfig option REMOTEPROC_MAX_FW_SIZE to set max firmware size
->    that can be loaded to a rproc.
-> *) Added freeing of address in rproc_boot() as pointed out by Ravi.
-> *) Allocating the address at a later point in rproc_boot()
-> *) Rebased on latest u-boot/master [commit=20
->    9e00b6993f724da9699ef12573307afea8c19284]
->=20
-> Changes from v3 to v4:
-> *) No functional change. Splitted the patch out of the series as suggested
->    by Nishant.
-> *) Droppped the RFC tag.
->=20
-> v5: https://lore.kernel.org/all/20240217122602.3402774-1-danishanwar@ti.c=
-om/
-> v4: https://lore.kernel.org/all/20240130063322.2345057-1-danishanwar@ti.c=
-om/
-> v3: https://lore.kernel.org/all/20240124064930.1787929-4-danishanwar@ti.c=
-om/
->=20
->  drivers/remoteproc/Kconfig        |   8 +++
->  drivers/remoteproc/rproc-uclass.c | 102 ++++++++++++++++++++++++++++++
->  include/remoteproc.h              |  34 ++++++++++
->  3 files changed, 144 insertions(+)
->=20
-> diff --git a/drivers/remoteproc/Kconfig b/drivers/remoteproc/Kconfig
-> index 781de530af..9f9877931c 100644
-> --- a/drivers/remoteproc/Kconfig
-> +++ b/drivers/remoteproc/Kconfig
-> @@ -10,6 +10,7 @@ menu "Remote Processor drivers"
->  # All users should depend on DM
->  config REMOTEPROC
->  	bool
-> +	select FS_LOADER
->  	depends on DM
-> =20
->  # Please keep the configuration alphabetically sorted.
+Co-developed-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
+Signed-off-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
+Signed-off-by: Ian Roberts <ian.roberts@timesys.com>
+Signed-off-by: Greg Malysa <greg.malysa@timesys.com>
 
-Can we not make the FS_LOADER portion optional? I didn't realize how
-many non-TI platforms this impacted. And even then it's possible I
-assume that custom designs will load the firmwares in other manners.
+---
 
---=20
-Tom
+ Kconfig              | 9 ++++++++-
+ Makefile             | 2 +-
+ scripts/Makefile.spl | 5 +++++
+ 3 files changed, 14 insertions(+), 2 deletions(-)
 
---Fu63nSbmOTYbOSyi
-Content-Type: application/pgp-signature; name="signature.asc"
+diff --git a/Kconfig b/Kconfig
+index 5710934000..3f3ce6054e 100644
+--- a/Kconfig
++++ b/Kconfig
+@@ -715,10 +715,17 @@ config SYS_CLK_FREQ
+ 	  A static value for the CPU frequency.  Note that if not required
+ 	  for a given SoC, this can be left at 0.
+ 
+-source "api/Kconfig"
++config LDR_CPU
++	string "CPU name to be passed to LDR utility."
++	help
++	  Set the CPU name for the -T parameter in the LDR utility.  This is
++	  generally used on processors from Analog Devices, but may be also
++	  be useful for other vendors.
+ 
+ endmenu		# General setup
+ 
++source "api/Kconfig"
++
+ source "boot/Kconfig"
+ 
+ source "common/Kconfig"
+diff --git a/Makefile b/Makefile
+index a2bc9d5903..db3272a439 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1328,7 +1328,7 @@ u-boot-nodtb.bin: u-boot FORCE
+ 
+ u-boot.ldr:	u-boot
+ 		$(CREATE_LDR_ENV)
+-		$(LDR) -T $(CONFIG_CPU) -c $@ $< $(LDR_FLAGS)
++		$(LDR) -T $(CONFIG_LDR_CPU) -c $@ $< $(LDR_FLAGS)
+ 		$(BOARD_SIZE_CHECK)
+ 
+ # binman
+diff --git a/scripts/Makefile.spl b/scripts/Makefile.spl
+index 407fc52376..58d6a452e5 100644
+--- a/scripts/Makefile.spl
++++ b/scripts/Makefile.spl
+@@ -381,6 +381,11 @@ $(obj)/$(BOARD)-spl.bin: $(obj)/u-boot-spl.bin
+ 	$(objtree)/tools/mkexynosspl) $(VAR_SIZE_PARAM) $< $@
+ endif
+ 
++$(obj)/u-boot-spl.ldr: $(obj)/u-boot-spl
++	$(CREATE_LDR_ENV)
++	$(LDR) -T $(CONFIG_LDR_CPU) -c $@ $< $(LDR_FLAGS)
++	$(BOARD_SIZE_CHECK)
++
+ quiet_cmd_objcopy = OBJCOPY $@
+ cmd_objcopy = $(OBJCOPY) $(OBJCOPYFLAGS) $(OBJCOPYFLAGS_$(@F)) $< $@
+ 
+-- 
+2.38.2
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmX6FFgACgkQFHw5/5Y0
-tyyZ2AwAoPSW97P4JkaUv9FOdZIf7fXu+TlqdcH4zRaAsbUfswi68Kk0PBcmH/Ii
-x+5mRD62gi6AfuW9V6JnRN3rIl32Bfw6bfsEZqN7fuzQiCo+x5mOSlVliABtBwfY
-qouBeHvSlKgM8Tn13ADJIlM2FA4Fu/erixo/fqpPP2KyjjeU4PJdbSmZbOGOS/Ot
-BQA7AqbC47a0WB673iodgtItnVdhLPnzLpfNEbWNJ+9QxsFOk7cjdqFjH9ujtr8m
-XwaoUB3JZXIFHJuJM3nanrZVxmq4CguGx0hDIjbAT03Tp/AB5ufBCXA/SsdVKWBc
-iUnVLvYQWYz2Qykp6dZo9Ml3JLVanZlDMYayd2Gx8rOUexgcmqSaDyFXoQG3Z0Y4
-+zAb113Qd1o5YtWf7zaENECdsInGXiSkz6huL9uieF+CZxy2hMLWuJdyJjRJu4ew
-Q8vdSrDUTDVnTMfiNv95O3Ra/Z5MJRUG+xKNzsUNXXRRDqrsjkIIKsnHpE6pKdmr
-DOzkTnOS
-=PHAc
------END PGP SIGNATURE-----
-
---Fu63nSbmOTYbOSyi--
