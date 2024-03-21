@@ -4,78 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19B09C54E58
-	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 15:00:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 735ABC54E58
+	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 15:01:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 92E6B88119;
-	Thu, 21 Mar 2024 16:00:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id EB9778812B;
+	Thu, 21 Mar 2024 16:01:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gnu.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jk9q3Ixa";
+	dkim=pass (2048-bit key; unprotected) header.d=gnu.org header.i=@gnu.org header.b="Xj7DktpV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E7CE8744F; Thu, 21 Mar 2024 16:00:39 +0100 (CET)
-Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
- [IPv6:2607:f8b0:4864:20::235])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7D2A9880DB; Thu, 21 Mar 2024 15:46:02 +0100 (CET)
+Received: from eggs.gnu.org (eggs.gnu.org [IPv6:2001:470:142:3::10])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 86B1E8811B
- for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 16:00:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D4A987F1E
+ for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 15:46:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-3c1e992f060so505943b6e.0
- for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 08:00:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1711033233; x=1711638033; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=eTTqUsL6CGIeHEpdOp/JRiamuFPD2DQ9rWuWEmYNSn0=;
- b=jk9q3Ixazfu4a1CYgnGHm7B8PQ2go+/dK2DsDUthNeW0Jyed05Zu1WUtsR0k3tG9l5
- QdtvGv5WM7gFLxz6oNpaN55CVSMo/GLXZFEx6cv14BsBt5MilNC5V0ZCNyqE11ekghUZ
- EvnhGb1yRpJ7SiZxeihOBbF8zk5H5r7WCRgek=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711033233; x=1711638033;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=eTTqUsL6CGIeHEpdOp/JRiamuFPD2DQ9rWuWEmYNSn0=;
- b=hqV/mxx/zzLLqwAfvzOSaOGSeYNyvjPkGFKhliOPwf7cxSFuq4g+EhByhQ6hCrxD3Q
- SAHyVUMP7nDrCnYbk1+4p0HvaITUOYs7jwzibUyFB7M4DYvwWxvw2VXa7CZne7oEVgIN
- 6oPICprfc38mbiYXjzHc8HBSYN1CmIN7Bb7RyoqccQmwMYvrjANPertY0cNGpYqypttc
- HWmZrA4IRVmVpCCJm4QEMYBiUPhcXH73CaRsbW3qYiZKIJjvgCgCK8H/RO0WMrinqTIs
- YUFWfxOh3Phd8XLurjB37KoioZV79paR+34uckpxXt4Rf3gTDhdLue4UhQCR3ijYSXc/
- EjnQ==
-X-Gm-Message-State: AOJu0Yxe+pvaOV9mi/mEBgUZJuyy54AfghZNEgnmMAtkOV+YyUZoYYX/
- ioS1LNhEG/l4/L6gwoqnEn9JyMNmQtmxVpMZr+NC1BUNbBlno+rA1+FlAdO7z0Y=
-X-Google-Smtp-Source: AGHT+IGmMCeMjnGRTAVmw8oNN1jEAoaw/8IuojkkXam7M94r3Ep3juf3gf+8VLMQ42X8TdZR/Y+Qiw==
-X-Received: by 2002:a05:6808:209d:b0:3c2:6117:493e with SMTP id
- s29-20020a056808209d00b003c26117493emr2966647oiw.37.1711033233247; 
- Thu, 21 Mar 2024 08:00:33 -0700 (PDT)
-Received: from bill-the-cat (065-184-193-066.res.spectrum.com. [65.184.193.66])
- by smtp.gmail.com with ESMTPSA id
- bs17-20020ac86f11000000b00430d8ca2a82sm2714121qtb.66.2024.03.21.08.00.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Mar 2024 08:00:32 -0700 (PDT)
-Date: Thu, 21 Mar 2024 11:00:30 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Andre Przywara <andre.przywara@arm.com>,
- Janne Grunau <j@jannau.net>, Sumit Garg <sumit.garg@linaro.org>
-Subject: Re: Pull request efi-next-20240321
-Message-ID: <20240321150030.GX3442575@bill-the-cat>
-References: <38662008-a812-4fe4-aeee-b160c4e59c12@gmx.de>
+ dmarc=pass (p=none dis=none) header.from=gnu.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=othacehe@gnu.org
+Received: from fencepost.gnu.org ([2001:470:142:3::e])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <othacehe@gnu.org>)
+ id 1rnJg1-0006oT-Ma; Thu, 21 Mar 2024 10:45:53 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=gnu.org;
+ s=fencepost-gnu-org; h=MIME-Version:Date:Subject:To:From:in-reply-to:
+ references; bh=1Y1QsQcaGAGfTCs/IXAPKlf61vhFpiNRHvQ1UzaV0gs=; b=Xj7DktpVy/QNyD
+ nEafa5NwLxheGZSWu7Cre94C+RiUUyB6ONgMj15hUrXrdRj2o/WCprY2JmfvuY44n8xuzKDSFjfBY
+ HYYtCGZuhmEifuX+doNsKrLmce9OpG/7rdLAcENcT+YzCljn4r0LApNG4FM21Ic2WlTem56RVLF06
+ 5W6SdudXRVjTrvp21E0gXjxzSKY3jnnqsnPM4RTeov6BYeOei4EilmyKRYzFekD3E5pIO9YGYg76y
+ OIAJ/+SG0HFdsI51JhxFCmjtrtW4iohZFFBCI57N6h9sfQ+YIyrQTUGm+zbT/cucfug/ZrcFw/EpL
+ KrHKUmEYRQnPv2yc1YJg==;
+From: Mathieu Othacehe <othacehe@gnu.org>
+To: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
+ Peng Fan <peng.fan@nxp.com>, Shiji Yang <yangshiji66@outlook.com>,
+ Ye Li <ye.li@nxp.com>, Alice Guo <alice.guo@nxp.com>,
+ Stefano Babic <sbabic@denx.de>,
+ =?UTF-8?q?S=C3=A9bastien=20Szymanski?= <sebastien.szymanski@armadeus.com>,
+ Fabio Estevam <festevam@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Mathieu Othacehe <m.othacehe@gmail.com>, Yannic Moog <y.moog@phytec.de>,
+ Primoz Fiser <primoz.fiser@norik.com>,
+ Christoph Stoidner <c.stoidner@phytec.de>,
+ Wadim Egorov <w.egorov@phytec.de>
+Cc: u-boot@lists.denx.de,
+	Mathieu Othacehe <othacehe@gnu.org>
+Subject: [PATCH v3 0/3] imx93-phyboard-segin: Add USB support.
+Date: Thu, 21 Mar 2024 15:45:38 +0100
+Message-ID: <20240321144541.15314-1-othacehe@gnu.org>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="0dmu/gbGT89zQ201"
-Content-Disposition: inline
-In-Reply-To: <38662008-a812-4fe4-aeee-b160c4e59c12@gmx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Thu, 21 Mar 2024 16:01:03 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,56 +72,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hello,
 
---0dmu/gbGT89zQ201
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This series adds USB support to imx93-phyboard-segin, in the same way as it
+has been done for imx93_var_som here:
 
-On Thu, Mar 21, 2024 at 08:48:00AM +0100, Heinrich Schuchardt wrote:
+https://lists.denx.de/pipermail/u-boot/2024-February/546301.html
 
-> Dear Tom,
->=20
-> The following changes since commit e50cb36cb5e772d5bbd30d070faedf73234063=
-64:
->=20
->   Merge branch '2024-03-19-assorted-updates' into next (2024-03-20
-> 08:39:05 -0400)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-efi.git
-> tags/efi-next-20240321
->=20
-> for you to fetch changes up to 884785adc1dc5e7b91acb542ba83941951ff2b77:
->=20
->   doc: typo Synopis (2024-03-21 07:00:12 +0100)
->=20
-> Gitlab CI showed no issues:
-> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/20011
->=20
+Thanks,
 
-Applied to u-boot/next, thanks!
+Mathieu
 
---=20
-Tom
+Changelog:
 
---0dmu/gbGT89zQ201
-Content-Type: application/pgp-signature; name="signature.asc"
+v1: https://lists.denx.de/pipermail/u-boot/2024-March/548613.html
 
------BEGIN PGP SIGNATURE-----
+Mathieu Othacehe (3):
+  arm: dts: imx93-phyboard-segin: Add USB support
+  configs: imx93-phyboard-segin: Add USB support
+  configs: imx93-phyboard-segin: Add fastboot support
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmX8S4sACgkQFHw5/5Y0
-tyy1dAv9GJmfAuFqILTP+qHhyOTXfaysYplpmBlwX82P9YmPe/2p1mhsj5z9+5A6
-7oL4JL0OTrDGmm0Kv2HSGt1LL2Gu6xVryb6j+9zvlcHNVfMu/MsQGow93wn81YHq
-pDvm8HCAtwfXfn0tTmCUxi8Kw517ThW0mADMS+2pIPErUNE3k5RC0F6B56dvToBK
-PKdBqMICvOTAMgiA3ZB9f4DmIi1t2/UgTcTNGrB2G5AsPtc9l3VjTXj4wxTrM2P0
-/0jbFQfQZQ6IyU504+/WDJRIO3ABXYLh/KnOCbgArLknHGhJDbaRyuMQA5ABNOce
-jvcQvSfzH4bU22RIBqOgejSXVNZ8If4WS69w6JITFl21lbH1XETLDtjY1U1ckNic
-Cez6AKtBspLMAaf7HnO22H8rd5ySJkzAbEfyYK48unr9QPKKuCI2xh6QiFWp9k05
-5N+Ao1KaMTrBYJdRNZvrtRPu7Kkh4Nf3M194PPY+4FRZgyX7a9S6mCziZJqzgbXa
-O9EWq8pX
-=sIWr
------END PGP SIGNATURE-----
+ arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi | 15 +++++++++++++++
+ configs/imx93-phyboard-segin_defconfig        | 14 ++++++++++++++
+ 2 files changed, 29 insertions(+)
 
---0dmu/gbGT89zQ201--
+-- 
+2.41.0
+
