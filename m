@@ -4,84 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8577EC54E68
-	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 14:14:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2614FC54E58
+	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 14:47:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 990FB87EFA;
-	Thu, 21 Mar 2024 15:14:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5D74387F4A;
+	Thu, 21 Mar 2024 15:47:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="2KM3bfmL";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="Wbo65AKK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F0A7880AF; Thu, 21 Mar 2024 15:14:53 +0100 (CET)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
+ id 690CD87F4A; Thu, 21 Mar 2024 15:47:23 +0100 (CET)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E5F887EFA
- for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 15:14:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 41A72880BF
+ for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 15:47:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-4146562a839so7321755e9.1
- for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 07:14:51 -0700 (PDT)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-41477b68cb5so1778495e9.2
+ for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 07:47:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1711030490; x=1711635290;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1711032439; x=1711637239;
  darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=wuQgcqBQYsmmHE5d4iRLuMPgbirdYcrNslLJrPpdreg=;
- b=2KM3bfmLi6Ndk6XitdmsChyFKjAi1oCcEzYfWdwHq8yiH5E505jE3aSKz4J292D+wy
- ObGBsCM92GpWriD/q+eONGpN6C63UPt5QR1rtdhjBIAwjiBRKBIJF1q1IUO7IwpQpAjF
- as+zCHpPcwvybPV6mhx11GM5YsPwZcpSFaLQYt9fyzQbc5HUKNUxTYYoZqyFB/KhCt6c
- 5k+1E3tHE9ZW9Z+I6f0mJ2BQupz2Oa+LLCh0RQxoebGniNmun5eJBOz45gJd/1R5loyj
- u2x5XyB0Bc4jZGsvD/0gCMHwocB4b8oUM7pGbgVDYHGSfMglPLCaDtGTE+hwFDIcWHDM
- AVBQ==
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=SbcJD/TBG4x+mmSRSJYO3nHLr4djFQtYubqL5g5//LA=;
+ b=Wbo65AKKr+5XRP4NETFLZqwlBRrlVmh0W0OcFL/DKH7Np6MVKHYi1+LWEOPhClFV7N
+ rmKKyv3wfo5S3BkHBcU9CJ6I4QXO3hvraTi/Ird+uJRMxowO7ucvhHcEUpv+9kVnXCP5
+ 2s6/nZpSUcbXAw6cBo4TSzWplJIqeIHY4+7jvJc+G+lD8dmyxxnIeFvxzuNMXvXEk4WM
+ 9S9L+NMzqnA9cbb9ynbiou0LsUA0C8Gd3+8WezdkI4+u4O6QUg+ngMQYXqdwfNIio0DN
+ JikY4zl2F3ib/1hY++IR+tX1QRAjICpX6f67vIOwLmRroSExujBVLSC8r1hbWAQquljL
+ 7VJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711030490; x=1711635290;
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=wuQgcqBQYsmmHE5d4iRLuMPgbirdYcrNslLJrPpdreg=;
- b=e5FokNd8domUIq5hvvgom7+LnW89AWPyR0Ubnlu5TJ8jktFOjxhe75cJuvQTQDB4Xy
- Qaz7ggntXTJidwyHX3rJ7VWP/Q2lvFuh2Iiv2td3TLFx/U8DpY0ekk0wCZXGalAPVReD
- gzmMk5MTVzZeM9H4IJM0NRb56E9JXc5YkrsTv9HssqVpmVgAVUF0Sl2NC2oNQsvWZPP/
- qOfjjbZJ6NB0cqALZJf0D1Ehug5oPhYGFU//trMGPgX5NKuR1aM4phmTQ8zEnrw65N5X
- xEMZF0TpLjeZbRi+MVOgishFC08Ug81oBs38ymPbEEW4EhUKm581G9/dbCnqwboqcjY4
- QEhQ==
-X-Gm-Message-State: AOJu0Yzs2jc00vldztPlPEisF7uNDTAuTWuRzr+2VPKVH+8+p81whNUC
- 47AV8CCmSI7Tom1q7RxFvZPgfCbO6tqLzlUmfPam3tBgYqBzO8Ofoyc/y11bU4s=
-X-Google-Smtp-Source: AGHT+IFQh/YdID67KY+miLvmm0QgFoAMNX/LaS4QVdaKZkXABNu32k5vB6pXQmAgpcvf9tjn+2P+2Q==
-X-Received: by 2002:a05:6000:4c2:b0:33d:87e9:5900 with SMTP id
- h2-20020a05600004c200b0033d87e95900mr5998539wri.62.1711030490395; 
- Thu, 21 Mar 2024 07:14:50 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1711032439; x=1711637239;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=SbcJD/TBG4x+mmSRSJYO3nHLr4djFQtYubqL5g5//LA=;
+ b=ZiIdZiNFV1uwHZliJ78SmY2VEMebSaejfho5JuSy78tjR9yx1CrrZwMJBPjJxszdCb
+ b6tyffctc75a4/dk6Ayj0akK6wyzMronEOlP5SGQX5n8684cwkdC2XYEV/qH3DkH7cx5
+ ZWRfyxGwVrlh3AGFptOyeiT0oz+jqSj4yKoK7NwiBRjpZz/utv0u68H9GbKjy0vnxTte
+ Wo/ehLw4q9Ikkr5skgo1S4FWRSUvvEEKkMJTysRAPqYXgh8xeNoVUGMHboF4i+Kq3i/O
+ JmEtm7Ee60Z5eq3qr4qLgcT1MsqsFS7xpHM7WNuDqHfIGMOZiPEldJODacEX+6FDuIoV
+ M25A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX3I2WCogLwO9Z7K6cKY4Yu8+ZScncZl80dbDANwvd6ntm9NmqQJzxTp4fLJk6qnvYR/QoGPH2TgnorT4N+itBehbtMwA==
+X-Gm-Message-State: AOJu0YzeTH+kwxpwj6NYNbmT7un1r1DsdoaAuJl70Cnx50zkjOjjmwUc
+ Wu8hXNPD8zkEj90W45GNeTM91TXnAhNrAtu7MPFQP0+VBvE/JG9Q1DAILae4LFg=
+X-Google-Smtp-Source: AGHT+IEG0VZWR/cYYN8htcK3HbAvE+Nxr6MdToOwzp7I5YRaX9KmymMXKjKUnGJfHaEMq62a2ntqFw==
+X-Received: by 2002:a05:600c:3106:b0:414:7431:6983 with SMTP id
+ g6-20020a05600c310600b0041474316983mr1493661wmo.25.1711032438605; 
+ Thu, 21 Mar 2024 07:47:18 -0700 (PDT)
 Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- u3-20020a5d6ac3000000b0033dd2c3131fsm17318901wrw.65.2024.03.21.07.14.49
+ e13-20020a05600c4e4d00b004146750314csm5862863wmq.3.2024.03.21.07.47.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Mar 2024 07:14:49 -0700 (PDT)
+ Thu, 21 Mar 2024 07:47:18 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Caleb Connolly <caleb.connolly@linaro.org>, Marek Vasut <marex@denx.de>,
- Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, Neil
- Armstrong <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH 1/5] usb: dwc3-generic: implement Qualcomm wrapper
-In-Reply-To: <f3940b9b-e5a0-447d-a6a8-447fdd21e17b@linaro.org>
-References: <20240131-b4-qcom-usb-v1-0-6438b2a2285e@linaro.org>
- <20240131-b4-qcom-usb-v1-1-6438b2a2285e@linaro.org>
- <ee020a2c-4f84-4fae-97a0-f12f3157d3ad@denx.de>
- <975bfe22-58b3-46b9-899b-f212b49d8664@linaro.org>
- <8221c539-51b9-4ead-8cce-834c93230282@denx.de>
- <87frwkndhf.fsf@baylibre.com>
- <f3940b9b-e5a0-447d-a6a8-447fdd21e17b@linaro.org>
-Date: Thu, 21 Mar 2024 15:14:48 +0100
-Message-ID: <87edc3llif.fsf@baylibre.com>
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>, Lukasz
+ Majewski <lukma@denx.de>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH v4 0/5] Qualcomm DWC3 USB support
+In-Reply-To: <171101299073.1017001.16411913317437946645.b4-ty@baylibre.com>
+References: <20240320-b4-qcom-usb-v4-0-41be480172e1@linaro.org>
+ <171101299073.1017001.16411913317437946645.b4-ty@baylibre.com>
+Date: Thu, 21 Mar 2024 15:47:17 +0100
+Message-ID: <87zfurvdze.fsf@baylibre.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,118 +93,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On jeu., mars 21, 2024 at 11:34, Caleb Connolly <caleb.connolly@linaro.org>=
- wrote:
+Hi Caleb,
+
+It seems CI got broken with this series.
+
+Baseline CI (passed):
+https://source.denx.de/u-boot/u-boot/-/pipelines/20006
+
+With series applied (failed):
+https://source.denx.de/u-boot/custodians/u-boot-dfu/-/jobs/802278
+
+It seems the change on UMS introduced some linking errors on arm32:
+
+f_mass_storage.c:946:(.text.do_write.lto_priv.0+0x1de): undefined reference to `__aeabi_ldivmod'
+
+Could you have a look, please?
+
+Thank you.
+Mattijs
+
+On jeu., mars 21, 2024 at 10:23, Mattijs Korpershoek <mkorpershoek@baylibre.com> wrote:
 
 > Hi,
 >
-> On 21/03/2024 09:25, Mattijs Korpershoek wrote:
->> Hi Caleb, Marek,
->>=20
->> On jeu., mars 21, 2024 at 06:34, Marek Vasut <marex@denx.de> wrote:
->>=20
->>> On 3/13/24 7:22 PM, Caleb Connolly wrote:
->>>
->>> [...]
->>>
->>>>>> +static inline void dwc3_qcom_setbits(void __iomem *base, u32 offset,
->>>>>> u32 val)
->>>>>> +{
->>>>>> +=C2=A0=C2=A0=C2=A0 u32 reg;
->>>>>> +
->>>>>> +=C2=A0=C2=A0=C2=A0 reg =3D readl(base + offset);
->>>>>> +=C2=A0=C2=A0=C2=A0 reg |=3D val;
->>>>>> +=C2=A0=C2=A0=C2=A0 writel(reg, base + offset);
->>>>>
->>>>> Use setbits_le32() .
->>>>>
->>>>>> +=C2=A0=C2=A0=C2=A0 /* ensure that above write is through */
->>>>>> +=C2=A0=C2=A0=C2=A0 readl(base + offset);
->>>>>
->>>>> Is this needed ?
->>>>
->>>> I honestly don't know, this is copied from the Linux driver and it see=
-ms
->>>> to be very defensively written. I doubt it's strictly necessary.
->>>
->>> Does git log indicate anything ?
+> On Wed, 20 Mar 2024 14:30:46 +0000, Caleb Connolly wrote:
+>> This series enables support for Qualcomm platforms in the DWC3 driver,
+>> adds support for arbitrary sector sizes to the USB mass storage gadget,
+>> and fixes an issue with the CDC ACM driver where it wouldn't initialise
+>> the USB device.
+>> 
+>> Additionally, it fixes a syntax bug in the Qualcomm SMMU driver, and
+>> makes USB_DWC3_GADGET select DM_USB_GADGET to fix compilation with
+>> gadget mode.
+>> 
+>> [...]
 >
-> Nope :/ it's there from when the driver was first added.
->>>
->>> I suspect this is some sort of barrier .
->>>
->>> [...]
->>>
->>>>>> +/* For controllers running without superspeed PHYs */
->>>>>> +static void dwc3_qcom_select_utmi_clk(void __iomem *qscratch_base)
->>>>>> +{
->>>>>> +=C2=A0=C2=A0=C2=A0 /* Configure dwc3 to use UTMI clock as PIPE cloc=
-k not present */
->>>>>> +=C2=A0=C2=A0=C2=A0 dwc3_qcom_setbits(qscratch_base, QSCRATCH_GENERA=
-L_CFG,
->>>>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0 PIPE_UTMI_CLK_DIS);
->>>>>> +
->>>>>> +=C2=A0=C2=A0=C2=A0 udelay(500);
->>>>>
->>>>> Isn't there some possibility to poll for completion instead of fixed
->>>>> delay ? If so, use wait_for_bit or some such .
->>>>
->>>> Not that I'm aware of, no. I think this hardware just has a blanket
->>>> "writes take X bus cycles to complete" rule or something. It's totally
->>>> possible that this code was originally written this way to work around
->>>> some issues on an FPGA prototype or something. Everything seems to sti=
-ll
->>>> work if I remove the delays so I'll drop them...
->>>
->>> Could you possibly ask someone ?
+> Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu-next)
 >
-> Yeah I'll ask around, I'm not confident I'll find an answer though.
->>>
->>> [...]
->>>
->>>>>>  =C2=A0 static int dwc3_rk_glue_get_ctrl_dev(struct udevice *dev, of=
-node *node)
->>>>>>  =C2=A0 {
->>>>>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 *node =3D dev_ofnode(dev);
->>>>>> @@ -506,6 +599,10 @@ static int dwc3_glue_reset_init(struct udevice =
-*dev,
->>>>>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 else if (ret)
->>>>>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return ret;
->>>>>>  =C2=A0 +=C2=A0=C2=A0=C2=A0 if (device_is_compatible(dev, "qcom,dwc3=
-")) {
->>>>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 reset_assert_bulk(&glue-=
->resets);
->>>>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 udelay(500);
->>>>>
->>>>> Why this delay here ?
->>>>
->>>> According to the docs, the reset should be asserted for at least 6 sle=
-ep
->>>> clock cycles, that's ~200us on sdm845, but it can vary by platform.
->>>
->>> A comment in the code would be nice.
->>>
->>> Sorry for the abysmal delay in replies.
->>>
->>> btw. the new version of this series is still OK to go in, unless you=20
->>> want to fill in the comments. They can also go in in separate follow up=
-=20
->>> patch.
->>=20
->> I'm interested by the answers above as well. As I took in the series [1]=
- (to
->> avoid delaying it too much), please consider a follow up patch to add a
->> comment.
+> [1/5] usb: dwc3-generic: implement Qualcomm wrapper
+>       https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/850b307789dca8dfff6d7cad57ba2ffbfbb5f6ed
+> [2/5] usb: dwc3: select DM_USB_GADGET
+>       https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/97d629372c8c58da96f46aa6d2bec09f120cc62d
+> [3/5] usb: gadget: CDC ACM: call usb_gadget_initialize
+>       https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/86327b4e3201a55aefee2f1bfbbea9a7896461f0
+> [4/5] usb: gadget: UMS: support multiple sector sizes
+>       https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/7e71eeb39f4c5280b1ce677f4a14063feaedff95
+> [5/5] iommu: qcom-smmu: fix debugging
+>       https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/c9959ce7b54145a83d3797bcfb3c3713cb4a97ea
 >
-> The v4 you picked up has a comment explaining this.
-
-Right, sorry I missed that. Thanks for pointing it out to me!
-
->>=20
->> [1] https://lore.kernel.org/r/all/171101299073.1017001.16411913317437946=
-645.b4-ty@baylibre.com/
->>=20
->
-> --=20
-> // Caleb (they/them)
+> --
+> Mattijs
