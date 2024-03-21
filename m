@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2614FC54E58
-	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 14:47:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6987DC54E68
+	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 14:55:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D74387F4A;
-	Thu, 21 Mar 2024 15:47:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id A7BC08809A;
+	Thu, 21 Mar 2024 15:55:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="Wbo65AKK";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iih5OLyt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 690CD87F4A; Thu, 21 Mar 2024 15:47:23 +0100 (CET)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id C10A187D5E; Thu, 21 Mar 2024 15:55:26 +0100 (CET)
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 41A72880BF
- for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 15:47:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 987948809A
+ for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 15:55:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-41477b68cb5so1778495e9.2
- for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 07:47:19 -0700 (PDT)
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-1def3340682so7979945ad.1
+ for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 07:55:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1711032439; x=1711637239;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=SbcJD/TBG4x+mmSRSJYO3nHLr4djFQtYubqL5g5//LA=;
- b=Wbo65AKKr+5XRP4NETFLZqwlBRrlVmh0W0OcFL/DKH7Np6MVKHYi1+LWEOPhClFV7N
- rmKKyv3wfo5S3BkHBcU9CJ6I4QXO3hvraTi/Ird+uJRMxowO7ucvhHcEUpv+9kVnXCP5
- 2s6/nZpSUcbXAw6cBo4TSzWplJIqeIHY4+7jvJc+G+lD8dmyxxnIeFvxzuNMXvXEk4WM
- 9S9L+NMzqnA9cbb9ynbiou0LsUA0C8Gd3+8WezdkI4+u4O6QUg+ngMQYXqdwfNIio0DN
- JikY4zl2F3ib/1hY++IR+tX1QRAjICpX6f67vIOwLmRroSExujBVLSC8r1hbWAQquljL
- 7VJQ==
+ d=linaro.org; s=google; t=1711032920; x=1711637720; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Vosje43hANX/4C2DUVAUF4aYlbt6DCdnXJbG0dxverc=;
+ b=iih5OLytJ339rUNAHPDQoZKgDK1urt/R+JSfOXPc+4Q1+E6HXvYynXJW0VR9CrM9HC
+ bqfSpT+onICGtYZvb247D6Am/MyEqwo5q4yp+N2DQgGrTlAoy1BjobJmes2bt7KII4Hq
+ olZLAg9ExV+z2zo0Nx3Kg1FYOAI8J7zK9Ry7IXDmuZOQofArxq88MeZmfrXjC0p9kL5B
+ DdrpZbimvzoWkExb49UIUGOPNk2D46mac5QLU+m1o43tdrISomyos3O+ZuE9Rty9lZOL
+ o8+E746eClkg+QYWki+JoDxue5/sSD0n0WWwi941rYOHQT2u0qG6Elov5FDl7A5bEFoj
+ mpVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711032439; x=1711637239;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=SbcJD/TBG4x+mmSRSJYO3nHLr4djFQtYubqL5g5//LA=;
- b=ZiIdZiNFV1uwHZliJ78SmY2VEMebSaejfho5JuSy78tjR9yx1CrrZwMJBPjJxszdCb
- b6tyffctc75a4/dk6Ayj0akK6wyzMronEOlP5SGQX5n8684cwkdC2XYEV/qH3DkH7cx5
- ZWRfyxGwVrlh3AGFptOyeiT0oz+jqSj4yKoK7NwiBRjpZz/utv0u68H9GbKjy0vnxTte
- Wo/ehLw4q9Ikkr5skgo1S4FWRSUvvEEKkMJTysRAPqYXgh8xeNoVUGMHboF4i+Kq3i/O
- JmEtm7Ee60Z5eq3qr4qLgcT1MsqsFS7xpHM7WNuDqHfIGMOZiPEldJODacEX+6FDuIoV
- M25A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX3I2WCogLwO9Z7K6cKY4Yu8+ZScncZl80dbDANwvd6ntm9NmqQJzxTp4fLJk6qnvYR/QoGPH2TgnorT4N+itBehbtMwA==
-X-Gm-Message-State: AOJu0YzeTH+kwxpwj6NYNbmT7un1r1DsdoaAuJl70Cnx50zkjOjjmwUc
- Wu8hXNPD8zkEj90W45GNeTM91TXnAhNrAtu7MPFQP0+VBvE/JG9Q1DAILae4LFg=
-X-Google-Smtp-Source: AGHT+IEG0VZWR/cYYN8htcK3HbAvE+Nxr6MdToOwzp7I5YRaX9KmymMXKjKUnGJfHaEMq62a2ntqFw==
-X-Received: by 2002:a05:600c:3106:b0:414:7431:6983 with SMTP id
- g6-20020a05600c310600b0041474316983mr1493661wmo.25.1711032438605; 
- Thu, 21 Mar 2024 07:47:18 -0700 (PDT)
-Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- e13-20020a05600c4e4d00b004146750314csm5862863wmq.3.2024.03.21.07.47.17
+ d=1e100.net; s=20230601; t=1711032920; x=1711637720;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Vosje43hANX/4C2DUVAUF4aYlbt6DCdnXJbG0dxverc=;
+ b=Yp11BRv0xK5HzcaYMLZiYZc8SXAbw+ZW8jbjjzcAYJ15+h4nn3IfXk8nLge/EZ5zLO
+ cUrUf792B4pqPzp5Kop5b7Jiw3H1oHzfL4J5Q3paAz3wdQQtiftjFt7mi+sBnJq8AgqW
+ sggyLUDzQAq4owkByFaZW/UnSSFrdxTrJBK99djumxNjmDEjh2hfdcIIdcDhixQdCrJ0
+ DmedxX3+LA4h8hp0suI6T2Gx7LbMj0UeSHqDGR60BerpRtiPRPpepCJL8DvrXPQMSA2c
+ utu01NwUvvrRyY9gcrgTJXPaWBNnhDcCdUhPpBtiUzG2o4v4XIlJTKawVVf6/t9jRPhI
+ PpHg==
+X-Gm-Message-State: AOJu0YyMT5BYNxuiUIbVCjI5PcRkYSCQwTnwNEbr5RgCAqGzVsi6Hxnq
+ kT6b7Ic6oerwMGpNgSupgXTScwvchA0+fhST8r+9qby+TAoYzFlsZSlojrES83NjOzb3A348Wxv
+ I
+X-Google-Smtp-Source: AGHT+IHAFrVz5/F8L6rZuH5KUY+zOLoyOuZAexongkOx/OIZPRRCgIKjqjAxmvl/EK7qwtVP+89Hbw==
+X-Received: by 2002:a17:902:db02:b0:1dd:a03c:8fe9 with SMTP id
+ m2-20020a170902db0200b001dda03c8fe9mr9288517plx.0.1711032920137; 
+ Thu, 21 Mar 2024 07:55:20 -0700 (PDT)
+Received: from sumit-X1.. ([223.178.211.159]) by smtp.gmail.com with ESMTPSA id
+ j9-20020a170902da8900b001dddb014624sm11751668plx.54.2024.03.21.07.55.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Mar 2024 07:47:18 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>, Lukasz
- Majewski <lukma@denx.de>, Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH v4 0/5] Qualcomm DWC3 USB support
-In-Reply-To: <171101299073.1017001.16411913317437946645.b4-ty@baylibre.com>
-References: <20240320-b4-qcom-usb-v4-0-41be480172e1@linaro.org>
- <171101299073.1017001.16411913317437946645.b4-ty@baylibre.com>
-Date: Thu, 21 Mar 2024 15:47:17 +0100
-Message-ID: <87zfurvdze.fsf@baylibre.com>
+ Thu, 21 Mar 2024 07:55:19 -0700 (PDT)
+From: Sumit Garg <sumit.garg@linaro.org>
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com, tharvey@gateworks.com, marcel.ziswiler@toradex.com,
+ francesco@dolcini.it, lukma@denx.de, seanga2@gmail.com,
+ jh80.chung@samsung.com, sjg@chromium.org, festevam@denx.de,
+ andrejs.cainikovs@toradex.com, peng.fan@nxp.com, aford173@gmail.com,
+ marex@denx.de, ilias.apalodimas@linaro.org, sahaj.sarup@linaro.org,
+ fathi.boudra@linaro.org, remi.duraffort@linaro.org,
+ daniel.thompson@linaro.org, pbrobinson@gmail.com,
+ Sumit Garg <sumit.garg@linaro.org>
+Subject: [PATCH v4 00/11] imx8mp: Enable PCIe/NVMe support
+Date: Thu, 21 Mar 2024 20:24:56 +0530
+Message-Id: <20240321145507.619448-1-sumit.garg@linaro.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,53 +95,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Caleb,
+pcie_imx doesn't seem to share any useful code for iMX8MP SoC and it is
+rather tied to quite old port of pcie_designware driver from Linux which
+suffices only iMX6 specific needs.
 
-It seems CI got broken with this series.
+But currently we have the common DWC specific bits which alligns pretty
+well with DW PCIe controller on iMX8MP SoC. So lets reuse those common
+bits instead as a new driver for iMX8 SoCs. It should be fairly easy to
+add support for other iMX8 variants to this driver.
 
-Baseline CI (passed):
-https://source.denx.de/u-boot/u-boot/-/pipelines/20006
+iMX8MP SoC also comes up with standalone PCIe PHY support, so hence we
+can reuse the generic PHY infrastructure to power on PCIe PHY.
 
-With series applied (failed):
-https://source.denx.de/u-boot/custodians/u-boot-dfu/-/jobs/802278
+Testing with this patch-set included:
 
-It seems the change on UMS introduced some linking errors on arm32:
+Verdin iMX8MP # pci enum
+PCIE-0: Link up (Gen1-x1, Bus0)
+Verdin iMX8MP # 
+Verdin iMX8MP # nvme scan
+Verdin iMX8MP # 
+Verdin iMX8MP # nvme info
+Device 0: Vendor: 0x126f Rev: T0828A0  Prod: AA000000000000000720
+            Type: Hard Disk
+            Capacity: 122104.3 MB = 119.2 GB (250069680 x 512)
+Verdin iMX8MP # 
+Verdin iMX8MP # load nvme 0 $loadaddr <file-name>
 
-f_mass_storage.c:946:(.text.do_write.lto_priv.0+0x1de): undefined reference to `__aeabi_ldivmod'
+Changes in v4:
+- Incorporated misc comments from Marek and added his review tag.
+- Dropped patch #4 (imx8mp: power-domain: Don't power off pd_bus)
+  since power domain off path is never excercised for DT based devices.
+- Added patch#8 as suggested by Peter to describe older pcie_imx.c
+  driver as legacy one.
 
-Could you have a look, please?
+Changes in v3:
+- Rebased on top of U-Boot next.
+- Incorporated misc. updates to commit messages.
+- New patch#2 to refactor reset driver function names.
+- Patch#3: Refactored further for better code reuse.
+- New patch#4 to fix refcount issue with power domain bus.
+- Patch#5: Refactored further for better code reuse.
+- Patch#7 & #8: Added dependency on REGMAP and SYSCON. Also, added
+  support for vpcie-supply regulator.
+- Patch#7 & #8: Added error paths and .remove callback.
+- New patch#10 to enable PCIe/NVMe for imx8mp_venice*.
 
-Thank you.
-Mattijs
+Changes in v2:
+- Renamed PCIe IMX driver pcie_dw_imx8.c -> pcie_dw_imx.c.
+- Added myself as maintainer for PCIe DWC IMX driver support.
+- Incorporated various code and commit message improvement suggestions
+  from Marek, thanks.
+- Patch#3: Gate PCIe and USB clocks behind corresponding power domain
+  IDs.
+- Patch#4: Expose HSIO PLL clocks as a regular clock driver instead
+  similar to what Linux kernel does.
+- Patch#7: Picked up tags.
 
-On jeu., mars 21, 2024 at 10:23, Mattijs Korpershoek <mkorpershoek@baylibre.com> wrote:
+Sumit Garg (10):
+  clk: imx8mp: Add support for PCIe clocks
+  reset: imx: Refactor driver to simplify function names
+  reset: imx: Add support for i.MX8MP reset controller
+  imx8mp: power-domain: Add PCIe support
+  imx8mp: power-domain: Expose high performance PLL clock
+  phy: phy-imx8m-pcie: Add support for i.MX8M{M/P} PCIe PHY
+  pci: Add DW PCIe controller support for iMX8MP SoC
+  pcie_imx: Update header to describe it as a legacy driver
+  verdin-imx8mp_defconfig: Enable PCIe/NVMe support
+  MAINTAINERS: Add entry for PCIe DWC IMX driver
 
-> Hi,
->
-> On Wed, 20 Mar 2024 14:30:46 +0000, Caleb Connolly wrote:
->> This series enables support for Qualcomm platforms in the DWC3 driver,
->> adds support for arbitrary sector sizes to the USB mass storage gadget,
->> and fixes an issue with the CDC ACM driver where it wouldn't initialise
->> the USB device.
->> 
->> Additionally, it fixes a syntax bug in the Qualcomm SMMU driver, and
->> makes USB_DWC3_GADGET select DM_USB_GADGET to fix compilation with
->> gadget mode.
->> 
->> [...]
->
-> Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu-next)
->
-> [1/5] usb: dwc3-generic: implement Qualcomm wrapper
->       https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/850b307789dca8dfff6d7cad57ba2ffbfbb5f6ed
-> [2/5] usb: dwc3: select DM_USB_GADGET
->       https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/97d629372c8c58da96f46aa6d2bec09f120cc62d
-> [3/5] usb: gadget: CDC ACM: call usb_gadget_initialize
->       https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/86327b4e3201a55aefee2f1bfbbea9a7896461f0
-> [4/5] usb: gadget: UMS: support multiple sector sizes
->       https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/7e71eeb39f4c5280b1ce677f4a14063feaedff95
-> [5/5] iommu: qcom-smmu: fix debugging
->       https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/c9959ce7b54145a83d3797bcfb3c3713cb4a97ea
->
-> --
-> Mattijs
+Tim Harvey (1):
+  imx8mp_venice_defconfig: Enable PCIe/NVMe support
+
+ MAINTAINERS                           |   6 +
+ configs/imx8mp_venice_defconfig       |   8 +
+ configs/verdin-imx8mp_defconfig       |   6 +
+ drivers/clk/imx/clk-imx8mp.c          |   6 +
+ drivers/pci/Kconfig                   |  11 +
+ drivers/pci/Makefile                  |   1 +
+ drivers/pci/pcie_dw_imx.c             | 338 ++++++++++++++++++++++++++
+ drivers/pci/pcie_imx.c                |   8 +
+ drivers/phy/Kconfig                   |  11 +
+ drivers/phy/Makefile                  |   1 +
+ drivers/phy/phy-imx8m-pcie.c          | 283 +++++++++++++++++++++
+ drivers/power/domain/imx8mp-hsiomix.c | 190 ++++++++++++---
+ drivers/reset/reset-imx7.c            | 143 +++++++++--
+ 13 files changed, 955 insertions(+), 57 deletions(-)
+ create mode 100644 drivers/pci/pcie_dw_imx.c
+ create mode 100644 drivers/phy/phy-imx8m-pcie.c
+
+-- 
+2.34.1
+
