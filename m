@@ -4,70 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D999BC54E58
-	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 10:28:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3845EC54E68
+	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 10:31:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DCF1487B77;
-	Thu, 21 Mar 2024 11:28:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8D3F087D4B;
+	Thu, 21 Mar 2024 11:31:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RTEY3Q0p";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="WUM6ka65";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9D2B487CB7; Thu, 21 Mar 2024 11:28:37 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id 5D57F87D4B; Thu, 21 Mar 2024 11:31:28 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 250EB87B41
- for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 11:28:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AB47487D08
+ for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 11:31:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=danishanwar@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 42LASNgL025929;
- Thu, 21 Mar 2024 05:28:23 -0500
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 42LAVDIW044922;
+ Thu, 21 Mar 2024 05:31:14 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1711016903;
- bh=+aWA38ZBokI62m/ahWX+EsH675Ku/BwgXp6ZXpCFOYo=;
- h=From:To:CC:Subject:Date;
- b=RTEY3Q0pJQaCAeffYK41PD1+KmeRzTLScKyWLpgm8G5qGJ8zK/zWQMWZsvvJvgzK7
- 5LpkVm+PRgSuvRYgw1smDwZWO7U5b1jFGpF+jI53GAK4A73YIdWZbSv7Dd+wOMRcow
- 1sf5GV/4bC9Q/XYPxr4jd0ejtIY9pLZ/MUevbQI8=
-Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 42LASMOa023224
+ s=ti-com-17Q1; t=1711017074;
+ bh=F0NvoXNyQm+tX3uBodNChX/UIEOSS23f9zKQXcoWY7Y=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=WUM6ka654E6sZMtkjyy3WTd8llD+CSsca14y5cRG30rlrIqFAnoFKxYpORPOUTHMs
+ dolDm4Q2TVAOl/OF0PMJPbiA9lxbSvnzd8eFN4zB/hIJ+xUzQOV2nSGLS0kjvEVdTL
+ 7XGAi4gT+5+aEZvFP28wz6ykji2dCkj2Nf3zH6pg=
+Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 42LAVDhh014485
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 21 Mar 2024 05:28:23 -0500
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 21 Mar 2024 05:31:13 -0500
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 21
- Mar 2024 05:28:22 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ Mar 2024 05:31:13 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 21 Mar 2024 05:28:22 -0500
-Received: from lelv0854.itg.ti.com (lelv0854.itg.ti.com [10.181.64.140])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 42LASMk0084668;
- Thu, 21 Mar 2024 05:28:22 -0500
-Received: from localhost (danish-tpc.dhcp.ti.com [10.24.69.25])
- by lelv0854.itg.ti.com (8.14.7/8.14.7) with ESMTP id 42LASLTa010751;
- Thu, 21 Mar 2024 05:28:22 -0500
-From: MD Danish Anwar <danishanwar@ti.com>
-To: Francesco Dolcini <francesco.dolcini@toradex.com>, Max Krummenacher
- <max.krummenacher@toradex.com>, Dan Carpenter <dan.carpenter@linaro.org>,
- Simon Glass <sjg@chromium.org>, Ravi Gunasekaran <r-gunasekaran@ti.com>, MD
- Danish Anwar <danishanwar@ti.com>, Nishanth Menon <nm@ti.com>,
- Roger Quadros <rogerq@kernel.org>, Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, <srk@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>
-Subject: [PATCH v7] remoteproc: uclass: Add methods to load firmware to rproc
- and boot rproc
-Date: Thu, 21 Mar 2024 15:58:19 +0530
-Message-ID: <20240321102819.1011011-1-danishanwar@ti.com>
-X-Mailer: git-send-email 2.34.1
+ Frontend Transport; Thu, 21 Mar 2024 05:31:13 -0500
+Received: from [10.24.69.25] (danish-tpc.dhcp.ti.com [10.24.69.25])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 42LAV9DM099580;
+ Thu, 21 Mar 2024 05:31:10 -0500
+Message-ID: <258f254f-ad7f-49ea-aae8-f871229abdcd@ti.com>
+Date: Thu, 21 Mar 2024 16:01:08 +0530
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6] remoteproc: uclass: Add methods to load firmware to
+ rproc and boot rproc
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>
+CC: Francesco Dolcini <francesco.dolcini@toradex.com>, Max Krummenacher
+ <max.krummenacher@toradex.com>, Dan Carpenter <dan.carpenter@linaro.org>,
+ Simon Glass <sjg@chromium.org>,
+ Ravi Gunasekaran <r-gunasekaran@ti.com>, Nishanth Menon <nm@ti.com>,
+ <u-boot@lists.denx.de>, <srk@ti.com>, Vignesh
+ Raghavendra <vigneshr@ti.com>, Roger Quadros <rogerq@kernel.org>
+References: <20240228120645.958316-1-danishanwar@ti.com>
+ <20240319224032.GA1686480@bill-the-cat>
+ <3b588cc0-225e-466d-9257-f0f4ef592cf3@ti.com>
+ <20240320123813.GL3442575@bill-the-cat>
+From: MD Danish Anwar <danishanwar@ti.com>
+In-Reply-To: <20240320123813.GL3442575@bill-the-cat>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,256 +89,135 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add APIs to set a firmware_name to a rproc and boot the rproc with the
-same firmware.
 
-Clients can call rproc_set_firmware() API to set firmware_name for a rproc
-whereas rproc_boot() will load the firmware set by rproc_set_firmware() to
-a buffer by calling request_firmware_into_buf(). rproc_boot() will then
-load the firmware file to the remote processor and start the remote
-processor.
 
-Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
-Acked-by: Ravi Gunasekaran <r-gunasekaran@ti.com>
-Reviewed-by: Roger Quadros <rogerq@kernel.org>
----
-Changes from v6 to v7:
-*) Removed selecting FS_LOADER by default in remoteproc Kconfig.
-*) Wrapped the rproc APIs using FS_LOADER inside #ifdef CONFIG_FS_LOADER.
-*) Added Reviewed-by tag from Roger Quadros <rogerq@kernel.org>
+On 20/03/24 6:08 pm, Tom Rini wrote:
+> On Wed, Mar 20, 2024 at 11:19:01AM +0530, MD Danish Anwar wrote:
+>> Hi Tom,
+>>
+>> On 20/03/24 4:10 am, Tom Rini wrote:
+>>> On Wed, Feb 28, 2024 at 05:36:45PM +0530, MD Danish Anwar wrote:
+>>>
+>>>> Add APIs to set a firmware_name to a rproc and boot the rproc with the
+>>>> same firmware.
+>>>>
+>>>> Clients can call rproc_set_firmware() API to set firmware_name for a rproc
+>>>> whereas rproc_boot() will load the firmware set by rproc_set_firmware() to
+>>>> a buffer by calling request_firmware_into_buf(). rproc_boot() will then
+>>>> load the firmware file to the remote processor and start the remote
+>>>> processor.
+>>>>
+>>>> Also include "fs-loader.h" and make remoteproc driver select FS_LOADER in
+>>>> Kconfig so that we can call request_firmware_into_buf() from remoteproc
+>>>> driver.
+>>>>
+>>>> Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
+>>>> Acked-by: Ravi Gunasekaran <r-gunasekaran@ti.com>
+>>>> Reviewed-by: Roger Quadros <rogerq@kernel.org>
+>>>> ---
+>>>> Changes from v5 to v6:
+>>>> *) Collected Acked-by tag from Ravi Gunasekaran <r-gunasekaran@ti.com>
+>>>> *) Fixed few typos as pointed out by Roger Quadros <rogerq@kernel.org>
+>>>> *) Added if condition to check if uc_pdata->fw_name exists and free it
+>>>>    before the strndup as suggested by Roger Quadros <rogerq@kernel.org>
+>>>>
+>>>> Changes from v4 to v5:
+>>>> *) Added Kconfig option REMOTEPROC_MAX_FW_SIZE to set max firmware size
+>>>>    that can be loaded to a rproc.
+>>>> *) Added freeing of address in rproc_boot() as pointed out by Ravi.
+>>>> *) Allocating the address at a later point in rproc_boot()
+>>>> *) Rebased on latest u-boot/master [commit 
+>>>>    9e00b6993f724da9699ef12573307afea8c19284]
+>>>>
+>>>> Changes from v3 to v4:
+>>>> *) No functional change. Splitted the patch out of the series as suggested
+>>>>    by Nishant.
+>>>> *) Droppped the RFC tag.
+>>>>
+>>>> v5: https://lore.kernel.org/all/20240217122602.3402774-1-danishanwar@ti.com/
+>>>> v4: https://lore.kernel.org/all/20240130063322.2345057-1-danishanwar@ti.com/
+>>>> v3: https://lore.kernel.org/all/20240124064930.1787929-4-danishanwar@ti.com/
+>>>>
+>>>>  drivers/remoteproc/Kconfig        |   8 +++
+>>>>  drivers/remoteproc/rproc-uclass.c | 102 ++++++++++++++++++++++++++++++
+>>>>  include/remoteproc.h              |  34 ++++++++++
+>>>>  3 files changed, 144 insertions(+)
+>>>>
+>>>> diff --git a/drivers/remoteproc/Kconfig b/drivers/remoteproc/Kconfig
+>>>> index 781de530af..9f9877931c 100644
+>>>> --- a/drivers/remoteproc/Kconfig
+>>>> +++ b/drivers/remoteproc/Kconfig
+>>>> @@ -10,6 +10,7 @@ menu "Remote Processor drivers"
+>>>>  # All users should depend on DM
+>>>>  config REMOTEPROC
+>>>>  	bool
+>>>> +	select FS_LOADER
+>>>>  	depends on DM
+>>>>  
+>>>>  # Please keep the configuration alphabetically sorted.
+>>>
+>>> Can we not make the FS_LOADER portion optional? I didn't realize how
+>>> many non-TI platforms this impacted. And even then it's possible I
+>>> assume that custom designs will load the firmwares in other manners.
+>>>
+>>
+>> Yes we can. We can wrap the remoteproc APIs using FS_LOADER in #ifdef
+>> CONFIG_FS_LOADER. And instead of REMOTEPROC driver selecting FS_LOADER,
+>> the clinet driver (ICSSG in this case) who is calling those remoteproc
+>> APIs will select FS_LOADER and enable it.
+>>
+>> This will make sure that other platforms (ti or non-ti) that doesn't
+>> support ICSSG but enables Remoteproc, will not enable FS_LOADER. This
+>> way we are not forcing other platforms using remoteproc to enable
+>> FS_LOADER. In this case the APIs will not get built.
+>>
+>> Now FS_LOADER will only be enabled when there is a client driver that
+>> uses rproc_boot() APIs. It's upto the client driver to enable FS_LOADER
+>>
+>> below is the diff,
+>>
+>> diff --git a/drivers/remoteproc/Kconfig b/drivers/remoteproc/Kconfig
+>> index 9f9877931c..a49802c132 100644
+>> --- a/drivers/remoteproc/Kconfig
+>> +++ b/drivers/remoteproc/Kconfig
+>> @@ -10,7 +10,6 @@ menu "Remote Processor drivers"
+>>  # All users should depend on DM
+>>  config REMOTEPROC
+>>         bool
+>> -       select FS_LOADER
+>>         depends on DM
+>>
+>>  # Please keep the configuration alphabetically sorted.
+>> diff --git a/drivers/remoteproc/rproc-uclass.c
+>> b/drivers/remoteproc/rproc-uclass.c
+>> index f4f22a3851..a6a8be5009 100644
+>> --- a/drivers/remoteproc/rproc-uclass.c
+>> +++ b/drivers/remoteproc/rproc-uclass.c
+>> @@ -994,6 +994,7 @@ int rproc_set_firmware(struct udevice *rproc_dev,
+>> const char *fw_name)
+>>         return 0;
+>>  }
+>>
+>> +#ifdef CONFIG_FS_LOADER
+>>  int rproc_boot(struct udevice *rproc_dev)
+>>  {
+>>         struct dm_rproc_uclass_pdata *uc_pdata;
+>> @@ -1063,3 +1064,4 @@ free_buffer:
+>>         free(addr);
+>>         return ret;
+>>  }
+>> +#endif
+>>
+>> Let me know if this looks ok. If it's ok I will post v7 with this change.
+> 
+> Yes please, thanks.
+> 
 
-Changes from v5 to v6:
-*) Collected Acked-by tag from Ravi Gunasekaran <r-gunasekaran@ti.com>
-*) Fixed few typos as pointed out by Roger Quadros <rogerq@kernel.org>
-*) Added if condition to check if uc_pdata->fw_name exists and free it
-   before the strndup as suggested by Roger Quadros <rogerq@kernel.org>
+Posted v7 with the above changes
+https://lore.kernel.org/all/20240321102819.1011011-1-danishanwar@ti.com/
 
-Changes from v4 to v5:
-*) Added Kconfig option REMOTEPROC_MAX_FW_SIZE to set max firmware size
-   that can be loaded to a rproc.
-*) Added freeing of address in rproc_boot() as pointed out by Ravi.
-*) Allocating the address at a later point in rproc_boot()
-*) Rebased on latest u-boot/master [commit 
-   9e00b6993f724da9699ef12573307afea8c19284]
+Please check.
 
-Changes from v3 to v4:
-*) No functional change. Splitted the patch out of the series as suggested
-   by Nishant.
-*) Droppped the RFC tag.
-
-v6: https://lore.kernel.org/all/20240228120645.958316-1-danishanwar@ti.com/
-v5: https://lore.kernel.org/all/20240217122602.3402774-1-danishanwar@ti.com/
-v4: https://lore.kernel.org/all/20240130063322.2345057-1-danishanwar@ti.com/
-v3: https://lore.kernel.org/all/20240124064930.1787929-4-danishanwar@ti.com/
-
- drivers/remoteproc/Kconfig        |   7 ++
- drivers/remoteproc/rproc-uclass.c | 104 ++++++++++++++++++++++++++++++
- include/remoteproc.h              |  34 ++++++++++
- 3 files changed, 145 insertions(+)
-
-diff --git a/drivers/remoteproc/Kconfig b/drivers/remoteproc/Kconfig
-index 781de530af..a49802c132 100644
---- a/drivers/remoteproc/Kconfig
-+++ b/drivers/remoteproc/Kconfig
-@@ -102,4 +102,11 @@ config REMOTEPROC_TI_IPU
- 	help
- 	  Say 'y' here to add support for TI' K3 remoteproc driver.
- 
-+config REMOTEPROC_MAX_FW_SIZE
-+	hex "Maximum size of firmware file that needs to be loaded to the remote processor"
-+	default 0x10000
-+	help
-+	  Maximum size of the firmware file (elf, binary) that needs to be
-+	  loaded to the remote processor.
-+
- endmenu
-diff --git a/drivers/remoteproc/rproc-uclass.c b/drivers/remoteproc/rproc-uclass.c
-index 28b362c887..aa7f7586a8 100644
---- a/drivers/remoteproc/rproc-uclass.c
-+++ b/drivers/remoteproc/rproc-uclass.c
-@@ -13,6 +13,7 @@
- #include <log.h>
- #include <malloc.h>
- #include <virtio_ring.h>
-+#include <fs_loader.h>
- #include <remoteproc.h>
- #include <asm/io.h>
- #include <dm/device-internal.h>
-@@ -961,3 +962,106 @@ unsigned long rproc_parse_resource_table(struct udevice *dev, struct rproc *cfg)
- 
- 	return 1;
- }
-+
-+int rproc_set_firmware(struct udevice *rproc_dev, const char *fw_name)
-+{
-+	struct dm_rproc_uclass_pdata *uc_pdata;
-+	int len;
-+	char *p;
-+
-+	if (!rproc_dev || !fw_name)
-+		return -EINVAL;
-+
-+	uc_pdata = dev_get_uclass_plat(rproc_dev);
-+	if (!uc_pdata)
-+		return -EINVAL;
-+
-+	len = strcspn(fw_name, "\n");
-+	if (!len) {
-+		debug("invalid firmware name\n");
-+		return -EINVAL;
-+	}
-+
-+	if (uc_pdata->fw_name)
-+		free(uc_pdata->fw_name);
-+
-+	p = strndup(fw_name, len);
-+	if (!p)
-+		return -ENOMEM;
-+
-+	uc_pdata->fw_name = p;
-+
-+	return 0;
-+}
-+
-+#if CONFIG_IS_ENABLED(FS_LOADER)
-+int rproc_boot(struct udevice *rproc_dev)
-+{
-+	struct dm_rproc_uclass_pdata *uc_pdata;
-+	struct udevice *fs_loader;
-+	int core_id, ret = 0;
-+	char *firmware;
-+	void *addr;
-+
-+	if (!rproc_dev)
-+		return -EINVAL;
-+
-+	uc_pdata = dev_get_uclass_plat(rproc_dev);
-+	if (!uc_pdata)
-+		return -EINVAL;
-+
-+	core_id = dev_seq(rproc_dev);
-+	firmware = uc_pdata->fw_name;
-+	if (!firmware) {
-+		debug("No firmware name set for rproc core %d\n", core_id);
-+		return -EINVAL;
-+	}
-+
-+	/* Initialize all rproc cores */
-+	if (!rproc_is_initialized()) {
-+		ret = rproc_init();
-+		if (ret) {
-+			debug("rproc_init() failed: %d\n", ret);
-+			return ret;
-+		}
-+	}
-+
-+	/* Loading firmware to a given address */
-+	ret = get_fs_loader(&fs_loader);
-+	if (ret) {
-+		debug("could not get fs loader: %d\n", ret);
-+		return ret;
-+	}
-+
-+	if (CONFIG_REMOTEPROC_MAX_FW_SIZE) {
-+		addr = malloc(CONFIG_REMOTEPROC_MAX_FW_SIZE);
-+		if (!addr)
-+			return -ENOMEM;
-+	} else {
-+		debug("CONFIG_REMOTEPROC_MAX_FW_SIZE not defined\n");
-+		return -EINVAL;
-+	}
-+
-+	ret = request_firmware_into_buf(fs_loader, firmware, addr, CONFIG_REMOTEPROC_MAX_FW_SIZE,
-+					0);
-+	if (ret < 0) {
-+		debug("could not request %s: %d\n", firmware, ret);
-+		goto free_buffer;
-+	}
-+
-+	ret = rproc_load(core_id, (ulong)addr, ret);
-+	if (ret) {
-+		debug("failed to load %s to rproc core %d from addr 0x%08lX err %d\n",
-+		      uc_pdata->fw_name, core_id, (ulong)addr, ret);
-+		goto free_buffer;
-+	}
-+
-+	ret = rproc_start(core_id);
-+	if (ret)
-+		debug("failed to start rproc core %d\n", core_id);
-+
-+free_buffer:
-+	free(addr);
-+	return ret;
-+}
-+#endif
-diff --git a/include/remoteproc.h b/include/remoteproc.h
-index 91a88791a4..6f8068e149 100644
---- a/include/remoteproc.h
-+++ b/include/remoteproc.h
-@@ -403,6 +403,7 @@ enum rproc_mem_type {
-  * @name: Platform-specific way of naming the Remote proc
-  * @mem_type: one of 'enum rproc_mem_type'
-  * @driver_plat_data: driver specific platform data that may be needed.
-+ * @fw_name: firmware name
-  *
-  * This can be accessed with dev_get_uclass_plat() for any UCLASS_REMOTEPROC
-  * device.
-@@ -412,6 +413,7 @@ struct dm_rproc_uclass_pdata {
- 	const char *name;
- 	enum rproc_mem_type mem_type;
- 	void *driver_plat_data;
-+	char *fw_name;
- };
- 
- /**
-@@ -705,6 +707,34 @@ unsigned long rproc_parse_resource_table(struct udevice *dev,
- struct resource_table *rproc_find_resource_table(struct udevice *dev,
- 						 unsigned int addr,
- 						 int *tablesz);
-+/**
-+ * rproc_set_firmware() - assign a new firmware name
-+ * @rproc_dev: device for which new firmware name is being assigned
-+ * @fw_name: new firmware name to be assigned
-+ *
-+ * This function allows remoteproc drivers or clients to configure a custom
-+ * firmware name. The function does not trigger a remote processor boot,
-+ * only sets the firmware name used for a subsequent boot.
-+ *
-+ * This function sets the fw_name field in uclass pdata of the Remote proc
-+ *
-+ * Return: 0 on success or a negative value upon failure
-+ */
-+int rproc_set_firmware(struct udevice *rproc_dev, const char *fw_name);
-+
-+/**
-+ * rproc_boot() - boot a remote processor
-+ * @rproc_dev: rproc device to boot
-+ *
-+ * Boot a remote processor (i.e. load its firmware, power it on, ...).
-+ *
-+ * This function first loads the firmware set in the uclass pdata of Remote
-+ * processor to a buffer and then loads firmware to the remote processor
-+ * using rproc_load().
-+ *
-+ * Return: 0 on success, and an appropriate error value otherwise
-+ */
-+int rproc_boot(struct udevice *rproc_dev);
- #else
- static inline int rproc_init(void) { return -ENOSYS; }
- static inline int rproc_dev_init(int id) { return -ENOSYS; }
-@@ -744,6 +774,10 @@ static inline int rproc_elf_load_rsc_table(struct udevice *dev, ulong fw_addr,
- 					   ulong fw_size, ulong *rsc_addr,
- 					   ulong *rsc_size)
- { return -ENOSYS; }
-+static inline int rproc_set_firmware(struct udevice *rproc_dev, const char *fw_name)
-+{ return -ENOSYS; }
-+static inline int rproc_boot(struct udevice *rproc_dev)
-+{ return -ENOSYS; }
- #endif
- 
- #endif	/* _RPROC_H_ */
-
-base-commit: e50cb36cb5e772d5bbd30d070faedf7323406364
 -- 
-2.34.1
-
+Thanks and Regards,
+Danish
