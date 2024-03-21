@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4DC0C54E58
-	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 23:38:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD342C6FD1F
+	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 23:38:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CBC2C881A5;
-	Fri, 22 Mar 2024 00:35:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3EE8C881AB;
+	Fri, 22 Mar 2024 00:35:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ToEXkpJz";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NbrcPS9y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A2FE688157; Thu, 21 Mar 2024 22:04:42 +0100 (CET)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 1CCCC88142; Thu, 21 Mar 2024 22:04:44 +0100 (CET)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B8208816A
- for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 22:04:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 676358814B
+ for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 22:04:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-41400a9844aso15014815e9.0
- for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 14:04:30 -0700 (PDT)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-4146d750dcdso8898415e9.1
+ for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 14:04:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1711055069; x=1711659869; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1711055073; x=1711659873; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=7ClZ/U2dCNnx0hFWsWke0QLt+QMuIoc1IIP33XWHwdg=;
- b=ToEXkpJzrL6rV+Kx3Vx+BUjfEfdU9FSFT2BT24vgGEk14s46GQtNrwRcbd+A5JuJMz
- oc0jhu7vl+rtvuYj4nTeDQkbGVzLPhHqgrjq4BppY5HAXIOlIx4KhtWSlh8vC5N9t/qx
- 97X0PsXP4e1iXEkfXQ8TFBR3VR8S0W4Ug5VeXCR/5Hw7rPZr8R9gmsm6IuSU7CQi6ZMg
- Wc2MOlakdIv0IbWESaiQ+SKlpVaiEzEbBHNz2ImR5kio3jXN3jMmevXQJxJgr8mbxkGl
- Nlb3eaLV1jv9xfXYOEefHWVXSEekRY/+3A5rc0IVKsFyXIGu9hhD2wuvO19u6CQjgfOR
- FE8Q==
+ :reply-to; bh=3I2vaGPZZ3gjBTSC5fLRBtWa2TW127+ZHLJWBufbarI=;
+ b=NbrcPS9yfKk5Ei9ZZW9Chj3MTekQ55g1n4KSZEi740dej/F7pzbH2j/NSZrA8dY38d
+ jG3/NkadorW+YCskdQO7elwsBPsWNJWC3eCLz8ao97Li3pUe5BsmWHMEv8ar7nBr9VL7
+ Ryiuvc4/IGUZ6HQHqwVFMO4ggQyPWnRo3y4oNoxi2pCtnejQelCRak4/sF/HHGBqlU/L
+ 96mWWu1wl164oO/JZvOxQklgfkSR8CpDNWwgPy1Yi1rO3Lwa8kTSHkNzlH58RBsJviF5
+ raDQjQG46Z99ouuMMGbdtuf5B4XWRUM7hBascjPsqJM81EtYV9Tg/ToDaJG3yMWPXs2A
+ XWbw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711055069; x=1711659869;
+ d=1e100.net; s=20230601; t=1711055073; x=1711659873;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7ClZ/U2dCNnx0hFWsWke0QLt+QMuIoc1IIP33XWHwdg=;
- b=p8fdAZAzbjlm9qzEFlf2vbnMGnpClM2qNHKcol1tYqVBjib+uJWehEf6JS/z+LEZT9
- cv3J9/pJ7CmcmLV4QHc6KLJu8HCXvJEUVHhkY4mG5hPgSRFOHRy+m98C6HXTsKhCKUYk
- q3A1yuZxk1kiSD/RZ7e95zhNIbu0wvu+KFxJJuSVNi6GdWvND2PIE6I/YNt3Num2NOx4
- EAiOwBXmvv+dBhi728xvjvG7T0oJePD9ZYIcrgMb+t1GY3f/XuTTKTriAnHN+nAwJvKG
- gE5rexw6f8596L+WqmUOTRRWdfuDuz/bb0K8MLdmG83mol4Tyl17ztrI3mQGvKcvjjVQ
- lgUA==
-X-Gm-Message-State: AOJu0YxZlEkRQobX7kgfSe2F0bfrKZozFYH70Nxy6357tv4K4HiqlNaX
- NBAisT3gutak71b2OQdSSATLNM+kRAC5ETWhcP84mXz8g/M/ko19JwwzclLaFwA=
-X-Google-Smtp-Source: AGHT+IGwCmMCRJFLeGp20KJgulv1DwtJ3zhUUj6pBshRPal0+kIud99pxGBOdsW///dmKfvUGFKrDQ==
-X-Received: by 2002:a05:600c:3111:b0:413:4299:ec9f with SMTP id
- g17-20020a05600c311100b004134299ec9fmr135499wmo.5.1711055069640; 
- Thu, 21 Mar 2024 14:04:29 -0700 (PDT)
+ bh=3I2vaGPZZ3gjBTSC5fLRBtWa2TW127+ZHLJWBufbarI=;
+ b=iWqiG1iz0QwksJWmJN5oBZ5a/k79z9R7Ke2LeZqi3p5ChMRAoLpOtsAqn+lRnpwiJ5
+ nJusSK7+IBJTLyCdMY3H6yp7/IPaFM2ChiIWz5mMx/h4d5qCxfXtn0inHplXpiO2dOJJ
+ 8lympcjPne7x2z0ciLG1BKr+a9zCUExoYGtzVf1D/cmbC8oO6esqnWBabW/5Ws8d/4pq
+ ypQ2XJQdhZwr1/82h2O+4wOdjPAFBIxtaC2kV893wCCeISEarN/c6NbaBXH2ZjaJQ23l
+ xokyZjyX26UA0WaDXHADhNYrbiIx4bmFtf7BUwO4eLvfMBN/BzW98VThJaSUO+nJFErv
+ KeWw==
+X-Gm-Message-State: AOJu0Yw03HyC3DAh5+NHdnmXwPj75GbEjRd50R6zS5KOvDxMjk/GP+vK
+ BLMzs9tRvzgKHqMfF6jkDLM8kWJry6s3erfZ15pGWfaQiMPAGiPDodImdSzCn/M=
+X-Google-Smtp-Source: AGHT+IG1D0KirhwTixx0OE1NWwwM56ZABLDMneg9vVTboOBpaNCz6I5lkSUwzSReEJDiVk+hXg7CnQ==
+X-Received: by 2002:a05:600c:4ecf:b0:414:61d9:d1f5 with SMTP id
+ g15-20020a05600c4ecf00b0041461d9d1f5mr120513wmq.10.1711055072939; 
+ Thu, 21 Mar 2024 14:04:32 -0700 (PDT)
 Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- ay15-20020a05600c1e0f00b004146f728906sm925462wmb.7.2024.03.21.14.04.28
+ ay15-20020a05600c1e0f00b004146f728906sm925462wmb.7.2024.03.21.14.04.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Mar 2024 14:04:29 -0700 (PDT)
+ Thu, 21 Mar 2024 14:04:32 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Thu, 21 Mar 2024 21:03:59 +0000
-Subject: [PATCH v2 16/24] xlnx: drop dt-binding headers
+Date: Thu, 21 Mar 2024 21:04:01 +0000
+Subject: [PATCH v2 18/24] microchip: drop dt-binding headers
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240321-b4-upstream-dt-headers-v2-16-1eac0df875fe@linaro.org>
+Message-Id: <20240321-b4-upstream-dt-headers-v2-18-1eac0df875fe@linaro.org>
 References: <20240321-b4-upstream-dt-headers-v2-0-1eac0df875fe@linaro.org>
 In-Reply-To: <20240321-b4-upstream-dt-headers-v2-0-1eac0df875fe@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -102,13 +102,13 @@ Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io,
  uboot-stm32@st-md-mailman.stormreply.com, uboot-snps-arc@synopsys.com, 
  Caleb Connolly <caleb.connolly@linaro.org>
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=19533;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=12736;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=TAkzYvr9nwbaAz1rFsd4FKI0tB6ez1V6FDMiqYuN7VI=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtQ/C/aUr7ZbsPen56Vwm9d3TOWXvV1UHff+64TEiuwN8
- ky7b4WVdZSyMAhyMMiKKbKIn1hm2bT2sr3G9gUXYOawMoEMYeDiFICJePxm+J9REvV7Fast89N1
- iR47XjqVP2pk2rpYVSvDImx64/RNEWcZ/gpcuny9uOhLnLTO22/f0hTlrk482nzjx73Uvtykeok
- 9pVkA
+ bh=HkbSGabfPtjJGIe4yorv0zsrHjzqb6ecFAWLshl7GSU=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtQ/C/ZWhCz52bThiL9B2swm8Xelv97Y/hA87v/p1xTtr
+ HIzy+VeHaUsDIIcDLJiiiziJ5ZZNq29bK+xfcEFmDmsTCBDGLg4BWAibOIM/xTqtm2Yq1G658MN
+ V9UKoUKVar06ifLANRKHIub1rV5a5cnwP/QMg5GcoYuFSJL0Zv41d2JXXJ7Te4b3jLZG+bOj7ae
+ 8VgEA
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-Mailman-Approved-At: Fri, 22 Mar 2024 00:35:07 +0100
@@ -130,628 +130,386 @@ X-Virus-Status: Clean
 
 Drop in favour of dts/upstream
 
+Adjust header include path naming for mpfs clock.
+
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- include/dt-bindings/clock/xlnx-versal-clk.h    | 123 -----------------------
- include/dt-bindings/clock/xlnx-zynqmp-clk.h    | 126 ------------------------
- include/dt-bindings/dma/xlnx-zynqmp-dpdma.h    |  16 ---
- include/dt-bindings/pinctrl/pinctrl-zynqmp.h   |  19 ----
- include/dt-bindings/power/xlnx-zynqmp-power.h  |  50 ----------
- include/dt-bindings/reset/xlnx-versal-resets.h | 105 --------------------
- include/dt-bindings/reset/xlnx-zynqmp-resets.h | 130 -------------------------
- 7 files changed, 569 deletions(-)
+ arch/riscv/dts/mpfs.dtsi                         |  2 +-
+ drivers/clk/microchip/mpfs_clk.c                 |  2 +-
+ drivers/clk/microchip/mpfs_clk_cfg.c             |  2 +-
+ drivers/clk/microchip/mpfs_clk_msspll.c          |  2 +-
+ drivers/clk/microchip/mpfs_clk_periph.c          |  2 +-
+ include/dt-bindings/clock/at91.h                 | 23 --------
+ include/dt-bindings/clock/microchip-mpfs-clock.h | 71 ------------------------
+ include/dt-bindings/dma/at91.h                   | 52 -----------------
+ include/dt-bindings/mfd/at91-usart.h             | 17 ------
+ include/dt-bindings/net/microchip-lan78xx.h      | 21 -------
+ include/dt-bindings/pinctrl/at91.h               | 49 ----------------
+ include/dt-bindings/sound/microchip,pdmc.h       | 13 -----
+ 12 files changed, 5 insertions(+), 251 deletions(-)
 
-diff --git a/include/dt-bindings/clock/xlnx-versal-clk.h b/include/dt-bindings/clock/xlnx-versal-clk.h
+diff --git a/arch/riscv/dts/mpfs.dtsi b/arch/riscv/dts/mpfs.dtsi
+index 6012a2850703..5827d5c5d19b 100644
+--- a/arch/riscv/dts/mpfs.dtsi
++++ b/arch/riscv/dts/mpfs.dtsi
+@@ -1,8 +1,8 @@
+ // SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+ /* Copyright (c) 2020-2021 Microchip Technology Inc */
+ 
+-#include "dt-bindings/clock/microchip-mpfs-clock.h"
++#include <dt-bindings/clock/microchip,mpfs-clock.h>
+ 
+ / {
+ 	#address-cells = <2>;
+ 	#size-cells = <2>;
+diff --git a/drivers/clk/microchip/mpfs_clk.c b/drivers/clk/microchip/mpfs_clk.c
+index 08f8bfcecbed..44ac4306eace 100644
+--- a/drivers/clk/microchip/mpfs_clk.c
++++ b/drivers/clk/microchip/mpfs_clk.c
+@@ -10,9 +10,9 @@
+ #include <log.h>
+ #include <dm/device.h>
+ #include <dm/devres.h>
+ #include <dm/uclass.h>
+-#include <dt-bindings/clock/microchip-mpfs-clock.h>
++#include <dt-bindings/clock/microchip,mpfs-clock.h>
+ #include <linux/err.h>
+ 
+ #include "mpfs_clk.h"
+ 
+diff --git a/drivers/clk/microchip/mpfs_clk_cfg.c b/drivers/clk/microchip/mpfs_clk_cfg.c
+index 5739fd66e8df..953e88e283ed 100644
+--- a/drivers/clk/microchip/mpfs_clk_cfg.c
++++ b/drivers/clk/microchip/mpfs_clk_cfg.c
+@@ -9,9 +9,9 @@
+ #include <asm/io.h>
+ #include <dm/device.h>
+ #include <dm/devres.h>
+ #include <dm/uclass.h>
+-#include <dt-bindings/clock/microchip-mpfs-clock.h>
++#include <dt-bindings/clock/microchip,mpfs-clock.h>
+ #include <linux/err.h>
+ 
+ #include "mpfs_clk.h"
+ 
+diff --git a/drivers/clk/microchip/mpfs_clk_msspll.c b/drivers/clk/microchip/mpfs_clk_msspll.c
+index f37c0d86047c..7b5020404549 100644
+--- a/drivers/clk/microchip/mpfs_clk_msspll.c
++++ b/drivers/clk/microchip/mpfs_clk_msspll.c
+@@ -8,9 +8,9 @@
+ #include <asm/io.h>
+ #include <dm/device.h>
+ #include <dm/devres.h>
+ #include <dm/uclass.h>
+-#include <dt-bindings/clock/microchip-mpfs-clock.h>
++#include <dt-bindings/clock/microchip,mpfs-clock.h>
+ #include <linux/err.h>
+ 
+ #include "mpfs_clk.h"
+ 
+diff --git a/drivers/clk/microchip/mpfs_clk_periph.c b/drivers/clk/microchip/mpfs_clk_periph.c
+index ddeccb914575..16823402def3 100644
+--- a/drivers/clk/microchip/mpfs_clk_periph.c
++++ b/drivers/clk/microchip/mpfs_clk_periph.c
+@@ -9,9 +9,9 @@
+ #include <asm/io.h>
+ #include <dm/device.h>
+ #include <dm/devres.h>
+ #include <dm/uclass.h>
+-#include <dt-bindings/clock/microchip-mpfs-clock.h>
++#include <dt-bindings/clock/microchip,mpfs-clock.h>
+ #include <linux/err.h>
+ 
+ #include "mpfs_clk.h"
+ 
+diff --git a/include/dt-bindings/clock/at91.h b/include/dt-bindings/clock/at91.h
 deleted file mode 100644
-index 264d634d226e..000000000000
---- a/include/dt-bindings/clock/xlnx-versal-clk.h
+index ab3ee241d10c..000000000000
+--- a/include/dt-bindings/clock/at91.h
 +++ /dev/null
-@@ -1,123 +0,0 @@
+@@ -1,23 +0,0 @@
+-/*
+- * This header provides constants for AT91 pmc status.
+- *
+- * The constants defined in this header are being used in dts.
+- *
+- * Licensed under GPLv2 or later.
+- */
+-
+-#ifndef _DT_BINDINGS_CLK_AT91_H
+-#define _DT_BINDINGS_CLK_AT91_H
+-
+-#define AT91_PMC_MOSCS		0		/* MOSCS Flag */
+-#define AT91_PMC_LOCKA		1		/* PLLA Lock */
+-#define AT91_PMC_LOCKB		2		/* PLLB Lock */
+-#define AT91_PMC_MCKRDY		3		/* Master Clock */
+-#define AT91_PMC_LOCKU		6		/* UPLL Lock */
+-#define AT91_PMC_PCKRDY(id)	(8 + (id))	/* Programmable Clock */
+-#define AT91_PMC_MOSCSELS	16		/* Main Oscillator Selection */
+-#define AT91_PMC_MOSCRCS	17		/* Main On-Chip RC */
+-#define AT91_PMC_CFDEV		18		/* Clock Failure Detector Event */
+-#define AT91_PMC_GCKRDY		24		/* Generated Clocks */
+-
+-#endif
+diff --git a/include/dt-bindings/clock/microchip-mpfs-clock.h b/include/dt-bindings/clock/microchip-mpfs-clock.h
+deleted file mode 100644
+index 79775a5134ca..000000000000
+--- a/include/dt-bindings/clock/microchip-mpfs-clock.h
++++ /dev/null
+@@ -1,71 +0,0 @@
+-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+-/*
+- * Daire McNamara,<daire.mcnamara@microchip.com>
+- * Copyright (C) 2020-2022 Microchip Technology Inc.  All rights reserved.
+- */
+-
+-#ifndef _DT_BINDINGS_CLK_MICROCHIP_MPFS_H_
+-#define _DT_BINDINGS_CLK_MICROCHIP_MPFS_H_
+-
+-#define CLK_CPU		0
+-#define CLK_AXI		1
+-#define CLK_AHB		2
+-
+-#define CLK_ENVM	3
+-#define CLK_MAC0	4
+-#define CLK_MAC1	5
+-#define CLK_MMC		6
+-#define CLK_TIMER	7
+-#define CLK_MMUART0	8
+-#define CLK_MMUART1	9
+-#define CLK_MMUART2	10
+-#define CLK_MMUART3	11
+-#define CLK_MMUART4	12
+-#define CLK_SPI0	13
+-#define CLK_SPI1	14
+-#define CLK_I2C0	15
+-#define CLK_I2C1	16
+-#define CLK_CAN0	17
+-#define CLK_CAN1	18
+-#define CLK_USB		19
+-#define CLK_RESERVED	20
+-#define CLK_RTC		21
+-#define CLK_QSPI	22
+-#define CLK_GPIO0	23
+-#define CLK_GPIO1	24
+-#define CLK_GPIO2	25
+-#define CLK_DDRC	26
+-#define CLK_FIC0	27
+-#define CLK_FIC1	28
+-#define CLK_FIC2	29
+-#define CLK_FIC3	30
+-#define CLK_ATHENA	31
+-#define CLK_CFM		32
+-
+-#define CLK_RTCREF	33
+-#define CLK_MSSPLL	34
+-
+-/* Clock Conditioning Circuitry Clock IDs */
+-
+-#define CLK_CCC_PLL0		0
+-#define CLK_CCC_PLL1		1
+-#define CLK_CCC_DLL0		2
+-#define CLK_CCC_DLL1		3
+-
+-#define CLK_CCC_PLL0_OUT0	4
+-#define CLK_CCC_PLL0_OUT1	5
+-#define CLK_CCC_PLL0_OUT2	6
+-#define CLK_CCC_PLL0_OUT3	7
+-
+-#define CLK_CCC_PLL1_OUT0	8
+-#define CLK_CCC_PLL1_OUT1	9
+-#define CLK_CCC_PLL1_OUT2	10
+-#define CLK_CCC_PLL1_OUT3	11
+-
+-#define CLK_CCC_DLL0_OUT0	12
+-#define CLK_CCC_DLL0_OUT1	13
+-
+-#define CLK_CCC_DLL1_OUT0	14
+-#define CLK_CCC_DLL1_OUT1	15
+-
+-#endif	/* _DT_BINDINGS_CLK_MICROCHIP_MPFS_H_ */
+diff --git a/include/dt-bindings/dma/at91.h b/include/dt-bindings/dma/at91.h
+deleted file mode 100644
+index ab6cbba45401..000000000000
+--- a/include/dt-bindings/dma/at91.h
++++ /dev/null
+@@ -1,52 +0,0 @@
+-/*
+- * This header provides macros for at91 dma bindings.
+- *
+- * Copyright (C) 2013 Ludovic Desroches <ludovic.desroches@atmel.com>
+- *
+- * GPLv2 only
+- */
+-
+-#ifndef __DT_BINDINGS_AT91_DMA_H__
+-#define __DT_BINDINGS_AT91_DMA_H__
+-
+-/* ---------- HDMAC ---------- */
+-
+-/*
+- * Source and/or destination peripheral ID
+- */
+-#define AT91_DMA_CFG_PER_ID_MASK	(0xff)
+-#define AT91_DMA_CFG_PER_ID(id)		(id & AT91_DMA_CFG_PER_ID_MASK)
+-
+-/*
+- * FIFO configuration: it defines when a request is serviced.
+- */
+-#define AT91_DMA_CFG_FIFOCFG_OFFSET	(8)
+-#define AT91_DMA_CFG_FIFOCFG_MASK	(0xf << AT91_DMA_CFG_FIFOCFG_OFFSET)
+-#define AT91_DMA_CFG_FIFOCFG_HALF	(0x0 << AT91_DMA_CFG_FIFOCFG_OFFSET)	/* half FIFO (default behavior) */
+-#define AT91_DMA_CFG_FIFOCFG_ALAP	(0x1 << AT91_DMA_CFG_FIFOCFG_OFFSET)	/* largest defined AHB burst */
+-#define AT91_DMA_CFG_FIFOCFG_ASAP	(0x2 << AT91_DMA_CFG_FIFOCFG_OFFSET)	/* single AHB access */
+-
+-
+-/* ---------- XDMAC ---------- */
+-#define AT91_XDMAC_DT_MEM_IF_MASK	(0x1)
+-#define AT91_XDMAC_DT_MEM_IF_OFFSET	(13)
+-#define AT91_XDMAC_DT_MEM_IF(mem_if)	(((mem_if) & AT91_XDMAC_DT_MEM_IF_MASK) \
+-					<< AT91_XDMAC_DT_MEM_IF_OFFSET)
+-#define AT91_XDMAC_DT_GET_MEM_IF(cfg)	(((cfg) >> AT91_XDMAC_DT_MEM_IF_OFFSET) \
+-					& AT91_XDMAC_DT_MEM_IF_MASK)
+-
+-#define AT91_XDMAC_DT_PER_IF_MASK	(0x1)
+-#define AT91_XDMAC_DT_PER_IF_OFFSET	(14)
+-#define AT91_XDMAC_DT_PER_IF(per_if)	(((per_if) & AT91_XDMAC_DT_PER_IF_MASK) \
+-					<< AT91_XDMAC_DT_PER_IF_OFFSET)
+-#define AT91_XDMAC_DT_GET_PER_IF(cfg)	(((cfg) >> AT91_XDMAC_DT_PER_IF_OFFSET) \
+-					& AT91_XDMAC_DT_PER_IF_MASK)
+-
+-#define AT91_XDMAC_DT_PERID_MASK	(0x7f)
+-#define AT91_XDMAC_DT_PERID_OFFSET	(24)
+-#define AT91_XDMAC_DT_PERID(perid)	(((perid) & AT91_XDMAC_DT_PERID_MASK) \
+-					<< AT91_XDMAC_DT_PERID_OFFSET)
+-#define AT91_XDMAC_DT_GET_PERID(cfg)	(((cfg) >> AT91_XDMAC_DT_PERID_OFFSET) \
+-					& AT91_XDMAC_DT_PERID_MASK)
+-
+-#endif /* __DT_BINDINGS_AT91_DMA_H__ */
+diff --git a/include/dt-bindings/mfd/at91-usart.h b/include/dt-bindings/mfd/at91-usart.h
+deleted file mode 100644
+index 2de5bc312e1e..000000000000
+--- a/include/dt-bindings/mfd/at91-usart.h
++++ /dev/null
+@@ -1,17 +0,0 @@
 -/* SPDX-License-Identifier: GPL-2.0 */
 -/*
-- *  Copyright (C) 2019 Xilinx Inc.
+- * This header provides macros for AT91 USART DT bindings.
+- *
+- * Copyright (C) 2018 Microchip Technology
+- *
+- * Author: Radu Pirea <radu.pirea@microchip.com>
 - *
 - */
 -
--#ifndef _DT_BINDINGS_CLK_VERSAL_H
--#define _DT_BINDINGS_CLK_VERSAL_H
+-#ifndef __DT_BINDINGS_AT91_USART_H__
+-#define __DT_BINDINGS_AT91_USART_H__
 -
--#define PMC_PLL					1
--#define APU_PLL					2
--#define RPU_PLL					3
--#define CPM_PLL					4
--#define NOC_PLL					5
--#define PLL_MAX					6
--#define PMC_PRESRC				7
--#define PMC_POSTCLK				8
--#define PMC_PLL_OUT				9
--#define PPLL					10
--#define NOC_PRESRC				11
--#define NOC_POSTCLK				12
--#define NOC_PLL_OUT				13
--#define NPLL					14
--#define APU_PRESRC				15
--#define APU_POSTCLK				16
--#define APU_PLL_OUT				17
--#define APLL					18
--#define RPU_PRESRC				19
--#define RPU_POSTCLK				20
--#define RPU_PLL_OUT				21
--#define RPLL					22
--#define CPM_PRESRC				23
--#define CPM_POSTCLK				24
--#define CPM_PLL_OUT				25
--#define CPLL					26
--#define PPLL_TO_XPD				27
--#define NPLL_TO_XPD				28
--#define APLL_TO_XPD				29
--#define RPLL_TO_XPD				30
--#define EFUSE_REF				31
--#define SYSMON_REF				32
--#define IRO_SUSPEND_REF				33
--#define USB_SUSPEND				34
--#define SWITCH_TIMEOUT				35
--#define RCLK_PMC				36
--#define RCLK_LPD				37
--#define WDT					38
--#define TTC0					39
--#define TTC1					40
--#define TTC2					41
--#define TTC3					42
--#define GEM_TSU					43
--#define GEM_TSU_LB				44
--#define MUXED_IRO_DIV2				45
--#define MUXED_IRO_DIV4				46
--#define PSM_REF					47
--#define GEM0_RX					48
--#define GEM0_TX					49
--#define GEM1_RX					50
--#define GEM1_TX					51
--#define CPM_CORE_REF				52
--#define CPM_LSBUS_REF				53
--#define CPM_DBG_REF				54
--#define CPM_AUX0_REF				55
--#define CPM_AUX1_REF				56
--#define QSPI_REF				57
--#define OSPI_REF				58
--#define SDIO0_REF				59
--#define SDIO1_REF				60
--#define PMC_LSBUS_REF				61
--#define I2C_REF					62
--#define TEST_PATTERN_REF			63
--#define DFT_OSC_REF				64
--#define PMC_PL0_REF				65
--#define PMC_PL1_REF				66
--#define PMC_PL2_REF				67
--#define PMC_PL3_REF				68
--#define CFU_REF					69
--#define SPARE_REF				70
--#define NPI_REF					71
--#define HSM0_REF				72
--#define HSM1_REF				73
--#define SD_DLL_REF				74
--#define FPD_TOP_SWITCH				75
--#define FPD_LSBUS				76
--#define ACPU					77
--#define DBG_TRACE				78
--#define DBG_FPD					79
--#define LPD_TOP_SWITCH				80
--#define ADMA					81
--#define LPD_LSBUS				82
--#define CPU_R5					83
--#define CPU_R5_CORE				84
--#define CPU_R5_OCM				85
--#define CPU_R5_OCM2				86
--#define IOU_SWITCH				87
--#define GEM0_REF				88
--#define GEM1_REF				89
--#define GEM_TSU_REF				90
--#define USB0_BUS_REF				91
--#define UART0_REF				92
--#define UART1_REF				93
--#define SPI0_REF				94
--#define SPI1_REF				95
--#define CAN0_REF				96
--#define CAN1_REF				97
--#define I2C0_REF				98
--#define I2C1_REF				99
--#define DBG_LPD					100
--#define TIMESTAMP_REF				101
--#define DBG_TSTMP				102
--#define CPM_TOPSW_REF				103
--#define USB3_DUAL_REF				104
--#define OUTCLK_MAX				105
--#define REF_CLK					106
--#define PL_ALT_REF_CLK				107
--#define MUXED_IRO				108
--#define PL_EXT					109
--#define PL_LB					110
--#define MIO_50_OR_51				111
--#define MIO_24_OR_25				112
+-#define AT91_USART_MODE_SERIAL	0
+-#define AT91_USART_MODE_SPI	1
+-
+-#endif /* __DT_BINDINGS_AT91_USART_H__ */
+diff --git a/include/dt-bindings/net/microchip-lan78xx.h b/include/dt-bindings/net/microchip-lan78xx.h
+deleted file mode 100644
+index 0742ff075307..000000000000
+--- a/include/dt-bindings/net/microchip-lan78xx.h
++++ /dev/null
+@@ -1,21 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-#ifndef _DT_BINDINGS_MICROCHIP_LAN78XX_H
+-#define _DT_BINDINGS_MICROCHIP_LAN78XX_H
+-
+-/* LED modes for LAN7800/LAN7850 embedded PHY */
+-
+-#define LAN78XX_LINK_ACTIVITY           0
+-#define LAN78XX_LINK_1000_ACTIVITY      1
+-#define LAN78XX_LINK_100_ACTIVITY       2
+-#define LAN78XX_LINK_10_ACTIVITY        3
+-#define LAN78XX_LINK_100_1000_ACTIVITY  4
+-#define LAN78XX_LINK_10_1000_ACTIVITY   5
+-#define LAN78XX_LINK_10_100_ACTIVITY    6
+-#define LAN78XX_DUPLEX_COLLISION        8
+-#define LAN78XX_COLLISION               9
+-#define LAN78XX_ACTIVITY                10
+-#define LAN78XX_AUTONEG_FAULT           12
+-#define LAN78XX_FORCE_LED_OFF           14
+-#define LAN78XX_FORCE_LED_ON            15
 -
 -#endif
-diff --git a/include/dt-bindings/clock/xlnx-zynqmp-clk.h b/include/dt-bindings/clock/xlnx-zynqmp-clk.h
+diff --git a/include/dt-bindings/pinctrl/at91.h b/include/dt-bindings/pinctrl/at91.h
 deleted file mode 100644
-index cdc4c0b9a374..000000000000
---- a/include/dt-bindings/clock/xlnx-zynqmp-clk.h
+index 3831f91fb3ba..000000000000
+--- a/include/dt-bindings/pinctrl/at91.h
 +++ /dev/null
-@@ -1,126 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0 */
+@@ -1,49 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0-only */
 -/*
-- * Xilinx Zynq MPSoC Firmware layer
+- * This header provides constants for most at91 pinctrl bindings.
 - *
-- *  Copyright (C) 2014-2018 Xilinx, Inc.
-- *
+- * Copyright (C) 2013 Jean-Christophe PLAGNIOL-VILLARD <plagnioj@jcrosoft.com>
 - */
 -
--#ifndef _DT_BINDINGS_CLK_ZYNQMP_H
--#define _DT_BINDINGS_CLK_ZYNQMP_H
+-#ifndef __DT_BINDINGS_AT91_PINCTRL_H__
+-#define __DT_BINDINGS_AT91_PINCTRL_H__
 -
--#define IOPLL			0
--#define RPLL			1
--#define APLL			2
--#define DPLL			3
--#define VPLL			4
--#define IOPLL_TO_FPD		5
--#define RPLL_TO_FPD		6
--#define APLL_TO_LPD		7
--#define DPLL_TO_LPD		8
--#define VPLL_TO_LPD		9
--#define ACPU			10
--#define ACPU_HALF		11
--#define DBF_FPD			12
--#define DBF_LPD			13
--#define DBG_TRACE		14
--#define DBG_TSTMP		15
--#define DP_VIDEO_REF		16
--#define DP_AUDIO_REF		17
--#define DP_STC_REF		18
--#define GDMA_REF		19
--#define DPDMA_REF		20
--#define DDR_REF			21
--#define SATA_REF		22
--#define PCIE_REF		23
--#define GPU_REF			24
--#define GPU_PP0_REF		25
--#define GPU_PP1_REF		26
--#define TOPSW_MAIN		27
--#define TOPSW_LSBUS		28
--#define GTGREF0_REF		29
--#define LPD_SWITCH		30
--#define LPD_LSBUS		31
--#define USB0_BUS_REF		32
--#define USB1_BUS_REF		33
--#define USB3_DUAL_REF		34
--#define USB0			35
--#define USB1			36
--#define CPU_R5			37
--#define CPU_R5_CORE		38
--#define CSU_SPB			39
--#define CSU_PLL			40
--#define PCAP			41
--#define IOU_SWITCH		42
--#define GEM_TSU_REF		43
--#define GEM_TSU			44
--#define GEM0_TX			45
--#define GEM1_TX			46
--#define GEM2_TX			47
--#define GEM3_TX			48
--#define GEM0_RX			49
--#define GEM1_RX			50
--#define GEM2_RX			51
--#define GEM3_RX			52
--#define QSPI_REF		53
--#define SDIO0_REF		54
--#define SDIO1_REF		55
--#define UART0_REF		56
--#define UART1_REF		57
--#define SPI0_REF		58
--#define SPI1_REF		59
--#define NAND_REF		60
--#define I2C0_REF		61
--#define I2C1_REF		62
--#define CAN0_REF		63
--#define CAN1_REF		64
--#define CAN0			65
--#define CAN1			66
--#define DLL_REF			67
--#define ADMA_REF		68
--#define TIMESTAMP_REF		69
--#define AMS_REF			70
--#define PL0_REF			71
--#define PL1_REF			72
--#define PL2_REF			73
--#define PL3_REF			74
--#define WDT			75
--#define IOPLL_INT		76
--#define IOPLL_PRE_SRC		77
--#define IOPLL_HALF		78
--#define IOPLL_INT_MUX		79
--#define IOPLL_POST_SRC		80
--#define RPLL_INT		81
--#define RPLL_PRE_SRC		82
--#define RPLL_HALF		83
--#define RPLL_INT_MUX		84
--#define RPLL_POST_SRC		85
--#define APLL_INT		86
--#define APLL_PRE_SRC		87
--#define APLL_HALF		88
--#define APLL_INT_MUX		89
--#define APLL_POST_SRC		90
--#define DPLL_INT		91
--#define DPLL_PRE_SRC		92
--#define DPLL_HALF		93
--#define DPLL_INT_MUX		94
--#define DPLL_POST_SRC		95
--#define VPLL_INT		96
--#define VPLL_PRE_SRC		97
--#define VPLL_HALF		98
--#define VPLL_INT_MUX		99
--#define VPLL_POST_SRC		100
--#define CAN0_MIO		101
--#define CAN1_MIO		102
--#define ACPU_FULL		103
--#define GEM0_REF		104
--#define GEM1_REF		105
--#define GEM2_REF		106
--#define GEM3_REF		107
--#define GEM0_REF_UNG		108
--#define GEM1_REF_UNG		109
--#define GEM2_REF_UNG		110
--#define GEM3_REF_UNG		111
--#define LPD_WDT			112
+-#define AT91_PINCTRL_NONE		(0 << 0)
+-#define AT91_PINCTRL_PULL_UP		(1 << 0)
+-#define AT91_PINCTRL_MULTI_DRIVE	(1 << 1)
+-#define AT91_PINCTRL_DEGLITCH		(1 << 2)
+-#define AT91_PINCTRL_PULL_DOWN		(1 << 3)
+-#define AT91_PINCTRL_DIS_SCHMIT		(1 << 4)
+-#define AT91_PINCTRL_OUTPUT		(1 << 7)
+-#define AT91_PINCTRL_OUTPUT_VAL(x)	((x & 0x1) << 8)
+-#define AT91_PINCTRL_SLEWRATE		(1 << 9)
+-#define AT91_PINCTRL_DEBOUNCE		(1 << 16)
+-#define AT91_PINCTRL_DEBOUNCE_VAL(x)	(x << 17)
 -
--#endif
-diff --git a/include/dt-bindings/dma/xlnx-zynqmp-dpdma.h b/include/dt-bindings/dma/xlnx-zynqmp-dpdma.h
+-#define AT91_PINCTRL_PULL_UP_DEGLITCH	(AT91_PINCTRL_PULL_UP | AT91_PINCTRL_DEGLITCH)
+-
+-#define AT91_PINCTRL_DRIVE_STRENGTH_DEFAULT		(0x0 << 5)
+-#define AT91_PINCTRL_DRIVE_STRENGTH_LOW			(0x1 << 5)
+-#define AT91_PINCTRL_DRIVE_STRENGTH_MED			(0x2 << 5)
+-#define AT91_PINCTRL_DRIVE_STRENGTH_HI			(0x3 << 5)
+-
+-#define AT91_PINCTRL_SLEWRATE_DIS	(0x0 << 9)
+-#define AT91_PINCTRL_SLEWRATE_ENA	(0x1 << 9)
+-
+-#define AT91_PIOA	0
+-#define AT91_PIOB	1
+-#define AT91_PIOC	2
+-#define AT91_PIOD	3
+-#define AT91_PIOE	4
+-
+-#define AT91_PERIPH_GPIO	0
+-#define AT91_PERIPH_A		1
+-#define AT91_PERIPH_B		2
+-#define AT91_PERIPH_C		3
+-#define AT91_PERIPH_D		4
+-
+-#define ATMEL_PIO_DRVSTR_LO	1
+-#define ATMEL_PIO_DRVSTR_ME	2
+-#define ATMEL_PIO_DRVSTR_HI	3
+-
+-#endif /* __DT_BINDINGS_AT91_PINCTRL_H__ */
+diff --git a/include/dt-bindings/sound/microchip,pdmc.h b/include/dt-bindings/sound/microchip,pdmc.h
 deleted file mode 100644
-index 3719cda5679d..000000000000
---- a/include/dt-bindings/dma/xlnx-zynqmp-dpdma.h
+index 96cde94ce74f..000000000000
+--- a/include/dt-bindings/sound/microchip,pdmc.h
 +++ /dev/null
-@@ -1,16 +0,0 @@
--/* SPDX-License-Identifier: (GPL-2.0 OR MIT) */
--/*
-- * Copyright 2019 Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-- */
--
--#ifndef __DT_BINDINGS_DMA_XLNX_ZYNQMP_DPDMA_H__
--#define __DT_BINDINGS_DMA_XLNX_ZYNQMP_DPDMA_H__
--
--#define ZYNQMP_DPDMA_VIDEO0		0
--#define ZYNQMP_DPDMA_VIDEO1		1
--#define ZYNQMP_DPDMA_VIDEO2		2
--#define ZYNQMP_DPDMA_GRAPHICS		3
--#define ZYNQMP_DPDMA_AUDIO0		4
--#define ZYNQMP_DPDMA_AUDIO1		5
--
--#endif /* __DT_BINDINGS_DMA_XLNX_ZYNQMP_DPDMA_H__ */
-diff --git a/include/dt-bindings/pinctrl/pinctrl-zynqmp.h b/include/dt-bindings/pinctrl/pinctrl-zynqmp.h
-deleted file mode 100644
-index cdb215734bdf..000000000000
---- a/include/dt-bindings/pinctrl/pinctrl-zynqmp.h
-+++ /dev/null
-@@ -1,19 +0,0 @@
+@@ -1,13 +0,0 @@
 -/* SPDX-License-Identifier: GPL-2.0 */
--/*
-- * MIO pin configuration defines for Xilinx ZynqMP
-- *
-- * Copyright (C) 2020 Xilinx, Inc.
-- */
+-#ifndef __DT_BINDINGS_MICROCHIP_PDMC_H__
+-#define __DT_BINDINGS_MICROCHIP_PDMC_H__
 -
--#ifndef _DT_BINDINGS_PINCTRL_ZYNQMP_H
--#define _DT_BINDINGS_PINCTRL_ZYNQMP_H
+-/* PDM microphone's pin placement */
+-#define MCHP_PDMC_DS0 0
+-#define MCHP_PDMC_DS1 1
 -
--/* Bit value for different voltage levels */
--#define IO_STANDARD_LVCMOS33	0
--#define IO_STANDARD_LVCMOS18	1
+-/* PDM microphone clock edge sampling */
+-#define MCHP_PDMC_CLK_POSITIVE 0
+-#define MCHP_PDMC_CLK_NEGATIVE 1
 -
--/* Bit values for Slew Rates */
--#define SLEW_RATE_FAST		0
--#define SLEW_RATE_SLOW		1
--
--#endif /* _DT_BINDINGS_PINCTRL_ZYNQMP_H */
-diff --git a/include/dt-bindings/power/xlnx-zynqmp-power.h b/include/dt-bindings/power/xlnx-zynqmp-power.h
-deleted file mode 100644
-index e7eb0960480a..000000000000
---- a/include/dt-bindings/power/xlnx-zynqmp-power.h
-+++ /dev/null
-@@ -1,50 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0 */
--/*
-- *  Copyright (C) 2018 Xilinx, Inc.
-- */
--
--#ifndef _DT_BINDINGS_ZYNQMP_POWER_H
--#define _DT_BINDINGS_ZYNQMP_POWER_H
--
--#define		PD_RPU_0	6
--#define		PD_RPU_1	7
--#define		PD_OCM_BANK_0	11
--#define		PD_OCM_BANK_1	12
--#define		PD_OCM_BANK_2	13
--#define		PD_OCM_BANK_3	14
--#define		PD_TCM_BANK_0	15
--#define		PD_TCM_BANK_1	16
--#define		PD_TCM_BANK_2	17
--#define		PD_TCM_BANK_3	18
--#define		PD_USB_0	22
--#define		PD_USB_1	23
--#define		PD_TTC_0	24
--#define		PD_TTC_1	25
--#define		PD_TTC_2	26
--#define		PD_TTC_3	27
--#define		PD_SATA		28
--#define		PD_ETH_0	29
--#define		PD_ETH_1	30
--#define		PD_ETH_2	31
--#define		PD_ETH_3	32
--#define		PD_UART_0	33
--#define		PD_UART_1	34
--#define		PD_SPI_0	35
--#define		PD_SPI_1	36
--#define		PD_I2C_0	37
--#define		PD_I2C_1	38
--#define		PD_SD_0		39
--#define		PD_SD_1		40
--#define		PD_DP		41
--#define		PD_GDMA		42
--#define		PD_ADMA		43
--#define		PD_NAND		44
--#define		PD_QSPI		45
--#define		PD_GPIO		46
--#define		PD_CAN_0	47
--#define		PD_CAN_1	48
--#define		PD_GPU		58
--#define		PD_PCIE		59
--#define		PD_PL		69
--
--#endif
-diff --git a/include/dt-bindings/reset/xlnx-versal-resets.h b/include/dt-bindings/reset/xlnx-versal-resets.h
-deleted file mode 100644
-index 895424e9b0e5..000000000000
---- a/include/dt-bindings/reset/xlnx-versal-resets.h
-+++ /dev/null
-@@ -1,105 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0 */
--/*
-- *  Copyright (C) 2020 Xilinx, Inc.
-- */
--
--#ifndef _DT_BINDINGS_VERSAL_RESETS_H
--#define _DT_BINDINGS_VERSAL_RESETS_H
--
--#define VERSAL_RST_PMC_POR			(0xc30c001U)
--#define VERSAL_RST_PMC				(0xc410002U)
--#define VERSAL_RST_PS_POR			(0xc30c003U)
--#define VERSAL_RST_PL_POR			(0xc30c004U)
--#define VERSAL_RST_NOC_POR			(0xc30c005U)
--#define VERSAL_RST_FPD_POR			(0xc30c006U)
--#define VERSAL_RST_ACPU_0_POR			(0xc30c007U)
--#define VERSAL_RST_ACPU_1_POR			(0xc30c008U)
--#define VERSAL_RST_OCM2_POR			(0xc30c009U)
--#define VERSAL_RST_PS_SRST			(0xc41000aU)
--#define VERSAL_RST_PL_SRST			(0xc41000bU)
--#define VERSAL_RST_NOC				(0xc41000cU)
--#define VERSAL_RST_NPI				(0xc41000dU)
--#define VERSAL_RST_SYS_RST_1			(0xc41000eU)
--#define VERSAL_RST_SYS_RST_2			(0xc41000fU)
--#define VERSAL_RST_SYS_RST_3			(0xc410010U)
--#define VERSAL_RST_FPD				(0xc410011U)
--#define VERSAL_RST_PL0				(0xc410012U)
--#define VERSAL_RST_PL1				(0xc410013U)
--#define VERSAL_RST_PL2				(0xc410014U)
--#define VERSAL_RST_PL3				(0xc410015U)
--#define VERSAL_RST_APU				(0xc410016U)
--#define VERSAL_RST_ACPU_0			(0xc410017U)
--#define VERSAL_RST_ACPU_1			(0xc410018U)
--#define VERSAL_RST_ACPU_L2			(0xc410019U)
--#define VERSAL_RST_ACPU_GIC			(0xc41001aU)
--#define VERSAL_RST_RPU_ISLAND			(0xc41001bU)
--#define VERSAL_RST_RPU_AMBA			(0xc41001cU)
--#define VERSAL_RST_R5_0				(0xc41001dU)
--#define VERSAL_RST_R5_1				(0xc41001eU)
--#define VERSAL_RST_SYSMON_PMC_SEQ_RST		(0xc41001fU)
--#define VERSAL_RST_SYSMON_PMC_CFG_RST		(0xc410020U)
--#define VERSAL_RST_SYSMON_FPD_CFG_RST		(0xc410021U)
--#define VERSAL_RST_SYSMON_FPD_SEQ_RST		(0xc410022U)
--#define VERSAL_RST_SYSMON_LPD			(0xc410023U)
--#define VERSAL_RST_PDMA_RST1			(0xc410024U)
--#define VERSAL_RST_PDMA_RST0			(0xc410025U)
--#define VERSAL_RST_ADMA				(0xc410026U)
--#define VERSAL_RST_TIMESTAMP			(0xc410027U)
--#define VERSAL_RST_OCM				(0xc410028U)
--#define VERSAL_RST_OCM2_RST			(0xc410029U)
--#define VERSAL_RST_IPI				(0xc41002aU)
--#define VERSAL_RST_SBI				(0xc41002bU)
--#define VERSAL_RST_LPD				(0xc41002cU)
--#define VERSAL_RST_QSPI				(0xc10402dU)
--#define VERSAL_RST_OSPI				(0xc10402eU)
--#define VERSAL_RST_SDIO_0			(0xc10402fU)
--#define VERSAL_RST_SDIO_1			(0xc104030U)
--#define VERSAL_RST_I2C_PMC			(0xc104031U)
--#define VERSAL_RST_GPIO_PMC			(0xc104032U)
--#define VERSAL_RST_GEM_0			(0xc104033U)
--#define VERSAL_RST_GEM_1			(0xc104034U)
--#define VERSAL_RST_SPARE			(0xc104035U)
--#define VERSAL_RST_USB_0			(0xc104036U)
--#define VERSAL_RST_UART_0			(0xc104037U)
--#define VERSAL_RST_UART_1			(0xc104038U)
--#define VERSAL_RST_SPI_0			(0xc104039U)
--#define VERSAL_RST_SPI_1			(0xc10403aU)
--#define VERSAL_RST_CAN_FD_0			(0xc10403bU)
--#define VERSAL_RST_CAN_FD_1			(0xc10403cU)
--#define VERSAL_RST_I2C_0			(0xc10403dU)
--#define VERSAL_RST_I2C_1			(0xc10403eU)
--#define VERSAL_RST_GPIO_LPD			(0xc10403fU)
--#define VERSAL_RST_TTC_0			(0xc104040U)
--#define VERSAL_RST_TTC_1			(0xc104041U)
--#define VERSAL_RST_TTC_2			(0xc104042U)
--#define VERSAL_RST_TTC_3			(0xc104043U)
--#define VERSAL_RST_SWDT_FPD			(0xc104044U)
--#define VERSAL_RST_SWDT_LPD			(0xc104045U)
--#define VERSAL_RST_USB				(0xc104046U)
--#define VERSAL_RST_DPC				(0xc208047U)
--#define VERSAL_RST_PMCDBG			(0xc208048U)
--#define VERSAL_RST_DBG_TRACE			(0xc208049U)
--#define VERSAL_RST_DBG_FPD			(0xc20804aU)
--#define VERSAL_RST_DBG_TSTMP			(0xc20804bU)
--#define VERSAL_RST_RPU0_DBG			(0xc20804cU)
--#define VERSAL_RST_RPU1_DBG			(0xc20804dU)
--#define VERSAL_RST_HSDP				(0xc20804eU)
--#define VERSAL_RST_DBG_LPD			(0xc20804fU)
--#define VERSAL_RST_CPM_POR			(0xc30c050U)
--#define VERSAL_RST_CPM				(0xc410051U)
--#define VERSAL_RST_CPMDBG			(0xc208052U)
--#define VERSAL_RST_PCIE_CFG			(0xc410053U)
--#define VERSAL_RST_PCIE_CORE0			(0xc410054U)
--#define VERSAL_RST_PCIE_CORE1			(0xc410055U)
--#define VERSAL_RST_PCIE_DMA			(0xc410056U)
--#define VERSAL_RST_CMN				(0xc410057U)
--#define VERSAL_RST_L2_0				(0xc410058U)
--#define VERSAL_RST_L2_1				(0xc410059U)
--#define VERSAL_RST_ADDR_REMAP			(0xc41005aU)
--#define VERSAL_RST_CPI0				(0xc41005bU)
--#define VERSAL_RST_CPI1				(0xc41005cU)
--#define VERSAL_RST_XRAM				(0xc30c05dU)
--#define VERSAL_RST_AIE_ARRAY			(0xc10405eU)
--#define VERSAL_RST_AIE_SHIM			(0xc10405fU)
--
--#endif
-diff --git a/include/dt-bindings/reset/xlnx-zynqmp-resets.h b/include/dt-bindings/reset/xlnx-zynqmp-resets.h
-deleted file mode 100644
-index d44525b9f8db..000000000000
---- a/include/dt-bindings/reset/xlnx-zynqmp-resets.h
-+++ /dev/null
-@@ -1,130 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0 */
--/*
-- *  Copyright (C) 2018 Xilinx, Inc.
-- */
--
--#ifndef _DT_BINDINGS_ZYNQMP_RESETS_H
--#define _DT_BINDINGS_ZYNQMP_RESETS_H
--
--#define		ZYNQMP_RESET_PCIE_CFG		0
--#define		ZYNQMP_RESET_PCIE_BRIDGE	1
--#define		ZYNQMP_RESET_PCIE_CTRL		2
--#define		ZYNQMP_RESET_DP			3
--#define		ZYNQMP_RESET_SWDT_CRF		4
--#define		ZYNQMP_RESET_AFI_FM5		5
--#define		ZYNQMP_RESET_AFI_FM4		6
--#define		ZYNQMP_RESET_AFI_FM3		7
--#define		ZYNQMP_RESET_AFI_FM2		8
--#define		ZYNQMP_RESET_AFI_FM1		9
--#define		ZYNQMP_RESET_AFI_FM0		10
--#define		ZYNQMP_RESET_GDMA		11
--#define		ZYNQMP_RESET_GPU_PP1		12
--#define		ZYNQMP_RESET_GPU_PP0		13
--#define		ZYNQMP_RESET_GPU		14
--#define		ZYNQMP_RESET_GT			15
--#define		ZYNQMP_RESET_SATA		16
--#define		ZYNQMP_RESET_ACPU3_PWRON	17
--#define		ZYNQMP_RESET_ACPU2_PWRON	18
--#define		ZYNQMP_RESET_ACPU1_PWRON	19
--#define		ZYNQMP_RESET_ACPU0_PWRON	20
--#define		ZYNQMP_RESET_APU_L2		21
--#define		ZYNQMP_RESET_ACPU3		22
--#define		ZYNQMP_RESET_ACPU2		23
--#define		ZYNQMP_RESET_ACPU1		24
--#define		ZYNQMP_RESET_ACPU0		25
--#define		ZYNQMP_RESET_DDR		26
--#define		ZYNQMP_RESET_APM_FPD		27
--#define		ZYNQMP_RESET_SOFT		28
--#define		ZYNQMP_RESET_GEM0		29
--#define		ZYNQMP_RESET_GEM1		30
--#define		ZYNQMP_RESET_GEM2		31
--#define		ZYNQMP_RESET_GEM3		32
--#define		ZYNQMP_RESET_QSPI		33
--#define		ZYNQMP_RESET_UART0		34
--#define		ZYNQMP_RESET_UART1		35
--#define		ZYNQMP_RESET_SPI0		36
--#define		ZYNQMP_RESET_SPI1		37
--#define		ZYNQMP_RESET_SDIO0		38
--#define		ZYNQMP_RESET_SDIO1		39
--#define		ZYNQMP_RESET_CAN0		40
--#define		ZYNQMP_RESET_CAN1		41
--#define		ZYNQMP_RESET_I2C0		42
--#define		ZYNQMP_RESET_I2C1		43
--#define		ZYNQMP_RESET_TTC0		44
--#define		ZYNQMP_RESET_TTC1		45
--#define		ZYNQMP_RESET_TTC2		46
--#define		ZYNQMP_RESET_TTC3		47
--#define		ZYNQMP_RESET_SWDT_CRL		48
--#define		ZYNQMP_RESET_NAND		49
--#define		ZYNQMP_RESET_ADMA		50
--#define		ZYNQMP_RESET_GPIO		51
--#define		ZYNQMP_RESET_IOU_CC		52
--#define		ZYNQMP_RESET_TIMESTAMP		53
--#define		ZYNQMP_RESET_RPU_R50		54
--#define		ZYNQMP_RESET_RPU_R51		55
--#define		ZYNQMP_RESET_RPU_AMBA		56
--#define		ZYNQMP_RESET_OCM		57
--#define		ZYNQMP_RESET_RPU_PGE		58
--#define		ZYNQMP_RESET_USB0_CORERESET	59
--#define		ZYNQMP_RESET_USB1_CORERESET	60
--#define		ZYNQMP_RESET_USB0_HIBERRESET	61
--#define		ZYNQMP_RESET_USB1_HIBERRESET	62
--#define		ZYNQMP_RESET_USB0_APB		63
--#define		ZYNQMP_RESET_USB1_APB		64
--#define		ZYNQMP_RESET_IPI		65
--#define		ZYNQMP_RESET_APM_LPD		66
--#define		ZYNQMP_RESET_RTC		67
--#define		ZYNQMP_RESET_SYSMON		68
--#define		ZYNQMP_RESET_AFI_FM6		69
--#define		ZYNQMP_RESET_LPD_SWDT		70
--#define		ZYNQMP_RESET_FPD		71
--#define		ZYNQMP_RESET_RPU_DBG1		72
--#define		ZYNQMP_RESET_RPU_DBG0		73
--#define		ZYNQMP_RESET_DBG_LPD		74
--#define		ZYNQMP_RESET_DBG_FPD		75
--#define		ZYNQMP_RESET_APLL		76
--#define		ZYNQMP_RESET_DPLL		77
--#define		ZYNQMP_RESET_VPLL		78
--#define		ZYNQMP_RESET_IOPLL		79
--#define		ZYNQMP_RESET_RPLL		80
--#define		ZYNQMP_RESET_GPO3_PL_0		81
--#define		ZYNQMP_RESET_GPO3_PL_1		82
--#define		ZYNQMP_RESET_GPO3_PL_2		83
--#define		ZYNQMP_RESET_GPO3_PL_3		84
--#define		ZYNQMP_RESET_GPO3_PL_4		85
--#define		ZYNQMP_RESET_GPO3_PL_5		86
--#define		ZYNQMP_RESET_GPO3_PL_6		87
--#define		ZYNQMP_RESET_GPO3_PL_7		88
--#define		ZYNQMP_RESET_GPO3_PL_8		89
--#define		ZYNQMP_RESET_GPO3_PL_9		90
--#define		ZYNQMP_RESET_GPO3_PL_10		91
--#define		ZYNQMP_RESET_GPO3_PL_11		92
--#define		ZYNQMP_RESET_GPO3_PL_12		93
--#define		ZYNQMP_RESET_GPO3_PL_13		94
--#define		ZYNQMP_RESET_GPO3_PL_14		95
--#define		ZYNQMP_RESET_GPO3_PL_15		96
--#define		ZYNQMP_RESET_GPO3_PL_16		97
--#define		ZYNQMP_RESET_GPO3_PL_17		98
--#define		ZYNQMP_RESET_GPO3_PL_18		99
--#define		ZYNQMP_RESET_GPO3_PL_19		100
--#define		ZYNQMP_RESET_GPO3_PL_20		101
--#define		ZYNQMP_RESET_GPO3_PL_21		102
--#define		ZYNQMP_RESET_GPO3_PL_22		103
--#define		ZYNQMP_RESET_GPO3_PL_23		104
--#define		ZYNQMP_RESET_GPO3_PL_24		105
--#define		ZYNQMP_RESET_GPO3_PL_25		106
--#define		ZYNQMP_RESET_GPO3_PL_26		107
--#define		ZYNQMP_RESET_GPO3_PL_27		108
--#define		ZYNQMP_RESET_GPO3_PL_28		109
--#define		ZYNQMP_RESET_GPO3_PL_29		110
--#define		ZYNQMP_RESET_GPO3_PL_30		111
--#define		ZYNQMP_RESET_GPO3_PL_31		112
--#define		ZYNQMP_RESET_RPU_LS		113
--#define		ZYNQMP_RESET_PS_ONLY		114
--#define		ZYNQMP_RESET_PL			115
--#define		ZYNQMP_RESET_PS_PL0		116
--#define		ZYNQMP_RESET_PS_PL1		117
--#define		ZYNQMP_RESET_PS_PL2		118
--#define		ZYNQMP_RESET_PS_PL3		119
--
--#endif
+-#endif /* __DT_BINDINGS_MICROCHIP_PDMC_H__ */
 
 -- 
 2.44.0
