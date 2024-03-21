@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A542DC54E68
-	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 15:01:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C032C54E58
+	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 15:01:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B9CB88134;
-	Thu, 21 Mar 2024 16:01:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id ADE7A8814A;
+	Thu, 21 Mar 2024 16:01:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gnu.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gnu.org header.i=@gnu.org header.b="eQ6hI1n2";
+	dkim=pass (2048-bit key; unprotected) header.d=gnu.org header.i=@gnu.org header.b="Kypowy5d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C776C87BE0; Thu, 21 Mar 2024 15:46:05 +0100 (CET)
+ id 0EF7B880BE; Thu, 21 Mar 2024 15:46:06 +0100 (CET)
 Received: from eggs.gnu.org (eggs.gnu.org [IPv6:2001:470:142:3::10])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C1074880BE
+ by phobos.denx.de (Postfix) with ESMTPS id 956C08809A
  for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 15:46:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gnu.org
@@ -27,15 +27,15 @@ Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=othacehe@gnu.org
 Received: from fencepost.gnu.org ([2001:470:142:3::e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <othacehe@gnu.org>)
- id 1rnJg6-0006ou-3o; Thu, 21 Mar 2024 10:45:58 -0400
+ id 1rnJg7-0006pM-Gv; Thu, 21 Mar 2024 10:45:59 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=gnu.org;
  s=fencepost-gnu-org; h=MIME-Version:References:In-Reply-To:Date:Subject:To:
- From; bh=tqhUSWZWFUPjsl2Euy0GSbL6gIY+3LbATeGNgmv9B6s=; b=eQ6hI1n2BI3i5tovn27W
- wMc8SrXNfH2gQB6043sSCObAmQ+82UAUF/qucf2S6n2F18nXfXpI3WE2S/OkmGEQyD3Bkg09EW46k
- HWsVqXMz+f7YRzrllIA5BkTP+qFrFmO1PeqdeIKzxPFKSMXb01GwSvED2bLAzfWQaNQhJYJpWFBBQ
- aIl5/fyFGz2BMb9e4lSCcvdl+gwcTx2Luw2FbW1XlCeV9xFmOpKd+7C57QqdCIf3uAlh/QZfq/nhM
- pgnDfhceFDf/CElcygltkD8TNaSX7z7gkuBCLgonsJEucZdpFvJfT+Yg24UQf0gGwcIwCBsKuLkOa
- cjhC9R2wruPRiA==;
+ From; bh=dHyU4EBl8z/95+bA57+mzu5odvca1EaaK6T09dpLRwg=; b=Kypowy5dP47D9G1XsoLc
+ eRA/DpnVvL60/UX9eaEk0g2EQFFlPtuvG2+U5XWK8uwKTzFnyV5Evd+VI1q2/HpTH2GDsATcwnI+v
+ dhXaXyM0cca8XCmjCq0zQV+7yPznaohwtCr2iYMyDYzueIe3wzDFUS69TkADGTp0RfPynKYDFyhl0
+ BkxgyQyVqinjt+VlwriTyse4exDbCrQlRKP2qYKn2BQoCht6DNBavUQMIDMOepBt5Uezd2oxxW4j1
+ /pzrBAwlF3hbYwHqO32hvESGhgKOQPsjSBznkiqDD6+/6NzPzIfQeT7wvBtGuWg26yR5AZ4Et+bVu
+ CzMJKme54WAVhg==;
 From: Mathieu Othacehe <othacehe@gnu.org>
 To: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
  Peng Fan <peng.fan@nxp.com>, Shiji Yang <yangshiji66@outlook.com>,
@@ -49,9 +49,9 @@ To: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
  Wadim Egorov <w.egorov@phytec.de>
 Cc: u-boot@lists.denx.de,
 	Mathieu Othacehe <othacehe@gnu.org>
-Subject: [PATCH v3 1/3] arm: dts: imx93-phyboard-segin: Add USB support
-Date: Thu, 21 Mar 2024 15:45:39 +0100
-Message-ID: <20240321144541.15314-2-othacehe@gnu.org>
+Subject: [PATCH v3 2/3] configs: imx93-phyboard-segin: Add USB support
+Date: Thu, 21 Mar 2024 15:45:40 +0100
+Message-ID: <20240321144541.15314-3-othacehe@gnu.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240321144541.15314-1-othacehe@gnu.org>
 References: <20240321144541.15314-1-othacehe@gnu.org>
@@ -74,43 +74,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable both usbotg1 and usbotg2 ports. Disable over-current as OC pins are
-not connected to the SoC.
-
-This is temporary, until USB support is added to imx93-phyboard-segin.dts
-in Linux.
+Add USB support by enabling `usb` command and required USB drivers.
 
 Signed-off-by: Mathieu Othacehe <othacehe@gnu.org>
 ---
- arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
+ configs/imx93-phyboard-segin_defconfig | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi b/arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi
-index 8bf28c2de87..6897c91f4d9 100644
---- a/arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi
-+++ b/arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi
-@@ -121,6 +121,21 @@
- 	bootph-some-ram;
- };
- 
-+/*
-+ * Remove once USB support is added to imx93-phyboard-segin.dts upstream.
-+ */
-+&usbotg1 {
-+	disable-over-current;
-+	dr_mode = "otg";
-+	status = "okay";
-+};
-+
-+&usbotg2 {
-+	disable-over-current;
-+	dr_mode = "host";
-+	status = "okay";
-+};
-+
- &usdhc1 {
- 	bootph-pre-ram;
- 	bootph-some-ram;
+diff --git a/configs/imx93-phyboard-segin_defconfig b/configs/imx93-phyboard-segin_defconfig
+index 24f9bd553aa..0345e7deeab 100644
+--- a/configs/imx93-phyboard-segin_defconfig
++++ b/configs/imx93-phyboard-segin_defconfig
+@@ -67,6 +67,7 @@ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_I2C=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_POWEROFF=y
++CONFIG_CMD_USB=y
+ CONFIG_CMD_SNTP=y
+ CONFIG_CMD_CACHE=y
+ CONFIG_CMD_EFIDEBUG=y
+@@ -132,6 +133,13 @@ CONFIG_SPL_SYSRESET=y
+ CONFIG_SYSRESET_WATCHDOG=y
+ CONFIG_DM_THERMAL=y
+ CONFIG_IMX_TMU=y
++CONFIG_USB=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_GADGET=y
++CONFIG_USB_GADGET_MANUFACTURER="PHYTEC"
++CONFIG_USB_GADGET_VENDOR_NUM=0x1fc9
++CONFIG_USB_GADGET_PRODUCT_NUM=0x0152
++CONFIG_CI_UDC=y
+ CONFIG_ULP_WATCHDOG=y
+ CONFIG_LZO=y
+ CONFIG_BZIP2=y
 -- 
 2.41.0
 
