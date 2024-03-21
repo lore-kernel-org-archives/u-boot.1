@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 420E6C54E58
-	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 10:01:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7BCBC54E68
+	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 10:02:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 98BB587EE6;
-	Thu, 21 Mar 2024 11:01:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4635287DE2;
+	Thu, 21 Mar 2024 11:02:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="FG58ZwR9";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="3cZ1xLwZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 954A280245; Thu, 21 Mar 2024 11:01:45 +0100 (CET)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
+ id EE84580245; Thu, 21 Mar 2024 11:02:22 +0100 (CET)
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15A1E87EE6
- for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 11:01:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A40DB88013
+ for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 11:02:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-33fd12a06fdso465304f8f.1
- for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 03:01:42 -0700 (PDT)
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-513e14b2bd9so955716e87.2
+ for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 03:02:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1711015301; x=1711620101;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1711015339; x=1711620139;
  darn=lists.denx.de; 
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=zGQMa277IbyRfWS3sVG6ZdKCDYfXJF32jVlhiMpedOU=;
- b=FG58ZwR9wg/zyTEzrmxPtayznsRVXeRS96KLNz+ROOjyMnpAzuIFBQq+zvsg9b4EcX
- 4aUvm7xS2kDNEugQWy8fsubf8FqWg2wvJKQ7hqn5PU6mwx2RjlM+/jZmfBVUOOBQm5/1
- T12DgM1VB2NCMJwLRwrnoUJuLP+Qc7twIzexE72G10pF/VNyENMDDGwVmiKc72FREJFM
- ytSHb7xscK1vYFJlS50ISyud5IW9Ip4AOJy73k0FKICLi2d+rySdb15ic7z4E2uChHKp
- sSqdNdlBQrcLl6s7Um0Z2zIUH/d7vLHVaCw1sOKVoj3pmeisMUWrMaWdw/sH27+Rs3e9
- kmxw==
+ bh=4JG21ru2ltU/2H3Va3LZKQgMHeC+bhoSOuMJEVERDfM=;
+ b=3cZ1xLwZZG/+FKW/b05KxsVdLONfNs666mdhF55QZ2cP3Miql0f2PngRvDz9VsZow7
+ aaieujTmpKnGabS5R399WQc1ugAJzF3fua/hAhOnmq0LJ5H2YN96mbjKOuP+fTTLmK3Y
+ w/BAl/tXenwZHfcVaaG08hxhnVC6at31TGke8m2wVtEj++oIwcK1Hl+PClljPz5/fURC
+ uAYxks43hPhjnCLLW2gRyO5dU8hgWrCMnMcRby/7nsoiRQIUXSSdEVom3TS8xEKqd58+
+ eNbqxGoaCFAeSE3J32ymQ9Acu3T8frGHf8+Gjnie4orud/IBsqFL7lwmTw9C81TVh+sl
+ nTsQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711015301; x=1711620101;
+ d=1e100.net; s=20230601; t=1711015339; x=1711620139;
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=zGQMa277IbyRfWS3sVG6ZdKCDYfXJF32jVlhiMpedOU=;
- b=jP7iXUgSN6Cf8sp/8B/8xEa4RiOlxv3Vjor9HTvvbWrYJEIhEG+3vlI/waudwLoWhJ
- GyXy7KJkFaJNiegvAAZZdnmoFwH6XhMWRnZ3N4ZhAnXSCsS4D/VniijkwOVDGdJP0qv5
- Tq6T8u2l1Hd7Dfk1DKwfMoIFwbeTzlQokCVvXzvkPSozqP7BsQRh0fje0dZNLZNqRuTz
- X3GdGtY7CyfoQs0lSYesncxbAYnapjpZGBrkrTDYjmvBtaDBNEP+abN9SgJW3Gxlr8wq
- XxZrZMCB2R5VxTqZp+ejMY1YD5ymwefITL/4upv1V4thDG8qX8Ec3Vm+mOJp1rPydSm+
- kbbA==
+ bh=4JG21ru2ltU/2H3Va3LZKQgMHeC+bhoSOuMJEVERDfM=;
+ b=ipXXKbR3MDEI77cScw/ZBMSesbKxJslJzA1rbE8bqTKoJunSQnZuHzz5Ii/twhSVmL
+ QNSUPQhA1xVy/nFW6/VEDNS0vXDZS5xfOlDheymPcKgcnVKf5zOF+iMdc4qWwukiZj+t
+ PZQWZsarDzERooewTPfrWBXtw6bv4jdENueP19GehMt3UpbQsZxhWh/vsHWb1R64Xrpa
+ iNdteP0FzmryWsDoQax9t2iZRFX4+ZGxfs2WcYY/ttydFmVC4g9PKg/v9ekOL8b5dUNn
+ 93QQrg7MajRoGZbHi3nWs4nhHBCXzmS05h/KsQ+BogTDdyEW+nmNV04lT+n3Uc5ldCwz
+ jqlw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXYim9/byuWU+HWh82Z+R/V3kjURF8NXTz9WFglJ12ZTbKot8nBshaK0Yoe3qWBbidjlAMP1KAjTpcnuCiDOjsYjI7WXg==
-X-Gm-Message-State: AOJu0Yy9wdB1Nb8NHKiFh2Nq7870mJdvM9jmsRlFkN4u6fOz7TqKhoJI
- e21Hlf9ElL+Bt+NfXGAGiE0QmPj6ToQEX2Gs0airj91kxLg/0ZTwXKPDM4LUjec=
-X-Google-Smtp-Source: AGHT+IGOkgHBZEN1LT3bY2OVd4p0wRwdWZTEXm7y5mENHXMXzS3uHw5C6G4dfshuqTRV4db8tmlxjA==
-X-Received: by 2002:adf:ea88:0:b0:341:7395:3097 with SMTP id
- s8-20020adfea88000000b0034173953097mr2925406wrm.1.1711015301349; 
- Thu, 21 Mar 2024 03:01:41 -0700 (PDT)
+ AJvYcCWtADomZo5XAljzA7Z3JT1vnKfGFiRdbLw4RDLnuKldkJWqX5tfPsTy5qef7rb+D8J8gyf64Ox0kpFk1oIeOznbczkQFw==
+X-Gm-Message-State: AOJu0YwNERm0xkVN+4ci3BaxP0qWruXCbsaDv+SreCOKPDzAT98ezV2B
+ ADhGQ3eHj8RMJxtR/Wmk/Y2dhoYH7aXzflN6CZwuE57Gmax84Rerqvt7xdQvjqc=
+X-Google-Smtp-Source: AGHT+IERhQFvzUMjB8RW7SZomKb9z+CUIIjtUDOLkBBKYlH44h6ZjsOC+getMpgT7jjPSC75Cykuig==
+X-Received: by 2002:ac2:5042:0:b0:513:22f0:c3af with SMTP id
+ a2-20020ac25042000000b0051322f0c3afmr15879044lfm.4.1711015338909; 
+ Thu, 21 Mar 2024 03:02:18 -0700 (PDT)
 Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- w16-20020adff9d0000000b0033ec7e71178sm16863995wrr.77.2024.03.21.03.01.40
+ p17-20020a05600c1d9100b00414774adccbsm191898wms.9.2024.03.21.03.02.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Mar 2024 03:01:40 -0700 (PDT)
+ Thu, 21 Mar 2024 03:02:18 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, Angus Ainslie
@@ -73,12 +73,13 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, Angus Ainslie
  <patrice.chotard@foss.st.com>, Simon Glass <sjg@chromium.org>, Stefan
  Bosch <stefan_b@posteo.net>, Svyatoslav Ryhel <clamor95@gmail.com>, Tom
  Rini <trini@konsulko.com>, kernel@puri.sm
-Subject: Re: [PATCH 1/2] usb: udc: dwc3: Fold board
- dm_usb_gadget_handle_interrupts() into DWC3 gadget
-In-Reply-To: <20240317044357.547037-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH 2/2] usb: udc: dwc3: Fold dwc3_uboot_handle_interrupt
+ into dm_usb_gadget_handle_interrupts
+In-Reply-To: <20240317044357.547037-2-marek.vasut+renesas@mailbox.org>
 References: <20240317044357.547037-1-marek.vasut+renesas@mailbox.org>
-Date: Thu, 21 Mar 2024 11:01:39 +0100
-Message-ID: <878r2boqd8.fsf@baylibre.com>
+ <20240317044357.547037-2-marek.vasut+renesas@mailbox.org>
+Date: Thu, 21 Mar 2024 11:02:17 +0100
+Message-ID: <875xxfoqc6.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -103,14 +104,25 @@ Thank you for the patch.
 
 On dim., mars 17, 2024 at 05:42, Marek Vasut <marek.vasut+renesas@mailbox.org> wrote:
 
-> The dm_usb_gadget_handle_interrupts() has no place in board code. Move
-> this into DWC3 driver. The OMAP implementation is special, add new weak
-> dwc3_uboot_interrupt_status() function to decide whether DWC3 interrupt
-> handling should be called, and override it in OMAP DWC3 code, to repair
-> the special OMAP interrupt handling code until OMAP gets switched over
-> to DM UDC proper.
+> The only call site of dwc3_uboot_handle_interrupt() is the
+> dm_usb_gadget_handle_interrupts(), fold the former into the
+> later. This makes dwc3_uboot_handle_interrupt() unavailable
+> to be called from board code as well.
 >
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> ---
+> Cc: Angus Ainslie <angus@akkea.ca>
+> Cc: Caleb Connolly <caleb.connolly@linaro.org>
+> Cc: Eugen Hristev <eugen.hristev@collabora.com>
+> Cc: Igor Prusov <ivprusov@salutedevices.com>
+> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> Cc: Nishanth Menon <nm@ti.com>
+> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Stefan Bosch <stefan_b@posteo.net>
+> Cc: Svyatoslav Ryhel <clamor95@gmail.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: kernel@puri.sm
 
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
@@ -135,188 +147,76 @@ scanning bus usb@ff500000 for devices... 3 USB Device(s) found
 Tested-by: Mattijs Korpershoek <mkorpershoek@baylibre.com> # vim3
 
 > ---
-> Cc: Angus Ainslie <angus@akkea.ca>
-> Cc: Caleb Connolly <caleb.connolly@linaro.org>
-> Cc: Eugen Hristev <eugen.hristev@collabora.com>
-> Cc: Igor Prusov <ivprusov@salutedevices.com>
-> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> Cc: Nishanth Menon <nm@ti.com>
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Stefan Bosch <stefan_b@posteo.net>
-> Cc: Svyatoslav Ryhel <clamor95@gmail.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: kernel@puri.sm
-> ---
->  board/purism/librem5/spl.c        |  6 ------
->  board/samsung/common/exynos5-dt.c |  6 ------
->  board/st/stih410-b2260/board.c    |  6 ------
->  board/ti/am43xx/board.c           | 11 -----------
->  drivers/usb/dwc3/core.c           | 25 +++++++++++++++++++++----
->  drivers/usb/dwc3/dwc3-omap.c      |  4 ++--
->  include/dwc3-omap-uboot.h         |  1 -
->  include/dwc3-uboot.h              |  1 +
->  8 files changed, 24 insertions(+), 36 deletions(-)
+>  drivers/usb/dwc3/core.c | 27 +++++++++++----------------
+>  include/dwc3-uboot.h    |  1 -
+>  2 files changed, 11 insertions(+), 17 deletions(-)
 >
-> diff --git a/board/purism/librem5/spl.c b/board/purism/librem5/spl.c
-> index 581f0929662..9aadc553302 100644
-> --- a/board/purism/librem5/spl.c
-> +++ b/board/purism/librem5/spl.c
-> @@ -418,12 +418,6 @@ out:
->  	return rv;
->  }
->  
-> -int dm_usb_gadget_handle_interrupts(struct udevice *dev)
-> -{
-> -	dwc3_uboot_handle_interrupt(dev);
-> -	return 0;
-> -}
-> -
->  static void dwc3_nxp_usb_phy_init(struct dwc3_device *dwc3)
->  {
->  	u32 RegData;
-> diff --git a/board/samsung/common/exynos5-dt.c b/board/samsung/common/exynos5-dt.c
-> index 95cf6d2acc2..b3e87c93751 100644
-> --- a/board/samsung/common/exynos5-dt.c
-> +++ b/board/samsung/common/exynos5-dt.c
-> @@ -122,12 +122,6 @@ static struct dwc3_device dwc3_device_data = {
->  	.index = 0,
->  };
->  
-> -int dm_usb_gadget_handle_interrupts(struct udevice *dev)
-> -{
-> -	dwc3_uboot_handle_interrupt(dev);
-> -	return 0;
-> -}
-> -
->  int board_usb_init(int index, enum usb_init_type init)
->  {
->  	struct exynos_usb3_phy *phy = (struct exynos_usb3_phy *)
-> diff --git a/board/st/stih410-b2260/board.c b/board/st/stih410-b2260/board.c
-> index e21cbc270e9..82817571ae3 100644
-> --- a/board/st/stih410-b2260/board.c
-> +++ b/board/st/stih410-b2260/board.c
-> @@ -50,12 +50,6 @@ static struct dwc3_device dwc3_device_data = {
->  	.index = 0,
->  };
->  
-> -int dm_usb_gadget_handle_interrupts(struct udevice *dev)
-> -{
-> -	dwc3_uboot_handle_interrupt(dev);
-> -	return 0;
-> -}
-> -
->  int board_usb_init(int index, enum usb_init_type init)
->  {
->  	int node;
-> diff --git a/board/ti/am43xx/board.c b/board/ti/am43xx/board.c
-> index ea0d0b92088..a4679a2e294 100644
-> --- a/board/ti/am43xx/board.c
-> +++ b/board/ti/am43xx/board.c
-> @@ -759,17 +759,6 @@ static struct ti_usb_phy_device usb_phy2_device = {
->  	.usb2_phy_power = (void *)USB2_PHY2_POWER,
->  	.index = 1,
->  };
-> -
-> -int dm_usb_gadget_handle_interrupts(struct udevice *dev)
-> -{
-> -	u32 status;
-> -
-> -	status = dwc3_omap_uboot_interrupt_status(dev);
-> -	if (status)
-> -		dwc3_uboot_handle_interrupt(dev);
-> -
-> -	return 0;
-> -}
->  #endif /* CONFIG_USB_DWC3 */
->  
->  #if defined(CONFIG_USB_DWC3) || defined(CONFIG_USB_XHCI_OMAP)
 > diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
-> index 4b4fcd8a22e..09737be9a9c 100644
+> index 09737be9a9c..96e850b7170 100644
 > --- a/drivers/usb/dwc3/core.c
 > +++ b/drivers/usb/dwc3/core.c
-> @@ -983,6 +983,11 @@ void dwc3_uboot_exit(int index)
->  	}
->  }
+> @@ -988,18 +988,27 @@ MODULE_AUTHOR("Felipe Balbi <balbi@ti.com>");
+>  MODULE_LICENSE("GPL v2");
+>  MODULE_DESCRIPTION("DesignWare USB3 DRD Controller Driver");
 >  
-> +MODULE_ALIAS("platform:dwc3");
-> +MODULE_AUTHOR("Felipe Balbi <balbi@ti.com>");
-> +MODULE_LICENSE("GPL v2");
-> +MODULE_DESCRIPTION("DesignWare USB3 DRD Controller Driver");
-> +
->  /**
->   * dwc3_uboot_handle_interrupt - handle dwc3 core interrupt
->   * @dev: device of this controller
-> @@ -1004,10 +1009,22 @@ void dwc3_uboot_handle_interrupt(struct udevice *dev)
->  	}
->  }
->  
-> -MODULE_ALIAS("platform:dwc3");
-> -MODULE_AUTHOR("Felipe Balbi <balbi@ti.com>");
-> -MODULE_LICENSE("GPL v2");
-> -MODULE_DESCRIPTION("DesignWare USB3 DRD Controller Driver");
 > +#if !CONFIG_IS_ENABLED(DM_USB_GADGET)
 > +__weak int dwc3_uboot_interrupt_status(struct udevice *dev)
 > +{
 > +	return 1;
 > +}
 > +
-> +int dm_usb_gadget_handle_interrupts(struct udevice *dev)
-> +{
-> +	if (!dwc3_uboot_interrupt_status(dev))
-> +		return 0;
-> +
-> +	dwc3_uboot_handle_interrupt(dev);
-> +
-> +	return 0;
-> +}
-> +#endif
->  
->  #if CONFIG_IS_ENABLED(PHY) && CONFIG_IS_ENABLED(DM_USB)
->  int dwc3_setup_phy(struct udevice *dev, struct phy_bulk *phys)
-> diff --git a/drivers/usb/dwc3/dwc3-omap.c b/drivers/usb/dwc3/dwc3-omap.c
-> index 4fadb4a3e20..53c4d4826b4 100644
-> --- a/drivers/usb/dwc3/dwc3-omap.c
-> +++ b/drivers/usb/dwc3/dwc3-omap.c
-> @@ -428,7 +428,7 @@ void dwc3_omap_uboot_exit(int index)
->  }
->  
 >  /**
-> - * dwc3_omap_uboot_interrupt_status - check the status of interrupt
-> + * dwc3_uboot_interrupt_status - check the status of interrupt
+> - * dwc3_uboot_handle_interrupt - handle dwc3 core interrupt
+> + * dm_usb_gadget_handle_interrupts - handle dwc3 core interrupt
 >   * @dev: device of this controller
 >   *
->   * Checks the status of interrupts and returns true if an interrupt
-> @@ -436,7 +436,7 @@ void dwc3_omap_uboot_exit(int index)
+>   * Invokes dwc3 gadget interrupts.
 >   *
 >   * Generally called from board file.
 >   */
-> -int dwc3_omap_uboot_interrupt_status(struct udevice *dev)
-> +int dwc3_uboot_interrupt_status(struct udevice *dev)
+> -void dwc3_uboot_handle_interrupt(struct udevice *dev)
+> +int dm_usb_gadget_handle_interrupts(struct udevice *dev)
 >  {
->  	struct dwc3_omap *omap = NULL;
+>  	struct dwc3 *dwc = NULL;
 >  
-> diff --git a/include/dwc3-omap-uboot.h b/include/dwc3-omap-uboot.h
-> index ed92bfc5a97..f220705ef7b 100644
-> --- a/include/dwc3-omap-uboot.h
-> +++ b/include/dwc3-omap-uboot.h
-> @@ -27,5 +27,4 @@ struct dwc3_omap_device {
+> +	if (!dwc3_uboot_interrupt_status(dev))
+> +		return 0;
+> +
+>  	list_for_each_entry(dwc, &dwc3_list, list) {
+>  		if (dwc->dev != dev)
+>  			continue;
+> @@ -1007,20 +1016,6 @@ void dwc3_uboot_handle_interrupt(struct udevice *dev)
+>  		dwc3_gadget_uboot_handle_interrupt(dwc);
+>  		break;
+>  	}
+> -}
+> -
+> -#if !CONFIG_IS_ENABLED(DM_USB_GADGET)
+> -__weak int dwc3_uboot_interrupt_status(struct udevice *dev)
+> -{
+> -	return 1;
+> -}
+> -
+> -int dm_usb_gadget_handle_interrupts(struct udevice *dev)
+> -{
+> -	if (!dwc3_uboot_interrupt_status(dev))
+> -		return 0;
+> -
+> -	dwc3_uboot_handle_interrupt(dev);
 >  
->  int dwc3_omap_uboot_init(struct dwc3_omap_device *dev);
->  void dwc3_omap_uboot_exit(int index);
-> -int dwc3_omap_uboot_interrupt_status(struct udevice *dev);
->  #endif /* __DWC3_OMAP_UBOOT_H_ */
+>  	return 0;
+>  }
 > diff --git a/include/dwc3-uboot.h b/include/dwc3-uboot.h
-> index 35cfbb93b29..5f13f5bcf40 100644
+> index 5f13f5bcf40..3689d60ae7f 100644
 > --- a/include/dwc3-uboot.h
 > +++ b/include/dwc3-uboot.h
-> @@ -44,6 +44,7 @@ struct dwc3_device {
->  
+> @@ -45,7 +45,6 @@ struct dwc3_device {
 >  int dwc3_uboot_init(struct dwc3_device *dev);
 >  void dwc3_uboot_exit(int index);
-> +int dwc3_uboot_interrupt_status(struct udevice *dev);
->  void dwc3_uboot_handle_interrupt(struct udevice *dev);
+>  int dwc3_uboot_interrupt_status(struct udevice *dev);
+> -void dwc3_uboot_handle_interrupt(struct udevice *dev);
 >  
 >  struct phy;
+>  #if CONFIG_IS_ENABLED(PHY) && CONFIG_IS_ENABLED(DM_USB)
 > -- 
 > 2.43.0
